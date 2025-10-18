@@ -71,8 +71,8 @@ $$
 interpreted as the largest scale over which a region can collapse coherently into a single classical geometry during \(\tau_{\rm collapse}\).
 
 Regimes:
-- Local classicality (\(R\ll\ell_0\)): compact systems (Solar System) decohere as a whole; \(\delta\mathbf{g}_q\to0\Rightarrow \mathcal{K}\to0\).
-- Macroscopic coherence (\(R\gg\ell_0\)): extended systems (galaxies/clusters) cannot collapse globally; a test body samples a coherent sum over many near‑stationary geometries; \(\delta\mathbf{g}_q\ne0\Rightarrow \mathcal{K}>0\).
+- Local classicality ($R\ll\ell_0$): compact systems (Solar System) decohere as a whole; $\delta\mathbf{g}_q\to0\Rightarrow \mathcal{K}\to0$.
+- Macroscopic coherence ($R\gg\ell_0$): extended systems (galaxies/clusters) cannot collapse globally; a test body samples a coherent sum over many near‑stationary geometries; $\delta\mathbf{g}_q\ne0\Rightarrow \mathcal{K}>0$.
 
 ### 2.3. Derivation of the Coherence Window
 
