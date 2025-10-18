@@ -58,17 +58,17 @@ $$
 \mathbf{g}_{\rm eff}(\mathbf{x}) = \mathbf{g}_{\rm bar}(\mathbf{x})\,\left[1 + \frac{\delta\mathbf{g}_q(\mathbf{x})}{\lvert\mathbf{g}_{\rm bar}(\mathbf{x})\rvert}\right] \equiv \mathbf{g}_{\rm bar}(\mathbf{x})\,[1+\mathcal{K}(\mathbf{x})]
 $$
 
-so the Σ‑kernel \(\mathcal{K}\) is the normalized, net effect of all quantum gravitational paths beyond the classical one.
+so the Σ‑kernel $\mathcal{K}$ is the normalized, net effect of all quantum gravitational paths beyond the classical one.
 
 ### 2.2. Scale‑Dependent Coherence and the Collapse Timescale
 
-We posit that the quantum superposition of geometries stochastically decoheres into a single classical state over a characteristic collapse time \(\tau_{\rm collapse}\). This defines a causal coherence length
+We posit that the quantum superposition of geometries stochastically decoheres into a single classical state over a characteristic collapse time $\tau_{\rm collapse}$. This defines a causal coherence length
 
 $$
 \ell_0 \equiv c\,\tau_{\rm collapse}
 $$
 
-interpreted as the largest scale over which a region can collapse coherently into a single classical geometry during \(\tau_{\rm collapse}\).
+interpreted as the largest scale over which a region can collapse coherently into a single classical geometry during $\tau_{\rm collapse}$.
 
 Regimes:
 - Local classicality ($R\ll\ell_0$): compact systems (Solar System) decohere as a whole; $\delta\mathbf{g}_q\to0\Rightarrow \mathcal{K}\to0$.
@@ -76,7 +76,7 @@ Regimes:
 
 ### 2.3. Derivation of the Coherence Window
 
-We model the degree of quantum coherence with a dimensionless field \(C(R)\) which vanishes at small \(R\) and saturates toward unity at large \(R\). The Σ‑kernel is proportional to this field with amplitude \(A_c\):
+We model the degree of quantum coherence with a dimensionless field $C(R)$ which vanishes at small $R$ and saturates toward unity at large $R$. The Σ‑kernel is proportional to this field with amplitude $A_c$:
 
 $$
 \mathcal{K}_\Sigma(R) = A_c\,C(R)
@@ -88,33 +88,33 @@ $$
 C(R) = 1 - \left[1 + \left(\frac{R}{\ell_0}\right)^p\right]^{-n_{\rm coh}}
 $$
 
-with exponents \(p,n_{\rm coh}\) characterizing the dephasing and \(\ell_0\) the causal coherence length. In this framework, \(\{A_c,\ell_0,p,n_{\rm coh},\gamma\}\) are the fundamental constants of Σ‑Gravity (\(\gamma\) enters a possible mass‑scaling \(\ell_0\propto M^{\gamma}\)).
+with exponents $p,n_{\rm coh}$ characterizing the dephasing and $\ell_0$ the causal coherence length. In this framework, $\{A_c,\ell_0,p,n_{\rm coh},\gamma\}$ are the fundamental constants of Σ‑Gravity ($\gamma$ enters a possible mass‑scaling $\ell_0\propto M^{\gamma}$).
 
 ### 2.4. Illustrative example (emergence of coherence with scale)
 
-Adopt \(\ell_0=5~\mathrm{kpc}\), \(A_c=0.8\), \(p=2\), \(n_{\rm coh}=1\). Then \(C(R)\) (and the boost \(1+\mathcal{K}\)) transition from negligible at stellar/cluster scales to order‑unity at galactic radii:
+Adopt $\ell_0=5~\mathrm{kpc}$, $A_c=0.8$, $p=2$, $n_{\rm coh}=1$. Then $C(R)$ (and the boost $1+\mathcal{K}$) transition from negligible at stellar/cluster scales to order‑unity at galactic radii:
 
-- 1 AU: \(R/\ell_0\sim10^{-9}\), \(C\sim10^{-18}\), \(1+\mathcal{K}\approx1\) (fully classical)
-- 100 pc: \(R/\ell_0=0.02\), \(C\approx4\times10^{-4}\), \(1+\mathcal{K}\approx1.00032\)
-- 5 kpc: \(R/\ell_0=1\), \(C=0.5\), \(1+\mathcal{K}\approx1.4\) (transition)
-- 20–200 kpc: \(C\to0.94\text{–}0.999\), \(1+\mathcal{K}\to1.75\text{–}1.80\) (saturated coherence)
+- 1 AU: $R/\ell_0\sim10^{-9}$, $C\sim10^{-18}$, $1+\mathcal{K}\approx1$ (fully classical)
+- 100 pc: $R/\ell_0=0.02$, $C\approx4\times10^{-4}$, $1+\mathcal{K}\approx1.00032$
+- 5 kpc: $R/\ell_0=1$, $C=0.5$, $1+\mathcal{K}\approx1.4$ (transition)
+- 20–200 kpc: $C\to0.94\text{–}0.999$, $1+\mathcal{K}\to1.75\text{–}1.80$ (saturated coherence)
 
 This explains Newtonian recovery in the Solar System and enhanced effective fields in galaxy/cluster regimes.
 
 ### 2.5. What is derived vs calibrated
 
 Derived from first principles:
-- Operator structure: \(\mathbf{g}_{\rm eff}=\mathbf{g}_{\rm bar}[1+\mathcal{K}]\) (stationary‑phase reduction of the gravitational path integral).
-- Existence of \(\ell_0\) and the proportionality \(\mathcal{K}_\Sigma\propto C(R)\).
+- Operator structure: $\mathbf{g}_{\rm eff}=\mathbf{g}_{\rm bar}[1+\mathcal{K}]$ (stationary‑phase reduction of the gravitational path integral).
+- Existence of $\ell_0$ and the proportionality $\mathcal{K}_\Sigma\propto C(R)$.
 
 Calibrated (fundamental constants):
-- \(A_c,\ell_0,p,n_{\rm coh}\) from data; \(\gamma\) tests universality vs self‑similar scaling (current \(\gamma=0.09\pm0.10\) consistent with 0).
+- $A_c,\ell_0,p,n_{\rm coh}$ from data; $\gamma$ tests universality vs self‑similar scaling (current $\gamma=0.09\pm0.10$ consistent with 0).
 
 ### 2.6. Plain‑language primer (double‑slit at cosmic scales)
 
 - Gravity as a wave: the field exists as a superposition of geometries. Measurement‑like interactions (frequent scattering, compactness) collapse it.
-- Solar System: compact and self‑measuring \(\Rightarrow\) collapse to a single classical path (Einstein); \(\mathcal{K}\to0\).
-- Galaxies/clusters: too large to collapse globally within \(\tau_{\rm collapse}\) \(\Rightarrow\) a star/light ray samples many coherent geometries; \(\mathcal{K}>0\).
+- Solar System: compact and self‑measuring $\Rightarrow$ collapse to a single classical path (Einstein); $\mathcal{K}\to0$.
+- Galaxies/clusters: too large to collapse globally within $\tau_{\rm collapse}$ $\Rightarrow$ a star/light ray samples many coherent geometries; $\mathcal{K}>0$.
 
 The “missing mass” is the measured effect of uncollapsed, coherent gravitational geometries on macroscopic scales.
 
@@ -330,36 +330,36 @@ While a full cosmological treatment is deferred, Scale‑Dependent Quantum Coher
 
 ### 8.1. A state‑dependent coherence length
 
-We propose that \(\tau_{\rm collapse}\) (and thus \(\ell_0=c\,\tau_{\rm collapse}\)) depends on the physical state of baryons: hot, dense, rapidly interacting plasmas act as efficient “measuring devices,” shortening coherence; cold, ordered, low‑entropy media preserve it.
+We propose that $\tau_{\rm collapse}$ (and thus $\ell_0=c\,\tau_{\rm collapse}$) depends on the physical state of baryons: hot, dense, rapidly interacting plasmas act as efficient “measuring devices,” shortening coherence; cold, ordered, low‑entropy media preserve it.
 
 ### 8.2. Early universe and acoustic peaks
 
-Prior to recombination (\(t<380{,}000\) yr), the tightly coupled photon‑baryon plasma continually measures spacetime, rendering \(\ell_0\) microscopic. On cosmological scales the universe is vastly larger than \(\ell_0\), so gravity behaves classically and the acoustic peak locations match ΛCDM. The standard sound horizon ruler is preserved.
+Prior to recombination ($t<380{,}000$ yr), the tightly coupled photon‑baryon plasma continually measures spacetime, rendering $\ell_0$ microscopic. On cosmological scales the universe is vastly larger than $\ell_0$, so gravity behaves classically and the acoustic peak locations match ΛCDM. The standard sound horizon ruler is preserved.
 
 ### 8.3. A gravitational phase transition at recombination
 
-At recombination, photon scattering shuts off. We hypothesize a rapid increase in \(\tau_{\rm collapse}\Rightarrow\ell_0\), initiating macroscopic gravitational coherence in bound systems. If non‑instantaneous, this can subtly modulate peak heights at last scattering—a small, distinctive signature for next‑generation CMB data.
+At recombination, photon scattering shuts off. We hypothesize a rapid increase in $\tau_{\rm collapse}\Rightarrow\ell_0$, initiating macroscopic gravitational coherence in bound systems. If non‑instantaneous, this can subtly modulate peak heights at last scattering—a small, distinctive signature for next‑generation CMB data.
 
 ### 8.4. Late‑time ISW and structure formation
 
-In Σ‑Gravity the potential is \(\Phi_{\rm bar}[1+\mathcal{K}(t,\mathbf{x})]\). As structures cross the \(\ell_0\) threshold, \(\mathcal{K}\) turns on, non‑linearly deepening wells. This yields a distinct late‑time ISW cross‑correlation between CMB temperature and large‑scale structure compared to ΛCDM. Existing ISW anomalies may be naturally accommodated.
+In Σ‑Gravity the potential is $\Phi_{\rm bar}[1+\mathcal{K}(t,\mathbf{x})]$. As structures cross the $\ell_0$ threshold, $\mathcal{K}$ turns on, non‑linearly deepening wells. This yields a distinct late‑time ISW cross‑correlation between CMB temperature and large‑scale structure compared to ΛCDM. Existing ISW anomalies may be naturally accommodated.
 
 ### 8.5. Future Directions and Cosmological Frontiers
 
 #### An evolving quantum vacuum (redshift and time dilation)
 
-Cosmological redshift may arise from a slowly relaxing quantum vacuum: an initially high‑coherence state (large \(\mathcal{K}\)) relaxes toward \(\mathcal{K}\to0\), lifting the baseline gravitational potential. Photons lose energy by climbing this rising floor, producing redshift; time dilation follows as \((1+z)\) from gravitational time dilation in the deeper past potential.
+Cosmological redshift may arise from a slowly relaxing quantum vacuum: an initially high‑coherence state (large $\mathcal{K}$) relaxes toward $\mathcal{K}\to0$, lifting the baseline gravitational potential. Photons lose energy by climbing this rising floor, producing redshift; time dilation follows as $(1+z)$ from gravitational time dilation in the deeper past potential.
 
 #### Falsifiable cosmological tests
 
-- Redshift–distance: Fit a minimal, physically motivated decay law \(\mathcal{K}(t)\) to SNe and BAO; test parsimony vs ΛCDM.
+- Redshift–distance: Fit a minimal, physically motivated decay law $\mathcal{K}(t)$ to SNe and BAO; test parsimony vs ΛCDM.
 - Alcock–Paczyński: In a non‑expanding metric, statistically spherical objects/correlations remain isotropic—absence of ΛCDM’s geometric distortion is decisive.
-- CMB/ISW: Predict a unique CMB–LSS cross‑correlation from evolving \(\mathcal{K}\); distinguishable from ΛCDM.
-- Bullet Cluster: Shock fronts act as “measurements,” forcing local \(\mathcal{K}\to0\). Lensing should follow BCG + unshocked gas, explaining the offset without particles.
+- CMB/ISW: Predict a unique CMB–LSS cross‑correlation from evolving $\mathcal{K}$; distinguishable from ΛCDM.
+- Bullet Cluster: Shock fronts act as “measurements,” forcing local $\mathcal{K}\to0$. Lensing should follow BCG + unshocked gas, explaining the offset without particles.
 
 #### Theoretical roadmap
 
-Derive a first‑principles decoherence law \(\mathcal{K}(t)\) to fix the redshift–distance relation a priori; extend linear perturbations and weak‑lensing kernels \(K(k)\); confront Planck lensing and shear two‑point data.
+Derive a first‑principles decoherence law $\mathcal{K}(t)$ to fix the redshift–distance relation a priori; extend linear perturbations and weak‑lensing kernels $K(k)$; confront Planck lensing and shear two‑point data.
 
 ---
 
@@ -480,18 +480,18 @@ All scripts listed in §9 are included in the project repository; outputs (CSV/J
 
 ## Appendix A — Integration‑by‑parts and cancellation of O(v/c)
 
-We begin from the causal (retarded) GR Green’s function in the weak‑field limit and perform a PN expansion. Using mass continuity \(\dot\rho=-\nabla'\!\cdot(\rho\,\mathbf{v})\) and periodic/axisymmetric boundaries, the linear \(\mathcal{O}(v/c)\) term vanishes after integration by parts, leaving the leading correction at \(\mathcal{O}(v^2/c^2)\):
+We begin from the causal (retarded) GR Green’s function in the weak‑field limit and perform a PN expansion. Using mass continuity $\dot\rho=-\nabla'\!\cdot(\rho\,\mathbf{v})$ and periodic/axisymmetric boundaries, the linear $\mathcal{O}(v/c)$ term vanishes after integration by parts, leaving the leading correction at $\mathcal{O}(v^2/c^2)$:
 
 $$
 \delta\Phi(\mathbf{x}) = \frac{G}{2c^2} \int \frac{\nabla'\!\cdot(\rho\,\mathbf{v}\!\otimes\!\mathbf{v})}{\lvert \mathbf{x}-\mathbf{x}'\rvert}\,\mathrm{d}^3\!x' ,\qquad
 \delta\mathbf{g}(\mathbf{x}) = -\frac{G}{2c^2} \int \nabla\!\left(\frac{1}{\lvert \mathbf{x}-\mathbf{x}'\rvert}\right) \, \nabla'\!\cdot(\rho\,\mathbf{v}\!\otimes\!\mathbf{v})\,\mathrm{d}^3\!x' .
 $$
 
-Example (circular flow): for \(\mathbf{v}=v_\phi\,\hat\phi\) in an axisymmetric disk, only the divergence of the Reynolds‑stress‑like tensor contributes; the induced field is curl‑free by construction.
+Example (circular flow): for $\mathbf{v}=v_\phi\,\hat\phi$ in an axisymmetric disk, only the divergence of the Reynolds‑stress‑like tensor contributes; the induced field is curl‑free by construction.
 
 ## Appendix B — Elliptic ring kernel (exact geometry)
 
-The azimuthal integral for axisymmetric systems reduces to complete elliptic integrals of the first and second kind. For radii \(R\) and \(R'\), with \(R_>\equiv\max(R,R')\), \(R_<\equiv\min(R,R')\), and \(k=2RR'/(R+R')\):
+The azimuthal integral for axisymmetric systems reduces to complete elliptic integrals of the first and second kind. For radii $R$ and $R'$, with $R_>\equiv\max(R,R')$, $R_<\equiv\min(R,R')$, and $k=2RR'/(R+R')$:
 
 $$
 G(R,R') = 2\pi R_>\,[\,K(k) - (R_</R_>)\,E(k)\,] .
@@ -523,13 +523,13 @@ assert abs(num-ana)/num < 1e-6
 
 ## Appendix C — Stationary phase & coherence window
 
-Near the stationary azimuth \(\varphi=0\) one may expand the separation as \(\Delta(\varphi)\approx D + (RR'/(2D))\,\varphi^2\). The phase integral reduces to a Gaussian/Fresnel form; adding stochastic dephasing over a coherence length \(\ell_0\) yields a radial envelope equivalent to
+Near the stationary azimuth $\varphi=0$ one may expand the separation as $\Delta(\varphi)\approx D + (RR'/(2D))\,\varphi^2$. The phase integral reduces to a Gaussian/Fresnel form; adding stochastic dephasing over a coherence length $\ell_0$ yields a radial envelope equivalent to
 
 $$
 C(R) = 1 - \Big[1 + (R/\ell_0)^p\Big]^{-n_{\rm coh}} ,
 $$
 
-with phenomenological exponents \(p,n_{\rm coh}\) calibrated once on data. This envelope multiplies the Newtonian response, remaining curl‑free.
+with phenomenological exponents $p,n_{\rm coh}$ calibrated once on data. This envelope multiplies the Newtonian response, remaining curl‑free.
 
 ## Appendix D — PN error budget
 
@@ -539,7 +539,7 @@ $$
 \Delta_{\rm PN} \;\lesssim\; C_1\,(v/c)^3 \, + \, C_2\,(v/c)^2\,(H/R) \, + \, C_3\,(v/c)^2\,(R/R_\Sigma)\,.
 $$
 
-In disks and clusters, representative values place all terms \(\ll10^{-5}\), well below statistical errors. (See PN bounds figure for a SPARC galaxy.)
+In disks and clusters, representative values place all terms $\ll10^{-5}$, well below statistical errors. (See PN bounds figure for a SPARC galaxy.)
 
 ## Appendix E — Data, code, and reproducibility (one‑stop)
 
