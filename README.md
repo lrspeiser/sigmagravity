@@ -43,19 +43,19 @@ Scope. We restrict this paper to galaxies (rotational kinematics) and clusters (
 The foundational equation for a quantum theory of gravity is the path integral over all possible spacetime geometries g:
 
 $$
-Z = \int \mathcal{D}[g] \, e^{iS[g]/\hbar} \tag{II.1}
+Z = \int \mathcal{D}[g] \, e^{iS[g]/\hbar}
 $$
 
 where S[g] is the Einstein–Hilbert action. Using a stationary‑phase approximation, this integral is dominated by the classical path g_cl (the GR solution), plus fluctuations δg around it. The effective gravitational acceleration can be decomposed as
 
 $$
-\mathbf{g}_{\rm eff} = \mathbf{g}_{\rm bar} + \delta\mathbf{g}_q(\mathbf{x}) \tag{II.2}
+\mathbf{g}_{\rm eff} = \mathbf{g}_{\rm bar} + \delta\mathbf{g}_q(\mathbf{x})
 $$
 
 Factoring out the classical contribution yields the Σ‑Gravity structure
 
 $$
-\mathbf{g}_{\rm eff}(\mathbf{x}) = \mathbf{g}_{\rm bar}(\mathbf{x})\,\left[1 + \frac{\delta\mathbf{g}_q(\mathbf{x})}{\lvert\mathbf{g}_{\rm bar}(\mathbf{x})\rvert}\right] \equiv \mathbf{g}_{\rm bar}(\mathbf{x})\,[1+\mathcal{K}(\mathbf{x})] \tag{II.3}
+\mathbf{g}_{\rm eff}(\mathbf{x}) = \mathbf{g}_{\rm bar}(\mathbf{x})\,\left[1 + \frac{\delta\mathbf{g}_q(\mathbf{x})}{\lvert\mathbf{g}_{\rm bar}(\mathbf{x})\rvert}\right] \equiv \mathbf{g}_{\rm bar}(\mathbf{x})\,[1+\mathcal{K}(\mathbf{x})]
 $$
 
 so the Σ‑kernel \(\mathcal{K}\) is the normalized, net effect of all quantum gravitational paths beyond the classical one.
@@ -65,7 +65,7 @@ so the Σ‑kernel \(\mathcal{K}\) is the normalized, net effect of all quantum 
 We posit that the quantum superposition of geometries stochastically decoheres into a single classical state over a characteristic collapse time \(\tau_{\rm collapse}\). This defines a causal coherence length
 
 $$
-\ell_0 \equiv c\,\tau_{\rm collapse} \tag{II.4}
+\ell_0 \equiv c\,\tau_{\rm collapse}
 $$
 
 interpreted as the largest scale over which a region can collapse coherently into a single classical geometry during \(\tau_{\rm collapse}\).
@@ -79,13 +79,13 @@ Regimes:
 We model the degree of quantum coherence with a dimensionless field \(C(R)\) which vanishes at small \(R\) and saturates toward unity at large \(R\). The Σ‑kernel is proportional to this field with amplitude \(A_c\):
 
 $$
-\mathcal{K}_\Sigma(R) = A_c\,C(R) \tag{II.5}
+\mathcal{K}_\Sigma(R) = A_c\,C(R)
 $$
 
 A standard collapse‑transition form is
 
 $$
-C(R) = 1 - \left[1 + \left(\frac{R}{\ell_0}\right)^p\right]^{-n_{\rm coh}} \tag{II.6}
+C(R) = 1 - \left[1 + \left(\frac{R}{\ell_0}\right)^p\right]^{-n_{\rm coh}}
 $$
 
 with exponents \(p,n_{\rm coh}\) characterizing the dephasing and \(\ell_0\) the causal coherence length. In this framework, \(\{A_c,\ell_0,p,n_{\rm coh},\gamma\}\) are the fundamental constants of Σ‑Gravity (\(\gamma\) enters a possible mass‑scaling \(\ell_0\propto M^{\gamma}\)).
@@ -706,9 +706,9 @@ so the enhanced field remains conservative.
 ## IV. SOLAR SYSTEM CONSTRAINTS
 
 Cassini bound |γ_PPN−1| < 2.3×10⁻⁵; with ℓ_0~kpc and A_gal~0.6:
-```
-K(1 AU) ~ 10⁻⁷  ≪ 10⁻⁵     (24)
-```
+$$
+K(1\,\mathrm{AU}) \sim 10^{-7} \ll 10^{-5}
+$$
 Safety margin ≥100×.
 
 ---
@@ -731,9 +731,9 @@ Path‑counting (2D disks vs 3D clusters) predicts A_cluster/A_gal ~ O(10). Empi
 
 ### F.1 Dimensional analysis of ℓ_0
 
-```
-ℓ_0 = √(c/(ρGα))
-```
+$$
+\ell_0 = \sqrt{\frac{c}{\rho G \alpha}}
+$$
 Numerically yields kpc‑scale coherence for galactic densities.
 
 ### F.2 Numerical kernel (example)
@@ -746,9 +746,9 @@ def sigma_gravity_kernel(R_kpc, A=0.6, ell_0=5.0, p=0.75, n_coh=0.5):
 
 ### F.3 Ring kernel expression
 
-```
-G_ring(R, R') = ∫₀^(2π) dφ / √(R² + R'² − 2RR'cos φ)
-```
+$$
+G_{\mathrm{ring}}(R, R') = \int_{0}^{2\pi} \frac{d\varphi}{\sqrt{R^2 + R'^2 - 2 R R'\cos\varphi}}
+$$
 
 Tables (Appendix F):
 - Table F1 — Galaxy parameter sensitivity (ablation & sweeps): `many_path_model/paper_release/tables/galaxy_param_sensitivity.md`
