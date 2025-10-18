@@ -42,21 +42,21 @@ Scope. We restrict this paper to galaxies (rotational kinematics) and clusters (
 
 The foundational equation for a quantum theory of gravity is the path integral over all possible spacetime geometries g:
 
-```latex path=null start=null
-Z = \int \mathcal{D}[g]\\,e^{iS[g]/\hbar} \tag{II.1}
-```
+$$
+Z = \int \mathcal{D}[g] \, e^{iS[g]/\hbar} \tag{II.1}
+$$
 
 where S[g] is the Einstein–Hilbert action. Using a stationary‑phase approximation, this integral is dominated by the classical path g_cl (the GR solution), plus fluctuations δg around it. The effective gravitational acceleration can be decomposed as
 
-```latex path=null start=null
+$$
 \mathbf{g}_{\rm eff} = \mathbf{g}_{\rm bar} + \delta\mathbf{g}_q(\mathbf{x}) \tag{II.2}
-```
+$$
 
 Factoring out the classical contribution yields the Σ‑Gravity structure
 
-```latex path=null start=null
+$$
 \mathbf{g}_{\rm eff}(\mathbf{x}) = \mathbf{g}_{\rm bar}(\mathbf{x})\,\left[1 + \frac{\delta\mathbf{g}_q(\mathbf{x})}{\lvert\mathbf{g}_{\rm bar}(\mathbf{x})\rvert}\right] \equiv \mathbf{g}_{\rm bar}(\mathbf{x})\,[1+\mathcal{K}(\mathbf{x})] \tag{II.3}
-```
+$$
 
 so the Σ‑kernel \(\mathcal{K}\) is the normalized, net effect of all quantum gravitational paths beyond the classical one.
 
@@ -64,9 +64,9 @@ so the Σ‑kernel \(\mathcal{K}\) is the normalized, net effect of all quantum 
 
 We posit that the quantum superposition of geometries stochastically decoheres into a single classical state over a characteristic collapse time \(\tau_{\rm collapse}\). This defines a causal coherence length
 
-```latex path=null start=null
+$$
 \ell_0 \equiv c\,\tau_{\rm collapse} \tag{II.4}
-```
+$$
 
 interpreted as the largest scale over which a region can collapse coherently into a single classical geometry during \(\tau_{\rm collapse}\).
 
@@ -78,15 +78,15 @@ Regimes:
 
 We model the degree of quantum coherence with a dimensionless field \(C(R)\) which vanishes at small \(R\) and saturates toward unity at large \(R\). The Σ‑kernel is proportional to this field with amplitude \(A_c\):
 
-```latex path=null start=null
+$$
 \mathcal{K}_\Sigma(R) = A_c\,C(R) \tag{II.5}
-```
+$$
 
 A standard collapse‑transition form is
 
-```latex path=null start=null
+$$
 C(R) = 1 - \left[1 + \left(\frac{R}{\ell_0}\right)^p\right]^{-n_{\rm coh}} \tag{II.6}
-```
+$$
 
 with exponents \(p,n_{\rm coh}\) characterizing the dephasing and \(\ell_0\) the causal coherence length. In this framework, \(\{A_c,\ell_0,p,n_{\rm coh},\gamma\}\) are the fundamental constants of Σ‑Gravity (\(\gamma\) enters a possible mass‑scaling \(\ell_0\propto M^{\gamma}\)).
 
@@ -231,11 +231,11 @@ We fit population and per‑cluster parameters with MCMC:
 • BTFR: within 0.15 dex target (passes).  
 • Ablations: each gate (bulge, shear, bar) reduces χ²; removing them worsens scatter/bias, confirming physical relevance.
 
-![Rotation‑curve gallery (12 panels)](figures/rc_gallery_12.png)
+![Figure G2. Rotation‑curve gallery (12 SPARC disks)](figures/rc_gallery.png)
 
 *Figure G2. Rotation‑curve gallery (12 SPARC disks). Curves: data±σ, GR(baryons), Σ‑Gravity (universal kernel). Per‑panel annotations show APE and χ²; no per‑galaxy tuning applied.*
 
-![RC residual histogram](figures/rc_residual_hist.png)
+![Figure G3. RC residual histogram](figures/rc_residual_hist.png)
 
 *Figure G3. Residuals (v_pred − v_obs) distributions for Σ‑Gravity vs GR(baryons) (and optional NFW overlay). Σ‑Gravity narrows tails and reduces bias in the outer regions.*
 
@@ -258,23 +258,23 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 • Posterior (γ‑free vs γ=0): ΔWAIC ≈ +0.01 ± 2.5 (inconclusive).  
 • 5‑fold k‑fold (N=10): **coverage 16/18 = 88.9%**, |Z|>2 = 0, **median fractional error = 7.9%**.
 
-![Hold‑out predicted vs observed](figures/holdouts_pred_vs_obs.png)
+![Figure H1. Hold‑out predicted vs observed](figures/holdouts_pred_vs_obs.png)
 
 *Figure H1. Blind hold‑outs: predicted θ_E medians with 68% PPC bands vs observed.*
 
-![K‑fold predicted vs observed](figures/kfold_pred_vs_obs.png)
+![Figure H2. K‑fold predicted vs observed](figures/kfold_pred_vs_obs.png)
 
 *Figure H2. K‑fold hold‑out across N=10: predicted vs observed with 68% PPC.*
 
-![K‑fold coverage](figures/kfold_coverage.png)
+![Figure H3. K‑fold coverage](figures/kfold_coverage.png)
 
 *Figure H3. Coverage summary: 16/18 inside 68%.*
 
-![⟨κ⟩(<R) panels for hold‑outs](figures/cluster_kappa_panels.png)
+![Figure C1. ⟨κ⟩(<R) panels for hold‑outs](figures/cluster_kappa_panels.png)
 
 *Figure C1. ⟨κ⟩(<R) vs R for Abell 2261 and MACSJ1149: GR(baryons) baseline and Σ‑Gravity median ±68% band with Einstein crossing marked.*
 
-![Triaxial sensitivity (θ_E vs q_LOS)](figures/triaxial_sensitivity_A2261.png)
+![Figure C2. Triaxial sensitivity (θ_E vs q_LOS)](figures/triaxial_sensitivity_A2261.png)
 
 *Figure C2. Triaxial lever arm for A2261: θ_E as a function of q_LOS under the same kernel and baryons.*
 
@@ -451,7 +451,7 @@ Cross‑checks: BTFR residuals vs morphology; cluster gas systematics; BCG/ICL M
 
 1. Galaxies — RAR (SPARC‑166): figures/rar_sparc_validation.png
 2. Galaxies — BTFR (two‑panel): figures/btfr_two_panel_v2.png
-3. Galaxies — RC gallery (12‑panel): figures/rc_gallery_12.png
+3. Galaxies — RC gallery (12‑panel): figures/rc_gallery.png
 4. Galaxies — RC residual histogram: figures/rc_residual_hist.png
 5. Clusters — Hold‑outs predicted vs observed: figures/holdouts_pred_vs_obs.png
 6. Clusters — K‑fold predicted vs observed: figures/kfold_pred_vs_obs.png
@@ -482,10 +482,10 @@ All scripts listed in §9 are included in the project repository; outputs (CSV/J
 
 We begin from the causal (retarded) GR Green’s function in the weak‑field limit and perform a PN expansion. Using mass continuity \(\dot\rho=-\nabla'\!\cdot(\rho\,\mathbf{v})\) and periodic/axisymmetric boundaries, the linear \(\mathcal{O}(v/c)\) term vanishes after integration by parts, leaving the leading correction at \(\mathcal{O}(v^2/c^2)\):
 
-```latex path=null start=null
+$$
 \delta\Phi(\mathbf{x}) = \frac{G}{2c^2} \int \frac{\nabla'\!\cdot(\rho\,\mathbf{v}\!\otimes\!\mathbf{v})}{\lvert \mathbf{x}-\mathbf{x}'\rvert}\,\mathrm{d}^3\!x' ,\qquad
 \delta\mathbf{g}(\mathbf{x}) = -\frac{G}{2c^2} \int \nabla\!\left(\frac{1}{\lvert \mathbf{x}-\mathbf{x}'\rvert}\right) \, \nabla'\!\cdot(\rho\,\mathbf{v}\!\otimes\!\mathbf{v})\,\mathrm{d}^3\!x' .
-```
+$$
 
 Example (circular flow): for \(\mathbf{v}=v_\phi\,\hat\phi\) in an axisymmetric disk, only the divergence of the Reynolds‑stress‑like tensor contributes; the induced field is curl‑free by construction.
 
@@ -493,13 +493,13 @@ Example (circular flow): for \(\mathbf{v}=v_\phi\,\hat\phi\) in an axisymmetric 
 
 The azimuthal integral for axisymmetric systems reduces to complete elliptic integrals of the first and second kind. For radii \(R\) and \(R'\), with \(R_>\equiv\max(R,R')\), \(R_<\equiv\min(R,R')\), and \(k=2RR'/(R+R')\):
 
-```latex path=null start=null
+$$
 G(R,R') = 2\pi R_>\,[\,K(k) - (R_</R_>)\,E(k)\,] .
-```
+$$
 
 Unit test (relative error < 1e−6):
 
-```python path=null start=null
+```python
 import numpy as np
 from mpmath import quad, ellipk, ellipe
 
@@ -525,9 +525,9 @@ assert abs(num-ana)/num < 1e-6
 
 Near the stationary azimuth \(\varphi=0\) one may expand the separation as \(\Delta(\varphi)\approx D + (RR'/(2D))\,\varphi^2\). The phase integral reduces to a Gaussian/Fresnel form; adding stochastic dephasing over a coherence length \(\ell_0\) yields a radial envelope equivalent to
 
-```latex path=null start=null
+$$
 C(R) = 1 - \Big[1 + (R/\ell_0)^p\Big]^{-n_{\rm coh}} ,
-```
+$$
 
 with phenomenological exponents \(p,n_{\rm coh}\) calibrated once on data. This envelope multiplies the Newtonian response, remaining curl‑free.
 
@@ -535,9 +535,9 @@ with phenomenological exponents \(p,n_{\rm coh}\) calibrated once on data. This 
 
 We bound neglected terms by
 
-```latex path=null start=null
+$$
 \Delta_{\rm PN} \;\lesssim\; C_1\,(v/c)^3 \, + \, C_2\,(v/c)^2\,(H/R) \, + \, C_3\,(v/c)^2\,(R/R_\Sigma)\,.
-```
+$$
 
 In disks and clusters, representative values place all terms \(\ll10^{-5}\), well below statistical errors. (See PN bounds figure for a SPARC galaxy.)
 
