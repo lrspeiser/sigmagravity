@@ -553,18 +553,7 @@ Regression tests: Solar‑System/PPN and wide‑binary safety; legacy galaxy run
 
 ---
 
-### Notes on nomenclature
-
-Use “causal (time‑delayed) Green’s function of GR” (avoid “retarded GR” after first clarifying mention).
-
 ---
-
-### One‑sentence takeaway
-
-Σ‑Gravity is a conservative, many‑path summation of gravity that—without dark matter or modified dynamics—fits galaxy RARs at 0.087 dex and matches cluster strong lensing in blind tests, with a small set of global coherence parameters.
-
-**Authors:** …
-**Correspondence:** …
 
 ---
 
