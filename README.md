@@ -276,6 +276,35 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 
 ![Figure C2. Triaxial sensitivity (θ_E vs q_LOS)](figures/triaxial_sensitivity_A2261.png)
 
+### 5.4. Milky Way (Gaia DR3): Star‑level RAR (this repository)
+
+Data and setup
+- Stars: 143,995 Milky Way stars (data/gaia/mw/mw_gaia_144k.npz) with per‑star R, z, v_obs, v_err, g_N, Σ_loc.
+- Pipeline fit (GPU, CuPy): Boundary R_b ≈ 5.83 kpc (68%: 5.13–7.25). Saturated‑well tail: v_flat = 180.27 km/s, R_s = 3.94 kpc, m = 7.29, gate ΔR ≈ 0.30 kpc (fit_params.json). Model selection on rotation‑curve bins (n=15): BIC — Σ 199.4; MOND 938.4; NFW 2869.7; GR 3366.4.
+
+Star‑level RAR results (log10 g, Δ ≡ log10 g_obs − log10 g_pred)
+- Global (n=143,995):
+  - GR(baryons): mean Δ = 0.4146 dex, σ = 0.0760 dex; median 0.4141; 16–84% = [0.3498, 0.4781].
+  - Σ‑Gravity: mean Δ = 0.0802 dex, σ = 0.0737 dex; median 0.0778; 16–84% = [0.0190, 0.1390].
+- By radius (kpc):
+  - 6–8: GR 0.381, Σ 0.055 (n=49,155); 8–10: GR 0.432, Σ 0.092 (n=91,275); 10–12: GR 0.474, Σ 0.100 (n=2,761); 12–16: GR 0.521, Σ 0.113 (n=150). Inside R_b (3–6 kpc), Σ is gated toward GR.
+
+RAR comparison figure
+
+![Figure MW‑RAR. R vs accelerations (left) and RAR best‑fit lines (right)](data/gaia/outputs/mw_rar_comparison.png)
+
+- Left: median log10 g vs R for stars (black) with model medians overlaid: GR(baryons), Σ‑Gravity, MOND, GR+NFW.
+- Right: Observed vs predicted log10 g with OLS best‑fit lines per model (1:1 dashed). Slopes/intercepts (y = a + b x): GR(baryons) a=−4.41, b=0.516; Σ a=−3.78, b=0.599; MOND a=−2.55, b=0.718; NFW a=+6.32, b=1.446 (see data/gaia/outputs/mw_rar_comparison_metrics.json).
+
+Interpretation
+- Baryons‑only underpredicts accelerations by ≈ 2.6× on average (0.415 dex). Σ‑Gravity reduces the bias to ≈ 1.2× (0.080 dex) with comparable scatter.
+- The Σ best‑fit line lies closest to 1:1 among tested models; MOND is partially corrective; the simple NFW curve fitted on bins is mis‑calibrated for star‑level points.
+
+Artifacts
+- Per‑star table: data/gaia/outputs/mw_rar_starlevel.csv (g_bar, g_obs, g_model, logs, residuals).
+- Metrics: data/gaia/outputs/mw_rar_starlevel_metrics.txt; line‑fit metrics: data/gaia/outputs/mw_rar_comparison_metrics.json.
+- Logs: data/gaia/outputs/rar_*.log, comparison_*.log.
+
 *Figure C2. Triaxial lever arm for A2261: θ_E as a function of q_LOS under the same kernel and baryons.*
 
 Table C1 — Training clusters (N≈10; auto‑generated)
@@ -364,6 +393,33 @@ Derive a first‑principles decoherence law $\mathcal{K}(t)$ to fix the redshift
 ---
 
 ## 9. Reproducibility & code availability
+
+### 9.0 Milky Way (Gaia DR3) — exact replication (this repo)
+
+1) Fit MW pipeline (GPU; writes fit_params.json)
+```pwsh path=null start=null
+python -m vendor.maxdepth_gaia.run_pipeline --use_source mw_csv --mw_csv_path "data/gaia/mw/gaia_mw_real.csv" --saveplot "data/gaia/outputs/mw_pipeline_run_vendor/mw_rotation_curve_maxdepth.png"
+```
+
+2) Predict star‑level speeds (GPU)
+```pwsh path=null start=null
+python scripts/predict_gaia_star_speeds.py --npz "data/gaia/mw/mw_gaia_144k.npz" --fit "data/gaia/outputs/mw_pipeline_run_vendor/fit_params.json" --out "data/gaia/outputs/mw_gaia_144k_predicted.csv" --device 0
+```
+
+3) Star‑level RAR table, metrics, and plot
+```pwsh path=null start=null
+python scripts/analyze_mw_rar_starlevel.py --pred_csv "data/gaia/outputs/mw_gaia_144k_predicted.csv" --out_prefix "data/gaia/outputs/mw_rar_starlevel" --hexbin
+```
+
+4) Comparison plot (R vs g medians; RAR line‑fits Σ vs MOND vs NFW vs GR)
+```pwsh path=null start=null
+python scripts/make_mw_rar_comparison.py
+```
+
+Notes
+- Requires CuPy/NVIDIA GPU for steps 1–2; steps 3–4 are CPU.
+- All input data are under data/gaia; outputs are written under data/gaia/outputs.
+- For MOND/NFW baselines, parameters are read from fit_params.json (a0, V200, c).
 
 ### 9.1. Repository structure & prerequisites
 
