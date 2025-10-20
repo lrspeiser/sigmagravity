@@ -8,7 +8,7 @@
 
 ## Abstract
 
-We introduce Σ‑Gravity, a conservative, GR‑compatible framework in which the gravitational field of baryons is enhanced non‑locally by the coherent superposition of near‑geodesic path families. Using the causal (time‑delayed) Green’s function of GR and a controlled O(v^2/c^2) expansion, we derive the operator structure of a projected, curl‑free kernel whose ring geometry is exact (elliptic integrals) and whose coherence window follows from a stationary‑phase reduction with phenomenological exponents. The kernel multiplies the Newtonian response, vanishes in high‑acceleration, compact environments (Solar System), and rises where extended structure allows coherence (disks; cluster radii ∼10^2 kpc).
+We introduce Σ‑Gravity, a conservative, GR‑compatible framework in which the gravitational field of baryons is enhanced non‑locally by the coherent superposition of near‑geodesic path families. Using a stationary‑phase expansion of the GR path integral to O(v^2/c^2), we derive the operator structure of a projected, curl‑free kernel whose ring geometry is exact (elliptic integrals) and whose coherence window follows from a phenomenological, causal envelope set by a collapse timescale (ℓ₀ = c·τ_collapse). The kernel multiplies the Newtonian response, vanishes in high‑acceleration, compact environments (Solar System), and rises where extended structure allows coherence (disks; cluster radii ∼10^2 kpc).
 
 With a single universal parameter set for disks, Σ‑Gravity reproduces the galactic radial‑acceleration relation at 0.087 dex scatter on SPARC without per‑galaxy tuning. For clusters, a projected Σ‑kernel with realistic baryons (gNFW gas + BCG/ICL), triaxial projection, source‑redshift distributions P(z_s) and hierarchical calibration yields blind‑holdout coverage 2/2 inside 68% (Abell 2261, MACSJ1149.5+2223) with median fractional error 14.9%. The calibrated population amplitude is μ_A=4.6±0.4 with intrinsic scatter σ_A≃1.5; the mass‑scaling of the coherence length is consistent with zero (γ=0.09±0.10). We release complete, reproducible code paths and provenance manifests for all figures and results.
 
@@ -536,7 +536,7 @@ All scripts listed in §9 are included in the project repository; outputs (CSV/J
 
 ## Appendix A — Integration‑by‑parts and cancellation of O(v/c)
 
-We begin from the causal (retarded) GR Green’s function in the weak‑field limit and perform a PN expansion. Using mass continuity $\dot\rho=-\nabla'\!\cdot(\rho\,\mathbf{v})$ and periodic/axisymmetric boundaries, the linear $\mathcal{O}(v/c)$ term vanishes after integration by parts, leaving the leading correction at $\mathcal{O}(v^2/c^2)$:
+We outline a weak‑field, post‑Newtonian (PN) expansion consistent with causality. Using mass continuity $\dot\rho=-\nabla'\!\cdot(\rho\,\mathbf{v})$ and periodic/axisymmetric boundaries, the linear $\mathcal{O}(v/c)$ term vanishes after integration by parts, leaving the leading correction at $\mathcal{O}(v^2/c^2)$. For illustration we write the Poisson‑limit potential kernel $1/\lvert \mathbf{x}-\mathbf{x}'\rvert$; this is a PN convenience, not a full GR Green’s‑function solution:
 
 $$
 \delta\Phi(\mathbf{x}) = \frac{G}{2c^2} \int \frac{\nabla'\!\cdot(\rho\,\mathbf{v}\!\otimes\!\mathbf{v})}{\lvert \mathbf{x}-\mathbf{x}'\rvert}\,\mathrm{d}^3\!x' ,\qquad
