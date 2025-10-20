@@ -81,7 +81,7 @@ def find_thetaE(R: np.ndarray, alpha: np.ndarray) -> float:
 
 def make_figures_for_cluster(name: str, thetaE_obs_arcsec: float, outdir: Path,
                              fb: float = 0.33, ell0_frac: float = 0.60, p: float = 2.0, ncoh: float = 2.0,
-                             r_max_mult: float = 2.5, n: int = 2000) -> dict:
+                             r_max_mult: float = 2.5, n: int = 2000, plot_inner_frac: float = 0.05) -> dict:
     outdir.mkdir(parents=True, exist_ok=True)
 
     thetaE_tot = float(thetaE_obs_arcsec)
@@ -111,13 +111,16 @@ def make_figures_for_cluster(name: str, thetaE_obs_arcsec: float, outdir: Path,
     thetaE_tot_meas = find_thetaE(R, alpha_tot)
     thetaE_sig_meas = find_thetaE(R, alpha_sig)
 
-    # FIG 1: kappa(R)
+    # FIG 1: kappa(R) — avoid divergent inner core in autoscale by masking R < plot_inner_frac·θ_E
     fig1, ax1 = plt.subplots(figsize=(7.6, 5.0))
-    ax1.plot(R, kappa_b,   label="GR only (baryons)", linewidth=1.8)
-    ax1.plot(R, kappa_tot, label="GR + Dark Matter",  linewidth=1.8)
-    ax1.plot(R, kappa_sig, label="Σ‑Gravity",         linewidth=1.8)
+    mask_plot = R >= max(plot_inner_frac * thetaE_tot, 3.0 * R[0])
+    ax1.plot(R[mask_plot], kappa_b[mask_plot],   label="GR only (baryons)", linewidth=1.8)
+    ax1.plot(R[mask_plot], kappa_tot[mask_plot], label="GR + Dark Matter",  linewidth=1.8)
+    ax1.plot(R[mask_plot], kappa_sig[mask_plot], label="Σ‑Gravity",         linewidth=1.8)
     ax1.set_xlim(0, R_max)
-    ax1.set_ylim(0, None)
+    # Set a sensible upper y-limit from masked data
+    ymax = np.nanmax([np.nanmax(kappa_b[mask_plot]), np.nanmax(kappa_tot[mask_plot]), np.nanmax(kappa_sig[mask_plot])])
+    ax1.set_ylim(0, float(ymax * 1.1) if np.isfinite(ymax) else None)
     ax1.set_xlabel("Radius R [arcsec]")
     ax1.set_ylabel("Convergence κ(R)")
     ax1.set_title(f"{name}: Convergence profiles")
@@ -130,10 +133,10 @@ def make_figures_for_cluster(name: str, thetaE_obs_arcsec: float, outdir: Path,
 
     # FIG 2: alpha(R)
     fig2, ax2 = plt.subplots(figsize=(7.6, 5.0))
-    ax2.plot(R, alpha_b,   label="GR only (baryons)", linewidth=1.8)
-    ax2.plot(R, alpha_tot, label="GR + Dark Matter",  linewidth=1.8)
-    ax2.plot(R, alpha_sig, label="Σ‑Gravity",         linewidth=1.8)
-    ax2.plot(R, R, linestyle=":", linewidth=1.2, label="α = R")
+    ax2.plot(R[mask_plot], alpha_b[mask_plot],   label="GR only (baryons)", linewidth=1.8)
+    ax2.plot(R[mask_plot], alpha_tot[mask_plot], label="GR + Dark Matter",  linewidth=1.8)
+    ax2.plot(R[mask_plot], alpha_sig[mask_plot], label="Σ‑Gravity",         linewidth=1.8)
+    ax2.plot(R[mask_plot], R[mask_plot], linestyle=":", linewidth=1.2, label="α = R")
 
     for val, lab in [
         (thetaE_b_meas,   "θ_E (GR only)"),
@@ -164,12 +167,13 @@ def make_figures_for_cluster(name: str, thetaE_obs_arcsec: float, outdir: Path,
 def main():
     ap = argparse.ArgumentParser(description="Make cluster lensing visuals (κ, α) with Σ‑Gravity vs references")
     ap.add_argument('--catalog', default=str(Path('data')/'clusters'/'master_catalog.csv'))
-    ap.add_argument('--clusters', default='A2261,MACS1149', help='Comma-separated cluster names; leave empty to use first 2')
+    ap.add_argument('--clusters', default='', help='Comma-separated cluster names; omit or use --all to process all')
     ap.add_argument('--fb', type=float, default=0.33, help='Baryon-only Einstein fraction: θ_E,b = fb * θ_E,tot')
     ap.add_argument('--ell0_frac', type=float, default=0.60, help='ℓ0 as fraction of θ_E,tot (dimensionless)')
     ap.add_argument('--p', type=float, default=2.0)
     ap.add_argument('--ncoh', type=float, default=2.0)
     ap.add_argument('--outdir', default=str(Path('data')/'clusters'/'figures'))
+    ap.add_argument('--all', action='store_true', help='Process all clusters in the catalog')
     args = ap.parse_args()
 
     cat = pd.read_csv(args.catalog)
@@ -180,8 +184,8 @@ def main():
         raise SystemExit("Catalog must include 'cluster_name' and 'theta_E_obs_arcsec' columns")
 
     names = [s.strip() for s in str(args.clusters).split(',') if s.strip()]
-    if not names:
-        names = list(cat[name_col].astype(str).head(2).values)
+    if args.all or not names:
+        names = list(cat[name_col].astype(str).values)
 
     # Case-insensitive mapping for robust lookup
     lower_to_row = {str(r[name_col]).strip().lower(): r for _, r in cat.iterrows()}
