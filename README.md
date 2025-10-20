@@ -235,7 +235,7 @@ many_path_model/path_spectrum_kernel.py computes K(R); many_path_model/run_full_
 
 1) Baryon builder: core/gnfw_gas_profiles.py (gas), core/build_cluster_baryons.py (BCG/ICL, clumping), normalized to f_gas=0.11.  
 2) Triaxial projection: core/triaxial_lensing.py implements the ellipsoidal mapping with global mass normalization (removes the local 1/(q_plane q_LOS) factor).  
-3) Projected kernel: core/kernel2d_sigma.py applies K_Σ(R)=A_c·C↑(R) with C↑(R)=1−[1+(R/ℓ_0)^p]^{−n_coh}.  
+3) Projected kernel: core/kernel2d_sigma.py applies K_Σ(R)=A_c·C(R) with C(R)=1−[1+(R/ℓ_0)^p]^{−n_coh}.
 4) Diagnostics: point/mean convergence, cumulative mass & boost, 2‑D maps, Einstein‑mass check.
 
 Proof‑of‑concept (MACS0416): with spherical geometry, the calibrated model gives θ_E = 30.4″ (obs 30.0″), ⟨κ⟩(<R_E)=1.019. Triaxial tests retain ~21.5% θ_E variation across plausible axis ratios, as expected.
@@ -282,7 +282,7 @@ Table G1 — RAR & BTFR metrics (authoritative)
 
 ### 5.3. Clusters (hierarchical NUTS‑grid; N≈10 + blind hold‑outs)
 
-Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), together with triaxial projection, source‑redshift distributions P(z_s), and baryonic surface‑density profiles Σ_baryon(R) (gas + BCG/ICL), the Σ‑gravity kernel reproduces Einstein radii without dark matter halos. In a blind hold‑out test on Abell 2261 and MACS J1149.5+2223, posterior‑predictive coverage is 2/2 inside the 68% interval and the median fractional error is 14.9%. The population amplitude is μ_A = 4.6 ± 0.4 with intrinsic scatter σ_A ≈ 1.5; the mass‑scaling exponent γ = 0.09 ± 0.10 is consistent with zero.  
+Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), together with triaxial projection, source‑redshift distributions P(z_s), and baryonic surface‑density profiles Σ_baryon(R) (gas + BCG/ICL), the Σ‑Gravity kernel reproduces Einstein radii without dark matter halos. In a blind hold‑out test on Abell 2261 and MACS J1149.5+2223, posterior‑predictive coverage is 2/2 inside the 68% interval (coverage = fraction of observed θ_E inside the model’s 68% posterior‑predictive interval, PPC) and the median fractional error is 14.9%. The population amplitude is μ_A = 4.6 ± 0.4 with intrinsic scatter σ_A ≈ 1.5; the mass‑scaling exponent γ = 0.09 ± 0.10 is consistent with zero.  
 • Posterior (γ‑free vs γ=0): ΔWAIC ≈ +0.01 ± 2.5 (inconclusive).  
 • 5‑fold k‑fold (N=10): **coverage 16/18 = 88.9%**, |Z|>2 = 0, **median fractional error = 7.9%**.
 
@@ -408,9 +408,9 @@ In Σ‑Gravity the potential is $\Phi_{\rm bar}[1+\mathcal{K}(t,\mathbf{x})]$. 
 
 ### 8.5. Future Directions and Cosmological Frontiers
 
-#### An evolving quantum vacuum (redshift and time dilation)
+#### Hypothesis (speculative): evolving coherence and effective redshift
 
-Cosmological redshift may arise from a slowly relaxing quantum vacuum: an initially high‑coherence state (large $\mathcal{K}$) relaxes toward $\mathcal{K}\to0$, lifting the baseline gravitational potential. Photons lose energy by climbing this rising floor, producing redshift; time dilation follows as $(1+z)$ from gravitational time dilation in the deeper past potential.
+The following ideas are exploratory and not used in §§3–5. Cosmological redshift could arise from a slowly relaxing quantum vacuum: an initially high‑coherence state (large $\mathcal{K}$) relaxes toward $\mathcal{K}\to0$, lifting the baseline gravitational potential. Photons might lose energy by climbing this rising floor, producing redshift; time dilation would follow as $(1+z)$ from gravitational time dilation in the deeper past potential. Each claim should be tested per §8.5 (e.g., fit a minimal $\mathcal{K}(t)$ to SNe/BAO; AP test; CMB–LSS cross‑correlation).
 
 #### Falsifiable cosmological tests
 
@@ -602,29 +602,28 @@ Example (circular flow): for $\mathbf{v}=v_\phi\,\hat\phi$ in an axisymmetric di
 
 ## Appendix B — Elliptic ring kernel (exact geometry)
 
-The azimuthal integral for axisymmetric systems reduces to complete elliptic integrals of the first and second kind. For radii $R$ and $R'$, with $R_>\equiv\max(R,R')$, $R_<\equiv\min(R,R')$, and $k=2RR'/(R+R')$:
+The azimuthal integral reduces to complete elliptic integrals with dimensionless parameter
+\[
+ m \;\equiv\; \frac{4 R R'}{(R+R')^2} \in [0,1].
+\]
+Then
+\[
+\int_{0}^{2\pi} \frac{d\varphi}{\sqrt{R^2 + R'^2 - 2 R R'\cos\varphi}} \;=\; \frac{4}{R+R'}\,K(m).
+\]
 
-$$
-G(R,R') = 2\pi R_>\,[\,K(k) - (R_</R_>)\,E(k)\,] .
-$$
-
-Unit test (relative error < 1e−6):
+Reference check (relative error < 1e−6):
 
 ```python
 import numpy as np
-from mpmath import quad, ellipk, ellipe
+from mpmath import quad, ellipk
 
 def ring_green_numeric(R, Rp):
-    # direct quadrature of 1/Delta(\varphi)
-    def integrand(phi):
-        D = np.sqrt(R**2 + Rp**2 - 2*R*Rp*np.cos(phi))
-        return 1.0/D
-    return quad(integrand, [0, np.pi]) * 2.0  # symmetry
+    f = lambda phi: 1.0/np.sqrt(R**2 + Rp**2 - 2*R*Rp*np.cos(phi))
+    return 2.0 * quad(f, [0, np.pi])
 
 def ring_green_elliptic(R, Rp):
-    Rgt, Rlt = max(R, Rp), min(R, Rp)
-    k = 2*R*Rp/(R+Rp)
-    return 2*np.pi*Rgt*(ellipk(k) - (Rlt/Rgt)*ellipe(k))
+    m = 4.0*R*Rp/((R+Rp)**2)  # dimensionless parameter m \in [0,1]
+    return 4.0/(R+Rp) * ellipk(m)
 
 R, Rp = 5.0, 7.0
 num = ring_green_numeric(R, Rp)
@@ -831,10 +830,11 @@ Path‑counting (2D disks vs 3D clusters) predicts A_cluster/A_gal ~ O(10). Empi
 
 ### F.1 Dimensional analysis of ℓ_0
 
+We treat ℓ₀ as a coherence length defined by a collapse time: ℓ₀ ≡ c\,τ_{\rm collapse}. A common heuristic scales the collapse rate with the gravitational interaction rate, τ_{\rm collapse}^{-1} ∝ \sqrt{\alpha\,\rho G}, which yields the length‑scale estimate
 $$
-\ell_0 = \sqrt{\frac{c}{\rho G \alpha}}
+\ell_0 \sim \frac{c}{\sqrt{\alpha\,\rho G}}.
 $$
-Numerically yields kpc‑scale coherence for galactic densities.
+This is a scaling ansatz (not a derivation); ℓ₀ is calibrated empirically in §§5.1–5.3.
 
 ### F.2 Numerical kernel (example)
 
