@@ -176,8 +176,8 @@ def print_pdf(html_path: Path, pdf_path: Path):
     browser = find_browser()
     url = html_path.resolve().as_uri()
     pdf_abs = str(pdf_path.resolve())
-    # Give MathJax a moment with virtual time budget using --virtual-time-budget (ms)
-    cmd = [browser, '--headless=new', '--disable-gpu', '--virtual-time-budget=5000', f"--print-to-pdf={pdf_abs}", url]
+    # Give MathJax more time to render complex formulas (increased to 15 seconds)
+    cmd = [browser, '--headless=new', '--disable-gpu', '--virtual-time-budget=15000', f"--print-to-pdf={pdf_abs}", url]
     # For legacy Edge, headless flag may be '--headless' instead
     try:
         subprocess.check_call(cmd)
