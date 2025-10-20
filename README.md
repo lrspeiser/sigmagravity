@@ -99,8 +99,6 @@ Regimes:
 - Local classicality ($R\ll\ell_0$): compact systems (Solar System) decohere as a whole; $\delta\mathbf{g}_q\to0\Rightarrow \mathcal{K}\to0$.
 - Macroscopic coherence ($R\gg\ell_0$): extended systems (galaxies/clusters) cannot collapse globally; a test body samples a coherent sum over many near‑stationary geometries; $\delta\mathbf{g}_q\ne0\Rightarrow \mathcal{K}>0$.
 
-### 2.3. Coherence window and constants of the model
-
 We model the degree of quantum coherence with a dimensionless field $C(R)$ which vanishes at small $R$ and saturates toward unity at large $R$. The Σ‑kernel is proportional to this field with amplitude $A_c$:
 
 $$
@@ -125,7 +123,7 @@ $$
 
 which remains curl‑free when K = K(R). This canonical kernel is not re‑defined elsewhere; domain‑specific forms below only select appropriate gates and observables.
 
-### 2.9. Illustrative example (emergence of coherence with scale)
+### 2.5. Illustrative example (emergence of coherence with scale)
 
 Adopt $\ell_0=5~\mathrm{kpc}$, $A_c=0.8$, $p=2$, $n_{\rm coh}=1$. Then $C(R)$ (and the boost $1+\mathcal{K}$) transition from negligible at stellar/cluster scales to order‑unity at galactic radii:
 
@@ -136,7 +134,7 @@ Adopt $\ell_0=5~\mathrm{kpc}$, $A_c=0.8$, $p=2$, $n_{\rm coh}=1$. Then $C(R)$ (a
 
 This explains Newtonian recovery in the Solar System and enhanced effective fields in galaxy/cluster regimes.
 
-### 2.7. What is derived vs calibrated
+### 2.6. What is derived vs calibrated
 
 Derived from first principles:
 - Operator structure: $\mathbf{g}_{\rm eff}=\mathbf{g}_{\rm bar}[1+\mathcal{K}]$ (stationary‑phase reduction of the gravitational path integral).
@@ -146,7 +144,7 @@ Calibrated (fundamental constants):
 - $A_c,\ell_0,p,n_{\rm coh}$ from data; $\gamma$ tests universality vs self‑similar scaling (current $\gamma=0.09\pm0.10$ consistent with 0).
 
 
-### 2.5. Galaxy‑scale kernel (RAR; rotation curves)
+### 2.7. Galaxy‑scale kernel (RAR; rotation curves)
 
 For circular motion in an axisymmetric disk,
 
@@ -162,7 +160,7 @@ Best‑fit hyperparameters from the SPARC analysis (166 galaxies, 80/20 split; v
 
 Result: hold‑out RAR scatter = 0.087 dex, bias −0.078 dex (after Newtonian‑limit bug fix and unit hygiene). Cassini‑class bounds are satisfied with margin ≥10^13 by construction (hard saturation gates).
 
-### 2.6. Cluster‑scale kernel (projected lensing)
+### 2.8. Cluster‑scale kernel (projected lensing)
 
 For lensing we work directly in the image plane with surface density and convergence,
 
@@ -175,7 +173,7 @@ Here we use the same C(·) as §2.3. Triaxial projection and Σ_crit(z_l, z_s) a
 **Mass‑scaled coherence.** We allow ℓ_0 to **scale with halo size**: ℓ_0(M) = ℓ_{0,⋆}(R_{500}/1 Mpc)^γ, testing γ=0 (fixed coherence) vs γ>0 (self‑similar growth). With the curated sample including BCG and $P(z_s)$, posteriors yield **$\gamma = 0.09 \pm 0.10$**—**consistent with no mass‑scaling**.
 
 
-### 2.8. Safety: Newtonian core and curl‑free field
+### 2.9. Safety: Newtonian core and curl‑free field
 
 • Newtonian limit: enforced analytically; K<10^−4 at 0.1 kpc (validation).  
 • Curl‑free field: conservative potential; loop curl tests pass.  
@@ -211,7 +209,7 @@ Sampling via PyMC **NUTS** on a differentiable θ_E grid surrogate (target_accep
 
 Why this section? We implement the canonical kernel from §2.4 without redefining it, describe geometry/cosmology (triaxial projection; Σ_crit; source P(z_s)), and document the validation suite that guarantees Newtonian recovery, curl‑free fields, and Solar‑System safety.
 
-We use the canonical kernel K(R) from §2.4 with the domain‑specific choices given in §§2.5–2.6.
+We use the canonical kernel K(R) from §2.4 with the domain‑specific choices given in §§2.7–2.8.
 
 Geometry and cosmology. Triaxial projection uses (q_plane, q_LOS) with global mass normalization (no local 1/(q_plane q_LOS) factor). Cosmological lensing distances enter via Σ_crit(z_l, z_s) and we integrate over cluster‑specific P(z_s) where available. External convergence adopts a conservative prior κ_ext ~ N(0, 0.05²).
 
@@ -259,13 +257,13 @@ How to read this section. We report results in the order the model is used: gala
 • BTFR: within 0.15 dex target (passes).  
 • Ablations: each gate (bulge, shear, bar) reduces χ²; removing them worsens scatter/bias, confirming physical relevance.
 
-![Figure G2. Rotation‑curve gallery (12 SPARC disks)](figures/rc_gallery.png)
+![Figure G1. Rotation‑curve gallery (12 SPARC disks)](figures/rc_gallery.png)
 
-*Figure G2. Rotation‑curve gallery (12 SPARC disks). Curves: data±σ, GR(baryons), Σ‑Gravity (universal kernel). Per‑panel annotations show APE and χ²; no per‑galaxy tuning applied.*
+*Figure G1. Rotation‑curve gallery (12 SPARC disks). Curves: data±σ, GR(baryons), Σ‑Gravity (universal kernel). Per‑panel annotations show APE and χ²; no per‑galaxy tuning applied.*
 
-![Figure G3. RC residual histogram](figures/rc_residual_hist.png)
+![Figure G2. RC residual histogram](figures/rc_residual_hist.png)
 
-*Figure G3. Residuals (v_pred − v_obs) distributions for Σ‑Gravity vs GR(baryons) (and optional NFW overlay). Σ‑Gravity narrows tails and reduces bias in the outer regions.*
+*Figure G2. Residuals (v_pred − v_obs) distributions for Σ‑Gravity vs GR(baryons) (and optional NFW overlay). Σ‑Gravity narrows tails and reduces bias in the outer regions.*
 
 Table G1 — RAR & BTFR metrics (authoritative)
 
@@ -304,13 +302,13 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 
 ![Figure C2. Triaxial sensitivity (θ_E vs q_LOS)](figures/triaxial_sensitivity_A2261.png)
 
-![Figure C4. Convergence panels for all clusters](figures/cluster_kappa_profiles_panel.png)
+![Figure C3. Convergence panels for all clusters](figures/cluster_kappa_profiles_panel.png)
 
-*Figure C4. Convergence κ(R) for each catalog cluster: GR(baryons), GR+DM (SIS ref calibrated to observed θ_E), and Σ‑Gravity with A_c chosen so ⟨κ⟩(<θ_E)=1.*
+*Figure C3. Convergence κ(R) for each catalog cluster: GR(baryons), GR+DM (SIS ref calibrated to observed θ_E), and Σ‑Gravity with A_c chosen so ⟨κ⟩(<θ_E)=1.*
 
-![Figure C5. Deflection panels for all clusters](figures/cluster_alpha_profiles_panel.png)
+![Figure C4. Deflection panels for all clusters](figures/cluster_alpha_profiles_panel.png)
 
-*Figure C5. Deflection α(R) with α=R line and vertical θ_E markers for GR(baryons), GR+DM ref, and Σ‑Gravity — per cluster.*
+*Figure C4. Deflection α(R) with α=R line and vertical θ_E markers for GR(baryons), GR+DM ref, and Σ‑Gravity — per cluster.*
 
 ### 5.4. Milky Way (Gaia DR3): Star‑level RAR (this repository)
 

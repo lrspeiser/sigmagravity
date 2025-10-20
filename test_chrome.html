@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+@page { margin: 20mm; }
+body { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.6; max-width: 180mm; margin: 20mm auto; }
+h1, h3 { margin: 16pt 0 8pt; }
+p { margin: 0 0 12pt 0; }
+</style>
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] } };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body><h1>Test: Section 2.5 — Galaxy-scale kernel</h1>
+<h3>2.5. Galaxy‑scale kernel (RAR; rotation curves)</h3>
+<p>For circular motion in an axisymmetric disk,</p>
+<p>$$
+g_{\rm model}(R) = g_{\rm bar}(R)[1 + K(R)],
+$$</p>
+<p>with</p>
+<p>$$
+K(R) = A_0\, (g^{\dagger}/g_{\rm bar}(R))^p\; C(R;\,\ell_0, p, n_{\rm coh})\; G_{\rm bulge}\; G_{\rm shear}\; G_{\rm bar}.
+$$</p>
+<p>Here $g^{\dagger}$ is an acceleration scale; $(A_0,p)$ govern the path‑spectrum slope; $(\ell_0,n_{\rm coh})$ set coherence length and damping; the gates $(G_{\cdot})$ suppress coherence for bulges, shear and stellar bars. The kernel multiplies Newton by $(1+K)$, preserving the Newtonian limit $(K \to 0$ as $R \to 0)$.</p>
+<p>Best‑fit hyperparameters from the SPARC analysis (166 galaxies, 80/20 split; validation suite pass): $\ell_0=4.993$ kpc, $\beta_{\rm bulge}=1.759$, $\alpha_{\rm shear}=0.149$, $\gamma_{\rm bar}=1.932$, $A_0=0.591$, $p=0.757$, $n_{\rm coh}=0.5$.</p>
+<p>Result: hold‑out RAR scatter = 0.087 dex, bias $-0.078$ dex (after Newtonian‑limit bug fix and unit hygiene). Cassini‑class bounds are satisfied with margin $\geq 10^{13}$ by construction (hard saturation gates).</p></body>
+</html>
