@@ -26,19 +26,44 @@ This idea is motivated by the success of path‑integral reasoning in QED/QFT an
 Scope. We restrict this paper to galaxies (rotational kinematics) and clusters (strong lensing). Cosmology (CMB/BAO, large‑scale growth) is deferred to future work.
 
 *What is new here* is a single, data‑driven kernel that (i) **matches the galactic RAR at 0.087 dex** without modifying GR, (ii) **projects correctly for lensing** with validated triaxial sensitivity (~20–30% lever arm in Einstein radius), and (iii) admits a **mass‑scaled coherence length** ℓ_0 across halos, a discriminant absent in MOND and not predicted by NFW phenomenology. This turns Σ‑Gravity into a **population model** with testable hyper‑parameters (A_c, ℓ_{0,⋆}, γ).
-
 ### Side‑by‑side performance (orientation)
 
-| Domain | Metric (test) | Σ‑Gravity | MOND | ΛCDM (halo fits) |
+|| Domain | Metric (test) | Σ‑Gravity | MOND | ΛCDM (halo fits) |
 |---|---|---:|---:|---:|
 | Galaxies | RAR scatter | 0.087 dex | 0.10–0.13 | 0.18–0.25 |
 | Clusters | Hold‑out θ_E | 2/2 in 68%, 14.9% median error | – | Baseline match |
 
 ---
 
-## 2. Theory: The Σ‑Kernel from Scale‑Dependent Quantum Coherence
+### Reader’s Guide (how to read this paper)
 
-### 2.1. The Gravitational Path Integral and the Origin of the Kernel
+- §2 Theory builds intuition first (primer), then derives a single canonical kernel K(R)=A·C(R;ℓ₀,p,n_coh) and shows how it specializes to galaxies (rotation‑supported disks) and clusters (projected, lensing plane).
+- §3 Data collects the observational ingredients (SPARC, CLASH‑like clusters, baryonic surface‑density profiles, Σ_crit, P(z_s)).
+- §4 Methods & Validation implements the kernel once, documents geometry/cosmology details, and runs the physics validation suite (Newtonian limit, curl‑free field, Solar‑System safety).
+- §5 Results reports galaxy RAR/RC performance and cluster Einstein‑radius tests (with triaxial sensitivity). §6–8 interpret, make predictions, and outline cosmological implications; §9–12 cover reproducibility and roadmap.
+
+### Notation (used throughout)
+
+- ℓ₀ — coherence length; p, n_coh — shape exponents of the coherence window.
+- C(R;ℓ₀,p,n_coh) ≡ 1 − [1 + (R/ℓ₀)^p]^{−n_coh} — coherence function (monotone, 0→1).
+- K(R) = A·C(R;⋅)×∏ G_j — Σ‑kernel; A is an amplitude (A₀ for galaxies; A_c for clusters); G_j are geometry gates (e.g., bulge/shear/bar for disks).
+- g_eff = g_bar·[1+K(R)] — multiplicative enhancement of the Newtonian field.
+- κ_eff(R) = Σ_bar(R)[1+K(R)]/Σ_crit — lensing convergence (clusters).
+
+Abbreviations: BCG/ICL — brightest cluster galaxy/intracluster light; RAR — radial‑acceleration relation; gNFW — generalized NFW gas pressure profile; WAIC/LOO — model comparison metrics.
+
+---
+---
+
+## 2. Theory: From intuition to a single kernel used in two domains
+
+Why this section? We first give an intuitive picture of scale‑dependent coherence (why Σ‑Gravity vanishes in compact systems yet rises on extended ones), then derive a single, conservative kernel that multiplies the Newtonian/GR response. We finish by specializing that kernel to galaxy rotation and cluster lensing, which are the two data domains used in §§3–5.
+
+### 2.1. Plain‑language primer
+
+Gravity can be viewed as a sum over near‑geodesic path families. In compact environments (Solar System), frequent interactions rapidly collapse the superposition to a single classical geometry, so the kernel is negligible (K→0). In extended, structured media (disks; ICM gas), multiple near‑stationary paths remain coherent over a finite scale ℓ₀, producing an order‑unity multiplicative boost to the classical response without altering GR’s field equations.
+
+### 2.2. Stationary‑phase reduction and the origin of the kernel
 
 The foundational equation for a quantum theory of gravity is the path integral over all possible spacetime geometries g:
 
@@ -60,7 +85,7 @@ $$
 
 so the Σ‑kernel $\mathcal{K}$ is the normalized, net effect of all quantum gravitational paths beyond the classical one.
 
-### 2.2. Scale‑Dependent Coherence and the Collapse Timescale
+### 2.3. Coherence window and constants of the model
 
 We posit that the quantum superposition of geometries stochastically decoheres into a single classical state over a characteristic collapse time $\tau_{\rm collapse}$. This defines a causal coherence length
 
@@ -74,7 +99,7 @@ Regimes:
 - Local classicality ($R\ll\ell_0$): compact systems (Solar System) decohere as a whole; $\delta\mathbf{g}_q\to0\Rightarrow \mathcal{K}\to0$.
 - Macroscopic coherence ($R\gg\ell_0$): extended systems (galaxies/clusters) cannot collapse globally; a test body samples a coherent sum over many near‑stationary geometries; $\delta\mathbf{g}_q\ne0\Rightarrow \mathcal{K}>0$.
 
-### 2.3. Derivation of the Coherence Window
+### 2.3. Coherence window and constants of the model
 
 We model the degree of quantum coherence with a dimensionless field $C(R)$ which vanishes at small $R$ and saturates toward unity at large $R$. The Σ‑kernel is proportional to this field with amplitude $A_c$:
 
@@ -90,7 +115,17 @@ $$
 
 with exponents $p,n_{\rm coh}$ characterizing the dephasing and $\ell_0$ the causal coherence length. In this framework, $\{A_c,\ell_0,p,n_{\rm coh},\gamma\}$ are the fundamental constants of Σ‑Gravity ($\gamma$ enters a possible mass‑scaling $\ell_0\propto M^{\gamma}$).
 
-### 2.4. Illustrative example (emergence of coherence with scale)
+### 2.4. Canonical kernel (single place where it is defined)
+
+For any axisymmetric system the effective field is
+
+$$
+ g_{\rm eff}(R) = g_{\rm bar}(R)\,[1 + K(R)] 
+$$
+
+which remains curl‑free when K = K(R). This canonical kernel is not re‑defined elsewhere; domain‑specific forms below only select appropriate gates and observables.
+
+### 2.9. Illustrative example (emergence of coherence with scale)
 
 Adopt $\ell_0=5~\mathrm{kpc}$, $A_c=0.8$, $p=2$, $n_{\rm coh}=1$. Then $C(R)$ (and the boost $1+\mathcal{K}$) transition from negligible at stellar/cluster scales to order‑unity at galactic radii:
 
@@ -101,7 +136,7 @@ Adopt $\ell_0=5~\mathrm{kpc}$, $A_c=0.8$, $p=2$, $n_{\rm coh}=1$. Then $C(R)$ (a
 
 This explains Newtonian recovery in the Solar System and enhanced effective fields in galaxy/cluster regimes.
 
-### 2.5. What is derived vs calibrated
+### 2.7. What is derived vs calibrated
 
 Derived from first principles:
 - Operator structure: $\mathbf{g}_{\rm eff}=\mathbf{g}_{\rm bar}[1+\mathcal{K}]$ (stationary‑phase reduction of the gravitational path integral).
@@ -110,15 +145,8 @@ Derived from first principles:
 Calibrated (fundamental constants):
 - $A_c,\ell_0,p,n_{\rm coh}$ from data; $\gamma$ tests universality vs self‑similar scaling (current $\gamma=0.09\pm0.10$ consistent with 0).
 
-### 2.6. Plain‑language primer (double‑slit at cosmic scales)
 
-- Gravity as a wave: the field exists as a superposition of geometries. Measurement‑like interactions (frequent scattering, compactness) collapse it.
-- Solar System: compact and self‑measuring $\Rightarrow$ collapse to a single classical path (Einstein); $\mathcal{K}\to0$.
-- Galaxies/clusters: too large to collapse globally within $\tau_{\rm collapse}$ $\Rightarrow$ a star/light ray samples many coherent geometries; $\mathcal{K}>0$.
-
-The “missing mass” is the measured effect of uncollapsed, coherent gravitational geometries on macroscopic scales.
-
-### Galaxy‑scale (RAR) kernel
+### 2.5. Galaxy‑scale kernel (RAR; rotation curves)
 
 For circular motion in an axisymmetric disk,
 
@@ -126,55 +154,49 @@ g_model(R) = g_bar(R)[1 + K(R)],
 
 with
 
-K(R) = A_0 (g^†/g_bar(R))^p · C_coh(R;L_0,n_coh) · G_bulge(B/T;β_bulge) · G_shear(S;α_shear) · G_bar(γ_bar).
+K(R) = A_0\, (g^\dagger/g_{\rm bar}(R))^p\; C(R;\,\ell_0, p, n_{\rm coh})\; G_{\rm bulge}\; G_{\rm shear}\; G_{\rm bar}.
 
-Here g^† is an acceleration scale; (A_0,p) govern the path‑spectrum slope; (L_0,n_coh) set coherence length and damping; the gates (G_·) suppress coherence for bulges, shear and stellar bars. The kernel multiplies Newton by (1+K), preserving the Newtonian limit (K→0 as R→0).
+Here g^† is an acceleration scale; (A_0,p) govern the path‑spectrum slope; (ℓ₀,n_{\rm coh}) set coherence length and damping; the gates (G_·) suppress coherence for bulges, shear and stellar bars. The kernel multiplies Newton by (1+K), preserving the Newtonian limit (K→0 as R→0).
 
-Best‑fit hyperparameters from the SPARC analysis (166 galaxies, 80/20 split; validation suite pass): L_0=4.993 kpc, β_bulge=1.759, α_shear=0.149, γ_bar=1.932, A_0=0.591, p=0.757, n_coh=0.5.
+Best‑fit hyperparameters from the SPARC analysis (166 galaxies, 80/20 split; validation suite pass): ℓ₀=4.993 kpc, β_bulge=1.759, α_shear=0.149, γ_bar=1.932, A_0=0.591, p=0.757, n_{\rm coh}=0.5.
 
 Result: hold‑out RAR scatter = 0.087 dex, bias −0.078 dex (after Newtonian‑limit bug fix and unit hygiene). Cassini‑class bounds are satisfied with margin ≥10^13 by construction (hard saturation gates).
 
-### Cluster‑scale (lensing) kernel — projected Σ‑kernel
+### 2.6. Cluster‑scale kernel (projected lensing)
 
 For lensing we work directly in the image plane with surface density and convergence,
 
-κ_eff(R) = Σ_eff(R)/Σ_crit = Σ(R)[1+K_Σ(R)]/Σ_crit,
+κ_eff(R) = \frac{\Sigma_{\rm bar}(R)}{\Sigma_{\rm crit}}\,[1+K_{\rm cl}(R)],\quad K_{\rm cl}(R)=A_c\,C(R;\,\ell_0,p,n_{\rm coh}).
 
-K_Σ(R) = A_c · C↑(R),  with  C↑(R)=1−[1+(R/ℓ_0)^p]^{−n_coh},
-
-where C↑(0)=0 (Newtonian core) and C↑→1 toward Einstein‑scale radii. This enforces the correct monotonicity (no core boost; rising toward lensing scales). The local normalization ensures A_c directly controls the amplitude without throttling by the global mass integral. The Einstein radius condition is ⟨κ_eff⟩(<R_E)=1.
+Here we use the same C(·) as §2.3. Triaxial projection and Σ_crit(z_l, z_s) are handled in §4; Einstein radii satisfy ⟨κ_eff⟩(<R_E)=1.
 
 **Triaxial projection.** We transform ρ(r) → ρ(x,y,z) with ellipsoidal radius m^2 = x^2 + (y/q_p)^2 + (z/q_los)^2 and enforce mass conservation via a single global normalization, not a local 1/(q_p q_los) factor, which cancels in the line‑of‑sight integral. The corrected projection recovers **~60% variation in κ(R)** and **~20–30% in θ_E** across q_los∈[0.7,1.3].
 
 **Mass‑scaled coherence.** We allow ℓ_0 to **scale with halo size**: ℓ_0(M) = ℓ_{0,⋆}(R_{500}/1 Mpc)^γ, testing γ=0 (fixed coherence) vs γ>0 (self‑similar growth). With the curated sample including BCG and P(z_s), posteriors yield **γ = 0.09 ± 0.10**—**consistent with no mass‑scaling**.
 
-### Baryon models (clusters)
 
-• **Gas**: gNFW pressure profile (Arnaud+2010 form), normalized to **f_gas(R_500)=0.11** with clumping correction C(r) (divide n_e by √C).  
-• **BCG + ICL**: central stellar components included.  
-• **External convergence** κ_ext ~ N(0, 0.05²).  
-• **Σ_crit**: Explicit Σ_crit(z_l, z_s) with proper distance ratios D_LS/D_S.
-
-### Safety & falsifiability
+### 2.8. Safety: Newtonian core and curl‑free field
 
 • Newtonian limit: enforced analytically; K<10^−4 at 0.1 kpc (validation).  
 • Curl‑free field: conservative potential; loop curl tests pass.  
 • Solar System & binaries: saturation gates keep deviations negligible (≫10^13 safety margin).  
 • Predictions: no wide‑binary anomaly; cluster lensing scales with triaxial geometry and gas fraction.
 
-### Solar‑system constraints (summary table)
-
-| Constraint | Observational bound | Σ‑Gravity prediction | Status |
-|---|---:|---:|---|
-| PPN γ−1 (Cassini) | < 2.3×10⁻⁵ | Boost at 1 AU < 10⁻¹⁴ → γ−1 ≈ 0 | PASS |
-| Planetary ephemerides | no anomalous drift | Boost < 10⁻¹⁴ (negligible) | PASS |
-| Wide binaries (10²–10⁴ AU) | no anomaly | K < 10⁻⁸ | PASS |
 
 ---
 
 ## 3. Data
 
+Why this section? The kernel of §2 becomes predictive only once paired with concrete baryonic inputs (disks and clusters) and lensing geometry. We summarize the galaxy and cluster datasets used in §5 and specify the baryon models that feed Σ_bar(R) and Σ_crit.
+
 **Galaxies.** 166 SPARC galaxies; 80/20 stratified split by morphology; RAR computed in SI units with inclination hygiene (30°–70°).
+
+### Baryon models (clusters) (moved from §2)
+
+• **Gas**: gNFW pressure profile (Arnaud+2010), normalized to f_gas(R_500)=0.11 with clumping correction C(r).  
+• **BCG + ICL**: central stellar components included.  
+• **External convergence** κ_ext ~ N(0, 0.05²).  
+• **Σ_crit**: distance ratios D_LS/D_S with cluster‑specific P(z_s) where available.
 
 **Clusters.** CLASH‑based catalog (Tier 1–2 quality). **N=10** used for hierarchical training; **blind hold‑outs**: Abell 2261 and MACSJ1149.5+2223. For each cluster we ingest per‑cluster Σ_baryon(R) (X‑ray + BCG/ICL where available), store {θ_E^obs, z_l, **P(z_s)** mixtures or median z_s}, and compute cluster‑specific M_500, R_500 and Σ_crit.
 
@@ -185,21 +207,25 @@ Sampling via PyMC **NUTS** on a differentiable θ_E grid surrogate (target_accep
 
 ---
 
-## 4. Methods
+## 4. Methods & Validation
 
-### 4.0 Kernel and lensing setup
+Why this section? We implement the canonical kernel from §2.4 without redefining it, describe geometry/cosmology (triaxial projection; Σ_crit; source P(z_s)), and document the validation suite that guarantees Newtonian recovery, curl‑free fields, and Solar‑System safety.
 
-Kernel (final form). We use a locally normalized coherence field C↑(R; ℓ₀, …) with 0 ≤ C↑ ≤ 1 so that
-
-K_Σ(R) = A_c · C↑(R; ℓ₀, …),
-
-making A_c directly interpretable while preserving the Newtonian core (C↑→0 as R→0). Gates that enforce small‑scale suppression and axisymmetric construction keep the field curl‑free. For interpretation we distinguish the 3D shell picture (interior chords vs exterior arcs) from the 2D projected kernel actually used for inference.
+We use the canonical kernel K(R) from §2.4 with the domain‑specific choices given in §§2.5–2.6.
 
 Geometry and cosmology. Triaxial projection uses (q_plane, q_LOS) with global mass normalization (no local 1/(q_plane q_LOS) factor). Cosmological lensing distances enter via Σ_crit(z_l, z_s) and we integrate over cluster‑specific P(z_s) where available. External convergence adopts a conservative prior κ_ext ~ N(0, 0.05²).
 
 ### 4.1. Validation suite (physics)
 
 many_path_model/validation_suite.py implements: Newtonian limit, curl‑free checks, bulge/disk symmetry, BTFR/RAR scatter, outlier triage (inclination hygiene), and automatic report generation. All critical physics tests pass.
+
+### Solar‑System constraints (summary table)
+
+| Constraint | Observational bound | Σ‑Gravity prediction | Status |
+|---|---:|---:|---|
+| PPN γ−1 (Cassini) | < 2.3×10⁻⁵ | Boost at 1 AU < 10⁻¹⁴ → γ−1 ≈ 0 | PASS |
+| Planetary ephemerides | no anomalous drift | Boost < 10⁻¹⁴ (negligible) | PASS |
+| Wide binaries (10²–10⁴ AU) | no anomaly | K < 10⁻⁸ | PASS |
 
 ### 4.2. Galaxy pipeline (RAR)
 
@@ -224,6 +250,8 @@ We fit population and per‑cluster parameters with MCMC:
 ---
 
 ## 5. Results
+
+How to read this section. We report results in the order the model is used: galaxies (§5.1; RAR, RC gallery, BTFR), then clusters (§§5.2–5.3; single‑system validation → hierarchical calibration and blind hold‑outs). Each subsection begins with the key question and ends with a one‑line takeaway that we revisit in §6.
 
 ### 5.1. Galaxies (SPARC)
 
@@ -329,7 +357,7 @@ Table C2 — Population posteriors (N≈10; NUTS‑grid)
 |---|---|---|
 | μ_A | 4.6 ± 0.4 | population mean amplitude |
 | σ_A | ≈ 1.5 | intrinsic scatter |
-| ℓ0,⋆ | ≈ 200 kpc | reference coherence length |
+|| ℓ₀,⋆ | ≈ 200 kpc | reference coherence length |
 | γ | 0.09 ± 0.10 | mass‑scaling (consistent with 0) |
 | ΔWAIC (γ‑free vs γ=0) | 0.01 ± 2.5 | inconclusive |
 
@@ -337,10 +365,7 @@ Table C2 — Population posteriors (N≈10; NUTS‑grid)
 
 ## 6. Discussion
 
-**Where Σ‑Gravity now stands.**  
-• **Solar System:** kernel vanishes (K→00) by design; Cassini/PPN limits passed with margin ≥1×10¹³. **No wide‑binary anomaly** at detectable levels.  
-• **Galaxies:** competitive or better than MOND on RAR (0.087 dex) without modifying GR; universal 7‑parameter kernel.  
-• **Clusters:** realistic baryons + Σ‑kernel reproduce A1689 strong lensing; population geometry and mass‑scaling (γ) now falsifiable.
+Where Σ‑Gravity stands after §§3–5. The Newtonian/GR limit is recovered locally; a single, conservative kernel (calibrated once per domain) reaches 0.087 dex RAR scatter on SPARC and reproduces cluster Einstein radii using realistic baryons and triaxial geometry. Current data are consistent with no mass‑scaling of ℓ₀ (γ = 0.09 ± 0.10); the safety margin against Solar‑System bounds remains large. We outline limitations and tests that could falsify or sharpen the framework.
 
 **Mass‑scaling.** After corrections, the posterior for γ peaks near zero with 1σ ≈ 0.10. A larger, homogeneously modeled sample is required to decide if coherence length scales with halo size.
 
@@ -454,7 +479,7 @@ core/gnfw_gas_profiles.py, core/build_cluster_baryons.py (f_gas=0.11, clumping f
 core/triaxial_lensing.py (global normalization; geometry validated in docs/triaxial_lensing_fix_report.md).
 
 3) Projected kernel:  
-core/kernel2d_sigma.py (K_Σ(R)=A_c·C↑(R)).
+core/kernel2d_sigma.py (K_Σ(R)=A_c·C(R;ℓ₀,⋯)).
 
 4) Diagnostics (MACS0416):  
 python scripts/plot_macs0416_diagnostics.py  
@@ -477,7 +502,7 @@ python scripts/run_tier12_mcmc_fast.py → posterior_A_c.png, summary.txt
 
 ### 9.7. Lensing visuals (κ and α) — quick reproduction (this repo)
 
-Self-contained figures for convergence and deflection, calibrated to the observed θ_E in the catalog and using the paper’s Σ‑kernel form K_Σ(R)=A_c·C↑(R):
+Self-contained figures for convergence and deflection, calibrated to the observed θ_E in the catalog and using the paper’s Σ‑kernel K(R)=A_c·C(R;ℓ₀,⋯):
 
 ```pwsh
 python scripts/make_cluster_lensing_profiles.py --clusters "MACS1149" --fb 0.33 --ell0_frac 0.60 --p 2 --ncoh 2
@@ -548,7 +573,7 @@ Cross‑checks: BTFR residuals vs morphology; cluster gas systematics; BCG/ICL M
 
 ## 13. Conclusion
 
-Σ‑Gravity offers a single, conservative kernel that **preserves GR locally**, **matches the galactic RAR at 0.087 dex**, and—when paired with realistic baryons and triaxial projection—**reproduces cluster strong lensing** with a population amplitude **μ_A ≈ 4.6**. Current data show **γ ≈ 0.09 ± 0.10** (consistent with no mass‑scaling). Upcoming work extends the calibration to **N≈18 CLASH clusters** with measured P(z_s), weak‑lensing profiles, and additional blind hold‑outs, providing a decisive comparison with **ΛCDM (NFW)** and **MOND**.
+Σ‑Gravity implements a coherence‑gated, multiplicative kernel that preserves GR locally and explains galaxy and cluster phenomenology with realistic baryons. With no per‑galaxy tuning, the model matches the SPARC RAR at 0.087 dex, and with triaxial projection and Σ_crit integrates cluster lensing to achieve μ_A ≈ 4.6 and blind hold‑out success at the 68% level. The open question is whether ℓ₀ scales with halo size; present constraints favor γ≈0. The next steps are larger homogeneous cluster samples (with P(z_s)) and stacked weak‑lensing profiles to test the predicted geometric lever arm.
 
 ---
 
