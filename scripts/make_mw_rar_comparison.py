@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 import sys
 # Ensure repo root is on sys.path so 'vendor' package is importable
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from vendor.maxdepth_gaia.models import v_c_nfw, v_c_mond_from_vbar
+from vendor.maxdepth_gaia.models import v_c_nfw, v_c_mond_from_vbar, v_c_baryon_multi, MW_DEFAULT, v2_saturated_extra, gate_c1
 
 KPC_M = 3.0856775814913673e19
 KM_TO_M = 1000.0
@@ -99,13 +99,35 @@ def main():
     log_nfw = np.log10(np.clip(g_nfw, 1e-20, None))
     log_mond = np.log10(np.clip(g_mond, 1e-20, None))
 
-    # Panel A: R vs log10 g_obs with binned medians of predictions
+    # Panel A: R vs log10 g_obs — show observed binned medians + smooth model curves from fit_params
     edges = np.array([float(x) for x in args.r_edges.split(',') if x.strip()])
     Rc, med_obs = bin_median_by_R(R, log_obs, edges)
-    _, med_bar = bin_median_by_R(R, log_bar, edges)
-    _, med_sig = bin_median_by_R(R, log_sig, edges)
-    _, med_nfw = bin_median_by_R(R, log_nfw, edges)
-    _, med_mond = bin_median_by_R(R, log_mond, edges)
+
+    # Smooth model curves on a dense radius grid using fit_params
+    Rg = np.linspace(max(3.0, np.nanmin(R)), min(20.0, np.nanmax(R)), 400)
+    # GR(baryons): MW-like multi-disk baseline
+    vbar_curve = v_c_baryon_multi(Rg, MW_DEFAULT)
+    # Σ-Gravity: saturated-well with C1 gate
+    try:
+        fit_d = json.loads(Path(args.fit_json).read_text())
+        rb = float(fit_d.get('boundary',{}).get('R_boundary', 6.0))
+        gw = float(fit_d.get('saturated_well',{}).get('params',{}).get('gate_width_kpc', 0.8))
+        vflat = float(fit_d.get('saturated_well',{}).get('params',{}).get('v_flat', 150.0))
+        Rs = float(fit_d.get('saturated_well',{}).get('params',{}).get('R_s', 2.0))
+        m = float(fit_d.get('saturated_well',{}).get('params',{}).get('m', 2.0))
+    except Exception:
+        rb, gw, vflat, Rs, m = 6.0, 0.8, 150.0, 2.0, 2.0
+    v2_extra_grid = v2_saturated_extra(Rg, v_flat=vflat, R_s=Rs, m=m) * gate_c1(Rg, rb, gw)
+    v_sig_curve = np.sqrt(np.clip(vbar_curve**2 + v2_extra_grid, 0.0, None))
+    # MOND/NFW smooth curves
+    v_nfw_curve = v_c_nfw(Rg, V200=V200, c=c)
+    v_mond_curve = v_c_mond_from_vbar(Rg, vbar_curve, a0_m_s2=a0, kind=mond_kind)
+
+    # Convert to log g
+    log_bar_grid = np.log10(np.clip(accel_m_s2(Rg, vbar_curve), 1e-20, None))
+    log_sig_grid = np.log10(np.clip(accel_m_s2(Rg, v_sig_curve), 1e-20, None))
+    log_nfw_grid = np.log10(np.clip(accel_m_s2(Rg, v_nfw_curve), 1e-20, None))
+    log_mond_grid = np.log10(np.clip(accel_m_s2(Rg, v_mond_curve), 1e-20, None))
 
     # Panel B: OLS fits in RAR space (per model)
     a_bar, b_bar = linear_fit(log_bar, log_obs)
@@ -118,14 +140,15 @@ def main():
 
     ax = axes[0]
     ax.scatter(R[::50], log_obs[::50], s=2, c='0.7', alpha=0.35, label='Stars (obs, downsampled)')
-    ax.plot(Rc, med_obs, 'k-', lw=1.5, label='Median log g_obs')
-    ax.plot(Rc, med_bar, color='#1f77b4', lw=1.8, label='GR (baryons)')
-    ax.plot(Rc, med_sig, color='#d62728', lw=1.8, label='Σ‑Gravity')
-    ax.plot(Rc, med_mond, color='#2ca02c', lw=1.8, label='MOND')
-    ax.plot(Rc, med_nfw, color='#9467bd', lw=1.8, label='GR+NFW')
+    ax.plot(Rc, med_obs, 'ko', ms=3.0, alpha=0.9, label='Median log g_obs')
+    # Smooth theory/model curves from fit
+    ax.plot(Rg, log_bar_grid, color='#1f77b4', lw=1.8, label='GR (baryons) — smooth')
+    ax.plot(Rg, log_sig_grid, color='#d62728', lw=2.0, label='Σ‑Gravity — smooth')
+    ax.plot(Rg, log_mond_grid, color='#2ca02c', lw=1.8, label='MOND — smooth')
+    ax.plot(Rg, log_nfw_grid, color='#9467bd', lw=1.8, label='GR+NFW — smooth')
     ax.set_xlabel('R [kpc]')
-    ax.set_ylabel('Median log10 g [m/s²]')
-    ax.set_title('Milky Way: R vs accelerations (binned medians)')
+    ax.set_ylabel('log10 g [m/s²]')
+    ax.set_title('Milky Way: R vs accelerations (smooth curves + median obs)')
     ax.grid(True, alpha=0.3)
     ax.legend(loc='best', fontsize=9)
 
