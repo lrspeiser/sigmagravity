@@ -1,5 +1,0 @@
-viz: make Gaia R vs g use smooth model curves (from fit) + median obs
-
-- Plot now overlays continuous GR/Σ/MOND/NFW curves from fit_params.json
-- Median observed points retained; removes jagged “turn” from bin medians
-- No change to OLS fits panel; kept as star-level diagnostic

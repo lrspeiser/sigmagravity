@@ -1,1 +1,0 @@
-docs+figs: add Milky Way (Gaia DR3) star-level RAR results, comparison plot, and replication steps`n`n- README.md: new §5.4 and §9.0 with detailed metrics and exact commands`n- Plot: data/gaia/outputs/mw_rar_comparison.png (R vs g medians; RAR line-fits Σ/MOND/NFW/GR)`n- Metrics: data/gaia/outputs/mw_rar_comparison_metrics.json`n- Script: scripts/make_mw_rar_comparison.py

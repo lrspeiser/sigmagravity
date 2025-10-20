@@ -1,1 +1,0 @@
-docs+figs: add multi-cluster lensing panels and embed in paper`n`n- Panels: figures/cluster_{kappa,alpha}_profiles_panel.png built from per-cluster visuals`n- Script: scripts/make_cluster_lensing_panels.py (rows/cols configurable)`n- README: embed panels under §5.3 and list under §12a; add replication command in §9.7

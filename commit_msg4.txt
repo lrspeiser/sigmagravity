@@ -1,1 +1,0 @@
-docs: correct abstract and Appendix A to remove Green's-function claim; clarify PN/decoherence framing`n`n- Abstract: replace GF language with stationary-phase path-integral O(v^2/c^2) and causal coherence length ℓ0=c·τ_collapse`n- Appendix A: remove "retarded GR Green's function" phrasing; explicitly mark Poisson-limit kernel as PN convenience, not a GR GF solution

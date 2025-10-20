@@ -1,1 +1,0 @@
-viz: fix blank κ-profiles (inner-radius mask) and generate figures for all clusters`n`n- Script: mask R < 0.05·θ_E to avoid autoscale dominated by SIS core; add --all to process full catalog`n- Outputs: data/clusters/figures/*_{kappa,alpha}_profiles.png for all catalog clusters

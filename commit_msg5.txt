@@ -1,1 +1,0 @@
-viz: add cluster lensing visuals (κ and α) + replication command`n`n- Script: scripts/make_cluster_lensing_profiles.py (self-contained Σ‑kernel toy; calibrates A_c via ⟨κ⟩(<θ_E)=1)`n- Outputs: data/clusters/figures/MACS1149_{kappa,alpha}_profiles.png`n- README: add §9.7 with reproduction notes and command

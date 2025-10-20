@@ -2,7 +2,7 @@
 # Σ‑Gravity (Sigma‑Gravity): A Coherent Many‑Path Enhancement of Newtonian Gravity Across Solar, Galactic, and Cluster Scales
 
 **Authors:** Leonard Speiser  
-**Date:** 2025‑10‑18 (manuscript draft)
+**Date:** 2025‑10‑20 (manuscript draft)
 
 ---
 
