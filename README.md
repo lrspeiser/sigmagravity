@@ -467,6 +467,18 @@ python scripts/run_tier12_mcmc_fast.py → posterior_A_c.png, summary.txt
 
 ### 9.6. Blind hold‑outs (with overrides)
 
+### 9.7. Lensing visuals (κ and α) — quick reproduction (this repo)
+
+Self-contained figures for convergence and deflection, calibrated to the observed θ_E in the catalog and using the paper’s Σ‑kernel form K_Σ(R)=A_c·C↑(R):
+
+```pwsh
+python scripts/make_cluster_lensing_profiles.py --clusters "MACS1149" --fb 0.33 --ell0_frac 0.60 --p 2 --ncoh 2
+```
+
+- Input: data/clusters/master_catalog.csv (uses cluster_name, theta_E_obs_arcsec)
+- Output: data/clusters/figures/<name>_kappa_profiles.png and <name>_alpha_profiles.png
+- Notes: This is a didactic, axisymmetric visual (SIS toys for GR(baryons) and GR+DM). For baryon‑accurate, triaxial panels, use the full cluster pipeline scripts and per‑cluster Σ_baryon(R).
+
 python scripts/run_holdout_validation.py → pred_vs_obs_holdout.png  
 python scripts/validate_holdout_mass_scaled.py \
   --posterior output/n10_nutsgrid/flat_samples.npz \
