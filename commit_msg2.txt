@@ -1,0 +1,1 @@
+analysis: add star-level RAR analysis (table, metrics, plot) based on GPU predictions`n`n- Script: scripts/analyze_mw_rar_starlevel.py`n- Outputs: data/gaia/outputs/mw_rar_starlevel.csv|.png|_metrics.txt`n- Logs: data/gaia/outputs/rar_*.log`n`nNote: RAR computed in SI (m/s^2); plots in log10; includes bin-wise residual summaries.

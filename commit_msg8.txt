@@ -1,0 +1,7 @@
+docs: apply flow/notation upgrades (Reader''s Guide, canonical kernel, relocations)
+
+- Add Reader''s Guide + Notation in §1
+- Reorder §2: primer→derivation→coherence→canonical kernel→galaxy/cluster kernels; standardize to ℓ₀ and C(R;ℓ₀,p,n_coh)
+- Move cluster baryon models to §3; move Solar‑System constraints to §4; add section bridges
+- Remove kernel redefinition from §4; add "How to read" in §5 and tightened §6 lead; condensed §13
+- Fix K→0 typo; notation cleanups across §4/§9
