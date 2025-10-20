@@ -28,16 +28,16 @@ Scope. We restrict this paper to galaxies (rotational kinematics) and clusters (
 *What is new here* is a single, data‑driven kernel that (i) **matches the galactic RAR at 0.087 dex** without modifying GR, (ii) **projects correctly for lensing** with validated triaxial sensitivity (~20–30% lever arm in Einstein radius), and (iii) admits a **mass‑scaled coherence length** ℓ_0 across halos, a discriminant absent in MOND and not predicted by NFW phenomenology. This turns Σ‑Gravity into a **population model** with testable hyper‑parameters (A_c, ℓ_{0,⋆}, γ).
 ### Side‑by‑side performance (orientation)
 
-|| Domain | Metric (test) | Σ‑Gravity | MOND | ΛCDM (halo fits) |
+| Domain   | Metric (test)     | Σ‑Gravity                         | MOND        | ΛCDM (halo fits) |
 |---|---|---:|---:|---:|
-| Galaxies | RAR scatter | 0.087 dex | 0.10–0.13 | 0.18–0.25 |
-| Clusters | Hold‑out θ_E | 2/2 in 68%, 14.9% median error | – | Baseline match |
+| Galaxies | RAR scatter        | 0.087 dex                        | 0.10–0.13   | 0.18–0.25       |
+| Clusters | Hold‑out $\theta_E$ | 2/2 in 68% (PPC), 14.9% median error | –           | Baseline match   |
 
 ---
 
 ### Reader’s Guide (how to read this paper)
 
-- §2 Theory builds intuition first (primer), then derives a single canonical kernel K(R)=A·C(R;ℓ₀,p,n_coh) and shows how it specializes to galaxies (rotation‑supported disks) and clusters (projected, lensing plane).
+- §2 Theory builds intuition first (primer), then derives a single canonical kernel $K(R)=A\,C(R;\ell_0,p,n_{\rm coh})$ and shows how it specializes to galaxies (rotation‑supported disks) and clusters (projected, lensing plane).
 - §3 Data collects the observational ingredients (SPARC, CLASH‑like clusters, baryonic surface‑density profiles, Σ_crit, $P(z_s)$).
 - §4 Methods & Validation implements the kernel once, documents geometry/cosmology details, and runs the physics validation suite (Newtonian limit, curl‑free field, Solar‑System safety).
 - §5 Results reports galaxy RAR/RC performance and cluster Einstein‑radius tests (with triaxial sensitivity). §6–8 interpret, make predictions, and outline cosmological implications; §9–12 cover reproducibility and roadmap.
@@ -170,7 +170,7 @@ For lensing we work directly in the image plane with surface density and converg
 
 Here we use the same C(·) as §2.3. Triaxial projection and Σ_crit(z_l, z_s) are handled in §4; Einstein radii satisfy ⟨κ_eff⟩(<R_E)=1.
 
-**Triaxial projection.** We transform ρ(r) → ρ(x,y,z) with ellipsoidal radius m^2 = x^2 + (y/q_p)^2 + (z/q_los)^2 and enforce mass conservation via a single global normalization, not a local 1/(q_p q_los) factor, which cancels in the line‑of‑sight integral. The corrected projection recovers **~60% variation in κ(R)** and **~20–30% in θ_E** across q_los∈[0.7,1.3].
+**Triaxial projection.** We transform ρ(r) → ρ(x,y,z) with ellipsoidal radius $m^2 = x^2 + (y/q_p)^2 + (z/q_{\rm LOS})^2$ and enforce mass conservation via a single global normalization, not a local $1/(q_p\, q_{\rm LOS})$ factor, which cancels in the line‑of‑sight integral. The corrected projection recovers **~60% variation in κ(R)** and **~20–30% in $\theta_E$** across $q_{\rm LOS}\in[0.7,1.3]$.
 
 **Mass‑scaled coherence.** We allow ℓ_0 to **scale with halo size**: ℓ_0(M) = ℓ_{0,⋆}(R_{500}/1 Mpc)^γ, testing γ=0 (fixed coherence) vs γ>0 (self‑similar growth). With the curated sample including BCG and $P(z_s)$, posteriors yield **$\gamma = 0.09 \pm 0.10$**—**consistent with no mass‑scaling**.
 
@@ -229,7 +229,7 @@ many_path_model/validation_suite.py implements: Newtonian limit, curl‑free che
 
 ### 4.2. Galaxy pipeline (RAR)
 
-many_path_model/path_spectrum_kernel.py computes K(R); many_path_model/run_full_tuning_pipeline.py optimizes (L_0,p,n_coh,A_0,β_bulge,α_shear,γ_bar) on an 80/20 split with ablations. Output: RAR scatter 0.087 dex and negligible bias after amplitude and unit fixes.
+many_path_model/path_spectrum_kernel.py computes $K(R)$; many_path_model/run_full_tuning_pipeline.py optimizes $(\ell_0,\,p,\,n_{\rm coh},\,A_0,\,\beta_{\rm bulge},\,\alpha_{\rm shear},\,\gamma_{\rm bar})$ on an 80/20 split with ablations. Output: RAR scatter 0.087 dex and negligible bias after amplitude and unit fixes.
 
 ### 4.3. Cluster pipeline (Σ‑kernel + triaxial lensing)
 
