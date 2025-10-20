@@ -8,9 +8,9 @@
 
 ## Abstract
 
-We introduce Σ‑Gravity, a conservative, GR‑compatible framework in which the gravitational field of baryons is enhanced non‑locally by the coherent superposition of near‑geodesic path families. Using a stationary‑phase expansion of the GR path integral to O(v^2/c^2), we derive the operator structure of a projected, curl‑free kernel whose ring geometry is exact (elliptic integrals) and whose coherence window follows from a phenomenological, causal envelope set by a collapse timescale (ℓ₀ = c·τ_collapse). The kernel multiplies the Newtonian response, vanishes in high‑acceleration, compact environments (Solar System), and rises where extended structure allows coherence (disks; cluster radii ∼10^2 kpc).
+We introduce Σ‑Gravity, a conservative, GR‑compatible framework in which the gravitational field of baryons is enhanced non‑locally by the coherent superposition of near‑geodesic path families. Using a stationary‑phase expansion of the GR path integral to $\mathcal{O}(v^2/c^2)$, we derive the operator structure of a projected, curl‑free kernel whose ring geometry is exact (elliptic integrals) and whose coherence window follows from a phenomenological, causal envelope set by a collapse timescale $(\ell_0 = c\,\tau_{\rm collapse})$. The kernel multiplies the Newtonian response, vanishes in high‑acceleration, compact environments (Solar System), and rises where extended structure allows coherence (disks; cluster radii $\sim 10^2$ kpc).
 
-With a single universal parameter set for disks, Σ‑Gravity reproduces the galactic radial‑acceleration relation at 0.087 dex scatter on SPARC without per‑galaxy tuning. For clusters, a projected Σ‑kernel with realistic baryons (gNFW gas + BCG/ICL), triaxial projection, source‑redshift distributions P(z_s) and hierarchical calibration yields blind‑holdout coverage 2/2 inside 68% (Abell 2261, MACSJ1149.5+2223) with median fractional error 14.9%. The calibrated population amplitude is μ_A=4.6±0.4 with intrinsic scatter σ_A≃1.5; the mass‑scaling of the coherence length is consistent with zero (γ=0.09±0.10). We release complete, reproducible code paths and provenance manifests for all figures and results.
+With a single universal parameter set for disks, Σ‑Gravity reproduces the galactic radial‑acceleration relation at 0.087 dex scatter on SPARC without per‑galaxy tuning. For clusters, a projected Σ‑kernel with realistic baryons (gNFW gas + BCG/ICL), triaxial projection, source‑redshift distributions $P(z_s)$ and hierarchical calibration yields blind‑holdout coverage 2/2 inside 68% (Abell 2261, MACSJ1149.5+2223) with median fractional error 14.9%. The calibrated population amplitude is $\mu_A=4.6\pm 0.4$ with intrinsic scatter $\sigma_A\simeq 1.5$; the mass‑scaling of the coherence length is consistent with zero ($\gamma=0.09\pm 0.10$). We release complete, reproducible code paths and provenance manifests for all figures and results.
 
 ---
 
@@ -38,7 +38,7 @@ Scope. We restrict this paper to galaxies (rotational kinematics) and clusters (
 ### Reader’s Guide (how to read this paper)
 
 - §2 Theory builds intuition first (primer), then derives a single canonical kernel K(R)=A·C(R;ℓ₀,p,n_coh) and shows how it specializes to galaxies (rotation‑supported disks) and clusters (projected, lensing plane).
-- §3 Data collects the observational ingredients (SPARC, CLASH‑like clusters, baryonic surface‑density profiles, Σ_crit, P(z_s)).
+- §3 Data collects the observational ingredients (SPARC, CLASH‑like clusters, baryonic surface‑density profiles, Σ_crit, $P(z_s)$).
 - §4 Methods & Validation implements the kernel once, documents geometry/cosmology details, and runs the physics validation suite (Newtonian limit, curl‑free field, Solar‑System safety).
 - §5 Results reports galaxy RAR/RC performance and cluster Einstein‑radius tests (with triaxial sensitivity). §6–8 interpret, make predictions, and outline cosmological implications; §9–12 cover reproducibility and roadmap.
 
@@ -172,7 +172,7 @@ Here we use the same C(·) as §2.3. Triaxial projection and Σ_crit(z_l, z_s) a
 
 **Triaxial projection.** We transform ρ(r) → ρ(x,y,z) with ellipsoidal radius m^2 = x^2 + (y/q_p)^2 + (z/q_los)^2 and enforce mass conservation via a single global normalization, not a local 1/(q_p q_los) factor, which cancels in the line‑of‑sight integral. The corrected projection recovers **~60% variation in κ(R)** and **~20–30% in θ_E** across q_los∈[0.7,1.3].
 
-**Mass‑scaled coherence.** We allow ℓ_0 to **scale with halo size**: ℓ_0(M) = ℓ_{0,⋆}(R_{500}/1 Mpc)^γ, testing γ=0 (fixed coherence) vs γ>0 (self‑similar growth). With the curated sample including BCG and P(z_s), posteriors yield **γ = 0.09 ± 0.10**—**consistent with no mass‑scaling**.
+**Mass‑scaled coherence.** We allow ℓ_0 to **scale with halo size**: ℓ_0(M) = ℓ_{0,⋆}(R_{500}/1 Mpc)^γ, testing γ=0 (fixed coherence) vs γ>0 (self‑similar growth). With the curated sample including BCG and $P(z_s)$, posteriors yield **$\gamma = 0.09 \pm 0.10$**—**consistent with no mass‑scaling**.
 
 
 ### 2.8. Safety: Newtonian core and curl‑free field
@@ -196,7 +196,7 @@ Why this section? The kernel of §2 becomes predictive only once paired with con
 • **Gas**: gNFW pressure profile (Arnaud+2010), normalized to f_gas(R_500)=0.11 with clumping correction C(r).  
 • **BCG + ICL**: central stellar components included.  
 • **External convergence** κ_ext ~ N(0, 0.05²).  
-• **Σ_crit**: distance ratios D_LS/D_S with cluster‑specific P(z_s) where available.
+• **Σ_crit**: distance ratios D_LS/D_S with cluster‑specific $P(z_s)$ where available.
 
 **Clusters.** CLASH‑based catalog (Tier 1–2 quality). **N=10** used for hierarchical training; **blind hold‑outs**: Abell 2261 and MACSJ1149.5+2223. For each cluster we ingest per‑cluster Σ_baryon(R) (X‑ray + BCG/ICL where available), store {θ_E^obs, z_l, **P(z_s)** mixtures or median z_s}, and compute cluster‑specific M_500, R_500 and Σ_crit.
 
