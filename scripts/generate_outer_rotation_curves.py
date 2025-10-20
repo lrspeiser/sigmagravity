@@ -117,9 +117,9 @@ def main():
     ax.set_xlim(5, 26)
     ax.set_ylim(100, 280)
 
-    # Annotate key point
+    # Annotate key point with NFW parameters
     ax.text(0.98, 0.05, 
-            'Both \u03a3 and NFW flatten beyond 10 kpc,\nbut \u03a3 achieves correct normalization\nwithout free halo mass parameter', 
+            f'Both \u03a3 and NFW flatten beyond 10 kpc,\nbut \u03a3 achieves correct normalization\nwithout free halo mass parameter.\nNFW shown: V\u2082\u2080\u2080={V200:.0f} km/s, c={c:.1f} (tuned)', 
             transform=ax.transAxes, fontsize=10, verticalalignment='bottom', horizontalalignment='right',
             bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.9))
 

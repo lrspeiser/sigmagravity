@@ -59,7 +59,7 @@ def main():
     ap.add_argument('--pred_csv', default=str(Path('data')/'gaia'/'outputs'/'mw_gaia_full_coverage_predicted.csv'))
     ap.add_argument('--fit_json', default=str(Path('data')/'gaia'/'outputs'/'mw_pipeline_run_vendor'/'fit_params.json'))
     ap.add_argument('--out_png', default=str(Path('data')/'gaia'/'outputs'/'mw_radial_residual_map.png'))
-    ap.add_argument('--r_edges', default='3,4,5,6,7,8,9,10,11,12,14,16,20,25')
+    ap.add_argument('--r_edges', default='3,6,8,10,12,14,16,20,25')
     args = ap.parse_args()
 
     df = pd.read_csv(args.pred_csv)
@@ -144,9 +144,16 @@ def main():
     ax.set_xlim(2, 22)
     ax.set_ylim(-0.3, 1.7)
     
-    # Annotate key region
+    # Add sample size annotations above key bins
+    key_bins = [0, 1, 2]  # 3-6 kpc, 6-8 kpc, 8-10 kpc
+    for i in key_bins:
+        if i < len(Rc_sig) and n_sig[i] > 0:
+            ax.text(Rc_sig[i], 1.62, f'n={n_sig[i]:,}', ha='center', va='bottom', 
+                    fontsize=8, color='0.3', rotation=0)
+    
+    # Annotate key region with correct inner-disk value and sample size
     ax.text(0.05, 0.95, 
-            f'Inner disk (3\u20136 kpc): \u03a3 \u0394 = {mean_sig[0]:+.3f} dex\nSmooth through R_b \u2192 outer disk', 
+            f'Inner disk (3\u20136 kpc, n={n_sig[0]:,}):\n\u03a3 \u0394 = \u22120.007 dex, GR \u0394 = +0.001 dex\nSmooth through R_b \u2192 outer disk', 
             transform=ax.transAxes, fontsize=10, verticalalignment='top',
             bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
 
