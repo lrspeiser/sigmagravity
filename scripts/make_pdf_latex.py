@@ -26,7 +26,7 @@ def check_dependencies():
                               capture_output=True, text=True, timeout=5)
         if result.returncode == 0:
             version = result.stdout.split('\n')[0]
-            print(f"✓ {version}")
+            print(f"[OK] {version}")
         else:
             missing.append('pandoc')
     except (FileNotFoundError, subprocess.TimeoutExpired):
@@ -38,14 +38,14 @@ def check_dependencies():
                               capture_output=True, text=True, timeout=5)
         if result.returncode == 0:
             version = result.stdout.split('\n')[0]
-            print(f"✓ {version}")
+            print(f"[OK] {version}")
         else:
             missing.append('pdflatex (MiKTeX)')
     except (FileNotFoundError, subprocess.TimeoutExpired):
         missing.append('pdflatex (MiKTeX)')
     
     if missing:
-        print(f"\n✗ Missing dependencies: {', '.join(missing)}")
+        print(f"\n[ERROR] Missing dependencies: {', '.join(missing)}")
         print("\nTo install:")
         print("  1. Run: .\\install_latex_pdf.ps1")
         print("  2. Or install manually:")
@@ -68,34 +68,9 @@ def generate_pdf_latex(md_path: Path, pdf_path: Path):
         'pandoc',
         str(md_path),
         '-o', str(pdf_path),
-        '--pdf-engine=pdflatex',
-        
-        # Page layout
+        '--pdf-engine=xelatex',  # XeLaTeX handles Unicode (Σ, †, ℓ, etc.)
         '-V', 'geometry:margin=20mm',
-        '-V', 'papersize=a4',
         '-V', 'fontsize=11pt',
-        
-        # Font (Times-like for academic papers)
-        '-V', 'mainfont=Times New Roman',
-        
-        # Better math rendering
-        '--mathml',  # Or use --mathjax for web-based rendering
-        
-        # Table of contents (optional, comment out if not wanted)
-        # '--toc',
-        # '--toc-depth=3',
-        
-        # Syntax highlighting for code blocks
-        '--highlight-style=tango',
-        
-        # Enable extensions
-        '--from=markdown+tex_math_dollars+raw_tex',
-        
-        # Better tables
-        '--columns=80',
-        
-        # Keep intermediate .tex file for debugging (optional)
-        # '--standalone',
     ]
     
     try:
@@ -106,11 +81,11 @@ def generate_pdf_latex(md_path: Path, pdf_path: Path):
         
         if result.returncode == 0:
             size_mb = pdf_path.stat().st_size / (1024 * 1024)
-            print(f"\n✓ Success! PDF generated: {size_mb:.1f} MB")
+            print(f"\n[SUCCESS] PDF generated: {size_mb:.1f} MB")
             print(f"   {pdf_path}")
             return True
         else:
-            print(f"\n✗ Error generating PDF:")
+            print(f"\n[ERROR] Error generating PDF:")
             print(result.stderr)
             
             # Common error hints
@@ -122,12 +97,12 @@ def generate_pdf_latex(md_path: Path, pdf_path: Path):
             return False
             
     except subprocess.TimeoutExpired:
-        print("\n✗ Timeout: PDF generation took > 5 minutes")
+        print("\n[ERROR] Timeout: PDF generation took > 5 minutes")
         print("   This usually means LaTeX is downloading packages.")
         print("   Try running again.")
         return False
     except Exception as e:
-        print(f"\n✗ Unexpected error: {e}")
+        print(f"\n[ERROR] Unexpected error: {e}")
         return False
 
 def main():
@@ -146,7 +121,7 @@ def main():
     
     # Validate input
     if not md_path.exists():
-        print(f"✗ Error: Input file not found: {md_path}")
+        print(f"[ERROR] Input file not found: {md_path}")
         sys.exit(1)
     
     # Check dependencies
