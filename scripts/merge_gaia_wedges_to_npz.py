@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
-Merge multiple Gaia CSV wedges into a single consolidated NPZ file.
-Reads existing mw_gaia_144k.npz schema and appends new wedge data.
+Merge multiple Gaia NPZ wedges into a single consolidated NPZ file.
+Combines base NPZ with additional wedge NPZs (all with derived galactocentric columns).
 """
 import argparse
 import numpy as np
-import pandas as pd
 from pathlib import Path
 
 
@@ -15,82 +14,64 @@ def load_existing_npz(npz_path):
         return {k: data[k] for k in data.files}
 
 
-def load_wedge_csv(csv_path):
-    """Load a Gaia wedge CSV and return normalized DataFrame."""
-    df = pd.read_csv(csv_path)
-    # Ensure required columns exist
-    required = ['source_id', 'ra', 'dec', 'parallax', 'pmra', 'pmdec', 
-                'radial_velocity', 'phot_g_mean_mag']
-    missing = [c for c in required if c not in df.columns]
-    if missing:
-        raise ValueError(f"Missing columns in {csv_path}: {missing}")
-    return df
-
-
-def merge_to_npz(base_npz, wedge_csvs, output_npz):
+def merge_to_npz(base_npz, wedge_npzs, output_npz):
     """
-    Merge base NPZ with new wedge CSVs and write consolidated NPZ.
+    Merge base NPZ with new wedge NPZs and write consolidated NPZ.
     
     Args:
         base_npz: path to existing mw_gaia_144k.npz
-        wedge_csvs: list of paths to new CSV wedges
+        wedge_npzs: list of paths to new wedge NPZ files (from convert_gaia_csv_to_npz.py)
         output_npz: path to write merged NPZ
     """
     # Load base
     base = load_existing_npz(base_npz)
-    print(f"Loaded base: {len(base['source_id'])} stars")
+    required_keys = ['R_kpc', 'z_kpc', 'v_obs_kms', 'v_err_kms', 'gN_kms2_per_kpc', 'Sigma_loc_Msun_pc2']
     
-    # Collect new wedge data
-    new_dfs = []
-    for csv in wedge_csvs:
-        df = load_wedge_csv(csv)
-        print(f"Loaded {csv}: {len(df)} stars")
-        new_dfs.append(df)
+    n_base = len(base['R_kpc'])
+    print(f"Loaded base: {n_base:,} stars")
+    print(f"  R range: {base['R_kpc'].min():.2f}–{base['R_kpc'].max():.2f} kpc")
     
-    if not new_dfs:
-        print("No new wedges to merge; copying base to output")
+    # Collect wedge arrays
+    wedge_arrays = {k: [] for k in required_keys}
+    total_wedge_stars = 0
+    
+    for wedge_path in wedge_npzs:
+        wedge = load_existing_npz(wedge_path)
+        n_wedge = len(wedge['R_kpc'])
+        total_wedge_stars += n_wedge
+        print(f"Loaded wedge {Path(wedge_path).name}: {n_wedge:,} stars")
+        print(f"  R range: {wedge['R_kpc'].min():.2f}–{wedge['R_kpc'].max():.2f} kpc")
+        
+        for k in required_keys:
+            wedge_arrays[k].append(wedge[k])
+    
+    if not wedge_npzs:
+        print("No wedges to merge; copying base to output")
         np.savez_compressed(output_npz, **base)
         return
     
-    merged_df = pd.concat(new_dfs, ignore_index=True)
-    print(f"Total new stars: {len(merged_df)}")
+    # Concatenate all arrays
+    print(f"\nMerging {n_base:,} base + {total_wedge_stars:,} wedge stars...")
+    merged = {}
+    for k in required_keys:
+        merged[k] = np.concatenate([base[k]] + wedge_arrays[k])
     
-    # Drop duplicates by source_id (prefer new data)
-    base_df = pd.DataFrame({
-        'source_id': base['source_id'],
-        'ra': base.get('ra', np.full(len(base['source_id']), np.nan)),
-        'dec': base.get('dec', np.full(len(base['source_id']), np.nan)),
-        'parallax': base.get('parallax', np.full(len(base['source_id']), np.nan)),
-        'pmra': base.get('pmra', np.full(len(base['source_id']), np.nan)),
-        'pmdec': base.get('pmdec', np.full(len(base['source_id']), np.nan)),
-        'radial_velocity': base.get('radial_velocity', np.full(len(base['source_id']), np.nan)),
-        'phot_g_mean_mag': base.get('phot_g_mean_mag', np.full(len(base['source_id']), np.nan)),
-    })
+    n_merged = len(merged['R_kpc'])
+    print(f"Total after merge: {n_merged:,} stars")
+    print(f"  R range: {merged['R_kpc'].min():.2f}–{merged['R_kpc'].max():.2f} kpc")
+    print(f"  Mean v_obs: {merged['v_obs_kms'].mean():.1f} ± {merged['v_obs_kms'].std():.1f} km/s")
     
-    combined = pd.concat([base_df, merged_df], ignore_index=True)
-    combined.drop_duplicates(subset='source_id', keep='last', inplace=True)
-    print(f"After dedup: {len(combined)} stars")
-    
-    # Write NPZ
-    out_dict = {
-        'source_id': combined['source_id'].values,
-        'ra': combined['ra'].values,
-        'dec': combined['dec'].values,
-        'parallax': combined['parallax'].values,
-        'pmra': combined['pmra'].values,
-        'pmdec': combined['pmdec'].values,
-        'radial_velocity': combined['radial_velocity'].values,
-        'phot_g_mean_mag': combined['phot_g_mean_mag'].values,
-    }
-    
-    np.savez_compressed(output_npz, **out_dict)
-    print(f"Wrote {output_npz}")
+    # Save merged NPZ
+    output_path = Path(output_npz)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(output_path, **merged)
+    print(f"\n✓ Wrote {output_path}")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base', required=True, help='Base NPZ (e.g., mw_gaia_144k.npz)')
-    parser.add_argument('--wedges', nargs='+', required=True, help='New wedge CSV files')
+    parser.add_argument('--wedges', nargs='+', required=True, help='New wedge NPZ files')
     parser.add_argument('--output', required=True, help='Output merged NPZ')
     args = parser.parse_args()
     
