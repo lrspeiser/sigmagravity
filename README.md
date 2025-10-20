@@ -276,6 +276,14 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 
 ![Figure C2. Triaxial sensitivity (θ_E vs q_LOS)](figures/triaxial_sensitivity_A2261.png)
 
+![Figure C4. Convergence panels for all clusters](figures/cluster_kappa_profiles_panel.png)
+
+*Figure C4. Convergence κ(R) for each catalog cluster: GR(baryons), GR+DM (SIS ref calibrated to observed θ_E), and Σ‑Gravity with A_c chosen so ⟨κ⟩(<θ_E)=1.*
+
+![Figure C5. Deflection panels for all clusters](figures/cluster_alpha_profiles_panel.png)
+
+*Figure C5. Deflection α(R) with α=R line and vertical θ_E markers for GR(baryons), GR+DM ref, and Σ‑Gravity — per cluster.*
+
 ### 5.4. Milky Way (Gaia DR3): Star‑level RAR (this repository)
 
 Data and setup
@@ -479,6 +487,14 @@ python scripts/make_cluster_lensing_profiles.py --clusters "MACS1149" --fb 0.33 
 - Output: data/clusters/figures/<name>_kappa_profiles.png and <name>_alpha_profiles.png
 - Notes: This is a didactic, axisymmetric visual (SIS toys for GR(baryons) and GR+DM). For baryon‑accurate, triaxial panels, use the full cluster pipeline scripts and per‑cluster Σ_baryon(R).
 
+Build multi‑cluster panels for the paper:
+
+```pwsh
+python scripts/make_cluster_lensing_panels.py
+```
+
+Produces: figures/cluster_kappa_profiles_panel.png and figures/cluster_alpha_profiles_panel.png.
+
 python scripts/run_holdout_validation.py → pred_vs_obs_holdout.png  
 python scripts/validate_holdout_mass_scaled.py \
   --posterior output/n10_nutsgrid/flat_samples.npz \
@@ -527,6 +543,8 @@ Cross‑checks: BTFR residuals vs morphology; cluster gas systematics; BCG/ICL M
 8. Clusters — ⟨κ⟩(<R) panels: figures/cluster_kappa_panels.png
 9. Clusters — Triaxial sensitivity: figures/triaxial_sensitivity_A2261.png
 10. Methods — MACS0416 convergence profiles: figures/macs0416_convergence_profiles.png
+11. Clusters — Convergence panels (all): figures/cluster_kappa_profiles_panel.png
+12. Clusters — Deflection panels (all): figures/cluster_alpha_profiles_panel.png
 
 ## 13. Conclusion
 
