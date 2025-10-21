@@ -1,0 +1,26 @@
+{
+  "center": {
+    "ra": 194.953,
+    "dec": 27.98,
+    "z": 0.0231
+  },
+  "H0": 70.0,
+  "D_A_Mpc": 96.69779214153064,
+  "sdss_csv": "C:\\Users\\henry\\dev\\sigmagravity\\data\\redshift\\coma_sdss_box.csv",
+  "bins": [
+    0.0,
+    0.1,
+    0.3,
+    0.6,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "bcg": {
+    "ra": 195.03387,
+    "dec": 27.976953,
+    "z": 0.02150175,
+    "rmag": 11.5143
+  },
+  "counts_total": 1232
+}
