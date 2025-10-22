@@ -165,7 +165,7 @@ def main():
         raise SystemExit(f"Only {len(use_clusters)} clusters with members; need more for robust stack.")
 
     print(f"Stacking {len(use_clusters)} clusters...")
-    rbins = np.array([0.0, 0.3, 0.6, 1.0, 1.5, 2.0])
+    rbins = np.arange(0.0, 2.01, 0.20)
 
     obs_profiles = []
     for cl in use_clusters:
@@ -176,7 +176,7 @@ def main():
 
     # Σ endpoint predictions (toy Hernquist)
     Msun = 1.98840987e30; kpc = 3.085677581e19
-    geff = geff_hernquist_factory(M=1.0e15*Msun, a=300.0*kpc, ell0=200.0*kpc, p=2.0, ncoh=2.0, kernel_metric='spherical')
+    geff = geff_hernquist_factory(M=1.0e15*Msun, a=300.0*kpc, ell0=200.0*kpc, p=2.0, ncoh=2.0, A=4.6, kernel_metric='spherical')
     _, dv_pred = stack_predictions(use_clusters, rbins, geff)
 
     out = OUTDIR / 'stack_vs_sigma_many.csv'

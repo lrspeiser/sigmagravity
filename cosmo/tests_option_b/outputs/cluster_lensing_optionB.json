@@ -1,0 +1,63 @@
+{
+  "test": "cluster_lensing",
+  "option": "B (Omega_eff in FRW, mu=1 on linear scales)",
+  "conclusion": "Option B preserves lensing distances and halo kernel; cluster fits unchanged",
+  "geometry": {
+    "z_lens": 0.3,
+    "z_source": 2.0
+  },
+  "kernel_parameters": {
+    "A_c": 4.6,
+    "ell0_kpc": 200.0,
+    "p": 0.75,
+    "n_coh": 2.0
+  },
+  "distances": {
+    "option_B": {
+      "D_l_Mpc": 918.7071262460747,
+      "D_s_Mpc": 1726.2989964050055,
+      "D_ls_Mpc": 1328.1925750317064,
+      "Sigma_crit_kg_m2": 4.913072329452266,
+      "Sigma_crit_Msun_pc2": 0.0023525301879722023
+    },
+    "LCDM": {
+      "D_l_Mpc": 918.7071262460747,
+      "D_s_Mpc": 1726.2989964050055,
+      "D_ls_Mpc": 1328.1925750317064,
+      "Sigma_crit_kg_m2": 4.913072329452266,
+      "Sigma_crit_Msun_pc2": 0.0023525301879722023
+    },
+    "ratios": {
+      "D_l": 1.0,
+      "D_s": 1.0,
+      "D_ls": 1.0,
+      "Sigma_crit": 1.0
+    }
+  },
+  "kernel": {
+    "r_kpc": [
+      50.0,
+      100.0,
+      200.0,
+      500.0,
+      1000.0,
+      2000.0
+    ],
+    "K": [
+      2.089229313904481,
+      2.790942485587406,
+      3.4499999999999997,
+      4.084836309011585,
+      4.356197653566969,
+      4.495143797199654
+    ],
+    "enhancement_1plusK": [
+      3.089229313904481,
+      3.790942485587406,
+      4.449999999999999,
+      5.084836309011585,
+      5.356197653566969,
+      5.495143797199654
+    ]
+  }
+}

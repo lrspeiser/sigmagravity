@@ -1,0 +1,20 @@
+{
+  "H0_kms_Mpc": 70.0,
+  "Omega_b0": 0.048,
+  "Omega_r0": 8.6e-05,
+  "Omega_L0": 0.7,
+  "ell0_m": 6.171355162e+21,
+  "p": 0.75,
+  "ncoh": 0.5,
+  "A0": 4.6,
+  "A_form": "logistic",
+  "a_t": 0.01,
+  "s": 2.0,
+  "k_grid": 9,
+  "k_rep": 3.240779289960431e-26,
+  "files": [
+    "mu_k_a1.csv",
+    "growth_k_rep.csv",
+    "los_isw.txt"
+  ]
+}

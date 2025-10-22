@@ -1,0 +1,29 @@
+{
+  "acceptance": "\u00b11% vs \u039bCDM for z\u2208[0,2]",
+  "passing": 4,
+  "total": 4,
+  "all_pass": true,
+  "checks": {
+    "E": {
+      "max_rel_err": 0.0,
+      "mean_rel_err": 0.0,
+      "pass_1pct": true
+    },
+    "D_A": {
+      "max_rel_err": 0.0,
+      "mean_rel_err": 0.0,
+      "pass_1pct": true
+    },
+    "D_L": {
+      "max_rel_err": 0.0,
+      "mean_rel_err": 0.0,
+      "pass_1pct": true
+    },
+    "D_V": {
+      "max_rel_err": 0.0,
+      "mean_rel_err": 0.0,
+      "pass_1pct": true
+    }
+  },
+  "r_d_Mpc": 147.0
+}

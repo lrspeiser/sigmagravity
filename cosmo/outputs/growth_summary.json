@@ -1,0 +1,8 @@
+{
+  "sigma_8_z0": 0.8,
+  "S_8": 0.799965602218641,
+  "Omega_m_z0": 0.29997420221860915,
+  "h": 0.7,
+  "k_fid_h_per_Mpc": 0.1,
+  "normalization": "\u03c3\u2088(z=0)=0.8 \u039bCDM-like; S\u2088 from \u03a9_matter(z=0)"
+}

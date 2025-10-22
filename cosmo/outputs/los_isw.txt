@@ -1,0 +1,1 @@
+Toy LOS ISW-like redshift (c*z) ≈ -1.352538 km/s

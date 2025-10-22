@@ -1,0 +1,4796 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.20)  20 OCT 2025 22:12
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**C:/Users/henry/dev/sigmagravity/sigmagravity_paper.tex
+(C:/Users/henry/dev/sigmagravity/sigmagravity_paper.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Program Files\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(C:\Program Files\MiKTeX\tex/latex/base\size11.clo
+File: size11.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+(C:\Program Files\MiKTeX\tex/latex/base\inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+)
+(C:\Program Files\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen141
+))
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen142
+)
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count195
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count196
+\leftroot@=\count197
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count198
+\DOTSCASE@=\count199
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box51
+\strutbox@=\box52
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen143
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count266
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count267
+\dotsspace@=\muskip16
+\c@parentequation=\count268
+\dspbrk@lvl=\count269
+\tag@help=\toks20
+\row@=\count270
+\column@=\count271
+\maxfields@=\count272
+\andhelp@=\toks21
+\eqnshift@=\dimen144
+\alignsep@=\dimen145
+\tagshift@=\dimen146
+\tagwidth@=\dimen147
+\totwidth@=\dimen148
+\lineht@=\dimen149
+\@envbody=\toks22
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks24
+)
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Program Files\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(C:\Program Files\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen150
+\Gin@req@width=\dimen151
+)
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(C:\Program Files\MiKTeX\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(C:\Program Files\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count273
+\Gm@cntv=\count274
+\c@Gm@tempcnt=\count275
+\Gm@bindingoffset=\dimen152
+\Gm@wd@mp=\dimen153
+\Gm@odd@mp=\dimen154
+\Gm@even@mp=\dimen155
+\Gm@layoutwidth=\dimen156
+\Gm@layoutheight=\dimen157
+\Gm@layouthoffset=\dimen158
+\Gm@layoutvoffset=\dimen159
+\Gm@dimlist=\toks25
+
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Program Files\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2023-11-26 v7.01g Hypertext links for LaTeX
+
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.st
+y
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (C:\Users\henry\AppData\Roaming\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(C:\Program Files\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/latex/letltxmacro\letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/latex/auxhook\auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/generic/gettitlestring\gettitlestrin
+g.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+ (C:\Users\henry\AppData\Roaming\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count276
+) (C:\Program Files\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count277
+)
+\@linkdim=\dimen160
+\Hy@linkcounter=\count278
+\Hy@pagecounter=\count279
+
+(C:\Program Files\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2023-11-26 v7.01g Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count280
+
+(C:\Program Files\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2023-11-26 v7.01g Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4181.
+Package hyperref Info: Link nesting OFF on input line 4186.
+Package hyperref Info: Hyper index ON on input line 4189.
+Package hyperref Info: Plain pages OFF on input line 4196.
+Package hyperref Info: Backreferencing OFF on input line 4201.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4448.
+\c@Hy@tempcnt=\count281
+
+(C:\Program Files\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4786.
+\XeTeXLinkMargin=\dimen161
+
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count282
+\Field@Width=\dimen162
+\Fld@charsize=\dimen163
+Package hyperref Info: Hyper figures OFF on input line 6065.
+Package hyperref Info: Link nesting OFF on input line 6070.
+Package hyperref Info: Hyper index ON on input line 6073.
+Package hyperref Info: backreferencing OFF on input line 6080.
+Package hyperref Info: Link coloring OFF on input line 6085.
+Package hyperref Info: Link coloring with OCG OFF on input line 6090.
+Package hyperref Info: PDF/A mode OFF on input line 6095.
+
+(C:\Program Files\MiKTeX\tex/latex/base\atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count283
+\c@Item=\count284
+\c@Hfootnote=\count285
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(C:\Program Files\MiKTeX\tex/latex/hyperref\hpdftex.def
+File: hpdftex.def 2023-11-26 v7.01g Hyperref driver for pdfTeX
+
+(C:\Program Files\MiKTeX\tex/latex/base\atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+\Fld@listcount=\count286
+\c@bookmark@seq@number=\count287
+
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.
+sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+
+(C:\Users\henry\AppData\Roaming\MiKTeX\tex/generic/uniquecounter\uniquecounter.
+sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+84.
+)
+\Hy@SectionHShift=\skip53
+) (C:\Users\henry\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen164
+\lightrulewidth=\dimen165
+\cmidrulewidth=\dimen166
+\belowrulesep=\dimen167
+\belowbottomsep=\dimen168
+\aboverulesep=\dimen169
+\abovetopsep=\dimen170
+\cmidrulesep=\dimen171
+\cmidrulekern=\dimen172
+\defaultaddspace=\dimen173
+\@cmidla=\count288
+\@cmidlb=\count289
+\@aboverulesep=\dimen174
+\@belowrulesep=\dimen175
+\@thisruleclass=\count290
+\@lastruleclass=\count291
+\@thisrulewidth=\dimen176
+)
+(C:\Program Files\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(C:\Program Files\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+)
+(C:\Program Files\MiKTeX\tex/latex/tools\longtable.sty
+Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count292
+\LTcapwidth=\dimen177
+\LT@head=\box53
+\LT@firsthead=\box54
+\LT@foot=\box55
+\LT@lastfoot=\box56
+\LT@gbox=\box57
+\LT@cols=\count293
+\LT@rows=\count294
+\c@LT@tables=\count295
+\c@LT@chunks=\count296
+\LT@p@ftn=\toks26
+)
+   defining Unicode char U+03A3 (decimal 931)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2113 (decimal 8467)
+   defining Unicode char U+2192 (decimal 8594)
+   defining Unicode char U+2261 (decimal 8801)
+   defining Unicode char U+00D7 (decimal 215)
+   defining Unicode char U+2211 (decimal 8721)
+   defining Unicode char U+220F (decimal 8719)
+   defining Unicode char U+2032 (decimal 8242)
+   defining Unicode char U+2264 (decimal 8804)
+   defining Unicode char U+2265 (decimal 8805)
+   defining Unicode char U+226B (decimal 8811)
+   defining Unicode char U+226A (decimal 8810)
+   defining Unicode char U+27E8 (decimal 10216)
+   defining Unicode char U+27E9 (decimal 10217)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2212 (decimal 8722)
+   defining Unicode char U+2260 (decimal 8800)
+   defining Unicode char U+2248 (decimal 8776)
+   defining Unicode char U+00B1 (decimal 177)
+Package hyperref Info: Option `colorlinks' set `true' on input line 43.
+
+(C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count297
+\l__pdf_internal_box=\box58
+)
+(sigmagravity_paper.aux)
+\openout1 = `sigmagravity_paper.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+
+(C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count298
+\scratchdimen=\dimen178
+\scratchbox=\box59
+\nofMPsegments=\count299
+\nofMParguments=\count300
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count301
+\MPscratchDim=\dimen179
+\MPnumerator=\count302
+\makeMPintoPDFobject=\count303
+\everyMPtoPDFconversion=\toks28
+) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:\Program Files\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(56.9055pt, 483.69687pt, 56.9055pt)
+* v-part:(T,H,B)=(56.9055pt, 731.23584pt, 56.9055pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=483.69687pt
+* \textheight=731.23584pt
+* \oddsidemargin=-15.36449pt
+* \evensidemargin=-15.36449pt
+* \topmargin=-52.36449pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=50.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package hyperref Info: Link coloring ON on input line 49.
+(sigmagravity_paper.out) (sigmagravity_paper.out)
+\@outlinefile=\write3
+\openout3 = `sigmagravity_paper.out'.
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 59.
+
+
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 59.
+
+
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+
+! LaTeX Error: Unicode character ⋆ (U+22C6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.89 ...able hyper‑parameters (A\_c, ℓ\_{0,⋆
+                                                  }, γ).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.89 ...hyper‑parameters (A\_c, ℓ\_{0,⋆}, γ
+                                                  ).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Λ (U+039B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.98 ...& Metric (test) & Σ‑Gravity & MOND & Λ
+                                                  CDM (halo fits) \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (33.554pt too wide) in paragraph at lines 114--115
+[]\T1/cmr/m/n/10.95 �2 The-ory builds in-tu-ition first (primer), then de-rives
+ a sin-gle canon-i-cal ker-nel $\OML/cmm/m/it/10.95 K\OT1/cmr/m/n/10.95 (\OML/c
+mm/m/it/10.95 R\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it/10.95 A C\OT1/cmr/m/n/10.95
+ (\OML/cmm/m/it/10.95 R\OT1/cmr/m/n/10.95 ; \OML/cmm/m/it/10.95 `[]; p; n[]\OT1
+/cmr/m/n/10.95 )$
+ []
+
+[1
+
+{C:/Users/henry/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+Overfull \hbox (16.48842pt too wide) in paragraph at lines 115--116
+[]\T1/cmr/m/n/10.95 �3 Data col-lects the ob-ser-va-tional in-gre-di-ents (SPAR
+C, CLASH[]like clus-ters, bary-onic surface[]density
+ []
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.125 \item ℓ₀
+                   — coherence length; p, n\_coh — shape exponents of th...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.126 \item C(R;ℓ₀
+                      ,p,n\_coh) ≡ 1 − [1 + (R/ℓ₀)^p]^{−n\_coh} �...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.126 ...ℓ₀,p,n\_coh) ≡ 1 − [1 + (R/ℓ₀
+                                                  )^p]^{−n\_coh} — coher...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.126 ...�₀,p,n\_coh) ≡ 1 − [1 + (R/ℓ₀)^
+                                                  p]^{−n\_coh} — coheren...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.126 ...n\_coh) ≡ 1 − [1 + (R/ℓ₀)^p]^{−
+                                                  n\_coh} — coherence func...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra }, or forgotten $.
+l.126 ... ≡ 1 − [1 + (R/ℓ₀)^p]^{−n\_coh}
+                                                   — coherence function (m...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.126 ...h} — coherence function (monotone, 0→
+                                                  1).
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Unicode character ⋅ (U+22C5)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.127 \item K(R) = A·C(R;⋅
+                             )×∏ G\_j — Σ‑kernel; A is an amplitude ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.127 ... — Σ‑kernel; A is an amplitude (A₀
+                                                   for galaxies; A\_c for cl...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.129 \item κ
+              \_eff(R) = Σ\_bar(R)[1+K(R)]/Σ\_crit — lensing convergence...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.150 ...emain coherent over a finite scale ℓ₀
+                                                  , producing an order‑uni...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[2]
+
+! LaTeX Error: Unicode character δ (U+03B4)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.164 ...l (the GR solution), plus fluctuations δ
+                                                  g around it. The effective...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (12.78023pt too wide) in paragraph at lines 221--222
+\T1/cmr/m/n/10.95 frame-work, $\OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 A[]; `[
+]; p; n[]; ^^M\OMS/cmsy/m/n/10.95 g$ \T1/cmr/m/n/10.95 are the fun-da-men-tal c
+on-stants of $\OT1/cmr/m/n/10.95 ^^F$[]\T1/cmr/m/n/10.95 Gravity ($\OML/cmm/m/i
+t/10.95 ^^M$ \T1/cmr/m/n/10.95 en-ters a pos-si-ble mass[]scaling
+ []
+
+
+Overfull \hbox (25.06825pt too wide) in paragraph at lines 235--236
+[]\T1/cmr/m/n/10.95 which re-mains curl[]free when K = K(R). This canon-i-cal k
+er-nel is not re[]defined else-where; domain[]specific
+ []
+
+[3]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.286 K(R) = A\_0\, (g^
+                       \dagger/g\_{\rm bar}(R))^p\; C(R;\,\ell\_0, p, n\_{\r...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.287 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.289 Here g^
+             † is an acceleration scale; (A\_0,p) govern the path‑spectr...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing { inserted.
+<to be read again> 
+                   $
+l.289 Here g^†
+                 is an acceleration scale; (A\_0,p) govern the path‑spectr...
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.289 Here g^†
+                 is an acceleration scale; (A\_0,p) govern the path‑spectr...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.289 Here g^†
+                 is an acceleration scale; (A\_0,p) govern the path‑spectr...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.289 ...govern the path‑spectrum slope; (ℓ₀
+                                                  ,n\_{\rm coh}) set coheren...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.292 .../20 split; validation suite pass): ℓ₀
+                                                  =4.993 kpc, β\_bulge=1.75...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character β (U+03B2)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.292 ...idation suite pass): ℓ₀=4.993 kpc, β
+                                                  \_bulge=1.759, α\_shear=0...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character α (U+03B1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.292 ...s): ℓ₀=4.993 kpc, β\_bulge=1.759, α
+                                                  \_shear=0.149, γ\_bar=1.9...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.292 ...kpc, β\_bulge=1.759, α\_shear=0.149, γ
+                                                  \_bar=1.932, A\_0=0.591, p...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.295 ...s bounds are satisfied with margin ≥10^
+                                                  13 by construction (hard s...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.296 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.304 κ
+        \_eff(R) = \frac{\Sigma\_{\rm bar}(R)}{\Sigma\_{\rm crit}}\,[1+K\_{\...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.304 ...\Sigma\_{\rm bar}(R)}{\Sigma\_{\rm crit}}
+                                                  \,[1+K\_{\rm cl}(R)],\quad...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.304 ...\Sigma\_{\rm bar}(R)}{\Sigma\_{\rm crit}}
+                                                  \,[1+K\_{\rm cl}(R)],\quad...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.304 ...\Sigma\_{\rm bar}(R)}{\Sigma\_{\rm crit}}
+                                                  \,[1+K\_{\rm cl}(R)],\quad...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+\frac  #1#2->{\begingroup #1\endgroup \@@over #2}
+                                                 
+l.304 ...\Sigma\_{\rm bar}(R)}{\Sigma\_{\rm crit}}
+                                                  \,[1+K\_{\rm cl}(R)],\quad...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.305 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.307 ...dled in §4; Einstein radii satisfy ⟨κ
+                                                  \_eff⟩(<R\_E)=1.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ρ (U+03C1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.310 ...tbf{Triaxial projection.} We transform ρ
+                                                  (r) → ρ(x,y,z) with ell...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ρ (U+03C1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.310 ...al projection.} We transform ρ(r) → ρ
+                                                  (x,y,z) with ellipsoidal r...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.310 ...ecovers \textbf{~60\% variation in κ(R)}
+                                                   and \textbf{~20–30\% in...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⋆ (U+22C6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.313 ... with halo size}: ℓ\_0(M) = ℓ\_{0,⋆
+                                                  }(R\_{500}/1 Mpc)^γ, test...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.313 ...ℓ\_0(M) = ℓ\_{0,⋆}(R\_{500}/1 Mpc)^
+                                                  γ, testing γ=0 (fixed co...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing { inserted.
+<to be read again> 
+                   \begingroup 
+l.313 ...�\_0(M) = ℓ\_{0,⋆}(R\_{500}/1 Mpc)^γ
+                                                  , testing γ=0 (fixed cohe...
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.313 ...�\_0(M) = ℓ\_{0,⋆}(R\_{500}/1 Mpc)^γ
+                                                  , testing γ=0 (fixed cohe...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.313 ...�\_{0,⋆}(R\_{500}/1 Mpc)^γ, testing γ
+                                                  =0 (fixed coherence) vs γ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.313 ...^γ, testing γ=0 (fixed coherence) vs γ
+                                                  >0 (self‑similar growth)...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.313 ...th the curated sample including BCG and $
+                                                  P(z_s)$, posteriors yield ...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.313 ...he curated sample including BCG and $P(z_
+                                                  s)$, posteriors yield \tex...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (9.23973pt too wide) in paragraph at lines 313--314
+\T1/cmr/m/n/10.95 Mpc)$[]$P(z$[]\OT1/cmr/m/n/10.95 )$\T1/cmr/m/n/10.95 , pos-te
+-ri-ors yield
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.320 ...onian limit: enforced analytically; K<10^
+                                                  −4 at 0.1 kpc (validation).
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing { inserted.
+<to be read again> 
+                   $
+l.320 ...an limit: enforced analytically; K<10^−
+                                                  4 at 0.1 kpc (validation).
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.320 ...an limit: enforced analytically; K<10^−
+                                                  4 at 0.1 kpc (validation).
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.321 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+[4]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.324 ... gates keep deviations negligible (≫10^
+                                                  13 safety margin).
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.325 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.349 • \textbf{External convergence} κ
+                                          \_ext ~ N(0, 0.05²).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.354 ...ray + BCG/ICL where available), store {θ
+                                                  \_E^obs, z\_l, \textbf{P(z...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.354 ...+ BCG/ICL where available), store {θ\_E^
+                                                  obs, z\_l, \textbf{P(z\_s)...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.354 ...\textbf{P(z\_s)} mixtures or median z\_s}
+                                                  , and compute cluster‑sp...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.354 ... cluster‑specific M\_500, R\_500 and Σ
+                                                  \_crit.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (194.72298pt too wide) in paragraph at lines 354--355
+\T1/cmr/m/n/10.95 (X[]ray + BCG/ICL where avail-able), store _E$[]\OML/cmm/m/it
+/10.95 bs; z[]l; []mixturesormedianz[]s; andcomputecluster[]specificM[]\OT1/cmr
+/m/n/10.95 500\OML/cmm/m/it/10.95 ; R[]\OT1/cmr/m/n/10.95 500\OML/cmm/m/it/10.9
+5 and$$\OT1/cmr/m/n/10.95 ^^F$\T1/cmr/m/n/10.95 _crit. 
+ []
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.360 \item \textbf{Baseline} (γ
+                                 =0) with population A\_c ~ N(μ\_A, σ\_A).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.360 ...eline} (γ=0) with population A\_c ~ N(μ
+                                                  \_A, σ\_A).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.360 ...(γ=0) with population A\_c ~ N(μ\_A, σ
+                                                  \_A).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⋆ (U+22C6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.361 ... \textbf{Mass‑scaled} with (ℓ\_{0,⋆
+                                                  }, γ) + same A\_c populat...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.361 ...tbf{Mass‑scaled} with (ℓ\_{0,⋆}, γ
+                                                  ) + same A\_c population.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.364 ...PyMC \textbf{NUTS} on a differentiable θ
+                                                  \_E grid surrogate (target...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.364 ...); WAIC/LOO used for model comparison (Δ
+                                                  WAIC ≈ 0 ± 2.5).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (7.79955pt too wide) in paragraph at lines 364--365
+[]\T1/cmr/m/n/10.95 Sampling via PyMC \T1/cmr/bx/n/10.95 NUTS \T1/cmr/m/n/10.95
+ on a dif-fer-en-tiable _E grid sur-ro-gate (tar-get_accept=0.95); WAIC/LOO
+ []
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.379 ...onvergence adopts a conservative prior κ
+                                                  \_ext ~ N(0, 0.05²).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.397 PPN γ
+            −1 (Cassini) & < 2.3×10⁻⁵ & Boost at 1 AU < 10⁻¹⁴ �...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁻ (U+207B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.397 PPN γ−1 (Cassini) & < 2.3×10⁻
+                                         ⁵ & Boost at 1 AU < 10⁻¹⁴ �...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁵ (U+2075)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.397 PPN γ−1 (Cassini) & < 2.3×10⁻⁵
+                                             & Boost at 1 AU < 10⁻¹⁴ �...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁻ (U+207B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.397 ...& < 2.3×10⁻⁵ & Boost at 1 AU < 10⁻
+                                                  ¹⁴ → γ−1 ≈ 0 & P...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁴ (U+2074)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.397 ....3×10⁻⁵ & Boost at 1 AU < 10⁻¹⁴
+                                                   → γ−1 ≈ 0 & PASS \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.397 ...��⁵ & Boost at 1 AU < 10⁻¹⁴ → γ
+                                                  −1 ≈ 0 & PASS \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁻ (U+207B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.398 ...ides & no anomalous drift & Boost < 10⁻
+                                                  ¹⁴ (negligible) & PASS \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁴ (U+2074)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.398 ...& no anomalous drift & Boost < 10⁻¹⁴
+                                                   (negligible) & PASS \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁴ (U+2074)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.399 Wide binaries (10²–10⁴
+                                  AU) & no anomaly & K < 10⁻⁸ & PASS \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁻ (U+207B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.399 ...10²–10⁴ AU) & no anomaly & K < 10⁻
+                                                  ⁸ & PASS \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁸ (U+2078)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.399 ...�–10⁴ AU) & no anomaly & K < 10⁻⁸
+                                                   & PASS \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (61.9021pt too wide) in paragraph at lines 408--409
+\T1/cmr/m/n/10.95 many_path_model/path_spectrum_kernel.py com-putes $\OML/cmm/m
+/it/10.95 K\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 R\OT1/cmr/m/n/10.95 )$\T1/cm
+r/m/n/10.95 ; many_path_model/run_full_tuning_pipeline.py
+ []
+
+[5]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.417 ...)=A\_c·C(R) with C(R)=1−[1+(R/ℓ\_0)^
+                                                  p]^{−n\_coh}.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.417 ...�C(R) with C(R)=1−[1+(R/ℓ\_0)^p]^{−
+                                                  n\_coh}.
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra }, or forgotten $.
+l.417 ...ith C(R)=1−[1+(R/ℓ\_0)^p]^{−n\_coh}
+                                                  .
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.418 \item
+            Diagnostics: point/mean convergence, cumulative mass \& boost, 2...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.418 \item D
+             iagnostics: point/mean convergence, cumulative mass \& boost, 2...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.418 \item D
+             iagnostics: point/mean convergence, cumulative mass \& boost, 2...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Command \end{enumerate} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.419 \end{enumerate}
+                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.419 \end{enumerate}
+                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.419 \end{enumerate}
+                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.419 \end{enumerate}
+                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (11.72464pt too wide) in paragraph at lines 417--420
+\OML/cmm/m/it/10.95 n[]coh:[][]Diagnostics \OT1/cmr/m/n/10.95 : \OML/cmm/m/it/1
+0.95 point=meanconvergence; cumulativemass\OT1/cmr/m/n/10.95 &\OML/cmm/m/it/10.
+95 boost; \OT1/cmr/m/n/10.95 2[]\OML/cmm/m/it/10.95 Dmaps; Einstein[]masscheck:
+$ 
+ []
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.422 ...l geometry, the calibrated model gives θ
+                                                  \_E = 30.4″ (obs 30.0″...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ″ (U+2033)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.422 ...he calibrated model gives θ\_E = 30.4″
+                                                   (obs 30.0″), ⟨κ⟩(<...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ″ (U+2033)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.422 ... model gives θ\_E = 30.4″ (obs 30.0″
+                                                  ), ⟨κ⟩(<R\_E)=1.019. ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.422 ...ives θ\_E = 30.4″ (obs 30.0″), ⟨κ
+                                                  ⟩(<R\_E)=1.019. Triaxial...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.422 ...)=1.019. Triaxial tests retain ~21.5\% θ
+                                                  \_E variation across plaus...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.432 • Population: A\_{c,i} ~ N(μ
+                                     \_A,σ\_A), optionally adding geometry ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.432 • Population: A\_{c,i} ~ N(μ\_A,σ
+                                           \_A), optionally adding geometry ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.432 ... geometry (q\_plane, q\_LOS) and small κ
+                                                  \_ext.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character χ (U+03C7)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.434 • Likelihood: χ
+                        ² = Σ\_i (θ\_{E,i}^{model}−θ\_{E,i}^{obs})²/�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.434 • Likelihood: χ² = Σ\_i (θ
+                                      \_{E,i}^{model}−θ\_{E,i}^{obs})²/�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.434 • Likelihood: χ² = Σ\_i (θ\_{E,i}^
+                                              {model}−θ\_{E,i}^{obs})²/�...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.434 ...ood: χ² = Σ\_i (θ\_{E,i}^{model}−θ
+                                                  \_{E,i}^{obs})²/σ\_i², ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 434.
+
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 434.
+
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.434 ...θ\_{E,i}^{model}−θ\_{E,i}^{obs})²/σ
+                                                  \_i², with Tier‑1 (rela...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 434.
+
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 434.
+
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.435 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no � in font cmr10!
+Missing character: There is no � in font cmr10!
+
+! LaTeX Error: Unicode character χ (U+03C7)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.453 ... each gate (bulge, shear, bar) reduces χ
+                                                  ²; removing them worsens ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+<figures/rc_gallery.png, id=365, 1300.86pt x 549.252pt>
+File: figures/rc_gallery.png Graphic file (type png)
+<use figures/rc_gallery.png>
+Package pdftex.def Info: figures/rc_gallery.png  used on input line 458.
+(pdftex.def)             Requested size: 386.95897pt x 163.37726pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.463 ...nd χ²; no per‑galaxy tuning applied.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character χ (U+03C7)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.463 ...nd χ²; no per‑galaxy tuning applied.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+<figures/rc_residual_hist.png, id=367, 433.62pt x 289.08pt>
+File: figures/rc_residual_hist.png Graphic file (type png)
+<use figures/rc_residual_hist.png>
+Package pdftex.def Info: figures/rc_residual_hist.png  used on input line 468.
+(pdftex.def)             Requested size: 386.95897pt x 257.98615pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (38.50516pt too wide) in paragraph at lines 481--491
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.497 \textbf{MACS0416:} θ
+                           \_E^pred = \textbf{30.43″} vs \textbf{30.0″} ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.497 \textbf{MACS0416:} θ\_E^
+                               pred = \textbf{30.43″} vs \textbf{30.0″} ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Unicode character ″ (U+2033)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.497 ...MACS0416:} θ\_E^pred = \textbf{30.43″}
+                                                   vs \textbf{30.0″} obser...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ″ (U+2033)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.497 ...d = \textbf{30.43″} vs \textbf{30.0″}
+                                                   observed (\textbf{1.4\%} ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.497 ...E \textbf{~ 7×} relative to Newtonian κ
+                                                  .
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.498 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (339.63126pt too wide) in paragraph at lines 497--498
+\T1/cmr/bx/n/10.95 MACS0416: \T1/cmr/m/n/10.95 _E$[]\OML/cmm/m/it/10.95 red \OT
+1/cmr/m/n/10.95 = []\OML/cmm/m/it/10.95 vs[]observed\OT1/cmr/m/n/10.95 ([]\OML/
+cmm/m/it/10.95 error\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 :Geometrysensitivit
+ypreserved\OT1/cmr/m/n/10.95 ([]\OML/cmm/m/it/10.95 spreadacrosstested[]\OT1/cm
+r/m/n/10.95 )\OML/cmm/m/it/10.95 :BoostatR[]E[]relativetoNewtonian:$ 
+ []
+
+[6]
+
+! LaTeX Error: Unicode character   (U+202F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.503 ...s. In a blind hold‑out test on Abell 
+                                                  2261 and MACS J1149.5+22...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character   (U+202F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.503 ...ld‑out test on Abell 2261 and MACS 
+                                                  J1149.5+2223, posterior‑...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.503 ...erval (coverage = fraction of observed θ
+                                                  \_E inside the model’s 6...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.503 ...is 14.9\%. The population amplitude is μ
+                                                  \_A = 4.6 ± 0.4 with intr...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.503 ..._A = 4.6 ± 0.4 with intrinsic scatter σ
+                                                  \_A ≈ 1.5; the mass‑sc...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.503 ...A ≈ 1.5; the mass‑scaling exponent γ
+                                                   = 0.09 ± 0.10 is consist...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.505 • Posterior (γ
+                       ‑free vs γ=0): ΔWAIC ≈ +0.01 ± 2.5 (inconclusi...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.505 • Posterior (γ‑free vs γ
+                                    =0): ΔWAIC ≈ +0.01 ± 2.5 (inconclusi...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.505 • Posterior (γ‑free vs γ=0): Δ
+                                           WAIC ≈ +0.01 ± 2.5 (inconclusi...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+<figures/holdouts_pred_vs_obs.png, id=378, 433.62pt x 433.62pt>
+File: figures/holdouts_pred_vs_obs.png Graphic file (type png)
+<use figures/holdouts_pred_vs_obs.png>
+Package pdftex.def Info: figures/holdouts_pred_vs_obs.png  used on input line 5
+10.
+(pdftex.def)             Requested size: 386.95897pt x 386.97923pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.515 ...medians with 68\% PPC bands vs observed.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+<figures/kfold_pred_vs_obs.png, id=379, 433.62pt x 433.62pt>
+File: figures/kfold_pred_vs_obs.png Graphic file (type png)
+<use figures/kfold_pred_vs_obs.png>
+Package pdftex.def Info: figures/kfold_pred_vs_obs.png  used on input line 520.
+
+(pdftex.def)             Requested size: 386.95897pt x 386.97923pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/kfold_coverage.png, id=380, 289.08pt x 216.81pt>
+File: figures/kfold_coverage.png Graphic file (type png)
+<use figures/kfold_coverage.png>
+Package pdftex.def Info: figures/kfold_coverage.png  used on input line 530.
+(pdftex.def)             Requested size: 386.95897pt x 290.23607pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/cluster_kappa_panels.png, id=381, 1011.78pt x 361.35pt>
+File: figures/cluster_kappa_panels.png Graphic file (type png)
+<use figures/cluster_kappa_panels.png>
+Package pdftex.def Info: figures/cluster_kappa_panels.png  used on input line 5
+40.
+(pdftex.def)             Requested size: 386.95897pt x 138.20213pt.
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.541 ... C1. ⟨κ⟩(<R) panels for hold‑outs}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.545 ...68\% band with Einstein crossing marked.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[7 <./figures/rc_gallery.png> <./figures/rc_residual_hist.png>]
+<figures/triaxial_sensitivity_A2261.png, id=391, 462.528pt x 317.988pt>
+File: figures/triaxial_sensitivity_A2261.png Graphic file (type png)
+<use figures/triaxial_sensitivity_A2261.png>
+Package pdftex.def Info: figures/triaxial_sensitivity_A2261.png  used on input 
+line 550.
+(pdftex.def)             Requested size: 386.95897pt x 266.04547pt.
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.551 ...C2. Triaxial sensitivity (θ_E vs q_LOS)}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.551 ...C2. Triaxial sensitivity (θ_E vs q_LOS)}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.551 ...C2. Triaxial sensitivity (θ_E vs q_LOS)}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/cluster_kappa_profiles_panel.png, id=392, 867.24pt x 542.025pt>
+File: figures/cluster_kappa_profiles_panel.png Graphic file (type png)
+<use figures/cluster_kappa_profiles_panel.png>
+Package pdftex.def Info: figures/cluster_kappa_profiles_panel.png  used on inpu
+t line 557.
+(pdftex.def)             Requested size: 386.95897pt x 241.84961pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.562 ... with A\_c chosen so ⟨κ⟩(<θ\_E)=1.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.562 ... with A\_c chosen so ⟨κ⟩(<θ\_E)=1.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.562 ... with A\_c chosen so ⟨κ⟩(<θ\_E)=1.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.562 ... with A\_c chosen so ⟨κ⟩(<θ\_E)=1.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+<figures/cluster_alpha_profiles_panel.png, id=393, 867.24pt x 542.025pt>
+File: figures/cluster_alpha_profiles_panel.png Graphic file (type png)
+<use figures/cluster_alpha_profiles_panel.png>
+Package pdftex.def Info: figures/cluster_alpha_profiles_panel.png  used on inpu
+t line 567.
+(pdftex.def)             Requested size: 386.95897pt x 241.84961pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character α (U+03B1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.572 ...M ref, and Σ‑Gravity — per cluster.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character α (U+03B1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.572 ...M ref, and Σ‑Gravity — per cluster.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.572 ...M ref, and Σ‑Gravity — per cluster.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.586 ....6 km/s, R\_s = 2.0 kpc, m = 2.0, gate Δ
+                                                  R = 0.77 kpc (data/gaia/ou...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (56.75998pt too wide) in paragraph at lines 586--587
+\T1/cmr/m/n/10.95 R_s = 2.0 kpc, m = 2.0, gate R = 0.77 kpc (data/gaia/outputs/
+mw_pipeline_run_vendor/fit_params.json). 
+ []
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.588 ...R in SI (m/s²); logarithmic residuals Δ
+                                                   ≡ log₁₀(g\_obs) −...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₁ (U+2081)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.588 ...s²); logarithmic residuals Δ ≡ log₁
+                                                  ₀(g\_obs) − log₁₀(...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.588 ...); logarithmic residuals Δ ≡ log₁₀
+                                                  (g\_obs) − log₁₀(g\_...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₁ (U+2081)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.588 ...duals Δ ≡ log₁₀(g\_obs) − log₁
+                                                  ₀(g\_pred).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.588 ...ls Δ ≡ log₁₀(g\_obs) − log₁₀
+                                                  (g\_pred).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (8.54134pt too wide) in paragraph at lines 588--589
+[]\T1/cmr/bx/n/10.95 Analysis\T1/cmr/m/n/10.95 : Ac-cel-er-a-tions g = v\TS1/cm
+r/m/n/10.95 �\T1/cmr/m/n/10.95 /R in SI (m/s\TS1/cmr/m/n/10.95 �\T1/cmr/m/n/10.
+95 ); log-a-rith-mic resid-u-als  $\OMS/cmsy/m/n/10.95 ^^Q$ \T1/cmr/m/n/10.95 l
+og(g_obs) $\OMS/cmsy/m/n/10.95 ^^@$ \T1/cmr/m/n/10.95 log(g_pred). 
+ []
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.598 \item \textbf{GR (baryons)}: mean Δ
+                                           = \textbf{+0.380 dex}, σ = 0.176...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.598 ...yons)}: mean Δ = \textbf{+0.380 dex}, σ
+                                                   = 0.176 dex — systemati...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.599 \item \textbf{Σ‑Gravity}: mean Δ
+                                           = \textbf{+0.062 dex}, σ = 0.142...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.599 ...avity}: mean Δ = \textbf{+0.062 dex}, σ
+                                                   = 0.142 dex — near-zero...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.601 \item \textbf{MOND}: mean Δ
+                                   = +0.166 dex, σ = 0.161 dex (2.3× bette...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.601 ...m \textbf{MOND}: mean Δ = +0.166 dex, σ
+                                                   = 0.161 dex (2.3× better...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.602 \item \textbf{NFW}: mean Δ
+                                  = \textbf{+1.409 dex}, σ = 0.140 dex — ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.602 ...f{NFW}: mean Δ = \textbf{+1.409 dex}, σ
+                                                   = 0.140 dex — catastrop...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.613 Radius [kpc] & n & GR mean Δ
+                                    & Σ mean Δ & Σ improvement \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.613 Radius [kpc] & n & GR mean Δ & Σ mean Δ
+                                                 & Σ improvement \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ✓ (U+2713)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.615 ...01 & −0.007 & ~1× (both near-zero) ✓
+                                                   \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[8]
+<data/gaia/outputs/mw_all_model_summary.png, id=399, 1156.32pt x 650.43pt>
+File: data/gaia/outputs/mw_all_model_summary.png Graphic file (type png)
+<use data/gaia/outputs/mw_all_model_summary.png>
+Package pdftex.def Info: data/gaia/outputs/mw_all_model_summary.png  used on in
+put line 641.
+(pdftex.def)             Requested size: 386.95897pt x 217.65968pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.646 ...f{Single glance, undeniable conclusion.}}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.646 ...f{Single glance, undeniable conclusion.}}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.646 ...f{Single glance, undeniable conclusion.}}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.646 ...f{Single glance, undeniable conclusion.}}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+<data/gaia/outputs/mw_rar_comparison_full_improved.png, id=400, 975.645pt x 397
+.485pt>
+File: data/gaia/outputs/mw_rar_comparison_full_improved.png Graphic file (type 
+png)
+<use data/gaia/outputs/mw_rar_comparison_full_improved.png>
+Package pdftex.def Info: data/gaia/outputs/mw_rar_comparison_full_improved.png 
+ used on input line 651.
+(pdftex.def)             Requested size: 386.95897pt x 157.65079pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.656 ...redicts by 1.4 dex (25× worse than Σ).}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+<data/gaia/outputs/mw_radial_residual_map.png, id=401, 794.97pt x 433.62pt>
+File: data/gaia/outputs/mw_radial_residual_map.png Graphic file (type png)
+<use data/gaia/outputs/mw_radial_residual_map.png>
+Package pdftex.def Info: data/gaia/outputs/mw_radial_residual_map.png  used on 
+input line 661.
+(pdftex.def)             Requested size: 386.95897pt x 211.07295pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.666 ...irms gate suppression works as designed.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.666 ...irms gate suppression works as designed.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[9 <./figures/holdouts_pred_vs_obs.png>]
+<data/gaia/outputs/mw_delta_histograms.png, id=411, 867.24pt x 650.43pt>
+File: data/gaia/outputs/mw_delta_histograms.png Graphic file (type png)
+<use data/gaia/outputs/mw_delta_histograms.png>
+Package pdftex.def Info: data/gaia/outputs/mw_delta_histograms.png  used on inp
+ut line 671.
+(pdftex.def)             Requested size: 386.95897pt x 290.21953pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.676 .... Only Σ achieves unbiased performance.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.676 .... Only Σ achieves unbiased performance.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.676 .... Only Σ achieves unbiased performance.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+<data/gaia/outputs/mw_radial_bin_table.png, id=412, 939.51pt x 722.7pt>
+File: data/gaia/outputs/mw_radial_bin_table.png Graphic file (type png)
+<use data/gaia/outputs/mw_radial_bin_table.png>
+Package pdftex.def Info: data/gaia/outputs/mw_radial_bin_table.png  used on inp
+ut line 681.
+(pdftex.def)             Requested size: 386.95897pt x 297.65427pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<data/gaia/outputs/mw_outer_rotation_curves.png, id=413, 794.97pt x 505.89pt>
+File: data/gaia/outputs/mw_outer_rotation_curves.png Graphic file (type png)
+<use data/gaia/outputs/mw_outer_rotation_curves.png>
+Package pdftex.def Info: data/gaia/outputs/mw_outer_rotation_curves.png  used o
+n input line 691.
+(pdftex.def)             Requested size: 386.95897pt x 246.25177pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character ₂ (U+2082)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.696 ...r flattening with one parameterization.}}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.696 ...r flattening with one parameterization.}}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.696 ...r flattening with one parameterization.}}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.702 ...3 proves smooth transition (3–6 kpc: Δ
+                                                   = −0.007; 6–8 kpc: Δ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.702 ... (3–6 kpc: Δ = −0.007; 6–8 kpc: Δ
+                                                   = +0.032).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[10 <./figures/kfold_pred_vs_obs.png>]
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.705 ...eady does this"} → Figure MW-4: MOND μ
+                                                   = +0.166 dex, 2.7× worse...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[11 <./figures/kfold_coverage.png> <./figures/cluster_kappa_panels.png>]
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.714 ...(3–6 kpc) shows near-zero residuals (Δ
+                                                   = −0.007 dex for Σ, +0...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (13.69019pt too wide) in paragraph at lines 728--729
+[]\T1/cmr/bx/n/10.95 Per-star pre-dic-tions\T1/cmr/m/n/10.95 : data/gaia/output
+s/mw_gaia_full_coverage_predicted.csv (g_bar, g_obs,
+ []
+
+[12 <./figures/triaxial_sensitivity_A2261.png>]
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.739 \item \textbf{Δ histograms}
+                                  : data/gaia/outputs/mw\_delta\_histograms....
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (47.58662pt too wide) in paragraph at lines 748--749
+[]\T1/cmr/bx/n/10.95 Inner-disk in-te-gra-tion anal-y-sis\T1/cmr/m/n/10.95 : da
+ta/gaia/outputs/INNER_DISK_INTEGRATION_ANALYSIS.md
+ []
+
+
+Overfull \hbox (39.56177pt too wide) in paragraph at lines 749--750
+[]\T1/cmr/bx/n/10.95 Improved com-par-i-son README\T1/cmr/m/n/10.95 : data/gaia
+/outputs/IMPROVED_COMPARISON_README.md
+ []
+
+[13 <./figures/cluster_kappa_profiles_panel.png>]
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.827 ...\_LOS under the same kernel and baryons.}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.839 ...ce & Geometry priors & P(z\_s) model & θ
+                                                  \_E(obs) [\"] & θ\_E(pred...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.839 ...rs & P(z\_s) model & θ\_E(obs) [\"] & θ
+                                                  \_E(pred) [\"] & Residual ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (277.10526pt too wide) in paragraph at lines 837--844
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14 <./figures/cluster_alpha_profiles_panel.png>]
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.858 μ
+        \_A & 4.6 ± 0.4 & population mean amplitude \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.859 σ
+        \_A & ≈ 1.5 & intrinsic scatter \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.860 ℓ₀
+            ,⋆ & ≈ 200 kpc & reference coherence length \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⋆ (U+22C6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.860 ℓ₀,⋆
+                 & ≈ 200 kpc & reference coherence length \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.861 γ
+         & 0.09 ± 0.10 & mass‑scaling (consistent with 0) \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.862 Δ
+        WAIC (γ‑free vs γ=0) & 0.01 ± 2.5 & inconclusive \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.862 ΔWAIC (γ
+                ‑free vs γ=0) & 0.01 ± 2.5 & inconclusive \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.862 ΔWAIC (γ‑free vs γ
+                             =0) & 0.01 ± 2.5 & inconclusive \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.874 ...nsistent with no mass‑scaling of ℓ₀
+                                                   (γ = 0.09 ± 0.10); the ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.874 ...tent with no mass‑scaling of ℓ₀ (γ
+                                                   = 0.09 ± 0.10); the safe...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.877 ...} After corrections, the posterior for γ
+                                                   peaks near zero with 1σ ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.877 ...posterior for γ peaks near zero with 1σ
+                                                   ≈ 0.10. A larger, homog...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ∼ (U+223C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.880 ...ths primarily confined to a 2-D disk (∼
+                                                  2π radians of azimuthal f...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character π (U+03C0)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.880 ... primarily confined to a 2-D disk (∼2π
+                                                   radians of azimuthal free...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character π (U+03C0)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.880 ...tes over 3-D source volumes with full 4π
+                                                   steradian solid angle and...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ∼ (U+223C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.880 ...line-of-sight depths of order 2R\_500 ∼
+                                                   2 Mpc (compared to disk s...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ∼ (U+223C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.880 ... (compared to disk scale heights h\_z ∼
+                                                   1 kpc). A rough combinato...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[15 <./data/gaia/outputs/mw_all_model_summary.png> <./data/gaia/outputs/mw_rar_
+comparison_full_improved.png>]
+
+! LaTeX Error: Unicode character ∈ (U+2208)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.888 ...riaxiality (oblate vs prolate; q\_LOS ∈
+                                                   [0.7, 1.3]) and galaxy di...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ∼ (U+223C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.888 ...direct tests; triaxial sensitivity of ∼
+                                                  20–30\% in θ\_E is alre...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.888 ...riaxial sensitivity of ∼20–30\% in θ
+                                                  \_E is already confirmed (...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.896 ...{Physical origin of A\_c, ℓ\_0, and γ}
+                                                   → stationary‑phase ke...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.896 ...stationary‑phase kernel in progress; γ
+                                                   is \textbf{falsifiable}.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.897 \item \textbf{Model comparison} → γ
+                                            ‑free vs γ=0 with ΔBIC/WAIC;...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.897 ...tbf{Model comparison} → γ‑free vs γ
+                                                  =0 with ΔBIC/WAIC; blind ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.897 ...comparison} → γ‑free vs γ=0 with Δ
+                                                  BIC/WAIC; blind PPC on hol...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.907 • Triaxial lever arm: θ
+                                \_E should change by ≈15–30\% as q\_LOS ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.909 ...nsing: Σ‑Gravity predicts shallower γ
+                                                  \_t(R) at 100–300 kpc th...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ≳ (U+2273)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.909 ... kpc than Newton‑baryons; stacking N≳
+                                                  18 clusters should disting...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.913 ...: no detectable anomaly; PN bounds ≪10^
+                                                  −5.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing { inserted.
+<to be read again> 
+                   $
+l.913 ...o detectable anomaly; PN bounds ≪10^−
+                                                  5.
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.913 ...o detectable anomaly; PN bounds ≪10^−
+                                                  5.
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.914 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+[16 <./data/gaia/outputs/mw_radial_residual_map.png>]
+
+! LaTeX Error: Unicode character Λ (U+039B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.934 ... and the acoustic peak locations match Λ
+                                                  CDM. The standard sound ho...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[17 <./data/gaia/outputs/mw_delta_histograms.png>]
+
+! LaTeX Error: Unicode character Λ (U+039B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.946 ...nd large‑scale structure compared to Λ
+                                                  CDM. Existing ISW anomalie...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Λ (U+039B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.962 ...(t)$ to SNe and BAO; test parsimony vs Λ
+                                                  CDM.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Λ (U+039B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.963 ...elations remain isotropic—absence of Λ
+                                                  CDM’s geometric distorti...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Λ (U+039B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.964 ...ng $\mathcal{K}$; distinguishable from Λ
+                                                  CDM.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[18 <./data/gaia/outputs/mw_radial_bin_table.png>]
+Overfull \hbox (116.40842pt too wide) in paragraph at lines 990--991
+[]\T1/cmr/m/n/10.95 python -m ven-dor.maxdepth_gaia.run_pipeline --use_source m
+w_csv --mw_csv_path "data/gaia/mw/gaia_mw_real.csv"
+ []
+
+
+Overfull \hbox (286.57959pt too wide) in paragraph at lines 1001--1002
+[]\T1/cmr/m/n/10.95 python scripts/predict_gaia_star_speeds.py --npz "data/gaia
+/mw/mw_gaia_144k.npz" --fit "data/gaia/outputs/mw_pipeline_run_vendor/fit_param
+s.json"
+ []
+
+
+Overfull \hbox (55.08582pt too wide) in paragraph at lines 1012--1013
+[]\T1/cmr/m/n/10.95 python scripts/analyze_mw_rar_starlevel.py --pred_csv "data
+/gaia/outputs/mw_gaia_144k_predicted.csv"
+ []
+
+[19 <./data/gaia/outputs/mw_outer_rotation_curves.png>]
+Overfull \hbox (48.40282pt too wide) in paragraph at lines 1076--1077
+[]\T1/cmr/m/n/10.95 core/gnfw_gas_profiles.py, core/build_cluster_baryons.py (f
+_gas=0.11, clump-ing fix), data/clusters/*.json;
+ []
+
+
+Overfull \hbox (45.36427pt too wide) in paragraph at lines 1083--1084
+[]\T1/cmr/m/n/10.95 core/triaxial_lensing.py (global nor-mal-iza-tion; ge-om-e-
+try val-i-dated in docs/triaxial_lensing_fix_report.md). 
+ []
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1090 ...l2d\_sigma.py (K\_Σ(R)=A\_c·C(R;ℓ₀
+                                                  ,⋯)).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⋯ (U+22EF)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1090 ..._sigma.py (K\_Σ(R)=A\_c·C(R;ℓ₀,⋯
+                                                  )).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (46.52448pt too wide) in paragraph at lines 1099--1100
+[]\T1/cmr/m/n/10.95 Generates: con-ver-gence_profiles.png, cu-mu-la-tive_mass.p
+ng, con-ver-gence_maps_2d.png, boost_profile.png. 
+ []
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1109 Outputs geometry sensitivity figs and θ
+                                               \_E validation.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1117 ...n\_hierarchical\_tier12\_clean.py → μ
+                                                  \_A, σ\_A, χ²/d.o.f.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1117 ...archical\_tier12\_clean.py → μ\_A, σ
+                                                  \_A, χ²/d.o.f.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character χ (U+03C7)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1117 ...l\_tier12\_clean.py → μ\_A, σ\_A, χ
+                                                  ²/d.o.f.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1127 ... α) — quick reproduction (this repo)}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character α (U+03B1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1127 ... α) — quick reproduction (this repo)}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1130 ...eflection, calibrated to the observed θ
+                                                  \_E in the catalog and usi...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1130 ...er’s Σ‑kernel K(R)=A\_c·C(R;ℓ₀
+                                                  ,⋯):
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⋯ (U+22EF)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1130 ...�s Σ‑kernel K(R)=A\_c·C(R;ℓ₀,⋯
+                                                  ):
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[20]
+Overfull \hbox (9.95006pt too wide) in paragraph at lines 1157--1158
+[]\T1/cmr/m/n/10.95 Produces: fig-ures/cluster_kappa_profiles_panel.png and fig
+-ures/cluster_alpha_profiles_panel.png. 
+ []
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1184 ...~60\% Σ‑sensitivity and ~20–30\% θ
+                                                  \_E lever arm.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1186 • Switched to differentiable θ
+                                        \_E surrogate + PyMC NUTS; ΔWAIC �...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1186 ...entiable θ\_E surrogate + PyMC NUTS; Δ
+                                                  WAIC ≈ 0 ± 2.5 for γ�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1186 ... + PyMC NUTS; ΔWAIC ≈ 0 ± 2.5 for γ
+                                                  ‑free vs γ=0.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1186 ... ΔWAIC ≈ 0 ± 2.5 for γ‑free vs γ
+                                                  =0.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1197 ...te (clusters): expand to N≈18; test γ
+                                                   via ΔBIC; stack γ\_t(R).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1197 ...sters): expand to N≈18; test γ via Δ
+                                                  BIC; stack γ\_t(R).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1197 ...d to N≈18; test γ via ΔBIC; stack γ
+                                                  \_t(R).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[21]
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1212 \item Clusters — Population: μ
+                                        \_A≈4.6, σ\_A≈1.5; γ consisten...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character σ (U+03C3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1212 ...Clusters — Population: μ\_A≈4.6, σ
+                                                  \_A≈1.5; γ consistent w...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1212 ...Population: μ\_A≈4.6, σ\_A≈1.5; γ
+                                                   consistent with 0.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character κ (U+03BA)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1230 \item Clusters — ⟨κ
+                               ⟩(<R) panels: figures/cluster\_kappa\_panel...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1241 ...integrates cluster lensing to achieve μ
+                                                  \_A ≈ 4.6 and blind hold...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1241 ...vel. The open question is whether ℓ₀
+                                                   scales with halo size; pr...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1241 ... halo size; present constraints favor γ
+                                                  ≈0. The next steps are l...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[22]
+Overfull \hbox (39.14735pt too wide) in paragraph at lines 1277--1278
+[]\T1/cmr/m/n/10.95 Example (cir-cu-lar flow): for $\OT1/cmr/bx/n/10.95 v \OT1/
+cmr/m/n/10.95 = \OML/cmm/m/it/10.95 v[] []$ \T1/cmr/m/n/10.95 in an ax-isym-met
+-ric disk, only the di-ver-gence of the Reynolds[]stress[]like
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1286 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Display math should end with $$.
+<to be read again> 
+                   \tex_par:D 
+l.1286 
+       
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1287  m \;\equiv
+                  \; \frac{4 R R'}{(R+R')^2} \in [0,1].
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1288 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1289 \]
+         
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1289 \]
+         
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.1289 \]
+         
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1294 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Display math should end with $$.
+<to be read again> 
+                   \tex_par:D 
+l.1294 
+       
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1295 \int
+           \_{0}^{2\pi} \frac{d\varphi}{\sqrt{R^2 + R'^2 - 2 R R'\cos\varphi...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1296 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1297 \]
+         
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1297 \]
+         
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.1297 \]
+         
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1319 ...p)**2)  \# dimensionless parameter m \in
+                                                   [0,1]
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1320 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+[23]
+
+! LaTeX Error: Unicode character λ (U+03BB)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1361 ...epresent this heterogeneity, we model λ
+                                                   as drawn from a Gamma dis...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character β (U+03B2)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1361 ...stribution with shape n\_coh and rate β
+                                                  :
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character λ (U+03BB)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1369 ...l probability is the expectation over λ
+                                                  :
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character β (U+03B2)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1385 Absorbing the rate parameter β
+                                       into the definition of ℓ₀ (ℓ₀...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1385 ...rameter β into the definition of ℓ₀
+                                                   (ℓ₀′ ≡ ℓ₀ β^...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1385 ...β into the definition of ℓ₀ (ℓ₀
+                                                  ′ ≡ ℓ₀ β^(1/p)), ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1385 ...finition of ℓ₀ (ℓ₀′ ≡ ℓ₀
+                                                   β^(1/p)), the coherence ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character β (U+03B2)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1385 ...ition of ℓ₀ (ℓ₀′ ≡ ℓ₀ β
+                                                  ^(1/p)), the coherence win...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1385 ...tion of ℓ₀ (ℓ₀′ ≡ ℓ₀ β^
+                                                  (1/p)), the coherence wind...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1386 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1399 \item \textbf{ℓ₀}
+                            : characteristic coherence scale set by local de...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character τ (U+03C4)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1399 ...le set by local decoherence timescale τ
+                                                  \_collapse
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character λ (U+03BB)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1401 ...\_coh implies narrower variability in λ
+                                                   (more homogeneous environ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1408 ...d the physical interpretation of {ℓ₀
+                                                  , p, n\_coh} in terms of p...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[24]
+
+! LaTeX Error: Unicode character ∫ (U+222B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1469 K(B,A) = ∫
+                    D[path] exp(iS[path]/ℏ)     (1)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ℏ (U+210F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1469 K(B,A) = ∫ D[path] exp(iS[path]/ℏ
+                                            )     (1)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character τ (U+03C4)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1483 ...rations on a characteristic timescale τ
+                                                  \_collapse(R) that depends...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ρ (U+03C1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1483 ...he spatial scale R and matter density ρ
+                                                  .
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Γ (U+0393)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1494 Γ
+         \_decoherence(R) ~ (interaction rate) × (geometric variation)     (2)
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ρ (U+03C1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1499 For a region of size R with density ρ
+                                             :
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ρ (U+03C1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1502 \item Interaction rate ~ ρ
+                                   (more mass → more interactions)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character τ (U+03C4)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1511 τ
+         \_collapse(R) ~ 1/(ρ G R² α)     (3)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ρ (U+03C1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1511 τ\_collapse(R) ~ 1/(ρ
+                               G R² α)     (3)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character α (U+03B1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1511 τ\_collapse(R) ~ 1/(ρ G R² α
+                                       )     (3)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[25]
+
+! LaTeX Error: Unicode character α (U+03B1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1516 where α
+                is a dimensionless constant of order unity characterizing th...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character √ (U+221A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1523 ℓ\_0 = √
+                   (c/(ρ G α))     (4)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ρ (U+03C1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1523 ℓ\_0 = √(c/(ρ
+                          G α))     (4)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character α (U+03B1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1523 ℓ\_0 = √(c/(ρ G α
+                              ))     (4)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ρ (U+03C1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1528 For typical galaxy halo densities ρ
+                                            ~ 10⁻²¹ kg/m³:
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁻ (U+207B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1528 ...typical galaxy halo densities ρ ~ 10⁻
+                                                  ²¹ kg/m³:
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character √ (U+221A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1532 ℓ\_0 ~ √
+                   (3×10⁸ / (10⁻²¹ × 6.67×10⁻¹¹ × 1)) ~ 7×10�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁸ (U+2078)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1532 ℓ\_0 ~ √(3×10⁸
+                             / (10⁻²¹ × 6.67×10⁻¹¹ × 1)) ~ 7×10�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁻ (U+207B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1532 ℓ\_0 ~ √(3×10⁸ / (10⁻
+                                     ²¹ × 6.67×10⁻¹¹ × 1)) ~ 7×10�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁻ (U+207B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1532 ...√(3×10⁸ / (10⁻²¹ × 6.67×10⁻
+                                                  ¹¹ × 1)) ~ 7×10¹⁹ m...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁹ (U+2079)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1532 ...� × 6.67×10⁻¹¹ × 1)) ~ 7×10¹⁹
+                                                   m ~ 2 kpc     (5)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character δ (U+03B4)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1573 S[path] = S\_classical + (1/2)δ
+                                       ²S[deviation] + ...     (9)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ∫ (U+222B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1582 ∫
+           D[path] exp(iS/ℏ) ≈ A\_0 exp(iS\_classical/ℏ) [1 + quantum ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ℏ (U+210F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1582 ∫ D[path] exp(iS/ℏ
+                             ) ≈ A\_0 exp(iS\_classical/ℏ) [1 + quantum ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ℏ (U+210F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1582 ...p(iS/ℏ) ≈ A\_0 exp(iS\_classical/ℏ
+                                                  ) [1 + quantum corrections...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ∫ (U+222B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1594 P\_coherent(R) = exp(-∫
+                                 dt/τ\_collapse(r(t)))     (11)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character τ (U+03C4)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1594 P\_coherent(R) = exp(-∫ dt/τ
+                                      \_collapse(r(t)))     (11)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ρ (U+03C1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1599 For characteristic scale R in density ρ
+                                               :
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1603 P\_coherent(R) ≈ exp(-(R/ℓ\_0)^
+                                          p)     (12)
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1604 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1612 C(R) = 1 - [1 + (R/ℓ\_0)^
+                                  p]^(-n\_coh)     (13)
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1613 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+[26]
+
+! LaTeX Error: Unicode character Φ (U+03A6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1644 Φ
+         \_eff = Φ\_classical [1 + K(R)],
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character Φ (U+03A6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1644 Φ\_eff = Φ
+                   \_classical [1 + K(R)],
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ∇ (U+2207)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1661 ∇
+           × g\_eff = (∇ × g\_bar)(1+K) + ∇K × g\_bar = 0     (21–22)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ∇ (U+2207)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1661 ∇ × g\_eff = (∇
+                            × g\_bar)(1+K) + ∇K × g\_bar = 0     (21–22)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ∇ (U+2207)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1661 ∇ × g\_eff = (∇ × g\_bar)(1+K) + ∇
+                                                 K × g\_bar = 0     (21–22)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1698 \item Clusters: θ
+                         \_E accuracy ≈15\% with A\_cluster≈4.6; triaxia...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁻ (U+207B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1699 ...m Solar System: K(0.1–1000 AU) < 10⁻
+                                                  ⁶.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ⁶ (U+2076)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1699 ...olar System: K(0.1–1000 AU) < 10⁻⁶
+                                                  .
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1712 We treat ℓ₀
+                       as a coherence length defined by a collapse time: ℓ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1712 ...ength defined by a collapse time: ℓ₀
+                                                   ≡ c\,τ\_{\rm collapse}...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character τ (U+03C4)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1712 ...ned by a collapse time: ℓ₀ ≡ c\,τ
+                                                  \_{\rm collapse}. A common...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character τ (U+03C4)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1712 ...h the gravitational interaction rate, τ
+                                                  \_{\rm collapse}^{-1} ∝ ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1712 ...al interaction rate, τ\_{\rm collapse}^
+                                                  {-1} ∝ \sqrt{\alpha\,\rh...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Unicode character ∝ (U+221D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1712 ...action rate, τ\_{\rm collapse}^{-1} ∝
+                                                   \sqrt{\alpha\,\rho G}, wh...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1713 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (45.25673pt too wide) in paragraph at lines 1712--1713
+\T1/cmr/m/n/10.95 the col-lapse rate with the grav-i-ta-tional in-ter-ac-tion r
+ate, _collapse$[][]\OML/cmm/m/it/10.95 ; whichyieldsthelength[]scaleestimate$ 
+ []
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1718 ...caling ansatz (not a derivation); ℓ₀
+                                                   is calibrated empirically...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[27]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
+746.
+ (C:\Program Files\MiKTeX\tex/latex/base\t1cmtt.fd
+File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+Overfull \hbox (200.28287pt too wide) in paragraph at lines 1746--1747
+[]\T1/cmr/m/n/10.95 Table F1 --- Galaxy pa-ram-e-ter sen-si-tiv-ity (ab-la-tion
+ & sweeps): \T1/cmtt/m/n/10.95 many_path_model/paper_release/tables/galaxy_para
+m_sensitivity.md 
+ []
+
+
+Overfull \hbox (176.15123pt too wide) in paragraph at lines 1747--1748
+[]\T1/cmr/m/n/10.95 Table F2 --- Clus-ter pa-ram-e-ter sen-si-tiv-ity (MACS0416
+): \T1/cmtt/m/n/10.95 many_path_model/paper_release/tables/cluster_param_sensit
+ivity.md 
+ []
+
+
+Overfull \hbox (194.13087pt too wide) in paragraph at lines 1748--1749
+[]\T1/cmr/m/n/10.95 Table F3 --- Clus-ter sen-si-tiv-ity across N$\OMS/cmsy/m/n
+/10.95 ^^Y$\T1/cmr/m/n/10.95 10 (Tier 1/2): \T1/cmtt/m/n/10.95 many_path_model/
+paper_release/tables/cluster_param_sensitivity_n10.md 
+ []
+
+[28] (sigmagravity_paper.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+ ***********
+Package rerunfilecheck Info: File `sigmagravity_paper.out' has not changed.
+(rerunfilecheck)             Checksum: ECBCA9EDD5D971D423E42BC4341513EB;19883.
+ )
+(\end occurred inside a group at level 2)
+
+### simple group (level 2) entered at line 354 ({)
+### simple group (level 1) entered at line 304 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 11459 strings out of 474486
+ 174230 string characters out of 5753569
+ 1942542 words of memory out of 5000000
+ 33399 multiletter control sequences out of 15000+600000
+ 583977 words of font info for 106 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 75i,9n,79p,833b,641s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\henry\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/
+ec/dpi600\ectt1095.pk> <C:\Users\henry\AppData\Local\MiKTeX\fonts/pk/ljfour/jkn
+appen/ec/dpi600\ecbi1095.pk> <C:\Users\henry\AppData\Local\MiKTeX\fonts/pk/ljfo
+ur/jknappen/ec/dpi600\tcti1095.pk> <C:\Users\henry\AppData\Local\MiKTeX\fonts/p
+k/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\henry\AppData\Local\MiKTeX\f
+onts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk> <C:\Users\henry\AppData\Local\Mi
+KTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\henry\AppData\Lo
+cal\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\henry\AppD
+ata\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095.pk> <C:\Users\henr
+y\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\User
+s\henry\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C
+:\Users\henry\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.
+pk> <C:\Users\henry\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecb
+x1000.pk> <C:\Users\henry\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi6
+00\ecrm1200.pk> <C:\Users\henry\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/e
+c/dpi600\ecrm1728.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+bx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:
+/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Fil
+es/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+<C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
+iles/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/f
+onts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Fi
+les/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fo
+nts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX/fonts/typ
+e1/public/amsfonts/symbols/msbm10.pfb>
+Output written on sigmagravity_paper.pdf (28 pages, 2284811 bytes).
+PDF statistics:
+ 1291 PDF objects out of 1440 (max. 8388607)
+ 181 named destinations out of 1000 (max. 500000)
+ 692 words of extra memory for PDF output out of 10000 (max. 10000000)
+

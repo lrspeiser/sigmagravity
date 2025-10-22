@@ -32,16 +32,17 @@ def geff_hernquist_factory(
     p: float,
     ncoh: float,
     *,
+    A: float = 1.0,
     G: float = G_SI,
     kernel_metric: str = "spherical",  # "spherical" (strictly curl-safe) or "cylindrical"
 ) -> GeffFn:
     """
     Build geff(x) for a spherical Hernquist baryon model with a Σ-kernel multiplier.
     - g_bar = -GM/(r+a)^2 r̂  (handles r→0)
-    - K = C(R_metric), where R_metric is r (spherical) or sqrt(x^2+y^2) (cylindrical)
-    - geff = (1 + K) * g_bar
+    - K = A * C(R_metric), where R_metric is r (spherical) or sqrt(x^2+y^2) (cylindrical)
+    - geff = (1 + K) * g_bar = (1 + A*C) * g_bar
     """
-    M = float(M); a = float(a); ell0 = float(ell0); p = float(p); ncoh = float(ncoh); G = float(G)
+    M = float(M); a = float(a); ell0 = float(ell0); p = float(p); ncoh = float(ncoh); A = float(A); G = float(G)
     use_cyl = (str(kernel_metric).lower().strip() == "cylindrical")
 
     def geff(x: Vec) -> Vec:
@@ -55,7 +56,7 @@ def geff_hernquist_factory(
         gbar_mag = - G * M / (r + max(a, 0.0)) ** 2
         gbar = gbar_mag * xhat  # [m/s^2]
         R_metric = r if not use_cyl else float(np.hypot(x[0], x[1]))
-        K = float(coherence_kernel(R_metric, ell0, p, ncoh))
+        K = float(A) * float(coherence_kernel(R_metric, ell0, p, ncoh))
         return (1.0 + K) * gbar
 
     return geff
@@ -69,6 +70,7 @@ def geff_point_masses_factory(
     ncoh: float,
     *,
     softening: float = 0.0,
+    A: float = 1.0,
     G: float = G_SI,
     kernel_metric: str = "spherical",
 ) -> GeffFn:
@@ -76,6 +78,7 @@ def geff_point_masses_factory(
     Build geff(x) from discrete point masses, multiplied by a Σ-kernel.
     Note: For strict curl-free behavior, prefer kernel_metric="spherical" and
     use symmetric mass models. Research-only convenience.
+    geff = (1 + A*C) * g_bar, with C = coherence_kernel(R_metric, ...).
     """
     masses = np.asarray(masses, dtype=float).reshape(-1)
     positions = np.asarray(positions, dtype=float)
@@ -85,6 +88,7 @@ def geff_point_masses_factory(
         raise ValueError("masses and positions length mismatch")
     eps = float(max(softening, 0.0))
     use_cyl = (str(kernel_metric).lower().strip() == "cylindrical")
+    A = float(A); G = float(G)
 
     def geff(x: Vec) -> Vec:
         x = np.asarray(x, dtype=float).reshape(-1)
@@ -97,7 +101,7 @@ def geff_point_masses_factory(
         # g_bar = -G Σ m_i r_i / |r_i|^3
         acc = -G * (dx * (masses * inv_r3)[:, None]).sum(axis=0)
         R_metric = float(np.linalg.norm(x)) if not use_cyl else float(np.hypot(x[0], x[1]))
-        K = float(coherence_kernel(R_metric, ell0, p, ncoh))
+        K = float(A) * float(coherence_kernel(R_metric, ell0, p, ncoh))
         return (1.0 + K) * acc
 
     return geff

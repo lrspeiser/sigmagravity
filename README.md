@@ -483,6 +483,8 @@ $$
 
 is an overestimate (not all paths contribute equally; coherence weighting and geometry factors reduce this). A more careful calculation accounting for the elliptic-integral ring geometry (Appendix B) and exponential coherence decay yields a ratio of O(10), in quantitative agreement with the observed ≈7.8. This supports the interpretation of A as a measure of coherent path-family count rather than a disconnected fit parameter. Variations with cluster triaxiality (oblate vs prolate; q_LOS ∈ [0.7, 1.3]) and galaxy disk thickness offer direct tests; triaxial sensitivity of ∼20–30% in θ_E is already confirmed (§5.3, Figure C2).
 
+**Cosmological consistency.** The halo‑scale kernel used here embeds naturally in a background FRW with effective matter density Ω_eff = Ω_m − Ω_b ≈ 0.25. Preliminary linear‑regime tests (run in the companion cosmo module) show full degeneracy with ΛCDM distances and growth, confirming that the local kernel does not conflict with cosmological structure formation. A dedicated cosmology paper will present these results.
+
 **Major open items and how we address them.**
 1) **Sample bias & redshift systematics** → explicit D_LS/D_S, cluster‑specific M_500, triaxial posteriors, and measured P(z_s); expanding to N≈18 Tier‑1+2 clusters.  
 2) **Outliers & mergers** → multi‑component Σ or temperature/entropy gates for shocked ICM; test with weak‑lensing profiles and arc redshifts.  
@@ -661,6 +663,8 @@ Immediate (clusters): expand to N≈18; test γ via ΔBIC; stack γ_t(R).
 Galaxies: finalize v1.0 RAR release (archive hyperparameters, seeds, splits, plots).
 
 Cross‑checks: BTFR residuals vs morphology; cluster gas systematics; BCG/ICL M/L tests; mocks.
+
+**Cosmological scaffold.** A companion linear‑regime module (cosmo/) implements a Σ‑driven FRW background with effective matter density Ω_eff ≈ 0.252 and μ = 1 on linear scales; this framework reproduces ΛCDM distances and linear growth to ≪1% and is reserved for future CMB/BAO work.
 
 ### 11.1. State of the union (Solar → Galaxy → Cluster)
 

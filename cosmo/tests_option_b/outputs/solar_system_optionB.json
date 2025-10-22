@@ -1,0 +1,67 @@
+{
+  "test": "solar_system_cassini",
+  "option": "B (Omega_eff in FRW, mu=1 on linear scales)",
+  "conclusion": "Option B does not change halo-scale kernel; Cassini safety preserved",
+  "results": [
+    {
+      "label": "Galaxy_ncoh0.5",
+      "parameters": {
+        "A": 0.591,
+        "ell0_kpc": 4.993,
+        "p": 0.757,
+        "n_coh": 0.5
+      },
+      "cassini_bound": 2.3e-05,
+      "radii_AU": [
+        0.1,
+        1.0,
+        10.0,
+        100.0
+      ],
+      "K": [
+        7.778263043323186e-09,
+        4.44511073646181e-08,
+        2.5402844705990634e-07,
+        1.4517138931039452e-06
+      ],
+      "K_over_Cassini": [
+        0.0003381853497097037,
+        0.0019326568419399174,
+        0.011044715089561145,
+        0.06311799535234544
+      ],
+      "passes_cassini": true,
+      "safety_margin": 15.843342210373928
+    },
+    {
+      "label": "Galaxy_ncoh2.0",
+      "parameters": {
+        "A": 0.591,
+        "ell0_kpc": 4.993,
+        "p": 0.757,
+        "n_coh": 2.0
+      },
+      "cassini_bound": 2.3e-05,
+      "radii_AU": [
+        0.1,
+        1.0,
+        10.0,
+        100.0
+      ],
+      "K": [
+        3.1113051451536755e-08,
+        1.778044093149189e-07,
+        1.0161131330820305e-06,
+        5.806834176812492e-06
+      ],
+      "K_over_Cassini": [
+        0.0013527413674581199,
+        0.007730626491952996,
+        0.04417883187313176,
+        0.2524710511657605
+      ],
+      "passes_cassini": true,
+      "safety_margin": 3.9608501465122328
+    }
+  ]
+}
