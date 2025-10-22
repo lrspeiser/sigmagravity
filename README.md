@@ -173,31 +173,37 @@ This explains Newtonian recovery in the Solar System and enhanced effective fiel
 
 For circular motion in an axisymmetric disk,
 
-g_model(R) = g_bar(R)[1 + K(R)],
+$$
+g_{\rm model}(R) = g_{\rm bar}(R)[1 + K(R)],
+$$
 
 with
 
+$$
 K(R) = A_0\, (g^\dagger/g_{\rm bar}(R))^p\; C(R;\,\ell_0, p, n_{\rm coh})\; G_{\rm bulge}\; G_{\rm shear}\; G_{\rm bar}.
+$$
 
-Here $g^†$ is a fixed acceleration scale (numerical value and provenance in §4.2); the ratio $(g^†/g_{\rm bar})^p$ appears only for dynamical observables that measure local acceleration, reflecting how coherent path bundles weight the field strength in the stationary‑phase spectrum. (A_0,p) govern the path‑spectrum slope; (ℓ₀,n_{\rm coh}) set coherence length and damping; the gates (G_·) suppress coherence for bulges, shear and stellar bars. The kernel multiplies Newton by (1+K), preserving the Newtonian limit (K→0 as R→0).
+Here $g^†$ is a fixed acceleration scale (numerical value and provenance in §4.2); the ratio $(g^†/g_{\rm bar})^p$ appears only for dynamical observables that measure local acceleration, reflecting how coherent path bundles weight the field strength in the stationary‑phase spectrum. $(A_0,p)$ govern the path‑spectrum slope; $(ℓ_0,n_{\rm coh})$ set coherence length and damping; the gates $(G_·)$ suppress coherence for bulges, shear and stellar bars. The kernel multiplies Newton by $(1+K)$, preserving the Newtonian limit $(K→0$ as $R→0)$.
 
 **Why the acceleration factor appears only in dynamics.** Rotation‑curve observables measure local acceleration directly, so the stationary‑phase path spectrum is naturally weighted by the field strength: coherent bundles that contribute a fractional correction $\delta g_q/|g_{\rm bar}|$ leave a dimensionless imprint that scales as $(g^†/g_{\rm bar})^p$, where $p$ encodes the path‑spectrum slope. Lensing, by contrast, is sensitive to projected surface density via $\kappa=\Sigma/\Sigma_{\rm crit}$; the observable is already normalized and linear in projection, so introducing an explicit acceleration weighting would be redundant with $A_c$ and the $\Sigma/\Sigma_{\rm crit}$ normalization. We therefore use the same coherence window $C(R)$ in both domains but include $(g^†/g_{\rm bar})^p$ only for dynamical observables. The same coherence window $C(R)$ is used for dynamics (§2.7) and lensing (§2.8); only the observable's normalization differs.
 
-Best‑fit hyperparameters from the SPARC analysis (166 galaxies, 80/20 split; validation suite pass): ℓ₀=4.993 kpc, β_bulge=1.759, α_shear=0.149, γ_bar=1.932, A_0=0.591, p=0.757, n_{\rm coh}=0.5.
+Best‑fit hyperparameters from the SPARC analysis (166 galaxies, 80/20 split; validation suite pass): $ℓ_0=4.993$ kpc, $β_{\rm bulge}=1.759$, $α_{\rm shear}=0.149$, $γ_{\rm bar}=1.932$, $A_0=0.591$, $p=0.757$, $n_{\rm coh}=0.5$.
 
-Result: hold‑out RAR scatter = 0.087 dex, bias −0.078 dex (after Newtonian‑limit bug fix and unit hygiene). Cassini‑class bounds are satisfied with margin ≥10^13 by construction (hard saturation gates).
+Result: hold‑out RAR scatter = 0.087 dex, bias −0.078 dex (after Newtonian‑limit bug fix and unit hygiene). Cassini‑class bounds are satisfied with margin $≥10^{13}$ by construction (hard saturation gates).
 
 ### 2.8. Cluster‑scale kernel (projected lensing)
 
 For lensing we work directly in the image plane with surface density and convergence,
 
-κ_eff(R) = \frac{\Sigma_{\rm bar}(R)}{\Sigma_{\rm crit}}\,[1+K_{\rm cl}(R)],\quad K_{\rm cl}(R)=A_c\,C(R;\,\ell_0,p,n_{\rm coh}).
+$$
+κ_{\rm eff}(R) = \frac{\Sigma_{\rm bar}(R)}{\Sigma_{\rm crit}}\,[1+K_{\rm cl}(R)],\quad K_{\rm cl}(R)=A_c\,C(R;\,\ell_0,p,n_{\rm coh}).
+$$
 
-Here we use the same C(·) as §2.3. Triaxial projection and Σ_crit(z_l, z_s) are handled in §4; Einstein radii satisfy ⟨κ_eff⟩(<R_E)=1.
+Here we use the same $C(·)$ as §2.3. Triaxial projection and $\Sigma_{\rm crit}(z_l, z_s)$ are handled in §4; Einstein radii satisfy $⟨κ_{\rm eff}⟩(<R_E)=1$.
 
-**Triaxial projection.** We transform ρ(r) → ρ(x,y,z) with ellipsoidal radius $m^2 = x^2 + (y/q_p)^2 + (z/q_{\rm LOS})^2$ and enforce mass conservation via a single global normalization, not a local $1/(q_p\, q_{\rm LOS})$ factor, which cancels in the line‑of‑sight integral. The corrected projection recovers **~60% variation in κ(R)** and **~20–30% in $\theta_E$** across $q_{\rm LOS}\in[0.7,1.3]$.
+**Triaxial projection.** We transform $ρ(r) → ρ(x,y,z)$ with ellipsoidal radius $m^2 = x^2 + (y/q_p)^2 + (z/q_{\rm LOS})^2$ and enforce mass conservation via a single global normalization, not a local $1/(q_p\, q_{\rm LOS})$ factor, which cancels in the line‑of‑sight integral. The corrected projection recovers **~60% variation in $κ(R)$** and **~20–30% in $\theta_E$** across $q_{\rm LOS}\in[0.7,1.3]$.
 
-**Mass‑scaled coherence.** We allow ℓ_0 to **scale with halo size**: ℓ_0(M) = ℓ_{0,⋆}(R_{500}/1 Mpc)^γ, testing γ=0 (fixed coherence) vs γ>0 (self‑similar growth). With the curated sample including BCG and $P(z_s)$, posteriors yield **$\gamma = 0.09 \pm 0.10$**—**consistent with no mass‑scaling**.
+**Mass‑scaled coherence.** We allow $ℓ_0$ to **scale with halo size**: $ℓ_0(M) = ℓ_{0,⋆}(R_{500}/1~{\rm Mpc})^γ$, testing $γ=0$ (fixed coherence) vs $γ>0$ (self‑similar growth). With the curated sample including BCG and $P(z_s)$, posteriors yield **$\gamma = 0.09 \pm 0.10$**—**consistent with no mass‑scaling**.
 
 **Observable‑effective coherence scales.** Throughout we distinguish an observable‑effective coherence scale: $\ell_{0}^{\rm dyn}\sim 5$ kpc for rotation‑supported disks and $\ell_{0}^{\rm proj}\sim 200$ kpc for projected lensing. The γ test pertains to within‑domain mass‑scaling; current posteriors ($\gamma=0.09\pm 0.10$) favor no mass‑scaling in clusters, while $\ell_{0}^{\rm dyn}$ and $\ell_{0}^{\rm proj}$ differ because the observables integrate different path ensembles: disks sample 3‑D mass projected onto a 2‑D rotation‑supported midplane (relevant phase‑coherence scale ~ few kpc), whereas lensing involves line‑of‑sight projection over 3‑D volumes that effectively coarse‑grains phases (projected coherence scale ~ 10² kpc).
 

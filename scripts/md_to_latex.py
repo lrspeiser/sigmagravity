@@ -108,6 +108,10 @@ def convert_markdown_to_latex(md_content):
             i += 1
             # Collect abstract content until next section
             while i < len(lines) and not lines[i].strip().startswith('##'):
+                # Skip horizontal rules that are just separators after abstract
+                if lines[i].strip() in ['---', '***', '___']:
+                    i += 1
+                    continue
                 if lines[i].strip():
                     latex += convert_inline_formatting(lines[i]) + "\n"
                 i += 1
@@ -117,6 +121,8 @@ def convert_markdown_to_latex(md_content):
         # Section headers
         if line.startswith('## '):
             section_title = line[3:].strip()
+            # Strip leading hierarchical numbers like "1.", "2.6.", "11.2.3." from section titles
+            section_title = re.sub(r'^\d+(\.\d+)*\.?\s*', '', section_title)
             section_title = convert_inline_formatting(section_title)
             latex += f"\\section{{{section_title}}}\n\n"
             i += 1
@@ -124,6 +130,8 @@ def convert_markdown_to_latex(md_content):
         
         if line.startswith('### '):
             subsection_title = line[4:].strip()
+            # Strip leading hierarchical numbers from subsection titles
+            subsection_title = re.sub(r'^\d+(\.\d+)*\.?\s*', '', subsection_title)
             subsection_title = convert_inline_formatting(subsection_title)
             latex += f"\\subsection{{{subsection_title}}}\n\n"
             i += 1
@@ -131,6 +139,8 @@ def convert_markdown_to_latex(md_content):
         
         if line.startswith('#### '):
             subsubsection_title = line[5:].strip()
+            # Strip leading hierarchical numbers from subsubsection titles
+            subsubsection_title = re.sub(r'^\d+(\.\d+)*\.?\s*', '', subsubsection_title)
             subsubsection_title = convert_inline_formatting(subsubsection_title)
             latex += f"\\subsubsection{{{subsubsection_title}}}\n\n"
             i += 1
@@ -208,6 +218,9 @@ def convert_markdown_to_latex(md_content):
             if match:
                 caption = match.group(1)
                 path = match.group(2)
+                # Fix path - images are relative to project root, but LaTeX compiles from docs/
+                if not path.startswith('http') and not path.startswith('/') and not path.startswith('..'):
+                    path = '../' + path
                 latex += "\\begin{figure}[h]\n"
                 latex += "\\centering\n"
                 latex += f"\\includegraphics[width=0.8\\textwidth]{{{path}}}\n"
@@ -221,6 +234,24 @@ def convert_markdown_to_latex(md_content):
             latex += "\\medskip\\hrule\\medskip\n\n"
             i += 1
             continue
+        
+        # Standalone equations (detect LaTeX equations not wrapped in $$ or $)
+        # These are lines with LaTeX commands but no markdown formatting
+        stripped = line.strip()
+        if stripped and not stripped.startswith('$') and not stripped.startswith('\\begin'):
+            # Skip lines that already have inline math delimiters - they're regular text, not standalone equations
+            if '$' not in stripped:
+                # Check if line looks like an equation (has LaTeX commands or math-like structure)
+                has_latex_commands = any(cmd in stripped for cmd in ['\\,', '\\;', '\\rm', '\\dagger', '\\ell', '\\Sigma', '\\quad'])
+                has_equation_pattern = '=' in stripped and ('(' in stripped or '_' in stripped)
+                # Exclude markdown links [text](url) but allow equation brackets
+                is_markdown_link = '](' in stripped or stripped.startswith('**') or stripped.startswith('*Figure')
+                
+                if has_latex_commands or (has_equation_pattern and not is_markdown_link and 'http' not in stripped):
+                    # This is likely a standalone equation - wrap it in display math
+                    latex += "\\[\n" + stripped + "\n\\]\n\n"
+                    i += 1
+                    continue
         
         # Regular paragraphs
         if line.strip():
@@ -336,10 +367,10 @@ def main():
     
     # Check if PDF was created regardless of return code
     if pdf_path.exists():
-        print(f"✓ PDF generated: {pdf_path}")
+        print(f"[OK] PDF generated: {pdf_path}")
         print(f"  Size: {pdf_path.stat().st_size / 1024:.1f} KB")
     else:
-        print(f"✗ PDF generation failed")
+        print(f"[FAILED] PDF generation failed")
         if result.stdout:
             print("STDOUT:", result.stdout[-500:])
         if result.stderr:
@@ -357,7 +388,7 @@ def main():
         errors='replace'
     )
     
-    print("✓ Complete")
+    print("[OK] Complete")
     return 0
 
 
