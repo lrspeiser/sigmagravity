@@ -6,9 +6,9 @@ This repository automatically converts `README.md` to a professional LaTeX-forma
 
 ### Option 1: Windows Batch Script
 ```bash
-rebuild_pdf.bat
+docs\rebuild_pdf.bat
 ```
-or simply double-click `rebuild_pdf.bat`
+or simply double-click `docs\rebuild_pdf.bat`
 
 ### Option 2: Python Script Directly
 ```bash
@@ -29,15 +29,15 @@ The conversion script (`scripts/md_to_latex.py`) performs the following:
    - Bold/italic → `\textbf{}` / `\textit{}`
    - Images → `\includegraphics{}`
    - Links → `\href{}{}`
-3. **Writes** `sigmagravity_paper.tex` (complete LaTeX document)
+3. **Writes** `docs/sigmagravity_paper.tex` (complete LaTeX document)
 4. **Compiles** with `pdflatex` (2 passes for cross-references)
-5. **Produces** `sigmagravity_paper.pdf`
+5. **Produces** `docs/sigmagravity_paper.pdf`
 
 ## Output
 
-- **sigmagravity_paper.tex** — Generated LaTeX source (can be edited manually if needed)
-- **sigmagravity_paper.pdf** — Final PDF document (~2.2 MB, full paper with figures)
-- **sigmagravity_paper.log** — LaTeX compilation log (for debugging)
+- **docs/sigmagravity_paper.tex** — Generated LaTeX source (can be edited manually if needed)
+- **docs/sigmagravity_paper.pdf** — Final PDF document (~2.2 MB, full paper with figures)
+- **docs/sigmagravity_paper.log** — LaTeX compilation log (for debugging)
 
 ## Requirements
 
@@ -56,7 +56,7 @@ Edit `scripts/md_to_latex.py` lines 19-69 to customize:
 
 ### Manual LaTeX Edits
 
-You can edit `sigmagravity_paper.tex` directly after generation, but changes will be overwritten on next rebuild. For persistent changes, either:
+You can edit `docs/sigmagravity_paper.tex` directly after generation, but changes will be overwritten on next rebuild. For persistent changes, either:
 1. Modify `README.md` (preferred — single source of truth)
 2. Modify the conversion logic in `scripts/md_to_latex.py`
 
@@ -69,10 +69,10 @@ You can edit `sigmagravity_paper.tex` directly after generation, but changes wil
 # ...
 
 # Regenerate PDF
-rebuild_pdf.bat
+docs\rebuild_pdf.bat
 
 # Commit both
-git add README.md sigmagravity_paper.pdf sigmagravity_paper.tex
+git add README.md docs/sigmagravity_paper.pdf docs/sigmagravity_paper.tex
 git commit -m "Update paper content"
 git push origin main
 ```
@@ -94,12 +94,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: xu-cheng/latex-action@v2
         with:
-          root_file: sigmagravity_paper.tex
+          root_file: docs/sigmagravity_paper.tex
           pre_compile: python scripts/md_to_latex.py
       - uses: actions/upload-artifact@v3
         with:
           name: sigmagravity_paper
-          path: sigmagravity_paper.pdf
+          path: docs/sigmagravity_paper.pdf
 ```
 
 ## Troubleshooting
@@ -140,15 +140,15 @@ README.md  (source)
     ↓
 scripts/md_to_latex.py  (parser + LaTeX generator)
     ↓
-sigmagravity_paper.tex  (intermediate)
+docs/sigmagravity_paper.tex  (intermediate)
     ↓
 pdflatex  (compiler)
     ↓
-sigmagravity_paper.pdf  (final output)
+docs/sigmagravity_paper.pdf  (final output)
 ```
 
 **Single source of truth**: `README.md`  
-**Reproducible**: Re-run `rebuild_pdf.bat` anytime
+**Reproducible**: Re-run `docs\rebuild_pdf.bat` anytime
 
 ## Version History
 

@@ -7,7 +7,7 @@ make_pdf.py — Build a single-column, figure‑captioned PDF of README.md
 - Uses Chrome/Edge headless to print to PDF
 
 Usage:
-  python scripts/make_pdf.py --md README.md --out sigmagravity_paper.pdf
+  python scripts/make_pdf.py --md README.md --out docs/sigmagravity_paper.pdf
 """
 import argparse
 import os
@@ -154,7 +154,7 @@ def build_html(md_path: Path) -> Path:
 </body>
 </html>
 """
-    out_html = md_path.parent / 'paper_formatted.html'
+    out_html = Path('docs') / 'paper_formatted.html'
     out_html.write_text(html, encoding='utf-8')
     return out_html
 
@@ -189,7 +189,7 @@ def print_pdf(html_path: Path, pdf_path: Path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--md', default='README.md')
-    ap.add_argument('--out', default='sigmagravity_paper.pdf')
+    ap.add_argument('--out', default='docs/sigmagravity_paper.pdf')
     args = ap.parse_args()
     md_path = Path(args.md)
     pdf_path = Path(args.out)

@@ -31,4 +31,5 @@ if ($chocoInstalled) {
 
 Write-Host ""
 Write-Host "After installation completes, close and reopen PowerShell, then run:" -ForegroundColor Green
+Write-Host "  cd .." -ForegroundColor White
 Write-Host "  python scripts/make_pdf_latex.py" -ForegroundColor White

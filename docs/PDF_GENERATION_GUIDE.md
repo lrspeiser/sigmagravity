@@ -20,7 +20,7 @@ Your current method (Chrome + MathJax) sometimes wraps long formulas incorrectly
 #### Option 1: Automated (Recommended)
 ```powershell
 # Run the installer script
-.\install_latex_pdf.ps1
+.\docs\install_latex_pdf.ps1
 ```
 
 #### Option 2: Manual
@@ -51,7 +51,7 @@ Your current method (Chrome + MathJax) sometimes wraps long formulas incorrectly
 python scripts/make_pdf_latex.py
 ```
 
-Output: `sigmagravity_paper.pdf` (publication-quality)
+Output: `docs/sigmagravity_paper.pdf` (publication-quality)
 
 ### Compare with current method:
 ```powershell
@@ -59,7 +59,7 @@ Output: `sigmagravity_paper.pdf` (publication-quality)
 python scripts/make_pdf.py
 
 # New method (Pandoc + LaTeX)
-python scripts/make_pdf_latex.py --out sigmagravity_paper_latex.pdf
+python scripts/make_pdf_latex.py --out docs/sigmagravity_paper_latex.pdf
 ```
 
 Then open both PDFs and compare formula rendering.
@@ -146,7 +146,7 @@ K(R) = A₀ (g†/g_bar(R))^p C(R; ℓ₀, p, n_coh) G_bulge G_shear
 
 1. **Install** Pandoc + MiKTeX (one-time, 10 minutes)
    ```powershell
-   .\install_latex_pdf.ps1
+   .\docs\install_latex_pdf.ps1
    ```
 
 2. **Test** on your document:
@@ -155,8 +155,8 @@ K(R) = A₀ (g†/g_bar(R))^p C(R; ℓ₀, p, n_coh) G_bulge G_shear
    ```
 
 3. **Compare** PDFs:
-   - Open `sigmagravity_paper.pdf` (current method)
-   - Generate `sigmagravity_paper_latex.pdf` (new method)
+   - Open `docs/sigmagravity_paper.pdf` (current method)
+   - Generate `docs/sigmagravity_paper_latex.pdf` (new method)
    - Check formula rendering quality
 
 4. **Decide**:
@@ -167,10 +167,10 @@ K(R) = A₀ (g†/g_bar(R))^p C(R; ℓ₀, p, n_coh) G_bulge G_shear
 
 ## File Locations:
 
-- **Installer**: `install_latex_pdf.ps1`
+- **Installer**: `docs/install_latex_pdf.ps1`
 - **LaTeX script**: `scripts/make_pdf_latex.py`
 - **Current script**: `scripts/make_pdf.py` (unchanged)
-- **This guide**: `PDF_GENERATION_GUIDE.md`
+- **This guide**: `docs/PDF_GENERATION_GUIDE.md`
 
 ---
 

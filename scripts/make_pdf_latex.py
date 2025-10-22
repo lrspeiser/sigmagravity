@@ -9,7 +9,7 @@ Advantages over Chrome/MathJax:
 - Standard for academic papers
 
 Usage:
-  python scripts/make_pdf_latex.py [--md README.md] [--out sigmagravity_paper.pdf]
+  python scripts/make_pdf_latex.py [--md README.md] [--out docs/sigmagravity_paper.pdf]
 """
 import argparse
 import subprocess
@@ -47,7 +47,7 @@ def check_dependencies():
     if missing:
         print(f"\n[ERROR] Missing dependencies: {', '.join(missing)}")
         print("\nTo install:")
-        print("  1. Run: .\\install_latex_pdf.ps1")
+        print("  1. Run: .\\docs\\install_latex_pdf.ps1")
         print("  2. Or install manually:")
         print("     - Pandoc: https://pandoc.org/installing.html")
         print("     - MiKTeX: https://miktex.org/download")
@@ -111,8 +111,8 @@ def main():
     )
     parser.add_argument('--md', default='README.md', 
                        help='Input Markdown file (default: README.md)')
-    parser.add_argument('--out', default='sigmagravity_paper.pdf',
-                       help='Output PDF file (default: sigmagravity_paper.pdf)')
+    parser.add_argument('--out', default='docs/sigmagravity_paper.pdf',
+                       help='Output PDF file (default: docs/sigmagravity_paper.pdf)')
     
     args = parser.parse_args()
     

@@ -311,8 +311,9 @@ def convert_table(table_lines):
 def main():
     repo_root = Path(__file__).parent.parent
     readme_path = repo_root / "README.md"
-    tex_path = repo_root / "sigmagravity_paper.tex"
-    pdf_path = repo_root / "sigmagravity_paper.pdf"
+    docs_path = repo_root / "docs"
+    tex_path = docs_path / "sigmagravity_paper.tex"
+    pdf_path = docs_path / "sigmagravity_paper.pdf"
     
     print(f"Reading {readme_path}...")
     md_content = readme_path.read_text(encoding='utf-8')
@@ -326,7 +327,7 @@ def main():
     print(f"Compiling to PDF...")
     result = subprocess.run(
         ['pdflatex', '-interaction=nonstopmode', str(tex_path)],
-        cwd=repo_root,
+        cwd=docs_path,
         capture_output=True,
         text=True,
         encoding='utf-8',
@@ -349,7 +350,7 @@ def main():
     print("Running pdflatex second pass for cross-references...")
     subprocess.run(
         ['pdflatex', '-interaction=nonstopmode', str(tex_path)],
-        cwd=repo_root,
+        cwd=docs_path,
         capture_output=True,
         text=True,
         encoding='utf-8',
