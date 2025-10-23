@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.20)  22 OCT 2025 17:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.20)  23 OCT 2025 12:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2040,7 +2040,7 @@ l.598 ... each gate (bulge, shear, bar) reduces χ
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/rc_gallery.png, id=415, 1300.86pt x 549.252pt>
+<../figures/rc_gallery.png, id=475, 1300.86pt x 549.252pt>
 File: ../figures/rc_gallery.png Graphic file (type png)
 <use ../figures/rc_gallery.png>
 Package pdftex.def Info: ../figures/rc_gallery.png  used on input line 606.
@@ -2074,7 +2074,7 @@ l.611 ...nd χ²; no per‑galaxy tuning applied.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/rc_residual_hist.png, id=417, 433.62pt x 289.08pt>
+<../figures/rc_residual_hist.png, id=477, 433.62pt x 289.08pt>
 File: ../figures/rc_residual_hist.png Graphic file (type png)
 <use ../figures/rc_residual_hist.png>
 Package pdftex.def Info: ../figures/rc_residual_hist.png  used on input line 61
@@ -2498,7 +2498,7 @@ l.663 ...rom geometry priors (q\_p, q\_LOS) and κ
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/holdouts_pred_vs_obs.png, id=436, 433.62pt x 433.62pt>
+<../figures/holdouts_pred_vs_obs.png, id=496, 433.62pt x 433.62pt>
 File: ../figures/holdouts_pred_vs_obs.png Graphic file (type png)
 <use ../figures/holdouts_pred_vs_obs.png>
 Package pdftex.def Info: ../figures/holdouts_pred_vs_obs.png  used on input lin
@@ -2517,7 +2517,7 @@ l.673 ...medians with 68\% PPC bands vs observed.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/kfold_pred_vs_obs.png, id=437, 433.62pt x 433.62pt>
+<../figures/kfold_pred_vs_obs.png, id=497, 433.62pt x 433.62pt>
 File: ../figures/kfold_pred_vs_obs.png Graphic file (type png)
 <use ../figures/kfold_pred_vs_obs.png>
 Package pdftex.def Info: ../figures/kfold_pred_vs_obs.png  used on input line 6
@@ -2526,7 +2526,7 @@ Package pdftex.def Info: ../figures/kfold_pred_vs_obs.png  used on input line 6
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../figures/kfold_coverage.png, id=438, 289.08pt x 216.81pt>
+<../figures/kfold_coverage.png, id=498, 289.08pt x 216.81pt>
 File: ../figures/kfold_coverage.png Graphic file (type png)
 <use ../figures/kfold_coverage.png>
 Package pdftex.def Info: ../figures/kfold_coverage.png  used on input line 688.
@@ -2535,7 +2535,7 @@ Package pdftex.def Info: ../figures/kfold_coverage.png  used on input line 688.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../figures/cluster_kappa_panels.png, id=439, 1011.78pt x 361.35pt>
+<../figures/cluster_kappa_panels.png, id=499, 1011.78pt x 361.35pt>
 File: ../figures/cluster_kappa_panels.png Graphic file (type png)
 <use ../figures/cluster_kappa_panels.png>
 Package pdftex.def Info: ../figures/cluster_kappa_panels.png  used on input lin
@@ -2570,7 +2570,7 @@ l.703 ...68\% band with Einstein crossing marked.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/triaxial_sensitivity_A2261.png, id=440, 462.528pt x 317.988pt>
+<../figures/triaxial_sensitivity_A2261.png, id=500, 462.528pt x 317.988pt>
 File: ../figures/triaxial_sensitivity_A2261.png Graphic file (type png)
 <use ../figures/triaxial_sensitivity_A2261.png>
 Package pdftex.def Info: ../figures/triaxial_sensitivity_A2261.png  used on inp
@@ -2608,7 +2608,7 @@ you left one out. Proceed, with fingers crossed.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../figures/cluster_kappa_profiles_panel.png, id=441, 867.24pt x 542.025pt>
+<../figures/cluster_kappa_profiles_panel.png, id=501, 867.24pt x 542.025pt>
 File: ../figures/cluster_kappa_profiles_panel.png Graphic file (type png)
 <use ../figures/cluster_kappa_profiles_panel.png>
 Package pdftex.def Info: ../figures/cluster_kappa_profiles_panel.png  used on i
@@ -2669,7 +2669,7 @@ l.720 ... with A\_c chosen so ⟨κ⟩(<θ\_E)=1.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/cluster_alpha_profiles_panel.png, id=442, 867.24pt x 542.025pt>
+<../figures/cluster_alpha_profiles_panel.png, id=502, 867.24pt x 542.025pt>
 File: ../figures/cluster_alpha_profiles_panel.png Graphic file (type png)
 <use ../figures/cluster_alpha_profiles_panel.png>
 Package pdftex.def Info: ../figures/cluster_alpha_profiles_panel.png  used on i
@@ -3079,7 +3079,7 @@ l.796 ...this fixed halo configuration (V₂₀₀
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../data/gaia/outputs/mw_all_model_summary.png, id=464, 1156.32pt x 650.43pt>
+<../data/gaia/outputs/mw_all_model_summary.png, id=524, 1156.32pt x 650.43pt>
 File: ../data/gaia/outputs/mw_all_model_summary.png Graphic file (type png)
 <use ../data/gaia/outputs/mw_all_model_summary.png>
 Package pdftex.def Info: ../data/gaia/outputs/mw_all_model_summary.png  used on
@@ -3141,7 +3141,7 @@ You may provide a definition with
 \DeclareUnicodeCharacter 
 
 [14 <../figures/triaxial_sensitivity_A2261.png>]
-<../data/gaia/outputs/mw_rar_comparison_full_improved.png, id=475, 975.645pt x 
+<../data/gaia/outputs/mw_rar_comparison_full_improved.png, id=535, 975.645pt x 
 397.485pt>
 File: ../data/gaia/outputs/mw_rar_comparison_full_improved.png Graphic file (ty
 pe png)
@@ -3166,7 +3166,7 @@ l.820 ...redicts by 1.4 dex (25× worse than Σ).}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../data/gaia/outputs/mw_radial_residual_map.png, id=476, 794.97pt x 433.62pt>
+<../data/gaia/outputs/mw_radial_residual_map.png, id=536, 794.97pt x 433.62pt>
 File: ../data/gaia/outputs/mw_radial_residual_map.png Graphic file (type png)
 <use ../data/gaia/outputs/mw_radial_residual_map.png>
 Package pdftex.def Info: ../data/gaia/outputs/mw_radial_residual_map.png  used 
@@ -3201,7 +3201,7 @@ l.830 ...irms gate suppression works as designed.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../data/gaia/outputs/mw_delta_histograms.png, id=477, 867.24pt x 650.43pt>
+<../data/gaia/outputs/mw_delta_histograms.png, id=537, 867.24pt x 650.43pt>
 File: ../data/gaia/outputs/mw_delta_histograms.png Graphic file (type png)
 <use ../data/gaia/outputs/mw_delta_histograms.png>
 Package pdftex.def Info: ../data/gaia/outputs/mw_delta_histograms.png  used on 
@@ -3249,7 +3249,7 @@ l.840 .... Only Σ achieves unbiased performance.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../data/gaia/outputs/mw_radial_bin_table.png, id=478, 939.51pt x 722.7pt>
+<../data/gaia/outputs/mw_radial_bin_table.png, id=538, 939.51pt x 722.7pt>
 File: ../data/gaia/outputs/mw_radial_bin_table.png Graphic file (type png)
 <use ../data/gaia/outputs/mw_radial_bin_table.png>
 Package pdftex.def Info: ../data/gaia/outputs/mw_radial_bin_table.png  used on 
@@ -3258,7 +3258,7 @@ input line 845.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../data/gaia/outputs/mw_outer_rotation_curves.png, id=479, 794.97pt x 505.89pt
+<../data/gaia/outputs/mw_outer_rotation_curves.png, id=539, 794.97pt x 505.89pt
 >
 File: ../data/gaia/outputs/mw_outer_rotation_curves.png Graphic file (type png)
 
@@ -4156,35 +4156,65 @@ You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-Overfull \hbox (116.40842pt too wide) in paragraph at lines 1165--1166
+! LaTeX Error: Unicode character Λ (U+039B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1167 ...ervationally degenerate with those of Λ
+                                                  CDM for the same $\{\Omega...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (16.76216pt too wide) in paragraph at lines 1167--1168
+[]\T1/cmr/m/n/10.95 where $\OT1/cmr/m/n/10.95 
+[]$ \T1/cmr/m/n/10.95 is an ef-fec-tive, pres-sure-less (dust[]like) com-po-nen
+t aris-ing from the coarse[]grained $\OT1/cmr/m/n/10.95 ^^F$[]\T1/cmr/m/n/10.95
+ geometry
+ []
+
+
+Overfull \hbox (12.69089pt too wide) in paragraph at lines 1167--1168
+\T1/cmr/m/n/10.95 rather than from par-ti-cle dark mat-ter. On lin-ear scales (
+$\OML/cmm/m/it/10.95 k \U/msa/m/n/10.95 . \OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.
+95 :\OT1/cmr/m/n/10.95 2 \OML/cmm/m/it/10.95 h [][]$\T1/cmr/m/n/10.95 ) we set 
+the lin-ear metric[]response
+ []
+
+[23]
+Overfull \hbox (116.40842pt too wide) in paragraph at lines 1211--1212
 []\T1/cmr/m/n/10.95 python -m ven-dor.maxdepth_gaia.run_pipeline --use_source m
 w_csv --mw_csv_path "data/gaia/mw/gaia_mw_real.csv"
  []
 
 
-Overfull \hbox (286.57959pt too wide) in paragraph at lines 1176--1177
+Overfull \hbox (286.57959pt too wide) in paragraph at lines 1222--1223
 []\T1/cmr/m/n/10.95 python scripts/predict_gaia_star_speeds.py --npz "data/gaia
 /mw/mw_gaia_144k.npz" --fit "data/gaia/outputs/mw_pipeline_run_vendor/fit_param
 s.json"
  []
 
 
-Overfull \hbox (55.08582pt too wide) in paragraph at lines 1187--1188
+Overfull \hbox (55.08582pt too wide) in paragraph at lines 1233--1234
 []\T1/cmr/m/n/10.95 python scripts/analyze_mw_rar_starlevel.py --pred_csv "data
 /gaia/outputs/mw_gaia_144k_predicted.csv"
  []
 
-[23]
+[24]
 ! Display math should end with $$.
 <to be read again> 
                    \Sigma 
-l.1252 ..., data/clusters/*.json; per‑cluster Σ
+l.1298 ..., data/clusters/*.json; per‑cluster Σ
                                                   _baryon(R) CSVs ingested w...
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
 
 
-Overfull \hbox (73.86551pt too wide) detected at line 1252
+Overfull \hbox (73.86551pt too wide) detected at line 1298
 \OML/cmm/m/it/10.95 core=gnfw[]as[]rofiles:py; core=build[]luster[]aryons:py\OT
 1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 f[]as \OT1/cmr/m/n/10.95 = 0\OML/cmm/m/it/
 10.95 :\OT1/cmr/m/n/10.95 11\OML/cmm/m/it/10.95 ; clumpingfix\OT1/cmr/m/n/10.95
@@ -4195,7 +4225,7 @@ Overfull \hbox (73.86551pt too wide) detected at line 1252
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1252 ..., data/clusters/*.json; per‑cluster Σ
+l.1298 ..., data/clusters/*.json; per‑cluster Σ
                                                   _baryon(R) CSVs ingested w...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4203,7 +4233,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1252 ... data/clusters/*.json; per‑cluster Σ_
+l.1298 ... data/clusters/*.json; per‑cluster Σ_
                                                   baryon(R) CSVs ingested wh...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4211,7 +4241,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1253 \]
+l.1299 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -4220,7 +4250,7 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Overfull \hbox (45.36427pt too wide) in paragraph at lines 1260--1261
+Overfull \hbox (45.36427pt too wide) in paragraph at lines 1306--1307
 []\T1/cmr/m/n/10.95 core/triaxial_lensing.py (global nor-mal-iza-tion; ge-om-e-
 try val-i-dated in docs/triaxial_lensing_fix_report.md). 
  []
@@ -4228,7 +4258,7 @@ try val-i-dated in docs/triaxial_lensing_fix_report.md).
 ! Missing { inserted.
 <to be read again> 
                    $
-l.1268 core/kernel2d_sigma.py (K_Σ
+l.1314 core/kernel2d_sigma.py (K_Σ
                                    (R)=A_c·C(R;ℓ₀,⋯)).
 A left brace was mandatory here, so I've put one in.
 You might want to delete and/or insert some corrections
@@ -4238,7 +4268,7 @@ so that I will find a matching right brace soon.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.1268 core/kernel2d_sigma.py (K_Σ
+l.1314 core/kernel2d_sigma.py (K_Σ
                                    (R)=A_c·C(R;ℓ₀,⋯)).
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -4249,7 +4279,7 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \Sigma 
-l.1268 core/kernel2d_sigma.py (K_Σ
+l.1314 core/kernel2d_sigma.py (K_Σ
                                    (R)=A_c·C(R;ℓ₀,⋯)).
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -4257,7 +4287,7 @@ So I shall assume that you typed `$$' both times.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1268 core/kernel2d_sigma.py (K_Σ
+l.1314 core/kernel2d_sigma.py (K_Σ
                                    (R)=A_c·C(R;ℓ₀,⋯)).
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4265,24 +4295,24 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1268 core/kernel2d_sigma.py (K_Σ(R)=A_
+l.1314 core/kernel2d_sigma.py (K_Σ(R)=A_
                                          c·C(R;ℓ₀,⋯)).
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
 LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 1
-268.
+314.
 
 
 LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 1
-268.
+314.
 
 Missing character: There is no � in font cmr10!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1268 .../kernel2d_sigma.py (K_Σ(R)=A_c·C(R;ℓ
+l.1314 .../kernel2d_sigma.py (K_Σ(R)=A_c·C(R;ℓ
                                                   ₀,⋯)).
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4295,7 +4325,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1268 ...rnel2d_sigma.py (K_Σ(R)=A_c·C(R;ℓ₀
+l.1314 ...rnel2d_sigma.py (K_Σ(R)=A_c·C(R;ℓ₀
                                                   ,⋯)).
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4308,7 +4338,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1268 ...2d_sigma.py (K_Σ(R)=A_c·C(R;ℓ₀,⋯
+l.1314 ...2d_sigma.py (K_Σ(R)=A_c·C(R;ℓ₀,⋯
                                                   )).
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4320,7 +4350,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1269 \]
+l.1315 \]
          
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -4329,7 +4359,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1269 \]
+l.1315 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -4340,13 +4370,13 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.1269 \]
+l.1315 \]
          
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
 
 
-Overfull \hbox (46.52448pt too wide) in paragraph at lines 1278--1279
+Overfull \hbox (46.52448pt too wide) in paragraph at lines 1324--1325
 []\T1/cmr/m/n/10.95 Generates: con-ver-gence_profiles.png, cu-mu-la-tive_mass.p
 ng, con-ver-gence_maps_2d.png, boost_profile.png. 
  []
@@ -4359,7 +4389,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1288 Outputs geometry sensitivity figs and θ
+l.1334 Outputs geometry sensitivity figs and θ
                                                \_E validation.
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4372,7 +4402,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1296 ...n\_hierarchical\_tier12\_clean.py → μ
+l.1342 ...n\_hierarchical\_tier12\_clean.py → μ
                                                   \_A, σ\_A, χ²/d.o.f.
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4385,7 +4415,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1296 ...archical\_tier12\_clean.py → μ\_A, σ
+l.1342 ...archical\_tier12\_clean.py → μ\_A, σ
                                                   \_A, χ²/d.o.f.
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4398,7 +4428,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1296 ...l\_tier12\_clean.py → μ\_A, σ\_A, χ
+l.1342 ...l\_tier12\_clean.py → μ\_A, σ\_A, χ
                                                   ²/d.o.f.
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4411,7 +4441,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1306 ... α) — quick reproduction (this repo)}
+l.1352 ... α) — quick reproduction (this repo)}
                                                   
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4424,7 +4454,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1306 ... α) — quick reproduction (this repo)}
+l.1352 ... α) — quick reproduction (this repo)}
                                                   
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4437,26 +4467,26 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1310 ...eflection, calibrated to the observed θ
+l.1356 ...eflection, calibrated to the observed θ
                                                   _E in the catalog and usin...
 
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-LaTeX Warning: Command \textquoteright invalid in math mode on input line 1310.
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 1356.
 
 
 ! Display math should end with $$.
 <to be read again> 
                    \Sigma 
-l.1310 ...n the catalog and using the paper’s Σ
+l.1356 ...n the catalog and using the paper’s Σ
                                                   ‑kernel K(R)=A_c·C(R;�...
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
 
 
-Overfull \hbox (59.00826pt too wide) detected at line 1310
+Overfull \hbox (59.00826pt too wide) detected at line 1356
 \OML/cmm/m/it/10.95 Self \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 containedf
 iguresforconvergenceanddeflection; calibratedtotheobserved[]inthecatalogandusin
 gthepaper[]s
@@ -4465,7 +4495,7 @@ gthepaper[]s
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1310 ...n the catalog and using the paper’s Σ
+l.1356 ...n the catalog and using the paper’s Σ
                                                   ‑kernel K(R)=A_c·C(R;�...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4473,24 +4503,24 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1310 ... using the paper’s Σ‑kernel K(R)=A_
+l.1356 ... using the paper’s Σ‑kernel K(R)=A_
                                                   c·C(R;ℓ₀,⋯):
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
 LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 1
-310.
+356.
 
 
 LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 1
-310.
+356.
 
 Missing character: There is no � in font cmr10!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1310 ... paper’s Σ‑kernel K(R)=A_c·C(R;ℓ
+l.1356 ... paper’s Σ‑kernel K(R)=A_c·C(R;ℓ
                                                   ₀,⋯):
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4503,7 +4533,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1310 ...per’s Σ‑kernel K(R)=A_c·C(R;ℓ₀
+l.1356 ...per’s Σ‑kernel K(R)=A_c·C(R;ℓ₀
                                                   ,⋯):
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4516,7 +4546,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1310 ...��s Σ‑kernel K(R)=A_c·C(R;ℓ₀,⋯
+l.1356 ...��s Σ‑kernel K(R)=A_c·C(R;ℓ₀,⋯
                                                   ):
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4528,7 +4558,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1311 \]
+l.1357 \]
          
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -4537,7 +4567,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1311 \]
+l.1357 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -4548,13 +4578,13 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.1311 \]
+l.1357 \]
          
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
 
-[24]
-Overfull \hbox (9.95006pt too wide) in paragraph at lines 1338--1339
+[25]
+Overfull \hbox (9.95006pt too wide) in paragraph at lines 1384--1385
 []\T1/cmr/m/n/10.95 Produces: fig-ures/cluster_kappa_profiles_panel.png and fig
 -ures/cluster_alpha_profiles_panel.png. 
  []
@@ -4567,16 +4597,16 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1365 ...~60\% Σ‑sensitivity and ~20–30\% θ
+l.1411 ...~60\% Σ‑sensitivity and ~20–30\% θ
                                                   \_E lever arm.
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-LaTeX Warning: Command \textbullet invalid in math mode on input line 1368.
+LaTeX Warning: Command \textbullet invalid in math mode on input line 1414.
 
 
-LaTeX Warning: Command \textbullet invalid in math mode on input line 1368.
+LaTeX Warning: Command \textbullet invalid in math mode on input line 1414.
 
 
 ! LaTeX Error: Unicode character θ (U+03B8)
@@ -4586,7 +4616,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1368 • Switched to differentiable θ
+l.1414 • Switched to differentiable θ
                                         _E surrogate + PyMC NUTS; ΔWAIC ≈...
 
 You may provide a definition with
@@ -4600,7 +4630,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1368 ...rentiable θ_E surrogate + PyMC NUTS; Δ
+l.1414 ...rentiable θ_E surrogate + PyMC NUTS; Δ
                                                   WAIC ≈ 0 ± 2.5 for γ�...
 
 You may provide a definition with
@@ -4609,7 +4639,7 @@ You may provide a definition with
 ! Display math should end with $$.
 <to be read again> 
                    \approx 
-l.1368 ...e θ_E surrogate + PyMC NUTS; ΔWAIC ≈
+l.1414 ...e θ_E surrogate + PyMC NUTS; ΔWAIC ≈
                                                    0 ± 2.5 for γ‑free vs...
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -4618,7 +4648,7 @@ Missing character: There is no � in font cmr10!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1368 ...e θ_E surrogate + PyMC NUTS; ΔWAIC ≈
+l.1414 ...e θ_E surrogate + PyMC NUTS; ΔWAIC ≈
                                                    0 ± 2.5 for γ‑free vs...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4631,7 +4661,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1368 ... + PyMC NUTS; ΔWAIC ≈ 0 ± 2.5 for γ
+l.1414 ... + PyMC NUTS; ΔWAIC ≈ 0 ± 2.5 for γ
                                                   ‑free vs γ=0.
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4644,7 +4674,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1368 ... ΔWAIC ≈ 0 ± 2.5 for γ‑free vs γ
+l.1414 ... ΔWAIC ≈ 0 ± 2.5 for γ‑free vs γ
                                                   =0.
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4656,7 +4686,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1369 \]
+l.1415 \]
          
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -4665,7 +4695,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1369 \]
+l.1415 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -4676,21 +4706,21 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.1369 \]
+l.1415 \]
          
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
 
 
-LaTeX Warning: Command \textbullet invalid in math mode on input line 1372.
+LaTeX Warning: Command \textbullet invalid in math mode on input line 1418.
 
 
-LaTeX Warning: Command \textbullet invalid in math mode on input line 1372.
+LaTeX Warning: Command \textbullet invalid in math mode on input line 1418.
 
 ! Display math should end with $$.
 <to be read again> 
                    \Sigma 
-l.1372 ... N=10 training set with per‑cluster Σ
+l.1418 ... N=10 training set with per‑cluster Σ
                                                   (R) and P(z_s) mixtures; b...
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -4699,7 +4729,7 @@ Missing character: There is no � in font cmr10!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1372 ... N=10 training set with per‑cluster Σ
+l.1418 ... N=10 training set with per‑cluster Σ
                                                   (R) and P(z_s) mixtures; b...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4707,7 +4737,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1372 ...ng set with per‑cluster Σ(R) and P(z_
+l.1418 ...ng set with per‑cluster Σ(R) and P(z_
                                                   s) mixtures; blind hold‑...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4715,7 +4745,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1373 \]
+l.1419 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -4731,7 +4761,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1382 ...te (clusters): expand to N≈18; test γ
+l.1428 ...te (clusters): expand to N≈18; test γ
                                                    via ΔBIC; stack γ\_t(R).
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4744,7 +4774,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1382 ...sters): expand to N≈18; test γ via Δ
+l.1428 ...sters): expand to N≈18; test γ via Δ
                                                   BIC; stack γ\_t(R).
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4757,7 +4787,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1382 ...d to N≈18; test γ via ΔBIC; stack γ
+l.1428 ...d to N≈18; test γ via ΔBIC; stack γ
                                                   \_t(R).
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4770,7 +4800,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1391 ...kground with effective matter density Ω
+l.1437 ...kground with effective matter density Ω
                                                   \_eff ≈ 0.252 and μ = 1...
 
 You may provide a definition with
@@ -4784,7 +4814,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1391 ... matter density Ω\_eff ≈ 0.252 and μ
+l.1437 ... matter density Ω\_eff ≈ 0.252 and μ
                                                    = 1 on linear scales; thi...
 
 You may provide a definition with
@@ -4798,13 +4828,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1391 ...ear scales; this framework reproduces Λ
+l.1437 ...ear scales; this framework reproduces Λ
                                                   CDM distances and linear g...
 
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-[25]
+[26]
 
 ! LaTeX Error: Unicode character μ (U+03BC)
                not set up for use with LaTeX.
@@ -4813,7 +4843,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1400 \item Clusters — Population: μ
+l.1446 \item Clusters — Population: μ
                                         \_A≈4.6, σ\_A≈1.5; γ consisten...
 
 You may provide a definition with
@@ -4827,7 +4857,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1400 ...Clusters — Population: μ\_A≈4.6, σ
+l.1446 ...Clusters — Population: μ\_A≈4.6, σ
                                                   \_A≈1.5; γ consistent w...
 
 You may provide a definition with
@@ -4841,7 +4871,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1400 ...Population: μ\_A≈4.6, σ\_A≈1.5; γ
+l.1446 ...Population: μ\_A≈4.6, σ\_A≈1.5; γ
                                                    consistent with 0.
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -4854,7 +4884,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1418 \item Clusters — ⟨κ
+l.1464 \item Clusters — ⟨κ
                                ⟩(<R) panels: figures/cluster\_kappa\_panel...
 
 You may provide a definition with
@@ -4868,7 +4898,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1429 ...integrates cluster lensing to achieve μ
+l.1475 ...integrates cluster lensing to achieve μ
                                                   \_A ≈ 4.6 and blind hold...
 
 You may provide a definition with
@@ -4882,7 +4912,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1429 ...vel. The open question is whether ℓ₀
+l.1475 ...vel. The open question is whether ℓ₀
                                                    scales with halo size; pr...
 
 You may provide a definition with
@@ -4896,14 +4926,14 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1429 ... halo size; present constraints favor γ
+l.1475 ... halo size; present constraints favor γ
                                                   ≈0. The next steps are l...
 
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-[26]
-Overfull \hbox (39.14735pt too wide) in paragraph at lines 1465--1466
+[27]
+Overfull \hbox (39.14735pt too wide) in paragraph at lines 1511--1512
 []\T1/cmr/m/n/10.95 Example (cir-cu-lar flow): for $\OT1/cmr/bx/n/10.95 v \OT1/
 cmr/m/n/10.95 = \OML/cmm/m/it/10.95 v[] []$ \T1/cmr/m/n/10.95 in an ax-isym-met
 -ric disk, only the di-ver-gence of the Reynolds[]stress[]like
@@ -4912,7 +4942,7 @@ cmr/m/n/10.95 = \OML/cmm/m/it/10.95 v[] []$ \T1/cmr/m/n/10.95 in an ax-isym-met
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1474 
+l.1520 
        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4920,7 +4950,7 @@ you left one out. Proceed, with fingers crossed.
 ! Display math should end with $$.
 <to be read again> 
                    \tex_par:D 
-l.1474 
+l.1520 
        
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -4932,7 +4962,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1479 \]
+l.1525 \]
          
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -4941,7 +4971,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1479 \]
+l.1525 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -4952,7 +4982,7 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.1479 \]
+l.1525 \]
          
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -4960,7 +4990,7 @@ So I shall assume that you typed `$$' both times.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1484 
+l.1530 
        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -4968,7 +4998,7 @@ you left one out. Proceed, with fingers crossed.
 ! Display math should end with $$.
 <to be read again> 
                    \tex_par:D 
-l.1484 
+l.1530 
        
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -4980,7 +5010,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1489 \]
+l.1535 \]
          
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -4989,7 +5019,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1489 \]
+l.1535 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -5000,20 +5030,20 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.1489 \]
+l.1535 \]
          
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
 
 ! You can't use `macro parameter character #' in display math mode.
-l.1514 m = 4.0*R*Rp/((R+Rp)**2)  #
+l.1560 m = 4.0*R*Rp/((R+Rp)**2)  #
                                    dimensionless parameter m \in [0,1]
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
 If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
-[27]
+[28]
 
 ! LaTeX Error: Unicode character λ (U+03BB)
                not set up for use with LaTeX.
@@ -5022,7 +5052,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1561 ...epresent this heterogeneity, we model λ
+l.1607 ...epresent this heterogeneity, we model λ
                                                    as drawn from a Gamma dis...
 
 You may provide a definition with
@@ -5036,7 +5066,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1561 ...stribution with shape n\_coh and rate β
+l.1607 ...stribution with shape n\_coh and rate β
                                                   :
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5049,7 +5079,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1569 ...l probability is the expectation over λ
+l.1615 ...l probability is the expectation over λ
                                                   :
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5062,7 +5092,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1585 Absorbing the rate parameter β
+l.1631 Absorbing the rate parameter β
                                        into the definition of ℓ₀ (ℓ₀...
 
 You may provide a definition with
@@ -5076,7 +5106,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1585 ...rameter β into the definition of ℓ₀
+l.1631 ...rameter β into the definition of ℓ₀
                                                    (ℓ₀′ ≡ ℓ₀ β^...
 
 You may provide a definition with
@@ -5090,7 +5120,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1585 ...β into the definition of ℓ₀ (ℓ₀
+l.1631 ...β into the definition of ℓ₀ (ℓ₀
                                                   ′ ≡ ℓ₀ β^(1/p)), ...
 
 You may provide a definition with
@@ -5104,7 +5134,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1585 ...finition of ℓ₀ (ℓ₀′ ≡ ℓ₀
+l.1631 ...finition of ℓ₀ (ℓ₀′ ≡ ℓ₀
                                                    β^(1/p)), the coherence ...
 
 You may provide a definition with
@@ -5118,7 +5148,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1585 ...ition of ℓ₀ (ℓ₀′ ≡ ℓ₀ β
+l.1631 ...ition of ℓ₀ (ℓ₀′ ≡ ℓ₀ β
                                                   ^(1/p)), the coherence win...
 
 You may provide a definition with
@@ -5127,7 +5157,7 @@ You may provide a definition with
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1585 ...tion of ℓ₀ (ℓ₀′ ≡ ℓ₀ β^
+l.1631 ...tion of ℓ₀ (ℓ₀′ ≡ ℓ₀ β^
                                                   (1/p)), the coherence wind...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5135,7 +5165,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1586 
+l.1632 
        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5148,7 +5178,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1599 \item \textbf{ℓ₀}
+l.1645 \item \textbf{ℓ₀}
                             : characteristic coherence scale set by local de...
 
 You may provide a definition with
@@ -5162,7 +5192,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1599 ...le set by local decoherence timescale τ
+l.1645 ...le set by local decoherence timescale τ
                                                   \_collapse
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5175,7 +5205,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1601 ...\_coh implies narrower variability in λ
+l.1647 ...\_coh implies narrower variability in λ
                                                    (more homogeneous environ...
 
 You may provide a definition with
@@ -5189,23 +5219,23 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1608 ...d the physical interpretation of {ℓ₀
+l.1654 ...d the physical interpretation of {ℓ₀
                                                   , p, n\_coh} in terms of p...
 
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-[28]
+[29]
 ! Display math should end with $$.
 <to be read again> 
                    \pm 
-l.1635 ... RAR = 0.087 dex; 5‑fold RAR = 0.083±
+l.1681 ... RAR = 0.087 dex; 5‑fold RAR = 0.083±
                                                   0.003; cluster hold‑outs...
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
 
 
-Overfull \hbox (391.37823pt too wide) detected at line 1635
+Overfull \hbox (391.37823pt too wide) detected at line 1681
 \OML/cmm/m/it/10.95 Provenance \OT1/cmr/m/n/10.95 : \OML/cmm/m/it/10.95 eachrun
 writesamanifest\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 catalogMD\OT1/cmr/m/n/10
 .95 5\OML/cmm/m/it/10.95 ; overridesJSON; kernelmode; P\OT1/cmr/m/n/10.95 (\OML
@@ -5220,7 +5250,7 @@ m/n/10.95 : \OML/cmm/m/it/10.95 RAR \OT1/cmr/m/n/10.95 = 0\OML/cmm/m/it/10.95 :
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1635 ... RAR = 0.087 dex; 5‑fold RAR = 0.083±
+l.1681 ... RAR = 0.087 dex; 5‑fold RAR = 0.083±
                                                   0.003; cluster hold‑outs...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5232,7 +5262,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1636 \]
+l.1682 \]
          
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -5241,7 +5271,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1636 \]
+l.1682 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -5252,7 +5282,7 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.1636 \]
+l.1682 \]
          
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -5265,7 +5295,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1672 K(B,A) = ∫
+l.1718 K(B,A) = ∫
                     D[path] exp(iS[path]/ℏ)     (1)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5278,7 +5308,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1672 K(B,A) = ∫ D[path] exp(iS[path]/ℏ
+l.1718 K(B,A) = ∫ D[path] exp(iS[path]/ℏ
                                             )     (1)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5291,7 +5321,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1687 ...rations on a characteristic timescale τ
+l.1733 ...rations on a characteristic timescale τ
                                                   \_collapse(R) that depends...
 
 You may provide a definition with
@@ -5305,12 +5335,12 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1687 ...he spatial scale R and matter density ρ
+l.1733 ...he spatial scale R and matter density ρ
                                                   .
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-[29]
+[30]
 
 ! LaTeX Error: Unicode character Γ (U+0393)
                not set up for use with LaTeX.
@@ -5319,7 +5349,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1698 Γ
+l.1744 Γ
          \_decoherence(R) ~ (interaction rate) × (geometric variation)     (2)
 
 You may provide a definition with
@@ -5333,7 +5363,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1703 For a region of size R with density ρ
+l.1749 For a region of size R with density ρ
                                              :
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5346,7 +5376,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1706 \item Interaction rate ~ ρ
+l.1752 \item Interaction rate ~ ρ
                                    (more mass → more interactions)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5359,7 +5389,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1715 τ
+l.1761 τ
          \_collapse(R) ~ 1/(ρ G R² α)     (3)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5372,7 +5402,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1715 τ\_collapse(R) ~ 1/(ρ
+l.1761 τ\_collapse(R) ~ 1/(ρ
                                G R² α)     (3)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5385,7 +5415,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1715 τ\_collapse(R) ~ 1/(ρ G R² α
+l.1761 τ\_collapse(R) ~ 1/(ρ G R² α
                                        )     (3)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5398,7 +5428,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1720 where α
+l.1766 where α
                 is a dimensionless constant of order unity characterizing th...
 
 You may provide a definition with
@@ -5407,7 +5437,7 @@ You may provide a definition with
 ! Display math should end with $$.
 <to be read again> 
                    \ell 
-l.1728 ℓ
+l.1774 ℓ
           _0 = √(c/(ρ G α))     (4)
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -5415,7 +5445,7 @@ So I shall assume that you typed `$$' both times.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1728 ℓ
+l.1774 ℓ
           _0 = √(c/(ρ G α))     (4)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5423,7 +5453,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1728 ℓ_
+l.1774 ℓ_
            0 = √(c/(ρ G α))     (4)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5436,7 +5466,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1728 ℓ_0 = √
+l.1774 ℓ_0 = √
                   (c/(ρ G α))     (4)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5449,7 +5479,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1728 ℓ_0 = √(c/(ρ
+l.1774 ℓ_0 = √(c/(ρ
                          G α))     (4)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5462,7 +5492,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1728 ℓ_0 = √(c/(ρ G α
+l.1774 ℓ_0 = √(c/(ρ G α
                              ))     (4)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5470,7 +5500,7 @@ You may provide a definition with
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1729 \]
+l.1775 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -5486,7 +5516,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1734 For typical galaxy halo densities ρ
+l.1780 For typical galaxy halo densities ρ
                                             ~ 10⁻²¹ kg/m³:
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5499,7 +5529,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1734 ...typical galaxy halo densities ρ ~ 10⁻
+l.1780 ...typical galaxy halo densities ρ ~ 10⁻
                                                   ²¹ kg/m³:
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5512,7 +5542,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1738 ℓ\_0 ~ √
+l.1784 ℓ\_0 ~ √
                    (3×10⁸ / (10⁻²¹ × 6.67×10⁻¹¹ × 1)) ~ 7×10�...
 
 You may provide a definition with
@@ -5526,7 +5556,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1738 ℓ\_0 ~ √(3×10⁸
+l.1784 ℓ\_0 ~ √(3×10⁸
                              / (10⁻²¹ × 6.67×10⁻¹¹ × 1)) ~ 7×10�...
 
 You may provide a definition with
@@ -5540,7 +5570,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1738 ℓ\_0 ~ √(3×10⁸ / (10⁻
+l.1784 ℓ\_0 ~ √(3×10⁸ / (10⁻
                                      ²¹ × 6.67×10⁻¹¹ × 1)) ~ 7×10�...
 
 You may provide a definition with
@@ -5554,7 +5584,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1738 ...√(3×10⁸ / (10⁻²¹ × 6.67×10⁻
+l.1784 ...√(3×10⁸ / (10⁻²¹ × 6.67×10⁻
                                                   ¹¹ × 1)) ~ 7×10¹⁹ m...
 
 You may provide a definition with
@@ -5568,7 +5598,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1738 ...� × 6.67×10⁻¹¹ × 1)) ~ 7×10¹⁹
+l.1784 ...� × 6.67×10⁻¹¹ × 1)) ~ 7×10¹⁹
                                                    m ~ 2 kpc     (5)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5581,21 +5611,21 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1780 S[path] = S_classical + (1/2)δ
+l.1826 S[path] = S_classical + (1/2)δ
                                       ²S[deviation] + ...     (9)
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1780
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1826
 .
 
 
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1780
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1826
 .
 
 Missing character: There is no � in font cmr10!
-[30]
+[31]
 
 ! LaTeX Error: Unicode character ∫ (U+222B)
                not set up for use with LaTeX.
@@ -5604,7 +5634,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1790 ∫
+l.1836 ∫
            D[path] exp(iS/ℏ) ≈ A\_0 exp(iS\_classical/ℏ) [1 + quantum ...
 
 You may provide a definition with
@@ -5618,7 +5648,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1790 ∫ D[path] exp(iS/ℏ
+l.1836 ∫ D[path] exp(iS/ℏ
                              ) ≈ A\_0 exp(iS\_classical/ℏ) [1 + quantum ...
 
 You may provide a definition with
@@ -5632,7 +5662,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1790 ...p(iS/ℏ) ≈ A\_0 exp(iS\_classical/ℏ
+l.1836 ...p(iS/ℏ) ≈ A\_0 exp(iS\_classical/ℏ
                                                   ) [1 + quantum corrections...
 
 You may provide a definition with
@@ -5646,7 +5676,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1803 P_coherent(R) = exp(-∫
+l.1849 P_coherent(R) = exp(-∫
                                 dt/τ_collapse(r(t)))     (11)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5659,7 +5689,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1803 P_coherent(R) = exp(-∫ dt/τ
+l.1849 P_coherent(R) = exp(-∫ dt/τ
                                      _collapse(r(t)))     (11)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5672,7 +5702,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1809 For characteristic scale R in density ρ
+l.1855 For characteristic scale R in density ρ
                                                :
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5680,7 +5710,7 @@ You may provide a definition with
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1813 P\_coherent(R) ≈ exp(-(R/ℓ\_0)^
+l.1859 P\_coherent(R) ≈ exp(-(R/ℓ\_0)^
                                           p)     (12)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5688,7 +5718,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1814 
+l.1860 
        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5696,7 +5726,7 @@ you left one out. Proceed, with fingers crossed.
 ! Display math should end with $$.
 <to be read again> 
                    \ell 
-l.1823 C(R) = 1 - [1 + (R/ℓ
+l.1869 C(R) = 1 - [1 + (R/ℓ
                              _0)^p]^(-n_coh)     (13)
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -5704,7 +5734,7 @@ So I shall assume that you typed `$$' both times.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1823 C(R) = 1 - [1 + (R/ℓ
+l.1869 C(R) = 1 - [1 + (R/ℓ
                              _0)^p]^(-n_coh)     (13)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5712,7 +5742,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1823 C(R) = 1 - [1 + (R/ℓ_
+l.1869 C(R) = 1 - [1 + (R/ℓ_
                               0)^p]^(-n_coh)     (13)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5720,7 +5750,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1824 \]
+l.1870 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -5736,7 +5766,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1857 Φ
+l.1903 Φ
          _eff = Φ_classical [1 + K(R)],
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5749,7 +5779,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1857 Φ_eff = Φ
+l.1903 Φ_eff = Φ
                   _classical [1 + K(R)],
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5762,7 +5792,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1878 ∇
+l.1924 ∇
            × g_eff = (∇ × g_bar)(1+K) + ∇K × g_bar = 0     (21–22)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5770,7 +5800,7 @@ You may provide a definition with
 ! Display math should end with $$.
 <to be read again> 
                    \times 
-l.1878 ∇ ×
+l.1924 ∇ ×
               g_eff = (∇ × g_bar)(1+K) + ∇K × g_bar = 0     (21–22)
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -5778,7 +5808,7 @@ So I shall assume that you typed `$$' both times.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1878 ∇ ×
+l.1924 ∇ ×
               g_eff = (∇ × g_bar)(1+K) + ∇K × g_bar = 0     (21–22)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5786,7 +5816,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1878 ∇ × g_
+l.1924 ∇ × g_
                 eff = (∇ × g_bar)(1+K) + ∇K × g_bar = 0     (21–22)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5799,7 +5829,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1878 ∇ × g_eff = (∇
+l.1924 ∇ × g_eff = (∇
                            × g_bar)(1+K) + ∇K × g_bar = 0     (21–22)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5807,7 +5837,7 @@ You may provide a definition with
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1878 ∇ × g_eff = (∇ ×
+l.1924 ∇ × g_eff = (∇ ×
                               g_bar)(1+K) + ∇K × g_bar = 0     (21–22)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5815,7 +5845,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1878 ∇ × g_eff = (∇ × g_
+l.1924 ∇ × g_eff = (∇ × g_
                                 bar)(1+K) + ∇K × g_bar = 0     (21–22)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5828,7 +5858,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1878 ∇ × g_eff = (∇ × g_bar)(1+K) + ∇
+l.1924 ∇ × g_eff = (∇ × g_bar)(1+K) + ∇
                                                K × g_bar = 0     (21–22)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5836,7 +5866,7 @@ You may provide a definition with
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1878 ...× g_eff = (∇ × g_bar)(1+K) + ∇K ×
+l.1924 ...× g_eff = (∇ × g_bar)(1+K) + ∇K ×
                                                    g_bar = 0     (21–22)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5844,7 +5874,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1878 ...g_eff = (∇ × g_bar)(1+K) + ∇K × g_
+l.1924 ...g_eff = (∇ × g_bar)(1+K) + ∇K × g_
                                                   bar = 0     (21–22)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -5852,7 +5882,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.1879 \]
+l.1925 \]
          
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -5860,7 +5890,7 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-[31]
+[32]
 
 ! LaTeX Error: Unicode character θ (U+03B8)
                not set up for use with LaTeX.
@@ -5869,7 +5899,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1916 \item Clusters: θ
+l.1962 \item Clusters: θ
                          \_E accuracy ≈15\% with A\_cluster≈4.6; triaxia...
 
 You may provide a definition with
@@ -5883,7 +5913,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1917 ...m Solar System: K(0.1–1000 AU) < 10⁻
+l.1963 ...m Solar System: K(0.1–1000 AU) < 10⁻
                                                   ⁶.
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5896,7 +5926,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1917 ...olar System: K(0.1–1000 AU) < 10⁻⁶
+l.1963 ...olar System: K(0.1–1000 AU) < 10⁻⁶
                                                   .
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -5909,7 +5939,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1930 We treat ℓ₀
+l.1976 We treat ℓ₀
                        as a coherence length defined by a collapse time: ℓ...
 
 You may provide a definition with
@@ -5923,7 +5953,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1930 ...ength defined by a collapse time: ℓ₀
+l.1976 ...ength defined by a collapse time: ℓ₀
                                                    ≡ c\,τ\_{\rm collapse}...
 
 You may provide a definition with
@@ -5937,7 +5967,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1930 ...ned by a collapse time: ℓ₀ ≡ c\,τ
+l.1976 ...ned by a collapse time: ℓ₀ ≡ c\,τ
                                                   \_{\rm collapse}. Adopting...
 
 You may provide a definition with
@@ -5951,7 +5981,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1936 where α
+l.1982 where α
                 is a dimensionless factor of order unity. For $\rho\sim 10^{...
 
 You may provide a definition with
@@ -5965,55 +5995,108 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1936 ...caling ansatz (not a derivation); ℓ₀
+l.1982 ...caling ansatz (not a derivation); ℓ₀
                                                    is calibrated empirically...
 
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-[32]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-968.
+[33]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 2
+014.
  (C:\Program Files\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-Overfull \hbox (200.28287pt too wide) in paragraph at lines 1968--1969
+Overfull \hbox (200.28287pt too wide) in paragraph at lines 2014--2015
 []\T1/cmr/m/n/10.95 Table F1 --- Galaxy pa-ram-e-ter sen-si-tiv-ity (ab-la-tion
  & sweeps): \T1/cmtt/m/n/10.95 many_path_model/paper_release/tables/galaxy_para
 m_sensitivity.md 
  []
 
 
-Overfull \hbox (176.15123pt too wide) in paragraph at lines 1969--1970
+Overfull \hbox (176.15123pt too wide) in paragraph at lines 2015--2016
 []\T1/cmr/m/n/10.95 Table F2 --- Clus-ter pa-ram-e-ter sen-si-tiv-ity (MACS0416
 ): \T1/cmtt/m/n/10.95 many_path_model/paper_release/tables/cluster_param_sensit
 ivity.md 
  []
 
 
-Overfull \hbox (194.13087pt too wide) in paragraph at lines 1970--1971
+Overfull \hbox (194.13087pt too wide) in paragraph at lines 2016--2017
 []\T1/cmr/m/n/10.95 Table F3 --- Clus-ter sen-si-tiv-ity across N$\OMS/cmsy/m/n
 /10.95 ^^Y$\T1/cmr/m/n/10.95 10 (Tier 1/2): \T1/cmtt/m/n/10.95 many_path_model/
 paper_release/tables/cluster_param_sensitivity_n10.md 
  []
 
-[33] (sigmagravity_paper.aux)
+! You can't use `macro parameter character #' in display math mode.
+l.2062 #
+         Run validation suite (includes 80/20 split, seed=42)
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2089 ...config/hyperparams\_track2.json} (ℓ₀
+                                                  =4.993 kpc, A₀=0.591, p=...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ₀ (U+2080)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2089 ...ms\_track2.json} (ℓ₀=4.993 kpc, A₀
+                                                  =0.591, p=0.757, n\_coh=0.5)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[34]
+! You can't use `macro parameter character #' in display math mode.
+l.2149 #
+         Hierarchical calibration (N=10 training)
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+[35]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.2263 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+[36] (sigmagravity_paper.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `sigmagravity_paper.out' has not changed.
-(rerunfilecheck)             Checksum: 0430160791514C7A8F065A1C321E5205;21295.
+(rerunfilecheck)             Checksum: 50FAD8689F4B6A45C14220652715064E;25237.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 493 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 11475 strings out of 474486
- 174753 string characters out of 5753569
+ 11510 strings out of 474486
+ 175300 string characters out of 5753569
  1942542 words of memory out of 5000000
- 33395 multiletter control sequences out of 15000+600000
+ 33410 multiletter control sequences out of 15000+600000
  581507 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,9n,79p,1295b,590s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -6046,9 +6129,9 @@ sfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8
 gram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/Mi
 KTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX/fo
 nts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on sigmagravity_paper.pdf (33 pages, 2300017 bytes).
+Output written on sigmagravity_paper.pdf (36 pages, 2328890 bytes).
 PDF statistics:
- 1347 PDF objects out of 1440 (max. 8388607)
- 202 named destinations out of 1000 (max. 500000)
- 748 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1451 PDF objects out of 1728 (max. 8388607)
+ 222 named destinations out of 1000 (max. 500000)
+ 868 words of extra memory for PDF output out of 10000 (max. 10000000)
 

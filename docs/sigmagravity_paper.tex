@@ -1147,6 +1147,52 @@ The following ideas are exploratory and not used in §§3–5. Cosmological reds
 Derive a first‑principles decoherence law $\mathcal{K}(t)$ to fix the redshift–distance relation a priori; extend linear perturbations and weak‑lensing kernels $K(k)$; confront Planck lensing and shear two‑point data.
 
 
+\subsection{Redshift and Expansion: Compatibility Statement}
+
+
+\textbf{Scope.} The galaxy‑ and cluster‑scale results in §§3–5 are independent of any cosmological hypothesis; they use only the local, curl‑free Σ‑kernel $K(R)$ that multiplies the Newtonian/GR response. Here we record a minimal statement about how Σ‑Gravity can be embedded in an expanding background without invoking particle dark matter.
+
+
+\subsubsection{Expanding background without particle dark matter}
+
+
+If one adopts an FRW spacetime, the background expansion can be written
+
+
+\begin{equation}
+E(a)^2 = \frac{H(a)^2}{H_0^2} = \Omega_{r0}\,a^{-4} + (\Omega_{b0} + \Omega_{\rm eff,0})\,a^{-3} + \Omega_{\Lambda 0},
+\end{equation}
+
+
+where $\Omega_{\rm eff}$ is an effective, pressureless (dust‑like) component arising from the coarse‑grained Σ‑geometry rather than from particle dark matter. On linear scales ($k \lesssim 0.2\,h\,{\rm Mpc}^{-1}$) we set the linear metric‑response modifier to unity, $\mu(k,a) \approx 1$. With this choice the background distances $\{D_A, D_L\}$ and linear growth $\{D(a), f(a)\}$ are observationally degenerate with those of ΛCDM for the same $\{\Omega_{b0} + \Omega_{\rm eff,0},\, \Omega_{\Lambda 0},\, H_0\}$. Thus, no particle dark matter is required to describe the expansion history or linear structure growth in this embedding; Σ supplies the dust‑like background through $\Omega_{\rm eff}$, and the redshift–distance relation remains the standard $1+z = a_0/a_{\rm em}$.
+
+
+\subsubsection{Redshift in this embedding}
+
+
+In the expanding case the cosmological redshift is purely metric: $1+z = a_0/a_{\rm em}$. Σ does not alter this mechanism on linear scales because $\mu \approx 1$ there. Inside bound systems, Σ affects only gravitational redshift at the endpoint level through the effective potential $\Psi_{\rm eff}$: for an emitter at $x_{\rm em}$ and observer at $x_{\rm obs}$,
+
+
+\begin{equation}
+z_{\rm gRZ} \simeq \frac{\Psi_{\rm eff}(x_{\rm obs}) - \Psi_{\rm eff}(x_{\rm em})}{c^2}, \quad \Psi_{\rm eff}(x) \equiv -\!\int g_{\rm eff}\cdot d\ell,
+\end{equation}
+
+
+with $g_{\rm eff} = g_{\rm bar}\,[1 + K(R)]$. This is the same endpoint formula already used for cluster gravitational redshift predictions; the cosmological piece is unchanged by Σ in this regime.
+
+
+\subsubsection{Relationship to the halo‑scale results}
+
+
+This FRW embedding leaves the local, curl‑free kernel $K(R)$ and all halo‑scale predictions intact. Galaxies and clusters are governed by the same multiplicative kernel as analyzed in §§2–5; adopting an expanding background simply fixes the large‑scale geometry against which lensing distances are computed. No re‑tuning of the galaxy $(A_0, \ell_0, p, n_{\rm coh})$ or cluster $(A_c, \ell_0, p, n_{\rm coh})$ hyper‑parameters is implied by this compatibility statement.
+
+
+\subsubsection{What we are not claiming here}
+
+
+We do not propose a microphysical derivation of $\Omega_{\rm eff}$ in this paper, nor do we assert any change to the standard interpretation of cosmological redshift when expansion is assumed. The statement above is strictly a consistency embedding: Σ‑Gravity works with expansion and does not require particle dark matter to do so. A separate study will treat cosmological tests (BAO, SNe, growth‑rate, CMB lensing) within this embedding and examine alternatives in which redshift could arise without global expansion.
+
+
 \medskip\hrule\medskip
 
 
@@ -1972,6 +2018,279 @@ Tables (Appendix F):
 
 
 For full derivations and proofs, see the PRD manuscript draft archived with this paper.
+
+
+\medskip\hrule\medskip
+
+
+\section{Appendix G — Complete Reproduction Guide}
+
+
+\subsection{Purpose}
+
+
+This appendix provides step-by-step instructions to exactly reproduce every quantitative result in this paper. All scripts, data, and configurations are included in the repository.
+
+
+\subsection{Prerequisites}
+
+
+\textbf{Required:} Python ≥ 3.10, NumPy, SciPy, Matplotlib, pandas, PyMC ≥ 5  
+
+\textbf{Optional:} CuPy (GPU acceleration)
+
+
+```bash
+
+pip install numpy scipy matplotlib pandas pymc arviz
+
+```
+
+
+\medskip\hrule\medskip
+
+
+\subsection{G.1. SPARC Galaxy RAR — 0.087 dex Hold-Out Scatter}
+
+
+\textbf{Commands:}
+
+
+```bash
+
+\[
+# Run validation suite (includes 80/20 split, seed=42)
+\]
+
+python many\_path\_model/validation\_suite.py --rar-holdout
+
+
+\# Or full validation:
+
+python many\_path\_model/validation\_suite.py --all
+
+
+\# 5-fold cross-validation (0.083 ± 0.003 dex)
+
+python many\_path\_model/run\_5fold\_cv.py
+
+```
+
+
+\textbf{Expected outputs:}
+
+\begin{itemize}
+\item Console: "Hold-out RAR scatter: 0.087 dex"
+\item Files: \texttt{many\_path\_model/results/validation\_suite/VALIDATION\_REPORT.md}
+\item 5-fold: \texttt{many\_path\_model/results/5fold\_cv\_results.json}
+\end{itemize}
+
+
+\textbf{Hyperparameters used:} \texttt{config/hyperparams\_track2.json} (ℓ₀=4.993 kpc, A₀=0.591, p=0.757, n\_coh=0.5)
+
+
+\medskip\hrule\medskip
+
+
+\subsection{G.2. Milky Way Star-Level RAR — Zero-Shot (+0.062 dex bias, 0.142 dex scatter)}
+
+
+\textbf{Commands:}
+
+
+```bash
+
+\# Step 1: Predict star speeds (GPU recommended, ~3 min; CPU: ~30 min)
+
+python scripts/predict\_gaia\_star\_speeds.py \
+
+  --npz data/gaia/mw\_gaia\_full\_coverage.npz \
+
+  --fit data/gaia/outputs/mw\_pipeline\_run\_vendor/fit\_params.json \
+
+  --out data/gaia/outputs/mw\_gaia\_full\_coverage\_predicted.csv \
+
+  --device 0
+
+
+\# Step 2: Compute metrics
+
+python scripts/analyze\_mw\_rar\_starlevel.py \
+
+  --pred\_csv data/gaia/outputs/mw\_gaia\_full\_coverage\_predicted.csv \
+
+  --out\_prefix data/gaia/outputs/mw\_rar\_starlevel\_full \
+
+  --hexbin
+
+```
+
+
+\textbf{Expected output:}
+
+\begin{itemize}
+\item File: \texttt{data/gaia/outputs/mw\_rar\_starlevel\_full\_metrics.txt}
+\item Contains: "Mean bias: +0.062 dex, Scatter: 0.142 dex, n=157343"
+\end{itemize}
+
+
+\medskip\hrule\medskip
+
+
+\subsection{G.3. Cluster Einstein Radii — Blind Hold-Outs (2/2 coverage, 14.9\% error)}
+
+
+\textbf{Commands:}
+
+
+```bash
+
+\[
+# Hierarchical calibration (N=10 training)
+\]
+
+python scripts/run\_tier12\_mcmc\_fast.py
+
+
+\# Blind hold-out validation
+
+python scripts/run\_holdout\_validation.py
+
+```
+
+
+\textbf{Expected outputs:}
+
+\begin{itemize}
+\item Console: "Hold-out coverage: 2/2 inside 68\% PPC"
+\item Console: "Median fractional error: 14.9\%"
+\item Files: \texttt{figures/holdouts\_pred\_vs\_obs.png}, \texttt{output/n10\_nutsgrid/flat\_samples.npz}
+\end{itemize}
+
+
+\medskip\hrule\medskip
+
+
+\subsection{G.4. Generate All Figures}
+
+
+```bash
+
+\# SPARC figures
+
+python scripts/generate\_rar\_plot.py
+
+python scripts/generate\_rc\_gallery.py
+
+
+\# MW figures
+
+python scripts/generate\_all\_model\_summary.py
+
+python scripts/generate\_radial\_residual\_map.py
+
+
+\# Cluster figures
+
+python scripts/generate\_cluster\_kappa\_panels.py
+
+python scripts/run\_holdout\_validation.py
+
+```
+
+
+\textbf{Outputs:} All figures in \texttt{figures/} and \texttt{data/gaia/outputs/}
+
+
+\medskip\hrule\medskip
+
+
+\subsection{G.5. Quick Verification (15 minutes)}
+
+
+\textbf{Minimum commands to verify core claims:}
+
+
+```bash
+
+\# 1. SPARC (most critical): Should print ~0.087 dex
+
+python many\_path\_model/validation\_suite.py --rar-holdout
+
+
+\# 2. MW (if CSV exists): Should show +0.062 dex, 0.142 dex  
+
+python scripts/analyze\_mw\_rar\_starlevel.py \
+
+  --pred\_csv data/gaia/outputs/mw\_gaia\_full\_coverage\_predicted.csv \
+
+  --out\_prefix data/gaia/outputs/test
+
+
+\# 3. Clusters: Should show 2/2 coverage
+
+python scripts/run\_holdout\_validation.py
+
+```
+
+
+\medskip\hrule\medskip
+
+
+\subsection{G.6. Troubleshooting}
+
+
+\textbf{Unicode errors on Windows:}
+
+```powershell
+
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+python many\_path\_model/validation\_suite.py --all
+
+```
+
+
+\textbf{Import errors:}
+
+```bash
+
+\# Ensure in repository root
+
+cd sigmagravity
+
+export PYTHONPATH="${PYTHONPATH}:$(pwd):$(pwd)/many\_path\_model"
+
+```
+
+
+\textbf{Results differ by > 5\%:} Verify \texttt{config/hyperparams\_track2.json} matches paper values and random seed=42 is set.
+
+
+\medskip\hrule\medskip
+
+
+\subsection{G.7. Expected Results Table}
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\toprule
+Metric & Expected Value & Verification Command \\
+\midrule
+SPARC hold-out scatter & 0.087 dex & validation\_suite.py --rar-holdout \\
+SPARC 5-fold CV & 0.083 ± 0.003 dex & run\_5fold\_cv.py \\
+MW bias & +0.062 dex & analyze\_mw\_rar\_starlevel.py output \\
+MW scatter & 0.142 dex & analyze\_mw\_rar\_starlevel.py output \\
+Cluster hold-outs & 2/2 in 68\% & run\_holdout\_validation.py \\
+Cluster error & 14.9\% median & run\_holdout\_validation.py \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\textbf{All scripts use seed=42 for reproducibility.}
 
 
 

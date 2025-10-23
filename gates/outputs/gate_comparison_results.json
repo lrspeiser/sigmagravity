@@ -1,0 +1,14 @@
+{
+  "baseline_scatter": 0.088,
+  "new_gates_initial_scatter": 1.9711187899306368,
+  "new_gates_optimized_scatter": 1.97024620358392,
+  "optimized_gate_params": {
+    "R_min": 0.003021721705878381,
+    "alpha_R": 2.4490397665165786,
+    "beta_R": 0.8907799014567801,
+    "g_crit": 9.421551159695753e-11,
+    "alpha_g": 4.0,
+    "beta_g": 2.0
+  },
+  "improvement_percent": -2138.9161404362726
+}

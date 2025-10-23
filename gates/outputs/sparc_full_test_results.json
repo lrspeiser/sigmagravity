@@ -1,0 +1,868 @@
+{
+  "n_galaxies": 143,
+  "scatter_current_mean": 0.17494401587012282,
+  "scatter_new_mean": 0.1261419139285452,
+  "scatter_improvement_pct": 27.895839534064393,
+  "bias_current": -0.03248616284342939,
+  "bias_new": 0.06722401896656677,
+  "per_galaxy": [
+    {
+      "name": "CamB",
+      "scatter_current": 0.27055437518697045,
+      "scatter_new": 0.1685286347431365,
+      "improvement": 1.6053911289279523
+    },
+    {
+      "name": "D631-7",
+      "scatter_current": 0.30198419912706786,
+      "scatter_new": 0.09138325950562891,
+      "improvement": 3.3045899299364194
+    },
+    {
+      "name": "DDO064",
+      "scatter_current": 0.14408597864089615,
+      "scatter_new": 0.2140756502575423,
+      "improvement": 0.673061034580787
+    },
+    {
+      "name": "DDO154",
+      "scatter_current": 0.3142094206910872,
+      "scatter_new": 0.10778175744463407,
+      "improvement": 2.9152374960344476
+    },
+    {
+      "name": "DDO161",
+      "scatter_current": 0.18857477118780264,
+      "scatter_new": 0.11002819883246256,
+      "improvement": 1.7138767442239162
+    },
+    {
+      "name": "DDO168",
+      "scatter_current": 0.1992132640480039,
+      "scatter_new": 0.057187245883127326,
+      "improvement": 3.4835261074669153
+    },
+    {
+      "name": "DDO170",
+      "scatter_current": 0.3530253303479109,
+      "scatter_new": 0.11624320642292045,
+      "improvement": 3.0369545129675855
+    },
+    {
+      "name": "ESO079-G014",
+      "scatter_current": 0.07843528396945024,
+      "scatter_new": 0.09000768446450262,
+      "improvement": 0.8714287500683753
+    },
+    {
+      "name": "ESO116-G012",
+      "scatter_current": 0.10119006817127216,
+      "scatter_new": 0.04696343498610516,
+      "improvement": 2.1546564513692568
+    },
+    {
+      "name": "ESO563-G021",
+      "scatter_current": 0.22938551766483675,
+      "scatter_new": 0.23172288501427624,
+      "improvement": 0.9899130923158691
+    },
+    {
+      "name": "F563-1",
+      "scatter_current": 0.3622148216023089,
+      "scatter_new": 0.19638749832672647,
+      "improvement": 1.8443883887135135
+    },
+    {
+      "name": "F563-V2",
+      "scatter_current": 0.28213164837167687,
+      "scatter_new": 0.20353668544374,
+      "improvement": 1.386146422481963
+    },
+    {
+      "name": "F568-1",
+      "scatter_current": 0.26459263108527753,
+      "scatter_new": 0.11518793799741812,
+      "improvement": 2.2970515462409633
+    },
+    {
+      "name": "F568-3",
+      "scatter_current": 0.2447455212114567,
+      "scatter_new": 0.0978936898687928,
+      "improvement": 2.500115395992222
+    },
+    {
+      "name": "F568-V1",
+      "scatter_current": 0.27206574043341986,
+      "scatter_new": 0.14848993341775596,
+      "improvement": 1.8322167312716102
+    },
+    {
+      "name": "F571-8",
+      "scatter_current": 0.3547329613159077,
+      "scatter_new": 0.34707770492622264,
+      "improvement": 1.0220563184584626
+    },
+    {
+      "name": "F574-1",
+      "scatter_current": 0.23480736555381346,
+      "scatter_new": 0.11198689995956067,
+      "improvement": 2.0967395797062354
+    },
+    {
+      "name": "F579-V1",
+      "scatter_current": 0.3186309731668092,
+      "scatter_new": 0.2679160270871828,
+      "improvement": 1.1892941853124868
+    },
+    {
+      "name": "F583-1",
+      "scatter_current": 0.3699835980487919,
+      "scatter_new": 0.2174784179946343,
+      "improvement": 1.7012428242784083
+    },
+    {
+      "name": "F583-4",
+      "scatter_current": 0.24192834661847784,
+      "scatter_new": 0.22070181364252622,
+      "improvement": 1.0961774288376829
+    },
+    {
+      "name": "IC2574",
+      "scatter_current": 0.2890448650318996,
+      "scatter_new": 0.07194062527492676,
+      "improvement": 4.017825309792512
+    },
+    {
+      "name": "IC4202",
+      "scatter_current": 0.21957269797893736,
+      "scatter_new": 0.21875174680499124,
+      "improvement": 1.0037528896840215
+    },
+    {
+      "name": "KK98-251",
+      "scatter_current": 0.06451178525914564,
+      "scatter_new": 0.13207973127558614,
+      "improvement": 0.4884306216866911
+    },
+    {
+      "name": "NGC0024",
+      "scatter_current": 0.12430891689790556,
+      "scatter_new": 0.11319297143408746,
+      "improvement": 1.0982034955261417
+    },
+    {
+      "name": "NGC0055",
+      "scatter_current": 0.15794366423188605,
+      "scatter_new": 0.05889055546600498,
+      "improvement": 2.6819863216107755
+    },
+    {
+      "name": "NGC0100",
+      "scatter_current": 0.14629057860952444,
+      "scatter_new": 0.05744607420309047,
+      "improvement": 2.546572253002701
+    },
+    {
+      "name": "NGC0247",
+      "scatter_current": 0.23907523232036937,
+      "scatter_new": 0.13967518904560783,
+      "improvement": 1.7116513960278563
+    },
+    {
+      "name": "NGC0289",
+      "scatter_current": 0.12068681193709356,
+      "scatter_new": 0.11591520622071408,
+      "improvement": 1.0411646225888074
+    },
+    {
+      "name": "NGC0300",
+      "scatter_current": 0.17613821771161198,
+      "scatter_new": 0.061995632048846616,
+      "improvement": 2.8411391559462116
+    },
+    {
+      "name": "NGC0801",
+      "scatter_current": 0.10288672964457489,
+      "scatter_new": 0.09564329199761742,
+      "improvement": 1.0757338805019165
+    },
+    {
+      "name": "NGC0891",
+      "scatter_current": 0.09290528143717697,
+      "scatter_new": 0.099948182172334,
+      "improvement": 0.929534478946166
+    },
+    {
+      "name": "NGC1003",
+      "scatter_current": 0.08642298350226824,
+      "scatter_new": 0.05932589692376805,
+      "improvement": 1.45674971612008
+    },
+    {
+      "name": "NGC1090",
+      "scatter_current": 0.12830623564120025,
+      "scatter_new": 0.11946035313040014,
+      "improvement": 1.0740486887824963
+    },
+    {
+      "name": "NGC1705",
+      "scatter_current": 0.24203924073352345,
+      "scatter_new": 0.07467813699278784,
+      "improvement": 3.2410990750465394
+    },
+    {
+      "name": "NGC2366",
+      "scatter_current": 0.24973039856589888,
+      "scatter_new": 0.09832549435579895,
+      "improvement": 2.539833643370546
+    },
+    {
+      "name": "NGC2403",
+      "scatter_current": 0.052083647988239834,
+      "scatter_new": 0.04736877472208889,
+      "improvement": 1.0995354702293432
+    },
+    {
+      "name": "NGC2683",
+      "scatter_current": 0.08686273130899876,
+      "scatter_new": 0.08470405984998682,
+      "improvement": 1.025484864159227
+    },
+    {
+      "name": "NGC2841",
+      "scatter_current": 0.04706973303005856,
+      "scatter_new": 0.04324919240761523,
+      "improvement": 1.0883378488651412
+    },
+    {
+      "name": "NGC2903",
+      "scatter_current": 0.23920313636330515,
+      "scatter_new": 0.23958323227974856,
+      "improvement": 0.998413512027421
+    },
+    {
+      "name": "NGC2915",
+      "scatter_current": 0.4342590412203878,
+      "scatter_new": 0.28336208649267125,
+      "improvement": 1.532523445869034
+    },
+    {
+      "name": "NGC2955",
+      "scatter_current": 0.06533417917523844,
+      "scatter_new": 0.0637731152617161,
+      "improvement": 1.0244784013940036
+    },
+    {
+      "name": "NGC2976",
+      "scatter_current": 0.12808592327296842,
+      "scatter_new": 0.1183816384592655,
+      "improvement": 1.0819745776456888
+    },
+    {
+      "name": "NGC2998",
+      "scatter_current": 0.2510883046288875,
+      "scatter_new": 0.2463704711983886,
+      "improvement": 1.0191493461353163
+    },
+    {
+      "name": "NGC3109",
+      "scatter_current": 0.2467766127435054,
+      "scatter_new": 0.15838813858754464,
+      "improvement": 1.5580498321666083
+    },
+    {
+      "name": "NGC3198",
+      "scatter_current": 0.17118475999309643,
+      "scatter_new": 0.14369604166444325,
+      "improvement": 1.1912976725750346
+    },
+    {
+      "name": "NGC3521",
+      "scatter_current": 0.04355600080194717,
+      "scatter_new": 0.050046908214666085,
+      "improvement": 0.8703035283442989
+    },
+    {
+      "name": "NGC3726",
+      "scatter_current": 0.031041245308100172,
+      "scatter_new": 0.03759545101756571,
+      "improvement": 0.8256649266847945
+    },
+    {
+      "name": "NGC3741",
+      "scatter_current": 0.38299126248528775,
+      "scatter_new": 0.15931530720684622,
+      "improvement": 2.403982826258076
+    },
+    {
+      "name": "NGC3769",
+      "scatter_current": 0.11200996458311636,
+      "scatter_new": 0.1073484462673054,
+      "improvement": 1.0434241805810904
+    },
+    {
+      "name": "NGC3877",
+      "scatter_current": 0.22683067178713234,
+      "scatter_new": 0.20291558205017238,
+      "improvement": 1.1178573350322933
+    },
+    {
+      "name": "NGC3893",
+      "scatter_current": 0.057487495765753654,
+      "scatter_new": 0.061798163272296064,
+      "improvement": 0.9302460254757301
+    },
+    {
+      "name": "NGC3917",
+      "scatter_current": 0.14673413848494124,
+      "scatter_new": 0.08818049477948038,
+      "improvement": 1.6640203579248491
+    },
+    {
+      "name": "NGC3953",
+      "scatter_current": 0.05142511652554035,
+      "scatter_new": 0.034692001780638734,
+      "improvement": 1.4823335029989593
+    },
+    {
+      "name": "NGC3972",
+      "scatter_current": 0.11820724013294427,
+      "scatter_new": 0.06897889229174894,
+      "improvement": 1.713672635289388
+    },
+    {
+      "name": "NGC3992",
+      "scatter_current": 0.06426591490947547,
+      "scatter_new": 0.06430697848615145,
+      "improvement": 0.9993614444708389
+    },
+    {
+      "name": "NGC4010",
+      "scatter_current": 0.08878698222245408,
+      "scatter_new": 0.10991889699125094,
+      "improvement": 0.8077499379339763
+    },
+    {
+      "name": "NGC4013",
+      "scatter_current": 0.028056098189196018,
+      "scatter_new": 0.026304920085134922,
+      "improvement": 1.0665722647471831
+    },
+    {
+      "name": "NGC4088",
+      "scatter_current": 0.04690410221646441,
+      "scatter_new": 0.043745422049758995,
+      "improvement": 1.0722059593598736
+    },
+    {
+      "name": "NGC4100",
+      "scatter_current": 0.07998391233908729,
+      "scatter_new": 0.058784870403423506,
+      "improvement": 1.3606207139725053
+    },
+    {
+      "name": "NGC4157",
+      "scatter_current": 0.03790781222934898,
+      "scatter_new": 0.042830645667184225,
+      "improvement": 0.8850628244998185
+    },
+    {
+      "name": "NGC4183",
+      "scatter_current": 0.19956965493983914,
+      "scatter_new": 0.13740636664370068,
+      "improvement": 1.4524047161317493
+    },
+    {
+      "name": "NGC4214",
+      "scatter_current": 0.20330125343996192,
+      "scatter_new": 0.08334400636671585,
+      "improvement": 2.4393026241794877
+    },
+    {
+      "name": "NGC4217",
+      "scatter_current": 0.21642138286090493,
+      "scatter_new": 0.220667913767246,
+      "improvement": 0.9807560109947828
+    },
+    {
+      "name": "NGC4559",
+      "scatter_current": 0.059500194349100664,
+      "scatter_new": 0.035233907648699346,
+      "improvement": 1.6887197112040198
+    },
+    {
+      "name": "NGC5005",
+      "scatter_current": 0.033024922314659,
+      "scatter_new": 0.035360293990115595,
+      "improvement": 0.9339549700545643
+    },
+    {
+      "name": "NGC5033",
+      "scatter_current": 0.0799318076677215,
+      "scatter_new": 0.08247452280639891,
+      "improvement": 0.9691696895943709
+    },
+    {
+      "name": "NGC5055",
+      "scatter_current": 0.0499831950055283,
+      "scatter_new": 0.04900840044506592,
+      "improvement": 1.0198903565839705
+    },
+    {
+      "name": "NGC5371",
+      "scatter_current": 0.12074262674083712,
+      "scatter_new": 0.11307312474351655,
+      "improvement": 1.067827806251196
+    },
+    {
+      "name": "NGC5585",
+      "scatter_current": 0.1254067313032305,
+      "scatter_new": 0.0702690845696155,
+      "improvement": 1.7846643665748938
+    },
+    {
+      "name": "NGC5907",
+      "scatter_current": 0.10493702861335934,
+      "scatter_new": 0.0909744325286392,
+      "improvement": 1.1534782432451518
+    },
+    {
+      "name": "NGC5985",
+      "scatter_current": 0.11726750668726717,
+      "scatter_new": 0.10426705494605415,
+      "improvement": 1.124684175149468
+    },
+    {
+      "name": "NGC6015",
+      "scatter_current": 0.10759846021949657,
+      "scatter_new": 0.08678184176687449,
+      "improvement": 1.2398729737557608
+    },
+    {
+      "name": "NGC6195",
+      "scatter_current": 0.05365266851344155,
+      "scatter_new": 0.04526597940241821,
+      "improvement": 1.1852757682864872
+    },
+    {
+      "name": "NGC6503",
+      "scatter_current": 0.0880881434553541,
+      "scatter_new": 0.07437298256220143,
+      "improvement": 1.1844105267888385
+    },
+    {
+      "name": "NGC6674",
+      "scatter_current": 0.10399314453450788,
+      "scatter_new": 0.10204856153211862,
+      "improvement": 1.0190554670560175
+    },
+    {
+      "name": "NGC6946",
+      "scatter_current": 0.03506163138086846,
+      "scatter_new": 0.03175148714280462,
+      "improvement": 1.1042516283781048
+    },
+    {
+      "name": "NGC7331",
+      "scatter_current": 0.056847301776293546,
+      "scatter_new": 0.06268930098216272,
+      "improvement": 0.9068102672331373
+    },
+    {
+      "name": "NGC7793",
+      "scatter_current": 0.1884481268431908,
+      "scatter_new": 0.16271179309509134,
+      "improvement": 1.1581712871485519
+    },
+    {
+      "name": "NGC7814",
+      "scatter_current": 0.07275876174825076,
+      "scatter_new": 0.07796056324448047,
+      "improvement": 0.9332765018652172
+    },
+    {
+      "name": "UGC00128",
+      "scatter_current": 0.21948781253347757,
+      "scatter_new": 0.18374200893508422,
+      "improvement": 1.1945434460282967
+    },
+    {
+      "name": "UGC00191",
+      "scatter_current": 0.21029441150448328,
+      "scatter_new": 0.1656776584369468,
+      "improvement": 1.2692985492942406
+    },
+    {
+      "name": "UGC00731",
+      "scatter_current": 0.5538885498120033,
+      "scatter_new": 0.3579099241490386,
+      "improvement": 1.5475641004616472
+    },
+    {
+      "name": "UGC01230",
+      "scatter_current": 0.3175464787888226,
+      "scatter_new": 0.24318447839218305,
+      "improvement": 1.3057843201518649
+    },
+    {
+      "name": "UGC01281",
+      "scatter_current": 0.39543021410850104,
+      "scatter_new": 0.3004299995071852,
+      "improvement": 1.3162141422532732
+    },
+    {
+      "name": "UGC02259",
+      "scatter_current": 0.26254655969320195,
+      "scatter_new": 0.20734279794806665,
+      "improvement": 1.266243931747088
+    },
+    {
+      "name": "UGC02455",
+      "scatter_current": 0.255774818620303,
+      "scatter_new": 0.18417912427006372,
+      "improvement": 1.3887286066430513
+    },
+    {
+      "name": "UGC02487",
+      "scatter_current": 0.06421097035635354,
+      "scatter_new": 0.06423769853951601,
+      "improvement": 0.9995839174850569
+    },
+    {
+      "name": "UGC02885",
+      "scatter_current": 0.06574492496771664,
+      "scatter_new": 0.06285890275990502,
+      "improvement": 1.0459127041850385
+    },
+    {
+      "name": "UGC02916",
+      "scatter_current": 0.10806361087646582,
+      "scatter_new": 0.1135436575333621,
+      "improvement": 0.9517362151621186
+    },
+    {
+      "name": "UGC02953",
+      "scatter_current": 0.11530373762495705,
+      "scatter_new": 0.1174805124596046,
+      "improvement": 0.9814711836961383
+    },
+    {
+      "name": "UGC03205",
+      "scatter_current": 0.0858104269469941,
+      "scatter_new": 0.06922382843649216,
+      "improvement": 1.2396082228494332
+    },
+    {
+      "name": "UGC03546",
+      "scatter_current": 0.06867315854571505,
+      "scatter_new": 0.07084689279743615,
+      "improvement": 0.9693178604468061
+    },
+    {
+      "name": "UGC03580",
+      "scatter_current": 0.14653112521386413,
+      "scatter_new": 0.14392373858766128,
+      "improvement": 1.018116445916354
+    },
+    {
+      "name": "UGC04278",
+      "scatter_current": 0.18277963124235447,
+      "scatter_new": 0.08111534925660231,
+      "improvement": 2.2533297694884458
+    },
+    {
+      "name": "UGC04305",
+      "scatter_current": 0.18811419050990877,
+      "scatter_new": 0.22788384424012315,
+      "improvement": 0.8254827854829904
+    },
+    {
+      "name": "UGC04325",
+      "scatter_current": 0.15212588948916103,
+      "scatter_new": 0.1914325359113688,
+      "improvement": 0.7946710247812507
+    },
+    {
+      "name": "UGC04483",
+      "scatter_current": 0.13074092464218784,
+      "scatter_new": 0.10188588521035098,
+      "improvement": 1.2832093903121466
+    },
+    {
+      "name": "UGC04499",
+      "scatter_current": 0.20445748698638833,
+      "scatter_new": 0.07491080012920322,
+      "improvement": 2.729345923868762
+    },
+    {
+      "name": "UGC05005",
+      "scatter_current": 0.1586917011568631,
+      "scatter_new": 0.0719496071237526,
+      "improvement": 2.2055951033049417
+    },
+    {
+      "name": "UGC05253",
+      "scatter_current": 0.07642921977345961,
+      "scatter_new": 0.07779240942035852,
+      "improvement": 0.9824765724952317
+    },
+    {
+      "name": "UGC05716",
+      "scatter_current": 0.3293512490027514,
+      "scatter_new": 0.18622716208713452,
+      "improvement": 1.7685457121912755
+    },
+    {
+      "name": "UGC05721",
+      "scatter_current": 0.26096066856829125,
+      "scatter_new": 0.13248916527543975,
+      "improvement": 1.969675543096406
+    },
+    {
+      "name": "UGC05750",
+      "scatter_current": 0.30373231971219306,
+      "scatter_new": 0.09364805395707229,
+      "improvement": 3.2433382956513133
+    },
+    {
+      "name": "UGC05764",
+      "scatter_current": 0.1207020646306219,
+      "scatter_new": 0.32297240664392146,
+      "improvement": 0.37372252906947706
+    },
+    {
+      "name": "UGC05829",
+      "scatter_current": 0.29836538643774463,
+      "scatter_new": 0.22428849376904467,
+      "improvement": 1.330275046320382
+    },
+    {
+      "name": "UGC05918",
+      "scatter_current": 0.06959443203569897,
+      "scatter_new": 0.2918615962487729,
+      "improvement": 0.23845011789896142
+    },
+    {
+      "name": "UGC05986",
+      "scatter_current": 0.12469093201474446,
+      "scatter_new": 0.05457903333719926,
+      "improvement": 2.284593998658442
+    },
+    {
+      "name": "UGC06399",
+      "scatter_current": 0.18163152865028395,
+      "scatter_new": 0.06387660823919969,
+      "improvement": 2.843474844032508
+    },
+    {
+      "name": "UGC06446",
+      "scatter_current": 0.29795139733401554,
+      "scatter_new": 0.17534316237590172,
+      "improvement": 1.699247311938321
+    },
+    {
+      "name": "UGC06614",
+      "scatter_current": 0.03763043146975262,
+      "scatter_new": 0.036307679740927294,
+      "improvement": 1.0364317339544633
+    },
+    {
+      "name": "UGC06667",
+      "scatter_current": 0.4447939179415399,
+      "scatter_new": 0.30210644435883427,
+      "improvement": 1.4723086059469328
+    },
+    {
+      "name": "UGC06786",
+      "scatter_current": 0.06738104441131035,
+      "scatter_new": 0.06279421488360026,
+      "improvement": 1.0730454156678693
+    },
+    {
+      "name": "UGC06787",
+      "scatter_current": 0.09796808157305671,
+      "scatter_new": 0.10044745962982887,
+      "improvement": 0.9753166673810446
+    },
+    {
+      "name": "UGC06818",
+      "scatter_current": 0.20731490750280815,
+      "scatter_new": 0.13343095991565476,
+      "improvement": 1.5537241704163516
+    },
+    {
+      "name": "UGC06917",
+      "scatter_current": 0.14330109753401546,
+      "scatter_new": 0.04473192568000473,
+      "improvement": 3.2035530631776794
+    },
+    {
+      "name": "UGC06930",
+      "scatter_current": 0.18448069923752008,
+      "scatter_new": 0.10296464960705239,
+      "improvement": 1.7916896715674775
+    },
+    {
+      "name": "UGC06973",
+      "scatter_current": 0.1621609598503803,
+      "scatter_new": 0.16629710754063978,
+      "improvement": 0.9751279637305255
+    },
+    {
+      "name": "UGC06983",
+      "scatter_current": 0.18055334077413482,
+      "scatter_new": 0.09910630551962116,
+      "improvement": 1.8218148666472962
+    },
+    {
+      "name": "UGC07089",
+      "scatter_current": 0.1374925485975679,
+      "scatter_new": 0.0772053300502107,
+      "improvement": 1.7808686072341022
+    },
+    {
+      "name": "UGC07125",
+      "scatter_current": 0.22646882631360218,
+      "scatter_new": 0.12839814415930426,
+      "improvement": 1.7638013991278652
+    },
+    {
+      "name": "UGC07151",
+      "scatter_current": 0.1084282506002903,
+      "scatter_new": 0.07382079056240781,
+      "improvement": 1.4688037038647732
+    },
+    {
+      "name": "UGC07323",
+      "scatter_current": 0.08453503636512515,
+      "scatter_new": 0.058424697294180795,
+      "improvement": 1.4469058511244524
+    },
+    {
+      "name": "UGC07399",
+      "scatter_current": 0.17755615243698986,
+      "scatter_new": 0.06968044048721703,
+      "improvement": 2.548149110359926
+    },
+    {
+      "name": "UGC07524",
+      "scatter_current": 0.282771088730207,
+      "scatter_new": 0.14025622781774744,
+      "improvement": 2.016103620708002
+    },
+    {
+      "name": "UGC07577",
+      "scatter_current": 0.10908588236599712,
+      "scatter_new": 0.06696255488280498,
+      "improvement": 1.629057949728988
+    },
+    {
+      "name": "UGC07603",
+      "scatter_current": 0.23640734472869812,
+      "scatter_new": 0.08604491623301307,
+      "improvement": 2.7474876503859633
+    },
+    {
+      "name": "UGC07608",
+      "scatter_current": 0.16841302330779226,
+      "scatter_new": 0.12979254475815125,
+      "improvement": 1.2975554460512693
+    },
+    {
+      "name": "UGC08286",
+      "scatter_current": 0.2231186273477654,
+      "scatter_new": 0.15010541321501802,
+      "improvement": 1.4864129318784782
+    },
+    {
+      "name": "UGC08490",
+      "scatter_current": 0.22770006272157767,
+      "scatter_new": 0.1135013920756204,
+      "improvement": 2.0061433481791333
+    },
+    {
+      "name": "UGC08550",
+      "scatter_current": 0.16750195921341343,
+      "scatter_new": 0.12108518520308387,
+      "improvement": 1.3833398275146496
+    },
+    {
+      "name": "UGC08699",
+      "scatter_current": 0.06693286188219502,
+      "scatter_new": 0.06706075864475088,
+      "improvement": 0.9980928226113072
+    },
+    {
+      "name": "UGC08837",
+      "scatter_current": 0.22515190219972123,
+      "scatter_new": 0.07802608812506921,
+      "improvement": 2.8855977226337655
+    },
+    {
+      "name": "UGC09037",
+      "scatter_current": 0.08795260376599132,
+      "scatter_new": 0.1015954850205466,
+      "improvement": 0.865713705173058
+    },
+    {
+      "name": "UGC09133",
+      "scatter_current": 0.12037568534470586,
+      "scatter_new": 0.1193821374745297,
+      "improvement": 1.0083224164954168
+    },
+    {
+      "name": "UGC11455",
+      "scatter_current": 0.10103130846495369,
+      "scatter_new": 0.09606433587698941,
+      "improvement": 1.0517046471265308
+    },
+    {
+      "name": "UGC11557",
+      "scatter_current": 0.34032939729729816,
+      "scatter_new": 0.3090952851445259,
+      "improvement": 1.10105010866849
+    },
+    {
+      "name": "UGC11820",
+      "scatter_current": 0.31197205062370686,
+      "scatter_new": 0.30610593250442386,
+      "improvement": 1.0191636864770603
+    },
+    {
+      "name": "UGC11914",
+      "scatter_current": 0.035993874420672214,
+      "scatter_new": 0.03722823982983021,
+      "improvement": 0.9668433045773783
+    },
+    {
+      "name": "UGC12506",
+      "scatter_current": 0.25721097658757025,
+      "scatter_new": 0.24314388694079964,
+      "improvement": 1.0578550002788911
+    },
+    {
+      "name": "UGC12632",
+      "scatter_current": 0.34486810869340295,
+      "scatter_new": 0.19301768581782472,
+      "improvement": 1.78671766388754
+    },
+    {
+      "name": "UGC12732",
+      "scatter_current": 0.28398002027498886,
+      "scatter_new": 0.16135695750539372,
+      "improvement": 1.759949026465104
+    },
+    {
+      "name": "UGCA442",
+      "scatter_current": 0.23999159194943306,
+      "scatter_new": 0.2033222310496359,
+      "improvement": 1.180350966593738
+    },
+    {
+      "name": "UGCA444",
+      "scatter_current": 0.15548875707430712,
+      "scatter_new": 0.27344394501825753,
+      "improvement": 0.5686311944626359
+    }
+  ]
+}
