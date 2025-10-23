@@ -16,18 +16,77 @@ With a single universal parameter set for disks calibrated once on SPARC and the
 
 ## 1. Introduction
 
-A central tension in contemporary astrophysics is that Newton–Einstein gravity sourced by visible matter underpredicts orbital and lensing signals on galactic and cluster scales. The standard solution invokes non‑baryonic dark matter. Modified gravity programs (MOND, TeVeS, emergent gravity, f(R), etc.) alter the dynamical law or field equations. Here we instead explore a conservative hypothesis:
+A persistent tension in contemporary astrophysics is that visible‑matter gravity—Newtonian in the weak field and General Relativity (GR) in full—systematically underpredicts orbital and lensing signals on galactic and cluster scales. The prevailing remedy is to posit large reservoirs of non‑baryonic dark matter. An alternative class of ideas modifies the dynamical law itself (e.g., MOND and its relativistic completions) or the field equations (e.g., $f(R)$ gravity). In this work we take a different, conservative path: keep GR intact and ask whether coherent many‑path contributions around classical geodesics can multiplicatively enhance the Newtonian/GR response in extended systems while vanishing in compact, high‑acceleration environments. We call this framework Σ‑Gravity. Its core ingredients, soft assumptions, and empirical posture are laid out below and developed technically in the body of the paper.
 
-> Gravity sums amplitudes over many geometric paths.  
-> Locally (Solar System) the stationary, shortest path dominates (K→0). At large, structured scales (galaxy disks, ICM gas) multiple families of near‑stationary paths add coherently, producing an effective boost without changing the underlying field equations.
+### 1) What is the problem with current theories?
 
-This idea is motivated by the success of path‑integral reasoning in QED/QFT and operationalized here through two complementary kernels: (1) a galaxy kernel (path‑spectrum; stationary‑phase) used for rotation curves/RAR; and (2) a cluster kernel (projected Σ‑kernel) used for strong/weak lensing with full triaxial geometry. Both kernels multiply the Newtonian response by a dimensionless, geometry‑gated factor that vanishes in high‑acceleration, compact environments.
+Dark‑matter halos can be tuned to fit individual galaxies and clusters, yet at the population level they struggle to reproduce certain empirical regularities (e.g., the small scatter in the radial‑acceleration relation, RAR) without flexible per‑system freedom; conversely, modified‑gravity theories that reduce the freedom tend either to conflict with lensing or to require bespoke interpolating functions that are not derived from first principles. The field thus faces a stark choice between explanatory power localized in per‑system fitting and universal laws that can miss key observables. Σ‑Gravity pursues a middle ground: preserve GR and its local tests, but account for scale‑dependent coherence that is negligible where systems are compact and becomes order‑unity where structures are extended and ordered (disks; intracluster gas).
 
-Scope. We restrict this paper to galaxies (rotational kinematics) and clusters (strong lensing). Cosmology (CMB/BAO, large‑scale growth) is deferred to future work.
+### 2) QED‑inspired intuition: summing near‑geodesic paths
 
-*What is new here* is a single, data‑driven kernel that (i) **matches the galactic RAR at 0.087 dex** without modifying GR, (ii) **projects correctly for lensing** with validated triaxial sensitivity (~20–30% lever arm in Einstein radius), and (iii) admits a **mass‑scaled coherence length** ℓ_0 across halos, a discriminant absent in MOND and not predicted by NFW phenomenology. This turns Σ‑Gravity into a **population model** with testable hyper‑parameters (A_c, ℓ_{0,⋆}, γ).
+Our starting point is the path‑integral intuition familiar from QED/QFT: amplitudes add over many paths, and stationary‑phase families dominate. Applied to gravity, the classical GR geometry is the leading stationary solution; however, in extended media there exist families of near‑stationary geometries whose phases remain aligned over a finite coherence scale. When these families add coherently, they can boost the classical response measured by dynamical and lensing observables—without altering the field equations. In compact systems (e.g., the Solar System), frequent interactions and strong gradients rapidly collapse the superposition to the single classical geometry, so the coherent correction is effectively zero. This is the QED‑style lens through which Σ‑Gravity is formulated.
 
-**Note on ΛCDM baseline:** Throughout this paper, "ΛCDM (halo fits)" refers to per‑galaxy tuned NFW halos used as a population baseline for the SPARC RAR (0.18–0.25 dex scatter). In contrast, our Milky Way star‑level test (§5.4) evaluates a single, fixed NFW halo configuration against Gaia DR3 accelerations without per‑star retuning; that specific realization fails with +1.409 dex mean residual. The "ruled out" statement in §5.4 applies to that tested MW halo, not to the broader practice of per‑galaxy halo fitting.
+### 3) Local collapse to Newton/GR: a distance‑set "point of classicality"
+
+The coherence properties above imply a causal coherence length $\ell_0$ defined by a collapse timescale $\tau_{\rm collapse}$:
+
+$$
+\ell_0 \equiv c\,\tau_{\rm collapse}.
+$$
+
+For separations $R\ll\ell_0$ (compact, high‑acceleration regimes), geometric superpositions collapse, the near‑stationary families do not contribute coherently, and the effective coupling reduces to the Newton/GR value $G$. Operationally, the enhancement kernel vanishes,
+
+$$
+K(R) \to 0 \quad (R/\ell_0 \to 0),
+$$
+
+so that
+
+$$
+g_{\rm eff}(R) = g_{\rm bar}(R)\,[1 + K(R)] \;\longrightarrow\; g_{\rm bar}(R),
+$$
+
+ensuring Solar‑System safety, curl‑free fields, and recovery of all standard weak‑field tests. This "collapse to $G$" is therefore distance‑ (and environment‑) controlled, not a change to the law of gravity.
+
+### 4) Growing distances, growing overlap: adding geodesic families
+
+For separations $R\gtrsim\ell_0$ in extended, ordered structures (e.g., rotation‑supported disks; intracluster media), the number and longevity of near‑stationary path families increase. Their phases overlap over macroscopic regions, so their coherent sum produces a dimensionless enhancement $K(R)$ that monotonically rises from 0 and saturates at large $R$:
+
+$$
+K(R) = A\,C(R;\,\ell_0,p,n_{\rm coh}) \times \prod_j G_j(\text{geometry}),
+$$
+
+where $A$ is an amplitude, $C$ is a coherence window that tracks the fraction of coherent, near‑geodesic families available at scale $R$, and the $G_j$ are geometry gates (e.g., bulge/shear/bar) that suppress coherence where observed morphology demands it. The monotone, saturating form of $C$ implements the QED‑inspired narrative with no change to Poisson/Einstein equations:
+
+$$
+C(R) \;=\; 1 - \left[1 + \left(\frac{R}{\ell_0}\right)^p\right]^{-n_{\rm coh}} \quad\text{(Burr‑XII envelope)}.
+$$
+
+In disks (dynamics) the observable can introduce a local‑acceleration weighting of the kernel's contribution, while in clusters (lensing) the same coherence window acts directly in projected surface density; in both cases the boost is multiplicative and curl‑free when $K=K(R)$.
+
+### 5) What the derived mathematics supports—and what is calibrated
+
+The operator structure
+
+$$
+g_{\rm eff}(\mathbf{x}) = g_{\rm bar}(\mathbf{x})\,[1 + K(\mathbf{x})]
+$$
+
+follows from a stationary‑phase reduction of the gravitational path integral, identifying $K$ with the normalized net effect of near‑stationary families around the classical geometry. The existence of a causal coherence length $\ell_0=c\,\tau_{\rm collapse}$ is likewise part of the derivation. The explicit envelope $C(R)$ above is phenomenological but principled: it arises as the Burr‑XII survival function of a Gamma–Weibull superstatistical mixture, a standard model for heterogeneous decoherence rates, here repurposed for gravitational coherence (Appendix C). Axisymmetry with $K=K(R)$ guarantees a conservative (curl‑free) effective field; ring‑geometry integrals reduce exactly to complete elliptic integrals (Appendix B), ensuring that the kernel can be carried through galactic and cluster calculations with analytic control. Finally, Solar‑System constraints are satisfied by construction because $K\to 0$ rapidly for $R\ll\ell_0$. The small set of hyper‑parameters $\{A,\ell_0,p,n_{\rm coh}\}$ is then calibrated once per observational domain (disks; clusters) and frozen for prediction, yielding competitive performance on RAR and strong‑lensing tests without per‑system retuning.
+
+### Key equations (for reference in the main text)
+
+**Effective field (domain‑agnostic):** $g_{\rm eff}(R) = g_{\rm bar}(R)\,[1 + K(R)]$.
+
+**Coherence window:** $C(R) = 1 - [1 + (R/\ell_0)^p]^{-n_{\rm coh}}$, with $\ell_0 = c\,\tau_{\rm collapse}$.
+
+**Canonical kernel:** $K(R) = A\,C(R;\ell_0,p,n_{\rm coh}) \times \prod_j G_j$ (gates enforce morphology and local classicality).
+
+**Exact ring geometry:** the azimuthal Green's function reduces to complete elliptic integrals with parameter $m = 4RR'/(R+R')^2$ (Appendix B).
+
+### Scope and posture
+
+The sections that follow formalize this introduction, quantify the domains where $K$ is negligible vs. order‑unity, and evaluate the framework against galaxy‑ and cluster‑scale data with careful validation (Newtonian limit, curl‑free fields, Solar‑System safety). Where we derive structure (operator factorization; existence of $\ell_0$), we say so; where we calibrate (shape of $C$; amplitude $A$), we do so transparently and test generalization on held‑out systems.
 
 ### Side‑by‑side performance (orientation)
 
@@ -39,6 +98,8 @@ Scope. We restrict this paper to galaxies (rotational kinematics) and clusters (
 *Per‑galaxy tuned halos (SPARC population). For the MW star‑level test, see §5.4.
 
 **Zero‑shot policy:** For all disks—including the Milky Way—we use a single, frozen galaxy kernel calibrated on SPARC. Only baryons and measured morphology vary by galaxy; no per‑galaxy parameters are tuned.
+
+**Note on ΛCDM baseline:** Throughout this paper, "ΛCDM (halo fits)" refers to per‑galaxy tuned NFW halos used as a population baseline for the SPARC RAR (0.18–0.25 dex scatter). In contrast, our Milky Way star‑level test (§5.4) evaluates a single, fixed NFW halo configuration against Gaia DR3 accelerations without per‑star retuning; that specific realization fails with +1.409 dex mean residual. The "ruled out" statement in §5.4 applies to that tested MW halo, not to the broader practice of per‑galaxy halo fitting.
 
 ---
 
