@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.20)  25 OCT 2025 08:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.20)  25 OCT 2025 08:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -534,50 +534,6 @@ You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-! LaTeX Error: Unicode character ₀ (U+2080)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.80 ...The coherence window C(R) = 1-[1+(R/ℓ₀
-                                                  )^p]^(-n\_coh) employs a B...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.80 ...e coherence window C(R) = 1-[1+(R/ℓ₀)^
-                                                  p]^(-n\_coh) employs a Bur...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.80 ...theoretical predictions (density-based ℓ
-                                                  ₀, naive path-counting) ...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-! LaTeX Error: Unicode character ₀ (U+2080)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.80 ...oretical predictions (density-based ℓ₀
-                                                  , naive path-counting) fai...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
 ! LaTeX Error: Unicode character ≲ (U+2272)
                not set up for use with LaTeX.
 
@@ -618,13 +574,6 @@ l.80 ...nstraints (boost at 1 AU: ≲7×10⁻¹⁴
 
 You may provide a definition with
 \DeclareUnicodeCharacter 
-
-
-Overfull \hbox (148.07127pt too wide) in paragraph at lines 80--81
-\OML/cmm/m/it/10 XIIformjustifiedbysuperstatisticaldecoherencemodels:Dedicatedv
-alidationconfirmsthatsimpletheoreticalpredictions\OT1/cmr/m/n/10 (\OML/cmm/m/it
-/10 density \OMS/cmsy/m/n/10 ^^@
- []
 
 [1
 
@@ -1565,7 +1514,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 530--531
 0.95 _baryon(R) (X[]ray + BCG/ICL where avail-able), store
  []
 
-<../figures/rar_sparc_validation.png, id=501, 505.89pt x 433.62pt>
+<../figures/rar_sparc_validation.png, id=503, 505.89pt x 433.62pt>
 File: ../figures/rar_sparc_validation.png Graphic file (type png)
 <use ../figures/rar_sparc_validation.png>
 Package pdftex.def Info: ../figures/rar_sparc_validation.png  used on input lin
@@ -1584,13 +1533,13 @@ l.546 ...tion from Newtonian to enhanced regimes.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/rc_gallery.png, id=503, 1300.86pt x 549.252pt>
+<../figures/rc_gallery.png, id=505, 1300.86pt x 549.252pt>
 File: ../figures/rc_gallery.png Graphic file (type png)
 <use ../figures/rc_gallery.png>
 Package pdftex.def Info: ../figures/rc_gallery.png  used on input line 551.
 (pdftex.def)             Requested size: 386.95897pt x 163.37726pt.
 [8 <../figures/rar_sparc_validation.png>]
-<../figures/holdouts_pred_vs_obs.png, id=511, 433.62pt x 433.62pt>
+<../figures/holdouts_pred_vs_obs.png, id=513, 433.62pt x 433.62pt>
 File: ../figures/holdouts_pred_vs_obs.png Graphic file (type png)
 <use ../figures/holdouts_pred_vs_obs.png>
 Package pdftex.def Info: ../figures/holdouts_pred_vs_obs.png  used on input lin
@@ -1600,7 +1549,7 @@ e 561.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../figures/cluster_kappa_panels.png, id=512, 1011.78pt x 361.35pt>
+<../figures/cluster_kappa_panels.png, id=514, 1011.78pt x 361.35pt>
 File: ../figures/cluster_kappa_panels.png Graphic file (type png)
 <use ../figures/cluster_kappa_panels.png>
 Package pdftex.def Info: ../figures/cluster_kappa_panels.png  used on input lin
@@ -2420,7 +2369,7 @@ l.684 ... each gate (bulge, shear, bar) reduces χ
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/rc_residual_hist.png, id=529, 433.62pt x 289.08pt>
+<../figures/rc_residual_hist.png, id=531, 433.62pt x 289.08pt>
 File: ../figures/rc_residual_hist.png Graphic file (type png)
 <use ../figures/rc_residual_hist.png>
 Package pdftex.def Info: ../figures/rc_residual_hist.png  used on input line 69
@@ -2847,13 +2796,13 @@ l.739 ...rom geometry priors (q\_p, q\_LOS) and κ
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/kfold_pred_vs_obs.png, id=545, 433.62pt x 433.62pt>
+<../figures/kfold_pred_vs_obs.png, id=547, 433.62pt x 433.62pt>
 File: ../figures/kfold_pred_vs_obs.png Graphic file (type png)
 <use ../figures/kfold_pred_vs_obs.png>
 Package pdftex.def Info: ../figures/kfold_pred_vs_obs.png  used on input line 7
 47.
 (pdftex.def)             Requested size: 386.95897pt x 386.97923pt.
-<../figures/kfold_coverage.png, id=546, 289.08pt x 216.81pt>
+<../figures/kfold_coverage.png, id=548, 289.08pt x 216.81pt>
 File: ../figures/kfold_coverage.png Graphic file (type png)
 <use ../figures/kfold_coverage.png>
 Package pdftex.def Info: ../figures/kfold_coverage.png  used on input line 757.
@@ -2862,7 +2811,7 @@ Package pdftex.def Info: ../figures/kfold_coverage.png  used on input line 757.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../figures/cluster_kappa_profiles_panel.png, id=547, 867.24pt x 542.025pt>
+<../figures/cluster_kappa_profiles_panel.png, id=549, 867.24pt x 542.025pt>
 File: ../figures/cluster_kappa_profiles_panel.png Graphic file (type png)
 <use ../figures/cluster_kappa_profiles_panel.png>
 Package pdftex.def Info: ../figures/cluster_kappa_profiles_panel.png  used on i
@@ -2923,7 +2872,7 @@ l.772 ... with A\_c chosen so ⟨κ⟩(<θ\_E)=1.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/cluster_alpha_profiles_panel.png, id=548, 867.24pt x 542.025pt>
+<../figures/cluster_alpha_profiles_panel.png, id=550, 867.24pt x 542.025pt>
 File: ../figures/cluster_alpha_profiles_panel.png Graphic file (type png)
 <use ../figures/cluster_alpha_profiles_panel.png>
 Package pdftex.def Info: ../figures/cluster_alpha_profiles_panel.png  used on i
@@ -3005,7 +2954,7 @@ l.792 ...68\% band with Einstein crossing marked.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../figures/triaxial_sensitivity_A2261.png, id=549, 462.528pt x 317.988pt>
+<../figures/triaxial_sensitivity_A2261.png, id=551, 462.528pt x 317.988pt>
 File: ../figures/triaxial_sensitivity_A2261.png Graphic file (type png)
 <use ../figures/triaxial_sensitivity_A2261.png>
 Package pdftex.def Info: ../figures/triaxial_sensitivity_A2261.png  used on inp
@@ -3403,7 +3352,7 @@ l.865 ...this fixed halo configuration (V₂₀₀
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../data/gaia/outputs/mw_all_model_summary.png, id=570, 1156.32pt x 650.43pt>
+<../data/gaia/outputs/mw_all_model_summary.png, id=572, 1156.32pt x 650.43pt>
 File: ../data/gaia/outputs/mw_all_model_summary.png Graphic file (type png)
 <use ../data/gaia/outputs/mw_all_model_summary.png>
 Package pdftex.def Info: ../data/gaia/outputs/mw_all_model_summary.png  used on
@@ -3516,7 +3465,7 @@ l.879 ...ts used in SPARC population comparisons.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../data/gaia/outputs/mw_rar_comparison_full_improved.png, id=571, 975.645pt x 
+<../data/gaia/outputs/mw_rar_comparison_full_improved.png, id=573, 975.645pt x 
 397.485pt>
 File: ../data/gaia/outputs/mw_rar_comparison_full_improved.png Graphic file (ty
 pe png)
@@ -3541,7 +3490,7 @@ You may provide a definition with
 \DeclareUnicodeCharacter 
 
 [16 <../figures/cluster_alpha_profiles_panel.png>]
-<../data/gaia/outputs/mw_radial_residual_map.png, id=582, 794.97pt x 433.62pt>
+<../data/gaia/outputs/mw_radial_residual_map.png, id=584, 794.97pt x 433.62pt>
 File: ../data/gaia/outputs/mw_radial_residual_map.png Graphic file (type png)
 <use ../data/gaia/outputs/mw_radial_residual_map.png>
 Package pdftex.def Info: ../data/gaia/outputs/mw_radial_residual_map.png  used 
@@ -3577,7 +3526,7 @@ l.899 ...irms gate suppression works as designed.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../data/gaia/outputs/mw_delta_histograms.png, id=583, 867.24pt x 650.43pt>
+<../data/gaia/outputs/mw_delta_histograms.png, id=585, 867.24pt x 650.43pt>
 File: ../data/gaia/outputs/mw_delta_histograms.png Graphic file (type png)
 <use ../data/gaia/outputs/mw_delta_histograms.png>
 Package pdftex.def Info: ../data/gaia/outputs/mw_delta_histograms.png  used on 
@@ -3625,7 +3574,7 @@ l.909 .... Only Σ achieves unbiased performance.}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-<../data/gaia/outputs/mw_radial_bin_table.png, id=584, 939.51pt x 722.7pt>
+<../data/gaia/outputs/mw_radial_bin_table.png, id=586, 939.51pt x 722.7pt>
 File: ../data/gaia/outputs/mw_radial_bin_table.png Graphic file (type png)
 <use ../data/gaia/outputs/mw_radial_bin_table.png>
 Package pdftex.def Info: ../data/gaia/outputs/mw_radial_bin_table.png  used on 
@@ -3634,7 +3583,7 @@ input line 914.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../data/gaia/outputs/mw_outer_rotation_curves.png, id=585, 794.97pt x 505.89pt
+<../data/gaia/outputs/mw_outer_rotation_curves.png, id=587, 794.97pt x 505.89pt
 >
 File: ../data/gaia/outputs/mw_outer_rotation_curves.png Graphic file (type png)
 
@@ -4224,6 +4173,7 @@ l.1123 ...iaxial sensitivity of ∼20–30\% in θ
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
+[22 <../data/gaia/outputs/mw_outer_rotation_curves.png>]
 
 ! LaTeX Error: Unicode character Δ (U+0394)
                not set up for use with LaTeX.
@@ -4238,7 +4188,6 @@ l.1126 ...gestive performance, quantifiable via Δ
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-[22 <../data/gaia/outputs/mw_outer_rotation_curves.png>]
 
 ! LaTeX Error: Unicode character Ω (U+03A9)
                not set up for use with LaTeX.
@@ -7859,13 +7808,13 @@ Package rerunfilecheck Info: File `sigmagravity_paper.out' has not changed.
 ### simple group (level 1) entered at line 530 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 11643 strings out of 474486
- 177927 string characters out of 5753569
+ 11639 strings out of 474486
+ 177887 string characters out of 5753569
  1940542 words of memory out of 5000000
- 33518 multiletter control sequences out of 15000+600000
- 583340 words of font info for 100 fonts, out of 8000000 for 9000
+ 33516 multiletter control sequences out of 15000+600000
+ 581806 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,79p,2454b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,2495b,589s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\henry\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/
 ec/dpi600\tcbx1095.pk> <C:\Users\henry\AppData\Local\MiKTeX\fonts/pk/ljfour/jkn
 appen/ec/dpi600\ecbi1095.pk> <C:\Users\henry\AppData\Local\MiKTeX\fonts/pk/ljfo
@@ -7889,15 +7838,17 @@ ts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/publ
 ic/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><
 C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Fi
-les/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
-:/Program Files/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Progr
-am Files/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on sigmagravity_paper.pdf (41 pages, 2485331 bytes).
+les/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:
+/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program File
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/font
+s/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX/fonts/type1
+/public/amsfonts/symbols/msbm10.pfb>
+Output written on sigmagravity_paper.pdf (41 pages, 2503363 bytes).
 PDF statistics:
- 1556 PDF objects out of 1728 (max. 8388607)
+ 1567 PDF objects out of 1728 (max. 8388607)
  240 named destinations out of 1000 (max. 500000)
  937 words of extra memory for PDF output out of 10000 (max. 10000000)
 
