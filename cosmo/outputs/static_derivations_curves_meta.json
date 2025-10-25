@@ -1,0 +1,21 @@
+{
+  "kernel": {
+    "A": 1.0,
+    "ell0_kpc": 200.0,
+    "p": 0.75,
+    "ncoh": 0.5
+  },
+  "H0": 70.0,
+  "outfile": "C:\\Users\\henry\\dev\\sigmagravity\\cosmo\\outputs\\static_derivations_curves.csv",
+  "models": [
+    "weyl",
+    "eikonal",
+    "lindblad",
+    "pathsum"
+  ],
+  "distance_range": [
+    1.0,
+    3000.0
+  ],
+  "n_points": 200
+}
