@@ -161,15 +161,15 @@ so the Σ‑kernel $\mathcal{K}$ is defined operationally as the normalized, net
 
 ---
 
-**Box: What is motivated vs. calibrated**
-
-*Motivated by stationary-phase:* multiplicative operator structure $g_{\rm eff}=g_{\rm bar}[1+K]$ and the existence of a coherence scale $\ell_0=c\,\tau_{\rm collapse}$. 
-
-*Phenomenological (calibrated):* the Burr-XII coherence window $C(R)=1-[1+(R/\ell_0)^p]^{-n_{\rm coh}}$ and all hyper-parameters $\{A,\ell_0,p,n_{\rm coh}\}$, which are fit once per domain (disks; clusters). 
-
-*Validation:* Newtonian limit, curl-free fields, and Solar-System safety are enforced by construction. 
-
-*Derivation-validation:* simple density/time closures (e.g., $\ell_0=c/\sqrt{G\rho}$) and naive path-counting fail by factors of 10–2500× and are not used to set parameter values (Appendix H).
+> **What is motivated vs. calibrated**
+> 
+> **Motivated by stationary-phase:** multiplicative operator structure $g_{\rm eff}=g_{\rm bar}[1+K]$ and the existence of a coherence scale $\ell_0=c\,\tau_{\rm collapse}$. 
+> 
+> **Phenomenological (calibrated):** the Burr-XII coherence window $C(R)=1-[1+(R/\ell_0)^p]^{-n_{\rm coh}}$ and all hyper-parameters $\{A,\ell_0,p,n_{\rm coh}\}$, which are fit once per domain (disks; clusters). 
+> 
+> **Validation:** Newtonian limit, curl-free fields, and Solar-System safety are enforced by construction. 
+> 
+> **Derivation-validation:** simple density/time closures (e.g., $\ell_0=c/\sqrt{G\rho}$) and naive path-counting fail by factors of 10–2500× and are not used to set parameter values (Appendix H).
 
 We emphasize that quantitative results in §§5.1-5.3 test the **predictive power** of this phenomenology, not the validity of any specific quantum gravity theory.
 
