@@ -1,5 +1,5 @@
 
-# Σ‑Gravity (Sigma‑Gravity): A Coherent Many‑Path Enhancement of Newtonian Gravity Across Solar, Galactic, and Cluster Scales
+# Σ-Gravity: A Phenomenological Enhancement Model for Galaxy and Cluster Dynamics
 
 **Authors:** Leonard Speiser  
 **Date:** 2025‑10‑20 (manuscript draft)
@@ -8,9 +8,9 @@
 
 ## Abstract
 
-We introduce Σ‑Gravity, a conservative, GR‑compatible framework in which the gravitational field of baryons is enhanced non‑locally by the coherent superposition of near‑geodesic path families. Using a stationary‑phase expansion of the GR path integral to $\mathcal{O}(v^2/c^2)$, we derive the operator structure of a projected, curl‑free kernel whose ring geometry is exact (elliptic integrals) and whose coherence window follows from a phenomenological, causal envelope set by a collapse timescale $(\ell_0 = c\,\tau_{\rm collapse})$. The kernel multiplies the Newtonian response, vanishes in high‑acceleration, compact environments (Solar System), and rises where extended structure allows coherence (disks; cluster radii $\sim 10^2$ kpc).
+We propose Σ‑Gravity, a phenomenological enhancement model motivated by path-integral reasoning. Using a stationary-phase reduction of the gravitational path integral to $\mathcal{O}(v^2/c^2)$, we develop a multiplicative, curl-free operator $g_{\rm eff} = g_{\rm bar}[1+K(R)]$ acting on the Newtonian/GR response. The kernel employs exact elliptic-integral ring geometry and a Burr-XII coherence window $C(R) = 1 - [1+(R/\ell_0)^p]^{-n_{\rm coh}}$ justified by superstatistical decoherence models. All parameters $\{A, \ell_0, p, n_{\rm coh}\}$ are calibrated on observational data; simple density-based derivations and naive path-counting fail to reproduce the fitted values by factors of 10-2500× (Appendix H). The kernel multiplies the Newtonian response, vanishes in high‑acceleration, compact environments (Solar System), and rises where extended structure allows coherence (disks; cluster radii $\sim 10^2$ kpc).
 
-With a single universal parameter set for disks calibrated once on SPARC and then frozen, Σ‑Gravity reproduces the galactic radial‑acceleration relation at 0.087 dex scatter without any per‑galaxy tuning; the Milky Way star‑level analysis (§5.4) is a strict zero‑shot application yielding +0.062 dex bias and 0.142 dex scatter. For clusters, a projected Σ‑kernel with realistic baryons (gNFW gas + BCG/ICL), triaxial projection, source‑redshift distributions $P(z_s)$ and hierarchical calibration yields blind‑holdout coverage 2/2 inside 68% (Abell 2261, MACSJ1149.5+2223) with median fractional error 14.9%. The calibrated population amplitude is $\mu_A=4.6\pm 0.4$ with intrinsic scatter $\sigma_A\simeq 1.5$; the mass‑scaling of the coherence length is consistent with zero ($\gamma=0.09\pm 0.10$). We release complete, reproducible code paths and provenance manifests for all figures and results.
+With a single universal parameter set for disks calibrated once on SPARC and then frozen, Σ‑Gravity reproduces the galactic radial‑acceleration relation at 0.087 dex scatter without any per‑galaxy tuning; the Milky Way star‑level analysis (§5.4) is a strict zero‑shot application yielding +0.062 dex bias and 0.142 dex scatter. For clusters, a projected Σ‑kernel with realistic baryons (gNFW gas + BCG/ICL), triaxial projection, source‑redshift distributions $P(z_s)$ and hierarchical calibration yields blind‑holdout coverage 2/2 inside 68% (Abell 2261, MACSJ1149.5+2223) with median fractional error 14.9%. The calibrated population amplitude is $\mu_A=4.6\pm 0.4$ with intrinsic scatter $\sigma_A\simeq 1.5$; the mass‑scaling of the coherence length is consistent with zero ($\gamma=0.09\pm 0.10$). A dedicated derivation-validation suite confirms that theoretical predictions miss the empirically successful parameters by factors of 10-2500×; we therefore present the model as principled phenomenology rather than first-principles derivation. We release complete, reproducible code paths and provenance manifests for all figures and results.
 
 ---
 
@@ -155,16 +155,25 @@ so the Σ‑kernel $\mathcal{K}$ is the normalized, net effect of all quantum gr
 
 ---
 
-**Box: What is derived vs phenomenological**
+**Box: Theoretical Motivation vs Empirical Calibration**
 
-*Derived from stationary‑phase reduction:*
-- The multiplicative operator structure $\mathbf{g}_{\rm eff}=\mathbf{g}_{\rm bar}[1+\mathcal{K}]$
-- The existence of a scale‑dependent coherence length $\ell_0$
+*Motivated by physical reasoning:*
+- Multiplicative structure $\mathbf{g}_{\rm eff}=\mathbf{g}_{\rm bar}[1+\mathcal{K}]$ (dimensional consistency; path-integral factorization)
+- Existence of characteristic scale $\ell_0$ separating compact from extended regimes (inspired by coherence/decoherence)
+- Burr-XII functional form for $C(R)$ (emerges from superstatistical Gamma-Weibull mixture; Appendix C.1)
 
-*Phenomenological (calibrated on data):*
-- The explicit coherence window $C(R)=1-[1+(R/\ell_0)^p]^{-n_{\rm coh}}$, whose Burr‑XII form we justify via a standard superstatistical mixture (Gamma–Weibull compounding; see Appendix C.1)
+*Empirically calibrated on data:*
+- All parameter values: $A$, $\ell_0$, $p$, $n_{\rm coh}$
+- Domain-specific values for galaxies vs clusters
 
-We emphasize that our quantitative results in §§5.1–5.3 depend only on this envelope's monotone, saturating form, not on any specific cosmological hypothesis in §8.
+*Enforced by construction:*
+- Curl-free fields (axisymmetry with $K=K(R)$)
+- Solar System recovery ($K \to 0$ as $R \to 0$)
+- Monotone, saturating coherence transition
+
+**Validation note:** Simple density-time closures ($\ell_0 = c/\sqrt{G\rho}$) and naive path-counting fail to recover the empirically successful $\{\ell_0, A, p\}$ by factors of 10-2500× (Appendix H). We therefore treat $C(R)$ as phenomenological but principled (superstatistics) and calibrate its parameters on data.
+
+We emphasize that quantitative results in §§5.1-5.3 test the **predictive power** of this phenomenology, not the validity of any specific quantum gravity theory.
 
 ---
 
@@ -181,6 +190,8 @@ interpreted as the largest scale over which a region can collapse coherently int
 Regimes:
 - Local classicality ($R\ll\ell_0$): compact systems (Solar System) decohere as a whole; $\delta\mathbf{g}_q\to0\Rightarrow \mathcal{K}\to0$.
 - Macroscopic coherence ($R\gg\ell_0$): extended systems (galaxies/clusters) cannot collapse globally; a test body samples a coherent sum over many near‑stationary geometries; $\delta\mathbf{g}_q\ne0\Rightarrow \mathcal{K}>0$.
+
+We make no numeric prediction for $\ell_0$ from density alone; $\ell_0$ is treated as a calibrated constant within each domain. Attempts to set its value directly from $\rho$ via $\ell_0 = c/(\alpha\sqrt{G\rho})$ miss the fitted scales by orders of magnitude (see validation results in Appendix H).
 
 We model the degree of quantum coherence with a dimensionless field $C(R)$ which vanishes at small $R$ and saturates toward unity at large $R$. The Σ‑kernel is proportional to this field with amplitude $A_c$:
 
@@ -1175,9 +1186,9 @@ so the enhanced field remains conservative.
 
 Cassini bound |γ_PPN−1| < 2.3×10⁻⁵; with ℓ_0~kpc and A_gal~0.6:
 $$
-K(1\,\mathrm{AU}) \sim 10^{-7} \ll 10^{-5}
+\text{Boost at 1 AU} \lesssim 7\times 10^{-14} \ll 10^{-5}
 $$
-Safety margin ≥100×.
+Safety margin ≥10^8×.
 
 ---
 
@@ -1191,19 +1202,21 @@ Path‑counting (2D disks vs 3D clusters) predicts A_cluster/A_gal ~ O(10). Empi
 
 - Galaxies (SPARC): RAR scatter ≈0.087 dex; BTFR ≈0.15 dex (using A_gal≈0.6, ℓ_0≈5 kpc).
 - Clusters: θ_E accuracy ≈15% with A_cluster≈4.6; triaxial lever arm 20–30%.
-- Solar System: K(0.1–1000 AU) < 10⁻⁶.
+- Solar System: Wide-binary regime (10²-10⁴ AU): K < 10⁻⁸.
 
 ---
 
 ## F. Technical addenda (selected)
 
-### F.1 Dimensional analysis of ℓ_0
+### F.1 Dimensional Analysis of ℓ₀
 
-We treat ℓ₀ as a coherence length defined by a collapse time: ℓ₀ ≡ c\,τ_{\rm collapse}. Adopting a dynamical‑time scaling $t_{\rm dyn}\sim 1/\sqrt{G\rho}$, a causal coherence length is
-$$
-\ell_0 \equiv c\,\tau_{\rm collapse} \approx \frac{c}{\alpha\sqrt{G\rho}},
-$$
-where α is a dimensionless factor of order unity. For $\rho\sim 10^{-21}$ kg m$^{-3}$ (typical halo density), this gives $\ell_0\sim \mathcal{O}(10)$ kpc$/\sqrt{\alpha}$, consistent with the fitted disk value (~5 kpc) for $\alpha\sim$ few. This is a scaling ansatz (not a derivation); ℓ₀ is calibrated empirically in §§5.1–5.3.
+We treat $\ell_0 \equiv c\,\tau_{\rm collapse}$ as an operational, calibrated scale. While a dynamical-time argument suggests $\ell_0 \propto \rho^{-1/2}$, our derivation-validation suite (Appendix H) shows that plug-in density estimates fail by factors of 100-250,000× for both galaxies and clusters. We therefore do not assign a numerical value from $\rho$ and use $\ell_0$ strictly as a fitted constant within each observational domain.
+
+The fitted values are:
+- Galaxies (SPARC): $\ell_0 = 4.993$ kpc
+- Clusters (lensing): $\ell_0 \sim 200$ kpc (domain-effective)
+
+Developing a first-principles theory that predicts these specific scales remains an open problem.
 
 ### F.2 Numerical kernel (example)
 
@@ -1383,4 +1396,70 @@ export PYTHONPATH="${PYTHONPATH}:$(pwd):$(pwd)/many_path_model"
 | Cluster error | 14.9% median | run_holdout_validation.py |
 
 **All scripts use seed=42 for reproducibility.**
+
+---
+
+## Appendix H — Derivation Validation: Negative Results
+
+### H.1. Purpose and Methodology
+
+We built a comprehensive validation suite (`derivation/` folder in repository) to test whether theoretical derivations could predict the empirically successful parameters $\{A, \ell_0, p, n_{\rm coh}\}$ from first principles. The suite includes:
+
+- `theory_constants.py`: Physical constants and theoretical calculations
+- `simple_derivation_test.py`: Direct tests of theory predictions
+- `parameter_sweep_to_find_derivation.py`: Systematic parameter exploration
+- `cluster_validation.py`: Cluster-scale validation
+
+### H.2. Results: All Simple Derivations Fail
+
+**Coherence length ℓ₀ = c/(α√(Gρ)):**
+- Virial density (ρ ~ 10⁻²⁵ kg/m³): predicts ℓ₀ ~ 1,254,000 kpc (251,000× too large)
+- Galactic density (ρ ~ 10⁻²¹ kg/m³): predicts ℓ₀ ~ 12,543 kpc (2,512× too large)
+- Stellar density (ρ ~ 10⁻¹⁸ kg/m³): predicts ℓ₀ ~ 397 kpc (79× too large)
+- Nuclear density (ρ ~ 10⁻¹⁵ kg/m³): predicts ℓ₀ ~ 12.5 kpc (2.5× too large)
+- **Empirical fit:** ℓ₀ = 4.993 kpc (galaxies), ℓ₀ ~ 200 kpc (clusters)
+- **Verdict:** No density scale reproduces observations
+
+**Amplitude ratio A_cluster/A_galaxy from path counting:**
+- Naive calculation: (4π/2π) × (1000 kpc/20 kpc) × (geometry factor 0.5) ~ 100
+- **Empirical fit:** A_c/A_0 = 4.6/0.591 ~ 7.8
+- **Discrepancy:** 13× too large
+- **Verdict:** Path-counting significantly overestimates
+
+**Interaction exponent p:**
+- Theory prediction: p = 2.0 (area-like interactions)
+- **Empirical fit:** p = 0.757
+- **Discrepancy:** 2.7× too large
+- **Verdict:** Theory prediction fails
+
+### H.3. Implications for Model Interpretation
+
+These negative results establish that:
+
+1. The Burr-XII envelope is **phenomenological**, justified by superstatistical reasoning but with parameters determined empirically
+2. The characteristic scales ℓ₀ ~ 5 kpc (galaxies) and ℓ₀ ~ 200 kpc (clusters) are **not derivable** from simple density arguments
+3. The amplitude values reflect complex geometric and physical effects beyond naive path-counting
+4. Parameter values $\{A, \ell_0, p, n_{\rm coh}\}$ should be treated as **calibrated constants** within each observational domain
+
+### H.4. Reproducibility
+
+Complete validation scripts and results are provided in:
+- `derivation/DERIVATION_VALIDATION_RESULTS.md` - Comprehensive analysis
+- `derivation/FINAL_DERIVATION_SUMMARY.md` - Executive summary
+- `derivation/theory_constants.py` - Physical calculations
+- `derivation/simple_derivation_test.py` - Direct validation tests
+- `derivation/parameter_sweep_to_find_derivation.py` - Systematic exploration
+
+All tests use seed=42 and are fully reproducible. Running `python derivation/simple_derivation_test.py` demonstrates the quantitative failures documented above.
+
+### H.5. Theoretical Outlook
+
+Developing a first-principles theory that quantitatively predicts:
+- ℓ₀ ~ 5 kpc for galaxy disks
+- ℓ₀ ~ 200 kpc for cluster lensing  
+- A₀ ~ 0.6 for galaxies
+- A_c ~ 5 for clusters
+- p ~ 0.75 (not 2.0)
+
+remains an important open problem. The successful phenomenology presented in this paper provides empirical targets that any future microphysical theory must reproduce.
 
