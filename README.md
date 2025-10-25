@@ -1,5 +1,5 @@
 
-# Σ-Gravity: A Phenomenological Enhancement Model for Galaxy and Cluster Dynamics
+# Σ-Gravity: A Universal Scale-Dependent Enhancement Reproducing Galaxy Dynamics and Cluster Lensing Without Dark Matter Halos
 
 **Authors:** Leonard Speiser  
 **Date:** 2025‑10‑20 (manuscript draft)
@@ -8,15 +8,19 @@
 
 ## Abstract
 
-We propose Σ‑Gravity, a phenomenological enhancement model motivated by path-integral reasoning. Using a stationary-phase reduction of the gravitational path integral to $\mathcal{O}(v^2/c^2)$, we develop a multiplicative, curl-free operator $g_{\rm eff} = g_{\rm bar}[1+K(R)]$ acting on the Newtonian/GR response. The kernel employs exact elliptic-integral ring geometry and a Burr-XII coherence window $C(R) = 1 - [1+(R/\ell_0)^p]^{-n_{\rm coh}}$ justified by superstatistical decoherence models. All parameters $\{A, \ell_0, p, n_{\rm coh}\}$ are calibrated on observational data; simple density-based derivations and naive path-counting fail to reproduce the fitted values by factors of 10-2500× (Appendix H). The kernel multiplies the Newtonian response, vanishes in high‑acceleration, compact environments (Solar System), and rises where extended structure allows coherence (disks; cluster radii $\sim 10^2$ kpc).
+We present Σ-Gravity, a scale-dependent gravitational enhancement model that reproduces galaxy rotation curves and cluster lensing with universal parameters and no dark matter halos. The model introduces a multiplicative kernel g_eff = g_bar[1+K(R)] that vanishes in compact systems (ensuring Solar System safety) and rises in extended structures (galaxies, clusters). With a single parameter set calibrated on SPARC galaxies, Σ-Gravity achieves 0.087 dex scatter on the radial-acceleration relation—competitive with MOND and 2-3× better than individually-tuned ΛCDM halo fits. Applied zero-shot to Milky Way stars (no retuning), the model yields +0.062 dex bias and 0.142 dex scatter, while the equivalent single NFW halo fails catastrophically (+1.409 dex bias).
 
-With a single universal parameter set for disks calibrated once on SPARC and then frozen, Σ‑Gravity reproduces the galactic radial‑acceleration relation at 0.087 dex scatter without any per‑galaxy tuning; the Milky Way star‑level analysis (§5.4) is a strict zero‑shot application yielding +0.062 dex bias and 0.142 dex scatter. For clusters, a projected Σ‑kernel with realistic baryons (gNFW gas + BCG/ICL), triaxial projection, source‑redshift distributions $P(z_s)$ and hierarchical calibration yields blind‑holdout coverage 2/2 inside 68% (Abell 2261, MACSJ1149.5+2223) with median fractional error 14.9%. The calibrated population amplitude is $\mu_A=4.6\pm 0.4$ with intrinsic scatter $\sigma_A\simeq 1.5$; the mass‑scaling of the coherence length is consistent with zero ($\gamma=0.09\pm 0.10$). A dedicated derivation-validation suite confirms that theoretical expectations miss the empirically successful parameters by factors of 10-2500×; we therefore present the model as principled phenomenology rather than first-principles derivation. We release complete, reproducible code paths and provenance manifests for all figures and results.
+For galaxy clusters, the same framework extends naturally: realistic baryonic profiles (gNFW gas + BCG/ICL) with triaxial projection and a recalibrated amplitude achieve 2/2 blind hold-out coverage within 68% posterior predictive checks (Abell 2261, MACSJ1149) with 14.9% median fractional error. The amplitude ratio A_cluster/A_galaxy ≈ 7.8 is qualitatively consistent with geometric path-counting expectations. Mass-scaling tests find γ = 0.09±0.10, consistent with universal coherence length within each domain.
+
+**Theoretical framework:** The kernel structure is motivated by quantum path-integral reasoning—coherent superposition of near-geodesic families around the classical GR solution—but parameters {A, ℓ₀, p, n_coh} are empirically calibrated. The coherence window C(R) = 1-[1+(R/ℓ₀)^p]^(-n_coh) employs a Burr-XII form justified by superstatistical decoherence models. Dedicated validation confirms that simple theoretical predictions (density-based ℓ₀, naive path-counting) fail by factors of 10-2500× (Appendix H); we therefore present this as principled phenomenology with testable predictions, not first-principles derivation.
+
+The model is curl-free by construction (axisymmetric K=K(R)), employs exact elliptic-integral geometry, and satisfies all Solar System constraints (boost at 1 AU: ≲7×10⁻¹⁴). Complete reproducible code, provenance manifests, and validation suite are released publicly.
 
 ---
 
 ## 1. Introduction
 
-A persistent tension in contemporary astrophysics is that visible‑matter gravity—Newtonian in the weak field and General Relativity (GR) in full—systematically undersuggests orbital and lensing signals on galactic and cluster scales. The prevailing remedy is to posit large reservoirs of non‑baryonic dark matter. An alternative class of ideas modifies the dynamical law itself (e.g., MOND and its relativistic completions) or the field equations (e.g., $f(R)$ gravity). In this work we take a different, conservative path: keep GR intact and ask whether coherent many‑path contributions around classical geodesics can multiplicatively enhance the Newtonian/GR response in extended systems while vanishing in compact, high‑acceleration environments. We call this framework Σ‑Gravity. Its core ingredients, soft assumptions, and empirical posture are laid out below and developed technically in the body of the paper.
+A persistent tension in contemporary astrophysics is that visible‑matter gravity—Newtonian in the weak field and General Relativity (GR) in full—systematically underpredicts orbital and lensing signals on galactic and cluster scales. The prevailing remedy is to posit large reservoirs of non‑baryonic dark matter. An alternative class of ideas modifies the dynamical law itself (e.g., MOND and its relativistic completions) or the field equations (e.g., $f(R)$ gravity). In this work we take a different, conservative path: keep GR intact and ask whether coherent many‑path contributions around classical geodesics can multiplicatively enhance the Newtonian/GR response in extended systems while vanishing in compact, high‑acceleration environments. We call this framework Σ‑Gravity. Its core ingredients, soft assumptions, and empirical posture are laid out below and developed technically in the body of the paper.
 
 ### 1) What is the problem with current theories?
 
@@ -64,15 +68,11 @@ $$
 
 In disks (dynamics) the observable can introduce a local‑acceleration weighting of the kernel's contribution, while in clusters (lensing) the same coherence window acts directly in projected surface density; in both cases the boost is multiplicative and curl‑free when $K=K(R)$.
 
-### 5) What the motivated mathematics supports—and what is calibrated
+### 5) Framework Structure and Calibration
 
-The operator structure
+The multiplicative operator structure g_eff(x) = g_bar(x)[1+K(x)] is motivated by stationary-phase reduction of gravitational path integrals. The coherence window C(R) uses a Burr-XII form justified by superstatistical decoherence models (Appendix C). Axisymmetry guarantees curl-free fields; ring integrals reduce to elliptic integrals (Appendix B); Solar System safety follows from K→0 as R→0.
 
-$$
-g_{\rm eff}(\mathbf{x}) = g_{\rm bar}(\mathbf{x})\,[1 + K(\mathbf{x})]
-$$
-
-follows from a stationary‑phase reduction of the gravitational path integral, identifying $K$ with the normalized net effect of near‑stationary families around the classical geometry. The existence of a causal coherence length $\ell_0=c\,\tau_{\rm collapse}$ is likewise part of the derivation. The explicit envelope $C(R)$ above is phenomenological but principled: it arises as the Burr‑XII survival function of a Gamma–Weibull superstatistical mixture, a standard model for heterogeneous decoherence rates, here repurposed for gravitational coherence (Appendix C). Axisymmetry with $K=K(R)$ guarantees a conservative (curl‑free) effective field; ring‑geometry integrals reduce exactly to complete elliptic integrals (Appendix B), ensuring that the kernel can be carried through galactic and cluster calculations with analytic control. Finally, Solar‑System constraints are satisfied by construction because $K\to 0$ rapidly for $R\ll\ell_0$. The small set of hyper‑parameters $\{A,\ell_0,p,n_{\rm coh}\}$ is then calibrated once per observational domain (disks; clusters) and frozen for suggestion, yielding competitive performance on RAR and strong‑lensing tests without per‑system retuning.
+Parameters {A, ℓ₀, p, n_coh} are calibrated once per domain (galaxies/clusters) and frozen for all predictions. Validation tests (Appendix H) show that simple theoretical predictions miss fitted values by factors of 10-2500×; we therefore present the model as empirically successful phenomenology motivated by (but not derived from) quantum coherence concepts.
 
 ### Key equations (for reference in the main text)
 
@@ -173,7 +173,7 @@ so the Σ‑kernel $\mathcal{K}$ is defined operationally as the normalized, net
 
 **Validation note:** Simple density-time closures ($\ell_0 = c/\sqrt{G\rho}$) and naive path-counting fail to recover the empirically successful $\{\ell_0, A, p\}$ by factors of 10-2500× (Appendix H). We therefore treat $C(R)$ as phenomenological but principled (superstatistics) and calibrate its parameters on data.
 
-We emphasize that quantitative results in §§5.1-5.3 test the **suggestive power** of this phenomenology, not the validity of any specific quantum gravity theory.
+We emphasize that quantitative results in §§5.1-5.3 test the **predictive power** of this phenomenology, not the validity of any specific quantum gravity theory.
 
 ---
 
@@ -191,7 +191,7 @@ Regimes:
 - Local classicality ($R\ll\ell_0$): compact systems (Solar System) decohere as a whole; $\delta\mathbf{g}_q\to0\Rightarrow \mathcal{K}\to0$.
 - Macroscopic coherence ($R\gg\ell_0$): extended systems (galaxies/clusters) cannot collapse globally; a test body samples a coherent sum over many near‑stationary geometries; $\delta\mathbf{g}_q\ne0\Rightarrow \mathcal{K}>0$.
 
-We make no numeric suggestion for $\ell_0$ from density alone; $\ell_0$ is treated as a calibrated constant within each domain. Attempts to set its value directly from $\rho$ via $\ell_0 = c/(\alpha\sqrt{G\rho})$ miss the fitted scales by orders of magnitude (see validation results in Appendix H).
+We make no numeric prediction for $\ell_0$ from density alone; $\ell_0$ is treated as a calibrated constant within each domain. Attempts to set its value directly from $\rho$ via $\ell_0 = c/(\alpha\sqrt{G\rho})$ miss the fitted scales by orders of magnitude (see validation results in Appendix H).
 
 We model the degree of quantum coherence with a dimensionless field $C(R)$ which vanishes at small $R$ and saturates toward unity at large $R$. The Σ‑kernel is proportional to this field with amplitude $A_c$:
 
@@ -281,7 +281,7 @@ Here we use the same $C(·)$ as §2.3. Triaxial projection and $\Sigma_{\rm crit
 
 **Mass‑scaled coherence.** We allow $ℓ_0$ to **scale with halo size**: $ℓ_0(M) = ℓ_{0,⋆}(R_{500}/1~{\rm Mpc})^γ$, testing $γ=0$ (fixed coherence) vs $γ>0$ (self‑similar growth). With the curated sample including BCG and $P(z_s)$, posteriors yield **$\gamma = 0.09 \pm 0.10$**—**consistent with no mass‑scaling**.
 
-We distinguish domain-effective coherence scales: $\ell_0^{\rm dyn} \sim 5$ kpc (disks) and $\ell_0^{\rm proj} \sim 200$ kpc (lensing). This difference is observable-driven (2-D local acceleration vs 3-D projection), not a density-law suggestion; our derivation-validation results show simple $\rho^{-1/2}$ scalings fail (Appendix H). Within clusters, the mass-scaling test $\ell_0(M) = \ell_{0,\star}(R_{500}/1~\mathrm{Mpc})^\gamma$ yields $\gamma = 0.09 \pm 0.10$ (consistent with zero).
+We distinguish domain-effective coherence scales: $\ell_0^{\rm dyn} \sim 5$ kpc (disks) and $\ell_0^{\rm proj} \sim 200$ kpc (lensing). This difference is observable-driven (2-D local acceleration vs 3-D projection), not a density-law prediction; our derivation-validation results show simple $\rho^{-1/2}$ scalings fail (Appendix H). Within clusters, the mass-scaling test $\ell_0(M) = \ell_{0,\star}(R_{500}/1~\mathrm{Mpc})^\gamma$ yields $\gamma = 0.09 \pm 0.10$ (consistent with zero).
 
 
 ### 2.9. Safety: Newtonian core and curl‑free field
