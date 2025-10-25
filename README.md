@@ -80,13 +80,28 @@ Parameters {A, ℓ₀, p, n_coh} are calibrated once per domain (galaxies/cluste
 
 ### Key equations (for reference in the main text)
 
-**Effective field (domain‑agnostic):** $g_{\rm eff}(R) = g_{\rm bar}(R)\,[1 + K(R)]$.
+**Effective field (domain‑agnostic):**
+$$
+g_{\rm eff}(R) = g_{\rm bar}(R)\,[1 + K(R)]
+$$
 
-**Coherence window:** $C(R) = 1 - [1 + (R/\ell_0)^p]^{-n_{\rm coh}}$, with $\ell_0 = c\,\tau_{\rm collapse}$.
+**Coherence window:**
+$$
+C(R) = 1 - [1 + (R/\ell_0)^p]^{-n_{\rm coh}}
+$$
+with $\ell_0 = c\,\tau_{\rm collapse}$.
 
-**Canonical kernel:** $K(R) = A\,C(R;\ell_0,p,n_{\rm coh}) \times \prod_j G_j$ (gates enforce morphology and local classicality).
+**Canonical kernel:**
+$$
+K(R) = A\,C(R;\ell_0,p,n_{\rm coh}) \times \prod_j G_j
+$$
+(gates enforce morphology and local classicality).
 
-**Exact ring geometry:** the azimuthal Green's function reduces to complete elliptic integrals with parameter $m = 4RR'/(R+R')^2$ (Appendix B).
+**Exact ring geometry:** the azimuthal Green's function reduces to complete elliptic integrals with parameter
+$$
+m = \frac{4RR'}{(R+R')^2}
+$$
+(Appendix B).
 
 ### Scope and posture
 
