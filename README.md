@@ -12,13 +12,7 @@ We present Σ-Gravity, a motivated, empirically calibrated scale-dependent enhan
 
 For galaxy clusters, the same framework extends naturally: realistic baryonic profiles (gNFW gas + BCG/ICL) with triaxial projection and a recalibrated amplitude achieve 88.9% coverage (16/18) within 68% posterior predictive checks across 10 galaxy clusters with 7.9% median fractional error. As validation, 2 clusters were held out during calibration (Abell 2261, MACSJ1149) and both fall within 68% PPC. The amplitude ratio A_cluster/A_galaxy ≈ 7.8 is qualitatively consistent with geometric path-counting expectations. Mass-scaling tests find γ = 0.09±0.10, consistent with universal coherence length within each domain.
 
-**Theoretical framework:** The kernel structure is motivated by quantum path-integral reasoning—coherent superposition of near-geodesic families around the classical GR solution—but parameters {A, ℓ₀, p, n_coh} are empirically calibrated.
-
-The coherence window C(R) = 1-[1+(R/ℓ₀)^p]^(-n_coh) employs a Burr-XII form justified by superstatistical decoherence models.
-
-Dedicated validation confirms that simple theoretical predictions (density-based ℓ₀, naive path-counting) fail by factors of 10-2500× (Appendix H). We therefore present this as principled phenomenology with testable predictions, not first-principles derivation.
-
-The model is curl-free by construction (axisymmetric K=K(R)), employs exact elliptic-integral geometry, and satisfies all Solar System constraints (boost at 1 AU: ≲7×10⁻¹⁴). Complete reproducible code, provenance manifests, and validation suite are released publicly.
+**Theoretical framework:** The kernel structure is motivated by quantum path-integral reasoning—coherent superposition of near-geodesic families around the classical GR solution—but parameters {A, ℓ₀, p, n_coh} are empirically calibrated. The coherence window C(R) = 1-[1+(R/ℓ₀)^p]^(-n_coh) employs a Burr-XII form justified by superstatistical decoherence models. Dedicated validation confirms that simple theoretical predictions (density-based ℓ₀, naive path-counting) fail by factors of 10-2500× (Appendix H). We therefore present this as principled phenomenology with testable predictions, not first-principles derivation. The model is curl-free by construction (axisymmetric K=K(R)), employs exact elliptic-integral geometry, and satisfies all Solar System constraints (boost at 1 AU: ≲7×10⁻¹⁴). Complete reproducible code, provenance manifests, and validation suite are released publicly.
 
 ---
 
@@ -423,31 +417,27 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 
 **Key insight:** The k‑fold results (88.9% coverage, 7.9% median error) represent the **full sample performance** across all 10 clusters, while the 2/2 hold‑out coverage (14.9% median error) validates that the model generalizes to unseen data. The hold‑outs serve as a robustness check, but the k‑fold results demonstrate the model's overall predictive power.
 
-![Figure 6. Hold‑out suggested vs observed](figures/holdouts_pred_vs_obs.png)
+![Figure 6. K‑fold suggested vs observed](figures/kfold_pred_vs_obs.png)
 
-*Figure 6. Blind hold‑outs: suggested θ_E medians with 68% PPC bands vs observed.*
+*Figure 6. K‑fold hold‑out across N=10: suggested vs observed with 68% PPC.*
 
-![Figure 7. K‑fold suggested vs observed](figures/kfold_pred_vs_obs.png)
+![Figure 7. K‑fold coverage](figures/kfold_coverage.png)
 
-*Figure 7. K‑fold hold‑out across N=10: suggested vs observed with 68% PPC.*
+*Figure 7. Coverage summary: 16/18 inside 68%.*
 
-![Figure 8. K‑fold coverage](figures/kfold_coverage.png)
+![Figure 8. Convergence panels for all clusters](figures/cluster_kappa_profiles_panel.png)
 
-*Figure 8. Coverage summary: 16/18 inside 68%.*
+*Figure 8. Convergence κ(R) for each catalog cluster: GR(baryons), GR+DM (SIS ref calibrated to observed θ_E), and Σ‑Gravity with A_c chosen so ⟨κ⟩(<θ_E)=1.*
 
-![Figure 9. Convergence panels for all clusters](figures/cluster_kappa_profiles_panel.png)
+![Figure 9. Deflection panels for all clusters](figures/cluster_alpha_profiles_panel.png)
 
-*Figure 9. Convergence κ(R) for each catalog cluster: GR(baryons), GR+DM (SIS ref calibrated to observed θ_E), and Σ‑Gravity with A_c chosen so ⟨κ⟩(<θ_E)=1.*
+*Figure 9. Deflection α(R) with α=R line and vertical θ_E markers for GR(baryons), GR+DM ref, and Σ‑Gravity — per cluster.*
 
-![Figure 10. Deflection panels for all clusters](figures/cluster_alpha_profiles_panel.png)
+![Figure 10. ⟨κ⟩(<R) panels for hold‑outs](figures/cluster_kappa_panels.png)
 
-*Figure 10. Deflection α(R) with α=R line and vertical θ_E markers for GR(baryons), GR+DM ref, and Σ‑Gravity — per cluster.*
+*Figure 10. ⟨κ⟩(<R) vs R for Abell 2261 and MACSJ1149: GR(baryons) baseline and Σ‑Gravity median ±68% band with Einstein crossing marked.*
 
-![Figure 11. ⟨κ⟩(<R) panels for hold‑outs](figures/cluster_kappa_panels.png)
-
-*Figure 11. ⟨κ⟩(<R) vs R for Abell 2261 and MACSJ1149: GR(baryons) baseline and Σ‑Gravity median ±68% band with Einstein crossing marked.*
-
-![Figure 12. Triaxial sensitivity (θ_E vs q_LOS)](figures/triaxial_sensitivity_A2261.png)
+![Figure 11. Triaxial sensitivity (θ_E vs q_LOS)](figures/triaxial_sensitivity_A2261.png)
 
 ### 5.4. Milky Way (Gaia DR3): Star‑level RAR (this repository)
 

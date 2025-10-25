@@ -28,6 +28,18 @@ def convert_markdown_to_latex(md_content):
 \usepackage{booktabs}
 \usepackage{xcolor}
 \usepackage{longtable}
+\usepackage{ragged2e}  % Better paragraph formatting
+
+% Line breaking settings
+\sloppy  % Allow more flexible line breaking
+\hyphenpenalty=1000  % Reduce hyphenation
+\exhyphenpenalty=1000  % Reduce hyphenation in compound words
+\doublehyphendemerits=10000  % Penalize consecutive hyphenated lines
+
+% Math line breaking
+\allowdisplaybreaks  % Allow page breaks in display math
+\binoppenalty=1000   % Penalty for breaking after binary operators
+\relpenalty=1000     % Penalty for breaking after relations
 
 % Unicode support for special characters
 \DeclareUnicodeCharacter{03A3}{$\Sigma$}  % Σ
@@ -59,6 +71,10 @@ def convert_markdown_to_latex(md_content):
     citecolor=blue,
     urlcolor=blue,
 }
+
+% Custom commands for better line breaking
+\newcommand{\allowbreakmath}[1]{$#1$\allowbreak}
+\newcommand{\breakablemath}[1]{$#1$\allowbreak}
 
 % Custom commands
 \newcommand{\Sigmagrav}{$\Sigma$-Gravity}
@@ -106,16 +122,16 @@ def convert_markdown_to_latex(md_content):
         if line.strip().startswith('## Abstract') or line.strip().startswith('**Abstract**'):
             latex += "\\begin{abstract}\n"
             i += 1
-            # Collect abstract content until next section
+            # Collect abstract content until next section as one paragraph
             while i < len(lines) and not lines[i].strip().startswith('##'):
                 # Skip horizontal rules that are just separators after abstract
                 if lines[i].strip() in ['---', '***', '___']:
                     i += 1
                     continue
                 if lines[i].strip():
-                    latex += convert_inline_formatting(lines[i]) + "\n"
+                    latex += convert_inline_formatting(lines[i]) + " "
                 i += 1
-            latex += "\\end{abstract}\n\n"
+            latex += "\n\\end{abstract}\n\n"
             continue
         
         # Section headers
@@ -296,8 +312,11 @@ def convert_inline_formatting(text):
     # Links [text](url)
     text = re.sub(r'\[(.+?)\]\((.+?)\)', r'\\href{\2}{\1}', text)
     
-    # Restore math blocks
+    # Restore math blocks and add line breaks for long expressions
     for i, math in enumerate(math_blocks):
+        # Add \allowbreak after long math expressions
+        if len(math) > 30:  # Long math expressions
+            math = math.replace('$', '$\\allowbreak ')
         text = text.replace(f"MATHBLOCK{i}MATHBLOCK", math)
     
     return text
@@ -372,9 +391,15 @@ def main():
     else:
         print(f"[FAILED] PDF generation failed")
         if result.stdout:
-            print("STDOUT:", result.stdout[-500:])
+            try:
+                print("STDOUT:", result.stdout[-500:])
+            except UnicodeEncodeError:
+                print("STDOUT: [Unicode content - check LaTeX log]")
         if result.stderr:
-            print("STDERR:", result.stderr[-500:])
+            try:
+                print("STDERR:", result.stderr[-500:])
+            except UnicodeEncodeError:
+                print("STDERR: [Unicode content - check LaTeX log]")
         return 1
     
     # Run pdflatex again for cross-references
