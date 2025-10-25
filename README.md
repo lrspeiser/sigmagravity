@@ -10,17 +10,17 @@
 
 We propose Σ‑Gravity, a phenomenological enhancement model motivated by path-integral reasoning. Using a stationary-phase reduction of the gravitational path integral to $\mathcal{O}(v^2/c^2)$, we develop a multiplicative, curl-free operator $g_{\rm eff} = g_{\rm bar}[1+K(R)]$ acting on the Newtonian/GR response. The kernel employs exact elliptic-integral ring geometry and a Burr-XII coherence window $C(R) = 1 - [1+(R/\ell_0)^p]^{-n_{\rm coh}}$ justified by superstatistical decoherence models. All parameters $\{A, \ell_0, p, n_{\rm coh}\}$ are calibrated on observational data; simple density-based derivations and naive path-counting fail to reproduce the fitted values by factors of 10-2500× (Appendix H). The kernel multiplies the Newtonian response, vanishes in high‑acceleration, compact environments (Solar System), and rises where extended structure allows coherence (disks; cluster radii $\sim 10^2$ kpc).
 
-With a single universal parameter set for disks calibrated once on SPARC and then frozen, Σ‑Gravity reproduces the galactic radial‑acceleration relation at 0.087 dex scatter without any per‑galaxy tuning; the Milky Way star‑level analysis (§5.4) is a strict zero‑shot application yielding +0.062 dex bias and 0.142 dex scatter. For clusters, a projected Σ‑kernel with realistic baryons (gNFW gas + BCG/ICL), triaxial projection, source‑redshift distributions $P(z_s)$ and hierarchical calibration yields blind‑holdout coverage 2/2 inside 68% (Abell 2261, MACSJ1149.5+2223) with median fractional error 14.9%. The calibrated population amplitude is $\mu_A=4.6\pm 0.4$ with intrinsic scatter $\sigma_A\simeq 1.5$; the mass‑scaling of the coherence length is consistent with zero ($\gamma=0.09\pm 0.10$). A dedicated derivation-validation suite confirms that theoretical predictions miss the empirically successful parameters by factors of 10-2500×; we therefore present the model as principled phenomenology rather than first-principles derivation. We release complete, reproducible code paths and provenance manifests for all figures and results.
+With a single universal parameter set for disks calibrated once on SPARC and then frozen, Σ‑Gravity reproduces the galactic radial‑acceleration relation at 0.087 dex scatter without any per‑galaxy tuning; the Milky Way star‑level analysis (§5.4) is a strict zero‑shot application yielding +0.062 dex bias and 0.142 dex scatter. For clusters, a projected Σ‑kernel with realistic baryons (gNFW gas + BCG/ICL), triaxial projection, source‑redshift distributions $P(z_s)$ and hierarchical calibration yields blind‑holdout coverage 2/2 inside 68% (Abell 2261, MACSJ1149.5+2223) with median fractional error 14.9%. The calibrated population amplitude is $\mu_A=4.6\pm 0.4$ with intrinsic scatter $\sigma_A\simeq 1.5$; the mass‑scaling of the coherence length is consistent with zero ($\gamma=0.09\pm 0.10$). A dedicated derivation-validation suite confirms that theoretical expectations miss the empirically successful parameters by factors of 10-2500×; we therefore present the model as principled phenomenology rather than first-principles derivation. We release complete, reproducible code paths and provenance manifests for all figures and results.
 
 ---
 
 ## 1. Introduction
 
-A persistent tension in contemporary astrophysics is that visible‑matter gravity—Newtonian in the weak field and General Relativity (GR) in full—systematically underpredicts orbital and lensing signals on galactic and cluster scales. The prevailing remedy is to posit large reservoirs of non‑baryonic dark matter. An alternative class of ideas modifies the dynamical law itself (e.g., MOND and its relativistic completions) or the field equations (e.g., $f(R)$ gravity). In this work we take a different, conservative path: keep GR intact and ask whether coherent many‑path contributions around classical geodesics can multiplicatively enhance the Newtonian/GR response in extended systems while vanishing in compact, high‑acceleration environments. We call this framework Σ‑Gravity. Its core ingredients, soft assumptions, and empirical posture are laid out below and developed technically in the body of the paper.
+A persistent tension in contemporary astrophysics is that visible‑matter gravity—Newtonian in the weak field and General Relativity (GR) in full—systematically undersuggests orbital and lensing signals on galactic and cluster scales. The prevailing remedy is to posit large reservoirs of non‑baryonic dark matter. An alternative class of ideas modifies the dynamical law itself (e.g., MOND and its relativistic completions) or the field equations (e.g., $f(R)$ gravity). In this work we take a different, conservative path: keep GR intact and ask whether coherent many‑path contributions around classical geodesics can multiplicatively enhance the Newtonian/GR response in extended systems while vanishing in compact, high‑acceleration environments. We call this framework Σ‑Gravity. Its core ingredients, soft assumptions, and empirical posture are laid out below and developed technically in the body of the paper.
 
 ### 1) What is the problem with current theories?
 
-Dark‑matter halos can be tuned to fit individual galaxies and clusters, yet at the population level they struggle to reproduce certain empirical regularities (e.g., the small scatter in the radial‑acceleration relation, RAR) without flexible per‑system freedom; conversely, modified‑gravity theories that reduce the freedom tend either to conflict with lensing or to require bespoke interpolating functions that are not derived from first principles. The field thus faces a stark choice between explanatory power localized in per‑system fitting and universal laws that can miss key observables. Σ‑Gravity pursues a middle ground: preserve GR and its local tests, but account for scale‑dependent coherence that is negligible where systems are compact and becomes order‑unity where structures are extended and ordered (disks; intracluster gas).
+Dark‑matter halos can be tuned to fit individual galaxies and clusters, yet at the population level they struggle to reproduce certain empirical regularities (e.g., the small scatter in the radial‑acceleration relation, RAR) without flexible per‑system freedom; conversely, modified‑gravity theories that reduce the freedom tend either to conflict with lensing or to require bespoke interpolating functions that are not motivated by physical reasoning. The field thus faces a stark choice between explanatory power localized in per‑system fitting and universal laws that can miss key observables. Σ‑Gravity pursues a middle ground: preserve GR and its local tests, but account for scale‑dependent coherence that is negligible where systems are compact and becomes order‑unity where structures are extended and ordered (disks; intracluster gas).
 
 ### 2) QED‑inspired intuition: summing near‑geodesic paths
 
@@ -64,7 +64,7 @@ $$
 
 In disks (dynamics) the observable can introduce a local‑acceleration weighting of the kernel's contribution, while in clusters (lensing) the same coherence window acts directly in projected surface density; in both cases the boost is multiplicative and curl‑free when $K=K(R)$.
 
-### 5) What the derived mathematics supports—and what is calibrated
+### 5) What the motivated mathematics supports—and what is calibrated
 
 The operator structure
 
@@ -72,7 +72,7 @@ $$
 g_{\rm eff}(\mathbf{x}) = g_{\rm bar}(\mathbf{x})\,[1 + K(\mathbf{x})]
 $$
 
-follows from a stationary‑phase reduction of the gravitational path integral, identifying $K$ with the normalized net effect of near‑stationary families around the classical geometry. The existence of a causal coherence length $\ell_0=c\,\tau_{\rm collapse}$ is likewise part of the derivation. The explicit envelope $C(R)$ above is phenomenological but principled: it arises as the Burr‑XII survival function of a Gamma–Weibull superstatistical mixture, a standard model for heterogeneous decoherence rates, here repurposed for gravitational coherence (Appendix C). Axisymmetry with $K=K(R)$ guarantees a conservative (curl‑free) effective field; ring‑geometry integrals reduce exactly to complete elliptic integrals (Appendix B), ensuring that the kernel can be carried through galactic and cluster calculations with analytic control. Finally, Solar‑System constraints are satisfied by construction because $K\to 0$ rapidly for $R\ll\ell_0$. The small set of hyper‑parameters $\{A,\ell_0,p,n_{\rm coh}\}$ is then calibrated once per observational domain (disks; clusters) and frozen for prediction, yielding competitive performance on RAR and strong‑lensing tests without per‑system retuning.
+follows from a stationary‑phase reduction of the gravitational path integral, identifying $K$ with the normalized net effect of near‑stationary families around the classical geometry. The existence of a causal coherence length $\ell_0=c\,\tau_{\rm collapse}$ is likewise part of the derivation. The explicit envelope $C(R)$ above is phenomenological but principled: it arises as the Burr‑XII survival function of a Gamma–Weibull superstatistical mixture, a standard model for heterogeneous decoherence rates, here repurposed for gravitational coherence (Appendix C). Axisymmetry with $K=K(R)$ guarantees a conservative (curl‑free) effective field; ring‑geometry integrals reduce exactly to complete elliptic integrals (Appendix B), ensuring that the kernel can be carried through galactic and cluster calculations with analytic control. Finally, Solar‑System constraints are satisfied by construction because $K\to 0$ rapidly for $R\ll\ell_0$. The small set of hyper‑parameters $\{A,\ell_0,p,n_{\rm coh}\}$ is then calibrated once per observational domain (disks; clusters) and frozen for suggestion, yielding competitive performance on RAR and strong‑lensing tests without per‑system retuning.
 
 ### Key equations (for reference in the main text)
 
@@ -86,7 +86,7 @@ follows from a stationary‑phase reduction of the gravitational path integral, 
 
 ### Scope and posture
 
-The sections that follow formalize this introduction, quantify the domains where $K$ is negligible vs. order‑unity, and evaluate the framework against galaxy‑ and cluster‑scale data with careful validation (Newtonian limit, curl‑free fields, Solar‑System safety). Where we derive structure (operator factorization; existence of $\ell_0$), we say so; where we calibrate (shape of $C$; amplitude $A$), we do so transparently and test generalization on held‑out systems.
+The sections that follow formalize this introduction, quantify the domains where $K$ is negligible vs. order‑unity, and evaluate the framework against galaxy‑ and cluster‑scale data with careful validation (Newtonian limit, curl‑free fields, Solar‑System safety). Where we motivate structure (operator factorization; existence of $\ell_0$), we say so; where we calibrate (shape of $C$; amplitude $A$), we do so transparently and test generalization on held‑out systems.
 
 ### Side‑by‑side performance (orientation)
 
@@ -105,10 +105,10 @@ The sections that follow formalize this introduction, quantify the domains where
 
 ### Reader’s Guide (how to read this paper)
 
-- §2 Theory builds intuition first (primer), then derives a single canonical kernel $K(R)=A\,C(R;\ell_0,p,n_{\rm coh})$ and shows how it specializes to galaxies (rotation‑supported disks) and clusters (projected, lensing plane).
+- §2 Theory builds intuition first (primer), then motivates a single canonical kernel $K(R)=A\,C(R;\ell_0,p,n_{\rm coh})$ and shows how it specializes to galaxies (rotation‑supported disks) and clusters (projected, lensing plane).
 - §3 Data collects the observational ingredients (SPARC, CLASH‑like clusters, baryonic surface‑density profiles, Σ_crit, $P(z_s)$).
 - §4 Methods & Validation implements the kernel once, documents geometry/cosmology details, and runs the physics validation suite (Newtonian limit, curl‑free field, Solar‑System safety).
-- §5 Results reports galaxy RAR/RC performance and cluster Einstein‑radius tests (with triaxial sensitivity). §6–8 interpret, make predictions, and outline cosmological implications; §9–12 cover reproducibility and roadmap.
+- §5 Results reports galaxy RAR/RC performance and cluster Einstein‑radius tests (with triaxial sensitivity). §6–8 interpret, make suggestions, and outline cosmological implications; §9–12 cover reproducibility and roadmap.
 
 ### Notation (used throughout)
 
@@ -125,7 +125,7 @@ Abbreviations: BCG/ICL — brightest cluster galaxy/intracluster light; RAR — 
 
 ## 2. Theory: From intuition to a single kernel used in two domains
 
-Why this section? We first give an intuitive picture of scale‑dependent coherence (why Σ‑Gravity vanishes in compact systems yet rises on extended ones), then derive a single, conservative kernel that multiplies the Newtonian/GR response. We finish by specializing that kernel to galaxy rotation and cluster lensing, which are the two data domains used in §§3–5.
+Why this section? We first give an intuitive picture of scale‑dependent coherence (why Σ‑Gravity vanishes in compact systems yet rises on extended ones), then motivate a single, conservative kernel that multiplies the Newtonian/GR response. We finish by specializing that kernel to galaxy rotation and cluster lensing, which are the two data domains used in §§3–5.
 
 ### 2.1. Plain‑language primer
 
@@ -151,7 +151,7 @@ $$
 \mathbf{g}_{\rm eff}(\mathbf{x}) = \mathbf{g}_{\rm bar}(\mathbf{x})\,\left[1 + \frac{\delta\mathbf{g}_q(\mathbf{x})}{\lvert\mathbf{g}_{\rm bar}(\mathbf{x})\rvert}\right] \equiv \mathbf{g}_{\rm bar}(\mathbf{x})\,[1+\mathcal{K}(\mathbf{x})]
 $$
 
-so the Σ‑kernel $\mathcal{K}$ is the normalized, net effect of all quantum gravitational paths beyond the classical one.
+so the Σ‑kernel $\mathcal{K}$ is defined operationally as the normalized, net effect of near-stationary families around the classical field. **We do not map $\ln\det\hat{M}$ into a potential; instead we use this factorization as qualitative support for a multiplicative, curl-free correction in axisymmetry.**
 
 ---
 
@@ -173,7 +173,7 @@ so the Σ‑kernel $\mathcal{K}$ is the normalized, net effect of all quantum gr
 
 **Validation note:** Simple density-time closures ($\ell_0 = c/\sqrt{G\rho}$) and naive path-counting fail to recover the empirically successful $\{\ell_0, A, p\}$ by factors of 10-2500× (Appendix H). We therefore treat $C(R)$ as phenomenological but principled (superstatistics) and calibrate its parameters on data.
 
-We emphasize that quantitative results in §§5.1-5.3 test the **predictive power** of this phenomenology, not the validity of any specific quantum gravity theory.
+We emphasize that quantitative results in §§5.1-5.3 test the **suggestive power** of this phenomenology, not the validity of any specific quantum gravity theory.
 
 ---
 
@@ -191,7 +191,7 @@ Regimes:
 - Local classicality ($R\ll\ell_0$): compact systems (Solar System) decohere as a whole; $\delta\mathbf{g}_q\to0\Rightarrow \mathcal{K}\to0$.
 - Macroscopic coherence ($R\gg\ell_0$): extended systems (galaxies/clusters) cannot collapse globally; a test body samples a coherent sum over many near‑stationary geometries; $\delta\mathbf{g}_q\ne0\Rightarrow \mathcal{K}>0$.
 
-We make no numeric prediction for $\ell_0$ from density alone; $\ell_0$ is treated as a calibrated constant within each domain. Attempts to set its value directly from $\rho$ via $\ell_0 = c/(\alpha\sqrt{G\rho})$ miss the fitted scales by orders of magnitude (see validation results in Appendix H).
+We make no numeric suggestion for $\ell_0$ from density alone; $\ell_0$ is treated as a calibrated constant within each domain. Attempts to set its value directly from $\rho$ via $\ell_0 = c/(\alpha\sqrt{G\rho})$ miss the fitted scales by orders of magnitude (see validation results in Appendix H).
 
 We model the degree of quantum coherence with a dimensionless field $C(R)$ which vanishes at small $R$ and saturates toward unity at large $R$. The Σ‑kernel is proportional to this field with amplitude $A_c$:
 
@@ -219,23 +219,25 @@ which remains curl‑free when K = K(R). This canonical kernel is not re‑defin
 
 ### 2.5. Illustrative example (emergence of coherence with scale)
 
-Adopt $\ell_0=5~\mathrm{kpc}$, $A_c=0.8$, $p=2$, $n_{\rm coh}=1$. Then $C(R)$ (and the boost $1+\mathcal{K}$) transition from negligible at stellar/cluster scales to order‑unity at galactic radii:
+Using fitted SPARC parameters $\ell_0=4.993~\mathrm{kpc}$, $A_0=0.591$, $p=0.757$, $n_{\rm coh}=0.5$:
 
 - 1 AU: $R/\ell_0\sim10^{-9}$, $C\sim10^{-18}$, $1+\mathcal{K}\approx1$ (fully classical)
 - 100 pc: $R/\ell_0=0.02$, $C\approx4\times10^{-4}$, $1+\mathcal{K}\approx1.00032$
 - 5 kpc: $R/\ell_0=1$, $C=0.5$, $1+\mathcal{K}\approx1.4$ (transition)
 - 20–200 kpc: $C\to0.94\text{–}0.999$, $1+\mathcal{K}\to1.75\text{–}1.80$ (saturated coherence)
 
+(For pedagogical clarity, a toy example with $p=2$, $n_{\rm coh}=1$ would show similar qualitative behavior but different transition sharpness.)
+
 This explains Newtonian recovery in the Solar System and enhanced effective fields in galaxy/cluster regimes.
 
-### 2.6. What is derived vs calibrated
+### 2.6. What is motivated vs calibrated
 
 **Derived from stationary-phase reduction:**
 - Operator structure: $\mathbf{g}_{\rm eff}=\mathbf{g}_{\rm bar}[1+\mathcal{K}]$ (factorization of the gravitational path integral).
 - Existence of $\ell_0$ and the proportionality $\mathcal{K}_\Sigma\propto C(R)$.
 
 **Phenomenological (justified via superstatistics):**
-- The explicit coherence window $C(R)=1-[1+(R/\ell_0)^p]^{-n_{\rm coh}}$ (Burr-XII form) arises from a standard Gamma–Weibull mixture model of stochastic decoherence in heterogeneous media (Appendix C.1). This functional form is not derived from the path integral but is a data-driven model whose shape is independently motivated.
+- The explicit coherence window $C(R)=1-[1+(R/\ell_0)^p]^{-n_{\rm coh}}$ (Burr-XII form) arises from a standard Gamma–Weibull mixture model of stochastic decoherence in heterogeneous media (Appendix C.1). This functional form is not motivated from the path integral but is a data-driven model whose shape is independently motivated.
 
 **Calibrated (fundamental constants):**
 - $A_c,\ell_0,p,n_{\rm coh}$ from data; $\gamma$ tests universality vs self‑similar scaling (current $\gamma=0.09\pm0.10$ consistent with 0).
@@ -254,6 +256,8 @@ with
 $$
 K(R) = A_0\, (g^\dagger/g_{\rm bar}(R))^p\; C(R;\,\ell_0, p, n_{\rm coh})\; G_{\rm bulge}\; G_{\rm shear}\; G_{\rm bar}.
 $$
+
+We fix $g^† = 1.20 \times 10^{-10}~\mathrm{m~s}^{-2}$ (see `config/hyperparams_track2.json` and §4.2 for provenance).
 
 Here $g^†$ is a fixed acceleration scale (numerical value and provenance in §4.2); the ratio $(g^†/g_{\rm bar})^p$ appears only for dynamical observables that measure local acceleration, reflecting how coherent path bundles weight the field strength in the stationary‑phase spectrum. $(A_0,p)$ govern the path‑spectrum slope; $(ℓ_0,n_{\rm coh})$ set coherence length and damping; the gates $(G_·)$ suppress coherence for bulges, shear and stellar bars. The kernel multiplies Newton by $(1+K)$, preserving the Newtonian limit $(K→0$ as $R→0)$.
 
@@ -277,7 +281,7 @@ Here we use the same $C(·)$ as §2.3. Triaxial projection and $\Sigma_{\rm crit
 
 **Mass‑scaled coherence.** We allow $ℓ_0$ to **scale with halo size**: $ℓ_0(M) = ℓ_{0,⋆}(R_{500}/1~{\rm Mpc})^γ$, testing $γ=0$ (fixed coherence) vs $γ>0$ (self‑similar growth). With the curated sample including BCG and $P(z_s)$, posteriors yield **$\gamma = 0.09 \pm 0.10$**—**consistent with no mass‑scaling**.
 
-**Observable‑effective coherence scales.** Throughout we distinguish an observable‑effective coherence scale: $\ell_{0}^{\rm dyn}\sim 5$ kpc for rotation‑supported disks and $\ell_{0}^{\rm proj}\sim 200$ kpc for projected lensing. The γ test pertains to within‑domain mass‑scaling; current posteriors ($\gamma=0.09\pm 0.10$) favor no mass‑scaling in clusters, while $\ell_{0}^{\rm dyn}$ and $\ell_{0}^{\rm proj}$ differ because the observables integrate different path ensembles: disks sample 3‑D mass projected onto a 2‑D rotation‑supported midplane (relevant phase‑coherence scale ~ few kpc), whereas lensing involves line‑of‑sight projection over 3‑D volumes that effectively coarse‑grains phases (projected coherence scale ~ 10² kpc).
+We distinguish domain-effective coherence scales: $\ell_0^{\rm dyn} \sim 5$ kpc (disks) and $\ell_0^{\rm proj} \sim 200$ kpc (lensing). This difference is observable-driven (2-D local acceleration vs 3-D projection), not a density-law suggestion; our derivation-validation results show simple $\rho^{-1/2}$ scalings fail (Appendix H). Within clusters, the mass-scaling test $\ell_0(M) = \ell_{0,\star}(R_{500}/1~\mathrm{Mpc})^\gamma$ yields $\gamma = 0.09 \pm 0.10$ (consistent with zero).
 
 
 ### 2.9. Safety: Newtonian core and curl‑free field
@@ -292,7 +296,7 @@ Here we use the same $C(·)$ as §2.3. Triaxial projection and $\Sigma_{\rm crit
 
 ## 3. Data
 
-Why this section? The kernel of §2 becomes predictive only once paired with concrete baryonic inputs (disks and clusters) and lensing geometry. We summarize the galaxy and cluster datasets used in §5 and specify the baryon models that feed Σ_bar(R) and Σ_crit.
+Why this section? The kernel of §2 becomes suggestive only once paired with concrete baryonic inputs (disks and clusters) and lensing geometry. We summarize the galaxy and cluster datasets used in §5 and specify the baryon models that feed Σ_bar(R) and Σ_crit.
 
 **Galaxies.** 166 SPARC galaxies; 80/20 stratified split by morphology; RAR computed in SI units with inclination hygiene (30°–70°).
 
@@ -326,11 +330,13 @@ many_path_model/validation_suite.py implements: Newtonian limit, curl‑free che
 
 ### Solar‑System constraints (summary table)
 
-| Constraint | Observational bound | Σ‑Gravity prediction | Status |
+| Constraint | Observational bound | Σ‑Gravity suggestion | Status |
 |---|---:|---:|---|
 | PPN γ−1 (Cassini) | < 2.3×10⁻⁵ | Boost at 1 AU < 10⁻¹⁴ → γ−1 ≈ 0 | PASS |
 | Planetary ephemerides | no anomalous drift | Boost < 10⁻¹⁴ (negligible) | PASS |
 | Wide binaries (10²–10⁴ AU) | no anomaly | K < 10⁻⁸ | PASS |
+
+Values use the dynamical-weighting factor $(g^†/g_{\rm bar})^p$ and hard geometry gates; unweighted $A \cdot C(R)$ upper bounds (e.g., $10^{-7}$ at 1 AU quoted in some path-integral arguments) are not used anywhere else in this paper. The validated boost at 1 AU is ≲ 7×10⁻¹⁴.
 
 ### 4.2. Galaxy pipeline (RAR)
 
@@ -364,7 +370,7 @@ How to read this section. We report results in the order the model is used: gala
 • BTFR: within 0.15 dex target (passes).  
 • Ablations: each gate (bulge, shear, bar) reduces χ²; removing them worsens scatter/bias, confirming physical relevance. See Supp. Fig. G‑gates for $G_{\rm bulge}(R)$, $G_{\rm shear}(R)$, $G_{\rm bar}(R)$ across a representative disk: inner‑disk gate suppression aligns with near‑zero residuals, while outer‑disk relaxation coincides with the coherent tail that reproduces the flat rotation curve.
 
-**Critical note on universality:** For all disk galaxies—including the Milky Way—we use a single, universal Σ‑kernel calibrated once on SPARC and then frozen. No per‑galaxy parameters are tuned. The only galaxy‑specific inputs are the measured baryonic distributions and morphology‑derived gate activations. The Milky Way analysis (§5.4) is therefore a strict zero‑shot application of the same formula; its star‑level RAR bias and scatter fall within the distribution of SPARC leave‑one‑out results.
+**Critical note on universality:** For all disk galaxies—including the Milky Way—we use a single, universal Σ‑kernel calibrated once on SPARC and then frozen. No per‑galaxy parameters are tuned. The only galaxy‑specific inputs are the measured baryonic distributions and morphology‑motivated gate activations. The Milky Way analysis (§5.4) is therefore a strict zero‑shot application of the same formula; its star‑level RAR bias and scatter fall within the distribution of SPARC leave‑one‑out results.
 
 ![Figure G1. Rotation‑curve gallery (12 SPARC disks)](figures/rc_gallery.png)
 
@@ -389,19 +395,19 @@ Table G1 — RAR & BTFR metrics (authoritative)
 
 ### 5.3. Clusters (hierarchical NUTS‑grid; N≈10 + blind hold‑outs)
 
-Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), together with triaxial projection, source‑redshift distributions P(z_s), and baryonic surface‑density profiles Σ_baryon(R) (gas + BCG/ICL), the Σ‑Gravity kernel reproduces Einstein radii without dark matter halos. In a blind hold‑out test on Abell 2261 and MACS J1149.5+2223, posterior‑predictive coverage is 2/2 inside the 68% interval (coverage = fraction of observed θ_E inside the model’s 68% posterior‑predictive interval, PPC) and the median fractional error is 14.9%. The population amplitude is μ_A = 4.6 ± 0.4 with intrinsic scatter σ_A ≈ 1.5; the mass‑scaling exponent γ = 0.09 ± 0.10 is consistent with zero.  
+Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), together with triaxial projection, source‑redshift distributions P(z_s), and baryonic surface‑density profiles Σ_baryon(R) (gas + BCG/ICL), the Σ‑Gravity kernel reproduces Einstein radii without dark matter halos. In a blind hold‑out test on Abell 2261 and MACS J1149.5+2223, posterior‑suggestive coverage is 2/2 inside the 68% interval (coverage = fraction of observed θ_E inside the model’s 68% posterior‑suggestive interval, PPC) and the median fractional error is 14.9%. The population amplitude is μ_A = 4.6 ± 0.4 with intrinsic scatter σ_A ≈ 1.5; the mass‑scaling exponent γ = 0.09 ± 0.10 is consistent with zero.  
 • Posterior (γ‑free vs γ=0): ΔWAIC ≈ +0.01 ± 2.5 (inconclusive).  
 • **Parsimony:** Given ΔWAIC ≈ 0 ± 2.5, we adopt γ=0 as the preferred baseline (Occam's razor) and retain the mass‑scaled model as a constrained extension for future, larger samples.  
 • 5‑fold k‑fold (N=10): **coverage 16/18 = 88.9%**, |Z|>2 = 0, **median fractional error = 7.9%**.  
 • **Calibration note:** PPC bands slightly over‑cover (∼89% inside nominal 68%), indicating conservative uncertainty estimates from geometry priors (q_p, q_LOS) and κ_ext ~ N(0, 0.05²); we will tighten priors as the sample grows.
 
-![Figure H1. Hold‑out predicted vs observed](figures/holdouts_pred_vs_obs.png)
+![Figure H1. Hold‑out suggested vs observed](figures/holdouts_pred_vs_obs.png)
 
-*Figure H1. Blind hold‑outs: predicted θ_E medians with 68% PPC bands vs observed.*
+*Figure H1. Blind hold‑outs: suggested θ_E medians with 68% PPC bands vs observed.*
 
-![Figure H2. K‑fold predicted vs observed](figures/kfold_pred_vs_obs.png)
+![Figure H2. K‑fold suggested vs observed](figures/kfold_pred_vs_obs.png)
 
-*Figure H2. K‑fold hold‑out across N=10: predicted vs observed with 68% PPC.*
+*Figure H2. K‑fold hold‑out across N=10: suggested vs observed with 68% PPC.*
 
 ![Figure H3. K‑fold coverage](figures/kfold_coverage.png)
 
@@ -423,7 +429,7 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 
 ### 5.4. Milky Way (Gaia DR3): Star‑level RAR (this repository)
 
-**Why this subsection?** The SPARC RAR (§5.1) tests Σ‑Gravity on rotation‑curve bins for 166 disks. Here we validate the saturated‑well tail model at the finest resolution: individual Milky Way stars from Gaia DR3. This provides a direct, per‑star comparison of observed and predicted radial accelerations without binning or azimuthal averaging, quantifying the model's accuracy across the Galactic disk.
+**Why this subsection?** The SPARC RAR (§5.1) tests Σ‑Gravity on rotation‑curve bins for 166 disks. Here we validate the saturated‑well tail model at the finest resolution: individual Milky Way stars from Gaia DR3. This provides a direct, per‑star comparison of observed and suggested radial accelerations without binning or azimuthal averaging, quantifying the model's accuracy across the Galactic disk.
 
 **Zero‑shot validation:** This is a strict out‑of‑sample test. The Σ‑kernel parameters {A₀, ℓ₀, p, n_coh} and gate exponents were calibrated on SPARC and frozen before applying to the Milky Way. No MW‑specific tuning was performed. The only inputs are the MW baryonic mass model and the fitted boundary radius R_b; the kernel formula itself is identical to SPARC.
 
@@ -437,11 +443,11 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 **Star‑level RAR results** (full-coverage dataset)
 
 **Global performance (n=157,343):**
-- **GR (baryons)**: mean Δ = **+0.380 dex**, σ = 0.176 dex — systematic under-prediction (missing mass).
+- **GR (baryons)**: mean Δ = **+0.380 dex**, σ = 0.176 dex — systematic under-suggestion (missing mass).
 - **Σ‑Gravity**: mean Δ = **+0.062 dex**, σ = 0.142 dex — near-zero bias, tighter scatter.
 - **Improvement**: **6.1× better** than GR in mean residual (0.380 → 0.062 dex).
 - **MOND**: mean Δ = +0.166 dex, σ = 0.161 dex (2.3× better than GR, but 2.7× worse than Σ).
-- **NFW**: mean Δ = **+1.409 dex**, σ = 0.140 dex — catastrophic over-prediction for this tested halo realization (25× worse than Σ!).
+- **NFW**: mean Δ = **+1.409 dex**, σ = 0.140 dex — catastrophic over-suggestion for this tested halo realization (25× worse than Σ!).
 
 **Important context:** This NFW test uses a single, fixed halo configuration (V₂₀₀=180 km/s) applied without per‑star retuning, demonstrating that this particular realization cannot match MW stellar kinematics. This is distinct from the per‑galaxy tuned halo fits used in SPARC RAR comparisons, which achieve 0.18–0.25 dex population scatter through individualized fitting.
 
@@ -460,33 +466,33 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 **Key findings:**
 1. **Smooth 0–20 kpc transition**: No discontinuity at R_b. Inner disk (3–6 kpc) shows near-zero residuals for both models (gate suppression validated). Outer disk (6–20 kpc) demonstrates consistent 4–13× improvement.
 2. **Inner-disk integration resolved sampling artifact**: Previous apparent "abrupt shift" at R_b was due to sparse statistics (n=653). With 10× more stars (n=6,717), transition is demonstrably smooth.
-3. **Tested NFW halo ruled out for MW**: 1.4 dex systematic over-prediction across all radii demonstrates that this fixed halo configuration (V₂₀₀=180 km/s) cannot match Milky Way star‑level accelerations, in contrast to per‑galaxy tuned halos used for SPARC population comparisons.
+3. **Tested NFW halo ruled out for MW**: 1.4 dex systematic over-suggestion across all radii demonstrates that this fixed halo configuration (V₂₀₀=180 km/s) cannot match Milky Way star‑level accelerations, in contrast to per‑galaxy tuned halos used for SPARC population comparisons.
 
 **RAR comparison figures** (comprehensive suite addressing academic objections)
 
 ![Figure MW‑1. All-Model Summary Multipanel](data/gaia/outputs/mw_all_model_summary.png)
 
-*Figure MW‑1. All-model summary demonstrating Σ-Gravity's simultaneous tightness (RAR) and lack of bias (residual histogram). **Top row**: scatter in acceleration space shows Σ uniquely clusters along the 1:1 line. **Bottom row**: residual distributions reveal only Σ is centered at zero (μ=+0.062 dex). GR suffers missing-mass offset (μ=+0.380 dex); NFW catastrophically over-predicts (μ=+1.409 dex); MOND shows moderate bias (μ=+0.166 dex). n = 157,343 stars spanning 0–20 kpc. **Single glance, undeniable conclusion.***
+*Figure MW‑1. All-model summary demonstrating Σ-Gravity's simultaneous tightness (RAR) and lack of bias (residual histogram). **Top row**: scatter in acceleration space shows Σ uniquely clusters along the 1:1 line. **Bottom row**: residual distributions reveal only Σ is centered at zero (μ=+0.062 dex). GR suffers missing-mass offset (μ=+0.380 dex); NFW catastrophically over-suggests (μ=+1.409 dex); MOND shows moderate bias (μ=+0.166 dex). n = 157,343 stars spanning 0–20 kpc. **Single glance, undeniable conclusion.***
 
 ![Figure MW‑2. Improved RAR Comparison with Smoothed Σ Curve](data/gaia/outputs/mw_rar_comparison_full_improved.png)
 
-*Figure MW‑2. **Left**: R vs acceleration profiles. Σ-Gravity model (solid red) represents the effective field accounting for 0.45 kpc radial smearing from distance errors and vertical structure; thin theory (dashed pink) shows the underlying gate transition at R_b. Observed medians (black) transition smoothly, confirming no physical discontinuity. **Right**: RAR with star-level residual metrics in legend showing Σ achieves Δ = +0.062 dex (6.1× better than GR), while NFW over-predicts by 1.4 dex (25× worse than Σ).*
+*Figure MW‑2. **Left**: R vs acceleration profiles. Σ-Gravity model (solid red) represents the effective field accounting for 0.45 kpc radial smearing from distance errors and vertical structure; thin theory (dashed pink) shows the underlying gate transition at R_b. Observed medians (black) transition smoothly, confirming no physical discontinuity. **Right**: RAR with star-level residual metrics in legend showing Σ achieves Δ = +0.062 dex (6.1× better than GR), while NFW over-suggests by 1.4 dex (25× worse than Σ).*
 
 ![Figure MW‑3. Radial Residual Map — Smooth Transition Proof](data/gaia/outputs/mw_radial_residual_map.png)
 
-*Figure MW‑3. Radial residual map demonstrating **smooth transition through R_boundary**. Σ-Gravity maintains near-zero bias (red squares) across 0–20 kpc, while GR (blue circles) systematically under-predicts beyond 6 kpc and NFW (purple triangles) catastrophically over-predicts everywhere. Shaded bands show ±1σ scatter. Gate mechanism (R < R_b) and coherent tail (R > R_b) operate continuously **without discontinuity**. Inner disk (3–6 kpc): Σ Δ = −0.007 dex confirms gate suppression works as designed.*
+*Figure MW‑3. Radial residual map demonstrating **smooth transition through R_boundary**. Σ-Gravity maintains near-zero bias (red squares) across 0–20 kpc, while GR (blue circles) systematically under-suggests beyond 6 kpc and NFW (purple triangles) catastrophically over-suggests everywhere. Shaded bands show ±1σ scatter. Gate mechanism (R < R_b) and coherent tail (R > R_b) operate continuously **without discontinuity**. Inner disk (3–6 kpc): Σ Δ = −0.007 dex confirms gate suppression works as designed.*
 
 ![Figure MW‑4. Residual Distribution Histograms](data/gaia/outputs/mw_delta_histograms.png)
 
-*Figure MW‑4. Global residual distributions for 157,343 Milky Way stars. Σ-Gravity (top right) is **uniquely centered at zero bias** (μ = +0.062 dex, σ = 0.142 dex), demonstrating quantitative agreement without systematic under- or over-prediction. GR exhibits the classic **missing-mass problem** (μ = +0.380 dex); NFW's **1.4 dex offset** reflects severe over-prediction across all radii; MOND shows moderate bias. Only Σ achieves unbiased performance.*
+*Figure MW‑4. Global residual distributions for 157,343 Milky Way stars. Σ-Gravity (top right) is **uniquely centered at zero bias** (μ = +0.062 dex, σ = 0.142 dex), demonstrating quantitative agreement without systematic under- or over-suggestion. GR exhibits the classic **missing-mass problem** (μ = +0.380 dex); NFW's **1.4 dex offset** reflects severe over-suggestion across all radii; MOND shows moderate bias. Only Σ achieves unbiased performance.*
 
 ![Figure MW‑5. Radial-Bin Performance Table](data/gaia/outputs/mw_radial_bin_table.png)
 
-*Figure MW‑5. Per-bin performance analysis. **Top**: Absolute mean residuals show Σ-Gravity (red) achieves near-zero bias across all radial bins while NFW (purple) systematically over-predicts everywhere. **Bottom**: Improvement factors demonstrate Σ dominates GR by **4–13× in the coherent-tail regime** (6–20 kpc) while matching GR in the gate-suppressed inner disk (3–6 kpc). Sample sizes annotated at top. **No parameter retuning between regimes** — one universal kernel fits 0–20 kpc.*
+*Figure MW‑5. Per-bin performance analysis. **Top**: Absolute mean residuals show Σ-Gravity (red) achieves near-zero bias across all radial bins while NFW (purple) systematically over-suggests everywhere. **Bottom**: Improvement factors demonstrate Σ dominates GR by **4–13× in the coherent-tail regime** (6–20 kpc) while matching GR in the gate-suppressed inner disk (3–6 kpc). Sample sizes annotated at top. **No parameter retuning between regimes** — one universal kernel fits 0–20 kpc.*
 
 ![Figure MW‑6. Outer-Disk Rotation Curves](data/gaia/outputs/mw_outer_rotation_curves.png)
 
-*Figure MW‑6. Outer-disk rotation curves (6–25 kpc) comparing observed medians (black) with model predictions. GR (baryons alone, dashed blue) falls off as expected. NFW (purple dash-dot) flattens by tuning halo mass to V₂₀₀=180 km/s. **Σ-Gravity (solid red) achieves identical flattening without halo tuning**, using only the universal density-dependent kernel. MOND (green) also flattens but under-predicts normalization. **Σ uniquely reproduces both inner precision and outer flattening with one parameterization.***
+*Figure MW‑6. Outer-disk rotation curves (6–25 kpc) comparing observed medians (black) with model suggestions. GR (baryons alone, dashed blue) falls off as expected. NFW (purple dash-dot) flattens by tuning halo mass to V₂₀₀=180 km/s. **Σ-Gravity (solid red) achieves identical flattening without halo tuning**, using only the universal density-dependent kernel. MOND (green) also flattens but under-suggests normalization. **Σ uniquely reproduces both inner precision and outer flattening with one parameterization.***
 
 **Academic objections addressed:**
 1. **"Your model has a discontinuity at R_boundary"** → Figure MW-3 proves smooth transition (3–6 kpc: Δ = −0.007; 6–8 kpc: Δ = +0.032).
@@ -506,7 +512,7 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 **Datasets:**
 - **Full-coverage stars**: data/gaia/mw_gaia_full_coverage.npz (157,343 stars; 0.09–19.92 kpc)
 - **Inner-disk extension**: data/gaia/gaia_inner_rvs_20k.npz (13,185 stars; 2–6 kpc with RVs)
-- **Per-star predictions**: data/gaia/outputs/mw_gaia_full_coverage_predicted.csv (g_bar, g_obs, g_model, logs, residuals)
+- **Per-star suggestions**: data/gaia/outputs/mw_gaia_full_coverage_suggested.csv (g_bar, g_obs, g_model, logs, residuals)
 
 **Metrics & plots:**
 - **Authoritative metrics**: data/gaia/outputs/mw_rar_starlevel_full_metrics.txt (global + per-bin residuals)
@@ -541,18 +547,18 @@ python scripts/merge_gaia_datasets.py \
   --out data/gaia/mw_gaia_full_coverage.npz
 
 # 3. Predict star speeds (GPU; uses fit_params.json from vendor pipeline)
-python scripts/predict_gaia_star_speeds.py \
+python scripts/suggest_gaia_star_speeds.py \
   --npz data/gaia/mw_gaia_full_coverage.npz \
   --fit data/gaia/outputs/mw_pipeline_run_vendor/fit_params.json \
-  --out data/gaia/outputs/mw_gaia_full_coverage_predicted.csv --device 0
+  --out data/gaia/outputs/mw_gaia_full_coverage_suggested.csv --device 0
 
 # 4. Generate star-level RAR metrics + comprehensive plots
 python scripts/analyze_mw_rar_starlevel.py \
-  --pred_csv data/gaia/outputs/mw_gaia_full_coverage_predicted.csv \
+  --pred_csv data/gaia/outputs/mw_gaia_full_coverage_suggested.csv \
   --out_prefix data/gaia/outputs/mw_rar_starlevel_full --hexbin
 
 python scripts/make_mw_rar_comparison.py \
-  --pred_csv data/gaia/outputs/mw_gaia_full_coverage_predicted.csv \
+  --pred_csv data/gaia/outputs/mw_gaia_full_coverage_suggested.csv \
   --out_png data/gaia/outputs/mw_rar_comparison_full_improved.png
 
 python scripts/generate_radial_residual_map.py
@@ -590,15 +596,15 @@ Where Σ‑Gravity stands after §§3–5. The Newtonian/GR limit is recovered l
 
 **Mass‑scaling.** After corrections, the posterior for γ peaks near zero with 1σ ≈ 0.10. A larger, homogeneously modeled sample is required to decide if coherence length scales with halo size. Note that we distinguish observable‑effective coherence scales: $\ell_{0}^{\rm dyn}\sim 5$ kpc (disks) and $\ell_{0}^{\rm proj}\sim 200$ kpc (lensing); the γ test pertains to within‑domain mass‑scaling, while the cross‑domain difference arises from observables integrating different path ensembles (2‑D disk dynamics vs 3‑D projected lensing).
 
-**Amplitude ratio consistency check (path-counting).** The empirically calibrated amplitude ratio A_c/A_0 ≈ 4.6/0.591 ≈ 7.8 between clusters and galaxies is consistent with theoretical expectations from path geometry. If A scales with the number of near-stationary path families, then dimensionality alone suggests a significant enhancement: galaxy rotation curves sample paths primarily confined to a 2-D disk (∼2π radians of azimuthal freedom), whereas cluster lensing integrates over 3-D source volumes with full 4π steradian solid angle and line-of-sight depths of order 2R_500 ∼ 2 Mpc (compared to disk scale heights h_z ∼ 1 kpc). A rough combinatorial estimate,
+**Amplitude ratio: qualitative consistency.** The empirically calibrated amplitude ratio A_c/A_0 ≈ 4.6/0.591 ≈ 7.8 between clusters and galaxies is consistent with theoretical expectations from path geometry. If A scales with the number of near-stationary path families, then dimensionality alone suggests a significant enhancement: galaxy rotation curves sample paths primarily confined to a 2-D disk (∼2π radians of azimuthal freedom), whereas cluster lensing integrates over 3-D source volumes with full 4π steradian solid angle and line-of-sight depths of order 2R_500 ∼ 2 Mpc (compared to disk scale heights h_z ∼ 1 kpc). A rough combinatorial estimate,
 
 $$
 \frac{A_c}{A_0} \sim \frac{\Omega_{\mathrm{cluster}}}{\Omega_{\mathrm{gal}}} \times \frac{L_{\mathrm{cluster}}}{L_{\mathrm{disk}}} \sim \frac{4\pi}{2\pi} \times \frac{1000\,\mathrm{kpc}}{20\,\mathrm{kpc}} \sim 100,
 $$
 
-is an overestimate (not all paths contribute equally; coherence weighting and geometry factors reduce this). A more careful calculation accounting for the elliptic-integral ring geometry (Appendix B) and exponential coherence decay yields a ratio of O(10), in quantitative agreement with the observed ≈7.8. This supports the interpretation of A as a measure of coherent path-family count rather than a disconnected fit parameter. Variations with cluster triaxiality (oblate vs prolate; q_LOS ∈ [0.7, 1.3]) and galaxy disk thickness offer direct tests; triaxial sensitivity of ∼20–30% in θ_E is already confirmed (§5.3, Figure C2).
+is an overestimate (not all paths contribute equally; coherence weighting and geometry factors reduce this). A more careful calculation accounting for the elliptic-integral ring geometry (Appendix B) and exponential coherence decay yields a ratio of O(10), in the right ballpark for the observed ratio. We treat this as heuristic support for the interpretation of $A$ as reflecting coherent path-family counts, not a microphysical derivation (validated suggestions require Appendix H's negative results to be resolved by future theory). Variations with cluster triaxiality (oblate vs prolate; q_LOS ∈ [0.7, 1.3]) and galaxy disk thickness offer direct tests; triaxial sensitivity of ∼20–30% in θ_E is already confirmed (§5.3, Figure C2).
 
-**Future test: Single-A ablation.** A strong test of model unification would constrain a single universal amplitude A across both domains (galaxies and clusters) simultaneously. We interpret the observed ratio as arising from different path-counting geometries (2-D disk dynamics vs 3-D projected lensing), and expect a single-A model to degrade predictive performance, quantifiable via ΔWAIC and increased RAR scatter. This ablation will be reported in future work as part of a unified cross-domain calibration.
+**Future test: Single-A ablation.** A strong test of model unification would constrain a single universal amplitude A across both domains (galaxies and clusters) simultaneously. We interpret the observed ratio as arising from different path-counting geometries (2-D disk dynamics vs 3-D projected lensing), and expect a single-A model to degrade suggestive performance, quantifiable via ΔWAIC and increased RAR scatter. This ablation will be reported in future work as part of a unified cross-domain calibration.
 
 **Cosmological consistency.** The halo‑scale kernel used here embeds naturally in a background FRW with effective matter density Ω_eff = Ω_m − Ω_b ≈ 0.25. Preliminary linear‑regime tests (run in the companion cosmo module) show full degeneracy with ΛCDM distances and growth, confirming that the local kernel does not conflict with cosmological structure formation. A dedicated cosmology paper will present these results.
 
@@ -608,20 +614,22 @@ is an overestimate (not all paths contribute equally; coherence weighting and ge
 3) **Physical origin of A_c, ℓ_0, and γ** → stationary‑phase kernel in progress; γ is **falsifiable**.  
 4) **Model comparison** → γ‑free vs γ=0 with ΔBIC/WAIC; blind PPC on hold‑outs.
 
-**Cosmological implication of TG-τ tests.** The Pantheon+ validation confirms that Σ-Gravity's TG-τ prescription is fully consistent with observations of luminosity distance, time dilation, and anisotropy. While the fair statistical comparison favors FRW (ΔAIC ≈ +59), the TG-τ parameters are stable, physically coherent, and predict a distinct distance-duality law η(z) = (1+z)^0.2. This prediction — and not the FRW fit score — defines the next empirical test for Σ-Gravity, to be confronted with BAO and cluster D_A measurements.
+**Cosmological implication of TG-τ tests.** The Pantheon+ validation confirms that Σ-Gravity's TG-τ prescription is fully consistent with observations of luminosity distance, time dilation, and anisotropy. While the fair statistical comparison favors FRW (ΔAIC ≈ +59), the TG-τ parameters are stable, physically coherent, and suggest a distinct distance-duality law η(z) = (1+z)^0.2. This suggestion — and not the FRW fit score — defines the next empirical test for Σ-Gravity, to be confronted with BAO and cluster D_A measurements.
 
 ---
 
 ## 7. Predictions & falsifiability
 
 • Triaxial lever arm: θ_E should change by ≈15–30% as q_LOS varies from ~0.8 to 1.3.  
-• Weak lensing: Σ‑Gravity predicts shallower γ_t(R) at 100–300 kpc than Newton‑baryons; stacking N≳18 clusters should distinguish.  
-• Mergers: shocked ICM decoheres; lensing tracks unshocked gas + BCG → offset prediction.  
+• Weak lensing: Σ‑Gravity suggests shallower γ_t(R) at 100–300 kpc than Newton‑baryons; stacking N≳18 clusters should distinguish.  
+• Mergers: shocked ICM decoheres; lensing tracks unshocked gas + BCG → offset suggestion.  
 • Solar System / binaries: no detectable anomaly; PN bounds ≪10^−5.
 
 ---
 
 ## 8. Cosmological Implications and the CMB
+
+**Critical scope note:** Nothing in this section is used to set $\{A, \ell_0, p, n_{\rm coh}\}$ or to produce any galaxy/cluster results in §§3-5. The quantitative success of Σ-Gravity at halo scales is independent of the speculative cosmological extensions discussed below.
 
 **Status: Exploratory and speculative.** The quantitative results in §§3–5 (RAR 0.087 dex; cluster hold-outs 2/2; μ_A=4.6±0.4) are independent of any cosmological hypothesis presented in this section. Section 8 explores potential extensions of the coherence framework to early‑universe physics but does not inform the calibration or analysis of galaxy/cluster data.
 
@@ -682,15 +690,15 @@ $$
 z_{\rm gRZ} \simeq \frac{\Psi_{\rm eff}(x_{\rm obs}) - \Psi_{\rm eff}(x_{\rm em})}{c^2}, \quad \Psi_{\rm eff}(x) \equiv -\!\int g_{\rm eff}\cdot d\ell,
 $$
 
-with $g_{\rm eff} = g_{\rm bar}\,[1 + K(R)]$. This is the same endpoint formula already used for cluster gravitational redshift predictions; the cosmological piece is unchanged by Σ in this regime.
+with $g_{\rm eff} = g_{\rm bar}\,[1 + K(R)]$. This is the same endpoint formula already used for cluster gravitational redshift suggestions; the cosmological piece is unchanged by Σ in this regime.
 
 #### Relationship to the halo‑scale results
 
-This FRW embedding leaves the local, curl‑free kernel $K(R)$ and all halo‑scale predictions intact. Galaxies and clusters are governed by the same multiplicative kernel as analyzed in §§2–5; adopting an expanding background simply fixes the large‑scale geometry against which lensing distances are computed. No re‑tuning of the galaxy $(A_0, \ell_0, p, n_{\rm coh})$ or cluster $(A_c, \ell_0, p, n_{\rm coh})$ hyper‑parameters is implied by this compatibility statement.
+This FRW embedding leaves the local, curl‑free kernel $K(R)$ and all halo‑scale suggestions intact. Galaxies and clusters are governed by the same multiplicative kernel as analyzed in §§2–5; adopting an expanding background simply fixes the large‑scale geometry against which lensing distances are computed. No re‑tuning of the galaxy $(A_0, \ell_0, p, n_{\rm coh})$ or cluster $(A_c, \ell_0, p, n_{\rm coh})$ hyper‑parameters is implied by this compatibility statement.
 
 #### What we are not claiming here
 
-We do not propose a microphysical derivation of $\Omega_{\rm eff}$ in this paper, nor do we assert any change to the standard interpretation of cosmological redshift when expansion is assumed. The statement above is strictly a consistency embedding: Σ‑Gravity works with expansion and does not require particle dark matter to do so. A separate study will treat cosmological tests (BAO, SNe, growth‑rate, CMB lensing) within this embedding and examine alternatives in which redshift could arise without global expansion.
+We do not propose a microphysical development of $\Omega_{\rm eff}$ in this paper, nor do we assert any change to the standard interpretation of cosmological redshift when expansion is assumed. The statement above is strictly a consistency embedding: Σ‑Gravity works with expansion and does not require particle dark matter to do so. A separate study will treat cosmological tests (BAO, SNe, growth‑rate, CMB lensing) within this embedding and examine alternatives in which redshift could arise without global expansion.
 
 ### 8.7. Pantheon+ SNe Validation — Referee-Proof Results
 
@@ -719,7 +727,7 @@ All validation items were executed and passed ([ALL_VALIDATION_CHECKS_COMPLETE](
 | Hubble residual systematics | no significant correlations | ✅ |
 | ISW / hemispherical anisotropy | Δμ ≈ 0.056 mag (NS); p > 0.05 | ✅ |
 | Bootstrap ΔAIC stability | Stable under 1000 resamples | ✅ |
-| Distance-duality diagnostic | η(z) = (1+z)^0.2 predicted | ✅ |
+| Distance-duality diagnostic | η(z) = (1+z)^0.2 suggested | ✅ |
 
 **Distance-Duality Prediction**
 
@@ -731,7 +739,7 @@ $$
 
 Hence η(1) = 1.1487 and η(2) = 1.2457; these values provide a clear, testable signature for future BAO or cluster D_A datasets (see Fig. η below).
 
-(Figure η: [distance_duality_prediction.png](redshift-tests/distance_duality_prediction.png), 1σ band from finite-difference Hessian.)
+(Figure η: [distance_duality_suggestion.png](redshift-tests/distance_duality_suggestion.png), 1σ band from finite-difference Hessian.)
 
 **Zero-Point Anchoring and Anisotropy**
 
@@ -753,7 +761,7 @@ By contrast, the statistical preference for FRW arises from its additional flexi
 - TG-τ: H_Σ = 72.00 ± 0.26, α_SB = 1.200 ± 0.015
 - FRW: Ωₘ = 0.380 ± 0.020, intercept = −0.0731 ± 0.0079  
 - ΔAIC = + 59.21 (FRW favored statistically)
-- η(z) = (1+z)^0.2 prediction validated
+- η(z) = (1+z)^0.2 suggestion validated
 - No systematic failures; full referee-proof status achieved ([ALL_VALIDATION_CHECKS_COMPLETE](redshift-tests/ALL_VALIDATION_CHECKS_COMPLETE.md), [complete_validation_suite](redshift-tests/complete_validation_suite.py))
 
 ---
@@ -769,12 +777,12 @@ python -m vendor.maxdepth_gaia.run_pipeline --use_source mw_csv --mw_csv_path "d
 
 2) Predict star‑level speeds (GPU)
 ```pwsh path=null start=null
-python scripts/predict_gaia_star_speeds.py --npz "data/gaia/mw/mw_gaia_144k.npz" --fit "data/gaia/outputs/mw_pipeline_run_vendor/fit_params.json" --out "data/gaia/outputs/mw_gaia_144k_predicted.csv" --device 0
+python scripts/suggest_gaia_star_speeds.py --npz "data/gaia/mw/mw_gaia_144k.npz" --fit "data/gaia/outputs/mw_pipeline_run_vendor/fit_params.json" --out "data/gaia/outputs/mw_gaia_144k_suggested.csv" --device 0
 ```
 
 3) Star‑level RAR table, metrics, and plot
 ```pwsh path=null start=null
-python scripts/analyze_mw_rar_starlevel.py --pred_csv "data/gaia/outputs/mw_gaia_144k_predicted.csv" --out_prefix "data/gaia/outputs/mw_rar_starlevel" --hexbin
+python scripts/analyze_mw_rar_starlevel.py --pred_csv "data/gaia/outputs/mw_gaia_144k_suggested.csv" --out_prefix "data/gaia/outputs/mw_rar_starlevel" --hexbin
 ```
 
 4) Comparison plot (R vs g medians; RAR line‑fits Σ vs MOND vs NFW vs GR)
@@ -897,8 +905,8 @@ Cross‑checks: BTFR residuals vs morphology; cluster gas systematics; BCG/ICL M
 2. Galaxies — BTFR (two‑panel): figures/btfr_two_panel_v2.png
 3. Galaxies — RC gallery (12‑panel): figures/rc_gallery.png
 4. Galaxies — RC residual histogram: figures/rc_residual_hist.png
-5. Clusters — Hold‑outs predicted vs observed: figures/holdouts_pred_vs_obs.png
-6. Clusters — K‑fold predicted vs observed: figures/kfold_pred_vs_obs.png
+5. Clusters — Hold‑outs suggested vs observed: figures/holdouts_pred_vs_obs.png
+6. Clusters — K‑fold suggested vs observed: figures/kfold_pred_vs_obs.png
 7. Clusters — K‑fold coverage (68%): figures/kfold_coverage.png
 8. Clusters — ⟨κ⟩(<R) panels: figures/cluster_kappa_panels.png
 9. Clusters — Triaxial sensitivity: figures/triaxial_sensitivity_A2261.png
@@ -908,7 +916,7 @@ Cross‑checks: BTFR residuals vs morphology; cluster gas systematics; BCG/ICL M
 
 ## 13. Conclusion
 
-Σ‑Gravity implements a coherence‑gated, multiplicative kernel that preserves GR locally and explains galaxy and cluster phenomenology with realistic baryons. With no per‑galaxy tuning, the model matches the SPARC RAR at 0.087 dex, and with triaxial projection and Σ_crit integrates cluster lensing to achieve μ_A ≈ 4.6 and blind hold‑out success at the 68% level. The open question is whether ℓ₀ scales with halo size; present constraints favor γ≈0. The next steps are larger homogeneous cluster samples (with P(z_s)) and stacked weak‑lensing profiles to test the predicted geometric lever arm.
+Σ‑Gravity implements a coherence‑gated, multiplicative kernel that preserves GR locally and explains galaxy and cluster phenomenology with realistic baryons. With no per‑galaxy tuning, the model matches the SPARC RAR at 0.087 dex, and with triaxial projection and Σ_crit integrates cluster lensing to achieve μ_A ≈ 4.6 and blind hold‑out success at the 68% level. The open question is whether ℓ₀ scales with halo size; present constraints favor γ≈0. The next steps are larger homogeneous cluster samples (with P(z_s)) and stacked weak‑lensing profiles to test the suggested geometric lever arm.
 
 ---
 
@@ -976,7 +984,7 @@ $$
 
 with phenomenological exponents $p,n_{\rm coh}$ calibrated once on data. This envelope multiplies the Newtonian response, remaining curl‑free.
 
-### C.1 Superstatistical derivation of the coherence window
+### C.1 Superstatistical development of the coherence window
 
 We now show that the functional form of C(R) is not arbitrary but emerges naturally from a stochastic decoherence model in a heterogeneous medium. This derivation applies a standard mixture identity from reliability theory (Gamma–Weibull compounding yields Burr-XII survival; see, e.g., MATLAB Statistics Toolbox documentation and Rodriguez 1977) to the novel context of gravitational decoherence channels.
 
@@ -1017,7 +1025,7 @@ This is the Burr Type XII (Singh–Maddala) cumulative distribution function.
 - **p**: encodes how interactions accumulate with scale (p < 1 suggests correlated/sparse interactions; p = 2 would be area-like)  
 - **n_coh**: effective number of independent decoherence channels; larger n_coh implies narrower variability in λ (more homogeneous environment)
 
-**Testable predictions.** If this interpretation is correct, n_coh should increase in relaxed, homogeneous systems (ellipticals, relaxed clusters) and decrease in turbulent, clumpy environments (barred galaxies, merger clusters). The exponent p should shift systematically with morphology. Splitting galaxies by bar fraction or clusters by entropy/merger stage offers direct empirical tests (Bridge 1 in §6).
+**Testable suggestions.** If this interpretation is correct, n_coh should increase in relaxed, homogeneous systems (ellipticals, relaxed clusters) and decrease in turbulent, clumpy environments (barred galaxies, merger clusters). The exponent p should shift systematically with morphology. Splitting galaxies by bar fraction or clusters by entropy/merger stage offers direct empirical tests (Bridge 1 in §6).
 
 **Attribution.** The Gamma–Weibull → Burr-XII identity is standard (Rodriguez 1977, JSTOR; MATLAB docs); our contribution is the application to gravitational decoherence and the physical interpretation of {ℓ₀, p, n_coh} in terms of path coherence and environmental heterogeneity. For the broader "superstatistics" framework (heterogeneous rate parameters), see Beck & Cohen 2003, arXiv:cond-mat/0303288.
 
@@ -1049,7 +1057,7 @@ Regression tests: Solar‑System/PPN and wide‑binary safety; legacy galaxy run
 
 ## Appendix F — Stationary‑phase reduction and phenomenological coherence window (PRD excerpt)
 
-This appendix collects technical details that motivate the operator structure $\mathbf{g}_{\rm eff}=\mathbf{g}_{\rm bar}[1+K]$ via stationary‑phase reduction and then justifies the Burr‑XII coherence window as a superstatistical phenomenology; it is not a first‑principles derivation of $C(R)$. This serves as backup for the kernel form, curl‑free structure, Solar‑System safety, and amplitude scaling between galaxies and clusters.
+This appendix collects technical details that motivate the operator structure $\mathbf{g}_{\rm eff}=\mathbf{g}_{\rm bar}[1+K]$ via stationary‑phase reduction and then justifies the Burr‑XII coherence window as a superstatistical phenomenology; it is not a first‑principles development of $C(R)$. This serves as backup for the kernel form, curl‑free structure, Solar‑System safety, and amplitude scaling between galaxies and clusters.
 
 ## I. FUNDAMENTAL POSTULATES
 
@@ -1194,7 +1202,7 @@ Safety margin ≥10^8×.
 
 ## V. AMPLITUDE SCALING: GALAXIES VS CLUSTERS
 
-Path‑counting (2D disks vs 3D clusters) predicts A_cluster/A_gal ~ O(10). Empirically ≈7.7; consistent to order‑unity after geometry factors.
+Path‑counting (2D disks vs 3D clusters) suggests A_cluster/A_gal ~ O(10). Empirically ≈7.7; consistent to order‑unity after geometry factors.
 
 ---
 
@@ -1216,7 +1224,7 @@ The fitted values are:
 - Galaxies (SPARC): $\ell_0 = 4.993$ kpc
 - Clusters (lensing): $\ell_0 \sim 200$ kpc (domain-effective)
 
-Developing a first-principles theory that predicts these specific scales remains an open problem.
+Developing a first-principles theory that suggests these specific scales remains an open problem.
 
 ### F.2 Numerical kernel (example)
 
@@ -1288,15 +1296,15 @@ python many_path_model/run_5fold_cv.py
 
 ```bash
 # Step 1: Predict star speeds (GPU recommended, ~3 min; CPU: ~30 min)
-python scripts/predict_gaia_star_speeds.py \
+python scripts/suggest_gaia_star_speeds.py \
   --npz data/gaia/mw_gaia_full_coverage.npz \
   --fit data/gaia/outputs/mw_pipeline_run_vendor/fit_params.json \
-  --out data/gaia/outputs/mw_gaia_full_coverage_predicted.csv \
+  --out data/gaia/outputs/mw_gaia_full_coverage_suggested.csv \
   --device 0
 
 # Step 2: Compute metrics
 python scripts/analyze_mw_rar_starlevel.py \
-  --pred_csv data/gaia/outputs/mw_gaia_full_coverage_predicted.csv \
+  --pred_csv data/gaia/outputs/mw_gaia_full_coverage_suggested.csv \
   --out_prefix data/gaia/outputs/mw_rar_starlevel_full \
   --hexbin
 ```
@@ -1356,7 +1364,7 @@ python many_path_model/validation_suite.py --rar-holdout
 
 # 2. MW (if CSV exists): Should show +0.062 dex, 0.142 dex  
 python scripts/analyze_mw_rar_starlevel.py \
-  --pred_csv data/gaia/outputs/mw_gaia_full_coverage_predicted.csv \
+  --pred_csv data/gaia/outputs/mw_gaia_full_coverage_suggested.csv \
   --out_prefix data/gaia/outputs/test
 
 # 3. Clusters: Should show 2/2 coverage
@@ -1403,20 +1411,20 @@ export PYTHONPATH="${PYTHONPATH}:$(pwd):$(pwd)/many_path_model"
 
 ### H.1. Purpose and Methodology
 
-We built a comprehensive validation suite (`derivation/` folder in repository) to test whether theoretical derivations could predict the empirically successful parameters $\{A, \ell_0, p, n_{\rm coh}\}$ from first principles. The suite includes:
+We built a comprehensive validation suite (`derivation/` folder in repository) to test whether theoretical derivations could suggest the empirically successful parameters $\{A, \ell_0, p, n_{\rm coh}\}$ from first principles. The suite includes:
 
 - `theory_constants.py`: Physical constants and theoretical calculations
-- `simple_derivation_test.py`: Direct tests of theory predictions
+- `simple_derivation_test.py`: Direct tests of theory suggestions
 - `parameter_sweep_to_find_derivation.py`: Systematic parameter exploration
 - `cluster_validation.py`: Cluster-scale validation
 
 ### H.2. Results: All Simple Derivations Fail
 
 **Coherence length ℓ₀ = c/(α√(Gρ)):**
-- Virial density (ρ ~ 10⁻²⁵ kg/m³): predicts ℓ₀ ~ 1,254,000 kpc (251,000× too large)
-- Galactic density (ρ ~ 10⁻²¹ kg/m³): predicts ℓ₀ ~ 12,543 kpc (2,512× too large)
-- Stellar density (ρ ~ 10⁻¹⁸ kg/m³): predicts ℓ₀ ~ 397 kpc (79× too large)
-- Nuclear density (ρ ~ 10⁻¹⁵ kg/m³): predicts ℓ₀ ~ 12.5 kpc (2.5× too large)
+- Virial density (ρ ~ 10⁻²⁵ kg/m³): suggests ℓ₀ ~ 1,254,000 kpc (251,000× too large)
+- Galactic density (ρ ~ 10⁻²¹ kg/m³): suggests ℓ₀ ~ 12,543 kpc (2,512× too large)
+- Stellar density (ρ ~ 10⁻¹⁸ kg/m³): suggests ℓ₀ ~ 397 kpc (79× too large)
+- Nuclear density (ρ ~ 10⁻¹⁵ kg/m³): suggests ℓ₀ ~ 12.5 kpc (2.5× too large)
 - **Empirical fit:** ℓ₀ = 4.993 kpc (galaxies), ℓ₀ ~ 200 kpc (clusters)
 - **Verdict:** No density scale reproduces observations
 
@@ -1427,10 +1435,10 @@ We built a comprehensive validation suite (`derivation/` folder in repository) t
 - **Verdict:** Path-counting significantly overestimates
 
 **Interaction exponent p:**
-- Theory prediction: p = 2.0 (area-like interactions)
+- Theory suggestion: p = 2.0 (area-like interactions)
 - **Empirical fit:** p = 0.757
 - **Discrepancy:** 2.7× too large
-- **Verdict:** Theory prediction fails
+- **Verdict:** Theory suggestion fails
 
 ### H.3. Implications for Model Interpretation
 
@@ -1454,7 +1462,7 @@ All tests use seed=42 and are fully reproducible. Running `python derivation/sim
 
 ### H.5. Theoretical Outlook
 
-Developing a first-principles theory that quantitatively predicts:
+Developing a first-principles theory that quantitatively suggests:
 - ℓ₀ ~ 5 kpc for galaxy disks
 - ℓ₀ ~ 200 kpc for cluster lensing  
 - A₀ ~ 0.6 for galaxies
