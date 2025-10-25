@@ -12,7 +12,7 @@ We present Σ-Gravity, a motivated, empirically calibrated scale-dependent enhan
 
 For galaxy clusters, the same framework extends naturally: realistic baryonic profiles (gNFW gas + BCG/ICL) with triaxial projection and a recalibrated amplitude achieve 88.9% coverage (16/18) within 68% posterior predictive checks across 10 galaxy clusters with 7.9% median fractional error. As validation, 2 clusters were held out during calibration (Abell 2261, MACSJ1149) and both fall within 68% PPC. The amplitude ratio A_cluster/A_galaxy ≈ 7.8 is qualitatively consistent with geometric path-counting expectations. Mass-scaling tests find γ = 0.09±0.10, consistent with universal coherence length within each domain.
 
-**Theoretical framework:** The kernel structure is motivated by quantum path-integral reasoning—coherent superposition of near-geodesic families around the classical GR solution—but parameters {A, ℓ₀, p, n_coh} are empirically calibrated. The coherence window C(R) = 1-[1+(R/ℓ₀)^p]^(-n_coh) employs a Burr-XII form justified by superstatistical decoherence models. Dedicated validation confirms that simple theoretical predictions (density-based ℓ₀, naive path-counting) fail by factors of 10-2500× (Appendix H); we therefore present this as principled phenomenology with testable predictions, not first-principles derivation.
+**Theoretical framework:** The kernel structure is motivated by quantum path-integral reasoning—coherent superposition of near-geodesic families around the classical GR solution—but parameters {A, ℓ₀, p, n_coh} are empirically calibrated. The coherence window C(R) = 1-[1+(R/ℓ₀)^p]^(-n_coh) employs a Burr-XII form justified by superstatistical decoherence models. Dedicated validation confirms that simple theoretical predictions (density-based ℓ₀, naive path-counting) fail by factors of 10-2500× (Appendix H). We therefore present this as principled phenomenology with testable predictions, not first-principles derivation.
 
 The model is curl-free by construction (axisymmetric K=K(R)), employs exact elliptic-integral geometry, and satisfies all Solar System constraints (boost at 1 AU: ≲7×10⁻¹⁴). Complete reproducible code, provenance manifests, and validation suite are released publicly.
 
@@ -20,17 +20,23 @@ The model is curl-free by construction (axisymmetric K=K(R)), employs exact elli
 
 ## 1. Introduction
 
-A persistent tension in contemporary astrophysics is that visible‑matter gravity—Newtonian in the weak field and General Relativity (GR) in full—systematically underpredicts orbital and lensing signals on galactic and cluster scales. The prevailing remedy is to posit large reservoirs of non‑baryonic dark matter. An alternative class of ideas modifies the dynamical law itself (e.g., MOND and its relativistic completions) or the field equations (e.g., $f(R)$ gravity). In this work we take a different, conservative path: keep GR intact and ask whether coherent many‑path contributions around classical geodesics can multiplicatively enhance the Newtonian/GR response in extended systems while vanishing in compact, high‑acceleration environments. We call this framework Σ‑Gravity. Its core ingredients, soft assumptions, and empirical posture are laid out below and developed technically in the body of the paper.
+A persistent tension in contemporary astrophysics is that visible‑matter gravity—Newtonian in the weak field and General Relativity (GR) in full—systematically underpredicts orbital and lensing signals on galactic and cluster scales. The prevailing remedy is to posit large reservoirs of non‑baryonic dark matter. An alternative class of ideas modifies the dynamical law itself (e.g., MOND and its relativistic completions) or the field equations (e.g., $f(R)$ gravity). 
 
-### 1) What is the problem with current theories?
+In this work we take a different, conservative path: keep GR intact and ask whether coherent many‑path contributions around classical geodesics can multiplicatively enhance the Newtonian/GR response in extended systems while vanishing in compact, high‑acceleration environments. We call this framework Σ‑Gravity. Its core ingredients, soft assumptions, and empirical posture are laid out below and developed technically in the body of the paper.
 
-Dark‑matter halos can be tuned to fit individual galaxies and clusters, yet at the population level they struggle to reproduce certain empirical regularities (e.g., the small scatter in the radial‑acceleration relation, RAR) without flexible per‑system freedom; conversely, modified‑gravity theories that reduce the freedom tend either to conflict with lensing or to require bespoke interpolating functions that are not motivated by physical reasoning. The field thus faces a stark choice between explanatory power localized in per‑system fitting and universal laws that can miss key observables. Σ‑Gravity pursues a middle ground: preserve GR and its local tests, but account for scale‑dependent coherence that is negligible where systems are compact and becomes order‑unity where structures are extended and ordered (disks; intracluster gas).
+### 1. What is the problem with current theories?
 
-### 2) QED‑inspired intuition: summing near‑geodesic paths
+Dark‑matter halos can be tuned to fit individual galaxies and clusters, yet at the population level they struggle to reproduce certain empirical regularities (e.g., the small scatter in the radial‑acceleration relation, RAR) without flexible per‑system freedom. Conversely, modified‑gravity theories that reduce the freedom tend either to conflict with lensing or to require bespoke interpolating functions that are not motivated by physical reasoning. 
 
-Our starting point is the path‑integral intuition familiar from QED/QFT: amplitudes add over many paths, and stationary‑phase families dominate. Applied to gravity, the classical GR geometry is the leading stationary solution; however, in extended media there exist families of near‑stationary geometries whose phases remain aligned over a finite coherence scale. When these families add coherently, they can boost the classical response measured by dynamical and lensing observables—without altering the field equations. In compact systems (e.g., the Solar System), frequent interactions and strong gradients rapidly collapse the superposition to the single classical geometry, so the coherent correction is effectively zero. This is the QED‑style lens through which Σ‑Gravity is formulated.
+The field thus faces a stark choice between explanatory power localized in per‑system fitting and universal laws that can miss key observables. Σ‑Gravity pursues a middle ground: preserve GR and its local tests, but account for scale‑dependent coherence that is negligible where systems are compact and becomes order‑unity where structures are extended and ordered (disks; intracluster gas).
 
-### 3) Local collapse to Newton/GR: a distance‑set "point of classicality"
+### 2. QED‑inspired intuition: summing near‑geodesic paths
+
+Our starting point is the path‑integral intuition familiar from QED/QFT: amplitudes add over many paths, and stationary‑phase families dominate. Applied to gravity, the classical GR geometry is the leading stationary solution; however, in extended media there exist families of near‑stationary geometries whose phases remain aligned over a finite coherence scale. 
+
+When these families add coherently, they can boost the classical response measured by dynamical and lensing observables—without altering the field equations. In compact systems (e.g., the Solar System), frequent interactions and strong gradients rapidly collapse the superposition to the single classical geometry, so the coherent correction is effectively zero. This is the QED‑style lens through which Σ‑Gravity is formulated.
+
+### 3. Local collapse to Newton/GR: a distance‑set "point of classicality"
 
 The coherence properties above imply a causal coherence length $\ell_0$ defined by a collapse timescale $\tau_{\rm collapse}$:
 
@@ -52,7 +58,7 @@ $$
 
 ensuring Solar‑System safety, curl‑free fields, and recovery of all standard weak‑field tests. This "collapse to $G$" is therefore distance‑ (and environment‑) controlled, not a change to the law of gravity.
 
-### 4) Growing distances, growing overlap: adding geodesic families
+### 4. Growing distances, growing overlap: adding geodesic families
 
 For separations $R\gtrsim\ell_0$ in extended, ordered structures (e.g., rotation‑supported disks; intracluster media), the number and longevity of near‑stationary path families increase. Their phases overlap over macroscopic regions, so their coherent sum produces a dimensionless enhancement $K(R)$ that monotonically rises from 0 and saturates at large $R$:
 
@@ -68,7 +74,7 @@ $$
 
 In disks (dynamics) the observable can introduce a local‑acceleration weighting of the kernel's contribution, while in clusters (lensing) the same coherence window acts directly in projected surface density; in both cases the boost is multiplicative and curl‑free when $K=K(R)$.
 
-### 5) Framework Structure and Calibration
+### 5. Framework Structure and Calibration
 
 The multiplicative operator structure g_eff(x) = g_bar(x)[1+K(x)] is motivated by stationary-phase reduction of gravitational path integrals. The coherence window C(R) uses a Burr-XII form justified by superstatistical decoherence models (Appendix C). Axisymmetry guarantees curl-free fields; ring integrals reduce to elliptic integrals (Appendix B); Solar System safety follows from K→0 as R→0.
 
@@ -423,19 +429,19 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 
 *Figure 8. Coverage summary: 16/18 inside 68%.*
 
-![Figure 9. ⟨κ⟩(<R) panels for hold‑outs](figures/cluster_kappa_panels.png)
+![Figure 9. Convergence panels for all clusters](figures/cluster_kappa_profiles_panel.png)
 
-*Figure 9. ⟨κ⟩(<R) vs R for Abell 2261 and MACSJ1149: GR(baryons) baseline and Σ‑Gravity median ±68% band with Einstein crossing marked.*
+*Figure 9. Convergence κ(R) for each catalog cluster: GR(baryons), GR+DM (SIS ref calibrated to observed θ_E), and Σ‑Gravity with A_c chosen so ⟨κ⟩(<θ_E)=1.*
 
-![Figure 10. Triaxial sensitivity (θ_E vs q_LOS)](figures/triaxial_sensitivity_A2261.png)
+![Figure 10. Deflection panels for all clusters](figures/cluster_alpha_profiles_panel.png)
 
-![Figure 11. Convergence panels for all clusters](figures/cluster_kappa_profiles_panel.png)
+*Figure 10. Deflection α(R) with α=R line and vertical θ_E markers for GR(baryons), GR+DM ref, and Σ‑Gravity — per cluster.*
 
-*Figure 11. Convergence κ(R) for each catalog cluster: GR(baryons), GR+DM (SIS ref calibrated to observed θ_E), and Σ‑Gravity with A_c chosen so ⟨κ⟩(<θ_E)=1.*
+![Figure 11. ⟨κ⟩(<R) panels for hold‑outs](figures/cluster_kappa_panels.png)
 
-![Figure 12. Deflection panels for all clusters](figures/cluster_alpha_profiles_panel.png)
+*Figure 11. ⟨κ⟩(<R) vs R for Abell 2261 and MACSJ1149: GR(baryons) baseline and Σ‑Gravity median ±68% band with Einstein crossing marked.*
 
-*Figure 12. Deflection α(R) with α=R line and vertical θ_E markers for GR(baryons), GR+DM ref, and Σ‑Gravity — per cluster.*
+![Figure 12. Triaxial sensitivity (θ_E vs q_LOS)](figures/triaxial_sensitivity_A2261.png)
 
 ### 5.4. Milky Way (Gaia DR3): Star‑level RAR (this repository)
 
@@ -871,12 +877,14 @@ python scripts/make_cluster_lensing_panels.py
 
 Produces: figures/cluster_kappa_profiles_panel.png and figures/cluster_alpha_profiles_panel.png.
 
+```bash
 python scripts/run_holdout_validation.py → pred_vs_obs_holdout.png  
 python scripts/validate_holdout_mass_scaled.py \
   --posterior output/n10_nutsgrid/flat_samples.npz \
   --catalog data/clusters/master_catalog.csv \
   --pzs median --check-training 1 \
   --overrides-dir data/overrides
+```
 
 Artifacts are stored under output/… and results/…; each run writes a manifest (catalog MD5, overrides JSON, kernel mode, Σ_baryon source, P(z_s), sampler, seed).
 
