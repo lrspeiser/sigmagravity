@@ -12,7 +12,11 @@ We present Σ-Gravity, a motivated, empirically calibrated scale-dependent enhan
 
 For galaxy clusters, the same framework extends naturally: realistic baryonic profiles (gNFW gas + BCG/ICL) with triaxial projection and a recalibrated amplitude achieve 88.9% coverage (16/18) within 68% posterior predictive checks across 10 galaxy clusters with 7.9% median fractional error. As validation, 2 clusters were held out during calibration (Abell 2261, MACSJ1149) and both fall within 68% PPC. The amplitude ratio A_cluster/A_galaxy ≈ 7.8 is qualitatively consistent with geometric path-counting expectations. Mass-scaling tests find γ = 0.09±0.10, consistent with universal coherence length within each domain.
 
-**Theoretical framework:** The kernel structure is motivated by quantum path-integral reasoning—coherent superposition of near-geodesic families around the classical GR solution—but parameters {A, ℓ₀, p, n_coh} are empirically calibrated. The coherence window C(R) = 1-[1+(R/ℓ₀)^p]^(-n_coh) employs a Burr-XII form justified by superstatistical decoherence models. Dedicated validation confirms that simple theoretical predictions (density-based ℓ₀, naive path-counting) fail by factors of 10-2500× (Appendix H). We therefore present this as principled phenomenology with testable predictions, not first-principles derivation.
+**Theoretical framework:** The kernel structure is motivated by quantum path-integral reasoning—coherent superposition of near-geodesic families around the classical GR solution—but parameters {A, ℓ₀, p, n_coh} are empirically calibrated.
+
+The coherence window C(R) = 1-[1+(R/ℓ₀)^p]^(-n_coh) employs a Burr-XII form justified by superstatistical decoherence models.
+
+Dedicated validation confirms that simple theoretical predictions (density-based ℓ₀, naive path-counting) fail by factors of 10-2500× (Appendix H). We therefore present this as principled phenomenology with testable predictions, not first-principles derivation.
 
 The model is curl-free by construction (axisymmetric K=K(R)), employs exact elliptic-integral geometry, and satisfies all Solar System constraints (boost at 1 AU: ≲7×10⁻¹⁴). Complete reproducible code, provenance manifests, and validation suite are released publicly.
 
@@ -131,7 +135,7 @@ Abbreviations: BCG/ICL — brightest cluster galaxy/intracluster light; RAR — 
 
 ## 2. Theory: From intuition to a single kernel used in two domains
 
-Why this section? We first give an intuitive picture of scale‑dependent coherence (why Σ‑Gravity vanishes in compact systems yet rises on extended ones), then motivate a single, conservative kernel that multiplies the Newtonian/GR response. We finish by specializing that kernel to galaxy rotation and cluster lensing, which are the two data domains used in §§3–5.
+This section provides the theoretical foundation for Σ‑Gravity. We first give an intuitive picture of scale‑dependent coherence (why Σ‑Gravity vanishes in compact systems yet rises on extended ones), then motivate a single, conservative kernel that multiplies the Newtonian/GR response. We finish by specializing that kernel to galaxy rotation and cluster lensing, which are the two data domains used in §§3–5.
 
 ### 2.1. Plain‑language primer
 
@@ -213,7 +217,9 @@ $$
  g_{\rm eff}(R) = g_{\rm bar}(R)\,[1 + K(R)] 
 $$
 
-which remains curl‑free when K = K(R). This canonical kernel is not re‑defined elsewhere; domain‑specific forms below only select appropriate gates and observables.
+which remains curl‑free when K = K(R).
+
+This canonical kernel is not re‑defined elsewhere; domain‑specific forms below only select appropriate gates and observables.
 
 ### 2.5. Illustrative example (emergence of coherence with scale)
 
@@ -294,7 +300,7 @@ We distinguish domain-effective coherence scales: $\ell_0^{\rm dyn} \sim 5$ kpc 
 
 ## 3. Data
 
-Why this section? The kernel of §2 becomes suggestive only once paired with concrete baryonic inputs (disks and clusters) and lensing geometry. We summarize the galaxy and cluster datasets used in §5 and specify the baryon models that feed Σ_bar(R) and Σ_crit.
+The kernel of §2 becomes predictive only once paired with concrete baryonic inputs (disks and clusters) and lensing geometry. We summarize the galaxy and cluster datasets used in §5 and specify the baryon models that feed Σ_bar(R) and Σ_crit.
 
 **Galaxies.** 166 SPARC galaxies; 80/20 stratified split by morphology; RAR computed in SI units with inclination hygiene (30°–70°).
 
@@ -336,7 +342,7 @@ Sampling via PyMC **NUTS** on a differentiable θ_E grid surrogate (target_accep
 
 ## 4. Methods & Validation
 
-Why this section? We implement the canonical kernel from §2.4 without redefining it, describe geometry/cosmology (triaxial projection; Σ_crit; source P(z_s)), and document the validation suite that guarantees Newtonian recovery, curl‑free fields, and Solar‑System safety.
+This section implements the canonical kernel from §2.4 without redefining it, describes geometry/cosmology (triaxial projection; Σ_crit; source P(z_s)), and documents the validation suite that guarantees Newtonian recovery, curl‑free fields, and Solar‑System safety.
 
 We use the canonical kernel K(R) from §2.4 with the domain‑specific choices given in §§2.7–2.8.
 
@@ -445,7 +451,7 @@ Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), togeth
 
 ### 5.4. Milky Way (Gaia DR3): Star‑level RAR (this repository)
 
-**Why this subsection?** The SPARC RAR (§5.1) tests Σ‑Gravity on rotation‑curve bins for 166 disks. Here we validate the saturated‑well tail model at the finest resolution: individual Milky Way stars from Gaia DR3. This provides a direct, per‑star comparison of observed and suggested radial accelerations without binning or azimuthal averaging, quantifying the model's accuracy across the Galactic disk.
+**Purpose:** The SPARC RAR (§5.1) tests Σ‑Gravity on rotation‑curve bins for 166 disks. Here we validate the saturated‑well tail model at the finest resolution: individual Milky Way stars from Gaia DR3. This provides a direct, per‑star comparison of observed and suggested radial accelerations without binning or azimuthal averaging, quantifying the model's accuracy across the Galactic disk.
 
 **Zero‑shot validation:** This is a strict out‑of‑sample test. The Σ‑kernel parameters {A₀, ℓ₀, p, n_coh} and gate exponents were calibrated on SPARC and frozen before applying to the Milky Way. No MW‑specific tuning was performed. The only inputs are the MW baryonic mass model and the fitted boundary radius R_b; the kernel formula itself is identical to SPARC.
 
