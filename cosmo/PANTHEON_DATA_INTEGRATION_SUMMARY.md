@@ -54,3 +54,4 @@ Successfully integrated real Pantheon+ supernova data into the Weyl-integrable r
 
 ## Status
 ✅ **COMPLETE**: Pantheon data successfully integrated and model fitting pipeline operational
+

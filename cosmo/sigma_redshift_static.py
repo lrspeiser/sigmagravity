@@ -235,3 +235,4 @@ def demo_curves(distances_Mpc: np.ndarray, params: SigmaRedshiftParams) -> dict[
     zh = np.array([hubble_small_z(D, params.H0_kms_Mpc) for D in distances_Mpc])
     return {"z_tired": tired, "z_isw": isw, "z_geom": zgeom, "z_hubble": zh}
 
+

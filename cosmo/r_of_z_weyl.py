@@ -223,3 +223,4 @@ if __name__ == "__main__":
     
     print(f"\nMean AP ratio: {np.mean(f_ap):.3f} ± {np.std(f_ap):.3f}")
     print("(Should be constant for static universe)")
+

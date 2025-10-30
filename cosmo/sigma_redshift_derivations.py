@@ -181,3 +181,4 @@ def bundle_models(kernel: SigmaKernel, H0_kms_Mpc: float = 70.0) -> dict:
         lindblad=LindbladModel(kernel=kernel, H0_kms_Mpc=H0_kms_Mpc, gammaE_scale=1.0, gammaPhi_scale=0.0),
         pathsum=PathSumModel(kernel=kernel, H0_kms_Mpc=H0_kms_Mpc, beta=1.0, Lc_Mpc=1000.0),
     )
+

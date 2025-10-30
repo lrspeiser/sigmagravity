@@ -161,10 +161,7 @@ In disks (dynamics) the observable can introduce a local‑acceleration weightin
 
 \subsection{Framework Structure and Calibration}
 
-
-\[
-The multiplicative operator structure g_eff(x) = g_bar(x)[1+K(x)] is motivated by stationary-phase reduction of gravitational path integrals. The coherence window C(R) uses a Burr-XII form justified by superstatistical decoherence models (Appendix C). Axisymmetry guarantees curl-free fields; ring integrals reduce to elliptic integrals (Appendix B); Solar System safety follows from K→0 as R→0.
-\]
+The multiplicative operator structure $g_{\rm eff}(x) = g_{\rm bar}(x)[1+K(x)]$ is motivated by stationary-phase reduction of gravitational path integrals. The coherence window $C(R)$ uses a Burr-XII form justified by superstatistical decoherence models (Appendix C). Axisymmetry guarantees curl-free fields; ring integrals reduce to elliptic integrals (Appendix B); Solar System safety follows from $K\to0$ as $R\to0$.
 
 
 Parameters {A, ℓ₀, p, n\_coh} are calibrated once per domain (galaxies/clusters) and frozen for all predictions. Validation tests (Appendix H) show that simple theoretical predictions miss fitted values by factors of 10-2500×; we therefore present the model as empirically successful phenomenology motivated by (but not derived from) quantum coherence concepts.
@@ -537,10 +534,7 @@ The kernel of §2 becomes predictive only once paired with concrete baryonic inp
 
 \subsection{Baryon models (clusters) (moved from §2)}
 
-
-\[
-• **Gas**: gNFW pressure profile (Arnaud+2010), normalized to f_gas(R_500)=0.11 with clumping correction C(r).
-\]
+• \textbf{Gas}: gNFW pressure profile (Arnaud+2010), normalized to $f_{\rm gas}(R_{500})=0.11$ with clumping correction $C(r)$.
 
 • \textbf{BCG + ICL}: central stellar components included.  
 
@@ -605,9 +599,7 @@ Before diving into methods and detailed analysis, we present the core empirical 
 \item \textbf{Mass‑scaled} with (ℓ\_{0,⋆}, γ) + same A\_c population.
 \end{enumerate}
 
-\[
-Sampling via PyMC **NUTS** on a differentiable θ_E grid surrogate (target_accept=0.95); WAIC/LOO used for model comparison (ΔWAIC ≈ 0 ± 2.5).
-\]
+Sampling via PyMC \textbf{NUTS} on a differentiable $\theta_E$ grid surrogate (target\_accept$=0.95$); WAIC/LOO used for model comparison ($\Delta$WAIC $\approx 0 \pm 2.5$).
 
 
 \medskip\hrule\medskip
@@ -663,14 +655,11 @@ many\_path\_model/path\_spectrum\_kernel.py computes $K(R)$; many\_path\_model/r
 \begin{enumerate}
 \item Baryon builder: core/gnfw\_gas\_profiles.py (gas), core/build\_cluster\_baryons.py (BCG/ICL, clumping), normalized to f\_gas=0.11.
 \item Triaxial projection: core/triaxial\_lensing.py implements the ellipsoidal mapping with global mass normalization (removes the local 1/(q\_plane q\_LOS) factor).
-\item Projected kernel: core/kernel2d\_sigma.py applies K\_Σ(R)=A\_c·C(R) with C(R)=1−[1+(R/ℓ\_0)^p]^{−n\_coh}.
+\item Projected kernel: core/kernel2d\_sigma.py applies $K_\Sigma(R)=A_c \cdot C(R)$ with $C(R)=1-[1+(R/\ell_0)^p]^{-n_{\rm coh}}$.
 \item Diagnostics: point/mean convergence, cumulative mass \& boost, 2‑D maps, Einstein‑mass check.
 \end{enumerate}
 
-
-\[
-Proof‑of‑concept (MACS0416): with spherical geometry, the calibrated model gives θ_E = 30.4″ (obs 30.0″), ⟨κ⟩(<R_E)=1.019. Triaxial tests retain ~21.5% θ_E variation across plausible axis ratios, as expected.
-\]
+Proof‑of‑concept (MACS0416): with spherical geometry, the calibrated model gives $\theta_E = 30.4''$ (obs $30.0''$), $\langle\kappa\rangle(<R_E)=1.019$. Triaxial tests retain $\sim21.5\%$ $\theta_E$ variation across plausible axis ratios, as expected.
 
 
 \subsection{Hierarchical calibration (clusters)}
@@ -678,13 +667,11 @@ Proof‑of‑concept (MACS0416): with spherical geometry, the calibrated model g
 
 We fit population and per‑cluster parameters with MCMC:  
 
-• Simple universal: A\_c only.  
+• Simple universal: $A_c$ only.  
 
-• Population: A\_{c,i} ~ N(μ\_A,σ\_A), optionally adding geometry (q\_plane, q\_LOS) and small κ\_ext.  
+• Population: $A_{c,i} \sim N(\mu_A,\sigma_A)$, optionally adding geometry ($q_{\rm plane}$, $q_{\rm LOS}$) and small $\kappa_{\rm ext}$.  
 
-\[
-• Likelihood: χ² = Σ_i (θ_{E,i}^{model}−θ_{E,i}^{obs})²/σ_i², with Tier‑1 (relaxed) priority.
-\]
+• Likelihood: $\chi^2 = \sum_i (\theta_{E,i}^{\rm model}-\theta_{E,i}^{\rm obs})^2/\sigma_i^2$, with Tier‑1 (relaxed) priority.
 
 
 \medskip\hrule\medskip
@@ -739,24 +726,17 @@ BTFR slope/intercept/scatter & see btfr\_*\_fit.json & produced by utilities; fi
 
 \subsection{Clusters (single‑system validation)}
 
-
-\textbf{MACS0416:} θ\_E^pred = \textbf{30.43″} vs \textbf{30.0″} observed (\textbf{1.4\%} error). Geometry sensitivity preserved (\textbf{~21.5\%} spread across tested {q\_p, q\_los}). Boost at R\_E \textbf{~ 7×} relative to Newtonian κ.
+\textbf{MACS0416:} $\theta_E^{\rm pred} = 30.43''$ vs $30.0''$ observed (1.4\% error). Geometry sensitivity preserved ($\sim21.5\%$ spread across tested $q_p$, $q_{\rm los}$). Boost at $R_E$ $\sim 7\times$ relative to Newtonian $\kappa$.
 
 
 \subsection{Clusters (hierarchical NUTS‑grid; N≈10 + blind hold‑outs)}
 
 
-\[
-Using a hierarchical calibration on a curated tier‑1/2 sample (N≈10), together with triaxial projection, source‑redshift distributions P(z_s), and baryonic surface‑density profiles Σ_baryon(R) (gas + BCG/ICL), the Σ‑Gravity kernel reproduces Einstein radii without invoking particle dark-matter halos in these calculations. In a blind hold‑out test on Abell 2261 and MACS J1149.5+2223, posterior‑suggestive coverage is 2/2 inside the 68% interval (coverage = fraction of observed θ_E inside the model’s 68% posterior‑suggestive interval, PPC) and the median fractional error is 14.9%. The population amplitude is μ_A = 4.6 ± 0.4 with intrinsic scatter σ_A ≈ 1.5; the mass‑scaling exponent γ = 0.09 ± 0.10 is consistent with zero.
-\]
+Using a hierarchical calibration on a curated tier‑1/2 sample ($N\approx10$), together with triaxial projection, source‑redshift distributions $P(z_s)$, and baryonic surface‑density profiles $\Sigma_{\rm baryon}(R)$ (gas + BCG/ICL), the $\Sigma$-Gravity kernel reproduces Einstein radii without invoking particle dark-matter halos in these calculations. In a blind hold‑out test on Abell 2261 and MACS J1149.5+2223, posterior‑suggestive coverage is 2/2 inside the 68\% interval (coverage = fraction of observed $\theta_E$ inside the model's 68\% posterior‑suggestive interval, PPC) and the median fractional error is 14.9\%. The population amplitude is $\mu_A = 4.6 \pm 0.4$ with intrinsic scatter $\sigma_A \approx 1.5$; the mass‑scaling exponent $\gamma = 0.09 \pm 0.10$ is consistent with zero.
 
-\[
-• Posterior (γ‑free vs γ=0): ΔWAIC ≈ +0.01 ± 2.5 (inconclusive).
-\]
+• Posterior ($\gamma$-free vs $\gamma=0$): $\Delta$WAIC $\approx +0.01 \pm 2.5$ (inconclusive).
 
-\[
-• **Parsimony:** Given ΔWAIC ≈ 0 ± 2.5, we adopt γ=0 as the preferred baseline (Occam's razor) and retain the mass‑scaled model as a constrained extension for future, larger samples.
-\]
+• \textbf{Parsimony:} Given $\Delta$WAIC $\approx 0 \pm 2.5$, we adopt $\gamma=0$ as the preferred baseline (Occam's razor) and retain the mass‑scaled model as a constrained extension for future, larger samples.
 
 • \textbf{Calibration note:} PPC bands slightly over‑cover (∼89\% inside nominal 68\%), indicating conservative uncertainty estimates from geometry priors (q\_p, q\_LOS) and κ\_ext ~ N(0, 0.05²); we will tighten priors as the sample grows.
 
@@ -1089,13 +1069,15 @@ Table C1 — Training clusters (N≈10; auto‑generated)
 
 \begin{table}[h]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{llllllllll}
 \toprule
 Name & z\_l & R500 [kpc] & Σ\_baryon source & Geometry priors & P(z\_s) model & θ\_E(obs) [\"] & θ\_E(pred) [\"] & Residual & Z‑score \\
 \midrule
 (see scripts/generate\_table\_c1.py) \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 
@@ -1293,36 +1275,36 @@ We do not propose a microphysical development of $\Omega_{\rm eff}$ in this pape
 \subsection{Pantheon+ SNe Validation — Referee-Proof Results}
 
 
-Using the final Phase-2 Lockdown validation suite (\href{redshift-tests/phase2\_hardening.py}{phase2\_hardening}, \href{redshift-tests/ALL\_VALIDATION\_CHECKS\_COMPLETE.md}{ALL\_VALIDATION\_CHECKS\_COMPLETE}, \href{redshift-tests/complete\_validation\_suite.py}{complete\_validation\_suite}), we performed a complete, parity-fair comparison between the TG-τ Σ-Gravity redshift prescription and a flat FRW cosmology with free intercept, employing the full Pantheon+ SH0ES dataset (N = 1701 SNe) and the official STAT + SYS compressed covariance.
+Using a comprehensive validation suite, we performed a complete, parity-fair comparison between the TG-$\tau$ $\Sigma$-Gravity redshift prescription and a flat FRW cosmology with free intercept, employing the full Pantheon+ SH0ES dataset ($N = 1701$ SNe) and the official STAT + SYS compressed covariance.
 
 
 \begin{table}[h]
 \centering
 \begin{tabular}{lllllll}
 \toprule
-Model & Hₛ / Ωₘ & α\_SB / Intercept & χ² & AIC & ΔAIC & Akaike Weight \\
+Model & $H_s$ / $\Omega_m$ & $\alpha_{\rm SB}$ / Intercept & $\chi^2$ & AIC & $\Delta$AIC & Akaike Weight \\
 \midrule
-TG-τ & H\_Σ = 72.00 ± 0.26 & α\_SB = 1.200 ± 0.015 & 871.83 & 875.83 & + 59.21 & 0.000 \\
-FRW & Ωₘ = 0.380 ± 0.020 & intercept = −0.0731 ± 0.0079 & 812.62 & 816.62 & 0 & 1.000 \\
+TG-$\tau$ & $H_\Sigma = 72.00 \pm 0.26$ & $\alpha_{\rm SB} = 1.200 \pm 0.015$ & 871.83 & 875.83 & + 59.21 & 0.000 \\
+FRW & $\Omega_m = 0.380 \pm 0.020$ & intercept $= -0.0731 \pm 0.0079$ & 812.62 & 816.62 & 0 & 1.000 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 
-\textbf{Fair-comparison outcome.} Both models were fitted with identical freedoms (k = 2). Under this parity, FRW remains the statistically preferred description (ΔAIC = + 59.21 in its favor), but TG-τ's parameters are fully physical and stable:
+\textbf{Fair-comparison outcome.} Both models were fitted with identical freedoms ($k = 2$). Under this parity, FRW remains the statistically preferred description ($\Delta$AIC $= + 59.21$ in its favor), but TG-$\tau$'s parameters are fully physical and stable:
 
 
 \begin{itemize}
-\item \textbf{H\_Σ = 72.00 km s⁻¹ Mpc⁻¹} — consistent with H₀ ≈ 70
-\item \textbf{α\_SB = 1.200 ± 0.015} — intermediate between energy-loss (1) and Tolman (4) scaling
-\item \textbf{ξ = 4.8 × 10⁻⁵} — matching the expected Σ-Gravity micro-loss constant (\href{redshift-tests/FINAL\_RESULTS\_SUMMARY.md}{FINAL\_RESULTS\_SUMMARY})
+\item \textbf{$H_\Sigma = 72.00$ km s$^{-1}$ Mpc$^{-1}$} — consistent with $H_0 \approx 70$
+\item \textbf{$\alpha_{\rm SB} = 1.200 \pm 0.015$} — intermediate between energy-loss (1) and Tolman (4) scaling
+\item \textbf{$\xi = 4.8 \times 10^{-5}$} — matching the expected $\Sigma$-Gravity micro-loss constant
 \end{itemize}
 
 
 \textbf{Physical and Systematic Validation Checklist}
 
 
-All validation items were executed and passed (\href{redshift-tests/ALL\_VALIDATION\_CHECKS\_COMPLETE.md}{ALL\_VALIDATION\_CHECKS\_COMPLETE}, \href{redshift-tests/complete\_validation\_suite.py}{complete\_validation\_suite}):
+All validation items were executed and passed:
 
 
 \begin{table}[h]
@@ -1331,13 +1313,13 @@ All validation items were executed and passed (\href{redshift-tests/ALL\_VALIDAT
 \toprule
 Test & Result & Pass \\
 \midrule
-Full covariance χ² (Cholesky) & Consistent; stable fit & ✅ \\
-Zero-point handling (anchored vs free intercept) & H shift 8 km/s/Mpc; α\_SB stable & ✅ \\
-α\_SB robustness (across z slices) & α\_SB = 1.200 for all bins & ✅ \\
-Hubble residual systematics & no significant correlations & ✅ \\
-ISW / hemispherical anisotropy & Δμ ≈ 0.056 mag (NS); p > 0.05 & ✅ \\
-Bootstrap ΔAIC stability & Stable under 1000 resamples & ✅ \\
-Distance-duality diagnostic & η(z) = (1+z)^0.2 suggested & ✅ \\
+Full covariance $\chi^2$ (Cholesky) & Consistent; stable fit & ✓ \\
+Zero-point handling (anchored vs free intercept) & $H$ shift 8 km/s/Mpc; $\alpha_{\rm SB}$ stable & ✓ \\
+$\alpha_{\rm SB}$ robustness (across $z$ slices) & $\alpha_{\rm SB} = 1.200$ for all bins & ✓ \\
+Hubble residual systematics & no significant correlations & ✓ \\
+ISW / hemispherical anisotropy & $\Delta\mu \approx 0.056$ mag (NS); $p > 0.05$ & ✓ \\
+Bootstrap $\Delta$AIC stability & Stable under 1000 resamples & ✓ \\
+Distance-duality diagnostic & $\eta(z) = (1+z)^{0.2}$ suggested & ✓ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1354,18 +1336,16 @@ The corrected TG-τ relation is now
 \end{equation}
 
 
-\[
-Hence η(1) = 1.1487 and η(2) = 1.2457; these values provide a clear, testable signature for future BAO or cluster D_A datasets (see Fig. η below).
-\]
+Hence $\eta(1) = 1.1487$ and $\eta(2) = 1.2457$; these values provide a clear, testable signature for future BAO or cluster $D_A$ datasets (see Fig. below).
 
 
-(Figure η: \href{redshift-tests/distance\_duality\_suggestion.png}{distance\_duality\_suggestion.png}, 1σ band from finite-difference Hessian.)
+(1$\sigma$ band from finite-difference Hessian.)
 
 
 \textbf{Zero-Point Anchoring and Anisotropy}
 
 
-Anchored fits (HΣ = 72.0) and free-intercept fits (HΣ = 80.0) yield identical α\_SB = 1.200, confirming that absolute magnitude degeneracy does not impact the surface-brightness scaling. A full-sky dipole fit framework was implemented (\href{redshift-tests/phase2\_hardening.py}{fit\_residual\_dipole}) and validated with RA/DEC data — no significant directional bias detected (p > 0.05) (\href{redshift-tests/phase2\_hardening.py}{phase2\_hardening}).
+Anchored fits ($H_\Sigma = 72.0$) and free-intercept fits ($H_\Sigma = 80.0$) yield identical $\alpha_{\rm SB} = 1.200$, confirming that absolute magnitude degeneracy does not impact the surface-brightness scaling. A full-sky dipole fit framework was implemented and validated with RA/DEC data — no significant directional bias detected ($p > 0.05$).
 
 
 \textbf{Statistical Interpretation}
@@ -1495,37 +1475,19 @@ Outputs best\_hyperparameters.json, ablation\_results.json, holdout\_results.jso
 
 
 \begin{enumerate}
-\item Baryons:
+\item \textbf{Baryons:} \texttt{core/gnfw\_gas\_profiles.py}, \texttt{core/build\_cluster\_baryons.py} ($f_{\rm gas}=0.11$, clumping fix), \texttt{data/clusters/*.json}; per‑cluster $\Sigma_{\rm baryon}(R)$ CSVs ingested when available (A2261, MACSJ1149 hold‑outs).
+
+
+\item \textbf{Triaxial projection:} \texttt{core/triaxial\_lensing.py} (global normalization; geometry validated).
+
+
+\item \textbf{Projected kernel:} \texttt{core/kernel2d\_sigma.py} ($K_\Sigma(R)=A_c \cdot C(R;\ell_0,\cdots)$).
+
+
+\item \textbf{Diagnostics (MACS0416):} \texttt{python scripts/plot\_macs0416\_diagnostics.py}
+
+Generates: \texttt{convergence\_profiles.png}, \texttt{cumulative\_mass.png}, \texttt{convergence\_maps\_2d.png}, \texttt{boost\_profile.png}.
 \end{enumerate}
-
-\[
-core/gnfw_gas_profiles.py, core/build_cluster_baryons.py (f_gas=0.11, clumping fix), data/clusters/*.json; per‑cluster Σ_baryon(R) CSVs ingested when available (A2261, MACSJ1149 hold‑outs).
-\]
-
-
-\begin{enumerate}
-\item Triaxial projection:
-\end{enumerate}
-
-core/triaxial\_lensing.py (global normalization; geometry validated in docs/triaxial\_lensing\_fix\_report.md).
-
-
-\begin{enumerate}
-\item Projected kernel:
-\end{enumerate}
-
-\[
-core/kernel2d_sigma.py (K_Σ(R)=A_c·C(R;ℓ₀,⋯)).
-\]
-
-
-\begin{enumerate}
-\item Diagnostics (MACS0416):
-\end{enumerate}
-
-python scripts/plot\_macs0416\_diagnostics.py  
-
-Generates: convergence\_profiles.png, cumulative\_mass.png, convergence\_maps\_2d.png, boost\_profile.png.
 
 
 \subsection{Triaxial tests \& Einstein mass checks}
@@ -1556,9 +1518,7 @@ python scripts/run\_tier12\_mcmc\_fast.py → posterior\_A\_c.png, summary.txt
 \subsection{Lensing visuals (κ and α) — quick reproduction (this repo)}
 
 
-\[
-Self-contained figures for convergence and deflection, calibrated to the observed θ_E in the catalog and using the paper’s Σ‑kernel K(R)=A_c·C(R;ℓ₀,⋯):
-\]
+Self-contained figures for convergence and deflection, calibrated to the observed $\theta_E$ in the catalog and using the paper's $\Sigma$-kernel $K(R)=A_c \cdot C(R;\ell_0,\cdots)$:
 
 
 ```pwsh
