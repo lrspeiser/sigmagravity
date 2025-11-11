@@ -182,3 +182,4 @@ def bundle_models(kernel: SigmaKernel, H0_kms_Mpc: float = 70.0) -> dict:
         pathsum=PathSumModel(kernel=kernel, H0_kms_Mpc=H0_kms_Mpc, beta=1.0, Lc_Mpc=1000.0),
     )
 
+

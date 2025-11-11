@@ -236,3 +236,4 @@ def demo_curves(distances_Mpc: np.ndarray, params: SigmaRedshiftParams) -> dict[
     return {"z_tired": tired, "z_isw": isw, "z_geom": zgeom, "z_hubble": zh}
 
 
+

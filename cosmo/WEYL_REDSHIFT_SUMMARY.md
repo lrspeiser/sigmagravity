@@ -267,3 +267,4 @@ $$Q_\mu k^\mu = \alpha_0 C(R) \Rightarrow 1 + z = \exp\left(\alpha_0 \int C \, d
 
 **Stay skeptical, stay excited!** 🧪🎉
 
+
