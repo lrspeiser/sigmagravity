@@ -1,0 +1,9 @@
+{
+  "use_columns": [
+    "log10_Mbar",
+    "log10_Sigma0",
+    "log10_Rd",
+    "log10_Vf"
+  ],
+  "impute": "median"
+}

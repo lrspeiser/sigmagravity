@@ -1,0 +1,33 @@
+SIGMA-GRAVITY vs PCA COMPARISON SUMMARY
+======================================================================
+
+TEST A: Residual vs PC Correlations
+----------------------------------------------------------------------
+
+PC1:
+  Spearman rho = +0.4589
+  p-value = 3.0906e-10
+  95% CI: [+0.3198, +0.5810]
+  n = 170
+
+PC2:
+  Spearman rho = +0.4065
+  p-value = 3.8009e-08
+  95% CI: [+0.2834, +0.5345]
+  n = 170
+
+PC3:
+  Spearman rho = -0.3162
+  p-value = 2.6593e-05
+  95% CI: [-0.4543, -0.1663]
+  n = 170
+
+======================================================================
+INTERPRETATION:
+
+RESULT: FAIL
+rho(residual, PC1) = +0.459
+p-value = 3.091e-10
+
+CONCLUSION: Residuals systematically correlate with PC1.
+            Model does not capture the dominant mass-velocity mode.

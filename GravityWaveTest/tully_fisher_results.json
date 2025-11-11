@@ -1,0 +1,12 @@
+{
+  "gamma_fit": 0.3926731449703481,
+  "gamma_expected": 0.5,
+  "k_fit": 0.0005988542155585185,
+  "TF_slope": 1.2146537100593051,
+  "TF_expected": 1.0,
+  "median_lambda_kpc": 6.973385384758267,
+  "fitted_ell0_kpc": 4.993,
+  "scatter_dex": 0.13525476747193368,
+  "r_squared": 0.8884327643958414,
+  "n_galaxies": 165
+}
