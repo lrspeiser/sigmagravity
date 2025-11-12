@@ -1,0 +1,297 @@
+[
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      2.078671076075818,
+      9.935209123905441,
+      2.7831911557615636
+    ],
+    "rms": 74.48569917047422,
+    "chi_squared": 25083524.917317975,
+    "time": 35.80561566352844,
+    "n_calls": 234
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_linear",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 75.22707006745017,
+    "chi_squared": 28697560.69496423,
+    "time": 1.741276502609253,
+    "n_calls": 12
+  },
+  {
+    "period_name": "orbital",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.8537900815525742,
+      1.0879540336759561,
+      2.0232763119263892
+    ],
+    "rms": 76.05711213161699,
+    "chi_squared": 29107983.4443323,
+    "time": 5.199910402297974,
+    "n_calls": 36
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.8537900815525742,
+      1.0879540336759561,
+      2.0232763119263892
+    ],
+    "rms": 76.06031246313381,
+    "chi_squared": 29105469.295462348,
+    "time": 5.421988248825073,
+    "n_calls": 36
+  },
+  {
+    "period_name": "orbital",
+    "multiplier_func": "multiplier_linear",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.31804734835688,
+    "chi_squared": 29220533.46539353,
+    "time": 1.7767436504364014,
+    "n_calls": 12
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_linear",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.34043899618135,
+    "chi_squared": 29212813.167141285,
+    "time": 1.7944817543029785,
+    "n_calls": 12
+  },
+  {
+    "period_name": "dynamical",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      1.5827669826315602,
+      0.5188047965524696,
+      1.287789766377374
+    ],
+    "rms": 76.49712170629438,
+    "chi_squared": 29300679.36919415,
+    "time": 5.371728181838989,
+    "n_calls": 36
+  },
+  {
+    "period_name": "dynamical",
+    "multiplier_func": "multiplier_linear",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.50307672608969,
+    "chi_squared": 29295624.070060495,
+    "time": 1.75925874710083,
+    "n_calls": 12
+  },
+  {
+    "period_name": "hybrid",
+    "multiplier_func": "multiplier_linear",
+    "params": [
+      4.296662100280169
+    ],
+    "rms": 76.54401923665726,
+    "chi_squared": 29318882.453213915,
+    "time": 1.7927789688110352,
+    "n_calls": 12
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_inverse_square",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.56444000167687,
+    "chi_squared": 29328889.002523433,
+    "time": 1.7517409324645996,
+    "n_calls": 12
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_distance_modulated",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.56451821660312,
+    "chi_squared": 29328089.47846615,
+    "time": 1.8268694877624512,
+    "n_calls": 12
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_inverse_square",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.56477776875404,
+    "chi_squared": 29328810.177045077,
+    "time": 1.7513761520385742,
+    "n_calls": 12
+  },
+  {
+    "period_name": "orbital",
+    "multiplier_func": "multiplier_inverse_square",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.56506529714868,
+    "chi_squared": 29328657.80885478,
+    "time": 1.7864832878112793,
+    "n_calls": 12
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_distance_modulated",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.56597311250408,
+    "chi_squared": 29329426.46831677,
+    "time": 1.7540411949157715,
+    "n_calls": 12
+  },
+  {
+    "period_name": "orbital",
+    "multiplier_func": "multiplier_distance_modulated",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.56617525572398,
+    "chi_squared": 29329051.685658965,
+    "time": 1.7958598136901855,
+    "n_calls": 12
+  },
+  {
+    "period_name": "dynamical",
+    "multiplier_func": "multiplier_inverse_square",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.56750514755426,
+    "chi_squared": 29329862.633998472,
+    "time": 1.7039570808410645,
+    "n_calls": 12
+  },
+  {
+    "period_name": "dynamical",
+    "multiplier_func": "multiplier_distance_modulated",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.57028179723233,
+    "chi_squared": 29330407.802280825,
+    "time": 1.7498266696929932,
+    "n_calls": 12
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_saturating",
+    "params": [
+      2.9625221372268524,
+      42.5474657053812,
+      2.6555650029413624
+    ],
+    "rms": 76.57381751237973,
+    "chi_squared": 29331998.421625145,
+    "time": 5.309334993362427,
+    "n_calls": 36
+  },
+  {
+    "period_name": "orbital",
+    "multiplier_func": "multiplier_saturating",
+    "params": [
+      2.5615451077201024,
+      12.587751687320589,
+      2.5058329393782346
+    ],
+    "rms": 76.57721933045092,
+    "chi_squared": 29333512.55708955,
+    "time": 5.290322303771973,
+    "n_calls": 36
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_saturating",
+    "params": [
+      2.5615451077201024,
+      12.587751687320589,
+      2.5058329393782346
+    ],
+    "rms": 76.57741948416295,
+    "chi_squared": 29333195.82818319,
+    "time": 5.3592658042907715,
+    "n_calls": 36
+  },
+  {
+    "period_name": "hybrid",
+    "multiplier_func": "multiplier_inverse_square",
+    "params": [
+      4.828160165372797
+    ],
+    "rms": 76.57811525077516,
+    "chi_squared": 29333166.935007654,
+    "time": 1.774550437927246,
+    "n_calls": 12
+  },
+  {
+    "period_name": "dynamical",
+    "multiplier_func": "multiplier_saturating",
+    "params": [
+      2.757785046557213,
+      3.069739773028264,
+      2.045634710844732
+    ],
+    "rms": 76.57868815307187,
+    "chi_squared": 29334383.289182693,
+    "time": 5.321977138519287,
+    "n_calls": 36
+  },
+  {
+    "period_name": "hybrid",
+    "multiplier_func": "multiplier_distance_modulated",
+    "params": [
+      3.8839612053793178
+    ],
+    "rms": 76.58077803425695,
+    "chi_squared": 29334260.228322297,
+    "time": 1.7523374557495117,
+    "n_calls": 12
+  },
+  {
+    "period_name": "hybrid",
+    "multiplier_func": "multiplier_saturating",
+    "params": [
+      1.7679241419835732,
+      8.473731459186695,
+      0.6605547944911392
+    ],
+    "rms": 76.59049220023721,
+    "chi_squared": 29339443.342316397,
+    "time": 5.438356637954712,
+    "n_calls": 36
+  },
+  {
+    "period_name": "hybrid",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      1.4761652464228305,
+      3.3047405643376457,
+      2.93470154579623
+    ],
+    "rms": 76.59482120013088,
+    "chi_squared": 29314798.891793028,
+    "time": 5.598067045211792,
+    "n_calls": 36
+  }
+]

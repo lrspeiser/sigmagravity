@@ -304,7 +304,7 @@ def optimize_multiplier_for_observations(calculator, obs_indices, v_observed,
     n_calls = [0]
     
     def objective(params):
-        """Compute χ² between model and observations"""
+        """Compute chi-squared between model and observations"""
         n_calls[0] += 1
         
         v_model = calculator.compute_gravity_sampled(
@@ -353,7 +353,7 @@ def optimize_multiplier_for_observations(calculator, obs_indices, v_observed,
     print(f"    [OK] Complete in {t1-t0:.1f}s ({n_calls[0]} function calls)")
     print(f"    Final params: {result.x}")
     print(f"    Final RMS: {rms:.1f} km/s")
-    print(f"    Final χ²: {chi_sq:.1f}")
+    print(f"    Final chi^2: {chi_sq:.1f}")
     
     return {
         'period_name': period_name,
@@ -518,7 +518,7 @@ def run_inverse_calculation():
     
     results_sorted = sorted(results, key=lambda x: x['rms'])
     
-    print(f"\n{'Rank':<5} {'Period':<15} {'Multiplier':<20} {'RMS (km/s)':<12} {'χ²':<15}")
+    print(f"\n{'Rank':<5} {'Period':<15} {'Multiplier':<20} {'RMS (km/s)':<12} {'chi^2':<15}")
     print("-"*75)
     
     for i, res in enumerate(results_sorted, 1):
