@@ -333,3 +333,4 @@ The PCA diagnostic suggests the problem is **structural**, not parametric:
 
 **Current status**: Simple scalings tested, found insufficient. Deeper diagnosis needed to choose next approach.
 
+

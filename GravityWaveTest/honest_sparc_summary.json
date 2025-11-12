@@ -1,0 +1,17 @@
+{
+  "target_ell0_kpc": 4.993,
+  "n_valid_hypotheses": 12,
+  "closest_to_target": {
+    "name": "geometric_mean_RxH",
+    "median_kpc": 1.7700526184936958,
+    "deviation_kpc": 3.2229473815063043,
+    "deviation_percent": 64.54931667346894,
+    "scatter_dex": 0.4049340022394316
+  },
+  "best_bic": {
+    "name": "tully_fisher_direct",
+    "bic": 54.81785359869048,
+    "median_kpc": 11.799298451367628
+  },
+  "conclusion": "No simple dimensional closure reproduces \u2113\u2080 = 5 kpc. This supports empirical universal scale."
+}
