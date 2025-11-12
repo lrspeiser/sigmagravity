@@ -1,0 +1,91 @@
+[
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.3197316968394073,
+      10.236716554811277,
+      3.699035382022254
+    ],
+    "rms": 219.69768170681806,
+    "chi_squared": 48250462.55043751,
+    "time": 36.79162812232971
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_distance_dependent",
+    "params": [
+      2.7845287154534883,
+      1.9031785910894214,
+      2.619246855283479,
+      5.623622284074826
+    ],
+    "rms": 219.69768170681806,
+    "chi_squared": 48174269.66601898,
+    "time": 58.91377329826355
+  },
+  {
+    "period_name": "hybrid_jeans_orbital",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      1.9028468876827223,
+      16.323718011074753,
+      3.536846605302432
+    ],
+    "rms": 219.69768170681806,
+    "chi_squared": 48233558.38429292,
+    "time": 35.04542422294617
+  },
+  {
+    "period_name": "hybrid_jeans_mass",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      1.5612561577945727,
+      2.5887195578035262,
+      1.8241653789701924
+    ],
+    "rms": 219.69768170681806,
+    "chi_squared": 48267071.347350344,
+    "time": 34.83871912956238
+  },
+  {
+    "period_name": "hybrid_weighted",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      1.5612561577945727,
+      2.5887195578035262,
+      1.8241653789701924
+    ],
+    "rms": 219.69768170681806,
+    "chi_squared": 48267071.347350344,
+    "time": 35.04809546470642
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_hybrid_saturating",
+    "params": [
+      2.5908265885966655,
+      4.860652034971207,
+      3.0000878530119826,
+      0.8280513407537812,
+      6.774162246294806,
+      0.7213235022845478
+    ],
+    "rms": 219.69768170681806,
+    "chi_squared": 48267068.235667616,
+    "time": 147.02193331718445
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_resonant_enhanced",
+    "params": [
+      0.7186856720009173,
+      16.177964458441906,
+      18.407465147889,
+      1.6436843710297064
+    ],
+    "rms": 219.69768170681806,
+    "chi_squared": 48267071.347350344,
+    "time": 73.21201133728027
+  }
+]
