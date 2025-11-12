@@ -4,15 +4,105 @@
 **Authors:** Leonard Speiser  
 **Date:** 2025‑10‑20 (manuscript draft)
 
+[![Paper PDF](https://img.shields.io/badge/Paper-PDF-red.svg)](docs/sigmagravity_paper.pdf)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Manuscript-yellow.svg)]()
+
+### Citation
+
+If you use this work, please cite:
+
+```bibtex
+@article{speiser2025sigmagravity,
+  title={Σ-Gravity: A Universal Scale-Dependent Enhancement Reproducing Galaxy Dynamics and Cluster Lensing Without Particle Dark-Matter Halos},
+  author={Speiser, Leonard},
+  journal={arXiv preprint},
+  year={2025},
+  note={Repository: https://github.com/yourusername/sigmagravity}
+}
+```
+
+---
+
+## Table of Contents
+
+- [Abstract](#abstract)
+- [Introduction](#1-introduction)
+- [Theory](#2-theory-from-intuition-to-a-single-kernel-used-in-two-domains)
+- [Data](#3-data)
+- [Methods & Validation](#4-methods--validation)
+- [Results](#5-results)
+- [Discussion](#6-discussion)
+- [Predictions & Falsifiability](#7-predictions--falsifiability)
+- [Cosmological Implications](#8-cosmological-implications-and-the-cmb)
+- [Reproducibility](#9-reproducibility--code-availability)
+- [Appendices](#appendix-a--integrationbyparts-and-cancellation-of-ovc)
+
 ---
 
 ## Abstract
 
-We present Σ-Gravity, a motivated, empirically calibrated scale-dependent enhancement that reproduces galaxy rotation curves and cluster lensing with universal parameters and no per-system dark-matter halo tuning. The model introduces a multiplicative kernel g_eff = g_bar[1+K(R)] that vanishes in compact systems (ensuring Solar System safety) and rises in extended structures (galaxies, clusters). With a single parameter set calibrated on SPARC galaxies, Σ-Gravity achieves 0.087 dex scatter on the radial-acceleration relation—competitive with MOND and 2-3× better than individually-tuned ΛCDM halo fits. Applied zero-shot to Milky Way stars (no retuning), the model yields +0.062 dex bias and 0.142 dex scatter, while the equivalent single NFW halo fails catastrophically (+1.409 dex bias).
+We present **Σ-Gravity**, a motivated, empirically calibrated scale-dependent enhancement that reproduces galaxy rotation curves and cluster lensing with universal parameters and no per-system dark-matter halo tuning. The model introduces a multiplicative kernel `g_eff = g_bar[1+K(R)]` that vanishes in compact systems (ensuring Solar System safety) and rises in extended structures (galaxies, clusters). 
 
-For galaxy clusters, the same framework extends naturally: realistic baryonic profiles (gNFW gas + BCG/ICL) with triaxial projection and a recalibrated amplitude achieve 88.9% coverage (16/18) within 68% posterior predictive checks across 10 galaxy clusters with 7.9% median fractional error. As validation, 2 clusters were held out during calibration (Abell 2261, MACSJ1149) and both fall within 68% PPC. The amplitude ratio A_cluster/A_galaxy ≈ 7.8 is qualitatively consistent with geometric path-counting expectations. Mass-scaling tests find γ = 0.09±0.10, consistent with universal coherence length within each domain.
+### Key Results
 
-**Theoretical framework:** The kernel structure is motivated by quantum path-integral reasoning—coherent superposition of near-geodesic families around the classical GR solution—but parameters {A, ℓ₀, p, n_coh} are empirically calibrated. The coherence window uses a Burr-XII form given by $C(R) = 1-[1+(R/\ell_0)^p]^{-n_{\mathrm{coh}}}$, which is justified by superstatistical decoherence models. Dedicated validation confirms that simple theoretical predictions based on naive path-counting fail by factors of 10-2500 times (Appendix H). We therefore present this as principled phenomenology with testable predictions, not first-principles derivation. The model is curl-free by construction (axisymmetric K=K(R)), employs exact elliptic-integral geometry, and satisfies all Solar System constraints (boost at 1 AU: ≲7×10⁻¹⁴). Complete reproducible code, provenance manifests, and validation suite are released publicly.
+- **Galaxy Dynamics:** With a single parameter set calibrated on SPARC galaxies, Σ-Gravity achieves **0.087 dex scatter** on the radial-acceleration relation—competitive with MOND and 2-3× better than individually-tuned ΛCDM halo fits.
+- **Milky Way Validation:** Applied zero-shot to Milky Way stars (no retuning), the model yields **+0.062 dex bias** and **0.142 dex scatter**, while the equivalent single NFW halo fails catastrophically (+1.409 dex bias).
+- **Galaxy Clusters:** Realistic baryonic profiles (gNFW gas + BCG/ICL) with triaxial projection achieve **88.9% coverage (16/18)** within 68% posterior predictive checks across 10 galaxy clusters with **7.9% median fractional error**.
+- **Hold-Out Validation:** 2 clusters held out during calibration (Abell 2261, MACSJ1149) both fall within 68% PPC.
+- **Amplitude Scaling:** The ratio `A_cluster/A_galaxy ≈ 7.8` is qualitatively consistent with geometric path-counting expectations.
+- **Universal Coherence:** Mass-scaling tests find `γ = 0.09±0.10`, consistent with universal coherence length within each domain.
+
+### Theoretical Framework
+
+The kernel structure is motivated by quantum path-integral reasoning—coherent superposition of near-geodesic families around the classical GR solution—but parameters `{A, ℓ₀, p, n_coh}` are empirically calibrated. The coherence window uses a Burr-XII form:
+
+```math
+C(R) = 1-[1+(R/\ell_0)^p]^{-n_{\mathrm{coh}}}
+```
+
+This form is justified by superstatistical decoherence models. Dedicated validation confirms that simple theoretical predictions based on naive path-counting fail by factors of 10-2500 times (Appendix H). We therefore present this as **principled phenomenology with testable predictions**, not first-principles derivation. 
+
+The model is:
+- ✅ **Curl-free** by construction (axisymmetric `K=K(R)`)
+- ✅ **Exact geometry** using elliptic integrals
+- ✅ **Solar System safe** (boost at 1 AU: ≲7×10⁻¹⁴)
+- ✅ **Fully reproducible** with complete code, provenance manifests, and validation suite
+
+---
+
+## Quick Start
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/sigmagravity.git
+cd sigmagravity
+
+# Install dependencies (Python ≥3.10 required)
+pip install numpy scipy matplotlib pandas pymc arviz
+```
+
+### Reproduce Key Results
+
+```bash
+# 1. SPARC Galaxy RAR (0.087 dex scatter)
+python many_path_model/validation_suite.py --rar-holdout
+
+# 2. Milky Way Star-Level Analysis
+python scripts/analyze_mw_rar_starlevel.py \
+  --pred_csv data/gaia/outputs/mw_gaia_full_coverage_suggested.csv \
+  --out_prefix data/gaia/outputs/mw_rar_starlevel_full
+
+# 3. Cluster Einstein Radii Validation
+python scripts/run_holdout_validation.py
+
+# 4. Generate All Paper Figures
+python scripts/generate_all_model_summary.py
+```
+
+See [Section 9](#9-reproducibility--code-availability) for detailed reproduction instructions.
 
 ---
 
@@ -795,32 +885,42 @@ By contrast, the statistical preference for FRW arises from its additional flexi
 
 ## 9. Reproducibility & code availability
 
-### 9.0 Milky Way (Gaia DR3) — exact replication (this repo)
+### 9.0 Milky Way (Gaia DR3) — Exact Replication
 
-1) Fit MW pipeline (GPU; writes fit_params.json)
-```pwsh path=null start=null
-python -m vendor.maxdepth_gaia.run_pipeline --use_source mw_csv --mw_csv_path "data/gaia/mw/gaia_mw_real.csv" --saveplot "data/gaia/outputs/mw_pipeline_run_vendor/mw_rotation_curve_maxdepth.png"
+**Step 1:** Fit MW pipeline (GPU; writes fit_params.json)
+```bash
+python -m vendor.maxdepth_gaia.run_pipeline \
+  --use_source mw_csv \
+  --mw_csv_path "data/gaia/mw/gaia_mw_real.csv" \
+  --saveplot "data/gaia/outputs/mw_pipeline_run_vendor/mw_rotation_curve_maxdepth.png"
 ```
 
-2) Predict star‑level speeds (GPU)
-```pwsh path=null start=null
-python scripts/suggest_gaia_star_speeds.py --npz "data/gaia/mw/mw_gaia_144k.npz" --fit "data/gaia/outputs/mw_pipeline_run_vendor/fit_params.json" --out "data/gaia/outputs/mw_gaia_144k_suggested.csv" --device 0
+**Step 2:** Predict star‑level speeds (GPU)
+```bash
+python scripts/suggest_gaia_star_speeds.py \
+  --npz "data/gaia/mw/mw_gaia_144k.npz" \
+  --fit "data/gaia/outputs/mw_pipeline_run_vendor/fit_params.json" \
+  --out "data/gaia/outputs/mw_gaia_144k_suggested.csv" \
+  --device 0
 ```
 
-3) Star‑level RAR table, metrics, and plot
-```pwsh path=null start=null
-python scripts/analyze_mw_rar_starlevel.py --pred_csv "data/gaia/outputs/mw_gaia_144k_suggested.csv" --out_prefix "data/gaia/outputs/mw_rar_starlevel" --hexbin
+**Step 3:** Star‑level RAR table, metrics, and plot
+```bash
+python scripts/analyze_mw_rar_starlevel.py \
+  --pred_csv "data/gaia/outputs/mw_gaia_144k_suggested.csv" \
+  --out_prefix "data/gaia/outputs/mw_rar_starlevel" \
+  --hexbin
 ```
 
-4) Comparison plot (R vs g medians; RAR line‑fits Σ vs MOND vs NFW vs GR)
-```pwsh path=null start=null
+**Step 4:** Comparison plot (R vs g medians; RAR line‑fits Σ vs MOND vs NFW vs GR)
+```bash
 python scripts/make_mw_rar_comparison.py
 ```
 
-Notes
-- Requires CuPy/NVIDIA GPU for steps 1–2; steps 3–4 are CPU.
-- All input data are under data/gaia; outputs are written under data/gaia/outputs.
-- For MOND/NFW baselines, parameters are read from fit_params.json (a0, V200, c).
+**Notes:**
+- Requires CuPy/NVIDIA GPU for steps 1–2; steps 3–4 are CPU-only
+- All input data are under `data/gaia/`; outputs written to `data/gaia/outputs/`
+- For MOND/NFW baselines, parameters are read from `fit_params.json` (a0, V200, c)
 
 ### 9.1. Repository structure & prerequisites
 
@@ -868,32 +968,42 @@ python scripts/run_tier12_mcmc_fast.py → posterior_A_c.png, summary.txt
 
 ### 9.6. Blind hold‑outs (with overrides)
 
-### 9.7. Lensing visuals (κ and α) — quick reproduction (this repo)
+### 9.7. Lensing Visuals (κ and α) — Quick Reproduction
 
-Self-contained figures for convergence and deflection, calibrated to the observed θ_E in the catalog and using the paper’s Σ‑kernel K(R)=A_c·C(R;ℓ₀,⋯):
+Self-contained figures for convergence and deflection, calibrated to the observed θ_E in the catalog using the paper's Σ‑kernel `K(R)=A_c·C(R;ℓ₀,⋯)`:
 
-```pwsh
-python scripts/make_cluster_lensing_profiles.py --clusters "MACS1149" --fb 0.33 --ell0_frac 0.60 --p 2 --ncoh 2
+```bash
+python scripts/make_cluster_lensing_profiles.py \
+  --clusters "MACS1149" \
+  --fb 0.33 \
+  --ell0_frac 0.60 \
+  --p 2 \
+  --ncoh 2
 ```
 
-- Input: data/clusters/master_catalog.csv (uses cluster_name, theta_E_obs_arcsec)
-- Output: data/clusters/figures/<name>_kappa_profiles.png and <name>_alpha_profiles.png
+**Input/Output:**
+- Input: `data/clusters/master_catalog.csv` (uses cluster_name, theta_E_obs_arcsec)
+- Output: `data/clusters/figures/<name>_kappa_profiles.png` and `<name>_alpha_profiles.png`
 - Notes: This is a didactic, axisymmetric visual (SIS toys for GR(baryons) and GR+DM). For baryon‑accurate, triaxial panels, use the full cluster pipeline scripts and per‑cluster Σ_baryon(R).
 
-Build multi‑cluster panels for the paper:
+**Build multi‑cluster panels for the paper:**
 
-```pwsh
+```bash
 python scripts/make_cluster_lensing_panels.py
 ```
 
-Produces: figures/cluster_kappa_profiles_panel.png and figures/cluster_alpha_profiles_panel.png.
+Produces: `figures/cluster_kappa_profiles_panel.png` and `figures/cluster_alpha_profiles_panel.png`
+
+**Hold-out validation:**
 
 ```bash
-python scripts/run_holdout_validation.py → pred_vs_obs_holdout.png  
+python scripts/run_holdout_validation.py  # → pred_vs_obs_holdout.png
+
 python scripts/validate_holdout_mass_scaled.py \
   --posterior output/n10_nutsgrid/flat_samples.npz \
   --catalog data/clusters/master_catalog.csv \
-  --pzs median --check-training 1 \
+  --pzs median \
+  --check-training 1 \
   --overrides-dir data/overrides
 ```
 
@@ -955,9 +1065,43 @@ We thank collaborators and the maintainers of the SPARC database and strong‑le
 
 ---
 
-## Data & code availability
+## Data & Code Availability
 
 All scripts listed in §9 are included in the project repository; outputs (CSV/JSON/PNG) are generated deterministically from checked‑in configs.
+
+### Repository Structure
+
+```
+sigmagravity/
+├── README.md                    # This file (paper content)
+├── docs/                        # PDF paper and LaTeX files
+│   ├── sigmagravity_paper.pdf  # Generated PDF
+│   └── sigmagravity_paper.tex  # LaTeX source
+├── many_path_model/            # Galaxy dynamics kernel
+│   ├── path_spectrum_kernel.py # Core Σ-kernel implementation
+│   ├── validation_suite.py     # Physics validation tests
+│   └── run_full_tuning_pipeline.py # RAR calibration
+├── core/                        # Cluster lensing infrastructure
+│   ├── kernel2d_sigma.py       # 2D projected kernel
+│   ├── triaxial_lensing.py     # Triaxial geometry
+│   ├── gnfw_gas_profiles.py    # Gas profiles
+│   └── build_cluster_baryons.py # Baryon models
+├── scripts/                     # Analysis & plotting scripts
+│   ├── analyze_mw_rar_starlevel.py
+│   ├── run_holdout_validation.py
+│   └── generate_*.py           # Figure generation
+├── data/                        # Datasets
+│   ├── gaia/                   # Milky Way star data
+│   ├── clusters/               # Galaxy cluster data
+│   ├── pantheon/               # SNe data
+│   └── Rotmod_LTG/            # Rotation curve data
+├── figures/                     # Generated figures for paper
+├── config/                      # Hyperparameter configurations
+│   └── hyperparams_track2.json # Calibrated parameters
+├── derivation/                  # Theory validation tests
+│   └── simple_derivation_test.py
+└── tests/                       # Unit tests
+```
 
 ---
 
