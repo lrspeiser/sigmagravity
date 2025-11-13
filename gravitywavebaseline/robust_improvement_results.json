@@ -1,0 +1,32 @@
+[
+  {
+    "period": "jeans",
+    "params": [
+      1.0,
+      15.0,
+      3.0
+    ],
+    "rms": 171.34742736816406,
+    "config": "Baseline (disk only)"
+  },
+  {
+    "period": "jeans",
+    "params": [
+      1.5,
+      15.0,
+      3.0
+    ],
+    "rms": 170.1483612060547,
+    "config": "With bulge"
+  },
+  {
+    "period": "jeans",
+    "params": [
+      0.5,
+      12.5,
+      3.0
+    ],
+    "rms": 169.97915649414062,
+    "config": "With bulge + gas"
+  }
+]

@@ -291,15 +291,28 @@ def optimize_fixed(calculator, obs_indices, v_observed, period_name,
     print(f"\n  Testing: {period_name} + {multiplier_func.__name__}")
     t0 = time.time()
     
-    R_obs = calculator.R.get() if calculator.use_gpu else calculator.R
-    R_obs = R_obs[obs_indices]
+    # FIX: Pass indices instead of R values
+    v_observed_np = np.asarray(v_observed, dtype=np.float32)
+    
+    n_calls = [0]
+    best_chi = [np.inf]
     
     def objective(params):
         try:
+            n_calls[0] += 1
             v_model, _ = calculator.compute_total_velocity(
-                R_obs, period_name, multiplier_func, params
+                obs_indices, period_name, multiplier_func, params
             )
-            chi_sq = float(np.sum((v_model - v_observed)**2))
+            # v_model is already NumPy
+            chi_sq = float(np.sum((v_model - v_observed_np)**2))
+            
+            # Track best
+            if chi_sq < best_chi[0]:
+                best_chi[0] = chi_sq
+                rms = np.sqrt(np.mean((v_model - v_observed_np)**2))
+                if n_calls[0] % 5 == 0:  # Print every 5 calls
+                    print(f"      Call {n_calls[0]}: RMS={rms:.1f} km/s")
+            
             return chi_sq
         except Exception as e:
             print(f"      Error in objective: {e}")
@@ -322,18 +335,20 @@ def optimize_fixed(calculator, obs_indices, v_observed, period_name,
     
     # Final model
     v_model, v_components = calculator.compute_total_velocity(
-        R_obs, period_name, multiplier_func, result.x
+        obs_indices, period_name, multiplier_func, result.x
     )
     
-    rms = np.sqrt(np.mean((v_model - v_observed)**2))
+    rms = np.sqrt(np.mean((v_model - v_observed_np)**2))
     
     print(f"    RMS: {rms:.1f} km/s (time: {t1-t0:.1f}s)")
     print(f"    Params: {result.x}")
     
     # Component breakdown
     for comp, v in v_components.items():
-        contrib = np.mean(v**2) / np.mean(v_model**2) * 100
-        print(f"      {comp}: {np.mean(v):.1f} km/s ({contrib:.1f}%)")
+        v_np = np.asarray(v, dtype=np.float32)
+        v_model_np = np.asarray(v_model, dtype=np.float32)
+        contrib = np.mean(v_np**2) / (np.mean(v_model_np**2) + 1e-10) * 100
+        print(f"      {comp}: {np.mean(v_np):.1f} km/s ({contrib:.1f}%)")
     
     return {
         'period_name': period_name,
@@ -475,6 +490,10 @@ def run_fixed_analysis():
     print(f"\n[OK] Saved: {output}")
     
     # Progress report
+    if len(results_sorted) == 0:
+        print("\n[ERROR] No results generated - all tests failed!")
+        return []
+    
     best = results_sorted[0]
     baseline = next((r for r in all_results if r['config'] == 'BASELINE'), None)
     
