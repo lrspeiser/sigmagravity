@@ -1,11 +1,13 @@
 """
-Phase-2: batch sigma-gated metric-resonance test on SPARC galaxies.
+Phase-3: batch metric-resonance test on SPARC galaxies with physical gates.
 
 This script:
   1) Loads the Milky Way metric-resonance fit (A, lambda_peak, sigma_ln_lambda, ...).
   2) Loops over a list of SPARC rotmod files.
   3) Looks up each galaxy's sigma_v from a SPARC summary CSV.
-  4) Applies the sigma-gated metric-resonance multiplier.
+  4) Applies Burr-XII × log-normal metric resonance with:
+        - Galaxy-level sigma Q-factor gating
+        - Optional local-acceleration gate S(g_bar)
   5) Writes a CSV with GR vs resonance RMS for each galaxy.
 
 Usage example
@@ -14,9 +16,12 @@ python gravitywavebaseline/run_metric_resonance_sigma_batch.py \
     --rotmod-dir data/Rotmod_LTG \
     --sparc-summary data/sparc/sparc_combined.csv \
     --mw-fit-json gravitywavebaseline/metric_resonance_mw_fit.json \
-    --out-csv gravitywavebaseline/metric_resonance_sigma_batch_beta0p6.csv \
-    --sigma-ref 30.0 \
-    --beta-sigma 0.6
+    --out-csv gravitywavebaseline/metric_resonance_sigma_phase3_beta1p0.csv \
+    --sigma-ref 25.0 \
+    --beta-sigma 1.0 \
+    --use-accel-gate \
+    --g-dag 1e-10 \
+    --q-accel 2.0
 """
 
 from __future__ import annotations
@@ -24,15 +29,12 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import Iterable, List, Optional
+from typing import List
 
 import numpy as np
 import pandas as pd
 
-from metric_resonance_multiplier import (
-    metric_resonance_multiplier_sigma,
-    sigma_gate_amplitude,
-)
+from metric_resonance_multiplier import metric_resonance_multiplier
 
 
 # --- Helpers ---------------------------------------------------------------
@@ -120,6 +122,37 @@ def load_galaxy_list(list_path: Path) -> List[str]:
     return names
 
 
+def gate_sigma_qfactor(sigma_v, sigma_ref=30.0, beta_sigma=1.0):
+    """
+    Q-factor style sigma gate:
+
+        Q = sigma_ref / sigma_v
+        G_sigma = Q^beta / (1 + Q^beta)
+
+    Cold disks (sigma_v << sigma_ref) -> G_sigma ~ 1
+    Hot disks (sigma_v >> sigma_ref)  -> G_sigma ~ (sigma_ref / sigma_v)^beta
+    """
+
+    sigma_v = np.asarray(sigma_v, dtype=float)
+    Q = sigma_ref / np.maximum(sigma_v, 1e-6)
+    Qbeta = Q**beta_sigma
+    return Qbeta / (1.0 + Qbeta)
+
+
+def gate_accel(g_bar, g_dag=1e-10, q=2.0):
+    """
+    Local-acceleration gate:
+
+        S = 1 / (1 + (g_bar / g_dag)^q)
+
+    g_bar in m/s^2, g_dag ~ MOND-like 1e-10 m/s^2 scale.
+    """
+
+    g_bar = np.asarray(g_bar, dtype=float)
+    ratio = g_bar / max(g_dag, 1e-30)
+    return 1.0 / (1.0 + ratio**q)
+
+
 # --- Main ------------------------------------------------------------------
 
 
@@ -169,19 +202,31 @@ def main():
     parser.add_argument(
         "--sigma-ref",
         type=float,
-        default=30.0,
-        help="Reference dispersion sigma_ref [km/s] for sigma gating.",
+        default=25.0,
+        help="Reference dispersion sigma_ref [km/s] for sigma Q-factor gating.",
     )
     parser.add_argument(
         "--beta-sigma",
         type=float,
-        default=0.4,
-        help="Exponent beta for sigma gating: A_eff ∝ (sigma_ref/sigma_v)^beta.",
+        default=1.0,
+        help="Exponent beta for sigma Q-factor gate.",
     )
     parser.add_argument(
-        "--no-clamp",
+        "--use-accel-gate",
         action="store_true",
-        help="If set, allow A_eff > A_base (not recommended for first passes).",
+        help="Apply local-acceleration gate S(g_bar).",
+    )
+    parser.add_argument(
+        "--g-dag",
+        type=float,
+        default=1e-10,
+        help="Acceleration scale g_dag (m/s^2) for S(g_bar).",
+    )
+    parser.add_argument(
+        "--q-accel",
+        type=float,
+        default=2.0,
+        help="Exponent q in S(g_bar) = 1 / (1 + (g_bar/g_dag)^q).",
     )
     parser.add_argument(
         "--out-csv",
@@ -280,30 +325,39 @@ def main():
             sigma_v = args.sigma_ref
 
         lambda_orb = 2.0 * np.pi * R
-        f_res = metric_resonance_multiplier_sigma(
+        sigma_gate = gate_sigma_qfactor(
+            sigma_v=sigma_v,
+            sigma_ref=args.sigma_ref,
+            beta_sigma=args.beta_sigma,
+        )
+        A_eff = A_base * sigma_gate
+
+        f_res = metric_resonance_multiplier(
             R_kpc=R,
             lambda_orb_kpc=lambda_orb,
-            sigma_v_kms=sigma_v,
-            A_base=A_base,
-            sigma_ref_kms=args.sigma_ref,
-            beta_sigma=args.beta_sigma,
             ell0_kpc=ell0_kpc,
             p=p,
             n_coh=n_coh,
             lambda_peak_kpc=lambda_peak_kpc,
             sigma_ln_lambda=sigma_ln_lambda,
-            clamp=not args.no_clamp,
+            A=A_eff,
         )
+
+        accel_gate_stats = (np.nan, np.nan, np.nan)
+        if args.use_accel_gate:
+            R_m = R * 3.0856775814913673e19  # kpc -> m
+            V_ms = V_gr * 1.0e3
+            g_bar = (V_ms**2) / np.maximum(R_m, 1e-6)
+            S = gate_accel(g_bar, g_dag=args.g_dag, q=args.q_accel)
+            f_res = 1.0 + (f_res - 1.0) * S
+            accel_gate_stats = (
+                float(np.nanmin(S)),
+                float(np.nanmedian(S)),
+                float(np.nanmax(S)),
+            )
+
         V_model = V_gr * np.sqrt(np.clip(f_res, 0.0, None))
         rms_res = rms(V_obs - V_model)
-
-        A_eff = sigma_gate_amplitude(
-            sigma_v_kms=sigma_v,
-            A_base=A_base,
-            sigma_ref_kms=args.sigma_ref,
-            beta_sigma=args.beta_sigma,
-            clamp=not args.no_clamp,
-        )
 
         print(
             f"  sigma_v={sigma_v:.2f} km/s -> A_eff={A_eff:.3f}, "
@@ -319,6 +373,10 @@ def main():
                 "beta_sigma": args.beta_sigma,
                 "A_base": A_base,
                 "A_eff": A_eff,
+                "sigma_gate": sigma_gate,
+                "accel_gate_min": accel_gate_stats[0],
+                "accel_gate_median": accel_gate_stats[1],
+                "accel_gate_max": accel_gate_stats[2],
                 "n_points": int(len(df)),
                 "rms_gr": rms_gr,
                 "rms_metric_resonance_sigma": rms_res,
