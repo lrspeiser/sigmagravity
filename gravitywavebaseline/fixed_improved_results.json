@@ -1,1 +1,144 @@
-[]
+[
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.5415318782796825,
+      15.404083029555801,
+      3.475168901835344
+    ],
+    "rms": 70.46147155761719,
+    "chi_squared": 4964819.0,
+    "time": 34.0885694026947,
+    "config": "WITH BULGE"
+  },
+  {
+    "period_name": "dynamical",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.062423353141227045,
+      11.735553241669919,
+      1.920792738605373
+    ],
+    "rms": 76.37525177001953,
+    "chi_squared": 5833179.0,
+    "time": 3.273700475692749,
+    "config": "OTHER PERIODS"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_log_richter",
+    "params": [
+      0.31211676570613545,
+      26.12589883154789
+    ],
+    "rms": 76.37527465820312,
+    "chi_squared": 5833182.5,
+    "time": 2.1860034465789795,
+    "config": "OTHER PERIODS"
+  },
+  {
+    "period_name": "orbital",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.14417677259110118,
+      14.465015574638118,
+      1.4719572378816677
+    ],
+    "rms": 76.37529754638672,
+    "chi_squared": 5833186.0,
+    "time": 3.273214101791382,
+    "config": "OTHER PERIODS"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_piecewise_steps",
+    "params": [
+      7.00942875570602,
+      35.485530730333814,
+      2.7611066977601135,
+      1.179597545259111,
+      5.234027960663653
+    ],
+    "rms": 76.37547302246094,
+    "chi_squared": 5833213.0,
+    "time": 5.522951364517212,
+    "config": "OTHER PERIODS"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_ramp",
+    "params": [
+      35.66362601439752,
+      0.6372511247257222
+    ],
+    "rms": 76.37564086914062,
+    "chi_squared": 5833238.5,
+    "time": 3.2797229290008545,
+    "config": "OTHER PERIODS"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_distance_dependent",
+    "params": [
+      0.088977733527837,
+      16.168126541731475,
+      1.1463909701915473,
+      12.411292333851728
+    ],
+    "rms": 76.37571716308594,
+    "chi_squared": 5833250.0,
+    "time": 8.854295492172241,
+    "config": "DISTANCE-DEPENDENT"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.3520798709985844,
+      16.567729499254412,
+      1.0600547448385098
+    ],
+    "rms": 76.37669372558594,
+    "chi_squared": 5833400.0,
+    "time": 6.5199596881866455,
+    "config": "WITH BULGE + GAS"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.3520798709985844,
+      16.567729499254412,
+      1.0600547448385098
+    ],
+    "rms": 76.37669372558594,
+    "chi_squared": 5833399.5,
+    "time": 6.549527645111084,
+    "config": "WITH ALL + WEIGHTS"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_constant_scale",
+    "params": [
+      4.107548054376622
+    ],
+    "rms": 76.4189224243164,
+    "chi_squared": 5839852.0,
+    "time": 2.1797354221343994,
+    "config": "MASS BOOST x200"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      1.6073545280883854,
+      6.198548800583769,
+      2.6761903638086344
+    ],
+    "rms": 84.01168060302734,
+    "chi_squared": 7057962.0,
+    "time": 34.18957185745239,
+    "config": "BASELINE"
+  }
+]

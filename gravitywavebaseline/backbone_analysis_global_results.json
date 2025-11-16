@@ -1,0 +1,216 @@
+[
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_richter_scale",
+    "params": [
+      0.011511254376763702,
+      0.852121154543492
+    ],
+    "rms": 39.1489840572477,
+    "chi_squared": 6130571.810858538,
+    "time": 18.717042207717896,
+    "components": {
+      "disk": 225.81815079442347,
+      "bulge": 21.637585329148703,
+      "halo": 2.430466500253385,
+      "stellar_perturbation": 16.64667510986328,
+      "analytic_total": 226.8772752628969
+    },
+    "config": "WITH HALO (standard LCDM)",
+    "rms_baseline": 39.16548910207229,
+    "improvement": 0.016505044824590698
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_richter_scale",
+    "params": [
+      0.03883586536830563,
+      0.8651586156391586
+    ],
+    "rms": 39.14973671494137,
+    "chi_squared": 6130807.539396912,
+    "time": 18.686212062835693,
+    "components": {
+      "disk": 225.83159638159833,
+      "bulge": 21.63758532919738,
+      "halo": 0.0,
+      "stellar_perturbation": 31.26181983947754,
+      "analytic_total": 226.87744935217592
+    },
+    "config": "NO HALO (baryons only)",
+    "rms_baseline": 39.167081965540866,
+    "improvement": 0.01734525059949732
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.009004134118175244,
+      44.84085212240364,
+      2.4962290959689355
+    ],
+    "rms": 39.15899901948942,
+    "chi_squared": 6133708.816833495,
+    "time": 7.012849807739258,
+    "components": {
+      "disk": 225.83159638159833,
+      "bulge": 21.63758532919738,
+      "halo": 0.0,
+      "stellar_perturbation": 30.540205001831055,
+      "analytic_total": 226.87744935217592
+    },
+    "config": "NO HALO (baryons only)",
+    "rms_baseline": 39.167081965540866,
+    "improvement": 0.008082946051445106
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.009004134118175244,
+      44.84085212240364,
+      2.4962290959689355
+    ],
+    "rms": 39.15982091906468,
+    "chi_squared": 6133966.297652863,
+    "time": 7.015874862670898,
+    "components": {
+      "disk": 225.81815079442347,
+      "bulge": 21.637585329148703,
+      "halo": 2.430466500253385,
+      "stellar_perturbation": 30.68177032470703,
+      "analytic_total": 226.8772752628969
+    },
+    "config": "WITH HALO (standard LCDM)",
+    "rms_baseline": 39.16548910207229,
+    "improvement": 0.005668183007614402
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_shortlambda_saturating",
+    "params": [
+      0.12484670628245409,
+      11.869165378240577,
+      1.7891098340475222
+    ],
+    "rms": 39.16002293944877,
+    "chi_squared": 6134029.586472616,
+    "time": 3.5079386234283447,
+    "components": {
+      "disk": 225.83159638159833,
+      "bulge": 21.63758532919738,
+      "halo": 0.0,
+      "stellar_perturbation": 30.585493087768555,
+      "analytic_total": 226.87744935217592
+    },
+    "config": "NO HALO (baryons only)",
+    "rms_baseline": 39.167081965540866,
+    "improvement": 0.007059026092093745
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_shortlambda_saturating",
+    "params": [
+      0.12484670628245409,
+      11.869165378240577,
+      1.7891098340475222
+    ],
+    "rms": 39.16083165121437,
+    "chi_squared": 6134282.942459012,
+    "time": 3.5118401050567627,
+    "components": {
+      "disk": 225.81815079442347,
+      "bulge": 21.637585329148703,
+      "halo": 2.430466500253385,
+      "stellar_perturbation": 30.724855422973633,
+      "analytic_total": 226.8772752628969
+    },
+    "config": "WITH HALO (standard LCDM)",
+    "rms_baseline": 39.16548910207229,
+    "improvement": 0.004657450857919798
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_shortlambda_boost",
+    "params": [
+      0.13301291668381054,
+      4.731271869271165,
+      2.3491687577584868
+    ],
+    "rms": 39.16114412499409,
+    "chi_squared": 6134380.836714235,
+    "time": 7.039174795150757,
+    "components": {
+      "disk": 225.83159638159833,
+      "bulge": 21.63758532919738,
+      "halo": 0.0,
+      "stellar_perturbation": 30.53962516784668,
+      "analytic_total": 226.87744935217592
+    },
+    "config": "NO HALO (baryons only)",
+    "rms_baseline": 39.167081965540866,
+    "improvement": 0.005937840546778261
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_shortlambda_boost",
+    "params": [
+      1.3462161547469047,
+      1.7573582430845036,
+      2.3039717691068122
+    ],
+    "rms": 39.16251213058009,
+    "chi_squared": 6134809.42551133,
+    "time": 7.018912315368652,
+    "components": {
+      "disk": 225.81815079442347,
+      "bulge": 21.637585329148703,
+      "halo": 2.430466500253385,
+      "stellar_perturbation": 30.71620750427246,
+      "analytic_total": 226.8772752628969
+    },
+    "config": "WITH HALO (standard LCDM)",
+    "rms_baseline": 39.16548910207229,
+    "improvement": 0.0029769714922025514
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_constant",
+    "params": [
+      1.4584182140334772
+    ],
+    "rms": 39.18986100636597,
+    "chi_squared": 6143380.822793135,
+    "time": 2.3384716510772705,
+    "components": {
+      "disk": 225.83159638159833,
+      "bulge": 21.63758532919738,
+      "halo": 0.0,
+      "stellar_perturbation": 36.675167083740234,
+      "analytic_total": 226.87744935217592
+    },
+    "config": "NO HALO (baryons only)",
+    "rms_baseline": 39.167081965540866,
+    "improvement": -0.022779040825106733
+  },
+  {
+    "period_name": "gw",
+    "multiplier_func": "multiplier_constant",
+    "params": [
+      1.4584182140334772
+    ],
+    "rms": 39.192396835301096,
+    "chi_squared": 6144175.878782879,
+    "time": 2.3433470726013184,
+    "components": {
+      "disk": 225.81815079442347,
+      "bulge": 21.637585329148703,
+      "halo": 2.430466500253385,
+      "stellar_perturbation": 36.847625732421875,
+      "analytic_total": 226.8772752628969
+    },
+    "config": "WITH HALO (standard LCDM)",
+    "rms_baseline": 39.16548910207229,
+    "improvement": -0.026907733228803465
+  }
+]

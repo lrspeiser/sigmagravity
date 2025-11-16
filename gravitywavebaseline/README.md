@@ -87,7 +87,106 @@ python calculate_periods.py
 
 # Step 2: Optimize multipliers (1-3 hours)
 python inverse_multiplier_calculation.py
+
+# Optional: Analytic backbone + λ_gw perturbations
+python backbone_analysis.py
 ```
+
+### Analytic Backbone + λ_gw Perturbations
+
+The file `backbone_analysis.py` implements the two-stage approach described in the λ_gw reference docs:
+
+1. **Analytic backbone** – Miyamoto–Nagai disk + Hernquist bulge (+ optional NFW halo) carries the full Milky Way mass and reproduces ≈220 km/s without any multipliers.
+2. **Stellar perturbation** – a sampled subset of Gaia stars supplies the λ_gw-dependent enhancement so multipliers act as coherent perturbations, not substitutes for missing mass.
+
+Key scripts/documentation:
+
+- `backbone_analysis.py` – runs the analytic backbone optimization and writes `backbone_analysis_results.json`.
+- `LAMBDA_GW_PHYSICS.md` – deep dive on the gravitational-wave wavelength hypothesis and expected parameter ranges.
+- `LAMBDA_GW_QUICK_REF.md` – one-page checklist for verifying short-wavelength boosters and λ_gw usage.
+
+Run it via:
+
+```bash
+python gravitywavebaseline/backbone_analysis.py
+```
+
+Look for low RMS (<30 km/s) in the “NO HALO” config to demonstrate that λ_gw multipliers can replace dark matter, and compare with the “WITH HALO” config to see how the perturbation behaves on top of ΛCDM.
+
+### GR Baseline vs λ_gw Enhancement (Corrected Workflow)
+
+To avoid the earlier “fit-the-answer” baseline, the Σ-Gravity test now runs in two explicit phases using observed baryonic masses only:
+
+1. **GR baseline (no dark matter, no multipliers)**  
+   ```bash
+   python gravitywavebaseline/calculate_gr_baseline.py
+   ```
+   - Loads `gaia_with_periods.parquet`, applies a Miyamoto–Nagai disk (4×10¹⁰ Msun) + Hernquist bulge (1.5×10¹⁰ Msun)
+   - Writes `gaia_with_gr_baseline.parquet` and `gr_baseline_plot.png`
+   - Reports the per-ring gap `v_obs - v_GR`; outer disk currently shows ⟨gap⟩ ≈ 104 km/s, RMS ≈ 109 km/s
+
+2. **λ_gw enhancement on top of the fixed GR baseline**  
+   ```bash
+   python gravitywavebaseline/test_lambda_enhancement.py \
+       --r-min 12 --r-max 16 \
+       --n-obs 1000 \
+       --stellar-scale 10 \
+       --disk-mass 4e10 \
+       --capacity-model surface_density \
+       --capacity-alpha 0.5
+   ```
+   - Samples 50 k Gaia stars, rescales them so the sampled mass represents the 4×10¹⁰ Msun disk (× user multiplier)
+   - Optional `--capacity-model` applies spillover constraints (`surface_density`, `velocity_dispersion`, `flatness`, `wavelength`) with geometry (`disk`/`sphere`) and strength (`--capacity-alpha`), limiting how much enhancement each shell can hold before spilling outward
+   - `--force-shell-match` scales each observation after spillover so `v_total` exactly equals `v_observed` (the “infinite boost per sphere” thought experiment)
+   - Runs the short-λ booster, saturating booster, and constant multiplier on the outer disk observations after the spillover step
+   - Outputs `lambda_enhancement_results.json` with baseline vs λ_gw RMS, best-fit parameters, and improvement percentages
+
+3. **Capacity-law solver**  
+   ```bash
+   python gravitywavebaseline/fit_capacity_profile.py \
+       --r-min 12 --r-max 16 \
+       --n-obs 1000 \
+       --stellar-scale 5 \
+       --disk-mass 4e10 \
+       --capacity-model surface_density
+   ```
+   - Computes the required per-star enhancement `sqrt(v_obs^2 - v_GR^2)` and fits a growth law `capacity ∝ Σ(r) × (r/r₀)^γ` whose spillover reproduces the data
+   - Writes `capacity_profile_fit.json` with the best-fit `(alpha, gamma)`, the residual RMS, and the per-shell capacity table for downstream modeling
+
+4. **SPARC validation (per-galaxy)**  
+   ```bash
+   python gravitywavebaseline/sparc_capacity_test.py \
+       --galaxy NGC2403 \
+       --alpha 2.8271 \
+       --gamma 0.8579
+   ```
+   - Reads `data/Rotmod_LTG/<galaxy>_rotmod.dat`, builds the baryonic GR baseline from the SPARC-provided `Vgas`, `Vdisk`, `Vbulge`
+   - Applies the Milky Way capacity law (or any `(alpha, gamma)` you supply) to the SPARC radii and reports the resulting RMS error
+   - Outputs `gravitywavebaseline/sparc_results/<galaxy>_capacity_test.json` for record-keeping inside this folder
+
+5. **Batch SPARC sweep**  
+   ```bash
+   python gravitywavebaseline/run_sparc_capacity_batch.py \
+       --alpha 2.8271 --gamma 0.8579 \
+       --force-match \
+       --results-file gravitywavebaseline/sparc_results_batch.csv
+   ```
+   - Loops through every entry in `data/sparc/sparc_combined.csv`, runs `sparc_capacity_test.py` per galaxy, and aggregates the RMS results
+   - Keeps all outputs under `gravitywavebaseline/sparc_results/` so nothing touches the core code/paper
+
+Latest run (12–16 kpc, stellar_scale=10, disk_mass=4×10¹⁰ Msun):
+- GR-only RMS: 113 km/s
+- Best λ_gw RMS: 52.5 km/s
+- Improvement: 60.4 km/s (53.5 %) with a simple constant multiplier, the short-λ forms land at the same RMS
+
+The detailed rationale, parameters, and interpretation are captured in:
+- `CORRECTED_WORKFLOW.md` — step-by-step rationale for the corrected baseline
+- `QUICK_REFERENCE.md` — one-page checklist for rerunning the test
+- `EXECUTIVE_SUMMARY.md` — narrative explaining why the new workflow matters
+
+### Correcting Gaia v_phi
+
+The supplied 1.8 M Gaia catalogue originally contained a simplified `v_phi = sqrt(v_ra^2 + v_dec^2)` estimate. Run `python gravitywavebaseline/recompute_gaia_velocities.py` to rebuild `data/gaia/gaia_processed_corrected.csv` using Astropy’s full Galactocentric transformation from the raw DR3 sample (`data/gaia/gaia_large_sample_raw.csv`). `calculate_periods.py` automatically prefers this corrected file when present.
 
 ## Computational Strategy
 

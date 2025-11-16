@@ -23,7 +23,8 @@ except ImportError:
     print("[!] GPU not available, using CPU")
 
 # Constants
-G_KPC = 4.498e-12
+# Gravitational constant (km/s)^2 kpc / Msun
+G_KPC = 4.30091e-6
 
 # ============================================================================
 # ANALYTICAL COMPONENTS
@@ -102,6 +103,43 @@ def multiplier_power_law(lam, r, params, xp=np):
     A, lambda_0, alpha = params
     return 1.0 + A * (lam / lambda_0)**alpha
 
+def multiplier_constant_scale(lam, r, params, xp=np):
+    """Constant Richter-style boost independent of lambda."""
+    (scale,) = params
+    return xp.ones_like(lam) * scale
+
+def multiplier_log_richter(lam, r, params, xp=np):
+    """
+    Richter-style logarithmic multiplier:
+        g = 1 + A * log10(lambda / lambda_0)
+    """
+    A, lambda_0 = params
+    ratio = xp.maximum(lam / lambda_0, 1e-4)
+    return 1.0 + A * xp.log10(ratio)
+
+def multiplier_piecewise_steps(lam, r, params, xp=np):
+    """
+    Piecewise step multiplier with 3 levels:
+        g = level1       if lambda < lambda_1
+          = level2       if lambda_1 <= lambda < lambda_2
+          = level3       otherwise
+    params = (lambda_1, lambda_2, level1, level2, level3)
+    """
+    lambda_1, lambda_2, level1, level2, level3 = params
+    out = xp.full_like(lam, level3)
+    out = xp.where(lam < lambda_1, level1, out)
+    out = xp.where((lam >= lambda_1) & (lam < lambda_2), level2, out)
+    return out
+
+def multiplier_power_ramp(lam, r, params, xp=np):
+    """
+    g = (lambda/lambda_0)^alpha
+    Pure power ramp (no +1 offset).
+    """
+    lambda_0, alpha = params
+    ratio = xp.maximum(lam / lambda_0, 1e-4)
+    return ratio**alpha
+
 def multiplier_distance_dependent(lam, r, params, xp=np):
     """Distance-modulated: f = 1 + A(lambda/lambda_0)^alpha × exp(-r/r_0)"""
     A, lambda_0, alpha, r_0 = params
@@ -120,7 +158,7 @@ class FixedGravityCalculator:
     """Fixed calculator with proper selection weights."""
     
     def __init__(self, stars_data, use_gpu=True, use_bulge=True, 
-                 use_gas=True, use_selection_weights=True):
+                 use_gas=True, use_selection_weights=True, mass_boost=1.0):
         
         self.use_gpu = use_gpu and GPU_AVAILABLE
         self.xp = cp if self.use_gpu else np
@@ -132,19 +170,25 @@ class FixedGravityCalculator:
         self.N_stars = len(stars_data)
         print(f"\n  Stars: {self.N_stars:,}")
         
-        # Load data
-        if self.use_gpu:
-            self.x = cp.array(stars_data['x'].values, dtype=cp.float32)
-            self.y = cp.array(stars_data['y'].values, dtype=cp.float32)
-            self.z = cp.array(stars_data['z'].values, dtype=cp.float32)
-            self.M = cp.array(stars_data['M_star'].values, dtype=cp.float32)
-        else:
-            self.x = stars_data['x'].values.astype(np.float32)
-            self.y = stars_data['y'].values.astype(np.float32)
-            self.z = stars_data['z'].values.astype(np.float32)
-            self.M = stars_data['M_star'].values.astype(np.float32)
+        # Load CPU copies (always)
+        self.x_cpu = stars_data['x'].values.astype(np.float32)
+        self.y_cpu = stars_data['y'].values.astype(np.float32)
+        self.z_cpu = stars_data['z'].values.astype(np.float32)
+        self.M_cpu = stars_data['M_star'].values.astype(np.float32)
         
-        self.R = self.xp.sqrt(self.x**2 + self.y**2)
+        if self.use_gpu:
+            self.x = cp.array(self.x_cpu)
+            self.y = cp.array(self.y_cpu)
+            self.z = cp.array(self.z_cpu)
+            self.M = cp.array(self.M_cpu)
+        else:
+            self.x = self.x_cpu
+            self.y = self.y_cpu
+            self.z = self.z_cpu
+            self.M = self.M_cpu
+        
+        self.R_cpu = np.sqrt(self.x_cpu**2 + self.y_cpu**2)
+        self.R = cp.array(self.R_cpu) if self.use_gpu else self.R_cpu
         
         # Load periods
         self.periods = {}
@@ -162,50 +206,55 @@ class FixedGravityCalculator:
         self.use_selection_weights = use_selection_weights
         if use_selection_weights:
             print("\n  Calculating CAPPED selection weights...")
-            R_cpu = cp.asnumpy(self.R) if self.use_gpu else self.R
-            z_cpu = cp.asnumpy(self.z) if self.use_gpu else self.z
-            M_cpu = cp.asnumpy(self.M) if self.use_gpu else self.M
-            
-            weights = estimate_selection_weights_capped(R_cpu, z_cpu, M_cpu)
-            
-            if self.use_gpu:
-                self.weights = cp.array(weights, dtype=cp.float32)
-            else:
-                self.weights = weights.astype(np.float32)
+            weights = estimate_selection_weights_capped(self.R_cpu, self.z_cpu, self.M_cpu)
+            self.weights_cpu = weights.astype(np.float32)
+            self.weights = cp.array(self.weights_cpu) if self.use_gpu else self.weights_cpu
             
             print(f"    Weight range: {weights.min():.2f} - {weights.max():.2f} (CAPPED)")
             print(f"    Mean: {weights.mean():.2f}")
         else:
-            self.weights = self.xp.ones(self.N_stars, dtype=self.xp.float32)
+            self.weights_cpu = np.ones(self.N_stars, dtype=np.float32)
+            self.weights = cp.array(self.weights_cpu) if self.use_gpu else self.weights_cpu
             print("\n  Selection weights: DISABLED")
         
         # Components
         self.use_bulge = use_bulge
         self.use_gas = use_gas
+        self.v_phi_cpu = stars_data['v_phi'].values.astype(np.float32) if 'v_phi' in stars_data.columns else np.full(self.N_stars, np.nan, dtype=np.float32)
+        self.v_phi = cp.array(self.v_phi_cpu) if self.use_gpu else self.v_phi_cpu
+
+        self.mass_boost = float(mass_boost)
+        print(f"    Mass boost factor: {self.mass_boost:.2f}x")
         
         print(f"\n  Components:")
         print(f"    Stars: ON")
         print(f"    Bulge: {'ON' if use_bulge else 'OFF'}")
         print(f"    Gas: {'ON' if use_gas else 'OFF'}")
         
+        # Batching parameters (observations vs. source chunks)
+        self.batch_size = 200 if self.use_gpu else 500
+        self.source_chunk_size = 50000 if self.use_gpu else 10000
+        print(f"    Observation batch size: {self.batch_size}")
+        print(f"    Source chunk size: {self.source_chunk_size}")
+        
         print(f"\n[OK] Calculator initialized")
     
-    def compute_total_velocity(self, R_obs, period_name, multiplier_func, params,
-                               M_disk=5e10, batch_size=5000):
+    def compute_total_velocity(self, obs_indices, period_name, multiplier_func, params,
+                               M_disk=5e10, batch_size=None):
         """Compute total velocity with all components."""
+        
+        batch_size = batch_size or self.batch_size
         
         # Stellar component
         v_stars = self._compute_stellar_component(
-            R_obs, period_name, multiplier_func, params, M_disk, batch_size
+            obs_indices, period_name, multiplier_func, params, batch_size
         )
         
-        # Bulge
+        # Analytical components use CPU arrays
+        R_obs = self.R_cpu[obs_indices]
         v_bulge = hernquist_bulge(R_obs) if self.use_bulge else np.zeros_like(R_obs)
-        
-        # Gas
         v_gas = exponential_gas(R_obs) if self.use_gas else np.zeros_like(R_obs)
         
-        # Total (quadrature)
         v_total = np.sqrt(v_stars**2 + v_bulge**2 + v_gas**2)
         
         return v_total, {
@@ -214,65 +263,74 @@ class FixedGravityCalculator:
             'gas': v_gas
         }
     
-    def _compute_stellar_component(self, R_obs, period_name, multiplier_func, params,
-                                   M_disk, batch_size):
-        """Compute stellar contribution."""
-        
-        N_obs = len(R_obs)
+    def _compute_stellar_component(self, obs_indices, period_name, multiplier_func, params,
+                                   batch_size):
+        """Compute stellar contribution using the full Gaia catalogue."""
+
+        N_obs = len(obs_indices)
         v_stars = np.zeros(N_obs, dtype=np.float32)
-        
-        # Scale masses with weights
-        M_total_weighted = float(self.xp.sum(self.M * self.weights))
-        M_scale_factor = M_disk / M_total_weighted
-        M_scaled = self.M * M_scale_factor * self.weights
-        
-        # Diagnostic
-        M_total_scaled = float(self.xp.sum(M_scaled))
-        print(f"    Stellar mass scaling: {M_total_weighted:.2e} -> {M_total_scaled:.2e} M_sun")
-        
-        # Get periods
+
+        # Pre-compute effective masses for ALL stars
         lambda_vals = self.periods[period_name]
-        
-        # Process in batches
-        n_batches = (N_obs + batch_size - 1) // batch_size
-        
-        for i in range(n_batches):
+        M_effective = self.M * self.weights * self.mass_boost
+        total_mass = float(self.xp.sum(M_effective))
+        print(f"    Effective stellar mass in sum: {total_mass:.2e} M_sun")
+        print(f"    Obs batch size: {batch_size}, Source chunk: {self.source_chunk_size}")
+
+        n_obs_batches = (N_obs + batch_size - 1) // batch_size
+
+        for i in range(n_obs_batches):
             start_idx = i * batch_size
             end_idx = min((i + 1) * batch_size, N_obs)
-            
-            R_batch = R_obs[start_idx:end_idx]
-            
+            batch_obs_idx = obs_indices[start_idx:end_idx]
+
             if self.use_gpu:
-                x_obs = cp.array(R_batch)
-                y_obs = cp.zeros_like(x_obs)
-                z_obs = cp.zeros_like(x_obs)
+                obs_idx_xp = cp.array(batch_obs_idx, dtype=cp.int32)
+                x_obs = self.x[obs_idx_xp]
+                y_obs = self.y[obs_idx_xp]
+                z_obs = self.z[obs_idx_xp]
+                R_obs_batch = self.R[obs_idx_xp]
             else:
-                x_obs = R_batch
-                y_obs = np.zeros_like(x_obs)
-                z_obs = np.zeros_like(x_obs)
-            
-            # Distances
-            dx = x_obs[:, None] - self.x[None, :]
-            dy = y_obs[:, None] - self.y[None, :]
-            dz = z_obs[:, None] - self.z[None, :]
-            r = self.xp.sqrt(dx**2 + dy**2 + dz**2 + 0.01**2)
-            
-            # Gravity
-            g_base = G_KPC * M_scaled[None, :] / r**2
-            
-            # Multiplier
-            multiplier = multiplier_func(lambda_vals[None, :], r, params, self.xp)
+                x_obs = self.x[batch_obs_idx]
+                y_obs = self.y[batch_obs_idx]
+                z_obs = self.z[batch_obs_idx]
+                R_obs_batch = self.R[batch_obs_idx]
+
+            g_total_batch = self.xp.zeros_like(R_obs_batch)
+
+            for src_start in range(0, self.N_stars, self.source_chunk_size):
+                src_end = min(src_start + self.source_chunk_size, self.N_stars)
+                src_slice = slice(src_start, src_end)
+
+                x_src = self.x[src_slice]
+                y_src = self.y[src_slice]
+                z_src = self.z[src_slice]
+                m_src = M_effective[src_slice]
+                lambda_src = lambda_vals[src_slice]
+
+                dx = x_obs[:, None] - x_src[None, :]
+                dy = y_obs[:, None] - y_src[None, :]
+                dz = z_obs[:, None] - z_src[None, :]
+                r = self.xp.sqrt(dx**2 + dy**2 + dz**2 + 0.01**2)
+
+            g_base = G_KPC * m_src[None, :] / r**2
+            multiplier = multiplier_func(lambda_src[None, :], r, params, self.xp)
             g_enhanced = g_base * multiplier
-            
-            # Radial component
-            cos_theta = dx / r
-            g_radial = g_enhanced * cos_theta
-            g_total = self.xp.sum(g_radial, axis=1)
-            
-            # Velocity
-            v_squared = R_batch * g_total
+
+            # Unit radial vector at observation position
+            radial_norm = R_obs_batch + 1e-6
+            ux = x_obs / radial_norm
+            uy = y_obs / radial_norm
+
+            force_x = g_enhanced * (dx / r)
+            force_y = g_enhanced * (dy / r)
+            g_radial = force_x * ux[:, None] + force_y * uy[:, None]
+
+            g_total_batch += self.xp.sum(g_radial, axis=1)
+
+            v_squared = R_obs_batch * self.xp.abs(g_total_batch)
             v_batch = self.xp.sqrt(self.xp.maximum(v_squared, 0))
-            
+
             if self.use_gpu:
                 v_stars[start_idx:end_idx] = cp.asnumpy(v_batch)
             else:
@@ -377,10 +435,20 @@ def run_fixed_analysis():
     gaia = pd.read_parquet('gravitywavebaseline/gaia_with_periods.parquet')
     print(f"  Loaded {len(gaia):,} stars")
     
-    # Observations
-    N_obs = min(1000, len(gaia))
-    obs_indices = np.linspace(0, len(gaia)-1, N_obs, dtype=int)
-    v_observed = np.ones(N_obs) * 220.0
+    # Observations: use real Gaia v_phi where available
+    vphi_values = gaia['v_phi'].values.astype(np.float32) if 'v_phi' in gaia.columns else None
+    if vphi_values is None:
+        raise ValueError("v_phi column missing in Gaia dataset; cannot fit to real velocities.")
+    
+    valid_mask = np.isfinite(vphi_values) & (vphi_values != 0.0)
+    valid_indices = np.where(valid_mask)[0]
+    if len(valid_indices) == 0:
+        raise ValueError("No stars with valid v_phi values found.")
+    
+    N_obs = min(1000, len(valid_indices))
+    print(f"\nObservation set: {N_obs} stars sampled from {len(valid_indices):,} with measured v_phi")
+    obs_indices = np.random.choice(valid_indices, size=N_obs, replace=False)
+    v_observed = vphi_values[obs_indices]
     
     # Test configurations
     print("\n" + "="*80)
@@ -441,7 +509,22 @@ def run_fixed_analysis():
             'use_weights': True,
             'tests': [
                 ('orbital', multiplier_power_law, [(0, 3), (1, 20), (1, 4)]),
-                ('dynamical', multiplier_power_law, [(0, 3), (1, 20), (1, 4)])
+                ('dynamical', multiplier_power_law, [(0, 3), (1, 20), (1, 4)]),
+                ('jeans', multiplier_log_richter, [(0, 10), (0.5, 50)]),
+                ('jeans', multiplier_piecewise_steps, [(1, 10), (10, 100), (0.5, 5.0), (1.0, 10.0), (5.0, 50.0)]),
+                ('jeans', multiplier_power_ramp, [(0.5, 50), (0.5, 5)])
+            ]
+        },
+
+        # 7. Demonstrate explicit mass boost + constant Richter scale
+        {
+            'name': 'MASS BOOST x200',
+            'use_bulge': True,
+            'use_gas': True,
+            'use_weights': True,
+            'mass_boost': 200.0,
+            'tests': [
+                ('jeans', multiplier_constant_scale, [(0.1, 500)])
             ]
         }
     ]
@@ -458,7 +541,8 @@ def run_fixed_analysis():
             use_gpu=GPU_AVAILABLE,
             use_bulge=config['use_bulge'],
             use_gas=config['use_gas'],
-            use_selection_weights=config['use_weights']
+            use_selection_weights=config['use_weights'],
+            mass_boost=config.get('mass_boost', 1.0)
         )
         
         for period, func, bounds in config['tests']:

@@ -295,3 +295,6 @@ K_disk = A_disk * C(R/l0_disk) * (1-exp(-R/R_disk))   # Outer
 
 **The 78.7° dwarf-giant angle is the smoking gun that explains why universal Σ-Gravity can't work!**
 
+
+
+

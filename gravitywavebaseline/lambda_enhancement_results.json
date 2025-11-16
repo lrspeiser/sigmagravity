@@ -1,0 +1,109 @@
+[
+  {
+    "multiplier_func": "multiplier_shortlambda_boost",
+    "params": [
+      1.87755203799893,
+      38.28474626693212,
+      2.4102617163276845
+    ],
+    "rms_baseline": 112.95087945746056,
+    "rms_with_lambda": 41.57241373748534,
+    "improvement": 71.37846571997522,
+    "improvement_percent": 63.194254053469066,
+    "v_GR_mean": 125.70271301269531,
+    "v_enhancement_mean": 193.58837890625,
+    "v_total_mean": 230.8321990966797,
+    "v_observed_mean": 230.79093275440653,
+    "chi_squared": 1728265.58396066,
+    "time": 1.4818954467773438,
+    "v_ratio_min": 1.8136638402938843,
+    "v_ratio_median": 1.8287842273712158,
+    "v_ratio_max": 2.4240424633026123,
+    "accel_multiplier_min": 3.2893764972686768,
+    "accel_multiplier_median": 3.344451665878296,
+    "accel_multiplier_max": 5.87598180770874,
+    "test_name": "shortlambda_boost",
+    "r_range": [
+      12.0,
+      16.0
+    ],
+    "n_obs": 1000,
+    "stellar_mass_scale": 1.0,
+    "capacity_model": "none",
+    "capacity_alpha": 1.0,
+    "force_shell_match": false,
+    "toy_disk_summary": [
+      {
+        "name": "dwarf",
+        "M_disk": 1000000000.0,
+        "R_d": 1.0,
+        "radius_min": 0.1,
+        "radius_max": 8.0,
+        "multiplier_min": 1.9740758994211065,
+        "multiplier_median": 6.025662341289802,
+        "multiplier_max": 37631.30484198748,
+        "velocity_ratio_median": 2.45469267359101,
+        "velocity_ratio_max": 193.98789869986086
+      },
+      {
+        "name": "lmc_like",
+        "M_disk": 3000000000.0,
+        "R_d": 1.5,
+        "radius_min": 0.1,
+        "radius_max": 12.0,
+        "multiplier_min": 1.3665783211285563,
+        "multiplier_median": 2.910225167832969,
+        "multiplier_max": 37631.30484198748,
+        "velocity_ratio_median": 1.7059251725691502,
+        "velocity_ratio_max": 193.98789869986086
+      },
+      {
+        "name": "mw_disk",
+        "M_disk": 40000000000.0,
+        "R_d": 3.0,
+        "radius_min": 0.1,
+        "radius_max": 24.0,
+        "multiplier_min": 1.068961341924375,
+        "multiplier_median": 1.3629599040549045,
+        "multiplier_max": 37631.30484198748,
+        "velocity_ratio_median": 1.1674572446458946,
+        "velocity_ratio_max": 193.98789869986086
+      }
+    ],
+    "toy_disk_summary_path": "gravitywavebaseline\\toy_models\\toy_disk_summary.csv"
+  },
+  {
+    "multiplier_func": "multiplier_shortlambda_saturating",
+    "params": [
+      1.9955537055335455,
+      39.801456748269445,
+      0.5176007833792143
+    ],
+    "rms_baseline": 112.95087945746056,
+    "rms_with_lambda": 80.01365419378305,
+    "improvement": 32.937225263677504,
+    "improvement_percent": 29.16066295533563,
+    "v_GR_mean": 125.70271301269531,
+    "v_enhancement_mean": 102.73490142822266,
+    "v_total_mean": 162.36175537109375,
+    "v_observed_mean": 230.79093275440653,
+    "chi_squared": 6402184.857442297,
+    "time": 2.2315940856933594,
+    "v_ratio_min": 1.2745270729064941,
+    "v_ratio_median": 1.2881238460540771,
+    "v_ratio_max": 1.5669585466384888,
+    "accel_multiplier_min": 1.6244192123413086,
+    "accel_multiplier_median": 1.6592631340026855,
+    "accel_multiplier_max": 2.4553589820861816,
+    "test_name": "shortlambda_sat",
+    "r_range": [
+      12.0,
+      16.0
+    ],
+    "n_obs": 1000,
+    "stellar_mass_scale": 1.0,
+    "capacity_model": "none",
+    "capacity_alpha": 1.0,
+    "force_shell_match": false
+  }
+]

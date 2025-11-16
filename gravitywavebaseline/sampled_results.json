@@ -1,0 +1,68 @@
+[
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_distance_dependent",
+    "params": [
+      1.7586147470953317,
+      11.944665480176651,
+      3.5713236571731395,
+      23.39575194196059
+    ],
+    "rms": 167.39686584472656,
+    "time": 28.787505388259888,
+    "n_calls": 180,
+    "config": "5_DISTANCE_DEPENDENT"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      1.3026349644465727,
+      12.359592630373918,
+      3.635698300042645
+    ],
+    "rms": 168.2427978515625,
+    "time": 20.8483989238739,
+    "n_calls": 135,
+    "config": "1_BASELINE"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      0.7116746975027011,
+      10.621479883345652,
+      3.622734673088013
+    ],
+    "rms": 168.42393493652344,
+    "time": 30.16313648223877,
+    "n_calls": 195,
+    "config": "4_WITH_ALL_WEIGHTS"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      2.312682987563984,
+      17.846219440432485,
+      3.8901536822494194
+    ],
+    "rms": 168.9813232421875,
+    "time": 27.60164761543274,
+    "n_calls": 180,
+    "config": "2_WITH_BULGE"
+  },
+  {
+    "period_name": "jeans",
+    "multiplier_func": "multiplier_power_law",
+    "params": [
+      1.276632218104733,
+      13.470567017267845,
+      3.7454368198690724
+    ],
+    "rms": 169.62452697753906,
+    "time": 36.978471755981445,
+    "n_calls": 240,
+    "config": "3_WITH_BULGE_GAS"
+  }
+]

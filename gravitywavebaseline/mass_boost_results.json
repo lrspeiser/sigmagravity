@@ -1,0 +1,212 @@
+[
+  {
+    "scale": 1.0,
+    "rms": 75.90120697021484,
+    "mean_stellar_speed": 0.18179969489574432,
+    "runtime_sec": 0.06702423095703125,
+    "mass_boost": 1.0
+  },
+  {
+    "scale": 3.0,
+    "rms": 75.90131378173828,
+    "mean_stellar_speed": 0.31488633155822754,
+    "runtime_sec": 0.018567562103271484,
+    "mass_boost": 1.0
+  },
+  {
+    "scale": 10.0,
+    "rms": 75.9017105102539,
+    "mean_stellar_speed": 0.5749011039733887,
+    "runtime_sec": 0.018252849578857422,
+    "mass_boost": 1.0
+  },
+  {
+    "scale": 30.0,
+    "rms": 75.90282440185547,
+    "mean_stellar_speed": 0.995758056640625,
+    "runtime_sec": 0.018541336059570312,
+    "mass_boost": 1.0
+  },
+  {
+    "scale": 100.0,
+    "rms": 75.90672302246094,
+    "mean_stellar_speed": 1.8179970979690552,
+    "runtime_sec": 0.018091917037963867,
+    "mass_boost": 1.0
+  },
+  {
+    "scale": 300.0,
+    "rms": 75.91788482666016,
+    "mean_stellar_speed": 3.1488633155822754,
+    "runtime_sec": 0.018658161163330078,
+    "mass_boost": 1.0
+  },
+  {
+    "scale": 1.0,
+    "rms": 75.90142822265625,
+    "mean_stellar_speed": 0.40651652216911316,
+    "runtime_sec": 0.018476247787475586,
+    "mass_boost": 5.0
+  },
+  {
+    "scale": 3.0,
+    "rms": 75.90198516845703,
+    "mean_stellar_speed": 0.7041072249412537,
+    "runtime_sec": 0.01793956756591797,
+    "mass_boost": 5.0
+  },
+  {
+    "scale": 10.0,
+    "rms": 75.90393829345703,
+    "mean_stellar_speed": 1.2855180501937866,
+    "runtime_sec": 0.018376588821411133,
+    "mass_boost": 5.0
+  },
+  {
+    "scale": 30.0,
+    "rms": 75.90951538085938,
+    "mean_stellar_speed": 2.2265825271606445,
+    "runtime_sec": 0.018302202224731445,
+    "mass_boost": 5.0
+  },
+  {
+    "scale": 100.0,
+    "rms": 75.92903900146484,
+    "mean_stellar_speed": 4.0651655197143555,
+    "runtime_sec": 0.018190622329711914,
+    "mass_boost": 5.0
+  },
+  {
+    "scale": 300.0,
+    "rms": 75.9848403930664,
+    "mean_stellar_speed": 7.041072845458984,
+    "runtime_sec": 0.018308639526367188,
+    "mass_boost": 5.0
+  },
+  {
+    "scale": 1.0,
+    "rms": 75.90254211425781,
+    "mean_stellar_speed": 0.9089985489845276,
+    "runtime_sec": 0.01813793182373047,
+    "mass_boost": 25.0
+  },
+  {
+    "scale": 3.0,
+    "rms": 75.90533447265625,
+    "mean_stellar_speed": 1.5744316577911377,
+    "runtime_sec": 0.01847529411315918,
+    "mass_boost": 25.0
+  },
+  {
+    "scale": 10.0,
+    "rms": 75.91510009765625,
+    "mean_stellar_speed": 2.8745059967041016,
+    "runtime_sec": 0.018236637115478516,
+    "mass_boost": 25.0
+  },
+  {
+    "scale": 30.0,
+    "rms": 75.94298553466797,
+    "mean_stellar_speed": 4.978790283203125,
+    "runtime_sec": 0.018229246139526367,
+    "mass_boost": 25.0
+  },
+  {
+    "scale": 100.0,
+    "rms": 76.0406494140625,
+    "mean_stellar_speed": 9.089984893798828,
+    "runtime_sec": 0.017841815948486328,
+    "mass_boost": 25.0
+  },
+  {
+    "scale": 300.0,
+    "rms": 76.31988525390625,
+    "mean_stellar_speed": 15.744316101074219,
+    "runtime_sec": 0.017981290817260742,
+    "mass_boost": 25.0
+  },
+  {
+    "scale": 1.0,
+    "rms": 75.90672302246094,
+    "mean_stellar_speed": 1.8179970979690552,
+    "runtime_sec": 0.01781630516052246,
+    "mass_boost": 100.0
+  },
+  {
+    "scale": 3.0,
+    "rms": 75.91788482666016,
+    "mean_stellar_speed": 3.1488633155822754,
+    "runtime_sec": 0.01830601692199707,
+    "mass_boost": 100.0
+  },
+  {
+    "scale": 10.0,
+    "rms": 75.9569320678711,
+    "mean_stellar_speed": 5.749011993408203,
+    "runtime_sec": 0.018459081649780273,
+    "mass_boost": 100.0
+  },
+  {
+    "scale": 30.0,
+    "rms": 76.06855010986328,
+    "mean_stellar_speed": 9.95758056640625,
+    "runtime_sec": 0.018185853958129883,
+    "mass_boost": 100.0
+  },
+  {
+    "scale": 100.0,
+    "rms": 76.4596176147461,
+    "mean_stellar_speed": 18.179969787597656,
+    "runtime_sec": 0.01829361915588379,
+    "mass_boost": 100.0
+  },
+  {
+    "scale": 300.0,
+    "rms": 77.58010864257812,
+    "mean_stellar_speed": 31.488632202148438,
+    "runtime_sec": 0.018213272094726562,
+    "mass_boost": 100.0
+  },
+  {
+    "scale": 1.0,
+    "rms": 75.91510009765625,
+    "mean_stellar_speed": 2.8745059967041016,
+    "runtime_sec": 0.018517732620239258,
+    "mass_boost": 250.0
+  },
+  {
+    "scale": 3.0,
+    "rms": 75.94298553466797,
+    "mean_stellar_speed": 4.978790283203125,
+    "runtime_sec": 0.018352985382080078,
+    "mass_boost": 250.0
+  },
+  {
+    "scale": 10.0,
+    "rms": 76.0406494140625,
+    "mean_stellar_speed": 9.089984893798828,
+    "runtime_sec": 0.018752574920654297,
+    "mass_boost": 250.0
+  },
+  {
+    "scale": 30.0,
+    "rms": 76.31988525390625,
+    "mean_stellar_speed": 15.744316101074219,
+    "runtime_sec": 0.018146038055419922,
+    "mass_boost": 250.0
+  },
+  {
+    "scale": 100.0,
+    "rms": 77.29956817626953,
+    "mean_stellar_speed": 28.74506187438965,
+    "runtime_sec": 0.017993450164794922,
+    "mass_boost": 250.0
+  },
+  {
+    "scale": 300.0,
+    "rms": 80.11590576171875,
+    "mean_stellar_speed": 49.787899017333984,
+    "runtime_sec": 0.018357276916503906,
+    "mass_boost": 250.0
+  }
+]

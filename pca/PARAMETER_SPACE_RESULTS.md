@@ -262,3 +262,6 @@ pca/outputs/parameter_space/
 - **Together**: "Works locally, fails globally" - complete diagnosis!
 
 🎯 **Both PCA types now complete!** Curve-space + parameter-space = full understanding.
+
+
+

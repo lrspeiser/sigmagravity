@@ -1,0 +1,2 @@
+scenario,mean_rms,median_rms,improved_vs_base,improved_pct,mean_delta,min_delta,max_delta
+mass_adaptive,74.1396184909435,41.74643094153471,0,0.0,42.20089184079312,0.0,548.3657875523455

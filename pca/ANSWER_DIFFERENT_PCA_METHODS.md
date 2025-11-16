@@ -247,3 +247,6 @@ This explains why universal parameters can't work and why all our reconciliation
 
 **The alternative PCA methods were crucial** - they revealed that the problem isn't methodological, it's physical: **dwarfs and giants genuinely require different models**.
 
+
+
+

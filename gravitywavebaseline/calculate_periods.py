@@ -48,6 +48,7 @@ def load_gaia_data():
     
     # Try different possible file locations
     possible_paths = [
+        'data/gaia/gaia_processed_corrected.csv',
         'data/gaia/gaia_processed.csv',
         '../data/gaia/gaia_processed.csv',
     ]

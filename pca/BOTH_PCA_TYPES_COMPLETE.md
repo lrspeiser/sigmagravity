@@ -210,3 +210,6 @@ pca/outputs/parameter_space/
 
 🎯 **Both PCA types complete! Full picture achieved!**
 
+
+
+

@@ -1,0 +1,327 @@
+{
+  "config": {
+    "r_min": 12.0,
+    "r_max": 16.0,
+    "n_obs": 1000,
+    "stellar_scale": 5.0,
+    "disk_mass": 40000000000.0,
+    "capacity_model": "surface_density",
+    "capacity_geometry": "disk",
+    "alpha_bounds": [
+      0.01,
+      20.0
+    ],
+    "gamma_bounds": [
+      -3.0,
+      3.0
+    ]
+  },
+  "fit": {
+    "alpha": 2.8270752572455065,
+    "gamma": 0.8579285583538192,
+    "rms_shortfall": 23.804504502790383,
+    "rms_velocity": 16.9838046600675
+  },
+  "shells": [
+    {
+      "R_center": 0.17405187693318808,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    },
+    {
+      "R_center": 0.5221556307995643,
+      "surface_density": 76844882.96414997,
+      "capacity": 19112392.420999505
+    },
+    {
+      "R_center": 0.8702593846659404,
+      "surface_density": 133664766.73818251,
+      "capacity": 51528490.847772494
+    },
+    {
+      "R_center": 1.2183631385323166,
+      "surface_density": 151836627.31880265,
+      "capacity": 78122195.81687886
+    },
+    {
+      "R_center": 1.5664668923986926,
+      "surface_density": 175712739.75681335,
+      "capacity": 112160335.84449722
+    },
+    {
+      "R_center": 1.914570646265069,
+      "surface_density": 142086424.40086696,
+      "capacity": 107735110.29783165
+    },
+    {
+      "R_center": 2.262674400131445,
+      "surface_density": 124332242.73567945,
+      "capacity": 108800710.67430875
+    },
+    {
+      "R_center": 2.6107781539978214,
+      "surface_density": 194304783.835682,
+      "capacity": 192242728.4756093
+    },
+    {
+      "R_center": 2.958881907864197,
+      "surface_density": 119609086.5695939,
+      "capacity": 131754541.25147529
+    },
+    {
+      "R_center": 3.3069856617305735,
+      "surface_density": 132627226.29007676,
+      "capacity": 160722274.7920664
+    },
+    {
+      "R_center": 3.6550894155969496,
+      "surface_density": 146021840.45619836,
+      "capacity": 192819814.8511609
+    },
+    {
+      "R_center": 4.0031931694633265,
+      "surface_density": 137522115.2682394,
+      "capacity": 196336883.53642318
+    },
+    {
+      "R_center": 4.351296923329702,
+      "surface_density": 159640820.1072165,
+      "capacity": 244816540.5120968
+    },
+    {
+      "R_center": 4.699400677196078,
+      "surface_density": 178007054.86738098,
+      "capacity": 291614567.8077789
+    },
+    {
+      "R_center": 5.047504431062454,
+      "surface_density": 224165031.6676983,
+      "capacity": 390449636.26852864
+    },
+    {
+      "R_center": 5.395608184928831,
+      "surface_density": 308547677.26171535,
+      "capacity": 569073312.9233011
+    },
+    {
+      "R_center": 5.743711938795206,
+      "surface_density": 372666915.11297375,
+      "capacity": 725206125.6317958
+    },
+    {
+      "R_center": 6.091815692661583,
+      "surface_density": 521808950.96932334,
+      "capacity": 1068011049.9695141
+    },
+    {
+      "R_center": 6.439919446527959,
+      "surface_density": 675759728.8470861,
+      "capacity": 1450646189.0347579
+    },
+    {
+      "R_center": 6.788023200394335,
+      "surface_density": 788126430.8112305,
+      "capacity": 1770026657.423705
+    },
+    {
+      "R_center": 7.13612695426071,
+      "surface_density": 916340867.8767784,
+      "capacity": 2148199125.217884
+    },
+    {
+      "R_center": 7.484230708127088,
+      "surface_density": 1042368798.0443974,
+      "capacity": 2545568512.0729103
+    },
+    {
+      "R_center": 7.832334461993463,
+      "surface_density": 1122966651.2232423,
+      "capacity": 2851472831.038785
+    },
+    {
+      "R_center": 8.18043821585984,
+      "surface_density": 1073750928.2152312,
+      "capacity": 2830141874.1960573
+    },
+    {
+      "R_center": 8.528541969726216,
+      "surface_density": 791437986.097581,
+      "capacity": 2161964345.4528203
+    },
+    {
+      "R_center": 8.876645723592592,
+      "surface_density": 633015138.1109341,
+      "capacity": 1789581434.415269
+    },
+    {
+      "R_center": 9.224749477458968,
+      "surface_density": 538186993.6713586,
+      "capacity": 1572544192.8670447
+    },
+    {
+      "R_center": 9.572853231325343,
+      "surface_density": 423662287.9399197,
+      "capacity": 1277882170.1656587
+    },
+    {
+      "R_center": 9.92095698519172,
+      "surface_density": 348812309.1869235,
+      "capacity": 1084853603.8433955
+    },
+    {
+      "R_center": 10.269060739058096,
+      "surface_density": 234702158.66093227,
+      "capacity": 751875178.1672142
+    },
+    {
+      "R_center": 10.617164492924474,
+      "surface_density": 207907306.5614026,
+      "capacity": 685360946.8339537
+    },
+    {
+      "R_center": 10.965268246790849,
+      "surface_density": 154764741.8881894,
+      "capacity": 524495566.49206525
+    },
+    {
+      "R_center": 11.313372000657225,
+      "surface_density": 104659632.34899756,
+      "capacity": 364328795.0617392
+    },
+    {
+      "R_center": 11.6614757545236,
+      "surface_density": 71875622.2978852,
+      "capacity": 256795548.42558718
+    },
+    {
+      "R_center": 12.009579508389978,
+      "surface_density": 69896085.07463117,
+      "capacity": 256105055.160946
+    },
+    {
+      "R_center": 12.357683262256353,
+      "surface_density": 43075465.8746982,
+      "capacity": 161748975.8833109
+    },
+    {
+      "R_center": 12.70578701612273,
+      "surface_density": 39391011.33025998,
+      "capacity": 151481353.3129724
+    },
+    {
+      "R_center": 13.053890769989106,
+      "surface_density": 27814533.896965716,
+      "capacity": 109472375.79117078
+    },
+    {
+      "R_center": 13.401994523855482,
+      "surface_density": 23292727.215307854,
+      "capacity": 93768886.53805813
+    },
+    {
+      "R_center": 13.750098277721857,
+      "surface_density": 17905104.010368668,
+      "capacity": 73683368.71406868
+    },
+    {
+      "R_center": 14.098202031588233,
+      "surface_density": 6360706.622918376,
+      "capacity": 26743196.536300045
+    },
+    {
+      "R_center": 14.44630578545461,
+      "surface_density": 7841635.5312310215,
+      "capacity": 33666867.07865647
+    },
+    {
+      "R_center": 14.794409539320986,
+      "surface_density": 9228854.249437777,
+      "capacity": 40440408.58948222
+    },
+    {
+      "R_center": 15.142513293187363,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    },
+    {
+      "R_center": 15.490617047053739,
+      "surface_density": 4636110.731683907,
+      "capacity": 21132715.60901258
+    },
+    {
+      "R_center": 15.838720800920115,
+      "surface_density": 3255078.5607265285,
+      "capacity": 15123182.124735778
+    },
+    {
+      "R_center": 16.18682455478649,
+      "surface_density": 1732662.8746886023,
+      "capacity": 8201550.405547484
+    },
+    {
+      "R_center": 16.534928308652866,
+      "surface_density": 2276078.541789457,
+      "capacity": 10972281.877388345
+    },
+    {
+      "R_center": 16.883032062519245,
+      "surface_density": 2683642.163436321,
+      "capacity": 13170339.388462331
+    },
+    {
+      "R_center": 17.23113581638562,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    },
+    {
+      "R_center": 17.579239570251996,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    },
+    {
+      "R_center": 17.92734332411837,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    },
+    {
+      "R_center": 18.275447077984747,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    },
+    {
+      "R_center": 18.623550831851123,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    },
+    {
+      "R_center": 18.971654585717502,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    },
+    {
+      "R_center": 19.319758339583878,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    },
+    {
+      "R_center": 19.667862093450253,
+      "surface_density": 1627851.7008903124,
+      "capacity": 9106963.941589344
+    },
+    {
+      "R_center": 20.01596584731663,
+      "surface_density": 1643631.1252134966,
+      "capacity": 9334692.892031413
+    },
+    {
+      "R_center": 20.364069601183004,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    },
+    {
+      "R_center": 20.71217335504938,
+      "surface_density": 0.0,
+      "capacity": 0.0
+    }
+  ]
+}
