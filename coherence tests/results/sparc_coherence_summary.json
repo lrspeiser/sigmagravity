@@ -1,0 +1,260 @@
+[
+  {
+    "galaxy": "NGC2403",
+    "sigma_v": 20.175,
+    "model": "path_interference",
+    "success": true,
+    "nfev": 11,
+    "rms_multiplier": 0.6629811391419347,
+    "rms_velocity": 22.051471168824143,
+    "params": {
+      "p": 0.9,
+      "n_coh": 0.8,
+      "sigma_ref": 30.0,
+      "A": 4.999999999999999,
+      "ell0": 10.871154220372366,
+      "beta_sigma": 0.9825139465833114
+    }
+  },
+  {
+    "galaxy": "NGC2403",
+    "sigma_v": 20.175,
+    "model": "metric_resonance",
+    "success": true,
+    "nfev": 26,
+    "rms_multiplier": 0.4375705463263271,
+    "rms_velocity": 10.44790244816433,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "beta_sigma": 0.0,
+      "A": 4.999999999999999,
+      "ell0": 13.906237384499772,
+      "lambda_m0": 79.99999999999999,
+      "log_width": 0.8388049568975015
+    }
+  },
+  {
+    "galaxy": "NGC2403",
+    "sigma_v": 20.175,
+    "model": "entanglement",
+    "success": true,
+    "nfev": 10,
+    "rms_multiplier": 0.6026827857196196,
+    "rms_velocity": 20.27118714450071,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "A": 4.999999999999754,
+      "ell0": 17.87242202905279,
+      "sigma0": 79.99999999999677
+    }
+  },
+  {
+    "galaxy": "NGC2403",
+    "sigma_v": 20.175,
+    "model": "vacuum_condensation",
+    "success": true,
+    "nfev": 10,
+    "rms_multiplier": 0.5866171971282901,
+    "rms_velocity": 19.985623839633163,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "beta": 1.0,
+      "A": 4.99999999999981,
+      "ell0": 19.516000005556172,
+      "sigma_c": 119.99999999999588,
+      "alpha": 5.999999999999822
+    }
+  },
+  {
+    "galaxy": "NGC2403",
+    "sigma_v": 20.175,
+    "model": "graviton_pairing",
+    "success": true,
+    "nfev": 11,
+    "rms_multiplier": 0.6558232562613775,
+    "rms_velocity": 21.150847362822184,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "A": 4.999999999999999,
+      "xi0": 7.819727984509097,
+      "sigma0": 79.99999999999999,
+      "gamma_xi": 0.40783680654743104
+    }
+  },
+  {
+    "galaxy": "NGC3198",
+    "sigma_v": 22.275,
+    "model": "path_interference",
+    "success": true,
+    "nfev": 10,
+    "rms_multiplier": 0.4410163700061558,
+    "rms_velocity": 20.53691388904588,
+    "params": {
+      "p": 0.9,
+      "n_coh": 0.8,
+      "sigma_ref": 30.0,
+      "A": 4.999999999999355,
+      "ell0": 32.0884982296903,
+      "beta_sigma": 1.68297596168421
+    }
+  },
+  {
+    "galaxy": "NGC3198",
+    "sigma_v": 22.275,
+    "model": "metric_resonance",
+    "success": true,
+    "nfev": 14,
+    "rms_multiplier": 0.43313726672182185,
+    "rms_velocity": 20.419181544596565,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "beta_sigma": 0.0,
+      "A": 4.938667237028423,
+      "ell0": 49.99999999999997,
+      "lambda_m0": 79.9999999999958,
+      "log_width": 1.9999999999999325
+    }
+  },
+  {
+    "galaxy": "NGC3198",
+    "sigma_v": 22.275,
+    "model": "entanglement",
+    "success": true,
+    "nfev": 12,
+    "rms_multiplier": 0.4047175650651162,
+    "rms_velocity": 19.769673732717784,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "A": 4.887581321169465,
+      "ell0": 49.99999999999999,
+      "sigma0": 77.55155938217511
+    }
+  },
+  {
+    "galaxy": "NGC3198",
+    "sigma_v": 22.275,
+    "model": "vacuum_condensation",
+    "success": true,
+    "nfev": 12,
+    "rms_multiplier": 0.38987608074781227,
+    "rms_velocity": 18.924006931164886,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "beta": 1.0,
+      "A": 4.999999999893511,
+      "ell0": 59.999999999999986,
+      "sigma_c": 119.99999999771047,
+      "alpha": 5.999999999900412
+    }
+  },
+  {
+    "galaxy": "NGC3198",
+    "sigma_v": 22.275,
+    "model": "graviton_pairing",
+    "success": true,
+    "nfev": 11,
+    "rms_multiplier": 0.4255960986608214,
+    "rms_velocity": 19.646823204519176,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "A": 4.999999999999969,
+      "xi0": 12.87993575131584,
+      "sigma0": 79.99999999999898,
+      "gamma_xi": 0.929956781061769
+    }
+  },
+  {
+    "galaxy": "NGC5055",
+    "sigma_v": 26.925,
+    "model": "path_interference",
+    "success": true,
+    "nfev": 10,
+    "rms_multiplier": 0.477203352312302,
+    "rms_velocity": 63.85406399522771,
+    "params": {
+      "p": 0.9,
+      "n_coh": 0.8,
+      "sigma_ref": 30.0,
+      "A": 1.6051103854382942,
+      "ell0": 49.99999999999999,
+      "beta_sigma": 1.9999999999999998
+    }
+  },
+  {
+    "galaxy": "NGC5055",
+    "sigma_v": 26.925,
+    "model": "metric_resonance",
+    "success": true,
+    "nfev": 3,
+    "rms_multiplier": 0.6063818009653381,
+    "rms_velocity": 58.26922066188828,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "beta_sigma": 0.0,
+      "A": 0.015862155522033017,
+      "ell0": 35.137428891793576,
+      "lambda_m0": 1.2183919354194694,
+      "log_width": 0.12036705137915732
+    }
+  },
+  {
+    "galaxy": "NGC5055",
+    "sigma_v": 26.925,
+    "model": "entanglement",
+    "success": true,
+    "nfev": 18,
+    "rms_multiplier": 0.4715515993349856,
+    "rms_velocity": 63.28337216460167,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "A": 2.2652325001192075,
+      "ell0": 49.99999999999999,
+      "sigma0": 34.92985658167449
+    }
+  },
+  {
+    "galaxy": "NGC5055",
+    "sigma_v": 26.925,
+    "model": "vacuum_condensation",
+    "success": true,
+    "nfev": 8,
+    "rms_multiplier": 0.46553399546961405,
+    "rms_velocity": 62.88750071804864,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "beta": 1.0,
+      "A": 1.7466184239452067,
+      "ell0": 59.99999999999982,
+      "sigma_c": 48.34373294626076,
+      "alpha": 2.8768616434530325
+    }
+  },
+  {
+    "galaxy": "NGC5055",
+    "sigma_v": 26.925,
+    "model": "graviton_pairing",
+    "success": true,
+    "nfev": 13,
+    "rms_multiplier": 0.4391574223706404,
+    "rms_velocity": 60.70192732205532,
+    "params": {
+      "p": 1.0,
+      "n_coh": 1.0,
+      "A": 4.999999999999997,
+      "xi0": 50.13537029882451,
+      "sigma0": 79.99999999999906,
+      "gamma_xi": 1.2739146586779713
+    }
+  }
+]
