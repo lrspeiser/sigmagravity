@@ -7,13 +7,15 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import multiprocessing as mp
+import os
 
 import numpy as np
 import pandas as pd
 from scipy.optimize import differential_evolution
 
 from metric_resonance_multiplier import metric_resonance_multiplier
-from theory_metric_resonance import compute_theory_kernel
+from theory_metric_resonance import compute_theory_kernel, CUPY_AVAILABLE
 
 
 def rms(values: np.ndarray) -> float:
@@ -60,6 +62,8 @@ def fit_theory_params(
     burr_n: float,
     require_positive_corr: bool = True,
     include_Q_ref: bool = True,
+    use_gpu: bool | None = None,
+    n_workers: int = 1,
 ) -> dict:
     """
     Fit theory kernel parameters to match empirical kernel.
@@ -105,6 +109,7 @@ def fit_theory_params(
                 burr_p=burr_p,
                 burr_n=burr_n,
                 Q_ref=Q_ref,
+                use_gpu=use_gpu,
             )
             
             # Compute correlation
@@ -131,6 +136,7 @@ def fit_theory_params(
             return 1e10  # Penalty for invalid parameters
 
     # Try multiple optimization runs with different seeds
+    # Use parallel workers for faster evaluation
     best_result = None
     best_obj = np.inf
     
@@ -144,6 +150,8 @@ def fit_theory_params(
                 seed=seed,
                 atol=1e-6,
                 tol=1e-4,
+                workers=n_workers if n_workers > 1 else 1,
+                updating='immediate' if n_workers > 1 else 'deferred',
             )
             if result.success and result.fun < best_obj:
                 best_obj = result.fun
@@ -154,7 +162,11 @@ def fit_theory_params(
     if best_result is None:
         # Fallback: single run
         best_result = differential_evolution(
-            objective, bounds=bounds, maxiter=200, polish=True
+            objective,
+            bounds=bounds,
+            maxiter=200,
+            polish=True,
+            workers=n_workers if n_workers > 1 else 1,
         )
     
     if include_Q_ref:
@@ -175,6 +187,7 @@ def fit_theory_params(
         Q_ref=Q_ref,
     )
 
+    common_kwargs['use_gpu'] = use_gpu
     K_raw = compute_theory_kernel(A_global=A_global_raw, **common_kwargs)
     corr_raw = float(np.corrcoef(K_raw, K_emp)[0, 1])
     if not np.isfinite(corr_raw):
@@ -233,7 +246,46 @@ def main() -> None:
         action="store_true",
         help="Don't fit Q_ref as a free parameter",
     )
+    parser.add_argument(
+        "--use-gpu",
+        action="store_true",
+        default=None,
+        help="Force GPU usage (CuPy). If not set, auto-detect.",
+    )
+    parser.add_argument(
+        "--no-gpu",
+        action="store_true",
+        help="Force CPU usage (disable GPU even if available)",
+    )
+    parser.add_argument(
+        "--n-workers",
+        type=int,
+        default=None,
+        help="Number of parallel workers for optimization (default: number of CPUs)",
+    )
     args = parser.parse_args()
+    
+    # Determine GPU usage
+    if args.no_gpu:
+        use_gpu = False
+    elif args.use_gpu:
+        use_gpu = True
+    else:
+        use_gpu = None  # Auto-detect
+    
+    # Determine number of workers
+    if args.n_workers is None:
+        n_workers = min(mp.cpu_count(), 10)  # Use up to 10 CPUs
+    else:
+        n_workers = args.n_workers
+    
+    if use_gpu and CUPY_AVAILABLE:
+        print(f"[GPU] CuPy available - GPU acceleration enabled")
+    elif use_gpu and not CUPY_AVAILABLE:
+        print(f"[WARN] GPU requested but CuPy not available, using CPU")
+        use_gpu = False
+    else:
+        print(f"[CPU] Using {n_workers} parallel workers")
 
     df = load_mw_slice(args.baseline_parquet, args.r_min, args.r_max)
     R = df["R"].to_numpy(float)
@@ -262,6 +314,8 @@ def main() -> None:
         burr_n=burr_n,
         require_positive_corr=args.require_positive_corr,
         include_Q_ref=not args.no_Q_ref,
+        use_gpu=use_gpu,
+        n_workers=n_workers,
     )
     
     print("[info] Best-fit theory parameters:")
@@ -283,6 +337,7 @@ def main() -> None:
         burr_p=burr_p,
         burr_n=burr_n,
         Q_ref=theory_fit.get("Q_ref", 1.0),
+        use_gpu=use_gpu,
     )
     corr_final = float(np.corrcoef(K_th_final, K_emp)[0, 1])
     print(f"[info] Final correlation: {corr_final:.6f}")

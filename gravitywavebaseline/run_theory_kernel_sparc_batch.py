@@ -9,11 +9,13 @@ import glob
 import os
 import json
 from pathlib import Path
+import multiprocessing as mp
+from functools import partial
 
 import numpy as np
 import pandas as pd
 
-from theory_metric_resonance import compute_theory_kernel
+from theory_metric_resonance import compute_theory_kernel, CUPY_AVAILABLE
 
 
 def rms(arr: np.ndarray) -> float:
@@ -63,7 +65,46 @@ def main():
         "--out-csv",
         default="gravitywavebaseline/theory_kernel_sparc_batch.csv",
     )
+    parser.add_argument(
+        "--use-gpu",
+        action="store_true",
+        default=None,
+        help="Force GPU usage (CuPy). If not set, auto-detect.",
+    )
+    parser.add_argument(
+        "--no-gpu",
+        action="store_true",
+        help="Force CPU usage (disable GPU even if available)",
+    )
+    parser.add_argument(
+        "--n-workers",
+        type=int,
+        default=None,
+        help="Number of parallel workers for galaxy processing (default: number of CPUs)",
+    )
     args = parser.parse_args()
+    
+    # Determine GPU usage
+    if args.no_gpu:
+        use_gpu = False
+    elif args.use_gpu:
+        use_gpu = True
+    else:
+        use_gpu = None  # Auto-detect
+    
+    # Determine number of workers
+    if args.n_workers is None:
+        n_workers = min(mp.cpu_count(), 10)  # Use up to 10 CPUs
+    else:
+        n_workers = args.n_workers
+    
+    if use_gpu and CUPY_AVAILABLE:
+        print(f"[GPU] CuPy available - GPU acceleration enabled")
+    elif use_gpu and not CUPY_AVAILABLE:
+        print(f"[WARN] GPU requested but CuPy not available, using CPU")
+        use_gpu = False
+    else:
+        print(f"[CPU] Using {n_workers} parallel workers for galaxy processing")
 
     theory_fit = json.loads(Path(args.theory_fit_json).read_text())
     th = theory_fit["theory_fit_params"]
@@ -77,23 +118,20 @@ def main():
         )
     )
 
-    rows: list[dict] = []
-    rotmod_paths = sorted(glob.glob(os.path.join(args.rotmod_dir, "*_rotmod.dat")))
-    print(f"[info] processing {len(rotmod_paths)} SPARC rotmod files")
-
-    for path in rotmod_paths:
+    # Process galaxies in parallel
+    def process_galaxy(path: str) -> dict | None:
+        """Process a single galaxy."""
         galaxy = Path(path).name.replace("_rotmod.dat", "")
         try:
             df = load_rotmod(path)
         except Exception as exc:
-            print(f"[warn] skip {galaxy}: {exc}")
-            continue
+            return None  # Don't print in parallel mode
 
         R = df["R_kpc"].to_numpy(float)
         V_obs = df["V_obs"].to_numpy(float)
         V_gr = df["V_gr"].to_numpy(float)
         if len(R) < 4:
-            continue
+            return None
 
         sigma_true = sigma_map.get(galaxy, args.sigma_ref)
         v_flat = np.nanmedian(V_gr[-min(len(V_gr), 5):]) or 200.0
@@ -110,6 +148,7 @@ def main():
             burr_ell0_kpc=th.get("burr_ell0_kpc"),
             burr_p=th.get("burr_p", 1.0),
             burr_n=th.get("burr_n", 0.5),
+            use_gpu=use_gpu,
         )
         K_aligned = phase_sign * K_th
         f_th = 1.0 + K_aligned
@@ -118,19 +157,32 @@ def main():
         rms_gr = rms(V_obs - V_gr)
         rms_th = rms(V_obs - V_model)
 
-        rows.append(
-            dict(
-                galaxy=galaxy,
-                n_points=len(R),
-                sigma_v_true=sigma_true,
-                Q_gal=Q,
-                G_sigma=G_sigma,
-                K_mean=float(np.mean(K_aligned)),
-                rms_gr=rms_gr,
-                rms_theory=rms_th,
-                delta_rms=rms_th - rms_gr,
-            )
+        return dict(
+            galaxy=galaxy,
+            n_points=len(R),
+            sigma_v_true=sigma_true,
+            Q_gal=Q,
+            G_sigma=G_sigma,
+            K_mean=float(np.mean(K_aligned)),
+            rms_gr=rms_gr,
+            rms_theory=rms_th,
+            delta_rms=rms_th - rms_gr,
         )
+    
+    rotmod_paths = sorted(glob.glob(os.path.join(args.rotmod_dir, "*_rotmod.dat")))
+    print(f"[info] processing {len(rotmod_paths)} SPARC rotmod files")
+
+    # Process in parallel if multiple workers
+    if n_workers > 1:
+        with mp.Pool(n_workers) as pool:
+            results = pool.map(process_galaxy, rotmod_paths)
+        rows = [r for r in results if r is not None]
+    else:
+        rows = []
+        for path in rotmod_paths:
+            result = process_galaxy(path)
+            if result is not None:
+                rows.append(result)
 
     out_df = pd.DataFrame(rows)
     out_df.to_csv(args.out_csv, index=False)

@@ -8,11 +8,21 @@ Implements:
   - integrate_K_lambda: numerical integral over ln λ
   - theory_metric_resonance_K: vectorized K(R)
   - theory_metric_resonance_multiplier: f_res = 1 + K(R)
+
+GPU acceleration via CuPy is supported if available.
 """
 
 from __future__ import annotations
 
 import numpy as np
+
+# Try to import CuPy for GPU acceleration
+try:
+    import cupy as cp
+    CUPY_AVAILABLE = True
+except ImportError:
+    cp = None
+    CUPY_AVAILABLE = False
 
 
 def fluctuation_spectrum_lambda(
@@ -194,34 +204,51 @@ def compute_theory_kernel(
     burr_ell0_kpc: float | None = None,
     burr_p: float = 0.757,
     burr_n: float = 0.5,
+    use_gpu: bool | None = None,
 ) -> np.ndarray:
     """
     Standalone λ-integral kernel: returns K_theory(R) so that g_eff = g_GR * (1 + K).
     Optionally applies a Burr-XII-style radial envelope when burr_ell0_kpc is provided.
+    
+    Parameters
+    ----------
+    use_gpu : bool | None
+        If True, use GPU (CuPy). If False, use CPU (NumPy). If None, auto-detect.
     """
-
-    R = np.asarray(R_kpc, dtype=float)
+    # Choose array module
+    if use_gpu is True:
+        if not CUPY_AVAILABLE:
+            raise RuntimeError("CuPy not available but GPU requested")
+        xp = cp
+    elif use_gpu is False:
+        xp = np
+    else:
+        # Auto-detect: use GPU if available
+        xp = cp if CUPY_AVAILABLE else np
+    
+    # Convert to appropriate array type
+    R = xp.asarray(R_kpc, dtype=xp.float64)
     lam_min = max(lam_min_kpc, 1e-6)
     lam_max = max(lam_max_kpc, lam_min * 1.01)
-    lam_grid = np.logspace(np.log10(lam_min), np.log10(lam_max), n_lambda)
+    lam_grid = xp.logspace(xp.log10(lam_min), xp.log10(lam_max), n_lambda)
 
     lam_ref = lam_min
-    P_lambda = (lam_ref / lam_grid) ** alpha * np.exp(-lam_grid / max(lam_cut_kpc, 1e-6))
+    P_lambda = (lam_ref / lam_grid) ** alpha * xp.exp(-lam_grid / max(lam_cut_kpc, 1e-6))
 
-    lam_matter = 2.0 * np.pi * R[:, None]
+    lam_matter = 2.0 * xp.pi * R[:, None]
     sigma_v = max(float(sigma_v_kms), 1e-6)
     Q = (v_circ_ref_kms / sigma_v) / max(Q_ref, 1e-6)
 
-    ratio = lam_grid[None, :] / np.maximum(lam_matter, 1e-12)
-    inv_ratio = np.maximum(lam_matter, 1e-12) / lam_grid[None, :]
+    ratio = lam_grid[None, :] / xp.maximum(lam_matter, 1e-12)
+    inv_ratio = xp.maximum(lam_matter, 1e-12) / lam_grid[None, :]
     denom = Q**2 + (ratio - inv_ratio) ** 2
     C_res = (Q**2) / denom
 
     lam_p = (lam_grid / max(lam_coh_kpc, 1e-6)) ** 2.0
-    C_coh = np.exp(-lam_p)
+    C_coh = xp.exp(-lam_p)
 
-    lam_over_R = lam_grid[None, :] / np.maximum(R[:, None], 1e-6)
-    W_geom = np.where(lam_over_R < 1.0, 1.0, lam_over_R**-2)
+    lam_over_R = lam_grid[None, :] / xp.maximum(R[:, None], 1e-6)
+    W_geom = xp.where(lam_over_R < 1.0, 1.0, lam_over_R**-2)
 
     integrand = (
         P_lambda[None, :]
@@ -230,17 +257,26 @@ def compute_theory_kernel(
         * W_geom
         / lam_grid[None, :]
     )
-    K0 = np.trapz(integrand, lam_grid, axis=1)
-    K0_max = np.max(np.abs(K0)) or 1.0
+    
+    # Use appropriate trapz function
+    if xp is cp:
+        K0 = cp.trapz(integrand, lam_grid, axis=1)
+    else:
+        K0 = np.trapz(integrand, lam_grid, axis=1)
+    
+    K0_max = xp.max(xp.abs(K0)) or 1.0
     K = A_global * (K0 / K0_max)
 
     if burr_ell0_kpc is not None:
         ell0 = max(burr_ell0_kpc, 1e-6)
-        shaped = 1.0 - (1.0 + (np.maximum(R, 0.0) / ell0) ** max(burr_p, 1e-6)) ** (
+        shaped = 1.0 - (1.0 + (xp.maximum(R, 0.0) / ell0) ** max(burr_p, 1e-6)) ** (
             -max(burr_n, 1e-6)
         )
         K = K * shaped
 
+    # Convert back to numpy if using GPU
+    if xp is cp:
+        return cp.asnumpy(K)
     return K
 
 
