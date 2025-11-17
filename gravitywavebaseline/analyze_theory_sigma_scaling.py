@@ -32,6 +32,7 @@ def main():
 
     theory_fit = json.loads(Path(args.theory_fit_json).read_text())
     th = theory_fit["theory_fit_params"]
+    phase_sign = float(th.get("phase_sign", 1.0))
 
     summary = pd.read_csv(args.sparc_summary)
     sigmas = summary[args.summary_sigma_col].astype(float).to_numpy()
@@ -41,7 +42,7 @@ def main():
     rows: list[dict] = []
 
     for gal, sigma_v in zip(galaxies, sigmas):
-        K_th = compute_theory_kernel(
+        K_raw = compute_theory_kernel(
             R_kpc=R_grid,
             sigma_v_kms=float(sigma_v),
             alpha=th["alpha"],
@@ -52,7 +53,7 @@ def main():
             burr_p=th.get("burr_p", 1.0),
             burr_n=th.get("burr_n", 0.5),
         )
-        K_mean = float(np.mean(K_th))
+        K_mean = float(np.mean(phase_sign * K_raw))
         v_circ_est = 200.0
         Q = v_circ_est / max(float(sigma_v), 1e-3)
         G_emp = Q**args.beta_sigma / (1.0 + Q**args.beta_sigma)

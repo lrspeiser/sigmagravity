@@ -1,5 +1,5 @@
 """
-Fit theory-based metric resonance kernel parameters to the empirical MW kernel.
+Fit the first-principles theory kernel so that it matches the empirical MW kernel.
 """
 
 from __future__ import annotations
@@ -80,35 +80,31 @@ def fit_theory_params(
             burr_p=burr_p,
             burr_n=burr_n,
         )
-        corr = np.corrcoef(K_th, K_emp)[0, 1]
-        if not np.isfinite(corr):
-            corr = 0.0
-        if corr < 0.0:
-            K_th = -K_th
         return rms(K_th - K_emp)
 
     result = differential_evolution(objective, bounds=bounds, maxiter=120, polish=True)
-    A_global, alpha, lam_coh_kpc, lam_cut_kpc, burr_ell0 = result.x
-    K_best = compute_theory_kernel(
+    A_global_raw, alpha, lam_coh_kpc, lam_cut_kpc, burr_ell0 = result.x
+
+    common_kwargs = dict(
         R_kpc=R_kpc,
         sigma_v_kms=sigma_v_kms,
         alpha=alpha,
         lam_coh_kpc=lam_coh_kpc,
         lam_cut_kpc=lam_cut_kpc,
-        A_global=A_global,
         burr_ell0_kpc=burr_ell0,
         burr_p=burr_p,
         burr_n=burr_n,
     )
-    corr = float(np.corrcoef(K_best, K_emp)[0, 1])
-    phase_sign = 1.0
-    if corr < 0.0:
-        phase_sign = -1.0
-        K_best = -K_best
-        A_global = -A_global
-        corr = -corr
+
+    K_raw = compute_theory_kernel(A_global=A_global_raw, **common_kwargs)
+    corr_raw = float(np.corrcoef(K_raw, K_emp)[0, 1])
+    if not np.isfinite(corr_raw):
+        corr_raw = 0.0
+    phase_sign = 1.0 if corr_raw >= 0.0 else -1.0
+    corr_abs = abs(corr_raw)
+
     return {
-        "A_global": float(A_global),
+        "A_global": float(A_global_raw),
         "alpha": float(alpha),
         "lam_coh_kpc": float(lam_coh_kpc),
         "lam_cut_kpc": float(lam_cut_kpc),
@@ -116,8 +112,8 @@ def fit_theory_params(
         "burr_p": float(burr_p),
         "burr_n": float(burr_n),
         "phase_sign": float(phase_sign),
-        "rms_diff": float(rms(K_best - K_emp)),
-        "corr_K_emp_theory": corr,
+        "rms_diff": float(rms(K_raw - K_emp)),
+        "corr_K_emp_theory": float(corr_abs),
     }
 
 
@@ -179,3 +175,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+

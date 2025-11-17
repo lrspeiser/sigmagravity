@@ -67,6 +67,7 @@ def main():
 
     theory_fit = json.loads(Path(args.theory_fit_json).read_text())
     th = theory_fit["theory_fit_params"]
+    phase_sign = float(th.get("phase_sign", 1.0))
 
     summary = pd.read_csv(args.sparc_summary)
     sigma_map = dict(
@@ -110,7 +111,7 @@ def main():
             burr_p=th.get("burr_p", 1.0),
             burr_n=th.get("burr_n", 0.5),
         )
-        f_th = 1.0 + K_th
+        f_th = 1.0 + phase_sign * K_th
         V_model = V_gr * np.sqrt(np.clip(f_th, 0.0, None))
 
         rms_gr = rms(V_obs - V_gr)

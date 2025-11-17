@@ -17,15 +17,15 @@
     "nfev": 460
   },
   "theory_fit_params": {
-    "A_global": 15.579922714327571,
+    "A_global": 15.57890459869912,
     "alpha": 1.0,
     "lam_coh_kpc": 80.0,
-    "lam_cut_kpc": 1219.4151288963885,
+    "lam_cut_kpc": 1443.0266280494916,
     "burr_ell0_kpc": 40.0,
     "burr_p": 0.757,
     "burr_n": 0.5,
-    "phase_sign": 1.0,
-    "rms_diff": 0.16898985530140778,
-    "corr_K_emp_theory": -0.9897208848561662
+    "phase_sign": -1.0,
+    "rms_diff": 0.16884576845381857,
+    "corr_K_emp_theory": 0.9897202663929485
   }
 }
