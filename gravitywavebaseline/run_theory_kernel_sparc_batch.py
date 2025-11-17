@@ -111,7 +111,8 @@ def main():
             burr_p=th.get("burr_p", 1.0),
             burr_n=th.get("burr_n", 0.5),
         )
-        f_th = 1.0 + phase_sign * K_th
+        K_aligned = phase_sign * K_th
+        f_th = 1.0 + K_aligned
         V_model = V_gr * np.sqrt(np.clip(f_th, 0.0, None))
 
         rms_gr = rms(V_obs - V_gr)
@@ -124,6 +125,7 @@ def main():
                 sigma_v_true=sigma_true,
                 Q_gal=Q,
                 G_sigma=G_sigma,
+                K_mean=float(np.mean(K_aligned)),
                 rms_gr=rms_gr,
                 rms_theory=rms_th,
                 delta_rms=rms_th - rms_gr,
