@@ -178,3 +178,56 @@ def theory_metric_resonance_multiplier(
     return 1.0 + A_global * K_R
 
 
+def compute_theory_kernel(
+    R_kpc: np.ndarray,
+    sigma_v_kms: float,
+    *,
+    alpha: float = 3.5,
+    lam_min_kpc: float = 0.1,
+    lam_max_kpc: float = 500.0,
+    lam_coh_kpc: float = 5.0,
+    lam_cut_kpc: float = 300.0,
+    Q_ref: float = 1.0,
+    A_global: float = 1.0,
+    n_lambda: int = 400,
+    v_circ_ref_kms: float = 200.0,
+) -> np.ndarray:
+    """
+    Standalone λ-integral kernel: returns K_theory(R) so that g_eff = g_GR * (1 + K).
+    """
+
+    R = np.asarray(R_kpc, dtype=float)
+    lam_min = max(lam_min_kpc, 1e-6)
+    lam_max = max(lam_max_kpc, lam_min * 1.01)
+    lam_grid = np.logspace(np.log10(lam_min), np.log10(lam_max), n_lambda)
+
+    lam_ref = lam_min
+    P_lambda = (lam_ref / lam_grid) ** alpha * np.exp(-lam_grid / max(lam_cut_kpc, 1e-6))
+
+    lam_matter = 2.0 * np.pi * R[:, None]
+    sigma_v = max(float(sigma_v_kms), 1e-6)
+    Q = (v_circ_ref_kms / sigma_v) / max(Q_ref, 1e-6)
+
+    ratio = lam_grid[None, :] / np.maximum(lam_matter, 1e-12)
+    inv_ratio = np.maximum(lam_matter, 1e-12) / lam_grid[None, :]
+    denom = Q**2 + (ratio - inv_ratio) ** 2
+    C_res = (Q**2) / denom
+
+    lam_p = (lam_grid / max(lam_coh_kpc, 1e-6)) ** 2.0
+    C_coh = np.exp(-lam_p)
+
+    lam_over_R = lam_grid[None, :] / np.maximum(R[:, None], 1e-6)
+    W_geom = np.where(lam_over_R < 1.0, 1.0, lam_over_R**-2)
+
+    integrand = (
+        P_lambda[None, :]
+        * C_res
+        * C_coh[None, :]
+        * W_geom
+        / lam_grid[None, :]
+    )
+    K0 = np.trapz(integrand, lam_grid, axis=1)
+    K0_max = np.max(np.abs(K0)) or 1.0
+    return A_global * (K0 / K0_max)
+
+

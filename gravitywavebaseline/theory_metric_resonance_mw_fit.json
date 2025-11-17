@@ -1,0 +1,27 @@
+{
+  "r_min": 12.0,
+  "r_max": 16.0,
+  "sigma_v": 30.0,
+  "n_points": 10486,
+  "rms_gr": 111.37021851783247,
+  "mw_fit_params": {
+    "A": 5.694915875549634,
+    "lambda_peak_kpc": 94.45219389745395,
+    "sigma_ln_lambda": 0.5900885206138617,
+    "ell0_kpc": 5.0,
+    "p": 0.757,
+    "n_coh": 0.5,
+    "rms_best": 39.57075032402997,
+    "success": true,
+    "message": "Optimization terminated successfully.",
+    "nfev": 460
+  },
+  "theory_fit_params": {
+    "A_global": 2.526977482285021,
+    "alpha": 1.0,
+    "lam_coh_kpc": 40.0,
+    "lam_cut_kpc": 887.5906790222483,
+    "rms_diff": 0.26278852069270975,
+    "corr_K_emp_theory": -0.9938271364082345
+  }
+}
