@@ -16,8 +16,8 @@ from metric_resonance_multiplier import metric_resonance_multiplier
 from theory_metric_resonance import compute_theory_kernel
 
 
-def rms(arr: np.ndarray) -> float:
-    return float(np.sqrt(np.mean(arr * arr)))
+def rms(values: np.ndarray) -> float:
+    return float(np.sqrt(np.mean(values * values)))
 
 
 def load_mw_slice(parquet_path: str, r_min: float, r_max: float) -> pd.DataFrame:
@@ -31,10 +31,10 @@ def load_mw_slice(parquet_path: str, r_min: float, r_max: float) -> pd.DataFrame
         & np.isfinite(df["v_phi"])
         & np.isfinite(df["v_phi_GR"])
     )
-    sl = df.loc[mask, ["R", "v_phi", "v_phi_GR"]].copy()
-    if sl.empty:
+    subset = df.loc[mask, ["R", "v_phi", "v_phi_GR"]].copy()
+    if subset.empty:
         raise RuntimeError(f"No MW data in [{r_min}, {r_max}] kpc for {parquet_path}")
-    return sl
+    return subset
 
 
 def empirical_kernel(R_kpc: np.ndarray, mw_fit: dict) -> np.ndarray:
@@ -52,16 +52,23 @@ def empirical_kernel(R_kpc: np.ndarray, mw_fit: dict) -> np.ndarray:
     return f_emp - 1.0
 
 
-def fit_theory_params(R_kpc: np.ndarray, K_emp: np.ndarray, sigma_v_kms: float) -> dict:
+def fit_theory_params(
+    R_kpc: np.ndarray,
+    K_emp: np.ndarray,
+    sigma_v_kms: float,
+    burr_p: float,
+    burr_n: float,
+) -> dict:
     bounds = [
-        (0.1, 20.0),    # A_global
-        (1.0, 6.0),     # alpha
-        (1.0, 40.0),    # lam_coh_kpc
-        (50.0, 1000.0), # lam_cut_kpc
+        (-20.0, 20.0),   # A_global
+        (1.0, 6.0),      # alpha
+        (1.0, 80.0),     # lam_coh_kpc
+        (50.0, 1500.0),  # lam_cut_kpc
+        (5.0, 40.0),     # burr_ell0_kpc
     ]
 
     def objective(theta: np.ndarray) -> float:
-        A_global, alpha, lam_coh_kpc, lam_cut_kpc = theta
+        A_global, alpha, lam_coh_kpc, lam_cut_kpc, burr_ell0 = theta
         K_th = compute_theory_kernel(
             R_kpc=R_kpc,
             sigma_v_kms=sigma_v_kms,
@@ -69,11 +76,19 @@ def fit_theory_params(R_kpc: np.ndarray, K_emp: np.ndarray, sigma_v_kms: float) 
             lam_coh_kpc=lam_coh_kpc,
             lam_cut_kpc=lam_cut_kpc,
             A_global=A_global,
+            burr_ell0_kpc=burr_ell0,
+            burr_p=burr_p,
+            burr_n=burr_n,
         )
+        corr = np.corrcoef(K_th, K_emp)[0, 1]
+        if not np.isfinite(corr):
+            corr = 0.0
+        if corr < 0.0:
+            K_th = -K_th
         return rms(K_th - K_emp)
 
-    result = differential_evolution(objective, bounds=bounds, maxiter=80, polish=True)
-    A_global, alpha, lam_coh_kpc, lam_cut_kpc = result.x
+    result = differential_evolution(objective, bounds=bounds, maxiter=120, polish=True)
+    A_global, alpha, lam_coh_kpc, lam_cut_kpc, burr_ell0 = result.x
     K_best = compute_theory_kernel(
         R_kpc=R_kpc,
         sigma_v_kms=sigma_v_kms,
@@ -81,19 +96,32 @@ def fit_theory_params(R_kpc: np.ndarray, K_emp: np.ndarray, sigma_v_kms: float) 
         lam_coh_kpc=lam_coh_kpc,
         lam_cut_kpc=lam_cut_kpc,
         A_global=A_global,
+        burr_ell0_kpc=burr_ell0,
+        burr_p=burr_p,
+        burr_n=burr_n,
     )
-    corr = float(np.corrcoef(K_emp, K_best)[0, 1])
+    corr = float(np.corrcoef(K_best, K_emp)[0, 1])
+    phase_sign = 1.0
+    if corr < 0.0:
+        phase_sign = -1.0
+        K_best = -K_best
+        A_global = -A_global
+        corr = -corr
     return {
         "A_global": float(A_global),
         "alpha": float(alpha),
         "lam_coh_kpc": float(lam_coh_kpc),
         "lam_cut_kpc": float(lam_cut_kpc),
+        "burr_ell0_kpc": float(burr_ell0),
+        "burr_p": float(burr_p),
+        "burr_n": float(burr_n),
+        "phase_sign": float(phase_sign),
         "rms_diff": float(rms(K_best - K_emp)),
         "corr_K_emp_theory": corr,
     }
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="Fit compute_theory_kernel parameters to MW empirical kernel."
     )
@@ -129,10 +157,12 @@ def main():
         f"K_max={K_emp.max():.4f}"
     )
 
-    theory_fit = fit_theory_params(R, K_emp, args.sigma_v)
+    burr_p = float(mw_fit.get("p", 1.0))
+    burr_n = float(mw_fit.get("n_coh", 0.5))
+    theory_fit = fit_theory_params(R, K_emp, args.sigma_v, burr_p=burr_p, burr_n=burr_n)
     print("[info] Best-fit theory parameters:")
-    for k, v in theory_fit.items():
-        print(f"  {k}: {v}")
+    for key, value in theory_fit.items():
+        print(f"  {key}: {value}")
 
     out = {
         "r_min": args.r_min,
@@ -149,5 +179,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

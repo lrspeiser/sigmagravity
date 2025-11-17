@@ -48,6 +48,9 @@ def main():
             lam_coh_kpc=th["lam_coh_kpc"],
             lam_cut_kpc=th["lam_cut_kpc"],
             A_global=th["A_global"],
+            burr_ell0_kpc=th.get("burr_ell0_kpc"),
+            burr_p=th.get("burr_p", 1.0),
+            burr_n=th.get("burr_n", 0.5),
         )
         K_mean = float(np.mean(K_th))
         v_circ_est = 200.0

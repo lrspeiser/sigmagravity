@@ -191,9 +191,13 @@ def compute_theory_kernel(
     A_global: float = 1.0,
     n_lambda: int = 400,
     v_circ_ref_kms: float = 200.0,
+    burr_ell0_kpc: float | None = None,
+    burr_p: float = 0.757,
+    burr_n: float = 0.5,
 ) -> np.ndarray:
     """
     Standalone λ-integral kernel: returns K_theory(R) so that g_eff = g_GR * (1 + K).
+    Optionally applies a Burr-XII-style radial envelope when burr_ell0_kpc is provided.
     """
 
     R = np.asarray(R_kpc, dtype=float)
@@ -228,6 +232,15 @@ def compute_theory_kernel(
     )
     K0 = np.trapz(integrand, lam_grid, axis=1)
     K0_max = np.max(np.abs(K0)) or 1.0
-    return A_global * (K0 / K0_max)
+    K = A_global * (K0 / K0_max)
+
+    if burr_ell0_kpc is not None:
+        ell0 = max(burr_ell0_kpc, 1e-6)
+        shaped = 1.0 - (1.0 + (np.maximum(R, 0.0) / ell0) ** max(burr_p, 1e-6)) ** (
+            -max(burr_n, 1e-6)
+        )
+        K = K * shaped
+
+    return K
 
 
