@@ -1,0 +1,11 @@
+{
+  "gamma_sigma": 2.0,
+  "F_max": 5.0,
+  "extra_amp": 0.25,
+  "sigma_gate_ref": 20.0,
+  "performance": {
+    "mean_delta_rms": -1.302673304605147,
+    "median_delta_rms": -4.283319462993077,
+    "frac_improved": 0.7393939393939394
+  }
+}
