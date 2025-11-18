@@ -69,3 +69,24 @@ def load_rotmod(path: str | Path) -> pd.DataFrame:
     return df[["R_kpc", "V_obs", "V_gr", "V_gas", "V_disk", "V_bul"]]
 
 
+def rms_velocity(velocity_residuals: np.ndarray) -> float:
+    """
+    Compute RMS velocity from residuals.
+    
+    Parameters
+    ----------
+    velocity_residuals : np.ndarray
+        V_obs - V_model residuals in km/s
+        
+    Returns
+    -------
+    float
+        RMS velocity in km/s
+    """
+    residuals = np.asarray(velocity_residuals, dtype=float)
+    mask = np.isfinite(residuals)
+    if not np.any(mask):
+        return np.nan
+    return float(np.sqrt(np.mean(residuals[mask] ** 2)))
+
+

@@ -1,0 +1,25 @@
+{
+  "n_galaxies": 165,
+  "gr_baseline": {
+    "mean_rms": 34.61484741536385,
+    "median_rms": 33.48453104145477
+  },
+  "roughness": {
+    "mean_rms": 40.35984539635314,
+    "median_rms": 26.8517771636815,
+    "improvement_pct": -16.596918403399822,
+    "fraction_improved": 0.6242424242424243
+  },
+  "pairing": {
+    "mean_rms": 32.53072075636911,
+    "median_rms": 27.706155655732747,
+    "improvement_pct": 6.020903787285506,
+    "fraction_improved": 0.7212121212121212
+  },
+  "resonance": {
+    "mean_rms": 51.08903486337559,
+    "median_rms": 35.339804427734954,
+    "improvement_pct": -47.59283567056733,
+    "fraction_improved": 0.5454545454545454
+  }
+}
