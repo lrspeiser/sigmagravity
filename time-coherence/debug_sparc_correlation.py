@@ -43,52 +43,44 @@ def debug_one_galaxy(rotmod_path, params, sigma_v=25.0):
     g_bar_kms2 = (V_bar[mask]**2) / (R_good * 1e3)
     rho_bar_msun_pc3 = g_bar_kms2 / (G_MSUN_KPC_KM2_S2 * R_good * 1e3) * 1e-9
     
-    K_rough = np.zeros_like(R_good)
-    ell_coh = np.zeros_like(R_good)
+    # Compute all at once for efficiency and correctness
+    tau_geom = compute_tau_geom(
+        R_good,
+        g_bar_kms2,
+        rho_bar_msun_pc3,
+        method=params.get("tau_geom_method", "tidal"),
+        alpha_geom=params.get("alpha_geom", 1.0),
+    )
     
-    for i, (R_i, g_i, rho_i) in enumerate(zip(R_good, g_bar_kms2, rho_bar_msun_pc3)):
-        tau_geom = compute_tau_geom(
-            np.array([R_i]),
-            np.array([g_i]),
-            np.array([rho_i]),
-            method=params.get("tau_geom_method", "tidal"),
-            alpha_geom=params.get("alpha_geom", 1.0),
-        )[0]
-        
-        tau_noise = compute_tau_noise(
-            np.array([R_i]),
-            sigma_v,
-            method="galaxy",
-            beta_sigma=params.get("beta_sigma", 1.5),
-        )[0]
-        
-        tau_coh = compute_tau_coh(
-            np.array([tau_geom]),
-            np.array([tau_noise])
-        )[0]
-        
-        # Compute coherence length
-        from coherence_time_kernel import compute_coherence_length
-        ell_coh[i] = compute_coherence_length(
-            np.array([tau_coh]),
-            alpha=params["alpha_length"]
-        )[0]
-        
-        K_rough[i] = compute_coherence_kernel(
-            R_kpc=np.array([R_i]),
-            g_bar_kms2=np.array([g_i]),
-            sigma_v_kms=sigma_v,
-            A_global=params["A_global"],
-            p=params["p"],
-            n_coh=params["n_coh"],
-            method="galaxy",
-            rho_bar_msun_pc3=np.array([rho_i]),
-            tau_geom_method=params.get("tau_geom_method", "tidal"),
-            alpha_length=params["alpha_length"],
-            beta_sigma=params["beta_sigma"],
-            alpha_geom=params.get("alpha_geom", 1.0),
-            backreaction_cap=params.get("backreaction_cap", 10.0),
-        )[0]
+    tau_noise = compute_tau_noise(
+        R_good,
+        sigma_v,
+        method="galaxy",
+        beta_sigma=params.get("beta_sigma", 1.5),
+    )
+    
+    tau_coh = compute_tau_coh(tau_geom, tau_noise)
+    
+    # Compute coherence length
+    from coherence_time_kernel import compute_coherence_length
+    ell_coh = compute_coherence_length(tau_coh, alpha=params["alpha_length"])
+    
+    # Compute kernel for all radii at once
+    K_rough = compute_coherence_kernel(
+        R_kpc=R_good,
+        g_bar_kms2=g_bar_kms2,
+        sigma_v_kms=sigma_v,
+        A_global=params["A_global"],
+        p=params["p"],
+        n_coh=params["n_coh"],
+        method="galaxy",
+        rho_bar_msun_pc3=rho_bar_msun_pc3,
+        tau_geom_method=params.get("tau_geom_method", "tidal"),
+        alpha_length=params["alpha_length"],
+        beta_sigma=params["beta_sigma"],
+        alpha_geom=params.get("alpha_geom", 1.0),
+        backreaction_cap=params.get("backreaction_cap", 10.0),
+    )
     
     K_req = (V_obs[mask]**2 / V_bar[mask]**2) - 1.0
     
