@@ -12,8 +12,37 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+import sys
+from pathlib import Path
+
+# Add time-coherence to path
+sys.path.insert(0, str(Path(__file__).parent))
+
 from unified_kernel import compute_unified_kernel
-from test_sparc_coherence import load_rotmod
+
+# Load rotmod function (exact copy from test_sparc_coherence.py)
+def load_rotmod(path: str) -> pd.DataFrame:
+    """Load SPARC rotmod file."""
+    df = pd.read_csv(
+        path,
+        sep=r"\s+",
+        comment="#",
+        header=None,
+        usecols=[0, 1, 3, 4, 5],
+        names=["R_kpc", "V_obs", "V_gas", "V_disk", "V_bul"],
+        engine="python",
+    )
+    v_gr = np.sqrt(
+        np.clip(
+            df["V_gas"].to_numpy() ** 2
+            + df["V_disk"].to_numpy() ** 2
+            + df["V_bul"].to_numpy() ** 2,
+            0.0,
+            None,
+        )
+    )
+    df["V_gr"] = v_gr
+    return df[["R_kpc", "V_obs", "V_gr", "V_gas", "V_disk", "V_bul"]]
 
 G_MSUN_KPC_KM2_S2 = 4.302e-6
 
