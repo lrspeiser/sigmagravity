@@ -1,0 +1,29 @@
+{
+  "n_points": 10486,
+  "R_range_kpc": [
+    12.000089882945645,
+    15.999064459998426
+  ],
+  "K_Xi_params": {
+    "a": 0.7737511599357971,
+    "b": 0.0
+  },
+  "boost_level": {
+    "rms_boost_obs_vs_pred": 0.5667092233725776,
+    "corr_boost_obs_vs_pred": 0.0,
+    "mean_boost_obs": 1.6608640768701108,
+    "mean_boost_pred": 1.0941642771256748,
+    "mean_boost_req": 3.4431818386855437
+  },
+  "K_level": {
+    "rms_K_obs_vs_pred": 0.5667092233725776,
+    "corr_K_obs_vs_pred": 0.0,
+    "mean_K_obs": 0.660864076870111,
+    "mean_K_pred": 0.09416427712567481
+  },
+  "Xi_stats": {
+    "mean_Xi": 0.12169839866022068,
+    "median_Xi": 0.12270901340400853,
+    "max_Xi": 0.12725601430339373
+  }
+}
