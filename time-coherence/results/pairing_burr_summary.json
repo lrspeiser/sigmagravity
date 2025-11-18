@@ -1,0 +1,15 @@
+{
+  "exponential": {
+    "mean_rms": 29.270145549202194,
+    "improvement_pct": 11.628305888926686,
+    "fraction_improved": 0.7818181818181819
+  },
+  "burr_xii": {
+    "mean_rms": 30.860213469592495,
+    "improvement_pct": 8.53268989687763,
+    "fraction_improved": 0.7636363636363637,
+    "solar_system_safe": false,
+    "K_solar_system": 1.038666911051018e-07
+  },
+  "delta_improvement": -3.0956159920490545
+}

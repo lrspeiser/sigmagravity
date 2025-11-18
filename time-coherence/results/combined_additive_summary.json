@@ -1,0 +1,22 @@
+{
+  "combination": "additive",
+  "n_galaxies": 165,
+  "rms_gr_mean": 34.61484741536385,
+  "rms_combined_mean": 40.35796157951332,
+  "improvement_pct": -24.646082686733923,
+  "improvement_median": 28.41546598035245,
+  "fraction_improved": 0.6060606060606061,
+  "roughness_params": {
+    "K0": 0.774,
+    "gamma": 0.1,
+    "alpha_length": 0.037,
+    "beta_sigma": 1.5
+  },
+  "pairing_params": {
+    "A_pair": 5.0,
+    "sigma_c": 15.0,
+    "gamma_sigma": 3.0,
+    "ell_pair_kpc": 20.0,
+    "p": 1.5
+  }
+}
