@@ -141,10 +141,18 @@ def analyze_one_galaxy(rotmod_path, params, sigma_v_default=None):
     K_rough_good = K_rough[good]
     Xi_good = Xi[good]
     
-    if np.std(K_req_good) < 1e-6 or np.std(K_rough_good) < 1e-6:
+    # Check for sufficient variation
+    std_K_req = np.std(K_req_good)
+    std_K_rough = np.std(K_rough_good)
+    
+    if std_K_req < 1e-6 or std_K_rough < 1e-6:
         corr = 0.0
     else:
-        corr = float(np.corrcoef(K_req_good, K_rough_good)[0, 1])
+        corr_matrix = np.corrcoef(K_req_good, K_rough_good)
+        corr = float(corr_matrix[0, 1]) if corr_matrix.size > 1 else 0.0
+        # Handle NaN
+        if np.isnan(corr):
+            corr = 0.0
     
     rms_diff = float(np.sqrt(np.mean((K_req_good - K_rough_good) ** 2)))
     mean_abs_diff = float(np.mean(np.abs(K_req_good - K_rough_good)))
