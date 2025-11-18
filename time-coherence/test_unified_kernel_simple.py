@@ -30,20 +30,8 @@ def main():
     summary_df = pd.read_csv(summary_csv)
     print(f"\nLoaded summary: {len(summary_df)} galaxies")
 
-    # Load fitted parameters
-    mass_coherence_fit = Path("time-coherence/mass_coherence_fit.json")
-    if mass_coherence_fit.exists():
-        with open(mass_coherence_fit, "r") as f:
-            fit_params = json.load(f)
-        K_max = fit_params["params"]["K_max"]
-        psi0 = fit_params["params"]["psi0"]
-        gamma_mass = fit_params["params"]["gamma"]
-        R_eff_factor = fit_params["params"]["R_eff_factor"]
-    else:
-        K_max = 19.58
-        psi0 = 7.34e-8
-        gamma_mass = 0.136
-        R_eff_factor = 1.33
+    # Parameters are now handled by UnifiedKernelParams
+    print("\nUsing unified kernel with multiplicative F_missing scaling")
 
     # Process a few galaxies to test
     rotmod_files = sorted(rotmod_dir.glob("*_rotmod.dat"))  # All galaxies
@@ -87,18 +75,28 @@ def main():
 
         # Compute unified kernel
         try:
+            galaxy_props = {
+                "sigma_v": sigma_v,
+                "R_disk": R_disk,
+                "M_baryon": M_baryon,
+            }
+            
+            from unified_kernel import UnifiedKernelParams, MassCoherenceParams
+            
+            params = UnifiedKernelParams(
+                ell0_kpc=5.0,
+                f_amp=1.0,
+                extra_amp=1.0,
+                mass_params=MassCoherenceParams(F_max=5.0),
+            )
+            
             K_total, info = compute_unified_kernel(
                 R_kpc=R,
                 g_bar_kms2=g_bar_kms2,
                 sigma_v_kms=sigma_v,
                 rho_bar_msun_pc3=rho_bar_msun_pc3,
-                M_baryon_msun=M_baryon,
-                R_disk_kpc=R_disk,
-                ell0_kpc=5.0,  # Default
-                K_max=K_max,
-                psi0=psi0,
-                gamma_mass=gamma_mass,
-                R_eff_factor=R_eff_factor,
+                galaxy_props=galaxy_props,
+                params=params,
             )
         except Exception as e:
             print(f"  {galaxy_name}: Kernel computation failed - {e}")
@@ -123,7 +121,8 @@ def main():
             "rms_model": rms_model,
             "delta_rms": delta_rms,
             "K_rough": info["K_rough"],
-            "K_missing": info["K_missing"],
+            "F_missing": info["F_missing"],
+            "scale": info["scale"],
             "K_total_mean": info["K_total_mean"],
             "Xi_mean": info["Xi_mean"],
             "M_baryon": M_baryon,
@@ -151,7 +150,8 @@ def main():
             "mean_delta_rms": float(df_results["delta_rms"].mean()),
             "median_delta_rms": float(df_results["delta_rms"].median()),
             "mean_K_rough": float(df_results["K_rough"].mean()),
-            "mean_K_missing": float(df_results["K_missing"].mean()),
+            "mean_F_missing": float(df_results["F_missing"].mean()),
+            "mean_scale": float(df_results["scale"].mean()),
             "mean_K_total": float(df_results["K_total_mean"].mean()),
             "mean_Xi": float(df_results["Xi_mean"].mean()),
         }
@@ -172,7 +172,8 @@ def main():
         print(f"  Median delta_RMS: {df_results['delta_rms'].median():.2f} km/s")
         print(f"\nKernel Statistics:")
         print(f"  Mean K_rough: {df_results['K_rough'].mean():.3f}")
-        print(f"  Mean K_missing: {df_results['K_missing'].mean():.3f}")
+        print(f"  Mean F_missing: {df_results['F_missing'].mean():.3f}")
+        print(f"  Mean scale: {df_results['scale'].mean():.3f}")
         print(f"  Mean K_total: {df_results['K_total_mean'].mean():.3f}")
         print(f"  Mean Xi: {df_results['Xi_mean'].mean():.3f}")
         print(f"\nGalaxy Properties:")

@@ -1,13 +1,14 @@
 {
   "n_galaxies": 165,
-  "n_improved": 13,
-  "n_worsened": 152,
+  "n_improved": 99,
+  "n_worsened": 66,
   "mean_rms_gr": 34.61484741536385,
-  "mean_rms_model": 221.55896107286637,
-  "mean_delta_rms": 186.94411365750244,
-  "median_delta_rms": 82.84212828759411,
+  "mean_rms_model": 47.519932978660044,
+  "mean_delta_rms": 12.905085563296204,
+  "median_delta_rms": -5.044206843421737,
   "mean_K_rough": 0.655441885936954,
-  "mean_K_missing": 10.085012087810796,
-  "mean_K_total": 10.279305233973814,
+  "mean_F_missing": 4.997919487726748,
+  "mean_scale": 4.997919487726748,
+  "mean_K_total": 0.970844348231924,
   "mean_Xi": 0.20950042481325387
 }

@@ -339,3 +339,4 @@ The PCA diagnostic suggests the problem is **structural**, not parametric:
 
 
 
+
