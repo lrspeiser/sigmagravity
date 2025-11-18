@@ -1,0 +1,22 @@
+{
+  "model": "pairing",
+  "parameters": {
+    "A_pair": 5.0,
+    "sigma_c": 15.0,
+    "gamma_sigma": 3.0,
+    "ell_pair_kpc": 20.0,
+    "p": 1.5
+  },
+  "performance": {
+    "improvement_pct": 15.440489458258885,
+    "rms_pair_mean": 29.270145549202194,
+    "rms_gr_mean": 34.61484741536385,
+    "fraction_improved": 0.7818181818181819,
+    "n_galaxies": 165
+  },
+  "safety": {
+    "K_solar_system": 1.541623971336646e-14,
+    "solar_system_safe": true,
+    "safety_threshold": 1e-10
+  }
+}

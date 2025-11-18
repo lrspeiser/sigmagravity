@@ -1,0 +1,27 @@
+{
+  "total_configs": 2400,
+  "safe_configs": 1446,
+  "improved_configs": 1337,
+  "safe_and_improved": 845,
+  "best_overall": {
+    "improvement_pct": 15.888793443518685,
+    "parameters": {
+      "A_pair": 5.0,
+      "sigma_c": 15.0,
+      "gamma_sigma": 3.0,
+      "ell_pair_kpc": 20.0,
+      "p": 1.0
+    },
+    "solar_system_safe": false
+  },
+  "best_safe": {
+    "improvement_pct": 15.440489458258885,
+    "parameters": {
+      "A_pair": 5.0,
+      "sigma_c": 15.0,
+      "gamma_sigma": 3.0,
+      "ell_pair_kpc": 20.0,
+      "p": 1.5
+    }
+  }
+}
