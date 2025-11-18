@@ -125,19 +125,61 @@ def main():
             "K_rough": info["K_rough"],
             "K_missing": info["K_missing"],
             "K_total_mean": info["K_total_mean"],
+            "Xi_mean": info["Xi_mean"],
+            "M_baryon": M_baryon,
+            "R_disk": R_disk,
+            "sigma_v": sigma_v,
         })
-        print(f"  {galaxy_name}: delta_RMS = {delta_rms:.2f} km/s, K_total = {info['K_total_mean']:.3f}")
+        if len(results) % 20 == 0:
+            print(f"  Processed {len(results)} galaxies...")
 
     if len(results) > 0:
         df_results = pd.DataFrame(results)
+        
+        # Save results
+        out_csv = Path("time-coherence/unified_kernel_sparc_results.csv")
+        df_results.to_csv(out_csv, index=False)
+        print(f"\nResults saved to {out_csv}")
+        
+        # Save summary
+        summary = {
+            "n_galaxies": int(len(df_results)),
+            "n_improved": int(np.sum(df_results["delta_rms"] < 0)),
+            "n_worsened": int(np.sum(df_results["delta_rms"] > 0)),
+            "mean_rms_gr": float(df_results["rms_gr"].mean()),
+            "mean_rms_model": float(df_results["rms_model"].mean()),
+            "mean_delta_rms": float(df_results["delta_rms"].mean()),
+            "median_delta_rms": float(df_results["delta_rms"].median()),
+            "mean_K_rough": float(df_results["K_rough"].mean()),
+            "mean_K_missing": float(df_results["K_missing"].mean()),
+            "mean_K_total": float(df_results["K_total_mean"].mean()),
+            "mean_Xi": float(df_results["Xi_mean"].mean()),
+        }
+        summary_path = Path("time-coherence/unified_kernel_summary.json")
+        with open(summary_path, "w") as f:
+            json.dump(summary, f, indent=2)
+        
         print(f"\n" + "=" * 80)
         print("SUMMARY")
         print("=" * 80)
-        print(f"Galaxies processed: {len(results)}")
-        print(f"Mean delta_RMS: {df_results['delta_rms'].mean():.2f} km/s")
-        print(f"Mean K_total: {df_results['K_total_mean'].mean():.3f}")
-        print(f"Mean K_rough: {df_results['K_rough'].mean():.3f}")
-        print(f"Mean K_missing: {df_results['K_missing'].mean():.3f}")
+        print(f"Total galaxies: {len(results)}")
+        print(f"Galaxies improved: {np.sum(df_results['delta_rms'] < 0)}")
+        print(f"Galaxies worsened: {np.sum(df_results['delta_rms'] > 0)}")
+        print(f"\nRMS Statistics:")
+        print(f"  Mean GR RMS: {df_results['rms_gr'].mean():.2f} km/s")
+        print(f"  Mean Model RMS: {df_results['rms_model'].mean():.2f} km/s")
+        print(f"  Mean delta_RMS: {df_results['delta_rms'].mean():.2f} km/s")
+        print(f"  Median delta_RMS: {df_results['delta_rms'].median():.2f} km/s")
+        print(f"\nKernel Statistics:")
+        print(f"  Mean K_rough: {df_results['K_rough'].mean():.3f}")
+        print(f"  Mean K_missing: {df_results['K_missing'].mean():.3f}")
+        print(f"  Mean K_total: {df_results['K_total_mean'].mean():.3f}")
+        print(f"  Mean Xi: {df_results['Xi_mean'].mean():.3f}")
+        print(f"\nGalaxy Properties:")
+        print(f"  Mean M_baryon: {df_results['M_baryon'].mean():.2e} Msun")
+        print(f"  Mean R_disk: {df_results['R_disk'].mean():.2f} kpc")
+        print(f"  Mean sigma_v: {df_results['sigma_v'].mean():.2f} km/s")
+        print(f"\nSummary saved to {summary_path}")
     else:
         print("\nNo valid results")
 
