@@ -1,0 +1,19 @@
+{
+  "A_global": 2.913110231552453,
+  "p": 1.5,
+  "n_coh": 0.1,
+  "delta_R_kpc": 7.742369979951296,
+  "log10_delta_R_kpc": 0.8888739208465422,
+  "tau_geom_method": "tidal",
+  "seed": 42,
+  "success": true,
+  "message": "Optimization terminated successfully.",
+  "nfev": 1570,
+  "mw_parquet": "gravitywavebaseline/gaia_with_gr_baseline.parquet",
+  "sparc_rotmod_dir": "data/Rotmod_LTG",
+  "sparc_summary": "data/sparc/sparc_combined.csv",
+  "n_sparc": 40,
+  "sigma_ref": 30.0,
+  "rms_gr_mw": 111.37021851783247,
+  "rms_time_coherence_mw": 66.40004925354094
+}

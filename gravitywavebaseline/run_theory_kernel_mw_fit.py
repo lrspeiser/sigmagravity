@@ -17,6 +17,9 @@ from scipy.optimize import differential_evolution
 from metric_resonance_multiplier import metric_resonance_multiplier
 from theory_metric_resonance import compute_theory_kernel, CUPY_AVAILABLE
 
+if CUPY_AVAILABLE:
+    import cupy as cp
+
 
 def rms(values: np.ndarray) -> float:
     return float(np.sqrt(np.mean(values * values)))
@@ -54,6 +57,103 @@ def empirical_kernel(R_kpc: np.ndarray, mw_fit: dict) -> np.ndarray:
     return f_emp - 1.0
 
 
+# Global variables for objective function (needed for multiprocessing)
+_OBJ_R_KPC = None
+_OBJ_K_EMP = None
+_OBJ_SIGMA_V = None
+_OBJ_BURR_P = None
+_OBJ_BURR_N = None
+_OBJ_REQUIRE_POSITIVE_CORR = True
+_OBJ_INCLUDE_Q_REF = True
+_OBJ_USE_GPU = None
+
+
+def _objective_function(theta: np.ndarray) -> float:
+    """Objective function for optimization (module-level for multiprocessing)."""
+    global _OBJ_R_KPC, _OBJ_K_EMP, _OBJ_SIGMA_V, _OBJ_BURR_P, _OBJ_BURR_N
+    global _OBJ_REQUIRE_POSITIVE_CORR, _OBJ_INCLUDE_Q_REF, _OBJ_USE_GPU
+    
+    if _OBJ_INCLUDE_Q_REF:
+        A_global, alpha, lam_coh_kpc, lam_cut_kpc, burr_ell0, Q_ref = theta
+    else:
+        A_global, alpha, lam_coh_kpc, lam_cut_kpc, burr_ell0 = theta
+        Q_ref = 1.0  # default
+    
+    try:
+        # Ensure R is a 1D numpy array (may have been corrupted during pickling)
+        R_kpc = np.asarray(_OBJ_R_KPC, dtype=np.float64)
+        if R_kpc.ndim == 0:
+            R_kpc = np.array([R_kpc])
+        elif R_kpc.ndim > 1:
+            R_kpc = R_kpc.flatten()
+        
+        # Ensure sigma_v is a valid float
+        sigma_v = float(_OBJ_SIGMA_V) if _OBJ_SIGMA_V is not None else 30.0
+        burr_p = float(_OBJ_BURR_P) if _OBJ_BURR_P is not None else 0.757
+        burr_n = float(_OBJ_BURR_N) if _OBJ_BURR_N is not None else 0.5
+        use_gpu = _OBJ_USE_GPU if _OBJ_USE_GPU is not None else False
+        
+        K_th = compute_theory_kernel(
+            R_kpc=R_kpc,
+            sigma_v_kms=sigma_v,
+            alpha=alpha,
+            lam_coh_kpc=lam_coh_kpc,
+            lam_cut_kpc=lam_cut_kpc,
+            A_global=A_global,
+            burr_ell0_kpc=burr_ell0,
+            burr_p=burr_p,
+            burr_n=burr_n,
+            Q_ref=Q_ref,
+            use_gpu=use_gpu,
+        )
+        
+        # Ensure K_emp is also a proper numpy array
+        K_emp = np.asarray(_OBJ_K_EMP, dtype=np.float64)
+        if K_emp.ndim == 0:
+            K_emp = np.array([K_emp])
+        elif K_emp.ndim > 1:
+            K_emp = K_emp.flatten()
+        
+        # Ensure K_th matches shape
+        K_th = np.asarray(K_th, dtype=np.float64)
+        if K_th.ndim == 0:
+            K_th = np.array([K_th])
+        elif K_th.ndim > 1:
+            K_th = K_th.flatten()
+        
+        # Ensure same length
+        min_len = min(len(K_th), len(K_emp))
+        K_th = K_th[:min_len]
+        K_emp = K_emp[:min_len]
+        
+        # Compute correlation
+        corr = float(np.corrcoef(K_th, K_emp)[0, 1])
+        if not np.isfinite(corr):
+            corr = 0.0
+        
+        # Base chi-squared
+        chi2 = rms(K_th - K_emp) ** 2
+        
+        # Penalty for negative correlation if required
+        if _OBJ_REQUIRE_POSITIVE_CORR:
+            if corr < 0:
+                # Extremely strong penalty: make it impossible to accept negative correlation
+                penalty = 1e10 * (1.0 - corr) ** 4
+                return chi2 + penalty
+            elif corr < 0.7:
+                # Strong penalty for weak positive correlation
+                penalty = 1000.0 * (0.7 - corr) ** 2
+                return chi2 + penalty
+            elif corr < 0.9:
+                # Moderate penalty to push toward high correlation
+                penalty = 10.0 * (0.9 - corr) ** 2
+                return chi2 + penalty
+        
+        return chi2
+    except (ValueError, RuntimeError, ZeroDivisionError):
+        return 1e10  # Penalty for invalid parameters
+
+
 def fit_theory_params(
     R_kpc: np.ndarray,
     K_emp: np.ndarray,
@@ -71,6 +171,30 @@ def fit_theory_params(
     If require_positive_corr=True, uses penalty function to strongly enforce
     positive correlation. Also optionally fits Q_ref as an additional parameter.
     """
+    global _OBJ_R_KPC, _OBJ_K_EMP, _OBJ_SIGMA_V, _OBJ_BURR_P, _OBJ_BURR_N
+    global _OBJ_REQUIRE_POSITIVE_CORR, _OBJ_INCLUDE_Q_REF, _OBJ_USE_GPU
+    
+    # Set global variables for objective function
+    # Ensure numpy arrays (not CuPy) for multiprocessing compatibility
+    # Convert from CuPy to NumPy if needed
+    if CUPY_AVAILABLE and hasattr(R_kpc, 'get'):  # CuPy array
+        _OBJ_R_KPC = cp.asnumpy(R_kpc)
+    else:
+        _OBJ_R_KPC = np.asarray(R_kpc, dtype=np.float64)
+    
+    if CUPY_AVAILABLE and hasattr(K_emp, 'get'):  # CuPy array
+        _OBJ_K_EMP = cp.asnumpy(K_emp)
+    else:
+        _OBJ_K_EMP = np.asarray(K_emp, dtype=np.float64)
+    
+    _OBJ_SIGMA_V = float(sigma_v_kms)
+    _OBJ_BURR_P = float(burr_p)
+    _OBJ_BURR_N = float(burr_n)
+    _OBJ_REQUIRE_POSITIVE_CORR = require_positive_corr
+    _OBJ_INCLUDE_Q_REF = include_Q_ref
+    # GPU can be used in each worker process independently
+    _OBJ_USE_GPU = use_gpu
+    
     if include_Q_ref:
         # Extended parameter set: [A_global, alpha, lam_coh_kpc, lam_cut_kpc, burr_ell0_kpc, Q_ref]
         bounds = [
@@ -89,52 +213,6 @@ def fit_theory_params(
             (20.0, 3000.0),  # lam_cut_kpc
             (2.0, 80.0),     # burr_ell0_kpc
         ]
-
-    def objective(theta: np.ndarray) -> float:
-        if include_Q_ref:
-            A_global, alpha, lam_coh_kpc, lam_cut_kpc, burr_ell0, Q_ref = theta
-        else:
-            A_global, alpha, lam_coh_kpc, lam_cut_kpc, burr_ell0 = theta
-            Q_ref = 1.0  # default
-        
-        try:
-            K_th = compute_theory_kernel(
-                R_kpc=R_kpc,
-                sigma_v_kms=sigma_v_kms,
-                alpha=alpha,
-                lam_coh_kpc=lam_coh_kpc,
-                lam_cut_kpc=lam_cut_kpc,
-                A_global=A_global,
-                burr_ell0_kpc=burr_ell0,
-                burr_p=burr_p,
-                burr_n=burr_n,
-                Q_ref=Q_ref,
-                use_gpu=use_gpu,
-            )
-            
-            # Compute correlation
-            corr = float(np.corrcoef(K_th, K_emp)[0, 1])
-            if not np.isfinite(corr):
-                corr = 0.0
-            
-            # Base chi-squared
-            chi2 = rms(K_th - K_emp) ** 2
-            
-            # Penalty for negative correlation if required
-            if require_positive_corr:
-                if corr < 0:
-                    # Strong penalty: make it impossible to accept negative correlation
-                    penalty = 1e6 * (1.0 - corr) ** 2
-                    return chi2 + penalty
-                elif corr < 0.5:
-                    # Soft penalty for weak positive correlation
-                    penalty = 100.0 * (0.5 - corr) ** 2
-                    return chi2 + penalty
-            
-            return chi2
-        except (ValueError, RuntimeError, ZeroDivisionError):
-            return 1e10  # Penalty for invalid parameters
-
     # Try multiple optimization runs with different seeds
     # Use parallel workers for faster evaluation
     best_result = None
@@ -143,7 +221,7 @@ def fit_theory_params(
     for seed in [123, 456, 789, 42, 999]:
         try:
             result = differential_evolution(
-                objective,
+                _objective_function,
                 bounds=bounds,
                 maxiter=200,
                 polish=True,
@@ -151,7 +229,6 @@ def fit_theory_params(
                 atol=1e-6,
                 tol=1e-4,
                 workers=n_workers if n_workers > 1 else 1,
-                updating='immediate' if n_workers > 1 else 'deferred',
             )
             if result.success and result.fun < best_obj:
                 best_obj = result.fun
@@ -162,7 +239,7 @@ def fit_theory_params(
     if best_result is None:
         # Fallback: single run
         best_result = differential_evolution(
-            objective,
+            _objective_function,
             bounds=bounds,
             maxiter=200,
             polish=True,

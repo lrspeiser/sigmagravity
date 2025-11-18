@@ -1,0 +1,36 @@
+{
+  "r_min": 12.0,
+  "r_max": 16.0,
+  "sigma_v": 30.0,
+  "n_points": 10486,
+  "rms_gr": 111.37021851783247,
+  "mw_fit_params": {
+    "A": 5.694915875549634,
+    "lambda_peak_kpc": 94.45219389745395,
+    "sigma_ln_lambda": 0.5900885206138617,
+    "ell0_kpc": 5.0,
+    "p": 0.757,
+    "n_coh": 0.5,
+    "rms_best": 39.57075032402997,
+    "success": true,
+    "message": "Optimization terminated successfully.",
+    "nfev": 460
+  },
+  "theory_fit_params": {
+    "A_global": -15.288711966804897,
+    "alpha": 2.0364684802228155,
+    "lam_coh_kpc": 140.16724132052707,
+    "lam_cut_kpc": 1131.7760237301259,
+    "burr_ell0_kpc": 14.693428767994064,
+    "burr_p": 0.757,
+    "burr_n": 0.5,
+    "Q_ref": 2.5930177293163275,
+    "phase_sign": 1.0,
+    "rms_diff": 6.040815448467304,
+    "chi2_K": 36.49145128244123,
+    "corr_K_emp_theory": 0.9949868778046288,
+    "optimization_success": false,
+    "optimization_message": "Maximum number of iterations has been exceeded.",
+    "optimization_nfev": 18237
+  }
+}

@@ -100,3 +100,4 @@ This is enough to put in the theory section of the paper as “Derivation of Bur
 * Provide a short appendix calculation: mixture of Weibull with Gamma → Burr-XII.
 * Mention that if you treat the hazard parameter as lognormal instead of Gamma, you’d get log-logistic, etc. but Burr-XII emerges naturally for Gamma mixture, consistent with the data.
 
+

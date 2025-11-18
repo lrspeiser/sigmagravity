@@ -1,0 +1,73 @@
+{
+  "MW": {
+    "ell_coh_mean_kpc": 0.9450799923254922,
+    "tau_coh_mean_yr": 83317.85809657724,
+    "A_global": 0.5,
+    "p": 0.5,
+    "tau_geom_method": "simple"
+  },
+  "SPARC": {
+    "N_galaxies": 175,
+    "delta_rms_mean": 5.906079561992683,
+    "delta_rms_median": -3.856012915591627,
+    "delta_rms_std": 26.202196348521106,
+    "improved_frac": 0.64,
+    "corr_delta_rms_sigma_v": 0.43859146418834133,
+    "corr_ellcoh_sigma_v": -0.491443023351266,
+    "ell_coh_mean_kpc": 1.3847633439598657,
+    "ell_coh_median_kpc": 1.2465828814747986,
+    "corr_taucoh_sigma_v": -0.49144302335126605,
+    "tau_coh_mean_yr": 122080.15906197886,
+    "tau_coh_median_yr": 109898.22710009146,
+    "sigma_bin_stats": [
+      {
+        "sigma_bin": "<15",
+        "N": 82,
+        "delta_rms_mean": -3.85351949928592,
+        "delta_rms_median": -5.184578751973742,
+        "ell_coh_mean_kpc": 1.805809369889498,
+        "tau_coh_mean_yr": 159199.40116360495
+      },
+      {
+        "sigma_bin": "15-20",
+        "N": 25,
+        "delta_rms_mean": -6.368337485260829,
+        "delta_rms_median": -11.328186863513652,
+        "ell_coh_mean_kpc": 1.3340482001411365,
+        "tau_coh_mean_yr": 117609.13312729682
+      },
+      {
+        "sigma_bin": "20-25",
+        "N": 22,
+        "delta_rms_mean": 4.741666446514604,
+        "delta_rms_median": -3.8894466046279987,
+        "ell_coh_mean_kpc": 0.7604489583690769,
+        "tau_coh_mean_yr": 67040.8631201489
+      },
+      {
+        "sigma_bin": "25-30",
+        "N": 16,
+        "delta_rms_mean": 32.07713856459151,
+        "delta_rms_median": 31.582527222744837,
+        "ell_coh_mean_kpc": 1.1398507924250365,
+        "tau_coh_mean_yr": 100488.77062866864
+      },
+      {
+        "sigma_bin": "30-40",
+        "N": 22,
+        "delta_rms_mean": 36.57325381110872,
+        "delta_rms_median": 47.613395676859795,
+        "ell_coh_mean_kpc": 0.8951094355882657,
+        "tau_coh_mean_yr": 78912.47464856399
+      },
+      {
+        "sigma_bin": ">=40",
+        "N": 8,
+        "delta_rms_mean": 10.824812090063606,
+        "delta_rms_median": -12.16154142131056,
+        "ell_coh_mean_kpc": 0.7807643140808904,
+        "tau_coh_mean_yr": 68831.85640973644
+      }
+    ]
+  }
+}

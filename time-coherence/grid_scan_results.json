@@ -1,0 +1,119 @@
+[
+  {
+    "alpha_length": 0.03,
+    "beta_sigma": 1.5,
+    "backreaction_cap": null,
+    "mw": {
+      "error": "No MW data in range 12-16 kpc"
+    },
+    "sparc": {
+      "error": "No rotmod files found"
+    },
+    "passed": true,
+    "score": 0.0
+  },
+  {
+    "alpha_length": 0.03,
+    "beta_sigma": 1.8,
+    "backreaction_cap": null,
+    "mw": {
+      "error": "No MW data in range 12-16 kpc"
+    },
+    "sparc": {
+      "error": "No rotmod files found"
+    },
+    "passed": true,
+    "score": 0.0
+  },
+  {
+    "alpha_length": 0.03,
+    "beta_sigma": 2.0,
+    "backreaction_cap": null,
+    "mw": {
+      "error": "No MW data in range 12-16 kpc"
+    },
+    "sparc": {
+      "error": "No rotmod files found"
+    },
+    "passed": true,
+    "score": 0.0
+  },
+  {
+    "alpha_length": 0.037,
+    "beta_sigma": 1.5,
+    "backreaction_cap": null,
+    "mw": {
+      "error": "No MW data in range 12-16 kpc"
+    },
+    "sparc": {
+      "error": "No rotmod files found"
+    },
+    "passed": true,
+    "score": 0.0
+  },
+  {
+    "alpha_length": 0.037,
+    "beta_sigma": 1.8,
+    "backreaction_cap": null,
+    "mw": {
+      "error": "No MW data in range 12-16 kpc"
+    },
+    "sparc": {
+      "error": "No rotmod files found"
+    },
+    "passed": true,
+    "score": 0.0
+  },
+  {
+    "alpha_length": 0.037,
+    "beta_sigma": 2.0,
+    "backreaction_cap": null,
+    "mw": {
+      "error": "No MW data in range 12-16 kpc"
+    },
+    "sparc": {
+      "error": "No rotmod files found"
+    },
+    "passed": true,
+    "score": 0.0
+  },
+  {
+    "alpha_length": 0.045,
+    "beta_sigma": 1.5,
+    "backreaction_cap": null,
+    "mw": {
+      "error": "No MW data in range 12-16 kpc"
+    },
+    "sparc": {
+      "error": "No rotmod files found"
+    },
+    "passed": true,
+    "score": 0.0
+  },
+  {
+    "alpha_length": 0.045,
+    "beta_sigma": 1.8,
+    "backreaction_cap": null,
+    "mw": {
+      "error": "No MW data in range 12-16 kpc"
+    },
+    "sparc": {
+      "error": "No rotmod files found"
+    },
+    "passed": true,
+    "score": 0.0
+  },
+  {
+    "alpha_length": 0.045,
+    "beta_sigma": 2.0,
+    "backreaction_cap": null,
+    "mw": {
+      "error": "No MW data in range 12-16 kpc"
+    },
+    "sparc": {
+      "error": "No rotmod files found"
+    },
+    "passed": true,
+    "score": 0.0
+  }
+]

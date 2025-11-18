@@ -136,3 +136,4 @@ def compute_theory_kernel_gpu(
         return cp.asnumpy(K)
     return K
 
+

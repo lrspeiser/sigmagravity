@@ -223,3 +223,4 @@ python gravitywavebaseline/fit_theory_kernel_joint.py \
 - Cluster fits assume a single `sigma_v_default` for all clusters; in reality, clusters have varying velocity dispersions, but this is a first-order approximation.
 - Joint fitting is computationally expensive (300+ function evaluations); consider reducing `--max-sparc-galaxies` for faster iteration.
 
+

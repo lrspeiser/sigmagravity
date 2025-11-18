@@ -17,6 +17,12 @@ import pandas as pd
 
 from theory_metric_resonance import compute_theory_kernel, CUPY_AVAILABLE
 
+# Global variables for multiprocessing
+_SPARC_TH_PARAMS = None
+_SPARC_PHASE_SIGN = None
+_SPARC_SIGMA_MAP = None
+_SPARC_ARGS = None
+
 
 def rms(arr: np.ndarray) -> float:
     return float(np.sqrt(np.mean(arr * arr)))
@@ -45,6 +51,71 @@ def load_rotmod(path: str) -> pd.DataFrame:
     )
     df["V_gr"] = v_gr
     return df[["R_kpc", "V_obs", "V_gr"]]
+
+
+def _process_galaxy_sparc_wrapper(args_tuple):
+    """Wrapper to unpack arguments for multiprocessing."""
+    path, th_params, phase_sign_val, sigma_map_dict, sigma_ref, beta_sigma = args_tuple
+    return _process_galaxy_sparc(path, th_params, phase_sign_val, sigma_map_dict, sigma_ref, beta_sigma)
+
+
+def _process_galaxy_sparc(
+    path: str,
+    th_params: dict,
+    phase_sign_val: float,
+    sigma_map_dict: dict,
+    sigma_ref: float,
+    beta_sigma: float,
+) -> dict | None:
+    """Process a single galaxy."""
+    galaxy = Path(path).name.replace("_rotmod.dat", "")
+    try:
+        df = load_rotmod(path)
+    except Exception:
+        return None
+
+    R = df["R_kpc"].to_numpy(float)
+    V_obs = df["V_obs"].to_numpy(float)
+    V_gr = df["V_gr"].to_numpy(float)
+    if len(R) < 4:
+        return None
+
+    sigma_true = sigma_map_dict.get(galaxy, sigma_ref)
+    v_flat = np.nanmedian(V_gr[-min(len(V_gr), 5):]) or 200.0
+    Q = v_flat / max(sigma_true, 1e-3)
+    G_sigma = (Q**beta_sigma) / (1.0 + Q**beta_sigma)
+
+    K_th = compute_theory_kernel(
+        R_kpc=R,
+        sigma_v_kms=sigma_true,
+        alpha=th_params["alpha"],
+        lam_coh_kpc=th_params["lam_coh_kpc"],
+        lam_cut_kpc=th_params["lam_cut_kpc"],
+        A_global=th_params["A_global"] * G_sigma,
+        burr_ell0_kpc=th_params.get("burr_ell0_kpc"),
+        burr_p=th_params.get("burr_p", 1.0),
+        burr_n=th_params.get("burr_n", 0.5),
+        Q_ref=th_params.get("Q_ref", 1.0),
+        use_gpu=False,  # CPU-only for multiprocessing compatibility
+    )
+    K_aligned = phase_sign_val * K_th
+    f_th = 1.0 + K_aligned
+    V_model = V_gr * np.sqrt(np.clip(f_th, 0.0, None))
+
+    rms_gr = rms(V_obs - V_gr)
+    rms_th = rms(V_obs - V_model)
+
+    return dict(
+        galaxy=galaxy,
+        n_points=len(R),
+        sigma_v_true=sigma_true,
+        Q_gal=Q,
+        G_sigma=G_sigma,
+        K_mean=float(np.mean(K_aligned)),
+        rms_gr=rms_gr,
+        rms_theory=rms_th,
+        delta_rms=rms_th - rms_gr,
+    )
 
 
 def main():
@@ -118,69 +189,25 @@ def main():
         )
     )
 
-    # Process galaxies in parallel
-    def process_galaxy(path: str) -> dict | None:
-        """Process a single galaxy."""
-        galaxy = Path(path).name.replace("_rotmod.dat", "")
-        try:
-            df = load_rotmod(path)
-        except Exception as exc:
-            return None  # Don't print in parallel mode
-
-        R = df["R_kpc"].to_numpy(float)
-        V_obs = df["V_obs"].to_numpy(float)
-        V_gr = df["V_gr"].to_numpy(float)
-        if len(R) < 4:
-            return None
-
-        sigma_true = sigma_map.get(galaxy, args.sigma_ref)
-        v_flat = np.nanmedian(V_gr[-min(len(V_gr), 5):]) or 200.0
-        Q = v_flat / max(sigma_true, 1e-3)
-        G_sigma = (Q**args.beta_sigma) / (1.0 + Q**args.beta_sigma)
-
-        K_th = compute_theory_kernel(
-            R_kpc=R,
-            sigma_v_kms=sigma_true,
-            alpha=th["alpha"],
-            lam_coh_kpc=th["lam_coh_kpc"],
-            lam_cut_kpc=th["lam_cut_kpc"],
-            A_global=th["A_global"] * G_sigma,
-            burr_ell0_kpc=th.get("burr_ell0_kpc"),
-            burr_p=th.get("burr_p", 1.0),
-            burr_n=th.get("burr_n", 0.5),
-            use_gpu=use_gpu,
-        )
-        K_aligned = phase_sign * K_th
-        f_th = 1.0 + K_aligned
-        V_model = V_gr * np.sqrt(np.clip(f_th, 0.0, None))
-
-        rms_gr = rms(V_obs - V_gr)
-        rms_th = rms(V_obs - V_model)
-
-        return dict(
-            galaxy=galaxy,
-            n_points=len(R),
-            sigma_v_true=sigma_true,
-            Q_gal=Q,
-            G_sigma=G_sigma,
-            K_mean=float(np.mean(K_aligned)),
-            rms_gr=rms_gr,
-            rms_theory=rms_th,
-            delta_rms=rms_th - rms_gr,
-        )
-    
     rotmod_paths = sorted(glob.glob(os.path.join(args.rotmod_dir, "*_rotmod.dat")))
     print(f"[info] processing {len(rotmod_paths)} SPARC rotmod files")
 
     # Process in parallel if multiple workers
     if n_workers > 1:
+        # Prepare arguments for each galaxy
+        args_list = [
+            (path, th, phase_sign, sigma_map, args.sigma_ref, args.beta_sigma)
+            for path in rotmod_paths
+        ]
         with mp.Pool(n_workers) as pool:
-            results = pool.map(process_galaxy, rotmod_paths)
+            results = pool.map(_process_galaxy_sparc_wrapper, args_list)
         rows = [r for r in results if r is not None]
     else:
         rows = []
         for path in rotmod_paths:
-            result = process_galaxy(path)
+            result = _process_galaxy_sparc(
+                path, th, phase_sign, sigma_map, args.sigma_ref, args.beta_sigma
+            )
             if result is not None:
                 rows.append(result)
 

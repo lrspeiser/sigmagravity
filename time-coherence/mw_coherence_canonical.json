@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "A_global": 1.0,
+    "p": 0.757,
+    "n_coh": 0.5,
+    "delta_R_kpc": 0.1,
+    "tau_geom_method": "tidal",
+    "alpha_length": 0.037,
+    "beta_sigma": 1.5,
+    "alpha_geom": 1.0,
+    "backreaction_cap": 10.0,
+    "source": "current_best_with_cap",
+    "notes": "Based on current test results with backreaction cap to stabilize SPARC outliers",
+    "performance": {
+      "mw_rms_target": "40-70 km/s",
+      "sparc_mean_delta_rms_target": "<= 0 km/s",
+      "sparc_fraction_improved_target": ">= 70%",
+      "cluster_boost_range": "1.5\u00d7 - 10\u00d7"
+    }
+  },
+  "rms": null,
+  "rms_gr": null,
+  "ell_coh_mean_kpc": 0.9450799923254922,
+  "K_max": 0.6608640775181231,
+  "K_mean": 0.6608640770914251
+}
