@@ -1,0 +1,28 @@
+{
+  "use_rough": true,
+  "A0": 0.774,
+  "gamma_rough": 0.1,
+  "p": 0.757,
+  "n_coh": 0.5,
+  "ell0_kpc": 5.0,
+  "tau_geom_method": "tidal",
+  "alpha_geom": 1.0,
+  "beta_sigma": 1.5,
+  "use_f_missing": true,
+  "f_amp": 1.0,
+  "extra_amp": 0.25,
+  "f_missing": {
+    "A0": 10.02,
+    "sigma_ref": 14.8,
+    "R_ref": 12.3,
+    "a_sigma": 0.1,
+    "a_Rd": 0.31,
+    "F_max": 5.0,
+    "use_sigma_gate": true,
+    "sigma_gate_ref": 25.0,
+    "gamma_sigma": 1.0,
+    "gate_floor": 0.1
+  },
+  "use_morph_gate": false,
+  "morph_floor": 0.2
+}
