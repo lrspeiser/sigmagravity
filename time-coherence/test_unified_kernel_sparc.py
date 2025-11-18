@@ -93,6 +93,9 @@ def process_galaxy(
         # Try alternative name matching
         galaxy_row = summary_df[summary_df[galaxy_col].astype(str).str.upper() == galaxy_name.upper()]
         if len(galaxy_row) == 0:
+            # Debug: print first few galaxy names
+            if len(errors) < 3:
+                print(f"  DEBUG: Galaxy '{galaxy_name}' not found. Sample names: {list(summary_df[galaxy_col].head(5))}")
             return None
 
     galaxy_row = galaxy_row.iloc[0]
@@ -221,6 +224,7 @@ def main():
 
     results = []
     errors = []
+    debug_count = 0
     for i, rotmod_path in enumerate(rotmod_files):
         try:
             result = process_galaxy(
@@ -235,6 +239,21 @@ def main():
                 results.append(result)
             else:
                 errors.append(f"{rotmod_path.name}: returned None")
+                debug_count += 1
+                if debug_count <= 3:
+                    # Debug first few failures
+                    galaxy_name = Path(rotmod_path).stem.replace("_rotmod", "")
+                    print(f"  DEBUG: {galaxy_name} failed - checking data...")
+                    try:
+                        df_test = load_rotmod(str(rotmod_path))
+                        print(f"    R shape: {df_test.shape}, columns: {list(df_test.columns)}")
+                        galaxy_row_test = summary_df[summary_df[galaxy_col].astype(str) == galaxy_name]
+                        print(f"    Found in summary: {len(galaxy_row_test) > 0}")
+                        if len(galaxy_row_test) > 0:
+                            print(f"    M_baryon: {galaxy_row_test.iloc[0].get('M_baryon', 'MISSING')}")
+                            print(f"    R_disk: {galaxy_row_test.iloc[0].get('R_disk', 'MISSING')}")
+                    except Exception as e:
+                        print(f"    Error in debug: {e}")
         except Exception as e:
             errors.append(f"{rotmod_path.name}: {str(e)}")
         if (i + 1) % 20 == 0:

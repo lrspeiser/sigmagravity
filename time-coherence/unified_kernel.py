@@ -90,7 +90,7 @@ def compute_unified_kernel(
     )
     tau_noise = compute_tau_noise(
         R,
-        np.full_like(R, sigma_v_kms),
+        sigma_v_kms,  # scalar, not array
         method="galaxy",
         beta_sigma=beta_sigma,
     )
@@ -100,7 +100,7 @@ def compute_unified_kernel(
     from coherence_time_kernel import compute_exposure_factor
 
     Xi = compute_exposure_factor(R, g_bar, tau_coh)
-    Xi_mean = float(np.mean(Xi))
+    Xi_mean = float(np.mean(Xi)) if len(Xi) > 0 else 0.0
 
     # System-level roughness
     K_rough = system_level_K(Xi_mean, A0=A0, gamma=gamma_rough)
