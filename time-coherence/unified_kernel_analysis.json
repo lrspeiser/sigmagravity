@@ -1,0 +1,47 @@
+{
+  "overall": {
+    "n_galaxies": 165,
+    "n_improved": 99,
+    "n_worsened": 66,
+    "mean_rms_gr": 34.61484741536385,
+    "mean_rms_model": 47.519932978660044,
+    "mean_delta_rms": 12.905085563296204,
+    "median_delta_rms": -5.044206843421737,
+    "mean_K_rough": 0.655441885936954,
+    "mean_F_missing": 4.997919487726748,
+    "mean_scale": 4.997919487726748,
+    "mean_K_total": 0.970844348231924,
+    "mean_Xi": 0.20950042481325387
+  },
+  "improved_stats": {
+    "count": 99,
+    "mean_delta_rms": -13.137440315242257,
+    "median_delta_rms": -12.827362419902336,
+    "mean_K_rough": 0.646758117507547,
+    "mean_F_missing": 4.999584266694337,
+    "mean_K_total": 0.8665389497083512
+  },
+  "worsened_stats": {
+    "count": 66,
+    "mean_delta_rms": 51.968874381103895,
+    "median_delta_rms": 44.09390197854613,
+    "mean_K_rough": 0.6684675385810644,
+    "mean_F_missing": 4.995422319275363,
+    "mean_K_total": 1.127302446017283
+  },
+  "f_saturated": {
+    "count": 163,
+    "fraction": 0.9878787878787879,
+    "mean_delta_rms": 12.851994063296326
+  },
+  "correlations": {
+    "K_rough": 0.2227757025114064,
+    "F_missing": -0.0904850442147927,
+    "K_total_mean": 0.3594813235447147,
+    "Xi_mean": 0.11107236779041745,
+    "M_baryon": 0.31840506056920204,
+    "R_disk": 0.32160429254308803,
+    "sigma_v": 0.5978831417525722,
+    "rms_gr": 0.20867016161407081
+  }
+}

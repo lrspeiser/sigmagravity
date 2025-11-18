@@ -23,9 +23,10 @@ def main():
     print("UNIFIED KERNEL TEST ON SPARC (SIMPLIFIED)")
     print("=" * 80)
 
-    # Load data
-    rotmod_dir = Path("data/Rotmod_LTG")
-    summary_csv = Path("data/sparc/sparc_combined.csv")
+    # Load data (paths relative to project root)
+    project_root = Path(__file__).parent.parent
+    rotmod_dir = project_root / "data" / "Rotmod_LTG"
+    summary_csv = project_root / "data" / "sparc" / "sparc_combined.csv"
 
     summary_df = pd.read_csv(summary_csv)
     print(f"\nLoaded summary: {len(summary_df)} galaxies")
@@ -136,7 +137,7 @@ def main():
         df_results = pd.DataFrame(results)
         
         # Save results
-        out_csv = Path("time-coherence/unified_kernel_sparc_results.csv")
+        out_csv = project_root / "time-coherence" / "unified_kernel_sparc_results.csv"
         df_results.to_csv(out_csv, index=False)
         print(f"\nResults saved to {out_csv}")
         
@@ -155,7 +156,7 @@ def main():
             "mean_K_total": float(df_results["K_total_mean"].mean()),
             "mean_Xi": float(df_results["Xi_mean"].mean()),
         }
-        summary_path = Path("time-coherence/unified_kernel_summary.json")
+        summary_path = project_root / "time-coherence" / "unified_kernel_summary.json"
         with open(summary_path, "w") as f:
             json.dump(summary, f, indent=2)
         
