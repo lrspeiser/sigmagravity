@@ -84,15 +84,35 @@ def debug_one_galaxy(rotmod_path, params, sigma_v=25.0):
     
     K_req = (V_obs[mask]**2 / V_bar[mask]**2) - 1.0
     
+    # Debug: check if ell_coh actually varies
+    ell_coh_std = float(np.std(ell_coh))
+    ell_coh_range = float(np.max(ell_coh) - np.min(ell_coh))
+    R_over_ell_coh = R_good / np.clip(ell_coh, 1e-6, None)  # Avoid division by zero
+    R_over_ell_coh_min = float(np.min(R_over_ell_coh))
+    R_over_ell_coh_max = float(np.max(R_over_ell_coh))
+    R_over_ell_coh_range = R_over_ell_coh_max - R_over_ell_coh_min
+    
+    # Check Burr-XII window directly
+    from coherence_time_kernel import burr_xii_coherence_window
+    C_window = burr_xii_coherence_window(R_good, ell_coh, p=params["p"], n_coh=params["n_coh"])
+    C_range = float(np.max(C_window) - np.min(C_window))
+    
     return {
         "galaxy": Path(rotmod_path).stem.replace("_rotmod", ""),
         "R": R_good,
         "K_rough": K_rough,
         "K_req": K_req,
         "ell_coh": ell_coh,
+        "C_window": C_window,
         "K_rough_std": float(np.std(K_rough)),
         "K_rough_range": float(np.max(K_rough) - np.min(K_rough)),
         "ell_coh_mean": float(np.mean(ell_coh)),
+        "ell_coh_std": ell_coh_std,
+        "ell_coh_range": ell_coh_range,
+        "R_over_ell_coh_min": R_over_ell_coh_min,
+        "R_over_ell_coh_max": R_over_ell_coh_max,
+        "R_over_ell_coh_range": R_over_ell_coh_range,
+        "C_range": C_range,
         "R_range": float(np.max(R_good) - np.min(R_good)),
         "corr": float(np.corrcoef(K_req, K_rough)[0, 1]) if np.std(K_rough) > 1e-6 and np.std(K_req) > 1e-6 else 0.0,
     }
@@ -134,10 +154,12 @@ def main():
         if result:
             print(f"{result['galaxy']}:")
             print(f"  R range: {result['R'].min():.2f} - {result['R'].max():.2f} kpc ({result['R_range']:.2f} kpc)")
+            print(f"  ell_coh: {result['ell_coh'].min():.3f} - {result['ell_coh'].max():.3f} kpc (std: {result['ell_coh_std']:.3f}, range: {result['ell_coh_range']:.3f})")
+            print(f"  R/ell_coh: {result.get('R_over_ell_coh_min', 0):.2f} - {result.get('R_over_ell_coh_max', 0):.2f} (range: {result['R_over_ell_coh_range']:.2f})")
+            print(f"  C_window range: {result['C_window'].min():.6f} - {result['C_window'].max():.6f} (variation: {result['C_range']:.6f})")
             print(f"  K_rough range: {result['K_rough'].min():.6f} - {result['K_rough'].max():.6f}")
             print(f"  K_rough std: {result['K_rough_std']:.6f}")
             print(f"  K_rough variation: {result['K_rough_range']:.6f}")
-            print(f"  ell_coh mean: {result['ell_coh_mean']:.3f} kpc")
             print(f"  Correlation: {result['corr']:.3f}")
             print(f"  K_req range: {result['K_req'].min():.3f} - {result['K_req'].max():.3f}")
             print()
