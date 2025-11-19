@@ -110,7 +110,10 @@ class HaloFieldSolver:
     
     def Veff(self, phi, rho_b):
         """
-        Effective potential: V_eff(φ) = V(φ) + (β/M_Pl) ρ_b.
+        Effective potential: V_eff(φ) = V(φ) + A(φ) * ρ_b.
+        
+        For exponential coupling: A(φ) = e^(βφ)
+        So: V_eff(φ) = V(φ) + e^(βφ) * ρ_b
         
         Parameters:
         -----------
@@ -124,10 +127,8 @@ class HaloFieldSolver:
         Veff : float or array
             Effective potential (in cosmology units: H0²)
         """
-        # Coupling term: (β/M_Pl) * ρ_b
-        # In cosmology units, we need to convert ρ_b to cosmology units first
-        # ρ_b is in M_sun/kpc^3, need to convert to cosmology units (relative to ρ_crit)
-        # Critical density: ρ_crit = 3H0²/(8πG) ≈ 1.45e3 M_sun/kpc^3
+        # Coupling: A(φ) * ρ_b where A(φ) = e^(βφ)
+        # In cosmology units, convert ρ_b to cosmology units first
         H0_kms_kpc = 70.0 / 306.6  # km/s/kpc
         H0_squared = H0_kms_kpc**2
         rho_crit = 3 * H0_squared / (8 * np.pi * G)  # M_sun/kpc^3
@@ -135,19 +136,39 @@ class HaloFieldSolver:
         # Convert ρ_b to cosmology units (fraction of critical density)
         rho_b_cosm = rho_b / rho_crit
         
-        # Coupling: β * (ρ_b / ρ_crit) in cosmology units
-        # This gives coupling term in same units as V(φ) (H0²)
-        coupling_term = self.beta * rho_b_cosm
+        # Coupling: A(φ) * (ρ_b / ρ_crit) = e^(βφ/M_Pl) * (ρ_b / ρ_crit)
+        # Normalize φ by a characteristic scale to prevent exponential blowup
+        # Use M_Pl normalization: φ_norm = φ / φ_scale where φ_scale ~ 1
+        # For now, use small β to keep coupling manageable
+        # A(φ) = e^(β * φ) where β is already dimensionless in our units
+        # But we need to prevent overflow, so use tanh or limit
+        phi_safe = np.clip(phi, -10.0, 10.0)  # Prevent overflow
+        A_phi = np.exp(self.beta * phi_safe)
+        coupling_term = A_phi * rho_b_cosm
         
         return self.V_func(phi) + coupling_term
     
     def dVeff_dphi(self, phi, rho_b):
         """
-        dV_eff/dφ = dV/dφ + (β/M_Pl) dρ_b/dφ.
+        dV_eff/dφ = dV/dφ + d/dφ [A(φ) * ρ_b].
         
-        Since ρ_b doesn't depend on φ, this is just dV/dφ.
+        For A(φ) = e^(βφ):
+        d/dφ [A(φ) * ρ_b] = β * e^(βφ) * ρ_b = β * A(φ) * ρ_b
+        
+        So: dV_eff/dφ = dV/dφ + β * A(φ) * ρ_b
         """
-        return self.dV_dphi(phi)
+        # Convert ρ_b to cosmology units
+        H0_kms_kpc = 70.0 / 306.6
+        H0_squared = H0_kms_kpc**2
+        rho_crit = 3 * H0_squared / (8 * np.pi * G)
+        rho_b_cosm = rho_b / rho_crit
+        
+        # Coupling derivative: β * A(φ) * ρ_b
+        phi_safe = np.clip(phi, -10.0, 10.0)  # Prevent overflow
+        A_phi = np.exp(self.beta * phi_safe)
+        coupling_derivative = self.beta * A_phi * rho_b_cosm
+        
+        return self.dV_dphi(phi) + coupling_derivative
     
     def _KG_rhs(self, y, r, rho_b_interp):
         """

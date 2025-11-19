@@ -61,9 +61,10 @@ def main():
         print(f"  Velocity range: {data['v_obs'].min():.1f} - {data['v_obs'].max():.1f} km/s")
         
         # Field coupling (try different values)
-        # beta = 0.1  # Weak coupling (too weak - produces low densities)
-        beta = 1.0  # Stronger coupling (test)
-        # beta = 10.0  # Very strong (may be too much)
+        # With corrected A(φ) = e^(βφ) coupling, need smaller β
+        beta = 0.01  # Small coupling (test with corrected form)
+        # beta = 0.1  # Medium coupling
+        # beta = 1.0  # Strong (may cause numerical issues)
         
         # Fit with field-driven halo
         result = fitter.fit_field_driven_halo(
