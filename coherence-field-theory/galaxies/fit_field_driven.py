@@ -190,8 +190,19 @@ class FieldDrivenSPARCFitter:
         print(f"  max(rho_phi) = {np.max(rho_phi_final):.2e} M_sun/kpc^3")
         print(f"  median(rho_phi) = {np.median(rho_phi_final):.2e} M_sun/kpc^3")
         
+        # Compute effective mass and theoretical core radius
+        R_c_theory, m_eff = solver.compute_effective_core_radius(
+            phi_final, rho_b, r_grid, R_disk_best
+        )
+        print(f"\nEffective mass analysis:")
+        print(f"  m_eff at r=2*R_disk = {m_eff:.6e} kpc^-1")
+        print(f"  R_c^(theory) = 1/m_eff = {R_c_theory:.2f} kpc")
+        
         # Fit halo parameters for comparison (with wider bounds if needed)
         rho_c0, R_c, chi2_fit = solver.fit_halo_parameters(rho_phi_final, r_grid)
+        
+        print(f"  R_c^(fitted) = {R_c:.2f} kpc")
+        print(f"  Ratio: R_c^(fitted) / R_c^(theory) = {R_c / R_c_theory:.2f}")
         
         # If fit hit bounds, try with wider range
         if rho_c0 <= 1e3 + 1e-6:  # Hit lower bound

@@ -170,6 +170,93 @@ class HaloFieldSolver:
         
         return self.dV_dphi(phi) + coupling_derivative
     
+    def d2Veff_dphi2(self, phi, rho_b):
+        """
+        d²V_eff/dφ² = d²V/dφ² + d²/dφ² [A(φ) * ρ_b].
+        
+        For A(φ) = e^(βφ):
+        d²/dφ² [A(φ) * ρ_b] = β² * e^(βφ) * ρ_b = β² * A(φ) * ρ_b
+        
+        So: d²V_eff/dφ² = d²V/dφ² + β² * A(φ) * ρ_b
+        
+        This gives the effective mass squared: m_eff² = d²V_eff/dφ²
+        """
+        # Convert ρ_b to cosmology units
+        H0_kms_kpc = 70.0 / 306.6
+        H0_squared = H0_kms_kpc**2
+        rho_crit = 3 * H0_squared / (8 * np.pi * G)
+        rho_b_cosm = rho_b / rho_crit
+        
+        # Coupling second derivative: β² * A(φ) * ρ_b
+        phi_safe = np.clip(phi, -10.0, 10.0)
+        A_phi = np.exp(self.beta * phi_safe)
+        coupling_second_deriv = self.beta**2 * A_phi * rho_b_cosm
+        
+        return self.d2V_dphi2(phi) + coupling_second_deriv
+    
+    def effective_mass_squared(self, phi, rho_b):
+        """
+        Compute effective mass squared: m_eff² = d²V_eff/dφ².
+        
+        Returns m_eff² in cosmology units (H0²).
+        """
+        return self.d2Veff_dphi2(phi, rho_b)
+    
+    def compute_effective_core_radius(self, phi, rho_b, r_grid, R_disk):
+        """
+        Compute theoretical core radius from effective mass.
+        
+        R_c^(m) = 1 / m_eff evaluated at r ~ 2 * R_disk
+        
+        Parameters:
+        -----------
+        phi : array
+            Field solution
+        rho_b : array or callable
+            Baryon density
+        r_grid : array
+            Radial grid
+        R_disk : float
+            Disk scale radius
+            
+        Returns:
+        --------
+        R_c_theory : float
+            Theoretical core radius (kpc)
+        m_eff_at_2R : float
+            Effective mass at r = 2*R_disk (in cosmology units)
+        """
+        # Evaluate at r ~ 2 * R_disk
+        r_eval = 2.0 * R_disk
+        idx = np.argmin(np.abs(r_grid - r_eval))
+        phi_eval = phi[idx]
+        
+        # Get baryon density at this radius
+        if callable(rho_b):
+            rho_b_eval = rho_b(r_eval)
+        else:
+            rho_b_eval = rho_b[idx]
+        
+        # Compute effective mass squared
+        m_eff_sq = self.effective_mass_squared(phi_eval, rho_b_eval)
+        
+        # Convert to physical units
+        # m_eff² is in cosmology units (H0²)
+        # H0 = 70 km/s/Mpc = 70/306.6 km/s/kpc ≈ 0.228 km/s/kpc
+        # In natural units (c=1): H0 ≈ 0.228 / c kpc⁻¹
+        c_km_s = 2.998e5  # km/s
+        H0_kms_kpc = 70.0 / 306.6  # km/s/kpc
+        H0_kpc_inv = H0_kms_kpc / c_km_s  # kpc⁻¹ (≈ 7.6e-7)
+        
+        if m_eff_sq > 0:
+            m_eff = np.sqrt(m_eff_sq) * H0_kpc_inv  # kpc⁻¹
+            R_c_theory = 1.0 / m_eff  # kpc
+        else:
+            R_c_theory = np.inf
+            m_eff = 0.0
+        
+        return R_c_theory, m_eff
+    
     def _KG_rhs(self, y, r, rho_b_interp):
         """
         Right-hand side of Klein-Gordon equation.
