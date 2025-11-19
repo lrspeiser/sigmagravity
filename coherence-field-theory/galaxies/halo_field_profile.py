@@ -232,7 +232,8 @@ class HaloFieldSolver:
             return self.Veff(phi, rho_b)
         
         # Bounds: phi should be positive and reasonable
-        bounds = (1e-6, 10.0)
+        # Allow smaller phi for strong chameleon screening
+        bounds = (1e-10, 10.0)
         
         try:
             result = minimize_scalar(objective, bounds=bounds, method='bounded')
@@ -247,7 +248,7 @@ class HaloFieldSolver:
                     return self.dVeff_dphi(phi, rho_b)
                 
                 try:
-                    sol = root_scalar(dVeff_zero, bracket=[1e-6, 10.0], method='brentq')
+                    sol = root_scalar(dVeff_zero, bracket=[1e-10, 10.0], method='brentq')
                     return sol.root
                 except:
                     return phi_guess

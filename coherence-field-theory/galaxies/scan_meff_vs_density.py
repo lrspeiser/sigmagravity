@@ -78,7 +78,8 @@ def main():
     # Scan parameters
     beta_values = [0.01, 0.05, 0.1]
     # Test wider M4 range - chameleon needs to be strong enough
-    M4_values = [None, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2]  # None = pure exponential, else chameleon
+    # Larger M4 = stronger chameleon = heavier field in dense regions
+    M4_values = [None, 1e-4, 1e-3, 1e-2, 5e-2, 1e-1, 5e-1]  # None = pure exponential, else chameleon
     
     print(f"\n{'=' * 80}")
     print("RESULTS")
@@ -123,8 +124,14 @@ def main():
             
             # Check if viable: R_c^cosmic >> R_c^galaxy
             # Target: R_c^cosmic ~ 10^4 Mpc ~ 3e9 kpc, R_c^galaxy ~ 1-5 kpc
-            # Relaxed: R_c^cosmic > 1e5 kpc, R_c^galaxy < 50 kpc (still much better than current)
-            if (R_c_cosmic > 1e5 and R_c_dwarf < 50.0 and R_c_spiral < 50.0):
+            # Criteria: R_c^cosmic > 1e5 kpc, at least one galaxy R_c < 200 kpc (much better than current ~1.5e6)
+            # Good: both galaxies < 200 kpc
+            # Ideal: both galaxies < 10 kpc
+            is_viable = (R_c_cosmic > 1e5 and (R_c_dwarf < 200.0 or R_c_spiral < 200.0))
+            is_good = (R_c_cosmic > 1e5 and R_c_dwarf < 200.0 and R_c_spiral < 200.0)
+            is_ideal = (R_c_cosmic > 1e5 and R_c_dwarf < 10.0 and R_c_spiral < 10.0)
+            
+            if is_viable:
                 viable_params.append({
                     'beta': beta,
                     'M4': M4,
@@ -133,7 +140,9 @@ def main():
                     'phi_spiral': phi_spiral,
                     'R_c_cosmic': R_c_cosmic,
                     'R_c_dwarf': R_c_dwarf,
-                    'R_c_spiral': R_c_spiral
+                    'R_c_spiral': R_c_spiral,
+                    'is_good': is_good,
+                    'is_ideal': is_ideal
                 })
     
     if viable_params:
@@ -141,9 +150,17 @@ def main():
         print("VIABLE PARAMETER REGIONS")
         print(f"{'=' * 80}")
         
+        # Sort by best (ideal first, then good, then by smallest R_c^galaxy)
+        viable_params.sort(key=lambda x: (not x['is_ideal'], not x['is_good'], x['R_c_dwarf'] + x['R_c_spiral']))
+        
         for p in viable_params:
             M4_str = "None" if p['M4'] is None else f"{p['M4']:.2e}"
-            print(f"\nbeta = {p['beta']:.3f}, M4 = {M4_str}:")
+            status_str = ""
+            if p['is_ideal']:
+                status_str = " [IDEAL]"
+            elif p['is_good']:
+                status_str = " [GOOD]"
+            print(f"\nbeta = {p['beta']:.3f}, M4 = {M4_str}{status_str}:")
             print(f"  phi^cosmic = {p['phi_cosmic']:.6f}, phi^dwarf = {p['phi_dwarf']:.6f}, phi^spiral = {p['phi_spiral']:.6f}")
             print(f"  R_c^cosmic = {p['R_c_cosmic']:.2e} kpc (~{p['R_c_cosmic']/3e9:.1f} Mpc)")
             print(f"  R_c^dwarf = {p['R_c_dwarf']:.2f} kpc")

@@ -67,7 +67,7 @@ class FieldDrivenSPARCFitter:
         return rho_0 * np.exp(-r / R_disk)
     
     def fit_field_driven_halo(self, data, V0, lambda_param, beta, 
-                              method='global', phi_inf=None):
+                              method='global', phi_inf=None, M4=None):
         """
         Fit galaxy with field-driven halo.
         
@@ -85,6 +85,8 @@ class FieldDrivenSPARCFitter:
             'local' or 'global'
         phi_inf : float, optional
             Cosmological field value (if None, use 0)
+        M4 : float, optional
+            Chameleon mass scale (if None, pure exponential potential)
             
         Returns:
         --------
@@ -94,7 +96,8 @@ class FieldDrivenSPARCFitter:
         print(f"\n{'=' * 70}")
         print(f"FITTING FIELD-DRIVEN HALO: {data['name']}")
         print(f"{'=' * 70}")
-        print(f"Field parameters: V0={V0:.2e}, lambda={lambda_param:.2f}, beta={beta:.2f}")
+        M4_str = f", M4={M4:.2e}" if M4 is not None else ""
+        print(f"Field parameters: V0={V0:.2e}, lambda={lambda_param:.2f}, beta={beta:.2f}{M4_str}")
         
         r_obs = data['r']
         v_obs = data['v_obs']
@@ -107,7 +110,7 @@ class FieldDrivenSPARCFitter:
         R_disk_est = np.median(r_obs) / 2.5
         
         # Create field solver
-        solver = HaloFieldSolver(V0, lambda_param, beta, M4=None, phi_inf=phi_inf)
+        solver = HaloFieldSolver(V0, lambda_param, beta, M4=M4, phi_inf=phi_inf)
         
         # Radial grid for field solver (wider than data)
         r_min = min(0.1, r_obs[0] * 0.1)
