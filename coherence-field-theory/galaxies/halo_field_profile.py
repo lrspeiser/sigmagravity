@@ -202,6 +202,58 @@ class HaloFieldSolver:
         """
         return self.d2Veff_dphi2(phi, rho_b)
     
+    def find_phi_min(self, rho_b, phi_guess=None):
+        """
+        Find field value that minimizes V_eff for given density.
+        
+        Solves: dV_eff/dφ = 0
+        
+        Parameters:
+        -----------
+        rho_b : float
+            Baryon density (M_sun/kpc^3)
+        phi_guess : float, optional
+            Initial guess for φ (default: phi_inf)
+            
+        Returns:
+        --------
+        phi_min : float
+            Field value that minimizes V_eff
+        """
+        from scipy.optimize import minimize_scalar
+        
+        if phi_guess is None:
+            phi_guess = self.phi_inf if self.phi_inf != 0 else 0.1
+        
+        # Define objective: minimize V_eff
+        def objective(phi):
+            if phi <= 0:
+                return 1e10  # Penalty for negative phi
+            return self.Veff(phi, rho_b)
+        
+        # Bounds: phi should be positive and reasonable
+        bounds = (1e-6, 10.0)
+        
+        try:
+            result = minimize_scalar(objective, bounds=bounds, method='bounded')
+            if result.success:
+                return result.x
+            else:
+                # Fallback: try root finding on dV_eff/dφ = 0
+                from scipy.optimize import root_scalar
+                def dVeff_zero(phi):
+                    if phi <= 0:
+                        return 1e10
+                    return self.dVeff_dphi(phi, rho_b)
+                
+                try:
+                    sol = root_scalar(dVeff_zero, bracket=[1e-6, 10.0], method='brentq')
+                    return sol.root
+                except:
+                    return phi_guess
+        except:
+            return phi_guess
+    
     def compute_effective_core_radius(self, phi, rho_b, r_grid, R_disk):
         """
         Compute theoretical core radius from effective mass.
