@@ -146,6 +146,20 @@ class CoherenceCosmology:
         
         return self.results
     
+    def get_phi_0(self):
+        """
+        Get today's scalar field value φ₀.
+        
+        Returns:
+        --------
+        phi_0 : float
+            Scalar field value at a=1 (today)
+        """
+        if 'phi' not in self.results:
+            raise ValueError("Must run evolve() first")
+        # Today corresponds to a=1, which is the last element
+        return self.results['phi'][-1]
+    
     def _rhs(self, phi, phidot, N):
         """Right-hand side of evolution equations in N = ln(a)"""
         rho_m = self.rho_m0_guess * np.exp(-3 * N)

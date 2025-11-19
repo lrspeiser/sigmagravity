@@ -1,0 +1,19 @@
+STATISTICAL TESTS: COHERENCE vs DARK MATTER
+================================================================================
+
+Dataset: 7 galaxies
+
+Wilcoxon signed-rank test (one-sided):
+  Coherence vs NFW: p = 0.078125
+  Coherence vs Best DM: p = 0.078125
+
+Paired t-test (one-sided):
+  Coherence vs NFW: p = 0.061577
+  Coherence vs Best DM: p = 0.061577
+
+Effect size (Cohen's d):
+  Coherence vs NFW: d = -0.929
+  Coherence vs Best DM: d = -0.929
+
+Win rate: 71.4%
+Interpretation: WEAK: Insufficient evidence

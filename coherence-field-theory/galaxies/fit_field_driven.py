@@ -184,8 +184,19 @@ class FieldDrivenSPARCFitter:
         rho_phi_final = solver.effective_density(phi_final, dphi_dr_final, 
                                                 convert_to_mass_density=True)
         
-        # Fit halo parameters for comparison
+        # Debug: print actual density values
+        print(f"\nField solution density range:")
+        print(f"  min(rho_phi) = {np.min(rho_phi_final):.2e} M_sun/kpc^3")
+        print(f"  max(rho_phi) = {np.max(rho_phi_final):.2e} M_sun/kpc^3")
+        print(f"  median(rho_phi) = {np.median(rho_phi_final):.2e} M_sun/kpc^3")
+        
+        # Fit halo parameters for comparison (with wider bounds if needed)
         rho_c0, R_c, chi2_fit = solver.fit_halo_parameters(rho_phi_final, r_grid)
+        
+        # If fit hit bounds, try with wider range
+        if rho_c0 <= 1e3 + 1e-6:  # Hit lower bound
+            print(f"\n[WARNING] Fit hit lower bound (rho_c0 = {rho_c0:.2e})")
+            print(f"  Actual density is too low - may need stronger coupling or different V0")
         
         dof = len(r_obs) - len(best_params)
         chi2_reduced = chi2_min / dof if dof > 0 else chi2_min

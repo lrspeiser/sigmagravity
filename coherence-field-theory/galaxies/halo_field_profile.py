@@ -122,12 +122,23 @@ class HaloFieldSolver:
         Returns:
         --------
         Veff : float or array
-            Effective potential
+            Effective potential (in cosmology units: H0²)
         """
-        # Convert coupling: β/M_Pl (units: 1/(M_sun/kpc^3) for consistency)
-        # Approximate: M_Pl ~ 2.4e18 kg ~ 1.2e12 M_sun
-        # But we want units to work out, so use dimensionless β and scale by density
-        coupling_term = self.beta * rho_b / M_PL_KPC  # Dimensionless coupling × density
+        # Coupling term: (β/M_Pl) * ρ_b
+        # In cosmology units, we need to convert ρ_b to cosmology units first
+        # ρ_b is in M_sun/kpc^3, need to convert to cosmology units (relative to ρ_crit)
+        # Critical density: ρ_crit = 3H0²/(8πG) ≈ 1.45e3 M_sun/kpc^3
+        H0_kms_kpc = 70.0 / 306.6  # km/s/kpc
+        H0_squared = H0_kms_kpc**2
+        rho_crit = 3 * H0_squared / (8 * np.pi * G)  # M_sun/kpc^3
+        
+        # Convert ρ_b to cosmology units (fraction of critical density)
+        rho_b_cosm = rho_b / rho_crit
+        
+        # Coupling: β * (ρ_b / ρ_crit) in cosmology units
+        # This gives coupling term in same units as V(φ) (H0²)
+        coupling_term = self.beta * rho_b_cosm
+        
         return self.V_func(phi) + coupling_term
     
     def dVeff_dphi(self, phi, rho_b):
@@ -399,8 +410,8 @@ class HaloFieldSolver:
         rho_c0_guess = rho_fit[0]  # Central density
         R_c_guess = np.median(r_fit)  # Typical scale
         
-        bounds = [(1e3, 1e12),  # rho_c0 (M_sun/kpc^3) - wide range
-                 (0.1, 50.0)]   # R_c (kpc)
+        bounds = [(1e-3, 1e12),  # rho_c0 (M_sun/kpc^3) - wider range (allow very low)
+                 (0.01, 50.0)]   # R_c (kpc) - allow very small
         
         result = minimize(chi_squared, [rho_c0_guess, R_c_guess], 
                          method='L-BFGS-B', bounds=bounds)
