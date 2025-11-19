@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data (don't commit large data files)
+*.dat
+*.fits
+*.hdf5
+*.h5
+
+# Outputs (figures and results)
+outputs/*.png
+outputs/*.pdf
+outputs/*.csv
+outputs/*.json
+!outputs/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+*.aux
+*.out
+
+# MCMC chains
+*.h5
+chains/
+
