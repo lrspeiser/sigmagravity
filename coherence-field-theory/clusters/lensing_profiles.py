@@ -342,7 +342,7 @@ def example_cluster():
     lens.set_coherence_profile_simple(rho_c0, R_c)
     
     print(f"\nCoherence halo:")
-    print(f"  ρ_c0 = {rho_c0:.2e} M_sun/kpc^3")
+    print(f"  rho_c0 = {rho_c0:.2e} M_sun/kpc^3")
     print(f"  R_c = {R_c} kpc")
     
     # Compute profiles

@@ -261,7 +261,7 @@ class CoherenceCosmology:
         # Plot H(z)
         plt.figure(figsize=(10, 6))
         plt.plot(z_vals, H_scalar, label='Coherence field model', linewidth=2)
-        plt.plot(z_vals, H_LCDM, '--', label=f'ΛCDM (Ωₘ={Omega_m0:.3f})', linewidth=2)
+        plt.plot(z_vals, H_LCDM, '--', label=f'LCDM (Omega_m={Omega_m0:.3f})', linewidth=2)
         plt.xlabel('Redshift z', fontsize=12)
         plt.ylabel('H(z) / H₀', fontsize=12)
         plt.title('Expansion History Comparison', fontsize=14)
@@ -276,7 +276,7 @@ class CoherenceCosmology:
         # Plot d_L(z)
         plt.figure(figsize=(10, 6))
         plt.plot(z_vals, dL_scalar, label='Coherence field model', linewidth=2)
-        plt.plot(z_vals, dL_LCDM, '--', label=f'ΛCDM (Ωₘ={Omega_m0:.3f})', linewidth=2)
+        plt.plot(z_vals, dL_LCDM, '--', label=f'LCDM (Omega_m={Omega_m0:.3f})', linewidth=2)
         plt.xlabel('Redshift z', fontsize=12)
         plt.ylabel('Luminosity Distance $d_L$ (c/H₀)', fontsize=12)
         plt.title('Luminosity Distance Comparison', fontsize=14)
@@ -318,8 +318,8 @@ if __name__ == '__main__':
     results = cosmo.evolve(N_start=-7.0, N_end=0.0, n_steps=4000)
     
     print(f"\nPresent-day density parameters:")
-    print(f"  Ω_m0  = {results['Omega_m0']:.4f}")
-    print(f"  Ω_φ0  = {results['Omega_phi0']:.4f}")
+    print(f"  Omega_m0  = {results['Omega_m0']:.4f}")
+    print(f"  Omega_phi0  = {results['Omega_phi0']:.4f}")
     print(f"  Total = {results['Omega_m0'] + results['Omega_phi0']:.4f}")
     
     # Plot density evolution
@@ -327,7 +327,7 @@ if __name__ == '__main__':
     cosmo.plot_density_evolution(savefig='density_evolution.png')
     
     # Compare with ΛCDM
-    print("\nComparing with ΛCDM...")
+    print("\nComparing with LCDM...")
     cosmo.compare_with_LCDM(z_max=2.0, savefig_prefix='cosmology_comparison')
     
     print("\n" + "=" * 60)

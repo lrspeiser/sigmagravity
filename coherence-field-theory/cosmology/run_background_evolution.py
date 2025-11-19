@@ -17,24 +17,24 @@ def main():
     
     # Test different parameter combinations
     param_sets = [
-        {'V0': 1.0e-6, 'lambda_param': 1.0, 'label': 'λ=1.0'},
-        {'V0': 1.5e-6, 'lambda_param': 0.8, 'label': 'λ=0.8'},
-        {'V0': 0.8e-6, 'lambda_param': 1.2, 'label': 'λ=1.2'},
+        {'V0': 1.0e-6, 'lambda_param': 1.0, 'label': 'lambda=1.0'},
+        {'V0': 1.5e-6, 'lambda_param': 0.8, 'label': 'lambda=0.8'},
+        {'V0': 0.8e-6, 'lambda_param': 1.2, 'label': 'lambda=1.2'},
     ]
     
     results_list = []
     
     for params in param_sets:
         print(f"\n{'=' * 70}")
-        print(f"Testing parameters: V0={params['V0']:.2e}, λ={params['lambda_param']:.2f}")
+        print(f"Testing parameters: V0={params['V0']:.2e}, lambda={params['lambda_param']:.2f}")
         print(f"{'=' * 70}")
         
         cosmo = CoherenceCosmology(V0=params['V0'], lambda_param=params['lambda_param'])
         results = cosmo.evolve()
         
         print(f"\nDensity parameters at a=1:")
-        print(f"  Ω_m0  = {results['Omega_m0']:.4f}")
-        print(f"  Ω_φ0  = {results['Omega_phi0']:.4f}")
+        print(f"  Omega_m0  = {results['Omega_m0']:.4f}")
+        print(f"  Omega_phi0  = {results['Omega_phi0']:.4f}")
         
         results['cosmo'] = cosmo
         results['params'] = params
@@ -95,7 +95,7 @@ def main():
     
     # Detailed analysis for best-fit parameters
     print(f"\n{'=' * 70}")
-    print("Detailed analysis for reference parameters (V0=1e-6, λ=1.0)...")
+    print("Detailed analysis for reference parameters (V0=1e-6, lambda=1.0)...")
     print(f"{'=' * 70}")
     
     cosmo_ref = CoherenceCosmology(V0=1.0e-6, lambda_param=1.0)
