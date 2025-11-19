@@ -1,0 +1,70 @@
+# Exclude large data directories
+data/
+outputs/
+output/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Exclude binary and large files
+*.npy
+*.npz
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+*.bin
+*.dat
+*.fits
+
+# Exclude image files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.tiff
+*.tif
+
+# Exclude archives
+*.zip
+*.tar
+*.gz
+*.bz2
+*.xz
+*.7z
+
+# Exclude media files
+*.mp4
+*.mov
+*.avi
+*.wav
+*.flac
+
+# Exclude documents
+*.pdf
+*.docx
+*.pptx
+*.xlsx
+
+# Exclude model files
+*.ckpt
+*.pt
+*.onnx
+
+# Exclude LaTeX build files
+*.aux
+*.log
+*.out
+*.synctex.gz
+
+# Exclude large result directories
+gravitywavebaseline/results/
+many_path_model/results/
+pca/results/
+time-coherence/results/
+coherence tests/results/
+
