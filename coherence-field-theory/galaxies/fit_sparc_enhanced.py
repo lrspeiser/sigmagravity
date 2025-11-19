@@ -231,8 +231,12 @@ class EnhancedSPARCFitter:
                     v_baryon_model[i] = np.sqrt(self.G * M_enc / r)
             
             # NFW halo
-            r_s = 200.0 / c  # Approximate r_s from virial radius (simplified)
-            rho_s = M200 / (4 * np.pi * r_s**3 * (np.log(1 + c) - c / (1 + c)))
+            # Use virial radius estimate: r_200 = (3*M200/(4*pi*rho_crit))^(1/3)
+            # For typical galaxy: rho_crit ~ 140 M_sun/kpc^3
+            # Simplified: use optical radius approximation
+            r_max = np.max(r_obs) * 2.0  # Use 2× max radius as virial estimate
+            r_s = r_max / c  # More realistic r_s estimate
+            rho_s = M200 / (4 * np.pi * r_s**3 * (np.log(1 + c) - c / (1 + c))) if c > 0 else 0
             
             v_NFW = np.zeros_like(r_obs)
             for i, r in enumerate(r_obs):
@@ -252,12 +256,12 @@ class EnhancedSPARCFitter:
             
             return chi2
         
-        # Bounds for NFW fit
+        # Bounds for NFW fit (fair comparison with coherence)
         bounds = [
             (M_disk_est*0.1, M_disk_est*10),  # M_disk
             (R_disk_est*0.3, R_disk_est*3),   # R_disk
             (M_disk_est*0.1, M_disk_est*100), # M200 (halo mass)
-            (1.0, 20.0)                       # c (concentration)
+            (1.0, 30.0)                       # c (concentration) - wider range
         ]
         
         p0 = [M_disk_est, R_disk_est, M_disk_est*10, 10.0]
@@ -344,8 +348,9 @@ class EnhancedSPARCFitter:
         # NFW halo
         M200 = params_nfw[2]
         c = params_nfw[3]
-        r_s = 200.0 / c
-        rho_s = M200 / (4 * np.pi * r_s**3 * (np.log(1 + c) - c / (1 + c)))
+        r_max = np.max(r_plot) * 2.0  # Use 2× max radius as virial estimate
+        r_s = r_max / c
+        rho_s = M200 / (4 * np.pi * r_s**3 * (np.log(1 + c) - c / (1 + c))) if c > 0 else 0
         
         v_NFW = np.zeros_like(r_plot)
         for i, r in enumerate(r_plot):
@@ -543,7 +548,59 @@ def fit_multiple_galaxies(galaxy_names, output_dir='../outputs'):
     print(f"  NFW DM: {nfw_wins}")
     print(f"  Ties: {ties}")
     
+    # Export to CSV
+    csv_file = os.path.join(output_dir, 'sparc_fit_summary.csv')
+    export_results_to_csv(results, csv_file)
+    print(f"\nSaved results to: {csv_file}")
+    
     return results
+
+
+def export_results_to_csv(results, csv_file):
+    """
+    Export fit results to CSV.
+    
+    Parameters:
+    -----------
+    results : list
+        List of fit results from fit_multiple_galaxies
+    csv_file : str
+        Output CSV filename
+    """
+    rows = []
+    
+    for r in results:
+        galaxy = r['galaxy']
+        co = r['coherence']
+        nfw = r['nfw']
+        
+        co_params = co['params']
+        nfw_params = nfw['params']
+        
+        ratio = co['chi2_reduced'] / nfw['chi2_reduced'] if nfw['chi2_reduced'] > 0 else np.inf
+        
+        rows.append({
+            'galaxy': galaxy,
+            'chi2_red_coherence': co['chi2_reduced'],
+            'chi2_red_nfw': nfw['chi2_reduced'],
+            'ratio': ratio,
+            'winner': 'Coherence' if ratio < 1.0 else ('NFW' if ratio > 1.1 else 'Tie'),
+            'M_disk_co': co_params[0],
+            'R_disk_co': co_params[1],
+            'rho_c0': co_params[2],
+            'R_c': co_params[3],
+            'M_disk_nfw': nfw_params[0],
+            'R_disk_nfw': nfw_params[1],
+            'M200': nfw_params[2],
+            'c': nfw_params[3],
+            'n_points': len(co['data']['r']),
+            'dof_coherence': co['dof'],
+            'dof_nfw': nfw['dof']
+        })
+    
+    df = pd.DataFrame(rows)
+    df.to_csv(csv_file, index=False)
+    print(f"\nExported {len(rows)} galaxy fits to CSV")
 
 
 if __name__ == '__main__':
