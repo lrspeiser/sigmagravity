@@ -205,10 +205,10 @@ class PPNCalculator:
         gamma, beta = self.compute_ppn_parameters()
         
         print(f"\nPPN Parameters:")
-        print(f"  γ = {gamma:.6f}  (GR: 1.0)")
-        print(f"  β = {beta:.6f}  (GR: 1.0)")
-        print(f"  |γ - 1| = {abs(gamma - 1):.2e}  (Constraint: < 2.3e-5)")
-        print(f"  |β - 1| = {abs(beta - 1):.2e}  (Constraint: < 8e-5)")
+        print(f"  gamma = {gamma:.6f}  (GR: 1.0)")
+        print(f"  beta  = {beta:.6f}  (GR: 1.0)")
+        print(f"  |gamma - 1| = {abs(gamma - 1):.2e}  (Constraint: < 2.3e-5)")
+        print(f"  |beta - 1|  = {abs(beta - 1):.2e}  (Constraint: < 8e-5)")
         
         # Field profile around Sun
         r_array = np.logspace(8, 12, 200)  # 100 km to 10,000 km
