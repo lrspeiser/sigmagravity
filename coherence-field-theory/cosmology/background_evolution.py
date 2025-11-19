@@ -25,7 +25,7 @@ class CoherenceCosmology:
     Units: 8πG/3 = 1, H0 = 1 at present
     """
     
-    def __init__(self, V0=1.0e-6, lambda_param=1.0, rho_m0_guess=1.0e-6):
+    def __init__(self, V0=1.0e-6, lambda_param=1.0, rho_m0_guess=1.0e-6, M4=None):
         """
         Parameters:
         -----------
@@ -35,17 +35,37 @@ class CoherenceCosmology:
             Exponential slope parameter
         rho_m0_guess : float
             Initial guess for present-day matter density
+        M4 : float, optional
+            Chameleon mass scale (M^5 term, if None, pure exponential)
+            For n=1 chameleon: V(φ) = V₀e^(-λφ) + M^5/φ
         """
         self.V0 = V0
         self.lambda_param = lambda_param
         self.rho_m0_guess = rho_m0_guess
+        self.M4 = M4
         
     def V(self, phi):
-        """Potential V(φ)"""
+        """
+        Potential V(φ).
+        
+        For chameleon (n=1): V(φ) = V₀e^(-λφ) + M^5/φ
+        Without chameleon: V(φ) = V₀e^(-λφ)
+        """
+        if self.M4 is not None:
+            phi_safe = np.maximum(np.abs(phi), 1e-10) * np.sign(phi) if phi != 0 else 1e-10
+            return self.V0 * np.exp(-self.lambda_param * phi) + self.M4**5 / phi_safe
         return self.V0 * np.exp(-self.lambda_param * phi)
     
     def dV_dphi(self, phi):
-        """Potential derivative dV/dφ"""
+        """
+        Potential derivative dV/dφ.
+        
+        For chameleon: dV/dφ = -λV₀e^(-λφ) - M^5/φ²
+        """
+        if self.M4 is not None:
+            phi_safe = np.maximum(np.abs(phi), 1e-10) * np.sign(phi) if phi != 0 else 1e-10
+            return (-self.lambda_param * self.V0 * np.exp(-self.lambda_param * phi) - 
+                    self.M4**5 / phi_safe**2)
         return -self.lambda_param * self.V(phi)
     
     def evolve(self, N_start=-7.0, N_end=0.0, n_steps=4000):
