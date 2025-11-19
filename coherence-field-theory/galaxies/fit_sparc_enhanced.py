@@ -299,6 +299,129 @@ class EnhancedSPARCFitter:
             'model': 'NFW'
         }
     
+    def fit_Burkert_dark_matter(self, data, method='global'):
+        """
+        Fit Burkert dark matter halo as baseline.
+        
+        Burkert profile: ρ(r) = ρ₀ / [(1 + r/r₀)(1 + (r/r₀)²)]
+        Often outperforms NFW in dwarf/LSB galaxies.
+        
+        Parameters:
+        -----------
+        data : dict
+            Galaxy data
+        method : str
+            'local' or 'global'
+            
+        Returns:
+        --------
+        result : dict
+            Best-fit parameters and diagnostics
+        """
+        print(f"\n{'=' * 70}")
+        print(f"FITTING BURKERT DARK MATTER: {data['name']}")
+        print(f"{'=' * 70}")
+        
+        r_obs = data['r']
+        v_obs = data['v_obs']
+        v_err = data['v_err']
+        v_baryon = data['v_baryon']
+        
+        # Estimate disk mass
+        mid_idx = len(r_obs) // 2
+        M_disk_est = v_baryon[mid_idx]**2 * r_obs[mid_idx] / self.G
+        R_disk_est = np.median(r_obs) / 2.5
+        
+        def chi_squared(params):
+            """Chi-squared for Burkert + baryons."""
+            M_disk, R_disk, rho_0, r_0 = params
+            
+            if M_disk <= 0 or R_disk <= 0 or rho_0 <= 0 or r_0 <= 0:
+                return 1e10
+            
+            # Baryonic component
+            v_baryon_model = np.zeros_like(r_obs)
+            for i, r in enumerate(r_obs):
+                if r > 0:
+                    M_enc = M_disk * (1 - np.exp(-r / R_disk) * (1 + r / R_disk))
+                    v_baryon_model[i] = np.sqrt(self.G * M_enc / r)
+            
+            # Burkert halo: ρ(r) = ρ₀ / [(1 + r/r₀)(1 + (r/r₀)²)]
+            v_Burkert = np.zeros_like(r_obs)
+            for i, r in enumerate(r_obs):
+                if r <= 0:
+                    continue
+                
+                # Burkert density at radius r
+                x = r / r_0
+                if x < 0.001:
+                    rho_r = rho_0
+                else:
+                    rho_r = rho_0 / ((1 + x) * (1 + x**2))
+                
+                # Enclosed mass for Burkert (integrate numerically)
+                r_vals = np.linspace(0, r, 200)
+                x_vals = r_vals / r_0
+                mask = x_vals > 0.001
+                rho_vals = np.zeros_like(r_vals)
+                rho_vals[mask] = rho_0 / ((1 + x_vals[mask]) * (1 + x_vals[mask]**2))
+                rho_vals[~mask] = rho_0
+                
+                # Enclosed mass: M(<r) = ∫₀ʳ 4πr'² ρ(r') dr'
+                M_enc = trapz(4 * np.pi * r_vals**2 * rho_vals, r_vals)
+                v_Burkert[i] = np.sqrt(self.G * M_enc / r)
+            
+            # Total velocity
+            v_model = np.sqrt(v_baryon_model**2 + v_Burkert**2)
+            
+            # Chi-squared
+            chi2 = np.sum(((v_obs - v_model) / v_err)**2)
+            
+            return chi2
+        
+        # Bounds for Burkert fit
+        bounds = [
+            (M_disk_est*0.1, M_disk_est*10),  # M_disk
+            (R_disk_est*0.3, R_disk_est*3),   # R_disk
+            (1e6, 1e11),                       # rho_0 (M_sun/kpc^3) - wide range
+            (0.5, 50.0)                       # r_0 (kpc) - typical core radius
+        ]
+        
+        p0 = [M_disk_est, R_disk_est, 1e8, 5.0]
+        
+        if method == 'local':
+            result = minimize(chi_squared, p0, method='L-BFGS-B', bounds=bounds)
+            best_params = result.x
+            chi2_min = result.fun
+        else:
+            result = differential_evolution(chi_squared, bounds, 
+                                          maxiter=200, seed=42, 
+                                          workers=1, disp=False, polish=True)
+            best_params = result.x
+            chi2_min = result.fun
+        
+        dof = len(r_obs) - len(best_params)
+        chi2_reduced = chi2_min / dof if dof > 0 else chi2_min
+        
+        print(f"\nBest-fit parameters:")
+        print(f"  M_disk = {best_params[0]:.2e} M_sun")
+        print(f"  R_disk = {best_params[1]:.2f} kpc")
+        print(f"  rho_0  = {best_params[2]:.2e} M_sun/kpc^3")
+        print(f"  r_0    = {best_params[3]:.2f} kpc")
+        print(f"\nGoodness of fit:")
+        print(f"  chi^2 = {chi2_min:.2f}")
+        print(f"  DOF = {dof}")
+        print(f"  chi^2_red = {chi2_reduced:.3f}")
+        
+        return {
+            'params': best_params,
+            'chi2': chi2_min,
+            'chi2_reduced': chi2_reduced,
+            'dof': dof,
+            'data': data,
+            'model': 'Burkert'
+        }
+    
     def compare_fits(self, coherence_result, nfw_result, savefig=None):
         """
         Compare coherence vs NFW fits.
@@ -445,9 +568,9 @@ class EnhancedSPARCFitter:
         print(f"{'=' * 70}")
 
 
-def fit_galaxy_with_comparison(galaxy_name, output_dir='../outputs'):
+def fit_galaxy_with_comparison(galaxy_name, output_dir='../outputs', include_burkert=True):
     """
-    Fit a galaxy with both coherence and NFW models.
+    Fit a galaxy with coherence, NFW, and optionally Burkert models.
     
     Parameters:
     -----------
@@ -455,11 +578,13 @@ def fit_galaxy_with_comparison(galaxy_name, output_dir='../outputs'):
         Galaxy name
     output_dir : str
         Output directory for plots
+    include_burkert : bool
+        Whether to include Burkert halo fit
         
     Returns:
     --------
     results : dict
-        Both fit results
+        All fit results
     """
     os.makedirs(output_dir, exist_ok=True)
     
@@ -477,18 +602,40 @@ def fit_galaxy_with_comparison(galaxy_name, output_dir='../outputs'):
     # Fit NFW dark matter
     nfw_result = fitter.fit_NFW_dark_matter(data, method='global')
     
-    # Compare fits
-    savefig = os.path.join(output_dir, f'{galaxy_name}_coherence_vs_NFW.png')
-    fitter.compare_fits(coherence_result, nfw_result, savefig=savefig)
+    # Fit Burkert if requested
+    burkert_result = None
+    if include_burkert:
+        try:
+            burkert_result = fitter.fit_Burkert_dark_matter(data, method='global')
+        except Exception as e:
+            print(f"\nWARNING: Burkert fit failed for {galaxy_name}: {e}")
+            burkert_result = None
     
-    return {
+    # Find best DM halo
+    dm_results = [nfw_result]
+    if burkert_result is not None:
+        dm_results.append(burkert_result)
+    
+    best_dm = min(dm_results, key=lambda x: x['chi2_reduced'])
+    
+    # Compare fits (use best DM halo)
+    savefig = os.path.join(output_dir, f'{galaxy_name}_coherence_vs_DM.png')
+    fitter.compare_fits(coherence_result, best_dm, savefig=savefig)
+    
+    result = {
         'galaxy': galaxy_name,
         'coherence': coherence_result,
-        'nfw': nfw_result
+        'nfw': nfw_result,
+        'best_dm': best_dm
     }
+    
+    if burkert_result is not None:
+        result['burkert'] = burkert_result
+    
+    return result
 
 
-def fit_multiple_galaxies(galaxy_names, output_dir='../outputs'):
+def fit_multiple_galaxies(galaxy_names, output_dir='../outputs', include_burkert=True):
     """
     Fit multiple galaxies and create summary.
     
@@ -508,7 +655,7 @@ def fit_multiple_galaxies(galaxy_names, output_dir='../outputs'):
     
     for galaxy_name in galaxy_names:
         try:
-            result = fit_galaxy_with_comparison(galaxy_name, output_dir)
+            result = fit_galaxy_with_comparison(galaxy_name, output_dir, include_burkert=include_burkert)
             results.append(result)
         except Exception as e:
             print(f"\nERROR fitting {galaxy_name}: {e}")
@@ -519,34 +666,51 @@ def fit_multiple_galaxies(galaxy_names, output_dir='../outputs'):
     print(f"\n{'=' * 80}")
     print("SUMMARY OF FITS")
     print(f"{'=' * 80}")
-    print(f"{'Galaxy':<15} {'Coherence chi^2_red':<20} {'NFW chi^2_red':<18} {'Ratio':<10} {'Winner'}")
+    print(f"{'Galaxy':<15} {'Coherence':<12} {'NFW':<12} {'Burkert':<12} {'Best DM':<12} {'Ratio':<10} {'Winner'}")
     print("-" * 80)
     
     for r in results:
         co_chi2 = r['coherence']['chi2_reduced']
         nfw_chi2 = r['nfw']['chi2_reduced']
-        ratio = co_chi2 / nfw_chi2
+        best_dm_chi2 = r['best_dm']['chi2_reduced']
+        best_dm_model = r['best_dm']['model']
+        
+        burkert_chi2 = r.get('burkert', {}).get('chi2_reduced', np.nan)
+        burkert_str = f"{burkert_chi2:.3f}" if not np.isnan(burkert_chi2) else "N/A"
+        
+        ratio = co_chi2 / best_dm_chi2 if best_dm_chi2 > 0 else np.inf
         
         if ratio < 1.0:
             winner = "Coherence"
         elif ratio < 1.1:
             winner = "Tie"
         else:
-            winner = "NFW"
+            winner = f"DM ({best_dm_model})"
         
-        print(f"{r['galaxy']:<15} {co_chi2:>18.3f}  {nfw_chi2:>16.3f}  {ratio:>8.3f}  {winner}")
+        print(f"{r['galaxy']:<15} {co_chi2:>10.3f}  {nfw_chi2:>10.3f}  {burkert_str:>10}  "
+              f"{best_dm_chi2:>10.3f} ({best_dm_model[:1]})  {ratio:>8.3f}  {winner}")
     
     print(f"{'=' * 80}")
     
     # Count wins
-    coherence_wins = sum(1 for r in results if r['coherence']['chi2_reduced'] < r['nfw']['chi2_reduced'])
-    nfw_wins = sum(1 for r in results if r['coherence']['chi2_reduced'] > r['nfw']['chi2_reduced'])
-    ties = len(results) - coherence_wins - nfw_wins
+    coherence_wins = sum(1 for r in results if r['coherence']['chi2_reduced'] < r['best_dm']['chi2_reduced'])
+    dm_wins = sum(1 for r in results if r['coherence']['chi2_reduced'] > r['best_dm']['chi2_reduced'])
+    ties = len(results) - coherence_wins - dm_wins
+    
+    # Count NFW vs Burkert wins
+    nfw_wins = sum(1 for r in results if 'burkert' in r and 
+                  r['nfw']['chi2_reduced'] < r['burkert']['chi2_reduced'])
+    burkert_wins = sum(1 for r in results if 'burkert' in r and 
+                      r['nfw']['chi2_reduced'] > r['burkert']['chi2_reduced'])
     
     print(f"\nWin counts:")
-    print(f"  Coherence: {coherence_wins}")
-    print(f"  NFW DM: {nfw_wins}")
+    print(f"  Coherence: {coherence_wins}/{len(results)} ({100*coherence_wins/len(results):.0f}%)")
+    print(f"  Best DM: {dm_wins}/{len(results)} ({100*dm_wins/len(results):.0f}%)")
     print(f"  Ties: {ties}")
+    if include_burkert:
+        print(f"\nDM comparison (NFW vs Burkert):")
+        print(f"  NFW wins: {nfw_wins}")
+        print(f"  Burkert wins: {burkert_wins}")
     
     # Export to CSV
     csv_file = os.path.join(output_dir, 'sparc_fit_summary.csv')
@@ -579,12 +743,26 @@ def export_results_to_csv(results, csv_file):
         
         ratio = co['chi2_reduced'] / nfw['chi2_reduced'] if nfw['chi2_reduced'] > 0 else np.inf
         
+        # Best DM halo
+        best_dm = r.get('best_dm', nfw)
+        best_dm_model = best_dm.get('model', 'NFW')
+        best_dm_chi2 = best_dm['chi2_reduced']
+        ratio_vs_best = co['chi2_reduced'] / best_dm_chi2 if best_dm_chi2 > 0 else np.inf
+        
+        # Burkert parameters
+        burkert_params = r.get('burkert', {}).get('params', [np.nan]*4)
+        burkert_chi2 = r.get('burkert', {}).get('chi2_reduced', np.nan)
+        
         rows.append({
             'galaxy': galaxy,
             'chi2_red_coherence': co['chi2_reduced'],
             'chi2_red_nfw': nfw['chi2_reduced'],
-            'ratio': ratio,
-            'winner': 'Coherence' if ratio < 1.0 else ('NFW' if ratio > 1.1 else 'Tie'),
+            'chi2_red_burkert': burkert_chi2,
+            'chi2_red_best_dm': best_dm_chi2,
+            'best_dm_model': best_dm_model,
+            'ratio_vs_nfw': co['chi2_reduced'] / nfw['chi2_reduced'] if nfw['chi2_reduced'] > 0 else np.inf,
+            'ratio_vs_best_dm': ratio_vs_best,
+            'winner': 'Coherence' if ratio_vs_best < 1.0 else (f'DM ({best_dm_model})' if ratio_vs_best > 1.1 else 'Tie'),
             'M_disk_co': co_params[0],
             'R_disk_co': co_params[1],
             'rho_c0': co_params[2],
@@ -592,10 +770,13 @@ def export_results_to_csv(results, csv_file):
             'M_disk_nfw': nfw_params[0],
             'R_disk_nfw': nfw_params[1],
             'M200': nfw_params[2],
-            'c': nfw_params[3],
+            'c_nfw': nfw_params[3],
+            'rho_0_burkert': burkert_params[2] if len(burkert_params) > 2 else np.nan,
+            'r_0_burkert': burkert_params[3] if len(burkert_params) > 3 else np.nan,
             'n_points': len(co['data']['r']),
             'dof_coherence': co['dof'],
-            'dof_nfw': nfw['dof']
+            'dof_nfw': nfw['dof'],
+            'dof_burkert': r.get('burkert', {}).get('dof', np.nan)
         })
     
     df = pd.DataFrame(rows)
