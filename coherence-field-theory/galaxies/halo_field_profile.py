@@ -39,7 +39,8 @@ class HaloFieldSolver:
         V_eff(φ) = V(φ) + (β/M_Pl) ρ_b(r)
     """
     
-    def __init__(self, V0, lambda_param, beta, M4=None, phi_inf=None):
+    def __init__(self, V0, lambda_param, beta, M4=None, phi_inf=None, 
+                 M4_galaxy=5e-2, rho_thresh=1e5):
         """
         Initialize field solver.
         
@@ -52,22 +53,40 @@ class HaloFieldSolver:
         beta : float
             Matter coupling (dimensionless)
         M4 : float, optional
-            Chameleon mass scale (if None, use pure exponential)
+            Fixed chameleon mass scale (if None and density-dependent, use M4_galaxy)
+            If not None, use this value everywhere
         phi_inf : float, optional
             Cosmological field value at infinity (if None, use 0)
+        M4_galaxy : float, optional
+            Chameleon mass scale in galaxies (for density-dependent mode)
+            Default: 5e-2 (from scan results)
+        rho_thresh : float, optional
+            Density threshold for chameleon activation (M_sun/kpc^3)
+            Below this: M4 = 0 (pure exponential, cosmology)
+            Above this: M4 = M4_galaxy (chameleon, galaxies)
+            Default: 1e5 M_sun/kpc^3 (between cosmic ~1e3 and galaxy ~1e7-1e8)
         """
         self.V0 = V0
         self.lambda_param = lambda_param
         self.beta = beta
-        self.M4 = M4
+        self.M4_fixed = M4  # Fixed M4 if provided
+        self.M4_galaxy = M4_galaxy  # Galaxy M4 for density-dependent mode
+        self.rho_thresh = rho_thresh  # Threshold density
         self.phi_inf = phi_inf if phi_inf is not None else 0.0
         
-        # Potential function
+        # Potential function selection
+        # Will be set dynamically based on density if using density-dependent M4
         if M4 is not None:
+            # Fixed M4 - use chameleon everywhere
+            self.M4 = M4
+            self.use_density_dependent = False
             self.V_func = self._V_chameleon
             self.dV_dphi = self._dV_chameleon_dphi
             self.d2V_dphi2 = self._d2V_chameleon_dphi2
         else:
+            # Density-dependent M4 - use exponential for now, will switch dynamically
+            self.M4 = None
+            self.use_density_dependent = True
             self.V_func = self._V_exponential
             self.dV_dphi = self._dV_exponential_dphi
             self.d2V_dphi2 = self._d2V_exponential_dphi2
@@ -84,29 +103,83 @@ class HaloFieldSolver:
         """d²V/dφ² for exponential potential."""
         return self.lambda_param**2 * self.V0 * np.exp(-self.lambda_param * phi)
     
-    def _V_chameleon(self, phi):
-        """Chameleon potential: V(φ) = V₀ e^(-λφ) + M⁵/φ."""
+    def _M4_density_dependent(self, rho_b):
+        """
+        Compute M4 based on density for environment-dependent screening.
+        
+        In cosmology (low density): M4 → 0 (pure exponential)
+        In galaxies (high density): M4 → M4_galaxy (chameleon)
+        """
+        if self.use_density_dependent:
+            if rho_b < self.rho_thresh:
+                return 0.0  # Pure exponential in cosmology
+            else:
+                return self.M4_galaxy  # Chameleon in galaxies
+        else:
+            return self.M4  # Use fixed M4
+    
+    def _V_chameleon(self, phi, rho_b=None):
+        """
+        Chameleon potential: V(φ) = V₀ e^(-λφ) + M⁵/φ.
+        
+        If density-dependent, M4 depends on rho_b.
+        """
+        if rho_b is not None and self.use_density_dependent:
+            M4_local = self._M4_density_dependent(rho_b)
+        else:
+            M4_local = self.M4
+        
+        if M4_local is None or M4_local == 0:
+            # Pure exponential
+            return self.V0 * np.exp(-self.lambda_param * phi)
+        
         if np.any(phi <= 0):
             # Regularize near φ=0
             phi_safe = np.maximum(phi, 1e-6)
-            return self.V0 * np.exp(-self.lambda_param * phi) + self.M4**5 / phi_safe
-        return self.V0 * np.exp(-self.lambda_param * phi) + self.M4**5 / phi
+            return self.V0 * np.exp(-self.lambda_param * phi) + M4_local**5 / phi_safe
+        return self.V0 * np.exp(-self.lambda_param * phi) + M4_local**5 / phi
     
-    def _dV_chameleon_dphi(self, phi):
-        """dV/dφ for chameleon potential."""
+    def _dV_chameleon_dphi(self, phi, rho_b=None):
+        """
+        dV/dφ for chameleon potential.
+        
+        If density-dependent, M4 depends on rho_b.
+        """
+        if rho_b is not None and self.use_density_dependent:
+            M4_local = self._M4_density_dependent(rho_b)
+        else:
+            M4_local = self.M4
+        
+        if M4_local is None or M4_local == 0:
+            # Pure exponential
+            return -self.lambda_param * self.V0 * np.exp(-self.lambda_param * phi)
+        
         if np.any(phi <= 0):
             phi_safe = np.maximum(phi, 1e-6)
-            return -self.lambda_param * self.V0 * np.exp(-self.lambda_param * phi) - self.M4**5 / phi_safe**2
-        return -self.lambda_param * self.V0 * np.exp(-self.lambda_param * phi) - self.M4**5 / phi**2
+            return -self.lambda_param * self.V0 * np.exp(-self.lambda_param * phi) - M4_local**5 / phi_safe**2
+        return -self.lambda_param * self.V0 * np.exp(-self.lambda_param * phi) - M4_local**5 / phi**2
     
-    def _d2V_chameleon_dphi2(self, phi):
-        """d²V/dφ² for chameleon potential."""
+    def _d2V_chameleon_dphi2(self, phi, rho_b=None):
+        """
+        d²V/dφ² for chameleon potential.
+        
+        If density-dependent, M4 depends on rho_b.
+        """
+        if rho_b is not None and self.use_density_dependent:
+            M4_local = self._M4_density_dependent(rho_b)
+        else:
+            M4_local = self.M4
+        
+        if M4_local is None or M4_local == 0:
+            # Pure exponential
+            return self.lambda_param**2 * self.V0 * np.exp(-self.lambda_param * phi)
+        
         if np.any(phi <= 0):
             phi_safe = np.maximum(phi, 1e-6)
             return (self.lambda_param**2 * self.V0 * np.exp(-self.lambda_param * phi) + 
-                    2 * self.M4**5 / phi_safe**3)
+                    2 * M4_local**5 / phi_safe**3)
         return (self.lambda_param**2 * self.V0 * np.exp(-self.lambda_param * phi) + 
-                2 * self.M4**5 / phi**3)
+                2 * M4_local**5 / phi**3)
     
     def Veff(self, phi, rho_b):
         """
@@ -136,17 +209,18 @@ class HaloFieldSolver:
         # Convert ρ_b to cosmology units (fraction of critical density)
         rho_b_cosm = rho_b / rho_crit
         
-        # Coupling: A(φ) * (ρ_b / ρ_crit) = e^(βφ/M_Pl) * (ρ_b / ρ_crit)
-        # Normalize φ by a characteristic scale to prevent exponential blowup
-        # Use M_Pl normalization: φ_norm = φ / φ_scale where φ_scale ~ 1
-        # For now, use small β to keep coupling manageable
-        # A(φ) = e^(β * φ) where β is already dimensionless in our units
-        # But we need to prevent overflow, so use tanh or limit
+        # Coupling: A(φ) * (ρ_b / ρ_crit) = e^(βφ) * (ρ_b / ρ_crit)
         phi_safe = np.clip(phi, -10.0, 10.0)  # Prevent overflow
         A_phi = np.exp(self.beta * phi_safe)
         coupling_term = A_phi * rho_b_cosm
         
-        return self.V_func(phi) + coupling_term
+        # V(φ) - if density-dependent chameleon, pass rho_b
+        if self.use_density_dependent:
+            V_phi = self.V_func(phi, rho_b=rho_b)
+        else:
+            V_phi = self.V_func(phi)
+        
+        return V_phi + coupling_term
     
     def dVeff_dphi(self, phi, rho_b):
         """
@@ -168,7 +242,13 @@ class HaloFieldSolver:
         A_phi = np.exp(self.beta * phi_safe)
         coupling_derivative = self.beta * A_phi * rho_b_cosm
         
-        return self.dV_dphi(phi) + coupling_derivative
+        # dV/dφ - if density-dependent chameleon, pass rho_b
+        if self.use_density_dependent:
+            dV = self.dV_dphi(phi, rho_b=rho_b)
+        else:
+            dV = self.dV_dphi(phi)
+        
+        return dV + coupling_derivative
     
     def d2Veff_dphi2(self, phi, rho_b):
         """
@@ -192,7 +272,13 @@ class HaloFieldSolver:
         A_phi = np.exp(self.beta * phi_safe)
         coupling_second_deriv = self.beta**2 * A_phi * rho_b_cosm
         
-        return self.d2V_dphi2(phi) + coupling_second_deriv
+        # d²V/dφ² - if density-dependent chameleon, pass rho_b
+        if self.use_density_dependent:
+            d2V = self.d2V_dphi2(phi, rho_b=rho_b)
+        else:
+            d2V = self.d2V_dphi2(phi)
+        
+        return d2V + coupling_second_deriv
     
     def effective_mass_squared(self, phi, rho_b):
         """
