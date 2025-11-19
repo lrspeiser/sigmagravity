@@ -294,7 +294,7 @@ class HaloFieldSolver:
         
         return phi, dphi_dr
     
-    def effective_density(self, phi, dphi_dr):
+    def effective_density(self, phi, dphi_dr, convert_to_mass_density=True):
         """
         Compute effective density: ρ_φ(r) = ½(∇φ)² + V(φ).
         
@@ -304,6 +304,8 @@ class HaloFieldSolver:
             Scalar field profile
         dphi_dr : array
             Gradient dφ/dr
+        convert_to_mass_density : bool
+            If True, convert V(φ) from energy density to mass density
             
         Returns:
         --------
@@ -311,12 +313,33 @@ class HaloFieldSolver:
             Effective density (M_sun/kpc^3)
         """
         # Kinetic term: ½(∇φ)² = ½(dφ/dr)²
+        # Units: (dφ/dr)² has units of energy density if φ is dimensionless
         kinetic = 0.5 * dphi_dr**2
         
         # Potential term: V(φ)
+        # Units: V(φ) typically in energy density units
         potential = self.V_func(phi)
         
-        # Total (in same units as V, convert to density if needed)
+        # Convert energy density to mass density if needed
+        # In cosmology, V(φ) is in units where H0² = 8πG/3 * ρ_crit
+        # So V has dimensions of energy density = ρ_crit (in cosmology units)
+        # Need to convert to physical mass density (M_sun/kpc³)
+        if convert_to_mass_density:
+            # Critical density: ρ_crit = 3H0²/(8πG)
+            # H0 ≈ 70 km/s/Mpc ≈ 0.228 km/s/kpc
+            H0_kms_kpc = 70.0 / 306.6  # km/s/kpc
+            H0_squared = H0_kms_kpc**2  # (km/s)²/kpc²
+            # G = 4.30091e-6 (km/s)² kpc / M_sun
+            rho_crit = 3 * H0_squared / (8 * np.pi * G)  # M_sun/kpc³
+            # V(φ) in cosmology units is relative to ρ_crit
+            # So multiply by ρ_crit to get physical density
+            potential = potential * rho_crit  # Convert to mass density (M_sun/kpc³)
+            kinetic = kinetic * rho_crit  # Convert kinetic term too
+        else:
+            # Assume V(φ) already in M_sun/kpc^3
+            pass
+        
+        # Total density
         rho_phi = kinetic + potential
         
         return rho_phi
