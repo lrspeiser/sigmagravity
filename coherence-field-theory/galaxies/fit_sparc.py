@@ -192,8 +192,8 @@ class SPARCFitter:
         print(f"  rho_c0 = {best_params[2]:.4f} (dimensionless)")
         print(f"  R_c    = {best_params[3]:.2f} kpc")
         print(f"\nGoodness of fit:")
-        print(f"  χ² = {chi2_min:.2f}")
-        print(f"  χ²_red = {chi2_reduced:.2f}")
+        print(f"  chi^2 = {chi2_min:.2f}")
+        print(f"  chi^2_red = {chi2_reduced:.2f}")
         
         return {
             'params': best_params,
