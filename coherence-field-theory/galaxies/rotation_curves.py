@@ -31,6 +31,7 @@ class GalaxyRotationCurve:
             Gravitational constant in convenient units
         """
         self.G = G
+        self.halo_type = None  # Initialize halo type
         
     def set_baryon_profile(self, M_disk, R_disk, M_bulge=0.0, R_bulge=0.0):
         """
@@ -104,6 +105,25 @@ class GalaxyRotationCurve:
         dphi_dr = self._numerical_derivative(self.phi_profile, r)
         return 0.5 * dphi_dr**2 + self.V_func(phi)
     
+    def set_coherence_halo_gpm(self, rho_coh_func, gpm_params=None):
+        """
+        Set coherence halo from GPM (Gravitational Polarization with Memory).
+        
+        Parameters:
+        -----------
+        rho_coh_func : callable
+            Coherence density function ρ_coh(r) from GPM
+        gpm_params : dict, optional
+            Diagnostic parameters (α, ℓ, Q, σ_v, etc.)
+        """
+        self.rho_coh_func = rho_coh_func
+        self.gpm_params = gpm_params or {}
+        self.halo_type = 'gpm'
+    
+    def rho_coherence_gpm(self, r):
+        """Coherence density from GPM microphysics."""
+        return self.rho_coh_func(r)
+    
     def _numerical_derivative(self, func, x, h=1e-5):
         """Numerical derivative."""
         return (func(x + h) - func(x - h)) / (2 * h)
@@ -165,6 +185,8 @@ class GalaxyRotationCurve:
                 M_coh = self.mass_enclosed(ri, self.rho_coherence_simple)
             elif self.halo_type == 'field':
                 M_coh = self.mass_enclosed(ri, self.rho_coherence_field)
+            elif self.halo_type == 'gpm':
+                M_coh = self.mass_enclosed(ri, self.rho_coherence_gpm)
             else:
                 M_coh = 0.0
             
