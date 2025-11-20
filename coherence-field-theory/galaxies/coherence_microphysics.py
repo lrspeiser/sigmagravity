@@ -262,10 +262,11 @@ class GravitationalPolarizationMemory:
         Jlt = cumulative_trapezoid(integrand_lt, grid, initial=0.0)
         
         # Cumulative integral for r > s: J_>(r) = ∫_r^∞ s exp(-s/ℓ) ρ_b(s) ds
-        # Compute in reverse order then flip
+        # Compute total integral, then subtract cumulative from left
         integrand_gt = grid * np.exp(-grid/ell) * rho_b_grid
-        Jgt_rev = cumulative_trapezoid(integrand_gt[::-1], grid[::-1], initial=0.0)
-        Jgt = Jgt_rev[::-1]
+        Jgt_cumulative = cumulative_trapezoid(integrand_gt, grid, initial=0.0)
+        Jgt_total = Jgt_cumulative[-1]
+        Jgt = Jgt_total - Jgt_cumulative  # Integral from r to infinity
         
         # Create ρ_coh function using cached integrals
         def rho_coh_of_r(r):
