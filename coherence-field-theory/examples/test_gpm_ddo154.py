@@ -181,17 +181,21 @@ def test_gpm_on_ddo154():
     
     # 4. Create GPM model
     print("\n4. Creating GPM coherence halo...")
+    # Use validated parameters from batch test (80% success rate)
     gpm = GravitationalPolarizationMemory(
-        alpha0=0.9,
+        alpha0=0.3,         # Tuned from 0.9
         ell0_kpc=2.0,
         Qstar=2.0,
         sigmastar=25.0,
         nQ=2.0,
-        nsig=2.0
+        nsig=2.0,
+        p=0.5,              # ell ~ R_disk^0.5 scaling
+        Mstar_Msun=2e8,     # Mass-dependent gating
+        nM=1.5
     )
     
     rho_coh_func, gpm_params = gpm.make_rho_coh(
-        rho_b, Q=Q, sigma_v=sigma_v, R_disk=R_disk
+        rho_b, Q=Q, sigma_v=sigma_v, R_disk=R_disk, M_total=M_total
     )
     
     print(f"   Effective α: {gpm_params['alpha']:.3f} ({gpm_params['gate_strength']:.1%} gate)")
@@ -222,10 +226,9 @@ def test_gpm_on_ddo154():
     # 6. Compute χ²
     print("\n6. Computing fit quality...")
     
-    # Interpolate model to data points
-    from scipy.interpolate import interp1d
-    v_model_interp = interp1d(r_model, v_model, kind='cubic', fill_value='extrapolate')
-    v_model_at_data = v_model_interp(r_data)
+    # Interpolate model to data points using PCHIP (shape-preserving, no overshoots)
+    from scipy.interpolate import PchipInterpolator
+    v_model_at_data = PchipInterpolator(r_model, v_model)(r_data)
     
     # χ² for baryons only
     chi2_baryon = np.sum((v_bar - v_obs)**2 / (v_err**2 + 1e-10))

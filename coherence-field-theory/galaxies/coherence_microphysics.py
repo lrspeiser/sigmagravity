@@ -216,6 +216,9 @@ class GravitationalPolarizationMemory:
         """
         Create coherence density function from baryon density.
         
+        Uses analytic spherical Yukawa convolution with pre-computed
+        cumulative integrals for numerical stability and speed.
+        
         Parameters
         ----------
         rho_b_func : callable
@@ -242,23 +245,46 @@ class GravitationalPolarizationMemory:
         params : dict
             Dictionary with effective α, ℓ, and diagnostics
         """
+        from scipy.integrate import cumulative_trapezoid
+        
         # Get environment-gated parameters
         alpha, ell = self.environment_factors(Q, sigma_v, R_disk, M_total, cs, kappa)
         
-        # Create ρ_coh function
+        # Pre-compute on fixed grid for stability
+        r_max_safe = max(r_max, 10.0*ell, 5.0*R_disk)
+        grid = np.geomspace(1e-4, r_max_safe, 2048)
+        
+        # Evaluate baryon density on grid
+        rho_b_grid = np.array([rho_b_func(g) for g in grid])
+        
+        # Cumulative integral for r < s: J_<(r) = ∫_0^r s sinh(s/ℓ) ρ_b(s) ds
+        integrand_lt = grid * np.sinh(grid/ell) * rho_b_grid
+        Jlt = cumulative_trapezoid(integrand_lt, grid, initial=0.0)
+        
+        # Cumulative integral for r > s: J_>(r) = ∫_r^∞ s exp(-s/ℓ) ρ_b(s) ds
+        # Compute in reverse order then flip
+        integrand_gt = grid * np.exp(-grid/ell) * rho_b_grid
+        Jgt_rev = cumulative_trapezoid(integrand_gt[::-1], grid[::-1], initial=0.0)
+        Jgt = Jgt_rev[::-1]
+        
+        # Create ρ_coh function using cached integrals
         def rho_coh_of_r(r):
-            if np.isscalar(r):
-                return self.yukawa_convolution_spherical(
-                    r, rho_b_func, alpha, ell, r_max=r_max
-                )
-            # Vectorized version
-            r_arr = np.asarray(r)
-            return np.array([
-                self.yukawa_convolution_spherical(
-                    ri, rho_b_func, alpha, ell, r_max=r_max
-                ) 
-                for ri in r_arr
-            ])
+            """
+            Analytic formula: ρ_coh(r) = α/(ℓ²r) [e^(-r/ℓ) J_<(r) + sinh(r/ℓ) J_>(r)]
+            """
+            r_safe = np.maximum(np.asarray(r), 1e-6)
+            scalar_input = np.isscalar(r)
+            r_safe = np.atleast_1d(r_safe)
+            
+            # Interpolate pre-computed integrals
+            Jlt_r = np.interp(r_safe, grid, Jlt)
+            Jgt_r = np.interp(r_safe, grid, Jgt)
+            
+            # Apply analytic formula
+            pref = alpha / (ell**2 * r_safe)
+            result = pref * (np.exp(-r_safe/ell) * Jlt_r + np.sinh(r_safe/ell) * Jgt_r)
+            
+            return float(result[0]) if scalar_input else result
         
         # Diagnostic parameters
         params = {
@@ -267,8 +293,9 @@ class GravitationalPolarizationMemory:
             'Q': Q,
             'sigma_v': sigma_v,
             'R_disk': R_disk,
-            'gate_strength': alpha / self.alpha0,  # fraction of max susceptibility
-            'coherence_scale': ell / R_disk if R_disk > 0 else 0  # ℓ/R_d ratio
+            'M_total': M_total,
+            'gate_strength': alpha / self.alpha0 if self.alpha0 > 0 else 0.0,
+            'coherence_scale': ell / R_disk if R_disk > 0 else 0.0
         }
         
         return rho_coh_of_r, params
