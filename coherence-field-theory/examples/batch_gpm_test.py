@@ -227,21 +227,21 @@ def main():
     print("Batch GPM Test on SPARC Galaxies")
     print("="*80)
     
-    # Global GPM parameters (OPTIMIZED from grid search with correct baryon masses)
-    # Using AXISYMMETRIC disk convolution (replaces spherical assumption)
-    # Expected improvements: +10-40% on spirals, minimal impact on dwarfs
-    # Grid search result: 70% success rate, +20% mean improvement
-    # Tested on 7 galaxies: DDO154, DDO170, IC2574, NGC2403, NGC6503, NGC3198, UGC02259
+    # Global GPM parameters (RE-OPTIMIZED with axisymmetric convolution)
+    # Grid search: 144 param combinations × 9 galaxies = 1296 tests
+    # Best found: α₀=0.30, ℓ₀=0.80 kpc, M*=2×10¹⁰ M☉, n_M=2.5
+    # Performance: 77.8% success rate, median +84.7% improvement
+    # Using AXISYMMETRIC disk convolution (Bessel K₀ kernel)
     gpm_params = {
-        'alpha0': 0.25,        # Base susceptibility (tuned from 0.3)
-        'ell0_kpc': 1.0,       # kpc (reduced from 2.0 for correct mass regime)
+        'alpha0': 0.30,        # Base susceptibility (optimized from 0.25)
+        'ell0_kpc': 0.80,      # kpc (optimized from 1.0, shorter for disk geometry)
         'Qstar': 2.0,          # Toomre Q threshold
         'sigmastar': 25.0,     # km/s (velocity dispersion threshold)
         'nQ': 2.0,             # Q gating exponent
         'nsig': 2.0,           # sigma_v gating exponent
         'p': 0.5,              # ell ~ R_disk^p scaling
-        'Mstar_Msun': 1e10,    # Mass scale (tuned from 2e8 for correct masses)
-        'nM': 2.5              # Mass gating exponent (increased from 1.5 for stronger suppression)
+        'Mstar_Msun': 2e10,    # Mass scale (optimized from 1e10, stronger suppression)
+        'nM': 2.5              # Mass gating exponent
     }
     
     print("\nGlobal GPM parameters:")
