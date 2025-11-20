@@ -45,6 +45,8 @@ def create_baryon_density(gal, galaxy_name):
         Total baryon mass
     R_disk : float
         Disk scale length
+    SBdisk : array
+        Surface brightness profile (needed for Q estimation)
     """
     from data_integration.load_real_data import RealDataLoader
     
@@ -121,28 +123,30 @@ def create_baryon_density(gal, galaxy_name):
     def rho_b(r_eval):
         return rho_disk(r_eval) + rho_gas(r_eval)
     
-    return rho_b, M_disk + M_gas_total, R_disk
+    return rho_b, M_disk + M_gas_total, R_disk, SBdisk
 
 
-def estimate_environment(gal, morphology='dwarf'):
+def estimate_environment_proper(gal, SBdisk, R_disk, M_total, galaxy_name='DDO154'):
     """
-    Estimate Q and σ_v for a galaxy.
+    Estimate Q and σ_v from actual SPARC data.
     
-    For now, use typical values based on morphology.
-    Later: compute from SPARC data.
+    Uses EnvironmentEstimator to compute proper Toomre Q and
+    velocity dispersion from observables.
     """
-    if morphology == 'dwarf':
-        Q = 1.5
-        sigma_v = 8.0  # km/s
-    elif morphology == 'lsb':
-        Q = 1.8
-        sigma_v = 12.0
-    else:  # spiral
-        v_max = np.max(gal['v_obs'])
-        Q = 2.0
-        sigma_v = max(v_max / 10, 15.0)
+    from galaxies.environment_estimator import EnvironmentEstimator
     
-    return Q, sigma_v
+    estimator = EnvironmentEstimator()
+    morphology = estimator.classify_morphology(gal, M_total, R_disk)
+    
+    Q, sigma_v = estimator.estimate_from_sparc(
+        gal, SBdisk, R_disk, M_L=0.5, morphology=morphology
+    )
+    
+    print(f"   Morphology: {morphology}")
+    print(f"   Q method: Toomre Q = κσ_R/(3.36 G Σ) from SBdisk")
+    print(f"   σ_v method: scaling relation σ_v/v_c ~ {0.06 if morphology=='dwarf' else 0.17}")
+    
+    return Q, sigma_v, morphology
 
 
 def test_gpm_on_ddo154():
@@ -167,17 +171,17 @@ def test_gpm_on_ddo154():
     
     # 2. Create baryon density
     print("\n2. Creating baryon density...")
-    rho_b, M_total, R_disk = create_baryon_density(gal, 'DDO154')
+    rho_b, M_total, R_disk, SBdisk = create_baryon_density(gal, 'DDO154')
     
-    print(f"   Total baryon mass: {M_total:.2e} M☉")
+    print(f"   Total baryon mass: {M_total:.2e} Msun")
     print(f"   Disk scale length: {R_disk:.2f} kpc")
     
-    # 3. Estimate environment
-    print("\n3. Estimating environment...")
-    Q, sigma_v = estimate_environment(gal, morphology='dwarf')
+    # 3. Estimate environment from data
+    print("\n3. Estimating environment from SPARC data...")
+    Q, sigma_v, morphology = estimate_environment_proper(gal, SBdisk, R_disk, M_total, 'DDO154')
     
     print(f"   Q (Toomre): {Q:.2f}")
-    print(f"   σ_v: {sigma_v:.1f} km/s")
+    print(f"   sigma_v: {sigma_v:.1f} km/s")
     
     # 4. Create GPM model
     print("\n4. Creating GPM coherence halo...")
