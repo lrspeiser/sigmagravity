@@ -67,9 +67,10 @@ class AxiSymmetricYukawaConvolver:
         self.h_z = h_z
         self.G_kpc = 4.302e-3  # G in kpc (km/s)^2 / M_sun
     
-    def yukawa_kernel_2d(self, R: float, Rp: float, ell: float) -> float:
+    def yukawa_kernel_2d(self, R: float, Rp: float, ell: float, 
+                        apply_thickness_correction: bool = True) -> float:
         """
-        2D Yukawa kernel for disk midplane.
+        2D Yukawa kernel for disk midplane with optional finite-thickness correction.
         
         This computes the effective kernel at the midplane (z=0) after
         integrating over the vertical structure of the source disk.
@@ -79,7 +80,12 @@ class AxiSymmetricYukawaConvolver:
         where r = sqrt((R-R')² + z'²) and G_ℓ(r) = exp(-r/ℓ)/(4π ℓ² r).
         
         For numerical stability, we use the modified Bessel function form:
-        K(R, R') ≈ K₀(|R-R'|/ℓ) / (2π ℓ²) for thin disks
+        K(R, R') ≈ K₀(|R-R'|/ℓ) / (2π ℓ²) for infinitesimally thin disks
+        
+        FINITE-THICKNESS CORRECTION:
+        For finite h_z, the Fourier-space kernel picks up a factor exp(-k*h_z)
+        where k = 1/ℓ. In real space, this modifies K₀ slightly for h_z ~ ℓ.
+        We apply: K_thick = K_thin × exp(-h_z/ℓ) as first-order correction.
         
         Parameters
         ----------
@@ -89,6 +95,8 @@ class AxiSymmetricYukawaConvolver:
             Source radius (kpc)
         ell : float
             Coherence length (kpc)
+        apply_thickness_correction : bool
+            If True, apply exp(-h_z/ℓ) correction for finite disk thickness
             
         Returns
         -------
@@ -102,7 +110,7 @@ class AxiSymmetricYukawaConvolver:
         if dR < 1e-6:
             # K₀(x) ~ -ln(x/2) - γ for small x, but we need regularization
             # Use average over small disk instead
-            return self._kernel_regularized(R, ell)
+            return self._kernel_regularized(R, ell, apply_thickness_correction)
         
         # Modified Bessel function K₀ for thin disk approximation
         # This is exact for infinitesimally thin disk (h_z → 0)
@@ -118,9 +126,16 @@ class AxiSymmetricYukawaConvolver:
         
         kernel = K0_val / (2.0 * np.pi * ell**2)
         
+        # Apply finite-thickness correction
+        # For disks with h_z ~ ℓ, the vertical extent softens the kernel
+        if apply_thickness_correction and self.h_z > 0:
+            thickness_factor = np.exp(-self.h_z / ell)
+            kernel *= thickness_factor
+        
         return kernel
     
-    def _kernel_regularized(self, R: float, ell: float) -> float:
+    def _kernel_regularized(self, R: float, ell: float, 
+                           apply_thickness_correction: bool = True) -> float:
         """
         Regularized kernel for R ≈ R' (self-interaction).
         
@@ -132,7 +147,14 @@ class AxiSymmetricYukawaConvolver:
         x_eps = eps / ell
         integral = ell**2 * x_eps * k1(x_eps)
         avg_kernel = integral / (np.pi * eps**2)
-        return avg_kernel / (2.0 * np.pi * ell**2)
+        kernel = avg_kernel / (2.0 * np.pi * ell**2)
+        
+        # Apply finite-thickness correction
+        if apply_thickness_correction and self.h_z > 0:
+            thickness_factor = np.exp(-self.h_z / ell)
+            kernel *= thickness_factor
+        
+        return kernel
     
     def yukawa_kernel_3d_vertical(self, R: float, Rp: float, ell: float) -> float:
         """
@@ -190,7 +212,8 @@ class AxiSymmetricYukawaConvolver:
                                  ell: float,
                                  R_target: np.ndarray,
                                  R_max: float = 50.0,
-                                 use_3d: bool = False) -> np.ndarray:
+                                 use_3d: bool = False,
+                                 apply_thickness_correction: bool = True) -> np.ndarray:
         """
         Compute coherence density via axisymmetric convolution.
         
@@ -233,7 +256,11 @@ class AxiSymmetricYukawaConvolver:
         
         for i, R in enumerate(R_target):
             # Compute kernel K(R, R') for all R' on grid
-            K_grid = np.array([kernel_func(R, Rp, ell) for Rp in R_grid])
+            if use_3d:
+                K_grid = np.array([kernel_func(R, Rp, ell) for Rp in R_grid])
+            else:
+                K_grid = np.array([kernel_func(R, Rp, ell, apply_thickness_correction) 
+                                 for Rp in R_grid])
             
             # Integrand: R' × Σ(R') × K(R, R')
             integrand = R_grid * Sigma_grid * K_grid
@@ -248,7 +275,8 @@ class AxiSymmetricYukawaConvolver:
                                alpha: float,
                                ell: float,
                                R_target: np.ndarray,
-                               R_max: float = 50.0) -> np.ndarray:
+                               R_max: float = 50.0,
+                               apply_thickness_correction: bool = True) -> np.ndarray:
         """
         Compute coherence density from 3D baryon density.
         
@@ -272,6 +300,8 @@ class AxiSymmetricYukawaConvolver:
             Target radii (kpc)
         R_max : float
             Maximum integration radius (kpc)
+        apply_thickness_correction : bool
+            Apply finite-thickness correction to kernel
             
         Returns
         -------
@@ -285,7 +315,65 @@ class AxiSymmetricYukawaConvolver:
         
         # Convolve surface density
         rho_coh = self.convolve_surface_density(
-            Sigma_func, alpha, ell, R_target, R_max, use_3d=False
+            Sigma_func, alpha, ell, R_target, R_max, use_3d=False,
+            apply_thickness_correction=apply_thickness_correction
+        )
+        
+        return rho_coh
+    
+    def convolve_disk_plus_bulge(self,
+                                Sigma_disk_func: Callable[[float], float],
+                                Sigma_bulge_func: Callable[[float], float],
+                                alpha: float,
+                                ell: float,
+                                R_target: np.ndarray,
+                                R_max: float = 50.0,
+                                apply_thickness_correction: bool = True) -> np.ndarray:
+        """
+        Compute coherence density from disk + bulge components.
+        
+        This treats the bulge as a separate mass component that also
+        contributes to the coherence source term. The total coherence
+        density is the convolution of (disk + bulge) surface density.
+        
+        ρ_coh(R) = α ∫ R' dR' [Σ_disk(R') + Σ_bulge(R')] K(R, R'; ℓ)
+        
+        WHY THIS MATTERS:
+        For massive spirals like NGC2841 and NGC0801, the bulge dominates
+        the inner region. Including bulge mass in the coherence source
+        ensures the coherence halo tracks total baryon geometry, not just
+        the disk.
+        
+        Parameters
+        ----------
+        Sigma_disk_func : callable
+            Disk surface density Σ_disk(R) in M☉/kpc²
+        Sigma_bulge_func : callable  
+            Bulge surface density Σ_bulge(R) in M☉/kpc²
+        alpha : float
+            Coherence susceptibility
+        ell : float
+            Coherence length (kpc)
+        R_target : array
+            Target radii (kpc)
+        R_max : float
+            Maximum integration radius (kpc)
+        apply_thickness_correction : bool
+            Apply finite-thickness correction (primarily for disk)
+            
+        Returns
+        -------
+        rho_coh : array
+            Coherence volume density at R_target, z=0 (M☉/kpc³)
+        """
+        # Combined surface density: disk + bulge
+        def Sigma_total_func(R):
+            return Sigma_disk_func(R) + Sigma_bulge_func(R)
+        
+        # Convolve total surface density
+        rho_coh = self.convolve_surface_density(
+            Sigma_total_func, alpha, ell, R_target, R_max, use_3d=False,
+            apply_thickness_correction=apply_thickness_correction
         )
         
         return rho_coh
