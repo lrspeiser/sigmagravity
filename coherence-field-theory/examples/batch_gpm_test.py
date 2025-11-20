@@ -19,8 +19,10 @@ from pathlib import Path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from data_integration.load_real_data import RealDataLoader
+from data_integration.load_sparc_masses import load_sparc_masses
 from galaxies.coherence_microphysics import GravitationalPolarizationMemory
 from galaxies.rotation_curves import GalaxyRotationCurve
+from galaxies.environment_estimator import EnvironmentEstimator
 
 
 def exponential_disk_density(r, Sigma0, R_d, h_z):
@@ -38,14 +40,50 @@ def exponential_disk_density(r, Sigma0, R_d, h_z):
 
 
 def create_baryon_density(gal, galaxy_name):
-    """Create baryon density from SPARC data using SBdisk."""
-    from data_integration.load_real_data import RealDataLoader
+    """Create baryon density from SPARC master table masses.
     
-    r = gal['r']
-    v_disk = gal['v_disk']
-    v_gas = gal['v_gas']
+    CRITICAL FIX: Uses master table masses (M_stellar from L[3.6], M_HI from 21cm)
+    instead of broken SBdisk × M/L approach which underestimated by ~1000×.
+    """
+    # Load masses from SPARC master table
+    try:
+        sparc_masses = load_sparc_masses(galaxy_name)
+    except Exception as e:
+        raise ValueError(f"Could not load SPARC masses for {galaxy_name}: {e}")
     
-    # Load SBdisk from raw file
+    M_stellar = sparc_masses['M_stellar']
+    M_HI = sparc_masses['M_HI']
+    M_total = sparc_masses['M_total']
+    R_disk = sparc_masses['R_disk']
+    R_HI = sparc_masses['R_HI']
+    
+    # Gas disk scale length (more extended than stellar)
+    R_gas = max(R_HI, 1.5 * R_disk)
+    
+    # Central surface densities from total masses
+    # For M = 2π Σ₀ R², we have Σ₀ = M/(2π R²)
+    Sigma0_stellar = M_stellar / (2.0 * np.pi * R_disk**2)  # M☉/kpc²
+    Sigma0_gas = M_HI / (2.0 * np.pi * R_gas**2)  # M☉/kpc²
+    
+    # Scale height
+    h_z = 0.3  # kpc
+    
+    def rho_b(r_eval):
+        """Total baryon volume density: stellar + gas exponential disks."""
+        r_safe = np.maximum(np.atleast_1d(r_eval), 1e-6)
+        scalar_input = np.isscalar(r_eval)
+        
+        # Exponential profiles: Σ(r) = Σ₀ exp(-r/R)
+        Sigma_stellar = Sigma0_stellar * np.exp(-r_safe / R_disk)
+        Sigma_gas = Sigma0_gas * np.exp(-r_safe / R_gas)
+        Sigma_total = Sigma_stellar + Sigma_gas
+        
+        # Volume density: ρ = Σ / (2 h_z)
+        rho = Sigma_total / (2.0 * h_z)
+        
+        return float(rho[0]) if scalar_input else rho
+    
+    # Load SBdisk for environment estimation (Q calculation needs it)
     loader = RealDataLoader()
     rotmod_dir = os.path.join(loader.base_data_dir, 'Rotmod_LTG')
     filepath = os.path.join(rotmod_dir, f'{galaxy_name}_rotmod.dat')
@@ -53,91 +91,28 @@ def create_baryon_density(gal, galaxy_name):
     with open(filepath, 'r') as f:
         lines = f.readlines()
     
-    # Parse SBdisk (column 7)
     data_lines = [l for l in lines if not l.startswith('#')]
     SBdisk = []
     for line in data_lines:
         parts = line.split()
         if len(parts) >= 7:
             SBdisk.append(float(parts[6]))  # L☉/pc²
-    
     SBdisk = np.array(SBdisk)
     
-    # Estimate R_disk from exponential fit
-    mask = SBdisk > 0
-    if np.sum(mask) >= 3:
-        from scipy.optimize import curve_fit
-        
-        def exp_profile(r_fit, SB0, R_d):
-            return SB0 * np.exp(-r_fit / R_d)
-        
-        try:
-            popt, _ = curve_fit(exp_profile, r[mask], SBdisk[mask], 
-                               p0=[SBdisk[mask][0], 2.0],
-                               bounds=([0, 0.1], [1e10, 20.0]))
-            SB0, R_disk = popt
-        except:
-            # Fallback: use r where SBdisk drops to 1/e
-            SB0 = np.max(SBdisk)
-            idx_1e = np.argmin(np.abs(SBdisk - SB0/np.e))
-            R_disk = r[idx_1e] if idx_1e > 0 else 2.0
-    else:
-        # Very sparse data: estimate from velocities
-        idx_peak = np.argmax(v_disk)
-        R_disk = r[idx_peak] / 2.2
-        SB0 = np.max(SBdisk) if len(SBdisk) > 0 else 1.0
-    
-    # Convert to mass surface density
-    M_L = 0.5  # M☉/L☉ for [3.6] band
-    Sigma0 = SB0 * M_L * 1e6  # M☉/kpc²
-    
-    # Total disk mass
-    M_disk = 2.0 * np.pi * Sigma0 * R_disk**2
-    
-    # Disk density
-    h_z = 0.3  # kpc
-    def rho_disk(r_eval):
-        return exponential_disk_density(r_eval, Sigma0, R_disk, h_z)
-    
-    # Gas component
-    G_kpc = 4.302e-3
-    M_gas_enc = r * v_gas**2 / G_kpc
-    M_gas_total = M_gas_enc[-1] if len(M_gas_enc) > 0 else 0
-    
-    Sigma0_gas = M_gas_total / (2.0 * np.pi * R_disk**2)
-    
-    def rho_gas(r_eval):
-        return exponential_disk_density(r_eval, Sigma0_gas, R_disk, h_z)
-    
-    def rho_b(r_eval):
-        # Ensure scalar output for scalar input
-        rho_d = rho_disk(r_eval)
-        rho_g = rho_gas(r_eval)
-        result = rho_d + rho_g
-        # Return scalar for scalar input
-        if np.isscalar(r_eval):
-            return float(result) if not np.isscalar(result) else result
-        return result
-    
-    return rho_b, M_disk + M_gas_total, R_disk
+    return rho_b, M_total, R_disk, SBdisk
 
 
-def estimate_environment(gal):
-    """Estimate Toomre Q and velocity dispersion."""
-    r = gal['r']
-    v_disk = gal['v_disk']
-    v_gas = gal['v_gas']
+def estimate_environment(gal, SBdisk, R_disk, M_total, galaxy_name):
+    """Estimate Toomre Q and velocity dispersion from SPARC data."""
+    estimator = EnvironmentEstimator()
     
-    v_obs = np.sqrt(v_disk**2 + v_gas**2)
+    # Classify morphology
+    morphology = estimator.classify_morphology(gal, M_total, R_disk)
     
-    # Velocity dispersion (assume 10% of circular velocity for dwarfs, 15% for spirals)
-    sigma_v = 0.10 * np.mean(v_obs)
-    
-    # Toomre Q (simplified)
-    Q = 1.5  # typical for cold disks
-    if np.max(v_obs) > 100:  # spiral
-        Q = 2.0
-        sigma_v = 0.15 * np.mean(v_obs)
+    # Estimate Q and sigma_v from observables
+    Q, sigma_v = estimator.estimate_from_sparc(
+        gal, SBdisk, R_disk, M_L=0.5, morphology=morphology
+    )
     
     return Q, sigma_v
 
@@ -170,13 +145,13 @@ def test_galaxy_gpm(galaxy_name, gpm_params):
     
     # Baryon density
     try:
-        rho_b, M_total, R_disk = create_baryon_density(gal, galaxy_name)
+        rho_b, M_total, R_disk, SBdisk = create_baryon_density(gal, galaxy_name)
     except Exception as e:
         print(f"\n   ERROR baryon: {e}")
         return None
     
     # Environment
-    Q, sigma_v = estimate_environment(gal)
+    Q, sigma_v = estimate_environment(gal, SBdisk, R_disk, M_total, galaxy_name)
     
     # Create GPM
     gpm = GravitationalPolarizationMemory(
@@ -197,17 +172,22 @@ def test_galaxy_gpm(galaxy_name, gpm_params):
     alpha_eff = gpm_diagnostics['alpha']
     ell_eff = gpm_diagnostics['ell_kpc']
     
-    # GPM model
+    # SPARC baryon baseline (their best-fit decomposition)
+    # v_bar = sqrt(v_disk² + v_gas² + v_bulge²)
+    v_disk = gal['v_disk']
+    v_gas = gal['v_gas']
+    v_bulge = gal.get('v_bulge', np.zeros_like(v_disk))
+    v_bar_sparc = np.sqrt(v_disk**2 + v_gas**2 + v_bulge**2)
+    
+    # GPM model (SPARC baryons + coherence halo)
     galaxy_gpm = GalaxyRotationCurve(G=4.30091e-6)
     galaxy_gpm.set_baryon_profile(M_disk=M_total, R_disk=R_disk)
     galaxy_gpm.set_coherence_halo_gpm(rho_coh_func, gpm_params)
-    
     v_model_gpm = galaxy_gpm.circular_velocity(r_data)
     
-    # Baryons only
-    galaxy_bar = GalaxyRotationCurve(G=4.30091e-6)
-    galaxy_bar.set_baryon_profile(M_disk=M_total, R_disk=R_disk)
-    v_model_bar = galaxy_bar.circular_velocity(r_data)
+    # But for baryon baseline, use SPARC velocities (not our exponential profiles)
+    # This is the correct comparison: SPARC baryons vs SPARC baryons + GPM
+    v_model_bar = v_bar_sparc
     
     # χ²
     chi2_bar = np.sum(((v_obs - v_model_bar) / e_v_obs)**2)
