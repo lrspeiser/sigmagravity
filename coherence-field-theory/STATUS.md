@@ -1,8 +1,31 @@
 # Coherence Field Theory - Project Status
 
-**Created**: November 19, 2025  
-**Status**: Framework Complete, Ready for Data Fitting  
-**Commit**: 289005f
+**Date**: November 19, 2025  
+**Status**: Ready for Global Viability Scan (Decisive Test)  
+**Latest**: Exponential + Chameleon Viability Test
+
+---
+
+## 🚀 Quick Start - Run Viability Scan NOW
+
+```bash
+cd C:\Users\henry\dev\sigmagravity\coherence-field-theory
+python run_viability_scan.py
+```
+
+**This is the decisive test**: Does V(φ) = V₀e^(-λφ) + M⁵/φ work globally?
+
+**Read first**:
+- **WHERE_WE_ARE_NOW.md** - Executive summary (start here!)
+- **QUICK_REFERENCE.md** - One-page command reference
+- **THEORY_LEVELS.md** - Fundamental vs phenomenology
+- **VIABILITY_SCAN_README.md** - Full scan documentation
+
+**Key insight**: The M₄(ρ) density-dependence was a diagnostic tool, not the final theory. This scan tests whether a fundamental constant-M theory can deliver the same behavior naturally.
+
+**Runtime**: 30 minutes | **Outcome**: Either find viable parameters or rule out this potential
+
+---
 
 ## What Was Built
 

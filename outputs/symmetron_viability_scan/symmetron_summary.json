@@ -1,0 +1,8 @@
+{
+  "total_tested": 10000,
+  "passed_cosmology": 0,
+  "passed_screening": 0,
+  "passed_ppn": 0,
+  "passed_all": 0,
+  "viable_fraction": 0.0
+}
