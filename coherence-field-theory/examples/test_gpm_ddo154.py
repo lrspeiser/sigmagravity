@@ -191,8 +191,20 @@ def test_gpm_on_ddo154():
         nM=1.5
     )
     
+    # Disk scale height for axisymmetric convolution
+    h_z = 0.3  # kpc (typical thin disk)
+    
+    # Test BOTH spherical and axisymmetric modes
+    print("\n   Testing spherical kernel...")
+    rho_coh_func_sph, gpm_params_sph = gpm.make_rho_coh(
+        rho_b, Q=Q, sigma_v=sigma_v, R_disk=R_disk, M_total=M_total,
+        use_axisymmetric=False
+    )
+    
+    print("   Testing axisymmetric kernel...")
     rho_coh_func, gpm_params = gpm.make_rho_coh(
-        rho_b, Q=Q, sigma_v=sigma_v, R_disk=R_disk, M_total=M_total
+        rho_b, Q=Q, sigma_v=sigma_v, R_disk=R_disk, M_total=M_total,
+        use_axisymmetric=True, h_z=h_z
     )
     
     print(f"   Effective α: {gpm_params['alpha']:.3f} ({gpm_params['gate_strength']:.1%} gate)")
@@ -201,13 +213,18 @@ def test_gpm_on_ddo154():
     # 5. Compute rotation curves
     print("\n5. Computing rotation curves...")
     
-    # Create GalaxyRotationCurve object
+    # Create GalaxyRotationCurve objects for both kernels
+    galaxy_sph = GalaxyRotationCurve(G=4.30091e-6)
+    galaxy_sph.set_baryon_profile(M_disk=M_total, R_disk=R_disk)
+    galaxy_sph.set_coherence_halo_gpm(rho_coh_func_sph, gpm_params_sph)
+    
     galaxy = GalaxyRotationCurve(G=4.30091e-6)
     galaxy.set_baryon_profile(M_disk=M_total, R_disk=R_disk)
     galaxy.set_coherence_halo_gpm(rho_coh_func, gpm_params)
     
     # Compute velocities
     r_model = np.linspace(r_data.min(), r_data.max(), 100)
+    v_model_sph = galaxy_sph.circular_velocity(r_model)
     v_model = galaxy.circular_velocity(r_model)
     
     # Baryons only
@@ -225,6 +242,7 @@ def test_gpm_on_ddo154():
     
     # Interpolate model to data points using PCHIP (shape-preserving, no overshoots)
     from scipy.interpolate import PchipInterpolator
+    v_model_sph_at_data = PchipInterpolator(r_model, v_model_sph)(r_data)
     v_model_at_data = PchipInterpolator(r_model, v_model)(r_data)
     
     # χ² for baryons only
@@ -232,17 +250,28 @@ def test_gpm_on_ddo154():
     dof = len(r_data)
     chi2_red_baryon = chi2_baryon / dof
     
-    # χ² for baryons + GPM
+    # χ² for baryons + GPM (spherical)
+    chi2_gpm_sph = np.sum((v_model_sph_at_data - v_obs)**2 / (v_err**2 + 1e-10))
+    chi2_red_gpm_sph = chi2_gpm_sph / dof
+    
+    # χ² for baryons + GPM (axisymmetric)
     chi2_gpm = np.sum((v_model_at_data - v_obs)**2 / (v_err**2 + 1e-10))
     chi2_red_gpm = chi2_gpm / dof
     
     print(f"   Baryons only:")
     print(f"      χ² = {chi2_baryon:.1f}, χ²_red = {chi2_red_baryon:.2f}")
-    print(f"   Baryons + GPM:")
+    print(f"   Baryons + GPM (spherical):")
+    print(f"      χ² = {chi2_gpm_sph:.1f}, χ²_red = {chi2_red_gpm_sph:.2f}")
+    print(f"   Baryons + GPM (axisymmetric):")
     print(f"      χ² = {chi2_gpm:.1f}, χ²_red = {chi2_red_gpm:.2f}")
     
+    improvement_sph = (chi2_baryon - chi2_gpm_sph) / chi2_baryon * 100
     improvement = (chi2_baryon - chi2_gpm) / chi2_baryon * 100
-    print(f"   Improvement: {improvement:.1f}%")
+    improvement_vs_sph = (chi2_gpm_sph - chi2_gpm) / chi2_gpm_sph * 100
+    
+    print(f"\n   Improvement (spherical): {improvement_sph:.1f}%")
+    print(f"   Improvement (axisymmetric): {improvement:.1f}%")
+    print(f"   Axisymmetric vs spherical: {improvement_vs_sph:+.1f}%")
     
     # 7. Plot
     print("\n7. Creating plot...")
@@ -255,23 +284,24 @@ def test_gpm_on_ddo154():
     ax.errorbar(r_data, v_obs, yerr=v_err, fmt='ko', 
                label='Observed', alpha=0.6, capsize=3, markersize=5)
     ax.plot(r_data, v_bar, 'b--', label='Baryons only (SPARC)', linewidth=2, alpha=0.7)
-    ax.plot(r_model, v_model_baryon, 'b:', label='Baryons model', linewidth=2, alpha=0.5)
-    ax.plot(r_model, v_model, 'r-', label=f'Baryons + GPM (χ²_red={chi2_red_gpm:.2f})', linewidth=2.5)
+    ax.plot(r_model, v_model_sph, 'orange', linestyle=':', label=f'GPM spherical (χ²_red={chi2_red_gpm_sph:.2f})', linewidth=2)
+    ax.plot(r_model, v_model, 'r-', label=f'GPM axisymmetric (χ²_red={chi2_red_gpm:.2f})', linewidth=2.5)
     ax.set_xlabel('Radius (kpc)', fontsize=11)
     ax.set_ylabel('Velocity (km/s)', fontsize=11)
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
-    ax.set_title('Rotation Curve')
+    ax.set_title('Rotation Curve Comparison')
     
     # Right: Density profiles
     ax = axes[1]
     r_dens = np.linspace(0.1, r_data.max(), 100)
     rho_b_vals = np.array([rho_b(ri) for ri in r_dens])
+    rho_coh_vals_sph = rho_coh_func_sph(r_dens)
     rho_coh_vals = rho_coh_func(r_dens)
     
     ax.semilogy(r_dens, rho_b_vals, 'b-', label='ρ_baryons', linewidth=2)
-    ax.semilogy(r_dens, rho_coh_vals, 'r-', label='ρ_coherence (GPM)', linewidth=2)
-    ax.semilogy(r_dens, rho_b_vals + rho_coh_vals, 'k--', label='ρ_total', linewidth=1.5, alpha=0.7)
+    ax.semilogy(r_dens, rho_coh_vals_sph, 'orange', linestyle=':', label='ρ_coh (spherical)', linewidth=2)
+    ax.semilogy(r_dens, rho_coh_vals, 'r-', label='ρ_coh (axisymmetric)', linewidth=2)
     ax.set_xlabel('Radius (kpc)', fontsize=11)
     ax.set_ylabel('Density (M☉/kpc³)', fontsize=11)
     ax.legend(fontsize=9)
