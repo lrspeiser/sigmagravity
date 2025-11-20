@@ -212,12 +212,14 @@ class GravitationalPolarizationMemory:
                     M_total: Optional[float] = None,
                     cs: Optional[float] = None,
                     kappa: Optional[float] = None,
-                    r_max: float = 50.0) -> Tuple[Callable[[float], float], Dict]:
+                    r_max: float = 50.0,
+                    use_axisymmetric: bool = False,
+                    h_z: float = 0.3) -> Tuple[Callable[[float], float], Dict]:
         """
         Create coherence density function from baryon density.
         
-        Uses analytic spherical Yukawa convolution with pre-computed
-        cumulative integrals for numerical stability and speed.
+        Uses analytic Yukawa convolution - either spherical (fast) or
+        axisymmetric disk geometry (more accurate for spirals).
         
         Parameters
         ----------
@@ -237,6 +239,11 @@ class GravitationalPolarizationMemory:
             Epicyclic frequency (km/s/kpc)
         r_max : float
             Maximum radius for integration (kpc)
+        use_axisymmetric : bool
+            If True, use axisymmetric disk convolution (more accurate, slightly slower)
+            If False, use spherical convolution (faster, good for dwarfs)
+        h_z : float
+            Disk scale height (kpc), only used if use_axisymmetric=True
             
         Returns
         -------
@@ -249,6 +256,39 @@ class GravitationalPolarizationMemory:
         
         # Get environment-gated parameters
         alpha, ell = self.environment_factors(Q, sigma_v, R_disk, M_total, cs, kappa)
+        
+        # Choose convolution method
+        if use_axisymmetric:
+            # Use axisymmetric disk convolution (more accurate for spirals)
+            from galaxies.coherence_microphysics_axisym import AxiSymmetricYukawaConvolver
+            
+            convolver = AxiSymmetricYukawaConvolver(h_z=h_z)
+            
+            def rho_coh_of_r(r):
+                """Axisymmetric disk convolution."""
+                r_arr = np.atleast_1d(r)
+                scalar_input = np.isscalar(r)
+                
+                rho_coh = convolver.convolve_volume_density(
+                    rho_b_func, alpha, ell, r_arr, R_max=r_max
+                )
+                
+                return float(rho_coh[0]) if scalar_input else rho_coh
+            
+            params = {
+                'alpha': alpha,
+                'ell_kpc': ell,
+                'Q': Q,
+                'sigma_v': sigma_v,
+                'R_disk': R_disk,
+                'M_total': M_total,
+                'gate_strength': alpha / self.alpha0 if self.alpha0 > 0 else 0.0,
+                'coherence_scale': ell / R_disk if R_disk > 0 else 0.0,
+                'geometry': 'axisymmetric',
+                'h_z': h_z
+            }
+            
+            return rho_coh_of_r, params
         
         # Pre-compute on fixed grid for stability
         r_max_safe = max(r_max, 10.0*ell, 5.0*R_disk)
