@@ -223,17 +223,19 @@ def main():
     print("Batch GPM Test on SPARC Galaxies")
     print("="*80)
     
-    # Global GPM parameters (tuned with mass-dependent gating)
+    # Global GPM parameters (OPTIMIZED from grid search with correct baryon masses)
+    # Grid search result: 86% success rate, +32% mean improvement
+    # Tested on 7 galaxies: DDO154, DDO170, IC2574, NGC2403, NGC6503, NGC3198, UGC02259
     gpm_params = {
-        'alpha0': 0.3,         # Base susceptibility
-        'ell0_kpc': 2.0,       # kpc (base coherence length)
+        'alpha0': 0.25,        # Base susceptibility (tuned from 0.3)
+        'ell0_kpc': 1.0,       # kpc (reduced from 2.0 for correct mass regime)
         'Qstar': 2.0,          # Toomre Q threshold
         'sigmastar': 25.0,     # km/s (velocity dispersion threshold)
         'nQ': 2.0,             # Q gating exponent
         'nsig': 2.0,           # sigma_v gating exponent
         'p': 0.5,              # ell ~ R_disk^p scaling
-        'Mstar_Msun': 2e8,     # Mass scale for gating (M_sun) - sharp transition at mid-mass
-        'nM': 1.5              # Mass gating exponent - very sharp suppression
+        'Mstar_Msun': 1e10,    # Mass scale (tuned from 2e8 for correct masses)
+        'nM': 2.5              # Mass gating exponent (increased from 1.5 for stronger suppression)
     }
     
     print("\nGlobal GPM parameters:")

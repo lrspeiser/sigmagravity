@@ -1,0 +1,13 @@
+# Best GPM Parameters (from grid search)
+# Success rate: 57.1%
+# Mean improvement: +7.4%
+
+alpha0 = 0.200
+Mstar_Msun = 5.00e+09
+ell0_kpc = 1.5
+Qstar = 2.0
+sigmastar = 25.0
+nQ = 2.0
+nsig = 2.0
+p = 0.5
+nM = 2.0
