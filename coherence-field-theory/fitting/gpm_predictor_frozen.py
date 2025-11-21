@@ -115,11 +115,12 @@ class GPMPredictor:
         Returns:
         --------
         result : dict
-            Prediction results with chi-squared and residuals
+            Prediction results with RMS, MAE, chi-squared and residuals
         """
         if verbose:
             print(f"\nPredicting {galaxy_name}...")
         
+        failure_reason = None
         try:
             # Load data
             loader = RealDataLoader()
@@ -175,8 +176,13 @@ class GPMPredictor:
             # Compute gates (NO FITTING)
             alpha_eff = self.gates.alpha_eff(Q, sigma_v, M_total, K=0.0)
             
-            # Coherence length (theory-driven)
-            ell_eff = self.ell_0 * (R_disk / 2.0)**self.p
+            # Self-consistent coherence length (use theory, not ad-hoc scaling)
+            # ℓ = σ_v / sqrt(2πG ⟨Σ_b⟩_ℓ)
+            Sigma_mean = Sigma_b(R_disk)  # Approximate at scale radius
+            if Sigma_mean > 0:
+                ell_eff = sigma_v / np.sqrt(2.0 * np.pi * 4.30091e-6 * Sigma_mean * 1e6)  # Σ in M_sun/kpc^2
+            else:
+                ell_eff = self.ell_0 * (R_disk / 2.0)**self.p  # Fallback
             
             if verbose:
                 print(f"  M_total = {M_total:.2e} M☉")
@@ -212,7 +218,17 @@ class GPMPredictor:
             # Total prediction
             v_pred = np.sqrt(v_bar**2 + v_coh**2)
             
-            # Compute chi-squared (baryon baseline and GPM prediction)
+            # Compute proper metrics
+            residuals_bar = v_obs - v_bar
+            residuals_gpm = v_obs - v_pred
+            
+            # RMS and MAE (in km/s - physical units)
+            rms_bar = np.sqrt(np.mean(residuals_bar**2))
+            rms_gpm = np.sqrt(np.mean(residuals_gpm**2))
+            mae_bar = np.mean(np.abs(residuals_bar))
+            mae_gpm = np.mean(np.abs(residuals_gpm))
+            
+            # Chi-squared (for compatibility)
             chi2_bar = np.sum(((v_obs - v_bar) / v_err)**2)
             chi2_gpm = np.sum(((v_obs - v_pred) / v_err)**2)
             
@@ -220,12 +236,15 @@ class GPMPredictor:
             chi2_red_bar = chi2_bar / n_dof
             chi2_red_gpm = chi2_gpm / n_dof
             
-            improvement = (chi2_bar - chi2_gpm) / chi2_bar * 100
+            # Improvement metrics
+            rms_improvement = (rms_bar - rms_gpm) / rms_bar * 100
+            chi2_improvement = (chi2_bar - chi2_gpm) / chi2_bar * 100
             
             if verbose:
-                print(f"  χ²_bar = {chi2_red_bar:.2f}")
-                print(f"  χ²_gpm = {chi2_red_gpm:.2f}")
-                print(f"  Improvement = {improvement:+.1f}%")
+                print(f"  RMS_bar = {rms_bar:.2f} km/s, RMS_gpm = {rms_gpm:.2f} km/s")
+                print(f"  MAE_bar = {mae_bar:.2f} km/s, MAE_gpm = {mae_gpm:.2f} km/s")
+                print(f"  χ²_bar = {chi2_red_bar:.2f}, χ²_gpm = {chi2_red_gpm:.2f}")
+                print(f"  RMS improvement = {rms_improvement:+.1f}%")
             
             return {
                 'name': galaxy_name,
@@ -236,24 +255,34 @@ class GPMPredictor:
                 'sigma_v': sigma_v,
                 'alpha_eff': alpha_eff,
                 'ell_eff': ell_eff,
+                'rms_bar': rms_bar,
+                'rms_gpm': rms_gpm,
+                'mae_bar': mae_bar,
+                'mae_gpm': mae_gpm,
                 'chi2_red_bar': chi2_red_bar,
                 'chi2_red_gpm': chi2_red_gpm,
-                'improvement_pct': improvement,
+                'rms_improvement': rms_improvement,
+                'chi2_improvement': chi2_improvement,
                 'r': r_data,
                 'v_obs': v_obs,
                 'v_err': v_err,
                 'v_bar': v_bar,
                 'v_pred': v_pred,
-                'success': improvement > 0
+                'residuals_bar': residuals_bar,
+                'residuals_gpm': residuals_gpm,
+                'success': True,
+                'failure_reason': None
             }
             
         except Exception as e:
             if verbose:
                 print(f"  ERROR: {e}")
+            failure_reason = str(e)
             return {
                 'name': galaxy_name,
-                'error': str(e),
-                'success': False
+                'success': False,
+                'failure_reason': failure_reason,
+                'error': failure_reason
             }
     
     def predict_batch(self, galaxy_names, output_dir='outputs/gpm_holdout'):
@@ -290,35 +319,53 @@ class GPMPredictor:
             
             if result.get('success', False):
                 successes += 1
-                print(f"✓ χ²_red = {result['chi2_red_gpm']:.2f} ({result['improvement_pct']:+.1f}%)")
+                rms_imp = result['rms_improvement']
+                rms_gpm = result['rms_gpm']
+                print(f"✓ RMS = {rms_gpm:.1f} km/s ({rms_imp:+.1f}%)")
             else:
                 failures += 1
-                print(f"✗ {result.get('error', 'Failed')}")
+                err = result.get('failure_reason', 'Unknown error')
+                # Truncate long error messages
+                err_short = err[:50] + '...' if len(err) > 50 else err
+                print(f"✗ {err_short}")
         
         # Summary statistics
         valid_results = [r for r in results if r.get('success', False)]
         
         if len(valid_results) > 0:
-            chi2_bar_all = [r['chi2_red_bar'] for r in valid_results]
-            chi2_gpm_all = [r['chi2_red_gpm'] for r in valid_results]
-            improvement_all = [r['improvement_pct'] for r in valid_results]
+            rms_bar_all = [r['rms_bar'] for r in valid_results]
+            rms_gpm_all = [r['rms_gpm'] for r in valid_results]
+            mae_bar_all = [r['mae_bar'] for r in valid_results]
+            mae_gpm_all = [r['mae_gpm'] for r in valid_results]
+            rms_improvement_all = [r['rms_improvement'] for r in valid_results]
+            chi2_improvement_all = [r['chi2_improvement'] for r in valid_results]
             
             print(f"\n{'='*80}")
-            print("HOLD-OUT RESULTS")
+            print("HOLD-OUT RESULTS (FROZEN PARAMETERS)")
             print(f"{'='*80}")
             print(f"Success rate: {successes}/{len(galaxy_names)} ({successes/len(galaxy_names)*100:.1f}%)")
             print(f"Failures: {failures}")
-            print(f"\nχ²_red (baryons): {np.median(chi2_bar_all):.2f} ± {np.std(chi2_bar_all):.2f}")
-            print(f"χ²_red (GPM):     {np.median(chi2_gpm_all):.2f} ± {np.std(chi2_gpm_all):.2f}")
-            print(f"Improvement:      {np.median(improvement_all):+.1f}% (median)")
-            print(f"                  {np.mean(improvement_all):+.1f}% (mean)")
+            print(f"\nRMS Residuals (km/s):")
+            print(f"  Baryons:  {np.median(rms_bar_all):.1f} ± {np.std(rms_bar_all):.1f}")
+            print(f"  GPM:      {np.median(rms_gpm_all):.1f} ± {np.std(rms_gpm_all):.1f}")
+            print(f"  Improvement: {np.median(rms_improvement_all):+.1f}% (median)")
+            print(f"\nMAE Residuals (km/s):")
+            print(f"  Baryons:  {np.median(mae_bar_all):.1f} ± {np.std(mae_bar_all):.1f}")
+            print(f"  GPM:      {np.median(mae_gpm_all):.1f} ± {np.std(mae_gpm_all):.1f}")
+            print(f"\nFraction with RMS improvement > 0: {np.sum(np.array(rms_improvement_all) > 0) / len(rms_improvement_all) * 100:.1f}%")
             print(f"{'='*80}\n")
             
-            # Save results
-            df = pd.DataFrame(valid_results)
-            csv_path = os.path.join(output_dir, 'holdout_predictions.csv')
-            df.to_csv(csv_path, index=False)
-            print(f"✓ Saved results to {csv_path}")
+            # Save ALL results (including failures)
+            df_all = pd.DataFrame(results)
+            csv_all_path = os.path.join(output_dir, 'holdout_predictions_all.csv')
+            df_all.to_csv(csv_all_path, index=False)
+            print(f"✓ Saved all results (with failures) to {csv_all_path}")
+            
+            # Save successes only
+            df_success = pd.DataFrame(valid_results)
+            csv_path = os.path.join(output_dir, 'holdout_predictions_successes.csv')
+            df_success.to_csv(csv_path, index=False)
+            print(f"✓ Saved successes to {csv_path}")
             
             # Plot calibration
             self.plot_calibration(valid_results, output_dir)
@@ -328,67 +375,74 @@ class GPMPredictor:
     def plot_calibration(self, results, output_dir):
         """
         Generate calibration plots for hold-out predictions.
+        Uses RMS residuals (km/s) as primary metric.
         """
         # Extract data
-        chi2_bar = np.array([r['chi2_red_bar'] for r in results])
-        chi2_gpm = np.array([r['chi2_red_gpm'] for r in results])
-        improvement = np.array([r['improvement_pct'] for r in results])
+        rms_bar = np.array([r['rms_bar'] for r in results])
+        rms_gpm = np.array([r['rms_gpm'] for r in results])
+        rms_improvement = np.array([r['rms_improvement'] for r in results])
         alpha_eff = np.array([r['alpha_eff'] for r in results])
         sigma_v = np.array([r['sigma_v'] for r in results])
         M_total = np.array([r['M_total'] for r in results])
+        
+        # Collect all residuals for QQ plot
+        all_residuals_gpm = np.concatenate([r['residuals_gpm'] for r in results])
         
         fig, axes = plt.subplots(2, 2, figsize=(14, 12))
         fig.suptitle('GPM Hold-Out Prediction Calibration (Frozen Parameters)', 
                      fontsize=14, fontweight='bold')
         
-        # Plot 1: χ² comparison
+        # Plot 1: RMS comparison (km/s)
         ax = axes[0, 0]
-        ax.scatter(chi2_bar, chi2_gpm, alpha=0.6, s=50)
-        lim = max(chi2_bar.max(), chi2_gpm.max())
+        ax.scatter(rms_bar, rms_gpm, alpha=0.6, s=50, c=M_total, cmap='viridis', norm=plt.Normalize(vmin=1e8, vmax=1e11))
+        lim = max(rms_bar.max(), rms_gpm.max())
         ax.plot([0, lim], [0, lim], 'k--', alpha=0.5, label='1:1 line')
-        ax.set_xlabel('χ²_red (Baryons)', fontsize=11)
-        ax.set_ylabel('χ²_red (GPM Prediction)', fontsize=11)
-        ax.set_title('Prediction Quality', fontsize=12)
+        ax.set_xlabel('RMS Baryons [km/s]', fontsize=11)
+        ax.set_ylabel('RMS GPM [km/s]', fontsize=11)
+        ax.set_title('Prediction Quality (Physical Units)', fontsize=12)
         ax.legend()
         ax.grid(alpha=0.3)
         
         # Add success/failure counts
-        n_success = np.sum(chi2_gpm < chi2_bar)
-        n_total = len(chi2_gpm)
-        ax.text(0.05, 0.95, f"{n_success}/{n_total} improved\n({n_success/n_total*100:.1f}%)",
+        n_improved = np.sum(rms_gpm < rms_bar)
+        n_total = len(rms_gpm)
+        median_rms = np.median(rms_gpm)
+        ax.text(0.05, 0.95, f"{n_improved}/{n_total} improved\n({n_improved/n_total*100:.1f}%)\nMedian RMS: {median_rms:.1f} km/s",
                transform=ax.transAxes, fontsize=10, verticalalignment='top',
                bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
         
-        # Plot 2: Improvement distribution
+        # Plot 2: QQ plot for residuals (normality test)
         ax = axes[0, 1]
-        ax.hist(improvement, bins=30, alpha=0.7, edgecolor='black')
-        ax.axvline(0, color='r', linestyle='--', label='No improvement')
-        ax.axvline(np.median(improvement), color='g', linestyle='-', 
-                  label=f'Median: {np.median(improvement):+.1f}%')
-        ax.set_xlabel('Improvement (%)', fontsize=11)
-        ax.set_ylabel('Count', fontsize=11)
-        ax.set_title('Distribution of Improvements', fontsize=12)
-        ax.legend()
+        from scipy import stats
+        stats.probplot(all_residuals_gpm, dist="norm", plot=ax)
+        ax.set_title('Q-Q Plot: GPM Residuals vs Normal', fontsize=12)
+        ax.set_xlabel('Theoretical Quantiles', fontsize=11)
+        ax.set_ylabel('Sample Quantiles [km/s]', fontsize=11)
         ax.grid(alpha=0.3)
+        # Add text with normality test
+        _, p_value = stats.shapiro(all_residuals_gpm[:5000] if len(all_residuals_gpm) > 5000 else all_residuals_gpm)
+        ax.text(0.05, 0.95, f'Shapiro-Wilk p={p_value:.3f}\n(p>0.05: normal)',
+               transform=ax.transAxes, fontsize=9, verticalalignment='top',
+               bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.5))
         
         # Plot 3: α_eff vs σ_v (gating signature)
         ax = axes[1, 0]
-        scatter = ax.scatter(sigma_v, alpha_eff, c=improvement, 
+        scatter = ax.scatter(sigma_v, alpha_eff, c=rms_improvement, 
                            cmap='RdYlGn', vmin=-50, vmax=100, s=50, alpha=0.7)
         ax.set_xlabel('σ_v [km/s]', fontsize=11)
         ax.set_ylabel('α_eff', fontsize=11)
         ax.set_title('Environmental Gating', fontsize=12)
         ax.grid(alpha=0.3)
-        plt.colorbar(scatter, ax=ax, label='Improvement (%)')
+        plt.colorbar(scatter, ax=ax, label='RMS Improvement (%)')
         
-        # Plot 4: Improvement vs mass (mass gate validation)
+        # Plot 4: RMS improvement vs mass (mass gate validation)
         ax = axes[1, 1]
-        scatter = ax.scatter(M_total, improvement, c=alpha_eff, 
+        scatter = ax.scatter(M_total, rms_improvement, c=alpha_eff, 
                            cmap='viridis', s=50, alpha=0.7, norm=plt.Normalize(vmin=0, vmax=0.3))
-        ax.axhline(0, color='r', linestyle='--', alpha=0.5)
+        ax.axhline(0, color='r', linestyle='--', alpha=0.5, label='No improvement')
         ax.axvline(self.M_star, color='k', linestyle=':', alpha=0.5, label=f'M* = {self.M_star:.1e}')
         ax.set_xlabel('M_total [M☉]', fontsize=11)
-        ax.set_ylabel('Improvement (%)', fontsize=11)
+        ax.set_ylabel('RMS Improvement (%)', fontsize=11)
         ax.set_title('Mass Gate Validation', fontsize=12)
         ax.set_xscale('log')
         ax.legend()
