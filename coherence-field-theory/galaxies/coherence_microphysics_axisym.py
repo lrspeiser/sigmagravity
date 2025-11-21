@@ -270,6 +270,70 @@ class AxiSymmetricYukawaConvolver:
         
         return rho_coh
     
+    def convolve_surface_density_with_ell_profile(self,
+                                                   Sigma_func: Callable[[float], float],
+                                                   alpha: float,
+                                                   ell_func: Callable[[float], float],
+                                                   R_target: np.ndarray,
+                                                   R_max: float = 50.0,
+                                                   apply_thickness_correction: bool = True) -> np.ndarray:
+        """
+        Compute coherence density with RADIUS-DEPENDENT coherence length ℓ(R).
+        
+        ρ_coh(R, 0) = α ∫₀^∞ R' dR' Σ(R') K(R, R'; ℓ(R))
+        
+        CRITICAL: This uses ℓ(R) at the TARGET radius R, not the source R'.
+        This is correct because the kernel measures how far coherence reaches
+        FROM the target point, which depends on local conditions at R.
+        
+        Physical interpretation:
+        - ℓ(R) sets how strongly baryons at R' contribute to coherence at R
+        - In inner disk (high Σ_b, high σ_v): larger ℓ → longer-range coupling
+        - In outer disk (low Σ_b, low σ_v): smaller ℓ → more local coupling
+        
+        Parameters
+        ----------
+        Sigma_func : callable
+            Surface density function Σ(R) in M☉/kpc²
+        alpha : float
+            Coherence susceptibility (dimensionless)
+        ell_func : callable
+            Coherence length function ℓ(R) in kpc (radius-dependent)
+        R_target : array
+            Target radii where to compute ρ_coh (kpc)
+        R_max : float
+            Maximum integration radius (kpc)
+        apply_thickness_correction : bool
+            Apply finite-thickness correction to kernel
+            
+        Returns
+        -------
+        rho_coh : array
+            Coherence volume density at R_target, z=0 (M☉/kpc³)
+        """
+        # Pre-compute surface density on integration grid
+        n_grid = 512
+        R_grid = np.geomspace(1e-3, R_max, n_grid)
+        Sigma_grid = np.array([Sigma_func(R) for R in R_grid])
+        
+        rho_coh = np.zeros_like(R_target)
+        
+        for i, R in enumerate(R_target):
+            # Get coherence length at THIS target radius
+            ell_R = ell_func(R)
+            
+            # Compute kernel K(R, R'; ℓ(R)) for all R' on grid
+            K_grid = np.array([self.yukawa_kernel_2d(R, Rp, ell_R, apply_thickness_correction) 
+                             for Rp in R_grid])
+            
+            # Integrand: R' × Σ(R') × K(R, R'; ℓ(R))
+            integrand = R_grid * Sigma_grid * K_grid
+            
+            # Integrate using Simpson's rule
+            rho_coh[i] = alpha * simpson(integrand, x=R_grid)
+        
+        return rho_coh
+    
     def convolve_volume_density(self,
                                rho_func: Callable[[float], float],
                                alpha: float,

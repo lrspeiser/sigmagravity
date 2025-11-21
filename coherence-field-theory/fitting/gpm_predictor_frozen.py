@@ -40,8 +40,9 @@ from data_integration.load_real_data import RealDataLoader
 from data_integration.load_sparc_masses import load_sparc_masses
 from galaxies.coherence_microphysics_axisym import AxiSymmetricYukawaConvolver
 from galaxies.microphysical_gates import MicrophysicalGates
-from galaxies.environment_estimator_v2 import EnvironmentEstimatorV2
+from galaxies.environment_estimator_v3 import EnvironmentEstimatorV3
 from galaxies.rotation_curves import GalaxyRotationCurve
+from scipy.interpolate import interp1d
 
 
 class GPMPredictor:
@@ -175,51 +176,73 @@ class GPMPredictor:
                         SBdisk.append(float(parts[6]))
             SBdisk = np.array(SBdisk)
             
-            # Use improved environment estimator V2 (with v_bar and R_disk)
-            estimator = EnvironmentEstimatorV2(verbose=False)
-            Q, sigma_v = estimator.estimate_from_sparc(
+            # Use improved environment estimator V3 (radius-dependent profiles)
+            estimator = EnvironmentEstimatorV3(verbose=verbose)
+            profiles = estimator.estimate_profiles_from_sparc(
                 r_data, v_obs, SBdisk, M_L=0.5,
                 v_bar=v_bar,  # Use baryons for κ (avoid circularity)
                 R_disk=R_disk  # For compactness check
             )
             
-            # Compute gates (NO FITTING) - includes HARD FLOOR at 0.05
-            alpha_eff = self.gates.alpha_eff(Q, sigma_v, M_total, K=0.0)
+            # Extract profiles
+            r_profile = profiles['r']
+            Q_profile = profiles['Q']
+            sigma_v_profile = profiles['sigma_v']
+            ell_profile = profiles['ell']
             
-            # CRITICAL: If alpha_eff == 0 (below floor), skip coherence calculation entirely
-            if alpha_eff == 0.0:
+            # For reporting: use median values
+            Q_median = np.median(Q_profile)
+            sigma_v_median = np.median(sigma_v_profile)
+            ell_median = np.median(ell_profile)
+            
+            # Compute gates at each radius
+            alpha_eff_profile = np.array([
+                self.gates.alpha_eff(Q_profile[i], sigma_v_profile[i], M_total, K=0.0)
+                for i in range(len(r_profile))
+            ])
+            alpha_eff_median = np.median(alpha_eff_profile)
+            
+            # CRITICAL: If all alpha_eff == 0 (below floor), skip coherence calculation
+            if np.all(alpha_eff_profile == 0.0):
                 # No coherence - return baryon-only prediction
                 ell_eff = 0.0  # Set to zero for reporting
                 v_pred = v_bar
                 if verbose:
                     print(f"  M_total = {M_total:.2e} M☉")
                     print(f"  R_disk = {R_disk:.2f} kpc")
-                    print(f"  Q = {Q:.2f}, σ_v = {sigma_v:.1f} km/s")
-                    print(f"  α_eff = 0.0 (below floor {self.gates.alpha_floor}) - NO COHERENCE")
+                    print(f"  Q range: {Q_profile.min():.2f} - {Q_profile.max():.2f}")
+                    print(f"  σ_v range: {sigma_v_profile.min():.1f} - {sigma_v_profile.max():.1f} km/s")
+                    print(f"  α_eff = 0.0 (all below floor {self.gates.alpha_floor}) - NO COHERENCE")
             else:
-                # Self-consistent coherence length (use theory with ell-scale averaging)
-                # ℓ = σ_v / sqrt(2πG ⟨Σ_b⟩_ℓ)
-                ell_eff, converged = self.gates.compute_self_consistent_ell(
-                    sigma_v, Sigma_b, R_disk, ell_init=self.ell_0, max_iter=5
-                )
-                
+                # Radius-dependent coherence calculation
                 if verbose:
                     print(f"  M_total = {M_total:.2e} M☉")
                     print(f"  R_disk = {R_disk:.2f} kpc")
-                    print(f"  Q = {Q:.2f}, σ_v = {sigma_v:.1f} km/s")
-                    print(f"  α_eff = {alpha_eff:.4f} ({alpha_eff/self.alpha_0*100:.1f}%)")
-                    print(f"  ℓ_eff = {ell_eff:.2f} kpc (converged: {converged})")
+                    print(f"  Q range: {Q_profile.min():.2f} - {Q_profile.max():.2f} (median: {Q_median:.2f})")
+                    print(f"  σ_v range: {sigma_v_profile.min():.1f} - {sigma_v_profile.max():.1f} km/s (median: {sigma_v_median:.1f})")
+                    print(f"  α_eff range: {alpha_eff_profile.min():.4f} - {alpha_eff_profile.max():.4f} (median: {alpha_eff_median:.4f})")
+                    print(f"  ℓ range: {ell_profile.min():.2f} - {ell_profile.max():.2f} kpc (median: {ell_median:.2f})")
                 
-                # Convolution (axisymmetric K0 kernel)
+                # Create interpolators for radius-dependent profiles
+                # Use linear extrapolation at boundaries
+                ell_interp = interp1d(r_profile, ell_profile, kind='linear',
+                                     bounds_error=False, fill_value=(ell_profile[0], ell_profile[-1]))
+                alpha_interp = interp1d(r_profile, alpha_eff_profile, kind='linear',
+                                       bounds_error=False, fill_value=(alpha_eff_profile[0], alpha_eff_profile[-1]))
+                
+                # Use median alpha_eff for reporting (but use profile for convolution)
+                alpha_eff_for_convolution = alpha_eff_median
+                ell_eff = ell_median  # For reporting
+                
+                # Convolution with radius-dependent ℓ(R)
                 convolver = AxiSymmetricYukawaConvolver(h_z=self.h_z)
-                rho_coh = convolver.convolve_surface_density(
-                    Sigma_b, alpha_eff, ell_eff, r_data,
-                    R_max=r_data.max() * 2, use_3d=False,
+                rho_coh = convolver.convolve_surface_density_with_ell_profile(
+                    Sigma_b, alpha_eff_for_convolution, ell_interp, r_data,
+                    R_max=r_data.max() * 2,
                     apply_thickness_correction=True
                 )
                 
                 # Create interpolated density function
-                from scipy.interpolate import interp1d
                 rho_coh_func = interp1d(r_data, rho_coh, kind='cubic', 
                                        bounds_error=False, fill_value=0.0)
                 
@@ -227,10 +250,10 @@ class GPMPredictor:
                 galaxy = GalaxyRotationCurve(G=4.30091e-6)
                 galaxy.set_baryon_profile(M_disk=M_total, R_disk=R_disk)
                 galaxy.set_coherence_halo_gpm(rho_coh_func, gpm_params={
-                    'alpha_eff': alpha_eff,
-                    'ell_eff': ell_eff,
-                    'Q': Q,
-                    'sigma_v': sigma_v
+                    'alpha_eff': alpha_eff_median,
+                    'ell_eff': ell_median,
+                    'Q': Q_median,
+                    'sigma_v': sigma_v_median
                 })
                 v_coh = galaxy.circular_velocity(r_data)
                 
@@ -270,9 +293,9 @@ class GPMPredictor:
                 'n_points': n_dof,
                 'M_total': M_total,
                 'R_disk': R_disk,
-                'Q': Q,
-                'sigma_v': sigma_v,
-                'alpha_eff': alpha_eff,
+                'Q': Q_median if 'Q_median' in locals() else 0.0,
+                'sigma_v': sigma_v_median if 'sigma_v_median' in locals() else 0.0,
+                'alpha_eff': alpha_eff_median if 'alpha_eff_median' in locals() else alpha_eff if 'alpha_eff' in locals() else 0.0,
                 'ell_eff': ell_eff,
                 'rms_bar': rms_bar,
                 'rms_gpm': rms_gpm,
