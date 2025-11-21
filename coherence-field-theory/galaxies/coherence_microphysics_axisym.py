@@ -377,6 +377,75 @@ class AxiSymmetricYukawaConvolver:
         )
         
         return rho_coh
+    
+    def apply_temporal_memory(self,
+                            rho_coh_instantaneous: np.ndarray,
+                            R_target: np.ndarray,
+                            v_circ: np.ndarray,
+                            eta: float = 1.0) -> np.ndarray:
+        """
+        Apply temporal memory smoothing to coherence density.
+        
+        The coherence field has a finite memory/relaxation timescale:
+        
+            τ(R) = η × (2π/Ω(R)) = η × (2π R / v_circ)
+        
+        where Ω = v_circ/R is the angular frequency.
+        
+        This introduces exponential time smoothing that damps narrow spikes
+        while preserving large-scale structure. The smoothed coherence density
+        is:
+        
+            ρ_coh(R) = ρ_inst(R) × [1 - exp(-t_age/τ(R))]
+        
+        For steady-state (t_age >> τ), this reduces to ρ_coh ≈ ρ_inst.
+        For transient features (t_age ~ τ), this provides smoothing.
+        
+        PHYSICAL MOTIVATION:
+        Gravitational polarization is not instantaneous—the coherence field
+        takes time τ ~ orbital period to establish. This prevents sharp
+        spikes from unphysical features in ρ_b and matches the "memory"
+        aspect of GPM.
+        
+        Parameters
+        ----------
+        rho_coh_instantaneous : array
+            Coherence density from spatial convolution (M☉/kpc³)
+        R_target : array
+            Radii where ρ_coh is evaluated (kpc)
+        v_circ : array
+            Circular velocity at R_target (km/s)
+        eta : float
+            Memory timescale parameter (η ~ 0.5-2)
+            η = 1: memory timescale = one orbital period
+            η < 1: faster memory (weaker smoothing)
+            η > 1: slower memory (stronger smoothing)
+            
+        Returns
+        -------
+        rho_coh_smoothed : array
+            Temporally smoothed coherence density (M☉/kpc³)
+        """
+        # Compute memory timescale τ(R) = η × 2π R / v_circ
+        # Convert to Gyr: τ [Gyr] = η × 2π R[kpc] / v_circ[km/s] × (kpc/km/s → Gyr)
+        kpc_per_km_s_to_Gyr = 1.0226903  # 1 kpc/(km/s) = 1.023 Gyr
+        
+        tau_R = eta * 2.0 * np.pi * R_target / v_circ * kpc_per_km_s_to_Gyr  # Gyr
+        
+        # For steady-state analysis, assume disk has existed for t_age ~ 10 Gyr
+        # (typical spiral galaxy age)
+        t_age = 10.0  # Gyr
+        
+        # Smoothing factor: f(R) = 1 - exp(-t_age/τ(R))
+        # For t_age >> τ: f → 1 (no smoothing, equilibrium)
+        # For t_age ~ τ: f ~ 0.5-0.9 (partial smoothing)
+        # For t_age << τ: f → 0 (strong suppression, not yet established)
+        smoothing_factor = 1.0 - np.exp(-t_age / tau_R)
+        
+        # Apply smoothing
+        rho_coh_smoothed = rho_coh_instantaneous * smoothing_factor
+        
+        return rho_coh_smoothed
 
 
 # Convenience function for drop-in replacement
