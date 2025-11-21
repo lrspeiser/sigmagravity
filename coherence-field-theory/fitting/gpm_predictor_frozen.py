@@ -77,13 +77,14 @@ class GPMPredictor:
         self.n_M = n_M
         self.p = p  # ℓ ~ R_disk^p scaling
         
-        # Initialize gates and convolver
+        # Initialize gates and convolver (WITH HARD FLOOR)
         self.gates = MicrophysicalGates(
             alpha_0=alpha_0,
             Q_star=Q_star,
             sigma_star=sigma_star,
             M_star=M_star,
-            n_M=n_M
+            n_M=n_M,
+            alpha_floor=0.05  # Hard cutoff: prevents spurious coherence in massive systems
         )
         
         self.h_z = 0.3  # kpc (thin disk scale height)
@@ -173,50 +174,59 @@ class GPMPredictor:
                 gal, SBdisk, R_disk, M_L=0.5, morphology=morphology
             )
             
-            # Compute gates (NO FITTING)
+            # Compute gates (NO FITTING) - includes HARD FLOOR at 0.05
             alpha_eff = self.gates.alpha_eff(Q, sigma_v, M_total, K=0.0)
             
-            # Self-consistent coherence length (use theory, not ad-hoc scaling)
-            # ℓ = σ_v / sqrt(2πG ⟨Σ_b⟩_ℓ)
-            Sigma_mean = Sigma_b(R_disk)  # Approximate at scale radius
-            if Sigma_mean > 0:
-                ell_eff = sigma_v / np.sqrt(2.0 * np.pi * 4.30091e-6 * Sigma_mean * 1e6)  # Σ in M_sun/kpc^2
+            # CRITICAL: If alpha_eff == 0 (below floor), skip coherence calculation entirely
+            if alpha_eff == 0.0:
+                # No coherence - return baryon-only prediction
+                ell_eff = 0.0  # Set to zero for reporting
+                v_pred = v_bar
+                if verbose:
+                    print(f"  M_total = {M_total:.2e} M☉")
+                    print(f"  R_disk = {R_disk:.2f} kpc")
+                    print(f"  Q = {Q:.2f}, σ_v = {sigma_v:.1f} km/s")
+                    print(f"  α_eff = 0.0 (below floor {self.gates.alpha_floor}) - NO COHERENCE")
             else:
-                ell_eff = self.ell_0 * (R_disk / 2.0)**self.p  # Fallback
-            
-            if verbose:
-                print(f"  M_total = {M_total:.2e} M☉")
-                print(f"  R_disk = {R_disk:.2f} kpc")
-                print(f"  Q = {Q:.2f}, σ_v = {sigma_v:.1f} km/s")
-                print(f"  α_eff = {alpha_eff:.4f} ({alpha_eff/self.alpha_0*100:.1f}%)")
-                print(f"  ℓ_eff = {ell_eff:.2f} kpc")
-            
-            # Convolution (axisymmetric)
-            convolver = AxiSymmetricYukawaConvolver(h_z=self.h_z)
-            rho_coh = convolver.convolve_surface_density(
-                Sigma_b, alpha_eff, ell_eff, r_data,
-                R_max=r_data.max() * 2, use_3d=False,
-                apply_thickness_correction=True
-            )
-            
-            # Create interpolated density function
-            from scipy.interpolate import interp1d
-            rho_coh_func = interp1d(r_data, rho_coh, kind='cubic', 
-                                   bounds_error=False, fill_value=0.0)
-            
-            # Convert to velocity
-            galaxy = GalaxyRotationCurve(G=4.30091e-6)
-            galaxy.set_baryon_profile(M_disk=M_total, R_disk=R_disk)
-            galaxy.set_coherence_halo_gpm(rho_coh_func, gpm_params={
-                'alpha_eff': alpha_eff,
-                'ell_eff': ell_eff,
-                'Q': Q,
-                'sigma_v': sigma_v
-            })
-            v_coh = galaxy.circular_velocity(r_data)
-            
-            # Total prediction
-            v_pred = np.sqrt(v_bar**2 + v_coh**2)
+                # Self-consistent coherence length (use theory with ell-scale averaging)
+                # ℓ = σ_v / sqrt(2πG ⟨Σ_b⟩_ℓ)
+                ell_eff, converged = self.gates.compute_self_consistent_ell(
+                    sigma_v, Sigma_b, R_disk, ell_init=self.ell_0, max_iter=5
+                )
+                
+                if verbose:
+                    print(f"  M_total = {M_total:.2e} M☉")
+                    print(f"  R_disk = {R_disk:.2f} kpc")
+                    print(f"  Q = {Q:.2f}, σ_v = {sigma_v:.1f} km/s")
+                    print(f"  α_eff = {alpha_eff:.4f} ({alpha_eff/self.alpha_0*100:.1f}%)")
+                    print(f"  ℓ_eff = {ell_eff:.2f} kpc (converged: {converged})")
+                
+                # Convolution (axisymmetric K0 kernel)
+                convolver = AxiSymmetricYukawaConvolver(h_z=self.h_z)
+                rho_coh = convolver.convolve_surface_density(
+                    Sigma_b, alpha_eff, ell_eff, r_data,
+                    R_max=r_data.max() * 2, use_3d=False,
+                    apply_thickness_correction=True
+                )
+                
+                # Create interpolated density function
+                from scipy.interpolate import interp1d
+                rho_coh_func = interp1d(r_data, rho_coh, kind='cubic', 
+                                       bounds_error=False, fill_value=0.0)
+                
+                # Convert to velocity
+                galaxy = GalaxyRotationCurve(G=4.30091e-6)
+                galaxy.set_baryon_profile(M_disk=M_total, R_disk=R_disk)
+                galaxy.set_coherence_halo_gpm(rho_coh_func, gpm_params={
+                    'alpha_eff': alpha_eff,
+                    'ell_eff': ell_eff,
+                    'Q': Q,
+                    'sigma_v': sigma_v
+                })
+                v_coh = galaxy.circular_velocity(r_data)
+                
+                # Total prediction
+                v_pred = np.sqrt(v_bar**2 + v_coh**2)
             
             # Compute proper metrics
             residuals_bar = v_obs - v_bar

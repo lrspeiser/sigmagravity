@@ -86,13 +86,14 @@ class MicrophysicalGates:
     """
     
     def __init__(self, alpha_0=0.30, Q_star=2.0, sigma_star=70.0, 
-                 M_star=2e10, n_M=2.5, K_star=1e-3):
+                 M_star=2e10, n_M=2.5, K_star=1e-3, alpha_floor=0.05):
         self.alpha_0 = alpha_0
         self.Q_star = Q_star
         self.sigma_star = sigma_star
         self.M_star = M_star
         self.n_M = n_M
         self.K_star = K_star
+        self.alpha_floor = alpha_floor  # Hard cutoff to prevent spurious contributions
         
         # Physical constants
         self.G_kpc = 4.302e-3  # G in kpc (km/s)^2 / M_sun
@@ -204,9 +205,16 @@ class MicrophysicalGates:
     
     def alpha_eff(self, Q, sigma_v, M_disk, K=0.0):
         """
-        Effective coupling strength with all gates applied.
+        Effective coupling strength with all gates applied + HARD FLOOR.
         
         α_eff = α_0 × g_Q × g_σ × g_M × g_K
+        
+        **CRITICAL FIX**: Hard floor at alpha_floor (default 0.05).
+        Even α_eff ~ 0.01 × large Σ_b creates spurious noise in massive systems.
+        Below threshold, coherence is strictly zero (not just suppressed).
+        
+        This fixes the failure mode where massive galaxies (M > 10¹¹ M☉) get
+        worse predictions because tiny α_eff still adds non-zero ρ_coh.
         
         Parameters:
         -----------
@@ -222,14 +230,22 @@ class MicrophysicalGates:
         Returns:
         --------
         α_eff : float or array
-            Effective coupling ∈ [0, α_0]
+            Effective coupling ∈ [0, α_0] with hard floor
         """
         gQ = self.g_Q(Q)
         gS = self.g_sigma(sigma_v)
         gM = self.g_M(M_disk)
         gK = self.g_K(K)
         
-        return self.alpha_0 * gQ * gS * gM * gK
+        alpha_raw = self.alpha_0 * gQ * gS * gM * gK
+        
+        # HARD FLOOR: Below threshold, no coherence (prevents noise in massive systems)
+        if np.isscalar(alpha_raw):
+            alpha_eff = alpha_raw if alpha_raw >= self.alpha_floor else 0.0
+        else:
+            alpha_eff = np.where(alpha_raw >= self.alpha_floor, alpha_raw, 0.0)
+        
+        return alpha_eff
     
     def compute_self_consistent_ell(self, sigma_v, Sigma_b_func, R_disk, 
                                     ell_init=0.8, max_iter=10, tol=0.01):
