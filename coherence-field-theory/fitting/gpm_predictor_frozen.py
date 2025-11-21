@@ -40,7 +40,7 @@ from data_integration.load_real_data import RealDataLoader
 from data_integration.load_sparc_masses import load_sparc_masses
 from galaxies.coherence_microphysics_axisym import AxiSymmetricYukawaConvolver
 from galaxies.microphysical_gates import MicrophysicalGates
-from galaxies.environment_estimator import EnvironmentEstimator
+from galaxies.environment_estimator_v2 import EnvironmentEstimatorV2
 from galaxies.rotation_curves import GalaxyRotationCurve
 
 
@@ -168,10 +168,10 @@ class GPMPredictor:
                         SBdisk.append(float(parts[6]))
             SBdisk = np.array(SBdisk)
             
-            estimator = EnvironmentEstimator()
-            morphology = estimator.classify_morphology(gal, M_total, R_disk)
+            # Use improved environment estimator V2
+            estimator = EnvironmentEstimatorV2(verbose=False)
             Q, sigma_v = estimator.estimate_from_sparc(
-                gal, SBdisk, R_disk, M_L=0.5, morphology=morphology
+                r_data, v_obs, SBdisk, M_L=0.5
             )
             
             # Compute gates (NO FITTING) - includes HARD FLOOR at 0.05
