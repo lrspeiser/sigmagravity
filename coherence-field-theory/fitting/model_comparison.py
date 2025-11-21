@@ -41,6 +41,7 @@ class DarkMatterHalo:
         NFW profile: ρ(r) = ρ_0 / [(r/r_s)(1 + r/r_s)²]
         """
         x = r / r_s
+        x = np.maximum(x, 1e-10)  # Avoid singularity at r=0
         return rho_0 / (x * (1 + x)**2)
     
     @staticmethod
@@ -102,7 +103,7 @@ def fit_nfw(gal, initial_guess=[1e7, 5.0]):
     
     r = gal['r']
     v_obs = gal['v_obs']
-    dv = gal['dv']
+    dv = gal.get('dv', gal.get('v_err', np.ones_like(v_obs) * 5.0))  # Use v_err or default 5 km/s
     v_disk = gal['v_disk']
     v_gas = gal['v_gas']
     v_bulge = gal.get('v_bulge', np.zeros_like(v_disk))
@@ -142,7 +143,7 @@ def fit_burkert(gal, initial_guess=[1e7, 3.0]):
     
     r = gal['r']
     v_obs = gal['v_obs']
-    dv = gal['dv']
+    dv = gal.get('dv', gal.get('v_err', np.ones_like(v_obs) * 5.0))  # Use v_err or default 5 km/s
     v_disk = gal['v_disk']
     v_gas = gal['v_gas']
     v_bulge = gal.get('v_bulge', np.zeros_like(v_disk))
@@ -246,7 +247,7 @@ def compare_models_single_galaxy(galaxy_name, gpm_samples=None):
         df = pd.read_csv(results_csv)
         gpm_row = df[df['name'] == galaxy_name]
         if len(gpm_row) > 0:
-            gpm_chi2 = gpm_row.iloc[0]['chi2_final']
+            gpm_chi2 = gpm_row.iloc[0]['chi2_gpm']  # Correct column name
             print(f"  GPM χ² = {gpm_chi2:.2f}")
         else:
             gpm_chi2 = np.nan
