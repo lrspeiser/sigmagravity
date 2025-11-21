@@ -135,6 +135,13 @@ class GPMPredictor:
             v_bulge = gal.get('v_bulge', np.zeros_like(v_disk))
             v_bar = np.sqrt(v_disk**2 + v_gas**2 + v_bulge**2)
             
+            # DATA QUALITY CHECK: Skip poor quality data
+            mean_snr = np.mean(v_obs / v_err)
+            if len(r_data) < 8:
+                raise ValueError(f"Insufficient data: only {len(r_data)} points")
+            if mean_snr < 5.0:  # Mean SNR < 5 (error > 20% of signal)
+                raise ValueError(f"Poor data quality: mean SNR = {mean_snr:.1f}")
+            
             # Load masses
             sparc_masses = load_sparc_masses(galaxy_name)
             M_stellar = sparc_masses['M_stellar']
