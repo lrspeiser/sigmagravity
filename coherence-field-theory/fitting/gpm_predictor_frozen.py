@@ -1,0 +1,465 @@
+#!/usr/bin/env python3
+"""
+GPM Pure Predictor - Frozen Parameters
+
+Hold-out validation on 175 SPARC galaxies with NO parameter tuning.
+
+Universal parameters (frozen from axisymmetric grid search):
+- α₀ = 0.30 ± 0.05
+- ℓ₀ = 0.80 ± 0.15 kpc
+- M* = 2×10¹⁰ M☉
+- σ* = 70 km/s
+- Q* = 2.0
+- n_M = 2.5
+
+Prediction pipeline:
+1. Load galaxy: Σ_b(R), σ_v, Q, M_total
+2. Compute gates: α_eff = α₀ × g_Q × g_σ × g_M × g_K
+3. Compute coherence length: ℓ = f(σ_v, Σ_b) [self-consistent]
+4. Convolve: ρ_coh = α_eff × [Σ_b ⊗ K₀(R/ℓ)]
+5. Predict: v_coh = √(G ∫ ρ_coh dV / r)
+6. Total: v_pred = √(v_bar² + v_coh²)
+
+NO FITTING. Pure prediction from frozen theory.
+
+Reference: GPM_CANONICAL_STATEMENT.md
+Author: GPM Theory Team
+Date: December 2024
+"""
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pathlib import Path
+import sys
+import os
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from data_integration.load_real_data import RealDataLoader
+from data_integration.load_sparc_masses import load_sparc_masses
+from galaxies.coherence_microphysics_axisym import AxiSymmetricYukawaConvolver
+from galaxies.microphysical_gates import MicrophysicalGates
+from galaxies.environment_estimator import EnvironmentEstimator
+from galaxies.rotation_curves import GalaxyRotationCurve
+
+
+class GPMPredictor:
+    """
+    Pure GPM predictor with frozen universal parameters.
+    
+    NO FITTING - only prediction from theory.
+    
+    Parameters (FROZEN from grid search):
+    -----------
+    alpha_0 : float
+        Base susceptibility (0.30)
+    ell_0 : float
+        Base coherence length [kpc] (0.80)
+    M_star : float
+        Mass gate scale [M_sun] (2×10¹⁰)
+    sigma_star : float
+        Velocity dispersion gate [km/s] (70)
+    Q_star : float
+        Toomre Q gate (2.0)
+    n_M : float
+        Mass gate exponent (2.5)
+    """
+    
+    def __init__(self, alpha_0=0.30, ell_0=0.80, M_star=2e10, 
+                 sigma_star=70.0, Q_star=2.0, n_M=2.5, p=0.5):
+        # Frozen parameters (NO TUNING)
+        self.alpha_0 = alpha_0
+        self.ell_0 = ell_0
+        self.M_star = M_star
+        self.sigma_star = sigma_star
+        self.Q_star = Q_star
+        self.n_M = n_M
+        self.p = p  # ℓ ~ R_disk^p scaling
+        
+        # Initialize gates and convolver
+        self.gates = MicrophysicalGates(
+            alpha_0=alpha_0,
+            Q_star=Q_star,
+            sigma_star=sigma_star,
+            M_star=M_star,
+            n_M=n_M
+        )
+        
+        self.h_z = 0.3  # kpc (thin disk scale height)
+        
+        print("="*80)
+        print("GPM PREDICTOR (FROZEN PARAMETERS)")
+        print("="*80)
+        print(f"α₀ = {alpha_0}")
+        print(f"ℓ₀ = {ell_0} kpc")
+        print(f"M* = {M_star:.2e} M☉")
+        print(f"σ* = {sigma_star} km/s")
+        print(f"Q* = {Q_star}")
+        print(f"n_M = {n_M}")
+        print("="*80)
+        print("NO PARAMETER FITTING - PURE PREDICTION ONLY")
+        print("="*80 + "\n")
+    
+    def predict_rotation_curve(self, galaxy_name, verbose=False):
+        """
+        Predict rotation curve for one galaxy (NO FITTING).
+        
+        Parameters:
+        -----------
+        galaxy_name : str
+            Galaxy name from SPARC
+        verbose : bool
+            Print detailed diagnostics
+        
+        Returns:
+        --------
+        result : dict
+            Prediction results with chi-squared and residuals
+        """
+        if verbose:
+            print(f"\nPredicting {galaxy_name}...")
+        
+        try:
+            # Load data
+            loader = RealDataLoader()
+            gal = loader.load_rotmod_galaxy(galaxy_name)
+            
+            r_data = gal['r']
+            v_obs = gal['v_obs']
+            v_err = gal['v_err']
+            v_disk = gal['v_disk']
+            v_gas = gal['v_gas']
+            v_bulge = gal.get('v_bulge', np.zeros_like(v_disk))
+            v_bar = np.sqrt(v_disk**2 + v_gas**2 + v_bulge**2)
+            
+            # Load masses
+            sparc_masses = load_sparc_masses(galaxy_name)
+            M_stellar = sparc_masses['M_stellar']
+            M_HI = sparc_masses['M_HI']
+            M_total = sparc_masses['M_total']
+            R_disk = sparc_masses['R_disk']
+            R_HI = sparc_masses['R_HI']
+            
+            # Baryon surface density
+            R_gas = max(R_HI, 1.5 * R_disk)
+            Sigma0_stellar = M_stellar / (2.0 * np.pi * R_disk**2)
+            Sigma0_gas = M_HI / (2.0 * np.pi * R_gas**2)
+            
+            def Sigma_b(R):
+                Sigma_stellar = Sigma0_stellar * np.exp(-R / R_disk)
+                Sigma_gas = Sigma0_gas * np.exp(-R / R_gas)
+                return Sigma_stellar + Sigma_gas
+            
+            # Environment estimation
+            rotmod_dir = os.path.join(loader.base_data_dir, 'Rotmod_LTG')
+            filepath = os.path.join(rotmod_dir, f'{galaxy_name}_rotmod.dat')
+            
+            with open(filepath, 'r') as f:
+                lines = f.readlines()
+            
+            SBdisk = []
+            for line in lines:
+                if not line.startswith('#'):
+                    parts = line.split()
+                    if len(parts) >= 7:
+                        SBdisk.append(float(parts[6]))
+            SBdisk = np.array(SBdisk)
+            
+            estimator = EnvironmentEstimator()
+            morphology = estimator.classify_morphology(gal, M_total, R_disk)
+            Q, sigma_v = estimator.estimate_from_sparc(
+                gal, SBdisk, R_disk, M_L=0.5, morphology=morphology
+            )
+            
+            # Compute gates (NO FITTING)
+            alpha_eff = self.gates.alpha_eff(Q, sigma_v, M_total, K=0.0)
+            
+            # Coherence length (theory-driven)
+            ell_eff = self.ell_0 * (R_disk / 2.0)**self.p
+            
+            if verbose:
+                print(f"  M_total = {M_total:.2e} M☉")
+                print(f"  R_disk = {R_disk:.2f} kpc")
+                print(f"  Q = {Q:.2f}, σ_v = {sigma_v:.1f} km/s")
+                print(f"  α_eff = {alpha_eff:.4f} ({alpha_eff/self.alpha_0*100:.1f}%)")
+                print(f"  ℓ_eff = {ell_eff:.2f} kpc")
+            
+            # Convolution (axisymmetric)
+            convolver = AxiSymmetricYukawaConvolver(h_z=self.h_z)
+            rho_coh = convolver.convolve_surface_density(
+                Sigma_b, alpha_eff, ell_eff, r_data,
+                R_max=r_data.max() * 2, use_3d=False,
+                apply_thickness_correction=True
+            )
+            
+            # Create interpolated density function
+            from scipy.interpolate import interp1d
+            rho_coh_func = interp1d(r_data, rho_coh, kind='cubic', 
+                                   bounds_error=False, fill_value=0.0)
+            
+            # Convert to velocity
+            galaxy = GalaxyRotationCurve(G=4.30091e-6)
+            galaxy.set_baryon_profile(M_disk=M_total, R_disk=R_disk)
+            galaxy.set_coherence_halo_gpm(rho_coh_func, gpm_params={
+                'alpha_eff': alpha_eff,
+                'ell_eff': ell_eff,
+                'Q': Q,
+                'sigma_v': sigma_v
+            })
+            v_coh = galaxy.circular_velocity(r_data)
+            
+            # Total prediction
+            v_pred = np.sqrt(v_bar**2 + v_coh**2)
+            
+            # Compute chi-squared (baryon baseline and GPM prediction)
+            chi2_bar = np.sum(((v_obs - v_bar) / v_err)**2)
+            chi2_gpm = np.sum(((v_obs - v_pred) / v_err)**2)
+            
+            n_dof = len(r_data)
+            chi2_red_bar = chi2_bar / n_dof
+            chi2_red_gpm = chi2_gpm / n_dof
+            
+            improvement = (chi2_bar - chi2_gpm) / chi2_bar * 100
+            
+            if verbose:
+                print(f"  χ²_bar = {chi2_red_bar:.2f}")
+                print(f"  χ²_gpm = {chi2_red_gpm:.2f}")
+                print(f"  Improvement = {improvement:+.1f}%")
+            
+            return {
+                'name': galaxy_name,
+                'n_points': n_dof,
+                'M_total': M_total,
+                'R_disk': R_disk,
+                'Q': Q,
+                'sigma_v': sigma_v,
+                'alpha_eff': alpha_eff,
+                'ell_eff': ell_eff,
+                'chi2_red_bar': chi2_red_bar,
+                'chi2_red_gpm': chi2_red_gpm,
+                'improvement_pct': improvement,
+                'r': r_data,
+                'v_obs': v_obs,
+                'v_err': v_err,
+                'v_bar': v_bar,
+                'v_pred': v_pred,
+                'success': improvement > 0
+            }
+            
+        except Exception as e:
+            if verbose:
+                print(f"  ERROR: {e}")
+            return {
+                'name': galaxy_name,
+                'error': str(e),
+                'success': False
+            }
+    
+    def predict_batch(self, galaxy_names, output_dir='outputs/gpm_holdout'):
+        """
+        Predict rotation curves for batch of galaxies (hold-out test).
+        
+        Parameters:
+        -----------
+        galaxy_names : list
+            List of galaxy names
+        output_dir : str
+            Output directory for results
+        
+        Returns:
+        --------
+        results : list of dict
+            Prediction results for each galaxy
+        """
+        Path(output_dir).mkdir(parents=True, exist_ok=True)
+        
+        print(f"\n{'='*80}")
+        print(f"HOLD-OUT PREDICTION ON {len(galaxy_names)} GALAXIES")
+        print(f"{'='*80}\n")
+        
+        results = []
+        successes = 0
+        failures = 0
+        
+        for i, name in enumerate(galaxy_names):
+            print(f"[{i+1}/{len(galaxy_names)}] {name}...", end=' ')
+            
+            result = self.predict_rotation_curve(name, verbose=False)
+            results.append(result)
+            
+            if result.get('success', False):
+                successes += 1
+                print(f"✓ χ²_red = {result['chi2_red_gpm']:.2f} ({result['improvement_pct']:+.1f}%)")
+            else:
+                failures += 1
+                print(f"✗ {result.get('error', 'Failed')}")
+        
+        # Summary statistics
+        valid_results = [r for r in results if r.get('success', False)]
+        
+        if len(valid_results) > 0:
+            chi2_bar_all = [r['chi2_red_bar'] for r in valid_results]
+            chi2_gpm_all = [r['chi2_red_gpm'] for r in valid_results]
+            improvement_all = [r['improvement_pct'] for r in valid_results]
+            
+            print(f"\n{'='*80}")
+            print("HOLD-OUT RESULTS")
+            print(f"{'='*80}")
+            print(f"Success rate: {successes}/{len(galaxy_names)} ({successes/len(galaxy_names)*100:.1f}%)")
+            print(f"Failures: {failures}")
+            print(f"\nχ²_red (baryons): {np.median(chi2_bar_all):.2f} ± {np.std(chi2_bar_all):.2f}")
+            print(f"χ²_red (GPM):     {np.median(chi2_gpm_all):.2f} ± {np.std(chi2_gpm_all):.2f}")
+            print(f"Improvement:      {np.median(improvement_all):+.1f}% (median)")
+            print(f"                  {np.mean(improvement_all):+.1f}% (mean)")
+            print(f"{'='*80}\n")
+            
+            # Save results
+            df = pd.DataFrame(valid_results)
+            csv_path = os.path.join(output_dir, 'holdout_predictions.csv')
+            df.to_csv(csv_path, index=False)
+            print(f"✓ Saved results to {csv_path}")
+            
+            # Plot calibration
+            self.plot_calibration(valid_results, output_dir)
+        
+        return results
+    
+    def plot_calibration(self, results, output_dir):
+        """
+        Generate calibration plots for hold-out predictions.
+        """
+        # Extract data
+        chi2_bar = np.array([r['chi2_red_bar'] for r in results])
+        chi2_gpm = np.array([r['chi2_red_gpm'] for r in results])
+        improvement = np.array([r['improvement_pct'] for r in results])
+        alpha_eff = np.array([r['alpha_eff'] for r in results])
+        sigma_v = np.array([r['sigma_v'] for r in results])
+        M_total = np.array([r['M_total'] for r in results])
+        
+        fig, axes = plt.subplots(2, 2, figsize=(14, 12))
+        fig.suptitle('GPM Hold-Out Prediction Calibration (Frozen Parameters)', 
+                     fontsize=14, fontweight='bold')
+        
+        # Plot 1: χ² comparison
+        ax = axes[0, 0]
+        ax.scatter(chi2_bar, chi2_gpm, alpha=0.6, s=50)
+        lim = max(chi2_bar.max(), chi2_gpm.max())
+        ax.plot([0, lim], [0, lim], 'k--', alpha=0.5, label='1:1 line')
+        ax.set_xlabel('χ²_red (Baryons)', fontsize=11)
+        ax.set_ylabel('χ²_red (GPM Prediction)', fontsize=11)
+        ax.set_title('Prediction Quality', fontsize=12)
+        ax.legend()
+        ax.grid(alpha=0.3)
+        
+        # Add success/failure counts
+        n_success = np.sum(chi2_gpm < chi2_bar)
+        n_total = len(chi2_gpm)
+        ax.text(0.05, 0.95, f"{n_success}/{n_total} improved\n({n_success/n_total*100:.1f}%)",
+               transform=ax.transAxes, fontsize=10, verticalalignment='top',
+               bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
+        
+        # Plot 2: Improvement distribution
+        ax = axes[0, 1]
+        ax.hist(improvement, bins=30, alpha=0.7, edgecolor='black')
+        ax.axvline(0, color='r', linestyle='--', label='No improvement')
+        ax.axvline(np.median(improvement), color='g', linestyle='-', 
+                  label=f'Median: {np.median(improvement):+.1f}%')
+        ax.set_xlabel('Improvement (%)', fontsize=11)
+        ax.set_ylabel('Count', fontsize=11)
+        ax.set_title('Distribution of Improvements', fontsize=12)
+        ax.legend()
+        ax.grid(alpha=0.3)
+        
+        # Plot 3: α_eff vs σ_v (gating signature)
+        ax = axes[1, 0]
+        scatter = ax.scatter(sigma_v, alpha_eff, c=improvement, 
+                           cmap='RdYlGn', vmin=-50, vmax=100, s=50, alpha=0.7)
+        ax.set_xlabel('σ_v [km/s]', fontsize=11)
+        ax.set_ylabel('α_eff', fontsize=11)
+        ax.set_title('Environmental Gating', fontsize=12)
+        ax.grid(alpha=0.3)
+        plt.colorbar(scatter, ax=ax, label='Improvement (%)')
+        
+        # Plot 4: Improvement vs mass (mass gate validation)
+        ax = axes[1, 1]
+        scatter = ax.scatter(M_total, improvement, c=alpha_eff, 
+                           cmap='viridis', s=50, alpha=0.7, norm=plt.Normalize(vmin=0, vmax=0.3))
+        ax.axhline(0, color='r', linestyle='--', alpha=0.5)
+        ax.axvline(self.M_star, color='k', linestyle=':', alpha=0.5, label=f'M* = {self.M_star:.1e}')
+        ax.set_xlabel('M_total [M☉]', fontsize=11)
+        ax.set_ylabel('Improvement (%)', fontsize=11)
+        ax.set_title('Mass Gate Validation', fontsize=12)
+        ax.set_xscale('log')
+        ax.legend()
+        ax.grid(alpha=0.3)
+        plt.colorbar(scatter, ax=ax, label='α_eff')
+        
+        plt.tight_layout()
+        
+        plot_path = os.path.join(output_dir, 'holdout_calibration.png')
+        plt.savefig(plot_path, dpi=150, bbox_inches='tight')
+        print(f"✓ Saved calibration plot to {plot_path}")
+        plt.close()
+
+
+def get_all_sparc_galaxies(data_dir=None):
+    """Load all 175 SPARC galaxy names from Rotmod_LTG directory."""
+    if data_dir is None:
+        # Try to find data directory
+        possible_paths = [
+            r'C:\Users\henry\dev\sigmagravity\data\Rotmod_LTG',
+            r'../data/Rotmod_LTG',
+            r'../../data/Rotmod_LTG'
+        ]
+        for path in possible_paths:
+            if os.path.exists(path):
+                data_dir = path
+                break
+    
+    if data_dir is None or not os.path.exists(data_dir):
+        raise FileNotFoundError(f"Cannot find SPARC data directory")
+    
+    files = [f.replace('_rotmod.dat', '') for f in os.listdir(data_dir) 
+             if f.endswith('_rotmod.dat')]
+    return sorted(files)
+
+
+def main():
+    """
+    Main driver: Hold-out prediction on FULL 175 SPARC galaxy sample.
+    """
+    # Initialize predictor (FROZEN PARAMETERS)
+    predictor = GPMPredictor(
+        alpha_0=0.30,
+        ell_0=0.80,
+        M_star=2e10,
+        sigma_star=70.0,
+        Q_star=2.0,
+        n_M=2.5,
+        p=0.5
+    )
+    
+    # Load FULL SPARC galaxy list (175 galaxies)
+    all_galaxies = get_all_sparc_galaxies()
+    
+    print(f"\nFound {len(all_galaxies)} SPARC galaxies")
+    print("\nRunning FULL hold-out prediction (no parameter tuning)...\n")
+    
+    # Run hold-out prediction on ALL galaxies
+    results = predictor.predict_batch(all_galaxies)
+    
+    print("\n✓ Hold-out prediction complete!")
+    print("\nResults:")
+    print(f"  - Full sample: {len(all_galaxies)} galaxies")
+    print(f"  - Frozen parameters (no tuning)")
+    print(f"  - Results saved to outputs/gpm_holdout/")
+    print("\nNext steps:")
+    print("1. Analyze failure modes (expect M > 10¹¹ M☉)")
+    print("2. Stratify by mass and morphology")
+    print("3. Compute prediction interval coverage")
+    print("4. Generate per-galaxy residual plots")
+
+
+if __name__ == '__main__':
+    main()
