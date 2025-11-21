@@ -41,14 +41,17 @@ class EnvironmentEstimatorV2:
                            r: np.ndarray,
                            v_obs: np.ndarray,
                            SBdisk: np.ndarray,
-                           M_L: float = 0.5) -> Tuple[float, float]:
+                           M_L: float = 0.5,
+                           v_bar: np.ndarray = None,
+                           R_disk: float = None) -> Tuple[float, float]:
         """
         Estimate Q and σ_v from SPARC data.
         
-        Method:
-        1. Compute Σ_b(R) from SBdisk × M/L
-        2. Compute κ(R) from rotation curve (κ² = 2Ω(Ω + dΩ/dr))
-        3. Assume Q ~ 1.5 (marginally stable) → solve for σ_v
+        CRITICAL FIXES (to prevent catastrophic failures):
+        1. Q_target = 1.0 (not 1.5) - more conservative, prevents σ_v blow-up
+        2. Use v_bar (baryons) for κ, not v_obs - avoids circularity
+        3. Clamp σ_v to [10, 50] km/s - realistic range for disk galaxies
+        4. Compactness guard: extra limit for compact/dense dwarfs
         
         Parameters:
         -----------
@@ -60,6 +63,10 @@ class EnvironmentEstimatorV2:
             Surface brightness [L_sun/pc²]
         M_L : float
             Mass-to-light ratio [M_sun/L_sun]
+        v_bar : array, optional
+            Baryon rotation velocities [km/s] (use for κ to avoid circularity)
+        R_disk : float, optional
+            Disk scale length [kpc] (for compactness check)
         
         Returns:
         --------
@@ -72,6 +79,9 @@ class EnvironmentEstimatorV2:
         # SB is in L_sun/pc², need M_sun/kpc²
         Sigma_b = SBdisk * M_L * 1e6  # M_sun/kpc²
         
+        # Use v_bar for κ if provided (avoid circularity)
+        v_for_kappa = v_bar if v_bar is not None else v_obs
+        
         # Mask valid points
         mask = (r > 0) & (v_obs > 0) & (Sigma_b > 0)
         if np.sum(mask) < 3:
@@ -81,10 +91,11 @@ class EnvironmentEstimatorV2:
         
         r_valid = r[mask]
         v_valid = v_obs[mask]
+        v_kappa_valid = v_for_kappa[mask]
         Sigma_valid = Sigma_b[mask]
         
-        # Compute angular velocity Ω = v/r
-        Omega = v_valid / r_valid
+        # Compute angular velocity Ω = v/r (using v_bar to avoid circularity)
+        Omega = v_kappa_valid / r_valid
         
         # Compute dΩ/dr numerically
         dOmega_dr = np.gradient(Omega, r_valid)
@@ -109,17 +120,31 @@ class EnvironmentEstimatorV2:
         Sigma_use = Sigma_valid[kappa_mask]
         kappa_use = kappa[kappa_mask]
         
-        # Assume disks are marginally stable: Q ~ 1.5
+        # CRITICAL FIX: Q_target = 1.0 (not 1.5)
+        # More conservative assumption prevents σ_v blow-up in compact dwarfs
         # Q = κ σ_R / (π G Σ) → σ_R = Q π G Σ / κ
-        Q_target = 1.5
+        Q_target = 1.0
         sigma_v_at_r = Q_target * np.pi * self.G * Sigma_use / kappa_use
         
         # Weight by surface density (inner disk dominates)
         weights = Sigma_use / np.sum(Sigma_use)
         sigma_v_mean = np.sum(sigma_v_at_r * weights)
         
-        # Sanity bounds
-        sigma_v_mean = np.clip(sigma_v_mean, 5.0, 80.0)
+        # CRITICAL FIX: Clamp to realistic range [10, 50] km/s
+        sigma_v_mean = np.clip(sigma_v_mean, 10.0, 50.0)
+        
+        # COMPACTNESS GUARD: Extra limits for compact/dense dwarfs
+        # These systems are not suitable for GPM (local gravity dominates)
+        if R_disk is not None and R_disk < 1.0:  # Compact dwarf
+            sigma_v_mean = min(sigma_v_mean, 35.0)
+            if self.verbose:
+                print(f"  [ENV] Compactness guard: R_disk = {R_disk:.2f} kpc, limiting σ_v to 35 km/s")
+        
+        # Check median surface density (another compactness indicator)
+        if np.median(Sigma_use) > 1e9:  # Very dense
+            sigma_v_mean = min(sigma_v_mean, 35.0)
+            if self.verbose:
+                print(f"  [ENV] High density guard: median Σ = {np.median(Sigma_use):.1e}, limiting σ_v to 35 km/s")
         
         # Now compute actual Q with this σ_v
         Q_at_r = kappa_use * sigma_v_mean / (np.pi * self.G * Sigma_use)

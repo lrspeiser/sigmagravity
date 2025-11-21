@@ -175,10 +175,12 @@ class GPMPredictor:
                         SBdisk.append(float(parts[6]))
             SBdisk = np.array(SBdisk)
             
-            # Use improved environment estimator V2
+            # Use improved environment estimator V2 (with v_bar and R_disk)
             estimator = EnvironmentEstimatorV2(verbose=False)
             Q, sigma_v = estimator.estimate_from_sparc(
-                r_data, v_obs, SBdisk, M_L=0.5
+                r_data, v_obs, SBdisk, M_L=0.5,
+                v_bar=v_bar,  # Use baryons for κ (avoid circularity)
+                R_disk=R_disk  # For compactness check
             )
             
             # Compute gates (NO FITTING) - includes HARD FLOOR at 0.05
