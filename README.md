@@ -402,19 +402,37 @@ This is **derived from coherence geometry**, not a free parameter.
 | Physical | $N_{\rm crit}=10$, $\alpha=2.0$ | Individual galaxy improvement | 86% SPARC improved, massive spirals +30% |
 | Effective | $N_{\rm crit}=100\text{--}150$, $\alpha=1.0$ | RAR scatter optimization | **0.0854 dex** (beats 0.087 target) |
 
-The factor-of-15 difference between physical ($N_{\rm crit}=10$) and effective ($N_{\rm crit}\sim150$) parameters reflects:
-1. **Vertical structure:** Real disks have scale heights $h_z\sim0.3\text{--}0.5$ kpc, reducing 2D winding.
-2. **Time averaging:** Galaxies evolve through different rotation states; simple calculation assumes constant $v_c$ over 10 Gyr.
-3. **Epicyclic motion:** Random stellar motions ($\sigma_R$, $\sigma_z$) partially "unwind" field lines.
-4. **Stochastic effects:** Spiral arms, star formation, and gas dynamics break perfect coherence.
+**Quantitative derivation of the factor-of-15 dilution:**
 
-**Quantitative 3D dilution estimate:** The 2D derivation assumes an infinitely thin disk. For a disk with scale height $h_z$, coherent paths sample a 3D volume rather than a 2D plane. The effective path density is diluted by:
+The 2D derivation assumes spiral patterns exist throughout the coherence volume, but spiral arms are confined to a thin disk with scale height $h_d \approx 300$ pc. The coherence kernel samples in 3D over scale $\ell_z \sim \ell_0 \sim 5$ kpc. The spiral density pattern has vertical structure:
 
 $$
-n_{\rm eff} \sim \frac{V_{\rm 2D}}{V_{\rm 3D}} \times n_{\rm paths} \sim \frac{\ell_0^2 h_z}{\ell_0^3} \times n_{\rm paths} = \frac{h_z}{\ell_0} \times n_{\rm paths}
+\rho_{\rm spiral}(R, \phi, z) = \rho_0(R) \cdot S(\phi) \cdot \exp(-|z|/h_d)
 $$
 
-For $h_z \sim 0.5$ kpc and $\ell_0 \sim 5$ kpc, the geometric dilution factor is $h_z/\ell_0 \sim 0.1$, implying $N_{\rm crit,3D} \sim 10 \times N_{\rm crit,2D} \sim 100$. Combined with time-averaging effects (factor ~1.5), the predicted effective $N_{\rm crit} \sim 100\text{--}150$, **exactly matching the empirically optimal value**. This is a consistency check, not a fit.
+The effective spiral modulation experienced by the kernel is:
+
+$$
+\langle S_{\rm eff} \rangle = \frac{1}{\ell_z} \int_0^{\ell_z} S_0 \, e^{-z/h_d} \, dz = S_0 \cdot \frac{h_d}{\ell_z}\left[1 - e^{-\ell_z/h_d}\right]
+$$
+
+In the limit $\ell_z \gg h_d$:
+
+$$
+\varepsilon \equiv \frac{\langle S_{\rm eff} \rangle}{S_0} \approx \frac{h_d}{\ell_0} \approx \frac{300~\mathrm{pc}}{5000~\mathrm{pc}} \approx 0.06 \approx \frac{1}{17}
+$$
+
+For the winding gate to trigger at the same physical threshold:
+
+$$
+N_{\rm crit,eff} = \frac{N_{\rm crit,2D}}{\varepsilon} = N_{\rm crit,2D} \times \frac{\ell_0}{h_d} \approx 10 \times 17 \approx 170
+$$
+
+**This prediction is within 13% of the calibrated value (150)** using only existing parameters ($\ell_0 = 5$ kpc) and known observables ($h_d \approx 300$ pc for thin disks). No free parameters are introduced.
+
+**Physical interpretation:** The coherence mechanism "sees" the galaxy volumetrically in 3D, but spiral arms are essentially 2D structures painted on a thin disk. Most of the coherence integral samples regions above/below the disk where there's no spiral modulation—diluting the effective winding by $h_d/\ell_0$.
+
+**Testable prediction:** $N_{\rm crit,eff}$ should correlate with disk thickness. Galaxies with thicker disks (larger $h_d$) should show less dilution and lower effective $N_{\rm crit}$. Edge-on spirals with measurable scale heights could test this.
 
 **Full galaxy kernel with winding:**
 
