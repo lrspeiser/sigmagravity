@@ -58,6 +58,7 @@ class CMSIParams:
     
     ell_0_kpc: Characteristic coherence length scale [kpc].
                Sets the radial profile shape.
+               If use_scale_dependent_ell0=True, this is ignored.
     
     n_profile: Shape exponent for radial coherence profile.
     
@@ -77,11 +78,17 @@ class CMSIParams:
     Note on Σ: This is ALSO crucial - point masses don't self-interfere:
           Galaxy: Σ ~ 50 M_sun/pc² → (Σ/Σ_ref) ~ 1
           Solar:  Σ ~ 0 → (Σ/Σ_ref) ~ 0
+    
+    Scale-dependent ℓ₀:
+        From coherence time: ℓ_coh ~ c × τ_coh ~ c × R/v_c
+        This implies ℓ₀ should scale with system size: ℓ₀ = η × R_half
+        where η is a universal constant (~0.3-0.6).
+        This unifies galaxies and clusters with a single parameter!
     """
     chi_0: float = 800.0       # Base nonlinear coupling
     gamma_phase: float = 1.5   # Phase coherence exponent
     alpha_Ncoh: float = 0.55   # N_coh → enhancement exponent
-    ell_0_kpc: float = 2.2     # Coherence length scale [kpc]
+    ell_0_kpc: float = 2.2     # Coherence length scale [kpc] (if not scale-dependent)
     n_profile: float = 2.0     # Radial profile shape
     
     # Source density parameters (the "no self-interference for point masses" physics)
@@ -92,6 +99,10 @@ class CMSIParams:
     include_K_rough: bool = True
     K_rough_prefactor: float = 0.774
     K_rough_exponent: float = 0.1
+    
+    # Scale-dependent coherence length (unifies galaxies and clusters)
+    use_scale_dependent_ell0: bool = False
+    eta_ell0: float = 0.5      # ℓ₀ = η × R_half (universal constant)
 
 
 def compute_phase_coherence(
@@ -271,7 +282,8 @@ def cmsi_enhancement(
     v_circ: np.ndarray,
     sigma_v: np.ndarray,
     params: CMSIParams,
-    Sigma: Optional[np.ndarray] = None
+    Sigma: Optional[np.ndarray] = None,
+    R_half: Optional[float] = None
 ) -> Tuple[np.ndarray, dict]:
     """
     Compute full CMSI enhancement factor F_CMSI(R).
@@ -292,6 +304,11 @@ def cmsi_enhancement(
         Galaxy disk: Σ ~ 50 M_sun/pc² → full effect
         Solar System: Σ ~ 0 (point mass) → no effect
     
+    Scale-dependent ℓ₀:
+        If params.use_scale_dependent_ell0=True and R_half is provided:
+        ℓ₀ = η × R_half  (derived from coherence time physics)
+        This unifies galaxies (~5 kpc) and clusters (~500 kpc).
+    
     Parameters
     ----------
     R_kpc : array
@@ -304,6 +321,9 @@ def cmsi_enhancement(
         CMSI parameters
     Sigma : array, optional
         Surface density [M_sun/pc²]. If None, estimate from v_circ profile.
+    R_half : float, optional
+        Half-mass/half-light radius [kpc]. Used for scale-dependent ℓ₀.
+        If None and scale-dependent mode is on, estimates from R array.
     
     Returns
     -------
@@ -315,9 +335,19 @@ def cmsi_enhancement(
     # Step 1: Phase coherence → N_coh
     N_coh = compute_phase_coherence(v_circ, sigma_v, params.gamma_phase)
     
-    # Step 2: Radial profile
+    # Step 2: Determine coherence length scale
+    if params.use_scale_dependent_ell0:
+        # Scale-dependent ℓ₀ from coherence time: ℓ₀ = η × R_half
+        if R_half is None:
+            # Estimate R_half from data extent (median radius)
+            R_half = np.median(R_kpc)
+        ell_0_local = params.eta_ell0 * R_half
+    else:
+        ell_0_local = params.ell_0_kpc
+    
+    # Step 3: Radial profile with local ℓ₀
     f_profile = compute_radial_coherence_profile(
-        R_kpc, params.ell_0_kpc, params.n_profile
+        R_kpc, ell_0_local, params.n_profile
     )
     
     # Step 3: The (v/c)² factor from nonlinear GR
@@ -376,6 +406,8 @@ def cmsi_enhancement(
         'K_rough': K_rough,
         'F_total': F_total,
         'sigma_over_vc': sigma_v / np.maximum(v_circ, 1.0),
+        'ell_0_local': ell_0_local,
+        'R_half': R_half if params.use_scale_dependent_ell0 else None,
     }
     
     return F_total, diagnostics
