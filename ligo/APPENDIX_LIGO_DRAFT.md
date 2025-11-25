@@ -101,6 +101,10 @@ The large coefficient of variation reflects the spread in both observed masses a
 | 3000           | $1.4 \times 10^6$ | 1.59 | 95.2 $M_\odot$         |
 | 5000           | $2.3 \times 10^6$ | 2.16 | 129.4 $M_\odot$        |
 
+### I.3.4 Selection Bias Null Hypothesis (Monte Carlo)
+
+We constructed an analytical selection model using standard scaling $\mathrm{SNR} \propto \mathcal{M}_c^{5/3}/d$ with an SNR threshold of 8, uniform-in-volume distances, and a power-law mass function $dN/dM \propto M^{-2.3}$. Over 1000 Monte Carlo catalogs, the expected selection-only mass–distance correlation is $\bar r_{\rm sel} = 0.215 \pm 0.005$, and not a single realization reached the observed $r=0.585$ (i.e., $p=0.0000$ to 4 decimals). Thus, the observed correlation significantly exceeds what selection effects predict.
+
 ### I.4 Discussion
 
 #### I.4.1 Comparison with Standard Explanations

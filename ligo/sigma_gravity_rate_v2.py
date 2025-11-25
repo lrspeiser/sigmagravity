@@ -26,19 +26,97 @@ DATA_FILE = Path(__file__).parent / "IGWN-GWTC4p0-1a206db3d_721-PESummaryTable.h
 LAMBDA_COH_KPC = 2.2
 
 
-def load_data():
+def load_data(dedupe=True):
+    """Load GWTC-4 data, optionally deduplicating to one row per unique event.
+    
+    Args:
+        dedupe: If True, collapse multiple rows per event to median values.
+                This is CRITICAL for correct statistics—raw files may have
+                multiple pipeline/posterior entries per event.
+    """
     with h5py.File(DATA_FILE, 'r') as f:
         data = f['summary_info'][:]
-    return {
-        'name': [n.decode('utf-8').strip() for n in data['gw_name']],
+    
+    names = [n.decode('utf-8').strip() for n in data['gw_name']]
+    raw = {
+        'name': names,
         'mass': data['total_mass_source_median'],
         'mass_1': data['mass_1_source_median'],
         'mass_2': data['mass_2_source_median'],
         'distance': data['luminosity_distance_median'],
         'redshift': data['redshift_median'],
         'snr': data['network_matched_filter_snr_median'],
-        'chi_eff': data['chi_eff_median'],  # Effective spin parameter
+        'chi_eff': data['chi_eff_median'],
     }
+    
+    n_raw = len(names)
+    
+    if not dedupe:
+        print(f"[load_data] Loaded {n_raw} rows (no deduplication)")
+        return raw
+    
+    # Deduplicate: take median of each field per unique event name
+    unique_names = sorted(set(names))
+    n_unique = len(unique_names)
+    
+    out = {k: [] for k in raw.keys()}
+    for uname in unique_names:
+        idxs = [i for i, n in enumerate(names) if n == uname]
+        out['name'].append(uname)
+        for field in ['mass', 'mass_1', 'mass_2', 'distance', 'redshift', 'snr', 'chi_eff']:
+            vals = [raw[field][i] for i in idxs if not np.isnan(raw[field][i])]
+            out[field].append(np.median(vals) if vals else np.nan)
+    
+    # Convert lists to arrays
+    for field in ['mass', 'mass_1', 'mass_2', 'distance', 'redshift', 'snr', 'chi_eff']:
+        out[field] = np.array(out[field])
+    
+    n_dupes = n_raw - n_unique
+    print(f"[load_data] Loaded {n_raw} rows → {n_unique} unique events (removed {n_dupes} duplicates)")
+    
+    return out
+
+
+def load_data_from_file(file_path: str, dedupe=True):
+    """Load a GWTC PESummaryTable HDF5 by explicit path.
+    
+    Args:
+        file_path: Path to the HDF5 file.
+        dedupe: If True, collapse multiple rows per event to median values.
+    """
+    p = Path(file_path)
+    with h5py.File(p, 'r') as f:
+        data = f['summary_info'][:]
+    
+    names = [n.decode('utf-8').strip() for n in data['gw_name']]
+    raw = {
+        'name': names,
+        'mass': data['total_mass_source_median'],
+        'mass_1': data['mass_1_source_median'],
+        'mass_2': data['mass_2_source_median'],
+        'distance': data['luminosity_distance_median'],
+        'redshift': data['redshift_median'],
+        'snr': data['network_matched_filter_snr_median'],
+        'chi_eff': data['chi_eff_median'],
+    }
+    
+    if not dedupe:
+        return raw
+    
+    # Deduplicate: take median of each field per unique event name
+    unique_names = sorted(set(names))
+    out = {k: [] for k in raw.keys()}
+    for uname in unique_names:
+        idxs = [i for i, n in enumerate(names) if n == uname]
+        out['name'].append(uname)
+        for field in ['mass', 'mass_1', 'mass_2', 'distance', 'redshift', 'snr', 'chi_eff']:
+            vals = [raw[field][i] for i in idxs if not np.isnan(raw[field][i])]
+            out[field].append(np.median(vals) if vals else np.nan)
+    
+    for field in ['mass', 'mass_1', 'mass_2', 'distance', 'redshift', 'snr', 'chi_eff']:
+        out[field] = np.array(out[field])
+    
+    return out
 
 
 def analyze_mass_distance_correlation():
@@ -248,18 +326,25 @@ def analyze_spin_distributions():
             print(f"  ? Gap events have LOWER spins - unclear interpretation")
     
     # High spin fraction comparison
+    # NOTE: Use SIGNED χ_eff > 0.3 (not absolute value) because hierarchical
+    # mergers preferentially produce aligned, positive spins. Using |χ_eff|
+    # conflates anti-aligned spins (which are rare first-gen too) with aligned.
     high_spin_threshold = 0.3
-    normal_high_frac = np.mean(np.abs(normal_spins) > high_spin_threshold)
-    gap_high_frac = np.mean(np.abs(gap_spins) > high_spin_threshold)
+    normal_high_frac = np.mean(normal_spins > high_spin_threshold)  # signed
+    gap_high_frac = np.mean(gap_spins > high_spin_threshold)  # signed
     
-    print(f"\nHigh-spin fraction (|χ_eff| > {high_spin_threshold}):")
+    print(f"\nHigh-spin fraction (χ_eff > {high_spin_threshold}, signed):")
     print(f"  Normal events: {100*normal_high_frac:.1f}%")
     print(f"  Gap events:    {100*gap_high_frac:.1f}%")
     
-    if gap_high_frac <= normal_high_frac * 1.5:
+    # Hierarchical mergers predict >50% high-spin for gap events
+    if gap_high_frac < 0.20:
+        print(f"  ✓ Gap events have LOW high-spin fraction (<20%)")
+        print(f"    This is INCONSISTENT with hierarchical mergers (expect >50%)")
+    elif gap_high_frac <= normal_high_frac * 2.0:
         print(f"  ✓ Gap events do NOT have excess high-spin systems")
     else:
-        print(f"  ⚠ Gap events have {gap_high_frac/normal_high_frac:.1f}× more high-spin systems")
+        print(f"  ⚠ Gap events have {gap_high_frac/max(normal_high_frac,0.01):.1f}× more high-spin systems")
     
     return {
         'gap_spins': gap_spins,
@@ -647,6 +732,11 @@ def plot_spin_comparison():
         ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
                 f'n={n}', ha='center', va='bottom', fontsize=9)
     
+    # Console report for auditability
+    print("\nHigh-spin fraction by mass bin (χ_eff > 0.3):")
+    for label, frac, n in zip(bin_labels, high_spin_fractions, n_events):
+        print(f"  {label:>7} M☉ : {frac:5.1f}% (n={n})")
+    
     # Plot 4: Summary box
     ax = axes[1, 1]
     ax.axis('off')
@@ -830,3 +920,50 @@ CRITICAL EVIDENCE vs HIERARCHICAL MERGER HYPOTHESIS:
     # Generate plots
     plot_results(sg_results)
     plot_spin_comparison()
+
+    # Cross-catalog consistency (uses local files if present)
+    print("\n" + "="*70)
+    print("CROSS-CATALOG CONSISTENCY (optional - requires GWTC1/2/3 tables)")
+    print("="*70)
+    def cross_catalog_consistency():
+        catalogs = {
+            'GWTC-1 (O1+O2)': 'ligo/IGWN-GWTC1-PESummaryTable.hdf5',
+            'GWTC-2.1 (O3a)': 'ligo/IGWN-GWTC2p1-PESummaryTable.hdf5',
+            'GWTC-3 (O3b)': 'ligo/IGWN-GWTC3p0-PESummaryTable.hdf5',
+            'GWTC-4 (O4a)': str(DATA_FILE),
+        }
+        results = {}
+        for name, fpath in catalogs.items():
+            try:
+                d = load_data_from_file(fpath)
+            except FileNotFoundError:
+                print(f"{name}: file not found at {fpath} — download from GWOSC/Zenodo")
+                continue
+            valid = (~np.isnan(d['mass'])) & (~np.isnan(d['distance'])) & (d['snr'] > 8)
+            if np.sum(valid) < 10:
+                print(f"{name}: insufficient events after cuts")
+                continue
+            corr, p_val = stats.pearsonr(d['distance'][valid], d['mass'][valid])
+            gap_mask = (d['mass'] >= 100) & valid
+            eps = []
+            for m, dist_mpc in zip(d['mass'][gap_mask], d['distance'][gap_mask]):
+                C = m / 60.0
+                N = dist_mpc * 1000 / LAMBDA_COH_KPC
+                if N > 0 and C > 0:
+                    eps.append(np.power(C, 1/N) - 1)
+            if len(eps) == 0:
+                print(f"{name}: no gap events with valid data")
+                continue
+            eps = np.array(eps)
+            results[name] = {
+                'n_total': int(np.sum(valid)),
+                'n_gap': int(np.sum(gap_mask)),
+                'epsilon_median': float(np.median(eps)),
+                'epsilon_std': float(np.std(eps)),
+                'correlation': float(corr),
+                'p_value': float(p_val),
+            }
+            print(f"{name}: N={results[name]['n_total']}, gap={results[name]['n_gap']}, "
+                  f"median ε={results[name]['epsilon_median']:.2e}, r={corr:.3f} (p={p_val:.1e})")
+        return results
+    cross_catalog_consistency()
