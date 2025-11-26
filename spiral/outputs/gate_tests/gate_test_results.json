@@ -1,0 +1,50 @@
+[
+  {
+    "test": "bar_gate",
+    "group": "Strongly Barred (SB)",
+    "n_galaxies": 30,
+    "rar_without": 0.03395269945706357,
+    "rar_with": 0.03395269945706357,
+    "improvement_pct": 0.0
+  },
+  {
+    "test": "bar_gate",
+    "group": "Unbarred (S)",
+    "n_galaxies": 118,
+    "rar_without": 0.07851334632799253,
+    "rar_with": 0.08185608902715946,
+    "improvement_pct": -4.257547099320531
+  },
+  {
+    "test": "bulge_gate",
+    "group": "High B/D (>0.15)",
+    "n_galaxies": 20,
+    "rar_without": 0.04049277731566365,
+    "rar_with": 0.040319046046390306,
+    "improvement_pct": 0.4290426115230663
+  },
+  {
+    "test": "bulge_gate",
+    "group": "Low B/D (<0.05)",
+    "n_galaxies": 137,
+    "rar_without": 0.08575654916929686,
+    "rar_with": 0.08563453873584458,
+    "improvement_pct": 0.14227535346765424
+  },
+  {
+    "test": "shear_gate",
+    "group": "High Shear",
+    "n_galaxies": 47,
+    "rar_without": 0.08255628873026856,
+    "rar_with": 0.07422316066668963,
+    "improvement_pct": 10.093874363472517
+  },
+  {
+    "test": "shear_gate",
+    "group": "Low Shear",
+    "n_galaxies": 54,
+    "rar_without": 0.08276983175908292,
+    "rar_with": 0.07533003539446798,
+    "improvement_pct": 8.988536289731586
+  }
+]
