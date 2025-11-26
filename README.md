@@ -1,4 +1,4 @@
-# Σ-Gravity: A Universal Scale-Dependent Enhancement Reproducing Galaxy Dynamics and Cluster Lensing Without Particle Dark-Matter Halos
+# Σ-Gravity: A Scale-Dependent Gravitational Enhancement Reproducing Galaxy Dynamics and Cluster Lensing Without Particle Dark Matter
 
 **Authors:** Leonard Speiser  
 **Date:** 2025-10-20 (manuscript draft)
@@ -7,7 +7,7 @@
 
 ## Abstract
 
-We present Σ-Gravity, a scale-dependent gravitational enhancement that reproduces galaxy rotation curves and cluster lensing with universal parameters and no per-system dark-matter halo tuning. The model introduces a multiplicative kernel $g_{\rm eff} = g_{\rm bar}[1+K(R)]$ that vanishes in compact systems (ensuring Solar System safety) and rises in extended structures. With parameters calibrated once on SPARC galaxies, Σ-Gravity achieves **0.0854 dex** scatter on the radial-acceleration relation (RAR)—competitive with MOND (0.10–0.13 dex) and 2–3× better than individually-tuned ΛCDM halo fits. Applied zero-shot to Milky Way stars (no retuning), the model yields +0.062 dex bias and 0.142 dex scatter. For galaxy clusters, the same framework with recalibrated amplitude achieves 88.9% coverage (16/18) within 68% posterior predictive checks across 10 clusters with 7.9% median fractional error. Two blind hold-outs (Abell 2261, MACSJ1149) both fall within 68% PPC. The kernel structure is motivated by quantum path-integral reasoning, but parameters $\{A, \ell_0, p, n_{\rm coh}\}$ are empirically calibrated (see Supplementary Information §7 for validation that simple theoretical predictions fail by factors of 10–2500×). Complete reproducible code and validation suite are released publicly.
+We present Σ-Gravity, a scale-dependent gravitational enhancement that reproduces galaxy rotation curves and cluster lensing with domain-calibrated parameters and no per-system dark-matter halo tuning. The model introduces a multiplicative kernel $g_{\rm eff} = g_{\rm bar}[1+K(R)]$ that vanishes in compact systems (ensuring Solar System safety) and rises in extended structures. With parameters calibrated once on SPARC galaxies, Σ-Gravity achieves **0.0854 dex** scatter on the radial-acceleration relation (RAR)—competitive with MOND (0.10–0.13 dex) and 2–3× better than individually-tuned ΛCDM halo fits. Applied zero-shot to Milky Way stars (no retuning), the model yields +0.062 dex bias and 0.142 dex scatter. For galaxy clusters, the same framework with recalibrated amplitude achieves 88.9% coverage (16/18) within 68% posterior predictive checks across 10 clusters with 7.9% median fractional error. Two blind hold-outs (Abell 2261, MACSJ1149) both fall within 68% PPC. The kernel structure is motivated by quantum path-integral reasoning, but parameters $\{A, \ell_0, p, n_{\rm coh}\}$ are empirically calibrated (see Supplementary Information §7 for validation that simple theoretical predictions fail by factors of 10–2500×). Complete reproducible code and validation suite are released publicly.
 
 ---
 
@@ -138,7 +138,7 @@ The canonical kernel from §2 is implemented without redefinition. Triaxial proj
 
 ![Figure 1. RAR Performance](figures/rar_sparc_validation.png)
 
-*Figure 1. Radial Acceleration Relation performance. Σ-Gravity achieves 0.087 dex scatter with universal parameters.*
+*Figure 1. Radial Acceleration Relation performance. Σ-Gravity achieves 0.087 dex scatter with domain-calibrated parameters (no per-galaxy tuning).*
 
 ### 5.2 Clusters
 
@@ -169,6 +169,8 @@ The canonical kernel from §2 is implemented without redefinition. Triaxial proj
 2. 4–13× improvement over GR in outer disk (6–20 kpc)
 3. Inner disk (3–6 kpc): near-zero residuals for both models (gate suppression validated)
 
+**Note on fair comparison:** This comparison tests generalization, not fitting power. The Σ-Gravity kernel was frozen from SPARC calibration; no MW-specific parameters were adjusted. A fair NFW comparison would require re-tuning $(M_{200}, c)$ to MW kinematics—at which point Σ-Gravity's zero-shot success becomes the relevant benchmark.
+
 Full MW analysis with all figures in SI §11.
 
 ---
@@ -177,11 +179,25 @@ Full MW analysis with all figures in SI §11.
 
 **Where Σ-Gravity stands:** Solar System kernel vanishes (K→0) by design; Cassini/PPN limits passed with margin ≥10⁸. Galaxies: 0.0854 dex RAR scatter without modifying GR. Clusters: realistic baryons + Σ-kernel reproduce Einstein radii; population geometry and mass-scaling now falsifiable.
 
+### 6.1 Parameter Count Comparison
+
+A critical question is whether Σ-Gravity's success comes from additional fitting freedom. The answer is no—the key distinction is **domain-calibrated vs per-system tuning**:
+
+| Framework | Free params (galaxies) | Free params (clusters) | Per-system tuning? |
+|-----------|------------------------|------------------------|--------------------|
+| Σ-Gravity | 4 + 4 gates | 4 (same form) | **No** |
+| MOND | 1–2 | N/A (doesn't fit clusters) | No |
+| ΛCDM (NFW) | 2–3 per galaxy | 2–3 per cluster | **Yes** |
+
+Σ-Gravity calibrates 8 parameters once on SPARC, then applies them to all 166 galaxies, the MW (zero-shot), and—with recalibrated amplitude—to clusters. ΛCDM fits 2–3 parameters **per system**. For SPARC alone, that's 166 × 2 = 332+ fitted parameters vs Σ-Gravity's 8. This reframes the debate: Σ-Gravity isn't "more parameters than MOND"—it's "domain-calibrated parameters vs per-system fitting."
+
+### 6.2 Cross-Domain Parameter Variation
+
 **Amplitude ratio:** $A_c/A_0 \approx 7.8$ is order-of-magnitude consistent with path-geometry considerations (3D projected lensing vs 2D disk dynamics), but naive counting over-predicts; we treat this as heuristic support, not derivation.
 
-**Multi-kernel methodology:** The use of different kernel parameterizations across domains (Burr-XII for SPARC, saturated-well for MW) is standard effective field theory practice. All kernels share the same coherence scale: $\ell_0 = 5$ kpc corresponds to $R_b \approx 6$ kpc—both within 20%.
+**Coherence length ratio:** $\ell_0^{\rm cluster}/\ell_0^{\rm gal} \approx 40$ reflects different observables (2D rotation curves vs 3D projected lensing) integrating different path ensembles. Within each domain, mass-scaling is consistent with zero (γ = 0.09 ± 0.10 for clusters).
 
-**Mass-scaling:** γ = 0.09 ± 0.10 is consistent with no mass-scaling within clusters. The cross-domain difference ($\ell_0^{\rm gal} \sim 5$ kpc vs $\ell_0^{\rm cluster} \sim 200$ kpc) arises from observables integrating different path ensembles.
+**Multi-kernel methodology:** The use of different kernel parameterizations across domains (Burr-XII for SPARC, saturated-well for MW) is standard effective field theory practice. All kernels share the same coherence scale: $\ell_0 = 5$ kpc corresponds to $R_b \approx 6$ kpc—both within 20%.
 
 ---
 
@@ -196,7 +212,7 @@ Full MW analysis with all figures in SI §11.
 
 ## 8. Conclusion
 
-Σ-Gravity implements a coherence-gated, multiplicative kernel that preserves GR locally and explains galaxy and cluster phenomenology with realistic baryons. With no per-galaxy tuning, the model achieves **0.0854 dex** RAR scatter—the best result with universal parameters, beating MOND (0.10–0.13 dex) by 15–52% and approaching the theoretical measurement floor (~0.08 dex).
+Σ-Gravity implements a coherence-gated, multiplicative kernel that preserves GR locally and explains galaxy and cluster phenomenology with realistic baryons. With no per-galaxy tuning, the model achieves **0.0854 dex** RAR scatter—the best result with domain-calibrated parameters, beating MOND (0.10–0.13 dex) by 15–52% and approaching the theoretical measurement floor (~0.08 dex).
 
 **Key achievements:**
 
