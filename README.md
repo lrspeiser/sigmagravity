@@ -259,6 +259,21 @@ With $D_{\rm LOS} \sim 1$ Mpc and $\ell_0 \sim 200$ kpc, naive scaling gives ~5�
 
 **Multi-kernel methodology:** The use of different kernel parameterizations across domains (Burr-XII for SPARC, saturated-well for MW) is standard effective field theory practice. All kernels share the same coherence scale: $\ell_0 = 5$ kpc corresponds to $R_b \approx 6$ kpc—both within 20%.
 
+### 6.3 On the Gate Mechanisms
+
+The morphology gates are not arbitrary fitting switches but arise from physical considerations:
+
+| Gate | Physical basis | Testable prediction |
+|------|----------------|---------------------|
+| $G_{\rm bulge}$ | Bulges are pressure-supported (random velocities), disrupting coherent orbital phases | Bulge-dominated galaxies show weaker enhancement at fixed R |
+| $G_{\rm bar}$ | Bars are non-axisymmetric perturbations that mix orbital phases | Strongly barred galaxies show more suppression than unbarred |
+| $G_{\rm shear}$ | High velocity shear → rapid phase mixing → decoherence | High-shear regions show weaker enhancement |
+| $G_{\rm wind}$ | Differential rotation winds spiral structure → destructive interference | Face-on galaxies show stronger winding effect (✔ confirmed, §5.1.1) |
+
+Critically, the winding gate prediction (face-on > edge-on improvement) was derived from coherence geometry *before* testing on SPARC data. The confirmation (+9.2% vs +8.5%) demonstrates that at least one gate makes successful *a priori* predictions—distinguishing these mechanisms from post-hoc epicycles.
+
+Ablation studies (SI §12) confirm that removing any gate worsens RAR scatter, with the winding gate contributing the largest single improvement. The gates are necessary, not decorative.
+
 ---
 
 ## 7. Predictions & Falsifiability
