@@ -55,19 +55,23 @@ assert abs(num-ana)/num < 1e-6
 
 ---
 
-## SI §3 — Coherence Window Derivation
+## SI §3 — Coherence Damping Derivation
 
-Near the stationary azimuth $\varphi=0$ one may expand the separation as $\Delta(\varphi)\approx D + (RR'/(2D))\,\varphi^2$. The phase integral reduces to a Gaussian/Fresnel form; adding stochastic dephasing over a coherence length $\ell_0$ yields a radial envelope equivalent to
+Near the stationary azimuth $\varphi=0$ one may expand the separation as $\Delta(\varphi)\approx D + (RR'/(2D))\,\varphi^2$. The phase integral reduces to a Gaussian/Fresnel form; adding stochastic dephasing over a coherence length $\ell_0$ yields a radial damping envelope. The implemented form is:
 
 $$
-C(R) = 1 - \Big[1 + (R/\ell_0)^p\Big]^{-n_{\rm coh}} ,
+K_{\rm coh}(R) = \left(\frac{\ell_0}{\ell_0 + R}\right)^{n_{\rm coh}}
 $$
 
-with phenomenological exponents $p,n_{\rm coh}$ calibrated once on data. This envelope multiplies the Newtonian response, remaining curl-free.
+with phenomenological exponents calibrated once on data. This power-law decay multiplies the Newtonian response, remaining curl-free.
 
-### SI §3.1 Superstatistical derivation of the coherence window
+**Implementation note:** While the Burr-XII form $C(R) = 1 - [1 + (R/\ell_0)^p]^{-n_{\rm coh}}$ emerges from superstatistical models (§3.1), the validated code uses the simpler power-law decay $K_{\rm coh}(R) = (\ell_0/(\ell_0+R))^{n_{\rm coh}}$. Both satisfy the key physical requirements (full coherence at small $R$, decay at large $R$), but differ in their asymptotic behavior. The Burr-XII form has $C: 0 \to 1$ (enhancement "turns on"), while the power-law has $K_{\rm coh}: 1 \to 0$ (enhancement "turns off"). At galactic radii ($R \sim 20$ kpc, $\ell_0 \sim 5$ kpc, $n_{\rm coh} = 0.5$), they yield similar numerical values ($C \approx 0.49$ vs $K_{\rm coh} \approx 0.45$), but the power-law is computationally simpler and used throughout all results. The exponent $p$ appears only in the RAR term $(g^\dagger/g_{\rm bar})^p$, not in the coherence damping.
 
-We now show that the functional form of C(R) is not arbitrary but emerges naturally from a stochastic decoherence model in a heterogeneous medium. This derivation applies a standard mixture identity from reliability theory (Gamma–Weibull compounding yields Burr-XII survival; see, e.g., MATLAB Statistics Toolbox documentation and Rodriguez 1977) to the novel context of gravitational decoherence channels.
+### SI §3.1 Superstatistical derivation: Theoretical motivation for coherence decay
+
+**Note:** This derivation motivates the functional structure of coherence decay from superstatistical principles. The actual implemented form is the simpler power-law $K_{\rm coh} = (\ell_0/(\ell_0+R))^{n_{\rm coh}}$ described above, which captures the essential physics (coherence decay with scale) while being more tractable.
+
+We now show that coherence decay is not arbitrary but emerges naturally from a stochastic decoherence model in a heterogeneous medium. This derivation applies a standard mixture identity from reliability theory (Gamma–Weibull compounding yields Burr-XII survival; see, e.g., MATLAB Statistics Toolbox documentation and Rodriguez 1977) to the novel context of gravitational decoherence channels.
 
 **Physical model.** Assume coherence loss along scale R follows a Poisson process with integrated hazard H(R|λ) = λ(R/ℓ₀)^p, where λ > 0 is a "decoherence rate" that varies across the system due to environmental heterogeneity (density clumps, turbulence, bars, shear). The survival probability for a single channel is
 

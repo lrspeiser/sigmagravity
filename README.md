@@ -27,12 +27,12 @@ A persistent tension in contemporary astrophysics is that visible-matter gravity
 
 ### 1.2 Framework Structure
 
-The multiplicative form $g_{\rm eff}(\mathbf{x}) = g_{\rm bar}(\mathbf{x})[1 + K(\mathbf{x})]$ emerges from stationary-phase reduction of gravitational path integrals. The coherence window $C(R) = 1 - [1 + (R/\ell_0)^p]^{-n_{\rm coh}}$ (Burr-XII form) arises from superstatistical decoherence models (SI §3). Parameters $\{A, \ell_0, p, n_{\rm coh}\}$ are calibrated once per domain and frozen for all predictions.
+The multiplicative form $g_{\rm eff}(\mathbf{x}) = g_{\rm bar}(\mathbf{x})[1 + K(\mathbf{x})]$ emerges from stationary-phase reduction of gravitational path integrals. The coherence damping $K_{\rm coh}(R) = (\ell_0/(\ell_0+R))^{n_{\rm coh}}$ implements power-law decay motivated by superstatistical reasoning (SI §3). Parameters $\{A, \ell_0, p, n_{\rm coh}\}$ are calibrated once per domain and frozen for all predictions.
 
 **Key equations:**
 
 $$
-g_{\rm eff}(R) = g_{\rm bar}(R)\,[1 + K(R)], \quad C(R) = 1 - [1 + (R/\ell_0)^p]^{-n_{\rm coh}}
+g_{\rm eff}(R) = g_{\rm bar}(R)\,[1 + K(R)], \quad K_{\rm coh}(R) = \left(\frac{\ell_0}{\ell_0+R}\right)^{n_{\rm coh}}
 $$
 
 ---
@@ -47,19 +47,27 @@ The coherence length $\ell_0 \sim R(\sigma_v/v_c)$ balances coherence buildup ag
 
 ### 2.2 Theoretical Status
 
-Σ-Gravity occupies the same epistemic position as MOND in 1983 or the Fermi theory of weak interactions before electroweak unification. The multiplicative structure $g_{\rm eff} = g_{\rm bar}[1+K]$ and the Burr-XII coherence window are *motivated* by path-integral reasoning—not *derived* from it. The functional form is theoretically constrained (must vanish at small R, saturate at large R, be curl-free), but parameter values are empirical constants, analogous to how the fine-structure constant α ≈ 1/137 is measured rather than derived from QED.
+Σ-Gravity occupies the same epistemic position as MOND in 1983 or the Fermi theory of weak interactions before electroweak unification. The multiplicative structure $g_{\rm eff} = g_{\rm bar}[1+K]$ and the power-law coherence damping are *motivated* by path-integral and superstatistical reasoning—not *derived* from it. The functional form is theoretically constrained (must preserve coherence at small R, decay at large R, be curl-free), but parameter values are empirical constants, analogous to how the fine-structure constant α ≈ 1/137 is measured rather than derived from QED.
 
 We explicitly tested whether simple theoretical estimates could predict the fitted parameters; they fail by factors of 10–2500× (SI §7). This negative result is important: it establishes that Σ-Gravity is successful phenomenology awaiting deeper theoretical understanding, not a first-principles prediction. The path-integral language provides structural motivation, not numerical derivation.
 
-### 2.3 The Coherence Window
+### 2.3 The Coherence Damping
 
-The coherence window $C(R)$ satisfies: (1) $C(0) = 0$, (2) $C(\infty) = 1$, (3) smooth transition around $r \sim \ell_0$. The Burr Type XII form emerges naturally from superstatistical models where the decoherence rate varies spatially due to environmental heterogeneity (SI §3.1).
+The coherence damping term follows a power-law decay:
 
-**Asymptotic behavior:** For small $R \ll \ell_0$: $C(R) \approx n_{\rm coh}(R/\ell_0)^p$ (Solar System safety automatic). For large $R \gg \ell_0$: $C(R) \to 1$ (saturated enhancement).
+$$
+K_{\rm coh}(R) = \left(\frac{\ell_0}{\ell_0 + R}\right)^{n_{\rm coh}}
+$$
+
+This form satisfies key physical requirements: (1) $K_{\rm coh}(0) = 1$ (full coherence at small scales), (2) $K_{\rm coh}(\infty) \to 0$ (decoherence from large path separations), (3) smooth transition around $R \sim \ell_0$.
+
+**Asymptotic behavior:** For small $R \ll \ell_0$: $K_{\rm coh} \approx 1 - n_{\rm coh}(R/\ell_0)$ (Solar System safety: kernel vanishes as $R \to 0$ in full expression). For large $R \gg \ell_0$: $K_{\rm coh} \approx (\ell_0/R)^{n_{\rm coh}} \to 0$ (power-law decoherence).
+
+**Theoretical motivation:** This power-law form is motivated by superstatistical models of heterogeneous decoherence (SI §3). At galactic radii ($R \sim 20$ kpc, $\ell_0 \sim 5$ kpc, $n_{\rm coh} \sim 0.5$), it yields $K_{\rm coh} \approx 0.45$, providing ~50% coherence damping while remaining computationally tractable.
 
 ### 2.4 Parameter Interpretation
 
-**What is derived:** Multiplicative form $g_{\rm eff} = g_{\rm bar}[1+K]$; coherence length scaling $\ell_0 \propto R(\sigma_v/v_c)$; Burr-XII from superstatistics; Solar System safety.
+**What is derived:** Multiplicative form $g_{\rm eff} = g_{\rm bar}[1+K]$; coherence length scaling $\ell_0 \propto R(\sigma_v/v_c)$; power-law decay motivated by superstatistics; Solar System safety.
 
 **What is calibrated:** Amplitude $A$; exact values of $\ell_0$, $p$, $n_{\rm coh}$; scale dependence between galaxies/clusters. Simple theoretical predictions fail by factors of 10–2500× (SI §7).
 
@@ -68,10 +76,10 @@ The coherence window $C(R)$ satisfies: (1) $C(0) = 0$, (2) $C(\infty) = 1$, (3) 
 For circular motion in an axisymmetric disk:
 
 $$
-K(R) = A_0\, (g^\dagger/g_{\rm bar})^p\; C(R;\,\ell_0, p, n_{\rm coh})\; G_{\rm bulge}\; G_{\rm shear}\; G_{\rm bar}\; G_{\rm wind}
+K(R) = A_0\, \left(\frac{g^\dagger}{g_{\rm bar}}\right)^p \left(\frac{\ell_0}{\ell_0+R}\right)^{n_{\rm coh}} S_{\rm small}(R)\; G_{\rm bulge}\; G_{\rm shear}\; G_{\rm bar}\; G_{\rm wind}
 $$
 
-where $g^\dagger = 1.20 \times 10^{-10}$ m s⁻² is a fixed acceleration scale, and gates $(G_\cdot)$ suppress coherence for bulges, shear, stellar bars, and spiral winding.
+where $g^\dagger = 1.20 \times 10^{-10}$ m s⁻² is a fixed acceleration scale, $p$ appears only in the RAR slope term $(g^\dagger/g_{\rm bar})^p$, $S_{\rm small}(R) = 1 - e^{-(R/R_{\rm gate})^2}$ with $R_{\rm gate} \approx 0.5$ kpc ensures the kernel vanishes at small radii (Solar System safety), and gates $(G_\cdot)$ suppress coherence for bulges, shear, stellar bars, and spiral winding.
 
 **Best-fit hyperparameters:** $\ell_0=4.993$ kpc, $A_0=0.591$, $p=0.757$, $n_{\rm coh}=0.5$, plus morphology gates.
 
@@ -82,8 +90,10 @@ where $g^\dagger = 1.20 \times 10^{-10}$ m s⁻² is a fixed acceleration scale,
 For lensing:
 
 $$
-\kappa_{\rm eff}(R) = \frac{\Sigma_{\rm bar}(R)}{\Sigma_{\rm crit}}\,[1+K_{\rm cl}(R)],\quad K_{\rm cl}(R)=A_c\,C(R;\,\ell_0,p,n_{\rm coh})
+\kappa_{\rm eff}(R) = \frac{\Sigma_{\rm bar}(R)}{\Sigma_{\rm crit}}\,[1+K_{\rm cl}(R)],\quad K_{\rm cl}(R)=A_c\,\left(\frac{\ell_0}{\ell_0+R}\right)^{n_{\rm coh}}
 $$
+
+where the same power-law coherence form applies with cluster-scale $\ell_0 \sim 200$ kpc and recalibrated amplitude $A_c$.
 
 Triaxial projection preserves **~60% variation in κ(R)** and **~20–30% in θ_E** across $q_{\rm LOS}\in[0.7,1.3]$.
 
@@ -97,7 +107,7 @@ Triaxial projection preserves **~60% variation in κ(R)** and **~20–30% in θ_
 
 ### 2.8 Testable Predictions
 
-1. **Velocity correlations** (Gaia DR3—testable now): $\langle \delta v(R) \, \delta v(R') \rangle \propto C(|R-R'|; \ell_0 = 5$ kpc). ΛCDM predicts decorrelation beyond ~100 pc.
+1. **Velocity correlations** (Gaia DR3—testable now): $\langle \delta v(R) \, \delta v(R') \rangle \propto K_{\rm coh}(|R-R'|; \ell_0 = 5$ kpc$)$. ΛCDM predicts decorrelation beyond ~100 pc.
 
 2. **Age dependence** (JWST high-z): Younger galaxies at $z > 1$ should show 20–40% weaker enhancement at fixed mass.
 
@@ -271,7 +281,7 @@ $$A_{\rm eff}^{\rm 3D} \sim A_{\rm eff}^{\rm 2D} \times (D_{\rm LOS}/\ell_0) \ti
 
 With $D_{\rm LOS} \sim 1$ Mpc and $\ell_0 \sim 200$ kpc, naive scaling gives ~5×, within a factor of 2 of the observed 7.8×. This is not a derivation, but demonstrates that the amplitude ratio is geometrically plausible, not arbitrary.
 
-**Multi-kernel methodology:** The use of different kernel parameterizations across domains (Burr-XII for SPARC, saturated-well for MW) is standard effective field theory practice. All kernels share the same coherence scale: $\ell_0 = 5$ kpc corresponds to $R_b \approx 6$ kpc—both within 20%.
+**Multi-kernel methodology:** The use of different kernel parameterizations across domains (power-law coherence for SPARC, saturated-well for MW) is standard effective field theory practice. All kernels share the same coherence scale: $\ell_0 = 5$ kpc corresponds to $R_b \approx 6$ kpc—both within 20%.
 
 ### 6.3 On the Gate Mechanisms
 
@@ -331,7 +341,7 @@ Ablation studies (SI §12) confirm that removing any gate worsens RAR scatter. T
 
 The present evidence is qualitative—larger samples will be needed for decisive tests—but the systematic pattern demonstrates that the gates are physically motivated, not arbitrary fitting switches.
 
-**Three falsifiable predictions:** (1) Velocity correlations in Gaia DR3 should match Burr-XII with $\ell_0 = 5$ kpc; (2) JWST high-z galaxies should show 20–40% weaker enhancement; (3) Counter-rotating systems should show no winding suppression.
+**Three falsifiable predictions:** (1) Velocity correlations in Gaia DR3 should match the power-law coherence form $(\ell_0/(\ell_0 + |R-R'|))^{n_{\rm coh}}$ with $\ell_0 = 5$ kpc; (2) JWST high-z galaxies should show 20–40% weaker enhancement; (3) Counter-rotating systems should show no winding suppression.
 
 The velocity correlation test is executable immediately with publicly available data. If confirmed, it would provide direct evidence for non-local gravitational coupling at galactic scales.
 
@@ -360,6 +370,7 @@ Technical details are provided in SUPPLEMENTARY_INFORMATION.md:
 - **SI §11** — Milky Way full analysis
 - **SI §12** — Spiral winding gate details
 - **SI §13** — Extended cluster analysis
+- **SI §14** — Morphology dependence of decoherence exponent
 
 ---
 
