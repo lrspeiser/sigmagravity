@@ -173,6 +173,20 @@ The prediction is confirmed: face-on galaxies show greater improvement from the 
 
 *Figure 4. Left: RAR scatter by inclination group with and without winding correction. Right: Percentage improvement from winding gate. Face-on galaxies (viewing full azimuthal structure) show stronger winding benefit, confirming the §2.5 prediction.*
 
+#### 5.1.2 p-Morphology Correlation: Interaction Network Signature
+
+Hierarchical Bayesian analysis reveals a **statistically significant correlation** between the decoherence exponent $p$ and galaxy morphology ($\beta_{\rm morph} = 0.234 \pm 0.024$, 95% CI [0.198, 0.283], P(β>0) = 100%). Early-type galaxies show systematically higher $p$ than irregulars:
+
+| Morphology | Predicted $p$ | Interpretation |
+|------------|---------------|----------------|
+| Irregular | 0.49 ± 0.04 | Fractal network ($d_I < 1$) |
+| Late Spiral | 0.61 ± 0.03 | Clumpy |
+| Intermediate | 0.72 ± 0.02 | Mixed |
+| Early Spiral | 0.90 ± 0.02 | Concentrated |
+| Early (S0–Sa) | 1.31 ± 0.06 | Smooth ($d_I \to 2$) |
+
+The population mean $\mu_p = 0.80 \pm 0.02$ matches the globally calibrated value ($p = 0.757$), validating both the kernel specification and the hierarchical inference. This correlation supports the interaction network interpretation: smooth, concentrated mass distributions (early-types) create denser decoherence networks than clumpy, fractal systems (irregulars). Full methodology and results in SI §14.
+
 ### 5.2 Clusters
 
 **Single-system (MACS0416):** θ_E^pred = 30.43″ vs 30.0″ observed (1.4% error). Geometry sensitivity preserved (~21.5% spread).

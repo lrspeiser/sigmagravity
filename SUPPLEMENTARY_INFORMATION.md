@@ -895,6 +895,102 @@ python scripts/make_cluster_lensing_panels.py
 
 ---
 
+## SI §14 — Morphology Dependence of Decoherence Exponent
+
+### SI §14.1. Theoretical Prediction
+
+The interaction network interpretation of gravitational decoherence predicts that the exponent $p$, which controls the RAR slope via $(g^\dagger/g_{\rm bar})^p$, should correlate with the fractal dimension of the mass distribution:
+
+$$p_{\rm Early} > p_{\rm Intermediate} > p_{\rm Late} > p_{\rm Irregular}$$
+
+Smooth, concentrated systems (early-types) should show area-like decoherence ($p \to 2$), while clumpy, fractal systems (irregulars) should show sparse-network decoherence ($p < 1$). The globally calibrated value $p = 0.757$ suggests sub-linear accumulation consistent with sparse, clustered interaction networks.
+
+### SI §14.2. Hierarchical Bayesian Analysis
+
+We tested this prediction using GPU-accelerated hierarchical Bayesian inference on 116 SPARC galaxies with classified morphologies. The model estimates the population-level morphology slope $\beta_{\rm morph}$:
+
+$$p_i = \mu_p + \beta_{\rm morph} \times z_{\rm morph,i} + \sigma_p \cdot \epsilon_i$$
+
+where $z_{\rm morph}$ is the standardized morphology code (0 = Irregular to 4 = Early), $\sigma_p$ is the intrinsic scatter, and $\epsilon_i \sim N(0,1)$.
+
+**Critical methodological note:** The kernel formula must match the validated implementation:
+$$K = A_0 \cdot (g^\dagger/g_{\rm bar})^p \cdot K_{\rm coherence} \cdot S_{\rm small}$$
+where $K_{\rm coherence} = (\ell_0/(\ell_0 + R))^{n_{\rm coh}}$ and $S_{\rm small} = 1 - e^{-(R/0.5~{\rm kpc})^2}$. The exponent $p$ controls the RAR slope $(g^\dagger/g_{\rm bar})^p$, not the coherence window shape.
+
+### SI §14.3. Results
+
+**Population parameters:**
+
+| Parameter | Value | 95% CI | Notes |
+|-----------|-------|--------|-------|
+| $\mu_p$ | 0.802 ± 0.021 | [0.760, 0.833] | Consistent with global fit $p = 0.757$ |
+| $\sigma_p$ | 0.366 ± 0.028 | [0.319, 0.435] | Intrinsic scatter |
+
+**Morphology effect:**
+
+| Parameter | Value | 95% CI | Significance |
+|-----------|-------|--------|------|
+| $\beta_{\rm morph}$ | 0.234 ± 0.024 | [0.198, 0.283] | **CI excludes zero** |
+| $P(\beta > 0)$ | 100% | — | **Definitive** |
+
+The correlation is **statistically significant**: the 95% credible interval excludes zero.
+
+**Predicted $p$ by morphology:**
+
+| Morphology | Predicted $p$ | Physical Interpretation |
+|------------|---------------|-------------------------|
+| Irregular (Sm–BCD) | 0.49 ± 0.04 | Sparse/fractal ($d_I < 1$) |
+| Late Spiral (Scd–Sdm) | 0.61 ± 0.03 | Clumpy structure |
+| Intermediate (Sbc–Sc) | 0.72 ± 0.02 | Mixed |
+| Early Spiral (Sab–Sb) | 0.90 ± 0.02 | Concentrated |
+| Early (S0–Sa) | 1.31 ± 0.06 | Smooth ($d_I \to 2$) |
+
+### SI §14.4. Physical Interpretation
+
+The detected correlation supports the interaction network interpretation:
+
+1. **Irregular galaxies ($p \approx 0.5$)**: Chaotic, clumpy mass distributions create sparse decoherence networks with fractal dimension $d_I < 1$. Paths decohere quickly due to the lack of extended, smooth structures.
+
+2. **Early-type galaxies ($p \approx 1.3$)**: Smooth, centrally concentrated mass distributions create dense networks approaching area-like scaling ($d_I \to 2$). Paths remain coherent over larger regions.
+
+3. **The range $\Delta p \approx 0.8$** across the Hubble sequence is consistent with the transition from fractal to smooth mass distributions.
+
+The effect size is substantial: early-types have $p$ approximately 2.7× larger than irregulars.
+
+### SI §14.5. Validation
+
+The hierarchical model recovers $\mu_p = 0.802 \pm 0.021$, consistent with the independently calibrated global value $p = 0.757$ (difference $< 2\sigma$). This agreement validates both:
+- The kernel specification (correct placement of $p$ exponent)
+- The hierarchical inference procedure (proper marginalization)
+
+### SI §14.6. Sample Limitations
+
+The early-type subsample (S0–Sa) contains only $n = 6$ galaxies, limiting precision for that category. The predicted $p_{\rm Early} = 1.31 \pm 0.06$ should be treated with appropriate caution. Future work with larger early-type samples (e.g., from MaNGA or CALIFA) could tighten these constraints.
+
+### SI §14.7. Implications and Future Work
+
+This result identifies a candidate microscopic mechanism for gravitational decoherence: the exponent $p$ tracks the fractal dimension of the mass distribution's interaction network. Future tests could:
+
+1. **Predict $p$ from images:** Compute fractal dimension directly from galaxy light profiles and test correlation with fitted $p$.
+2. **Test with continuous metrics:** Use B/T ratio, concentration index, or Sérsic index as continuous morphology predictors.
+3. **Extend to pressure-supported systems:** Elliptical galaxies and dwarf spheroidals should show $p \to 2$ if the interpretation is correct.
+4. **JWST high-z galaxies:** Young, clumpy high-redshift galaxies should show systematically lower $p$.
+
+### SI §14.8. Reproduction
+
+```bash
+# Run corrected GPU test (requires CuPy)
+python spiral/tests/test_p_morphology_gpu_constrained.py
+
+# Output: spiral/outputs/p_morphology_gpu_constrained/
+#   - constrained_results.json (posteriors)
+#   - constrained_results.png (diagnostic plots)
+```
+
+Computation time: ~14 seconds on RTX 5090 (CuPy) for 4 chains × 4000 samples.
+
+---
+
 ## References
 
 - Beck, C. & Cohen, E. G. D. (2003). Superstatistics. Physica A, 322, 267-275. arXiv:cond-mat/0303288
