@@ -140,6 +140,14 @@ The canonical kernel from §2 is implemented without redefinition. Triaxial proj
 
 *Figure 1. Radial Acceleration Relation performance. Σ-Gravity achieves 0.087 dex scatter with domain-calibrated parameters (no per-galaxy tuning).*
 
+![Figure 2. Rotation Curve Gallery](figures/rc_gallery.png)
+
+*Figure 2. Rotation curve gallery (12 SPARC disks). Curves: data±σ, GR(baryons), Σ-Gravity (universal kernel). Per-panel annotations show APE and χ²; no per-galaxy tuning applied.*
+
+![Figure 3. RC Residual Histogram](figures/rc_residual_hist.png)
+
+*Figure 3. Residuals (v_pred − v_obs) distributions for Σ-Gravity vs GR(baryons). Σ-Gravity narrows tails and reduces bias in the outer regions.*
+
 #### 5.1.1 Inclination Dependence: Winding Gate Validation
 
 The spiral winding gate (§2.4) makes a specific geometric prediction: face-on galaxies, which display their full azimuthal spiral structure, should experience stronger winding suppression than edge-on systems where the azimuthal view is compressed. We tested this by splitting the SPARC sample by inclination.
@@ -155,9 +163,9 @@ The prediction is confirmed: face-on galaxies show greater improvement from the 
 
 **Significance:** MOND contains no mechanism to produce inclination-dependent scatter reduction—its interpolating function depends only on acceleration magnitude. The observed differential is a geometric consequence of how spiral structure projects onto the line of sight, providing qualitative support for the coherence-based winding mechanism.
 
-![Figure 3. Inclination Dependence](figures/inclination_winding_comparison.png)
+![Figure 4. Inclination Dependence](figures/inclination_winding_comparison.png)
 
-*Figure 3. Left: RAR scatter by inclination group with and without winding correction. Right: Percentage improvement from winding gate. Face-on galaxies (viewing full azimuthal structure) show stronger winding benefit, confirming the §2.4 prediction.*
+*Figure 4. Left: RAR scatter by inclination group with and without winding correction. Right: Percentage improvement from winding gate. Face-on galaxies (viewing full azimuthal structure) show stronger winding benefit, confirming the §2.4 prediction.*
 
 ### 5.2 Clusters
 
@@ -168,9 +176,17 @@ The prediction is confirmed: face-on galaxies show greater improvement from the 
 - 5-fold k-fold: **coverage 16/18 = 88.9%**, median fractional error = 7.9%
 - Blind hold-outs (A2261, MACSJ1149): **2/2 inside 68% PPC**, 14.9% median error
 
-![Figure 2. Cluster Hold-outs](figures/holdouts_pred_vs_obs.png)
+![Figure 5. Cluster Hold-outs](figures/holdouts_pred_vs_obs.png)
 
-*Figure 2. Blind hold-out validation: predicted θ_E vs observed with 68% PPC bands.*
+*Figure 5. Blind hold-out validation: predicted θ_E vs observed with 68% PPC bands.*
+
+![Figure 6. K-fold Coverage](figures/kfold_coverage.png)
+
+*Figure 6. K-fold hold-out coverage across N=10 clusters: 16/18 = 88.9% inside 68% PPC.*
+
+![Figure 7. Cluster Convergence Profiles](figures/cluster_kappa_profiles_panel.png)
+
+*Figure 7. Convergence κ(R) for each catalog cluster: GR(baryons), GR+DM (SIS reference), and Σ-Gravity with A_c chosen so ⟨κ⟩(<θ_E)=1.*
 
 ### 5.3 Milky Way (Gaia DR3)
 
@@ -189,6 +205,14 @@ The prediction is confirmed: face-on galaxies show greater improvement from the 
 3. Inner disk (3–6 kpc): near-zero residuals for both models (gate suppression validated)
 
 **Note on fair comparison:** This comparison tests generalization, not fitting power. The Σ-Gravity kernel was frozen from SPARC calibration; no MW-specific parameters were adjusted. A fair NFW comparison would require re-tuning $(M_{200}, c)$ to MW kinematics—at which point Σ-Gravity's zero-shot success becomes the relevant benchmark.
+
+![Figure 8. MW All-Model Summary](data/gaia/outputs/mw_all_model_summary.png)
+
+*Figure 8. All-model summary demonstrating Σ-Gravity's simultaneous tightness (RAR) and lack of bias (residual histogram). Top row: scatter in acceleration space shows Σ uniquely clusters along the 1:1 line. Bottom row: residual distributions reveal only Σ is centered at zero (μ=+0.062 dex). n = 157,343 stars spanning 0–20 kpc.*
+
+![Figure 9. MW Radial Residual Map](data/gaia/outputs/mw_radial_residual_map.png)
+
+*Figure 9. Radial residual map demonstrating smooth transition through R_boundary. Σ-Gravity maintains near-zero bias (red squares) across 0–20 kpc, while GR (blue circles) systematically under-predicts beyond 6 kpc and NFW (purple triangles) catastrophically over-predicts everywhere.*
 
 Full MW analysis with all figures in SI §11.
 
