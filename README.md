@@ -45,19 +45,25 @@ In quantum field theory, the gravitational field amplitude arises from a sum ove
 
 The coherence length $\ell_0 \sim R(\sigma_v/v_c)$ balances coherence buildup against decoherence from random motions. For typical disk galaxies: $\ell_0 \sim 2$ kpc (empirical: 5 kpc, factor 2.5×). For clusters: $\ell_0 \sim 200$ kpc. These estimates are **within a factor of 2–3** of fitted values.
 
-### 2.2 The Coherence Window
+### 2.2 Theoretical Status
+
+Σ-Gravity occupies the same epistemic position as MOND in 1983 or the Fermi theory of weak interactions before electroweak unification. The multiplicative structure $g_{\rm eff} = g_{\rm bar}[1+K]$ and the Burr-XII coherence window are *motivated* by path-integral reasoning—not *derived* from it. The functional form is theoretically constrained (must vanish at small R, saturate at large R, be curl-free), but parameter values are empirical constants, analogous to how the fine-structure constant α ≈ 1/137 is measured rather than derived from QED.
+
+We explicitly tested whether simple theoretical estimates could predict the fitted parameters; they fail by factors of 10–2500× (SI §7). This negative result is important: it establishes that Σ-Gravity is successful phenomenology awaiting deeper theoretical understanding, not a first-principles prediction. The path-integral language provides structural motivation, not numerical derivation.
+
+### 2.3 The Coherence Window
 
 The coherence window $C(R)$ satisfies: (1) $C(0) = 0$, (2) $C(\infty) = 1$, (3) smooth transition around $r \sim \ell_0$. The Burr Type XII form emerges naturally from superstatistical models where the decoherence rate varies spatially due to environmental heterogeneity (SI §3.1).
 
 **Asymptotic behavior:** For small $R \ll \ell_0$: $C(R) \approx n_{\rm coh}(R/\ell_0)^p$ (Solar System safety automatic). For large $R \gg \ell_0$: $C(R) \to 1$ (saturated enhancement).
 
-### 2.3 Parameter Interpretation
+### 2.4 Parameter Interpretation
 
 **What is derived:** Multiplicative form $g_{\rm eff} = g_{\rm bar}[1+K]$; coherence length scaling $\ell_0 \propto R(\sigma_v/v_c)$; Burr-XII from superstatistics; Solar System safety.
 
 **What is calibrated:** Amplitude $A$; exact values of $\ell_0$, $p$, $n_{\rm coh}$; scale dependence between galaxies/clusters. Simple theoretical predictions fail by factors of 10–2500× (SI §7).
 
-### 2.4 Galaxy-Scale Kernel
+### 2.5 Galaxy-Scale Kernel
 
 For circular motion in an axisymmetric disk:
 
@@ -71,7 +77,7 @@ where $g^\dagger = 1.20 \times 10^{-10}$ m s⁻² is a fixed acceleration scale,
 
 **Spiral winding gate:** Differential rotation winds coherent paths into tight spirals, causing destructive interference. The critical orbit number $N_{\rm crit} \sim v_c/\sigma_v \sim 10$ is derived from coherence geometry (SI §12). The effective value $N_{\rm crit,eff} \sim 150$ differs by factor ~15 due to 3D geometric dilution ($h_d/\ell_0 \sim 0.06$)—a quantitative prediction within 13% of calibrated values.
 
-### 2.5 Cluster-Scale Kernel
+### 2.6 Cluster-Scale Kernel
 
 For lensing:
 
@@ -81,7 +87,7 @@ $$
 
 Triaxial projection preserves **~60% variation in κ(R)** and **~20–30% in θ_E** across $q_{\rm LOS}\in[0.7,1.3]$.
 
-### 2.6 Solar System Safety
+### 2.7 Solar System Safety
 
 | Constraint | Observational bound | Σ-Gravity prediction | Status |
 |---|---:|---:|---|
@@ -89,7 +95,7 @@ Triaxial projection preserves **~60% variation in κ(R)** and **~20–30% in θ_
 | Planetary ephemerides | no anomalous drift | Boost < 10⁻¹⁴ | **PASS** |
 | Wide binaries | no anomaly | K < 10⁻⁸ | **PASS** |
 
-### 2.7 Testable Predictions
+### 2.8 Testable Predictions
 
 1. **Velocity correlations** (Gaia DR3—testable now): $\langle \delta v(R) \, \delta v(R') \rangle \propto C(|R-R'|; \ell_0 = 5$ kpc). ΛCDM predicts decorrelation beyond ~100 pc.
 
@@ -150,7 +156,7 @@ The canonical kernel from §2 is implemented without redefinition. Triaxial proj
 
 #### 5.1.1 Inclination Dependence: Winding Gate Validation
 
-The spiral winding gate (§2.4) makes a specific geometric prediction: face-on galaxies, which display their full azimuthal spiral structure, should experience stronger winding suppression than edge-on systems where the azimuthal view is compressed. We tested this by splitting the SPARC sample by inclination.
+The spiral winding gate (§2.5) makes a specific geometric prediction: face-on galaxies, which display their full azimuthal spiral structure, should experience stronger winding suppression than edge-on systems where the azimuthal view is compressed. We tested this by splitting the SPARC sample by inclination.
 
 **Table 3. Winding gate effectiveness by inclination**
 
@@ -165,7 +171,7 @@ The prediction is confirmed: face-on galaxies show greater improvement from the 
 
 ![Figure 4. Inclination Dependence](figures/inclination_winding_comparison.png)
 
-*Figure 4. Left: RAR scatter by inclination group with and without winding correction. Right: Percentage improvement from winding gate. Face-on galaxies (viewing full azimuthal structure) show stronger winding benefit, confirming the §2.4 prediction.*
+*Figure 4. Left: RAR scatter by inclination group with and without winding correction. Right: Percentage improvement from winding gate. Face-on galaxies (viewing full azimuthal structure) show stronger winding benefit, confirming the §2.5 prediction.*
 
 ### 5.2 Clusters
 
