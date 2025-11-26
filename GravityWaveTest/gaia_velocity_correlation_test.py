@@ -148,6 +148,75 @@ def load_raw_gaia_data(filepath=None):
     return df
 
 
+def load_large_gaia_data(filepath=None, v_flat=220.0):
+    """
+    Load the large 1.8M star Gaia dataset.
+    
+    Since this doesn't have baryonic predictions pre-computed, we use
+    a simple model: v_expected = v_flat (flat rotation curve approximation).
+    
+    The velocity residuals then become:
+    delta_v = v_phi - v_flat
+    
+    For the correlation test, this is a reasonable first approximation
+    since we're looking for *correlations*, not absolute values.
+    
+    Parameters
+    ----------
+    filepath : Path or None
+        Path to gaia_processed_corrected.csv
+    v_flat : float
+        Assumed flat rotation curve velocity (km/s)
+    
+    Returns
+    -------
+    df : DataFrame
+        With R_kpc, z_kpc, v_obs_kms, v_baryon_kms, delta_v_baryon
+    """
+    if filepath is None:
+        filepath = ROOT / "data" / "gaia" / "gaia_processed_corrected.csv"
+    
+    filepath = Path(filepath)
+    if not filepath.exists():
+        # Try alternatives
+        alternatives = [
+            ROOT / "data" / "gaia" / "gaia_processed.csv",
+            ROOT / "data" / "gaia" / "gaia_large_sample_raw.csv",
+        ]
+        for alt in alternatives:
+            if alt.exists():
+                filepath = alt
+                break
+        else:
+            raise FileNotFoundError(f"Large Gaia data not found: {filepath}")
+    
+    print(f"Loading large Gaia dataset from: {filepath}")
+    df = pd.read_csv(filepath)
+    print(f"  Total stars: {len(df):,}")
+    
+    # Map columns to expected format
+    df_out = pd.DataFrame()
+    df_out['R_kpc'] = df['R_cyl'] if 'R_cyl' in df.columns else df['R_kpc']
+    df_out['z_kpc'] = df['z'] if 'z' in df.columns else df['z_kpc']
+    df_out['v_obs_kms'] = df['v_phi'] if 'v_phi' in df.columns else df['v_obs_kms']
+    
+    # Simple flat rotation curve model for v_baryon
+    # This is an approximation - the real MW rotation curve is ~flat at 220 km/s
+    df_out['v_baryon_kms'] = v_flat
+    
+    # Compute residual
+    df_out['delta_v_baryon'] = df_out['v_obs_kms'] - df_out['v_baryon_kms']
+    
+    print(f"  Using flat rotation curve model: v_baryon = {v_flat} km/s")
+    
+    # Filter to disk stars
+    disk_mask = (df_out['R_kpc'] >= 4) & (df_out['R_kpc'] <= 16) & (np.abs(df_out['z_kpc']) < 1.0)
+    df_disk = df_out[disk_mask].copy()
+    print(f"  Disk stars (4 < R < 16 kpc, |z| < 1 kpc): {len(df_disk):,}")
+    
+    return df_disk
+
+
 # ========== CORRELATION ANALYSIS ==========
 
 def compute_pair_separations(R, z, max_pairs=500000, seed=42):
@@ -665,7 +734,7 @@ Possible interpretations:
 # ========== MAIN EXECUTION ==========
 
 def run_correlation_test(data_file=None, output_dir=None, max_pairs=500000,
-                          method='pair_wise'):
+                          method='pair_wise', use_large_sample=False):
     """
     Run the full velocity correlation analysis.
     
@@ -680,6 +749,8 @@ def run_correlation_test(data_file=None, output_dir=None, max_pairs=500000,
     method : str
         'pair_wise' - direct pair correlation
         'radial' - shell-to-shell correlation
+    use_large_sample : bool
+        If True, use the 1.8M star dataset with flat rotation curve model
     """
     print("\n" + "=" * 70)
     print("GAIA DR3 VELOCITY CORRELATION TEST FOR Σ-GRAVITY")
@@ -702,8 +773,11 @@ Theory predicts: ℓ₀ ≈ 5 kpc, n_coh ≈ 0.5
     
     # Load data
     print("\n[1/4] Loading Gaia data...")
-    df = load_predicted_gaia_data(data_file)
-    print(f"  Using {len(df)} stars")
+    if use_large_sample:
+        df = load_large_gaia_data(data_file)
+    else:
+        df = load_predicted_gaia_data(data_file)
+    print(f"  Using {len(df):,} stars")
     
     # Compute correlations
     print("\n[2/4] Computing pair correlations...")
@@ -803,6 +877,8 @@ should be correlated according to the coherence kernel K_coh(r).
     parser.add_argument('--method', choices=['pair_wise', 'radial'], 
                         default='pair_wise',
                         help='Correlation method (default: pair_wise)')
+    parser.add_argument('--large-sample', action='store_true',
+                        help='Use the 1.8M star dataset (with flat RC model)')
     
     args = parser.parse_args()
     
@@ -810,7 +886,8 @@ should be correlated according to the coherence kernel K_coh(r).
         data_file=args.data_file,
         output_dir=args.output_dir,
         max_pairs=args.max_pairs,
-        method=args.method
+        method=args.method,
+        use_large_sample=args.large_sample
     )
     
     return results
