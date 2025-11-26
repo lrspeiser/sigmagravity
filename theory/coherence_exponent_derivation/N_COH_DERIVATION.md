@@ -193,9 +193,98 @@ Gaia DR3 has the precision to test this in the Milky Way disk. The power-law tai
 
 ---
 
+---
+
+## Empirical Validation Results (Gaia DR3)
+
+**Test Date:** 2025-11-26
+
+### Data Summary
+- **Stars:** 1,661,298 MW disk stars (4 < R < 16 kpc, |z| < 1 kpc)
+- **Pairs analyzed:** 1.24 billion
+- **Separation range:** 0.14 - 8.94 kpc
+
+### Key Finding: CORRELATION STRUCTURE IS COMPLEX
+
+The measured velocity correlation function shows:
+
+| Separation (kpc) | Correlation C(r) |
+|-----------------|------------------|
+| 0.14 | +0.257 |
+| 0.61 | +0.220 |
+| 1.22 | +0.150 |
+| 2.45 | +0.012 |
+| 3.46 | **-0.103** |
+| 5.48 | **-0.239** |
+| 8.94 | **-0.126** |
+
+**Critical observation:** Correlations become **NEGATIVE** at r > 2.4 kpc.
+
+This is **NOT predicted by any of the 5 approaches**, which all assume K(r) → 0 (never negative).
+
+### Model Comparison Results
+
+| Model | χ²/dof | Notes |
+|-------|--------|-------|
+| Exponential (Gaussian) | 197,599 | **Preferred** |
+| Power-law (n=0.5) | 485,902 | Poor fit |
+| Power-law (n=2.0) | 266,519 | Better than n=0.5 |
+| Power-law (n=1.5) | 289,001 | Best power-law |
+
+**Key results:**
+1. **Exponential decay beats power-law** (Δχ² = -689,204)
+2. **Higher n values fit better** than n=0.5 (n→2.0 preferred)
+3. **None of the models fit well** (χ²/dof >> 1)
+4. **Negative correlations unexplained** by theory
+
+### Approach-by-Approach Assessment
+
+**Approach 1 (Random Walk Patches):**
+- ❌ Data prefers n ≈ 2.0, not n = 0.5
+- Uncertainty too large to constrain (n = 2.0 ± 4.1)
+
+**Approach 2 (2D Thin Disk):**
+- ❌ Neither n=0.5 nor n=1.0 fits well
+- Best fit at upper bound (n=1.5)
+
+**Approach 3 (Lévy vs Gaussian):**
+- ❌ **Exponential beats power-law**
+- This contradicts the Lévy/Cauchy prediction
+
+**Approach 4 (Anomalous Diffusion):**
+- ⚠️ Cannot constrain β meaningfully (β = -3 ± 8)
+
+**Approach 5 (Effective Dimension):**
+- ⚠️ Cannot constrain d_eff meaningfully (d = 6 ± 8)
+
+### Interpretation
+
+The negative correlations at large separations suggest:
+
+1. **Galactic structure effects:** Spiral arms, bar, or streaming motions create anticorrelation patterns not captured by simple models
+
+2. **Baseline model inadequacy:** The flat rotation curve approximation (v_flat = 220 km/s) is too simple
+
+3. **Detrending needed:** Radial velocity gradients should be removed before correlation analysis
+
+4. **Physical anticorrelation:** Could indicate real physics (e.g., coherence patches "pushing" against each other)
+
+### Conclusion
+
+**The theoretical derivations in this document provide plausible physical motivation for n_coh = 0.5, but the current Gaia velocity correlation test does NOT confirm them.**
+
+Further work needed:
+- Better baseline model (not flat rotation curve)
+- Radial detrending to remove systematic gradients
+- Investigation of negative correlations (Galactic structure effects?)
+- Higher signal-to-noise correlation measurements
+
+---
+
 ## Future Work
 
-- Work out specific observational predictions for Gaia test
+- Improve baseline model for velocity residuals
+- Investigate source of negative correlations at large r
 - Connect to superstatistical framework in Burr-XII derivation
 - Explore connection between Approach 3 (Lévy/Cauchy) and coherence patches
 - Investigate phase transition interpretation from Approach 4
