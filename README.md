@@ -105,14 +105,6 @@ Triaxial projection preserves **~60% variation in κ(R)** and **~20–30% in θ_
 | Planetary ephemerides | no anomalous drift | Boost < 10⁻¹⁴ | **PASS** |
 | Wide binaries | no anomaly | K < 10⁻⁸ | **PASS** |
 
-### 2.8 Testable Predictions
-
-1. **Velocity correlations** (Gaia DR3—testable now): $\langle \delta v(R) \, \delta v(R') \rangle \propto K_{\rm coh}(|R-R'|; \ell_0 = 5$ kpc$)$. ΛCDM predicts decorrelation beyond ~100 pc.
-
-2. **Age dependence** (JWST high-z): Younger galaxies at $z > 1$ should show 20–40% weaker enhancement at fixed mass.
-
-3. **Counter-rotating disks** (NGC 4550, NGC 7217): Should show no winding suppression.
-
 ---
 
 ## 3. Data
