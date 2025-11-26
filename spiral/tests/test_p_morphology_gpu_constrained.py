@@ -44,10 +44,15 @@ except ImportError:
 
 from validation_suite_winding import ValidationSuite
 
-# Fixed parameters from calibration
+# Fixed parameters from calibration (paper values)
 A0_FIXED = 0.591
 ELL0_FIXED = 4.993
 N_COH_FIXED = 0.5
+G_DAGGER = 1.2e-10  # m/s² - RAR acceleration scale
+
+# Unit conversions
+KM_TO_M = 1000.0
+KPC_TO_M = 3.0856776e19
 
 
 def classify_morphology(hubble_type_code):
@@ -198,18 +203,35 @@ def log_likelihood_constrained(params, gpu_data, n_galaxies, morph_mean, morph_s
     galaxy_idx = gpu_data['galaxy_idx']
     p_per_point = p_galaxy[galaxy_idx]
     
-    # Coherence window with FIXED parameters
+    # CORRECTED FORMULA: K = A₀ × (g†/g_bar)^p × K_coherence × S_small
+    # This matches path_spectrum_kernel_winding.py many_path_boost_factor()
     R = gpu_data['R']
-    log_ratio = xp.log(R / ELL0_FIXED)
-    log_ratio = xp.clip(log_ratio, -5, 5)
-    ratio = xp.exp(p_per_point * log_ratio)
-    ratio = xp.clip(ratio, 1e-10, 1e10)
+    v_bar = gpu_data['v_bar']
     
-    C = 1 - (1 + ratio) ** (-N_COH_FIXED)
+    # Compute g_bar from v_bar and R (SI units)
+    v_m_s = v_bar * KM_TO_M
+    r_m = R * KPC_TO_M
+    g_bar = v_m_s**2 / r_m  # m/s²
+    g_bar = xp.maximum(g_bar, 1e-14)  # Avoid division by zero
     
-    # Predicted velocity with FIXED A₀
-    K = A0_FIXED * C
-    v_pred = gpu_data['v_bar'] * xp.sqrt(1 + K)
+    # RAR-shaped response: (g†/g_bar)^p - THIS IS WHERE p MATTERS!
+    g_ratio = G_DAGGER / g_bar
+    K_rar = xp.power(g_ratio, p_per_point)
+    K_rar = xp.clip(K_rar, 0, 1e6)  # Reasonable bounds
+    
+    # Coherence damping (power law): (ℓ₀/(ℓ₀+R))^n_coh
+    K_coherence = xp.power(ELL0_FIXED / (ELL0_FIXED + R), N_COH_FIXED)
+    
+    # Small-radius gate: S_small = 1 - exp(-(R/0.5)²)
+    R_GATE = 0.5  # kpc
+    S_small = 1.0 - xp.exp(-(R / R_GATE)**2)
+    
+    # Combined kernel: K = A₀ × K_rar × K_coherence × S_small
+    K = A0_FIXED * K_rar * K_coherence * S_small
+    K = xp.clip(K, 0, 100)  # Reasonable bounds
+    
+    # Predicted velocity
+    v_pred = v_bar * xp.sqrt(1 + K)
     
     # Log-likelihood
     residuals = (gpu_data['v_obs'] - v_pred) / gpu_data['v_err']
