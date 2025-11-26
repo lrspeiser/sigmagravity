@@ -65,7 +65,7 @@ $$
 K(R) = A_0\, (g^\dagger/g_{\rm bar})^p\; C(R;\,\ell_0, p, n_{\rm coh})\; G_{\rm bulge}\; G_{\rm shear}\; G_{\rm bar}\; G_{\rm wind}
 $$
 
-where $g^\dagger = 1.20 \times 10^{-10}~\mathrm{m~s}^{-2}$ is a fixed acceleration scale, and gates $(G_\cdot)$ suppress coherence for bulges, shear, stellar bars, and spiral winding.
+where $g^\dagger = 1.20 \times 10^{-10}$ m s⁻² is a fixed acceleration scale, and gates $(G_\cdot)$ suppress coherence for bulges, shear, stellar bars, and spiral winding.
 
 **Best-fit hyperparameters:** $\ell_0=4.993$ kpc, $A_0=0.591$, $p=0.757$, $n_{\rm coh}=0.5$, plus morphology gates.
 
@@ -91,7 +91,7 @@ Triaxial projection preserves **~60% variation in κ(R)** and **~20–30% in θ_
 
 ### 2.7 Testable Predictions
 
-1. **Velocity correlations** (Gaia DR3—testable now): $\langle \delta v(R) \, \delta v(R') \rangle \propto C(|R-R'|; \ell_0 = 5~\mathrm{kpc})$. ΛCDM predicts decorrelation beyond ~100 pc.
+1. **Velocity correlations** (Gaia DR3—testable now): $\langle \delta v(R) \, \delta v(R') \rangle \propto C(|R-R'|; \ell_0 = 5$ kpc). ΛCDM predicts decorrelation beyond ~100 pc.
 
 2. **Age dependence** (JWST high-z): Younger galaxies at $z > 1$ should show 20–40% weaker enhancement at fixed mass.
 
