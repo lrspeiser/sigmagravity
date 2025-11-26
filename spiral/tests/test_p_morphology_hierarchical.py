@@ -176,11 +176,18 @@ def prepare_galaxy_data(max_galaxies=None, min_points=10):
     return galaxies, output_dir
 
 
+# Constants for kernel computation
+G_DAGGER = 1.2e-10  # m/s² - RAR acceleration scale
+KM_TO_M = 1000.0
+KPC_TO_M = 3.0856776e19
+
 def build_hierarchical_model(galaxies, A0_fixed=0.591, ell_0_fixed=4.993, n_coh_fixed=0.5):
     """
     Build hierarchical PyMC model for p-morphology correlation.
     
     Key parameter: β_morph - if posterior excludes 0, correlation exists
+    
+    CORRECTED: Now uses proper kernel formula K = A₀ × (g†/g_bar)^p × K_coherence × S_small
     """
     n_galaxies = len(galaxies)
     morph_codes = np.array([g['morph_code'] for g in galaxies])
@@ -260,21 +267,34 @@ def build_hierarchical_model(galaxies, A0_fixed=0.591, ell_0_fixed=4.993, n_coh_
         # Get p value for each data point based on galaxy index
         p_per_point = p_galaxy[galaxy_idx]
         
-        # Coherence window: C(R) = 1 - [1 + (R/ℓ₀)^p]^{-n_coh}
-        # Use log-space for numerical stability: (R/ℓ₀)^p = exp(p * log(R/ℓ₀))
-        log_ratio = pt.log(all_R / ell_0_fixed)
-        # Clip to prevent extreme values
-        log_ratio_clipped = pt.clip(log_ratio, -5, 5)  # R/ℓ₀ in [0.007, 148]
-        p_clipped = pt.clip(p_per_point, 0.1, 3.0)
-        ratio = pt.exp(p_clipped * log_ratio_clipped)
-        ratio_safe = pt.clip(ratio, 1e-10, 1e10)  # Prevent overflow
-        C = 1 - (1 + ratio_safe) ** (-n_coh_fixed)
+        # CORRECTED FORMULA: K = A₀ × (g†/g_bar)^p × K_coherence × S_small
+        # This matches path_spectrum_kernel_winding.py many_path_boost_factor()
         
-        # Boost factor (simplified): K = A₀ × C
-        K = A0_fixed * C
+        # Compute g_bar from v_bar and R (SI units)
+        v_m_s = all_v_bar * KM_TO_M
+        r_m = all_R * KPC_TO_M
+        g_bar = v_m_s**2 / r_m  # m/s²
+        g_bar_safe = pt.maximum(g_bar, 1e-14)  # Avoid division by zero
+        
+        # RAR-shaped response: (g†/g_bar)^p - THIS IS WHERE p MATTERS!
+        p_clipped = pt.clip(p_per_point, 0.1, 3.0)
+        g_ratio = G_DAGGER / g_bar_safe
+        K_rar = pt.power(g_ratio, p_clipped)
+        K_rar_safe = pt.clip(K_rar, 0, 1e6)  # Reasonable bounds
+        
+        # Coherence damping (power law): (ℓ₀/(ℓ₀+R))^n_coh
+        K_coherence = pt.power(ell_0_fixed / (ell_0_fixed + all_R), n_coh_fixed)
+        
+        # Small-radius gate: S_small = 1 - exp(-(R/0.5)²)
+        R_GATE = 0.5  # kpc
+        S_small = 1.0 - pt.exp(-(all_R / R_GATE)**2)
+        
+        # Combined kernel: K = A₀ × K_rar × K_coherence × S_small
+        K = A0_fixed * K_rar_safe * K_coherence * S_small
+        K_safe = pt.clip(K, 0, 100)  # Reasonable bounds
         
         # Predicted velocity: v_pred = v_bar × sqrt(1 + K)
-        v_pred = all_v_bar * pt.sqrt(1 + K)
+        v_pred = all_v_bar * pt.sqrt(1 + K_safe)
         
         # Likelihood
         v_likelihood = pm.Normal(

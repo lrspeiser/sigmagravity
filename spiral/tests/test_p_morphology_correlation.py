@@ -84,14 +84,27 @@ def burr_xii_coherence(R, ell_0, p, n_coh):
 
 def sigma_gravity_boost(R, g_bar, A0, ell_0, p, n_coh=0.5):
     """
-    Simplified Σ-Gravity boost factor.
+    CORRECTED Σ-Gravity boost factor.
     
-    K(R) = A0 * (g†/g_bar)^0.5 * C(R; ell_0, p, n_coh)
+    K(R) = A0 * (g†/g_bar)^p * K_coherence * S_small
+    
+    This matches path_spectrum_kernel_winding.py many_path_boost_factor()
+    Note: p controls the RAR slope in (g†/g_bar)^p, NOT the Burr-XII shape.
     """
-    C = burr_xii_coherence(R, ell_0, p, n_coh)
-    # Use 0.5 power for acceleration ratio (simplified)
-    acc_factor = np.where(g_bar > 1e-14, (G_DAGGER / g_bar) ** 0.5, 0)
-    return A0 * acc_factor * C
+    # RAR-shaped response: (g†/g_bar)^p - THIS IS WHERE p MATTERS!
+    K_rar = np.where(g_bar > 1e-14, (G_DAGGER / g_bar) ** p, 0)
+    K_rar = np.clip(K_rar, 0, 1e6)
+    
+    # Coherence damping (power law): (ℓ₀/(ℓ₀+R))^n_coh
+    K_coherence = (ell_0 / (ell_0 + R)) ** n_coh
+    
+    # Small-radius gate: S_small = 1 - exp(-(R/0.5)²)
+    R_GATE = 0.5  # kpc
+    S_small = 1.0 - np.exp(-(R / R_GATE)**2)
+    
+    # Combined kernel
+    K = A0 * K_rar * K_coherence * S_small
+    return np.clip(K, 0, 100)
 
 
 def fit_galaxy_p(r_kpc, v_obs, v_bar, v_err, 
