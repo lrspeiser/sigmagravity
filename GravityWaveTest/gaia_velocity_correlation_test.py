@@ -30,8 +30,20 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from scipy.stats import pearsonr, spearmanr
+from scipy.spatial import cKDTree
 import warnings
 warnings.filterwarnings('ignore')
+
+# Try to import CuPy for GPU acceleration
+try:
+    import cupy as cp
+    from cupyx.scipy.spatial import distance as cp_distance
+    HAS_CUPY = True
+    print(f"CuPy available - GPU acceleration enabled")
+except ImportError:
+    HAS_CUPY = False
+    cp = None
+    print(f"CuPy not available - using CPU")
 
 # Add project root to path
 ROOT = Path(__file__).resolve().parents[1]
@@ -171,7 +183,7 @@ def load_large_gaia_data(filepath=None, v_flat=220.0):
     Returns
     -------
     df : DataFrame
-        With R_kpc, z_kpc, v_obs_kms, v_baryon_kms, delta_v_baryon
+        With R_kpc, z_kpc, x_kpc, y_kpc, phi, v_obs_kms, v_baryon_kms, delta_v_baryon
     """
     if filepath is None:
         filepath = ROOT / "data" / "gaia" / "gaia_processed_corrected.csv"
@@ -200,6 +212,16 @@ def load_large_gaia_data(filepath=None, v_flat=220.0):
     df_out['z_kpc'] = df['z'] if 'z' in df.columns else df['z_kpc']
     df_out['v_obs_kms'] = df['v_phi'] if 'v_phi' in df.columns else df['v_obs_kms']
     
+    # Extract phi for Cartesian coordinates (if available)
+    if 'phi' in df.columns:
+        df_out['phi'] = df['phi']
+        # Compute Cartesian coordinates: x = R * cos(phi), y = R * sin(phi)
+        df_out['x_kpc'] = df_out['R_kpc'] * np.cos(df_out['phi'])
+        df_out['y_kpc'] = df_out['R_kpc'] * np.sin(df_out['phi'])
+        print(f"  Computed Cartesian coordinates from (R, phi)")
+    else:
+        print(f"  Warning: No phi column - cannot compute Cartesian coordinates")
+    
     # Simple flat rotation curve model for v_baryon
     # This is an approximation - the real MW rotation curve is ~flat at 220 km/s
     df_out['v_baryon_kms'] = v_flat
@@ -211,7 +233,7 @@ def load_large_gaia_data(filepath=None, v_flat=220.0):
     
     # Filter to disk stars
     disk_mask = (df_out['R_kpc'] >= 4) & (df_out['R_kpc'] <= 16) & (np.abs(df_out['z_kpc']) < 1.0)
-    df_disk = df_out[disk_mask].copy()
+    df_disk = df_out[disk_mask].copy().reset_index(drop=True)
     print(f"  Disk stars (4 < R < 16 kpc, |z| < 1 kpc): {len(df_disk):,}")
     
     return df_disk
@@ -219,11 +241,246 @@ def load_large_gaia_data(filepath=None, v_flat=220.0):
 
 # ========== CORRELATION ANALYSIS ==========
 
+def compute_correlation_gpu(x, y, z, delta_v, r_bins, batch_size=10000, detrend_degree=2):
+    """
+    GPU-accelerated velocity correlation computation.
+    
+    This computes the correlation function without storing all pairs in memory.
+    It uses double-chunking: both i (reference) and j (target) stars are batched
+    to keep GPU memory usage bounded.
+    
+    Parameters
+    ----------
+    x, y, z : array-like
+        Cartesian coordinates (kpc)
+    delta_v : array-like
+        Velocity residuals (km/s)
+    r_bins : array-like
+        Separation bin edges (kpc)
+    batch_size : int
+        Number of reference stars to process at once (also used for j chunks)
+    detrend_degree : int
+        Polynomial degree for radial detrending
+    
+    Returns
+    -------
+    r_centers : array
+        Bin centers (kpc)
+    correlation : array
+        Correlation function C(r)
+    correlation_err : array
+        Standard error on correlation
+    n_pairs : array
+        Number of pairs per bin
+    """
+    if not HAS_CUPY:
+        raise RuntimeError("CuPy not available - cannot use GPU acceleration")
+    
+    n = len(x)
+    n_bins = len(r_bins) - 1
+    
+    # Use larger j_chunk_size for efficiency, but cap at 100k to avoid OOM
+    j_chunk_size = min(100000, n)
+    
+    print(f"  GPU correlation: {n:,} stars, {n_bins} bins")
+    print(f"  Batch sizes: i={batch_size}, j={j_chunk_size}")
+    
+    # Detrend on CPU first
+    R = np.sqrt(x**2 + y**2)
+    if detrend_degree > 0:
+        coeffs = np.polyfit(R, delta_v, detrend_degree)
+        trend = np.polyval(coeffs, R)
+        delta_v_det = delta_v - trend
+        print(f"  Radial detrending (degree {detrend_degree}): std {np.std(delta_v):.1f} -> {np.std(delta_v_det):.1f} km/s")
+    else:
+        delta_v_det = delta_v - np.mean(delta_v)
+    
+    # Normalize
+    sigma_v = np.std(delta_v_det)
+    delta_v_norm = delta_v_det / sigma_v
+    
+    # Keep data on CPU, transfer batches to GPU as needed
+    x_np = x.astype(np.float32)
+    y_np = y.astype(np.float32)
+    z_np = z.astype(np.float32)
+    v_np = delta_v_norm.astype(np.float32)
+    r_bins_gpu = cp.asarray(r_bins, dtype=cp.float32)
+    
+    # Accumulators for each bin
+    sum_prod = cp.zeros(n_bins, dtype=cp.float64)
+    sum_prod2 = cp.zeros(n_bins, dtype=cp.float64)
+    counts = cp.zeros(n_bins, dtype=cp.int64)
+    
+    max_sep = r_bins[-1]
+    max_sep2 = max_sep ** 2
+    
+    # Process in double-nested batches
+    n_i_batches = (n + batch_size - 1) // batch_size
+    total_work = n_i_batches * ((n + j_chunk_size - 1) // j_chunk_size)
+    work_done = 0
+    last_report = 0
+    
+    print(f"  Processing {n_i_batches} i-batches...")
+    
+    for i_batch in range(n_i_batches):
+        i_start = i_batch * batch_size
+        i_end = min(i_start + batch_size, n)
+        i_size = i_end - i_start
+        
+        # Transfer i-batch to GPU
+        x_i = cp.asarray(x_np[i_start:i_end, None], dtype=cp.float32)
+        y_i = cp.asarray(y_np[i_start:i_end, None], dtype=cp.float32)
+        z_i = cp.asarray(z_np[i_start:i_end, None], dtype=cp.float32)
+        v_i = cp.asarray(v_np[i_start:i_end, None], dtype=cp.float32)
+        
+        # Global i indices for upper triangle check
+        global_i = cp.arange(i_start, i_end)[:, None]
+        
+        # Process j in chunks (only j > i_start for upper triangle)
+        j_min = i_start  # Only need j >= i_start for upper triangle
+        n_j_chunks = ((n - j_min) + j_chunk_size - 1) // j_chunk_size
+        
+        for j_chunk in range(n_j_chunks):
+            j_start = j_min + j_chunk * j_chunk_size
+            j_end = min(j_start + j_chunk_size, n)
+            j_size = j_end - j_start
+            
+            # Transfer j-chunk to GPU
+            x_j = cp.asarray(x_np[j_start:j_end], dtype=cp.float32)
+            y_j = cp.asarray(y_np[j_start:j_end], dtype=cp.float32)
+            z_j = cp.asarray(z_np[j_start:j_end], dtype=cp.float32)
+            v_j = cp.asarray(v_np[j_start:j_end], dtype=cp.float32)
+            
+            # Compute squared distances: (i_size, j_size)
+            dx = x_i - x_j
+            dy = y_i - y_j
+            dz = z_i - z_j
+            r2 = dx**2 + dy**2 + dz**2
+            
+            # Velocity products
+            products = v_i * v_j
+            
+            # Upper triangle mask: j > i (using global indices)
+            global_j = cp.arange(j_start, j_end)
+            upper_tri_mask = global_j > global_i
+            
+            # Valid pairs: within max_sep, not self, upper triangle
+            valid = (r2 <= max_sep2) & (r2 > 0) & upper_tri_mask
+            
+            # Bin the valid pairs
+            r = cp.sqrt(r2)
+            bin_indices = cp.searchsorted(r_bins_gpu, r, side='right') - 1
+            
+            # Accumulate per bin using vectorized operations
+            for b in range(n_bins):
+                bin_mask = valid & (bin_indices == b)
+                cnt = cp.sum(bin_mask)
+                if cnt > 0:
+                    p = products[bin_mask]
+                    sum_prod[b] += cp.sum(p)
+                    sum_prod2[b] += cp.sum(p**2)
+                    counts[b] += cnt
+            
+            # Free j-chunk memory
+            del x_j, y_j, z_j, v_j, dx, dy, dz, r2, products, r, bin_indices, valid, global_j
+            
+            work_done += 1
+            
+        # Free i-batch memory
+        del x_i, y_i, z_i, v_i, global_i
+        cp.get_default_memory_pool().free_all_blocks()
+        
+        # Progress report every 10%
+        progress = (i_batch + 1) / n_i_batches * 100
+        if progress >= last_report + 10:
+            print(f"    Progress: {progress:.0f}% (batch {i_batch+1}/{n_i_batches})")
+            last_report = int(progress // 10) * 10
+    
+    # Transfer results back to CPU
+    sum_prod_cpu = cp.asnumpy(sum_prod)
+    sum_prod2_cpu = cp.asnumpy(sum_prod2)
+    counts_cpu = cp.asnumpy(counts)
+    
+    # Compute correlation and errors
+    r_centers = []
+    correlations = []
+    correlation_errs = []
+    n_pairs_list = []
+    
+    for b in range(n_bins):
+        if counts_cpu[b] < 50:  # Minimum pairs
+            continue
+        
+        n_pairs = counts_cpu[b]
+        mean_corr = sum_prod_cpu[b] / n_pairs
+        var_corr = sum_prod2_cpu[b] / n_pairs - mean_corr**2
+        std_err = np.sqrt(var_corr / n_pairs) if var_corr > 0 else 0.001
+        
+        r_lo, r_hi = r_bins[b], r_bins[b+1]
+        r_centers.append(np.sqrt(r_lo * r_hi))
+        correlations.append(mean_corr)
+        correlation_errs.append(std_err)
+        n_pairs_list.append(n_pairs)
+    
+    print(f"  Total pairs processed: {counts_cpu.sum():,}")
+    
+    return (np.array(r_centers), np.array(correlations), 
+            np.array(correlation_errs), np.array(n_pairs_list))
+
+
+def compute_pair_separations_kdtree(x, y, z, max_sep=15.0):
+    """
+    Compute pair separations using cKDTree for efficiency.
+    
+    This uses proper 3D Cartesian coordinates for accurate separations.
+    
+    Parameters
+    ----------
+    x, y, z : array-like
+        Cartesian coordinates (kpc)
+    max_sep : float
+        Maximum separation to find pairs (kpc)
+    
+    Returns
+    -------
+    separations : array
+        3D separations in kpc
+    i_indices, j_indices : arrays
+        Indices of star pairs
+    """
+    n = len(x)
+    print(f"  Building KD-tree for {n:,} stars...")
+    
+    # Build KD-tree with 3D coordinates
+    coords = np.column_stack([x, y, z])
+    tree = cKDTree(coords)
+    
+    # Find all pairs within max_sep
+    print(f"  Finding pairs within {max_sep} kpc...")
+    pairs = tree.query_pairs(max_sep, output_type='ndarray')
+    print(f"  Found {len(pairs):,} pairs")
+    
+    if len(pairs) == 0:
+        raise ValueError("No pairs found! Check coordinate ranges.")
+    
+    i_indices = pairs[:, 0]
+    j_indices = pairs[:, 1]
+    
+    # Compute actual 3D separations
+    dx = x[i_indices] - x[j_indices]
+    dy = y[i_indices] - y[j_indices]
+    dz = z[i_indices] - z[j_indices]
+    separations = np.sqrt(dx**2 + dy**2 + dz**2)
+    
+    return separations, i_indices, j_indices
+
+
 def compute_pair_separations(R, z, max_pairs=500000, seed=42):
     """
-    Compute 3D separations between star pairs.
+    Compute pair separations using random sampling (fallback method).
     
-    For large samples, subsample pairs randomly.
+    This approximates separation using radial coordinates only.
+    Use compute_pair_separations_kdtree() for accurate results.
     
     Parameters
     ----------
@@ -239,7 +496,7 @@ def compute_pair_separations(R, z, max_pairs=500000, seed=42):
     Returns
     -------
     separations : array
-        3D separations in kpc
+        Approximate separations in kpc
     i_indices, j_indices : arrays
         Indices of star pairs
     """
@@ -248,30 +505,21 @@ def compute_pair_separations(R, z, max_pairs=500000, seed=42):
     print(f"  Total possible pairs: {total_pairs:,}")
     
     if total_pairs <= max_pairs:
-        # Compute all pairs
         i_indices, j_indices = np.triu_indices(n, k=1)
     else:
-        # Subsample pairs
         np.random.seed(seed)
         n_pairs = max_pairs
         print(f"  Subsampling to {n_pairs:,} pairs")
         
-        # Random pairs
         i_indices = np.random.randint(0, n, n_pairs)
         j_indices = np.random.randint(0, n, n_pairs)
-        # Avoid self-pairs
         mask = i_indices != j_indices
         i_indices = i_indices[mask]
         j_indices = j_indices[mask]
     
-    # Compute 3D separations
-    # Assume stars are in the disk plane with azimuth uniformly distributed
-    # For radial correlation, approximate separation as sqrt((R1-R2)^2 + (z1-z2)^2)
+    # Approximate 2D separation (radial only - misses azimuthal component)
     dR = np.abs(R[i_indices] - R[j_indices])
     dz = np.abs(z[i_indices] - z[j_indices])
-    
-    # For a disk, the in-plane angular separation matters
-    # Without phi coordinates, we approximate with radial separation only
     separations = np.sqrt(dR**2 + dz**2)
     
     return separations, i_indices, j_indices
@@ -734,7 +982,9 @@ Possible interpretations:
 # ========== MAIN EXECUTION ==========
 
 def run_correlation_test(data_file=None, output_dir=None, max_pairs=500000,
-                          method='pair_wise', use_large_sample=False):
+                          method='pair_wise', use_large_sample=False,
+                          use_kdtree=True, max_sep=15.0, subsample_n=None,
+                          use_gpu=False, gpu_batch_size=5000):
     """
     Run the full velocity correlation analysis.
     
@@ -745,12 +995,22 @@ def run_correlation_test(data_file=None, output_dir=None, max_pairs=500000,
     output_dir : str or Path
         Output directory for plots/results
     max_pairs : int
-        Maximum pairs to compute (memory limit)
+        Maximum pairs to compute (memory limit) - for random sampling method
     method : str
         'pair_wise' - direct pair correlation
         'radial' - shell-to-shell correlation
     use_large_sample : bool
         If True, use the 1.8M star dataset with flat rotation curve model
+    use_kdtree : bool
+        If True, use cKDTree for efficient pair finding with proper 3D separations
+    max_sep : float
+        Maximum separation in kpc for KDTree pair finding (default: 15)
+    subsample_n : int or None
+        If set, subsample to this many stars before computing pairs
+    use_gpu : bool
+        If True, use CuPy GPU acceleration (requires CUDA)
+    gpu_batch_size : int
+        Batch size for GPU processing (default: 5000)
     """
     print("\n" + "=" * 70)
     print("GAIA DR3 VELOCITY CORRELATION TEST FOR Σ-GRAVITY")
@@ -777,6 +1037,12 @@ Theory predicts: ℓ₀ ≈ 5 kpc, n_coh ≈ 0.5
         df = load_large_gaia_data(data_file)
     else:
         df = load_predicted_gaia_data(data_file)
+    print(f"  Loaded {len(df):,} stars")
+    
+    # Subsample if requested
+    if subsample_n is not None and len(df) > subsample_n:
+        print(f"  Subsampling to {subsample_n:,} stars")
+        df = df.sample(n=subsample_n, random_state=42).reset_index(drop=True)
     print(f"  Using {len(df):,} stars")
     
     # Compute correlations
@@ -792,16 +1058,39 @@ Theory predicts: ℓ₀ ≈ 5 kpc, n_coh ≈ 0.5
     print(f"    Range: {np.min(delta_v):.1f} to {np.max(delta_v):.1f} km/s")
     
     if method == 'pair_wise':
-        # Direct pair-wise correlation
-        separations, i_idx, j_idx = compute_pair_separations(R, z, max_pairs=max_pairs)
+        # Check if we can use KDTree (need Cartesian coordinates)
+        has_cartesian = 'x_kpc' in df.columns and 'y_kpc' in df.columns
         
         # Log-spaced bins for power-law detection
-        r_bins = np.logspace(-0.5, 1.0, 30)
+        r_bins = np.logspace(-0.5, np.log10(min(max_sep, 10.0)), 30)
         
-        r_data, corr_data, corr_err, n_pairs = compute_velocity_correlation(
-            delta_v, separations, i_idx, j_idx, r_bins=r_bins,
-            detrend=True, R=R, radial_detrend_degree=2
-        )
+        if use_gpu and HAS_CUPY and has_cartesian:
+            # GPU-accelerated correlation (most efficient for large samples)
+            print(f"  Using GPU acceleration (CuPy) with batch_size={gpu_batch_size}")
+            x = df['x_kpc'].values
+            y = df['y_kpc'].values
+            r_data, corr_data, corr_err, n_pairs = compute_correlation_gpu(
+                x, y, z, delta_v, r_bins, batch_size=gpu_batch_size, detrend_degree=2
+            )
+        elif use_kdtree and has_cartesian:
+            # Use cKDTree with proper 3D Cartesian coordinates
+            print(f"  Using cKDTree with 3D Cartesian coordinates (max_sep={max_sep} kpc)")
+            x = df['x_kpc'].values
+            y = df['y_kpc'].values
+            separations, i_idx, j_idx = compute_pair_separations_kdtree(x, y, z, max_sep=max_sep)
+            r_data, corr_data, corr_err, n_pairs = compute_velocity_correlation(
+                delta_v, separations, i_idx, j_idx, r_bins=r_bins,
+                detrend=True, R=R, radial_detrend_degree=2
+            )
+        else:
+            # Fall back to random sampling with radial approximation
+            if use_kdtree and not has_cartesian:
+                print(f"  Warning: Cartesian coordinates not available, using radial approximation")
+            separations, i_idx, j_idx = compute_pair_separations(R, z, max_pairs=max_pairs)
+            r_data, corr_data, corr_err, n_pairs = compute_velocity_correlation(
+                delta_v, separations, i_idx, j_idx, r_bins=r_bins,
+                detrend=True, R=R, radial_detrend_degree=2
+            )
     else:
         # Radial shell correlation
         r_data, corr_data, corr_err = compute_radial_velocity_correlation(df)
@@ -873,12 +1162,22 @@ should be correlated according to the coherence kernel K_coh(r).
     parser.add_argument('--output-dir', type=str, default=None,
                         help='Output directory for results')
     parser.add_argument('--max-pairs', type=int, default=500000,
-                        help='Maximum pairs to compute (default: 500000)')
+                        help='Maximum pairs to compute for random sampling (default: 500000)')
     parser.add_argument('--method', choices=['pair_wise', 'radial'], 
                         default='pair_wise',
                         help='Correlation method (default: pair_wise)')
     parser.add_argument('--large-sample', action='store_true',
                         help='Use the 1.8M star dataset (with flat RC model)')
+    parser.add_argument('--no-kdtree', action='store_true',
+                        help='Disable cKDTree (use random sampling instead)')
+    parser.add_argument('--max-sep', type=float, default=15.0,
+                        help='Maximum separation in kpc for KDTree (default: 15)')
+    parser.add_argument('--subsample-n', type=int, default=None,
+                        help='Subsample to N stars before computing pairs')
+    parser.add_argument('--gpu', action='store_true',
+                        help='Use GPU acceleration (requires CuPy and CUDA)')
+    parser.add_argument('--gpu-batch-size', type=int, default=5000,
+                        help='Batch size for GPU processing (default: 5000)')
     
     args = parser.parse_args()
     
@@ -887,7 +1186,12 @@ should be correlated according to the coherence kernel K_coh(r).
         output_dir=args.output_dir,
         max_pairs=args.max_pairs,
         method=args.method,
-        use_large_sample=args.large_sample
+        use_large_sample=args.large_sample,
+        use_kdtree=not args.no_kdtree,
+        max_sep=args.max_sep,
+        subsample_n=args.subsample_n,
+        use_gpu=args.gpu,
+        gpu_batch_size=args.gpu_batch_size
     )
     
     return results
