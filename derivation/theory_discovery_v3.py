@@ -810,7 +810,7 @@ def main():
     print("║   GPU-Accelerated Symbolic Regression                      ║")
     print("╚════════════════════════════════════════════════════════════╝")
     print()
-    print(f"  Hardware: {'GPU (' + str(cp.cuda.Device().name if GPU_AVAILABLE else 'N/A') + ')' if GPU_AVAILABLE else 'CPU only'}")
+    print(f"  Hardware: {'GPU (RTX 5090 - 34GB)' if GPU_AVAILABLE else 'CPU only'}")
     print(f"  CPU Cores: {NUM_CORES}")
     print()
     
