@@ -1,0 +1,20 @@
+{
+  "sigma_gravity": {
+    "scatter_dex": 0.10525755886477385,
+    "bias_dex": 0.029342185612496637,
+    "n_points": 3248,
+    "n_galaxies": 173
+  },
+  "lcdm_cM": {
+    "scatter_dex": 0.07805608142880623,
+    "bias_dex": 0.11911261970637249,
+    "n_points": 3248,
+    "n_galaxies": 173
+  },
+  "mond": {
+    "scatter_dex": 0.14151216285168955,
+    "bias_dex": 0.24353019755018102,
+    "n_points": 3248,
+    "n_galaxies": 173
+  }
+}

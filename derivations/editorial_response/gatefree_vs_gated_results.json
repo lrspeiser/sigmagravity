@@ -1,0 +1,13 @@
+{
+  "gatefree": {
+    "scatter_dex": 0.10525755886477385,
+    "bias_dex": 0.029342185612496637,
+    "parameters": 1
+  },
+  "gated": {
+    "scatter_dex": 0.1028221201955578,
+    "bias_dex": 0.06138787184876349,
+    "parameters": 8
+  },
+  "degradation_percent": 2.3685940968578407
+}

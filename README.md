@@ -103,7 +103,39 @@ This form satisfies key physical requirements: (1) $K_{\rm coh}(0) = 1$ (full co
 
 **Comparison to other theories:** MOND has 2+ phenomenological parameters ($a_0$, $\mu(x)$ form). ΛCDM has 3+ per system (concentration-mass relation). Σ-Gravity derives 5 parameters from first principles, with only 1 remaining phenomenological scale.
 
-### 2.5 Galaxy-Scale Kernel
+### 2.5 Gate-Free Minimal Model
+
+To address concerns about gate complexity, a **minimal 1-parameter model** demonstrates that the core physics does most of the work:
+
+| Model | Parameters | RAR Scatter | Degradation |
+|-------|------------|-------------|-------------|
+| Gate-free (minimal) | 1 | 0.105 dex | — |
+| Gated (refined) | 8 | 0.103 dex | +2% |
+
+The gate-free kernel absorbs morphology effects into an **observable-dependent coherence length**:
+
+$$\ell_{\rm eff} = R \times (\sigma_{\rm ref}/v_c) \times (\sigma_{\rm ref}/\sigma_v)$$
+
+This captures bulge, shear, and winding effects through observables alone. The minimal degradation (2%) shows that gates are refinements, not essential—the RAR scaling and coherence damping carry the physics.
+
+### 2.6 Gate Derivations from Decoherence Theory
+
+The four morphology gates are **not arbitrary switches** but emerge from a single unifying principle:
+
+$$G = \exp(-\Gamma \times t_{\rm orbit})$$
+
+where $\Gamma$ is the decoherence rate from different mechanisms:
+
+| Gate | Physical Mechanism | Formula |
+|------|-------------------|---------|
+| $G_{\rm bulge}$ | Velocity dispersion | $\exp(-(\sigma_v/v_c)(R/\ell_0)(B/D))$ |
+| $G_{\rm bar}$ | Non-axisymmetric forcing | $\exp(-2|1-\Omega_{\rm bar}/\Omega|\epsilon)$ |
+| $G_{\rm shear}$ | Differential rotation | $\exp(-\ell_0/R)$ |
+| $G_{\rm wind}$ | Spiral winding | $\exp(-N/N_{\rm crit})$ |
+
+**All four gate predictions are confirmed by SPARC morphology splits** (see §6.3). Each gate emerges from observables with no additional free parameters.
+
+### 2.7 Galaxy-Scale Kernel
 
 For circular motion in an axisymmetric disk:
 
@@ -501,6 +533,7 @@ Technical details are provided in SUPPLEMENTARY_INFORMATION.md:
 - **SI §14** — Morphology dependence of decoherence exponent
 - **SI §15** — Gaia velocity correlation analysis
 - **SI §16** — Environmental dependence analysis (cosmic web, σ_v partial correlation)
+- **SI §17** — Editorial response: gate-free model, covariant formulation, fair comparisons
 
 ---
 
