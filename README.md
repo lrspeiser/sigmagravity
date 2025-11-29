@@ -7,7 +7,7 @@
 
 ## Abstract
 
-We present Σ-Gravity, a scale-dependent gravitational enhancement that reproduces galaxy rotation curves and cluster lensing with **derived parameters** and no per-system dark-matter halo tuning. The model introduces a multiplicative kernel $g_{\rm eff} = g_{\rm bar}[1+K(R)]$ that vanishes in compact systems (ensuring Solar System safety) and rises in extended structures. **All five key parameters are derived from first principles within 3% accuracy**: the critical acceleration $g^\dagger = cH_0/(2e)$ (0.4% error), amplitude $A_0 = 1/\sqrt{e}$ (2.6% error), exponent $p = 3/4$ (0.9% error), geometry factor $f_{\rm geom} = \pi \times 2.5$ (0.9% error), and coherence exponent $n_{\rm coh} = k/2$ (exact). Σ-Gravity achieves **0.0854 dex** scatter on the radial-acceleration relation (RAR)—competitive with MOND (0.10–0.13 dex) and 2–3× better than individually-tuned ΛCDM halo fits. Applied zero-shot to Milky Way stars (no retuning), the model yields +0.062 dex bias and 0.142 dex scatter. Independent validation from Gaia DR3 stellar velocity correlations yields $\ell_0 = 4.9$ kpc, matching the SPARC-calibrated value. For galaxy clusters, the same framework achieves 88.9% coverage (16/18) within 68% posterior predictive checks with 7.9% median fractional error. Two blind hold-outs (Abell 2261, MACSJ1149) both fall within 68% PPC. The kernel structure emerges from de Sitter horizon physics and path-integral interference, representing a significant advance over MOND (where $a_0$ and $\mu(x)$ are empirical) and ΛCDM (where concentration-mass relations are empirical). Complete reproducible code and validation suite are released publicly.
+We present Σ-Gravity, a scale-dependent gravitational enhancement that reproduces galaxy rotation curves and cluster lensing with **physically motivated parameters** and no per-system dark-matter halo tuning. The model introduces a multiplicative kernel $g_{\rm eff} = g_{\rm bar}[1+K(R)]$ that vanishes in compact systems (ensuring Solar System safety) and rises in extended structures. All five key parameters are **tightly constrained and motivated within a few per cent** by a noise-driven decoherence framework (SI §3): the critical acceleration $g^\dagger = cH_0/(2e)$ (0.4% match), amplitude $A_0 = 1/\sqrt{e}$ (2.6% match), exponent $p = 3/4$ (0.9% match), geometry factor $f_{\rm geom} = \pi \times 2.5$ (0.9% match), and coherence exponent $n_{\rm coh} = k/2$ (exact). Σ-Gravity achieves **0.0854 dex** scatter on the radial-acceleration relation (RAR)—competitive with MOND (0.10–0.13 dex) and 2–3× better than individually-tuned ΛCDM halo fits. Applied zero-shot to Milky Way stars (no retuning), the model yields +0.062 dex bias and 0.142 dex scatter. Independent validation from Gaia DR3 stellar velocity correlations yields $\ell_0 = 4.9$ kpc, matching the SPARC-calibrated value. For galaxy clusters, the same framework achieves 88.9% coverage (16/18) within 68% posterior predictive checks with 7.9% median fractional error. Two blind hold-outs (Abell 2261, MACSJ1149) both fall within 68% PPC. The kernel structure emerges from a stochastic decoherence model where gravitational noise limits coherent path contributions, representing a significant advance over MOND (where $a_0$ and $\mu(x)$ are empirical) and ΛCDM (where concentration-mass relations are empirical). Complete reproducible code and validation suite are released publicly.
 
 ---
 
@@ -19,7 +19,7 @@ A persistent tension in contemporary astrophysics is that visible-matter gravity
 
 | Domain | Metric | Σ-Gravity | MOND | ΛCDM (halo fits) |
 |--------|--------|-----------|------|------------------|
-| **Theory** | Parameters derived | **5/6 (< 3%)** | 0/2 | 0/3+ |
+| **Theory** | Parameters motivated | **5/6 (< 3%)** | 0/2 | 0/3+ |
 | Galaxies | RAR scatter [dex] | **0.0854** | 0.10–0.13 | 0.18–0.25 |
 | MW stars | Bias [dex] | **+0.062** | +0.166 | +1.409* |
 | MW velocities | ℓ0 recovery [kpc] | **4.9** | — | — |
@@ -31,6 +31,8 @@ A persistent tension in contemporary astrophysics is that visible-matter gravity
 ### 1.2 Framework Structure
 
 The multiplicative form $g_{\rm eff}(\mathbf{x}) = g_{\rm bar}(\mathbf{x})[1 + K(\mathbf{x})]$ emerges from stationary-phase reduction of gravitational path integrals. The coherence damping $K_{\rm coh}(R) = (\ell_0/(\ell_0+R))^{n_{\rm coh}}$ implements power-law decay motivated by superstatistical reasoning (SI §3). Parameters $\{A, \ell_0, p, n_{\rm coh}\}$ are calibrated once per domain and frozen for all predictions.
+
+In this formulation, $K$ is interpreted as the **survival probability of coherence** for many-path gravitational contributions in a noisy environment: more gravitational noise (from velocity dispersion, non-axisymmetric structure, shear, etc.) implies faster decoherence and therefore a smaller enhancement. A stochastic noise model leading to the working coherence window is developed in SI §3.
 
 **Key equations:**
 
@@ -48,19 +50,21 @@ In quantum field theory, the gravitational field amplitude arises from a sum ove
 
 The coherence length $\ell_0 \sim R(\sigma_v/v_c)$ balances coherence buildup against decoherence from random motions. For typical disk galaxies: $\ell_0 \sim 2$ kpc (empirical: 5 kpc, factor 2.5×). For clusters: $\ell_0 \sim 200$ kpc. These estimates are **within a factor of 2–3** of fitted values.
 
-### 2.2 Theoretical Status: Derived Parameters
+### 2.2 Theoretical Status: Noise-Motivated Parameters
 
-Unlike MOND (where $a_0$ is empirical) or ΛCDM (where halo concentrations are empirical), **all five Σ-Gravity parameters are now derived from first principles**:
+Unlike MOND or ΛCDM, the key Σ-Gravity parameters are not left fully empirical. In a simple noise-driven decoherence model, each of them emerges as a natural combination of cosmological or geometric quantities, and the resulting estimates lie within a few per cent of the values calibrated on data (see SI §3–§7). Because the underlying noise spectrum and microphysics are not yet derived from fundamental GR+QFT, we treat these as **physically motivated relations** rather than strict predictions.
 
-| Parameter | Physical Derivation | Formula | Derived | Observed | Error |
-|-----------|---------------------|---------|---------|----------|-------|
+| Parameter | Noise-based motivation | Formula | Motivated | Observed | Match |
+|-----------|------------------------|---------|-----------|----------|-------|
 | $g^\dagger$ | De Sitter horizon decoherence | $cH_0/(2e)$ | $1.20 \times 10^{-10}$ m/s² | $1.2 \times 10^{-10}$ | **0.4%** |
 | $A_0$ | Gaussian path integral interference | $1/\sqrt{e}$ | 0.606 | 0.591 | **2.6%** |
 | $p$ | Phase coherence (½) + geodesic counting (¼) | $3/4$ | 0.75 | 0.757 | **0.9%** |
 | $f_{\rm geom}$ | 3D/2D geometry × NFW projection | $\pi \times 2.5$ | 7.85 | 7.78 | **0.9%** |
-| $n_{\rm coh}$ | χ²(k) decoherence statistics | $k/2$ | exact | exact | **0%** |
+| $n_{\rm coh}$ | χ²(k) noise channel statistics | $k/2$ | exact | exact | **0%** |
 
-**Physical derivations:**
+*All expressions follow from the stochastic decoherence model in SI §3–§7 under explicit assumptions about the gravitational noise spectrum. They should be read as motivated relations, not rigorous GR+QFT theorems.*
+
+**Physical motivations:**
 
 1. **Critical acceleration** $g^\dagger = cH_0/(2e)$: The cosmic horizon at $R_H = c/H_0$ sets a decoherence scale for graviton paths. The exponential suppression $\exp(-R/R_H)$ yields a factor of $1/e$, giving $g^\dagger = cH_0/(2e) = 1.20 \times 10^{-10}$ m/s².
 
@@ -70,9 +74,9 @@ Unlike MOND (where $a_0$ is empirical) or ΛCDM (where halo concentrations are e
 
 4. **Geometry factor** $f_{\rm geom} = \pi \times 2.5$: The factor $\pi$ accounts for 3D vs 2D path integral measures (spheres vs disks). The factor 2.5 arises from NFW lensing projection along the line of sight.
 
-5. **Coherence exponent** $n_{\rm coh} = k/2$: Follows χ²(k) decoherence statistics, where $k$ is the number of decoherence channels. Rotation curves: $k=1 \to n_{\rm coh}=0.5$. Cluster velocity dispersion: $k=4 \to n_{\rm coh}=2.0$.
+5. **Coherence exponent** $n_{\rm coh} = k/2$: Follows χ²(k) noise channel statistics, where $k$ is the number of independent decoherence channels. Rotation curves: $k=1 \to n_{\rm coh}=0.5$. Cluster velocity dispersion: $k=4 \to n_{\rm coh}=2.0$.
 
-This represents a significant advance: Σ-Gravity derives **more structure than competitors while requiring fewer free parameters**. Only the coherence length normalization ($\sigma_{\rm ref} \sim 20$ km/s) remains phenomenological.
+This represents a significant advance: Σ-Gravity provides **physically motivated parameter values** while requiring fewer free parameters than competitors. Only the coherence length normalization ($\sigma_{\rm ref} \sim 20$ km/s) remains fully phenomenological.
 
 ### 2.3 The Coherence Damping
 
@@ -86,22 +90,22 @@ This form satisfies key physical requirements: (1) $K_{\rm coh}(0) = 1$ (full co
 
 **Asymptotic behavior:** For small $R \ll \ell_0$: $K_{\rm coh} \approx 1 - n_{\rm coh}(R/\ell_0)$ (Solar System safety: kernel vanishes as $R \to 0$ in full expression). For large $R \gg \ell_0$: $K_{\rm coh} \approx (\ell_0/R)^{n_{\rm coh}} \to 0$ (power-law decoherence).
 
-**Theoretical motivation:** This power-law form is motivated by superstatistical models of heterogeneous decoherence (SI §3). At galactic radii ($R \sim 20$ kpc, $\ell_0 \sim 5$ kpc, $n_{\rm coh} \sim 0.5$), it yields $K_{\rm coh} \approx 0.45$, providing ~50% coherence damping while remaining computationally tractable.
+**Theoretical motivation:** This power-law form is motivated by superstatistical models of heterogeneous decoherence (SI §3). In the revised formulation, we make this explicit: starting from a stochastic gravitational potential with Gaussian noise and a power-law spectrum, the phase-coherence functional between nearby paths decays as $\exp[-(R/\ell_0)^p]$. Heterogeneity in the local noise strength $\lambda$ (modeled by a Gamma prior) then yields the Burr-XII survival form, of which the working window $K_{\rm coh}=(\ell_0/(\ell_0+R))^{n_{\rm coh}}$ is a computationally convenient approximation (SI §3.2–§3.3). At galactic radii ($R \sim 20$ kpc, $\ell_0 \sim 5$ kpc, $n_{\rm coh} \sim 0.5$), it yields $K_{\rm coh} \approx 0.45$, providing ~50% coherence damping.
 
 ### 2.4 Parameter Interpretation
 
-**What is derived (< 3% error):**
+**What is motivated by the noise model (< 3% match):**
 - Critical acceleration $g^\dagger = cH_0/(2e) = 1.2 \times 10^{-10}$ m/s² from de Sitter horizon physics
-- Amplitude $A_0 = 1/\sqrt{e} = 0.606$ from Gaussian path integral
+- Amplitude $A_0 = 1/\sqrt{e} = 0.606$ from Gaussian path integral normalization
 - Exponent $p = 3/4$ from phase coherence + geodesic counting
 - Geometry factor $f_{\rm geom} = \pi \times 2.5$ for cluster/galaxy ratio
-- Coherence exponent $n_{\rm coh} = k/2$ from χ²(k) decoherence statistics
+- Coherence exponent $n_{\rm coh} = k/2$ from χ²(k) noise channel statistics
 
 **What remains phenomenological:**
 - Coherence length normalization $\sigma_{\rm ref} \sim 20$ km/s (sets absolute $\ell_0$ scale)
 - Gate coefficients (morphology-dependent fine-tuning)
 
-**Comparison to other theories:** MOND has 2+ phenomenological parameters ($a_0$, $\mu(x)$ form). ΛCDM has 3+ per system (concentration-mass relation). Σ-Gravity derives 5 parameters from first principles, with only 1 remaining phenomenological scale.
+**Comparison to other theories:** MOND has 2+ phenomenological parameters ($a_0$, $\mu(x)$ form). ΛCDM has 3+ per system (concentration-mass relation). Σ-Gravity motivates 5 parameters from a stochastic decoherence model, with only 1 remaining fully phenomenological scale.
 
 ### 2.5 Gate-Free Minimal Model
 
@@ -118,22 +122,20 @@ $$\ell_{\rm eff} = R \times (\sigma_{\rm ref}/v_c) \times (\sigma_{\rm ref}/\sig
 
 This captures bulge, shear, and winding effects through observables alone. The minimal degradation (2%) shows that gates are refinements, not essential—the RAR scaling and coherence damping carry the physics.
 
-### 2.6 Gate Derivations from Decoherence Theory
+### 2.6 Gate Derivations from Noise Channels
 
-The four morphology gates are **not arbitrary switches** but emerge from a single unifying principle:
+The four morphology gates are **exponentials of decoherence rates arising from specific gravitational noise channels**. Starting from a stochastic potential with amplitude set by velocity dispersion, bar forcing, shear, and spiral winding, each mechanism contributes additively to the decoherence exponent $\Gamma_j$. The corresponding gate is $G_j(R) = \exp[-\Gamma_j(R) \cdot T_{\rm orb}]$, and simple estimates of the noise amplitude lead directly to the functional forms below (see SI §3.5 and §16.2 for detailed derivations).
 
-$$G = \exp(-\Gamma \times t_{\rm orbit})$$
+*Closed-form expressions obtained from the noise-based decoherence model:*
 
-where $\Gamma$ is the decoherence rate from different mechanisms:
-
-| Gate | Physical Mechanism | Formula |
-|------|-------------------|---------|
-| $G_{\rm bulge}$ | Velocity dispersion | $\exp(-(\sigma_v/v_c)(R/\ell_0)(B/D))$ |
+| Gate | Noise Channel | Formula |
+|------|---------------|---------|
+| $G_{\rm bulge}$ | Velocity dispersion noise | $\exp(-(\sigma_v/v_c)(R/\ell_0)(B/D))$ |
 | $G_{\rm bar}$ | Non-axisymmetric forcing | $\exp(-2|1-\Omega_{\rm bar}/\Omega|\epsilon)$ |
 | $G_{\rm shear}$ | Differential rotation | $\exp(-\ell_0/R)$ |
-| $G_{\rm wind}$ | Spiral winding | $\exp(-N/N_{\rm crit})$ |
+| $G_{\rm wind}$ | Spiral winding noise | $\exp(-N/N_{\rm crit})$ |
 
-**All four gate predictions are confirmed by SPARC morphology splits** (see §6.3). Each gate emerges from observables with no additional free parameters.
+**All four gate predictions are confirmed by SPARC morphology splits** (see §6.3). Each gate emerges from observables with no additional free parameters—the noise amplitudes are set by observable quantities ($\sigma_v$, $v_c$, $B/D$, $\Omega_{\rm bar}$, $N_{\rm orbits}$).
 
 ### 2.7 Galaxy-Scale Kernel
 
@@ -390,6 +392,8 @@ This represents a clean geometric derivation—not a fit or approximation.
 
 ### 6.3 On the Gate Mechanisms
 
+As shown in the stochastic decoherence derivation (SI §3–§3.5, §16), each gate is one term in the environmental noise budget: increasing any of the underlying noise sources ($\sigma_v$, bar strength, shear, number of orbits) strictly decreases the coherence factor and hence the enhancement.
+
 The morphology gates are not arbitrary fitting switches but arise from physical considerations:
 
 | Gate | Physical basis | Testable prediction | Status |
@@ -428,7 +432,7 @@ These confirmations are particularly compelling because they test different phys
 
 ### 6.5 Environmental Dependence: Cosmic Web and Velocity Dispersion
 
-The coherence mechanism predicts that gravitational enhancement K should depend on environmental "quietness"—lower in noisy environments (high velocity dispersion, dense regions) where decoherence is rapid, and higher in quiet environments (voids, low σ_v) where coherence is maintained.
+In the noise-limited coherence picture, the enhancement $K$ should anti-correlate with environmental gravitational noise (velocity dispersion, tidal fields, merger rate) and therefore increase systematically from cluster nodes to voids. This provides a direct test of the noise hypothesis formalized in SI §3.
 
 #### 6.5.1 Cosmic Web Classification
 
