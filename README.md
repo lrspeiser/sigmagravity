@@ -525,7 +525,7 @@ Technical details are provided in SUPPLEMENTARY_INFORMATION.md:
 - **SI §4** — PN error budget
 - **SI §5** — Complete reproducibility guide
 - **SI §6** — Extended theory (PRD excerpt)
-- **SI §7** — Derivation validation: negative results
+- **SI §7** — Parameter derivations from first principles
 - **SI §8** — CMB analysis (exploratory)
 - **SI §9** — Pantheon+ SNe validation
 - **SI §10** — LIGO gravitational wave analysis
