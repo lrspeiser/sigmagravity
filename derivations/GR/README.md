@@ -1,88 +1,107 @@
-# Physics Discovery Engine - General Relativity Derivation
+# Physics Discovery Engine
 
-A GPU-accelerated genetic algorithm that rediscovers Einstein's Field Equations from synthetic spacetime data.
+Discovers physical laws from **real observational data** using genetic programming and symbolic regression.
+
+## Two Approaches
+
+### 1. `gr_derivation.py` - Tensor Coefficient Discovery (GPU)
+Rediscovers Einstein Field Equations from synthetic spacetime data using CuPy on GPU.
+
+### 2. `discover_gravity.py` - Symbolic Regression (Real Data)
+Discovers equations from actual astronomical observations without knowing the answer.
 
 ## Prerequisites
 
 ```bash
-pip install cupy-cuda12x numpy sympy
+pip install numpy sympy requests
+# For GPU tensor search:
+pip install cupy-cuda12x
 ```
 
-> **Note**: Adjust `cupy-cuda12x` to match your CUDA driver version (e.g., `cupy-cuda11x` for CUDA 11).
+---
 
-## How It Works
+## Real Physics Discovery (`discover_gravity.py`)
 
-### The Strategy
+This is the **non-circular** approach - feeding real measurements and letting the AI discover equations.
 
-1. **"Universe" Generator**: Creates synthetic spacetime data where GR is true by construction
-2. **Blind AI**: Receives raw tensors (g_uv, R_uv, R, T_uv) without knowing relationships
-3. **GPU Engine**: Uses genetic algorithm to test billions of tensor combinations
+### Usage
 
-### The Physics
+```bash
+# Discover all laws
+python discover_gravity.py all
 
-The script generates random metrics and curvature tensors, then computes what the stress-energy tensor T_uv **must be** for Einstein's equation to hold:
-
-```
-G_uv = R_uv - 0.5 R g_uv = 8π T_uv
-```
-
-The AI then tries to find coefficients [c1, c2, c3, c4] such that:
-
-```
-c1*R_uv + c2*R*g_uv + c3*T_uv + c4*g_uv = 0
+# Individual modes
+python discover_gravity.py kepler   # T² ∝ a³
+python discover_gravity.py newton   # a ∝ 1/r²
+python discover_gravity.py galaxy   # Dark matter/MOND relationship
 ```
 
-If successful, it should discover c1=1, c2=-0.5, c3=-8π, c4=0.
+### Discovery Modes
 
-## Usage
+**1. Kepler's Third Law**
+- Input: Planetary orbital periods (T) and semi-major axes (a)
+- Data: 8 planets from Mercury to Neptune
+- Expected discovery: T = a^1.5
+
+**2. Newton's Gravitational Law**
+- Input: Distance from Sun (r), measured centripetal acceleration (a)
+- Data: Real planetary orbital mechanics
+- Expected discovery: a ∝ 1/r²
+
+**3. Galaxy Rotation Anomaly**
+- Input: Baryonic acceleration (g_baryon) vs observed acceleration (g_obs)
+- Data: SPARC galaxy rotation curves (NGC2403, NGC3198, UGC128)
+- Expected discovery: g_obs ≠ g_baryon (the dark matter problem!)
+
+### Data Sources
+
+- **Planetary data**: JPL Horizons API (real ephemerides)
+- **Galaxy data**: SPARC database (real rotation curves)
+- **Constants**: CODATA values for G, c, etc.
+
+### How Symbolic Regression Works
+
+1. **Expression Trees**: Equations represented as trees (operators + terminals)
+2. **Genetic Evolution**: Population of candidate equations
+3. **Fitness**: Mean squared error + parsimony penalty (Occam's razor)
+4. **Operators**: +, -, *, /, ^, sqrt, log, exp, sin, cos
+
+---
+
+## GPU Tensor Search (`gr_derivation.py`)
+
+This approach generates synthetic data where GR is true, then searches for the tensor equation.
+
+### Usage
 
 ```bash
 python gr_derivation.py
 ```
 
-## Expected Output
+### What It Does
 
-```
---- Phase 1: Observing the Universe ---
-Generating 100000 spacetime points (The Universe)...
-Moving Universe to VRAM...
+1. Generates 100k random spacetime metrics and curvature tensors
+2. Enforces Einstein's equation: T_uv = (1/8π)(R_uv - 0.5 R g_uv)
+3. AI searches for coefficients [c1, c2, c3, c4] in:
+   ```
+   c1*R_uv + c2*R*g_uv + c3*T_uv + c4*g_uv = 0
+   ```
+4. Discovers c1=1, c2=-0.5, c3=-8π, c4=0
 
---- Phase 2: Deriving Laws of Physics on GPU ---
-Constructing Term Vectors on GPU...
-Gen 0: Best Loss 1.234567e+00
-...
-Gen 40: Best Loss 1.234567e-12
+---
 
---- FINAL DISCOVERY ---
-Normalized Eq: R_uv + (-0.5000) R g_uv + (-25.1327) T_uv + (0.0000) g_uv = 0
+## Key Differences
 
---- COMPARISON TO EINSTEIN ---
-Einstein Field Equation: R_uv - 0.5 R g_uv - 8*pi T_uv = 0
-Target 'Scalar' Coeff: -0.5
-Target 'Matter' Coeff: -25.1327
+| Aspect | `gr_derivation.py` | `discover_gravity.py` |
+|--------|-------------------|----------------------|
+| Data | Synthetic (GR embedded) | Real observations |
+| Search | Coefficient optimization | Symbolic equation discovery |
+| Compute | GPU (CuPy) | CPU (NumPy) |
+| Circular? | Yes (proves nothing new) | No (genuine discovery) |
 
-SUCCESS: The AI has derived General Relativity!
-```
+## Extending
 
-## GPU Memory Requirements
-
-- 100k samples × (4,4) tensors × 4 terms × 4 bytes ≈ ~100 MB for data
-- Batched evaluation keeps VRAM usage manageable
-- RTX 5090 (32GB) can handle larger populations for faster convergence
-
-## Key Parameters
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `n_samples` | 100,000 | Number of spacetime points |
-| `population_size` | 5,000 | Candidate equations per generation |
-| `generations` | 50 | Evolution iterations |
-| `mutation_rate` | 0.1 (decaying) | Noise for exploration |
-
-## Extending This
-
-To search for more complex physics (e.g., with cosmological constant Λ), the genetic search already includes the c4*g_uv term. You could also:
-
-- Add higher-order curvature terms (Riemann tensor, Weyl tensor)
-- Include derivative terms for modified gravity theories
-- Expand to more sophisticated optimization (CMA-ES, differential evolution)
+- Add more galaxies from full SPARC database
+- Fetch live JPL Horizons data for any solar system body
+- Add GW strain data for testing tensor equations
+- Expand operator set for more complex physics
