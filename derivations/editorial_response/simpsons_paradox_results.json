@@ -1,0 +1,11 @@
+{
+  "raw_correlation": -0.32131877544694165,
+  "raw_p_value": 4.355827469449823e-54,
+  "partial_correlation": 0.005176335719869301,
+  "partial_p_value": 0.8081441561524386,
+  "bootstrap_mean": 0.005598553823549685,
+  "bootstrap_ci_low": -0.038558218294518505,
+  "bootstrap_ci_high": 0.05036592204040368,
+  "is_simpsons_paradox": false,
+  "n_points": 2203
+}
