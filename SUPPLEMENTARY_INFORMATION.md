@@ -170,9 +170,9 @@ Python ≥3.10; NumPy/SciPy/Matplotlib; pymc≥5; optional: emcee, CuPy (GPU), a
 pip install numpy scipy matplotlib pandas pymc arviz
 ```
 
-### SI §5.2. Unified Derived Formula Validation — 0.094 dex Scatter
+### SI §5.2. Full SPARC Analysis — 171 Galaxies with RAR Scatter Comparison
 
-The unified formula with derived parameters achieves 0.094 dex RAR scatter on SPARC:
+We analyze all 171 SPARC galaxies with sufficient data quality using the derived formula with **no free parameters**.
 
 **Formula:**
 $$\Sigma = 1 + A \times W(r) \times h(g)$$
@@ -184,22 +184,47 @@ where:
 - $A = \sqrt{3} \approx 1.73$ for galaxies
 - $A = \pi\sqrt{2} \approx 4.44$ for clusters
 
-**Commands:**
+**Results (171 galaxies):**
+
+| Metric | Σ-Gravity | MOND |
+|--------|-----------|------|
+| Mean RAR scatter | **0.100 dex** | 0.100 dex |
+| Median RAR scatter | **0.087 dex** | 0.085 dex |
+| Head-to-head wins | **97 galaxies** | 74 galaxies |
+
+Both theories achieve identical mean scatter, but Σ-Gravity wins on more individual galaxies (97 vs 74).
+
+**Commands to reproduce:**
 
 ```bash
-# Unified formula holdout validation (80/20 split, seed=42)
-python derivations/connections/validate_holdout.py
+# Generate all 171 galaxy comparisons + statistics
+python scripts/generate_model_comparison_plots.py
 
 # Expected output:
-#   Training set (140 galaxies): 0.0946 dex
-#   Holdout set (35 galaxies):  0.0906 dex
-#   Degradation: -4.2% (holdout performs better)
+#   RAR Scatter (dex) - paper metric:
+#     Σ-Gravity: 0.100 dex (median: 0.087)
+#     MOND:       0.100 dex (median: 0.085)
+#   Head-to-head (by RAR): Σ-Gravity wins 97, MOND wins 74
+
+# Output files:
+#   figures/model_comparison/galaxy_statistics.csv  (all 171 galaxies)
+#   figures/model_comparison/all_galaxies/          (individual plots)
+#   figures/model_comparison/comparison_grid_all.png
 ```
 
-**Generate paper figures with derived formula:**
+**Generate representative 6-panel figure:**
 
 ```bash
-# Generate all theory figures
+# 6 galaxies closest to mean RAR scatter (0.100 dex)
+python scripts/generate_representative_panel.py
+
+# Output: figures/rc_gallery_derived.png
+# Galaxies: NGC7793, UGC11455, UGC05750, NGC3917, F574-1, UGC02023
+```
+
+**Generate paper theory figures:**
+
+```bash
 python scripts/generate_paper_figures.py
 
 # Outputs to figures/:
@@ -208,34 +233,34 @@ python scripts/generate_paper_figures.py
 #   coherence_window.png
 #   amplitude_comparison.png
 #   solar_system_safety.png
-#   theory_summary_box.png
 ```
 
-### SI §5.3. Legacy Empirical Formula — 0.087 dex Scatter
+### SI §5.3. RAR Scatter Calculation Method
 
-The original empirically-calibrated formula (for comparison):
+The RAR scatter is computed as the standard deviation of log-residuals in acceleration space:
 
-**Commands:**
+```python
+# RAR scatter calculation (per galaxy)
+g_obs = (V_obs * 1000)**2 / (R * kpc_to_m)      # Observed acceleration
+g_pred = (V_pred * 1000)**2 / (R * kpc_to_m)    # Predicted acceleration
+log_residual = np.log10(g_obs / g_pred)          # Log residual (dex)
+rar_scatter = np.std(log_residual)               # Scatter in dex
+```
+
+This is the standard metric used in SPARC publications (McGaugh et al. 2016, Lelli et al. 2017).
+
+### SI §5.4. Legacy Empirical Formula (for comparison)
+
+The original empirically-calibrated formula used fitted parameters:
+
+**Hyperparameters:** `config/hyperparams_track2.json` (ℓ0=4.993 kpc, A₀=0.591, p=0.757, n_coh=0.5)
 
 ```bash
 # Run validation suite (includes 80/20 split, seed=42)
 python many_path_model/validation_suite.py --rar-holdout
-
-# Or full validation:
-python many_path_model/validation_suite.py --all
-
-# 5-fold cross-validation (0.083 ± 0.003 dex)
-python many_path_model/run_5fold_cv.py
 ```
 
-**Expected outputs:**
-- Console: "Hold-out RAR scatter: 0.087 dex"
-- Files: `many_path_model/results/validation_suite/VALIDATION_REPORT.md`
-- 5-fold: `many_path_model/results/5fold_cv_results.json`
-
-**Hyperparameters used:** `config/hyperparams_track2.json` (ℓ₀=4.993 kpc, A₀=0.591, p=0.757, n_coh=0.5)
-
-### SI §5.4. Milky Way Star-Level RAR — Zero-Shot (+0.062 dex bias, 0.142 dex scatter)
+### SI §5.5. Milky Way Star-Level RAR — Zero-Shot (+0.062 dex bias, 0.142 dex scatter)
 
 **Commands:**
 
@@ -258,7 +283,7 @@ python scripts/analyze_mw_rar_starlevel.py \
 - File: `data/gaia/outputs/mw_rar_starlevel_full_metrics.txt`
 - Contains: "Mean bias: +0.062 dex, Scatter: 0.142 dex, n=157343"
 
-### SI §5.5. Cluster Einstein Radii — Blind Hold-Outs (2/2 coverage, 14.9% error)
+### SI §5.6. Cluster Einstein Radii — Blind Hold-Outs (2/2 coverage, 14.9% error)
 
 **Commands:**
 
@@ -275,7 +300,7 @@ python scripts/run_holdout_validation.py
 - Console: "Median fractional error: 14.9%"
 - Files: `figures/holdouts_pred_vs_obs.png`, `output/n10_nutsgrid/flat_samples.npz`
 
-### SI §5.6. Generate All Figures
+### SI §5.7. Generate All Figures
 
 ```bash
 # SPARC figures
@@ -291,11 +316,11 @@ python scripts/generate_cluster_kappa_panels.py
 python scripts/run_holdout_validation.py
 ```
 
-### SI §5.7. Quick Verification (15 minutes)
+### SI §5.8. Quick Verification (15 minutes)
 
 ```bash
-# 1. SPARC (most critical): Should print ~0.087 dex
-python many_path_model/validation_suite.py --rar-holdout
+# 1. SPARC (full analysis): Should show 0.100 dex, 97-74 wins
+python scripts/generate_model_comparison_plots.py
 
 # 2. MW (if CSV exists): Should show +0.062 dex, 0.142 dex  
 python scripts/analyze_mw_rar_starlevel.py \
@@ -306,12 +331,13 @@ python scripts/analyze_mw_rar_starlevel.py \
 python scripts/run_holdout_validation.py
 ```
 
-### SI §5.8. Expected Results Table
+### SI §5.9. Expected Results Table
 
 | Metric | Expected Value | Verification Command |
 |--------|----------------|---------------------|
-| SPARC hold-out scatter | 0.087 dex | validation_suite.py --rar-holdout |
-| SPARC 5-fold CV | 0.083 ± 0.003 dex | run_5fold_cv.py |
+| SPARC mean RAR scatter | 0.100 dex | generate_model_comparison_plots.py |
+| SPARC median RAR scatter | 0.087 dex | generate_model_comparison_plots.py |
+| SPARC head-to-head wins | 97 vs 74 | generate_model_comparison_plots.py |
 | MW bias | +0.062 dex | analyze_mw_rar_starlevel.py output |
 | MW scatter | 0.142 dex | analyze_mw_rar_starlevel.py output |
 | Cluster hold-outs | 2/2 in 68% | run_holdout_validation.py |
@@ -319,7 +345,7 @@ python scripts/run_holdout_validation.py
 
 **All scripts use seed=42 for reproducibility.**
 
-### SI §5.9. Troubleshooting
+### SI §5.10. Troubleshooting
 
 **Unicode errors on Windows:**
 ```powershell
