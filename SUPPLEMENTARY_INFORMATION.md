@@ -3,7 +3,7 @@
 ## Σ-Gravity: A Universal Scale-Dependent Enhancement Reproducing Galaxy Dynamics and Cluster Lensing Without Particle Dark-Matter Halos
 
 **Authors:** Leonard Speiser  
-**Date:** 2025-10-20
+**Date:** 2025-11-30
 
 This Supplementary Information (SI) accompanies the main manuscript and provides complete technical details, derivations, reproducibility instructions, and extended analyses.
 
