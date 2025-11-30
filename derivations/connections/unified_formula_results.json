@@ -1,0 +1,39 @@
+{
+  "formula": "\u03a3 = 1 + A_geom \u00d7 W \u00d7 h(g)",
+  "h_function": "h(g) = \u221a(g\u2020/g) \u00d7 g\u2020/(g\u2020+g)",
+  "A_galaxy": 1.4142135623730951,
+  "A_cluster": 4.442882938158366,
+  "g_dagger": 1.2508616254737346e-10,
+  "grand_mean_ratio": 0.9962494863653566,
+  "grand_std_ratio": 0.14392479796709187,
+  "cluster_summaries": [
+    {
+      "name": "A383",
+      "mean_ratio": 0.8268952668179429,
+      "std_ratio": 0.24314905868831363,
+      "n_points": 5
+    },
+    {
+      "name": "Coma",
+      "mean_ratio": 0.9312571143471243,
+      "std_ratio": 0.34687712406289484,
+      "n_points": 4
+    },
+    {
+      "name": "A2029",
+      "mean_ratio": 1.2194731647292554,
+      "std_ratio": 0.15225782045050223,
+      "n_points": 4
+    },
+    {
+      "name": "Bullet_main",
+      "mean_ratio": 1.007372399567104,
+      "std_ratio": 0.24644300427526467,
+      "n_points": 4
+    }
+  ],
+  "physical_interpretation": {
+    "geometry_factor_pi": "3D path integral vs 2D for disks",
+    "W_unity_for_lensing": "Photons travel through quiet environment, no phase mixing"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "A_max_galaxy": 1.4142135623730951,
+  "A_max_cluster": 4.442882938158366,
+  "cluster_mean_ratio": 0.7687408627211003,
+  "physical_interpretation": "Clusters have higher A_max due to 3D geometry (factor \u03c0) and near-unity W due to quiet lensing environment"
+}
