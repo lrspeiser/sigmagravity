@@ -7,7 +7,7 @@
 
 ## Abstract
 
-We present Σ-Gravity, a scale-dependent gravitational enhancement that reproduces galaxy rotation curves and cluster lensing with **physically motivated parameters** and no per-system dark-matter halo tuning. The model introduces a multiplicative kernel $g_{\rm eff} = g_{\rm bar}[1+K(R)]$ that vanishes in compact systems (ensuring Solar System safety) and rises in extended structures. All five key parameters are **tightly constrained and motivated within a few per cent** by a noise-driven decoherence framework (SI §3): the critical acceleration $g^\dagger = cH_0/(2e)$ (0.4% match), amplitude $A_0 = 1/\sqrt{e}$ (2.6% match), exponent $p = 3/4$ (0.9% match), geometry factor $f_{\rm geom} = \pi \times 2.5$ (0.9% match), and coherence exponent $n_{\rm coh} = k/2$ (exact). Σ-Gravity achieves **0.0854 dex** scatter on the radial-acceleration relation (RAR)—competitive with MOND (0.10–0.13 dex) and 2–3× better than individually-tuned ΛCDM halo fits. Applied zero-shot to Milky Way stars (no retuning), the model yields +0.062 dex bias and 0.142 dex scatter. Independent validation from Gaia DR3 stellar velocity correlations yields $\ell_0 = 4.9$ kpc, matching the SPARC-calibrated value. For galaxy clusters, the same framework achieves 88.9% coverage (16/18) within 68% posterior predictive checks with 7.9% median fractional error. Two blind hold-outs (Abell 2261, MACSJ1149) both fall within 68% PPC. The kernel structure emerges from a stochastic decoherence model where gravitational noise limits coherent path contributions, representing a significant advance over MOND (where $a_0$ and $\mu(x)$ are empirical) and ΛCDM (where concentration-mass relations are empirical). Complete reproducible code and validation suite are released publicly.
+We present Σ-Gravity, a scale-dependent gravitational enhancement that reproduces galaxy rotation curves and cluster lensing with **physically constrained parameters** and no per-system dark-matter halo tuning. The model introduces a multiplicative kernel $g_{\rm eff} = g_{\rm bar}[1+K(R)]$ that vanishes in compact systems (ensuring Solar System safety) and rises in extended structures. The model parameters are constrained by physical principles with varying degrees of rigor: the coherence exponent $n_{\rm coh} = k/2$ follows exactly from Gamma-exponential decoherence statistics; the amplitude $A_0 \approx 1/\sqrt{e}$ (2.6% match) emerges from phase variance definitions; the critical acceleration $g^\dagger \approx cH_0/(2e)$ (0.4% match) and exponent $p \approx 3/4$ (0.9% match) are physically motivated by horizon decoherence and coherent phase addition, though not uniquely derived; the geometry factor $f_{\rm geom} \approx 7.8$ for cluster/galaxy amplitudes remains phenomenological. Σ-Gravity achieves **0.0854 dex** scatter on the radial-acceleration relation (RAR)—competitive with MOND (0.10–0.13 dex) and 2–3× better than individually-tuned ΛCDM halo fits. Applied zero-shot to Milky Way stars (no retuning), the model yields +0.062 dex bias and 0.142 dex scatter. Independent validation from Gaia DR3 stellar velocity correlations yields $\ell_0 = 4.9$ kpc, matching the SPARC-calibrated value. For galaxy clusters, the same framework achieves 88.9% coverage (16/18) within 68% posterior predictive checks with 7.9% median fractional error. Two blind hold-outs (Abell 2261, MACSJ1149) both fall within 68% PPC. The kernel structure emerges from a stochastic decoherence model where gravitational noise limits coherent path contributions, representing a significant advance over MOND (where $a_0$ and $\mu(x)$ are empirical) and ΛCDM (where concentration-mass relations are empirical). Complete reproducible code and validation suite are released publicly.
 
 ---
 
@@ -19,7 +19,7 @@ A persistent tension in contemporary astrophysics is that visible-matter gravity
 
 | Domain | Metric | Σ-Gravity | MOND | ΛCDM (halo fits) |
 |--------|--------|-----------|------|------------------|
-| **Theory** | Parameters motivated | **5/6 (< 3%)** | 0/2 | 0/3+ |
+| **Theory** | Theoretical grounding | **1 rigorous, 2 numeric, 2 motivated, 1 empirical** | 0/2 | 0/3+ |
 | Galaxies | RAR scatter [dex] | **0.0854** | 0.10–0.13 | 0.18–0.25 |
 | MW stars | Bias [dex] | **+0.062** | +0.166 | +1.409* |
 | MW velocities | ℓ0 recovery [kpc] | **4.9** | — | — |
@@ -50,33 +50,34 @@ In quantum field theory, the gravitational field amplitude arises from a sum ove
 
 The coherence length $\ell_0 \sim R(\sigma_v/v_c)$ balances coherence buildup against decoherence from random motions. For typical disk galaxies: $\ell_0 \sim 2$ kpc (empirical: 5 kpc, factor 2.5×). For clusters: $\ell_0 \sim 200$ kpc. These estimates are **within a factor of 2–3** of fitted values.
 
-### 2.2 Theoretical Status: Noise-Motivated Parameters
+### 2.2 Theoretical Status: Parameter Constraints
 
-Unlike MOND or ΛCDM, the key Σ-Gravity parameters are not left fully empirical. In a simple noise-driven decoherence model, each of them emerges as a natural combination of cosmological or geometric quantities, and the resulting estimates lie within a few per cent of the values calibrated on data (see SI §3–§7). Because the underlying noise spectrum and microphysics are not yet derived from fundamental GR+QFT, we treat these as **physically motivated relations** rather than strict predictions.
+Unlike MOND or ΛCDM, several Σ-Gravity parameters have physical interpretations beyond pure fitting. One parameter ($n_{\rm coh} = k/2$) follows rigorously from Gamma-exponential decoherence statistics. Two parameters ($A_0$, $\ell_0/R_d$) emerge from well-defined geometric calculations. Two parameters ($p$, $g^\dagger$) have plausible physical motivations but are not uniquely derived. One parameter ($f_{\rm geom}$ for cluster/galaxy ratio) remains phenomenological. We treat these as constraints of varying strength, not rigorous predictions.
 
-| Parameter | Noise-based motivation | Formula | Motivated | Observed | Match |
-|-----------|------------------------|---------|-----------|----------|-------|
-| $g^\dagger$ | De Sitter horizon decoherence | $cH_0/(2e)$ | $1.20 \times 10^{-10}$ m/s² | $1.2 \times 10^{-10}$ | **0.4%** |
-| $A_0$ | Gaussian path integral interference | $1/\sqrt{e}$ | 0.606 | 0.591 | **2.6%** |
-| $p$ | Phase coherence (½) + geodesic counting (¼) | $3/4$ | 0.75 | 0.757 | **0.9%** |
-| $f_{\rm geom}$ | 3D/2D geometry × NFW projection | $\pi \times 2.5$ | 7.85 | 7.78 | **0.9%** |
-| $n_{\rm coh}$ | χ²(k) noise channel statistics | $k/2$ | exact | exact | **0%** |
+| Parameter | Physical basis | Status | Formula | Predicted | Observed | Match |
+|-----------|----------------|--------|---------|-----------|----------|-------|
+| $n_{\rm coh}$ | Gamma-exponential statistics | **Derived** | $k/2$ | 0.5 | 0.5 | exact |
+| $A_0$ | Phase variance at coherence scale | **Numeric** | $\approx 1/\sqrt{e}$ | 0.607 | 0.591 | 2.6% |
+| $\ell_0/R_d$ | Exponential disk geometry | **Numeric** | 1.42 | 4.3 kpc* | 5.0 kpc | 15% |
+| $g^\dagger$ | Horizon decoherence (motivated) | Motivated | $\sim cH_0/(2e)$ | $1.2 \times 10^{-10}$ | $1.2 \times 10^{-10}$ | 0.4% |
+| $p$ | Phase + mode counting (motivated) | Motivated | $\sim 3/4$ | 0.75 | 0.757 | 0.9% |
+| $f_{\rm geom}$ | Cluster/galaxy amplitude ratio | **Empirical** | — | — | 7.78 | — |
 
-*All expressions follow from the stochastic decoherence model in SI §3–§7 under explicit assumptions about the gravitational noise spectrum. They should be read as motivated relations, not rigorous GR+QFT theorems.*
+*For $R_d = 3$ kpc typical galaxy.
 
-**Physical motivations:**
+**Detailed motivations:**
 
-1. **Critical acceleration** $g^\dagger = cH_0/(2e)$: The cosmic horizon at $R_H = c/H_0$ sets a decoherence scale for graviton paths. The exponential suppression $\exp(-R/R_H)$ yields a factor of $1/e$, giving $g^\dagger = cH_0/(2e) = 1.20 \times 10^{-10}$ m/s².
+1. **Critical acceleration** $g^\dagger \approx cH_0/(2e)$: Systematic search confirms $1/(2e)$ is the best simple coefficient (1.1% error vs 4.8% for $\ln(2)/4$, the next competitor). Physically, the $1/e$ factor is consistent with exponential horizon decoherence, and the factor 2 may arise from graviton polarization averaging or path weighting. This is motivation, not a QFT derivation; the coefficient could be fundamental or coincidental.
 
-2. **Amplitude** $A_0 = 1/\sqrt{e}$: When $N \sim e$ graviton paths contribute coherently with random phases, the amplitude of the coherent sum is $A_0 = 1/\sqrt{N} = 1/\sqrt{e} \approx 0.606$.
+2. **Amplitude** $A_0 \approx 1/\sqrt{e}$: Defining the coherence length $\ell_0$ as the scale where phase variance $\sigma^2 = 1$, the Gaussian approximation gives $A_0 = \exp(-\sigma^2/2) = 1/\sqrt{e}$. Monte Carlo verification shows the phase distribution is not exactly Gaussian (positive skew and kurtosis), and the actual amplitude at the coherence scale is ~0.65, about 10% higher than the Gaussian prediction. The fitted value 0.591 agrees with $1/\sqrt{e}$ to 2.6%.
 
-3. **Exponent** $p = 3/4$: Combines phase coherence ($p_1 = 1/2$: coherent addition of graviton phases gives $\sqrt{g^\dagger/g_{\rm bar}}$) and geodesic counting ($p_2 = 1/4$: number of contributing paths scales as $(g^\dagger/g_{\rm bar})^{1/4}$). Total: $p = 1/2 + 1/4 = 3/4$.
+3. **Exponent** $p \approx 3/4$: The decomposition $p = 1/2 + 1/4$ is physically motivated: the $1/2$ contribution matches the MOND deep limit from random phase addition, while the $1/4$ may arise from mode counting or Fresnel zone geometry. However, other decompositions (e.g., $3/8 + 3/8$) also yield 0.75, and explicit Fresnel calculations do not cleanly produce the $1/4$ exponent. The value $p = 0.757$ is best treated as empirically determined, with $3/4$ providing physical motivation.
 
-4. **Geometry factor** $f_{\rm geom} = \pi \times 2.5$: The factor $\pi$ accounts for 3D vs 2D path integral measures (spheres vs disks). The factor 2.5 arises from NFW lensing projection along the line of sight.
+4. **Geometry factor** $f_{\rm geom} \approx 7.8$: The ratio of cluster to galaxy amplitudes ($A_c/A_0 = 4.6/0.591 = 7.78$). The factor $\pi$ is consistent with 3D vs 2D path integral measures. The remaining factor ~2.5 does **not** emerge from the simple NFW projection formula $2\ln(1+c)/c$ (which gives 0.80 for $c=4$, not 2.5); its origin requires further theoretical work.
 
-5. **Coherence exponent** $n_{\rm coh} = k/2$: Follows χ²(k) noise channel statistics, where $k$ is the number of independent decoherence channels. Rotation curves: $k=1 \to n_{\rm coh}=0.5$. Cluster velocity dispersion: $k=4 \to n_{\rm coh}=2.0$.
+5. **Coherence exponent** $n_{\rm coh} = k/2$: Follows rigorously from Gamma-exponential conjugacy in decoherence statistics. This is a textbook result from reliability theory applied to our physical context. Rotation curves: $k=1 \to n_{\rm coh}=0.5$. Cluster velocity dispersion: $k=4 \to n_{\rm coh}=2.0$.
 
-This represents a significant advance: Σ-Gravity provides **physically motivated parameter values** while requiring fewer free parameters than competitors. Only the coherence length normalization ($\sigma_{\rm ref} \sim 20$ km/s) remains fully phenomenological.
+This represents a significant advance: Σ-Gravity has more theoretical structure than MOND (where $a_0$ and $\mu(x)$ are fully empirical) or per-galaxy ΛCDM fitting, while honestly acknowledging what remains to be derived.
 
 ### 2.3 The Coherence Damping
 
@@ -92,20 +93,25 @@ This form satisfies key physical requirements: (1) $K_{\rm coh}(0) = 1$ (full co
 
 **Theoretical motivation:** This power-law form is motivated by superstatistical models of heterogeneous decoherence (SI §3). In the revised formulation, we make this explicit: starting from a stochastic gravitational potential with Gaussian noise and a power-law spectrum, the phase-coherence functional between nearby paths decays as $\exp[-(R/\ell_0)^p]$. Heterogeneity in the local noise strength $\lambda$ (modeled by a Gamma prior) then yields the Burr-XII survival form, of which the working window $K_{\rm coh}=(\ell_0/(\ell_0+R))^{n_{\rm coh}}$ is a computationally convenient approximation (SI §3.2–§3.3). At galactic radii ($R \sim 20$ kpc, $\ell_0 \sim 5$ kpc, $n_{\rm coh} \sim 0.5$), it yields $K_{\rm coh} \approx 0.45$, providing ~50% coherence damping.
 
-### 2.4 Parameter Interpretation
+### 2.4 Derivation Status: What Is and Isn't Proven
 
-**What is motivated by the noise model (< 3% match):**
-- Critical acceleration $g^\dagger = cH_0/(2e) = 1.2 \times 10^{-10}$ m/s² from de Sitter horizon physics
-- Amplitude $A_0 = 1/\sqrt{e} = 0.606$ from Gaussian path integral normalization
-- Exponent $p = 3/4$ from phase coherence + geodesic counting
-- Geometry factor $f_{\rm geom} = \pi \times 2.5$ for cluster/galaxy ratio
-- Coherence exponent $n_{\rm coh} = k/2$ from χ²(k) noise channel statistics
+To be transparent about the theoretical foundations, we classify our parameters by the strength of their derivation:
 
-**What remains phenomenological:**
-- Coherence length normalization $\sigma_{\rm ref} \sim 20$ km/s (sets absolute $\ell_0$ scale)
-- Gate coefficients (morphology-dependent fine-tuning)
+**Rigorously derived (theorem-level):**
+- $n_{\rm coh} = k/2$: Follows from Gamma-exponential conjugacy in decoherence statistics. This is a textbook result from reliability theory applied to our physical context.
 
-**Comparison to other theories:** MOND has 2+ phenomenological parameters ($a_0$, $\mu(x)$ form). ΛCDM has 3+ per system (concentration-mass relation). Σ-Gravity motivates 5 parameters from a stochastic decoherence model, with only 1 remaining fully phenomenological scale.
+**Numerically derived (well-posed calculation):**
+- $A_0 \approx 1/\sqrt{e}$: Emerges from the definition of coherence length as the scale where phase variance = 1. Monte Carlo confirms this to ~10%.
+- $\ell_0/R_d \approx 1.42$: Emerges from phase statistics of exponential disks. This is a numerical result, not a closed-form expression.
+
+**Physically motivated (plausible but not unique):**
+- $p \approx 3/4$: The decomposition $1/2 + 1/4$ is motivated by MOND-like phase coherence plus mode counting, but other decompositions also give 0.75.
+- $g^\dagger \approx cH_0/(2e)$: Best simple expression among systematic search; horizon physics provides motivation but not rigorous derivation.
+
+**Empirical (awaits theoretical explanation):**
+- $f_{\rm geom} \approx 7.8$: The cluster/galaxy amplitude ratio. The factor $\pi$ has geometric motivation; the factor ~2.5 is not explained by simple NFW projection or Monte Carlo geometry.
+
+This honest classification shows that Σ-Gravity has more theoretical structure than its competitors while identifying specific targets for future theoretical work.
 
 ### 2.5 Gate-Free Minimal Model
 
@@ -376,17 +382,16 @@ A critical question is whether Σ-Gravity's success comes from additional fittin
 
 This suggests a scaling law $\ell_0 \approx 0.2 R$ that holds across 50× in system size. The coherence length is not arbitrary—it tracks the system scale at a fixed fraction.
 
-**Amplitude scaling:** The ratio $A_c/A_0 = 7.78$ is **now fully derived** from geometry:
+**Amplitude scaling:** The ratio $A_c/A_0 = 7.78$ is:
 
-$$f_{\rm geom} = \pi \times 2.5 = 7.85$$
+$$f_{\rm geom} = \frac{A_c}{A_0} = \frac{4.6}{0.591} \approx 7.8$$
 
-The factor $\pi$ accounts for 3D vs 2D path integral measures (solid angle ratio $4\pi/4 = \pi$ when properly normalized). The factor 2.5 arises from NFW lensing projection: for a cluster with concentration $c \sim 4$, $f_{\rm proj} = 2 \ln(1+c)/c \approx 2.5$.
+The factor $\pi$ is consistent with 3D vs 2D geometric considerations. The remaining factor ~2.5 does **not** emerge from the simple NFW projection formula $2\ln(1+c)/c$ (which gives 0.80 for $c=4$, not 2.5). Monte Carlo simulation of cluster vs galaxy coherence amplitudes also does not reproduce this ratio from geometry alone.
 
-**Predicted ratio:** $A_c/A_0 = f_{\rm geom} = 7.85$  
 **Observed ratio:** $4.6/0.591 = 7.78$  
-**Error:** 0.9%
+**Status:** Partially motivated ($\pi$), partially empirical (~2.5)
 
-This represents a clean geometric derivation—not a fit or approximation.
+The origin of the factor ~2.5 remains phenomenological and requires further theoretical work.
 
 **Multi-kernel methodology:** The use of different kernel parameterizations across domains (power-law coherence for SPARC, saturated-well for MW) is standard effective field theory practice. All kernels share the same coherence scale: $\ell_0 = 5$ kpc corresponds to $R_b \approx 6$ kpc—both within 20%.
 
@@ -492,7 +497,9 @@ The partial correlation is indistinguishable from zero, indicating that the raw 
 | Solar System | **margin ≥10⁸** | Cassini constraints satisfied |
 | Environment | K(void)/K(node) = **7.9×** | p = 2×10⁻¹³ |
 
-**Environmental validation (§6.5):** The quietness hypothesis—that K depends on environmental noise—receives strong confirmation from the cosmic web classification:
+**Theoretical status:** The parameters above have varying levels of theoretical grounding. The coherence exponent $n_{\rm coh} = k/2$ is rigorously derived from Gamma-exponential statistics. The amplitude $A_0$ and coherence scale $\ell_0/R_d$ emerge from well-defined numerical calculations. The exponent $p \approx 3/4$ and critical acceleration $g^\dagger \approx cH_0/(2e)$ are physically motivated but not uniquely derived. The cluster/galaxy amplitude ratio $f_{\rm geom}$ remains phenomenological. This represents substantially more theoretical structure than MOND (where $a_0$ and the interpolating function are fully empirical) or per-galaxy ΛCDM fitting, while honestly acknowledging what remains to be derived.
+
+**Environmental validation (§6.5):**
 - Void-like regions (R > 20 kpc) show 8× more enhancement than node-like regions (R < 5 kpc)
 - Kruskal-Wallis test: H = 62.17, p = 2×10⁻¹³
 - The velocity dispersion analysis shows radius is the dominant confounding variable; direct σ_v effects require further investigation with Gaia kinematic data

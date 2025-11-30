@@ -1,0 +1,24 @@
+Honest parameter status revisions: fix arithmetic errors and overclaims
+
+CRITICAL FIX:
+- f_geom = 2.5 from NFW formula was WRONG: 2ln(1+c)/c = 0.80 for c=4, not 2.5
+- Removed all claims that f_geom is "derived" - it's now marked empirical
+
+README changes:
+- Abstract: Acknowledge varying rigor levels (1 rigorous, 2 numeric, 2 motivated, 1 empirical)
+- §1.1: Changed "Parameters motivated 5/6" to honest breakdown
+- §2.2: Renamed to "Parameter Constraints", added Status column to table
+- §2.2: Revised p and g† descriptions to acknowledge non-uniqueness
+- §2.2: Fixed f_geom description (removed wrong 2.5=NFW claim)
+- §2.4: New "Derivation Status: What Is and Isn't Proven" section
+- §6.2: Fixed amplitude scaling section (removed "fully derived" claim)
+- §8: Added theoretical status paragraph to conclusion
+
+SI changes:
+- §6 V: Removed "DERIVED" label, corrected NFW projection math
+- §7.4: Changed to "Motivated (not derived)", noted decomposition non-uniqueness
+- §7.5: Changed to "Empirical (partially motivated)", showed correct NFW math
+- §7.10: Updated comparison table with honest status breakdown
+
+This addresses the core issue: the NFW formula 2ln(1+c)/c gives 0.80 for c=4,
+NOT 2.5 as previously claimed. The factor ~2.5 remains unexplained.

@@ -430,19 +430,13 @@ $$
 $$
 Safety margin ≥10^8×.
 
-### V. AMPLITUDE SCALING: GALAXIES VS CLUSTERS (DERIVED)
+### V. AMPLITUDE SCALING: GALAXIES VS CLUSTERS
 
-**UPDATE (2025-11):** The amplitude ratio is now **fully derived** from geometry:
+The amplitude ratio between clusters and galaxies is:
 
-$$f_{\rm geom} = \pi \times 2.5 = 7.85$$
+$$f_{\rm geom} = \frac{A_c}{A_0} = \frac{4.6}{0.591} \approx 7.8$$
 
-where $\pi$ accounts for 3D vs 2D path integral measures, and 2.5 arises from NFW lensing projection.
-
-**Derived ratio:** $A_c/A_0 = 7.85$  
-**Observed ratio:** $4.6/0.591 = 7.78$  
-**Error:** 0.9%
-
-See SI §7.5 for full derivation.
+The factor $\pi$ is consistent with 3D/2D geometric considerations. The remaining factor ~2.5 does **not** emerge from simple NFW projection (which gives $2\ln(1+c)/c = 0.80$ for $c=4$, not 2.5) and remains phenomenological. See SI §7.5 for detailed analysis.
 
 ### VI. QUANTITATIVE PREDICTIONS
 
@@ -530,47 +524,53 @@ A0_observed = 0.591  # SPARC fit
 error = abs(A0_derived - A0_observed) / A0_observed  # = 2.6%
 ```
 
-### SI §7.4. Exponent: $p = 3/4$
+### SI §7.4. Exponent: $p \approx 3/4$
 
-**Physical derivation:**
+**Status: Motivated (not derived)**
 
-The exponent combines two independent contributions:
+The fitted exponent $p = 0.757$ is close to $3/4 = 0.75$ (0.9% difference). A decomposition $p = 1/2 + 1/4$ is physically motivated:
 
-1. **Phase coherence ($p_1 = 1/2$):** The coherent addition of graviton phases gives enhancement proportional to $\sqrt{g^\dagger/g_{\rm bar}}$.
+1. **Phase coherence ($p_1 = 1/2$):** Random phase addition of $N$ graviton paths gives amplitude $\sim \sqrt{N}$. With $N \sim g^\dagger/g_{\rm bar}$, this contributes $p_1 = 1/2$. This is the same physics that gives MOND its deep-limit behavior and is robust.
 
-2. **Geodesic counting ($p_2 = 1/4$):** The number of geodesics contributing to the path integral scales as $(g^\dagger/g_{\rm bar})^{1/4}$.
+2. **Mode counting ($p_2 = 1/4$):** Proposed to arise from Fresnel zone geometry or coherent mode counting. However:
+   - Explicit Fresnel integral calculations do not cleanly produce exponent $1/4$
+   - Other decompositions ($3/8 + 3/8$, $2/3 + 1/12$, etc.) also give $p = 0.75$
+   - We cannot independently verify $p_1$ and $p_2$ with current analysis
 
-**Combined:**
-$$p = p_1 + p_2 = \frac{1}{2} + \frac{1}{4} = \frac{3}{4} = 0.75$$
+**Conclusion:** The decomposition $p = 1/2 + 1/4$ is a motivated story, not a derivation. The value $p = 3/4$ should be presented as empirically preferred with physical motivation, not as derived.
 
-**Verification:**
+**Match:**
 ```python
-p_derived = 0.75  # 3/4 exact
+p_motivated = 0.75  # 3/4
 p_observed = 0.757  # SPARC fit
-error = abs(p_derived - p_observed) / p_observed  # = 0.9%
+agreement = abs(p_motivated - p_observed) / p_observed  # = 0.9%
 ```
 
-### SI §7.5. Geometry Factor: $f_{\rm geom} = \pi \times 2.5$
+### SI §7.5. Geometry Factor: $f_{\rm geom} \approx 7.8$
 
-**Physical derivation:**
+**Status: Empirical (partially motivated)**
 
-The geometry factor accounts for the difference between 2D disk dynamics (galaxies) and 3D projected lensing (clusters):
+The geometry factor is the ratio of cluster to galaxy amplitudes:
+$$f_{\rm geom} = \frac{A_c}{A_0} = \frac{4.6}{0.591} = 7.78$$
 
-1. **Factor $\pi$:** Ratio of 3D to 2D path integral measures. The solid angle ratio $4\pi/4 = \pi$ when properly normalized for spherical vs disk geometry.
+**Partial motivation:**
 
-2. **Factor 2.5:** NFW lensing projection. For a cluster with concentration $c \sim 4$:
-$$f_{\rm proj} = \frac{2\ln(1+c)}{c} \approx 2.5$$
+1. **Factor $\pi$:** The ratio of 3D to 2D path integral measures is consistent with $\pi$, accounting for spherical vs disk geometry.
 
-**Combined:**
-$$f_{\rm geom} = \pi \times 2.5 = 7.85$$
+2. **Factor ~2.5:** This does **NOT** emerge from the simple NFW projection formula. For concentration $c = 4$:
+$$f_{\rm proj} = \frac{2\ln(1+c)}{c} = \frac{2\ln(5)}{4} = 0.80 \neq 2.5$$
+
+Monte Carlo simulation of cluster vs galaxy coherence amplitudes also does not reproduce the ratio ~7.8 from geometry alone.
+
+**Conclusion:** The factor $\pi$ has geometric justification; the factor ~2.5 remains unexplained and should be treated as phenomenological until a proper derivation is found.
 
 **Verification:**
 ```python
-f_geom_derived = np.pi * 2.5  # = 7.85
-A_cluster = 4.6  # Cluster fit
-A_galaxy = 0.591  # Galaxy fit
-f_geom_observed = A_cluster / A_galaxy  # = 7.78
-error = abs(f_geom_derived - f_geom_observed) / f_geom_observed  # = 0.9%
+import numpy as np
+c = 4.0
+f_proj_NFW = 2 * np.log(1 + c) / c  # = 0.805, NOT 2.5
+f_geom_observed = 4.6 / 0.591  # = 7.78
+# The factor ~2.5 = 7.78 / pi = 2.48 is not explained by NFW projection
 ```
 
 ### SI §7.6. Coherence Exponent: $n_{\rm coh} = k/2$
@@ -644,13 +644,13 @@ python derivations/Quiet/cluster_formula_derivation.py
 
 This represents a **qualitative advance** over competitor theories:
 
-| Theory | Parameters | Derived | Phenomenological |
-|--------|------------|---------|------------------|
-| MOND | 2+ | 0 | $a_0$, $\mu(x)$ form |
-| ΛCDM | 3+ per system | 0 | c-M relation, profiles |
-| **Σ-Gravity** | 6 | **5** | $\sigma_{\rm ref}$ only |
+| Theory | Parameters | Status | |
+|--------|------------|--------|-|
+| MOND | 2+ | 0 rigorous, 0 numeric, 0 motivated | All empirical |
+| ΛCDM | 3+ per system | 0 rigorous, 0 numeric, 0 motivated | Per-galaxy fitting |
+| **Σ-Gravity** | 6 | **1 rigorous, 2 numeric, 2 motivated, 1 empirical** | Most constrained |
 
-Σ-Gravity is the first modified gravity framework with **all key parameters derived from first principles**.
+Σ-Gravity has substantially more theoretical structure than MOND (where $a_0$ and $\mu(x)$ are fully empirical) or per-galaxy ΛCDM fitting, while honestly acknowledging what remains to be derived.
 
 ---
 
