@@ -11,7 +11,7 @@ The observed dynamics of galaxies and galaxy clusters systematically exceed pred
 
 The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.2 × 10⁻¹⁰ m/s² emerges from cosmological horizon physics. Applied to 175 SPARC galaxies, the framework achieves 0.094 dex scatter on the radial acceleration relation. Zero-shot application to 157,343 Milky Way stars from Gaia DR3 yields +0.062 dex bias—outperforming MOND (+0.166 dex). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. The theory passes Solar System constraints by 8 orders of magnitude due to automatic coherence suppression in compact systems. 
 
-Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity is embedded in relativistic field theory with testable ~7% differences in the transition regime. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherent summation of torsion modes that produces it.
+Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity is embedded in relativistic field theory with g† derived from cosmological constants rather than fitted. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherent summation of torsion modes that produces it.
 
 ---
 
@@ -146,13 +146,15 @@ with components:
 
 The cluster/galaxy amplitude ratio π√2/√3 ≈ 2.57 matches the empirically observed ratio of **2.60 to within 1.2%**.
 
-### 2.7 Comparison with MOND
+### 2.7 Why This Formula (Not MOND's)
 
-The Σ-Gravity h(g) function differs mathematically from MOND's interpolating function by approximately **7%** in the transition region (g ~ g†). This is a testable prediction: high-precision rotation curves in galaxies with accelerations near g† could distinguish the theories.
+MOND's success with a₀ ≈ 1.2×10⁻¹⁰ m/s² has been known for 40 years, but lacked physical explanation. Σ-Gravity derives g† = cH₀/(2e) from cosmological horizon physics—matching a₀ to 0.4%—while the h(g) function emerges from teleparallel coherence, not phenomenological fitting. 
+
+The two approaches produce similar curves but differ by ~7% in the transition regime, making them experimentally distinguishable with high-precision rotation curves.
 
 ![Figure: h(g) function comparison](figures/h_function_comparison.png)
 
-*Figure 1: Left: Enhancement functions h(g) for Σ-Gravity (blue) vs MOND (red). Right: Percentage difference in the transition region, showing ~7% deviation near g = g†—a testable prediction.*
+*Figure 1: Enhancement functions h(g) for Σ-Gravity (derived from teleparallel coherence) vs MOND (empirical). The functions are similar but distinguishable.*
 
 ### 2.8 Solar System Safety
 
@@ -242,14 +244,14 @@ The amplitude ratio emerges from geometric arguments (spherical vs disk coherenc
 - Embedded in relativistic field theory (teleparallel gravity)
 - Automatic Solar System safety (coherence window, not hand-tuned)
 - Natural cluster/galaxy amplitude ratio (from coherence geometry)
-- Different interpolation function providing testable ~7% difference
+- Critical acceleration g† = cH₀/(2e) derived, not fitted
 
 ### 4.2 Testable Predictions
 
-1. **Interpolation function shape:** ~7% deviation from MOND near g = g†
-2. **Counter-rotating disks:** Reduced enhancement (coherence disrupted)
-3. **Tidal streams:** Enhanced self-gravity in dynamically cold streams
-4. **High-redshift galaxies:** Different dynamics if enhancement depends on coherence
+1. **Counter-rotating disks:** Reduced enhancement (coherence disrupted)
+2. **Tidal streams:** Enhanced self-gravity in dynamically cold streams
+3. **High-redshift galaxies:** Different dynamics if enhancement depends on coherence  
+4. **Transition regime shape:** Small but measurable differences from MOND in galaxies with g ~ g†
 
 ### 4.3 Limitations and Future Work
 
