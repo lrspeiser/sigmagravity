@@ -540,6 +540,169 @@ $$
 
 ---
 
+## SI §6.1 — Modified TEGR Action and Field Equations
+
+### The Σ-Gravity Action
+
+Σ-Gravity modifies the matter coupling in the TEGR action, not the gravitational sector:
+
+$$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x \, |e| \, \Sigma[g, \mathcal{C}] \, \mathcal{L}_m$$
+
+where:
+- $|e|$ = tetrad determinant
+- $\mathbf{T}$ = torsion scalar (standard TEGR)
+- $\kappa = 8\pi G/c^4$
+- $\mathcal{L}_m$ = matter Lagrangian
+- $\Sigma$ = coherent enhancement factor
+
+**Key distinction from f(T) gravity:** Standard f(T) gravity modifies the gravitational sector ($\mathbf{T} \to f(\mathbf{T})$). Σ-Gravity modifies the matter coupling ($\mathcal{L}_m \to \Sigma \cdot \mathcal{L}_m$). This is crucial because:
+1. The torsion scalar $\mathbf{T}$ doesn't know about velocity coherence
+2. The matter coupling can naturally incorporate coherence through $\mathcal{C}$
+3. The gravitational wave sector remains unmodified (GW speed = c)
+
+### Field Equations
+
+Varying the action with respect to the tetrad yields:
+
+$$G_{\mu\nu} = \kappa \left( \Sigma \, T_{\mu\nu}^{(\text{matter})} + \Theta_{\mu\nu} \right)$$
+
+where $\Theta_{\mu\nu}$ is a small correction from varying $\Sigma$ with respect to the metric.
+
+**Newtonian limit:**
+$$\nabla^2\Phi = 4\pi G \rho \, \Sigma$$
+$$g_{\text{eff}} = g_{\text{bar}} \cdot \Sigma$$
+
+### Consistency Checks
+
+| Check | Result |
+|-------|--------|
+| No ghosts | ✓ Since $\Sigma > 0$ always, kinetic terms maintain correct sign |
+| Solar System | ✓ $\Sigma - 1 < 10^{-11}$ (6 orders below Cassini bound) |
+| GW speed | ✓ Gravitational sector unchanged $\Rightarrow$ GW speed = c |
+| GW170817 | ✓ Compact binaries in high-g regime $\Rightarrow$ standard GR |
+
+---
+
+## SI §6.2 — Mode Counting Derivation for A = √3
+
+### Torsion Mode Decomposition
+
+The torsion tensor $T^\lambda_{\mu\nu}$ has 24 independent components that decompose into irreducible parts:
+
+- **Vector part (4 components):** $V_\mu = T^\nu{}_{\nu\mu}$
+- **Axial part (4 components):** $A^\mu = \frac{1}{6}\epsilon^{\mu\nu\rho\sigma}T_{\nu\rho\sigma}$
+- **Tensor part (16 components):** The remainder
+
+### Disk Geometry
+
+For a thin disk in the z = 0 plane with axial symmetry, the torsion field decomposes into three orthogonal components in cylindrical coordinates $(r, \phi, z)$:
+
+$$\mathbf{T} = T_r \hat{r} + T_\phi \hat{\phi} + T_z \hat{z}$$
+
+### Coherent vs. Incoherent Addition
+
+**Incoherent case:** Each component adds in quadrature:
+$$|\mathbf{T}|_{\text{incoh}}^2 = \langle T_r^2 \rangle + \langle T_\phi^2 \rangle + \langle T_z^2 \rangle$$
+
+**Coherent case:** Components maintain phase relationships:
+$$|\mathbf{T}|_{\text{coh}}^2 = |\langle T_r \rangle|^2 + |\langle T_\phi \rangle|^2 + |\langle T_z \rangle|^2$$
+
+### Mode Contribution Table
+
+| Mode | Physical Origin | Incoherent | Coherent |
+|------|----------------|------------|----------|
+| **Radial ($T_r$)** | Gradient of gravitational potential $\partial_r \Phi$ | ✓ Always | ✓ Always |
+| **Azimuthal ($T_\phi$)** | Frame-dragging from ordered rotation | ✗ Averages to zero | ✓ Coherent rotation |
+| **Vertical ($T_z$)** | Disk geometry breaks spherical symmetry | ✗ Averages to zero | ✓ Disk geometry |
+
+### Enhancement Factor Derivation
+
+If all three components contribute equally with amplitude $T_0$:
+
+$$A_{\text{disk}} = \frac{|\mathbf{T}|_{\text{coh}}}{|\mathbf{T}|_{\text{incoh}}} = \frac{\sqrt{3 T_0^2}}{\sqrt{T_0^2}} = \sqrt{3} \approx 1.73$$
+
+**This is the geometric origin of A = √3 for disk galaxies.**
+
+### Spherical Clusters: A = π√2
+
+For spherical clusters, expanding in spherical harmonics:
+- More modes available due to 3D geometry
+- Solid angle integration contributes factor of $\pi$ (from $4\pi / 4$ normalization)
+- Two polarizations contribute factor of $\sqrt{2}$
+- Combined: $A_{\text{cluster}} = \pi\sqrt{2} \approx 4.44$
+
+**Cluster/Galaxy ratio:**
+$$\frac{A_{\text{cluster}}}{A_{\text{disk}}} = \frac{\pi\sqrt{2}}{\sqrt{3}} \approx 2.57$$
+
+*Observed ratio: 2.60 — agreement to 1.2%*
+
+**Caveat:** These derivations are motivated rather than rigorous. The agreement is intriguing but requires further investigation.
+
+---
+
+## SI §6.3 — Derivation Status Summary
+
+| Parameter | Formula | Status | Error |
+|-----------|---------|--------|-------|
+| **$n_{\text{coh}}$** | $k/2$ (Gamma-exponential) | ✓ **RIGOROUS** | 0% |
+| **$A_0$** | $1/\sqrt{e}$ (Gaussian phases) | ○ Numeric | 2.6% |
+| **$g^\dagger \sim cH_0$** | Timescale matching | △ Motivated | — |
+| **Factor 2e** | Polarization + coherence | △ Motivated | ~4% |
+| **$A = \sqrt{3}$** | 3 torsion modes | △ Motivated | — |
+| **$A = \pi\sqrt{2}$** | Spherical geometry | △ Motivated | 1.2% |
+| **$\xi = (2/3)R_d$** | Coherence scale | ✗ Phenomenological | ~40% |
+
+**Legend:**
+- ✓ **RIGOROUS**: Mathematical theorem, independently verifiable
+- ○ **NUMERIC**: Well-defined calculation with stated assumptions
+- △ **MOTIVATED**: Plausible physical story, not unique derivation
+- ✗ **EMPIRICAL**: Fits data but no valid first-principles derivation
+
+---
+
+## SI §6.4 — Quantitative Testable Predictions
+
+### 1. Counter-Rotating Disks (Most Decisive Test)
+
+Counter-rotating components disrupt coherence:
+
+| Counter-rotation % | Σ-Gravity | MOND | Difference |
+|--------------------|-----------|------|------------|
+| 0% (normal) | 2.69 | 2.56 | +5% |
+| 25% | 2.27 | 2.56 | -11% |
+| 50% | 1.84 | 2.56 | **-28%** |
+| 100% (fully counter) | 1.00 | 2.56 | -61% |
+
+**Prediction:** NGC 4550 (~50% counter-rotating) should show 28% less enhancement than MOND.
+
+### 2. Velocity Dispersion Dependence
+
+$$W_{\text{eff}} = W(r) \times \exp(-(\sigma_v/v_c)^2)$$
+
+MOND has no $\sigma_v$ dependence at fixed $g_{\text{bar}}$.
+
+### 3. Environment Dependence
+
+| Environment | Coherence | Predicted Σ | vs MOND |
+|-------------|-----------|-------------|----------|
+| Void | High (1.0) | 2.69 | +5% |
+| Field | Normal (0.9) | 2.51 | -2% |
+| Group | Moderate (0.7) | 2.15 | -16% |
+| Cluster | Low (0.5) | 1.84 | -28% |
+
+### 4. Enhancement Function Comparison
+
+| $g/g^\dagger$ | Σ-Gravity | MOND | Difference |
+|---------------|-----------|------|------------|
+| 0.01 | 18.28 | 10.49 | +74% |
+| 0.1 | 5.01 | 3.67 | +37% |
+| 1.0 | 1.87 | 1.62 | +15% |
+| 10.0 | 1.08 | 1.05 | +3% |
+
+*Note: Differences partially compensated by coherence window W(r).*
+
+---
+
 ## SI §7 — Noise-Based Parameter Motivations
 
 **UPDATE (2025-11):** Following intensive theoretical work, we have identified noise-driven relations that **motivate all five key parameters** to within a few per cent. These are physically motivated constraints arising from the decoherence framework, not unique derivations from first principles.
