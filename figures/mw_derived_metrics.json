@@ -1,0 +1,23 @@
+{
+  "n_stars": 157343,
+  "derived_formula": {
+    "g_dagger": 1.251794410857302e-10,
+    "A": 1.7320508075688772,
+    "R_d_MW": 2.6
+  },
+  "results": {
+    "GR_baryons": {
+      "bias_dex": 0.38036769143359545,
+      "scatter_dex": 0.17578730519378938
+    },
+    "Sigma_Gravity": {
+      "bias_dex": 0.19105307251750372,
+      "scatter_dex": 0.15565069101515294
+    },
+    "MOND": {
+      "bias_dex": 0.1758834884010413,
+      "scatter_dex": 0.15946385153060003
+    }
+  },
+  "improvement": "MOND 1.1\u00d7 better bias (\u03a3-Gravity: no fitting)"
+}
