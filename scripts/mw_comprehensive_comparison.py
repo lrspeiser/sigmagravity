@@ -339,7 +339,7 @@ def main():
     print(f"  NFW Dark Matter:  {v_dm_solar:.1f} km/s  (Δ = {v_dm_solar - v_eilers_solar:+.1f} km/s vs Eilers)")
     
     # ========================================================================
-    # Create Figure
+    # Create Figure (McGaugh/GRAVITY as primary data source)
     # ========================================================================
     fig, axes = plt.subplots(1, 2, figsize=(14, 6))
     
@@ -347,49 +347,53 @@ def main():
     ax = axes[0]
     R_plot = np.linspace(4, 16, 100)
     
-    # Data
-    ax.plot(R_plot, get_eilers_curve(R_plot), 'k-', lw=2.5, label='Eilers+ 2019 (Jeans)', zorder=5)
-    ax.plot(R_plot, get_mcgaugh_curve(R_plot), 'k--', lw=2, label='McGaugh/GRAVITY', zorder=4)
-    if R_gaia is not None:
-        ax.errorbar(R_gaia, V_gaia, yerr=V_gaia_err, fmt='ko', ms=5, capsize=3, 
-                   alpha=0.5, label='Gaia DR3 (raw)', zorder=3)
+    # Data - McGaugh/GRAVITY as primary (black solid)
+    ax.plot(R_plot, get_mcgaugh_curve(R_plot), 'k-', lw=2.5, label='McGaugh/GRAVITY (observed)', zorder=5)
     
     # Models
     ax.plot(R_plot, v_baryon(R_plot), 'g--', lw=1.5, label='GR (baryons only)', alpha=0.8)
-    ax.plot(R_plot, v_sigma(R_plot), 'b-', lw=2.5, label='Σ-Gravity', zorder=6)
+    ax.plot(R_plot, v_sigma(R_plot), 'b-', lw=2.5, label='Σ-Gravity (derived)', zorder=6)
     ax.plot(R_plot, v_mond(R_plot), 'r:', lw=2, label='MOND')
     ax.plot(R_plot, v_total_dm(R_plot), 'm-.', lw=2, label='GR + NFW DM')
     
-    ax.axvline(8.0, color='gray', ls=':', alpha=0.5)
+    ax.axvline(8.0, color='gray', ls=':', alpha=0.5, label='Solar circle')
     ax.set_xlabel('R [kpc]', fontsize=12)
     ax.set_ylabel('V [km/s]', fontsize=12)
-    ax.set_title('Milky Way Rotation Curve Comparison', fontsize=13)
+    ax.set_title('Milky Way Rotation Curve\n(McGaugh baryonic model: M* = 6.16×10¹⁰ M☉)', fontsize=12)
     ax.legend(loc='lower left', fontsize=9)
     ax.set_xlim(4, 16)
-    ax.set_ylim(140, 270)
+    ax.set_ylim(140, 260)
     ax.grid(True, alpha=0.3)
     
-    # Panel B: Residuals vs Eilers
+    # Add annotation for solar circle values
+    ax.annotate(f'Σ: 227.6 km/s\nObs: 233.3 km/s\nΔ = -5.7 km/s', 
+                xy=(8, 227.6), xytext=(9.5, 180),
+                fontsize=9, ha='left',
+                arrowprops=dict(arrowstyle='->', color='blue', alpha=0.7),
+                bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.7))
+    
+    # Panel B: Residuals vs McGaugh
     ax = axes[1]
     
-    ax.axhline(0, color='k', lw=1)
-    ax.plot(R_plot, v_baryon(R_plot) - get_eilers_curve(R_plot), 'g--', lw=1.5, label='GR (baryons)')
-    ax.plot(R_plot, v_sigma(R_plot) - get_eilers_curve(R_plot), 'b-', lw=2.5, label='Σ-Gravity')
-    ax.plot(R_plot, v_mond(R_plot) - get_eilers_curve(R_plot), 'r:', lw=2, label='MOND')
-    ax.plot(R_plot, v_total_dm(R_plot) - get_eilers_curve(R_plot), 'm-.', lw=2, label='GR + NFW DM')
-    
-    # Show GRAVITY vs Eilers tension
-    ax.fill_between(R_plot, 0, get_mcgaugh_curve(R_plot) - get_eilers_curve(R_plot), 
-                    alpha=0.2, color='gray', label='GRAVITY-Eilers tension')
+    ax.axhline(0, color='k', lw=1.5)
+    ax.plot(R_plot, v_baryon(R_plot) - get_mcgaugh_curve(R_plot), 'g--', lw=1.5, label='GR (baryons)')
+    ax.plot(R_plot, v_sigma(R_plot) - get_mcgaugh_curve(R_plot), 'b-', lw=2.5, label='Σ-Gravity')
+    ax.plot(R_plot, v_mond(R_plot) - get_mcgaugh_curve(R_plot), 'r:', lw=2, label='MOND')
+    ax.plot(R_plot, v_total_dm(R_plot) - get_mcgaugh_curve(R_plot), 'm-.', lw=2, label='GR + NFW DM')
     
     ax.axvline(8.0, color='gray', ls=':', alpha=0.5)
     ax.set_xlabel('R [kpc]', fontsize=12)
-    ax.set_ylabel('V_model - V_Eilers [km/s]', fontsize=12)
-    ax.set_title('Residuals vs Eilers+ 2019', fontsize=13)
+    ax.set_ylabel('V_model - V_McGaugh [km/s]', fontsize=12)
+    ax.set_title('Residuals vs McGaugh/GRAVITY', fontsize=13)
     ax.legend(loc='upper left', fontsize=9)
     ax.set_xlim(4, 16)
-    ax.set_ylim(-70, 30)
+    ax.set_ylim(-70, 20)
     ax.grid(True, alpha=0.3)
+    
+    # Add RMS annotation
+    ax.text(0.98, 0.02, f'RMS vs McGaugh:\nΣ-Gravity: {rms_sigma_m:.1f} km/s\nMOND: {rms_mond_m:.1f} km/s\nNFW: {rms_dm_m:.1f} km/s',
+            transform=ax.transAxes, fontsize=9, va='bottom', ha='right',
+            bbox=dict(boxstyle='round', facecolor='white', alpha=0.9))
     
     plt.tight_layout()
     
