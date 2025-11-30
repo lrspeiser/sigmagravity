@@ -170,7 +170,50 @@ Python ≥3.10; NumPy/SciPy/Matplotlib; pymc≥5; optional: emcee, CuPy (GPU), a
 pip install numpy scipy matplotlib pandas pymc arviz
 ```
 
-### SI §5.2. SPARC Galaxy RAR — 0.087 dex Hold-Out Scatter
+### SI §5.2. Unified Derived Formula Validation — 0.094 dex Scatter
+
+The unified formula with derived parameters achieves 0.094 dex RAR scatter on SPARC:
+
+**Formula:**
+$$\Sigma = 1 + A \times W(r) \times h(g)$$
+
+where:
+- $h(g) = \sqrt{g^\dagger/g} \times g^\dagger/(g^\dagger + g)$
+- $W(r) = 1 - (\xi/(\xi + r))^{0.5}$ with $\xi = (2/3)R_d$
+- $g^\dagger = cH_0/(2e) = 1.25 \times 10^{-10}$ m/s²
+- $A = \sqrt{3} \approx 1.73$ for galaxies
+- $A = \pi\sqrt{2} \approx 4.44$ for clusters
+
+**Commands:**
+
+```bash
+# Unified formula holdout validation (80/20 split, seed=42)
+python derivations/connections/validate_holdout.py
+
+# Expected output:
+#   Training set (140 galaxies): 0.0946 dex
+#   Holdout set (35 galaxies):  0.0906 dex
+#   Degradation: -4.2% (holdout performs better)
+```
+
+**Generate paper figures with derived formula:**
+
+```bash
+# Generate all theory figures
+python scripts/generate_paper_figures.py
+
+# Outputs to figures/:
+#   rar_derived_formula.png
+#   h_function_comparison.png  
+#   coherence_window.png
+#   amplitude_comparison.png
+#   solar_system_safety.png
+#   theory_summary_box.png
+```
+
+### SI §5.3. Legacy Empirical Formula — 0.087 dex Scatter
+
+The original empirically-calibrated formula (for comparison):
 
 **Commands:**
 
@@ -192,7 +235,7 @@ python many_path_model/run_5fold_cv.py
 
 **Hyperparameters used:** `config/hyperparams_track2.json` (ℓ₀=4.993 kpc, A₀=0.591, p=0.757, n_coh=0.5)
 
-### SI §5.3. Milky Way Star-Level RAR — Zero-Shot (+0.062 dex bias, 0.142 dex scatter)
+### SI §5.4. Milky Way Star-Level RAR — Zero-Shot (+0.062 dex bias, 0.142 dex scatter)
 
 **Commands:**
 
@@ -215,7 +258,7 @@ python scripts/analyze_mw_rar_starlevel.py \
 - File: `data/gaia/outputs/mw_rar_starlevel_full_metrics.txt`
 - Contains: "Mean bias: +0.062 dex, Scatter: 0.142 dex, n=157343"
 
-### SI §5.4. Cluster Einstein Radii — Blind Hold-Outs (2/2 coverage, 14.9% error)
+### SI §5.5. Cluster Einstein Radii — Blind Hold-Outs (2/2 coverage, 14.9% error)
 
 **Commands:**
 
@@ -232,7 +275,7 @@ python scripts/run_holdout_validation.py
 - Console: "Median fractional error: 14.9%"
 - Files: `figures/holdouts_pred_vs_obs.png`, `output/n10_nutsgrid/flat_samples.npz`
 
-### SI §5.5. Generate All Figures
+### SI §5.6. Generate All Figures
 
 ```bash
 # SPARC figures
@@ -248,7 +291,7 @@ python scripts/generate_cluster_kappa_panels.py
 python scripts/run_holdout_validation.py
 ```
 
-### SI §5.6. Quick Verification (15 minutes)
+### SI §5.7. Quick Verification (15 minutes)
 
 ```bash
 # 1. SPARC (most critical): Should print ~0.087 dex
@@ -263,7 +306,7 @@ python scripts/analyze_mw_rar_starlevel.py \
 python scripts/run_holdout_validation.py
 ```
 
-### SI §5.7. Expected Results Table
+### SI §5.8. Expected Results Table
 
 | Metric | Expected Value | Verification Command |
 |--------|----------------|---------------------|
@@ -276,7 +319,7 @@ python scripts/run_holdout_validation.py
 
 **All scripts use seed=42 for reproducibility.**
 
-### SI §5.8. Troubleshooting
+### SI §5.9. Troubleshooting
 
 **Unicode errors on Windows:**
 ```powershell
