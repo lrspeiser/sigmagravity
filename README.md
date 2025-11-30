@@ -9,7 +9,7 @@
 
 The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. Here we present Σ-Gravity ("Sigma-Gravity"), a framework where **coherent superposition of gravitational torsion modes** produces scale-dependent enhancement in extended, dynamically cold systems. Built on teleparallel gravity—the mathematical equivalent of General Relativity where gravity is mediated by torsion rather than curvature—the key insight is that torsion contributions from spatially separated mass elements can interfere constructively when their phases remain aligned, analogous to coherent light in a laser or Cooper pairs in a superconductor.
 
-The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.2 × 10⁻¹⁰ m/s² emerges from cosmological horizon physics. Applied to 175 SPARC galaxies, the framework achieves 0.094 dex scatter on the radial acceleration relation. Zero-shot application to 157,343 Milky Way stars from Gaia DR3 yields +0.062 dex bias—outperforming MOND (+0.166 dex). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. The theory passes Solar System constraints by 8 orders of magnitude due to automatic coherence suppression in compact systems. 
+The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.2 × 10⁻¹⁰ m/s² emerges from cosmological horizon physics. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—while winning head-to-head on 97 vs 74 galaxies. Zero-shot application to 157,343 Milky Way stars from Gaia DR3 yields +0.062 dex bias—outperforming MOND (+0.166 dex). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. The theory passes Solar System constraints by 8 orders of magnitude due to automatic coherence suppression in compact systems.
 
 Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity is embedded in relativistic field theory with g† derived from cosmological constants rather than fitted. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherent summation of torsion modes that produces it.
 
@@ -46,11 +46,11 @@ This mechanism naturally explains:
 
 | Domain | Metric | Σ-Gravity | MOND | ΛCDM (halo fits) |
 |--------|--------|-----------|------|------------------|
-| SPARC galaxies (175) | RAR scatter | **0.094 dex** | 0.10–0.13 dex | 0.18–0.25 dex |
+| SPARC galaxies (171) | RAR scatter | **0.100 dex** | 0.100 dex | 0.18–0.25 dex |
+| SPARC head-to-head | Wins | **97** | 74 | — |
 | Milky Way (Gaia DR3) | Zero-shot bias | **+0.062 dex** | +0.166 dex | +1.4 dex* |
 | Galaxy clusters | Hold-out coverage | **2/2 in 68%** | — | Baseline |
 | Solar System | PPN γ−1 | **< 10⁻¹³** | < 10⁻⁵ | 0 |
-| Cluster/galaxy ratio | Predicted vs observed | **2.57 vs 2.60** | — | — |
 
 *Single fixed NFW halo (V₂₀₀ = 180 km/s), not per-galaxy tuned.
 
@@ -170,24 +170,25 @@ In compact systems, the coherence window W(r) → 0 and the enhancement automati
 
 ### 3.1 Radial Acceleration Relation (SPARC Galaxies)
 
-We test the framework on the SPARC database containing 175 late-type galaxies with high-quality rotation curves and 3.6μm photometry.
+We test the framework on the SPARC database containing 175 late-type galaxies with high-quality rotation curves and 3.6μm photometry. Using the derived formula with no free parameters (A = √3, g† = cH₀/(2e)), we analyze all 171 galaxies with sufficient data quality.
 
-**Results:**
+**Results (171 galaxies):**
 
-| Metric | Training (140 galaxies) | Holdout (35 galaxies) |
-|--------|-------------------------|----------------------|
-| RAR scatter | 0.095 dex | **0.091 dex** |
-| Bias | -0.073 dex | -0.079 dex |
+| Metric | Σ-Gravity | MOND |
+|--------|-----------|------|
+| Mean RAR scatter | **0.100 dex** | 0.100 dex |
+| Median RAR scatter | **0.087 dex** | 0.085 dex |
+| Head-to-head wins | **97 galaxies** | 74 galaxies |
 
-The holdout scatter of **0.094 dex** compares favorably to MOND (0.10-0.13 dex) and ΛCDM with per-galaxy halo fitting (0.18-0.25 dex).
+Both theories achieve comparable overall scatter, but Σ-Gravity wins on more individual galaxies (97 vs 74) when comparing RAR residuals. This is achieved with parameters derived from first principles, not fitted to data.
 
 ![Figure: RAR plot](figures/rar_derived_formula.png)
 
-*Figure 4: Radial Acceleration Relation for SPARC galaxies using derived formula. Gray points: observed accelerations. Blue line: Σ-Gravity prediction with A = √3. Red dashed: MOND. The scatter of 0.094 dex demonstrates predictive accuracy.*
+*Figure 4: Radial Acceleration Relation for SPARC galaxies using derived formula. Gray points: observed accelerations. Blue line: Σ-Gravity prediction with A = √3. Red dashed: MOND.*
 
 ![Figure: Rotation curve gallery](figures/rc_gallery_derived.png)
 
-*Figure 5: Rotation curves for six representative SPARC galaxies showing observed data (black points), baryonic prediction (green dashed), Σ-Gravity with derived parameters (blue solid), and MOND (red dotted).*
+*Figure 5: Rotation curves for six representative SPARC galaxies selected for RAR scatter near the mean (0.100 dex). Black points: observed data. Green dashed: baryonic (GR). Blue solid: Σ-Gravity. Red dotted: MOND.*
 
 ### 3.2 Milky Way Zero-Shot Validation
 
@@ -218,7 +219,7 @@ Galaxy clusters provide a third independent test domain through strong lensing.
 
 | Domain | Formula | Amplitude | Performance |
 |--------|---------|-----------|-------------|
-| Disk galaxies | Σ = 1 + A·W·h | √3 | 0.094 dex RAR |
+| Disk galaxies (171) | Σ = 1 + A·W·h | √3 | 0.100 dex RAR, wins 97/171 |
 | Milky Way | same | √3 | +0.062 dex bias |
 | Galaxy clusters | same | π√2 | 2/2 hold-outs |
 
