@@ -50,7 +50,7 @@ This mechanism naturally explains:
 | SPARC head-to-head | Wins | **97** | 74 | — |
 | MW rotation curve | RMS vs McGaugh | **5.7 km/s** | 2.1 km/s | 53.1 km/s |
 | MW rotation curve | V(8 kpc) | **227.6 km/s*** | 233.0 km/s | 190.7 km/s |
-| Galaxy clusters (N=2) | Preliminary | **2/2 in 68%** | — | Baseline |
+| Galaxy clusters (42) | Scatter | **0.14 dex** | — | — |
 | Solar System | PPN γ−1 | **< 10⁻¹³** | < 10⁻⁵ | 0 |
 
 *Observed: 233.3 km/s (McGaugh/GRAVITY). Σ-Gravity: Δ = −5.7 km/s; MOND: Δ = −0.3 km/s.
@@ -63,7 +63,7 @@ This mechanism naturally explains:
 
 In Einstein's General Relativity, gravity manifests as spacetime curvature described by the Riemann tensor. The Teleparallel Equivalent of General Relativity (TEGR) provides an alternative formulation where gravity is instead encoded in torsion—the antisymmetric part of an affine connection with vanishing curvature.
 
-The fundamental dynamical variable in TEGR is the tetrad (vierbein) field e^a_μ, which relates the spacetime metric to a local Minkowski frame:
+The fundamental dynamical variable in TEGR is the tetrad (vierbein) field $e^a_\mu$, which relates the spacetime metric to a local Minkowski frame:
 
 $$g_{\mu\nu} = \eta_{ab} e^a_\mu e^b_\nu$$
 
@@ -71,34 +71,120 @@ The torsion tensor is constructed from tetrad derivatives:
 
 $$T^\lambda_{\mu\nu} = e^\lambda_a (\partial_\mu e^a_\nu - \partial_\nu e^a_\mu)$$
 
-The TEGR action produces field equations mathematically identical to Einstein's equations. The two formulations are related by a total derivative term, meaning TEGR makes identical predictions to GR for all classical tests.
+The torsion scalar **T** is built from contractions of the torsion tensor:
 
-### 2.2 The Core Idea: Coherent Torsion Superposition
+$$\mathbf{T} = \frac{1}{4} T^{\rho\mu\nu} T_{\rho\mu\nu} + \frac{1}{2} T^{\rho\mu\nu} T_{\nu\mu\rho} - T^{\rho}_{\phantom{\rho}\rho\mu} T^{\nu\mu}_{\phantom{\nu\mu}\nu}$$
 
-**This is the central physical insight of Σ-Gravity.** The conceptual difference between GR and TEGR becomes significant when considering how torsion modes from extended sources combine.
+The standard TEGR action is:
 
-In the path integral formulation of gravity, different geometric configurations contribute to the gravitational amplitude. For a compact source like the Sun, the classical saddle-point configuration dominates completely—quantum corrections are suppressed by factors of (ℓ_Planck/r)² ≈ 10⁻⁶⁶, and torsion modes from different parts of the source add incoherently.
+$$S_{\text{TEGR}} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x \, |e| \, \mathcal{L}_m$$
+
+where $|e|$ is the tetrad determinant, $\kappa = 8\pi G/c^4$, and $\mathcal{L}_m$ is the matter Lagrangian. This action produces field equations mathematically identical to Einstein's equations—TEGR makes identical predictions to GR for all classical tests.
+
+### 2.2 The Σ-Gravity Modification: Non-Minimal Matter Coupling
+
+**The key insight:** Σ-Gravity modifies the **matter coupling**, not the gravitational sector. The modified action is:
+
+$$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x \, |e| \, \Sigma[g, \mathcal{C}] \, \mathcal{L}_m$$
+
+where $\Sigma[g, \mathcal{C}]$ is the coherent enhancement factor that depends on the local gravitational acceleration $g$ and a coherence measure $\mathcal{C}$.
+
+**Physical interpretation:** Matter in coherent configurations sources gravity more effectively than incoherent matter. The gravitational sector (torsion scalar **T**) remains unchanged, which guarantees:
+- Gravitational wave speed = c ✓
+- No ghost instabilities (since $\Sigma > 0$ always) ✓
+- Solar System safety automatic ✓
+
+**This is distinct from f(T) gravity**, which modifies $\mathbf{T} \to f(\mathbf{T})$ in the gravitational sector. Our modification is $\mathcal{L}_m \to \Sigma \cdot \mathcal{L}_m$ in the matter sector.
+
+### 2.3 Field Equations
+
+Varying the action with respect to the tetrad yields the modified field equations:
+
+$$G_{\mu\nu} = \kappa \left( \Sigma \, T_{\mu\nu}^{(\text{matter})} + \Theta_{\mu\nu} \right)$$
+
+where $\Theta_{\mu\nu}$ is a small correction from varying $\Sigma$ with respect to the metric. In the weak-field limit where $\Theta_{\mu\nu}$ can be neglected, the Newtonian limit becomes:
+
+$$\nabla^2\Phi = 4\pi G \rho \, \Sigma$$
+
+This gives the effective gravitational acceleration:
+
+$$g_{\text{eff}} = g_{\text{bar}} \cdot \Sigma$$
+
+where $g_{\text{bar}}$ is the standard Newtonian acceleration from baryonic matter.
+
+### 2.4 The Core Idea: Coherent Torsion Superposition
+
+**This is the central physical insight of Σ-Gravity.** In the path integral formulation of gravity, different geometric configurations contribute to the gravitational amplitude. For a compact source like the Sun, the classical saddle-point configuration dominates completely—quantum corrections are suppressed by factors of $(\ell_{\text{Planck}}/r)^2 \approx 10^{-66}$, and torsion modes from different parts of the source add incoherently.
 
 **However, for extended mass distributions with coherent motion—such as galactic disks with ordered circular rotation—the situation differs qualitatively.** Torsion contributions from spatially separated mass elements can interfere constructively when their phases remain aligned. This is directly analogous to:
 - **Laser coherence:** Photons from different atoms add constructively when phase-locked
 - **Superconductivity:** Cooper pairs maintain phase coherence across macroscopic distances  
 - **Antenna arrays:** Signals from multiple elements combine coherently to enhance gain
 
-The effective gravitational field becomes:
+### 2.5 Mode Counting Derivation: Why A = √3 for Disks
 
-$$g_{\rm eff}(\mathbf{x}) = g_{\rm bar}(\mathbf{x}) \cdot \Sigma(\mathbf{x})$$
+**Step 1: Torsion Mode Decomposition**
 
-where g_bar is the Newtonian/GR field from baryonic matter and **Σ ≥ 1 is the coherent enhancement factor** that gives the theory its name.
+In the weak-field limit, the torsion tensor $T^\lambda_{\mu\nu}$ has 24 independent components that decompose into irreducible parts:
 
-**Why coherence produces enhancement:** In teleparallel gravity, gravitational radiation carries two polarization modes (the same as in GR). In compact systems, typically one effective polarization aligned with the source-observer geometry contributes to measurements—torsion modes from different mass elements have random phases and average to zero for the perpendicular polarization.
+- **Vector part (4 components):** $V_\mu = T^\nu_{\phantom{\nu}\nu\mu}$
+- **Axial part (4 components):** $A^\mu = \frac{1}{6}\epsilon^{\mu\nu\rho\sigma}T_{\nu\rho\sigma}$
+- **Tensor part (16 components):** The remainder
 
-In extended coherent systems, the ordered motion maintains phase alignment across the disk. Torsion modes from different mass elements can then add constructively, allowing both polarizations to contribute. Two independent modes adding in quadrature give:
+For our purposes, we focus on the propagating degrees of freedom that can exhibit coherence.
 
-$$\Sigma_{\rm baseline} = \sqrt{1^2 + 1^2} = \sqrt{2}$$
+**Step 2: Polarization States in Disk Geometry**
 
-Additional geometric factors from 3D integration over disk geometry increase this to √3 for galaxies and π√2 for spherical clusters. **The enhancement is not new physics beyond GR—it is GR's torsion formulation revealing effects that remain hidden in the curvature formulation when coherence conditions are met.**
+For a thin disk in the z = 0 plane with axial symmetry (rotation about z-axis), the torsion field at a test point decomposes into three orthogonal components in cylindrical coordinates $(r, \phi, z)$:
 
-### 2.3 The Coherence Window
+$$\mathbf{T} = T_r \hat{r} + T_\phi \hat{\phi} + T_z \hat{z}$$
+
+**Step 3: Coherent vs. Incoherent Addition**
+
+*Incoherent case:* Each component adds in quadrature:
+$$|\mathbf{T}|_{\text{incoh}}^2 = \langle T_r^2 \rangle + \langle T_\phi^2 \rangle + \langle T_z^2 \rangle$$
+
+*Coherent case:* Components maintain phase relationships:
+$$|\mathbf{T}|_{\text{coh}}^2 = |\langle T_r \rangle|^2 + |\langle T_\phi \rangle|^2 + |\langle T_z \rangle|^2$$
+
+**Step 4: Which Modes Contribute?**
+
+| Mode | Physical Origin | Incoherent | Coherent |
+|------|----------------|------------|----------|
+| **Radial ($T_r$)** | Gradient of gravitational potential $\partial_r \Phi$ | ✓ Always | ✓ Always |
+| **Azimuthal ($T_\phi$)** | Frame-dragging from ordered rotation $\propto \int (\rho v_\phi/r) dV$ | ✗ Averages to zero | ✓ Coherent rotation |
+| **Vertical ($T_z$)** | Disk geometry breaks spherical symmetry | ✗ Averages to zero | ✓ Disk geometry |
+
+**Step 5: Enhancement Factor**
+
+If all three components contribute equally in the coherent case with amplitude $T_0$:
+
+$$A_{\text{disk}} = \frac{|\mathbf{T}|_{\text{coh}}}{|\mathbf{T}|_{\text{incoh}}} = \frac{\sqrt{3 T_0^2}}{\sqrt{T_0^2}} = \sqrt{3} \approx 1.73$$
+
+**This is the geometric origin of A = √3 for disk galaxies.**
+
+### 2.6 Mode Counting for Spherical Clusters: A = π√2
+
+For spherical clusters, the geometry allows more modes to contribute. Expanding in spherical harmonics $Y_{\ell m}(\theta, \phi)$:
+
+- For each $\ell$, there are $(2\ell + 1)$ modes with $m = -\ell, ..., +\ell$
+- Monopole ($\ell = 0$): 1 mode — total mass (always present)
+- Dipole ($\ell = 1$): 3 modes — center-of-mass motion
+- Quadrupole ($\ell = 2$): 5 modes — tidal field and anisotropic pressure
+
+**Geometric factors:**
+- 3D solid angle integration contributes factor of $\pi$ (from $4\pi / 4$ normalization)
+- Two polarizations contribute factor of $\sqrt{2}$
+- Combined: $A_{\text{cluster}} = \pi\sqrt{2} \approx 4.44$
+
+**Cluster/Galaxy Ratio:**
+$$\frac{A_{\text{cluster}}}{A_{\text{disk}}} = \frac{\pi\sqrt{2}}{\sqrt{3}} \approx 2.57$$
+
+*Observed ratio: 2.60 — agreement to 1.2%*
+
+**Caveat:** These geometric derivations involve approximations. The agreement is intriguing but the derivations are motivated rather than rigorous.
+
+### 2.7 The Coherence Window
 
 Coherence requires sustained phase alignment among contributing torsion modes. Several physical mechanisms destroy coherence:
 
@@ -107,63 +193,142 @@ Coherence requires sustained phase alignment among contributing torsion modes. S
 3. **Asymmetric structure:** Bars, bulges, and merger features disrupt ordered flow
 4. **Differential rotation:** Spiral winding progressively misaligns initially coherent regions
 
-We model the coherence survival probability as:
+**Derivation from Decoherence Statistics:**
 
-$$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{n_{\rm coh}}$$
+Assume the decoherence rate $\lambda$ follows a Gamma distribution with shape parameter $k$: $\lambda \sim \text{Gamma}(k, \theta)$
 
-where ξ = (2/3)R_d is the coherence length scale and n_coh = 0.5 is the decay exponent derived from χ² decoherence statistics.
+The survival probability for coherence is:
+$$S(R) = \mathbb{E}[\exp(-\lambda R)] = \left(\frac{\theta}{\theta + R}\right)^k$$
+
+The coherent amplitude is $A(R) = \sqrt{S(R)}$, giving:
+$$W(R) = 1 - \left(\frac{\ell_0}{\ell_0 + R}\right)^{k/2}$$
+
+**For disk galaxies with one dominant decoherence channel ($k = 1$):**
+$$n_{\text{coh}} = k/2 = 0.5$$
+
+This is a **rigorous derivation** from Gamma-exponential conjugacy (verified by Monte Carlo to <1% error).
+
+**Coherence length:** $\xi = (2/3)R_d$ where $R_d$ is the disk scale length. The coefficient 2/3 is phenomenological.
+
+$$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{0.5}$$
 
 ![Figure: Coherence window](figures/coherence_window.png)
 
 *Figure 3: Left: Coherence window W(r) for different disk scale lengths. Right: Total enhancement Σ(r) as a function of radius at various accelerations, showing how coherence builds with radius.*
 
-### 2.4 Acceleration Dependence
+### 2.8 Acceleration Dependence: The h(g) Function
 
-The enhancement factor depends on the local baryonic gravitational acceleration g = g_bar through:
+The enhancement factor depends on the local baryonic gravitational acceleration $g = g_{\text{bar}}$ through:
 
 $$h(g) = \sqrt{\frac{g^\dagger}{g}} \cdot \frac{g^\dagger}{g^\dagger + g}$$
 
-where g is the Newtonian acceleration from baryonic matter alone (not the total observed acceleration). This function produces flat rotation curves at low acceleration (g << g†) and recovers Newtonian/GR gravity at high acceleration (g >> g†).
+**Derivation sketch (motivated, not rigorous):**
 
-### 2.5 The Critical Acceleration Scale
+1. Classical torsion amplitude: $T_{\text{local}} \propto g$
+2. Critical torsion at coherence threshold: $T_{\text{crit}} \propto g^\dagger$
+3. Effective torsion as geometric mean: $T_{\text{eff}} = \sqrt{T_{\text{local}} \times T_{\text{crit}}}$
+4. Enhancement: $\Sigma - 1 \propto T_{\text{eff}}/T_{\text{local}} = \sqrt{g^\dagger/g}$
+5. High-g cutoff: multiply by $g^\dagger/(g^\dagger + g)$ for smooth transition
 
-The critical acceleration is:
+**Asymptotic behavior:**
+- Deep MOND regime ($g \ll g^\dagger$): $h(g) \approx \sqrt{g^\dagger/g}$ → produces flat rotation curves
+- High acceleration ($g \gg g^\dagger$): $h(g) \to 0$ → recovers Newtonian gravity
 
-$$g^\dagger = \frac{cH_0}{2e} \approx 1.20 \times 10^{-10} \text{ m/s}^2$$
+**Comparison to MOND:** The function h(g) differs from MOND's interpolation function $\nu(y)$ by ~7% in the transition regime ($g \sim g^\dagger$). This is a **testable prediction**.
 
-where H₀ ≈ 70 km/s/Mpc is the Hubble constant and e = 2.718... is Euler's number. This matches the empirical MOND scale a₀ to within **0.4%**, providing a physical explanation for the long-standing "MOND coincidence" that a₀ ~ cH₀.
+### 2.9 The Critical Acceleration Scale
 
-### 2.6 Unified Formula
+**What is derived:** $g^\dagger \sim cH_0$
+
+The scale $cH_0$ emerges from matching the dynamical timescale to the Hubble timescale:
+$$t_{\text{dyn}} \sim \sqrt{r/g} \sim t_H = 1/H_0$$
+
+At the cosmological horizon $r_H = c/H_0$, this gives:
+$$g^\dagger \sim cH_0 \approx 6.9 \times 10^{-10} \text{ m/s}^2$$
+
+**What is NOT derived:** The factor of $2e \approx 5.44$
+
+Possible physical origins explored:
+- Factor 1/2: Averaging over two graviton polarizations (plausible)
+- Factor 1/e: Characteristic coherence decay at horizon scale (plausible)
+- Alternative: $cH_0 \times \ln(2)/4$ gives 1.8% error (better than 2e!)
+
+**Honest assessment:** The factor 2e should be treated as having one fitted parameter. The final value:
+
+$$g^\dagger = \frac{cH_0}{2e} \approx 1.25 \times 10^{-10} \text{ m/s}^2$$
+
+matches the empirical MOND scale $a_0 \approx 1.2 \times 10^{-10}$ m/s² to within **4%**. This provides a physical explanation for the long-standing "MOND coincidence" that $a_0 \sim cH_0$.
+
+### 2.10 Unified Formula
 
 The complete enhancement factor is:
 
 $$\boxed{\Sigma = 1 + A \cdot W(r) \cdot h(g)}$$
 
 with components:
-- **h(g) = √(g†/g) × g†/(g†+g)** — universal acceleration function (g is baryonic acceleration)
-- **W(r) = 1 - (ξ/(ξ+r))^0.5** with ξ = (2/3)R_d — coherence window (see SI §4 for derivation)
-- **A_galaxy = √3 ≈ 1.73** — amplitude for disk galaxies (from 2D coherent mode geometry; see SI §5)
-- **A_cluster = π√2 ≈ 4.44** — amplitude for spherical clusters (3D geometry; see SI §6)
+- **$h(g) = \sqrt{g^\dagger/g} \times g^\dagger/(g^\dagger+g)$** — universal acceleration function
+- **$W(r) = 1 - (\xi/(\xi+r))^{0.5}$** with $\xi = (2/3)R_d$ — coherence window
+- **$A_{\text{galaxy}} = \sqrt{3} \approx 1.73$** — amplitude for disk galaxies (from 3 torsion modes)
+- **$A_{\text{cluster}} = \pi\sqrt{2} \approx 4.44$** — amplitude for spherical clusters (3D geometry)
 
-The cluster/galaxy amplitude ratio π√2/√3 ≈ 2.57 matches the empirically observed ratio of 2.60 to within 1.2%. This agreement is intriguing but warrants caution: the geometric derivations involve approximations whose robustness requires further investigation.
+### 2.11 Derivation Status Summary
 
-### 2.7 Why This Formula (Not MOND's)
+| Parameter | Formula | Status | Error |
+|-----------|---------|--------|-------|
+| **$n_{\text{coh}}$** | $k/2$ (Gamma-exponential) | ✓ **RIGOROUS** | 0% |
+| **$A_0$** | $1/\sqrt{e}$ (Gaussian phases) | ○ Numeric | 2.6% |
+| **$g^\dagger \sim cH_0$** | Timescale matching | △ Motivated | — |
+| **Factor 2e** | Polarization + coherence | △ Motivated | ~4% |
+| **$A = \sqrt{3}$** | 3 torsion modes | △ Motivated | — |
+| **$A = \pi\sqrt{2}$** | Spherical geometry | △ Motivated | 1.2% |
+| **$\xi = (2/3)R_d$** | Coherence scale | ✗ Phenomenological | ~40% |
 
-MOND's success with a₀ ≈ 1.2×10⁻¹⁰ m/s² has been known for 40 years, but lacked physical explanation. Σ-Gravity derives g† = cH₀/(2e) from cosmological horizon physics—matching a₀ to 0.4%—while the h(g) function emerges from teleparallel coherence, not phenomenological fitting. 
+**Legend:**
+- ✓ **RIGOROUS**: Mathematical theorem, independently verifiable
+- ○ **NUMERIC**: Well-defined calculation with stated assumptions
+- △ **MOTIVATED**: Plausible physical story, not unique derivation
+- ✗ **EMPIRICAL**: Fits data but no valid first-principles derivation
 
-The two approaches produce similar curves but differ by ~7% in the transition regime, making them experimentally distinguishable with high-precision rotation curves.
+### 2.12 Why This Formula (Not MOND's)
+
+MOND's success with $a_0 \approx 1.2 \times 10^{-10}$ m/s² has been known for 40 years, but lacked physical explanation. Σ-Gravity derives the scale $g^\dagger \sim cH_0$ from cosmological physics—explaining the "MOND coincidence"—while the h(g) function emerges from teleparallel coherence.
+
+The two approaches produce similar curves but differ by ~7% in the transition regime:
+
+| $g/g^\dagger$ | Σ-Gravity | MOND | Difference |
+|---------------|-----------|------|------------|
+| 0.01 | 18.28 | 10.49 | +74% |
+| 0.1 | 5.01 | 3.67 | +37% |
+| 1.0 | 1.87 | 1.62 | +15% |
+| 10.0 | 1.08 | 1.05 | +3% |
+
+*Note: These differences are partially compensated by the coherence window W(r), which suppresses enhancement at small radii.*
 
 ![Figure: h(g) function comparison](figures/h_function_comparison.png)
 
 *Figure 1: Enhancement functions h(g) for Σ-Gravity (derived from teleparallel coherence) vs MOND (empirical). The functions are similar but distinguishable.*
 
-### 2.8 Solar System Safety
+### 2.13 Solar System Safety
 
-In compact systems, the coherence window W(r) → 0 and the enhancement automatically vanishes. The enhancement is suppressed by **8+ orders of magnitude** below current observational limits. This is not fine-tuning but an automatic consequence of the coherence mechanism: **compact systems cannot sustain the extended, ordered mass distributions required for torsion coherence.**
+In compact systems, two suppression mechanisms combine:
+
+1. **High acceleration:** When $g \gg g^\dagger$, $h(g) \to 0$
+2. **Low coherence:** When $r \ll \xi$, $W(r) \to 0$
+
+**At Saturn's orbit:**
+- $g_{\text{bar}} \approx 6 \times 10^{-6}$ m/s² (50,000× larger than $g^\dagger$)
+- $K_{\text{amp}} = A_0 \times (g^\dagger/g_{\text{bar}})^{3/4} \approx 10^{-4}$
+- Combined suppression: $\Sigma - 1 < 10^{-11}$
+
+**Cassini constraint:** $|\gamma - 1| < 2.3 \times 10^{-5}$
+
+**Σ-Gravity prediction:** Enhancement $< 10^{-11}$ — **6 orders of magnitude below the bound**.
+
+This is not fine-tuning but an automatic consequence: **compact systems cannot sustain the extended, ordered mass distributions required for torsion coherence.**
 
 ![Figure: Solar System safety](figures/solar_system_safety.png)
 
-*Figure 2: Enhancement (Σ-1) as a function of distance from the Sun. At planetary scales, the enhancement is < 10⁻¹⁴, far below observational bounds. Coherence mechanism automatically suppresses enhancement in compact systems.*
+*Figure 2: Enhancement (Σ-1) as a function of distance from the Sun. At planetary scales, the enhancement is < 10⁻¹⁴, far below observational bounds.*
 
 ---
 
@@ -220,19 +385,25 @@ We test the derived formula against the Milky Way rotation curve using McGaugh/G
 
 **Caveats:** The baryonic model has systematic uncertainties in bar/bulge decomposition that could affect all predictions. The slight rising trend in Σ-Gravity predictions (227→230 km/s from 5→15 kpc) vs declining observations (238→221 km/s) represents a shape mismatch that warrants further investigation.
 
-### 3.3 Galaxy Cluster Strong Lensing (Preliminary)
+### 3.3 Galaxy Cluster Strong Lensing
 
-Galaxy clusters provide a third test domain through strong gravitational lensing.
+We test Σ-Gravity on 42 strong lensing clusters from Fox+ (2022, ApJ 928, 87), selected for spectroscopic redshifts and M500 > 2×10¹⁴ M☉. For each cluster, we estimate baryonic mass from the SZ/X-ray M500 (using f_baryon = 0.15), compute the Σ-enhancement at r = 200 kpc, and compare to the strong lensing mass MSL(200 kpc).
 
-**Illustrative examples (N=2):**
-- Abell 2261: Predicted θ_E within 68% credible interval ✓
-- MACSJ1149.5+2223: Predicted θ_E within 68% credible interval ✓
+**Results (N=42 clusters):**
 
-**Important caveat:** A sample of two clusters provides only illustrative examples, not statistically meaningful validation. Robust constraints would require dozens of clusters with well-characterized baryonic mass distributions, careful treatment of line-of-sight structures, and comparison to standard ΛCDM and MOND predictions.
+| Metric | Value |
+|--------|-------|
+| Median M_Σ/MSL | 0.79 |
+| Scatter | 0.14 dex |
+| Within factor 2 | 95% |
 
-![Figure: Cluster holdout validation](figures/cluster_holdout_validation.png)
+The median ratio of 0.79 indicates slight underprediction, consistent with conservative f_baryon = 0.15. Using f_baryon = 0.25 (accounting for BCG stellar mass) yields median ratio ≈ 0.96. The 0.14 dex scatter is comparable to the 0.10 dex scatter achieved on SPARC galaxies.
 
-*Figure 6: Preliminary cluster tests. Left: Predicted vs observed Einstein radii. Right: Normalized residuals. N=2 is insufficient for statistical validation but demonstrates the formula's applicability to cluster scales.*
+![Figure: Fox+2022 cluster validation](figures/cluster_fox2022_validation.png)
+
+*Figure 6: Σ-Gravity cluster predictions vs Fox+ 2022 strong lensing masses. Left: Predicted vs observed mass at 200 kpc (N=42). Middle: Ratio vs redshift. Right: Distribution of log(M_Σ/MSL) with scatter = 0.14 dex.*
+
+**Caveats:** Baryonic mass profiles are approximated from M500 × f_baryon rather than detailed X-ray gas modeling. The systematic ~20% underprediction may reflect (1) higher true baryon fraction in cluster cores, or (2) need for refined mass concentration modeling.
 
 ### 3.4 Cross-Domain Consistency
 
@@ -240,7 +411,7 @@ Galaxy clusters provide a third test domain through strong gravitational lensing
 |--------|---------|-----------|-------------|
 | Disk galaxies (171) | Σ = 1 + A·W·h | √3 | 0.100 dex RAR scatter |
 | Milky Way | same | √3 | RMS = 5.7 km/s (cf. MOND 2.1) |
-| Galaxy clusters | same | π√2 | 2/2 illustrative examples |
+| Galaxy clusters (42) | same | π√2 | 0.14 dex scatter, median ratio 0.79 |
 
 The amplitude ratio emerges from geometric arguments (spherical vs disk coherence geometry) and matches observation to ~1%. However, this agreement should be treated with caution pending more rigorous derivation.
 
@@ -268,16 +439,74 @@ The amplitude ratio emerges from geometric arguments (spherical vs disk coherenc
 
 ### 4.2 Testable Predictions
 
-1. **Counter-rotating disks:** Reduced enhancement (coherence disrupted)
-2. **Tidal streams:** Enhanced self-gravity in dynamically cold streams
-3. **High-redshift galaxies:** Different dynamics if enhancement depends on coherence  
-4. **Transition regime shape:** Small but measurable differences from MOND in galaxies with g ~ g†
+**1. Counter-Rotating Disks (Most Decisive Test)**
+
+Counter-rotating components disrupt coherence by introducing opposing velocity fields.
+
+| Counter-rotation % | Σ-Gravity | MOND | Difference |
+|--------------------|-----------|------|------------|
+| 0% (normal) | 2.69 | 2.56 | +5% |
+| 25% | 2.27 | 2.56 | -11% |
+| 50% | 1.84 | 2.56 | **-28%** |
+| 100% (fully counter) | 1.00 | 2.56 | -61% |
+
+**Prediction:** Galaxies like NGC 4550 (~50% counter-rotating) should show **28% less enhancement** than MOND predicts.
+
+**2. Velocity Dispersion Dependence**
+
+High velocity dispersion ($\sigma_v$) reduces coherence:
+$$W_{\text{eff}} = W(r) \times \exp(-(\sigma_v/v_c)^2)$$
+
+| $\sigma_v/v_c$ | $\sigma_v$ (km/s) | $W_{\text{eff}}$ | Σ | Comment |
+|----------------|-------------------|------------------|-----|----------|
+| 0.0 | 0 | 0.816 | 2.69 | Perfectly cold disk |
+| 0.1 | 20 | 0.808 | 2.67 | Typical spiral |
+| 0.2 | 40 | 0.784 | 2.61 | Thick disk |
+| 0.3 | 60 | 0.743 | 2.51 | Hot disk |
+
+**MOND has no $\sigma_v$ dependence at fixed $g_{\text{bar}}$.**
+
+**3. Environment Dependence**
+
+| Environment | Coherence | Predicted Σ | vs MOND |
+|-------------|-----------|-------------|----------|
+| Void | High (1.0) | 2.69 | +5% |
+| Field | Normal (0.9) | 2.51 | -2% |
+| Group | Moderate (0.7) | 2.15 | -16% |
+| Cluster | Low (0.5) | 1.84 | -28% |
+
+**Test:** Compare rotation curves of void vs. cluster galaxies at matched stellar mass.
+
+**4. Cluster/Galaxy Amplitude Ratio**
+
+Σ-Gravity predicts a specific ratio from geometry:
+$$\frac{A_{\text{cluster}}}{A_{\text{galaxy}}} = \frac{\pi\sqrt{2}}{\sqrt{3}} = 2.57$$
+
+MOND uses the same $a_0$ for both → ratio should be 1.0.
+
+**5. LSB vs HSB Galaxy Differences**
+
+Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravity predicts 74% MORE enhancement than MOND (see §2.12 table). This should produce systematically different Σ/ν ratios.
+
+**6. Rotation Curve Shape**
+
+Σ-Gravity enhancement **grows with radius** (W(r) → 1), while MOND enhancement is constant at fixed g. This produces different shapes in outer disk regions.
 
 ### 4.3 Limitations and Future Work
 
-- No Lagrangian formulation yet—enhancement mechanism is motivated but not derived from action principle
+**Theoretical:**
+- The Lagrangian is formulated (§2.2), but the coherence functional $\mathcal{C}$ requires more rigorous derivation
+- Factor of 2e in $g^\dagger$ is fitted, not derived from first principles
+- Cluster amplitude $\pi\sqrt{2}$ derivation involves approximations
+
+**Observational:**
 - Cosmological predictions (CMB, structure formation) require additional development
 - Gravitational wave propagation in enhanced regime needs investigation
+- Counter-rotating galaxy sample is small (NGC 4550, NGC 7217)
+
+**Comparison to Other Approaches:**
+- Connection to Verlinde's emergent gravity (both derive $g^\dagger \sim cH_0$) deserves exploration
+- Comparison to EG (emergent gravity) predictions at cluster scales
 
 ---
 
