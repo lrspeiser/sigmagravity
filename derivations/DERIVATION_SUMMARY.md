@@ -20,6 +20,7 @@ This document summarizes our attempts to derive the Σ-Gravity parameters from f
 | **g†** | cH₀/(2e) | 1.2×10⁻¹⁰ | 1.25×10⁻¹⁰ | 96% | △ MOTIVATED |
 | **A_max** | √2 (polarizations) | √2 | √2 | 100% | △ MOTIVATED |
 | **f_geom** | π × 2.5 (claimed) | 7.78 | 7.85 | 99% | ✗ EMPIRICAL |
+| **ξ** | (2/3)×R_d (claimed) | ~5 kpc | 2 kpc | ~40% | △ MOTIVATED |
 
 **Legend**:
 - ✓ **RIGOROUS**: Mathematical theorem, independently verifiable
@@ -231,6 +232,59 @@ python derivations/connections/verify_teleparallel_h_derivation.py
 
 ---
 
+### 8. ξ = (2/3)×R_d — MOTIVATED △
+
+**Claim**: The coherence length ξ = (2/3)×R_d from torsion gradient analysis.
+
+**What the Derivation Actually Shows**:
+
+The `derive_xi.py` script attempts 18 different approaches, most of which fail:
+- Approach 1-2: Hubble-scale lengths (4 Gpc) — way too large
+- Approach 3: Gradient condition gives ξ ~ R_d/3 (1 kpc) — too small
+- Approach 6: Phase accumulation gives ξ ~ 750 Mpc — way too large
+- Approach 7: ξ ~ 2 R_d (6 kpc) — too large
+- Approach 11: Coherence variance gives ξ ~ 0.4 R_d (1.2 kpc) — too small
+- Approach 16-18: Trial and error to fit rotation curve shapes
+
+**CRITICAL ISSUE**: The final formula ξ = (2/3)×R_d is CHOSEN, not derived.
+
+**Claimed justification**: "The factor 2/3 comes from the requirement that Σ ≈ 2 at r ≈ 2R_d"
+
+**BUT**: The script's own output shows:
+```
+Testing β = 0.667 (so ξ = 0.667 × R_d):
+R_d (kpc)    ξ (kpc)      Σ(2Rd)
+3.0          2.00         1.37      ← NOT ~2!
+```
+
+**The derivation claims Σ(2R_d) ≈ 2, but actually gets Σ(2R_d) = 1.37**
+
+**What IS Established**:
+- ξ scales with galaxy properties (NOT universal)
+- The coherence concept is physically motivated
+- ξ ~ R_d is dimensionally sensible
+
+**What's NOT Established**:
+- The coefficient 2/3 is arbitrary
+- The "torsion gradient" argument is hand-waving
+- The phenomenological ξ ~ 5 kpc disagrees with derived ξ ~ 2 kpc by factor of 2.5
+
+**Comparison**:
+- Phenomenological fit to SPARC: ξ ≈ 5 kpc
+- Derived from (2/3)×R_d with R_d=3 kpc: ξ = 2 kpc
+- **Disagreement: ~40%**
+
+**Status**: The scaling ξ ∝ R_d is motivated, but the coefficient is fitted.
+
+**Replication**:
+```bash
+python derivations/connections/derive_xi.py
+# Watch for the 18 failed approaches before the "final" formula
+# Note the Σ(2Rd) = 1.37, not ~2 as claimed
+```
+
+---
+
 ## Summary: What's Actually Derived?
 
 ### Genuinely Derived (1 parameter):
@@ -238,12 +292,13 @@ python derivations/connections/verify_teleparallel_h_derivation.py
 
 ### Numerically Constrained (2 parameters):
 - **A₀ = 1/√e**: Correct math, but Gaussian assumption unproven
-- **ℓ₀/R_d ≈ 1.42**: Monte Carlo calculation, geometry-dependent
+- **ℓ0/R_d ≈ 1.42**: Monte Carlo calculation, geometry-dependent
 
-### Physically Motivated (3 parameters):
+### Physically Motivated (4 parameters):
 - **p ≈ 3/4**: p=1/2 verified (MOND), p=1/4 not verified
 - **g† = cH₀/(2e)**: Right scale, coefficients not unique
 - **A_max = √2**: Multiple convergent arguments, not rigorous
+- **ξ = (2/3)×R_d**: Scaling motivated, coefficient fitted (40% discrepancy)
 
 ### Empirical (1 parameter):
 - **f_geom ≈ 7.8**: No valid derivation, claimed NFW formula is wrong
@@ -256,9 +311,9 @@ python derivations/connections/verify_teleparallel_h_derivation.py
 |--------|-----------------|-------------------|
 | ΛCDM | 6 cosmological + per-halo c-M | All fitted |
 | MOND | 1 (a₀) | Fitted to BTFR |
-| Σ-Gravity | 6 (g†, A₀, p, ℓ₀, n_coh, f_geom) | 1 rigorous, 2 numeric, 3 motivated |
+| Σ-Gravity | 7 (g†, A₀, p, ℓ0, n_coh, f_geom, ξ) | 1 rigorous, 2 numeric, 4 motivated |
 
-**Honest Assessment**: Σ-Gravity has MORE theoretical structure than MOND (which just posits a₀) but LESS than claimed. The "all parameters derived" claim is not supported.
+**Honest Assessment**: Σ-Gravity has MORE theoretical structure than MOND (which just posits a₀) but LESS than claimed. The "all parameters derived" claim is not supported. The recent ξ derivation adds to the motivated parameters but does not achieve rigorous status.
 
 ---
 
@@ -304,6 +359,7 @@ python derivations/connections/derive_A_max_teleparallel.py
 | `verify_teleparallel_h_derivation.py` | Tests h(g) function derivation |
 | `verify_A_max_derivation.py` | Tests A_max = √2 BTFR claim |
 | `derive_A_max_teleparallel.py` | Explores A_max from polarizations |
+| `derive_xi.py` | Attempts ξ derivation (18 approaches) |
 | `VERIFICATION_RESULTS.md` | Summary of verification findings |
 
 ---
@@ -318,12 +374,16 @@ python derivations/connections/derive_A_max_teleparallel.py
 
 ### DON'T Say:
 - "All parameters are derived from first principles"
-- "No free parameters" (still have ξ, and others are only motivated)
+- "No free parameters" (still have f_geom empirical, and others are only motivated)
 - "f_geom = π × 2.5 from NFW projection" (arithmetic error)
 - "p = 1/4 from Fresnel zones" (physics not verified)
+- "ξ = (2/3)×R_d from first principles" (coefficient is fitted, 40% error from data)
 
 ### Honest Framing:
-"Σ-Gravity provides a theoretical framework where the structure of the enhancement function emerges from coherence physics, with one rigorously derived parameter (n_coh), two numerically constrained parameters (A₀, ℓ₀), and three physically motivated parameters (p, g†, A_max). One parameter (f_geom) remains empirical."
+"Σ-Gravity provides a theoretical framework where the structure of the enhancement function emerges from coherence physics, with one rigorously derived parameter (n_coh), two numerically constrained parameters (A₀, ℓ0), and four physically motivated parameters (p, g†, A_max, ξ). One parameter (f_geom) remains empirical."
+
+### Regarding ξ:
+"ξ is expected to scale with the disk scale radius R_d based on coherence arguments. The phenomenological value ξ ≈ 5 kpc is consistent with typical SPARC galaxies having R_d ≈ 3-8 kpc, though the precise coefficient remains to be determined from data."
 
 ---
 
