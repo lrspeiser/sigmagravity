@@ -241,38 +241,48 @@ def main():
     # =========================================================================
     fig, ax = plt.subplots(figsize=(9, 6))
     
+    # Filter to region with good coverage (5-13 kpc has >100 stars per kpc bin)
+    R_min, R_max = 5, 13
+    good_mask = (R >= R_min) & (R <= R_max)
+    R_good = R[good_mask]
+    V_obs_good = V_obs[good_mask]
+    V_bar_good = V_bar[good_mask]
+    V_sigma_good = V_sigma[good_mask]
+    V_mond_good = V_mond[good_mask]
+    
     # Downsample for scatter plot
-    idx = np.random.choice(len(R), size=min(5000, len(R)), replace=False)
-    ax.scatter(R[idx], V_obs[idx], s=1, alpha=0.3, c='gray', label='Observed stars')
+    idx = np.random.choice(len(R_good), size=min(5000, len(R_good)), replace=False)
+    ax.scatter(R_good[idx], V_obs_good[idx], s=1, alpha=0.3, c='gray', label='Observed stars')
     
-    # Binned medians
-    R_edges = np.linspace(3, 18, 30)
+    # Binned medians (only bins with N >= 30 stars)
+    R_edges = np.linspace(R_min, R_max, 25)
     R_centers = 0.5 * (R_edges[:-1] + R_edges[1:])
+    min_stars = 30
     
-    def safe_median(arr):
-        return np.median(arr) if len(arr) > 0 else np.nan
+    def get_bin_stats(arr, R_arr, i):
+        mask = (R_arr >= R_edges[i]) & (R_arr < R_edges[i+1])
+        vals = arr[mask]
+        return np.median(vals) if len(vals) >= min_stars else np.nan
     
-    V_obs_med = np.array([safe_median(V_obs[(R >= R_edges[i]) & (R < R_edges[i+1])]) 
-                          for i in range(len(R_edges)-1)])
-    V_bar_med = np.array([safe_median(V_bar[(R >= R_edges[i]) & (R < R_edges[i+1])]) 
-                          for i in range(len(R_edges)-1)])
-    V_sigma_med = np.array([safe_median(V_sigma[(R >= R_edges[i]) & (R < R_edges[i+1])]) 
-                            for i in range(len(R_edges)-1)])
-    V_mond_med = np.array([safe_median(V_mond[(R >= R_edges[i]) & (R < R_edges[i+1])]) 
-                           for i in range(len(R_edges)-1)])
+    V_obs_med = np.array([get_bin_stats(V_obs_good, R_good, i) for i in range(len(R_edges)-1)])
+    V_bar_med = np.array([get_bin_stats(V_bar_good, R_good, i) for i in range(len(R_edges)-1)])
+    V_sigma_med = np.array([get_bin_stats(V_sigma_good, R_good, i) for i in range(len(R_edges)-1)])
+    V_mond_med = np.array([get_bin_stats(V_mond_good, R_good, i) for i in range(len(R_edges)-1)])
     
-    ax.plot(R_centers, V_obs_med, 'ko', ms=6, label='Observed (binned median)')
-    ax.plot(R_centers, V_bar_med, 'g--', lw=2, label='GR (baryons)')
-    ax.plot(R_centers, V_sigma_med, 'b-', lw=2.5, label='Σ-Gravity (derived)')
-    ax.plot(R_centers, V_mond_med, 'r:', lw=2, label='MOND')
+    # Only plot valid bins
+    valid = ~np.isnan(V_obs_med)
+    ax.plot(R_centers[valid], V_obs_med[valid], 'ko', ms=6, label='Observed (binned median)')
+    ax.plot(R_centers[valid], V_bar_med[valid], 'g--', lw=2, label='GR (baryons)')
+    ax.plot(R_centers[valid], V_sigma_med[valid], 'b-', lw=2.5, label='Σ-Gravity (derived)')
+    ax.plot(R_centers[valid], V_mond_med[valid], 'r:', lw=2, label='MOND')
     
     ax.set_xlabel('R [kpc]')
     ax.set_ylabel('V [km/s]')
-    ax.set_title(f'Milky Way Rotation Curve: {n_stars:,} Gaia DR3 Stars')
+    ax.set_title(f'Milky Way Rotation Curve: {np.sum(good_mask):,} Stars (5-13 kpc)')
     ax.legend(loc='lower right')
     ax.grid(True, alpha=0.3)
-    ax.set_xlim(3, 18)
-    ax.set_ylim(100, 350)
+    ax.set_xlim(R_min - 0.5, R_max + 0.5)
+    ax.set_ylim(150, 300)
     
     # Add formula annotation
     ax.text(0.02, 0.98, r'$\Sigma = 1 + \sqrt{3} \cdot W(r) \cdot h(g)$' + '\n' +
