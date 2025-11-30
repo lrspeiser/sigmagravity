@@ -9,7 +9,7 @@
 
 The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. Here we present Σ-Gravity ("Sigma-Gravity"), a framework where **coherent superposition of gravitational torsion modes** produces scale-dependent enhancement in extended, dynamically cold systems. Built on teleparallel gravity—the mathematical equivalent of General Relativity where gravity is mediated by torsion rather than curvature—the key insight is that torsion contributions from spatially separated mass elements can interfere constructively when their phases remain aligned, analogous to coherent light in a laser or Cooper pairs in a superconductor.
 
-The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.2 × 10⁻¹⁰ m/s² emerges from cosmological horizon physics. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—while winning head-to-head on 97 vs 74 galaxies. Zero-shot application to the Milky Way rotation curve achieves RMS = 6.3 km/s (vs observed 229 km/s at the solar circle, Δ = -1.6 km/s—the best match of any model). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. The theory passes Solar System constraints by 8 orders of magnitude due to automatic coherence suppression in compact systems.
+The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.2 × 10⁻¹⁰ m/s² emerges from cosmological horizon physics. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—while winning head-to-head on 97 vs 74 galaxies. Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s vs McGaugh/GRAVITY data (Δ = −5.7 km/s at the solar circle). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. The theory passes Solar System constraints by 8 orders of magnitude due to automatic coherence suppression in compact systems.
 
 Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity is embedded in relativistic field theory with g† derived from cosmological constants rather than fitted. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherent summation of torsion modes that produces it.
 
@@ -48,12 +48,12 @@ This mechanism naturally explains:
 |--------|--------|-----------|------|------------|
 | SPARC galaxies (171) | RAR scatter | **0.100 dex** | 0.100 dex | 0.18–0.25 dex |
 | SPARC head-to-head | Wins | **97** | 74 | — |
-| MW rotation curve | RMS vs Eilers | **6.3 km/s** | 3.4 km/s | 49.2 km/s |
+| MW rotation curve | RMS vs McGaugh | **5.7 km/s** | 2.1 km/s | 53.1 km/s |
 | MW rotation curve | V(8 kpc) | **227.6 km/s*** | 233.0 km/s | 190.7 km/s |
 | Galaxy clusters | Hold-out coverage | **2/2 in 68%** | — | Baseline |
 | Solar System | PPN γ−1 | **< 10⁻¹³** | < 10⁻⁵ | 0 |
 
-*Observed: 229.2 km/s (Eilers+ 2019). Σ-Gravity: Δ = -1.6 km/s (best match); MOND: Δ = +3.8 km/s.
+*Observed: 233.3 km/s (McGaugh/GRAVITY). Σ-Gravity: Δ = −5.7 km/s; MOND: Δ = −0.3 km/s.
 
 ---
 
@@ -193,24 +193,24 @@ Both theories achieve comparable overall scatter, but Σ-Gravity wins on more in
 
 ### 3.2 Milky Way Validation
 
-We test the derived formula against Milky Way rotation curve data from Eilers+ 2019 (Jeans-corrected) and McGaugh/GRAVITY (HI terminal velocities). We use McGaugh's baryonic model (M* = 6.16×10¹⁰ M☉, giving V_bar ≈ 190 km/s at R=8 kpc).
+We test the derived formula against the Milky Way rotation curve using McGaugh/GRAVITY data (HI terminal velocities + GRAVITY Θ₀ = 233.3 km/s at R₀ = 8 kpc). We adopt McGaugh's baryonic model (M* = 6.16×10¹⁰ M☉, giving V_bar ≈ 190 km/s at R=8 kpc).
 
 **Rotation curve comparison (5-15 kpc):**
 
-| Model | RMS vs Eilers | RMS vs McGaugh | V(8 kpc) |
-|-------|--------------|----------------|----------|
-| GR (baryons only) | 49.2 km/s | 53.1 km/s | 190.7 km/s |
-| **Σ-Gravity** | **6.3 km/s** | **5.7 km/s** | **227.6 km/s** |
-| MOND | 3.4 km/s | 2.1 km/s | 233.0 km/s |
-| NFW Dark Matter | 4.5 km/s | 2.8 km/s | 233.9 km/s |
+| Model | RMS vs McGaugh | V(8 kpc) | Δ at solar circle |
+|-------|----------------|----------|-------------------|
+| GR (baryons only) | 53.1 km/s | 190.7 km/s | −42.6 km/s |
+| **Σ-Gravity** | **5.7 km/s** | **227.6 km/s** | **−5.7 km/s** |
+| MOND | 2.1 km/s | 233.0 km/s | −0.3 km/s |
+| NFW Dark Matter | 2.8 km/s | 233.9 km/s | +0.6 km/s |
 
-**At solar circle (R = 8 kpc):** Eilers observed = 229.2 km/s. Σ-Gravity predicts **227.6 km/s (Δ = -1.6 km/s)**—the best match of any model. MOND (+3.8 km/s) and NFW (+4.7 km/s) slightly overpredict.
+**At solar circle (R = 8 kpc):** McGaugh/GRAVITY observed = 233.3 km/s. Σ-Gravity predicts **227.6 km/s (Δ = −5.7 km/s)**. All modified gravity models match within ~3%, while GR baryons alone underpredict by 43 km/s (18%).
 
 ![Figure: MW rotation curve](figures/mw_comprehensive_comparison.png)
 
-*Figure 4b: Milky Way rotation curve comparison. Left: Observed data (Eilers+ 2019, McGaugh/GRAVITY) vs model predictions. Right: Residuals vs Eilers. Σ-Gravity (blue) achieves RMS = 6.3 km/s with gate-free derived formula (A=√3, g†=cH₀/2e). Baryonic model: McGaugh M* = 6.16×10¹⁰ M☉.*
+*Figure 4b: Milky Way rotation curve comparison. Left: McGaugh/GRAVITY observed (black) vs model predictions. Right: Residuals. Σ-Gravity (blue) achieves RMS = 5.7 km/s with gate-free derived formula (A=√3, g†=cH₀/2e). Baryonic model: McGaugh M* = 6.16×10¹⁰ M☉.*
 
-Σ-Gravity achieves competitive accuracy with MOND and NFW dark matter models, using only derived parameters and no MW-specific tuning. The slight rising trend in Σ-Gravity predictions (vs declining observations) is within baryonic model uncertainties.
+Σ-Gravity achieves competitive accuracy with MOND and NFW dark matter, using only derived parameters and no MW-specific tuning. The slight rising trend in Σ-Gravity predictions (227→230 km/s from 5→15 kpc) vs declining observations (238→221 km/s) is within baryonic model uncertainties.
 
 ### 3.3 Galaxy Cluster Strong Lensing
 
@@ -230,7 +230,7 @@ Galaxy clusters provide a third independent test domain through strong lensing.
 | Domain | Formula | Amplitude | Performance |
 |--------|---------|-----------|-------------|
 | Disk galaxies (171) | Σ = 1 + A·W·h | √3 | 0.100 dex RAR, wins 97/171 |
-| Milky Way | same | √3 | RMS = 6.3 km/s, V(8kpc) within 0.7% |
+| Milky Way | same | √3 | RMS = 5.7 km/s vs McGaugh, V(8kpc) within 2.4% |
 | Galaxy clusters | same | π√2 | 2/2 hold-outs |
 
 The amplitude ratio emerges from geometric arguments (spherical vs disk coherence geometry) and matches observation to 1.2%.
