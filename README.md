@@ -51,7 +51,7 @@ This mechanism naturally explains:
 | MW rotation curve | RMS vs McGaugh | **5.7 km/s** | 2.1 km/s | 53.1 km/s |
 | MW rotation curve | V(8 kpc) | **227.6 km/s*** | 233.0 km/s | 190.7 km/s |
 | Galaxy clusters (42) | Scatter | **0.14 dex** | — | — |
-| Solar System | PPN γ−1 | **< 10⁻¹³** | < 10⁻⁵ | 0 |
+| Solar System | PPN γ−1 | **< 10⁻¹¹** | < 10⁻⁵ | 0 |
 
 *Observed: 233.3 km/s (McGaugh/GRAVITY). Σ-Gravity: Δ = −5.7 km/s; MOND: Δ = −0.3 km/s.
 
@@ -95,6 +95,8 @@ where $\Sigma[g, \mathcal{C}]$ is the coherent enhancement factor that depends o
 - Solar System safety automatic ✓
 
 **This is distinct from f(T) gravity**, which modifies $\mathbf{T} \to f(\mathbf{T})$ in the gravitational sector. Our modification is $\mathcal{L}_m \to \Sigma \cdot \mathcal{L}_m$ in the matter sector.
+
+**Open theoretical issue:** Non-minimal matter couplings in teleparallel gravity can violate local Lorentz invariance unless carefully constructed (see Krššák & Saridakis 2016, CQG 33, 115009). Whether the specific coherence-dependent coupling $\Sigma[g, \mathcal{C}]$ preserves Lorentz invariance requires further investigation. We note that the coupling depends only on scalar quantities (acceleration magnitude, coherence measure), which may mitigate this concern.
 
 ### 2.3 Field Equations
 
@@ -157,11 +159,11 @@ $$|\mathbf{T}|_{\text{coh}}^2 = |\langle T_r \rangle|^2 + |\langle T_\phi \rangl
 
 **Step 5: Enhancement Factor**
 
-If all three components contribute equally in the coherent case with amplitude $T_0$:
+*Assumption:* All three components contribute equally in the coherent case with amplitude $T_0$. (This equal-weighting assumption is plausible for axisymmetric disks but not rigorously derived.)
 
 $$A_{\text{disk}} = \frac{|\mathbf{T}|_{\text{coh}}}{|\mathbf{T}|_{\text{incoh}}} = \frac{\sqrt{3 T_0^2}}{\sqrt{T_0^2}} = \sqrt{3} \approx 1.73$$
 
-**This is the geometric origin of A = √3 for disk galaxies.**
+**This provides geometric intuition for A = √3, but the equal-weighting assumption should be classified as phenomenological.**
 
 ### 2.6 Mode Counting for Spherical Clusters: A = π√2
 
@@ -206,9 +208,11 @@ $$W(R) = 1 - \left(\frac{\ell_0}{\ell_0 + R}\right)^{k/2}$$
 **For disk galaxies with one dominant decoherence channel ($k = 1$):**
 $$n_{\text{coh}} = k/2 = 0.5$$
 
-This is a **rigorous derivation** from Gamma-exponential conjugacy (verified by Monte Carlo to <1% error).
+The exponent $n_{\text{coh}} = k/2$ is a **rigorous derivation** from Gamma-exponential conjugacy (verified by Monte Carlo to <1% error).
 
-**Coherence length:** $\xi = (2/3)R_d$ where $R_d$ is the disk scale length. The coefficient 2/3 is phenomenological.
+**Coherence length:** $\xi = (2/3)R_d$ where $R_d$ is the disk scale length.
+
+*Important distinction:* While $n_{\text{coh}} = 0.5$ is mathematically derived (given k=1), the coherence length $\xi = (2/3)R_d$ is **phenomenologically fitted** from SPARC data. The derivation constrains the functional form but not the absolute scale.
 
 $$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{0.5}$$
 
@@ -253,7 +257,9 @@ Possible physical origins explored:
 - Factor 1/e: Characteristic coherence decay at horizon scale (plausible)
 - Alternative: $cH_0 \times \ln(2)/4$ gives 1.8% error (better than 2e!)
 
-**Honest assessment:** The factor 2e should be treated as having one fitted parameter. The final value:
+**Honest assessment:** The factor 2e should be treated as having one fitted parameter. We retain $2e$ rather than alternatives like $\ln(2)/4$ (which gives slightly better fit at 1.8% error) because $2e$ has a more natural physical interpretation: polarization averaging ($1/2$) times coherence decay ($1/e$). Neither is rigorously derived.
+
+The final value:
 
 $$g^\dagger = \frac{cH_0}{2e} \approx 1.25 \times 10^{-10} \text{ m/s}^2$$
 
@@ -320,7 +326,7 @@ In compact systems, two suppression mechanisms combine:
 - $K_{\text{amp}} = A_0 \times (g^\dagger/g_{\text{bar}})^{3/4} \approx 10^{-4}$
 - Combined suppression: $\Sigma - 1 < 10^{-11}$
 
-**Cassini constraint:** $|\gamma - 1| < 2.3 \times 10^{-5}$
+**Cassini constraint:** $|\gamma - 1| < 2.3 \times 10^{-5}$ (Bertotti et al. 2003, Nature 425, 374)
 
 **Σ-Gravity prediction:** Enhancement $< 10^{-11}$ — **6 orders of magnitude below the bound**.
 
@@ -352,7 +358,7 @@ We test the framework on the SPARC database (Lelli+ 2016) containing 175 late-ty
 | Median RAR scatter | **0.087 dex** | 0.085 dex |
 | Head-to-head wins | **97 galaxies** | 74 galaxies |
 
-Both theories achieve comparable overall scatter. Σ-Gravity wins on more individual galaxies (97 vs 74) when comparing per-galaxy RAR residuals, though this margin is not statistically overwhelming.
+Both theories achieve comparable overall scatter. Σ-Gravity wins on more individual galaxies (97 vs 74) when comparing per-galaxy RAR residuals. *Statistical note:* A binomial test gives p ≈ 0.07 (two-tailed), indicating this margin is suggestive but not statistically significant at conventional thresholds (p < 0.05).
 
 ![Figure: RAR plot](figures/rar_derived_formula.png)
 
@@ -496,12 +502,18 @@ Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravi
 
 **Theoretical:**
 - The Lagrangian is formulated (§2.2), but the coherence functional $\mathcal{C}$ requires more rigorous derivation
+- Lorentz invariance of the non-minimal matter coupling needs formal verification (see §2.2)
 - Factor of 2e in $g^\dagger$ is fitted, not derived from first principles
-- Cluster amplitude $\pi\sqrt{2}$ derivation involves approximations
+- Mode counting derivations (A = √3, A = π√2) involve equal-weighting assumptions that lack rigorous justification
+- The h(g) function's "geometric mean" ansatz is phenomenologically successful but not uniquely derived
+
+**Cosmological:**
+- CMB predictions require development; ΛCDM's success on large scales is not yet matched
+- Structure formation (matter power spectrum, BAO) needs explicit treatment
+- The theory should be consistent with cosmological constraints, but full calculations are deferred
 
 **Observational:**
-- Cosmological predictions (CMB, structure formation) require additional development
-- Gravitational wave propagation in enhanced regime needs investigation
+- GW170817 constraint ($c_{\text{GW}} = c$ to $10^{-15}$) is satisfied because the gravitational sector is unchanged, but propagation in matter-filled regions warrants further study
 - Counter-rotating galaxy sample is small (NGC 4550, NGC 7217)
 
 **Comparison to Other Approaches:**

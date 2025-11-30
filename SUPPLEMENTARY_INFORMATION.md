@@ -617,11 +617,11 @@ $$|\mathbf{T}|_{\text{coh}}^2 = |\langle T_r \rangle|^2 + |\langle T_\phi \rangl
 
 ### Enhancement Factor Derivation
 
-If all three components contribute equally with amplitude $T_0$:
+*Assumption:* All three components contribute equally with amplitude $T_0$. (This equal-weighting assumption is plausible for axisymmetric disks but not rigorously derived.)
 
 $$A_{\text{disk}} = \frac{|\mathbf{T}|_{\text{coh}}}{|\mathbf{T}|_{\text{incoh}}} = \frac{\sqrt{3 T_0^2}}{\sqrt{T_0^2}} = \sqrt{3} \approx 1.73$$
 
-**This is the geometric origin of A = √3 for disk galaxies.**
+**This provides geometric intuition for A = √3, but the equal-weighting assumption should be classified as phenomenological.**
 
 ### Spherical Clusters: A = π√2
 
