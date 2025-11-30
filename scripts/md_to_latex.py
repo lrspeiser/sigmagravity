@@ -163,7 +163,18 @@ def convert_markdown_to_latex(md_content):
             continue
         
         # Block equations $$...$$
-        if line.strip().startswith('$$'):
+        stripped = line.strip()
+        # Single-line block equation: $$content$$
+        if stripped.startswith('$$') and stripped.endswith('$$') and len(stripped) > 4:
+            equation_content = stripped[2:-2].strip()
+            latex += "\\begin{equation}\n"
+            latex += equation_content + "\n"
+            latex += "\\end{equation}\n\n"
+            i += 1
+            continue
+        
+        # Multi-line block equation start/end: $$ on its own line
+        if stripped == '$$':
             if not in_equation:
                 latex += "\\begin{equation}\n"
                 in_equation = True
@@ -173,7 +184,7 @@ def convert_markdown_to_latex(md_content):
             i += 1
             continue
         
-        # Inline equations and equation blocks
+        # Inside multi-line equation
         if in_equation:
             latex += line + "\n"
             i += 1

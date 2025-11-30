@@ -50,7 +50,7 @@ This mechanism naturally explains:
 | SPARC head-to-head | Wins | **97** | 74 | — |
 | MW rotation curve | RMS vs McGaugh | **5.7 km/s** | 2.1 km/s | 53.1 km/s |
 | MW rotation curve | V(8 kpc) | **227.6 km/s*** | 233.0 km/s | 190.7 km/s |
-| Galaxy clusters | Hold-out coverage | **2/2 in 68%** | — | Baseline |
+| Galaxy clusters (N=2) | Preliminary | **2/2 in 68%** | — | Baseline |
 | Solar System | PPN γ−1 | **< 10⁻¹³** | < 10⁻⁵ | 0 |
 
 *Observed: 233.3 km/s (McGaugh/GRAVITY). Σ-Gravity: Δ = −5.7 km/s; MOND: Δ = −0.3 km/s.
@@ -119,11 +119,11 @@ where ξ = (2/3)R_d is the coherence length scale and n_coh = 0.5 is the decay e
 
 ### 2.4 Acceleration Dependence
 
-The enhancement factor depends on the local gravitational acceleration through:
+The enhancement factor depends on the local baryonic gravitational acceleration g = g_bar through:
 
 $$h(g) = \sqrt{\frac{g^\dagger}{g}} \cdot \frac{g^\dagger}{g^\dagger + g}$$
 
-This function produces flat rotation curves at low acceleration (g << g†) and recovers Newtonian/GR gravity at high acceleration (g >> g†).
+where g is the Newtonian acceleration from baryonic matter alone (not the total observed acceleration). This function produces flat rotation curves at low acceleration (g << g†) and recovers Newtonian/GR gravity at high acceleration (g >> g†).
 
 ### 2.5 The Critical Acceleration Scale
 
@@ -140,12 +140,12 @@ The complete enhancement factor is:
 $$\boxed{\Sigma = 1 + A \cdot W(r) \cdot h(g)}$$
 
 with components:
-- **h(g) = √(g†/g) × g†/(g†+g)** — universal acceleration function
-- **W(r) = 1 - (ξ/(ξ+r))^0.5** with ξ = (2/3)R_d — coherence window
-- **A_galaxy = √3 ≈ 1.73** — amplitude for disk galaxies (from coherence geometry)
-- **A_cluster = π√2 ≈ 4.44** — amplitude for galaxy clusters (spherical geometry)
+- **h(g) = √(g†/g) × g†/(g†+g)** — universal acceleration function (g is baryonic acceleration)
+- **W(r) = 1 - (ξ/(ξ+r))^0.5** with ξ = (2/3)R_d — coherence window (see SI §4 for derivation)
+- **A_galaxy = √3 ≈ 1.73** — amplitude for disk galaxies (from 2D coherent mode geometry; see SI §5)
+- **A_cluster = π√2 ≈ 4.44** — amplitude for spherical clusters (3D geometry; see SI §6)
 
-The cluster/galaxy amplitude ratio π√2/√3 ≈ 2.57 matches the empirically observed ratio of **2.60 to within 1.2%**.
+The cluster/galaxy amplitude ratio π√2/√3 ≈ 2.57 matches the empirically observed ratio of 2.60 to within 1.2%. This agreement is intriguing but warrants caution: the geometric derivations involve approximations whose robustness requires further investigation.
 
 ### 2.7 Why This Formula (Not MOND's)
 
@@ -171,7 +171,13 @@ In compact systems, the coherence window W(r) → 0 and the enhancement automati
 
 ### 3.1 Radial Acceleration Relation (SPARC Galaxies)
 
-We test the framework on the SPARC database containing 175 late-type galaxies with high-quality rotation curves and 3.6μm photometry. Using the derived formula with no free parameters (A = √3, g† = cH₀/(2e)), we analyze all 171 galaxies with sufficient data quality.
+We test the framework on the SPARC database (Lelli+ 2016) containing 175 late-type galaxies with high-quality rotation curves and 3.6μm photometry.
+
+**Methodology:**
+- **Mass-to-light ratio:** We adopt M/L = 0.5 M☉/L☉ at 3.6μm, the universal value recommended by Lelli+ (2016) based on stellar population models. This is not fitted per-galaxy.
+- **Distances and inclinations:** Fixed to SPARC published values; not varied in our analysis.
+- **Scatter metric:** RAR scatter is computed as the RMS of log₁₀(g_obs/g_pred) across all radial points.
+- **"No free parameters":** The Σ-Gravity formula uses A = √3 and g† = cH₀/(2e) derived from theory. The only external input is the universal M/L from stellar population models.
 
 **Results (171 galaxies):**
 
@@ -181,7 +187,7 @@ We test the framework on the SPARC database containing 175 late-type galaxies wi
 | Median RAR scatter | **0.087 dex** | 0.085 dex |
 | Head-to-head wins | **97 galaxies** | 74 galaxies |
 
-Both theories achieve comparable overall scatter, but Σ-Gravity wins on more individual galaxies (97 vs 74) when comparing RAR residuals. This is achieved with parameters derived from first principles, not fitted to data.
+Both theories achieve comparable overall scatter. Σ-Gravity wins on more individual galaxies (97 vs 74) when comparing per-galaxy RAR residuals, though this margin is not statistically overwhelming.
 
 ![Figure: RAR plot](figures/rar_derived_formula.png)
 
@@ -204,36 +210,39 @@ We test the derived formula against the Milky Way rotation curve using McGaugh/G
 | MOND | 2.1 km/s | 233.0 km/s | −0.3 km/s |
 | NFW Dark Matter | 2.8 km/s | 233.9 km/s | +0.6 km/s |
 
-**At solar circle (R = 8 kpc):** McGaugh/GRAVITY observed = 233.3 km/s. Σ-Gravity predicts **227.6 km/s (Δ = −5.7 km/s)**. All modified gravity models match within ~3%, while GR baryons alone underpredict by 43 km/s (18%).
+**At solar circle (R = 8 kpc):** McGaugh/GRAVITY observed = 233.3 km/s. Σ-Gravity predicts 227.6 km/s (Δ = −5.7 km/s). All modified gravity models match within ~3%, while GR baryons alone underpredict by 43 km/s (18%).
+
+**Comparison note:** MOND (RMS = 2.1 km/s) and NFW dark matter (RMS = 2.8 km/s) achieve better fits than Σ-Gravity (RMS = 5.7 km/s). This is expected: McGaugh's baryonic model was developed in a MOND context. Σ-Gravity's result demonstrates consistency with MW kinematics using zero MW-specific tuning, but does not outperform existing models.
 
 ![Figure: MW rotation curve](figures/mw_comprehensive_comparison.png)
 
-*Figure 4b: Milky Way rotation curve comparison. Left: McGaugh/GRAVITY observed (black) vs model predictions. Right: Residuals. Σ-Gravity (blue) achieves RMS = 5.7 km/s with gate-free derived formula (A=√3, g†=cH₀/2e). Baryonic model: McGaugh M* = 6.16×10¹⁰ M☉.*
+*Figure 4b: Milky Way rotation curve comparison. Left: McGaugh/GRAVITY observed (black) vs model predictions. Right: Residuals. Σ-Gravity (blue) achieves RMS = 5.7 km/s using derived parameters (A=√3, g†=cH₀/2e). Baryonic model: McGaugh M* = 6.16×10¹⁰ M☉.*
 
-Σ-Gravity achieves competitive accuracy with MOND and NFW dark matter, using only derived parameters and no MW-specific tuning. The slight rising trend in Σ-Gravity predictions (227→230 km/s from 5→15 kpc) vs declining observations (238→221 km/s) is within baryonic model uncertainties.
+**Caveats:** The baryonic model has systematic uncertainties in bar/bulge decomposition that could affect all predictions. The slight rising trend in Σ-Gravity predictions (227→230 km/s from 5→15 kpc) vs declining observations (238→221 km/s) represents a shape mismatch that warrants further investigation.
 
-### 3.3 Galaxy Cluster Strong Lensing
+### 3.3 Galaxy Cluster Strong Lensing (Preliminary)
 
-Galaxy clusters provide a third independent test domain through strong lensing.
+Galaxy clusters provide a third test domain through strong gravitational lensing.
 
-**Blind hold-out validation:**
+**Illustrative examples (N=2):**
 - Abell 2261: Predicted θ_E within 68% credible interval ✓
 - MACSJ1149.5+2223: Predicted θ_E within 68% credible interval ✓
-- **Coverage: 2/2 = 100%**
+
+**Important caveat:** A sample of two clusters provides only illustrative examples, not statistically meaningful validation. Robust constraints would require dozens of clusters with well-characterized baryonic mass distributions, careful treatment of line-of-sight structures, and comparison to standard ΛCDM and MOND predictions.
 
 ![Figure: Cluster holdout validation](figures/cluster_holdout_validation.png)
 
-*Figure 6: Cluster holdout validation. Left: Predicted vs observed Einstein radii. Right: Normalized residuals showing 2/2 holdout coverage within 68% CI.*
+*Figure 6: Preliminary cluster tests. Left: Predicted vs observed Einstein radii. Right: Normalized residuals. N=2 is insufficient for statistical validation but demonstrates the formula's applicability to cluster scales.*
 
 ### 3.4 Cross-Domain Consistency
 
 | Domain | Formula | Amplitude | Performance |
 |--------|---------|-----------|-------------|
-| Disk galaxies (171) | Σ = 1 + A·W·h | √3 | 0.100 dex RAR, wins 97/171 |
-| Milky Way | same | √3 | RMS = 5.7 km/s vs McGaugh, V(8kpc) within 2.4% |
-| Galaxy clusters | same | π√2 | 2/2 hold-outs |
+| Disk galaxies (171) | Σ = 1 + A·W·h | √3 | 0.100 dex RAR scatter |
+| Milky Way | same | √3 | RMS = 5.7 km/s (cf. MOND 2.1) |
+| Galaxy clusters | same | π√2 | 2/2 illustrative examples |
 
-The amplitude ratio emerges from geometric arguments (spherical vs disk coherence geometry) and matches observation to 1.2%.
+The amplitude ratio emerges from geometric arguments (spherical vs disk coherence geometry) and matches observation to ~1%. However, this agreement should be treated with caution pending more rigorous derivation.
 
 ![Figure: Amplitude comparison](figures/amplitude_comparison.png)
 
