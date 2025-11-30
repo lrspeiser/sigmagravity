@@ -112,6 +112,10 @@ $$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{n_{\rm coh}}$$
 
 where ξ = (2/3)R_d is the coherence length scale and n_coh = 0.5 is the decay exponent derived from χ² decoherence statistics.
 
+![Figure: Coherence window](figures/coherence_window.png)
+
+*Figure 3: Left: Coherence window W(r) for different disk scale lengths. Right: Total enhancement Σ(r) as a function of radius at various accelerations, showing how coherence builds with radius.*
+
 ### 2.4 Acceleration Dependence
 
 The enhancement factor depends on the local gravitational acceleration through:
@@ -175,13 +179,13 @@ We test the framework on the SPARC database containing 175 late-type galaxies wi
 
 The holdout scatter of **0.094 dex** compares favorably to MOND (0.10-0.13 dex) and ΛCDM with per-galaxy halo fitting (0.18-0.25 dex).
 
-![Figure: RAR plot](figures/rar_sparc_validation.png)
+![Figure: RAR plot](figures/rar_derived_formula.png)
 
-*Figure 3: Radial Acceleration Relation for SPARC galaxies. Gray points: observed accelerations. Red points: Σ-Gravity predictions. Cyan dashed: GR (baryons only). The tight correspondence between predictions and observations achieves 0.094 dex scatter.*
+*Figure 4: Radial Acceleration Relation for SPARC galaxies using derived formula. Gray points: observed accelerations. Blue line: Σ-Gravity prediction with A = √3. Red dashed: MOND. The scatter of 0.094 dex demonstrates predictive accuracy.*
 
-![Figure: Rotation curve gallery](figures/rc_gallery.png)
+![Figure: Rotation curve gallery](figures/rc_gallery_derived.png)
 
-*Figure 4: Rotation curves for six representative SPARC galaxies showing observed data (black points with error bars), baryonic prediction (cyan dashed), and Σ-Gravity prediction (red solid with uncertainty band). The framework matches observed rotation velocities across diverse galaxy types with ~10-17% average errors.*
+*Figure 5: Rotation curves for six representative SPARC galaxies showing observed data (black points), baryonic prediction (green dashed), Σ-Gravity with derived parameters (blue solid), and MOND (red dotted).*
 
 ### 3.2 Milky Way Zero-Shot Validation
 
@@ -204,13 +208,9 @@ Galaxy clusters provide a third independent test domain through strong lensing.
 - MACSJ1149.5+2223: Predicted θ_E within 68% credible interval ✓
 - **Coverage: 2/2 = 100%**
 
-![Figure: Cluster holdout validation](figures/holdouts_pred_vs_obs.png)
+![Figure: Cluster holdout validation](figures/cluster_holdout_validation.png)
 
-*Figure 5: Cluster holdout validation. Predicted vs observed Einstein radii for blind holdout clusters. Both points fall within 68% credible intervals of the 1:1 line, achieving 2/2 coverage.*
-
-![Figure: K-fold coverage](figures/kfold_coverage.png)
-
-*Figure 6: K-fold cross-validation coverage for galaxy clusters, showing consistent performance across different holdout splits.*
+*Figure 6: Cluster holdout validation. Left: Predicted vs observed Einstein radii. Right: Normalized residuals showing 2/2 holdout coverage within 68% CI.*
 
 ### 3.4 Cross-Domain Consistency
 
@@ -224,7 +224,7 @@ The amplitude ratio emerges from geometric arguments (spherical vs disk coherenc
 
 ![Figure: Amplitude comparison](figures/amplitude_comparison.png)
 
-*Figure 7: Derived vs observed amplitudes. The different amplitudes for galaxies (√3) vs clusters (π√2) emerge from coherence geometry: disk (2D) vs spherical (3D) mass distributions produce different mode counting.*
+*Figure 7: Derived vs observed amplitudes. Galaxy amplitude √3 and cluster amplitude π√2 emerge from coherence geometry.*
 
 ---
 
@@ -315,18 +315,14 @@ Extended derivations, additional validation tests, parameter derivation details,
 
 **Figure 1:** Enhancement function h(g) comparison showing ~7% testable difference from MOND.
 
-**Figure 2:** Solar System safety—coherence mechanism automatically suppresses enhancement in compact systems.
+**Figure 2:** Solar System safety—coherence mechanism automatically suppresses enhancement.
 
-**Figure 3:** Radial Acceleration Relation for SPARC galaxies (0.094 dex scatter).
+**Figure 3:** Coherence window W(r) and total enhancement Σ(r).
 
-**Figure 4:** Rotation curve gallery for representative SPARC galaxies.
+**Figure 4:** Radial Acceleration Relation for SPARC galaxies with derived formula.
 
-**Figure 5:** Cluster holdout validation showing 2/2 coverage.
+**Figure 5:** Rotation curve gallery for representative SPARC galaxies.
 
-**Figure 6:** K-fold cross-validation coverage for clusters.
+**Figure 6:** Cluster holdout validation with 2/2 coverage.
 
 **Figure 7:** Amplitude comparison: √3 (galaxies) vs π√2 (clusters) from coherence geometry.
-
-![Figure: Coherence window](figures/coherence_window.png)
-
-*Figure 8: How coherence builds with radius through the W(r) function.*
