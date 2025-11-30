@@ -591,3 +591,77 @@ Extended derivations, additional validation tests, parameter derivation details,
 **Figure 6:** Cluster holdout validation with 2/2 coverage.
 
 **Figure 7:** Amplitude comparison: √3 (galaxies) vs π√2 (clusters) from coherence geometry.
+
+---
+
+## References (To be reviewed)
+
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. (LIGO Scientific Collaboration and Virgo Collaboration) 2017a, PhRvL, 119, 161101 (GW170817: Observation of Gravitational Waves from a Binary Neutron Star Inspiral)
+
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2017b, ApJL, 848, L13 (Gravitational Waves and Gamma-Rays from a Binary Neutron Star Merger: GW170817 and GRB 170817A)
+
+Aldrovandi, R., & Pereira, J. G. 2013, Teleparallel Gravity: An Introduction (Dordrecht: Springer)
+
+Bahamonde, S., Dialektopoulos, K. F., Escamilla-Rivera, C., et al. 2023, RPPh, 86, 026901 (Teleparallel gravity: from theory to cosmology)
+
+Bekenstein, J. D. 2004, PhRvD, 70, 083509 (Relativistic gravitation theory for the modified Newtonian dynamics paradigm)
+
+Bertone, G., & Hooper, D. 2018, RvMP, 90, 045002 (History of dark matter)
+
+Bertotti, B., Iess, L., & Tortora, P. 2003, Nature, 425, 374 (A test of general relativity using radio links with the Cassini spacecraft)
+
+Bosma, A. 1981, AJ, 86, 1825 (21-cm line studies of spiral galaxies. II. The distribution and kinematics of neutral hydrogen in spiral galaxies of various morphological types)
+
+Cai, Y.-F., Capozziello, S., De Laurentis, M., & Saridakis, E. N. 2016, RPPh, 79, 106901 (f(T) teleparallel gravity and cosmology)
+
+Eilers, A.-C., Hogg, D. W., Rix, H.-W., & Ness, M. K. 2019, ApJ, 871, 120 (The Circular Velocity Curve of the Milky Way from 5 to 25 kpc)
+
+Ferraro, R., & Fiorini, F. 2007, PhRvD, 75, 084031 (Modified teleparallel gravity: Inflation without inflaton)
+
+Fox, C., Mahler, G., Sharon, K., & Remolina González, J. D. 2022, ApJ, 928, 87 (The Strongest Cluster Lenses: An Analysis of the Relation between Strong Lensing Strength and Physical Properties of Galaxy Clusters)
+
+GRAVITY Collaboration, Abuter, R., Amorim, A., et al. 2019, A&A, 625, L10 (A geometric distance measurement to the Galactic center black hole with 0.3% uncertainty)
+
+Krššák, M., & Saridakis, E. N. 2016, CQGra, 33, 115009 (The covariant formulation of f(T) gravity)
+
+Lelli, F., McGaugh, S. S., & Schombert, J. M. 2016a, AJ, 152, 157 (SPARC: Mass Models for 175 Disk Galaxies with Spitzer Photometry and Accurate Rotation Curves)
+
+Lelli, F., McGaugh, S. S., Schombert, J. M., & Pawlowski, M. S. 2017, ApJ, 836, 152 (One Law to Rule Them All: The Radial Acceleration Relation of Galaxies)
+
+Li, P., Lelli, F., McGaugh, S. S., & Schombert, J. M. 2018, A&A, 615, A3 (Fitting the radial acceleration relation to individual SPARC galaxies)
+
+Maluf, J. W. 2013, AnPhy, 525, 339 (The teleparallel equivalent of general relativity)
+
+McGaugh, S. S. 2004, ApJ, 609, 652 (The Mass Discrepancy-Acceleration Relation: Disk Mass and the Dark Matter Distribution)
+
+McGaugh, S. S. 2019, ApJ, 885, 87 (The Imprint of Spiral Arms on the Galactic Rotation Curve)
+
+McGaugh, S. S., Lelli, F., & Schombert, J. M. 2016, PhRvL, 117, 201101 (Radial Acceleration Relation in Rotationally Supported Galaxies)
+
+McGaugh, S. S., Schombert, J. M., Bothun, G. D., & de Blok, W. J. G. 2000, ApJL, 533, L99 (The Baryonic Tully-Fisher Relation)
+
+Milgrom, M. 1983a, ApJ, 270, 365 (A modification of the Newtonian dynamics as a possible alternative to the hidden mass hypothesis)
+
+Milgrom, M. 1983b, ApJ, 270, 371 (A modification of the Newtonian dynamics—Implications for galaxies)
+
+Milgrom, M. 1983c, ApJ, 270, 384 (A modification of the Newtonian dynamics—Implications for galaxy systems)
+
+Milgrom, M. 2009, PhRvD, 80, 123536 (Bimetric MOND gravity)
+
+Navarro, J. F., Frenk, C. S., & White, S. D. M. 1996, ApJ, 462, 563 (The Structure of Cold Dark Matter Halos)
+
+Navarro, J. F., Frenk, C. S., & White, S. D. M. 1997, ApJ, 490, 493 (A Universal Density Profile from Hierarchical Clustering)
+
+Planck Collaboration, Aghanim, N., Akrami, Y., et al. 2020, A&A, 641, A6 (Planck 2018 results. VI. Cosmological parameters)
+
+Rubin, V. C., & Ford, W. K., Jr. 1970, ApJ, 159, 379 (Rotation of the Andromeda Nebula from a Spectroscopic Survey of Emission Regions)
+
+Rubin, V. C., Graham, J. A., & Kenney, J. D. P. 1992, ApJL, 394, L9 (Cospatial counterrotating stellar disks in the Virgo E7/S0 galaxy NGC 4550)
+
+Sanders, R. H., & McGaugh, S. S. 2002, ARA&A, 40, 263 (Modified Newtonian Dynamics as an Alternative to Dark Matter)
+
+Verlinde, E. P. 2017, SciPost Phys., 2, 016 (Emergent Gravity and the Dark Universe)
+
+Zwicky, F. 1933, HPA, 6, 110 (Die Rotverschiebung von extragalaktischen Nebeln)
+
+Zwicky, F. 1937, ApJ, 86, 217 (On the Masses of Nebulae and of Clusters of Nebulae)
