@@ -1,0 +1,32 @@
+{
+  "scatter_derived_canonical": 0.09310853240418795,
+  "scatter_derived_optimized": 0.09218158991529274,
+  "scatter_empirical": 0.10423285694833294,
+  "scatter_mond": 0.09043988371626256,
+  "optimal_A_max": 1.7571428571428571,
+  "theoretical_A_max": 1.4142135623730951,
+  "ratio_derived_empirical": 0.8932743007355235,
+  "ratio_optimized_empirical": 0.8843813036899307,
+  "xi_model_results": {
+    "Derived: \u03be = (2/3)\u00d7R_d": {
+      "scatter": 0.09310853240418795,
+      "bias": 0.048810376880284646
+    },
+    "Alternative: \u03be = R_d": {
+      "scatter": 0.09573774613515201,
+      "bias": 0.033737136285976195
+    },
+    "Alternative: \u03be = 2\u00d7R_d": {
+      "scatter": 0.10264439143041355,
+      "bias": 0.005242876629657907
+    },
+    "Universal: \u03be = 5 kpc": {
+      "scatter": 0.10620568722333398,
+      "bias": 0.017805106287569074
+    },
+    "Universal: \u03be = 2 kpc": {
+      "scatter": 0.09500936373401264,
+      "bias": 0.051340719181982894
+    }
+  }
+}
