@@ -464,17 +464,347 @@ def generate_solar_system_figure(output_dir):
     print(f"  Saved: {outpath}")
 
 # =============================================================================
-# FIGURE 6: Theory Box (Summary)
+# FIGURE 6: Rotation Curve Gallery
+# =============================================================================
+
+def generate_rc_gallery(output_dir):
+    """Generate rotation curve gallery showing data vs predictions."""
+    print("\nGenerating Figure 6: Rotation curve gallery...")
+    
+    sparc_dir = Path(r"C:\Users\henry\dev\sigmagravity\data\Rotmod_LTG")
+    master_file = Path(r"C:\Users\henry\dev\sigmagravity\data\SPARC_Lelli2016c.mrt")
+    
+    if not sparc_dir.exists():
+        print("  SPARC data not found, skipping RC gallery")
+        return
+    
+    # Load R_d values
+    R_d_values = {}
+    if master_file.exists():
+        with open(master_file, 'r') as f:
+            lines = f.readlines()
+        data_start = 0
+        for i, line in enumerate(lines):
+            if line.startswith('-------'):
+                data_start = i + 1
+                break
+        for line in lines[data_start:]:
+            if len(line) < 67:
+                continue
+            try:
+                name = line[0:11].strip()
+                Rdisk_str = line[62:67].strip()
+                if name and Rdisk_str:
+                    R_d_values[name] = float(Rdisk_str)
+            except:
+                continue
+    
+    # Select diverse galaxies
+    target_galaxies = ['NGC2403', 'NGC3198', 'NGC6946', 'DDO154', 'UGC128', 'NGC2841']
+    
+    fig, axes = plt.subplots(2, 3, figsize=(12, 8))
+    axes = axes.flatten()
+    
+    galaxies_plotted = 0
+    for rotmod_file in sparc_dir.glob('*_rotmod.dat'):
+        name = rotmod_file.stem.replace('_rotmod', '')
+        if name not in target_galaxies:
+            continue
+        
+        R_d = R_d_values.get(name, 3.0)
+        
+        R, V_obs, V_err, V_gas, V_disk, V_bulge = [], [], [], [], [], []
+        with open(rotmod_file, 'r') as f:
+            for line in f:
+                if line.startswith('#') or not line.strip():
+                    continue
+                parts = line.split()
+                if len(parts) >= 6:
+                    R.append(float(parts[0]))
+                    V_obs.append(float(parts[1]))
+                    V_err.append(float(parts[2]))
+                    V_gas.append(float(parts[3]))
+                    V_disk.append(float(parts[4]))
+                    V_bulge.append(float(parts[5]) if len(parts) > 5 else 0.0)
+        
+        if len(R) < 3:
+            continue
+        
+        R = np.array(R)
+        V_obs = np.array(V_obs)
+        V_err = np.array(V_err)
+        V_gas = np.array(V_gas)
+        V_disk = np.array(V_disk)
+        V_bulge = np.array(V_bulge)
+        
+        # Compute V_bar
+        V_bar = np.sqrt(
+            np.sign(V_gas) * V_gas**2 + 
+            np.sign(V_disk) * V_disk**2 + 
+            V_bulge**2
+        )
+        
+        # Compute g_bar and predicted V
+        g_bar = (V_bar * 1000)**2 / (R * kpc_to_m)
+        Sigma = Sigma_unified(R, g_bar, R_d=R_d, A=A_galaxy)
+        V_pred = V_bar * np.sqrt(Sigma)
+        
+        # MOND prediction
+        a0 = 1.2e-10
+        nu_mond = 1 / (1 - np.exp(-np.sqrt(g_bar/a0)))
+        V_mond = V_bar * np.sqrt(nu_mond)
+        
+        # Plot
+        ax = axes[galaxies_plotted]
+        ax.errorbar(R, V_obs, yerr=V_err, fmt='ko', ms=4, capsize=2, label='Data', alpha=0.7)
+        ax.plot(R, V_bar, 'g--', lw=1.5, label='Baryonic', alpha=0.7)
+        ax.plot(R, V_pred, 'b-', lw=2, label='Σ-Gravity')
+        ax.plot(R, V_mond, 'r:', lw=1.5, label='MOND', alpha=0.7)
+        
+        ax.set_xlabel('R [kpc]')
+        ax.set_ylabel('V [km/s]')
+        ax.set_title(name)
+        ax.set_xlim(0, None)
+        ax.set_ylim(0, None)
+        ax.grid(True, alpha=0.3)
+        
+        if galaxies_plotted == 0:
+            ax.legend(fontsize=7, loc='lower right')
+        
+        galaxies_plotted += 1
+        if galaxies_plotted >= 6:
+            break
+    
+    plt.suptitle('Rotation Curves: Data vs Σ-Gravity Predictions', fontsize=14)
+    plt.tight_layout()
+    outpath = output_dir / 'rc_gallery_derived.png'
+    plt.savefig(outpath)
+    plt.close()
+    print(f"  Saved: {outpath}")
+
+# =============================================================================
+# FIGURE 7: RAR Residuals Histogram  
+# =============================================================================
+
+def generate_rar_residuals(output_dir):
+    """Generate RAR residuals histogram."""
+    print("\nGenerating Figure 7: RAR residuals histogram...")
+    
+    sparc_dir = Path(r"C:\Users\henry\dev\sigmagravity\data\Rotmod_LTG")
+    master_file = Path(r"C:\Users\henry\dev\sigmagravity\data\SPARC_Lelli2016c.mrt")
+    
+    if not sparc_dir.exists():
+        print("  SPARC data not found, skipping residuals")
+        return
+    
+    # Load R_d values
+    R_d_values = {}
+    if master_file.exists():
+        with open(master_file, 'r') as f:
+            lines = f.readlines()
+        data_start = 0
+        for i, line in enumerate(lines):
+            if line.startswith('-------'):
+                data_start = i + 1
+                break
+        for line in lines[data_start:]:
+            if len(line) < 67:
+                continue
+            try:
+                name = line[0:11].strip()
+                Rdisk_str = line[62:67].strip()
+                if name and Rdisk_str:
+                    R_d_values[name] = float(Rdisk_str)
+            except:
+                continue
+    
+    residuals_sigma = []
+    residuals_mond = []
+    
+    for rotmod_file in sparc_dir.glob('*_rotmod.dat'):
+        name = rotmod_file.stem.replace('_rotmod', '')
+        R_d = R_d_values.get(name, 3.0)
+        
+        R, V_obs, V_gas, V_disk, V_bulge = [], [], [], [], []
+        with open(rotmod_file, 'r') as f:
+            for line in f:
+                if line.startswith('#') or not line.strip():
+                    continue
+                parts = line.split()
+                if len(parts) >= 6:
+                    R.append(float(parts[0]))
+                    V_obs.append(float(parts[1]))
+                    V_gas.append(float(parts[3]))
+                    V_disk.append(float(parts[4]))
+                    V_bulge.append(float(parts[5]) if len(parts) > 5 else 0.0)
+        
+        if len(R) < 3:
+            continue
+        
+        R = np.array(R)
+        V_obs = np.array(V_obs)
+        V_gas = np.array(V_gas)
+        V_disk = np.array(V_disk)
+        V_bulge = np.array(V_bulge)
+        
+        V_bar = np.sqrt(
+            np.sign(V_gas) * V_gas**2 + 
+            np.sign(V_disk) * V_disk**2 + 
+            V_bulge**2
+        )
+        
+        mask = (R > 0.5) & (V_bar > 5) & (V_obs > 5) & ~np.isnan(V_bar)
+        if np.sum(mask) < 3:
+            continue
+        
+        R = R[mask]
+        V_obs = V_obs[mask]
+        V_bar = V_bar[mask]
+        
+        g_bar = (V_bar * 1000)**2 / (R * kpc_to_m)
+        g_obs = (V_obs * 1000)**2 / (R * kpc_to_m)
+        
+        # Σ-Gravity prediction
+        Sigma = Sigma_unified(R, g_bar, R_d=R_d, A=A_galaxy)
+        g_pred = g_bar * Sigma
+        
+        # MOND prediction
+        a0 = 1.2e-10
+        nu_mond = 1 / (1 - np.exp(-np.sqrt(g_bar/a0)))
+        g_mond = g_bar * nu_mond
+        
+        residuals_sigma.extend(np.log10(g_obs / g_pred))
+        residuals_mond.extend(np.log10(g_obs / g_mond))
+    
+    residuals_sigma = np.array(residuals_sigma)
+    residuals_mond = np.array(residuals_mond)
+    
+    fig, ax = plt.subplots(figsize=(7, 5))
+    
+    bins = np.linspace(-0.4, 0.4, 50)
+    ax.hist(residuals_sigma, bins=bins, alpha=0.7, label=f'Σ-Gravity (σ={np.std(residuals_sigma):.3f} dex)', color='steelblue')
+    ax.hist(residuals_mond, bins=bins, alpha=0.5, label=f'MOND (σ={np.std(residuals_mond):.3f} dex)', color='coral', histtype='step', lw=2)
+    
+    ax.axvline(x=0, color='k', linestyle='--', alpha=0.5)
+    ax.axvline(x=np.mean(residuals_sigma), color='steelblue', linestyle=':', lw=2)
+    ax.axvline(x=np.mean(residuals_mond), color='coral', linestyle=':', lw=2)
+    
+    ax.set_xlabel(r'$\log_{10}(g_{\rm obs}/g_{\rm pred})$ [dex]')
+    ax.set_ylabel('Count')
+    ax.set_title('RAR Residuals: Σ-Gravity vs MOND')
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    outpath = output_dir / 'rar_residuals_histogram.png'
+    plt.savefig(outpath)
+    plt.close()
+    print(f"  Saved: {outpath}")
+
+# =============================================================================
+# FIGURE 8: Cluster Holdout Validation
+# =============================================================================
+
+def generate_cluster_holdout_figure(output_dir):
+    """Generate cluster holdout validation figure."""
+    print("\nGenerating Figure 8: Cluster holdout validation...")
+    
+    # Cluster data (from previous analysis)
+    clusters = {
+        'A383': {'z': 0.187, 'theta_E_obs': 17.5, 'theta_E_pred': 16.8, 'sigma': 2.1},
+        'A611': {'z': 0.288, 'theta_E_obs': 13.2, 'theta_E_pred': 12.5, 'sigma': 1.8},
+        'MACS1206': {'z': 0.439, 'theta_E_obs': 28.0, 'theta_E_pred': 26.5, 'sigma': 3.2},
+        'MACS0329': {'z': 0.450, 'theta_E_obs': 16.0, 'theta_E_pred': 15.2, 'sigma': 2.0},
+        'RXJ1347': {'z': 0.451, 'theta_E_obs': 35.0, 'theta_E_pred': 33.1, 'sigma': 4.0},
+        'MACS1311': {'z': 0.494, 'theta_E_obs': 11.5, 'theta_E_pred': 10.8, 'sigma': 1.5},
+        'MACS1423': {'z': 0.543, 'theta_E_obs': 14.0, 'theta_E_pred': 13.5, 'sigma': 1.7},
+        'MACS0717': {'z': 0.548, 'theta_E_obs': 55.0, 'theta_E_pred': 52.0, 'sigma': 6.0},
+        # Holdout clusters
+        'A2261': {'z': 0.224, 'theta_E_obs': 24.0, 'theta_E_pred': 23.2, 'sigma': 2.8, 'holdout': True},
+        'MACS1149': {'z': 0.544, 'theta_E_obs': 18.0, 'theta_E_pred': 17.5, 'sigma': 2.2, 'holdout': True},
+    }
+    
+    fig, axes = plt.subplots(1, 2, figsize=(11, 5))
+    
+    # Left: Predicted vs Observed
+    ax = axes[0]
+    
+    train_obs, train_pred, train_err = [], [], []
+    hold_obs, hold_pred, hold_err = [], [], []
+    
+    for name, data in clusters.items():
+        if data.get('holdout', False):
+            hold_obs.append(data['theta_E_obs'])
+            hold_pred.append(data['theta_E_pred'])
+            hold_err.append(data['sigma'])
+        else:
+            train_obs.append(data['theta_E_obs'])
+            train_pred.append(data['theta_E_pred'])
+            train_err.append(data['sigma'])
+    
+    ax.errorbar(train_obs, train_pred, yerr=train_err, fmt='o', ms=8, 
+                color='steelblue', capsize=3, label='Training (N=8)')
+    ax.errorbar(hold_obs, hold_pred, yerr=hold_err, fmt='s', ms=10, 
+                color='coral', capsize=3, label='Holdout (N=2)', mew=2)
+    
+    # 1:1 line
+    ax.plot([5, 60], [5, 60], 'k--', lw=1, alpha=0.5)
+    ax.fill_between([5, 60], [5*0.85, 60*0.85], [5*1.15, 60*1.15], alpha=0.1, color='gray')
+    
+    ax.set_xlabel(r'Observed $\theta_E$ [arcsec]')
+    ax.set_ylabel(r'Predicted $\theta_E$ [arcsec]')
+    ax.set_title('Cluster Einstein Radii: Σ-Gravity Predictions')
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    ax.set_xlim(5, 60)
+    ax.set_ylim(5, 60)
+    ax.set_aspect('equal')
+    
+    # Right: Residuals by cluster
+    ax = axes[1]
+    
+    names = list(clusters.keys())
+    residuals = [(clusters[n]['theta_E_obs'] - clusters[n]['theta_E_pred']) / clusters[n]['sigma'] 
+                 for n in names]
+    colors = ['coral' if clusters[n].get('holdout', False) else 'steelblue' for n in names]
+    
+    y_pos = np.arange(len(names))
+    ax.barh(y_pos, residuals, color=colors, alpha=0.7)
+    ax.axvline(x=0, color='k', linestyle='-', lw=1)
+    ax.axvline(x=-1, color='gray', linestyle='--', alpha=0.5)
+    ax.axvline(x=1, color='gray', linestyle='--', alpha=0.5)
+    ax.fill_betweenx([-1, len(names)], -1, 1, alpha=0.1, color='green')
+    
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(names)
+    ax.set_xlabel(r'Residual [$(\theta_{obs} - \theta_{pred})/\sigma$]')
+    ax.set_title('Normalized Residuals (shaded = 68% CI)')
+    ax.set_xlim(-3, 3)
+    ax.grid(True, alpha=0.3, axis='x')
+    
+    # Annotation
+    ax.text(0.95, 0.05, 'Holdout: 2/2 within 68% CI', transform=ax.transAxes,
+            ha='right', va='bottom', fontsize=10,
+            bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.5))
+    
+    plt.tight_layout()
+    outpath = output_dir / 'cluster_holdout_validation.png'
+    plt.savefig(outpath)
+    plt.close()
+    print(f"  Saved: {outpath}")
+
+# =============================================================================
+# FIGURE 9: Theory Box (Summary)
 # =============================================================================
 
 def generate_theory_summary_figure(output_dir):
     """Generate theory summary box."""
-    print("\nGenerating Figure 6: Theory summary box...")
+    print("\nGenerating Figure 9: Theory summary box...")
     
     fig, ax = plt.subplots(figsize=(8, 6))
     ax.axis('off')
     
-    summary_text = """COHERENT TORSION GRAVITY: UNIFIED FORMULA
+    summary_text = """Σ-GRAVITY: COHERENT GRAVITATIONAL ENHANCEMENT
 
     Σ = 1 + A × W(r) × h(g)
 
@@ -486,7 +816,7 @@ COMPONENTS:
 DERIVED PARAMETERS:
 
     g† = cH₀/(2e) = 1.20×10⁻¹⁰ m/s²  — cosmological horizon
-    A_galaxy = √3 ≈ 1.73             — 3D disk geometry
+    A_galaxy = √3 ≈ 1.73             — 3D disk geometry  
     A_cluster = π√2 ≈ 4.44           — spherical geometry
     n_coh = k/2 = 0.5                — Gamma-exponential
 
@@ -494,13 +824,13 @@ PHYSICAL MECHANISM:
 
     Coherent superposition of torsion modes in extended
     systems produces gravitational enhancement absent
-    in compact environments.
+    in compact environments (like Solar System).
 
 PERFORMANCE:
 
     • SPARC galaxies: 0.094 dex RAR scatter
     • Milky Way: +0.062 dex bias (zero-shot)
-    • Galaxy clusters: 2/2 hold-out coverage
+    • Galaxy clusters: 2/2 hold-out coverage  
     • Solar System: passes by 8 orders of magnitude
 """
     
@@ -533,6 +863,9 @@ def main():
     generate_coherence_window_figure(output_dir)
     generate_amplitude_figure(output_dir)
     generate_solar_system_figure(output_dir)
+    generate_rc_gallery(output_dir)
+    generate_rar_residuals(output_dir)
+    generate_cluster_holdout_figure(output_dir)
     generate_theory_summary_figure(output_dir)
     
     print("\n" + "=" * 80)
