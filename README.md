@@ -330,7 +330,3 @@ Extended derivations, additional validation tests, parameter derivation details,
 ![Figure: Coherence window](figures/coherence_window.png)
 
 *Figure 8: How coherence builds with radius through the W(r) function.*
-
-![Figure: Theory summary](figures/theory_summary_box.png)
-
-*Figure 9: Visual summary of the unified formula and performance metrics.*

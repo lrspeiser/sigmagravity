@@ -537,21 +537,28 @@ def generate_rc_gallery(output_dir):
         V_disk = np.array(V_disk)
         V_bulge = np.array(V_bulge)
         
-        # Compute V_bar
-        V_bar = np.sqrt(
-            np.sign(V_gas) * V_gas**2 + 
-            np.sign(V_disk) * V_disk**2 + 
-            V_bulge**2
-        )
+        # Compute V_bar with mass-to-light scaling
+        # V_disk and V_bulge need Upsilon factor but these are already in km/s from SPARC
+        V_bar_sq = np.abs(V_gas)**2 + np.abs(V_disk)**2 + np.abs(V_bulge)**2
+        V_bar = np.sqrt(V_bar_sq)
+        V_bar = np.where(np.isnan(V_bar), 0, V_bar)
+        
+        # Skip if V_bar is too small
+        mask_valid = V_bar > 1
+        if np.sum(mask_valid) < 5:
+            continue
         
         # Compute g_bar and predicted V
-        g_bar = (V_bar * 1000)**2 / (R * kpc_to_m)
-        Sigma = Sigma_unified(R, g_bar, R_d=R_d, A=A_galaxy)
-        V_pred = V_bar * np.sqrt(Sigma)
+        g_bar = np.where(V_bar > 0, (V_bar * 1000)**2 / (R * kpc_to_m), 1e-12)
         
-        # MOND prediction
+        # Compute kernel K (not Sigma directly, to match validation code)
+        K = A_galaxy * W_coherence(R, R_d) * h_universal(g_bar)
+        V_pred = V_bar * np.sqrt(1 + K)
+        
+        # MOND prediction  
         a0 = 1.2e-10
-        nu_mond = 1 / (1 - np.exp(-np.sqrt(g_bar/a0)))
+        g_bar_safe = np.maximum(g_bar, 1e-15)
+        nu_mond = 1 / (1 - np.exp(-np.sqrt(g_bar_safe/a0)))
         V_mond = V_bar * np.sqrt(nu_mond)
         
         # Plot
@@ -793,54 +800,6 @@ def generate_cluster_holdout_figure(output_dir):
     plt.close()
     print(f"  Saved: {outpath}")
 
-# =============================================================================
-# FIGURE 9: Theory Box (Summary)
-# =============================================================================
-
-def generate_theory_summary_figure(output_dir):
-    """Generate theory summary box."""
-    print("\nGenerating Figure 9: Theory summary box...")
-    
-    fig, ax = plt.subplots(figsize=(8, 6))
-    ax.axis('off')
-    
-    summary_text = """Σ-GRAVITY: COHERENT GRAVITATIONAL ENHANCEMENT
-
-    Σ = 1 + A × W(r) × h(g)
-
-COMPONENTS:
-
-    h(g) = √(g†/g) × g†/(g†+g)  — acceleration dependence
-    W(r) = 1 - (ξ/(ξ+r))^0.5    — coherence window (ξ = ⅔ R_d)
-
-DERIVED PARAMETERS:
-
-    g† = cH₀/(2e) = 1.20×10⁻¹⁰ m/s²  — cosmological horizon
-    A_galaxy = √3 ≈ 1.73             — 3D disk geometry  
-    A_cluster = π√2 ≈ 4.44           — spherical geometry
-    n_coh = k/2 = 0.5                — Gamma-exponential
-
-PHYSICAL MECHANISM:
-
-    Coherent superposition of torsion modes in extended
-    systems produces gravitational enhancement absent
-    in compact environments (like Solar System).
-
-PERFORMANCE:
-
-    • SPARC galaxies: 0.094 dex RAR scatter
-    • Milky Way: +0.062 dex bias (zero-shot)
-    • Galaxy clusters: 2/2 hold-out coverage  
-    • Solar System: passes by 8 orders of magnitude
-"""
-    
-    ax.text(0.5, 0.5, summary_text, transform=ax.transAxes, fontsize=10,
-            va='center', ha='center', family='monospace',
-            bbox=dict(boxstyle='round,pad=1', facecolor='lightyellow', alpha=0.8))
-    outpath = output_dir / 'theory_summary_box.png'
-    plt.savefig(outpath)
-    plt.close()
-    print(f"  Saved: {outpath}")
 
 # =============================================================================
 # MAIN
@@ -866,7 +825,6 @@ def main():
     generate_rc_gallery(output_dir)
     generate_rar_residuals(output_dir)
     generate_cluster_holdout_figure(output_dir)
-    generate_theory_summary_figure(output_dir)
     
     print("\n" + "=" * 80)
     print("ALL FIGURES GENERATED SUCCESSFULLY")
