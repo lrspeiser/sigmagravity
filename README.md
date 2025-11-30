@@ -175,17 +175,13 @@ We test the framework on the SPARC database containing 175 late-type galaxies wi
 
 The holdout scatter of **0.094 dex** compares favorably to MOND (0.10-0.13 dex) and ΛCDM with per-galaxy halo fitting (0.18-0.25 dex).
 
-![Figure: RAR plot](figures/rar_derived_formula.png)
+![Figure: RAR plot](figures/rar_sparc_validation.png)
 
-*Figure 3: Radial Acceleration Relation for SPARC galaxies. Gray points: individual measurements. Blue line: Σ-Gravity prediction with A = √3 (from coherent mode counting). Red dashed: MOND. The scatter of 0.094 dex demonstrates predictive accuracy comparable to MOND without per-galaxy fitting.*
+*Figure 3: Radial Acceleration Relation for SPARC galaxies. Gray points: observed accelerations. Red points: Σ-Gravity predictions. Cyan dashed: GR (baryons only). The tight correspondence between predictions and observations achieves 0.094 dex scatter.*
 
-![Figure: Rotation curve gallery](figures/rc_gallery_derived.png)
+![Figure: Rotation curve gallery](figures/rc_gallery.png)
 
-*Figure 4: Rotation curves for six representative SPARC galaxies showing observed data (black points with error bars), baryonic prediction (green dashed), Σ-Gravity prediction (blue solid), and MOND (red dotted). The coherent enhancement formula matches observed rotation velocities across diverse galaxy types.*
-
-![Figure: RAR residuals](figures/rar_residuals_histogram.png)
-
-*Figure 5: Distribution of RAR residuals for Σ-Gravity (blue) vs MOND (coral outline). Both achieve similar scatter (~0.09-0.10 dex), but Σ-Gravity derives its parameters from physical principles rather than calibration.*
+*Figure 4: Rotation curves for six representative SPARC galaxies showing observed data (black points with error bars), baryonic prediction (cyan dashed), and Σ-Gravity prediction (red solid with uncertainty band). The framework matches observed rotation velocities across diverse galaxy types with ~10-17% average errors.*
 
 ### 3.2 Milky Way Zero-Shot Validation
 
@@ -208,9 +204,13 @@ Galaxy clusters provide a third independent test domain through strong lensing.
 - MACSJ1149.5+2223: Predicted θ_E within 68% credible interval ✓
 - **Coverage: 2/2 = 100%**
 
-![Figure: Cluster holdout validation](figures/cluster_holdout_validation.png)
+![Figure: Cluster holdout validation](figures/holdouts_pred_vs_obs.png)
 
-*Figure 6: Left: Predicted vs observed Einstein radii for galaxy clusters. Training clusters (blue) and blind holdout clusters (coral squares) both fall near the 1:1 line. Right: Normalized residuals showing holdout clusters achieve 2/2 coverage within 68% confidence intervals.*
+*Figure 5: Cluster holdout validation. Predicted vs observed Einstein radii for blind holdout clusters. Both points fall within 68% credible intervals of the 1:1 line, achieving 2/2 coverage.*
+
+![Figure: K-fold coverage](figures/kfold_coverage.png)
+
+*Figure 6: K-fold cross-validation coverage for galaxy clusters, showing consistent performance across different holdout splits.*
 
 ### 3.4 Cross-Domain Consistency
 
@@ -313,19 +313,19 @@ Extended derivations, additional validation tests, parameter derivation details,
 
 ## Figure Legends
 
-**Figure 1:** Enhancement function comparison showing ~7% testable difference from MOND.
+**Figure 1:** Enhancement function h(g) comparison showing ~7% testable difference from MOND.
 
-**Figure 2:** Solar System safety—coherence mechanism automatically suppresses enhancement.
+**Figure 2:** Solar System safety—coherence mechanism automatically suppresses enhancement in compact systems.
 
-**Figure 3:** Radial Acceleration Relation with 0.094 dex scatter.
+**Figure 3:** Radial Acceleration Relation for SPARC galaxies (0.094 dex scatter).
 
-**Figure 4:** Rotation curve gallery showing Σ-Gravity matches observed velocities.
+**Figure 4:** Rotation curve gallery for representative SPARC galaxies.
 
-**Figure 5:** RAR residuals comparing Σ-Gravity and MOND.
+**Figure 5:** Cluster holdout validation showing 2/2 coverage.
 
-**Figure 6:** Cluster holdout validation with 2/2 coverage.
+**Figure 6:** K-fold cross-validation coverage for clusters.
 
-**Figure 7:** Amplitude comparison showing coherence geometry predictions.
+**Figure 7:** Amplitude comparison: √3 (galaxies) vs π√2 (clusters) from coherence geometry.
 
 ![Figure: Coherence window](figures/coherence_window.png)
 
