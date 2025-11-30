@@ -73,7 +73,7 @@ $$T^\lambda_{\mu\nu} = e^\lambda_a (\partial_\mu e^a_\nu - \partial_\nu e^a_\mu)
 
 The torsion scalar **T** is built from contractions of the torsion tensor:
 
-$$\mathbf{T} = \frac{1}{4} T^{\rho\mu\nu} T_{\rho\mu\nu} + \frac{1}{2} T^{\rho\mu\nu} T_{\nu\mu\rho} - T^{\rho}_{\phantom{\rho}\rho\mu} T^{\nu\mu}_{\phantom{\nu\mu}\nu}$$
+$$\mathbf{T} = \frac{1}{4} T^{\rho\mu\nu} T_{\rho\mu\nu} + \frac{1}{2} T^{\rho\mu\nu} T_{\nu\mu\rho} - T^{\rho}{}_{\rho\mu} T^{\nu\mu}{}_{\nu}$$
 
 The standard TEGR action is:
 
@@ -127,7 +127,7 @@ where $g_{\text{bar}}$ is the standard Newtonian acceleration from baryonic matt
 
 In the weak-field limit, the torsion tensor $T^\lambda_{\mu\nu}$ has 24 independent components that decompose into irreducible parts:
 
-- **Vector part (4 components):** $V_\mu = T^\nu_{\phantom{\nu}\nu\mu}$
+- **Vector part (4 components):** $V_\mu = T^\nu{}_{\nu\mu}$
 - **Axial part (4 components):** $A^\mu = \frac{1}{6}\epsilon^{\mu\nu\rho\sigma}T_{\nu\rho\sigma}$
 - **Tensor part (16 components):** The remainder
 
