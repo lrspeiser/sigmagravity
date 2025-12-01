@@ -9,9 +9,9 @@
 
 The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. Here we present Σ-Gravity ("Sigma-Gravity"), a phenomenological framework **motivated by teleparallel gravity concepts** that produces scale-dependent gravitational enhancement in extended, dynamically cold systems. The key ansatz is that organized rotational motion in galactic disks enables coherent gravitational effects that are suppressed in compact or kinematically hot systems. This coherence concept is analogous to phase alignment in lasers or Cooper pairs in superconductors, though the gravitational mechanism remains to be rigorously derived.
 
-The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.2 × 10⁻¹⁰ m/s² connects to cosmological scales. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—with comparable per-galaxy performance (97 vs 74; p=0.07, not statistically significant). Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s, demonstrating consistency but not outperforming MOND (RMS = 2.1 km/s). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. Preliminary estimates suggest the theory satisfies Solar System constraints due to suppression from both the h(g)→0 limit at high accelerations and reduced coherence in compact systems; rigorous PPN analysis remains future work.
+The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/6 ≈ 1.14 × 10⁻¹⁰ m/s² (factor 6 = 3×2 derived from phase coherence) connects to cosmological scales. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—with comparable per-galaxy performance (97 vs 74; p=0.07, not statistically significant). Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s, demonstrating consistency but not outperforming MOND (RMS = 2.1 km/s). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. Preliminary estimates suggest the theory satisfies Solar System constraints due to suppression from both the h(g)→0 limit at high accelerations and reduced coherence in compact systems; rigorous PPN analysis remains future work.
 
-Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity connects the critical acceleration to cosmological scales (g† ~ cH₀) up to a single fitted numerical coefficient. The framework is motivated by teleparallel gravity but currently operates as phenomenology awaiting rigorous field-theoretic completion. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherence-dependent gravitational effects that produce it.
+Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity connects the critical acceleration to cosmological scales (g† ~ cH₀) (factor 6 = 3×2 derived from three-channel phase geometry). The framework is motivated by teleparallel gravity but currently operates as phenomenology awaiting rigorous field-theoretic completion. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherence-dependent gravitational effects that produce it.
 
 ---
 
@@ -561,7 +561,7 @@ Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravi
 # Physical constants
 c = 2.998e8          # m/s
 H0_SI = 2.27e-18     # s⁻¹ (70 km/s/Mpc)
-g_dagger = c * H0_SI / (2 * np.e)  # Critical acceleration
+g_dagger = c * H0_SI / 6  # Critical acceleration (factor 6 = 3×2 derived)
 
 def h_universal(g):
     """Acceleration function h(g)"""
