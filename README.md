@@ -9,7 +9,7 @@
 
 The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. Here we present Σ-Gravity ("Sigma-Gravity"), a phenomenological framework **motivated by teleparallel gravity concepts** that produces scale-dependent gravitational enhancement in extended, dynamically cold systems. The key ansatz is that organized rotational motion in galactic disks enables coherent gravitational effects that are suppressed in compact or kinematically hot systems. This coherence concept is analogous to phase alignment in lasers or Cooper pairs in superconductors, though the gravitational mechanism remains to be rigorously derived.
 
-The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.2 × 10⁻¹⁰ m/s² connects to cosmological scales. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—while winning head-to-head on 97 vs 74 galaxies. Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s vs McGaugh/GRAVITY data (Δ = −5.7 km/s at the solar circle). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. Preliminary estimates suggest the theory satisfies Solar System constraints due to suppression from both the h(g)→0 limit at high accelerations and reduced coherence in compact systems; rigorous PPN analysis remains future work.
+The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.2 × 10⁻¹⁰ m/s² connects to cosmological scales. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—with comparable per-galaxy performance (97 vs 74; p=0.07, not statistically significant). Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s, demonstrating consistency but not outperforming MOND (RMS = 2.1 km/s). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. Preliminary estimates suggest the theory satisfies Solar System constraints due to suppression from both the h(g)→0 limit at high accelerations and reduced coherence in compact systems; rigorous PPN analysis remains future work.
 
 Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity connects the critical acceleration to cosmological scales (g† ~ cH₀) up to a single fitted numerical coefficient. The framework is motivated by teleparallel gravity but currently operates as phenomenology awaiting rigorous field-theoretic completion. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherence-dependent gravitational effects that produce it.
 
@@ -29,9 +29,9 @@ An alternative interpretation holds that gravity itself behaves differently at g
 
 However, MOND faces significant challenges. It lacks a relativistic foundation, making gravitational lensing and cosmological predictions problematic. Relativistic extensions (TeVeS, BIMOND) introduce additional fields but face theoretical difficulties including superluminal propagation and instabilities. MOND also struggles with galaxy clusters, requiring either residual dark matter or modifications to the theory.
 
-### 1.3 Σ-Gravity: Coherent Torsion Enhancement
+### 1.3 Σ-Gravity: Coherence-Based Enhancement
 
-Here we develop Σ-Gravity ("Sigma-Gravity"), grounded in teleparallel gravity—an equivalent reformulation of General Relativity (GR) where the gravitational field is carried by torsion rather than curvature. While mathematically equivalent to GR for classical predictions, teleparallel gravity suggests a different physical picture where gravity emerges from the parallel transport properties of spacetime.
+Here we develop Σ-Gravity ("Sigma-Gravity"), motivated by (but not rigorously derived from) teleparallel gravity—an equivalent reformulation of General Relativity (GR) where the gravitational field is carried by torsion rather than curvature.
 
 **The central idea of Σ-Gravity:** In extended mass distributions with coherent motion—such as galactic disks with ordered circular rotation—the organized velocity field enables gravitational enhancement effects that are suppressed in compact or disordered systems. We parameterize this coherence dependence through the enhancement factor Σ, which gives the theory its name.
 
@@ -120,7 +120,7 @@ $$G_{\mu\nu} = \kappa \left( \Sigma \, T_{\mu\nu}^{(\text{matter})} + \Theta_{\m
 
 where $\Theta_{\mu\nu}$ arises from varying $\Sigma$ with respect to the metric. For the phenomenological Poisson equation above to emerge cleanly, $\Theta_{\mu\nu}$ must be negligible—an assumption we adopt but have not rigorously proven. Deriving the weak-field limit from first principles, including all contributions from $\delta\Sigma/\delta g_{\mu\nu}$, remains important future work.
 
-### 2.4 The Core Idea: Coherent Torsion Superposition
+### 2.4 The Core Ansatz: Coherence-Dependent Enhancement
 
 **This is the central physical insight of Σ-Gravity.** In the path integral formulation of gravity, different geometric configurations contribute to the gravitational amplitude. For a compact source like the Sun, the classical saddle-point configuration dominates completely—quantum corrections are suppressed by factors of $(\ell_{\text{Planck}}/r)^2 \approx 10^{-66}$, and torsion modes from different parts of the source add incoherently.
 
