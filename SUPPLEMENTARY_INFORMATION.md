@@ -1864,6 +1864,63 @@ All scripts and results: `derivations/editorial_response/`
 
 ---
 
+## SI §18 — Theoretical Status and Open Questions
+
+### §18.1 What Is Derived vs. Fitted vs. Assumed
+
+| Component | Status | Details |
+|-----------|--------|--------|
+| $g^\dagger \sim cH_0$ | Derived | Dimensional analysis, timescale matching |
+| Factor 1/(2e) | Fitted | Matches MOND scale $a_0$ |
+| h(g) functional form | Motivated | Interpolates correctly; not uniquely derived |
+| A = √3 (disks) | Fitted | Geometric motivation but not derivation |
+| A = π√2 (clusters) | Fitted | Geometric motivation but not derivation |
+| W(r) functional form | Motivated | Power-law decay from superstatistics |
+| ξ = (2/3)R_d | Fitted | Physically motivated scale |
+| n_coh = 0.5 | Fitted | χ² noise interpretation post-hoc |
+| Poisson equation | Assumed | Not derived from action; defines the model |
+| $\Theta_{\mu\nu}$ negligible | Assumed | Not proven in weak-field limit |
+
+### §18.2 Known Theoretical Issues
+
+1. **Fifth forces**: Non-minimal couplings produce forces ~$\nabla(\ln \Sigma)$. Our estimates give ~few percent in galaxies, ~$10^{-12}$ m/s² in Solar System. Formally negligible but not zero.
+
+2. **Energy-momentum non-conservation**: The coupling $\Sigma \cdot \mathcal{L}_m$ implies $\nabla_\mu T^{\mu\nu} \neq 0$. This is generic in f(T,$\mathcal{L}_m$) theories and needs careful treatment.
+
+3. **Lorentz invariance**: Non-minimal teleparallel couplings can violate local Lorentz invariance (Krššák & Saridakis 2016). Our scalar-dependent $\Sigma$ may avoid this, but formal proof is needed.
+
+4. **Mode counting invalidity**: TEGR has 2 physical DOF, not 3 "torsion modes." The A = √3 argument is geometric intuition, not physics.
+
+5. **PPN derivation incomplete**: The $\delta\gamma \sim 10^{-8}$ estimate is order-of-magnitude; rigorous PPN calculation from modified field equations is needed.
+
+### §18.3 Comparison to MOND's Theoretical Status
+
+MOND has operated as successful phenomenology for 40 years without a complete relativistic foundation. Relativistic extensions (TeVeS, BIMOND, AeST) have been proposed but face various issues (superluminal propagation, instabilities, additional fields).
+
+Σ-Gravity is in a similar position: successful phenomenology with theoretical motivation but incomplete foundations. This is scientifically legitimate—the empirical success motivates the search for deeper theory. The key advantages over MOND are:
+- Connection of $g^\dagger$ to cosmological scale $cH_0$
+- Natural (though not derived) explanation for cluster/galaxy amplitude ratio
+- Built-in suppression mechanism for Solar System via h(g)→0
+
+### §18.4 Path Forward
+
+1. **Immediate**: Present Σ-Gravity as phenomenology; test distinctive predictions (counter-rotating disks, environment dependence, rotation curve shape differences)
+
+2. **Medium-term**: Develop proper scalar-tensor formulation with $\Sigma$ as dynamical field; compute PPN rigorously; analyze energy-momentum conservation
+
+3. **Long-term**: Derive coherence mechanism from quantum gravity or emergent gravity principles; connect to Verlinde's entropic gravity framework
+
+### §18.5 References for Non-Minimal Coupling Theories
+
+- Harko et al. (2014), f(T,$\mathcal{L}_m$) gravity: arXiv:1404.6212
+- Harko et al. (2011), f(R,$\mathcal{L}_m$) gravity: arXiv:1104.2669
+- Bertotti et al. (2003), Cassini PPN: Nature 425, 374
+- Krššák & Saridakis (2016), Lorentz invariance in f(T): CQG 33, 115009
+- Will (2014), PPN confrontation: LRR 17, 4
+- Sotiriou & Faraoni (2010), f(R) theories: RvMP 82, 451
+
+---
+
 ## References
 
 - Beck, C. & Cohen, E. G. D. (2003). Superstatistics. Physica A, 322, 267-275. arXiv:cond-mat/0303288

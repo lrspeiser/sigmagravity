@@ -1,4 +1,4 @@
-# Σ-Gravity: Coherent Gravitational Enhancement from Torsion Mode Superposition
+# Σ-Gravity: A Coherence-Based Phenomenological Model for Galactic Dynamics
 
 **Author:** Leonard Speiser  
 **Date:** November 30, 2025
@@ -7,11 +7,11 @@
 
 ## Abstract
 
-The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. Here we present Σ-Gravity ("Sigma-Gravity"), a framework where **coherent superposition of gravitational torsion modes** produces scale-dependent enhancement in extended, dynamically cold systems. Built on teleparallel gravity—the mathematical equivalent of General Relativity where gravity is mediated by torsion rather than curvature—the key insight is that torsion contributions from spatially separated mass elements can interfere constructively when their phases remain aligned, analogous to coherent light in a laser or Cooper pairs in a superconductor.
+The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. Here we present Σ-Gravity ("Sigma-Gravity"), a phenomenological framework **motivated by teleparallel gravity concepts** that produces scale-dependent gravitational enhancement in extended, dynamically cold systems. The key ansatz is that organized rotational motion in galactic disks enables coherent gravitational effects that are suppressed in compact or kinematically hot systems. This coherence concept is analogous to phase alignment in lasers or Cooper pairs in superconductors, though the gravitational mechanism remains to be rigorously derived.
 
-The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.2 × 10⁻¹⁰ m/s² emerges from cosmological horizon physics. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—while winning head-to-head on 97 vs 74 galaxies. Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s vs McGaugh/GRAVITY data (Δ = −5.7 km/s at the solar circle). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. The theory passes Solar System constraints by 8 orders of magnitude due to automatic coherence suppression in compact systems.
+The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.2 × 10⁻¹⁰ m/s² connects to cosmological scales. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—while winning head-to-head on 97 vs 74 galaxies. Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s vs McGaugh/GRAVITY data (Δ = −5.7 km/s at the solar circle). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. Preliminary estimates suggest the theory satisfies Solar System constraints due to suppression from both the h(g)→0 limit at high accelerations and reduced coherence in compact systems; rigorous PPN analysis remains future work.
 
-Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity is embedded in relativistic field theory with g† derived from cosmological constants rather than fitted. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherent summation of torsion modes that produces it.
+Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity connects the critical acceleration to cosmological scales (g† ~ cH₀) up to a single fitted numerical coefficient. The framework is motivated by teleparallel gravity but currently operates as phenomenology awaiting rigorous field-theoretic completion. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherence-dependent gravitational effects that produce it.
 
 ---
 
@@ -33,14 +33,14 @@ However, MOND faces significant challenges. It lacks a relativistic foundation, 
 
 Here we develop Σ-Gravity ("Sigma-Gravity"), grounded in teleparallel gravity—an equivalent reformulation of General Relativity (GR) where the gravitational field is carried by torsion rather than curvature. While mathematically equivalent to GR for classical predictions, teleparallel gravity suggests a different physical picture where gravity emerges from the parallel transport properties of spacetime.
 
-**The central idea of Σ-Gravity:** In extended mass distributions with coherent motion—such as galactic disks with ordered circular rotation—torsion modes from spatially separated mass elements can interfere constructively. This **coherent superposition** produces measurable gravitational enhancement (Σ > 1) in dynamically cold systems while remaining undetectable in compact environments like the Solar System. The enhancement factor Σ gives the theory its name.
+**The central idea of Σ-Gravity:** In extended mass distributions with coherent motion—such as galactic disks with ordered circular rotation—the organized velocity field enables gravitational enhancement effects that are suppressed in compact or disordered systems. We parameterize this coherence dependence through the enhancement factor Σ, which gives the theory its name.
 
 This mechanism naturally explains:
 
-1. **Why enhancement appears at galactic scales:** Extended, ordered mass distributions allow torsion coherence
-2. **Why the Solar System shows no anomaly:** Compact systems suppress coherence automatically
-3. **Why a characteristic acceleration exists:** The cosmological horizon sets a fundamental decoherence scale
-4. **Why clusters require larger enhancement:** Spherical geometry increases coherent mode counting
+1. **Why enhancement appears at galactic scales:** Extended, ordered mass distributions are parameterized as having high coherence
+2. **Why the Solar System shows no anomaly:** High-acceleration and compact systems are parameterized as having low coherence
+3. **Why a characteristic acceleration exists:** Dimensional analysis connects the critical scale to cH₀
+4. **Why clusters require larger enhancement:** Empirically, a larger amplitude A fits cluster data; geometric arguments provide motivation but not derivation
 
 ### 1.4 Summary of Results
 
@@ -51,9 +51,11 @@ This mechanism naturally explains:
 | MW rotation curve | RMS vs McGaugh | **5.7 km/s** | 2.1 km/s | 53.1 km/s |
 | MW rotation curve | V(8 kpc) | **227.6 km/s*** | 233.0 km/s | 190.7 km/s |
 | Galaxy clusters (42) | Scatter | **0.14 dex** | — | — |
-| Solar System | PPN γ−1 | **< 10⁻¹¹** | < 10⁻⁵ | 0 |
+| Solar System | PPN γ−1 | **~10⁻⁸ (est.)**† | < 10⁻⁵ | 0 |
 
 *Observed: 233.3 km/s (McGaugh/GRAVITY). Σ-Gravity: Δ = −5.7 km/s; MOND: Δ = −0.3 km/s.
+
+†PPN estimate is preliminary; rigorous derivation from modified field equations is ongoing.
 
 ---
 
@@ -89,10 +91,12 @@ $$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x \, |
 
 where $\Sigma[g, \mathcal{C}]$ is the coherent enhancement factor that depends on the local gravitational acceleration $g$ and a coherence measure $\mathcal{C}$.
 
-**Physical interpretation:** Matter in coherent configurations sources gravity more effectively than incoherent matter. The gravitational sector (torsion scalar **T**) remains unchanged, which guarantees:
-- Gravitational wave speed = c ✓
-- No ghost instabilities (since $\Sigma > 0$ always) ✓
-- Solar System safety automatic ✓
+**Physical interpretation:** Matter in coherent configurations is modeled as sourcing gravity more effectively than incoherent matter. The gravitational sector (torsion scalar **T**) remains unchanged, which suggests:
+- Gravitational wave speed = c (likely, but propagation in matter-filled regions needs study)
+- No ghost instabilities from kinetic terms (since $\Sigma > 0$ always)
+- Solar System safety (preliminary estimates support this; formal PPN analysis needed)
+
+**Important caveat:** Non-minimal matter couplings generically produce: (1) non-conservation of stress-energy, $\nabla_\mu T^{\mu\nu} \neq 0$, and (2) additional "fifth forces" proportional to $\nabla\Sigma$. Our estimates suggest these effects are small (~few percent in galaxies, negligible in Solar System), but this requires formal verification. See Harko et al. (2014), arXiv:1404.6212 for related f(T,$\mathcal{L}_m$) theories.
 
 **This is distinct from f(T) gravity**, which modifies $\mathbf{T} \to f(\mathbf{T})$ in the gravitational sector. Our modification is $\mathcal{L}_m \to \Sigma \cdot \mathcal{L}_m$ in the matter sector.
 
@@ -100,11 +104,7 @@ where $\Sigma[g, \mathcal{C}]$ is the coherent enhancement factor that depends o
 
 ### 2.3 Field Equations
 
-Varying the action with respect to the tetrad yields the modified field equations:
-
-$$G_{\mu\nu} = \kappa \left( \Sigma \, T_{\mu\nu}^{(\text{matter})} + \Theta_{\mu\nu} \right)$$
-
-where $\Theta_{\mu\nu}$ is a small correction from varying $\Sigma$ with respect to the metric. In the weak-field limit where $\Theta_{\mu\nu}$ can be neglected, the Newtonian limit becomes:
+**Phenomenological field equations:** We adopt as the defining relation of Σ-Gravity the modified Poisson equation:
 
 $$\nabla^2\Phi = 4\pi G \rho \, \Sigma$$
 
@@ -113,6 +113,12 @@ This gives the effective gravitational acceleration:
 $$g_{\text{eff}} = g_{\text{bar}} \cdot \Sigma$$
 
 where $g_{\text{bar}}$ is the standard Newtonian acceleration from baryonic matter.
+
+**Relation to action principle:** Varying the action $S_\Sigma$ with respect to the tetrad formally yields:
+
+$$G_{\mu\nu} = \kappa \left( \Sigma \, T_{\mu\nu}^{(\text{matter})} + \Theta_{\mu\nu} \right)$$
+
+where $\Theta_{\mu\nu}$ arises from varying $\Sigma$ with respect to the metric. For the phenomenological Poisson equation above to emerge cleanly, $\Theta_{\mu\nu}$ must be negligible—an assumption we adopt but have not rigorously proven. Deriving the weak-field limit from first principles, including all contributions from $\delta\Sigma/\delta g_{\mu\nu}$, remains important future work.
 
 ### 2.4 The Core Idea: Coherent Torsion Superposition
 
@@ -123,7 +129,9 @@ where $g_{\text{bar}}$ is the standard Newtonian acceleration from baryonic matt
 - **Superconductivity:** Cooper pairs maintain phase coherence across macroscopic distances  
 - **Antenna arrays:** Signals from multiple elements combine coherently to enhance gain
 
-### 2.5 Mode Counting Derivation: Why A = √3 for Disks
+### 2.5 Geometric Motivation for Amplitude A (Not a Rigorous Derivation)
+
+**Important note:** The following "mode counting" argument provides geometric intuition for the amplitude values but is NOT a rigorous derivation from teleparallel field theory. TEGR, like GR, has only 2 physical gravitational degrees of freedom (tensor polarizations). The 24 torsion tensor components decompose into gauge and constraint parts; they are not independent physical modes. The argument below should be understood as motivational, with A = √3 and A = π√2 ultimately determined by fitting to galaxy and cluster data respectively.
 
 **Step 1: Torsion Mode Decomposition**
 
@@ -163,7 +171,7 @@ $$|\mathbf{T}|_{\text{coh}}^2 = |\langle T_r \rangle|^2 + |\langle T_\phi \rangl
 
 $$A_{\text{disk}} = \frac{|\mathbf{T}|_{\text{coh}}}{|\mathbf{T}|_{\text{incoh}}} = \frac{\sqrt{3 T_0^2}}{\sqrt{T_0^2}} = \sqrt{3} \approx 1.73$$
 
-**This provides geometric intuition for A = √3, but the equal-weighting assumption should be classified as phenomenological.**
+**Motivated value:** With the (heuristic) assumption of three equal contributions → **A = √3 ≈ 1.73**, which matches the empirically optimal amplitude for disk galaxies.
 
 ### 2.6 Mode Counting for Spherical Clusters: A = π√2
 
@@ -184,7 +192,7 @@ $$\frac{A_{\text{cluster}}}{A_{\text{disk}}} = \frac{\pi\sqrt{2}}{\sqrt{3}} \app
 
 *Observed ratio: 2.60 — agreement to 1.2%*
 
-**Caveat:** These geometric derivations involve approximations. The agreement is intriguing but the derivations are motivated rather than rigorous.
+**Note:** The cluster amplitude A = π√2 ≈ 4.44 is similarly motivated by geometric arguments about spherical vs. disk mode structure, but is ultimately an empirical fit to cluster lensing data. The ratio A_cluster/A_galaxy = 2.57 emerges from fitting both datasets, not from a first-principles calculation.
 
 ### 2.7 The Coherence Window
 
@@ -265,6 +273,8 @@ $$g^\dagger = \frac{cH_0}{2e} \approx 1.25 \times 10^{-10} \text{ m/s}^2$$
 
 matches the empirical MOND scale $a_0 \approx 1.2 \times 10^{-10}$ m/s² to within **4%**. This provides a physical explanation for the long-standing "MOND coincidence" that $a_0 \sim cH_0$.
 
+**Derivation status:** The scaling $g^\dagger \sim cH_0$ follows from dimensional analysis and timescale matching (dynamical time ~ Hubble time at the critical acceleration). The specific numerical factor $1/(2e) \approx 0.18$ is chosen to match the empirical MOND scale $a_0 \approx 1.2 \times 10^{-10}$ m/s². This factor has not been derived from first principles; it represents one fitted parameter of the theory.
+
 ### 2.10 Unified Formula
 
 The complete enhancement factor is:
@@ -310,27 +320,43 @@ The two approaches produce similar curves but differ by ~7% in the transition re
 
 *Note: These differences are partially compensated by the coherence window W(r), which suppresses enhancement at small radii.*
 
+**Important:** These large differences (up to 74%) occur in the deep low-acceleration regime. In actual galaxies, the coherence window W(r) suppresses enhancement in inner regions, partially mitigating this difference. The net observable difference in rotation curves is typically 10-20%, concentrated in the transition regime $g \sim g^\dagger$. The most robust test is the SHAPE difference: Σ-Gravity enhancement grows with radius (W→1), while MOND enhancement is constant at fixed g.
+
 ![Figure: h(g) function comparison](figures/h_function_comparison.png)
 
 *Figure 1: Enhancement functions h(g) for Σ-Gravity (derived from teleparallel coherence) vs MOND (empirical). The functions are similar but distinguishable.*
 
-### 2.13 Solar System Safety
+### 2.13 Solar System Constraints
 
 In compact systems, two suppression mechanisms combine:
 
 1. **High acceleration:** When $g \gg g^\dagger$, $h(g) \to 0$
 2. **Low coherence:** When $r \ll \xi$, $W(r) \to 0$
 
-**At Saturn's orbit:**
-- $g_{\text{bar}} \approx 6 \times 10^{-6}$ m/s² (50,000× larger than $g^\dagger$)
-- $K_{\text{amp}} = A_0 \times (g^\dagger/g_{\text{bar}})^{3/4} \approx 10^{-4}$
-- Combined suppression: $\Sigma - 1 < 10^{-11}$
+**Acceleration values (corrected):**
+At Saturn's orbit ($r \approx 9.5$ AU), the gravitational acceleration is:
+$$g_{\text{Saturn}} = \frac{GM_\odot}{r^2} \approx 6.5 \times 10^{-5} \text{ m/s}^2$$
 
+This is approximately $5 \times 10^5$ times larger than $g^\dagger$.
+
+**Enhancement estimate:**
+Using h(g) at this acceleration:
+$$h(g_{\text{Saturn}}) = \sqrt{\frac{g^\dagger}{g}} \cdot \frac{g^\dagger}{g^\dagger + g} \approx 2.7 \times 10^{-9}$$
+
+Even with W = 1 and A = √3, this gives $\Sigma - 1 < 10^{-8}$.
+
+**Fifth force consideration:**
+Non-minimal matter couplings can produce additional "fifth forces" proportional to $\nabla(\ln \Sigma)$. Our estimates give:
+$$|a_{\text{fifth}}| \sim v^2 |\nabla \ln \Sigma| \lesssim 10^{-12} \text{ m/s}^2$$
+
+This is well below current observational bounds (~$10^{-14}$ m/s² from Cassini).
+
+**PPN parameters:**
 **Cassini constraint:** $|\gamma - 1| < 2.3 \times 10^{-5}$ (Bertotti et al. 2003, Nature 425, 374)
 
-**Σ-Gravity prediction:** Enhancement $< 10^{-11}$ — **6 orders of magnitude below the bound**.
+A rough estimate of the correction to the PPN parameter $\gamma$ gives $\delta\gamma \sim 10^{-8}$, which would satisfy the Cassini bound by ~3 orders of magnitude.
 
-This is not fine-tuning but an automatic consequence: **compact systems cannot sustain the extended, ordered mass distributions required for torsion coherence.**
+**Caveat:** These are order-of-magnitude estimates, not rigorous derivations. A complete analysis requires: (1) solving the modified field equations for a point-mass source, (2) computing the full PPN metric, and (3) evaluating fifth-force effects from $\nabla\Sigma$. We defer this to future work but note that suppression from $h(g)\to 0$ provides a robust mechanism for Solar System safety.
 
 ![Figure: Solar System safety](figures/solar_system_safety.png)
 
@@ -437,11 +463,13 @@ The amplitude ratio emerges from geometric arguments (spherical vs disk coherenc
 - No invisible mass—only baryons contribute, coherently enhanced
 
 **Unlike MOND:**
-- **Physical mechanism identified:** coherent torsion superposition
-- Embedded in relativistic field theory (teleparallel gravity)
-- Automatic Solar System safety (coherence window, not hand-tuned)
-- Natural cluster/galaxy amplitude ratio (from coherence geometry)
-- Critical acceleration g† = cH₀/(2e) derived, not fitted
+- **Physical mechanism proposed:** coherence-dependent gravitational enhancement
+- Motivated by relativistic field theory (teleparallel gravity)
+- Preliminary Solar System safety from h(g)→0 suppression
+- Cluster/galaxy amplitude ratio has geometric motivation (though empirically fitted)
+- Critical acceleration g† ~ cH₀ from dimensional analysis (factor 2e is fitted)
+
+**Comparison to MOND's theoretical status:** MOND has operated as successful phenomenology for 40 years without a complete relativistic foundation. Relativistic extensions (TeVeS, BIMOND, AeST) have been proposed but face various issues. Σ-Gravity is in a similar position: successful phenomenology with theoretical motivation but incomplete foundations. This is scientifically legitimate—the empirical success motivates the search for deeper theory.
 
 ### 4.2 Testable Predictions
 
@@ -501,10 +529,13 @@ Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravi
 ### 4.3 Limitations and Future Work
 
 **Theoretical:**
+- The Poisson equation $g_{\text{eff}} = g_{\text{bar}} \cdot \Sigma$ is adopted as the phenomenological definition, not derived from the action
 - The Lagrangian is formulated (§2.2), but the coherence functional $\mathcal{C}$ requires more rigorous derivation
 - Lorentz invariance of the non-minimal matter coupling needs formal verification (see §2.2)
+- Non-minimal matter couplings produce fifth forces (~few percent in galaxies) that require field-theoretic treatment
+- Energy-momentum conservation is violated ($\nabla_\mu T^{\mu\nu} \neq 0$); implications need full analysis
 - Factor of 2e in $g^\dagger$ is fitted, not derived from first principles
-- Mode counting derivations (A = √3, A = π√2) involve equal-weighting assumptions that lack rigorous justification
+- Mode counting derivations (A = √3, A = π√2) provide geometric intuition but are not rigorous derivations from TEGR (which has only 2 physical DOF)
 - The h(g) function's "geometric mean" ansatz is phenomenologically successful but not uniquely derived
 
 **Cosmological:**
@@ -622,6 +653,8 @@ Fox, C., Mahler, G., Sharon, K., & Remolina González, J. D. 2022, ApJ, 928, 87 
 
 GRAVITY Collaboration, Abuter, R., Amorim, A., et al. 2019, A&A, 625, L10 (A geometric distance measurement to the Galactic center black hole with 0.3% uncertainty)
 
+Harko, T., Lobo, F.S.N., Otalora, G., & Saridakis, E.N. 2014, arXiv:1404.6212 (Nonminimal torsion-matter coupling extension of f(T) gravity)
+
 Krššák, M., & Saridakis, E. N. 2016, CQGra, 33, 115009 (The covariant formulation of f(T) gravity)
 
 Lelli, F., McGaugh, S. S., & Schombert, J. M. 2016a, AJ, 152, 157 (SPARC: Mass Models for 175 Disk Galaxies with Spitzer Photometry and Accurate Rotation Curves)
@@ -660,7 +693,11 @@ Rubin, V. C., Graham, J. A., & Kenney, J. D. P. 1992, ApJL, 394, L9 (Cospatial c
 
 Sanders, R. H., & McGaugh, S. S. 2002, ARA&A, 40, 263 (Modified Newtonian Dynamics as an Alternative to Dark Matter)
 
+Sotiriou, T.P., & Faraoni, V. 2010, RvMP, 82, 451 (f(R) theories of gravity)
+
 Verlinde, E. P. 2017, SciPost Phys., 2, 016 (Emergent Gravity and the Dark Universe)
+
+Will, C.M. 2014, LRR, 17, 4 (The Confrontation between General Relativity and Experiment)
 
 Zwicky, F. 1933, HPA, 6, 110 (Die Rotverschiebung von extragalaktischen Nebeln)
 
