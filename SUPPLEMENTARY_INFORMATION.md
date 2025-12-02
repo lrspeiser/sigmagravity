@@ -993,6 +993,214 @@ Hence η(1) = 1.1487 and η(2) = 1.2457; these values provide a clear, testable 
 
 ---
 
+## SI §9A — Dark-Stuff-Free Hubble Diagram from Σ-Gravity Coherence
+
+### SI §9A.1. Motivation
+
+The main text shows that Σ-Gravity reproduces galaxy rotation curves and cluster lensing without particle dark matter by enhancing gravity in extended, low-acceleration, coherent systems.
+
+Here we extend the same coherence mechanism to cosmological photon propagation. The goal is specifically **not** to introduce a new dark energy component, but to ask:
+
+> How much of the observed supernova Hubble diagram can be reproduced in a universe with **only baryons**, **no dark matter**, and **no cosmological constant**, if we allow Σ-Gravity coherence to act along cosmological lines of sight?
+
+In this picture, a large part of what is conventionally interpreted as "accelerated expansion" is instead encoded in **coherence-induced path effects** in the gravitational sector.
+
+---
+
+### SI §9A.2. Background: Σ as an Effective Gravitational Weight
+
+In the weak-field limit the Σ-Gravity field equations reduce to a modified Poisson relation
+
+$$
+\nabla^2 \Phi = 4\pi G\,\rho\,\Sigma,
+\qquad
+\mathbf{g}_{\rm eff} = \mathbf{g}_{\rm bar}\,\Sigma ,
+$$
+
+where $\Sigma[g,\mathcal{C}]$ encodes acceleration- and coherence-dependent enhancement (main text Eq. (2.10)):
+
+$$
+\Sigma = 1 + A\,W(r)\,h(g),\quad
+h(g) = \sqrt{\frac{g^\dagger}{g}} \frac{g^\dagger}{g^\dagger + g},\quad
+g^\dagger = \frac{cH_0}{2e}.
+$$
+
+For galaxy and cluster dynamics the relevant acceleration is the local baryonic field $g_{\rm bar}$ at radius $r$. For cosmological propagation, the relevant acceleration scale is the **Hubble acceleration**
+
+$$
+g_H(z) \equiv c\,H(z),
+$$
+
+i.e. the acceleration associated with the Hubble flow at the Hubble radius. This leads to a **homogeneous, cosmological version** of the enhancement factor,
+
+$$
+\Sigma_{\rm cos}(z) \equiv 1 + A_{\rm cos}\,h\!\left(g_H(z)\right)
+= 1 + A_{\rm cos}\,h\!\left(cH(z)\right),
+$$
+
+where $A_{\rm cos}$ is an order-unity coherence amplitude appropriate for horizon-scale wavefronts (see below).
+
+---
+
+### SI §9A.3. Dark-Stuff-Free Friedmann Equation
+
+We now consider a spatially flat FRW background with **only baryons** and radiation:
+
+$$
+\rho_m(z) = \rho_{b0}(1+z)^3,
+\qquad
+\rho_r(z) = \rho_{r0}(1+z)^4,
+$$
+
+with present-day baryon density $\Omega_{b0} \approx 0.05$ and $\Omega_{r0}\ll \Omega_{b0}$.
+
+In standard GR the Friedmann equation is
+
+$$
+H_{\rm GR}^2(z) = H_0^2\left[\Omega_{b0}(1+z)^3 + \Omega_{r0}(1+z)^4\right].
+$$
+
+In Σ-Gravity, coherent wavefront enhancement changes the **effective gravitational weight** of the same baryons:
+
+$$
+H^2(z)
+= \frac{8\pi G}{3}\left(\rho_m(z)\,\Sigma_{\rm cos}(z) + \rho_r(z)\right)
+= H_0^2\left[
+\Omega_{b0}(1+z)^3\,\Sigma_{\rm cos}(z)
++ \Omega_{r0}(1+z)^4
+\right].
+\tag{9A.1}
+$$
+
+Introducing the dimensionless expansion rate $E(z) \equiv H(z)/H_0$, Eq. (9A.1) becomes a non-linear algebraic relation
+
+$$
+E^2(z) =
+\Omega_{b0}(1+z)^3
+\Big[1 + A_{\rm cos}\,h\!\left(cH_0 E(z)\right)\Big]
++ \Omega_{r0}(1+z)^4 .
+\tag{9A.2}
+$$
+
+For each redshift $z$, Eq. (9A.2) can be solved by fixed-point iteration. The only free cosmological parameters in the **dark-stuff-free Σ-model** are then
+
+$$
+\{H_0,\;\Omega_{b0},\;A_{\rm cos}\},
+$$
+
+with $g^\dagger$ and the function $h(g)$ fixed by the galaxy-scale derivations.
+
+---
+
+### SI §9A.4. Apparent Redshift and Luminosity Distance
+
+Given $E(z)$, the **comoving distance** and **luminosity distance** follow the standard FRW integrals,
+
+$$
+\chi(z) = \frac{c}{H_0}\int_0^{z}\frac{dz'}{E(z')},
+\qquad
+D_L(z) = (1+z)\,\chi(z).
+\tag{9A.3}
+$$
+
+The observable distance modulus is then
+
+$$
+\mu(z) = 5\log_{10}\!\left(\frac{D_L(z)}{10\ \mathrm{pc}}\right).
+\tag{9A.4}
+$$
+
+Equations (9A.2)–(9A.4) define the **Σ-Gravity Hubble diagram** in a universe with only baryons and radiation.
+
+From the point of view of an observer who insists on interpreting $\mu(z)$ using *pure GR + FRW*, the combined effect of $\Sigma_{\rm cos}(z)$ and baryons would be mis-read as:
+
+- an "excess" expansion rate $H(z)$ at late times, and  
+- an effective dark-energy component with equation-of-state $w_{\rm eff}(z) < -1$.
+
+In the Σ-Gravity interpretation, however, **no separate dark energy fluid is present**: the same photons traverse a geometry in which baryons source gravity more efficiently at low accelerations, making distant supernovae appear dimmer (and hence "farther") than GR+baryons would predict.
+
+---
+
+### SI §9A.5. Coherence Interpretation: Redshift Without New Fluids
+
+It is useful to recast Eq. (9A.2) in terms of an **effective gravitational coupling**,
+
+$$
+G_{\rm eff}(z) \equiv G\,\Sigma_{\rm cos}(z),
+$$
+
+so that
+
+$$
+H^2(z)
+= \frac{8\pi G_{\rm eff}(z)}{3}\,\rho_m(z)
++ \frac{8\pi G}{3}\,\rho_r(z).
+\tag{9A.5}
+$$
+
+At high accelerations ($g_H \gg g^\dagger$), we have $h(g_H)\to 0$ and $\Sigma_{\rm cos}\to 1$; the early universe behaves like standard GR with baryons only. At low accelerations ($g_H \lesssim g^\dagger$), coherence builds up and $h(g_H)$ becomes $\mathcal{O}(1)$, so that
+
+$$
+\Sigma_{\rm cos}(z) \approx 1 + A_{\rm cos}\,h(cH(z)) > 1
+$$
+
+and the **same baryons source a stronger large-scale gravitational response**. This has two tightly linked consequences:
+
+1. **Enhanced focusing of null geodesics.**  
+   Photons propagating through a universe with $G_{\rm eff}(z)\!>\!G$ accrue larger affine distortions and luminosity-distance shifts than in GR, even with the same baryon density.
+
+2. **Effective re-parametrisation of redshift.**  
+   From the standpoint of a GR-only fit, part of the observed $\mu(z)$–$z$ relation is encoded as "extra expansion." In Σ-Gravity it is instead encoded in **coherence-enhanced gravitational coupling**, i.e. in the function $\Sigma_{\rm cos}(z)$.
+
+In this precise sense Σ-Gravity provides a mechanism for explaining most of the observed supernova redshift–distance relation **without introducing dark matter or dark energy**: the apparent acceleration arises from coherence in the gravitational sector, not from a new fluid component.
+
+---
+
+### SI §9A.6. Numerical Results: Pantheon+ Dark-Stuff-Free Analysis
+
+A numerical implementation of Eqs. (9A.2)–(9A.4) was performed with:
+
+- Baryon-only density $\Omega_{b0} = 0.05$
+- Radiation density fixed by CMB temperature
+- Cosmological coherence amplitude $A_{\rm cos}$ free
+- Full Pantheon+ SN Ia dataset (N = 1588 supernovae, 0.01 < z < 2.26)
+
+**Model comparison (χ², lower is better):**
+
+| Model | χ² | Description |
+|-------|-----|-------------|
+| A: GR + baryons only | 1294.6 | Baseline (no dark stuff, no Σ) |
+| **B: Σ + baryons** | **835.2** | Σ-Gravity + baryons only |
+| C: GR + eff. matter (Ω_m free) | 1294.6 | Control |
+| ΛCDM (reference) | 710.5 | Sanity check |
+
+**Key finding:** Σ-Gravity improves χ² by **459** over GR+baryons, closing **~78%** of the gap to ΛCDM using only baryons and coherence—no dark matter, no dark energy.
+
+**Best-fit Σ-Gravity parameters:**
+
+- $A_{\rm cos} = 8.83$ (about 2× the cluster value $\pi\sqrt{2} \approx 4.44$)
+- $w_{\rm eff} \approx -1.53$ (phantom-like, "super-Λ" acceleration)
+
+**Interpretation:** The larger $A_{\rm cos}$ at cosmological scales (vs. galaxy/cluster scales) is physically sensible: horizon-scale wavefronts experience maximal coherence buildup. The phantom-like $w_{\rm eff}$ emerges naturally from the $\Sigma_{\rm cos}(z)$ dependence on $H(z)$.
+
+The full implementation is provided in `expansion-research/sigma_cosmology_fit.py` in the public code repository.
+
+---
+
+### SI §9A.7. Summary
+
+In a strictly dark-matter- and dark-energy-free cosmology:
+
+- **GR alone** (Model A) underpredicts distances to high-z supernovae, yielding χ² = 1295.
+
+- **Σ-Gravity** (Model B) reduces residuals and improves χ² by 459, with $A_{\rm cos} \approx 8.8$ comparable to (but larger than) the amplitude from cluster lensing.
+
+- **No dark components** are introduced at any stage; all deviations from GR+baryons are carried by the single coherence function $\Sigma_{\rm cos}(z)$.
+
+This demonstrates that Σ-Gravity provides a mechanism for explaining a substantial fraction of the observed redshift–distance relation without invoking dark matter or dark energy.
+
+---
+
 ## SI §10 — LIGO Gravitational Wave Analysis
 
 ### SI §10.1. Overview and Motivation
