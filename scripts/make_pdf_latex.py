@@ -63,14 +63,35 @@ def generate_pdf_latex(md_path: Path, pdf_path: Path):
     print(f"Output: {pdf_path}")
     print("\nThis may take 1-2 minutes for first run (LaTeX packages download)...")
     
+    # LaTeX header to constrain images and improve layout
+    latex_header = r'''
+\usepackage{float}
+\usepackage[export]{adjustbox}
+% Redefine includegraphics to enforce max height while keeping full width
+\let\oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{%
+  \oldincludegraphics[#1,keepaspectratio,max height=0.42\textheight]{#2}%
+}
+% Allow floats to break if needed
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.85}
+'''
+    
+    # Write header to temp file
+    header_file = pdf_path.parent / '_latex_header.tex'
+    header_file.write_text(latex_header, encoding='utf-8')
+    
     # Pandoc options for academic papers
     cmd = [
         'pandoc',
         str(md_path),
         '-o', str(pdf_path),
         '--pdf-engine=xelatex',  # XeLaTeX handles Unicode (Σ, †, ℓ, etc.)
-        '-V', 'geometry:margin=20mm',
+        '-V', 'geometry:top=20mm,left=20mm,right=20mm,bottom=30mm',  # Extra bottom margin
         '-V', 'fontsize=11pt',
+        '-H', str(header_file),  # Include header for image sizing
     ]
     
     try:
@@ -104,6 +125,10 @@ def generate_pdf_latex(md_path: Path, pdf_path: Path):
     except Exception as e:
         print(f"\n[ERROR] Unexpected error: {e}")
         return False
+    finally:
+        # Clean up temp header file
+        if header_file.exists():
+            header_file.unlink()
 
 def main():
     parser = argparse.ArgumentParser(

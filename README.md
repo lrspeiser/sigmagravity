@@ -224,7 +224,7 @@ The exponent $n_{\text{coh}} = k/2$ is a **rigorous derivation** from Gamma-expo
 
 $$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{0.5}$$
 
-![Figure: Coherence window](figures/coherence_window.png)
+![Figure: Coherence window](figures/coherence_window.png){width=100%}
 
 *Figure 3: Left: Coherence window W(r) for different disk scale lengths. Right: Total enhancement Σ(r) as a function of radius at various accelerations, showing how coherence builds with radius.*
 
@@ -322,7 +322,7 @@ The two approaches produce similar curves but differ by ~7% in the transition re
 
 **Important:** These large differences (up to 74%) occur in the deep low-acceleration regime. In actual galaxies, the coherence window W(r) suppresses enhancement in inner regions, partially mitigating this difference. The net observable difference in rotation curves is typically 10-20%, concentrated in the transition regime $g \sim g^\dagger$. The most robust test is the SHAPE difference: Σ-Gravity enhancement grows with radius (W→1), while MOND enhancement is constant at fixed g.
 
-![Figure: h(g) function comparison](figures/h_function_comparison.png)
+![Figure: h(g) function comparison](figures/h_function_comparison.png){width=100%}
 
 *Figure 1: Enhancement functions h(g) for Σ-Gravity (derived from teleparallel coherence) vs MOND (empirical). The functions are similar but distinguishable.*
 
@@ -358,7 +358,7 @@ A rough estimate of the correction to the PPN parameter $\gamma$ gives $\delta\g
 
 **Caveat:** These are order-of-magnitude estimates, not rigorous derivations. A complete analysis requires: (1) solving the modified field equations for a point-mass source, (2) computing the full PPN metric, and (3) evaluating fifth-force effects from $\nabla\Sigma$. We defer this to future work but note that suppression from $h(g)\to 0$ provides a robust mechanism for Solar System safety.
 
-![Figure: Solar System safety](figures/solar_system_safety.png)
+![Figure: Solar System safety](figures/solar_system_safety.png){width=100%}
 
 *Figure 2: Enhancement (Σ-1) as a function of distance from the Sun. At planetary scales, the enhancement is < 10⁻¹⁴, far below observational bounds.*
 
@@ -386,11 +386,11 @@ We test the framework on the SPARC database (Lelli+ 2016) containing 175 late-ty
 
 Both theories achieve comparable overall scatter. Σ-Gravity wins on more individual galaxies (97 vs 74) when comparing per-galaxy RAR residuals. *Statistical note:* A binomial test gives p ≈ 0.07 (two-tailed), indicating this margin is suggestive but not statistically significant at conventional thresholds (p < 0.05).
 
-![Figure: RAR plot](figures/rar_derived_formula.png)
+![Figure: RAR plot](figures/rar_derived_formula.png){width=100%}
 
 *Figure 4: Radial Acceleration Relation for SPARC galaxies using derived formula. Gray points: observed accelerations. Blue line: Σ-Gravity prediction with A = √3. Red dashed: MOND.*
 
-![Figure: Rotation curve gallery](figures/rc_gallery_derived.png)
+![Figure: Rotation curve gallery](figures/rc_gallery_derived.png){width=100%}
 
 *Figure 5: Rotation curves for six representative SPARC galaxies selected for RAR scatter near the mean (0.100 dex). Black points: observed data. Green dashed: baryonic (GR). Blue solid: Σ-Gravity. Red dotted: MOND.*
 
@@ -411,7 +411,7 @@ We test the derived formula against the Milky Way rotation curve using McGaugh/G
 
 **Comparison note:** MOND (RMS = 2.1 km/s) and NFW dark matter (RMS = 2.8 km/s) achieve better fits than Σ-Gravity (RMS = 5.7 km/s). This is expected: McGaugh's baryonic model was developed in a MOND context. Σ-Gravity's result demonstrates consistency with MW kinematics using zero MW-specific tuning, but does not outperform existing models.
 
-![Figure: MW rotation curve](figures/mw_comprehensive_comparison.png)
+![Figure: MW rotation curve](figures/mw_comprehensive_comparison.png){width=100%}
 
 *Figure 4b: Milky Way rotation curve comparison. Left: McGaugh/GRAVITY observed (black) vs model predictions. Right: Residuals. Σ-Gravity (blue) achieves RMS = 5.7 km/s using derived parameters (A=√3, g†=cH₀/2e). Baryonic model: McGaugh M* = 6.16×10¹⁰ M☉.*
 
@@ -431,7 +431,7 @@ We test Σ-Gravity on 42 strong lensing clusters from Fox+ (2022, ApJ 928, 87), 
 
 The median ratio of 0.79 indicates slight underprediction, consistent with conservative f_baryon = 0.15. Using f_baryon = 0.25 (accounting for BCG stellar mass) yields median ratio ≈ 0.96. The 0.14 dex scatter is comparable to the 0.10 dex scatter achieved on SPARC galaxies.
 
-![Figure: Fox+2022 cluster validation](figures/cluster_fox2022_validation.png)
+![Figure: Fox+2022 cluster validation](figures/cluster_fox2022_validation.png){width=100%}
 
 *Figure 6: Σ-Gravity cluster predictions vs Fox+ 2022 strong lensing masses. Left: Predicted vs observed mass at 200 kpc (N=42). Middle: Ratio vs redshift. Right: Distribution of log(M_Σ/MSL) with scatter = 0.14 dex.*
 
@@ -447,7 +447,9 @@ The median ratio of 0.79 indicates slight underprediction, consistent with conse
 
 The amplitude ratio emerges from geometric arguments (spherical vs disk coherence geometry) and matches observation to ~1%. However, this agreement should be treated with caution pending more rigorous derivation.
 
-![Figure: Amplitude comparison](figures/amplitude_comparison.png)
+\newpage
+
+![Figure: Amplitude comparison](figures/amplitude_comparison.png){width=100%}
 
 *Figure 7: Derived vs observed amplitudes. Galaxy amplitude √3 and cluster amplitude π√2 emerge from coherence geometry.*
 

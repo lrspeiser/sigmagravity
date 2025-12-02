@@ -325,13 +325,13 @@ def generate_coherence_window_figure(output_dir):
     ax.set_xlabel('Radius r [kpc]')
     ax.set_ylabel(r'$\Sigma = g_{\rm eff}/g_{\rm bar}$')
     ax.set_title(r'Total Enhancement ($R_d$ = 3 kpc)')
-    ax.legend(fontsize=8)
+    ax.legend(fontsize=8, loc='upper right')
     ax.grid(True, alpha=0.3)
     ax.set_xlim(0, 30)
     
     plt.tight_layout()
     outpath = output_dir / 'coherence_window.png'
-    plt.savefig(outpath)
+    plt.savefig(outpath, bbox_inches='tight', dpi=150)
     plt.close()
     print(f"  Saved: {outpath}")
 
@@ -453,9 +453,9 @@ def generate_solar_system_figure(output_dir):
     ax.legend(loc='upper right')
     ax.grid(True, alpha=0.3)
     
-    # Galactic scale annotation
-    ax.axvline(x=1e4/AU_to_kpc, color='green', linestyle='-', alpha=0.5)
-    ax.text(1e4/AU_to_kpc, 1e-3, 'Galaxy scale', rotation=90, va='top', ha='right', fontsize=8, color='green')
+    # Galactic scale annotation (at ~10,000 AU, approaching galaxy scales)
+    ax.axvline(x=1e4, color='green', linestyle='-', alpha=0.5)
+    ax.text(1.2e4, 1e-4, 'Galaxy\nscale', va='center', ha='left', fontsize=8, color='green')
     
     plt.tight_layout()
     outpath = output_dir / 'solar_system_safety.png'
