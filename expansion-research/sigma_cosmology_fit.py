@@ -314,15 +314,15 @@ def chi_squared_lcdm(params, z_data, mu_data, mu_err):
 
 
 # =============================================================================
-# Physical Constants for Dark-Stuff-Free Analysis
+# Physical Constants for Baryons-Only Analysis
 # =============================================================================
 
 # Baryon density from Planck: Ω_b h² ≈ 0.0224, with h ≈ 0.67 → Ω_b ≈ 0.05
-OMEGA_BARYON = 0.05  # The ONLY matter in a truly dark-stuff-free universe
+OMEGA_BARYON = 0.05  # The ONLY matter in a truly baryons-only universe
 
 
 # =============================================================================
-# Chi-Squared for Dark-Stuff-Free Models
+# Chi-Squared for Baryons-Only Models
 # =============================================================================
 
 def chi_squared_gr_baryons_only(params, z_data, mu_data, mu_err):
@@ -408,7 +408,7 @@ def mu_matter_only_vectorized(z_array, Omega_m, H0, M=0.0):
 
 
 # =============================================================================
-# Fitting Functions - Dark-Stuff-Free Models
+# Fitting Functions - Baryons-Only Models
 # =============================================================================
 
 def fit_gr_baryons_only(z_data, mu_data, mu_err):
@@ -611,12 +611,12 @@ def compute_effective_w(z_array, Omega_m0, A_cos, H0):
 
 
 # =============================================================================
-# Plotting - Dark-Stuff-Free Analysis
+# Plotting - Baryons-Only Analysis
 # =============================================================================
 
-def plot_dark_stuff_free(z_data, mu_data, mu_err, gr_baryons, sigma_baryons, gr_eff_matter, lcdm_ref):
+def plot_baryons_only(z_data, mu_data, mu_err, gr_baryons, sigma_baryons, gr_eff_matter, lcdm_ref):
     """
-    Create comparison plots for dark-stuff-free models.
+    Create comparison plots for baryons-only models.
     """
     fig, axes = plt.subplots(2, 2, figsize=(14, 11))
     
@@ -644,7 +644,7 @@ def plot_dark_stuff_free(z_data, mu_data, mu_err, gr_baryons, sigma_baryons, gr_
     ax1.plot(z_fine, mu_ref, 'r--', lw=1.5, alpha=0.7, label=f'Ref: ΛCDM', zorder=2)
     ax1.set_xlabel('Redshift z', fontsize=12)
     ax1.set_ylabel('Distance modulus μ', fontsize=12)
-    ax1.set_title('Hubble Diagram: Dark-Stuff-Free Models', fontsize=13)
+    ax1.set_title('Hubble Diagram: Baryons-Only Models', fontsize=13)
     ax1.legend(loc='lower right', fontsize=9)
     ax1.set_xscale('log')
     
@@ -707,7 +707,7 @@ def plot_dark_stuff_free(z_data, mu_data, mu_err, gr_baryons, sigma_baryons, gr_
     plt.tight_layout()
     
     output_dir = os.path.dirname(os.path.abspath(__file__))
-    output_path = os.path.join(output_dir, 'sigma_cosmology_dark_stuff_free.png')
+    output_path = os.path.join(output_dir, 'sigma_cosmology_baryons_only.png')
     plt.savefig(output_path, dpi=150)
     print(f"\nPlot saved to: {output_path}")
     
@@ -715,12 +715,12 @@ def plot_dark_stuff_free(z_data, mu_data, mu_err, gr_baryons, sigma_baryons, gr_
 
 
 # =============================================================================
-# Main Execution - Dark-Stuff-Free Analysis
+# Main Execution - Baryons-Only Analysis
 # =============================================================================
 
 def main():
     """
-    Main execution: Pure dark-stuff-free cosmology analysis.
+    Main execution: Pure baryons-only cosmology analysis.
     
     Three models, ALL with no dark matter and no dark energy:
     A) GR + baryons only (Ω_m = Ω_b = 0.05, Λ=0, Σ=1)
@@ -731,7 +731,7 @@ def main():
     """
     print("="*70)
     print("Σ-GRAVITY COSMOLOGICAL EXPANSION ANALYSIS")
-    print("DARK-STUFF-FREE: No Dark Matter, No Dark Energy")
+    print("BARYONS-ONLY: No Dark Matter, No Dark Energy")
     print("="*70)
     print("\nQuestion: With ONLY baryons (Ω_b ≈ 0.05) and NO dark energy,")
     print("how much of the observed expansion can Σ-Gravity explain?")
@@ -743,7 +743,7 @@ def main():
     z_data, mu_data, mu_err = load_pantheon_data(max_z=2.5)
     
     # =================================================================
-    # Fit all dark-stuff-free models
+    # Fit all baryons-only models
     # =================================================================
     
     # Model A: GR + baryons only (the baseline "nothing works" model)
@@ -762,7 +762,7 @@ def main():
     # Results Summary
     # =================================================================
     print("\n" + "="*70)
-    print("RESULTS SUMMARY: DARK-STUFF-FREE COSMOLOGY")
+    print("RESULTS SUMMARY: BARYONS-ONLY COSMOLOGY")
     print("="*70)
     
     print("\nχ² values (lower is better):")
@@ -824,8 +824,8 @@ In a strictly dark-matter- and dark-energy-free cosmology,
     print(f"Total analysis time: {total_t1-total_t0:.2f} seconds")
     
     # Plot results
-    plot_dark_stuff_free(z_data, mu_data, mu_err, gr_baryons, sigma_baryons, 
-                         gr_eff_matter, lcdm_ref)
+    plot_baryons_only(z_data, mu_data, mu_err, gr_baryons, sigma_baryons, 
+                      gr_eff_matter, lcdm_ref)
     
     # Clear GPU memory
     if GPU_AVAILABLE:

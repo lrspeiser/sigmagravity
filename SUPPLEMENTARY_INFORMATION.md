@@ -993,7 +993,7 @@ Hence η(1) = 1.1487 and η(2) = 1.2457; these values provide a clear, testable 
 
 ---
 
-## SI §9A — Dark-Stuff-Free Hubble Diagram from Σ-Gravity Coherence
+## SI §9A — Baryons-Only Hubble Diagram from Σ-Gravity Coherence
 
 ### SI §9A.1. Motivation
 
@@ -1042,7 +1042,7 @@ where $A_{\rm cos}$ is an order-unity coherence amplitude appropriate for horizo
 
 ---
 
-### SI §9A.3. Dark-Stuff-Free Friedmann Equation
+### SI §9A.3. Baryons-Only Friedmann Equation
 
 We now consider a spatially flat FRW background with **only baryons** and radiation:
 
@@ -1088,7 +1088,7 @@ $$
 \{H_0,\;\Omega_{b0},\;A_{\rm cos}\},
 $$
 
-with $g^\dagger$ and the function $h(g)$ fixed by the galaxy-scale derivations.
+with $g^\dagger$ and the function $h(g)$ fixed by the galaxy-scale derivations. We refer to this as the **baryons-only Σ-model**.
 
 ---
 
@@ -1156,7 +1156,7 @@ In this precise sense Σ-Gravity provides a mechanism for explaining most of the
 
 ---
 
-### SI §9A.6. Numerical Results: Pantheon+ Dark-Stuff-Free Analysis
+### SI §9A.6. Numerical Results: Pantheon+ Baryons-Only Analysis
 
 A numerical implementation of Eqs. (9A.2)–(9A.4) was performed with:
 

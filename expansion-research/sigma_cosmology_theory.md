@@ -1,5 +1,5 @@
 # Σ-Gravity Cosmological Expansion Analysis
-## Dark-Stuff-Free Cosmology: No Dark Matter, No Dark Energy
+## Baryons-Only Cosmology: No Dark Matter, No Dark Energy
 
 ## Overview
 
@@ -29,7 +29,7 @@ the gap to ΛCDM with only baryons and coherence.
 
 ---
 
-## 1. The Three Dark-Stuff-Free Models
+## 1. The Three Baryons-Only Models
 
 All models use **Ω_m = Ω_baryon ≈ 0.05** (Planck value) and **Ω_Λ = 0**.
 
