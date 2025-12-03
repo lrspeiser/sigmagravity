@@ -369,7 +369,7 @@ We test the framework on the SPARC database (Lelli+ 2016) containing 175 late-ty
 - **Mass-to-light ratio:** We adopt M/L = 0.5 M☉/L☉ at 3.6μm, the universal value recommended by Lelli+ (2016) based on stellar population models. This is not fitted per-galaxy.
 - **Distances and inclinations:** Fixed to SPARC published values; not varied in our analysis.
 - **Scatter metric:** RAR scatter is computed as the RMS of log₁₀(g_obs/g_pred) across all radial points.
-- **"No free parameters":** The Σ-Gravity formula uses A = √3 and g† = cH₀/(2e) derived from theory. The only external input is the universal M/L from stellar population models.
+- **"No free parameters":** The Σ-Gravity formula uses A = √3 and g† = cH₀/(2e) motivated by dimensional analysis. The only external input is the universal M/L from stellar population models.
 
 **Results (171 galaxies):**
 
@@ -648,6 +648,8 @@ Ferraro, R., & Fiorini, F. 2007, PhRvD, 75, 084031 (Modified teleparallel gravit
 
 Fox, C., Mahler, G., Sharon, K., & Remolina González, J. D. 2022, ApJ, 928, 87 (The Strongest Cluster Lenses: An Analysis of the Relation between Strong Lensing Strength and Physical Properties of Galaxy Clusters)
 
+Gentile, G., Famaey, B., & de Blok, W. J. G. 2011, A&A, 527, A76 (THINGS about MOND)
+
 GRAVITY Collaboration, Abuter, R., Amorim, A., et al. 2019, A&A, 625, L10 (A geometric distance measurement to the Galactic center black hole with 0.3% uncertainty)
 
 Harko, T., Lobo, F.S.N., Otalora, G., & Saridakis, E.N. 2014, arXiv:1404.6212 (Nonminimal torsion-matter coupling extension of f(T) gravity)
@@ -677,6 +679,8 @@ Milgrom, M. 1983b, ApJ, 270, 371 (A modification of the Newtonian dynamics—Imp
 Milgrom, M. 1983c, ApJ, 270, 384 (A modification of the Newtonian dynamics—Implications for galaxy systems)
 
 Milgrom, M. 2009, PhRvD, 80, 123536 (Bimetric MOND gravity)
+
+Milgrom, M. 2020, arXiv:2001.09729 (The a₀ — cosmology connection in MOND)
 
 Navarro, J. F., Frenk, C. S., & White, S. D. M. 1996, ApJ, 462, 563 (The Structure of Cold Dark Matter Halos)
 
