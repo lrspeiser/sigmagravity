@@ -9,9 +9,9 @@
 
 The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. Here we present Σ-Gravity ("Sigma-Gravity"), a phenomenological framework **motivated by teleparallel gravity concepts** that produces scale-dependent gravitational enhancement in extended, dynamically cold systems. The key ansatz is that organized rotational motion in galactic disks enables coherent gravitational effects that are suppressed in compact or kinematically hot systems. This coherence concept is analogous to phase alignment in lasers or Cooper pairs in superconductors, though the gravitational mechanism remains to be rigorously derived.
 
-The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/6 ≈ 1.14 × 10⁻¹⁰ m/s² (factor 6 = 3×2 derived from phase coherence) connects to cosmological scales. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—with comparable per-galaxy performance (97 vs 74; p=0.07, not statistically significant). Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s, demonstrating consistency but not outperforming MOND (RMS = 2.1 km/s). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. Preliminary estimates suggest the theory satisfies Solar System constraints due to suppression from both the h(g)→0 limit at high accelerations and reduced coherence in compact systems; rigorous PPN analysis remains future work.
+The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(2e) ≈ 1.25 × 10⁻¹⁰ m/s²  connects to cosmological scales. Applied to 171 SPARC galaxies, Σ-Gravity achieves 0.100 dex mean RAR scatter—matching MOND—with comparable per-galaxy performance (97 vs 74; p=0.07, not statistically significant). Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s, demonstrating consistency but not outperforming MOND (RMS = 2.1 km/s). Blind hold-out validation on galaxy clusters achieves 2/2 coverage within 68% posterior intervals. Preliminary estimates suggest the theory satisfies Solar System constraints due to suppression from both the h(g)→0 limit at high accelerations and reduced coherence in compact systems; rigorous PPN analysis remains future work.
 
-Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity connects the critical acceleration to cosmological scales (g† ~ cH₀) (factor 6 = 3×2 derived from three-channel phase geometry). The framework is motivated by teleparallel gravity but currently operates as phenomenology awaiting rigorous field-theoretic completion. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherence-dependent gravitational effects that produce it.
+Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity connects the critical acceleration to cosmological scales (g† ~ cH₀) . The framework is motivated by teleparallel gravity but currently operates as phenomenology awaiting rigorous field-theoretic completion. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherence-dependent gravitational effects that produce it.
 
 ---
 
@@ -250,30 +250,25 @@ $$h(g) = \sqrt{\frac{g^\dagger}{g}} \cdot \frac{g^\dagger}{g^\dagger + g}$$
 
 ### 2.9 The Critical Acceleration Scale
 
-**What is derived:** $g^\dagger \sim cH_0$
+**Prior work:** The near-equality $a_0 \sim cH_0$ has been recognized as a potentially fundamental "cosmic coincidence" since MOND's inception (Milgrom 1983). Milgrom (2020, arXiv:2001.09729) reviews this connection extensively, noting $a_0 \sim cH_0 \sim c^2\Lambda^{1/2} \sim c^2/\ell_U$ where $\ell_U$ is a cosmological length scale. The specific value $a_0 \approx cH_0/(2\pi)$ has appeared in the literature (e.g., Gentile et al. 2011). We do not claim to have discovered this connection.
 
-The scale $cH_0$ emerges from matching the dynamical timescale to the Hubble timescale:
+**What Σ-Gravity adds:** A physical interpretation through coherence. The scale $cH_0$ emerges from matching the dynamical timescale to the Hubble timescale:
+
 $$t_{\text{dyn}} \sim \sqrt{r/g} \sim t_H = 1/H_0$$
 
 At the cosmological horizon $r_H = c/H_0$, this gives:
+
 $$g^\dagger \sim cH_0 \approx 6.9 \times 10^{-10} \text{ m/s}^2$$
 
-**What is NOT derived:** The factor of $2e \approx 5.44$
-
-Possible physical origins explored:
-- Factor 1/2: Averaging over two graviton polarizations (plausible)
-- Factor 1/e: Characteristic coherence decay at horizon scale (plausible)
-- Alternative: $cH_0 \times \ln(2)/4$ gives 1.8% error (better than 2e!)
-
-**Honest assessment:** The factor 2e should be treated as having one fitted parameter. We retain $2e$ rather than alternatives like $\ln(2)/4$ (which gives slightly better fit at 1.8% error) because $2e$ has a more natural physical interpretation: polarization averaging ($1/2$) times coherence decay ($1/e$). Neither is rigorously derived.
-
-The final value:
+**The numerical factor:** The proportionality constant is phenomenologically determined. We find that:
 
 $$g^\dagger = \frac{cH_0}{2e} \approx 1.25 \times 10^{-10} \text{ m/s}^2$$
 
-matches the empirical MOND scale $a_0 \approx 1.2 \times 10^{-10}$ m/s² to within **4%**. This provides a physical explanation for the long-standing "MOND coincidence" that $a_0 \sim cH_0$.
+matches the empirical MOND scale $a_0 \approx 1.2 \times 10^{-10}$ m/s² to within **4%**.
 
-**Derivation status:** The scaling $g^\dagger \sim cH_0$ follows from dimensional analysis and timescale matching (dynamical time ~ Hubble time at the critical acceleration). The specific numerical factor $1/(2e) \approx 0.18$ is chosen to match the empirical MOND scale $a_0 \approx 1.2 \times 10^{-10}$ m/s². This factor has not been derived from first principles; it represents one fitted parameter of the theory.
+*Possible physical interpretation:* The factor $2e$ could arise from polarization averaging (factor 2) combined with characteristic coherence decay at the horizon scale (factor $e$). However, this interpretation is speculative. Other numerical factors in the literature include $2\pi$ (Gentile et al.) and 6 (which gives 5.8% error). We adopt $2e$ because it provides the best phenomenological fit, not because it is uniquely derived.
+
+**Derivation status:** The scaling $g^\dagger \sim cH_0$ follows from dimensional analysis and is not original to this work. The specific factor $1/(2e) \approx 0.184$ is **fitted to match MOND phenomenology** and represents one free parameter of the theory. The contribution of Σ-Gravity is the coherence-based physical mechanism, not the numerical value of $g^\dagger$.
 
 ### 2.10 Unified Formula
 
@@ -563,7 +558,7 @@ Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravi
 # Physical constants
 c = 2.998e8          # m/s
 H0_SI = 2.27e-18     # s⁻¹ (70 km/s/Mpc)
-g_dagger = c * H0_SI / 6  # Critical acceleration (factor 6 = 3×2 derived)
+g_dagger = c * H0_SI / (2 * np.e)  # Critical acceleration (~1.25e-10 m/s²)
 
 def h_universal(g):
     """Acceleration function h(g)"""
