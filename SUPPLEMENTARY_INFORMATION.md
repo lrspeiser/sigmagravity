@@ -648,7 +648,7 @@ $$\frac{A_{\text{cluster}}}{A_{\text{disk}}} = \frac{\pi\sqrt{2}}{\sqrt{3}} \app
 |-----------|---------|--------|-------|
 | **$n_{\text{coh}}$** | $k/2$ (Gamma-exponential) | ✓ **RIGOROUS** | 0% |
 | **$A_{\text{disk}} = \sqrt{3}$** | 3 torsion channels | ✓ **DERIVED** (SI §19) | — |
-| **$g^\dagger = cH_0/6$** | Phase coherence threshold | ✓ **DERIVED** (SI §19) | 5.5% |
+| **$g^\dagger = cH_0/(2e)$** | Fitted to match MOND | ✗ **FITTED** | 4% |
 | **$A_{\text{cluster}} = \pi\sqrt{2}$** | 3D geometry + polarizations | ✓ **DERIVED** (SI §19) | — |
 | **$A_c/A_d = 2.57$** | Geometry ratio | ✓ **DERIVED** (SI §19) | 1.2% |
 | **$A_0 = 1/\sqrt{e}$** | Gaussian phases | ○ Numeric | 2.6% |
@@ -2082,7 +2082,7 @@ All scripts and results: `derivations/editorial_response/`
 
 | Component | Status | Details |
 |-----------|--------|--------|
-| $g^\dagger = cH_0/6$ | **DERIVED** (SI §19) | Phase coherence threshold: factor 6 = 3×2 |
+| $g^\dagger = cH_0/(2e)$ | **FITTED** | Factor 2e matches MOND to 4%; not derived from first principles |
 | A = √3 (disks) | **DERIVED** (SI §19) | N=3 torsion channels → √N |
 | A = π√2 (clusters) | **DERIVED** (SI §19) | 3D geometry + 2 polarizations |
 | n_coh = 0.5 | **RIGOROUS** | χ² noise: k/2 with k=1 |
@@ -2132,13 +2132,15 @@ MOND has operated as successful phenomenology for 40 years without a complete re
 
 ---
 
-## SI §19 — Wavefront Coherence Framework: First-Principles Derivations
+## SI §19 — Wavefront Coherence Framework: Alternative Derivation Approach
 
 ### SI §19.1. Overview
 
-The Wavefront Coherence Framework provides rigorous first-principles derivations for the key Σ-Gravity parameters, significantly advancing beyond the previous "motivated" status. This framework explains the MOND coincidence ($a_0 \sim cH_0$) as an emergent consequence of phase coherence physics.
+**Important note:** This section documents an alternative derivation framework that produces $g^\dagger = cH_0/6$. However, the main paper uses $g^\dagger = cH_0/(2e)$ which provides a better fit (4% error vs 5.5%) to the empirical MOND value $a_0 \approx 1.2 \times 10^{-10}$ m/s². The factor $2e$ is **fitted to match MOND phenomenology**, not derived from first principles. The framework below represents one possible physical interpretation but should not be taken as a unique derivation.
 
-**Key result:** The derived $g^\dagger = cH_0/6 = 1.134 \times 10^{-10}$ m/s² agrees with the empirical MOND $a_0 = 1.20 \times 10^{-10}$ m/s² to **5.5%**.
+The Wavefront Coherence Framework attempts to derive the key Σ-Gravity parameters from postulates about phase coherence. While providing geometric intuition, the specific numerical factors (like 6 vs 2e) remain phenomenological choices.
+
+**Key result (this framework):** The derived $g^\dagger = cH_0/6 = 1.134 \times 10^{-10}$ m/s² agrees with the empirical MOND $a_0 = 1.20 \times 10^{-10}$ m/s² to **5.5%**. The main paper uses $g^\dagger = cH_0/(2e) \approx 1.25 \times 10^{-10}$ m/s² which agrees to **4%**.
 
 ### SI §19.2. Four Foundational Postulates
 
