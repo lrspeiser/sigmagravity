@@ -1,0 +1,8 @@
+R_coh Validation Summary
+========================================
+
+SPARC: 170 galaxies, mean RMS = 51.4 km/s
+Clusters: 8 tested, mean R_coh = 208 kpc
+Solar System: Cassini SATISFIED
+
+Overall: NEEDS REVIEW
