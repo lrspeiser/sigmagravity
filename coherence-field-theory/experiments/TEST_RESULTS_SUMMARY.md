@@ -144,3 +144,5 @@ The Σ-gravity model shows **promising results** on the initial test sample:
 
 The main limitation is the fixed `sigma = 20 km/s` parameter, which should be replaced with measured `sigma_v(R)` profiles. Integration with `EnvironmentEstimator` is the next critical step.
 
+
+

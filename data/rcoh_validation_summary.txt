@@ -1,8 +1,3 @@
-R_coh Validation Summary
-========================================
-
-SPARC: 170 galaxies, mean RMS = 51.4 km/s
-Clusters: 8 tested, mean R_coh = 208 kpc
-Solar System: Cassini SATISFIED
-
-Overall: NEEDS REVIEW
+version https://git-lfs.github.com/spec/v1
+oid sha256:5f65d1c46bba6144c6f34646bcfbf2b8fb97a0a328343635b21d92e935519ed6
+size 205

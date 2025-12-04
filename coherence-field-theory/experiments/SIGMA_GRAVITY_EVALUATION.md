@@ -156,3 +156,5 @@ python test_sigma_gravity_first_principles.py --galaxies DDO154,NGC2403,NGC3198 
 
 The implementation provides a solid foundation for testing. The next step is to integrate with `EnvironmentEstimator` for realistic σ_v(R) profiles and run on a larger galaxy sample.
 
+
+
