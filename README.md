@@ -100,6 +100,8 @@ where $\Sigma[g, \mathcal{C}]$ is the coherent enhancement factor that depends o
 
 **This is distinct from f(T) gravity**, which modifies $\mathbf{T} \to f(\mathbf{T})$ in the gravitational sector. Our modification is $\mathcal{L}_m \to \Sigma \cdot \mathcal{L}_m$ in the matter sector.
 
+**Connection to f(T) dimensional structure (Ferraro correspondence):** R. Ferraro (IAFE, Buenos Aires) has noted that f(T) theories necessarily introduce a dimensional constant $a$ with units [length]² that sets the scale where modified gravity activates. In Σ-Gravity, the coherence scale $\ell$ plays an analogous role: $\ell^2$ sets where enhancement activates. However, validation against 171 SPARC galaxies shows that $\ell$ is **field-dependent** (varying with $\sigma_v$, $\Sigma_b$, $R_{\text{disk}}$) rather than universal. This is consistent with f(T,$\mathcal{L}_m$) theories where the modification scale depends on matter distribution, similar to Bekenstein's RAQUAL or emergent gravity frameworks. The phenomenology (0.100 dex RAR scatter) is unchanged by this interpretation.
+
 **Open theoretical issue:** Non-minimal matter couplings in teleparallel gravity can violate local Lorentz invariance unless carefully constructed (see Krššák & Saridakis 2016, CQG 33, 115009). Whether the specific coherence-dependent coupling $\Sigma[g, \mathcal{C}]$ preserves Lorentz invariance requires further investigation. We note that the coupling depends only on scalar quantities (acceleration magnitude, coherence measure), which may mitigate this concern.
 
 ### 2.3 Field Equations and Weak-Field Limit
