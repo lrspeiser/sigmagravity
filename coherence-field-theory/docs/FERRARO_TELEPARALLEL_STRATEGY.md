@@ -229,3 +229,4 @@ This is similar to other field-dependent modified gravity theories (RAQUAL, emer
 
 The key test is whether the ratio ℓ_fitted / ℓ_toomre is universal across the SPARC sample. If so, we have a candidate for the teleparallel formalization.
 
+
