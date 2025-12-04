@@ -1012,6 +1012,14 @@ Key sections include:
 
 ---
 
+## Acknowledgments
+
+We thank **Emmanuel N. Saridakis** (National Observatory of Athens) for detailed feedback on the theoretical framework, particularly regarding the derivation of field equations, the structure of Θ_μν, and consistency constraints in teleparallel gravity with non-minimal matter coupling. His suggestions significantly strengthened the theoretical presentation.
+
+We thank **Rafael Ferraro** (Instituto de Astronomía y Física del Espacio, CONICET – Universidad de Buenos Aires) for helpful discussions on f(T) gravity and the role of dimensional constants in modified teleparallel theories.
+
+---
+
 ## References (To be reviewed)
 
 Abbott, B. P., Abbott, R., Abbott, T. D., et al. (LIGO Scientific Collaboration and Virgo Collaboration) 2017a, PhRvL, 119, 161101 (GW170817: Observation of Gravitational Waves from a Binary Neutron Star Inspiral)

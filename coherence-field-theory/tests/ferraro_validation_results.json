@@ -1,0 +1,9 @@
+{
+  "n_galaxies": 171,
+  "mean_rar_scatter": 0.10047618812591315,
+  "median_rar_scatter": 0.08699828383035951,
+  "scale_ratio_mean": 0.2229847354230527,
+  "scale_ratio_scatter": 0.9009228220550987,
+  "correlation": 0.3562764921335887,
+  "power_law_slope": 0.2186318655633064
+}

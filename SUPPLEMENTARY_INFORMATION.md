@@ -2574,12 +2574,21 @@ where $A_{\text{eff}} = \frac{3}{2} A$.
 
 ---
 
+## Acknowledgments
+
+We thank **Emmanuel N. Saridakis** (National Observatory of Athens) for detailed feedback on the theoretical framework, particularly regarding the derivation of field equations, the structure of Θ_μν, and consistency constraints in teleparallel gravity with non-minimal matter coupling. His suggestions significantly strengthened the theoretical presentation.
+
+We thank **Rafael Ferraro** (Instituto de Astronomía y Física del Espacio, CONICET – Universidad de Buenos Aires) for helpful discussions on f(T) gravity and the role of dimensional constants in modified teleparallel theories. His insight that f(T) functions necessarily introduce a constant with units of square length that fixes the scale at which modified gravity deviates from GR was particularly valuable.
+
+---
+
 ## References
 
 - Aldrovandi, R. & Pereira, J. G. (2013). Teleparallel Gravity: An Introduction. Springer.
 - Beck, C. & Cohen, E. G. D. (2003). Superstatistics. Physica A, 322, 267-275. arXiv:cond-mat/0303288
 - Bertotti, B., Iess, L., & Tortora, P. (2003). A test of general relativity using radio links with the Cassini spacecraft. Nature, 425, 374-376.
 - Dutton, A. A. & Macciò, A. V. (2014). Cold dark matter haloes in the Planck era. MNRAS, 441, 3359.
+- Ferraro, R. & Fiorini, F. (2007). Modified teleparallel gravity: Inflation without inflaton. PRD, 75, 084031.
 - Harko, T., et al. (2014). f(T,L_m) gravity and its cosmological implications. PRD, 90, 044067. arXiv:1404.6212
 - Krššák, M. & Saridakis, E. N. (2016). The covariant formulation of f(T) gravity. CQG, 33, 115009.
 - Lelli, F., et al. (2017). SPARC: Mass Models for 175 Disk Galaxies. AJ, 153, 240.
