@@ -1,0 +1,13 @@
+name,z,M_gas_200kpc_1e12Msun,M_gas_200kpc_err,M_star_200kpc_1e12Msun,M_star_200kpc_err,MSL_200kpc_1e12Msun,MSL_200kpc_err,source_gas,source_star,source_lens,M_bar_200kpc_1e12Msun,M_bar_200kpc_err,Sigma_required
+Abell 2744,0.308,8.5,1.5,3.0,0.6,179.69,2.0,"Owers+ 2011, Merten+ 2011 (Chandra)",Montes & Trujillo 2018,Fox+ 2022,11.5,1.6155494421403511,15.625217391304348
+Abell 370,0.375,10.0,2.0,3.5,0.7,234.13,1.5,Richard+ 2010 (Chandra),HST photometry,Fox+ 2022,13.5,2.118962010041709,17.34296296296296
+MACS J0416.1-2403,0.396,6.5,1.0,2.5,0.5,154.7,1.0,Ogrean+ 2015 (Chandra),CLASH photometry,Fox+ 2022,9.0,1.118033988749895,17.188888888888886
+MACS J0717.5+3745,0.545,12.0,2.0,3.5,0.7,234.73,1.5,"Ma+ 2009, van Weeren+ 2017 (Chandra)",HST photometry,Fox+ 2022,15.5,2.118962010041709,15.143870967741934
+MACS J1149.5+2223,0.543,7.5,1.2,2.8,0.5,177.85,1.5,Chandra archive,HST photometry,Fox+ 2022,10.3,1.3,17.266990291262132
+Abell S1063,0.348,8.0,1.2,2.8,0.5,208.95,0.85,Gomez+ 2012 (Chandra),HST photometry,Fox+ 2022,10.8,1.3,19.34722222222222
+Abell 1689,0.183,7.0,1.0,2.5,0.5,150.0,15.0,"Lemze+ 2008, Kawaharada+ 2010 (Chandra)",Deep imaging,"Limousin+ 2007, Coe+ 2010",9.5,1.118033988749895,15.789473684210526
+Coma,0.023,3.5,0.5,2.0,0.4,80.0,15.0,Briel+ 2001 (ROSAT/XMM),SDSS photometry,"Kubo+ 2007, Gavazzi+ 2009",5.5,0.6403124237432849,14.545454545454545
+Bullet Cluster,0.296,5.0,1.0,2.0,0.4,120.0,20.0,"Markevitch+ 2004, Clowe+ 2006 (Chandra)",HST photometry,Bradac+ 2006,7.0,1.077032961426901,17.142857142857142
+Abell 2029,0.077,4.5,0.6,2.2,0.4,95.0,12.0,Vikhlinin+ 2006 (Chandra),Photometry,Weak lensing,6.7,0.7211102550927979,14.17910447761194
+Abell 383,0.187,3.0,0.5,1.5,0.3,65.0,8.0,Vikhlinin+ 2006 (Chandra),Photometry,Zitrin+ 2011,4.5,0.58309518948453,14.444444444444445
+MS 2137-2353,0.313,4.0,0.7,1.8,0.4,75.0,10.0,Chandra,Photometry,Gavazzi+ 2003,5.8,0.8062257748298549,12.931034482758621
