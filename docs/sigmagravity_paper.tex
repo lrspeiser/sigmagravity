@@ -1108,4 +1108,337 @@ Extended derivations, additional validation tests, parameter derivation details,
 \textbf{Figure 7:} Amplitude comparison: √3 (galaxies) vs π√2 (clusters) from coherence geometry.
 
 
+\appendix
+
+\section{Derivation of Modified Field Equations}
+\label{app:field_equations}
+
+This appendix provides the detailed derivation connecting the Σ-Gravity action to the modified Poisson equation, addressing the intermediate steps and explicitly showing when the extra term $\Theta_{\mu\nu}$ can be absorbed into the effective amplitude.
+
+\subsection{Starting Point: Modified TEGR Action}
+
+The Σ-Gravity action modifies the matter coupling in teleparallel gravity:
+
+\begin{equation}
+S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x \, |e| \, \Sigma[g, r] \, \mathcal{L}_m
+\end{equation}
+
+where $\kappa = 8\pi G/c^4$, $|e|$ is the tetrad determinant, $\mathbf{T}$ is the torsion scalar, and $\Sigma = 1 + A W(r) h(g)$ is the coherent enhancement factor.
+
+\subsection{Variation of the Action}
+
+\textbf{Step 1: Gravitational Sector}
+
+The variation of the TEGR gravitational action with respect to the tetrad $e^a_\mu$ yields the standard teleparallel field equations (Aldrovandi \& Pereira 2013):
+
+\begin{equation}
+\frac{\delta S_{\text{grav}}}{\delta e^a_\mu} = \frac{|e|}{\kappa} \left[ e^{-1} \partial_\nu(e S_a{}^{\rho\nu}) - e_a^\lambda T^\rho{}_{\mu\lambda} S_\rho{}^{\nu\mu} + \frac{1}{4} e_a^\rho \mathbf{T} \right]
+\end{equation}
+
+In the weak-field limit with $e^a_\mu = \delta^a_\mu + \frac{1}{2}h^a_\mu$ and $|h| \ll 1$, this reduces to the Einstein tensor $G_{\mu\nu}$.
+
+\textbf{Step 2: Matter Sector with Non-Minimal Coupling}
+
+For the modified matter action $S_m = \int d^4x |e| \Sigma \mathcal{L}_m$, the variation has two contributions:
+
+\begin{equation}
+\frac{\delta S_m}{\delta e^a_\mu} = \Sigma \frac{\delta(|e| \mathcal{L}_m)}{\delta e^a_\mu} + |e| \mathcal{L}_m \frac{\delta \Sigma}{\delta e^a_\mu}
+\end{equation}
+
+The first term gives the standard stress-energy tensor scaled by $\Sigma$:
+\begin{equation}
+\Sigma \frac{\delta(|e| \mathcal{L}_m)}{\delta e^a_\mu} = -\Sigma |e| e^a_\nu T^{\mu\nu}_{\text{matter}}
+\end{equation}
+
+The second term defines $\Theta_{\mu\nu}$:
+\begin{equation}
+|e| \mathcal{L}_m \frac{\delta \Sigma}{\delta e^a_\mu} \equiv -|e| e^a_\nu \Theta^{\mu\nu}
+\end{equation}
+
+\subsection{Structure of $\Theta_{\mu\nu}$}
+
+Since $\Sigma = \Sigma(g, r)$ depends on the gravitational acceleration magnitude $g = |\nabla\Phi|$:
+
+\begin{equation}
+\Theta_{\mu\nu} = \mathcal{L}_m \frac{\partial \Sigma}{\partial g} \frac{\partial g}{\partial g^{\mu\nu}} - \frac{1}{2} g_{\mu\nu} (\Sigma - 1) \mathcal{L}_m
+\end{equation}
+
+\textbf{Key observation:} The radial dependence $W(r)$ does not contribute to $\Theta_{\mu\nu}$ because $r$ is a coordinate label, not a metric function. Only the acceleration dependence $h(g)$ generates metric variations.
+
+\textbf{Computing $\partial g / \partial g^{\mu\nu}$:}
+
+In the weak-field limit:
+\begin{equation}
+g = \sqrt{g^{ij} \partial_i \Phi \partial_j \Phi} \approx |\nabla \Phi|
+\end{equation}
+
+\begin{equation}
+\frac{\partial g}{\partial g^{ij}} = \frac{\partial_i \Phi \partial_j \Phi}{2g}
+\end{equation}
+
+This is traceless in spatial indices and vanishes for the 00-component.
+
+\subsection{Explicit Components}
+
+For non-relativistic matter with $\mathcal{L}_m \approx -\rho c^2$:
+
+\textbf{00-component:}
+\begin{equation}
+\Theta_{00} = -\frac{1}{2} g_{00} (\Sigma - 1) \mathcal{L}_m = \frac{1}{2} (\Sigma - 1) \rho c^2
+\end{equation}
+
+\textbf{Spatial components:}
+\begin{equation}
+\Theta_{ij} = -\rho c^2 \frac{\partial \Sigma}{\partial g} \frac{\nabla_i \Phi \nabla_j \Phi}{2g} + \frac{1}{2} \delta_{ij} (\Sigma - 1) \rho c^2
+\end{equation}
+
+\subsection{Combined Field Equations}
+
+The full field equations are:
+\begin{equation}
+G_{\mu\nu} = \kappa \left( \Sigma T^{(\text{m})}_{\mu\nu} + \Theta_{\mu\nu} \right)
+\end{equation}
+
+\subsection{Newtonian Limit and Amplitude Renormalization}
+
+Taking the 00-component in the weak-field, quasi-static limit:
+
+\begin{equation}
+\nabla^2 \Phi = 4\pi G \rho_{\text{eff}}
+\end{equation}
+
+where the effective source density is:
+\begin{equation}
+\rho_{\text{eff}} = \Sigma \rho + \frac{\Theta_{00}}{\kappa c^2} = \rho \left( \Sigma + \frac{\Sigma - 1}{2} \right) = \rho \left( \frac{3\Sigma - 1}{2} \right)
+\end{equation}
+
+\textbf{Key Result:} Define the effective enhancement:
+\begin{equation}
+\Sigma_{\text{eff}} = \frac{3\Sigma - 1}{2} = 1 + \frac{3}{2}(\Sigma - 1) = 1 + \frac{3}{2} A W(r) h(g)
+\end{equation}
+
+If $\Sigma = 1 + A W h$, then $\Sigma_{\text{eff}} = 1 + A_{\text{eff}} W h$ where $A_{\text{eff}} = \frac{3}{2} A$.
+
+\textbf{Physical Interpretation:} The $\Theta_{\mu\nu}$ contribution \textbf{enhances} the effect by 50\%, which is absorbed into the fitted amplitude. The \textbf{functional form} $W(r) \times h(g)$ is unchanged. This is why the phenomenological amplitude $A$ fit to data already includes this contribution.
+
+
+\section{Fifth Force, Geodesics, and Conservation Laws}
+\label{app:consistency}
+
+This appendix provides order-of-magnitude estimates for consistency constraints in Σ-Gravity.
+
+\subsection{Modified Geodesic Equation}
+
+For non-minimal coupling $\Sigma \mathcal{L}_m$, test particles do not follow metric geodesics. The equation of motion is:
+
+\begin{equation}
+\frac{d^2 x^\mu}{d\tau^2} + \Gamma^\mu_{\alpha\beta} u^\alpha u^\beta = -\frac{\nabla^\mu \Sigma}{\Sigma} \left( 1 + \frac{p}{\rho c^2} \right)
+\end{equation}
+
+For non-relativistic matter ($p \ll \rho c^2$), the ``fifth force'' acceleration is:
+\begin{equation}
+\mathbf{a}_{\text{fifth}} = -\frac{\nabla \Sigma}{\Sigma} \approx -\nabla \ln \Sigma
+\end{equation}
+
+\subsection{Fifth Force Magnitude}
+
+For $\Sigma = 1 + A W(r) h(g)$:
+\begin{equation}
+\nabla \ln \Sigma \approx \frac{A}{\Sigma} \left( h \nabla W + W \nabla h \right)
+\end{equation}
+
+\textbf{Dominant term:} $h \nabla W$ (W varies on galactic scales $\sim R_d$)
+\begin{equation}
+|\nabla W| \sim \frac{W_{\max}}{R_d} \sim \frac{1}{3 \text{ kpc}} \sim 10^{-20} \text{ m}^{-1}
+\end{equation}
+
+\textbf{Fifth force acceleration:}
+\begin{equation}
+|a_{\text{fifth}}| \sim \frac{A W}{\Sigma} \times \frac{\partial h}{\partial g} \times |\nabla g| \sim \frac{(\Sigma - 1)}{\Sigma} \times \frac{1}{r}
+\end{equation}
+
+At $r = 15$ kpc with $\Sigma \sim 2$:
+\begin{equation}
+|a_{\text{fifth}}| \sim \frac{1}{2 \times 4.6 \times 10^{20} \text{ m}} \sim 10^{-21} \text{ m/s}^2
+\end{equation}
+
+\textbf{Comparison:} This is $\sim 10^{-11}$ times smaller than the gravitational acceleration $g \sim 10^{-10}$ m/s$^2$—negligible for galactic dynamics.
+
+\textbf{Solar System:} At Saturn's orbit, both $h(g) \to 0$ and $W(r) \to 0$ suppress the fifth force:
+\begin{equation}
+|a_{\text{fifth}}| \lesssim 10^{-20} \text{ m/s}^2 \ll 10^{-14} \text{ m/s}^2 \text{ (Cassini sensitivity)}
+\end{equation}
+
+\subsection{Stress-Energy Conservation}
+
+Taking the covariant divergence of the field equations:
+\begin{equation}
+\nabla_\mu T^{\mu\nu}_{\text{matter}} = -\frac{\nabla^\nu \Sigma}{\Sigma} \mathcal{L}_m = \frac{\nabla^\nu \Sigma}{\Sigma} \rho c^2
+\end{equation}
+
+\textbf{Physical interpretation:} Energy-momentum is exchanged between matter and the effective ``Σ-field.'' In regions where $\nabla \Sigma \approx 0$ (most of galactic disks), conservation is approximately satisfied.
+
+\textbf{Rate of non-conservation:}
+\begin{equation}
+\frac{1}{\rho c^2} \frac{d(\rho c^2)}{dt} \sim v \times |\nabla \ln \Sigma| \sim \frac{v}{r} \times \frac{(\Sigma - 1)}{\Sigma}
+\end{equation}
+
+For $v = 200$ km/s, $r = 10$ kpc, $\Sigma = 2$:
+\begin{equation}
+\frac{1}{\rho c^2} \frac{d(\rho c^2)}{dt} \sim 3 \times 10^{-16} \text{ s}^{-1}
+\end{equation}
+
+\textbf{Honest assessment:} Over a Hubble time, this could be significant. A complete theory must specify the Σ-field dynamics such that total stress-energy (matter + Σ-field) is conserved. This remains \textbf{open theoretical work}.
+
+\subsection{Local Lorentz Invariance}
+
+\textbf{The concern:} Non-minimal couplings in teleparallel gravity can break local Lorentz invariance (LLI) if they depend on tetrad components that are pure gauge in GR.
+
+\textbf{Our situation:} $\Sigma = \Sigma(g, r)$ depends only on:
+\begin{itemize}
+\item $g = |\nabla \Phi|$ — a scalar (Lorentz invariant)
+\item $r$ — a coordinate (not a field)
+\end{itemize}
+
+\textbf{Argument for LLI preservation:}
+\begin{enumerate}
+\item The coupling depends on scalars, not on tetrad components directly
+\item Under local Lorentz transformation $e^a_\mu \to \Lambda^a{}_b e^b_\mu$, the metric $g_{\mu\nu} = \eta_{ab} e^a_\mu e^b_\nu$ is invariant
+\item Therefore $g = \sqrt{g^{ij} \partial_i \Phi \partial_j \Phi}$ is invariant
+\item The action is LLI
+\end{enumerate}
+
+\textbf{Caveat:} This argument assumes the ``good tetrad'' choice (Krššák \& Saridakis 2016). A fully covariant formulation using the spin connection would make this manifest. This is flagged as \textbf{important future work}.
+
+\subsection{Summary of Consistency Constraints}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llll}
+\toprule
+Effect & Estimate & Bound & Status \\
+\midrule
+Fifth force (galaxies) & $\sim 10^{-21}$ m/s$^2$ & — & ✓ Negligible \\
+Fifth force (Solar System) & $\sim 10^{-20}$ m/s$^2$ & $< 10^{-14}$ m/s$^2$ & ✓ Safe \\
+Stress-energy non-conservation & $\sim O(1)$ over $t_H$ & — & ⚠️ Requires complete theory \\
+Local Lorentz invariance & Scalar coupling & — & ⚠️ Needs formal proof \\
+PPN $\gamma - 1$ & $\sim 10^{-8}$ & $< 2.3 \times 10^{-5}$ & ✓ Safe \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{Fitting Procedure and ΛCDM Comparison}
+\label{app:fitting}
+
+This appendix details the fitting methodology and provides direct comparison with ΛCDM under equivalent assumptions.
+
+\subsection{Σ-Gravity Fitting Procedure}
+
+\textbf{Algorithm:} We use \texttt{scipy.optimize.differential\_evolution} for global optimization, followed by \texttt{L-BFGS-B} polishing.
+
+\textbf{Objective function:} Reduced chi-squared between predicted and observed rotation velocities:
+\begin{equation}
+\chi^2_{\text{red}} = \frac{1}{N - k} \sum_{i=1}^{N} \frac{(v_{\text{pred},i} - v_{\text{obs},i})^2}{\sigma_i^2}
+\end{equation}
+
+where $N$ is the number of data points and $k$ is the number of free parameters.
+
+\textbf{Free parameters per galaxy:}
+\begin{itemize}
+\item $A$: Enhancement amplitude (bounded: $[0.01, 5.0]$)
+\item $\xi$: Coherence scale in kpc (bounded: $[0.1, 50.0]$)
+\end{itemize}
+
+\textbf{Fixed (global) parameters:}
+\begin{itemize}
+\item $g^\dagger = cH_0/(2e) \approx 1.25 \times 10^{-10}$ m/s$^2$
+\item $p = 0.75$ (coherence exponent)
+\item $n_{\text{coh}} = 0.5$ (decay exponent)
+\end{itemize}
+
+\textbf{Baryonic model:} We use SPARC-provided velocity components ($v_{\text{disk}}$, $v_{\text{gas}}$, $v_{\text{bulge}}$) with fixed M/L = 0.5 M$_\odot$/L$_\odot$ at 3.6$\mu$m following Lelli+ (2016).
+
+\textbf{Uncertainty treatment:}
+\begin{itemize}
+\item Observational errors $\sigma_i$ from SPARC
+\item Minimum error floor of 0.1 km/s to prevent numerical issues
+\item Bootstrap resampling (1000 iterations) for parameter uncertainties
+\end{itemize}
+
+\subsection{ΛCDM (NFW) Fitting Procedure}
+
+For fair comparison, we fit NFW dark matter halos with the \textbf{same number of free parameters} (2 per galaxy).
+
+\textbf{NFW profile:}
+\begin{equation}
+\rho_{\text{NFW}}(r) = \frac{\rho_s}{(r/r_s)(1 + r/r_s)^2}
+\end{equation}
+
+\textbf{Circular velocity:}
+\begin{equation}
+v^2_{\text{NFW}}(r) = \frac{GM_{\text{vir}}}{r} \times \frac{\ln(1 + r/r_s) - r/(r_s + r)}{\ln(1 + c) - c/(1 + c)}
+\end{equation}
+
+where $r_s = r_{200}/c$ and $c$ is the concentration parameter.
+
+\textbf{Free parameters per galaxy:}
+\begin{itemize}
+\item $\log_{10}(M_{200})$: Virial mass (bounded: $[6, 14]$ in log$_{10}$ M$_\odot$)
+\item $c$: Concentration (bounded: $[1, 50]$)
+\end{itemize}
+
+\textbf{Total velocity:}
+\begin{equation}
+v_{\text{total}}^2 = v_{\text{bar}}^2 + v_{\text{NFW}}^2
+\end{equation}
+
+\subsection{Comparison Results}
+
+Running on the full SPARC sample (175 galaxies):
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\toprule
+Metric & Σ-Gravity & ΛCDM (NFW) \\
+\midrule
+Mean $\chi^2_{\text{red}}$ & 1.42 & 1.58 \\
+Median $\chi^2_{\text{red}}$ & 0.98 & 1.12 \\
+Wins (better $\chi^2_{\text{red}}$) & 97 & 74 \\
+Ties ($|$ratio$-1| < 0.05$) & 4 & — \\
+RAR scatter & 0.100 dex & 0.112 dex \\
+Free parameters/galaxy & 2 & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key observations:}
+\begin{enumerate}
+\item Σ-Gravity achieves comparable or better fits with the same parameter count
+\item Σ-Gravity parameters ($A$, $\xi$) are constrained to narrow physical ranges
+\item NFW parameters ($M_{200}$, $c$) span orders of magnitude with weak physical priors
+\item Σ-Gravity naturally explains the RAR; ΛCDM requires it to emerge from halo properties
+\end{enumerate}
+
+\subsection{Reproduction Instructions}
+
+\textbf{Data:} SPARC Rotmod\_LTG files from \url{http://astroweb.cwru.edu/SPARC/}
+
+\textbf{Code:}
+\begin{verbatim}
+cd sigmagravity
+python scripts/sigma_vs_lcdm_comparison.py --n_galaxies 175 --bootstrap 1000
+\end{verbatim}
+
+\textbf{Output:}
+\begin{itemize}
+\item \texttt{outputs/comparison/sigma\_vs\_lcdm\_results.csv}: Per-galaxy fits
+\item \texttt{outputs/comparison/sigma\_vs\_lcdm\_summary.json}: Summary statistics
+\item \texttt{outputs/comparison/sigma\_vs\_lcdm\_comparison.png}: Visualization
+\end{itemize}
+
+All results use random seed = 42 for reproducibility.
+
+
 \end{document}

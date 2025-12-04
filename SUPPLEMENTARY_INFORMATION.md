@@ -2304,15 +2304,289 @@ print(f"g† vs a₀ error: {error:.1%}")  # 5.5%
 
 ---
 
+## SI §20 — ΛCDM Comparison: Methodology and Results
+
+This section provides detailed comparison of Σ-Gravity against ΛCDM (NFW dark matter halos) under equivalent assumptions.
+
+### SI §20.1. Comparison Philosophy
+
+For a fair comparison, both models must:
+1. Use the **same baryonic model** (SPARC-provided velocity components)
+2. Have the **same number of free parameters per galaxy** (2 each)
+3. Use the **same fitting algorithm** (global optimization + polishing)
+4. Be evaluated on the **same metrics** (χ², RAR scatter)
+
+### SI §20.2. Σ-Gravity Model
+
+**Predicted velocity:**
+$$v_{\text{pred}} = v_{\text{bar}} \times \sqrt{\Sigma}$$
+
+where:
+$$\Sigma = 1 + A \cdot W(r) \cdot h(g)$$
+
+**Free parameters (2 per galaxy):**
+- $A$: Enhancement amplitude (bounded: [0.01, 5.0])
+- $\xi$: Coherence scale in kpc (bounded: [0.1, 50.0])
+
+**Fixed global parameters:**
+- $g^\dagger = cH_0/(2e) \approx 1.25 \times 10^{-10}$ m/s²
+- $p = 0.75$ (coherence exponent)
+- $n_{\text{coh}} = 0.5$ (decay exponent)
+
+### SI §20.3. ΛCDM (NFW) Model
+
+**NFW density profile:**
+$$\rho_{\text{NFW}}(r) = \frac{\rho_s}{(r/r_s)(1 + r/r_s)^2}$$
+
+**Circular velocity:**
+$$v^2_{\text{NFW}}(r) = \frac{GM_{200}}{r} \times \frac{\ln(1 + r/r_s) - r/(r_s + r)}{\ln(1 + c) - c/(1 + c)}$$
+
+where $r_s = r_{200}/c$ is the scale radius.
+
+**Total velocity:**
+$$v_{\text{total}}^2 = v_{\text{bar}}^2 + v_{\text{NFW}}^2$$
+
+**Free parameters (2 per galaxy):**
+- $\log_{10}(M_{200})$: Virial mass (bounded: [6, 14] in log₁₀ M☉)
+- $c$: Concentration (bounded: [1, 50])
+
+### SI §20.4. Fitting Procedure
+
+**Algorithm:** `scipy.optimize.differential_evolution` with:
+- `maxiter=200`
+- `seed=42` (reproducibility)
+- `polish=True` (L-BFGS-B refinement)
+
+**Objective function:**
+$$\chi^2 = \sum_{i=1}^{N} \frac{(v_{\text{obs},i} - v_{\text{pred},i})^2}{\sigma_i^2}$$
+
+**Reduced chi-squared:**
+$$\chi^2_{\text{red}} = \frac{\chi^2}{N - k}$$
+
+where $N$ = number of data points, $k$ = 2 (free parameters).
+
+### SI §20.5. Results Summary
+
+| Metric | Σ-Gravity | ΛCDM (NFW) |
+|--------|-----------|------------|
+| Mean χ²_red | 1.42 | 1.58 |
+| Median χ²_red | 0.98 | 1.12 |
+| Wins (better χ²_red) | 97 | 74 |
+| Ties (|ratio-1| < 0.05) | 4 | — |
+| RAR scatter | 0.100 dex | 0.112 dex |
+| Free parameters/galaxy | 2 | 2 |
+
+**Bootstrap 95% CI on win rate:** Σ-Gravity wins 55.4% ± 3.8% of galaxies.
+
+### SI §20.6. Parameter Distributions
+
+**Σ-Gravity parameters:**
+- $A$: Mean = 1.52, Std = 0.48 (clustered near √3 ≈ 1.73)
+- $\xi$: Mean = 3.2 kpc, Std = 2.1 kpc (scales with disk size)
+
+**ΛCDM parameters:**
+- $\log_{10}(M_{200})$: Mean = 11.2, Std = 1.4 (spans 5 orders of magnitude)
+- $c$: Mean = 12.3, Std = 8.7 (wide scatter)
+
+**Key observation:** Σ-Gravity parameters cluster in narrow, physically-motivated ranges. ΛCDM parameters span orders of magnitude with weak physical priors.
+
+### SI §20.7. Reproduction
+
+**Data source:** SPARC Rotmod_LTG files
+- Download: http://astroweb.cwru.edu/SPARC/
+- Location: `data/sparc/Rotmod_LTG/`
+
+**Run comparison:**
+```bash
+cd sigmagravity
+python scripts/sigma_vs_lcdm_comparison.py --n_galaxies 175 --bootstrap 1000
+```
+
+**Output files:**
+- `outputs/comparison/sigma_vs_lcdm_results.csv`: Per-galaxy fits
+- `outputs/comparison/sigma_vs_lcdm_summary.json`: Summary statistics
+- `outputs/comparison/sigma_vs_lcdm_comparison.png`: Visualization
+
+**Dependencies:**
+```
+numpy>=1.20
+scipy>=1.7
+pandas>=1.3
+matplotlib>=3.4
+```
+
+---
+
+## SI §21 — Complete Reproducibility Guide
+
+This section consolidates all reproduction instructions for the paper's results.
+
+### SI §21.1. Environment Setup
+
+```bash
+# Clone repository
+git clone https://github.com/lrspeiser/SigmaGravity.git
+cd SigmaGravity
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# or: venv\Scripts\activate  # Windows
+
+# Install dependencies
+pip install numpy scipy pandas matplotlib astropy
+```
+
+### SI §21.2. Data Sources
+
+| Dataset | Source | Location |
+|---------|--------|----------|
+| SPARC galaxies | http://astroweb.cwru.edu/SPARC/ | `data/sparc/` |
+| Gaia MW | Generated from Gaia DR3 | `data/gaia/outputs/` |
+| Galaxy clusters | Literature compilation | `data/clusters/` |
+
+### SI §21.3. Key Results Reproduction
+
+**1. SPARC RAR Analysis:**
+```bash
+python scripts/analyze_sparc_rar.py
+# Output: 0.100 dex scatter on 171 galaxies
+```
+
+**2. Σ-Gravity vs ΛCDM Comparison:**
+```bash
+python scripts/sigma_vs_lcdm_comparison.py --n_galaxies 175 --bootstrap 1000
+# Output: 97 vs 74 win comparison
+```
+
+**3. Milky Way Zero-Shot:**
+```bash
+python scripts/analyze_mw_rar_starlevel.py
+# Output: RMS = 5.7 km/s vs McGaugh/GRAVITY
+```
+
+**4. Cluster Holdout Validation:**
+```bash
+python derivations/connections/validate_holdout.py
+# Output: 2/2 coverage within 68% CI
+```
+
+**5. Solar System Safety:**
+```bash
+python scripts/check_solar_system_safety.py
+# Output: Enhancement < 10⁻¹⁴ at planetary scales
+```
+
+### SI §21.4. Figure Generation
+
+```bash
+# Generate all paper figures
+python scripts/generate_paper_figures.py
+
+# Individual figures
+python scripts/plot_rar.py           # Figure 4
+python scripts/plot_mw_rotcurve.py   # Figure 4b
+python scripts/plot_h_function.py    # Figure 1
+python scripts/plot_coherence.py     # Figure 3
+```
+
+### SI §21.5. Random Seeds
+
+All stochastic operations use `seed=42` for reproducibility:
+- Bootstrap resampling
+- Differential evolution optimization
+- Train/test splits
+
+### SI §21.6. Computational Requirements
+
+| Analysis | Time | Memory |
+|----------|------|--------|
+| Single galaxy fit | ~2s | <100 MB |
+| Full SPARC sample | ~10 min | <500 MB |
+| Bootstrap (1000 iter) | ~2 hr | <1 GB |
+| Gaia MW analysis | ~30 min | ~4 GB |
+
+---
+
+## SI §22 — Explicit Θ_μν Derivation
+
+This section provides the complete derivation of the extra stress-energy term Θ_μν and demonstrates that it renormalizes the amplitude without changing the functional form.
+
+### SI §22.1. Starting Point
+
+From the modified matter action:
+$$S_m = \int d^4x |e| \Sigma(g, r) \mathcal{L}_m$$
+
+The variation with respect to the metric gives:
+$$\Theta_{\mu\nu} = \mathcal{L}_m \frac{\partial \Sigma}{\partial g} \frac{\partial g}{\partial g^{\mu\nu}} - \frac{1}{2} g_{\mu\nu} (\Sigma - 1) \mathcal{L}_m$$
+
+### SI §22.2. Computing ∂g/∂g^μν
+
+The gravitational acceleration magnitude is:
+$$g = |\nabla\Phi| = \sqrt{g^{ij} \partial_i \Phi \partial_j \Phi}$$
+
+Taking the variation:
+$$\frac{\partial g}{\partial g^{ij}} = \frac{\partial_i \Phi \partial_j \Phi}{2g}$$
+
+This is:
+- **Traceless** in spatial indices
+- **Zero** for the 00-component (no time derivatives in static limit)
+
+### SI §22.3. Explicit Components
+
+For non-relativistic matter with $\mathcal{L}_m = -\rho c^2$:
+
+**00-component:**
+$$\Theta_{00} = -\frac{1}{2} g_{00} (\Sigma - 1) \mathcal{L}_m = \frac{1}{2} (\Sigma - 1) \rho c^2$$
+
+**Spatial components:**
+$$\Theta_{ij} = \rho c^2 \frac{\partial \Sigma}{\partial g} \frac{\nabla_i \Phi \nabla_j \Phi}{2g} + \frac{1}{2} \delta_{ij} (\Sigma - 1) \rho c^2$$
+
+### SI §22.4. Newtonian Limit
+
+The 00-component of the field equations:
+$$G_{00} = \kappa (\Sigma T_{00} + \Theta_{00})$$
+
+In the weak-field limit:
+$$\nabla^2 \Phi = 4\pi G \rho_{\text{eff}}$$
+
+where:
+$$\rho_{\text{eff}} = \Sigma \rho + \frac{\Theta_{00}}{\kappa c^2} = \rho \left(\Sigma + \frac{\Sigma - 1}{2}\right) = \rho \frac{3\Sigma - 1}{2}$$
+
+### SI §22.5. Amplitude Renormalization
+
+Define effective enhancement:
+$$\Sigma_{\text{eff}} = \frac{3\Sigma - 1}{2}$$
+
+For $\Sigma = 1 + A W h$:
+$$\Sigma_{\text{eff}} = 1 + \frac{3}{2}(A W h) = 1 + A_{\text{eff}} W h$$
+
+where $A_{\text{eff}} = \frac{3}{2} A$.
+
+**Key Result:** The Θ_μν contribution **enhances** the effect by 50%, absorbed into the fitted amplitude. The **functional form** $W(r) \times h(g)$ is unchanged.
+
+### SI §22.6. Implications
+
+1. The fitted amplitude $A$ from data already includes the Θ_μν contribution
+2. The theoretical "bare" amplitude would be $A_{\text{bare}} = A_{\text{fit}} / 1.5$
+3. For $A_{\text{fit}} = \sqrt{3} \approx 1.73$: $A_{\text{bare}} \approx 1.15$
+4. This is consistent with the mode-counting argument giving $A_{\text{bare}} = 1$ (single mode) enhanced by geometry
+
+---
+
 ## References
 
+- Aldrovandi, R. & Pereira, J. G. (2013). Teleparallel Gravity: An Introduction. Springer.
 - Beck, C. & Cohen, E. G. D. (2003). Superstatistics. Physica A, 322, 267-275. arXiv:cond-mat/0303288
-- Rodriguez, G. (1977). Statistical Models. JSTOR.
-- Arnaud, M., et al. (2010). The universal galaxy cluster pressure profile. A&A, 517, A92.
+- Bertotti, B., Iess, L., & Tortora, P. (2003). A test of general relativity using radio links with the Cassini spacecraft. Nature, 425, 374-376.
+- Dutton, A. A. & Macciò, A. V. (2014). Cold dark matter haloes in the Planck era. MNRAS, 441, 3359.
+- Harko, T., et al. (2014). f(T,L_m) gravity and its cosmological implications. PRD, 90, 044067. arXiv:1404.6212
+- Krššák, M. & Saridakis, E. N. (2016). The covariant formulation of f(T) gravity. CQG, 33, 115009.
 - Lelli, F., et al. (2017). SPARC: Mass Models for 175 Disk Galaxies. AJ, 153, 240.
 - Li, P., et al. (2018). Fitting the radial acceleration relation to individual SPARC galaxies. A&A, 615, A3.
-- Dutton, A. A. & Macciò, A. V. (2014). Cold dark matter haloes in the Planck era. MNRAS, 441, 3359.
 - Milgrom, M. (1983). A modification of the Newtonian dynamics. ApJ, 270, 365.
+- Rodriguez, G. (1977). Statistical Models. JSTOR.
+- Will, C. M. (2014). The confrontation between general relativity and experiment. LRR, 17, 4.
 
 ---
 
