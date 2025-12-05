@@ -221,9 +221,11 @@ where $|e|$ is the tetrad determinant, $\kappa = 8\pi G/c^4$, and $\mathcal{L}_m
 
 **The key insight:** Σ-Gravity modifies the **matter coupling**, not the gravitational sector. The modified action is:
 
-$$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x \, |e| \, \Sigma[g, \mathcal{C}] \, \mathcal{L}_m$$
+$$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x \, |e| \, \Sigma[g_N, \mathcal{C}] \, \mathcal{L}_m$$
 
-where $\Sigma[g, \mathcal{C}]$ is the coherent enhancement factor that depends on the local gravitational acceleration $g$ and a coherence measure $\mathcal{C}$.
+where $\Sigma[g_N, \mathcal{C}]$ is the coherent enhancement factor that depends on the **baryonic Newtonian acceleration** $g_N = |\nabla\Phi_N|$ (where $\Phi_N$ solves $\nabla^2\Phi_N = 4\pi G\rho$) and a coherence measure $\mathcal{C}$.
+
+**QUMOND-like structure:** This is analogous to Milgrom's QUMOND formulation (2010), where the modification depends on the Newtonian field of baryons rather than the total gravitational field. This choice is physically motivated: the coherence enhancement is determined by how **matter** is organized (disk geometry, rotation pattern), which is characterized by the baryonic source distribution. The enhancement is a property of the **source configuration**, not the resulting total field.
 
 **Physical interpretation:** Matter in coherent configurations is modeled as sourcing gravity more effectively than incoherent matter. The gravitational sector (torsion scalar **T**) remains unchanged, which suggests:
 - Gravitational wave speed = c (likely, but propagation in matter-filled regions needs study)
@@ -246,7 +248,9 @@ This section provides a schematic derivation of the modified Poisson equation fr
 
 Starting from the Σ-Gravity action:
 
-$$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x \, |e| \, \Sigma[g, \mathcal{C}] \, \mathcal{L}_m$$
+$$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x \, |e| \, \Sigma[g_N, \mathcal{C}] \, \mathcal{L}_m$$
+
+where $g_N = |\nabla\Phi_N|$ is the Newtonian acceleration from baryons alone ($\nabla^2\Phi_N = 4\pi G\rho$).
 
 Varying with respect to the tetrad $e^a_\mu$ yields the modified field equations:
 
@@ -258,57 +262,39 @@ $$\Theta_{\mu\nu} = \mathcal{L}_m \frac{\delta \Sigma}{\delta g^{\mu\nu}} - \fra
 
 #### 2.3.2 Structure of the Extra Term Θ_μν
 
-Since $\Sigma = \Sigma(g, r)$ depends on the gravitational acceleration magnitude $g = |\nabla\Phi|$, we have:
+Since $\Sigma = \Sigma(g_N, r)$ depends on the **baryonic** Newtonian acceleration $g_N = |\nabla\Phi_N|$, the structure of $\Theta_{\mu\nu}$ is simplified compared to fully nonlinear theories.
 
-$$\frac{\delta \Sigma}{\delta g^{\mu\nu}} = \frac{\partial \Sigma}{\partial g} \frac{\delta g}{\delta g^{\mu\nu}}$$
+**Key simplification from QUMOND-like structure:** Because $\Sigma$ depends on $\Phi_N$ (which is determined by the matter distribution alone, independent of the metric perturbation $h_{\mu\nu}$), the metric variation of $\Sigma$ vanishes to leading order:
 
-In the weak-field limit where $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$ with $|h| \ll 1$:
+$$\frac{\delta \Sigma}{\delta g^{\mu\nu}} = \frac{\partial \Sigma}{\partial g_N} \frac{\delta g_N}{\delta g^{\mu\nu}} \approx 0$$
 
-$$g = |\nabla\Phi| = \sqrt{g^{ij} \partial_i \Phi \partial_j \Phi} \approx |\nabla\Phi|_{\text{flat}} + O(h)$$
+since $g_N = |\nabla\Phi_N|$ is computed from the flat-space Poisson equation and does not depend on the metric perturbation.
 
-The metric variation contributes:
+**Consequence:** The extra stress-energy simplifies to:
 
-$$\frac{\delta g}{\delta g^{ij}} = \frac{\partial_i \Phi \partial_j \Phi}{2g}$$
+$$\Theta_{\mu\nu} \approx -\frac{1}{2} g_{\mu\nu} (\Sigma - 1) \mathcal{L}_m = \frac{1}{2} g_{\mu\nu} (\Sigma - 1) \rho c^2$$
 
-For non-relativistic matter with $\mathcal{L}_m \approx -\rho c^2$, the extra stress-energy takes the schematic form:
-
-$$\Theta_{\mu\nu} \approx -\rho c^2 \left[ \frac{\partial \Sigma}{\partial g} \frac{\partial_\mu \Phi \partial_\nu \Phi}{2g} - \frac{1}{2} g_{\mu\nu} (\Sigma - 1) \right]$$
+This is a **pressure-like term** that contributes to the effective source but does not introduce gradient forces from $\nabla\Sigma$.
 
 #### 2.3.3 Conditions for Neglecting Θ_μν in the Newtonian Limit
 
-**Approximation 1: Slowly varying Σ**
+**Assessment of Θ_μν in the QUMOND-like formulation:**
 
-The key ratio determining when $\Theta_{\mu\nu}$ can be neglected compared to $\Sigma T_{\mu\nu}$ is:
+With the simplified $\Theta_{\mu\nu}$ from §2.3.2, the ratio to the main term is:
 
-$$\frac{|\Theta_{\mu\nu}|}{|\Sigma T_{\mu\nu}|} \sim \frac{|(\Sigma-1)| + |g \partial\Sigma/\partial g|}{\Sigma} = \frac{(\Sigma-1)}{\Sigma} \left(1 + \left|\frac{\partial \ln(\Sigma-1)}{\partial \ln g}\right|\right)$$
+$$\frac{|\Theta_{00}|}{|\Sigma T_{00}|} \sim \frac{(\Sigma - 1)}{2\Sigma}$$
 
-For the h(g) function with $h(g) = \sqrt{g^\dagger/g} \cdot g^\dagger/(g^\dagger+g)$:
+For $\Sigma \sim 2$ at the outer disk, this gives $\sim 0.25$—not negligible, but the effect is a simple **amplitude renormalization**.
 
-$$\frac{\partial \ln h}{\partial \ln g} = -\frac{1}{2} - \frac{g}{g^\dagger + g}$$
+**Key result:** The $\Theta_{\mu\nu}$ contribution has the **same spatial dependence** as the enhancement term $(\Sigma - 1)\rho$:
 
-This varies from $-1.5$ (at $g \ll g^\dagger$) to $-0.5$ (at $g \gg g^\dagger$), i.e., $|d\ln h/d\ln g| \sim O(1)$.
+$$\Theta_{00} \propto \rho \times (\Sigma - 1) \propto \rho \times A W(r) h(g_N)$$
 
-**Approximation 2: Weak enhancement regime**
+This differs from the main enhancement only by an $O(1)$ numerical factor that can be absorbed into the amplitude $A$.
 
-When $\Sigma - 1 \ll 1$ (enhancement is small), $\Theta_{\mu\nu}$ is suppressed relative to $T_{\mu\nu}$ by a factor of $(\Sigma - 1)$. This holds in:
-- Inner galactic regions where $W(r) \to 0$
-- High-acceleration regions where $h(g) \to 0$
+**Consequence:** The effect of $\Theta_{\mu\nu}$ is to **renormalize the amplitude** $A$ rather than change the functional form. The physically meaningful amplitude is the **effective** value $A_{\text{eff}}$ that includes this contribution. This is the amplitude we fit to data.
 
-**Approximation 3: Quasi-static, non-relativistic sources**
-
-In the Newtonian limit, we focus on the 00-component of the field equations. The spatial components of $\Theta_{ij}$ contribute to post-Newtonian corrections suppressed by $(v/c)^2 \sim 10^{-6}$ for galactic rotation velocities.
-
-**Combined assessment:** Taking $\Sigma \sim 2$ at the outer disk (typical enhancement), $|\partial \ln h/\partial \ln g| \sim 1$, and $(v/c)^2 \sim 10^{-6}$:
-
-$$\frac{|\Theta_{00}|}{|\Sigma T_{00}|} \sim \frac{(\Sigma - 1)}{\Sigma} \sim 0.5$$
-
-**This is not negligible.** However, the functional form of $\Theta_{00}$ in the weak-field limit is:
-
-$$\Theta_{00} \propto \rho \times (\Sigma - 1) \propto \rho \times A W(r) h(g)$$
-
-This has the **same spatial dependence** as the enhancement term $(\Sigma - 1)\rho$, differing only by an $O(1)$ numerical factor that can be absorbed into the amplitude $A$.
-
-**Key result:** The effect of $\Theta_{\mu\nu}$ is to **renormalize the amplitude** $A$ rather than change the functional form of the enhancement. The physically meaningful amplitude is the **effective** value $A_{\text{eff}}$ that includes the $\Theta_{\mu\nu}$ contribution. This is the amplitude we fit to data.
+**Advantage of QUMOND-like structure:** Because $\Sigma$ depends on $g_N$ (not the total field), there are no implicit equations to solve. The enhancement is computed directly from the baryonic mass distribution, then applied once. This is both computationally simpler and physically cleaner than a fully nonlinear formulation.
 
 #### 2.3.4 Derivation of the Modified Poisson Equation
 
@@ -318,27 +304,29 @@ $$\nabla^2 \Phi = 4\pi G \rho_{\text{eff}}$$
 
 where the effective source density is:
 
-$$\rho_{\text{eff}} = \Sigma_{\text{eff}} \, \rho = \left[1 + A_{\text{eff}} W(r) h(g)\right] \rho$$
+$$\rho_{\text{eff}} = \Sigma_{\text{eff}} \, \rho = \left[1 + A_{\text{eff}} W(r) h(g_N)\right] \rho$$
+
+Here $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration**, computed from $\nabla^2\Phi_N = 4\pi G\rho$.
 
 The effective acceleration is then:
 
-$$g_{\text{eff}} = g_{\text{bar}} \cdot \Sigma_{\text{eff}}$$
+$$g_{\text{eff}} = g_N \cdot \Sigma_{\text{eff}}(g_N, r)$$
 
-where $g_{\text{bar}} = -\nabla\Phi_{\text{bar}}$ is the standard Newtonian acceleration.
-
-**This is the defining phenomenological relation of Σ-Gravity**, with the understanding that:
-1. $A_{\text{eff}}$ absorbs contributions from $\Theta_{\mu\nu}$
-2. Post-Newtonian corrections are $O(v/c)^2 \sim 10^{-6}$
-3. Spatial components of $\Theta_{ij}$ contribute at higher PN order
+**This is the defining phenomenological relation of Σ-Gravity.** Note that:
+1. $\Sigma$ depends on $g_N$ (baryonic field), not $g_{\text{eff}}$ (total field)—this is the QUMOND-like structure
+2. $A_{\text{eff}}$ absorbs contributions from $\Theta_{\mu\nu}$
+3. No iteration is required: compute $g_N$ from baryons, apply $\Sigma$, done
+4. Post-Newtonian corrections are $O(v/c)^2 \sim 10^{-6}$
 
 #### 2.3.5 Theoretical Uncertainties
 
 **What is derived:**
-- Multiplicative enhancement form $g_{\text{eff}} = g_{\text{bar}} \cdot \Sigma$
-- Functional dependence on $g$ and $r$ through $h(g)$ and $W(r)$
+- Multiplicative enhancement form $g_{\text{eff}} = g_N \cdot \Sigma$
+- Functional dependence on $g_N$ and $r$ through $h(g_N)$ and $W(r)$
+- QUMOND-like structure where $\Sigma$ depends on baryonic field only
 
 **What is assumed:**
-- $\Theta_{\mu\nu}$ contribution can be absorbed into effective amplitude (plausible but not proven)
+- $\Theta_{\mu\nu}$ contribution can be absorbed into effective amplitude (justified by same spatial dependence)
 - Post-Newtonian corrections remain small for galactic kinematics (well-justified)
 - Coherence functional $\mathcal{C}$ enters only through $W(r)$ (simplifying ansatz)
 
@@ -346,6 +334,7 @@ where $g_{\text{bar}} = -\nabla\Phi_{\text{bar}}$ is the standard Newtonian acce
 - Full post-Newtonian treatment including all $\Theta_{\mu\nu}$ components
 - Behavior in strong-field regime (neutron stars, black holes)
 - Cosmological limit and consistency with CMB
+- Whether QUMOND-like structure emerges from a deeper principle or is phenomenological choice
 
 ### 2.4 The Core Ansatz: Coherence-Dependent Enhancement
 
@@ -675,8 +664,8 @@ Teleparallel gravity theories with non-minimal matter couplings can violate loca
 
 **Σ-Gravity's situation:**
 
-The coupling $\Sigma[g, \mathcal{C}]$ depends on:
-- $g = |\nabla\Phi|$: a scalar under both transformations (good)
+The coupling $\Sigma[g_N, \mathcal{C}]$ depends on:
+- $g_N = |\nabla\Phi_N|$: the baryonic Newtonian acceleration, a scalar (good)
 - $\mathcal{C}$: the coherence measure, assumed to be a scalar (good)
 - $r$: radial distance from galactic center, also a scalar (good)
 
