@@ -967,7 +967,16 @@ This resolves the question of how the action leads to the modified Poisson equat
 
 ### 3.1 Radial Acceleration Relation (SPARC Galaxies)
 
-We test the framework on the SPARC database (Lelli+ 2016) containing 175 late-type galaxies with high-quality rotation curves and 3.6μm photometry.
+We test the framework on the SPARC database (Lelli+ 2016) containing 175 late-type galaxies with high-quality rotation curves and 3.6μm photometry. **One galaxy (UGC01281) is excluded** due to unphysical V_bar values at inner radii (negative gas velocity dominates over disk velocity, producing imaginary V_bar), leaving **174 galaxies** for analysis.
+
+**Sample Selection Criteria (for reproducibility):**
+| Criterion | Requirement | Galaxies Passing |
+|-----------|-------------|------------------|
+| SPARC database | Lelli+ 2016 rotation curves | 175 |
+| Valid V_bar | $V_{\text{bar}} = \sqrt{\text{sign}(V_g)V_g^2 + \text{sign}(V_d)V_d^2 + V_b^2} > 0$ at all radii | 174 |
+| Minimum points | ≥3 rotation curve points | 174 |
+
+**Excluded galaxy:** UGC01281 — At r < 0.3 kpc, the counter-rotating gas component ($V_{\text{gas}} = -5.85$ km/s) dominates over the stellar disk ($V_{\text{disk}} = 1.5-3.5$ km/s), producing $V_{\text{bar}}^2 < 0$ and thus imaginary baryonic velocity.
 
 **Methodology and Uncertainty Treatment:**
 

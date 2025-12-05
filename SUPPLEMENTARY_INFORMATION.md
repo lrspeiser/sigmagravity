@@ -370,8 +370,10 @@ This section provides complete documentation of data sources, processing steps, 
 **Data URL:** http://astroweb.cwru.edu/SPARC/
 
 **Files used:**
-- `data/Rotmod_LTG/*.dat` — Individual galaxy rotation curve files (175 galaxies)
+- `data/Rotmod_LTG/*.dat` — Individual galaxy rotation curve files (175 galaxies; 174 used after exclusion)
 - `data/Rotmod_LTG/MasterSheet_SPARC.mrt` — Galaxy properties including disk scale lengths
+
+**Excluded galaxy:** UGC01281 — excluded due to unphysical V_bar values at inner radii (negative gas velocity dominates over disk velocity, producing imaginary V_bar).
 
 **Data format per galaxy:**
 ```
