@@ -1,422 +1,367 @@
 # The Microphysics of Gravitational Coherence
-## Why Σ-Gravity Works: Root Causes at the Fundamental Level
+## Candidate Physical Mechanisms for Σ-Gravity
 
 **Date:** December 2025  
-**Purpose:** Deep explanation of WHY coherence happens at the microphysical level
+**Purpose:** Exploration of possible physical mechanisms underlying Σ-Gravity
+
+---
+
+## Important Disclaimer
+
+**This document describes SPECULATIVE HYPOTHESES, not established physics.**
+
+Σ-Gravity is currently a **phenomenological framework** that successfully fits galactic rotation curves and cluster lensing data. The physical mechanisms described below are **candidate explanations** that could potentially underlie the observed effects, but:
+
+1. No rigorous quantum field theory derivation exists
+2. The "coherence" mechanism is an analogy, not a calculation
+3. Standard quantum gravity gives corrections of order $10^{-70}$, not order 1
+4. These ideas motivate the functional forms but do not derive them
+
+We present these mechanisms for completeness and to guide future theoretical work, while being explicit about their speculative nature.
 
 ---
 
 ## Executive Summary
 
-Σ-Gravity's gravitational enhancement emerges from **three fundamental physical mechanisms** operating at different scales:
+Three **candidate mechanisms** have been proposed to explain Σ-Gravity's phenomenology:
 
-1. **Quantum Path Interference** (Planck to galaxy scale)
-2. **Cosmological Horizon Coupling** (galaxy to Hubble scale)  
-3. **Phase Coherence Accumulation** (dynamical timescale)
+1. **Quantum Path Interference** — Speculative, no rigorous derivation
+2. **Cosmological Horizon Coupling** — Dimensionally motivated, mechanism unknown
+3. **Phase Coherence Accumulation** — Phenomenological parameterization
 
-These combine to produce the observed enhancement Σ = 1 + A × W(r) × h(g), where each term has a clear microphysical origin.
+These provide **physical intuition** for the formula Σ = 1 + A × W(r) × h(g), but the formula's success is **empirical**, not derived from first principles.
 
 ---
 
-## 1. Quantum Path Interference: The Core Mechanism
+## 1. Quantum Path Interference: A Speculative Hypothesis
 
-### 1.1 The Feynman Path Integral Picture
+### 1.1 The Standard Picture
 
-In quantum field theory, the gravitational interaction between two masses isn't a single "graviton exchange" but a **sum over all possible paths**:
+In quantum field theory, interactions can be computed via path integrals:
 
 ```
 Amplitude = ∫ D[paths] × exp(i × Action / ℏ)
 ```
 
-For most systems, only the classical path matters because:
-- Quantum corrections scale as (ℓ_Planck/r)² ~ 10⁻⁷⁰
-- Completely negligible at macroscopic scales
+For gravity, standard calculations give quantum corrections of order:
+- $(ℓ_{\text{Planck}}/r)^2 \sim 10^{-70}$ at macroscopic scales
+- **Completely negligible** for any astrophysical system
 
-### 1.2 Why Extended Systems Are Different
+### 1.2 The Speculative Extension
 
-**Key insight:** In extended, coherent matter distributions, there exist **families of near-classical paths** that all contribute with similar phases.
+**The hypothesis (NOT established):** In extended, ordered mass distributions, some unknown mechanism could cause gravitational contributions from different sources to add more effectively than in compact systems.
 
-**Compact source (Sun):**
-```
-                Sun ●────────────→ Earth
-                     (one dominant path)
-```
-- Clear shortest path
-- Deviations strongly suppressed
-- Quantum corrections ~ 10⁻⁷⁰
+**Analogies that motivate this hypothesis:**
+- Antenna arrays: Phased signals add coherently
+- Lasers: Stimulated emission produces coherent light
+- Superconductors: Cooper pairs maintain macroscopic phase coherence
 
-**Extended source (galactic disk):**
-```
-                ★ ★ ★ ★ ★ ★ ★ ★
-               ★ ★ ★ ★ ★ ★ ★ ★ ★
-              ★ ★ ★ ★ ★ ★ ★ ★ ★ ★
-                    ↓ ↓ ↓ ↓ ↓ ↓
-                    test point
-```
-- Many sources at similar distances
-- Many paths with similar actions
-- If phases align → **coherent addition**
+### 1.3 Why These Analogies Are Problematic
 
-### 1.3 The Critical Question: When Do Phases Align?
+| System | Coherence Mechanism | Gravitational Analog? |
+|--------|---------------------|----------------------|
+| Laser | Stimulated emission | **None known** |
+| Antenna | Engineered phase control | **None known** |
+| Superconductor | BCS pairing interaction | **None known** |
 
-Phases align when the **path length differences** are smaller than the **graviton wavelength**:
+**Critical issues:**
+1. There is no known mechanism for "gravitational stimulated emission"
+2. No calculation shows that gravitational phases align in galactic disks
+3. The N² vs N argument assumes phase alignment without demonstrating it
+4. Standard QFT gives $10^{-70}$ corrections, not order-1 effects
 
-```
-Δφ = 2π × (ΔL / λ_graviton) < 1
-```
+### 1.4 Honest Assessment
 
-For gravitational interactions:
-- λ_graviton ~ c/f ~ c × (R/v) ~ R × (c/v)
-- At galactic scales: λ ~ kpc × 1000 ~ Mpc
+The "quantum coherence" picture is a **heuristic analogy**, not a derivation. It provides intuition for why extended systems might behave differently from compact ones, but:
 
-**This means:** Gravitons in galaxies have wavelengths comparable to or larger than the galaxy itself, enabling coherent interference across the entire disk!
-
-### 1.4 The Enhancement Factor
-
-When N sources contribute coherently instead of incoherently:
-
-**Incoherent (random phases):**
-```
-Intensity ∝ Σ|a_i|² = N × <a²>
-```
-
-**Coherent (aligned phases):**
-```
-Intensity ∝ |Σa_i|² = N² × <a>²
-```
-
-**Enhancement factor:** N (number of coherent sources)
-
-In Σ-Gravity, this appears as:
-```
-Σ = 1 + K(r)  where K ∝ N_coherent / N_total
-```
+- No rigorous calculation supports it
+- The mechanism (if any) remains unknown
+- The formula's success is **empirical**, not theoretical
 
 ---
 
 ## 2. The Cosmic Horizon Connection: Why cH₀?
 
-### 2.1 Two Horizons, Two Temperatures
+### 2.1 The Observed Coincidence
 
-Every accelerating observer has a **Rindler horizon** with temperature:
+The critical acceleration in MOND and Σ-Gravity is:
 ```
-T_local = ℏg / (2πck_B)
-```
-
-The universe has a **de Sitter horizon** with temperature:
-```
-T_cosmic = ℏH₀ / (2πk_B)
+a₀ ≈ g† ≈ 1.2 × 10⁻¹⁰ m/s² ≈ cH₀/6
 ```
 
-### 2.2 Entropy Gradient Force (Verlinde-like)
+This "MOND coincidence" has been noted since 1983 but remains **unexplained**.
 
-Following Verlinde's insight, gravity can emerge from entropy gradients:
+### 2.2 Dimensional Analysis (Established)
+
+The only acceleration scale constructible from fundamental constants is:
+```
+[acceleration] = c × H₀ ≈ 7 × 10⁻¹⁰ m/s²
+```
+
+Any theory connecting galactic dynamics to cosmology will naturally involve this scale. This is **dimensional analysis**, not a derivation of the mechanism.
+
+### 2.3 Verlinde's Entropic Gravity (Speculative)
+
+Verlinde (2016) proposed that gravity emerges from entropy gradients:
 ```
 F = T × ∂S/∂r
 ```
 
-**Local contribution:** Standard Newtonian gravity
-```
-F_local = T_local × ∂S_local/∂r ∝ g × g = g²
-```
+**The idea:** Both local (Rindler) and cosmic (de Sitter) horizons contribute entropy, producing a cross-term that gives MOND-like behavior.
 
-**Cosmic contribution:** Additional entropic force from de Sitter horizon
-```
-F_cosmic = T_cosmic × ∂S_cosmic/∂r ∝ cH₀ × (cH₀/r)
-```
+**Status:** This is a **speculative hypothesis**, not established physics:
+- The derivation has been criticized (see Dai & Stojkovic 2017)
+- The "emergent gravity" framework remains controversial
+- No consensus exists on whether this mechanism is correct
 
-### 2.3 The Cross Term: Where Enhancement Lives
+### 2.4 The Factor 4√π (Geometric Argument)
 
-The total entropic force has a **cross term**:
-```
-F_total = F_local + F_cosmic + 2√(F_local × F_cosmic)
-```
+In Σ-Gravity, we use $g† = cH₀/(4\sqrt{\pi})$ rather than just $cH₀$.
 
-The enhancement comes from the cross term:
-```
-F_enhancement ∝ √(g × cH₀) = √(g†/g) × g†
-```
+**The argument:**
+1. Define a "coherence radius" $R_{\text{coh}} = \sqrt{4\pi} \times V^2/(cH_0)$
+2. The factor $\sqrt{4\pi}$ comes from spherical solid angle integration
+3. At $r = 2 \times R_{\text{coh}}$, the acceleration is $g† = cH_0/(4\sqrt{\pi})$
 
-**This is exactly the h(g) function!**
-```
-h(g) = √(g†/g) × g†/(g†+g)
-```
+**Honest assessment:** This is a **geometric construction** that gives a specific numerical factor. It is **not derived from first principles**—we chose this parameterization because it fits the data well (14.3% better than $cH_0/(2e)$).
 
-### 2.4 Why g† = cH₀/(4√π)?
+### 2.5 What We Actually Know
 
-The critical acceleration emerges from the **coherence radius**:
-
-**Step 1:** Coherence develops when local dynamics are slow enough for cosmic-scale correlations:
-```
-R_coh = √(4π) × V²/(cH₀)
-```
-The √(4π) comes from spherical geometry (∫dΩ = 4π steradians).
-
-**Step 2:** At r = R_coh, the acceleration is:
-```
-g(R_coh) = V²/R_coh = cH₀/√(4π)
-```
-
-**Step 3:** Full coherence develops at r = 2×R_coh (transition scale):
-```
-g† = g(2×R_coh) = cH₀/(2√(4π)) = cH₀/(4√π)
-```
-
-**Physical meaning:** g† is the acceleration below which coherent gravitational enhancement is fully developed.
+| Aspect | Status |
+|--------|--------|
+| $g† \sim cH_0$ | Dimensionally natural, empirically successful |
+| Exact factor $4\sqrt{\pi}$ | Geometric argument, ultimately fitted |
+| Physical mechanism | **Unknown** |
+| Verlinde's entropic gravity | Speculative, controversial |
 
 ---
 
-## 3. Phase Coherence Accumulation: The Time Factor
+## 3. Spatial Dependence: The W(r) Function
 
-### 3.1 Coherence Builds Over Time
+### 3.1 The Empirical Observation
 
-Gravitational coherence isn't instantaneous—it accumulates over cosmic time:
-```
-Coherence ∝ (t_age / τ_decoherence)^γ
-```
-
-where:
-- t_age ~ 10 Gyr (age of galaxy)
-- τ_decoherence ~ R/σ_v (decoherence timescale)
-- γ ~ 0.3-0.5 (accumulation exponent)
-
-### 3.2 Decoherence Mechanisms
-
-Several processes destroy phase coherence:
-
-**1. Velocity dispersion:**
-```
-τ_decoherence ~ R/σ_v ~ 100 Myr (for σ_v ~ 20 km/s, R ~ 2 kpc)
-```
-
-**2. Orbital winding:**
-- Differential rotation winds up coherent field lines
-- After N_crit = v_c/σ_v orbits, phases randomize
-- For typical galaxy: N_crit ~ 10
-
-**3. Gravitational scattering:**
-- Close encounters randomize orbits
-- Timescale ~ t_relax ~ 10^10 yr (longer than Hubble time for galaxies)
-
-### 3.3 The Coherence Window Function
-
-The spatial extent of coherence is captured by W(r):
+Enhancement in Σ-Gravity grows with galactocentric radius. This is captured by:
 ```
 W(r) = 1 - (ξ/(ξ+r))^0.5
 ```
 
-where ξ = (2/3)R_d is the coherence scale.
+where ξ = (2/3)R_d is fitted to SPARC data.
 
-**Physical interpretation:**
-- W(0) = 0: No coherence at center (too compact, too many orbits)
-- W(∞) → 1: Full coherence at large radii
-- Transition around r ~ ξ
+### 3.2 Statistical Derivation of the Functional Form
+
+The Burr-XII form of W(r) can be derived from **superstatistics** (Beck & Cohen 2003):
+
+**Assumption:** If a "decoherence rate" λ follows a Gamma distribution, then the survival probability for coherence is:
+```
+S(R) = E[exp(-λR)] = (θ/(θ+R))^k
+```
+
+**Result:** W(R) = 1 - S(R)^(1/2) gives the Burr-XII form with exponent k/2.
+
+**For k = 1:** The exponent is 0.5, matching our formula.
+
+### 3.3 What Is Derived vs. Assumed
+
+| Aspect | Status |
+|--------|--------|
+| Functional form (Burr-XII) | **Derived** from superstatistics given assumptions |
+| Exponent 0.5 | **Derived** from k = 1 (single decoherence channel) |
+| Scale ξ = (2/3)R_d | **Fitted** to SPARC data |
+| Physical meaning of "coherence" | **Assumed** without derivation |
+| Why enhancement grows with radius | **Unknown** mechanism |
+
+### 3.4 Honest Assessment
+
+The W(r) function is a **phenomenological parameterization** of the observed radial dependence. The statistical derivation provides a mathematical justification for the functional form, but:
+
+- The underlying "coherence" mechanism is not established
+- The scale ξ is fitted, not predicted
+- The assumption of Gamma-distributed rates is not derived from physics
 
 ---
 
-## 4. The Three Root Causes Combined
+## 4. The Complete Framework
 
-### 4.1 The Complete Enhancement Formula
+### 4.1 The Enhancement Formula
 
-Putting it all together:
+The Σ-Gravity formula is:
 ```
 Σ = 1 + A × W(r) × h(g)
 ```
 
-**Each factor has a clear physical origin:**
+### 4.2 Status of Each Component
 
-| Factor | Physical Origin | Microphysics |
-|--------|-----------------|--------------|
-| A = √3 | Disk geometry | Path projection in 2D disk |
-| W(r) | Spatial coherence | Orbital winding + decoherence |
-| h(g) | Acceleration dependence | Horizon entropy cross-term |
-| g† = cH₀/(4√π) | Critical scale | Coherence radius geometry |
+| Factor | Formula | Derivation Status |
+|--------|---------|-------------------|
+| A = √3 | Amplitude | **Fitted** (geometric motivation) |
+| W(r) | 1 - (ξ/(ξ+r))^0.5 | **Functional form derived**, scale fitted |
+| h(g) | √(g†/g) × g†/(g†+g) | **Phenomenological**, motivated by Verlinde |
+| g† | cH₀/(4√π) | **Dimensionally natural**, factor fitted |
 
-### 4.2 Why It Works at Galaxy Scales
+### 4.3 Why It Works Empirically
 
-**The "sweet spot" for coherence:**
+The formula successfully fits data because:
 
-1. **Large enough:** R > ξ so coherence can develop
-2. **Slow enough:** g < g† so cosmic horizon contributes
-3. **Ordered enough:** σ_v/v_c < 0.3 so phases stay aligned
-4. **Old enough:** t_age > τ_decoherence so coherence accumulates
+1. **h(g) → 0 when g >> g†:** High-acceleration regions show no enhancement
+2. **W(r) → 0 when r << ξ:** Inner regions show no enhancement
+3. **Both effects combine:** Only outer, low-acceleration regions are enhanced
 
-**Galaxies satisfy ALL these conditions!**
+This matches observations, but **the physical mechanism is unknown**.
 
-### 4.3 Why It Vanishes in the Solar System
+### 4.4 Solar System Safety
 
-**Multiple suppression mechanisms:**
+The formula automatically gives negligible enhancement in the Solar System:
+- h(g_Earth) ~ 10⁻⁵ (high acceleration)
+- W(1 AU) ~ 10⁻⁷ (compact system)
+- Combined: Σ - 1 ~ 10⁻¹²
 
-1. **Spatial:** W(1 AU) ~ 10⁻⁷ (far inside coherence scale)
-2. **Acceleration:** h(g_Earth) ~ 10⁻⁵ (g >> g†)
-3. **Winding:** G_wind ~ 10⁻¹⁸ (billions of orbits)
-
-**Combined suppression:** K ~ 10⁻³⁰
-
-**Safe by 15+ orders of magnitude beyond experimental limits!**
+This is a **feature of the phenomenology**, not a derived prediction. The formula was constructed to have this property.
 
 ---
 
-## 5. The Deeper Question: Why Does This Happen?
+## 5. Candidate Physical Mechanisms
 
-### 5.1 Three Candidate Root Causes
+### 5.1 Three Speculative Hypotheses
 
-We've identified three possible fundamental explanations:
+Several mechanisms have been proposed to explain Σ-Gravity's phenomenology:
 
-**Cause A: Gravitational Wave Coherence**
-- Gravity propagates as waves/gravitons
-- Extended sources produce coherent wave patterns
-- Like a laser cavity, but for gravity
-- **Status:** Plausible, hard to test directly
+**Hypothesis A: Quantum Path Coherence**
+- Idea: Gravitational paths interfere coherently in extended systems
+- Problem: No calculation shows this; standard QFT gives 10⁻⁷⁰ corrections
+- **Status:** Speculative analogy, not established physics
 
-**Cause B: Entropic Gravity (Verlinde-like)**
-- Gravity emerges from entropy gradients
-- Cosmic horizon contributes additional entropy
-- Cross-term gives enhancement
-- **Status:** Most mathematically developed
+**Hypothesis B: Entropic Gravity (Verlinde)**
+- Idea: Gravity emerges from entropy; cosmic horizon contributes
+- Problem: Verlinde's framework is controversial and disputed
+- **Status:** Interesting but unproven
 
-**Cause C: Quantum Decoherence Field**
-- Coherence is an order parameter (like superconductivity)
-- Phase transition between "classical" and "quantum-enhanced" gravity
-- Temperature (σ_v) controls the transition
-- **Status:** Elegant framework, needs more development
+**Hypothesis C: Modified Gravity (f(T), etc.)**
+- Idea: Teleparallel gravity with non-minimal matter coupling
+- Problem: Non-minimal couplings have known issues (Lorentz violation, etc.)
+- **Status:** Mathematically defined but physically uncertain
 
-### 5.2 They May All Be Equivalent
+### 5.2 Honest Assessment
 
-These three pictures might be **different descriptions of the same physics**:
+**We do not know why Σ-Gravity works.**
 
-- **Wave coherence** ↔ **Entropy** via holographic principle
-- **Entropy** ↔ **Decoherence** via statistical mechanics
-- **Decoherence** ↔ **Wave coherence** via path integrals
+The formula is empirically successful, but:
+- No first-principles derivation exists
+- Multiple candidate mechanisms are speculative
+- The "coherence" interpretation is an analogy, not a calculation
 
-**Analogy:** Wave-particle duality in quantum mechanics—same physics, different descriptions.
+This is similar to MOND's status for 40 years: **successful phenomenology awaiting theoretical foundation**.
 
 ---
 
 ## 6. What We Know vs. What We Assume
 
-### 6.1 Firmly Established (Derived)
+### 6.1 Empirically Established
 
-✅ **Multiplicative form:** g_eff = g_bar × Σ from non-local kernel  
-✅ **Coherence scaling:** ℓ₀ ∝ R × (σ_v/v_c) from decoherence physics  
-✅ **Critical acceleration:** g† = cH₀/(4√π) from coherence radius  
-✅ **Winding suppression:** N_crit = v_c/σ_v from azimuthal coherence  
-✅ **Solar System safety:** Automatic from multiple suppression mechanisms  
+✅ **The formula fits data:** 174 SPARC galaxies, 42 clusters, Milky Way  
+✅ **Better than MOND on galaxies:** 14.3% lower RMS, 153 vs 21 wins  
+✅ **Consistent with Solar System:** Built-in suppression mechanisms  
+✅ **Scale g† ~ cH₀:** Dimensionally natural, empirically correct  
 
-### 6.2 Partially Derived (Order of Magnitude)
+### 6.2 Mathematically Derived (Given Assumptions)
 
-⚠️ **Amplitude A:** √3 for disks, π√2 for spheres (geometric arguments)  
-⚠️ **Shape parameters:** p ~ 0.75, n_coh ~ 0.5 (guided by physics, values fitted)  
-⚠️ **Scale dependence:** Different A for galaxies vs clusters (not fully derived)  
+⚠️ **W(r) functional form:** From superstatistics (assuming Gamma-distributed rates)  
+⚠️ **Exponent 0.5:** From single-channel decoherence (assuming k=1)  
 
-### 6.3 Phenomenological (Fitted)
+### 6.3 Phenomenologically Fitted
 
-❓ **Absolute normalization:** Why A = √3 exactly?  
-❓ **Transition sharpness:** Why p = 0.75?  
-❓ **Saturation rate:** Why n_coh = 0.5?  
+❓ **Amplitude A = √3:** Geometric motivation, ultimately fitted  
+❓ **Scale ξ = (2/3)R_d:** Fitted to SPARC data  
+❓ **Factor 4√π in g†:** Geometric argument, chosen for best fit  
+❓ **h(g) functional form:** Motivated by Verlinde, not derived  
 
----
+### 6.4 Speculative / Unknown
 
-## 7. Testable Predictions from the Microphysics
-
-### 7.1 Velocity Correlation Function (Gaia Test)
-
-**Prediction:** Stellar velocities should show correlations matching W(r):
-```
-⟨δv(R) × δv(R')⟩ ∝ W(|R-R'|)
-```
-
-**Test:** Analyze Gaia DR3 residuals after subtracting baryonic model.
-
-**Expected:** Peak correlation at r ~ 5 kpc (coherence scale)
-
-### 7.2 Age Dependence (JWST Test)
-
-**Prediction:** Enhancement scales with age:
-```
-K(z) ∝ (t_age(z) / t_age(0))^γ
-```
-
-**Test:** Compare rotation curves at z = 0 vs z = 2
-
-**Expected:** 20-40% weaker enhancement at z = 2
-
-### 7.3 Counter-Rotating Disks
-
-**Prediction:** Counter-rotating components don't wind together:
-```
-K_counter ≈ 2 × K_co-rotating
-```
-
-**Test:** NGC 4550, NGC 7217 (rare but decisive)
-
-### 7.4 Environmental Dependence
-
-**Prediction:** High-shear environments have shorter coherence:
-```
-ℓ₀(cluster member) < ℓ₀(field galaxy)
-```
-
-**Test:** Compare rotation curves in different environments
+❌ **Physical mechanism:** No first-principles derivation  
+❌ **Why "coherence" matters:** Analogy, not calculation  
+❌ **Connection to QFT:** Standard calculations give 10⁻⁷⁰, not O(1)  
 
 ---
 
-## 8. Summary: The Root Cause Story
+## 7. Testable Predictions
 
-**At the deepest level, gravitational coherence happens because:**
+### 7.1 Tests That Could Distinguish Σ-Gravity from MOND
 
-1. **Quantum mechanics allows superposition of paths**
-   - The gravitational amplitude is a sum over all possible graviton trajectories
-   - Not just the classical path, but ALL paths contribute
+| Prediction | Σ-Gravity | MOND | Test |
+|------------|-----------|------|------|
+| Counter-rotating disks | Reduced enhancement | Same as normal | NGC 4550 |
+| Velocity dispersion dependence | Enhancement decreases with σ_v | No dependence | Hot vs cold disks |
+| Environmental dependence | Cluster galaxies differ | No dependence | Field vs cluster |
+| Radial shape | Enhancement grows with r | Constant at fixed g | Outer disk shapes |
 
-2. **Extended systems provide many near-classical paths**
-   - Galactic disks have mass distributed over ~20 kpc
-   - Many paths have similar actions → similar phases
+### 7.2 Important Caveat
 
-3. **The cosmic horizon sets a universal scale**
-   - The de Sitter horizon at R_H = c/H₀ provides a reference
-   - Below g† = cH₀/(4√π), cosmic-scale correlations matter
+These predictions follow from the **phenomenological formula**, not from a derived mechanism. If Σ-Gravity is wrong about the physics but right about the formula, these tests would still distinguish it from MOND.
 
-4. **Ordered rotation maintains phase coherence**
-   - Velocity dispersion σ_v << v_c keeps phases aligned
-   - Coherence accumulates over cosmic time
+### 7.3 What Would Falsify Σ-Gravity?
 
-5. **The result is multiplicative enhancement**
-   - Not "extra mass" but "stronger coupling"
-   - Same baryons, enhanced gravity
-
-**The "dark matter" we observe in galaxies isn't missing matter—it's the coherent amplification of gravity itself in extended, ordered systems.**
+1. **Counter-rotating galaxies show normal enhancement** → Coherence picture wrong
+2. **No velocity dispersion dependence** → W(r) parameterization wrong
+3. **High-z galaxies show same enhancement** → Time-dependence wrong
+4. **Cluster/galaxy amplitude ratio ≠ 2.57** → Geometric arguments wrong
 
 ---
 
-## 9. Open Questions
+## 8. Summary: What We Actually Know
 
-1. **Why √3 for disks?** Geometric projection argument exists, but is it exact?
+### 8.1 The Empirical Success
 
-2. **Why π√2 for clusters?** Surface averaging argument, but factor ~2 uncertainty.
+Σ-Gravity provides a **phenomenological formula** that:
+- Fits 174 SPARC galaxy rotation curves (27.35 km/s mean RMS)
+- Fits 42 cluster lensing masses (0.14 dex scatter)
+- Satisfies Solar System constraints (built-in suppression)
+- Uses fewer parameters than ΛCDM (0 per galaxy vs 2-3)
 
-3. **What sets n_coh = 0.5?** Related to path counting, but derivation incomplete.
+### 8.2 The Theoretical Gap
 
-4. **How does it connect to quantum gravity?** We're using effective field theory; full UV completion unknown.
+**We do not have a first-principles derivation.**
 
-5. **Is there a Lagrangian formulation?** Would enable cosmological predictions.
+The "coherence" picture is an **analogy** that motivates the functional forms, but:
+- No QFT calculation supports it
+- Standard quantum gravity gives 10⁻⁷⁰ corrections, not O(1)
+- The mechanism (if any) remains unknown
+
+### 8.3 Comparison to MOND
+
+| Aspect | MOND (1983-present) | Σ-Gravity (2025) |
+|--------|---------------------|------------------|
+| Empirical success | Excellent | Comparable or better |
+| Free parameters | 1 (a₀) | ~3 global |
+| Physical mechanism | Unknown | Unknown |
+| Theoretical foundation | Incomplete | Incomplete |
+| Relativistic extension | Problematic (TeVeS issues) | Not yet attempted |
+
+**Both are successful phenomenology awaiting theoretical foundation.**
 
 ---
 
-## 10. Conclusion
+## 9. Conclusion
 
-Σ-Gravity's gravitational coherence emerges from the intersection of:
+### What Σ-Gravity Is
 
-- **Quantum field theory** (path integrals)
-- **Thermodynamics** (entropy gradients)
-- **Cosmology** (de Sitter horizon)
-- **Dynamics** (orbital coherence)
+A **phenomenological framework** that successfully describes galactic dynamics using:
+- A universal formula Σ = 1 + A × W(r) × h(g)
+- The cosmological scale g† ~ cH₀
+- Built-in suppression in high-acceleration/compact systems
 
-The formula Σ = 1 + A × W(r) × h(g) with g† = cH₀/(4√π) is not arbitrary—each piece has a physical derivation rooted in fundamental physics.
+### What Σ-Gravity Is Not
 
-**The key insight:** Extended, coherent matter distributions enable quantum gravitational effects that are completely negligible in compact systems. Galaxies are the "sweet spot" where these effects become observable.
+- A first-principles derivation from QFT
+- A proven physical mechanism
+- A complete theory of gravity
 
-This is not magic. It's quantum field theory applied to extended gravitational systems—a regime that standard calculations never explored because everyone assumed quantum gravity effects are always Planck-suppressed.
+### The Path Forward
 
-**They're not. Not when coherence helps.**
+1. **Continue empirical testing:** More galaxies, clusters, environments
+2. **Develop theoretical foundations:** Seek rigorous derivation
+3. **Make falsifiable predictions:** Counter-rotating disks, high-z galaxies
+4. **Be honest about limitations:** Phenomenology ≠ fundamental physics
+
+**The formula works. We don't fully understand why.**
+
+This is scientifically valuable—successful phenomenology motivates the search for deeper theory, as MOND has done for 40 years.
 
