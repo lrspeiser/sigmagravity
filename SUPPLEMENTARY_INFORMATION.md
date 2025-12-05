@@ -2036,7 +2036,7 @@ The gates removed:
 
 ### SI §15.3. SPARC Analysis
 
-**Dataset**: 175 SPARC galaxies (Lelli et al. 2016), 3,361 rotation curve points.
+**Dataset**: 174 SPARC galaxies (Lelli et al. 2016; 1 excluded for data issues), 3,361 rotation curve points.
 
 **Results**:
 
