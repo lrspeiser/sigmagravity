@@ -433,6 +433,59 @@ Column 6: Bulge velocity contribution V_bul [km/s]
 
 **Key assumption:** Baryonic mass fraction $f_{\rm baryon} = 0.15$ (gas + stars) with concentration factor 0.4 for 200 kpc aperture.
 
+### SI §5A.2b. Profile-Based Cluster Subsample (Literature Gas + Stellar Masses)
+
+**Purpose:** Address referee concern about simplified baryon fractions by using directly measured baryonic masses from published X-ray and photometric studies.
+
+**Methodology:**
+- Gas masses: X-ray surface brightness deprojection from Chandra/XMM
+- Stellar masses: BCG + ICL + satellite photometry with stellar population M/L
+- M_bar = M_gas + M_star (no ΛCDM assumptions!)
+- Compare Σ-enhanced M_bar to strong lensing mass MSL(200 kpc)
+
+**Data sources (per cluster):**
+
+| Cluster | z | M_gas (10¹² M☉) | M_star (10¹² M☉) | MSL (10¹² M☉) | Gas Source |
+|---------|---|-----------------|------------------|---------------|------------|
+| Abell 2744 | 0.308 | 8.5 ± 1.5 | 3.0 ± 0.6 | 179.7 | Owers+ 2011, Merten+ 2011 (Chandra) |
+| Abell 370 | 0.375 | 10.0 ± 2.0 | 3.5 ± 0.7 | 234.1 | Richard+ 2010 (Chandra) |
+| MACS J0416 | 0.396 | 6.5 ± 1.0 | 2.5 ± 0.5 | 154.7 | Ogrean+ 2015 (Chandra) |
+| MACS J0717 | 0.545 | 12.0 ± 2.0 | 3.5 ± 0.7 | 234.7 | Ma+ 2009, van Weeren+ 2017 (Chandra) |
+| MACS J1149 | 0.543 | 7.5 ± 1.2 | 2.8 ± 0.5 | 177.8 | Chandra archive |
+| Abell S1063 | 0.348 | 8.0 ± 1.2 | 2.8 ± 0.5 | 208.9 | Gomez+ 2012 (Chandra) |
+| Abell 1689 | 0.183 | 7.0 ± 1.0 | 2.5 ± 0.5 | 150.0 | Lemze+ 2008, Kawaharada+ 2010 (Chandra) |
+| Bullet Cluster | 0.296 | 5.0 ± 1.0 | 2.0 ± 0.4 | 120.0 | Markevitch+ 2004, Clowe+ 2006 (Chandra) |
+| Abell 383 | 0.187 | 3.0 ± 0.5 | 1.5 ± 0.3 | 65.0 | Vikhlinin+ 2006 (Chandra) |
+| MS 2137 | 0.313 | 4.0 ± 0.7 | 1.8 ± 0.4 | 75.0 | Chandra |
+
+**Results:**
+
+| Metric | Value |
+|--------|-------|
+| N clusters | 10 |
+| Median M_Σ/MSL | **0.39** |
+| Mean M_Σ/MSL | 0.44 |
+| Scatter | 0.13 dex |
+| Required amplitude A_req | ~12.8 |
+| Current amplitude A_cluster | π√2 ≈ 4.44 |
+
+**Interpretation:**
+
+The profile-based analysis using directly measured baryonic masses shows **worse agreement** (ratio 0.39) than the simplified M500 × f_baryon approach (ratio 0.68). This reveals a **factor ~3 tension** in the cluster amplitude.
+
+**Possible explanations:**
+1. **Missing baryons:** ICL (intracluster light) is notoriously difficult to measure; could be factor ~2 underestimated
+2. **Non-equilibrium effects:** Merging clusters (Bullet, A2744) have gas displaced from mass peaks
+3. **Incomplete mode counting:** The geometric derivation A = π√2 may be missing additional 3D coherence modes
+4. **Fundamental limitation:** The coherence mechanism may operate differently in 3D spherical vs 2D disk geometries
+
+**Honest assessment:** This is the "cluster problem" for Σ-Gravity, analogous to MOND's cluster problem. Both approaches require additional physics (or residual dark matter) to explain cluster lensing masses.
+
+**Reproduction:**
+```bash
+python derivations/cluster_profile_validation.py
+```
+
 ### SI §5A.3. Σ-Gravity Formulas
 
 **Galaxy rotation curves:**
