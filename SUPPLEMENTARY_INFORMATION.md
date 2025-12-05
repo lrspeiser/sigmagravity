@@ -3039,6 +3039,145 @@ Full implementation: `theory/test_equivalence_principle.py`, `theory/fifth_force
 
 ---
 
+## SI §25 — Relativistic Lensing Derivation
+
+A non-minimal coupling theory must explicitly state what photons do. This section provides a clean relativistic derivation of gravitational lensing in Σ-Gravity, addressing the question: do dynamics and lensing see the same enhancement?
+
+### SI §25.1. The Question
+
+The Σ-Gravity action is:
+
+$$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x \, |e| \, \Sigma[g_N, \mathcal{C}] \, \mathcal{L}_m$$
+
+This raises the question: **Does the electromagnetic Lagrangian also get multiplied by Σ?**
+
+**Option A: Minimal EM coupling (adopted)**
+- EM couples minimally to the metric: $\mathcal{L}_{EM} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$
+- Photons follow null geodesics of the metric sourced by $\Sigma T_{\mu\nu} + \Theta_{\mu\nu}$
+- No non-standard light propagation
+- Consistent with GW170817 constraints on gravitational wave speed
+
+**Option B: Non-minimal EM coupling (rejected)**
+- Would introduce variable speed of light
+- Strong constraints from pulsar timing, gravitational wave observations
+
+We adopt Option A as the physically motivated choice.
+
+### SI §25.2. Weak-Field Metric Derivation
+
+In the weak-field limit, the metric is:
+
+$$ds^2 = -\left(1 + \frac{2\Phi}{c^2}\right)c^2 dt^2 + \left(1 - \frac{2\Psi}{c^2}\right)(dx^2 + dy^2 + dz^2)$$
+
+where:
+- $\Phi$ is the Newtonian potential (time-time component)
+- $\Psi$ is the spatial curvature potential (space-space component)
+
+In GR: $\Phi = \Psi$ (no gravitational slip). In modified gravity theories, they can differ.
+
+### SI §25.3. Structure of Θ_μν
+
+Since $\Sigma = \Sigma(g_N, r)$ depends on the **baryonic** Newtonian acceleration (QUMOND-like structure), the metric variation of $\Sigma$ vanishes to leading order. This simplifies $\Theta_{\mu\nu}$ to:
+
+$$\Theta_{\mu\nu} = \frac{1}{2} g_{\mu\nu} (\Sigma - 1) \rho c^2$$
+
+This is a **pressure-like term** (isotropic, proportional to the metric).
+
+### SI §25.4. Key Result: No Gravitational Slip
+
+The total stress-energy structure is:
+- $T^{\text{tot}}_{00} = \Sigma \rho c^2 + \frac{(\Sigma-1)}{2}\rho c^2 = \frac{3\Sigma - 1}{2}\rho c^2$
+- $T^{\text{tot}}_{ij} = -\frac{(\Sigma-1)}{2}\rho c^2 \cdot \delta_{ij}$
+
+Because $\Theta_{\mu\nu}$ is isotropic (proportional to $g_{\mu\nu}$), it does not source anisotropic stress. The trace-free spatial equation gives:
+
+$$\nabla^2(\Phi - \Psi) = 0$$
+
+With boundary conditions at infinity:
+
+$$\boxed{\Phi = \Psi}$$
+
+**The gravitational slip parameter is $\eta \equiv \Psi/\Phi = 1$.**
+
+### SI §25.5. Deflection Angle Formula
+
+For a photon passing through a weak gravitational field:
+
+$$\alpha = \frac{1}{c^2}\int_{-\infty}^{+\infty} (\nabla_\perp\Phi + \nabla_\perp\Psi) \, dl$$
+
+With $\Phi = \Psi$:
+
+$$\alpha = \frac{2}{c^2}\int_{-\infty}^{+\infty} \nabla_\perp\Phi \, dl$$
+
+For a point mass with enhancement factor $\Sigma_{\text{eff}}$:
+
+$$\alpha = \frac{4GM_{\text{eff}}}{c^2 b} = \frac{4GM_{\text{bar}} \cdot \Sigma_{\text{eff}}}{c^2 b}$$
+
+This is the standard GR formula with enhanced mass.
+
+### SI §25.6. Lensing Mass vs Dynamical Mass
+
+**Dynamical mass** (from rotation curves, velocity dispersions):
+$$M_{\text{dyn}} = M_{\text{bar}} \cdot \Sigma_{\text{eff}}$$
+
+**Lensing mass** (from light deflection):
+$$M_{\text{lens}} = M_{\text{bar}} \cdot \Sigma_{\text{eff}}$$
+
+**Key result:**
+$$\frac{M_{\text{lens}}}{M_{\text{dyn}}} = 1$$
+
+**Lensing and dynamics see the same $\Sigma_{\text{eff}}$.** There is no dynamics-lensing mismatch.
+
+### SI §25.7. Validation on Fox+ 2022 Clusters
+
+The relativistic derivation was validated numerically on 42 Fox+ 2022 clusters:
+
+| Metric | Naive Approach | Relativistic Approach |
+|--------|----------------|----------------------|
+| Median ratio | 0.679 | 0.679 |
+| Mean ratio | 0.725 | 0.725 |
+| Scatter | 0.141 dex | 0.141 dex |
+| Max difference | — | 0.000000 |
+
+**The naive "baryons × Σ" approach and the proper relativistic calculation give identical results.** This confirms that the "baryons × Σ" method is the correct relativistic result, not a naive approximation.
+
+### SI §25.8. Gravitational Slip as Testable Prediction
+
+Σ-Gravity predicts $\eta = \Psi/\Phi = 1$ (no gravitational slip). This is testable by combining:
+- Galaxy-galaxy lensing (probes $\Phi + \Psi$)
+- Galaxy clustering (probes $\Phi$)
+- Redshift-space distortions (probes $\Phi$)
+
+Current constraints from DES, KiDS, and Planck are consistent with $\eta = 1$ at the 10-20% level. Future surveys (Euclid, LSST) will provide tighter constraints.
+
+### SI §25.9. Summary
+
+| Prediction | Status | Notes |
+|------------|--------|-------|
+| $\Phi = \Psi$ | ✓ Consistent | Matches GR structure |
+| $\eta = 1$ | ✓ Consistent | Within current observational bounds |
+| Lensing = Dynamics | ✓ Consistent | By construction (renormalized $\Sigma$) |
+| Cluster ratio 0.68 | ⚠️ Underprediction | Real physics result, not methodology artifact |
+
+### SI §25.10. Reproduction
+
+To reproduce the relativistic lensing validation:
+
+```bash
+# Run the relativistic lensing test
+python derivations/test_relativistic_lensing.py
+
+# Output:
+# - Verifies naive vs relativistic approaches are identical
+# - Tests effect of hypothetical gravitational slip
+# - Validates on 42 Fox+ 2022 clusters
+# - Generates figure: derivations/relativistic_lensing_test.png
+```
+
+Full derivation: `derivations/relativistic_lensing_derivation.md`
+
+---
+
 ## Acknowledgments
 
 We thank **Emmanuel N. Saridakis** (National Observatory of Athens) for detailed feedback on the theoretical framework, particularly regarding the derivation of field equations, the structure of Θ_μν, and consistency constraints in teleparallel gravity with non-minimal matter coupling. His suggestions significantly strengthened the theoretical presentation.

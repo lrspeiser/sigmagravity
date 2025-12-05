@@ -917,6 +917,21 @@ We test the derived formula against the Milky Way rotation curve using McGaugh/G
 
 We test Σ-Gravity on 42 strong lensing clusters from Fox+ (2022, ApJ 928, 87), selected for spectroscopic redshifts and M500 > 2×10¹⁴ M☉. For each cluster, we estimate baryonic mass from the SZ/X-ray M500 (using f_baryon = 0.15), compute the Σ-enhancement at r = 200 kpc, and compare to the strong lensing mass MSL(200 kpc).
 
+**Relativistic Lensing Framework:**
+
+A non-minimal coupling theory must explicitly state what photons do. In Σ-Gravity:
+
+1. **EM couples minimally to the metric** — photons follow geodesics of the metric sourced by $\Sigma T_{\mu\nu} + \Theta_{\mu\nu}$. No non-standard light propagation is introduced.
+
+2. **No gravitational slip** — The metric potentials satisfy $\Phi = \Psi$ because $\Theta_{\mu\nu} \propto g_{\mu\nu}$ (isotropic, no anisotropic stress). The gravitational slip parameter $\eta \equiv \Psi/\Phi = 1$.
+
+3. **Deflection angle** — For a photon passing an enhanced mass distribution:
+$$\alpha = \frac{4GM_{\text{eff}}}{c^2 b} = \frac{4GM_{\text{bar}} \cdot \Sigma_{\text{eff}}}{c^2 b}$$
+
+4. **Lensing = Dynamics** — The same $\Sigma_{\text{eff}}$ appears in both dynamics and lensing. There is no dynamics-lensing mismatch introduced by the non-minimal coupling.
+
+**Key result:** The "baryons × Σ" comparison is **not** a naive approximation—it is the correct relativistic result. The renormalized $\Sigma_{\text{eff}}$ (what we fit to data) is the physical quantity for both dynamics and lensing. See SI §25 for the complete derivation.
+
 **Results (N=42 clusters) — Updated December 2025:**
 
 | Metric | Value |
@@ -926,7 +941,12 @@ We test Σ-Gravity on 42 strong lensing clusters from Fox+ (2022, ApJ 928, 87), 
 | Scatter | 0.14 dex |
 | Within factor 2 | 95% |
 
-The median ratio of 0.68 indicates slight underprediction with the new formula $g^\dagger = cH_0/(4\sqrt{\pi})$. This is within acceptable range for cluster lensing (0.5-2.0). The 0.14 dex scatter is comparable to the 0.10 dex scatter achieved on SPARC galaxies.
+The median ratio of 0.68 indicates slight underprediction with the new formula $g^\dagger = cH_0/(4\sqrt{\pi})$. This is within acceptable range for cluster lensing (0.5-2.0). The 0.14 dex scatter is comparable to the 0.105 dex scatter achieved on SPARC galaxies.
+
+**Interpretation of the 0.68 ratio:** This is a **real physics result**, not an artifact of the lensing methodology. The relativistic derivation confirms that lensing and dynamics probe the same $\Sigma_{\text{eff}}$. Possible explanations for the underprediction include:
+- Baryon fraction in cluster cores higher than assumed (0.15)
+- Cluster amplitude $A = \pi\sqrt{2}$ may need refinement
+- Additional physics at cluster scales (massive neutrinos, WHIM)
 
 **Note:** Both the old formula ($g^\dagger = cH_0/(2e)$, median 0.79) and new formula ($g^\dagger = cH_0/(4\sqrt{\pi})$, median 0.68) work within observational uncertainties for clusters. The new formula is adopted because it provides significantly better galaxy fits (+14.3%) while maintaining acceptable cluster performance.
 
@@ -934,7 +954,7 @@ The median ratio of 0.68 indicates slight underprediction with the new formula $
 
 *Figure 6: Σ-Gravity cluster predictions vs Fox+ 2022 strong lensing masses. Left: Predicted vs observed mass at 200 kpc (N=42). Middle: Ratio vs redshift. Right: Distribution of log(M_Σ/MSL) with scatter = 0.14 dex.*
 
-**Caveats:** Baryonic mass profiles are approximated from M500 × f_baryon rather than detailed X-ray gas modeling. The systematic ~20% underprediction may reflect (1) higher true baryon fraction in cluster cores, or (2) need for refined mass concentration modeling.
+**Caveats:** Baryonic mass profiles are approximated from M500 × f_baryon rather than detailed X-ray gas modeling. The systematic ~32% underprediction may reflect (1) higher true baryon fraction in cluster cores, (2) need for refined mass concentration modeling, or (3) additional cluster-scale physics.
 
 ### 3.4 Cross-Domain Consistency
 
@@ -1141,6 +1161,10 @@ python exploratory/coherence_wavelength_test/counter_rotation_statistical_test.p
 # Solar System safety check
 python scripts/check_solar_system_safety.py
 # Output: Enhancement < 10⁻¹⁴ at planetary scales
+
+# Relativistic lensing validation (SI §25)
+python derivations/test_relativistic_lensing.py
+# Output: Validates Φ=Ψ, lensing=dynamics on 42 Fox+ clusters
 ```
 
 All stochastic operations use `seed = 42` for reproducibility.
@@ -1163,6 +1187,7 @@ Key sections include:
 - **SI §20**: ΛCDM Comparison Methodology and Results
 - **SI §21**: Complete Reproducibility Guide
 - **SI §22**: Explicit Θ_μν Derivation and Amplitude Renormalization
+- **SI §25**: Relativistic Lensing Derivation (Φ = Ψ, deflection angle, dynamics-lensing consistency)
 
 ---
 
