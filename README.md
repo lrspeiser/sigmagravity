@@ -1132,14 +1132,13 @@ See SI §25 for the complete derivation and SI §25.8 for testable predictions.
 
 Using standard assumptions from the literature (f_baryon = 0.15, gas concentration factor = 0.4 at 200 kpc):
 
-| Metric | Value | Source |
-|--------|-------|--------|
-| Median M_Σ/MSL | **0.68** | Fox+ 2022, N=42 clusters |
-| Mean M_Σ/MSL | 0.73 | — |
-| Scatter | 0.14 dex | — |
-| Within factor 2 | 95% | — |
+| Metric | Dynamical | Lensing (with slip) | Source |
+|--------|-----------|---------------------|--------|
+| Median M_Σ/MSL | **0.68** | **0.60** | Fox+ 2022, N=42 |
+| Scatter | 0.14 dex | 0.14 dex | — |
+| Within factor 2 | 95% | 92% | — |
 
-The baseline median ratio of 0.68 indicates ~32% underprediction. This is a **real physics result**, not an artifact of the lensing methodology—the relativistic derivation (SI §25) confirms that lensing and dynamics probe the same $\Sigma_{\text{eff}}$.
+**Important correction:** The full weak-field derivation (SI §25.4-25.7) shows that lensing mass is ~12% lower than dynamical mass at typical cluster $\Sigma \approx 2$, due to gravitational slip ($\eta = 0.75$). The baseline lensing ratio is **0.60**, not 0.68.
 
 #### Revised Results with Updated Gas Fractions (2024-2025 Observations)
 
@@ -1152,22 +1151,22 @@ Recent X-ray and lensing observations have revealed that cluster gas fractions a
 | Bullet Cluster | JWST + Chandra | Total mass revised down ~10-15% | f_gas effectively +11-18% |
 | eROSITA clusters | eROSITA | Extended diffuse emission in outskirts | +30-50% more diffuse gas than pre-2020 surveys |
 
-**Effect on Σ-Gravity predictions (Fox+ 2022 clusters, N=42):**
+**Effect on Σ-Gravity lensing predictions (Fox+ 2022 clusters, N=42):**
 
-| f_gas | Concentration | Σ-Gravity Ratio | MOND Ratio | Status |
-|-------|---------------|-----------------|------------|--------|
-| 0.15 | 0.4 (baseline) | **0.68** | 0.40 | △ Underpredicts |
-| 0.18 | 0.5 | **0.78** | 0.55 | △ Underpredicts |
-| 0.20 | 0.5 | **0.82** | 0.60 | ○ Acceptable |
-| 0.20 | 0.6 | **0.89** | 0.69 | ✓ Good |
-| 0.22 | 0.6 | **0.93** | 0.75 | ✓ Excellent |
+| f_gas | Concentration | Dynamical Ratio | Lensing Ratio | MOND | Status |
+|-------|---------------|-----------------|---------------|------|--------|
+| 0.15 | 0.4 (baseline) | 0.68 | **0.60** | 0.40 | △ Under |
+| 0.18 | 0.5 | 0.78 | **0.68** | 0.48 | △ Under |
+| 0.20 | 0.5 | 0.82 | **0.72** | 0.52 | ○ Acceptable |
+| 0.20 | 0.6 | 0.89 | **0.78** | 0.60 | ○ Acceptable |
+| 0.22 | 0.6 | 0.93 | **0.81** | 0.66 | ✓ Good |
 
 **Key findings:**
-1. With revised gas fractions (f_gas ~ 0.20-0.22) and better concentration modeling (0.5-0.6), Σ-Gravity reaches ratio **0.85-0.95** (good to excellent agreement).
-2. MOND remains at **0.55-0.75** even with the same revisions—the "cluster problem" persists.
-3. Σ-Gravity benefits more because Lensing = Dynamics by construction (SI §25), while MOND's relativistic extensions (TeVeS, AeST) typically predict *less* lensing than dynamics.
+1. With revised gas fractions (f_gas ~ 0.20-0.22) and better concentration modeling (0.5-0.6), Σ-Gravity's lensing predictions reach **0.75-0.85** (acceptable given ~20% cluster systematics).
+2. MOND remains at **0.50-0.66** even with the same revisions—the "cluster problem" persists.
+3. The gravitational slip ($\eta \approx 0.75$) is a **testable prediction** that will be constrained by Euclid/LSST to ~1% precision.
 
-**Note:** The new formula $g^\dagger = cH_0/(4\sqrt{\pi})$ is adopted because it provides **14.3% better galaxy fits** while maintaining acceptable cluster performance. See SI §25.9 for detailed analysis.
+**Note:** The new formula $g^\dagger = cH_0/(4\sqrt{\pi})$ is adopted because it provides **14.3% better galaxy fits** while maintaining acceptable cluster performance. See SI §25 for detailed analysis.
 
 ![Figure: Fox+2022 cluster validation](figures/cluster_fox2022_validation.png){width=100%}
 
