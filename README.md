@@ -804,10 +804,24 @@ Non-minimal matter couplings generically introduce several effects that require 
 
 **Our convention:** We adopt $\mathcal{L}_m = -\rho c^2$ (rest-mass energy density), which is the standard choice for dust and non-relativistic matter. This gives the extra-force factor $(1 + p/\rho c^2) \to 1$ for dust.
 
-**What couples:** In our formulation, the non-minimal coupling $f(\phi_C) \mathcal{L}_m$ applies to **matter only** (baryons, dark matter if present). The electromagnetic Lagrangian $\mathcal{L}_{EM} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$ couples **minimally** to the metric. This ensures:
+**What couples:** In our formulation, the non-minimal coupling $f(\phi_C) \mathcal{L}_m$ applies to **massive matter only** (baryons, dark matter if present). The electromagnetic Lagrangian $\mathcal{L}_{EM} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$ couples **minimally** to the metric. This ensures:
 - Photons follow null geodesics of the metric
 - No variable speed of light
 - Consistency with GW170817 constraints
+
+**Explicit matter sector specification:**
+| Field | Lagrangian | Coupling to Σ | Justification |
+|-------|------------|---------------|---------------|
+| Baryons (p, n, e) | $\mathcal{L}_m = -\rho c^2$ | Yes ($\Sigma \cdot \mathcal{L}_m$) | Source of coherent gravitational effects |
+| EM field | $\mathcal{L}_{EM} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$ | No (minimal) | Preserves c_EM = c, GW170817 |
+| Gravitational waves | $\mathcal{L}_{GW}$ | No (minimal) | Preserves c_GW = c, GW170817 |
+
+**EEP consistency:** The claim of "universal coupling" for WEP safety refers to universality **within the matter sector**: all massive test bodies (regardless of composition) couple identically to Σ. This is distinct from EM minimal coupling. The EEP is preserved because:
+1. **WEP:** All massive bodies fall identically (same Σ enhancement)
+2. **LLI:** Speed of light is position-independent (EM minimal coupling)
+3. **LPI:** Fundamental constants are position-independent
+
+The selective coupling (massive matter ≠ EM) does **not** violate EEP; it is analogous to how in GR, massive particles follow timelike geodesics while photons follow null geodesics of the same metric. The key is that the metric seen by all fields is the **same**—only the coupling to the coherence field Σ differs.
 
 #### 2.14.1 Fifth Force: Proper Dimensional Derivation
 
@@ -874,7 +888,9 @@ The Einstein Equivalence Principle (EEP) has three components. We assess each wi
 
 The coupling function $f(\phi_C) = 1 + \phi_C^2/M^2$ is **universal**—it does not depend on particle species, composition, or internal structure. This means:
 - All test particles feel the same enhancement factor Σ
-- The Eötvös parameter η = 0 **within the theory's assumptions**
+- The Eötvös parameter η_E = 0 **within the theory's assumptions**
+
+**Note on notation:** We use η_E for the Eötvös parameter (WEP test) and η = Ψ/Φ for gravitational slip (cosmological anisotropic stress). These are distinct quantities.
 
 **Caveat:** This assumes all matter couples via the same $\mathcal{L}_m = -\rho c^2$. If different species have different effective Lagrangians (e.g., due to binding energy contributions), small WEP violations could arise. A rigorous treatment would require specifying how composite bodies couple.
 
@@ -901,7 +917,7 @@ The fundamental constants (A, M, g†, c, G) are position-independent. Only the 
 | Fifth force (galaxies) | Absorbed into g_eff | — | ✓ Part of self-consistent solution |
 | Fifth force (Solar System) | Suppressed by Σ-1 < 10⁻⁸ | $< 10^{-14}$ m/s² | ✓ Safe |
 | Stress-energy conservation | Total conserved | — | ✓ Resolved via dynamical field |
-| WEP (Eötvös) | η = 0 (if universal coupling) | η < 10⁻¹³ | ○ Plausible, needs verification |
+| WEP (Eötvös) | η_E = 0 (if universal coupling) | η_E < 10⁻¹³ | ○ Plausible, needs verification |
 | LLI violation | Unknown (likely ~10⁻⁷) | Various | ⚠️ Not proven; future work |
 | LPI | Satisfied | — | ✓ Constants are position-independent |
 | PPN $\gamma - 1$ | $\sim 10^{-8}$ (estimate) | $< 2.3 \times 10^{-5}$ | ○ Plausible, needs derivation |
@@ -1122,7 +1138,7 @@ $$S = S_{\text{grav}} + \int d^4x \, |e| \, \Sigma \cdot \mathcal{L}_m + \int d^
 | Matter (baryons) | $\mathcal{L}_m = -\rho c^2$ | $\Sigma \cdot \mathcal{L}_m$ | Non-minimal (enhanced) |
 | Electromagnetic | $\mathcal{L}_{EM} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$ | Minimal | Photons follow null geodesics |
 
-**Key choice:** EM couples **minimally** to the metric, not multiplied by Σ. This ensures no variable speed of light and consistency with GW170817.
+**Key choice:** EM couples **minimally** to the metric, not multiplied by Σ. This ensures no variable speed of light and consistency with GW170817. See §2.14.0 for detailed justification of this selective coupling and its consistency with EEP.
 
 **2. Weak-field metric from full field equations:**
 
@@ -1139,7 +1155,7 @@ With $\rho_{\text{eff}} = \frac{3\Sigma - 1}{2}\rho$ and $p_{\text{eff}} = \frac
 $$\nabla^2 \Phi = 4\pi G \left[ \frac{3\Sigma - 1}{2} + \frac{3(\Sigma - 1)}{2} \right] \rho = 4\pi G (3\Sigma - 2) \rho$$
 $$\nabla^2 \Psi = 4\pi G \left[ \frac{3\Sigma - 1}{2} + \frac{\Sigma - 1}{2} \right] \rho = 4\pi G (2\Sigma - 1) \rho$$
 
-**Result:** $\Phi \neq \Psi$ in general. The gravitational slip is:
+**Result:** $\Phi \neq \Psi$ in general. The **gravitational slip** (distinct from the Eötvös parameter η_E) is:
 $$\eta \equiv \frac{\Psi}{\Phi} = \frac{2\Sigma - 1}{3\Sigma - 2}$$
 
 For $\Sigma = 2$: $\eta = 3/4 = 0.75$. For $\Sigma \to 1$: $\eta \to 1$.
