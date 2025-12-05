@@ -324,7 +324,7 @@ python scripts/run_holdout_validation.py
 ### SI §5.8. Quick Verification (15 minutes)
 
 ```bash
-# 1. SPARC (full analysis): Should show 0.100 dex, 97-74 wins
+# 1. SPARC (full analysis): Should show 0.105 dex, 98-76 wins
 python scripts/generate_model_comparison_plots.py
 
 # 2. MW (if CSV exists): Should show +0.062 dex, 0.142 dex  
