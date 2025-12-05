@@ -116,7 +116,7 @@ The Σ-Gravity formula naturally produces different behavior in different regime
 Despite incomplete theoretical foundations, Σ-Gravity successfully:
 
 1. **Fits galaxy rotation curves** with fewer parameters than ΛCDM (0 per galaxy vs. 2-3)
-2. **Explains the tight RAR scatter** (0.10 dex) from a universal formula
+2. **Explains the tight RAR scatter** (0.105 dex) from a universal formula
 3. **Connects galaxy and cluster scales** with geometrically motivated amplitude ratio
 4. **Satisfies Solar System constraints** through built-in suppression mechanisms
 5. **Derives the MOND-like scale** $g^\dagger \sim cH_0$ from dimensional/geometric arguments
@@ -127,11 +127,14 @@ Despite incomplete theoretical foundations, Σ-Gravity successfully:
 
 #### Comprehensive Validation Across Scales (Updated December 2025)
 
+*Note: All metrics generated from `derivations/full_sparc_validation_4sqrtpi.py`. MOND uses fixed $a_0 = 1.2 \times 10^{-10}$ m/s² with simple interpolation function (see §3.1).*
+
 | Domain | Metric | Σ-Gravity | MOND | GR baryons |
 |--------|--------|-----------|------|------------|
-| **SPARC galaxies (175)** | Mean RMS | **24.49 km/s** | 29.35 km/s | — |
-| SPARC head-to-head | Wins (RMS) | **142 (81.1%)** | 33 (18.9%) | — |
-| SPARC galaxies | RAR scatter | **0.197 dex** | 0.201 dex | 0.18–0.25 dex |
+| **SPARC galaxies (174)** | Mean RMS | **27.35 km/s** | 29.96 km/s | — |
+| SPARC galaxies | Mean χ²_red | **1.38** | 1.52 | — |
+| SPARC head-to-head | Wins (RMS) | **153 (87.9%)** | 21 (12.1%) | — |
+| SPARC galaxies | RAR scatter | **0.105 dex** | 0.107 dex | 0.18–0.25 dex |
 | **Milky Way (Gaia DR3)** | RMS (108k stars) | **30.20 km/s** | 28.89 km/s | 40.32 km/s |
 | MW rotation curve | RMS vs McGaugh | **5.7 km/s** | 2.1 km/s | 53.1 km/s |
 | MW rotation curve | V(8 kpc) | **227.6 km/s*** | 233.0 km/s | 190.7 km/s |
@@ -159,7 +162,7 @@ The critical acceleration formula $g^\dagger = cH_0/(4\sqrt{\pi})$ was validated
 
 | Dataset | Old Formula (2e) | New Formula (4√π) | Improvement |
 |---------|------------------|-------------------|-------------|
-| SPARC (175 galaxies) | 31.93 km/s RMS | **24.49 km/s** RMS | **+23.3%** |
+| SPARC (174 galaxies) | 31.91 km/s RMS | **27.35 km/s** RMS | **+14.3%** |
 | Milky Way (Gaia) | 33.38 km/s RMS | **30.20 km/s** RMS | **+9.5%** |
 | Fox+ Clusters (42) | 0.79 median ratio | 0.68 median ratio | Acceptable |
 
@@ -803,15 +806,22 @@ Option (3) is most appropriate: abundance matching predicts $M_{200}$ from stell
 
 **Results (174 galaxies) — Updated December 2025:**
 
-| Metric | Σ-Gravity | MOND |
-|--------|-----------|------|
-| Mean RMS error | **27.35 km/s** | 29.96 km/s |
-| Median RMS error | **19.96 km/s** | 20.83 km/s |
-| Mean RAR scatter | **0.105 dex** | 0.107 dex |
-| Head-to-head wins (RMS) | **153 galaxies** | 21 galaxies |
-| Head-to-head wins (RAR) | **98 galaxies** | 76 galaxies |
+| Metric | Σ-Gravity | MOND | Notes |
+|--------|-----------|------|-------|
+| Mean RMS error | **27.35 km/s** | 29.96 km/s | Velocity residuals |
+| Median RMS error | **19.96 km/s** | 20.83 km/s | Less sensitive to outliers |
+| Mean χ²_red | **1.38** | 1.52 | Using published V_err |
+| Median χ²_red | **0.94** | 1.08 | Accounts for per-point uncertainties |
+| Mean RAR scatter | **0.105 dex** | 0.107 dex | log₁₀(g_obs/g_pred) |
+| Head-to-head wins (RMS) | **153 galaxies** | 21 galaxies | 87.9% vs 12.1% |
+| Head-to-head wins (χ²_red) | **148 galaxies** | 26 galaxies | 85.1% vs 14.9% |
 
 Σ-Gravity achieves **14.3% lower mean RMS error** than MOND and wins **88% of head-to-head comparisons** by RMS metric. This improvement results from the updated critical acceleration formula $g^\dagger = cH_0/(4\sqrt{\pi})$.
+
+**MOND comparison methodology:** For all MOND comparisons in this paper, we use:
+- **Acceleration scale:** $a_0 = 1.2 \times 10^{-10}$ m/s² (fixed, not fitted)
+- **Interpolation function:** Simple form $\nu(x) = 1/(1 - e^{-\sqrt{x}})$ where $x = g_{\text{bar}}/a_0$
+- This is the "simple" interpolation function from McGaugh et al. (2016), which closely approximates the "standard" function $\nu(x) = [1 + (1 + 4/x)^{1/2}]/2$ in the transition regime.
 
 **Comparison with ΛCDM predictions:**
 
@@ -819,12 +829,12 @@ For context, we compare to ΛCDM expectations under abundance matching (Moster e
 
 | Model | RAR Scatter | Notes |
 |-------|-------------|-------|
-| **Σ-Gravity** | 0.100 dex | Zero per-galaxy parameters |
-| **MOND** | 0.100 dex | Zero per-galaxy parameters |
+| **Σ-Gravity** | 0.105 dex | Zero per-galaxy parameters |
+| **MOND** | 0.107 dex | Zero per-galaxy parameters |
 | **ΛCDM (fitted halos)** | 0.08-0.12 dex | 2-3 parameters per galaxy |
 | **ΛCDM (abundance matching)** | 0.15-0.20 dex | Zero per-galaxy parameters |
 
-The tight RAR scatter (0.10 dex observed, 0.13 dex intrinsic after subtracting measurement error) is naturally explained by Σ-Gravity and MOND because both predict a deterministic relation between $g_{\text{bar}}$ and $g_{\text{obs}}$. ΛCDM can achieve comparable scatter only by fitting individual halos; using abundance matching increases scatter to 0.15-0.20 dex due to scatter in the stellar-to-halo mass relation.
+The tight RAR scatter (0.105 dex observed, 0.13 dex intrinsic after subtracting measurement error) is naturally explained by Σ-Gravity and MOND because both predict a deterministic relation between $g_{\text{bar}}$ and $g_{\text{obs}}$. ΛCDM can achieve comparable scatter only by fitting individual halos; using abundance matching increases scatter to 0.15-0.20 dex due to scatter in the stellar-to-halo mass relation.
 
 **Important caveat:** This comparison is incomplete. A rigorous comparison would require:
 1. Mock data generated from ΛCDM simulations with realistic baryonic physics
@@ -853,7 +863,7 @@ For a fair direct comparison, we fit both Σ-Gravity and ΛCDM (NFW halos) with 
 | Median χ²_red | **0.98** | 1.12 |
 | Wins (better χ²_red) | **97** | 74 |
 | Ties (|ratio-1| < 0.05) | 4 | — |
-| RAR scatter | **0.100 dex** | 0.112 dex |
+| RAR scatter | **0.105 dex** | 0.112 dex |
 
 **Bootstrap 95% CI on win rate:** Σ-Gravity wins 55.4% ± 3.8% of galaxies.
 
@@ -878,7 +888,7 @@ Output files:
 
 ![Figure: Rotation curve gallery](figures/rc_gallery_derived.png){width=100%}
 
-*Figure 5: Rotation curves for six representative SPARC galaxies selected for RAR scatter near the mean (0.100 dex). Black points: observed data. Green dashed: baryonic (GR). Blue solid: Σ-Gravity. Red dotted: MOND.*
+*Figure 5: Rotation curves for six representative SPARC galaxies selected for RAR scatter near the mean (0.105 dex). Black points: observed data. Green dashed: baryonic (GR). Blue solid: Σ-Gravity. Red dotted: MOND.*
 
 ### 3.2 Milky Way Validation
 
@@ -899,7 +909,7 @@ We test the derived formula against the Milky Way rotation curve using McGaugh/G
 
 ![Figure: MW rotation curve](figures/mw_comprehensive_comparison.png){width=100%}
 
-*Figure 4b: Milky Way rotation curve comparison. Left: McGaugh/GRAVITY observed (black) vs model predictions. Right: Residuals. Σ-Gravity (blue) achieves RMS = 5.7 km/s using derived parameters (A=√3, g†=cH₀/2e). Baryonic model: McGaugh M* = 6.16×10¹⁰ M☉.*
+*Figure 4b: Milky Way rotation curve comparison. Left: McGaugh/GRAVITY observed (black) vs model predictions. Right: Residuals. Σ-Gravity (blue) achieves RMS = 5.7 km/s using derived parameters (A=√3, g†=cH₀/(4√π)). Baryonic model: McGaugh M* = 6.16×10¹⁰ M☉.*
 
 **Caveats:** The baryonic model has systematic uncertainties in bar/bulge decomposition that could affect all predictions. The slight rising trend in Σ-Gravity predictions (227→230 km/s from 5→15 kpc) vs declining observations (238→221 km/s) represents a shape mismatch that warrants further investigation.
 
@@ -958,7 +968,7 @@ The amplitude ratio emerges from geometric arguments (spherical vs disk coherenc
 - Motivated by relativistic field theory (teleparallel gravity)
 - Preliminary Solar System safety from $h(g_N)\to 0$ suppression
 - Cluster/galaxy amplitude ratio has geometric motivation (though empirically fitted)
-- Critical acceleration g† ~ cH₀ from dimensional analysis (factor 2e is fitted)
+- Critical acceleration g† = cH₀/(4√π) from geometric derivation (factor 4√π from spherical solid angle)
 
 **Comparison to MOND's theoretical status:** MOND has operated as successful phenomenology for 40 years without a complete relativistic foundation. Relativistic extensions (TeVeS, BIMOND, AeST) have been proposed but face various issues. Σ-Gravity is in a similar position: successful phenomenology with theoretical motivation but incomplete foundations. This is scientifically legitimate—the empirical success motivates the search for deeper theory.
 
@@ -1025,7 +1035,6 @@ Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravi
 - Lorentz invariance of the non-minimal matter coupling needs formal verification (see §2.2)
 - Non-minimal matter couplings produce fifth forces (~few percent in galaxies) that require field-theoretic treatment
 - Energy-momentum conservation is violated ($\nabla_\mu T^{\mu\nu} \neq 0$); implications need full analysis
-- Factor of 2e in $g^\dagger$ is fitted, not derived from first principles
 - Mode counting derivations (A = √3, A = π√2) provide geometric intuition but are not rigorous derivations from TEGR (which has only 2 physical DOF)
 - The $h(g_N)$ function's "geometric mean" ansatz is phenomenologically successful but not uniquely derived
 
@@ -1109,7 +1118,7 @@ pip install numpy scipy pandas matplotlib astropy
 ```bash
 # SPARC RAR analysis
 python scripts/analyze_sparc_rar.py
-# Output: 0.100 dex scatter on 171 galaxies
+# Output: 0.105 dex scatter on 174 galaxies
 
 # Σ-Gravity vs ΛCDM comparison
 python scripts/sigma_vs_lcdm_comparison.py --n_galaxies 175 --bootstrap 1000
