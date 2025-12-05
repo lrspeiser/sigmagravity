@@ -66,7 +66,18 @@ H0_SI = H0 * 1000 / Mpc_to_m
 
 # Σ-Gravity parameters (December 2025 - derived formula)
 g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # Critical acceleration
-A_cluster = np.pi * np.sqrt(2)               # Cluster amplitude (3D geometry)
+
+# Cluster amplitude derivation (see cluster_amplitude_derivation.py):
+# A_cluster = A_cluster_bare × (W_cluster / <W>_galaxy)
+#           = π√2 × (1.0 / 0.53)
+#           = 4.44 × 1.9
+#           ≈ 8.4
+# This accounts for:
+#   1. Mode counting (3D vs 2D): π√2/√3 ≈ 2.57
+#   2. Coherence window saturation: 1/<W>_galaxy ≈ 1.9
+A_cluster_bare = np.pi * np.sqrt(2)  # From mode counting
+W_ratio = 1.0 / 0.53                  # Coherence window saturation
+A_cluster = A_cluster_bare * W_ratio  # ≈ 8.4
 
 print("=" * 80)
 print("Σ-GRAVITY CLUSTER VALIDATION: Profile-Based Analysis")
