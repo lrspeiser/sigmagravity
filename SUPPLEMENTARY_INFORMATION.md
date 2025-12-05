@@ -2259,11 +2259,11 @@ Free parameters: 1 ($A_0$).
 | Model | Free Params | Total Params | Scatter (dex) | Bias (dex) |
 |-------|-------------|--------------|---------------|------------|
 | Σ-Gravity | 1 (global) | **1** | 0.105 | **+0.029** |
-| ΛCDM c-M | 1 per galaxy | **175** | **0.078** | +0.119 |
+| ΛCDM c-M | 1 per galaxy | **174** | **0.078** | +0.119 |
 | MOND | 0 | **0** | 0.142 | +0.244 |
 
 **Interpretation**:
-- ΛCDM achieves lowest scatter (0.078 dex) but requires **175 per-galaxy halo mass fits** vs Σ-Gravity's single global amplitude. This represents 175× more fitting freedom. Despite this, ΛCDM shows 4× larger systematic bias (+0.119 vs +0.029 dex).
+- ΛCDM achieves lowest scatter (0.078 dex) but requires **174 per-galaxy halo mass fits** vs Σ-Gravity's single global amplitude. This represents 174× more fitting freedom. Despite this, ΛCDM shows 4× larger systematic bias (+0.119 vs +0.029 dex).
 - MOND is fully predictive (0 free parameters) but has systematic 0.24 dex over-prediction across all accelerations.
 - Σ-Gravity with a single global parameter achieves comparable scatter to per-galaxy ΛCDM while maintaining the lowest bias. This suggests the acceleration-dependent kernel captures genuine physics rather than fitting flexibility.
 
@@ -2652,7 +2652,7 @@ where $N$ = number of data points, $k$ = 2 (free parameters).
 | Median χ²_red | 0.98 | 1.12 |
 | Wins (better χ²_red) | 97 | 74 |
 | Ties (|ratio-1| < 0.05) | 4 | — |
-| RAR scatter | 0.100 dex | 0.112 dex |
+| RAR scatter | 0.105 dex | 0.112 dex |
 | Free parameters/galaxy | 2 | 2 |
 
 **Bootstrap 95% CI on win rate:** Σ-Gravity wins 55.4% ± 3.8% of galaxies.
@@ -2678,7 +2678,7 @@ where $N$ = number of data points, $k$ = 2 (free parameters).
 **Run comparison:**
 ```bash
 cd sigmagravity
-python scripts/sigma_vs_lcdm_comparison.py --n_galaxies 175 --bootstrap 1000
+python scripts/sigma_vs_lcdm_comparison.py --n_galaxies 174 --bootstrap 1000
 ```
 
 **Output files:**
@@ -2729,12 +2729,12 @@ pip install numpy scipy pandas matplotlib astropy
 **1. SPARC RAR Analysis:**
 ```bash
 python scripts/analyze_sparc_rar.py
-# Output: 0.100 dex scatter on 171 galaxies
+# Output: 0.105 dex scatter on 174 galaxies
 ```
 
 **2. Σ-Gravity vs ΛCDM Comparison:**
 ```bash
-python scripts/sigma_vs_lcdm_comparison.py --n_galaxies 175 --bootstrap 1000
+python scripts/sigma_vs_lcdm_comparison.py --n_galaxies 174 --bootstrap 1000
 # Output: 97 vs 74 win comparison
 ```
 
