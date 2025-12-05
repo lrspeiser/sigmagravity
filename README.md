@@ -253,7 +253,7 @@ This is the **Poisson equation as an equation of motion**, not an external presc
 
 **This is distinct from f(T) gravity**, which modifies $\mathbf{T} \to f(\mathbf{T})$ in the gravitational sector. Our modification is $\mathcal{L}_m \to \Sigma \cdot \mathcal{L}_m$ in the matter sector.
 
-**Connection to f(T) dimensional structure:** In f(T) theories, a dimensional constant with units [length]² necessarily sets the scale where modified gravity activates (R. Ferraro, private communication). In Σ-Gravity, the coherence scale $\ell$ plays an analogous role. However, validation against 171 SPARC galaxies shows that $\ell$ is **field-dependent** (varying with $\sigma_v$, $\Sigma_b$, $R_{\text{disk}}$) rather than universal. This is consistent with f(T,$\mathcal{L}_m$) theories where the modification scale depends on matter distribution.
+**Connection to f(T) dimensional structure:** In f(T) theories, a dimensional constant with units [length]² necessarily sets the scale where modified gravity activates (R. Ferraro, private communication). In Σ-Gravity, the coherence scale $\ell$ plays an analogous role. However, validation against 174 SPARC galaxies shows that $\ell$ is **field-dependent** (varying with $\sigma_v$, $\Sigma_b$, $R_{\text{disk}}$) rather than universal. This is consistent with f(T,$\mathcal{L}_m$) theories where the modification scale depends on matter distribution.
 
 **Open theoretical issue:** Non-minimal matter couplings in teleparallel gravity can violate local Lorentz invariance unless carefully constructed (see Krššák & Saridakis 2016, CQG 33, 115009). Whether the specific coherence-dependent coupling $\Sigma[g_N, \mathcal{C}]$ preserves Lorentz invariance requires further investigation. We note that the coupling depends only on scalar quantities (baryonic acceleration magnitude, coherence measure), which may mitigate this concern.
 
@@ -1065,7 +1065,7 @@ where the sum runs over all radial points in all galaxies. This is the standard 
 | **ΛCDM (NFW)** | 2-3 ($M_{200}$, $c$, optional $\alpha$) | 2-3N |
 | **ΛCDM (cored)** | 3-4 | 3-4N |
 
-For N = 171 galaxies:
+For N = 174 galaxies:
 - Σ-Gravity: ~3 parameters total
 - MOND: 1 parameter total
 - ΛCDM: 340-680 parameters total
@@ -1588,7 +1588,7 @@ python scripts/check_solar_system_safety.py
 
 # Relativistic lensing validation (SI §25)
 python derivations/test_relativistic_lensing.py
-# Output: Validates Φ=Ψ, lensing=dynamics on 42 Fox+ clusters
+# Output: Tests gravitational slip (Φ≠Ψ, η≈0.75), lensing vs dynamics on 42 Fox+ clusters
 ```
 
 All stochastic operations use `seed = 42` for reproducibility.
@@ -1611,7 +1611,7 @@ Key sections include:
 - **SI §20**: ΛCDM Comparison Methodology and Results
 - **SI §21**: Complete Reproducibility Guide
 - **SI §22**: Explicit Θ_μν Derivation and Amplitude Renormalization
-- **SI §25**: Relativistic Lensing Derivation (Φ = Ψ, deflection angle, dynamics-lensing consistency)
+- **SI §25**: Relativistic Lensing Derivation (gravitational slip η = Ψ/Φ, deflection angle, dynamics-lensing consistency)
 
 ---
 

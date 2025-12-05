@@ -202,7 +202,7 @@ where:
 **Commands to reproduce:**
 
 ```bash
-# Generate all 171 galaxy comparisons + statistics
+# Generate all 174 galaxy comparisons + statistics
 python scripts/generate_model_comparison_plots.py
 
 # Expected output:
@@ -212,7 +212,7 @@ python scripts/generate_model_comparison_plots.py
 #   Head-to-head (by RAR): Σ-Gravity wins 98, MOND wins 76
 
 # Output files:
-#   figures/model_comparison/galaxy_statistics.csv  (all 171 galaxies)
+#   figures/model_comparison/galaxy_statistics.csv  (all 174 galaxies)
 #   figures/model_comparison/all_galaxies/          (individual plots)
 #   figures/model_comparison/comparison_grid_all.png
 ```
@@ -1723,7 +1723,7 @@ python ligo/cross_catalog_analysis.py
 
 ### SI §11.1. Purpose
 
-The SPARC RAR tests Σ-Gravity on rotation-curve bins for 171 external galaxies. Here we validate the framework on the Milky Way using precision rotation curve data from Eilers+ 2019 (Jeans-corrected Gaia red giants) and McGaugh/GRAVITY (HI terminal velocities + GRAVITY $\Theta_0$).
+The SPARC RAR tests Σ-Gravity on rotation-curve bins for 174 external galaxies. Here we validate the framework on the Milky Way using precision rotation curve data from Eilers+ 2019 (Jeans-corrected Gaia red giants) and McGaugh/GRAVITY (HI terminal velocities + GRAVITY $\Theta_0$).
 
 ### SI §11.2. Baryonic Model
 
