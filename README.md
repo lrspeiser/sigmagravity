@@ -395,7 +395,7 @@ $$g_{\text{eff}} = g_N \cdot \Sigma_{\text{eff}}(g_N, r)$$
 
 **What has been resolved (December 2025):**
 - Stress-energy conservation: Resolved via dynamical coherence field (SI §23)
-- Fifth force concern: Absorbed into self-consistent solution (§2.14.1)
+- Fifth force concern: Eliminated via QUMOND-like formulation with minimal matter coupling (§2.14.2)
 - Matter Lagrangian convention: Explicitly specified as $\mathcal{L}_m = -\rho c^2$ (§2.14.0)
 
 **What remains partially open (December 2025):**
@@ -914,30 +914,35 @@ The coherence field $\phi_C$ carries the "missing" momentum/energy, analogous to
 
 **Validation:** The dynamical field formulation exactly reproduces original Σ-Gravity predictions (0.000 km/s difference on 50 SPARC galaxies tested). See SI §23 for the complete derivation.
 
-#### 2.14.2 Fifth Force Analysis
+#### 2.14.2 Fifth Force Resolution: QUMOND-Like Formulation
 
-**The concern:** Non-minimal couplings produce extra accelerations $\propto \nabla \ln \Sigma$.
+**The concern:** Non-minimal couplings $f(\phi_C)\mathcal{L}_m$ generically produce fifth forces $\propto \nabla \ln f$. For Σ varying by O(1) over kpc scales, a naive estimate gives $|a_5| \sim c^2/R_d \sim 10^{-3}$ m/s²—catastrophically large.
 
-**Geodesic equation** (for dust, $\mathcal{L}_m = -\rho c^2$):
-$$\frac{d^2 x^\mu}{d\tau^2} + \Gamma^\mu_{\alpha\beta} u^\alpha u^\beta = -c^2 \partial^\mu \ln \Sigma \cdot \left(1 + \frac{u^\mu u_\mu}{c^2}\right)$$
+**The resolution:** We adopt a **QUMOND-like formulation** (Milgrom 2010, PRD 82, 043523) where matter couples **minimally** and the modification appears in the **field equations**, not the particle action.
 
-**For a particle at rest** (Newtonian limit):
-$$a^i_{\text{fifth}} = -c^2 \partial^i \ln \Sigma$$
+**Formulation:**
 
-**Magnitude in galaxies** ($r = 10$ kpc, $\Sigma \approx 2$, $R_d \approx 3$ kpc):
-$$|\partial_r \ln \Sigma| \sim \frac{1}{\Sigma R_d} \sim 5 \times 10^{-21} \text{ m}^{-1}$$
-$$|a_{\text{fifth}}| \sim c^2 \times 5 \times 10^{-21} \sim 4.5 \times 10^{-4} \text{ m/s}^2$$
+*Step 1:* Solve the standard Poisson equation for baryons:
+$$\nabla^2 \Phi_N = 4\pi G \rho_b$$
 
-**This appears enormous** compared to $g_{\text{bar}} \sim 10^{-10}$ m/s²—but this is a misinterpretation.
+*Step 2:* Define the Newtonian acceleration $\mathbf{g}_N = -\nabla \Phi_N$ and compute the enhancement:
+$$\nu(g_N, r) = 1 + A \cdot W(r) \cdot h(g_N) = \Sigma_{\text{eff}}$$
 
-**Resolution:** The "fifth force" is not an *additional* force on top of Newtonian gravity. In the self-consistent solution:
-1. The modified Poisson equation $\nabla^2 \Phi = 4\pi G \Sigma \rho$ is solved
-2. The resulting $\Phi_{\text{eff}}$ **already includes** the effect of varying $\Sigma$
-3. The formula $g_{\text{eff}} = g_{\text{bar}} \times \Sigma$ is the **output**, not an input plus correction
+*Step 3:* Solve the modified Poisson equation:
+$$\boxed{\nabla^2 \Phi = 4\pi G \rho_b + \nabla \cdot [(\nu - 1) \mathbf{g}_N]}$$
 
-The "fifth force" language is misleading—there is one gravitational force, enhanced by the coherence factor. This is analogous to MOND, where the "extra force" beyond Newtonian is simply part of the modified gravitational law.
+The second term acts as a **phantom density** $\rho_{\text{phantom}} = (4\pi G)^{-1} \nabla \cdot [(\nu - 1) \mathbf{g}_N]$ that sources additional gravity without corresponding baryonic matter.
 
-**In the Solar System:** Both $h(g) \to 0$ (high acceleration) and $W(r) \to 0$ (compact system) suppress $\Sigma - 1 < 10^{-8}$. The enhancement is negligible.
+**Observable equation of motion:**
+$$\mathbf{g}_{\text{eff}} = -\nabla \Phi = \mathbf{g}_N \cdot \nu(g_N, r)$$
+
+**Why there is no fifth force:** Matter couples minimally to the metric sourced by $\Phi$. Test particles follow geodesics. The enhancement is **already incorporated** into $\Phi$ via the phantom density—it is not an additional force on particles.
+
+**Equivalence to original formulation:** The phenomenological prediction $g_{\text{eff}} = g_{\text{bar}} \times \Sigma$ is **identical**. The QUMOND-like formulation simply provides a clean field-theoretic derivation that avoids fifth-force concerns entirely.
+
+**In the Solar System:** Both $h(g) \to 0$ (high acceleration) and $W(r) \to 0$ (compact system) suppress $\nu - 1 < 10^{-8}$. The phantom density vanishes, recovering standard Newtonian gravity.
+
+**Relation to dynamical field (§2.14.1):** The stress-energy conservation proof using $\phi_C$ remains valid. The QUMOND-like formulation is the **weak-field limit** of the full dynamical theory, where the field equation for $\phi_C$ reduces to the phantom density prescription. See SI §24.4 for the complete derivation.
 
 #### 2.14.3 Einstein Equivalence Principle: Assessment
 
@@ -985,16 +990,17 @@ where $r_E = 1$ AU. This satisfies the Cassini bound $|\gamma - 1| < 2.3 \times 
 
 | Constraint | Our Claim | Observational Bound | Status |
 |------------|-----------|---------------------|--------|
-| **Stress-energy conservation** | Total $T^{\mu\nu}$ conserved | Required | ✓ **Proven** (dynamical field) |
-| **Fifth force (Solar System)** | $< 10^{-12}$ m/s² | $< 10^{-14}$ m/s² (Cassini) | ✓ **Safe** (suppressed by $\Sigma - 1 < 10^{-8}$) |
-| **WEP (Eötvös)** | $\eta_E = 0$ (universal coupling) | $\eta_E < 10^{-13}$ | ○ Satisfied *if* coupling is truly universal |
+| **Stress-energy conservation** | Total $T^{\mu\nu}$ conserved | Required | ✓ **Proven** (dynamical field, §2.14.1) |
+| **Fifth force** | None (minimal coupling) | — | ✓ **Eliminated** (QUMOND-like formulation, §2.14.2) |
+| **WEP (Eötvös)** | $\eta_E = 0$ (minimal coupling) | $\eta_E < 10^{-13}$ | ✓ **Satisfied** (all particles follow same geodesics) |
+| **Solar System** | $\nu - 1 < 10^{-8}$ | Various | ✓ **Safe** (phantom density vanishes) |
 | **PPN $\gamma - 1$** | $\sim 10^{-8}$ (estimate) | $< 2.3 \times 10^{-5}$ | ○ **Estimate only**; rigorous derivation needed |
 | **LLI** | Unknown (likely $\sim 10^{-7}$) | Various | ⚠️ Uncertain; requires formal analysis |
 | **LPI** | Satisfied | — | ✓ Position-independent constants |
 
 **Legend:** ✓ = established/proven, ○ = plausible estimate (not rigorous), ⚠️ = uncertain
 
-**Bottom line:** The dynamical coherence field resolves stress-energy conservation. Solar System constraints are *plausibly* satisfied due to strong suppression of $\Sigma - 1$ in high-acceleration compact systems, but a rigorous PPN derivation is needed to make this claim definitive. See SI §23-24 for extended analysis.
+**Bottom line:** The QUMOND-like formulation (§2.14.2) eliminates fifth-force concerns entirely: matter couples minimally, and the enhancement appears in the field equations via a phantom density. Solar System constraints are satisfied because $\nu - 1 < 10^{-8}$ in high-acceleration compact systems. A rigorous PPN derivation is needed to make $\gamma - 1$ claims definitive. See SI §23-24 for extended analysis.
 
 ### 2.15 Amplitude Renormalization from Θ_μν
 
