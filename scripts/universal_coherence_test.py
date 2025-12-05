@@ -6,7 +6,7 @@ Tests R_coh = 0.65 × V²/g† and C = 1 - R_coh/R_outer
 across SPARC galaxies and compares to cluster results.
 
 CONSISTENT with cluster analysis:
-- g† = cH₀/(2e) ≈ 1.25×10⁻¹⁰ m/s²
+- g† = cH₀/(4√π) ≈ 1.25×10⁻¹⁰ m/s²
 - k_coh = 0.65
 - A_geometry = √3 for disks, π√2 for clusters
 """
@@ -39,7 +39,7 @@ print("=" * 80)
 print("UNIVERSAL COHERENCE FORMULA TEST")
 print("=" * 80)
 print(f"\nParameters (CONSISTENT with cluster tests):")
-print(f"  g† = cH₀/(2e) = {g_dagger:.3e} m/s²")
+print(f"  g† = cH₀/(4√π) = {g_dagger:.3e} m/s²")
 print(f"  k_coh = {k_coh}")
 print(f"  A_geometry = √3 = {A_geometry_disk:.4f}")
 

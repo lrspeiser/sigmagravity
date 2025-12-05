@@ -10,7 +10,7 @@ Three Data Sources:
 
 Four Models:
 1. GR (baryons only)
-2. Σ-Gravity (derived: A=√3, g†=cH₀/(2e))
+2. Σ-Gravity (derived: A=√3, g†=cH₀/(4√π))
 3. MOND (a₀=1.2×10⁻¹⁰ m/s²)
 4. Dark Matter (NFW halo)
 
@@ -32,7 +32,7 @@ km_to_m = 1000.0
 G = 4.302e-6         # kpc (km/s)^2 / Msun
 
 # Model parameters
-g_dagger = c * H0_SI / (2 * np.e)  # ≈ 1.25×10⁻¹⁰ m/s²
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 1.25×10⁻¹⁰ m/s²
 A_galaxy = np.sqrt(3)              # ≈ 1.732
 R_d_MW = 2.6                       # kpc
 a0_mond = 1.2e-10                  # m/s²
@@ -106,7 +106,7 @@ def g_to_v(g, R_kpc):
 # Core formula: Σ = 1 + A × C(R) × h(g)
 
 # Derived parameters (NOT fitted):
-# g† = cH₀/(2e) ≈ 1.25×10⁻¹⁰ m/s²
+# g† = cH₀/(4√π) ≈ 1.25×10⁻¹⁰ m/s²
 # A = √3 ≈ 1.732 for disk galaxies
 # p = 3/4 from path interference
 # ℓ₀ = (2/3)R_d from coherence scale

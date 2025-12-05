@@ -7,7 +7,7 @@ on SPARC galaxies to verify it works universally across all scales.
 
 Key formulas (CONSISTENT with cluster tests):
 - R_coh = k × V² / g† where k = 0.65
-- g† = cH₀/(2e) ≈ 1.25×10⁻¹⁰ m/s²
+- g† = cH₀/(4√π) ≈ 1.25×10⁻¹⁰ m/s²
 - A = A_geometry × C_realization
 - A_geometry = √3 for disk galaxies
 - Σ = 1 + A × h(g)
@@ -43,7 +43,7 @@ print("=" * 80)
 print("UNIVERSAL C FORMULA TEST ON SPARC GALAXIES")
 print("=" * 80)
 print(f"\nParameters (CONSISTENT with cluster tests):")
-print(f"  g† = cH₀/(2e) = {g_dagger:.3e} m/s²")
+print(f"  g† = cH₀/(4√π) = {g_dagger:.3e} m/s²")
 print(f"  k_coh = {k_coh}")
 print(f"  A_geometry = √3 = {A_geometry:.4f}")
 

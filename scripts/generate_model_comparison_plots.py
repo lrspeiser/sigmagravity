@@ -13,11 +13,11 @@ Uses the derived formula:
     Σ = 1 + A × W(r) × h(g)
     h(g) = √(g†/g) × g†/(g†+g)
     W(r) = 1 - (ξ/(ξ+r))^0.5 with ξ = (2/3)R_d
-    g† = cH₀/(2e) ≈ 1.20×10⁻¹⁰ m/s²
+    g† = cH₀/(4√π) ≈ 9.60×10⁻¹¹ m/s²
     A = √3 for galaxies
 
 Author: Sigma Gravity Team
-Date: November 30, 2025
+Date: December 2025 (Updated with new g† formula)
 """
 
 import numpy as np
@@ -44,8 +44,9 @@ H0_SI = 2.27e-18     # 1/s (70 km/s/Mpc)
 G = 6.674e-11        # m³/kg/s²
 kpc_to_m = 3.086e19  # m per kpc
 
-# Derived critical acceleration
-g_dagger = c * H0_SI / (2 * np.e)  # ≈ 1.20×10⁻¹⁰ m/s²
+# Derived critical acceleration (UPDATED December 2025)
+# New formula: g† = cH₀/(4√π) - purely geometric derivation
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 9.60×10⁻¹¹ m/s²
 
 # Amplitudes
 A_galaxy = np.sqrt(3)  # ≈ 1.732
@@ -56,7 +57,7 @@ a0_mond = 1.2e-10
 print("=" * 80)
 print("GENERATING MODEL COMPARISON PLOTS")
 print("=" * 80)
-print(f"g† = cH₀/(2e) = {g_dagger:.4e} m/s²")
+print(f"g† = cH₀/(4√π) = {g_dagger:.4e} m/s²")
 print(f"A_galaxy = √3 = {A_galaxy:.4f}")
 print(f"a0_MOND = {a0_mond:.4e} m/s²")
 

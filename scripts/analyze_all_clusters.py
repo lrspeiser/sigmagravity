@@ -30,7 +30,7 @@ H0_SI = H0 * 1000 / Mpc_to_m
 cosmo = FlatLambdaCDM(H0=H0, Om0=0.3)
 
 # Σ-Gravity parameters
-g_dagger = c * H0_SI / (2 * np.e)  # Critical acceleration
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # Critical acceleration
 A_cluster = np.pi * np.sqrt(2)  # Cluster amplitude (3D geometry)
 
 print("=" * 80)

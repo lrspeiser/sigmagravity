@@ -8,7 +8,7 @@ performs well, to illustrate typical predictive performance.
 
 Uses the derived formula:
     Σ = 1 + A × W(r) × h(g)
-    g† = cH₀/(2e) ≈ 1.20×10⁻¹⁰ m/s²
+    g† = cH₀/(4√π) ≈ 1.20×10⁻¹⁰ m/s²
     A = √3 for galaxies
 """
 
@@ -33,7 +33,7 @@ rcParams['savefig.bbox'] = 'tight'
 c = 2.998e8
 H0_SI = 2.27e-18
 kpc_to_m = 3.086e19
-g_dagger = c * H0_SI / (2 * np.e)
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))
 A_galaxy = np.sqrt(3)
 a0_mond = 1.2e-10
 

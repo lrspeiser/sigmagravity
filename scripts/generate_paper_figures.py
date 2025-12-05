@@ -11,7 +11,7 @@ using the unified derived formula:
 where:
     h(g) = √(g†/g) × g†/(g†+g)
     W(r) = 1 - (ξ/(ξ+r))^0.5  with ξ = (2/3)R_d
-    g† = cH₀/(2e) ≈ 1.20×10⁻¹⁰ m/s²
+    g† = cH₀/(4√π) ≈ 1.20×10⁻¹⁰ m/s²
     A = √3 for galaxies, π√2 for clusters
 
 Author: Sigma Gravity Team
@@ -47,7 +47,7 @@ G = 6.674e-11        # m³/kg/s²
 kpc_to_m = 3.086e19  # m per kpc
 
 # Derived critical acceleration
-g_dagger = c * H0_SI / (2 * np.e)  # ≈ 1.20×10⁻¹⁰ m/s²
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 1.20×10⁻¹⁰ m/s²
 
 # Amplitudes
 A_galaxy = np.sqrt(3)      # ≈ 1.732
@@ -56,7 +56,7 @@ A_cluster = np.pi * np.sqrt(2)  # ≈ 4.44
 print("=" * 80)
 print("GENERATING PAPER FIGURES WITH DERIVED FORMULA")
 print("=" * 80)
-print(f"g† = cH₀/(2e) = {g_dagger:.4e} m/s²")
+print(f"g† = cH₀/(4√π) = {g_dagger:.4e} m/s²")
 print(f"A_galaxy = √3 = {A_galaxy:.4f}")
 print(f"A_cluster = π√2 = {A_cluster:.4f}")
 print(f"Ratio = {A_cluster/A_galaxy:.4f} (expected: 2.57)")

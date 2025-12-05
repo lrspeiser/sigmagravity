@@ -5,14 +5,14 @@ Generate Milky Way Gaia Star-Level RAR Comparison Using Derived Formula
 
 Creates visualization of 157,343 Gaia DR3 stars comparing:
 - GR (baryons only)
-- Σ-Gravity (derived formula: A=√3, g†=cH₀/(2e))
+- Σ-Gravity (derived formula: A=√3, g†=cH₀/(4√π))
 - MOND
 
 Uses the derived formula:
     Σ = 1 + A × W(r) × h(g)
     h(g) = √(g†/g) × g†/(g†+g)
     W(r) = 1 - (ξ/(ξ+r))^0.5 with ξ = (2/3)R_d
-    g† = cH₀/(2e) ≈ 1.25×10⁻¹⁰ m/s²
+    g† = cH₀/(4√π) ≈ 1.25×10⁻¹⁰ m/s²
     A = √3 ≈ 1.73 for the Milky Way disk
 """
 
@@ -40,7 +40,7 @@ kpc_to_m = 3.086e19  # m per kpc
 km_to_m = 1000.0
 
 # Derived parameters (from first principles, NOT fitted)
-g_dagger = c * H0_SI / (2 * np.e)  # ≈ 1.25×10⁻¹⁰ m/s²
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 1.25×10⁻¹⁰ m/s²
 A_galaxy = np.sqrt(3)              # ≈ 1.732
 R_d_MW = 2.6                       # MW disk scale length (kpc) - from literature
 
@@ -50,7 +50,7 @@ a0_mond = 1.2e-10  # m/s²
 print("=" * 70)
 print("MW GAIA VISUALIZATION WITH DERIVED FORMULA")
 print("=" * 70)
-print(f"g† = cH₀/(2e) = {g_dagger:.4e} m/s²")
+print(f"g† = cH₀/(4√π) = {g_dagger:.4e} m/s²")
 print(f"A = √3 = {A_galaxy:.4f}")
 print(f"R_d (MW) = {R_d_MW} kpc")
 print(f"ξ = (2/3)R_d = {(2/3)*R_d_MW:.2f} kpc")

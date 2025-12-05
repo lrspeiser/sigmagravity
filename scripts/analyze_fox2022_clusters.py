@@ -30,15 +30,16 @@ H0 = 70  # km/s/Mpc
 H0_SI = H0 * 1000 / Mpc_to_m
 cosmo = FlatLambdaCDM(H0=H0, Om0=0.3)
 
-# Σ-Gravity parameters
-g_dagger = c * H0_SI / (2 * np.e)  # Critical acceleration
+# Σ-Gravity parameters (UPDATED December 2025)
+# New formula: g† = cH₀/(4√π) - purely geometric derivation
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # Critical acceleration
 A_cluster = np.pi * np.sqrt(2)  # Cluster amplitude (3D geometry)
 
 print("=" * 80)
 print("Σ-GRAVITY CLUSTER VALIDATION: Fox+ 2022 Sample")
 print("=" * 80)
 print(f"\nParameters:")
-print(f"  g† = cH₀/(2e) = {g_dagger:.3e} m/s²")
+print(f"  g† = cH₀/(4√π) = {g_dagger:.3e} m/s²")
 print(f"  A_cluster = π√2 = {A_cluster:.3f}")
 
 
