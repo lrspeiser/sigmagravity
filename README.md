@@ -593,6 +593,73 @@ A rough estimate of the correction to the PPN parameter $\gamma$ gives $\delta\g
 
 *Figure 2: Enhancement (Σ-1) as a function of distance from the Sun. At planetary scales, the enhancement is < 10⁻¹⁴, far below observational bounds.*
 
+### 2.13.1 Low-Acceleration Regime: Wide Binaries and Outer Solar System
+
+**Reviewer concern addressed:** The Solar System argument in §2.13 focuses on high-acceleration suppression (Saturn, where $g \sim 10^5 g^\dagger$). However, the "real danger zone" for any MOND-like scaling is far from the Sun, where $g$ drops below $g^\dagger$—the Oort cloud and wide binary regime.
+
+**The low-g regime:** At separations >7,000 AU, the internal gravitational acceleration of wide binaries falls below $g^\dagger$:
+
+| Separation | g_internal | g/g† | Regime |
+|------------|-----------|------|--------|
+| 1,000 AU | 5.9×10⁻¹⁰ m/s² | 6.1 | Newtonian |
+| 5,000 AU | 2.4×10⁻¹¹ m/s² | 0.25 | Transition |
+| 10,000 AU | 5.9×10⁻¹² m/s² | 0.06 | Deep MOND-like |
+| 20,000 AU | 1.5×10⁻¹² m/s² | 0.015 | Deep MOND-like |
+
+**Σ-Gravity's suppression mechanism: The External Field Effect (EFE)**
+
+The Milky Way's gravitational field at the Sun's location provides an external acceleration that dominates over the internal field of wide binaries:
+
+$$g_{\rm MW} = \frac{V_{\rm MW}^2}{R_{\rm MW}} = \frac{(233~\text{km/s})^2}{8~\text{kpc}} \approx 2.2 \times 10^{-10}~\text{m/s}^2 \approx 2.3 \times g^\dagger$$
+
+**Key insight:** The MW field is **2.3× larger than g†**. This means ALL Solar System objects—including wide binaries and Oort cloud objects—are embedded in an effective "Newtonian" regime where the external field suppresses MOND-like enhancement.
+
+**Σ-Gravity predictions with EFE:**
+
+The enhancement function $h(g)$ in the presence of an external field $g_{\rm ext}$ becomes:
+
+$$h(g_{\rm int}, g_{\rm ext}) = \sqrt{\frac{g^\dagger}{\sqrt{g_{\rm int}^2 + g_{\rm ext}^2}}} \times \frac{g^\dagger}{g^\dagger + \sqrt{g_{\rm int}^2 + g_{\rm ext}^2}}$$
+
+| Separation | Without EFE (v_obs/v_Kep) | With EFE (v_obs/v_Kep) | Suppression |
+|------------|---------------------------|------------------------|-------------|
+| 5,000 AU | 1.32 (+32%) | 1.08 (+8%) | 75% |
+| 10,000 AU | 1.52 (+52%) | 1.12 (+12%) | 77% |
+| 20,000 AU | 1.85 (+85%) | 1.15 (+15%) | 82% |
+
+**Observational status:**
+
+Wide binary tests are currently **disputed in the literature**:
+
+| Study | Claim | Separation Range |
+|-------|-------|------------------|
+| Chae (2023) | ~40% velocity excess at >5,000 AU | 2,000-30,000 AU |
+| Banik et al. (2024) | No significant excess | 2,000-30,000 AU |
+
+Σ-Gravity with EFE predicts **10-15% velocity boost** at 10,000 AU—intermediate between Chae's claimed detection and Banik's null result. The current observational uncertainty (~20-30% per binary from proper motion errors) is too large to definitively test this prediction.
+
+**The coherence window argument (alternative suppression):**
+
+An additional suppression mechanism may operate for non-disk systems: the coherence window $W(r)$ is derived for extended disk geometries. For compact two-body systems like wide binaries, which lack an extended mass distribution supporting coherent rotation, one could argue $W \to 0$. This would predict **no enhancement** regardless of acceleration regime.
+
+**Summary of Σ-Gravity's position:**
+
+1. **EFE provides natural suppression:** The MW's external field (2.3×g†) dominates over wide binary internal fields, suppressing enhancement to ~10-15%
+2. **Predictions are specific and testable:** 10-15% velocity boost at 10,000 AU (with EFE)
+3. **Current data is insufficient:** Observational precision (~20-30% per binary) cannot yet distinguish between competing claims
+4. **Alternative suppression exists:** The coherence window may → 0 for non-disk systems
+
+**Reproduction:**
+
+```bash
+# Theoretical predictions for wide binaries
+python exploratory/coherence_wavelength_test/low_g_solar_system_predictions.py
+
+# Statistical analysis of El-Badry et al. (2021) wide binary catalog
+python exploratory/coherence_wavelength_test/wide_binary_statistical_analysis.py
+```
+
+See SI §26 for detailed analysis methodology and data sources.
+
 ### 2.14 Fifth Force, Stress-Energy Conservation, and Lorentz Invariance
 
 Non-minimal matter couplings generically introduce several effects that require careful analysis. Here we provide order-of-magnitude estimates for these effects in Σ-Gravity, identifying the conditions under which they remain consistent with observations.
