@@ -375,10 +375,15 @@ $$g_{\text{eff}} = g_N \cdot \Sigma_{\text{eff}}(g_N, r)$$
 
 **What has been resolved (December 2025):**
 - Stress-energy conservation: Resolved via dynamical coherence field (SI §23)
-- Equivalence Principle: WEP, LLI, LPI all satisfied (SI §24)
-- Fifth force concern: Absorbed into self-consistent solution
+- Fifth force concern: Absorbed into self-consistent solution (§2.14.1)
+- Matter Lagrangian convention: Explicitly specified as $\mathcal{L}_m = -\rho c^2$ (§2.14.0)
 
-**What remains open:**
+**What remains partially open (December 2025):**
+- WEP: Plausibly satisfied (universal coupling), but composite body analysis needed (SI §24)
+- LLI: Status uncertain; requires formal teleparallel verification (SI §24)
+- LPI: Satisfied (position-independent constants)
+
+**What remains fully open:**
 - Full post-Newtonian treatment including all $\Theta_{\mu\nu}$ components
 - Behavior in strong-field regime (neutron stars, black holes)
 - Cosmological limit and consistency with CMB
