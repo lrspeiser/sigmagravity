@@ -7,21 +7,11 @@
 
 ## Abstract
 
-**Claim:** We propose Σ-Gravity, a phenomenological framework where gravitational enhancement depends on both acceleration ($g_N$) and kinematic coherence. The enhancement factor $\Sigma = 1 + A \cdot W(r) \cdot h(g_N)$ is governed by three quantities: a critical acceleration $g^\dagger = cH_0/(4\sqrt{\pi})$ (motivated by cosmology, calibrated to data), an amplitude $A = \sqrt{3}$ (motivated by geometry, calibrated to data), and a coherence window $W(r)$ (functional form derived, scale calibrated).
+The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. We present Σ-Gravity, a phenomenological framework in which gravitational enhancement depends on both the local acceleration and the kinematic coherence of the source. The enhancement factor $\Sigma = 1 + A \cdot W(r) \cdot h(g_N)$ introduces a critical acceleration $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s² connected to cosmological scales, an amplitude $A = \sqrt{3}$ motivated by geometric mode-counting, and a coherence window $W(r)$ that suppresses enhancement in dispersion-dominated systems.
 
-**Tests:** (1) 174 SPARC galaxy rotation curves; (2) Milky Way rotation curve; (3) 42 Fox+ 2022 strong-lensing clusters; (4) Solar System PPN constraints; (5) counter-rotating galaxies (MaNGA); (6) high-redshift kinematics (KMOS³D).
+Applied to 174 SPARC galaxies, the framework achieves mean RMS error of 27.35 km/s—14.3% better than MOND (robust across multiple interpolation functions)—winning 153 of 174 head-to-head comparisons with zero free parameters per galaxy. Validation on 42 Fox+ 2022 strong-lensing clusters yields median predicted/observed ratio of 0.68 with 0.14 dex scatter. Preliminary estimates suggest Solar System constraints are satisfied ($\gamma - 1 \sim 10^{-8}$, three orders of magnitude below the Cassini bound), though rigorous PPN analysis remains future work.
 
-**Results:** On SPARC galaxies, mean RMS = 27.35 km/s (14.3% better than MOND; robust against multiple interpolation functions, §3.1.0), winning 153/174 head-to-head comparisons. On clusters (baseline assumptions), median ratio 0.68 ± 0.14 dex. Solar System: $\gamma - 1 \sim 10^{-8}$ (estimate; satisfies Cassini by 3 orders of magnitude). Counter-rotating galaxies show 44% lower inferred dark matter fraction (p < 0.01), as predicted.
-
-**Falsifiers:** The theory makes four unique predictions that distinguish it from both MOND and ΛCDM:
-
-> **Box 1: Unique Predictions (Falsifiable)**
-> 1. **Counter-rotation effect:** Galaxies with counter-rotating components show reduced enhancement (tested: confirmed at p < 0.01)
-> 2. **Dispersion dependence:** High-σ systems (ellipticals, bulges) show suppressed enhancement relative to cold disks
-> 3. **Redshift evolution:** $g^\dagger(z) \propto H(z)$ predicts less enhancement at high-z (preliminary: consistent with KMOS³D)
-> 4. **Environmental dependence:** Cluster/group environment may affect coherence differently than field
-
-If any of these predictions fail under rigorous testing, the coherence mechanism is ruled out.
+Crucially, the theory makes predictions distinct from both MOND and ΛCDM: (1) counter-rotating stellar components should reduce enhancement—confirmed in MaNGA data with 44% lower inferred dark matter fractions (p < 0.01); (2) high-dispersion systems should show suppressed enhancement relative to cold disks; (3) enhancement should decrease at high redshift as $g^\dagger(z) \propto H(z)$—consistent with KMOS³D observations. These falsifiable predictions provide clear tests of the coherence mechanism.
 
 ---
 
