@@ -1090,7 +1090,9 @@ pip install numpy scipy pandas matplotlib astropy
 |---------|--------|----------|
 | SPARC galaxies | http://astroweb.cwru.edu/SPARC/ | `data/sparc/` |
 | Gaia MW | Generated from Gaia DR3 | `data/gaia/outputs/` |
-| Galaxy clusters | Literature compilation | `data/clusters/` |
+| Galaxy clusters | Fox et al. 2022 | `data/clusters/` |
+| MaNGA DynPop | https://manga-dynpop.github.io/ | `data/manga_dynpop/` |
+| Counter-rotating | Bevacqua et al. 2022 (VizieR) | `data/stellar_corgi/` |
 
 ### 6.3 Key Reproduction Commands
 
@@ -1112,6 +1114,10 @@ python scripts/analyze_mw_rar_starlevel.py
 
 # Generate paper figures  
 python scripts/generate_paper_figures.py
+
+# Counter-rotating galaxy test (unique Σ-Gravity prediction)
+python exploratory/coherence_wavelength_test/counter_rotation_statistical_test.py
+# Output: f_DM(CR) = 0.169 vs f_DM(Normal) = 0.302, p < 0.01
 
 # Solar System safety check
 python scripts/check_solar_system_safety.py

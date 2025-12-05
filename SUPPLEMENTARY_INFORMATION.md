@@ -468,7 +468,46 @@ $$\Sigma = 1 + A_{\rm cluster} \times h(g)$$
 | 1 kpc | 3.086×10¹⁹ m | IAU 2012 |
 | 1 Mpc | 3.086×10²² m | IAU 2012 |
 
-### SI §5A.5. Verification Commands
+### SI §5A.5. Counter-Rotating Galaxies: MaNGA DynPop + Bevacqua et al. 2022
+
+**Purpose:** Test the unique Σ-Gravity prediction that counter-rotating stellar components disrupt coherence, leading to reduced gravitational enhancement.
+
+**Data Sources:**
+
+1. **MaNGA DynPop Catalog** (Zhu et al. 2023, MNRAS 522, 6326)
+   - URL: https://manga-dynpop.github.io/pages/data_access/
+   - File: `SDSSDR17_MaNGA_JAM.fits`
+   - Contents: Dynamical masses, dark matter fractions (f_DM), stellar masses for 10,296 MaNGA galaxies
+   - Key column: `fdm_Re` in HDU 4 (dark matter fraction within effective radius from JAM modeling)
+
+2. **Bevacqua et al. 2022 Counter-Rotating Catalog** (MNRAS 511, 139)
+   - VizieR: J/MNRAS/511/139
+   - Contents: 64 counter-rotating galaxies identified in MaNGA by kinematic decomposition
+   - Key column: `MaNGAId` for cross-matching
+
+**Download Commands:**
+```bash
+# MaNGA DynPop
+mkdir -p data/manga_dynpop
+curl -L -o data/manga_dynpop/SDSSDR17_MaNGA_JAM.fits \
+  "https://raw.githubusercontent.com/manga-dynpop/manga-dynpop.github.io/main/catalogs/JAM/SDSSDR17_MaNGA_JAM.fits"
+
+# Bevacqua et al. counter-rotating catalog
+mkdir -p data/stellar_corgi
+curl -s "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/MNRAS/511/139/table1&-out.max=200&-out.form=|" \
+  > data/stellar_corgi/bevacqua2022_counter_rotating.tsv
+```
+
+**Analysis Method:**
+1. Cross-match catalogs by MaNGA ID (format: "1-113520")
+2. Extract f_DM for matched counter-rotating galaxies (N=63)
+3. Compare to remaining normal galaxies (N=10,038)
+4. Apply mass-matching to control for stellar mass differences
+5. Statistical tests: KS, Mann-Whitney U, t-test
+
+**Result:** Counter-rotating galaxies have 44% lower f_DM (p < 0.01), confirming Σ-Gravity's coherence disruption prediction.
+
+### SI §5A.6. Verification Commands
 
 **Full SPARC validation:**
 ```bash
@@ -480,6 +519,12 @@ python derivations/full_sparc_validation_4sqrtpi.py
 ```bash
 cd sigmagravity
 python scripts/analyze_fox2022_clusters.py
+```
+
+**Counter-rotation validation:**
+```bash
+cd sigmagravity
+python exploratory/coherence_wavelength_test/counter_rotation_statistical_test.py
 ```
 
 **Combined validation:**
@@ -836,9 +881,50 @@ Counter-rotating components disrupt coherence:
 **Interpretation:**
 Counter-rotating galaxies have **significantly lower dark matter fractions** than normal galaxies at the same stellar mass. This is exactly what Σ-Gravity predicts (disrupted coherence → reduced enhancement) and what **neither ΛCDM nor MOND predicts**.
 
-**Replication:**
-```bash
-python exploratory/coherence_wavelength_test/counter_rotation_statistical_test.py
+**Replication Instructions:**
+
+1. **Download MaNGA DynPop catalog** (Zhu et al. 2023):
+   ```bash
+   mkdir -p data/manga_dynpop
+   curl -L -o data/manga_dynpop/SDSSDR17_MaNGA_JAM.fits \
+     "https://raw.githubusercontent.com/manga-dynpop/manga-dynpop.github.io/main/catalogs/JAM/SDSSDR17_MaNGA_JAM.fits"
+   ```
+   - Source: https://manga-dynpop.github.io/pages/data_access/
+   - Paper: Zhu et al. 2023, MNRAS 522, 6326
+
+2. **Download Bevacqua et al. 2022 counter-rotating catalog**:
+   ```bash
+   mkdir -p data/stellar_corgi
+   curl -s "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/MNRAS/511/139/table1&-out.max=200&-out.form=|" \
+     > data/stellar_corgi/bevacqua2022_counter_rotating.tsv
+   ```
+   - Source: VizieR catalog J/MNRAS/511/139
+   - Paper: Bevacqua et al. 2022, MNRAS 511, 139
+
+3. **Run the analysis**:
+   ```bash
+   python exploratory/coherence_wavelength_test/counter_rotation_statistical_test.py
+   ```
+
+**Data Description:**
+- **MaNGA DynPop HDU 4**: Contains `fdm_Re` (dark matter fraction within effective radius) from JAM modeling with NFW halo
+- **Bevacqua catalog**: 64 counter-rotating galaxies identified by kinematic decomposition in MaNGA DR15
+- **Cross-match**: By MaNGA ID (format: "1-113520")
+
+**Key Code Logic:**
+```python
+# Cross-match by MaNGA ID
+dynpop_idx = {str(mid).strip(): i for i, mid in enumerate(basic['mangaid'])}
+matches = [dynpop_idx[cr_id] for cr_id in cr_manga_ids if cr_id in dynpop_idx]
+
+# Extract f_DM
+fdm_cr = fdm_all[cr_valid]      # Counter-rotating sample
+fdm_normal = fdm_all[normal_valid]  # Control sample
+
+# Statistical tests
+from scipy import stats
+ks_stat, ks_pval = stats.ks_2samp(fdm_cr, fdm_normal)
+mw_stat, mw_pval = stats.mannwhitneyu(fdm_cr, fdm_normal, alternative='less')
 ```
 
 **Status: ✓ CONFIRMED** — This is a unique prediction of Σ-Gravity that distinguishes it from all other theories.
