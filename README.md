@@ -139,13 +139,15 @@ Despite incomplete theoretical foundations, Σ-Gravity:
 | **Milky Way (Gaia DR3)** | RMS (108k stars) | **30.20 km/s** | 28.89 km/s | 40.32 km/s |
 | MW rotation curve | RMS vs McGaugh | **5.7 km/s** | 2.1 km/s | 53.1 km/s |
 | MW rotation curve | V(8 kpc) | **227.6 km/s*** | 233.0 km/s | 190.7 km/s |
-| **Galaxy clusters (42)** | Median ratio | **0.68** | — | — |
-| Galaxy clusters (42) | Scatter | **0.14 dex** | — | — |
+| **Galaxy clusters (42)** | Median ratio | **0.68** | ~0.40* | 0.10–0.15 |
+| Galaxy clusters (42) | Scatter | **0.14 dex** | ~0.2 dex | — |
 | **High-z (KMOS³D)** | f_DM prediction | **Matches z-evolution** | No z-evolution | — |
 | **Counter-rotating (63)** | f_DM difference | **-44% (p<0.01)** | No effect | No effect |
 | **Solar System** | PPN γ−1 | **~10⁻⁸ (est.)**† | < 10⁻⁵ | 0 |
 
 *Observed: 233.3 km/s (McGaugh/GRAVITY). Σ-Gravity: Δ = −5.7 km/s; MOND: Δ = −0.3 km/s.
+
+*MOND cluster ratio ~0.40 is the well-known "cluster problem" (Sanders 1999, 2003; Pointecouteau & Silk 2005). MOND underpredicts cluster masses by factor ~2-3×.
 
 †PPN estimate based on $\gamma - 1 \approx 2g^\dagger r_E^2/(GM_\odot)$; satisfies Cassini bound by 3 orders of magnitude. Rigorous PPN derivation from modified field equations is future work (see §2.14.4).
 
@@ -1313,6 +1315,26 @@ Using standard literature values (f_baryon = 0.15, gas concentration = 0.4 at 20
 **Primary result:** Σ-Gravity underpredicts cluster lensing masses by ~32-40% with standard assumptions. This is the **baseline performance** that should be compared to other theories.
 
 **Gravitational slip correction:** The weak-field derivation (SI §25) predicts $\eta = \Psi/\Phi = 0.75$ at $\Sigma \approx 2$, reducing the lensing ratio from 0.68 to 0.60. This slip is a **testable prediction** for Euclid/LSST.
+
+#### Comparison to Other Theories (Cluster Lensing)
+
+| Theory | M_predicted/M_lensing | Scatter | Notes |
+|--------|----------------------|---------|-------|
+| **GR + baryons only** | **0.10–0.15** | — | Factor 7-10× underprediction; the "missing mass" problem |
+| **ΛCDM (fitted halos)** | **0.95–1.05** | 0.10–0.15 dex | Excellent fit, but requires 2-3 free parameters per cluster |
+| **MOND (standard)** | **0.30–0.50** | ~0.2 dex | The "cluster problem"; requires ~2× more mass than baryons provide |
+| **TeVeS/AeST** | **0.40–0.60** | — | Relativistic MOND extensions; lensing worse than dynamics |
+| **Σ-Gravity (baseline)** | **0.60–0.68** | 0.14 dex | 32-40% underprediction; better than MOND, worse than ΛCDM |
+| **Σ-Gravity (revised f_gas)** | **0.75–0.85** | 0.14 dex | If f_gas ~ 0.20-0.22; within cluster systematics |
+
+**Key observations:**
+1. **GR + baryons** fails catastrophically (factor ~10×)—this is why dark matter was proposed
+2. **ΛCDM** succeeds but requires per-cluster halo fitting (not predictive)
+3. **MOND** has a well-known "cluster problem"—underpredicts by factor ~2-3×
+4. **Σ-Gravity** performs intermediate: better than MOND, not as good as fitted ΛCDM
+5. **The gap is testable:** If revised gas fractions (f_gas ~ 0.20) are confirmed by eROSITA/Athena, Σ-Gravity's predictions become acceptable
+
+**Honest assessment:** Cluster lensing is currently a **weakness** of Σ-Gravity, though less severe than MOND's cluster problem. The theory does not catastrophically fail (95% within factor 2), but systematic underprediction requires either revised baryon accounting or additional physics.
 
 ---
 
