@@ -9,7 +9,7 @@
 
 The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. Here we present Σ-Gravity ("Sigma-Gravity"), a phenomenological framework **motivated by teleparallel gravity concepts** that produces scale-dependent gravitational enhancement in extended, dynamically cold systems. The key ansatz is that organized rotational motion in galactic disks enables coherent gravitational effects that are suppressed in compact or kinematically hot systems. This coherence concept is analogous to phase alignment in lasers or Cooper pairs in superconductors, though the gravitational mechanism remains to be rigorously derived.
 
-The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g), where h(g) = √(g†/g) × g†/(g†+g) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(4√π) ≈ 9.60 × 10⁻¹¹ m/s² connects to cosmological scales through purely geometric factors. Applied to 174 SPARC galaxies, Σ-Gravity achieves 27.35 km/s mean RMS error—14.3% better than MOND—winning 153 vs 21 head-to-head comparisons. Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s, demonstrating consistency but not outperforming MOND (RMS = 2.1 km/s). Validation on 42 Fox+ 2022 clusters achieves median ratio 0.68 with 0.14 dex scatter. Preliminary estimates suggest the theory satisfies Solar System constraints due to suppression from both the h(g)→0 limit at high accelerations and reduced coherence in compact systems; rigorous PPN analysis remains future work.
+The enhancement follows a universal formula Σ = 1 + A × W(r) × h(g_N), where g_N is the baryonic Newtonian acceleration (QUMOND-like structure), h(g_N) = √(g†/g_N) × g†/(g†+g_N) encodes acceleration dependence, W(r) encodes spatial coherence decay, and the critical acceleration g† = cH₀/(4√π) ≈ 9.60 × 10⁻¹¹ m/s² connects to cosmological scales through purely geometric factors. Applied to 174 SPARC galaxies, Σ-Gravity achieves 27.35 km/s mean RMS error—14.3% better than MOND—winning 153 vs 21 head-to-head comparisons. Zero-shot application to the Milky Way rotation curve using McGaugh's baryonic model achieves RMS = 5.7 km/s, demonstrating consistency but not outperforming MOND (RMS = 2.1 km/s). Validation on 42 Fox+ 2022 clusters achieves median ratio 0.68 with 0.14 dex scatter. Preliminary estimates suggest the theory satisfies Solar System constraints due to suppression from both the h(g)→0 limit at high accelerations and reduced coherence in compact systems; rigorous PPN analysis remains future work.
 
 Unlike particle dark matter, no per-system halo fitting is required; unlike MOND, Σ-Gravity connects the critical acceleration to cosmological scales (g† ~ cH₀) . The framework is motivated by teleparallel gravity but currently operates as phenomenology awaiting rigorous field-theoretic completion. The "Σ" refers both to the enhancement factor (Σ ≥ 1) and to the coherence-dependent gravitational effects that produce it.
 
@@ -88,12 +88,12 @@ The coherence window $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ with $\xi = (2/3)R_d$ capt
 The Σ-Gravity formula naturally produces different behavior in different regimes:
 
 **In galaxies (enhancement observed):**
-- Low acceleration: $g \lesssim g^\dagger$ → $h(g) \sim O(1)$
+- Low acceleration: $g_N \lesssim g^\dagger$ → $h(g_N) \sim O(1)$
 - Large radius: $r \gtrsim \xi$ → $W(r) \sim O(1)$
 - Combined: $\Sigma - 1 \sim A \times O(1) \times O(1) \sim 1$
 
 **In the Solar System (no enhancement observed):**
-- High acceleration: $g \sim 10^{-3}$ m/s² $\gg g^\dagger$ → $h(g) \sim 10^{-5}$
+- High acceleration: $g_N \sim 10^{-3}$ m/s² $\gg g^\dagger$ → $h(g_N) \sim 10^{-5}$
 - Small effective radius: $W \to 0$ for compact systems
 - Combined: $\Sigma - 1 \lesssim 10^{-8}$, consistent with precision tests
 
@@ -103,7 +103,7 @@ The Σ-Gravity formula naturally produces different behavior in different regime
 
 | Aspect | Status | Notes |
 |--------|--------|-------|
-| **Multiplicative form** $g_{\text{eff}} = g_{\text{bar}} \times \Sigma$ | Phenomenological ansatz | Motivated by non-minimal coupling, not derived |
+| **Multiplicative form** $g_{\text{eff}} = g_N \times \Sigma(g_N, r)$ | QUMOND-like structure | $\Sigma$ depends on baryonic field, not total field |
 | **Scale** $g^\dagger \sim cH_0$ | Dimensionally natural | Same as MOND; mechanism unknown |
 | **Factor** $4\sqrt{\pi}$ | Geometric argument | Plausible but not rigorous |
 | **Window** $W(r)$ form | Statistical derivation | Given assumptions about decoherence |
@@ -238,7 +238,7 @@ where $\Sigma[g_N, \mathcal{C}]$ is the coherent enhancement factor that depends
 
 **Connection to f(T) dimensional structure:** In f(T) theories, a dimensional constant with units [length]² necessarily sets the scale where modified gravity activates (R. Ferraro, private communication). In Σ-Gravity, the coherence scale $\ell$ plays an analogous role. However, validation against 171 SPARC galaxies shows that $\ell$ is **field-dependent** (varying with $\sigma_v$, $\Sigma_b$, $R_{\text{disk}}$) rather than universal. This is consistent with f(T,$\mathcal{L}_m$) theories where the modification scale depends on matter distribution.
 
-**Open theoretical issue:** Non-minimal matter couplings in teleparallel gravity can violate local Lorentz invariance unless carefully constructed (see Krššák & Saridakis 2016, CQG 33, 115009). Whether the specific coherence-dependent coupling $\Sigma[g, \mathcal{C}]$ preserves Lorentz invariance requires further investigation. We note that the coupling depends only on scalar quantities (acceleration magnitude, coherence measure), which may mitigate this concern.
+**Open theoretical issue:** Non-minimal matter couplings in teleparallel gravity can violate local Lorentz invariance unless carefully constructed (see Krššák & Saridakis 2016, CQG 33, 115009). Whether the specific coherence-dependent coupling $\Sigma[g_N, \mathcal{C}]$ preserves Lorentz invariance requires further investigation. We note that the coupling depends only on scalar quantities (baryonic acceleration magnitude, coherence measure), which may mitigate this concern.
 
 ### 2.3 Field Equations and Weak-Field Limit
 
@@ -444,25 +444,27 @@ $$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{0.5}$$
 
 *Figure 3: Left: Coherence window W(r) for different disk scale lengths. Right: Total enhancement Σ(r) as a function of radius at various accelerations, showing how coherence builds with radius.*
 
-### 2.8 Acceleration Dependence: The h(g) Function
+### 2.8 Acceleration Dependence: The h(g_N) Function
 
-The enhancement factor depends on the local baryonic gravitational acceleration $g = g_{\text{bar}}$ through:
+The enhancement factor depends on the **baryonic Newtonian acceleration** $g_N = |\nabla\Phi_N|$ through:
 
-$$h(g) = \sqrt{\frac{g^\dagger}{g}} \cdot \frac{g^\dagger}{g^\dagger + g}$$
+$$h(g_N) = \sqrt{\frac{g^\dagger}{g_N}} \cdot \frac{g^\dagger}{g^\dagger + g_N}$$
+
+**Important:** This is the QUMOND-like structure—$h$ depends on the baryonic field $g_N$, not the total (enhanced) field. This means no iteration is required: compute $g_N$ from the baryonic mass distribution, evaluate $h(g_N)$, done.
 
 **Derivation sketch (motivated, not rigorous):**
 
-1. Classical torsion amplitude: $T_{\text{local}} \propto g$
+1. Classical torsion amplitude: $T_{\text{local}} \propto g_N$
 2. Critical torsion at coherence threshold: $T_{\text{crit}} \propto g^\dagger$
 3. Effective torsion as geometric mean: $T_{\text{eff}} = \sqrt{T_{\text{local}} \times T_{\text{crit}}}$
-4. Enhancement: $\Sigma - 1 \propto T_{\text{eff}}/T_{\text{local}} = \sqrt{g^\dagger/g}$
-5. High-g cutoff: multiply by $g^\dagger/(g^\dagger + g)$ for smooth transition
+4. Enhancement: $\Sigma - 1 \propto T_{\text{eff}}/T_{\text{local}} = \sqrt{g^\dagger/g_N}$
+5. High-$g_N$ cutoff: multiply by $g^\dagger/(g^\dagger + g_N)$ for smooth transition
 
 **Asymptotic behavior:**
-- Deep MOND regime ($g \ll g^\dagger$): $h(g) \approx \sqrt{g^\dagger/g}$ → produces flat rotation curves
-- High acceleration ($g \gg g^\dagger$): $h(g) \to 0$ → recovers Newtonian gravity
+- Deep MOND regime ($g_N \ll g^\dagger$): $h(g_N) \approx \sqrt{g^\dagger/g_N}$ → produces flat rotation curves
+- High acceleration ($g_N \gg g^\dagger$): $h(g_N) \to 0$ → recovers Newtonian gravity
 
-**Comparison to MOND:** The function h(g) differs from MOND's interpolation function $\nu(y)$ by ~7% in the transition regime ($g \sim g^\dagger$). This is a **testable prediction**.
+**Comparison to MOND:** The function $h(g_N)$ differs from MOND's interpolation function $\nu(y)$ by ~7% in the transition regime ($g_N \sim g^\dagger$). This is a **testable prediction**.
 
 ### 2.9 The Critical Acceleration Scale
 
@@ -499,10 +501,12 @@ The factor $4\sqrt{\pi} = 2 \times \sqrt{4\pi} \approx 7.09$ combines:
 
 The complete enhancement factor is:
 
-$$\boxed{\Sigma = 1 + A \cdot W(r) \cdot h(g)}$$
+$$\boxed{\Sigma = 1 + A \cdot W(r) \cdot h(g_N)}$$
 
-with components:
-- **$h(g) = \sqrt{g^\dagger/g} \times g^\dagger/(g^\dagger+g)$** — universal acceleration function
+where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-like structure).
+
+Components:
+- **$h(g_N) = \sqrt{g^\dagger/g_N} \times g^\dagger/(g^\dagger+g_N)$** — universal acceleration function (depends on baryonic field)
 - **$W(r) = 1 - (\xi/(\xi+r))^{0.5}$** with $\xi = (2/3)R_d$ — coherence window
 - **$g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s²** — critical acceleration (derived from geometry)
 - **$A_{\text{galaxy}} = \sqrt{3} \approx 1.73$** — amplitude for disk galaxies (from 3 torsion modes)
@@ -526,7 +530,7 @@ with components:
 
 ### 2.12 Why This Formula (Not MOND's)
 
-MOND's success with $a_0 \approx 1.2 \times 10^{-10}$ m/s² has been known for 40 years, but lacked physical explanation. Σ-Gravity derives the scale $g^\dagger \sim cH_0$ from cosmological physics—explaining the "MOND coincidence"—while the h(g) function emerges from teleparallel coherence.
+MOND's success with $a_0 \approx 1.2 \times 10^{-10}$ m/s² has been known for 40 years, but lacked physical explanation. Σ-Gravity derives the scale $g^\dagger \sim cH_0$ from cosmological physics—explaining the "MOND coincidence"—while the $h(g_N)$ function emerges from teleparallel coherence.
 
 The two approaches produce similar curves but differ by ~7% in the transition regime:
 
@@ -541,15 +545,15 @@ The two approaches produce similar curves but differ by ~7% in the transition re
 
 **Important:** These large differences (up to 74%) occur in the deep low-acceleration regime. In actual galaxies, the coherence window W(r) suppresses enhancement in inner regions, partially mitigating this difference. The net observable difference in rotation curves is typically 10-20%, concentrated in the transition regime $g \sim g^\dagger$. The most robust test is the SHAPE difference: Σ-Gravity enhancement grows with radius (W→1), while MOND enhancement is constant at fixed g.
 
-![Figure: h(g) function comparison](figures/h_function_comparison.png){width=100%}
+![Figure: h(g_N) function comparison](figures/h_function_comparison.png){width=100%}
 
-*Figure 1: Enhancement functions h(g) for Σ-Gravity (derived from teleparallel coherence) vs MOND (empirical). The functions are similar but distinguishable.*
+*Figure 1: Enhancement functions $h(g_N)$ for Σ-Gravity (derived from teleparallel coherence) vs MOND (empirical). The functions are similar but distinguishable.*
 
 ### 2.13 Solar System Constraints
 
 In compact systems, two suppression mechanisms combine:
 
-1. **High acceleration:** When $g \gg g^\dagger$, $h(g) \to 0$
+1. **High acceleration:** When $g_N \gg g^\dagger$, $h(g_N) \to 0$
 2. **Low coherence:** When $r \ll \xi$, $W(r) \to 0$
 
 **Acceleration values (corrected):**
@@ -559,8 +563,8 @@ $$g_{\text{Saturn}} = \frac{GM_\odot}{r^2} \approx 6.5 \times 10^{-5} \text{ m/s
 This is approximately $5 \times 10^5$ times larger than $g^\dagger$.
 
 **Enhancement estimate:**
-Using h(g) at this acceleration:
-$$h(g_{\text{Saturn}}) = \sqrt{\frac{g^\dagger}{g}} \cdot \frac{g^\dagger}{g^\dagger + g} \approx 2.7 \times 10^{-9}$$
+Using $h(g_N)$ at this acceleration:
+$$h(g_{N,\text{Saturn}}) = \sqrt{\frac{g^\dagger}{g_N}} \cdot \frac{g^\dagger}{g^\dagger + g_N} \approx 2.7 \times 10^{-9}$$
 
 Even with W = 1 and A = √3, this gives $\Sigma - 1 < 10^{-8}$.
 
@@ -575,7 +579,7 @@ This is well below current observational bounds (~$10^{-14}$ m/s² from Cassini)
 
 A rough estimate of the correction to the PPN parameter $\gamma$ gives $\delta\gamma \sim 10^{-8}$, which would satisfy the Cassini bound by ~3 orders of magnitude.
 
-**Caveat:** These are order-of-magnitude estimates, not rigorous derivations. A complete analysis requires: (1) solving the modified field equations for a point-mass source, (2) computing the full PPN metric, and (3) evaluating fifth-force effects from $\nabla\Sigma$. We defer this to future work but note that suppression from $h(g)\to 0$ provides a robust mechanism for Solar System safety.
+**Caveat:** These are order-of-magnitude estimates, not rigorous derivations. A complete analysis requires: (1) solving the modified field equations for a point-mass source, (2) computing the full PPN metric, and (3) evaluating fifth-force effects from $\nabla\Sigma$. We defer this to future work but note that suppression from $h(g_N)\to 0$ provides a robust mechanism for Solar System safety.
 
 ![Figure: Solar System safety](figures/solar_system_safety.png){width=100%}
 
@@ -597,7 +601,7 @@ $$\mathbf{a}_{\text{fifth}} = -\frac{\nabla \Sigma}{\Sigma} \approx -\nabla \ln 
 
 **Magnitude in galaxies:**
 
-For $\Sigma = 1 + A W(r) h(g)$, the gradient is:
+For $\Sigma = 1 + A W(r) h(g_N)$, the gradient is:
 
 $$\nabla \ln \Sigma \approx \frac{A}{\Sigma} \left( h \nabla W + W \nabla h \right)$$
 
@@ -619,7 +623,7 @@ $$|a_{\text{fifth}}| \sim \frac{1}{2 \times 4.6 \times 10^{20} \text{ m}} \sim 1
 
 **Order-of-magnitude result:** The fifth force in galaxies is suppressed by a factor of $\sim r_{\text{galactic}}/c \times g \sim 10^{-11}$ relative to the gravitational acceleration, making it negligible for galactic dynamics.
 
-**In the Solar System:** Both $h(g) \to 0$ and $W(r) \to 0$ suppress the fifth force. At Saturn's orbit:
+**In the Solar System:** Both $h(g_N) \to 0$ and $W(r) \to 0$ suppress the fifth force. At Saturn's orbit:
 
 $$|a_{\text{fifth}}| \lesssim \frac{(\Sigma - 1)}{r_{\text{Saturn}}} \lesssim \frac{10^{-8}}{1.4 \times 10^{12} \text{ m}} \sim 10^{-20} \text{ m/s}^2$$
 
@@ -686,7 +690,7 @@ $$\delta_{\text{LLI}} \sim 1 \times (7 \times 10^{-7})^2 \sim 5 \times 10^{-13}$
 
 This is below current LLI tests from atomic physics ($\sim 10^{-21}$) but the scaling may differ.
 
-**Assessment:** The scalar nature of $\Sigma(g, r)$ suggests LLI is preserved, but a rigorous proof requires constructing the covariant formulation following Krššák & Saridakis (2016). This is flagged as **important future work**.
+**Assessment:** The scalar nature of $\Sigma(g_N, r)$ suggests LLI is preserved, but a rigorous proof requires constructing the covariant formulation following Krššák & Saridakis (2016). This is flagged as **important future work**.
 
 #### 2.14.4 Summary of Consistency Constraints
 
@@ -724,11 +728,11 @@ $$\rho_{\text{eff}} = \Sigma \rho + \frac{\Theta_{00}}{\kappa c^2} = \rho\left(\
 
 Define the effective enhancement:
 
-$$\Sigma_{\text{eff}} = \frac{3\Sigma - 1}{2} = 1 + \frac{3}{2}(\Sigma - 1) = 1 + A_{\text{eff}} W(r) h(g)$$
+$$\Sigma_{\text{eff}} = \frac{3\Sigma - 1}{2} = 1 + \frac{3}{2}(\Sigma - 1) = 1 + A_{\text{eff}} W(r) h(g_N)$$
 
 where $A_{\text{eff}} = \frac{3}{2}A$.
 
-**Key Result:** The Θ_μν contribution **enhances** the gravitational effect by 50%, which is absorbed into the fitted amplitude $A$. The **functional form** $W(r) \times h(g)$ is unchanged. This means:
+**Key Result:** The Θ_μν contribution **enhances** the gravitational effect by 50%, which is absorbed into the fitted amplitude $A$. The **functional form** $W(r) \times h(g_N)$ is unchanged. This means:
 - The amplitude $A = \sqrt{3}$ fitted to data already includes this contribution
 - The "bare" theoretical amplitude would be $A_{\text{bare}} = A_{\text{fit}}/1.5 \approx 1.15$
 - This is consistent with single-mode enhancement ($A = 1$) plus geometric corrections
@@ -940,7 +944,7 @@ The amplitude ratio emerges from geometric arguments (spherical vs disk coherenc
 **Unlike MOND:**
 - **Physical mechanism proposed:** coherence-dependent gravitational enhancement
 - Motivated by relativistic field theory (teleparallel gravity)
-- Preliminary Solar System safety from h(g)→0 suppression
+- Preliminary Solar System safety from $h(g_N)\to 0$ suppression
 - Cluster/galaxy amplitude ratio has geometric motivation (though empirically fitted)
 - Critical acceleration g† ~ cH₀ from dimensional analysis (factor 2e is fitted)
 
@@ -1011,7 +1015,7 @@ Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravi
 - Energy-momentum conservation is violated ($\nabla_\mu T^{\mu\nu} \neq 0$); implications need full analysis
 - Factor of 2e in $g^\dagger$ is fitted, not derived from first principles
 - Mode counting derivations (A = √3, A = π√2) provide geometric intuition but are not rigorous derivations from TEGR (which has only 2 physical DOF)
-- The h(g) function's "geometric mean" ansatz is phenomenologically successful but not uniquely derived
+- The $h(g_N)$ function's "geometric mean" ansatz is phenomenologically successful but not uniquely derived
 
 **Cosmological:**
 - CMB predictions require development; ΛCDM's success on large scales is not yet matched
@@ -1038,18 +1042,23 @@ c = 2.998e8          # m/s
 H0_SI = 2.27e-18     # s⁻¹ (70 km/s/Mpc)
 g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # Critical acceleration (~9.60e-11 m/s²)
 
-def h_universal(g):
-    """Acceleration function h(g)"""
-    return np.sqrt(g_dagger / g) * g_dagger / (g_dagger + g)
+def h_universal(g_N):
+    """Acceleration function h(g_N) - depends on BARYONIC Newtonian acceleration"""
+    return np.sqrt(g_dagger / g_N) * g_dagger / (g_dagger + g_N)
 
 def W_coherence(r, R_d):
     """Coherence window W(r)"""
     xi = (2/3) * R_d
     return 1 - (xi / (xi + r)) ** 0.5
 
-def Sigma(r, g_bar, R_d, A):
-    """Enhancement factor"""
-    return 1 + A * W_coherence(r, R_d) * h_universal(g_bar)
+def Sigma(r, g_N, R_d, A):
+    """
+    Enhancement factor (QUMOND-like structure).
+    
+    g_N: baryonic Newtonian acceleration (from baryonic mass only)
+    No iteration required - enhancement computed directly from baryonic field.
+    """
+    return 1 + A * W_coherence(r, R_d) * h_universal(g_N)
 ```
 
 ---
@@ -1138,7 +1147,7 @@ Key sections include:
 
 ## Figure Legends
 
-**Figure 1:** Enhancement function h(g) comparison showing ~7% testable difference from MOND.
+**Figure 1:** Enhancement function $h(g_N)$ comparison showing ~7% testable difference from MOND.
 
 **Figure 2:** Solar System safety—coherence mechanism automatically suppresses enhancement.
 
