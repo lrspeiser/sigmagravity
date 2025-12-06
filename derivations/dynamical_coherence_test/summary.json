@@ -1,0 +1,99 @@
+{
+  "models": {
+    "baseline": {
+      "mean_rms": 20.949875225143,
+      "median_rms": 17.75369488547636,
+      "mean_xi": 3.846393762183236,
+      "by_mass": {
+        "dwarf": 10.196800724709421,
+        "massive": 32.30629571051593,
+        "normal": 21.317399213187702
+      },
+      "by_bulge": {
+        "bulge-dominated": 34.94667820887201,
+        "disk-dominated": 18.440103655646762
+      },
+      "params": {}
+    },
+    "fixed_5kpc": {
+      "mean_rms": 22.543375214836367,
+      "median_rms": 19.67890974774261,
+      "mean_xi": 5.0,
+      "by_mass": {
+        "dwarf": 13.600664332621745,
+        "massive": 31.12814411151163,
+        "normal": 23.693381707974538
+      },
+      "by_bulge": {
+        "bulge-dominated": 34.34416150317353,
+        "disk-dominated": 20.42737215623798
+      },
+      "params": {}
+    },
+    "timescale_proxy": {
+      "mean_rms": 17.20558744673021,
+      "median_rms": 14.293568606073926,
+      "mean_xi": 1.4313221156946683,
+      "by_mass": {
+        "dwarf": 8.605300545869941,
+        "massive": 27.293737176376208,
+        "normal": 16.51217635603532
+      },
+      "by_bulge": {
+        "bulge-dominated": 28.117857797879665,
+        "disk-dominated": 15.248904487213753
+      },
+      "params": {
+        "xi0": 1.0,
+        "beta": 1.4570093171117233
+      }
+    },
+    "rate_based": {
+      "mean_rms": 17.010722032657682,
+      "median_rms": 13.108228463325318,
+      "mean_xi": 0.6918910128009763,
+      "by_mass": {
+        "dwarf": 9.626014424653391,
+        "massive": 27.739403665210066,
+        "normal": 14.385810723548335
+      },
+      "by_bulge": {
+        "bulge-dominated": 29.057893005806935,
+        "disk-dominated": 14.850539651265404
+      },
+      "params": {
+        "k": 0.48777614392501234
+      }
+    },
+    "combined": {
+      "mean_rms": 16.99136908437562,
+      "median_rms": 13.331125280738597,
+      "mean_xi": 0.6593909802517991,
+      "by_mass": {
+        "dwarf": 9.615984307166196,
+        "massive": 27.649751332190547,
+        "normal": 14.425513066567484
+      },
+      "by_bulge": {
+        "bulge-dominated": 28.913383731066,
+        "disk-dominated": 14.853628527038033
+      },
+      "params": {
+        "k": 0.6757729887935348,
+        "alpha": -0.20789347537257985
+      }
+    }
+  },
+  "cv_results": {
+    "rate_based": {
+      "train_rms_mean": 17.02287731332933,
+      "test_rms_mean": 17.01127718622269,
+      "overfitting": -0.011600127106643043
+    },
+    "timescale_proxy": {
+      "train_rms_mean": 17.21042210375614,
+      "test_rms_mean": 17.24326435860125,
+      "overfitting": 0.03284225484511083
+    }
+  }
+}
