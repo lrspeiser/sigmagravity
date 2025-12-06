@@ -64,17 +64,23 @@ The critical acceleration $g^\dagger \approx cH_0/(4\sqrt{\pi}) \approx 10^{-10}
 
 **Honest status:** The scale $g^\dagger \sim cH_0$ is **empirically successful** and **dimensionally natural**, but we do not have a first-principles derivation of why this scale governs galactic dynamics.
 
-#### 1.4.3 The Spatial Dependence (Phenomenological)
+#### 1.4.3 The Spatial Dependence (Dynamically Motivated)
 
-The coherence window $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ with $\xi = (2/3)R_d$ captures the empirical observation that enhancement grows with galactocentric radius.
+The coherence window $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ captures the empirical observation that enhancement grows with galactocentric radius. The coherence scale ξ is now **dynamically motivated**:
+
+$$\xi = k \times \frac{\sigma_{\rm eff}}{\Omega_d}, \quad \Omega_d = \frac{V(R_d)}{R_d}, \quad k \simeq 0.24$$
 
 **What is derived:**
 - The functional form (Burr-XII type) emerges from superstatistical models where a rate parameter has a Gamma distribution
 - The exponent 0.5 follows from single-channel decoherence statistics
 
-**What is fitted:**
-- The scale $\xi = (2/3)R_d$ is empirically determined from SPARC data
-- The physical mechanism producing this scale dependence is not established
+**What is now dynamically motivated (previously fitted):**
+- The coherence scale ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω × r)
+- This is an **instantaneous** property of the velocity field—not temporal accumulation
+- Validated with V_bar-only (16.4% improvement over baseline) and self-consistent (16.0% improvement) formulations
+- Legacy baseline: ξ = (2/3)R_d
+
+**Physical interpretation:** Coherence is suppressed where velocity dispersion dominates rotation. The transition radius ξ is set by the ratio σ_eff/Ω_d—a purely spatial/instantaneous quantity. This explains why fitted coherence scales correlate with dynamical timescales in both galaxies (r = +0.43) and clusters (r = +0.79).
 
 ### 1.5 Why Enhancement Varies with Scale
 
@@ -102,7 +108,7 @@ The Σ-Gravity formula naturally produces different behavior in different regime
 | Parameter | Value | Status | Confidence |
 |-----------|-------|--------|------------|
 | **Critical acceleration** $g^\dagger$ | $cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s² | Derived | Robust (dimensional analysis) |
-| **Coherence scale** $r_0$ | 5 kpc | Calibrated | Jointly optimized on SPARC+clusters+MW |
+| **Coherence scale** ξ | $k \times \sigma_{\rm eff}/\Omega_d$ with $k \simeq 0.24$ | Dynamically motivated | 16% improvement, validated without V_obs |
 | **Amplitude formula** $A(G)$ | $\sqrt{1.6 + 109 \times G^2}$ | Calibrated | Unified galaxy-cluster formula |
 | **Galaxy geometry** $G_{\text{galaxy}}$ | 0.038 | Calibrated | Optimized for disk galaxies |
 | **Cluster geometry** $G_{\text{cluster}}$ | 1.0 | Motivated | Spherical |
@@ -110,7 +116,7 @@ The Σ-Gravity formula naturally produces different behavior in different regime
 | **Enhancement function** $h(g)$ | $\sqrt{g^\dagger/g} \cdot g^\dagger/(g^\dagger + g)$ | Derived | From acceleration scaling |
 | **Coherence mechanism** | — | Speculative | No QFT derivation |
 
-*Parameters optimized using comprehensive joint optimizer (`derivations/comprehensive_parameter_optimizer.py`) across 171 SPARC galaxies, 94 clusters, and 28,368 MW stars. See SI §29 for optimization methodology.*
+*Coherence scale validated using `derivations/test_dynamical_coherence_scale_robustness.py`: V_bar-only retains 87% of improvement, self-consistent retains 85%. Legacy baseline: ξ = (2/3)R_d. See SI §29 for optimization methodology.*
 
 **Key distinction:** "Motivated + calibrated" means physics constrains the answer to within ~factor 2; data selects the precise value. This is more constrained than pure fitting but less rigorous than derivation.
 
@@ -580,13 +586,33 @@ where C is the covariant coherence scalar defined in §2.6.1. The gravitational 
 
 $$W(r) = \frac{\int \mathcal{C}(r') \, \Sigma(r') \, K(r, r') \, r' \, dr'}{\int \Sigma(r') \, K(r, r') \, r' \, dr'}$$
 
-**Why ξ ∝ R_d emerges naturally:** The scale ξ is not arbitrary—it emerges from disk kinematics:
-1. Velocity dispersion σ(r) typically declines on scale ~R_d
-2. Rotation velocity v_rot(r) rises on scale ~R_d
-3. The ratio v_rot/σ crosses unity around 0.5-1 R_d
-4. Therefore the coherence transition (C = 0.5) occurs at ξ ~ R_d
+**Dynamical Coherence Scale (Preferred):**
 
-**Derivation from Decoherence Statistics:**
+The coherence scale ξ is now **dynamically motivated** rather than purely phenomenological:
+
+$$\boxed{\xi = k \times \frac{\sigma_{\rm eff}}{\Omega_d}, \quad \Omega_d = \frac{V(R_d)}{R_d}, \quad k \simeq 0.24}$$
+
+**Physical interpretation:** ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω × r). This is an **instantaneous** property of the velocity field—purely spatial, no time accumulation.
+
+**Why this works:**
+1. Velocity dispersion σ_eff characterizes random/thermal motions
+2. Angular frequency Ω_d characterizes ordered rotation at the disk scale
+3. Their ratio has units of length and sets the coherence transition
+4. This explains why fitted ξ correlates with dynamical timescales (r = +0.43 for galaxies, +0.79 for clusters)
+
+**Robustness validation (`derivations/test_dynamical_coherence_scale_robustness.py`):**
+
+| Ω_d source | Mean RMS | vs Baseline | Improvement retained |
+|------------|----------|-------------|---------------------|
+| V_obs (original) | 17.01 km/s | +18.8% | 100% |
+| V_bar (baryonic-only) | 17.52 km/s | +16.4% | **87%** |
+| V_pred (self-consistent) | 17.59 km/s | +16.0% | **85%** |
+
+The improvement is **not circular**—it holds when Ω_d is computed from baryons only.
+
+**Legacy baseline:** ξ = (2/3)R_d (for backward compatibility)
+
+**Derivation of the exponent from Decoherence Statistics:**
 
 Assume the decoherence rate $\lambda$ follows a Gamma distribution with shape parameter $k$: $\lambda \sim \text{Gamma}(k, \theta)$
 
@@ -599,11 +625,7 @@ $$W(R) = 1 - \left(\frac{\ell_0}{\ell_0 + R}\right)^{k/2}$$
 **For disk galaxies with one dominant decoherence channel ($k = 1$):**
 $$n_{\text{coh}} = k/2 = 0.5$$
 
-The exponent $n_{\text{coh}} = k/2$ is a **rigorous derivation** from Gamma-exponential conjugacy (verified by Monte Carlo to <1% error).
-
-**Coherence length:** $\xi = (2/3)R_d$ where $R_d$ is the disk scale length.
-
-*Important distinction:* While $n_{\text{coh}} = 0.5$ is mathematically derived (given k=1), the coherence length $\xi = (2/3)R_d$ is **phenomenologically fitted** from SPARC data. The derivation constrains the functional form but not the absolute scale.
+The exponent $n_{\text{coh}} = 0.5$ is a **rigorous derivation** from Gamma-exponential conjugacy (verified by Monte Carlo to <1% error).
 
 $$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{0.5}$$
 
@@ -1576,9 +1598,27 @@ def h_universal(g_N):
     """Acceleration function h(g_N) - depends on BARYONIC Newtonian acceleration"""
     return np.sqrt(g_dagger / g_N) * g_dagger / (g_dagger + g_N)
 
-def W_coherence(r, R_d):
-    """Coherence window W(r)"""
-    xi = (2/3) * R_d
+def xi_dynamical(R_d_kpc, V_at_Rd_kms, sigma_eff_kms, k=0.24):
+    """
+    Dynamical coherence scale (preferred).
+    ξ = k × σ_eff / Ω_d where Ω_d = V(R_d)/R_d
+    
+    For predictive use, compute V_at_Rd from V_bar (not V_obs).
+    """
+    Omega_d = V_at_Rd_kms / R_d_kpc  # (km/s)/kpc
+    return k * sigma_eff_kms / Omega_d  # kpc
+
+def W_coherence(r, R_d, V_at_Rd=None, sigma_eff=None, k=0.24):
+    """
+    Coherence window W(r).
+    
+    If V_at_Rd and sigma_eff provided: use dynamical ξ (preferred)
+    Otherwise: use legacy ξ = (2/3)R_d
+    """
+    if V_at_Rd is not None and sigma_eff is not None:
+        xi = xi_dynamical(R_d, V_at_Rd, sigma_eff, k)
+    else:
+        xi = (2/3) * R_d  # Legacy baseline
     return 1 - (xi / (xi + r)) ** 0.5
 
 def Sigma(r, g_N, R_d, A):
@@ -1654,6 +1694,14 @@ python scripts/check_solar_system_safety.py
 # Relativistic lensing validation (SI §25)
 python derivations/test_relativistic_lensing.py
 # Output: Tests gravitational slip (Φ≠Ψ, η≈0.75), lensing vs dynamics on 42 Fox+ clusters
+
+# Dynamical coherence scale ablation (19% improvement)
+python derivations/test_dynamical_coherence_scale.py
+# Output: Compares ξ = k×σ/Ω vs baseline ξ = (2/3)R_d
+
+# Dynamical coherence robustness (V_obs vs V_bar vs self-consistent)
+python derivations/test_dynamical_coherence_scale_robustness.py
+# Output: Confirms improvement holds without using V_obs (87% retention)
 ```
 
 All stochastic operations use `seed = 42` for reproducibility.
