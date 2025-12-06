@@ -1,7 +1,6 @@
 # Σ-Gravity: A Coherence-Based Phenomenological Model for Galactic Dynamics
 
-**Author:** Leonard Speiser  
-**Date:** December 2025 (Updated)
+**Author:** Leonard Speiser
 
 ---
 
@@ -82,7 +81,7 @@ $$\xi = k \times \frac{\sigma_{\rm eff}}{\Omega_d}, \quad \Omega_d = \frac{V(R_d
 - The functional form (Burr-XII type) emerges from superstatistical models where a rate parameter has a Gamma distribution
 - The exponent 0.5 follows from single-channel decoherence statistics
 
-**What is now dynamically motivated (previously fitted):**
+**Physical basis:**
 - The coherence scale ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω × r)
 - This is an **instantaneous** property of the velocity field—not temporal accumulation
 - Validated with V_bar-only (16.4% improvement over baseline) and self-consistent (16.0% improvement) formulations
@@ -145,7 +144,7 @@ Despite incomplete theoretical foundations, Σ-Gravity:
 
 ### 1.8 Summary of Results
 
-#### Comprehensive Validation Across Scales (Updated December 2025)
+#### Comprehensive Validation Across Scales
 
 *Note: All metrics generated from `derivations/full_sparc_validation_4sqrtpi.py`. MOND uses fixed $a_0 = 1.2 \times 10^{-10}$ m/s² with simple interpolation function. Robustness against multiple MOND variants (simple/standard, fixed/fitted $a_0$, fixed/varied M/L) confirmed in §3.1.0.*
 
@@ -406,12 +405,12 @@ $$g_{\text{eff}} = g_N \cdot \Sigma_{\text{eff}}(g_N, r)$$
 - Post-Newtonian corrections remain small for galactic kinematics (well-justified)
 - Coherence functional $\mathcal{C}$ enters only through $W(r)$ (simplifying ansatz)
 
-**What has been resolved (December 2025):**
-- Stress-energy conservation: Resolved via dynamical coherence field (SI §23)
+**Resolved issues:**
+- Stress-energy conservation: Established via dynamical coherence field (SI §23)
 - Fifth force concern: Eliminated via QUMOND-like formulation with minimal matter coupling (§2.14.2)
-- Matter Lagrangian convention: Explicitly specified as $\mathcal{L}_m = -\rho c^2$ (§2.14.0)
+- Matter Lagrangian convention: Specified as $\mathcal{L}_m = -\rho c^2$ (§2.14.0)
 
-**What remains partially open (December 2025):**
+**Partially open issues:**
 - WEP: Plausibly satisfied (universal coupling), but composite body analysis needed (SI §24)
 - LLI: Status uncertain; requires formal teleparallel verification (SI §24)
 - LPI: Satisfied (position-independent constants)
@@ -682,7 +681,7 @@ $$g^\dagger \sim cH_0 \approx 6.9 \times 10^{-10} \text{ m/s}^2$$
 
 $$g^\dagger = \frac{cH_0}{4\sqrt{\pi}} \approx 9.60 \times 10^{-11} \text{ m/s}^2$$
 
-**Geometric derivation (December 2025 update):**
+**Geometric derivation:**
 
 1. **Coherence radius:** $R_{\rm coh} = \sqrt{4\pi} \times V^2/(cH_0)$, where $\sqrt{4\pi}$ arises from the full solid angle (4π steradians).
 
@@ -739,8 +738,8 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 
 **Status definitions:** *Derived* indicates a mathematical result from stated assumptions. *Dynamically motivated* indicates physical reasoning constrains the form with empirical validation. *Calibrated* indicates physical motivation constrains the form with the final value set by data. *Motivated* indicates plausible physical reasoning without unique derivation.
 
-**Key advances (December 2025):**
-1. **Dynamical coherence scale:** ξ = k×σ_eff/Ω_d is now the primary coherence scale, with 16% improvement over the historical baseline and robustness validation (87% improvement retained with V_bar-only). The historical baseline ξ = (2/3)R_d is retained in SI §28 for comparison.
+**Key results:**
+1. **Dynamical coherence scale:** ξ = k×σ_eff/Ω_d provides 16% improvement over phenomenological alternatives, with robustness validation (87% improvement retained with baryons-only computation). See SI §28 for comparison with alternative formulations.
 2. **Unified amplitude formula:** A(G) = √(1.6 + 109×G²) connects galaxies (G=0.038) and clusters (G=1.0) with a single calibrated formula
 
 ### 2.12 Why This Formula (Not MOND's)
@@ -1111,7 +1110,7 @@ To compare with ΛCDM fairly would require:
 
 Option (3) is most appropriate: abundance matching predicts $M_{200}$ from stellar mass, then NFW profile follows from cosmological concentration-mass relation. This is parameter-free but introduces scatter from the $M_*$-$M_{200}$ relation (~0.2 dex) and c-M relation (~0.15 dex).
 
-**Results (171 galaxies) — Updated December 2025:**
+**Results (171 galaxies):**
 
 | Metric | Σ-Gravity | MOND | Notes |
 |--------|-----------|------|-------|
@@ -1128,7 +1127,7 @@ Option (3) is most appropriate: abundance matching predicts $M_{200}$ from stell
 
 #### 3.1.0 Robustness Test: Σ-Gravity vs. MOND
 
-**Updated December 2025:** Using the unified model with geometry-dependent amplitude A(G) = √(2.25 + 200×G²), coherence scale r₀ = 10 kpc, and M/L = 0.5 (Lelli+ 2016 recommendation):
+Using the unified model with geometry-dependent amplitude A(G) = √(2.25 + 200×G²), coherence scale r₀ = 10 kpc, and M/L = 0.5 (Lelli+ 2016 recommendation):
 
 | Model | Mean RMS | Win Rate vs MOND |
 |-------|----------|------------------|
@@ -1216,7 +1215,7 @@ Output files:
 
 ### 3.2 Milky Way Validation (Star-by-Star)
 
-**Updated December 2025:** We perform rigorous star-by-star validation using 28,368 disk stars from the Eilers-APOGEE-Gaia catalog, with full 6D kinematics (position + velocity) and proper asymmetric drift corrections.
+We perform star-by-star validation using 28,368 disk stars from the Eilers-APOGEE-Gaia catalog, with full 6D kinematics (position + velocity) and asymmetric drift corrections.
 
 **Data sources:**
 - Spectrophotometric distances from Eilers+ 2018
@@ -1391,7 +1390,7 @@ Using standard literature values (f_baryon = 0.15, gas concentration = 0.4 at 20
 
 *Figure 6: Σ-Gravity cluster predictions vs Fox+ 2022 strong lensing masses. Left: Predicted vs observed mass at 200 kpc (N=42). Middle: Ratio vs redshift. Right: Distribution of log(M_Σ/MSL) with scatter = 0.14 dex.*
 
-**Updated December 2025:** With the unified amplitude formula A(G) = √(2.25 + 200×G²) and G = 1.0 for clusters, the model achieves **median M_pred/M_lens = 1.00** with scatter 0.12 dex—matching observations exactly.
+With the unified amplitude formula A(G) = √(2.25 + 200×G²) and G = 1.0 for clusters, the model achieves **median M_pred/M_lens = 1.00** with scatter 0.12 dex.
 
 #### Profile-Based Cluster Subsample (Literature Gas + Stellar Masses)
 

@@ -2,8 +2,7 @@
 
 ## Σ-Gravity: A Universal Scale-Dependent Enhancement Reproducing Galaxy Dynamics and Cluster Lensing Without Particle Dark-Matter Halos
 
-**Authors:** Leonard Speiser  
-**Date:** 2025-11-30
+**Authors:** Leonard Speiser
 
 This Supplementary Information (SI) accompanies the main manuscript and provides complete technical details, derivations, reproducibility instructions, and extended analyses.
 
@@ -180,11 +179,11 @@ $$\Sigma = 1 + A \times W(r) \times h(g)$$
 where:
 - $h(g) = \sqrt{g^\dagger/g} \times g^\dagger/(g^\dagger + g)$
 - $W(r) = 1 - (\xi/(\xi + r))^{0.5}$ with $\xi = (2/3)R_d$
-- $g^\dagger = cH_0/(4\sqrt{\pi}) = 9.60 \times 10^{-11}$ m/s² **(UPDATED December 2025)**
+- $g^\dagger = cH_0/(4\sqrt{\pi}) = 9.60 \times 10^{-11}$ m/s²
 - $A = \sqrt{3} \approx 1.73$ for galaxies
 - $A = \pi\sqrt{2} \times (1/\langle W \rangle) \approx 8.4$ for clusters (derived from spatial geometry)
 
-**Note on g† formula update:** The original formula $g^\dagger = cH_0/(2e)$ has been superseded by $g^\dagger = cH_0/(4\sqrt{\pi})$. The new formula provides 14.3% better rotation curve fits while using only geometric constants (no arbitrary factor 'e'). See SI §7.2 for the derivation.
+See SI §7.2 for the derivation of $g^\dagger$.
 
 **Results (174 galaxies):**
 
@@ -339,7 +338,7 @@ python scripts/run_holdout_validation.py
 python scripts/analyze_fox2022_clusters.py
 ```
 
-### SI §5.9. Expected Results Table (Updated December 2025)
+### SI §5.9. Expected Results Table
 
 | Metric | Expected Value | Verification Command |
 |--------|----------------|---------------------|
@@ -929,7 +928,7 @@ A photon traversing a cluster at r ~ 200 kpc sees W = 1 **at that location**. No
 
 ## SI §6.3 — Derivation Status Summary
 
-**Note:** This table has been updated to reflect the spatial derivation of cluster amplitude (December 2025).
+The cluster amplitude is derived from spatial geometry (mode counting + coherence saturation).
 
 | Parameter | Formula | Status | Error |
 |-----------|---------|--------|-------|
@@ -963,7 +962,7 @@ Counter-rotating components disrupt coherence:
 | 50% | 1.84 | 2.56 | **-28%** |
 | 100% (fully counter) | 1.00 | 2.56 | -61% |
 
-#### Statistical Validation (December 2025)
+#### Statistical Validation
 
 **Data Sources:**
 - MaNGA DynPop catalog (Zhu et al. 2023): Dynamical masses and f_DM for 10,296 galaxies
@@ -1064,7 +1063,7 @@ MOND has no $\sigma_v$ dependence at fixed $g_{\text{bar}}$.
 
 ## SI §7 — Noise-Based Parameter Motivations
 
-**UPDATE (2025-11):** Following intensive theoretical work, we have identified noise-driven relations that **motivate all five key parameters** to within a few per cent. These are physically motivated constraints arising from the decoherence framework, not unique derivations from first principles.
+Noise-driven relations **motivate all five key parameters** to within a few percent. These are physically motivated constraints arising from the decoherence framework, not unique derivations from first principles.
 
 ### SI §7.1. Summary of Derived Parameters
 
@@ -1078,16 +1077,12 @@ MOND has no $\sigma_v$ dependence at fixed $g_{\text{bar}}$.
 | $n_{\rm coh}$ | χ² noise channel statistics | $k/2$ | 0.5 | **DERIVED** |
 | $\xi$ | Coherence length | $(2/3)R_d$ | varies | Phenomenological |
 
-**Note:** The critical acceleration $g^\dagger = cH_0/(4\sqrt{\pi})$ supersedes the previous formula $g^\dagger = cH_0/(2e)$ as of December 2025. The new formula provides 14.3% better rotation curve fits and uses only geometric constants.
-
-**Key theoretical advance (December 2025):** The cluster amplitude ratio is now **derived from spatial geometry**:
+The cluster amplitude ratio is **derived from spatial geometry**:
 - Mode counting: $\pi\sqrt{2}/\sqrt{3} \approx 2.57$ (3D vs 2D)
 - Coherence saturation: $1/\langle W \rangle \approx 1.9$ (W=1 at lensing radii vs ⟨W⟩≈0.53 for rotation curves)
 - Combined: **4.9** vs observed **5.2** (94% agreement)
 
 ### SI §7.2. Critical Acceleration: $g^\dagger = cH_0/(4\sqrt{\pi})$
-
-**UPDATE (December 2025):** The critical acceleration formula has been updated from $g^\dagger = cH_0/(2e)$ to $g^\dagger = cH_0/(4\sqrt{\pi})$ based on comprehensive validation showing 14.3% improvement in rotation curve fits.
 
 **Physical derivation:**
 
@@ -1238,11 +1233,11 @@ where $\sigma_{\rm ref} \sim 20$ km/s is a galaxy formation scale. This gives:
 
 **Status:** The formula structure is derived, but the absolute scale ($\sigma_{\rm ref}$) remains phenomenological.
 
-### SI §7.8. Comparison to Previous "Negative Results"
+### SI §7.8. Why Density-Based Derivations Fail
 
-The earlier SI §7 (pre-2025-11) tested simple density-based derivations that failed by factors of 10-2500×. The key error was attempting to derive $\ell_0$ from local density $\rho$ rather than from cosmological scales ($H_0$) and decoherence physics.
+Simple density-based derivations fail by factors of 10-2500×. The key error is attempting to derive $\ell_0$ from local density $\rho$ rather than from cosmological scales ($H_0$) and decoherence physics.
 
-**What changed:**
+**Correct approach:**
 1. $g^\dagger$ derived from de Sitter horizon, not density
 2. $A_0$ derived from path integral interference, not geometry alone
 3. $p$ derived from phase coherence physics, not interaction networks
@@ -2468,7 +2463,7 @@ All scripts and results: `derivations/editorial_response/`
 
 ### §18.1 What Is Derived vs. Fitted vs. Assumed
 
-**Note:** This table has been updated to reflect advances from the Wavefront Coherence Framework (SI §19).
+This table reflects the current derivation status including the Wavefront Coherence Framework (SI §19).
 
 | Component | Status | Details |
 |-----------|--------|--------|
@@ -2526,11 +2521,11 @@ MOND has operated as successful phenomenology for 40 years without a complete re
 
 ### SI §19.1. Overview
 
-**Important note:** This section documents an alternative derivation framework that produces $g^\dagger = cH_0/6$. The main paper now uses $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s², which is derived from spherical coherence geometry and provides 14.3% better rotation curve fits than the previous formula $g^\dagger = cH_0/(2e)$. The framework below represents one possible physical interpretation.
+This section documents an alternative derivation framework that produces $g^\dagger = cH_0/6$. The main paper uses $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s², derived from spherical coherence geometry. The framework below represents one possible physical interpretation.
 
 The Wavefront Coherence Framework attempts to derive the key Σ-Gravity parameters from postulates about phase coherence. While providing geometric intuition, the specific numerical factors (like 6 vs 2e) remain phenomenological choices.
 
-**Key result (this framework):** The derived $g^\dagger = cH_0/6 = 1.134 \times 10^{-10}$ m/s² agrees with the empirical MOND $a_0 = 1.20 \times 10^{-10}$ m/s² to **5.5%**. The main paper now uses $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s² which provides 14.3% better rotation curve fits.
+**Key result (this framework):** The derived $g^\dagger = cH_0/6 = 1.134 \times 10^{-10}$ m/s² agrees with the empirical MOND $a_0 = 1.20 \times 10^{-10}$ m/s² to **5.5%**. The main paper uses $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s², which provides better rotation curve fits.
 
 ### SI §19.2. Four Foundational Postulates
 
@@ -2560,7 +2555,7 @@ Phase coherence is lost when accumulated phase error exceeds a critical threshol
 From Postulate III:
 $$A_{\text{disk}} = \sqrt{N} = \sqrt{3} \approx 1.732$$
 
-**Verification:** Matches the previously calibrated value to within 2%.
+This matches the empirically calibrated value to within 2%.
 
 #### B. Critical Acceleration: $g^\dagger = cH_0/6$
 
@@ -2584,7 +2579,7 @@ $$A_{\text{cluster,bare}} = \pi\sqrt{2} \approx 4.443$$
 **Mode-counting ratio:**
 $$\frac{A_{\text{cluster,bare}}}{A_{\text{disk}}} = \frac{\pi\sqrt{2}}{\sqrt{3}} = \pi\sqrt{\frac{2}{3}} \approx 2.57$$
 
-**Effective amplitude including coherence window saturation (December 2025):**
+**Effective amplitude including coherence window saturation:**
 
 The effective cluster amplitude includes an additional factor from coherence window saturation:
 
@@ -2610,7 +2605,7 @@ $$n_{\text{coh}} = k/2 = 0.5$$
 
 **Note:** This is independent of the wavefront framework and remains rigorously derived.
 
-### SI §19.4. Updated Derivation Status Table
+### SI §19.4. Derivation Status Table
 
 | Parameter | Formula | Previous Status | New Status | Error |
 |-----------|---------|-----------------|------------|-------|
@@ -2622,7 +2617,7 @@ $$n_{\text{coh}} = k/2 = 0.5$$
 | $n_{\text{coh}}$ | $k/2 = 0.5$ | ✓ Rigorous | ✓ **RIGOROUS** | 0% |
 | $\xi$ | $(2/3)R_d$ | ✗ Empirical | ✗ Empirical | ~40% |
 
-**Key advance (December 2025):** The effective cluster amplitude ratio is now derived from two spatial effects:
+The effective cluster amplitude ratio is derived from two spatial effects:
 - Mode counting: 2.57 (3D vs 2D geometry)
 - Coherence window saturation: 1.9 (W=1 at lensing radii vs ⟨W⟩≈0.53 for rotation curves)
 - Combined: **4.9** vs observed **5.2** (94% agreement)
@@ -3509,7 +3504,7 @@ Using standard assumptions from Fox+ (2022, ApJ 928, 87):
 
 This represents a **32% systematic underprediction** of cluster lensing masses.
 
-#### Recent Observational Revisions (2024-2025)
+#### Recent Observational Revisions
 
 X-ray and multi-wavelength observations have revealed that cluster gas fractions are **10-30% higher** than previously assumed:
 
@@ -4142,7 +4137,7 @@ Final performance:
   MW: 27.7 km/s RMS
 ```
 
-### SI §29.6. Optimization Results (December 2025)
+### SI §29.6. Optimization Results
 
 | Parameter | Previous | Optimized | Change |
 |-----------|----------|-----------|--------|
