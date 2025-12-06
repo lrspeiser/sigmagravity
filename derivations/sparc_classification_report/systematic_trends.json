@@ -1,0 +1,31 @@
+{
+  "rms_vs_V_flat": {
+    "correlation": 0.6583318921077896,
+    "interpretation": "positive = worse fits for massive galaxies"
+  },
+  "rms_vs_R_max": {
+    "correlation": 0.5160502069327265,
+    "interpretation": "positive = worse fits for extended galaxies"
+  },
+  "rms_vs_gas_fraction": {
+    "correlation": -0.45647255776720813,
+    "interpretation": "positive = worse fits for gas-rich galaxies"
+  },
+  "rms_vs_bulge_fraction": {
+    "correlation": 0.3657399397612452,
+    "interpretation": "positive = worse fits for bulge-dominated galaxies"
+  },
+  "residual_vs_V_flat": {
+    "correlation": 0.23704627573944645,
+    "interpretation": "positive = underprediction for massive galaxies"
+  },
+  "residual_vs_gas_fraction": {
+    "correlation": 0.012589793696720022,
+    "interpretation": "positive = underprediction for gas-rich galaxies"
+  },
+  "strongest_trend": {
+    "name": "rms_vs_V_flat",
+    "correlation": 0.6583318921077896,
+    "interpretation": "positive = worse fits for massive galaxies"
+  }
+}

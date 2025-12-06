@@ -1,0 +1,8 @@
+1. BULGE-DOMINATED GALAXY ISSUE: Bulge-dominated galaxies have worse fits. Consider: (1) Different G for bulge-dominated systems (G → 0.1-0.2), (2) Two-component model with separate G for bulge and disk.
+
+2. INNER REGION UNDERPREDICTION: Multiple galaxies show underprediction in inner regions. Consider: (1) Reducing r0 to allow earlier coherence buildup, (2) Modified f(r) with faster inner rise.
+
+3. OUTER REGION UNDERPREDICTION: Multiple galaxies show underprediction in outer regions. Consider: (1) Increasing A_galaxy, (2) f(r) that doesn't saturate as quickly.
+
+4. MASS-DEPENDENT FIT QUALITY: RMS correlates with V_flat (r=0.66). Massive galaxies fit worse. Consider mass-dependent amplitude scaling.
+
