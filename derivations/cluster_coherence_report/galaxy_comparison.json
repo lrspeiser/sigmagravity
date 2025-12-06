@@ -1,0 +1,15 @@
+{
+  "galaxy_comparison": {
+    "galaxy_r0_vs_coherence_time": 0.43,
+    "galaxy_r0_vs_sigma_v_ratio": 0.3
+  },
+  "cluster_correlations": {
+    "r0_vs_t_dyn": 0.7914432487969759,
+    "r0_vs_t_cross": 0.7914432487969756,
+    "r0_vs_orbital_periods": -0.8132202157895041,
+    "r0_vs_sigma_v_ratio": 0.015767139227266143
+  },
+  "interpretation": [
+    "CONSISTENT: Both galaxies (r=0.43) and clusters (r=0.79) show r\u2080 correlating with dynamical timescale"
+  ]
+}
