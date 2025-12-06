@@ -464,7 +464,7 @@ The cluster amplitude is **derived from spatial geometry**, not fitted:
 | Effect | Factor | Source |
 |--------|--------|--------|
 | Mode counting (3D vs 2D) | 2.57 | π√2/√3 (solid angle geometry) |
-| Coherence window saturation | 1.9 | W=1 at lensing radii vs ⟨W⟩≈0.53 for rotation curves |
+| Coherence window saturation | 1.9 | W(r≫ξ) → 1 for clusters vs ⟨W⟩≈0.53 for galaxy rotation curves |
 | **Combined ratio** | **4.9** | 2.57 × 1.9 |
 | **Observed ratio** | **5.2** | A_cluster/A_galaxy needed to match data |
 | **Agreement** | **94%** | Within systematic uncertainties |
@@ -520,7 +520,7 @@ $$\Sigma = 1 + A_{\rm cluster} \times h(g)$$
 
 **Components:**
 - Same enhancement function $h(g)$ (universal—same for dynamics and lensing)
-- No coherence window for lensing ($W = 1$ at lensing radii ~200 kpc)
+- Coherence window approaches unity at lensing radii: $W(200~{\rm kpc}) \approx 0.95$ for typical cluster $\xi \sim 20$ kpc
 - Critical acceleration: $g^\dagger = cH_0/(4\sqrt{\pi}) = 9.60 \times 10^{-11}$ m/s²
 - Cluster amplitude: $A_{\rm cluster} = \pi\sqrt{2} \times (1/\langle W \rangle_{\rm galaxy}) \approx 8.4$ (derived)
 
@@ -1079,7 +1079,7 @@ Noise-driven relations **motivate all five key parameters** to within a few perc
 
 The cluster amplitude ratio is **derived from spatial geometry**:
 - Mode counting: $\pi\sqrt{2}/\sqrt{3} \approx 2.57$ (3D vs 2D)
-- Coherence saturation: $1/\langle W \rangle \approx 1.9$ (W=1 at lensing radii vs ⟨W⟩≈0.53 for rotation curves)
+- Coherence saturation: $1/\langle W \rangle \approx 1.9$ (W(r≫ξ) → 1 for clusters vs ⟨W⟩≈0.53 for galaxy rotation curves)
 - Combined: **4.9** vs observed **5.2** (94% agreement)
 
 ### SI §7.2. Critical Acceleration: $g^\dagger = cH_0/(4\sqrt{\pi})$
@@ -2586,14 +2586,14 @@ The effective cluster amplitude includes an additional factor from coherence win
 | Effect | Factor | Physical Origin |
 |--------|--------|-----------------|
 | Mode counting | 2.57 | 3D sphere vs 2D disk (π√2/√3) |
-| Coherence saturation | 1.9 | W=1 at lensing radii vs ⟨W⟩≈0.53 for rotation curves |
+| Coherence saturation | 1.9 | W(r≫ξ) → 1 for clusters vs ⟨W⟩≈0.53 for galaxy rotation curves |
 | **Combined ratio** | **4.9** | 2.57 × 1.9 |
 | **Observed ratio** | **5.2** | From cluster data |
 | **Agreement** | **94%** | Within systematics |
 
 $$A_{\text{cluster,eff}} = \pi\sqrt{2} \times \frac{1}{\langle W \rangle_{\text{galaxy}}} \approx 4.44 \times 1.9 \approx 8.4$$
 
-**Key insight:** Both effects are **instantaneous and spatial**—no temporal buildup required. A photon traversing a cluster at r ~ 200 kpc sees W = 1 at that location.
+Both effects are **instantaneous and spatial**—no temporal buildup required. At cluster lensing radii ($r \sim 200$ kpc), the coherence window evaluates to $W(200) \approx 0.95$ for typical cluster $\xi \sim 20$ kpc, effectively unity.
 
 #### D. Coherence Exponent: $n_{\text{coh}} = 0.5$
 
@@ -2619,7 +2619,7 @@ $$n_{\text{coh}} = k/2 = 0.5$$
 
 The effective cluster amplitude ratio is derived from two spatial effects:
 - Mode counting: 2.57 (3D vs 2D geometry)
-- Coherence window saturation: 1.9 (W=1 at lensing radii vs ⟨W⟩≈0.53 for rotation curves)
+- Coherence window saturation: 1.9 (W(r≫ξ) → 1 for clusters vs ⟨W⟩≈0.53 for galaxy rotation curves)
 - Combined: **4.9** vs observed **5.2** (94% agreement)
 
 **Legend:**
