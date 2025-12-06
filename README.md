@@ -167,18 +167,18 @@ Despite incomplete theoretical foundations, Σ-Gravity:
 
 ---
 
-> ### Why Read Further? Unique Falsifiable Predictions
-> 
-> Σ-Gravity makes **four predictions that distinguish it from both MOND and ΛCDM**:
-> 
-> | Prediction | Mechanism | Test | Current Status |
-> |------------|-----------|------|----------------|
-> | **1. Counter-rotation reduces enhancement** | Opposing velocities increase effective σ, reducing coherence | MaNGA counter-rotating galaxies | ✓ Confirmed (p < 0.01) |
-> | **2. High-σ systems show less enhancement** | Dispersion-dominated systems have low coherence | Ellipticals vs spirals at fixed mass | ○ Qualitatively consistent |
-> | **3. Less enhancement at high redshift** | $g^\dagger(z) \propto H(z)$ | KMOS³D f_DM evolution | ○ Consistent with data |
-> | **4. Environment affects coherence** | Cluster tides may disrupt disk coherence | Satellite vs field galaxies | ◇ Untested |
-> 
-> **If any of these fail under rigorous testing, the coherence mechanism is ruled out.**
+#### Falsifiable Predictions
+
+Σ-Gravity makes four predictions that distinguish it from both MOND and ΛCDM:
+
+| Prediction | Mechanism | Observational Test | Status |
+|------------|-----------|-------------------|--------|
+| Counter-rotation reduces enhancement | Opposing velocities increase effective σ, reducing coherence | MaNGA counter-rotating galaxies | Confirmed (p < 0.01) |
+| Dispersion-dominated systems show less enhancement | High σ/v_rot reduces coherence | Ellipticals vs spirals at fixed mass | Qualitatively consistent |
+| Enhancement decreases at high redshift | $g^\dagger(z) \propto H(z)$ increases with z | KMOS³D f_DM evolution | Consistent with observations |
+| Environment affects coherence | Cluster tides may disrupt disk coherence | Satellite vs field galaxies | Not yet tested |
+
+Failure of any prediction under rigorous testing would falsify the coherence mechanism.
 
 ---
 
@@ -462,9 +462,9 @@ $$|\mathbf{T}|_{\text{coh}}^2 = |\langle T_r \rangle|^2 + |\langle T_\phi \rangl
 
 | Mode | Physical Origin | Incoherent | Coherent |
 |------|----------------|------------|----------|
-| **Radial ($T_r$)** | Gradient of gravitational potential $\partial_r \Phi$ | ✓ Always | ✓ Always |
-| **Azimuthal ($T_\phi$)** | Frame-dragging from ordered rotation $\propto \int (\rho v_\phi/r) dV$ | ✗ Averages to zero | ✓ Coherent rotation |
-| **Vertical ($T_z$)** | Disk geometry breaks spherical symmetry | ✗ Averages to zero | ✓ Disk geometry |
+| Radial ($T_r$) | Gradient of gravitational potential $\partial_r \Phi$ | Contributes | Contributes |
+| Azimuthal ($T_\phi$) | Frame-dragging from ordered rotation $\propto \int (\rho v_\phi/r) dV$ | Averages to zero | Contributes (ordered rotation) |
+| Vertical ($T_z$) | Disk geometry breaks spherical symmetry | Averages to zero | Contributes (disk geometry) |
 
 **Step 5: Enhancement Factor**
 
@@ -546,7 +546,7 @@ Clusters:       A = π√2 × 1.9 ≈ 8.4,  W = 1
 ```
 A_eff_galaxy  = √3 × ⟨W⟩ ≈ 1.73 × 0.53 ≈ 0.9
 A_eff_cluster = π√2 × 1  ≈ 4.44
-Ratio = 4.44/0.9 ≈ 4.9 ✓
+Ratio = 4.44/0.9 ≈ 4.9  (matches observed ratio)
 ```
 
 Both formulations give the same predictions. The key insight is that the cluster amplitude is **not a separate fitted parameter**—it emerges from the same physics (coherence enhancement) applied to different geometry (3D vs 2D) and different observation regime (outer regions where $W = 1$ vs inner regions where $\langle W \rangle < 1$).
@@ -566,11 +566,7 @@ where:
 - **Jeans scale contribution:** $4\pi G\rho$ arises from the Jeans length $\ell_J = \sigma_v/\sqrt{4\pi G\rho}$, which converts velocity dispersion to a rate with correct dimensions [time]⁻²
 - **Cosmic reference:** $H_0^2$ provides an infrared cutoff
 
-This definition is:
-- ✓ **LOCAL:** Only depends on fields and derivatives at each spacetime point
-- ✓ **COVARIANT:** Transforms properly under coordinate changes
-- ✓ **GAUGE-INVARIANT:** No reference to special coordinates
-- ✓ **DIMENSIONALLY CORRECT:** All terms have dimension [time]⁻²
+This scalar is local and covariant by construction: it depends only on fields and their derivatives at each spacetime point, transforms properly under coordinate changes, requires no reference to special coordinates, and all terms have dimension [time]⁻².
 
 **Non-relativistic limit:** For steady-state circular rotation in a disk galaxy (θ ≈ 0, incompressible flow):
 
@@ -730,20 +726,17 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 
 | Parameter | Formula | Status | Notes |
 |-----------|---------|--------|-------|
-| **Coherence C** | $\omega^2/(\omega^2 + 4\pi G\rho + \theta^2 + H_0^2)$ | ✓ **COVARIANT** | From Ellis (1971) 4-velocity decomposition |
-| **$n_{\text{coh}} = 0.5$** | $k/2$ (Gamma-exponential) | ✓ **RIGOROUS** | Exact from decoherence statistics |
-| **$g^\dagger$** | $cH_0/(4\sqrt{\pi})$ | ✓ **DERIVED** | From spherical coherence geometry |
-| **W(r) form** | $1 - (\xi/(\xi+r))^{0.5}$ | ○ **DERIVED** | From Gamma-exponential decoherence |
-| **$\xi$** | $k \times \sigma_{\rm eff}/\Omega_d$ | ○ **DYNAMICALLY MOTIVATED** | 16% improvement; validated without V_obs |
-| **$h(g)$** | $\sqrt{g^\dagger/g} \times g^\dagger/(g^\dagger+g)$ | ✓ **DERIVED** | From acceleration scaling |
-| **$A(G)$** | $\sqrt{1.6 + 109 \times G^2}$ | △ **CALIBRATED** | Unified galaxy-cluster formula |
-| **$G_{\text{galaxy}}$** | 0.038 | △ **CALIBRATED** | Optimized for disk geometries |
-| **$G_{\text{cluster}}$** | 1.0 | ○ **MOTIVATED** | Spherical geometry |
+| Coherence C | $\omega^2/(\omega^2 + 4\pi G\rho + \theta^2 + H_0^2)$ | Covariant | From Ellis (1971) 4-velocity decomposition |
+| $n_{\text{coh}} = 0.5$ | $k/2$ (Gamma-exponential) | Derived | Exact from decoherence statistics |
+| $g^\dagger$ | $cH_0/(4\sqrt{\pi})$ | Derived | From spherical coherence geometry |
+| W(r) form | $1 - (\xi/(\xi+r))^{0.5}$ | Derived | From Gamma-exponential decoherence |
+| $\xi$ | $k \times \sigma_{\rm eff}/\Omega_d$ | Dynamically motivated | 16% improvement; validated without V_obs |
+| $h(g)$ | $\sqrt{g^\dagger/g} \times g^\dagger/(g^\dagger+g)$ | Derived | From acceleration scaling |
+| $A(G)$ | $\sqrt{1.6 + 109 \times G^2}$ | Calibrated | Unified galaxy-cluster formula |
+| $G_{\text{galaxy}}$ | 0.038 | Calibrated | Optimized for disk geometries |
+| $G_{\text{cluster}}$ | 1.0 | Motivated | Spherical geometry |
 
-**Legend:**
-- ✓ **RIGOROUS/DERIVED**: Mathematical theorem or well-defined calculation
-- ○ **DERIVED/MOTIVATED**: Well-defined calculation with stated assumptions
-- △ **CALIBRATED**: Physical motivation constrains form; value set by data
+**Status definitions:** *Derived* indicates a mathematical result from stated assumptions. *Dynamically motivated* indicates physical reasoning constrains the form with empirical validation. *Calibrated* indicates physical motivation constrains the form with the final value set by data. *Motivated* indicates plausible physical reasoning without unique derivation.
 
 **Key advances (December 2025):**
 1. **Dynamical coherence scale:** ξ = k×σ_eff/Ω_d replaces phenomenological ξ = (2/3)R_d, with 16% improvement and robustness validation (87% improvement retained with V_bar-only)
@@ -873,28 +866,15 @@ Since $g_{\rm MW} > g^\dagger$, the effective field remains in the Newtonian reg
 
 ---
 
-#### Which Option is Correct?
+#### Open Theoretical Issue: Wide Binary Predictions
 
-**We do not know.** Both options are theoretically motivated but neither is derived from first principles:
+Both options are theoretically motivated but neither is derived from first principles. Option A (external field effect) follows by analogy with MOND and predicts 10-15% velocity enhancement in wide binaries. Option B (coherence suppression) is consistent with the premise that coherence requires extended rotating structures and predicts no enhancement (Σ = 1).
 
-| Option | Theoretical Status | Prediction for Wide Binaries |
-|--------|-------------------|------------------------------|
-| **A (EFE)** | Phenomenological extension by analogy with MOND | 10-15% velocity boost |
-| **B (W→0)** | Consistent with coherence premise; limits theory scope | No enhancement |
+Current observational constraints are disputed. Chae (2023) reports ~40% excess velocities, which would be inconsistent with both options. Banik et al. (2024) find no excess, consistent with Option B but not Option A.
 
-**Observational status:** Wide binary tests are currently disputed:
+Resolution requires: (1) derivation of the external field effect (or its absence) from the field equation structure, (2) clarification of whether coherence requires extended rotation or applies more broadly, and (3) improved wide binary data from Gaia DR4.
 
-| Study | Claim | Σ-Gravity Option A | Σ-Gravity Option B |
-|-------|-------|-------------------|-------------------|
-| Chae (2023) | ~40% excess | Underpredicts | Inconsistent |
-| Banik et al. (2024) | No excess | Overpredicts | Consistent |
-
-**Future work needed:**
-1. Derive EFE (or its absence) from the field equation structure
-2. Clarify whether coherence requires extended rotation or applies more broadly
-3. Wait for improved wide binary data (Gaia DR4) to distinguish predictions
-
-**Honest summary:** The low-g regime exposes a theoretical ambiguity in Σ-Gravity. We present both options transparently rather than claiming a definitive answer.
+This ambiguity represents a genuine theoretical gap in the current formulation.
 
 **Reproduction:**
 
@@ -1024,17 +1004,15 @@ where $r_E = 1$ AU. This satisfies the Cassini bound $|\gamma - 1| < 2.3 \times 
 
 #### 2.14.5 Summary of Consistency Status
 
-| Constraint | Our Claim | Observational Bound | Status |
-|------------|-----------|---------------------|--------|
-| **Stress-energy conservation** | Total $T^{\mu\nu}$ conserved | Required | ✓ **Proven** (dynamical field, §2.14.1) |
-| **Fifth force** | None (minimal coupling) | — | ✓ **Eliminated** (QUMOND-like formulation, §2.14.2) |
-| **WEP (Eötvös)** | $\eta_E = 0$ (minimal coupling) | $\eta_E < 10^{-13}$ | ✓ **Satisfied** (all particles follow same geodesics) |
-| **Solar System** | $\nu - 1 < 10^{-8}$ | Various | ✓ **Safe** (phantom density vanishes) |
-| **PPN $\gamma - 1$** | $\sim 10^{-8}$ (estimate) | $< 2.3 \times 10^{-5}$ | ○ **Estimate only**; rigorous derivation needed |
-| **LLI** | Unknown (likely $\sim 10^{-7}$) | Various | ⚠️ Uncertain; requires formal analysis |
-| **LPI** | Satisfied | — | ✓ Position-independent constants |
-
-**Legend:** ✓ = established/proven, ○ = plausible estimate (not rigorous), ⚠️ = uncertain
+| Constraint | Claim | Observational Bound | Status |
+|------------|-------|---------------------|--------|
+| Stress-energy conservation | Total $T^{\mu\nu}$ conserved | Required | Proven (dynamical field, §2.14.1) |
+| Fifth force | None (minimal coupling) | — | Eliminated (QUMOND-like formulation, §2.14.2) |
+| WEP (Eötvös) | $\eta_E = 0$ (minimal coupling) | $\eta_E < 10^{-13}$ | Satisfied (all particles follow same geodesics) |
+| Solar System | $\nu - 1 < 10^{-8}$ | Various | Safe (phantom density vanishes) |
+| PPN $\gamma - 1$ | $\sim 10^{-8}$ (estimate) | $< 2.3 \times 10^{-5}$ | Estimate only; rigorous derivation needed |
+| LLI | Unknown (likely $\sim 10^{-7}$) | Various | Uncertain; requires formal analysis |
+| LPI | Satisfied | — | Position-independent constants |
 
 **Bottom line:** The QUMOND-like formulation (§2.14.2) eliminates fifth-force concerns entirely: matter couples minimally, and the enhancement appears in the field equations via a phantom density. Solar System constraints are satisfied because $\nu - 1 < 10^{-8}$ in high-acceleration compact systems. A rigorous PPN derivation is needed to make $\gamma - 1$ claims definitive. See SI §23-24 for extended analysis.
 
@@ -1396,9 +1374,9 @@ Using standard literature values (f_baryon = 0.15, gas concentration = 0.4 at 20
 
 | f_gas | Conc. | Lensing Ratio | Status |
 |-------|-------|---------------|--------|
-| 0.15 (baseline) | 0.4 | **0.60** | △ 40% under |
-| 0.20 | 0.5 | **0.72** | ○ 28% under |
-| 0.22 | 0.6 | **0.81** | ○ 19% under |
+| 0.15 (baseline) | 0.4 | 0.60 | 40% underprediction |
+| 0.20 | 0.5 | 0.72 | 28% underprediction |
+| 0.22 | 0.6 | 0.81 | 19% underprediction |
 
 **Interpretation:** If cluster gas fractions are ~20-22% (vs. the canonical 15%), Σ-Gravity's predictions improve to within ~20% of observations—comparable to systematic uncertainties in cluster mass measurements.
 
