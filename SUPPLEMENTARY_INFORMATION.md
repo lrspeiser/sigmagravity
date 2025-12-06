@@ -3980,6 +3980,84 @@ This ensures that the gravitational enhancement (V_obs/V_bar) is computed consis
 
 ---
 
+## SI §28.5 — Dynamical Coherence Scale Validation
+
+### Overview
+
+The coherence scale ξ has been upgraded from a purely phenomenological value (ξ = (2/3)R_d) to a **dynamically motivated** formula:
+
+$$\boxed{\xi = k \times \frac{\sigma_{\rm eff}}{\Omega_d}, \quad \Omega_d = \frac{V(R_d)}{R_d}, \quad k \simeq 0.24}$$
+
+This is an **instantaneous** property of the velocity field—purely spatial, no time accumulation.
+
+### Physical Interpretation
+
+ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω × r):
+- σ_eff = effective velocity dispersion (gas/disk/bulge weighted)
+- Ω_d = angular frequency at disk scale length
+- Their ratio has units of length
+
+### Validation Scripts
+
+```bash
+# Ablation study comparing coherence scale models
+python derivations/test_dynamical_coherence_scale.py
+# Output: 19% improvement over baseline
+
+# Robustness test (V_obs vs V_bar vs self-consistent)
+python derivations/test_dynamical_coherence_scale_robustness.py
+# Output: Confirms improvement holds without using V_obs
+```
+
+### Robustness Results
+
+| Ω_d source | Mean RMS | vs Baseline | Improvement retained |
+|------------|----------|-------------|---------------------|
+| V_obs (original) | 17.01 km/s | +18.8% | 100% |
+| V_bar (baryonic-only) | 17.52 km/s | +16.4% | **87%** |
+| V_pred (self-consistent) | 17.59 km/s | +16.0% | **85%** |
+
+The improvement is **not circular**—it holds when Ω_d is computed from baryons only.
+
+### Connection to Dynamical Timescale
+
+This formula explains why fitted coherence scales correlate with dynamical timescales:
+- Galaxies: r = +0.43 (correlation between fitted r₀ and T_orbit)
+- Clusters: r = +0.79 (correlation between fitted r₀ and T_dyn)
+
+The spatial structure of the velocity field (σ/Ω ratio) encodes the same information that dynamical timescales do, without introducing any time-dependence into the theory.
+
+### Velocity Dispersion Estimates
+
+When σ_v is not directly available, use:
+
+```python
+# Component velocity dispersions
+SIGMA_GAS = 10.0    # km/s (cold gas)
+SIGMA_DISK = 25.0   # km/s (stellar disk)
+SIGMA_BULGE = 120.0 # km/s (hot bulge)
+
+# Effective dispersion (weighted by mass fraction)
+sigma_eff = (gas_fraction * SIGMA_GAS + 
+             disk_fraction * SIGMA_DISK + 
+             bulge_fraction * SIGMA_BULGE)
+```
+
+### Legacy Baseline
+
+For backward compatibility, the legacy formula ξ = (2/3)R_d is still supported:
+
+```python
+def W_coherence(r, R_d, V_at_Rd=None, sigma_eff=None, k=0.24):
+    if V_at_Rd is not None and sigma_eff is not None:
+        xi = k * sigma_eff / (V_at_Rd / R_d)  # Dynamical
+    else:
+        xi = (2/3) * R_d  # Legacy baseline
+    return 1 - (xi / (xi + r)) ** 0.5
+```
+
+---
+
 ## SI §29 — Comprehensive Parameter Optimizer
 
 ### SI §29.1. Overview
@@ -4152,6 +4230,128 @@ new_metric, new_scatter = compute_new_metric(new_data, params)
 new_loss = weights.get('new', 1.0) * new_metric
 total_loss += new_loss
 ```
+
+---
+
+## SI §30 — Full Regression Test Suite
+
+### SI §30.1. Overview
+
+The script `derivations/full_regression_test.py` provides comprehensive regression testing across ALL validation domains. This ensures the theory remains consistent when formulas are updated.
+
+### SI §30.2. Tests Included
+
+| Test | Description | Threshold | Current Result |
+|------|-------------|-----------|----------------|
+| **Critical Acceleration** | Verify g† = cH₀/(4√π) | ~10⁻¹⁰ m/s² | 9.60×10⁻¹¹ m/s² ✓ |
+| **Solar System Safety** | Cassini bound |γ-1| < 2.3×10⁻⁵ | 0.0 ✓ |
+| **Planetary Orbits** | h-enhancement at planets | < 10⁻⁵ | 7.4×10⁻⁸ ✓ |
+| **SPARC Galaxies** | 171 rotation curves | RMS < 25 km/s | 19.18 km/s ✓ |
+| **Galaxy Clusters** | 94 Fox+ 2022 lensing | 0.7 < ratio < 1.3 | 0.999 ✓ |
+| **Milky Way** | 28,368 Gaia stars | RMS < 35 km/s | 27.7 km/s ✓ |
+| **Redshift Evolution** | g†(z) = cH(z)/(4√π) | Correct scaling | 2.966× at z=2 ✓ |
+| **Dynamical Coherence** | ξ = k×σ/Ω improvement | > 0% | 16.4% ✓ |
+
+### SI §30.3. Usage
+
+```bash
+# Full regression test (all domains)
+python derivations/full_regression_test.py
+
+# Quick mode (skip MW star-by-star)
+python derivations/full_regression_test.py --quick
+
+# Verbose output
+python derivations/full_regression_test.py --verbose
+```
+
+### SI §30.4. Output
+
+The script generates:
+
+1. **JSON report**: `derivations/regression_test_results/regression_report.json`
+   - Complete test results with all metrics and details
+   - Model parameters used
+   - Timestamp for tracking
+
+2. **Text summary**: `derivations/regression_test_results/regression_summary.txt`
+   - Human-readable summary
+   - Pass/fail status for each test
+
+### SI §30.5. Adding New Tests
+
+To add a new regression test:
+
+```python
+def test_new_domain(data, verbose: bool = False) -> TestResult:
+    """Test new domain."""
+    # Compute predictions
+    predictions = predict_something(data)
+    
+    # Compare to observations
+    metric = compute_metric(predictions, observations)
+    
+    # Check threshold
+    threshold = 1.0
+    passed = metric < threshold
+    
+    return TestResult(
+        name="New Domain",
+        passed=passed,
+        metric=metric,
+        threshold=threshold,
+        details={'key': 'value'},
+        message=f"{'PASSED' if passed else 'FAILED'}: metric = {metric:.2f}"
+    )
+
+# Add to run_all_tests():
+result = test_new_domain(data, verbose)
+results.append(result)
+print(f"[{'✓' if result.passed else '✗'}] {result.message}")
+```
+
+### SI §30.6. Continuous Integration
+
+The regression test can be integrated into CI/CD pipelines:
+
+```bash
+# Run regression test and check exit code
+python derivations/full_regression_test.py
+if [ $? -ne 0 ]; then
+    echo "Regression tests failed!"
+    exit 1
+fi
+```
+
+Exit codes:
+- `0`: All tests passed
+- `1`: One or more tests failed
+
+### SI §30.7. Test Details
+
+**Solar System Safety Test:**
+- Computes enhancement at 1 AU using h(g) function
+- Sets W = 0 for compact systems (no extended disk)
+- Verifies |γ-1| << Cassini bound (2.3×10⁻⁵)
+- Result: Enhancement is exactly zero due to W = 0
+
+**Planetary Orbits Test:**
+- Tests Mercury through Neptune
+- Computes h(g) at each planetary orbit
+- All planets have g >> g†, so h → 0
+- Maximum raw h-enhancement: 7.4×10⁻⁸ (Neptune)
+
+**Redshift Evolution Test:**
+- Verifies g†(z) = cH(z)/(4√π)
+- H(z) = H₀ × √(Ωm(1+z)³ + ΩΛ)
+- At z = 2: g†(z=2)/g†(z=0) = 2.966
+- This predicts LESS enhancement at high z for fixed g_bar
+
+**Dynamical Coherence Scale Test:**
+- Compares baseline ξ = (2/3)R_d to dynamical ξ = k×σ_eff/Ω_d
+- Uses V_bar for Ω_d (baryonic-only, not V_obs)
+- Current improvement: 16.4% over baseline
+- This validates the robustness finding from §2.7
 
 ---
 

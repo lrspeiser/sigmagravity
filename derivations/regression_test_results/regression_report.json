@@ -1,0 +1,215 @@
+{
+  "timestamp": "2025-12-06T11:26:13.370153",
+  "all_passed": true,
+  "total_tests": 8,
+  "passed_tests": 8,
+  "failed_tests": 0,
+  "results": [
+    {
+      "name": "Critical Acceleration",
+      "passed": "True",
+      "metric": 9.598924108127284e-11,
+      "threshold": 1e-10,
+      "details": {
+        "g_dagger": 9.598924108127284e-11,
+        "log10_g_dagger": -10.017777441969645,
+        "a0_mond": 1.2e-10,
+        "ratio_to_mond": 0.7999103423439403,
+        "c": 299800000.0,
+        "H0_SI": 2.27e-18
+      },
+      "message": "PASSED: g\u2020 = 9.599e-11 m/s\u00b2 (MOND a0 = 1.2e-10)"
+    },
+    {
+      "name": "Solar System Safety",
+      "passed": "True",
+      "metric": 0.0,
+      "threshold": 2.3e-05,
+      "details": {
+        "g_sun": 0.00593140799708313,
+        "g_dagger": 9.598924108127284e-11,
+        "g_ratio": 61792425.17462019,
+        "h_sun": 2.0587192833644955e-12,
+        "f_sun": 9.695398564806016e-10,
+        "W_sun": 0.0,
+        "Sigma_minus_1": 0.0,
+        "gamma_minus_1": 0.0,
+        "cassini_bound": 2.3e-05
+      },
+      "message": "PASSED: |\u03b3-1| = 0.00e+00 < 2.30e-05"
+    },
+    {
+      "name": "Planetary Orbits",
+      "passed": "True",
+      "metric": 7.420375547173641e-08,
+      "threshold": 1e-05,
+      "details": {
+        "planets": [
+          {
+            "name": "Mercury",
+            "r_AU": 0.387,
+            "g": 0.03960370969348216,
+            "h": 1.1932461271337739e-13,
+            "enhancement": 0.0,
+            "raw_h_enhancement": 1.5818483660837057e-13
+          },
+          {
+            "name": "Venus",
+            "r_AU": 0.723,
+            "g": 0.011347003891276608,
+            "h": 7.78058098863534e-13,
+            "enhancement": 0.0,
+            "raw_h_enhancement": 1.0314468276229277e-12
+          },
+          {
+            "name": "Earth",
+            "r_AU": 1.0,
+            "g": 0.00593140799708313,
+            "h": 2.0587192833644955e-12,
+            "enhancement": 0.0,
+            "raw_h_enhancement": 2.7291785496405406e-12
+          },
+          {
+            "name": "Mars",
+            "r_AU": 1.524,
+            "g": 0.002553805773022338,
+            "h": 7.287054609409387e-12,
+            "enhancement": 0.0,
+            "raw_h_enhancement": 9.660216082280811e-12
+          },
+          {
+            "name": "Jupiter",
+            "r_AU": 5.203,
+            "g": 0.0002191039194844652,
+            "h": 2.8997357767541543e-10,
+            "enhancement": 0.0,
+            "raw_h_enhancement": 3.8440873146188607e-10
+          },
+          {
+            "name": "Saturn",
+            "r_AU": 9.537,
+            "g": 6.521300804234187e-05,
+            "h": 1.7857960093029568e-09,
+            "enhancement": 0.0,
+            "raw_h_enhancement": 2.36737286234493e-09
+          },
+          {
+            "name": "Uranus",
+            "r_AU": 19.19,
+            "g": 1.6106747443105843e-05,
+            "h": 1.4548542111391536e-08,
+            "enhancement": 0.0,
+            "raw_h_enhancement": 1.9286538664981272e-08
+          },
+          {
+            "name": "Neptune",
+            "r_AU": 30.07,
+            "g": 6.559805191371039e-06,
+            "h": 5.5974609029463486e-08,
+            "enhancement": 0.0,
+            "raw_h_enhancement": 7.420375547173641e-08
+          }
+        ],
+        "max_raw_h_enhancement": 7.420375547173641e-08
+      },
+      "message": "PASSED: Max h-enhancement = 7.42e-08"
+    },
+    {
+      "name": "SPARC Galaxies",
+      "passed": true,
+      "metric": 19.180747780609295,
+      "threshold": 25.0,
+      "details": {
+        "n_galaxies": 171,
+        "mean_rms": 19.180747780609295,
+        "mean_mond_rms": 27.242781734011224,
+        "wins": 146,
+        "win_rate": 85.38011695906432,
+        "improvement": 29.593284680385228
+      },
+      "message": "PASSED: RMS=19.18 km/s, Wins=85.4%, Improvement=29.6%"
+    },
+    {
+      "name": "Galaxy Clusters",
+      "passed": "True",
+      "metric": 0.9994929654264872,
+      "threshold": 1.0,
+      "details": {
+        "n_clusters": 94,
+        "median_ratio": 0.9994929654264872,
+        "scatter_dex": 0.7697802375083626,
+        "min_ratio": 0.45845195603913197,
+        "max_ratio": 686.5350888148154
+      },
+      "message": "PASSED: Median ratio=0.999, Scatter=0.770 dex"
+    },
+    {
+      "name": "Milky Way",
+      "passed": "True",
+      "metric": 27.650853223917547,
+      "threshold": 35.0,
+      "details": {
+        "n_stars": 28368,
+        "rms": 27.650853223917547,
+        "mean_residual": -2.3557086527935835,
+        "vbar_scale": 1.16
+      },
+      "message": "PASSED: RMS=27.7 km/s (28368 stars)"
+    },
+    {
+      "name": "Redshift Evolution",
+      "passed": "True",
+      "metric": 2.966479394838265,
+      "threshold": 2.966479394838265,
+      "details": {
+        "z_values": [
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        "g_dagger_values": [
+          9.598924108127284e-11,
+          1.6900649884076062e-10,
+          2.8475010579375856e-10,
+          4.28202399137182e-10
+        ],
+        "g_dagger_z0": 9.598924108127284e-11,
+        "g_dagger_z2": 2.8475010579375856e-10,
+        "ratio_z2_z0": 2.966479394838265,
+        "expected_ratio": 2.966479394838265,
+        "h_values": [
+          0.4798456983170534,
+          0.8167560033238219,
+          1.2488695974251083,
+          1.6775415080086666
+        ]
+      },
+      "message": "PASSED: g\u2020(z=2)/g\u2020(z=0) = 2.966 (expected 2.966)"
+    },
+    {
+      "name": "Dynamical Coherence Scale",
+      "passed": "True",
+      "metric": 16.37641470981941,
+      "threshold": 5.0,
+      "details": {
+        "mean_rms_baseline": 20.949875225143,
+        "mean_rms_dynamical": 17.51903677708387,
+        "improvement_percent": 16.37641470981941,
+        "k_dynamical": 0.24
+      },
+      "message": "PASSED: Dynamical \u03be improvement = 16.4%"
+    }
+  ],
+  "parameters": {
+    "r0_kpc": 5.0,
+    "a_coeff": 1.6,
+    "b_coeff": 109.0,
+    "G_galaxy": 0.038,
+    "G_cluster": 1.0,
+    "A_galaxy": 1.3256681334331002,
+    "A_cluster": 10.516653460107925,
+    "g_dagger": 9.598924108127284e-11,
+    "k_dynamical": 0.24
+  }
+}
