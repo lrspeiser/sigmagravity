@@ -3980,6 +3980,181 @@ This ensures that the gravitational enhancement (V_obs/V_bar) is computed consis
 
 ---
 
+## SI §29 — Comprehensive Parameter Optimizer
+
+### SI §29.1. Overview
+
+The script `derivations/comprehensive_parameter_optimizer.py` provides a comprehensive framework for jointly optimizing Σ-Gravity parameters across all three validation datasets:
+
+1. **SPARC galaxies**: 171 rotation curves with M/L = 0.5 correction
+2. **Galaxy clusters**: 94 Fox+ 2022 strong-lensing clusters
+3. **Milky Way**: 28,368 Eilers-APOGEE-Gaia disk stars
+
+### SI §29.2. Parameters Optimized
+
+| Parameter | Symbol | Range | Description |
+|-----------|--------|-------|-------------|
+| Coherence scale | r₀ | 1–50 kpc | Path-length saturation scale |
+| Amplitude coefficient a | a | 0.1–10 | Constant term in A(G) |
+| Amplitude coefficient b | b | 10–500 | Geometry scaling in A(G) |
+| Galaxy geometry factor | G_galaxy | 0.01–0.3 | Disk thickness proxy |
+
+The amplitude formula is: $A(G) = \sqrt{a + b \times G^2}$
+
+### SI §29.3. Objective Function
+
+The optimizer minimizes a weighted combination:
+
+$$\mathcal{L} = w_{\rm SPARC} \times \text{RMS}_{\rm SPARC} + w_{\rm cluster} \times |R_{\rm cluster} - 1| \times 100 + w_{\rm MW} \times \text{RMS}_{\rm MW}$$
+
+where:
+- $w_{\rm SPARC} = 1.0$ (galaxy rotation curve accuracy)
+- $w_{\rm cluster} = 2.0$ (cluster ratio targeting 1.0)
+- $w_{\rm MW} = 0.5$ (Milky Way star velocities)
+
+### SI §29.4. Usage
+
+```bash
+# Quick grid search (400 combinations, ~30 seconds)
+python derivations/comprehensive_parameter_optimizer.py --quick
+
+# Full optimization (8,640 grid + differential evolution, ~5 minutes)
+python derivations/comprehensive_parameter_optimizer.py --full
+
+# Default (quick mode)
+python derivations/comprehensive_parameter_optimizer.py
+```
+
+### SI §29.5. Output
+
+The optimizer produces:
+
+1. **Grid search results**: Best parameters from discrete search
+2. **Scipy optimization**: Fine-tuned parameters using differential evolution
+3. **Sensitivity analysis**: How each metric changes when parameters vary by ±20%
+4. **Final summary**: Optimal parameters and performance metrics
+
+Example output:
+
+```
+================================================================================
+FINAL SUMMARY
+================================================================================
+
+Optimal parameters:
+  r0 = 5.00 kpc
+  A(G) = √(1.60 + 109.1 × G²)
+  G_galaxy = 0.038
+  G_cluster = 1.0
+  A_galaxy = 1.326
+  A_cluster = 10.52
+
+Final performance:
+  SPARC: 19.18 km/s RMS, 85.4% wins vs MOND
+  Clusters: 1.000 median ratio, 0.770 dex scatter
+  MW: 27.7 km/s RMS
+```
+
+### SI §29.6. Optimization Results (December 2025)
+
+| Parameter | Previous | Optimized | Change |
+|-----------|----------|-----------|--------|
+| r₀ | 10 kpc | **5 kpc** | -50% |
+| a | 2.25 | **1.60** | -29% |
+| b | 200 | **109** | -46% |
+| G_galaxy | 0.05 | **0.038** | -24% |
+| A_galaxy | 1.66 | **1.33** | -20% |
+| A_cluster | 14.2 | **10.5** | -26% |
+
+| Metric | Previous | Optimized | Improvement |
+|--------|----------|-----------|-------------|
+| SPARC RMS | 20.85 km/s | **19.18 km/s** | +8.0% |
+| SPARC wins | 80.1% | **85.4%** | +5.3 pp |
+| Cluster ratio | 1.27 | **1.00** | Exact match |
+| MW RMS | 27.6 km/s | **27.7 km/s** | -0.4% |
+
+### SI §29.7. Sensitivity Analysis
+
+The sensitivity analysis shows how robust the optimal parameters are:
+
+**Varying r₀ by ±20%:**
+| r₀ (kpc) | SPARC RMS | Cluster ratio | MW RMS |
+|----------|-----------|---------------|--------|
+| 4.0 | 18.73 km/s | 1.004 | 27.9 km/s |
+| 5.0 | 19.18 km/s | 1.000 | 27.7 km/s |
+| 6.0 | 19.64 km/s | 0.996 | 27.6 km/s |
+
+**Varying b by ±20%:**
+| b | A_cluster | SPARC RMS | Cluster ratio |
+|---|-----------|-----------|---------------|
+| 87 | 9.43 | 19.19 km/s | 0.915 |
+| 109 | 10.52 | 19.18 km/s | 1.000 |
+| 131 | 11.51 | 19.17 km/s | 1.081 |
+
+The cluster ratio is most sensitive to b, while SPARC RMS is most sensitive to r₀.
+
+### SI §29.8. Code Structure
+
+```python
+# Key functions in comprehensive_parameter_optimizer.py
+
+class ModelParameters:
+    """Container for Σ-Gravity model parameters."""
+    r0: float      # Coherence scale (kpc)
+    a: float       # Amplitude coefficient a
+    b: float       # Amplitude coefficient b
+    G_galaxy: float  # Geometry factor for galaxies
+    
+    def A(self, G: float) -> float:
+        """Compute amplitude A(G) = √(a + b×G²)"""
+        return np.sqrt(self.a + self.b * G**2)
+
+def h_function(g: np.ndarray) -> np.ndarray:
+    """Universal enhancement function h(g) = √(g†/g) × g†/(g†+g)"""
+    
+def f_path(r: np.ndarray, r0: float) -> np.ndarray:
+    """Path-length coherence factor f(r) = r/(r+r0)"""
+
+def predict_velocity(R_kpc, V_bar, params) -> np.ndarray:
+    """Predict rotation velocity using Σ-Gravity."""
+
+def predict_cluster_mass(M_bar, r_kpc, params) -> float:
+    """Predict cluster total mass using Σ-Gravity."""
+
+def combined_objective(x, galaxies, clusters, mw_df, weights) -> float:
+    """Combined objective function for optimization."""
+```
+
+### SI §29.9. Extending the Optimizer
+
+To add new datasets or modify the objective function:
+
+1. **Add data loader**: Create a `load_*_data()` function returning appropriate format
+2. **Add metric function**: Create `compute_*_metric()` returning (value, scatter)
+3. **Modify objective**: Add weighted term to `combined_objective()`
+4. **Update bounds**: Adjust parameter ranges if needed
+
+Example for adding a new dataset:
+
+```python
+def load_new_data(data_dir: Path) -> List[Dict]:
+    """Load new dataset."""
+    # ... load and format data ...
+    return data
+
+def compute_new_metric(data: List[Dict], params: ModelParameters) -> Tuple[float, float]:
+    """Compute metric for new dataset."""
+    # ... compute predictions and compare to observations ...
+    return metric, scatter
+
+# In combined_objective():
+new_metric, new_scatter = compute_new_metric(new_data, params)
+new_loss = weights.get('new', 1.0) * new_metric
+total_loss += new_loss
+```
+
+---
+
 ## Acknowledgments
 
 We thank **Emmanuel N. Saridakis** (National Observatory of Athens) for detailed feedback on the theoretical framework, particularly regarding the derivation of field equations, the structure of Θ_μν, and consistency constraints in teleparallel gravity with non-minimal matter coupling. His suggestions significantly strengthened the theoretical presentation.
