@@ -1,0 +1,477 @@
+====================================================================================================
+COMPLETE GALAXY-BY-GALAXY BREAKDOWN: Σ-GRAVITY vs MOND
+====================================================================================================
+
+Using Σ-Gravity formulas from README.md:
+  g† = cH₀/(4√π) = 9.60e-11 m/s²
+  A = √3 = 1.732
+  h(gN) = √(g†/gN) × g†/(g† + gN)
+  W(r) = 1 - (ξ/(ξ+r))^0.5 with ξ = (2/3)Rd
+  Σ = 1 + A × W(r) × h(gN)
+
+Loaded master sheet data for 175 galaxies
+
+Analyzed 174 galaxies
+
+======================================================================================================================================================
+COMPLETE GALAXY TABLE (sorted by Σ-Gravity improvement over MOND)
+======================================================================================================================================================
+Galaxy       Type   Winner    RMS_Σ    RMS_M      Δ%  V_flat    R_d  Rd_src  Gas% Deep% Regime     Mass      Inc  Q Hubble
+------------------------------------------------------------------------------------------------------------------------------------------------------
+UGCA281      BCD    Σ          1.36     7.03  +80.6%    28.6   1.72 catalog    24   100 Deep MOND  Dwarf      67  3 BCD  
+UGC04278     Sd     Σ          4.29     8.84  +51.5%    85.5   2.21 catalog    55   100 Deep MOND  Normal     90  1 Sd   
+ESO079-G014  Sbc    Σ         12.06    23.52  +48.7%   172.6   5.08 catalog     8   100 Deep MOND  Massive    79  1 Sbc  
+UGC07603     Sd     Σ          2.84     5.41  +47.6%    62.5   0.53 catalog    24   100 Deep MOND  Dwarf      78  1 Sd   
+NGC0055      Sm     Σ         14.81    26.95  +45.0%    86.3   6.11 catalog    42   100 Deep MOND  Normal     77  2 Sm   
+ESO116-G012  Sd     Σ          5.29     9.58  +44.8%   110.2   1.51 catalog    22   100 Deep MOND  Normal     74  1 Sd   
+UGC06399     Sm     Σ          5.27     9.35  +43.6%    85.8   2.05 catalog    25   100 Deep MOND  Normal     75  1 Sm   
+NGC2976      Sc     Σ         10.31    18.18  +43.3%    79.3   1.01 catalog    12    56 Transition Dwarf      61  2 Sc   
+UGC05986     Sm     Σ          4.00     6.76  +40.8%   115.4   1.67 catalog    13   100 Deep MOND  Normal     90  2 Sm   
+UGCA442      Sm     Σ          3.00     5.00  +39.9%    56.9   1.18 catalog    74   100 Deep MOND  Dwarf      64  1 Sm   
+UGC07232     Im     Σ          4.54     7.51  +39.5%    35.1   0.29 catalog    20   100 Deep MOND  Dwarf      59  2 Im   
+UGCA444      Im     Σ          3.29     5.36  +38.6%    35.0   0.83 catalog    89   100 Deep MOND  Dwarf      78  2 Im   
+KK98-251     Im     Σ          7.86    12.79  +38.5%    33.0   1.34 catalog    66   100 Deep MOND  Dwarf      59  2 Im   
+NGC3972      Sbc    Σ         12.26    19.85  +38.2%   132.7   2.18 catalog     8   100 Deep MOND  Normal     77  1 Sbc  
+UGC06917     Sm     Σ          9.46    15.01  +37.0%   108.7   2.76 catalog    25   100 Deep MOND  Normal     56  1 Sm   
+UGC07323     Sdm    Σ         15.06    23.41  +35.7%    82.6   2.26 catalog    18   100 Deep MOND  Normal     47  1 Sdm  
+UGC05414     Im     Σ         10.69    16.31  +34.5%    56.7   1.47 catalog    32   100 Deep MOND  Dwarf      55  1 Im   
+DDO168       Im     Σ          6.67    10.11  +34.0%    54.2   1.02 catalog    64   100 Deep MOND  Dwarf      63  2 Im   
+F568-3       Sd     Σ          9.41    14.09  +33.2%   106.3   4.99 catalog    36   100 Deep MOND  Normal     40  1 Sd   
+UGC06786     S0     Σ         12.43    18.24  +31.8%   225.1   3.60 catalog     4    33 Transition Massive    64  1 S0   
+NGC2955      Sb     Σ         53.09    75.77  +29.9%   272.1  18.76 catalog     9    17 Newtonian  Massive    56  1 Sb   
+NGC3953      Sbc    Σ         42.98    60.76  +29.3%   223.7   4.89 catalog     2     0 Newtonian  Massive    62  1 Sbc  
+NGC4010      Sd     Σ         23.48    32.93  +28.7%   126.8   2.81 catalog    12   100 Deep MOND  Normal     89  2 Sd   
+UGC07524     Sm     Σ         10.60    14.81  +28.4%    79.5   3.46 catalog    44   100 Deep MOND  Dwarf      46  1 Sm   
+UGC08837     Im     Σ         15.21    21.20  +28.3%    45.9   1.72 catalog    40   100 Deep MOND  Dwarf      80  2 Im   
+UGC02023     Im     Σ         16.38    22.78  +28.1%    48.1   1.55 catalog    22   100 Deep MOND  Dwarf      19  2 Im   
+NGC6195      Sb     Σ         63.40    87.94  +27.9%   254.0  13.94 catalog     8    17 Newtonian  Massive    62  1 Sb   
+UGC06923     Im     Σ         16.12    22.10  +27.1%    79.6   1.44 catalog    23   100 Deep MOND  Dwarf      65  2 Im   
+NGC2915      BCD    Σ         12.56    17.11  +26.6%    84.4   0.55 catalog    14    93 Deep MOND  Normal     56  2 BCD  
+NGC7793      Sd     Σ         15.12    20.54  +26.4%   107.7   1.21 catalog    11    30 Transition Normal     47  1 Sd   
+NGC3949      Sbc    Σ         39.62    53.16  +25.5%   165.0   3.59 catalog     5     0 Newtonian  Massive    55  2 Sbc  
+UGC07577     Im     Σ         12.49    16.61  +24.8%    15.9   0.90 catalog    33   100 Deep MOND  Dwarf      63  2 Im   
+NGC4051      Sbc    Σ         51.22    67.13  +23.7%   158.3   4.65 catalog     4    14 Newtonian  Massive    49  2 Sbc  
+ESO563-G021  Sbc    Σ         24.15    31.60  +23.6%   317.8   5.45 catalog     5    37 Transition Massive    83  1 Sbc  
+UGC05918     Im     Σ          5.95     7.77  +23.5%    42.8   1.66 catalog    43   100 Deep MOND  Dwarf      46  2 Im   
+D512-2       Im     Σ         10.24    13.29  +23.0%    35.5   1.24 catalog    13   100 Deep MOND  Dwarf      56  2 Im   
+UGC11914     Sab    Σ         23.75    30.81  +22.9%   292.1   2.44 catalog     2     0 Newtonian  Massive    31  1 Sab  
+DDO064       Im     Σ          5.33     6.89  +22.6%    46.5   0.69 catalog    56   100 Deep MOND  Dwarf      60  1 Im   
+NGC0247      Sd     Σ         13.76    17.77  +22.6%   105.4   3.74 catalog    31   100 Deep MOND  Normal     74  2 Sd   
+IC2574       Sm     Σ         16.05    20.67  +22.4%    61.6   2.78 catalog    50   100 Deep MOND  Dwarf      75  2 Sm   
+F571-8       Sc     Σ         30.35    38.88  +22.0%   135.8   3.56 catalog     1    62 Transition Normal     85  1 Sc   
+NGC5585      Sd     Σ         15.30    19.52  +21.6%    90.3   1.53 catalog    24   100 Deep MOND  Normal     51  1 Sd   
+IC4202       Sbc    Σ         41.32    52.71  +21.6%   247.3   4.78 catalog     8    28 Newtonian  Massive    90  1 Sbc  
+F563-V1      Im     Σ         27.92    35.52  +21.4%    28.9   3.79 catalog    41   100 Deep MOND  Dwarf      60  3 Im   
+UGC00891     Sm     Σ          9.35    11.89  +21.4%    59.4   1.43 catalog    58   100 Deep MOND  Dwarf      60  2 Sm   
+NGC0100      Scd    Σ         13.29    16.88  +21.3%    87.5   1.66 catalog    13   100 Deep MOND  Normal     89  1 Scd  
+NGC3109      Sm     Σ          3.43     4.34  +21.1%    64.2   1.56 catalog    62   100 Deep MOND  Dwarf      70  1 Sm   
+NGC1705      BCD    Σ          7.09     8.90  +20.3%    72.8   0.39 catalog    13    86 Deep MOND  Dwarf      80  3 BCD  
+UGC05829     Im     Σ          9.71    12.13  +20.0%    65.0   1.99 catalog    72   100 Deep MOND  Dwarf      34  2 Im   
+UGC11455     Scd    Σ         61.92    77.19  +19.8%   281.1   5.93 catalog     3    22 Newtonian  Massive    90  1 Scd  
+NGC3877      Sc     Σ         48.96    60.39  +18.9%   170.2   2.53 catalog     2     0 Newtonian  Massive    76  2 Sc   
+UGC07151     Scd    Σ         13.07    16.12  +18.9%    74.2   1.25 catalog    25   100 Deep MOND  Dwarf      90  1 Scd  
+NGC4085      Sc     Σ         45.25    55.43  +18.4%   133.0   1.65 catalog     3     0 Newtonian  Normal     82  2 Sc   
+UGC05253     Sab    Σ         39.51    48.18  +18.0%   247.6   8.07 catalog     6    19 Newtonian  Massive    37  2 Sab  
+UGC02916     Sab    Σ         48.67    59.12  +17.7%   216.6   6.15 catalog    32    19 Newtonian  Massive    50  2 Sab  
+F583-4       Sc     Σ         13.49    16.39  +17.7%    66.0   1.93 catalog    13   100 Deep MOND  Dwarf      55  1 Sc   
+UGC11557     Sdm    Σ         45.65    55.08  +17.1%    82.3   2.75 catalog    12   100 Deep MOND  Normal     30  2 Sdm  
+NGC2403      Scd    Σ         15.20    18.34  +17.1%   132.6   1.39 catalog    16    51 Transition Normal     63  1 Scd  
+UGC03205     Sab    Σ         27.00    32.54  +17.0%   233.8   3.19 catalog     6    38 Transition Massive    67  1 Sab  
+NGC4214      Im     Σ          6.02     7.22  +16.7%    80.5   0.51 catalog     8    79 Deep MOND  Normal     15  2 Im   
+UGC08699     Sab    Σ         27.80    33.22  +16.3%   194.5   3.09 catalog     7    29 Newtonian  Massive    73  2 Sab  
+NGC4389      Sbc    Σ         67.43    80.50  +16.2%    96.5   2.79 catalog     2     0 Newtonian  Normal     50  3 Sbc  
+NGC3917      Scd    Σ         21.66    25.86  +16.2%   137.2   2.63 catalog     8   100 Deep MOND  Normal     79  1 Scd  
+NGC5005      Sbc    Σ         60.76    72.42  +16.1%   264.5   9.45 catalog     7     0 Newtonian  Massive    68  1 Sbc  
+UGC04499     Sdm    Σ         14.66    17.46  +16.1%    73.5   1.73 catalog    42   100 Deep MOND  Dwarf      50  1 Sdm  
+F567-2       Sm     Σ         24.52    29.18  +16.0%    49.3   3.08 catalog    35   100 Deep MOND  Dwarf      20  3 Sm   
+UGC02885     Sc     Σ         40.53    48.16  +15.8%   299.2  11.40 catalog    11    74 Deep MOND  Massive    64  1 Sc   
+ESO444-G084  Im     Σ          7.40     8.78  +15.7%    61.3   0.46 catalog    65   100 Deep MOND  Dwarf      32  2 Im   
+UGC07089     Sdm    Σ         23.65    27.99  +15.5%    75.8   2.26 catalog    21   100 Deep MOND  Dwarf      80  2 Sdm  
+UGC05750     Sdm    Σ         19.88    23.45  +15.2%    76.6   3.46 catalog    43   100 Deep MOND  Dwarf      64  1 Sdm  
+UGC06930     Sd     Σ         20.39    24.05  +15.2%   108.3   3.94 catalog    29   100 Deep MOND  Normal     32  1 Sd   
+UGC06818     Sm     Σ         20.05    23.63  +15.2%    71.2   1.39 catalog    20   100 Deep MOND  Dwarf      75  2 Sm   
+UGC03580     Sa     Σ         38.90    45.66  +14.8%   117.7   2.43 catalog    15    40 Transition Normal     63  2 Sa   
+UGC05721     Sd     Σ          8.72    10.22  +14.6%    81.6   0.38 catalog    24    83 Deep MOND  Normal     61  1 Sd   
+UGC06628     Sm     Σ         38.45    45.01  +14.6%    42.3   2.82 catalog    30   100 Deep MOND  Dwarf      20  2 Sm   
+UGC07866     Im     Σ         10.66    12.48  +14.6%    30.6   0.61 catalog    40   100 Deep MOND  Dwarf      44  2 Im   
+NGC4068      Im     Σ         14.32    16.74  +14.4%    36.1   0.59 catalog    41   100 Deep MOND  Dwarf      44  2 Im   
+F574-1       Sd     Σ          9.27    10.79  +14.1%    99.0   4.46 catalog    26   100 Deep MOND  Normal     65  1 Sd   
+F574-2       Sm     Σ         42.44    48.72  +12.9%    35.3   3.76 catalog    38   100 Deep MOND  Dwarf      30  3 Sm   
+NGC3893      Sc     Σ         37.77    43.35  +12.9%   190.7   2.38 catalog     5    50 Transition Massive    49  1 Sc   
+F571-V1      Sd     Σ         12.36    14.15  +12.7%    83.6   2.47 catalog    43   100 Deep MOND  Normal     30  2 Sd   
+NGC0300      Sd     Σ          8.58     9.79  +12.3%    93.8   1.75 catalog    24   100 Deep MOND  Normal     42  2 Sd   
+NGC3521      Sbc    Σ         56.88    64.85  +12.3%   218.1   2.40 catalog     3     7 Newtonian  Massive    75  1 Sbc  
+D564-8       Im     Σ          8.74     9.96  +12.3%    23.6   0.61 catalog    38   100 Deep MOND  Dwarf      63  2 Im   
+NGC5371      Sbc    Σ         88.76   100.59  +11.8%   237.8   7.44 catalog     4    42 Transition Massive    53  1 Sbc  
+NGC7814      Sab    Σ         28.20    31.88  +11.6%   239.0   2.54 catalog     4    44 Transition Massive    90  1 Sab  
+UGC07559     Im     Σ         13.06    14.71  +11.2%    31.0   0.58 catalog    47   100 Deep MOND  Dwarf      61  2 Im   
+UGC02455     Im     Σ         52.02    58.44  +11.0%    52.6   0.99 catalog    13    50 Transition Dwarf      51  3 Im   
+CamB         Im     Σ         17.51    19.64  +10.9%    17.2   0.47 catalog    23   100 Deep MOND  Dwarf      65  2 Im   
+F561-1       Sm     Σ         39.66    44.44  +10.7%    50.0   2.79 catalog    26   100 Deep MOND  Dwarf      24  3 Sm   
+NGC4217      Sb     Σ         75.47    84.38  +10.6%   189.2   2.94 catalog     8    32 Transition Massive    86  1 Sb   
+UGC09992     Im     Σ         18.89    21.00  +10.0%    33.6   1.04 catalog    36   100 Deep MOND  Dwarf      30  2 Im   
+NGC6946      Scd    Σ         52.10    57.84   +9.9%   176.9   2.44 catalog     5    47 Transition Massive    38  1 Scd  
+UGC05999     Im     Σ         18.26    20.26   +9.9%    96.3   3.22 catalog    58   100 Deep MOND  Normal     22  2 Im   
+NGC7331      Sb     Σ         87.94    97.53   +9.8%   251.7   5.02 catalog     3    42 Transition Massive    75  1 Sb   
+UGC06787     Sab    Σ         36.17    40.09   +9.8%   256.8   5.37 catalog     6    30 Newtonian  Massive    66  2 Sab  
+UGC09037     Scd    Σ         64.63    71.60   +9.7%   157.1   4.28 catalog    15    73 Deep MOND  Massive    65  2 Scd  
+NGC4088      Sbc    Σ         83.23    92.20   +9.7%   178.5   2.58 catalog     4    33 Transition Massive    69  1 Sbc  
+NGC0891      Sb     Σ         82.98    91.79   +9.6%   227.3   2.55 catalog     2    17 Newtonian  Massive    90  1 Sb   
+UGC10310     Sm     Σ         13.84    15.29   +9.5%    72.2   1.80 catalog    38   100 Deep MOND  Dwarf      34  1 Sm   
+UGC06614     Sa     Σ         56.14    61.55   +8.8%   203.0   5.10 catalog    18    69 Transition Massive    36  1 Sa   
+NGC3726      Sc     Σ         58.74    64.13   +8.4%   167.0   3.40 catalog     8    58 Transition Massive    53  2 Sc   
+NGC0801      Sc     Σ         77.61    83.63   +7.2%   230.0   8.72 catalog     5    46 Transition Massive    80  1 Sc   
+NGC4013      Sb     Σ         48.45    51.70   +6.3%   191.2   3.53 catalog     3    75 Deep MOND  Massive    89  2 Sb   
+UGC12632     Sm     Σ         11.75    12.45   +5.6%    72.2   2.42 catalog    51   100 Deep MOND  Dwarf      46  1 Sm   
+NGC3769      Sb     Σ         37.59    39.80   +5.6%   124.0   3.38 catalog     7    75 Deep MOND  Normal     70  2 Sb   
+UGC03546     Sa     Σ         75.33    79.75   +5.5%   232.7   3.79 catalog     3    30 Transition Massive    55  1 Sa   
+NGC2998      Sc     Σ         43.06    45.58   +5.5%   213.5   6.20 catalog     8    46 Transition Massive    58  1 Sc   
+UGC02953     Sab    Σ         46.87    49.60   +5.5%   308.3   3.55 catalog     1    28 Newtonian  Massive    50  2 Sab  
+UGC06973     Sab    Σ         95.89   101.21   +5.3%   178.3   1.07 catalog     1     0 Newtonian  Massive    71  3 Sab  
+UGC04305     Im     Σ         31.82    33.54   +5.1%    35.6   1.16 catalog    39   100 Deep MOND  Dwarf      40  3 Im   
+NGC2903      Sbc    Σ         64.99    68.17   +4.7%   208.6   2.33 catalog     2    41 Transition Massive    66  1 Sbc  
+UGC07125     Sm     Σ         37.21    38.84   +4.2%    65.4   3.38 catalog    49   100 Deep MOND  Dwarf      90  1 Sm   
+UGC06983     Scd    Σ         10.87    11.33   +4.0%   110.2   3.21 catalog    30   100 Deep MOND  Normal     49  1 Scd  
+UGC07261     Sdm    Σ         12.94    13.48   +4.0%    74.7   1.20 catalog    25   100 Deep MOND  Dwarf      30  2 Sdm  
+NGC4157      Sb     Σ         67.02    69.63   +3.8%   195.6   2.32 catalog     4    59 Transition Massive    82  1 Sb   
+UGC05005     Im     Σ         24.33    25.27   +3.7%    99.5   3.20 catalog    44   100 Deep MOND  Normal     41  1 Im   
+NGC1090      Sbc    Σ         50.90    52.67   +3.3%   169.8   3.53 catalog     9    67 Transition Massive    64  1 Sbc  
+NGC5033      Sc     Σ         46.05    47.57   +3.2%   222.1   5.16 catalog     6    64 Transition Massive    66  1 Sc   
+D631-7       Im     Σ         12.98    13.39   +3.1%    57.7   0.70 catalog    48   100 Deep MOND  Dwarf      59  1 Im   
+NGC3198      Sc     Σ         34.49    35.01   +1.5%   152.1   3.14 catalog    11    58 Transition Massive    73  1 Sc   
+NGC4100      Sbc    Σ         36.11    36.52   +1.1%   192.0   2.15 catalog     3    62 Transition Massive    73  1 Sbc  
+F565-V2      Im     M          5.09     5.09   -0.1%    78.4   2.17 catalog    64   100 Deep MOND  Dwarf      60  2 Im   
+UGC04483     Im     M          7.07     7.02   -0.7%    23.8   0.18 catalog    61   100 Deep MOND  Dwarf      58  2 Im   
+DDO170       Im     M         18.31    18.15   -0.9%    60.4   1.95 catalog    66   100 Deep MOND  Dwarf      66  2 Im   
+NGC4559      Scd    M         42.44    41.99   -1.1%   122.8   2.10 catalog    17    78 Deep MOND  Normal     67  1 Scd  
+UGC07690     Im     M         14.93    14.77   -1.1%    59.8   0.57 catalog    17    86 Deep MOND  Dwarf      41  2 Im   
+NGC5055      Sbc    M         84.81    83.77   -1.2%   204.0   3.20 catalog     3    50 Transition Massive    55  1 Sbc  
+NGC3992      Sbc    M         42.82    42.02   -1.9%   269.0   4.96 catalog     4    67 Transition Massive    56  1 Sbc  
+NGC4138      S0     M         41.70    40.86   -2.1%   185.0   1.51 catalog     1    57 Transition Massive    53  2 S0   
+UGC09133     Sab    M         62.04    60.62   -2.3%   286.0   6.97 catalog     5    43 Transition Massive    53  1 Sab  
+PGC51017     BCD    M         26.54    25.88   -2.5%    19.9   0.53 catalog    33   100 Deep MOND  Dwarf      66  3 BCD  
+NGC5907      Sc     M         55.00    53.61   -2.6%   232.0   5.34 catalog     7    74 Deep MOND  Massive    88  1 Sc   
+NGC0289      Sbc    M         53.93    51.88   -3.9%   183.4   6.74 catalog     8    75 Deep MOND  Massive    46  2 Sbc  
+UGC00634     Sm     M         10.23     9.79   -4.5%   104.4   2.45 catalog    45   100 Deep MOND  Normal     37  2 Sm   
+NGC4183      Scd    M         26.01    24.62   -5.6%   112.4   2.79 catalog    21   100 Deep MOND  Normal     82  1 Scd  
+NGC6503      Scd    M         25.77    24.36   -5.8%   118.1   2.16 catalog     4    84 Deep MOND  Normal     74  1 Scd  
+UGC00191     Sm     M         10.90    10.03   -8.6%    80.5   1.58 catalog    40   100 Deep MOND  Normal     45  1 Sm   
+NGC6015      Scd    M         25.60    23.48   -9.0%   160.6   2.30 catalog     9    57 Transition Massive    60  2 Scd  
+DDO161       Im     M         24.36    22.28   -9.3%    66.0   1.22 catalog    62   100 Deep MOND  Dwarf      70  1 Im   
+NGC2366      Im     M         16.38    14.99   -9.3%    51.8   0.65 catalog    57   100 Deep MOND  Dwarf      68  3 Im   
+NGC2683      Sb     M         56.34    50.92  -10.6%   206.0   2.18 catalog     1    64 Transition Massive    80  2 Sb   
+F583-1       Sm     M          9.76     8.55  -14.1%    79.1   2.36 catalog    70   100 Deep MOND  Dwarf      63  1 Sm   
+NGC6789      BCD    M         13.87    11.64  -19.1%    45.7   0.31 catalog    24   100 Deep MOND  Dwarf      43  2 BCD  
+UGC01230     Sm     M         27.20    22.60  -20.4%   109.3   4.34 catalog    44   100 Deep MOND  Normal     22  1 Sm   
+UGC11820     Sm     M         14.36    11.73  -22.5%    80.9   2.08 catalog    64   100 Deep MOND  Normal     45  1 Sm   
+F579-V1      Sc     M         20.58    16.60  -23.9%   113.8   3.37 catalog    17   100 Deep MOND  Normal     26  1 Sc   
+UGC07399     Sdm    M         23.13    18.63  -24.2%   103.0   1.64 catalog    30   100 Deep MOND  Normal     55  1 Sdm  
+NGC1003      Scd    M         27.54    21.58  -27.6%   111.1   1.61 catalog    18   100 Deep MOND  Normal     67  1 Scd  
+UGC00731     Im     M         13.68    10.43  -31.2%    73.8   2.30 catalog    85   100 Deep MOND  Dwarf      57  1 Im   
+NGC3741      Im     M          5.28     4.00  -31.9%    48.8   0.20 catalog    50   100 Deep MOND  Dwarf      70  1 Im   
+NGC6674      Sb     M         41.87    31.66  -32.2%   274.2   6.04 catalog     5    73 Deep MOND  Massive    54  1 Sb   
+UGC12732     Sm     M         12.71     9.50  -33.7%    91.6   1.98 catalog    60   100 Deep MOND  Normal     39  1 Sm   
+UGC00128     Sdm    M         23.56    17.60  -33.9%   131.6   5.95 catalog    38   100 Deep MOND  Normal     57  1 Sdm  
+DDO154       Im     M          9.14     6.74  -35.5%    47.3   0.37 catalog    60   100 Deep MOND  Dwarf      64  2 Im   
+UGC12506     Scd    M         35.37    25.92  -36.5%   248.4   7.38 catalog    18    97 Deep MOND  Massive    86  2 Scd  
+F563-V2      Im     M         20.44    14.78  -38.3%   117.7   2.43 catalog    44   100 Deep MOND  Normal     29  1 Im   
+F563-1       Sm     M         17.14    12.39  -38.4%   110.7   3.52 catalog    59   100 Deep MOND  Normal     25  1 Sm   
+F568-V1      Sd     M         20.03    14.23  -40.7%   113.8   2.85 catalog    38   100 Deep MOND  Normal     40  1 Sd   
+UGC07608     Im     M          7.40     5.09  -45.5%    65.6   1.50 catalog    67   100 Deep MOND  Dwarf      25  1 Im   
+NGC5985      Sb     M         44.23    28.99  -52.6%   299.4   7.01 catalog     4    42 Transition Massive    60  1 Sb   
+F568-1       Sc     M         29.79    18.99  -56.8%   133.0   5.18 catalog    47   100 Deep MOND  Normal     26  1 Sc   
+UGC05716     Sm     M         11.81     7.37  -60.3%    73.6   1.14 catalog    53   100 Deep MOND  Dwarf      54  2 Sm   
+UGC08550     Sd     M          7.18     4.45  -61.5%    57.5   0.45 catalog    37   100 Deep MOND  Dwarf      90  1 Sd   
+UGC05764     Im     M         10.77     6.66  -61.9%    54.8   1.17 catalog    77   100 Deep MOND  Dwarf      60  2 Im   
+NGC2841      Sb     M         15.18     8.81  -72.2%   320.8   3.64 catalog     7    46 Transition Massive    76  1 Sb   
+UGC06446     Sd     M          9.16     5.32  -72.3%    83.5   1.49 catalog    54   100 Deep MOND  Normal     51  1 Sd   
+UGC04325     Sm     M         14.45     8.15  -77.2%    91.9   1.86 catalog    25   100 Deep MOND  Normal     41  1 Sm   
+UGC02259     Sdm    M         10.80     6.09  -77.4%    88.1   1.62 catalog    29   100 Deep MOND  Normal     41  2 Sdm  
+UGC08286     Scd    M          6.65     3.70  -79.8%    83.5   1.05 catalog    30   100 Deep MOND  Normal     90  1 Scd  
+UGC06667     Scd    M         23.37    12.19  -91.8%    84.9   5.15 catalog    53   100 Deep MOND  Normal     89  1 Scd  
+NGC0024      Sc     M         14.11     7.11  -98.4%   106.7   1.34 catalog    12   100 Deep MOND  Normal     64  1 Sc   
+UGC02487     S0     M         23.45     8.82 -165.8%   378.6   7.89 catalog     3    65 Transition Massive    36  1 S0   
+UGC08490     Sm     M          6.62     1.80 -268.5%    79.7   0.67 catalog    23   100 Deep MOND  Dwarf      50  1 Sm   
+
+
+======================================================================================================================================================
+GALAXIES WHERE MOND WINS (52 galaxies) - Sorted by MOND advantage
+======================================================================================================================================================
+Galaxy       Type      RMS_Σ    RMS_M  MOND Δ%  V_flat    R_d  Rd_src  Gas% Deep%      g_min      g_max Regime      Rise
+------------------------------------------------------------------------------------------------------------------------------------------------------
+UGC08490     Sm         6.62     1.80  +268.5%    79.7   0.67 catalog    23   100   3.02e-12   7.68e-11 Deep MOND   1.21
+UGC02487     S0        23.45     8.82  +165.8%   378.6   7.89 catalog     3    65   1.18e-11   3.54e-10 Transition  0.88
+NGC0024      Sc        14.11     7.11   +98.4%   106.7   1.34 catalog    12   100   5.82e-12   8.47e-11 Deep MOND   2.26
+UGC06667     Scd       23.37    12.19   +91.8%    84.9   5.15 catalog    53   100   1.78e-12   5.58e-12 Deep MOND   1.93
+UGC08286     Scd        6.65     3.70   +79.8%    83.5   1.05 catalog    30   100   5.82e-12   2.21e-11 Deep MOND   1.68
+UGC02259     Sdm       10.80     6.09   +77.4%    88.1   1.62 catalog    29   100   7.11e-12   2.17e-11 Deep MOND   1.25
+UGC04325     Sm        14.45     8.15   +77.2%    91.9   1.86 catalog    25   100   1.69e-11   3.01e-11 Deep MOND   1.40
+UGC06446     Sd         9.16     5.32   +72.3%    83.5   1.49 catalog    54   100   4.95e-12   2.55e-11 Deep MOND   1.55
+NGC2841      Sb        15.18     8.81   +72.2%   320.8   3.64 catalog     7    46   8.96e-12   7.92e-10 Transition  0.91
+UGC05764     Im        10.77     6.66   +61.9%    54.8   1.17 catalog    77   100   3.28e-12   7.04e-12 Deep MOND   1.58
+UGC08550     Sd         7.18     4.45   +61.5%    57.5   0.45 catalog    37   100   4.40e-12   2.44e-11 Deep MOND   1.46
+UGC05716     Sm        11.81     7.37   +60.3%    73.6   1.14 catalog    53   100   2.59e-12   1.52e-11 Deep MOND   1.50
+F568-1       Sc        29.79    18.99   +56.8%   133.0   5.18 catalog    47   100   1.08e-11   1.92e-11 Deep MOND   3.05
+NGC5985      Sb        44.23    28.99   +52.6%   299.4   7.01 catalog     4    42   3.36e-11   2.39e-10 Transition  1.12
+UGC07608     Im         7.40     5.09   +45.5%    65.6   1.50 catalog    67   100   5.41e-12   6.18e-12 Deep MOND   2.09
+F568-V1      Sd        20.03    14.23   +40.7%   113.8   2.85 catalog    38   100   4.40e-12   2.29e-11 Deep MOND   2.52
+F563-1       Sm        17.14    12.39   +38.4%   110.7   3.52 catalog    59   100   2.80e-12   1.12e-11 Deep MOND   2.14
+F563-V2      Im        20.44    14.78   +38.3%   117.7   2.43 catalog    44   100   4.58e-12   2.05e-11 Deep MOND   3.26
+UGC12506     Scd       35.37    25.92   +36.5%   248.4   7.38 catalog    18    97   1.32e-11   9.94e-11 Deep MOND   1.21
+DDO154       Im         9.14     6.74   +35.5%    47.3   0.37 catalog    60   100   1.55e-12   1.09e-11 Deep MOND   2.10
+UGC00128     Sdm       23.56    17.60   +33.9%   131.6   5.95 catalog    38   100   1.35e-12   2.25e-11 Deep MOND   1.50
+UGC12732     Sm        12.71     9.50   +33.7%    91.6   1.98 catalog    60   100   4.77e-12   1.46e-11 Deep MOND   1.75
+NGC6674      Sb        41.87    31.66   +32.2%   274.2   6.04 catalog     5    73   6.79e-12   5.77e-10 Deep MOND   0.93
+NGC3741      Im         5.28     4.00   +31.9%    48.8   0.20 catalog    50   100   9.03e-13   1.98e-11 Deep MOND   2.22
+UGC00731     Im        13.68    10.43   +31.2%    73.8   2.30 catalog    85   100   2.20e-12   5.33e-12 Deep MOND   1.74
+NGC1003      Scd       27.54    21.58   +27.6%   111.1   1.61 catalog    18   100   2.19e-12   8.43e-11 Deep MOND   1.37
+UGC07399     Sdm       23.13    18.63   +24.2%   103.0   1.64 catalog    30   100   8.55e-12   5.45e-11 Deep MOND   1.51
+F579-V1      Sc        20.58    16.60   +23.9%   113.8   3.37 catalog    17   100   1.10e-11   3.62e-11 Deep MOND   1.58
+UGC11820     Sm        14.36    11.73   +22.5%    80.9   2.08 catalog    64   100   3.16e-12   1.95e-11 Deep MOND   3.81
+UGC01230     Sm        27.20    22.60   +20.4%   109.3   4.34 catalog    44   100   2.25e-12   2.38e-11 Deep MOND   1.87
+NGC6789      BCD       13.87    11.64   +19.1%    45.7   0.31 catalog    24   100   2.14e-11   3.86e-11 Deep MOND   1.47
+F583-1       Sm         9.76     8.55   +14.1%    79.1   2.36 catalog    70   100   3.16e-12   7.78e-12 Deep MOND   4.30
+NGC2683      Sb        56.34    50.92   +10.6%   206.0   2.18 catalog     1    64   9.75e-12   5.57e-10 Transition  0.76
+NGC2366      Im        16.38    14.99    +9.3%    51.8   0.65 catalog    57   100   4.16e-12   1.62e-11 Deep MOND   2.85
+DDO161       Im        24.36    22.28    +9.3%    66.0   1.22 catalog    62   100   2.32e-12   1.56e-11 Deep MOND   2.89
+NGC6015      Scd       25.60    23.48    +9.0%   160.6   2.30 catalog     9    57   7.04e-12   2.09e-10 Transition  1.43
+UGC00191     Sm        10.90    10.03    +8.6%    80.5   1.58 catalog    40   100   7.00e-12   3.03e-11 Deep MOND   2.13
+NGC6503      Scd       25.77    24.36    +5.8%   118.1   2.16 catalog     4    84   4.18e-12   3.25e-10 Deep MOND   1.05
+NGC4183      Scd       26.01    24.62    +5.6%   112.4   2.79 catalog    21   100   5.76e-12   5.74e-11 Deep MOND   1.47
+UGC00634     Sm        10.23     9.79    +4.5%   104.4   2.45 catalog    45   100   3.81e-12   1.64e-11 Deep MOND   1.12
+NGC0289      Sbc       53.93    51.88    +3.9%   183.4   6.74 catalog     8    75   3.30e-12   6.93e-10 Deep MOND   0.93
+NGC5907      Sc        55.00    53.61    +2.6%   232.0   5.34 catalog     7    74   1.28e-11   2.06e-10 Deep MOND   0.95
+PGC51017     BCD       26.54    25.88    +2.5%    19.9   0.53 catalog    33   100   3.68e-12   1.67e-11 Deep MOND   0.88
+UGC09133     Sab       62.04    60.62    +2.3%   286.0   6.97 catalog     5    43   4.19e-12   4.52e-09 Transition  0.82
+NGC4138      S0        41.70    40.86    +2.1%   185.0   1.51 catalog     1    57   1.92e-11   6.59e-10 Transition  0.79
+NGC3992      Sbc       42.82    42.02    +1.9%   269.0   4.96 catalog     4    67   1.75e-11   1.68e-10 Transition  0.92
+NGC5055      Sbc       84.81    83.77    +1.2%   204.0   3.20 catalog     3    50   8.13e-12   1.83e-09 Transition  1.00
+UGC07690     Im        14.93    14.77    +1.1%    59.8   0.57 catalog    17    86   1.16e-11   1.16e-10 Deep MOND   1.01
+NGC4559      Scd       42.44    41.99    +1.1%   122.8   2.10 catalog    17    78   1.07e-11   1.68e-10 Deep MOND   1.42
+DDO170       Im        18.31    18.15    +0.9%    60.4   1.95 catalog    66   100   2.22e-12   7.04e-12 Deep MOND   1.44
+UGC04483     Im         7.07     7.02    +0.7%    23.8   0.18 catalog    61   100   5.49e-12   1.34e-11 Deep MOND   1.97
+F565-V2      Im         5.09     5.09    +0.1%    78.4   2.17 catalog    64   100   3.99e-12   5.31e-12 Deep MOND   1.92
+
+
+======================================================================================================================================================
+DEEP MOND REGIME GALAXIES WHERE MOND WINS (43 galaxies)
+======================================================================================================================================================
+Galaxy       Type      RMS_Σ    RMS_M  MOND Δ%  V_flat    R_d  Gas% Bulge% g_min/g†  R_max  Rise  Inc    L_3.6
+------------------------------------------------------------------------------------------------------------------------------------------------------
+UGC08490     Sm         6.62     1.80  +268.5%    79.7   0.67    23    0.0     0.03   10.2  1.21   50    1.017
+NGC0024      Sc        14.11     7.11   +98.4%   106.7   1.34    12    0.0     0.06   11.3  2.26   64    3.889
+UGC06667     Scd       23.37    12.19   +91.8%    84.9   5.15    53    0.0     0.02    7.8  1.93   89    1.397
+UGC08286     Scd        6.65     3.70   +79.8%    83.5   1.05    30    0.0     0.06    8.0  1.68   90    1.255
+UGC02259     Sdm       10.80     6.09   +77.4%    88.1   1.62    29    0.0     0.07    8.1  1.25   41    1.725
+UGC04325     Sm        14.45     8.15   +77.2%    91.9   1.86    25    0.0     0.18    5.6  1.40   41    2.026
+UGC06446     Sd         9.16     5.32   +72.3%    83.5   1.49    54    0.0     0.05   10.2  1.55   51    0.988
+UGC05764     Im        10.77     6.66   +61.9%    54.8   1.17    77    0.0     0.03    3.6  1.58   60    0.085
+UGC08550     Sd         7.18     4.45   +61.5%    57.5   0.45    37    0.0     0.05    5.4  1.46   90    0.289
+UGC05716     Sm        11.81     7.37   +60.3%    73.6   1.14    53    0.0     0.03   12.4  1.50   54    0.588
+F568-1       Sc        29.79    18.99   +56.8%   133.0   5.18    47    0.0     0.11   13.2  3.05   26    6.252
+UGC07608     Im         7.40     5.09   +45.5%    65.6   1.50    67    0.0     0.06    4.8  2.09   25    0.264
+F568-V1      Sd        20.03    14.23   +40.7%   113.8   2.85    38    0.0     0.05   17.6  2.52   40    3.825
+F563-1       Sm        17.14    12.39   +38.4%   110.7   3.52    59    0.0     0.03   20.1  2.14   25    1.903
+F563-V2      Im        20.44    14.78   +38.3%   117.7   2.43    44    0.0     0.05   10.5  3.26   29    2.986
+UGC12506     Scd       35.37    25.92   +36.5%   248.4   7.38    18    0.0     0.14   50.0  1.21   86  139.571
+DDO154       Im         9.14     6.74   +35.5%    47.3   0.37    60    0.0     0.02    5.9  2.10   64    0.053
+UGC00128     Sdm       23.56    17.60   +33.9%   131.6   5.95    38    0.0     0.01   53.8  1.50   57   12.020
+UGC12732     Sm        12.71     9.50   +33.7%    91.6   1.98    60    0.0     0.05   15.4  1.75   39    1.667
+NGC6674      Sb        41.87    31.66   +32.2%   274.2   6.04     5   34.8     0.07   72.4  0.93   54  214.654
+NGC3741      Im         5.28     4.00   +31.9%    48.8   0.20    50    0.0     0.01    7.0  2.22   70    0.028
+UGC00731     Im        13.68    10.43   +31.2%    73.8   2.30    85    0.0     0.02   10.9  1.74   57    0.323
+NGC1003      Scd       27.54    21.58   +27.6%   111.1   1.61    18    0.0     0.02   30.2  1.37   67    6.820
+UGC07399     Sdm       23.13    18.63   +24.2%   103.0   1.64    30    0.0     0.09    6.1  1.51   55    1.156
+F579-V1      Sc        20.58    16.60   +23.9%   113.8   3.37    17    0.0     0.11   15.2  1.58   26   11.848
+UGC11820     Sm        14.36    11.73   +22.5%    80.9   2.08    64    0.0     0.03   15.8  3.81   45    0.970
+UGC01230     Sm        27.20    22.60   +20.4%   109.3   4.34    44    0.0     0.02   36.5  1.87   22    7.620
+NGC6789      BCD       13.87    11.64   +19.1%    45.7   0.31    24    0.0     0.22    0.7  1.47   43    0.100
+F583-1       Sm         9.76     8.55   +14.1%    79.1   2.36    70    0.0     0.03   16.3  4.30   63    0.986
+NGC2366      Im        16.38    14.99    +9.3%    51.8   0.65    57    0.0     0.04    6.1  2.85   68    0.236
+DDO161       Im        24.36    22.28    +9.3%    66.0   1.22    62    0.0     0.02   13.4  2.89   70    0.548
+UGC00191     Sm        10.90    10.03    +8.6%    80.5   1.58    40    0.0     0.07   10.0  2.13   45    2.004
+NGC6503      Scd       25.77    24.36    +5.8%   118.1   2.16     4    0.0     0.04   23.5  1.05   74   12.845
+NGC4183      Scd       26.01    24.62    +5.6%   112.4   2.79    21    0.0     0.06   21.0  1.47   82   10.838
+UGC00634     Sm        10.23     9.79    +4.5%   104.4   2.45    45    0.0     0.04   18.0  1.12   37    2.989
+NGC0289      Sbc       53.93    51.88    +3.9%   183.4   6.74     8    0.0     0.03   71.1  0.93   46   72.065
+NGC5907      Sc        55.00    53.61    +2.6%   232.0   5.34     7    0.0     0.13   50.3  0.95   88  175.425
+PGC51017     BCD       26.54    25.88    +2.5%    19.9   0.53    33    0.0     0.04    3.6  0.88   66    0.155
+UGC07690     Im        14.93    14.77    +1.1%    59.8   0.57    17    0.0     0.12    4.1  1.01   41    0.858
+NGC4559      Scd       42.44    41.99    +1.1%   122.8   2.10    17    0.0     0.11   21.0  1.42   67   19.377
+DDO170       Im        18.31    18.15    +0.9%    60.4   1.95    66    0.0     0.02   12.3  1.44   66    0.543
+UGC04483     Im         7.07     7.02    +0.7%    23.8   0.18    61    0.0     0.06    1.2  1.97   58    0.013
+F565-V2      Im         5.09     5.09    +0.1%    78.4   2.17    64    0.0     0.04    8.8  1.92   60    0.559
+
+
+====================================================================================================
+BREAKDOWN BY HUBBLE TYPE
+====================================================================================================
+
+S0 (N=3):
+  Σ-Gravity wins: 1/3 (33.3%)
+  Mean RMS: Σ=25.9, MOND=22.6 km/s
+  Mean improvement: -45.4%
+  Mean gas fraction: 3%
+  Mean deep MOND fraction: 52%
+
+Sa (N=3):
+  Σ-Gravity wins: 3/3 (100.0%)
+  Mean RMS: Σ=56.8, MOND=62.3 km/s
+  Mean improvement: +9.7%
+  Mean gas fraction: 12%
+  Mean deep MOND fraction: 47%
+
+Sab (N=10):
+  Σ-Gravity wins: 9/10 (90.0%)
+  Mean RMS: Σ=43.6, MOND=48.7 km/s
+  Mean improvement: +12.2%
+  Mean gas fraction: 7%
+  Mean deep MOND fraction: 25%
+
+Sb (N=12):
+  Σ-Gravity wins: 8/12 (66.7%)
+  Mean RMS: Σ=56.1, MOND=59.9 km/s
+  Mean improvement: -5.4%
+  Mean gas fraction: 5%
+  Mean deep MOND fraction: 47%
+
+Sbc (N=18):
+  Σ-Gravity wins: 15/18 (83.3%)
+  Mean RMS: Σ=50.8, MOND=58.6 km/s
+  Mean improvement: +15.5%
+  Mean gas fraction: 5%
+  Mean deep MOND fraction: 40%
+
+Sc (N=16):
+  Σ-Gravity wins: 12/16 (75.0%)
+  Mean RMS: Σ=37.9, MOND=40.8 km/s
+  Mean improvement: -0.4%
+  Mean gas fraction: 11%
+  Mean deep MOND fraction: 62%
+
+Scd (N=16):
+  Σ-Gravity wins: 8/16 (50.0%)
+  Mean RMS: Σ=29.1, MOND=29.6 km/s
+  Mean improvement: -8.8%
+  Mean gas fraction: 18%
+  Mean deep MOND fraction: 82%
+
+Sd (N=16):
+  Σ-Gravity wins: 13/16 (81.2%)
+  Mean RMS: Σ=11.6, MOND=13.9 km/s
+  Mean improvement: +10.7%
+  Mean gas fraction: 31%
+  Mean deep MOND fraction: 95%
+
+Sdm (N=9):
+  Σ-Gravity wins: 6/9 (66.7%)
+  Mean RMS: Σ=21.0, MOND=22.6 km/s
+  Mean improvement: -3.5%
+  Mean gas fraction: 29%
+  Mean deep MOND fraction: 100%
+
+Sm (N=27):
+  Σ-Gravity wins: 17/27 (63.0%)
+  Mean RMS: Σ=16.3, MOND=17.6 km/s
+  Mean improvement: -5.9%
+  Mean gas fraction: 43%
+  Mean deep MOND fraction: 100%
+
+Im (N=39):
+  Σ-Gravity wins: 27/39 (69.2%)
+  Mean RMS: Σ=13.9, MOND=15.4 km/s
+  Mean improvement: +7.1%
+  Mean gas fraction: 47%
+  Mean deep MOND fraction: 98%
+
+BCD (N=5):
+  Σ-Gravity wins: 3/5 (60.0%)
+  Mean RMS: Σ=12.3, MOND=14.1 km/s
+  Mean improvement: +21.2%
+  Mean gas fraction: 22%
+  Mean deep MOND fraction: 96%
+
+
+====================================================================================================
+PATTERN ANALYSIS: MOND WINNERS vs Σ-GRAVITY WINNERS
+====================================================================================================
+
+Metric                     MOND wins  Σ-Gravity wins      Difference
+----------------------------------------------------------------------
+V_flat                     125.51       124.71        -0.79 km/s
+R_d                          2.72         3.00        +0.28 kpc
+gas_fraction                34.02        22.83       -11.19 %
+bulge_fraction               6.05        21.63       +15.57 %
+frac_deep_mond               0.90         0.73        -0.17 %
+rise_ratio                   1.67         1.86        +0.19 
+inclination                 56.15        60.11        +3.96 deg
+R_max                       23.45        16.76        -6.69 kpc
+luminosity                  46.75        53.63        +6.88 10^9 Lsun
+M_HI                         5.75         4.30        -1.45 10^9 Msun
+
+
+====================================================================================================
+DEEP ANALYSIS: CHARACTERISTICS OF DEEP MOND GALAXIES WHERE MOND WINS
+====================================================================================================
+
+Metric               Deep MOND, MOND wins Deep MOND, Σ wins      Difference
+----------------------------------------------------------------------
+V_flat                      98.07        76.76       -21.31 km/s
+R_d                          2.37         2.20        -0.17 kpc
+gas_fraction                40.25        33.09        -7.15 %
+bulge_fraction               0.81         1.41        +0.60 %
+frac_deep_mond               0.97         0.98        +0.01 %
+rise_ratio                   1.82         2.10        +0.28 
+inclination                 55.60        57.35        +1.74 deg
+R_max                       17.43        10.24        -7.19 kpc
+luminosity                  16.85        10.98        -5.88 10^9 Lsun
+M_HI                         4.39         2.00        -2.40 10^9 Msun
+
+
+====================================================================================================
+HUBBLE TYPE DISTRIBUTION IN MOND WINNERS
+====================================================================================================
+
+Hubble Type   MOND wins      Total  % MOND wins
+--------------------------------------------------
+S0                    2          3        66.7%
+Sa                    0          3         0.0%
+Sab                   1         10        10.0%
+Sb                    4         12        33.3%
+Sbc                   3         18        16.7%
+Sc                    4         16        25.0%
+Scd                   8         16        50.0%
+Sd                    3         16        18.8%
+Sdm                   3          9        33.3%
+Sm                   10         27        37.0%
+Im                   12         39        30.8%
+BCD                   2          5        40.0%
+
+
+Writing CSV to: /Users/leonardspeiser/Projects/sigmagravity/derivations/galaxy_breakdown_results.csv
+CSV file written with 174 galaxies
+
+
+====================================================================================================
+SUMMARY STATISTICS
+====================================================================================================
+
+Total galaxies analyzed: 174
+
+OVERALL PERFORMANCE:
+  Σ-Gravity wins: 122/174 (70.1%)
+  MOND wins: 52/174 (29.9%)
+  
+  Mean RMS:
+    Σ-Gravity: 27.35 km/s
+    MOND: 29.96 km/s
+  
+  Median improvement: +11.1%
+
+MOND WINNERS SUMMARY:
+  Number: 52
+  Most common Hubble types: Im(12), Sm(10), Scd(8), Sc(4), Sb(4)
+  Mean gas fraction: 34%
+  Mean deep MOND fraction: 90%
+  Mean V_flat: 126 km/s
+
