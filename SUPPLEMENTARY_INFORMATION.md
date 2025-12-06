@@ -4043,16 +4043,25 @@ sigma_eff = (gas_fraction * SIGMA_GAS +
              bulge_fraction * SIGMA_BULGE)
 ```
 
-### Legacy Baseline
+### Historical Baseline (for Comparison Only)
 
-For backward compatibility, the legacy formula ξ = (2/3)R_d is still supported:
+The historical baseline ξ = (2/3)R_d was used in early versions of the theory. It is retained here for backward compatibility and ablation comparisons, but **all primary results in the main paper use the dynamical formulation**.
+
+The historical baseline has no physical motivation—it was a purely phenomenological fit to SPARC data. The dynamical formulation ξ = k×σ_eff/Ω_d provides:
+- 16% improvement in RMS prediction error
+- Physical interpretation (coherence suppression where dispersion dominates rotation)
+- Robustness (improvement holds with baryons-only computation)
 
 ```python
 def W_coherence(r, R_d, V_at_Rd=None, sigma_eff=None, k=0.24):
+    """
+    Primary: Use dynamical ξ when kinematic data available.
+    Fallback: Historical baseline for legacy comparisons only.
+    """
     if V_at_Rd is not None and sigma_eff is not None:
-        xi = k * sigma_eff / (V_at_Rd / R_d)  # Dynamical
+        xi = k * sigma_eff / (V_at_Rd / R_d)  # Primary (dynamical)
     else:
-        xi = (2/3) * R_d  # Legacy baseline
+        xi = (2/3) * R_d  # Historical baseline (for comparison only)
     return 1 - (xi / (xi + r)) ** 0.5
 ```
 

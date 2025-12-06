@@ -86,7 +86,8 @@ $$\xi = k \times \frac{\sigma_{\rm eff}}{\Omega_d}, \quad \Omega_d = \frac{V(R_d
 - The coherence scale ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω × r)
 - This is an **instantaneous** property of the velocity field—not temporal accumulation
 - Validated with V_bar-only (16.4% improvement over baseline) and self-consistent (16.0% improvement) formulations
-- Legacy baseline: ξ = (2/3)R_d
+
+*Note:* The historical baseline ξ = (2/3)R_d is retained in SI §28 for backward compatibility comparisons.
 
 **Physical interpretation:** Coherence is suppressed where velocity dispersion dominates rotation. The transition radius ξ is set by the ratio σ_eff/Ω_d—a purely spatial/instantaneous quantity. This explains why fitted coherence scales correlate with dynamical timescales in both galaxies (r = +0.43) and clusters (r = +0.79).
 
@@ -614,7 +615,7 @@ $$\boxed{\xi = k \times \frac{\sigma_{\rm eff}}{\Omega_d}, \quad \Omega_d = \fra
 
 The improvement is **not circular**—it holds when Ω_d is computed from baryons only.
 
-**Legacy baseline:** ξ = (2/3)R_d (for backward compatibility)
+*Note:* The historical baseline ξ = (2/3)R_d is documented in SI §28 for backward compatibility. All primary results in this paper use the dynamical formulation.
 
 **Derivation of the exponent from Decoherence Statistics:**
 
@@ -739,7 +740,7 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 **Status definitions:** *Derived* indicates a mathematical result from stated assumptions. *Dynamically motivated* indicates physical reasoning constrains the form with empirical validation. *Calibrated* indicates physical motivation constrains the form with the final value set by data. *Motivated* indicates plausible physical reasoning without unique derivation.
 
 **Key advances (December 2025):**
-1. **Dynamical coherence scale:** ξ = k×σ_eff/Ω_d replaces phenomenological ξ = (2/3)R_d, with 16% improvement and robustness validation (87% improvement retained with V_bar-only)
+1. **Dynamical coherence scale:** ξ = k×σ_eff/Ω_d is now the primary coherence scale, with 16% improvement over the historical baseline and robustness validation (87% improvement retained with V_bar-only). The historical baseline ξ = (2/3)R_d is retained in SI §28 for comparison.
 2. **Unified amplitude formula:** A(G) = √(1.6 + 109×G²) connects galaxies (G=0.038) and clusters (G=1.0) with a single calibrated formula
 
 ### 2.12 Why This Formula (Not MOND's)
@@ -1743,7 +1744,7 @@ python derivations/test_relativistic_lensing.py
 
 # Dynamical coherence scale ablation (19% improvement)
 python derivations/test_dynamical_coherence_scale.py
-# Output: Compares ξ = k×σ/Ω vs baseline ξ = (2/3)R_d
+# Output: Compares primary ξ = k×σ/Ω vs historical baseline ξ = (2/3)R_d
 
 # Dynamical coherence robustness (V_obs vs V_bar vs self-consistent)
 python derivations/test_dynamical_coherence_scale_robustness.py
