@@ -1576,6 +1576,87 @@ Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravi
 - Connection to Verlinde's emergent gravity (both derive $g^\dagger \sim cH_0$) deserves exploration
 - Comparison to EG (emergent gravity) predictions at cluster scales
 
+### 4.4 Outlook: Derivation Roadmap
+
+This section outlines the theoretical path from the covariant coherence scalar (§2.6.1) to the empirically validated formulas. The goal is to replace phenomenological fits with first-principles derivations.
+
+#### 4.4.1 Deriving ξ ∝ σ/Ω from the Covariant Scalar
+
+The local coherence scalar (§2.6.1) is:
+
+$$\mathcal{C} = \frac{\omega^2}{\omega^2 + 4\pi G\rho + \theta^2 + H_0^2}$$
+
+In the non-relativistic limit for steady-state circular rotation ($\theta \approx 0$):
+
+$$\mathcal{C} \approx \frac{(v_{\rm rot}/r)^2}{(v_{\rm rot}/r)^2 + \sigma_v^2/r^2} = \frac{v_{\rm rot}^2}{v_{\rm rot}^2 + \sigma_v^2}$$
+
+The coherence transition $\mathcal{C} = 1/2$ occurs when $v_{\rm rot} = \sigma_v$. With $v_{\rm rot} \approx \Omega \cdot r$, this gives:
+
+$$r_{\rm transition} \sim \frac{\sigma_v}{\Omega}$$
+
+This motivates the dynamical coherence scale $\xi = k \times \sigma_{\rm eff}/\Omega_d$, where $k \approx 0.24$ is an orbit-averaging constant.
+
+**Derivation target:** Compute $k$ from the orbit-averaged coherence integral:
+
+$$\langle W \rangle = \frac{1}{T_{\rm orbit}} \oint W(r(t)) \, dt$$
+
+where the orbit samples different radii due to epicyclic motion. The constant $k$ should emerge from the ratio of epicyclic to circular frequencies ($\kappa/\Omega$) in a thin disk.
+
+#### 4.4.2 Clusters as the Same Principle in a Different Kinematic Regime
+
+Empirical correlations from cross-system analysis support a universal "rate-based" coherence scale:
+
+| System | Correlation with fitted r₀ | Interpretation |
+|--------|---------------------------|----------------|
+| Galaxies | r = +0.43 with T_orbit | Rotation-dominated |
+| Clusters | r = +0.79 with T_dyn | Dispersion-dominated |
+| Both | r = −0.6 to −0.8 with v/T_orbit | Inverse rate dependence |
+
+The strong anti-correlation with $v_{\rm circ}/T_{\rm orbit}$ (equivalently, with angular frequency $\Omega$) confirms that the coherence scale is set by $\sigma/\Omega$-type quantities across both kinematic regimes.
+
+**Derivation target:** Show that the cluster coherence scale emerges from the same covariant scalar with $\omega^2 \to 0$ (no net rotation) and $\sigma^2$ dominating:
+
+$$\mathcal{C}_{\rm cluster} \approx \frac{\sigma_v^2/R^2}{\sigma_v^2/R^2 + 4\pi G\rho}$$
+
+The transition radius where $\mathcal{C} = 1/2$ should yield $\xi_{\rm cluster} \propto \sigma_v / \sqrt{G\rho}$, connecting to the crossing time $T_{\rm cross} \sim R/\sigma_v$.
+
+#### 4.4.3 Redshift Dependence from Evolving IR Cutoff
+
+The cluster correlation with redshift (r ≈ +0.77 between fitted r₀ and z) suggests the IR cutoff $H_0^2$ in the covariant scalar should evolve:
+
+$$\mathcal{C}(z) = \frac{\omega^2}{\omega^2 + 4\pi G\rho + \theta^2 + H(z)^2}$$
+
+This predicts:
+- At fixed $\omega^2$, higher $H(z)$ reduces $\mathcal{C}$, requiring larger radii to achieve the same coherence
+- The coherence scale grows as $\xi(z) \propto H(z)/H_0$
+
+**Derivation target:** Compute $\xi(z)$ explicitly and compare to the observed redshift evolution of cluster coherence scales.
+
+#### 4.4.4 Multi-Component Velocity Dispersion
+
+The positive correlation between fitted r₀ and gas fraction in clusters (r ≈ +0.53) indicates that $\sigma_{\rm eff}$ requires careful multi-component weighting:
+
+$$\sigma_{\rm eff}^2 = f_{\rm stars} \sigma_{\rm stars}^2 + f_{\rm gas,thermal} \sigma_{\rm thermal}^2 + f_{\rm gas,turb} \sigma_{\rm turb}^2$$
+
+where:
+- $\sigma_{\rm stars}$: Collisionless stellar dispersion (~1000 km/s in clusters)
+- $\sigma_{\rm thermal}$: Gas thermal velocity ($\sqrt{kT/m_p}$ ~ 1000 km/s for T ~ 5 keV)
+- $\sigma_{\rm turb}$: Turbulent gas motions (~200-500 km/s from X-ray observations)
+
+**Derivation target:** Derive the mass-weighted combination from the covariant scalar applied to a multi-fluid system. The gas fraction dependence suggests thermal motions contribute to coherence suppression.
+
+#### 4.4.5 Summary of Derivation Priorities
+
+| Target | Current Status | Path Forward |
+|--------|---------------|--------------|
+| k ≈ 0.24 | Calibrated | Orbit-averaging integral with epicyclic corrections |
+| ξ ∝ σ/Ω | Dynamically motivated | NR limit of covariant scalar at C = 1/2 |
+| Cluster ξ | Correlated with T_dyn | Dispersion-dominated limit of same scalar |
+| ξ(z) evolution | Empirical hint (r = 0.77) | Replace H₀² with H(z)² in covariant scalar |
+| Multi-component σ | Gas fraction correlation | Multi-fluid covariant treatment |
+
+These derivations would elevate the coherence scale from "dynamically motivated" to "derived from first principles."
+
 ---
 
 ## 5. Methods
