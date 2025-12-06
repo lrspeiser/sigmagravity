@@ -3850,6 +3850,136 @@ python exploratory/coherence_wavelength_test/wide_binary_statistical_analysis.py
 
 ---
 
+## SI §27 — Milky Way Gaia Data
+
+### SI §27.1. Available Gaia Datasets
+
+We provide two processed Gaia datasets for Milky Way rotation curve validation:
+
+| Dataset | Stars | Location | Description |
+|---------|-------|----------|-------------|
+| Small | 143,995 | `data/gaia/mw/gaia_mw_real.csv` | Initial sample, some selection bias |
+| Large | 1,818,845 | `data/gaia/gaia_processed_signed.csv` | Extended sample with signed velocities |
+
+**Recommended dataset:** The large dataset (`gaia_processed_signed.csv`) with the `v_phi_signed` column, which preserves the sign of the azimuthal velocity and matches the Eilers+ 2019 literature rotation curve in the R = 6-8 kpc region.
+
+### SI §27.2. Data Format
+
+The large Gaia dataset contains the following columns:
+
+| Column | Units | Description |
+|--------|-------|-------------|
+| `source_id` | — | Gaia source identifier |
+| `R_cyl` | kpc | Cylindrical galactocentric radius |
+| `z` | kpc | Height above galactic plane |
+| `v_phi_signed` | km/s | Azimuthal velocity (signed, positive = prograde) |
+| `v_phi` | km/s | Azimuthal velocity (unsigned) |
+| `v_phi_err` | km/s | Velocity uncertainty |
+
+### SI §27.3. Solar Motion Parameters
+
+The Gaia data was transformed to galactocentric coordinates using:
+
+```python
+R0_KPC = 8.122      # Distance from Sun to Galactic center (Bennett & Bovy 2019)
+ZSUN_KPC = 0.0208   # Height of Sun above Galactic plane
+VSUN_KMS = [11.1, 232.24, 7.25]  # Solar motion [U, V, W] (Schönrich+ 2010)
+```
+
+### SI §27.4. Usage
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the large Gaia dataset
+df = pd.read_csv('data/gaia/gaia_processed_signed.csv')
+
+# Filter to disk plane (|z| < 0.5 kpc)
+disk = df[np.abs(df['z']) < 0.5]
+
+# Compute rotation curve in radial bins
+R_bins = np.arange(4.0, 15.0, 0.5)
+for i in range(len(R_bins) - 1):
+    mask = (disk['R_cyl'] >= R_bins[i]) & (disk['R_cyl'] < R_bins[i+1])
+    if mask.sum() > 100:
+        v_median = disk.loc[mask, 'v_phi_signed'].median()
+        print(f"R = {(R_bins[i]+R_bins[i+1])/2:.1f} kpc: V = {v_median:.1f} km/s")
+```
+
+### SI §27.5. Comparison to Literature
+
+The large Gaia dataset matches the Eilers+ 2019 rotation curve in the inner region:
+
+| R [kpc] | Gaia (this work) | Eilers+ 2019 | Difference |
+|---------|------------------|--------------|------------|
+| 6.0 | 226 ± 2 km/s | 229 ± 2 km/s | -3 km/s |
+| 7.0 | 228 ± 1 km/s | 229 ± 2 km/s | -1 km/s |
+| 8.0 | 229 ± 1 km/s | 229 ± 2 km/s | 0 km/s |
+
+The outer regions (R > 9 kpc) show higher velocities than Eilers+ 2019, likely due to selection effects in the extended sample.
+
+### SI §27.6. Validation Script
+
+```bash
+python derivations/run_gaia_large_validation.py
+# Output: Comparison of unified model, MOND, and Newtonian predictions
+# against observed Gaia rotation curve
+```
+
+---
+
+## SI §28 — SPARC Mass-to-Light Ratio Calibration
+
+### SI §28.1. Critical Calibration Issue
+
+The SPARC rotation curve files provide velocity contributions (V_disk, V_bulge) computed for a **reference mass-to-light ratio of M/L = 1 M☉/L☉ at 3.6μm**. The SPARC paper (Lelli+ 2016) recommends using:
+
+- Υ*_disk ≈ 0.5 M☉/L☉ at [3.6] (from stellar population models)
+- Υ*_bulge ≈ 0.7 M☉/L☉ at [3.6]
+
+The actual baryonic velocity contribution should be:
+
+$$V_{\rm bar} = \sqrt{V_{\rm gas}^2 + \Upsilon_{\rm disk} \cdot V_{\rm disk}^2 + \Upsilon_{\rm bulge} \cdot V_{\rm bulge}^2}$$
+
+### SI §28.2. Impact on Analysis
+
+If M/L = 1 is used (as in the raw files) instead of M/L = 0.5:
+
+- V_bar is overestimated by a factor of ~1.3-1.4 for disk-dominated galaxies
+- The ratio V_obs/V_bar is correspondingly underestimated
+- At g/g† ~ 1.2, using M/L = 1 gives V_obs/V_bar ≈ 1.0
+- With M/L = 0.5, this becomes V_obs/V_bar ≈ 1.3-1.4
+
+### SI §28.3. Consistency with Milky Way
+
+The Milky Way at R = 8 kpc has:
+- V_obs = 228 km/s (Eilers+ 2019)
+- V_bar = 172 km/s (McMillan 2017)
+- Ratio: V_obs/V_bar = 1.33
+
+This is consistent with SPARC galaxies **only when M/L ≈ 0.5 is applied**.
+
+### SI §28.4. Recommendation
+
+For consistent analysis across SPARC and Milky Way data:
+
+```python
+# Apply M/L correction to SPARC data
+Y_disk = 0.5   # Mass-to-light ratio for disk
+Y_bulge = 0.7  # Mass-to-light ratio for bulge
+
+V_bar_corrected = np.sqrt(
+    V_gas**2 + 
+    Y_disk * V_disk**2 + 
+    Y_bulge * V_bulge**2
+)
+```
+
+This ensures that the gravitational enhancement (V_obs/V_bar) is computed consistently across all datasets.
+
+---
+
 ## Acknowledgments
 
 We thank **Emmanuel N. Saridakis** (National Observatory of Athens) for detailed feedback on the theoretical framework, particularly regarding the derivation of field equations, the structure of Θ_μν, and consistency constraints in teleparallel gravity with non-minimal matter coupling. His suggestions significantly strengthened the theoretical presentation.
