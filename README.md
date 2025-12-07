@@ -105,114 +105,21 @@ The Σ-Gravity formula naturally produces different behavior in different regime
 
 **This is a feature of the phenomenology, not a derived prediction.** The formula was constructed to have this behavior; it does not emerge from first principles.
 
-### 1.6 Parameter Status
+### 1.6 Paper Organization
 
-**Terminology:**
-- **Derived:** Follows from mathematics/physics with no free choices
-- **Dynamically motivated:** Physical argument constrains the form; validated against data
-- **Calibrated:** Physical motivation constrains the form; final value set by data
+The remainder of this paper is organized as follows:
 
-| Parameter | Formula | Status | Notes |
-|-----------|---------|--------|-------|
-| **Critical acceleration** $g^\dagger$ | $cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s² | Derived | Spherical coherence geometry |
-| **Acceleration function** $h(g_N)$ | $\sqrt{g^\dagger/g_N} \cdot g^\dagger/(g^\dagger + g_N)$ | Derived | Standard form (α = 0.5) |
-| **Coherence window** $W(r)$ | $1 - (\xi/(\xi+r))^{0.5}$ | Derived | Exponent from decoherence statistics |
-| **Coherence scale** ξ | $(2/3) \times R_d$ | Calibrated | Disk scale length |
-| **Galaxy amplitude** $A_{\rm galaxy}$ | $\sqrt{3} \approx 1.73$ | Mode counting | Thin disk geometry |
-| **Cluster amplitude** $A_{\rm cluster}$ | 8.0 | Path length scaling | Spherical geometry (see §2.12.1) |
-
-**M/L dependence:** Galaxy performance depends on assumed mass-to-light ratio. With M/L = 0.5/0.7 (Lelli+ 2016), we achieve 42% win rate vs MOND. With higher M/L (0.7-1.0), win rate increases to 60-78% because MOND is more sensitive to M/L assumptions.
-
-Run `python run_regression.py` to verify all results (SPARC, clusters, Gaia, redshift, Solar System).
-
-### 1.7 What the Framework Achieves
-
-With fair M/L assumptions (0.5/0.7), Σ-Gravity:
-
-1. **Fits 171 galaxy rotation curves** with 0 free parameters per galaxy (RMS ≈ 19 km/s)
-2. **Matches MOND on galaxies** (42% win rate with same M/L assumptions)
-3. **Matches cluster lensing** (median M_pred/M_lens = 0.95, where MOND gets ~0.33)
-4. **Validates on 28,368 Milky Way stars** (RMS ≈ 28 km/s)
-5. **Satisfies Solar System constraints** (|γ-1| < 10⁻⁸)
-6. **Makes unique testable predictions** (counter-rotation: p < 0.01, redshift evolution)
-
-**Scientific value:** Even without complete theoretical derivation, Σ-Gravity provides a **predictive phenomenological framework** with falsifiable predictions distinct from both MOND and ΛCDM.
-
-### 1.8 Summary of Results
-
-*All results from `python run_regression.py` — the single authoritative validation script.*
-
-#### Comprehensive Validation Across Scales
-
-| Domain | Metric | Σ-Gravity | MOND | Notes |
-|--------|--------|-----------|------|-------|
-| **SPARC galaxies** | Mean RMS | **18.97 km/s** | 17.15 km/s | 171 galaxies, M/L=0.5/0.7 |
-| SPARC | RAR scatter | **0.101 dex** | 0.098 dex | Nearly identical |
-| SPARC head-to-head | Win rate | 42.1% | 57.9% | Fair comparison (same M/L) |
-| **Galaxy clusters** | Median M_pred/M_lens | **0.955** | ~0.33* | 42 Fox+ 2022 clusters |
-| Cluster scatter | | **0.133 dex** | ~0.2 dex | |
-| **Milky Way** | RMS | **28.8 km/s** | — | 28,368 Eilers-APOGEE stars |
-| **Counter-rotating** | f_DM difference | **-44% (p=0.004)** | No prediction | 63 Bevacqua+ galaxies |
-| **Redshift** | g†(z=2)/g†(z=0) | **2.97** | 1.0 | Matches H(z) evolution |
-| **Solar System** | PPN γ−1 | **1.8×10⁻⁹** | — | Cassini bound: 2.3×10⁻⁵ |
-
-*MOND cluster ratio ~0.33 is the well-known "cluster problem" (Sanders 1999, 2003). MOND underpredicts cluster masses by factor ~3×. Σ-Gravity achieves ratio ≈ 1.0.
+| Section | Content |
+|---------|---------|
+| **§2 Model** | Theoretical framework: teleparallel gravity, field equations, component derivations |
+| **§3 Data & Methods** | Datasets, sample selection, analysis methodology |
+| **§4 Results** | Validation: SPARC galaxies, Milky Way, clusters, unique predictions |
+| **§5 Discussion** | Relation to DM/MOND, testable predictions, limitations, derivation roadmap |
+| **§6 Code Availability** | Repository, reproduction instructions, data sources |
 
 ---
 
-#### Falsifiable Predictions
-
-| Prediction | Test | Result |
-|------------|------|--------|
-| Counter-rotation reduces enhancement | MaNGA CR galaxies | **Confirmed** (p=0.004) |
-| Enhancement decreases at high z | g†(z) ∝ H(z) | **Confirmed** |
-| Clusters require more enhancement than disks | A_cluster > A_galaxy | **Confirmed** (8.0 vs 1.73) |
-| Solar System safe | γ-1 < Cassini bound | **Confirmed** (4 orders margin) |
-
----
-
-#### Key Parameters (from regression test)
-
-| Parameter | Value | Source |
-|-----------|-------|--------|
-| g† | 9.60×10⁻¹¹ m/s² | cH₀/(4√π), derived |
-| A_galaxy | √3 ≈ 1.73 | Mode counting (thin disk) |
-| A_cluster | 8.0 | Path length scaling (see §2.12) |
-| ξ | (2/3) × R_d | Coherence scale |
-| M/L (disk) | 0.5 | Lelli+ 2016 standard |
-| M/L (bulge) | 0.7 | Lelli+ 2016 standard |
-
-#### Path Length Relationship (New Finding)
-
-The amplitude ratio A_cluster/A_galaxy ≈ 4.6 can be explained by a **path length scaling**:
-
-$$A = A_0 \times L^{1/4}$$
-
-where L is the characteristic path length through baryonic matter and A₀ ≈ 1.6 is a universal constant.
-
-| System | Path Length L | Predicted A | Observed A |
-|--------|--------------|-------------|------------|
-| Disk galaxies | ~1.5 kpc | 1.79 | √3 ≈ 1.73 |
-| Ellipticals | ~17 kpc | 3.26 | 3.07 (MaNGA) |
-| Clusters | ~400 kpc | 7.15 | 8.0 |
-
-This reduces the number of free parameters from 2 (A_galaxy, A_cluster) to 1 (A₀), and correctly predicts the intermediate amplitude for elliptical galaxies.
-
-#### Redshift Evolution
-
-The regression test confirms g†(z=2)/g†(z=0) = 2.97, matching the theoretical prediction g†(z) ∝ H(z). This predicts **less gravitational enhancement at high redshift**, consistent with observed f_DM evolution in high-z galaxies (Genzel+ 2020).
-
-#### Counter-Rotating Galaxies (Unique Σ-Gravity Test)
-
-Σ-Gravity predicts that counter-rotating stellar components disrupt gravitational coherence. This is a unique prediction—neither ΛCDM nor MOND predicts any effect from rotation direction.
-
-**Regression test result:** f_DM(CR) = 0.169 vs f_DM(Normal) = 0.302, **p = 0.004**
-
-Counter-rotating galaxies have **44% lower dark matter fractions** than normal galaxies.
-
----
-
-## 2. Theoretical Framework
+## 2. Model
 
 ### 2.1 Teleparallel Gravity as Mathematical Foundation
 
@@ -1073,64 +980,78 @@ This resolves the question of how the action leads to the modified Poisson equat
 
 ---
 
-## 3. Results
+## 3. Data and Methods
 
-### 3.1 Radial Acceleration Relation (SPARC Galaxies)
+### 3.1 Data Sources
 
-We test the framework on the SPARC database (Lelli+ 2016) containing 175 late-type galaxies with high-quality rotation curves and 3.6μm photometry. **Four galaxies are excluded** due to insufficient data points or unphysical V_bar values, leaving **171 galaxies** for analysis.
+| Dataset | N | Source | Description |
+|---------|---|--------|-------------|
+| SPARC galaxies | 171 | Lelli+ 2016 | Rotation curves + 3.6μm photometry |
+| Milky Way stars | 28,368 | Eilers-APOGEE-Gaia | 6D kinematics with asymmetric drift |
+| Galaxy clusters | 42 | Fox+ 2022 | Strong lensing masses |
+| Counter-rotating | 63 | Bevacqua+ 2022 | MaNGA DynPop cross-match |
 
-**Sample Selection Criteria (for reproducibility):**
+### 3.2 SPARC Galaxy Sample
+
+The SPARC database (Lelli+ 2016) contains 175 late-type galaxies with high-quality rotation curves and 3.6μm photometry. Four galaxies are excluded due to insufficient data points or unphysical V_bar values, leaving **171 galaxies** for analysis.
+
+**Sample Selection Criteria:**
+
 | Criterion | Requirement | Galaxies Passing |
 |-----------|-------------|------------------|
 | SPARC database | Lelli+ 2016 rotation curves | 175 |
 | Valid V_bar | $V_{\text{bar}} = \sqrt{\text{sign}(V_g)V_g^2 + \text{sign}(V_d)V_d^2 + V_b^2} > 0$ at all radii | 174 |
-| Minimum points | ≥3 rotation curve points | 174 |
+| Minimum points | ≥3 rotation curve points | 171 |
 
 **Excluded galaxy:** UGC01281 — At r < 0.3 kpc, the counter-rotating gas component ($V_{\text{gas}} = -5.85$ km/s) dominates over the stellar disk ($V_{\text{disk}} = 1.5-3.5$ km/s), producing $V_{\text{bar}}^2 < 0$ and thus imaginary baryonic velocity.
 
-**Methodology and Uncertainty Treatment:**
+### 3.3 Milky Way Sample
 
-- **Mass-to-light ratio:** We adopt M/L = 0.5 M☉/L☉ at 3.6μm, the universal value recommended by Lelli+ (2016) based on stellar population synthesis models. This is **not fitted per-galaxy**, following MOND convention. Uncertainty in M/L contributes ~0.05-0.1 dex to RAR scatter (Schombert & McGaugh 2014).
+We use 28,368 disk stars from the Eilers-APOGEE-Gaia catalog with full 6D kinematics:
+- Spectrophotometric distances from Eilers+ 2018
+- Radial velocities from APOGEE DR17
+- Proper motions from Gaia EDR3
+- Baryonic model: McMillan 2017 (scaled by 1.16× to match SPARC calibration)
 
-- **Distances and inclinations:** Fixed to SPARC published values; not varied in our analysis. Distance uncertainties (typically 10-20%) contribute systematic shifts that affect all models equally. Inclination uncertainties (typically 3-5°) affect derived velocities as $v \propto 1/\sin(i)$.
+**Asymmetric drift correction:** $V_a = \sigma_R^2/(2V_c) \times (R/R_d - 1)$ with $R_d = 2.6$ kpc.
 
-- **Observational uncertainties:** SPARC provides velocity errors $\sigma_v$ at each radius. We propagate these to acceleration uncertainties as $\sigma_{\log g} = 2\sigma_v / (v \ln 10)$. Typical values are 0.03-0.05 dex per point.
+### 3.4 Galaxy Cluster Sample
 
-- **Scatter metric:** RAR scatter is computed as:
+We use 42 strong lensing clusters from Fox+ (2022, ApJ 928, 87), selected for spectroscopic redshifts and $M_{500} > 2 \times 10^{14}$ M☉. Baryonic mass is estimated from SZ/X-ray $M_{500}$ using $f_{\rm baryon} = 0.15$.
+
+### 3.5 Analysis Methodology
+
+**Mass-to-light ratio:** We adopt M/L = 0.5 M☉/L☉ (disk) and 0.7 M☉/L☉ (bulge) at 3.6μm, the universal values recommended by Lelli+ (2016). This is **not fitted per-galaxy**, following MOND convention.
+
+**Distances and inclinations:** Fixed to SPARC published values; not varied in our analysis.
+
+**Scatter metric:** RAR scatter is computed as:
 $$\sigma_{\text{RAR}} = \sqrt{\frac{1}{N}\sum_i \left[\log_{10}\left(\frac{g_{\text{obs},i}}{g_{\text{pred},i}}\right)\right]^2}$$
-where the sum runs over all radial points in all galaxies. This is the standard metric used by Lelli et al. (2017) and Li et al. (2018).
 
-- **Parameter count:** Σ-Gravity uses **zero free parameters per galaxy**. Global parameters ($A = \sqrt{3}$, $g^\dagger = cH_0/(4\sqrt{\pi})$, $\xi = 2R_d/3$) are fixed from physics (derived from geometry). Only M/L is external input.
+**Parameter count comparison:**
 
-**Comparison with ΛCDM fitting:**
-
-| Approach | Parameters per galaxy | Total parameters (N galaxies) |
-|----------|----------------------|-------------------------------|
+| Approach | Parameters per galaxy | Total (N=171) |
+|----------|----------------------|---------------|
 | **Σ-Gravity** | 0 | ~3 global |
 | **MOND** | 0 | 1 global ($a_0$) |
-| **ΛCDM (NFW)** | 2-3 ($M_{200}$, $c$, optional $\alpha$) | 2-3N |
-| **ΛCDM (cored)** | 3-4 | 3-4N |
+| **ΛCDM (NFW)** | 2-3 | 340-510 |
 
-For N = 171 galaxies:
-- Σ-Gravity: ~3 parameters total
-- MOND: 1 parameter total
-- ΛCDM: 340-680 parameters total
+### 3.6 MOND Comparison Methodology
 
-**Fair comparison methodology:**
+For all MOND comparisons, we use:
+- **Acceleration scale:** $a_0 = 1.2 \times 10^{-10}$ m/s² (fixed)
+- **Interpolation function:** Simple form $\nu(x) = 1/(1 - e^{-\sqrt{x}})$
+- **Same M/L** as Σ-Gravity (0.5 disk, 0.7 bulge)
 
-To compare Σ-Gravity and MOND fairly, both are evaluated with:
-1. Same M/L = 0.5 M☉/L☉ for all galaxies
-2. Same SPARC distances and inclinations
-3. Same scatter metric (RMS of log residuals)
+This ensures a fair comparison with identical assumptions.
 
-To compare with ΛCDM fairly would require:
-1. Fitting NFW halos to each galaxy individually
-2. Marginalizing over halo parameters (expensive)
-3. Or using abundance matching to predict halos without fitting (testable)
+---
 
-Option (3) is most appropriate: abundance matching predicts $M_{200}$ from stellar mass, then NFW profile follows from cosmological concentration-mass relation. This is parameter-free but introduces scatter from the $M_*$-$M_{200}$ relation (~0.2 dex) and c-M relation (~0.15 dex).
+## 4. Results
 
-**Results (from `python run_regression.py`):**
+### 4.1 SPARC Galaxy Rotation Curves
+
+**Results:**
 
 | Metric | Σ-Gravity | MOND | Notes |
 |--------|-----------|------|-------|
@@ -1144,11 +1065,6 @@ With M/L = 0.5/0.7 (Lelli+ 2016 standard), Σ-Gravity performs comparably to MON
 - **Interpolation function:** Simple form $\nu(x) = 1/(1 - e^{-\sqrt{x}})$
 - **Same M/L** as Σ-Gravity (0.5 disk, 0.7 bulge)
 
-**Reproduction:**
-```bash
-python run_regression.py  # Runs all validation tests
-```
-
 **Important caveat:** This comparison is incomplete. A rigorous comparison would require:
 1. Mock data generated from ΛCDM simulations with realistic baryonic physics
 2. Identical analysis pipelines applied to mocks and real data
@@ -1156,7 +1072,7 @@ python run_regression.py  # Runs all validation tests
 
 Such a comparison is beyond the scope of this work but would strengthen the case for (or against) Σ-Gravity.
 
-### 3.1.1 Head-to-Head ΛCDM Comparison (Equal Parameters)
+### 4.1.1 Head-to-Head ΛCDM Comparison (Equal Parameters)
 
 For a fair direct comparison, we fit both Σ-Gravity and ΛCDM (NFW halos) with **equal numbers of free parameters per galaxy** (2 each).
 
@@ -1186,15 +1102,6 @@ For a fair direct comparison, we fit both Σ-Gravity and ΛCDM (NFW halos) with 
 3. NFW parameters ($M_{200}$, $c$) span orders of magnitude with weak physical priors
 4. Σ-Gravity naturally explains the RAR; ΛCDM requires it to emerge from halo properties
 
-**Reproduction:**
-```bash
-python scripts/sigma_vs_lcdm_comparison.py --n_galaxies 174 --bootstrap 1000
-```
-
-Output files:
-- `outputs/comparison/sigma_vs_lcdm_results.csv`: Per-galaxy fits
-- `outputs/comparison/sigma_vs_lcdm_summary.json`: Summary statistics
-
 ![Figure: RAR plot](figures/rar_derived_formula.png){width=100%}
 
 *Figure 4: Radial Acceleration Relation for SPARC galaxies using derived formula. Gray points: observed accelerations. Blue line: Σ-Gravity prediction with A = √3. Red dashed: MOND.*
@@ -1203,17 +1110,9 @@ Output files:
 
 *Figure 5: Rotation curves for six representative SPARC galaxies selected for RAR scatter near the mean (0.105 dex). Black points: observed data. Green dashed: baryonic (GR). Blue solid: Σ-Gravity. Red dotted: MOND.*
 
-### 3.2 Milky Way Validation (Star-by-Star)
+### 4.2 Milky Way Validation
 
-We perform star-by-star validation using 28,368 disk stars from the Eilers-APOGEE-Gaia catalog, with full 6D kinematics (position + velocity) and asymmetric drift corrections.
-
-**Data sources:**
-- Spectrophotometric distances from Eilers+ 2018
-- Radial velocities from APOGEE DR17
-- Proper motions from Gaia EDR3
-- Baryonic model: McMillan 2017 (scaled by 1.16× to match SPARC calibration)
-
-**Star-by-star results (28,368 disk stars):**
+Using the Eilers-APOGEE-Gaia sample (§3.3), we perform star-by-star validation with asymmetric drift corrections.
 
 | Model | Mean Residual | RMS | Improvement |
 |-------|---------------|-----|-------------|
@@ -1224,19 +1123,14 @@ We perform star-by-star validation using 28,368 disk stars from the Eilers-APOGE
 **Key findings:**
 1. **Σ-Gravity outperforms MOND by 9%** in RMS residual
 2. **Near-zero mean residual** (−0.7 km/s) indicates unbiased predictions
-3. **Optimal V_bar scaling = 1.16×** brings MW into consistency with SPARC galaxies at similar accelerations
-4. This scaling is within the ~20% uncertainty of McMillan 2017 and consistent with recent estimates (Cautun+ 2020)
+3. **V_bar scaling = 1.16×** brings MW into consistency with SPARC galaxies
+4. This scaling is within the ~20% uncertainty of McMillan 2017 (Cautun+ 2020)
 
-**Methodology:**
-- Asymmetric drift correction: V_a = σ_R²/(2V_c) × (R/R_d − 1) with R_d = 2.6 kpc
-- Velocity dispersion σ_R computed in radial bins from the data
-- V_bar scaling of 1.16× applied to McMillan 2017 baryonic model
+**Result:** RMS = 28.8 km/s across 28,368 stars.
 
-**Result (from `python run_regression.py`):** RMS = 28.8 km/s across 28,368 stars.
+### 4.3 Galaxy Cluster Strong Lensing
 
-### 3.3 Galaxy Cluster Strong Lensing
-
-We test Σ-Gravity on 42 strong lensing clusters from Fox+ (2022, ApJ 928, 87), selected for spectroscopic redshifts and M500 > 2×10¹⁴ M☉. For each cluster, we estimate baryonic mass from the SZ/X-ray M500 (using f_baryon = 0.15), compute the Σ-enhancement at r = 200 kpc, and compare to the strong lensing mass MSL(200 kpc).
+Using the Fox+ 2022 cluster sample (§3.4), we compute the Σ-enhancement at r = 200 kpc and compare to strong lensing masses.
 
 **Relativistic Lensing Framework:**
 
@@ -1374,7 +1268,7 @@ Using standard literature values (f_baryon = 0.15, gas concentration = 0.4 at 20
 
 *Figure 6: Σ-Gravity cluster predictions vs Fox+ 2022 strong lensing masses. Left: Predicted vs observed mass at 200 kpc (N=42). Middle: Ratio vs redshift. Right: Distribution of log(M_Σ/MSL) with scatter = 0.14 dex.*
 
-With A_cluster = 8.0, the model achieves **median M_pred/M_lens = 0.955** with scatter 0.133 dex (from `python run_regression.py`).
+With A_cluster = 8.0, the model achieves **median M_pred/M_lens = 0.955** with scatter 0.133 dex.
 
 #### Profile-Based Cluster Subsample (Literature Gas + Stellar Masses)
 
@@ -1429,11 +1323,11 @@ At cluster lensing radii ($r \sim 200$ kpc), the coherence window approaches uni
 
 **This is a clean result.** The cluster amplitude reflects the geometric difference between spherical clusters and disk galaxies.
 
-**Regression test result:** Median ratio = 0.955, scatter = 0.13 dex (42 clusters). Run `python run_regression.py` to reproduce.
+**Result:** Median ratio = 0.955, scatter = 0.13 dex (42 clusters).
 
-### 3.4 Cross-Domain Consistency
+### 4.4 Cross-Domain Consistency
 
-*All results from `python run_regression.py`*
+*All results validated via master regression test (§6.4).*
 
 | Domain | Formula | Amplitude | Performance |
 |--------|---------|-----------|-------------|
@@ -1453,9 +1347,9 @@ Both effects are **instantaneous and spatial**—no temporal buildup required, s
 
 ---
 
-## 4. Discussion
+## 5. Discussion
 
-### 4.1 Relation to Dark Matter and MOND
+### 5.1 Relation to Dark Matter and MOND
 
 **Unlike particle dark matter:**
 - No per-system halo fitting required (vs 2-3 parameters per galaxy in ΛCDM)
@@ -1471,7 +1365,7 @@ Both effects are **instantaneous and spatial**—no temporal buildup required, s
 
 **Comparison to MOND's theoretical status:** MOND has operated as successful phenomenology for 40 years without a complete relativistic foundation. Relativistic extensions (TeVeS, BIMOND, AeST) have been proposed but face various issues. Σ-Gravity is in a similar position: successful phenomenology with theoretical motivation but incomplete foundations. This is scientifically legitimate—the empirical success motivates the search for deeper theory.
 
-### 4.2 Testable Predictions
+### 5.2 Testable Predictions
 
 **1. Counter-Rotating Disks (Most Decisive Test)**
 
@@ -1526,7 +1420,7 @@ Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravi
 
 Σ-Gravity enhancement **grows with radius** (W(r) → 1), while MOND enhancement is constant at fixed g. This produces different shapes in outer disk regions.
 
-### 4.3 Limitations and Future Work
+### 5.3 Limitations and Future Work
 
 **Theoretical:**
 - The Poisson equation $g_{\text{eff}} = g_{\text{bar}} \cdot \Sigma$ is adopted as the phenomenological definition, not derived from the action
@@ -1550,11 +1444,11 @@ Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravi
 - Connection to Verlinde's emergent gravity (both derive $g^\dagger \sim cH_0$) deserves exploration
 - Comparison to EG (emergent gravity) predictions at cluster scales
 
-### 4.4 Outlook: Derivation Roadmap
+### 5.4 Outlook: Derivation Roadmap
 
 This section outlines the theoretical path from the covariant coherence scalar (§2.5) to the empirically validated formulas. The goal is to replace phenomenological fits with first-principles derivations.
 
-#### 4.4.1 Deriving ξ ∝ σ/Ω from the Covariant Scalar
+#### 5.4.1 Deriving ξ ∝ σ/Ω from the Covariant Scalar
 
 The local coherence scalar (§2.5) is:
 
@@ -1576,7 +1470,7 @@ $$\langle W \rangle = \frac{1}{T_{\rm orbit}} \oint W(r(t)) \, dt$$
 
 where the orbit samples different radii due to epicyclic motion. The constant $k$ should emerge from the ratio of epicyclic to circular frequencies ($\kappa/\Omega$) in a thin disk.
 
-#### 4.4.2 Clusters as the Same Principle in a Different Kinematic Regime
+#### 5.4.2 Clusters as the Same Principle in a Different Kinematic Regime
 
 Empirical correlations from cross-system analysis support a universal "rate-based" coherence scale:
 
@@ -1594,7 +1488,7 @@ $$\mathcal{C}_{\rm cluster} \approx \frac{\sigma_v^2/R^2}{\sigma_v^2/R^2 + 4\pi 
 
 The transition radius where $\mathcal{C} = 1/2$ should yield $\xi_{\rm cluster} \propto \sigma_v / \sqrt{G\rho}$, connecting to the crossing time $T_{\rm cross} \sim R/\sigma_v$.
 
-#### 4.4.3 Redshift Dependence from Evolving IR Cutoff
+#### 5.4.3 Redshift Dependence from Evolving IR Cutoff
 
 The cluster correlation with redshift (r ≈ +0.77 between fitted r₀ and z) suggests the IR cutoff $H_0^2$ in the covariant scalar should evolve:
 
@@ -1606,7 +1500,7 @@ This predicts:
 
 **Derivation target:** Compute $\xi(z)$ explicitly and compare to the observed redshift evolution of cluster coherence scales.
 
-#### 4.4.4 Multi-Component Velocity Dispersion
+#### 5.4.4 Multi-Component Velocity Dispersion
 
 The positive correlation between fitted r₀ and gas fraction in clusters (r ≈ +0.53) indicates that $\sigma_{\rm eff}$ requires careful multi-component weighting:
 
@@ -1619,7 +1513,7 @@ where:
 
 **Derivation target:** Derive the mass-weighted combination from the covariant scalar applied to a multi-fluid system. The gas fraction dependence suggests thermal motions contribute to coherence suppression.
 
-#### 4.4.5 Summary of Derivation Priorities
+#### 5.4.5 Summary of Derivation Priorities
 
 | Target | Current Status | Path Forward |
 |--------|---------------|--------------|
@@ -1633,9 +1527,11 @@ These derivations would elevate the coherence scale from "dynamically motivated"
 
 ---
 
-## 5. Methods
+## 6. Code Availability and Reproducibility
 
-### 5.1 Unified Formula Implementation
+Complete code repository: https://github.com/lrspeiser/SigmaGravity
+
+### 6.1 Unified Formula Implementation
 
 ```python
 import numpy as np
@@ -1714,11 +1610,7 @@ def predict_velocity(R_kpc, V_bar_kms, R_d_kpc, A=A_GALAXY):
 
 ---
 
-## 6. Code Availability and Reproducibility
-
-Complete code repository: https://github.com/lrspeiser/SigmaGravity
-
-### 6.1 Environment Setup
+### 6.2 Environment Setup
 
 ```bash
 # Clone repository
@@ -1733,7 +1625,7 @@ source venv/bin/activate  # Linux/Mac
 pip install numpy scipy pandas matplotlib astropy
 ```
 
-### 6.2 Data Sources
+### 6.3 Data Sources
 
 | Dataset | Source | Location |
 |---------|--------|----------|
@@ -1743,7 +1635,7 @@ pip install numpy scipy pandas matplotlib astropy
 | MaNGA DynPop | https://manga-dynpop.github.io/ | `data/manga_dynpop/` |
 | Counter-rotating | Bevacqua et al. 2022 (VizieR) | `data/stellar_corgi/` |
 
-### 6.3 Master Regression Test
+### 6.4 Master Regression Test
 
 **Run this after any formula change:**
 
@@ -1763,7 +1655,7 @@ This single script validates all domains with authoritative data sources:
 | **Redshift** | g†(z) ∝ H(z) confirmed | Theoretical consistency |
 | **Solar System** | \|γ-1\|=1.8×10⁻⁹ | Cassini-safe |
 
-### 6.4 Output Files
+### 6.5 Output Files
 
 | Output | Location |
 |--------|----------|
