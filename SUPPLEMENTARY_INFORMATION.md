@@ -228,55 +228,49 @@ where f_baryon = 0.15 (cosmic baryon fraction). The factor 0.4 accounts for the 
 
 ## SI §4 — Reproducibility
 
-### Single Command Validation
+All numerical results reported in this paper are reproducible using the provided code repository.
 
+### Repository and Requirements
+
+**Repository:** https://github.com/lrspeiser/SigmaGravity
+
+**Dependencies:** numpy, scipy, pandas, matplotlib, astropy
+
+**Installation:**
 ```bash
 git clone https://github.com/lrspeiser/SigmaGravity.git && cd SigmaGravity
 pip install numpy scipy pandas matplotlib astropy
-python scripts/run_regression.py
 ```
 
-### Expected Output
+### Validation Script
 
-```
-================================================================================
-Σ-GRAVITY MASTER REGRESSION TEST
-================================================================================
+The script `scripts/run_regression.py` reproduces all reported results using the canonical parameters:
 
-UNIFIED FORMULA PARAMETERS:
-  A₀ = exp(1/2π) ≈ 1.1725
-  L₀ = 0.4 kpc
-  n = 0.27
-  ξ = R_d/(2π) ≈ 0.1592 × R_d
-  M/L = 0.5/0.7 (disk/bulge)
-  g† = 9.599e-11 m/s²
+| Parameter | Value |
+|-----------|-------|
+| $A_0$ | $e^{1/(2\pi)} \approx 1.1725$ |
+| $L_0$ | 0.4 kpc |
+| $n$ | 0.27 |
+| $\xi$ | $R_d/(2\pi)$ |
+| M/L (disk/bulge) | 0.5/0.7 |
+| $g^\dagger$ | $9.599 \times 10^{-11}$ m/s² |
 
-  For 2D disk (D=0): A = A₀ = 1.173
-  For 3D cluster (D=1, L=600): A = 8.45
+### Expected Results
 
-[✓] SPARC Galaxies: RMS=17.75 km/s, Scatter=0.097 dex, Win=47.4%
-[✓] Clusters: Median ratio=0.987, Scatter=0.132 dex (42 clusters)
-[✓] Gaia/MW: RMS=29.5 km/s (28368 stars)
-[✓] Redshift Evolution: g†(z=2)/g†(z=0) = 2.966 (expected 2.966)
-[✓] Solar System: |γ-1| = 1.77e-09 < 2.30e-05
-[✓] Counter-Rotation: f_DM(CR)=0.169 < f_DM(Normal)=0.302, p=0.0039
+Running the validation script produces:
 
-================================================================================
-SUMMARY: 6/6 tests passed
-================================================================================
-✓ ALL TESTS PASSED
-```
+| Test | Expected Result |
+|------|-----------------|
+| SPARC Galaxies | RMS = 17.75 km/s, Scatter = 0.097 dex, Win rate = 47.4% |
+| Galaxy Clusters | Median ratio = 0.987, Scatter = 0.132 dex (N=42) |
+| Milky Way | RMS = 29.5 km/s (N=28,368 stars) |
+| Redshift Evolution | $g^\dagger(z=2)/g^\dagger(z=0) = 2.966$ |
+| Solar System | $|\gamma-1| = 1.77 \times 10^{-9}$ |
+| Counter-Rotation | $f_{\rm DM}$(CR) = 0.169 vs $f_{\rm DM}$(Normal) = 0.302, p = 0.004 |
 
 ### Output Files
 
-- `scripts/regression_results/latest_report.json` — Full JSON report
-- Exit code 0 = all passed, 1 = some failed
-
-### Quick Mode
-
-```bash
-python scripts/run_regression.py --quick  # Skip slow tests (Gaia, counter-rotation)
-```
+Results are saved to `scripts/regression_results/latest_report.json` in machine-readable JSON format.
 
 ---
 

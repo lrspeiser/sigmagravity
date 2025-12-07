@@ -1280,7 +1280,7 @@ The cluster amplitude is **derived from spatial geometry**, not fitted:
 | Mode counting (3D vs 2D) | 2.57 | π√2/√3 (solid angle geometry) |
 | Coherence window saturation | 1.9 | W(r≫ξ) → 1 for clusters vs ⟨W⟩≈0.53 for galaxy rotation curves |
 | **Combined (mode + window)** | **4.9** | 2.57 × 1.9 |
-| **Observed ratio** ($8.0/\sqrt{3}$) | **4.6** | From regression test |
+| **Observed ratio** ($8.0/\sqrt{3}$) | **4.6** | From cluster/galaxy amplitude ratio |
 | **Path length scaling** | **4.6** | $L_{\rm cluster}^{0.25}/L_{\rm galaxy}^{0.25}$ (§2.12.1) |
 
 **Both effects are instantaneous and spatial:**
@@ -1292,8 +1292,6 @@ At cluster lensing radii ($r \sim 200$ kpc), the coherence window approaches uni
 **Result:** With the unified amplitude formula, the model achieves median ratio = 0.987, scatter = 0.132 dex (42 clusters). The amplitude ratio $A_{\rm cluster}/A_{\rm galaxy} \approx 7.2$ emerges naturally from the dimensionality and path length formula.
 
 ### 4.4 Cross-Domain Consistency
-
-*All results validated via master regression test (§6.2).*
 
 | Domain | Formula | Amplitude | Performance |
 |--------|---------|-----------|-------------|
@@ -1543,19 +1541,7 @@ def predict_velocity(R_kpc, V_bar_kms, R_d_kpc, D=0, L=0.5):
 
 ### 6.2 Reproduction
 
-```bash
-git clone https://github.com/lrspeiser/SigmaGravity.git && cd SigmaGravity
-pip install numpy scipy pandas matplotlib astropy
-python scripts/run_regression.py  # Validates all results in this paper
-```
-
-| Test | Result | N |
-|------|--------|---|
-| SPARC galaxies | RMS=17.75 km/s | 171 |
-| Clusters | Ratio=0.987 | 42 |
-| Milky Way | RMS=29.5 km/s | 28,368 |
-
-See SI §4 for complete reproduction guide, data sources, and output file locations.
+All numerical results reported in this paper are reproducible using the provided code repository. The repository includes data files, analysis scripts, and a validation script that confirms all reported metrics. See SI §4 for complete instructions, data sources, and expected outputs.
 
 ---
 
