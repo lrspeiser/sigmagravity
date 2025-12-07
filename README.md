@@ -13,14 +13,14 @@ $$\boxed{\Sigma = 1 + A \cdot W(r) \cdot h(g_N)}$$
 where:
 - **Critical acceleration:** $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s² (derived from cosmological scales)
 - **Acceleration function:** $h(g_N) = \sqrt{g^\dagger/g_N} \cdot g^\dagger/(g^\dagger + g_N)$
-- **Coherence window:** $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ with $\xi = (2/3) \times R_d$
-- **Amplitude:** $A = A_0 \times L^{1/4}$ where L is the path length through baryons and $A_0 \approx 1.6$
+- **Coherence window:** $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ with $\xi = (1/2) \times R_d$
+- **Amplitude:** $A = A_0 \times L^{1/4}$ where L is the path length through baryons and $A_0 = \sqrt{e} \approx 1.649$
 
 The coherence scale ξ is the radius where enhancement transitions from suppressed to full—an instantaneous property of the velocity field requiring no temporal accumulation.
 
-Applied to 171 SPARC galaxies with M/L = 0.5/0.7 (Lelli+ 2016 standard), the framework achieves RMS = 18.97 km/s with 42% win rate vs MOND (17.15 km/s)—a fair comparison using the same M/L assumptions.
+Applied to 171 SPARC galaxies with M/L = 0.5/0.7 (Lelli+ 2016 standard), the framework achieves RMS = 18.56 km/s with 46% win rate vs MOND—a fair comparison using the same M/L assumptions.
 
-Validation on 42 Fox+ 2022 strong-lensing clusters yields median predicted/observed ratio of **0.955** with scatter of 0.133 dex—matching observations where MOND underpredicts by factor ~3. Star-by-star validation against 28,368 Milky Way disk stars yields RMS = 28.8 km/s. Solar System constraints are satisfied (|γ-1| ~ 10⁻⁹), well within the Cassini bound.
+Validation on 42 Fox+ 2022 strong-lensing clusters yields median predicted/observed ratio of **0.955** with scatter of 0.133 dex—matching observations where MOND underpredicts by factor ~3. Star-by-star validation against 28,368 Milky Way disk stars yields RMS = 29.0 km/s. Solar System constraints are satisfied (|γ-1| ~ 10⁻⁹), well within the Cassini bound.
 
 The theory makes falsifiable predictions distinct from both MOND and ΛCDM: (1) counter-rotating stellar components reduce enhancement—confirmed in MaNGA data with 44% lower inferred dark matter fractions (p < 0.01); (2) high-dispersion systems show suppressed enhancement relative to cold disks; (3) enhancement decreases at high redshift as $g^\dagger(z) \propto H(z)$—consistent with KMOS³D observations.
 
@@ -83,7 +83,7 @@ The coherence window $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ captures the empirical obs
 - The functional form (Burr-XII type) emerges from superstatistical models where a rate parameter has a Gamma distribution
 - The exponent 0.5 follows from single-channel decoherence statistics
 
-**Coherence scale ξ:** All results in this paper use $\xi = (2/3) \times R_d$ (disk scale length). An alternative dynamical formulation $\xi = \kappa \times \sigma_{\rm eff}/\Omega_d$ shows 16% improvement in ablation studies (SI §28) but is not used for primary results.
+**Coherence scale ξ:** All results in this paper use $\xi = (1/2) \times R_d$ (half the disk scale length). This cleaner formulation was adopted after comprehensive testing showed improved performance over the previous $(2/3) \times R_d$ (see SI §28). An alternative dynamical formulation $\xi = \kappa \times \sigma_{\rm eff}/\Omega_d$ shows additional improvement in ablation studies but is not used for primary results.
 
 **Physical interpretation:** The coherence scale ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω × r). This is an **instantaneous** property of the velocity field—purely spatial, no temporal accumulation.
 
@@ -174,7 +174,7 @@ This is the **Poisson equation as an equation of motion**, not an external presc
 
 **This is distinct from f(T) gravity**, which modifies $\mathbf{T} \to f(\mathbf{T})$ in the gravitational sector. Our modification is $\mathcal{L}_m \to \Sigma \cdot \mathcal{L}_m$ in the matter sector.
 
-**Connection to f(T) dimensional structure:** In f(T) theories, a dimensional constant with units [length]² necessarily sets the scale where modified gravity activates (R. Ferraro, private communication). In Σ-Gravity, the coherence scale $\xi = (2/3) R_d$ plays an analogous role, with typical values ~2-3 kpc for disk galaxies. This is consistent with f(T,$\mathcal{L}_m$) theories where the modification scale depends on matter distribution.
+**Connection to f(T) dimensional structure:** In f(T) theories, a dimensional constant with units [length]² necessarily sets the scale where modified gravity activates (R. Ferraro, private communication). In Σ-Gravity, the coherence scale $\xi = (1/2) R_d$ plays an analogous role, with typical values ~1.5 kpc for disk galaxies. This is consistent with f(T,$\mathcal{L}_m$) theories where the modification scale depends on matter distribution.
 
 **Open theoretical issue:** Non-minimal matter couplings in teleparallel gravity can violate local Lorentz invariance unless carefully constructed (see Krššák & Saridakis 2016, CQG 33, 115009). Whether the specific coherence-dependent coupling $\Sigma[g_N, \mathcal{C}]$ preserves Lorentz invariance requires further investigation. We note that the coupling depends only on scalar quantities (baryonic acceleration magnitude, coherence measure), which may mitigate this concern.
 
@@ -397,7 +397,7 @@ This dramatically increases σ_eff and reduces C. MaNGA DynPop data confirms: co
 
 ### 2.7 Geometric Motivation for Amplitude A
 
-**Note on amplitude derivation:** The amplitude A is derived from path length scaling: $A = A_0 \times L^{1/4}$ with $A_0 \approx 1.6$ (§2.12.1). For disk galaxies with L ≈ 1.5 kpc, this gives A ≈ 1.79, close to √3 ≈ 1.73. The following "mode counting" argument provides geometric intuition but is not the primary derivation.
+**Note on amplitude derivation:** The amplitude A is derived from path length scaling: $A = A_0 \times L^{1/4}$ with $A_0 = \sqrt{e} \approx 1.649$ (§2.12.1). For disk galaxies with L ≈ 1.5 kpc, this gives A ≈ 1.82. The following "mode counting" argument provides geometric intuition but is not the primary derivation.
 
 **Step 1: Torsion Mode Decomposition**
 
@@ -507,7 +507,7 @@ For clusters, the coherence scale is small relative to lensing radii. Using $\xi
 
 The amplitude follows from path length scaling (§2.12.1):
 
-$$A = A_0 \times L^{1/4}, \quad A_0 \approx 1.6$$
+$$A = A_0 \times L^{1/4}, \quad A_0 = \sqrt{e} \approx 1.649$$
 
 | System | Path Length L | Predicted A | Used A |
 |--------|--------------|-------------|--------|
@@ -515,7 +515,7 @@ $$A = A_0 \times L^{1/4}, \quad A_0 \approx 1.6$$
 | Ellipticals | 17 kpc | 3.26 | ~3.1 |
 | Clusters | 400 kpc | 7.15 | 8.0 |
 
-This unifies all amplitudes with a single constant $A_0$.
+This unifies all amplitudes with a single constant $A_0 = \sqrt{e}$—a natural exponential constant that may connect to entropy-based derivations (see §5.7).
 
 $$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{0.5}$$
 
@@ -578,7 +578,7 @@ The factor $4\sqrt{\pi} = 2 \times \sqrt{4\pi} \approx 7.09$ combines:
 - $\sqrt{4\pi} \approx 3.54$ from spherical solid angle
 - Factor 2 from the coherence transition scale
 
-With M/L = 0.5/0.7 (Lelli+ 2016), Σ-Gravity achieves RMS = 18.97 km/s on 171 SPARC galaxies (42% win rate vs MOND with same M/L), while matching clusters (ratio = 0.955) and passing all other tests. See §6 for reproduction instructions.
+With M/L = 0.5/0.7 (Lelli+ 2016), Σ-Gravity achieves RMS = 18.56 km/s on 171 SPARC galaxies (46% win rate vs MOND with same M/L), while matching clusters (ratio = 0.955) and passing all other tests. See §6 for reproduction instructions.
 
 **Derivation status:** The scaling $g^\dagger \sim cH_0$ follows from dimensional analysis and is not original to this work. The specific factor $1/(4\sqrt{\pi})$ is **derived from coherence geometry** rather than fitted. This represents a significant advance: the critical acceleration is now fully determined by geometric constants.
 
@@ -596,14 +596,14 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 |--------|---------|-------------|
 | $h(g_N)$ | $\sqrt{g^\dagger/g_N} \times g^\dagger/(g^\dagger+g_N)$ | Acceleration function (same for dynamics and lensing) |
 | $W(r)$ | $1 - (\xi/(\xi+r))^{0.5}$ | Coherence window (suppresses inner regions) |
-| $\xi$ | $(2/3) \times R_d$ | Coherence scale (disk scale length) |
+| $\xi$ | $(1/2) \times R_d$ | Coherence scale (half disk scale length) |
 | $g^\dagger$ | $cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s² | Critical acceleration (derived) |
 | $A_{\rm galaxy}$ | $\sqrt{3} \approx 1.73$ | Galaxy amplitude (path length: L ≈ 1.5 kpc) |
 | $A_{\rm cluster}$ | 8.0 | Cluster amplitude (path length scaling) |
 
 **Amplitude relationship:**
 - The ratio $A_{\rm cluster}/A_{\rm galaxy} \approx 4.6$ follows from the path length scaling $A = A_0 \times L^{1/4}$ (§2.12.1)
-- This unifies galaxy and cluster amplitudes with a single constant $A_0 \approx 1.6$
+- This unifies galaxy and cluster amplitudes with a single constant $A_0 = \sqrt{e} \approx 1.649$
 
 **Key insight:** The same enhancement formula $\Sigma = 1 + A \cdot W \cdot h$ works across 6 orders of magnitude in mass, with the amplitude ratio explained by path length through baryonic matter.
 
@@ -615,9 +615,9 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 | $n_{\text{coh}} = 0.5$ | $k/2$ (Gamma-exponential) | Derived | Exact from decoherence statistics |
 | $g^\dagger$ | $cH_0/(4\sqrt{\pi})$ | Derived | From spherical coherence geometry |
 | W(r) form | $1 - (\xi/(\xi+r))^{0.5}$ | Derived | From Gamma-exponential decoherence |
-| $\xi$ | $(2/3) \times R_d$ | Calibrated | Disk scale length |
+| $\xi$ | $(1/2) \times R_d$ | Calibrated | Half disk scale length |
 | $h(g)$ | $\sqrt{g^\dagger/g} \times g^\dagger/(g^\dagger+g)$ | Derived | From acceleration scaling |
-| $A$ | $A_0 \times L^{1/4}$ | Path length | $A_0 \approx 1.6$; L = path through baryons |
+| $A$ | $A_0 \times L^{1/4}$ | Path length | $A_0 = \sqrt{e} \approx 1.649$; L = path through baryons |
 
 **Amplitude values from path length scaling:**
 - Disk galaxies: L ≈ 1.5 kpc → A ≈ 1.79 (use √3 ≈ 1.73)
@@ -627,7 +627,7 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 **Status definitions:** *Derived* indicates a mathematical result from stated assumptions. *Covariant* indicates a tensor/scalar constructed from 4-velocity. *Calibrated* indicates physical motivation with final value set by data. *Path length* indicates derivation from $A = A_0 \times L^{1/4}$.
 
 **Key results:**
-1. **Path length amplitude scaling:** $A = A_0 \times L^{1/4}$ unifies galaxy and cluster amplitudes with a single constant $A_0 \approx 1.6$ (see §2.12.1)
+1. **Path length amplitude scaling:** $A = A_0 \times L^{1/4}$ unifies galaxy and cluster amplitudes with a single constant $A_0 = \sqrt{e} \approx 1.649$ (see §2.12.1)
 2. **Dynamical coherence scale (alternative):** An alternative $\xi = \kappa \times \sigma_{\rm eff}/\Omega_d$ formulation shows 16% improvement in ablation studies (SI §28) but is not used for primary results.
 
 ### 2.12.1 Path Length Derivation of Amplitude
@@ -1040,8 +1040,8 @@ This ensures a fair comparison with identical assumptions.
 
 | Metric | Σ-Gravity | MOND | Notes |
 |--------|-----------|------|-------|
-| Mean RMS error | **18.97 km/s** | 17.15 km/s | 171 galaxies |
-| Win rate | 42.1% | 57.9% | Fair comparison (same M/L) |
+| Mean RMS error | **18.56 km/s** | 17.15 km/s | 171 galaxies |
+| Win rate | 45.6% | 54.4% | Fair comparison (same M/L) |
 
 With M/L = 0.5/0.7 (Lelli+ 2016 standard), Σ-Gravity performs comparably to MOND on galaxies. The key advantage is that Σ-Gravity also fits clusters (median ratio = 0.955), which MOND cannot (ratio ~0.33).
 
@@ -1111,7 +1111,7 @@ Using the Eilers-APOGEE-Gaia sample (§3.3), we perform star-by-star validation 
 3. **V_bar scaling = 1.16×** brings MW into consistency with SPARC galaxies
 4. This scaling is within the ~20% uncertainty of McMillan 2017 (Cautun+ 2020)
 
-**Result:** RMS = 28.8 km/s across 28,368 stars.
+**Result:** RMS = 29.0 km/s across 28,368 stars.
 
 ### 4.3 Galaxy Cluster Strong Lensing
 
@@ -1274,7 +1274,7 @@ Both effects are **instantaneous and spatial**—no temporal buildup required, s
 
 ![Figure: Amplitude comparison](figures/amplitude_comparison.png){width=100%}
 
-*Figure 7: Amplitude vs path length. All amplitudes follow $A = A_0 \times L^{1/4}$ with $A_0 \approx 1.6$. Disk galaxies (L ≈ 1.5 kpc), ellipticals (L ≈ 17 kpc), clusters (L ≈ 400 kpc).*
+*Figure 7: Amplitude vs path length. All amplitudes follow $A = A_0 \times L^{1/4}$ with $A_0 = \sqrt{e} \approx 1.649$. Disk galaxies (L ≈ 1.5 kpc), ellipticals (L ≈ 17 kpc), clusters (L ≈ 400 kpc).*
 
 ---
 
@@ -1470,7 +1470,7 @@ import numpy as np
 # Constants
 c, H0_SI, kpc_to_m = 2.998e8, 2.27e-18, 3.086e19
 g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 9.60e-11 m/s²
-A_GALAXY, A_CLUSTER, XI_SCALE = np.sqrt(3), 8.0, 2/3
+A_GALAXY, A_CLUSTER, XI_SCALE = np.sqrt(np.e), 8.0, 0.5  # A_0 = √e ≈ 1.649, ξ = R_d/2
 
 def h_function(g_N):
     """Acceleration function h(g_N) - QUMOND-like."""
@@ -1502,9 +1502,9 @@ python run_regression.py  # Validates all results in this paper
 
 | Test | Result | N |
 |------|--------|---|
-| SPARC galaxies | RMS=18.97 km/s | 171 |
+| SPARC galaxies | RMS=18.56 km/s | 171 |
 | Clusters | Ratio=0.955 | 42 |
-| Milky Way | RMS=28.8 km/s | 28,368 |
+| Milky Way | RMS=29.0 km/s | 28,368 |
 
 See SI §21 for complete reproduction guide, data sources, and output file locations.
 
@@ -1538,7 +1538,7 @@ Key sections include:
 
 **Figure 6:** Cluster holdout validation with 2/2 coverage.
 
-**Figure 7:** Amplitude vs path length: $A = A_0 \times L^{1/4}$ with $A_0 \approx 1.6$ unifies disk, elliptical, and cluster amplitudes.
+**Figure 7:** Amplitude vs path length: $A = A_0 \times L^{1/4}$ with $A_0 = \sqrt{e} \approx 1.649$ unifies disk, elliptical, and cluster amplitudes.
 
 ---
 

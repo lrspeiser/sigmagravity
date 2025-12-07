@@ -1,0 +1,146 @@
+{
+  "CURRENT": {
+    "sparc": {
+      "mean_rms": 21.155556075447333,
+      "median_rms": 17.7970313970801,
+      "win_rate": 39.08045977011494,
+      "n_galaxies": 174,
+      "rar_scatter_dex": 0.30878925640983684
+    },
+    "clusters": {
+      "median_ratio": 0.927474011077041,
+      "mean_ratio": 1.005140079975854,
+      "scatter_dex": 0.13318079700571617,
+      "n_clusters": 42
+    },
+    "gaia": {
+      "rms": 30.905866005803713,
+      "n_stars": 28368,
+      "mean_V_pred": 209.5397898394748,
+      "mean_V_obs": 211.00771299785177
+    },
+    "counter_rotation": {
+      "status": "SKIPPED",
+      "reason": "No counter-rotation data"
+    },
+    "redshift": {
+      "all_match": true,
+      "details": [
+        {
+          "z": 0,
+          "g_dagger_z": 9.598924108127284e-11,
+          "ratio": 1.0,
+          "expected": 1.0,
+          "match": true
+        },
+        {
+          "z": 0.5,
+          "g_dagger_z": 1.2561394295917872e-10,
+          "ratio": 1.3086252328302401,
+          "expected": 1.3086252328302401,
+          "match": true
+        },
+        {
+          "z": 1.0,
+          "g_dagger_z": 1.6900649884076062e-10,
+          "ratio": 1.760681686165901,
+          "expected": 1.7606816861659007,
+          "match": true
+        },
+        {
+          "z": 2.0,
+          "g_dagger_z": 2.8475010579375856e-10,
+          "ratio": 2.966479394838265,
+          "expected": 2.966479394838265,
+          "match": true
+        },
+        {
+          "z": 3.0,
+          "g_dagger_z": 4.28202399137182e-10,
+          "ratio": 4.460941604639093,
+          "expected": 4.460941604639093,
+          "match": true
+        }
+      ]
+    },
+    "solar_system": {
+      "g_sun": 0.00593140799708313,
+      "h_value": 2.0587192833644955e-12,
+      "Sigma": 1.0000000000033602,
+      "gamma_minus_1": 3.3602010063304988e-12,
+      "cassini_safe": true
+    }
+  },
+  "CLEAN": {
+    "sparc": {
+      "mean_rms": 20.199490989741204,
+      "median_rms": 17.094919262893114,
+      "win_rate": 41.95402298850575,
+      "n_galaxies": 174,
+      "rar_scatter_dex": 0.30878925640983684
+    },
+    "clusters": {
+      "median_ratio": 0.927474011077041,
+      "mean_ratio": 1.005140079975854,
+      "scatter_dex": 0.13318079700571617,
+      "n_clusters": 42
+    },
+    "gaia": {
+      "rms": 30.808562899810628,
+      "n_stars": 28368,
+      "mean_V_pred": 210.49074023617368,
+      "mean_V_obs": 211.00771299785177
+    },
+    "counter_rotation": {
+      "status": "SKIPPED",
+      "reason": "No counter-rotation data"
+    },
+    "redshift": {
+      "all_match": true,
+      "details": [
+        {
+          "z": 0,
+          "g_dagger_z": 9.598924108127284e-11,
+          "ratio": 1.0,
+          "expected": 1.0,
+          "match": true
+        },
+        {
+          "z": 0.5,
+          "g_dagger_z": 1.2561394295917872e-10,
+          "ratio": 1.3086252328302401,
+          "expected": 1.3086252328302401,
+          "match": true
+        },
+        {
+          "z": 1.0,
+          "g_dagger_z": 1.6900649884076062e-10,
+          "ratio": 1.760681686165901,
+          "expected": 1.7606816861659007,
+          "match": true
+        },
+        {
+          "z": 2.0,
+          "g_dagger_z": 2.8475010579375856e-10,
+          "ratio": 2.966479394838265,
+          "expected": 2.966479394838265,
+          "match": true
+        },
+        {
+          "z": 3.0,
+          "g_dagger_z": 4.28202399137182e-10,
+          "ratio": 4.460941604639093,
+          "expected": 4.460941604639093,
+          "match": true
+        }
+      ]
+    },
+    "solar_system": {
+      "g_sun": 0.00593140799708313,
+      "h_value": 2.0587192833644955e-12,
+      "Sigma": 1.0000000000033602,
+      "gamma_minus_1": 3.3602010063304988e-12,
+      "cassini_safe": true
+    }
+  }
+}
