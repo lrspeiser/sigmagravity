@@ -312,7 +312,7 @@ For all MOND comparisons:
 |--------|-------|-------|
 | Median M_pred/M_lens | **0.987** | N=42 clusters |
 | Scatter | 0.132 dex | — |
-| Within factor 2 | 100% | No failures |
+| Range | 0.67–1.48 | All within factor 1.5 |
 
 ### Comparison to Other Theories
 

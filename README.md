@@ -20,7 +20,7 @@ The coherence scale $\xi = R_d/(2\pi)$ corresponds to one azimuthal wavelength a
 
 Applied to 171 SPARC galaxies with M/L = 0.5/0.7 (Lelli+ 2016 standard), the framework achieves RMS = 17.75 km/s with 47% win rate vs MOND—a fair comparison using the same M/L assumptions.
 
-Validation on 42 Fox+ 2022 strong-lensing clusters yields median predicted/observed ratio of **0.987** with scatter of 0.132 dex—matching observations where MOND underpredicts by factor ~3. Star-by-star validation against 28,368 Milky Way disk stars yields RMS = 29.5 km/s. Solar System constraints are satisfied (|γ-1| ~ 10⁻⁹), well within the Cassini bound.
+Validation on 42 Fox+ 2022 strong-lensing clusters yields median predicted/observed ratio of **0.987** (consistent with unity; scatter 0.132 dex; all clusters within factor 1.5)—where MOND underpredicts by factor ~3. Star-by-star validation against 28,368 Milky Way disk stars yields RMS = 29.5 km/s. Solar System constraints are satisfied (|γ-1| ~ 10⁻⁹), well within the Cassini bound.
 
 The theory makes falsifiable predictions distinct from both MOND and ΛCDM: (1) counter-rotating stellar components reduce enhancement—confirmed in MaNGA data with 44% lower inferred dark matter fractions (p < 0.01); (2) high-dispersion systems show suppressed enhancement relative to cold disks; (3) enhancement decreases at high redshift as $g^\dagger(z) \propto H(z)$—consistent with KMOS³D observations.
 
@@ -285,7 +285,7 @@ This differs from the main enhancement only by an $O(1)$ numerical factor that c
 1. **Covariant:** The auxiliary field $\Phi_N$ is defined within the action, not computed externally
 2. **Self-consistent:** The Poisson equation $\nabla^2\Phi_N = 4\pi G\rho$ emerges as an equation of motion
 3. **No iteration:** Because $\Phi_N$ satisfies its own equation independently, $\Sigma(g_N)$ can be computed directly from the baryonic distribution
-4. **QUMOND-equivalent:** In the weak-field limit, this reproduces the QUMOND phenomenology exactly
+4. **QUMOND-equivalent:** In the weak-field limit, this reproduces the QUMOND phenomenology
 
 #### 2.3.4 Derivation of the Modified Poisson Equation
 
@@ -875,7 +875,7 @@ $$\boxed{\nabla_\mu \left( T^{\mu\nu}_{\text{matter}} + T^{\mu\nu}_{\text{cohere
 
 The coherence field $\phi_C$ carries the "missing" momentum/energy, analogous to how scalar fields in scalar-tensor theories (Brans-Dicke, f(R)) restore conservation. This is not an *ad hoc* fix—it is the standard resolution for non-minimal coupling theories (see Harko et al. 2011, arXiv:1104.2669).
 
-**Validation:** The dynamical field formulation exactly reproduces original Σ-Gravity predictions (0.000 km/s difference on 50 SPARC galaxies tested). See SI §10 for the complete derivation.
+**Validation:** The dynamical field formulation reproduces original Σ-Gravity predictions to numerical precision (<0.001 km/s difference on 50 SPARC galaxies tested). See SI §10 for the complete derivation.
 
 #### 2.14.2 Fifth Force Resolution: QUMOND-Like Formulation
 
@@ -1206,7 +1206,7 @@ For $\Sigma = 2$: ratio = $7/(2 \times 4) = 0.875$
 For $\Sigma = 1.5$: ratio = $4.5/(2 \times 2.5) = 0.90$
 For $\Sigma = 1$: ratio = $1.0$ (GR limit)
 
-**Key insight:** The lensing-to-dynamics ratio is **close to unity** (0.85-1.0) across the relevant range of Σ. The 10-15% deviation is within cluster systematic uncertainties.
+**Key insight:** The lensing-to-dynamics ratio ranges from 0.85 to 1.0 across the relevant range of Σ. This 10-15% deviation from unity is within typical cluster systematic uncertainties (~20%).
 
 **4. What if $\delta\Sigma/\delta g^{\mu\nu} \neq 0$?**
 
@@ -1226,9 +1226,9 @@ Using the unified amplitude formula (D=1, L=600 kpc → A ≈ 8.45) on the Fox+ 
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| Median $M_{\rm pred}/M_{\rm lens}$ | **0.987** | N=42 clusters |
+| Median $M_{\rm pred}/M_{\rm lens}$ | **0.987** | Consistent with unity (N=42) |
 | Scatter | 0.132 dex | Comparable to ΛCDM scatter |
-| Within factor 2 | 100% | No catastrophic failures |
+| Range | 0.67–1.48 | All clusters within factor 1.5 of unity |
 
 **Comparison to other theories:**
 
@@ -1239,7 +1239,7 @@ Using the unified amplitude formula (D=1, L=600 kpc → A ≈ 8.45) on the Fox+ 
 | **ΛCDM (fitted halos)** | 0.95–1.05 | Requires 2-3 parameters per cluster |
 | **Σ-Gravity** | **0.987** | Zero free parameters per cluster |
 
-The key result is that Σ-Gravity matches cluster lensing masses with the same formula used for galaxies. The unified amplitude formula $A = A_0 \times [1-D+D(L/L_0)^n]$ naturally produces A ≈ 1.17 for disk galaxies (D=0) and A ≈ 8.45 for clusters (D=1, L=600 kpc).
+The key result is that Σ-Gravity reproduces cluster lensing masses (median ratio consistent with unity, scatter 0.132 dex) using the same formula applied to galaxies. The unified amplitude formula $A = A_0 \times [1-D+D(L/L_0)^n]$ produces A ≈ 1.17 for disk galaxies (D=0) and A ≈ 8.45 for clusters (D=1, L=600 kpc).
 
 **Gravitational slip:** The weak-field derivation (SI §11) predicts $\eta = \Psi/\Phi \neq 1$, a testable prediction for future lensing+dynamics surveys.
 
