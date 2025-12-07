@@ -79,22 +79,22 @@ The critical acceleration $g^\dagger \approx cH_0/(4\sqrt{\pi}) \approx 10^{-10}
 
 ---
 
-### ⚠️ CANONICAL MODEL DEFINITION
+### Canonical Model Definition
 
-**All results in this paper use exactly the following formulas:**
+All results in this paper use exactly the following formulas:
 
-$$\boxed{
-\begin{aligned}
-\Sigma &= 1 + A(D,L) \cdot W(r) \cdot h(g_N) \\[6pt]
-W(r) &= \frac{r}{\xi + r} \quad \text{(coherence window)} \\[6pt]
-\xi &= \frac{R_d}{2\pi} \approx 0.159 \times R_d \quad \text{(coherence scale, derived per-galaxy from } R_d \text{)} \\[6pt]
-h(g_N) &= \sqrt{\frac{g^\dagger}{g_N}} \cdot \frac{g^\dagger}{g^\dagger + g_N} \quad \text{(acceleration function)} \\[6pt]
-g^\dagger &= \frac{cH_0}{4\sqrt{\pi}} \approx 9.60 \times 10^{-11} \text{ m/s}^2 \quad \text{(critical acceleration, derived)} \\[6pt]
-A(D,L) &= A_0 \times [1 - D + D \times (L/L_0)^n] \quad \text{(unified amplitude)}
-\end{aligned}
-}$$
+$$\Sigma = 1 + A(D,L) \cdot W(r) \cdot h(g_N)$$
+
+| Component | Formula | Description |
+|-----------|---------|-------------|
+| Coherence window | $W(r) = r/(\xi + r)$ | Suppresses enhancement at small radii |
+| Coherence scale | $\xi = R_d/(2\pi)$ | Derived per-galaxy from disk scale length |
+| Acceleration function | $h(g_N) = \sqrt{g^\dagger/g_N} \cdot g^\dagger/(g^\dagger + g_N)$ | Activates at low acceleration |
+| Critical acceleration | $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s² | Derived from cosmological scales |
+| Unified amplitude | $A(D,L) = A_0 \times [1 - D + D \times (L/L_0)^n]$ | Connects galaxies and clusters |
 
 **Parameter values:**
+
 | Parameter | Value | Status |
 |-----------|-------|--------|
 | $A_0$ | $e^{1/(2\pi)} \approx 1.173$ | Derived |
@@ -106,7 +106,7 @@ A(D,L) &= A_0 \times [1 - D + D \times (L/L_0)^n] \quad \text{(unified amplitude
 
 **Amplitude values:** Galaxies (D=0): A = 1.173. Clusters (D=1, L≈600 kpc): A ≈ 8.45.
 
-**Note:** There is NO separate path-length factor $r_0$ or $f(r)$. The coherence window $W(r)$ is the ONLY spatial modulation. The parameter $L$ in the amplitude formula $A(D,L)$ refers to the characteristic path length through baryonic matter for different system types (disk thickness for galaxies, cluster diameter for clusters), NOT a per-system fitted parameter.
+**Note:** There is no separate path-length factor $r_0$ or $f(r)$. The coherence window $W(r)$ is the only spatial modulation. The parameter $L$ in the amplitude formula refers to the characteristic path length through baryonic matter for different system types (disk thickness for galaxies, cluster diameter for clusters), not a per-system fitted parameter.
 
 ---
 
