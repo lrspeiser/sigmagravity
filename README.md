@@ -328,8 +328,8 @@ $$g_{\text{eff}} = g_N \cdot \Sigma_{\text{eff}}(g_N, r)$$
 
 **Resolved issues:**
 - Stress-energy conservation: Established via dynamical coherence field (SI §10)
-- Fifth force concern: Eliminated via QUMOND-like formulation with minimal matter coupling (§2.14.2)
-- Matter Lagrangian convention: Specified as $\mathcal{L}_m = -\rho c^2$ (§2.14.0)
+- Fifth force concern: Eliminated via QUMOND-like formulation with minimal matter coupling (§2.15.3)
+- Matter Lagrangian convention: Specified as $\mathcal{L}_m = -\rho c^2$ (§2.15.1)
 
 **Partially open issues:**
 - WEP: Plausibly satisfied (universal coupling), but composite body analysis needed
@@ -839,7 +839,7 @@ See SI §8 for detailed analysis methodology and reproduction instructions.
 
 Non-minimal matter couplings generically raise three concerns: (1) stress-energy non-conservation, (2) composition-dependent "fifth forces," and (3) violations of the equivalence principle. This section specifies precisely what couples, derives the conservation law, and states the strongest bounds we can currently claim.
 
-#### 2.14.0 Matter Sector Specification
+#### 2.15.1 Matter Sector Specification
 
 **What couples to Σ (and what does not):**
 
@@ -855,7 +855,7 @@ The non-minimal coupling $\Sigma \cdot \mathcal{L}_m$ applies **only to massive 
 
 **Why EM couples minimally?** If photons coupled non-minimally to Σ, the speed of light would vary with position—violating local Lorentz invariance and conflicting with GW170817 (which constrains $|c_{GW}/c_{EM} - 1| < 10^{-15}$). Our selective coupling (matter ≠ EM) is analogous to GR, where massive particles follow timelike geodesics while photons follow null geodesics of the *same* metric.
 
-#### 2.14.1 Stress-Energy Conservation (Main Result)
+#### 2.15.2 Stress-Energy Conservation (Main Result)
 
 **The problem:** With Σ as an external functional, matter stress-energy is not conserved:
 $$\nabla_\mu T^{\mu\nu}_{\text{matter}} \neq 0$$
@@ -877,7 +877,7 @@ The coherence field $\phi_C$ carries the "missing" momentum/energy, analogous to
 
 **Validation:** The dynamical field formulation reproduces original Σ-Gravity predictions to numerical precision (<0.001 km/s difference on 50 SPARC galaxies tested). See SI §10 for the complete derivation.
 
-#### 2.14.2 Fifth Force Resolution: QUMOND-Like Formulation
+#### 2.15.3 Fifth Force Resolution: QUMOND-Like Formulation
 
 **The concern:** Non-minimal couplings $f(\phi_C)\mathcal{L}_m$ generically produce fifth forces $\propto \nabla \ln f$. For Σ varying by O(1) over kpc scales, a naive estimate gives $|a_5| \sim c^2/R_d \sim 10^{-3}$ m/s²—catastrophically large.
 
@@ -905,9 +905,9 @@ $$\mathbf{g}_{\text{eff}} = -\nabla \Phi = \mathbf{g}_N \cdot \nu(g_N, r)$$
 
 **In the Solar System:** Both $h(g) \to 0$ (high acceleration) and $W(r) \to 0$ (compact system) suppress $\nu - 1 < 10^{-8}$. The phantom density vanishes, recovering standard Newtonian gravity.
 
-**Relation to dynamical field (§2.14.1):** The stress-energy conservation proof using $\phi_C$ remains valid. The QUMOND-like formulation is the **weak-field limit** of the full dynamical theory, where the field equation for $\phi_C$ reduces to the phantom density prescription. See SI §10 for the complete derivation.
+**Relation to dynamical field (§2.15.2):** The stress-energy conservation proof using $\phi_C$ remains valid. The QUMOND-like formulation is the **weak-field limit** of the full dynamical theory, where the field equation for $\phi_C$ reduces to the phantom density prescription. See SI §10 for the complete derivation.
 
-#### 2.14.3 Einstein Equivalence Principle: Assessment
+#### 2.15.4 Einstein Equivalence Principle: Assessment
 
 The EEP has three components:
 
@@ -927,7 +927,7 @@ The coherence field equation $\Box \phi_C = \text{source}$ is Lorentz covariant.
 
 The constants $(A, g^\dagger, c, G)$ are position-independent. Only $\Sigma(r)$ varies, analogous to $\Phi(r)$ in GR.
 
-#### 2.14.4 Solar System Bounds: Estimate vs. Rigorous Calculation
+#### 2.15.5 Solar System Bounds: Estimate vs. Rigorous Calculation
 
 **What we can claim today (order-of-magnitude estimate):**
 
@@ -949,19 +949,19 @@ where $r_E = 1$ AU. This satisfies the Cassini bound $|\gamma - 1| < 2.3 \times 
 
 **Theoretical status:** The $\gamma - 1 \sim 10^{-8}$ estimate is **plausible but not rigorously derived**. A complete PPN analysis from the action (§2.2) is future work.
 
-#### 2.14.5 Summary of Consistency Status
+#### 2.15.6 Summary of Consistency Status
 
 | Constraint | Claim | Observational Bound | Status |
 |------------|-------|---------------------|--------|
-| Stress-energy conservation | Total $T^{\mu\nu}$ conserved | Required | Proven (dynamical field, §2.14.1) |
-| Fifth force | None (minimal coupling) | — | Eliminated (QUMOND-like formulation, §2.14.2) |
+| Stress-energy conservation | Total $T^{\mu\nu}$ conserved | Required | Proven (dynamical field, §2.15.2) |
+| Fifth force | None (minimal coupling) | — | Eliminated (QUMOND-like formulation, §2.15.3) |
 | WEP (Eötvös) | $\eta_E = 0$ (minimal coupling) | $\eta_E < 10^{-13}$ | Satisfied (all particles follow same geodesics) |
 | Solar System | $\nu - 1 < 10^{-8}$ | Various | Safe (phantom density vanishes) |
 | PPN $\gamma - 1$ | $\sim 10^{-8}$ (estimate) | $< 2.3 \times 10^{-5}$ | Estimate only; rigorous derivation needed |
 | LLI | Unknown (likely $\sim 10^{-7}$) | Various | Uncertain; requires formal analysis |
 | LPI | Satisfied | — | Position-independent constants |
 
-**Bottom line:** The QUMOND-like formulation (§2.14.2) eliminates fifth-force concerns entirely: matter couples minimally, and the enhancement appears in the field equations via a phantom density. Solar System constraints are satisfied because $\nu - 1 < 10^{-8}$ in high-acceleration compact systems. A rigorous PPN derivation is needed to make $\gamma - 1$ claims definitive. See SI §9-10 for extended analysis.
+**Bottom line:** The QUMOND-like formulation (§2.15.3) eliminates fifth-force concerns entirely: matter couples minimally, and the enhancement appears in the field equations via a phantom density. Solar System constraints are satisfied because $\nu - 1 < 10^{-8}$ in high-acceleration compact systems. A rigorous PPN derivation is needed to make $\gamma - 1$ claims definitive. See SI §9-10 for extended analysis.
 
 ### 2.16 Amplitude Renormalization from Θ_μν
 
@@ -1101,7 +1101,7 @@ Such a comparison is beyond the scope of this work but would strengthen the case
 
 *Figure 5: Rotation curves for six representative SPARC galaxies. Black points: observed data. Green dashed: baryonic (GR). Blue solid: Σ-Gravity. Red dotted: MOND.*
 
-**Parameter-free comparison:** Unlike ΛCDM (2-3 fitted halo parameters per galaxy), Σ-Gravity uses the same canonical formula for all 171 galaxies with no per-galaxy fitting. See SI §14 for ablation studies with fitted parameters.
+**Parameter-free comparison:** Unlike ΛCDM (2-3 fitted halo parameters per galaxy), Σ-Gravity uses the same canonical formula for all 171 galaxies with no per-galaxy fitting. For a head-to-head comparison where both models are given equal fitting freedom (2 parameters per galaxy), see SI §15.
 
 ### 4.2 Milky Way Validation
 
@@ -1139,7 +1139,7 @@ $$S = S_{\text{grav}} + \int d^4x \, |e| \, \Sigma \cdot \mathcal{L}_m + \int d^
 | Matter (baryons) | $\mathcal{L}_m = -\rho c^2$ | $\Sigma \cdot \mathcal{L}_m$ | Non-minimal (enhanced) |
 | Electromagnetic | $\mathcal{L}_{EM} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$ | Minimal | Photons follow null geodesics |
 
-**Key choice:** EM couples **minimally** to the metric, not multiplied by Σ. This ensures no variable speed of light and consistency with GW170817. See §2.14.0 for detailed justification of this selective coupling and its consistency with EEP.
+**Key choice:** EM couples **minimally** to the metric, not multiplied by Σ. This ensures no variable speed of light and consistency with GW170817. See §2.15.1 for detailed justification of this selective coupling and its consistency with EEP.
 
 **2. Weak-field metric from full field equations:**
 
