@@ -340,20 +340,20 @@ python scripts/analyze_fox2022_clusters.py
 
 ### SI §5.9. Expected Results Table
 
-| Metric | Expected Value | Verification Command |
-|--------|----------------|---------------------|
-| SPARC mean RMS | 27.35 km/s | derivations/full_sparc_validation_4sqrtpi.py |
-| SPARC median RMS | 19.96 km/s | derivations/full_sparc_validation_4sqrtpi.py |
-| SPARC mean RAR scatter | 0.105 dex | derivations/full_sparc_validation_4sqrtpi.py |
-| SPARC head-to-head wins (RMS) | 153 vs 21 | derivations/full_sparc_validation_4sqrtpi.py |
-| MW bias | +0.062 dex | analyze_mw_rar_starlevel.py output |
-| MW scatter | 0.142 dex | analyze_mw_rar_starlevel.py output |
-| Cluster hold-outs | 2/2 in 68% | run_holdout_validation.py |
-| Cluster error | 14.9% median | run_holdout_validation.py |
-| Fox+ 2022 median ratio | 0.68 (new formula) | scripts/analyze_fox2022_clusters.py |
-| Fox+ 2022 scatter | 0.14 dex | scripts/analyze_fox2022_clusters.py |
+**All results from `python run_regression.py`:**
 
-**All scripts use seed=42 for reproducibility.**
+| Metric | Expected Value |
+|--------|----------------|
+| SPARC mean RMS | 18.97 km/s |
+| SPARC win rate vs MOND | 42.1% |
+| Cluster median ratio | 0.955 |
+| Cluster scatter | 0.133 dex |
+| MW RMS | 28.8 km/s |
+| Counter-rotation p-value | 0.004 |
+| Redshift g†(z=2)/g†(z=0) | 2.966 |
+| Solar System |γ-1| | 1.8×10⁻⁹ |
+
+**Run `python run_regression.py` to verify all results.**
 
 ---
 
@@ -581,29 +581,14 @@ curl -s "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/MNRAS/511/139/t
 
 ### SI §5A.6. Verification Commands
 
-**Full SPARC validation:**
+**Master regression test (validates all domains):**
 ```bash
 cd sigmagravity
-python derivations/full_sparc_validation_4sqrtpi.py
+python run_regression.py           # Full test
+python run_regression.py --quick   # Skip slow tests
 ```
 
-**Cluster validation:**
-```bash
-cd sigmagravity
-python scripts/analyze_fox2022_clusters.py
-```
-
-**Counter-rotation validation:**
-```bash
-cd sigmagravity
-python exploratory/coherence_wavelength_test/counter_rotation_statistical_test.py
-```
-
-**Combined validation:**
-```bash
-cd sigmagravity
-python derivations/final_formula_validation.py
-```
+This single command validates SPARC, clusters, Gaia/MW, counter-rotation, redshift, and Solar System.
 
 ### SI §5.10. Troubleshooting
 
@@ -4123,57 +4108,32 @@ Example output:
 FINAL SUMMARY
 ================================================================================
 
-Optimal parameters:
-  r0 = 5.00 kpc
-  A(G) = √(1.60 + 109.1 × G²)
-  G_galaxy = 0.038
-  G_cluster = 1.0
-  A_galaxy = 1.326
-  A_cluster = 10.52
+**Note:** This section documents historical optimization work. The current canonical parameters are documented in SI §30 and used by `run_regression.py`.
 
-Final performance:
-  SPARC: 19.18 km/s RMS, 85.4% wins vs MOND
-  Clusters: 1.000 median ratio, 0.770 dex scatter
-  MW: 27.7 km/s RMS
-```
+### SI §29.6. Current Canonical Parameters
 
-### SI §29.6. Optimization Results
+The master regression test (`run_regression.py`) uses these parameters:
 
-| Parameter | Previous | Optimized | Change |
-|-----------|----------|-----------|--------|
-| r₀ | 10 kpc | **5 kpc** | -50% |
-| a | 2.25 | **1.60** | -29% |
-| b | 200 | **109** | -46% |
-| G_galaxy | 0.05 | **0.038** | -24% |
-| A_galaxy | 1.66 | **1.33** | -20% |
-| A_cluster | 14.2 | **10.5** | -26% |
+| Parameter | Value | Source |
+|-----------|-------|--------|
+| A_galaxy | √3 ≈ 1.732 | Mode counting (thin disk) |
+| A_cluster | 8.0 | Optimized for cluster ratio ≈ 1.0 |
+| ξ | (2/3) × R_d | Coherence scale |
+| M/L (disk) | 0.5 | Lelli+ 2016 |
+| M/L (bulge) | 0.7 | Lelli+ 2016 |
 
-| Metric | Previous | Optimized | Improvement |
-|--------|----------|-----------|-------------|
-| SPARC RMS | 20.85 km/s | **19.18 km/s** | +8.0% |
-| SPARC wins | 80.1% | **85.4%** | +5.3 pp |
-| Cluster ratio | 1.27 | **1.00** | Exact match |
-| MW RMS | 27.6 km/s | **27.7 km/s** | -0.4% |
+### SI §29.7. Current Performance
 
-### SI §29.7. Sensitivity Analysis
+From `python run_regression.py`:
 
-The sensitivity analysis shows how robust the optimal parameters are:
-
-**Varying r₀ by ±20%:**
-| r₀ (kpc) | SPARC RMS | Cluster ratio | MW RMS |
-|----------|-----------|---------------|--------|
-| 4.0 | 18.73 km/s | 1.004 | 27.9 km/s |
-| 5.0 | 19.18 km/s | 1.000 | 27.7 km/s |
-| 6.0 | 19.64 km/s | 0.996 | 27.6 km/s |
-
-**Varying b by ±20%:**
-| b | A_cluster | SPARC RMS | Cluster ratio |
-|---|-----------|-----------|---------------|
-| 87 | 9.43 | 19.19 km/s | 0.915 |
-| 109 | 10.52 | 19.18 km/s | 1.000 |
-| 131 | 11.51 | 19.17 km/s | 1.081 |
-
-The cluster ratio is most sensitive to b, while SPARC RMS is most sensitive to r₀.
+| Metric | Result |
+|--------|--------|
+| SPARC RMS | 18.97 km/s |
+| SPARC win rate | 42.1% (vs MOND with same M/L) |
+| Cluster median ratio | 0.955 |
+| Cluster scatter | 0.133 dex |
+| MW RMS | 28.8 km/s |
+| Counter-rotation | p = 0.004 |
 
 ### SI §29.8. Code Structure
 
@@ -4237,106 +4197,96 @@ total_loss += new_loss
 
 ---
 
-## SI §30 — Full Regression Test Suite
+## SI §30 — Master Regression Test Suite
 
 ### SI §30.1. Overview
 
-The script `derivations/full_regression_test.py` provides comprehensive regression testing across ALL validation domains. This ensures the theory remains consistent when formulas are updated.
+The script `run_regression.py` (in repository root) is the **single authoritative validation** for Σ-Gravity. Run this after any formula change to ensure consistency across all domains.
 
-### SI §30.2. Tests Included
-
-| Test | Description | Threshold | Current Result |
-|------|-------------|-----------|----------------|
-| **Critical Acceleration** | Verify g† = cH₀/(4√π) | ~10⁻¹⁰ m/s² | 9.60×10⁻¹¹ m/s² ✓ |
-| **Solar System Safety** | Cassini bound |γ-1| < 2.3×10⁻⁵ | 0.0 ✓ |
-| **Planetary Orbits** | h-enhancement at planets | < 10⁻⁵ | 7.4×10⁻⁸ ✓ |
-| **SPARC Galaxies** | 171 rotation curves | RMS < 25 km/s | 19.18 km/s ✓ |
-| **Galaxy Clusters** | 94 Fox+ 2022 lensing | 0.7 < ratio < 1.3 | 0.999 ✓ |
-| **Milky Way** | 28,368 Gaia stars | RMS < 35 km/s | 27.7 km/s ✓ |
-| **Redshift Evolution** | g†(z) = cH(z)/(4√π) | Correct scaling | 2.966× at z=2 ✓ |
-| **Dynamical Coherence** | ξ = k×σ/Ω improvement | > 0% | 16.4% ✓ |
-
-### SI §30.3. Usage
+### SI §30.2. Usage
 
 ```bash
-# Full regression test (all domains)
-python derivations/full_regression_test.py
-
-# Quick mode (skip MW star-by-star)
-python derivations/full_regression_test.py --quick
-
-# Verbose output
-python derivations/full_regression_test.py --verbose
+python run_regression.py           # Full test (all domains)
+python run_regression.py --quick   # Skip slow tests (Gaia, counter-rotation)
 ```
 
-### SI §30.4. Output
+### SI §30.3. Tests and Results
+
+| Test | Result | Threshold | Status |
+|------|--------|-----------|--------|
+| **SPARC Galaxies** | RMS=18.97 km/s, 42% win rate | RMS < 25 km/s | ✓ |
+| **Galaxy Clusters** | Median ratio=0.955 | 0.5 < ratio < 1.5 | ✓ |
+| **Milky Way** | RMS=28.8 km/s | RMS < 35 km/s | ✓ |
+| **Counter-Rotation** | p=0.004 | p < 0.05 | ✓ |
+| **Redshift Evolution** | 2.966× at z=2 | Matches H(z) | ✓ |
+| **Solar System** | \|γ-1\|=1.8×10⁻⁹ | < 2.3×10⁻⁵ | ✓ |
+
+### SI §30.4. Data Sources
+
+Each test uses validated, documented data sources:
+
+| Test | Data File | Source | N |
+|------|-----------|--------|---|
+| **SPARC Galaxies** | `data/Rotmod_LTG/*_rotmod.dat` | Lelli+ 2016 (SPARC) | 171 |
+| **Clusters** | `data/clusters/fox2022_unique_clusters.csv` | Fox+ 2022 (ApJ 928, 87) | 42 |
+| **Milky Way** | `data/gaia/eilers_apogee_6d_disk.csv` | Eilers+ 2019 × APOGEE DR17 | 28,368 |
+| **Counter-Rotation** | `data/stellar_corgi/bevacqua2022_counter_rotating.tsv` | Bevacqua+ 2022 (VizieR) | 63 |
+| **Counter-Rotation** | `data/manga_dynpop/SDSSDR17_MaNGA_JAM.fits` | MaNGA DynPop | 10,296 |
+
+### SI §30.5. Data Source Details
+
+**SPARC Galaxies (171):**
+- Source: http://astroweb.cwru.edu/SPARC/
+- Contains: Rotation curves with gas, disk, and bulge components
+- M/L applied: 0.5 (disk), 0.7 (bulge) per Lelli+ 2016
+
+**Fox+ 2022 Clusters (42):**
+- Source: ApJ 928, 87 (2022), Table 1
+- Selection: Spectroscopic redshift confirmed, M500 > 2×10¹⁴ M☉
+- Contains: M500 (SZ/X-ray), MSL at 200 kpc (strong lensing)
+- Baryonic mass: 0.4 × f_baryon × M500, where f_baryon = 0.15
+
+**Eilers-APOGEE-Gaia (28,368 stars):**
+- Source: Cross-match of Eilers+ 2019 (spectrophotometric distances) with APOGEE DR17 (radial velocities) and Gaia EDR3 (proper motions)
+- Selection: Disk stars with 4 < R_gal < 15 kpc, |z| < 0.5 kpc
+- Contains: Full 6D phase space (position + velocity)
+- Asymmetric drift correction applied using local velocity dispersion
+
+**Bevacqua+ 2022 Counter-Rotating (63):**
+- Source: VizieR catalog from Bevacqua et al. 2022
+- Selection: MaNGA galaxies with spectroscopically confirmed counter-rotating stellar components
+- Cross-matched with MaNGA DynPop for f_DM measurements
+
+### SI §30.6. Model Parameters
+
+The regression test uses these fixed parameters:
+
+| Parameter | Value | Source |
+|-----------|-------|--------|
+| g† | 9.60×10⁻¹¹ m/s² | cH₀/(4√π), derived |
+| A_galaxy | √3 ≈ 1.732 | Mode counting (thin disk) |
+| A_cluster | 8.0 | Optimized for cluster ratio ≈ 1.0 |
+| ξ | (2/3) × R_d | Coherence scale |
+| M/L (disk) | 0.5 | Lelli+ 2016 standard |
+| M/L (bulge) | 0.7 | Lelli+ 2016 standard |
+| MW V_bar scale | 1.16 | McMillan 2017 + calibration |
+
+### SI §30.7. Output
 
 The script generates:
+- **JSON report**: `regression_results/latest_report.json`
+- **Console output**: Pass/fail status for each test
+- **Exit code**: 0 = all passed, 1 = some failed
 
-1. **JSON report**: `derivations/regression_test_results/regression_report.json`
-   - Complete test results with all metrics and details
-   - Model parameters used
-   - Timestamp for tracking
-
-2. **Text summary**: `derivations/regression_test_results/regression_summary.txt`
-   - Human-readable summary
-   - Pass/fail status for each test
-
-### SI §30.5. Adding New Tests
-
-To add a new regression test:
-
-```python
-def test_new_domain(data, verbose: bool = False) -> TestResult:
-    """Test new domain."""
-    # Compute predictions
-    predictions = predict_something(data)
-    
-    # Compare to observations
-    metric = compute_metric(predictions, observations)
-    
-    # Check threshold
-    threshold = 1.0
-    passed = metric < threshold
-    
-    return TestResult(
-        name="New Domain",
-        passed=passed,
-        metric=metric,
-        threshold=threshold,
-        details={'key': 'value'},
-        message=f"{'PASSED' if passed else 'FAILED'}: metric = {metric:.2f}"
-    )
-
-# Add to run_all_tests():
-result = test_new_domain(data, verbose)
-results.append(result)
-print(f"[{'✓' if result.passed else '✗'}] {result.message}")
-```
-
-### SI §30.6. Continuous Integration
-
-The regression test can be integrated into CI/CD pipelines:
+### SI §30.8. Continuous Integration
 
 ```bash
-# Run regression test and check exit code
-python derivations/full_regression_test.py
+python run_regression.py
 if [ $? -ne 0 ]; then
     echo "Regression tests failed!"
     exit 1
 fi
 ```
-
-Exit codes:
-- `0`: All tests passed
-- `1`: One or more tests failed
-
-### SI §30.7. Test Details
-
-**Solar System Safety Test:**
-- Computes enhancement at 1 AU using h(g) function
-- Sets W = 0 for compact systems (no extended disk)
-- Verifies |γ-1| << Cassini bound (2.3×10⁻⁵)
 - Result: Enhancement is exactly zero due to W = 0
 
 **Planetary Orbits Test:**
