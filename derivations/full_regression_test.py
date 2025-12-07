@@ -51,19 +51,151 @@ M_sun = 1.989e30
 # Critical acceleration (derived from cosmology)
 g_dagger = cH0 / (4 * math.sqrt(math.pi))
 
-# Model parameters (optimized for both galaxies AND clusters)
-# Found by derivations/find_unified_solution.py
-# These parameters achieve:
-#   - Galaxy RMS: 17.32 km/s (vs MOND 17.18 km/s)
-#   - Galaxy win rate: 52.6% vs MOND
-#   - Cluster median ratio: 1.000
+# =============================================================================
+# MODEL CONFIGURATIONS TO TEST
+# =============================================================================
+# Each configuration is a dict with all parameters needed for testing.
+# This allows easy comparison of different formula versions.
 
-A_GALAXY = 1.930
-A_CLUSTER = 8.001
-XI_SCALE = 0.200  # ξ = 0.2 × R_d
-ALPHA_H = 0.343   # h(g) = (g†/g)^α × (g†/(g†+g))
+MOND_A0 = 1.2e-10  # MOND acceleration scale
 
-# Legacy parameters (for comparison)
+MODEL_CONFIGS = {
+    # The original formula that achieved 70% win rate (M/L = 1.0)
+    "original_ml1": {
+        "name": "Original (M/L=1.0, A=√3, ξ=2/3 R_d)",
+        "A_galaxy": np.sqrt(3),  # ≈ 1.732
+        "A_cluster": np.pi * np.sqrt(2),  # ≈ 4.44
+        "xi_scale": 2/3,
+        "alpha_h": 0.5,  # Standard h(g) = √(g†/g) × g†/(g†+g)
+        "ml_disk": 1.0,
+        "ml_bulge": 1.0,
+    },
+    
+    # Same formula but with M/L = 0.5/0.7 (Lelli+ 2016)
+    "original_ml05": {
+        "name": "Original + M/L=0.5/0.7",
+        "A_galaxy": np.sqrt(3),
+        "A_cluster": np.pi * np.sqrt(2),
+        "xi_scale": 2/3,
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+    },
+    
+    # The "optimized" formula from find_unified_solution.py
+    "optimized": {
+        "name": "Optimized (A=1.93, ξ=0.2, α=0.343)",
+        "A_galaxy": 1.930,
+        "A_cluster": 8.001,
+        "xi_scale": 0.200,
+        "alpha_h": 0.343,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+    },
+    
+    # Test: Smaller ξ with standard h(g)
+    "small_xi": {
+        "name": "A=√3, ξ=0.3, h_std, M/L=0.5",
+        "A_galaxy": np.sqrt(3),
+        "A_cluster": np.pi * np.sqrt(2),
+        "xi_scale": 0.3,
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+    },
+    
+    # Test: Larger amplitude A=2.0
+    "a2_ml05": {
+        "name": "A=2.0, ξ=2/3, h_std, M/L=0.5",
+        "A_galaxy": 2.0,
+        "A_cluster": 2.0 * (np.pi * np.sqrt(2) / np.sqrt(3)),
+        "xi_scale": 2/3,
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+    },
+    
+    # Test: Larger amplitude A=2.5
+    "a25_ml05": {
+        "name": "A=2.5, ξ=2/3, h_std, M/L=0.5",
+        "A_galaxy": 2.5,
+        "A_cluster": 2.5 * (np.pi * np.sqrt(2) / np.sqrt(3)),
+        "xi_scale": 2/3,
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+    },
+    
+    # Test: Even larger amplitude A=3.0
+    "a3_ml05": {
+        "name": "A=3.0, ξ=2/3, h_std, M/L=0.5",
+        "A_galaxy": 3.0,
+        "A_cluster": 3.0 * (np.pi * np.sqrt(2) / np.sqrt(3)),
+        "xi_scale": 2/3,
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+    },
+    
+    # Test: M/L = 0.7/0.8 (slightly higher than Lelli)
+    "ml07": {
+        "name": "A=√3, ξ=2/3, M/L=0.7/0.8",
+        "A_galaxy": np.sqrt(3),
+        "A_cluster": np.pi * np.sqrt(2),
+        "xi_scale": 2/3,
+        "alpha_h": 0.5,
+        "ml_disk": 0.7,
+        "ml_bulge": 0.8,
+    },
+    
+    # Test: M/L = 0.8/0.9 (even higher)
+    "ml08": {
+        "name": "A=√3, ξ=2/3, M/L=0.8/0.9",
+        "A_galaxy": np.sqrt(3),
+        "A_cluster": np.pi * np.sqrt(2),
+        "xi_scale": 2/3,
+        "alpha_h": 0.5,
+        "ml_disk": 0.8,
+        "ml_bulge": 0.9,
+    },
+    
+    # Test: Combined - larger A + smaller ξ
+    "a2_small_xi": {
+        "name": "A=2.0, ξ=0.3, h_std, M/L=0.5",
+        "A_galaxy": 2.0,
+        "A_cluster": 2.0 * (np.pi * np.sqrt(2) / np.sqrt(3)),
+        "xi_scale": 0.3,
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+    },
+    
+    # Test: What if we use the old g† = cH₀/(2e)?
+    "old_gdagger": {
+        "name": "A=√3, ξ=2/3, old g†=cH₀/2e, M/L=0.5",
+        "A_galaxy": np.sqrt(3),
+        "A_cluster": np.pi * np.sqrt(2),
+        "xi_scale": 2/3,
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+        "use_old_gdagger": True,  # Special flag
+    },
+}
+
+# Current active configuration
+ACTIVE_CONFIG = "original_ml1"  # Change this to test different configs
+
+# Get active parameters
+_cfg = MODEL_CONFIGS[ACTIVE_CONFIG]
+A_GALAXY = _cfg["A_galaxy"]
+A_CLUSTER = _cfg["A_cluster"]
+XI_SCALE = _cfg["xi_scale"]
+ALPHA_H = _cfg["alpha_h"]
+ML_DISK = _cfg["ml_disk"]
+ML_BULGE = _cfg["ml_bulge"]
+
+# Legacy parameters (for reference)
 R0_KPC = 5.0
 A_COEFF = 1.60
 B_COEFF = 109.0
@@ -206,9 +338,9 @@ def load_sparc_data(data_dir: Path) -> List[Dict]:
         
         df = pd.DataFrame(data)
         
-        # Apply M/L corrections
-        df['V_disk_scaled'] = df['V_disk'] * np.sqrt(0.5)
-        df['V_bulge_scaled'] = df['V_bulge'] * np.sqrt(0.7)
+        # Apply M/L corrections (use global ML_DISK and ML_BULGE from active config)
+        df['V_disk_scaled'] = df['V_disk'] * np.sqrt(ML_DISK)
+        df['V_bulge_scaled'] = df['V_bulge'] * np.sqrt(ML_BULGE)
         V_bar_sq = (np.sign(df['V_gas']) * df['V_gas']**2 + 
                     df['V_disk_scaled']**2 + df['V_bulge_scaled']**2)
         df['V_bar'] = np.sqrt(np.abs(V_bar_sq)) * np.sign(V_bar_sq)
@@ -874,6 +1006,212 @@ def test_critical_acceleration(verbose: bool = False) -> TestResult:
 
 
 # =============================================================================
+# COMPARE ALL CONFIGURATIONS
+# =============================================================================
+
+def compare_all_configs(data_dir: Path) -> None:
+    """Compare all model configurations on SPARC galaxies and clusters.
+    
+    This is the key diagnostic function to understand which formula changes
+    affect performance.
+    """
+    print("=" * 80)
+    print("COMPARING ALL MODEL CONFIGURATIONS")
+    print("=" * 80)
+    print()
+    
+    # We need to load data fresh for each config since M/L affects V_bar
+    sparc_dir = data_dir / "Rotmod_LTG"
+    if not sparc_dir.exists():
+        print("ERROR: SPARC data not found!")
+        return
+    
+    # Load cluster data once (doesn't depend on M/L)
+    clusters = load_cluster_data(data_dir)
+    
+    results = []
+    
+    for config_name, cfg in MODEL_CONFIGS.items():
+        # Load galaxies with this config's M/L
+        ml_disk = cfg["ml_disk"]
+        ml_bulge = cfg["ml_bulge"]
+        A_gal = cfg["A_galaxy"]
+        A_cl = cfg["A_cluster"]
+        xi_scale = cfg["xi_scale"]
+        alpha_h = cfg["alpha_h"]
+        
+        # Check for old g† flag
+        if cfg.get("use_old_gdagger", False):
+            g_dag = c * H0_SI / (2 * np.e)  # Old formula
+        else:
+            g_dag = g_dagger  # Standard: cH₀/(4√π)
+        
+        # Load galaxies
+        galaxies = []
+        for gf in sorted(sparc_dir.glob("*_rotmod.dat")):
+            data = []
+            with open(gf) as f:
+                for line in f:
+                    if line.startswith('#') or not line.strip():
+                        continue
+                    parts = line.split()
+                    if len(parts) >= 6:
+                        try:
+                            data.append({
+                                'R': float(parts[0]),
+                                'V_obs': float(parts[1]),
+                                'V_gas': float(parts[3]),
+                                'V_disk': float(parts[4]),
+                                'V_bulge': float(parts[5]) if len(parts) > 5 else 0.0
+                            })
+                        except ValueError:
+                            continue
+            
+            if len(data) < 5:
+                continue
+            
+            df = pd.DataFrame(data)
+            
+            # Apply M/L corrections
+            df['V_disk_scaled'] = df['V_disk'] * np.sqrt(ml_disk)
+            df['V_bulge_scaled'] = df['V_bulge'] * np.sqrt(ml_bulge)
+            V_bar_sq = (np.sign(df['V_gas']) * df['V_gas']**2 + 
+                        df['V_disk_scaled']**2 + df['V_bulge_scaled']**2)
+            df['V_bar'] = np.sqrt(np.abs(V_bar_sq)) * np.sign(V_bar_sq)
+            
+            valid = (df['V_bar'] > 0) & (df['R'] > 0) & (df['V_obs'] > 0)
+            df = df[valid]
+            
+            if len(df) >= 5:
+                # Estimate R_d
+                idx = len(df) // 3
+                R_d = df['R'].iloc[idx] if idx > 0 else df['R'].iloc[-1] / 2
+                
+                galaxies.append({
+                    'name': gf.stem.replace('_rotmod', ''),
+                    'R': df['R'].values,
+                    'V_obs': df['V_obs'].values,
+                    'V_bar': df['V_bar'].values,
+                    'R_d': R_d
+                })
+        
+        # Evaluate on galaxies
+        rms_list = []
+        mond_rms_list = []
+        wins = 0
+        
+        for gal in galaxies:
+            R = gal['R']
+            V_obs = gal['V_obs']
+            V_bar = gal['V_bar']
+            R_d = gal['R_d']
+            
+            # Σ-Gravity prediction with this config's parameters
+            R_m = R * kpc_to_m
+            V_bar_ms = V_bar * 1000
+            g_bar = V_bar_ms**2 / R_m
+            
+            # h(g) with config's alpha and g†
+            g_bar_safe = np.maximum(g_bar, 1e-15)
+            h = np.power(g_dag / g_bar_safe, alpha_h) * g_dag / (g_dag + g_bar_safe)
+            
+            # W(r) with config's xi_scale
+            xi = xi_scale * R_d
+            W = 1 - np.power(xi / (xi + R), 0.5)
+            
+            Sigma = 1 + A_gal * W * h
+            V_pred = V_bar * np.sqrt(Sigma)
+            
+            rms = np.sqrt(((V_obs - V_pred)**2).mean())
+            rms_list.append(rms)
+            
+            # MOND prediction
+            a0 = 1.2e-10
+            x = g_bar / a0
+            nu = 1.0 / (1.0 - np.exp(-np.sqrt(np.maximum(x, 1e-10))))
+            V_mond = V_bar * np.sqrt(nu)
+            rms_mond = np.sqrt(((V_obs - V_mond)**2).mean())
+            mond_rms_list.append(rms_mond)
+            
+            if rms < rms_mond:
+                wins += 1
+        
+        mean_rms = np.mean(rms_list)
+        mean_mond = np.mean(mond_rms_list)
+        win_rate = wins / len(galaxies) * 100
+        
+        # Evaluate on clusters
+        if len(clusters) > 0:
+            ratios = []
+            for cl in clusters:
+                M_bar = cl['M_bar']
+                M_lens = cl['M_lens']
+                r_kpc = cl['r_kpc']
+                
+                r_m = r_kpc * kpc_to_m
+                g_bar = G_const * M_bar * M_sun / r_m**2
+                
+                g_bar_safe = max(g_bar, 1e-15)
+                h = np.power(g_dag / g_bar_safe, alpha_h) * g_dag / (g_dag + g_bar_safe)
+                W = 1.0  # W ≈ 1 for clusters
+                
+                Sigma = 1 + A_cl * W * h
+                M_pred = M_bar * Sigma
+                ratio = M_pred / M_lens
+                if np.isfinite(ratio) and ratio > 0:
+                    ratios.append(ratio)
+            
+            cluster_ratio = np.median(ratios) if ratios else 0.0
+        else:
+            cluster_ratio = 0.0
+        
+        results.append({
+            'config': config_name,
+            'name': cfg['name'],
+            'n_galaxies': len(galaxies),
+            'mean_rms': mean_rms,
+            'mean_mond': mean_mond,
+            'win_rate': win_rate,
+            'cluster_ratio': cluster_ratio,
+            'ml_disk': ml_disk,
+            'ml_bulge': ml_bulge,
+            'A_galaxy': A_gal,
+            'xi_scale': xi_scale,
+            'alpha_h': alpha_h,
+        })
+    
+    # Print results table
+    print(f"{'Configuration':<45} | {'RMS':>7} | {'MOND':>7} | {'Win%':>6} | {'Cluster':>8}")
+    print("-" * 85)
+    
+    for r in results:
+        print(f"{r['name']:<45} | {r['mean_rms']:>7.2f} | {r['mean_mond']:>7.2f} | {r['win_rate']:>5.1f}% | {r['cluster_ratio']:>8.3f}")
+    
+    print("-" * 85)
+    print()
+    
+    # Find best config
+    best_win = max(results, key=lambda x: x['win_rate'])
+    best_rms = min(results, key=lambda x: x['mean_rms'])
+    best_cluster = min(results, key=lambda x: abs(x['cluster_ratio'] - 1.0))
+    
+    print("BEST CONFIGURATIONS:")
+    print(f"  Highest win rate: {best_win['name']} ({best_win['win_rate']:.1f}%)")
+    print(f"  Lowest RMS:       {best_rms['name']} ({best_rms['mean_rms']:.2f} km/s)")
+    print(f"  Best cluster:     {best_cluster['name']} (ratio {best_cluster['cluster_ratio']:.3f})")
+    print()
+    
+    # Save results
+    output_dir = Path(__file__).parent / "regression_test_results"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    with open(output_dir / "config_comparison.json", 'w') as f:
+        json.dump(results, f, indent=2, default=float)
+    
+    print(f"Results saved to: {output_dir / 'config_comparison.json'}")
+
+
+# =============================================================================
 # MAIN REGRESSION RUNNER
 # =============================================================================
 
@@ -1023,9 +1361,20 @@ def save_report(report: RegressionReport, output_dir: Path) -> None:
 def main():
     verbose = '--verbose' in sys.argv
     quick = '--quick' in sys.argv
+    compare = '--compare' in sys.argv
     
     data_dir = Path(__file__).parent.parent / "data"
     output_dir = Path(__file__).parent / "regression_test_results"
+    
+    if compare:
+        # Just compare all configurations
+        compare_all_configs(data_dir)
+        sys.exit(0)
+    
+    # Print active configuration
+    print(f"Active configuration: {ACTIVE_CONFIG}")
+    print(f"  {MODEL_CONFIGS[ACTIVE_CONFIG]['name']}")
+    print()
     
     report = run_all_tests(data_dir, verbose, quick)
     save_report(report, output_dir)
