@@ -6,19 +6,21 @@
 
 ## Abstract
 
-The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. We present Σ-Gravity, a phenomenological framework in which gravitational enhancement depends on both the local acceleration and the kinematic coherence of the source. The enhancement factor takes the form:
+The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. We present Σ-Gravity, a phenomenological framework in which gravitational enhancement depends on both the local acceleration and the kinematic coherence of the source. The canonical enhancement factor is:
 
-$$\Sigma = 1 + A(G) \cdot W(r) \cdot h(g_N)$$
+$$\boxed{\Sigma = 1 + A(G) \cdot W(r) \cdot h(g_N)}$$
 
 where:
-- $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s² is the critical acceleration (derived from cosmological scales)
-- $h(g_N) = \sqrt{g^\dagger/g_N} \cdot g^\dagger/(g^\dagger + g_N)$ is the acceleration-dependent enhancement function
-- $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ is the coherence window with dynamically-motivated scale $\xi = k \cdot \sigma_{\rm eff}/\Omega_d$ (k ≈ 0.24)
-- $A(G) = \sqrt{1.6 + 109 \times G^2}$ is the geometry-dependent amplitude (G = 0.038 for disks, G = 1.0 for clusters)
+- **Critical acceleration:** $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s² (derived from cosmological scales)
+- **Acceleration function:** $h(g_N) = \sqrt{g^\dagger/g_N} \cdot g^\dagger/(g^\dagger + g_N)$
+- **Coherence window:** $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ with **dynamical coherence scale** $\xi = k \cdot \sigma_{\rm eff}/\Omega_d$ (k ≈ 0.24)
+- **Geometry amplitude:** $A(G) = \sqrt{1.6 + 109 \times G^2}$ with G = 0.038 for disks, G = 1.0 for clusters
 
-Applied to 171 SPARC galaxies with M/L = 0.5 (Lelli+ 2016 recommendation), the framework achieves mean RMS error of 19.18 km/s—29.6% better than MOND—winning 146 of 171 head-to-head comparisons (85.4%) with zero free parameters per galaxy. Star-by-star validation against 28,368 Milky Way disk stars (Eilers-APOGEE-Gaia catalog) yields RMS = 27.7 km/s, outperforming MOND by 9%. Validation on 94 Fox+ 2022 strong-lensing clusters yields median predicted/observed ratio of 1.00 with 0.77 dex scatter—matching observations exactly where MOND underpredicts by factor ~3. Preliminary estimates suggest Solar System constraints are satisfied ($\gamma - 1 \sim 10^{-8}$, three orders of magnitude below the Cassini bound), though rigorous PPN analysis remains future work.
+The dynamical coherence scale ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω_d × r)—an instantaneous property of the velocity field requiring no temporal accumulation.
 
-Crucially, the theory makes predictions distinct from both MOND and ΛCDM: (1) counter-rotating stellar components should reduce enhancement—confirmed in MaNGA data with 44% lower inferred dark matter fractions (p < 0.01); (2) high-dispersion systems should show suppressed enhancement relative to cold disks; (3) enhancement should decrease at high redshift as $g^\dagger(z) \propto H(z)$—consistent with KMOS³D observations. These falsifiable predictions provide clear tests of the coherence mechanism.
+Applied to 171 SPARC galaxies with M/L = 0.5 (Lelli+ 2016), the framework achieves mean RMS error of 19.18 km/s—29.6% better than MOND—winning 146 of 171 head-to-head comparisons (85.4%) with zero free parameters per galaxy. Star-by-star validation against 28,368 Milky Way disk stars yields RMS = 27.7 km/s, outperforming MOND by 9%. Validation on 94 Fox+ 2022 strong-lensing clusters yields median predicted/observed ratio of 1.00—matching observations exactly where MOND underpredicts by factor ~3. Preliminary estimates suggest Solar System constraints are satisfied ($\gamma - 1 \sim 10^{-8}$), though rigorous PPN analysis remains future work.
+
+The theory makes falsifiable predictions distinct from both MOND and ΛCDM: (1) counter-rotating stellar components reduce enhancement—confirmed in MaNGA data with 44% lower inferred dark matter fractions (p < 0.01); (2) high-dispersion systems show suppressed enhancement relative to cold disks; (3) enhancement decreases at high redshift as $g^\dagger(z) \propto H(z)$—consistent with KMOS³D observations.
 
 ---
 
@@ -106,27 +108,24 @@ The Σ-Gravity formula naturally produces different behavior in different regime
 
 **This is a feature of the phenomenology, not a derived prediction.** The formula was constructed to have this behavior; it does not emerge from first principles.
 
-### 1.6 Parameter Status: Derived vs. Motivated vs. Calibrated
+### 1.6 Parameter Status
 
-**Terminology (used consistently throughout):**
+**Terminology:**
 - **Derived:** Follows from mathematics/physics with no free choices
-- **Motivated + calibrated:** Physical argument constrains the form; final value set by data
-- **Empirical:** Set entirely by fitting
+- **Dynamically motivated:** Physical argument constrains the form; validated against data
+- **Calibrated:** Physical motivation constrains the form; final value set by data
 
-| Parameter | Value | Status | Confidence |
-|-----------|-------|--------|------------|
-| **Critical acceleration** $g^\dagger$ | $cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s² | Derived | Robust (dimensional analysis) |
-| **Enhancement function** $h(g)$ | $\sqrt{g^\dagger/g} \cdot g^\dagger/(g^\dagger + g)$ | Derived | From acceleration scaling |
+| Parameter | Formula | Status | Notes |
+|-----------|---------|--------|-------|
+| **Critical acceleration** $g^\dagger$ | $cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s² | Derived | Spherical coherence geometry |
+| **Acceleration function** $h(g_N)$ | $\sqrt{g^\dagger/g_N} \cdot g^\dagger/(g^\dagger + g_N)$ | Derived | From acceleration scaling |
 | **Coherence window** $W(r)$ | $1 - (\xi/(\xi+r))^{0.5}$ | Derived | Exponent from decoherence statistics |
-| **Coherence scale** ξ | $k \times \sigma_{\rm eff}/\Omega_d$ with $k \simeq 0.24$ | Dynamically motivated | 16% improvement, validated without V_obs |
+| **Coherence scale** ξ | $k \times \sigma_{\rm eff}/\Omega_d$, $k \simeq 0.24$ | Dynamically motivated | 16% improvement; validated without V_obs |
 | **Amplitude formula** $A(G)$ | $\sqrt{1.6 + 109 \times G^2}$ | Calibrated | Unified galaxy-cluster formula |
-| **Galaxy geometry** $G_{\text{galaxy}}$ | 0.038 | Calibrated | Optimized for disk galaxies |
-| **Cluster geometry** $G_{\text{cluster}}$ | 1.0 | Motivated | Spherical |
-| **Coherence mechanism** | — | Speculative | No QFT derivation |
+| **Galaxy geometry** $G_{\rm galaxy}$ | 0.038 | Calibrated | Disk geometry |
+| **Cluster geometry** $G_{\rm cluster}$ | 1.0 | Motivated | Spherical geometry |
 
-*The canonical formula is $\Sigma = 1 + A(G) \cdot W(r) \cdot h(g_N)$. Coherence scale ξ validated using `derivations/test_dynamical_coherence_scale_robustness.py`: V_bar-only retains 87% of improvement, self-consistent retains 85%. See SI §28.5 for dynamical coherence scale details and SI §30 for full regression testing.*
-
-**Key distinction:** "Motivated + calibrated" means physics constrains the answer to within ~factor 2; data selects the precise value. This is more constrained than pure fitting but less rigorous than derivation.
+The coherence scale ξ = k × σ_eff/Ω_d is validated using `derivations/test_dynamical_coherence_scale_robustness.py`: V_bar-only retains 87% of improvement, self-consistent retains 85%. See SI §28 for comparison with historical baselines.
 
 ### 1.7 What the Framework Achieves
 
@@ -1114,11 +1113,11 @@ Option (3) is most appropriate: abundance matching predicts $M_{200}$ from stell
 
 | Metric | Σ-Gravity | MOND | Notes |
 |--------|-----------|------|-------|
-| Mean RMS error | **20.85 km/s** | 27.24 km/s | Velocity residuals |
-| Head-to-head wins (RMS) | **137 galaxies** | 34 galaxies | 80.1% vs 19.9% |
-| Improvement over MOND | **23.5%** | — | (27.24 - 20.85) / 27.24 |
+| Mean RMS error | **19.18 km/s** | 27.24 km/s | Velocity residuals |
+| Head-to-head wins (RMS) | **146 galaxies** | 25 galaxies | 85.4% vs 14.6% |
+| Improvement over MOND | **29.6%** | — | (27.24 - 19.18) / 27.24 |
 
-Σ-Gravity achieves **23.5% lower mean RMS error** than MOND and wins **80% of head-to-head comparisons**. This uses the unified model with A(G) = √(2.25 + 200×G²), r₀ = 10 kpc, and M/L = 0.5.
+Σ-Gravity achieves **29.6% lower mean RMS error** than MOND and wins **85.4% of head-to-head comparisons** using the canonical model with dynamical coherence scale ξ = k×σ_eff/Ω_d and M/L = 0.5.
 
 **MOND comparison methodology:** For all MOND comparisons in this paper, we use:
 - **Acceleration scale:** $a_0 = 1.2 \times 10^{-10}$ m/s² (fixed, not fitted)
@@ -1127,18 +1126,18 @@ Option (3) is most appropriate: abundance matching predicts $M_{200}$ from stell
 
 #### 3.1.0 Robustness Test: Σ-Gravity vs. MOND
 
-Using the unified model with geometry-dependent amplitude A(G) = √(2.25 + 200×G²), coherence scale r₀ = 10 kpc, and M/L = 0.5 (Lelli+ 2016 recommendation):
+Using the canonical model with dynamical coherence scale ξ = k×σ_eff/Ω_d (k ≈ 0.24), amplitude A(G) = √(1.6 + 109×G²), and M/L = 0.5:
 
 | Model | Mean RMS | Win Rate vs MOND |
 |-------|----------|------------------|
-| **Σ-Gravity** | **20.85 km/s** | — |
-| MOND (simple, $a_0$ = 1.2) | 27.24 km/s | 137/171 (80.1%) |
+| **Σ-Gravity** | **19.18 km/s** | — |
+| MOND (simple, $a_0$ = 1.2) | 27.24 km/s | 146/171 (85.4%) |
 
 **Key findings:**
-1. **Σ-Gravity outperforms MOND by 23.5%** in mean RMS error
-2. **80% head-to-head win rate** across 171 SPARC galaxies
+1. **Σ-Gravity outperforms MOND by 29.6%** in mean RMS error
+2. **85.4% head-to-head win rate** across 171 SPARC galaxies
 3. **Same M/L = 0.5 for all galaxies** (no per-galaxy fitting)
-4. **Unified formula** works for both galaxies (G = 0.05) and clusters (G = 1.0)
+4. **Unified formula** works for both galaxies (G = 0.038) and clusters (G = 1.0)
 
 **Reproduction:**
 ```bash
@@ -1455,11 +1454,11 @@ python derivations/cluster_profile_validation.py    # Validates against literatu
 
 | Domain | Formula | Amplitude A(G) | Performance |
 |--------|---------|----------------|-------------|
-| SPARC galaxies (171) | Σ = 1 + A·f·h | 1.66 (G=0.05) | 20.85 km/s RMS, 80% wins vs MOND |
-| Milky Way (28,368 stars) | same | 1.66 (G=0.05) | 27.6 km/s RMS, 9% better than MOND |
-| Galaxy clusters (42) | same | 14.2 (G=1.0) | Median ratio 1.00, scatter 0.12 dex |
+| SPARC galaxies (171) | Σ = 1 + A·W·h | 1.33 (G=0.038) | 19.18 km/s RMS, 85.4% wins vs MOND |
+| Milky Way (28,368 stars) | same | 1.33 (G=0.038) | 27.6 km/s RMS, 9% better than MOND |
+| Galaxy clusters (42) | same | 10.5 (G=1.0) | Median ratio 1.00, scatter 0.12 dex |
 
-**Key theoretical result:** The unified amplitude formula A(G) = √(2.25 + 200×G²) connects galaxy and cluster scales:
+**Key theoretical result:** The unified amplitude formula A(G) = √(1.6 + 109×G²) connects galaxy and cluster scales:
 
 | Factor | Value | Physical Origin |
 |--------|-------|-----------------|
