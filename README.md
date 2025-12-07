@@ -129,19 +129,18 @@ The Σ-Gravity formula naturally produces different behavior in different regime
 
 **M/L dependence:** Galaxy performance depends on assumed mass-to-light ratio. With M/L = 0.5/0.7 (Lelli+ 2016), we achieve 42% win rate vs MOND. With higher M/L (0.7-1.0), win rate increases to 60-78% because MOND is more sensitive to M/L assumptions.
 
-Run `python derivations/full_regression_test.py --compare` to compare all parameter configurations.
+Run `python run_regression.py` to verify all results (SPARC, clusters, Gaia, redshift, Solar System).
 
 ### 1.7 What the Framework Achieves
 
-Despite incomplete theoretical foundations, Σ-Gravity:
+With fair M/L assumptions (0.5/0.7), Σ-Gravity:
 
-1. **Fits 171 galaxy rotation curves** with 0 free parameters per galaxy (vs. 2-3 for ΛCDM)
-2. **Outperforms MOND by 29.6%** on SPARC galaxies (85.4% head-to-head wins)
-3. **Connects galaxy and cluster scales** with a unified amplitude formula A(G) = √(1.6 + 109×G²)
-4. **Matches cluster lensing exactly** (median M_pred/M_lens = 1.00, where MOND gets ~0.33)
-5. **Validates on 28,368 Milky Way stars** with 9% improvement over MOND
-6. **Satisfies Solar System constraints** through built-in suppression (estimate: $\gamma - 1 \sim 10^{-8}$)
-7. **Makes unique testable predictions** (counter-rotation, dispersion, redshift evolution)
+1. **Fits 171 galaxy rotation curves** with 0 free parameters per galaxy (RMS ≈ 19 km/s)
+2. **Matches MOND on galaxies** (42% win rate with same M/L assumptions)
+3. **Matches cluster lensing** (median M_pred/M_lens = 0.95, where MOND gets ~0.33)
+4. **Validates on 28,368 Milky Way stars** (RMS ≈ 28 km/s)
+5. **Satisfies Solar System constraints** (|γ-1| < 10⁻⁸)
+6. **Makes unique testable predictions** (counter-rotation: p < 0.01, redshift evolution)
 
 **Scientific value:** Even without complete theoretical derivation, Σ-Gravity provides a **predictive phenomenological framework** with falsifiable predictions distinct from both MOND and ΛCDM.
 
@@ -1792,34 +1791,28 @@ pip install numpy scipy pandas matplotlib astropy
 | MaNGA DynPop | https://manga-dynpop.github.io/ | `data/manga_dynpop/` |
 | Counter-rotating | Bevacqua et al. 2022 (VizieR) | `data/stellar_corgi/` |
 
-### 6.3 Key Reproduction Commands
+### 6.3 Master Regression Test
+
+**Run this after any formula change:**
 
 ```bash
-# SPARC RAR analysis
-python scripts/analyze_sparc_rar.py
-# Output: Results on 171 galaxies
+python run_regression.py           # Full test (all domains)
+python run_regression.py --quick   # Skip slow tests (Gaia)
+```
 
-# Σ-Gravity vs ΛCDM comparison
-python scripts/sigma_vs_lcdm_comparison.py --n_galaxies 174 --bootstrap 1000
-# Output: 97 vs 74 win comparison
+This single script validates:
+- **SPARC galaxies** (171): RMS ≈ 19 km/s, ~42% win rate vs MOND (fair comparison)
+- **Clusters** (42): Median ratio ≈ 0.95, scatter 0.13 dex
+- **Gaia/MW** (28,368 stars): RMS ≈ 28 km/s
+- **Redshift evolution**: g†(z) ∝ H(z) confirmed
+- **Solar System**: Cassini-safe (|γ-1| < 10⁻⁵)
 
-# SPARC holdout validation
-python derivations/connections/validate_holdout.py
+### 6.4 Additional Reproduction Commands
 
-# Milky Way zero-shot analysis
-python scripts/analyze_mw_rar_starlevel.py
-# Output: RMS = 5.7 km/s vs McGaugh/GRAVITY
-
-# Generate paper figures  
-python scripts/generate_paper_figures.py
-
+```bash
 # Counter-rotating galaxy test (unique Σ-Gravity prediction)
 python exploratory/coherence_wavelength_test/counter_rotation_statistical_test.py
 # Output: f_DM(CR) = 0.169 vs f_DM(Normal) = 0.302, p < 0.01
-
-# Solar System safety check
-python scripts/check_solar_system_safety.py
-# Output: Enhancement < 10⁻¹⁴ at planetary scales
 
 # Relativistic lensing validation (SI §25)
 python derivations/test_relativistic_lensing.py
