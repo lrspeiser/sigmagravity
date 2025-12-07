@@ -1543,7 +1543,7 @@ MOND uses the same $a_0$ for both → ratio should be 1.0.
 
 **5. LSB vs HSB Galaxy Differences**
 
-Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravity predicts 74% MORE enhancement than MOND (see §2.12 table). This should produce systematically different Σ/ν ratios.
+Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravity predicts 74% MORE enhancement than MOND (see §2.13 table). This should produce systematically different Σ/ν ratios.
 
 **6. Rotation Curve Shape**
 
