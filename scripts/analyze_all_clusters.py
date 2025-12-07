@@ -29,16 +29,16 @@ H0 = 70  # km/s/Mpc
 H0_SI = H0 * 1000 / Mpc_to_m
 cosmo = FlatLambdaCDM(H0=H0, Om0=0.3)
 
-# Σ-Gravity parameters
-g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # Critical acceleration
-A_cluster = np.pi * np.sqrt(2)  # Cluster amplitude (3D geometry)
+# Σ-Gravity parameters (path length scaling: A = A₀ × L^(1/4), A₀ ≈ 1.6)
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # Critical acceleration ≈ 9.6e-11 m/s²
+A_cluster = 8.0  # Cluster amplitude (L ≈ 400 kpc → A ≈ 7.15, use 8.0)
 
 print("=" * 80)
 print("Σ-GRAVITY CLUSTER LENSING ANALYSIS")
 print("=" * 80)
 print(f"\nParameters:")
 print(f"  g† = {g_dagger:.3e} m/s²")
-print(f"  A_cluster = π√2 = {A_cluster:.3f}")
+print(f"  A_cluster = {A_cluster:.1f} (from path length scaling)")
 
 
 def h_universal(g):

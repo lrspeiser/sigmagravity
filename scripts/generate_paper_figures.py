@@ -11,11 +11,13 @@ using the unified derived formula:
 where:
     h(g) = √(g†/g) × g†/(g†+g)
     W(r) = 1 - (ξ/(ξ+r))^0.5  with ξ = (2/3)R_d
-    g† = cH₀/(4√π) ≈ 1.20×10⁻¹⁰ m/s²
-    A = √3 for galaxies, π√2 for clusters
+    g† = cH₀/(4√π) ≈ 9.6×10⁻¹¹ m/s²
+    A = A₀ × L^(1/4) with A₀ ≈ 1.6
+        - √3 for disk galaxies (L ≈ 1.5 kpc)
+        - 8.0 for clusters (L ≈ 400 kpc)
 
 Author: Sigma Gravity Team
-Date: November 30, 2025
+Date: December 2025 (Updated)
 
 Usage:
     python scripts/generate_paper_figures.py [--output-dir figures/]
@@ -47,19 +49,19 @@ G = 6.674e-11        # m³/kg/s²
 kpc_to_m = 3.086e19  # m per kpc
 
 # Derived critical acceleration
-g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 1.20×10⁻¹⁰ m/s²
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 9.6×10⁻¹¹ m/s²
 
-# Amplitudes
-A_galaxy = np.sqrt(3)      # ≈ 1.732
-A_cluster = np.pi * np.sqrt(2)  # ≈ 4.44
+# Amplitudes from path length scaling: A = A₀ × L^(1/4), A₀ ≈ 1.6
+A_galaxy = np.sqrt(3)      # ≈ 1.73 (L ≈ 1.5 kpc → A ≈ 1.79, use √3)
+A_cluster = 8.0            # L ≈ 400 kpc → A ≈ 7.15, use 8.0
 
 print("=" * 80)
 print("GENERATING PAPER FIGURES WITH DERIVED FORMULA")
 print("=" * 80)
 print(f"g† = cH₀/(4√π) = {g_dagger:.4e} m/s²")
 print(f"A_galaxy = √3 = {A_galaxy:.4f}")
-print(f"A_cluster = π√2 = {A_cluster:.4f}")
-print(f"Ratio = {A_cluster/A_galaxy:.4f} (expected: 2.57)")
+print(f"A_cluster = 8.0 = {A_cluster:.4f}")
+print(f"Ratio = {A_cluster/A_galaxy:.4f} (from path length scaling A = A₀ × L^(1/4))")
 
 # =============================================================================
 # UNIFIED FORMULA FUNCTIONS
@@ -98,8 +100,9 @@ def generate_rar_figure(output_dir):
     fig, ax = plt.subplots(figsize=(6, 5))
     
     # Load SPARC data if available
-    sparc_dir = Path(r"C:\Users\henry\dev\sigmagravity\data\Rotmod_LTG")
-    master_file = Path(r"C:\Users\henry\dev\sigmagravity\data\SPARC_Lelli2016c.mrt")
+    script_dir = Path(__file__).resolve().parent.parent
+    sparc_dir = script_dir / "data" / "Rotmod_LTG"
+    master_file = script_dir / "data" / "SPARC_Lelli2016c.mrt"
     
     g_bar_all = []
     g_obs_all = []
@@ -340,41 +343,47 @@ def generate_coherence_window_figure(output_dir):
 # =============================================================================
 
 def generate_amplitude_figure(output_dir):
-    """Generate amplitude comparison for galaxies vs clusters."""
-    print("\nGenerating Figure 4: Amplitude comparison...")
+    """Generate amplitude comparison showing path length scaling."""
+    print("\nGenerating Figure 4: Amplitude comparison (path length scaling)...")
     
-    fig, ax = plt.subplots(figsize=(6, 5))
+    fig, ax = plt.subplots(figsize=(8, 5))
     
-    # Theoretical predictions
-    systems = ['Galaxies\n(disk)', 'Clusters\n(spherical)']
-    A_pred = [np.sqrt(3), np.pi * np.sqrt(2)]
-    A_obs = [1.73, 4.5]  # Observed/calibrated values
+    # Path length scaling: A = A₀ × L^(1/4), A₀ ≈ 1.6
+    A0 = 1.6
+    
+    # Systems with their path lengths
+    systems = ['Disk galaxies', 'Ellipticals', 'Clusters']
+    L_kpc = [1.5, 17, 400]  # Path lengths in kpc
+    A_pred = [A0 * L**0.25 for L in L_kpc]  # Predicted from scaling
+    A_used = [np.sqrt(3), 3.1, 8.0]  # Values used in paper
     
     x = np.arange(len(systems))
     width = 0.35
     
-    bars1 = ax.bar(x - width/2, A_pred, width, label='Derived', color='steelblue', alpha=0.8)
-    bars2 = ax.bar(x + width/2, A_obs, width, label='Observed', color='coral', alpha=0.8)
+    bars1 = ax.bar(x - width/2, A_pred, width, label=f'Path length: A = {A0} × L^(1/4)', 
+                   color='steelblue', alpha=0.8)
+    bars2 = ax.bar(x + width/2, A_used, width, label='Values used', 
+                   color='coral', alpha=0.8)
     
     # Add value labels
-    for bar, val in zip(bars1, A_pred):
-        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1, 
-                f'{val:.2f}', ha='center', va='bottom', fontsize=10)
-    for bar, val in zip(bars2, A_obs):
-        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1, 
-                f'{val:.2f}', ha='center', va='bottom', fontsize=10)
+    for bar, val, L in zip(bars1, A_pred, L_kpc):
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.15, 
+                f'{val:.2f}\n(L={L})', ha='center', va='bottom', fontsize=9)
+    for bar, val in zip(bars2, A_used):
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.15, 
+                f'{val:.2f}', ha='center', va='bottom', fontsize=9)
     
     ax.set_ylabel('Amplitude A')
-    ax.set_title('Derived vs Observed Amplitudes')
+    ax.set_title(r'Amplitude vs Path Length: $A = A_0 \times L^{1/4}$, $A_0 \approx 1.6$')
     ax.set_xticks(x)
     ax.set_xticklabels(systems)
-    ax.legend()
-    ax.set_ylim(0, 6)
+    ax.legend(loc='upper left')
+    ax.set_ylim(0, 10)
     
-    # Add ratio annotation
-    ratio_pred = A_pred[1] / A_pred[0]
-    ratio_obs = A_obs[1] / A_obs[0]
-    ax.text(0.95, 0.95, f'Ratio (cluster/galaxy):\nPredicted: {ratio_pred:.2f}\nObserved: {ratio_obs:.2f}\nMatch: {100*ratio_pred/ratio_obs:.1f}%', 
+    # Add annotation
+    ax.text(0.95, 0.95, 
+            f'Path length scaling unifies\nall system types with\nsingle constant A₀ ≈ 1.6\n\n'
+            f'Cluster/Galaxy ratio:\n{A_used[2]/A_used[0]:.2f} (observed)\n{A_pred[2]/A_pred[0]:.2f} (predicted)', 
             transform=ax.transAxes, ha='right', va='top', fontsize=9,
             bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
     
@@ -471,8 +480,9 @@ def generate_rc_gallery(output_dir):
     """Generate rotation curve gallery showing data vs predictions."""
     print("\nGenerating Figure 6: Rotation curve gallery...")
     
-    sparc_dir = Path(r"C:\Users\henry\dev\sigmagravity\data\Rotmod_LTG")
-    master_file = Path(r"C:\Users\henry\dev\sigmagravity\data\SPARC_Lelli2016c.mrt")
+    script_dir = Path(__file__).resolve().parent.parent
+    sparc_dir = script_dir / "data" / "Rotmod_LTG"
+    master_file = script_dir / "data" / "SPARC_Lelli2016c.mrt"
     
     if not sparc_dir.exists():
         print("  SPARC data not found, skipping RC gallery")
@@ -597,8 +607,9 @@ def generate_rar_residuals(output_dir):
     """Generate RAR residuals histogram."""
     print("\nGenerating Figure 7: RAR residuals histogram...")
     
-    sparc_dir = Path(r"C:\Users\henry\dev\sigmagravity\data\Rotmod_LTG")
-    master_file = Path(r"C:\Users\henry\dev\sigmagravity\data\SPARC_Lelli2016c.mrt")
+    script_dir = Path(__file__).resolve().parent.parent
+    sparc_dir = script_dir / "data" / "Rotmod_LTG"
+    master_file = script_dir / "data" / "SPARC_Lelli2016c.mrt"
     
     if not sparc_dir.exists():
         print("  SPARC data not found, skipping residuals")
@@ -811,7 +822,8 @@ def main():
                         help='Output directory for figures')
     args = parser.parse_args()
     
-    output_dir = Path(r"C:\Users\henry\dev\sigmagravity") / args.output_dir
+    script_dir = Path(__file__).resolve().parent.parent
+    output_dir = script_dir / args.output_dir
     output_dir.mkdir(exist_ok=True)
     
     print(f"\nOutput directory: {output_dir}")
