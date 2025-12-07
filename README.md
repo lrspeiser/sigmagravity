@@ -1110,7 +1110,7 @@ This gives ΛCDM 2 free parameters per galaxy, compared to 0 for the canonical �
 | Mean RMS error | **17.75 km/s** | 17.15 km/s | ~15 km/s | 171 galaxies |
 | RAR scatter | **0.097 dex** | 0.098 dex | 0.112 dex | |
 | Mean χ²_red | **1.42** | — | 1.58 | Lower is better |
-| Galaxy wins | — | 52.6% | **43.3%** | Head-to-head |
+| Galaxy wins (vs Σ-Gravity) | — | 90 (52.6%) | 74 (43.3%) | Σ-Gravity: 81 vs MOND, **97 vs ΛCDM** |
 | Parameters/galaxy | **0** | 0 | 2 | Σ-Gravity is parameter-free |
 
 *ΛCDM comparison uses fitted NFW halos with 2 parameters per galaxy (log M₂₀₀, concentration c).
