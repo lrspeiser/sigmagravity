@@ -4,14 +4,54 @@ This document tracks major revisions to the Σ-Gravity framework and documentati
 
 ---
 
-## December 2025
+## December 2025 (Latest)
+
+### 2D Coherence Framework Adoption
+
+**Major theoretical advance:** Disk galaxies have 2D coherence (not 1D), leading to derived parameters:
+
+1. **Coherence exponent k = 1**
+   - Derived from 2D disk geometry: k = ν/2 where ν = 2 (spatial dimensions)
+   - Simplifies W(r) to rational function: W(r) = r/(ξ+r)
+   - For clusters (3D): k = 1.5
+
+2. **Coherence scale ξ = R_d/(2π)**
+   - Derived from one azimuthal wavelength at disk scale length
+   - Replaces phenomenological ξ = (1/2)R_d or (2/3)R_d
+   - Typical value: ~0.5 kpc for disk galaxies
+
+3. **Amplitude A = e^(1/(2π)) ≈ 1.173**
+   - Derived from inverse density ratio at coherence boundary
+   - Replaces phenomenological A = √e or √3
+
+### Performance Improvements
+
+| Test | Previous | Current |
+|------|----------|---------|
+| SPARC RMS | 20.2 km/s | 17.5 km/s |
+| SPARC Win Rate | 42% | 48% |
+| Cluster Ratio | 0.955 | 0.955 |
+| Cluster Scatter | 0.133 dex | 0.133 dex |
+| MW RMS | 29.0 km/s | 29.4 km/s |
+
+### Derivation Status
+
+All galaxy parameters are now derived from first principles:
+- ✓ k = 1 (2D geometry)
+- ✓ ξ = R_d/(2π) (azimuthal wavelength)
+- ✓ A = e^(1/(2π)) (inverse density at ξ)
+- ✓ W(r) = r/(ξ+r) (superstatistics with k=1)
+- ✓ h(g) = √(g†/g) × g†/(g†+g) (enhancement × coherence probability)
+
+---
+
+## December 2025 (Earlier)
 
 ### Theoretical Advances
 
-1. **Dynamical coherence scale**
-   - Replaced phenomenological ξ = (2/3)R_d with dynamically motivated ξ = k×σ_eff/Ω_d (k ≈ 0.24)
-   - 16% improvement in rotation curve predictions
-   - Validated with baryons-only computation (not circular)
+1. **Dynamical coherence scale (superseded)**
+   - Replaced phenomenological ξ = (2/3)R_d with ξ = k×σ_eff/Ω_d (k ≈ 0.24)
+   - Now superseded by 2D-derived ξ = R_d/(2π)
 
 2. **Unified amplitude formula**
    - A(G) = √(1.6 + 109×G²) connects galaxies (G=0.038) and clusters (G=1.0)

@@ -71,9 +71,9 @@ a0_mond = 1.2e-10
 # =============================================================================
 # MODEL PARAMETERS
 # =============================================================================
-# Galaxy parameters
-A_GALAXY = np.sqrt(np.e)  # ≈ 1.649, from path length scaling with A_0 = √e
-XI_SCALE = 0.5  # ξ = (1/2) × R_d (cleaner than 2/3, better performance)
+# Galaxy parameters (2D coherence framework)
+A_GALAXY = np.exp(1 / (2 * np.pi))  # ≈ 1.173, from 2D coherence geometry
+XI_SCALE = 1 / (2 * np.pi)  # ξ = R_d/(2π), one azimuthal wavelength
 ML_DISK = 0.5   # Mass-to-light ratio for disk (Lelli+ 2016)
 ML_BULGE = 0.7  # Mass-to-light ratio for bulge (Lelli+ 2016)
 
@@ -94,9 +94,9 @@ def h_function(g: np.ndarray) -> np.ndarray:
 
 
 def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
-    """Coherence window W(r) = 1 - (ξ/(ξ+r))^0.5"""
+    """Coherence window W(r) = r/(ξ+r) for 2D coherence (k=1)"""
     xi = max(xi, 0.01)
-    return 1 - np.power(xi / (xi + r), 0.5)
+    return r / (xi + r)
 
 
 def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float) -> np.ndarray:
@@ -558,10 +558,10 @@ def main():
     print(f"Timestamp: {datetime.now().isoformat()}")
     print(f"Mode: {'Quick' if quick else 'Full'}")
     print()
-    print("Parameters:")
-    print(f"  A_galaxy = √3 ≈ {A_GALAXY:.3f}")
+    print("Parameters (2D coherence framework):")
+    print(f"  A_galaxy = e^(1/2π) ≈ {A_GALAXY:.3f}")
     print(f"  A_cluster = {A_CLUSTER}")
-    print(f"  ξ = {XI_SCALE:.3f} × R_d")
+    print(f"  ξ = R_d/(2π) ≈ {XI_SCALE:.4f} × R_d")
     print(f"  M/L = {ML_DISK}/{ML_BULGE} (disk/bulge)")
     print(f"  g† = {g_dagger:.3e} m/s²")
     print()
