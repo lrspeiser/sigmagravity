@@ -1,0 +1,33 @@
+{
+  "current": {
+    "A_galaxy": 1.3256681334331002,
+    "A_cluster": 10.516653460107925,
+    "mean_rms_sigma": 20.633119655373562,
+    "mean_rms_mond": 17.181209488052144,
+    "win_rate": 0.39766081871345027,
+    "cluster_median_ratio": 1.146219713382459,
+    "cluster_scatter": 0.13148666379394783
+  },
+  "old_sqrt3": {
+    "A_galaxy": 1.7320508075688772,
+    "A_cluster": 1.7320508075688772,
+    "mean_rms_sigma": 18.957353127590444,
+    "mean_rms_mond": 17.181209488052144,
+    "win_rate": 0.4269005847953216,
+    "cluster_median_ratio": 0.4175397573666946,
+    "cluster_scatter": 0.16504651771159293
+  },
+  "optimized": {
+    "a_coeff": 2.091736566103168,
+    "b_coeff": 72.06826834192942,
+    "G_galaxy": 0.037193296826869955,
+    "xi_scale": 0.3,
+    "A_galaxy": 1.480348465800985,
+    "A_cluster": 8.611620341610084,
+    "mean_rms_sigma": 18.044434227612037,
+    "mean_rms_mond": 17.181209488052144,
+    "win_rate": 0.47368421052631576,
+    "cluster_median_ratio": 0.9999999999943024,
+    "cluster_scatter": 0.1323068270818079
+  }
+}
