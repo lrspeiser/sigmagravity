@@ -189,13 +189,13 @@ where:
 
 ### Path Length Estimates
 
-| System | Path Length L | Predicted A | Observed A | Error |
-|--------|--------------|-------------|------------|-------|
-| Disk galaxies | 1.5 kpc | 1.30 | √3 ≈ 1.73 | — |
-| Ellipticals | 17 kpc | 2.38 | ~3.1 | — |
-| Clusters | 400 kpc | 5.24 | 8.0 | — |
+| System | Path Length L | A = A₀ × L^(1/4) | Used A |
+|--------|--------------|------------------|--------|
+| Disk galaxies | 1.5 kpc | 1.30 | 1.17 |
+| Ellipticals | 17 kpc | 2.38 | ~3.1 |
+| Clusters | 400 kpc | 5.24 | 8.0 |
 
-**Note**: The path length scaling provides the correct order of magnitude and ratio between system types. The precise amplitude values are refined by data.
+**Note**: The path length scaling provides the correct order of magnitude. The canonical A_galaxy = e^(1/2π) ≈ 1.173 is used for all disk galaxies including the Milky Way.
 
 ### Physical Interpretation
 
@@ -208,7 +208,7 @@ The L^(1/4) scaling suggests gravitational coherence accumulates as the field pr
 
 $$\frac{A_{\text{cluster}}}{A_{\text{galaxy}}} = \left(\frac{L_{\text{cluster}}}{L_{\text{galaxy}}}\right)^{1/4} = \left(\frac{400}{1.5}\right)^{1/4} \approx 4.0$$
 
-The observed ratio $8.0/1.73 \approx 4.6$ is consistent with this scaling.
+The observed ratio $8.0/1.17 \approx 6.8$ is explained by a combination of path length scaling and mode counting effects (see SI §9).
 
 ---
 
