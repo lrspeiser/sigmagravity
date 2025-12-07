@@ -1107,17 +1107,17 @@ Using the Eilers-APOGEE-Gaia sample (§3.3), we perform star-by-star validation 
 
 | Model | Mean Residual | RMS | Improvement |
 |-------|---------------|-----|-------------|
-| **Σ-Gravity** | **−0.7 km/s** | **27.6 km/s** | — |
+| **Σ-Gravity** | **−11.0 km/s** | **29.5 km/s** | — |
 | MOND | +8.1 km/s | 30.3 km/s | — |
-| **Σ-Gravity vs MOND** | — | — | **+9.0%** |
+| **Σ-Gravity vs MOND** | — | — | **+2.6%** |
 
 **Key findings:**
-1. **Σ-Gravity outperforms MOND by 9%** in RMS residual
-2. **Near-zero mean residual** (−0.7 km/s) indicates unbiased predictions
+1. **Σ-Gravity outperforms MOND by 2.6%** in RMS residual
+2. **Mean residual** (−11.0 km/s) indicates slight systematic offset
 3. **V_bar scaling = 1.16×** brings MW into consistency with SPARC galaxies
 4. This scaling is within the ~20% uncertainty of McMillan 2017 (Cautun+ 2020)
 
-**Result:** RMS = 29.4 km/s across 28,368 stars.
+**Result:** RMS = 29.5 km/s across 28,368 stars.
 
 ### 4.3 Galaxy Cluster Strong Lensing
 
