@@ -6,9 +6,8 @@
 This is THE DEFINITIVE regression test for Σ-Gravity. Run this after any formula changes.
 
 USAGE:
-    python run_regression.py           # Full test (all domains)
-    python run_regression.py --quick   # Skip slow tests (Gaia, counter-rotation)
-    python run_regression.py --compare # Compare all parameter configurations
+    python scripts/run_regression.py           # Full test (all domains)
+    python scripts/run_regression.py --quick   # Skip slow tests (Gaia, counter-rotation)
 
 DATA SOURCES (validated and documented):
     - SPARC: 171 galaxies from Lelli+ 2016 (data/Rotmod_LTG/)
@@ -16,23 +15,34 @@ DATA SOURCES (validated and documented):
     - Gaia/MW: 28,368 Eilers-APOGEE-Gaia disk stars (data/gaia/eilers_apogee_6d_disk.csv)
     - Counter-rotation: 64 Bevacqua+ 2022 galaxies (data/stellar_corgi/)
 
-CURRENT FORMULA (Σ-Gravity canonical form):
-    Σ = 1 + A × W(r) × h(g)
+CANONICAL FORMULA (Σ-Gravity unified form):
+
+    Σ = 1 + A(D,L) × W(r) × h(g)
     
     h(g) = √(g†/g) × g†/(g†+g)           [acceleration enhancement]
-    W(r) = 1 - (ξ/(ξ+r))^0.5             [coherence window]
-    g† = cH₀/(4√π) ≈ 9.6×10⁻¹¹ m/s²     [critical acceleration]
-    ξ = (1/2) × R_d                      [coherence scale - clean formulation]
+    W(r) = r / (ξ + r)                    [coherence window, k=1 for 2D]
+    g† = cH₀/(4√π) ≈ 9.60×10⁻¹¹ m/s²    [critical acceleration, derived]
+    ξ = R_d/(2π)                          [coherence scale, derived]
     
-    A_galaxy = √e ≈ 1.649                [disk amplitude, from path length scaling]
-    A_cluster = 8.0                      [cluster amplitude, from path length scaling]
+    UNIFIED AMPLITUDE:
+    A(D,L) = A₀ × [1 - D + D × (L/L₀)^n]
+    
+    where:
+      A₀ = exp(1/2π) ≈ 1.173             [base amplitude, derived]
+      D = dimensionality (0=2D disk, 1=3D cluster)
+      L = path length through baryons (kpc)
+      L₀ = 0.40 kpc                       [reference scale]
+      n = 0.27                            [path length exponent]
+    
+    For pure 2D disk (D=0): A = A₀ = 1.173
+    For 3D cluster (D=1, L=600 kpc): A = A₀ × (600/0.4)^0.27 ≈ 8.45
     
     M/L = 0.5 (disk), 0.7 (bulge)        [Lelli+ 2016 standard]
 
 EXPECTED RESULTS:
-    - SPARC: RMS ≈ 20 km/s, ~42% win rate vs MOND (fair comparison, same M/L)
-    - Clusters: Median ratio ≈ 0.93, scatter ≈ 0.13 dex
-    - Gaia: RMS ≈ 31 km/s (28,368 stars)
+    - SPARC: RMS ≈ 17.8 km/s, ~47% win rate vs MOND
+    - Clusters: Median ratio ≈ 0.99, scatter ≈ 0.13 dex
+    - Gaia: RMS ≈ 29.5 km/s (28,368 stars)
     - Counter-rotation: p < 0.05, f_DM(CR) < f_DM(Normal)
     - Redshift: g†(z) ∝ H(z) confirmed
     - Solar System: γ-1 < 10⁻⁵ (Cassini safe)
@@ -63,22 +73,27 @@ G_const = 6.674e-11
 M_sun = 1.989e30
 
 # Critical acceleration (derived from cosmology)
-g_dagger = c * H0_SI / (4 * math.sqrt(math.pi))  # ≈ 9.6×10⁻¹¹ m/s²
+g_dagger = c * H0_SI / (4 * math.sqrt(math.pi))  # ≈ 9.60×10⁻¹¹ m/s²
 
 # MOND acceleration scale (for comparison)
 a0_mond = 1.2e-10
 
 # =============================================================================
-# MODEL PARAMETERS
+# MODEL PARAMETERS (UNIFIED FORMULA)
 # =============================================================================
-# Galaxy parameters (2D coherence framework)
-A_GALAXY = np.exp(1 / (2 * np.pi))  # ≈ 1.173, from 2D coherence geometry
-XI_SCALE = 1 / (2 * np.pi)  # ξ = R_d/(2π), one azimuthal wavelength
-ML_DISK = 0.5   # Mass-to-light ratio for disk (Lelli+ 2016)
-ML_BULGE = 0.7  # Mass-to-light ratio for bulge (Lelli+ 2016)
+# Base amplitude (derived from 2D coherence geometry)
+A_0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173
 
-# Cluster parameters
-A_CLUSTER = 8.0  # From path length scaling: A_0 × L^0.25 with L ≈ 400 kpc
+# Unified amplitude parameters
+L_0 = 0.40  # Reference path length (kpc)
+N_EXP = 0.27  # Path length exponent
+
+# Coherence scale
+XI_SCALE = 1 / (2 * np.pi)  # ξ = R_d/(2π), one azimuthal wavelength
+
+# Mass-to-light ratios (Lelli+ 2016 standard)
+ML_DISK = 0.5
+ML_BULGE = 0.7
 
 # MW parameters
 MW_VBAR_SCALE = 1.16  # McMillan 2017 baryonic model scaling
@@ -86,6 +101,20 @@ MW_VBAR_SCALE = 1.16  # McMillan 2017 baryonic model scaling
 # =============================================================================
 # CORE FUNCTIONS
 # =============================================================================
+
+def unified_amplitude(D: float, L: float) -> float:
+    """
+    Unified amplitude formula: A = A₀ × [1 - D + D × (L/L₀)^n]
+    
+    Args:
+        D: Dimensionality factor (0 for 2D disk, 1 for 3D cluster)
+        L: Path length through baryons (kpc)
+    
+    Returns:
+        Amplitude A
+    """
+    return A_0 * (1 - D + D * (L / L_0)**N_EXP)
+
 
 def h_function(g: np.ndarray) -> np.ndarray:
     """Enhancement function h(g) = √(g†/g) × g†/(g†+g)"""
@@ -99,8 +128,21 @@ def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
     return r / (xi + r)
 
 
-def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float) -> np.ndarray:
-    """Predict rotation velocity using Σ-Gravity."""
+def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float, 
+                     h_disk: float = None, f_bulge: float = 0.0) -> np.ndarray:
+    """
+    Predict rotation velocity using Σ-Gravity unified formula.
+    
+    Args:
+        R_kpc: Radii in kpc
+        V_bar: Baryonic velocities in km/s
+        R_d: Disk scale length in kpc
+        h_disk: Disk thickness (default: 0.15 × R_d)
+        f_bulge: Bulge fraction (0 to 1), used as dimensionality D
+    
+    Returns:
+        Predicted velocities in km/s
+    """
     R_m = R_kpc * kpc_to_m
     V_bar_ms = V_bar * 1000
     g_bar = V_bar_ms**2 / R_m
@@ -109,7 +151,14 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float) -> np.nda
     xi = XI_SCALE * R_d
     W = W_coherence(R_kpc, xi)
     
-    Sigma = 1 + A_GALAXY * W * h
+    # Unified amplitude
+    if h_disk is None:
+        h_disk = 0.15 * R_d
+    L = 2 * h_disk  # Path length = 2 × disk thickness
+    D = f_bulge  # Use bulge fraction as dimensionality proxy
+    A = unified_amplitude(D, L)
+    
+    Sigma = 1 + A * W * h
     return V_bar * np.sqrt(Sigma)
 
 
@@ -173,12 +222,19 @@ def load_sparc(data_dir: Path) -> List[Dict]:
             idx = len(df) // 3
             R_d = df['R'].iloc[idx] if idx > 0 else df['R'].iloc[-1] / 2
             
+            # Estimate disk thickness and bulge fraction for unified model
+            h_disk = 0.15 * R_d
+            total_sq = np.sum(df['V_disk']**2 + df['V_bulge']**2 + df['V_gas']**2)
+            f_bulge = np.sum(df['V_bulge']**2) / max(total_sq, 1e-10)
+            
             galaxies.append({
                 'name': gf.stem.replace('_rotmod', ''),
                 'R': df['R'].values,
                 'V_obs': df['V_obs'].values,
                 'V_bar': df['V_bar'].values,
-                'R_d': R_d
+                'R_d': R_d,
+                'h_disk': h_disk,
+                'f_bulge': f_bulge,
             })
     
     return galaxies
@@ -249,14 +305,15 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
         return TestResult("SPARC Galaxies", False, 0.0, {}, "No data")
     
     rms_list, mond_rms_list = [], []
-    all_log_ratios = []  # For RAR scatter
+    all_log_ratios = []
     all_log_ratios_mond = []
     wins = 0
     
     for gal in galaxies:
         R, V_obs, V_bar, R_d = gal['R'], gal['V_obs'], gal['V_bar'], gal['R_d']
+        h_disk, f_bulge = gal['h_disk'], gal['f_bulge']
         
-        V_pred = predict_velocity(R, V_bar, R_d)
+        V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge)
         V_mond = predict_mond(R, V_bar)
         
         rms = np.sqrt(((V_obs - V_pred)**2).mean())
@@ -265,8 +322,6 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
         rms_list.append(rms)
         mond_rms_list.append(rms_mond)
         
-        # Compute RAR scatter: log10(g_obs / g_bar) = log10(V_obs² / V_bar²) = 2*log10(V_obs/V_bar)
-        # We compare predicted vs observed: log10(V_obs / V_pred)
         valid = (V_obs > 0) & (V_pred > 0) & (V_mond > 0) & (V_bar > 0)
         if valid.sum() > 0:
             log_ratio = np.log10(V_obs[valid] / V_pred[valid])
@@ -281,11 +336,10 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
     mean_mond = np.mean(mond_rms_list)
     win_rate = wins / len(galaxies) * 100
     
-    # RAR scatter in dex (std of log10(V_obs/V_pred))
     rar_scatter = np.std(all_log_ratios) if all_log_ratios else 0.0
     rar_scatter_mond = np.std(all_log_ratios_mond) if all_log_ratios_mond else 0.0
     
-    passed = mean_rms < 25.0  # Reasonable threshold
+    passed = mean_rms < 25.0
     
     return TestResult(
         name="SPARC Galaxies",
@@ -309,12 +363,18 @@ def test_clusters(clusters: List[Dict]) -> TestResult:
         return TestResult("Clusters", False, 0.0, {}, "No data")
     
     ratios = []
+    
+    # Cluster parameters for unified amplitude
+    L_cluster = 600  # kpc (path through cluster)
+    D_cluster = 1.0  # 3D system
+    A_cluster = unified_amplitude(D_cluster, L_cluster)
+    
     for cl in clusters:
         r_m = cl['r_kpc'] * kpc_to_m
         g_bar = G_const * cl['M_bar'] * M_sun / r_m**2
         
         h = h_function(np.array([g_bar]))[0]
-        Sigma = 1 + A_CLUSTER * h  # W ≈ 1 for clusters
+        Sigma = 1 + A_cluster * h  # W ≈ 1 for clusters
         
         M_pred = cl['M_bar'] * Sigma
         ratio = M_pred / cl['M_lens']
@@ -334,6 +394,7 @@ def test_clusters(clusters: List[Dict]) -> TestResult:
             'n_clusters': len(ratios),
             'median_ratio': median_ratio,
             'scatter_dex': scatter,
+            'A_cluster': A_cluster,
         },
         message=f"Median ratio={median_ratio:.3f}, Scatter={scatter:.3f} dex ({len(ratios)} clusters)"
     )
@@ -356,9 +417,12 @@ def test_gaia(gaia_df: Optional[pd.DataFrame]) -> TestResult:
     v2_gas = G_kpc * M_gas * R**2 / (R**2 + 7.0**2)**1.5
     V_bar = np.sqrt(v2_disk + v2_bulge + v2_gas)
     
-    # Predict circular velocity
-    R_d_mw = 2.6  # MW disk scale length
-    V_c_pred = predict_velocity(R, V_bar, R_d_mw)
+    # MW parameters
+    R_d_mw = 2.6
+    h_disk_mw = 0.3  # MW disk thickness
+    f_bulge_mw = 0.1  # MW is mostly disk
+    
+    V_c_pred = predict_velocity(R, V_bar, R_d_mw, h_disk_mw, f_bulge_mw)
     
     # Asymmetric drift correction
     from scipy.interpolate import interp1d
@@ -409,7 +473,7 @@ def test_redshift() -> TestResult:
         return np.sqrt(Omega_m * (1 + z)**3 + Omega_L)
     
     g_dagger_z2 = g_dagger * H_z(2)
-    expected_ratio = H_z(2)  # ≈ 2.97
+    expected_ratio = H_z(2)
     actual_ratio = g_dagger_z2 / g_dagger
     
     passed = abs(actual_ratio - expected_ratio) < 0.01
@@ -432,7 +496,6 @@ def test_solar_system() -> TestResult:
     g_saturn = G_const * M_sun_kg / r_m**2
     h_saturn = h_function(np.array([g_saturn]))[0]
     
-    # γ - 1 ≈ h for weak field
     gamma_minus_1 = h_saturn
     cassini_bound = 2.3e-5
     
@@ -448,11 +511,7 @@ def test_solar_system() -> TestResult:
 
 
 def test_counter_rotation(data_dir: Path) -> TestResult:
-    """Test counter-rotation prediction: CR galaxies should have lower f_DM.
-    
-    This is a UNIQUE prediction of Σ-Gravity that neither ΛCDM nor MOND makes.
-    Disrupted coherence → reduced gravitational enhancement → lower apparent DM.
-    """
+    """Test counter-rotation prediction: CR galaxies should have lower f_DM."""
     try:
         from astropy.io import fits
         from astropy.table import Table
@@ -466,16 +525,13 @@ def test_counter_rotation(data_dir: Path) -> TestResult:
     if not dynpop_file.exists() or not cr_file.exists():
         return TestResult("Counter-Rotation", True, 0.0, {}, "SKIPPED: Data not found")
     
-    # Load DynPop catalog
     with fits.open(dynpop_file) as hdul:
         basic = Table(hdul[1].data)
         jam_nfw = Table(hdul[4].data)
     
-    # Load counter-rotating catalog
     with open(cr_file, 'r') as f:
         lines = f.readlines()
     
-    # Parse CR data
     data_start = 0
     for i, line in enumerate(lines):
         if line.startswith('---'):
@@ -501,14 +557,12 @@ def test_counter_rotation(data_dir: Path) -> TestResult:
     
     cr_manga_ids = [d['MaNGAId'].strip() for d in cr_data]
     
-    # Cross-match
     dynpop_idx = {str(mid).strip(): i for i, mid in enumerate(basic['mangaid'])}
     matches = [dynpop_idx[cr_id] for cr_id in cr_manga_ids if cr_id in dynpop_idx]
     
     if len(matches) < 10:
         return TestResult("Counter-Rotation", True, 0.0, {}, f"SKIPPED: Only {len(matches)} matches")
     
-    # Extract f_DM values
     fdm_all = np.array(jam_nfw['fdm_Re'])
     valid_mask = np.isfinite(fdm_all) & (fdm_all >= 0) & (fdm_all <= 1)
     
@@ -521,11 +575,9 @@ def test_counter_rotation(data_dir: Path) -> TestResult:
     if len(fdm_cr) < 10:
         return TestResult("Counter-Rotation", True, 0.0, {}, "SKIPPED: Insufficient data")
     
-    # Mann-Whitney U test (one-sided: CR < Normal)
     mw_stat, mw_pval_two = stats.mannwhitneyu(fdm_cr, fdm_normal)
     mw_pval = mw_pval_two / 2 if np.mean(fdm_cr) < np.mean(fdm_normal) else 1 - mw_pval_two / 2
     
-    # Pass if p < 0.05 and CR has lower f_DM
     passed = mw_pval < 0.05 and np.mean(fdm_cr) < np.mean(fdm_normal)
     
     return TestResult(
@@ -548,7 +600,6 @@ def test_counter_rotation(data_dir: Path) -> TestResult:
 
 def main():
     quick = '--quick' in sys.argv
-    compare = '--compare' in sys.argv
     
     data_dir = Path(__file__).parent.parent / "data"
     
@@ -558,12 +609,16 @@ def main():
     print(f"Timestamp: {datetime.now().isoformat()}")
     print(f"Mode: {'Quick' if quick else 'Full'}")
     print()
-    print("Parameters (2D coherence framework):")
-    print(f"  A_galaxy = e^(1/2π) ≈ {A_GALAXY:.3f}")
-    print(f"  A_cluster = {A_CLUSTER}")
+    print("UNIFIED FORMULA PARAMETERS:")
+    print(f"  A₀ = exp(1/2π) ≈ {A_0:.4f}")
+    print(f"  L₀ = {L_0} kpc")
+    print(f"  n = {N_EXP}")
     print(f"  ξ = R_d/(2π) ≈ {XI_SCALE:.4f} × R_d")
     print(f"  M/L = {ML_DISK}/{ML_BULGE} (disk/bulge)")
     print(f"  g† = {g_dagger:.3e} m/s²")
+    print()
+    print("  For 2D disk (D=0): A = A₀ = 1.173")
+    print(f"  For 3D cluster (D=1, L=600): A = {unified_amplitude(1.0, 600):.2f}")
     print()
     
     # Load data
@@ -632,9 +687,11 @@ def main():
     
     report = {
         'timestamp': datetime.now().isoformat(),
+        'formula': 'unified',
         'parameters': {
-            'A_galaxy': A_GALAXY,
-            'A_cluster': A_CLUSTER,
+            'A_0': A_0,
+            'L_0': L_0,
+            'n_exp': N_EXP,
             'xi_scale': XI_SCALE,
             'ml_disk': ML_DISK,
             'ml_bulge': ML_BULGE,
@@ -654,4 +711,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

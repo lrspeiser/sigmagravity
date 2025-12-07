@@ -41,7 +41,7 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 
 The enhancement factor is:
 
-$$\boxed{\Sigma = 1 + A \cdot W(r) \cdot h(g_N)}$$
+$$\boxed{\Sigma = 1 + A(D,L) \cdot W(r) \cdot h(g_N)}$$
 
 ### Component Definitions
 
@@ -51,8 +51,20 @@ $$\boxed{\Sigma = 1 + A \cdot W(r) \cdot h(g_N)}$$
 | **W(r)** | $r/(\xi + r)$ | Coherence window |
 | **ξ** | $R_d/(2\pi)$ | Coherence scale |
 | **g†** | $cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s² | Critical acceleration |
-| **A_galaxy** | $e^{1/(2\pi)} \approx 1.173$ | Galaxy amplitude |
-| **A_cluster** | 8.0 | Cluster amplitude |
+| **A(D,L)** | $A_0 \times [1 - D + D \times (L/L_0)^n]$ | Unified amplitude |
+
+### Unified Amplitude Parameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
+| **A₀** | $e^{1/(2\pi)} \approx 1.173$ | Base amplitude |
+| **L₀** | 0.40 kpc | Reference path length |
+| **n** | 0.27 | Path length exponent |
+| **D** | 0 (galaxy) or 1 (cluster) | Dimensionality factor |
+
+**Amplitude values:**
+- Disk galaxies (D=0): A = A₀ = 1.173
+- Galaxy clusters (D=1, L≈600 kpc): A ≈ 8.45
 
 ### Rotation Curve Prediction
 
@@ -75,10 +87,10 @@ where $V_{\text{bar}}^2 = V_{\text{gas}}^2 + \Upsilon_{\text{disk}} \cdot V_{\te
 | Parameter | Value | Status | Source |
 |-----------|-------|--------|--------|
 | **g†** | $cH_0/(4\sqrt{\pi}) = 9.60 \times 10^{-11}$ m/s² | **Derived** | Spherical coherence geometry (SI §4) |
-| **ξ** | $R_d/(2\pi) \approx 0.159 \times R_d$ | **Derived** | 2D disk coherence (SI §3) |
-| **A_galaxy** | $e^{1/(2\pi)} \approx 1.173$ | **Derived** | Path length scaling (SI §5) |
-| **A_cluster** | 8.0 | **Derived** | Path length: $A = A_0 \times L^{1/4}$ |
-| **n_coh** | 0.5 | **Derived** | Gamma-exponential conjugacy |
+| **ξ** | $R_d/(2\pi) \approx 0.159 \times R_d$ | **Derived** | One azimuthal wavelength (SI §3) |
+| **A₀** | $e^{1/(2\pi)} \approx 1.173$ | **Derived** | 2D coherence geometry (SI §5) |
+| **L₀** | 0.40 kpc | **Calibrated** | Reference path length |
+| **n** | 0.27 | **Calibrated** | Path length exponent |
 | **M/L_disk** | 0.5 M☉/L☉ | Fixed | Lelli+ 2016 |
 | **M/L_bulge** | 0.7 M☉/L☉ | Fixed | Lelli+ 2016 |
 
@@ -464,40 +476,31 @@ python scripts/run_regression.py --quick
 
 ```
 ================================================================================
-Σ-GRAVITY REGRESSION TEST SUITE
+Σ-GRAVITY MASTER REGRESSION TEST
 ================================================================================
 
-[1/6] SPARC Galaxies (N=171)
-  Mean RMS: 17.5 km/s
-  Win rate vs MOND: 48%
-  Status: ✓ PASS
+UNIFIED FORMULA PARAMETERS:
+  A₀ = exp(1/2π) ≈ 1.1725
+  L₀ = 0.4 kpc
+  n = 0.27
+  ξ = R_d/(2π) ≈ 0.1592 × R_d
+  M/L = 0.5/0.7 (disk/bulge)
+  g† = 9.599e-11 m/s²
 
-[2/6] Galaxy Clusters (N=42)
-  Median ratio: 0.955
-  Scatter: 0.133 dex
-  Status: ✓ PASS
+  For 2D disk (D=0): A = A₀ = 1.173
+  For 3D cluster (D=1, L=600): A = 8.45
 
-[3/6] Milky Way (N=28,368)
-  RMS: 29.4 km/s
-  Status: ✓ PASS
-
-[4/6] Counter-Rotation Test
-  f_DM difference: -44%
-  p-value: 0.004
-  Status: ✓ PASS
-
-[5/6] Redshift Evolution
-  g†(z=2)/g†(z=0): 2.966
-  Status: ✓ PASS
-
-[6/6] Solar System Safety
-  |γ-1|: 1.8×10⁻⁹
-  Cassini bound: 2.3×10⁻⁵
-  Status: ✓ PASS
+[✓] SPARC Galaxies: RMS=17.75 km/s, Scatter=0.097 dex, Win=47.4%
+[✓] Clusters: Median ratio=0.987, Scatter=0.132 dex (42 clusters)
+[✓] Gaia/MW: RMS=29.5 km/s (28368 stars)
+[✓] Redshift Evolution: g†(z=2)/g†(z=0) = 2.966 (expected 2.966)
+[✓] Solar System: |γ-1| = 1.77e-09 < 2.30e-05
+[✓] Counter-Rotation: f_DM(CR)=0.169 < f_DM(Normal)=0.302, p=0.0039
 
 ================================================================================
-ALL TESTS PASSED
+SUMMARY: 6/6 tests passed
 ================================================================================
+✓ ALL TESTS PASSED
 ```
 
 ### Output Files
@@ -513,10 +516,9 @@ ALL TESTS PASSED
 
 | Metric | Σ-Gravity | MOND | Notes |
 |--------|-----------|------|-------|
-| Mean RMS error | **17.5 km/s** | 17.15 km/s | 171 galaxies |
-| Median RMS error | 13.2 km/s | 12.8 km/s | — |
-| Win rate | 45.6% | 54.4% | Fair comparison (same M/L) |
-| RAR scatter | 0.101 dex | 0.098 dex | — |
+| Mean RMS error | **17.75 km/s** | 17.15 km/s | 171 galaxies |
+| Win rate | 47.4% | 52.6% | Fair comparison (same M/L) |
+| RAR scatter | 0.097 dex | 0.098 dex | — |
 
 ### Methodology
 
