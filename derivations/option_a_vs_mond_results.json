@@ -1,0 +1,18 @@
+{
+  "sparc": {
+    "n_galaxies": 171,
+    "sigma_optA_mean_rms": 19.647854297892895,
+    "mond_simple_mean_rms": 17.363000062612127,
+    "mond_std_mean_rms": 17.181209488052144,
+    "sigma_wins_vs_mond": 55
+  },
+  "amplitudes": {
+    "A_galaxy": 1.3256681334331002,
+    "A_cluster": 10.516653460107925,
+    "ratio": 7.933096673956256
+  },
+  "critical_accelerations": {
+    "g_dagger": 9.598924108127284e-11,
+    "a0_mond": 1.2e-10
+  }
+}

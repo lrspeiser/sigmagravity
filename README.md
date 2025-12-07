@@ -56,7 +56,7 @@ Here we develop Σ-Gravity ("Sigma-Gravity"), motivated by (but not rigorously d
 
 **Theoretical status:** The "coherence" language is **motivational**, not derived from first principles. No QFT calculation demonstrates that gravitational phases align in galactic disks. Standard quantum gravity corrections are of order $(\ell_{\text{Planck}}/r)^2 \sim 10^{-70}$—utterly negligible.
 
-**What we actually use:** The *functional form* of Σ-Gravity (multiplicative enhancement depending on acceleration and kinematics) is **phenomenologically successful**. The underlying mechanism remains an open question. Analogies to coherent systems (lasers, superconductors, antenna arrays) are discussed in §5 but should not be taken as rigorous physics.
+**Phenomenological success:** The *functional form* of Σ-Gravity (multiplicative enhancement depending on acceleration and kinematics) is **phenomenologically successful**. The underlying mechanism remains an open question. Analogies to coherent systems (lasers, superconductors, antenna arrays) are discussed in §5 but should not be taken as rigorous physics.
 
 #### 1.4.2 The Cosmological Scale Connection (Dimensional Analysis)
 
@@ -71,11 +71,11 @@ The critical acceleration $g^\dagger \approx cH_0/(4\sqrt{\pi}) \approx 10^{-10}
 - The specific factor $4\sqrt{\pi}$ from "coherence radius geometry"
 - Any causal mechanism connecting local dynamics to the cosmic horizon
 
-**Honest status:** The scale $g^\dagger \sim cH_0$ is **empirically successful** and **dimensionally natural**, but we do not have a first-principles derivation of why this scale governs galactic dynamics.
+**Theoretical status:** The scale $g^\dagger \sim cH_0$ is **empirically successful** and **dimensionally natural**, but we do not have a first-principles derivation of why this scale governs galactic dynamics.
 
 #### 1.4.3 The Spatial Dependence (Dynamically Motivated)
 
-The coherence window $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ captures the empirical observation that enhancement grows with galactocentric radius. The coherence scale ξ is now **dynamically motivated**:
+The coherence window $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ captures the empirical observation that enhancement grows with galactocentric radius. The coherence scale ξ is **dynamically motivated**:
 
 $$\xi = k \times \frac{\sigma_{\rm eff}}{\Omega_d}, \quad \Omega_d = \frac{V(R_d)}{R_d}, \quad k \simeq 0.24$$
 
@@ -86,9 +86,7 @@ $$\xi = k \times \frac{\sigma_{\rm eff}}{\Omega_d}, \quad \Omega_d = \frac{V(R_d
 **Physical basis:**
 - The coherence scale ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω × r)
 - This is an **instantaneous** property of the velocity field—not temporal accumulation
-- Validated with V_bar-only (16.4% improvement over baseline) and self-consistent (16.0% improvement) formulations
-
-*Note:* The historical baseline ξ = (2/3)R_d is retained in SI §28 for backward compatibility comparisons.
+- Validated with V_bar-only (16.4% improvement) and self-consistent (16.0% improvement) formulations
 
 **Physical interpretation:** Coherence is suppressed where velocity dispersion dominates rotation. The transition radius ξ is set by the ratio σ_eff/Ω_d—a purely spatial/instantaneous quantity. This explains why fitted coherence scales correlate with dynamical timescales in both galaxies (r = +0.43) and clusters (r = +0.79).
 
@@ -429,7 +427,93 @@ $$g_{\text{eff}} = g_N \cdot \Sigma_{\text{eff}}(g_N, r)$$
 - **Superconductivity:** Cooper pairs maintain phase coherence across macroscopic distances  
 - **Antenna arrays:** Signals from multiple elements combine coherently to enhance gain
 
-### 2.5 Geometric Motivation for Amplitude A (Not a Rigorous Derivation)
+### 2.5 Covariant Definition of the Coherence Scalar
+
+**Addressing the main theoretical gap:** The phenomenological coherence window W(r) references non-local quantities (galaxy center, disk scale length R_d, cylindrical radius r). A proper covariant theory should depend only on quantities constructible from the metric, matter fields, and their derivatives at each spacetime point.
+
+**The solution:** Define a local coherence scalar C from invariants of the matter 4-velocity u^μ using the standard Ellis (1971) decomposition:
+
+$$\mathcal{C} = \frac{\omega^2}{\omega^2 + 4\pi G\rho + \theta^2 + H_0^2}$$
+
+where:
+- **Vorticity tensor:** $\omega_{\mu\nu} = \frac{1}{2}(u_{\mu;\nu} - u_{\nu;\mu})$ with scalar $\omega^2 = \frac{1}{2}\omega_{\mu\nu}\omega^{\mu\nu}$
+- **Shear tensor:** $\sigma_{\mu\nu} = \frac{1}{2}(u_{\mu;\nu} + u_{\nu;\mu}) - \frac{1}{3}\theta h_{\mu\nu}$
+- **Expansion scalar:** $\theta = u^\mu_{;\mu}$
+- **Jeans scale contribution:** $4\pi G\rho$ arises from the Jeans length $\ell_J = \sigma_v/\sqrt{4\pi G\rho}$, which converts velocity dispersion to a rate with correct dimensions [time]⁻²
+- **Cosmic reference:** $H_0^2$ provides an infrared cutoff
+
+This scalar is local and covariant by construction: it depends only on fields and their derivatives at each spacetime point, transforms properly under coordinate changes, requires no reference to special coordinates, and all terms have dimension [time]⁻².
+
+**Non-relativistic limit:** For steady-state circular rotation in a disk galaxy (θ ≈ 0, incompressible flow):
+
+$$\mathcal{C} = \frac{(v_{\rm rot}/\sigma_v)^2}{1 + (v_{\rm rot}/\sigma_v)^2}$$
+
+| Regime | v_rot/σ | C | Physical Interpretation |
+|--------|---------|---|-------------------------|
+| Cold rotation | >> 1 | → 1 | Full coherence |
+| Transition | = 1 | = 0.5 | Equal ordered/random |
+| Hot dispersion | << 1 | → 0 | No coherence |
+
+**Key references:** Ellis (1971, "Relativistic Cosmology" in *General Relativity and Cosmology*, Enrico Fermi School); Hawking & Ellis (1973, *The Large Scale Structure of Space-Time*, Chapter 4).
+
+### 2.6 The Coherence Window and Dynamical Scale ξ
+
+**Connection to local coherence scalar:** The phenomenological coherence window W(r) is an approximation to the **orbit-averaged local coherence**:
+
+$$W(r) \approx \langle \mathcal{C} \rangle_{\rm orbit}$$
+
+where C is the covariant coherence scalar defined in §2.5. The gravitational enhancement at radius r depends on the coherence of **all matter** contributing to gravity there, weighted by gravitational influence:
+
+$$W(r) = \frac{\int \mathcal{C}(r') \, \Sigma(r') \, K(r, r') \, r' \, dr'}{\int \Sigma(r') \, K(r, r') \, r' \, dr'}$$
+
+**Dynamical Coherence Scale:**
+
+The coherence scale ξ is **dynamically motivated**:
+
+$$\boxed{\xi = k \times \frac{\sigma_{\rm eff}}{\Omega_d}, \quad \Omega_d = \frac{V(R_d)}{R_d}, \quad k \simeq 0.24}$$
+
+**Physical interpretation:** ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω × r). This is an **instantaneous** property of the velocity field—purely spatial, no time accumulation.
+
+**Why this works:**
+1. Velocity dispersion σ_eff characterizes random/thermal motions
+2. Angular frequency Ω_d characterizes ordered rotation at the disk scale
+3. Their ratio has units of length and sets the coherence transition
+4. This explains why fitted ξ correlates with dynamical timescales (r = +0.43 for galaxies, +0.79 for clusters)
+
+**Robustness validation (`derivations/test_dynamical_coherence_scale_robustness.py`):**
+
+| Ω_d source | Mean RMS | vs Baseline | Improvement retained |
+|------------|----------|-------------|---------------------|
+| V_obs (original) | 17.01 km/s | +18.8% | 100% |
+| V_bar (baryonic-only) | 17.52 km/s | +16.4% | **87%** |
+| V_pred (self-consistent) | 17.59 km/s | +16.0% | **85%** |
+
+The improvement is **not circular**—it holds when Ω_d is computed from baryons only.
+
+**Derivation of the exponent from Decoherence Statistics:**
+
+Assume the decoherence rate $\lambda$ follows a Gamma distribution with shape parameter $k$: $\lambda \sim \text{Gamma}(k, \theta)$
+
+The survival probability for coherence is:
+$$S(R) = \mathbb{E}[\exp(-\lambda R)] = \left(\frac{\theta}{\theta + R}\right)^k$$
+
+The coherent amplitude is $A(R) = \sqrt{S(R)}$, giving:
+$$W(R) = 1 - \left(\frac{\ell_0}{\ell_0 + R}\right)^{k/2}$$
+
+**For disk galaxies with one dominant decoherence channel ($k = 1$):**
+$$n_{\text{coh}} = k/2 = 0.5$$
+
+The exponent $n_{\text{coh}} = 0.5$ is a **rigorous derivation** from Gamma-exponential conjugacy (verified by Monte Carlo to <1% error).
+
+$$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{0.5}$$
+
+**Validation via counter-rotating galaxies:** The local coherence formalism predicts that counter-rotating stellar components should reduce gravitational enhancement. For two populations with velocities v₁ and v₂ (v₂ < 0), the effective dispersion includes a (v₁ - v₂)² term:
+
+$$\sigma^2_{\rm eff} = f_1 \sigma_1^2 + f_2 \sigma_2^2 + f_1 f_2 (v_1 - v_2)^2$$
+
+This dramatically increases σ_eff and reduces C. MaNGA DynPop data confirms: counter-rotating galaxies have **44% lower f_DM** than normal galaxies (p < 0.01). This is a unique prediction—neither ΛCDM nor MOND predicts any effect from rotation direction.
+
+### 2.7 Geometric Motivation for Amplitude A
 
 **Important note:** The following "mode counting" argument provides geometric intuition for the amplitude values but is NOT a rigorous derivation from teleparallel field theory. TEGR, like GR, has only 2 physical gravitational degrees of freedom (tensor polarizations). The 24 torsion tensor components decompose into gauge and constraint parts; they are not independent physical modes. The argument below should be understood as motivational, with A = √3 and A = π√2 ultimately determined by fitting to galaxy and cluster data respectively.
 
@@ -473,11 +557,11 @@ $$A_{\text{disk}} = \frac{|\mathbf{T}|_{\text{coh}}}{|\mathbf{T}|_{\text{incoh}}
 
 **Motivated value:** With the (heuristic) assumption of three equal contributions → **A = √3 ≈ 1.73**, which matches the empirically optimal amplitude for disk galaxies.
 
-### 2.6 Cluster Amplitude: Derivation from Spatial Geometry
+### 2.8 Cluster Amplitude: Derivation from Spatial Geometry
 
 The effective cluster amplitude emerges from **two spatial effects**, both instantaneous (no temporal buildup required):
 
-#### 2.6.1 Mode Counting (Factor 2.57)
+#### 2.8.1 Mode Counting (Factor 2.57)
 
 For spherical clusters, the geometry allows more modes to contribute than for disk galaxies:
 
@@ -493,7 +577,7 @@ For spherical clusters, the geometry allows more modes to contribute than for di
 **Mode-counting ratio:**
 $$\frac{A_{\text{cluster,bare}}}{A_{\text{galaxy}}} = \frac{\pi\sqrt{2}}{\sqrt{3}} \approx 2.57$$
 
-#### 2.6.2 Coherence Window Saturation (Factor 1.9)
+#### 2.8.2 Coherence Window Saturation (Factor 1.9)
 
 The coherence window $W(r)$ creates an additional amplitude difference:
 
@@ -509,7 +593,7 @@ The coherence window $W(r)$ creates an additional amplitude difference:
 **Coherence window ratio:**
 $$\frac{W_{\text{cluster}}}{\langle W \rangle_{\text{galaxy}}} = \frac{1.0}{0.53} \approx 1.9$$
 
-#### 2.6.3 Combined Amplitude Ratio
+#### 2.8.3 Combined Amplitude Ratio
 
 The effective amplitude ratio combines both effects:
 
@@ -523,7 +607,7 @@ $$\frac{A_{\text{eff,cluster}}}{A_{\text{eff,galaxy}}} = \underbrace{\frac{\pi\s
 | **Observed (from cluster data)** | **5.2** |
 | **Agreement** | **94%** |
 
-#### 2.6.4 Why This Is Spatial, Not Temporal
+#### 2.8.4 Why This Is Spatial, Not Temporal
 
 Both effects are **instantaneous properties of the spatial field**:
 
@@ -533,102 +617,16 @@ Both effects are **instantaneous properties of the spatial field**:
 
 For clusters, the coherence scale is small relative to lensing radii. Using $\xi_{\rm cluster} \sim 10$–30 kpc (from $\sigma \sim 1000$ km/s, $\Omega \sim 50$ km/s/kpc), the coherence window at $r = 200$ kpc evaluates to $W(200) = 1 - (\xi/(\xi + 200))^{0.5} \approx 0.92$–0.97, effectively unity. This is a geometric property of the source at a single instant, satisfying the constraint that lensing must work for single-pass photons.
 
-#### 2.6.5 Recommended Formulation
+#### 2.8.5 Unified Amplitude Formula
 
-**Option 1: Different bare amplitudes**
-```
-Disk galaxies:  A = √3,     W(r) = 1 - (ξ/(ξ+r))^0.5
-Clusters:       A = π√2 × 1.9 ≈ 8.4,  W = 1
-```
+The unified amplitude formula A(G) = √(1.6 + 109×G²) captures both regimes:
 
-**Option 2 (equivalent): Same bare amplitude, different effective W**
-```
-A_eff_galaxy  = √3 × ⟨W⟩ ≈ 1.73 × 0.53 ≈ 0.9
-A_eff_cluster = π√2 × 1  ≈ 4.44
-Ratio = 4.44/0.9 ≈ 4.9  (matches observed ratio)
-```
+| System | G | A(G) | Notes |
+|--------|---|------|-------|
+| Disk galaxies | 0.038 | 1.33 | Calibrated to SPARC |
+| Spherical clusters | 1.0 | 10.5 | Matches lensing data |
 
-Both formulations give the same predictions. The key insight is that the cluster amplitude is **not a separate fitted parameter**—it emerges from the same physics (coherence enhancement) applied to different geometry (3D vs 2D) and different observation regime (outer regions where $W = 1$ vs inner regions where $\langle W \rangle < 1$).
-
-### 2.6.1 Covariant Definition of the Coherence Scalar
-
-**Addressing the main theoretical gap:** The phenomenological coherence window W(r) references non-local quantities (galaxy center, disk scale length R_d, cylindrical radius r). A proper covariant theory should depend only on quantities constructible from the metric, matter fields, and their derivatives at each spacetime point.
-
-**The solution:** Define a local coherence scalar C from invariants of the matter 4-velocity u^μ using the standard Ellis (1971) decomposition:
-
-$$\mathcal{C} = \frac{\omega^2}{\omega^2 + 4\pi G\rho + \theta^2 + H_0^2}$$
-
-where:
-- **Vorticity tensor:** $\omega_{\mu\nu} = \frac{1}{2}(u_{\mu;\nu} - u_{\nu;\mu})$ with scalar $\omega^2 = \frac{1}{2}\omega_{\mu\nu}\omega^{\mu\nu}$
-- **Shear tensor:** $\sigma_{\mu\nu} = \frac{1}{2}(u_{\mu;\nu} + u_{\nu;\mu}) - \frac{1}{3}\theta h_{\mu\nu}$
-- **Expansion scalar:** $\theta = u^\mu_{;\mu}$
-- **Jeans scale contribution:** $4\pi G\rho$ arises from the Jeans length $\ell_J = \sigma_v/\sqrt{4\pi G\rho}$, which converts velocity dispersion to a rate with correct dimensions [time]⁻²
-- **Cosmic reference:** $H_0^2$ provides an infrared cutoff
-
-This scalar is local and covariant by construction: it depends only on fields and their derivatives at each spacetime point, transforms properly under coordinate changes, requires no reference to special coordinates, and all terms have dimension [time]⁻².
-
-**Non-relativistic limit:** For steady-state circular rotation in a disk galaxy (θ ≈ 0, incompressible flow):
-
-$$\mathcal{C} = \frac{(v_{\rm rot}/\sigma_v)^2}{1 + (v_{\rm rot}/\sigma_v)^2}$$
-
-| Regime | v_rot/σ | C | Physical Interpretation |
-|--------|---------|---|-------------------------|
-| Cold rotation | >> 1 | → 1 | Full coherence |
-| Transition | = 1 | = 0.5 | Equal ordered/random |
-| Hot dispersion | << 1 | → 0 | No coherence |
-
-**Key references:** Ellis (1971, "Relativistic Cosmology" in *General Relativity and Cosmology*, Enrico Fermi School); Hawking & Ellis (1973, *The Large Scale Structure of Space-Time*, Chapter 4).
-
-### 2.7 The Coherence Window
-
-**Connection to local coherence scalar:** The phenomenological coherence window W(r) is an approximation to the **orbit-averaged local coherence**:
-
-$$W(r) \approx \langle \mathcal{C} \rangle_{\rm orbit}$$
-
-where C is the covariant coherence scalar defined in §2.6.1. The gravitational enhancement at radius r depends on the coherence of **all matter** contributing to gravity there, weighted by gravitational influence:
-
-$$W(r) = \frac{\int \mathcal{C}(r') \, \Sigma(r') \, K(r, r') \, r' \, dr'}{\int \Sigma(r') \, K(r, r') \, r' \, dr'}$$
-
-**Dynamical Coherence Scale (Preferred):**
-
-The coherence scale ξ is now **dynamically motivated** rather than purely phenomenological:
-
-$$\boxed{\xi = k \times \frac{\sigma_{\rm eff}}{\Omega_d}, \quad \Omega_d = \frac{V(R_d)}{R_d}, \quad k \simeq 0.24}$$
-
-**Physical interpretation:** ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω × r). This is an **instantaneous** property of the velocity field—purely spatial, no time accumulation.
-
-**Why this works:**
-1. Velocity dispersion σ_eff characterizes random/thermal motions
-2. Angular frequency Ω_d characterizes ordered rotation at the disk scale
-3. Their ratio has units of length and sets the coherence transition
-4. This explains why fitted ξ correlates with dynamical timescales (r = +0.43 for galaxies, +0.79 for clusters)
-
-**Robustness validation (`derivations/test_dynamical_coherence_scale_robustness.py`):**
-
-| Ω_d source | Mean RMS | vs Baseline | Improvement retained |
-|------------|----------|-------------|---------------------|
-| V_obs (original) | 17.01 km/s | +18.8% | 100% |
-| V_bar (baryonic-only) | 17.52 km/s | +16.4% | **87%** |
-| V_pred (self-consistent) | 17.59 km/s | +16.0% | **85%** |
-
-The improvement is **not circular**—it holds when Ω_d is computed from baryons only.
-
-*Note:* The historical baseline ξ = (2/3)R_d is documented in SI §28 for backward compatibility. All primary results in this paper use the dynamical formulation.
-
-**Derivation of the exponent from Decoherence Statistics:**
-
-Assume the decoherence rate $\lambda$ follows a Gamma distribution with shape parameter $k$: $\lambda \sim \text{Gamma}(k, \theta)$
-
-The survival probability for coherence is:
-$$S(R) = \mathbb{E}[\exp(-\lambda R)] = \left(\frac{\theta}{\theta + R}\right)^k$$
-
-The coherent amplitude is $A(R) = \sqrt{S(R)}$, giving:
-$$W(R) = 1 - \left(\frac{\ell_0}{\ell_0 + R}\right)^{k/2}$$
-
-**For disk galaxies with one dominant decoherence channel ($k = 1$):**
-$$n_{\text{coh}} = k/2 = 0.5$$
-
-The exponent $n_{\text{coh}} = 0.5$ is a **rigorous derivation** from Gamma-exponential conjugacy (verified by Monte Carlo to <1% error).
+The cluster amplitude is **not a separate fitted parameter**—it emerges from the same physics (coherence enhancement) applied to different geometry (3D vs 2D) and different observation regime (outer regions where $W = 1$ vs inner regions where $\langle W \rangle < 1$).
 
 $$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{0.5}$$
 
@@ -642,7 +640,7 @@ This dramatically increases σ_eff and reduces C. MaNGA DynPop data confirms: co
 
 *Figure 3: Left: Coherence window W(r) for different disk scale lengths. Right: Total enhancement Σ(r) as a function of radius at various accelerations, showing how coherence builds with radius.*
 
-### 2.8 Acceleration Dependence: The h(g_N) Function
+### 2.9 Acceleration Dependence: The h(g_N) Function
 
 The enhancement factor depends on the **baryonic Newtonian acceleration** $g_N = |\nabla\Phi_N|$ through:
 
@@ -664,7 +662,7 @@ $$h(g_N) = \sqrt{\frac{g^\dagger}{g_N}} \cdot \frac{g^\dagger}{g^\dagger + g_N}$
 
 **Comparison to MOND:** The function $h(g_N)$ differs from MOND's interpolation function $\nu(y)$ by ~7% in the transition regime ($g_N \sim g^\dagger$). This is a **testable prediction**.
 
-### 2.9 The Critical Acceleration Scale
+### 2.10 The Critical Acceleration Scale
 
 **Prior work:** The near-equality $a_0 \sim cH_0$ has been recognized as a potentially fundamental "cosmic coincidence" since MOND's inception (Milgrom 1983). Milgrom (2020, arXiv:2001.09729) reviews this connection extensively, noting $a_0 \sim cH_0 \sim c^2\Lambda^{1/2} \sim c^2/\ell_U$ where $\ell_U$ is a cosmological length scale. The specific value $a_0 \approx cH_0/(2\pi)$ has appeared in the literature (e.g., Gentile et al. 2011). We do not claim to have discovered this connection.
 
@@ -695,7 +693,7 @@ The factor $4\sqrt{\pi} = 2 \times \sqrt{4\pi} \approx 7.09$ combines:
 
 **Derivation status:** The scaling $g^\dagger \sim cH_0$ follows from dimensional analysis and is not original to this work. The specific factor $1/(4\sqrt{\pi})$ is **derived from coherence geometry** rather than fitted. This represents a significant advance: the critical acceleration is now fully determined by geometric constants.
 
-### 2.10 Unified Formula
+### 2.11 Unified Formula
 
 The complete enhancement factor is:
 
@@ -721,7 +719,7 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 
 **Key insight:** The galaxy-cluster amplitude ratio emerges from geometry (mode counting) and the unified A(G) formula—not separate fitting. The same formula works across 6 orders of magnitude in mass.
 
-### 2.11 Derivation Status Summary
+### 2.12 Derivation Status Summary
 
 | Parameter | Formula | Status | Notes |
 |-----------|---------|--------|-------|
@@ -741,7 +739,7 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 1. **Dynamical coherence scale:** ξ = k×σ_eff/Ω_d provides 16% improvement over phenomenological alternatives, with robustness validation (87% improvement retained with baryons-only computation). See SI §28 for comparison with alternative formulations.
 2. **Unified amplitude formula:** A(G) = √(1.6 + 109×G²) connects galaxies (G=0.038) and clusters (G=1.0) with a single calibrated formula
 
-### 2.12 Why This Formula (Not MOND's)
+### 2.13 Why This Formula (Not MOND's)
 
 MOND's success with $a_0 \approx 1.2 \times 10^{-10}$ m/s² has been known for 40 years, but lacked physical explanation. Σ-Gravity derives the scale $g^\dagger \sim cH_0$ from cosmological physics—explaining the "MOND coincidence"—while the $h(g_N)$ function emerges from teleparallel coherence.
 
@@ -762,7 +760,7 @@ The two approaches produce similar curves but differ by ~7% in the transition re
 
 *Figure 1: Enhancement functions $h(g_N)$ for Σ-Gravity (derived from teleparallel coherence) vs MOND (empirical). The functions are similar but distinguishable.*
 
-### 2.13 Solar System Constraints
+### 2.14 Solar System Constraints
 
 In compact systems, two suppression mechanisms combine:
 
@@ -798,7 +796,7 @@ A rough estimate of the correction to the PPN parameter $\gamma$ gives $\delta\g
 
 *Figure 2: Enhancement (Σ-1) as a function of distance from the Sun. At planetary scales, the enhancement is < 10⁻¹⁴, far below observational bounds.*
 
-### 2.13.1 Low-Acceleration Regime: Wide Binaries and Outer Solar System
+### 2.14.1 Low-Acceleration Regime: Wide Binaries and Outer Solar System
 
 **The problem:** The Solar System argument in §2.13 focuses on high-acceleration suppression (Saturn, where $g \sim 10^5 g^\dagger$). However, the "real danger zone" for any MOND-like scaling is far from the Sun, where $g$ drops below $g^\dagger$—the Oort cloud and wide binary regime.
 
@@ -887,7 +885,7 @@ python exploratory/coherence_wavelength_test/wide_binary_statistical_analysis.py
 
 See SI §26 for detailed analysis methodology and data sources.
 
-### 2.14 Non-Minimal Coupling: Conservation, Fifth Forces, and Equivalence Principle
+### 2.15 Non-Minimal Coupling: Conservation, Fifth Forces, and Equivalence Principle
 
 Non-minimal matter couplings generically raise three concerns: (1) stress-energy non-conservation, (2) composition-dependent "fifth forces," and (3) violations of the equivalence principle. This section specifies precisely what couples, derives the conservation law, and states the strongest bounds we can currently claim.
 
@@ -999,7 +997,7 @@ where $r_E = 1$ AU. This satisfies the Cassini bound $|\gamma - 1| < 2.3 \times 
 - Derivation of all 10 PPN parameters, not just $\gamma$
 - Analysis of preferred-frame effects from the coherence field
 
-**Honest status:** The $\gamma - 1 \sim 10^{-8}$ estimate is **plausible but not rigorously derived**. A complete PPN analysis from the action (§2.2) is future work.
+**Theoretical status:** The $\gamma - 1 \sim 10^{-8}$ estimate is **plausible but not rigorously derived**. A complete PPN analysis from the action (§2.2) is future work.
 
 #### 2.14.5 Summary of Consistency Status
 
@@ -1015,7 +1013,7 @@ where $r_E = 1$ AU. This satisfies the Cassini bound $|\gamma - 1| < 2.3 \times 
 
 **Bottom line:** The QUMOND-like formulation (§2.14.2) eliminates fifth-force concerns entirely: matter couples minimally, and the enhancement appears in the field equations via a phantom density. Solar System constraints are satisfied because $\nu - 1 < 10^{-8}$ in high-acceleration compact systems. A rigorous PPN derivation is needed to make $\gamma - 1$ claims definitive. See SI §23-24 for extended analysis.
 
-### 2.15 Amplitude Renormalization from Θ_μν
+### 2.16 Amplitude Renormalization from Θ_μν
 
 A key theoretical result addresses how the extra stress-energy term Θ_μν affects the phenomenology.
 
@@ -1577,11 +1575,11 @@ Low Surface Brightness (LSB) galaxies are in the deep MOND regime where Σ-Gravi
 
 ### 4.4 Outlook: Derivation Roadmap
 
-This section outlines the theoretical path from the covariant coherence scalar (§2.6.1) to the empirically validated formulas. The goal is to replace phenomenological fits with first-principles derivations.
+This section outlines the theoretical path from the covariant coherence scalar (§2.5) to the empirically validated formulas. The goal is to replace phenomenological fits with first-principles derivations.
 
 #### 4.4.1 Deriving ξ ∝ σ/Ω from the Covariant Scalar
 
-The local coherence scalar (§2.6.1) is:
+The local coherence scalar (§2.5) is:
 
 $$\mathcal{C} = \frac{\omega^2}{\omega^2 + 4\pi G\rho + \theta^2 + H_0^2}$$
 
@@ -1882,7 +1880,7 @@ We thank **Rafael Ferraro** (Instituto de Astronomía y Física del Espacio, CON
 
 ---
 
-## References (To be reviewed)
+## References
 
 Abbott, B. P., Abbott, R., Abbott, T. D., et al. (LIGO Scientific Collaboration and Virgo Collaboration) 2017a, PhRvL, 119, 161101 (GW170817: Observation of Gravitational Waves from a Binary Neutron Star Inspiral)
 
