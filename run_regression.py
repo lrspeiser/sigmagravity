@@ -430,6 +430,101 @@ def test_solar_system() -> TestResult:
     )
 
 
+def test_counter_rotation(data_dir: Path) -> TestResult:
+    """Test counter-rotation prediction: CR galaxies should have lower f_DM.
+    
+    This is a UNIQUE prediction of Σ-Gravity that neither ΛCDM nor MOND makes.
+    Disrupted coherence → reduced gravitational enhancement → lower apparent DM.
+    """
+    try:
+        from astropy.io import fits
+        from astropy.table import Table
+        from scipy import stats
+    except ImportError:
+        return TestResult("Counter-Rotation", True, 0.0, {}, "SKIPPED: astropy required")
+    
+    dynpop_file = data_dir / "manga_dynpop" / "SDSSDR17_MaNGA_JAM.fits"
+    cr_file = data_dir / "stellar_corgi" / "bevacqua2022_counter_rotating.tsv"
+    
+    if not dynpop_file.exists() or not cr_file.exists():
+        return TestResult("Counter-Rotation", True, 0.0, {}, "SKIPPED: Data not found")
+    
+    # Load DynPop catalog
+    with fits.open(dynpop_file) as hdul:
+        basic = Table(hdul[1].data)
+        jam_nfw = Table(hdul[4].data)
+    
+    # Load counter-rotating catalog
+    with open(cr_file, 'r') as f:
+        lines = f.readlines()
+    
+    # Parse CR data
+    data_start = 0
+    for i, line in enumerate(lines):
+        if line.startswith('---'):
+            data_start = i + 1
+            break
+    
+    header_line = None
+    for i, line in enumerate(lines):
+        if line.startswith('MaNGAId'):
+            header_line = i
+            break
+    
+    if header_line is None:
+        return TestResult("Counter-Rotation", True, 0.0, {}, "SKIPPED: Parse error")
+    
+    headers = [h.strip() for h in lines[header_line].split('|')]
+    cr_data = []
+    for line in lines[data_start:]:
+        if line.strip() and not line.startswith('#'):
+            parts = [p.strip() for p in line.split('|')]
+            if len(parts) >= len(headers):
+                cr_data.append(dict(zip(headers, parts)))
+    
+    cr_manga_ids = [d['MaNGAId'].strip() for d in cr_data]
+    
+    # Cross-match
+    dynpop_idx = {str(mid).strip(): i for i, mid in enumerate(basic['mangaid'])}
+    matches = [dynpop_idx[cr_id] for cr_id in cr_manga_ids if cr_id in dynpop_idx]
+    
+    if len(matches) < 10:
+        return TestResult("Counter-Rotation", True, 0.0, {}, f"SKIPPED: Only {len(matches)} matches")
+    
+    # Extract f_DM values
+    fdm_all = np.array(jam_nfw['fdm_Re'])
+    valid_mask = np.isfinite(fdm_all) & (fdm_all >= 0) & (fdm_all <= 1)
+    
+    cr_mask = np.zeros(len(fdm_all), dtype=bool)
+    cr_mask[matches] = True
+    
+    fdm_cr = fdm_all[cr_mask & valid_mask]
+    fdm_normal = fdm_all[~cr_mask & valid_mask]
+    
+    if len(fdm_cr) < 10:
+        return TestResult("Counter-Rotation", True, 0.0, {}, "SKIPPED: Insufficient data")
+    
+    # Mann-Whitney U test (one-sided: CR < Normal)
+    mw_stat, mw_pval_two = stats.mannwhitneyu(fdm_cr, fdm_normal)
+    mw_pval = mw_pval_two / 2 if np.mean(fdm_cr) < np.mean(fdm_normal) else 1 - mw_pval_two / 2
+    
+    # Pass if p < 0.05 and CR has lower f_DM
+    passed = mw_pval < 0.05 and np.mean(fdm_cr) < np.mean(fdm_normal)
+    
+    return TestResult(
+        name="Counter-Rotation",
+        passed=passed,
+        metric=mw_pval,
+        details={
+            'n_cr': len(fdm_cr),
+            'n_normal': len(fdm_normal),
+            'fdm_cr_mean': float(np.mean(fdm_cr)),
+            'fdm_normal_mean': float(np.mean(fdm_normal)),
+        },
+        message=f"f_DM(CR)={np.mean(fdm_cr):.3f} < f_DM(Normal)={np.mean(fdm_normal):.3f}, p={mw_pval:.4f}"
+    )
+
+
 # =============================================================================
 # MAIN
 # =============================================================================
@@ -491,6 +586,11 @@ def main():
     result = test_solar_system()
     results.append(result)
     print(f"[{'✓' if result.passed else '✗'}] {result.name}: {result.message}")
+    
+    if not quick:
+        result = test_counter_rotation(data_dir)
+        results.append(result)
+        print(f"[{'✓' if result.passed else '✗'}] {result.name}: {result.message}")
     
     print("-" * 80)
     
