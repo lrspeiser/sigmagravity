@@ -77,14 +77,45 @@ The critical acceleration $g^\dagger \approx cH_0/(4\sqrt{\pi}) \approx 10^{-10}
 
 #### 1.4.3 The Spatial Dependence (Coherence Window)
 
+---
+
+### ⚠️ CANONICAL MODEL DEFINITION
+
+**All results in this paper use exactly the following formulas:**
+
+$$\boxed{
+\begin{aligned}
+\Sigma &= 1 + A(D,L) \cdot W(r) \cdot h(g_N) \\[6pt]
+W(r) &= \frac{r}{\xi + r} \quad \text{(coherence window)} \\[6pt]
+\xi &= \frac{R_d}{2\pi} \approx 0.159 \times R_d \quad \text{(coherence scale, derived per-galaxy from } R_d \text{)} \\[6pt]
+h(g_N) &= \sqrt{\frac{g^\dagger}{g_N}} \cdot \frac{g^\dagger}{g^\dagger + g_N} \quad \text{(acceleration function)} \\[6pt]
+g^\dagger &= \frac{cH_0}{4\sqrt{\pi}} \approx 9.60 \times 10^{-11} \text{ m/s}^2 \quad \text{(critical acceleration, derived)} \\[6pt]
+A(D,L) &= A_0 \times [1 - D + D \times (L/L_0)^n] \quad \text{(unified amplitude)}
+\end{aligned}
+}$$
+
+**Parameter values:**
+| Parameter | Value | Status |
+|-----------|-------|--------|
+| $A_0$ | $e^{1/(2\pi)} \approx 1.173$ | Derived |
+| $L_0$ | 0.40 kpc | Calibrated |
+| $n$ | 0.27 | Calibrated |
+| $\xi$ | $R_d/(2\pi)$ | Derived per-galaxy |
+| M/L (disk) | 0.5 M☉/L☉ | Fixed (Lelli+ 2016) |
+| M/L (bulge) | 0.7 M☉/L☉ | Fixed (Lelli+ 2016) |
+
+**Amplitude values:** Galaxies (D=0): A = 1.173. Clusters (D=1, L≈600 kpc): A ≈ 8.45.
+
+**Note:** There is NO separate path-length factor $r_0$ or $f(r)$. The coherence window $W(r)$ is the ONLY spatial modulation. The parameter $L$ in the amplitude formula $A(D,L)$ refers to the characteristic path length through baryonic matter for different system types (disk thickness for galaxies, cluster diameter for clusters), NOT a per-system fitted parameter.
+
+---
+
 The coherence window $W(r) = r/(\xi + r)$ captures the observation that enhancement grows with galactocentric radius.
 
 **What is derived:**
 - The functional form emerges from superstatistical models where a decoherence rate has a Gamma distribution with shape parameter k = 1 (corresponding to 2D coherence in the disk plane)
 - For disk galaxies with 2D structure, k = 1 gives $W(r) = r/(\xi + r)$
 - The coherence scale $\xi = R_d/(2\pi)$ corresponds to one azimuthal wavelength at the disk scale length
-
-**Coherence scale ξ:** All results in this paper use $\xi = R_d/(2\pi) \approx 0.159 \times R_d$. This value is derived from the condition that coherence is established over one azimuthal wavelength.
 
 **Physical interpretation:** The coherence scale ξ represents the characteristic length over which the ordered velocity field maintains phase coherence. This is an **instantaneous** property of the velocity field—purely spatial, no temporal accumulation.
 
@@ -500,7 +531,7 @@ Both effects are **instantaneous properties of the spatial field**:
 
 2. **Coherence window** $W(r)$ is a spatial function describing WHERE coherence is suppressed (inner regions with high $\sigma/v$), not WHEN.
 
-For clusters, the coherence scale is small relative to lensing radii. Using $\xi_{\rm cluster} \sim 10$–30 kpc (from $\sigma \sim 1000$ km/s, $\Omega \sim 50$ km/s/kpc), the coherence window at $r = 200$ kpc evaluates to $W(200) = 1 - (\xi/(\xi + 200))^{0.5} \approx 0.92$–0.97, effectively unity. This is a geometric property of the source at a single instant, satisfying the constraint that lensing must work for single-pass photons.
+For clusters, the coherence scale is small relative to lensing radii. Using $\xi_{\rm cluster} \sim 10$–30 kpc (from $\sigma \sim 1000$ km/s, $\Omega \sim 50$ km/s/kpc), the coherence window at $r = 200$ kpc evaluates to $W(200) = 200/(200 + \xi) \approx 0.87$–0.95, effectively unity. This is a geometric property of the source at a single instant, satisfying the constraint that lensing must work for single-pass photons.
 
 #### 2.8.5 Amplitude Values
 
@@ -514,9 +545,7 @@ $$A = A_0 \times L^{1/4}, \quad A_0 = e^{1/(2\pi)} \approx 1.173$$
 | Ellipticals | 17 kpc | 3.26 | ~3.1 |
 | Clusters | 400 kpc | 7.15 | 8.0 |
 
-This unifies all amplitudes with a single constant $A_0 = \sqrt{e}$—a natural exponential constant that may connect to entropy-based derivations (see §5.7).
-
-$$W(r) = 1 - \left(\frac{\xi}{\xi + r}\right)^{0.5}$$
+This unifies all amplitudes with a single constant $A_0 = e^{1/(2\pi)}$—a natural exponential constant that may connect to entropy-based derivations (see §5.7).
 
 **Validation via counter-rotating galaxies:** The local coherence formalism predicts that counter-rotating stellar components should reduce gravitational enhancement. For two populations with velocities v₁ and v₂ (v₂ < 0), the effective dispersion includes a (v₁ - v₂)² term:
 
