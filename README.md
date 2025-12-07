@@ -18,12 +18,9 @@ where:
 
 The coherence scale ξ is the radius where enhancement transitions from suppressed to full—an instantaneous property of the velocity field requiring no temporal accumulation.
 
-Applied to 171 SPARC galaxies, the framework achieves:
+Applied to 171 SPARC galaxies with M/L = 0.5/0.7 (Lelli+ 2016 standard), the framework achieves RMS = 18.97 km/s with 42% win rate vs MOND (17.15 km/s)—a fair comparison using the same M/L assumptions.
 
-- **With M/L = 0.5/0.7** (Lelli+ 2016 standard): RMS = 17.3 km/s, winning 51.5% vs MOND (17.2 km/s). This is a fair comparison using the same M/L as MOND papers.
-- **With M/L = 1.0** (no correction): RMS = 24.4 km/s, winning 77.8% vs MOND (30.3 km/s). Higher M/L hurts MOND more than Σ-Gravity.
-
-Validation on 42 Fox+ 2022 strong-lensing clusters yields median predicted/observed ratio of **1.00** with scatter of 0.135 dex—matching observations exactly where MOND underpredicts by factor ~3. Star-by-star validation against 28,368 Milky Way disk stars yields RMS = 27.7 km/s, outperforming MOND by 9%. Preliminary estimates suggest Solar System constraints are satisfied ($\gamma - 1 \sim 10^{-8}$), though rigorous PPN analysis remains future work.
+Validation on 42 Fox+ 2022 strong-lensing clusters yields median predicted/observed ratio of **0.955** with scatter of 0.133 dex—matching observations where MOND underpredicts by factor ~3. Star-by-star validation against 28,368 Milky Way disk stars yields RMS = 28.8 km/s. Solar System constraints are satisfied (|γ-1| ~ 10⁻⁹), well within the Cassini bound.
 
 The theory makes falsifiable predictions distinct from both MOND and ΛCDM: (1) counter-rotating stellar components reduce enhancement—confirmed in MaNGA data with 44% lower inferred dark matter fractions (p < 0.01); (2) high-dispersion systems show suppressed enhancement relative to cold disks; (3) enhancement decreases at high redshift as $g^\dagger(z) \propto H(z)$—consistent with KMOS³D observations.
 
@@ -1327,7 +1324,7 @@ Using standard literature values (f_baryon = 0.15, gas concentration = 0.4 at 20
 
 *Figure 6: Σ-Gravity cluster predictions vs Fox+ 2022 strong lensing masses. Left: Predicted vs observed mass at 200 kpc (N=42). Middle: Ratio vs redshift. Right: Distribution of log(M_Σ/MSL) with scatter = 0.14 dex.*
 
-With the unified amplitude formula A(G) = √(2.25 + 200×G²) and G = 1.0 for clusters, the model achieves **median M_pred/M_lens = 1.00** with scatter 0.12 dex.
+With A_cluster = 8.0, the model achieves **median M_pred/M_lens = 0.955** with scatter 0.133 dex (from `python run_regression.py`).
 
 #### Profile-Based Cluster Subsample (Literature Gas + Stellar Masses)
 
