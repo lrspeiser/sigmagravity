@@ -1045,6 +1045,15 @@ We use 42 strong lensing clusters from Fox+ (2022, ApJ 928, 87), selected for sp
 
 **Distances and inclinations:** Fixed to SPARC published values; not varied in our analysis.
 
+**Prediction procedure:** For each galaxy, we:
+1. Load rotation curve data (R, V_obs, V_err, V_gas, V_disk, V_bul)
+2. Apply M/L scaling: $V_{\rm bar}^2 = V_{\rm gas}^2 + 0.5 \times V_{\rm disk}^2 + 0.7 \times V_{\rm bul}^2$
+3. Compute $g_N = V_{\rm bar}^2/R$ at each radius
+4. Apply canonical enhancement: $\Sigma = 1 + A_0 \cdot W(r) \cdot h(g_N)$ with $\xi = R_d/(2\pi)$
+5. Predict: $V_{\rm pred} = V_{\rm bar} \times \sqrt{\Sigma}$
+
+No optimization or fitting is performed per galaxy.
+
 **Scatter metric:** RAR scatter is computed as:
 $$\sigma_{\text{RAR}} = \sqrt{\frac{1}{N}\sum_i \left[\log_{10}\left(\frac{g_{\text{obs},i}}{g_{\text{pred},i}}\right)\right]^2}$$
 
@@ -1056,7 +1065,21 @@ $$\sigma_{\text{RAR}} = \sqrt{\frac{1}{N}\sum_i \left[\log_{10}\left(\frac{g_{\t
 | **MOND** | 0 | 1 global ($a_0$) |
 | **ΛCDM (NFW)** | 2-3 | 340-510 |
 
-### 3.6 MOND Comparison Methodology
+### 3.6 Uncertainty Treatment
+
+**Observational uncertainties:** SPARC provides velocity errors $\sigma_V$ at each radius. We propagate these through the RMS calculation:
+$$\text{RMS} = \sqrt{\frac{1}{N}\sum_i (V_{\rm obs,i} - V_{\rm pred,i})^2}$$
+
+**Systematic uncertainties:** The dominant systematics are:
+- **M/L ratio:** ±0.1 dex uncertainty in stellar mass (Lelli+ 2016). We use fixed values rather than marginalizing.
+- **Distance:** ±10-20% typical uncertainty. We use SPARC published values.
+- **Inclination:** ±5° typical uncertainty. We use SPARC published values.
+
+**Bootstrap confidence intervals:** For win rate statistics, we compute 95% CI via bootstrap resampling (1000 iterations) over the galaxy sample.
+
+**What we do NOT do:** We do not marginalize over M/L, distance, or inclination per galaxy. This is intentional—it matches the MOND convention and avoids inflating parameter counts. A full Bayesian analysis with marginalization over systematics would be more rigorous but is beyond our current scope.
+
+### 3.7 MOND Comparison Methodology
 
 For all MOND comparisons, we use:
 - **Acceleration scale:** $a_0 = 1.2 \times 10^{-10}$ m/s² (fixed)
@@ -1064,6 +1087,15 @@ For all MOND comparisons, we use:
 - **Same M/L** as Σ-Gravity (0.5 disk, 0.7 bulge)
 
 This ensures a fair comparison with identical assumptions.
+
+### 3.8 ΛCDM Comparison Methodology
+
+For the fitted-parameter comparison (SI §15), we fit NFW halos with:
+- **Virial mass:** $\log_{10}(M_{200}/M_\odot)$ as free parameter
+- **Concentration:** $c$ as free parameter
+- **Optimization:** Scipy minimize with L-BFGS-B, minimizing $\chi^2$
+
+This gives ΛCDM 2 free parameters per galaxy, compared to 0 for the canonical Σ-Gravity model. The comparison is presented in SI §15 as an ablation study.
 
 ---
 
