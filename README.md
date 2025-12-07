@@ -1264,7 +1264,7 @@ At cluster lensing radii ($r \sim 200$ kpc), the coherence window approaches uni
 | Domain | Formula | Amplitude | Performance |
 |--------|---------|-----------|-------------|
 | SPARC galaxies (171) | Σ = 1 + A·W·h | 1.17 | 17.5 km/s RMS, 48% wins vs MOND |
-| Milky Way (28,368 stars) | same | √3 ≈ 1.73 | 28.8 km/s RMS |
+| Milky Way (28,368 stars) | same | 1.17 | 29.4 km/s RMS |
 | Galaxy clusters (42) | same | 8.0 | Median ratio 0.955, scatter 0.133 dex |
 
 **Key result:** The same formula Σ = 1 + A·W·h works across all scales. The amplitude ratio A_cluster/A_galaxy ≈ 4.6 reflects the geometric difference between spherical clusters and disk galaxies.
