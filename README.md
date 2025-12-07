@@ -1498,7 +1498,7 @@ def predict_velocity(R_kpc, V_bar_kms, R_d_kpc, A=A_GALAXY):
 ```bash
 git clone https://github.com/lrspeiser/SigmaGravity.git && cd SigmaGravity
 pip install numpy scipy pandas matplotlib astropy
-python run_regression.py  # Validates all results in this paper
+python scripts/run_regression.py  # Validates all results in this paper
 ```
 
 | Test | Result | N |

@@ -449,7 +449,7 @@ curl -s "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/MNRAS/511/139/t
 
 ```bash
 cd sigmagravity
-python run_regression.py
+python scripts/run_regression.py
 ```
 
 This validates **all results** in the paper across all domains.
@@ -457,7 +457,7 @@ This validates **all results** in the paper across all domains.
 ### Quick Mode (Skip Slow Tests)
 
 ```bash
-python run_regression.py --quick
+python scripts/run_regression.py --quick
 ```
 
 ### Expected Output
@@ -560,7 +560,7 @@ def predict_velocity(R_kpc, V_bar_kms, R_d_kpc, A=A_GALAXY):
 
 ```bash
 # Full SPARC analysis
-python run_regression.py
+python scripts/run_regression.py
 
 # Generate rotation curve gallery
 python scripts/generate_representative_panel.py
@@ -612,7 +612,7 @@ The empirical value A_cluster = 8.0 is higher, possibly due to:
 ### Reproduction
 
 ```bash
-python run_regression.py  # Includes cluster test
+python scripts/run_regression.py  # Includes cluster test
 ```
 
 ---
@@ -648,7 +648,7 @@ This scaling is within the ~20% uncertainty of the McMillan 2017 model (Cautun+ 
 ### Reproduction
 
 ```bash
-python run_regression.py  # Includes MW test
+python scripts/run_regression.py  # Includes MW test
 ```
 
 ---
@@ -868,7 +868,7 @@ Two possible responses to the low-g regime (wide binaries, Oort cloud):
 ```bash
 git clone https://github.com/lrspeiser/SigmaGravity.git && cd SigmaGravity
 pip install numpy scipy pandas matplotlib astropy
-python run_regression.py
+python scripts/run_regression.py
 ```
 
 ---
