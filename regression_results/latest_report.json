@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-06T17:14:34.284328",
+  "timestamp": "2025-12-06T17:17:29.510522",
   "parameters": {
     "A_galaxy": 1.7320508075688772,
     "A_cluster": 8.0,
@@ -17,9 +17,11 @@
         "n_galaxies": 171,
         "mean_rms": 18.966398912603214,
         "mean_mond_rms": 17.154025922937112,
-        "win_rate": 42.10526315789473
+        "win_rate": 42.10526315789473,
+        "rar_scatter_dex": 0.10076636663743674,
+        "rar_scatter_mond_dex": 0.09799344988090442
       },
-      "message": "RMS=18.97 km/s, MOND=17.15, Win=42.1%"
+      "message": "RMS=18.97 km/s, Scatter=0.101 dex, Win=42.1%"
     },
     {
       "name": "Clusters",

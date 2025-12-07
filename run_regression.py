@@ -249,6 +249,8 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
         return TestResult("SPARC Galaxies", False, 0.0, {}, "No data")
     
     rms_list, mond_rms_list = [], []
+    all_log_ratios = []  # For RAR scatter
+    all_log_ratios_mond = []
     wins = 0
     
     for gal in galaxies:
@@ -263,12 +265,25 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
         rms_list.append(rms)
         mond_rms_list.append(rms_mond)
         
+        # Compute RAR scatter: log10(g_obs / g_bar) = log10(V_obs² / V_bar²) = 2*log10(V_obs/V_bar)
+        # We compare predicted vs observed: log10(V_obs / V_pred)
+        valid = (V_obs > 0) & (V_pred > 0) & (V_mond > 0) & (V_bar > 0)
+        if valid.sum() > 0:
+            log_ratio = np.log10(V_obs[valid] / V_pred[valid])
+            log_ratio_mond = np.log10(V_obs[valid] / V_mond[valid])
+            all_log_ratios.extend(log_ratio)
+            all_log_ratios_mond.extend(log_ratio_mond)
+        
         if rms < rms_mond:
             wins += 1
     
     mean_rms = np.mean(rms_list)
     mean_mond = np.mean(mond_rms_list)
     win_rate = wins / len(galaxies) * 100
+    
+    # RAR scatter in dex (std of log10(V_obs/V_pred))
+    rar_scatter = np.std(all_log_ratios) if all_log_ratios else 0.0
+    rar_scatter_mond = np.std(all_log_ratios_mond) if all_log_ratios_mond else 0.0
     
     passed = mean_rms < 25.0  # Reasonable threshold
     
@@ -281,8 +296,10 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
             'mean_rms': mean_rms,
             'mean_mond_rms': mean_mond,
             'win_rate': win_rate,
+            'rar_scatter_dex': rar_scatter,
+            'rar_scatter_mond_dex': rar_scatter_mond,
         },
-        message=f"RMS={mean_rms:.2f} km/s, MOND={mean_mond:.2f}, Win={win_rate:.1f}%"
+        message=f"RMS={mean_rms:.2f} km/s, Scatter={rar_scatter:.3f} dex, Win={win_rate:.1f}%"
     )
 
 

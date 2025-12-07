@@ -4126,14 +4126,15 @@ The master regression test (`run_regression.py`) uses these parameters:
 
 From `python run_regression.py`:
 
-| Metric | Result |
-|--------|--------|
-| SPARC RMS | 18.97 km/s |
-| SPARC win rate | 42.1% (vs MOND with same M/L) |
-| Cluster median ratio | 0.955 |
-| Cluster scatter | 0.133 dex |
-| MW RMS | 28.8 km/s |
-| Counter-rotation | p = 0.004 |
+| Metric | Σ-Gravity | MOND |
+|--------|-----------|------|
+| SPARC RMS | 18.97 km/s | 17.15 km/s |
+| SPARC RAR scatter | 0.101 dex | 0.098 dex |
+| SPARC win rate | 42.1% | 57.9% |
+| Cluster median ratio | 0.955 | ~0.33 |
+| Cluster scatter | 0.133 dex | ~0.2 dex |
+| MW RMS | 28.8 km/s | — |
+| Counter-rotation | p = 0.004 | No prediction |
 
 ### SI §29.8. Code Structure
 

@@ -150,9 +150,10 @@ With fair M/L assumptions (0.5/0.7), Σ-Gravity:
 | Domain | Metric | Σ-Gravity | MOND | Notes |
 |--------|--------|-----------|------|-------|
 | **SPARC galaxies** | Mean RMS | **18.97 km/s** | 17.15 km/s | 171 galaxies, M/L=0.5/0.7 |
+| SPARC | RAR scatter | **0.101 dex** | 0.098 dex | Nearly identical |
 | SPARC head-to-head | Win rate | 42.1% | 57.9% | Fair comparison (same M/L) |
 | **Galaxy clusters** | Median M_pred/M_lens | **0.955** | ~0.33* | 42 Fox+ 2022 clusters |
-| Cluster scatter | | 0.133 dex | ~0.2 dex | |
+| Cluster scatter | | **0.133 dex** | ~0.2 dex | |
 | **Milky Way** | RMS | **28.8 km/s** | — | 28,368 Eilers-APOGEE stars |
 | **Counter-rotating** | f_DM difference | **-44% (p=0.004)** | No prediction | 63 Bevacqua+ galaxies |
 | **Redshift** | g†(z=2)/g†(z=0) | **2.97** | 1.0 | Matches H(z) evolution |
