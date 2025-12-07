@@ -214,56 +214,232 @@ The observed ratio $8.0/1.73 \approx 4.6$ is consistent with this scaling.
 
 ## SI §6 — Data Sources
 
-### SPARC Galaxies (N=171)
+### SI §6.1 SPARC Galaxies (N=171)
 
 **Source:** Spitzer Photometry and Accurate Rotation Curves (SPARC)  
 **Reference:** Lelli, McGaugh & Schombert (2016), AJ 152, 157  
+**DOI:** 10.3847/0004-6256/152/6/157  
 **URL:** http://astroweb.cwru.edu/SPARC/
 
 **Files:**
-- `data/Rotmod_LTG/*.dat` — Individual galaxy rotation curves
-- `data/Rotmod_LTG/MasterSheet_SPARC.mrt` — Galaxy properties
+- `data/Rotmod_LTG/*_rotmod.dat` — Individual galaxy rotation curves (175 files)
+- `data/Rotmod_LTG/MasterSheet_SPARC.mrt` — Galaxy properties including disk scale lengths
+
+**Column Format (per galaxy .dat file):**
+
+| Column | Name | Units | Description |
+|--------|------|-------|-------------|
+| 1 | R | kpc | Galactocentric radius |
+| 2 | V_obs | km/s | Observed rotation velocity (inclination-corrected) |
+| 3 | V_err | km/s | Error on V_obs |
+| 4 | V_gas | km/s | Gas velocity contribution (from HI 21cm) |
+| 5 | V_disk | km/s | Disk velocity contribution (at M/L = 1) |
+| 6 | V_bul | km/s | Bulge velocity contribution (at M/L = 1) |
+
+**Critical Note:** SPARC files provide V_disk and V_bulge computed for **reference M/L = 1 M☉/L☉ at 3.6μm**. The actual baryonic velocity requires scaling:
+
+$$V_{\rm bar}^2 = V_{\rm gas}^2 + \Upsilon_{\rm disk} \cdot V_{\rm disk}^2 + \Upsilon_{\rm bulge} \cdot V_{\rm bulge}^2$$
+
+where Υ_disk = 0.5 and Υ_bulge = 0.7 (Lelli+ 2016 recommended values).
+
+**Processing Steps Applied:**
+
+```python
+# 1. Apply M/L correction
+V_disk_scaled = V_disk * np.sqrt(0.5)   # √0.5 ≈ 0.707
+V_bulge_scaled = V_bulge * np.sqrt(0.7) # √0.7 ≈ 0.837
+
+# 2. Compute V_bar with signed gas contribution
+V_bar_sq = np.sign(V_gas) * V_gas**2 + V_disk_scaled**2 + V_bulge_scaled**2
+V_bar = np.sqrt(np.abs(V_bar_sq)) * np.sign(V_bar_sq)
+
+# 3. Estimate disk scale length R_d from rotation curve shape
+# (Use R at 1/3 of rotation curve points as proxy when not in MasterSheet)
+idx = len(data) // 3
+R_d = R[idx] if idx > 0 else R[-1] / 2
+```
 
 **Sample Selection:**
-| Criterion | N |
-|-----------|---|
-| SPARC database | 175 |
-| Valid V_bar at all radii | 174 |
-| ≥3 rotation curve points | **171** |
 
-### Fox+ 2022 Galaxy Clusters (N=42)
+| Criterion | N | Notes |
+|-----------|---|-------|
+| SPARC database | 175 | Original sample |
+| Valid V_bar at all radii | 174 | Excludes UGC01281 (imaginary V_bar) |
+| ≥5 rotation curve points | **171** | Quality cut for reliable RMS |
+
+**Excluded Galaxy:** UGC01281 — excluded due to unphysical V_bar values at inner radii (negative gas velocity dominates over disk velocity, producing imaginary V_bar).
+
+---
+
+### SI §6.2 Fox+ 2022 Galaxy Clusters (N=42)
 
 **Source:** Fox et al. (2022), ApJ 928, 87  
+**Title:** "The Strongest Cluster Lenses: An Analysis of the Relation between Strong Lensing Strength and Physical Properties of Galaxy Clusters"  
+**DOI:** 10.3847/1538-4357/ac5024
+
 **File:** `data/clusters/fox2022_unique_clusters.csv`
 
-**Selection Criteria:**
-- Spectroscopic redshift confirmed
-- M500 > 2×10¹⁴ M☉
-- Both M500 and MSL_200kpc measurements available
+**Column Format:**
+
+| Column | Units | Description |
+|--------|-------|-------------|
+| `cluster` | — | Cluster name (e.g., "Abell 370") |
+| `z_lens` | — | Cluster redshift |
+| `M500_1e14Msun` | 10¹⁴ M☉ | Total mass within R500 (from SZ/X-ray) |
+| `MSL_200kpc_1e12Msun` | 10¹² M☉ | Strong lensing mass at 200 kpc aperture |
+| `spec_z_constraint` | — | "yes" if spectroscopic redshift available |
+
+**Selection Criteria Applied:**
+
+1. `spec_z_constraint == 'yes'` — Spectroscopic redshift confirmed
+2. `M500_1e14Msun > 2.0` — Exclude low-mass clusters with large uncertainties
+3. Both M500 and MSL_200kpc measurements available
 
 **Baryonic Mass Estimate:**
-$$M_{\rm bar} = 0.4 \times f_{\rm baryon} \times M_{500}$$
-where $f_{\rm baryon} = 0.15$
 
-### Eilers-APOGEE-Gaia Milky Way (N=28,368)
+$$M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$$
 
-**Source:** Cross-match of:
-- Eilers+ 2019 (spectrophotometric distances)
-- APOGEE DR17 (radial velocities)
-- Gaia EDR3 (proper motions)
+where:
+- $f_{\rm baryon} = 0.15$ (cosmic baryon fraction)
+- Factor 0.4 accounts for concentration of baryons within 200 kpc aperture
+
+**Processing Steps:**
+
+```python
+# 1. Filter to high-quality clusters
+df_valid = df[
+    df['M500_1e14Msun'].notna() & 
+    df['MSL_200kpc_1e12Msun'].notna() &
+    (df['spec_z_constraint'] == 'yes') &
+    (df['M500_1e14Msun'] > 2.0)
+]
+
+# 2. Compute baryonic mass at 200 kpc
+M500 = df_valid['M500_1e14Msun'] * 1e14  # Convert to M☉
+M_bar_200 = 0.4 * 0.15 * M500            # 0.4 × f_baryon × M500
+
+# 3. Compute baryonic acceleration
+r_kpc = 200
+r_m = r_kpc * 3.086e19
+g_bar = G * M_bar_200 * M_sun / r_m**2
+```
+
+---
+
+### SI §6.3 Eilers-APOGEE-Gaia Milky Way (N=28,368)
+
+**Source:** Cross-match of three catalogs:
+1. **Eilers+ 2019** (ApJ 871, 120): Spectrophotometric distances
+2. **APOGEE DR17**: Radial velocities and stellar parameters
+3. **Gaia EDR3**: Proper motions and parallaxes
 
 **File:** `data/gaia/eilers_apogee_6d_disk.csv`
 
-**Selection:**
-- Disk stars with 4 < R_gal < 15 kpc
-- |z| < 0.5 kpc
-- Full 6D phase space
+**Column Format:**
 
-### Counter-Rotating Galaxies (N=63)
+| Column | Units | Description |
+|--------|-------|-------------|
+| `source_id` | — | Gaia source identifier |
+| `R_gal` | kpc | Galactocentric cylindrical radius |
+| `z` | kpc | Height above Galactic plane |
+| `v_R` | km/s | Radial velocity component |
+| `v_phi` | km/s | Azimuthal velocity (raw, needs sign correction) |
+| `v_z` | km/s | Vertical velocity component |
+
+**Sign Convention:** The raw `v_phi` column uses the opposite sign convention from standard (positive = retrograde). We apply:
+
+```python
+v_phi_obs = -df['v_phi']  # Correct to positive = prograde
+```
+
+**Selection Criteria:**
+- Disk stars: 4 < R_gal < 15 kpc
+- Thin disk: |z| < 0.5 kpc
+- Full 6D phase space available
+
+**Solar Motion Parameters Used:**
+
+```python
+R0_KPC = 8.122      # Distance from Sun to Galactic center (Bennett & Bovy 2019)
+ZSUN_KPC = 0.0208   # Height of Sun above Galactic plane
+VSUN_KMS = [11.1, 232.24, 7.25]  # Solar motion [U, V, W] (Schönrich+ 2010)
+```
+
+**Baryonic Model:** McMillan 2017, scaled by factor 1.16× to match SPARC calibration:
+
+```python
+MW_VBAR_SCALE = 1.16  # Within ~20% uncertainty of McMillan 2017 (Cautun+ 2020)
+M_disk = 4.6e10 * MW_VBAR_SCALE**2   # Disk mass
+M_bulge = 1.0e10 * MW_VBAR_SCALE**2  # Bulge mass
+M_gas = 1.0e10 * MW_VBAR_SCALE**2    # Gas mass
+```
+
+**Asymmetric Drift Correction:**
+
+$$V_a = \frac{\sigma_R^2}{2 V_c} \times \left(\frac{R}{R_d} - 1\right)$$
+
+where σ_R is computed in radial bins from the data itself.
+
+---
+
+### SI §6.4 Counter-Rotating Galaxies (N=63)
 
 **Sources:**
-- MaNGA DynPop catalog (Zhu et al. 2023): `data/manga_dynpop/SDSSDR17_MaNGA_JAM.fits`
-- Bevacqua et al. 2022: `data/stellar_corgi/bevacqua2022_counter_rotating.tsv`
+
+1. **MaNGA DynPop Catalog** (Zhu et al. 2023, MNRAS 522, 6326)
+   - URL: https://manga-dynpop.github.io/pages/data_access/
+   - File: `data/manga_dynpop/SDSSDR17_MaNGA_JAM.fits`
+   - Contents: Dynamical masses and dark matter fractions for 10,296 MaNGA galaxies
+
+2. **Bevacqua et al. 2022 Counter-Rotating Catalog** (MNRAS 511, 139)
+   - VizieR: J/MNRAS/511/139
+   - File: `data/stellar_corgi/bevacqua2022_counter_rotating.tsv`
+   - Contents: 64 counter-rotating galaxies identified in MaNGA
+
+**MaNGA DynPop FITS Structure:**
+
+| HDU | Name | Contents |
+|-----|------|----------|
+| 1 | BASIC | Galaxy properties, `mangaid` for cross-matching |
+| 4 | JAM_NFW | JAM modeling results with NFW halo, contains `fdm_Re` |
+
+**Key Column:** `fdm_Re` in HDU 4 — Dark matter fraction within effective radius from JAM modeling
+
+**Cross-Matching:**
+
+```python
+# MaNGA ID format: "1-113520"
+dynpop_idx = {str(mid).strip(): i for i, mid in enumerate(basic['mangaid'])}
+matches = [dynpop_idx[cr_id] for cr_id in cr_manga_ids if cr_id in dynpop_idx]
+```
+
+**Download Commands:**
+
+```bash
+# MaNGA DynPop catalog
+mkdir -p data/manga_dynpop
+curl -L -o data/manga_dynpop/SDSSDR17_MaNGA_JAM.fits \
+  "https://raw.githubusercontent.com/manga-dynpop/manga-dynpop.github.io/main/catalogs/JAM/SDSSDR17_MaNGA_JAM.fits"
+
+# Bevacqua et al. counter-rotating catalog
+mkdir -p data/stellar_corgi
+curl -s "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/MNRAS/511/139/table1&-out.max=200&-out.form=|" \
+  > data/stellar_corgi/bevacqua2022_counter_rotating.tsv
+```
+
+---
+
+### SI §6.5 Cosmological Parameters
+
+| Parameter | Value | Source |
+|-----------|-------|--------|
+| H₀ | 70 km/s/Mpc | Planck 2018 (rounded) |
+| c | 2.998×10⁸ m/s | CODATA 2018 |
+| G | 6.674×10⁻¹¹ m³/kg/s² | CODATA 2018 |
+| M☉ | 1.989×10³⁰ kg | IAU 2015 |
+| 1 kpc | 3.086×10¹⁹ m | IAU 2012 |
+| Ωₘ | 0.3 | Planck 2018 |
+| ΩΛ | 0.7 | Planck 2018 |
 
 ---
 
