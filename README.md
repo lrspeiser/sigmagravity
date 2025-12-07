@@ -296,13 +296,13 @@ $$g_{\text{eff}} = g_N \cdot \Sigma_{\text{eff}}(g_N, r)$$
 - Coherence functional $\mathcal{C}$ enters only through $W(r)$ (simplifying ansatz)
 
 **Resolved issues:**
-- Stress-energy conservation: Established via dynamical coherence field (SI §23)
+- Stress-energy conservation: Established via dynamical coherence field (SI §10)
 - Fifth force concern: Eliminated via QUMOND-like formulation with minimal matter coupling (§2.14.2)
 - Matter Lagrangian convention: Specified as $\mathcal{L}_m = -\rho c^2$ (§2.14.0)
 
 **Partially open issues:**
-- WEP: Plausibly satisfied (universal coupling), but composite body analysis needed (SI §24)
-- LLI: Status uncertain; requires formal teleparallel verification (SI §24)
+- WEP: Plausibly satisfied (universal coupling), but composite body analysis needed
+- LLI: Status uncertain; requires formal teleparallel verification
 - LPI: Satisfied (position-independent constants)
 
 **What remains fully open:**
@@ -804,7 +804,7 @@ Resolution requires: (1) derivation of the external field effect (or its absence
 
 This ambiguity represents a genuine theoretical gap in the current formulation.
 
-See SI §26 for detailed analysis methodology and reproduction instructions.
+See SI §8 for detailed analysis methodology and reproduction instructions.
 
 ### 2.15 Non-Minimal Coupling: Conservation, Fifth Forces, and Equivalence Principle
 
@@ -846,7 +846,7 @@ $$\boxed{\nabla_\mu \left( T^{\mu\nu}_{\text{matter}} + T^{\mu\nu}_{\text{cohere
 
 The coherence field $\phi_C$ carries the "missing" momentum/energy, analogous to how scalar fields in scalar-tensor theories (Brans-Dicke, f(R)) restore conservation. This is not an *ad hoc* fix—it is the standard resolution for non-minimal coupling theories (see Harko et al. 2011, arXiv:1104.2669).
 
-**Validation:** The dynamical field formulation exactly reproduces original Σ-Gravity predictions (0.000 km/s difference on 50 SPARC galaxies tested). See SI §23 for the complete derivation.
+**Validation:** The dynamical field formulation exactly reproduces original Σ-Gravity predictions (0.000 km/s difference on 50 SPARC galaxies tested). See SI §10 for the complete derivation.
 
 #### 2.14.2 Fifth Force Resolution: QUMOND-Like Formulation
 
@@ -876,7 +876,7 @@ $$\mathbf{g}_{\text{eff}} = -\nabla \Phi = \mathbf{g}_N \cdot \nu(g_N, r)$$
 
 **In the Solar System:** Both $h(g) \to 0$ (high acceleration) and $W(r) \to 0$ (compact system) suppress $\nu - 1 < 10^{-8}$. The phantom density vanishes, recovering standard Newtonian gravity.
 
-**Relation to dynamical field (§2.14.1):** The stress-energy conservation proof using $\phi_C$ remains valid. The QUMOND-like formulation is the **weak-field limit** of the full dynamical theory, where the field equation for $\phi_C$ reduces to the phantom density prescription. See SI §24.4 for the complete derivation.
+**Relation to dynamical field (§2.14.1):** The stress-energy conservation proof using $\phi_C$ remains valid. The QUMOND-like formulation is the **weak-field limit** of the full dynamical theory, where the field equation for $\phi_C$ reduces to the phantom density prescription. See SI §10 for the complete derivation.
 
 #### 2.14.3 Einstein Equivalence Principle: Assessment
 
@@ -932,7 +932,7 @@ where $r_E = 1$ AU. This satisfies the Cassini bound $|\gamma - 1| < 2.3 \times 
 | LLI | Unknown (likely $\sim 10^{-7}$) | Various | Uncertain; requires formal analysis |
 | LPI | Satisfied | — | Position-independent constants |
 
-**Bottom line:** The QUMOND-like formulation (§2.14.2) eliminates fifth-force concerns entirely: matter couples minimally, and the enhancement appears in the field equations via a phantom density. Solar System constraints are satisfied because $\nu - 1 < 10^{-8}$ in high-acceleration compact systems. A rigorous PPN derivation is needed to make $\gamma - 1$ claims definitive. See SI §23-24 for extended analysis.
+**Bottom line:** The QUMOND-like formulation (§2.14.2) eliminates fifth-force concerns entirely: matter couples minimally, and the enhancement appears in the field equations via a phantom density. Solar System constraints are satisfied because $\nu - 1 < 10^{-8}$ in high-acceleration compact systems. A rigorous PPN derivation is needed to make $\gamma - 1$ claims definitive. See SI §9-10 for extended analysis.
 
 ### 2.16 Amplitude Renormalization from Θ_μν
 
@@ -994,7 +994,7 @@ The SPARC database (Lelli+ 2016) contains 175 late-type galaxies with high-quali
 | Valid V_bar at all radii | 174 |
 | ≥3 rotation curve points | **171** |
 
-All primary results use N=171. The excluded galaxies have counter-rotating gas producing imaginary V_bar (UGC01281) or insufficient data points. Some SI analyses use N=174 (relaxed point requirement); see SI §21 for details.
+All primary results use N=171. The excluded galaxies have counter-rotating gas producing imaginary V_bar (UGC01281) or insufficient data points. See SI §3 for sample selection details.
 
 ### 3.3 Milky Way Sample
 
@@ -1189,7 +1189,7 @@ This would modify the gravitational slip. However:
 - Current observational bounds on slip ($\eta = 1 \pm 0.1$) are consistent with our predictions
 - **This is a testable prediction**: future lensing+dynamics surveys can constrain $\eta$ to ~1%
 
-See SI §25 for the complete derivation and SI §25.8 for testable predictions.
+See SI §11 for the complete derivation and testable predictions.
 
 #### Primary Results
 
@@ -1212,7 +1212,7 @@ Using the unified amplitude formula (D=1, L=600 kpc → A ≈ 8.45) on the Fox+ 
 
 The key result is that Σ-Gravity matches cluster lensing masses with the same formula used for galaxies. The unified amplitude formula $A = A_0 \times [1-D+D(L/L_0)^n]$ naturally produces A ≈ 1.17 for disk galaxies (D=0) and A ≈ 8.45 for clusters (D=1, L=600 kpc).
 
-**Gravitational slip:** The weak-field derivation (SI §25) predicts $\eta = \Psi/\Phi \neq 1$, a testable prediction for future lensing+dynamics surveys.
+**Gravitational slip:** The weak-field derivation (SI §11) predicts $\eta = \Psi/\Phi \neq 1$, a testable prediction for future lensing+dynamics surveys.
 
 ![Figure: Fox+2022 cluster validation](figures/cluster_fox2022_validation.png){width=100%}
 
@@ -1399,7 +1399,7 @@ The coherence transition $\mathcal{C} = 1/2$ occurs when $v_{\rm rot} = \sigma_v
 
 $$r_{\rm transition} \sim \frac{\sigma_v}{\Omega}$$
 
-This motivates an alternative dynamical coherence scale $\xi = \kappa \times \sigma_{\rm eff}/\Omega_d$, where $\kappa$ is an orbit-averaging constant (see SI §28 for calibration).
+This motivates an alternative dynamical coherence scale $\xi = \kappa \times \sigma_{\rm eff}/\Omega_d$, where $\kappa$ is an orbit-averaging constant (see SI §13 for calibration).
 
 **Derivation target:** Compute $\kappa$ from the orbit-averaged coherence integral:
 
@@ -1526,7 +1526,7 @@ python scripts/run_regression.py  # Validates all results in this paper
 | Clusters | Ratio=0.987 | 42 |
 | Milky Way | RMS=29.5 km/s | 28,368 |
 
-See SI §7 for complete reproduction guide, data sources, and output file locations.
+See SI §4 for complete reproduction guide, data sources, and output file locations.
 
 ---
 
@@ -1535,10 +1535,10 @@ See SI §7 for complete reproduction guide, data sources, and output file locati
 Extended derivations, additional validation tests, parameter derivation details, morphology dependence analysis, gate derivations, cluster analysis details, and complete reproduction instructions are provided in SUPPLEMENTARY_INFORMATION.md.
 
 Key sections include:
-- **SI §20**: ΛCDM Comparison Methodology and Results
-- **SI §21**: Complete Reproducibility Guide
-- **SI §22**: Explicit Θ_μν Derivation and Amplitude Renormalization
-- **SI §25**: Relativistic Lensing Derivation (gravitational slip η = Ψ/Φ, deflection angle, dynamics-lensing consistency)
+- **SI §4**: Complete Reproducibility Guide
+- **SI §5**: SPARC Galaxy Analysis
+- **SI §9**: Teleparallel Gravity Foundation
+- **SI §11**: Relativistic Lensing Derivation
 
 ---
 
