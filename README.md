@@ -83,7 +83,7 @@ The coherence window $W(r) = 1 - (\xi/(\xi+r))^{0.5}$ captures the empirical obs
 - The functional form (Burr-XII type) emerges from superstatistical models where a rate parameter has a Gamma distribution
 - The exponent 0.5 follows from single-channel decoherence statistics
 
-**Coherence scale ξ:** All results in this paper use $\xi = (2/3) \times R_d$ (disk scale length). An alternative dynamical formulation $\xi = k \times \sigma_{\rm eff}/\Omega_d$ shows 16% improvement in ablation studies (SI §28) but is not used for primary results.
+**Coherence scale ξ:** All results in this paper use $\xi = (2/3) \times R_d$ (disk scale length). An alternative dynamical formulation $\xi = \kappa \times \sigma_{\rm eff}/\Omega_d$ shows 16% improvement in ablation studies (SI §28) but is not used for primary results.
 
 **Physical interpretation:** The coherence scale ξ is the radius where random motions (σ_eff) become comparable to ordered rotation (Ω × r). This is an **instantaneous** property of the velocity field—purely spatial, no temporal accumulation.
 
@@ -356,7 +356,9 @@ $$W(r) \approx \langle \mathcal{C} \rangle_{\rm orbit}$$
 
 where C is the covariant coherence scalar defined in §2.5. The gravitational enhancement at radius r depends on the coherence of **all matter** contributing to gravity there, weighted by gravitational influence:
 
-$$W(r) = \frac{\int \mathcal{C}(r') \, \Sigma(r') \, K(r, r') \, r' \, dr'}{\int \Sigma(r') \, K(r, r') \, r' \, dr'}$$
+$$W(r) = \frac{\int \mathcal{C}(r') \, \Sigma_b(r') \, K(r, r') \, r' \, dr'}{\int \Sigma_b(r') \, K(r, r') \, r' \, dr'}$$
+
+where $\Sigma_b(r')$ is the baryonic surface density (distinct from the enhancement factor Σ).
 
 **Coherence Scale:**
 
@@ -368,20 +370,20 @@ where $R_d$ is the disk scale length. All results in this paper use this form.
 
 **Physical interpretation:** ξ is the radius where random motions become comparable to ordered rotation. This is an **instantaneous** property of the velocity field—purely spatial, no time accumulation.
 
-An alternative dynamical formulation ($\xi = k \times \sigma_{\rm eff}/\Omega_d$) shows 16% improvement in ablation studies but is not used for primary results. See SI §28 for details.
+An alternative dynamical formulation ($\xi = \kappa \times \sigma_{\rm eff}/\Omega_d$) shows 16% improvement in ablation studies but is not used for primary results. See SI §28 for details.
 
 **Derivation of the exponent from Decoherence Statistics:**
 
-Assume the decoherence rate $\lambda$ follows a Gamma distribution with shape parameter $k$: $\lambda \sim \text{Gamma}(k, \theta)$
+Assume the decoherence rate $\lambda$ follows a Gamma distribution with shape parameter $\alpha$: $\lambda \sim \text{Gamma}(\alpha, \theta)$
 
 The survival probability for coherence is:
-$$S(R) = \mathbb{E}[\exp(-\lambda R)] = \left(\frac{\theta}{\theta + R}\right)^k$$
+$$S(R) = \mathbb{E}[\exp(-\lambda R)] = \left(\frac{\theta}{\theta + R}\right)^\alpha$$
 
 The coherent amplitude is $A(R) = \sqrt{S(R)}$, giving:
-$$W(R) = 1 - \left(\frac{\ell_0}{\ell_0 + R}\right)^{k/2}$$
+$$W(R) = 1 - \left(\frac{\ell_0}{\ell_0 + R}\right)^{\alpha/2}$$
 
-**For disk galaxies with one dominant decoherence channel ($k = 1$):**
-$$n_{\text{coh}} = k/2 = 0.5$$
+**For disk galaxies with one dominant decoherence channel ($\alpha = 1$):**
+$$n_{\text{coh}} = \alpha/2 = 0.5$$
 
 The exponent $n_{\text{coh}} = 0.5$ is a **rigorous derivation** from Gamma-exponential conjugacy (verified by Monte Carlo to <1% error).
 
@@ -626,7 +628,7 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 
 **Key results:**
 1. **Path length amplitude scaling:** $A = A_0 \times L^{1/4}$ unifies galaxy and cluster amplitudes with a single constant $A_0 \approx 1.6$ (see §2.12.1)
-2. **Dynamical coherence scale (alternative):** An alternative $\xi = k \times \sigma_{\rm eff}/\Omega_d$ formulation shows 16% improvement in ablation studies (SI §28) but is not used for primary results.
+2. **Dynamical coherence scale (alternative):** An alternative $\xi = \kappa \times \sigma_{\rm eff}/\Omega_d$ formulation shows 16% improvement in ablation studies (SI §28) but is not used for primary results.
 
 ### 2.12.1 Path Length Derivation of Amplitude
 
@@ -976,17 +978,17 @@ This resolves the question of how the action leads to the modified Poisson equat
 
 ### 3.2 SPARC Galaxy Sample
 
-The SPARC database (Lelli+ 2016) contains 175 late-type galaxies with high-quality rotation curves and 3.6μm photometry. Four galaxies are excluded due to insufficient data points or unphysical V_bar values, leaving **171 galaxies** for analysis.
+The SPARC database (Lelli+ 2016) contains 175 late-type galaxies with high-quality rotation curves and 3.6μm photometry.
 
-**Sample Selection Criteria:**
+**Sample Selection:**
 
-| Criterion | Requirement | Galaxies Passing |
-|-----------|-------------|------------------|
-| SPARC database | Lelli+ 2016 rotation curves | 175 |
-| Valid V_bar | $V_{\text{bar}} = \sqrt{\text{sign}(V_g)V_g^2 + \text{sign}(V_d)V_d^2 + V_b^2} > 0$ at all radii | 174 |
-| Minimum points | ≥3 rotation curve points | 171 |
+| Criterion | N |
+|-----------|---|
+| SPARC database | 175 |
+| Valid V_bar at all radii | 174 |
+| ≥3 rotation curve points | **171** |
 
-**Excluded galaxy:** UGC01281 — At r < 0.3 kpc, the counter-rotating gas component ($V_{\text{gas}} = -5.85$ km/s) dominates over the stellar disk ($V_{\text{disk}} = 1.5-3.5$ km/s), producing $V_{\text{bar}}^2 < 0$ and thus imaginary baryonic velocity.
+All primary results use N=171. The excluded galaxies have counter-rotating gas producing imaginary V_bar (UGC01281) or insufficient data points. Some SI analyses use N=174 (relaxed point requirement); see SI §21 for details.
 
 ### 3.3 Milky Way Sample
 
@@ -1391,13 +1393,13 @@ The coherence transition $\mathcal{C} = 1/2$ occurs when $v_{\rm rot} = \sigma_v
 
 $$r_{\rm transition} \sim \frac{\sigma_v}{\Omega}$$
 
-This motivates an alternative dynamical coherence scale $\xi = k \times \sigma_{\rm eff}/\Omega_d$, where $k$ is an orbit-averaging constant (see SI §28 for calibration).
+This motivates an alternative dynamical coherence scale $\xi = \kappa \times \sigma_{\rm eff}/\Omega_d$, where $\kappa$ is an orbit-averaging constant (see SI §28 for calibration).
 
-**Derivation target:** Compute $k$ from the orbit-averaged coherence integral:
+**Derivation target:** Compute $\kappa$ from the orbit-averaged coherence integral:
 
 $$\langle W \rangle = \frac{1}{T_{\rm orbit}} \oint W(r(t)) \, dt$$
 
-where the orbit samples different radii due to epicyclic motion. The constant $k$ should emerge from the ratio of epicyclic to circular frequencies ($\kappa/\Omega$) in a thin disk.
+where the orbit samples different radii due to epicyclic motion. The constant $\kappa$ should emerge from the ratio of epicyclic to circular frequencies in a thin disk.
 
 #### 5.4.2 Clusters as the Same Principle in a Different Kinematic Regime
 
@@ -1446,7 +1448,7 @@ where:
 
 | Target | Current Status | Path Forward |
 |--------|---------------|--------------|
-| Dynamical k | Calibrated (SI §28) | Orbit-averaging integral with epicyclic corrections |
+| Dynamical κ | Calibrated (SI §28) | Orbit-averaging integral with epicyclic corrections |
 | ξ ∝ σ/Ω | Dynamically motivated | NR limit of covariant scalar at C = 1/2 |
 | Cluster ξ | Correlated with T_dyn | Dispersion-dominated limit of same scalar |
 | ξ(z) evolution | Empirical hint (r = 0.77) | Replace H₀² with H(z)² in covariant scalar |
@@ -1456,141 +1458,55 @@ These derivations would elevate the coherence scale from "dynamically motivated"
 
 ---
 
-## 6. Code Availability and Reproducibility
+## 6. Code Availability
 
 Complete code repository: https://github.com/lrspeiser/SigmaGravity
 
-### 6.1 Unified Formula Implementation
+### 6.1 Reference Implementation
 
 ```python
 import numpy as np
 
-# =============================================================================
-# PHYSICAL CONSTANTS (DERIVED)
-# =============================================================================
-c = 2.998e8          # m/s
-H0_SI = 2.27e-18     # s⁻¹ (70 km/s/Mpc)
-kpc_to_m = 3.086e19  # m
-
-# Critical acceleration (derived from cosmology)
+# Constants
+c, H0_SI, kpc_to_m = 2.998e8, 2.27e-18, 3.086e19
 g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 9.60e-11 m/s²
-
-# =============================================================================
-# MODEL PARAMETERS
-# =============================================================================
-# Amplitudes from path length scaling: A = A₀ × L^(1/4), A₀ ≈ 1.6
-A_GALAXY = np.sqrt(3)  # L ≈ 1.5 kpc → A = 1.79, use √3 ≈ 1.73
-A_CLUSTER = 8.0        # L ≈ 400 kpc → A = 7.15, use 8.0
-XI_SCALE = 2/3         # ξ = (2/3) × R_d
-
-# =============================================================================
-# CORE FUNCTIONS
-# =============================================================================
+A_GALAXY, A_CLUSTER, XI_SCALE = np.sqrt(3), 8.0, 2/3
 
 def h_function(g_N):
-    """
-    Acceleration function h(g_N).
-    Depends on BARYONIC Newtonian acceleration (QUMOND-like).
-    """
+    """Acceleration function h(g_N) - QUMOND-like."""
     g_N = np.maximum(g_N, 1e-15)
     return np.sqrt(g_dagger / g_N) * g_dagger / (g_dagger + g_N)
 
 def W_coherence(r_kpc, R_d_kpc):
-    """
-    Coherence window W(r) = 1 - (ξ/(ξ+r))^0.5
-    
-    Args:
-        r_kpc: Galactocentric radius (kpc)
-        R_d_kpc: Disk scale length (kpc)
-    
-    Returns:
-        W(r) in range [0, 1]
-    """
-    xi = XI_SCALE * R_d_kpc  # ξ = (2/3) × R_d
-    xi = max(xi, 0.01)
+    """Coherence window W(r) = 1 - (ξ/(ξ+r))^0.5"""
+    xi = max(XI_SCALE * R_d_kpc, 0.01)
     return 1 - np.sqrt(xi / (xi + r_kpc))
 
 def Sigma_enhancement(r_kpc, g_N, R_d_kpc, A=A_GALAXY):
-    """
-    Complete enhancement factor: Σ = 1 + A × W(r) × h(g_N)
-    
-    Args:
-        r_kpc: Galactocentric radius (kpc)
-        g_N: Baryonic Newtonian acceleration (m/s²)
-        R_d_kpc: Disk scale length (kpc)
-        A: Amplitude from A = A₀ × L^(1/4) (√3 for disks, 8.0 for clusters)
-    """
-    W = W_coherence(r_kpc, R_d_kpc)
-    h = h_function(g_N)
-    return 1 + A * W * h
+    """Enhancement factor: Σ = 1 + A × W(r) × h(g_N)"""
+    return 1 + A * W_coherence(r_kpc, R_d_kpc) * h_function(g_N)
 
 def predict_velocity(R_kpc, V_bar_kms, R_d_kpc, A=A_GALAXY):
-    """
-    Predict rotation velocity from baryonic velocity.
-    
-    V_pred = V_bar × √Σ
-    """
-    R_m = R_kpc * kpc_to_m
-    V_bar_ms = V_bar_kms * 1000
-    g_N = V_bar_ms**2 / R_m
-    
-    Sigma = Sigma_enhancement(R_kpc, g_N, R_d_kpc, A)
-    return V_bar_kms * np.sqrt(Sigma)
+    """V_pred = V_bar × √Σ"""
+    g_N = (V_bar_kms * 1000)**2 / (R_kpc * kpc_to_m)
+    return V_bar_kms * np.sqrt(Sigma_enhancement(R_kpc, g_N, R_d_kpc, A))
 ```
 
----
-
-### 6.2 Environment Setup
+### 6.2 Reproduction
 
 ```bash
-# Clone repository
-git clone https://github.com/lrspeiser/SigmaGravity.git
-cd SigmaGravity
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-
-# Install dependencies
+git clone https://github.com/lrspeiser/SigmaGravity.git && cd SigmaGravity
 pip install numpy scipy pandas matplotlib astropy
+python run_regression.py  # Validates all results in this paper
 ```
 
-### 6.3 Data Sources
+| Test | Result | N |
+|------|--------|---|
+| SPARC galaxies | RMS=18.97 km/s | 171 |
+| Clusters | Ratio=0.955 | 42 |
+| Milky Way | RMS=28.8 km/s | 28,368 |
 
-| Dataset | Source | Location |
-|---------|--------|----------|
-| SPARC galaxies | http://astroweb.cwru.edu/SPARC/ | `data/sparc/` |
-| Gaia MW | Generated from Gaia DR3 | `data/gaia/outputs/` |
-| Galaxy clusters | Fox et al. 2022 | `data/clusters/` |
-| MaNGA DynPop | https://manga-dynpop.github.io/ | `data/manga_dynpop/` |
-| Counter-rotating | Bevacqua et al. 2022 (VizieR) | `data/stellar_corgi/` |
-
-### 6.4 Master Regression Test
-
-**Run this after any formula change:**
-
-```bash
-python run_regression.py           # Full test (all domains)
-python run_regression.py --quick   # Skip slow tests (Gaia)
-```
-
-This single script validates all domains with authoritative data sources:
-
-| Test | Result | Data Source |
-|------|--------|-------------|
-| **SPARC galaxies** | RMS=18.97 km/s, 42% win rate | 171 galaxies from Lelli+ 2016 |
-| **Clusters** | Median ratio=0.955 | 42 Fox+ 2022 clusters |
-| **Gaia/MW** | RMS=28.8 km/s | 28,368 Eilers-APOGEE stars |
-| **Counter-rotation** | p=0.004 | 63 Bevacqua+ 2022 galaxies |
-| **Redshift** | g†(z) ∝ H(z) confirmed | Theoretical consistency |
-| **Solar System** | \|γ-1\|=1.8×10⁻⁹ | Cassini-safe |
-
-### 6.5 Output Files
-
-| Output | Location |
-|--------|----------|
-| Regression report | `regression_results/latest_report.json` |
-| Paper figures | `figures/` |
+See SI §21 for complete reproduction guide, data sources, and output file locations.
 
 ---
 
