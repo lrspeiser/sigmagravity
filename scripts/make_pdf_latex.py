@@ -66,12 +66,6 @@ def generate_pdf_latex(md_path: Path, pdf_path: Path):
     # LaTeX header to constrain images and improve layout
     latex_header = r'''
 \usepackage{float}
-\usepackage[export]{adjustbox}
-% Redefine includegraphics to enforce max height while keeping full width
-\let\oldincludegraphics\includegraphics
-\renewcommand{\includegraphics}[2][]{%
-  \oldincludegraphics[#1,keepaspectratio,max height=0.42\textheight]{#2}%
-}
 % Allow floats to break if needed
 \renewcommand{\topfraction}{0.9}
 \renewcommand{\bottomfraction}{0.9}
