@@ -184,16 +184,27 @@ R_d = R[idx] if idx > 0 else R[-1] / 2
 **Source:** Fox et al. (2022), ApJ 928, 87  
 **File:** `data/clusters/fox2022_unique_clusters.csv`
 
-**Selection Criteria:**
-1. `spec_z_constraint == 'yes'` — Spectroscopic redshift
-2. `M500_1e14Msun > 2.0` — High-mass clusters only
-3. Both M500 and MSL_200kpc available
+**Full Catalog:** The Fox+ 2022 catalog contains 94 unique galaxy clusters with strong lensing measurements.
+
+**Selection Criteria (reducing to N=42):**
+
+| Criterion | N remaining | Rationale |
+|-----------|-------------|-----------|
+| Fox+ 2022 full catalog | 94 | Starting sample |
+| `spec_z_constraint == 'yes'` | 68 | Spectroscopic redshifts ensure accurate distance/mass calibration |
+| `M500_1e14Msun > 2.0` | 42 | High-mass clusters have well-measured X-ray/SZ masses and reliable baryon fractions |
+| Both M500 and MSL_200kpc available | **42** | Require both SZ mass and lensing mass for comparison |
+
+**Rationale for filtering:**
+- **Spectroscopic redshifts:** Photometric redshifts introduce ~5-10% distance uncertainties that propagate to ~10-20% mass errors, which would dominate over any theoretical signal.
+- **High-mass cut (M500 > 2×10¹⁴ M☉):** Lower-mass clusters have larger fractional uncertainties in both M500 (from SZ/X-ray) and baryonic mass estimates. The cosmic baryon fraction f_baryon ≈ 0.15 is better calibrated for massive, relaxed clusters.
+- **Complete data:** Both M500 (to estimate baryonic mass) and MSL_200kpc (lensing mass at 200 kpc) are required for the comparison.
 
 **Baryonic Mass Estimate:**
 
 $$M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$$
 
-where f_baryon = 0.15 (cosmic baryon fraction).
+where f_baryon = 0.15 (cosmic baryon fraction). The factor 0.4 accounts for the concentration of baryonic mass within 200 kpc relative to R500.
 
 ### SI §3.3 Eilers-APOGEE-Gaia Milky Way (N=28,368)
 

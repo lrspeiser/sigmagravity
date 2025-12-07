@@ -7,7 +7,7 @@ to ensure the theory remains consistent when formulas are updated.
 
 Tests included:
 1. SPARC Galaxies (171 rotation curves)
-2. Galaxy Clusters (94 Fox+ 2022 lensing masses)
+2. Galaxy Clusters (42 Fox+ 2022 lensing masses)
 3. Milky Way (28,368 Eilers-APOGEE-Gaia stars)
 4. Solar System Safety (Cassini bound, planetary orbits)
 5. Redshift Evolution (high-z predictions)

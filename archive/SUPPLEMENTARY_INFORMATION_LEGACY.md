@@ -4056,7 +4056,7 @@ def W_coherence(r, R_d, V_at_Rd=None, sigma_eff=None, k=0.24):
 The script `derivations/comprehensive_parameter_optimizer.py` provides a comprehensive framework for jointly optimizing Σ-Gravity parameters across all three validation datasets:
 
 1. **SPARC galaxies**: 171 rotation curves with M/L = 0.5 correction
-2. **Galaxy clusters**: 94 Fox+ 2022 strong-lensing clusters
+2. **Galaxy clusters**: 42 Fox+ 2022 strong-lensing clusters
 3. **Milky Way**: 28,368 Eilers-APOGEE-Gaia disk stars
 
 ### SI §29.2. Parameters Optimized
