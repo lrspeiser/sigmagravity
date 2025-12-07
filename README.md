@@ -1076,6 +1076,7 @@ This ensures a fair comparison with identical assumptions.
 | Metric | Σ-Gravity | MOND | Notes |
 |--------|-----------|------|-------|
 | Mean RMS error | **17.75 km/s** | 17.15 km/s | 171 galaxies |
+| RAR scatter | **0.097 dex** | 0.098 dex | Equally tight |
 | Win rate | 47.4% | 52.6% | Fair comparison (same M/L) |
 
 With M/L = 0.5/0.7 (Lelli+ 2016 standard), Σ-Gravity performs comparably to MOND on galaxies. The key advantage is that Σ-Gravity also fits clusters (median ratio = 0.987), which MOND cannot (ratio ~0.33).
@@ -1092,43 +1093,15 @@ With M/L = 0.5/0.7 (Lelli+ 2016 standard), Σ-Gravity performs comparably to MON
 
 Such a comparison is beyond the scope of this work but would strengthen the case for (or against) Σ-Gravity.
 
-### 4.1.1 Head-to-Head ΛCDM Comparison (Equal Parameters)
-
-For a fair direct comparison, we fit both Σ-Gravity and ΛCDM (NFW halos) with **equal numbers of free parameters per galaxy** (2 each).
-
-**Σ-Gravity parameters (2 per galaxy):**
-- $A$: Enhancement amplitude (bounded: [0.01, 5.0])
-- $\xi$: Coherence scale in kpc (bounded: [0.1, 50.0])
-
-**ΛCDM/NFW parameters (2 per galaxy):**
-- $\log_{10}(M_{200})$: Virial mass (bounded: [6, 14])
-- $c$: Concentration (bounded: [1, 50])
-
-**Results on SPARC sample (171 galaxies):**
-
-| Metric | Σ-Gravity | ΛCDM (NFW) |
-|--------|-----------|------------|
-| Mean χ²_red | **1.42** | 1.58 |
-| Median χ²_red | **0.98** | 1.12 |
-| Wins (better χ²_red) | **97** | 74 |
-| Ties (|ratio-1| < 0.05) | 4 | — |
-| RAR scatter | **0.105 dex** | 0.112 dex |
-
-**Bootstrap 95% CI on win rate:** Σ-Gravity wins 55.4% ± 3.8% of galaxies.
-
-**Key observations:**
-1. Σ-Gravity achieves comparable or better fits with the same parameter count
-2. Σ-Gravity parameters ($A$, $\xi$) cluster in narrow, physically-motivated ranges
-3. NFW parameters ($M_{200}$, $c$) span orders of magnitude with weak physical priors
-4. Σ-Gravity naturally explains the RAR; ΛCDM requires it to emerge from halo properties
-
 ![Figure: RAR plot](figures/rar_derived_formula.png){width=100%}
 
-*Figure 4: Radial Acceleration Relation for SPARC galaxies using derived formula. Gray points: observed accelerations. Blue line: Σ-Gravity prediction with A = √3. Red dashed: MOND.*
+*Figure 4: Radial Acceleration Relation for SPARC galaxies using the canonical formula. Gray points: observed accelerations. Blue line: Σ-Gravity prediction. Red dashed: MOND.*
 
 ![Figure: Rotation curve gallery](figures/rc_gallery_derived.png){width=100%}
 
-*Figure 5: Rotation curves for six representative SPARC galaxies selected for RAR scatter near the mean (0.105 dex). Black points: observed data. Green dashed: baryonic (GR). Blue solid: Σ-Gravity. Red dotted: MOND.*
+*Figure 5: Rotation curves for six representative SPARC galaxies. Black points: observed data. Green dashed: baryonic (GR). Blue solid: Σ-Gravity. Red dotted: MOND.*
+
+**Parameter-free comparison:** Unlike ΛCDM (2-3 fitted halo parameters per galaxy), Σ-Gravity uses the same canonical formula for all 171 galaxies with no per-galaxy fitting. See SI §14 for ablation studies with fitted parameters.
 
 ### 4.2 Milky Way Validation
 
@@ -1295,8 +1268,8 @@ At cluster lensing radii ($r \sim 200$ kpc), the coherence window approaches uni
 
 | Domain | Formula | Amplitude | Performance |
 |--------|---------|-----------|-------------|
-| SPARC galaxies (171) | Σ = 1 + A(D,L)·W·h | 1.173 (D=0) | 17.75 km/s RMS, 47% wins vs MOND |
-| Milky Way (28,368 stars) | same | 1.173 (D=0) | 29.5 km/s RMS |
+| SPARC galaxies (171) | Σ = 1 + A(D,L)·W·h | 1.173 (D=0) | RMS 17.75 km/s, RAR scatter 0.097 dex, 47% wins vs MOND |
+| Milky Way (28,368 stars) | same | 1.173 (D=0) | RMS 29.5 km/s |
 | Galaxy clusters (42) | same | 8.45 (D=1, L=600) | Median ratio 0.987, scatter 0.132 dex |
 
 **Key result:** The same formula Σ = 1 + A(D,L)·W·h works across all scales. The unified amplitude formula naturally produces the correct enhancement for both 2D disk galaxies and 3D spherical clusters.
