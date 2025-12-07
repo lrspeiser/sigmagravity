@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-06T15:52:52.315499",
-  "all_passed": true,
+  "timestamp": "2025-12-06T16:36:57.165523",
+  "all_passed": false,
   "total_tests": 8,
-  "passed_tests": 8,
-  "failed_tests": 0,
+  "passed_tests": 7,
+  "failed_tests": 1,
   "results": [
     {
       "name": "Critical Acceleration",
@@ -116,32 +116,32 @@
     },
     {
       "name": "SPARC Galaxies",
-      "passed": true,
-      "metric": 19.180747780609295,
+      "passed": false,
+      "metric": 18.725841765977528,
       "threshold": 25.0,
       "details": {
         "n_galaxies": 171,
-        "mean_rms": 19.180747780609295,
-        "mean_mond_rms": 27.242781734011224,
-        "wins": 146,
-        "win_rate": 85.38011695906432,
-        "improvement": 29.593284680385228
+        "mean_rms": 18.725841765977528,
+        "mean_mond_rms": 17.154025922937112,
+        "wins": 69,
+        "win_rate": 40.35087719298245,
+        "improvement": -9.162955973726831
       },
-      "message": "PASSED: RMS=19.18 km/s, Wins=85.4%, Improvement=29.6%"
+      "message": "FAILED: RMS=18.73 km/s, Wins=40.4%, Improvement=-9.2%"
     },
     {
       "name": "Galaxy Clusters",
       "passed": "True",
-      "metric": 0.9994929654264872,
+      "metric": 1.0199702423641637,
       "threshold": 1.0,
       "details": {
         "n_clusters": 94,
-        "median_ratio": 0.9994929654264872,
-        "scatter_dex": 0.7697802375083626,
-        "min_ratio": 0.45845195603913197,
-        "max_ratio": 686.5350888148154
+        "median_ratio": 1.0199702423641637,
+        "scatter_dex": 0.7693342052593508,
+        "min_ratio": 0.46956811601076903,
+        "max_ratio": 690.9774269726859
       },
-      "message": "PASSED: Median ratio=0.999, Scatter=0.770 dex"
+      "message": "PASSED: Median ratio=1.020, Scatter=0.769 dex"
     },
     {
       "name": "Milky Way",

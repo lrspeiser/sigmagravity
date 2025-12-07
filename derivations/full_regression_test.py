@@ -59,8 +59,13 @@ G_GALAXY = 0.038
 G_CLUSTER = 1.0
 
 # Derived amplitudes
-A_GALAXY = np.sqrt(A_COEFF + B_COEFF * G_GALAXY**2)
-A_CLUSTER = np.sqrt(A_COEFF + B_COEFF * G_CLUSTER**2)
+# Note: The A(G) formula gives A_galaxy ≈ 1.33, but the original √3 ≈ 1.73 
+# performed better against MOND. This is an open issue.
+A_GALAXY = np.sqrt(A_COEFF + B_COEFF * G_GALAXY**2)  # ≈ 1.33
+A_CLUSTER = np.sqrt(A_COEFF + B_COEFF * G_CLUSTER**2)  # ≈ 10.5
+
+# Alternative: use original √3 for galaxies (performs better)
+# A_GALAXY = np.sqrt(3)  # ≈ 1.73
 
 # Dynamical coherence scale parameter
 K_DYNAMICAL = 0.24
@@ -125,28 +130,38 @@ def xi_dynamical(R_d: float, V_at_Rd: float, sigma_eff: float, k: float = K_DYNA
 
 def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, 
                      A: float = A_GALAXY, r0: float = R0_KPC) -> np.ndarray:
-    """Predict rotation velocity using Σ-Gravity."""
+    """Predict rotation velocity using Σ-Gravity.
+    
+    Uses the canonical formula: Σ = 1 + A × W(r) × h(g)
+    with W(r) = 1 - (ξ/(ξ+r))^0.5 and ξ = r0/3 as approximation.
+    """
     R_m = R_kpc * kpc_to_m
     V_bar_ms = V_bar * 1000
     g_bar = V_bar_ms**2 / R_m
     
     h = h_function(g_bar)
-    f = f_path(R_kpc, r0)
+    # Use W_coherence with ξ ≈ r0/3 (approximation for dynamical ξ)
+    xi = r0 / 3.0
+    W = W_coherence(R_kpc, xi)
     
-    Sigma = 1 + A * f * h
+    Sigma = 1 + A * W * h
     return V_bar * np.sqrt(Sigma)
 
 
 def predict_cluster_mass(M_bar: float, r_kpc: float, 
                          A: float = A_CLUSTER, r0: float = R0_KPC) -> float:
-    """Predict cluster total mass using Σ-Gravity."""
+    """Predict cluster total mass using Σ-Gravity.
+    
+    For clusters, W(r) ≈ 1 at lensing radii (~200 kpc), so we use W=1.
+    """
     r_m = r_kpc * kpc_to_m
     g_bar = G_const * M_bar * M_sun / r_m**2
     
     h = h_function(np.array([g_bar]))[0]
-    f = f_path(np.array([r_kpc]), r0)[0]
+    # For clusters at r ~ 200 kpc with ξ ~ 20 kpc: W ≈ 0.95 ≈ 1
+    W = 1.0
     
-    Sigma = 1 + A * f * h
+    Sigma = 1 + A * W * h
     return M_bar * Sigma
 
 
@@ -307,14 +322,16 @@ def test_sparc_galaxies(galaxies: List[Dict], verbose: bool = False) -> TestResu
         rms = np.sqrt(((V_obs - V_pred)**2).mean())
         rms_list.append(rms)
         
-        # MOND prediction
+        # MOND prediction (standard interpolation function)
         R_m = R * kpc_to_m
         V_bar_ms = V_bar * 1000
         g_bar = V_bar_ms**2 / R_m
         a0 = 1.2e-10
         x = g_bar / a0
+        # Standard interpolation: ν = 1/(1 - exp(-√x))
         nu = 1.0 / (1.0 - np.exp(-np.sqrt(np.maximum(x, 1e-10))))
-        V_mond = V_bar * np.power(nu, 0.25)
+        # V = V_bar × √ν (not ν^0.25 - that was a bug!)
+        V_mond = V_bar * np.sqrt(nu)
         rms_mond = np.sqrt(((V_obs - V_mond)**2).mean())
         mond_rms_list.append(rms_mond)
         
