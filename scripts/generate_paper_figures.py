@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 """
-Generate All Paper Figures Using Derived Formula
-=================================================
+Generate All Paper Figures Using CANONICAL Formula
+===================================================
 
 This script generates publication-quality figures for the Nature Physics paper
-using the unified derived formula:
+using the CANONICAL unified formula (from run_regression.py):
 
-    Σ = 1 + A × W(r) × h(g)
+    Σ = 1 + A(D,L) × W(r) × h(g)
 
 where:
     h(g) = √(g†/g) × g†/(g†+g)
-    W(r) = 1 - (ξ/(ξ+r))^0.5  with ξ = (2/3)R_d
+    W(r) = r/(ξ+r)              [k=1 for 2D coherence]
+    ξ = R_d/(2π)                [one azimuthal wavelength]
     g† = cH₀/(4√π) ≈ 9.6×10⁻¹¹ m/s²
-    A = A₀ × L^(1/4) with A₀ ≈ 1.6
-        - √3 for disk galaxies (L ≈ 1.5 kpc)
-        - 8.0 for clusters (L ≈ 400 kpc)
+    A₀ = exp(1/2π) ≈ 1.173 for disk galaxies
+    A_cluster ≈ 8.45 for clusters (D=1, L=600 kpc)
 
 Author: Sigma Gravity Team
-Date: December 2025 (Updated)
+Date: December 2025 (Updated to canonical formula)
 
 Usage:
     python scripts/generate_paper_figures.py [--output-dir figures/]
@@ -51,17 +51,29 @@ kpc_to_m = 3.086e19  # m per kpc
 # Derived critical acceleration
 g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 9.6×10⁻¹¹ m/s²
 
-# Amplitudes from path length scaling: A = A₀ × L^(1/4), A₀ ≈ 1.6
-A_galaxy = np.sqrt(3)      # ≈ 1.73 (L ≈ 1.5 kpc → A ≈ 1.79, use √3)
-A_cluster = 8.0            # L ≈ 400 kpc → A ≈ 7.15, use 8.0
+# CANONICAL amplitudes from unified formula
+A_0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173 (base amplitude)
+L_0 = 0.40  # Reference path length (kpc)
+N_EXP = 0.27  # Path length exponent
+
+# Coherence scale factor (canonical: ξ = R_d/(2π))
+XI_SCALE = 1 / (2 * np.pi)  # ≈ 0.159
+
+def unified_amplitude(D, L):
+    """Unified amplitude: A = A₀ × [1 - D + D × (L/L₀)^n]"""
+    return A_0 * (1 - D + D * (L / L_0)**N_EXP)
+
+A_galaxy = A_0  # D=0 → A = A₀ ≈ 1.173
+A_cluster = unified_amplitude(1.0, 600)  # D=1, L=600 kpc → A ≈ 8.45
 
 print("=" * 80)
-print("GENERATING PAPER FIGURES WITH DERIVED FORMULA")
+print("GENERATING PAPER FIGURES WITH CANONICAL FORMULA")
 print("=" * 80)
 print(f"g† = cH₀/(4√π) = {g_dagger:.4e} m/s²")
-print(f"A_galaxy = √3 = {A_galaxy:.4f}")
-print(f"A_cluster = 8.0 = {A_cluster:.4f}")
-print(f"Ratio = {A_cluster/A_galaxy:.4f} (from path length scaling A = A₀ × L^(1/4))")
+print(f"A₀ = exp(1/2π) = {A_0:.4f}")
+print(f"ξ = R_d/(2π) = {XI_SCALE:.4f} × R_d")
+print(f"A_galaxy = {A_galaxy:.4f}")
+print(f"A_cluster = {A_cluster:.4f}")
 
 # =============================================================================
 # UNIFIED FORMULA FUNCTIONS
@@ -73,9 +85,10 @@ def h_universal(g):
     return np.sqrt(g_dagger / g) * g_dagger / (g_dagger + g)
 
 def W_coherence(r, R_d=3.0):
-    """Coherence window: W(r) = 1 - (ξ/(ξ+r))^0.5 with ξ = (2/3)R_d"""
-    xi = (2/3) * R_d
-    return 1 - (xi / (xi + r)) ** 0.5
+    """Coherence window: W(r) = r/(ξ+r) with ξ = R_d/(2π) [canonical formula]"""
+    xi = XI_SCALE * R_d
+    xi = max(xi, 0.01)  # Avoid division by zero
+    return r / (xi + r)
 
 def Sigma_unified(r, g, R_d=3.0, A=None):
     """
@@ -308,8 +321,8 @@ def generate_coherence_window_figure(output_dir):
     
     ax.axhline(y=0.5, color='k', linestyle='--', alpha=0.5)
     ax.set_xlabel('Radius r [kpc]')
-    ax.set_ylabel(r'$W(r) = 1 - (\xi/(\xi+r))^{0.5}$')
-    ax.set_title(r'Coherence Window ($\xi = \frac{2}{3}R_d$)')
+    ax.set_ylabel(r'$W(r) = r/(\xi+r)$')
+    ax.set_title(r'Coherence Window ($\xi = R_d/(2\pi)$)')
     ax.legend()
     ax.grid(True, alpha=0.3)
     ax.set_xlim(0, 30)
@@ -343,24 +356,24 @@ def generate_coherence_window_figure(output_dir):
 # =============================================================================
 
 def generate_amplitude_figure(output_dir):
-    """Generate amplitude comparison showing path length scaling."""
-    print("\nGenerating Figure 4: Amplitude comparison (path length scaling)...")
+    """Generate amplitude comparison showing unified amplitude formula."""
+    print("\nGenerating Figure 4: Amplitude comparison (unified formula)...")
     
     fig, ax = plt.subplots(figsize=(8, 5))
     
-    # Path length scaling: A = A₀ × L^(1/4), A₀ ≈ 1.6
-    A0 = 1.6
-    
+    # Unified amplitude formula: A = A₀ × [1 - D + D × (L/L₀)^n]
     # Systems with their path lengths
     systems = ['Disk galaxies', 'Ellipticals', 'Clusters']
-    L_kpc = [1.5, 17, 400]  # Path lengths in kpc
-    A_pred = [A0 * L**0.25 for L in L_kpc]  # Predicted from scaling
-    A_used = [np.sqrt(3), 3.1, 8.0]  # Values used in paper
+    L_kpc = [1.5, 17, 600]  # Path lengths in kpc
+    D_vals = [0, 0.5, 1.0]  # Dimensionality factors
+    
+    A_pred = [unified_amplitude(D, L) for D, L in zip(D_vals, L_kpc)]
+    A_used = [A_0, 3.1, A_cluster]  # Values from canonical formula
     
     x = np.arange(len(systems))
     width = 0.35
     
-    bars1 = ax.bar(x - width/2, A_pred, width, label=f'Path length: A = {A0} × L^(1/4)', 
+    bars1 = ax.bar(x - width/2, A_pred, width, label=f'Unified: A = A₀ × [1-D+D(L/L₀)^n]', 
                    color='steelblue', alpha=0.8)
     bars2 = ax.bar(x + width/2, A_used, width, label='Values used', 
                    color='coral', alpha=0.8)
@@ -374,7 +387,7 @@ def generate_amplitude_figure(output_dir):
                 f'{val:.2f}', ha='center', va='bottom', fontsize=9)
     
     ax.set_ylabel('Amplitude A')
-    ax.set_title(r'Amplitude vs Path Length: $A = A_0 \times L^{1/4}$, $A_0 \approx 1.6$')
+    ax.set_title(r'Amplitude: $A = A_0 \times [1-D+D(L/L_0)^n]$, $A_0 = e^{1/2\pi} \approx 1.17$')
     ax.set_xticks(x)
     ax.set_xticklabels(systems)
     ax.legend(loc='upper left')
@@ -382,8 +395,9 @@ def generate_amplitude_figure(output_dir):
     
     # Add annotation
     ax.text(0.95, 0.95, 
-            f'Path length scaling unifies\nall system types with\nsingle constant A₀ ≈ 1.6\n\n'
-            f'Cluster/Galaxy ratio:\n{A_used[2]/A_used[0]:.2f} (observed)\n{A_pred[2]/A_pred[0]:.2f} (predicted)', 
+            f'Unified amplitude formula\nconnects galaxies and clusters\n\n'
+            f'A₀ = exp(1/2π) ≈ {A_0:.3f}\n'
+            f'Cluster/Galaxy ratio:\n{A_used[2]/A_used[0]:.2f}', 
             transform=ax.transAxes, ha='right', va='top', fontsize=9,
             bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
     

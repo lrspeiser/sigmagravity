@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 """
-Generate Milky Way Gaia Star-Level RAR Comparison Using Derived Formula
-========================================================================
+Generate Milky Way Gaia Star-Level RAR Comparison Using CANONICAL Formula
+=========================================================================
 
-Creates visualization of 157,343 Gaia DR3 stars comparing:
+Creates visualization of Gaia DR3 stars comparing:
 - GR (baryons only)
-- Σ-Gravity (derived formula: A=√3, g†=cH₀/(4√π))
+- Σ-Gravity (canonical formula: A₀=exp(1/2π), g†=cH₀/(4√π))
 - MOND
 
-Uses the derived formula:
+Uses the CANONICAL formula (from run_regression.py):
     Σ = 1 + A × W(r) × h(g)
     h(g) = √(g†/g) × g†/(g†+g)
-    W(r) = 1 - (ξ/(ξ+r))^0.5 with ξ = (2/3)R_d
-    g† = cH₀/(4√π) ≈ 1.25×10⁻¹⁰ m/s²
-    A = √3 ≈ 1.73 for the Milky Way disk
+    W(r) = r/(ξ+r)              [k=1 for 2D coherence]
+    ξ = R_d/(2π)                [one azimuthal wavelength]
+    g† = cH₀/(4√π) ≈ 9.60×10⁻¹¹ m/s²
+    A₀ = exp(1/2π) ≈ 1.173 for disk galaxies
 """
 
 import numpy as np
@@ -39,21 +40,23 @@ H0_SI = 2.27e-18     # 1/s (70 km/s/Mpc)
 kpc_to_m = 3.086e19  # m per kpc
 km_to_m = 1000.0
 
-# Derived parameters (from first principles, NOT fitted)
-g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 1.25×10⁻¹⁰ m/s²
-A_galaxy = np.sqrt(3)              # ≈ 1.732
+# CANONICAL parameters (from run_regression.py)
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 9.60×10⁻¹¹ m/s²
+A_0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173
+A_galaxy = A_0
+XI_SCALE = 1 / (2 * np.pi)  # ≈ 0.159
 R_d_MW = 2.6                       # MW disk scale length (kpc) - from literature
 
 # MOND
 a0_mond = 1.2e-10  # m/s²
 
 print("=" * 70)
-print("MW GAIA VISUALIZATION WITH DERIVED FORMULA")
+print("MW GAIA VISUALIZATION WITH CANONICAL FORMULA")
 print("=" * 70)
 print(f"g† = cH₀/(4√π) = {g_dagger:.4e} m/s²")
-print(f"A = √3 = {A_galaxy:.4f}")
+print(f"A₀ = exp(1/2π) = {A_galaxy:.4f}")
 print(f"R_d (MW) = {R_d_MW} kpc")
-print(f"ξ = (2/3)R_d = {(2/3)*R_d_MW:.2f} kpc")
+print(f"ξ = R_d/(2π) = {XI_SCALE*R_d_MW:.2f} kpc")
 
 
 def h_universal(g):
@@ -63,9 +66,10 @@ def h_universal(g):
 
 
 def W_coherence(r, R_d=R_d_MW):
-    """W(r) = 1 - (ξ/(ξ+r))^0.5 with ξ = (2/3)R_d"""
-    xi = (2/3) * R_d
-    return 1 - (xi / (xi + r)) ** 0.5
+    """W(r) = r/(ξ+r) with ξ = R_d/(2π) [canonical formula]"""
+    xi = XI_SCALE * R_d
+    xi = max(xi, 0.01)
+    return r / (xi + r)
 
 
 def Sigma_derived(r, g_bar, R_d=R_d_MW):

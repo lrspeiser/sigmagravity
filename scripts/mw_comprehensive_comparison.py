@@ -31,9 +31,11 @@ kpc_to_m = 3.086e19  # m per kpc
 km_to_m = 1000.0
 G = 4.302e-6         # kpc (km/s)^2 / Msun
 
-# Model parameters
-g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 1.25×10⁻¹⁰ m/s²
-A_galaxy = np.sqrt(3)              # ≈ 1.732
+# CANONICAL model parameters (from run_regression.py)
+g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 9.60×10⁻¹¹ m/s²
+A_0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173
+A_galaxy = A_0
+XI_SCALE = 1 / (2 * np.pi)  # ≈ 0.159
 R_d_MW = 2.6                       # kpc
 a0_mond = 1.2e-10                  # m/s²
 
@@ -100,16 +102,14 @@ def g_to_v(g, R_kpc):
     return V_m / km_to_m
 
 # ============================================================================
-# Σ-Gravity model functions (GATE-FREE, derived from first principles)
+# Σ-Gravity model functions (CANONICAL formula from run_regression.py)
 # ============================================================================
-# From SI §17.5: Gate-free kernel achieves 0.105 dex scatter (97.6% of full model)
-# Core formula: Σ = 1 + A × C(R) × h(g)
+# Core formula: Σ = 1 + A × W(r) × h(g)
 
-# Derived parameters (NOT fitted):
-# g† = cH₀/(4√π) ≈ 1.25×10⁻¹⁰ m/s²
-# A = √3 ≈ 1.732 for disk galaxies
-# p = 3/4 from path interference
-# ℓ₀ = (2/3)R_d from coherence scale
+# CANONICAL parameters:
+# g† = cH₀/(4√π) ≈ 9.60×10⁻¹¹ m/s²
+# A₀ = exp(1/2π) ≈ 1.173 for disk galaxies
+# ξ = R_d/(2π) (one azimuthal wavelength)
 
 def h_universal(g):
     """
@@ -124,14 +124,15 @@ def h_universal(g):
 
 def C_coherence(r, R_d=R_d_MW):
     """
-    Spatial coherence window: C(R) = 1 - (ξ/(ξ+R))^0.5
+    Coherence window: W(r) = r/(ξ+r) with ξ = R_d/(2π) [canonical formula]
     
     - Suppresses enhancement near center (r << ξ)
     - Approaches 1 at large r
-    - ξ = (2/3)R_d from coherence scale
+    - ξ = R_d/(2π) from azimuthal wavelength
     """
-    xi = (2/3) * R_d
-    return 1 - (xi / (xi + r)) ** 0.5
+    xi = XI_SCALE * R_d
+    xi = max(xi, 0.01)
+    return r / (xi + r)
 
 def Sigma_derived(r, g_bar, R_d=R_d_MW):
     """

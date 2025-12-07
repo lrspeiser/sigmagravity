@@ -9,15 +9,16 @@ This script generates 7 individual galaxy plots comparing four models:
 3. MOND - red dotted
 4. NFW Dark Matter halo - purple dash-dot
 
-Uses the derived formula:
-    Σ = 1 + A × W(r) × h(g)
+Uses the CANONICAL formula (from run_regression.py):
+    Σ = 1 + A(D,L) × W(r) × h(g)
     h(g) = √(g†/g) × g†/(g†+g)
-    W(r) = 1 - (ξ/(ξ+r))^0.5 with ξ = (2/3)R_d
+    W(r) = r/(ξ+r)  [k=1 for 2D coherence]
+    ξ = R_d/(2π)    [one azimuthal wavelength]
     g† = cH₀/(4√π) ≈ 9.60×10⁻¹¹ m/s²
-    A = √3 for galaxies
+    A₀ = exp(1/2π) ≈ 1.173 for galaxies
 
 Author: Sigma Gravity Team
-Date: December 2025 (Updated with new g† formula)
+Date: December 2025 (Updated to canonical formula)
 """
 
 import numpy as np
@@ -44,21 +45,26 @@ H0_SI = 2.27e-18     # 1/s (70 km/s/Mpc)
 G = 6.674e-11        # m³/kg/s²
 kpc_to_m = 3.086e19  # m per kpc
 
-# Derived critical acceleration (UPDATED December 2025)
-# New formula: g† = cH₀/(4√π) - purely geometric derivation
+# Derived critical acceleration (canonical formula)
+# g† = cH₀/(4√π) - purely geometric derivation
 g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 9.60×10⁻¹¹ m/s²
 
-# Amplitudes
-A_galaxy = np.sqrt(3)  # ≈ 1.732
+# Canonical amplitude (from unified formula with D=0)
+A_0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173
+A_galaxy = A_0  # For 2D disk galaxies
+
+# Coherence scale factor (canonical: ξ = R_d/(2π))
+XI_SCALE = 1 / (2 * np.pi)  # ≈ 0.159
 
 # MOND acceleration scale
 a0_mond = 1.2e-10
 
 print("=" * 80)
-print("GENERATING MODEL COMPARISON PLOTS")
+print("GENERATING MODEL COMPARISON PLOTS (Canonical Formula)")
 print("=" * 80)
 print(f"g† = cH₀/(4√π) = {g_dagger:.4e} m/s²")
-print(f"A_galaxy = √3 = {A_galaxy:.4f}")
+print(f"A₀ = exp(1/2π) = {A_0:.4f}")
+print(f"ξ = R_d/(2π) = {XI_SCALE:.4f} × R_d")
 print(f"a0_MOND = {a0_mond:.4e} m/s²")
 
 # =============================================================================
@@ -71,9 +77,10 @@ def h_universal(g):
     return np.sqrt(g_dagger / g) * g_dagger / (g_dagger + g)
 
 def W_coherence(r, R_d=3.0):
-    """Coherence window: W(r) = 1 - (ξ/(ξ+r))^0.5 with ξ = (2/3)R_d"""
-    xi = (2/3) * R_d
-    return 1 - (xi / (xi + r)) ** 0.5
+    """Coherence window: W(r) = r/(ξ+r) with ξ = R_d/(2π) [canonical formula]"""
+    xi = XI_SCALE * R_d
+    xi = max(xi, 0.01)  # Avoid division by zero
+    return r / (xi + r)
 
 def Sigma_unified(r, g, R_d=3.0, A=None):
     """Unified enhancement formula: Σ = 1 + A × W(r) × h(g)"""
@@ -355,10 +362,10 @@ def plot_summary_grid(galaxies, predictions_list, output_dir):
     ax.legend(handles=legend_elements, loc='center', fontsize=11, frameon=True)
     
     # Add formula
-    ax.text(0.5, 0.25, r'$\Sigma = 1 + \sqrt{3} \cdot W(r) \cdot h(g)$', 
+    ax.text(0.5, 0.25, r'$\Sigma = 1 + A_0 \cdot W(r) \cdot h(g)$', 
             transform=ax.transAxes, fontsize=12, ha='center',
             bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.5))
-    ax.text(0.5, 0.1, r'$g^\dagger = cH_0/(2e) \approx 1.2 \times 10^{-10}$ m/s²', 
+    ax.text(0.5, 0.1, r'$g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s²', 
             transform=ax.transAxes, fontsize=10, ha='center')
     
     plt.suptitle('SPARC Galaxy Rotation Curves: Four-Model Comparison', fontsize=14, y=1.02)

@@ -6,10 +6,11 @@ Generate 6-Panel Representative Galaxy Figure
 Selects 6 galaxies closest to the mean RAR scatter (0.100 dex) where Σ-Gravity
 performs well, to illustrate typical predictive performance.
 
-Uses the derived formula:
+Uses the CANONICAL formula (from run_regression.py):
     Σ = 1 + A × W(r) × h(g)
-    g† = cH₀/(4√π) ≈ 1.20×10⁻¹⁰ m/s²
-    A = √3 for galaxies
+    W(r) = r/(ξ+r) with ξ = R_d/(2π)
+    g† = cH₀/(4√π) ≈ 9.60×10⁻¹¹ m/s²
+    A₀ = exp(1/2π) ≈ 1.173 for galaxies
 """
 
 import numpy as np
@@ -34,7 +35,9 @@ c = 2.998e8
 H0_SI = 2.27e-18
 kpc_to_m = 3.086e19
 g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))
-A_galaxy = np.sqrt(3)
+A_0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173
+A_galaxy = A_0
+XI_SCALE = 1 / (2 * np.pi)  # ≈ 0.159
 a0_mond = 1.2e-10
 
 def h_universal(g):
@@ -42,8 +45,9 @@ def h_universal(g):
     return np.sqrt(g_dagger / g) * g_dagger / (g_dagger + g)
 
 def W_coherence(r, R_d=3.0):
-    xi = (2/3) * R_d
-    return 1 - (xi / (xi + r)) ** 0.5
+    xi = XI_SCALE * R_d
+    xi = max(xi, 0.01)
+    return r / (xi + r)
 
 def mond_nu(g):
     g = np.maximum(g, 1e-15)
