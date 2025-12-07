@@ -550,7 +550,7 @@ def main():
     quick = '--quick' in sys.argv
     compare = '--compare' in sys.argv
     
-    data_dir = Path(__file__).parent / "data"
+    data_dir = Path(__file__).parent.parent / "data"
     
     print("=" * 80)
     print("Σ-GRAVITY MASTER REGRESSION TEST")
