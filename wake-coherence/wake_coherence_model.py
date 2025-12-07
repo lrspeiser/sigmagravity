@@ -40,9 +40,10 @@ M_sun = 1.989e30
 # Critical acceleration (Σ-Gravity)
 g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 9.6×10⁻¹¹ m/s²
 
-# Default parameters
-A_GALAXY = np.exp(1 / (2 * np.pi))  # ≈ 1.173
-XI_SCALE = 1 / (2 * np.pi)  # ξ = R_d/(2π)
+# Default parameters (matching regression test)
+A_GALAXY = np.sqrt(3)  # ≈ 1.732 (mode counting from disk geometry)
+XI_SCALE = 2 / 3  # ξ = (2/3) × R_d (regression test value)
+# Note: README uses ξ = R_d/(2π) ≈ 0.159 × R_d, but regression uses 2/3
 
 
 # =============================================================================
@@ -206,9 +207,9 @@ def h_function(g: np.ndarray) -> np.ndarray:
 
 
 def W_geometric(r: np.ndarray, xi: float) -> np.ndarray:
-    """Standard geometric coherence window."""
+    """Standard geometric coherence window: W(r) = 1 - (ξ/(ξ+r))^0.5"""
     xi = max(xi, 0.01)
-    return r / (xi + r)
+    return 1 - np.power(xi / (xi + r), 0.5)
 
 
 def Sigma_enhancement_baseline(

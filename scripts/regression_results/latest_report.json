@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-12-07T10:19:25.057998",
+  "parameters": {
+    "A_galaxy": 1.17251960642002,
+    "A_cluster": 8.0,
+    "xi_scale": 0.15915494309189535,
+    "ml_disk": 0.5,
+    "ml_bulge": 0.7,
+    "g_dagger": 9.598924108127284e-11
+  },
+  "results": [
+    {
+      "name": "SPARC Galaxies",
+      "passed": false,
+      "metric": 0.0,
+      "details": {},
+      "message": "No data"
+    },
+    {
+      "name": "Clusters",
+      "passed": false,
+      "metric": 0.0,
+      "details": {},
+      "message": "No data"
+    },
+    {
+      "name": "Gaia/MW",
+      "passed": true,
+      "metric": 0.0,
+      "details": {},
+      "message": "SKIPPED: No Gaia data"
+    },
+    {
+      "name": "Redshift Evolution",
+      "passed": 1.0,
+      "metric": 2.966479394838265,
+      "details": {
+        "g_dagger_z2": 2.8475010579375856e-10,
+        "ratio": 2.966479394838265
+      },
+      "message": "g\u2020(z=2)/g\u2020(z=0) = 2.966 (expected 2.966)"
+    },
+    {
+      "name": "Solar System",
+      "passed": 1.0,
+      "metric": 1.7650918961610334e-09,
+      "details": {
+        "h_saturn": 1.7650918961610334e-09,
+        "cassini_bound": 2.3e-05
+      },
+      "message": "|\u03b3-1| = 1.77e-09 < 2.30e-05"
+    }
+  ],
+  "all_passed": false
+}
