@@ -1,0 +1,26 @@
+{
+  "k_naive": 0.3333333333333333,
+  "k_orbit_averaged": 0.33242594154973965,
+  "k_empirical": 0.24,
+  "ratio": 0.72,
+  "epicyclic_results": {
+    "flat": {
+      "kappa_over_Omega": 1.4142135623730951,
+      "W_naive": 0.5,
+      "W_orbit": 0.49948931389971424,
+      "ratio": 0.9989786277994285
+    },
+    "keplerian": {
+      "kappa_over_Omega": 1.0,
+      "W_naive": 0.5,
+      "W_orbit": 0.49948931389971424,
+      "ratio": 0.9989786277994285
+    },
+    "solid_body": {
+      "kappa_over_Omega": 2.0,
+      "W_naive": 0.5,
+      "W_orbit": 0.49948931389971424,
+      "ratio": 0.9989786277994285
+    }
+  }
+}

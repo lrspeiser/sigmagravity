@@ -1,0 +1,22 @@
+{
+  "dispersion_ratios": {
+    "sigma_r_over_phi": 1.414213562373095,
+    "sigma_3D_over_phi": 1.8708286933869707,
+    "sigma_2D_over_phi": 1.7320508075688772,
+    "k_3D": 0.1781741612749496,
+    "k_2D": 0.19245008972987526,
+    "k_1D": 0.3333333333333333
+  },
+  "covariant_analysis": {
+    "k_hypothesis1": 0.19245008972987526,
+    "C_at_transition": 0.34141201264488935
+  },
+  "function_matching": {
+    "best_k": 0.11616161616161616,
+    "best_k_weighted": 0.2737373737373737
+  },
+  "final_hypothesis": {
+    "k_matched": 0.18701314831286112,
+    "C_avg": 0.6564608238237237
+  }
+}

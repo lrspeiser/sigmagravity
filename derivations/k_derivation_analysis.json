@@ -1,0 +1,17 @@
+{
+  "n_galaxies": 171,
+  "boundary_hits": {
+    "lower": 57,
+    "upper": 69
+  },
+  "k_interior": {
+    "mean": 0.339309994436521,
+    "median": 0.3330884088069005,
+    "std": 0.21502290144706587
+  },
+  "k_by_range": {
+    "low_k_count": 74,
+    "mid_k_count": 14,
+    "high_k_count": 83
+  }
+}
