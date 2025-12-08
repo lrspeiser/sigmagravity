@@ -1,0 +1,139 @@
+{
+  "hubble_type": {
+    "Im": 39,
+    "Sbc": 18,
+    "Sd": 16,
+    "Sm": 27,
+    "Sc": 16,
+    "Scd": 16,
+    "Sb": 12,
+    "BCD": 5,
+    "S0": 3,
+    "Sab": 10,
+    "Sdm": 10,
+    "Sa": 3
+  },
+  "type_group": {
+    "irregular": 44,
+    "intermediate": 50,
+    "late": 53,
+    "early": 28
+  },
+  "bulge_presence": {
+    "pure_disk": 143,
+    "bulge_dominated": 26,
+    "intermediate_bulge": 6
+  },
+  "rc_shape": {
+    "rising": 48,
+    "unknown": 4,
+    "flat": 111,
+    "declining": 12
+  },
+  "enhancement": {
+    "minimal_enhancement": 35,
+    "moderate_enhancement": 56,
+    "high_enhancement": 41,
+    "low_enhancement": 43
+  },
+  "size": {
+    "compact": 73,
+    "medium": 86,
+    "extended": 16
+  },
+  "surface_brightness": {
+    "normal": 88,
+    "LSB": 12,
+    "HSB": 75
+  },
+  "luminosity": {
+    "dwarf": 32,
+    "low_luminosity": 62,
+    "high_luminosity": 52,
+    "medium_luminosity": 29
+  },
+  "gas_fraction": {
+    "intermediate_gas": 49,
+    "gas_rich": 81,
+    "gas_poor": 45
+  },
+  "acceleration_regime": {
+    "low-g": 104,
+    "mixed": 37,
+    "high-g": 34
+  },
+  "dm_fraction": {
+    "baryon_dominated": 26,
+    "dm_significant": 90,
+    "dm_dominated": 23,
+    "baryon_significant": 34,
+    "unknown": 2
+  },
+  "tf_residual": {
+    "unknown": 40,
+    "on_tf": 79,
+    "above_tf": 50,
+    "below_tf": 6
+  },
+  "distance": {
+    "nearby": 65,
+    "intermediate_distance": 68,
+    "distant": 42
+  },
+  "inclination": {
+    "high_inclination": 50,
+    "moderate_inclination": 48,
+    "edge_on": 36,
+    "face_on": 41
+  },
+  "data_quality": {
+    "low_quality": 78,
+    "medium_quality": 74,
+    "high_quality": 23
+  },
+  "coherence_survival": {
+    "high_survival": 135,
+    "moderate_survival": 13,
+    "low_survival": 14,
+    "minimal_survival": 13
+  },
+  "jeans_length": {
+    "small_jeans": 51,
+    "medium_jeans": 97,
+    "large_jeans": 27
+  },
+  "morphology_dynamics": {
+    "irregular_low-g": 42,
+    "intermediate_mixed": 23,
+    "late_low-g": 50,
+    "intermediate_low-g": 12,
+    "intermediate_high-g": 15,
+    "early_high-g": 19,
+    "early_mixed": 9,
+    "late_mixed": 3,
+    "irregular_mixed": 2
+  },
+  "structure_kinematics": {
+    "compact_rising": 32,
+    "compact_unknown": 3,
+    "compact_flat": 34,
+    "compact_declining": 4,
+    "medium_rising": 16,
+    "medium_flat": 62,
+    "extended_flat": 15,
+    "medium_declining": 7,
+    "extended_declining": 1,
+    "medium_unknown": 1
+  },
+  "bulge_enhancement": {
+    "pure_disk_minimal_enhancement": 24,
+    "pure_disk_moderate_enhancement": 45,
+    "pure_disk_high_enhancement": 41,
+    "pure_disk_low_enhancement": 33,
+    "bulge_dominated_minimal_enhancement": 8,
+    "intermediate_bulge_low_enhancement": 3,
+    "bulge_dominated_moderate_enhancement": 11,
+    "intermediate_bulge_minimal_enhancement": 3,
+    "bulge_dominated_low_enhancement": 7
+  }
+}

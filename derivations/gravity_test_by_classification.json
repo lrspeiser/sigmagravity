@@ -1,0 +1,1832 @@
+{
+  "type_group": {
+    "irregular": {
+      "MOND_simple": {
+        "n_galaxies": 44,
+        "mean_rms": 15.28103503909973,
+        "median_rms": 13.335801203782985,
+        "mean_outer_rms": 15.763628739760016,
+        "mean_inner_rms": 12.235947239885473
+      },
+      "MOND_standard": {
+        "n_galaxies": 44,
+        "mean_rms": 13.434343784952056,
+        "median_rms": 11.53450496185498,
+        "mean_outer_rms": 13.878623024129428,
+        "mean_inner_rms": 10.92502306536666
+      },
+      "Sigma_original": {
+        "n_galaxies": 44,
+        "mean_rms": 11.633690972997806,
+        "median_rms": 8.651014707348759,
+        "mean_outer_rms": 12.632166897131988,
+        "mean_inner_rms": 8.643416707617979
+      },
+      "Survival_threshold": {
+        "n_galaxies": 44,
+        "mean_rms": 10.568904210561605,
+        "median_rms": 7.219823157028648,
+        "mean_outer_rms": 11.138798024545677,
+        "mean_inner_rms": 8.47302450299732
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 44,
+        "mean_rms": 12.75598765321355,
+        "median_rms": 10.29324590275758,
+        "mean_outer_rms": 13.565091561323953,
+        "mean_inner_rms": 9.702888788918338
+      },
+      "win_rates": {
+        "MOND_standard": 0.7954545454545454,
+        "Sigma_original": 0.75,
+        "Survival_threshold": 0.7045454545454546,
+        "Survival_nonlocal": 0.7954545454545454
+      }
+    },
+    "intermediate": {
+      "MOND_simple": {
+        "n_galaxies": 50,
+        "mean_rms": 43.607030059066446,
+        "median_rms": 42.684648005626435,
+        "mean_outer_rms": 41.30124674284645,
+        "mean_inner_rms": 41.71177311534659
+      },
+      "MOND_standard": {
+        "n_galaxies": 50,
+        "mean_rms": 30.98188535547643,
+        "median_rms": 28.38090466677181,
+        "mean_outer_rms": 26.91980503019027,
+        "mean_inner_rms": 32.48283577198975
+      },
+      "Sigma_original": {
+        "n_galaxies": 50,
+        "mean_rms": 41.01982105082594,
+        "median_rms": 40.284890411831384,
+        "mean_outer_rms": 43.572196385750175,
+        "mean_inner_rms": 34.35841974716048
+      },
+      "Survival_threshold": {
+        "n_galaxies": 50,
+        "mean_rms": 29.253701600695845,
+        "median_rms": 28.746911343214215,
+        "mean_outer_rms": 24.96387130390695,
+        "mean_inner_rms": 31.476323456765964
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 50,
+        "mean_rms": 28.474790244511937,
+        "median_rms": 27.076037693445514,
+        "mean_outer_rms": 24.02500199632438,
+        "mean_inner_rms": 30.7427580802335
+      },
+      "win_rates": {
+        "MOND_standard": 0.9,
+        "Sigma_original": 0.66,
+        "Survival_threshold": 0.86,
+        "Survival_nonlocal": 0.88
+      }
+    },
+    "late": {
+      "MOND_simple": {
+        "n_galaxies": 53,
+        "mean_rms": 17.099254171087033,
+        "median_rms": 14.093367092957484,
+        "mean_outer_rms": 18.241327979677,
+        "mean_inner_rms": 13.562529928031056
+      },
+      "MOND_standard": {
+        "n_galaxies": 53,
+        "mean_rms": 13.92189459460948,
+        "median_rms": 10.598138953777434,
+        "mean_outer_rms": 14.682218466592259,
+        "mean_inner_rms": 11.146219717008472
+      },
+      "Sigma_original": {
+        "n_galaxies": 53,
+        "mean_rms": 15.478612985799462,
+        "median_rms": 10.863438680784313,
+        "mean_outer_rms": 17.92210224596211,
+        "mean_inner_rms": 9.923058263190704
+      },
+      "Survival_threshold": {
+        "n_galaxies": 53,
+        "mean_rms": 13.475490714208284,
+        "median_rms": 10.173788748751578,
+        "mean_outer_rms": 13.516403786803973,
+        "mean_inner_rms": 11.027738972916175
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 53,
+        "mean_rms": 14.266784260147709,
+        "median_rms": 10.730582928894167,
+        "mean_outer_rms": 15.694455604502943,
+        "mean_inner_rms": 10.148749574966102
+      },
+      "win_rates": {
+        "MOND_standard": 0.8113207547169812,
+        "Sigma_original": 0.660377358490566,
+        "Survival_threshold": 0.6415094339622641,
+        "Survival_nonlocal": 0.8113207547169812
+      }
+    },
+    "early": {
+      "MOND_simple": {
+        "n_galaxies": 28,
+        "mean_rms": 52.18187128972675,
+        "median_rms": 48.890817651998816,
+        "mean_outer_rms": 40.315459895540116,
+        "mean_inner_rms": 58.02606762235164
+      },
+      "MOND_standard": {
+        "n_galaxies": 28,
+        "mean_rms": 42.247285709587366,
+        "median_rms": 37.772925716943746,
+        "mean_outer_rms": 28.31086185544613,
+        "mean_inner_rms": 50.353586359330635
+      },
+      "Sigma_original": {
+        "n_galaxies": 28,
+        "mean_rms": 50.39859883533547,
+        "median_rms": 49.02704136138029,
+        "mean_outer_rms": 46.5710125861795,
+        "mean_inner_rms": 51.98636756461255
+      },
+      "Survival_threshold": {
+        "n_galaxies": 28,
+        "mean_rms": 41.259494953853995,
+        "median_rms": 36.63353983467699,
+        "mean_outer_rms": 27.12295253050103,
+        "mean_inner_rms": 49.647672434979555
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 28,
+        "mean_rms": 40.84152319292286,
+        "median_rms": 35.50530160128106,
+        "mean_outer_rms": 26.29080307736937,
+        "mean_inner_rms": 49.41446682297573
+      },
+      "win_rates": {
+        "MOND_standard": 0.8571428571428571,
+        "Sigma_original": 0.75,
+        "Survival_threshold": 0.7857142857142857,
+        "Survival_nonlocal": 0.7857142857142857
+      }
+    }
+  },
+  "bulge_presence": {
+    "pure_disk": {
+      "MOND_simple": {
+        "n_galaxies": 143,
+        "mean_rms": 24.615951928650844,
+        "median_rms": 17.46045796416958,
+        "mean_outer_rms": 24.514222349150483,
+        "mean_inner_rms": 22.10685997996828
+      },
+      "MOND_standard": {
+        "n_galaxies": 143,
+        "mean_rms": 18.99502280395553,
+        "median_rms": 13.948151867641537,
+        "mean_outer_rms": 18.35449296351103,
+        "mean_inner_rms": 17.681351239813207
+      },
+      "Sigma_original": {
+        "n_galaxies": 143,
+        "mean_rms": 22.031382631781906,
+        "median_rms": 14.90447794683672,
+        "mean_outer_rms": 24.187278728018068,
+        "mean_inner_rms": 17.19362615523488
+      },
+      "Survival_threshold": {
+        "n_galaxies": 143,
+        "mean_rms": 17.34121090078605,
+        "median_rms": 11.565945583479232,
+        "mean_outer_rms": 16.43716546455917,
+        "mean_inner_rms": 16.57797004637
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 143,
+        "mean_rms": 18.08287406128527,
+        "median_rms": 12.63413719278509,
+        "mean_outer_rms": 17.731818212927813,
+        "mean_inner_rms": 16.33216024665884
+      },
+      "win_rates": {
+        "MOND_standard": 0.8321678321678322,
+        "Sigma_original": 0.6923076923076923,
+        "Survival_threshold": 0.7272727272727273,
+        "Survival_nonlocal": 0.8251748251748252
+      }
+    },
+    "bulge_dominated": {
+      "MOND_simple": {
+        "n_galaxies": 26,
+        "mean_rms": 49.543696966781866,
+        "median_rms": 48.17054737637086,
+        "mean_outer_rms": 39.226003555987035,
+        "mean_inner_rms": 56.15395890984202
+      },
+      "MOND_standard": {
+        "n_galaxies": 26,
+        "mean_rms": 39.847940427383506,
+        "median_rms": 37.76043255076948,
+        "mean_outer_rms": 26.60796213919614,
+        "mean_inner_rms": 49.854788566312585
+      },
+      "Sigma_original": {
+        "n_galaxies": 26,
+        "mean_rms": 48.2348912292753,
+        "median_rms": 48.98537757509356,
+        "mean_outer_rms": 45.72542028179289,
+        "mean_inner_rms": 51.14543035455836
+      },
+      "Survival_threshold": {
+        "n_galaxies": 26,
+        "mean_rms": 39.596322164452324,
+        "median_rms": 35.71016553595519,
+        "mean_outer_rms": 26.32273787905802,
+        "mean_inner_rms": 49.51907829770042
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 26,
+        "mean_rms": 38.95647888364975,
+        "median_rms": 35.061395363472045,
+        "mean_outer_rms": 25.292757417035947,
+        "mean_inner_rms": 48.97510252572809
+      },
+      "win_rates": {
+        "MOND_standard": 0.8461538461538461,
+        "Sigma_original": 0.6923076923076923,
+        "Survival_threshold": 0.7692307692307693,
+        "Survival_nonlocal": 0.7692307692307693
+      }
+    },
+    "intermediate_bulge": {
+      "MOND_simple": {
+        "n_galaxies": 6,
+        "mean_rms": 68.64211082004546,
+        "median_rms": 60.66523809586063,
+        "mean_outer_rms": 54.812562217597645,
+        "mean_inner_rms": 74.16407515489064
+      },
+      "MOND_standard": {
+        "n_galaxies": 6,
+        "mean_rms": 51.44251593614148,
+        "median_rms": 40.99437687279796,
+        "mean_outer_rms": 35.16864430865206,
+        "mean_inner_rms": 57.26320718470803
+      },
+      "Sigma_original": {
+        "n_galaxies": 6,
+        "mean_rms": 64.96763711399909,
+        "median_rms": 58.84988906372198,
+        "mean_outer_rms": 56.77385812952243,
+        "mean_inner_rms": 61.935231686073806
+      },
+      "Survival_threshold": {
+        "n_galaxies": 6,
+        "mean_rms": 47.98103279538142,
+        "median_rms": 36.808847770110745,
+        "mean_outer_rms": 29.867817257087836,
+        "mean_inner_rms": 55.509274095574696
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 6,
+        "mean_rms": 47.664290402995825,
+        "median_rms": 35.839066152777086,
+        "mean_outer_rms": 28.800177404643204,
+        "mean_inner_rms": 56.253147182326146
+      },
+      "win_rates": {
+        "MOND_standard": 1.0,
+        "Sigma_original": 0.8333333333333334,
+        "Survival_threshold": 1.0,
+        "Survival_nonlocal": 1.0
+      }
+    }
+  },
+  "rc_shape": {
+    "rising": {
+      "MOND_simple": {
+        "n_galaxies": 48,
+        "mean_rms": 21.165088527695023,
+        "median_rms": 16.34809025859921,
+        "mean_outer_rms": 20.354186622169582,
+        "mean_inner_rms": 15.011772548399122
+      },
+      "MOND_standard": {
+        "n_galaxies": 48,
+        "mean_rms": 17.17978707343382,
+        "median_rms": 11.19819912599004,
+        "mean_outer_rms": 15.88436164018263,
+        "mean_inner_rms": 12.37698141727991
+      },
+      "Sigma_original": {
+        "n_galaxies": 48,
+        "mean_rms": 15.872709006387803,
+        "median_rms": 9.616336159329567,
+        "mean_outer_rms": 15.476787998688017,
+        "mean_inner_rms": 9.668726845093087
+      },
+      "Survival_threshold": {
+        "n_galaxies": 48,
+        "mean_rms": 14.768775804127706,
+        "median_rms": 7.866372937486808,
+        "mean_outer_rms": 13.513451763004795,
+        "mean_inner_rms": 9.854911637899923
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 48,
+        "mean_rms": 15.69958553489939,
+        "median_rms": 9.460028230828325,
+        "mean_outer_rms": 14.611702814398972,
+        "mean_inner_rms": 10.514798814836743
+      },
+      "win_rates": {
+        "MOND_standard": 0.8541666666666666,
+        "Sigma_original": 0.7916666666666666,
+        "Survival_threshold": 0.7708333333333334,
+        "Survival_nonlocal": 0.875
+      }
+    },
+    "unknown": {
+      "MOND_simple": {
+        "n_galaxies": 4,
+        "mean_rms": 10.556887760794119,
+        "median_rms": 10.71806064621023,
+        "mean_outer_rms": 10.457948596761497,
+        "mean_inner_rms": NaN
+      },
+      "MOND_standard": {
+        "n_galaxies": 4,
+        "mean_rms": 8.88247665535414,
+        "median_rms": 8.19234506582395,
+        "mean_outer_rms": 9.07296342324236,
+        "mean_inner_rms": NaN
+      },
+      "Sigma_original": {
+        "n_galaxies": 4,
+        "mean_rms": 9.913091251599132,
+        "median_rms": 7.281965929335983,
+        "mean_outer_rms": 12.601475949865003,
+        "mean_inner_rms": NaN
+      },
+      "Survival_threshold": {
+        "n_galaxies": 4,
+        "mean_rms": 9.555276438014136,
+        "median_rms": 7.425963731598339,
+        "mean_outer_rms": 12.442766717024554,
+        "mean_inner_rms": NaN
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 4,
+        "mean_rms": 10.334598038684312,
+        "median_rms": 9.32258857771945,
+        "mean_outer_rms": 12.138760411890443,
+        "mean_inner_rms": NaN
+      },
+      "win_rates": {
+        "MOND_standard": 0.75,
+        "Sigma_original": 0.75,
+        "Survival_threshold": 0.75,
+        "Survival_nonlocal": 0.75
+      }
+    },
+    "flat": {
+      "MOND_simple": {
+        "n_galaxies": 111,
+        "mean_rms": 32.89865975872201,
+        "median_rms": 24.62290153401546,
+        "mean_outer_rms": 30.203973662280664,
+        "mean_inner_rms": 33.458070950946215
+      },
+      "MOND_standard": {
+        "n_galaxies": 111,
+        "mean_rms": 25.65820332282646,
+        "median_rms": 19.31710113153436,
+        "mean_outer_rms": 21.92698883664601,
+        "mean_inner_rms": 27.764026040089785
+      },
+      "Sigma_original": {
+        "n_galaxies": 111,
+        "mean_rms": 32.098366603936235,
+        "median_rms": 24.74543143256934,
+        "mean_outer_rms": 33.87068745232709,
+        "mean_inner_rms": 28.69657200608291
+      },
+      "Survival_threshold": {
+        "n_galaxies": 111,
+        "mean_rms": 24.475752827235226,
+        "median_rms": 21.21445868860356,
+        "mean_outer_rms": 20.25642140754772,
+        "mean_inner_rms": 27.43217533283286
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 111,
+        "mean_rms": 24.985079527129475,
+        "median_rms": 20.891234598579604,
+        "mean_outer_rms": 21.410710584167827,
+        "mean_inner_rms": 26.763423024389535
+      },
+      "win_rates": {
+        "MOND_standard": 0.8378378378378378,
+        "Sigma_original": 0.6396396396396397,
+        "Survival_threshold": 0.7207207207207207,
+        "Survival_nonlocal": 0.8018018018018018
+      }
+    },
+    "declining": {
+      "MOND_simple": {
+        "n_galaxies": 12,
+        "mean_rms": 42.513906521916034,
+        "median_rms": 39.937425495101664,
+        "mean_outer_rms": 40.23428607711901,
+        "mean_inner_rms": 43.6920411946421
+      },
+      "MOND_standard": {
+        "n_galaxies": 12,
+        "mean_rms": 29.397462726206996,
+        "median_rms": 24.219651124925313,
+        "mean_outer_rms": 24.57286683030389,
+        "mean_inner_rms": 34.764313883972214
+      },
+      "Sigma_original": {
+        "n_galaxies": 12,
+        "mean_rms": 35.82830172000265,
+        "median_rms": 34.41485203004446,
+        "mean_outer_rms": 36.2789082721285,
+        "mean_inner_rms": 35.34286205552889
+      },
+      "Survival_threshold": {
+        "n_galaxies": 12,
+        "mean_rms": 27.771068640596457,
+        "median_rms": 21.57495106081133,
+        "mean_outer_rms": 22.26943517498928,
+        "mean_inner_rms": 32.9739805955352
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 12,
+        "mean_rms": 26.3702382346152,
+        "median_rms": 20.02313504370627,
+        "mean_outer_rms": 19.963092511510887,
+        "mean_inner_rms": 33.21700565986769
+      },
+      "win_rates": {
+        "MOND_standard": 0.8333333333333334,
+        "Sigma_original": 0.8333333333333334,
+        "Survival_threshold": 0.8333333333333334,
+        "Survival_nonlocal": 0.8333333333333334
+      }
+    }
+  },
+  "enhancement": {
+    "minimal_enhancement": {
+      "MOND_simple": {
+        "n_galaxies": 35,
+        "mean_rms": 60.67068389607252,
+        "median_rms": 60.38812190782266,
+        "mean_outer_rms": 59.01884734940087,
+        "mean_inner_rms": 58.923265384343196
+      },
+      "MOND_standard": {
+        "n_galaxies": 35,
+        "mean_rms": 46.473050506675285,
+        "median_rms": 44.91685327628231,
+        "mean_outer_rms": 40.64602351104616,
+        "mean_inner_rms": 49.1621404709676
+      },
+      "Sigma_original": {
+        "n_galaxies": 35,
+        "mean_rms": 52.29893790093456,
+        "median_rms": 47.92487683206063,
+        "mean_outer_rms": 52.60018159414387,
+        "mean_inner_rms": 49.31978835671988
+      },
+      "Survival_threshold": {
+        "n_galaxies": 35,
+        "mean_rms": 41.50048599462869,
+        "median_rms": 37.49910053763678,
+        "mean_outer_rms": 34.500059619576305,
+        "mean_inner_rms": 45.84033874745376
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 35,
+        "mean_rms": 43.369023295625944,
+        "median_rms": 40.697800212036384,
+        "mean_outer_rms": 36.187095654076074,
+        "mean_inner_rms": 47.09899967239083
+      },
+      "win_rates": {
+        "MOND_standard": 1.0,
+        "Sigma_original": 0.9714285714285714,
+        "Survival_threshold": 1.0,
+        "Survival_nonlocal": 1.0
+      }
+    },
+    "moderate_enhancement": {
+      "MOND_simple": {
+        "n_galaxies": 56,
+        "mean_rms": 20.35977873375799,
+        "median_rms": 16.494933912034753,
+        "mean_outer_rms": 18.3336505557237,
+        "mean_inner_rms": 20.704368815597988
+      },
+      "MOND_standard": {
+        "n_galaxies": 56,
+        "mean_rms": 16.129112361297928,
+        "median_rms": 12.023697559043779,
+        "mean_outer_rms": 13.948036921113328,
+        "mean_inner_rms": 17.176992222751203
+      },
+      "Sigma_original": {
+        "n_galaxies": 56,
+        "mean_rms": 18.99535721561669,
+        "median_rms": 12.085992634648067,
+        "mean_outer_rms": 21.231185323917657,
+        "mean_inner_rms": 15.650526358644735
+      },
+      "Survival_threshold": {
+        "n_galaxies": 56,
+        "mean_rms": 14.677698057610225,
+        "median_rms": 9.400285368669602,
+        "mean_outer_rms": 12.082397194329072,
+        "mean_inner_rms": 15.81773955362529
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 56,
+        "mean_rms": 15.77275307886846,
+        "median_rms": 10.93183013269496,
+        "mean_outer_rms": 14.44475098613172,
+        "mean_inner_rms": 15.620797081856715
+      },
+      "win_rates": {
+        "MOND_standard": 0.875,
+        "Sigma_original": 0.75,
+        "Survival_threshold": 0.7321428571428571,
+        "Survival_nonlocal": 0.8392857142857143
+      }
+    },
+    "high_enhancement": {
+      "MOND_simple": {
+        "n_galaxies": 41,
+        "mean_rms": 11.414758223541634,
+        "median_rms": 9.504712220097087,
+        "mean_outer_rms": 9.776388385028335,
+        "mean_inner_rms": 11.928549315283266
+      },
+      "MOND_standard": {
+        "n_galaxies": 41,
+        "mean_rms": 11.255146591530647,
+        "median_rms": 9.329778617208941,
+        "mean_outer_rms": 10.228448420483513,
+        "mean_inner_rms": 11.447216993640103
+      },
+      "Sigma_original": {
+        "n_galaxies": 41,
+        "mean_rms": 14.232408492300905,
+        "median_rms": 12.52091819297376,
+        "mean_outer_rms": 13.450324970197485,
+        "mean_inner_rms": 13.770379658928514
+      },
+      "Survival_threshold": {
+        "n_galaxies": 41,
+        "mean_rms": 16.161710217111274,
+        "median_rms": 14.77512582996404,
+        "mean_outer_rms": 16.12573005273418,
+        "mean_inner_rms": 15.062426442792281
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 41,
+        "mean_rms": 12.593992644075897,
+        "median_rms": 10.267049919494976,
+        "mean_outer_rms": 12.280972115012318,
+        "mean_inner_rms": 12.002737499116897
+      },
+      "win_rates": {
+        "MOND_standard": 0.5121951219512195,
+        "Sigma_original": 0.2682926829268293,
+        "Survival_threshold": 0.3170731707317073,
+        "Survival_nonlocal": 0.5121951219512195
+      }
+    },
+    "low_enhancement": {
+      "MOND_simple": {
+        "n_galaxies": 43,
+        "mean_rms": 34.614959982220455,
+        "median_rms": 29.1772069731115,
+        "mean_outer_rms": 31.65370347800111,
+        "mean_inner_rms": 37.430733336675644
+      },
+      "MOND_standard": {
+        "n_galaxies": 43,
+        "mean_rms": 24.877714825008955,
+        "median_rms": 20.571499688762398,
+        "mean_outer_rms": 21.03358371033265,
+        "mean_inner_rms": 28.785537882269637
+      },
+      "Sigma_original": {
+        "n_galaxies": 43,
+        "mean_rms": 30.6202123767066,
+        "median_rms": 27.245698632504297,
+        "mean_outer_rms": 32.717880848786336,
+        "mean_inner_rms": 28.46146141399781
+      },
+      "Survival_threshold": {
+        "n_galaxies": 43,
+        "mean_rms": 20.001988649318942,
+        "median_rms": 13.590589687494369,
+        "mean_outer_rms": 15.554453211634797,
+        "mean_inner_rms": 25.46733683260944
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 43,
+        "mean_rms": 22.492127860139735,
+        "median_rms": 20.449472224260333,
+        "mean_outer_rms": 18.304383764835524,
+        "mean_inner_rms": 26.74978680265905
+      },
+      "win_rates": {
+        "MOND_standard": 0.9767441860465116,
+        "Sigma_original": 0.813953488372093,
+        "Survival_threshold": 0.9534883720930233,
+        "Survival_nonlocal": 0.9534883720930233
+      }
+    }
+  },
+  "size": {
+    "compact": {
+      "MOND_simple": {
+        "n_galaxies": 73,
+        "mean_rms": 15.454495732200812,
+        "median_rms": 12.479450242862605,
+        "mean_outer_rms": 14.493073976324691,
+        "mean_inner_rms": 13.209711633880632
+      },
+      "MOND_standard": {
+        "n_galaxies": 73,
+        "mean_rms": 12.980647902370785,
+        "median_rms": 10.598138953777434,
+        "mean_outer_rms": 11.86355867317505,
+        "mean_inner_rms": 11.148136348670018
+      },
+      "Sigma_original": {
+        "n_galaxies": 73,
+        "mean_rms": 12.301925966410028,
+        "median_rms": 9.666563583971048,
+        "mean_outer_rms": 11.808670245794039,
+        "mean_inner_rms": 9.970534576212362
+      },
+      "Survival_threshold": {
+        "n_galaxies": 73,
+        "mean_rms": 12.158771187290673,
+        "median_rms": 7.972012958003377,
+        "mean_outer_rms": 11.227453780210665,
+        "mean_inner_rms": 10.32856433484903
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 73,
+        "mean_rms": 12.470212774894394,
+        "median_rms": 9.521390958955642,
+        "mean_outer_rms": 11.617498422555881,
+        "mean_inner_rms": 10.174695693845202
+      },
+      "win_rates": {
+        "MOND_standard": 0.7671232876712328,
+        "Sigma_original": 0.684931506849315,
+        "Survival_threshold": 0.6438356164383562,
+        "Survival_nonlocal": 0.7671232876712328
+      }
+    },
+    "medium": {
+      "MOND_simple": {
+        "n_galaxies": 86,
+        "mean_rms": 37.62386582485491,
+        "median_rms": 32.735211503143766,
+        "mean_outer_rms": 33.983257991644386,
+        "mean_inner_rms": 38.52921560337976
+      },
+      "MOND_standard": {
+        "n_galaxies": 86,
+        "mean_rms": 28.45031120577303,
+        "median_rms": 24.51347231856743,
+        "mean_outer_rms": 23.866747030701923,
+        "mean_inner_rms": 31.13395589458523
+      },
+      "Sigma_original": {
+        "n_galaxies": 86,
+        "mean_rms": 34.57028689996326,
+        "median_rms": 28.544863635343724,
+        "mean_outer_rms": 35.122935077138735,
+        "mean_inner_rms": 31.671878159935204
+      },
+      "Survival_threshold": {
+        "n_galaxies": 86,
+        "mean_rms": 26.063671219652687,
+        "median_rms": 24.106988991866082,
+        "mean_outer_rms": 20.604106885912532,
+        "mean_inner_rms": 29.86565451624939
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 86,
+        "mean_rms": 26.93817192452143,
+        "median_rms": 23.258647770146645,
+        "mean_outer_rms": 22.24499518096101,
+        "mean_inner_rms": 29.557871990943042
+      },
+      "win_rates": {
+        "MOND_standard": 0.9069767441860465,
+        "Sigma_original": 0.7558139534883721,
+        "Survival_threshold": 0.813953488372093,
+        "Survival_nonlocal": 0.872093023255814
+      }
+    },
+    "extended": {
+      "MOND_simple": {
+        "n_galaxies": 16,
+        "mean_rms": 53.51495390409319,
+        "median_rms": 50.03206483779107,
+        "mean_outer_rms": 54.60816713354049,
+        "mean_inner_rms": 49.70121065822872
+      },
+      "MOND_standard": {
+        "n_galaxies": 16,
+        "mean_rms": 41.667234195307046,
+        "median_rms": 40.75366566036335,
+        "mean_outer_rms": 38.05820921693411,
+        "mean_inner_rms": 43.31639061094026
+      },
+      "Sigma_original": {
+        "n_galaxies": 16,
+        "mean_rms": 57.70721512782458,
+        "median_rms": 57.57021000571871,
+        "mean_outer_rms": 69.10497435208991,
+        "mean_inner_rms": 45.111395027303544
+      },
+      "Survival_threshold": {
+        "n_galaxies": 16,
+        "mean_rms": 41.75735689363148,
+        "median_rms": 40.16087396592124,
+        "mean_outer_rms": 38.90971448038373,
+        "mean_inner_rms": 42.93335694797764
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 16,
+        "mean_rms": 41.106054130033,
+        "median_rms": 38.47777468600151,
+        "mean_outer_rms": 37.80723695689032,
+        "mean_inner_rms": 42.44852877487839
+      },
+      "win_rates": {
+        "MOND_standard": 0.8125,
+        "Sigma_original": 0.4375,
+        "Survival_threshold": 0.8125,
+        "Survival_nonlocal": 0.8125
+      }
+    }
+  },
+  "surface_brightness": {
+    "normal": {
+      "MOND_simple": {
+        "n_galaxies": 88,
+        "mean_rms": 22.031617927361815,
+        "median_rms": 16.494933912034753,
+        "mean_outer_rms": 21.931812162298453,
+        "mean_inner_rms": 19.608517364780926
+      },
+      "MOND_standard": {
+        "n_galaxies": 88,
+        "mean_rms": 17.643619159274696,
+        "median_rms": 13.702383609891509,
+        "mean_outer_rms": 17.17728657157586,
+        "mean_inner_rms": 16.22287909250568
+      },
+      "Sigma_original": {
+        "n_galaxies": 88,
+        "mean_rms": 18.907338710008666,
+        "median_rms": 11.844605985797262,
+        "mean_outer_rms": 20.753833607031954,
+        "mean_inner_rms": 14.630401621532195
+      },
+      "Survival_threshold": {
+        "n_galaxies": 88,
+        "mean_rms": 15.501811295362012,
+        "median_rms": 9.155205966566525,
+        "mean_outer_rms": 14.760299765275962,
+        "mean_inner_rms": 14.407652370773052
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 88,
+        "mean_rms": 16.948573127615024,
+        "median_rms": 12.062110963051719,
+        "mean_outer_rms": 17.10184739543556,
+        "mean_inner_rms": 14.646459690823963
+      },
+      "win_rates": {
+        "MOND_standard": 0.875,
+        "Sigma_original": 0.7613636363636364,
+        "Survival_threshold": 0.7386363636363636,
+        "Survival_nonlocal": 0.8522727272727273
+      }
+    },
+    "LSB": {
+      "MOND_simple": {
+        "n_galaxies": 12,
+        "mean_rms": 15.373574384468489,
+        "median_rms": 8.86680692046149,
+        "mean_outer_rms": 17.149255912272675,
+        "mean_inner_rms": 6.320854547633308
+      },
+      "MOND_standard": {
+        "n_galaxies": 12,
+        "mean_rms": 14.375086449013297,
+        "median_rms": 8.518813985715589,
+        "mean_outer_rms": 16.11797987207846,
+        "mean_inner_rms": 5.97673209144255
+      },
+      "Sigma_original": {
+        "n_galaxies": 12,
+        "mean_rms": 14.731778769153886,
+        "median_rms": 12.212822502819545,
+        "mean_outer_rms": 16.271219403903242,
+        "mean_inner_rms": 8.697999645802785
+      },
+      "Survival_threshold": {
+        "n_galaxies": 12,
+        "mean_rms": 14.034416856922467,
+        "median_rms": 14.993571584946519,
+        "mean_outer_rms": 14.992107283583989,
+        "mean_inner_rms": 9.866335770712551
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 12,
+        "mean_rms": 14.351938750550723,
+        "median_rms": 8.77070337129675,
+        "mean_outer_rms": 16.155251122765616,
+        "mean_inner_rms": 5.896438698631896
+      },
+      "win_rates": {
+        "MOND_standard": 0.6666666666666666,
+        "Sigma_original": 0.5833333333333334,
+        "Survival_threshold": 0.5833333333333334,
+        "Survival_nonlocal": 0.75
+      }
+    },
+    "HSB": {
+      "MOND_simple": {
+        "n_galaxies": 75,
+        "mean_rms": 41.290728555096145,
+        "median_rms": 35.00626744911062,
+        "mean_outer_rms": 36.24659627280308,
+        "mean_inner_rms": 42.09555022173624
+      },
+      "MOND_standard": {
+        "n_galaxies": 75,
+        "mean_rms": 31.144670457201705,
+        "median_rms": 27.601814219088592,
+        "mean_outer_rms": 24.299925313192976,
+        "mean_inner_rms": 34.63259801308017
+      },
+      "Sigma_original": {
+        "n_galaxies": 75,
+        "mean_rms": 39.38364745705808,
+        "median_rms": 36.1935960384476,
+        "mean_outer_rms": 39.555905919262436,
+        "mean_inner_rms": 35.915020524272734
+      },
+      "Survival_threshold": {
+        "n_galaxies": 75,
+        "mean_rms": 30.194817807807038,
+        "median_rms": 26.006081997349565,
+        "mean_outer_rms": 23.13734777443605,
+        "mean_inner_rms": 33.94224723343363
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 75,
+        "mean_rms": 29.613433118932406,
+        "median_rms": 27.071403110248234,
+        "mean_outer_rms": 22.229829032639394,
+        "mean_inner_rms": 33.56825268509676
+      },
+      "win_rates": {
+        "MOND_standard": 0.8266666666666667,
+        "Sigma_original": 0.64,
+        "Survival_threshold": 0.7733333333333333,
+        "Survival_nonlocal": 0.8
+      }
+    }
+  },
+  "acceleration_regime": {
+    "low-g": {
+      "MOND_simple": {
+        "n_galaxies": 104,
+        "mean_rms": 15.524986903645324,
+        "median_rms": 14.121664650125245,
+        "mean_outer_rms": 16.27579204682233,
+        "mean_inner_rms": 12.469019689195104
+      },
+      "MOND_standard": {
+        "n_galaxies": 104,
+        "mean_rms": 13.136522200637511,
+        "median_rms": 11.187294581985668,
+        "mean_outer_rms": 13.506957375464745,
+        "mean_inner_rms": 10.85390852569126
+      },
+      "Sigma_original": {
+        "n_galaxies": 104,
+        "mean_rms": 13.598286109430695,
+        "median_rms": 10.814891314931847,
+        "mean_outer_rms": 15.24939539160135,
+        "mean_inner_rms": 9.499972389874275
+      },
+      "Survival_threshold": {
+        "n_galaxies": 104,
+        "mean_rms": 11.97684630620612,
+        "median_rms": 8.798179557447057,
+        "mean_outer_rms": 11.852135390111231,
+        "mean_inner_rms": 10.447810468867958
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 104,
+        "mean_rms": 13.092342965010392,
+        "median_rms": 10.458980066019818,
+        "mean_outer_rms": 13.905562440959757,
+        "mean_inner_rms": 10.00377101757064
+      },
+      "win_rates": {
+        "MOND_standard": 0.7884615384615384,
+        "Sigma_original": 0.6634615384615384,
+        "Survival_threshold": 0.6442307692307693,
+        "Survival_nonlocal": 0.7788461538461539
+      }
+    },
+    "mixed": {
+      "MOND_simple": {
+        "n_galaxies": 37,
+        "mean_rms": 41.253135185627414,
+        "median_rms": 40.85622013961126,
+        "mean_outer_rms": 38.41816836893711,
+        "mean_inner_rms": 40.96004589758337
+      },
+      "MOND_standard": {
+        "n_galaxies": 37,
+        "mean_rms": 29.182474730939543,
+        "median_rms": 29.159995114455025,
+        "mean_outer_rms": 26.60279132089994,
+        "mean_inner_rms": 31.100711119112365
+      },
+      "Sigma_original": {
+        "n_galaxies": 37,
+        "mean_rms": 40.203093029112075,
+        "median_rms": 38.88954643705796,
+        "mean_outer_rms": 43.98388487118934,
+        "mean_inner_rms": 32.4079840244023
+      },
+      "Survival_threshold": {
+        "n_galaxies": 37,
+        "mean_rms": 26.305440797455393,
+        "median_rms": 26.006081997349565,
+        "mean_outer_rms": 24.35972851409772,
+        "mean_inner_rms": 28.45805589247984
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 37,
+        "mean_rms": 26.110208179014993,
+        "median_rms": 27.071403110248234,
+        "mean_outer_rms": 23.812570594255472,
+        "mean_inner_rms": 28.719652591794027
+      },
+      "win_rates": {
+        "MOND_standard": 0.8918918918918919,
+        "Sigma_original": 0.6486486486486487,
+        "Survival_threshold": 0.8918918918918919,
+        "Survival_nonlocal": 0.8918918918918919
+      }
+    },
+    "high-g": {
+      "MOND_simple": {
+        "n_galaxies": 34,
+        "mean_rms": 61.15015505901012,
+        "median_rms": 59.869590925293544,
+        "mean_outer_rms": 51.1803135049874,
+        "mean_inner_rms": 65.6305451459144
+      },
+      "MOND_standard": {
+        "n_galaxies": 34,
+        "mean_rms": 47.50117452304107,
+        "median_rms": 42.34245199723463,
+        "mean_outer_rms": 33.484839097984086,
+        "mean_inner_rms": 55.86617578102128
+      },
+      "Sigma_original": {
+        "n_galaxies": 34,
+        "mean_rms": 55.66660333917724,
+        "median_rms": 52.03156976467824,
+        "mean_outer_rms": 52.204237448523166,
+        "mean_inner_rms": 58.135588848385034
+      },
+      "Survival_threshold": {
+        "n_galaxies": 34,
+        "mean_rms": 46.42030607379904,
+        "median_rms": 41.294918114643934,
+        "mean_outer_rms": 31.770021006965088,
+        "mean_inner_rms": 55.149515408777724
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 34,
+        "mean_rms": 45.79481803447136,
+        "median_rms": 41.029095213371065,
+        "mean_outer_rms": 30.5535045844766,
+        "mean_inner_rms": 54.772522198425
+      },
+      "win_rates": {
+        "MOND_standard": 0.9411764705882353,
+        "Sigma_original": 0.8529411764705882,
+        "Survival_threshold": 0.8823529411764706,
+        "Survival_nonlocal": 0.8823529411764706
+      }
+    }
+  },
+  "dm_fraction": {
+    "baryon_dominated": {
+      "MOND_simple": {
+        "n_galaxies": 26,
+        "mean_rms": 58.290700536080664,
+        "median_rms": 56.93354889823293,
+        "mean_outer_rms": 58.752285723622634,
+        "mean_inner_rms": 52.376910384219705
+      },
+      "MOND_standard": {
+        "n_galaxies": 26,
+        "mean_rms": 45.70342221033289,
+        "median_rms": 42.995711135576684,
+        "mean_outer_rms": 42.353371323219726,
+        "mean_inner_rms": 44.47003828932378
+      },
+      "Sigma_original": {
+        "n_galaxies": 26,
+        "mean_rms": 48.949818082315545,
+        "median_rms": 45.35561503570838,
+        "mean_outer_rms": 49.67589978177273,
+        "mean_inner_rms": 43.30997892957015
+      },
+      "Survival_threshold": {
+        "n_galaxies": 26,
+        "mean_rms": 40.14258302648703,
+        "median_rms": 35.96082743462926,
+        "mean_outer_rms": 35.60396290936697,
+        "mean_inner_rms": 40.68560484930225
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 26,
+        "mean_rms": 42.81819028650857,
+        "median_rms": 38.85776194151528,
+        "mean_outer_rms": 38.179365945496045,
+        "mean_inner_rms": 42.45381798218627
+      },
+      "win_rates": {
+        "MOND_standard": 1.0,
+        "Sigma_original": 1.0,
+        "Survival_threshold": 1.0,
+        "Survival_nonlocal": 1.0
+      }
+    },
+    "dm_significant": {
+      "MOND_simple": {
+        "n_galaxies": 90,
+        "mean_rms": 21.157119274894793,
+        "median_rms": 15.802286666549751,
+        "mean_outer_rms": 18.827401126512733,
+        "mean_inner_rms": 21.892249907355428
+      },
+      "MOND_standard": {
+        "n_galaxies": 90,
+        "mean_rms": 16.427870504948295,
+        "median_rms": 12.156433781474423,
+        "mean_outer_rms": 14.17518187074559,
+        "mean_inner_rms": 17.817911014611315
+      },
+      "Sigma_original": {
+        "n_galaxies": 90,
+        "mean_rms": 20.543890291838743,
+        "median_rms": 13.07420749822348,
+        "mean_outer_rms": 22.15267850384377,
+        "mean_inner_rms": 17.710585424958005
+      },
+      "Survival_threshold": {
+        "n_galaxies": 90,
+        "mean_rms": 15.791788553336902,
+        "median_rms": 10.198936251770533,
+        "mean_outer_rms": 13.29789758976317,
+        "mean_inner_rms": 17.514342628491825
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 90,
+        "mean_rms": 16.124785102103246,
+        "median_rms": 11.12063953969027,
+        "mean_outer_rms": 14.687689774827797,
+        "mean_inner_rms": 16.654951680376463
+      },
+      "win_rates": {
+        "MOND_standard": 0.8555555555555555,
+        "Sigma_original": 0.6555555555555556,
+        "Survival_threshold": 0.6888888888888889,
+        "Survival_nonlocal": 0.8
+      }
+    },
+    "dm_dominated": {
+      "MOND_simple": {
+        "n_galaxies": 23,
+        "mean_rms": 11.264594672928816,
+        "median_rms": 9.960459566247195,
+        "mean_outer_rms": 9.094160487571173,
+        "mean_inner_rms": 12.537757637545441
+      },
+      "MOND_standard": {
+        "n_galaxies": 23,
+        "mean_rms": 11.516091939935631,
+        "median_rms": 10.531847511808957,
+        "mean_outer_rms": 10.421104128027741,
+        "mean_inner_rms": 12.0269866023562
+      },
+      "Sigma_original": {
+        "n_galaxies": 23,
+        "mean_rms": 14.286703725931796,
+        "median_rms": 15.258355694514266,
+        "mean_outer_rms": 13.489992322362317,
+        "mean_inner_rms": 13.517646173036818
+      },
+      "Survival_threshold": {
+        "n_galaxies": 23,
+        "mean_rms": 16.666248204888294,
+        "median_rms": 16.091871608251704,
+        "mean_outer_rms": 17.769436992509377,
+        "mean_inner_rms": 14.543106904652344
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 23,
+        "mean_rms": 12.97647774626541,
+        "median_rms": 12.447256655712472,
+        "mean_outer_rms": 12.66087857507727,
+        "mean_inner_rms": 12.41198820061272
+      },
+      "win_rates": {
+        "MOND_standard": 0.391304347826087,
+        "Sigma_original": 0.2608695652173913,
+        "Survival_threshold": 0.30434782608695654,
+        "Survival_nonlocal": 0.4782608695652174
+      }
+    },
+    "baryon_significant": {
+      "MOND_simple": {
+        "n_galaxies": 34,
+        "mean_rms": 44.22350045923229,
+        "median_rms": 39.850126274193016,
+        "mean_outer_rms": 40.70748241239693,
+        "mean_inner_rms": 48.44778953622616
+      },
+      "MOND_standard": {
+        "n_galaxies": 34,
+        "mean_rms": 32.07405911249571,
+        "median_rms": 27.13708713490266,
+        "mean_outer_rms": 25.621338892536638,
+        "mean_inner_rms": 38.572087942372676
+      },
+      "Sigma_original": {
+        "n_galaxies": 34,
+        "mean_rms": 38.314053446281214,
+        "median_rms": 36.1072469296653,
+        "mean_outer_rms": 39.60790667920332,
+        "mean_inner_rms": 38.517242163344484
+      },
+      "Survival_threshold": {
+        "n_galaxies": 34,
+        "mean_rms": 26.694057797777127,
+        "median_rms": 21.12917652168307,
+        "mean_outer_rms": 18.802491614385843,
+        "mean_inner_rms": 34.954170224795654
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 34,
+        "mean_rms": 28.828575329014527,
+        "median_rms": 23.625188497931894,
+        "mean_outer_rms": 21.08310726626348,
+        "mean_inner_rms": 36.278149891379485
+      },
+      "win_rates": {
+        "MOND_standard": 1.0,
+        "Sigma_original": 0.8823529411764706,
+        "Survival_threshold": 1.0,
+        "Survival_nonlocal": 1.0
+      }
+    }
+  },
+  "coherence_survival": {
+    "high_survival": {
+      "MOND_simple": {
+        "n_galaxies": 135,
+        "mean_rms": 22.009617049238475,
+        "median_rms": 16.610003670965547,
+        "mean_outer_rms": 22.32927317761914,
+        "mean_inner_rms": 19.07647542163318
+      },
+      "MOND_standard": {
+        "n_galaxies": 135,
+        "mean_rms": 16.999750198808986,
+        "median_rms": 12.689830991454988,
+        "mean_outer_rms": 16.85088487291336,
+        "mean_inner_rms": 15.345838544194894
+      },
+      "Sigma_original": {
+        "n_galaxies": 135,
+        "mean_rms": 19.275480152691728,
+        "median_rms": 13.415708011366773,
+        "mean_outer_rms": 21.243821722597655,
+        "mean_inner_rms": 14.509832166200297
+      },
+      "Survival_threshold": {
+        "n_galaxies": 135,
+        "mean_rms": 15.305718207060039,
+        "median_rms": 10.178433631255219,
+        "mean_outer_rms": 14.811963533650133,
+        "mean_inner_rms": 14.307409019555148
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 135,
+        "mean_rms": 16.149361103712277,
+        "median_rms": 12.041900281650454,
+        "mean_outer_rms": 16.261247213626685,
+        "mean_inner_rms": 14.082707725373519
+      },
+      "win_rates": {
+        "MOND_standard": 0.8222222222222222,
+        "Sigma_original": 0.6962962962962963,
+        "Survival_threshold": 0.7111111111111111,
+        "Survival_nonlocal": 0.8148148148148148
+      }
+    },
+    "moderate_survival": {
+      "MOND_simple": {
+        "n_galaxies": 13,
+        "mean_rms": 60.48771318890638,
+        "median_rms": 57.83623599227504,
+        "mean_outer_rms": 51.3127953367764,
+        "mean_inner_rms": 63.74203565211254
+      },
+      "MOND_standard": {
+        "n_galaxies": 13,
+        "mean_rms": 45.104061727548405,
+        "median_rms": 39.15694341110353,
+        "mean_outer_rms": 33.71416914131114,
+        "mean_inner_rms": 50.57506609515228
+      },
+      "Sigma_original": {
+        "n_galaxies": 13,
+        "mean_rms": 57.017192396764365,
+        "median_rms": 56.305348770296604,
+        "mean_outer_rms": 56.52449455320933,
+        "mean_inner_rms": 53.92097441067052
+      },
+      "Survival_threshold": {
+        "n_galaxies": 13,
+        "mean_rms": 42.79420400330168,
+        "median_rms": 38.331189879305754,
+        "mean_outer_rms": 30.704229553916697,
+        "mean_inner_rms": 48.60100579200803
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 13,
+        "mean_rms": 42.171896063414174,
+        "median_rms": 35.925556854170466,
+        "mean_outer_rms": 29.66088239341506,
+        "mean_inner_rms": 48.489256329972626
+      },
+      "win_rates": {
+        "MOND_standard": 1.0,
+        "Sigma_original": 0.8461538461538461,
+        "Survival_threshold": 1.0,
+        "Survival_nonlocal": 1.0
+      }
+    },
+    "low_survival": {
+      "MOND_simple": {
+        "n_galaxies": 14,
+        "mean_rms": 53.56901642263591,
+        "median_rms": 49.53941558702479,
+        "mean_outer_rms": 43.61828784063567,
+        "mean_inner_rms": 55.854996100345176
+      },
+      "MOND_standard": {
+        "n_galaxies": 14,
+        "mean_rms": 41.076245802534686,
+        "median_rms": 38.54098400813173,
+        "mean_outer_rms": 29.672425206584364,
+        "mean_inner_rms": 45.34671173372153
+      },
+      "Sigma_original": {
+        "n_galaxies": 14,
+        "mean_rms": 52.52851584606429,
+        "median_rms": 53.145018989628944,
+        "mean_outer_rms": 50.53294603660347,
+        "mean_inner_rms": 48.795330912359
+      },
+      "Survival_threshold": {
+        "n_galaxies": 14,
+        "mean_rms": 40.501177817887005,
+        "median_rms": 36.329044687812534,
+        "mean_outer_rms": 29.485211932713366,
+        "mean_inner_rms": 44.58462138352089
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 14,
+        "mean_rms": 39.7204565002314,
+        "median_rms": 35.28562848278373,
+        "mean_outer_rms": 28.278679571428373,
+        "mean_inner_rms": 44.0643966603038
+      },
+      "win_rates": {
+        "MOND_standard": 0.8571428571428571,
+        "Sigma_original": 0.5714285714285714,
+        "Survival_threshold": 0.8571428571428571,
+        "Survival_nonlocal": 0.8571428571428571
+      }
+    },
+    "minimal_survival": {
+      "MOND_simple": {
+        "n_galaxies": 13,
+        "mean_rms": 54.805008371830205,
+        "median_rms": 49.59883177568557,
+        "mean_outer_rms": 43.23930873570703,
+        "mean_inner_rms": 62.113212908719134
+      },
+      "MOND_standard": {
+        "n_galaxies": 13,
+        "mean_rms": 46.50794516627945,
+        "median_rms": 40.1264120976815,
+        "mean_outer_rms": 30.687981975427736,
+        "mean_inner_rms": 57.71255555216586
+      },
+      "Sigma_original": {
+        "n_galaxies": 13,
+        "mean_rms": 55.04524364413424,
+        "median_rms": 50.696070796389996,
+        "mean_outer_rms": 52.16071753503695,
+        "mean_inner_rms": 58.130637262186774
+      },
+      "Survival_threshold": {
+        "n_galaxies": 13,
+        "mean_rms": 46.73620249338524,
+        "median_rms": 40.59927817675113,
+        "mean_outer_rms": 30.965363194486528,
+        "mean_inner_rms": 57.83912718803893
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 13,
+        "mean_rms": 46.17079964060618,
+        "median_rms": 41.028197908909576,
+        "mean_outer_rms": 29.946261751190487,
+        "mean_inner_rms": 57.3280107438939
+      },
+      "win_rates": {
+        "MOND_standard": 0.8461538461538461,
+        "Sigma_original": 0.6923076923076923,
+        "Survival_threshold": 0.6923076923076923,
+        "Survival_nonlocal": 0.6923076923076923
+      }
+    }
+  },
+  "gas_fraction": {
+    "intermediate_gas": {
+      "MOND_simple": {
+        "n_galaxies": 49,
+        "mean_rms": 30.0395975667424,
+        "median_rms": 24.359406683931955,
+        "mean_outer_rms": 28.196261427560387,
+        "mean_inner_rms": 30.60257478230889
+      },
+      "MOND_standard": {
+        "n_galaxies": 49,
+        "mean_rms": 21.72703088691076,
+        "median_rms": 17.980020581949493,
+        "mean_outer_rms": 19.519632487051037,
+        "mean_inner_rms": 23.60569237552394
+      },
+      "Sigma_original": {
+        "n_galaxies": 49,
+        "mean_rms": 28.41831706481976,
+        "median_rms": 22.726506888737887,
+        "mean_outer_rms": 32.26019936851651,
+        "mean_inner_rms": 23.860184730197695
+      },
+      "Survival_threshold": {
+        "n_galaxies": 49,
+        "mean_rms": 19.327752943406423,
+        "median_rms": 19.930191070860648,
+        "mean_outer_rms": 17.42335378020086,
+        "mean_inner_rms": 21.635745847435924
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 49,
+        "mean_rms": 20.034502858170036,
+        "median_rms": 17.337331456948156,
+        "mean_outer_rms": 18.292542905533573,
+        "mean_inner_rms": 21.750284351601334
+      },
+      "win_rates": {
+        "MOND_standard": 0.8775510204081632,
+        "Sigma_original": 0.673469387755102,
+        "Survival_threshold": 0.8367346938775511,
+        "Survival_nonlocal": 0.8571428571428571
+      }
+    },
+    "gas_rich": {
+      "MOND_simple": {
+        "n_galaxies": 81,
+        "mean_rms": 15.323645131742433,
+        "median_rms": 12.78735923013372,
+        "mean_outer_rms": 15.913527013203113,
+        "mean_inner_rms": 12.30216654788272
+      },
+      "MOND_standard": {
+        "n_galaxies": 81,
+        "mean_rms": 13.28019729875742,
+        "median_rms": 10.531847511808957,
+        "mean_outer_rms": 13.826325175287371,
+        "mean_inner_rms": 10.589012041944313
+      },
+      "Sigma_original": {
+        "n_galaxies": 81,
+        "mean_rms": 13.848218720301611,
+        "median_rms": 10.547413283455509,
+        "mean_outer_rms": 15.51484937392834,
+        "mean_inner_rms": 9.627320011933993
+      },
+      "Survival_threshold": {
+        "n_galaxies": 81,
+        "mean_rms": 12.586459906592097,
+        "median_rms": 8.616537709491967,
+        "mean_outer_rms": 12.879927267947682,
+        "mean_inner_rms": 10.309499384289895
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 81,
+        "mean_rms": 13.408590046505118,
+        "median_rms": 10.267049919494976,
+        "mean_outer_rms": 14.576783605131581,
+        "mean_inner_rms": 9.662609547984724
+      },
+      "win_rates": {
+        "MOND_standard": 0.7777777777777778,
+        "Sigma_original": 0.6296296296296297,
+        "Survival_threshold": 0.6172839506172839,
+        "Survival_nonlocal": 0.7777777777777778
+      }
+    },
+    "gas_poor": {
+      "MOND_simple": {
+        "n_galaxies": 45,
+        "mean_rms": 55.709208342492374,
+        "median_rms": 55.43086542948487,
+        "mean_outer_rms": 48.5260614148857,
+        "mean_inner_rms": 57.46129954562658
+      },
+      "MOND_standard": {
+        "n_galaxies": 45,
+        "mean_rms": 42.68154028969961,
+        "median_rms": 40.1264120976815,
+        "mean_outer_rms": 32.24704542642916,
+        "mean_inner_rms": 48.517620580235096
+      },
+      "Sigma_original": {
+        "n_galaxies": 45,
+        "mean_rms": 50.67105463265259,
+        "median_rms": 49.4019349241698,
+        "mean_outer_rms": 47.7962747969962,
+        "mean_inner_rms": 49.78146105753587
+      },
+      "Survival_threshold": {
+        "n_galaxies": 45,
+        "mean_rms": 40.68045744887954,
+        "median_rms": 37.49910053763678,
+        "mean_outer_rms": 29.26876235325316,
+        "mean_inner_rms": 47.366222975107924
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 45,
+        "mean_rms": 40.37597222976478,
+        "median_rms": 36.93344761688196,
+        "mean_outer_rms": 28.644637496281515,
+        "mean_inner_rms": 47.34129190809573
+      },
+      "win_rates": {
+        "MOND_standard": 0.9111111111111111,
+        "Sigma_original": 0.8444444444444444,
+        "Survival_threshold": 0.8666666666666667,
+        "Survival_nonlocal": 0.8666666666666667
+      }
+    }
+  },
+  "luminosity": {
+    "dwarf": {
+      "MOND_simple": {
+        "n_galaxies": 32,
+        "mean_rms": 10.458933005077377,
+        "median_rms": 9.368147590448748,
+        "mean_outer_rms": 10.492544951498472,
+        "mean_inner_rms": 8.72671794396774
+      },
+      "MOND_standard": {
+        "n_galaxies": 32,
+        "mean_rms": 9.138915146570596,
+        "median_rms": 8.578098966610206,
+        "mean_outer_rms": 9.253992473004384,
+        "mean_inner_rms": 7.562360840566283
+      },
+      "Sigma_original": {
+        "n_galaxies": 32,
+        "mean_rms": 7.376035029030389,
+        "median_rms": 6.003491694428716,
+        "mean_outer_rms": 8.100305170994625,
+        "mean_inner_rms": 5.406010211760986
+      },
+      "Survival_threshold": {
+        "n_galaxies": 32,
+        "mean_rms": 8.181642576372838,
+        "median_rms": 6.959722151806161,
+        "mean_outer_rms": 9.184742775797098,
+        "mean_inner_rms": 5.591993747142461
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 32,
+        "mean_rms": 8.016944780155022,
+        "median_rms": 7.689878370505603,
+        "mean_outer_rms": 8.667666243206845,
+        "mean_inner_rms": 5.855377695328652
+      },
+      "win_rates": {
+        "MOND_standard": 0.84375,
+        "Sigma_original": 0.71875,
+        "Survival_threshold": 0.625,
+        "Survival_nonlocal": 0.8125
+      }
+    },
+    "low_luminosity": {
+      "MOND_simple": {
+        "n_galaxies": 62,
+        "mean_rms": 17.806944744896644,
+        "median_rms": 15.053859940732565,
+        "mean_outer_rms": 18.440782975579634,
+        "mean_inner_rms": 14.013776398485085
+      },
+      "MOND_standard": {
+        "n_galaxies": 62,
+        "mean_rms": 15.409433695755654,
+        "median_rms": 12.572332925106444,
+        "mean_outer_rms": 15.78535965938168,
+        "mean_inner_rms": 12.342077561301501
+      },
+      "Sigma_original": {
+        "n_galaxies": 62,
+        "mean_rms": 15.627474807967813,
+        "median_rms": 12.166393472223328,
+        "mean_outer_rms": 16.748307982977856,
+        "mean_inner_rms": 11.267550721577756
+      },
+      "Survival_threshold": {
+        "n_galaxies": 62,
+        "mean_rms": 14.009696394849133,
+        "median_rms": 10.084866975339716,
+        "mean_outer_rms": 13.898563667206657,
+        "mean_inner_rms": 11.773896152515839
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 62,
+        "mean_rms": 15.911622563671312,
+        "median_rms": 12.3919397092504,
+        "mean_outer_rms": 16.75725745128174,
+        "mean_inner_rms": 11.81571081926935
+      },
+      "win_rates": {
+        "MOND_standard": 0.7258064516129032,
+        "Sigma_original": 0.6612903225806451,
+        "Survival_threshold": 0.6451612903225806,
+        "Survival_nonlocal": 0.7419354838709677
+      }
+    },
+    "high_luminosity": {
+      "MOND_simple": {
+        "n_galaxies": 52,
+        "mean_rms": 56.049256148937566,
+        "median_rms": 53.159326020810596,
+        "mean_outer_rms": 49.02995383627004,
+        "mean_inner_rms": 58.09582030905236
+      },
+      "MOND_standard": {
+        "n_galaxies": 52,
+        "mean_rms": 42.27419545428532,
+        "median_rms": 39.16943657727781,
+        "mean_outer_rms": 32.23113131495077,
+        "mean_inner_rms": 48.2320103833496
+      },
+      "Sigma_original": {
+        "n_galaxies": 52,
+        "mean_rms": 54.33596235880661,
+        "median_rms": 52.922235566997145,
+        "mean_outer_rms": 54.722183558663644,
+        "mean_inner_rms": 50.6610091191602
+      },
+      "Survival_threshold": {
+        "n_galaxies": 52,
+        "mean_rms": 40.96510237900548,
+        "median_rms": 37.37575976208555,
+        "mean_outer_rms": 30.70626706763056,
+        "mean_inner_rms": 47.283117917264505
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 52,
+        "mean_rms": 40.273107115174994,
+        "median_rms": 35.8275457873816,
+        "mean_outer_rms": 29.551262091463634,
+        "mean_inner_rms": 46.937006007646076
+      },
+      "win_rates": {
+        "MOND_standard": 0.9038461538461539,
+        "Sigma_original": 0.6730769230769231,
+        "Survival_threshold": 0.8653846153846154,
+        "Survival_nonlocal": 0.8653846153846154
+      }
+    },
+    "medium_luminosity": {
+      "MOND_simple": {
+        "n_galaxies": 29,
+        "mean_rms": 29.88938488837417,
+        "median_rms": 24.047074185131056,
+        "mean_outer_rms": 28.470264802408177,
+        "mean_inner_rms": 26.657961992996004
+      },
+      "MOND_standard": {
+        "n_galaxies": 29,
+        "mean_rms": 21.203498973948783,
+        "median_rms": 16.03640128106851,
+        "mean_outer_rms": 19.885258236477426,
+        "mean_inner_rms": 19.6428678464124
+      },
+      "Sigma_original": {
+        "n_galaxies": 29,
+        "mean_rms": 26.344624458932582,
+        "median_rms": 23.20903227507556,
+        "mean_outer_rms": 29.142294094598938,
+        "mean_inner_rms": 19.180507679475202
+      },
+      "Survival_threshold": {
+        "n_galaxies": 29,
+        "mean_rms": 18.50291962853765,
+        "median_rms": 12.114060380183204,
+        "mean_outer_rms": 15.922901590375426,
+        "mean_inner_rms": 18.65646046822465
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 29,
+        "mean_rms": 18.877268353619993,
+        "median_rms": 15.790630667449571,
+        "mean_outer_rms": 17.692477627630197,
+        "mean_inner_rms": 17.437616241881177
+      },
+      "win_rates": {
+        "MOND_standard": 0.9655172413793104,
+        "Sigma_original": 0.7931034482758621,
+        "Survival_threshold": 0.8620689655172413,
+        "Survival_nonlocal": 0.9310344827586207
+      }
+    }
+  },
+  "data_quality": {
+    "low_quality": {
+      "MOND_simple": {
+        "n_galaxies": 78,
+        "mean_rms": 29.595542953037555,
+        "median_rms": 20.63093877136204,
+        "mean_outer_rms": 28.916302803906074,
+        "mean_inner_rms": 27.421276116487498
+      },
+      "MOND_standard": {
+        "n_galaxies": 78,
+        "mean_rms": 23.28803768455822,
+        "median_rms": 16.927872561285106,
+        "mean_outer_rms": 21.63499891501691,
+        "mean_inner_rms": 22.735119046324723
+      },
+      "Sigma_original": {
+        "n_galaxies": 78,
+        "mean_rms": 25.532379738229086,
+        "median_rms": 18.41438418907608,
+        "mean_outer_rms": 26.108304048680736,
+        "mean_inner_rms": 22.18094462398926
+      },
+      "Survival_threshold": {
+        "n_galaxies": 78,
+        "mean_rms": 20.494318740647397,
+        "median_rms": 15.959807106900087,
+        "mean_outer_rms": 18.055757866607834,
+        "mean_inner_rms": 21.5872692341826
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 78,
+        "mean_rms": 21.90466044830752,
+        "median_rms": 16.062374856099165,
+        "mean_outer_rms": 19.750544785627174,
+        "mean_inner_rms": 21.66047656780633
+      },
+      "win_rates": {
+        "MOND_standard": 0.8333333333333334,
+        "Sigma_original": 0.782051282051282,
+        "Survival_threshold": 0.7948717948717948,
+        "Survival_nonlocal": 0.8333333333333334
+      }
+    },
+    "medium_quality": {
+      "MOND_simple": {
+        "n_galaxies": 74,
+        "mean_rms": 26.561221830142983,
+        "median_rms": 17.973407937905346,
+        "mean_outer_rms": 24.51749574970574,
+        "mean_inner_rms": 26.29972580283686
+      },
+      "MOND_standard": {
+        "n_galaxies": 74,
+        "mean_rms": 20.4127635591913,
+        "median_rms": 12.360212602788831,
+        "mean_outer_rms": 17.87414622214027,
+        "mean_inner_rms": 21.43522615444572
+      },
+      "Sigma_original": {
+        "n_galaxies": 74,
+        "mean_rms": 25.797793738243826,
+        "median_rms": 15.608750561716763,
+        "mean_outer_rms": 27.965947738251014,
+        "mean_inner_rms": 21.713537736131865
+      },
+      "Survival_threshold": {
+        "n_galaxies": 74,
+        "mean_rms": 20.133220455708432,
+        "median_rms": 13.848325527202434,
+        "mean_outer_rms": 17.716397136187688,
+        "mean_inner_rms": 20.775338440145333
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 74,
+        "mean_rms": 19.833855210067014,
+        "median_rms": 11.63705166676791,
+        "mean_outer_rms": 18.015300961286222,
+        "mean_inner_rms": 20.119246982791687
+      },
+      "win_rates": {
+        "MOND_standard": 0.8378378378378378,
+        "Sigma_original": 0.6216216216216216,
+        "Survival_threshold": 0.6756756756756757,
+        "Survival_nonlocal": 0.7972972972972973
+      }
+    },
+    "high_quality": {
+      "MOND_simple": {
+        "n_galaxies": 23,
+        "mean_rms": 41.13422374287665,
+        "median_rms": 32.53720262442851,
+        "mean_outer_rms": 34.109519891602986,
+        "mean_inner_rms": 44.7401849708713
+      },
+      "MOND_standard": {
+        "n_galaxies": 23,
+        "mean_rms": 31.912102822554925,
+        "median_rms": 29.159995114455025,
+        "mean_outer_rms": 22.491071280147427,
+        "mean_inner_rms": 37.557860503056396
+      },
+      "Sigma_original": {
+        "n_galaxies": 23,
+        "mean_rms": 38.8625371642632,
+        "median_rms": 38.73282707856965,
+        "mean_outer_rms": 38.363351555767856,
+        "mean_inner_rms": 37.94416021201152
+      },
+      "Survival_threshold": {
+        "n_galaxies": 23,
+        "mean_rms": 30.816024189892733,
+        "median_rms": 26.006081997349565,
+        "mean_outer_rms": 21.51088035463896,
+        "mean_inner_rms": 35.88925225359866
+      },
+      "Survival_nonlocal": {
+        "n_galaxies": 23,
+        "mean_rms": 30.801581897552893,
+        "median_rms": 27.080672276642794,
+        "mean_outer_rms": 21.408173795885723,
+        "mean_inner_rms": 35.99151341742361
+      },
+      "win_rates": {
+        "MOND_standard": 0.8695652173913043,
+        "Sigma_original": 0.6521739130434783,
+        "Survival_threshold": 0.782608695652174,
+        "Survival_nonlocal": 0.8695652173913043
+      }
+    }
+  }
+}
