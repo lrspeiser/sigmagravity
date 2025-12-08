@@ -1,0 +1,82 @@
+[
+  {
+    "property_name": "R_e",
+    "correlation": NaN,
+    "p_value": NaN,
+    "n_samples": 42,
+    "interpretation": "GR deviation decreases with R_e",
+    "effect_size": "large"
+  },
+  {
+    "property_name": "sigma_v",
+    "correlation": -0.9899014274892385,
+    "p_value": 6.029662093406585e-09,
+    "n_samples": 11,
+    "interpretation": "GR deviation decreases with sigma_v",
+    "effect_size": "large"
+  },
+  {
+    "property_name": "v_rot_sigma_ratio",
+    "correlation": 0.9845799927646859,
+    "p_value": 4.019562000538977e-08,
+    "n_samples": 11,
+    "interpretation": "GR deviation increases with v_rot_sigma_ratio",
+    "effect_size": "large"
+  },
+  {
+    "property_name": "gas_fraction",
+    "correlation": 0.6070263443166448,
+    "p_value": 1.7124486867095685e-18,
+    "n_samples": 170,
+    "interpretation": "GR deviation increases with gas_fraction",
+    "effect_size": "large"
+  },
+  {
+    "property_name": "R_d",
+    "correlation": -0.2202259120473808,
+    "p_value": 0.0039051394630063726,
+    "n_samples": 170,
+    "interpretation": "GR deviation decreases with R_d",
+    "effect_size": "small"
+  },
+  {
+    "property_name": "R_max",
+    "correlation": -0.20083784267481383,
+    "p_value": 0.008636985489401366,
+    "n_samples": 170,
+    "interpretation": "GR deviation decreases with R_max",
+    "effect_size": "small"
+  },
+  {
+    "property_name": "redshift",
+    "correlation": -0.03926657163195149,
+    "p_value": 0.8049919084478155,
+    "n_samples": 42,
+    "interpretation": "GR deviation decreases with redshift",
+    "effect_size": "negligible"
+  },
+  {
+    "property_name": "axis_ratio",
+    "correlation": NaN,
+    "p_value": NaN,
+    "n_samples": 223,
+    "interpretation": "GR deviation decreases with axis_ratio",
+    "effect_size": "large"
+  },
+  {
+    "property_name": "v_rot_max",
+    "correlation": -0.3368204539404264,
+    "p_value": 7.084464148103756e-06,
+    "n_samples": 170,
+    "interpretation": "GR deviation decreases with v_rot_max",
+    "effect_size": "medium"
+  },
+  {
+    "property_name": "bulge_fraction",
+    "correlation": -0.21173361458740814,
+    "p_value": 0.24469124792105768,
+    "n_samples": 32,
+    "interpretation": "GR deviation decreases with bulge_fraction",
+    "effect_size": "small"
+  }
+]

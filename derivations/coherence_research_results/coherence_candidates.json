@@ -1,0 +1,330 @@
+[
+  {
+    "category": "Kinematics",
+    "name": "Ordered rotation (v_rot)",
+    "description": "Circular velocity of ordered rotation",
+    "hypothesis": "Higher v_rot \u2192 more coherent velocity field \u2192 more enhancement",
+    "testable": true,
+    "data_available": "SPARC, MW"
+  },
+  {
+    "category": "Kinematics",
+    "name": "Velocity dispersion (\u03c3_v)",
+    "description": "Random velocity component",
+    "hypothesis": "Higher \u03c3_v \u2192 less coherent \u2192 less enhancement",
+    "testable": true,
+    "data_available": "MW, MaNGA"
+  },
+  {
+    "category": "Kinematics",
+    "name": "v_rot/\u03c3 ratio",
+    "description": "Ratio of ordered to random motion",
+    "hypothesis": "Higher ratio \u2192 more coherent \u2192 more enhancement",
+    "testable": true,
+    "data_available": "MW, MaNGA"
+  },
+  {
+    "category": "Kinematics",
+    "name": "Counter-rotation",
+    "description": "Presence of counter-rotating components",
+    "hypothesis": "Counter-rotation destroys coherence \u2192 less enhancement",
+    "testable": true,
+    "data_available": "MaNGA DynPop, Bevacqua+2022"
+  },
+  {
+    "category": "Kinematics",
+    "name": "Streaming motions",
+    "description": "Non-circular motions (bars, spirals)",
+    "hypothesis": "Streaming breaks axisymmetry \u2192 affects coherence",
+    "testable": true,
+    "data_available": "MaNGA, CALIFA"
+  },
+  {
+    "category": "Kinematics",
+    "name": "Orbital phase coherence",
+    "description": "How aligned are orbital phases?",
+    "hypothesis": "Phase alignment \u2192 constructive interference \u2192 enhancement",
+    "testable": false,
+    "data_available": "None (would need N-body)"
+  },
+  {
+    "category": "Geometry",
+    "name": "Disk scale length (R_d)",
+    "description": "Exponential disk scale",
+    "hypothesis": "Sets coherence scale \u03be = R_d/(2\u03c0)",
+    "testable": true,
+    "data_available": "SPARC photometry"
+  },
+  {
+    "category": "Geometry",
+    "name": "Disk thickness (h_z)",
+    "description": "Vertical scale height",
+    "hypothesis": "Thinner disk \u2192 more 2D \u2192 different coherence mode",
+    "testable": true,
+    "data_available": "SPARC, edge-on galaxies"
+  },
+  {
+    "category": "Geometry",
+    "name": "Axis ratio (b/a)",
+    "description": "Ellipticity of isophotes",
+    "hypothesis": "More elongated \u2192 different mode structure",
+    "testable": true,
+    "data_available": "SPARC, SDSS"
+  },
+  {
+    "category": "Geometry",
+    "name": "Inclination",
+    "description": "Viewing angle",
+    "hypothesis": "Affects measured kinematics, not intrinsic coherence",
+    "testable": true,
+    "data_available": "SPARC"
+  },
+  {
+    "category": "Geometry",
+    "name": "Morphology (disk/spheroid/irregular)",
+    "description": "Overall shape classification",
+    "hypothesis": "Disks vs spheroids have different coherence modes",
+    "testable": true,
+    "data_available": "SPARC, Galaxy Zoo"
+  },
+  {
+    "category": "Geometry",
+    "name": "Bar presence",
+    "description": "Central bar structure",
+    "hypothesis": "Bars create non-axisymmetric potential \u2192 affects coherence",
+    "testable": true,
+    "data_available": "Galaxy Zoo, SPARC morphology"
+  },
+  {
+    "category": "Geometry",
+    "name": "Spiral arm strength",
+    "description": "Prominence of spiral structure",
+    "hypothesis": "Spirals are density waves \u2192 periodic coherence modulation",
+    "testable": true,
+    "data_available": "Galaxy Zoo"
+  },
+  {
+    "category": "Geometry",
+    "name": "Path length through baryons (L)",
+    "description": "How far does gravity propagate through matter?",
+    "hypothesis": "A \u221d L^(1/4) \u2192 longer path \u2192 more enhancement",
+    "testable": true,
+    "data_available": "Derived from R_d, R_e"
+  },
+  {
+    "category": "Composition",
+    "name": "Gas fraction (f_gas)",
+    "description": "Fraction of baryons in gas",
+    "hypothesis": "Gas is more coherent (lower \u03c3) \u2192 more enhancement?",
+    "testable": true,
+    "data_available": "SPARC, xGASS"
+  },
+  {
+    "category": "Composition",
+    "name": "Stellar mass (M_*)",
+    "description": "Total stellar mass",
+    "hypothesis": "More mass \u2192 stronger gravity \u2192 different regime",
+    "testable": true,
+    "data_available": "SPARC, SDSS"
+  },
+  {
+    "category": "Composition",
+    "name": "Bulge fraction (B/T)",
+    "description": "Bulge-to-total ratio",
+    "hypothesis": "Bulges are hot \u2192 less coherent \u2192 less enhancement",
+    "testable": true,
+    "data_available": "SPARC, decompositions"
+  },
+  {
+    "category": "Composition",
+    "name": "Central concentration",
+    "description": "How centrally concentrated is mass?",
+    "hypothesis": "Concentrated mass \u2192 higher g \u2192 less enhancement regime",
+    "testable": true,
+    "data_available": "SPARC, S\u00e9rsic fits"
+  },
+  {
+    "category": "Composition",
+    "name": "Metallicity",
+    "description": "Metal abundance",
+    "hypothesis": "Affects stellar populations and gas cooling",
+    "testable": true,
+    "data_available": "SDSS, APOGEE"
+  },
+  {
+    "category": "Composition",
+    "name": "Dust content",
+    "description": "Dust mass and distribution",
+    "hypothesis": "Dust traces dense gas \u2192 coherence indicator?",
+    "testable": true,
+    "data_available": "Herschel, WISE"
+  },
+  {
+    "category": "Acceleration",
+    "name": "Baryonic acceleration (g_bar)",
+    "description": "Newtonian acceleration from baryons",
+    "hypothesis": "g_bar < g\u2020 \u2192 enhancement regime",
+    "testable": true,
+    "data_available": "All datasets"
+  },
+  {
+    "category": "Acceleration",
+    "name": "Fraction below g\u2020",
+    "description": "What fraction of system is in low-g regime?",
+    "hypothesis": "More low-g \u2192 more enhancement",
+    "testable": true,
+    "data_available": "All datasets"
+  },
+  {
+    "category": "Acceleration",
+    "name": "Acceleration gradient (dg/dr)",
+    "description": "How quickly does g change with radius?",
+    "hypothesis": "Steep gradients \u2192 phase mixing \u2192 less coherence?",
+    "testable": true,
+    "data_available": "SPARC"
+  },
+  {
+    "category": "Acceleration",
+    "name": "External field (g_ext)",
+    "description": "Gravitational field from environment",
+    "hypothesis": "External field effect (EFE) suppresses enhancement",
+    "testable": true,
+    "data_available": "Environment catalogs"
+  },
+  {
+    "category": "Environment",
+    "name": "Local galaxy density",
+    "description": "Number density of nearby galaxies",
+    "hypothesis": "Dense environments \u2192 tidal interactions \u2192 less coherence",
+    "testable": true,
+    "data_available": "SDSS groups"
+  },
+  {
+    "category": "Environment",
+    "name": "Nearest neighbor distance",
+    "description": "Distance to closest galaxy",
+    "hypothesis": "Close neighbors \u2192 tidal effects \u2192 disrupted coherence",
+    "testable": true,
+    "data_available": "SDSS"
+  },
+  {
+    "category": "Environment",
+    "name": "Void vs filament vs cluster",
+    "description": "Large-scale structure environment",
+    "hypothesis": "Void galaxies \u2192 isolated \u2192 maximum coherence",
+    "testable": true,
+    "data_available": "Cosmic web catalogs"
+  },
+  {
+    "category": "Environment",
+    "name": "Halo mass (if in group/cluster)",
+    "description": "Mass of host dark matter halo",
+    "hypothesis": "Larger halos \u2192 stronger external field",
+    "testable": true,
+    "data_available": "Group catalogs"
+  },
+  {
+    "category": "Environment",
+    "name": "Tidal field strength",
+    "description": "Tidal tensor from nearby mass",
+    "hypothesis": "Strong tides \u2192 disrupted orbits \u2192 less coherence",
+    "testable": true,
+    "data_available": "Simulations"
+  },
+  {
+    "category": "Evolution",
+    "name": "Redshift (z)",
+    "description": "Cosmic epoch",
+    "hypothesis": "g\u2020(z) \u221d H(z) \u2192 less enhancement at high z",
+    "testable": true,
+    "data_available": "KMOS3D, high-z surveys"
+  },
+  {
+    "category": "Evolution",
+    "name": "Stellar age",
+    "description": "Mean age of stellar population",
+    "hypothesis": "Older systems \u2192 more relaxed \u2192 more coherent?",
+    "testable": true,
+    "data_available": "SDSS, APOGEE"
+  },
+  {
+    "category": "Evolution",
+    "name": "Star formation rate",
+    "description": "Current SFR",
+    "hypothesis": "High SFR \u2192 turbulent gas \u2192 less coherence",
+    "testable": true,
+    "data_available": "SDSS, H\u03b1 surveys"
+  },
+  {
+    "category": "Evolution",
+    "name": "Merger history",
+    "description": "Recent merger activity",
+    "hypothesis": "Recent mergers \u2192 disturbed kinematics \u2192 less coherence",
+    "testable": true,
+    "data_available": "Morphology, tidal features"
+  },
+  {
+    "category": "Evolution",
+    "name": "Dynamical age (t/t_cross)",
+    "description": "Age in units of crossing time",
+    "hypothesis": "More dynamical times \u2192 more relaxed \u2192 more coherent",
+    "testable": true,
+    "data_available": "Derived"
+  },
+  {
+    "category": "Fundamental",
+    "name": "De Broglie wavelength",
+    "description": "\u03bb_dB = h/(m*v) for constituent particles",
+    "hypothesis": "Quantum coherence at macroscopic scales?",
+    "testable": false,
+    "data_available": "Theoretical"
+  },
+  {
+    "category": "Fundamental",
+    "name": "Entropy",
+    "description": "Phase space entropy of system",
+    "hypothesis": "Verlinde: entropy gradients \u2192 emergent gravity",
+    "testable": false,
+    "data_available": "Theoretical"
+  },
+  {
+    "category": "Fundamental",
+    "name": "Information content",
+    "description": "Holographic information on boundary",
+    "hypothesis": "Information \u2192 gravity connection",
+    "testable": false,
+    "data_available": "Theoretical"
+  },
+  {
+    "category": "Fundamental",
+    "name": "Torsion field",
+    "description": "Teleparallel torsion tensor",
+    "hypothesis": "Torsion modes add coherently in disks",
+    "testable": false,
+    "data_available": "Theoretical"
+  },
+  {
+    "category": "Observational",
+    "name": "Surface brightness",
+    "description": "LSB vs HSB",
+    "hypothesis": "LSB \u2192 lower g \u2192 deeper in enhancement regime",
+    "testable": true,
+    "data_available": "SPARC"
+  },
+  {
+    "category": "Observational",
+    "name": "Data quality (N_points)",
+    "description": "Number of rotation curve points",
+    "hypothesis": "Selection effect, not physical",
+    "testable": true,
+    "data_available": "SPARC"
+  },
+  {
+    "category": "Observational",
+    "name": "Distance",
+    "description": "Distance to system",
+    "hypothesis": "Affects resolution and errors",
+    "testable": true,
+    "data_available": "All datasets"
+  }
+]
