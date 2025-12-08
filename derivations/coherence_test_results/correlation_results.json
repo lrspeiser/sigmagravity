@@ -1,0 +1,23 @@
+{
+  "C_vs_enhancement": [],
+  "g_vs_enhancement": [],
+  "combined_vs_enhancement": [],
+  "correlation_C": {
+    "r": -0.2846769626381745,
+    "p": 1.743640110494251e-63
+  },
+  "correlation_g": {
+    "r": -0.7327476926282279,
+    "p": 0.0
+  },
+  "partial_C_given_g": {
+    "r": -0.001020805411535034,
+    "p": 0.9529032428455166
+  },
+  "regression_coeffs": {
+    "intercept": -4.6763343673987325,
+    "C": -0.0028144043536278756,
+    "log_g": -0.6076010436549036
+  },
+  "n_points": 3350
+}
