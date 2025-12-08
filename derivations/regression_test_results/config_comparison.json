@@ -152,5 +152,33 @@
     "A_galaxy": 1.7320508075688772,
     "xi_scale": 0.6666666666666666,
     "alpha_h": 0.5
+  },
+  {
+    "config": "recommended",
+    "name": "A_gal=\u221a3, A_cl=8.0, \u03be=2/3, M/L=0.5",
+    "n_galaxies": 171,
+    "mean_rms": 18.966398912603214,
+    "mean_mond": 17.154025922937112,
+    "win_rate": 42.10526315789473,
+    "cluster_ratio": 0.954653931128602,
+    "ml_disk": 0.5,
+    "ml_bulge": 0.7,
+    "A_galaxy": 1.7320508075688772,
+    "xi_scale": 0.6666666666666666,
+    "alpha_h": 0.5
+  },
+  {
+    "config": "canonical",
+    "name": "A\u2080=e^(1/2\u03c0), A_cl=8.45, \u03be=R_d/(2\u03c0), M/L=0.5",
+    "n_galaxies": 171,
+    "mean_rms": 17.904978243906182,
+    "mean_mond": 17.154025922937112,
+    "win_rate": 46.783625730994146,
+    "cluster_ratio": 0.9871624332060389,
+    "ml_disk": 0.5,
+    "ml_bulge": 0.7,
+    "A_galaxy": 1.17251960642002,
+    "xi_scale": 0.15915494309189535,
+    "alpha_h": 0.5
   }
 ]

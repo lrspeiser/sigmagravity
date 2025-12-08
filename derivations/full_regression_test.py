@@ -193,11 +193,24 @@ MODEL_CONFIGS = {
         "ml_disk": 0.5,
         "ml_bulge": 0.7,
     },
+    
+    # CANONICAL: First-principles derived parameters from README
+    # A₀ = e^(1/2π) ≈ 1.173, ξ = R_d/(2π), g† = cH₀/(4√π)
+    "canonical": {
+        "name": "A₀=e^(1/2π), A_cl=8.45, ξ=R_d/(2π), M/L=0.5",
+        "A_galaxy": np.exp(1 / (2 * np.pi)),  # ≈ 1.173
+        "A_cluster": np.exp(1 / (2 * np.pi)) * (600 / 0.4)**0.27,  # ≈ 8.45
+        "xi_scale": 1 / (2 * np.pi),  # ≈ 0.159
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+    },
 }
 
 # Current active configuration
-# "recommended" = fair MOND comparison on galaxies + perfect cluster fit
-ACTIVE_CONFIG = "recommended"
+# "canonical" = first-principles derived parameters from README
+# A₀ = e^(1/2π) ≈ 1.173, ξ = R_d/(2π), g† = cH₀/(4√π)
+ACTIVE_CONFIG = "canonical"
 
 # Get active parameters
 _cfg = MODEL_CONFIGS[ACTIVE_CONFIG]
