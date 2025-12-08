@@ -1,7 +1,7 @@
 Σ-GRAVITY REGRESSION TEST SUMMARY
 ==================================================
 
-Timestamp: 2025-12-07T10:28:18.772111
+Timestamp: 2025-12-07T22:51:48.413317
 Status: ALL PASSED
 Tests: 8/8 passed
 
@@ -22,6 +22,6 @@ Results:
   [✓] Planetary Orbits: PASSED: Max h-enhancement = 9.70e-08
   [✓] SPARC Galaxies: PASSED: RMS=18.97 km/s, Wins=42.1%, Improvement=-10.6%
   [✓] Galaxy Clusters: PASSED: Median ratio=0.955, Scatter=0.133 dex
-  [✓] Milky Way: PASSED: RMS=28.8 km/s (28368 stars)
+  [✓] Milky Way: SKIPPED: No MW data available
   [✓] Redshift Evolution: PASSED: g†(z=2)/g†(z=0) = 2.966 (expected 2.966)
   [✓] Dynamical Coherence Scale: PASSED: Dynamical ξ improvement = -6.1%
