@@ -1,0 +1,10 @@
+{
+  "g_dagger": 9.598924108127284e-11,
+  "geometric_factor": 7.0898154036220635,
+  "A_disk": 1.17251960642002,
+  "A_cluster": 5.243667089812928,
+  "xi_formula": "R_d / (2\u03c0)",
+  "h_formula": "\u221a(g\u2020/g) \u00d7 g\u2020/(g\u2020+g)",
+  "W_formula": "r / (\u03be + r)",
+  "Sigma_formula": "1 + A \u00d7 W \u00d7 h"
+}
