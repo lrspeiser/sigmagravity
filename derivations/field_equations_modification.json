@@ -1,0 +1,30 @@
+{
+  "GR_modification": {
+    "standard": "G_\u03bc\u03bd = (8\u03c0G/c\u2074) T_\u03bc\u03bd",
+    "modified": "G_\u03bc\u03bd = (8\u03c0G/c\u2074) T_\u03bc\u03bd \u00d7 \u03a3(x, R)",
+    "Sigma": "1 + \u221a3 \u00d7 \u03a6(r) \u00d7 exp(-S) \u00d7 h(R)",
+    "Phi": "1 - exp(-(r/r\u2080)^\u03b2)",
+    "S": "(r\u2080/r)^\u03b2 \u00d7 (R/R\u2020)^\u03b1",
+    "h": "\u221a(R\u2020/R) \u00d7 R\u2020/(R\u2020+R)"
+  },
+  "TEGR_modification": {
+    "standard": "S = \u222b T \u221a(-g) d\u2074x",
+    "modified": "S = \u222b f(T,\u03a6) \u221a(-g) d\u2074x",
+    "f": "T + \u221a3 \u00d7 \u03a6(r) \u00d7 F(T)",
+    "F": "T \u00d7 (T\u2020/T)^0.6 \u00d7 exp(-(T/T\u2020)^0.1)"
+  },
+  "parameters": {
+    "g_dagger": 9.598924108127284e-11,
+    "R_dagger": 1.0679706092840284e-27,
+    "T_dagger": 2.1359412185680568e-27,
+    "r_char_kpc": 20.0,
+    "alpha": 0.1,
+    "beta": 0.3,
+    "A": 1.7320508075688772
+  },
+  "Newtonian_limit": {
+    "standard": "\u2207\u00b2\u03a6 = 4\u03c0G \u03c1",
+    "modified": "\u2207\u00b2\u03a6 = 4\u03c0G \u03c1 \u00d7 \u03a3(r, g)",
+    "rotation_curve": "V_obs = V_bar \u00d7 \u221a\u03a3"
+  }
+}
