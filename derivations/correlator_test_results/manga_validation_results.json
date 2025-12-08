@@ -1,0 +1,19 @@
+{
+  "theory": {
+    "model": "Current-current correlator",
+    "formula": "alignment = (1 - 2*f_counter)^2",
+    "predicted_suppression_at_15pct": 49.17295078468066
+  },
+  "observation": {
+    "n_cr": 63,
+    "n_normal": 10038,
+    "fdm_cr_mean": 0.16922222222222216,
+    "fdm_normal_mean": 0.30162422793385135,
+    "observed_suppression": 43.896343015477534,
+    "p_value": 0.003930782472226124
+  },
+  "inference": {
+    "inferred_f_counter": 0.12548812774318335,
+    "status": "SUPPORTS"
+  }
+}
