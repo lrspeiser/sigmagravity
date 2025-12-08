@@ -1,0 +1,100 @@
+{
+  "top_positive": {
+    "label": "TOP 50 POSITIVE",
+    "n_points": 50,
+    "unique_galaxies": [
+      "DDO064",
+      "UGC06667",
+      "NGC1705",
+      "F571-8",
+      "UGCA444",
+      "UGC00731",
+      "F563-1",
+      "UGC12506",
+      "F583-1",
+      "ESO444-G084",
+      "NGC2915",
+      "UGC05764",
+      "F568-1",
+      "NGC3741"
+    ],
+    "n_galaxies": 14,
+    "regime_counts": {
+      "deep_mond": 49,
+      "transition": 1
+    },
+    "position_counts": {
+      "core": 10,
+      "inner": 5,
+      "disk": 8,
+      "outer": 24,
+      "halo": 3
+    },
+    "curve_shape_counts": {
+      "flat": 19,
+      "rising": 27,
+      "declining": 4
+    },
+    "mean_log_g_bar": -11.674478875109854,
+    "mean_R_normalized": 2.067085892741703,
+    "mean_gas_fraction": 0.41979640029834536,
+    "mean_bulge_fraction": 0.0,
+    "frac_below_gdagger": 1.0,
+    "frac_below_a0": 1.0,
+    "frac_outer": 0.36,
+    "frac_inner": 0.3
+  },
+  "top_negative": {
+    "label": "TOP 50 NEGATIVE",
+    "n_points": 50,
+    "unique_galaxies": [
+      "IC4202",
+      "F571-8",
+      "NGC0891",
+      "NGC4217",
+      "NGC3877",
+      "NGC3198",
+      "UGC02455",
+      "UGC06973",
+      "CamB",
+      "UGC03580",
+      "NGC4085",
+      "NGC2903",
+      "NGC1090",
+      "D631-7",
+      "UGC04305",
+      "NGC4389",
+      "UGC09037",
+      "NGC7793",
+      "ESO563-G021",
+      "UGC11455",
+      "UGC11557",
+      "NGC2915"
+    ],
+    "n_galaxies": 22,
+    "regime_counts": {
+      "transition": 41,
+      "deep_mond": 6,
+      "newtonian": 3
+    },
+    "position_counts": {
+      "core": 35,
+      "outer": 3,
+      "inner": 9,
+      "disk": 3
+    },
+    "curve_shape_counts": {
+      "declining": 4,
+      "rising": 25,
+      "flat": 21
+    },
+    "mean_log_g_bar": -9.910490604695761,
+    "mean_R_normalized": 0.5051935034804218,
+    "mean_gas_fraction": 0.04846332043626243,
+    "mean_bulge_fraction": 0.28244135410977544,
+    "frac_below_gdagger": 0.28,
+    "frac_below_a0": 0.38,
+    "frac_outer": 0.0,
+    "frac_inner": 0.88
+  }
+}

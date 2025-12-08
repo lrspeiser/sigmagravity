@@ -1,0 +1,1568 @@
+[
+  {
+    "name": "UGC06667",
+    "n_points": 9,
+    "mean_deviation": 279.9275359222302,
+    "max_deviation": 483.23406039474344,
+    "mean_g_ratio": 15.579531308456811,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.223354564755839
+  },
+  {
+    "name": "NGC2915",
+    "n_points": 30,
+    "mean_deviation": 208.47814219500754,
+    "max_deviation": 273.8714767554353,
+    "mean_g_ratio": 10.400972936345104,
+    "frac_below_gdagger": 0.9666666666666667,
+    "mean_R_norm": 2.0664010624169986
+  },
+  {
+    "name": "UGC00731",
+    "n_points": 12,
+    "mean_deviation": 206.50574311984283,
+    "max_deviation": 429.7874836570901,
+    "mean_g_ratio": 10.556715170152273,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.1668194317140235
+  },
+  {
+    "name": "F563-1",
+    "n_points": 17,
+    "mean_deviation": 203.87935894002428,
+    "max_deviation": 301.91171833159507,
+    "mean_g_ratio": 9.488844715349698,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 9.304705882352941
+  },
+  {
+    "name": "UGC05764",
+    "n_points": 10,
+    "mean_deviation": 196.5864106524918,
+    "max_deviation": 357.5136621013593,
+    "mean_g_ratio": 9.222044663533293,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.202209944751381
+  },
+  {
+    "name": "NGC3741",
+    "n_points": 21,
+    "mean_deviation": 189.01220367136906,
+    "max_deviation": 277.8163182855615,
+    "mean_g_ratio": 8.752777655295706,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.5342857142857143
+  },
+  {
+    "name": "F568-V1",
+    "n_points": 15,
+    "mean_deviation": 188.74388445441187,
+    "max_deviation": 229.20901900308797,
+    "mean_g_ratio": 8.470666046709036,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.4405747778408018
+  },
+  {
+    "name": "NGC1705",
+    "n_points": 14,
+    "mean_deviation": 184.5995237415236,
+    "max_deviation": 265.64386994554025,
+    "mean_g_ratio": 8.49106735198529,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.0738095238095235
+  },
+  {
+    "name": "F568-1",
+    "n_points": 12,
+    "mean_deviation": 183.26820481711022,
+    "max_deviation": 262.60871496124133,
+    "mean_g_ratio": 8.30487998372741,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.759133282942807
+  },
+  {
+    "name": "F583-1",
+    "n_points": 25,
+    "mean_deviation": 183.24782660236608,
+    "max_deviation": 312.0973772241007,
+    "mean_g_ratio": 8.511225529323116,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.1834
+  },
+  {
+    "name": "UGC07399",
+    "n_points": 10,
+    "mean_deviation": 181.4335237016136,
+    "max_deviation": 214.65592700254513,
+    "mean_g_ratio": 8.01544390133991,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.200978792822186
+  },
+  {
+    "name": "ESO444-G084",
+    "n_points": 7,
+    "mean_deviation": 181.07260511747987,
+    "max_deviation": 300.4261281137846,
+    "mean_g_ratio": 8.24485826559184,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.408
+  },
+  {
+    "name": "F563-V2",
+    "n_points": 10,
+    "mean_deviation": 178.19614514089312,
+    "max_deviation": 228.92459694083178,
+    "mean_g_ratio": 7.836477142323815,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.5442222222222222
+  },
+  {
+    "name": "NGC3109",
+    "n_points": 25,
+    "mean_deviation": 171.38240416192312,
+    "max_deviation": 215.02978693591305,
+    "mean_g_ratio": 7.463347686167498,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.8382999999999999
+  },
+  {
+    "name": "UGC07608",
+    "n_points": 8,
+    "mean_deviation": 170.95988330446744,
+    "max_deviation": 214.89622137509974,
+    "mean_g_ratio": 7.488673837373112,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.2489539748953975
+  },
+  {
+    "name": "F565-V2",
+    "n_points": 7,
+    "mean_deviation": 170.79333417817583,
+    "max_deviation": 205.78454275894492,
+    "mean_g_ratio": 7.401825887493291,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.7185714285714286
+  },
+  {
+    "name": "UGC05918",
+    "n_points": 8,
+    "mean_deviation": 163.36809680163356,
+    "max_deviation": 223.3397933749544,
+    "mean_g_ratio": 7.060810793538321,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.8358333333333333
+  },
+  {
+    "name": "UGC00128",
+    "n_points": 22,
+    "mean_deviation": 158.11724868241737,
+    "max_deviation": 209.26504018846623,
+    "mean_g_ratio": 6.754093524024404,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 9.17090909090909
+  },
+  {
+    "name": "DDO064",
+    "n_points": 14,
+    "mean_deviation": 157.299972505714,
+    "max_deviation": 683.8652878930134,
+    "mean_g_ratio": 8.961237428124749,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.8782358581016296
+  },
+  {
+    "name": "UGC02259",
+    "n_points": 8,
+    "mean_deviation": 154.46757637035864,
+    "max_deviation": 214.35073749134767,
+    "mean_g_ratio": 6.538499013995108,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.2512285012285007
+  },
+  {
+    "name": "NGC6789",
+    "n_points": 4,
+    "mean_deviation": 151.71971660485315,
+    "max_deviation": 214.3296160995336,
+    "mean_g_ratio": 6.497779170672585,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.2025
+  },
+  {
+    "name": "UGC08286",
+    "n_points": 17,
+    "mean_deviation": 148.49943084838176,
+    "max_deviation": 183.81606492179182,
+    "mean_g_ratio": 6.203384787414119,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.8512941176470589
+  },
+  {
+    "name": "UGC05716",
+    "n_points": 12,
+    "mean_deviation": 145.04355324814742,
+    "max_deviation": 156.28363107530583,
+    "mean_g_ratio": 6.013140698573198,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.6783333333333337
+  },
+  {
+    "name": "UGC08490",
+    "n_points": 30,
+    "mean_deviation": 143.53406568912365,
+    "max_deviation": 187.85196669462266,
+    "mean_g_ratio": 6.0441041294843245,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.0660755336617407
+  },
+  {
+    "name": "UGC06446",
+    "n_points": 17,
+    "mean_deviation": 142.75765841847743,
+    "max_deviation": 169.89138471919068,
+    "mean_g_ratio": 5.935689248172972,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.8812745098039215
+  },
+  {
+    "name": "UGC12732",
+    "n_points": 16,
+    "mean_deviation": 140.61030358092273,
+    "max_deviation": 162.04558755060233,
+    "mean_g_ratio": 5.815516942540218,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 4.08125
+  },
+  {
+    "name": "UGC05721",
+    "n_points": 23,
+    "mean_deviation": 138.67327052788144,
+    "max_deviation": 190.30027515670514,
+    "mean_g_ratio": 5.936362116390052,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.6090826990065796
+  },
+  {
+    "name": "UGC08550",
+    "n_points": 11,
+    "mean_deviation": 137.45447569761996,
+    "max_deviation": 176.13565378588032,
+    "mean_g_ratio": 5.702919142542365,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.924545454545455
+  },
+  {
+    "name": "NGC4214",
+    "n_points": 14,
+    "mean_deviation": 137.4306604318102,
+    "max_deviation": 215.9708543816363,
+    "mean_g_ratio": 5.945664667468482,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.0761228114691703
+  },
+  {
+    "name": "UGC04325",
+    "n_points": 8,
+    "mean_deviation": 136.4705739971528,
+    "max_deviation": 189.1185994955317,
+    "mean_g_ratio": 5.686473219939891,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.3491666666666667
+  },
+  {
+    "name": "UGCA442",
+    "n_points": 8,
+    "mean_deviation": 134.22035712039334,
+    "max_deviation": 207.7957994080991,
+    "mean_g_ratio": 5.650874110072149,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 3.375
+  },
+  {
+    "name": "UGC05829",
+    "n_points": 11,
+    "mean_deviation": 133.9643022188321,
+    "max_deviation": 221.17471382784143,
+    "mean_g_ratio": 5.754890024087989,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 3.7709090909090914
+  },
+  {
+    "name": "DDO154",
+    "n_points": 12,
+    "mean_deviation": 132.73042917720844,
+    "max_deviation": 180.04245306487377,
+    "mean_g_ratio": 5.581090117622583,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.6416666666666667
+  },
+  {
+    "name": "F579-V1",
+    "n_points": 14,
+    "mean_deviation": 132.68318604470457,
+    "max_deviation": 232.13103458558524,
+    "mean_g_ratio": 5.580460983752353,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.0767857142857145
+  },
+  {
+    "name": "UGC12632",
+    "n_points": 15,
+    "mean_deviation": 131.83283352846277,
+    "max_deviation": 162.0054724066821,
+    "mean_g_ratio": 5.416924282061299,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.4216666666666666
+  },
+  {
+    "name": "UGCA444",
+    "n_points": 36,
+    "mean_deviation": 131.42509498477966,
+    "max_deviation": 420.52427911605025,
+    "mean_g_ratio": 5.929189794239291,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.3663888888888887
+  },
+  {
+    "name": "UGC04278",
+    "n_points": 25,
+    "mean_deviation": 131.3428552370544,
+    "max_deviation": 213.05296503373432,
+    "mean_g_ratio": 5.544445536926307,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.5766
+  },
+  {
+    "name": "F574-1",
+    "n_points": 14,
+    "mean_deviation": 128.17600131183346,
+    "max_deviation": 160.67225311075498,
+    "mean_g_ratio": 5.28263752159554,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.9391836734693878
+  },
+  {
+    "name": "UGC00634",
+    "n_points": 4,
+    "mean_deviation": 127.15946174184455,
+    "max_deviation": 159.5534234039283,
+    "mean_g_ratio": 5.220529092526375,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.8766666666666667
+  },
+  {
+    "name": "NGC1003",
+    "n_points": 36,
+    "mean_deviation": 126.30555116672389,
+    "max_deviation": 216.75781571665254,
+    "mean_g_ratio": 5.470092998175614,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.0832598471487365
+  },
+  {
+    "name": "D564-8",
+    "n_points": 6,
+    "mean_deviation": 122.9365495205788,
+    "max_deviation": 181.5878694537077,
+    "mean_g_ratio": 5.168684659325204,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.8941666666666667
+  },
+  {
+    "name": "UGC07603",
+    "n_points": 12,
+    "mean_deviation": 122.79571012961487,
+    "max_deviation": 182.47416412064123,
+    "mean_g_ratio": 5.16826937724209,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.44449999999999995
+  },
+  {
+    "name": "NGC0300",
+    "n_points": 25,
+    "mean_deviation": 122.07289451995668,
+    "max_deviation": 182.97034940563458,
+    "mean_g_ratio": 5.03722089121025,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.1536271186440676
+  },
+  {
+    "name": "UGC11820",
+    "n_points": 10,
+    "mean_deviation": 122.03949011864488,
+    "max_deviation": 165.32008365749593,
+    "mean_g_ratio": 4.983402319596047,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.394
+  },
+  {
+    "name": "UGC01230",
+    "n_points": 11,
+    "mean_deviation": 117.0976730907571,
+    "max_deviation": 163.82531211067513,
+    "mean_g_ratio": 4.840753693666305,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.738545454545455
+  },
+  {
+    "name": "F571-V1",
+    "n_points": 7,
+    "mean_deviation": 115.86925083902374,
+    "max_deviation": 143.96460869549875,
+    "mean_g_ratio": 4.708589787919284,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.971607142857143
+  },
+  {
+    "name": "D512-2",
+    "n_points": 4,
+    "mean_deviation": 114.24857088727413,
+    "max_deviation": 127.72031119735956,
+    "mean_g_ratio": 4.600103845974785,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.3425
+  },
+  {
+    "name": "UGC06983",
+    "n_points": 17,
+    "mean_deviation": 111.84769562406143,
+    "max_deviation": 125.86661390635771,
+    "mean_g_ratio": 4.525658119196787,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.7450588235294118
+  },
+  {
+    "name": "UGC07524",
+    "n_points": 31,
+    "mean_deviation": 111.15559160713447,
+    "max_deviation": 132.3652501136,
+    "mean_g_ratio": 4.503978703749806,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 5.516129032258065
+  },
+  {
+    "name": "F583-4",
+    "n_points": 12,
+    "mean_deviation": 110.79357507620767,
+    "max_deviation": 168.80561798483504,
+    "mean_g_ratio": 4.487941778246868,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 4.041666666666667
+  },
+  {
+    "name": "UGC06399",
+    "n_points": 9,
+    "mean_deviation": 110.65502162154183,
+    "max_deviation": 126.65629887030296,
+    "mean_g_ratio": 4.4665389092147585,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.8726666666666668
+  },
+  {
+    "name": "UGC12506",
+    "n_points": 31,
+    "mean_deviation": 109.86437883380302,
+    "max_deviation": 336.61490943325674,
+    "mean_g_ratio": 4.598586845076579,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.032922713574973
+  },
+  {
+    "name": "F568-3",
+    "n_points": 18,
+    "mean_deviation": 109.67076456038907,
+    "max_deviation": 148.1178275486231,
+    "mean_g_ratio": 4.509268897552917,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.9515873015873014
+  },
+  {
+    "name": "NGC0024",
+    "n_points": 29,
+    "mean_deviation": 109.41306246267871,
+    "max_deviation": 214.53337523129252,
+    "mean_g_ratio": 4.494972598049441,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.9046905118869136
+  },
+  {
+    "name": "UGC00891",
+    "n_points": 5,
+    "mean_deviation": 108.8598963540775,
+    "max_deviation": 165.059395640845,
+    "mean_g_ratio": 4.521447554599255,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.741
+  },
+  {
+    "name": "UGC05986",
+    "n_points": 15,
+    "mean_deviation": 107.30190268328006,
+    "max_deviation": 149.8842672197056,
+    "mean_g_ratio": 4.404899054323123,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.5106666666666664
+  },
+  {
+    "name": "NGC0247",
+    "n_points": 26,
+    "mean_deviation": 105.28355442861873,
+    "max_deviation": 136.006348740703,
+    "mean_g_ratio": 4.228734331557202,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.115054945054945
+  },
+  {
+    "name": "D631-7",
+    "n_points": 16,
+    "mean_deviation": 104.12994445210208,
+    "max_deviation": 214.16999817652774,
+    "mean_g_ratio": 4.746026928857887,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.9090625
+  },
+  {
+    "name": "UGC00191",
+    "n_points": 9,
+    "mean_deviation": 102.90318423115531,
+    "max_deviation": 139.09522462913398,
+    "mean_g_ratio": 4.1502388459571105,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.3493653974615898
+  },
+  {
+    "name": "DDO170",
+    "n_points": 8,
+    "mean_deviation": 102.47155477801438,
+    "max_deviation": 129.7942350015455,
+    "mean_g_ratio": 4.118710090210844,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.36625
+  },
+  {
+    "name": "NGC6503",
+    "n_points": 31,
+    "mean_deviation": 101.02088058270827,
+    "max_deviation": 170.7224673310131,
+    "mean_g_ratio": 4.247270715145309,
+    "frac_below_gdagger": 0.8709677419354839,
+    "mean_R_norm": 2.066547700754976
+  },
+  {
+    "name": "UGC05999",
+    "n_points": 5,
+    "mean_deviation": 100.78925502580799,
+    "max_deviation": 124.16102285728725,
+    "mean_g_ratio": 4.1061543952726245,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 3.396666666666667
+  },
+  {
+    "name": "UGC10310",
+    "n_points": 7,
+    "mean_deviation": 99.33865828012797,
+    "max_deviation": 116.12467106924274,
+    "mean_g_ratio": 3.997673267138402,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.21
+  },
+  {
+    "name": "UGC07261",
+    "n_points": 7,
+    "mean_deviation": 97.44394465452656,
+    "max_deviation": 134.10144643226272,
+    "mean_g_ratio": 3.9319032219394137,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.6349999999999999
+  },
+  {
+    "name": "IC2574",
+    "n_points": 34,
+    "mean_deviation": 96.60646460500645,
+    "max_deviation": 136.66527800190985,
+    "mean_g_ratio": 3.9050680874824355,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.6930514705882352
+  },
+  {
+    "name": "UGC02487",
+    "n_points": 17,
+    "mean_deviation": 95.40359717415366,
+    "max_deviation": 158.0027965352552,
+    "mean_g_ratio": 3.939123966240181,
+    "frac_below_gdagger": 0.7647058823529411,
+    "mean_R_norm": 2.04461162419683
+  },
+  {
+    "name": "NGC6674",
+    "n_points": 15,
+    "mean_deviation": 94.42883205513424,
+    "max_deviation": 158.00175038369275,
+    "mean_g_ratio": 3.9085642380020484,
+    "frac_below_gdagger": 0.8666666666666667,
+    "mean_R_norm": 2.0697325415458265
+  },
+  {
+    "name": "ESO116-G012",
+    "n_points": 15,
+    "mean_deviation": 93.84929833052833,
+    "max_deviation": 138.13162631471707,
+    "mean_g_ratio": 3.8398941008781304,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.9454666666666666
+  },
+  {
+    "name": "NGC5985",
+    "n_points": 33,
+    "mean_deviation": 91.7082444526891,
+    "max_deviation": 110.4173401435699,
+    "mean_g_ratio": 3.6865673208149374,
+    "frac_below_gdagger": 0.9393939393939394,
+    "mean_R_norm": 1.852778941488619
+  },
+  {
+    "name": "UGC05005",
+    "n_points": 11,
+    "mean_deviation": 91.34732528866203,
+    "max_deviation": 134.82641591200039,
+    "mean_g_ratio": 3.7955545741931114,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 5.84909090909091
+  },
+  {
+    "name": "UGC06917",
+    "n_points": 11,
+    "mean_deviation": 90.88556018864588,
+    "max_deviation": 103.76489826471982,
+    "mean_g_ratio": 3.6684099348456694,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 3.054090909090909
+  },
+  {
+    "name": "NGC0100",
+    "n_points": 21,
+    "mean_deviation": 90.46026982110607,
+    "max_deviation": 155.64537587426196,
+    "mean_g_ratio": 3.829822689694695,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 4.937619047619048
+  },
+  {
+    "name": "F567-2",
+    "n_points": 5,
+    "mean_deviation": 88.26627476863104,
+    "max_deviation": 139.0257826804705,
+    "mean_g_ratio": 3.637471275988407,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.9173333333333331
+  },
+  {
+    "name": "NGC4183",
+    "n_points": 23,
+    "mean_deviation": 88.0308939647092,
+    "max_deviation": 126.31112234147743,
+    "mean_g_ratio": 3.56041239161661,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.5195652173913046
+  },
+  {
+    "name": "UGC06930",
+    "n_points": 10,
+    "mean_deviation": 84.89389091572227,
+    "max_deviation": 99.93592416361696,
+    "mean_g_ratio": 3.4398323285154833,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.1883750000000002
+  },
+  {
+    "name": "NGC2841",
+    "n_points": 50,
+    "mean_deviation": 83.30733988698076,
+    "max_deviation": 170.82319937255332,
+    "mean_g_ratio": 3.552800885564128,
+    "frac_below_gdagger": 0.5,
+    "mean_R_norm": 1.4620113136392203
+  },
+  {
+    "name": "UGC05750",
+    "n_points": 11,
+    "mean_deviation": 83.21950766678681,
+    "max_deviation": 116.4274051138313,
+    "mean_g_ratio": 3.489288918381594,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.1892580067634773
+  },
+  {
+    "name": "UGCA281",
+    "n_points": 7,
+    "mean_deviation": 82.15496645897615,
+    "max_deviation": 119.48211361963456,
+    "mean_g_ratio": 3.3502867270898746,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.08265306122448979
+  },
+  {
+    "name": "NGC6015",
+    "n_points": 44,
+    "mean_deviation": 79.20695663380326,
+    "max_deviation": 147.84571234806816,
+    "mean_g_ratio": 3.3233473948877688,
+    "frac_below_gdagger": 0.9772727272727273,
+    "mean_R_norm": 1.6967001523963545
+  },
+  {
+    "name": "UGC04499",
+    "n_points": 9,
+    "mean_deviation": 77.95415304871182,
+    "max_deviation": 94.04166727882232,
+    "mean_g_ratio": 3.206966267023545,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.5051851851851852
+  },
+  {
+    "name": "UGC07866",
+    "n_points": 7,
+    "mean_deviation": 76.63208381151692,
+    "max_deviation": 94.7632143268353,
+    "mean_g_ratio": 3.127148780388951,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.266
+  },
+  {
+    "name": "NGC3769",
+    "n_points": 12,
+    "mean_deviation": 75.09994264555003,
+    "max_deviation": 149.57345737352261,
+    "mean_g_ratio": 3.3216054389538314,
+    "frac_below_gdagger": 0.9166666666666666,
+    "mean_R_norm": 1.6517761033369214
+  },
+  {
+    "name": "DDO168",
+    "n_points": 10,
+    "mean_deviation": 73.92108422468881,
+    "max_deviation": 113.38670516600754,
+    "mean_g_ratio": 3.1628518352870594,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.25177777777777777
+  },
+  {
+    "name": "NGC0289",
+    "n_points": 28,
+    "mean_deviation": 73.18784211710106,
+    "max_deviation": 132.5328985401861,
+    "mean_g_ratio": 3.1352058156937077,
+    "frac_below_gdagger": 0.7857142857142857,
+    "mean_R_norm": 1.7855736782902134
+  },
+  {
+    "name": "NGC2403",
+    "n_points": 73,
+    "mean_deviation": 73.16253407221657,
+    "max_deviation": 161.67503706573044,
+    "mean_g_ratio": 3.1774485450660204,
+    "frac_below_gdagger": 0.9178082191780822,
+    "mean_R_norm": 1.343371556471569
+  },
+  {
+    "name": "NGC3992",
+    "n_points": 9,
+    "mean_deviation": 72.77162805103745,
+    "max_deviation": 104.42206194652013,
+    "mean_g_ratio": 3.016614592844852,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.395673378724226
+  },
+  {
+    "name": "UGC04483",
+    "n_points": 8,
+    "mean_deviation": 70.55728315211803,
+    "max_deviation": 84.67234356948275,
+    "mean_g_ratio": 2.9271792934061542,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.10770833333333334
+  },
+  {
+    "name": "UGC07151",
+    "n_points": 11,
+    "mean_deviation": 70.3409062845854,
+    "max_deviation": 86.12512433717644,
+    "mean_g_ratio": 2.9170270139213517,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.42831168831168837
+  },
+  {
+    "name": "NGC2998",
+    "n_points": 13,
+    "mean_deviation": 70.03811773010088,
+    "max_deviation": 185.63559383657662,
+    "mean_g_ratio": 3.0309366605174626,
+    "frac_below_gdagger": 0.5384615384615384,
+    "mean_R_norm": 1.520558911287388
+  },
+  {
+    "name": "UGC06818",
+    "n_points": 8,
+    "mean_deviation": 69.3388665117135,
+    "max_deviation": 130.59273502240285,
+    "mean_g_ratio": 3.0951550998281685,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.9637499999999999
+  },
+  {
+    "name": "NGC2366",
+    "n_points": 26,
+    "mean_deviation": 69.20653298893468,
+    "max_deviation": 92.66610751736502,
+    "mean_g_ratio": 2.9038609906004353,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.3862980769230769
+  },
+  {
+    "name": "NGC3917",
+    "n_points": 17,
+    "mean_deviation": 68.59752802379279,
+    "max_deviation": 95.39322135587494,
+    "mean_g_ratio": 2.887360795756932,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.1141635658301006
+  },
+  {
+    "name": "F571-8",
+    "n_points": 13,
+    "mean_deviation": 68.37718338726182,
+    "max_deviation": 253.06412363887384,
+    "mean_g_ratio": 3.7081423823779485,
+    "frac_below_gdagger": 0.7692307692307693,
+    "mean_R_norm": 1.4128122681177342
+  },
+  {
+    "name": "UGC02885",
+    "n_points": 19,
+    "mean_deviation": 65.76557433245789,
+    "max_deviation": 105.03459541996327,
+    "mean_g_ratio": 2.8222478836600318,
+    "frac_below_gdagger": 0.7894736842105263,
+    "mean_R_norm": 2.066665245535873
+  },
+  {
+    "name": "UGC07690",
+    "n_points": 7,
+    "mean_deviation": 65.69716762277024,
+    "max_deviation": 77.95105220668911,
+    "mean_g_ratio": 2.759388592189526,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.2857142857142856
+  },
+  {
+    "name": "ESO079-G014",
+    "n_points": 15,
+    "mean_deviation": 65.67028996899396,
+    "max_deviation": 91.91588859683878,
+    "mean_g_ratio": 2.7924106927240193,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.7214157168566286
+  },
+  {
+    "name": "DDO161",
+    "n_points": 31,
+    "mean_deviation": 65.43383732243043,
+    "max_deviation": 124.65065023461146,
+    "mean_g_ratio": 2.8341595996238467,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.5969354838709677
+  },
+  {
+    "name": "NGC5907",
+    "n_points": 19,
+    "mean_deviation": 65.30912096819081,
+    "max_deviation": 97.44235825373629,
+    "mean_g_ratio": 2.763873035204614,
+    "frac_below_gdagger": 0.9473684210526315,
+    "mean_R_norm": 2.199880786807073
+  },
+  {
+    "name": "UGC05414",
+    "n_points": 6,
+    "mean_deviation": 64.21197529503476,
+    "max_deviation": 82.29925696881487,
+    "mean_g_ratio": 2.7115345619841107,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.7983333333333333
+  },
+  {
+    "name": "UGC07232",
+    "n_points": 4,
+    "mean_deviation": 63.64712824129637,
+    "max_deviation": 105.52718161813912,
+    "mean_g_ratio": 2.7507838348942686,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.08583333333333333
+  },
+  {
+    "name": "NGC3972",
+    "n_points": 10,
+    "mean_deviation": 63.58051041634428,
+    "max_deviation": 86.29071542273044,
+    "mean_g_ratio": 2.70776771941769,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.2013761467889905
+  },
+  {
+    "name": "NGC5585",
+    "n_points": 24,
+    "mean_deviation": 63.08889165129619,
+    "max_deviation": 119.20868687179214,
+    "mean_g_ratio": 2.8290536410060896,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.593154761904762
+  },
+  {
+    "name": "NGC5033",
+    "n_points": 22,
+    "mean_deviation": 62.79725819835948,
+    "max_deviation": 121.3435456425447,
+    "mean_g_ratio": 2.8045765304933337,
+    "frac_below_gdagger": 0.7272727272727273,
+    "mean_R_norm": 1.8984281025097351
+  },
+  {
+    "name": "NGC3198",
+    "n_points": 43,
+    "mean_deviation": 62.49947183652694,
+    "max_deviation": 130.2468040408314,
+    "mean_g_ratio": 2.8151897936407946,
+    "frac_below_gdagger": 0.9302325581395349,
+    "mean_R_norm": 1.2600979192166462
+  },
+  {
+    "name": "UGC07089",
+    "n_points": 12,
+    "mean_deviation": 62.231794047267734,
+    "max_deviation": 90.06050687419933,
+    "mean_g_ratio": 2.659806899794956,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.3180494905385736
+  },
+  {
+    "name": "NGC4100",
+    "n_points": 24,
+    "mean_deviation": 61.634131635534025,
+    "max_deviation": 89.29009046243517,
+    "mean_g_ratio": 2.6433389190884706,
+    "frac_below_gdagger": 0.8333333333333334,
+    "mean_R_norm": 2.225761570005858
+  },
+  {
+    "name": "UGC06786",
+    "n_points": 45,
+    "mean_deviation": 61.5681357281311,
+    "max_deviation": 170.3572168907717,
+    "mean_g_ratio": 2.817593596821232,
+    "frac_below_gdagger": 0.35555555555555557,
+    "mean_R_norm": 1.1409626366454564
+  },
+  {
+    "name": "NGC2683",
+    "n_points": 11,
+    "mean_deviation": 61.307511592781175,
+    "max_deviation": 104.21697891577557,
+    "mean_g_ratio": 2.687560938232068,
+    "frac_below_gdagger": 0.8181818181818182,
+    "mean_R_norm": 2.0911716821595507
+  },
+  {
+    "name": "NGC4013",
+    "n_points": 36,
+    "mean_deviation": 60.52567927267077,
+    "max_deviation": 111.50910201535382,
+    "mean_g_ratio": 2.6809854423957087,
+    "frac_below_gdagger": 0.8611111111111112,
+    "mean_R_norm": 2.3530760686516894
+  },
+  {
+    "name": "NGC0055",
+    "n_points": 21,
+    "mean_deviation": 60.46885458202706,
+    "max_deviation": 84.07155808771081,
+    "mean_g_ratio": 2.6114615452107706,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.0522448979591839
+  },
+  {
+    "name": "ESO563-G021",
+    "n_points": 30,
+    "mean_deviation": 59.29769675583724,
+    "max_deviation": 113.60835894419598,
+    "mean_g_ratio": 2.693553687541004,
+    "frac_below_gdagger": 0.6,
+    "mean_R_norm": 1.7915271555450758
+  },
+  {
+    "name": "KK98-251",
+    "n_points": 15,
+    "mean_deviation": 59.23401496581182,
+    "max_deviation": 75.30180167469793,
+    "mean_g_ratio": 2.542931904360962,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.185
+  },
+  {
+    "name": "UGC07559",
+    "n_points": 7,
+    "mean_deviation": 55.920838679967865,
+    "max_deviation": 78.35275856580182,
+    "mean_g_ratio": 2.4648203859366222,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.18053571428571427
+  },
+  {
+    "name": "UGC09992",
+    "n_points": 5,
+    "mean_deviation": 55.48520088704315,
+    "max_deviation": 78.76701634316338,
+    "mean_g_ratio": 2.4350797776160085,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.168
+  },
+  {
+    "name": "UGC07125",
+    "n_points": 13,
+    "mean_deviation": 55.2529447404179,
+    "max_deviation": 76.5991716699835,
+    "mean_g_ratio": 2.431659118152346,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 5.038461538461538
+  },
+  {
+    "name": "UGC07323",
+    "n_points": 10,
+    "mean_deviation": 54.696768861079406,
+    "max_deviation": 65.67625916400708,
+    "mean_g_ratio": 2.4011271216362777,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.5335
+  },
+  {
+    "name": "NGC4138",
+    "n_points": 7,
+    "mean_deviation": 52.317659697667715,
+    "max_deviation": 90.73655679853177,
+    "mean_g_ratio": 2.3860345610696774,
+    "frac_below_gdagger": 0.7142857142857143,
+    "mean_R_norm": 2.289097339689374
+  },
+  {
+    "name": "UGC06923",
+    "n_points": 6,
+    "mean_deviation": 50.38004714321159,
+    "max_deviation": 69.26571509754758,
+    "mean_g_ratio": 2.3158782738306454,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.46640826873385
+  },
+  {
+    "name": "NGC4559",
+    "n_points": 32,
+    "mean_deviation": 50.108142035212396,
+    "max_deviation": 74.67257140083056,
+    "mean_g_ratio": 2.3010266960648895,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.06014544587506
+  },
+  {
+    "name": "UGC09133",
+    "n_points": 68,
+    "mean_deviation": 48.91288677837599,
+    "max_deviation": 141.83692817875206,
+    "mean_g_ratio": 2.4050582780911585,
+    "frac_below_gdagger": 0.45588235294117646,
+    "mean_R_norm": 1.1120150765504244
+  },
+  {
+    "name": "NGC7814",
+    "n_points": 18,
+    "mean_deviation": 48.81708731918812,
+    "max_deviation": 101.36970430786887,
+    "mean_g_ratio": 2.328171017018735,
+    "frac_below_gdagger": 0.6111111111111112,
+    "mean_R_norm": 2.0614439324116742
+  },
+  {
+    "name": "NGC4010",
+    "n_points": 12,
+    "mean_deviation": 48.374046179020915,
+    "max_deviation": 69.70562748477138,
+    "mean_g_ratio": 2.247477759659605,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.8905555555555555
+  },
+  {
+    "name": "UGC03205",
+    "n_points": 48,
+    "mean_deviation": 48.04758828468905,
+    "max_deviation": 138.50157235974552,
+    "mean_g_ratio": 2.2600191959576086,
+    "frac_below_gdagger": 0.4166666666666667,
+    "mean_R_norm": 1.1514319014319014
+  },
+  {
+    "name": "UGC06614",
+    "n_points": 13,
+    "mean_deviation": 46.87981403438609,
+    "max_deviation": 116.65487731778119,
+    "mean_g_ratio": 2.3268101112870307,
+    "frac_below_gdagger": 0.9230769230769231,
+    "mean_R_norm": 1.4838686626889133
+  },
+  {
+    "name": "NGC3893",
+    "n_points": 10,
+    "mean_deviation": 46.39699677366611,
+    "max_deviation": 77.31890415854195,
+    "mean_g_ratio": 2.205870318527503,
+    "frac_below_gdagger": 0.7,
+    "mean_R_norm": 2.1411023622047245
+  },
+  {
+    "name": "UGC06787",
+    "n_points": 71,
+    "mean_deviation": 46.219601708491304,
+    "max_deviation": 182.20489892239945,
+    "mean_g_ratio": 2.397891736031935,
+    "frac_below_gdagger": 0.36619718309859156,
+    "mean_R_norm": 1.077996886941439
+  },
+  {
+    "name": "UGC02953",
+    "n_points": 115,
+    "mean_deviation": 45.096837838568206,
+    "max_deviation": 240.27070562693976,
+    "mean_g_ratio": 2.3352796687329604,
+    "frac_below_gdagger": 0.3217391304347826,
+    "mean_R_norm": 0.961447277643435
+  },
+  {
+    "name": "NGC1090",
+    "n_points": 24,
+    "mean_deviation": 45.02939893427325,
+    "max_deviation": 74.8576629266351,
+    "mean_g_ratio": 2.180456074686456,
+    "frac_below_gdagger": 0.875,
+    "mean_R_norm": 2.0203832945607623
+  },
+  {
+    "name": "UGC08837",
+    "n_points": 8,
+    "mean_deviation": 44.37221383865537,
+    "max_deviation": 68.37799660347216,
+    "mean_g_ratio": 2.124067015105748,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.47225000000000006
+  },
+  {
+    "name": "NGC3726",
+    "n_points": 12,
+    "mean_deviation": 43.2004914730116,
+    "max_deviation": 107.53925591911526,
+    "mean_g_ratio": 2.174194402930604,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.942291922919229
+  },
+  {
+    "name": "UGC02023",
+    "n_points": 5,
+    "mean_deviation": 42.65613441096971,
+    "max_deviation": 81.68394561719276,
+    "mean_g_ratio": 2.094465116747979,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.7566666666666666
+  },
+  {
+    "name": "UGC08699",
+    "n_points": 41,
+    "mean_deviation": 42.394535599209604,
+    "max_deviation": 133.73237952166826,
+    "mean_g_ratio": 2.141327072003417,
+    "frac_below_gdagger": 0.6585365853658537,
+    "mean_R_norm": 1.2107810572269146
+  },
+  {
+    "name": "NGC7793",
+    "n_points": 46,
+    "mean_deviation": 37.205053589798375,
+    "max_deviation": 66.89479544766218,
+    "mean_g_ratio": 1.9371238663114148,
+    "frac_below_gdagger": 0.8913043478260869,
+    "mean_R_norm": 1.1765095851057952
+  },
+  {
+    "name": "NGC4157",
+    "n_points": 17,
+    "mean_deviation": 36.38520766952389,
+    "max_deviation": 86.51750088644805,
+    "mean_g_ratio": 1.9431815291373913,
+    "frac_below_gdagger": 0.7058823529411765,
+    "mean_R_norm": 2.1184417029223037
+  },
+  {
+    "name": "NGC5055",
+    "n_points": 28,
+    "mean_deviation": 36.13169643934427,
+    "max_deviation": 95.78781502403567,
+    "mean_g_ratio": 1.987898000225856,
+    "frac_below_gdagger": 0.5714285714285714,
+    "mean_R_norm": 1.5299243712872581
+  },
+  {
+    "name": "NGC2903",
+    "n_points": 34,
+    "mean_deviation": 35.542064631984715,
+    "max_deviation": 99.98972856909914,
+    "mean_g_ratio": 2.012802217251373,
+    "frac_below_gdagger": 0.5294117647058824,
+    "mean_R_norm": 1.6606334841628958
+  },
+  {
+    "name": "UGC07577",
+    "n_points": 9,
+    "mean_deviation": 32.27458710673367,
+    "max_deviation": 131.66223097614267,
+    "mean_g_ratio": 1.890275199584116,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.13460317460317459
+  },
+  {
+    "name": "NGC4068",
+    "n_points": 6,
+    "mean_deviation": 32.05724968585075,
+    "max_deviation": 64.34207868215765,
+    "mean_g_ratio": 1.8046285714616257,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.2716666666666667
+  },
+  {
+    "name": "IC4202",
+    "n_points": 32,
+    "mean_deviation": 31.876558807605566,
+    "max_deviation": 66.85106914374747,
+    "mean_g_ratio": 1.8218374694996533,
+    "frac_below_gdagger": 0.5625,
+    "mean_R_norm": 1.9779440154440155
+  },
+  {
+    "name": "NGC6946",
+    "n_points": 58,
+    "mean_deviation": 30.90982247517298,
+    "max_deviation": 64.63228285377775,
+    "mean_g_ratio": 1.7571450964731554,
+    "frac_below_gdagger": 0.6379310344827587,
+    "mean_R_norm": 2.014807302231237
+  },
+  {
+    "name": "NGC3953",
+    "n_points": 8,
+    "mean_deviation": 30.221162726050984,
+    "max_deviation": 35.07802477848208,
+    "mean_g_ratio": 1.6967301251812101,
+    "frac_below_gdagger": 0.5,
+    "mean_R_norm": 2.4464285714285716
+  },
+  {
+    "name": "NGC0801",
+    "n_points": 13,
+    "mean_deviation": 29.73657932083258,
+    "max_deviation": 65.71574844979186,
+    "mean_g_ratio": 1.7261574142923144,
+    "frac_below_gdagger": 0.5384615384615384,
+    "mean_R_norm": 1.5054393951084022
+  },
+  {
+    "name": "UGC09037",
+    "n_points": 22,
+    "mean_deviation": 27.86097425650415,
+    "max_deviation": 54.61115750239141,
+    "mean_g_ratio": 1.6945350578021883,
+    "frac_below_gdagger": 0.9090909090909091,
+    "mean_R_norm": 2.1742749382234363
+  },
+  {
+    "name": "NGC2976",
+    "n_points": 27,
+    "mean_deviation": 27.292067535116775,
+    "max_deviation": 45.045452417014495,
+    "mean_g_ratio": 1.64314147133589,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.8267254038179148
+  },
+  {
+    "name": "NGC7331",
+    "n_points": 36,
+    "mean_deviation": 27.045405189351047,
+    "max_deviation": 75.62365420020993,
+    "mean_g_ratio": 1.6853168474908773,
+    "frac_below_gdagger": 0.5833333333333334,
+    "mean_R_norm": 1.9890449524159246
+  },
+  {
+    "name": "F561-1",
+    "n_points": 6,
+    "mean_deviation": 25.986039657329744,
+    "max_deviation": 43.0839470984834,
+    "mean_g_ratio": 1.6053553438961388,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.6268518518518519
+  },
+  {
+    "name": "NGC5371",
+    "n_points": 19,
+    "mean_deviation": 25.79260615307479,
+    "max_deviation": 56.02743093672592,
+    "mean_g_ratio": 1.5953614348938137,
+    "frac_below_gdagger": 0.5789473684210527,
+    "mean_R_norm": 1.8471589874339829
+  },
+  {
+    "name": "UGC03580",
+    "n_points": 47,
+    "mean_deviation": 25.70532070100683,
+    "max_deviation": 153.06703371497403,
+    "mean_g_ratio": 1.8611518722161693,
+    "frac_below_gdagger": 0.5106382978723404,
+    "mean_R_norm": 0.9156327153213506
+  },
+  {
+    "name": "UGC11455",
+    "n_points": 36,
+    "mean_deviation": 25.521702088368595,
+    "max_deviation": 73.44994356370972,
+    "mean_g_ratio": 1.6264680481872977,
+    "frac_below_gdagger": 0.3611111111111111,
+    "mean_R_norm": 1.4657497946312636
+  },
+  {
+    "name": "PGC51017",
+    "n_points": 6,
+    "mean_deviation": 25.167900051173522,
+    "max_deviation": 124.04492006909709,
+    "mean_g_ratio": 1.7632772961623548,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.24749999999999997
+  },
+  {
+    "name": "F563-V1",
+    "n_points": 6,
+    "mean_deviation": 24.974536006666654,
+    "max_deviation": 41.471883422064366,
+    "mean_g_ratio": 1.5767411358227308,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 4.588333333333334
+  },
+  {
+    "name": "UGC05253",
+    "n_points": 73,
+    "mean_deviation": 24.546672009440442,
+    "max_deviation": 111.44495814215787,
+    "mean_g_ratio": 1.6447438657418179,
+    "frac_below_gdagger": 0.2191780821917808,
+    "mean_R_norm": 0.7291917833924996
+  },
+  {
+    "name": "UGC11914",
+    "n_points": 65,
+    "mean_deviation": 22.144465893097387,
+    "max_deviation": 58.74543359158738,
+    "mean_g_ratio": 1.4989639907103272,
+    "frac_below_gdagger": 0.0,
+    "mean_R_norm": 1.5161749745676503
+  },
+  {
+    "name": "NGC3877",
+    "n_points": 13,
+    "mean_deviation": 20.94669111600517,
+    "max_deviation": 50.647130931598184,
+    "mean_g_ratio": 1.521414288742723,
+    "frac_below_gdagger": 0.8461538461538461,
+    "mean_R_norm": 2.1527617756692647
+  },
+  {
+    "name": "NGC3949",
+    "n_points": 7,
+    "mean_deviation": 19.334824410082323,
+    "max_deviation": 41.738670378730895,
+    "mean_g_ratio": 1.4394957425463895,
+    "frac_below_gdagger": 0.2857142857142857,
+    "mean_R_norm": 2.4764598908870474
+  },
+  {
+    "name": "UGC03546",
+    "n_points": 30,
+    "mean_deviation": 18.48851331852695,
+    "max_deviation": 100.98817104449556,
+    "mean_g_ratio": 1.5222279210357357,
+    "frac_below_gdagger": 0.4,
+    "mean_R_norm": 1.2087581252138215
+  },
+  {
+    "name": "UGC02916",
+    "n_points": 43,
+    "mean_deviation": 18.353482800872875,
+    "max_deviation": 76.51731630932429,
+    "mean_g_ratio": 1.4457212931790506,
+    "frac_below_gdagger": 0.32558139534883723,
+    "mean_R_norm": 1.0582129742962054
+  },
+  {
+    "name": "NGC3521",
+    "n_points": 41,
+    "mean_deviation": 18.101845839237157,
+    "max_deviation": 83.20120420360827,
+    "mean_g_ratio": 1.4239142479754896,
+    "frac_below_gdagger": 0.12195121951219512,
+    "mean_R_norm": 1.0629966728077653
+  },
+  {
+    "name": "NGC4051",
+    "n_points": 7,
+    "mean_deviation": 17.857208667992662,
+    "max_deviation": 30.553156809171245,
+    "mean_g_ratio": 1.3962439383403422,
+    "frac_below_gdagger": 0.8571428571428571,
+    "mean_R_norm": 2.289464432204383
+  },
+  {
+    "name": "UGC06628",
+    "n_points": 7,
+    "mean_deviation": 17.374957808649146,
+    "max_deviation": 45.730291666209204,
+    "mean_g_ratio": 1.4066101667021849,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.0989285714285715
+  },
+  {
+    "name": "UGC04305",
+    "n_points": 22,
+    "mean_deviation": 17.18470565377757,
+    "max_deviation": 63.67194683003571,
+    "mean_g_ratio": 1.425514931587781,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.9619696969696968
+  },
+  {
+    "name": "NGC2955",
+    "n_points": 24,
+    "mean_deviation": 16.84482626639425,
+    "max_deviation": 40.36659360763381,
+    "mean_g_ratio": 1.384572674994543,
+    "frac_below_gdagger": 0.2916666666666667,
+    "mean_R_norm": 1.3831498729889924
+  },
+  {
+    "name": "NGC0891",
+    "n_points": 18,
+    "mean_deviation": 14.081927410676235,
+    "max_deviation": 40.16197636880535,
+    "mean_g_ratio": 1.3393771649321706,
+    "frac_below_gdagger": 0.3888888888888889,
+    "mean_R_norm": 2.1620884473017727
+  },
+  {
+    "name": "NGC6195",
+    "n_points": 23,
+    "mean_deviation": 11.397083200794642,
+    "max_deviation": 41.49658505152791,
+    "mean_g_ratio": 1.2557767688820634,
+    "frac_below_gdagger": 0.30434782608695654,
+    "mean_R_norm": 1.5565288999749372
+  },
+  {
+    "name": "NGC4088",
+    "n_points": 12,
+    "mean_deviation": 11.226870095050929,
+    "max_deviation": 46.321720870980506,
+    "mean_g_ratio": 1.264604864488738,
+    "frac_below_gdagger": 0.5833333333333334,
+    "mean_R_norm": 2.12042209807573
+  },
+  {
+    "name": "NGC5005",
+    "n_points": 18,
+    "mean_deviation": 9.240789486197587,
+    "max_deviation": 31.52237365032272,
+    "mean_g_ratio": 1.2065469051806157,
+    "frac_below_gdagger": 0.0,
+    "mean_R_norm": 1.8570183086312118
+  },
+  {
+    "name": "F574-2",
+    "n_points": 5,
+    "mean_deviation": 9.206249993954767,
+    "max_deviation": 30.399820287577857,
+    "mean_g_ratio": 1.204263882996398,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.8115
+  },
+  {
+    "name": "NGC4085",
+    "n_points": 7,
+    "mean_deviation": 7.248764282089338,
+    "max_deviation": 33.95437764835288,
+    "mean_g_ratio": 1.2007762149484056,
+    "frac_below_gdagger": 0.42857142857142855,
+    "mean_R_norm": 2.2921658986175117
+  },
+  {
+    "name": "UGC06973",
+    "n_points": 9,
+    "mean_deviation": 4.963892312634967,
+    "max_deviation": 36.98950272908787,
+    "mean_g_ratio": 1.155733894643438,
+    "frac_below_gdagger": 0.2222222222222222,
+    "mean_R_norm": 2.5936305732484075
+  },
+  {
+    "name": "NGC4217",
+    "n_points": 19,
+    "mean_deviation": 2.723840310081439,
+    "max_deviation": 41.21934619063705,
+    "mean_g_ratio": 1.1439872744258963,
+    "frac_below_gdagger": 0.47368421052631576,
+    "mean_R_norm": 2.0905313523042057
+  },
+  {
+    "name": "UGC11557",
+    "n_points": 12,
+    "mean_deviation": -4.379431678956412,
+    "max_deviation": 29.760241834549326,
+    "mean_g_ratio": 1.0008142627784575,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 1.7291666666666667
+  },
+  {
+    "name": "CamB",
+    "n_points": 9,
+    "mean_deviation": -7.686894518821289,
+    "max_deviation": 59.45244049824172,
+    "mean_g_ratio": 0.9464043425284344,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 0.9233333333333332
+  },
+  {
+    "name": "NGC4389",
+    "n_points": 6,
+    "mean_deviation": -23.59010797057198,
+    "max_deviation": 8.298202567098762,
+    "mean_g_ratio": 0.6230969655231501,
+    "frac_below_gdagger": 0.5,
+    "mean_R_norm": 2.3395989974937343
+  },
+  {
+    "name": "UGC02455",
+    "n_points": 8,
+    "mean_deviation": -28.730988637025952,
+    "max_deviation": 11.103207203082627,
+    "mean_g_ratio": 0.54938288734095,
+    "frac_below_gdagger": 1.0,
+    "mean_R_norm": 2.246898263027295
+  }
+]

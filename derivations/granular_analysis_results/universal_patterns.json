@@ -1,0 +1,122 @@
+{
+  "threshold_analysis": [
+    {
+      "threshold_gdagger": 0.1,
+      "threshold_mps2": 9.598924108127284e-12,
+      "n_below": 1206,
+      "n_above": 2160,
+      "mean_deviation_below": 126.49852736948374,
+      "mean_deviation_above": 45.56230116060622,
+      "deviation_difference": 80.93622620887751
+    },
+    {
+      "threshold_gdagger": 0.5,
+      "threshold_mps2": 4.799462054063642e-11,
+      "n_below": 2193,
+      "n_above": 1173,
+      "mean_deviation_below": 102.80651657768729,
+      "mean_deviation_above": 21.75371155979418,
+      "deviation_difference": 81.0528050178931
+    },
+    {
+      "threshold_gdagger": 1.0,
+      "threshold_mps2": 9.598924108127284e-11,
+      "n_below": 2563,
+      "n_above": 803,
+      "mean_deviation_below": 93.59470133336931,
+      "mean_deviation_above": 13.808935239204581,
+      "deviation_difference": 79.78576609416473
+    },
+    {
+      "threshold_gdagger": 2.0,
+      "threshold_mps2": 1.9197848216254568e-10,
+      "n_below": 2852,
+      "n_above": 514,
+      "mean_deviation_below": 86.39440300115571,
+      "mean_deviation_above": 8.900694854495532,
+      "deviation_difference": 77.49370814666018
+    },
+    {
+      "threshold_gdagger": 5.0,
+      "threshold_mps2": 4.799462054063642e-10,
+      "n_below": 3117,
+      "n_above": 249,
+      "mean_deviation_below": 80.21863928527652,
+      "mean_deviation_above": 3.736127961043836,
+      "deviation_difference": 76.48251132423269
+    },
+    {
+      "threshold_gdagger": 10.0,
+      "threshold_mps2": 9.598924108127284e-10,
+      "n_below": 3249,
+      "n_above": 117,
+      "mean_deviation_below": 77.05326447830147,
+      "mean_deviation_above": 5.348189953036908,
+      "deviation_difference": 71.70507452526456
+    }
+  ],
+  "radial_analysis": [
+    {
+      "R_norm_low": 0,
+      "R_norm_high": 0.5,
+      "n_points": 872,
+      "mean_deviation": 44.038756984059305,
+      "mean_g_ratio": 2.48862476182609,
+      "n_galaxies": 151
+    },
+    {
+      "R_norm_low": 0.5,
+      "R_norm_high": 1.0,
+      "n_points": 609,
+      "mean_deviation": 65.90299497591145,
+      "mean_g_ratio": 3.121893480899345,
+      "n_galaxies": 157
+    },
+    {
+      "R_norm_low": 1.0,
+      "R_norm_high": 2.0,
+      "n_points": 764,
+      "mean_deviation": 76.8652797845178,
+      "mean_g_ratio": 3.4665778057560948,
+      "n_galaxies": 154
+    },
+    {
+      "R_norm_low": 2.0,
+      "R_norm_high": 3.0,
+      "n_points": 537,
+      "mean_deviation": 89.6956581648506,
+      "mean_g_ratio": 3.8759218626740144,
+      "n_galaxies": 127
+    },
+    {
+      "R_norm_low": 3.0,
+      "R_norm_high": 5.0,
+      "n_points": 491,
+      "mean_deviation": 109.42993388900469,
+      "mean_g_ratio": 4.700257950922902,
+      "n_galaxies": 121
+    },
+    {
+      "R_norm_low": 5.0,
+      "R_norm_high": 10.0,
+      "n_points": 71,
+      "mean_deviation": 114.74736567813157,
+      "mean_g_ratio": 4.795195477686844,
+      "n_galaxies": 15
+    }
+  ],
+  "gas_comparison": {
+    "gas_rich_mean_deviation": 127.03468075041141,
+    "gas_poor_mean_deviation": 50.84001980648215,
+    "gas_rich_n": 562,
+    "gas_poor_n": 2140
+  },
+  "curve_shape_comparison": {
+    "rising_mean_deviation": 76.61611914035988,
+    "flat_mean_deviation": 77.15498266773497,
+    "declining_mean_deviation": 56.604275055495705,
+    "rising_n": 1674,
+    "flat_n": 1311,
+    "declining_n": 381
+  }
+}
