@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-07T22:57:46.692536",
+  "timestamp": "2025-12-08T13:37:36.958025",
   "formula": "unified",
   "parameters": {
     "A_0": 1.17251960642002,
@@ -39,10 +39,14 @@
     },
     {
       "name": "Gaia/MW",
-      "passed": true,
-      "metric": 0.0,
-      "details": {},
-      "message": "SKIPPED: No Gaia data"
+      "passed": 1.0,
+      "metric": 29.533388250323267,
+      "details": {
+        "n_stars": 28368,
+        "rms": 29.533388250323267,
+        "mean_residual": -10.96968367167344
+      },
+      "message": "RMS=29.5 km/s (28368 stars)"
     },
     {
       "name": "Redshift Evolution",
@@ -63,6 +67,18 @@
         "cassini_bound": 2.3e-05
       },
       "message": "|\u03b3-1| = 1.77e-09 < 2.30e-05"
+    },
+    {
+      "name": "Counter-Rotation",
+      "passed": 1.0,
+      "metric": 0.003915553907736003,
+      "details": {
+        "n_cr": 63,
+        "n_normal": 10080,
+        "fdm_cr_mean": 0.16922222222222216,
+        "fdm_normal_mean": 0.3020046626984127
+      },
+      "message": "f_DM(CR)=0.169 < f_DM(Normal)=0.302, p=0.0039"
     }
   ],
   "all_passed": true

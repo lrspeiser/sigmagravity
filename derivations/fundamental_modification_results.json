@@ -1,0 +1,28 @@
+{
+  "best_fit_params": {
+    "r_char_kpc": 20.0,
+    "alpha": 0.1,
+    "beta": 0.3,
+    "A": 1.7320508075688772,
+    "g_dagger": 9.598924108127284e-11,
+    "r_char_m": 6.172e+20
+  },
+  "derived_quantities": {
+    "T_dagger": 2.1359412185680568e-27,
+    "R_dagger": 1.0679706092840284e-27,
+    "n_effective": 0.4,
+    "r_char_over_R_H": 4.673262174783189e-06
+  },
+  "lagrangian": {
+    "form": "L = T + A \u00d7 \u03a6(r) \u00d7 F(T)",
+    "F_T": "T \u00d7 (T\u2020/T)^(\u03b1+0.5) \u00d7 exp(-(T/T\u2020)^\u03b1)",
+    "Phi_r": "1 - exp(-(r/r\u2080)^\u03b2)",
+    "enhancement": "\u03a3 = 1 + A \u00d7 \u03a6 \u00d7 F'(T)"
+  },
+  "physical_interpretation": {
+    "mechanism": "Coherent addition of torsion modes",
+    "scale": "Local (r_char << R_H)",
+    "recovery": "GR at high torsion",
+    "amplitude_origin": "Mode counting (3 coherent modes)"
+  }
+}
