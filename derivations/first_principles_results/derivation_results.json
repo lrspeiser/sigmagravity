@@ -1,0 +1,13 @@
+{
+  "g_dagger_derived": 9.598924108127284e-11,
+  "g_dagger_mond_ratio": 0.7999103423439403,
+  "A_0": 1.17251960642002,
+  "A_galaxy_derived": 1.17251960642002,
+  "A_cluster_derived": 8.446265977972306,
+  "sparc_rms_derived": 17.502579085219246,
+  "sparc_rms_empirical": 24.021497611533615,
+  "sparc_win_rate_derived": 47.953216374269005,
+  "sparc_win_rate_empirical": 19.883040935672515,
+  "cluster_ratio_derived": 0.9871624332060389,
+  "cluster_ratio_empirical": 0.954653931128602
+}

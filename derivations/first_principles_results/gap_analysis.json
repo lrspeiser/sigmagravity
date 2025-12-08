@@ -1,0 +1,73 @@
+{
+  "config_comparison": {
+    "derived_A0": {
+      "description": "First-principles: A\u2080 = e^(1/2\u03c0), \u03be = R_d/(2\u03c0)",
+      "A": 1.17251960642002,
+      "xi_scale": 0.15915494309189535,
+      "mean_rms": 17.502579085219246,
+      "median_rms": 14.26349622002486,
+      "wins": 82,
+      "win_rate": 47.953216374269005,
+      "mond_rms": 17.154025922937112,
+      "vs_mond": -2.03190297046289
+    },
+    "empirical_sqrt3": {
+      "description": "Empirical: A = \u221a3, \u03be = (2/3)R_d",
+      "A": 1.7320508075688772,
+      "xi_scale": 0.6666666666666666,
+      "mean_rms": 20.467995123117348,
+      "median_rms": 17.03812683384071,
+      "wins": 39,
+      "win_rate": 22.807017543859647,
+      "mond_rms": 17.154025922937112,
+      "vs_mond": -19.318900502237423
+    },
+    "recommended": {
+      "description": "Current recommended (same as empirical)",
+      "A": 1.7320508075688772,
+      "xi_scale": 0.6666666666666666,
+      "mean_rms": 20.467995123117348,
+      "median_rms": 17.03812683384071,
+      "wins": 39,
+      "win_rate": 22.807017543859647,
+      "mond_rms": 17.154025922937112,
+      "vs_mond": -19.318900502237423
+    },
+    "hybrid_A0_xi23": {
+      "description": "Hybrid: derived A\u2080, empirical \u03be",
+      "A": 1.17251960642002,
+      "xi_scale": 0.6666666666666666,
+      "mean_rms": 18.22365178872317,
+      "median_rms": 14.037419044685445,
+      "wins": 78,
+      "win_rate": 45.614035087719294,
+      "mond_rms": 17.154025922937112,
+      "vs_mond": -6.235421763912765
+    },
+    "hybrid_sqrt3_xi2pi": {
+      "description": "Hybrid: empirical A, derived \u03be",
+      "A": 1.7320508075688772,
+      "xi_scale": 0.15915494309189535,
+      "mean_rms": 24.021497611533615,
+      "median_rms": 20.123650161251874,
+      "wins": 34,
+      "win_rate": 19.883040935672515,
+      "mond_rms": 17.154025922937112,
+      "vs_mond": -40.03416876859106
+    }
+  },
+  "optimal_params": {
+    "A": 1.0,
+    "xi_scale": 0.1,
+    "mean_rms": 17.099502955686624,
+    "win_rate": 54.97076023391813,
+    "mond_rms": 17.154025922937112
+  },
+  "summary": {
+    "g_dagger": 9.598924108127284e-11,
+    "A_0_derived": 1.17251960642002,
+    "A_sqrt3": 1.7320508075688772,
+    "xi_2pi": 0.15915494309189535,
+    "xi_23": 0.6666666666666666
+  }
+}
