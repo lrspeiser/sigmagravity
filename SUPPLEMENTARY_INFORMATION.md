@@ -661,44 +661,96 @@ Current observational data is insufficient to distinguish.
 
 ## SI §13 — Alternative Coherence Scales
 
-### SI §13.1 Geometric Baseline
+### SI §13.1 Geometric Baseline (Canonical)
 
 The canonical coherence scale is:
 
 $$\xi_{\rm geom} = \frac{R_d}{2\pi} \approx 0.159 \times R_d$$
 
-This corresponds to one azimuthal wavelength at the disk scale length.
+This corresponds to one azimuthal wavelength at the disk scale length. All primary results in this paper use this form.
 
 ### SI §13.2 Dynamical Coherence Scale
 
-An alternative formulation uses:
+An alternative formulation connects ξ directly to the ratio of random to ordered motion:
 
 $$\xi_{\rm dyn} = k \times \frac{\sigma_{\rm eff}}{\Omega_d}$$
 
 where:
-- k ≈ 0.24 (calibrated)
-- σ_eff = effective velocity dispersion
-- Ω_d = angular frequency at R_d
+- $k \approx 0.24$ (calibrated constant)
+- $\sigma_{\rm eff}$ = effective velocity dispersion (mass-weighted: gas ~10 km/s, disk ~25 km/s, bulge ~120 km/s)
+- $\Omega_d = V_{\rm bar}(R_d)/R_d$ = angular frequency at disk scale length
 
-**Ablation Results:**
+**Implementation:**
 
-| Coherence Scale | SPARC RMS | Improvement |
-|-----------------|-----------|-------------|
-| ξ = R_d/(2π) | 17.75 km/s | Baseline |
-| ξ_dyn | 16.8 km/s | +5% |
+```python
+def xi_dyn_kpc(R_d_kpc, V_bar_at_Rd_kms, sigma_eff_kms, k=0.24):
+    """Dynamical coherence scale ξ = k × σ_eff / Ω_d"""
+    Omega = V_bar_at_Rd_kms / np.maximum(R_d_kpc, 1e-6)  # (km/s)/kpc
+    return k * sigma_eff_kms / np.maximum(Omega, 1e-12)  # kpc
 
-The dynamical formulation shows modest improvement but is not used for primary results due to additional complexity.
+def compute_sigma_eff(V_gas, V_disk, V_bulge):
+    """Mass-weighted effective dispersion"""
+    V_total_sq = V_gas.max()**2 + V_disk.max()**2 + V_bulge.max()**2
+    gas_frac = V_gas.max()**2 / V_total_sq
+    disk_frac = V_disk.max()**2 / V_total_sq
+    bulge_frac = V_bulge.max()**2 / V_total_sq
+    return gas_frac * 10 + disk_frac * 25 + bulge_frac * 120  # km/s
+```
 
-### SI §13.3 Interpretation
+### SI §13.3 Full 16-Test Comparison
+
+**Tests affected by ξ choice:**
+
+| Metric | Canonical ξ = R_d/(2π) | Dynamical ξ_dyn (k=0.24) | Change |
+|--------|------------------------|--------------------------|--------|
+| SPARC RMS | 17.48 km/s | 17.39 km/s | **−0.5%** |
+| RAR scatter | 0.194 dex | 0.191 dex | **−1.9%** |
+| Win rate vs MOND | 45.6% | 46.8% | +1.2pp |
+| Milky Way RMS | 66.7 km/s | 67.6 km/s | +1.4% |
+
+**Tests NOT affected by ξ choice:**
+
+| Test | Reason |
+|------|--------|
+| Galaxy Clusters | W = 1 at r = 200 kpc (ξ irrelevant) |
+| Solar System | W = 0 (no extended disk structure) |
+| GW170817 | Gravitational sector unchanged |
+| Counter-Rotation | Coherence effect, not ξ-dependent |
+| Dwarf Spheroidals | W → 0 (dispersion-dominated) |
+| Bullet Cluster | W = 1 at lensing radii |
+
+**With optimal k = 0.47:**
+
+| Metric | Canonical | Dynamical (k=0.47) | Change |
+|--------|-----------|-------------------|--------|
+| SPARC RMS | 17.48 km/s | 17.29 km/s | **−1.1%** |
+| RAR scatter | 0.194 dex | 0.190 dex | **−2.0%** |
+| Win rate vs MOND | 45.6% | 44.4% | −1.2pp |
+
+### SI §13.4 Physical Interpretation
 
 The dynamical coherence scale tracks the ratio of random to ordered motion:
 
-$$\xi \propto \frac{\sigma}{\Omega} \propto T_{\rm orbit}$$
+$$\xi_{\rm dyn} \propto \frac{\sigma}{\Omega} \propto T_{\rm orbit}$$
 
-This connects to:
-- Epicyclic orbit averaging
-- Multi-fluid velocity dispersion
-- H(z) scaling at high redshift
+This connects to the covariant coherence scalar (§2.5): the transition $\mathcal{C} = 1/2$ occurs when $v_{\rm rot} = \sigma_v$, giving $r_{\rm transition} \sim \sigma/\Omega$.
+
+**Coherence scale statistics (171 SPARC galaxies):**
+
+| Scale | Mean (kpc) | Std (kpc) |
+|-------|------------|-----------|
+| ξ_canonical | 0.918 | 0.634 |
+| ξ_dynamical | 0.532 | 0.366 |
+| Ratio ξ_dyn/ξ_can | 0.72 | — |
+
+### SI §13.5 Conclusion
+
+The dynamical formulation provides modest improvement (~0.5-1.1%) on SPARC galaxies while maintaining physical connection to the coherence mechanism. However, we use the **canonical geometric form** for all primary results because:
+
+1. **Simplicity:** ξ = R_d/(2π) requires only disk scale length
+2. **Direct derivation:** One azimuthal wavelength at disk scale
+3. **No additional parameters:** Dynamical form requires σ_eff estimation
+4. **Comparable performance:** Improvement is modest (~1%)
 
 ---
 

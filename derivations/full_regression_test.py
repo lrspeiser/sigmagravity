@@ -201,6 +201,32 @@ MODEL_CONFIGS = {
         "A_galaxy": np.exp(1 / (2 * np.pi)),  # ≈ 1.173
         "A_cluster": np.exp(1 / (2 * np.pi)) * (600 / 0.4)**0.27,  # ≈ 8.45
         "xi_scale": 1 / (2 * np.pi),  # ≈ 0.159
+        "xi_mode": "geometric",  # ξ = xi_scale × R_d
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+    },
+    
+    # DYNAMICAL: Alternative coherence scale ξ_dyn = k × σ_eff / Ω_d
+    # Provides ~0.5-1% improvement on SPARC galaxies
+    "dynamical_xi": {
+        "name": "A₀=e^(1/2π), A_cl=8.45, ξ_dyn=k×σ/Ω, M/L=0.5",
+        "A_galaxy": np.exp(1 / (2 * np.pi)),  # ≈ 1.173
+        "A_cluster": np.exp(1 / (2 * np.pi)) * (600 / 0.4)**0.27,  # ≈ 8.45
+        "xi_scale": 0.24,  # k parameter for dynamical ξ
+        "xi_mode": "dynamical",  # ξ = k × σ_eff / Ω_d
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+    },
+    
+    # DYNAMICAL_OPTIMAL: Dynamical ξ with optimal k = 0.47
+    "dynamical_xi_optimal": {
+        "name": "A₀=e^(1/2π), A_cl=8.45, ξ_dyn=0.47×σ/Ω, M/L=0.5",
+        "A_galaxy": np.exp(1 / (2 * np.pi)),  # ≈ 1.173
+        "A_cluster": np.exp(1 / (2 * np.pi)) * (600 / 0.4)**0.27,  # ≈ 8.45
+        "xi_scale": 0.47,  # Optimal k parameter
+        "xi_mode": "dynamical",  # ξ = k × σ_eff / Ω_d
         "alpha_h": 0.5,
         "ml_disk": 0.5,
         "ml_bulge": 0.7,
@@ -278,35 +304,97 @@ def f_path(r: np.ndarray, r0: float = R0_KPC) -> np.ndarray:
 
 
 def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
-    """Coherence window W(r) = 1 - (ξ/(ξ+r))^0.5"""
+    """Coherence window W(r) = r/(ξ+r)
+    
+    This is the canonical form from the README.
+    """
     xi = max(xi, 0.01)
-    return 1 - np.power(xi / (xi + r), 0.5)
+    return r / (xi + r)
 
 
 def xi_dynamical(R_d: float, V_at_Rd: float, sigma_eff: float, k: float = K_DYNAMICAL) -> float:
-    """Dynamical coherence scale ξ = k × σ_eff / Ω_d"""
+    """Dynamical coherence scale ξ = k × σ_eff / Ω_d
+    
+    Parameters:
+    -----------
+    R_d : float
+        Disk scale length in kpc
+    V_at_Rd : float  
+        Baryonic velocity at R_d in km/s
+    sigma_eff : float
+        Effective velocity dispersion in km/s
+    k : float
+        Calibrated constant (default 0.24, optimal ~0.47)
+        
+    Returns:
+    --------
+    xi : float
+        Coherence scale in kpc
+    """
     if R_d <= 0 or V_at_Rd <= 0:
-        return (2/3) * R_d  # Fallback to legacy
-    Omega_d = V_at_Rd / R_d
-    return k * sigma_eff / Omega_d
+        return XI_SCALE * R_d  # Fallback to geometric
+    Omega_d = V_at_Rd / R_d  # (km/s)/kpc
+    return k * sigma_eff / max(Omega_d, 1e-12)
+
+
+def compute_sigma_eff(V_gas: np.ndarray, V_disk: np.ndarray, V_bulge: np.ndarray) -> float:
+    """Compute effective velocity dispersion from component fractions.
+    
+    Uses mass-weighted average of component dispersions:
+    - Gas: σ ≈ 10 km/s (cold HI)
+    - Disk: σ ≈ 25 km/s (thin disk stars)
+    - Bulge: σ ≈ 120 km/s (dispersion-supported)
+    """
+    V_gas_max = np.abs(V_gas).max() if len(V_gas) > 0 else 0
+    V_disk_max = np.abs(V_disk).max() if len(V_disk) > 0 else 0
+    V_bulge_max = np.abs(V_bulge).max() if len(V_bulge) > 0 else 0
+    
+    V_total_sq = V_gas_max**2 + V_disk_max**2 + V_bulge_max**2
+    
+    if V_total_sq > 0:
+        gas_frac = V_gas_max**2 / V_total_sq
+        bulge_frac = V_bulge_max**2 / V_total_sq
+        disk_frac = max(0, 1 - gas_frac - bulge_frac)
+    else:
+        gas_frac, disk_frac, bulge_frac = 0.3, 0.7, 0.0
+    
+    return gas_frac * SIGMA_GAS + disk_frac * SIGMA_DISK + bulge_frac * SIGMA_BULGE
 
 
 def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
-                     A: float = A_GALAXY, xi_scale: float = XI_SCALE) -> np.ndarray:
+                     A: float = A_GALAXY, xi_scale: float = XI_SCALE,
+                     xi_mode: str = "geometric", 
+                     V_gas: np.ndarray = None, V_disk: np.ndarray = None, 
+                     V_bulge: np.ndarray = None) -> np.ndarray:
     """Predict rotation velocity using Σ-Gravity.
     
-    Uses the optimized formula: Σ = 1 + A × W(r) × h(g)
+    Uses the canonical formula: Σ = 1 + A × W(r) × h(g)
     with:
-      - h(g) = (g†/g)^0.343 × g†/(g†+g)
-      - W(r) = 1 - (ξ/(ξ+r))^0.5
-      - ξ = 0.2 × R_d
+      - h(g) = √(g†/g) × g†/(g†+g)
+      - W(r) = r/(ξ+r)
+      - ξ = R_d/(2π) [geometric] or k × σ_eff/Ω_d [dynamical]
+      
+    Parameters:
+    -----------
+    xi_mode : str
+        "geometric" (default): ξ = xi_scale × R_d
+        "dynamical": ξ = xi_scale × σ_eff / Ω_d (xi_scale is k parameter)
     """
     R_m = R_kpc * kpc_to_m
     V_bar_ms = V_bar * 1000
     g_bar = V_bar_ms**2 / R_m
     
     h = h_function(g_bar)
-    xi = xi_scale * R_d
+    
+    # Compute ξ based on mode
+    if xi_mode == "dynamical" and V_gas is not None and V_disk is not None:
+        sigma_eff = compute_sigma_eff(V_gas, V_disk, V_bulge if V_bulge is not None else np.zeros_like(V_gas))
+        V_bar_at_Rd = np.interp(R_d, R_kpc, V_bar)
+        xi = xi_dynamical(R_d, V_bar_at_Rd, sigma_eff, k=xi_scale)
+    else:
+        # Geometric: ξ = xi_scale × R_d
+        xi = xi_scale * R_d
+    
     W = W_coherence(R_kpc, xi)
     
     Sigma = 1 + A * W * h
@@ -511,7 +599,11 @@ def load_mw_data(data_dir: Path) -> Optional[pd.DataFrame]:
 # =============================================================================
 
 def test_sparc_galaxies(galaxies: List[Dict], verbose: bool = False) -> TestResult:
-    """Test SPARC galaxy rotation curves."""
+    """Test SPARC galaxy rotation curves.
+    
+    Supports both geometric (canonical) and dynamical coherence scales
+    based on the active configuration's xi_mode setting.
+    """
     if len(galaxies) == 0:
         return TestResult(
             name="SPARC Galaxies",
@@ -522,6 +614,9 @@ def test_sparc_galaxies(galaxies: List[Dict], verbose: bool = False) -> TestResu
             message="FAILED: No SPARC data available"
         )
     
+    # Get xi_mode from active config (default to geometric)
+    xi_mode = _cfg.get("xi_mode", "geometric")
+    
     rms_list = []
     mond_rms_list = []
     wins = 0
@@ -530,12 +625,20 @@ def test_sparc_galaxies(galaxies: List[Dict], verbose: bool = False) -> TestResu
         R = gal['R']
         V_obs = gal['V_obs']
         V_bar = gal['V_bar']
+        V_disk = gal.get('V_disk', V_bar)
+        V_bulge = gal.get('V_bulge', np.zeros_like(V_bar))
+        V_gas = gal.get('V_gas', np.zeros_like(V_bar))
         
-        # Estimate R_d (disk scale length) from data
-        R_d = gal.get('R_d', R[len(R)//3] if len(R) > 3 else R[-1]/2)
+        # Estimate R_d (disk scale length) from disk velocity profile
+        if len(V_disk) > 0 and np.abs(V_disk).max() > 0:
+            peak_idx = np.argmax(np.abs(V_disk))
+            R_d = R[peak_idx] if peak_idx > 0 else R.max() / 3
+        else:
+            R_d = gal.get('R_d', R[len(R)//3] if len(R) > 3 else R[-1]/2)
         
-        # Σ-Gravity prediction
-        V_pred = predict_velocity(R, V_bar, R_d)
+        # Σ-Gravity prediction (supports both geometric and dynamical xi)
+        V_pred = predict_velocity(R, V_bar, R_d, xi_mode=xi_mode,
+                                  V_gas=V_gas, V_disk=V_disk, V_bulge=V_bulge)
         rms = np.sqrt(((V_obs - V_pred)**2).mean())
         rms_list.append(rms)
         
@@ -547,7 +650,6 @@ def test_sparc_galaxies(galaxies: List[Dict], verbose: bool = False) -> TestResu
         x = g_bar / a0
         # Standard interpolation: ν = 1/(1 - exp(-√x))
         nu = 1.0 / (1.0 - np.exp(-np.sqrt(np.maximum(x, 1e-10))))
-        # V = V_bar × √ν (not ν^0.25 - that was a bug!)
         V_mond = V_bar * np.sqrt(nu)
         rms_mond = np.sqrt(((V_obs - V_mond)**2).mean())
         mond_rms_list.append(rms_mond)
@@ -561,8 +663,6 @@ def test_sparc_galaxies(galaxies: List[Dict], verbose: bool = False) -> TestResu
     improvement = (mean_mond_rms - mean_rms) / mean_mond_rms * 100
     
     # Thresholds depend on M/L configuration
-    # M/L = 1.0: RMS ~ 24 km/s, win rate ~ 78%
-    # M/L = 0.5: RMS ~ 19 km/s, win rate ~ 42%
     rms_threshold = 30.0  # km/s (generous to allow different configs)
     win_threshold = 35.0  # % (minimum acceptable)
     
@@ -579,9 +679,10 @@ def test_sparc_galaxies(galaxies: List[Dict], verbose: bool = False) -> TestResu
             'mean_mond_rms': mean_mond_rms,
             'wins': wins,
             'win_rate': win_rate,
-            'improvement': improvement
+            'improvement': improvement,
+            'xi_mode': xi_mode
         },
-        message=f"{'PASSED' if passed else 'FAILED'}: RMS={mean_rms:.2f} km/s, Wins={win_rate:.1f}%, Improvement={improvement:.1f}%"
+        message=f"{'PASSED' if passed else 'FAILED'}: RMS={mean_rms:.2f} km/s, Wins={win_rate:.1f}% (xi_mode={xi_mode})"
     )
 
 

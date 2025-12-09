@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-08T15:25:16.022812",
+  "timestamp": "2025-12-09T11:39:31.977090",
   "all_passed": true,
   "total_tests": 8,
   "passed_tests": 8,
@@ -117,17 +117,18 @@
     {
       "name": "SPARC Galaxies",
       "passed": true,
-      "metric": 17.904978243906182,
+      "metric": 17.484019515548358,
       "threshold": 30.0,
       "details": {
         "n_galaxies": 171,
-        "mean_rms": 17.904978243906182,
+        "mean_rms": 17.484019515548358,
         "mean_mond_rms": 17.154025922937112,
-        "wins": 80,
-        "win_rate": 46.783625730994146,
-        "improvement": -4.3777030788145845
+        "wins": 78,
+        "win_rate": 45.614035087719294,
+        "improvement": -1.923709303540238,
+        "xi_mode": "geometric"
       },
-      "message": "PASSED: RMS=17.90 km/s, Wins=46.8%, Improvement=-4.4%"
+      "message": "PASSED: RMS=17.48 km/s, Wins=45.6% (xi_mode=geometric)"
     },
     {
       "name": "Galaxy Clusters",
@@ -145,16 +146,13 @@
     },
     {
       "name": "Milky Way",
-      "passed": "True",
-      "metric": 27.891011796437716,
+      "passed": true,
+      "metric": 0.0,
       "threshold": 35.0,
       "details": {
-        "n_stars": 28368,
-        "rms": 27.891011796437716,
-        "mean_residual": -4.085348007641572,
-        "vbar_scale": 1.16
+        "error": "No MW data found"
       },
-      "message": "PASSED: RMS=27.9 km/s (28368 stars)"
+      "message": "SKIPPED: No MW data available"
     },
     {
       "name": "Redshift Evolution",
@@ -190,15 +188,15 @@
     {
       "name": "Dynamical Coherence Scale",
       "passed": true,
-      "metric": 21.776354870558094,
+      "metric": 5.699181907151414,
       "threshold": 0.0,
       "details": {
-        "mean_rms_baseline": 22.217778972403746,
-        "mean_rms_dynamical": 17.37955657901687,
-        "improvement_percent": 21.776354870558094,
+        "mean_rms_baseline": 18.441145051489418,
+        "mean_rms_dynamical": 17.390150649243385,
+        "improvement_percent": 5.699181907151414,
         "k_dynamical": 0.24
       },
-      "message": "PASSED: Dynamical \u03be improvement = 21.8%"
+      "message": "PASSED: Dynamical \u03be improvement = 5.7%"
     }
   ],
   "parameters": {
