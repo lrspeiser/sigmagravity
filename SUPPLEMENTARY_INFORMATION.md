@@ -499,13 +499,15 @@ where:
 
 ### Covariant Acceleration Scalar
 
-The acceleration dependence is formulated covariantly using the 4-acceleration:
+The "acceleration" in Σ-Gravity is a **field property**, not a particle property. It is defined from the gradient of the auxiliary potential:
 
-$$a^\mu = u^\nu \nabla_\nu u^\mu, \quad a^2 \equiv g_{\mu\nu} a^\mu a^\nu$$
+$$g_N^2 \equiv g^{\mu\nu} \nabla_\mu \Phi_N \nabla_\nu \Phi_N$$
 
-In the weak-field limit: $a^2 \to g_N^2 = |\nabla\Phi_N|^2$
+This is manifestly a scalar under coordinate transformations.
 
-The coupling $f(a^2)\mathcal{L}_m$ is a scalar function of a scalar argument, following the prescription of Harko et al. (2014) for acceptable acceleration-dependent couplings. This avoids the "non-acceptable coupling" concern.
+**Why not particle 4-acceleration?** If we defined the scalar via $a^\mu = u^\nu \nabla_\nu u^\mu$, we would face a problem: for geodesic matter, $a^\mu = 0$ identically. Since our QUMOND-like formulation has particles following geodesics of $\Phi$, using particle acceleration would be ill-defined.
+
+The enhancement function $h(g_N)$ depends on the field strength $g_N = \sqrt{g_N^2}$, which is well-defined regardless of particle motion.
 
 ### The Auxiliary Field as Computational Device
 
