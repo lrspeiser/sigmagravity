@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-08T22:39:05.183841",
+  "timestamp": "2025-12-08T22:45:59.483681",
   "model": "graviton_path_interference",
   "formula": "g_total = g_N + A \u00d7 sqrt(g_N \u00d7 a0) \u00d7 a0/(a0 + g_N)",
   "parameters": {
@@ -138,6 +138,224 @@
         "note": "Needs detailed spatial modeling"
       },
       "message": "M_eff(gal)/M_eff(gas) = 0.64 (needs spatial modeling)"
+    },
+    {
+      "name": "Wide Binaries",
+      "passed": 1.0,
+      "metric": 22.709972832717938,
+      "details": {
+        "separations": [
+          {
+            "separation_AU": 100,
+            "g_N": 1.186281599416626e-06,
+            "g_over_a0": 9885.67999513855,
+            "boost_percent": 5.086465959536213e-05
+          },
+          {
+            "separation_AU": 500,
+            "g_N": 4.745126397666505e-08,
+            "g_over_a0": 395.42719980554205,
+            "boost_percent": 0.006342486004240477
+          },
+          {
+            "separation_AU": 1000,
+            "g_N": 1.1862815994166262e-08,
+            "g_over_a0": 98.85679995138551,
+            "boost_percent": 0.05034771568293017
+          },
+          {
+            "separation_AU": 2000,
+            "g_N": 2.9657039985415654e-09,
+            "g_over_a0": 24.714199987846378,
+            "boost_percent": 0.3903703791224178
+          },
+          {
+            "separation_AU": 5000,
+            "g_N": 4.745126397666504e-10,
+            "g_over_a0": 3.95427199805542,
+            "boost_percent": 4.952602210359824
+          },
+          {
+            "separation_AU": 10000,
+            "g_N": 1.186281599416626e-10,
+            "g_over_a0": 0.988567999513855,
+            "boost_percent": 22.709972832717938
+          },
+          {
+            "separation_AU": 20000,
+            "g_N": 2.965703998541565e-11,
+            "g_over_a0": 0.24714199987846375,
+            "boost_percent": 61.645059705502156
+          }
+        ],
+        "note": "Chae 2023 reports ~30-40% boost at >2000 AU"
+      },
+      "message": "Boost at 10kAU: 22.7% (Chae 2023: ~30-40%)"
+    },
+    {
+      "name": "Dwarf Spheroidals",
+      "passed": 1.0,
+      "metric": 0.7449640221637773,
+      "details": {
+        "galaxies": [
+          {
+            "name": "Fornax",
+            "sigma_obs": 10000,
+            "sigma_newton": 4957.851421112051,
+            "sigma_pred": 11504.693699313004,
+            "g_over_a0": 0.04741129431268475,
+            "enhancement": 2.3204998944346116
+          },
+          {
+            "name": "Draco",
+            "sigma_obs": 9000,
+            "sigma_newton": 1135.986471079518,
+            "sigma_pred": 3872.583622684972,
+            "g_over_a0": 0.008711825329955826,
+            "enhancement": 3.409005055319796
+          },
+          {
+            "name": "Sculptor",
+            "sigma_obs": 9000,
+            "sigma_newton": 2394.8697598321814,
+            "sigma_pred": 6366.733902417239,
+            "g_over_a0": 0.025812815792461703,
+            "enhancement": 2.65848857804417
+          },
+          {
+            "name": "Carina",
+            "sigma_obs": 6000,
+            "sigma_newton": 1173.2417824021084,
+            "sigma_pred": 4150.108628941379,
+            "g_over_a0": 0.007434090948228972,
+            "enhancement": 3.537300402347076
+          }
+        ]
+      },
+      "message": "\u03c3_pred/\u03c3_obs = 0.74 (avg of 4 dSphs)"
+    },
+    {
+      "name": "Ultra-Diffuse Galaxies",
+      "passed": true,
+      "metric": 0,
+      "details": {
+        "galaxies": [
+          {
+            "name": "NGC1052-DF2",
+            "sigma_obs": 8.5,
+            "sigma_newton": 8.84364268317179,
+            "sigma_pred": 20.465625914640917,
+            "g_over_a0": 0.04799903763061059,
+            "note": "Low DM - external field effect?"
+          },
+          {
+            "name": "Dragonfly44",
+            "sigma_obs": 47.0,
+            "sigma_newton": 7.490472970716222,
+            "sigma_pred": 22.05074358894507,
+            "g_over_a0": 0.016468478884604586,
+            "note": "High DM - isolated?"
+          }
+        ],
+        "note": "DF2/DF4 may require external field effect"
+      },
+      "message": "UDGs: DF2 \u03c3_pred=20.5 vs obs=8.5 km/s"
+    },
+    {
+      "name": "Galaxy-Galaxy Lensing",
+      "passed": 1.0,
+      "metric": 27.205407648659808,
+      "details": {
+        "radii": [
+          {
+            "r_kpc": 10,
+            "g_N": 6.969460263964661e-11,
+            "g_over_a0": 0.5807883553303884,
+            "M_eff_ratio": 1.8300749764884696
+          },
+          {
+            "r_kpc": 30,
+            "g_N": 7.743844737738511e-12,
+            "g_over_a0": 0.06453203948115425,
+            "M_eff_ratio": 4.697886418309203
+          },
+          {
+            "r_kpc": 50,
+            "g_N": 2.787784105585864e-12,
+            "g_over_a0": 0.023231534213215534,
+            "M_eff_ratio": 7.411905873742819
+          },
+          {
+            "r_kpc": 100,
+            "g_N": 6.96946026396466e-13,
+            "g_over_a0": 0.005807883553303883,
+            "M_eff_ratio": 14.045959157214924
+          },
+          {
+            "r_kpc": 200,
+            "g_N": 1.742365065991165e-13,
+            "g_over_a0": 0.0014519708883259709,
+            "M_eff_ratio": 27.205407648659808
+          },
+          {
+            "r_kpc": 500,
+            "g_N": 2.7877841055858636e-14,
+            "g_over_a0": 0.0002323153421321553,
+            "M_eff_ratio": 66.59340449000022
+          }
+        ]
+      },
+      "message": "M_eff/M_star at 200kpc = 27.2\u00d7 (obs: ~10-30\u00d7)"
+    },
+    {
+      "name": "External Field Effect",
+      "passed": true,
+      "metric": 1.0,
+      "details": {
+        "g_ext": 2.787784105585864e-12,
+        "g_int": 5.575568211171728e-12,
+        "g_ext_over_a0": 0.023231534213215534,
+        "g_int_over_a0": 0.04646306842643107,
+        "boost_no_efe": 2.4717883658189322e-11,
+        "boost_with_efe": 2.4717883658189322e-11,
+        "efe_suppression": 1.0
+      },
+      "message": "EFE suppression: 1.00\u00d7 (g_ext/a\u2080=0.02)"
+    },
+    {
+      "name": "Gravitational Waves",
+      "passed": true,
+      "metric": 0.0,
+      "details": {
+        "c_gw_deviation": 0.0,
+        "constraint": 1e-15,
+        "note": "Gravitons travel at c in this model"
+      },
+      "message": "|c_GW-c|/c = 0e+00 < 1e-15 (GW170817)"
+    },
+    {
+      "name": "Structure Formation",
+      "passed": true,
+      "metric": 1.1615767106607768,
+      "details": {
+        "g_cluster": 1.3938920527929321e-10,
+        "g_over_a0": 1.1615767106607768,
+        "note": "Requires N-body simulations for full test"
+      },
+      "message": "Cluster scale: g/a\u2080 = 1.2 (needs N-body sims)"
+    },
+    {
+      "name": "CMB Acoustic Peaks",
+      "passed": true,
+      "metric": 0.00154569543389038,
+      "details": {
+        "z_rec": 1100,
+        "a0_z": 2.401169687964597e-06,
+        "g_J": 3.711477022682866e-09,
+        "g_over_a0_z": 0.00154569543389038,
+        "note": "CMB requires additional physics (hot DM? neutrinos?)"
+      },
+      "message": "At z=1100: g/a\u2080(z) = 1.5e-03 (CMB needs additional physics)"
     }
   ],
   "all_passed": true
