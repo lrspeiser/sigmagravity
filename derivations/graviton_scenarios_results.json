@@ -1,0 +1,25 @@
+{
+  "scenarios": {
+    "sun_earth": {
+      "g": 0.00593140799708313,
+      "g_over_a0": 49428399.97569275,
+      "f_coherence": 2.0231283639779624e-08,
+      "boost_negligible": true
+    },
+    "sun_galactic_orbit": {
+      "g": 5.4448908312223904e-11,
+      "g_over_a0": 0.4537409026018659,
+      "f_coherence": 0.6878804869631358,
+      "v_newton_kms": 115.94113370207245,
+      "v_total_kms": 164.83207942145873
+    },
+    "galaxy_edge": {
+      "g": 7.743844737738511e-12,
+      "g_over_a0": 0.06453203948115425,
+      "f_coherence": 0.9393798992535661,
+      "v_newton_kms": 84.6714323617967,
+      "v_total_kms": 183.5220124533112
+    }
+  },
+  "key_insight": "Enhancement depends on LOCAL field strength, not path through space"
+}

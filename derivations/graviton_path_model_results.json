@@ -1,0 +1,21 @@
+{
+  "model": "graviton_path_interference",
+  "key_assumptions": [
+    "Gravitons are virtual particles (no mass drain)",
+    "Gravitons travel at c",
+    "Paths exist in superposition until matter interaction",
+    "Coherence length depends on local acceleration",
+    "Constructive interference enhances gravity at low g"
+  ],
+  "formula": "g_boost = sqrt(g_N * a0) * a0/(a0 + g_N)",
+  "physical_interpretation": {
+    "sqrt_term": "Amplitude enhancement from coherent path addition",
+    "suppression": "Coherence factor - paths decohere at high g",
+    "a0": "Coherence scale set by cosmic expansion (cH0)"
+  },
+  "predictions": {
+    "solar_system": "Standard Newton (g >> a0, decoherent)",
+    "galaxy_edges": "Enhanced gravity (g ~ a0, coherent)",
+    "clusters": "Even more enhancement (3D geometry, more paths)"
+  }
+}
