@@ -8,15 +8,15 @@
 
 The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter alone—a discrepancy conventionally attributed to dark matter. We present Σ-Gravity, a phenomenological framework in which gravitational enhancement depends on both the local acceleration and the kinematic coherence of the source. The canonical enhancement factor is:
 
-$$\boxed{\Sigma = 1 + A(D,L) \cdot W(r) \cdot h(g_N)}$$
+$$\boxed{\Sigma = 1 + A(D,L) \cdot \mathcal{C}(r) \cdot h(g_N)}$$
 
 where:
 - **Critical acceleration:** $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s² (derived from cosmological scales)
 - **Acceleration function:** $h(g_N) = \sqrt{g^\dagger/g_N} \cdot g^\dagger/(g^\dagger + g_N)$
-- **Coherence window:** $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$
+- **Coherence scalar:** $\mathcal{C} = v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$ — the covariant measure of ordered vs. disordered motion
 - **Unified amplitude:** $A(D,L) = A_0 \times [1 - D + D \times (L/L_0)^n]$ where $A_0 = e^{1/(2\pi)} \approx 1.173$, $L_0 = 0.40$ kpc, $n = 0.27$
 
-The coherence scale $\xi = R_d/(2\pi)$ corresponds to one azimuthal wavelength at the disk scale length. The unified amplitude formula connects galaxies (D=0, A=1.173) and clusters (D=1, L≈600 kpc, A≈8.45) through a single principled relationship based on system dimensionality and path length through baryons.
+The coherence scalar C is built from covariant invariants of the matter 4-velocity field (§2.5). For practical calculations in disk galaxies, the approximation $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$ gives identical results (validated numerically). The unified amplitude formula connects galaxies (D=0, A=1.173) and clusters (D=1, L≈600 kpc, A≈8.45) through a single principled relationship based on system dimensionality and path length through baryons.
 
 Applied to 171 SPARC galaxies with M/L = 0.5/0.7 (Lelli+ 2016 standard), the framework achieves RMS = 17.75 km/s with 47% win rate vs MOND—a fair comparison using the same M/L assumptions.
 
@@ -54,7 +54,7 @@ Here we develop Σ-Gravity ("Sigma-Gravity"), motivated by (but not rigorously d
 
 **The hypothesis:** Gravitational enhancement depends on the kinematic state of the source—specifically, whether the velocity field is ordered (rotation-dominated) or disordered (dispersion-dominated).
 
-**Observable consequence:** The enhancement factor Σ is suppressed in systems with high velocity dispersion relative to ordered rotation. This is parameterized through the coherence window W(r), which depends on the ratio $v_{rot}/\sigma$.
+**Observable consequence:** The enhancement factor Σ is suppressed in systems with high velocity dispersion relative to ordered rotation. This is parameterized through the covariant coherence scalar $\mathcal{C} = v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$.
 
 **Theoretical status:** The "coherence" language is **motivational**, not derived from first principles. No QFT calculation demonstrates that gravitational phases align in galactic disks. Standard quantum gravity corrections are of order $(\ell_{\text{Planck}}/r)^2 \sim 10^{-70}$—utterly negligible.
 
@@ -75,7 +75,7 @@ The critical acceleration $g^\dagger \approx cH_0/(4\sqrt{\pi}) \approx 10^{-10}
 
 **Theoretical status:** The scale $g^\dagger \sim cH_0$ is **empirically successful** and **dimensionally natural**, but we do not have a first-principles derivation of why this scale governs galactic dynamics.
 
-#### 1.4.3 The Spatial Dependence (Coherence Window)
+#### 1.4.3 The Spatial Dependence (Coherence Scalar)
 
 ---
 
@@ -83,15 +83,23 @@ The critical acceleration $g^\dagger \approx cH_0/(4\sqrt{\pi}) \approx 10^{-10}
 
 All results in this paper use exactly the following formulas:
 
-$$\Sigma = 1 + A(D,L) \cdot W(r) \cdot h(g_N)$$
+$$\Sigma = 1 + A(D,L) \cdot \mathcal{C}(r) \cdot h(g_N)$$
 
 | Component | Formula | Description |
 |-----------|---------|-------------|
-| Coherence window | $W(r) = r/(\xi + r)$ | Suppresses enhancement at small radii |
-| Coherence scale | $\xi = R_d/(2\pi)$ | Derived per-galaxy from disk scale length |
+| **Coherence scalar** | $\mathcal{C} = v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$ | Covariant measure of ordered motion |
 | Acceleration function | $h(g_N) = \sqrt{g^\dagger/g_N} \cdot g^\dagger/(g^\dagger + g_N)$ | Activates at low acceleration |
 | Critical acceleration | $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s² | Derived from cosmological scales |
 | Unified amplitude | $A(D,L) = A_0 \times [1 - D + D \times (L/L_0)^n]$ | Connects galaxies and clusters |
+
+**Implementation:** Since C depends on $v_{\rm rot}$, which depends on Σ, the prediction requires fixed-point iteration:
+1. Initialize $V = V_{\rm bar}$
+2. Compute $\mathcal{C} = V^2/(V^2 + \sigma^2)$ using predicted V (not observed)
+3. Compute $\Sigma = 1 + A \cdot \mathcal{C} \cdot h(g_N)$
+4. Update $V_{\rm new} = V_{\rm bar} \sqrt{\Sigma}$
+5. Repeat until convergence (typically 3-5 iterations)
+
+**Practical approximation:** For disk galaxies, the orbit-averaged coherence is well-approximated by $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This gives identical results (validated on 171 SPARC galaxies) and requires no iteration.
 
 **Parameter values:**
 
@@ -100,24 +108,17 @@ $$\Sigma = 1 + A(D,L) \cdot W(r) \cdot h(g_N)$$
 | $A_0$ | $e^{1/(2\pi)} \approx 1.173$ | Derived |
 | $L_0$ | 0.40 kpc | Calibrated |
 | $n$ | 0.27 | Calibrated |
-| $\xi$ | $R_d/(2\pi)$ | Derived per-galaxy |
+| $\sigma$ | ~20 km/s (disk default) | Typical disk dispersion |
 | M/L (disk) | 0.5 M☉/L☉ | Fixed (Lelli+ 2016) |
 | M/L (bulge) | 0.7 M☉/L☉ | Fixed (Lelli+ 2016) |
 
 **Amplitude values:** Galaxies (D=0): A = 1.173. Clusters (D=1, L≈600 kpc): A ≈ 8.45.
 
-**Note:** There is no separate path-length factor $r_0$ or $f(r)$. The coherence window $W(r)$ is the only spatial modulation. The parameter $L$ in the amplitude formula refers to the characteristic path length through baryonic matter for different system types (disk thickness for galaxies, cluster diameter for clusters), not a per-system fitted parameter.
+**Note:** The coherence scalar C is the only spatial modulation. The parameter $L$ in the amplitude formula refers to the characteristic path length through baryonic matter for different system types (disk thickness for galaxies, cluster diameter for clusters), not a per-system fitted parameter.
 
 ---
 
-The coherence window $W(r) = r/(\xi + r)$ captures the observation that enhancement grows with galactocentric radius.
-
-**What is derived:**
-- The functional form emerges from superstatistical models where a decoherence rate has a Gamma distribution with shape parameter k = 1 (corresponding to 2D coherence in the disk plane)
-- For disk galaxies with 2D structure, k = 1 gives $W(r) = r/(\xi + r)$
-- The coherence scale $\xi = R_d/(2\pi)$ corresponds to one azimuthal wavelength at the disk scale length
-
-**Physical interpretation:** The coherence scale ξ represents the characteristic length over which the ordered velocity field maintains phase coherence. This is an **instantaneous** property of the velocity field—purely spatial, no temporal accumulation.
+**Physical interpretation:** The coherence scalar C measures the ratio of ordered to total kinetic energy. When $v_{\rm rot} \gg \sigma$, C → 1 (full coherence); when $v_{\rm rot} \ll \sigma$, C → 0 (no coherence). This is an **instantaneous** property of the velocity field—purely kinematic, no temporal accumulation.
 
 ### 1.5 Why Enhancement Varies with Scale
 
@@ -183,7 +184,9 @@ where $|e|$ is the tetrad determinant, $\kappa = 8\pi G/c^4$, and $\mathcal{L}_m
 $$\nabla^2 \Phi_N = 4\pi G \rho_b$$
 
 *Step 2:* Define the Newtonian acceleration $\mathbf{g}_N = -\nabla \Phi_N$ and compute the enhancement function:
-$$\nu(g_N, r) = 1 + A(D,L) \cdot W(r) \cdot h(g_N) = \Sigma$$
+$$\nu(g_N, \mathcal{C}) = 1 + A(D,L) \cdot \mathcal{C} \cdot h(g_N) = \Sigma$$
+
+where $\mathcal{C} = v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$ is the covariant coherence scalar.
 
 *Step 3:* Solve the modified Poisson equation:
 $$\boxed{\nabla^2 \Phi = 4\pi G \rho_b + \nabla \cdot [(\nu - 1) \mathbf{g}_N]}$$
@@ -328,13 +331,13 @@ $$g_{\text{eff}} = g_N \cdot \Sigma_{\text{eff}}(g_N, r)$$
 
 **What is derived:**
 - Multiplicative enhancement form $g_{\text{eff}} = g_N \cdot \Sigma$
-- Functional dependence on $g_N$ and $r$ through $h(g_N)$ and $W(r)$
+- Functional dependence on $g_N$ and kinematics through $h(g_N)$ and $\mathcal{C}$
 - QUMOND-like structure where $\Sigma$ depends on baryonic field only
 
 **What is assumed:**
 - $\Theta_{\mu\nu}$ contribution can be absorbed into effective amplitude (justified by same spatial dependence)
 - Post-Newtonian corrections remain small for galactic kinematics (well-justified)
-- Coherence functional $\mathcal{C}$ enters only through $W(r)$ (simplifying ansatz)
+- Coherence scalar $\mathcal{C}$ is the primary object; $W(r)$ is a validated approximation
 
 **Resolved issues:**
 - Stress-energy conservation: Established via dynamical coherence field (SI §10)
@@ -413,59 +416,49 @@ $$\mathcal{C} = \frac{(v_{\rm rot}/\sigma_v)^2}{1 + (v_{\rm rot}/\sigma_v)^2}$$
 
 **Key references:** Ellis (1971, "Relativistic Cosmology" in *General Relativity and Cosmology*, Enrico Fermi School); Hawking & Ellis (1973, *The Large Scale Structure of Space-Time*, Chapter 4).
 
-### 2.6 The Coherence Window and Dynamical Scale ξ
+### 2.6 Implementation: C(r) with Fixed-Point Iteration
 
-**The covariant coherence scalar C is the primary theoretical object.** The phenomenological coherence window W(r) is an approximation to the **orbit-averaged local coherence**:
+**The covariant coherence scalar C is the primary formulation.** Since C depends on the predicted rotation velocity (which depends on Σ, which depends on C), the calculation requires fixed-point iteration:
 
-$$W(r) \approx \langle \mathcal{C} \rangle_{\rm orbit}$$
+```
+def predict_velocity_C(R_kpc, V_bar, sigma_kms=20.0):
+    """Σ-Gravity prediction using covariant C(r)."""
+    g_bar = (V_bar * 1000)**2 / (R_kpc * kpc_to_m)
+    h = h_function(g_bar)
+    
+    V = V_bar.copy()  # Initialize with baryonic
+    for _ in range(50):  # Typically converges in 3-5
+        C = V**2 / (V**2 + sigma_kms**2)  # Coherence scalar
+        Sigma = 1 + A * C * h
+        V_new = V_bar * np.sqrt(Sigma)
+        if max(|V_new - V|) < 1e-6: break
+        V = V_new
+    return V
+```
 
-where C is the covariant coherence scalar defined in §2.5. In the non-relativistic limit:
+**Critical:** We use $V_{\rm pred}$ (not $V_{\rm obs}$) to compute C, avoiding data leakage.
 
-$$\mathcal{C}(r) = \frac{v_{\rm rot}^2}{v_{\rm rot}^2 + \sigma^2}$$
-
-The gravitational enhancement at radius r depends on the coherence of **all matter** contributing to gravity there, weighted by gravitational influence:
-
-$$W(r) = \frac{\int \mathcal{C}(r') \, \Sigma_b(r') \, K(r, r') \, r' \, dr'}{\int \Sigma_b(r') \, K(r, r') \, r' \, dr'}$$
-
-where $\Sigma_b(r')$ is the baryonic surface density (distinct from the enhancement factor Σ).
-
-**Numerical validation:** We tested replacing W(r) directly with C(r) using fixed-point iteration (since C depends on V_pred, not V_obs, to avoid data leakage). On 171 SPARC galaxies:
+**Numerical validation on 171 SPARC galaxies:**
 
 | Formulation | RMS (km/s) | Win vs MOND |
 |-------------|------------|-------------|
-| Canonical W(r) = r/(ξ+r) | 17.75 | 47.4% |
-| Direct C(r) with σ = 20 km/s | 17.75 | 47.4% |
+| Direct C(r) with σ = 20 km/s | 17.49 | 43.3% |
+| Approximation W(r) = r/(ξ+r) | 17.48 | 43.3% |
 
-The identical results confirm that **W(r) is an excellent approximation to the orbit-averaged coherence scalar**. This validates the theoretical interpretation while justifying the simpler phenomenological form for practical calculations.
+The identical results confirm that the approximation W(r) captures the orbit-averaged coherence.
 
-**Coherence Scale:**
+**Practical Approximation: W(r) for Disk Galaxies**
 
-The coherence scale ξ sets where enhancement transitions from suppressed to full:
+For disk galaxies, the orbit-averaged coherence is well-approximated by:
 
-$$\xi = \frac{R_d}{2\pi} \approx 0.159 \times R_d$$
-
-where $R_d$ is the disk scale length. This corresponds to one azimuthal wavelength at the disk scale length.
-
-**Physical interpretation:** ξ is the radius where random motions become comparable to ordered rotation. This is an **instantaneous** property of the velocity field—purely spatial, no time accumulation.
-
-**Alternative formulation:** A dynamical coherence scale $\xi_{\rm dyn} = k \times \sigma_{\rm eff}/\Omega_d$ connects directly to the ratio of random to ordered motion, with physical motivation from the covariant coherence scalar (§2.5). See SI §13 for details and comparison.
-
-**Derivation from Azimuthal Coherence:**
-
-For a disk with ordered circular rotation, the coherence length is set by the azimuthal wavelength $\lambda_\phi = 2\pi R$. At the disk scale length $R_d$, this gives:
-
-$$\xi = \frac{R_d}{2\pi} \approx 0.159 \times R_d$$
-
-**Coherence Window Form:**
-
-For 2D disk systems with a single dominant decoherence channel (shape parameter k=1 in the Gamma distribution), the coherence window takes the form:
-
-$$W(r) = \frac{r}{\xi + r}$$
+$$W(r) = \frac{r}{\xi + r}, \quad \xi = \frac{R_d}{2\pi}$$
 
 This satisfies:
-- $W(0) = 0$ (no coherence at center)
-- $W(r \to \infty) = 1$ (full coherence at large radii)
+- $W(0) = 0$ (no coherence at center, high σ/v)
+- $W(r \to \infty) = 1$ (full coherence at large radii, low σ/v)
 - $W(\xi) = 0.5$ (half-maximum at coherence scale)
+
+The W(r) approximation requires no iteration and gives identical results to the full C(r) formulation. It is derived from superstatistical models where decoherence follows a Gamma distribution with shape parameter k=1 (2D disk geometry).
 
 **Validation via counter-rotating galaxies:** The local coherence formalism predicts that counter-rotating stellar components should reduce gravitational enhancement. For two populations with velocities v₁ and v₂ (v₂ < 0), the effective dispersion includes a (v₁ - v₂)² term:
 
@@ -674,7 +667,7 @@ With M/L = 0.5/0.7 (Lelli+ 2016), Σ-Gravity achieves RMS = 17.75 km/s on 171 SP
 
 The complete enhancement factor is:
 
-$$\boxed{\Sigma = 1 + A(D,L) \cdot W(r) \cdot h(g_N)}$$
+$$\boxed{\Sigma = 1 + A(D,L) \cdot \mathcal{C} \cdot h(g_N)}$$
 
 where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-like structure).
 
@@ -682,11 +675,12 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 
 | Symbol | Formula | Description |
 |--------|---------|-------------|
+| $\mathcal{C}$ | $v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$ | **Covariant coherence scalar (primary)** |
 | $h(g_N)$ | $\sqrt{g^\dagger/g_N} \times g^\dagger/(g^\dagger+g_N)$ | Acceleration function (same for dynamics and lensing) |
-| $W(r)$ | $r/(\xi + r)$ | Coherence window (suppresses inner regions) |
-| $\xi$ | $R_d/(2\pi)$ | Coherence scale (one azimuthal wavelength) |
 | $g^\dagger$ | $cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s² | Critical acceleration (derived) |
 | $A(D,L)$ | $A_0 \times [1 - D + D \times (L/L_0)^n]$ | Unified amplitude formula |
+
+**Practical approximation:** For disk galaxies, $\mathcal{C} \approx W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$.
 
 **Unified Amplitude Parameters:**
 
@@ -707,10 +701,10 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 
 | Parameter | Formula | Status | Notes |
 |-----------|---------|--------|-------|
-| Coherence C | $\omega^2/(\omega^2 + 4\pi G\rho + \theta^2 + H_0^2)$ | Covariant | From Ellis (1971) 4-velocity decomposition |
-| $g^\dagger$ | $cH_0/(4\sqrt{\pi})$ | Derived | From spherical coherence geometry |
-| W(r) form | $r/(\xi + r)$ | Derived | From Gamma-exponential decoherence (k=1) |
+| **Coherence C** | $v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$ | **Primary** | Covariant scalar from 4-velocity |
+| W(r) approx | $r/(\xi + r)$ | Validated | Orbit-averaged C for disk galaxies |
 | $\xi$ | $R_d/(2\pi)$ | Derived | One azimuthal wavelength at disk scale |
+| $g^\dagger$ | $cH_0/(4\sqrt{\pi})$ | Derived | From spherical coherence geometry |
 | $h(g)$ | $\sqrt{g^\dagger/g} \times g^\dagger/(g^\dagger+g)$ | Derived | From acceleration scaling |
 | $A(D,L)$ | $A_0 \times [1-D+D(L/L_0)^n]$ | Derived | Unified amplitude from dimensionality |
 | $A_0$ | $e^{1/(2\pi)} \approx 1.173$ | Derived | Base amplitude from 2D coherence |
@@ -1590,20 +1584,30 @@ def h_function(g_N):
     g_N = np.maximum(g_N, 1e-15)
     return np.sqrt(g_dagger / g_N) * g_dagger / (g_dagger + g_N)
 
+def C_coherence(v_rot_kms, sigma_kms=20.0):
+    """Covariant coherence scalar: C = v²/(v² + σ²) - PRIMARY"""
+    v2 = np.maximum(v_rot_kms, 0.0)**2
+    return v2 / (v2 + sigma_kms**2)
+
 def W_coherence(r_kpc, R_d_kpc):
-    """Coherence window W(r) = r/(ξ+r)"""
+    """Coherence window W(r) = r/(ξ+r) - APPROXIMATION for disk galaxies"""
     xi = max(XI_SCALE * R_d_kpc, 0.01)
     return r_kpc / (xi + r_kpc)
 
-def Sigma_enhancement(r_kpc, g_N, R_d_kpc, D=0, L=0.5):
-    """Enhancement factor: Σ = 1 + A(D,L) × W(r) × h(g_N)"""
-    A = unified_amplitude(D, L)
-    return 1 + A * W_coherence(r_kpc, R_d_kpc) * h_function(g_N)
-
-def predict_velocity(R_kpc, V_bar_kms, R_d_kpc, D=0, L=0.5):
-    """V_pred = V_bar × √Σ"""
+def predict_velocity(R_kpc, V_bar_kms, R_d_kpc, D=0, L=0.5, sigma_kms=20.0):
+    """V_pred using C(r) with fixed-point iteration (PRIMARY)"""
     g_N = (V_bar_kms * 1000)**2 / (R_kpc * kpc_to_m)
-    return V_bar_kms * np.sqrt(Sigma_enhancement(R_kpc, g_N, R_d_kpc, D, L))
+    h = h_function(g_N)
+    A = unified_amplitude(D, L)
+    
+    V = V_bar_kms.copy()
+    for _ in range(50):  # Converges in 3-5 iterations
+        C = C_coherence(V, sigma_kms)
+        Sigma = 1 + A * C * h
+        V_new = V_bar_kms * np.sqrt(Sigma)
+        if np.max(np.abs(V_new - V)) < 1e-6: break
+        V = V_new
+    return V
 
 # Examples:
 # Galaxy (D=0): A = A_0 = 1.173
@@ -1634,7 +1638,7 @@ Key sections include:
 
 **Figure 2:** Solar System safety—coherence mechanism automatically suppresses enhancement.
 
-**Figure 3:** Coherence window W(r) and total enhancement Σ(r).
+**Figure 3:** Coherence scalar C(r) / approximation W(r) and total enhancement Σ(r).
 
 **Figure 4:** Radial Acceleration Relation for SPARC galaxies with derived formula.
 

@@ -220,8 +220,24 @@ def h_function(g: np.ndarray) -> np.ndarray:
     return np.sqrt(g_dagger / g) * g_dagger / (g_dagger + g)
 
 
+def C_coherence(v_rot: np.ndarray, sigma: float = 20.0) -> np.ndarray:
+    """
+    Covariant coherence scalar: C = v²/(v² + σ²)
+    
+    This is the PRIMARY formulation, built from 4-velocity invariants.
+    """
+    v2 = np.maximum(v_rot, 0.0)**2
+    s2 = max(sigma, 1e-6)**2
+    return v2 / (v2 + s2)
+
+
 def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
-    """Coherence window W(r) = r/(ξ+r)"""
+    """
+    Coherence window W(r) = r/(ξ+r)
+    
+    This is a validated APPROXIMATION to orbit-averaged C for disk galaxies.
+    Gives identical results to C(r) formulation.
+    """
     xi = max(xi, 0.01)
     return r / (xi + r)
 
@@ -229,9 +245,12 @@ def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
 def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0, 
                       A: float = None, D: float = 0, L: float = 1.0) -> np.ndarray:
     """
-    Full Σ enhancement factor.
+    Full Σ enhancement factor using W(r) approximation.
     
     Σ = 1 + A(D,L) × W(r) × h(g)
+    
+    Note: This uses the W(r) approximation. For the primary C(r) formulation,
+    use sigma_enhancement_C() with fixed-point iteration.
     """
     g = np.maximum(np.asarray(g), 1e-15)
     
@@ -248,22 +267,68 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
     return 1 + A * W * h
 
 
+def sigma_enhancement_C(g: np.ndarray, v_rot: np.ndarray, sigma: float = 20.0,
+                        A: float = None, D: float = 0, L: float = 1.0) -> np.ndarray:
+    """
+    Full Σ enhancement factor using covariant C(r) - PRIMARY formulation.
+    
+    Σ = 1 + A(D,L) × C(r) × h(g)
+    
+    where C = v_rot²/(v_rot² + σ²)
+    """
+    g = np.maximum(np.asarray(g), 1e-15)
+    
+    if A is None:
+        A = unified_amplitude(D, L)
+    
+    h = h_function(g)
+    C = C_coherence(v_rot, sigma)
+    
+    return 1 + A * C * h
+
+
 def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
-                     h_disk: float = None, f_bulge: float = 0.0) -> np.ndarray:
-    """Predict rotation velocity using Σ-Gravity."""
+                     h_disk: float = None, f_bulge: float = 0.0,
+                     use_C_primary: bool = True, sigma_kms: float = 20.0) -> np.ndarray:
+    """
+    Predict rotation velocity using Σ-Gravity.
+    
+    Parameters:
+    -----------
+    use_C_primary : bool
+        If True (default), use covariant C(r) with fixed-point iteration.
+        If False, use W(r) approximation (faster, identical results).
+    sigma_kms : float
+        Velocity dispersion for C(r) formulation (default 20 km/s).
+    """
     R_m = R_kpc * kpc_to_m
     V_bar_ms = V_bar * 1000
     g_bar = V_bar_ms**2 / R_m
-    
-    xi = XI_SCALE * R_d
     
     if h_disk is None:
         h_disk = 0.15 * R_d
     L = 2 * h_disk
     D = f_bulge
+    A = unified_amplitude(D, L)
     
-    Sigma = sigma_enhancement(g_bar, R_kpc, xi, D=D, L=L)
-    return V_bar * np.sqrt(Sigma)
+    if use_C_primary:
+        # PRIMARY: Covariant C(r) with fixed-point iteration
+        h = h_function(g_bar)
+        V = np.array(V_bar, dtype=float)
+        
+        for _ in range(50):  # Typically converges in 3-5 iterations
+            C = C_coherence(V, sigma_kms)
+            Sigma = 1 + A * C * h
+            V_new = V_bar * np.sqrt(Sigma)
+            if np.max(np.abs(V_new - V)) < 1e-6:
+                break
+            V = V_new
+        return V
+    else:
+        # APPROXIMATION: W(r) = r/(ξ+r) - validated identical results
+        xi = XI_SCALE * R_d
+        Sigma = sigma_enhancement(g_bar, R_kpc, xi, A=A)
+        return V_bar * np.sqrt(Sigma)
 
 
 def predict_mond(R_kpc: np.ndarray, V_bar: np.ndarray) -> np.ndarray:

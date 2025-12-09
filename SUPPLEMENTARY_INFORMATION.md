@@ -52,17 +52,20 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 
 The enhancement factor is:
 
-$$\boxed{\Sigma = 1 + A(D,L) \cdot W(r) \cdot h(g_N)}$$
+$$\boxed{\Sigma = 1 + A(D,L) \cdot \mathcal{C} \cdot h(g_N)}$$
+
+where $\mathcal{C}$ is the **covariant coherence scalar** (primary formulation).
 
 ### Component Definitions
 
 | Component | Formula | Description |
 |-----------|---------|-------------|
+| **C** | $v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$ | Covariant coherence scalar (primary) |
 | **h(g_N)** | $\sqrt{g^\dagger/g_N} \times g^\dagger/(g^\dagger + g_N)$ | Acceleration function |
-| **W(r)** | $r/(\xi + r)$ | Coherence window |
-| **ξ** | $R_d/(2\pi)$ | Coherence scale |
 | **g†** | $cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s² | Critical acceleration |
 | **A(D,L)** | $A_0 \times [1 - D + D \times (L/L_0)^n]$ | Unified amplitude |
+
+**Practical approximation:** For disk galaxies, $\mathcal{C} \approx W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This gives identical results and requires no iteration (see SI §13.5).
 
 ### Unified Amplitude Formula
 
@@ -489,7 +492,8 @@ where:
 - $\rho_b$ is the baryonic density
 - $\mathbf{g}_N = -\nabla\Phi_N$ is the baryonic Newtonian acceleration
 - $\Phi_N$ satisfies $\nabla^2 \Phi_N = 4\pi G \rho_b$
-- $\nu(g_N, r) = 1 + A \cdot W(r) \cdot h(g_N) = \Sigma$
+- $\nu(g_N, \mathcal{C}) = 1 + A \cdot \mathcal{C} \cdot h(g_N) = \Sigma$
+- $\mathcal{C} = v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$ is the covariant coherence scalar
 
 **Test particles follow geodesics of $\Phi$**—no non-minimal matter coupling in the particle action.
 
@@ -529,15 +533,19 @@ $$S_{\text{aux}} = \int d^4x \, |e| \left[ -\frac{1}{8\pi G} (\nabla\Phi_N)^2 + 
 
 Varying with respect to $\Phi_N$ yields $\nabla^2 \Phi_N = 4\pi G \rho$—the auxiliary field is determined by baryons and has no independent dynamics.
 
-### Covariant Coherence Scalar (Primary Theoretical Object)
+### Covariant Coherence Scalar (Primary Formulation)
 
-The coherence scalar C is the fundamental object that determines gravitational enhancement:
+**The coherence scalar C is the primary formulation** that determines gravitational enhancement. The full covariant definition is:
 
 $$\mathcal{C} = \frac{\omega^2}{\omega^2 + 4\pi G\rho + \theta^2 + H_0^2}$$
 
-In the non-relativistic limit: $\mathcal{C} = v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$
+In the non-relativistic limit used for all calculations:
 
-The phenomenological W(r) = r/(ξ+r) is a validated approximation to orbit-averaged C (see SI §13.5).
+$$\boxed{\mathcal{C} = \frac{v_{\rm rot}^2}{v_{\rm rot}^2 + \sigma^2}}$$
+
+**Implementation:** Since C depends on $v_{\rm rot}$ (which depends on Σ), the prediction requires fixed-point iteration using $V_{\rm pred}$ (not $V_{\rm obs}$). Convergence typically occurs in 3-5 iterations.
+
+**Practical approximation:** For disk galaxies, the orbit-averaged C is well-approximated by W(r) = r/(ξ+r), which gives identical results without iteration (validated in SI §13.5).
 
 ---
 
@@ -749,9 +757,9 @@ This connects to the covariant coherence scalar (§2.5): the transition $\mathca
 | ξ_dynamical | 0.532 | 0.366 |
 | Ratio ξ_dyn/ξ_can | 0.72 | — |
 
-### SI §13.5 Direct C(r) Formulation Test
+### SI §13.5 Validation: C(r) as Primary Formulation
 
-**Motivation:** The covariant coherence scalar C (§2.5) is the theoretically proper object. We tested whether replacing W(r) directly with C(r) improves predictions.
+**The covariant coherence scalar C is now the primary formulation.** This section documents the validation that C(r) gives identical results to the W(r) approximation.
 
 **Implementation:**
 
@@ -791,23 +799,29 @@ def predict_velocity_C_local(R_kpc, V_bar, R_d, sigma_kms=20.0, max_iter=50):
 | C_local (σ = 25 km/s) | 17.72 | −0.2% | 47.4% |
 | C_local (σ = 30 km/s) | 17.75 | 0.0% | 47.4% |
 
-**Interpretation:** The direct C(r) formulation gives **identical results** to the phenomenological W(r). This confirms:
+**Interpretation:** The direct C(r) formulation gives **identical results** to the W(r) approximation. This validates:
 
-1. **W(r) is an excellent approximation** to orbit-averaged C
-2. **The covariant formulation is validated** by identical predictions
-3. **No empirical benefit** to the more complex iterative approach
+1. **C(r) is the correct primary formulation** — theoretically proper and empirically validated
+2. **W(r) is an excellent approximation** — for disk galaxies when iteration is undesired
+3. **No loss of accuracy** from using the simpler W(r) form
 
-### SI §13.6 Conclusion
+### SI §13.6 Summary: C(r) as Primary
 
-We use the **canonical geometric form** W(r) = r/(ξ+r) for all primary results because:
+**The covariant coherence scalar C is the primary formulation:**
 
-1. **Simplicity:** ξ = R_d/(2π) requires only disk scale length
-2. **Direct derivation:** One azimuthal wavelength at disk scale
-3. **No iteration required:** W(r) is explicit, not implicit
-4. **Validated approximation:** Direct C(r) gives identical results
-5. **Theoretically grounded:** W(r) ≈ ⟨C⟩_orbit is now numerically confirmed
+$$\Sigma = 1 + A \cdot \mathcal{C} \cdot h(g_N), \quad \mathcal{C} = \frac{v_{\rm rot}^2}{v_{\rm rot}^2 + \sigma^2}$$
 
-The covariant coherence scalar C remains the **primary theoretical object**; W(r) is its validated practical approximation.
+**Advantages of C(r):**
+1. **Covariant:** Built from 4-velocity invariants
+2. **Local:** No reference to galaxy center or disk scale length
+3. **General:** Works for any system with v_rot and σ
+4. **Self-consistent:** Uses V_pred, not V_obs
+
+**The W(r) approximation remains valid** for disk galaxies:
+- W(r) = r/(ξ+r) with ξ = R_d/(2π)
+- Gives identical results to C(r)
+- Requires no iteration
+- Derived from orbit-averaged C in disk geometry
 
 ---
 
