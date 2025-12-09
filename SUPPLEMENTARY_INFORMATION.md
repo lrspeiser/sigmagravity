@@ -355,7 +355,7 @@ The canonical model produces the expected outputs from SI §4. Any variant that 
 
 ## SI §4b — Extended Regression Test (16 Tests)
 
-The script `scripts/run_regression_extended.py` extends the core regression test with 9 additional tests for comprehensive validation against diverse astrophysical phenomena.
+The script `scripts/run_regression_extended.py` extends the core regression test (6 tests) with 10 additional tests for comprehensive validation against diverse astrophysical phenomena. The extended test adds Tully-Fisher (test #7) to the core tests, plus 9 more specialized tests.
 
 ### Usage
 
