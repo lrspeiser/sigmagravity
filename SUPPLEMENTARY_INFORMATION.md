@@ -523,17 +523,7 @@ The intermediate variable $\Phi_N$ is **not** a new gravitational degree of free
 - A "second gravitational potential" with separate physical effects
 - A source of additional gravitational degrees of freedom
 
-This is exactly the QUMOND construction (Milgrom 2010, PRD 82, 043523).
-
-### Action Formulation (for completeness)
-
-$$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + S_{\text{aux}} + \int d^4x \, |e| \, \mathcal{L}_m$$
-
-where $S_{\text{aux}}$ encodes the auxiliary field:
-
-$$S_{\text{aux}} = \int d^4x \, |e| \left[ -\frac{1}{8\pi G} (\nabla\Phi_N)^2 + \rho \Phi_N \right]$$
-
-Varying with respect to $\Phi_N$ yields $\nabla^2 \Phi_N = 4\pi G \rho$—the auxiliary field is determined by baryons and has no independent dynamics.
+This is exactly the QUMOND construction (Milgrom 2010, PRD 82, 043523). A fully covariant action formulation is deferred to future work.
 
 ### Covariant Coherence Scalar (Primary Formulation)
 
@@ -635,13 +625,11 @@ where:
 
 ## SI §10 — Stress-Energy Conservation
 
-### The Resolution
+### The QUMOND Analogy
 
-Promote Σ to a dynamical scalar field φ_C:
+In QUMOND/AQUAL (Milgrom 2010, Bekenstein & Milgrom 1984), the phantom density represents a redistribution of the gravitational field, not additional matter. Total stress-energy (matter + gravitational field) is conserved by construction.
 
-$$\boxed{\nabla_\mu \left( T^{\mu\nu}_{\text{matter}} + T^{\mu\nu}_{\text{coherence}} \right) = 0}$$
-
-The coherence field carries the "missing" momentum/energy.
+Σ-Gravity inherits this structure. A fully covariant completion (deriving the field equations from an action) is deferred to future work. The phenomenological predictions do not depend on this completion.
 
 ---
 

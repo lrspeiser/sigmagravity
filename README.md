@@ -202,9 +202,7 @@ $$\mathbf{g}_{\text{eff}} = -\nabla \Phi = \mathbf{g}_N \cdot \nu(g_N, r)$$
 
 The intermediate variable $\Phi_N$ (the Newtonian potential of baryons) is **not** a new dynamical degree of freedom—it has no independent propagating modes. It is determined by the standard Poisson equation and serves as an intermediate variable for computing the enhancement, exactly as in QUMOND (Milgrom 2010, PRD 82, 043523).
 
-**Why not a non-minimal action?** One might attempt to write an action with $\Sigma \cdot \mathcal{L}_m$ (non-minimal matter coupling). However, this creates theoretical difficulties: (1) it implies non-geodesic motion, (2) it makes "acceleration" ill-defined (Harko's concern), and (3) the variation of Σ with respect to the metric produces problematic extra terms. 
-
-**The QUMOND-like approach avoids these issues:** Matter couples minimally to the metric; the enhancement appears only in the modified Poisson equation. This is not derived from an action principle but is instead adopted as the phenomenological definition, following QUMOND (Milgrom 2010, PRD 82, 043523).
+**The QUMOND-like approach:** Matter couples minimally to the metric; the enhancement appears only in the modified Poisson equation. This is adopted as the phenomenological definition, following QUMOND (Milgrom 2010, PRD 82, 043523). A fully covariant action formulation is deferred to future work.
 
 **Physical interpretation:** The enhancement factor $\Sigma$ depends on how **matter** is organized (disk geometry, rotation pattern), characterized by $g_N = |\nabla\Phi_N|$. This is a property of the **source configuration**, not a new field. The gravitational sector (torsion scalar **T**) remains unchanged, which suggests:
 - Gravitational wave speed = c (likely, but propagation in matter-filled regions needs study)
@@ -589,7 +587,7 @@ This is manifestly a scalar under coordinate transformations.
 
 **The h(g_N) function:**
 
-The enhancement factor depends on the **baryonic Newtonian acceleration** $g_N = \sqrt{a^2} = |\nabla\Phi_N|$ through:
+The enhancement factor depends on the **baryonic field strength** $g_N = |\nabla\Phi_N|$ through:
 
 $$h(g_N) = \sqrt{\frac{g^\dagger}{g_N}} \cdot \frac{g^\dagger}{g^\dagger + g_N}$$
 
@@ -896,24 +894,11 @@ The enhancement $\Sigma$ depends on the baryonic matter distribution:
 
 #### 2.15.3 Stress-Energy Conservation
 
-**The issue:** In the QUMOND-like formulation, the phantom density is a derived quantity, not a dynamical field. How is stress-energy conserved?
+**The issue:** In the QUMOND-like formulation, the phantom density is a derived quantity. How is stress-energy conserved?
 
-**Resolution:** The phantom density can be understood as the weak-field limit of a dynamical coherence field $\phi_C$. When $\phi_C$ is promoted to a full scalar field with kinetic and potential terms, stress-energy is conserved:
+**Resolution:** This is the same situation as in QUMOND/AQUAL (Milgrom 2010, Bekenstein & Milgrom 1984). The phantom density represents a redistribution of the gravitational field, not additional matter. Total stress-energy (matter + gravitational field) is conserved by construction, since the theory reduces to GR in the appropriate limits.
 
-$$\boxed{\nabla_\mu \left( T^{\mu\nu}_{\text{matter}} + T^{\mu\nu}_{\text{coherence}} \right) = 0}$$
-
-The coherence field carries the "missing" momentum/energy, analogous to scalar fields in scalar-tensor theories (Brans-Dicke, f(R)). See SI §10 for the complete derivation.
-
-**Validation:** The dynamical field formulation reproduces original Σ-Gravity predictions to numerical precision (<0.001 km/s difference on 50 SPARC galaxies tested).
-
-#### 2.15.4 Historical Note: Non-Minimal Coupling Formulation
-
-An earlier version of this theory was formulated with non-minimal matter coupling $\Sigma \cdot \mathcal{L}_m$. This approach creates theoretical difficulties:
-- Non-geodesic motion (particles feel "extra forces")
-- Ill-defined "acceleration" (if motion is non-geodesic, what acceleration enters $\Sigma$?)
-- Fifth force concerns ($\propto \nabla \ln \Sigma$)
-
-The QUMOND-like formulation adopted here avoids all these issues while preserving the phenomenological predictions. The non-minimal coupling action is retained in SI §10 for theoretical completeness, but it is **not** the primary formulation.
+**Formal treatment:** A fully covariant completion (deriving the QUMOND-like equations from an action) is deferred to future work. The phenomenological predictions do not depend on this completion.
 
 #### 2.15.4 Einstein Equivalence Principle: Assessment
 
