@@ -1,0 +1,253 @@
+{
+  "timestamp": "2025-12-09T09:47:23.652822",
+  "model": "Graviton Path Model",
+  "formula": "g_total = g_N + A \u00d7 \u221a(g_N \u00d7 a\u2080) \u00d7 a\u2080/(a\u2080 + g_N)",
+  "parameters": {
+    "a0": 1.2e-10,
+    "A_cluster": 8.45,
+    "A_galaxy": 1.0
+  },
+  "n_scenarios": 8,
+  "scenarios": {
+    "bullet_cluster": {
+      "total_mass_baryonic": 370390503754372.1,
+      "total_mass_gas": 321375964343315.4,
+      "total_mass_stars": 49014539411056.73,
+      "gas_fraction": 0.8676679371791853,
+      "mass_ratio_graviton": 14.44865357373629,
+      "mass_ratio_mond": 1.775671609271885,
+      "peak_kappa_graviton": 1.9683249561562164,
+      "peak_location_graviton": [
+        -194.63087248322142,
+        -6.711409395973192
+      ],
+      "peak_location_newtonian": [
+        302.0134228187919,
+        6.711409395973192
+      ],
+      "peak_offset_kpc": 496.8256516327985,
+      "mean_enhancement": 20.10041627849726,
+      "max_enhancement": 36.567055854853514,
+      "component_positions": {
+        "Main cluster gas": [
+          -50,
+          0
+        ],
+        "Main cluster stars": [
+          -200,
+          0
+        ],
+        "Subcluster gas": [
+          100,
+          0
+        ],
+        "Subcluster stars": [
+          300,
+          0
+        ]
+      }
+    },
+    "abell_1689": {
+      "total_mass_baryonic": 180645415001382.53,
+      "total_mass_gas": 165897662808608.3,
+      "total_mass_stars": 14747752192774.225,
+      "gas_fraction": 0.9183607721642902,
+      "mass_ratio_graviton": 10.680548421665321,
+      "mass_ratio_mond": 1.9853880167426243,
+      "peak_kappa_graviton": 1.0514781766256642,
+      "peak_location_graviton": [
+        5.0335570469798085,
+        5.0335570469798085
+      ],
+      "peak_location_newtonian": [
+        5.0335570469798085,
+        5.0335570469798085
+      ],
+      "peak_offset_kpc": null,
+      "mean_enhancement": 13.650579189350891,
+      "max_enhancement": 25.167272118788034,
+      "component_positions": {
+        "ICM gas": [
+          0,
+          0
+        ],
+        "Central galaxies": [
+          0,
+          0
+        ]
+      }
+    },
+    "abell_520": {
+      "total_mass_baryonic": 156584413330641.3,
+      "total_mass_gas": 122408820373563.14,
+      "total_mass_stars": 34175592957078.156,
+      "gas_fraction": 0.7817433278948812,
+      "mass_ratio_graviton": 9.751463760590847,
+      "mass_ratio_mond": 1.7178968994318216,
+      "peak_kappa_graviton": 1.7602455121438862,
+      "peak_location_graviton": [
+        -149.49664429530196,
+        104.19463087248323
+      ],
+      "peak_location_newtonian": [
+        194.7986577181208,
+        -49.832214765100616
+      ],
+      "peak_offset_kpc": 377.17837181574725,
+      "mean_enhancement": 13.527548680983909,
+      "max_enhancement": 24.84691814004621,
+      "component_positions": {
+        "Central gas": [
+          0,
+          0
+        ],
+        "Galaxy group 1": [
+          -150,
+          100
+        ],
+        "Galaxy group 2": [
+          200,
+          -50
+        ]
+      }
+    },
+    "galaxy_galaxy": {
+      "total_mass_baryonic": 466616508719.43164,
+      "total_mass_gas": 0.0,
+      "total_mass_stars": 466616508719.43164,
+      "gas_fraction": 0.0,
+      "mass_ratio_graviton": 1.3689882382057712,
+      "mass_ratio_mond": 1.4476623871037255,
+      "peak_kappa_graviton": 0.1366101211485754,
+      "peak_location_graviton": [
+        -0.2516778523489904,
+        -0.2516778523489904
+      ],
+      "peak_location_newtonian": [
+        0.25167785234899753,
+        0.25167785234899753
+      ],
+      "peak_offset_kpc": 0.7118524642817612,
+      "mean_enhancement": 1.865079820247457,
+      "max_enhancement": 2.888597703219653,
+      "component_positions": {
+        "Lens galaxy": [
+          0,
+          0
+        ]
+      }
+    },
+    "spiral": {
+      "total_mass_baryonic": 68146229185.435646,
+      "total_mass_gas": 9077597262.936705,
+      "total_mass_stars": 59068631922.49894,
+      "gas_fraction": 0.13320762383249796,
+      "mass_ratio_graviton": 2.6982549852885165,
+      "mass_ratio_mond": 1.5756129695871133,
+      "peak_kappa_graviton": 0.11883003093737765,
+      "peak_location_graviton": [
+        0.1510067114093978,
+        0.1510067114093978
+      ],
+      "peak_location_newtonian": [
+        -0.15100671140939426,
+        -0.15100671140939426
+      ],
+      "peak_offset_kpc": 0.4271114785690557,
+      "mean_enhancement": 5.461642768174972,
+      "max_enhancement": 10.222566776376615,
+      "component_positions": {
+        "Stellar disk": [
+          0,
+          0
+        ],
+        "Bulge": [
+          0,
+          0
+        ],
+        "Gas disk": [
+          0,
+          0
+        ]
+      }
+    },
+    "dsph": {
+      "total_mass_baryonic": 18664660.348777276,
+      "total_mass_gas": 0.0,
+      "total_mass_stars": 18664660.348777276,
+      "gas_fraction": 0.0,
+      "mass_ratio_graviton": 10.255213227331998,
+      "mass_ratio_mond": 9.876101855952257,
+      "peak_kappa_graviton": 1.6191222222417884e-05,
+      "peak_location_graviton": [
+        0.01761744966442924,
+        0.01761744966442924
+      ],
+      "peak_location_newtonian": [
+        0.01761744966442924,
+        0.01761744966442924
+      ],
+      "peak_offset_kpc": null,
+      "mean_enhancement": 15.658778517378101,
+      "max_enhancement": 25.96000625380139,
+      "component_positions": {
+        "Stars": [
+          0,
+          0
+        ]
+      }
+    },
+    "udg_df2": {
+      "total_mass_baryonic": 186646603.48777267,
+      "total_mass_gas": 0.0,
+      "total_mass_stars": 186646603.48777267,
+      "gas_fraction": 0.0,
+      "mass_ratio_graviton": 10.19702019100301,
+      "mass_ratio_mond": 9.818636355033878,
+      "peak_kappa_graviton": 0.0018889329802877959,
+      "peak_location_graviton": [
+        -0.05536912751677825,
+        -0.05536912751677825
+      ],
+      "peak_location_newtonian": [
+        -0.05536912751677825,
+        -0.05536912751677825
+      ],
+      "peak_offset_kpc": null,
+      "mean_enhancement": 15.567850965571889,
+      "max_enhancement": 25.806227956928538,
+      "component_positions": {
+        "Stars": [
+          0,
+          0
+        ]
+      }
+    },
+    "dragonfly44": {
+      "total_mass_baryonic": 279969905.23165905,
+      "total_mass_gas": 0.0,
+      "total_mass_stars": 279969905.23165905,
+      "gas_fraction": 0.0,
+      "mass_ratio_graviton": 16.826482044976604,
+      "mass_ratio_mond": 16.398336209543647,
+      "peak_kappa_graviton": 0.004501654133361255,
+      "peak_location_graviton": [
+        0.11577181208053844,
+        0.11577181208053844
+      ],
+      "peak_location_newtonian": [
+        0.11577181208053844,
+        0.11577181208053844
+      ],
+      "peak_offset_kpc": null,
+      "mean_enhancement": 25.953677619780155,
+      "max_enhancement": 43.39472973812488,
+      "component_positions": {
+        "Stars": [
+          0,
+          0
+        ]
+      }
+    }
+  }
+}

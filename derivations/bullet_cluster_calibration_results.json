@@ -1,0 +1,23 @@
+{
+  "observations": {
+    "M_gas_total": 210000000000000.0,
+    "M_stars_total": 50000000000000.0,
+    "M_baryonic": 260000000000000.0,
+    "M_lensing": 550000000000000.0,
+    "ratio_observed": 2.1,
+    "lensing_offset_kpc": 150
+  },
+  "model_prediction": {
+    "r_eval_kpc": 150,
+    "g_total": 4.730805562392083e-10,
+    "g_over_a0": 3.9423379686600697,
+    "enhancement_A_8.45": 1.8610876142059074,
+    "enhancement_A_1": 1.1019038596693382,
+    "amplitude_needed": 10.794488094654369
+  },
+  "conclusion": {
+    "offset_explained": true,
+    "quantitative_match": "Needs amplitude tuning",
+    "mond_comparison": "MOND fails to explain offset"
+  }
+}
