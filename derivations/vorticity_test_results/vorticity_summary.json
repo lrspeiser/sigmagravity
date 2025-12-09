@@ -1,0 +1,12 @@
+{
+  "n_galaxies": 170,
+  "r_uniformity_enhancement": 0.07121533035656277,
+  "p_uniformity_enhancement": 0.3560822390484092,
+  "r_flatness_enhancement": 0.08110359849176733,
+  "p_flatness_enhancement": 0.2930782269743052,
+  "r_Comega_fDM": 0.16582446171597107,
+  "p_Comega_fDM": 0.03068610744498496,
+  "high_uniform_enhancement": 1.9093418197246725,
+  "low_uniform_enhancement": 1.7281466088185606,
+  "t_test_pval": 0.03124679020292467
+}
