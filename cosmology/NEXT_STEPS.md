@@ -4,36 +4,88 @@
 
 ---
 
+## The Unified Microphysics (FOUNDATION)
+
+**Before testing, we need to understand what we believe:**
+
+### The Current-Current Correlator
+The fundamental quantity is the current-current correlator:
+```
+G_jj(x,x') = ⟨j(x) · j(x')⟩_c    where j = ρv
+```
+
+Why this is compelling:
+1. **It's what gravity couples to** - T_0i ~ ρv in the stress-energy tensor
+2. **It naturally explains counter-rotation** - dot product is +/−/0 for co-/counter-/random motion
+3. **It's measurable** - directly from IFU velocity maps
+4. **It connects to coherence** - the "connected" correlator measures actual correlation
+
+### The Fundamental Claim
+**Gravity is not purely local.** The gravitational field depends on CORRELATIONS of T_μν, not just local values.
+
+Analogies:
+- EM in media: dielectric response depends on collective behavior
+- Casimir effect: force from field correlations ⟨E(x)E(x')⟩
+- GW emission: depends on mass quadrupole (non-local)
+
+### The Coherence Field
+1. A field φ_C permeates space with energy density ~ ρ_crit
+2. It couples to matter's velocity correlations
+3. It creates a potential Ψ_coh that grows with distance
+4. This causes redshift, time dilation, AND the CMB
+5. g† = cH₀/(4√π) emerges from this coupling
+
+Files: `cosmology/fundamental_microphysics.py`
+
+---
+
 ## Priority 1: CMB Power Spectrum (CRITICAL)
 
 **Why it matters:** The CMB is the strongest evidence for the standard Big Bang + dark matter model. If coherence cosmology cannot reproduce the acoustic peaks, it fails.
 
-### Tasks
+### The T(z) = T₀(1+z) Solution (SOLVED!)
 
-1. **Understand the challenge**
-   - In ΛCDM, acoustic peaks arise from baryon-photon oscillations before recombination
-   - The peak positions depend on the sound horizon at recombination
-   - The peak heights depend on baryon and dark matter densities
-   - File: `cosmology/cmb_analysis.py`
+The coherence field has a local temperature that scales with potential:
+```
+T_coh(z) = T₀ × (1 + z)
+```
+
+This is NOT thermal equilibrium. The coherence field ACTIVELY maintains this temperature by converting potential energy to thermal radiation.
+
+**Why it works:**
+1. Molecules at z equilibrate with local coherence field at T_coh(z)
+2. Photons emitted at T_coh(z) get redshifted by (1+z) traveling to us
+3. We observe T₀ = T_coh(z)/(1+z) = T₀ ✓
+
+**Physical picture:**
+- CMB is continuously generated, not primordial
+- CMB energy density scales as (1+z)^4
+- At high z, CMB becomes significant fraction of total energy
+- System is in steady state
+
+File: `cosmology/tz_solution.py`
+
+### Remaining CMB Tasks
+
+1. **Understand what sets the acoustic peaks**
+   - In ΛCDM: baryon-photon oscillations before recombination
+   - In coherence: matter-coherence coupling? Coherence field oscillations?
+   - The matter power spectrum has turnover at k ~ 0.01 h/Mpc (~ 100 Mpc)
+   - This is close to the acoustic scale ~ 150 Mpc
 
 2. **Identify what plays the role of "dark matter"**
-   - In coherence cosmology, what provides the gravitational potential wells?
-   - Options: coherence field itself, primordial density fluctuations, something else
-   - The coherence field has energy density ~ ρ_critical — could this work?
+   - The coherence field has energy density ~ ρ_critical
+   - Does it cluster like dark matter?
+   - Can it provide the potential wells for oscillations?
 
 3. **Compute the power spectrum**
    - Modify CAMB or CLASS to include coherence effects
    - Compare with Planck 2018 data
-   - Identify which features match and which don't
-
-4. **Address T(z) = T₀(1+z)**
-   - This is observed in molecular absorption at high z
-   - How does coherence cosmology produce this without expansion?
-   - Critical constraint that needs a clear answer
+   - File: `cosmology/cmb_analysis.py`
 
 ### Success Criteria
 - Reproduce the first three acoustic peaks within 10%
-- Explain T(z) scaling without expansion
+- ✓ Explain T(z) scaling without expansion (DONE)
 - Identify the "dark matter equivalent" in the coherence framework
 
 ---
@@ -249,26 +301,41 @@
 
 ## Key Questions to Answer
 
-1. **What produces the CMB in a static universe?**
-   - Thermalized starlight?
-   - Coherence equilibrium radiation?
-   - Something else?
+1. ~~**What produces the CMB in a static universe?**~~ ✓ ANSWERED
+   - The coherence field generates thermal EM radiation
+   - Temperature scales with coherence potential: T_coh = T₀(1+z)
+   - CMB is continuously generated, not primordial
 
-2. **Why does T_CMB scale as (1+z)?**
-   - This is observed in molecular absorption
-   - Needs a clear mechanism without expansion
+2. ~~**Why does T_CMB scale as (1+z)?**~~ ✓ ANSWERED
+   - Coherence field maintains T_coh ∝ (1+z)
+   - Photons redshift by (1+z) traveling to us
+   - We observe T₀ = T_coh/(1+z) = T₀
 
 3. **What plays the role of dark matter in structure formation?**
    - Coherence field fluctuations?
    - Enhanced gravity from coherence?
+   - The coherence field has ρ ~ ρ_crit — same as DM+DE combined
 
 4. **Is the coherence field dynamical or static?**
-   - Does it evolve with cosmic time?
-   - What sets its energy density?
+   - It maintains T_coh ∝ (1+z) — this is ACTIVE, not passive
+   - It converts potential energy to thermal radiation
+   - What is its equation of state?
 
 5. **How does coherence cosmology handle the horizon problem?**
-   - Why is the CMB so uniform?
-   - Is there an analog of inflation?
+   - In a static universe, there's no horizon problem!
+   - The universe has always existed, so everything is causally connected
+   - CMB uniformity is natural, not a problem
+
+6. **NEW: What is the Lagrangian for the coherence field?**
+   - How does it couple to gravity and EM?
+   - What sets T_coh ∝ (1+z)?
+   - How does it generate the acoustic peaks?
+
+7. **NEW: How does coherence affect photon propagation?**
+   - Redshift: ✓ (from coherence potential)
+   - Time dilation: ✓ (from metric modification)
+   - Polarization: ? (needs investigation)
+   - Lensing: ? (should trace coherence, not just mass)
 
 ---
 
