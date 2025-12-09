@@ -275,6 +275,111 @@ Results are saved to `scripts/regression_results/latest_report.json` in machine-
 
 ---
 
+## SI §4b — Extended Regression Test (16 Tests)
+
+The script `scripts/run_regression_extended.py` extends the core regression test with 9 additional tests for comprehensive validation against diverse astrophysical phenomena.
+
+### Usage
+
+```bash
+python scripts/run_regression_extended.py           # Full test (16 tests)
+python scripts/run_regression_extended.py --quick   # Skip slow tests (Gaia, counter-rotation)
+python scripts/run_regression_extended.py --core    # Only original 7 tests
+```
+
+### Test Suite Summary
+
+| # | Test | Gold Standard | Σ-Gravity | MOND | ΛCDM |
+|---|------|---------------|-----------|------|------|
+| 1 | SPARC Galaxies | Lelli+ 2016 | 17.75 km/s | 17.15 km/s | ~15 km/s (fitted) |
+| 2 | Galaxy Clusters | Fox+ 2022 | 0.987× | ~0.33× | ~1.0× (fitted) |
+| 3 | Milky Way | Eilers+ 2019 | 29.5 km/s | ~30 km/s | ~25 km/s |
+| 4 | Redshift Evolution | Theory | ∝ H(z) | ∝ H(z)? | N/A |
+| 5 | Solar System | Bertotti+ 2003 | 1.77×10⁻⁹ | ~10⁻⁵ | 0 |
+| 6 | Counter-Rotation | Bevacqua+ 2022 | p=0.004 | N/A | N/A |
+| 7 | Tully-Fisher | McGaugh 2012 | slope=4 | slope=4 | slope~3.5 |
+| 8 | Wide Binaries | Chae 2023 | 63% boost | ~35% | 0% |
+| 9 | Dwarf Spheroidals | Walker+ 2009 | 0.72× | ~1× | ~1× (fitted) |
+| 10 | Ultra-Diffuse Galaxies | van Dokkum+ 2018 | EFE needed | EFE needed | Fitted |
+| 11 | Galaxy-Galaxy Lensing | Stacking | 9.5× | ~10× | ~15× |
+| 12 | External Field Effect | Theory | 0.36× | 0.3× | N/A |
+| 13 | Gravitational Waves | GW170817 | c_GW = c | c_GW = c | c_GW = c |
+| 14 | Structure Formation | Planck 2018 | Informational | Fails | Works |
+| 15 | CMB Acoustic Peaks | Planck 2018 | Informational | Fails | Works |
+| 16 | Bullet Cluster | Clowe+ 2006 | 1.12× | ~0.5× | ~2.1× |
+
+### Observational Benchmarks (Gold Standard)
+
+All benchmarks are documented in `derivations/observational_benchmarks.py` with full citations.
+
+| Observable | Value | Source |
+|------------|-------|--------|
+| a₀ (MOND scale) | 1.2×10⁻¹⁰ m/s² | McGaugh 2016 |
+| Cassini γ-1 | (0 ± 2.3×10⁻⁵) | Bertotti+ 2003 |
+| BTFR slope | 3.98 ± 0.06 | McGaugh 2012 |
+| Wide binary boost | 35% ± 10% | Chae 2023 |
+| GW170817 Δc/c | <10⁻¹⁵ | Abbott+ 2017 |
+| Bullet Cluster M_lens/M_bar | 2.1× | Clowe+ 2006 |
+
+### How to Modify the Formula
+
+To test alternative formulas, edit `scripts/run_regression_extended.py`:
+
+1. **Change the enhancement function h(g):**
+```python
+def h_function(g: np.ndarray) -> np.ndarray:
+    """Enhancement function h(g) = √(g†/g) × g†/(g†+g)"""
+    g = np.maximum(np.asarray(g), 1e-15)
+    return np.sqrt(g_dagger / g) * g_dagger / (g_dagger + g)
+```
+
+2. **Change the coherence window W(r):**
+```python
+def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
+    """Coherence window W(r) = r/(ξ+r)"""
+    xi = max(xi, 0.01)
+    return r / (xi + r)
+```
+
+3. **Change the unified amplitude A(D,L):**
+```python
+def unified_amplitude(D: float, L: float) -> float:
+    """Unified amplitude: A = A₀ × [1 - D + D × (L/L₀)^n]"""
+    return A_0 * (1 - D + D * (L / L_0)**N_EXP)
+```
+
+4. **Change the full enhancement Σ:**
+```python
+def sigma_enhancement(g, r=None, xi=1.0, A=None, D=0, L=1.0):
+    """Σ = 1 + A(D,L) × W(r) × h(g)"""
+    # ... implementation
+```
+
+### Expected Results (Extended)
+
+Running `python scripts/run_regression_extended.py` produces:
+
+| Test | Expected Result |
+|------|-----------------|
+| SPARC Galaxies | RMS = 17.75 km/s, Scatter = 0.097 dex, Win = 47.4% |
+| Galaxy Clusters | Median ratio = 0.987, Scatter = 0.132 dex (N=42) |
+| Milky Way | RMS = 29.5 km/s (N=28,368 stars) |
+| Redshift Evolution | g†(z=2)/g†(z=0) = 2.966 |
+| Solar System | \|γ-1\| = 1.77×10⁻⁹ |
+| Counter-Rotation | f_DM(CR) = 0.169 < f_DM(Normal) = 0.302, p = 0.004 |
+| Tully-Fisher | M_pred/M_obs = 0.87, slope = 4 |
+| Wide Binaries | 63.2% boost at 10 kAU |
+| Dwarf Spheroidals | σ_pred/σ_obs = 0.72 |
+| Ultra-Diffuse Galaxies | DF2: σ_pred = 20.8 km/s (EFE needed) |
+| Galaxy-Galaxy Lensing | M_eff/M_star = 9.5× at 200 kpc |
+| External Field Effect | Suppression = 0.36× |
+| Gravitational Waves | c_GW = c (consistent with GW170817) |
+| Structure Formation | g/g† = 1.5 at cluster scales |
+| CMB Acoustic Peaks | g/g†(z) = 2.7×10⁻¹⁰ at z=1100 |
+| Bullet Cluster | M_pred/M_bar = 1.12× |
+
+---
+
 # Part II: Results
 
 ## SI §5 — SPARC Galaxy Analysis
