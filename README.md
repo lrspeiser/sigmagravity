@@ -423,38 +423,17 @@ $$W(r) = \frac{\int \mathcal{C}(r') \, \Sigma_b(r') \, K(r, r') \, r' \, dr'}{\i
 
 where $\Sigma_b(r')$ is the baryonic surface density (distinct from the enhancement factor Σ).
 
-**Coherence Scale (Canonical):**
+**Coherence Scale:**
 
-The coherence scale ξ sets where enhancement transitions from suppressed to full. The **canonical** form used for all primary results is:
+The coherence scale ξ sets where enhancement transitions from suppressed to full:
 
-$$\xi_{\rm geom} = \frac{R_d}{2\pi} \approx 0.159 \times R_d$$
+$$\xi = \frac{R_d}{2\pi} \approx 0.159 \times R_d$$
 
 where $R_d$ is the disk scale length. This corresponds to one azimuthal wavelength at the disk scale length.
 
 **Physical interpretation:** ξ is the radius where random motions become comparable to ordered rotation. This is an **instantaneous** property of the velocity field—purely spatial, no time accumulation.
 
-**Alternative: Dynamical Coherence Scale**
-
-An alternative formulation connects ξ directly to the ratio of random to ordered motion:
-
-$$\xi_{\rm dyn} = k \times \frac{\sigma_{\rm eff}}{\Omega_d}$$
-
-where:
-- $\sigma_{\rm eff}$ is the effective velocity dispersion (mass-weighted average of gas, disk, bulge dispersions)
-- $\Omega_d = V_{\rm bar}(R_d)/R_d$ is the angular frequency at the disk scale length
-- $k \approx 0.24$ is a calibrated constant
-
-This formulation has physical motivation from the covariant coherence scalar (§2.5): the transition $\mathcal{C} = 1/2$ occurs when $v_{\rm rot} = \sigma_v$, giving $r_{\rm transition} \sim \sigma/\Omega$.
-
-**Comparison of coherence scales:**
-
-| Metric | Canonical ξ = R_d/(2π) | Dynamical ξ_dyn (k=0.24) | Change |
-|--------|------------------------|--------------------------|--------|
-| SPARC RMS | 17.48 km/s | 17.39 km/s | **−0.5%** |
-| RAR scatter | 0.194 dex | 0.191 dex | **−1.9%** |
-| Win rate vs MOND | 45.6% | 46.8% | +1.2pp |
-
-The dynamical formulation provides modest improvement on SPARC galaxies (~0.5-1%) while maintaining physical connection to the coherence mechanism. However, we use the **canonical geometric form** for all primary results due to its simplicity and direct derivation from disk geometry.
+**Alternative formulation:** A dynamical coherence scale $\xi_{\rm dyn} = k \times \sigma_{\rm eff}/\Omega_d$ connects directly to the ratio of random to ordered motion, with physical motivation from the covariant coherence scalar (§2.5). See SI §13 for details and comparison.
 
 **Derivation from Azimuthal Coherence:**
 
