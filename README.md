@@ -1658,6 +1658,8 @@ We thank **Emmanuel N. Saridakis** (National Observatory of Athens) for detailed
 
 We thank **Rafael Ferraro** (Instituto de Astronomía y Física del Espacio, CONICET – Universidad de Buenos Aires) for helpful discussions on f(T) gravity and the role of dimensional constants in modified teleparallel theories.
 
+We thank **Tiberiu Harko** (Babeș-Bolyai University, Cluj-Napoca) for incisive feedback on the theoretical foundations, particularly regarding the status of auxiliary fields, covariant formulation of acceleration-dependent couplings, and the importance of promoting the coherence scalar to a primary role. His critique led to significant improvements in the theoretical presentation.
+
 ---
 
 ## References
