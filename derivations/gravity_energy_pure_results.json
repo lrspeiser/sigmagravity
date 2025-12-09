@@ -1,0 +1,82 @@
+{
+  "timestamp": "2025-12-08T22:16:12.480939",
+  "formula": "g_total = g_N + sqrt(g_N * a0) * a0/(a0 + g_N)",
+  "a0_derived": 1.08312259901417e-10,
+  "a0_mond": 1.2e-10,
+  "results_derived": [
+    {
+      "name": "SPARC (derived)",
+      "passed": 1.0,
+      "metric": 17.169558661694442,
+      "details": {
+        "n_galaxies": 171,
+        "mean_rms": 17.169558661694442,
+        "mean_mond_rms": 17.154025922937112,
+        "win_rate": 41.52046783625731,
+        "a0_used": 1.08312259901417e-10
+      },
+      "message": "RMS=17.17 km/s (MOND=17.15), Win=41.5%"
+    },
+    {
+      "name": "Clusters (derived)",
+      "passed": 1.0,
+      "metric": 0.3565743393439108,
+      "details": {
+        "n_clusters": 42,
+        "median_ratio": 0.3565743393439108,
+        "scatter_dex": 0.17843205792761022
+      },
+      "message": "Median ratio=0.357, Scatter=0.178 dex"
+    },
+    {
+      "name": "Solar System (derived)",
+      "passed": 1.0,
+      "metric": 2.1156792594444604e-09,
+      "details": {
+        "g_saturn": 6.572197226684908e-05,
+        "g_boost": 1.3904661361475662e-13,
+        "boost_ratio": 2.1156792594444604e-09,
+        "cassini_bound": 2.3e-05
+      },
+      "message": "Boost ratio=2.12e-09 vs Cassini bound=2.30e-05"
+    }
+  ],
+  "results_mond": [
+    {
+      "name": "SPARC (MOND)",
+      "passed": 1.0,
+      "metric": 17.574488693617795,
+      "details": {
+        "n_galaxies": 171,
+        "mean_rms": 17.574488693617795,
+        "mean_mond_rms": 17.154025922937112,
+        "win_rate": 34.50292397660819,
+        "a0_used": 1.2e-10
+      },
+      "message": "RMS=17.57 km/s (MOND=17.15), Win=34.5%"
+    },
+    {
+      "name": "Clusters (MOND)",
+      "passed": 1.0,
+      "metric": 0.36651977252452506,
+      "details": {
+        "n_clusters": 42,
+        "median_ratio": 0.36651977252452506,
+        "scatter_dex": 0.17623349623449686
+      },
+      "message": "Median ratio=0.367, Scatter=0.176 dex"
+    },
+    {
+      "name": "Solar System (MOND)",
+      "passed": 1.0,
+      "metric": 2.4672047607534052e-09,
+      "details": {
+        "g_saturn": 6.572197226684908e-05,
+        "g_boost": 1.621495628628733e-13,
+        "boost_ratio": 2.4672047607534052e-09,
+        "cassini_bound": 2.3e-05
+      },
+      "message": "Boost ratio=2.47e-09 vs Cassini bound=2.30e-05"
+    }
+  ]
+}
