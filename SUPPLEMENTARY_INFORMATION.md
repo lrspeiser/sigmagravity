@@ -246,124 +246,34 @@ pip install numpy scipy pandas matplotlib astropy
 
 ### Validation Script
 
-The script `scripts/run_regression.py` reproduces all reported results using the canonical parameters:
+The master regression test is `scripts/run_regression_extended.py`, which runs 16 comprehensive tests using the canonical Σ-Gravity parameters:
 
-| Parameter | Value |
-|-----------|-------|
-| $A_0$ | $e^{1/(2\pi)} \approx 1.1725$ |
-| $L_0$ | 0.4 kpc |
-| $n$ | 0.27 |
-| $\xi$ | $R_d/(2\pi)$ |
-| M/L (disk/bulge) | 0.5/0.7 |
-| $g^\dagger$ | $9.599 \times 10^{-11}$ m/s² |
+| Parameter | Value | Status |
+|-----------|-------|--------|
+| $A_0$ | $e^{1/(2\pi)} \approx 1.1725$ | Derived |
+| $L_0$ | 0.4 kpc | Calibrated |
+| $n$ | 0.27 | Calibrated |
+| $\xi$ | $R_d/(2\pi)$ | Derived per-galaxy |
+| M/L (disk/bulge) | 0.5/0.7 | Fixed (Lelli+ 2016) |
+| $g^\dagger$ | $9.599 \times 10^{-11}$ m/s² | Derived |
 
-### Expected Results
+### Usage
 
-Running the validation script produces:
-
-| Test | Expected Result |
-|------|-----------------|
-| SPARC Galaxies | RMS = 17.75 km/s, Scatter = 0.097 dex, Win rate = 47.4% |
-| Galaxy Clusters | Median ratio = 0.987, Scatter = 0.132 dex (N=42) |
-| Milky Way | RMS = 29.5 km/s (N=28,368 stars) |
-| Redshift Evolution | $g^\dagger(z=2)/g^\dagger(z=0) = 2.966$ |
-| Solar System | $|\gamma-1| = 1.77 \times 10^{-9}$ |
-| Counter-Rotation | $f_{\rm DM}$(CR) = 0.169 vs $f_{\rm DM}$(Normal) = 0.302, p = 0.004 |
+```bash
+python scripts/run_regression_extended.py           # Full 16 tests
+python scripts/run_regression_extended.py --quick   # Skip slow tests (Gaia, counter-rotation)
+python scripts/run_regression_extended.py --core    # Core 6 tests only (SPARC, clusters, Gaia, redshift, solar system, counter-rotation)
+```
 
 ### Output Files
 
-Results are saved to `scripts/regression_results/latest_report.json` in machine-readable JSON format.
+Results are saved to `scripts/regression_results/extended_report.json` in machine-readable JSON format.
 
 ---
 
-## SI §4a — Model Variants and A/B Testing
+## SI §4a — Complete Test Suite (16 Tests)
 
-### Purpose
-
-This section defines the model registry that enables systematic comparison between the canonical formulation and theoretical variants. All variants produce identical regression outputs for the canonical case.
-
-### Model Registry
-
-```python
-# sigma_models.py
-import numpy as np
-
-# Physical constants
-c, H0_SI, kpc_to_m = 2.998e8, 2.27e-18, 3.086e19
-g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # ≈ 9.60e-11 m/s²
-
-# Unified amplitude parameters
-A_0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173
-L_0 = 0.40  # kpc
-N_EXP = 0.27
-XI_SCALE = 1 / (2 * np.pi)
-
-def Sigma_canonical(r_kpc, g_N, R_d_kpc, params=None, D=0, L=0.5):
-    """
-    Canonical Σ-Gravity enhancement factor (QUMOND-like formulation).
-    
-    Key properties:
-    - g_N is the baryonic Newtonian acceleration (from auxiliary field Φ_N)
-    - Enhancement depends on g_N, not total field (no iteration needed)
-    - Test particles follow geodesics of the enhanced potential Φ
-    - Acceleration dependence is via covariant scalar a² = g_N²
-    """
-    if params is None:
-        params = {"A_0": A_0, "L_0": L_0, "N_EXP": N_EXP, 
-                  "XI_SCALE": XI_SCALE, "g_dagger": g_dagger}
-    
-    # Unified amplitude: A = A₀ × [1 - D + D × (L/L₀)^n]
-    A = params["A_0"] * (1 - D + D * (L / params["L_0"])**params["N_EXP"])
-    
-    # Coherence window: W(r) = r/(ξ+r) with ξ = R_d/(2π)
-    xi = max(params["XI_SCALE"] * R_d_kpc, 0.01)
-    W = r_kpc / (xi + r_kpc)
-    
-    # Acceleration function h(g_N) - depends on scalar a² = g_N²
-    # This is the covariant formulation: h(√a²) = h(g_N)
-    g = np.maximum(g_N, 1e-15)
-    h = np.sqrt(params["g_dagger"]/g) * params["g_dagger"]/(params["g_dagger"] + g)
-    
-    return 1 + A * W * h
-
-# Model registry for A/B testing
-MODEL = {
-    "canonical": Sigma_canonical,
-    # Future variants can be added here for systematic comparison
-}
-```
-
-### Usage
-
-```bash
-python scripts/run_regression.py --sigma-model canonical
-```
-
-### Regression Expectation
-
-The canonical model produces the expected outputs from SI §4. Any variant that changes these numbers should be explicitly flagged.
-
-### Theoretical Variants (for future implementation)
-
-| Variant | Description | Expected Regression Impact |
-|---------|-------------|---------------------------|
-| `canonical` | QUMOND-like field equations (primary) | Baseline |
-| `full_pde` | Solve modified Poisson numerically | Minor (same algebraic limit) |
-| `covariant_C` | Full covariant coherence scalar | TBD |
-
----
-
-## SI §4b — Extended Regression Test (16 Tests)
-
-The script `scripts/run_regression_extended.py` extends the core regression test (6 tests) with 10 additional tests for comprehensive validation against diverse astrophysical phenomena. The extended test adds Tully-Fisher (test #7) to the core tests, plus 9 more specialized tests.
-
-### Usage
-
-```bash
-python scripts/run_regression_extended.py           # Full test (16 tests)
-python scripts/run_regression_extended.py --quick   # Skip slow tests (Gaia, counter-rotation)
-python scripts/run_regression_extended.py --core    # Only original 7 tests
-```
+The regression test validates Σ-Gravity against 16 diverse astrophysical phenomena, comparing to both MOND and ΛCDM where applicable.
 
 ### Test Suite Summary
 
