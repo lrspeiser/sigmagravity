@@ -173,42 +173,52 @@ $$S_{\text{TEGR}} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + \int d^4x
 
 where $|e|$ is the tetrad determinant, $\kappa = 8\pi G/c^4$, and $\mathcal{L}_m$ is the matter Lagrangian. This action produces field equations mathematically identical to Einstein's equations—TEGR makes identical predictions to GR for all classical tests.
 
-### 2.2 The Σ-Gravity Modification: Non-Minimal Matter Coupling
+### 2.2 The Σ-Gravity Modification: QUMOND-Like Field Equations
 
-**The key insight:** Σ-Gravity modifies the **matter coupling**, not the gravitational sector. Following the QUMOND construction (Milgrom 2010), we introduce an **auxiliary scalar field** $\Phi_N$ that captures the Newtonian potential of baryons.
+**The key insight:** Σ-Gravity modifies gravity through a **modified Poisson equation** with minimal matter coupling, following the QUMOND construction (Milgrom 2010). Test particles follow geodesics of the total gravitational potential—no "acceleration-in-the-particle-action" is needed.
 
-**Complete action with auxiliary field:**
+**Primary formulation (QUMOND-like):**
 
-$$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + S_{\text{aux}} + \int d^4x \, |e| \, \Sigma[g_N, \mathcal{C}] \, \mathcal{L}_m$$
+*Step 1:* Solve the standard Poisson equation for baryons:
+$$\nabla^2 \Phi_N = 4\pi G \rho_b$$
 
-where the auxiliary field sector is:
+*Step 2:* Define the Newtonian acceleration $\mathbf{g}_N = -\nabla \Phi_N$ and compute the enhancement function:
+$$\nu(g_N, r) = 1 + A(D,L) \cdot W(r) \cdot h(g_N) = \Sigma$$
+
+*Step 3:* Solve the modified Poisson equation:
+$$\boxed{\nabla^2 \Phi = 4\pi G \rho_b + \nabla \cdot [(\nu - 1) \mathbf{g}_N]}$$
+
+The second term acts as a **phantom density** $\rho_{\text{phantom}} = (4\pi G)^{-1} \nabla \cdot [(\nu - 1) \mathbf{g}_N]$ that sources additional gravity without corresponding baryonic matter.
+
+**Observable equation of motion:** Test particles follow geodesics of $\Phi$:
+$$\mathbf{g}_{\text{eff}} = -\nabla \Phi = \mathbf{g}_N \cdot \nu(g_N, r)$$
+
+**Why this resolves the matter coupling concern:** Matter couples minimally to the metric sourced by $\Phi$. The enhancement is **already incorporated** into $\Phi$ via the phantom density—it is not an additional force on particles. This avoids non-geodesic motion and "acceleration ambiguity."
+
+**The auxiliary field $\Phi_N$ as computational device:**
+
+The intermediate variable $\Phi_N$ (the Newtonian potential of baryons) is **not** a new dynamical degree of freedom—it has no independent propagating modes. It is determined by the standard Poisson equation and serves as an intermediate variable for computing the enhancement, exactly as in QUMOND (Milgrom 2010, PRD 82, 043523).
+
+**Action formulation (for completeness):**
+
+$$S_{\Sigma} = \frac{1}{2\kappa} \int d^4x \, |e| \, \mathbf{T} + S_{\text{aux}} + \int d^4x \, |e| \, \mathcal{L}_m$$
+
+where $S_{\text{aux}}$ encodes the auxiliary field:
 
 $$S_{\text{aux}} = \int d^4x \, |e| \left[ -\frac{1}{8\pi G} (\nabla\Phi_N)^2 + \rho \Phi_N \right]$$
 
-**How this works:** The auxiliary field $\Phi_N$ is a dynamical variable in the action. Varying $S_{\text{aux}}$ with respect to $\Phi_N$ yields:
+Varying with respect to $\Phi_N$ yields $\nabla^2 \Phi_N = 4\pi G \rho$—the auxiliary field is determined entirely by baryons and has no independent dynamics. This is the standard QUMOND construction where the auxiliary field is integrated out to yield the modified field equation.
 
-$$\frac{\delta S_{\text{aux}}}{\delta \Phi_N} = 0 \quad \Rightarrow \quad \nabla^2 \Phi_N = 4\pi G \rho$$
-
-This is the **Poisson equation as an equation of motion**, not an external prescription. The field $\Phi_N$ is determined self-consistently within the variational principle.
-
-**The enhancement factor** $\Sigma[g_N, \mathcal{C}]$ then depends on $g_N = |\nabla\Phi_N|$, which is a well-defined functional of the matter distribution through the auxiliary field's equation of motion.
-
-**Why this is covariant:** The auxiliary field $\Phi_N$ transforms as a scalar under diffeomorphisms. In the weak-field limit, its equation of motion reduces to the flat-space Poisson equation, but the action itself is generally covariant. This is the same construction used in QUMOND (Milgrom 2010, PRD 82, 043523).
-
-**QUMOND-like structure:** This formulation is analogous to Milgrom's QUMOND, where the modification depends on the Newtonian field of baryons rather than the total gravitational field. The coherence enhancement is determined by how **matter** is organized (disk geometry, rotation pattern), which is characterized by $\Phi_N$. The enhancement is a property of the **source configuration**, not the resulting total field.
-
-**Physical interpretation:** Matter in coherent configurations is modeled as sourcing gravity more effectively than incoherent matter. The gravitational sector (torsion scalar **T**) remains unchanged, which suggests:
+**Physical interpretation:** The enhancement factor $\Sigma$ depends on how **matter** is organized (disk geometry, rotation pattern), characterized by $g_N = |\nabla\Phi_N|$. This is a property of the **source configuration**, not a new field. The gravitational sector (torsion scalar **T**) remains unchanged, which suggests:
 - Gravitational wave speed = c (likely, but propagation in matter-filled regions needs study)
 - No ghost instabilities from kinetic terms (since $\Sigma > 0$ always)
 - Solar System safety (preliminary estimates support this; formal PPN analysis needed)
 
-**Important caveat:** Non-minimal matter couplings generically produce: (1) non-conservation of stress-energy, $\nabla_\mu T^{\mu\nu} \neq 0$, and (2) additional "fifth forces" proportional to $\nabla\Sigma$. Our estimates suggest these effects are small (~few percent in galaxies, negligible in Solar System), but this requires formal verification. See Harko et al. (2014), arXiv:1404.6212 for related f(T,$\mathcal{L}_m$) theories.
+**This is distinct from f(T) gravity**, which modifies $\mathbf{T} \to f(\mathbf{T})$ in the gravitational sector. Our modification appears in the field equations via the phantom density term.
 
-**This is distinct from f(T) gravity**, which modifies $\mathbf{T} \to f(\mathbf{T})$ in the gravitational sector. Our modification is $\mathcal{L}_m \to \Sigma \cdot \mathcal{L}_m$ in the matter sector.
+**Connection to f(T) dimensional structure:** In f(T) theories, a dimensional constant with units [length]² necessarily sets the scale where modified gravity activates (R. Ferraro, private communication). In Σ-Gravity, the coherence scale $\xi = R_d/(2\pi)$ plays an analogous role, with typical values ~0.5 kpc for disk galaxies.
 
-**Connection to f(T) dimensional structure:** In f(T) theories, a dimensional constant with units [length]² necessarily sets the scale where modified gravity activates (R. Ferraro, private communication). In Σ-Gravity, the coherence scale $\xi = R_d/(2\pi)$ plays an analogous role, with typical values ~0.5 kpc for disk galaxies. This is consistent with f(T,$\mathcal{L}_m$) theories where the modification scale depends on matter distribution.
-
-**Open theoretical issue:** Non-minimal matter couplings in teleparallel gravity can violate local Lorentz invariance unless carefully constructed (see Krššák & Saridakis 2016, CQG 33, 115009). Whether the specific coherence-dependent coupling $\Sigma[g_N, \mathcal{C}]$ preserves Lorentz invariance requires further investigation. We note that the coupling depends only on scalar quantities (baryonic acceleration magnitude, coherence measure), which may mitigate this concern.
+**Open theoretical issue:** The QUMOND-like formulation avoids fifth-force concerns (matter couples minimally), but local Lorentz invariance in the teleparallel context requires verification (see Krššák & Saridakis 2016, CQG 33, 115009). The coupling depends only on scalar quantities (baryonic acceleration magnitude, coherence measure), which may mitigate this concern.
 
 ### 2.3 Field Equations and Weak-Field Limit
 
@@ -330,6 +340,7 @@ $$g_{\text{eff}} = g_N \cdot \Sigma_{\text{eff}}(g_N, r)$$
 - Stress-energy conservation: Established via dynamical coherence field (SI §10)
 - Fifth force concern: Eliminated via QUMOND-like formulation with minimal matter coupling (§2.15.3)
 - Matter Lagrangian convention: Specified as $\mathcal{L}_m = -\rho c^2$ (§2.15.1)
+- Acceleration coupling: Formulated covariantly via scalar $a^2 = g_{\mu\nu} a^\mu a^\nu$ (§2.9)
 
 **Partially open issues:**
 - WEP: Plausibly satisfied (universal coupling), but composite body analysis needed
@@ -341,6 +352,26 @@ $$g_{\text{eff}} = g_N \cdot \Sigma_{\text{eff}}(g_N, r)$$
 - Behavior in strong-field regime (neutron stars, black holes)
 - Cosmological limit and consistency with CMB
 - Whether QUMOND-like structure emerges from a deeper principle or is phenomenological choice
+
+#### 2.3.6 On the Physical Status of the Auxiliary Field
+
+**Addressing the concern:** "Adding a Newtonian potential again has no physical meaning."
+
+**Resolution:** The auxiliary field $\Phi_N$ is **not** a new gravitational degree of freedom. It is a **computational device** that encodes the baryonic mass distribution in a form suitable for the QUMOND-like construction.
+
+**Comparison to QUMOND:** In Milgrom's QUMOND (2010, PRD 82, 043523), the Newtonian potential $\Phi_N$ plays exactly this role: it is the solution to the standard Poisson equation for baryons, used as an intermediate variable to construct the modified field equation. The auxiliary action $S_{\text{aux}}$ simply promotes this to a variational principle—varying with respect to $\Phi_N$ recovers the Poisson equation.
+
+**What $\Phi_N$ is:**
+- The unique solution to $\nabla^2 \Phi_N = 4\pi G \rho_b$
+- Determined entirely by the baryonic density $\rho_b$
+- An intermediate variable for computing $\nu(g_N)$
+
+**What $\Phi_N$ is NOT:**
+- An independent dynamical field with its own propagating modes
+- A "second gravitational potential" with separate physical effects
+- A source of additional gravitational degrees of freedom
+
+**Physical interpretation:** The enhancement factor $\Sigma$ depends on how **matter** is organized (disk geometry, rotation pattern), characterized by $g_N = |\nabla\Phi_N|$. This is a property of the **source configuration**, not a new field. The total gravitational potential $\Phi$ (not $\Phi_N$) determines particle trajectories via geodesic motion.
 
 ### 2.4 The Core Ansatz: Coherence-Dependent Enhancement
 
@@ -557,9 +588,21 @@ This dramatically increases σ_eff and reduces C. MaNGA DynPop data confirms: co
 
 *Figure 3: Left: Coherence window W(r) for different disk scale lengths. Right: Total enhancement Σ(r) as a function of radius at various accelerations, showing how coherence builds with radius.*
 
-### 2.9 Acceleration Dependence: The h(g_N) Function
+### 2.9 Acceleration Dependence: Covariant Definition and the h(g_N) Function
 
-The enhancement factor depends on the **baryonic Newtonian acceleration** $g_N = |\nabla\Phi_N|$ through:
+**Covariant formulation:** The enhancement depends on a scalar quantity built from the 4-acceleration:
+
+$$a^\mu = u^\nu \nabla_\nu u^\mu, \quad a^2 \equiv g_{\mu\nu} a^\mu a^\nu$$
+
+In the weak-field, quasi-static limit for circular motion, the magnitude of the gravitational field relates to connection components, and the coordinate-independent acceleration scalar reduces to:
+
+$$a^2 \to g_N^2 = |\nabla\Phi_N|^2$$
+
+**Why this is covariant:** The coupling $f(a^2) \mathcal{L}_m$ involves only the scalar $a^2$, not coordinate acceleration. In the Newtonian limit, $a^2 = g_N^2$ is the squared magnitude of the gravitational field—a scalar under coordinate transformations. The enhancement function $h(\sqrt{a^2})$ is therefore a scalar function of a scalar argument, following the prescription of Harko et al. (2014) for acceptable acceleration-dependent couplings.
+
+**The h(g_N) function:**
+
+The enhancement factor depends on the **baryonic Newtonian acceleration** $g_N = \sqrt{a^2} = |\nabla\Phi_N|$ through:
 
 $$h(g_N) = \sqrt{\frac{g^\dagger}{g_N}} \cdot \frac{g^\dagger}{g^\dagger + g_N}$$
 
