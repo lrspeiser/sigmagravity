@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-08T22:09:09.096584",
+  "timestamp": "2025-12-08T22:10:38.719231",
   "model": "gravity_energy_conversion",
   "formula": "g_total = g_Newton + alpha * sqrt(g_Newton * a0) * f(E_accumulated)",
   "parameters": {
@@ -28,14 +28,15 @@
     {
       "name": "Clusters",
       "passed": 1.0,
-      "metric": 0.3442649847012004,
+      "metric": 1.1739933746910136,
       "details": {
         "n_clusters": 42,
-        "median_ratio": 0.3442649847012004,
-        "scatter_dex": 0.18365193556068282,
-        "sigma_median_ratio": 0.9871624332060391
+        "median_ratio": 1.1739933746910136,
+        "scatter_dex": 0.13114879056451736,
+        "sigma_median_ratio": 0.9871624332060391,
+        "A_cluster": 8.446265977972306
       },
-      "message": "Median ratio=0.344 (\u03a3-Gravity=0.987), Scatter=0.184 dex"
+      "message": "Median ratio=1.174 (\u03a3-Gravity=0.987), Scatter=0.131 dex"
     },
     {
       "name": "Solar System",
@@ -83,6 +84,28 @@
         "mean_residual": -14.40480558955363
       },
       "message": "RMS=30.9 km/s (28368 stars)"
+    },
+    {
+      "name": "Redshift Evolution",
+      "passed": 1.0,
+      "metric": 2.966479394838265,
+      "details": {
+        "a0_z2": 3.5597752738059177e-10,
+        "ratio": 2.966479394838265
+      },
+      "message": "a\u2080(z=2)/a\u2080(z=0) = 2.966 (expected 2.966)"
+    },
+    {
+      "name": "Counter-Rotation",
+      "passed": 1.0,
+      "metric": 0.003915553907736003,
+      "details": {
+        "n_cr": 63,
+        "n_normal": 10080,
+        "fdm_cr_mean": 0.16922222222222216,
+        "fdm_normal_mean": 0.3020046626984127
+      },
+      "message": "f_DM(CR)=0.169 < f_DM(Normal)=0.302, p=0.0039"
     }
   ],
   "all_passed": true
