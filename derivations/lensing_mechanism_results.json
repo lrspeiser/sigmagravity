@@ -1,0 +1,54 @@
+{
+  "model": "gravity_energy_lensing",
+  "key_equation": "alpha_total = alpha_Newton * (1 + sqrt(a0/g_Newton) * f(Sigma))",
+  "cluster_results": [
+    {
+      "b_Mpc": 0.10000000000000002,
+      "Sigma": 0.4361533502741022,
+      "f_Sigma": 0.4104508952172173,
+      "alpha_newton_arcsec": 1.7187865540821587,
+      "alpha_total_arcsec": 2.7109236739215845,
+      "boost_factor": 0.5772311387257927
+    },
+    {
+      "b_Mpc": 0.20000000000000004,
+      "Sigma": 0.23979510436447263,
+      "f_Sigma": 0.23530220771986884,
+      "alpha_newton_arcsec": 2.5841238546545395,
+      "alpha_total_arcsec": 3.57039693609218,
+      "boost_factor": 0.3816663352498216
+    },
+    {
+      "b_Mpc": 0.5,
+      "Sigma": 0.08109808579848048,
+      "f_Sigma": 0.08092076096240128,
+      "alpha_newton_arcsec": 3.4412766406135367,
+      "alpha_total_arcsec": 4.060153538507131,
+      "boost_factor": 0.17983933363266494
+    },
+    {
+      "b_Mpc": 1.0,
+      "Sigma": 0.028523042602772247,
+      "f_Sigma": 0.028515310012654567,
+      "alpha_newton_arcsec": 3.4614749988109224,
+      "alpha_total_arcsec": 3.770795150673736,
+      "boost_factor": 0.08936079329449761
+    },
+    {
+      "b_Mpc": 1.5,
+      "Sigma": 0.01427767596724991,
+      "f_Sigma": 0.01427670586860438,
+      "alpha_newton_arcsec": 3.215311633475951,
+      "alpha_total_arcsec": 3.3981152129013315,
+      "boost_factor": 0.05685407831767717
+    },
+    {
+      "b_Mpc": 2.0,
+      "Sigma": 0.008439096139010848,
+      "f_Sigma": 0.008438895805234867,
+      "alpha_newton_arcsec": 2.9614758441713853,
+      "alpha_total_arcsec": 3.0812199754056397,
+      "boost_factor": 0.04043393818994938
+    }
+  ]
+}
