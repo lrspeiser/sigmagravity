@@ -1,0 +1,20 @@
+{
+  "model": "column_density_dependent_boost",
+  "formula": "g_boost = sqrt(g_bar * a0) * tanh(Sigma / Sigma_threshold)",
+  "Sigma_threshold_kg_m2": 1000000.0,
+  "solar_system_columns": {
+    "Sun \u2192 Earth": 2.803127609620416e-07,
+    "Sun \u2192 Jupiter": 3.8705377342741885e-07,
+    "Sun \u2192 Neptune": 1.2469957453372961e-06,
+    "Sun \u2192 Voyager": 6.285356345949338e-06,
+    "Earth \u2192 Voyager": 1.920116616182631e-09
+  },
+  "galaxy_columns": {
+    "Center \u2192 1 kpc": 2.317001538695301,
+    "Center \u2192 5 kpc": 7.195439229774087,
+    "Center \u2192 10 kpc": 8.616581731132436,
+    "Center \u2192 30 kpc": 8.97487697103652,
+    "10 kpc \u2192 30 kpc": 0.3300739268398407
+  },
+  "key_insight": "Galaxy paths have ~10^13 more column density than solar system"
+}
