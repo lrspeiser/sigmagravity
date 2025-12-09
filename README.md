@@ -94,7 +94,11 @@ where $\omega^2$ is the vorticity scalar and $\theta$ is the expansion. In the n
 4. Update $V_{\rm new} = V_{\rm bar} \sqrt{\Sigma}$
 5. Repeat until convergence (typically 3–5 iterations)
 
-**Practical approximation:** For disk galaxies, the orbit-averaged coherence is well-approximated by $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This gives identical results (validated on 171 SPARC galaxies) and requires no iteration.
+**Practical approximation:** For disk galaxies, the orbit-averaged coherence is well-approximated by $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This gives identical results (validated on 171 SPARC galaxies) and requires no iteration (Fig. 2).
+
+![Figure 2: Coherence window](figures/coherence_window.png)
+
+*FIG. 2. Left: Coherence scalar $\mathcal{C}(r)$ and its approximation $W(r) = r/(\xi + r)$ for different disk scale lengths. Right: Total enhancement $\Sigma(r)$ as a function of radius, showing how coherence builds from center to outer disk.*
 
 ### C. The Acceleration Function
 
@@ -102,11 +106,15 @@ The enhancement depends on the baryonic field strength $g_N = |\nabla\Phi_N|$ th
 
 $$h(g_N) = \sqrt{\frac{g^\dagger}{g_N}} \cdot \frac{g^\dagger}{g^\dagger + g_N}$$
 
-This is the QUMOND-like structure—$h$ depends on the baryonic field $g_N$, not the total field.
+This is the QUMOND-like structure—$h$ depends on the baryonic field $g_N$, not the total field (Fig. 1).
 
 **Asymptotic behavior:**
 - Deep MOND regime ($g_N \ll g^\dagger$): $h(g_N) \approx \sqrt{g^\dagger/g_N}$ → produces flat rotation curves
 - High acceleration ($g_N \gg g^\dagger$): $h(g_N) \to 0$ → recovers Newtonian gravity
+
+![Figure 1: Enhancement function comparison](figures/h_function_comparison.png)
+
+*FIG. 1. Enhancement functions $h(g_N)$ for Σ-Gravity (solid blue) compared to MOND's interpolation function (dashed red). The functions differ by ~7% in the transition regime $g_N \sim g^\dagger$, providing a testable distinction.*
 
 **Covariant formulation:** The "acceleration" in Σ-Gravity is a field property, not a particle property:
 $$g_N^2 \equiv g^{\mu\nu} \nabla_\mu \Phi_N \nabla_\nu \Phi_N$$
@@ -138,7 +146,11 @@ For disk galaxies ($D=0$): $A = 1.173$
 
 For clusters ($D=1$, $L \approx 600$ kpc): $A \approx 8.45$
 
-This unifies the galaxy and cluster regimes through a single principled relationship based on system dimensionality and path length through baryons.
+This unifies the galaxy and cluster regimes through a single principled relationship based on system dimensionality and path length through baryons (Fig. 7).
+
+![Figure 7: Unified amplitude](figures/amplitude_comparison.png)
+
+*FIG. 7. Amplitude versus path length through baryons. All system types follow $A = A_0 \times (L/L_0)^{0.27}$ with $A_0 = e^{1/(2\pi)} \approx 1.173$. Disk galaxies ($L \approx 1.5$ kpc), ellipticals ($L \approx 17$ kpc), and clusters ($L \approx 400$ kpc) are unified by a single relationship.*
 
 ### F. Solar System Constraints
 
@@ -148,7 +160,11 @@ In compact systems, two suppression mechanisms combine:
 
 At Saturn's orbit ($r \approx 9.5$ AU), $g_N \approx 6.4 \times 10^{-4}$ m/s², giving $h(g_N) \approx 4 \times 10^{-4}$. Combined with $\mathcal{C} \ll 1$ for the Solar System, the total enhancement is $\Sigma - 1 < 10^{-8}$.
 
-This implies $|\gamma - 1| \sim 10^{-9}$, well within the Cassini bound of $|\gamma - 1| < 2.3 \times 10^{-5}$ [13].
+This implies $|\gamma - 1| \sim 10^{-9}$, well within the Cassini bound of $|\gamma - 1| < 2.3 \times 10^{-5}$ [13] (Fig. 3).
+
+![Figure 3: Solar System safety](figures/solar_system_safety.png)
+
+*FIG. 3. Enhancement ($\Sigma - 1$) as a function of distance from the Sun. At planetary scales, the enhancement is $< 10^{-14}$, far below observational bounds. The coherence mechanism automatically suppresses modification in compact, high-acceleration systems.*
 
 ### G. Conservation and Equivalence Principle
 
@@ -204,7 +220,17 @@ where $x = g_N/a_0$ and $a_0 = 1.2 \times 10^{-10}$ m/s².
 
 Both frameworks achieve comparable performance on galaxy rotation curves. The 47% win rate indicates neither framework systematically outperforms the other on individual galaxies.
 
-**Radial Acceleration Relation:** The tight correlation between observed and baryonic acceleration (scatter ~0.09 dex) emerges naturally from both frameworks.
+**Radial Acceleration Relation:** The tight correlation between observed and baryonic acceleration (scatter ~0.09 dex) emerges naturally from both frameworks (Fig. 4).
+
+![Figure 4: Radial Acceleration Relation](figures/rar_derived_formula.png)
+
+*FIG. 4. Radial Acceleration Relation for 171 SPARC galaxies. Gray points: observed accelerations. Blue line: Σ-Gravity prediction. Red dashed: MOND. Both frameworks reproduce the tight correlation with scatter ~0.09 dex.*
+
+Representative rotation curves are shown in Fig. 5.
+
+![Figure 5: Rotation curve gallery](figures/rc_gallery_derived.png)
+
+*FIG. 5. Rotation curves for six representative SPARC galaxies spanning the mass range. Black points with error bars: observed data. Green dashed: baryonic contribution (Newtonian). Blue solid: Σ-Gravity prediction. Red dotted: MOND prediction.*
 
 ### B. Milky Way Validation
 
@@ -225,7 +251,11 @@ The Milky Way provides an independent validation using individual stellar veloci
 | Scatter | 0.132 dex | — |
 | Range | 0.67–1.49 | — |
 
-Σ-Gravity achieves near-unity median ratio with all 42 clusters within factor 1.5 of observations. MOND systematically underpredicts cluster lensing masses by factor ~3, requiring additional mass (often attributed to residual dark matter or massive neutrinos).
+Σ-Gravity achieves near-unity median ratio with all 42 clusters within factor 1.5 of observations (Fig. 6). MOND systematically underpredicts cluster lensing masses by factor ~3, requiring additional mass (often attributed to residual dark matter or massive neutrinos).
+
+![Figure 6: Cluster validation](figures/cluster_fox2022_validation.png)
+
+*FIG. 6. Σ-Gravity predictions versus Fox et al. (2022) strong-lensing masses for 42 galaxy clusters. Left: Predicted vs. observed mass at 200 kpc. Middle: Ratio vs. redshift showing no systematic trend. Right: Distribution of $\log(M_\Sigma/M_{\rm SL})$ with scatter = 0.132 dex.*
 
 ### D. Cross-Domain Consistency
 
