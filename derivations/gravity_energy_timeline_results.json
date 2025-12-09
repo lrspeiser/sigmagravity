@@ -1,0 +1,37 @@
+{
+  "scenarios": {
+    "sun_earth": {
+      "distance_AU": 1,
+      "distance_m": 149600000000.0,
+      "g_newton": 0.00593140799708313,
+      "g_over_a0": 49428399.97569275,
+      "light_time_minutes": 8.316655548143206
+    },
+    "sun_voyager": {
+      "distance_AU": 160,
+      "distance_m": 23936000000000.0,
+      "g_newton": 2.3169562488605978e-07,
+      "g_over_a0": 1930.7968740504982
+    },
+    "bulge_earth": {
+      "distance_kpc": 8,
+      "distance_m": 2.4688e+20,
+      "g_newton": 2.1779563324889562e-11,
+      "g_over_a0": 0.18149636104074635,
+      "light_time_years": 26092.59573978766
+    },
+    "galaxy_edge": {
+      "distance_kpc": 30,
+      "distance_m": 9.258e+20,
+      "g_newton": 7.743844737738511e-12,
+      "g_over_a0": 0.06453203948115425
+    }
+  },
+  "problems_identified": [
+    "Static masses do not radiate energy in GR",
+    "No physical mechanism for gravity energy propagation",
+    "Galaxy is too transparent for matter absorption model",
+    "Suppression factor is defined, not derived"
+  ],
+  "a0": 1.2e-10
+}
