@@ -1,0 +1,42 @@
+{
+  "mass_distribution": {
+    "gas_center": [
+      0,
+      0
+    ],
+    "main_gal_center": [
+      -200,
+      0
+    ],
+    "sub_gal_center": [
+      300,
+      0
+    ],
+    "gas_scale_kpc": 200,
+    "stellar_scale_kpc": 80
+  },
+  "peak_locations": {
+    "baryon_west": [
+      -202.01005025125625,
+      2.0100502512562457
+    ],
+    "baryon_east": [
+      3.0150753768845107,
+      -2.0100502512563025
+    ],
+    "lensing_west": [
+      -3.015075376884397,
+      -2.0100502512563025
+    ],
+    "lensing_east": [
+      3.0150753768845107,
+      -2.0100502512563025
+    ]
+  },
+  "offsets_kpc": {
+    "west": -198.99497487437185,
+    "east": 0.0
+  },
+  "mass_ratio": 10.438405376455933,
+  "conclusion": "Graviton model CAN produce offset lensing peaks due to differential enhancement"
+}

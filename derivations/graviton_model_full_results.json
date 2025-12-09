@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-08T22:45:59.483681",
+  "timestamp": "2025-12-09T09:28:02.292056",
   "model": "graviton_path_interference",
   "formula": "g_total = g_N + A \u00d7 sqrt(g_N \u00d7 a0) \u00d7 a0/(a0 + g_N)",
   "parameters": {
@@ -11,24 +11,24 @@
     {
       "name": "SPARC Galaxies",
       "passed": 1.0,
-      "metric": 17.574488693617795,
+      "metric": 17.57395179166169,
       "details": {
         "n_galaxies": 171,
-        "mean_rms": 17.574488693617795,
-        "mean_mond_rms": 17.154025922937112,
+        "mean_rms": 17.57395179166169,
+        "mean_mond_rms": 17.153600094243732,
         "win_rate": 34.50292397660819,
-        "rar_scatter_dex": 0.09925586456835395
+        "rar_scatter_dex": 0.09925550780403335
       },
       "message": "RMS=17.57 km/s (MOND=17.15), Win=34.5%, Scatter=0.099 dex"
     },
     {
       "name": "Clusters",
       "passed": 1.0,
-      "metric": 1.1743658681944313,
+      "metric": 1.1741681429484832,
       "details": {
         "n_clusters": 42,
-        "median_ratio": 1.1743658681944313,
-        "scatter_dex": 0.13114674606066676,
+        "median_ratio": 1.1741681429484832,
+        "scatter_dex": 0.13114775907703477,
         "A_cluster": 8.45
       },
       "message": "Median ratio=1.174, Scatter=0.131 dex (42 clusters)"
@@ -36,43 +36,43 @@
     {
       "name": "Solar System",
       "passed": 1.0,
-      "metric": 2.4672047607534052e-09,
+      "metric": 2.4669330763867807e-09,
       "details": {
         "locations": [
           [
             "Mercury",
             0.39,
-            1.7069821953429725e-13
+            1.7067942251560368e-13
           ],
           [
             "Earth",
             1.0,
-            2.877631393080161e-12
+            2.8773145128536534e-12
           ],
           [
             "Mars",
             1.52,
-            1.0105688679357393e-11
+            1.0104575856892071e-11
           ],
           [
             "Jupiter",
             5.2,
-            4.04617781756413e-10
+            4.045732259006444e-10
           ],
           [
             "Saturn",
             9.5,
-            2.4672047607534052e-09
+            2.4669330763867807e-09
           ],
           [
             "Neptune",
             30,
-            7.769463450905729e-08
+            7.768607900227818e-08
           ],
           [
             "Voyager 1",
             160,
-            1.1780676966035045e-05
+            1.1779380144115546e-05
           ]
         ],
         "cassini_bound": 2.3e-05
@@ -82,11 +82,11 @@
     {
       "name": "Milky Way",
       "passed": 1.0,
-      "metric": 30.94731179471759,
+      "metric": 30.94547042453256,
       "details": {
         "n_stars": 28368,
-        "rms": 30.94731179471759,
-        "mean_residual": -14.40480558955363
+        "rms": 30.94547042453256,
+        "mean_residual": -14.40069968536146
       },
       "message": "RMS=30.9 km/s (28368 stars)"
     },
@@ -104,11 +104,11 @@
     {
       "name": "Tully-Fisher",
       "passed": true,
-      "metric": 1.4849796784388527,
+      "metric": 1.484972658186459,
       "details": {
         "V_flat": 200,
-        "M_predicted": 100442554919.10132,
-        "M_observed": 67639009730.21784,
+        "M_predicted": 100442080076.18137,
+        "M_observed": 67639009730.21785,
         "slope_predicted": 4.0,
         "slope_observed": 3.98
       },
@@ -129,12 +129,12 @@
     {
       "name": "Bullet Cluster",
       "passed": true,
-      "metric": 0.6369456320893105,
+      "metric": 0.6368980949684847,
       "details": {
         "M_gas": 200000000000000.0,
         "M_galaxies": 50000000000000.0,
-        "M_eff_gas": 303006738374769.7,
-        "M_eff_gal": 192998818501438.03,
+        "M_eff_gas": 302976957795295.1,
+        "M_eff_gal": 192965447239170.47,
         "note": "Needs detailed spatial modeling"
       },
       "message": "M_eff(gal)/M_eff(gas) = 0.64 (needs spatial modeling)"
@@ -142,50 +142,50 @@
     {
       "name": "Wide Binaries",
       "passed": 1.0,
-      "metric": 22.709972832717938,
+      "metric": 22.70929072085672,
       "details": {
         "separations": [
           {
             "separation_AU": 100,
-            "g_N": 1.186281599416626e-06,
-            "g_over_a0": 9885.67999513855,
-            "boost_percent": 5.086465959536213e-05
+            "g_N": 1.186320977855929e-06,
+            "g_over_a0": 9886.008148799408,
+            "boost_percent": 5.086212722105188e-05
           },
           {
             "separation_AU": 500,
-            "g_N": 4.745126397666505e-08,
-            "g_over_a0": 395.42719980554205,
-            "boost_percent": 0.006342486004240477
+            "g_N": 4.745283911423717e-08,
+            "g_over_a0": 395.44032595197643,
+            "boost_percent": 0.006342170751572063
           },
           {
             "separation_AU": 1000,
-            "g_N": 1.1862815994166262e-08,
-            "g_over_a0": 98.85679995138551,
-            "boost_percent": 0.05034771568293017
+            "g_N": 1.1863209778559292e-08,
+            "g_over_a0": 98.86008148799411,
+            "boost_percent": 0.0503452262216042
           },
           {
             "separation_AU": 2000,
-            "g_N": 2.9657039985415654e-09,
-            "g_over_a0": 24.714199987846378,
-            "boost_percent": 0.3903703791224178
+            "g_N": 2.965802444639823e-09,
+            "g_over_a0": 24.715020371998527,
+            "boost_percent": 0.39035148320212265
           },
           {
             "separation_AU": 5000,
-            "g_N": 4.745126397666504e-10,
-            "g_over_a0": 3.95427199805542,
-            "boost_percent": 4.952602210359824
+            "g_N": 4.745283911423717e-10,
+            "g_over_a0": 3.954403259519764,
+            "boost_percent": 4.952393835482005
           },
           {
             "separation_AU": 10000,
-            "g_N": 1.186281599416626e-10,
-            "g_over_a0": 0.988567999513855,
-            "boost_percent": 22.709972832717938
+            "g_N": 1.1863209778559292e-10,
+            "g_over_a0": 0.988600814879941,
+            "boost_percent": 22.70929072085672
           },
           {
             "separation_AU": 20000,
-            "g_N": 2.965703998541565e-11,
-            "g_over_a0": 0.24714199987846375,
-            "boost_percent": 61.645059705502156
+            "g_N": 2.965802444639823e-11,
+            "g_over_a0": 0.24715020371998525,
+            "boost_percent": 61.64390348899078
           }
         ],
         "note": "Chae 2023 reports ~30-40% boost at >2000 AU"
@@ -195,40 +195,40 @@
     {
       "name": "Dwarf Spheroidals",
       "passed": 1.0,
-      "metric": 0.7449640221637773,
+      "metric": 0.7449685688270495,
       "details": {
         "galaxies": [
           {
             "name": "Fornax",
             "sigma_obs": 10000,
-            "sigma_newton": 4957.851421112051,
-            "sigma_pred": 11504.693699313004,
-            "g_over_a0": 0.04741129431268475,
-            "enhancement": 2.3204998944346116
+            "sigma_newton": 4958.122153920385,
+            "sigma_pred": 11504.776131153189,
+            "g_over_a0": 0.04742142690661459,
+            "enhancement": 2.320389811706508
           },
           {
             "name": "Draco",
             "sigma_obs": 9000,
-            "sigma_newton": 1135.986471079518,
-            "sigma_pred": 3872.583622684972,
-            "g_over_a0": 0.008711825329955826,
-            "enhancement": 3.409005055319796
+            "sigma_newton": 1136.0485037588826,
+            "sigma_pred": 3872.602736497343,
+            "g_over_a0": 0.008713687194090427,
+            "enhancement": 3.408835735167935
           },
           {
             "name": "Sculptor",
             "sigma_obs": 9000,
-            "sigma_newton": 2394.8697598321814,
-            "sigma_pred": 6366.733902417239,
-            "g_over_a0": 0.025812815792461703,
-            "enhancement": 2.65848857804417
+            "sigma_newton": 2395.000536202952,
+            "sigma_pred": 6366.774858416854,
+            "g_over_a0": 0.0258183324269346,
+            "enhancement": 2.658360514820918
           },
           {
             "name": "Carina",
             "sigma_obs": 6000,
-            "sigma_newton": 1173.2417824021084,
-            "sigma_pred": 4150.108628941379,
-            "g_over_a0": 0.007434090948228972,
-            "enhancement": 3.537300402347076
+            "sigma_newton": 1173.3058494778684,
+            "sigma_pred": 4150.128243214479,
+            "g_over_a0": 0.007435679738957164,
+            "enhancement": 3.537123969049778
           }
         ]
       },
@@ -243,17 +243,17 @@
           {
             "name": "NGC1052-DF2",
             "sigma_obs": 8.5,
-            "sigma_newton": 8.84364268317179,
-            "sigma_pred": 20.465625914640917,
-            "g_over_a0": 0.04799903763061059,
+            "sigma_newton": 8.844125606925681,
+            "sigma_pred": 20.465772814329096,
+            "g_over_a0": 0.04800929583520897,
             "note": "Low DM - external field effect?"
           },
           {
             "name": "Dragonfly44",
             "sigma_obs": 47.0,
-            "sigma_newton": 7.490472970716222,
-            "sigma_pred": 22.05074358894507,
-            "g_over_a0": 0.016468478884604586,
+            "sigma_newton": 7.490882002091076,
+            "sigma_pred": 22.050871820489238,
+            "g_over_a0": 0.016471998476541457,
             "note": "High DM - isolated?"
           }
         ],
@@ -264,44 +264,44 @@
     {
       "name": "Galaxy-Galaxy Lensing",
       "passed": 1.0,
-      "metric": 27.205407648659808,
+      "metric": 27.20259970928056,
       "details": {
         "radii": [
           {
             "r_kpc": 10,
-            "g_N": 6.969460263964661e-11,
-            "g_over_a0": 0.5807883553303884,
-            "M_eff_ratio": 1.8300749764884696
+            "g_N": 6.970949755272344e-11,
+            "g_over_a0": 0.5809124796060287,
+            "M_eff_ratio": 1.8299211243731521
           },
           {
             "r_kpc": 30,
-            "g_N": 7.743844737738511e-12,
-            "g_over_a0": 0.06453203948115425,
-            "M_eff_ratio": 4.697886418309203
+            "g_N": 7.74549972808038e-12,
+            "g_over_a0": 0.0645458310673365,
+            "M_eff_ratio": 4.697443428888481
           },
           {
             "r_kpc": 50,
-            "g_N": 2.787784105585864e-12,
-            "g_over_a0": 0.023231534213215534,
-            "M_eff_ratio": 7.411905873742819
+            "g_N": 2.7883799021089368e-12,
+            "g_over_a0": 0.02323649918424114,
+            "M_eff_ratio": 7.411189708616631
           },
           {
             "r_kpc": 100,
-            "g_N": 6.96946026396466e-13,
-            "g_over_a0": 0.005807883553303883,
-            "M_eff_ratio": 14.045959157214924
+            "g_N": 6.970949755272342e-13,
+            "g_over_a0": 0.005809124796060285,
+            "M_eff_ratio": 14.04454921182201
           },
           {
             "r_kpc": 200,
-            "g_N": 1.742365065991165e-13,
-            "g_over_a0": 0.0014519708883259709,
-            "M_eff_ratio": 27.205407648659808
+            "g_N": 1.7427374388180855e-13,
+            "g_over_a0": 0.0014522811990150713,
+            "M_eff_ratio": 27.20259970928056
           },
           {
             "r_kpc": 500,
-            "g_N": 2.7877841055858636e-14,
-            "g_over_a0": 0.0002323153421321553,
-            "M_eff_ratio": 66.59340449000022
+            "g_N": 2.788379902108937e-14,
+            "g_over_a0": 0.0002323649918424114,
+            "M_eff_ratio": 66.58639314880017
           }
         ]
       },
@@ -312,12 +312,12 @@
       "passed": true,
       "metric": 1.0,
       "details": {
-        "g_ext": 2.787784105585864e-12,
-        "g_int": 5.575568211171728e-12,
-        "g_ext_over_a0": 0.023231534213215534,
-        "g_int_over_a0": 0.04646306842643107,
-        "boost_no_efe": 2.4717883658189322e-11,
-        "boost_with_efe": 2.4717883658189322e-11,
+        "g_ext": 2.7883799021089368e-12,
+        "g_int": 5.576759804217874e-12,
+        "g_ext_over_a0": 0.02323649918424114,
+        "g_int_over_a0": 0.04647299836848229,
+        "boost_no_efe": 2.4720290259467555e-11,
+        "boost_with_efe": 2.4720290259467555e-11,
         "efe_suppression": 1.0
       },
       "message": "EFE suppression: 1.00\u00d7 (g_ext/a\u2080=0.02)"
@@ -336,10 +336,10 @@
     {
       "name": "Structure Formation",
       "passed": true,
-      "metric": 1.1615767106607768,
+      "metric": 1.161824959212057,
       "details": {
-        "g_cluster": 1.3938920527929321e-10,
-        "g_over_a0": 1.1615767106607768,
+        "g_cluster": 1.3941899510544686e-10,
+        "g_over_a0": 1.161824959212057,
         "note": "Requires N-body simulations for full test"
       },
       "message": "Cluster scale: g/a\u2080 = 1.2 (needs N-body sims)"
@@ -347,12 +347,12 @@
     {
       "name": "CMB Acoustic Peaks",
       "passed": true,
-      "metric": 0.00154569543389038,
+      "metric": 0.0015429729413603509,
       "details": {
         "z_rec": 1100,
         "a0_z": 2.401169687964597e-06,
-        "g_J": 3.711477022682866e-09,
-        "g_over_a0_z": 0.00154569543389038,
+        "g_J": 3.7049398561440505e-09,
+        "g_over_a0_z": 0.0015429729413603509,
         "note": "CMB requires additional physics (hot DM? neutrinos?)"
       },
       "message": "At z=1100: g/a\u2080(z) = 1.5e-03 (CMB needs additional physics)"

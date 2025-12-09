@@ -1,0 +1,49 @@
+{
+  "bullet_data": {
+    "main_cluster": {
+      "M_gas": 2.9835e+44,
+      "M_stars": 5.967e+43,
+      "M_lensing": 7.956e+44,
+      "r_core_kpc": 150.0,
+      "position": "east"
+    },
+    "subcluster": {
+      "M_gas": 1.1934e+44,
+      "M_stars": 3.9779999999999998e+43,
+      "M_lensing": 2.9835e+44,
+      "r_core_kpc": 100.0,
+      "position": "west"
+    },
+    "separation_kpc": 720,
+    "collision_velocity_kms": 4700,
+    "key_offsets": {
+      "main_cluster_offset_kpc": 150.0,
+      "subcluster_offset_kpc": 200.0
+    },
+    "gas_fraction": {
+      "main": 0.83,
+      "sub": 0.75
+    }
+  },
+  "model_predictions": {
+    "main_cluster": {
+      "M_baryon": 180000000000000.0,
+      "M_effective": 228476873230311.16,
+      "enhancement": 1.2693159623906176,
+      "observed_ratio": 2.2
+    },
+    "subcluster": {
+      "M_baryon": 80000000000000.0,
+      "M_effective": 101545276991249.44,
+      "enhancement": 1.2693159623906178,
+      "observed_ratio": 1.9
+    }
+  },
+  "status": "CHALLENGE - offset not explained",
+  "possible_resolutions": [
+    "Projection effects",
+    "Enhancement gradient",
+    "Dynamical non-equilibrium",
+    "Model may need modification"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "observations": {
+    "main_cluster": {
+      "M_gas": 150000000000000.0,
+      "M_stars": 30000000000000.0,
+      "M_lensing": 400000000000000.0,
+      "r_gas": 250,
+      "r_stars": 100,
+      "x_gas": -50,
+      "x_stars": -200
+    },
+    "subcluster": {
+      "M_gas": 60000000000000.0,
+      "M_stars": 20000000000000.0,
+      "M_lensing": 150000000000000.0,
+      "r_gas": 150,
+      "r_stars": 60,
+      "x_gas": 100,
+      "x_stars": 300
+    }
+  },
+  "model_predictions": {
+    "main": {
+      "M_baryonic": 180000000000000.0,
+      "M_effective": 323670121523805.5,
+      "ratio": 1.7981673417989195,
+      "observed_ratio": 2.2222222222222223
+    },
+    "sub": {
+      "M_baryonic": 80000000000000.0,
+      "M_effective": 159229436607860.2,
+      "ratio": 1.9903679575982522,
+      "observed_ratio": 1.875
+    },
+    "total": {
+      "M_baryonic": 260000000000000.0,
+      "M_effective": 482899558131665.7,
+      "M_observed": 550000000000000.0,
+      "ratio_model": 1.8573059928140987,
+      "ratio_observed": 2.1153846153846154
+    }
+  },
+  "offset_mechanism": {
+    "r_eff_gas_kpc": 318.03233669286993,
+    "r_eff_stars_kpc": 233.33494129717758,
+    "Sigma_avg_gas": 2.693639781116239,
+    "Sigma_avg_stars": 6.551784668519089
+  },
+  "status": "PARTIALLY RESOLVED - offset mechanism exists, quantitative agreement needs work"
+}

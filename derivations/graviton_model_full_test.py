@@ -12,7 +12,7 @@ THE MODEL:
     
     where a₀ = 1.2 × 10⁻¹⁰ m/s² (MOND scale, related to cH₀)
 
-TESTS:
+TESTS (16 total):
     1. SPARC galaxies (171 rotation curves)
     2. Galaxy clusters (42 Fox+ 2022)
     3. Milky Way (28,368 Gaia stars)
@@ -20,7 +20,18 @@ TESTS:
     5. Redshift evolution
     6. Counter-rotating galaxies
     7. Bullet Cluster
-    8. Wide binaries (if data available)
+    8. Tully-Fisher relation
+    9. Wide binaries
+    10. Dwarf spheroidals
+    11. Ultra-diffuse galaxies
+    12. Galaxy-galaxy lensing
+    13. External field effect
+    14. Gravitational waves (GW170817)
+    15. Structure formation
+    16. CMB acoustic peaks
+
+OBSERVATIONAL BENCHMARKS:
+    See observational_benchmarks.py for gold-standard data sources.
 """
 
 import numpy as np
@@ -34,23 +45,89 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # =============================================================================
-# PHYSICAL CONSTANTS
+# PHYSICAL CONSTANTS (CODATA 2018)
 # =============================================================================
-c = 2.998e8          # m/s
-H0_SI = 2.27e-18     # 1/s (H0 = 70 km/s/Mpc)
-kpc_to_m = 3.086e19
-G = 6.674e-11
-M_sun = 1.989e30
-AU = 1.496e11
+c = 2.99792458e8     # m/s (exact)
+G = 6.67430e-11      # m³/kg/s² (±0.00015)
+H0_SI = 2.268e-18    # 1/s (H0 = 70 km/s/Mpc)
+kpc_to_m = 3.0856775814913673e19  # m
+M_sun = 1.98892e30   # kg
+AU = 1.495978707e11  # m (exact)
+pc = 3.0856775814913673e16  # m
 
 # THE MODEL PARAMETERS
 a0 = 1.2e-10         # MOND acceleration scale [m/s²]
+                     # Source: McGaugh 2016, Lelli+ 2017
+                     # Note: a0 ≈ cH0/(2π) suggests cosmological origin
 A_DISK = 1.0         # Amplitude for disk galaxies
 A_CLUSTER = 8.45     # Amplitude for clusters (from path length scaling)
 
-# Mass-to-light ratios
-ML_DISK = 0.5
-ML_BULGE = 0.7
+# Mass-to-light ratios (3.6μm, Lelli+ 2016)
+ML_DISK = 0.5        # M☉/L☉ (±0.1)
+ML_BULGE = 0.7       # M☉/L☉ (±0.1)
+
+# =============================================================================
+# OBSERVATIONAL BENCHMARKS (GOLD STANDARD)
+# =============================================================================
+# These are the definitive values from peer-reviewed literature that any
+# gravity theory must satisfy.
+
+OBS_BENCHMARKS = {
+    'solar_system': {
+        'cassini_gamma_uncertainty': 2.3e-5,  # Bertotti+ 2003
+        'extra_accel_bound': 1e-15,           # m/s² at Saturn
+    },
+    'sparc': {
+        'n_galaxies': 175,
+        'n_quality': 171,
+        'rar_scatter_dex': 0.13,              # McGaugh+ 2016
+        'mond_rms_kms': 17.15,
+    },
+    'milky_way': {
+        'V_sun_kms': 233,                     # Eilers+ 2019 (±3)
+        'R_sun_kpc': 8.178,                   # GRAVITY 2019
+        'M_baryonic': 6.5e10,                 # McMillan 2017
+    },
+    'clusters': {
+        'n_quality': 42,                      # Fox+ 2022
+        'mond_discrepancy': 3.0,              # Factor MOND underpredicts
+        'baryon_fraction': 0.157,             # Planck 2018
+    },
+    'bullet_cluster': {
+        'M_gas_main': 1.5e14,                 # Clowe+ 2006
+        'M_stars_main': 0.3e14,
+        'M_lensing_main': 4.0e14,
+        'offset_kpc': 150,                    # Lensing-gas offset
+    },
+    'wide_binaries': {
+        'boost_factor': 1.35,                 # Chae 2023 (±0.1)
+        'threshold_AU': 2000,
+        'status': 'disputed',                 # Banik+ 2024 disagrees
+    },
+    'dwarf_spheroidals': {
+        'fornax_sigma': 10.7,                 # km/s (Walker+ 2009)
+        'draco_sigma': 9.1,
+        'sculptor_sigma': 9.2,
+        'carina_sigma': 6.6,
+    },
+    'udgs': {
+        'df2_sigma': 8.5,                     # van Dokkum+ 2018 (±2.3)
+        'df2_M_star': 2e8,
+        'dragonfly44_sigma': 47,              # van Dokkum+ 2016 (±8)
+    },
+    'tully_fisher': {
+        'btfr_slope': 3.98,                   # McGaugh 2012 (±0.06)
+        'btfr_scatter_dex': 0.10,
+    },
+    'gw170817': {
+        'delta_c_over_c': 1e-15,              # Abbott+ 2017
+    },
+    'cmb': {
+        'Omega_b': 0.0493,                    # Planck 2018
+        'Omega_c': 0.265,
+        'H0_cmb': 67.4,                       # km/s/Mpc (tension with local)
+    },
+}
 
 # =============================================================================
 # THE GRAVITON PATH MODEL
