@@ -1,0 +1,89 @@
+{
+  "timestamp": "2025-12-08T22:09:09.096584",
+  "model": "gravity_energy_conversion",
+  "formula": "g_total = g_Newton + alpha * sqrt(g_Newton * a0) * f(E_accumulated)",
+  "parameters": {
+    "alpha": 1.0,
+    "a0": 1.2e-10,
+    "sigma": 1e-06,
+    "ml_disk": 0.5,
+    "ml_bulge": 0.7
+  },
+  "results": [
+    {
+      "name": "SPARC Galaxies",
+      "passed": 1.0,
+      "metric": 17.664622692847587,
+      "details": {
+        "n_galaxies": 171,
+        "mean_rms": 17.664622692847587,
+        "mean_mond_rms": 17.154025922937112,
+        "mean_sigma_rms": 17.7462935375024,
+        "win_rate_vs_mond": 39.76608187134503,
+        "win_rate_vs_sigma": 43.859649122807014,
+        "rar_scatter_dex": 0.09854384262770771
+      },
+      "message": "RMS=17.66 km/s (MOND=17.15, \u03a3=17.75), Win vs MOND=39.8%"
+    },
+    {
+      "name": "Clusters",
+      "passed": 1.0,
+      "metric": 0.3442649847012004,
+      "details": {
+        "n_clusters": 42,
+        "median_ratio": 0.3442649847012004,
+        "scatter_dex": 0.18365193556068282,
+        "sigma_median_ratio": 0.9871624332060391
+      },
+      "message": "Median ratio=0.344 (\u03a3-Gravity=0.987), Scatter=0.184 dex"
+    },
+    {
+      "name": "Solar System",
+      "passed": 1.0,
+      "metric": 2.4672047607534052e-09,
+      "details": {
+        "locations": [
+          [
+            "Earth",
+            1.0,
+            2.877631393080161e-12
+          ],
+          [
+            "Jupiter",
+            5.2,
+            4.04617781756413e-10
+          ],
+          [
+            "Saturn",
+            9.5,
+            2.4672047607534052e-09
+          ],
+          [
+            "Neptune",
+            30,
+            7.769463450905729e-08
+          ],
+          [
+            "Voyager",
+            160,
+            1.1780676966035045e-05
+          ]
+        ],
+        "cassini_bound": 2.3e-05
+      },
+      "message": "Saturn boost=2.47e-09 vs Cassini bound=2.30e-05"
+    },
+    {
+      "name": "Gaia/MW",
+      "passed": 1.0,
+      "metric": 30.94731179471759,
+      "details": {
+        "n_stars": 28368,
+        "rms": 30.94731179471759,
+        "mean_residual": -14.40480558955363
+      },
+      "message": "RMS=30.9 km/s (28368 stars)"
+    }
+  ],
+  "all_passed": true
+}
