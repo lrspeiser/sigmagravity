@@ -241,7 +241,11 @@ Star-by-star predictions for 28,368 disk stars:
 | RMS | 29.5 km/s | 31.2 km/s |
 | Bias | +1.2 km/s | +3.1 km/s |
 
-The Milky Way provides an independent validation using individual stellar velocities rather than binned rotation curves.
+The Milky Way provides an independent validation using individual stellar velocities rather than binned rotation curves (Fig. 8).
+
+![Figure 8: Milky Way rotation curve](figures/mw_rotation_curve_derived.png)
+
+*FIG. 8. Milky Way rotation curve from Eilers et al. (2019). Black points: observed circular velocities for 28,368 red giant stars. Green dashed: baryonic (Newtonian) prediction. Blue solid: Σ-Gravity. Red dotted: MOND. Both modified gravity frameworks reproduce the flat rotation curve; Σ-Gravity shows slightly better agreement in the outer disk.*
 
 ### C. Galaxy Cluster Strong Lensing
 
@@ -279,7 +283,11 @@ This cross-domain consistency, achieved without per-system fitting, supports the
 
 The coherence scalar $\mathcal{C}$ depends on net ordered motion. Counter-rotating populations increase effective dispersion, reducing $\mathcal{C}$ and hence $\Sigma$.
 
-*Observational test:* MaNGA DynPop survey data confirms this prediction. Counter-rotating galaxies show 44% lower inferred dark matter fractions than normal galaxies (p < 0.01) [18].
+*Observational test:* MaNGA DynPop survey data confirms this prediction. Counter-rotating galaxies show 44% lower inferred dark matter fractions than normal galaxies (p < 0.01) [18] (Fig. 9).
+
+![Figure 9: Counter-rotation effect](figures/counter_rotation_effect.png)
+
+*FIG. 9. Counter-rotation reduces gravitational enhancement. Left: Predicted vs. observed dark matter fractions for normal (blue) and counter-rotating (red) galaxies from MaNGA DynPop. Counter-rotating systems show systematically lower f_DM, as predicted by the coherence mechanism. Right: Distribution of f_DM residuals. This is a unique prediction of Σ-Gravity—neither ΛCDM nor MOND predicts any dependence on rotation direction.*
 
 **2. High-dispersion systems show suppressed enhancement.**
 
