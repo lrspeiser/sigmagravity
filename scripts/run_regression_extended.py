@@ -283,16 +283,20 @@ def load_clusters(data_dir: Path) -> List[Dict]:
 
 
 def load_gaia(data_dir: Path) -> Optional[pd.DataFrame]:
-    """Load Gaia/MW data."""
+    """Load validated Gaia/Eilers-APOGEE disk star catalog.
+    
+    This file already contains the quality-filtered disk sample:
+    - 28,368 stars from Eilers+ 2019 cross-matched with APOGEE DR17
+    - Pre-filtered to disk region (4 < R_gal < 16 kpc, |z_gal| < 1 kpc)
+    - Full 6D phase space information
+    """
     gaia_file = data_dir / "gaia" / "eilers_apogee_6d_disk.csv"
     if not gaia_file.exists():
         return None
     
     df = pd.read_csv(gaia_file)
     df['v_phi_obs'] = -df['v_phi']  # Correct sign convention
-    
-    mask = (df['R_gal'] > 4) & (df['R_gal'] < 15) & (np.abs(df['z_gal']) < 0.5)
-    return df[mask].copy()
+    return df  # No additional filtering - file is already the disk sample
 
 
 # =============================================================================

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-09T10:02:44.156650",
+  "timestamp": "2025-12-09T11:03:32.638516",
   "formula": "sigma_gravity_unified",
   "mode": "full",
   "parameters": {
@@ -39,12 +39,12 @@
     {
       "name": "Gaia/MW",
       "passed": 1.0,
-      "metric": 28.024071464912257,
+      "metric": 29.533388250323267,
       "details": {
-        "n_stars": 18305,
-        "rms": 28.024071464912257
+        "n_stars": 28368,
+        "rms": 29.533388250323267
       },
-      "message": "RMS=28.0 km/s (18305 stars)"
+      "message": "RMS=29.5 km/s (28368 stars)"
     },
     {
       "name": "Redshift Evolution",
