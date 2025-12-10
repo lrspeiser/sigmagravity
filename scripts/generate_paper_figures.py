@@ -352,61 +352,267 @@ def generate_coherence_window_figure(output_dir):
     print(f"  Saved: {outpath}")
 
 # =============================================================================
-# FIGURE 4: Galaxy/Cluster Amplitude Comparison
+# FIGURE 4: Galaxy/Cluster Amplitude Comparison (with real data)
 # =============================================================================
 
 def generate_amplitude_figure(output_dir):
-    """Generate amplitude comparison showing unified amplitude formula.
+    """Generate amplitude comparison using real SPARC, MaNGA, and cluster data.
     
-    Shows amplitude A vs path length L on a log-log plot, demonstrating
-    the power-law relationship A = A₀ × (L/L₀)^n for dispersion-dominated systems.
+    Shows effective amplitude A vs path length L on a log-log plot, comparing
+    Σ-Gravity's prediction with MOND and GR (no dark matter).
     """
-    print("\nGenerating Figure 4: Amplitude comparison (unified formula)...")
+    print("\nGenerating Figure 4: Amplitude comparison (with real data)...")
     
-    fig, ax = plt.subplots(figsize=(8, 5))
+    import pandas as pd
+    from pathlib import Path
     
-    # Path length range (kpc)
-    L_range = np.logspace(-0.5, 3, 100)  # 0.3 to 1000 kpc
+    # Data directory
+    script_dir = Path(__file__).resolve().parent.parent
+    data_dir = script_dir / "data"
     
-    # Unified formula for D=1 (dispersion-dominated): A = A₀ × (L/L₀)^n
-    A_dispersion = A_0 * (L_range / L_0)**N_EXP
+    # Load SPARC galaxies
+    def load_sparc_for_amplitude():
+        sparc_dir = data_dir / "Rotmod_LTG"
+        if not sparc_dir.exists():
+            return []
+        
+        galaxies = []
+        for gf in sorted(sparc_dir.glob("*_rotmod.dat")):
+            data = []
+            with open(gf) as f:
+                for line in f:
+                    if line.startswith('#') or not line.strip():
+                        continue
+                    parts = line.split()
+                    if len(parts) >= 6:
+                        try:
+                            data.append({
+                                'R': float(parts[0]),
+                                'V_obs': float(parts[1]),
+                                'V_gas': float(parts[3]),
+                                'V_disk': float(parts[4]),
+                                'V_bulge': float(parts[5]) if len(parts) > 5 else 0.0
+                            })
+                        except ValueError:
+                            continue
+            
+            if len(data) < 5:
+                continue
+            
+            df = pd.DataFrame(data)
+            V_bar_sq = (np.sign(df['V_gas']) * df['V_gas']**2 + 
+                        0.5 * df['V_disk']**2 + 0.7 * df['V_bulge']**2)
+            df['V_bar'] = np.sqrt(np.abs(V_bar_sq))
+            
+            valid = (df['V_bar'] > 0) & (df['R'] > 0) & (df['V_obs'] > 0)
+            df = df[valid]
+            
+            if len(df) >= 5:
+                idx = len(df) // 3
+                R_d = df['R'].iloc[idx] if idx > 0 else df['R'].iloc[-1] / 2
+                h_disk = 0.12 * R_d
+                L = 2 * h_disk
+                
+                galaxies.append({
+                    'R': df['R'].values,
+                    'V_obs': df['V_obs'].values,
+                    'V_bar': df['V_bar'].values,
+                    'R_d': R_d,
+                    'path_length': L,
+                })
+        return galaxies
     
-    # Disk galaxies (D=0): A = A₀ (constant)
-    A_disk = np.ones_like(L_range) * A_0
+    # Load clusters
+    def load_clusters_for_amplitude():
+        cluster_file = data_dir / "clusters" / "fox2022_unique_clusters.csv"
+        if not cluster_file.exists():
+            return []
+        
+        df = pd.read_csv(cluster_file)
+        df_valid = df[
+            df['M500_1e14Msun'].notna() & 
+            df['MSL_200kpc_1e12Msun'].notna() &
+            (df['spec_z_constraint'] == 'yes')
+        ].copy()
+        
+        clusters = []
+        f_baryon = 0.15
+        M500_ref, R500_ref = 5e14, 1000
+        
+        for idx, row in df_valid.iterrows():
+            M500 = row['M500_1e14Msun'] * 1e14
+            M_bar_200 = 0.4 * f_baryon * M500
+            M_lens_200 = row['MSL_200kpc_1e12Msun'] * 1e12
+            R500 = R500_ref * (M500 / M500_ref)**(1/3)
+            L = 2 * R500
+            
+            r_m = 200 * kpc_to_m
+            g_bar = G * M_bar_200 * 2e30 / r_m**2
+            
+            clusters.append({
+                'M_bar': M_bar_200,
+                'M_lens': M_lens_200,
+                'path_length': L,
+                'g_bar': g_bar,
+            })
+        return clusters
     
-    # Plot the theoretical curves
-    ax.loglog(L_range, A_dispersion, 'b-', lw=2, 
-              label=r'Dispersion-dominated: $A = A_0 (L/L_0)^{0.27}$')
-    ax.axhline(y=A_0, color='g', linestyle='--', lw=1.5, 
-               label=r'Disk galaxies: $A = A_0$')
+    # Load ellipticals from MaNGA
+    def load_ellipticals_for_amplitude():
+        try:
+            from astropy.io import fits
+            from astropy.table import Table
+        except ImportError:
+            return []
+        
+        manga_file = data_dir / "manga_dynpop" / "SDSSDR17_MaNGA_JAM.fits"
+        if not manga_file.exists():
+            return []
+        
+        with fits.open(manga_file) as hdul:
+            basic = Table(hdul[1].data)
+            jam_nfw = Table(hdul[4].data)
+        
+        ellipticals = []
+        for i in range(len(basic)):
+            try:
+                lambda_re = float(basic['Lambda_Re'][i])
+                sersic_n = float(basic['nsa_sersic_n'][i])
+                
+                if lambda_re > 0.2 or sersic_n < 2.5 or sersic_n < 0:
+                    continue
+                
+                log_mstar = float(basic['nsa_sersic_mass'][i])
+                Re_arcsec = float(basic['Re_arcsec_MGE'][i])
+                z = float(basic['z'][i])
+                
+                if not (9.0 < log_mstar < 12.0 and 0.01 < z < 0.15 and Re_arcsec > 0):
+                    continue
+                
+                D_A = float(basic['DA'][i])
+                Re_kpc = Re_arcsec * D_A * 1000 / 206265
+                
+                if not (0.5 < Re_kpc < 30):
+                    continue
+                
+                fdm = float(jam_nfw['fdm_Re'][i])
+                if not (np.isfinite(fdm) and 0 <= fdm <= 1):
+                    continue
+                
+                L = 2 * Re_kpc
+                M_star = 10**log_mstar
+                r_m = Re_kpc * kpc_to_m
+                g_bar = G * M_star * 2e30 / r_m**2
+                Sigma_obs = 1 / (1 - fdm) if fdm < 0.99 else 10
+                
+                ellipticals.append({
+                    'path_length': L,
+                    'g_bar': g_bar,
+                    'Sigma_obs': Sigma_obs,
+                })
+            except (ValueError, IndexError, KeyError):
+                continue
+        return ellipticals
     
-    # Mark specific system types
-    systems = {
-        'Disk galaxies': {'L': 1.5, 'D': 0, 'color': 'green', 'marker': 's'},
-        'Ellipticals': {'L': 17, 'D': 0.5, 'color': 'orange', 'marker': 'o'},
-        'Clusters': {'L': 400, 'D': 1.0, 'color': 'red', 'marker': '^'},
-    }
+    # Compute effective amplitudes
+    def compute_galaxy_amplitude(gal):
+        R = gal['R']
+        V_obs = gal['V_obs']
+        V_bar = gal['V_bar']
+        R_d = gal['R_d']
+        
+        g_bar = (V_bar * 1000)**2 / (R * kpc_to_m)
+        xi = XI_SCALE * R_d
+        W = R / (xi + R)
+        h = h_universal(g_bar)
+        
+        Sigma_obs = (V_obs / V_bar)**2
+        Wh = W * h
+        valid = Wh > 0.01
+        
+        if np.sum(valid) < 3:
+            return np.nan
+        
+        A_eff = np.median((Sigma_obs[valid] - 1) / Wh[valid])
+        return A_eff if 0.1 < A_eff < 20 else np.nan
     
-    for name, props in systems.items():
-        L = props['L']
-        D = props['D']
-        A = unified_amplitude(D, L)
-        ax.scatter([L], [A], s=150, c=props['color'], marker=props['marker'], 
-                   edgecolors='black', linewidths=1.5, zorder=10, label=f'{name} (A={A:.2f})')
+    def compute_cluster_amplitude(cl):
+        Sigma = cl['M_lens'] / cl['M_bar']
+        h = h_universal(np.array([cl['g_bar']]))[0]
+        A_eff = (Sigma - 1) / h
+        return A_eff if 0.5 < A_eff < 50 else np.nan
     
-    ax.set_xlabel('Path length through baryons L [kpc]')
-    ax.set_ylabel('Amplitude A')
-    ax.set_title(r'Unified Amplitude: $A = A_0 \times [1-D+D(L/L_0)^n]$')
-    ax.set_xlim(0.3, 1000)
-    ax.set_ylim(0.8, 12)
+    def compute_elliptical_amplitude(ell):
+        h = h_universal(np.array([ell['g_bar']]))[0]
+        A_eff = (ell['Sigma_obs'] - 1) / h
+        return A_eff if 0.5 < A_eff < 20 else np.nan
+    
+    # Load all data
+    print("  Loading SPARC galaxies...")
+    galaxies = load_sparc_for_amplitude()
+    galaxy_data = [(g['path_length'], compute_galaxy_amplitude(g)) for g in galaxies]
+    galaxy_data = [(L, A) for L, A in galaxy_data if not np.isnan(A)]
+    
+    print("  Loading clusters...")
+    clusters = load_clusters_for_amplitude()
+    cluster_data = [(c['path_length'], compute_cluster_amplitude(c)) for c in clusters]
+    cluster_data = [(L, A) for L, A in cluster_data if not np.isnan(A)]
+    
+    print("  Loading ellipticals...")
+    ellipticals = load_ellipticals_for_amplitude()
+    elliptical_data = [(e['path_length'], compute_elliptical_amplitude(e)) for e in ellipticals]
+    elliptical_data = [(L, A) for L, A in elliptical_data if not np.isnan(A)]
+    
+    print(f"  Data loaded: {len(galaxy_data)} galaxies, {len(elliptical_data)} ellipticals, {len(cluster_data)} clusters")
+    
+    # Create figure
+    fig, ax = plt.subplots(figsize=(10, 7))
+    
+    # Theoretical curves
+    L_range = np.logspace(-0.5, 4, 100)
+    A_sigma = A_0 * (L_range / L_0)**N_EXP
+    
+    # Σ-Gravity prediction
+    ax.loglog(L_range, A_sigma, 'b-', lw=2.5, 
+              label=r'$\Sigma$-Gravity: $A = A_0 (L/L_0)^{0.27}$')
+    
+    # MOND prediction (constant A ≈ 1)
+    ax.axhline(y=1.0, color='red', ls='--', lw=2, alpha=0.8,
+               label='MOND: A ≈ 1 (scale-independent)')
+    
+    # GR (no dark matter)
+    ax.axhline(y=0.15, color='gray', ls=':', lw=2, alpha=0.6,
+               label='GR (no DM): A → 0')
+    ax.text(0.15, 0.11, 'GR: A = 0', fontsize=9, color='gray', alpha=0.8)
+    
+    # Plot data
+    if galaxy_data:
+        gal_L, gal_A = zip(*galaxy_data)
+        ax.scatter(gal_L, gal_A, c='green', s=15, alpha=0.5, 
+                   label=f'Disk galaxies (N={len(galaxy_data)})')
+    
+    if elliptical_data:
+        ell_L, ell_A = zip(*elliptical_data)
+        ax.scatter(ell_L, ell_A, c='orange', s=25, alpha=0.6, marker='s',
+                   label=f'Ellipticals (N={len(elliptical_data)})')
+    
+    if cluster_data:
+        cl_L, cl_A = zip(*cluster_data)
+        ax.scatter(cl_L, cl_A, c='red', s=50, alpha=0.7, marker='^',
+                   label=f'Clusters (N={len(cluster_data)})')
+    
+    ax.set_xlabel('Path length through baryons L [kpc]', fontsize=12)
+    ax.set_ylabel('Effective amplitude A', fontsize=12)
+    ax.set_title('Amplitude vs Path Length: Σ-Gravity, MOND, and GR Predictions', fontsize=13)
+    ax.set_xlim(0.1, 5000)
+    ax.set_ylim(0.1, 30)
     ax.legend(loc='upper left', fontsize=9)
     ax.grid(True, alpha=0.3, which='both')
     
-    # Add formula parameters annotation
+    # Add formula annotation
     ax.text(0.98, 0.02, 
             r'$A_0 = e^{1/(2\pi)} \approx 1.17$' + '\n' +
-            r'$L_0 = 0.40$ kpc' + '\n' +
-            r'$n = 0.27$',
+            r'$L_0 = 0.40$ kpc, $n = 0.27$',
             transform=ax.transAxes, ha='right', va='bottom', fontsize=9,
             bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
     

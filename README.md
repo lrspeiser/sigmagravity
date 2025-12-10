@@ -150,7 +150,7 @@ This unifies the galaxy and cluster regimes through a single principled relation
 
 ![Figure 3: Unified amplitude](figures/amplitude_comparison.png)
 
-*FIG. 3. Amplitude versus path length through baryons. Blue line: power-law scaling for dispersion-dominated systems. Green dashed: constant amplitude for disk galaxies. Points mark disk galaxies (L ≈ 1.5 kpc, A = 1.17), ellipticals (L ≈ 17 kpc, A = 2.47), and clusters (L ≈ 400 kpc, A = 8.45). The unified formula connects all system types.*
+*FIG. 3. Amplitude versus path length through baryons for 163 SPARC disk galaxies (green), 873 MaNGA ellipticals (orange), and 44 Fox et al. clusters (red). Blue line: Σ-Gravity prediction A = A₀(L/L₀)^0.27. Red dashed: MOND (scale-independent, A ≈ 1). Gray dotted: GR without dark matter (A = 0). MOND works for galaxies but fails for clusters by ~10×. Σ-Gravity's path-length-dependent amplitude unifies all system types from sub-kpc disks to Mpc-scale clusters.*
 
 ### F. Solar System Constraints
 
