@@ -56,15 +56,38 @@ def check_dependencies():
     
     return True
 
-def generate_pdf_latex(md_path: Path, pdf_path: Path):
-    """Generate PDF using Pandoc + LaTeX backend"""
+def generate_pdf_latex(md_path: Path, pdf_path: Path, two_column: bool = False, journal_style: bool = False):
+    """Generate PDF using Pandoc + LaTeX backend
+    
+    Args:
+        md_path: Input markdown file
+        pdf_path: Output PDF file
+        two_column: Use two-column layout (like PRD)
+        journal_style: Use journal-like formatting (smaller margins, etc.)
+    """
     
     print(f"\nGenerating PDF from {md_path}...")
     print(f"Output: {pdf_path}")
+    if two_column:
+        print("Layout: Two-column (journal style)")
+    if journal_style:
+        print("Style: Physical Review D-like formatting")
     print("\nThis may take 1-2 minutes for first run (LaTeX packages download)...")
     
-    # LaTeX header to constrain images and improve layout
-    latex_header = r'''
+    # LaTeX header for journal-style formatting
+    if journal_style:
+        latex_header = r'''
+\usepackage{float}
+% Allow floats to break if needed
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.85}
+% Tighter paragraph spacing
+\setlength{\parskip}{0.5em}
+'''
+    else:
+        latex_header = r'''
 \usepackage{float}
 % Allow floats to break if needed
 \renewcommand{\topfraction}{0.9}
@@ -77,16 +100,32 @@ def generate_pdf_latex(md_path: Path, pdf_path: Path):
     header_file = pdf_path.parent / '_latex_header.tex'
     header_file.write_text(latex_header, encoding='utf-8')
     
-    # Pandoc options for academic papers
+    # Pandoc options
     cmd = [
         'pandoc',
         str(md_path),
         '-o', str(pdf_path),
         '--pdf-engine=xelatex',  # XeLaTeX handles Unicode (Σ, †, ℓ, etc.)
-        '-V', 'geometry:top=20mm,left=20mm,right=20mm,bottom=30mm',  # Extra bottom margin
-        '-V', 'fontsize=11pt',
         '-H', str(header_file),  # Include header for image sizing
     ]
+    
+    # Geometry and layout options
+    if journal_style:
+        cmd.extend([
+            '-V', 'geometry:top=18mm,left=18mm,right=18mm,bottom=25mm',
+            '-V', 'fontsize=10pt',
+        ])
+    else:
+        cmd.extend([
+            '-V', 'geometry:top=20mm,left=20mm,right=20mm,bottom=30mm',
+            '-V', 'fontsize=11pt',
+        ])
+    
+    # Two-column layout
+    if two_column:
+        cmd.extend([
+            '-V', 'classoption=twocolumn',
+        ])
     
     try:
         result = subprocess.run(cmd, 
@@ -132,6 +171,10 @@ def main():
                        help='Input Markdown file (default: README.md)')
     parser.add_argument('--out', default='docs/sigmagravity_paper.pdf',
                        help='Output PDF file (default: docs/sigmagravity_paper.pdf)')
+    parser.add_argument('--two-column', action='store_true',
+                       help='Use two-column layout (like Physical Review D)')
+    parser.add_argument('--journal', action='store_true',
+                       help='Use journal-style formatting (smaller margins, tighter spacing)')
     
     args = parser.parse_args()
     
@@ -149,7 +192,9 @@ def main():
         sys.exit(1)
     
     # Generate PDF
-    success = generate_pdf_latex(md_path, pdf_path)
+    success = generate_pdf_latex(md_path, pdf_path, 
+                                  two_column=args.two_column,
+                                  journal_style=args.journal)
     sys.exit(0 if success else 1)
 
 if __name__ == '__main__':
