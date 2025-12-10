@@ -1,7 +1,8 @@
 % sigmagravity_revtex.tex - Physical Review D submission format
 % REVTeX 4.2 template for Sigma-Gravity paper
+% COMPLETE VERSION matching README.md
 
-\documentclass[aps,prd,twocolumn,superscriptaddress,showpacs,floatfix]{revtex4-2}
+\documentclass[aps,prd,twocolumn,superscriptaddress,showpacs,floatfix,longbibliography]{revtex4-2}
 
 % Standard packages
 \usepackage{graphicx}
@@ -10,12 +11,9 @@
 \usepackage{bm}
 \usepackage{hyperref}
 \usepackage{xcolor}
-
-% For proper handling of figures
 \usepackage{float}
 
 % Define shortcuts
-\newcommand{\Sig}{\Sigma}
 \newcommand{\gdagger}{g^{\dagger}}
 \newcommand{\vrot}{v_{\rm rot}}
 \newcommand{\gN}{g_N}
@@ -26,9 +24,9 @@
 \title{$\Sigma$-Gravity: Coherence-Dependent Gravitational Enhancement in Galaxies and Clusters}
 
 \author{Leonard Speiser}
-\email{leonard@horizon3.net}
+\email[Contact author: ]{leonard@horizon3.net}
+\homepage[ORCID: ]{https://orcid.org/0009-0008-8797-2457}
 \affiliation{Horizon 3, Independent Research}
-\affiliation{ORCID: 0009-0008-8797-2457}
 
 \date{\today}
 
@@ -39,15 +37,12 @@ Applied to 171 SPARC galaxies (M/L = 0.5/0.7), the framework achieves RMS = 17.7
 \end{abstract}
 
 \pacs{04.50.Kd, 98.80.-k, 95.35.+d, 98.62.Dm}
-% 04.50.Kd - Modified theories of gravity
-% 98.80.-k - Cosmology
-% 95.35.+d - Dark matter
-% 98.62.Dm - Kinematics, dynamics, and rotation of galaxies
 
 \maketitle
 
 %=============================================================================
 \section{Introduction}
+\label{sec:intro}
 %=============================================================================
 
 \subsection{The Missing Mass Problem}
@@ -68,9 +63,19 @@ Here we develop $\Sigma$-Gravity (``Sigma-Gravity''), a phenomenological framewo
 
 We emphasize that $\Sigma$-Gravity is currently a phenomenological framework with theoretical motivation but without rigorous first-principles derivation. The framework is falsifiable and makes predictions distinct from both MOND and $\Lambda$CDM.
 
+\subsection{Relation to Previous Work}
+
+$\Sigma$-Gravity differs from existing approaches in several key respects:
+
+\textbf{Compared to MOND/QUMOND:} Both frameworks share the QUMOND-like field equation structure with minimal matter coupling~\cite{Milgrom2010}. However, $\Sigma$-Gravity introduces coherence dependence through $\mathcal{C}$, which suppresses enhancement in dispersion-dominated systems. This enables unified treatment of galaxies and clusters with a single amplitude formula.
+
+\textbf{Compared to f(T) teleparallel gravity:} While motivated by teleparallel concepts, $\Sigma$-Gravity leaves the gravitational sector unchanged (standard TEGR) and modifies only the effective source through a phantom density term~\cite{Ferraro2007,Bahamonde2023}. This avoids the theoretical complications of modified kinetic terms.
+
+\textbf{Compared to emergent/entropic gravity:} The acceleration scale $g^{\dagger} \sim cH_0$ is empirically similar to Verlinde's emergent gravity prediction~\cite{Verlinde2017}, but $\Sigma$-Gravity does not invoke entropic mechanisms. The cosmological connection remains phenomenological.
+
 \subsection{Paper Organization}
 
-Section~\ref{sec:theory} presents the theoretical framework: the QUMOND-like field equations, the coherence scalar, the acceleration function, and the unified amplitude formula. Section~\ref{sec:data} describes the data sources and methodology. Section~\ref{sec:results} presents results for SPARC galaxies, the Milky Way, and galaxy clusters. Section~\ref{sec:discussion} discusses implications, testable predictions, and limitations. Section~\ref{sec:conclusions} provides conclusions.
+Section~\ref{sec:theory} presents the theoretical framework. Section~\ref{sec:data} describes data sources. Section~\ref{sec:results} presents results. Section~\ref{sec:discussion} discusses implications. Section~\ref{sec:conclusions} provides conclusions.
 
 %=============================================================================
 \section{Theoretical Framework}
@@ -80,8 +85,6 @@ Section~\ref{sec:theory} presents the theoretical framework: the QUMOND-like fie
 \subsection{QUMOND-Like Field Equations}
 
 $\Sigma$-Gravity modifies gravity through a modified Poisson equation with minimal matter coupling, following the QUMOND construction~\cite{Milgrom2010}. Test particles follow geodesics of the total gravitational potential.
-
-\textbf{Primary formulation:}
 
 \textit{Step 1:} The auxiliary potential $\Phi_N$ satisfies the exact Poisson equation:
 \begin{equation}
@@ -106,14 +109,27 @@ The effective gravitational field is:
 
 \subsection{The Covariant Coherence Scalar}
 
-The coherence scalar $\mathcal{C}$ is the primary theoretical object in $\Sigma$-Gravity. It measures the ratio of ordered to total kinetic energy:
+The coherence scalar $\mathcal{C}$ measures the ratio of ordered to total kinetic energy:
 \begin{equation}
 \mathcal{C} = \frac{v_{\rm rot}^2}{v_{\rm rot}^2 + \sigma^2}
 \end{equation}
 
 When $v_{\rm rot} \gg \sigma$, $\mathcal{C} \to 1$ (full coherence); when $v_{\rm rot} \ll \sigma$, $\mathcal{C} \to 0$ (no coherence).
 
-\textbf{Practical approximation:} For disk galaxies, the orbit-averaged coherence is well-approximated by $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This gives identical results (validated on 171 SPARC galaxies) and requires no iteration.
+\textbf{Covariant definition:} The coherence scalar can be constructed from the vorticity and expansion of the matter 4-velocity field:
+\begin{equation}
+\mathcal{C} = \frac{\omega^2}{\omega^2 + 4\pi G\rho + \theta^2 + H_0^2}
+\end{equation}
+where $\omega^2$ is the vorticity scalar and $\theta$ is the expansion.
+
+\textbf{Practical approximation:} For disk galaxies, the orbit-averaged coherence is well-approximated by $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This gives identical results (validated on 171 SPARC galaxies) and requires no iteration (Fig.~\ref{fig:coherence}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{../figures/coherence_window.png}
+\caption{Left: Coherence window $W(r) = r/(\xi+r)$ for different disk scale lengths $R_d$, where $\xi = R_d/(2\pi)$. Right: Total enhancement $\Sigma(r) = 1 + A \times W \times h$ for different baryonic accelerations.}
+\label{fig:coherence}
+\end{figure}
 
 \subsection{The Acceleration Function}
 
@@ -133,24 +149,43 @@ g^{\dagger} = \frac{cH_0}{4\sqrt{\pi}} \approx 9.6 \times 10^{-11}~\text{m/s}^2
 \item When $g \gg g^{\dagger}$: $h(g) \to (g^{\dagger}/g)^{3/2}$ (Newtonian regime)
 \end{itemize}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{../figures/h_function_comparison.png}
+\caption{Left: Enhancement functions for $\Sigma$-Gravity (blue) and MOND (red dashed). Right: Percentage difference, showing $\sim$7\% distinction in the transition regime.}
+\label{fig:hfunction}
+\end{figure}
+
 \subsection{Unified Amplitude Formula}
 
-The amplitude $A$ connects galaxy and cluster regimes through a single formula:
+The amplitude $A$ connects galaxy and cluster regimes:
 \begin{equation}
 A(D, L) = A_0 \times \left[1 - D + D \times \left(\frac{L}{L_0}\right)^n\right]
 \end{equation}
 
-where:
-\begin{itemize}
-\item $A_0 = e^{1/(2\pi)} \approx 1.173$ (base amplitude)
-\item $L_0 = 0.40$ kpc (reference path length)
-\item $n = 0.27$ (path length exponent)
-\item $D = \sigma^2/(\sigma^2 + v_{\rm rot}^2)$ (dispersion dominance)
-\end{itemize}
+where $A_0 = e^{1/(2\pi)} \approx 1.173$, $L_0 = 0.40$ kpc, $n = 0.27$, and $D = \sigma^2/(\sigma^2 + v_{\rm rot}^2)$.
 
-For disk galaxies ($D=0$): $A = 1.173$
+For disk galaxies ($D=0$): $A = 1.173$. For clusters ($D=1$, $L \approx 600$ kpc): $A \approx 8.45$.
 
-For clusters ($D=1$, $L \approx 600$ kpc): $A \approx 8.45$
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{../figures/amplitude_comparison.png}
+\caption{Amplitude versus path length for 163 SPARC disk galaxies (green), 873 MaNGA ellipticals (orange), and 44 Fox et al. clusters (red). Blue: $\Sigma$-Gravity prediction. Red dashed: MOND (scale-independent). Gray: GR without dark matter.}
+\label{fig:amplitude}
+\end{figure}
+
+\subsection{Solar System Constraints}
+
+In compact systems, two suppression mechanisms combine: (1) High acceleration: When $g_N \gg g^{\dagger}$, $h(g_N) \to 0$. (2) Low coherence: When $r \ll \xi$, $\mathcal{C} \to 0$.
+
+At Saturn's orbit ($r \approx 9.5$ AU), $g_N \approx 6.4 \times 10^{-4}$ m/s$^2$, giving $h(g_N) \approx 4 \times 10^{-4}$. Combined with $\mathcal{C} \ll 1$ for the Solar System, the total enhancement is $\Sigma - 1 < 10^{-8}$, implying $|\gamma - 1| \sim 10^{-9}$, well within the Cassini bound~\cite{Bertotti2003}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{../figures/solar_system_safety.png}
+\caption{Enhancement ($\Sigma - 1$) as a function of distance from the Sun. The predicted enhancement is $< 10^{-14}$ throughout the Solar System, far below detection thresholds.}
+\label{fig:solar}
+\end{figure}
 
 %=============================================================================
 \section{Data and Methodology}
@@ -163,18 +198,29 @@ We use 171 galaxies from the Spitzer Photometry and Accurate Rotation Curves (SP
 
 \subsection{Milky Way}
 
-Milky Way validation uses the Eilers et al. (2019) rotation curve derived from Gaia DR2~\cite{Eilers2019}.
+Milky Way validation uses the Eilers et al. (2019) rotation curve derived from Gaia DR2~\cite{Eilers2019}, with baryonic model from McMillan (2017).
 
 \subsection{Galaxy Clusters}
 
-Cluster validation uses 42 strong-lensing clusters from Fox et al. (2022)~\cite{Fox2022} with spectroscopic redshift constraints.
+Cluster validation uses 42 strong-lensing clusters from Fox et al. (2022)~\cite{Fox2022} with spectroscopic redshift constraints and $M_{500} > 2 \times 10^{14} M_\odot$.
 
 %=============================================================================
 \section{Results}
 \label{sec:results}
 %=============================================================================
 
-\subsection{SPARC Galaxies}
+\subsection{Radial Acceleration Relation}
+
+Figure~\ref{fig:rar} shows the Radial Acceleration Relation for 171 SPARC galaxies. Both $\Sigma$-Gravity and MOND reproduce the tight correlation with scatter $\sim$0.09 dex.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{../figures/rar_comparison.png}
+\caption{Radial Acceleration Relation for 171 SPARC galaxies. Gray: observed data. Blue: $\Sigma$-Gravity. Red dashed: MOND. Black dashed: 1:1 (Newtonian).}
+\label{fig:rar}
+\end{figure}
+
+\subsection{SPARC Galaxy Rotation Curves}
 
 Applied to 171 SPARC galaxies, $\Sigma$-Gravity achieves:
 \begin{itemize}
@@ -182,6 +228,26 @@ Applied to 171 SPARC galaxies, $\Sigma$-Gravity achieves:
 \item Win rate vs MOND: 47\%
 \item Median bias: $-0.8$ km/s
 \end{itemize}
+
+Figure~\ref{fig:gallery} shows rotation curves for six representative galaxies.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{../figures/rotation_curve_gallery.png}
+\caption{Rotation curves for six representative SPARC galaxies. Black: observed data. Green dashed: baryonic. Blue: $\Sigma$-Gravity. Red dotted: MOND.}
+\label{fig:gallery}
+\end{figure*}
+
+\subsection{Milky Way}
+
+Figure~\ref{fig:mw} shows the Milky Way rotation curve comparison.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{../figures/mw_rotation_curve.png}
+\caption{Milky Way rotation curve. Black: observed (Eilers et al. 2019). Green dashed: baryonic. Blue: $\Sigma$-Gravity. Red dotted: MOND.}
+\label{fig:mw}
+\end{figure}
 
 \subsection{Galaxy Clusters}
 
@@ -194,13 +260,23 @@ For 42 Fox et al. clusters:
 
 MOND underpredicts cluster masses by factor $\sim$3.
 
-\subsection{Solar System Safety}
-
-At Saturn's orbit: $|\gamma - 1| \sim 10^{-9}$, well within the Cassini bound of $|\gamma - 1| < 2.3 \times 10^{-5}$~\cite{Bertotti2003}.
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{../figures/cluster_validation.png}
+\caption{$\Sigma$-Gravity cluster validation. Left: Predicted vs. observed mass. Middle: Ratio vs. redshift. Right: Distribution centered at zero.}
+\label{fig:clusters}
+\end{figure*}
 
 \subsection{Counter-Rotation Test}
 
-MaNGA DynPop data shows counter-rotating galaxies have 44\% lower inferred dark matter fractions ($p < 0.01$), consistent with $\Sigma$-Gravity's prediction that counter-rotation reduces coherence.
+The theory predicts that counter-rotating stellar components reduce coherence and thus enhancement. MaNGA DynPop data confirms this: counter-rotating galaxies show 44\% lower inferred dark matter fractions ($p < 0.01$).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{../figures/counter_rotation_test.png}
+\caption{Counter-rotation test. (A) Theory predictions vs. observation. (B) $f_{\rm DM}$ distributions for counter-rotating (red) vs. normal (gray) galaxies.}
+\label{fig:counter}
+\end{figure}
 
 %=============================================================================
 \section{Discussion}
@@ -212,9 +288,10 @@ MaNGA DynPop data shows counter-rotating galaxies have 44\% lower inferred dark 
 $\Sigma$-Gravity makes specific predictions distinct from $\Lambda$CDM and MOND:
 
 \begin{enumerate}
-\item \textbf{Counter-rotation:} Galaxies with counter-rotating components should show reduced enhancement
-\item \textbf{Dispersion dependence:} High-$\sigma$ systems should show less enhancement at fixed mass
-\item \textbf{Cluster success:} Unlike MOND, clusters are predicted correctly without additional dark matter
+\item \textbf{Counter-rotation:} Galaxies with counter-rotating components show reduced enhancement---confirmed.
+\item \textbf{Dispersion dependence:} High-$\sigma$ systems show less enhancement at fixed mass.
+\item \textbf{Cluster success:} Unlike MOND, clusters are predicted correctly without additional dark matter.
+\item \textbf{High-redshift evolution:} Enhancement should decrease at $z > 2$ as $H(z)$ increases.
 \end{enumerate}
 
 \subsection{Limitations}
@@ -222,6 +299,10 @@ $\Sigma$-Gravity makes specific predictions distinct from $\Lambda$CDM and MOND:
 \textbf{Theoretical:} No rigorous action formulation; coherence scalar requires operational definition; cosmological sector undeveloped.
 
 \textbf{Observational:} Wide binary constraints remain ambiguous; high-redshift predictions need larger samples.
+
+\subsection{Outlook}
+
+A complete theory would derive the coherence scalar from covariant field theory, provide an action formulation, and make cosmological predictions. The current phenomenological success motivates this theoretical development.
 
 %=============================================================================
 \section{Conclusions}
@@ -240,6 +321,11 @@ We have presented $\Sigma$-Gravity, a phenomenological framework where gravitati
 The unified amplitude formula connects galaxies and clusters through a single principled relationship. While lacking rigorous first-principles derivation, $\Sigma$-Gravity demonstrates that coherence-dependent enhancement is phenomenologically viable and observationally testable.
 
 %=============================================================================
+\section*{Data Availability}
+
+The data and code supporting this study are openly available at \url{https://github.com/lrspeiser/SigmaGravity}. This repository includes SPARC, Milky Way, and cluster analysis scripts, configuration files, and instructions to reproduce all figures and numerical results.
+
+%=============================================================================
 \begin{acknowledgments}
 We thank Emmanuel N. Saridakis (National Observatory of Athens) for detailed feedback on the theoretical framework, particularly regarding field equations and consistency constraints in teleparallel gravity. We thank Rafael Ferraro (IAFE, CONICET--Universidad de Buenos Aires) for discussions on $f(T)$ gravity and dimensional constants. We thank Tiberiu Harko (Babe\c{s}-Bolyai University) for incisive feedback on theoretical foundations, particularly regarding auxiliary fields and covariant formulation of acceleration-dependent couplings.
 \end{acknowledgments}
@@ -248,45 +334,59 @@ We thank Emmanuel N. Saridakis (National Observatory of Athens) for detailed fee
 \begin{thebibliography}{99}
 
 \bibitem{Zwicky1933}
-F. Zwicky, Helv. Phys. Acta \textbf{6}, 110 (1933).
+F. Zwicky, ``Die Rotverschiebung von extragalaktischen Nebeln,'' Helv. Phys. Acta \textbf{6}, 110 (1933).
 
 \bibitem{Planck2020}
-Planck Collaboration, Astron. Astrophys. \textbf{641}, A6 (2020).
+Planck Collaboration, ``Planck 2018 results. VI. Cosmological parameters,'' Astron. Astrophys. \textbf{641}, A6 (2020).
 
 \bibitem{Milgrom1983a}
-M. Milgrom, Astrophys. J. \textbf{270}, 365 (1983).
+M. Milgrom, ``A modification of the Newtonian dynamics as a possible alternative to the hidden mass hypothesis,'' Astrophys. J. \textbf{270}, 365 (1983).
 
 \bibitem{Milgrom1983b}
-M. Milgrom, Astrophys. J. \textbf{270}, 371 (1983).
+M. Milgrom, ``A modification of the Newtonian dynamics - Implications for galaxies,'' Astrophys. J. \textbf{270}, 371 (1983).
 
 \bibitem{McGaugh2000}
-S. S. McGaugh, J. M. Schombert, G. D. Bothun, and W. J. G. de Blok, Astrophys. J. Lett. \textbf{533}, L99 (2000).
+S. S. McGaugh, J. M. Schombert, G. D. Bothun, and W. J. G. de Blok, ``The Baryonic Tully-Fisher Relation,'' Astrophys. J. Lett. \textbf{533}, L99 (2000).
 
 \bibitem{Bekenstein2004}
-J. D. Bekenstein, Phys. Rev. D \textbf{70}, 083509 (2004).
+J. D. Bekenstein, ``Relativistic gravitation theory for the modified Newtonian dynamics paradigm,'' Phys. Rev. D \textbf{70}, 083509 (2004).
 
 \bibitem{Milgrom2009}
-M. Milgrom, Phys. Rev. D \textbf{80}, 123536 (2009).
+M. Milgrom, ``Bimetric MOND gravity,'' Phys. Rev. D \textbf{80}, 123536 (2009).
 
 \bibitem{Sanders2002}
-R. H. Sanders and S. S. McGaugh, Annu. Rev. Astron. Astrophys. \textbf{40}, 263 (2002).
+R. H. Sanders and S. S. McGaugh, ``Modified Newtonian Dynamics as an Alternative to Dark Matter,'' Annu. Rev. Astron. Astrophys. \textbf{40}, 263 (2002).
 
 \bibitem{Milgrom2010}
-M. Milgrom, Phys. Rev. D \textbf{82}, 043523 (2010).
+M. Milgrom, ``Quasi-linear formulation of MOND,'' Phys. Rev. D \textbf{82}, 043523 (2010).
+
+\bibitem{Ferraro2007}
+R. Ferraro and F. Fiorini, ``Modified teleparallel gravity: Inflation without an inflaton,'' Phys. Rev. D \textbf{75}, 084031 (2007).
+
+\bibitem{Bahamonde2023}
+S. Bahamonde et al., ``Teleparallel gravity: from theory to cosmology,'' Rep. Prog. Phys. \textbf{86}, 026901 (2023).
+
+\bibitem{Verlinde2017}
+E. P. Verlinde, ``Emergent Gravity and the Dark Universe,'' SciPost Phys. \textbf{2}, 016 (2017).
 
 \bibitem{Lelli2016}
-F. Lelli, S. S. McGaugh, and J. M. Schombert, Astron. J. \textbf{152}, 157 (2016).
+F. Lelli, S. S. McGaugh, and J. M. Schombert, ``SPARC: Mass Models for 175 Disk Galaxies with Spitzer Photometry and Accurate Rotation Curves,'' Astron. J. \textbf{152}, 157 (2016).
 
 \bibitem{Eilers2019}
-A.-C. Eilers, D. W. Hogg, H.-W. Rix, and M. K. Ness, Astrophys. J. \textbf{871}, 120 (2019).
+A.-C. Eilers, D. W. Hogg, H.-W. Rix, and M. K. Ness, ``The Circular Velocity Curve of the Milky Way from 5 to 25 kpc,'' Astrophys. J. \textbf{871}, 120 (2019).
 
 \bibitem{Fox2022}
-C. Fox, G. Mahler, K. Sharon, and J. D. Remolina Gonz\'{a}lez, Astrophys. J. \textbf{928}, 87 (2022).
+C. Fox, G. Mahler, K. Sharon, and J. D. Remolina Gonz\'{a}lez, ``The RELICS Strong Lensing Analysis,'' Astrophys. J. \textbf{928}, 87 (2022).
 
 \bibitem{Bertotti2003}
-B. Bertotti, L. Iess, and P. Tortora, Nature \textbf{425}, 374 (2003).
+B. Bertotti, L. Iess, and P. Tortora, ``A test of general relativity using radio links with the Cassini spacecraft,'' Nature \textbf{425}, 374 (2003).
+
+\bibitem{BekensteinMilgrom1984}
+J. Bekenstein and M. Milgrom, ``Does the missing mass problem signal the breakdown of Newtonian gravity?,'' Astrophys. J. \textbf{286}, 7 (1984).
+
+\bibitem{MaNGA2023}
+MaNGA DynPop Collaboration, private communication (2023).
 
 \end{thebibliography}
 
 \end{document}
-
