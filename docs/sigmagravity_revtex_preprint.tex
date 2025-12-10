@@ -116,6 +116,8 @@ The effective gravitational field is:
 
 \textbf{The auxiliary field as computational device:} The intermediate variable $\Phi_N$ is not a new dynamical degree of freedom---it has no independent propagating modes. It is determined by the standard Poisson equation and serves as an intermediate variable for computing the enhancement, exactly as in QUMOND \cite{Milgrom2010}.
 
+\textbf{Algebraic approximation:} For disk galaxies with approximate axial symmetry, we use the algebraic relation $g_{\rm eff} = g_N \cdot \Sigma$ rather than solving the modified Poisson equation numerically. This is the standard approach in MOND phenomenology \cite{Milgrom2010} and is valid when the enhancement varies slowly compared to the gravitational field structure.
+
 \subsection{The Covariant Coherence Scalar}
 
 The coherence scalar $\mathcal{C}$ is the primary theoretical object in $\Sigma$-Gravity. It measures the ratio of ordered to total kinetic energy:
@@ -194,22 +196,33 @@ The amplitude connecting galaxies and clusters follows:
 A(D, L) = A_0 \times \left[1 - D + D \times \left(\frac{L}{L_0}\right)^n\right]
 \end{equation}
 
-where:
-\begin{itemize}
-\item $A_0 = e^{1/(2\pi)} \approx 1.173$ (disk galaxies)
-\item $L_0 = 0.40$ kpc (calibrated scale)
-\item $n = 0.27$ (path-length exponent)
-\item $D = 0$ for disk-dominated, $D = 1$ for dispersion-dominated
-\end{itemize}
+\textbf{Parameter accounting:}
 
-For disk galaxies ($D=0$): $A = 1.173$. For clusters ($D=1$, $L \approx 600$ kpc): $A \approx 8.45$.
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lccc}
+\hline
+Parameter & Value & Status & Origin \\
+\hline
+$g^{\dagger}$ & $9.60 \times 10^{-11}$ m/s$^2$ & Derived & $cH_0/(4\sqrt{\pi})$ \\
+$A_0$ & $e^{1/(2\pi)} \approx 1.173$ & Derived & Mode-counting \\
+$\xi$ & $R_d/(2\pi)$ & Derived & Azimuthal wavelength \\
+$L_0$ & 0.40 kpc & Calibrated & Galaxy-cluster transition \\
+$n$ & 0.27 & Calibrated & Path-length scaling \\
+M/L (disk) & 0.5 $M_\odot/L_\odot$ & Fixed & Lelli+ 2016 \\
+M/L (bulge) & 0.7 $M_\odot/L_\odot$ & Fixed & Lelli+ 2016 \\
+\hline
+\end{tabular}
+\caption{Parameter accounting. $L_0$ and $n$ were calibrated using 42 Fox et al. clusters; SPARC galaxies provide independent validation.}
+\label{tab:params}
+\end{table}
 
-This unifies the galaxy and cluster regimes through a single principled relationship based on system dimensionality and path length through baryons (Fig.~\ref{fig:amplitude}).
+$D = 0$ for disk-dominated systems, $D = 1$ for dispersion-dominated. For disk galaxies ($D=0$): $A = 1.173$. For clusters ($D=1$, $L \approx 600$ kpc): $A \approx 8.45$ (Fig.~\ref{fig:amplitude}).
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{amplitude_comparison.png}
-\caption{Amplitude versus path length through baryons for 163 SPARC disk galaxies (green), 873 MaNGA ellipticals (orange), and 44 Fox et al. clusters (red). Blue line: $\Sigma$-Gravity prediction $A = A_0(L/L_0)^{0.27}$. Red dashed: MOND (scale-independent, $A \approx 1$). Gray dotted: GR without dark matter ($A = 0$). MOND works for galaxies but fails for clusters by $\sim$10$\times$. $\Sigma$-Gravity's path-length-dependent amplitude unifies all system types from sub-kpc disks to Mpc-scale clusters.}
+\caption{Amplitude versus path length for 163 SPARC disk galaxies (green), 873 MaNGA ellipticals (orange), and 42 Fox et al. clusters (red). Blue: $\Sigma$-Gravity prediction. Red dashed: MOND. Gray: GR without dark matter.}
 \label{fig:amplitude}
 \end{figure}
 
@@ -221,14 +234,14 @@ In compact systems, two suppression mechanisms combine:
 \item \textbf{Low coherence:} When $r \ll \xi$, $\mathcal{C} \to 0$
 \end{enumerate}
 
-At Saturn's orbit ($r \approx 9.5$ AU), $g_N \approx 6.4 \times 10^{-4}$ m/s$^2$, giving $h(g_N) \approx 4 \times 10^{-4}$. Combined with $\mathcal{C} \ll 1$ for the Solar System, the total enhancement is $\Sigma - 1 < 10^{-8}$.
+At Saturn's orbit ($r \approx 9.5$ AU $= 1.42 \times 10^{12}$ m), the Newtonian acceleration is $g_N = GM_\odot/r^2 \approx 6.5 \times 10^{-6}$ m/s$^2$, giving $h(g_N) \approx 1.2 \times 10^{-3}$. However, the Solar System lacks extended coherent rotation, so $\mathcal{C} \approx 0$. With $\mathcal{C} \to 0$, the enhancement $\Sigma - 1 \to 0$ regardless of $h(g_N)$.
 
-This implies $|\gamma - 1| \sim 10^{-9}$, well within the Cassini bound of $|\gamma - 1| < 2.3 \times 10^{-5}$ \cite{Bertotti2003} (Fig.~\ref{fig:solar}).
+This satisfies the Cassini bound $|\gamma - 1| < 2.3 \times 10^{-5}$ \cite{Bertotti2003} (Fig.~\ref{fig:solar}).
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{solar_system_safety.png}
-\caption{Enhancement ($\Sigma - 1$) as a function of distance from the Sun. Blue line: $\Sigma$-Gravity prediction. Red/orange dashed: observational bounds (Cassini PPN, planetary ephemeris). The predicted enhancement is $< 10^{-14}$ throughout the Solar System---including at Voyager 1 (160 AU)---far below any detection threshold. The coherence mechanism automatically suppresses modification in compact, high-acceleration systems.}
+\caption{Enhancement ($\Sigma - 1$) as a function of distance from the Sun. The coherence mechanism automatically suppresses modification in compact, high-acceleration systems without extended coherent rotation.}
 \label{fig:solar}
 \end{figure}
 
@@ -266,7 +279,11 @@ We use the Eilers et al. (2019) rotation curve \cite{Eilers2019}: 28,368 red gia
 
 \subsection{Galaxy Cluster Sample}
 
-We use 42 strong-lensing clusters from Fox et al. (2022) \cite{Fox2022} with Einstein radii and spectroscopic redshifts. Lensing masses are derived from the critical surface density at the Einstein radius.
+We use 42 strong-lensing clusters from Fox et al. (2022) \cite{Fox2022} with spectroscopic redshifts and $M_{500} > 2 \times 10^{14} M_\odot$.
+
+\textbf{Baryonic mass estimate:} $M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$, where $f_{\rm baryon} = 0.15$ (cosmic baryon fraction). The factor 0.4 accounts for concentration within 200 kpc.
+
+\textbf{Lensing assumption:} We assume the enhanced potential $\Phi$ governs both dynamics and light deflection ($\Phi = \Psi$ in the weak-field limit). A rigorous relativistic derivation is deferred to future work.
 
 \subsection{MOND Comparison}
 
@@ -402,7 +419,7 @@ The coherence scalar $\mathcal{C}$ depends on net ordered motion. Counter-rotati
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{counter_rotation_effect.png}
-\caption{Counter-rotation test using MaNGA DynPop data. (A) Theory predictions vs. observation: $\Lambda$CDM/MOND predict no difference between counter-rotating and normal galaxies (ratio = 1.0); $\Sigma$-Gravity predicts reduced enhancement (ratio $< 1.0$, exact value depends on counter-rotating fraction). The observed ratio is $0.56 \pm 0.09$, consistent with $\Sigma$-Gravity and inconsistent with $\Lambda$CDM/MOND. (B) $f_{\rm DM}$ distributions: counter-rotating galaxies (red, N=63) show systematically lower inferred dark matter fractions than normal galaxies (gray, N=10,038). Mann-Whitney $p = 0.004$.}
+\caption{Counter-rotation test using MaNGA DynPop data \cite{MaNGA2023} cross-matched with Bevacqua et al. \cite{Bevacqua2022}. (A) Theory predictions vs. observation: $\Lambda$CDM/MOND predict no difference between counter-rotating and normal galaxies (ratio = 1.0); $\Sigma$-Gravity predicts reduced enhancement (ratio $< 1.0$). The observed ratio is $0.56 \pm 0.09$, consistent with $\Sigma$-Gravity. (B) $f_{\rm DM}$ distributions: counter-rotating galaxies (red, N=63) show systematically lower inferred dark matter fractions than normal galaxies (gray, N=10,038). Mann-Whitney $p = 0.004$.}
 \label{fig:counter}
 \end{figure}
 
@@ -416,7 +433,7 @@ Elliptical galaxies and galaxy clusters have $\sigma \gg v_{\rm rot}$, reducing 
 
 If $g^{\dagger} \propto H(z)$, enhancement is suppressed at high redshift.
 
-\textit{Observational status:} KMOS$^{\rm 3D}$ observations of $z \sim 1$--2 galaxies show reduced dark matter fractions compared to local galaxies, consistent with this prediction \cite{KMOS3D2020}.
+\textit{Observational status:} Genzel et al. \cite{Genzel2017} report that massive star-forming galaxies at $z \sim 1$--2 are ``strongly baryon-dominated,'' with dark matter fractions significantly lower than local galaxies. This is qualitatively consistent with $\Sigma$-Gravity's prediction, though a quantitative comparison requires careful treatment of selection effects.
 
 \subsection{Comparison with MOND}
 
@@ -503,7 +520,7 @@ M. Milgrom, ``Bimetric MOND gravity,'' Phys. Rev. D \textbf{80}, 123536 (2009).
 R. H. Sanders and S. S. McGaugh, ``Modified Newtonian Dynamics as an Alternative to Dark Matter,'' Annu. Rev. Astron. Astrophys. \textbf{40}, 263 (2002).
 
 \bibitem{Milgrom2010}
-M. Milgrom, ``Cosmological fluctuation growth in bimetric MOND,'' Phys. Rev. D \textbf{82}, 043523 (2010).
+M. Milgrom, ``Quasi-linear formulation of MOND,'' Mon. Not. R. Astron. Soc. \textbf{403}, 886 (2010).
 
 \bibitem{Ferraro2007}
 R. Ferraro and F. Fiorini, ``Modified teleparallel gravity: Inflation without an inflaton,'' Phys. Rev. D \textbf{75}, 084031 (2007).
@@ -530,10 +547,13 @@ A.-C. Eilers, D. W. Hogg, H.-W. Rix, and M. K. Ness, ``The Circular Velocity Cur
 C. Fox, G. Mahler, K. Sharon, and J. D. Remolina Gonz\'{a}lez, ``The Strongest Cluster Lenses: An Analysis of the Relation Between Strong Gravitational Lensing Strength and the Physical Properties of Galaxy Clusters,'' Astrophys. J. \textbf{928}, 87 (2022).
 
 \bibitem{MaNGA2023}
-MaNGA DynPop Collaboration (2023), private communication.
+L. Zhu et al. (MaNGA DynPop), ``The stellar mass fundamental plane and compact galaxies,'' Mon. Not. R. Astron. Soc. \textbf{522}, 6326 (2023).
 
-\bibitem{KMOS3D2020}
-KMOS$^{\rm 3D}$ Collaboration, Astrophys. J. (2020).
+\bibitem{Genzel2017}
+R. Genzel et al., ``Strongly baryon-dominated disk galaxies at the peak of galaxy formation ten billion years ago,'' Nature \textbf{543}, 397 (2017).
+
+\bibitem{Bevacqua2022}
+D. Bevacqua et al., ``A catalogue of galaxies with counter-rotating stellar discs,'' Mon. Not. R. Astron. Soc. \textbf{511}, 139 (2022).
 
 \end{thebibliography}
 

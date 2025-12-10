@@ -78,6 +78,8 @@ $$\mathbf{g}_{\text{eff}} = -\nabla \Phi = \mathbf{g}_N \cdot \nu(g_N, r)$$
 
 **The auxiliary field as computational device:** The intermediate variable $\Phi_N$ is not a new dynamical degree of freedom—it has no independent propagating modes. It is determined by the standard Poisson equation and serves as an intermediate variable for computing the enhancement, exactly as in QUMOND [9].
 
+**Algebraic approximation:** For disk galaxies with approximate axial symmetry, we use the algebraic relation $g_{\rm eff} = g_N \cdot \Sigma$ rather than solving the modified Poisson equation numerically. This is the standard approach in MOND phenomenology [9] and is valid when the enhancement varies slowly compared to the gravitational field structure. The rotation curve prediction $V_{\rm pred} = V_{\rm bar} \sqrt{\Sigma}$ follows directly from this approximation.
+
 ### B. The Covariant Coherence Scalar
 
 The coherence scalar $\mathcal{C}$ is the primary theoretical object in Σ-Gravity. It measures the ratio of ordered to total kinetic energy:
@@ -140,21 +142,29 @@ The amplitude connecting galaxies and clusters follows:
 
 $$A(D,L) = A_0 \times [1 - D + D \times (L/L_0)^n]$$
 
-where:
-- $A_0 = e^{1/(2\pi)} \approx 1.173$ (disk galaxies)
-- $L_0 = 0.40$ kpc (calibrated scale)
-- $n = 0.27$ (path-length exponent)
-- $D = 0$ for disk-dominated, $D = 1$ for dispersion-dominated
+**Parameter accounting:**
+
+| Parameter | Value | Status | Origin |
+|-----------|-------|--------|--------|
+| $g^\dagger$ | $9.60 \times 10^{-11}$ m/s² | Derived | $cH_0/(4\sqrt{\pi})$ with $H_0 = 70$ km/s/Mpc |
+| $A_0$ | $e^{1/(2\pi)} \approx 1.173$ | Derived | Mode-counting argument (see SI) |
+| $\xi$ | $R_d/(2\pi)$ | Derived | Azimuthal wavelength at disk scale |
+| $L_0$ | 0.40 kpc | Calibrated | Set by galaxy-cluster transition |
+| $n$ | 0.27 | Calibrated | Path-length scaling exponent |
+| M/L (disk) | 0.5 M☉/L☉ | Fixed | Lelli et al. 2016 standard |
+| M/L (bulge) | 0.7 M☉/L☉ | Fixed | Lelli et al. 2016 standard |
+
+- $D = 0$ for disk-dominated systems, $D = 1$ for dispersion-dominated systems
 
 For disk galaxies ($D=0$): $A = 1.173$
 
 For clusters ($D=1$, $L \approx 600$ kpc): $A \approx 8.45$
 
-This unifies the galaxy and cluster regimes through a single principled relationship based on system dimensionality and path length through baryons (Fig. 3).
+**Note:** $L_0$ and $n$ were calibrated using the 42 Fox et al. clusters; SPARC galaxies provide independent validation. All other parameters are either derived from first principles or fixed from literature values. No per-galaxy or per-cluster fitting is performed (Fig. 3).
 
 ![Figure 3: Unified amplitude](figures/amplitude_comparison.png)
 
-*FIG. 3. Amplitude versus path length through baryons for 163 SPARC disk galaxies (green), 873 MaNGA ellipticals (orange), and 44 Fox et al. clusters (red). Blue line: Σ-Gravity prediction A = A₀(L/L₀)^0.27. Red dashed: MOND (scale-independent, A ≈ 1). Gray dotted: GR without dark matter (A = 0). MOND works for galaxies but fails for clusters by ~10×. Σ-Gravity's path-length-dependent amplitude unifies all system types from sub-kpc disks to Mpc-scale clusters.*
+*FIG. 3. Amplitude versus path length through baryons for 163 SPARC disk galaxies (green), 873 MaNGA ellipticals (orange), and 42 Fox et al. clusters (red). Blue line: Σ-Gravity prediction A = A₀(L/L₀)^0.27. Red dashed: MOND (scale-independent, A ≈ 1). Gray dotted: GR without dark matter (A = 0). MOND works for galaxies but fails for clusters by ~10×. Σ-Gravity's path-length-dependent amplitude connects galaxy and cluster regimes through a principled relationship.*
 
 ### F. Solar System Constraints
 
@@ -162,13 +172,13 @@ In compact systems, two suppression mechanisms combine:
 1. **High acceleration:** When $g_N \gg g^\dagger$, $h(g_N) \to 0$
 2. **Low coherence:** When $r \ll \xi$, $\mathcal{C} \to 0$
 
-At Saturn's orbit ($r \approx 9.5$ AU), $g_N \approx 6.4 \times 10^{-4}$ m/s², giving $h(g_N) \approx 4 \times 10^{-4}$. Combined with $\mathcal{C} \ll 1$ for the Solar System, the total enhancement is $\Sigma - 1 < 10^{-8}$.
+At Saturn's orbit ($r \approx 9.5$ AU = 1.42×10¹² m), the Newtonian acceleration is $g_N = GM_\odot/r^2 \approx 6.5 \times 10^{-6}$ m/s², giving $h(g_N) \approx 1.2 \times 10^{-3}$. However, the Solar System lacks extended coherent rotation, so $\mathcal{C} \approx 0$ (no disk-like velocity field). With $\mathcal{C} \to 0$, the enhancement $\Sigma - 1 \to 0$ regardless of $h(g_N)$.
 
-This implies $|\gamma - 1| \sim 10^{-9}$, well within the Cassini bound of $|\gamma - 1| < 2.3 \times 10^{-5}$ [13] (Fig. 4).
+For the Sun treated as a compact source, $\xi \to 0$ (no extended disk), so $W(r) = r/(\xi + r) \to 1$. But without coherent rotation ($\mathcal{C} = 0$), the enhancement vanishes. This satisfies the Cassini bound $|\gamma - 1| < 2.3 \times 10^{-5}$ [13] (Fig. 4).
 
 ![Figure 4: Solar System safety](figures/solar_system_safety.png)
 
-*FIG. 4. Enhancement (Σ − 1) as a function of distance from the Sun. Blue line: Σ-Gravity prediction. Red/orange dashed: observational bounds (Cassini PPN, planetary ephemeris). The predicted enhancement is < 10⁻¹⁴ throughout the Solar System—including at Voyager 1 (160 AU)—far below any detection threshold. The coherence mechanism automatically suppresses modification in compact, high-acceleration systems.*
+*FIG. 4. Enhancement (Σ − 1) as a function of distance from the Sun. Blue line: Σ-Gravity prediction showing suppression due to high acceleration and lack of coherent rotation. Red/orange dashed: observational bounds (Cassini PPN, planetary ephemeris). The coherence mechanism automatically suppresses modification in compact, high-acceleration systems without extended coherent rotation.*
 
 ### G. Conservation and Equivalence Principle
 
@@ -201,7 +211,11 @@ We use the Eilers et al. (2019) rotation curve [16]: 28,368 red giant stars with
 
 ### C. Galaxy Cluster Sample
 
-We use 42 strong-lensing clusters from Fox et al. (2022) [17] with Einstein radii and spectroscopic redshifts. Lensing masses are derived from the critical surface density at the Einstein radius.
+We use 42 strong-lensing clusters from Fox et al. (2022) [17] with Einstein radii and spectroscopic redshifts. Selection criteria: spectroscopic redshift confirmation and $M_{500} > 2 \times 10^{14} M_\odot$.
+
+**Baryonic mass estimate:** $M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$, where $f_{\rm baryon} = 0.15$ (cosmic baryon fraction). The factor 0.4 accounts for concentration within 200 kpc.
+
+**Lensing assumption:** We assume the enhanced potential $\Phi$ governs both dynamics and light deflection. This is equivalent to assuming $\Phi = \Psi$ (no gravitational slip) in the weak-field limit. A rigorous relativistic derivation is deferred to future work; the cluster predictions should be understood as conditional on this assumption.
 
 ### D. MOND Comparison
 
@@ -287,7 +301,7 @@ This cross-domain consistency, achieved without per-system fitting, supports the
 
 The coherence scalar $\mathcal{C}$ depends on net ordered motion. Counter-rotating populations increase effective dispersion, reducing $\mathcal{C}$ and hence $\Sigma$.
 
-*Observational test:* MaNGA DynPop survey data confirms this prediction. Counter-rotating galaxies show 44% lower inferred dark matter fractions than normal galaxies (p < 0.01) [18] (Fig. 9).
+*Observational test:* Analysis of MaNGA DynPop survey data [18] cross-matched with the Bevacqua et al. counter-rotating galaxy catalog [20] shows this prediction is consistent with observations. Counter-rotating galaxies show 44% lower inferred dark matter fractions than normal galaxies (p < 0.01) (Fig. 9).
 
 ![Figure 9: Counter-rotation effect](figures/counter_rotation_effect.png)
 
@@ -303,7 +317,7 @@ Elliptical galaxies and galaxy clusters have $\sigma \gg v_{\rm rot}$, reducing 
 
 If $g^\dagger \propto H(z)$, enhancement is suppressed at high redshift.
 
-*Observational status:* KMOS³D observations of $z \sim 1$–2 galaxies show reduced dark matter fractions compared to local galaxies, consistent with this prediction [19].
+*Observational status:* Genzel et al. [19] report that massive star-forming galaxies at $z \sim 1$–2 are "strongly baryon-dominated," with dark matter fractions significantly lower than local galaxies. This is qualitatively consistent with Σ-Gravity's prediction of reduced enhancement at high redshift, though a quantitative comparison requires careful treatment of selection effects and baryonic physics.
 
 ### B. Comparison with MOND
 
@@ -375,7 +389,7 @@ We thank Emmanuel N. Saridakis (National Observatory of Athens) for detailed fee
 
 [8] R. H. Sanders and S. S. McGaugh, Annu. Rev. Astron. Astrophys. **40**, 263 (2002).
 
-[9] M. Milgrom, Phys. Rev. D **82**, 043523 (2010).
+[9] M. Milgrom, Mon. Not. R. Astron. Soc. **403**, 886 (2010). [QUMOND formulation]
 
 [10] R. Ferraro and F. Fiorini, Phys. Rev. D **75**, 084031 (2007).
 
@@ -393,9 +407,11 @@ We thank Emmanuel N. Saridakis (National Observatory of Athens) for detailed fee
 
 [17] C. Fox, G. Mahler, K. Sharon, and J. D. Remolina González, Astrophys. J. **928**, 87 (2022).
 
-[18] MaNGA DynPop Collaboration (2023), private communication.
+[18] L. Zhu et al. (MaNGA DynPop), Mon. Not. R. Astron. Soc. **522**, 6326 (2023).
 
-[19] KMOS³D Collaboration, Astrophys. J. (2020).
+[19] R. Genzel et al., Nature **543**, 397 (2017). [High-z baryon-dominated galaxies]
+
+[20] D. Bevacqua et al., Mon. Not. R. Astron. Soc. **511**, 139 (2022). [Counter-rotating galaxies]
 
 ---
 
