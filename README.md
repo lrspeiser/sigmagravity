@@ -1,5 +1,7 @@
 # Σ-Gravity: Coherence-Dependent Gravitational Enhancement in Galaxies and Clusters
 
+**Pre-print**
+
 **Leonard Speiser**<sup>1,*</sup>
 
 <sup>1</sup>Horizon 3, Independent Research
