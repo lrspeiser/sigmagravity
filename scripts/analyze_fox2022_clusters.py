@@ -278,10 +278,12 @@ ax.axvline(x=mean_log_ratio, color='coral', linestyle='-', lw=2, label=f'Mean = 
 
 ax.set_xlabel(r'$\log_{10}$(M$_\Sigma$ / MSL)')
 ax.set_ylabel('Count')
-ax.set_title(f'Distribution (scatter = {scatter_dex:.2f} dex)')
+ax.set_title(f'Distribution (scatter = {scatter_dex:.3f} dex)')
 ax.grid(True, alpha=0.3)
 ax.legend()
 
+plt.suptitle('Σ-Gravity Cluster Validation: 42 Fox et al. (2022) Strong-Lensing Clusters', 
+             fontsize=12, fontweight='bold', y=1.02)
 plt.tight_layout()
 
 # Save figure
@@ -308,8 +310,9 @@ Median ratio: {median_ratio:.2f}
 Scatter: {scatter_dex:.2f} dex
 
 Σ-Gravity successfully predicts cluster lensing masses at 200 kpc
-using only baryonic mass estimates and the derived formula
-(A = π√2, g† = cH₀/2e).
+using only baryonic mass estimates and the unified formula:
+  A_cluster = A₀ × (L/L₀)^n ≈ {A_cluster:.2f}
+  g† = cH₀/(4√π) ≈ {g_dagger:.2e} m/s²
 """)
 elif 0.5 < median_ratio < 2.0:
     print(f"""
