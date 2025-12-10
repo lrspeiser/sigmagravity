@@ -133,7 +133,7 @@ When $v_{\rm rot} \gg \sigma$, $\mathcal{C} \to 1$ (full coherence); when $v_{\r
 \end{equation}
 where $\omega^2$ is the vorticity scalar and $\theta$ is the expansion. In the non-relativistic limit for disk galaxies, this reduces to the kinematic form above.
 
-\textbf{Implementation:} Since $\mathcal{C}$ depends on $v_{\rm rot}$ (which depends on $\Sigma$), the prediction requires fixed-point iteration:
+\textbf{Implementation:} Since $\mathcal{C}$ depends on $v_{\rm rot}$ (which depends on $\Sigma$), the prediction requires fixed-point iteration using the \textit{predicted} velocity $V_{\rm pred}$, not the observed velocity (avoiding data leakage):
 \begin{enumerate}
 \item Initialize $V = V_{\rm bar}$
 \item Compute $\mathcal{C} = V^2/(V^2 + \sigma^2)$ using predicted $V$
@@ -142,7 +142,7 @@ where $\omega^2$ is the vorticity scalar and $\theta$ is the expansion. In the n
 \item Repeat until convergence (typically 3--5 iterations)
 \end{enumerate}
 
-\textbf{Practical approximation:} For disk galaxies, the orbit-averaged coherence is well-approximated by $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This gives identical results (validated on 171 SPARC galaxies) and requires no iteration (Fig.~\ref{fig:coherence}).
+\textbf{Practical approximation:} For disk galaxies, the orbit-averaged coherence is well-approximated by $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This closed-form expression gives identical results to the iterative procedure (validated on 171 SPARC galaxies, see SI \S13.5) and is used for all galaxy predictions (Fig.~\ref{fig:coherence}).
 
 \begin{figure}[htbp]
 \centering
@@ -283,7 +283,11 @@ We use 42 strong-lensing clusters from Fox et al. (2022) \cite{Fox2022} with spe
 
 \textbf{Baryonic mass estimate:} $M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$, where $f_{\rm baryon} = 0.15$ (cosmic baryon fraction). The factor 0.4 accounts for concentration within 200 kpc.
 
-\textbf{Lensing assumption:} We assume the enhanced potential $\Phi$ governs both dynamics and light deflection ($\Phi = \Psi$ in the weak-field limit). A rigorous relativistic derivation is deferred to future work.
+\textbf{Lensing mapping:} We assume the enhanced potential governs both dynamics and light deflection. In the weak-field limit with gravitational slip parameter $\eta \equiv \Psi/\Phi$, the lensing-to-dynamics mass ratio is:
+\begin{equation}
+\frac{M_{\rm lens}}{M_{\rm dyn}} = \frac{\Phi + \Psi}{2\Phi} = \frac{1 + \eta}{2}
+\end{equation}
+For $\eta = 1$ (no slip, as in GR), lensing and dynamics probe the same mass. We adopt $\eta = 1$; a rigorous relativistic derivation is deferred to future work.
 
 \subsection{MOND Comparison}
 
@@ -483,9 +487,9 @@ We have presented $\Sigma$-Gravity, a phenomenological framework where gravitati
 The unified amplitude formula connects galaxies and clusters through a single principled relationship. While lacking rigorous first-principles derivation, $\Sigma$-Gravity demonstrates that coherence-dependent enhancement is phenomenologically viable and observationally testable.
 
 %=============================================================================
-\section*{Data Availability}
+\section*{Data and Code Availability}
 
-The data and code supporting this study are openly available at \url{https://github.com/lrspeiser/SigmaGravity}. This repository includes SPARC, Milky Way, and cluster analysis scripts, configuration files, and instructions to reproduce all figures and numerical results.
+The data and code supporting this study are openly available at \url{https://github.com/lrspeiser/SigmaGravity}. The master regression script \texttt{derivations/full\_regression\_test.py} reproduces all numerical results using the canonical parameters defined in SI \S2. The repository includes SPARC rotation curve analysis, cluster lensing predictions, Milky Way validation, and figure generation scripts.
 
 %=============================================================================
 \begin{acknowledgments}

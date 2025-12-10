@@ -93,14 +93,14 @@ $$\mathcal{C} = \frac{\omega^2}{\omega^2 + 4\pi G\rho + \theta^2 + H_0^2}$$
 
 where $\omega^2$ is the vorticity scalar and $\theta$ is the expansion. In the non-relativistic limit for disk galaxies, this reduces to the kinematic form above.
 
-**Implementation:** Since $\mathcal{C}$ depends on $v_{\rm rot}$ (which depends on $\Sigma$), the prediction requires fixed-point iteration:
+**Implementation:** Since $\mathcal{C}$ depends on $v_{\rm rot}$ (which depends on $\Sigma$), the prediction requires fixed-point iteration using the *predicted* velocity $V_{\rm pred}$, not the observed velocity (avoiding data leakage):
 1. Initialize $V = V_{\rm bar}$
 2. Compute $\mathcal{C} = V^2/(V^2 + \sigma^2)$ using predicted $V$
 3. Compute $\Sigma = 1 + A \cdot \mathcal{C} \cdot h(g_N)$
 4. Update $V_{\rm new} = V_{\rm bar} \sqrt{\Sigma}$
 5. Repeat until convergence (typically 3–5 iterations)
 
-**Practical approximation:** For disk galaxies, the orbit-averaged coherence is well-approximated by $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This gives identical results (validated on 171 SPARC galaxies) and requires no iteration (Fig. 1).
+**Practical approximation:** For disk galaxies, the orbit-averaged coherence is well-approximated by $W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This closed-form expression gives identical results to the iterative procedure (validated on 171 SPARC galaxies, see SI §13.5) and is used for all galaxy predictions (Fig. 1).
 
 ![Figure 1: Coherence window](figures/coherence_window.png)
 
@@ -201,9 +201,10 @@ We use the SPARC database [15]: 175 galaxies with Spitzer 3.6μm photometry and 
 **Prediction procedure:**
 1. Load rotation curve data ($R$, $V_{\rm obs}$, $V_{\rm err}$, $V_{\rm gas}$, $V_{\rm disk}$, $V_{\rm bul}$)
 2. Apply M/L scaling: $V_{\rm bar}^2 = V_{\rm gas}^2 + 0.5 \times V_{\rm disk}^2 + 0.7 \times V_{\rm bul}^2$
-3. Compute $g_N = V_{\rm bar}^2/R$ at each radius
-4. Apply enhancement: $\Sigma = 1 + A_0 \cdot \mathcal{C}(r) \cdot h(g_N)$
-5. Predict: $V_{\rm pred} = V_{\rm bar} \times \sqrt{\Sigma}$
+3. Estimate $R_d$ from the radius where $V_{\rm disk}$ peaks (robustness tested in SI §14)
+4. Compute $g_N = V_{\rm bar}^2/R$ at each radius
+5. Apply enhancement: $\Sigma = 1 + A_0 \cdot W(r) \cdot h(g_N)$ with $W(r) = r/(\xi + r)$, $\xi = R_d/(2\pi)$
+6. Predict: $V_{\rm pred} = V_{\rm bar} \times \sqrt{\Sigma}$
 
 ### B. Milky Way Sample
 
@@ -215,7 +216,11 @@ We use 42 strong-lensing clusters from Fox et al. (2022) [17] with Einstein radi
 
 **Baryonic mass estimate:** $M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$, where $f_{\rm baryon} = 0.15$ (cosmic baryon fraction). The factor 0.4 accounts for concentration within 200 kpc.
 
-**Lensing assumption:** We assume the enhanced potential $\Phi$ governs both dynamics and light deflection. This is equivalent to assuming $\Phi = \Psi$ (no gravitational slip) in the weak-field limit. A rigorous relativistic derivation is deferred to future work; the cluster predictions should be understood as conditional on this assumption.
+**Lensing mapping:** We assume the enhanced potential governs both dynamics and light deflection. In the weak-field limit with gravitational slip parameter $\eta \equiv \Psi/\Phi$, the lensing-to-dynamics mass ratio is:
+
+$$\frac{M_{\rm lens}}{M_{\rm dyn}} = \frac{\Phi + \Psi}{2\Phi} = \frac{1 + \eta}{2}$$
+
+For $\eta = 1$ (no slip, as in GR), lensing and dynamics probe the same mass. We adopt $\eta = 1$ for the cluster predictions; a rigorous relativistic derivation is deferred to future work. The cluster results should be understood as conditional on this assumption.
 
 ### D. MOND Comparison
 
@@ -359,9 +364,9 @@ The unified amplitude formula connects galaxies and clusters through a single pr
 
 ---
 
-## Data Availability
+## Data and Code Availability
 
-The data and code supporting this study are openly available at https://github.com/lrspeiser/SigmaGravity. This repository includes SPARC, Milky Way, and cluster analysis scripts, configuration files, and instructions to reproduce all figures and numerical results.
+The data and code supporting this study are openly available at https://github.com/lrspeiser/SigmaGravity. The master regression script `derivations/full_regression_test.py` reproduces all numerical results using the canonical parameters defined in SI §2. The repository includes SPARC rotation curve analysis, cluster lensing predictions, Milky Way validation, and figure generation scripts. All dependencies are standard Python packages (numpy, scipy, pandas, matplotlib, astropy).
 
 ---
 
