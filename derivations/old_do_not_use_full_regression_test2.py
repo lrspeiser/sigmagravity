@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
 """
-Σ-Gravity Full Regression Test Suite
+██████████████████████████████████████████████████████████████████████████████
+██  DO NOT USE - DEPRECATED                                                  ██
+██  Use scripts/run_regression_extended.py instead (17 tests)                ██
+██████████████████████████████████████████████████████████████████████████████
+
+This was an intermediate development version. The master regression test is:
+    scripts/run_regression_extended.py
+
+This file is kept for reference only.
+
+---
+
+Σ-Gravity Full Regression Test Suite (DEPRECATED)
 
 This script runs comprehensive regression tests across ALL validation domains
 to ensure the theory remains consistent when formulas are updated.
