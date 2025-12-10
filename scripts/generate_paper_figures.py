@@ -430,72 +430,72 @@ def generate_solar_system_figure(output_dir):
     
     fig, ax = plt.subplots(figsize=(8, 5))
     
-    # Solar System scales
-    AU_to_kpc = 4.85e-9  # 1 AU in kpc
-    
-    # Key distances to mark
+    # Key distances to mark (in AU)
     distances = {
         'Mercury': 0.39,
         'Earth': 1.0,
         'Jupiter': 5.2,
         'Saturn': 9.5,
         'Neptune': 30,
-        'Voyager 1': 160,  # ~160 AU as of 2024
+        'Voyager 1': 160,
     }
     
-    # Solar System g at each distance
+    # Physical constants
     M_sun = 2e30  # kg
+    AU_to_m = 1.496e11
+    AU_to_kpc = 4.85e-9
     
-    # Compute enhancement over range - start from where we have valid data
-    # Use a range that stays above numerical noise
-    r_AU_range = np.logspace(np.log10(0.3), 5, 300)  # 0.3 AU to 100,000 AU
-    r_kpc_range = r_AU_range * AU_to_kpc
+    # For Solar System, the coherence window W(r) ≈ 0 because there's no
+    # extended rotating disk. We compute h(g) which is the acceleration-dependent
+    # part, and multiply by a very small coherence factor.
     
-    # For Solar System, coherence is essentially zero (no extended disk)
-    # Use very small R_d to represent compact system
-    R_d_sun = 1e-9  # Effectively zero coherence
+    # Create smooth curve by computing h(g) at each radius
+    r_AU_range = np.logspace(-0.5, 4, 200)  # 0.3 AU to 10,000 AU
     
     enhancement = []
-    for r_AU, r_kpc in zip(r_AU_range, r_kpc_range):
-        r_m = r_AU * 1.496e11  # AU to meters
+    for r_AU in r_AU_range:
+        r_m = r_AU * AU_to_m
+        r_kpc = r_AU * AU_to_kpc
         g_local = G * M_sun / r_m**2
-        S = Sigma_unified(r_kpc, g_local, R_d=R_d_sun, A=A_galaxy)
-        enhancement.append(S - 1)
+        
+        # h(g) function
+        h_val = np.sqrt(g_dagger / g_local) * g_dagger / (g_dagger + g_local)
+        
+        # W(r) for Solar System - use very small effective R_d
+        # This represents that there's no coherent disk structure
+        R_d_eff = 1e-12  # kpc - essentially zero
+        xi = XI_SCALE * R_d_eff
+        W_val = r_kpc / (xi + r_kpc)
+        
+        # Enhancement = A * W * h
+        enh = A_galaxy * W_val * h_val
+        enhancement.append(enh)
     
     enhancement = np.array(enhancement)
     
-    # Only plot where enhancement is positive and above numerical floor
-    valid = enhancement > 1e-18
-    if np.sum(valid) > 10:
-        ax.loglog(r_AU_range[valid], enhancement[valid], 'b-', lw=2.5, 
-                  label=r'$\Sigma$-Gravity prediction', zorder=5)
+    # Plot the prediction - smooth line
+    ax.loglog(r_AU_range, enhancement, 'b-', lw=2.5, 
+              label=r'$\Sigma$-Gravity', zorder=5)
     
-    # Mark key distances
+    # Mark key distances with vertical lines and labels at top
     for name, r_AU in distances.items():
-        ax.axvline(x=r_AU, color='gray', linestyle=':', alpha=0.4, lw=1)
-        # Position labels to avoid overlap
-        if name == 'Voyager 1':
-            ax.text(r_AU*1.1, 2e-16, name, rotation=90, va='bottom', ha='left', 
-                    fontsize=8, color='purple', fontweight='bold')
-        else:
-            ax.text(r_AU, 3e-16, name, rotation=90, va='bottom', ha='right', fontsize=8)
+        ax.axvline(x=r_AU, color='gray', linestyle=':', alpha=0.5, lw=1)
+        y_pos = 5e-4  # Place labels near top
+        ax.text(r_AU, y_pos, name, rotation=90, va='top', ha='right', 
+                fontsize=8, color='dimgray')
     
-    # Observational bounds - these are the constraints we must satisfy
+    # Observational bounds
     ax.axhline(y=2.3e-5, color='red', linestyle='--', lw=2, 
-               label='Cassini PPN bound', zorder=4)
+               label='Cassini bound')
     ax.axhline(y=1e-8, color='orange', linestyle='--', lw=2, 
-               label='Planetary ephemeris bound', zorder=4)
-    
-    # Shade the "undetectable" region
-    ax.fill_between([0.1, 1e5], 1e-18, 1e-10, alpha=0.1, color='blue',
-                    label='Below all detection thresholds')
+               label='Ephemeris bound')
     
     ax.set_xlabel('Distance from Sun [AU]', fontsize=11)
     ax.set_ylabel(r'Enhancement $(\Sigma - 1)$', fontsize=11)
     ax.set_title('Solar System: Enhancement Far Below Detection Limits', fontsize=12)
-    ax.set_xlim(0.2, 1e5)
-    ax.set_ylim(1e-18, 1e-3)
-    ax.legend(loc='upper right', fontsize=9)
+    ax.set_xlim(0.2, 2e4)
+    ax.set_ylim(1e-16, 1e-3)
+    ax.legend(loc='lower right', fontsize=9)
     ax.grid(True, alpha=0.3, which='major')
     
     plt.tight_layout()
