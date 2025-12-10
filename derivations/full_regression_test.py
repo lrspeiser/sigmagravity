@@ -256,11 +256,11 @@ MODEL_CONFIGS = {
 }
 
 # Current active configuration
-# "canonical" = first-principles derived parameters from README
-# "unified_3d" = same parameters but with unified amplitude formula (no D switch)
-# Both give IDENTICAL results - unified_3d just avoids the D=0/1 switch
+# "unified_3d" = unified amplitude formula A(L) = A₀ × (L/L₀)^n (no D switch)
+# "canonical" = equivalent but uses D=0/1 switch (deprecated)
+# Both give IDENTICAL results - unified_3d is the preferred formulation
 # A₀ = e^(1/2π) ≈ 1.173, ξ = R_d/(2π), g† = cH₀/(4√π)
-ACTIVE_CONFIG = "canonical"
+ACTIVE_CONFIG = "unified_3d"
 
 # Get active parameters
 _cfg = MODEL_CONFIGS[ACTIVE_CONFIG]

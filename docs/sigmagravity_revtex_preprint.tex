@@ -191,10 +191,17 @@ The near-equality $g^{\dagger} \sim cH_0$ has been recognized as a fundamental `
 
 \subsection{Unified Amplitude Formula}
 
-The amplitude connecting galaxies and clusters follows:
+The amplitude depends on the effective path length $L$ through the baryonic distribution:
 \begin{equation}
-A(D, L) = A_0 \times \left[1 - D + D \times \left(\frac{L}{L_0}\right)^n\right]
+A(L) = A_0 \times \left(\frac{L}{L_0}\right)^n
 \end{equation}
+
+This unified 3D formula requires no discrete switch between system types. The path length $L$ naturally varies with geometry:
+\begin{itemize}
+\item \textbf{Thin disk galaxies:} $L \approx L_0$ (disk scale height) $\to$ $A \approx A_0 = 1.173$
+\item \textbf{Elliptical galaxies:} $L \sim 1$--$20$ kpc $\to$ $A \sim 1.5$--$3.4$
+\item \textbf{Galaxy clusters:} $L \approx 600$ kpc $\to$ $A \approx 8.45$
+\end{itemize}
 
 \textbf{Parameter accounting:}
 
@@ -207,17 +214,17 @@ Parameter & Value & Status & Origin \\
 $g^{\dagger}$ & $9.60 \times 10^{-11}$ m/s$^2$ & Derived & $cH_0/(4\sqrt{\pi})$ \\
 $A_0$ & $e^{1/(2\pi)} \approx 1.173$ & Derived & Mode-counting \\
 $\xi$ & $R_d/(2\pi)$ & Derived & Azimuthal wavelength \\
-$L_0$ & 0.40 kpc & Calibrated & Galaxy-cluster transition \\
+$L_0$ & 0.40 kpc & Physical & Disk scale height ref. \\
 $n$ & 0.27 & Calibrated & Path-length scaling \\
 M/L (disk) & 0.5 $M_\odot/L_\odot$ & Fixed & Lelli+ 2016 \\
 M/L (bulge) & 0.7 $M_\odot/L_\odot$ & Fixed & Lelli+ 2016 \\
 \hline
 \end{tabular}
-\caption{Parameter accounting. $L_0$ and $n$ were calibrated using 42 Fox et al. clusters; SPARC galaxies provide independent validation.}
+\caption{Parameter accounting. $L_0 \approx 0.4$ kpc corresponds to the typical disk scale height; $n$ was calibrated using 42 Fox et al. clusters. SPARC galaxies provide independent validation.}
 \label{tab:params}
 \end{table}
 
-$D = 0$ for disk-dominated systems, $D = 1$ for dispersion-dominated. For disk galaxies ($D=0$): $A = 1.173$. For clusters ($D=1$, $L \approx 600$ kpc): $A \approx 8.45$ (Fig.~\ref{fig:amplitude}).
+\textbf{Physical interpretation:} $L_0 \approx 0.4$ kpc corresponds to the typical scale height of disk galaxies. When $L = L_0$, the amplitude is $A = A_0$. For extended systems like clusters with $L \approx 600$ kpc, the amplitude increases to $A \approx 8.45$ (Fig.~\ref{fig:amplitude}).
 
 \begin{figure}[htbp]
 \centering

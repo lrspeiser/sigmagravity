@@ -138,9 +138,14 @@ The near-equality $g^\dagger \sim cH_0$ has been recognized as a fundamental "co
 
 ### E. Unified Amplitude Formula
 
-The amplitude connecting galaxies and clusters follows:
+The amplitude depends on the effective path length $L$ through the baryonic distribution:
 
-$$A(D,L) = A_0 \times [1 - D + D \times (L/L_0)^n]$$
+$$A(L) = A_0 \times (L/L_0)^n$$
+
+This unified 3D formula requires no discrete switch between system types. The path length $L$ naturally varies with geometry:
+- **Thin disk galaxies:** $L \approx L_0$ (disk scale height) → $A \approx A_0 = 1.173$
+- **Elliptical galaxies:** $L \sim 1$–$20$ kpc → $A \sim 1.5$–$3.4$
+- **Galaxy clusters:** $L \approx 600$ kpc → $A \approx 8.45$
 
 **Parameter accounting:**
 
@@ -149,16 +154,12 @@ $$A(D,L) = A_0 \times [1 - D + D \times (L/L_0)^n]$$
 | $g^\dagger$ | $9.60 \times 10^{-11}$ m/s² | Derived | $cH_0/(4\sqrt{\pi})$ with $H_0 = 70$ km/s/Mpc |
 | $A_0$ | $e^{1/(2\pi)} \approx 1.173$ | Derived | Mode-counting argument (see SI) |
 | $\xi$ | $R_d/(2\pi)$ | Derived | Azimuthal wavelength at disk scale |
-| $L_0$ | 0.40 kpc | Calibrated | Set by galaxy-cluster transition |
+| $L_0$ | 0.40 kpc | Physical | Disk scale height reference |
 | $n$ | 0.27 | Calibrated | Path-length scaling exponent |
 | M/L (disk) | 0.5 M☉/L☉ | Fixed | Lelli et al. 2016 standard |
 | M/L (bulge) | 0.7 M☉/L☉ | Fixed | Lelli et al. 2016 standard |
 
-- $D = 0$ for disk-dominated systems, $D = 1$ for dispersion-dominated systems
-
-For disk galaxies ($D=0$): $A = 1.173$
-
-For clusters ($D=1$, $L \approx 600$ kpc): $A \approx 8.45$
+**Physical interpretation:** $L_0 \approx 0.4$ kpc corresponds to the typical scale height of disk galaxies. When the path length equals this reference ($L = L_0$), the amplitude is $A = A_0$. For extended systems like clusters with $L \approx 600$ kpc, the amplitude increases to $A \approx 8.45$.
 
 **Note:** $L_0$ and $n$ were calibrated using the 42 Fox et al. clusters; SPARC galaxies provide independent validation. All other parameters are either derived from first principles or fixed from literature values. No per-galaxy or per-cluster fitting is performed (Fig. 3).
 

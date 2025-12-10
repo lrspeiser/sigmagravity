@@ -66,24 +66,29 @@ where $\mathcal{C}$ is the **covariant coherence scalar** (primary formulation).
 | **C** | $v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$ | Covariant coherence scalar (primary) |
 | **h(g_N)** | $\sqrt{g^\dagger/g_N} \times g^\dagger/(g^\dagger + g_N)$ | Acceleration function |
 | **g†** | $cH_0/(4\sqrt{\pi}) \approx 9.60 \times 10^{-11}$ m/s² | Critical acceleration |
-| **A(D,L)** | $A_0 \times [1 - D + D \times (L/L_0)^n]$ | Unified amplitude |
+| **A(L)** | $A_0 \times (L/L_0)^n$ | Unified 3D amplitude |
 
 **Practical approximation:** For disk galaxies, $\mathcal{C} \approx W(r) = r/(\xi + r)$ with $\xi = R_d/(2\pi)$. This gives identical results and requires no iteration (see SI §13.5).
 
 ### Unified Amplitude Formula
 
-$$\boxed{A(D,L) = A_0 \times [1 - D + D \times (L/L_0)^n]}$$
+$$\boxed{A(L) = A_0 \times (L/L_0)^n}$$
+
+This unified 3D formula requires no discrete switch between system types. The path length $L$ naturally varies with geometry:
 
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | **A₀** | $e^{1/(2\pi)} \approx 1.173$ | Base amplitude |
-| **L₀** | 0.40 kpc | Reference path length |
+| **L₀** | 0.40 kpc | Reference path length (≈ disk scale height) |
 | **n** | 0.27 | Path length exponent |
-| **D** | 0 (galaxy) or 1 (cluster) | Dimensionality factor |
+| **L** | Varies by system | Effective path through baryons |
 
 **Amplitude values:**
-- Disk galaxies (D=0): A = A₀ = 1.173
-- Galaxy clusters (D=1, L≈600 kpc): A = A₀ × (600/0.4)^0.27 ≈ 8.45
+- Thin disk galaxies (L ≈ L₀ = 0.4 kpc): A = A₀ = 1.173
+- Elliptical galaxies (L ~ 1–20 kpc): A ~ 1.5–3.4
+- Galaxy clusters (L ≈ 600 kpc): A = A₀ × (600/0.4)^0.27 ≈ 8.45
+
+**Physical interpretation:** $L_0 \approx 0.4$ kpc corresponds to the typical scale height of disk galaxies. When the path length equals this reference ($L = L_0$), the amplitude is $A = A_0$. For extended systems, the amplitude scales as a power law with exponent $n = 0.27$.
 
 ### Rotation Curve Prediction
 
@@ -335,17 +340,22 @@ def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
     return r / (xi + r)
 ```
 
-3. **Change the unified amplitude A(D,L):**
+3. **Change the unified amplitude A(L):**
 ```python
-def unified_amplitude(D: float, L: float) -> float:
-    """Unified amplitude: A = A₀ × [1 - D + D × (L/L₀)^n]"""
-    return A_0 * (1 - D + D * (L / L_0)**N_EXP)
+def unified_amplitude(L: float) -> float:
+    """Unified 3D amplitude: A = A₀ × (L/L₀)^n
+    
+    No D switch needed - path length L determines amplitude:
+    - Disk galaxies: L ≈ L₀ = 0.4 kpc → A ≈ A₀
+    - Clusters: L ≈ 600 kpc → A ≈ 8.45
+    """
+    return A_0 * (L / L_0)**N_EXP
 ```
 
 4. **Change the full enhancement Σ:**
 ```python
-def sigma_enhancement(g, r=None, xi=1.0, A=None, D=0, L=1.0):
-    """Σ = 1 + A(D,L) × W(r) × h(g)"""
+def sigma_enhancement(g, r=None, xi=1.0, A=None, L=0.4):
+    """Σ = 1 + A(L) × W(r) × h(g)"""
     # ... implementation
 ```
 
@@ -425,9 +435,9 @@ For all MOND comparisons:
 
 ### Cluster Amplitude
 
-Using the unified amplitude formula with D=1 and L=600 kpc:
+Using the unified amplitude formula with L = 600 kpc (typical cluster path length):
 
-$$A_{\rm cluster} = A_0 \times (600/0.4)^{0.27} = 1.173 \times 8.45 \approx 8.45$$
+$$A_{\rm cluster} = A_0 \times (L/L_0)^n = 1.173 \times (600/0.4)^{0.27} \approx 8.45$$
 
 ---
 

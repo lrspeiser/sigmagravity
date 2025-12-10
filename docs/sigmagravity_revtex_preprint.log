@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  10 DEC 2025 09:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  10 DEC 2025 10:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -580,7 +580,7 @@ s been already used, duplicate ignored
 l.187 \end{equation}
                      <../figures/coherence_window.png> <../figures/h_function_c
 omparison.png>]
-Overfull \hbox (103.8178pt too wide) in paragraph at lines 203--216
+Overfull \hbox (90.78415pt too wide) in paragraph at lines 210--223
  []$[]$ 
  []
 
@@ -588,10 +588,10 @@ Overfull \hbox (103.8178pt too wide) in paragraph at lines 203--216
 File: ../figures/amplitude_comparison.png Graphic file (type png)
 <use ../figures/amplitude_comparison.png>
 Package pdftex.def Info: ../figures/amplitude_comparison.png  used on input lin
-e 224.
+e 231.
 (pdftex.def)             Requested size: 229.0pt x 159.60585pt.
 
-Underfull \hbox (badness 2486) in paragraph at lines 231--232
+Underfull \hbox (badness 2486) in paragraph at lines 238--239
 []\OT1/cmr/m/n/12 In com-pact sys-tems, two sup-pres-sion
  []
 
@@ -600,141 +600,130 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.238 
-      
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
-s been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.238 
-       <../figures/amplitude_comparison.png>]
-<../figures/solar_system_safety.png, id=253, 570.933pt x 353.8821pt>
-File: ../figures/solar_system_safety.png Graphic file (type png)
-<use ../figures/solar_system_safety.png>
-Package pdftex.def Info: ../figures/solar_system_safety.png  used on input line
- 243.
-(pdftex.def)             Requested size: 229.0pt x 141.9391pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 248--248
-[] []\OT1/cmr/bx/n/10.95 G. Con-ser-va-tion and Equiv-a-lence
- []
-
-
-Underfull \hbox (badness 1502) in paragraph at lines 250--251
-\OT1/cmr/m/n/12 QUMOND-like for-mu-la-tion, the phan-tom
- []
-
-
-Underfull \hbox (badness 1648) in paragraph at lines 265--266
-[]\OT1/cmr/bx/n/12 Mass-to-light ra-tios: \OT1/cmr/m/n/12 Fol-low-ing the
- []
-
-[7
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
-s been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.274 \item P
-             redict: $V_{\rm pred} = V_{\rm bar} \times \sqrt{\Sigma}$ <../figu
-res/solar_system_safety.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 285--286
-[]\OT1/cmr/bx/n/12 Baryonic mass es-ti-mate:
- []
-
-
-Overfull \hbox (19.99196pt too wide) in paragraph at lines 310--320
- []$[]$ 
- []
-
-
-Underfull \hbox (badness 1082) in paragraph at lines 320--320
-[]\OT1/cmr/m/n/10.95 TABLE II. []Performance com-par-i-son on 171
- []
-
-<../figures/rar_derived_formula.png, id=275, 426.393pt x 354.123pt>
-File: ../figures/rar_derived_formula.png Graphic file (type png)
-<use ../figures/rar_derived_formula.png>
-Package pdftex.def Info: ../figures/rar_derived_formula.png  used on input line
- 330.
-(pdftex.def)             Requested size: 229.0pt x 190.1861pt.
-
-Underfull \hbox (badness 1122) in paragraph at lines 331--331
-\OT1/cmr/m/n/10.95 onic ac-cel-er-a-tion ($\OML/cmm/m/it/10.95 g[]$ \OT1/cmr/m/
-n/10.95 from vis-i-ble mat-ter).
- []
-
-[8
-pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has
- been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.336 
+l.245 
       ]
 
-LaTeX Warning: A float is stuck (cannot be placed) on input line 336.
+LaTeX Warning: A float is stuck (cannot be placed) on input line 245.
 
 
-LaTeX Warning: A float is stuck (cannot be placed) on input line 336.
+LaTeX Warning: A float is stuck (cannot be placed) on input line 245.
 
 
 Class revtex4-2 Warning: Deferred float stuck during \clearpage processing.
 
-<../figures/rc_gallery_derived.png, id=289, 860.013pt x 570.2103pt>
+<../figures/solar_system_safety.png, id=252, 570.933pt x 353.8821pt>
+File: ../figures/solar_system_safety.png Graphic file (type png)
+<use ../figures/solar_system_safety.png>
+Package pdftex.def Info: ../figures/solar_system_safety.png  used on input line
+ 250.
+(pdftex.def)             Requested size: 229.0pt x 141.9391pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 255--255
+[] []\OT1/cmr/bx/n/10.95 G. Con-ser-va-tion and Equiv-a-lence
+ []
+
+
+Underfull \hbox (badness 1502) in paragraph at lines 257--258
+\OT1/cmr/m/n/12 QUMOND-like for-mu-la-tion, the phan-tom
+ []
+
+[7
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.271 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.271 
+       <../figures/amplitude_comparison.png> <../figures/solar_system_safety.pn
+g>]
+Underfull \hbox (badness 1648) in paragraph at lines 272--273
+[]\OT1/cmr/bx/n/12 Mass-to-light ra-tios: \OT1/cmr/m/n/12 Fol-low-ing the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--293
+[]\OT1/cmr/bx/n/12 Baryonic mass es-ti-mate:
+ []
+
+
+Overfull \hbox (19.99196pt too wide) in paragraph at lines 317--327
+ []$[]$ 
+ []
+
+
+Underfull \hbox (badness 1082) in paragraph at lines 327--327
+[]\OT1/cmr/m/n/10.95 TABLE II. []Performance com-par-i-son on 171
+ []
+
+[8]
+<../figures/rar_derived_formula.png, id=285, 426.393pt x 354.123pt>
+File: ../figures/rar_derived_formula.png Graphic file (type png)
+<use ../figures/rar_derived_formula.png>
+Package pdftex.def Info: ../figures/rar_derived_formula.png  used on input line
+ 337.
+(pdftex.def)             Requested size: 229.0pt x 190.1861pt.
+
+Underfull \hbox (badness 1122) in paragraph at lines 338--338
+\OT1/cmr/m/n/10.95 onic ac-cel-er-a-tion ($\OML/cmm/m/it/10.95 g[]$ \OT1/cmr/m/
+n/10.95 from vis-i-ble mat-ter).
+ []
+
+<../figures/rc_gallery_derived.png, id=287, 860.013pt x 570.2103pt>
 File: ../figures/rc_gallery_derived.png Graphic file (type png)
 <use ../figures/rc_gallery_derived.png>
 Package pdftex.def Info: ../figures/rc_gallery_derived.png  used on input line 
-339.
+346.
 (pdftex.def)             Requested size: 468.0pt x 310.29297pt.
-<../figures/mw_rotation_curve_derived.png, id=291, 642.9621pt x 426.393pt>
+<../figures/mw_rotation_curve_derived.png, id=289, 642.9621pt x 426.393pt>
 File: ../figures/mw_rotation_curve_derived.png Graphic file (type png)
 <use ../figures/mw_rotation_curve_derived.png>
 Package pdftex.def Info: ../figures/mw_rotation_curve_derived.png  used on inpu
-t line 366.
+t line 373.
 (pdftex.def)             Requested size: 229.0pt x 151.86179pt.
-<../figures/cluster_fox2022_validation.png, id=293, 1084.05pt x 361.35pt>
-File: ../figures/cluster_fox2022_validation.png Graphic file (type png)
-<use ../figures/cluster_fox2022_validation.png>
-Package pdftex.def Info: ../figures/cluster_fox2022_validation.png  used on inp
-ut line 392.
-(pdftex.def)             Requested size: 468.0pt x 156.00052pt.
-
-Underfull \hbox (badness 1308) in paragraph at lines 399--400
-[]\OT1/cmr/m/n/12 The same the-o-ret-i-cal framework---with
- []
-
-
-Underfull \hbox (badness 2980) in paragraph at lines 399--400
-\OT1/cmr/m/n/12 cluster-calibrated am-pli-tude parameters---
- []
-
-
-Underfull \hbox (badness 2189) in paragraph at lines 401--402
- []\OT1/cmr/m/n/12 Galaxy ro-ta-tion curves (RMS $\OMS/cmsy/m/n/12 ^^X$\OT1/cmr
-/m/n/12 18
- []
-
 [9
+pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has
+ been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.396 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.403 \item C
-             luster lensing masses (median ratio 0.99) --- calibration set
+l.396 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.403 \item C
-             luster lensing masses (median ratio 0.99) --- calibration set
-pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has
- been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.403 \item C
-             luster lensing masses (median ratio 0.99) --- calibration set <../
-figures/rar_derived_formula.png>]
-Underfull \hbox (badness 2050) in paragraph at lines 407--408
-\OT1/cmr/m/n/12 with-out per-system fit-ting, sup-ports the
+l.396 
+       <../figures/rar_derived_formula.png>]
+<../figures/cluster_fox2022_validation.png, id=301, 1084.05pt x 361.35pt>
+File: ../figures/cluster_fox2022_validation.png Graphic file (type png)
+<use ../figures/cluster_fox2022_validation.png>
+Package pdftex.def Info: ../figures/cluster_fox2022_validation.png  used on inp
+ut line 399.
+(pdftex.def)             Requested size: 468.0pt x 156.00052pt.
+
+Underfull \hbox (badness 1308) in paragraph at lines 406--407
+[]\OT1/cmr/m/n/12 The same the-o-ret-i-cal framework---with
+ []
+
+
+Underfull \hbox (badness 2980) in paragraph at lines 406--407
+\OT1/cmr/m/n/12 cluster-calibrated am-pli-tude parameters---
+ []
+
+
+Underfull \hbox (badness 2189) in paragraph at lines 408--409
+ []\OT1/cmr/m/n/12 Galaxy ro-ta-tion curves (RMS $\OMS/cmsy/m/n/12 ^^X$\OT1/cmr
+/m/n/12 18
  []
 
 [10
@@ -742,62 +731,59 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.423 
-       <../figures/rc_gallery_derived.png>]
+l.411 \item S
+             olar System constraints ($|\gamma-1| \sim 10^{-9}$)
+pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has
+ been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.411 \item S
+             olar System constraints ($|\gamma-1| \sim 10^{-9}$) <../figures/rc
+_gallery_derived.png>]
 
-LaTeX Warning: A float is stuck (cannot be placed) on input line 423.
+LaTeX Warning: A float is stuck (cannot be placed) on input line 411.
 
 
-LaTeX Warning: A float is stuck (cannot be placed) on input line 423.
+LaTeX Warning: A float is stuck (cannot be placed) on input line 411.
 
 
 Class revtex4-2 Warning: Deferred float stuck during \clearpage processing.
+
+
+Underfull \hbox (badness 2050) in paragraph at lines 414--415
+\OT1/cmr/m/n/12 with-out per-system fit-ting, sup-ports the
+ []
 
 <../figures/counter_rotation_effect.png, id=312, 713.3049pt x 315.579pt>
 File: ../figures/counter_rotation_effect.png Graphic file (type png)
 <use ../figures/counter_rotation_effect.png>
 Package pdftex.def Info: ../figures/counter_rotation_effect.png  used on input 
-line 426.
+line 433.
 (pdftex.def)             Requested size: 229.0pt x 101.30997pt.
-
-Underfull \hbox (badness 4859) in paragraph at lines 453--454
- []\OT1/cmr/m/n/12 The mod-i-fied Pois-son equa-tion is
- []
-
-
-Underfull \hbox (badness 1052) in paragraph at lines 453--454
- \OT1/cmr/m/n/12 adopted as phe-nomeno-log-i-cal def-i-ni-
- []
-
-
-Underfull \hbox (badness 2012) in paragraph at lines 454--455
- \OT1/cmr/m/n/12 more rig-or-ous deriva-tion from first
- []
-
 [11
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.456 \end{itemize}
-                    <../figures/mw_rotation_curve_derived.png>]
-Underfull \hbox (badness 6252) in paragraph at lines 461--462
+l.453 
+       <../figures/mw_rotation_curve_derived.png>]
+Underfull \hbox (badness 4859) in paragraph at lines 460--461
+ []\OT1/cmr/m/n/12 The mod-i-fied Pois-son equa-tion is
+ []
+
+
+Underfull \hbox (badness 1052) in paragraph at lines 460--461
+ \OT1/cmr/m/n/12 adopted as phe-nomeno-log-i-cal def-i-ni-
+ []
+
+
+Underfull \hbox (badness 2012) in paragraph at lines 461--462
+ \OT1/cmr/m/n/12 more rig-or-ous deriva-tion from first
+ []
+
+
+Underfull \hbox (badness 6252) in paragraph at lines 468--469
  []\OT1/cmr/m/n/12 Structure for-ma-tion needs ex-plicit
- []
-
-
-Underfull \hbox (badness 1303) in paragraph at lines 479--480
-[]\OT1/cmr/m/n/12 We have pre-sented $^^F$-Gravity, a phe-
- []
-
-
-Underfull \hbox (badness 4621) in paragraph at lines 479--480
-\OT1/cmr/m/n/12 nomeno-log-i-cal frame-work where grav-i-ta-
- []
-
-
-Underfull \hbox (badness 4872) in paragraph at lines 482--483
- []\OT1/cmr/m/n/12 Reproduces galaxy ro-ta-tion curves
  []
 
 [12
@@ -805,51 +791,66 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.483 \item F
-             its cluster lensing masses where MOND fails (calibration set fo...
- <../figures/cluster_fox2022_validation.png>]
+l.474 \item H
+             igh-redshift predictions need larger samples <../figures/cluster_f
+ox2022_validation.png>]
 
-LaTeX Warning: A float is stuck (cannot be placed) on input line 483.
+LaTeX Warning: A float is stuck (cannot be placed) on input line 474.
 
 
-LaTeX Warning: A float is stuck (cannot be placed) on input line 483.
+LaTeX Warning: A float is stuck (cannot be placed) on input line 474.
 
 
 Class revtex4-2 Warning: Deferred float stuck during \clearpage processing.
 
 
-Underfull \hbox (badness 5091) in paragraph at lines 483--484
+Underfull \hbox (badness 1303) in paragraph at lines 486--487
+[]\OT1/cmr/m/n/12 We have pre-sented $^^F$-Gravity, a phe-
+ []
+
+
+Underfull \hbox (badness 4621) in paragraph at lines 486--487
+\OT1/cmr/m/n/12 nomeno-log-i-cal frame-work where grav-i-ta-
+ []
+
+
+Underfull \hbox (badness 4872) in paragraph at lines 489--490
+ []\OT1/cmr/m/n/12 Reproduces galaxy ro-ta-tion curves
+ []
+
+
+Underfull \hbox (badness 5091) in paragraph at lines 490--491
  []\OT1/cmr/m/n/12 Fits clus-ter lens-ing masses where
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--494
+Underfull \hbox (badness 10000) in paragraph at lines 500--501
 []\OT1/cmr/m/n/12 The data and code sup-port-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--494
+Underfull \hbox (badness 10000) in paragraph at lines 500--501
 \OT1/cmr/m/n/12 this study are openly avail-able at
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--494
+Underfull \hbox (badness 10000) in paragraph at lines 500--501
 []$\OT1/cmtt/m/n/12 https : / / github . com / lrspeiser /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--494
+Underfull \hbox (badness 10000) in paragraph at lines 500--501
 \OT1/cmtt/m/n/12 derivations/full[]regression[]test.py
  []
 
 
-Underfull \hbox (badness 3977) in paragraph at lines 493--494
+Underfull \hbox (badness 3977) in paragraph at lines 500--501
 \OT1/cmr/m/n/12 canon-i-cal pa-ram-e-ters de-fined in SI \TS1/cmr/m/n/12 §\OT1/
 cmr/m/n/12 2.
  []
 
 
-Underfull \hbox (badness 1661) in paragraph at lines 493--494
+Underfull \hbox (badness 1661) in paragraph at lines 500--501
 \OT1/cmr/m/n/12 The repos-i-tory in-cludes SPARC ro-ta-tion
  []
 
@@ -858,24 +859,24 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.498 \end{acknowledgments}
-                            <../figures/counter_rotation_effect.png>]
-Underfull \hbox (badness 3460) in paragraph at lines 531--532
+l.501 
+       <../figures/counter_rotation_effect.png>]
+Underfull \hbox (badness 3460) in paragraph at lines 538--539
  []\OT1/cmr/m/n/10.95 R. Fer-raro and F. Fior-ini, ``Mod-i-fied
  []
 
-
-Underfull \hbox (badness 2318) in paragraph at lines 546--547
+[14]
+Underfull \hbox (badness 2318) in paragraph at lines 553--554
  []\OT1/cmr/m/n/10.95 F. Lelli, S. S. Mc-Gaugh, and J. M.
  []
 
-[14]
-Underfull \hbox (badness 1484) in paragraph at lines 552--553
+
+Underfull \hbox (badness 1484) in paragraph at lines 559--560
  \OT1/cmr/m/n/10.95 ter Lenses: An Anal-y-sis of the Re-la-
  []
 
 
-Underfull \hbox (badness 6268) in paragraph at lines 558--559
+Underfull \hbox (badness 6268) in paragraph at lines 565--566
  []\OT1/cmr/m/n/10.95 R. Gen-zel et al., ``Strongly baryon-
  []
 
@@ -890,13 +891,13 @@ anged.
 (rerunfilecheck)             Checksum: 8AE02912BC2D05FAE013B0CE90C24538;6082.
  ) 
 Here is how much of TeX's memory you used:
- 12587 strings out of 474662
- 189794 string characters out of 5751110
- 606687 words of memory out of 5000000
- 35363 multiletter control sequences out of 15000+600000
+ 12588 strings out of 474662
+ 189805 string characters out of 5751110
+ 606738 words of memory out of 5000000
+ 35364 multiletter control sequences out of 15000+600000
  576841 words of font info for 102 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 75i,9n,79p,981b,646s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,981b,622s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/leonardspeiser/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/j
 knappen/ec/tcrm1200.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/ty
@@ -913,7 +914,7 @@ e/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
 live/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/
 texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/lo
 cal/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on sigmagravity_revtex_preprint.pdf (15 pages, 2161756 bytes).
+Output written on sigmagravity_revtex_preprint.pdf (15 pages, 2161989 bytes).
 PDF statistics:
  445 PDF objects out of 1000 (max. 8388607)
  373 compressed objects within 4 object streams
