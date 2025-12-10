@@ -421,79 +421,82 @@ def generate_amplitude_figure(output_dir):
 # =============================================================================
 
 def generate_solar_system_figure(output_dir):
-    """Generate Solar System safety demonstration."""
+    """Generate Solar System safety demonstration.
+    
+    Shows that Σ-Gravity enhancement is far below any measurable level
+    throughout the Solar System, satisfying all observational constraints.
+    """
     print("\nGenerating Figure 5: Solar System safety...")
     
-    fig, ax = plt.subplots(figsize=(7, 5))
+    fig, ax = plt.subplots(figsize=(8, 5))
     
     # Solar System scales
     AU_to_kpc = 4.85e-9  # 1 AU in kpc
-    r_planets = {
-        'Mercury': 0.39 * AU_to_kpc,
-        'Earth': 1.0 * AU_to_kpc,
-        'Jupiter': 5.2 * AU_to_kpc,
-        'Neptune': 30 * AU_to_kpc,
+    
+    # Key distances to mark
+    distances = {
+        'Mercury': 0.39,
+        'Earth': 1.0,
+        'Jupiter': 5.2,
+        'Saturn': 9.5,
+        'Neptune': 30,
+        'Voyager 1': 160,  # ~160 AU as of 2024
     }
     
-    # Solar System g at each planet
+    # Solar System g at each distance
     M_sun = 2e30  # kg
-    g_planets = {}
-    for name, r_kpc in r_planets.items():
-        r_m = r_kpc * kpc_to_m
-        g_planets[name] = G * M_sun / r_m**2
     
-    # Compute enhancement
-    r_range_kpc = np.logspace(-12, 2, 500)  # From sub-AU to 100 kpc
-    r_range_AU = r_range_kpc / AU_to_kpc
+    # Compute enhancement over range - start from where we have valid data
+    # Use a range that stays above numerical noise
+    r_AU_range = np.logspace(np.log10(0.3), 5, 300)  # 0.3 AU to 100,000 AU
+    r_kpc_range = r_AU_range * AU_to_kpc
     
-    # Use R_d = 0.001 kpc for Solar System (effectively no coherence scale)
-    R_d_sun = 1e-6  # Very small
+    # For Solar System, coherence is essentially zero (no extended disk)
+    # Use very small R_d to represent compact system
+    R_d_sun = 1e-9  # Effectively zero coherence
     
-    # Compute enhancement at different g values (use Solar System g)
-    g_1AU = g_planets['Earth']
-    Sigma_vals = []
-    for r in r_range_kpc:
-        r_m = r * kpc_to_m
-        g_local = G * M_sun / r_m**2 if r_m > 1e6 else 1e-5
-        S = Sigma_unified(r, g_local, R_d=R_d_sun, A=A_galaxy)
-        Sigma_vals.append(S)
-    
-    Sigma_vals = np.array(Sigma_vals)
-    enhancement = Sigma_vals - 1
-    
-    # Filter out values below plot range to avoid stair-stepping
-    # Only plot where enhancement > 1e-16 (our y-axis minimum)
-    plot_mask = enhancement > 1e-17
-    r_plot = r_range_AU[plot_mask]
-    enh_plot = enhancement[plot_mask]
-    
-    # Plot Σ-Gravity prediction with label
-    ax.loglog(r_plot, enh_plot, 'b-', lw=2, label='Σ-Gravity')
-    
-    # Mark planets
-    for name, r_kpc in r_planets.items():
-        r_AU = r_kpc / AU_to_kpc
-        g_local = g_planets[name]
+    enhancement = []
+    for r_AU, r_kpc in zip(r_AU_range, r_kpc_range):
+        r_m = r_AU * 1.496e11  # AU to meters
+        g_local = G * M_sun / r_m**2
         S = Sigma_unified(r_kpc, g_local, R_d=R_d_sun, A=A_galaxy)
-        enh = S - 1
-        ax.axvline(x=r_AU, color='gray', linestyle=':', alpha=0.5)
-        ax.text(r_AU, 1e-10, name, rotation=90, va='bottom', ha='right', fontsize=8)
+        enhancement.append(S - 1)
     
-    # Observational bounds
-    ax.axhline(y=2.3e-5, color='r', linestyle='--', lw=1.5, label='Cassini PPN bound')
-    ax.axhline(y=1e-8, color='orange', linestyle='--', lw=1.5, label='Ephemeris bound')
+    enhancement = np.array(enhancement)
     
-    ax.set_xlabel('Distance from Sun [AU]')
-    ax.set_ylabel(r'Enhancement $(\Sigma - 1)$')
-    ax.set_title('Solar System Safety: Enhancement is Negligible')
-    ax.set_xlim(0.1, 1e5)
-    ax.set_ylim(1e-16, 1e-2)
-    ax.legend(loc='upper right')
-    ax.grid(True, alpha=0.3)
+    # Only plot where enhancement is positive and above numerical floor
+    valid = enhancement > 1e-18
+    if np.sum(valid) > 10:
+        ax.loglog(r_AU_range[valid], enhancement[valid], 'b-', lw=2.5, 
+                  label=r'$\Sigma$-Gravity prediction', zorder=5)
     
-    # Galactic scale annotation (at ~10,000 AU, approaching galaxy scales)
-    ax.axvline(x=1e4, color='green', linestyle='-', alpha=0.5)
-    ax.text(1.2e4, 1e-4, 'Galaxy\nscale', va='center', ha='left', fontsize=8, color='green')
+    # Mark key distances
+    for name, r_AU in distances.items():
+        ax.axvline(x=r_AU, color='gray', linestyle=':', alpha=0.4, lw=1)
+        # Position labels to avoid overlap
+        if name == 'Voyager 1':
+            ax.text(r_AU*1.1, 2e-16, name, rotation=90, va='bottom', ha='left', 
+                    fontsize=8, color='purple', fontweight='bold')
+        else:
+            ax.text(r_AU, 3e-16, name, rotation=90, va='bottom', ha='right', fontsize=8)
+    
+    # Observational bounds - these are the constraints we must satisfy
+    ax.axhline(y=2.3e-5, color='red', linestyle='--', lw=2, 
+               label='Cassini PPN bound', zorder=4)
+    ax.axhline(y=1e-8, color='orange', linestyle='--', lw=2, 
+               label='Planetary ephemeris bound', zorder=4)
+    
+    # Shade the "undetectable" region
+    ax.fill_between([0.1, 1e5], 1e-18, 1e-10, alpha=0.1, color='blue',
+                    label='Below all detection thresholds')
+    
+    ax.set_xlabel('Distance from Sun [AU]', fontsize=11)
+    ax.set_ylabel(r'Enhancement $(\Sigma - 1)$', fontsize=11)
+    ax.set_title('Solar System: Enhancement Far Below Detection Limits', fontsize=12)
+    ax.set_xlim(0.2, 1e5)
+    ax.set_ylim(1e-18, 1e-3)
+    ax.legend(loc='upper right', fontsize=9)
+    ax.grid(True, alpha=0.3, which='major')
     
     plt.tight_layout()
     outpath = output_dir / 'solar_system_safety.png'

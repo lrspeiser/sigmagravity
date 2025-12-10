@@ -164,7 +164,7 @@ This implies $|\gamma - 1| \sim 10^{-9}$, well within the Cassini bound of $|\ga
 
 ![Figure 4: Solar System safety](figures/solar_system_safety.png)
 
-*FIG. 4. Enhancement ($\Sigma - 1$) as a function of distance from the Sun. At planetary scales, the enhancement is $< 10^{-14}$, far below observational bounds. The coherence mechanism automatically suppresses modification in compact, high-acceleration systems.*
+*FIG. 4. Enhancement (Σ − 1) as a function of distance from the Sun. Blue line: Σ-Gravity prediction. Red/orange dashed: observational bounds (Cassini PPN, planetary ephemeris). The predicted enhancement is < 10⁻¹⁴ throughout the Solar System—including at Voyager 1 (160 AU)—far below any detection threshold. The coherence mechanism automatically suppresses modification in compact, high-acceleration systems.*
 
 ### G. Conservation and Equivalence Principle
 
