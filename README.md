@@ -98,7 +98,7 @@ where $\omega^2$ is the vorticity scalar and $\theta$ is the expansion. In the n
 
 ![Figure 1: Coherence window](figures/coherence_window.png)
 
-*FIG. 1. Left: Coherence scalar $\mathcal{C}(r)$ and its approximation $W(r) = r/(\xi + r)$ for different disk scale lengths. Right: Total enhancement $\Sigma(r)$ as a function of radius, showing how coherence builds from center to outer disk.*
+*FIG. 1. Left: Coherence window W(r) = r/(ξ+r) for different disk scale lengths R_d, where ξ = R_d/(2π). W approaches 1 at large radii (full coherence) and 0 near the center (suppressed). Right: Total enhancement Σ(r) = 1 + A×W×h for different baryonic accelerations g at fixed R_d = 3 kpc, showing how enhancement builds from center to outer disk.*
 
 ### C. The Acceleration Function
 
