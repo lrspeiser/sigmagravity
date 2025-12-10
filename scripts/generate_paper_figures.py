@@ -452,8 +452,14 @@ def generate_solar_system_figure(output_dir):
     Sigma_vals = np.array(Sigma_vals)
     enhancement = Sigma_vals - 1
     
-    # Plot
-    ax.loglog(r_range_AU, np.maximum(enhancement, 1e-20), 'b-', lw=2)
+    # Filter out values below plot range to avoid stair-stepping
+    # Only plot where enhancement > 1e-16 (our y-axis minimum)
+    plot_mask = enhancement > 1e-17
+    r_plot = r_range_AU[plot_mask]
+    enh_plot = enhancement[plot_mask]
+    
+    # Plot Σ-Gravity prediction with label
+    ax.loglog(r_plot, enh_plot, 'b-', lw=2, label='Σ-Gravity')
     
     # Mark planets
     for name, r_kpc in r_planets.items():
@@ -469,7 +475,7 @@ def generate_solar_system_figure(output_dir):
     ax.axhline(y=1e-8, color='orange', linestyle='--', lw=1.5, label='Ephemeris bound')
     
     ax.set_xlabel('Distance from Sun [AU]')
-    ax.set_ylabel(r'Enhancement $\Sigma - 1$')
+    ax.set_ylabel(r'Enhancement $(\Sigma - 1)$')
     ax.set_title('Solar System Safety: Enhancement is Negligible')
     ax.set_xlim(0.1, 1e5)
     ax.set_ylim(1e-16, 1e-2)
