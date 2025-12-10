@@ -599,13 +599,33 @@ def main():
             
             # Theoretical curves
             L_range = np.logspace(-0.5, 4, 100)
-            A_disk = np.ones_like(L_range) * A_0_CANONICAL
             A_disp = A_0_CANONICAL * (L_range / L_0_CANONICAL)**N_EXP_CANONICAL
             
-            ax.loglog(L_range, A_disk, 'g--', lw=2, alpha=0.7, 
-                      label=f'Theory (disk, D=0): A = {A_0_CANONICAL:.2f}')
-            ax.loglog(L_range, A_disp, 'b-', lw=2, alpha=0.7,
-                      label=r'Theory (dispersion, D=1): $A = A_0 (L/L_0)^{0.27}$')
+            # GR/Newtonian prediction: A = 0 (no enhancement, Σ = 1)
+            # This would be a horizontal line at A = 0, but log scale can't show 0
+            # Instead, we note that GR predicts NO amplitude effect
+            
+            # MOND prediction: MOND has a fixed interpolation function, not path-dependent
+            # MOND's "effective amplitude" would be constant across all scales
+            # ν(x) = 1/(1 - e^(-√x)) where x = g/g†
+            # At low g (outer galaxies, clusters): ν → √(g†/g), so A_MOND ≈ 1
+            A_MOND = 1.0  # MOND's effective amplitude is ~1 at all scales
+            
+            # Σ-Gravity prediction (dispersion-dominated)
+            ax.loglog(L_range, A_disp, 'b-', lw=2.5, 
+                      label=r'Σ-Gravity: $A = A_0 (L/L_0)^{0.27}$')
+            
+            # MOND prediction (constant A ≈ 1)
+            ax.axhline(y=A_MOND, color='red', ls='--', lw=2, alpha=0.8,
+                       label=f'MOND: A ≈ {A_MOND:.1f} (scale-independent)')
+            
+            # GR prediction (no dark matter = no enhancement needed)
+            # A = 0 means Σ = 1, but we can't show 0 on log scale
+            # Instead show text annotation
+            ax.axhline(y=0.15, color='gray', ls=':', lw=2, alpha=0.6,
+                       label='GR (no DM): A → 0 (below plot)')
+            ax.text(0.15, 0.12, 'GR predicts A = 0\n(no enhancement)', 
+                    fontsize=9, color='gray', alpha=0.8)
             
             # Galaxies
             gal_L = np.array([d['L'] for d in galaxy_data])

@@ -333,13 +333,20 @@ def main():
     
     # Theoretical curves (extend to 10,000 kpc to cover clusters)
     L_range = np.logspace(-0.5, 4, 100)
-    A_disk = np.ones_like(L_range) * A_0  # D=0
-    A_disp = A_0 * (L_range / L_0)**N_EXP  # D=1
+    A_disp = A_0 * (L_range / L_0)**N_EXP  # D=1, Σ-Gravity prediction
     
-    ax.loglog(L_range, A_disk, 'g--', lw=2, alpha=0.7, 
-              label=f'Theory (disk, D=0): A = {A_0:.2f}')
-    ax.loglog(L_range, A_disp, 'b-', lw=2, alpha=0.7,
-              label=r'Theory (dispersion, D=1): $A = A_0 (L/L_0)^{0.27}$')
+    # Σ-Gravity prediction (path-length dependent)
+    ax.loglog(L_range, A_disp, 'b-', lw=2.5,
+              label=r'Σ-Gravity: $A = A_0 (L/L_0)^{0.27}$')
+    
+    # MOND prediction: constant A ≈ 1 at all scales (scale-independent)
+    ax.axhline(y=1.0, color='red', ls='--', lw=2, alpha=0.8,
+               label='MOND: A ≈ 1 (scale-independent)')
+    
+    # GR (no dark matter): A = 0 (no enhancement)
+    ax.axhline(y=0.15, color='gray', ls=':', lw=2, alpha=0.6,
+               label='GR (no DM): A → 0')
+    ax.text(0.15, 0.12, 'GR: A = 0', fontsize=9, color='gray', alpha=0.8)
     
     # Plot individual galaxies
     if len(galaxy_data) > 0:
