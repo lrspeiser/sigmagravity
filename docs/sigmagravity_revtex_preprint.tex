@@ -116,7 +116,7 @@ The effective gravitational field is:
 
 \textbf{The auxiliary field as computational device:} The intermediate variable $\Phi_N$ is not a new dynamical degree of freedom---it has no independent propagating modes. It is determined by the standard Poisson equation and serves as an intermediate variable for computing the enhancement, exactly as in QUMOND \cite{Milgrom2010}.
 
-\textbf{Algebraic approximation:} For disk galaxies with approximate axial symmetry, we use the algebraic relation $g_{\rm eff} = g_N \cdot \Sigma$ rather than solving the modified Poisson equation numerically. This is the standard approach in MOND phenomenology \cite{Milgrom2010} and is valid when the enhancement varies slowly compared to the gravitational field structure.
+\textbf{Algebraic approximation:} For disk galaxies with approximate axial symmetry, we use the algebraic relation $g_{\rm eff} = g_N \cdot \Sigma$ rather than solving the modified Poisson equation numerically. This is the standard approach in MOND phenomenology \cite{Milgrom2010} and is valid when the enhancement varies slowly compared to the gravitational field structure. The rotation curve prediction $V_{\rm pred} = V_{\rm bar} \sqrt{\Sigma}$ follows directly from this approximation.
 
 \subsection{The Covariant Coherence Scalar}
 
@@ -268,8 +268,9 @@ We use the SPARC database \cite{Lelli2016}: 175 galaxies with Spitzer 3.6$\mu$m 
 \begin{enumerate}
 \item Load rotation curve data ($R$, $V_{\rm obs}$, $V_{\rm err}$, $V_{\rm gas}$, $V_{\rm disk}$, $V_{\rm bul}$)
 \item Apply M/L scaling: $V_{\rm bar}^2 = V_{\rm gas}^2 + 0.5 \times V_{\rm disk}^2 + 0.7 \times V_{\rm bul}^2$
+\item Estimate $R_d$ from the radius where $V_{\rm disk}$ peaks (robustness tested in SI \S14)
 \item Compute $g_N = V_{\rm bar}^2/R$ at each radius
-\item Apply enhancement: $\Sigma = 1 + A_0 \cdot \mathcal{C}(r) \cdot h(g_N)$
+\item Apply enhancement: $\Sigma = 1 + A_0 \cdot W(r) \cdot h(g_N)$ with $W(r) = r/(\xi + r)$, $\xi = R_d/(2\pi)$
 \item Predict: $V_{\rm pred} = V_{\rm bar} \times \sqrt{\Sigma}$
 \end{enumerate}
 
@@ -524,7 +525,7 @@ M. Milgrom, ``Bimetric MOND gravity,'' Phys. Rev. D \textbf{80}, 123536 (2009).
 R. H. Sanders and S. S. McGaugh, ``Modified Newtonian Dynamics as an Alternative to Dark Matter,'' Annu. Rev. Astron. Astrophys. \textbf{40}, 263 (2002).
 
 \bibitem{Milgrom2010}
-M. Milgrom, ``Quasi-linear formulation of MOND,'' Mon. Not. R. Astron. Soc. \textbf{403}, 886 (2010).
+M. Milgrom, ``Quasi-linear formulation of MOND,'' Mon. Not. R. Astron. Soc. \textbf{403}, 886 (2010). [QUMOND formulation]
 
 \bibitem{Ferraro2007}
 R. Ferraro and F. Fiorini, ``Modified teleparallel gravity: Inflation without an inflaton,'' Phys. Rev. D \textbf{75}, 084031 (2007).
