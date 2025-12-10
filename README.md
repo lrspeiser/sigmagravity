@@ -287,7 +287,7 @@ The coherence scalar $\mathcal{C}$ depends on net ordered motion. Counter-rotati
 
 ![Figure 9: Counter-rotation effect](figures/counter_rotation_effect.png)
 
-*FIG. 9. Counter-rotation reduces gravitational enhancement. Left: Predicted vs. observed dark matter fractions for normal (blue) and counter-rotating (red) galaxies from MaNGA DynPop. Counter-rotating systems show systematically lower f_DM, as predicted by the coherence mechanism. Right: Distribution of f_DM residuals. This is a unique prediction of Σ-Gravity—neither ΛCDM nor MOND predicts any dependence on rotation direction.*
+*FIG. 9. Counter-rotation reduces inferred dark matter fractions—a unique prediction of Σ-Gravity. Left: Distribution of f_DM within the effective radius for normal galaxies (gray, N=10,038) and counter-rotating galaxies (red, N=63) from MaNGA DynPop. Counter-rotating systems show 44% lower f_DM (p=0.004). Right: f_DM vs stellar mass showing counter-rotating galaxies (red points) fall systematically below the normal trend (black line). Neither ΛCDM nor MOND predicts any dependence on rotation direction.*
 
 **2. High-dispersion systems show suppressed enhancement.**
 
