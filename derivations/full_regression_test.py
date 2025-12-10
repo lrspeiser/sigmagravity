@@ -231,10 +231,34 @@ MODEL_CONFIGS = {
         "ml_disk": 0.5,
         "ml_bulge": 0.7,
     },
+    
+    # UNIFIED_3D: No D switch - uses path length L directly
+    # A(L) = A₀ × (L/L₀)^n where L₀ = disk scale height reference
+    # For disks: L ≈ L₀ → A ≈ A₀
+    # For clusters: L ≈ 600 kpc → A ≈ 8.45
+    "unified_3d": {
+        "name": "Unified 3D: A=A₀×(L/L₀)^n, no D switch",
+        "A_0": np.exp(1 / (2 * np.pi)),  # ≈ 1.173
+        "L_0": 0.4,  # kpc - reference path length (≈ disk scale height)
+        "n_exp": 0.27,  # path length exponent
+        # For compatibility with existing code, compute effective A values:
+        # A_galaxy = A₀ × (L₀/L₀)^n = A₀ (when L = L₀)
+        # A_cluster = A₀ × (600/L₀)^n ≈ 8.45 (when L = 600 kpc)
+        "A_galaxy": np.exp(1 / (2 * np.pi)),  # Same as canonical
+        "A_cluster": np.exp(1 / (2 * np.pi)) * (600 / 0.4)**0.27,  # Same as canonical
+        "xi_scale": 1 / (2 * np.pi),  # ≈ 0.159
+        "xi_mode": "geometric",
+        "alpha_h": 0.5,
+        "ml_disk": 0.5,
+        "ml_bulge": 0.7,
+        "amplitude_mode": "unified_3d",  # Flag for unified amplitude calculation
+    },
 }
 
 # Current active configuration
 # "canonical" = first-principles derived parameters from README
+# "unified_3d" = same parameters but with unified amplitude formula (no D switch)
+# Both give IDENTICAL results - unified_3d just avoids the D=0/1 switch
 # A₀ = e^(1/2π) ≈ 1.173, ξ = R_d/(2π), g† = cH₀/(4√π)
 ACTIVE_CONFIG = "canonical"
 
@@ -401,11 +425,40 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     return V_bar * np.sqrt(Sigma)
 
 
+def unified_amplitude(L: float, A_0: float = None, L_0: float = 0.4, n: float = 0.27) -> float:
+    """
+    Unified 3D amplitude formula: A(L) = A₀ × (L/L₀)^n
+    
+    No D switch needed! Path length L determines the amplitude:
+    - Thin disks: L ≈ L₀ (scale height) → A ≈ A₀
+    - Clusters: L ≈ 600 kpc → A ≈ 8.45
+    - Ellipticals: intermediate L → intermediate A
+    
+    Parameters:
+        L: Effective path length through baryons (kpc)
+        A_0: Base amplitude (default: e^(1/2π) ≈ 1.173)
+        L_0: Reference path length (default: 0.4 kpc ≈ disk scale height)
+        n: Path length exponent (default: 0.27)
+    """
+    if A_0 is None:
+        A_0 = np.exp(1 / (2 * np.pi))
+    return A_0 * (L / L_0) ** n
+
+
 def predict_cluster_mass(M_bar: float, r_kpc: float, 
-                         A: float = A_CLUSTER) -> float:
+                         A: float = A_CLUSTER,
+                         use_unified: bool = False,
+                         L_cluster: float = 600.0) -> float:
     """Predict cluster total mass using Σ-Gravity.
     
     For clusters, W(r) ≈ 1 at lensing radii (~200 kpc), so we use W=1.
+    
+    Parameters:
+        M_bar: Baryonic mass (M_sun)
+        r_kpc: Radius (kpc)
+        A: Amplitude (used if use_unified=False)
+        use_unified: If True, compute A from unified formula
+        L_cluster: Path length for unified formula (kpc)
     """
     r_m = r_kpc * kpc_to_m
     g_bar = G_const * M_bar * M_sun / r_m**2
@@ -413,6 +466,10 @@ def predict_cluster_mass(M_bar: float, r_kpc: float,
     h = h_function(np.array([g_bar]))[0]
     # For clusters at r ~ 200 kpc with ξ ~ 20 kpc: W ≈ 0.95 ≈ 1
     W = 1.0
+    
+    # Use unified amplitude if requested
+    if use_unified:
+        A = unified_amplitude(L_cluster)
     
     Sigma = 1 + A * W * h
     return M_bar * Sigma
@@ -686,8 +743,16 @@ def test_sparc_galaxies(galaxies: List[Dict], verbose: bool = False) -> TestResu
     )
 
 
-def test_clusters(clusters: List[Dict], verbose: bool = False) -> TestResult:
-    """Test galaxy cluster lensing masses."""
+def test_clusters(clusters: List[Dict], verbose: bool = False, 
+                  use_unified: bool = False, L_cluster: float = 600.0) -> TestResult:
+    """Test galaxy cluster lensing masses.
+    
+    Parameters:
+        clusters: List of cluster data dicts
+        verbose: Print detailed output
+        use_unified: Use unified 3D amplitude formula (no D switch)
+        L_cluster: Path length for unified formula (kpc)
+    """
     if len(clusters) == 0:
         return TestResult(
             name="Galaxy Clusters",
@@ -700,7 +765,8 @@ def test_clusters(clusters: List[Dict], verbose: bool = False) -> TestResult:
     
     ratios = []
     for cl in clusters:
-        M_pred = predict_cluster_mass(cl['M_bar'], cl['r_kpc'])
+        M_pred = predict_cluster_mass(cl['M_bar'], cl['r_kpc'], 
+                                      use_unified=use_unified, L_cluster=L_cluster)
         ratio = M_pred / cl['M_lens']
         if np.isfinite(ratio) and ratio > 0:
             ratios.append(ratio)
@@ -1539,7 +1605,10 @@ def run_all_tests(data_dir: Path, verbose: bool = False, quick: bool = False) ->
     print(f"[{'✓' if result.passed else '✗'}] {result.message}")
     
     # 5. Galaxy clusters
-    result = test_clusters(clusters, verbose)
+    # Check if using unified 3D mode
+    cfg = MODEL_CONFIGS.get(ACTIVE_CONFIG, {})
+    use_unified = cfg.get('amplitude_mode') == 'unified_3d'
+    result = test_clusters(clusters, verbose, use_unified=use_unified)
     results.append(result)
     print(f"[{'✓' if result.passed else '✗'}] {result.message}")
     
