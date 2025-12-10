@@ -287,7 +287,7 @@ The coherence scalar $\mathcal{C}$ depends on net ordered motion. Counter-rotati
 
 ![Figure 9: Counter-rotation effect](figures/counter_rotation_effect.png)
 
-*FIG. 9. Counter-rotation test: A unique qualitative prediction of Σ-Gravity. (A) Σ-Gravity predicts enhancement proportional to (prograde − retrograde) fraction (blue region), while ΛCDM and MOND predict no dependence on rotation direction (gray line at 1.0). The observed 44% reduction (red band) implies ~22% counter-rotating fraction. (B) MaNGA DynPop data: counter-rotating galaxies (red, N=63) show significantly lower inferred f_DM than normal galaxies (gray, N=10,038). The key test is qualitative—Σ-Gravity predicts reduced enhancement for counter-rotation; ΛCDM/MOND predict none. The data reject the null hypothesis (p=0.004).*
+*FIG. 9. Counter-rotation test using MaNGA DynPop data. (A) Theory predictions vs. observation: ΛCDM/MOND predict no difference between counter-rotating and normal galaxies (ratio = 1.0); Σ-Gravity predicts reduced enhancement (ratio < 1.0, exact value depends on counter-rotating fraction). The observed ratio is 0.56 ± 0.09, consistent with Σ-Gravity and inconsistent with ΛCDM/MOND. (B) f_DM distributions: counter-rotating galaxies (red, N=63) show systematically lower inferred dark matter fractions than normal galaxies (gray, N=10,038). Mann-Whitney p = 0.004.*
 
 **2. High-dispersion systems show suppressed enhancement.**
 
