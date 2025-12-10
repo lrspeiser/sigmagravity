@@ -523,17 +523,23 @@ def generate_rc_gallery(output_dir):
             except:
                 continue
     
-    # Select diverse galaxies
+    # Select diverse galaxies spanning the mass range
+    # Primary targets + fallbacks in case some are missing
     target_galaxies = ['NGC2403', 'NGC3198', 'NGC6946', 'DDO154', 'UGC128', 'NGC2841']
+    fallback_galaxies = ['NGC7331', 'NGC5055', 'NGC3521', 'IC2574', 'DDO168', 'UGC2259']
     
     fig, axes = plt.subplots(2, 3, figsize=(12, 8))
     axes = axes.flatten()
     
-    galaxies_plotted = 0
-    for rotmod_file in sparc_dir.glob('*_rotmod.dat'):
-        name = rotmod_file.stem.replace('_rotmod', '')
-        if name not in target_galaxies:
-            continue
+    # M/L ratios (matching regression test)
+    ML_DISK = 0.5
+    ML_BULGE = 0.7
+    
+    def try_plot_galaxy(name, ax, show_legend=False):
+        """Try to load and plot a galaxy. Returns True if successful."""
+        rotmod_file = sparc_dir / f'{name}_rotmod.dat'
+        if not rotmod_file.exists():
+            return False
         
         R_d = R_d_values.get(name, 3.0)
         
@@ -552,7 +558,7 @@ def generate_rc_gallery(output_dir):
                     V_bulge.append(float(parts[5]) if len(parts) > 5 else 0.0)
         
         if len(R) < 3:
-            continue
+            return False
         
         R = np.array(R)
         V_obs = np.array(V_obs)
@@ -561,10 +567,7 @@ def generate_rc_gallery(output_dir):
         V_disk = np.array(V_disk)
         V_bulge = np.array(V_bulge)
         
-        # Compute V_bar with mass-to-light scaling (matching regression test)
-        # M/L_disk = 0.5, M/L_bulge = 0.7 (Lelli+ 2016 standard)
-        ML_DISK = 0.5
-        ML_BULGE = 0.7
+        # Compute V_bar with mass-to-light scaling
         V_bar_sq = np.abs(V_gas)**2 + ML_DISK * np.abs(V_disk)**2 + ML_BULGE * np.abs(V_bulge)**2
         V_bar = np.sqrt(V_bar_sq)
         V_bar = np.where(np.isnan(V_bar), 0, V_bar)
@@ -572,7 +575,7 @@ def generate_rc_gallery(output_dir):
         # Skip if V_bar is too small
         mask_valid = V_bar > 1
         if np.sum(mask_valid) < 5:
-            continue
+            return False
         
         # Compute g_bar and predicted V
         g_bar = np.where(V_bar > 0, (V_bar * 1000)**2 / (R * kpc_to_m), 1e-12)
@@ -588,7 +591,6 @@ def generate_rc_gallery(output_dir):
         V_mond = V_bar * np.sqrt(nu_mond)
         
         # Plot
-        ax = axes[galaxies_plotted]
         ax.errorbar(R, V_obs, yerr=V_err, fmt='ko', ms=4, capsize=2, label='Data', alpha=0.7)
         ax.plot(R, V_bar, 'g--', lw=1.5, label='Baryonic', alpha=0.7)
         ax.plot(R, V_pred, 'b-', lw=2, label='Σ-Gravity')
@@ -601,12 +603,30 @@ def generate_rc_gallery(output_dir):
         ax.set_ylim(0, None)
         ax.grid(True, alpha=0.3)
         
-        if galaxies_plotted == 0:
+        if show_legend:
             ax.legend(fontsize=7, loc='lower right')
         
-        galaxies_plotted += 1
+        return True
+    
+    # Try to plot target galaxies, use fallbacks if needed
+    galaxies_plotted = 0
+    all_candidates = target_galaxies + fallback_galaxies
+    
+    for name in all_candidates:
         if galaxies_plotted >= 6:
             break
+        ax = axes[galaxies_plotted]
+        if try_plot_galaxy(name, ax, show_legend=(galaxies_plotted == 0)):
+            galaxies_plotted += 1
+    
+    # Hide any unused axes
+    for i in range(galaxies_plotted, 6):
+        axes[i].set_visible(False)
+    
+    if galaxies_plotted == 0:
+        print("  WARNING: No galaxies could be plotted (data not found)")
+        plt.close()
+        return
     
     plt.suptitle('Rotation Curves: Data vs Σ-Gravity Predictions', fontsize=14)
     plt.tight_layout()
