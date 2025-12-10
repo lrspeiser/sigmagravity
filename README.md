@@ -114,7 +114,7 @@ This is the QUMOND-like structure—$h$ depends on the baryonic field $g_N$, not
 
 ![Figure 2: Enhancement function comparison](figures/h_function_comparison.png)
 
-*FIG. 2. Enhancement functions $h(g_N)$ for Σ-Gravity (solid blue) compared to MOND's interpolation function (dashed red). The functions differ by ~7% in the transition regime $g_N \sim g^\dagger$, providing a testable distinction.*
+*FIG. 2. Left: Enhancement functions for Σ-Gravity (blue: h(g) = √(g†/g) × g†/(g†+g)) and MOND (red dashed: ν−1). Right: Percentage difference after normalizing at low g. The functions differ by ~7% in the transition regime (g ≈ g†), providing a testable distinction between the theories.*
 
 **Covariant formulation:** The "acceleration" in Σ-Gravity is a field property, not a particle property:
 $$g_N^2 \equiv g^{\mu\nu} \nabla_\mu \Phi_N \nabla_\nu \Phi_N$$
