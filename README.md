@@ -150,7 +150,7 @@ This unifies the galaxy and cluster regimes through a single principled relation
 
 ![Figure 3: Unified amplitude](figures/amplitude_comparison.png)
 
-*FIG. 3. Amplitude versus path length through baryons. All system types follow $A = A_0 \times (L/L_0)^{0.27}$ with $A_0 = e^{1/(2\pi)} \approx 1.173$. Disk galaxies ($L \approx 1.5$ kpc), ellipticals ($L \approx 17$ kpc), and clusters ($L \approx 400$ kpc) are unified by a single relationship.*
+*FIG. 3. Amplitude versus path length through baryons. Blue line: power-law scaling for dispersion-dominated systems. Green dashed: constant amplitude for disk galaxies. Points mark disk galaxies (L ≈ 1.5 kpc, A = 1.17), ellipticals (L ≈ 17 kpc, A = 2.47), and clusters (L ≈ 400 kpc, A = 8.45). The unified formula connects all system types.*
 
 ### F. Solar System Constraints
 

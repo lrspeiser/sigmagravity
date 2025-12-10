@@ -356,50 +356,59 @@ def generate_coherence_window_figure(output_dir):
 # =============================================================================
 
 def generate_amplitude_figure(output_dir):
-    """Generate amplitude comparison showing unified amplitude formula."""
+    """Generate amplitude comparison showing unified amplitude formula.
+    
+    Shows amplitude A vs path length L on a log-log plot, demonstrating
+    the power-law relationship A = A₀ × (L/L₀)^n for dispersion-dominated systems.
+    """
     print("\nGenerating Figure 4: Amplitude comparison (unified formula)...")
     
     fig, ax = plt.subplots(figsize=(8, 5))
     
-    # Unified amplitude formula: A = A₀ × [1 - D + D × (L/L₀)^n]
-    # Systems with their path lengths
-    systems = ['Disk galaxies', 'Ellipticals', 'Clusters']
-    L_kpc = [1.5, 17, 600]  # Path lengths in kpc
-    D_vals = [0, 0.5, 1.0]  # Dimensionality factors
+    # Path length range (kpc)
+    L_range = np.logspace(-0.5, 3, 100)  # 0.3 to 1000 kpc
     
-    A_pred = [unified_amplitude(D, L) for D, L in zip(D_vals, L_kpc)]
-    A_used = A_pred  # Use unified formula values consistently
+    # Unified formula for D=1 (dispersion-dominated): A = A₀ × (L/L₀)^n
+    A_dispersion = A_0 * (L_range / L_0)**N_EXP
     
-    x = np.arange(len(systems))
-    width = 0.35
+    # Disk galaxies (D=0): A = A₀ (constant)
+    A_disk = np.ones_like(L_range) * A_0
     
-    bars1 = ax.bar(x - width/2, A_pred, width, label=f'Unified: A = A₀ × [1-D+D(L/L₀)^n]', 
-                   color='steelblue', alpha=0.8)
-    bars2 = ax.bar(x + width/2, A_used, width, label='Values used', 
-                   color='coral', alpha=0.8)
+    # Plot the theoretical curves
+    ax.loglog(L_range, A_dispersion, 'b-', lw=2, 
+              label=r'Dispersion-dominated: $A = A_0 (L/L_0)^{0.27}$')
+    ax.axhline(y=A_0, color='g', linestyle='--', lw=1.5, 
+               label=r'Disk galaxies: $A = A_0$')
     
-    # Add value labels
-    for bar, val, L in zip(bars1, A_pred, L_kpc):
-        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.15, 
-                f'{val:.2f}\n(L={L})', ha='center', va='bottom', fontsize=9)
-    for bar, val in zip(bars2, A_used):
-        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.15, 
-                f'{val:.2f}', ha='center', va='bottom', fontsize=9)
+    # Mark specific system types
+    systems = {
+        'Disk galaxies': {'L': 1.5, 'D': 0, 'color': 'green', 'marker': 's'},
+        'Ellipticals': {'L': 17, 'D': 0.5, 'color': 'orange', 'marker': 'o'},
+        'Clusters': {'L': 400, 'D': 1.0, 'color': 'red', 'marker': '^'},
+    }
     
+    for name, props in systems.items():
+        L = props['L']
+        D = props['D']
+        A = unified_amplitude(D, L)
+        ax.scatter([L], [A], s=150, c=props['color'], marker=props['marker'], 
+                   edgecolors='black', linewidths=1.5, zorder=10, label=f'{name} (A={A:.2f})')
+    
+    ax.set_xlabel('Path length through baryons L [kpc]')
     ax.set_ylabel('Amplitude A')
-    ax.set_title(r'Amplitude: $A = A_0 \times [1-D+D(L/L_0)^n]$, $A_0 = e^{1/2\pi} \approx 1.17$')
-    ax.set_xticks(x)
-    ax.set_xticklabels(systems)
-    ax.legend(loc='upper left')
-    ax.set_ylim(0, 10)
+    ax.set_title(r'Unified Amplitude: $A = A_0 \times [1-D+D(L/L_0)^n]$')
+    ax.set_xlim(0.3, 1000)
+    ax.set_ylim(0.8, 12)
+    ax.legend(loc='upper left', fontsize=9)
+    ax.grid(True, alpha=0.3, which='both')
     
-    # Add annotation
-    ax.text(0.95, 0.95, 
-            f'Unified amplitude formula\nconnects galaxies and clusters\n\n'
-            f'A₀ = exp(1/2π) ≈ {A_0:.3f}\n'
-            f'Cluster/Galaxy ratio:\n{A_used[2]/A_used[0]:.2f}', 
-            transform=ax.transAxes, ha='right', va='top', fontsize=9,
-            bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
+    # Add formula parameters annotation
+    ax.text(0.98, 0.02, 
+            r'$A_0 = e^{1/(2\pi)} \approx 1.17$' + '\n' +
+            r'$L_0 = 0.40$ kpc' + '\n' +
+            r'$n = 0.27$',
+            transform=ax.transAxes, ha='right', va='bottom', fontsize=9,
+            bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
     
     plt.tight_layout()
     outpath = output_dir / 'amplitude_comparison.png'
