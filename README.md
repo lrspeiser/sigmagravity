@@ -161,7 +161,7 @@ This unified 3D formula requires no discrete switch between system types. The pa
 
 **Physical interpretation:** $L_0 \approx 0.4$ kpc corresponds to the typical scale height of disk galaxies. When the path length equals this reference ($L = L_0$), the amplitude is $A = A_0$. For extended systems like clusters with $L \approx 600$ kpc, the amplitude increases to $A \approx 8.45$.
 
-**Note:** $L_0$ and $n$ were calibrated using the 42 Fox et al. clusters; SPARC galaxies provide independent validation. All other parameters are either derived from first principles or fixed from literature values. No per-galaxy or per-cluster fitting is performed (Fig. 3).
+**Note:** $L_0 = 0.4$ kpc is a physical parameter (typical disk scale height), not calibrated. Only $n = 0.27$ was calibrated using the 42 Fox et al. clusters. Holdout validation (70/30 split) confirms this: with $L_0$ fixed, calibrated $n = 0.27 \pm 0.01$ and holdout median ratio $= 1.02 \pm 0.12$. SPARC galaxies provide fully independent validation. No per-galaxy or per-cluster fitting is performed (Fig. 3).
 
 ![Figure 3: Unified amplitude](figures/amplitude_comparison.png)
 

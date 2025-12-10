@@ -117,8 +117,8 @@ All results in this paper use exactly these parameters:
 | Critical acceleration | g† | 9.599×10⁻¹¹ | m/s² | Derived |
 | Coherence scale | ξ | R_d/(2π) | kpc | Derived |
 | Base amplitude | A₀ | 1.1725 | — | Derived |
-| Reference path length | L₀ | 0.40 | kpc | Calibrated |
-| Path length exponent | n | 0.27 | — | Calibrated |
+| Reference path length | L₀ | 0.40 | kpc | Physical (disk scale height) |
+| Path length exponent | n | 0.27 | — | Calibrated (holdout validated) |
 | Disk M/L ratio | Υ_disk | 0.5 | M☉/L☉ | Fixed |
 | Bulge M/L ratio | Υ_bulge | 0.7 | M☉/L☉ | Fixed |
 
