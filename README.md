@@ -224,7 +224,7 @@ Both frameworks achieve comparable performance on galaxy rotation curves. The 47
 
 ![Figure 5: Radial Acceleration Relation](figures/rar_derived_formula.png)
 
-*FIG. 5. Radial Acceleration Relation for 171 SPARC galaxies. Gray points: observed accelerations. Blue line: Σ-Gravity prediction. Red dashed: MOND. Both frameworks reproduce the tight correlation with scatter ~0.09 dex.*
+*FIG. 5. Radial Acceleration Relation for 171 SPARC galaxies. Gray points: observed centripetal acceleration (g_obs = V²/r) versus baryonic acceleration (g_bar from visible matter). Black dashed: 1:1 line (Newtonian prediction—data would lie here without dark matter or modified gravity). Blue solid: Σ-Gravity. Red dotted: MOND. Both frameworks reproduce the tight correlation with scatter ~0.09 dex.*
 
 Representative rotation curves are shown in Fig. 6.
 

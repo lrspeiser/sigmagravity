@@ -210,8 +210,8 @@ def generate_rar_figure(output_dir):
     g_eff_theory = g_range * Sigma_unified(10.0, g_range, R_d=3.0, A=A_galaxy)
     ax.plot(g_range, g_eff_theory, 'b-', lw=2, label=f'Σ-Gravity (A={A_galaxy:.2f})')
     
-    # 1:1 line
-    ax.plot([1e-14, 1e-7], [1e-14, 1e-7], 'k--', lw=1, alpha=0.5, label='1:1 (no enhancement)')
+    # 1:1 line (Newtonian/GR prediction without dark matter)
+    ax.plot([1e-14, 1e-7], [1e-14, 1e-7], 'k--', lw=1, alpha=0.5, label='1:1 (Newtonian)')
     
     # MOND comparison
     a0 = 1.2e-10
