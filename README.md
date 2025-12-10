@@ -164,7 +164,7 @@ For clusters ($D=1$, $L \approx 600$ kpc): $A \approx 8.45$
 
 ![Figure 3: Unified amplitude](figures/amplitude_comparison.png)
 
-*FIG. 3. Amplitude versus path length through baryons for 163 SPARC disk galaxies (green), 873 MaNGA ellipticals (orange), and 42 Fox et al. clusters (red). Blue line: Σ-Gravity prediction A = A₀(L/L₀)^0.27. Red dashed: MOND (scale-independent, A ≈ 1). Gray dotted: GR without dark matter (A = 0). MOND works for galaxies but fails for clusters by ~10×. Σ-Gravity's path-length-dependent amplitude connects galaxy and cluster regimes through a principled relationship.*
+*FIG. 3. Amplitude versus path length through baryons for 171 SPARC disk galaxies (green), 873 MaNGA ellipticals (orange), and 42 Fox et al. clusters (red). Blue line: Σ-Gravity prediction A = A₀(L/L₀)^0.27. Red dashed: MOND (scale-independent, A ≈ 1). Gray dotted: GR without dark matter (A = 0). MOND works for galaxies but fails for clusters by ~10×. Σ-Gravity's path-length-dependent amplitude connects galaxy and cluster regimes through a principled relationship.*
 
 ### F. Solar System Constraints
 
