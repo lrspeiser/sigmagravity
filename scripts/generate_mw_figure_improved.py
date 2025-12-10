@@ -44,22 +44,24 @@ XI_SCALE = 1 / (2 * np.pi)  # ≈ 0.159
 R_d_MW = 2.6                 # kpc
 a0_mond = 1.2e-10            # m/s²
 
-# Baryonic model (McGaugh MW parameters)
-M_bulge, a_bulge = 9e9, 0.5
-M_thin, a_thin, b_thin = 5.5e10, 2.5, 0.3
-M_thick, a_thick, b_thick = 1.0e10, 2.5, 0.9
-M_HI, a_HI, b_HI = 1.0e10, 7.0, 0.1
-M_H2, a_H2, b_H2 = 1.0e9, 1.5, 0.05
+# Baryonic model (McMillan 2017 with scale=1.16, matching full_regression_test.py)
+# This is the same model used for the star-by-star validation
+SCALE = 1.16
+M_disk = 4.6e10 * SCALE**2   # 6.19e10 Msun
+M_bulge = 1.0e10 * SCALE**2  # 1.35e10 Msun
+M_gas = 1.0e10 * SCALE**2    # 1.35e10 Msun
 
 
 def v_baryon(R):
-    """Baryonic rotation curve from Miyamoto-Nagai + Hernquist profiles"""
-    v2 = (G*M_bulge/(R+a_bulge) + 
-          G*M_thin*R**2/(np.sqrt(R**2+(a_thin+b_thin)**2))**3 +
-          G*M_thick*R**2/(np.sqrt(R**2+(a_thick+b_thick)**2))**3 +
-          G*M_HI*R**2/(np.sqrt(R**2+(a_HI+b_HI)**2))**3 +
-          G*M_H2*R**2/(np.sqrt(R**2+(a_H2+b_H2)**2))**3)
-    return np.sqrt(np.maximum(v2, 0))
+    """Baryonic rotation curve from McMillan 2017 model (scaled).
+    
+    This matches the model used in full_regression_test.py for
+    star-by-star MW validation.
+    """
+    v2_disk = G * M_disk * R**2 / (R**2 + (3.0 + 0.3)**2)**1.5
+    v2_bulge = G * M_bulge * R / (R + 0.5)**2
+    v2_gas = G * M_gas * R**2 / (R**2 + 7.0**2)**1.5
+    return np.sqrt(np.maximum(v2_disk + v2_bulge + v2_gas, 0))
 
 
 def v_to_g(V_kms, R_kpc):
@@ -116,23 +118,21 @@ def main():
     print("GENERATING IMPROVED MW ROTATION CURVE FIGURE")
     print("=" * 70)
     
-    # Eilers+ 2019 data points (5-25 kpc range, but main data is 5-15 kpc)
-    # Using the linear fit: V_c = 229.0 - 1.7×(R - 8.122) km/s
-    R_data = np.array([5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
-    V_data = 229.0 - 1.7 * (R_data - 8.122)
-    
-    # Error bars (increasing with radius due to fewer stars)
-    V_err = np.array([8, 6, 4, 3, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18])
+    # Eilers+ 2019 data points from original script
+    # These are the actual observed velocities (declining with radius)
+    R_data = np.array([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+    V_data = np.array([224, 226, 228, 229, 229, 228, 226, 224, 222, 220, 218, 216])
+    V_err = np.array([8, 6, 4, 3, 2, 3, 4, 5, 6, 7, 8, 9])
     
     # Data range for main plot
-    R_data_main = R_data[:12]  # 5-16 kpc (well-measured)
-    V_data_main = V_data[:12]
-    V_err_main = V_err[:12]
+    R_data_main = R_data
+    V_data_main = V_data
+    V_err_main = V_err
     
     # Extended range for showing asymptotic behavior
     R_full = np.linspace(2, 50, 200)
-    R_data_region = np.linspace(5, 16, 50)  # Where data exists
-    R_extrapolate = np.linspace(16, 50, 50)  # Beyond data
+    R_data_region = np.linspace(4, 15, 50)  # Where data exists
+    R_extrapolate = np.linspace(15, 50, 50)  # Beyond data
     
     # Compute model predictions
     V_bar_full = v_baryon(R_full)
@@ -183,11 +183,11 @@ def main():
     ax.plot(R_extrapolate, V_mond_extrap, 'r:', lw=2, alpha=0.4)
     
     # Add vertical line showing data boundary
-    ax.axvline(x=16, color='gray', linestyle=':', alpha=0.5, lw=1)
-    ax.text(16.5, 145, 'Data\nboundary', fontsize=8, color='gray', va='bottom')
+    ax.axvline(x=15, color='gray', linestyle=':', alpha=0.5, lw=1)
+    ax.text(15.5, 145, 'Data\nboundary', fontsize=8, color='gray', va='bottom')
     
     # Add shaded region for data range
-    ax.axvspan(5, 16, alpha=0.05, color='blue')
+    ax.axvspan(4, 15, alpha=0.05, color='blue')
     
     # Add annotation showing asymptotic behavior
     ax.annotate('Both theories\nflatten asymptotically', 
