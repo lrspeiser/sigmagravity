@@ -432,7 +432,8 @@ def generate_amplitude_figure(output_dir):
         df_valid = df[
             df['M500_1e14Msun'].notna() & 
             df['MSL_200kpc_1e12Msun'].notna() &
-            (df['spec_z_constraint'] == 'yes')
+            (df['spec_z_constraint'] == 'yes') &
+            (df['M500_1e14Msun'] > 2.0)  # High-mass cut for reliable baryon fractions
         ].copy()
         
         clusters = []
