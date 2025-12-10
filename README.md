@@ -245,7 +245,7 @@ The Milky Way provides an independent validation using individual stellar veloci
 
 ![Figure 7: Milky Way rotation curve](figures/mw_rotation_curve_derived.png)
 
-*FIG. 7. Milky Way rotation curve from Eilers et al. (2019). Black points: observed circular velocities for 28,368 red giant stars. Green dashed: baryonic (Newtonian) prediction. Blue solid: Σ-Gravity. Red dotted: MOND.*
+*FIG. 7. Milky Way rotation curve. Black points: Eilers et al. (2019) data (5–16 kpc). Green dashed: baryonic prediction. Blue solid: Σ-Gravity (dashed beyond data). Red dotted: MOND. Inset: Σ-Gravity vs MOND difference. Both theories flatten asymptotically (~200–210 km/s at 50 kpc), with Σ-Gravity predicting slightly higher velocities in the outer disk.*
 
 ### C. Galaxy Cluster Strong Lensing
 
