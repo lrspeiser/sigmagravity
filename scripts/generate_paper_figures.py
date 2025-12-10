@@ -208,7 +208,7 @@ def generate_rar_figure(output_dir):
     # Plot theory line
     g_range = np.logspace(-13, -8, 200)
     g_eff_theory = g_range * Sigma_unified(10.0, g_range, R_d=3.0, A=A_galaxy)
-    ax.plot(g_range, g_eff_theory, 'b-', lw=2, label=f'Σ-Gravity (A=√3)')
+    ax.plot(g_range, g_eff_theory, 'b-', lw=2, label=f'Σ-Gravity (A={A_galaxy:.2f})')
     
     # 1:1 line
     ax.plot([1e-14, 1e-7], [1e-14, 1e-7], 'k--', lw=1, alpha=0.5, label='1:1 (no enhancement)')
@@ -368,7 +368,7 @@ def generate_amplitude_figure(output_dir):
     D_vals = [0, 0.5, 1.0]  # Dimensionality factors
     
     A_pred = [unified_amplitude(D, L) for D, L in zip(D_vals, L_kpc)]
-    A_used = [A_0, 3.1, A_cluster]  # Values from canonical formula
+    A_used = A_pred  # Use unified formula values consistently
     
     x = np.arange(len(systems))
     width = 0.35
@@ -561,9 +561,11 @@ def generate_rc_gallery(output_dir):
         V_disk = np.array(V_disk)
         V_bulge = np.array(V_bulge)
         
-        # Compute V_bar with mass-to-light scaling
-        # V_disk and V_bulge need Upsilon factor but these are already in km/s from SPARC
-        V_bar_sq = np.abs(V_gas)**2 + np.abs(V_disk)**2 + np.abs(V_bulge)**2
+        # Compute V_bar with mass-to-light scaling (matching regression test)
+        # M/L_disk = 0.5, M/L_bulge = 0.7 (Lelli+ 2016 standard)
+        ML_DISK = 0.5
+        ML_BULGE = 0.7
+        V_bar_sq = np.abs(V_gas)**2 + ML_DISK * np.abs(V_disk)**2 + ML_BULGE * np.abs(V_bulge)**2
         V_bar = np.sqrt(V_bar_sq)
         V_bar = np.where(np.isnan(V_bar), 0, V_bar)
         

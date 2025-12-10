@@ -31,7 +31,11 @@ cosmo = FlatLambdaCDM(H0=H0, Om0=0.3)
 
 # Σ-Gravity parameters (path length scaling: A = A₀ × L^(1/4), A₀ ≈ 1.6)
 g_dagger = c * H0_SI / (4 * np.sqrt(np.pi))  # Critical acceleration ≈ 9.6e-11 m/s²
-A_cluster = 8.0  # Cluster amplitude (L ≈ 400 kpc → A ≈ 7.15, use 8.0)
+A_0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173
+L_0 = 0.40  # Reference path length (kpc)
+N_EXP = 0.27  # Path length exponent
+L_cluster = 600  # Typical cluster path length (kpc)
+A_cluster = A_0 * (L_cluster / L_0)**N_EXP  # ≈ 8.45
 
 print("=" * 80)
 print("Σ-GRAVITY CLUSTER LENSING ANALYSIS")
