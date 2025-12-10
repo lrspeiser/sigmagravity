@@ -257,7 +257,7 @@ pip install numpy scipy pandas matplotlib astropy
 
 ### Validation Script
 
-The master regression test is `scripts/run_regression_extended.py`, which runs 16 comprehensive tests using the canonical Σ-Gravity parameters:
+The master regression test is `scripts/run_regression_extended.py`, which runs 17 comprehensive tests using the canonical Σ-Gravity parameters:
 
 | Parameter | Value | Status |
 |-----------|-------|--------|
@@ -271,9 +271,9 @@ The master regression test is `scripts/run_regression_extended.py`, which runs 1
 ### Usage
 
 ```bash
-python scripts/run_regression_extended.py           # Full 16 tests
+python scripts/run_regression_extended.py           # Full 17 tests
 python scripts/run_regression_extended.py --quick   # Skip slow tests (Gaia, counter-rotation)
-python scripts/run_regression_extended.py --core    # Core 6 tests only (SPARC, clusters, Gaia, redshift, solar system, counter-rotation)
+python scripts/run_regression_extended.py --core    # Core 8 tests only (SPARC, clusters, holdout, Gaia, etc.)
 ```
 
 ### Output Files
@@ -282,30 +282,31 @@ Results are saved to `scripts/regression_results/extended_report.json` in machin
 
 ---
 
-## SI §4a — Complete Test Suite (16 Tests)
+## SI §4a — Complete Test Suite (17 Tests)
 
-The regression test validates Σ-Gravity against 16 diverse astrophysical phenomena, comparing to both MOND and ΛCDM where applicable.
+The regression test validates Σ-Gravity against 17 diverse astrophysical phenomena, comparing to both MOND and ΛCDM where applicable.
 
 ### Test Suite Summary
 
 | # | Test | Gold Standard | Σ-Gravity | MOND | ΛCDM |
 |---|------|---------------|-----------|------|------|
-| 1 | SPARC Galaxies | Lelli+ 2016 | 17.75 km/s | 17.15 km/s | ~15 km/s (fitted) |
+| 1 | SPARC Galaxies | Lelli+ 2016 | 17.42 km/s | 17.15 km/s | ~15 km/s (fitted) |
 | 2 | Galaxy Clusters | Fox+ 2022 | 0.987× | ~0.33× | ~1.0× (fitted) |
-| 3 | Milky Way | Eilers+ 2019 | 29.5 km/s | ~30 km/s | ~25 km/s |
-| 4 | Redshift Evolution | Theory | ∝ H(z) | ∝ H(z)? | N/A |
-| 5 | Solar System | Bertotti+ 2003 | 1.77×10⁻⁹ | ~10⁻⁵ | 0 |
-| 6 | Counter-Rotation | Bevacqua+ 2022 | p=0.004 | N/A | N/A |
-| 7 | Tully-Fisher | McGaugh 2012 | slope=4 | slope=4 | slope~3.5 |
-| 8 | Wide Binaries | Chae 2023 | 63% boost | ~35% | 0% |
-| 9 | Dwarf Spheroidals | Walker+ 2009 | 0.72× | ~1× | ~1× (fitted) |
-| 10 | Ultra-Diffuse Galaxies | van Dokkum+ 2018 | EFE needed | EFE needed | Fitted |
-| 11 | Galaxy-Galaxy Lensing | Stacking | 9.5× | ~10× | ~15× |
-| 12 | External Field Effect | Theory | 0.36× | 0.3× | N/A |
-| 13 | Gravitational Waves | GW170817 | c_GW = c | c_GW = c | c_GW = c |
-| 14 | Structure Formation | Planck 2018 | Informational | Fails | Works |
-| 15 | CMB Acoustic Peaks | Planck 2018 | Informational | Fails | Works |
-| 16 | Bullet Cluster | Clowe+ 2006 | 1.12× | ~0.5× | ~2.1× |
+| 3 | Cluster Holdout | Cross-validation | n=0.27±0.01 | N/A | N/A |
+| 4 | Milky Way | Eilers+ 2019 | 29.5 km/s | ~30 km/s | ~25 km/s |
+| 5 | Redshift Evolution | Theory | ∝ H(z) | ∝ H(z)? | N/A |
+| 6 | Solar System | Bertotti+ 2003 | 1.77×10⁻⁹ | ~10⁻⁵ | 0 |
+| 7 | Counter-Rotation | Bevacqua+ 2022 | p=0.004 | N/A | N/A |
+| 8 | Tully-Fisher | McGaugh 2012 | slope=4 | slope=4 | slope~3.5 |
+| 9 | Wide Binaries | Chae 2023 | 63% boost | ~35% | 0% |
+| 10 | Dwarf Spheroidals | Walker+ 2009 | 0.72× | ~1× | ~1× (fitted) |
+| 11 | Ultra-Diffuse Galaxies | van Dokkum+ 2018 | EFE needed | EFE needed | Fitted |
+| 12 | Galaxy-Galaxy Lensing | Stacking | 9.5× | ~10× | ~15× |
+| 13 | External Field Effect | Theory | 0.36× | 0.3× | N/A |
+| 14 | Gravitational Waves | GW170817 | c_GW = c | c_GW = c | c_GW = c |
+| 15 | Structure Formation | Planck 2018 | Informational | Fails | Works |
+| 16 | CMB Acoustic Peaks | Planck 2018 | Informational | Fails | Works |
+| 17 | Bullet Cluster | Clowe+ 2006 | 1.12× | ~0.5× | ~2.1× |
 
 ### Observational Benchmarks (Gold Standard)
 
@@ -634,7 +635,7 @@ def compute_sigma_eff(V_gas, V_disk, V_bulge):
     return gas_frac * 10 + disk_frac * 25 + bulge_frac * 120  # km/s
 ```
 
-### SI §13.3 Full 16-Test Comparison
+### SI §13.3 Full 17-Test Comparison
 
 **Tests affected by ξ choice:**
 

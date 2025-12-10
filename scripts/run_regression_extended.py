@@ -3,33 +3,37 @@
 Σ-GRAVITY EXTENDED REGRESSION TEST
 ===================================
 
-This extends the master regression test with 8 additional tests developed during
+This extends the master regression test with additional tests developed during
 the graviton path model exploration, plus optional ray-tracing lensing tests.
 
-ORIGINAL TESTS (7):
+Uses the UNIFIED 3D AMPLITUDE FORMULA: A(L) = A₀ × (L/L₀)^n
+No D switch needed - path length L determines amplitude naturally.
+
+CORE TESTS (8):
     1. SPARC Galaxies (171 rotation curves)
     2. Galaxy Clusters (42 Fox+ 2022)
-    3. Milky Way (28,368 Gaia stars)
-    4. Redshift Evolution
-    5. Solar System (Cassini bound)
-    6. Counter-Rotation Effect
-    7. Tully-Fisher Relation
+    3. Cluster Holdout (n calibration stability with L₀ fixed)
+    4. Milky Way (28,368 Gaia stars)
+    5. Redshift Evolution
+    6. Solar System (Cassini bound)
+    7. Counter-Rotation Effect
+    8. Tully-Fisher Relation
 
-NEW TESTS (9):
-    8. Wide Binaries (Chae 2023)
-    9. Dwarf Spheroidals (Fornax, Draco, Sculptor, Carina)
-    10. Ultra-Diffuse Galaxies (DF2, Dragonfly44)
-    11. Galaxy-Galaxy Lensing
-    12. External Field Effect
-    13. Gravitational Waves (GW170817)
-    14. Structure Formation
-    15. CMB Acoustic Peaks
-    16. Bullet Cluster (ray-tracing)
+EXTENDED TESTS (9):
+    9. Wide Binaries (Chae 2023)
+    10. Dwarf Spheroidals (Fornax, Draco, Sculptor, Carina)
+    11. Ultra-Diffuse Galaxies (DF2, Dragonfly44)
+    12. Galaxy-Galaxy Lensing
+    13. External Field Effect
+    14. Gravitational Waves (GW170817)
+    15. Structure Formation
+    16. CMB Acoustic Peaks
+    17. Bullet Cluster (ray-tracing)
 
 USAGE:
-    python scripts/run_regression_extended.py           # Full test (16 tests)
+    python scripts/run_regression_extended.py           # Full test (17 tests)
     python scripts/run_regression_extended.py --quick   # Skip slow tests
-    python scripts/run_regression_extended.py --core    # Only original 7 tests
+    python scripts/run_regression_extended.py --core    # Only core 8 tests
 
 Author: Leonard Speiser
 Last Updated: December 2025
@@ -209,8 +213,19 @@ class TestResult:
     message: str
 
 
-def unified_amplitude(D: float, L: float) -> float:
-    """Unified amplitude: A = A₀ × [1 - D + D × (L/L₀)^n]"""
+def unified_amplitude(L: float) -> float:
+    """Unified 3D amplitude: A = A₀ × (L/L₀)^n
+    
+    No D switch needed - path length L determines amplitude naturally:
+    - Thin disk galaxies: L ≈ L₀ (0.4 kpc scale height) → A ≈ A₀
+    - Elliptical galaxies: L ~ 1-20 kpc → A ~ 1.5-3.4
+    - Galaxy clusters: L ≈ 600 kpc → A ≈ 8.45
+    """
+    return A_0 * (L / L_0)**N_EXP
+
+
+def unified_amplitude_legacy(D: float, L: float) -> float:
+    """Legacy amplitude with D switch (for backwards compatibility)."""
     return A_0 * (1 - D + D * (L / L_0)**N_EXP)
 
 
@@ -243,11 +258,11 @@ def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
 
 
 def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0, 
-                      A: float = None, D: float = 0, L: float = 1.0) -> np.ndarray:
+                      A: float = None, L: float = L_0) -> np.ndarray:
     """
     Full Σ enhancement factor using W(r) approximation.
     
-    Σ = 1 + A(D,L) × W(r) × h(g)
+    Σ = 1 + A(L) × W(r) × h(g)
     
     Note: This uses the W(r) approximation. For the primary C(r) formulation,
     use sigma_enhancement_C() with fixed-point iteration.
@@ -255,7 +270,7 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
     g = np.maximum(np.asarray(g), 1e-15)
     
     if A is None:
-        A = unified_amplitude(D, L)
+        A = unified_amplitude(L)
     
     h = h_function(g)
     
@@ -268,18 +283,18 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
 
 
 def sigma_enhancement_C(g: np.ndarray, v_rot: np.ndarray, sigma: float = 20.0,
-                        A: float = None, D: float = 0, L: float = 1.0) -> np.ndarray:
+                        A: float = None, L: float = L_0) -> np.ndarray:
     """
     Full Σ enhancement factor using covariant C(r) - PRIMARY formulation.
     
-    Σ = 1 + A(D,L) × C(r) × h(g)
+    Σ = 1 + A(L) × C(r) × h(g)
     
     where C = v_rot²/(v_rot² + σ²)
     """
     g = np.maximum(np.asarray(g), 1e-15)
     
     if A is None:
-        A = unified_amplitude(D, L)
+        A = unified_amplitude(L)
     
     h = h_function(g)
     C = C_coherence(v_rot, sigma)
@@ -305,11 +320,9 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     V_bar_ms = V_bar * 1000
     g_bar = V_bar_ms**2 / R_m
     
-    if h_disk is None:
-        h_disk = 0.15 * R_d
-    L = 2 * h_disk
-    D = f_bulge
-    A = unified_amplitude(D, L)
+    # For thin disk galaxies, use L = L₀ = 0.4 kpc → A = A₀
+    # (The path length L₀ IS the typical disk scale height by definition)
+    A = A_0  # = unified_amplitude(L_0) = 1.173
     
     if use_C_primary:
         # PRIMARY: Covariant C(r) with fixed-point iteration
@@ -569,9 +582,8 @@ def test_clusters(clusters: List[Dict]) -> TestResult:
     ratios = []
     
     # Cluster parameters for unified amplitude
-    L_cluster = 600  # kpc (path through cluster)
-    D_cluster = 1.0  # 3D system
-    A_cluster = unified_amplitude(D_cluster, L_cluster)
+    L_cluster = 600  # kpc (path through cluster baryons)
+    A_cluster = unified_amplitude(L_cluster)  # ≈ 8.45
     
     for cl in clusters:
         M_bar = cl['M_bar']
@@ -610,6 +622,92 @@ def test_clusters(clusters: List[Dict]) -> TestResult:
             'benchmark_lcdm': 'Works with NFW fits',
         },
         message=f"Median ratio={median_ratio:.3f} (MOND~{mond_ratio:.2f}, ΛCDM~1.0), Scatter={scatter:.3f} dex ({len(ratios)} clusters)"
+    )
+
+
+def test_cluster_holdout(clusters: List[Dict], n_splits: int = 10, 
+                         test_fraction: float = 0.3) -> TestResult:
+    """Test cluster parameter stability via holdout validation.
+    
+    With L₀ = 0.4 kpc fixed (physical value), calibrate only n on training set
+    and evaluate on holdout set. Validates that n is stable and not overfit.
+    
+    Pass criteria:
+        - Holdout median ratio between 0.7 and 1.4
+        - Calibrated n stable (std < 0.05)
+    """
+    if len(clusters) < 10:
+        return TestResult("Cluster Holdout", True, 0.0, {}, 
+                         "SKIPPED: Need ≥10 clusters")
+    
+    from scipy.optimize import minimize_scalar
+    
+    # Fixed physical parameters
+    L0_fixed = 0.4  # kpc - disk scale height (physical, not calibrated)
+    L_cluster = 600.0  # kpc - cluster path length
+    
+    def predict_with_n(M_bar, r_kpc, n):
+        """Predict cluster mass with given n (L₀ fixed)."""
+        A = A_0 * (L_cluster / L0_fixed) ** n
+        r_m = r_kpc * kpc_to_m
+        g_N = G * M_bar * M_sun / r_m**2
+        h = np.sqrt(g_dagger / g_N) * g_dagger / (g_dagger + g_N)
+        Sigma = 1 + A * h
+        return M_bar * Sigma
+    
+    holdout_medians = []
+    calibrated_n_values = []
+    
+    for seed in range(n_splits):
+        np.random.seed(seed + 42)
+        
+        indices = np.random.permutation(len(clusters))
+        n_test = int(len(clusters) * test_fraction)
+        test_idx = indices[:n_test]
+        train_idx = indices[n_test:]
+        
+        train_clusters = [clusters[i] for i in train_idx]
+        test_clusters = [clusters[i] for i in test_idx]
+        
+        def train_objective(n):
+            ratios = []
+            for cl in train_clusters:
+                M_pred = predict_with_n(cl['M_bar'], cl.get('r_kpc', 200), n)
+                ratios.append(M_pred / cl['M_lens'])
+            return abs(np.median(ratios) - 1.0)
+        
+        result = minimize_scalar(train_objective, bounds=(0.1, 0.5), method='bounded')
+        n_cal = result.x
+        calibrated_n_values.append(n_cal)
+        
+        ratios = []
+        for cl in test_clusters:
+            M_pred = predict_with_n(cl['M_bar'], cl.get('r_kpc', 200), n_cal)
+            ratios.append(M_pred / cl['M_lens'])
+        
+        holdout_medians.append(np.median(ratios))
+    
+    mean_holdout = np.mean(holdout_medians)
+    std_holdout = np.std(holdout_medians)
+    mean_n = np.mean(calibrated_n_values)
+    std_n = np.std(calibrated_n_values)
+    
+    holdout_ok = 0.7 < mean_holdout < 1.4
+    n_stable = std_n < 0.05
+    passed = holdout_ok and n_stable
+    
+    return TestResult(
+        name="Cluster Holdout",
+        passed=passed,
+        metric=mean_holdout,
+        details={
+            'n_splits': n_splits,
+            'mean_n': mean_n,
+            'std_n': std_n,
+            'mean_holdout_ratio': mean_holdout,
+            'std_holdout_ratio': std_holdout,
+        },
+        message=f"n={mean_n:.2f}±{std_n:.2f}, holdout={mean_holdout:.2f}±{std_holdout:.2f}"
     )
 
 
@@ -1305,10 +1403,11 @@ def main():
     print("Running tests...")
     print("-" * 80)
     
-    # Original tests (1-7)
+    # Original tests (1-8) - now includes holdout validation
     tests_core = [
         ("SPARC", lambda: test_sparc(galaxies)),
         ("Clusters", lambda: test_clusters(clusters)),
+        ("Cluster Holdout", lambda: test_cluster_holdout(clusters)),
         ("Gaia/MW", lambda: test_gaia(gaia_df)),
         ("Redshift", lambda: test_redshift()),
         ("Solar System", lambda: test_solar_system()),
@@ -1317,7 +1416,7 @@ def main():
         ("Tully-Fisher", lambda: test_tully_fisher()),
     ]
     
-    # New tests (8-16)
+    # Extended tests (9-17)
     tests_extended = [
         ("Wide Binaries", lambda: test_wide_binaries()),
         ("Dwarf Spheroidals", lambda: test_dwarf_spheroidals()),

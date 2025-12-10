@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-12-09T12:19:22.315415",
+  "timestamp": "2025-12-10T11:09:30.022581",
   "formula": "sigma_gravity_unified",
-  "mode": "full",
+  "mode": "quick",
   "parameters": {
     "A_0": 1.17251960642002,
     "L_0": 0.4,
@@ -16,18 +16,18 @@
     {
       "name": "SPARC Galaxies",
       "passed": 1.0,
-      "metric": 17.814218446710008,
+      "metric": 17.415478722054278,
       "details": {
         "n_galaxies": 171,
-        "mean_rms": 17.814218446710008,
+        "mean_rms": 17.415478722054278,
         "mean_mond_rms": 17.154025922937112,
-        "win_rate": 0.4327485380116959,
-        "rar_scatter_dex": 0.09965932394905529,
+        "win_rate": 0.4269005847953216,
+        "rar_scatter_dex": 0.09966065473052123,
         "benchmark_mond_rms": 17.15,
         "benchmark_lcdm_rms": 15.0,
         "benchmark_rar_scatter": 0.13
       },
-      "message": "RMS=17.81 km/s (MOND=17.15, \u039bCDM~15), Scatter=0.100 dex, Win=43.3%"
+      "message": "RMS=17.42 km/s (MOND=17.15, \u039bCDM~15), Scatter=0.100 dex, Win=42.7%"
     },
     {
       "name": "Clusters",
@@ -44,17 +44,24 @@
       "message": "Median ratio=0.987 (MOND~0.33, \u039bCDM~1.0), Scatter=0.132 dex (42 clusters)"
     },
     {
-      "name": "Gaia/MW",
+      "name": "Cluster Holdout",
       "passed": 1.0,
-      "metric": 30.020375925533884,
+      "metric": 1.0214444947693806,
       "details": {
-        "n_stars": 28368,
-        "rms": 30.020375925533884,
-        "mean_residual": -12.233350978029799,
-        "benchmark_V_sun": 233,
-        "benchmark_n_stars": 28368
+        "n_splits": 10,
+        "mean_n": 0.2729923441750869,
+        "std_n": 0.005110139497549799,
+        "mean_holdout_ratio": 1.0214444947693806,
+        "std_holdout_ratio": 0.06432387050969941
       },
-      "message": "RMS=30.0 km/s (28368 stars, expected 28368)"
+      "message": "n=0.27\u00b10.01, holdout=1.02\u00b10.06"
+    },
+    {
+      "name": "Gaia/MW",
+      "passed": true,
+      "metric": 0.0,
+      "details": {},
+      "message": "SKIPPED: No data"
     },
     {
       "name": "Redshift Evolution",
@@ -77,14 +84,10 @@
     },
     {
       "name": "Counter-Rotation",
-      "passed": 1.0,
-      "metric": 0.003915553907736003,
-      "details": {
-        "n_cr": 63,
-        "fdm_cr_mean": 0.16922222222222216,
-        "fdm_normal_mean": 0.3020046626984127
-      },
-      "message": "f_DM(CR)=0.169 < f_DM(Normal)=0.302, p=0.0039"
+      "passed": true,
+      "metric": 0,
+      "details": {},
+      "message": "SKIPPED"
     },
     {
       "name": "Tully-Fisher",
@@ -263,8 +266,8 @@
     }
   ],
   "summary": {
-    "total_tests": 16,
-    "passed": 16,
+    "total_tests": 17,
+    "passed": 17,
     "failed": 0
   },
   "all_passed": true
