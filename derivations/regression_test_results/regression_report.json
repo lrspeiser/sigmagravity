@@ -1,8 +1,8 @@
 {
-  "timestamp": "2025-12-10T11:02:21.135969",
+  "timestamp": "2025-12-10T11:05:13.340128",
   "all_passed": true,
-  "total_tests": 8,
-  "passed_tests": 8,
+  "total_tests": 9,
+  "passed_tests": 9,
   "failed_tests": 0,
   "results": [
     {
@@ -143,6 +143,26 @@
         "max_ratio": 2.930921119761393
       },
       "message": "PASSED: Median ratio=0.987, Scatter=0.132 dex"
+    },
+    {
+      "name": "Cluster Holdout",
+      "passed": "True",
+      "metric": 1.0214444947693806,
+      "threshold": 1.0,
+      "details": {
+        "n_splits": 10,
+        "test_fraction": 0.3,
+        "L0_fixed": 0.4,
+        "mean_n": 0.2729923441750869,
+        "std_n": 0.005110139497549799,
+        "mean_holdout_ratio": 1.0214444947693806,
+        "std_holdout_ratio": 0.06432387050969941,
+        "min_holdout": 0.911356346073692,
+        "max_holdout": 1.1497418633231242,
+        "holdout_ok": "True",
+        "n_stable": "True"
+      },
+      "message": "PASSED: n=0.27\u00b10.01, holdout=1.02\u00b10.06"
     },
     {
       "name": "Milky Way",

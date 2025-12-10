@@ -6,13 +6,15 @@ This script runs comprehensive regression tests across ALL validation domains
 to ensure the theory remains consistent when formulas are updated.
 
 Tests included:
-1. SPARC Galaxies (171 rotation curves)
-2. Galaxy Clusters (42 Fox+ 2022 lensing masses)
-3. Milky Way (28,368 Eilers-APOGEE-Gaia stars)
-4. Solar System Safety (Cassini bound, planetary orbits)
-5. Redshift Evolution (high-z predictions)
-6. Dynamical Coherence Scale (new ξ formula validation)
-7. Counter-rotation Effect (unique prediction)
+1. Critical Acceleration (g† derivation)
+2. Solar System Safety (Cassini bound)
+3. Planetary Orbits (h-enhancement suppression)
+4. SPARC Galaxies (171 rotation curves)
+5. Galaxy Clusters (42 Fox+ 2022 lensing masses)
+6. Cluster Holdout (n calibration stability with L₀ fixed)
+7. Milky Way (28,368 Eilers-APOGEE-Gaia stars)
+8. Redshift Evolution (high-z predictions)
+9. Dynamical Coherence Scale (ξ formula validation)
 
 Usage:
     python derivations/full_regression_test.py [--verbose] [--quick]
@@ -805,6 +807,125 @@ def test_clusters(clusters: List[Dict], verbose: bool = False,
             'max_ratio': max(ratios)
         },
         message=f"{'PASSED' if passed else 'FAILED'}: Median ratio={median_ratio:.3f}, Scatter={scatter:.3f} dex"
+    )
+
+
+def test_cluster_holdout(clusters: List[Dict], verbose: bool = False,
+                         n_splits: int = 10, test_fraction: float = 0.3) -> TestResult:
+    """Test cluster parameter stability via holdout validation.
+    
+    With L₀ = 0.4 kpc fixed (physical value), calibrate only n on training set
+    and evaluate on holdout set. This validates that n is stable and not overfit.
+    
+    Parameters:
+        clusters: List of cluster data dicts
+        verbose: Print detailed output
+        n_splits: Number of random train/test splits
+        test_fraction: Fraction of clusters to hold out (default 30%)
+    
+    Pass criteria:
+        - Holdout median ratio between 0.7 and 1.4
+        - Calibrated n stable (std < 0.05)
+    """
+    if len(clusters) < 10:
+        return TestResult(
+            name="Cluster Holdout",
+            passed=True,  # Skip if insufficient data
+            metric=0.0,
+            threshold=1.0,
+            details={'error': 'Insufficient clusters for holdout'},
+            message="SKIPPED: Need ≥10 clusters for holdout validation"
+        )
+    
+    from scipy.optimize import minimize_scalar
+    
+    # Fixed physical parameters
+    L0_fixed = 0.4  # kpc - disk scale height (physical, not calibrated)
+    L_cluster = 600.0  # kpc - cluster path length
+    A0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173
+    
+    def predict_with_n(M_bar, r_kpc, n):
+        """Predict cluster mass with given n (L₀ fixed)."""
+        A = A0 * (L_cluster / L0_fixed) ** n
+        r_m = r_kpc * kpc_to_m
+        g_N = G_const * M_bar * M_sun / r_m**2
+        h = np.sqrt(g_dagger / g_N) * g_dagger / (g_dagger + g_N)
+        Sigma = 1 + A * h
+        return M_bar * Sigma
+    
+    holdout_medians = []
+    calibrated_n_values = []
+    
+    for seed in range(n_splits):
+        np.random.seed(seed + 42)  # Reproducible splits
+        
+        # Shuffle and split
+        indices = np.random.permutation(len(clusters))
+        n_test = int(len(clusters) * test_fraction)
+        test_idx = indices[:n_test]
+        train_idx = indices[n_test:]
+        
+        train_clusters = [clusters[i] for i in train_idx]
+        test_clusters = [clusters[i] for i in test_idx]
+        
+        # Calibrate n on training set (minimize distance from median = 1.0)
+        def train_objective(n):
+            ratios = []
+            for cl in train_clusters:
+                M_pred = predict_with_n(cl['M_bar'], cl['r_kpc'], n)
+                ratios.append(M_pred / cl['M_lens'])
+            return abs(np.median(ratios) - 1.0)
+        
+        result = minimize_scalar(train_objective, bounds=(0.1, 0.5), method='bounded')
+        n_cal = result.x
+        calibrated_n_values.append(n_cal)
+        
+        # Evaluate on holdout set
+        ratios = []
+        for cl in test_clusters:
+            M_pred = predict_with_n(cl['M_bar'], cl['r_kpc'], n_cal)
+            ratios.append(M_pred / cl['M_lens'])
+        
+        holdout_medians.append(np.median(ratios))
+    
+    # Compute statistics
+    mean_holdout = np.mean(holdout_medians)
+    std_holdout = np.std(holdout_medians)
+    mean_n = np.mean(calibrated_n_values)
+    std_n = np.std(calibrated_n_values)
+    
+    # Pass criteria:
+    # 1. Holdout median between 0.7 and 1.4 (generous bounds)
+    # 2. Calibrated n is stable (std < 0.05)
+    holdout_ok = 0.7 < mean_holdout < 1.4
+    n_stable = std_n < 0.05
+    passed = holdout_ok and n_stable
+    
+    if verbose:
+        print(f"  Holdout validation ({n_splits} splits, {int(test_fraction*100)}% held out):")
+        print(f"    Calibrated n = {mean_n:.3f} ± {std_n:.3f}")
+        print(f"    Holdout median = {mean_holdout:.3f} ± {std_holdout:.3f}")
+        print(f"    Range: {min(holdout_medians):.3f} - {max(holdout_medians):.3f}")
+    
+    return TestResult(
+        name="Cluster Holdout",
+        passed=passed,
+        metric=mean_holdout,
+        threshold=1.0,
+        details={
+            'n_splits': n_splits,
+            'test_fraction': test_fraction,
+            'L0_fixed': L0_fixed,
+            'mean_n': mean_n,
+            'std_n': std_n,
+            'mean_holdout_ratio': mean_holdout,
+            'std_holdout_ratio': std_holdout,
+            'min_holdout': min(holdout_medians),
+            'max_holdout': max(holdout_medians),
+            'holdout_ok': holdout_ok,
+            'n_stable': n_stable
+        },
+        message=f"{'PASSED' if passed else 'FAILED'}: n={mean_n:.2f}±{std_n:.2f}, holdout={mean_holdout:.2f}±{std_holdout:.2f}"
     )
 
 
@@ -1612,17 +1733,22 @@ def run_all_tests(data_dir: Path, verbose: bool = False, quick: bool = False) ->
     results.append(result)
     print(f"[{'✓' if result.passed else '✗'}] {result.message}")
     
-    # 6. Milky Way
+    # 6. Cluster holdout validation (validates n calibration stability)
+    result = test_cluster_holdout(clusters, verbose)
+    results.append(result)
+    print(f"[{'✓' if result.passed else '✗'}] {result.message}")
+    
+    # 7. Milky Way
     result = test_milky_way(mw_df, verbose)
     results.append(result)
     print(f"[{'✓' if result.passed else '✗'}] {result.message}")
     
-    # 7. Redshift evolution
+    # 8. Redshift evolution
     result = test_redshift_evolution(verbose)
     results.append(result)
     print(f"[{'✓' if result.passed else '✗'}] {result.message}")
     
-    # 8. Dynamical coherence scale
+    # 9. Dynamical coherence scale
     result = test_dynamical_coherence_scale(galaxies, verbose)
     results.append(result)
     print(f"[{'✓' if result.passed else '✗'}] {result.message}")
