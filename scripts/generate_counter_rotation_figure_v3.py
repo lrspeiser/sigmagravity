@@ -168,19 +168,19 @@ ax.set_xlim(0, 0.5)
 ax.set_ylim(0, 1.2)
 ax.grid(True, alpha=0.3)
 
-# Annotations
-ax.annotate('ΛCDM/MOND:\nNo dependence on\nrotation direction', 
-            xy=(0.25, 1.0), xytext=(0.3, 1.1),
-            fontsize=9, ha='left', va='bottom',
-            arrowprops=dict(arrowstyle='->', color='gray'))
+# Annotations - positioned to avoid overlap
+ax.annotate('ΛCDM/MOND:\nNo effect', 
+            xy=(0.4, 1.0), xytext=(0.38, 1.12),
+            fontsize=8, ha='center', va='bottom',
+            arrowprops=dict(arrowstyle='->', color='gray', lw=0.8))
 
 ax.annotate(f'Implied CR\nfraction: {implied_retro:.0%}', 
             xy=(implied_retro, relative_enhancement_observed), 
-            xytext=(implied_retro + 0.08, relative_enhancement_observed - 0.15),
-            fontsize=9, ha='left', color='red',
-            arrowprops=dict(arrowstyle='->', color='red'))
+            xytext=(0.35, 0.35),
+            fontsize=8, ha='left', color='red',
+            arrowprops=dict(arrowstyle='->', color='red', lw=0.8))
 
-ax.text(0.02, 0.98, 'A', transform=ax.transAxes, fontsize=14, fontweight='bold', va='top')
+ax.text(0.02, 0.02, 'A', transform=ax.transAxes, fontsize=14, fontweight='bold', va='bottom')
 
 # ==========================================================================
 # RIGHT PANEL: Data Comparison
@@ -204,17 +204,17 @@ ax.set_title('MaNGA DynPop Data', fontsize=12, fontweight='bold')
 ax.legend(loc='upper right', fontsize=9)
 ax.grid(True, alpha=0.3)
 
-# Statistics box
+# Statistics box - positioned in lower right to avoid histogram overlap
 reduction_pct = (1 - relative_enhancement_observed) * 100
-ax.text(0.98, 0.98, 
-        f'Mean $f_{{\\rm DM}}$ (normal): {mean_fdm_normal:.2f}\n'
-        f'Mean $f_{{\\rm DM}}$ (CR): {mean_fdm_cr:.2f}\n'
+ax.text(0.98, 0.55, 
+        f'Normal mean: {mean_fdm_normal:.2f}\n'
+        f'CR mean: {mean_fdm_cr:.2f}\n'
         f'Reduction: {reduction_pct:.0f}%\n'
-        f'p-value: {mw_pval:.4f}',
-        transform=ax.transAxes, fontsize=10, va='top', ha='right',
+        f'p = {mw_pval:.4f}',
+        transform=ax.transAxes, fontsize=9, va='top', ha='right',
         bbox=dict(boxstyle='round', facecolor='lightyellow', alpha=0.9))
 
-ax.text(0.02, 0.98, 'B', transform=ax.transAxes, fontsize=14, fontweight='bold', va='top')
+ax.text(0.02, 0.02, 'B', transform=ax.transAxes, fontsize=14, fontweight='bold', va='bottom')
 
 plt.suptitle('Counter-Rotation Test: Σ-Gravity Predicts Reduced Enhancement',
              fontsize=13, fontweight='bold')
