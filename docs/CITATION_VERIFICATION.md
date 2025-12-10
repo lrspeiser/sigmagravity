@@ -4,32 +4,32 @@ This document verifies the citations in README.md against the downloaded referen
 
 ## Executive Summary
 
-**Critical Finding: 5 PDF files contain the WRONG papers entirely.**
+**Critical Finding: 4 PDF files contain the WRONG papers entirely.**
 
 | Status | Count |
 |--------|-------|
-| ✅ VERIFIED | 10 |
-| ❌ WRONG FILE | 5 |
-| ⚠️ CORRUPTED | 1 |
+| ✅ VERIFIED | 11 |
+| ❌ WRONG FILE | 4 |
+| 📄 SCANNED IMAGE | 1 |
 
 ---
 
 ## ❌ CRITICAL ISSUES - Wrong PDFs Downloaded
 
-### Reference [4] - CORRUPTED FILE
+### Reference [4] - VERIFIED (Scanned Image) ✅
 
 **README Citation:** M. Milgrom, Astrophys. J. **270**, 371 (1983) - MOND implications for galaxies
 
 **PDF File:** `1983ApJ-milgrom-implications-for-galaxies.pdf`
 
-**Status:** ❌ CORRUPTED - PDF text extraction returns garbage characters
+**Status:** ✅ VERIFIED via PDF metadata - This is a scanned image PDF (pre-digital era paper)
 
-**PDF Content:**
-```
-M173..072...JpA3891
-```
+**PDF Metadata Confirms:**
+- Title: `1983ApJ...270..371M` (ADS bibcode = 1983, ApJ, Vol 270, Page 371, Milgrom)
+- Producer: NASA Astrophysics Data System
+- Pages: 13 (consistent with full article)
 
-**Action Required:** Re-download the correct PDF from ADS or arXiv
+**Note:** Text extraction failed because this is a scanned image, but the metadata confirms it's the correct paper.
 
 ---
 
@@ -278,7 +278,6 @@ M173..072...JpA3891
 
 | Ref | Current PDF | Action |
 |-----|-------------|--------|
-| [4] | Corrupted | Re-download Milgrom 1983 ApJ 270, 371 |
 | [7] | Wrong (optics paper) | Download https://arxiv.org/abs/0906.0399 |
 | [9] | Wrong (Verlinde 2010) | Download https://arxiv.org/abs/0912.0790 |
 | [10] | Wrong (spinfoam paper) | Download https://arxiv.org/abs/gr-qc/0702125 |
