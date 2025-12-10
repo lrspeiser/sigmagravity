@@ -124,28 +124,11 @@ def main():
     V_data = np.array([224, 226, 228, 229, 229, 228, 226, 224, 222, 220, 218, 216])
     V_err = np.array([8, 6, 4, 3, 2, 3, 4, 5, 6, 7, 8, 9])
     
-    # Data range for main plot
-    R_data_main = R_data
-    V_data_main = V_data
-    V_err_main = V_err
-    
-    # Extended range for showing asymptotic behavior
-    R_full = np.linspace(2, 50, 200)
-    R_data_region = np.linspace(4, 15, 50)  # Where data exists
-    R_extrapolate = np.linspace(15, 50, 50)  # Beyond data
-    
-    # Compute model predictions
-    V_bar_full = v_baryon(R_full)
-    V_sigma_full = v_sigma(R_full)
-    V_mond_full = v_mond(R_full)
-    
-    V_bar_data = v_baryon(R_data_region)
-    V_sigma_data = v_sigma(R_data_region)
-    V_mond_data = v_mond(R_data_region)
-    
-    V_bar_extrap = v_baryon(R_extrapolate)
-    V_sigma_extrap = v_sigma(R_extrapolate)
-    V_mond_extrap = v_mond(R_extrapolate)
+    # Model prediction range (just covering the data)
+    R_model = np.linspace(3, 16, 100)
+    V_bar_model = v_baryon(R_model)
+    V_sigma_model = v_sigma(R_model)
+    V_mond_model = v_mond(R_model)
     
     # Print some diagnostics
     print(f"\nModel predictions at key radii:")
@@ -164,63 +147,27 @@ def main():
     print(f"  V_MOND: {v_mond(100):.1f} km/s")
     
     # Create figure
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(9, 6))
     
     # Plot data with error bars
-    ax.errorbar(R_data_main, V_data_main, yerr=V_err_main, 
+    ax.errorbar(R_data, V_data, yerr=V_err, 
                 fmt='ko', ms=7, capsize=3, capthick=1.5,
                 label='Eilers et al. (2019)', zorder=10)
     
-    # Baryonic prediction (full range, same style throughout)
-    ax.plot(R_full, V_bar_full, 'g--', lw=2, alpha=0.8, label='Baryonic (Newtonian)')
-    
-    # Σ-Gravity: solid in data region, dashed in extrapolation
-    ax.plot(R_data_region, V_sigma_data, 'b-', lw=2.5, label='Σ-Gravity')
-    ax.plot(R_extrapolate, V_sigma_extrap, 'b--', lw=2, alpha=0.5)
-    
-    # MOND: dotted in data region, lighter dotted in extrapolation
-    ax.plot(R_data_region, V_mond_data, 'r:', lw=2.5, label='MOND')
-    ax.plot(R_extrapolate, V_mond_extrap, 'r:', lw=2, alpha=0.4)
-    
-    # Add vertical line showing data boundary
-    ax.axvline(x=15, color='gray', linestyle=':', alpha=0.5, lw=1)
-    ax.text(15.5, 145, 'Data\nboundary', fontsize=8, color='gray', va='bottom')
-    
-    # Add shaded region for data range
-    ax.axvspan(4, 15, alpha=0.05, color='blue')
-    
-    # Add annotation showing asymptotic behavior
-    ax.annotate('Both theories\nflatten asymptotically', 
-                xy=(35, 210), xytext=(38, 180),
-                fontsize=9, ha='left', va='top',
-                arrowprops=dict(arrowstyle='->', color='gray', alpha=0.7),
-                bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+    # Model predictions
+    ax.plot(R_model, V_bar_model, 'g--', lw=2, label='Baryonic (Newtonian)')
+    ax.plot(R_model, V_sigma_model, 'b-', lw=2.5, label='Σ-Gravity')
+    ax.plot(R_model, V_mond_model, 'r:', lw=2.5, label='MOND')
     
     # Labels and formatting
     ax.set_xlabel('Galactocentric Radius R [kpc]', fontsize=11)
     ax.set_ylabel('Circular Velocity V [km/s]', fontsize=11)
-    ax.set_title('Milky Way Rotation Curve: Data and Predictions', fontsize=12)
+    ax.set_title('Milky Way Rotation Curve', fontsize=12)
     
-    ax.set_xlim(0, 50)
-    ax.set_ylim(100, 280)
+    ax.set_xlim(3, 16)
+    ax.set_ylim(140, 260)
     ax.legend(loc='upper right', fontsize=9)
     ax.grid(True, alpha=0.3)
-    
-    # Add inset showing the difference between theories
-    ax_inset = ax.inset_axes([0.15, 0.15, 0.35, 0.35])
-    R_diff = np.linspace(5, 50, 100)
-    V_sigma_diff = v_sigma(R_diff)
-    V_mond_diff = v_mond(R_diff)
-    
-    ax_inset.plot(R_diff, V_sigma_diff - V_mond_diff, 'purple', lw=2)
-    ax_inset.axhline(0, color='k', linestyle='--', lw=0.5)
-    ax_inset.axvline(16, color='gray', linestyle=':', alpha=0.5)
-    ax_inset.set_xlabel('R [kpc]', fontsize=8)
-    ax_inset.set_ylabel('V_Σ - V_MOND [km/s]', fontsize=8)
-    ax_inset.set_title('Σ-Gravity vs MOND', fontsize=8)
-    ax_inset.set_xlim(5, 50)
-    ax_inset.tick_params(labelsize=7)
-    ax_inset.grid(True, alpha=0.3)
     
     plt.tight_layout()
     
