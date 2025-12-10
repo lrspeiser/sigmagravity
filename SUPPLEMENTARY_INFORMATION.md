@@ -34,6 +34,9 @@ This Supplementary Information (SI) accompanies the main manuscript and provides
 14. [SI §14 — Parameter Sensitivity](#si-14--parameter-sensitivity)
 15. [SI §15 — Fitted-Parameter Comparison (Ablation)](#si-15--fitted-parameter-comparison-ablation)
 
+**Part V: Additional Figures**
+16. [SI §16 — Additional Figures](#si-16--additional-figures)
+
 ---
 
 # Part I: Methods Canon
@@ -801,6 +804,58 @@ When given equal fitting freedom:
 We thank **Emmanuel N. Saridakis** (National Observatory of Athens) for detailed feedback on the theoretical framework.
 
 We thank **Rafael Ferraro** (CONICET – Universidad de Buenos Aires) for discussions on f(T) gravity.
+
+---
+
+## SI §16 — Additional Figures
+
+This section contains supplementary figures that provide additional validation and detail beyond the main paper figures.
+
+### SI §16.1 — RAR Residuals Histogram
+
+![RAR Residuals](figures/rar_residuals_histogram.png)
+
+*SI FIG. 16.1. Distribution of RAR residuals for Σ-Gravity (blue) and MOND (red outline) across all SPARC data points. Both theories achieve similar scatter (~0.12 dex), with Σ-Gravity showing slightly lower mean bias.*
+
+### SI §16.2 — Cluster Holdout Validation
+
+![Cluster Holdout](figures/cluster_holdout_validation.png)
+
+*SI FIG. 16.2. Cluster holdout validation. Left: Predicted vs. observed Einstein radii for training (blue circles) and holdout (orange squares) clusters. Right: Normalized residuals by cluster. Both holdout clusters fall within 1σ of predictions, demonstrating out-of-sample predictive power.*
+
+### SI §16.3 — Milky Way Comprehensive Comparison
+
+![MW Comprehensive](figures/mw_comprehensive_comparison.png)
+
+*SI FIG. 16.3. Milky Way rotation curve comparison. Four models compared against Gaia DR3 data (black points with errors): GR/baryons only (green dashed), Σ-Gravity (blue solid), MOND (red dotted), and NFW dark matter halo (purple dash-dot). Σ-Gravity and MOND both reproduce the flat rotation curve; the NFW halo requires tuned parameters.*
+
+### SI §16.4 — Baryonic Tully-Fisher Relation
+
+![BTFR](figures/btfr_two_panel_v2.png)
+
+*SI FIG. 16.4. Baryonic Tully-Fisher Relation. Left: Log M_bar vs log V_flat for SPARC galaxies. Σ-Gravity predicts a slope of 4.0 (solid line), consistent with the observed relation. Right: Residuals from the best-fit relation.*
+
+### SI §16.5 — Full Rotation Curve Gallery
+
+The `figures/model_comparison/all_galaxies/` directory contains individual rotation curve plots for all 171 SPARC galaxies, comparing:
+- Observed data (black points with error bars)
+- Baryonic prediction (green dashed)
+- Σ-Gravity prediction (blue solid)
+- MOND prediction (red dotted)
+
+Each plot is named `comparison_XX_GALAXYNAME.png` where XX is the galaxy index.
+
+### SI §16.6 — Cluster Convergence Profiles
+
+![Cluster Kappa Profiles](figures/cluster_kappa_profiles_panel.png)
+
+*SI FIG. 16.6. Convergence profiles for selected clusters. Comparison of Σ-Gravity enhanced convergence (blue) with observed strong lensing constraints (gray bands).*
+
+### SI §16.7 — Representative Galaxy Panel
+
+![Representative Panel](figures/rc_representative_panel.png)
+
+*SI FIG. 16.7. Six representative galaxies spanning the full range of SPARC: high-mass spirals (NGC2841, NGC6946), intermediate disks (NGC3198, NGC2403), and low-mass dwarfs (DDO154, UGC128). Σ-Gravity (blue) matches observations (black) across all mass scales without per-galaxy tuning.*
 
 ---
 

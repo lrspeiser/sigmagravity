@@ -127,8 +127,9 @@ def nfw_velocity(r, V200=150, c_nfw=10):
 
 def load_sparc_data():
     """Load SPARC galaxy data and R_d values."""
-    sparc_dir = Path(r"C:\Users\henry\dev\sigmagravity\data\Rotmod_LTG")
-    master_file = Path(r"C:\Users\henry\dev\sigmagravity\data\Rotmod_LTG\MasterSheet_SPARC.mrt")
+    script_dir = Path(__file__).resolve().parent.parent
+    sparc_dir = script_dir / "data" / "Rotmod_LTG"
+    master_file = script_dir / "data" / "SPARC_Lelli2016c.mrt"
     
     if not sparc_dir.exists():
         print(f"ERROR: SPARC data not found at {sparc_dir}")
@@ -198,8 +199,11 @@ def load_galaxy_data(rotmod_file, R_d_values):
     V_disk = np.array(V_disk)
     V_bulge = np.array(V_bulge)
     
-    # Compute V_bar
-    V_bar_sq = np.abs(V_gas)**2 + np.abs(V_disk)**2 + np.abs(V_bulge)**2
+    # Compute V_bar with mass-to-light scaling (matching regression test)
+    # M/L_disk = 0.5, M/L_bulge = 0.7 (Lelli+ 2016 standard)
+    ML_DISK = 0.5
+    ML_BULGE = 0.7
+    V_bar_sq = np.abs(V_gas)**2 + ML_DISK * np.abs(V_disk)**2 + ML_BULGE * np.abs(V_bulge)**2
     V_bar = np.sqrt(V_bar_sq)
     V_bar = np.where(np.isnan(V_bar), 0.1, V_bar)
     V_bar = np.maximum(V_bar, 0.1)  # Avoid division by zero
@@ -434,7 +438,8 @@ def compute_galaxy_stats(galaxy, predictions):
 
 
 def main():
-    output_dir = Path(r"C:\Users\henry\dev\sigmagravity\figures\model_comparison")
+    script_dir = Path(__file__).resolve().parent.parent
+    output_dir = script_dir / "figures" / "model_comparison"
     output_dir.mkdir(parents=True, exist_ok=True)
     
     print(f"\nOutput directory: {output_dir}")

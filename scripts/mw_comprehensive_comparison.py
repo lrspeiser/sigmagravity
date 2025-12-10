@@ -10,7 +10,7 @@ Three Data Sources:
 
 Four Models:
 1. GR (baryons only)
-2. Σ-Gravity (derived: A=√3, g†=cH₀/(4√π))
+2. Σ-Gravity (derived: A=exp(1/2π)≈1.173, g†=cH₀/(4√π))
 3. MOND (a₀=1.2×10⁻¹⁰ m/s²)
 4. Dark Matter (NFW halo)
 
@@ -141,7 +141,7 @@ def Sigma_derived(r, g_bar, R_d=R_d_MW):
     Σ = 1 + A × C(R) × h(g)
     
     where:
-    - A = √3 (derived from path interference geometry)
+    - A = exp(1/2π) ≈ 1.173 (derived from path interference geometry)
     - C(R) = coherence window (suppresses inner region)
     - h(g) = acceleration dependence
     
