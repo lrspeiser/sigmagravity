@@ -190,6 +190,23 @@ For the Sun treated as a compact source, $\xi \to 0$ (no extended disk), so $W(r
 
 **Fifth forces:** Matter couples minimally to the metric sourced by $\Phi$. The enhancement is incorporated into $\Phi$ via the phantom density—it is not an additional force on particles.
 
+### H. Framework Independence
+
+Although Σ-Gravity is implemented in this work using a QUMOND-like two-step scheme (auxiliary Poisson solve plus algebraic enhancement), the underlying coherence-dependent enhancement can be embedded in several distinct gravitational architectures. To test whether our phenomenology depends on the QUMOND-like choice, we implemented three alternative variants in the same codebase: an AQUAL-like nonlinear field equation (using $h(g_{\rm eff})$ rather than $h(g_N)$), a nonlocal kernel-averaged coherence model, and a source-coupled variant in which the enhancement is interpreted as a modified effective source rather than a phantom density. All four frameworks were evaluated using the identical 17-test regression suite described in the Supplementary Information.
+
+**Table V: Framework Independence Test**
+
+| Framework | SPARC RMS | RAR Scatter | Win Rate | Cluster Ratio | Cassini |
+|-----------|-----------|-------------|----------|---------------|---------|
+| QUMOND (baseline) | 17.50 km/s | 0.097 dex | 48.0% | 0.987 | Safe ✓ |
+| AQUAL* | 18.56 km/s | 0.097 dex | 43.3% | 0.734 | Safe ✓ |
+| Kernel | 17.53 km/s | 0.099 dex | 40.9% | 0.987 | Safe ✓ |
+| Source | 17.50 km/s | 0.097 dex | 48.0% | 0.987 | Safe ✓ |
+
+*AQUAL uses recalibrated $A_0 \approx 1.35 \times A_0^{\rm (baseline)}$ to compensate for $h(g_{\rm eff})$ vs $h(g_N)$.
+
+The nonlocal kernel version and source-coupled version (with lensing = dynamics, i.e., no gravitational slip) are nearly indistinguishable from baseline on all metrics. The AQUAL-like variant remains viable but requires modest recalibration and yields somewhat lower cluster performance. We conclude that the empirical success of Σ-Gravity is **not tied to the specific QUMOND-like implementation**. The QUMOND-like formulation is adopted because it provides the best overall performance and simplest numerical scheme, while the alternative variants demonstrate that the underlying coherence-dependent enhancement is robust across plausible field-theoretic realizations (see SI §13b for details).
+
 ---
 
 ## III. Data and Methodology
