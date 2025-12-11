@@ -14,7 +14,7 @@
 
 The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter—a discrepancy conventionally attributed to dark matter. We present Σ-Gravity, a phenomenological framework where gravitational enhancement depends on both local acceleration and kinematic coherence of the source. The enhancement factor $\Sigma = 1 + A \cdot \mathcal{C} \cdot h(g_N)$ combines a covariant coherence scalar $\mathcal{C} = v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$, an acceleration function $h(g_N)$ with critical scale $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s², and a unified amplitude connecting galaxies and clusters. Adopting a QUMOND-like formulation with minimal matter coupling, test particles follow geodesics of the enhanced potential.
 
-Applied to 171 SPARC galaxies (M/L = 0.5/0.7), the framework achieves RMS = 17.75 km/s with 47% win rate versus MOND—with no per-galaxy fitting. The amplitude formula's two cluster parameters ($L_0$, $n$) were calibrated on 42 Fox et al. (2022) strong-lensing clusters, achieving median predicted/observed ratio of 0.987—where MOND underpredicts by factor ~3. Crucially, the same framework with these parameters reproduces SPARC rotation curves without additional adjustment. Solar System constraints are satisfied ($|\gamma-1| \sim 10^{-9}$). The theory predicts that counter-rotating stellar components reduce enhancement—confirmed in MaNGA data with 44% lower inferred dark matter fractions (p < 0.01). While phenomenologically successful, Σ-Gravity lacks rigorous first-principles derivation; we present it as a falsifiable framework with specific predictions distinct from both MOND and ΛCDM.
+Applied to 171 SPARC galaxies (M/L = 0.5/0.7), the framework achieves RMS = 17.42 km/s with 43% win rate versus MOND—with no per-galaxy fitting. The amplitude formula uses $L_0 = 0.4$ kpc (fixed from typical disk scale heights) and a single calibrated exponent $n = 0.27$ (fit to 42 Fox et al. 2022 strong-lensing clusters), achieving median predicted/observed ratio of 0.987—where MOND underpredicts by factor ~3. Crucially, the same framework with this cluster-calibrated exponent reproduces SPARC rotation curves without additional adjustment. Solar System constraints are satisfied ($|\gamma-1| \sim 10^{-9}$). The theory predicts that counter-rotating stellar components reduce enhancement—confirmed in MaNGA data with 44% lower inferred dark matter fractions (p < 0.01). While phenomenologically successful, Σ-Gravity lacks rigorous first-principles derivation; we present it as a falsifiable framework with specific predictions distinct from both MOND and ΛCDM.
 
 ---
 
@@ -228,6 +228,8 @@ $$\frac{M_{\rm lens}}{M_{\rm dyn}} = \frac{\Phi + \Psi}{2\Phi} = \frac{1 + \eta}
 
 For $\Sigma = 1$: $M_{\rm lens}/M_{\rm dyn} = 1$ (GR limit). For $\Sigma = 2$: $M_{\rm lens}/M_{\rm dyn} \approx 0.875$. This effective lensing closure is adopted as a phenomenological ansatz; a rigorous derivation from an action principle is deferred to future work. **The cluster lensing results are conditional on this prescription**; sensitivity analysis (SI §11) shows the qualitative result is robust but the calibrated parameters would shift under alternative slip assumptions.
 
+**Amplitude calibration:** We fix $L_0 = 0.4$ kpc from typical disk scale heights (this is a physical reference scale, not a free parameter). We then calibrate only the exponent $n$ on the Fox et al. sample, obtaining $n = 0.27$. Holdout validation (70/30 split, 10 random seeds) confirms stability: $n = 0.27 \pm 0.01$ with holdout median ratio $= 1.02 \pm 0.12$. The SPARC galaxies provide fully independent validation—they were not used in any calibration.
+
 ### D. MOND Comparison
 
 For fair comparison, we apply MOND with the same M/L assumptions (0.5/0.7) and the standard interpolation function:
@@ -282,11 +284,11 @@ The Milky Way provides an independent validation using individual stellar veloci
 | Scatter | 0.132 dex | — |
 | Range | 0.67–1.49 | — |
 
-The amplitude parameters $L_0$ and $n$ were calibrated on these 42 clusters to achieve this fit, using the gravitational slip prescription described in Section III.C. The key result is not the cluster fit itself, but that the same unified framework—with these cluster-calibrated parameters—reproduces SPARC galaxy rotation curves without any additional adjustment. MOND systematically underpredicts cluster lensing masses by factor ~3, requiring additional mass (often attributed to residual dark matter or massive neutrinos). See SI §11 for sensitivity analysis showing robustness to alternative slip prescriptions (Fig. 8).
+We fix $L_0 = 0.4$ kpc from typical disk scale heights (not calibrated) and calibrate only the exponent $n = 0.27$ on these 42 clusters, using the gravitational slip prescription described in Section III.C. The key result is not the cluster fit itself, but that the same unified framework—with this single cluster-calibrated exponent—reproduces SPARC galaxy rotation curves without any additional adjustment. MOND systematically underpredicts cluster lensing masses by factor ~3, requiring additional mass (often attributed to residual dark matter or massive neutrinos). See SI §11 for sensitivity analysis showing robustness to alternative slip prescriptions (Fig. 8).
 
 ![Figure 8: Cluster calibration](figures/cluster_fox2022_validation.png)
 
-*FIG. 8. Σ-Gravity cluster calibration using 42 Fox et al. (2022) strong-lensing clusters. Left: Predicted vs. observed mass at 200 kpc aperture (1:1 line shown). Middle: Ratio vs. redshift showing no systematic evolution. Right: Distribution of log(M_Σ/M_SL) centered at zero with scatter = 0.132 dex. Parameters $L_0$ and $n$ were calibrated on this sample (holdout validation: n = 0.27±0.01, holdout ratio = 1.02±0.12); SPARC galaxies provide independent validation.*
+*FIG. 8. Σ-Gravity cluster calibration using 42 Fox et al. (2022) strong-lensing clusters. Left: Predicted vs. observed mass at 200 kpc aperture (1:1 line shown). Middle: Ratio vs. redshift showing no systematic evolution. Right: Distribution of log(M_Σ/M_SL) centered at zero with scatter = 0.132 dex. Only the exponent n was calibrated on this sample (L₀ = 0.4 kpc fixed from disk scale heights; holdout validation: n = 0.27±0.01, holdout ratio = 1.02±0.12); SPARC galaxies provide independent validation.*
 
 ### D. Cross-Domain Consistency
 
@@ -366,7 +368,7 @@ A complete theory would derive the coherence scalar from covariant field theory,
 We have presented Σ-Gravity, a phenomenological framework where gravitational enhancement depends on both local acceleration and kinematic coherence. The framework:
 
 1. Reproduces galaxy rotation curves with accuracy comparable to MOND (independent validation)
-2. Fits cluster lensing masses where MOND fails (calibration set for $L_0$, $n$)
+2. Fits cluster lensing masses where MOND fails (calibration set for exponent $n$; $L_0$ fixed from disk scale heights)
 3. Satisfies Solar System constraints
 4. Makes falsifiable predictions confirmed by independent data (counter-rotation, dispersion dependence)
 
