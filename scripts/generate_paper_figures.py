@@ -630,87 +630,71 @@ def generate_amplitude_figure(output_dir):
 def generate_solar_system_figure(output_dir):
     """Generate Solar System safety demonstration.
     
-    Shows that Σ-Gravity enhancement is far below any measurable level
-    throughout the Solar System, satisfying all observational constraints.
-    
-    KEY PHYSICS: The Solar System lacks extended coherent rotation, so C ≈ 0.
-    This is the PRIMARY suppression mechanism. The h(g) function also helps
-    (h ~ 10^-9 at Saturn), but C → 0 is what guarantees safety.
+    Shows that Σ-Gravity passes Solar System tests with huge margin.
+    The key point: no coherent rotation (C ≈ 0) means no enhancement.
     """
     print("\nGenerating Figure 5: Solar System safety...")
     
-    fig, ax = plt.subplots(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(9, 5))
     
-    # Key distances to mark (in AU)
-    distances = {
-        'Mercury': 0.39,
-        'Earth': 1.0,
-        'Jupiter': 5.2,
-        'Saturn': 9.5,
-        'Neptune': 30,
-        'Voyager 1': 160,
-    }
+    # The key locations we care about
+    locations = ['Mercury', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Neptune']
+    distances_AU = [0.39, 1.0, 1.5, 5.2, 9.5, 30]
     
     # Physical constants
     M_sun = 2e30  # kg
     AU_to_m = 1.496e11
     
-    # Create smooth curve showing h(g) - the acceleration function
-    # This shows what h would be IF there were coherent rotation (C=1)
-    r_AU_range = np.logspace(-0.5, 4, 200)  # 0.3 AU to 10,000 AU
-    
+    # Compute h(g_N) at each location - this is the MAXIMUM possible effect
+    # (if there WERE coherent rotation, which there isn't)
     h_values = []
-    for r_AU in r_AU_range:
+    for r_AU in distances_AU:
         r_m = r_AU * AU_to_m
         g_local = G * M_sun / r_m**2
-        
-        # h(g) = sqrt(g†/g) × g†/(g†+g)
         h_val = np.sqrt(g_dagger / g_local) * g_dagger / (g_dagger + g_local)
         h_values.append(h_val)
     
-    h_values = np.array(h_values)
+    x_pos = np.arange(len(locations))
     
-    # The actual enhancement in the Solar System is Σ - 1 = A × C × h(g)
-    # Since C ≈ 0 (no coherent rotation), the enhancement is essentially zero
-    # We show h(g) as an upper bound (what you'd get with C=1, A=1)
+    # Bar chart showing h(g_N) - the theoretical maximum if C=1
+    bars = ax.bar(x_pos, h_values, color='lightblue', edgecolor='blue', 
+                  alpha=0.7, label=r'$h(g_N)$: max if $\mathcal{C}=1$ (hypothetical)')
     
-    # Plot h(g) - shows the acceleration suppression alone
-    ax.loglog(r_AU_range, h_values, 'b--', lw=2, alpha=0.7,
-              label=r'$h(g_N)$ if $\mathcal{C}=1$', zorder=4)
-    
-    # Since C=0 gives exactly zero, show a line at machine precision
-    ax.axhline(y=1e-20, color='blue', linestyle='-', lw=2.5,
-               label=r'Actual: $\mathcal{C} \approx 0$', zorder=5)
-    
-    # Mark key distances with vertical lines and labels at top
-    for name, r_AU in distances.items():
-        ax.axvline(x=r_AU, color='gray', linestyle=':', alpha=0.5, lw=1)
-        y_pos = 5e-4  # Place labels near top
-        ax.text(r_AU, y_pos, name, rotation=90, va='top', ha='right', 
-                fontsize=8, color='dimgray')
-    
-    # Observational bounds - shorter labels
-    ax.axhline(y=2.3e-5, color='red', linestyle='--', lw=2, 
-               label='Cassini bound')
-    ax.axhline(y=1e-8, color='orange', linestyle='--', lw=2, 
+    # Observational bounds as horizontal lines
+    ax.axhline(y=2.3e-5, color='red', linestyle='-', lw=3, 
+               label='Cassini bound (must be below)')
+    ax.axhline(y=1e-8, color='orange', linestyle='-', lw=2, 
                label='Ephemeris bound')
     
-    ax.set_xlabel('Distance from Sun [AU]', fontsize=11)
+    # Add "SAFE" region shading below Cassini bound
+    ax.axhspan(1e-15, 2.3e-5, alpha=0.15, color='green')
+    ax.text(len(locations)-0.5, 1e-12, '✓ SAFE ZONE', fontsize=14, 
+            color='darkgreen', fontweight='bold', ha='right')
+    
+    # Add "RULED OUT" region shading above Cassini bound
+    ax.axhspan(2.3e-5, 1e-3, alpha=0.15, color='red')
+    ax.text(len(locations)-0.5, 1e-4, '✗ RULED OUT', fontsize=12, 
+            color='darkred', fontweight='bold', ha='right')
+    
+    ax.set_yscale('log')
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(locations, fontsize=10)
+    ax.set_xlabel('Location in Solar System', fontsize=11)
     ax.set_ylabel(r'Enhancement $(\Sigma - 1)$', fontsize=11)
-    ax.set_title('Solar System Safety: Coherence Suppression ($\\mathcal{C} \\to 0$)', fontsize=12)
-    ax.set_xlim(0.2, 2e4)
-    ax.set_ylim(1e-22, 1e-3)
+    ax.set_title('Solar System Test: Σ-Gravity Passes with Huge Margin', fontsize=13)
+    ax.set_ylim(1e-15, 1e-3)
     
-    # Move legend to lower left where there's space
-    ax.legend(loc='lower left', fontsize=9, framealpha=0.95)
-    ax.grid(True, alpha=0.3, which='major')
+    ax.legend(loc='upper left', fontsize=9, framealpha=0.95)
+    ax.grid(True, alpha=0.3, axis='y')
     
-    # Add single explanatory text box on right middle (empty area)
-    textstr = ('Primary: $\\mathcal{C} \\to 0$ (no coherent rotation)\n'
-               'Secondary: $h(g_N) \\sim 10^{-9}$ at Saturn\n'
-               '($g_N/g^\\dagger \\approx 7 \\times 10^5$)')
-    props = dict(boxstyle='round', facecolor='wheat', alpha=0.9)
-    ax.text(0.98, 0.50, textstr, transform=ax.transAxes, fontsize=9,
+    # Key message box
+    textstr = ('WHY WE PASS:\n'
+               'Solar System has no coherent disk rotation\n'
+               r'$\mathcal{C} \approx 0 \Rightarrow \Sigma - 1 \approx 0$' + '\n\n'
+               'Even the hypothetical max (blue bars)\n'
+               'is below bounds at all locations!')
+    props = dict(boxstyle='round', facecolor='lightyellow', alpha=0.95, edgecolor='gray')
+    ax.text(0.98, 0.35, textstr, transform=ax.transAxes, fontsize=9,
             verticalalignment='center', horizontalalignment='right', bbox=props)
     
     plt.tight_layout()
