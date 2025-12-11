@@ -687,8 +687,6 @@ def generate_solar_system_figure(output_dir):
     # to indicate "effectively zero"
     ax.axhline(y=1e-20, color='blue', linestyle='-', lw=2.5,
                label=r'$\Sigma$-Gravity ($\mathcal{C} \approx 0$)', zorder=5)
-    ax.text(1, 3e-20, r'$\mathcal{C} \to 0$: no coherent rotation', 
-            fontsize=10, color='blue', style='italic')
     
     # Mark key distances with vertical lines and labels at top
     for name, r_AU in distances.items():
