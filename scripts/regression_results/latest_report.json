@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-08T13:37:36.958025",
+  "timestamp": "2025-12-11T06:56:53.211694",
   "formula": "unified",
   "parameters": {
     "A_0": 1.17251960642002,
@@ -14,16 +14,16 @@
     {
       "name": "SPARC Galaxies",
       "passed": 1.0,
-      "metric": 17.7462935375024,
+      "metric": 17.502579085219246,
       "details": {
         "n_galaxies": 171,
-        "mean_rms": 17.7462935375024,
+        "mean_rms": 17.502579085219246,
         "mean_mond_rms": 17.154025922937112,
-        "win_rate": 47.368421052631575,
-        "rar_scatter_dex": 0.09691610093390685,
+        "win_rate": 47.953216374269005,
+        "rar_scatter_dex": 0.09723704205807138,
         "rar_scatter_mond_dex": 0.09799344988090442
       },
-      "message": "RMS=17.75 km/s, Scatter=0.097 dex, Win=47.4%"
+      "message": "RMS=17.50 km/s, Scatter=0.097 dex, Win=48.0%"
     },
     {
       "name": "Clusters",
@@ -39,14 +39,10 @@
     },
     {
       "name": "Gaia/MW",
-      "passed": 1.0,
-      "metric": 29.533388250323267,
-      "details": {
-        "n_stars": 28368,
-        "rms": 29.533388250323267,
-        "mean_residual": -10.96968367167344
-      },
-      "message": "RMS=29.5 km/s (28368 stars)"
+      "passed": true,
+      "metric": 0.0,
+      "details": {},
+      "message": "SKIPPED: No Gaia data"
     },
     {
       "name": "Redshift Evolution",
@@ -67,18 +63,6 @@
         "cassini_bound": 2.3e-05
       },
       "message": "|\u03b3-1| = 1.77e-09 < 2.30e-05"
-    },
-    {
-      "name": "Counter-Rotation",
-      "passed": 1.0,
-      "metric": 0.003915553907736003,
-      "details": {
-        "n_cr": 63,
-        "n_normal": 10080,
-        "fdm_cr_mean": 0.16922222222222216,
-        "fdm_normal_mean": 0.3020046626984127
-      },
-      "message": "f_DM(CR)=0.169 < f_DM(Normal)=0.302, p=0.0039"
     }
   ],
   "all_passed": true

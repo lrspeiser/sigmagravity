@@ -55,7 +55,7 @@ where $g_N = |\nabla\Phi_N|$ is the **baryonic Newtonian acceleration** (QUMOND-
 
 The enhancement factor is:
 
-$$\boxed{\Sigma = 1 + A(D,L) \cdot \mathcal{C} \cdot h(g_N)}$$
+$$\boxed{\Sigma = 1 + A(L) \cdot \mathcal{C} \cdot h(g_N)}$$
 
 where $\mathcal{C}$ is the **covariant coherence scalar** (primary formulation).
 

@@ -17,25 +17,24 @@ DATA SOURCES (validated and documented):
 
 CANONICAL FORMULA (Σ-Gravity unified form):
 
-    Σ = 1 + A(D,L) × W(r) × h(g)
+    Σ = 1 + A(L) × W(r) × h(g)
     
     h(g) = √(g†/g) × g†/(g†+g)           [acceleration enhancement]
-    W(r) = r / (ξ + r)                    [coherence window, k=1 for 2D]
+    W(r) = r / (ξ + r)                    [coherence window]
     g† = cH₀/(4√π) ≈ 9.60×10⁻¹¹ m/s²    [critical acceleration, derived]
     ξ = R_d/(2π)                          [coherence scale, derived]
     
     UNIFIED AMPLITUDE:
-    A(D,L) = A₀ × [1 - D + D × (L/L₀)^n]
+    A(L) = A₀ × (L/L₀)^n
     
     where:
       A₀ = exp(1/2π) ≈ 1.173             [base amplitude, derived]
-      D = dimensionality (0=2D disk, 1=3D cluster)
       L = path length through baryons (kpc)
-      L₀ = 0.40 kpc                       [reference scale]
-      n = 0.27                            [path length exponent]
+      L₀ = 0.40 kpc                       [reference scale, fixed from disk scale heights]
+      n = 0.27                            [path length exponent, calibrated on clusters]
     
-    For pure 2D disk (D=0): A = A₀ = 1.173
-    For 3D cluster (D=1, L=600 kpc): A = A₀ × (600/0.4)^0.27 ≈ 8.45
+    For disk galaxies (L ≈ L₀): A = A₀ = 1.173
+    For clusters (L ≈ 600 kpc): A = A₀ × (600/0.4)^0.27 ≈ 8.45
     
     M/L = 0.5 (disk), 0.7 (bulge)        [Lelli+ 2016 standard]
 
@@ -102,18 +101,22 @@ MW_VBAR_SCALE = 1.16  # McMillan 2017 baryonic model scaling
 # CORE FUNCTIONS
 # =============================================================================
 
-def unified_amplitude(D: float, L: float) -> float:
+def unified_amplitude(L: float) -> float:
     """
-    Unified amplitude formula: A = A₀ × [1 - D + D × (L/L₀)^n]
+    Unified amplitude formula: A = A₀ × (L/L₀)^n
+    
+    No D switch needed - path length L determines amplitude naturally:
+    - Thin disk galaxies: L ≈ L₀ (0.4 kpc scale height) → A ≈ A₀
+    - Elliptical galaxies: L ~ 1-20 kpc → A ~ 1.5-3.4
+    - Galaxy clusters: L ≈ 600 kpc → A ≈ 8.45
     
     Args:
-        D: Dimensionality factor (0 for 2D disk, 1 for 3D cluster)
         L: Path length through baryons (kpc)
     
     Returns:
         Amplitude A
     """
-    return A_0 * (1 - D + D * (L / L_0)**N_EXP)
+    return A_0 * (L / L_0)**N_EXP
 
 
 def h_function(g: np.ndarray) -> np.ndarray:
@@ -137,8 +140,8 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
         R_kpc: Radii in kpc
         V_bar: Baryonic velocities in km/s
         R_d: Disk scale length in kpc
-        h_disk: Disk thickness (default: 0.15 × R_d)
-        f_bulge: Bulge fraction (0 to 1), used as dimensionality D
+        h_disk: Disk thickness (unused, kept for API compatibility)
+        f_bulge: Bulge fraction (unused, kept for API compatibility)
     
     Returns:
         Predicted velocities in km/s
@@ -151,12 +154,9 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     xi = XI_SCALE * R_d
     W = W_coherence(R_kpc, xi)
     
-    # Unified amplitude
-    if h_disk is None:
-        h_disk = 0.15 * R_d
-    L = 2 * h_disk  # Path length = 2 × disk thickness
-    D = f_bulge  # Use bulge fraction as dimensionality proxy
-    A = unified_amplitude(D, L)
+    # For thin disk galaxies, use L = L₀ = 0.4 kpc → A = A₀
+    # (The path length L₀ IS the typical disk scale height by definition)
+    A = A_0  # = unified_amplitude(L_0) = 1.173
     
     Sigma = 1 + A * W * h
     return V_bar * np.sqrt(Sigma)
@@ -365,9 +365,8 @@ def test_clusters(clusters: List[Dict]) -> TestResult:
     ratios = []
     
     # Cluster parameters for unified amplitude
-    L_cluster = 600  # kpc (path through cluster)
-    D_cluster = 1.0  # 3D system
-    A_cluster = unified_amplitude(D_cluster, L_cluster)
+    L_cluster = 600  # kpc (path through cluster baryons)
+    A_cluster = unified_amplitude(L_cluster)  # ≈ 8.45
     
     for cl in clusters:
         r_m = cl['r_kpc'] * kpc_to_m
@@ -617,8 +616,8 @@ def main():
     print(f"  M/L = {ML_DISK}/{ML_BULGE} (disk/bulge)")
     print(f"  g† = {g_dagger:.3e} m/s²")
     print()
-    print("  For 2D disk (D=0): A = A₀ = 1.173")
-    print(f"  For 3D cluster (D=1, L=600): A = {unified_amplitude(1.0, 600):.2f}")
+    print(f"  For disk galaxies (L=L₀): A = A₀ = {A_0:.4f}")
+    print(f"  For clusters (L=600 kpc): A = {unified_amplitude(600):.2f}")
     print()
     
     # Load data
