@@ -703,16 +703,6 @@ def generate_solar_system_figure(output_dir):
     ax.axhline(y=1e-8, color='orange', linestyle='--', lw=2, 
                label='Planetary ephemeris bound')
     
-    # Add annotation for Saturn's h(g) value
-    saturn_r = 9.5  # AU
-    saturn_r_m = saturn_r * AU_to_m
-    saturn_g = G * M_sun / saturn_r_m**2
-    saturn_h = np.sqrt(g_dagger / saturn_g) * g_dagger / (g_dagger + saturn_g)
-    ax.annotate(f'Saturn: $h(g_N) \\approx {saturn_h:.1e}$\n$g_N/g^\\dagger \\approx 7\\times10^5$',
-                xy=(saturn_r, saturn_h), xytext=(40, saturn_h * 10),
-                fontsize=9, color='darkblue',
-                arrowprops=dict(arrowstyle='->', color='darkblue', alpha=0.7))
-    
     ax.set_xlabel('Distance from Sun [AU]', fontsize=11)
     ax.set_ylabel(r'Enhancement $(\Sigma - 1)$', fontsize=11)
     ax.set_title('Solar System Safety: Coherence Suppression ($\\mathcal{C} \\to 0$)', fontsize=12)
@@ -721,13 +711,13 @@ def generate_solar_system_figure(output_dir):
     ax.legend(loc='upper right', fontsize=9)
     ax.grid(True, alpha=0.3, which='major')
     
-    # Add explanatory text box
-    textstr = ('Primary suppression: $\\mathcal{C} \\to 0$\n'
-               '(no extended coherent rotation)\n\n'
-               'Secondary: $h(g_N) \\sim 10^{-9}$ at Saturn')
-    props = dict(boxstyle='round', facecolor='wheat', alpha=0.8)
-    ax.text(0.02, 0.02, textstr, transform=ax.transAxes, fontsize=9,
-            verticalalignment='bottom', bbox=props)
+    # Add single explanatory text box on right side (empty area)
+    textstr = ('Primary: $\\mathcal{C} \\to 0$ (no coherent rotation)\n'
+               'Secondary: $h(g_N) \\sim 10^{-9}$ at Saturn\n'
+               '($g_N/g^\\dagger \\approx 7 \\times 10^5$)')
+    props = dict(boxstyle='round', facecolor='wheat', alpha=0.9)
+    ax.text(0.98, 0.45, textstr, transform=ax.transAxes, fontsize=9,
+            verticalalignment='center', horizontalalignment='right', bbox=props)
     
     plt.tight_layout()
     outpath = output_dir / 'solar_system_safety.png'

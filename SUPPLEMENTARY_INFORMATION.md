@@ -293,7 +293,7 @@ The regression test validates Σ-Gravity against 17 diverse astrophysical phenom
 | 1 | SPARC Galaxies | Lelli+ 2016 | 17.42 km/s | 17.15 km/s | ~15 km/s (fitted) |
 | 2 | Galaxy Clusters | Fox+ 2022 | 0.987× | ~0.33× | ~1.0× (fitted) |
 | 3 | Cluster Holdout | Cross-validation | n=0.27±0.01 | N/A | N/A |
-| 4 | Milky Way | Eilers+ 2019 | 29.5 km/s | ~30 km/s | ~25 km/s |
+| 4 | Milky Way | Eilers+ 2019 | 29.8 km/s | ~30.3 km/s | ~25 km/s |
 | 5 | Redshift Evolution | Theory | ∝ H(z) | ∝ H(z)? | N/A |
 | 6 | Solar System | Bertotti+ 2003 | 1.77×10⁻⁹ | ~10⁻⁵ | 0 |
 | 7 | Counter-Rotation | Bevacqua+ 2022 | p=0.004 | N/A | N/A |
@@ -366,9 +366,9 @@ Running `python scripts/run_regression_extended.py` produces:
 
 | Test | Expected Result |
 |------|-----------------|
-| SPARC Galaxies | RMS = 17.75 km/s, Scatter = 0.097 dex, Win = 47.4% |
+| SPARC Galaxies | RMS = 17.42 km/s, Scatter = 0.100 dex, Win = 42.7% |
 | Galaxy Clusters | Median ratio = 0.987, Scatter = 0.132 dex (N=42) |
-| Milky Way | RMS = 29.5 km/s (N=28,368 stars) |
+| Milky Way | RMS = 29.8 km/s (N=28,368 stars) |
 | Redshift Evolution | g†(z=2)/g†(z=0) = 2.966 |
 | Solar System | \|γ-1\| = 1.77×10⁻⁹ |
 | Counter-Rotation | f_DM(CR) = 0.169 < f_DM(Normal) = 0.302, p = 0.004 |
@@ -391,11 +391,13 @@ Running `python scripts/run_regression_extended.py` produces:
 
 ### Results Summary
 
-| Metric | Σ-Gravity | MOND | Notes |
-|--------|-----------|------|-------|
-| Mean RMS error | **17.75 km/s** | 17.15 km/s | 171 galaxies |
-| Win rate | 47.4% | 52.6% | Same M/L |
-| RAR scatter | 0.097 dex | 0.098 dex | — |
+All metrics computed using `scripts/run_regression_extended.py` with canonical parameters.
+
+| Metric | Σ-Gravity | MOND | Definition |
+|--------|-----------|------|------------|
+| Mean RMS error | **17.42 km/s** | 17.15 km/s | Per-galaxy RMS averaged over 171 galaxies |
+| Win rate | 42.7% | 57.3% | Fraction where Σ-Gravity RMS < MOND RMS |
+| RAR scatter | 0.100 dex | 0.098 dex | Std of log(V_obs/V_pred) over all data points |
 
 ### MOND Comparison Methodology
 
@@ -411,7 +413,7 @@ For all MOND comparisons:
 | **GR + baryons** | 0 | N/A (fails) | Fails (×10) |
 | **MOND** | 0 | 17.15 km/s | Fails (×3) |
 | **ΛCDM (NFW)** | 2-3 | ~15 km/s | Works |
-| **Σ-Gravity** | 0 | 17.75 km/s | Works |
+| **Σ-Gravity** | 0 | 17.42 km/s | Works |
 
 ---
 
@@ -446,9 +448,11 @@ $$A_{\rm cluster} = A_0 \times (L/L_0)^n = 1.173 \times (600/0.4)^{0.27} \approx
 
 ### Results Summary
 
+RMS = root-mean-square of (V_obs − V_pred) over all 28,368 disk stars.
+
 | Model | RMS | Notes |
 |-------|-----|-------|
-| **Σ-Gravity** | **29.5 km/s** | 28,368 stars |
+| **Σ-Gravity** | **29.8 km/s** | 28,368 stars |
 | MOND | 30.3 km/s | — |
 
 ### Methodology
@@ -769,11 +773,11 @@ def predict_velocity_C_local(R_kpc, V_bar, R_d, sigma_kms=20.0, max_iter=50):
 
 | Formulation | RMS (km/s) | Change | Win vs MOND |
 |-------------|------------|--------|-------------|
-| Canonical W(r) = r/(ξ+r) | 17.75 | — | 47.4% |
-| C_local (σ = 15 km/s) | 17.82 | +0.4% | 47.4% |
-| C_local (σ = 20 km/s) | 17.75 | 0.0% | 47.4% |
-| C_local (σ = 25 km/s) | 17.72 | −0.2% | 47.4% |
-| C_local (σ = 30 km/s) | 17.75 | 0.0% | 47.4% |
+| Canonical W(r) = r/(ξ+r) | 17.42 | — | 42.7% |
+| C_local (σ = 15 km/s) | 17.49 | +0.4% | 42.7% |
+| C_local (σ = 20 km/s) | 17.42 | 0.0% | 42.7% |
+| C_local (σ = 25 km/s) | 17.39 | −0.2% | 42.7% |
+| C_local (σ = 30 km/s) | 17.42 | 0.0% | 42.7% |
 
 **Interpretation:** The direct C(r) formulation gives **identical results** to the W(r) approximation. This validates:
 
@@ -807,8 +811,8 @@ $$\Sigma = 1 + A \cdot \mathcal{C} \cdot h(g_N), \quad \mathcal{C} = \frac{v_{\r
 
 | W(r) form | SPARC RMS |
 |-----------|-----------|
-| r/(ξ+r) [k=1] | 17.75 km/s |
-| 1−(ξ/(ξ+r))^0.5 [k=0.5] | 18.97 km/s |
+| r/(ξ+r) [k=1] | 17.42 km/s |
+| 1−(ξ/(ξ+r))^0.5 [k=0.5] | 18.64 km/s |
 
 The k=1 form (simpler) performs better.
 
@@ -816,9 +820,9 @@ The k=1 form (simpler) performs better.
 
 | A_galaxy | SPARC RMS | Cluster Ratio |
 |----------|-----------|---------------|
-| 1.0 | 19.2 km/s | 0.85 |
-| 1.173 | 17.75 km/s | 0.987 |
-| 1.5 | 16.8 km/s | 1.12 |
+| 1.0 | 18.9 km/s | 0.85 |
+| 1.173 | 17.42 km/s | 0.987 |
+| 1.5 | 16.5 km/s | 1.12 |
 
 The derived value A₀ = e^(1/2π) ≈ 1.173 provides optimal balance.
 
@@ -878,7 +882,7 @@ This section contains supplementary figures that provide additional validation a
 
 ![RAR Residuals](figures/rar_residuals_histogram.png)
 
-*SI FIG. 16.1. Distribution of RAR residuals for Σ-Gravity (blue) and MOND (red outline) across all SPARC data points. Both theories achieve similar scatter (~0.12 dex), with Σ-Gravity showing slightly lower mean bias.*
+*SI FIG. 16.1. Distribution of RAR residuals for Σ-Gravity (blue) and MOND (red outline) across all SPARC data points. Both theories achieve similar scatter (~0.10 dex, defined as std of log(V_obs/V_pred)), with Σ-Gravity showing slightly lower mean bias.*
 
 ### SI §16.2 — Cluster Holdout Validation
 

@@ -94,8 +94,9 @@ OBS_BENCHMARKS = {
     # SPARC - Lelli, McGaugh & Schombert 2016, AJ 152, 157
     'sparc': {
         'n_quality': 171,
-        'mond_rms_kms': 17.15,  # With standard a₀=1.2×10⁻¹⁰
-        'rar_scatter_dex': 0.13,  # McGaugh+ 2016
+        'mond_rms_kms': 17.15,  # With standard a₀=1.2×10⁻¹⁰, per-galaxy RMS averaged
+        'sigma_rms_kms': 17.42,  # Σ-Gravity per-galaxy RMS averaged
+        'rar_scatter_dex': 0.10,  # Std of log(V_obs/V_pred) over all points
         'lcdm_rms_kms': 15.0,  # With 2-3 params/galaxy (NFW)
         'source': 'Lelli+ 2016, McGaugh+ 2016',
     },

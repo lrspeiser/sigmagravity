@@ -40,9 +40,9 @@ CANONICAL FORMULA (Σ-Gravity unified form):
     M/L = 0.5 (disk), 0.7 (bulge)        [Lelli+ 2016 standard]
 
 EXPECTED RESULTS:
-    - SPARC: RMS ≈ 17.8 km/s, ~47% win rate vs MOND
-    - Clusters: Median ratio ≈ 0.99, scatter ≈ 0.13 dex
-    - Gaia: RMS ≈ 29.5 km/s (28,368 stars)
+    - SPARC: RMS = 17.42 km/s, 42.7% win rate vs MOND (per-galaxy RMS averaged)
+    - Clusters: Median ratio = 0.987, scatter = 0.132 dex
+    - Gaia: RMS = 29.8 km/s (28,368 stars)
     - Counter-rotation: p < 0.05, f_DM(CR) < f_DM(Normal)
     - Redshift: g†(z) ∝ H(z) confirmed
     - Solar System: γ-1 < 10⁻⁵ (Cassini safe)

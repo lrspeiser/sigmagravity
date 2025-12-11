@@ -239,20 +239,19 @@ where $x = g_N/a_0$ and $a_0 = 1.2 \times 10^{-10}$ m/s².
 
 ### A. SPARC Galaxy Rotation Curves
 
-| Metric | Σ-Gravity | MOND | Improvement |
-|--------|-----------|------|-------------|
-| Mean RMS | 17.75 km/s | 18.12 km/s | −2.0% |
-| Median RMS | 12.31 km/s | 12.89 km/s | −4.5% |
-| RAR scatter | 0.093 dex | 0.095 dex | −2.1% |
-| Win rate | 47% | 53% | — |
+| Metric | Σ-Gravity | MOND | Notes |
+|--------|-----------|------|-------|
+| Mean RMS | 17.42 km/s | 17.15 km/s | Per-galaxy RMS averaged |
+| RAR scatter | 0.100 dex | 0.098 dex | Std of log(V_obs/V_pred) over all points |
+| Win rate | 42.7% | 57.3% | — |
 
-Both frameworks achieve comparable performance on galaxy rotation curves. The 47% win rate indicates neither framework systematically outperforms the other on individual galaxies.
+Both frameworks achieve comparable performance on galaxy rotation curves. MOND has a slight edge (57% win rate) on individual galaxies, but Σ-Gravity's unified treatment of galaxies and clusters provides its primary advantage.
 
-**Radial Acceleration Relation:** The tight correlation between observed and baryonic acceleration (scatter ~0.09 dex) emerges naturally from both frameworks (Fig. 5).
+**Radial Acceleration Relation:** The tight correlation between observed and baryonic acceleration (scatter ~0.10 dex, computed as std of log(V_obs/V_pred) over all data points) emerges naturally from both frameworks (Fig. 5).
 
 ![Figure 5: Radial Acceleration Relation](figures/rar_derived_formula.png)
 
-*FIG. 5. Radial Acceleration Relation for 171 SPARC galaxies. Gray points: observed centripetal acceleration (g_obs = V²/r) versus baryonic acceleration (g_bar from visible matter). Black dashed: 1:1 line (Newtonian prediction—data would lie here without dark matter or modified gravity). Blue solid: Σ-Gravity. Red dotted: MOND. Both frameworks reproduce the tight correlation with scatter ~0.09 dex.*
+*FIG. 5. Radial Acceleration Relation for 171 SPARC galaxies. Gray points: observed centripetal acceleration (g_obs = V²/r) versus baryonic acceleration (g_bar from visible matter). Black dashed: 1:1 line (Newtonian prediction—data would lie here without dark matter or modified gravity). Blue solid: Σ-Gravity. Red dotted: MOND. Both frameworks reproduce the tight correlation with scatter ~0.10 dex.*
 
 Representative rotation curves are shown in Fig. 6.
 
@@ -262,12 +261,11 @@ Representative rotation curves are shown in Fig. 6.
 
 ### B. Milky Way Validation
 
-Star-by-star predictions for 28,368 disk stars:
+Star-by-star predictions for 28,368 disk stars (RMS = root-mean-square residual of V_obs − V_pred):
 
 | Metric | Σ-Gravity | MOND |
 |--------|-----------|------|
-| RMS | 29.5 km/s | 31.2 km/s |
-| Bias | +1.2 km/s | +3.1 km/s |
+| RMS | 29.8 km/s | 30.3 km/s |
 
 The Milky Way provides an independent validation using individual stellar velocities rather than binned rotation curves (Fig. 7).
 
@@ -292,9 +290,9 @@ The amplitude parameters $L_0$ and $n$ were calibrated on these 42 clusters to a
 ### D. Cross-Domain Consistency
 
 The same theoretical framework—with cluster-calibrated amplitude parameters—successfully reproduces:
-- Galaxy rotation curves (RMS ~18 km/s) — **independent validation**
-- Milky Way stellar velocities (RMS ~30 km/s) — **independent validation**
-- Cluster lensing masses (median ratio 0.99) — calibration set
+- Galaxy rotation curves (RMS = 17.42 km/s) — **independent validation**
+- Milky Way stellar velocities (RMS = 29.8 km/s) — **independent validation**
+- Cluster lensing masses (median ratio = 0.987) — calibration set
 - Solar System constraints ($|\gamma-1| \sim 10^{-9}$)
 
 This cross-domain consistency, achieved without per-system fitting, supports the framework's validity.
