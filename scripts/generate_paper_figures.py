@@ -676,17 +676,11 @@ def generate_solar_system_figure(output_dir):
     
     # Plot h(g) - shows the acceleration suppression alone
     ax.loglog(r_AU_range, h_values, 'b--', lw=2, alpha=0.7,
-              label=r'$h(g_N)$ alone (if $\mathcal{C}=1$)', zorder=4)
-    
-    # Plot actual enhancement with C ≈ 0 (essentially zero)
-    # Use a small but non-zero C to show it's well below bounds
-    C_solar_system = 0  # No coherent rotation
-    actual_enhancement = A_galaxy * C_solar_system * h_values
+              label=r'$h(g_N)$ if $\mathcal{C}=1$', zorder=4)
     
     # Since C=0 gives exactly zero, show a line at machine precision
-    # to indicate "effectively zero"
     ax.axhline(y=1e-20, color='blue', linestyle='-', lw=2.5,
-               label=r'$\Sigma$-Gravity ($\mathcal{C} \approx 0$)', zorder=5)
+               label=r'Actual: $\mathcal{C} \approx 0$', zorder=5)
     
     # Mark key distances with vertical lines and labels at top
     for name, r_AU in distances.items():
@@ -695,26 +689,28 @@ def generate_solar_system_figure(output_dir):
         ax.text(r_AU, y_pos, name, rotation=90, va='top', ha='right', 
                 fontsize=8, color='dimgray')
     
-    # Observational bounds
+    # Observational bounds - shorter labels
     ax.axhline(y=2.3e-5, color='red', linestyle='--', lw=2, 
-               label=r'Cassini PPN bound: $|\gamma-1| < 2.3\times10^{-5}$')
+               label='Cassini bound')
     ax.axhline(y=1e-8, color='orange', linestyle='--', lw=2, 
-               label='Planetary ephemeris bound')
+               label='Ephemeris bound')
     
     ax.set_xlabel('Distance from Sun [AU]', fontsize=11)
     ax.set_ylabel(r'Enhancement $(\Sigma - 1)$', fontsize=11)
     ax.set_title('Solar System Safety: Coherence Suppression ($\\mathcal{C} \\to 0$)', fontsize=12)
     ax.set_xlim(0.2, 2e4)
     ax.set_ylim(1e-22, 1e-3)
-    ax.legend(loc='upper right', fontsize=9)
+    
+    # Move legend to lower left where there's space
+    ax.legend(loc='lower left', fontsize=9, framealpha=0.95)
     ax.grid(True, alpha=0.3, which='major')
     
-    # Add single explanatory text box on right side (empty area)
+    # Add single explanatory text box on right middle (empty area)
     textstr = ('Primary: $\\mathcal{C} \\to 0$ (no coherent rotation)\n'
                'Secondary: $h(g_N) \\sim 10^{-9}$ at Saturn\n'
                '($g_N/g^\\dagger \\approx 7 \\times 10^5$)')
     props = dict(boxstyle='round', facecolor='wheat', alpha=0.9)
-    ax.text(0.98, 0.45, textstr, transform=ax.transAxes, fontsize=9,
+    ax.text(0.98, 0.50, textstr, transform=ax.transAxes, fontsize=9,
             verticalalignment='center', horizontalalignment='right', bbox=props)
     
     plt.tight_layout()
