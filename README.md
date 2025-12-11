@@ -276,7 +276,9 @@ The Milky Way provides an independent validation using individual stellar veloci
 
 *FIG. 7. Milky Way rotation curve from Eilers et al. (2019). Black points: observed circular velocities. Green dashed: baryonic (Newtonian) prediction. Blue solid: Σ-Gravity. Red dotted: MOND.*
 
-### C. Galaxy Cluster Strong Lensing
+### C. Galaxy Cluster Calibration
+
+The 42 Fox et al. (2022) strong-lensing clusters serve as the **calibration set** for the amplitude exponent $n$.
 
 | Metric | Σ-Gravity | MOND |
 |--------|-----------|------|
@@ -284,11 +286,13 @@ The Milky Way provides an independent validation using individual stellar veloci
 | Scatter | 0.132 dex | — |
 | Range | 0.67–1.49 | — |
 
-We fix $L_0 = 0.4$ kpc from typical disk scale heights (not calibrated) and calibrate only the exponent $n = 0.27$ on these 42 clusters, using the gravitational slip prescription described in Section III.C. The key result is not the cluster fit itself, but that the same unified framework—with this single cluster-calibrated exponent—reproduces SPARC galaxy rotation curves without any additional adjustment. MOND systematically underpredicts cluster lensing masses by factor ~3, requiring additional mass (often attributed to residual dark matter or massive neutrinos). See SI §11 for sensitivity analysis showing robustness to alternative slip prescriptions (Fig. 8).
+**Calibration procedure:** We fix $L_0 = 0.4$ kpc from typical disk scale heights (this is a physical reference, not fitted). We then calibrate the exponent $n = 0.27$ by minimizing the median absolute deviation of log(M_pred/M_lens) on these 42 clusters. This is the **only calibrated parameter** in the unified amplitude formula. MOND systematically underpredicts cluster lensing masses by factor ~3, requiring additional mass (often attributed to residual dark matter or massive neutrinos).
+
+**Why this matters:** The key result is not the cluster fit itself—that is guaranteed by calibration. The key result is that the same unified framework, with this single cluster-calibrated exponent, reproduces SPARC galaxy rotation curves (Section IV.A) without any additional adjustment. The galaxies were not used in calibration and therefore provide independent validation. See SI §11 for sensitivity analysis (Fig. 8).
 
 ![Figure 8: Cluster calibration](figures/cluster_fox2022_validation.png)
 
-*FIG. 8. Σ-Gravity cluster calibration using 42 Fox et al. (2022) strong-lensing clusters. Left: Predicted vs. observed mass at 200 kpc aperture (1:1 line shown). Middle: Ratio vs. redshift showing no systematic evolution. Right: Distribution of log(M_Σ/M_SL) centered at zero with scatter = 0.132 dex. Only the exponent n was calibrated on this sample (L₀ = 0.4 kpc fixed from disk scale heights; holdout validation: n = 0.27±0.01, holdout ratio = 1.02±0.12); SPARC galaxies provide independent validation.*
+*FIG. 8. Cluster calibration set (NOT validation). The exponent n = 0.27 was calibrated on these 42 Fox et al. (2022) strong-lensing clusters to achieve median ratio = 0.987. Left: Predicted vs. observed mass at 200 kpc aperture. Middle: Ratio vs. redshift (no systematic evolution). Right: Distribution of log(M_Σ/M_SL) with scatter = 0.132 dex. Holdout validation (70/30 split) confirms stability: n = 0.27±0.01, holdout ratio = 1.02±0.12. SPARC galaxies (not shown) provide fully independent validation.*
 
 ### D. Cross-Domain Consistency
 

@@ -19,7 +19,7 @@ This Supplementary Information (SI) accompanies the main manuscript and provides
 
 **Part II: Results**
 5. [SI §5 — SPARC Galaxy Analysis](#si-5--sparc-galaxy-analysis)
-6. [SI §6 — Galaxy Cluster Lensing](#si-6--galaxy-cluster-lensing)
+6. [SI §6 — Galaxy Cluster Calibration](#si-6--galaxy-cluster-calibration)
 7. [SI §7 — Milky Way Validation](#si-7--milky-way-validation)
 8. [SI §8 — Unique Predictions](#si-8--unique-predictions)
 
@@ -417,9 +417,11 @@ For all MOND comparisons:
 
 ---
 
-## SI §6 — Galaxy Cluster Lensing
+## SI §6 — Galaxy Cluster Calibration
 
-### Results Summary
+This section describes the **calibration set** used to determine the amplitude exponent $n$. The 42 Fox et al. (2022) clusters are NOT a validation sample—they are the training data for $n$.
+
+### Calibration Results
 
 | Metric | Value | Notes |
 |--------|-------|-------|
