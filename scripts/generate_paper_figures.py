@@ -632,6 +632,10 @@ def generate_solar_system_figure(output_dir):
     
     Shows that Σ-Gravity enhancement is far below any measurable level
     throughout the Solar System, satisfying all observational constraints.
+    
+    KEY PHYSICS: The Solar System lacks extended coherent rotation, so C ≈ 0.
+    This is the PRIMARY suppression mechanism. The h(g) function also helps
+    (h ~ 10^-9 at Saturn), but C → 0 is what guarantees safety.
     """
     print("\nGenerating Figure 5: Solar System safety...")
     
@@ -650,39 +654,41 @@ def generate_solar_system_figure(output_dir):
     # Physical constants
     M_sun = 2e30  # kg
     AU_to_m = 1.496e11
-    AU_to_kpc = 4.85e-9
     
-    # For Solar System, the coherence window W(r) ≈ 0 because there's no
-    # extended rotating disk. We compute h(g) which is the acceleration-dependent
-    # part, and multiply by a very small coherence factor.
-    
-    # Create smooth curve by computing h(g) at each radius
+    # Create smooth curve showing h(g) - the acceleration function
+    # This shows what h would be IF there were coherent rotation (C=1)
     r_AU_range = np.logspace(-0.5, 4, 200)  # 0.3 AU to 10,000 AU
     
-    enhancement = []
+    h_values = []
     for r_AU in r_AU_range:
         r_m = r_AU * AU_to_m
-        r_kpc = r_AU * AU_to_kpc
         g_local = G * M_sun / r_m**2
         
-        # h(g) function
+        # h(g) = sqrt(g†/g) × g†/(g†+g)
         h_val = np.sqrt(g_dagger / g_local) * g_dagger / (g_dagger + g_local)
-        
-        # W(r) for Solar System - use very small effective R_d
-        # This represents that there's no coherent disk structure
-        R_d_eff = 1e-12  # kpc - essentially zero
-        xi = XI_SCALE * R_d_eff
-        W_val = r_kpc / (xi + r_kpc)
-        
-        # Enhancement = A * W * h
-        enh = A_galaxy * W_val * h_val
-        enhancement.append(enh)
+        h_values.append(h_val)
     
-    enhancement = np.array(enhancement)
+    h_values = np.array(h_values)
     
-    # Plot the prediction - smooth line
-    ax.loglog(r_AU_range, enhancement, 'b-', lw=2.5, 
-              label=r'$\Sigma$-Gravity', zorder=5)
+    # The actual enhancement in the Solar System is Σ - 1 = A × C × h(g)
+    # Since C ≈ 0 (no coherent rotation), the enhancement is essentially zero
+    # We show h(g) as an upper bound (what you'd get with C=1, A=1)
+    
+    # Plot h(g) - shows the acceleration suppression alone
+    ax.loglog(r_AU_range, h_values, 'b--', lw=2, alpha=0.7,
+              label=r'$h(g_N)$ alone (if $\mathcal{C}=1$)', zorder=4)
+    
+    # Plot actual enhancement with C ≈ 0 (essentially zero)
+    # Use a small but non-zero C to show it's well below bounds
+    C_solar_system = 0  # No coherent rotation
+    actual_enhancement = A_galaxy * C_solar_system * h_values
+    
+    # Since C=0 gives exactly zero, show a line at machine precision
+    # to indicate "effectively zero"
+    ax.axhline(y=1e-20, color='blue', linestyle='-', lw=2.5,
+               label=r'$\Sigma$-Gravity ($\mathcal{C} \approx 0$)', zorder=5)
+    ax.text(1, 3e-20, r'$\mathcal{C} \to 0$: no coherent rotation', 
+            fontsize=10, color='blue', style='italic')
     
     # Mark key distances with vertical lines and labels at top
     for name, r_AU in distances.items():
@@ -693,17 +699,35 @@ def generate_solar_system_figure(output_dir):
     
     # Observational bounds
     ax.axhline(y=2.3e-5, color='red', linestyle='--', lw=2, 
-               label='Cassini bound')
+               label=r'Cassini PPN bound: $|\gamma-1| < 2.3\times10^{-5}$')
     ax.axhline(y=1e-8, color='orange', linestyle='--', lw=2, 
-               label='Ephemeris bound')
+               label='Planetary ephemeris bound')
+    
+    # Add annotation for Saturn's h(g) value
+    saturn_r = 9.5  # AU
+    saturn_r_m = saturn_r * AU_to_m
+    saturn_g = G * M_sun / saturn_r_m**2
+    saturn_h = np.sqrt(g_dagger / saturn_g) * g_dagger / (g_dagger + saturn_g)
+    ax.annotate(f'Saturn: $h(g_N) \\approx {saturn_h:.1e}$\n$g_N/g^\\dagger \\approx 7\\times10^5$',
+                xy=(saturn_r, saturn_h), xytext=(40, saturn_h * 10),
+                fontsize=9, color='darkblue',
+                arrowprops=dict(arrowstyle='->', color='darkblue', alpha=0.7))
     
     ax.set_xlabel('Distance from Sun [AU]', fontsize=11)
     ax.set_ylabel(r'Enhancement $(\Sigma - 1)$', fontsize=11)
-    ax.set_title('Solar System: Enhancement Far Below Detection Limits', fontsize=12)
+    ax.set_title('Solar System Safety: Coherence Suppression ($\\mathcal{C} \\to 0$)', fontsize=12)
     ax.set_xlim(0.2, 2e4)
-    ax.set_ylim(1e-16, 1e-3)
-    ax.legend(loc='lower right', fontsize=9)
+    ax.set_ylim(1e-22, 1e-3)
+    ax.legend(loc='upper right', fontsize=9)
     ax.grid(True, alpha=0.3, which='major')
+    
+    # Add explanatory text box
+    textstr = ('Primary suppression: $\\mathcal{C} \\to 0$\n'
+               '(no extended coherent rotation)\n\n'
+               'Secondary: $h(g_N) \\sim 10^{-9}$ at Saturn')
+    props = dict(boxstyle='round', facecolor='wheat', alpha=0.8)
+    ax.text(0.02, 0.02, textstr, transform=ax.transAxes, fontsize=9,
+            verticalalignment='bottom', bbox=props)
     
     plt.tight_layout()
     outpath = output_dir / 'solar_system_safety.png'
