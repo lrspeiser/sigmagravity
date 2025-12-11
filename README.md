@@ -203,7 +203,7 @@ We use the SPARC database [15]: 175 galaxies with Spitzer 3.6μm photometry and 
 **Prediction procedure:**
 1. Load rotation curve data ($R$, $V_{\rm obs}$, $V_{\rm err}$, $V_{\rm gas}$, $V_{\rm disk}$, $V_{\rm bul}$)
 2. Apply M/L scaling: $V_{\rm bar}^2 = V_{\rm gas}^2 + 0.5 \times V_{\rm disk}^2 + 0.7 \times V_{\rm bul}^2$
-3. Estimate $R_d$ from the radius where $V_{\rm disk}$ peaks (robustness tested in SI §14)
+3. Estimate $R_d$ as the radius at the N/3 data point (a simple proxy for the disk scale length; see SI §14 for robustness to this choice)
 4. Compute $g_N = V_{\rm bar}^2/R$ at each radius
 5. Apply enhancement: $\Sigma = 1 + A_0 \cdot W(r) \cdot h(g_N)$ with $W(r) = r/(\xi + r)$, $\xi = R_d/(2\pi)$
 6. Predict: $V_{\rm pred} = V_{\rm bar} \times \sqrt{\Sigma}$
