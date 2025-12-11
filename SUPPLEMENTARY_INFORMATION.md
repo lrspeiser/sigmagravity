@@ -818,16 +818,17 @@ def compute_sigma_eff(V_gas, V_disk, V_bulge):
     return gas_frac * 10 + disk_frac * 25 + bulge_frac * 120  # km/s
 ```
 
-### SI §13.3 Full 17-Test Comparison
+### SI §13.3 Coherence Scale Comparison
+
+This section compares the canonical geometric coherence scale with an alternative dynamical formulation. **Note:** The canonical results (ξ = R_d/(2π)) are used throughout the main paper.
 
 **Tests affected by ξ choice:**
 
 | Metric | Canonical ξ = R_d/(2π) | Dynamical ξ_dyn (k=0.24) | Change |
 |--------|------------------------|--------------------------|--------|
-| SPARC RMS | 17.48 km/s | 17.39 km/s | **−0.5%** |
-| RAR scatter | 0.194 dex | 0.191 dex | **−1.9%** |
-| Win rate vs MOND | 45.6% | 46.8% | +1.2pp |
-| Milky Way RMS | 66.7 km/s | 67.6 km/s | +1.4% |
+| SPARC RMS | 17.42 km/s | 17.35 km/s | **−0.4%** |
+| RAR scatter | 0.100 dex | 0.098 dex | **−2.0%** |
+| Win rate vs MOND | 42.7% | 43.9% | +1.2pp |
 
 **Tests NOT affected by ξ choice:**
 
@@ -840,13 +841,7 @@ def compute_sigma_eff(V_gas, V_disk, V_bulge):
 | Dwarf Spheroidals | Host inheritance model (Σ_dSph = Σ_MW) |
 | Bullet Cluster | W = 1 at lensing radii |
 
-**With optimal k = 0.47:**
-
-| Metric | Canonical | Dynamical (k=0.47) | Change |
-|--------|-----------|-------------------|--------|
-| SPARC RMS | 17.48 km/s | 17.29 km/s | **−1.1%** |
-| RAR scatter | 0.194 dex | 0.190 dex | **−2.0%** |
-| Win rate vs MOND | 45.6% | 44.4% | −1.2pp |
+**Conclusion:** The dynamical coherence scale provides marginally better fits but adds complexity. The canonical geometric form (ξ = R_d/(2π)) is preferred for simplicity and is used for all main paper results.
 
 ### SI §13.4 Physical Interpretation
 

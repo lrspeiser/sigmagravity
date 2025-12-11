@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-12-11T06:56:59.079825",
+  "timestamp": "2025-12-11T07:11:25.054093",
   "formula": "sigma_gravity_unified",
-  "mode": "quick",
+  "mode": "core",
   "parameters": {
     "A_0": 1.17251960642002,
     "L_0": 0.4,
@@ -58,10 +58,16 @@
     },
     {
       "name": "Gaia/MW",
-      "passed": true,
-      "metric": 0.0,
-      "details": {},
-      "message": "SKIPPED: No data"
+      "passed": 1.0,
+      "metric": 29.84529071899299,
+      "details": {
+        "n_stars": 28368,
+        "rms": 29.84529071899299,
+        "mean_residual": -11.773303076557116,
+        "benchmark_V_sun": 233,
+        "benchmark_n_stars": 28368
+      },
+      "message": "RMS=29.8 km/s (28368 stars, expected 28368)"
     },
     {
       "name": "Redshift Evolution",
@@ -84,10 +90,14 @@
     },
     {
       "name": "Counter-Rotation",
-      "passed": true,
-      "metric": 0,
-      "details": {},
-      "message": "SKIPPED"
+      "passed": 1.0,
+      "metric": 0.003915553907736003,
+      "details": {
+        "n_cr": 63,
+        "fdm_cr_mean": 0.16922222222222216,
+        "fdm_normal_mean": 0.3020046626984127
+      },
+      "message": "f_DM(CR)=0.169 < f_DM(Normal)=0.302, p=0.0039"
     },
     {
       "name": "Tully-Fisher",
@@ -102,191 +112,11 @@
         "benchmark_scatter": 0.1
       },
       "message": "BTFR: M_pred/M_obs = 0.87 at V=200 km/s, slope=4 (obs=3.98)"
-    },
-    {
-      "name": "Wide Binaries",
-      "passed": 1.0,
-      "metric": 0.6320490128970924,
-      "details": {
-        "separation_AU": 10000,
-        "g_N": 8.897111995624694e-11,
-        "g_over_a0": 0.7414259996353912,
-        "boost_pred": 0.6320490128970924,
-        "boost_obs": 0.3500000000000001,
-        "obs_uncertainty": 0.1,
-        "n_pairs": 26500,
-        "controversy": "Banik+ 2024 disputes; ongoing debate"
-      },
-      "message": "Boost at 10000 AU: 63.2% (Chae 2023: 35\u00b110%)"
-    },
-    {
-      "name": "Dwarf Spheroidals",
-      "passed": 1.0,
-      "metric": 0.8701534304791707,
-      "details": {
-        "n_dsphs": 5,
-        "mean_ratio": 0.8701534304791707,
-        "std_ratio": 0.6252832719666661,
-        "model": "host_inheritance",
-        "results": {
-          "fornax": {
-            "sigma_pred": 21.67784577103226,
-            "sigma_obs": 10.7,
-            "ratio": 2.0259668944889966,
-            "d_MW_kpc": 147,
-            "Sigma_MW": 19.3912380537562,
-            "M_L_obs": 7.5
-          },
-          "draco": {
-            "sigma_pred": 3.4350528782063177,
-            "sigma_obs": 9.1,
-            "ratio": 0.3774783382644305,
-            "d_MW_kpc": 76,
-            "Sigma_MW": 10.404865658842814,
-            "M_L_obs": 330
-          },
-          "sculptor": {
-            "sigma_pred": 9.084059316451459,
-            "sigma_obs": 9.2,
-            "ratio": 0.9873977517882021,
-            "d_MW_kpc": 86,
-            "Sigma_MW": 11.677101594090788,
-            "M_L_obs": 160
-          },
-          "carina": {
-            "sigma_pred": 4.29185915185344,
-            "sigma_obs": 6.6,
-            "ratio": 0.6502816896747636,
-            "d_MW_kpc": 105,
-            "Sigma_MW": 14.086148897964126,
-            "M_L_obs": 40
-          },
-          "ursa_minor": {
-            "sigma_pred": 2.9416035427048803,
-            "sigma_obs": 9.5,
-            "ratio": 0.3096424781794611,
-            "d_MW_kpc": 76,
-            "Sigma_MW": 10.404865658842814,
-            "M_L_obs": 290
-          }
-        },
-        "mond_status": "Generally works for isolated dSphs; EFE complicates satellites",
-        "note": "Scatter correlates with M_star uncertainty; Sculptor is best-constrained"
-      },
-      "message": "\u03c3_pred/\u03c3_obs = 0.87\u00b10.63 (host inheritance, 5 dSphs)"
-    },
-    {
-      "name": "Ultra-Diffuse Galaxies",
-      "passed": true,
-      "metric": 2.4434812813307842,
-      "details": {
-        "results": {
-          "df2": {
-            "sigma_pred": 20.769590891311665,
-            "sigma_obs": 8.5,
-            "sigma_err": 2.3,
-            "ratio": 2.4434812813307842,
-            "note": "Appears to lack DM; MOND predicts ~20 km/s (EFE resolution)"
-          },
-          "dragonfly44": {
-            "sigma_pred": 22.480012986127992,
-            "sigma_obs": 47,
-            "sigma_err": 8,
-            "ratio": 0.4782981486410211,
-            "note": "Very DM dominated; M_dyn ~ 10^12 M\u2609"
-          }
-        },
-        "mond_challenge": "DF2 requires EFE explanation"
-      },
-      "message": "DF2: \u03c3_pred=20.8 vs obs=8.5 km/s (EFE needed for MOND/\u03a3-Gravity)"
-    },
-    {
-      "name": "Galaxy-Galaxy Lensing",
-      "passed": 1.0,
-      "metric": 9.547701293152613,
-      "details": {
-        "M_star": 500000000000.0,
-        "M_eff": 4773850646576.307,
-        "ratio": 9.547701293152613,
-        "g_N": 1.742365065991165e-12,
-        "Sigma": 9.547701293152613
-      },
-      "message": "M_eff/M_star at 200kpc = 9.5\u00d7 (obs: ~10-30\u00d7)"
-    },
-    {
-      "name": "External Field Effect",
-      "passed": 1.0,
-      "metric": 0.36359354657115417,
-      "details": {
-        "g_int": 1e-11,
-        "g_ext": 1e-10,
-        "Sigma_isolated": 4.289971744831545,
-        "Sigma_total": 1.559806041393344,
-        "suppression": 0.36359354657115417
-      },
-      "message": "EFE suppression: 0.36\u00d7 (g_ext/g\u2020=1.04)"
-    },
-    {
-      "name": "Gravitational Waves",
-      "passed": true,
-      "metric": 0,
-      "details": {
-        "delta_c_over_c": 0,
-        "bound": 1e-15,
-        "time_delay_s": 1.7,
-        "distance_Mpc": 40,
-        "source": "Abbott+ 2017 (GW170817 + GRB170817A)"
-      },
-      "message": "|c_GW-c|/c = 0e+00 < 1e-15 (GW170817)"
-    },
-    {
-      "name": "Structure Formation",
-      "passed": true,
-      "metric": 1.4521336319481284,
-      "details": {
-        "g_cluster": 1.3938920527929321e-10,
-        "g_dagger": 9.598924108127284e-11,
-        "ratio": 1.4521336319481284,
-        "sigma8_planck": 0.811,
-        "sigma8_lensing": 0.76,
-        "bao_scale_Mpc": 150
-      },
-      "message": "Cluster scale: g/g\u2020 = 1.5 (needs N-body sims; \u03c38 tension exists)"
-    },
-    {
-      "name": "CMB Acoustic Peaks",
-      "passed": true,
-      "metric": 2.654646650935522e-10,
-      "details": {
-        "g_cmb": 5.22475025514638e-16,
-        "g_dagger_z": 1.968152806063711e-06,
-        "ratio": 2.654646650935522e-10,
-        "Omega_b": 0.0493,
-        "Omega_c": 0.265,
-        "mond_challenge": "CMB requires DM at z~1100"
-      },
-      "message": "At z=1100: g/g\u2020(z) = 2.7e-10 (MOND challenge: CMB requires DM at z~1100)"
-    },
-    {
-      "name": "Bullet Cluster",
-      "passed": 1.0,
-      "metric": 1.1159655893763318,
-      "details": {
-        "M_bar": 259999999999999.97,
-        "M_pred": 290151053237846.25,
-        "M_lens": 550000000000000.06,
-        "ratio_pred": 1.1159655893763318,
-        "ratio_obs": 2.1,
-        "Sigma": 1.1159655893763318,
-        "offset_kpc": 150,
-        "mond_challenge": "Lensing follows stars, not gas"
-      },
-      "message": "M_pred/M_bar = 1.12\u00d7 (obs: 2.1\u00d7, MOND challenge: lensing follows stars)"
     }
   ],
   "summary": {
-    "total_tests": 17,
-    "passed": 17,
+    "total_tests": 8,
+    "passed": 8,
     "failed": 0
   },
   "all_passed": true
