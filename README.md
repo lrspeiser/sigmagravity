@@ -146,6 +146,7 @@ This unified 3D formula requires no discrete switch between system types. The pa
 - **Thin disk galaxies:** $L \approx L_0$ (disk scale height) → $A \approx A_0 = 1.173$
 - **Elliptical galaxies:** $L \sim 1$–$20$ kpc → $A \sim 1.5$–$3.4$
 - **Galaxy clusters:** $L \approx 600$ kpc → $A \approx 8.45$
+- **Satellite galaxies (dSphs):** Inherit $\Sigma$ from host galaxy at orbital radius (see SI §7a)
 
 **Parameter accounting:**
 
@@ -215,7 +216,7 @@ We use the Eilers et al. (2019) rotation curve [16]: 28,368 red giant stars with
 
 We use 42 strong-lensing clusters from Fox et al. (2022) [17] with Einstein radii and spectroscopic redshifts. Selection criteria: spectroscopic redshift confirmation and $M_{500} > 2 \times 10^{14} M_\odot$.
 
-**Baryonic mass estimate:** $M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$, where $f_{\rm baryon} = 0.15$ (cosmic baryon fraction). The factor 0.4 accounts for concentration within 200 kpc.
+**Baryonic mass estimate:** $M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$, where $f_{\rm baryon} = 0.15$ (cosmic baryon fraction). The factor 0.4 accounts for baryon concentration within 200 kpc (typical for NFW profiles with $c \sim 4$–6). Sensitivity analysis (SI §6) shows that varying this factor by ±25% shifts the median ratio by ~±30%, within the observational scatter. The $M_{500}$ values are from X-ray/SZ observations, independent of lensing.
 
 **Lensing mapping:** The enhanced potential governs both dynamics and light deflection. In the weak-field limit, we adopt an effective gravitational slip relation consistent with the QUMOND-like structure:
 
@@ -225,7 +226,7 @@ This ansatz interpolates between GR ($\eta = 1$ when $\Sigma = 1$) and a modifie
 
 $$\frac{M_{\rm lens}}{M_{\rm dyn}} = \frac{\Phi + \Psi}{2\Phi} = \frac{1 + \eta}{2} = \frac{5\Sigma - 3}{2(3\Sigma - 2)}$$
 
-For $\Sigma = 1$: $M_{\rm lens}/M_{\rm dyn} = 1$ (GR limit). For $\Sigma = 2$: $M_{\rm lens}/M_{\rm dyn} \approx 0.875$. This effective lensing closure is adopted as a phenomenological ansatz; a rigorous derivation from an action principle is deferred to future work (see SI §11 for derivation details).
+For $\Sigma = 1$: $M_{\rm lens}/M_{\rm dyn} = 1$ (GR limit). For $\Sigma = 2$: $M_{\rm lens}/M_{\rm dyn} \approx 0.875$. This effective lensing closure is adopted as a phenomenological ansatz; a rigorous derivation from an action principle is deferred to future work. **The cluster lensing results are conditional on this prescription**; sensitivity analysis (SI §11) shows the qualitative result is robust but the calibrated parameters would shift under alternative slip assumptions.
 
 ### D. MOND Comparison
 
@@ -281,11 +282,11 @@ The Milky Way provides an independent validation using individual stellar veloci
 | Scatter | 0.132 dex | — |
 | Range | 0.67–1.49 | — |
 
-The amplitude parameters $L_0$ and $n$ were calibrated on these 42 clusters to achieve this fit. The key result is not the cluster fit itself, but that the same unified framework—with these cluster-calibrated parameters—reproduces SPARC galaxy rotation curves without any additional adjustment. MOND systematically underpredicts cluster lensing masses by factor ~3, requiring additional mass (often attributed to residual dark matter or massive neutrinos) (Fig. 8).
+The amplitude parameters $L_0$ and $n$ were calibrated on these 42 clusters to achieve this fit, using the gravitational slip prescription described in Section III.C. The key result is not the cluster fit itself, but that the same unified framework—with these cluster-calibrated parameters—reproduces SPARC galaxy rotation curves without any additional adjustment. MOND systematically underpredicts cluster lensing masses by factor ~3, requiring additional mass (often attributed to residual dark matter or massive neutrinos). See SI §11 for sensitivity analysis showing robustness to alternative slip prescriptions (Fig. 8).
 
-![Figure 8: Cluster validation](figures/cluster_fox2022_validation.png)
+![Figure 8: Cluster calibration](figures/cluster_fox2022_validation.png)
 
-*FIG. 8. Σ-Gravity cluster calibration using 42 Fox et al. (2022) strong-lensing clusters. Left: Predicted vs. observed mass at 200 kpc aperture (1:1 line shown). Middle: Ratio vs. redshift showing no systematic evolution. Right: Distribution of log(M_Σ/M_SL) centered at zero with scatter = 0.132 dex. Parameters $L_0$ and $n$ were calibrated on this sample; SPARC galaxies provide independent validation.*
+*FIG. 8. Σ-Gravity cluster calibration using 42 Fox et al. (2022) strong-lensing clusters. Left: Predicted vs. observed mass at 200 kpc aperture (1:1 line shown). Middle: Ratio vs. redshift showing no systematic evolution. Right: Distribution of log(M_Σ/M_SL) centered at zero with scatter = 0.132 dex. Parameters $L_0$ and $n$ were calibrated on this sample (holdout validation: n = 0.27±0.01, holdout ratio = 1.02±0.12); SPARC galaxies provide independent validation.*
 
 ### D. Cross-Domain Consistency
 
@@ -326,6 +327,12 @@ Elliptical galaxies and galaxy clusters have $\sigma \gg v_{\rm rot}$, reducing 
 If $g^\dagger \propto H(z)$, enhancement is suppressed at high redshift.
 
 *Observational status:* Genzel et al. [19] report that massive star-forming galaxies at $z \sim 1$–2 are "strongly baryon-dominated," with dark matter fractions significantly lower than local galaxies. This is qualitatively consistent with Σ-Gravity's prediction of reduced enhancement at high redshift, though a quantitative comparison requires careful treatment of selection effects and baryonic physics.
+
+**4. Satellite galaxies inherit host enhancement.**
+
+Dwarf spheroidal galaxies (dSphs) orbiting the Milky Way are dispersion-dominated ($v_{\rm rot} \approx 0$), which would give $\mathcal{C} \to 0$ and no enhancement. However, dSphs are embedded in the MW's already-enhanced gravitational field. We propose that satellites inherit the host's enhancement: $\Sigma_{\rm satellite} = \Sigma_{\rm host}(R_{\rm orbit})$.
+
+*Preliminary test:* Applied to 5 MW dSphs (Sculptor, Fornax, Draco, Carina, Ursa Minor), this model gives mean $\sigma_{\rm pred}/\sigma_{\rm obs} = 0.87 \pm 0.63$. Sculptor shows near-perfect agreement (ratio = 0.99). The scatter correlates with stellar mass uncertainty—a testable prediction. See SI §7a for details.
 
 ### B. Comparison with MOND
 
@@ -369,7 +376,7 @@ The unified amplitude formula connects galaxies and clusters through a single pr
 
 ## Data and Code Availability
 
-The data and code supporting this study are openly available at https://github.com/lrspeiser/SigmaGravity. The master regression script `derivations/full_regression_test.py` reproduces all numerical results using the canonical parameters defined in SI §2. The repository includes SPARC rotation curve analysis, cluster lensing predictions, Milky Way validation, and figure generation scripts. All dependencies are standard Python packages (numpy, scipy, pandas, matplotlib, astropy).
+The data and code supporting this study are openly available at https://github.com/lrspeiser/SigmaGravity. The master regression script `scripts/run_regression_extended.py` reproduces all numerical results (17 tests) using the canonical parameters defined in SI §2. The repository includes SPARC rotation curve analysis, cluster lensing predictions, Milky Way validation, dSph satellite analysis, and figure generation scripts. All dependencies are standard Python packages (numpy, scipy, pandas, matplotlib, astropy).
 
 ---
 

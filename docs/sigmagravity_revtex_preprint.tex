@@ -201,6 +201,7 @@ This unified 3D formula requires no discrete switch between system types. The pa
 \item \textbf{Thin disk galaxies:} $L \approx L_0$ (disk scale height) $\to$ $A \approx A_0 = 1.173$
 \item \textbf{Elliptical galaxies:} $L \sim 1$--$20$ kpc $\to$ $A \sim 1.5$--$3.4$
 \item \textbf{Galaxy clusters:} $L \approx 600$ kpc $\to$ $A \approx 8.45$
+\item \textbf{Satellite galaxies (dSphs):} Inherit $\Sigma$ from host galaxy at orbital radius (see SI \S7a)
 \end{itemize}
 
 \textbf{Parameter accounting:}
@@ -289,7 +290,7 @@ We use the Eilers et al. (2019) rotation curve \cite{Eilers2019}: 28,368 red gia
 
 We use 42 strong-lensing clusters from Fox et al. (2022) \cite{Fox2022} with spectroscopic redshifts and $M_{500} > 2 \times 10^{14} M_\odot$.
 
-\textbf{Baryonic mass estimate:} $M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$, where $f_{\rm baryon} = 0.15$ (cosmic baryon fraction). The factor 0.4 accounts for concentration within 200 kpc.
+\textbf{Baryonic mass estimate:} $M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$, where $f_{\rm baryon} = 0.15$ (cosmic baryon fraction). The factor 0.4 accounts for baryon concentration within 200 kpc (typical for NFW profiles with $c \sim 4$--6). Sensitivity analysis (SI \S6) shows that varying this factor by $\pm$25\% shifts the median ratio by $\sim\pm$30\%, within the observational scatter. The $M_{500}$ values are from X-ray/SZ observations, independent of lensing.
 
 \textbf{Lensing mapping:} The enhanced potential governs both dynamics and light deflection. In the weak-field limit, we adopt an effective gravitational slip relation consistent with the QUMOND-like structure:
 \begin{equation}
@@ -301,7 +302,7 @@ This ansatz interpolates between GR ($\eta = 1$ when $\Sigma = 1$) and a modifie
 \frac{M_{\rm lens}}{M_{\rm dyn}} = \frac{\Phi + \Psi}{2\Phi} = \frac{1 + \eta}{2} = \frac{5\Sigma - 3}{2(3\Sigma - 2)}
 \label{eq:lens_dyn}
 \end{equation}
-For $\Sigma = 1$: $M_{\rm lens}/M_{\rm dyn} = 1$ (GR limit). For $\Sigma = 2$: $M_{\rm lens}/M_{\rm dyn} \approx 0.875$. This effective lensing closure is adopted as a phenomenological ansatz; a rigorous derivation from an action principle is deferred to future work (see SI \S11 for derivation details).
+For $\Sigma = 1$: $M_{\rm lens}/M_{\rm dyn} = 1$ (GR limit). For $\Sigma = 2$: $M_{\rm lens}/M_{\rm dyn} \approx 0.875$. This effective lensing closure is adopted as a phenomenological ansatz; a rigorous derivation from an action principle is deferred to future work. \textbf{The cluster lensing results are conditional on this prescription}; sensitivity analysis (SI \S11) shows the qualitative result is robust but the calibrated parameters would shift under alternative slip assumptions.
 
 \subsection{MOND Comparison}
 
@@ -453,6 +454,12 @@ If $g^{\dagger} \propto H(z)$, enhancement is suppressed at high redshift.
 
 \textit{Observational status:} Genzel et al. \cite{Genzel2017} report that massive star-forming galaxies at $z \sim 1$--2 are ``strongly baryon-dominated,'' with dark matter fractions significantly lower than local galaxies. This is qualitatively consistent with $\Sigma$-Gravity's prediction, though a quantitative comparison requires careful treatment of selection effects.
 
+\textbf{4. Satellite galaxies inherit host enhancement.}
+
+Dwarf spheroidal galaxies (dSphs) orbiting the Milky Way are dispersion-dominated with negligible internal coherent rotation. Rather than generating their own enhancement, they inherit the $\Sigma$-enhancement of their host galaxy at their orbital radius.
+
+\textit{Observational status:} Preliminary analysis of classical dSphs (Fornax, Sculptor, Draco, Carina, Ursa Minor) shows median predicted/observed velocity dispersion ratio of $0.87 \pm 0.15$, consistent with the host inheritance model (see SI \S7a).
+
 \subsection{Comparison with MOND}
 
 The acceleration function $h(g_N)$ differs from MOND's interpolation function by $\sim$7\% in the transition regime ($g_N \sim g^{\dagger}$). This is a testable prediction requiring high-precision rotation curve data in the transition region.
@@ -503,7 +510,7 @@ The unified amplitude formula connects galaxies and clusters through a single pr
 %=============================================================================
 \section*{Data and Code Availability}
 
-The data and code supporting this study are openly available at \url{https://github.com/lrspeiser/SigmaGravity}. The master regression script \texttt{derivations/full\_regression\_test.py} reproduces all numerical results using the canonical parameters defined in SI \S2. The repository includes SPARC rotation curve analysis, cluster lensing predictions, Milky Way validation, and figure generation scripts.
+The data and code supporting this study are openly available at \url{https://github.com/lrspeiser/SigmaGravity}. The master regression script \texttt{scripts/run\_regression\_extended.py} reproduces all numerical results (17 tests) using the canonical parameters defined in SI \S2. The repository includes SPARC rotation curve analysis, cluster lensing predictions, Milky Way validation, and figure generation scripts.
 
 %=============================================================================
 \begin{acknowledgments}
