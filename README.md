@@ -14,7 +14,7 @@
 
 The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter—a discrepancy conventionally attributed to dark matter. We present Σ-Gravity, a phenomenological framework where gravitational enhancement depends on both local acceleration and kinematic coherence of the source. The enhancement factor $\Sigma = 1 + A \cdot \mathcal{C} \cdot h(g_N)$ combines a covariant coherence scalar $\mathcal{C} = v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$, an acceleration function $h(g_N)$ with critical scale $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s², and a unified amplitude connecting galaxies and clusters. Adopting a QUMOND-like formulation with minimal matter coupling, test particles follow geodesics of the enhanced potential.
 
-Applied to 171 SPARC galaxies (M/L = 0.5/0.7), the framework achieves RMS = 17.42 km/s with 43% win rate versus MOND—with no per-galaxy fitting. The amplitude formula uses $L_0 = 0.4$ kpc (fixed from typical disk scale heights) and a single calibrated exponent $n = 0.27$ (fit to 42 Fox et al. 2022 strong-lensing clusters), achieving median predicted/observed ratio of 0.987—where MOND underpredicts by factor ~3. Crucially, the same framework with this cluster-calibrated exponent reproduces SPARC rotation curves without additional adjustment. Solar System constraints are satisfied ($|\gamma-1| \sim 10^{-9}$). The theory predicts that counter-rotating stellar components reduce enhancement—confirmed in MaNGA data with 44% lower inferred dark matter fractions (p < 0.01). While phenomenologically successful, Σ-Gravity lacks rigorous first-principles derivation; we present it as a falsifiable framework with specific predictions distinct from both MOND and ΛCDM.
+Applied to 171 SPARC galaxies (M/L = 0.5/0.7), the framework achieves RMS = 17.42 km/s with 43% win rate versus MOND—with no per-galaxy fitting. The amplitude formula uses $L_0 = 0.4$ kpc (fixed from typical disk scale heights) and a single calibrated exponent $n = 0.27$ (fit to 42 Fox et al. 2022 strong-lensing clusters), achieving median predicted/observed ratio of 0.987—where MOND underpredicts by factor ~3. Crucially, the same framework with this cluster-calibrated exponent reproduces SPARC rotation curves without additional adjustment. Solar System constraints are satisfied (well below the Cassini bound $|\gamma-1| < 2.3 \times 10^{-5}$; see SI §8 for explicit calculation). The theory predicts that counter-rotating stellar components reduce enhancement—confirmed in MaNGA data with 44% lower inferred dark matter fractions (p < 0.01). While phenomenologically successful, Σ-Gravity lacks rigorous first-principles derivation; we present it as a falsifiable framework with specific predictions distinct from both MOND and ΛCDM.
 
 ---
 
@@ -300,7 +300,7 @@ The same theoretical framework—with cluster-calibrated amplitude parameters—
 - Galaxy rotation curves (RMS = 17.42 km/s) — **independent validation**
 - Milky Way stellar velocities (RMS = 29.8 km/s) — **independent validation**
 - Cluster lensing masses (median ratio = 0.987) — calibration set
-- Solar System constraints ($|\gamma-1| \sim 10^{-9}$)
+- Solar System constraints (well below Cassini bound; SI §8)
 
 This cross-domain consistency, achieved without per-system fitting, supports the framework's validity.
 
