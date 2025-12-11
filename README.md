@@ -173,7 +173,7 @@ In compact systems, two suppression mechanisms combine:
 1. **High acceleration:** When $g_N \gg g^\dagger$, $h(g_N) \to 0$
 2. **Low coherence:** When $r \ll \xi$, $\mathcal{C} \to 0$
 
-At Saturn's orbit ($r \approx 9.5$ AU = 1.42×10¹² m), the Newtonian acceleration is $g_N = GM_\odot/r^2 \approx 6.5 \times 10^{-6}$ m/s², giving $h(g_N) \approx 1.2 \times 10^{-3}$. However, the Solar System lacks extended coherent rotation, so $\mathcal{C} \approx 0$ (no disk-like velocity field). With $\mathcal{C} \to 0$, the enhancement $\Sigma - 1 \to 0$ regardless of $h(g_N)$.
+At Saturn's orbit ($r \approx 9.5$ AU = 1.42×10¹² m), the Newtonian acceleration is $g_N = GM_\odot/r^2 \approx 6.5 \times 10^{-5}$ m/s². With $g_N/g^\dagger \approx 7 \times 10^5$, the acceleration function gives $h(g_N) \approx 1.5 \times 10^{-9}$—already tiny. However, the **primary suppression mechanism** is that the Solar System lacks extended coherent rotation: $\mathcal{C} \approx 0$ (no disk-like velocity field). With $\mathcal{C} \to 0$, the enhancement $\Sigma - 1 \to 0$ regardless of $h(g_N)$.
 
 For the Sun treated as a compact source, $\xi \to 0$ (no extended disk), so $W(r) = r/(\xi + r) \to 1$. But without coherent rotation ($\mathcal{C} = 0$), the enhancement vanishes. This satisfies the Cassini bound $|\gamma - 1| < 2.3 \times 10^{-5}$ [13] (Fig. 4).
 
