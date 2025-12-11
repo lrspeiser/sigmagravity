@@ -1,9 +1,28 @@
 #!/usr/bin/env python3
 """
-Σ-GRAVITY MASTER REGRESSION TEST
-=================================
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! DEPRECATED - DO NOT USE !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-This is THE DEFINITIVE regression test for Σ-Gravity. Run this after any formula changes.
+USE INSTEAD: scripts/run_regression_extended.py
+
+This file is kept for historical reference only. The extended regression script
+runs 17 comprehensive tests and is the canonical regression test for all paper
+results.
+
+To run the canonical regression:
+    python scripts/run_regression_extended.py           # Full 17 tests
+    python scripts/run_regression_extended.py --core    # Core 8 tests only
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+ORIGINAL DOCSTRING (historical):
+================================
+
+Σ-GRAVITY MASTER REGRESSION TEST (DEPRECATED)
+==============================================
+
+This was the original regression test. Now superseded by run_regression_extended.py.
 
 USAGE:
     python scripts/run_regression.py           # Full test (all domains)
