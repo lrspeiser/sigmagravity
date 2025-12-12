@@ -34,6 +34,7 @@ USAGE:
     python scripts/run_regression_extended.py           # Full test (17 tests)
     python scripts/run_regression_extended.py --quick   # Skip slow tests
     python scripts/run_regression_extended.py --core    # Only core 8 tests
+    python scripts/run_regression_extended.py --sigma-components  # Use component-mixed σ(r) in C(r)
 
 Author: Leonard Speiser
 Last Updated: December 2025
@@ -76,6 +77,13 @@ N_EXP = 0.27  # Path length exponent
 XI_SCALE = 1 / (2 * np.pi)  # ξ = R_d/(2π)
 ML_DISK = 0.5
 ML_BULGE = 0.7
+
+# Optional: use a component-mixed dispersion profile σ(r) in the coherence scalar C(r).
+# This is a population-informed *input* (from baryonic phase mixture), not a per-galaxy fit.
+USE_SIGMA_COMPONENTS = False  # set in main()
+SIGMA_GAS_KMS = 10.0
+SIGMA_DISK_KMS = 25.0
+SIGMA_BULGE_KMS = 120.0
 
 # Cluster amplitude
 A_CLUSTER = A_0 * (600 / L_0)**N_EXP  # ≈ 8.45
@@ -245,8 +253,9 @@ def C_coherence(v_rot: np.ndarray, sigma: float = 20.0) -> np.ndarray:
     
     This is the PRIMARY formulation, built from 4-velocity invariants.
     """
-    v2 = np.maximum(v_rot, 0.0)**2
-    s2 = max(sigma, 1e-6)**2
+    v2 = np.maximum(np.asarray(v_rot, dtype=float), 0.0)**2
+    sigma_arr = np.maximum(np.asarray(sigma, dtype=float), 1e-6)
+    s2 = sigma_arr**2
     return v2 / (v2 + s2)
 
 
@@ -259,6 +268,35 @@ def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
     """
     xi = max(xi, 0.01)
     return r / (xi + r)
+
+
+def sigma_profile_from_components_kms(
+    V_gas_kms: np.ndarray,
+    V_disk_scaled_kms: np.ndarray,
+    V_bulge_scaled_kms: np.ndarray,
+) -> np.ndarray:
+    """
+    Construct an effective dispersion profile σ_eff(r) by mixing fixed phase dispersions.
+
+    Weights use squared baryonic component contributions to V_bar at each radius:
+      w_i(r) = V_i(r)^2 / Σ_j V_j(r)^2
+
+    σ_eff(r)^2 = Σ_i w_i(r) σ_i^2
+
+    This is designed to capture the empirical fact that galaxy populations differ in phase-space
+    coherence (gas-rich disks vs bulge-dominated systems) without per-object tuning.
+    """
+    vg2 = np.square(np.nan_to_num(np.asarray(V_gas_kms, dtype=float), nan=0.0, posinf=0.0, neginf=0.0))
+    vd2 = np.square(np.nan_to_num(np.asarray(V_disk_scaled_kms, dtype=float), nan=0.0, posinf=0.0, neginf=0.0))
+    vb2 = np.square(np.nan_to_num(np.asarray(V_bulge_scaled_kms, dtype=float), nan=0.0, posinf=0.0, neginf=0.0))
+
+    denom = np.maximum(vg2 + vd2 + vb2, 1e-12)
+    wgas = vg2 / denom
+    wdisk = vd2 / denom
+    wbul = vb2 / denom
+
+    sigma2 = wgas * (SIGMA_GAS_KMS**2) + wdisk * (SIGMA_DISK_KMS**2) + wbul * (SIGMA_BULGE_KMS**2)
+    return np.sqrt(np.maximum(sigma2, 1e-6))
 
 
 def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0, 
@@ -308,7 +346,8 @@ def sigma_enhancement_C(g: np.ndarray, v_rot: np.ndarray, sigma: float = 20.0,
 
 def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
                      h_disk: float = None, f_bulge: float = 0.0,
-                     use_C_primary: bool = True, sigma_kms: float = 20.0) -> np.ndarray:
+                     use_C_primary: bool = True, sigma_kms: float = 20.0,
+                     sigma_profile_kms: Optional[np.ndarray] = None) -> np.ndarray:
     """
     Predict rotation velocity using Σ-Gravity.
     
@@ -332,9 +371,10 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
         # PRIMARY: Covariant C(r) with fixed-point iteration
         h = h_function(g_bar)
         V = np.array(V_bar, dtype=float)
+        sigma_use = sigma_profile_kms if sigma_profile_kms is not None else float(sigma_kms)
         
         for _ in range(50):  # Typically converges in 3-5 iterations
-            C = C_coherence(V, sigma_kms)
+            C = C_coherence(V, sigma_use)
             Sigma = 1 + A * C * h
             V_new = V_bar * np.sqrt(Sigma)
             if np.max(np.abs(V_new - V)) < 1e-6:
@@ -424,6 +464,10 @@ def load_sparc(data_dir: Path) -> List[Dict]:
                 'R': df['R'].values,
                 'V_obs': df['V_obs'].values,
                 'V_bar': df['V_bar'].values,
+                # Keep baryonic component curves for optional σ(r) mixing.
+                'V_gas': df['V_gas'].values,
+                'V_disk_scaled': df['V_disk_scaled'].values,
+                'V_bulge_scaled': df['V_bulge_scaled'].values,
                 'R_d': R_d,
                 'h_disk': h_disk,
                 'f_bulge': f_bulge,
@@ -528,8 +572,19 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
         R_d = gal['R_d']
         h_disk = gal.get('h_disk', 0.15 * R_d)
         f_bulge = gal.get('f_bulge', 0.0)
+
+        sigma_profile = None
+        if USE_SIGMA_COMPONENTS:
+            try:
+                sigma_profile = sigma_profile_from_components_kms(
+                    gal.get('V_gas', np.zeros_like(V_bar)),
+                    gal.get('V_disk_scaled', np.zeros_like(V_bar)),
+                    gal.get('V_bulge_scaled', np.zeros_like(V_bar)),
+                )
+            except Exception:
+                sigma_profile = None
         
-        V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge)
+        V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge, sigma_profile_kms=sigma_profile)
         V_mond = predict_mond(R, V_bar)
         
         rms_sigma = np.sqrt(((V_pred - V_obs)**2).mean())
@@ -742,7 +797,10 @@ def test_gaia(gaia_df: Optional[pd.DataFrame]) -> TestResult:
     V_bar = np.sqrt(v2_disk + v2_bulge + v2_gas)
     
     R_d_mw = 2.6  # MW disk scale length (kpc)
-    V_pred = predict_velocity(R, V_bar, R_d_mw, h_disk=0.3, f_bulge=0.1)
+    sigma_profile = None
+    if USE_SIGMA_COMPONENTS:
+        sigma_profile = sigma_profile_from_components_kms(np.sqrt(v2_gas), np.sqrt(v2_disk), np.sqrt(v2_bulge))
+    V_pred = predict_velocity(R, V_bar, R_d_mw, h_disk=0.3, f_bulge=0.1, sigma_profile_kms=sigma_profile)
     
     # Asymmetric drift correction
     from scipy.interpolate import interp1d
@@ -1392,6 +1450,9 @@ def test_bullet_cluster() -> TestResult:
 def main():
     quick = '--quick' in sys.argv
     core_only = '--core' in sys.argv
+    sigma_components = '--sigma-components' in sys.argv
+    global USE_SIGMA_COMPONENTS
+    USE_SIGMA_COMPONENTS = bool(sigma_components)
     
     data_dir = Path(__file__).parent.parent / "data"
     
@@ -1408,6 +1469,9 @@ def main():
     print(f"  M/L = {ML_DISK}/{ML_BULGE}")
     print(f"  g† = {g_dagger:.3e} m/s²")
     print(f"  A_cluster = {A_CLUSTER:.2f}")
+    print(f"  σ components mode: {'ON' if USE_SIGMA_COMPONENTS else 'OFF'}")
+    if USE_SIGMA_COMPONENTS:
+        print(f"    σ_gas/disk/bulge = {SIGMA_GAS_KMS:.1f}/{SIGMA_DISK_KMS:.1f}/{SIGMA_BULGE_KMS:.1f} km/s")
     print()
     
     # Load data
@@ -1496,6 +1560,10 @@ def main():
             'ml_bulge': ML_BULGE,
             'g_dagger': g_dagger,
             'A_cluster': A_CLUSTER,
+            'use_sigma_components': USE_SIGMA_COMPONENTS,
+            'sigma_gas_kms': SIGMA_GAS_KMS,
+            'sigma_disk_kms': SIGMA_DISK_KMS,
+            'sigma_bulge_kms': SIGMA_BULGE_KMS,
         },
         'results': [asdict(r) for r in results],
         'summary': {
