@@ -288,9 +288,9 @@ Results are saved to `scripts/regression_results/extended_report.json` in machin
 
 ---
 
-## SI §4a — Complete Test Suite (17 Tests)
+## SI §4a — Model Variants and A/B Testing
 
-The regression test validates Σ-Gravity against 17 diverse astrophysical phenomena, comparing to both MOND and ΛCDM where applicable.
+This section documents the full 17-test regression suite and highlights model variants that materially improve specific stress-tests without changing the core galaxy/cluster/Milky Way performance.
 
 ### Test Suite Summary
 
@@ -304,7 +304,7 @@ The regression test validates Σ-Gravity against 17 diverse astrophysical phenom
 | 6 | Solar System | Bertotti+ 2003 | 1.77×10⁻⁹ | ~10⁻⁵ | 0 |
 | 7 | Counter-Rotation | Bevacqua+ 2022 | p=0.004 | N/A | N/A |
 | 8 | Tully-Fisher | McGaugh 2012 | slope=4 | slope=4 | slope~3.5 |
-| 9 | Wide Binaries | Chae 2023 | 63% boost | ~35% | 0% |
+| 9 | Wide Binaries | Chae 2023 | 63% boost (canonical); 22% with EFE-style $g_{\\rm tot}$ | ~35% | 0% |
 | 10 | Dwarf Spheroidals | Walker+ 2009 | 0.87× (host inherit) | ~1× | ~1× (fitted) |
 | 11 | Ultra-Diffuse Galaxies | van Dokkum+ 2018 | EFE needed | EFE needed | Fitted |
 | 12 | Galaxy-Galaxy Lensing | Stacking | 9.5× | ~10× | ~15× |
@@ -312,7 +312,7 @@ The regression test validates Σ-Gravity against 17 diverse astrophysical phenom
 | 14 | Gravitational Waves | GW170817 | c_GW = c | c_GW = c | c_GW = c |
 | 15 | Structure Formation | Planck 2018 | Informational | Fails | Works |
 | 16 | CMB Acoustic Peaks | Planck 2018 | Informational | Fails | Works |
-| 17 | Bullet Cluster | Clowe+ 2006 | 1.12× | ~0.5× | ~2.1× |
+| 17 | Bullet Cluster | Clowe+ 2006 | 1.12× (spherical); 1.60× (gas/stars scale sanity check) | ~0.5× | ~2.1× |
 
 ### Observational Benchmarks (Gold Standard)
 
@@ -379,7 +379,7 @@ Running `python scripts/run_regression_extended.py` produces:
 | Solar System | \|γ-1\| = 1.77×10⁻⁹ |
 | Counter-Rotation | f_DM(CR) = 0.169 < f_DM(Normal) = 0.302, p = 0.004 |
 | Tully-Fisher | M_pred/M_obs = 0.87, slope = 4 |
-| Wide Binaries | 63.2% boost at 10 kAU |
+| Wide Binaries | 63.2% boost at 10 kAU (canonical); 22.0% with EFE-style $g_{\\rm tot}$ |
 | Dwarf Spheroidals | σ_pred/σ_obs = 0.87±0.63 (host inheritance, 5 dSphs) |
 | Ultra-Diffuse Galaxies | DF2: σ_pred = 20.8 km/s (EFE needed) |
 | Galaxy-Galaxy Lensing | M_eff/M_star = 9.5× at 200 kpc |
@@ -387,7 +387,31 @@ Running `python scripts/run_regression_extended.py` produces:
 | Gravitational Waves | c_GW = c (consistent with GW170817) |
 | Structure Formation | g/g† = 1.5 at cluster scales |
 | CMB Acoustic Peaks | g/g†(z) = 2.7×10⁻¹⁰ at z=1100 |
-| Bullet Cluster | M_pred/M_bar = 1.12× |
+| Bullet Cluster | M_pred/M_bar = 1.12× (spherical); 1.60× (gas/stars scale sanity check) |
+
+### Material Variants (Motivated Extensions)
+
+The canonical implementation is intentionally minimal. Two refinements materially improve specific stress-tests (wide binaries and the Bullet Cluster) **without changing** the core SPARC/cluster/Milky Way results in our regression runs. We document them here because they are physically motivated, testable, and clarify where the current phenomenology is under-modeled.
+
+#### Variant A — External-Field Dependence (EFE-style)
+
+In nonlinear modified-Poisson frameworks (including QUMOND-like constructions), the enhancement can depend on the **environmental field**. A simple phenomenological implementation is to evaluate the acceleration function on a total field magnitude:
+
+$$g_{\rm tot} = \sqrt{g_{\rm int}^2 + g_{\rm ext}^2}, \qquad \Sigma = 1 + A \cdot \mathcal{C} \cdot h(g_{\rm tot}).$$
+
+For wide binaries embedded in the Milky Way, taking $g_{\rm ext} \sim V_c^2/R$ at the Solar radius suppresses the predicted 10 kAU boost from the canonical $\sim 63\\%$ to $\sim 22\\%$ (closer to the Chae 2023 benchmark $35\\%\\pm10\\%$).
+
+**Academic objection:** this violates the strong equivalence principle (SEP).  
+**How we frame it:** SEP violation is expected in nonlinear field equations; the weak equivalence principle can still hold. The virtue is falsifiability: the same $g_{\rm ext}$ prescription predicts environment-dependent suppression across wide binaries, satellites, and low-acceleration systems.
+
+#### Variant B — Bullet Cluster: Gas/Stellar Scale Sanity Check (No Slip)
+
+The Bullet Cluster is often summarized as “gas dominates baryons but lensing follows galaxies.” Even with **one potential** (no special law for light vs stars), a nonlinear dependence on $g_N$ means that spatially segregated baryonic components can contribute differently.
+
+A coarse sanity check is to model gas and stars with different characteristic radii ($r_{\rm gas} > r_{\\rm stars}$), compute separate enhancements $\Sigma_{\\rm gas}$ and $\Sigma_{\\rm stars}$, and compare a simple peak proxy proportional to $(M\\Sigma)/r^2$. With fiducial scales (gas more extended than galaxies), this raises the predicted enhancement from $\sim 1.12\\times$ (spherical baseline) to $\sim 1.60\\times$ and yields a peak proxy that follows the stellar/galaxy component.
+
+**Academic objection:** this is a toy model; the radii are ad hoc.  
+**How we frame it:** this is explicitly a proof-of-principle sanity check. A publishable treatment requires forward-modeling using observed baryon maps (gas + galaxies) and ray-tracing the lensing signal across a sample of merging clusters.
 
 ---
 
@@ -675,97 +699,38 @@ In QUMOND/AQUAL (Milgrom 2010, Bekenstein & Milgrom 1984), the phantom density r
 
 ## SI §11 — Relativistic Lensing Derivation
 
-This section provides the derivation details for the effective lensing closure adopted in the main paper (Section III.C).
+This section documents the lensing closure used in the code and main manuscript.
 
-### Gravitational Slip Ansatz
+### SI §11.1 Canonical choice: no gravitational slip (Ψ = Φ)
 
-In general relativity, the two scalar potentials $\Phi$ (Newtonian potential, governing dynamics) and $\Psi$ (curvature potential, governing light deflection) are equal in the absence of anisotropic stress. In modified gravity theories, these potentials generally differ, characterized by the gravitational slip parameter:
+In general relativity with minimal matter coupling and negligible anisotropic stress, the two scalar potentials $\Phi$ (governing dynamics) and $\Psi$ (governing light deflection) are equal. In this work we adopt the **no-slip** closure:
 
-$$\eta \equiv \frac{\Psi}{\Phi}$$
+$$\boxed{\Psi = \Phi}$$
 
-For Σ-Gravity, we adopt an effective slip relation consistent with the QUMOND-like structure:
+so the lensing potential $\Phi_{\rm lens} = (\Phi+\Psi)/2$ equals $\Phi$, and lensing responds to the same enhanced potential as dynamics. In this closure:
 
-$$\boxed{\eta = \frac{2\Sigma - 1}{3\Sigma - 2}}$$
+$$\boxed{M_{\rm lens} = M_{\rm dyn} = \Sigma \, M_{\rm bar}.}$$
 
-**Derivation motivation:** This ansatz arises from requiring that:
-1. The GR limit is recovered: when $\Sigma \to 1$, we have $\eta \to 1$
-2. The slip is bounded: $\eta$ remains finite and positive for all $\Sigma > 1$
-3. The lensing enhancement is weaker than the dynamical enhancement (consistent with the phantom density interpretation)
+This choice enforces a single-potential (“light and stars see the same potential”) implementation consistent with the constraints adopted in this project. A fully covariant action-based derivation is future work.
 
-| Σ | η | Physical regime |
-|---|---|-----------------|
-| 1.0 | 1.00 | GR limit (no enhancement) |
-| 1.5 | 0.80 | Typical galaxy outer disk |
-| 2.0 | 0.75 | Typical cluster enhancement |
-| 3.0 | 0.71 | Strong enhancement regime |
+### SI §11.2 Alternative slip ansatz (exploratory; not adopted)
 
-### Lensing-to-Dynamics Mass Ratio
+For completeness we record an exploratory mapping previously considered in draft form, expressed via the gravitational slip parameter:
 
-The lensing mass is determined by the lensing potential $\Phi_{\rm lens} = (\Phi + \Psi)/2$, while the dynamical mass is determined by $\Phi$ alone. The ratio is:
+$$\eta \equiv \frac{\Psi}{\Phi}, \qquad \eta = \frac{2\Sigma - 1}{3\Sigma - 2}.$$
 
-$$\frac{M_{\text{lens}}}{M_{\text{dyn}}} = \frac{\Phi + \Psi}{2\Phi} = \frac{1 + \eta}{2}$$
+This yields a lensing-to-dynamics ratio:
 
-Substituting the slip relation:
+$$\frac{M_{\rm lens}}{M_{\rm dyn}} = \frac{\Phi + \Psi}{2\Phi} = \frac{1+\eta}{2} = \frac{5\Sigma - 3}{2(3\Sigma - 2)}.$$
 
-$$\boxed{\frac{M_{\text{lens}}}{M_{\text{dyn}}} = \frac{5\Sigma - 3}{2(3\Sigma - 2)}}$$
+We do **not** adopt this slip prescription in the canonical results because it explicitly introduces different behavior for lensing and dynamics, contrary to the “one potential” implementation used here. If a slip relation is adopted in a future covariant completion, the cluster-calibrated amplitude parameters would need recalibration; galaxy rotation-curve predictions (pure dynamics) are unaffected.
 
-| Σ | M_lens/M_dyn | Interpretation |
-|---|--------------|----------------|
-| 1.0 | 1.00 | GR: lensing = dynamics |
-| 1.5 | 0.90 | Lensing slightly weaker |
-| 2.0 | 0.875 | Lensing 12.5% weaker than dynamics |
-| 3.0 | 0.857 | Asymptotic approach to 5/6 |
+### SI §11.3 Academic objections and interpretation
 
-### Implications for Cluster Predictions
-
-The cluster predictions in the main paper use this lensing closure. The key points:
-
-1. **Strong lensing masses** from Fox et al. (2022) probe $M_{\rm lens}$
-2. **Σ-Gravity predicts** an enhanced dynamical mass $M_{\rm dyn} = \Sigma \times M_{\rm bar}$
-3. **The slip relation** maps between them: $M_{\rm lens} = M_{\rm dyn} \times (5\Sigma - 3)/(2(3\Sigma - 2))$
-
-For typical cluster values ($\Sigma \approx 8.45$ from the path-length amplitude), the lensing-to-dynamics ratio approaches $\approx 0.83$. This is accounted for in the cluster calibration.
-
-### Theoretical Status
-
-This lensing prescription is an **effective ansatz**, not derived from first principles. A complete derivation would require:
-1. A covariant action formulation of Σ-Gravity
-2. Derivation of the metric perturbations in the weak-field limit
-3. Identification of the physical source of gravitational slip
-
-The current ansatz provides a self-consistent phenomenological framework that:
-- Reduces to GR when enhancement vanishes
-- Gives testable predictions for lensing-to-dynamics ratios
-- Is consistent with the QUMOND-like field equation structure
-
-Future work should derive this relation from first principles or constrain it observationally using systems with both dynamical and lensing mass measurements.
-
-### Lensing Slip Sensitivity Analysis
-
-The cluster results depend on the assumed gravitational slip relation. We test sensitivity to alternative slip prescriptions:
-
-**Baseline (adopted):** $\eta = (2\Sigma - 1)/(3\Sigma - 2)$
-
-**Alternative prescriptions:**
-
-| Prescription | η formula | η at Σ=8.45 | M_lens/M_dyn |
-|--------------|-----------|-------------|--------------|
-| **Adopted** | $(2\Sigma-1)/(3\Sigma-2)$ | 0.68 | 0.84 |
-| No slip (GR-like) | $\eta = 1$ | 1.00 | 1.00 |
-| Maximal slip | $\eta = 1/\Sigma$ | 0.12 | 0.56 |
-| MOND-like | $\eta = 1/\sqrt{\Sigma}$ | 0.34 | 0.67 |
-
-**Impact on cluster calibration:**
-
-| Slip prescription | Median M_pred/M_lens | Required n | Notes |
-|-------------------|---------------------|------------|-------|
-| **Adopted** | **0.987** | **0.27** | Baseline |
-| No slip (η=1) | 0.83 | 0.32 | Would require higher n |
-| MOND-like | 1.18 | 0.23 | Would require lower n |
-
-**Key finding:** The cluster calibration is sensitive to the slip prescription, but the *qualitative* result (Σ-Gravity fits clusters where MOND fails) is robust. Different slip assumptions would require recalibrating n, but the unified framework would still work.
-
-**Conditional statement:** The cluster lensing results are conditional on the adopted slip relation. If future observations or theoretical developments constrain $\eta$ differently, the cluster amplitude parameters would need recalibration. The SPARC galaxy results are unaffected by this choice (they use dynamics, not lensing).
+- **Objection:** Without an action-based covariant completion, any slip prescription is ad hoc.  
+  **Response:** We therefore do not use slip in the canonical results; we treat no-slip as a minimal phenomenological closure.
+- **Objection:** No-slip may be inconsistent with some modified-gravity realizations.  
+  **Response:** This is an implementation choice made explicit here; future work should derive (or observationally constrain) the relativistic lensing mapping in a covariant completion.
 
 ---
 
