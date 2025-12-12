@@ -34,6 +34,7 @@ USAGE:
     python scripts/run_regression_extended.py           # Full test (17 tests)
     python scripts/run_regression_extended.py --quick   # Skip slow tests
     python scripts/run_regression_extended.py --core    # Only core 8 tests
+    python scripts/run_regression_extended.py --xi-dyn  # Use ξ_dyn coherence scale (SI §13.2)
 
 Author: Leonard Speiser
 Last Updated: December 2025
@@ -76,6 +77,9 @@ N_EXP = 0.27  # Path length exponent
 XI_SCALE = 1 / (2 * np.pi)  # ξ = R_d/(2π)
 ML_DISK = 0.5
 ML_BULGE = 0.7
+
+# Optional alternative coherence scale (SI §13.2)
+XI_DYN_K = 0.24  # dimensionless proportionality constant
 
 # Cluster amplitude
 A_CLUSTER = A_0 * (600 / L_0)**N_EXP  # ≈ 8.45
@@ -270,6 +274,34 @@ def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
     return r / (xi + r)
 
 
+def sigma_eff_global_kms(
+    V_gas_kms: np.ndarray,
+    V_disk_scaled_kms: np.ndarray,
+    V_bulge_scaled_kms: np.ndarray,
+) -> float:
+    """
+    Global (galaxy-level) effective dispersion proxy for ξ_dyn (SI §13.2).
+    
+    Uses component maxima (as in SI) to form rough mass weights; this is not used in the
+    canonical model, but supports a situation-informed alternative coherence scale.
+    """
+    vg = float(np.nanmax(np.abs(np.asarray(V_gas_kms, dtype=float))))
+    vd = float(np.nanmax(np.abs(np.asarray(V_disk_scaled_kms, dtype=float))))
+    vb = float(np.nanmax(np.abs(np.asarray(V_bulge_scaled_kms, dtype=float))))
+    V_total_sq = max(vg**2 + vd**2 + vb**2, 1e-12)
+    gas_frac = vg**2 / V_total_sq
+    disk_frac = vd**2 / V_total_sq
+    bulge_frac = vb**2 / V_total_sq
+    # Fiducial dispersions (km/s) by component; see SI §13.2
+    return gas_frac * 10.0 + disk_frac * 25.0 + bulge_frac * 120.0
+
+
+def xi_dyn_kpc(R_d_kpc: float, V_bar_at_Rd_kms: float, sigma_eff_kms: float) -> float:
+    """Dynamical coherence scale ξ_dyn = k × σ_eff / Ω_d (SI §13.2)."""
+    Omega = float(V_bar_at_Rd_kms) / max(float(R_d_kpc), 1e-6)  # (km/s)/kpc
+    return XI_DYN_K * float(sigma_eff_kms) / max(Omega, 1e-12)  # kpc
+
+
 def sigma_enhancement(
     g: np.ndarray,
     r: np.ndarray = None,
@@ -334,6 +366,7 @@ def predict_velocity(
     f_bulge: float = 0.0,
     use_C_primary: bool = True,
     sigma_kms: float = 20.0,
+    xi_override_kpc: Optional[float] = None,
 ) -> np.ndarray:
     """
     Predict rotation velocity using Σ-Gravity.
@@ -372,7 +405,7 @@ def predict_velocity(
         return V
     else:
         # APPROXIMATION: W(r) = r/(ξ+r) - validated identical results
-        xi = XI_SCALE * R_d
+        xi = float(xi_override_kpc) if xi_override_kpc is not None else (XI_SCALE * R_d)
         Sigma = sigma_enhancement(g_bar, R_kpc, xi, A=A)
         return V_bar * np.sqrt(Sigma)
 
@@ -447,6 +480,15 @@ def load_sparc(data_dir: Path) -> List[Dict]:
             h_disk = 0.15 * R_d
             total_sq = np.sum(df['V_disk']**2 + df['V_bulge']**2 + df['V_gas']**2)
             f_bulge = np.sum(df['V_bulge']**2) / max(total_sq, 1e-10)
+
+            # Optional alternative coherence scale inputs (SI §13.2)
+            try:
+                sigma_eff = sigma_eff_global_kms(df['V_gas'].values, df['V_disk_scaled'].values, df['V_bulge_scaled'].values)
+                V_bar_at_Rd = float(df['V_bar'].iloc[idx])
+                xi_dyn = xi_dyn_kpc(R_d, V_bar_at_Rd, sigma_eff)
+            except Exception:
+                sigma_eff = float('nan')
+                xi_dyn = float('nan')
             
             galaxies.append({
                 'name': gf.stem.replace('_rotmod', ''),
@@ -454,6 +496,8 @@ def load_sparc(data_dir: Path) -> List[Dict]:
                 'V_obs': df['V_obs'].values,
                 'V_bar': df['V_bar'].values,
                 'R_d': R_d,
+                'xi_dyn': xi_dyn,
+                'sigma_eff': sigma_eff,
                 'h_disk': h_disk,
                 'f_bulge': f_bulge,
             })
@@ -534,7 +578,7 @@ def load_gaia(data_dir: Path) -> Optional[pd.DataFrame]:
 # ORIGINAL TESTS (1-7)
 # =============================================================================
 
-def test_sparc(galaxies: List[Dict]) -> TestResult:
+def test_sparc(galaxies: List[Dict], use_xi_dyn: bool = False) -> TestResult:
     """Test SPARC galaxy rotation curves.
     
     Gold standard: Lelli+ 2016, McGaugh+ 2016
@@ -557,8 +601,19 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
         R_d = gal['R_d']
         h_disk = gal.get('h_disk', 0.15 * R_d)
         f_bulge = gal.get('f_bulge', 0.0)
-        
-        V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge)
+
+        if use_xi_dyn:
+            xi_dyn = gal.get('xi_dyn', None)
+            if xi_dyn is None or not np.isfinite(xi_dyn) or xi_dyn <= 0:
+                V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge)
+            else:
+                V_pred = predict_velocity(
+                    R, V_bar, R_d, h_disk, f_bulge,
+                    use_C_primary=False,
+                    xi_override_kpc=float(xi_dyn),
+                )
+        else:
+            V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge)
         V_mond = predict_mond(R, V_bar)
         
         rms_sigma = np.sqrt(((V_pred - V_obs)**2).mean())
@@ -1443,6 +1498,7 @@ def test_bullet_cluster() -> TestResult:
 def main():
     quick = '--quick' in sys.argv
     core_only = '--core' in sys.argv
+    xi_dyn_mode = '--xi-dyn' in sys.argv
     
     data_dir = Path(__file__).parent.parent / "data"
     
@@ -1451,6 +1507,8 @@ def main():
     print("=" * 80)
     print(f"Timestamp: {datetime.now().isoformat()}")
     print(f"Mode: {'Core only' if core_only else 'Quick' if quick else 'Full'}")
+    if xi_dyn_mode:
+        print("Coherence scale: ξ_dyn (SI §13.2)")
     print()
     print("UNIFIED FORMULA PARAMETERS:")
     print(f"  A₀ = exp(1/2π) ≈ {A_0:.4f}")
@@ -1481,7 +1539,7 @@ def main():
     
     # Original tests (1-8) - now includes holdout validation
     tests_core = [
-        ("SPARC", lambda: test_sparc(galaxies)),
+        ("SPARC", lambda: test_sparc(galaxies, use_xi_dyn=xi_dyn_mode)),
         ("Clusters", lambda: test_clusters(clusters)),
         ("Cluster Holdout", lambda: test_cluster_holdout(clusters)),
         ("Gaia/MW", lambda: test_gaia(gaia_df)),
