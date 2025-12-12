@@ -52,6 +52,62 @@ def _extract_abstract(md_lines: list[str]) -> tuple[str, list[str]]:
     return " ".join(parts).strip(), out
 
 
+def _extract_readme_frontmatter(md_lines: list[str]) -> tuple[dict[str, str], list[str]]:
+    """
+    Extract a lightweight frontmatter block from the top of README.md (before the first horizontal rule).
+
+    Expected README pattern:
+    - '# Title'
+    - optional '**Pre-print**'
+    - '**Author Name**<sup>1,*</sup>'
+    - '<sup>1</sup>Affiliation, City, State, Country'
+    - '<sup>*</sup>Contact author: email | ORCID: [id](url)'
+    - '---'
+    """
+    meta: dict[str, str] = {}
+
+    i = 0
+    while i < len(md_lines) and not md_lines[i].strip():
+        i += 1
+
+    if i < len(md_lines) and md_lines[i].startswith("# "):
+        meta["title"] = md_lines[i][2:].strip()
+        i += 1
+
+    while i < len(md_lines):
+        s = md_lines[i].strip()
+        if s in ("---", "***", "___"):
+            i += 1
+            break
+
+        if s.lower() in ("**pre-print**", "pre-print"):
+            meta["preprint"] = "true"
+
+        m_author = re.match(r"^\*\*(.+?)\*\*", s)
+        if m_author and "author" not in meta:
+            cand = m_author.group(1).strip()
+            if cand.casefold() not in ("pre-print", "preprint"):
+                meta["author"] = cand
+
+        m_aff = re.match(r"^<\s*sup\s*>\s*1\s*<\s*/\s*sup\s*>(.+)$", s, flags=re.IGNORECASE)
+        if m_aff and "affiliation" not in meta:
+            meta["affiliation"] = m_aff.group(1).strip()
+
+        if "contact author:" in s.lower():
+            m_email = re.search(r"contact author:\s*([^\s|]+@[^\s|]+)", s, flags=re.IGNORECASE)
+            if m_email:
+                meta["email"] = m_email.group(1).strip()
+
+            m_orcid = re.search(r"ORCID:\s*\[([^\]]+)\]\(([^)]+)\)", s, flags=re.IGNORECASE)
+            if m_orcid:
+                meta["orcid_id"] = m_orcid.group(1).strip()
+                meta["orcid_url"] = m_orcid.group(2).strip()
+
+        i += 1
+
+    return meta, md_lines[i:]
+
+
 def convert_inline_formatting(text: str) -> str:
     # Inline HTML used in README
     text = re.sub(r"<\s*sup\s*>(.*?)<\s*/\s*sup\s*>", r"\\textsuperscript{\1}", text, flags=re.IGNORECASE)
@@ -71,19 +127,19 @@ def convert_inline_formatting(text: str) -> str:
         "—": "---",
         "–": "--",
         "−": "-",
-        "→": r"$\\to$",
-        "×": r"$\\times$",
-        "≈": r"$\\approx$",
-        "±": r"$\\pm$",
-        "≪": r"$\\ll$",
-        "≫": r"$\\gg$",
-        "≠": r"$\\neq$",
-        "ℓ": r"$\\ell$",
-        "†": r"$\\dagger$",
-        "☉": r"$\\odot$",
-        "μ": r"$\\mu$",
-        "²": r"\\textsuperscript{2}",
-        "°": r"$^\\circ$",
+        "→": r"$\to$",
+        "×": r"$\times$",
+        "≈": r"$\approx$",
+        "±": r"$\pm$",
+        "≪": r"$\ll$",
+        "≫": r"$\gg$",
+        "≠": r"$\neq$",
+        "ℓ": r"$\ell$",
+        "†": r"$\dagger$",
+        "☉": r"$\odot$",
+        "μ": r"$\mu$",
+        "²": r"\textsuperscript{2}",
+        "°": r"$^\circ$",
     }
     for k, v in replacements.items():
         text = text.replace(k, v)
@@ -120,10 +176,16 @@ def convert_table(table_lines: list[str], *, width_ref: str) -> str:
     if ncol == 0:
         return ""
 
-    # Wrap last col
-    colspec = ("l" * (ncol - 1)) + r">{\\raggedright\\arraybackslash}X" if ncol >= 2 else "l"
+    # Use a standard tabular. For narrow tables, wrap the last column to prevent overflow.
+    # For wide tables (many columns), wrapping a column tends to blow up the layout; keep them numeric.
+    if ncol >= 5:
+        colspec = "l" * ncol
+    elif ncol >= 2:
+        colspec = ("l" * (ncol - 1)) + "p{0.48\\linewidth}"
+    else:
+        colspec = "l"
 
-    out = f"\\begin{{tabularx}}{{{width_ref}}}{{{colspec}}}\n"
+    out = f"\\begin{{tabular}}{{{colspec}}}\n"
     out += "\\toprule\n"
     out += " & ".join(convert_inline_formatting(h) for h in header) + " \\\\\n"
     out += "\\midrule\n"
@@ -137,7 +199,7 @@ def convert_table(table_lines: list[str], *, width_ref: str) -> str:
         out += " & ".join(convert_inline_formatting(c) for c in cells) + " \\\\\n"
 
     out += "\\bottomrule\n"
-    out += "\\end{tabularx}\n"
+    out += "\\end{tabular}\n"
     return out
 
 
@@ -220,22 +282,24 @@ def _validate_readme_coverage(md: str, latex: str) -> None:
 
 def convert_markdown_to_revtex(md_content: str) -> str:
     lines = md_content.splitlines()
+    meta, lines = _extract_readme_frontmatter(lines)
     abstract, lines = _extract_abstract(lines)
 
     latex = r"""\documentclass[aps,prd,reprint,superscriptaddress,showpacs,floatfix,longbibliography]{revtex4-2}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\DeclareUnicodeCharacter{03A3}{\ensuremath{\Sigma}} % Σ
+\DeclareUnicodeCharacter{03C3}{\ensuremath{\sigma}} % σ
+\DeclareUnicodeCharacter{039B}{\ensuremath{\Lambda}} % Λ
+\DeclareUnicodeCharacter{03BB}{\ensuremath{\lambda}} % λ
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{bm}
 \usepackage{hyperref}
 \usepackage{xcolor}
-\usepackage{float}
 \usepackage{booktabs}
-\usepackage{array}
-\usepackage{tabularx}
 \usepackage[protrusion=true,expansion=false]{microtype}
 
 \graphicspath{{../figures/}}
@@ -265,24 +329,30 @@ def convert_markdown_to_revtex(md_content: str) -> str:
             i += 1
             continue
 
-        # Title/author block
-        if i < 25 and line.startswith("# ") and "\\title" not in latex:
-            title = convert_inline_formatting(line[2:].strip())
-            latex += f"\\title{{{title}\\\\\n\\textnormal{{\\textit{{Pre-print}}}}}}\n\n"
-            latex += "\\author{Leonard Speiser}\n"
-            latex += "\\email[Contact author: ]{leonard@horizon3.net}\n"
-            latex += "\\homepage[ORCID: ]{https://orcid.org/0009-0008-8797-2457}\n"
-            latex += "\\affiliation{Horizon 3, Independent Research, Los Altos, California, USA}\n\n"
+        # Title/author block (from README frontmatter; avoid hardcoding in the converter)
+        if i == 0 and "\\title" not in latex:
+            title = convert_inline_formatting(meta.get("title", "").strip())
+            author = convert_inline_formatting(meta.get("author", "Leonard Speiser").strip())
+            affiliation = convert_inline_formatting(meta.get("affiliation", "Horizon 3, Independent Research").strip())
+            email = meta.get("email", "").strip()
+            orcid_url = meta.get("orcid_url", "").strip()
+
+            if meta.get("preprint") == "true":
+                latex += f"\\title{{{title}\\\\\n\\textnormal{{\\textit{{Pre-print}}}}}}\n\n"
+            else:
+                latex += f"\\title{{{title}}}\n\n"
+
+            latex += f"\\author{{{author}}}\n"
+            if email:
+                latex += f"\\email[Contact author: ]{{{email}}}\n"
+            if orcid_url:
+                latex += f"\\homepage[ORCID: ]{{{orcid_url}}}\n"
+            latex += f"\\affiliation{{{affiliation}}}\n\n"
             latex += "\\date{\\today}\n\n"
             latex += "\\begin{abstract}\n" + convert_inline_formatting(abstract) + "\n\\end{abstract}\n\n"
             latex += "\\maketitle\n\n"
-            # Skip README byline/frontmatter block beneath title to avoid duplication
+
             i += 1
-            while i < len(lines) and not lines[i].strip().startswith("## "):
-                if lines[i].strip() in ("---", "***", "___"):
-                    i += 1
-                    break
-                i += 1
             continue
 
         # Acknowledgments
@@ -320,6 +390,23 @@ def convert_markdown_to_revtex(md_content: str) -> str:
             pending_table_caption = convert_inline_formatting(cap_plain)
             i += 1
             continue
+
+        # Bold label immediately before a markdown table (treat as caption)
+        # Example: "**Parameter accounting:**" followed by a |---| separator table.
+        if line.strip().startswith("**") and line.strip().endswith("**"):
+            j = i + 1
+            while j < len(lines) and lines[j].strip() == "":
+                j += 1
+            k = j + 1
+            while k < len(lines) and lines[k].strip() == "":
+                k += 1
+            if j < len(lines) and lines[j].lstrip().startswith("|") and k < len(lines) and _table_sep_line(lines[k]):
+                label = line.strip().strip("*").strip()
+                if label.endswith(":"):
+                    label = label[:-1].strip()
+                pending_table_caption = convert_inline_formatting(label)
+                i += 1
+                continue
 
         # Headings
         if line.startswith("## "):
@@ -370,51 +457,58 @@ def convert_markdown_to_revtex(md_content: str) -> str:
             i += 1
             continue
 
-        # Tables (strict: header must be followed by separator row)
-        if "|" in line and not line.strip().startswith("<!--"):
+        # Tables (robust parsing): detect header + separator, then consume following pipe rows.
+        if not in_table and "|" in line and not line.strip().startswith("<!--"):
             j = i + 1
             while j < len(lines) and lines[j].strip() == "":
                 j += 1
             if j < len(lines) and _table_sep_line(lines[j]):
-                if not in_table:
-                    in_table = True
-                    table_buffer = [line]
-                else:
-                    table_buffer.append(line)
-                i += 1
-                if i >= len(lines) or "|" not in lines[i]:
-                    # optional note after table
-                    k = i
-                    while k < len(lines) and lines[k].strip() == "":
-                        k += 1
-                    table_note = None
-                    if k < len(lines) and lines[k].strip().startswith("*"):
-                        raw_note = lines[k].strip().lstrip("*").rstrip("*").strip()
-                        if raw_note and not raw_note.lower().startswith(("fig.", "figure")):
-                            table_note = raw_note
-                            i = k + 1
-
-                    ncol = len([c for c in table_buffer[0].split("|") if c.strip()])
-                    wide = ncol >= 5
-                    env = "table*" if wide else "table"
-                    width_ref = "\\textwidth" if wide else "\\columnwidth"
-
-                    latex += f"\\begin{{{env}}}[t]\n\\centering\n"
-                    if pending_table_caption:
-                        if table_note:
-                            latex += f"\\caption{{{pending_table_caption} \\\\ \\textit{{{convert_inline_formatting(table_note)}}}}}\n"
-                        else:
-                            latex += f"\\caption{{{pending_table_caption}}}\n"
-                    elif table_note:
-                        latex += f"\\caption{{\\textit{{{convert_inline_formatting(table_note)}}}}}\n"
-                    latex += "\\small\n"
-                    latex += convert_table(table_buffer, width_ref=width_ref)
-                    latex += f"\\end{{{env}}}\n\n"
-
-                    pending_table_caption = None
-                    in_table = False
-                    table_buffer = []
+                in_table = True
+                table_buffer = [line, lines[j]]
+                i = j + 1
                 continue
+
+        if in_table:
+            # Consume data rows
+            if "|" in line and not line.strip().startswith("<!--") and not _table_sep_line(line):
+                table_buffer.append(line)
+                i += 1
+                continue
+
+            # Flush table when pipe rows end (or on blank/non-table line)
+            k = i
+            while k < len(lines) and lines[k].strip() == "":
+                k += 1
+            table_note = None
+            note_line = lines[k].strip() if k < len(lines) else ""
+            # Only treat fully-italic note lines like *...* as table notes.
+            if note_line.startswith("*") and note_line.endswith("*") and not note_line.startswith("**"):
+                raw_note = note_line.strip().lstrip("*").rstrip("*").strip()
+                if raw_note and not raw_note.lower().startswith(("fig.", "figure")):
+                    table_note = raw_note
+                    i = k + 1
+
+            ncol = len([c for c in table_buffer[0].split("|") if c.strip()])
+            wide = ncol >= 5
+            env = "table*" if wide else "table"
+            width_ref = "\\textwidth" if wide else "\\columnwidth"
+
+            latex += f"\\begin{{{env}}}[t]\n\\centering\n"
+            if pending_table_caption:
+                if table_note:
+                    latex += f"\\caption{{{pending_table_caption} \\\\ \\textit{{{convert_inline_formatting(table_note)}}}}}\n"
+                else:
+                    latex += f"\\caption{{{pending_table_caption}}}\n"
+            elif table_note:
+                latex += f"\\caption{{\\textit{{{convert_inline_formatting(table_note)}}}}}\n"
+            latex += ("\\scriptsize\n" if wide else "\\small\n")
+            latex += convert_table(table_buffer, width_ref=width_ref)
+            latex += f"\\end{{{env}}}\n\n"
+
+            pending_table_caption = None
+            in_table = False
+            table_buffer = []
+            continue
 
         # Lists
         if line.strip().startswith("- ") or line.strip().startswith("* "):

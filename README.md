@@ -4,7 +4,7 @@
 
 **Leonard Speiser**<sup>1,*</sup>
 
-<sup>1</sup>Horizon 3, Independent Research
+<sup>1</sup>Horizon 3, Independent Research, Los Altos, California, USA
 
 <sup>*</sup>Contact author: leonard@horizon3.net | ORCID: [0009-0008-8797-2457](https://orcid.org/0009-0008-8797-2457)
 
@@ -104,7 +104,7 @@ where $\omega^2$ is the vorticity scalar and $\theta$ is the expansion. In the n
 
 ![Figure 1: Coherence window](figures/coherence_window.png)
 
-*FIG. 1. Left: Coherence window W(r) = r/(ξ+r) for different disk scale lengths R_d, where ξ = R_d/(2π). W approaches 1 at large radii (full coherence) and 0 near the center (suppressed). Right: Total enhancement Σ(r) = 1 + A×W×h for different baryonic accelerations g at fixed R_d = 3 kpc, showing how enhancement builds from center to outer disk.*
+*FIG. 1. Left: Coherence window $W(r) = r/(\xi+r)$ for different disk scale lengths $R_d$, where $\xi = R_d/(2\pi)$. $W$ approaches 1 at large radii (full coherence) and 0 near the center (suppressed). Right: Total enhancement $\Sigma(r) = 1 + A\times W\times h$ for different baryonic accelerations $g$ at fixed $R_d = 3$ kpc, showing how enhancement builds from center to outer disk.*
 
 ### C. The Acceleration Function
 
@@ -120,7 +120,7 @@ This is the QUMOND-like structure—$h$ depends on the baryonic field $g_N$, not
 
 ![Figure 2: Enhancement function comparison](figures/h_function_comparison.png)
 
-*FIG. 2. Left: Enhancement functions for Σ-Gravity (blue: h(g) = √(g†/g) × g†/(g†+g)) and MOND (red dashed: ν−1). Right: Percentage difference after normalizing at low g. The functions differ by ~7% in the transition regime (g ≈ g†), providing a testable distinction between the theories.*
+*FIG. 2. Left: Enhancement functions for Σ-Gravity (blue: $h(g) = \sqrt{g^\dagger/g}\times g^\dagger/(g^\dagger+g)$) and MOND (red dashed: $\nu-1$). Right: Percentage difference after normalizing at low $g$. The functions differ by ~7% in the transition regime ($g \approx g^\dagger$), providing a testable distinction between the theories.*
 
 **Covariant formulation:** The "acceleration" in Σ-Gravity is a field property, not a particle property:
 $$g_N^2 \equiv g^{\mu\nu} \nabla_\mu \Phi_N \nabla_\nu \Phi_N$$
@@ -166,7 +166,7 @@ This unified 3D formula requires no discrete switch between system types. The pa
 
 ![Figure 3: Unified amplitude](figures/amplitude_comparison.png)
 
-*FIG. 3. Amplitude versus path length through baryons for SPARC disk galaxies (green), MaNGA ellipticals (orange), and Fox et al. clusters (red). Blue line: Σ-Gravity prediction A = A₀(L/L₀)^0.27. Red dashed: MOND (scale-independent, A ≈ 1). Gray dotted: GR without dark matter (A = 0). MOND works for galaxies but fails for clusters by ~10×. Σ-Gravity's path-length-dependent amplitude connects galaxy and cluster regimes through a principled relationship. Sample sizes shown in legend.*
+*FIG. 3. Amplitude versus path length through baryons for SPARC disk galaxies (green), MaNGA ellipticals (orange), and Fox et al. clusters (red). Blue line: Σ-Gravity prediction $A = A_0 (L/L_0)^{0.27}$. Red dashed: MOND (scale-independent, $A \approx 1$). Gray dotted: GR without dark matter ($A = 0$). MOND works for galaxies but fails for clusters by $\sim 10\times$. Σ-Gravity's path-length-dependent amplitude connects galaxy and cluster regimes through a principled relationship. Sample sizes shown in legend.*
 
 ### F. Solar System Constraints
 
@@ -174,7 +174,7 @@ In compact systems, two suppression mechanisms combine:
 1. **High acceleration:** When $g_N \gg g^\dagger$, $h(g_N) \to 0$
 2. **Low coherence:** When $r \ll \xi$, $\mathcal{C} \to 0$
 
-At Saturn's orbit ($r \approx 9.5$ AU = 1.42×10¹² m), the Newtonian acceleration is $g_N = GM_\odot/r^2 \approx 6.5 \times 10^{-5}$ m/s². With $g_N/g^\dagger \approx 7 \times 10^5$, the acceleration function gives $h(g_N) \approx 1.5 \times 10^{-9}$—already tiny. However, the **primary suppression mechanism** is that the Solar System lacks extended coherent rotation: $\mathcal{C} \approx 0$ (no disk-like velocity field). With $\mathcal{C} \to 0$, the enhancement $\Sigma - 1 \to 0$ regardless of $h(g_N)$.
+At Saturn's orbit ($r \approx 9.5$ AU = $1.42\times 10^{12}$ m), the Newtonian acceleration is $g_N = GM_\odot/r^2 \approx 6.5 \times 10^{-5}$ m/s². With $g_N/g^\dagger \approx 7 \times 10^5$, the acceleration function gives $h(g_N) \approx 1.5 \times 10^{-9}$---already tiny. However, the **primary suppression mechanism** is that the Solar System lacks extended coherent rotation: $\mathcal{C} \approx 0$ (no disk-like velocity field). With $\mathcal{C} \to 0$, the enhancement $\Sigma - 1 \to 0$ regardless of $h(g_N)$.
 
 For the Sun treated as a compact source, $\xi \to 0$ (no extended disk), so $W(r) = r/(\xi + r) \to 1$. But without coherent rotation ($\mathcal{C} = 0$), the enhancement vanishes. This satisfies the Cassini bound $|\gamma - 1| < 2.3 \times 10^{-5}$ [13] (Fig. 4).
 
