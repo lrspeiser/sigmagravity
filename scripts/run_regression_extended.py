@@ -77,12 +77,6 @@ XI_SCALE = 1 / (2 * np.pi)  # ξ = R_d/(2π)
 ML_DISK = 0.5
 ML_BULGE = 0.7
 
-# Fiducial (non-fitted) dispersions used to build σ_eff from baryonic components.
-# These are "situation details" (gas vs stellar disk vs bulge) rather than new free params.
-SIGMA_GAS_KMS = 10.0
-SIGMA_DISK_KMS = 25.0
-SIGMA_BULGE_KMS = 120.0
-
 # Cluster amplitude
 A_CLUSTER = A_0 * (600 / L_0)**N_EXP  # ≈ 8.45
 
@@ -168,6 +162,11 @@ OBS_BENCHMARKS = {
         'M_baryonic': 2.6e14,  # M☉
         'M_lensing': 5.5e14,  # M☉ (from weak lensing)
         'mass_ratio': 2.1,  # M_lensing / M_baryonic
+        # Very coarse characteristic scales (order-of-magnitude, literature typical):
+        # gas is more extended than galaxies/stars in projection.
+        # These are used ONLY for a refined "does the offset mechanism exist?" sanity check.
+        'r_gas_kpc': 250,
+        'r_stars_kpc': 100,
         'offset_kpc': 150,  # Lensing peak offset from gas
         'separation_kpc': 720,  # Between main and subcluster
         'mond_challenge': 'Lensing follows stars, not gas',
@@ -260,29 +259,6 @@ def C_coherence(v_rot: np.ndarray, sigma: float = 20.0) -> np.ndarray:
     return v2 / (v2 + s2)
 
 
-def sigma_eff_from_components(
-    V_gas_kms: np.ndarray,
-    V_disk_kms: np.ndarray,
-    V_bulge_kms: np.ndarray,
-) -> np.ndarray:
-    """
-    Mass-weighted effective dispersion σ_eff(r) built from baryonic components.
-    
-    Principle: dispersion is a property of the *source* kinematics (gas vs stellar disk vs bulge),
-    not something tuned per galaxy. We weight by squared component contributions (∝ enclosed mass).
-    """
-    Vg2 = np.square(np.asarray(V_gas_kms, dtype=float))
-    Vd2 = np.square(np.asarray(V_disk_kms, dtype=float))
-    Vb2 = np.square(np.asarray(V_bulge_kms, dtype=float))
-    denom = np.maximum(Vg2 + Vd2 + Vb2, 1e-12)
-    sigma2 = (
-        Vg2 * (SIGMA_GAS_KMS**2)
-        + Vd2 * (SIGMA_DISK_KMS**2)
-        + Vb2 * (SIGMA_BULGE_KMS**2)
-    ) / denom
-    return np.sqrt(sigma2)
-
-
 def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
     """
     Coherence window W(r) = r/(ξ+r)
@@ -358,9 +334,6 @@ def predict_velocity(
     f_bulge: float = 0.0,
     use_C_primary: bool = True,
     sigma_kms: float = 20.0,
-    V_gas_kms: Optional[np.ndarray] = None,
-    V_disk_kms: Optional[np.ndarray] = None,
-    V_bulge_kms: Optional[np.ndarray] = None,
 ) -> np.ndarray:
     """
     Predict rotation velocity using Σ-Gravity.
@@ -480,9 +453,6 @@ def load_sparc(data_dir: Path) -> List[Dict]:
                 'R': df['R'].values,
                 'V_obs': df['V_obs'].values,
                 'V_bar': df['V_bar'].values,
-                'V_gas': df['V_gas'].values,
-                'V_disk_scaled': df['V_disk_scaled'].values,
-                'V_bulge_scaled': df['V_bulge_scaled'].values,
                 'R_d': R_d,
                 'h_disk': h_disk,
                 'f_bulge': f_bulge,
@@ -587,14 +557,8 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
         R_d = gal['R_d']
         h_disk = gal.get('h_disk', 0.15 * R_d)
         f_bulge = gal.get('f_bulge', 0.0)
-        V_gas = gal.get('V_gas')
-        V_disk = gal.get('V_disk_scaled')
-        V_bulge = gal.get('V_bulge_scaled')
         
-        V_pred = predict_velocity(
-            R, V_bar, R_d, h_disk, f_bulge,
-            V_gas_kms=V_gas, V_disk_kms=V_disk, V_bulge_kms=V_bulge,
-        )
+        V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge)
         V_mond = predict_mond(R, V_bar)
         
         rms_sigma = np.sqrt(((V_pred - V_obs)**2).mean())
@@ -1420,19 +1384,33 @@ def test_bullet_cluster() -> TestResult:
     M_bar = M_gas + M_stars
     M_lens = bc['M_lensing'] * M_sun
     
-    # At r = 150 kpc (where lensing is measured)
-    r_lens = bc['offset_kpc'] * kpc_to_m
-    g_bar = G * M_bar / r_lens**2
+    # Refined (still simple) treatment: gas and galaxies have different characteristic scales.
+    # Because h(g) is nonlinear in g_N, an extended gas component can yield a different effective
+    # lensing contribution than a compact stellar component, even with *one* universal Σ-law.
+    r_gas = float(bc.get('r_gas_kpc', bc['offset_kpc'])) * kpc_to_m
+    r_stars = float(bc.get('r_stars_kpc', 100.0)) * kpc_to_m
     
-    # Σ-Gravity enhancement (cluster amplitude)
-    Sigma = sigma_enhancement(g_bar, A=A_CLUSTER)
-    M_pred = M_bar * Sigma
+    g_gas = G * M_gas / r_gas**2
+    g_stars = G * M_stars / r_stars**2
     
-    ratio_pred = M_pred / M_bar
+    Sigma_gas = float(sigma_enhancement(np.array([g_gas]), A=A_CLUSTER)[0])
+    Sigma_stars = float(sigma_enhancement(np.array([g_stars]), A=A_CLUSTER)[0])
+    
+    M_eff_gas = M_gas * Sigma_gas
+    M_eff_stars = M_stars * Sigma_stars
+    M_pred = M_eff_gas + M_eff_stars
+    
+    ratio_pred = float(M_pred / M_bar)  # total enhancement
     ratio_obs = bc['mass_ratio']
     
+    # "Peak preference" heuristic: compare effective central surface densities ~ M_eff / r_scale^2.
+    # If stars dominate this proxy, it supports the observed "lensing follows galaxies" offset.
+    peak_proxy_gas = (M_eff_gas / max(r_gas**2, 1e-30))
+    peak_proxy_stars = (M_eff_stars / max(r_stars**2, 1e-30))
+    peak_follows = 'stars' if peak_proxy_stars > peak_proxy_gas else 'gas'
+    
     # Key test: does Σ-Gravity give reasonable enhancement?
-    passed = 0.5 * ratio_obs < ratio_pred < 2.0 * ratio_obs
+    passed = (0.5 * ratio_obs < ratio_pred < 2.0 * ratio_obs) and (peak_follows == 'stars')
     
     return TestResult(
         name="Bullet Cluster",
@@ -1444,11 +1422,17 @@ def test_bullet_cluster() -> TestResult:
             'M_lens': M_lens / M_sun,
             'ratio_pred': ratio_pred,
             'ratio_obs': ratio_obs,
-            'Sigma': Sigma,
+            'Sigma_gas': float(Sigma_gas),
+            'Sigma_stars': float(Sigma_stars),
+            'r_gas_kpc': float(r_gas / kpc_to_m),
+            'r_stars_kpc': float(r_stars / kpc_to_m),
+            'peak_proxy_gas': float(peak_proxy_gas),
+            'peak_proxy_stars': float(peak_proxy_stars),
+            'peak_follows': peak_follows,
             'offset_kpc': bc['offset_kpc'],
             'mond_challenge': bc['mond_challenge'],
         },
-        message=f"M_pred/M_bar = {ratio_pred:.2f}× (obs: {ratio_obs:.1f}×, MOND challenge: lensing follows stars)"
+        message=f"M_pred/M_bar = {ratio_pred:.2f}× (obs: {ratio_obs:.1f}×), peak proxy follows {peak_follows}"
     )
 
 
