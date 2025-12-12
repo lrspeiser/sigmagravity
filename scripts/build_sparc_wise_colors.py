@@ -276,7 +276,7 @@ def main() -> None:
         default="/Users/leonardspeiser/Projects/sigmagravity_external_data/wise/allwise/healpix_k5/wise-allwise-parquet/wise-allwise.parquet",
         help="Local path to wise-allwise.parquet root (only for --wise-mode=local)",
     )
-    ap.add_argument("--radius-arcsec", type=float, default=180.0, help="Search radius around each galaxy center")
+    ap.add_argument("--radius-arcsec", type=float, default=60.0, help="Search radius around each galaxy center")
     ap.add_argument("--sleep-s", type=float, default=0.1, help="Sleep between resolver calls")
     ap.add_argument("--max-galaxies", type=int, default=0, help="Limit number of galaxies (0 = all)")
     args = ap.parse_args()
@@ -333,6 +333,7 @@ def main() -> None:
     for c in coords:
         table = query_allwise_candidates(dataset, c.ra_deg, c.dec_deg, args.radius_arcsec, columns)
         df = table.to_pandas()
+        n_candidates_bbox = int(len(df))
         if len(df) == 0:
             rows.append(
                 {
@@ -342,12 +343,31 @@ def main() -> None:
                     "resolver": c.resolver,
                     "resolved_name": c.resolved_name,
                     "match_found": False,
+                    "n_candidates_bbox": 0,
+                    "n_candidates_within_radius": 0,
                     "n_candidates": 0,
                 }
             )
             continue
 
         df["sep_arcsec"] = angular_separation_arcsec(c.ra_deg, c.dec_deg, df["ra"].values, df["dec"].values)
+        df = df[df["sep_arcsec"] <= float(args.radius_arcsec)].copy()
+        n_candidates_within = int(len(df))
+        if n_candidates_within == 0:
+            rows.append(
+                {
+                    "name": c.name,
+                    "ra_deg": c.ra_deg,
+                    "dec_deg": c.dec_deg,
+                    "resolver": c.resolver,
+                    "resolved_name": c.resolved_name,
+                    "match_found": False,
+                    "n_candidates_bbox": n_candidates_bbox,
+                    "n_candidates_within_radius": 0,
+                    "n_candidates": 0,
+                }
+            )
+            continue
 
         best = pick_best_allwise_match(df)
         if best is None:
@@ -359,7 +379,9 @@ def main() -> None:
                     "resolver": c.resolver,
                     "resolved_name": c.resolved_name,
                     "match_found": False,
-                    "n_candidates": int(len(df)),
+                    "n_candidates_bbox": n_candidates_bbox,
+                    "n_candidates_within_radius": n_candidates_within,
+                    "n_candidates": n_candidates_within,
                 }
             )
             continue
@@ -380,7 +402,9 @@ def main() -> None:
             "resolver": c.resolver,
             "resolved_name": c.resolved_name,
             "match_found": True,
-            "n_candidates": int(len(df)),
+            "n_candidates_bbox": n_candidates_bbox,
+            "n_candidates_within_radius": n_candidates_within,
+            "n_candidates": n_candidates_within,
             "designation": best.get("designation"),
             "wise_ra": best.get("ra"),
             "wise_dec": best.get("dec"),
