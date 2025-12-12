@@ -203,7 +203,7 @@ Although Σ-Gravity is implemented in this work using a QUMOND-like two-step sch
 | Kernel | 17.53 km/s | 0.099 dex | 40.9% | 0.987 | Safe ✓ |
 | Source | 17.50 km/s | 0.097 dex | 48.0% | 0.987 | Safe ✓ |
 
-*AQUAL uses recalibrated $A_0 \approx 1.35 \times A_0^{\rm (baseline)}$ to compensate for $h(g_{\rm eff})$ vs $h(g_N)$.
+*AQUAL uses recalibrated $A_0 \approx 1.35 \times A_0^{\rm (baseline)}$ to compensate for $h(g_{\rm eff})$ vs $h(g_N)$.*
 
 The nonlocal kernel version and source-coupled version (with lensing = dynamics, i.e., no gravitational slip) are nearly indistinguishable from baseline on all metrics. The AQUAL-like variant remains viable but requires modest recalibration and yields somewhat lower cluster performance. We conclude that the empirical success of Σ-Gravity is **not tied to the specific QUMOND-like implementation**. The QUMOND-like formulation is adopted because it provides the best overall performance and simplest numerical scheme, while the alternative variants demonstrate that the underlying coherence-dependent enhancement is robust across plausible field-theoretic realizations (see SI §13b for details).
 
@@ -254,6 +254,8 @@ where $x = g_N/a_0$ and $a_0 = 1.2 \times 10^{-10}$ m/s².
 
 ### A. SPARC Galaxy Rotation Curves
 
+**SPARC rotation-curve summary:**
+
 | Metric | Σ-Gravity | MOND | Notes |
 |--------|-----------|------|-------|
 | Mean RMS | 17.42 km/s | 17.15 km/s | Per-galaxy RMS averaged |
@@ -278,6 +280,8 @@ Representative rotation curves are shown in Fig. 6.
 
 Star-by-star predictions for 28,368 disk stars (RMS = root-mean-square residual of V_obs − V_pred):
 
+**Milky Way star-by-star summary:**
+
 | Metric | Σ-Gravity | MOND |
 |--------|-----------|------|
 | RMS | 29.8 km/s | 30.3 km/s |
@@ -291,6 +295,8 @@ The Milky Way provides an independent validation using individual stellar veloci
 ### C. Galaxy Cluster Calibration
 
 The 42 Fox et al. (2022) strong-lensing clusters serve as the **calibration set** for the amplitude exponent $n$.
+
+**Cluster calibration summary:**
 
 | Metric | Σ-Gravity | MOND |
 |--------|-----------|------|

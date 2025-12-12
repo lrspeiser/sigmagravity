@@ -176,27 +176,37 @@ def convert_table(table_lines: list[str], *, width_ref: str) -> str:
     if ncol == 0:
         return ""
 
-    # Use a standard tabular. For narrow tables, wrap the last column to prevent overflow.
-    # For wide tables (many columns), wrapping a column tends to blow up the layout; keep them numeric.
+    # Decide whether we need to wrap the last column.
+    # Many tables (e.g., 3-column metric summaries) look worse if we force a wide p{...} column.
+    rows: list[list[str]] = [header]
+    for line in table_lines[2:]:
+        if not line.strip():
+            continue
+        cells = [c.strip() for c in line.split("|") if c.strip()]
+        if cells:
+            rows.append(cells)
+
+    last_col_max = 0
+    if ncol >= 2:
+        for r in rows:
+            if len(r) >= ncol:
+                last_col_max = max(last_col_max, len(r[ncol - 1]))
+
+    # For wide tables (many columns), keep simple columns and rely on table* + \squeezetable.
     if ncol >= 5:
         colspec = "l" * ncol
-    elif ncol >= 2:
+    elif ncol >= 2 and last_col_max >= 32:
         colspec = ("l" * (ncol - 1)) + "p{0.48\\linewidth}"
     else:
-        colspec = "l"
+        colspec = "l" * ncol
 
     out = f"\\begin{{tabular}}{{{colspec}}}\n"
     out += "\\toprule\n"
     out += " & ".join(convert_inline_formatting(h) for h in header) + " \\\\\n"
     out += "\\midrule\n"
 
-    for line in table_lines[2:]:
-        if not line.strip():
-            continue
-        cells = [c.strip() for c in line.split("|") if c.strip()]
-        if not cells:
-            continue
-        out += " & ".join(convert_inline_formatting(c) for c in cells) + " \\\\\n"
+    for r in rows[1:]:
+        out += " & ".join(convert_inline_formatting(c) for c in r) + " \\\\\n"
 
     out += "\\bottomrule\n"
     out += "\\end{tabular}\n"
@@ -387,6 +397,8 @@ def convert_markdown_to_revtex(md_content: str) -> str:
         # Table caption line
         cap_plain = line.strip().strip("*").strip()
         if re.match(r"^(Table)\s+[A-Za-z0-9IVXLCDM]+\s*:\s+.+", cap_plain):
+            # Avoid "TABLE V. Table V: ..." duplication in REVTeX caption formatting.
+            cap_plain = re.sub(r"^Table\s+[A-Za-z0-9IVXLCDM]+\s*:\s*", "", cap_plain).strip()
             pending_table_caption = convert_inline_formatting(cap_plain)
             i += 1
             continue
@@ -501,6 +513,9 @@ def convert_markdown_to_revtex(md_content: str) -> str:
                     latex += f"\\caption{{{pending_table_caption}}}\n"
             elif table_note:
                 latex += f"\\caption{{\\textit{{{convert_inline_formatting(table_note)}}}}}\n"
+            # REVTeX helper to tighten table spacing when needed
+            if wide:
+                latex += "\\squeezetable\n"
             latex += ("\\scriptsize\n" if wide else "\\small\n")
             latex += convert_table(table_buffer, width_ref=width_ref)
             latex += f"\\end{{{env}}}\n\n"
