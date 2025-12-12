@@ -77,6 +77,12 @@ XI_SCALE = 1 / (2 * np.pi)  # ξ = R_d/(2π)
 ML_DISK = 0.5
 ML_BULGE = 0.7
 
+# Fiducial (non-fitted) dispersions used to build σ_eff from baryonic components.
+# These are "situation details" (gas vs stellar disk vs bulge) rather than new free params.
+SIGMA_GAS_KMS = 10.0
+SIGMA_DISK_KMS = 25.0
+SIGMA_BULGE_KMS = 120.0
+
 # Cluster amplitude
 A_CLUSTER = A_0 * (600 / L_0)**N_EXP  # ≈ 8.45
 
@@ -225,7 +231,10 @@ def unified_amplitude(L: float) -> float:
     - Elliptical galaxies: L ~ 1-20 kpc → A ~ 1.5-3.4
     - Galaxy clusters: L ≈ 600 kpc → A ≈ 8.45
     """
-    return A_0 * (L / L_0)**N_EXP
+    # Physical floor: A₀ is the *base* mode-count amplitude.
+    # Path-length scaling increases A for extended systems; it does not reduce A below A₀.
+    L_eff = max(float(L), L_0)
+    return A_0 * (L_eff / L_0)**N_EXP
 
 
 def unified_amplitude_legacy(D: float, L: float) -> float:
@@ -245,9 +254,33 @@ def C_coherence(v_rot: np.ndarray, sigma: float = 20.0) -> np.ndarray:
     
     This is the PRIMARY formulation, built from 4-velocity invariants.
     """
-    v2 = np.maximum(v_rot, 0.0)**2
-    s2 = max(sigma, 1e-6)**2
+    v2 = np.maximum(np.asarray(v_rot, dtype=float), 0.0)**2
+    sigma_arr = np.maximum(np.asarray(sigma, dtype=float), 1e-6)
+    s2 = sigma_arr**2
     return v2 / (v2 + s2)
+
+
+def sigma_eff_from_components(
+    V_gas_kms: np.ndarray,
+    V_disk_kms: np.ndarray,
+    V_bulge_kms: np.ndarray,
+) -> np.ndarray:
+    """
+    Mass-weighted effective dispersion σ_eff(r) built from baryonic components.
+    
+    Principle: dispersion is a property of the *source* kinematics (gas vs stellar disk vs bulge),
+    not something tuned per galaxy. We weight by squared component contributions (∝ enclosed mass).
+    """
+    Vg2 = np.square(np.asarray(V_gas_kms, dtype=float))
+    Vd2 = np.square(np.asarray(V_disk_kms, dtype=float))
+    Vb2 = np.square(np.asarray(V_bulge_kms, dtype=float))
+    denom = np.maximum(Vg2 + Vd2 + Vb2, 1e-12)
+    sigma2 = (
+        Vg2 * (SIGMA_GAS_KMS**2)
+        + Vd2 * (SIGMA_DISK_KMS**2)
+        + Vb2 * (SIGMA_BULGE_KMS**2)
+    ) / denom
+    return np.sqrt(sigma2)
 
 
 def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
@@ -261,8 +294,14 @@ def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
     return r / (xi + r)
 
 
-def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0, 
-                      A: float = None, L: float = L_0) -> np.ndarray:
+def sigma_enhancement(
+    g: np.ndarray,
+    r: np.ndarray = None,
+    xi: float = 1.0,
+    A: float = None,
+    L: float = L_0,
+    g_ext: float = 0.0,
+) -> np.ndarray:
     """
     Full Σ enhancement factor using W(r) approximation.
     
@@ -271,12 +310,16 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
     Note: This uses the W(r) approximation. For the primary C(r) formulation,
     use sigma_enhancement_C() with fixed-point iteration.
     """
-    g = np.maximum(np.asarray(g), 1e-15)
+    g_int = np.maximum(np.asarray(g), 1e-15)
     
     if A is None:
         A = unified_amplitude(L)
     
-    h = h_function(g)
+    # External Field Effect (EFE): enhancement depends on the *total* field magnitude.
+    # This is a general situation-dependent input (not per-object tuning) and suppresses
+    # small-system boosts in strong ambient fields (e.g., wide binaries inside the MW).
+    g_tot = np.sqrt(g_int**2 + float(g_ext)**2)
+    h = h_function(g_tot)
     
     if r is not None:
         W = W_coherence(np.asarray(r), xi)
@@ -287,7 +330,7 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
 
 
 def sigma_enhancement_C(g: np.ndarray, v_rot: np.ndarray, sigma: float = 20.0,
-                        A: float = None, L: float = L_0) -> np.ndarray:
+                        A: float = None, L: float = L_0, g_ext: float = 0.0) -> np.ndarray:
     """
     Full Σ enhancement factor using covariant C(r) - PRIMARY formulation.
     
@@ -295,20 +338,30 @@ def sigma_enhancement_C(g: np.ndarray, v_rot: np.ndarray, sigma: float = 20.0,
     
     where C = v_rot²/(v_rot² + σ²)
     """
-    g = np.maximum(np.asarray(g), 1e-15)
+    g_int = np.maximum(np.asarray(g), 1e-15)
     
     if A is None:
         A = unified_amplitude(L)
     
-    h = h_function(g)
+    g_tot = np.sqrt(g_int**2 + float(g_ext)**2)
+    h = h_function(g_tot)
     C = C_coherence(v_rot, sigma)
     
     return 1 + A * C * h
 
 
-def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
-                     h_disk: float = None, f_bulge: float = 0.0,
-                     use_C_primary: bool = True, sigma_kms: float = 20.0) -> np.ndarray:
+def predict_velocity(
+    R_kpc: np.ndarray,
+    V_bar: np.ndarray,
+    R_d: float,
+    h_disk: float = None,
+    f_bulge: float = 0.0,
+    use_C_primary: bool = True,
+    sigma_kms: float = 20.0,
+    V_gas_kms: Optional[np.ndarray] = None,
+    V_disk_kms: Optional[np.ndarray] = None,
+    V_bulge_kms: Optional[np.ndarray] = None,
+) -> np.ndarray:
     """
     Predict rotation velocity using Σ-Gravity.
     
@@ -325,8 +378,11 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     g_bar = V_bar_ms**2 / R_m
     
     # For thin disk galaxies, use L = L₀ = 0.4 kpc → A = A₀
-    # (The path length L₀ IS the typical disk scale height by definition)
+    # (This is the canonical disk regime; do NOT infer L from R_d heuristics.)
     A = A_0  # = unified_amplitude(L_0) = 1.173
+    
+    # Canonical: constant σ in the C(r) fixed-point iteration (validated equivalent to W(r)).
+    sigma_eff = float(sigma_kms)
     
     if use_C_primary:
         # PRIMARY: Covariant C(r) with fixed-point iteration
@@ -334,7 +390,7 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
         V = np.array(V_bar, dtype=float)
         
         for _ in range(50):  # Typically converges in 3-5 iterations
-            C = C_coherence(V, sigma_kms)
+            C = C_coherence(V, sigma_eff)
             Sigma = 1 + A * C * h
             V_new = V_bar * np.sqrt(Sigma)
             if np.max(np.abs(V_new - V)) < 1e-6:
@@ -424,6 +480,9 @@ def load_sparc(data_dir: Path) -> List[Dict]:
                 'R': df['R'].values,
                 'V_obs': df['V_obs'].values,
                 'V_bar': df['V_bar'].values,
+                'V_gas': df['V_gas'].values,
+                'V_disk_scaled': df['V_disk_scaled'].values,
+                'V_bulge_scaled': df['V_bulge_scaled'].values,
                 'R_d': R_d,
                 'h_disk': h_disk,
                 'f_bulge': f_bulge,
@@ -528,8 +587,14 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
         R_d = gal['R_d']
         h_disk = gal.get('h_disk', 0.15 * R_d)
         f_bulge = gal.get('f_bulge', 0.0)
+        V_gas = gal.get('V_gas')
+        V_disk = gal.get('V_disk_scaled')
+        V_bulge = gal.get('V_bulge_scaled')
         
-        V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge)
+        V_pred = predict_velocity(
+            R, V_bar, R_d, h_disk, f_bulge,
+            V_gas_kms=V_gas, V_disk_kms=V_disk, V_bulge_kms=V_bulge,
+        )
         V_mond = predict_mond(R, V_bar)
         
         rms_sigma = np.sqrt(((V_pred - V_obs)**2).mean())
@@ -986,8 +1051,13 @@ def test_wide_binaries() -> TestResult:
     M_total = 1.5 * M_sun
     g_N = G * M_total / s_m**2
     
-    # Σ-Gravity enhancement
-    Sigma = sigma_enhancement(g_N, A=A_0)
+    # External field from the Milky Way at the Sun (EFE suppression)
+    V_sun_ms = OBS_BENCHMARKS['milky_way']['V_sun_kms'] * 1000
+    R_sun_m = OBS_BENCHMARKS['milky_way']['R_sun_kpc'] * kpc_to_m
+    g_ext_mw = V_sun_ms**2 / R_sun_m
+    
+    # Σ-Gravity enhancement (no special casing; just feed the environment)
+    Sigma = sigma_enhancement(g_N, A=A_0, g_ext=g_ext_mw)
     boost = Sigma - 1
     
     # Chae 2023 observed ~35% boost
@@ -1191,14 +1261,11 @@ def test_external_field_effect() -> TestResult:
     # External field (from host galaxy)
     g_ext = 1e-10  # m/s² (MW at 100 kpc)
     
-    # Total field
-    g_total = np.sqrt(g_int**2 + g_ext**2)
+    # Σ-Gravity enhancement with external field (EFE)
+    Sigma_total = sigma_enhancement(g_int, A=A_0, g_ext=g_ext)
     
-    # Σ-Gravity enhancement with total field
-    Sigma_total = sigma_enhancement(g_total, A=A_0)
-    
-    # Enhancement if isolated
-    Sigma_isolated = sigma_enhancement(g_int, A=A_0)
+    # Enhancement if isolated (g_ext=0)
+    Sigma_isolated = sigma_enhancement(g_int, A=A_0, g_ext=0.0)
     
     # EFE suppression
     suppression = Sigma_total / Sigma_isolated
