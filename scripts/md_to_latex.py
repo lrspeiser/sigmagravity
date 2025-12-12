@@ -501,7 +501,8 @@ def convert_markdown_to_revtex(md_content: str) -> str:
                     i = k + 1
 
             ncol = len([c for c in table_buffer[0].split("|") if c.strip()])
-            wide = ncol >= 5
+            # Use table* (full width) for 4+ columns to avoid overflow in two-column layout
+            wide = ncol >= 4
             env = "table*" if wide else "table"
             width_ref = "\\textwidth" if wide else "\\columnwidth"
 
