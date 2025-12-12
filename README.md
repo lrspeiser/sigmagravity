@@ -235,15 +235,10 @@ We use 42 strong-lensing clusters from Fox et al. (2022) [17] with Einstein radi
 
 **Baryonic mass estimate:** $M_{\rm bar}(200~{\rm kpc}) = 0.4 \times f_{\rm baryon} \times M_{500}$, where $f_{\rm baryon} = 0.15$ (cosmic baryon fraction). The factor 0.4 accounts for baryon concentration within 200 kpc (typical for NFW profiles with $c \sim 4$–6). Sensitivity analysis (SI §6) shows that varying this factor by ±25% shifts the median ratio by ~±30%, within the observational scatter. The $M_{500}$ values are from X-ray/SZ observations, independent of lensing.
 
-**Lensing mapping:** The enhanced potential governs both dynamics and light deflection. In the weak-field limit, we adopt an effective gravitational slip relation consistent with the QUMOND-like structure:
+**Lensing mapping (no slip):** The enhanced potential governs both dynamics and light deflection. In the weak-field limit, we assume **no gravitational slip** ($\Psi=\Phi$), so lensing and dynamics respond to the same potential (no “separate law” for light vs stars). In this no-slip implementation, the predicted lensing mass is simply the enhanced dynamical mass:
+$$M_{\rm lens} = M_{\rm dyn} = \Sigma \, M_{\rm bar}.$$
 
-$$\eta \equiv \frac{\Psi}{\Phi} = \frac{2\Sigma - 1}{3\Sigma - 2}$$
-
-This ansatz interpolates between GR ($\eta = 1$ when $\Sigma = 1$) and a modified regime where $\eta < 1$ for $\Sigma > 1$. For typical cluster enhancements ($\Sigma \approx 2$), this gives $\eta \approx 0.75$. The lensing-to-dynamics mass ratio becomes:
-
-$$\frac{M_{\rm lens}}{M_{\rm dyn}} = \frac{\Phi + \Psi}{2\Phi} = \frac{1 + \eta}{2} = \frac{5\Sigma - 3}{2(3\Sigma - 2)}$$
-
-For $\Sigma = 1$: $M_{\rm lens}/M_{\rm dyn} = 1$ (GR limit). For $\Sigma = 2$: $M_{\rm lens}/M_{\rm dyn} \approx 0.875$. This effective lensing closure is adopted as a phenomenological ansatz; a rigorous derivation from an action principle is deferred to future work. **The cluster lensing results are conditional on this prescription**; sensitivity analysis (SI §11) shows the qualitative result is robust but the calibrated parameters would shift under alternative slip assumptions.
+This is a phenomenological closure consistent with minimal matter coupling; a fully covariant action-based derivation remains future work. Alternative slip prescriptions would primarily rescale the cluster-calibrated amplitude parameters but do not affect the galaxy rotation-curve predictions.
 
 **Amplitude calibration:** We fix $L_0 = 0.4$ kpc from typical disk scale heights (this is a physical reference scale, not a free parameter). We then calibrate only the exponent $n$ on the Fox et al. sample, obtaining $n = 0.27$. Holdout validation (70/30 split, 10 random seeds) confirms stability: $n = 0.27 \pm 0.01$ with holdout median ratio $= 1.02 \pm 0.12$. The SPARC galaxies provide fully independent validation—they were not used in any calibration.
 
