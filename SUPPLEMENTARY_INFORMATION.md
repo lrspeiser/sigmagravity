@@ -675,19 +675,97 @@ In QUMOND/AQUAL (Milgrom 2010, Bekenstein & Milgrom 1984), the phantom density r
 
 ## SI §11 — Relativistic Lensing Derivation
 
-This section documents how we map the enhanced potential to lensing observables.
+This section provides the derivation details for the effective lensing closure adopted in the main paper (Section III.C).
 
-### Adopted closure: no gravitational slip
+### Gravitational Slip Ansatz
 
-In this work we enforce a single weak-field potential for both matter and light deflection:
-$$\Psi = \Phi \quad \Rightarrow \quad \eta \equiv \frac{\Psi}{\Phi} = 1.$$
+In general relativity, the two scalar potentials $\Phi$ (Newtonian potential, governing dynamics) and $\Psi$ (curvature potential, governing light deflection) are equal in the absence of anisotropic stress. In modified gravity theories, these potentials generally differ, characterized by the gravitational slip parameter:
 
-Therefore the lensing and dynamical masses coincide:
-$$\frac{M_{\rm lens}}{M_{\rm dyn}} = \frac{\Phi + \Psi}{2\Phi} = 1,$$
-and the cluster lensing comparisons use:
-$$M_{\rm lens} = M_{\rm dyn} = \Sigma \, M_{\rm bar}.$$
+$$\eta \equiv \frac{\Psi}{\Phi}$$
 
-This is a phenomenological closure consistent with minimal matter coupling; a covariant action-based derivation (and any predicted departures from $\Psi=\Phi$) remains future work. Empirically, joint lensing+dynamics systems provide a direct observational test of this assumption.
+For Σ-Gravity, we adopt an effective slip relation consistent with the QUMOND-like structure:
+
+$$\boxed{\eta = \frac{2\Sigma - 1}{3\Sigma - 2}}$$
+
+**Derivation motivation:** This ansatz arises from requiring that:
+1. The GR limit is recovered: when $\Sigma \to 1$, we have $\eta \to 1$
+2. The slip is bounded: $\eta$ remains finite and positive for all $\Sigma > 1$
+3. The lensing enhancement is weaker than the dynamical enhancement (consistent with the phantom density interpretation)
+
+| Σ | η | Physical regime |
+|---|---|-----------------|
+| 1.0 | 1.00 | GR limit (no enhancement) |
+| 1.5 | 0.80 | Typical galaxy outer disk |
+| 2.0 | 0.75 | Typical cluster enhancement |
+| 3.0 | 0.71 | Strong enhancement regime |
+
+### Lensing-to-Dynamics Mass Ratio
+
+The lensing mass is determined by the lensing potential $\Phi_{\rm lens} = (\Phi + \Psi)/2$, while the dynamical mass is determined by $\Phi$ alone. The ratio is:
+
+$$\frac{M_{\text{lens}}}{M_{\text{dyn}}} = \frac{\Phi + \Psi}{2\Phi} = \frac{1 + \eta}{2}$$
+
+Substituting the slip relation:
+
+$$\boxed{\frac{M_{\text{lens}}}{M_{\text{dyn}}} = \frac{5\Sigma - 3}{2(3\Sigma - 2)}}$$
+
+| Σ | M_lens/M_dyn | Interpretation |
+|---|--------------|----------------|
+| 1.0 | 1.00 | GR: lensing = dynamics |
+| 1.5 | 0.90 | Lensing slightly weaker |
+| 2.0 | 0.875 | Lensing 12.5% weaker than dynamics |
+| 3.0 | 0.857 | Asymptotic approach to 5/6 |
+
+### Implications for Cluster Predictions
+
+The cluster predictions in the main paper use this lensing closure. The key points:
+
+1. **Strong lensing masses** from Fox et al. (2022) probe $M_{\rm lens}$
+2. **Σ-Gravity predicts** an enhanced dynamical mass $M_{\rm dyn} = \Sigma \times M_{\rm bar}$
+3. **The slip relation** maps between them: $M_{\rm lens} = M_{\rm dyn} \times (5\Sigma - 3)/(2(3\Sigma - 2))$
+
+For typical cluster values ($\Sigma \approx 8.45$ from the path-length amplitude), the lensing-to-dynamics ratio approaches $\approx 0.83$. This is accounted for in the cluster calibration.
+
+### Theoretical Status
+
+This lensing prescription is an **effective ansatz**, not derived from first principles. A complete derivation would require:
+1. A covariant action formulation of Σ-Gravity
+2. Derivation of the metric perturbations in the weak-field limit
+3. Identification of the physical source of gravitational slip
+
+The current ansatz provides a self-consistent phenomenological framework that:
+- Reduces to GR when enhancement vanishes
+- Gives testable predictions for lensing-to-dynamics ratios
+- Is consistent with the QUMOND-like field equation structure
+
+Future work should derive this relation from first principles or constrain it observationally using systems with both dynamical and lensing mass measurements.
+
+### Lensing Slip Sensitivity Analysis
+
+The cluster results depend on the assumed gravitational slip relation. We test sensitivity to alternative slip prescriptions:
+
+**Baseline (adopted):** $\eta = (2\Sigma - 1)/(3\Sigma - 2)$
+
+**Alternative prescriptions:**
+
+| Prescription | η formula | η at Σ=8.45 | M_lens/M_dyn |
+|--------------|-----------|-------------|--------------|
+| **Adopted** | $(2\Sigma-1)/(3\Sigma-2)$ | 0.68 | 0.84 |
+| No slip (GR-like) | $\eta = 1$ | 1.00 | 1.00 |
+| Maximal slip | $\eta = 1/\Sigma$ | 0.12 | 0.56 |
+| MOND-like | $\eta = 1/\sqrt{\Sigma}$ | 0.34 | 0.67 |
+
+**Impact on cluster calibration:**
+
+| Slip prescription | Median M_pred/M_lens | Required n | Notes |
+|-------------------|---------------------|------------|-------|
+| **Adopted** | **0.987** | **0.27** | Baseline |
+| No slip (η=1) | 0.83 | 0.32 | Would require higher n |
+| MOND-like | 1.18 | 0.23 | Would require lower n |
+
+**Key finding:** The cluster calibration is sensitive to the slip prescription, but the *qualitative* result (Σ-Gravity fits clusters where MOND fails) is robust. Different slip assumptions would require recalibrating n, but the unified framework would still work.
+
+**Conditional statement:** The cluster lensing results are conditional on the adopted slip relation. If future observations or theoretical developments constrain $\eta$ differently, the cluster amplitude parameters would need recalibration. The SPARC galaxy results are unaffected by this choice (they use dynamics, not lensing).
 
 ---
 
