@@ -1,432 +1,566 @@
 #!/usr/bin/env python3
-"""
-md_to_latex.py — Convert README.md to sigmagravity_paper.tex
+"""md_to_latex.py — Generate APS/PRD (REVTeX) journal TeX+PDF from README.md
+
+Submission layout requirement:
+- Full-width abstract, two-column body (REVTeX `reprint` does this)
+
+Outputs:
+- docs/sigmagravity_paper.tex
+- docs/sigmagravity_paper.pdf
+
+Also runs a coverage check to ensure README prose is not dropped.
 
 Usage:
   python scripts/md_to_latex.py
-
-Reads README.md and generates a complete LaTeX document at sigmagravity_paper.tex
-Then compiles it to PDF using pdflatex.
 """
+
+from __future__ import annotations
+
 import re
 import subprocess
 from pathlib import Path
 
-def convert_markdown_to_latex(md_content):
-    """Convert markdown content to LaTeX, preserving equations and structure."""
-    
-    # Start with preamble
-    latex = r"""\documentclass[11pt,a4paper]{article}
 
-% Packages
+def _strip_heading_numbering(title: str) -> str:
+    title = re.sub(r"^[IVXLCDM]+\.\s*", "", title)  # I.
+    title = re.sub(r"^[A-Z]\.\s*", "", title)  # A.
+    title = re.sub(r"^\d+(\.\d+)*\.?\s*", "", title)  # 2.6.
+    return title.strip()
+
+
+def _extract_abstract(md_lines: list[str]) -> tuple[str, list[str]]:
+    out: list[str] = []
+    parts: list[str] = []
+    i = 0
+    while i < len(md_lines):
+        if md_lines[i].strip().startswith("## Abstract") or md_lines[i].strip().startswith("**Abstract**"):
+            i += 1
+            while i < len(md_lines) and not md_lines[i].strip().startswith("## "):
+                s = md_lines[i].strip()
+                if s in ("---", "***", "___"):
+                    i += 1
+                    continue
+                if s:
+                    parts.append(s)
+                i += 1
+            while i < len(md_lines) and md_lines[i].strip() in ("", "---", "***", "___"):
+                i += 1
+            continue
+        out.append(md_lines[i])
+        i += 1
+
+    return " ".join(parts).strip(), out
+
+
+def convert_inline_formatting(text: str) -> str:
+    # Inline HTML used in README
+    text = re.sub(r"<\s*sup\s*>(.*?)<\s*/\s*sup\s*>", r"\\textsuperscript{\1}", text, flags=re.IGNORECASE)
+    text = re.sub(r"</?[^>]+?>", "", text)
+
+    # Protect inline math
+    math_blocks: list[str] = []
+
+    def save_math(m: re.Match[str]) -> str:
+        math_blocks.append(m.group(0))
+        return f"MATHBLOCK{len(math_blocks)-1}MATHBLOCK"
+
+    text = re.sub(r"\$[^$]+\$", save_math, text)
+
+    # Normalize common unicode outside math
+    replacements = {
+        "—": "---",
+        "–": "--",
+        "−": "-",
+        "→": r"$\\to$",
+        "×": r"$\\times$",
+        "≈": r"$\\approx$",
+        "±": r"$\\pm$",
+        "≪": r"$\\ll$",
+        "≫": r"$\\gg$",
+        "≠": r"$\\neq$",
+        "ℓ": r"$\\ell$",
+        "†": r"$\\dagger$",
+        "☉": r"$\\odot$",
+        "μ": r"$\\mu$",
+        "²": r"\\textsuperscript{2}",
+        "°": r"$^\\circ$",
+    }
+    for k, v in replacements.items():
+        text = text.replace(k, v)
+
+    # Escape special chars outside math
+    text = text.replace("&", "\\&")
+    text = text.replace("%", "\\%")
+    text = text.replace("#", "\\#")
+    text = text.replace("_", "\\_")
+
+    # Markdown formatting
+    text = re.sub(r"\*\*(.+?)\*\*", r"\\textbf{\1}", text)
+    text = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"\\textit{\1}", text)
+    text = re.sub(r"`([^`]+)`", r"\\texttt{\1}", text)
+    text = re.sub(r"\[(.+?)\]\((.+?)\)", r"\\href{\2}{\1}", text)
+
+    # Restore math blocks
+    for i, math in enumerate(math_blocks):
+        if len(math) > 30:
+            math = math.replace("$", "$\\allowbreak ")
+        text = text.replace(f"MATHBLOCK{i}MATHBLOCK", math)
+
+    return text
+
+
+def _table_sep_line(s: str) -> bool:
+    s = s.strip()
+    return bool(re.match(r"^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$", s))
+
+
+def convert_table(table_lines: list[str], *, width_ref: str) -> str:
+    header = [c.strip() for c in table_lines[0].split("|") if c.strip()]
+    ncol = len(header)
+    if ncol == 0:
+        return ""
+
+    # Wrap last col
+    colspec = ("l" * (ncol - 1)) + r">{\\raggedright\\arraybackslash}X" if ncol >= 2 else "l"
+
+    out = f"\\begin{{tabularx}}{{{width_ref}}}{{{colspec}}}\n"
+    out += "\\toprule\n"
+    out += " & ".join(convert_inline_formatting(h) for h in header) + " \\\\\n"
+    out += "\\midrule\n"
+
+    for line in table_lines[2:]:
+        if not line.strip():
+            continue
+        cells = [c.strip() for c in line.split("|") if c.strip()]
+        if not cells:
+            continue
+        out += " & ".join(convert_inline_formatting(c) for c in cells) + " \\\\\n"
+
+    out += "\\bottomrule\n"
+    out += "\\end{tabularx}\n"
+    return out
+
+
+def _latex_token_string(latex: str) -> str:
+    s = re.sub(r"%.*", "", latex)
+    s = s.replace("Σ", " sigma ").replace("σ", " sigma ")
+    s = s.replace("Λ", " lambda ").replace("λ", " lambda ")
+    s = s.replace("μ", " mu ").replace("°", " deg ")
+    s = s.replace("\\\\", " ")
+    s = re.sub(r"\\[a-zA-Z@]+\\*?", " ", s)
+    s = s.translate(str.maketrans({c: " " for c in "{}$[]"}))
+    s = re.sub(r"\s+", " ", s).strip().casefold()
+    toks = re.findall(r"[0-9]+(?:\.[0-9]+)?|\w+", s, flags=re.UNICODE)
+    toks = [t for t in toks if not re.fullmatch(r"ref\d+", t)]
+    return " ".join(toks)
+
+
+def _validate_readme_coverage(md: str, latex: str) -> None:
+    tex_tok = _latex_token_string(latex)
+
+    in_code = False
+    candidates: list[str] = []
+    for line in md.splitlines():
+        s = line.strip()
+        if s.startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code:
+            if s:
+                candidates.append(s)
+            continue
+        if not s or s in ("---", "***", "___"):
+            continue
+        if s.startswith("|"):
+            continue
+        if s.startswith("# "):
+            continue
+        if "<sup" in s.lower() or "contact author:" in s.lower() or "orcid:" in s.lower():
+            continue
+        if s.lower() in ("**pre-print**", "pre-print"):
+            continue
+
+        s = re.sub(r"^#{1,6}\s+", "", s)
+        s = _strip_heading_numbering(s)
+        if re.match(r"^figure\s+\d+\s*:\s*", s, flags=re.IGNORECASE):
+            continue
+        s = re.sub(r"^!\[([^\]]*)\]\([^\)]+\).*$", r"\1", s)
+        s = re.sub(r"\[([^\]]+)\]\([^\)]+\)", r"\1", s)
+        s = re.sub(r"\[(\d+(?:\s*,\s*\d+)*)\]", "", s)
+        s = s.replace("**", "").replace("`", "")
+        if s.startswith("*") and s.endswith("*") and len(s) > 2:
+            s = s[1:-1]
+        s = re.sub(r"^\s*(FIG|Fig)\.\s*\d+\.\s*", "", s).strip()
+        if "$" in s or "\\" in s:
+            continue
+        if sum(ch.isalpha() for ch in s) < 6:
+            continue
+        candidates.append(convert_inline_formatting(s).casefold())
+
+    seen: set[str] = set()
+    uniq = [x for x in candidates if not (x in seen or seen.add(x))]
+
+    word_re = re.compile(r"[0-9]+(?:\.[0-9]+)?|\w+", re.UNICODE)
+    missing: list[str] = []
+    for s in uniq:
+        toks = word_re.findall(_latex_token_string(s))
+        if len(toks) < 8:
+            continue
+        needles = [" ".join(toks[:12]), " ".join(toks[:8]), " ".join(toks[:6])]
+        if not any(n and n in tex_tok for n in needles):
+            missing.append(s)
+
+    if missing:
+        sample = "\n".join(f"- {m}" for m in missing[:30])
+        raise RuntimeError(
+            f"README coverage check failed: {len(missing)} content lines not found in generated TeX.\n"
+            f"First missing lines:\n{sample}\n"
+        )
+
+
+def convert_markdown_to_revtex(md_content: str) -> str:
+    lines = md_content.splitlines()
+    abstract, lines = _extract_abstract(lines)
+
+    latex = r"""\documentclass[aps,prd,reprint,superscriptaddress,showpacs,floatfix,longbibliography]{revtex4-2}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
-\usepackage[margin=20mm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
 \usepackage{hyperref}
-\usepackage{booktabs}
 \usepackage{xcolor}
-\usepackage{longtable}
-\usepackage{ragged2e}  % Better paragraph formatting
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[protrusion=true,expansion=false]{microtype}
 
-% Line breaking settings
-\sloppy  % Allow more flexible line breaking
-\hyphenpenalty=1000  % Reduce hyphenation
-\exhyphenpenalty=1000  % Reduce hyphenation in compound words
-\doublehyphendemerits=10000  % Penalize consecutive hyphenated lines
-
-% Math line breaking
-\allowdisplaybreaks  % Allow page breaks in display math
-\binoppenalty=1000   % Penalty for breaking after binary operators
-\relpenalty=1000     % Penalty for breaking after relations
-
-% Unicode support for special characters
-\DeclareUnicodeCharacter{03A3}{$\Sigma$}  % Σ
-\DeclareUnicodeCharacter{2020}{$\dagger$} % †
-\DeclareUnicodeCharacter{2113}{$\ell$}    % ℓ
-\DeclareUnicodeCharacter{2192}{$\to$}     % →
-\DeclareUnicodeCharacter{2261}{$\equiv$}  % ≡
-\DeclareUnicodeCharacter{00D7}{$\times$}  % ×
-\DeclareUnicodeCharacter{2211}{$\sum$}    % ∑
-\DeclareUnicodeCharacter{220F}{$\prod$}   % ∏
-\DeclareUnicodeCharacter{2032}{$'$}       % ′
-\DeclareUnicodeCharacter{2264}{$\leq$}    % ≤
-\DeclareUnicodeCharacter{2265}{$\geq$}    % ≥
-\DeclareUnicodeCharacter{226B}{$\gg$}     % ≫
-\DeclareUnicodeCharacter{226A}{$\ll$}     % ≪
-\DeclareUnicodeCharacter{27E8}{$\langle$} % ⟨
-\DeclareUnicodeCharacter{27E9}{$\rangle$} % ⟩
-\DeclareUnicodeCharacter{2013}{--}        % en-dash
-\DeclareUnicodeCharacter{2014}{---}       % em-dash
-\DeclareUnicodeCharacter{2212}{$-$}       % minus
-\DeclareUnicodeCharacter{2260}{$\neq$}    % ≠
-\DeclareUnicodeCharacter{2248}{$\approx$} % ≈
-\DeclareUnicodeCharacter{00B1}{$\pm$}     % ±
-
-% Hyperref setup
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=blue,
-    urlcolor=blue,
-}
-
-% Custom commands for better line breaking
-\newcommand{\allowbreakmath}[1]{$#1$\allowbreak}
-\newcommand{\breakablemath}[1]{$#1$\allowbreak}
-
-% Custom commands
-\newcommand{\Sigmagrav}{$\Sigma$-Gravity}
-\newcommand{\ellzero}{\ell_0}
+\graphicspath{{../figures/}}
 
 \begin{document}
 
 """
-    
-    lines = md_content.split('\n')
+
     i = 0
     in_equation = False
     in_table = False
-    table_buffer = []
-    
+    table_buffer: list[str] = []
+
+    bibkey_for_number: dict[str, str] = {}
+    in_ack = False
+    in_appendix = False
+    pending_table_caption: str | None = None
+
     while i < len(lines):
         line = lines[i]
-        
-        # Skip yaml frontmatter if present
-        if i == 0 and line.strip() == '---':
+
+        # YAML frontmatter
+        if i == 0 and line.strip() == "---":
             i += 1
-            while i < len(lines) and lines[i].strip() != '---':
+            while i < len(lines) and lines[i].strip() != "---":
                 i += 1
             i += 1
             continue
-        
-        # Title (first # heading becomes \title)
-        if i < 10 and line.startswith('# ') and '\\title' not in latex:
-            title = line[2:].strip()
-            # Convert markdown bold and math in title
-            title = convert_inline_formatting(title)
-            latex += f"\\title{{{title}}}\n\n"
-            latex += "\\author{Leonard Speiser}\n\n"
-            latex += "\\date{}\n\n"  # Empty date - common for preprints
+
+        # Title/author block
+        if i < 25 and line.startswith("# ") and "\\title" not in latex:
+            title = convert_inline_formatting(line[2:].strip())
+            latex += f"\\title{{{title}\\\\\n\\textnormal{{\\textit{{Pre-print}}}}}}\n\n"
+            latex += "\\author{Leonard Speiser}\n"
+            latex += "\\email[Contact author: ]{leonard@horizon3.net}\n"
+            latex += "\\homepage[ORCID: ]{https://orcid.org/0009-0008-8797-2457}\n"
+            latex += "\\affiliation{Horizon 3, Independent Research, Los Altos, California, USA}\n\n"
+            latex += "\\date{\\today}\n\n"
+            latex += "\\begin{abstract}\n" + convert_inline_formatting(abstract) + "\n\\end{abstract}\n\n"
             latex += "\\maketitle\n\n"
+            # Skip README byline/frontmatter block beneath title to avoid duplication
             i += 1
-            # Skip author/date lines if they immediately follow the title
-            while i < len(lines) and (lines[i].strip().startswith('**Authors:**') or 
-                                       lines[i].strip().startswith('**Date:**') or
-                                       lines[i].strip() == ''):
+            while i < len(lines) and not lines[i].strip().startswith("## "):
+                if lines[i].strip() in ("---", "***", "___"):
+                    i += 1
+                    break
                 i += 1
             continue
-        
-        # Abstract
-        if line.strip().startswith('## Abstract') or line.strip().startswith('**Abstract**'):
-            latex += "\\begin{abstract}\n"
+
+        # Acknowledgments
+        if line.strip().startswith("## ") and _strip_heading_numbering(line.strip()[3:]).lower().startswith("acknowledg"):
+            latex += "\\begin{acknowledgments}\n"
+            in_ack = True
             i += 1
-            # Collect abstract content until next section as one paragraph
-            while i < len(lines) and not lines[i].strip().startswith('##'):
-                # Skip horizontal rules that are just separators after abstract
-                if lines[i].strip() in ['---', '***', '___']:
+            continue
+
+        # References
+        if line.strip().startswith("## References"):
+            if in_ack:
+                latex += "\\end{acknowledgments}\n\n"
+                in_ack = False
+            latex += "\\begin{thebibliography}{99}\n\n"
+            i += 1
+            while i < len(lines) and not lines[i].strip().startswith("## "):
+                s = lines[i].strip()
+                if not s:
                     i += 1
                     continue
-                if lines[i].strip():
-                    latex += convert_inline_formatting(lines[i]) + " "
+                m = re.match(r"^\[(\d+)\]\s*(.*)$", s)
+                if m:
+                    num = m.group(1)
+                    bibkey = f"ref{num}"
+                    bibkey_for_number[num] = bibkey
+                    latex += f"\\bibitem{{{bibkey}}} {convert_inline_formatting(m.group(2))}\n\n"
                 i += 1
-            latex += "\n\\end{abstract}\n\n"
+            latex += "\\end{thebibliography}\n\n"
             continue
-        
-        # Section headers
-        if line.startswith('## '):
-            section_title = line[3:].strip()
-            # Strip leading hierarchical numbers like "1.", "2.6.", "11.2.3." from section titles
-            section_title = re.sub(r'^\d+(\.\d+)*\.?\s*', '', section_title)
-            section_title = convert_inline_formatting(section_title)
-            latex += f"\\section{{{section_title}}}\n\n"
+
+        # Table caption line
+        cap_plain = line.strip().strip("*").strip()
+        if re.match(r"^(Table)\s+[A-Za-z0-9IVXLCDM]+\s*:\s+.+", cap_plain):
+            pending_table_caption = convert_inline_formatting(cap_plain)
             i += 1
             continue
-        
-        if line.startswith('### '):
-            subsection_title = line[4:].strip()
-            # Strip leading hierarchical numbers from subsection titles
-            subsection_title = re.sub(r'^\d+(\.\d+)*\.?\s*', '', subsection_title)
-            subsection_title = convert_inline_formatting(subsection_title)
-            latex += f"\\subsection{{{subsection_title}}}\n\n"
+
+        # Headings
+        if line.startswith("## "):
+            raw = line[3:].strip()
+            clean = convert_inline_formatting(_strip_heading_numbering(raw))
+
+            if raw.lower().startswith("appendix"):
+                if not in_appendix:
+                    latex += "\\appendix\n\n"
+                    in_appendix = True
+                latex += f"\\section{{{clean}}}\n\n"
+                i += 1
+                continue
+
+            if in_ack:
+                latex += "\\end{acknowledgments}\n\n"
+                in_ack = False
+
+            latex += f"\\section{{{clean}}}\n\n"
             i += 1
             continue
-        
-        if line.startswith('#### '):
-            subsubsection_title = line[5:].strip()
-            # Strip leading hierarchical numbers from subsubsection titles
-            subsubsection_title = re.sub(r'^\d+(\.\d+)*\.?\s*', '', subsubsection_title)
-            subsubsection_title = convert_inline_formatting(subsubsection_title)
-            latex += f"\\subsubsection{{{subsubsection_title}}}\n\n"
+
+        if line.startswith("### "):
+            latex += f"\\subsection{{{convert_inline_formatting(_strip_heading_numbering(line[4:].strip()))}}}\n\n"
             i += 1
             continue
-        
-        # Block equations $$...$$
+
+        if line.startswith("#### "):
+            latex += f"\\subsubsection{{{convert_inline_formatting(_strip_heading_numbering(line[5:].strip()))}}}\n\n"
+            i += 1
+            continue
+
+        # Block equations
         stripped = line.strip()
-        # Single-line block equation: $$content$$
-        if stripped.startswith('$$') and stripped.endswith('$$') and len(stripped) > 4:
-            equation_content = stripped[2:-2].strip()
-            latex += "\\begin{equation}\n"
-            latex += equation_content + "\n"
-            latex += "\\end{equation}\n\n"
+        if stripped.startswith("$$") and stripped.endswith("$$") and len(stripped) > 4:
+            latex += "\\begin{equation}\n" + stripped[2:-2].strip() + "\n\\end{equation}\n\n"
             i += 1
             continue
-        
-        # Multi-line block equation start/end: $$ on its own line
-        if stripped == '$$':
-            if not in_equation:
-                latex += "\\begin{equation}\n"
-                in_equation = True
-            else:
-                latex += "\\end{equation}\n\n"
-                in_equation = False
+
+        if stripped == "$$":
+            latex += "\\begin{equation}\n" if not in_equation else "\\end{equation}\n\n"
+            in_equation = not in_equation
             i += 1
             continue
-        
-        # Inside multi-line equation
+
         if in_equation:
             latex += line + "\n"
             i += 1
             continue
-        
-        # Tables
-        if '|' in line and not line.strip().startswith('<!--'):
-            if not in_table:
-                in_table = True
-                table_buffer = [line]
-            else:
-                table_buffer.append(line)
-            i += 1
-            # Check if table continues
-            if i >= len(lines) or '|' not in lines[i]:
-                # End of table, convert it
-                latex += convert_table(table_buffer)
-                in_table = False
-                table_buffer = []
-            continue
-        
+
+        # Tables (strict: header must be followed by separator row)
+        if "|" in line and not line.strip().startswith("<!--"):
+            j = i + 1
+            while j < len(lines) and lines[j].strip() == "":
+                j += 1
+            if j < len(lines) and _table_sep_line(lines[j]):
+                if not in_table:
+                    in_table = True
+                    table_buffer = [line]
+                else:
+                    table_buffer.append(line)
+                i += 1
+                if i >= len(lines) or "|" not in lines[i]:
+                    # optional note after table
+                    k = i
+                    while k < len(lines) and lines[k].strip() == "":
+                        k += 1
+                    table_note = None
+                    if k < len(lines) and lines[k].strip().startswith("*"):
+                        raw_note = lines[k].strip().lstrip("*").rstrip("*").strip()
+                        if raw_note and not raw_note.lower().startswith(("fig.", "figure")):
+                            table_note = raw_note
+                            i = k + 1
+
+                    ncol = len([c for c in table_buffer[0].split("|") if c.strip()])
+                    wide = ncol >= 5
+                    env = "table*" if wide else "table"
+                    width_ref = "\\textwidth" if wide else "\\columnwidth"
+
+                    latex += f"\\begin{{{env}}}[t]\n\\centering\n"
+                    if pending_table_caption:
+                        if table_note:
+                            latex += f"\\caption{{{pending_table_caption} \\\\ \\textit{{{convert_inline_formatting(table_note)}}}}}\n"
+                        else:
+                            latex += f"\\caption{{{pending_table_caption}}}\n"
+                    elif table_note:
+                        latex += f"\\caption{{\\textit{{{convert_inline_formatting(table_note)}}}}}\n"
+                    latex += "\\small\n"
+                    latex += convert_table(table_buffer, width_ref=width_ref)
+                    latex += f"\\end{{{env}}}\n\n"
+
+                    pending_table_caption = None
+                    in_table = False
+                    table_buffer = []
+                continue
+
         # Lists
-        if line.strip().startswith('- ') or line.strip().startswith('* '):
+        if line.strip().startswith("- ") or line.strip().startswith("* "):
             latex += "\\begin{itemize}\n"
-            while i < len(lines) and (lines[i].strip().startswith('- ') or lines[i].strip().startswith('* ')):
-                item = lines[i].strip()[2:]
-                item = convert_inline_formatting(item)
-                latex += f"\\item {item}\n"
+            while i < len(lines) and (lines[i].strip().startswith("- ") or lines[i].strip().startswith("* ")):
+                latex += f"\\item {convert_inline_formatting(lines[i].strip()[2:])}\n"
                 i += 1
             latex += "\\end{itemize}\n\n"
             continue
-        
-        # Numbered lists
-        if re.match(r'^\d+[\.\)]\s', line.strip()):
+
+        if re.match(r"^\d+[\.\)]\s", line.strip()):
             latex += "\\begin{enumerate}\n"
-            while i < len(lines) and re.match(r'^\d+[\.\)]\s', lines[i].strip()):
-                item = re.sub(r'^\d+[\.\)]\s', '', lines[i].strip())
-                item = convert_inline_formatting(item)
-                latex += f"\\item {item}\n"
+            while i < len(lines) and re.match(r"^\d+[\.\)]\s", lines[i].strip()):
+                item = re.sub(r"^\d+[\.\)]\s", "", lines[i].strip())
+                latex += f"\\item {convert_inline_formatting(item)}\n"
                 i += 1
             latex += "\\end{enumerate}\n\n"
             continue
-        
-        # Block quotes
-        if line.strip().startswith('>'):
+
+        # Quotes
+        if line.strip().startswith(">"):
             latex += "\\begin{quote}\n"
-            while i < len(lines) and lines[i].strip().startswith('>'):
-                quote_line = lines[i].strip()[1:].strip()
-                quote_line = convert_inline_formatting(quote_line)
-                latex += quote_line + "\n\n"
+            while i < len(lines) and lines[i].strip().startswith(">"):
+                latex += convert_inline_formatting(lines[i].strip()[1:].strip()) + "\n\n"
                 i += 1
             latex += "\\end{quote}\n\n"
             continue
-        
-        # Images ![alt](path)
-        if line.strip().startswith('!['):
-            match = re.match(r'!\[(.*?)\]\((.*?)\)', line.strip())
-            if match:
-                caption = match.group(1)
-                path = match.group(2)
-                # Fix path - images are relative to project root, but LaTeX compiles from docs/
-                if not path.startswith('http') and not path.startswith('/') and not path.startswith('..'):
-                    path = '../' + path
-                latex += "\\begin{figure}[h]\n"
-                latex += "\\centering\n"
-                latex += f"\\includegraphics[width=0.8\\textwidth]{{{path}}}\n"
-                latex += f"\\caption{{{caption}}}\n"
-                latex += "\\end{figure}\n\n"
+
+        # Images (use italic FIG caption line)
+        if line.strip().startswith("!["):
+            m = re.match(r"!\[(.*?)\]\((.*?)\)", line.strip())
+            if m:
+                alt_caption = m.group(1).strip()
+                path = m.group(2).strip()
+                if not path.startswith("http") and not path.startswith("/") and not path.startswith(".."):
+                    path = "../" + path
+
+                j = i + 1
+                while j < len(lines) and lines[j].strip() == "":
+                    j += 1
+                long_caption = None
+                if j < len(lines):
+                    mcap = re.match(r"^\*(.+)\*\s*$", lines[j].strip())
+                    if mcap:
+                        long_caption = mcap.group(1).strip()
+
+                cap_for_layout = (alt_caption + " " + (long_caption or "")).lower()
+                env = "figure*" if any(k in cap_for_layout for k in ("gallery", "cluster", "kappa", "profiles")) else "figure"
+                pos = "t" if env == "figure*" else "htbp"
+                width = "\\textwidth" if env == "figure*" else "\\columnwidth"
+
+                latex += f"\\begin{{{env}}}[{pos}]\n\\centering\n"
+                latex += f"\\includegraphics[width={width}]{{{path}}}\n"
+                if long_caption:
+                    cleaned = re.sub(r"^\s*(FIG|Fig)\.\s*\d+\.\s*", "", long_caption).strip()
+                    latex += f"\\caption{{{convert_inline_formatting(cleaned)}}}\n"
+                    i = j
+                else:
+                    latex += f"\\caption{{{convert_inline_formatting(alt_caption)}}}\n"
+                latex += f"\\end{{{env}}}\n\n"
             i += 1
             continue
-        
+
         # Horizontal rules
-        if line.strip() in ['---', '***', '___']:
+        if line.strip() in ("---", "***", "___"):
             latex += "\\medskip\\hrule\\medskip\n\n"
             i += 1
             continue
-        
-        # Standalone equations (detect LaTeX equations not wrapped in $$ or $)
-        # These are lines with LaTeX commands but no markdown formatting
-        stripped = line.strip()
-        if stripped and not stripped.startswith('$') and not stripped.startswith('\\begin'):
-            # Skip lines that already have inline math delimiters - they're regular text, not standalone equations
-            if '$' not in stripped:
-                # Check if line looks like an equation (has LaTeX commands or math-like structure)
-                has_latex_commands = any(cmd in stripped for cmd in ['\\,', '\\;', '\\rm', '\\dagger', '\\ell', '\\Sigma', '\\quad'])
-                has_equation_pattern = '=' in stripped and ('(' in stripped or '_' in stripped)
-                # Exclude markdown links [text](url) but allow equation brackets
-                is_markdown_link = '](' in stripped or stripped.startswith('**') or stripped.startswith('*Figure')
-                
-                if has_latex_commands or (has_equation_pattern and not is_markdown_link and 'http' not in stripped):
-                    # This is likely a standalone equation - wrap it in display math
-                    latex += "\\[\n" + stripped + "\n\\]\n\n"
-                    i += 1
-                    continue
-        
-        # Regular paragraphs
+
+        # Paragraphs + numeric citations
         if line.strip():
             converted = convert_inline_formatting(line)
+
+            def _cite_repl(m: re.Match[str]) -> str:
+                nums = [x.strip() for x in m.group(1).split(",")]
+                keys = [bibkey_for_number.get(n, f"ref{n}") for n in nums]
+                return "\\cite{" + ",".join(keys) + "}"
+
+            converted = re.sub(r"\[(\d+(?:\s*,\s*\d+)*)\]", _cite_repl, converted)
             latex += converted + "\n\n"
         else:
             latex += "\n"
-        
+
         i += 1
-    
+
+    if in_ack:
+        latex += "\\end{acknowledgments}\n\n"
+
     latex += "\\end{document}\n"
     return latex
 
 
-def convert_inline_formatting(text):
-    """Convert markdown inline formatting to LaTeX."""
-    # Protect math mode content first
-    math_blocks = []
-    def save_math(match):
-        math_blocks.append(match.group(0))
-        return f"MATHBLOCK{len(math_blocks)-1}MATHBLOCK"
-    
-    # Save inline math $...$
-    text = re.sub(r'\$[^$]+\$', save_math, text)
-    
-    # Escape special LaTeX characters outside math
-    text = text.replace('&', '\\&')
-    text = text.replace('%', '\\%')
-    text = text.replace('#', '\\#')
-    text = text.replace('_', '\\_')  # Escape underscores outside math/formatting
-    
-    # Now handle markdown formatting
-    # Bold **text** (do this before italic to avoid conflicts)
-    text = re.sub(r'\*\*(.+?)\*\*', r'\\textbf{\1}', text)
-    
-    # Italic *text* (single asterisk)
-    text = re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'\\textit{\1}', text)
-    
-    # Code `code`
-    text = re.sub(r'`([^`]+)`', r'\\texttt{\1}', text)
-    
-    # Links [text](url)
-    text = re.sub(r'\[(.+?)\]\((.+?)\)', r'\\href{\2}{\1}', text)
-    
-    # Restore math blocks and add line breaks for long expressions
-    for i, math in enumerate(math_blocks):
-        # Add \allowbreak after long math expressions
-        if len(math) > 30:  # Long math expressions
-            math = math.replace('$', '$\\allowbreak ')
-        text = text.replace(f"MATHBLOCK{i}MATHBLOCK", math)
-    
-    return text
-
-
-def convert_table(table_lines):
-    """Convert markdown table to LaTeX tabular."""
-    if len(table_lines) < 2:
-        return ""
-    
-    # Parse header
-    header = [cell.strip() for cell in table_lines[0].split('|') if cell.strip()]
-    num_cols = len(header)
-    
-    # Skip separator line
-    # Build table
-    latex = "\\begin{table}[h]\n\\centering\n"
-    latex += "\\begin{tabular}{" + "l" * num_cols + "}\n"
-    latex += "\\toprule\n"
-    
-    # Header row
-    header_latex = ' & '.join([convert_inline_formatting(h) for h in header])
-    latex += header_latex + " \\\\\n"
-    latex += "\\midrule\n"
-    
-    # Data rows (skip first 2 lines: header and separator)
-    for line in table_lines[2:]:
-        if not line.strip():
-            continue
-        cells = [cell.strip() for cell in line.split('|') if cell.strip()]
-        if cells:
-            row_latex = ' & '.join([convert_inline_formatting(c) for c in cells])
-            latex += row_latex + " \\\\\n"
-    
-    latex += "\\bottomrule\n"
-    latex += "\\end{tabular}\n"
-    latex += "\\end{table}\n\n"
-    
-    return latex
-
-
-def main():
+def main() -> int:
     repo_root = Path(__file__).parent.parent
     readme_path = repo_root / "README.md"
     docs_path = repo_root / "docs"
     tex_path = docs_path / "sigmagravity_paper.tex"
     pdf_path = docs_path / "sigmagravity_paper.pdf"
-    
+
+    docs_path.mkdir(exist_ok=True)
+
     print(f"Reading {readme_path}...")
-    md_content = readme_path.read_text(encoding='utf-8')
-    
-    print("Converting to LaTeX...")
-    latex_content = convert_markdown_to_latex(md_content)
-    
+    md_content = readme_path.read_text(encoding="utf-8")
+
+    print("Converting to REVTeX (PRD reprint)...")
+    latex_content = convert_markdown_to_revtex(md_content)
+
+    print("Validating README coverage...")
+    _validate_readme_coverage(md_content, latex_content)
+
     print(f"Writing {tex_path}...")
-    tex_path.write_text(latex_content, encoding='utf-8')
-    
-    print(f"Compiling to PDF...")
+    tex_path.write_text(latex_content, encoding="utf-8")
+
+    print("Compiling to PDF (pdflatex, 2 passes)...")
+    jobname = pdf_path.stem
+
     result = subprocess.run(
-        ['pdflatex', '-interaction=nonstopmode', str(tex_path)],
+        ["pdflatex", "-interaction=nonstopmode", f"-jobname={jobname}", str(tex_path)],
         cwd=docs_path,
         capture_output=True,
         text=True,
-        encoding='utf-8',
-        errors='replace'
+        encoding="utf-8",
+        errors="replace",
     )
-    
-    # Check if PDF was created regardless of return code
-    if pdf_path.exists():
-        print(f"[OK] PDF generated: {pdf_path}")
-        print(f"  Size: {pdf_path.stat().st_size / 1024:.1f} KB")
-    else:
-        print(f"[FAILED] PDF generation failed")
+
+    produced_pdf = docs_path / f"{jobname}.pdf"
+    if not produced_pdf.exists():
+        print("[FAILED] PDF generation failed")
         if result.stdout:
-            try:
-                print("STDOUT:", result.stdout[-500:])
-            except UnicodeEncodeError:
-                print("STDOUT: [Unicode content - check LaTeX log]")
+            print("STDOUT:", result.stdout[-2000:])
         if result.stderr:
-            try:
-                print("STDERR:", result.stderr[-500:])
-            except UnicodeEncodeError:
-                print("STDERR: [Unicode content - check LaTeX log]")
+            print("STDERR:", result.stderr[-2000:])
         return 1
-    
-    # Run pdflatex again for cross-references
-    print("Running pdflatex second pass for cross-references...")
+
     subprocess.run(
-        ['pdflatex', '-interaction=nonstopmode', str(tex_path)],
+        ["pdflatex", "-interaction=nonstopmode", f"-jobname={jobname}", str(tex_path)],
         cwd=docs_path,
         capture_output=True,
         text=True,
-        encoding='utf-8',
-        errors='replace'
+        encoding="utf-8",
+        errors="replace",
     )
-    
-    print("[OK] Complete")
+
+    print(f"[OK] Generated: {pdf_path}")
     return 0
 
 
-if __name__ == '__main__':
-    exit(main())
+if __name__ == "__main__":
+    raise SystemExit(main())
