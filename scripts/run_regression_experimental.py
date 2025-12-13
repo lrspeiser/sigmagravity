@@ -2224,6 +2224,17 @@ def main():
     
     USE_SIGMA_COMPONENTS = bool(sigma_components)
     
+    # Wave/interference toggles (optional)
+    USE_WAVE_INTERFERENCE = bool(wave_mode_on)
+    for arg in sys.argv:
+        if arg.startswith('--wave-mode='):
+            WAVE_MODE = arg.split('=', 1)[1].strip() or WAVE_MODE
+        if arg.startswith('--wave-beta='):
+            try:
+                WAVE_BETA = float(arg.split('=', 1)[1])
+            except Exception:
+                pass
+    
     if coherence_arg in ('jj', 'current', 'currents'):
         COHERENCE_MODEL = "JJ"
         if jj_xi_mult is not None:
