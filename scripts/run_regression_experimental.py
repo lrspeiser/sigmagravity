@@ -92,8 +92,9 @@ SIGMA_BULGE_KMS = 120.0
 COHERENCE_MODEL = "C"   # "C" (baseline v^2/(v^2+σ^2)) or "JJ" (current-current coherence)
 
 # JJ model hyperparameters (global; no per-galaxy fits)
-JJ_XI_MULT = 1.0        # ξ_corr = JJ_XI_MULT * (R_d/(2π)) by default
-JJ_SMOOTH_M_POINTS = 5  # smooth M_enc before derivative to reduce numerical noise
+# Tuned values: JJ_XI_MULT=0.4 gives best SPARC RMS (22.83 km/s vs 22.94 at 1.0)
+JJ_XI_MULT = 0.4        # ξ_corr = JJ_XI_MULT * (R_d/(2π)) by default (tuned: 0.4 optimal)
+JJ_SMOOTH_M_POINTS = 5  # smooth M_enc before derivative to reduce numerical noise (tuned: 5 optimal)
 JJ_EPS = 1e-30
 
 # Cluster amplitude
@@ -1606,15 +1607,26 @@ def main():
     
     # NEW: coherence selector
     coherence_arg = None
+    jj_xi_mult = None
+    jj_smooth_points = None
+    
     for a in sys.argv:
         if a.startswith('--coherence='):
             coherence_arg = a.split('=', 1)[1].strip().lower()
+        elif a.startswith('--jj-xi-mult='):
+            jj_xi_mult = float(a.split('=', 1)[1].strip())
+        elif a.startswith('--jj-smooth='):
+            jj_smooth_points = int(a.split('=', 1)[1].strip())
     
-    global USE_SIGMA_COMPONENTS, COHERENCE_MODEL
+    global USE_SIGMA_COMPONENTS, COHERENCE_MODEL, JJ_XI_MULT, JJ_SMOOTH_M_POINTS
     USE_SIGMA_COMPONENTS = bool(sigma_components)
     
     if coherence_arg in ('jj', 'current', 'currents'):
         COHERENCE_MODEL = "JJ"
+        if jj_xi_mult is not None:
+            JJ_XI_MULT = jj_xi_mult
+        if jj_smooth_points is not None:
+            JJ_SMOOTH_M_POINTS = jj_smooth_points
     else:
         COHERENCE_MODEL = "C"
     

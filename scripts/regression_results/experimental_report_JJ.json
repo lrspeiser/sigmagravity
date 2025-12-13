@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-12T19:27:20.665759",
+  "timestamp": "2025-12-12T19:40:45.954128",
   "formula": "sigma_gravity_unified",
   "coherence_model": "JJ",
   "mode": "core",
@@ -17,25 +17,25 @@
     "sigma_disk_kms": 25.0,
     "sigma_bulge_kms": 120.0,
     "coherence_model": "JJ",
-    "jj_xi_mult": 1.0,
+    "jj_xi_mult": 0.4,
     "jj_smooth_points": 5
   },
   "results": [
     {
       "name": "SPARC Galaxies",
       "passed": 0.0,
-      "metric": 22.936386830491752,
+      "metric": 22.82979641792116,
       "details": {
         "n_galaxies": 171,
-        "mean_rms": 22.936386830491752,
+        "mean_rms": 22.82979641792116,
         "mean_mond_rms": 17.154025922937112,
-        "win_rate": 0.2631578947368421,
-        "rar_scatter_dex": 0.15147114313531113,
+        "win_rate": 0.26900584795321636,
+        "rar_scatter_dex": 0.15233062859420637,
         "benchmark_mond_rms": 17.15,
         "benchmark_lcdm_rms": 15.0,
         "benchmark_rar_scatter": 0.1
       },
-      "message": "RMS=22.94 km/s (MOND=17.15, \u039bCDM~15), Scatter=0.151 dex, Win=26.3%"
+      "message": "RMS=22.83 km/s (MOND=17.15, \u039bCDM~15), Scatter=0.152 dex, Win=26.9%"
     },
     {
       "name": "Clusters",
@@ -67,15 +67,15 @@
     {
       "name": "Gaia/MW",
       "passed": 1.0,
-      "metric": 28.085841693637523,
+      "metric": 28.642710303845938,
       "details": {
         "n_stars": 28368,
-        "rms": 28.085841693637523,
-        "mean_residual": -2.2658085406166477,
+        "rms": 28.642710303845938,
+        "mean_residual": -3.983857936328644,
         "benchmark_V_sun": 233,
         "benchmark_n_stars": 28368
       },
-      "message": "RMS=28.1 km/s (28368 stars, expected 28368)"
+      "message": "RMS=28.6 km/s (28368 stars, expected 28368)"
     },
     {
       "name": "Redshift Evolution",

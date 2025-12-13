@@ -14,9 +14,9 @@ This document compares the baseline **C coherence model** (`C = v²/(v²+σ²)`)
 
 | Metric | C Model (Baseline) | JJ Model | Change |
 |--------|-------------------|---------|--------|
-| **Mean RMS** | 17.42 km/s | 22.94 km/s | +31.7% (worse) |
-| **Win Rate vs MOND** | 42.7% | 26.3% | -16.4% (worse) |
-| **RAR Scatter** | 0.100 dex | 0.151 dex | +51% (worse) |
+| **Mean RMS** | 17.42 km/s | 22.83 km/s (tuned) | +31.0% (worse) |
+| **Win Rate vs MOND** | 42.7% | 26.9% (tuned) | -15.8% (worse) |
+| **RAR Scatter** | 0.100 dex | 0.152 dex (tuned) | +52% (worse) |
 | **Status** | ✓ Passed | ✗ Failed | |
 
 **Benchmarks:**
@@ -54,13 +54,13 @@ This document compares the baseline **C coherence model** (`C = v²/(v²+σ²)`)
 - **Interpretation:** Measures local phase-space coherence from velocity dispersion
 - **Performance:** Matches MOND on SPARC, works well for galaxies
 
-### JJ Model (Experimental)
+### JJ Model (Experimental) - TUNED
 - **Coherence:** `Q_JJ(r) = <J>_K² / <J² + J_rand²>_K` - scale-dependent current-current correlation
 - **Interpretation:** Measures long-range correlation of baryonic mass-current
 - **Performance:** Worse on SPARC, but explicitly suppresses Solar System (coherence → 0)
-- **Parameters:**
-  - `JJ_XI_MULT = 1.0` (correlation scale = R_d/(2π))
-  - `JJ_SMOOTH_M_POINTS = 5` (smoothing for density proxy)
+- **Parameters (TUNED):**
+  - `JJ_XI_MULT = 0.4` (correlation scale = 0.4 × R_d/(2π)) - **optimized from 1.0**
+  - `JJ_SMOOTH_M_POINTS = 5` (smoothing for density proxy) - **optimal**
 
 ## Discussion
 
@@ -70,11 +70,24 @@ This document compares the baseline **C coherence model** (`C = v²/(v²+σ²)`)
 2. **Density proxy limitations:** Uses spherical inversion `ρ ~ dM_enc/dr` from `V_bar`, which is approximate for disk galaxies
 3. **Parameter tuning:** Current `JJ_XI_MULT = 1.0` may not be optimal for galaxy-scale correlations
 
-### Potential Improvements
+### Tuning Results
 
-1. **Tune correlation scale:** Try `JJ_XI_MULT = 0.5` or `2.0` to adjust `ξ_corr`
-2. **Better density proxy:** Use actual disk density profiles instead of spherical inversion
-3. **Hybrid approach:** Use JJ for large-scale systems (clusters), C for galaxies
+**Parameter sweep completed:** Tested 24 combinations of `JJ_XI_MULT` (0.2-2.0) and `JJ_SMOOTH_M_POINTS` (3-7).
+
+**Best combination found:**
+- `JJ_XI_MULT = 0.4` (reduces RMS from 22.94 → 22.83 km/s)
+- `JJ_SMOOTH_M_POINTS = 5` (optimal, smoothing has minimal effect)
+
+**Key findings:**
+1. Smaller `JJ_XI_MULT` values (0.3-0.5) perform better than larger ones
+2. Smoothing parameter has minimal impact (3, 5, 7 all similar)
+3. Best RMS (22.83 km/s) still 31% worse than baseline C model (17.42 km/s)
+
+### Potential Further Improvements
+
+1. **Better density proxy:** Use actual disk density profiles instead of spherical inversion
+2. **Hybrid approach:** Use JJ for large-scale systems (clusters), C for galaxies
+3. **Alternative kernel:** Test different kernel shapes (Gaussian, top-hat) instead of exponential
 
 ### Solar System Suppression
 
