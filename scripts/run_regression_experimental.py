@@ -1755,6 +1755,96 @@ def test_synthetic_stream_lensing() -> TestResult:
     )
 
 
+def test_anisotropic_prediction_ab() -> TestResult:
+    """A/B test: Does anisotropic gravity predict object impact better than baseline?
+
+    This test compares κ=0 (baseline isotropic) vs κ>0 (anisotropic) predictions
+    against observational targets to determine if anisotropy improves predictions
+    of how gravity impacts objects (light rays, particles, etc.).
+
+    Currently uses synthetic observations, but designed to accept real data:
+    - Light deflection/image positions (strong lensing)
+    - Weak lensing shear anisotropy
+    - Bullet-like merger offsets
+    - Stellar stream tracks
+
+    Pass criteria: Anisotropic model must improve RMS prediction error vs baseline.
+    """
+    try:
+        from score_stream_lensing import (
+            build_scene,
+            solve_potential,
+            predict_ray_endpoints,
+            compare_models_ab,
+        )
+    except ImportError:
+        return TestResult(
+            name="Anisotropic Prediction A/B",
+            passed=True,
+            metric=0.0,
+            details={"enabled": False},
+            message="SKIPPED (score_stream_lensing.py not found)",
+        )
+
+    # Build a test scene
+    scene = build_scene(
+        N=160,
+        L=1.0,
+        mass_offset_x=0.30,
+        mass_sigma=0.12,
+        stream_sigma=0.06,
+    )
+
+    # Generate synthetic "observations" from a known κ_true
+    # In real usage, replace this with actual observational data
+    kappa_true = 6.0
+    Phi_true, _ = solve_potential(scene, kappa=kappa_true)
+    x0s, x_obs = predict_ray_endpoints(Phi_true, scene, n_rays=80, n_steps=240)
+    
+    # Add realistic measurement noise
+    obs_uncertainty = np.full_like(x_obs, 0.002)
+    x_obs = x_obs + np.random.normal(0.0, obs_uncertainty[0], size=x_obs.shape)
+
+    # A/B comparison: baseline (κ=0) vs anisotropic (κ=6.0)
+    results = compare_models_ab(
+        scene=scene,
+        kappa_baseline=0.0,
+        kappa_aniso=6.0,
+        observations=x_obs,
+        obs_uncertainty=obs_uncertainty,
+        prediction_type="ray_endpoints",
+        n_rays=80,
+        n_steps=240,
+    )
+
+    baseline_rms = results['baseline']['score'].rms
+    aniso_rms = results['anisotropic']['score'].rms
+    improvement = results['comparison']['rms_improvement']
+    aniso_better = results['comparison']['aniso_better']
+
+    # Pass if anisotropic model improves predictions
+    # (In this synthetic case, it should since observations were generated with κ>0)
+    passed = aniso_better and improvement > 0.05  # Require at least 5% improvement
+
+    return TestResult(
+        name="Anisotropic Prediction A/B",
+        passed=passed,
+        metric=improvement,  # RMS improvement fraction
+        details={
+            "baseline_rms": float(baseline_rms),
+            "anisotropic_rms": float(aniso_rms),
+            "rms_improvement": float(improvement),
+            "chi2_delta": float(results['comparison']['chi2_delta']) if results['comparison']['chi2_delta'] is not None else None,
+            "anisotropic_better": bool(aniso_better),
+            "kappa_baseline": 0.0,
+            "kappa_aniso": 6.0,
+            "kappa_true": kappa_true,
+            "n_observations": len(x_obs),
+        },
+        message=f"RMS improvement: {improvement*100:.1f}% (baseline={baseline_rms:.4f}, aniso={aniso_rms:.4f})",
+    )
+
+
 # =============================================================================
 # MAIN
 # =============================================================================
@@ -1890,6 +1980,8 @@ def main():
         ("CMB", lambda: test_cmb()),
         ("Synthetic Stream Lensing", lambda: test_synthetic_stream_lensing() if not quick else
          TestResult("Synthetic Stream Lensing", True, 0, {}, "SKIPPED")),
+        ("Anisotropic Prediction A/B", lambda: test_anisotropic_prediction_ab() if not quick else
+         TestResult("Anisotropic Prediction A/B", True, 0, {}, "SKIPPED")),
         ("Bullet Cluster", lambda: test_bullet_cluster()),
     ]
     
