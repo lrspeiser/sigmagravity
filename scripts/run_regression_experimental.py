@@ -57,6 +57,21 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # =============================================================================
+# OPTIONAL: SYNTHETIC STREAM-SEEKING TEST (2D/3D)
+# =============================================================================
+# This imports a small prototype solver/test implementing an anisotropic operator:
+#     ∇·[(I + κ w(x) ŝ ŝᵀ) ∇Φ] = 4πGρ
+# plus a toy ray-trace regression metric that *depends on directionality*.
+#
+# Place stream_seeking_anisotropic.py next to this script (or on PYTHONPATH) to enable.
+try:
+    from stream_seeking_anisotropic import synthetic_stream_lensing_regression
+    _HAS_STREAM_SEEKING_TEST = True
+except Exception:
+    synthetic_stream_lensing_regression = None
+    _HAS_STREAM_SEEKING_TEST = False
+
+# =============================================================================
 # PHYSICAL CONSTANTS
 # =============================================================================
 c = 2.998e8  # m/s
@@ -1682,6 +1697,64 @@ def test_bullet_cluster() -> TestResult:
     )
 
 
+def test_synthetic_stream_lensing() -> TestResult:
+    """Synthetic anisotropic-operator + ray-trace test (toy 2D/3D regression).
+
+    This is NOT an observational benchmark. It is a diagnostic that the
+    *directional* operator
+        ∇·[(I + κ w(x) ŝ ŝᵀ) ∇Φ] = 4πGρ
+    can produce focusing toward a stream/filament in a way a scalar amplitude
+    rescaling cannot mimic.
+
+    The test runs:
+      - isotropic solve (κ=0)
+      - anisotropic solve (κ>0) localized around a filament
+    and compares ray-traced capture + mean-shift statistics.
+    """
+    if not _HAS_STREAM_SEEKING_TEST:
+        return TestResult(
+            name="Synthetic Stream Lensing",
+            passed=True,
+            metric=0.0,
+            details={"enabled": False},
+            message="SKIPPED (stream_seeking_anisotropic.py not found on PYTHONPATH)",
+        )
+
+    out = synthetic_stream_lensing_regression(
+        N=160,
+        L=1.0,
+        kappa=6.0,
+        mass_offset_x=0.30,
+        mass_sigma=0.12,
+        stream_sigma=0.06,
+        capture_width=0.08,
+        n_rays=80,
+        n_steps=240,
+        tol=1e-7,
+        max_iter=6000,
+    )
+
+    # Pass criteria: anisotropy should increase filament capture and pull mean x_end toward x=0
+    passed = (out.capture_ratio > 1.05) and (out.mean_shift_ratio < 0.98)
+
+    return TestResult(
+        name="Synthetic Stream Lensing",
+        passed=bool(passed),
+        metric=float(out.capture_ratio),
+        details={
+            "capture_ratio": float(out.capture_ratio),
+            "mean_shift_ratio": float(out.mean_shift_ratio),
+            "capture_iso": float(out.capture_iso),
+            "capture_aniso": float(out.capture_aniso),
+            "mean_x_iso": float(out.mean_x_iso),
+            "mean_x_aniso": float(out.mean_x_aniso),
+            "solver_iso": out.solver_iso,
+            "solver_aniso": out.solver_aniso,
+        },
+        message=f"capture_ratio={out.capture_ratio:.3f} (want>1), mean_shift_ratio={out.mean_shift_ratio:.3f} (want<1)",
+    )
+
+
 # =============================================================================
 # MAIN
 # =============================================================================
@@ -1815,6 +1888,8 @@ def main():
         ("Gravitational Waves", lambda: test_gravitational_waves()),
         ("Structure Formation", lambda: test_structure_formation()),
         ("CMB", lambda: test_cmb()),
+        ("Synthetic Stream Lensing", lambda: test_synthetic_stream_lensing() if not quick else
+         TestResult("Synthetic Stream Lensing", True, 0, {}, "SKIPPED")),
         ("Bullet Cluster", lambda: test_bullet_cluster()),
     ]
     
