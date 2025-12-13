@@ -37,24 +37,36 @@ The comparison shows metrics for each test:
 ## Example Output
 
 ```
-COMPARISON: baseline → guided
+COMPARISON: Baseline | Anisotropic | MOND
 ================================================================================
-SPARC Galaxies            ✓     17.4  →  ✓     17.6
-Clusters                  ✓    0.987  →  ✓        1
-Cluster Holdout           ✓     1.02  →  ✓     1.02
-Gaia/MW                   ✓     29.8  →  ✓     30.2
-Redshift Evolution        ✓     2.97  →  ✓     2.97
-Solar System              ✓ 1.77e-09  →  ✓ 1.77e-09
-Counter-Rotation          ✓  0.00392  →  ✓  0.00392
-Tully-Fisher              ✓     0.87  →  ✓     0.87
+SPARC Galaxies            ✓     17.4  |  ✓     17.6  |  MOND=17.15           [BEST: MOND]
+Clusters                  ✓    0.987  |  ✓        1  |  MOND~0.33            [BEST: Aniso]
+Cluster Holdout           ✓     1.02  |  ✓     1.02  |  MOND: N/A           
+Gaia/MW                   ✓     29.8  |  ✓     30.2  |  MOND: N/A           
+Redshift Evolution        ✓     2.97  |  ✓     2.97  |  MOND: N/A           
+Solar System              ✓ 1.77e-09  |  ✓ 1.77e-09  |  MOND: N/A           
+Counter-Rotation          ✓  0.00392  |  ✓  0.00392  |  MOND: N/A           
+Tully-Fisher              ✓     0.87  |  ✓     0.87  |  MOND: N/A           
 ```
 
 ## Interpretation
 
-- **SPARC (17.4 → 17.6)**: Baseline slightly better (lower RMS)
-- **Clusters (0.987 → 1.0)**: Anisotropic better (perfect ratio vs slightly under-predicting)
-- **Gaia/MW (29.8 → 30.2)**: Baseline slightly better (lower RMS)
-- **Solar System**: Both identical (no coherent streams → no effect)
+### SPARC Galaxies (Star Motion in Galaxies)
+- **Baseline**: 17.4 km/s RMS
+- **Anisotropic**: 17.6 km/s RMS
+- **MOND**: 17.15 km/s RMS ⭐ **BEST**
+- **Winner**: MOND (slightly better than baseline, both better than anisotropic)
+
+### Clusters (Lensing + Dynamics)
+- **Baseline**: 0.987 (slightly under-predicts)
+- **Anisotropic**: 1.0 (perfect ratio) ⭐ **BEST**
+- **MOND**: ~0.33 (under-predicts by factor ~3, "cluster problem")
+- **Winner**: Anisotropic (perfect prediction, MOND fails badly)
+
+### Overall Summary
+- **SPARC**: MOND > Baseline > Anisotropic
+- **Clusters**: Anisotropic > Baseline >> MOND
+- **Mixed results**: Each model has strengths on different tests
 
 ## Key Tests for Anisotropy
 

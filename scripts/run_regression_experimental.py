@@ -2080,10 +2080,10 @@ def main():
         guided_results = _run_suite(f"GUIDED (κ={GUIDED_KAPPA:g}, C_default={GUIDED_C_DEFAULT:g})")
         guided_passed, guided_all = _summarize(guided_results, "GUIDED SUMMARY")
 
-        # 3) Side-by-side comparison (aligned by test name)
+        # 3) Side-by-side comparison (aligned by test name) with MOND
         print()
         print("=" * 80)
-        print("COMPARISON: baseline → guided")
+        print("COMPARISON: Baseline | Anisotropic | MOND")
         print("=" * 80)
         guided_map = {r.name: r for r in guided_results}
         for b in baseline_results:
@@ -2092,8 +2092,48 @@ def main():
                 continue
             b_stat = '✓' if b.passed else '✗'
             g_stat = '✓' if g.passed else '✗'
+            
+            # Extract MOND metric from test details if available
+            mond_metric = None
+            mond_label = ""
+            if 'mean_mond_rms' in b.details:
+                mond_metric = b.details['mean_mond_rms']
+                mond_label = f"MOND={mond_metric:.2f}"
+            elif 'benchmark_mond_ratio' in b.details:
+                mond_metric = b.details['benchmark_mond_ratio']
+                mond_label = f"MOND~{mond_metric:.2f}"
+            elif 'mond_status' in b.details:
+                mond_label = "MOND: varies"
+            elif 'mond_challenge' in b.details:
+                mond_label = "MOND: challenge"
+            else:
+                mond_label = "MOND: N/A"
+            
+            # Determine which is best (lower RMS or closer to 1.0 for ratios)
+            best = ""
+            if mond_metric is not None:
+                # For SPARC: lower RMS is better
+                if 'mean_mond_rms' in b.details:
+                    if b.metric < g.metric and b.metric < mond_metric:
+                        best = " [BEST: Baseline]"
+                    elif g.metric < b.metric and g.metric < mond_metric:
+                        best = " [BEST: Aniso]"
+                    elif mond_metric < b.metric and mond_metric < g.metric:
+                        best = " [BEST: MOND]"
+                # For clusters: closer to 1.0 is better
+                elif 'benchmark_mond_ratio' in b.details:
+                    b_dist = abs(b.metric - 1.0)
+                    g_dist = abs(g.metric - 1.0)
+                    m_dist = abs(mond_metric - 1.0)
+                    if b_dist < g_dist and b_dist < m_dist:
+                        best = " [BEST: Baseline]"
+                    elif g_dist < b_dist and g_dist < m_dist:
+                        best = " [BEST: Aniso]"
+                    elif m_dist < b_dist and m_dist < g_dist:
+                        best = " [BEST: MOND]"
+            
             print(
-                f"{b.name:24}  {b_stat} { _fmt_metric(b.metric):>8}  →  {g_stat} { _fmt_metric(g.metric):>8}"
+                f"{b.name:24}  {b_stat} {_fmt_metric(b.metric):>8}  |  {g_stat} {_fmt_metric(g.metric):>8}  |  {mond_label:20}{best}"
             )
 
         compare_report = {
