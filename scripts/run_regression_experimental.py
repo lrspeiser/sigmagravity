@@ -156,6 +156,20 @@ GUIDED_C_DEFAULT = 0.0      # Used when no local stream proxy is available (has 
 GUIDED_FACTOR_CAP = 1e3     # Safety cap to avoid numerical blow-ups
 
 # =============================================================================
+# GEOMETRY PATH-LENGTH (MAJOR EXPERIMENT) — galaxy-level L_gal from bulge fraction
+# =============================================================================
+# Root-cause idea: coherence strength scales with available correlated path length
+# of baryonic worldlines. Disks have thin vertical thickness (L ≈ L_0), but bulges
+# are 3D orbital families requiring bulge-size-scale path lengths.
+#
+# L_gal = (1 - f_b) * L_disk + f_b * L_bulge
+# where L_bulge = α * R_d (geometry scale)
+USE_GEO_L = False              # set in main() via --lgeom
+GEO_L_BULGE_MULT = 1.0         # L_bulge = GEO_L_BULGE_MULT * R_d  (kpc)
+GEO_L_MIN_KPC = L_0            # keep >= L0 to avoid "shorter-than-disk" unless explicitly relaxed
+GEO_L_MAX_KPC = 50.0           # safety cap; adjust as needed
+
+# =============================================================================
 # DYNAMICAL PATH-LENGTH (MAJOR EXPERIMENT) — LOCAL L_eff = v_coh / Omega
 # =============================================================================
 # Root-cause idea: coherence is a phase-ordering process that has only one "clock"
@@ -707,9 +721,27 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     V_bar_ms = V_bar * 1000
     g_bar = V_bar_ms**2 / R_m
     
-    # Baseline default: disks use A0. If --ldyn is on, we promote A -> A(r) via L_eff(r).
-    # This allows the amplitude to vary with radius based on local dynamical time.
-    A_base = A_0
+    # -------------------------------------------------------------------------
+    # Baseline default: disks use L=L0 → A=A0.
+    # New experiment: galaxy-level L_gal from bulge fraction (geometry channel).
+    # If --ldyn is on, we still allow radius-dependent L_eff(r) inside the loop,
+    # but we use L_gal as the minimum floor (instead of L0).
+    # -------------------------------------------------------------------------
+    L_gal = L_0
+    if USE_GEO_L:
+        fb = float(f_bulge) if (f_bulge is not None) else 0.0
+        fb = max(0.0, min(1.0, fb))
+
+        # Keep disks near-baseline unless you decide otherwise
+        L_disk = L_0
+
+        # Bulge geometry scale (kpc). Uses existing R_d input.
+        L_bulge = GEO_L_BULGE_MULT * max(float(R_d), 1e-6)
+
+        L_gal = (1.0 - fb) * L_disk + fb * L_bulge
+        L_gal = min(max(L_gal, GEO_L_MIN_KPC), GEO_L_MAX_KPC)
+
+    A_base = unified_amplitude(L_gal)
     
     # Optional external field for wave/interference mode
     # Can be scalar or per-radius array
@@ -2191,6 +2223,7 @@ def main():
     global USE_SIGMA_COMPONENTS, COHERENCE_MODEL, JJ_XI_MULT, JJ_SMOOTH_M_POINTS
     global USE_GUIDED_GRAVITY, GUIDED_KAPPA, GUIDED_C_DEFAULT
     global USE_DYN_L, DYN_L_VCOH_KMS
+    global USE_GEO_L, GEO_L_BULGE_MULT
     global USE_WAVE_INTERFERENCE, WAVE_MODE, WAVE_BETA
     
     quick = '--quick' in sys.argv
@@ -2288,6 +2321,8 @@ def main():
     if guided_flag:
         print(f"  Guided gravity: {'ON' if USE_GUIDED_GRAVITY else 'COMPARE'}")
         print(f"    κ = {GUIDED_KAPPA:g}, C_default = {GUIDED_C_DEFAULT:g}")
+    if USE_GEO_L:
+        print(f"  Geometry L mode: ON (L_bulge = {GEO_L_BULGE_MULT:g} × R_d)")
     if USE_DYN_L:
         print(f"  Dynamical L mode: ON (v_coh={DYN_L_VCOH_KMS:g} km/s)")
     print()
