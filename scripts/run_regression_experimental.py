@@ -36,6 +36,9 @@ USAGE:
     python scripts/run_regression_experimental.py --core    # Only core 8 tests
     python scripts/run_regression_experimental.py --sigma-components  # Use component-mixed σ(r) in C(r)
     python scripts/run_regression_experimental.py --coherence=jj  # Use JJ (current-current) coherence model
+    python scripts/run_regression_experimental.py --guided --guided-kappa 1.0  # Experimental guided-gravity variant
+    python scripts/run_regression_experimental.py --compare-guided --guided-kappa 1.0  # Baseline vs guided side-by-side
+    python scripts/run_regression_experimental.py --guided --guided-kappa 1.0 --guided-c-default 0.0  # Only use explicit coherence proxies
 
 Author: Leonard Speiser
 Last Updated: December 2025
@@ -99,6 +102,28 @@ JJ_EPS = 1e-30
 
 # Cluster amplitude
 A_CLUSTER = A_0 * (600 / L_0)**N_EXP  # ≈ 8.45
+
+# =============================================================================
+# GUIDED-GRAVITY (STREAM-SEEKING) EXTENSION — EXPERIMENTAL
+# =============================================================================
+#
+# Concept (toy model): coherent streams "guide" the gravitational response by
+# increasing the effective path-length in the amplitude law,
+#
+#   L_eff = L · (1 + κ · C_stream)
+#   A_eff = A(L_eff) = A(L) · (1 + κ · C_stream)^n
+#
+# where C_stream ∈ [0, 1] is a local proxy for stream coherence.
+# - In disk RC fits: we use the existing covariant C(v) (or W(r) if using W).
+# - In contexts without an explicit stream proxy (e.g., simple point-mass tests,
+#   lensing rays), we use GUIDED_C_DEFAULT.
+#
+# This is *not* standard GR; it is an experimental hook to test the "gravity
+# bends toward streams" idea against the baseline Σ-Gravity formulas.
+USE_GUIDED_GRAVITY = False
+GUIDED_KAPPA = 0.0          # κ = 0 reduces exactly to baseline
+GUIDED_C_DEFAULT = 1.0      # Used when no local stream proxy is available
+GUIDED_FACTOR_CAP = 1e3     # Safety cap to avoid numerical blow-ups
 
 # =============================================================================
 # OBSERVATIONAL BENCHMARKS (GOLD STANDARD)
@@ -251,6 +276,29 @@ def unified_amplitude(L: float) -> float:
 def unified_amplitude_legacy(D: float, L: float) -> float:
     """Legacy amplitude with D switch (for backwards compatibility)."""
     return A_0 * (1 - D + D * (L / L_0)**N_EXP)
+
+
+def guided_amplitude_multiplier(C_stream: Any, exponent: float = N_EXP) -> Any:
+    """Return the multiplicative factor (1 + κ·C_stream)^exponent.
+
+    This implements the toy "stream-seeking" extension via:
+        L_eff = L · (1 + κ·C_stream)
+        A_eff = A(L_eff) = A(L) · (1 + κ·C_stream)^n
+
+    Notes:
+      - C_stream is clipped into [0,1] for stability.
+      - A soft cap is applied to avoid numerical blow-ups during sweeps.
+      - With κ=0 or USE_GUIDED_GRAVITY=False, this returns 1.
+    """
+    if not USE_GUIDED_GRAVITY:
+        return 1.0
+    kappa = float(GUIDED_KAPPA)
+    if kappa == 0.0:
+        return 1.0
+    C = np.clip(np.asarray(C_stream, dtype=float), 0.0, 1.0)
+    fac = 1.0 + kappa * C
+    fac = np.clip(fac, 1.0 / GUIDED_FACTOR_CAP, GUIDED_FACTOR_CAP)
+    return np.power(fac, float(exponent))
 
 
 def h_function(g: np.ndarray) -> np.ndarray:
@@ -425,8 +473,8 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
     """
     g = np.maximum(np.asarray(g), 1e-15)
     
-    if A is None:
-        A = unified_amplitude(L)
+    # Baseline amplitude A(L)
+    A_base = unified_amplitude(L) if A is None else A
     
     h = h_function(g)
     
@@ -434,8 +482,17 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
         W = W_coherence(np.asarray(r), xi)
     else:
         W = 1.0
+
+    # Experimental: "stream-seeking" / guided amplitude. Use W(r) as a proxy
+    # for local stream coherence when available; otherwise fall back to a
+    # configurable default.
+    if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
+        C_stream = W if r is not None else GUIDED_C_DEFAULT
+        A_use = A_base * guided_amplitude_multiplier(C_stream)
+    else:
+        A_use = A_base
     
-    return 1 + A * W * h
+    return 1 + A_use * W * h
 
 
 def sigma_enhancement_C(g: np.ndarray, v_rot: np.ndarray, sigma: float = 20.0,
@@ -449,13 +506,18 @@ def sigma_enhancement_C(g: np.ndarray, v_rot: np.ndarray, sigma: float = 20.0,
     """
     g = np.maximum(np.asarray(g), 1e-15)
     
-    if A is None:
-        A = unified_amplitude(L)
+    # Baseline amplitude A(L)
+    A_base = unified_amplitude(L) if A is None else A
     
     h = h_function(g)
     C = C_coherence(v_rot, sigma)
+
+    if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
+        A_use = A_base * guided_amplitude_multiplier(C)
+    else:
+        A_use = A_base
     
-    return 1 + A * C * h
+    return 1 + A_use * C * h
 
 
 def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
@@ -485,7 +547,7 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     
     # For thin disk galaxies, use L = L₀ = 0.4 kpc → A = A₀
     # (The path length L₀ IS the typical disk scale height by definition)
-    A = A_0  # = unified_amplitude(L_0) = 1.173
+    A_base = A_0  # = unified_amplitude(L_0) = 1.173
     
     # Build sigma input once
     sigma_use = sigma_profile_kms if sigma_profile_kms is not None else float(sigma_kms)
@@ -511,11 +573,23 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
                 sigma_kms=sigma_use,
                 kernel=jj_kernel,
             )
-            Sigma = 1 + A * Q * h
+            # Experimental guided-gravity: allow the stream coherence Q to
+            # feed back into the amplitude via L_eff = L(1+κQ).
+            if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
+                A_use = A_base * guided_amplitude_multiplier(Q)
+            else:
+                A_use = A_base
+            Sigma = 1 + A_use * Q * h
         else:
             # Baseline: C = v^2/(v^2+σ^2)
             C = C_coherence(V, sigma_use)
-            Sigma = 1 + A * C * h
+            # Experimental guided-gravity: allow the stream coherence C to
+            # feed back into the amplitude via L_eff = L(1+κC).
+            if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
+                A_use = A_base * guided_amplitude_multiplier(C)
+            else:
+                A_use = A_base
+            Sigma = 1 + A_use * C * h
         
         V_new = V_bar * np.sqrt(Sigma)
         # Safety: handle NaN/inf in V_new
@@ -796,7 +870,12 @@ def test_clusters(clusters: List[Dict]) -> TestResult:
         h = h_function(np.array([g_bar]))[0]
         # For clusters, coherence is high (large correlated currents)
         q_cluster = 1.0 if COHERENCE_MODEL == "C" else 1.0  # JJ model: clusters have large correlation volume
-        Sigma = 1 + A_cluster * q_cluster * h
+        # Apply guided-gravity multiplier if enabled
+        if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
+            A_use = A_cluster * guided_amplitude_multiplier(q_cluster if COHERENCE_MODEL == "C" else GUIDED_C_DEFAULT)
+        else:
+            A_use = A_cluster
+        Sigma = 1 + A_use * q_cluster * h
         
         M_pred = M_bar * Sigma
         ratio = M_pred / M_lens
@@ -850,7 +929,13 @@ def test_cluster_holdout(clusters: List[Dict], n_splits: int = 10,
     
     def predict_with_n(M_bar, r_kpc, n):
         """Predict cluster mass with given n (L₀ fixed)."""
-        A = A_0 * (L_cluster / L0_fixed) ** n
+        A_base = A_0 * (L_cluster / L0_fixed) ** n
+        # Apply guided-gravity multiplier consistently with the definition:
+        # A_eff = A(L_eff) = A(L) · (1+κ·C_stream)^n
+        if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
+            A = A_base * guided_amplitude_multiplier(GUIDED_C_DEFAULT, exponent=n)
+        else:
+            A = A_base
         r_m = r_kpc * kpc_to_m
         g_N = G * M_bar * M_sun / r_m**2
         h = np.sqrt(g_dagger / g_N) * g_dagger / (g_dagger + g_N)
@@ -1600,7 +1685,30 @@ def test_bullet_cluster() -> TestResult:
 # MAIN
 # =============================================================================
 
+def _parse_cli_float(flag: str, default: float) -> float:
+    """Parse a float flag from sys.argv.
+
+    Supports:
+      - --flag=1.23
+      - --flag 1.23
+    """
+    for i, arg in enumerate(sys.argv):
+        if arg.startswith(flag + "="):
+            try:
+                return float(arg.split("=", 1)[1])
+            except Exception:
+                return default
+        if arg == flag and i + 1 < len(sys.argv):
+            try:
+                return float(sys.argv[i + 1])
+            except Exception:
+                return default
+    return default
+
 def main():
+    global USE_SIGMA_COMPONENTS, COHERENCE_MODEL, JJ_XI_MULT, JJ_SMOOTH_M_POINTS
+    global USE_GUIDED_GRAVITY, GUIDED_KAPPA, GUIDED_C_DEFAULT
+    
     quick = '--quick' in sys.argv
     core_only = '--core' in sys.argv
     sigma_components = '--sigma-components' in sys.argv
@@ -1618,7 +1726,6 @@ def main():
         elif a.startswith('--jj-smooth='):
             jj_smooth_points = int(a.split('=', 1)[1].strip())
     
-    global USE_SIGMA_COMPONENTS, COHERENCE_MODEL, JJ_XI_MULT, JJ_SMOOTH_M_POINTS
     USE_SIGMA_COMPONENTS = bool(sigma_components)
     
     if coherence_arg in ('jj', 'current', 'currents'):
@@ -1630,13 +1737,28 @@ def main():
     else:
         COHERENCE_MODEL = "C"
     
+    # NEW: guided-gravity selector
+    compare_guided = '--compare-guided' in sys.argv
+    guided_flag = ('--guided' in sys.argv) or compare_guided
+    guided_kappa = _parse_cli_float('--guided-kappa', GUIDED_KAPPA)
+    guided_c_default = _parse_cli_float('--guided-c-default', GUIDED_C_DEFAULT)
+    
+    GUIDED_KAPPA = float(guided_kappa)
+    GUIDED_C_DEFAULT = float(guided_c_default)
+    # In compare mode we toggle USE_GUIDED_GRAVITY per run below.
+    USE_GUIDED_GRAVITY = bool(guided_flag) and not bool(compare_guided)
+    
     data_dir = Path(__file__).parent.parent / "data"
     
     print("=" * 80)
-    print("Σ-GRAVITY EXPERIMENTAL REGRESSION TEST (JJ COHERENCE)")
+    print("Σ-GRAVITY EXPERIMENTAL REGRESSION TEST")
     print("=" * 80)
     print(f"Timestamp: {datetime.now().isoformat()}")
     print(f"Mode: {'Core only' if core_only else 'Quick' if quick else 'Full'}")
+    if compare_guided:
+        print(f"Model: COMPARE baseline vs guided (κ={GUIDED_KAPPA:g}, C_default={GUIDED_C_DEFAULT:g})")
+    else:
+        print(f"Model: {'GUIDED' if USE_GUIDED_GRAVITY else 'BASELINE'}")
     print(f"Coherence Model: {COHERENCE_MODEL}")
     print()
     print("UNIFIED FORMULA PARAMETERS:")
@@ -1651,6 +1773,9 @@ def main():
         print(f"    σ_gas/disk/bulge = {SIGMA_GAS_KMS:.1f}/{SIGMA_DISK_KMS:.1f}/{SIGMA_BULGE_KMS:.1f} km/s")
     if COHERENCE_MODEL == "JJ":
         print(f"  JJ coherence: ξ_mult={JJ_XI_MULT}, smooth_points={JJ_SMOOTH_M_POINTS}")
+    if guided_flag:
+        print(f"  Guided gravity: {'ON' if USE_GUIDED_GRAVITY else 'COMPARE'}")
+        print(f"    κ = {GUIDED_KAPPA:g}, C_default = {GUIDED_C_DEFAULT:g}")
     print()
     
     # Load data
@@ -1665,12 +1790,7 @@ def main():
     print(f"  Gaia/MW: {len(gaia_df) if gaia_df is not None else 'Skipped'}")
     print()
     
-    # Run tests
-    results = []
-    
-    print("Running tests...")
-    print("-" * 80)
-    
+    # Define tests
     # Original tests (1-8) - now includes holdout validation
     tests_core = [
         ("SPARC", lambda: test_sparc(galaxies)),
@@ -1698,72 +1818,185 @@ def main():
     ]
     
     all_tests = tests_core if core_only else tests_core + tests_extended
-    
-    for name, test_func in all_tests:
-        result = test_func()
-        results.append(result)
-        status = '✓' if result.passed else '✗'
-        print(f"[{status}] {result.name}: {result.message}")
-    
-    print("-" * 80)
-    
-    # Summary
-    passed = sum(1 for r in results if r.passed)
-    print()
-    print("=" * 80)
-    print(f"SUMMARY: {passed}/{len(results)} tests passed")
-    print("=" * 80)
-    
-    if passed == len(results):
-        print("✓ ALL TESTS PASSED")
-    else:
-        print("✗ SOME TESTS FAILED")
-        for r in results:
-            if not r.passed:
-                print(f"  - {r.name}: {r.message}")
-    
-    # Save report
+
+    def _fmt_metric(x: Any) -> str:
+        try:
+            xf = float(x)
+            if not np.isfinite(xf):
+                return str(xf)
+            # Compact formatting that still preserves order-of-magnitude changes.
+            return f"{xf:.3g}"
+        except Exception:
+            return str(x)
+
+    def _run_suite(label: str) -> List[TestResult]:
+        print("-" * 80)
+        print(f"Running tests: {label}")
+        print("-" * 80)
+        results_local: List[TestResult] = []
+        for _, test_func in all_tests:
+            result = test_func()
+            results_local.append(result)
+            status = '✓' if result.passed else '✗'
+            print(f"[{status}] {result.name}: {result.message}")
+        print("-" * 80)
+        return results_local
+
+    def _summarize(results_local: List[TestResult], label: str) -> Tuple[int, bool]:
+        passed_local = sum(1 for r in results_local if r.passed)
+        print()
+        print("=" * 80)
+        print(f"{label}: {passed_local}/{len(results_local)} tests passed")
+        print("=" * 80)
+        if passed_local == len(results_local):
+            print("✓ ALL TESTS PASSED")
+        else:
+            print("✗ SOME TESTS FAILED")
+            for r in results_local:
+                if not r.passed:
+                    print(f"  - {r.name}: {r.message}")
+        return passed_local, passed_local == len(results_local)
+
+    def _build_report(results_local: List[TestResult], *, model: str, guided_enabled: bool, guided_kappa_used: float) -> Dict[str, Any]:
+        passed_local = sum(1 for r in results_local if r.passed)
+        return {
+            'model': model,
+            'coherence_model': COHERENCE_MODEL,
+            'guided_gravity': {
+                'enabled': bool(guided_enabled),
+                'kappa': float(guided_kappa_used),
+                'c_default': float(GUIDED_C_DEFAULT),
+            },
+            'parameters': {
+                'A_0': A_0,
+                'L_0': L_0,
+                'n_exp': N_EXP,
+                'xi_scale': XI_SCALE,
+                'ml_disk': ML_DISK,
+                'ml_bulge': ML_BULGE,
+                'g_dagger': g_dagger,
+                'A_cluster': A_CLUSTER,
+                'use_sigma_components': USE_SIGMA_COMPONENTS,
+                'sigma_gas_kms': SIGMA_GAS_KMS,
+                'sigma_disk_kms': SIGMA_DISK_KMS,
+                'sigma_bulge_kms': SIGMA_BULGE_KMS,
+                'coherence_model': COHERENCE_MODEL,
+                'jj_xi_mult': JJ_XI_MULT if COHERENCE_MODEL == "JJ" else None,
+                'jj_smooth_points': JJ_SMOOTH_M_POINTS if COHERENCE_MODEL == "JJ" else None,
+            },
+            'results': [asdict(r) for r in results_local],
+            'summary': {
+                'total_tests': len(results_local),
+                'passed': passed_local,
+                'failed': len(results_local) - passed_local,
+            },
+            'all_passed': passed_local == len(results_local),
+        }
+
+    # Save reports
     output_dir = Path(__file__).parent / "regression_results"
     output_dir.mkdir(exist_ok=True)
-    
-    report = {
-        'timestamp': datetime.now().isoformat(),
-        'formula': 'sigma_gravity_unified',
-        'coherence_model': COHERENCE_MODEL,
-        'mode': 'core' if core_only else 'quick' if quick else 'full',
-        'parameters': {
-            'A_0': A_0,
-            'L_0': L_0,
-            'n_exp': N_EXP,
-            'xi_scale': XI_SCALE,
-            'ml_disk': ML_DISK,
-            'ml_bulge': ML_BULGE,
-            'g_dagger': g_dagger,
-            'A_cluster': A_CLUSTER,
-            'use_sigma_components': USE_SIGMA_COMPONENTS,
-            'sigma_gas_kms': SIGMA_GAS_KMS,
-            'sigma_disk_kms': SIGMA_DISK_KMS,
-            'sigma_bulge_kms': SIGMA_BULGE_KMS,
+
+    if compare_guided:
+        # 1) Baseline run
+        USE_GUIDED_GRAVITY = False
+        baseline_results = _run_suite("BASELINE (κ=0)")
+        baseline_passed, baseline_all = _summarize(baseline_results, "BASELINE SUMMARY")
+
+        # 2) Guided run
+        USE_GUIDED_GRAVITY = True
+        guided_results = _run_suite(f"GUIDED (κ={GUIDED_KAPPA:g}, C_default={GUIDED_C_DEFAULT:g})")
+        guided_passed, guided_all = _summarize(guided_results, "GUIDED SUMMARY")
+
+        # 3) Side-by-side comparison (aligned by test name)
+        print()
+        print("=" * 80)
+        print("COMPARISON: baseline → guided")
+        print("=" * 80)
+        guided_map = {r.name: r for r in guided_results}
+        for b in baseline_results:
+            g = guided_map.get(b.name)
+            if g is None:
+                continue
+            b_stat = '✓' if b.passed else '✗'
+            g_stat = '✓' if g.passed else '✗'
+            print(
+                f"{b.name:24}  {b_stat} { _fmt_metric(b.metric):>8}  →  {g_stat} { _fmt_metric(g.metric):>8}"
+            )
+
+        compare_report = {
+            'timestamp': datetime.now().isoformat(),
+            'formula': 'sigma_gravity_unified_compare_guided',
             'coherence_model': COHERENCE_MODEL,
-            'jj_xi_mult': JJ_XI_MULT if COHERENCE_MODEL == "JJ" else None,
-            'jj_smooth_points': JJ_SMOOTH_M_POINTS if COHERENCE_MODEL == "JJ" else None,
-        },
-        'results': [asdict(r) for r in results],
-        'summary': {
-            'total_tests': len(results),
-            'passed': passed,
-            'failed': len(results) - passed,
-        },
-        'all_passed': passed == len(results),
-    }
-    
-    report_filename = f"experimental_report_{COHERENCE_MODEL}.json"
-    with open(output_dir / report_filename, 'w') as f:
-        json.dump(report, f, indent=2, default=float)
-    
-    print(f"\nReport saved to: {output_dir / report_filename}")
-    
-    sys.exit(0 if passed == len(results) else 1)
+            'mode': 'core' if core_only else 'quick' if quick else 'full',
+            'guided_config': {
+                'kappa': float(GUIDED_KAPPA),
+                'c_default': float(GUIDED_C_DEFAULT),
+            },
+            'baseline': _build_report(baseline_results, model='baseline', guided_enabled=False, guided_kappa_used=0.0),
+            'guided': _build_report(guided_results, model='guided', guided_enabled=True, guided_kappa_used=float(GUIDED_KAPPA)),
+            'comparison_summary': {
+                'baseline_passed': int(baseline_passed),
+                'guided_passed': int(guided_passed),
+            },
+        }
+
+        out_path = output_dir / f"experimental_report_compare_{COHERENCE_MODEL}.json"
+        with open(out_path, 'w') as f:
+            json.dump(compare_report, f, indent=2, default=float)
+        print(f"\nReport saved to: {out_path}")
+
+        # Preserve original CI behavior: exit code follows BASELINE.
+        sys.exit(0 if baseline_all else 1)
+
+    else:
+        label = f"GUIDED (κ={GUIDED_KAPPA:g}, C_default={GUIDED_C_DEFAULT:g})" if USE_GUIDED_GRAVITY else "BASELINE"
+        results = _run_suite(label)
+        passed, all_passed = _summarize(results, "SUMMARY")
+
+        report = {
+            'timestamp': datetime.now().isoformat(),
+            'formula': 'sigma_gravity_unified_guided' if USE_GUIDED_GRAVITY else 'sigma_gravity_unified',
+            'coherence_model': COHERENCE_MODEL,
+            'mode': 'core' if core_only else 'quick' if quick else 'full',
+            'guided_config': {
+                'enabled': bool(USE_GUIDED_GRAVITY),
+                'kappa': float(GUIDED_KAPPA) if USE_GUIDED_GRAVITY else 0.0,
+                'c_default': float(GUIDED_C_DEFAULT),
+            },
+            'parameters': {
+                'A_0': A_0,
+                'L_0': L_0,
+                'n_exp': N_EXP,
+                'xi_scale': XI_SCALE,
+                'ml_disk': ML_DISK,
+                'ml_bulge': ML_BULGE,
+                'g_dagger': g_dagger,
+                'A_cluster': A_CLUSTER,
+                'use_sigma_components': USE_SIGMA_COMPONENTS,
+                'sigma_gas_kms': SIGMA_GAS_KMS,
+                'sigma_disk_kms': SIGMA_DISK_KMS,
+                'sigma_bulge_kms': SIGMA_BULGE_KMS,
+                'coherence_model': COHERENCE_MODEL,
+                'jj_xi_mult': JJ_XI_MULT if COHERENCE_MODEL == "JJ" else None,
+                'jj_smooth_points': JJ_SMOOTH_M_POINTS if COHERENCE_MODEL == "JJ" else None,
+            },
+            'results': [asdict(r) for r in results],
+            'summary': {
+                'total_tests': len(results),
+                'passed': passed,
+                'failed': len(results) - passed,
+            },
+            'all_passed': bool(all_passed),
+        }
+
+        report_filename = f"experimental_report_{COHERENCE_MODEL}{'_guided' if USE_GUIDED_GRAVITY else ''}.json"
+        out_path = output_dir / report_filename
+        with open(out_path, 'w') as f:
+            json.dump(report, f, indent=2, default=float)
+        print(f"\nReport saved to: {out_path}")
+
+        sys.exit(0 if all_passed else 1)
 
 
 if __name__ == "__main__":
