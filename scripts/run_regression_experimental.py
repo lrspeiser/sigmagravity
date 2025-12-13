@@ -2267,6 +2267,9 @@ def main():
     print(f"  g† = {g_dagger:.3e} m/s²")
     print(f"  A_cluster = {A_CLUSTER:.2f}")
     print(f"  σ components mode: {'ON' if USE_SIGMA_COMPONENTS else 'OFF'}")
+    print(f"  wave/interference mode: {'ON' if USE_WAVE_INTERFERENCE else 'OFF'}")
+    if USE_WAVE_INTERFERENCE:
+        print(f"    wave mode = {WAVE_MODE}, beta = {WAVE_BETA}")
     if USE_SIGMA_COMPONENTS:
         print(f"    σ_gas/disk/bulge = {SIGMA_GAS_KMS:.1f}/{SIGMA_DISK_KMS:.1f}/{SIGMA_BULGE_KMS:.1f} km/s")
     if COHERENCE_MODEL == "JJ":
