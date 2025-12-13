@@ -107,7 +107,7 @@ SIGMA_BULGE_KMS = 120.0
 # =============================================================================
 # COHERENCE MODEL SELECTION (A/B)
 # =============================================================================
-COHERENCE_MODEL = "C"   # "C" (baseline v^2/(v^2+σ^2)) or "JJ" (current-current coherence)
+COHERENCE_MODEL = "C"   # "C" (baseline v^2/(v^2+σ^2)), "JJ" (current-current), or "SRC" (source-current split)
 
 # JJ model hyperparameters (global; no per-galaxy fits)
 # Tuned values: JJ_XI_MULT=0.4 gives best SPARC RMS (22.83 km/s vs 22.94 at 1.0)
@@ -510,6 +510,19 @@ def Q_JJ_coherence(
     return np.clip(Q, 0.0, 1.0)
 
 
+def disk_gas_weights(V_gas_kms: np.ndarray, V_disk_scaled_kms: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Compute disk and gas weights for source-current coherence.
+    
+    Returns:
+        (w_gas, w_disk) where w_gas + w_disk = 1
+    """
+    vg2 = np.square(np.nan_to_num(np.asarray(V_gas_kms, dtype=float), nan=0.0))
+    vd2 = np.square(np.nan_to_num(np.asarray(V_disk_scaled_kms, dtype=float), nan=0.0))
+    denom = np.maximum(vg2 + vd2, 1e-12)
+    return vg2 / denom, vd2 / denom
+
+
 def sigma_profile_from_components_kms(
     V_gas_kms: np.ndarray,
     V_disk_scaled_kms: np.ndarray,
@@ -602,7 +615,10 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
                      h_disk: float = None, f_bulge: float = 0.0,
                      use_C_primary: bool = True, sigma_kms: float = 20.0,
                      sigma_profile_kms: Optional[np.ndarray] = None,
-                     coherence_model: Optional[str] = None) -> np.ndarray:
+                     coherence_model: Optional[str] = None,
+                     V_gas_kms: Optional[np.ndarray] = None,
+                     V_disk_scaled_kms: Optional[np.ndarray] = None,
+                     V_bulge_scaled_kms: Optional[np.ndarray] = None) -> np.ndarray:
     """
     Predict rotation velocity using Σ-Gravity.
     
@@ -614,7 +630,7 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     sigma_kms : float
         Velocity dispersion for C(r) formulation (default 20 km/s).
     coherence_model : str, optional
-        If None, uses global COHERENCE_MODEL. "C" for baseline, "JJ" for current-current.
+        If None, uses global COHERENCE_MODEL. "C" for baseline, "JJ" for current-current, "SRC" for source-current split.
     """
     if coherence_model is None:
         coherence_model = COHERENCE_MODEL
@@ -629,6 +645,25 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     
     # Build sigma input once
     sigma_use = sigma_profile_kms if sigma_profile_kms is not None else float(sigma_kms)
+    
+    # SRC precompute: split bulge vs coherent (disk+gas) contributions
+    src_enabled = (coherence_model.upper() == "SRC")
+    if src_enabled:
+        if V_bulge_scaled_kms is None:
+            # fallback to baseline if components missing
+            src_enabled = False
+        else:
+            V_bar_sq = np.square(np.asarray(V_bar, dtype=float))
+            V_bulge_sq = np.square(np.asarray(V_bulge_scaled_kms, dtype=float))
+            # Coherent squared contribution = everything that's not bulge (clamped)
+            V_coh_sq = np.maximum(V_bar_sq - V_bulge_sq, 0.0)
+
+            if V_gas_kms is None or V_disk_scaled_kms is None:
+                # If we can't split gas vs disk, treat all coherent part as "disk-like"
+                wgas = np.zeros_like(V_bar_sq)
+                wdisk = np.ones_like(V_bar_sq)
+            else:
+                wgas, wdisk = disk_gas_weights(V_gas_kms, V_disk_scaled_kms)
     
     # Precompute kernel for JJ once (performance + stable iteration)
     jj_kernel = None
@@ -664,6 +699,23 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
             else:
                 A_use = A_base
             Sigma = 1 + A_use * Q * h
+            V_new = V_bar * np.sqrt(Sigma)
+
+        elif src_enabled:
+            # Source-current coherence: only disk+gas get Σ, bulge stays Newtonian
+            C_gas = C_coherence(V, SIGMA_GAS_KMS)
+            C_disk = C_coherence(V, SIGMA_DISK_KMS)
+            C_src = wgas * C_gas + wdisk * C_disk
+
+            if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
+                A_use = A_base * guided_amplitude_multiplier(C_src)
+            else:
+                A_use = A_base
+
+            Sigma_coh = 1 + A_use * C_src * h
+            V_new_sq = V_bulge_sq + V_coh_sq * Sigma_coh
+            V_new = np.sqrt(np.maximum(V_new_sq, 1e-12))
+
         else:
             # Baseline: C = v^2/(v^2+σ^2)
             C = C_coherence(V, sigma_use)
@@ -674,8 +726,7 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
             else:
                 A_use = A_base
             Sigma = 1 + A_use * C * h
-        
-        V_new = V_bar * np.sqrt(Sigma)
+            V_new = V_bar * np.sqrt(Sigma)
         # Safety: handle NaN/inf in V_new
         V_new = np.nan_to_num(V_new, nan=V_bar, posinf=V_bar*10, neginf=V_bar)
         V_new = np.maximum(V_new, 1e-6)  # Ensure positive
@@ -864,6 +915,10 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
     all_log_ratios = []
     wins = 0
     
+    # Diagnostic: track bulge-dominated vs disk-dominated galaxies
+    bulge_rms_list = []
+    disk_rms_list = []
+    
     for gal in galaxies:
         R = gal['R']
         V_obs = gal['V_obs']
@@ -883,7 +938,13 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
             except Exception:
                 sigma_profile = None
         
-        V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge, sigma_profile_kms=sigma_profile)
+        V_pred = predict_velocity(
+            R, V_bar, R_d, h_disk, f_bulge,
+            sigma_profile_kms=sigma_profile,
+            V_gas_kms=gal.get('V_gas', None),
+            V_disk_scaled_kms=gal.get('V_disk_scaled', None),
+            V_bulge_scaled_kms=gal.get('V_bulge_scaled', None),
+        )
         V_mond = predict_mond(R, V_bar)
         
         rms_sigma = np.sqrt(((V_pred - V_obs)**2).mean())
@@ -891,6 +952,12 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
         
         rms_list.append(rms_sigma)
         mond_rms_list.append(rms_mond)
+        
+        # Diagnostic: bin by bulge fraction
+        if f_bulge > 0.3:
+            bulge_rms_list.append(rms_sigma)
+        else:
+            disk_rms_list.append(rms_sigma)
         
         # RAR scatter calculation
         valid = (V_obs > 0) & (V_pred > 0)
@@ -906,23 +973,41 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
     win_rate = wins / len(galaxies)
     rar_scatter = np.std(all_log_ratios) if all_log_ratios else 0.0
     
+    # Diagnostic: mean RMS by bulge fraction
+    bulge_mean_rms = np.mean(bulge_rms_list) if bulge_rms_list else None
+    disk_mean_rms = np.mean(disk_rms_list) if disk_rms_list else None
+    
     passed = mean_rms < 20.0
+    
+    details = {
+        'n_galaxies': len(galaxies),
+        'mean_rms': mean_rms,
+        'mean_mond_rms': mean_mond_rms,
+        'win_rate': win_rate,
+        'rar_scatter_dex': rar_scatter,
+        'benchmark_mond_rms': OBS_BENCHMARKS['sparc']['mond_rms_kms'],
+        'benchmark_lcdm_rms': OBS_BENCHMARKS['sparc']['lcdm_rms_kms'],
+        'benchmark_rar_scatter': OBS_BENCHMARKS['sparc']['rar_scatter_dex'],
+    }
+    
+    # Add diagnostic info if available
+    if bulge_mean_rms is not None:
+        details['bulge_mean_rms'] = bulge_mean_rms
+        details['n_bulge_galaxies'] = len(bulge_rms_list)
+    if disk_mean_rms is not None:
+        details['disk_mean_rms'] = disk_mean_rms
+        details['n_disk_galaxies'] = len(disk_rms_list)
+    
+    msg = f"RMS={mean_rms:.2f} km/s (MOND={mean_mond_rms:.2f}, ΛCDM~15), Scatter={rar_scatter:.3f} dex, Win={win_rate*100:.1f}%"
+    if bulge_mean_rms is not None and disk_mean_rms is not None:
+        msg += f" | Bulge: {bulge_mean_rms:.2f}, Disk: {disk_mean_rms:.2f}"
     
     return TestResult(
         name="SPARC Galaxies",
         passed=passed,
         metric=mean_rms,
-        details={
-            'n_galaxies': len(galaxies),
-            'mean_rms': mean_rms,
-            'mean_mond_rms': mean_mond_rms,
-            'win_rate': win_rate,
-            'rar_scatter_dex': rar_scatter,
-            'benchmark_mond_rms': OBS_BENCHMARKS['sparc']['mond_rms_kms'],
-            'benchmark_lcdm_rms': OBS_BENCHMARKS['sparc']['lcdm_rms_kms'],
-            'benchmark_rar_scatter': OBS_BENCHMARKS['sparc']['rar_scatter_dex'],
-        },
-        message=f"RMS={mean_rms:.2f} km/s (MOND={mean_mond_rms:.2f}, ΛCDM~15), Scatter={rar_scatter:.3f} dex, Win={win_rate*100:.1f}%"
+        details=details,
+        message=msg
     )
 
 
@@ -2035,6 +2120,8 @@ def main():
             JJ_XI_MULT = jj_xi_mult
         if jj_smooth_points is not None:
             JJ_SMOOTH_M_POINTS = jj_smooth_points
+    elif coherence_arg in ('src', 'source', 'score', 'split'):
+        COHERENCE_MODEL = "SRC"
     else:
         COHERENCE_MODEL = "C"
     
