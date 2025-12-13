@@ -37,7 +37,7 @@ USAGE:
     python scripts/run_regression_experimental.py --sigma-components  # Use component-mixed σ(r) in C(r)
     python scripts/run_regression_experimental.py --coherence=jj  # Use JJ (current-current) coherence model
     python scripts/run_regression_experimental.py --guided --guided-kappa 1.0  # Experimental guided-gravity variant
-    python scripts/run_regression_experimental.py --compare-guided --guided-kappa 1.0  # Baseline vs guided side-by-side
+    python scripts/run_regression_experimental.py --compare-guided --guided-kappa 0.1  # A/B TEST: Compare baseline (κ=0) vs anisotropic (κ>0) predictions against all 17 observational tests
     python scripts/run_regression_experimental.py --guided --guided-kappa 1.0 --guided-c-default 0.0  # Only use explicit coherence proxies
 
 Author: Leonard Speiser
@@ -1876,6 +1876,10 @@ def main():
     quick = '--quick' in sys.argv
     core_only = '--core' in sys.argv
     sigma_components = '--sigma-components' in sys.argv
+    
+    # NEW: A/B comparison mode for anisotropic gravity
+    compare_anisotropic = '--compare-anisotropic' in sys.argv
+    aniso_kappa = _parse_cli_float('--aniso-kappa', 6.0)
     
     # NEW: coherence selector
     coherence_arg = None
