@@ -33,9 +33,16 @@ Tested **14 values** of `v_coh` from 5 to 100 km/s:
 
 ## Key Findings
 
-1. **All v_coh values make SPARC worse** - Best is v_coh=5 km/s with RMS=19.09 km/s (vs baseline 17.42 km/s)
-2. **Clusters unaffected** - All values give same cluster ratio (0.987), suggesting dynamic L doesn't affect cluster predictions
-3. **No improvement found** - The dynamical path-length approach, as implemented, does not improve SPARC predictions
+1. **Very small v_coh recovers baseline** - v_coh ≤ 0.5 km/s gives RMS=17.42 km/s (identical to baseline) because minimum constraint `L_eff ≥ L_0` dominates
+2. **Larger v_coh makes SPARC worse** - Best is v_coh=5 km/s with RMS=18.87 km/s (vs baseline 17.42 km/s, +8.3% worse)
+3. **Clusters unaffected** - All values give same cluster ratio (0.987), suggesting dynamic L doesn't affect cluster predictions
+4. **No improvement found** - The dynamical path-length approach, as currently implemented, does not improve SPARC predictions
+
+## Minimum Constraint Effect
+
+With `L_eff ≥ L_0` constraint:
+- **Very small v_coh** (≤0.5 km/s): `L_eff = L_0` everywhere → `A = A_0` → baseline behavior
+- **Larger v_coh** (≥5 km/s): `L_eff > L_0` in outer disk → `A > A_0` → stronger enhancement, but worsens SPARC
 
 ## Possible Issues
 

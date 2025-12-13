@@ -347,6 +347,12 @@ def dyn_path_length_kpc(R_kpc: np.ndarray,
 
     # L_eff = v_coh * r / V_pred
     L = float(vcoh_kms) * (R / V)
+    
+    # Apply minimum constraint: L_eff should not be smaller than L_0
+    # This prevents the dynamical path-length from becoming unphysically small
+    # in regions with high angular velocity (inner disk, Solar System)
+    L = np.maximum(L, L_0)
+    
     return np.clip(L, DYN_L_MIN_KPC, DYN_L_MAX_KPC)
 
 
