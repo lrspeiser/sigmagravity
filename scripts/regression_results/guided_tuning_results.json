@@ -1,0 +1,352 @@
+{
+  "best_params": {
+    "kappa": 0.0,
+    "c_default": 0.0,
+    "sparc_rms": 17.415478722054278
+  },
+  "best_cluster_params": {
+    "kappa": 0.1,
+    "c_default": 0.0,
+    "cluster_ratio": 1.004256085204009
+  },
+  "all_results": [
+    {
+      "kappa": 0.0,
+      "c_default": 0.0,
+      "sparc_rms": 17.415478722054278,
+      "sparc_win_rate": 0.4269005847953216,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "kappa": 0.0,
+      "c_default": 0.5,
+      "sparc_rms": 17.415478722054278,
+      "sparc_win_rate": 0.4269005847953216,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "kappa": 0.0,
+      "c_default": 1.0,
+      "sparc_rms": 17.415478722054278,
+      "sparc_win_rate": 0.4269005847953216,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "kappa": 0.1,
+      "c_default": 0.0,
+      "sparc_rms": 17.628087526018597,
+      "sparc_win_rate": 0.4152046783625731,
+      "cluster_ratio": 1.004256085204009,
+      "success": true
+    },
+    {
+      "kappa": 0.1,
+      "c_default": 0.5,
+      "sparc_rms": 17.628087526018597,
+      "sparc_win_rate": 0.4152046783625731,
+      "cluster_ratio": 1.004256085204009,
+      "success": true
+    },
+    {
+      "kappa": 0.1,
+      "c_default": 1.0,
+      "sparc_rms": 17.628087526018597,
+      "sparc_win_rate": 0.4152046783625731,
+      "cluster_ratio": 1.004256085204009,
+      "success": true
+    },
+    {
+      "kappa": 0.2,
+      "c_default": 0.0,
+      "sparc_rms": 17.855843477578265,
+      "sparc_win_rate": 0.42105263157894735,
+      "cluster_ratio": 1.020250158543736,
+      "success": true
+    },
+    {
+      "kappa": 0.2,
+      "c_default": 0.5,
+      "sparc_rms": 17.855843477578265,
+      "sparc_win_rate": 0.42105263157894735,
+      "cluster_ratio": 1.020250158543736,
+      "success": true
+    },
+    {
+      "kappa": 0.2,
+      "c_default": 1.0,
+      "sparc_rms": 17.855843477578265,
+      "sparc_win_rate": 0.42105263157894735,
+      "cluster_ratio": 1.020250158543736,
+      "success": true
+    },
+    {
+      "kappa": 0.3,
+      "c_default": 0.0,
+      "sparc_rms": 18.09455706659876,
+      "sparc_win_rate": 0.4093567251461988,
+      "cluster_ratio": 1.035298811171145,
+      "success": true
+    },
+    {
+      "kappa": 0.3,
+      "c_default": 0.5,
+      "sparc_rms": 18.09455706659876,
+      "sparc_win_rate": 0.4093567251461988,
+      "cluster_ratio": 1.035298811171145,
+      "success": true
+    },
+    {
+      "kappa": 0.3,
+      "c_default": 1.0,
+      "sparc_rms": 18.09455706659876,
+      "sparc_win_rate": 0.4093567251461988,
+      "cluster_ratio": 1.035298811171145,
+      "success": true
+    },
+    {
+      "kappa": 0.5,
+      "c_default": 0.0,
+      "sparc_rms": 18.5927341430369,
+      "sparc_win_rate": 0.36257309941520466,
+      "cluster_ratio": 1.0630268691531428,
+      "success": true
+    },
+    {
+      "kappa": 0.5,
+      "c_default": 0.5,
+      "sparc_rms": 18.5927341430369,
+      "sparc_win_rate": 0.36257309941520466,
+      "cluster_ratio": 1.0630268691531428,
+      "success": true
+    },
+    {
+      "kappa": 0.5,
+      "c_default": 1.0,
+      "sparc_rms": 18.5927341430369,
+      "sparc_win_rate": 0.36257309941520466,
+      "cluster_ratio": 1.0630268691531428,
+      "success": true
+    },
+    {
+      "kappa": 0.7,
+      "c_default": 0.0,
+      "sparc_rms": 19.104003944313668,
+      "sparc_win_rate": 0.3391812865497076,
+      "cluster_ratio": 1.0881732578079188,
+      "success": true
+    },
+    {
+      "kappa": 0.7,
+      "c_default": 0.5,
+      "sparc_rms": 19.104003944313668,
+      "sparc_win_rate": 0.3391812865497076,
+      "cluster_ratio": 1.0881732578079188,
+      "success": true
+    },
+    {
+      "kappa": 0.7,
+      "c_default": 1.0,
+      "sparc_rms": 19.104003944313668,
+      "sparc_win_rate": 0.3391812865497076,
+      "cluster_ratio": 1.0881732578079188,
+      "success": true
+    },
+    {
+      "kappa": 1.0,
+      "c_default": 0.0,
+      "sparc_rms": 19.87179792805647,
+      "sparc_win_rate": 0.3333333333333333,
+      "cluster_ratio": 1.1220216133488918,
+      "success": true
+    },
+    {
+      "kappa": 1.0,
+      "c_default": 0.5,
+      "sparc_rms": 19.87179792805647,
+      "sparc_win_rate": 0.3333333333333333,
+      "cluster_ratio": 1.1220216133488918,
+      "success": true
+    },
+    {
+      "kappa": 1.0,
+      "c_default": 1.0,
+      "sparc_rms": 19.87179792805647,
+      "sparc_win_rate": 0.3333333333333333,
+      "cluster_ratio": 1.1220216133488918,
+      "success": true
+    },
+    {
+      "kappa": 1.5,
+      "c_default": 0.0,
+      "sparc_rms": 21.116089811180867,
+      "sparc_win_rate": 0.26900584795321636,
+      "cluster_ratio": 1.168108594691848,
+      "success": true
+    },
+    {
+      "kappa": 1.5,
+      "c_default": 0.5,
+      "sparc_rms": 21.116089811180867,
+      "sparc_win_rate": 0.26900584795321636,
+      "cluster_ratio": 1.168108594691848,
+      "success": true
+    },
+    {
+      "kappa": 1.5,
+      "c_default": 1.0,
+      "sparc_rms": 21.116089811180867,
+      "sparc_win_rate": 0.26900584795321636,
+      "cluster_ratio": 1.168108594691848,
+      "success": true
+    },
+    {
+      "kappa": 2.0,
+      "c_default": 0.0,
+      "sparc_rms": 22.296521880847287,
+      "sparc_win_rate": 0.2573099415204678,
+      "cluster_ratio": 1.2103208916320214,
+      "success": true
+    },
+    {
+      "kappa": 2.0,
+      "c_default": 0.5,
+      "sparc_rms": 22.296521880847287,
+      "sparc_win_rate": 0.2573099415204678,
+      "cluster_ratio": 1.2103208916320214,
+      "success": true
+    },
+    {
+      "kappa": 2.0,
+      "c_default": 1.0,
+      "sparc_rms": 22.296521880847287,
+      "sparc_win_rate": 0.2573099415204678,
+      "cluster_ratio": 1.2103208916320214,
+      "success": true
+    }
+  ],
+  "top_15": [
+    {
+      "kappa": 0.0,
+      "c_default": 0.0,
+      "sparc_rms": 17.415478722054278,
+      "sparc_win_rate": 0.4269005847953216,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "kappa": 0.0,
+      "c_default": 0.5,
+      "sparc_rms": 17.415478722054278,
+      "sparc_win_rate": 0.4269005847953216,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "kappa": 0.0,
+      "c_default": 1.0,
+      "sparc_rms": 17.415478722054278,
+      "sparc_win_rate": 0.4269005847953216,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "kappa": 0.1,
+      "c_default": 0.0,
+      "sparc_rms": 17.628087526018597,
+      "sparc_win_rate": 0.4152046783625731,
+      "cluster_ratio": 1.004256085204009,
+      "success": true
+    },
+    {
+      "kappa": 0.1,
+      "c_default": 0.5,
+      "sparc_rms": 17.628087526018597,
+      "sparc_win_rate": 0.4152046783625731,
+      "cluster_ratio": 1.004256085204009,
+      "success": true
+    },
+    {
+      "kappa": 0.1,
+      "c_default": 1.0,
+      "sparc_rms": 17.628087526018597,
+      "sparc_win_rate": 0.4152046783625731,
+      "cluster_ratio": 1.004256085204009,
+      "success": true
+    },
+    {
+      "kappa": 0.2,
+      "c_default": 0.0,
+      "sparc_rms": 17.855843477578265,
+      "sparc_win_rate": 0.42105263157894735,
+      "cluster_ratio": 1.020250158543736,
+      "success": true
+    },
+    {
+      "kappa": 0.2,
+      "c_default": 0.5,
+      "sparc_rms": 17.855843477578265,
+      "sparc_win_rate": 0.42105263157894735,
+      "cluster_ratio": 1.020250158543736,
+      "success": true
+    },
+    {
+      "kappa": 0.2,
+      "c_default": 1.0,
+      "sparc_rms": 17.855843477578265,
+      "sparc_win_rate": 0.42105263157894735,
+      "cluster_ratio": 1.020250158543736,
+      "success": true
+    },
+    {
+      "kappa": 0.3,
+      "c_default": 0.0,
+      "sparc_rms": 18.09455706659876,
+      "sparc_win_rate": 0.4093567251461988,
+      "cluster_ratio": 1.035298811171145,
+      "success": true
+    },
+    {
+      "kappa": 0.3,
+      "c_default": 0.5,
+      "sparc_rms": 18.09455706659876,
+      "sparc_win_rate": 0.4093567251461988,
+      "cluster_ratio": 1.035298811171145,
+      "success": true
+    },
+    {
+      "kappa": 0.3,
+      "c_default": 1.0,
+      "sparc_rms": 18.09455706659876,
+      "sparc_win_rate": 0.4093567251461988,
+      "cluster_ratio": 1.035298811171145,
+      "success": true
+    },
+    {
+      "kappa": 0.5,
+      "c_default": 0.0,
+      "sparc_rms": 18.5927341430369,
+      "sparc_win_rate": 0.36257309941520466,
+      "cluster_ratio": 1.0630268691531428,
+      "success": true
+    },
+    {
+      "kappa": 0.5,
+      "c_default": 0.5,
+      "sparc_rms": 18.5927341430369,
+      "sparc_win_rate": 0.36257309941520466,
+      "cluster_ratio": 1.0630268691531428,
+      "success": true
+    },
+    {
+      "kappa": 0.5,
+      "c_default": 1.0,
+      "sparc_rms": 18.5927341430369,
+      "sparc_win_rate": 0.36257309941520466,
+      "cluster_ratio": 1.0630268691531428,
+      "success": true
+    }
+  ]
+}
