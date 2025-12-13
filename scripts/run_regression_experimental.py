@@ -142,6 +142,17 @@ GUIDED_C_DEFAULT = 0.0      # Used when no local stream proxy is available (has 
 GUIDED_FACTOR_CAP = 1e3     # Safety cap to avoid numerical blow-ups
 
 # =============================================================================
+# DYNAMICAL PATH-LENGTH (MAJOR EXPERIMENT) — LOCAL L_eff = v_coh / Omega
+# =============================================================================
+# Root-cause idea: coherence is a phase-ordering process that has only one "clock"
+# If coherence propagates at universal speed v_coh, then in one dynamical time
+# τ_dyn = 1/Ω, the ordering can correlate over distance L_eff = v_coh * τ_dyn
+USE_DYN_L = False          # set in main() via --ldyn
+DYN_L_VCOH_KMS = 20.0      # universal coherence transport speed (km/s)
+DYN_L_MIN_KPC = 1e-4       # safety floor
+DYN_L_MAX_KPC = 1e3        # safety cap (covers clusters too)
+
+# =============================================================================
 # OBSERVATIONAL BENCHMARKS (GOLD STANDARD)
 # All values from peer-reviewed literature with citations
 # =============================================================================
@@ -278,20 +289,65 @@ class TestResult:
     message: str
 
 
-def unified_amplitude(L: float) -> float:
-    """Unified 3D amplitude: A = A₀ × (L/L₀)^n
+def unified_amplitude(L: float | np.ndarray, C_stream: float | np.ndarray = None) -> float | np.ndarray:
+    """Unified 3D amplitude: A = A₀ × (L_eff/L₀)^n where L_eff = L * (1 + κ * C_stream) if guided gravity is enabled
     
     No D switch needed - path length L determines amplitude naturally:
     - Thin disk galaxies: L ≈ L₀ (0.4 kpc scale height) → A ≈ A₀
     - Elliptical galaxies: L ~ 1-20 kpc → A ~ 1.5-3.4
     - Galaxy clusters: L ≈ 600 kpc → A ≈ 8.45
+    
+    If guided gravity is enabled, L_eff = L * (1 + κ * C_stream)
     """
-    return A_0 * (L / L_0)**N_EXP
+    if USE_GUIDED_GRAVITY:
+        if C_stream is None:
+            C_stream = GUIDED_C_DEFAULT
+        L_eff = np.asarray(L) * (1.0 + GUIDED_KAPPA * np.clip(C_stream, 0.0, 1.0))
+        return A_0 * (L_eff / L_0)**N_EXP
+    else:
+        return A_0 * (np.asarray(L) / L_0)**N_EXP
 
 
 def unified_amplitude_legacy(D: float, L: float) -> float:
     """Legacy amplitude with D switch (for backwards compatibility)."""
     return A_0 * (1 - D + D * (L / L_0)**N_EXP)
+
+
+def dyn_path_length_kpc(R_kpc: np.ndarray,
+                        V_pred_kms: np.ndarray,
+                        vcoh_kms: float = None) -> np.ndarray:
+    """
+    Compute effective coherence depth from local dynamical time:
+    
+    L_eff(r) = v_coh / Omega(r) = v_coh * r / V_pred(r)
+    
+    This is based on the idea that coherence is a phase-ordering process
+    that propagates at universal speed v_coh. In one dynamical time
+    τ_dyn = 1/Ω, the ordering can correlate over distance L_eff.
+    
+    Units: (km/s) * kpc / (km/s) = kpc
+    
+    Args:
+        R_kpc: Radial positions (kpc)
+        V_pred_kms: Predicted rotation velocities (km/s)
+        vcoh_kms: Coherence transport speed (km/s), defaults to DYN_L_VCOH_KMS
+    
+    Returns:
+        L_eff: Effective path length (kpc), clipped to [DYN_L_MIN_KPC, DYN_L_MAX_KPC]
+    """
+    if vcoh_kms is None:
+        vcoh_kms = DYN_L_VCOH_KMS
+
+    R = np.asarray(R_kpc, dtype=float)
+    V = np.asarray(V_pred_kms, dtype=float)
+
+    # Safety: avoid division by zero
+    R = np.maximum(R, 1e-12)
+    V = np.maximum(np.abs(V), 1e-6)
+
+    # L_eff = v_coh * r / V_pred
+    L = float(vcoh_kms) * (R / V)
+    return np.clip(L, DYN_L_MIN_KPC, DYN_L_MAX_KPC)
 
 
 def guided_amplitude_multiplier(C_stream: Any, exponent: float = N_EXP) -> Any:
@@ -561,9 +617,9 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     V_bar_ms = V_bar * 1000
     g_bar = V_bar_ms**2 / R_m
     
-    # For thin disk galaxies, use L = L₀ = 0.4 kpc → A = A₀
-    # (The path length L₀ IS the typical disk scale height by definition)
-    A_base = A_0  # = unified_amplitude(L_0) = 1.173
+    # Baseline default: disks use A0. If --ldyn is on, we promote A -> A(r) via L_eff(r).
+    # This allows the amplitude to vary with radius based on local dynamical time.
+    A_base = A_0
     
     # Build sigma input once
     sigma_use = sigma_profile_kms if sigma_profile_kms is not None else float(sigma_kms)
@@ -580,6 +636,12 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     V = np.array(V_bar, dtype=float)
     
     for _ in range(50):  # Typically converges in 3-5 iterations
+        # MAJOR CHANGE: allow A to become a radius-dependent profile via L_eff = v_coh / Omega
+        if USE_DYN_L:
+            L_eff = dyn_path_length_kpc(R_kpc, V, vcoh_kms=DYN_L_VCOH_KMS)
+            A_base = unified_amplitude(L_eff)   # NOTE: vector A(r), not scalar
+        else:
+            A_base = A_0  # Scalar A for baseline
         if coherence_model.upper() == "JJ":
             Q = Q_JJ_coherence(
                 R_kpc=R_kpc,
@@ -1872,10 +1934,18 @@ def _parse_cli_float(flag: str, default: float) -> float:
 def main():
     global USE_SIGMA_COMPONENTS, COHERENCE_MODEL, JJ_XI_MULT, JJ_SMOOTH_M_POINTS
     global USE_GUIDED_GRAVITY, GUIDED_KAPPA, GUIDED_C_DEFAULT
+    global USE_DYN_L, DYN_L_VCOH_KMS
     
     quick = '--quick' in sys.argv
     core_only = '--core' in sys.argv
     sigma_components = '--sigma-components' in sys.argv
+    
+    # NEW: dynamical path-length mode
+    ldyn_flag = '--ldyn' in sys.argv
+    vcoh_arg = _parse_cli_float('--vcoh-kms', DYN_L_VCOH_KMS)
+    
+    USE_DYN_L = bool(ldyn_flag)
+    DYN_L_VCOH_KMS = float(vcoh_arg)
     
     # NEW: A/B comparison mode for anisotropic gravity
     compare_anisotropic = '--compare-anisotropic' in sys.argv
@@ -1944,6 +2014,8 @@ def main():
     if guided_flag:
         print(f"  Guided gravity: {'ON' if USE_GUIDED_GRAVITY else 'COMPARE'}")
         print(f"    κ = {GUIDED_KAPPA:g}, C_default = {GUIDED_C_DEFAULT:g}")
+    if USE_DYN_L:
+        print(f"  Dynamical L mode: ON (v_coh={DYN_L_VCOH_KMS:g} km/s)")
     print()
     
     # Load data
