@@ -1752,17 +1752,22 @@ def test_external_field_effect() -> TestResult:
     # External field (from host galaxy)
     g_ext = 1e-10  # m/s² (MW at 100 kpc)
     
-    # Total field
+    # Total field (scalar EFE proxy)
     g_total = np.sqrt(g_int**2 + g_ext**2)
-    
-    # Σ-Gravity enhancement with total field
-    Sigma_total = sigma_enhancement(g_total, A=A_0)
-    
+
+    # Baseline (always available): evaluate h on |g_total|
+    Sigma_total_scalar = sigma_enhancement(g_total, A=A_0)
+
     # Enhancement if isolated
     Sigma_isolated = sigma_enhancement(g_int, A=A_0)
-    
-    # EFE suppression
-    suppression = Sigma_total / Sigma_isolated
+
+    # Wave/interference mode: pass g_int and g_ext separately (uses g_tot internally)
+    Sigma_total_wave = sigma_enhancement(g_int, A=A_0, g_ext=g_ext)
+
+    suppression_scalar = Sigma_total_scalar / Sigma_isolated
+    suppression_wave = Sigma_total_wave / Sigma_isolated
+
+    suppression = suppression_wave if USE_WAVE_INTERFERENCE else suppression_scalar
     
     # EFE should suppress enhancement when g_ext > g_int
     passed = suppression < 1.0
