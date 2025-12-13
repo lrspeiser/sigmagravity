@@ -104,6 +104,20 @@ SIGMA_GAS_KMS = 10.0
 SIGMA_DISK_KMS = 25.0
 SIGMA_BULGE_KMS = 120.0
 
+# Optional: "wave build-up + interference" mode.
+#
+# Concept mapping:
+# - Enhancement grows in low-field regions ("far from gravity") because the
+#   enhancement function increases as net field strength decreases.
+# - Nearby external gravitational fields ("another object hits the wave")
+#   reduce the enhancement by increasing the net field and/or dephasing it.
+#
+# This is implemented as an EFE-style replacement g -> g_tot = sqrt(g_int^2+g_ext^2)
+# (plus an optional additional interference factor).
+USE_WAVE_INTERFERENCE = False  # set in main() via --wave
+WAVE_MODE = "efe"              # "efe" or "interference"
+WAVE_BETA = 1.0                # only used for WAVE_MODE == "interference"
+
 # =============================================================================
 # COHERENCE MODEL SELECTION (A/B)
 # =============================================================================
@@ -385,6 +399,53 @@ def h_function(g: np.ndarray) -> np.ndarray:
     return np.sqrt(g_dagger / g) * g_dagger / (g_dagger + g)
 
 
+def h_effective(g_int: np.ndarray, g_ext: Any = 0.0) -> np.ndarray:
+    """Effective enhancement kernel for the optional wave/interference mode.
+
+    Baseline (default):
+        h_eff = h(g_int)
+
+    Wave/interference mode (enabled with --wave):
+        g_tot = sqrt(g_int^2 + g_ext^2)
+
+      - WAVE_MODE == "efe":
+            h_eff = h(g_tot)
+
+      - WAVE_MODE == "interference":
+            h_eff = h(g_tot) * (g_int/g_tot)^WAVE_BETA
+
+    Interpretation:
+        * "Wave builds" in low-field regions because h grows as g_tot falls.
+        * "Other gravity reduces the wave" because g_ext increases g_tot and/or
+          reduces the fractional contribution from the internal source.
+
+    Notes:
+        - g_ext is treated as a *magnitude* here (EFE-style scalar). A vector
+          implementation can be added later if you have external-field direction
+          estimates.
+        - When USE_WAVE_INTERFERENCE is False, g_ext is ignored.
+    """
+    g_int = np.maximum(np.asarray(g_int), 1e-15)
+
+    if not USE_WAVE_INTERFERENCE:
+        return h_function(g_int)
+
+    g_ext_arr = np.maximum(np.asarray(g_ext, dtype=float), 0.0)
+    g_tot = np.sqrt(g_int**2 + g_ext_arr**2)
+    h_tot = h_function(g_tot)
+
+    mode = (WAVE_MODE or "efe").lower().strip()
+    if mode == "efe":
+        return h_tot
+    if mode == "interference":
+        # Additional dephasing/screening beyond the pure |g| replacement.
+        frac = g_int / np.maximum(g_tot, 1e-15)
+        return h_tot * np.power(frac, float(WAVE_BETA))
+
+    # Fallback: treat unknown modes as pure EFE.
+    return h_tot
+
+
 def C_coherence(v_rot: np.ndarray, sigma: float = 20.0) -> np.ndarray:
     """
     Covariant coherence scalar: C = v²/(v² + σ²)
@@ -552,8 +613,9 @@ def sigma_profile_from_components_kms(
     return np.sqrt(np.maximum(sigma2, 1e-6))
 
 
-def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0, 
-                      A: float = None, L: float = L_0) -> np.ndarray:
+def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
+                      A: float = None, L: float = L_0,
+                      g_ext: Any = 0.0) -> np.ndarray:
     """
     Full Σ enhancement factor using W(r) approximation.
     
@@ -561,13 +623,15 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
     
     Note: This uses the W(r) approximation. For the primary C(r) formulation,
     use sigma_enhancement_C() with fixed-point iteration.
+    
+    In wave/interference mode, h uses g_tot = sqrt(g_int^2 + g_ext^2).
     """
     g = np.maximum(np.asarray(g), 1e-15)
     
     # Baseline amplitude A(L)
     A_base = unified_amplitude(L) if A is None else A
     
-    h = h_function(g)
+    h = h_effective(g, g_ext)
     
     if r is not None:
         W = W_coherence(np.asarray(r), xi)
@@ -587,20 +651,23 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
 
 
 def sigma_enhancement_C(g: np.ndarray, v_rot: np.ndarray, sigma: float = 20.0,
-                        A: float = None, L: float = L_0) -> np.ndarray:
+                        A: float = None, L: float = L_0,
+                        g_ext: Any = 0.0) -> np.ndarray:
     """
     Full Σ enhancement factor using covariant C(r) - PRIMARY formulation.
     
     Σ = 1 + A(L) × C(r) × h(g)
     
     where C = v_rot²/(v_rot² + σ²)
+    
+    In wave/interference mode, h uses g_tot = sqrt(g_int^2 + g_ext^2).
     """
     g = np.maximum(np.asarray(g), 1e-15)
     
     # Baseline amplitude A(L)
     A_base = unified_amplitude(L) if A is None else A
     
-    h = h_function(g)
+    h = h_effective(g, g_ext)
     C = C_coherence(v_rot, sigma)
 
     if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
@@ -618,7 +685,8 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
                      coherence_model: Optional[str] = None,
                      V_gas_kms: Optional[np.ndarray] = None,
                      V_disk_scaled_kms: Optional[np.ndarray] = None,
-                     V_bulge_scaled_kms: Optional[np.ndarray] = None) -> np.ndarray:
+                     V_bulge_scaled_kms: Optional[np.ndarray] = None,
+                     g_ext: Any = 0.0) -> np.ndarray:
     """
     Predict rotation velocity using Σ-Gravity.
     
@@ -642,6 +710,10 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     # Baseline default: disks use A0. If --ldyn is on, we promote A -> A(r) via L_eff(r).
     # This allows the amplitude to vary with radius based on local dynamical time.
     A_base = A_0
+    
+    # Optional external field for wave/interference mode
+    # Can be scalar or per-radius array
+    g_ext_arg = g_ext
     
     # Build sigma input once
     sigma_use = sigma_profile_kms if sigma_profile_kms is not None else float(sigma_kms)
@@ -673,7 +745,7 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
         dR = np.abs(Rm[:, None] - Rm[None, :])
         jj_kernel = np.exp(-dR / (max(xi_corr_kpc, 1e-6) * kpc_to_m))
     
-    h = h_function(g_bar)
+    h = h_effective(g_bar, g_ext_arg)
     V = np.array(V_bar, dtype=float)
     
     for _ in range(50):  # Typically converges in 3-5 iterations
@@ -938,12 +1010,16 @@ def test_sparc(galaxies: List[Dict]) -> TestResult:
             except Exception:
                 sigma_profile = None
         
+        # Optional environmental field (for wave/EFE mode): allow either a scalar
+        # gal['g_ext'] or a per-radius profile gal['g_ext_profile'].
+        g_ext_arg = gal.get('g_ext_profile', gal.get('g_ext', 0.0))
         V_pred = predict_velocity(
             R, V_bar, R_d, h_disk, f_bulge,
             sigma_profile_kms=sigma_profile,
             V_gas_kms=gal.get('V_gas', None),
             V_disk_scaled_kms=gal.get('V_disk_scaled', None),
             V_bulge_scaled_kms=gal.get('V_bulge_scaled', None),
+            g_ext=g_ext_arg,
         )
         V_mond = predict_mond(R, V_bar)
         
@@ -1450,9 +1526,19 @@ def test_wide_binaries() -> TestResult:
     # Typical binary: M_total ~ 1.5 M_sun
     M_total = 1.5 * M_sun
     g_N = G * M_total / s_m**2
+
+    # Optional external field (Milky Way at the Solar radius), for the wave/EFE mode.
+    # Using the centripetal estimate g_ext ≈ V_c^2 / R.
+    Vc = OBS_BENCHMARKS['milky_way']['V_sun_kms'] * 1000.0
+    R_sun = OBS_BENCHMARKS['milky_way']['R_sun_kpc'] * kpc_to_m
+    g_ext = (Vc**2) / max(R_sun, 1e-30)
     
     # Σ-Gravity enhancement
-    Sigma = sigma_enhancement(g_N, A=A_0)
+    # - baseline (canonical): g_ext ignored
+    # - wave/interference mode: g_ext suppresses the enhancement
+    Sigma_iso = sigma_enhancement(g_N, A=A_0)
+    Sigma_env = sigma_enhancement(g_N, A=A_0, g_ext=g_ext)
+    Sigma = Sigma_env if USE_WAVE_INTERFERENCE else Sigma_iso
     boost = Sigma - 1
     
     # Chae 2023 observed ~35% boost
@@ -1469,14 +1555,24 @@ def test_wide_binaries() -> TestResult:
         details={
             'separation_AU': s_AU,
             'g_N': g_N,
+            'g_ext': g_ext,
             'g_over_a0': g_N / a0_mond,
             'boost_pred': boost,
+            'boost_iso': float(Sigma_iso - 1),
+            'boost_env': float(Sigma_env - 1),
+            'wave_mode_enabled': USE_WAVE_INTERFERENCE,
+            'wave_mode': WAVE_MODE,
+            'wave_beta': WAVE_BETA,
             'boost_obs': obs_boost,
             'obs_uncertainty': obs_uncertainty,
             'n_pairs': OBS_BENCHMARKS['wide_binaries']['n_pairs'],
             'controversy': OBS_BENCHMARKS['wide_binaries']['controversy'],
         },
-        message=f"Boost at {s_AU} AU: {boost*100:.1f}% (Chae 2023: {obs_boost*100:.0f}±{obs_uncertainty*100:.0f}%)"
+        message=(
+            f"Boost at {s_AU} AU: {boost*100:.1f}% "
+            f"(iso={float(Sigma_iso - 1)*100:.1f}%, env={float(Sigma_env - 1)*100:.1f}%; "
+            f"Chae 2023: {obs_boost*100:.0f}±{obs_uncertainty*100:.0f}%)"
+        )
     )
 
 
@@ -1679,10 +1775,17 @@ def test_external_field_effect() -> TestResult:
             'g_int': g_int,
             'g_ext': g_ext,
             'Sigma_isolated': Sigma_isolated,
-            'Sigma_total': Sigma_total,
-            'suppression': suppression,
+            'Sigma_total_scalar': Sigma_total_scalar,
+            'Sigma_total_wave': Sigma_total_wave,
+            'suppression_scalar': suppression_scalar,
+            'suppression_wave': suppression_wave,
+            'suppression_used': suppression,
         },
-        message=f"EFE suppression: {suppression:.2f}× (g_ext/g†={g_ext/g_dagger:.2f})"
+        message=(
+            f"EFE suppression: {suppression:.2f}× "
+            f"(scalar={suppression_scalar:.2f}×, wave={suppression_wave:.2f}×; "
+            f"g_ext/g†={g_ext/g_dagger:.2f})"
+        )
     )
 
 
@@ -2083,10 +2186,12 @@ def main():
     global USE_SIGMA_COMPONENTS, COHERENCE_MODEL, JJ_XI_MULT, JJ_SMOOTH_M_POINTS
     global USE_GUIDED_GRAVITY, GUIDED_KAPPA, GUIDED_C_DEFAULT
     global USE_DYN_L, DYN_L_VCOH_KMS
+    global USE_WAVE_INTERFERENCE, WAVE_MODE, WAVE_BETA
     
     quick = '--quick' in sys.argv
     core_only = '--core' in sys.argv
     sigma_components = '--sigma-components' in sys.argv
+    wave_mode_on = '--wave' in sys.argv
     
     # NEW: dynamical path-length mode
     ldyn_flag = '--ldyn' in sys.argv
