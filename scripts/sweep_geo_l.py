@@ -21,7 +21,7 @@ def run_test(bulge_mult: float) -> dict:
         "--core",
         "--coherence=c",
         "--lgeom",
-        f"--lbulge-mult={bulge_mult}",
+        f"--geo-l-bulge-mult={bulge_mult}",
     ]
     
     result = subprocess.run(cmd, capture_output=True, text=True, check=False)

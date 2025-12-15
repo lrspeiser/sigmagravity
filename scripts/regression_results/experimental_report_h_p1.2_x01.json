@@ -1,0 +1,148 @@
+{
+  "timestamp": "2025-12-14T16:04:20.569972",
+  "formula": "sigma_gravity_unified",
+  "coherence_model": "C",
+  "mode": "core",
+  "guided_config": {
+    "enabled": false,
+    "kappa": 0.0,
+    "c_default": 0.0
+  },
+  "parameters": {
+    "A_0": 1.17251960642002,
+    "L_0": 0.4,
+    "n_exp": 0.27,
+    "xi_scale": 0.15915494309189535,
+    "ml_disk": 0.5,
+    "ml_bulge": 0.7,
+    "g_dagger": 9.598924108127284e-11,
+    "h_model": "hi_power",
+    "h_hi_p": 1.2,
+    "h_hi_x0": 1.0,
+    "A_cluster": 8.446265977972306,
+    "use_sigma_components": false,
+    "sigma_gas_kms": 10.0,
+    "sigma_disk_kms": 25.0,
+    "sigma_bulge_kms": 120.0,
+    "coherence_model": "C",
+    "jj_xi_mult": null,
+    "jj_smooth_points": null
+  },
+  "results": [
+    {
+      "name": "SPARC Galaxies",
+      "passed": 1.0,
+      "metric": 17.411234740243614,
+      "details": {
+        "n_galaxies": 171,
+        "mean_rms": 17.411234740243614,
+        "mean_mond_rms": 17.154025922937112,
+        "win_rate": 0.42105263157894735,
+        "rar_scatter_dex": 0.09950194061246588,
+        "benchmark_mond_rms": 17.15,
+        "benchmark_lcdm_rms": 15.0,
+        "benchmark_rar_scatter": 0.1,
+        "mean_rms_bulge": 28.754245299713084,
+        "bulge_mean_rms": 28.754245299713084,
+        "n_bulge": 18,
+        "n_bulge_galaxies": 18,
+        "mean_rms_disk": 16.076762909717793,
+        "disk_mean_rms": 16.076762909717793,
+        "n_disk": 153,
+        "n_disk_galaxies": 153
+      },
+      "message": "RMS=17.41 km/s (MOND=17.15, \u039bCDM~15), Scatter=0.100 dex, Win=42.1% | Bulge: 28.75, Disk: 16.08"
+    },
+    {
+      "name": "Clusters",
+      "passed": 1.0,
+      "metric": 1.1063113477335076,
+      "details": {
+        "n_clusters": 42,
+        "median_ratio": 1.1063113477335076,
+        "scatter_dex": 0.13719843854702723,
+        "A_cluster": 8.446265977972306,
+        "benchmark_mond_ratio": 0.3333333333333333,
+        "benchmark_lcdm": "Works with NFW fits"
+      },
+      "message": "Median ratio=1.106 (MOND~0.33, \u039bCDM~1.0), Scatter=0.137 dex (42 clusters)"
+    },
+    {
+      "name": "Cluster Holdout",
+      "passed": 1.0,
+      "metric": 1.0214444947693806,
+      "details": {
+        "n_splits": 10,
+        "mean_n": 0.2729923441750869,
+        "std_n": 0.005110139497549799,
+        "mean_holdout_ratio": 1.0214444947693806,
+        "std_holdout_ratio": 0.06432387050969941
+      },
+      "message": "n=0.27\u00b10.01, holdout=1.02\u00b10.06"
+    },
+    {
+      "name": "Gaia/MW",
+      "passed": 1.0,
+      "metric": 30.90580102461602,
+      "details": {
+        "n_stars": 28368,
+        "rms": 30.90580102461602,
+        "mean_residual": -13.647043740993315,
+        "benchmark_V_sun": 233,
+        "benchmark_n_stars": 28368
+      },
+      "message": "RMS=30.9 km/s (28368 stars, expected 28368)"
+    },
+    {
+      "name": "Redshift Evolution",
+      "passed": true,
+      "metric": 2.966479394838265,
+      "details": {
+        "g_dagger_z2_ratio": 2.966479394838265
+      },
+      "message": "g\u2020(z=2)/g\u2020(z=0) = 2.966 (\u221d H(z))"
+    },
+    {
+      "name": "Solar System",
+      "passed": 1.0,
+      "metric": 9.940625896722718e-08,
+      "details": {
+        "h_saturn": 9.940625896722718e-08,
+        "cassini_bound": 2.3e-05,
+        "coherence_model": "C"
+      },
+      "message": "|\u03b3-1| = 9.94e-08 < 2.30e-05 (model: C)"
+    },
+    {
+      "name": "Counter-Rotation",
+      "passed": 1.0,
+      "metric": 0.003915553907736003,
+      "details": {
+        "n_cr": 63,
+        "fdm_cr_mean": 0.16922222222222216,
+        "fdm_normal_mean": 0.3020046626984127
+      },
+      "message": "f_DM(CR)=0.169 < f_DM(Normal)=0.302, p=0.0039"
+    },
+    {
+      "name": "Tully-Fisher",
+      "passed": 1.0,
+      "metric": 0.8699040603877384,
+      "details": {
+        "V_flat": 200,
+        "M_bar_pred": 65416785341.15793,
+        "M_bar_obs": 75200000000,
+        "slope_pred": 4,
+        "slope_obs": 3.98,
+        "benchmark_scatter": 0.1
+      },
+      "message": "BTFR: M_pred/M_obs = 0.87 at V=200 km/s, slope=4 (obs=3.98)"
+    }
+  ],
+  "summary": {
+    "total_tests": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "all_passed": true
+}

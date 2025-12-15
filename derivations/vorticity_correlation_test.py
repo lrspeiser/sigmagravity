@@ -465,3 +465,5 @@ Differential rotation: ω varies → <ω·ω'> < ω² (reduced correlation)
 if __name__ == "__main__":
     main()
 
+
+

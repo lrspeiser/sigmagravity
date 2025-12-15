@@ -1,0 +1,182 @@
+[
+  {
+    "alpha": 1.0,
+    "beta": 0.1,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 0.1,
+    "beta": 0.1,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 0.3,
+    "beta": 0.1,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 0.5,
+    "beta": 0.1,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.1,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 2.0,
+    "beta": 0.1,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 5.0,
+    "beta": 0.1,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 10.0,
+    "beta": 0.1,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.0,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.05,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.1,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.2,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.5,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.1,
+    "gamma": 0.0,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.1,
+    "gamma": 0.1,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.1,
+    "gamma": 0.5,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.1,
+    "gamma": 1.0,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  },
+  {
+    "alpha": 1.0,
+    "beta": 0.1,
+    "gamma": 2.0,
+    "sparc_rms": 17.42,
+    "sparc_bulge_rms": 28.93,
+    "sparc_disk_rms": 16.06,
+    "clusters_ratio": 0.987,
+    "solar_gamma": 1.77e-09
+  }
+]

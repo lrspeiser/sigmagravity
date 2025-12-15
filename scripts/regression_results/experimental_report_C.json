@@ -1,8 +1,13 @@
 {
-  "timestamp": "2025-12-12T19:26:00.653094",
+  "timestamp": "2025-12-15T07:51:28.834281",
   "formula": "sigma_gravity_unified",
   "coherence_model": "C",
   "mode": "core",
+  "guided_config": {
+    "enabled": false,
+    "kappa": 0.0,
+    "c_default": 0.0
+  },
   "parameters": {
     "A_0": 1.17251960642002,
     "L_0": 0.4,
@@ -11,6 +16,9 @@
     "ml_disk": 0.5,
     "ml_bulge": 0.7,
     "g_dagger": 9.598924108127284e-11,
+    "h_model": "baseline",
+    "h_hi_p": 1.5,
+    "h_hi_x0": 10.0,
     "A_cluster": 8.446265977972306,
     "use_sigma_components": false,
     "sigma_gas_kms": 10.0,
@@ -30,12 +38,20 @@
         "mean_rms": 17.415478722054278,
         "mean_mond_rms": 17.154025922937112,
         "win_rate": 0.4269005847953216,
-        "rar_scatter_dex": 0.09966065473052123,
+        "rar_scatter_dex": 0.09966065473052121,
         "benchmark_mond_rms": 17.15,
         "benchmark_lcdm_rms": 15.0,
-        "benchmark_rar_scatter": 0.1
+        "benchmark_rar_scatter": 0.1,
+        "mean_rms_bulge": 28.92649783600022,
+        "bulge_mean_rms": 28.92649783600022,
+        "n_bulge": 18,
+        "n_bulge_galaxies": 18,
+        "mean_rms_disk": 16.061241179237115,
+        "disk_mean_rms": 16.061241179237115,
+        "n_disk": 153,
+        "n_disk_galaxies": 153
       },
-      "message": "RMS=17.42 km/s (MOND=17.15, \u039bCDM~15), Scatter=0.100 dex, Win=42.7%"
+      "message": "RMS=17.42 km/s (MOND=17.15, \u039bCDM~15), Scatter=0.100 dex, Win=42.7% | Bulge: 28.93, Disk: 16.06"
     },
     {
       "name": "Clusters",

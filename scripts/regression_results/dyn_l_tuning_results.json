@@ -1,0 +1,178 @@
+{
+  "best_params": {
+    "vcoh": 5,
+    "sparc_rms": 18.870533015174807
+  },
+  "all_results": [
+    {
+      "vcoh": 5,
+      "sparc_rms": 18.870533015174807,
+      "sparc_win_rate": 0.391812865497076,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 8,
+      "sparc_rms": 20.53289539312685,
+      "sparc_win_rate": 0.36257309941520466,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 10,
+      "sparc_rms": 21.55500910474678,
+      "sparc_win_rate": 0.3216374269005848,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 12,
+      "sparc_rms": 22.497934762081858,
+      "sparc_win_rate": 0.30994152046783624,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 15,
+      "sparc_rms": 23.78874467788615,
+      "sparc_win_rate": 0.28654970760233917,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 18,
+      "sparc_rms": 24.958427083458005,
+      "sparc_win_rate": 0.2631578947368421,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 20,
+      "sparc_rms": 25.682303231978125,
+      "sparc_win_rate": 0.23976608187134502,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 25,
+      "sparc_rms": 27.33384628006969,
+      "sparc_win_rate": 0.22807017543859648,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 30,
+      "sparc_rms": 28.804782417545884,
+      "sparc_win_rate": 0.21052631578947367,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 40,
+      "sparc_rms": 31.344078589254732,
+      "sparc_win_rate": 0.17543859649122806,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 50,
+      "sparc_rms": 33.492361900471934,
+      "sparc_win_rate": 0.14035087719298245,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 60,
+      "sparc_rms": 35.35904612636755,
+      "sparc_win_rate": 0.13450292397660818,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 80,
+      "sparc_rms": 38.505259325539164,
+      "sparc_win_rate": 0.11695906432748537,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 100,
+      "sparc_rms": 41.11189850882164,
+      "sparc_win_rate": 0.10526315789473684,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    }
+  ],
+  "top_10": [
+    {
+      "vcoh": 5,
+      "sparc_rms": 18.870533015174807,
+      "sparc_win_rate": 0.391812865497076,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 8,
+      "sparc_rms": 20.53289539312685,
+      "sparc_win_rate": 0.36257309941520466,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 10,
+      "sparc_rms": 21.55500910474678,
+      "sparc_win_rate": 0.3216374269005848,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 12,
+      "sparc_rms": 22.497934762081858,
+      "sparc_win_rate": 0.30994152046783624,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 15,
+      "sparc_rms": 23.78874467788615,
+      "sparc_win_rate": 0.28654970760233917,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 18,
+      "sparc_rms": 24.958427083458005,
+      "sparc_win_rate": 0.2631578947368421,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 20,
+      "sparc_rms": 25.682303231978125,
+      "sparc_win_rate": 0.23976608187134502,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 25,
+      "sparc_rms": 27.33384628006969,
+      "sparc_win_rate": 0.22807017543859648,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 30,
+      "sparc_rms": 28.804782417545884,
+      "sparc_win_rate": 0.21052631578947367,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    },
+    {
+      "vcoh": 40,
+      "sparc_rms": 31.344078589254732,
+      "sparc_win_rate": 0.17543859649122806,
+      "cluster_ratio": 0.9871624332060389,
+      "success": true
+    }
+  ]
+}
