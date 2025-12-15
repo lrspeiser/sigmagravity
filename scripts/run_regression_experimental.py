@@ -37,7 +37,7 @@ USAGE:
     python scripts/run_regression_experimental.py --sigma-components  # Use component-mixed σ(r) in C(r)
     python scripts/run_regression_experimental.py --coherence=jj  # Use JJ (current-current) coherence model
     python scripts/run_regression_experimental.py --guided --guided-kappa 1.0  # Experimental guided-gravity variant
-    python scripts/run_regression_experimental.py --compare-guided --guided-kappa 0.1  # A/B TEST: Compare baseline (κ=0) vs anisotropic (κ>0) predictions against all 17 observational tests
+    python scripts/run_regression_experimental.py --compare-guided --guided-kappa 1.0  # Baseline vs guided side-by-side
     python scripts/run_regression_experimental.py --guided --guided-kappa 1.0 --guided-c-default 0.0  # Only use explicit coherence proxies
 
 Author: Leonard Speiser
@@ -55,21 +55,6 @@ from dataclasses import dataclass, asdict
 from typing import Dict, List, Optional, Any, Tuple
 import warnings
 warnings.filterwarnings('ignore')
-
-# =============================================================================
-# OPTIONAL: SYNTHETIC STREAM-SEEKING TEST (2D/3D)
-# =============================================================================
-# This imports a small prototype solver/test implementing an anisotropic operator:
-#     ∇·[(I + κ w(x) ŝ ŝᵀ) ∇Φ] = 4πGρ
-# plus a toy ray-trace regression metric that *depends on directionality*.
-#
-# Place stream_seeking_anisotropic.py next to this script (or on PYTHONPATH) to enable.
-try:
-    from stream_seeking_anisotropic import synthetic_stream_lensing_regression
-    _HAS_STREAM_SEEKING_TEST = True
-except Exception:
-    synthetic_stream_lensing_regression = None
-    _HAS_STREAM_SEEKING_TEST = False
 
 # =============================================================================
 # PHYSICAL CONSTANTS
@@ -104,30 +89,46 @@ SIGMA_GAS_KMS = 10.0
 SIGMA_DISK_KMS = 25.0
 SIGMA_BULGE_KMS = 120.0
 
-# Optional: "wave build-up + interference" mode.
-#
-# Concept mapping:
-# - Enhancement grows in low-field regions ("far from gravity") because the
-#   enhancement function increases as net field strength decreases.
-# - Nearby external gravitational fields ("another object hits the wave")
-#   reduce the enhancement by increasing the net field and/or dephasing it.
-#
-# This is implemented as an EFE-style replacement g -> g_tot = sqrt(g_int^2+g_ext^2)
-# (plus an optional additional interference factor).
-USE_WAVE_INTERFERENCE = False  # set in main() via --wave
-WAVE_MODE = "efe"              # "efe" or "interference"
-WAVE_BETA = 1.0                # only used for WAVE_MODE == "interference"
-
 # =============================================================================
 # COHERENCE MODEL SELECTION (A/B)
 # =============================================================================
-COHERENCE_MODEL = "C"   # "C" (baseline v^2/(v^2+σ^2)), "JJ" (current-current), "SRC" (legacy source-current), "SRC2" (fixed source-current with component speeds + gating), "SC" (field-level coherence)
+COHERENCE_MODEL = "C"   # "C" baseline, "JJ" current-current, or "FLOW" vorticity/shear topology
+
+# Covariant coherence proxy for SPARC (translates Gaia-calibrated C_cov)
+USE_COVARIANT_PROXY = False
 
 # JJ model hyperparameters (global; no per-galaxy fits)
 # Tuned values: JJ_XI_MULT=0.4 gives best SPARC RMS (22.83 km/s vs 22.94 at 1.0)
 JJ_XI_MULT = 0.4        # ξ_corr = JJ_XI_MULT * (R_d/(2π)) by default (tuned: 0.4 optimal)
 JJ_SMOOTH_M_POINTS = 5  # smooth M_enc before derivative to reduce numerical noise (tuned: 5 optimal)
 JJ_EPS = 1e-30
+
+
+# FLOW / topology coherence hyperparameters
+# C_flow = omega^2 / (omega^2 + α·shear^2 + β·theta^2 + γ·tidal^2 + δ·H0^2)
+FLOW_ALPHA = 0.5
+FLOW_BETA = 0.0
+FLOW_GAMMA = 0.1
+FLOW_DELTA = 1.0
+FLOW_SMOOTH_POINTS = 5   # moving-average window for dV/dR and dg/dR (odd recommended)
+FLOW_USE_TIDAL = True
+
+# Bulge-specific flow parameters (for galaxies with f_bulge >= 0.3)
+# Bulges: vorticity-dominated, shear irrelevant
+# Disks: shear matters, vorticity less important
+FLOW_USE_BULGE_SPECIFIC = False  # Enable bulge-specific tuning
+FLOW_ALPHA_BULGE = 0.0   # Ignore shear for bulges
+FLOW_GAMMA_BULGE = 0.01  # Keep minimal tidal for bulges
+FLOW_ALPHA_DISK = 0.02   # Use shear for disks
+FLOW_GAMMA_DISK = 0.005  # Minimal tidal for disks
+
+# Optional: load precomputed Gaia 6D flow features (see export_gaia_pointwise_features.py)
+GAIA_FLOW_FEATURES_PATH = None
+GAIA_FLOW_FEATURES_DF = None
+GAIA_FLOW_REQUIRE_MATCH = True
+
+# Fixed-point damping (use <1.0 if a new coherence mode oscillates)
+FP_RELAX = 1.0
 
 # Cluster amplitude
 A_CLUSTER = A_0 * (600 / L_0)**N_EXP  # ≈ 8.45
@@ -154,32 +155,6 @@ USE_GUIDED_GRAVITY = False
 GUIDED_KAPPA = 0.1          # κ = 0.1 optimal (clusters: 0.987→1.004, SPARC: 17.42→17.63 km/s)
 GUIDED_C_DEFAULT = 0.0      # Used when no local stream proxy is available (has no effect in current tests)
 GUIDED_FACTOR_CAP = 1e3     # Safety cap to avoid numerical blow-ups
-
-# =============================================================================
-# GEOMETRY PATH-LENGTH (MAJOR EXPERIMENT) — galaxy-level L_gal from bulge fraction
-# =============================================================================
-# Root-cause idea: coherence strength scales with available correlated path length
-# of baryonic worldlines. Disks have thin vertical thickness (L ≈ L_0), but bulges
-# are 3D orbital families requiring bulge-size-scale path lengths.
-#
-# L_gal = (1 - f_b) * L_disk + f_b * L_bulge
-# where L_bulge = α * R_d (geometry scale)
-USE_GEO_L = False              # set in main() via --lgeom
-GEO_L_BULGE_MULT = 1.0         # Suppression strength: L_bulge = L_0 / (1 + GEO_L_BULGE_MULT * f_bulge)
-                                # Higher values = more suppression for bulge galaxies (reduces A)
-GEO_L_MIN_KPC = 0.01           # Allow L_gal < L_0 for suppression (was L_0, now relaxed)
-GEO_L_MAX_KPC = 50.0           # safety cap; adjust as needed
-
-# =============================================================================
-# DYNAMICAL PATH-LENGTH (MAJOR EXPERIMENT) — LOCAL L_eff = v_coh / Omega
-# =============================================================================
-# Root-cause idea: coherence is a phase-ordering process that has only one "clock"
-# If coherence propagates at universal speed v_coh, then in one dynamical time
-# τ_dyn = 1/Ω, the ordering can correlate over distance L_eff = v_coh * τ_dyn
-USE_DYN_L = False          # set in main() via --ldyn
-DYN_L_VCOH_KMS = 20.0      # universal coherence transport speed (km/s)
-DYN_L_MIN_KPC = 1e-4       # safety floor
-DYN_L_MAX_KPC = 1e3        # safety cap (covers clusters too)
 
 # =============================================================================
 # OBSERVATIONAL BENCHMARKS (GOLD STANDARD)
@@ -306,40 +281,6 @@ OBS_BENCHMARKS = {
 }
 
 # =============================================================================
-# ACCELERATION FUNCTION (h) VARIANTS — EXPERIMENTAL
-# =============================================================================
-#
-# Root cause hypothesis for the bulge residuals:
-#   The current high-acceleration suppression (h ∝ g^{-3/2}) may be too strong
-#   for compact but still *macroscopically coherent* baryonic structures (bulges).
-#   This block allows a controlled softening of the high-g tail while leaving the
-#   low-g (galaxy outskirts / clusters) regime essentially unchanged.
-#
-# H_MODEL options:
-#   - 'baseline': original h(g) = sqrt(g†/g) * g†/(g†+g)
-#   - 'hi_power': for x=g/g† > H_HI_X0, soften the asymptotic falloff to x^{-p_hi}
-#
-H_MODEL = 'baseline'
-H_HI_P = 1.5     # target high-g exponent p_hi (baseline=1.5)
-H_HI_X0 = 10.0   # knee in x=g/g† where tail softening begins
-
-# =============================================================================
-# CRHO (DENSITY/VORTICITY COHERENCE) PARAMETERS
-# =============================================================================
-CRHO_SCALE = 0.05  # Scale factor for σ_ρ (tuned to match typical σ ~ 20-120 km/s)
-CRHO_RHO_THRESHOLD = 5e-19  # kg/m³ (density threshold for bulge targeting)
-
-# =============================================================================
-# FLOW-BASED COHERENCE PARAMETERS
-# =============================================================================
-# Flow coherence: C_flow = ω²/(ω² + α·s² + β·θ² + γ·T²)
-# where ω = vorticity, s = shear, θ = divergence, T = tidal/dephasing
-FLOW_ALPHA = 1.0   # Shear weight
-FLOW_BETA = 0.1    # Divergence weight (typically small for rotation curves)
-FLOW_GAMMA = 0.5   # Tidal/dephasing weight
-FLOW_EPS = 1e-12   # Numerical floor
-
-# =============================================================================
 # CORE FUNCTIONS
 # =============================================================================
 
@@ -352,71 +293,20 @@ class TestResult:
     message: str
 
 
-def unified_amplitude(L: float | np.ndarray, C_stream: float | np.ndarray = None) -> float | np.ndarray:
-    """Unified 3D amplitude: A = A₀ × (L_eff/L₀)^n where L_eff = L * (1 + κ * C_stream) if guided gravity is enabled
+def unified_amplitude(L: float) -> float:
+    """Unified 3D amplitude: A = A₀ × (L/L₀)^n
     
     No D switch needed - path length L determines amplitude naturally:
     - Thin disk galaxies: L ≈ L₀ (0.4 kpc scale height) → A ≈ A₀
     - Elliptical galaxies: L ~ 1-20 kpc → A ~ 1.5-3.4
     - Galaxy clusters: L ≈ 600 kpc → A ≈ 8.45
-    
-    If guided gravity is enabled, L_eff = L * (1 + κ * C_stream)
     """
-    if USE_GUIDED_GRAVITY:
-        if C_stream is None:
-            C_stream = GUIDED_C_DEFAULT
-        L_eff = np.asarray(L) * (1.0 + GUIDED_KAPPA * np.clip(C_stream, 0.0, 1.0))
-        return A_0 * (L_eff / L_0)**N_EXP
-    else:
-        return A_0 * (np.asarray(L) / L_0)**N_EXP
+    return A_0 * (L / L_0)**N_EXP
 
 
 def unified_amplitude_legacy(D: float, L: float) -> float:
     """Legacy amplitude with D switch (for backwards compatibility)."""
     return A_0 * (1 - D + D * (L / L_0)**N_EXP)
-
-
-def dyn_path_length_kpc(R_kpc: np.ndarray,
-                        V_pred_kms: np.ndarray,
-                        vcoh_kms: float = None) -> np.ndarray:
-    """
-    Compute effective coherence depth from local dynamical time:
-    
-    L_eff(r) = v_coh / Omega(r) = v_coh * r / V_pred(r)
-    
-    This is based on the idea that coherence is a phase-ordering process
-    that propagates at universal speed v_coh. In one dynamical time
-    τ_dyn = 1/Ω, the ordering can correlate over distance L_eff.
-    
-    Units: (km/s) * kpc / (km/s) = kpc
-    
-    Args:
-        R_kpc: Radial positions (kpc)
-        V_pred_kms: Predicted rotation velocities (km/s)
-        vcoh_kms: Coherence transport speed (km/s), defaults to DYN_L_VCOH_KMS
-    
-    Returns:
-        L_eff: Effective path length (kpc), clipped to [DYN_L_MIN_KPC, DYN_L_MAX_KPC]
-    """
-    if vcoh_kms is None:
-        vcoh_kms = DYN_L_VCOH_KMS
-
-    R = np.asarray(R_kpc, dtype=float)
-    V = np.asarray(V_pred_kms, dtype=float)
-
-    # Safety: avoid division by zero
-    R = np.maximum(R, 1e-12)
-    V = np.maximum(np.abs(V), 1e-6)
-
-    # L_eff = v_coh * r / V_pred
-    L = float(vcoh_kms) * (R / V)
-    
-    # Apply minimum constraint: L_eff should not be smaller than L_0
-    # This prevents the dynamical path-length from becoming unphysically small
-    # in regions with high angular velocity (inner disk, Solar System)
-    L = np.maximum(L, L_0)
-    
-    return np.clip(L, DYN_L_MIN_KPC, DYN_L_MAX_KPC)
 
 
 def guided_amplitude_multiplier(C_stream: Any, exponent: float = N_EXP) -> Any:
@@ -443,99 +333,9 @@ def guided_amplitude_multiplier(C_stream: Any, exponent: float = N_EXP) -> Any:
 
 
 def h_function(g: np.ndarray) -> np.ndarray:
-    """Enhancement function h(g).
-
-    Baseline:
-        h(g) = sqrt(g†/g) * g†/(g†+g)
-        => for g >> g†, h ~ (g/g†)^(-3/2)
-
-    Experimental (H_MODEL='hi_power'):
-        For x=g/g† > H_HI_X0, multiply baseline by (x/H_HI_X0)^(1.5 - H_HI_P)
-        so the asymptotic tail becomes h ~ x^(-H_HI_P).
-
-    Motivation:
-        Bulge-dominated SPARC systems probe higher internal accelerations than
-        disk outskirts. If h falls too steeply at high g, the model cannot
-        provide enough enhancement in bulges even when coherence saturates.
-        This variant changes *only* the high-g tail and is constrained by the
-        Solar System Cassini bound test.
-    """
-    global H_MODEL, H_HI_P, H_HI_X0
-
-    g = np.maximum(np.asarray(g, dtype=float), 1e-15)
-    x = g / g_dagger
-
-    # Original baseline form (exactly matches previous implementation)
-    h = np.sqrt(1.0 / np.maximum(x, 1e-30)) * (1.0 / (1.0 + x))
-
-    if str(H_MODEL).lower() not in ('hi_power', 'hipower', 'high_power', 'highpower'):
-        return h
-
-    # Tail softening parameters
-    x0 = max(float(H_HI_X0), 1e-12)
-    p_hi = float(H_HI_P)
-
-    # Safety: keep within a sane range
-    p_hi = max(min(p_hi, 2.5), 0.05)
-
-    delta = 1.5 - p_hi
-    if abs(delta) < 1e-12:
-        return h
-
-    # Piecewise (no change below x0; power-law boost above x0)
-    mask = x > x0
-    if np.any(mask):
-        h = h.copy()
-        h[mask] = h[mask] * np.power(np.maximum(x[mask] / x0, 1e-30), delta)
-
-    return h
-
-
-def h_effective(g_int: np.ndarray, g_ext: Any = 0.0) -> np.ndarray:
-    """Effective enhancement kernel for the optional wave/interference mode.
-
-    Baseline (default):
-        h_eff = h(g_int)
-
-    Wave/interference mode (enabled with --wave):
-        g_tot = sqrt(g_int^2 + g_ext^2)
-
-      - WAVE_MODE == "efe":
-            h_eff = h(g_tot)
-
-      - WAVE_MODE == "interference":
-            h_eff = h(g_tot) * (g_int/g_tot)^WAVE_BETA
-
-    Interpretation:
-        * "Wave builds" in low-field regions because h grows as g_tot falls.
-        * "Other gravity reduces the wave" because g_ext increases g_tot and/or
-          reduces the fractional contribution from the internal source.
-
-    Notes:
-        - g_ext is treated as a *magnitude* here (EFE-style scalar). A vector
-          implementation can be added later if you have external-field direction
-          estimates.
-        - When USE_WAVE_INTERFERENCE is False, g_ext is ignored.
-    """
-    g_int = np.maximum(np.asarray(g_int), 1e-15)
-
-    if not USE_WAVE_INTERFERENCE:
-        return h_function(g_int)
-
-    g_ext_arr = np.maximum(np.asarray(g_ext, dtype=float), 0.0)
-    g_tot = np.sqrt(g_int**2 + g_ext_arr**2)
-    h_tot = h_function(g_tot)
-
-    mode = (WAVE_MODE or "efe").lower().strip()
-    if mode == "efe":
-        return h_tot
-    if mode == "interference":
-        # Additional dephasing/screening beyond the pure |g| replacement.
-        frac = g_int / np.maximum(g_tot, 1e-15)
-        return h_tot * np.power(frac, float(WAVE_BETA))
-
-    # Fallback: treat unknown modes as pure EFE.
-    return h_tot
+    """Enhancement function h(g) = √(g†/g) × g†/(g†+g)"""
+    g = np.maximum(np.asarray(g), 1e-15)
+    return np.sqrt(g_dagger / g) * g_dagger / (g_dagger + g)
 
 
 def C_coherence(v_rot: np.ndarray, sigma: float = 20.0) -> np.ndarray:
@@ -571,6 +371,181 @@ def _smooth_1d(x: np.ndarray, w: int) -> np.ndarray:
     return np.convolve(x, kernel, mode="same")
 
 
+
+
+def _odd_window(w: int, n: int) -> int:
+    """Return a safe odd smoothing window <= n (or 1 if n<3)."""
+    try:
+        w = int(w)
+    except Exception:
+        return 1
+    if n < 3:
+        return 1
+    if w > n:
+        w = n
+    if w % 2 == 0:
+        w = max(1, w - 1)
+    if w < 3:
+        return 1
+    return w
+
+
+def flow_invariants_from_rotation_curve(
+    R_kpc: np.ndarray,
+    V_kms: np.ndarray,
+    V_bar_kms: Optional[np.ndarray] = None,
+    smooth_points: Optional[int] = None,
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Axisymmetric flow invariants from a 1D rotation curve.
+
+    Returns (omega2, shear2, theta2, tidal2) in units of (km/s/kpc)^2.
+
+    For an azimuthal flow v = v_phi(R):
+      ω_z = (1/R) d(R v_phi)/dR = v_phi/R + dv_phi/dR
+      s   = dv_phi/dR - v_phi/R
+      θ   ≈ 0  (incompressible circular flow)
+
+    Tidal proxy uses the baryonic acceleration gradient:
+      g_bar(R) = V_bar(R)^2 / R
+      tidal2 ~ |dg_bar/dR|
+    with a unit conversion so tidal2 is also in (km/s/kpc)^2.
+    """
+    R = np.asarray(R_kpc, dtype=float)
+    V = np.asarray(V_kms, dtype=float)
+    Vb = np.asarray(V_bar_kms, dtype=float) if V_bar_kms is not None else V
+
+    R_safe = np.clip(R, 1e-6, None)
+
+    # Smooth V before derivative to reduce noise amplification
+    w = FLOW_SMOOTH_POINTS if smooth_points is None else int(smooth_points)
+    w = _odd_window(w, len(V))
+    V_s = _smooth_1d(V, w) if w > 1 else V
+
+    dVdR = np.gradient(V_s, R_safe)  # km/s/kpc
+
+    omega = V_s / R_safe + dVdR
+    shear = dVdR - V_s / R_safe
+    theta = np.zeros_like(omega)
+
+    omega2 = omega**2
+    shear2 = shear**2
+    theta2 = theta**2
+
+    # Baryonic tidal term
+    R_m = R_safe * kpc_to_m
+    Vb_ms = np.maximum(Vb, 0.0) * 1000.0
+    g_bar = (Vb_ms**2) / np.maximum(R_m, 1e-9)  # m/s^2
+    g_s = _smooth_1d(g_bar, w) if w > 1 else g_bar
+
+    dg_dR = np.gradient(g_s, R_m)  # 1/s^2
+
+    # Convert 1/s^2 -> (km/s/kpc)^2
+    omega_unit_si = 1000.0 / kpc_to_m  # (km/s/kpc) expressed as 1/s
+    tidal2 = np.abs(dg_dR) / (omega_unit_si**2)
+
+    return omega2, shear2, theta2, tidal2
+
+
+def C_covariant_coherence(
+    omega2: np.ndarray,
+    rho_kg_m3: np.ndarray,
+    theta2: np.ndarray,
+) -> np.ndarray:
+    """Covariant coherence scalar C_cov from field theory.
+
+    C_cov = ω² / (ω² + 4πGρ + θ² + H₀²)
+
+    This is the PRIMARY theoretical formulation from the paper.
+    The kinematic form C = v²/(v²+σ²) is the non-relativistic limit.
+
+    Parameters
+    ----------
+    omega2 : np.ndarray
+        Vorticity squared in (km/s/kpc)^2
+    rho_kg_m3 : np.ndarray
+        Baryonic density in kg/m³
+    theta2 : np.ndarray
+        Expansion squared in (km/s/kpc)^2
+
+    Returns
+    -------
+    np.ndarray
+        Coherence scalar in [0,1]
+    """
+    om2 = np.asarray(omega2, dtype=float)
+    rho = np.asarray(rho_kg_m3, dtype=float)
+    th2 = np.asarray(theta2, dtype=float)
+
+    # 4πGρ in (km/s/kpc)^2
+    # G = 6.674e-11 m³/kg/s²
+    # Convert: 4πGρ (m³/kg/s² × kg/m³ = 1/s²) → (km/s/kpc)^2
+    omega_unit_si = 1000.0 / kpc_to_m  # (km/s/kpc) as 1/s
+    four_pi_G_rho = 4.0 * np.pi * G * rho  # 1/s²
+    four_pi_G_rho_kms_kpc2 = four_pi_G_rho / (omega_unit_si**2)
+
+    # H0 in km/s/kpc (≈ 0.07)
+    H0_kms_per_kpc = H0_SI * (kpc_to_m / 1000.0)
+    H0_sq = H0_kms_per_kpc**2
+
+    denom = om2 + four_pi_G_rho_kms_kpc2 + th2 + H0_sq
+    denom = np.maximum(denom, 1e-30)
+    C = om2 / denom
+    C = np.nan_to_num(C, nan=0.0, posinf=1.0, neginf=0.0)
+    return np.clip(C, 0.0, 1.0)
+
+
+def C_flow_coherence(
+    omega2: np.ndarray,
+    shear2: np.ndarray,
+    theta2: np.ndarray,
+    tidal2: Optional[np.ndarray] = None,
+    alpha: Optional[float] = None,
+    beta: Optional[float] = None,
+    gamma: Optional[float] = None,
+    delta: Optional[float] = None,
+) -> np.ndarray:
+    """Topology / flow coherence scalar C_flow in [0,1].
+
+    C_flow = omega^2 / (omega^2 + α·shear^2 + β·theta^2 + γ·tidal^2 + δ·H0^2)
+
+    This is a phenomenological approximation to the covariant C_cov.
+    Use C_covariant_coherence() when you have access to density ρ.
+
+    All inputs must be in (km/s/kpc)^2.
+
+    Notes:
+      - In Gaia flow-feature exports, omega2 and shear2 are naturally in these units.
+      - H0 is converted to km/s/kpc so the floor term is comparable.
+    """
+    a = FLOW_ALPHA if alpha is None else float(alpha)
+    b = FLOW_BETA if beta is None else float(beta)
+    gam = FLOW_GAMMA if gamma is None else float(gamma)
+    d = FLOW_DELTA if delta is None else float(delta)
+
+    om2 = np.asarray(omega2, dtype=float)
+    sh2 = np.asarray(shear2, dtype=float)
+    th2 = np.asarray(theta2, dtype=float)
+
+    if tidal2 is None:
+        tid2 = 0.0
+        use_tidal = False
+    else:
+        tid2 = np.asarray(tidal2, dtype=float)
+        use_tidal = True
+
+    # H0 in km/s/kpc (≈ 0.07)
+    H0_kms_per_kpc = H0_SI * (kpc_to_m / 1000.0)
+
+    denom = om2 + a * sh2 + b * th2
+    if FLOW_USE_TIDAL and use_tidal:
+        denom = denom + gam * tid2
+    denom = denom + d * (H0_kms_per_kpc**2)
+
+    denom = np.maximum(denom, 1e-30)
+    C = om2 / denom
+    C = np.nan_to_num(C, nan=0.0, posinf=1.0, neginf=0.0)
+    return np.clip(C, 0.0, 1.0)
+
 def rho_proxy_from_vbar(R_kpc: np.ndarray, V_bar_kms: np.ndarray) -> np.ndarray:
     """
     Baryonic density proxy from V_bar (spherical inversion):
@@ -601,150 +576,6 @@ def rho_proxy_from_vbar(R_kpc: np.ndarray, V_bar_kms: np.ndarray) -> np.ndarray:
     rho = np.nan_to_num(rho, nan=1e-20, posinf=1e10, neginf=1e-20)
 
     return rho
-
-
-def sigma_rho_profile_kms(R_kpc: np.ndarray,
-                          V_bar_kms: np.ndarray,
-                          sigma_floor_kms: float = 0.0) -> np.ndarray:
-    """
-    Density/vorticity-inspired effective dispersion from the covariant coherence scalar:
-
-        C ≈ ω^2 / (ω^2 + 4πGρ + H0^2)
-    with ω ~ v/r  ⇒  C ≈ v^2 / (v^2 + (4πGρ+H0^2) r^2)
-
-    Therefore define:
-        σ_ρ^2(r) = (4πGρ(r) + H0^2) r^2
-
-    Returns σ_ρ in km/s. Optional sigma_floor_kms can be added in quadrature
-    by the caller (or here) to preserve disk-limit behavior.
-    """
-    R_kpc = np.asarray(R_kpc, dtype=float)
-    V_bar_kms = np.asarray(V_bar_kms, dtype=float)
-
-    # Reuse existing baryonic density proxy (kg/m^3)
-    rho = rho_proxy_from_vbar(R_kpc, V_bar_kms)
-
-    # Convert radius to meters
-    R_m = np.maximum(R_kpc, 1e-9) * kpc_to_m
-
-    # σ_ρ^2 = (4πGρ + H0^2) r^2  in (m/s)^2
-    # Note: For a flat rotation curve, this gives σ_ρ ~ V, which is reasonable.
-    # However, the spherical density proxy may overestimate ρ, so we apply a scaling factor.
-    # The scaling factor ensures σ_ρ is comparable to typical velocity dispersions.
-    # Using a smaller scale to target bulge suppression without affecting disk outskirts.
-    global CRHO_SCALE
-    sigma2_ms2 = (4.0 * np.pi * G * rho + H0_SI**2) * (R_m**2)
-    sigma2_ms2 = np.maximum(sigma2_ms2, 0.0)
-
-    sigma_kms = np.sqrt(sigma2_ms2) / 1000.0 * CRHO_SCALE
-
-    # Safety: cap extreme numerical spikes (derivatives can be noisy at small r)
-    # Cap at ~150 km/s to prevent complete suppression of C, but allow bulge suppression
-    sigma_kms = np.clip(sigma_kms, 0.0, 150.0)
-
-    if sigma_floor_kms and sigma_floor_kms > 0:
-        sigma_kms = np.sqrt(sigma_kms**2 + float(sigma_floor_kms)**2)
-
-    return sigma_kms
-
-
-def flow_coherence_proxy(R_kpc: np.ndarray, V_kms: np.ndarray, R_d_kpc: float = None) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Compute flow topology proxies from rotation curve (axisymmetric approximation).
-    
-    For axisymmetric systems, we approximate:
-    - Vorticity: ω ~ V/R (angular velocity, in rad/s)
-    - Shear: s ~ |dV/dR| (velocity gradient magnitude)
-    - Divergence: θ ~ 0 for axisymmetric flows (approximate as small correction)
-    
-    Returns:
-        omega2: (N,) vorticity magnitude squared (rad²/s²)
-        shear2: (N,) shear magnitude squared ((km/s/kpc)²)
-        theta: (N,) divergence (km/s/kpc) - typically small for rotation curves
-    """
-    global FLOW_EPS
-    R = np.asarray(R_kpc, dtype=float)
-    V = np.asarray(V_kms, dtype=float)
-    
-    # Ensure positive and finite
-    R = np.maximum(R, FLOW_EPS)
-    V = np.maximum(V, FLOW_EPS)
-    
-    # Vorticity proxy: ω = V/R (angular velocity)
-    # Convert to rad/s: V (km/s) / R (kpc) * (1000 m/s / km) / (kpc_to_m * m/kpc)
-    # For axisymmetric rotation: ω_z = V/R
-    omega = (V * 1000.0) / (R * kpc_to_m)  # rad/s
-    omega2 = omega**2
-    
-    # Shear proxy: s = |dV/dR|
-    # Use numerical gradient with proper spacing
-    dV_dR = np.gradient(V, R)
-    shear = np.abs(dV_dR)  # km/s per kpc
-    shear2 = shear**2
-    
-    # Divergence proxy: θ = ∇·v
-    # For axisymmetric flows: θ ≈ (1/R) * d(R·V_R)/dR
-    # For pure rotation (V_R ≈ 0), this is small. Use a simple proxy:
-    # θ ~ (1/R) * V (approximate radial expansion/contraction)
-    # Actually, for rotation curves, divergence is typically ~0, so we use a small floor
-    theta = np.zeros_like(R)  # Assume axisymmetric → divergence ~ 0
-    
-    # Safety: handle NaN/inf
-    omega2 = np.nan_to_num(omega2, nan=FLOW_EPS, posinf=1e6, neginf=FLOW_EPS)
-    shear2 = np.nan_to_num(shear2, nan=FLOW_EPS, posinf=1e6, neginf=FLOW_EPS)
-    theta = np.nan_to_num(theta, nan=0.0, posinf=0.0, neginf=0.0)
-    
-    return omega2, shear2, theta
-
-
-def flow_coherence_from_proxy(omega2: np.ndarray, shear2: np.ndarray, theta: np.ndarray = None, 
-                               tidal_proxy: np.ndarray = None) -> np.ndarray:
-    """Compute flow-based coherence: C_flow = ω²/(ω² + α·s² + β·θ² + γ·T²).
-    
-    Args:
-        omega2: Vorticity magnitude squared (rad²/s²)
-        shear2: Shear magnitude squared ((km/s/kpc)²)
-        theta: Divergence (km/s/kpc), optional
-        tidal_proxy: Tidal/dephasing proxy, optional
-    
-    Returns:
-        C_flow: (N,) coherence in [0, 1]
-    """
-    global FLOW_ALPHA, FLOW_BETA, FLOW_GAMMA, FLOW_EPS
-    
-    # Normalize units: convert omega2 to comparable scale with shear2
-    # omega2 is in (rad/s)², shear2 is in (km/s/kpc)²
-    # For axisymmetric rotation: ω = V/R (rad/s)
-    # To convert to (km/s/kpc): ω (rad/s) = (V km/s) / (R kpc) * (1 kpc / 3.086e16 m) * (1000 m/km)
-    # Actually simpler: ω (rad/s) ≈ V/R where V in km/s, R in kpc gives ω in (km/s)/kpc
-    # But we need to account for the kpc_to_m conversion factor
-    # ω² (rad²/s²) = (V/R)² where V in m/s, R in m
-    # For comparison with shear² (km/s/kpc)², we need to normalize
-    # Use: omega2_normalized = omega2 * (kpc_to_m / 1000)^2 to get (km/s/kpc)²
-    # Actually, let's use a simpler approach: normalize by typical galactic scales
-    # Typical: V ~ 200 km/s, R ~ 10 kpc → ω ~ 20 (km/s)/kpc
-    # So omega2 should be comparable to shear2 when both are in (km/s/kpc)²
-    
-    # Convert omega2 from (rad/s)² to (km/s/kpc)²
-    # ω (rad/s) = V/R where V in m/s, R in m
-    # To get (km/s/kpc): multiply by (kpc_to_m / 1000)
-    omega2_normalized = omega2 * (kpc_to_m / 1000.0)**2  # Now in (km/s/kpc)²
-    
-    # Build denominator (all terms now in (km/s/kpc)²)
-    denom = omega2_normalized + FLOW_ALPHA * shear2
-    
-    if theta is not None:
-        theta2 = theta**2  # Already in (km/s/kpc)²
-        denom = denom + FLOW_BETA * theta2
-    
-    if tidal_proxy is not None:
-        # Tidal proxy should already be in comparable units
-        denom = denom + FLOW_GAMMA * tidal_proxy
-    
-    # Compute coherence
-    C_flow = omega2_normalized / np.maximum(denom, FLOW_EPS)
-    C_flow = np.clip(C_flow, 0.0, 1.0)
-    
-    return C_flow
 
 
 def Q_JJ_coherence(
@@ -807,19 +638,6 @@ def Q_JJ_coherence(
     return np.clip(Q, 0.0, 1.0)
 
 
-def disk_gas_weights(V_gas_kms: np.ndarray, V_disk_scaled_kms: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
-    """
-    Compute disk and gas weights for source-current coherence.
-    
-    Returns:
-        (w_gas, w_disk) where w_gas + w_disk = 1
-    """
-    vg2 = np.square(np.nan_to_num(np.asarray(V_gas_kms, dtype=float), nan=0.0))
-    vd2 = np.square(np.nan_to_num(np.asarray(V_disk_scaled_kms, dtype=float), nan=0.0))
-    denom = np.maximum(vg2 + vd2, 1e-12)
-    return vg2 / denom, vd2 / denom
-
-
 def sigma_profile_from_components_kms(
     V_gas_kms: np.ndarray,
     V_disk_scaled_kms: np.ndarray,
@@ -849,9 +667,8 @@ def sigma_profile_from_components_kms(
     return np.sqrt(np.maximum(sigma2, 1e-6))
 
 
-def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
-                      A: float = None, L: float = L_0,
-                      g_ext: Any = 0.0) -> np.ndarray:
+def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0, 
+                      A: float = None, L: float = L_0) -> np.ndarray:
     """
     Full Σ enhancement factor using W(r) approximation.
     
@@ -859,15 +676,13 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
     
     Note: This uses the W(r) approximation. For the primary C(r) formulation,
     use sigma_enhancement_C() with fixed-point iteration.
-    
-    In wave/interference mode, h uses g_tot = sqrt(g_int^2 + g_ext^2).
     """
     g = np.maximum(np.asarray(g), 1e-15)
     
     # Baseline amplitude A(L)
     A_base = unified_amplitude(L) if A is None else A
     
-    h = h_effective(g, g_ext)
+    h = h_function(g)
     
     if r is not None:
         W = W_coherence(np.asarray(r), xi)
@@ -887,23 +702,20 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
 
 
 def sigma_enhancement_C(g: np.ndarray, v_rot: np.ndarray, sigma: float = 20.0,
-                        A: float = None, L: float = L_0,
-                        g_ext: Any = 0.0) -> np.ndarray:
+                        A: float = None, L: float = L_0) -> np.ndarray:
     """
     Full Σ enhancement factor using covariant C(r) - PRIMARY formulation.
     
     Σ = 1 + A(L) × C(r) × h(g)
     
     where C = v_rot²/(v_rot² + σ²)
-    
-    In wave/interference mode, h uses g_tot = sqrt(g_int^2 + g_ext^2).
     """
     g = np.maximum(np.asarray(g), 1e-15)
     
     # Baseline amplitude A(L)
     A_base = unified_amplitude(L) if A is None else A
     
-    h = h_effective(g, g_ext)
+    h = h_function(g)
     C = C_coherence(v_rot, sigma)
 
     if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
@@ -919,168 +731,122 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
                      use_C_primary: bool = True, sigma_kms: float = 20.0,
                      sigma_profile_kms: Optional[np.ndarray] = None,
                      coherence_model: Optional[str] = None,
-                     use_flow_for_6d: bool = False,
-                     V_gas_kms: Optional[np.ndarray] = None,
-                     V_disk_scaled_kms: Optional[np.ndarray] = None,
-                     V_bulge_scaled_kms: Optional[np.ndarray] = None,
-                     g_ext: Any = 0.0,
-                     return_diagnostics: bool = False) -> np.ndarray | Tuple[np.ndarray, Dict[str, Any]]:
-    """
-    Predict rotation velocity using Σ-Gravity.
+                     coherence_external: Optional[np.ndarray] = None,
+                     use_covariant_proxy: bool = False,
+                     return_terms: bool = False):
+    """Predict rotation velocity using Σ-Gravity.
+
+    This solver supports multiple coherence models:
+      - "C"    : baseline covariant coherence C = v^2/(v^2+σ^2)
+      - "JJ"   : current-current nonlocal coherence Q_JJ (kernel-averaged)
+      - "FLOW" : topology coherence from (ω, shear, θ, tidal) invariants
+      - "COVARIANT" : covariant coherence C_cov = ω²/(ω² + 4πGρ + θ² + H₀²)
+                     using rotation curve proxies (when use_covariant_proxy=True)
+
+    Parameters
+    ----------
+    coherence_external : Optional[np.ndarray]
+        If provided, uses this as the coherence scalar (clipped to [0,1]) and
+        skips fixed-point iteration (converges in one step). This is useful for
+        Gaia 6D flow-feature experiments where C_flow is computed directly from
+        the observed phase-space structure.
     
-    Parameters:
-    -----------
-    use_C_primary : bool
-        If True (default), use covariant C(r) with fixed-point iteration.
-        If False, use W(r) approximation (faster, identical results).
-    sigma_kms : float
-        Velocity dispersion for C(r) formulation (default 20 km/s).
-    coherence_model : str, optional
-        If None, uses global COHERENCE_MODEL. "C" for baseline, "JJ" for current-current, "SRC" for source-current split.
+    use_covariant_proxy : bool
+        If True, use covariant coherence C_cov with rotation curve proxies
+        (ω² from V/R, 4πGρ from density proxy). This translates Gaia-calibrated
+        C_cov to SPARC using available observables.
+
+    return_terms : bool
+        If True, returns (V_pred, diagnostics_dict) where diagnostics include
+        Sigma, C_term, A_use, and (for FLOW) omega2/shear2/theta2/tidal2.
     """
     if coherence_model is None:
         coherence_model = COHERENCE_MODEL
-    # Override: if FLOW mode is enabled but use_flow_for_6d is False, use baseline instead
-    # This allows SPARC (no 6D data) to use baseline C even when FLOW mode is globally enabled
-    if coherence_model == "FLOW" and not use_flow_for_6d:
-        coherence_model = None  # Force baseline for non-6D data
-    
-    R_m = R_kpc * kpc_to_m
-    V_bar_ms = V_bar * 1000
-    g_bar = V_bar_ms**2 / R_m
-    
-    # -------------------------------------------------------------------------
-    # Baseline default: disks use L=L0 → A=A0.
-    # New experiment: galaxy-level L_gal from bulge fraction (geometry channel).
-    # If --ldyn is on, we still allow radius-dependent L_eff(r) inside the loop,
-    # but we use L_gal as the minimum floor (instead of L0).
-    # -------------------------------------------------------------------------
-    L_gal = L_0
-    if USE_GEO_L:
-        fb = float(f_bulge) if (f_bulge is not None) else 0.0
-        fb = max(0.0, min(1.0, fb))
+    model = str(coherence_model).upper()
 
-        # Keep disks near-baseline
-        L_disk = L_0
+    R_m = np.asarray(R_kpc, dtype=float) * kpc_to_m
+    V_bar = np.asarray(V_bar, dtype=float)
+    V_bar_ms = V_bar * 1000.0
+    g_bar = (V_bar_ms**2) / np.maximum(R_m, 1e-9)
 
-        # OPPOSITE DIRECTION: Suppress L (and thus A) for bulge galaxies
-        # Two modes based on GEO_L_BULGE_MULT:
-        # - If > 0: Gradual suppression L_bulge = L_0 / (1 + mult * fb)
-        # - If < 0: Complete suppression for high-bulge (A_bulge → 0)
-        if GEO_L_BULGE_MULT > 0:
-            # Gradual suppression: L_bulge gets smaller as bulge fraction increases
-            suppression_factor = GEO_L_BULGE_MULT
-            L_bulge = L_0 / (1.0 + suppression_factor * fb)
-        elif GEO_L_BULGE_MULT < 0:
-            # Complete suppression mode: for high-bulge galaxies, set L_bulge very small
-            # This gives A_bulge ≈ 0 (no enhancement for bulge component)
-            threshold = abs(GEO_L_BULGE_MULT)  # Use absolute value as threshold
-            if fb > threshold:
-                L_bulge = GEO_L_MIN_KPC  # Very small L → A ≈ 0
-            else:
-                L_bulge = L_0  # Below threshold, use baseline
-        else:
-            # GEO_L_BULGE_MULT == 0: no suppression, use baseline
-            L_bulge = L_0
+    # For thin disk galaxies, use L = L₀ = 0.4 kpc → A = A₀
+    A_base = A_0  # = unified_amplitude(L_0)
 
-        L_gal = (1.0 - fb) * L_disk + fb * L_bulge
-        L_gal = min(max(L_gal, GEO_L_MIN_KPC), GEO_L_MAX_KPC)
-
-    A_base = unified_amplitude(L_gal)
-    
-    # Optional external field for wave/interference mode
-    # Can be scalar or per-radius array
-    g_ext_arg = g_ext
-    
     # Build sigma input once
     sigma_use = sigma_profile_kms if sigma_profile_kms is not None else float(sigma_kms)
-    
-    # NEW: CRHO coherence = C(v, σ_eff(r)), where σ_eff^2 = σ_base^2 + σ_ρ(r)^2
-    # σ_ρ is density-dependent and should primarily affect high-density (bulge) regions
-    if coherence_model is not None and coherence_model.upper() in ("CRHO", "C_RHO", "RHO"):
-        # σ_ρ from baryonic density proxy; keep the existing σ as the floor
-        sigma_rho = sigma_rho_profile_kms(R_kpc, V_bar, sigma_floor_kms=0.0)
-        # Combine in quadrature; supports scalar or array sigma_use
-        sigma_use_arr = np.asarray(sigma_use, dtype=float)
-        # Apply density-dependent scaling: stronger effect in high-density regions
-        # Use a threshold to only suppress C where density is high (bulge regions)
-        global CRHO_RHO_THRESHOLD
-        rho_proxy = rho_proxy_from_vbar(R_kpc, V_bar)
-        # Density values from proxy are typically 1e-20 to 1e-19 kg/m³
-        # Use a very low threshold to activate in most regions, with stronger effect in higher density
-        # density_factor scales from 0 (low density) to 10 (high density)
-        density_factor = np.clip(rho_proxy / max(CRHO_RHO_THRESHOLD, 1e-21), 0.0, 10.0)
-        sigma_rho_scaled = sigma_rho * density_factor
-        sigma_use = np.sqrt(sigma_use_arr**2 + sigma_rho_scaled**2)
-    
-    # SRC-family precompute: split bulge vs coherent (disk+gas) contributions
-    src_mode = coherence_model.upper() if coherence_model is not None else None
-    src_enabled = src_mode in ("SRC", "SRC2", "SC") if src_mode is not None else False
-    if src_enabled:
-        if V_bulge_scaled_kms is None:
-            # fallback to baseline if components missing
-            src_enabled = False
-        else:
-            V_bar_sq = np.square(np.asarray(V_bar, dtype=float))
-            V_bulge_sq = np.square(np.asarray(V_bulge_scaled_kms, dtype=float))
-            # Coherent squared contribution = everything that's not bulge (clamped)
-            V_coh_sq = np.maximum(V_bar_sq - V_bulge_sq, 0.0)
 
-            if V_gas_kms is None or V_disk_scaled_kms is None:
-                # If we can't split gas vs disk, treat all coherent part as "disk-like"
-                wgas = np.zeros_like(V_bar_sq)
-                wdisk = np.ones_like(V_bar_sq)
-            else:
-                wgas, wdisk = disk_gas_weights(V_gas_kms, V_disk_scaled_kms)
-    
-    # Precompute kernel for JJ once (performance + stable iteration)
+    # Precompute JJ kernel once (performance + stable iteration)
     jj_kernel = None
-    if coherence_model is not None and coherence_model.upper() == "JJ":
+    if model == "JJ":
         xi_corr_kpc = JJ_XI_MULT * XI_SCALE * max(float(R_d), 1e-6)
         Rm = np.asarray(R_kpc, dtype=float) * kpc_to_m
         dR = np.abs(Rm[:, None] - Rm[None, :])
         jj_kernel = np.exp(-dR / (max(xi_corr_kpc, 1e-6) * kpc_to_m))
-    
-    # Default: use total baryonic acceleration in h()
-    g_for_h = g_bar
-    
-    # SPLITG: use "coherent acceleration" from disk+gas ONLY
-    V_coh_sq = None
-    V_bulge_sq = None
-    if coherence_model is not None and coherence_model.upper() == "SPLITG":
-        if V_disk_scaled_kms is None or V_gas_kms is None:
-            # Fallback: if components missing, treat as baseline
-            g_for_h = g_bar
+
+    h = h_function(g_bar)
+
+    # If using covariant coherence proxy (SPARC translation from Gaia)
+    if use_covariant_proxy:
+        try:
+            from translate_covariant_to_sparc import compute_C_cov_proxy_sparc
+            # Use fixed-point iteration with C_cov proxy
+            V = np.array(V_bar, dtype=float)
+            for _ in range(5):  # Fixed-point iteration
+                C_cov = compute_C_cov_proxy_sparc(R_kpc, V, V_bar, R_d, f_bulge)
+                if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
+                    A_use = A_base * guided_amplitude_multiplier(C_cov)
+                else:
+                    A_use = A_base
+                Sigma = 1.0 + A_use * C_cov * h
+                V_new = V_bar * np.sqrt(np.maximum(Sigma, 0.0))
+                if np.allclose(V, V_new, rtol=1e-4):
+                    break
+                V = V_new
+            V_pred = np.nan_to_num(V, nan=V_bar, posinf=V_bar * 10, neginf=V_bar)
+            V_pred = np.maximum(V_pred, 1e-6)
+            if return_terms:
+                C_cov_final = compute_C_cov_proxy_sparc(R_kpc, V_pred, V_bar, R_d, f_bulge)
+                diag = {
+                    'Sigma': Sigma,
+                    'C_term': C_cov_final,
+                    'A_use': A_use,
+                    'h_term': h,
+                    'coherence_model': 'COVARIANT_PROXY',
+                }
+                return V_pred, diag
+            return V_pred
+        except ImportError:
+            # Fall back to baseline if translation module not available
+            pass
+
+    # If coherence is externally supplied, do a single forward pass
+    if coherence_external is not None:
+        q = np.clip(np.asarray(coherence_external, dtype=float), 0.0, 1.0)
+        if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
+            A_use = A_base * guided_amplitude_multiplier(q)
         else:
-            # Use magnitude-squared contributions (km/s)^2
-            V_coh_sq = np.square(np.asarray(V_disk_scaled_kms, dtype=float)) + np.square(np.asarray(V_gas_kms, dtype=float))
-            if V_bulge_scaled_kms is None:
-                V_bulge_sq = np.zeros_like(V_bar)
-            else:
-                V_bulge_sq = np.square(np.asarray(V_bulge_scaled_kms, dtype=float))
-            # g_coh = V_coh^2 / r
-            V_coh_sq_ms2 = V_coh_sq * (1000.0**2)  # Convert to (m/s)^2
-            g_coh = V_coh_sq_ms2 / R_m
-            # Avoid pathological division at r~0
-            g_for_h = np.where(R_m > 1e-12, g_coh, g_bar)
-            g_for_h = np.maximum(g_for_h, 1e-15)  # Safety floor
-    
-    h = h_effective(g_for_h, g_ext_arg)
+            A_use = A_base
+        Sigma = 1.0 + A_use * q * h
+        V_pred = V_bar * np.sqrt(np.maximum(Sigma, 0.0))
+        V_pred = np.nan_to_num(V_pred, nan=V_bar, posinf=V_bar * 10, neginf=V_bar)
+        V_pred = np.maximum(V_pred, 1e-6)
+        if return_terms:
+            diag = {
+                'Sigma': Sigma,
+                'C_term': q,
+                'A_use': A_use,
+                'h_term': h,
+            }
+            return V_pred, diag
+        return V_pred
+
     V = np.array(V_bar, dtype=float)
-    
-    # Initialize diagnostics dict if requested
-    diagnostics = {}
-    
-    for _ in range(50):  # Typically converges in 3-5 iterations
-        
-        # MAJOR CHANGE: allow A to become a radius-dependent profile via L_eff = v_coh / Omega
-        if USE_DYN_L:
-            L_eff = dyn_path_length_kpc(R_kpc, V, vcoh_kms=DYN_L_VCOH_KMS)
-            A_base = unified_amplitude(L_eff)   # NOTE: vector A(r), not scalar
-        # else: A_base was already set above (either A_0 for baseline, or geometry-based A_base if USE_GEO_L)
-        # Don't override it here - it was computed before the loop
-        if coherence_model is not None and coherence_model.upper() == "JJ":
-            Q = Q_JJ_coherence(
+
+    last_terms = None
+
+    for _ in range(50):  # Typically converges in 3-8 iterations
+        if model == "JJ":
+            q = Q_JJ_coherence(
                 R_kpc=R_kpc,
                 V_pred_kms=V,
                 V_bar_kms=V_bar,
@@ -1088,168 +854,77 @@ def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
                 sigma_kms=sigma_use,
                 kernel=jj_kernel,
             )
-            # Experimental guided-gravity: allow the stream coherence Q to
-            # feed back into the amplitude via L_eff = L(1+κQ).
-            if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
-                A_use = A_base * guided_amplitude_multiplier(Q)
-            else:
-                A_use = A_base
-            Sigma = 1 + A_use * Q * h
-            V_new = V_bar * np.sqrt(Sigma)
+            omega2 = shear2 = theta2 = tidal2 = None
 
-        elif src_enabled:
-            # SRC-family:
-            #  - SRC  : legacy behavior (uses total V, kept for comparison)
-            #  - SRC2 : component-speed SRC + coherent-fraction gating (applies Σ only to disk+gas)
-            #  - SC   : same C as SRC2, but apply Σ to total V_bar (field-level coherence)
-
-            if src_mode == "SRC":
-                # Legacy: uses total V (not component speeds) - bulge can inflate coherence
-                C_gas = C_coherence(V, SIGMA_GAS_KMS)
-                C_disk = C_coherence(V, SIGMA_DISK_KMS)
-                C_src = wgas * C_gas + wdisk * C_disk
-                f_coh = None  # Not computed for legacy SRC
+        elif model == "FLOW":
+            omega2, shear2, theta2, tidal2 = flow_invariants_from_rotation_curve(
+                R_kpc=np.asarray(R_kpc, dtype=float),
+                V_kms=V,
+                V_bar_kms=V_bar,
+                smooth_points=FLOW_SMOOTH_POINTS,
+            )
+            # Bulge-specific tuning: use different alpha/gamma for bulge vs disk
+            if FLOW_USE_BULGE_SPECIFIC and f_bulge >= 0.3:
+                # Bulge: ignore shear, use minimal tidal
+                q = C_flow_coherence(omega2=omega2, shear2=shear2, theta2=theta2, tidal2=tidal2,
+                                    alpha=FLOW_ALPHA_BULGE, gamma=FLOW_GAMMA_BULGE)
+            elif FLOW_USE_BULGE_SPECIFIC:
+                # Disk: use shear, minimal tidal
+                q = C_flow_coherence(omega2=omega2, shear2=shear2, theta2=theta2, tidal2=tidal2,
+                                    alpha=FLOW_ALPHA_DISK, gamma=FLOW_GAMMA_DISK)
             else:
-                # SRC2/SC: compute coherence from *source component* circular speeds
-                if (V_gas_kms is not None) and (V_disk_scaled_kms is not None):
-                    C_gas = C_coherence(V_gas_kms, SIGMA_GAS_KMS)
-                    C_disk = C_coherence(V_disk_scaled_kms, SIGMA_DISK_KMS)
-                    C_sub = wgas * C_gas + wdisk * C_disk
-                else:
-                    # Fallback: treat the coherent piece as disk-like
-                    V_coh = np.sqrt(np.maximum(V_coh_sq, 0.0))
-                    C_sub = C_coherence(V_coh, SIGMA_DISK_KMS)
+                # Default: use global parameters
+                q = C_flow_coherence(omega2=omega2, shear2=shear2, theta2=theta2, tidal2=tidal2)
 
-                # Key addition: coherent-fraction gating (bulge can't "fake" coherence)
-                # f_coh = V_coh^2 / V_bar^2 prevents tiny coherent components from producing "global coherence"
-                f_coh = np.clip(V_coh_sq / np.maximum(V_bar_sq, 1e-12), 0.0, 1.0)
-                C_src = f_coh * C_sub
-            
-            # Store diagnostics for SRC2/SC modes (store from final iteration)
-            if return_diagnostics and src_mode in ("SRC2", "SC"):
-                # Store arrays (will be overwritten each iteration, final values kept)
-                diagnostics['f_coh'] = f_coh.copy() if hasattr(f_coh, 'copy') else f_coh
-                diagnostics['C_src'] = C_src.copy() if hasattr(C_src, 'copy') else C_src
-                diagnostics['C_sub'] = C_sub.copy() if hasattr(C_sub, 'copy') else C_sub
-
-            if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
-                A_use = A_base * guided_amplitude_multiplier(C_src)
-            else:
-                A_use = A_base
-
-            Sigma_coh = 1 + A_use * C_src * h
-            
-            # SC mode: apply Σ to total V_bar (field-level coherence interpretation)
-            # SRC/SRC2: apply Σ only to disk+gas (bulge stays Newtonian)
-            if src_mode == "SC":
-                V_new_sq = V_bar_sq * Sigma_coh
-            else:
-                V_new_sq = V_bulge_sq + V_coh_sq * Sigma_coh
-            V_new = np.sqrt(np.maximum(V_new_sq, 1e-12))
-
-        elif coherence_model is not None and coherence_model.upper() == "SPLITG":
-            # SPLITG: use coherent acceleration for h, apply enhancement only to coherent part
-            if V_coh_sq is None or V_bulge_sq is None:
-                # Fallback to baseline if components missing
-                C = C_coherence(V, sigma_use)
-                if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
-                    A_use = A_base * guided_amplitude_multiplier(C)
-                else:
-                    A_use = A_base
-                Sigma = 1 + A_use * C * h
-                V_new = V_bar * np.sqrt(Sigma)
-            else:
-                # Compute coherence from predicted velocity (for coherent part)
-                V_coh = np.sqrt(np.maximum(V_coh_sq, 0.0))
-                C = C_coherence(V_coh, sigma_use)
-                # Experimental guided-gravity: allow the stream coherence C to
-                # feed back into the amplitude via L_eff = L(1+κC).
-                if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
-                    A_use = A_base * guided_amplitude_multiplier(C)
-                else:
-                    A_use = A_base
-                Sigma_coh = 1 + A_use * C * h
-                # Apply enhancement only to coherent part: V_pred² = V_bulge² + Σ_coh * V_coh²
-                # Note: V_coh_sq and V_bulge_sq are fixed from baryonic components (not updated in loop)
-                V_new_sq = V_bulge_sq + V_coh_sq * Sigma_coh
-                V_new = np.sqrt(np.maximum(V_new_sq, 1e-12))
-        
-        elif coherence_model is not None and coherence_model.upper() == "FLOW":
-            # FLOW: use flow topology (vorticity/shear) for coherence
-            # Compute flow proxies from current predicted velocity
-            omega2, shear2, theta = flow_coherence_proxy(R_kpc, V, R_d_kpc=R_d)
-            
-            # Optional: add tidal proxy from acceleration gradient
-            # Tidal proxy: |d ln g / d ln R| as a dephasing term
-            # Compute dlnG_dlnR from g_bar if available
-            try:
-                dlnG_dlnR = np.abs(np.gradient(np.log(np.maximum(g_bar, 1e-15)), np.log(np.maximum(R_kpc, 1e-6))))
-            except:
-                dlnG_dlnR = np.zeros_like(R_kpc)
-            # Normalize to be comparable with shear (use V²/R² as scale)
-            tidal_proxy = dlnG_dlnR * (V / np.maximum(R_kpc, 1e-6))**2  # Approximate scale
-            
-            # Compute flow-based coherence
-            C_flow = flow_coherence_from_proxy(omega2, shear2, theta=theta, tidal_proxy=tidal_proxy)
-            
-            # Experimental guided-gravity: allow the stream coherence C to
-            # feed back into the amplitude via L_eff = L(1+κC).
-            if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
-                A_use = A_base * guided_amplitude_multiplier(C_flow)
-            else:
-                A_use = A_base
-            
-            Sigma = 1 + A_use * C_flow * h
-            V_new = V_bar * np.sqrt(Sigma)
-            
-            # Store diagnostics for FLOW mode
-            if return_diagnostics:
-                def _as_arr(x):
-                    return x.copy() if hasattr(x, "copy") else (np.array([x]) if np.isscalar(x) else x)
-                diagnostics["g_bar"] = _as_arr(g_bar)
-                diagnostics["h"] = _as_arr(h)
-                diagnostics["A_use"] = _as_arr(A_use)
-                diagnostics["C_term"] = _as_arr(C_flow)  # Flow coherence
-                diagnostics["Sigma_term"] = _as_arr(Sigma)
-                diagnostics["omega2"] = _as_arr(omega2)
-                diagnostics["shear2"] = _as_arr(shear2)
-                # Also compute baseline C for comparison
-                C_baseline = C_coherence(V, sigma_use)
-                diagnostics["C_baseline"] = _as_arr(C_baseline)
-        
         else:
-            # Baseline: C = v^2/(v^2+σ^2)
-            C = C_coherence(V, sigma_use)
-            # Experimental guided-gravity: allow the stream coherence C to
-            # feed back into the amplitude via L_eff = L(1+κC).
-            if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
-                A_use = A_base * guided_amplitude_multiplier(C)
-            else:
-                A_use = A_base
-            Sigma = 1 + A_use * C * h
-            V_new = V_bar * np.sqrt(Sigma)
-            
-            # Store diagnostics for baseline mode
-            if return_diagnostics:
-                def _as_arr(x):
-                    return x.copy() if hasattr(x, "copy") else (np.array([x]) if np.isscalar(x) else x)
-                diagnostics["g_bar"] = _as_arr(g_bar)
-                diagnostics["h"] = _as_arr(h)
-                diagnostics["A_use"] = _as_arr(A_use)
-                diagnostics["C_term"] = _as_arr(C)
-                diagnostics["Sigma_term"] = _as_arr(Sigma)
-        
-        # Safety: handle NaN/inf in V_new
-        V_new = np.nan_to_num(V_new, nan=V_bar, posinf=V_bar*10, neginf=V_bar)
-        V_new = np.maximum(V_new, 1e-6)  # Ensure positive
-        
+            omega2 = shear2 = theta2 = tidal2 = None
+            q = C_coherence(V, sigma_use)
+
+        # Guided-gravity: allow stream coherence q to feed back into amplitude.
+        if USE_GUIDED_GRAVITY and float(GUIDED_KAPPA) != 0.0:
+            A_use = A_base * guided_amplitude_multiplier(q)
+        else:
+            A_use = A_base
+
+        Sigma = 1.0 + A_use * q * h
+
+        V_new = V_bar * np.sqrt(np.maximum(Sigma, 0.0))
+        V_new = np.nan_to_num(V_new, nan=V_bar, posinf=V_bar * 10, neginf=V_bar)
+        V_new = np.maximum(V_new, 1e-6)
+
         if np.max(np.abs(V_new - V)) < 1e-6:
+            last_terms = (Sigma, q, A_use, omega2, shear2, theta2, tidal2)
+            V = V_new
             break
-        V = V_new
-    
-    if return_diagnostics:
-        return V, diagnostics
+
+        # Optional damping if a new coherence mode introduces oscillations
+        if FP_RELAX is not None and float(FP_RELAX) < 1.0:
+            lam = float(FP_RELAX)
+            V = V + lam * (V_new - V)
+        else:
+            V = V_new
+
+        last_terms = (Sigma, q, A_use, omega2, shear2, theta2, tidal2)
+
+    if return_terms:
+        Sigma, q, A_use, omega2, shear2, theta2, tidal2 = last_terms if last_terms is not None else (np.nan, np.nan, np.nan, None, None, None, None)
+        diag = {
+            'Sigma': Sigma,
+            'C_term': q,
+            'A_use': A_use,
+            'h_term': h,
+        }
+        if model == 'FLOW':
+            diag.update({
+                'omega2': omega2,
+                'shear2': shear2,
+                'theta2': theta2,
+                'tidal2': tidal2,
+            })
+        return V, diag
+
     return V
+
 
 
 def predict_mond(R_kpc: np.ndarray, V_bar: np.ndarray) -> np.ndarray:
@@ -1266,131 +941,6 @@ def predict_mond(R_kpc: np.ndarray, V_bar: np.ndarray) -> np.ndarray:
 # =============================================================================
 # DATA LOADERS
 # =============================================================================
-
-def export_sparc_pointwise(galaxies, out_csv: str, coherence_model: str = None):
-    """Export pointwise SPARC residuals for analysis.
-    
-    Creates a CSV with one row per radius point, including:
-    - Observed vs predicted velocities
-    - Required vs predicted Sigma
-    - Component fractions (bulge, disk, gas)
-    - Kinematic/structure features
-    - Model internals (A, C, h, Sigma)
-    """
-    import pandas as pd
-    from pathlib import Path
-    
-    def _safe_div(a, b, eps=1e-12):
-        return a / np.maximum(b, eps)
-    
-    def _dlogy_dlogx(x, y):
-        x = np.asarray(x, float)
-        y = np.asarray(y, float)
-        lx = np.log(np.maximum(x, 1e-12))
-        ly = np.log(np.maximum(y, 1e-12))
-        return np.gradient(ly, lx)
-    
-    rows = []
-    for gal in galaxies:
-        R = gal["R"]
-        V_obs = gal["V_obs"]
-        V_bar = gal["V_bar"]
-        R_d = gal["R_d"]
-        f_bulge_global = gal.get("f_bulge", 0.0)
-        
-        Vgas = gal.get("V_gas", np.zeros_like(V_bar))
-        Vdisk = gal.get("V_disk_scaled", np.zeros_like(V_bar))
-        Vbul = gal.get("V_bulge_scaled", np.zeros_like(V_bar))
-        
-        # Get sigma profile if using components
-        sigma_profile = None
-        if USE_SIGMA_COMPONENTS:
-            try:
-                sigma_profile = sigma_profile_from_components_kms(Vgas, Vdisk, Vbul)
-            except Exception:
-                sigma_profile = None
-        
-        # Ask predict_velocity for internal terms
-        result = predict_velocity(
-            R, V_bar, R_d,
-            h_disk=gal.get("h_disk", 0.15 * R_d),
-            f_bulge=f_bulge_global,
-            sigma_profile_kms=sigma_profile,
-            coherence_model=coherence_model,
-            V_gas_kms=Vgas, V_disk_scaled_kms=Vdisk, V_bulge_scaled_kms=Vbul,
-            g_ext=gal.get("g_ext_profile", gal.get("g_ext", 0.0)),
-            return_diagnostics=True,
-        )
-        V_pred, diag = result if isinstance(result, tuple) else (result, {})
-        
-        # Physics / derived quantities
-        Vbar_sq = V_bar**2
-        Vpred_sq = V_pred**2
-        Vobs_sq = V_obs**2
-        
-        Sigma_req = _safe_div(Vobs_sq, Vbar_sq)
-        Sigma_pred = _safe_div(Vpred_sq, Vbar_sq)
-        
-        # Component fractions (use squared magnitudes)
-        denom = np.maximum(Vgas**2 + Vdisk**2 + Vbul**2, 1e-12)
-        f_bulge_r = (Vbul**2) / denom
-        f_disk_r  = (Vdisk**2) / denom
-        f_gas_r   = (Vgas**2) / denom
-        
-        # g_bar, Omega, slopes
-        R_m = R * kpc_to_m
-        g_bar = (V_bar * 1000.0)**2 / np.maximum(R_m, 1e-12)
-        Omega_bar = (V_bar * 1000.0) / np.maximum(R_m, 1e-12)
-        tau_dyn_s = 2.0 * np.pi / np.maximum(Omega_bar, 1e-18)
-        
-        dlnVbar_dlnR = _dlogy_dlogx(R, np.abs(V_bar))
-        dlnGbar_dlnR = _dlogy_dlogx(R, np.abs(g_bar))
-        
-        # Pull internal terms if present
-        A_use = diag.get("A_use", np.nan)
-        C_term = diag.get("C_term", np.nan)
-        h_term = diag.get("h", np.nan)
-        Sigma_term = diag.get("Sigma_term", np.nan)
-        g_bar_diag = diag.get("g_bar", g_bar)
-        g_for_h = diag.get("g_for_h", g_bar_diag)
-        
-        for i in range(len(R)):
-            rows.append(dict(
-                galaxy=gal["name"],
-                R_kpc=float(R[i]),
-                R_over_Rd=float(R[i] / max(R_d, 1e-6)),
-                V_obs_kms=float(V_obs[i]),
-                V_bar_kms=float(V_bar[i]),
-                V_pred_kms=float(V_pred[i]),
-                Sigma_req=float(Sigma_req[i]),
-                Sigma_pred=float(Sigma_pred[i]),
-                dSigma=float(Sigma_req[i] - Sigma_pred[i]),
-                need_sigma_lt_1=bool(Sigma_req[i] < 1.0),
-                
-                f_bulge_global=float(f_bulge_global),
-                f_bulge_r=float(f_bulge_r[i]),
-                f_disk_r=float(f_disk_r[i]),
-                f_gas_r=float(f_gas_r[i]),
-                
-                g_bar_SI=float(g_bar[i]),
-                Omega_bar_SI=float(Omega_bar[i]),
-                tau_dyn_Myr=float(tau_dyn_s[i] / (3600*24*365.25*1e6)),
-                dlnVbar_dlnR=float(dlnVbar_dlnR[i]),
-                dlnGbar_dlnR=float(dlnGbar_dlnR[i]),
-                
-                # Model internals (may be scalar or array; handle both)
-                A_use=float(A_use[i] if hasattr(A_use, "__len__") and len(A_use) > i else (A_use if not hasattr(A_use, "__len__") else np.nan)),
-                C_term=float(C_term[i] if hasattr(C_term, "__len__") and len(C_term) > i else (C_term if not hasattr(C_term, "__len__") else np.nan)),
-                h_term=float(h_term[i] if hasattr(h_term, "__len__") and len(h_term) > i else (h_term if not hasattr(h_term, "__len__") else np.nan)),
-                Sigma_term=float(Sigma_term[i] if hasattr(Sigma_term, "__len__") and len(Sigma_term) > i else (Sigma_term if not hasattr(Sigma_term, "__len__") else np.nan)),
-                g_for_h_SI=float(g_for_h[i] if hasattr(g_for_h, "__len__") and len(g_for_h) > i else (g_for_h if not hasattr(g_for_h, "__len__") else g_bar[i])),
-            ))
-    
-    df = pd.DataFrame(rows)
-    Path(out_csv).parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(out_csv, index=False)
-    print(f"[export] SPARC pointwise residuals -> {out_csv}  (N={len(df)})")
-
 
 def load_sparc(data_dir: Path) -> List[Dict]:
     """Load SPARC galaxy rotation curves.
@@ -1538,41 +1088,38 @@ def load_gaia(data_dir: Path) -> Optional[pd.DataFrame]:
 # ORIGINAL TESTS (1-7)
 # =============================================================================
 
-def test_sparc(galaxies: List[Dict], export_csv: Optional[str] = None) -> TestResult:
+
+def test_sparc(galaxies: List[Dict]) -> TestResult:
     """Test SPARC galaxy rotation curves.
-    
+
     Gold standard: Lelli+ 2016, McGaugh+ 2016
     - MOND RMS: 17.15 km/s (with a₀=1.2×10⁻¹⁰)
     - ΛCDM RMS: ~15 km/s (with 2-3 params/galaxy)
     - RAR scatter: 0.13 dex
+
+    This test also reports a simple *bulge vs disk* breakdown using the global
+    bulge fraction proxy f_bulge (computed from the SPARC component curves).
     """
     if not galaxies:
         return TestResult("SPARC Galaxies", True, 0.0, {}, "SKIPPED: No data")
-    
-    # Export pointwise residuals if requested
-    if export_csv:
-        export_sparc_pointwise(galaxies, export_csv, coherence_model=COHERENCE_MODEL)
-    
-    rms_list = []
-    mond_rms_list = []
-    all_log_ratios = []
+
+    rms_list: List[float] = []
+    mond_rms_list: List[float] = []
+    bulge_rms_list: List[float] = []
+    disk_rms_list: List[float] = []
+
+    all_log_ratios: List[float] = []
     wins = 0
-    
-    # Diagnostic: track bulge-dominated vs disk-dominated galaxies
-    bulge_rms_list = []
-    disk_rms_list = []
-    bulge_overshoot_fracs = []  # Track overshoot fraction for bulge galaxies
-    
-    # Diagnostic: collect f_coh and C_src for bulge galaxies (SRC2/SC modes)
-    bulge_diagnostics = []  # List of (gal_name, f_bulge, rms, mean_f_coh, mean_C_src)
-    
+
+    BULGE_GAL_THRESH = 0.30
+
     for gal in galaxies:
         R = gal['R']
         V_obs = gal['V_obs']
         V_bar = gal['V_bar']
         R_d = gal['R_d']
         h_disk = gal.get('h_disk', 0.15 * R_d)
-        f_bulge = gal.get('f_bulge', 0.0)
+        f_bulge = float(gal.get('f_bulge', 0.0))
 
         sigma_profile = None
         if USE_SIGMA_COMPONENTS:
@@ -1584,129 +1131,192 @@ def test_sparc(galaxies: List[Dict], export_csv: Optional[str] = None) -> TestRe
                 )
             except Exception:
                 sigma_profile = None
-        
-        # Optional environmental field (for wave/EFE mode): allow either a scalar
-        # gal['g_ext'] or a per-radius profile gal['g_ext_profile'].
-        g_ext_arg = gal.get('g_ext_profile', gal.get('g_ext', 0.0))
-        
-        # Request diagnostics for bulge galaxies in SRC2/SC modes
-        need_diagnostics = (f_bulge > 0.3) and (COHERENCE_MODEL in ("SRC2", "SC"))
-        # For SPARC: use baseline C (only rotation curves, no 6D data)
-        # Flow topology requires 6D phase-space data (individual star positions/velocities)
-        # SPARC only has integrated rotation curves, so force baseline coherence
-        sparc_coherence = None if COHERENCE_MODEL == "FLOW" else COHERENCE_MODEL
-        result = predict_velocity(
-            R, V_bar, R_d, h_disk, f_bulge,
-            sigma_profile_kms=sigma_profile,
-            V_gas_kms=gal.get('V_gas', None),
-            V_disk_scaled_kms=gal.get('V_disk_scaled', None),
-            V_bulge_scaled_kms=gal.get('V_bulge_scaled', None),
-            g_ext=g_ext_arg,
-            return_diagnostics=need_diagnostics,
-            coherence_model=sparc_coherence,  # Force baseline for SPARC when FLOW mode
-            use_flow_for_6d=False,  # SPARC doesn't have 6D data
-        )
-        if need_diagnostics and isinstance(result, tuple):
-            V_pred, diag = result
-            # Store diagnostics for this bulge galaxy
-            mean_f_coh = float(np.mean(diag.get('f_coh', np.array([0.0]))))
-            mean_C_src = float(np.mean(diag.get('C_src', np.array([0.0]))))
-            bulge_diagnostics.append((gal['name'], f_bulge, None, mean_f_coh, mean_C_src))  # rms added later
-        else:
-            V_pred = result
+
+        # Use covariant coherence proxy for bulge galaxies if enabled
+        use_covariant = USE_COVARIANT_PROXY and f_bulge >= BULGE_GAL_THRESH
+        V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge, 
+                                 sigma_profile_kms=sigma_profile,
+                                 use_covariant_proxy=use_covariant)
         V_mond = predict_mond(R, V_bar)
-        
-        rms_sigma = np.sqrt(((V_pred - V_obs)**2).mean())
-        rms_mond = np.sqrt(((V_mond - V_obs)**2).mean())
-        
+
+        rms_sigma = float(np.sqrt(((V_pred - V_obs) ** 2).mean()))
+        rms_mond = float(np.sqrt(((V_mond - V_obs) ** 2).mean()))
+
         rms_list.append(rms_sigma)
         mond_rms_list.append(rms_mond)
-        
-        # Diagnostic: bin by bulge fraction
-        if f_bulge > 0.3:
+
+        if f_bulge >= BULGE_GAL_THRESH:
             bulge_rms_list.append(rms_sigma)
-            # Update diagnostics with RMS
-            if need_diagnostics:
-                for i, (name, fb, _, mf, mc) in enumerate(bulge_diagnostics):
-                    if name == gal['name']:
-                        bulge_diagnostics[i] = (name, fb, rms_sigma, mf, mc)
-                        break
         else:
             disk_rms_list.append(rms_sigma)
-        
+
         # RAR scatter calculation
         valid = (V_obs > 0) & (V_pred > 0)
         if valid.sum() > 0:
             log_ratio = np.log10(V_obs[valid] / V_pred[valid])
             all_log_ratios.extend(log_ratio)
-        
+
         if rms_sigma < rms_mond:
             wins += 1
-    
-    mean_rms = np.mean(rms_list)
-    mean_mond_rms = np.mean(mond_rms_list)
+
+    mean_rms = float(np.mean(rms_list))
+    mean_mond_rms = float(np.mean(mond_rms_list))
     win_rate = wins / len(galaxies)
-    rar_scatter = np.std(all_log_ratios) if all_log_ratios else 0.0
-    
-    # Diagnostic: mean RMS by bulge fraction
-    bulge_mean_rms = np.mean(bulge_rms_list) if bulge_rms_list else None
-    disk_mean_rms = np.mean(disk_rms_list) if disk_rms_list else None
-    
-    # Print diagnostics for worst bulge galaxies (SRC2/SC modes)
-    if bulge_diagnostics and COHERENCE_MODEL in ("SRC2", "SC"):
-        # Sort by RMS (worst first)
-        bulge_diagnostics.sort(key=lambda x: x[2] if x[2] is not None else float('inf'), reverse=True)
-        print()
-        print("=" * 80)
-        print(f"DIAGNOSTICS: Worst 5 Bulge Galaxies (f_bulge > 0.3) - {COHERENCE_MODEL} mode")
-        print("=" * 80)
-        print(f"{'Galaxy':<20} {'f_bulge':<10} {'RMS':<10} {'mean(f_coh)':<15} {'mean(C_src)':<15}")
-        print("-" * 80)
-        for name, fb, rms, mf, mc in bulge_diagnostics[:5]:
-            rms_str = f"{rms:.2f}" if rms is not None else "N/A"
-            print(f"{name:<20} {fb:<10.3f} {rms_str:<10} {mf:<15.4f} {mc:<15.4f}")
-        print("=" * 80)
-        print()
-    
+    rar_scatter = float(np.std(all_log_ratios)) if all_log_ratios else 0.0
+
+    bulge_rms = float(np.mean(bulge_rms_list)) if bulge_rms_list else 0.0
+    disk_rms = float(np.mean(disk_rms_list)) if disk_rms_list else 0.0
+
     passed = mean_rms < 20.0
-    
-    details = {
-        'n_galaxies': len(galaxies),
-        'mean_rms': mean_rms,
-        'mean_mond_rms': mean_mond_rms,
-        'win_rate': win_rate,
-        'rar_scatter_dex': rar_scatter,
-        'benchmark_mond_rms': OBS_BENCHMARKS['sparc']['mond_rms_kms'],
-        'benchmark_lcdm_rms': OBS_BENCHMARKS['sparc']['lcdm_rms_kms'],
-        'benchmark_rar_scatter': OBS_BENCHMARKS['sparc']['rar_scatter_dex'],
-    }
-    
-    # Add diagnostic info if available (use keys expected by sweep script)
-    if bulge_mean_rms is not None:
-        details['mean_rms_bulge'] = bulge_mean_rms
-        details['bulge_mean_rms'] = bulge_mean_rms  # Keep both for compatibility
-        details['n_bulge'] = len(bulge_rms_list)
-        details['n_bulge_galaxies'] = len(bulge_rms_list)  # Keep both for compatibility
-        # Add overshoot diagnostic
-        if 'bulge_overshoot_fracs' in locals() and bulge_overshoot_fracs:
-            details['bulge_overshoot_frac_mean'] = float(np.mean(bulge_overshoot_fracs))
-    if disk_mean_rms is not None:
-        details['mean_rms_disk'] = disk_mean_rms
-        details['disk_mean_rms'] = disk_mean_rms  # Keep both for compatibility
-        details['n_disk'] = len(disk_rms_list)
-        details['n_disk_galaxies'] = len(disk_rms_list)  # Keep both for compatibility
-    
-    msg = f"RMS={mean_rms:.2f} km/s (MOND={mean_mond_rms:.2f}, ΛCDM~15), Scatter={rar_scatter:.3f} dex, Win={win_rate*100:.1f}%"
-    if bulge_mean_rms is not None and disk_mean_rms is not None:
-        msg += f" | Bulge: {bulge_mean_rms:.2f}, Disk: {disk_mean_rms:.2f}"
-    
+
     return TestResult(
         name="SPARC Galaxies",
         passed=passed,
         metric=mean_rms,
-        details=details,
-        message=msg
+        details={
+            'n_galaxies': len(galaxies),
+            'mean_rms': mean_rms,
+            'mean_mond_rms': mean_mond_rms,
+            'win_rate': win_rate,
+            'rar_scatter_dex': rar_scatter,
+            'bulge_thresh_f_bulge': BULGE_GAL_THRESH,
+            'n_bulge_galaxies': len(bulge_rms_list),
+            'n_disk_galaxies': len(disk_rms_list),
+            'bulge_rms': bulge_rms,
+            'disk_rms': disk_rms,
+            'benchmark_mond_rms': OBS_BENCHMARKS['sparc']['mond_rms_kms'],
+            'benchmark_lcdm_rms': OBS_BENCHMARKS['sparc']['lcdm_rms_kms'],
+            'benchmark_rar_scatter': OBS_BENCHMARKS['sparc']['rar_scatter_dex'],
+        },
+        message=(
+            f"RMS={mean_rms:.2f} km/s (MOND={mean_mond_rms:.2f}, ΛCDM~15), "
+            f"BulgeRMS={bulge_rms:.2f} (n={len(bulge_rms_list)}), "
+            f"DiskRMS={disk_rms:.2f} (n={len(disk_rms_list)}), "
+            f"Scatter={rar_scatter:.3f} dex, Win={win_rate*100:.1f}%"
+        )
     )
+
+
+def export_sparc_pointwise(galaxies: List[Dict], out_csv: Any, coherence_model: Optional[str] = None) -> Path:
+    """Export pointwise SPARC residuals + model terms for discovery.
+
+    This writes one row per (galaxy, radius) point including:
+      - observed vs predicted velocities
+      - Σ_req and Σ_pred (and dSigma)
+      - local component fractions and basic derived features (Ω, τ_dyn, gradients)
+      - model terms: h_term, C_term, A_use, Σ
+
+    The output is designed to work with analyze_sparc_pointwise.py and
+    discover_sparc_residual_drivers.py.
+    """
+    if not galaxies:
+        raise RuntimeError('No SPARC galaxies loaded; cannot export pointwise.')
+
+    out_path = Path(out_csv)
+    if out_path.suffix == '':
+        out_path = out_path.with_suffix('.csv')
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    rows = []
+
+    for gal in galaxies:
+        name = gal.get('name', 'UNKNOWN')
+        R = np.asarray(gal['R'], dtype=float)
+        V_obs = np.asarray(gal['V_obs'], dtype=float)
+        V_bar = np.asarray(gal['V_bar'], dtype=float)
+        R_d = float(gal['R_d'])
+        h_disk = float(gal.get('h_disk', 0.15 * R_d))
+        f_bulge_gal = float(gal.get('f_bulge', 0.0))
+
+        V_gas = np.asarray(gal.get('V_gas', np.zeros_like(V_bar)), dtype=float)
+        V_disk = np.asarray(gal.get('V_disk_scaled', np.zeros_like(V_bar)), dtype=float)
+        V_bulge = np.asarray(gal.get('V_bulge_scaled', np.zeros_like(V_bar)), dtype=float)
+
+        sigma_profile = None
+        if USE_SIGMA_COMPONENTS:
+            try:
+                sigma_profile = sigma_profile_from_components_kms(V_gas, V_disk, V_bulge)
+            except Exception:
+                sigma_profile = None
+
+        V_pred, diag = predict_velocity(
+            R_kpc=R,
+            V_bar=V_bar,
+            R_d=R_d,
+            h_disk=h_disk,
+            f_bulge=f_bulge_gal,
+            sigma_profile_kms=sigma_profile,
+            coherence_model=coherence_model,
+            return_terms=True,
+        )
+
+        Sigma_pred = np.asarray(diag.get('Sigma', (V_pred / np.maximum(V_bar, 1e-9)) ** 2), dtype=float)
+        C_term = np.asarray(diag.get('C_term', np.nan), dtype=float)
+        A_use = np.asarray(diag.get('A_use', A_0), dtype=float)
+        h_term = np.asarray(diag.get('h_term', np.nan), dtype=float)
+
+        V_bar_safe = np.maximum(V_bar, 1e-9)
+        Sigma_req = (V_obs / V_bar_safe) ** 2
+        dSigma = Sigma_req - Sigma_pred
+
+        # Local component fractions (in V^2 space)
+        Vbar2 = np.maximum(V_bar_safe ** 2, 1e-12)
+        f_gas_r = (V_gas ** 2) / Vbar2
+        f_disk_r = (V_disk ** 2) / Vbar2
+        f_bulge_r = (V_bulge ** 2) / Vbar2
+
+        # Basic derived features
+        R_m = np.maximum(R, 1e-9) * kpc_to_m
+        V_bar_ms = V_bar_safe * 1000.0
+        g_bar = (V_bar_ms ** 2) / np.maximum(R_m, 1e-9)
+        Omega_bar_SI = V_bar_ms / np.maximum(R_m, 1e-9)
+        sec_per_myr = 365.25 * 24.0 * 3600.0 * 1e6
+        tau_dyn_Myr = (1.0 / np.maximum(Omega_bar_SI, 1e-30)) / sec_per_myr
+
+        lnR = np.log(np.maximum(R, 1e-9))
+        lnVbar = np.log(np.maximum(V_bar_safe, 1e-9))
+        dlnVbar_dlnR = np.gradient(lnVbar, lnR)
+        lnGbar = np.log(np.maximum(g_bar, 1e-30))
+        dlnGbar_dlnR = np.gradient(lnGbar, lnR)
+
+        df_g = pd.DataFrame({
+            'galaxy': name,
+            'R_kpc': R,
+            'V_obs_kms': V_obs,
+            'V_bar_kms': V_bar,
+            'V_pred_kms': V_pred,
+            'Sigma_req': Sigma_req,
+            'Sigma_pred': Sigma_pred,
+            'dSigma': dSigma,
+            'need_Sigma_lt_1': (Sigma_req < 1.0).astype(int),
+            'f_bulge': f_bulge_gal,
+            'f_bulge_r': f_bulge_r,
+            'f_disk_r': f_disk_r,
+            'f_gas_r': f_gas_r,
+            'R_d_kpc': R_d,
+            'R_over_Rd': R / max(R_d, 1e-6),
+            'g_bar_SI': g_bar,
+            'Omega_bar_SI': Omega_bar_SI,
+            'tau_dyn_Myr': tau_dyn_Myr,
+            'dlnVbar_dlnR': dlnVbar_dlnR,
+            'dlnGbar_dlnR': dlnGbar_dlnR,
+            'h_term': h_term,
+            'C_term': C_term,
+            'A_use': A_use,
+        })
+
+        # Optional FLOW invariants if present
+        if isinstance(diag, dict) and 'omega2' in diag:
+            df_g['omega2'] = np.asarray(diag.get('omega2'), dtype=float)
+            df_g['shear2'] = np.asarray(diag.get('shear2'), dtype=float)
+            df_g['theta2'] = np.asarray(diag.get('theta2'), dtype=float)
+            df_g['tidal2'] = np.asarray(diag.get('tidal2'), dtype=float)
+
+        rows.append(df_g)
+
+    df_out = pd.concat(rows, ignore_index=True)
+    df_out.to_csv(out_path, index=False)
+    return out_path
 
 
 def test_clusters(clusters: List[Dict]) -> TestResult:
@@ -1865,6 +1475,171 @@ def test_cluster_holdout(clusters: List[Dict], n_splits: int = 10,
     )
 
 
+def mw_baryonic_density_kg_m3(R_kpc, z_kpc):
+    """
+    Simple MW baryonic density model used for Gaia bulge covariant test:
+      - Exponential disk  ρ ~ exp(-R/Rd) exp(-|z|/zd)
+      - Hernquist bulge   ρ(r) = (M/(2π)) a / (r (r+a)^3)
+
+    Returns ρ in kg/m^3.
+    """
+    # Match the MW baryonic parameters in test_gaia()
+    MW_SCALE = 1.16  # McMillan 2017 scaling factor
+    M_disk = 6e10 * (MW_SCALE**2)
+    R_d = 2.6
+    z_d = 0.3
+
+    M_bulge = 1e10 * (MW_SCALE**2)
+    a_bulge = 0.7
+
+    R = np.asarray(R_kpc, dtype=float)
+    z = np.asarray(z_kpc, dtype=float)
+
+    R_m = R * kpc_to_m
+    z_m = z * kpc_to_m
+    r_m = np.sqrt(R_m**2 + z_m**2)
+
+    # Disk density
+    M_disk_kg = M_disk * M_sun
+    R_d_m = R_d * kpc_to_m
+    z_d_m = z_d * kpc_to_m
+
+    rho0_disk = M_disk_kg / (4.0 * np.pi * (R_d_m**2) * z_d_m)
+    rho_disk = rho0_disk * np.exp(-R / R_d) * np.exp(-np.abs(z) / z_d)
+
+    # Hernquist bulge density
+    M_bulge_kg = M_bulge * M_sun
+    a_m = a_bulge * kpc_to_m
+    r_safe = np.maximum(r_m, 1e-6 * kpc_to_m)
+
+    rho_bulge = (M_bulge_kg / (2.0 * np.pi)) * (a_m / (r_safe * (r_safe + a_m)**3))
+
+    rho_total = rho_disk + rho_bulge
+    return np.maximum(rho_total, 0.0)
+
+
+def test_gaia_bulge_covariant(gaia_df: Optional[pd.DataFrame]) -> TestResult:
+    """
+    Gaia "bulge covariant coherence" regression test.
+
+    Notes:
+      * The Eilers catalog used by load_gaia() is an R~4–16 kpc disk sample.
+      * We use an inner-disk proxy selection (R<5 kpc, |z|>0.3 kpc) as a stand-in.
+      * We compare baseline coherence (v^2/(v^2+σ^2)) vs covariant coherence:
+          C_cov = ω² / (ω² + 4πGρ + (δH0)²)
+        with ω² from observed mean v_phi / R and ρ from a simple MW disk+bulge density model.
+    """
+    if gaia_df is None or len(gaia_df) == 0:
+        return TestResult(name="Gaia Bulge Covariant", passed=True, metric=0.0, details={"status": "SKIPPED", "reason": "No Gaia data"}, message="SKIPPED: No Gaia data")
+
+    df = gaia_df.copy()
+
+    # Proxy bulge selection (inner disk / high-|z|)
+    sel = (df["R_gal"] < 5.0) & (np.abs(df["z_gal"]) > 0.3)
+    df = df[sel].copy()
+    n_selected = len(df)
+
+    if n_selected < 200:
+        return TestResult(name="Gaia Bulge Covariant", passed=True, metric=0.0, details={"status": "SKIPPED", "n_selected": int(n_selected)}, message=f"SKIPPED: only {int(n_selected)} selected")
+
+    # Bin in (R, |z|) to get stable ω² and dispersions
+    R = df["R_gal"].to_numpy(dtype=float)
+    z_abs = np.abs(df["z_gal"].to_numpy(dtype=float))
+    vphi = df["v_phi_obs"].to_numpy(dtype=float)
+
+    # 5 radial bins × 2 vertical bins = 10 bins (matches design doc)
+    R_edges = np.linspace(np.min(R), np.max(R), 6)
+    z_edges = np.linspace(np.min(z_abs), np.max(z_abs), 3)
+
+    R_bin = np.digitize(R, R_edges) - 1
+    z_bin = np.digitize(z_abs, z_edges) - 1
+
+    mask = (R_bin >= 0) & (R_bin < 5) & (z_bin >= 0) & (z_bin < 2)
+    df = df.iloc[np.where(mask)[0]].copy()
+    R_bin = R_bin[mask]
+    z_bin = z_bin[mask]
+
+    min_stars = 30
+    rows = []
+    for iR in range(5):
+        for iz in range(2):
+            idx = (R_bin == iR) & (z_bin == iz)
+            if np.sum(idx) < min_stars:
+                continue
+            sub = df.iloc[np.where(idx)[0]]
+
+            R_mean = float(np.mean(sub["R_gal"]))
+            z_mean = float(np.mean(np.abs(sub["z_gal"])))
+
+            vphi_mean = float(np.mean(sub["v_phi_obs"]))
+            sigma_phi = float(np.std(sub["v_phi_obs"], ddof=1)) if len(sub) > 1 else 0.0
+
+            rows.append((R_mean, z_mean, vphi_mean, sigma_phi, int(len(sub))))
+
+    if len(rows) < 3:
+        return TestResult(name="Gaia Bulge Covariant", passed=False, metric=0.0, details={"status": "FAILED", "reason": "Too few populated bins", "n_bins": int(len(rows)), "n_selected": int(n_selected)}, message=f"FAILED: only {int(len(rows))} populated bins")
+
+    Rm = np.array([r[0] for r in rows], dtype=float)
+    zm = np.array([r[1] for r in rows], dtype=float)
+    vphi_m = np.array([r[2] for r in rows], dtype=float)
+    sigphi = np.array([r[3] for r in rows], dtype=float)
+    counts = np.array([r[4] for r in rows], dtype=int)
+
+    omega2 = (vphi_m / np.maximum(Rm, 1e-6))**2  # (km/s/kpc)^2
+    theta2 = np.zeros_like(omega2)
+
+    rho = mw_baryonic_density_kg_m3(Rm, zm)
+    C_cov = C_covariant_coherence(omega2, rho, theta2)
+
+    # Baseline coherence proxy in same bins
+    C_base = (vphi_m**2) / (vphi_m**2 + sigphi**2 + 1e-30)
+
+    # MW baryonic circular speed model (same as test_gaia)
+    MW_SCALE = 1.16
+    M_disk = 6e10 * (MW_SCALE**2) * M_sun
+    M_bulge = 1e10 * (MW_SCALE**2) * M_sun
+    M_gas = 1e10 * (MW_SCALE**2) * M_sun
+    R_disk = 2.6 * kpc_to_m
+    R_bulge = 0.7 * kpc_to_m
+    R_gas = 7.0 * kpc_to_m
+
+    Rm_m = Rm * kpc_to_m
+
+    v2_disk = (G * M_disk * Rm_m**2) / (Rm_m**2 + R_disk**2)**1.5
+    v2_bulge = (G * M_bulge * Rm_m**2) / (Rm_m**2 + R_bulge**2)**1.5
+    v2_gas = (G * M_gas * Rm_m**2) / (Rm_m**2 + R_gas**2)**1.5
+
+    Vbar = np.sqrt(np.maximum(v2_disk + v2_bulge + v2_gas, 0.0)) / 1000.0  # km/s
+    gbar_SI = (Vbar * 1000.0)**2 / np.maximum(Rm_m, 1e-6)
+
+    h = h_function(gbar_SI)
+
+    Sigma_base = 1.0 + A_0 * C_base * h
+    Sigma_cov = 1.0 + A_0 * C_cov * h
+
+    Vpred_base = Vbar * np.sqrt(np.maximum(Sigma_base, 0.0))
+    Vpred_cov = Vbar * np.sqrt(np.maximum(Sigma_cov, 0.0))
+
+    rms_base = float(np.sqrt(np.mean((vphi_m - Vpred_base)**2)))
+    rms_cov = float(np.sqrt(np.mean((vphi_m - Vpred_cov)**2)))
+    improvement = rms_base - rms_cov
+
+    passed = improvement > 1.0
+
+    details = {
+        "status": "PASSED" if passed else "FAILED",
+        "baseline_rms_kms": rms_base,
+        "rms_kms": rms_cov,
+        "improvement_kms": improvement,
+        "n_bins": int(len(rows)),
+        "n_selected": int(n_selected),
+        "mean_C_cov": float(np.mean(C_cov)),
+        "mean_omega2": float(np.mean(omega2)),
+        "counts": counts.tolist(),
+    }
+    return TestResult(name="Gaia Bulge Covariant", passed=passed, metric=rms_cov, details=details, message=f"RMS={rms_cov:.2f} km/s (baseline {rms_base:.2f}, Δ={improvement:.2f})")
+
+
 def test_gaia(gaia_df: Optional[pd.DataFrame]) -> TestResult:
     """Test Milky Way star-by-star validation.
     
@@ -1895,15 +1670,32 @@ def test_gaia(gaia_df: Optional[pd.DataFrame]) -> TestResult:
     sigma_profile = None
     if USE_SIGMA_COMPONENTS:
         sigma_profile = sigma_profile_from_components_kms(np.sqrt(v2_gas), np.sqrt(v2_disk), np.sqrt(v2_bulge))
-    # For Gaia/MW: use flow coherence if FLOW mode is enabled (we have 6D data available)
-    # Note: Currently test_gaia uses rotation curve approach, but could be extended to use
-    # individual star positions/velocities from gaia_df for true 6D flow topology
-    use_flow = (COHERENCE_MODEL == "FLOW")
+
+    # Optional: if we have precomputed 6D flow invariants for the Gaia sample, use them
+    # to drive coherence directly (this tests the "flow/topology" concept on Milky Way data).
+    coherence_external = None
+    used_flow_features = False
+    if COHERENCE_MODEL == "FLOW" and GAIA_FLOW_FEATURES_DF is not None:
+        try:
+            omega2 = GAIA_FLOW_FEATURES_DF['omega2'].values
+            shear2 = GAIA_FLOW_FEATURES_DF['shear2'].values
+            theta = GAIA_FLOW_FEATURES_DF['theta'].values
+            theta2 = theta**2
+            coherence_external = C_flow_coherence(omega2, shear2, theta2, tidal2=None)
+            used_flow_features = True
+        except Exception:
+            coherence_external = None
+            used_flow_features = False
+
     V_pred = predict_velocity(
-        R, V_bar, R_d_mw, h_disk=0.3, f_bulge=0.1, 
+        R,
+        V_bar,
+        R_d_mw,
+        h_disk=0.3,
+        f_bulge=0.1,
         sigma_profile_kms=sigma_profile,
         coherence_model=COHERENCE_MODEL,
-        use_flow_for_6d=use_flow,  # Enable flow topology for 6D data (Gaia)
+        coherence_external=coherence_external,
     )
     
     # Asymmetric drift correction
@@ -1947,6 +1739,8 @@ def test_gaia(gaia_df: Optional[pd.DataFrame]) -> TestResult:
             'n_stars': len(gaia_df),
             'rms': rms,
             'mean_residual': resid.mean(),
+            'flow_features_used': bool(used_flow_features),
+            'flow_coherence_mean': (float(np.nanmean(coherence_external)) if coherence_external is not None else None),
             'benchmark_V_sun': OBS_BENCHMARKS['milky_way']['V_sun_kms'],
             'benchmark_n_stars': OBS_BENCHMARKS['milky_way']['n_gaia_stars'],
         },
@@ -2157,19 +1951,9 @@ def test_wide_binaries() -> TestResult:
     # Typical binary: M_total ~ 1.5 M_sun
     M_total = 1.5 * M_sun
     g_N = G * M_total / s_m**2
-
-    # Optional external field (Milky Way at the Solar radius), for the wave/EFE mode.
-    # Using the centripetal estimate g_ext ≈ V_c^2 / R.
-    Vc = OBS_BENCHMARKS['milky_way']['V_sun_kms'] * 1000.0
-    R_sun = OBS_BENCHMARKS['milky_way']['R_sun_kpc'] * kpc_to_m
-    g_ext = (Vc**2) / max(R_sun, 1e-30)
     
     # Σ-Gravity enhancement
-    # - baseline (canonical): g_ext ignored
-    # - wave/interference mode: g_ext suppresses the enhancement
-    Sigma_iso = sigma_enhancement(g_N, A=A_0)
-    Sigma_env = sigma_enhancement(g_N, A=A_0, g_ext=g_ext)
-    Sigma = Sigma_env if USE_WAVE_INTERFERENCE else Sigma_iso
+    Sigma = sigma_enhancement(g_N, A=A_0)
     boost = Sigma - 1
     
     # Chae 2023 observed ~35% boost
@@ -2186,24 +1970,14 @@ def test_wide_binaries() -> TestResult:
         details={
             'separation_AU': s_AU,
             'g_N': g_N,
-            'g_ext': g_ext,
             'g_over_a0': g_N / a0_mond,
             'boost_pred': boost,
-            'boost_iso': float(Sigma_iso - 1),
-            'boost_env': float(Sigma_env - 1),
-            'wave_mode_enabled': USE_WAVE_INTERFERENCE,
-            'wave_mode': WAVE_MODE,
-            'wave_beta': WAVE_BETA,
             'boost_obs': obs_boost,
             'obs_uncertainty': obs_uncertainty,
             'n_pairs': OBS_BENCHMARKS['wide_binaries']['n_pairs'],
             'controversy': OBS_BENCHMARKS['wide_binaries']['controversy'],
         },
-        message=(
-            f"Boost at {s_AU} AU: {boost*100:.1f}% "
-            f"(iso={float(Sigma_iso - 1)*100:.1f}%, env={float(Sigma_env - 1)*100:.1f}%; "
-            f"Chae 2023: {obs_boost*100:.0f}±{obs_uncertainty*100:.0f}%)"
-        )
+        message=f"Boost at {s_AU} AU: {boost*100:.1f}% (Chae 2023: {obs_boost*100:.0f}±{obs_uncertainty*100:.0f}%)"
     )
 
 
@@ -2383,22 +2157,17 @@ def test_external_field_effect() -> TestResult:
     # External field (from host galaxy)
     g_ext = 1e-10  # m/s² (MW at 100 kpc)
     
-    # Total field (scalar EFE proxy)
+    # Total field
     g_total = np.sqrt(g_int**2 + g_ext**2)
-
-    # Baseline (always available): evaluate h on |g_total|
-    Sigma_total_scalar = sigma_enhancement(g_total, A=A_0)
-
+    
+    # Σ-Gravity enhancement with total field
+    Sigma_total = sigma_enhancement(g_total, A=A_0)
+    
     # Enhancement if isolated
     Sigma_isolated = sigma_enhancement(g_int, A=A_0)
-
-    # Wave/interference mode: pass g_int and g_ext separately (uses g_tot internally)
-    Sigma_total_wave = sigma_enhancement(g_int, A=A_0, g_ext=g_ext)
-
-    suppression_scalar = Sigma_total_scalar / Sigma_isolated
-    suppression_wave = Sigma_total_wave / Sigma_isolated
-
-    suppression = suppression_wave if USE_WAVE_INTERFERENCE else suppression_scalar
+    
+    # EFE suppression
+    suppression = Sigma_total / Sigma_isolated
     
     # EFE should suppress enhancement when g_ext > g_int
     passed = suppression < 1.0
@@ -2411,17 +2180,10 @@ def test_external_field_effect() -> TestResult:
             'g_int': g_int,
             'g_ext': g_ext,
             'Sigma_isolated': Sigma_isolated,
-            'Sigma_total_scalar': Sigma_total_scalar,
-            'Sigma_total_wave': Sigma_total_wave,
-            'suppression_scalar': suppression_scalar,
-            'suppression_wave': suppression_wave,
-            'suppression_used': suppression,
+            'Sigma_total': Sigma_total,
+            'suppression': suppression,
         },
-        message=(
-            f"EFE suppression: {suppression:.2f}× "
-            f"(scalar={suppression_scalar:.2f}×, wave={suppression_wave:.2f}×; "
-            f"g_ext/g†={g_ext/g_dagger:.2f})"
-        )
+        message=f"EFE suppression: {suppression:.2f}× (g_ext/g†={g_ext/g_dagger:.2f})"
     )
 
 
@@ -2589,211 +2351,6 @@ def test_bullet_cluster() -> TestResult:
     )
 
 
-def test_bullet_anisotropic_ab() -> TestResult:
-    """A/B test: Compare baseline (κ=0) vs anisotropic (κ>0) predictions
-    for Bullet Cluster lensing offset (directional observable).
-    
-    This tests whether anisotropic gravity can better predict the observed
-    ~150 kpc offset between lensing peak and gas peak in the Bullet Cluster.
-    
-    Gold standard: Clowe+ 2006, ApJ 648, L109
-    """
-    try:
-        from test_bullet_anisotropic import test_bullet_anisotropic_ab as _test_func
-        results = _test_func()
-        
-        if not results.get('success', False):
-            return TestResult(
-                name="Bullet Cluster Anisotropic A/B",
-                passed=True,
-                metric=0.0,
-                details={"enabled": False, "error": results.get('error', 'unknown')},
-                message=f"SKIPPED ({results.get('error', 'test_bullet_anisotropic module not found')})",
-            )
-        
-        baseline_error = results['comparison']['baseline_rms']
-        aniso_error = results['comparison']['aniso_rms']
-        improvement = results['comparison']['improvement']
-        aniso_better = results['comparison']['aniso_better']
-        
-        # Pass if anisotropic is better OR if both are within reasonable range
-        # (The offset prediction is challenging, so we're looking for relative improvement)
-        passed = aniso_better or (baseline_error < 100.0 and aniso_error < 100.0)
-        
-        return TestResult(
-            name="Bullet Cluster Anisotropic A/B",
-            passed=bool(passed),
-            metric=float(improvement),
-            details={
-                "observed_offset_kpc": results['observed_offset_kpc'],
-                "baseline_offset_kpc": results['baseline']['predicted_offset_kpc'],
-                "baseline_error_kpc": baseline_error,
-                "aniso_offset_kpc": results['anisotropic']['predicted_offset_kpc'],
-                "aniso_error_kpc": aniso_error,
-                "aniso_kappa": results['anisotropic']['kappa'],
-                "improvement": improvement,
-                "aniso_better": aniso_better,
-            },
-            message=f"Offset: baseline={results['baseline']['predicted_offset_kpc']:.1f} kpc (error={baseline_error:.1f}), aniso={results['anisotropic']['predicted_offset_kpc']:.1f} kpc (error={aniso_error:.1f}), improvement={improvement*100:.1f}%",
-        )
-    except ImportError:
-        return TestResult(
-            name="Bullet Cluster Anisotropic A/B",
-            passed=True,
-            metric=0.0,
-            details={"enabled": False},
-            message="SKIPPED (test_bullet_anisotropic.py not found on PYTHONPATH)",
-        )
-
-
-def test_synthetic_stream_lensing() -> TestResult:
-    """Synthetic anisotropic-operator + ray-trace test (toy 2D/3D regression).
-
-    This is NOT an observational benchmark. It is a diagnostic that the
-    *directional* operator
-        ∇·[(I + κ w(x) ŝ ŝᵀ) ∇Φ] = 4πGρ
-    can produce focusing toward a stream/filament in a way a scalar amplitude
-    rescaling cannot mimic.
-
-    The test runs:
-      - isotropic solve (κ=0)
-      - anisotropic solve (κ>0) localized around a filament
-    and compares ray-traced capture + mean-shift statistics.
-    """
-    if not _HAS_STREAM_SEEKING_TEST:
-        return TestResult(
-            name="Synthetic Stream Lensing",
-            passed=True,
-            metric=0.0,
-            details={"enabled": False},
-            message="SKIPPED (stream_seeking_anisotropic.py not found on PYTHONPATH)",
-        )
-
-    out = synthetic_stream_lensing_regression(
-        N=160,
-        L=1.0,
-        kappa=6.0,
-        mass_offset_x=0.30,
-        mass_sigma=0.12,
-        stream_sigma=0.06,
-        capture_width=0.08,
-        n_rays=80,
-        n_steps=240,
-        tol=1e-7,
-        max_iter=6000,
-    )
-
-    # Pass criteria: anisotropy should increase filament capture and pull mean x_end toward x=0
-    passed = (out.capture_ratio > 1.05) and (out.mean_shift_ratio < 0.98)
-
-    return TestResult(
-        name="Synthetic Stream Lensing",
-        passed=bool(passed),
-        metric=float(out.capture_ratio),
-        details={
-            "capture_ratio": float(out.capture_ratio),
-            "mean_shift_ratio": float(out.mean_shift_ratio),
-            "capture_iso": float(out.capture_iso),
-            "capture_aniso": float(out.capture_aniso),
-            "mean_x_iso": float(out.mean_x_iso),
-            "mean_x_aniso": float(out.mean_x_aniso),
-            "solver_iso": out.solver_iso,
-            "solver_aniso": out.solver_aniso,
-        },
-        message=f"capture_ratio={out.capture_ratio:.3f} (want>1), mean_shift_ratio={out.mean_shift_ratio:.3f} (want<1)",
-    )
-
-
-def test_anisotropic_prediction_ab() -> TestResult:
-    """A/B test: Does anisotropic gravity predict object impact better than baseline?
-
-    This test compares κ=0 (baseline isotropic) vs κ>0 (anisotropic) predictions
-    against observational targets to determine if anisotropy improves predictions
-    of how gravity impacts objects (light rays, particles, etc.).
-
-    Currently uses synthetic observations, but designed to accept real data:
-    - Light deflection/image positions (strong lensing)
-    - Weak lensing shear anisotropy
-    - Bullet-like merger offsets
-    - Stellar stream tracks
-
-    Pass criteria: Anisotropic model must improve RMS prediction error vs baseline.
-    """
-    try:
-        from score_stream_lensing import (
-            build_scene,
-            solve_potential,
-            predict_ray_endpoints,
-            compare_models_ab,
-        )
-    except ImportError:
-        return TestResult(
-            name="Anisotropic Prediction A/B",
-            passed=True,
-            metric=0.0,
-            details={"enabled": False},
-            message="SKIPPED (score_stream_lensing.py not found)",
-        )
-
-    # Build a test scene
-    scene = build_scene(
-        N=160,
-        L=1.0,
-        mass_offset_x=0.30,
-        mass_sigma=0.12,
-        stream_sigma=0.06,
-    )
-
-    # Generate synthetic "observations" from a known κ_true
-    # In real usage, replace this with actual observational data
-    kappa_true = 6.0
-    Phi_true, _ = solve_potential(scene, kappa=kappa_true)
-    x0s, x_obs = predict_ray_endpoints(Phi_true, scene, n_rays=80, n_steps=240)
-    
-    # Add realistic measurement noise
-    obs_uncertainty = np.full_like(x_obs, 0.002)
-    x_obs = x_obs + np.random.normal(0.0, obs_uncertainty[0], size=x_obs.shape)
-
-    # A/B comparison: baseline (κ=0) vs anisotropic (κ=6.0)
-    results = compare_models_ab(
-        scene=scene,
-        kappa_baseline=0.0,
-        kappa_aniso=6.0,
-        observations=x_obs,
-        obs_uncertainty=obs_uncertainty,
-        prediction_type="ray_endpoints",
-        n_rays=80,
-        n_steps=240,
-    )
-
-    baseline_rms = results['baseline']['score'].rms
-    aniso_rms = results['anisotropic']['score'].rms
-    improvement = results['comparison']['rms_improvement']
-    aniso_better = results['comparison']['aniso_better']
-
-    # Pass if anisotropic model improves predictions
-    # (In this synthetic case, it should since observations were generated with κ>0)
-    passed = aniso_better and improvement > 0.05  # Require at least 5% improvement
-
-    return TestResult(
-        name="Anisotropic Prediction A/B",
-        passed=passed,
-        metric=improvement,  # RMS improvement fraction
-        details={
-            "baseline_rms": float(baseline_rms),
-            "anisotropic_rms": float(aniso_rms),
-            "rms_improvement": float(improvement),
-            "chi2_delta": float(results['comparison']['chi2_delta']) if results['comparison']['chi2_delta'] is not None else None,
-            "anisotropic_better": bool(aniso_better),
-            "kappa_baseline": 0.0,
-            "kappa_aniso": 6.0,
-            "kappa_true": kappa_true,
-            "n_observations": len(x_obs),
-        },
-        message=f"RMS improvement: {improvement*100:.1f}% (baseline={baseline_rms:.4f}, aniso={aniso_rms:.4f})",
-    )
-
-
 # =============================================================================
 # MAIN
 # =============================================================================
@@ -2818,35 +2375,33 @@ def _parse_cli_float(flag: str, default: float) -> float:
                 return default
     return default
 
+
+
+def _parse_cli_str(flag: str, default: Optional[str] = None) -> Optional[str]:
+    """Parse a string flag from sys.argv.
+
+    Supports:
+      - --flag=value
+      - --flag value
+    """
+    for i, arg in enumerate(sys.argv):
+        if arg.startswith(flag + "="):
+            val = arg.split("=", 1)[1].strip()
+            return val if val != "" else default
+        if arg == flag and i + 1 < len(sys.argv):
+            return sys.argv[i + 1]
+    return default
+
 def main():
     global USE_SIGMA_COMPONENTS, COHERENCE_MODEL, JJ_XI_MULT, JJ_SMOOTH_M_POINTS
+    global FLOW_ALPHA, FLOW_BETA, FLOW_GAMMA, FLOW_DELTA, FLOW_SMOOTH_POINTS, FLOW_USE_TIDAL, FP_RELAX
+    global FLOW_USE_BULGE_SPECIFIC, FLOW_ALPHA_BULGE, FLOW_GAMMA_BULGE, FLOW_ALPHA_DISK, FLOW_GAMMA_DISK
+    global GAIA_FLOW_FEATURES_PATH, GAIA_FLOW_FEATURES_DF, GAIA_FLOW_REQUIRE_MATCH
     global USE_GUIDED_GRAVITY, GUIDED_KAPPA, GUIDED_C_DEFAULT
-    global USE_DYN_L, DYN_L_VCOH_KMS
-    global USE_GEO_L, GEO_L_BULGE_MULT
-    global USE_WAVE_INTERFERENCE, WAVE_MODE, WAVE_BETA
     
     quick = '--quick' in sys.argv
     core_only = '--core' in sys.argv
     sigma_components = '--sigma-components' in sys.argv
-    wave_mode_on = '--wave' in sys.argv
-    
-    # NEW: dynamical path-length mode
-    ldyn_flag = '--ldyn' in sys.argv
-    vcoh_arg = _parse_cli_float('--vcoh-kms', DYN_L_VCOH_KMS)
-    
-    USE_DYN_L = bool(ldyn_flag)
-    DYN_L_VCOH_KMS = float(vcoh_arg)
-    
-    # NEW: geometry-based path-length mode
-    lgeom_flag = '--lgeom' in sys.argv
-    geo_l_bulge_mult_arg = _parse_cli_float('--geo-l-bulge-mult', GEO_L_BULGE_MULT)
-    
-    USE_GEO_L = bool(lgeom_flag)
-    GEO_L_BULGE_MULT = float(geo_l_bulge_mult_arg)
-    
-    # NEW: A/B comparison mode for anisotropic gravity
-    compare_anisotropic = '--compare-anisotropic' in sys.argv
-    aniso_kappa = _parse_cli_float('--aniso-kappa', 6.0)
     
     # NEW: coherence selector
     coherence_arg = None
@@ -2861,36 +2416,43 @@ def main():
         elif a.startswith('--jj-smooth='):
             jj_smooth_points = int(a.split('=', 1)[1].strip())
     
+    
+    # FLOW coherence tuning + misc runtime controls
+    FLOW_ALPHA = float(_parse_cli_float('--flow-alpha', FLOW_ALPHA))
+    FLOW_BETA = float(_parse_cli_float('--flow-beta', FLOW_BETA))
+    FLOW_GAMMA = float(_parse_cli_float('--flow-gamma', FLOW_GAMMA))
+    FLOW_DELTA = float(_parse_cli_float('--flow-delta', FLOW_DELTA))
+    FLOW_SMOOTH_POINTS = int(_parse_cli_float('--flow-smooth', FLOW_SMOOTH_POINTS))
+    FP_RELAX = float(_parse_cli_float('--fp-relax', FP_RELAX))
+
+    if '--flow-no-tidal' in sys.argv:
+        FLOW_USE_TIDAL = False
+    if '--flow-tidal' in sys.argv:
+        FLOW_USE_TIDAL = True
+
+    # Bulge-specific tuning
+    if '--flow-bulge-specific' in sys.argv:
+        FLOW_USE_BULGE_SPECIFIC = True
+    FLOW_ALPHA_BULGE = float(_parse_cli_float('--flow-alpha-bulge', FLOW_ALPHA_BULGE))
+    FLOW_GAMMA_BULGE = float(_parse_cli_float('--flow-gamma-bulge', FLOW_GAMMA_BULGE))
+    FLOW_ALPHA_DISK = float(_parse_cli_float('--flow-alpha-disk', FLOW_ALPHA_DISK))
+    FLOW_GAMMA_DISK = float(_parse_cli_float('--flow-gamma-disk', FLOW_GAMMA_DISK))
+
+    # Optional Gaia 6D flow features (see export_gaia_pointwise_features.py)
+    GAIA_FLOW_FEATURES_PATH = _parse_cli_str('--gaia-flow-features', GAIA_FLOW_FEATURES_PATH)
+
+    # Optional SPARC pointwise export
+    export_sparc_points = _parse_cli_str('--export-sparc-points', None)
+
     USE_SIGMA_COMPONENTS = bool(sigma_components)
-    
-    # Wave/interference toggles (optional)
-    USE_WAVE_INTERFERENCE = bool(wave_mode_on)
-    for arg in sys.argv:
-        if arg.startswith('--wave-mode='):
-            WAVE_MODE = arg.split('=', 1)[1].strip() or WAVE_MODE
-        if arg.startswith('--wave-beta='):
-            try:
-                WAVE_BETA = float(arg.split('=', 1)[1])
-            except Exception:
-                pass
-    
+
     if coherence_arg in ('jj', 'current', 'currents'):
         COHERENCE_MODEL = "JJ"
         if jj_xi_mult is not None:
             JJ_XI_MULT = jj_xi_mult
         if jj_smooth_points is not None:
             JJ_SMOOTH_M_POINTS = jj_smooth_points
-    elif coherence_arg in ('src', 'source', 'score', 'split'):
-        COHERENCE_MODEL = "SRC"
-    elif coherence_arg in ('src2', 'src-fixed', 'srcv', 'source2'):
-        COHERENCE_MODEL = "SRC2"
-    elif coherence_arg in ('sc', 'field', 'fieldcoh'):
-        COHERENCE_MODEL = "SC"
-    elif coherence_arg in ('crho', 'c_rho', 'rho'):
-        COHERENCE_MODEL = "CRHO"
-    elif coherence_arg in ('splitg', 'split-g', 'cohacc', 'scg'):
-        COHERENCE_MODEL = "SPLITG"
-    elif coherence_arg in ('flow', 'vorticity', 'vort', 'shear', 'topology'):
+    elif coherence_arg in ('flow', 'topology', 'vorticity', 'vort', 'shear', 'topo'):
         COHERENCE_MODEL = "FLOW"
     else:
         COHERENCE_MODEL = "C"
@@ -2906,34 +2468,9 @@ def main():
     # In compare mode we toggle USE_GUIDED_GRAVITY per run below.
     USE_GUIDED_GRAVITY = bool(guided_flag) and not bool(compare_guided)
     
-    # NEW: acceleration-function (h) selector
-    global H_MODEL, H_HI_P, H_HI_X0, CRHO_SCALE, CRHO_RHO_THRESHOLD, FLOW_ALPHA, FLOW_BETA, FLOW_GAMMA
-    h_mode_arg = None
-    for a in sys.argv:
-        if a.startswith('--h='):
-            h_mode_arg = a.split('=', 1)[1].strip().lower()
-        elif a.startswith('--h-mode='):
-            h_mode_arg = a.split('=', 1)[1].strip().lower()
-
-    # Tail-softening parameters (used only when H_MODEL='hi_power')
-    H_HI_P = float(_parse_cli_float('--h-hi-p', H_HI_P))
-    H_HI_X0 = float(_parse_cli_float('--h-hi-x0', H_HI_X0))
-
-    if h_mode_arg in ('hi_power', 'hipower', 'high_power', 'highpower', 'soft', 'softscreen', 'bulge', 'bulgefix'):
-        H_MODEL = 'hi_power'
-    else:
-        H_MODEL = 'baseline'
-    
-    # Parse export flag
-    export_csv = None
-    for arg in sys.argv:
-        if arg.startswith('--export-sparc-points='):
-            export_csv = arg.split('=', 1)[1].strip()
-        elif arg == '--export-sparc-points':
-            # Allow space-separated form
-            idx = sys.argv.index(arg)
-            if idx + 1 < len(sys.argv):
-                export_csv = sys.argv[idx + 1]
+    # NEW: covariant coherence proxy for SPARC (translates Gaia-calibrated C_cov)
+    global USE_COVARIANT_PROXY
+    USE_COVARIANT_PROXY = '--use-covariant-proxy' in sys.argv
     
     data_dir = Path(__file__).parent.parent / "data"
     
@@ -2954,25 +2491,27 @@ def main():
     print(f"  ξ = R_d/(2π) ≈ {XI_SCALE:.4f} × R_d")
     print(f"  M/L = {ML_DISK}/{ML_BULGE}")
     print(f"  g† = {g_dagger:.3e} m/s²")
-    print(f"  h(g) model: {H_MODEL} (hi_p={H_HI_P:g}, hi_x0={H_HI_X0:g} in x=g/g†)")
     print(f"  A_cluster = {A_CLUSTER:.2f}")
     print(f"  σ components mode: {'ON' if USE_SIGMA_COMPONENTS else 'OFF'}")
-    print(f"  wave/interference mode: {'ON' if USE_WAVE_INTERFERENCE else 'OFF'}")
-    if USE_WAVE_INTERFERENCE:
-        print(f"    wave mode = {WAVE_MODE}, beta = {WAVE_BETA}")
     if USE_SIGMA_COMPONENTS:
         print(f"    σ_gas/disk/bulge = {SIGMA_GAS_KMS:.1f}/{SIGMA_DISK_KMS:.1f}/{SIGMA_BULGE_KMS:.1f} km/s")
     if COHERENCE_MODEL == "JJ":
         print(f"  JJ coherence: ξ_mult={JJ_XI_MULT}, smooth_points={JJ_SMOOTH_M_POINTS}")
     if COHERENCE_MODEL == "FLOW":
-        print(f"  Flow coherence: α={FLOW_ALPHA:g}, β={FLOW_BETA:g}, γ={FLOW_GAMMA:g}")
+        print(
+            f"  Flow coherence: α={FLOW_ALPHA:g}, β={FLOW_BETA:g}, γ={FLOW_GAMMA:g}, δ={FLOW_DELTA:g}, "
+            f"smooth={FLOW_SMOOTH_POINTS}, tidal={'ON' if FLOW_USE_TIDAL else 'OFF'}"
+        )
+        if FLOW_USE_BULGE_SPECIFIC:
+            print(f"  Bulge-specific: ON (bulge: α={FLOW_ALPHA_BULGE:g}, γ={FLOW_GAMMA_BULGE:g}; "
+                  f"disk: α={FLOW_ALPHA_DISK:g}, γ={FLOW_GAMMA_DISK:g})")
+        print(f"  Fixed-point relax: {FP_RELAX:g}")
+        if GAIA_FLOW_FEATURES_DF is not None:
+            print(f"  Gaia flow features: loaded ({len(GAIA_FLOW_FEATURES_DF)} rows)")
+
     if guided_flag:
         print(f"  Guided gravity: {'ON' if USE_GUIDED_GRAVITY else 'COMPARE'}")
         print(f"    κ = {GUIDED_KAPPA:g}, C_default = {GUIDED_C_DEFAULT:g}")
-    if USE_GEO_L:
-        print(f"  Geometry L mode: ON (bulge suppression = {GEO_L_BULGE_MULT:g}, L_bulge = L_0/(1+{GEO_L_BULGE_MULT:g}×f_bulge))")
-    if USE_DYN_L:
-        print(f"  Dynamical L mode: ON (v_coh={DYN_L_VCOH_KMS:g} km/s)")
     print()
     
     # Load data
@@ -2985,12 +2524,27 @@ def main():
     
     gaia_df = load_gaia(data_dir) if not quick else None
     print(f"  Gaia/MW: {len(gaia_df) if gaia_df is not None else 'Skipped'}")
+
+    # Optionally load Gaia flow features (must align 1:1 with the Gaia catalog rows)
+    GAIA_FLOW_FEATURES_DF = None
+    if gaia_df is not None and GAIA_FLOW_FEATURES_PATH:
+        try:
+            GAIA_FLOW_FEATURES_DF = pd.read_csv(GAIA_FLOW_FEATURES_PATH)
+            if GAIA_FLOW_REQUIRE_MATCH and (len(GAIA_FLOW_FEATURES_DF) != len(gaia_df)):
+                print(f"  WARNING: Gaia flow features rows ({len(GAIA_FLOW_FEATURES_DF)}) != Gaia stars ({len(gaia_df)}). Ignoring flow features.")
+                GAIA_FLOW_FEATURES_DF = None
+            else:
+                print(f"  Gaia flow features: {len(GAIA_FLOW_FEATURES_DF)} rows loaded from {GAIA_FLOW_FEATURES_PATH}")
+        except Exception as e:
+            print(f"  WARNING: Could not load Gaia flow features from {GAIA_FLOW_FEATURES_PATH}: {e}")
+            GAIA_FLOW_FEATURES_DF = None
+
     print()
     
     # Define tests
     # Original tests (1-8) - now includes holdout validation
     tests_core = [
-        ("SPARC", lambda: test_sparc(galaxies, export_csv=export_csv)),
+        ("SPARC", lambda: test_sparc(galaxies)),
         ("Clusters", lambda: test_clusters(clusters)),
         ("Cluster Holdout", lambda: test_cluster_holdout(clusters)),
         ("Gaia/MW", lambda: test_gaia(gaia_df)),
@@ -3001,8 +2555,9 @@ def main():
         ("Tully-Fisher", lambda: test_tully_fisher()),
     ]
     
-    # Extended tests (9-17)
+    # Extended tests (9-18)
     tests_extended = [
+        ("Gaia Bulge Covariant", lambda: test_gaia_bulge_covariant(gaia_df) if gaia_df is not None else TestResult(name="Gaia Bulge Covariant", passed=True, metric=0.0, details={"status": "SKIPPED", "reason": "No Gaia data"}, message="SKIPPED: No Gaia data")),
         ("Wide Binaries", lambda: test_wide_binaries()),
         ("Dwarf Spheroidals", lambda: test_dwarf_spheroidals()),
         ("UDGs", lambda: test_ultra_diffuse_galaxies()),
@@ -3011,12 +2566,6 @@ def main():
         ("Gravitational Waves", lambda: test_gravitational_waves()),
         ("Structure Formation", lambda: test_structure_formation()),
         ("CMB", lambda: test_cmb()),
-        ("Synthetic Stream Lensing", lambda: test_synthetic_stream_lensing() if not quick else
-         TestResult("Synthetic Stream Lensing", True, 0, {}, "SKIPPED")),
-        ("Anisotropic Prediction A/B", lambda: test_anisotropic_prediction_ab() if not quick else
-         TestResult("Anisotropic Prediction A/B", True, 0, {}, "SKIPPED")),
-        ("Bullet Cluster Anisotropic A/B", lambda: test_bullet_anisotropic_ab() if not quick else
-         TestResult("Bullet Cluster Anisotropic A/B", True, 0, {}, "SKIPPED")),
         ("Bullet Cluster", lambda: test_bullet_cluster()),
     ]
     
@@ -3078,9 +2627,6 @@ def main():
                 'ml_disk': ML_DISK,
                 'ml_bulge': ML_BULGE,
                 'g_dagger': g_dagger,
-                'h_model': H_MODEL,
-                'h_hi_p': H_HI_P,
-                'h_hi_x0': H_HI_X0,
                 'A_cluster': A_CLUSTER,
                 'use_sigma_components': USE_SIGMA_COMPONENTS,
                 'sigma_gas_kms': SIGMA_GAS_KMS,
@@ -3089,6 +2635,14 @@ def main():
                 'coherence_model': COHERENCE_MODEL,
                 'jj_xi_mult': JJ_XI_MULT if COHERENCE_MODEL == "JJ" else None,
                 'jj_smooth_points': JJ_SMOOTH_M_POINTS if COHERENCE_MODEL == "JJ" else None,
+                'flow_alpha': FLOW_ALPHA if COHERENCE_MODEL == "FLOW" else None,
+                'flow_beta': FLOW_BETA if COHERENCE_MODEL == "FLOW" else None,
+                'flow_gamma': FLOW_GAMMA if COHERENCE_MODEL == "FLOW" else None,
+                'flow_delta': FLOW_DELTA if COHERENCE_MODEL == "FLOW" else None,
+                'flow_smooth_points': FLOW_SMOOTH_POINTS if COHERENCE_MODEL == "FLOW" else None,
+                'flow_use_tidal': FLOW_USE_TIDAL if COHERENCE_MODEL == "FLOW" else None,
+                'fp_relax': FP_RELAX,
+                'gaia_flow_features_path': GAIA_FLOW_FEATURES_PATH,
             },
             'results': [asdict(r) for r in results_local],
             'summary': {
@@ -3109,15 +2663,35 @@ def main():
         baseline_results = _run_suite("BASELINE (κ=0)")
         baseline_passed, baseline_all = _summarize(baseline_results, "BASELINE SUMMARY")
 
+        if export_sparc_points:
+            try:
+                p = Path(export_sparc_points)
+                p_base = p.with_name(p.stem + '_baseline' + p.suffix if p.suffix else p.name + '_baseline.csv')
+                export_path = export_sparc_pointwise(galaxies, p_base, coherence_model=COHERENCE_MODEL)
+                print(f"SPARC pointwise export (baseline) saved to: {export_path}")
+            except Exception as e:
+                print(f"WARNING: SPARC pointwise export (baseline) failed: {e}")
+
+
         # 2) Guided run
         USE_GUIDED_GRAVITY = True
         guided_results = _run_suite(f"GUIDED (κ={GUIDED_KAPPA:g}, C_default={GUIDED_C_DEFAULT:g})")
         guided_passed, guided_all = _summarize(guided_results, "GUIDED SUMMARY")
 
-        # 3) Side-by-side comparison (aligned by test name) with MOND
+        if export_sparc_points:
+            try:
+                p = Path(export_sparc_points)
+                p_guided = p.with_name(p.stem + '_guided' + p.suffix if p.suffix else p.name + '_guided.csv')
+                export_path = export_sparc_pointwise(galaxies, p_guided, coherence_model=COHERENCE_MODEL)
+                print(f"SPARC pointwise export (guided) saved to: {export_path}")
+            except Exception as e:
+                print(f"WARNING: SPARC pointwise export (guided) failed: {e}")
+
+
+        # 3) Side-by-side comparison (aligned by test name)
         print()
         print("=" * 80)
-        print("COMPARISON: Baseline | Anisotropic | MOND")
+        print("COMPARISON: baseline → guided")
         print("=" * 80)
         guided_map = {r.name: r for r in guided_results}
         for b in baseline_results:
@@ -3126,48 +2700,8 @@ def main():
                 continue
             b_stat = '✓' if b.passed else '✗'
             g_stat = '✓' if g.passed else '✗'
-            
-            # Extract MOND metric from test details if available
-            mond_metric = None
-            mond_label = ""
-            if 'mean_mond_rms' in b.details:
-                mond_metric = b.details['mean_mond_rms']
-                mond_label = f"MOND={mond_metric:.2f}"
-            elif 'benchmark_mond_ratio' in b.details:
-                mond_metric = b.details['benchmark_mond_ratio']
-                mond_label = f"MOND~{mond_metric:.2f}"
-            elif 'mond_status' in b.details:
-                mond_label = "MOND: varies"
-            elif 'mond_challenge' in b.details:
-                mond_label = "MOND: challenge"
-            else:
-                mond_label = "MOND: N/A"
-            
-            # Determine which is best (lower RMS or closer to 1.0 for ratios)
-            best = ""
-            if mond_metric is not None:
-                # For SPARC: lower RMS is better
-                if 'mean_mond_rms' in b.details:
-                    if b.metric < g.metric and b.metric < mond_metric:
-                        best = " [BEST: Baseline]"
-                    elif g.metric < b.metric and g.metric < mond_metric:
-                        best = " [BEST: Aniso]"
-                    elif mond_metric < b.metric and mond_metric < g.metric:
-                        best = " [BEST: MOND]"
-                # For clusters: closer to 1.0 is better
-                elif 'benchmark_mond_ratio' in b.details:
-                    b_dist = abs(b.metric - 1.0)
-                    g_dist = abs(g.metric - 1.0)
-                    m_dist = abs(mond_metric - 1.0)
-                    if b_dist < g_dist and b_dist < m_dist:
-                        best = " [BEST: Baseline]"
-                    elif g_dist < b_dist and g_dist < m_dist:
-                        best = " [BEST: Aniso]"
-                    elif m_dist < b_dist and m_dist < g_dist:
-                        best = " [BEST: MOND]"
-            
             print(
-                f"{b.name:24}  {b_stat} {_fmt_metric(b.metric):>8}  |  {g_stat} {_fmt_metric(g.metric):>8}  |  {mond_label:20}{best}"
+                f"{b.name:24}  {b_stat} { _fmt_metric(b.metric):>8}  →  {g_stat} { _fmt_metric(g.metric):>8}"
             )
 
         compare_report = {
@@ -3218,9 +2752,6 @@ def main():
                 'ml_disk': ML_DISK,
                 'ml_bulge': ML_BULGE,
                 'g_dagger': g_dagger,
-                'h_model': H_MODEL,
-                'h_hi_p': H_HI_P,
-                'h_hi_x0': H_HI_X0,
                 'A_cluster': A_CLUSTER,
                 'use_sigma_components': USE_SIGMA_COMPONENTS,
                 'sigma_gas_kms': SIGMA_GAS_KMS,
@@ -3229,6 +2760,14 @@ def main():
                 'coherence_model': COHERENCE_MODEL,
                 'jj_xi_mult': JJ_XI_MULT if COHERENCE_MODEL == "JJ" else None,
                 'jj_smooth_points': JJ_SMOOTH_M_POINTS if COHERENCE_MODEL == "JJ" else None,
+                'flow_alpha': FLOW_ALPHA if COHERENCE_MODEL == "FLOW" else None,
+                'flow_beta': FLOW_BETA if COHERENCE_MODEL == "FLOW" else None,
+                'flow_gamma': FLOW_GAMMA if COHERENCE_MODEL == "FLOW" else None,
+                'flow_delta': FLOW_DELTA if COHERENCE_MODEL == "FLOW" else None,
+                'flow_smooth_points': FLOW_SMOOTH_POINTS if COHERENCE_MODEL == "FLOW" else None,
+                'flow_use_tidal': FLOW_USE_TIDAL if COHERENCE_MODEL == "FLOW" else None,
+                'fp_relax': FP_RELAX,
+                'gaia_flow_features_path': GAIA_FLOW_FEATURES_PATH,
             },
             'results': [asdict(r) for r in results],
             'summary': {
@@ -3244,6 +2783,13 @@ def main():
         with open(out_path, 'w') as f:
             json.dump(report, f, indent=2, default=float)
         print(f"\nReport saved to: {out_path}")
+
+        if export_sparc_points:
+            try:
+                export_path = export_sparc_pointwise(galaxies, export_sparc_points, coherence_model=COHERENCE_MODEL)
+                print(f"SPARC pointwise export saved to: {export_path}")
+            except Exception as e:
+                print(f"WARNING: SPARC pointwise export failed: {e}")
 
         sys.exit(0 if all_passed else 1)
 
