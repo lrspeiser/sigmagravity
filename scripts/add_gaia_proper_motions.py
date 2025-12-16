@@ -103,9 +103,13 @@ def crossmatch_gaia(catalog_table, max_sep_arcsec=2.0, max_stars=None):
     if 'ra' not in catalog_table.colnames or 'dec' not in catalog_table.colnames:
         raise ValueError("Catalog must have 'ra' and 'dec' columns")
     
+    # Convert to numpy arrays to avoid unit issues
+    ra_values = np.array(catalog_table['ra'], dtype=float)
+    dec_values = np.array(catalog_table['dec'], dtype=float)
+    
     coords = SkyCoord(
-        ra=catalog_table['ra'] * u.deg,
-        dec=catalog_table['dec'] * u.deg,
+        ra=ra_values * u.deg,
+        dec=dec_values * u.deg,
         frame='icrs'
     )
     
@@ -115,11 +119,15 @@ def crossmatch_gaia(catalog_table, max_sep_arcsec=2.0, max_stars=None):
         coords = coords[:max_stars]
         catalog_table = catalog_table[:max_stars]
     
-    # Query Gaia in batches (Gaia has limits on number of sources)
-    batch_size = 5000
+    # Query Gaia using ADQL with cross-match
+    # Use smaller batches to avoid query timeouts
+    batch_size = 100
     n_batches = (len(coords) + batch_size - 1) // batch_size
     
     all_results = []
+    radius_deg = max_sep_arcsec / 3600.0
+    
+    print(f"  Querying in {n_batches} batches of {batch_size} stars each...")
     
     for i in tqdm(range(n_batches), desc="Querying Gaia"):
         start_idx = i * batch_size
@@ -127,28 +135,55 @@ def crossmatch_gaia(catalog_table, max_sep_arcsec=2.0, max_stars=None):
         batch_coords = coords[start_idx:end_idx]
         
         try:
-            # Use Gaia's cross-match functionality
-            radius = u.Quantity(max_sep_arcsec, u.arcsec)
-            j = Gaia.cone_search_async(
-                coordinates=batch_coords,
-                radius=radius,
-                table="gaiadr3.gaia_source",
-                columns=[
-                    "source_id",
-                    "ra", "dec",
-                    "parallax", "parallax_error",
-                    "pmra", "pmra_error",
-                    "pmdec", "pmdec_error",
-                    "radial_velocity", "radial_velocity_error",
-                    "phot_g_mean_mag",
-                    "ruwe",
-                    "visibility_periods_used"
-                ]
-            )
+            # Build ADQL query for this batch
+            # Create a UNION of cone searches for each coordinate
+            queries = []
+            for coord in batch_coords:
+                query = f"""
+                SELECT TOP 1
+                    g.source_id,
+                    g.ra, g.dec,
+                    g.parallax, g.parallax_error,
+                    g.pmra, g.pmra_error,
+                    g.pmdec, g.pmdec_error,
+                    g.radial_velocity, g.radial_velocity_error,
+                    g.phot_g_mean_mag,
+                    g.ruwe,
+                    g.visibility_periods_used,
+                    {coord.ra.deg} AS query_ra,
+                    {coord.dec.deg} AS query_dec,
+                    DISTANCE(
+                        POINT('ICRS', g.ra, g.dec),
+                        POINT('ICRS', {coord.ra.deg}, {coord.dec.deg})
+                    ) AS sep
+                FROM gaiadr3.gaia_source AS g
+                WHERE 
+                    1 = CONTAINS(
+                        POINT('ICRS', g.ra, g.dec),
+                        CIRCLE('ICRS', {coord.ra.deg}, {coord.dec.deg}, {radius_deg})
+                    )
+                ORDER BY sep
+                """
+                queries.append(query)
             
-            result = j.get_results()
+            # Execute queries sequentially (Gaia rate limiting)
+            batch_results = []
+            for query in queries:
+                try:
+                    job = Gaia.launch_job_async(query)
+                    result = job.get_results()
+                    if len(result) > 0:
+                        batch_results.append(result)
+                    # Small delay to avoid rate limiting
+                    import time
+                    time.sleep(0.1)
+                except Exception as e:
+                    # Skip individual query errors
+                    continue
             
-            if len(result) > 0:
+            if batch_results:
+                from astropy.table import vstack
+                result = vstack(batch_results)
                 all_results.append(result)
         
         except Exception as e:
@@ -160,35 +195,66 @@ def crossmatch_gaia(catalog_table, max_sep_arcsec=2.0, max_stars=None):
         return None
     
     # Combine results
-    gaia_table = Table.vstack(all_results)
+    from astropy.table import vstack
+    gaia_table = vstack(all_results)
     print(f"  Found {len(gaia_table)} Gaia matches")
     
-    # Cross-match with original catalog
-    gaia_coords = SkyCoord(
-        ra=gaia_table['ra'] * u.deg,
-        dec=gaia_table['dec'] * u.deg,
-        frame='icrs'
-    )
+    # Match back to original catalog using query_ra/query_dec
+    if 'query_ra' not in gaia_table.colnames or 'query_dec' not in gaia_table.colnames:
+        print("⚠ Warning: query coordinates not found, using position matching")
+        gaia_coords = SkyCoord(
+            ra=np.array(gaia_table['ra'], dtype=float) * u.deg,
+            dec=np.array(gaia_table['dec'], dtype=float) * u.deg,
+            frame='icrs'
+        )
+        idx, sep2d, _ = coords.match_to_catalog_sky(gaia_coords)
+        sep_arcsec = sep2d.arcsec
+        good = sep_arcsec < max_sep_arcsec
+        matched_indices = np.where(good)[0]
+        gaia_indices = idx[good]
+    else:
+        # Use query coordinates to match back
+        query_ra = np.array(gaia_table['query_ra'], dtype=float)
+        query_dec = np.array(gaia_table['query_dec'], dtype=float)
+        catalog_ra = np.array(catalog_table['ra'], dtype=float)
+        catalog_dec = np.array(catalog_table['dec'], dtype=float)
+        
+        # Find matches by comparing coordinates
+        matched_indices = []
+        gaia_indices = []
+        for i, (qra, qdec) in enumerate(zip(query_ra, query_dec)):
+            # Find closest catalog entry
+            dra = catalog_ra - qra
+            ddec = catalog_dec - qdec
+            sep_deg = np.sqrt(dra**2 + ddec**2)
+            min_idx = np.argmin(sep_deg)
+            sep_arcsec_val = sep_deg[min_idx] * 3600
+            
+            if sep_arcsec_val < max_sep_arcsec:
+                matched_indices.append(min_idx)
+                gaia_indices.append(i)
+        
+        matched_indices = np.array(matched_indices)
+        gaia_indices = np.array(gaia_indices)
+        sep_arcsec = np.array([np.sqrt((catalog_ra[i] - query_ra[j])**2 + 
+                                      (catalog_dec[i] - query_dec[j])**2) * 3600
+                              for i, j in zip(matched_indices, gaia_indices)])
     
-    idx, sep2d, _ = coords.match_to_catalog_sky(gaia_coords)
-    sep_arcsec = sep2d.arcsec
-    
-    # Only keep good matches
-    good = sep_arcsec < max_sep_arcsec
-    print(f"  {good.sum()} stars matched within {max_sep_arcsec} arcsec")
+    print(f"  {len(matched_indices)} stars matched within {max_sep_arcsec} arcsec")
     
     # Create matched table
-    matched_table = catalog_table[good].copy()
+    matched_table = catalog_table[matched_indices].copy()
     
     # Add Gaia columns (rename to avoid conflicts)
-    for col in ['source_id', 'parallax', 'parallax_error', 
+    for col in ['source_id', 'ra', 'dec', 'parallax', 'parallax_error', 
                 'pmra', 'pmra_error', 'pmdec', 'pmdec_error',
                 'radial_velocity', 'radial_velocity_error',
-                'phot_g_mean_mag', 'ruwe', 'visibility_periods_used']:
+                'phot_g_mean_mag', 'ruwe', 'visibility_periods_used', 'sep']:
         if col in gaia_table.colnames:
-            matched_table[f'gaia_{col}'] = gaia_table[col][idx[good]]
+            new_col = f'gaia_{col}' if col in matched_table.colnames else col
+            matched_table[new_col] = gaia_table[col][gaia_indices]
     
-    matched_table['gaia_sep_arcsec'] = sep_arcsec[good]
+    matched_table['gaia_sep_arcsec'] = sep_arcsec
     
     return matched_table
 
