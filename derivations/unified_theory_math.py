@@ -645,3 +645,4 @@ The theory has ONE free parameter (A ≈ √3) beyond known physics (G, c, H₀)
 
 
 
+

@@ -190,3 +190,4 @@ Then translate back to SPARC via proxies.
 
 **Key Insight:** Don't optimize on SPARC bulges right now. Use SPARC disk + non-galaxy tests as guardrails, but let Gaia bulge teach you the flow topology law.
 
+

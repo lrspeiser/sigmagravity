@@ -65,3 +65,4 @@ SPARC bulges are exactly where you need true flow information, but SPARC gives y
 
 **Key Insight:** Don't optimize on SPARC bulges right now. Use SPARC disk + non-galaxy tests as guardrails, but let Gaia bulge teach you the flow topology law.
 
+

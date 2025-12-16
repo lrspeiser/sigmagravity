@@ -75,3 +75,4 @@ The flow topology hypothesis is still valid (vorticity is #1 in Gaia), but the *
 **Possible solution:** Use flow topology for Gaia/MW test (where we have 6D data), but keep baseline C for SPARC (where we only have rotation curves).
 
 
+

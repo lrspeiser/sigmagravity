@@ -75,3 +75,4 @@ python scripts/run_regression_experimental.py --core \
 - `sparc_pointwise_flow_bulge_specific.csv`: Pointwise data with bulge-specific tuning
 - `experimental_report_FLOW.json`: Test results (updated)
 
+

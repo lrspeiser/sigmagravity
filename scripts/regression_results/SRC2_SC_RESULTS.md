@@ -73,3 +73,4 @@ This suggests that:
 - SC mode applies Σ to total V_bar instead of just disk+gas
 
 
+

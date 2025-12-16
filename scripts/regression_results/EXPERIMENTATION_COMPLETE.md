@@ -132,3 +132,4 @@ Flow coherence model is **functional and validated**:
 
 The model provides topology information (vorticity, shear, tidal) that correlates with residuals, enabling future improvements through targeted tuning.
 
+

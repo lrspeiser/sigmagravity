@@ -101,3 +101,4 @@ python scripts/run_regression_experimental.py --coherence=c \
 - Test design: `GAIA_BULGE_TEST_DESIGN.md`
 - Completion notes: `NEXT_STEPS_COMPLETE.md`
 
+

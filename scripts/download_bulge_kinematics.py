@@ -75,34 +75,63 @@ def download_brava():
     print("Downloading BRAVA (Bulge Radial Velocity Assay)")
     print("="*60)
     
-    # BRAVA data is available via IRSA
-    # Main catalog URL (need to check actual file structure)
-    brava_base_url = "https://irsa.ipac.caltech.edu/data/BRAVA/"
+    # BRAVA catalog is available via IRSA Gator
+    # Catalog name in IRSA is "bravacat" (not "brava")
+    catalog_url = "https://irsa.ipac.caltech.edu/cgi-bin/Gator/nph-query"
+    params = {
+        "catalog": "bravacat",
+        "spatial": "None",
+        "outfmt": "1",  # IPAC ASCII table format
+        "outrows": "100000"
+    }
     
-    # Common BRAVA file names (these may need to be verified)
-    brava_files = [
-        "brava_catalog.fits",
-        "brava_velocities.txt",
-        "brava_photometry.fits",
-    ]
+    # Build query URL
+    query_url = f"{catalog_url}?catalog={params['catalog']}&spatial={params['spatial']}&outfmt={params['outfmt']}&outrows={params['outrows']}"
     
-    # Try to access BRAVA via IRSA query interface
-    # For now, we'll create a metadata file with instructions
+    output_path = BRAVA_DIR / "brava_catalog.tbl"
+    
+    print(f"  Downloading BRAVA catalog from IRSA...")
+    print(f"  URL: {query_url}")
+    
+    success = download_file(query_url, output_path, "BRAVA catalog")
+    
+    if success:
+        # Get file size and line count
+        file_size = output_path.stat().st_size / (1024 * 1024)  # MB
+        with open(output_path, 'r') as f:
+            line_count = sum(1 for _ in f)
+        
+        print(f"  ✓ Catalog downloaded: {file_size:.2f} MB, ~{line_count} lines")
+        print(f"  ✓ Saved to: {output_path}")
+    
+    # Create metadata file
     metadata = {
         "dataset": "BRAVA",
-        "description": "Bulge Radial Velocity Assay - ~10,000 M giants with radial velocities",
+        "description": "Bulge Radial Velocity Assay - ~8,585 M giants with radial velocities",
         "coverage": "−10° < l < +10°, −4° < b < −8°",
         "url": "https://irsa.ipac.caltech.edu/data/BRAVA/",
         "paper": "Kunder et al. 2012, AJ, 143, 57",
-        "download_instructions": [
-            "1. Visit https://irsa.ipac.caltech.edu/data/BRAVA/",
-            "2. Use the IRSA query interface to download the catalog",
-            "3. Files typically include: positions, RVs, photometry, TiO band strengths",
-            "4. Save files to: " + str(BRAVA_DIR)
-        ],
+        "catalog_name": "bravacat",
+        "catalog_file": "brava_catalog.tbl",
+        "download_date": time.strftime("%Y-%m-%d"),
+        "download_method": "IRSA Gator query interface",
+        "query_url": query_url,
         "columns": [
-            "ra", "dec", "l", "b", "rv", "rv_err",
-            "photometry", "TiO_strength"
+            "l", "b", "ra", "dec",
+            "j", "h", "k",  # JHK magnitudes
+            "vhc",  # Heliocentric radial velocity
+            "e",  # E(B-V) reddening
+            "j0", "h0", "k0",  # Extinction-corrected magnitudes
+            "TiO",  # TiO band strength
+            "n_obs",  # Number of observations
+            "fits_spectra_1", "fits_spectra_2",  # Links to FITS spectra
+            "TMASS_ID"  # 2MASS identifier
+        ],
+        "spectra_directory": "https://irsa.ipac.caltech.edu/data/BRAVA/spectra/",
+        "notes": [
+            "Catalog downloaded via IRSA Gator using catalog name 'bravacat'",
+            "Spectra are available in FITS format from the spectra directory",
+            "Spectra URLs are also embedded in the catalog as HTML links"
         ]
     }
     
@@ -110,11 +139,9 @@ def download_brava():
     with open(metadata_path, 'w') as f:
         json.dump(metadata, f, indent=2)
     
-    print(f"✓ Created metadata file: {metadata_path}")
-    print("  Note: BRAVA requires manual download via IRSA interface")
-    print(f"  Please visit: {brava_base_url}")
+    print(f"  ✓ Created metadata file: {metadata_path}")
     
-    return True
+    return success
 
 
 def download_apogee():

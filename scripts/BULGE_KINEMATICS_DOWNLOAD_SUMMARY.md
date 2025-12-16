@@ -26,14 +26,22 @@ December 15, 2024
 - **Coverage**: Central ~36′ × 16′ (~150 pc from Galactic Center)
 - **Paper**: Nogueras-Lara et al. 2018, A&A, 620, A83
 
-## Datasets Requiring Manual Download
+## Successfully Downloaded Datasets (continued)
 
-### 3. BRAVA (Bulge Radial Velocity Assay)
-- **Status**: Metadata created, manual download required
-- **Location**: `data/bulge_kinematics/BRAVA/metadata.json`
-- **Download URL**: https://irsa.ipac.caltech.edu/data/BRAVA/
-- **Description**: ~10,000 M giants with radial velocities
+### 3. BRAVA (Bulge Radial Velocity Assay) ✓
+- **Status**: Successfully downloaded
+- **Files**: 
+  - `data/bulge_kinematics/BRAVA/brava_catalog.tbl` (8,585 stars, 3.1 MB)
+- **Total**: 8,585 stars
+- **Source**: IRSA Gator catalog `bravacat`
 - **Coverage**: −10° < l < +10°, −4° < b < −8°
+- **Paper**: Kunder et al. 2012, AJ, 143, 57
+- **Download Date**: December 15, 2024
+- **Columns**: l, b, ra, dec, JHK magnitudes, vhc (radial velocity), TiO, spectra URLs
+- **Spectra**: Available at `https://irsa.ipac.caltech.edu/data/BRAVA/spectra/`
+- **Download Script**: `scripts/download_brava_spectra.py` (for downloading FITS spectra)
+
+## Datasets Requiring Manual Download
 
 ### 4. APOGEE (inner bulge fields)
 - **Status**: Metadata created, query required
@@ -69,9 +77,9 @@ December 15, 2024
 
 ## Recommended Next Steps
 
-1. **Download BRAVA data manually**:
-   - Visit https://irsa.ipac.caltech.edu/data/BRAVA/
-   - Save to `data/bulge_kinematics/BRAVA/`
+1. **BRAVA data downloaded** ✓:
+   - Catalog available at `data/bulge_kinematics/BRAVA/brava_catalog.tbl`
+   - To download spectra: `python scripts/download_brava_spectra.py [--all]`
 
 2. **Query APOGEE bulge fields**:
    - Use CasJobs or astroquery
@@ -91,15 +99,18 @@ December 15, 2024
 
 - **Total FITS files downloaded**: 30
 - **Total stars in GIBS**: 5,678
+- **Total stars in BRAVA**: 8,585
 - **Total stars in GALACTICNUCLEUS**: ~10,000+ (across 28 catalogs)
-- **Total data size**: ~2.5 MB
+- **Total data size**: ~5.6 MB (including BRAVA catalog)
 
 ## Directory Structure
 
 ```
 data/bulge_kinematics/
 ├── BRAVA/
-│   └── metadata.json
+│   ├── metadata.json
+│   ├── brava_catalog.tbl (8,585 stars, 3.1 MB)
+│   └── spectra/ (for FITS spectra downloads)
 ├── GIBS/
 │   ├── metadata.json
 │   ├── gibs_catalog_0.fits (27 stars)

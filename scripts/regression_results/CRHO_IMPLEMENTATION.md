@@ -67,3 +67,4 @@ CRHO is implemented and working, but **not yet improving bulge predictions**. Th
   - Modified `predict_velocity()` to use σ_eff when CRHO is selected
 
 
+

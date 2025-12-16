@@ -47,3 +47,4 @@ This suggests that:
 3. Consider if bulge galaxies need a different coherence model entirely
 
 
+

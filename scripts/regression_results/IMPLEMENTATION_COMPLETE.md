@@ -120,3 +120,4 @@ python scripts/run_regression_experimental.py --coherence=c \
 
 The covariant coherence implementation is complete, validated, and integrated into the regression suite. Ready for use and further development with true bulge datasets.
 
+

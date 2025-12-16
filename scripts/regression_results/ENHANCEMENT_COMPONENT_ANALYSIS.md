@@ -98,3 +98,4 @@ The enhancement is primarily controlled by **h(g)**, which depends on the **acce
 3. Change how h is computed for bulge-dominated regions
 
 
+
