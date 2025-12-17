@@ -247,13 +247,16 @@ def _select_best_matches(gaia_all: Table, use_gpu: bool = False) -> Table:
 
     if cp is not None:
         # GPU-accelerated lexsort+unique
-        order = cp.lexsort((cp.asarray(sep_np), cp.asarray(row_id_np)))
-        row_sorted = cp.take(cp.asarray(row_id_np), order)
+        sep_cp = cp.asarray(sep_np)
+        row_cp = cp.asarray(row_id_np)
+        # cupy 13.x expects a stacked array, not a tuple, for lexsort
+        order = cp.lexsort(cp.stack((sep_cp, row_cp)))
+        row_sorted = cp.take(row_cp, order)
         _, first_idx = cp.unique(row_sorted, return_index=True)
         best_idx = cp.take(order, first_idx).get()
     else:
         if use_gpu and cp is None and not _CUPY_UNAVAILABLE_WARNED:
-            print("⚠ CuPy requested but not available; falling back to NumPy.")
+            print("[warn] CuPy requested but not available; falling back to NumPy.")
             _CUPY_UNAVAILABLE_WARNED = True
         order = np.lexsort((sep_np, row_id_np))
         row_sorted = row_id_np[order]
@@ -383,7 +386,7 @@ def crossmatch_gaia_bulk(
         # Collect results
         for chunk_idx, res, error in results:
             if error:
-                print(f"\n⚠ Gaia bulk query failed for chunk {chunk_idx}: {error}")
+                print(f"\n[warn] Gaia bulk query failed for chunk {chunk_idx}: {error}")
             if res is not None and len(res) > 0:
                 best_hits.append(res)
     else:
@@ -407,7 +410,7 @@ def crossmatch_gaia_bulk(
                     break
                 except Exception as e:
                     if attempt == max_attempts:
-                        print(f"\n⚠ Gaia bulk query failed for chunk {start}:{end}: {e}")
+                        print(f"\n[warn] Gaia bulk query failed for chunk {start}:{end}: {e}")
                     else:
                         sleep_s = 3 * attempt + random.random()
                         time.sleep(sleep_s)
@@ -417,7 +420,7 @@ def crossmatch_gaia_bulk(
                 best_hits.append(best)
 
     if not best_hits:
-        print("⚠ No Gaia matches found")
+        print("[warn] No Gaia matches found")
         return None
 
     # Each chunk has disjoint row_id ranges, so per-chunk reduction is sufficient.
@@ -448,7 +451,7 @@ def crossmatch_gaia_bulk(
         out.remove_column("row_id")
 
     n_match = int(np.sum(out["gaia_matched"])) if "gaia_matched" in out.colnames else 0
-    print(f"  ✓ Gaia matches: {n_match:,}/{len(out):,} ({(n_match/max(len(out),1))*100:.1f}%)")
+    print(f"  Gaia matches: {n_match:,}/{len(out):,} ({(n_match/max(len(out),1))*100:.1f}%)")
     return out
 
 
@@ -534,7 +537,7 @@ def crossmatch_gaia_per_star(
         out = out[out["gaia_matched"]]
 
     n_match = int(np.sum(out["gaia_matched"])) if "gaia_matched" in out.colnames else 0
-    print(f"  ✓ Gaia matches: {n_match:,}/{len(out):,} ({(n_match/max(len(out),1))*100:.1f}%)")
+    print(f"  Gaia matches: {n_match:,}/{len(out):,} ({(n_match/max(len(out),1))*100:.1f}%)")
     return out
 
 
@@ -586,7 +589,7 @@ def process_catalog(
         catalog_table, catalog_label = load_catalog(catalog_name)
         print(f"Loaded {len(catalog_table):,} rows from {catalog_label}")
     except Exception as e:
-        print(f"✗ Error loading catalog: {e}")
+        print(f"[error] Error loading catalog: {e}")
         return False
 
     matched = crossmatch_gaia(
@@ -607,7 +610,7 @@ def process_catalog(
     matched.write(str(output_path), overwrite=True)
 
     n_match = int(np.sum(matched["gaia_matched"])) if "gaia_matched" in matched.colnames else 0
-    print(f"\n✓ Saved: {output_path}")
+    print(f"\nSaved: {output_path}")
     print(f"  Rows: {len(matched):,} (matched: {n_match:,})")
     return True
 
@@ -628,14 +631,14 @@ def process_input_file(
     print("=" * 70)
 
     if not input_path.exists():
-        print(f"✗ Input file not found: {input_path}")
+        print(f"[error] Input file not found: {input_path}")
         return False
 
     try:
         table = load_table_any(input_path)
         table = ensure_radec_deg(table)
     except Exception as e:
-        print(f"✗ Failed to read/standardize input table: {e}")
+        print(f"[error] Failed to read/standardize input table: {e}")
         return False
 
     print(f"Loaded {len(table):,} rows")
@@ -659,7 +662,7 @@ def process_input_file(
 
     matched.write(str(output_path), overwrite=True)
     n_match = int(np.sum(matched["gaia_matched"])) if "gaia_matched" in matched.colnames else 0
-    print(f"\n✓ Saved: {output_path}")
+    print(f"\nSaved: {output_path}")
     print(f"  Rows: {len(matched):,} (matched: {n_match:,})")
     return True
 
@@ -768,7 +771,7 @@ def main() -> None:
         matched.write(str(out_path), overwrite=True)
 
         n_match = int(np.sum(matched["gaia_matched"])) if "gaia_matched" in matched.colnames else 0
-        print(f"\n✓ Saved: {out_path}")
+        print(f"\nSaved: {out_path}")
         print(f"  Rows: {len(matched):,} (matched: {n_match:,})")
         return
 
@@ -798,7 +801,7 @@ def main() -> None:
     print("SUMMARY")
     print("=" * 70)
     for cat, ok in results.items():
-        print(f"{'✓' if ok else '✗'} {cat}")
+        print(f"{'OK' if ok else 'FAIL'} {cat}")
     print(f"\nCross-matched catalogs saved to: {OUTPUT_DIR}")
 
 
