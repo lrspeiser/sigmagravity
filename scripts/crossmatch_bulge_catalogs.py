@@ -9,7 +9,7 @@ Creates unified catalog with full 6D phase space where available.
 import sys
 from pathlib import Path
 import numpy as np
-from astropy.table import Table, join, vstack
+from astropy.table import Table, vstack
 from astropy.coordinates import SkyCoord
 import astropy.units as u
 from astropy.io import ascii
@@ -20,24 +20,81 @@ OUTPUT_DIR = BULGE_DIR / "crossmatched"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 
+def ensure_radec_deg(table: Table) -> Table:
+    """Ensure the table has float 'ra'/'dec' columns in degrees.
+
+    Supports common FITS/IPAC/VizieR conventions and can convert from
+    Galactic lon/lat (l,b or glon/glat).
+    """
+    if table is None:
+        return table
+
+    cols = set(table.colnames)
+
+    # Direct ICRS candidates
+    radec_candidates = [
+        ("ra", "dec"),
+        ("RA", "DEC"),
+        ("RAJ2000", "DEJ2000"),
+        ("raj2000", "dej2000"),
+        ("RA_ICRS", "DE_ICRS"),
+        ("ra_icrs", "dec_icrs"),
+    ]
+    for ra_col, dec_col in radec_candidates:
+        if ra_col in cols and dec_col in cols:
+            # Try to convert to float, handling sexagesimal strings
+            try:
+                ra_vals = np.array(table[ra_col], dtype=float)
+                dec_vals = np.array(table[dec_col], dtype=float)
+            except (ValueError, TypeError):
+                # Handle sexagesimal format (e.g., "17 50 19.76")
+                from astropy.coordinates import Angle
+                ra_vals = [Angle(ra_str, unit='hourangle').deg for ra_str in table[ra_col]]
+                dec_vals = [Angle(dec_str, unit='deg').deg for dec_str in table[dec_col]]
+                ra_vals = np.array(ra_vals)
+                dec_vals = np.array(dec_vals)
+            table["ra"] = ra_vals
+            table["dec"] = dec_vals
+            return table
+
+    # Galactic candidates
+    lb_candidates = [
+        ("l", "b"),
+        ("L", "B"),
+        ("glon", "glat"),
+        ("GLON", "GLAT"),
+    ]
+    for l_col, b_col in lb_candidates:
+        if l_col in cols and b_col in cols:
+            l = np.array(table[l_col], dtype=float)
+            b = np.array(table[b_col], dtype=float)
+            c = SkyCoord(l=l * u.deg, b=b * u.deg, frame="galactic").icrs
+            table["ra"] = c.ra.deg
+            table["dec"] = c.dec.deg
+            return table
+
+    # Nothing worked
+    raise ValueError(
+        "Could not infer coordinates. Need ra/dec (ICRS) or l/b (Galactic). "
+        f"Available columns: {table.colnames}"
+    )
+
+
 def load_brava():
     """Load BRAVA catalog."""
     catalog_path = BULGE_DIR / "BRAVA" / "brava_catalog.tbl"
     if not catalog_path.exists():
         return None
     
-    table = ascii.read(catalog_path, format='ipac')
-    
-    # Standardize column names
-    if 'RA' in table.colnames:
-        table['ra'] = table['RA']
-    if 'DEC' in table.colnames:
-        table['dec'] = table['DEC']
-    if 'vhc' in table.colnames:
-        table['vhelio'] = table['vhc']
+    table = ascii.read(catalog_path, format="ipac")
+    table = ensure_radec_deg(table)
+
+    # Standardize velocity naming if present
+    if "vhc" in table.colnames and "vhelio" not in table.colnames:
+        table["vhelio"] = table["vhc"]
     
     # Add catalog identifier
-    table['catalog'] = 'BRAVA'
+    table["catalog"] = "BRAVA"
     
     return table
 
@@ -48,7 +105,8 @@ def load_apogee():
         catalog_path = BULGE_DIR / "APOGEE" / f"apogee_bulge_dr{dr}.fits"
         if catalog_path.exists():
             table = Table.read(catalog_path)
-            table['catalog'] = f'APOGEE_DR{dr}'
+            table = ensure_radec_deg(table)
+            table["catalog"] = f"APOGEE_DR{dr}"
             return table
     return None
 
@@ -60,7 +118,8 @@ def load_gibs():
         return None
     
     table = Table.read(catalog_path)
-    table['catalog'] = 'GIBS'
+    table = ensure_radec_deg(table)
+    table["catalog"] = "GIBS"
     
     return table
 
@@ -188,13 +247,14 @@ def main():
     print("\n" + "="*70)
     print("NEXT STEPS")
     print("="*70)
-    print("1. Add Gaia DR3 proper motions:")
-    print("   python scripts/add_gaia_proper_motions.py --catalog BRAVA")
-    print("   python scripts/add_gaia_proper_motions.py --catalog APOGEE")
-    print("\n2. Cross-matched catalogs saved to:")
+    print("1. Add Gaia DR3 proper motions (bulk mode, fast):")
+    print("   python scripts/add_gaia_proper_motions.py --input data/bulge_kinematics/crossmatched/all_bulge_catalogs_combined.fits --method bulk --chunk-size 2000")
+    print("\n2. Or process individual catalogs:")
+    print("   python scripts/add_gaia_proper_motions.py --catalog BRAVA --method bulk")
+    print("   python scripts/add_gaia_proper_motions.py --catalog GIBS --method bulk")
+    print("\n3. Cross-matched catalogs saved to:")
     print(f"   {OUTPUT_DIR}")
 
 
 if __name__ == "__main__":
     main()
-
