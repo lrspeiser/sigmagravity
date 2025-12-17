@@ -1,0 +1,26 @@
+{
+  "best_params": {
+    "chi_0": 500,
+    "gamma_phase": 1.5,
+    "alpha_Ncoh": 0.45,
+    "ell_0_kpc": 3.0,
+    "n_profile": 2.0,
+    "Sigma_ref": 50.0,
+    "epsilon_Sigma": 0.5
+  },
+  "summary": {
+    "n_total": 171,
+    "n_improved": 106,
+    "pct_improved": 61.98830409356725,
+    "mean_delta_rms": 16.440451312271385,
+    "median_delta_rms": -2.2397956305749966,
+    "mean_F": 1.5656921311178793
+  },
+  "per_galaxy": [
+    {
+      "name": "CamB",
+      "n_points": 9,
+      "rms_bary": 4.616823441597753,
+      "rms_cmsi": 6.130579046003332,
+      "delta_rms": 1.5137556044055787,
+      "improved": 
