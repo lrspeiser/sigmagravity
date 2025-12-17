@@ -25,6 +25,9 @@ Usage
     # Fast path (recommended)
     python scripts/add_gaia_proper_motions.py --catalog BRAVA --method bulk --chunk-size 2000
 
+    # Fast path with GPU reduction (needs CuPy + NVIDIA card)
+    python scripts/add_gaia_proper_motions.py --catalog BRAVA --method bulk --chunk-size 2000 --gpu
+
     # Debug / fallback
     python scripts/add_gaia_proper_motions.py --catalog BRAVA --method per_star --max-stars 10
 
@@ -84,6 +87,18 @@ def _get_gaia():
         subprocess.check_call([sys.executable, "-m", "pip", "install", "astroquery"])
         from astroquery.gaia import Gaia  # type: ignore
         return Gaia
+
+
+def _get_cupy():
+    """Return CuPy module if available, else None."""
+    try:
+        import cupy as cp  # type: ignore
+        return cp
+    except Exception:
+        return None
+
+
+_CUPY_UNAVAILABLE_WARNED = False
 
 
 def ensure_radec_deg(table: Table) -> Table:
@@ -222,9 +237,35 @@ def _bulk_query_gaia(
     return res
 
 
+def _select_best_matches(gaia_all: Table, use_gpu: bool = False) -> Table:
+    """Select nearest Gaia match per row_id, optionally using CuPy."""
+    row_id_np = np.asarray(gaia_all["row_id"], dtype=np.int64)
+    sep_np = np.asarray(gaia_all["sep"], dtype=float)
+
+    global _CUPY_UNAVAILABLE_WARNED
+    cp = _get_cupy() if use_gpu else None
+
+    if cp is not None:
+        # GPU-accelerated lexsort+unique
+        order = cp.lexsort((cp.asarray(sep_np), cp.asarray(row_id_np)))
+        row_sorted = cp.take(cp.asarray(row_id_np), order)
+        _, first_idx = cp.unique(row_sorted, return_index=True)
+        best_idx = cp.take(order, first_idx).get()
+    else:
+        if use_gpu and cp is None and not _CUPY_UNAVAILABLE_WARNED:
+            print("⚠ CuPy requested but not available; falling back to NumPy.")
+            _CUPY_UNAVAILABLE_WARNED = True
+        order = np.lexsort((sep_np, row_id_np))
+        row_sorted = row_id_np[order]
+        _, first_idx = np.unique(row_sorted, return_index=True)
+        best_idx = order[first_idx]
+
+    return gaia_all[best_idx]
+
+
 def _process_chunk_worker(args_tuple):
     """Worker function for parallel chunk processing."""
-    start, end, table_data, radius_deg, chunk_idx = args_tuple
+    start, end, table_data, radius_deg, chunk_idx, use_gpu = args_tuple
     
     # Re-import Gaia in worker process (required for multiprocessing)
     Gaia = _get_gaia()
@@ -245,7 +286,10 @@ def _process_chunk_worker(args_tuple):
     for attempt in range(1, max_attempts + 1):
         try:
             res = _bulk_query_gaia(Gaia, upload, radius_deg)
-            return (chunk_idx, res, None)
+            if res is None or len(res) == 0:
+                return (chunk_idx, None, None)
+            best = _select_best_matches(res, use_gpu=use_gpu)
+            return (chunk_idx, best, None)
         except Exception as e:
             if attempt == max_attempts:
                 return (chunk_idx, None, f"{e}")
@@ -260,6 +304,7 @@ def crossmatch_gaia_bulk(
     max_stars: Optional[int] = None,
     keep_unmatched: bool = True,
     n_workers: Optional[int] = None,
+    use_gpu: bool = False,
 ) -> Optional[Table]:
     """Bulk Gaia crossmatch using TAP_UPLOAD join.
 
@@ -276,6 +321,9 @@ def crossmatch_gaia_bulk(
     keep_unmatched
         If True, return the full input table with Gaia columns masked for
         unmatched rows. If False, return only matched rows.
+    use_gpu
+        If True and CuPy is installed, use GPU acceleration for best-match
+        selection (row_id/sep reduction).
     """
     Gaia = _get_gaia()
 
@@ -293,7 +341,7 @@ def crossmatch_gaia_bulk(
     table["row_id"] = np.arange(n, dtype=np.int64)
 
     radius_deg = float(max_sep_arcsec) / 3600.0
-    all_hits: list[Table] = []
+    best_hits: list[Table] = []
 
     ranges = list(range(0, n, int(chunk_size)))
     
@@ -304,6 +352,8 @@ def crossmatch_gaia_bulk(
     print(f"\nBulk Gaia DR3 cross-match: {n:,} targets in {len(ranges)} chunk(s) (chunk_size={chunk_size})")
     if n_workers > 1:
         print(f"Using {n_workers} parallel workers")
+    if use_gpu:
+        print("CuPy mode enabled: best-match reduction will run on GPU")
     
     # Prepare data for workers (convert table to dict for pickling)
     table_data = {
@@ -314,7 +364,7 @@ def crossmatch_gaia_bulk(
     
     # Prepare arguments for workers
     worker_args = [
-        (start, min(start + int(chunk_size), n), table_data, radius_deg, i)
+        (start, min(start + int(chunk_size), n), table_data, radius_deg, i, use_gpu)
         for i, start in enumerate(ranges)
     ]
     
@@ -322,18 +372,20 @@ def crossmatch_gaia_bulk(
     if n_workers > 1 and len(ranges) > 1:
         # Parallel processing
         with Pool(processes=n_workers) as pool:
-            results = list(tqdm(
-                pool.imap(_process_chunk_worker, worker_args),
-                total=len(worker_args),
-                desc="Gaia bulk chunks (parallel)"
-            ))
+            results = list(
+                tqdm(
+                    pool.imap(_process_chunk_worker, worker_args),
+                    total=len(worker_args),
+                    desc="Gaia bulk chunks (parallel)"
+                )
+            )
         
         # Collect results
         for chunk_idx, res, error in results:
             if error:
                 print(f"\n⚠ Gaia bulk query failed for chunk {chunk_idx}: {error}")
             if res is not None and len(res) > 0:
-                all_hits.append(res)
+                best_hits.append(res)
     else:
         # Sequential processing (fallback or single chunk)
         for start in tqdm(ranges, desc="Gaia bulk chunks"):
@@ -361,25 +413,15 @@ def crossmatch_gaia_bulk(
                         time.sleep(sleep_s)
 
             if res is not None and len(res) > 0:
-                all_hits.append(res)
+                best = _select_best_matches(res, use_gpu=use_gpu)
+                best_hits.append(best)
 
-    if not all_hits:
+    if not best_hits:
         print("⚠ No Gaia matches found")
         return None
 
-    gaia_all = vstack(all_hits, metadata_conflicts="silent")
-
-    # Pick nearest match per row_id
-    try:
-        gaia_all.sort(["row_id", "sep"])  # sep is in degrees
-        row_ids = np.asarray(gaia_all["row_id"], dtype=np.int64)
-        _, first_idx = np.unique(row_ids, return_index=True)
-        gaia_best = gaia_all[np.sort(first_idx)]
-    except Exception:
-        # Fallback: pandas grouping if astropy sort/unique hits a corner case
-        df = gaia_all.to_pandas().sort_values(["row_id", "sep"], ascending=[True, True])
-        df_best = df.groupby("row_id", as_index=False).first()
-        gaia_best = Table.from_pandas(df_best)
+    # Each chunk has disjoint row_id ranges, so per-chunk reduction is sufficient.
+    gaia_best = vstack(best_hits, metadata_conflicts="silent")
 
     # Prefix Gaia columns to avoid collisions
     rename_map = {}
@@ -504,6 +546,7 @@ def crossmatch_gaia(
     max_stars: Optional[int] = None,
     keep_unmatched: bool = True,
     n_workers: Optional[int] = None,
+    use_gpu: bool = False,
 ) -> Optional[Table]:
     """Dispatch to bulk/per-star crossmatch."""
     if method == "per_star":
@@ -520,6 +563,7 @@ def crossmatch_gaia(
         max_stars=max_stars,
         keep_unmatched=keep_unmatched,
         n_workers=n_workers,
+        use_gpu=use_gpu,
     )
 
 
@@ -531,6 +575,7 @@ def process_catalog(
     max_stars: Optional[int],
     keep_unmatched: bool,
     n_workers: Optional[int] = None,
+    use_gpu: bool = False,
 ) -> bool:
     """Process one catalog end-to-end."""
     print("=" * 70)
@@ -552,6 +597,7 @@ def process_catalog(
         max_stars=max_stars,
         keep_unmatched=keep_unmatched,
         n_workers=n_workers,
+        use_gpu=use_gpu,
     )
 
     if matched is None:
@@ -574,6 +620,7 @@ def process_input_file(
     chunk_size: int,
     max_stars: Optional[int],
     keep_unmatched: bool,
+    use_gpu: bool = False,
 ) -> bool:
     """Process an arbitrary input catalog file (not just BRAVA/APOGEE/GIBS)."""
     print("=" * 70)
@@ -600,6 +647,7 @@ def process_input_file(
         chunk_size=chunk_size,
         max_stars=max_stars,
         keep_unmatched=keep_unmatched,
+        use_gpu=use_gpu,
     )
     if matched is None:
         return False
@@ -679,6 +727,11 @@ def main() -> None:
         default=None,
         help="Number of parallel workers for bulk mode (default: min(CPU count, chunk count, 4))",
     )
+    parser.add_argument(
+        "--gpu",
+        action="store_true",
+        help="Use CuPy on GPU (e.g., RTX 5090) to speed up post-query reductions",
+    )
 
     args = parser.parse_args()
 
@@ -701,6 +754,7 @@ def main() -> None:
             max_stars=args.max_stars,
             keep_unmatched=keep_unmatched,
             n_workers=args.n_workers,
+            use_gpu=args.gpu,
         )
         if matched is None:
             raise SystemExit("No matches (or Gaia query failed)")
@@ -737,6 +791,7 @@ def main() -> None:
             max_stars=args.max_stars,
             keep_unmatched=keep_unmatched,
             n_workers=args.n_workers,
+            use_gpu=args.gpu,
         )
 
     print("\n" + "=" * 70)
