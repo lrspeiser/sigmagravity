@@ -418,6 +418,14 @@ def crossmatch_gaia_local(
     gaia_ra = np.array(gaia_df[gaia_ra_col], dtype=np.float64)
     gaia_dec = np.array(gaia_df[gaia_dec_col], dtype=np.float64)
     
+    # Diagnostic: verify coordinate ranges
+    print(f"  Catalog coordinate ranges:")
+    print(f"    RA: {catalog_ra.min():.2f} to {catalog_ra.max():.2f} deg")
+    print(f"    Dec: {catalog_dec.min():.2f} to {catalog_dec.max():.2f} deg")
+    print(f"  Gaia coordinate ranges:")
+    print(f"    RA: {gaia_ra.min():.2f} to {gaia_ra.max():.2f} deg")
+    print(f"    Dec: {gaia_dec.min():.2f} to {gaia_dec.max():.2f} deg")
+    
     max_sep_deg = max_sep_arcsec / 3600.0
     
     print(f"  Cross-matching {n:,} targets against {len(gaia_df):,} Gaia stars...")
@@ -475,7 +483,9 @@ def crossmatch_gaia_local(
                 dra = batch_ra[:, None] - gaia_ra_batch[None, :]
                 
                 # Haversine formula
+                # Clamp a to [0, 1] to avoid numerical issues with arcsin
                 a = cp.sin(ddec / 2) ** 2 + cp.cos(batch_dec[:, None]) * cp.cos(gaia_dec_batch[None, :]) * cp.sin(dra / 2) ** 2
+                a = cp.clip(a, 0.0, 1.0)  # Prevent arcsin domain errors
                 sep_rad = 2 * cp.arcsin(cp.sqrt(a))
                 sep_deg = cp.rad2deg(sep_rad)
                 
@@ -503,6 +513,19 @@ def crossmatch_gaia_local(
         # Get results back to CPU
         best_indices_cpu = best_indices.get()
         best_seps_cpu = best_seps.get()
+        
+        # Diagnostic: report separation statistics
+        all_seps_arcsec = best_seps_cpu * 3600.0
+        valid_seps_arcsec = all_seps_arcsec[all_seps_arcsec < np.inf]
+        matched_seps_arcsec = all_seps_arcsec[all_seps_arcsec <= max_sep_arcsec]
+        
+        print(f"  Separation stats:")
+        print(f"    Stars with any match found: {len(valid_seps_arcsec):,} / {n:,} ({len(valid_seps_arcsec)/n*100:.1f}%)")
+        if len(valid_seps_arcsec) > 0:
+            print(f"    Min separation: {valid_seps_arcsec.min():.3f} arcsec")
+            print(f"    Median separation: {np.median(valid_seps_arcsec):.3f} arcsec")
+            print(f"    Max separation: {valid_seps_arcsec.max():.3f} arcsec")
+        print(f"    Stars within {max_sep_arcsec} arcsec: {len(matched_seps_arcsec):,} / {n:,} ({len(matched_seps_arcsec)/n*100:.1f}%)")
         
         # Filter out non-matches
         matched_mask = best_seps_cpu < max_sep_deg
