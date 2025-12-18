@@ -77,6 +77,7 @@ def compute_baryonic_acceleration_mw(R_kpc: np.ndarray) -> np.ndarray:
 
 def test_brava_6d_covariant(
     binned_data_path: Optional[Path] = None,
+    use_3d_gradients: bool = False,
 ) -> BRAVA6DTestResult:
     """
     Test BRAVA 6D bulge data using covariant coherence.
@@ -93,7 +94,10 @@ def test_brava_6d_covariant(
         Test results
     """
     if binned_data_path is None:
-        binned_data_path = Path("data/gaia/6d_brava_galcen.parquet")
+        if use_3d_gradients:
+            binned_data_path = Path("data/gaia/6d_brava_galcen_3d.parquet")
+        else:
+            binned_data_path = Path("data/gaia/6d_brava_galcen.parquet")
     
     if not binned_data_path.exists():
         return BRAVA6DTestResult(
@@ -183,11 +187,19 @@ def test_brava_6d_covariant(
 
 
 if __name__ == "__main__":
+    import sys
+    
+    use_3d = "--3d" in sys.argv or "--use-3d" in sys.argv
+    
     print("="*70)
     print("BRAVA 6D BULGE COVARIANT COHERENCE TEST")
+    if use_3d:
+        print("(Using 3D velocity gradients)")
+    else:
+        print("(Using axisymmetric approximation)")
     print("="*70)
     
-    result = test_brava_6d_covariant()
+    result = test_brava_6d_covariant(use_3d_gradients=use_3d)
     
     print("\n" + "="*70)
     print("RESULTS")
