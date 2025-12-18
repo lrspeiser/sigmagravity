@@ -146,6 +146,7 @@ def bin_stars(
     Bin stars in (R,z) space.
     
     Returns binned DataFrame with mean velocities and dispersions.
+    If omega2 and theta2 columns exist in df, they will be averaged per bin.
     """
     if R_bins is None:
         R_min, R_max = df['R_kpc'].min(), df['R_kpc'].max()
@@ -176,7 +177,7 @@ def bin_stars(
             R_center = (R_min + R_max) / 2
             z_center = (z_min + z_max) / 2
             
-            binned_data.append({
+            bin_dict = {
                 'R_kpc': R_center,
                 'z_kpc': z_center,
                 'R_min': R_min,
@@ -190,7 +191,24 @@ def bin_stars(
                 'vphi_std': stars_in_bin['vphi_kms'].std(),
                 'vz_mean': stars_in_bin['vz_kms'].mean(),
                 'vz_std': stars_in_bin['vz_kms'].std(),
-            })
+            }
+            
+            # If omega2 and theta2 exist, average them
+            if 'omega2' in stars_in_bin.columns:
+                omega2_valid = stars_in_bin['omega2'].dropna()
+                if len(omega2_valid) > 0:
+                    bin_dict['omega2'] = omega2_valid.mean()
+                else:
+                    bin_dict['omega2'] = np.nan
+            
+            if 'theta2' in stars_in_bin.columns:
+                theta2_valid = stars_in_bin['theta2'].dropna()
+                if len(theta2_valid) > 0:
+                    bin_dict['theta2'] = theta2_valid.mean()
+                else:
+                    bin_dict['theta2'] = np.nan
+            
+            binned_data.append(bin_dict)
     
     return pd.DataFrame(binned_data)
 
@@ -219,6 +237,111 @@ def compute_flow_invariants_axisymmetric(
     # Expansion: θ ≈ 0 for steady-state bulge
     theta2 = np.zeros_like(omega2)
     
+    return omega2, theta2
+
+
+def compute_flow_invariants_3d_gradients(
+    df: pd.DataFrame,
+    n_neighbors: int = 50,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Compute ω² and θ² from 3D velocity gradients using KNN.
+    
+    For each star, finds n_neighbors nearest neighbors and fits a local
+    linear velocity field: v(x) ≈ v0 + ∇v · (x - x0)
+    
+    From ∇v, computes:
+    - ω² = |∇×v|² (vorticity magnitude squared)
+    - θ² = (∇·v)² (expansion squared)
+    
+    Parameters
+    ----------
+    df : pd.DataFrame
+        DataFrame with columns: R_kpc, phi_rad, z_kpc, vR_kms, vphi_kms, vz_kms
+    n_neighbors : int
+        Number of nearest neighbors to use for gradient estimation
+        
+    Returns
+    -------
+    Tuple[np.ndarray, np.ndarray]
+        (omega2, theta2) in (km/s/kpc)^2, one value per star
+    """
+    from sklearn.neighbors import NearestNeighbors
+    
+    # Convert cylindrical to Cartesian coordinates
+    x = df['R_kpc'].values * np.cos(df['phi_rad'].values)
+    y = df['R_kpc'].values * np.sin(df['phi_rad'].values)
+    z = df['z_kpc'].values
+    coords = np.column_stack([x, y, z])  # (N, 3)
+    
+    # Velocities in Cartesian frame
+    # v_x = vR * cos(phi) - vphi * sin(phi)
+    # v_y = vR * sin(phi) + vphi * cos(phi)
+    # v_z = vz
+    phi = df['phi_rad'].values
+    vR = df['vR_kms'].values
+    vphi = df['vphi_kms'].values
+    vz = df['vz_kms'].values
+    
+    vx = vR * np.cos(phi) - vphi * np.sin(phi)
+    vy = vR * np.sin(phi) + vphi * np.cos(phi)
+    vels = np.column_stack([vx, vy, vz])  # (N, 3)
+    
+    # Find nearest neighbors
+    print(f"    Finding {n_neighbors} nearest neighbors for each star...")
+    nn = NearestNeighbors(n_neighbors=n_neighbors + 1)  # +1 to exclude self
+    nn.fit(coords)
+    distances, indices = nn.kneighbors(coords)
+    
+    # Exclude self (first neighbor is always self)
+    indices = indices[:, 1:]  # (N, n_neighbors)
+    
+    N = len(df)
+    omega2 = np.zeros(N)
+    theta2 = np.zeros(N)
+    
+    print(f"    Computing velocity gradients for {N} stars...")
+    I = np.eye(3)
+    
+    for i in range(N):
+        if i % 500 == 0:
+            print(f"      Progress: {i}/{N} ({i/N*100:.1f}%)")
+        
+        idx = indices[i]
+        # Relative positions and velocities
+        dx = coords[idx] - coords[i]  # (k, 3)
+        dv = vels[idx] - vels[i]  # (k, 3)
+        
+        # Skip if degenerate
+        if not (np.isfinite(dx).all() and np.isfinite(dv).all()):
+            omega2[i] = np.nan
+            theta2[i] = np.nan
+            continue
+        
+        # Solve dv ≈ J · dx, where J = ∇v (3x3)
+        J = np.zeros((3, 3))
+        for comp in range(3):
+            try:
+                grad_comp, *_ = np.linalg.lstsq(dx, dv[:, comp], rcond=None)
+                J[comp, :] = grad_comp
+            except:
+                omega2[i] = np.nan
+                theta2[i] = np.nan
+                continue
+        
+        # Divergence: θ = ∇·v = trace(J)
+        theta_i = float(np.trace(J))
+        theta2[i] = theta_i**2
+        
+        # Vorticity vector: ω = ∇×v (from antisymmetric part)
+        omega_vec = np.array([
+            J[2, 1] - J[1, 2],  # ∂v_z/∂y - ∂v_y/∂z
+            J[0, 2] - J[2, 0],  # ∂v_x/∂z - ∂v_z/∂x
+            J[1, 0] - J[0, 1],  # ∂v_y/∂x - ∂v_x/∂y
+        ])
+        omega2[i] = float(np.dot(omega_vec, omega_vec))
+    
+    # Convert to (km/s/kpc)^2 (already in correct units since coords are in kpc and vels in km/s)
     return omega2, theta2
 
 
@@ -293,6 +416,17 @@ def main():
         default=50,
         help="Minimum stars per bin (default: 50)",
     )
+    parser.add_argument(
+        "--use-3d-gradients",
+        action="store_true",
+        help="Use 3D velocity gradients (KNN) instead of axisymmetric approximation",
+    )
+    parser.add_argument(
+        "--n-neighbors",
+        type=int,
+        default=50,
+        help="Number of neighbors for 3D gradient computation (default: 50)",
+    )
     args = parser.parse_args()
     
     print("="*70)
@@ -347,6 +481,16 @@ def main():
     print(f"  z range: {z_kpc.min():.2f} - {z_kpc.max():.2f} kpc")
     print(f"  v_phi range: {vphi_kms.min():.1f} - {vphi_kms.max():.1f} km/s")
     
+    # Compute flow invariants
+    if args.use_3d_gradients:
+        print(f"\nComputing 3D velocity gradients (KNN, n_neighbors={args.n_neighbors})...")
+        omega2_star, theta2_star = compute_flow_invariants_3d_gradients(df, n_neighbors=args.n_neighbors)
+        df['omega2'] = omega2_star
+        df['theta2'] = theta2_star
+        print(f"  Computed gradients for {len(df)} stars")
+        print(f"  omega^2 range: {np.nanmin(omega2_star):.2f} - {np.nanmax(omega2_star):.2f} (km/s/kpc)^2")
+        print(f"  theta^2 range: {np.nanmin(theta2_star):.2f} - {np.nanmax(theta2_star):.2f} (km/s/kpc)^2")
+    
     # Bin stars
     print(f"\nBinning stars (min {args.min_stars_per_bin} per bin)...")
     binned_df = bin_stars(df, min_stars_per_bin=args.min_stars_per_bin)
@@ -356,11 +500,19 @@ def main():
         print("ERROR: No bins with sufficient stars")
         return
     
-    # Compute flow invariants
-    print("\nComputing flow invariants (omega^2, theta^2)...")
-    omega2, theta2 = compute_flow_invariants_axisymmetric(binned_df)
-    binned_df['omega2'] = omega2
-    binned_df['theta2'] = theta2
+    # Compute flow invariants (if not already computed from 3D gradients)
+    if not args.use_3d_gradients:
+        print("\nComputing flow invariants (axisymmetric approximation)...")
+        omega2, theta2 = compute_flow_invariants_axisymmetric(binned_df)
+        binned_df['omega2'] = omega2
+        binned_df['theta2'] = theta2
+    else:
+        # Flow invariants already computed per-star and averaged in binning
+        omega2 = binned_df['omega2'].values
+        theta2 = binned_df['theta2'].values
+        print(f"\nUsing 3D gradient-based flow invariants (averaged per bin)")
+        print(f"  omega^2 range: {np.nanmin(omega2):.2f} - {np.nanmax(omega2):.2f} (km/s/kpc)^2")
+        print(f"  theta^2 range: {np.nanmin(theta2):.2f} - {np.nanmax(theta2):.2f} (km/s/kpc)^2")
     
     # Compute baryonic density
     print("Computing baryonic density...")
