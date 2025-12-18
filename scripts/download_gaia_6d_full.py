@@ -118,7 +118,7 @@ def download_chunk(
             job = Gaia.launch_job_async(
                 query,
                 dump_to_file=False,
-                output_format='fits',  # FITS is more efficient for large datasets
+                # Use default format (VOTable), we'll convert to FITS when saving
             )
             
             print(f"  Waiting for results...")
