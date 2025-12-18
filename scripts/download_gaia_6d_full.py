@@ -57,6 +57,31 @@ WHERE
     {order_by}
 """
 
+# Query for 6D stars matching 2MASS IDs (via cross-match table)
+BASE_QUERY_6D_2MASS = """
+SELECT
+    g.source_id,
+    g.ra, g.dec,
+    g.l, g.b,
+    g.parallax, g.parallax_error,
+    g.pmra, g.pmra_error,
+    g.pmdec, g.pmdec_error,
+    g.radial_velocity, g.radial_velocity_error,
+    g.phot_g_mean_mag,
+    g.bp_rp,
+    g.ruwe,
+    g.visibility_periods_used,
+    xmatch.original_ext_source_id AS tmass_id
+FROM gaiadr3.gaia_source AS g
+JOIN gaiadr3.tmass_psc_xsc_best_neighbour AS xmatch
+    ON g.source_id = xmatch.source_id
+JOIN TAP_UPLOAD.tmass_ids AS tids
+    ON xmatch.original_ext_source_id = tids.tmass_id
+WHERE
+    g.radial_velocity IS NOT NULL
+    {quality_cuts}
+"""
+
 
 def build_query(
     l_min: Optional[float] = None,
@@ -141,6 +166,153 @@ def download_chunk(
             time.sleep(wait_time)
     
     return None
+
+
+def download_gaia_for_brava(
+    Gaia,
+    brava_catalog_path: Path,
+    output_path: Path,
+    ruwe_max: float = 1.6,
+    vis_min: int = 8,
+    chunk_size: int = 5000,
+) -> None:
+    """Download Gaia 6D stars that match BRAVA catalog via 2MASS IDs.
+    
+    This uses the pre-computed Gaia-2MASS cross-match table to find
+    Gaia stars with 6D information (radial velocity) that match BRAVA stars.
+    """
+    from astropy.io import ascii
+    from astropy.table import Table
+    
+    print(f"\n{'='*70}")
+    print("DOWNLOADING GAIA 6D STARS FOR BRAVA CATALOG")
+    print(f"{'='*70}")
+    
+    # Load BRAVA catalog
+    print(f"\nLoading BRAVA catalog: {brava_catalog_path}")
+    try:
+        brava = ascii.read(str(brava_catalog_path), format='ipac')
+    except Exception as e:
+        print(f"ERROR: Failed to load BRAVA catalog: {e}")
+        return
+    
+    print(f"  Loaded {len(brava):,} BRAVA stars")
+    
+    # Extract 2MASS IDs
+    if 'tmass_id' not in brava.colnames:
+        print("ERROR: BRAVA catalog missing 'tmass_id' column")
+        return
+    
+    tmass_ids = brava['tmass_id']
+    # Filter out null/masked values and convert to strings
+    if hasattr(tmass_ids, 'mask'):
+        valid_mask = ~tmass_ids.mask
+    else:
+        # Try to handle different data types
+        try:
+            valid_mask = np.isfinite(tmass_ids.astype(float))
+        except:
+            valid_mask = np.array([str(x).strip() not in ['', 'None', 'nan', 'NULL'] for x in tmass_ids])
+    
+    tmass_ids_valid = tmass_ids[valid_mask]
+    # Convert to strings (2MASS IDs are typically stored as strings)
+    tmass_ids_valid = np.array([str(x).strip() for x in tmass_ids_valid])
+    
+    print(f"  Found {len(tmass_ids_valid):,} valid 2MASS IDs")
+    
+    if len(tmass_ids_valid) == 0:
+        print("ERROR: No valid 2MASS IDs found")
+        return
+    
+    # Process in chunks
+    n_chunks = (len(tmass_ids_valid) + chunk_size - 1) // chunk_size
+    print(f"\nProcessing {len(tmass_ids_valid):,} 2MASS IDs in {n_chunks} chunk(s)...")
+    
+    all_results = []
+    
+    for i in range(0, len(tmass_ids_valid), chunk_size):
+        chunk_ids = tmass_ids_valid[i:min(i+chunk_size, len(tmass_ids_valid))]
+        chunk_num = i // chunk_size + 1
+        
+        print(f"\n  Chunk {chunk_num}/{n_chunks}: {len(chunk_ids):,} 2MASS IDs")
+        
+        # Create upload table
+        upload_table = Table({'tmass_id': chunk_ids})
+        
+        # Build query
+        quality_cuts = f"AND g.ruwe < {ruwe_max} AND g.visibility_periods_used >= {vis_min}"
+        query = BASE_QUERY_6D_2MASS.format(
+            limit_clause="",
+            quality_cuts=quality_cuts,
+            order_by="",
+        )
+        
+        # Download chunk
+        for attempt in range(1, 4):
+            try:
+                print(f"    Submitting query (attempt {attempt}/3)...")
+                job = Gaia.launch_job_async(
+                    query,
+                    upload_resource=upload_table,
+                    upload_table_name="tmass_ids",
+                    dump_to_file=False,
+                )
+                
+                print(f"    Waiting for results...")
+                results = job.get_results()
+                
+                if results is not None and len(results) > 0:
+                    print(f"    Retrieved {len(results):,} Gaia stars with 6D info")
+                    all_results.append(results)
+                else:
+                    print(f"    No matches found in this chunk")
+                
+                break  # Success
+                
+            except Exception as e:
+                if attempt == 3:
+                    print(f"    Failed after 3 attempts: {e}")
+                else:
+                    wait_time = 5 * attempt
+                    print(f"    Error (attempt {attempt}): {e}")
+                    print(f"    Retrying in {wait_time} seconds...")
+                    time.sleep(wait_time)
+        
+        # Be nice to TAP server
+        time.sleep(1)
+    
+    # Combine all results
+    if not all_results:
+        print("\nNo Gaia stars found matching BRAVA 2MASS IDs")
+        return
+    
+    print(f"\nCombining {len(all_results)} chunks...")
+    combined = vstack(all_results, metadata_conflicts='silent')
+    
+    print(f"  Total Gaia stars with 6D info: {len(combined):,}")
+    print(f"  Match rate: {len(combined):,}/{len(brava):,} ({len(combined)/len(brava)*100:.1f}%)")
+    
+    # Save to FITS
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Fix string columns for FITS compatibility (FITS doesn't like variable-length strings)
+    if 'tmass_id' in combined.colnames:
+        # Convert tmass_id to fixed-length string array
+        tmass_str = [str(x) for x in combined['tmass_id']]
+        max_len = max(len(s) for s in tmass_str) if tmass_str else 20
+        # Pad to fixed length
+        tmass_fixed = [s.ljust(max_len)[:max_len] for s in tmass_str]
+        combined['tmass_id'] = tmass_fixed
+    
+    combined.write(str(output_path), overwrite=True, format='fits')
+    
+    print(f"\n{'='*70}")
+    print(f"DOWNLOAD COMPLETE")
+    print(f"{'='*70}")
+    print(f"Saved: {output_path}")
+    print(f"  Stars: {len(combined):,}")
+    print(f"  Columns: {len(combined.colnames)}")
+    print(f"{'='*70}")
 
 
 def download_by_lb_bins(
@@ -239,10 +411,22 @@ def main():
         description="Download full Gaia DR3 6D catalog (470M stars with radial velocities)"
     )
     parser.add_argument(
+        "--brava-catalog",
+        type=str,
+        default=None,
+        help="Path to BRAVA catalog file. If provided, only downloads Gaia stars matching BRAVA via 2MASS IDs.",
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        default=None,
+        help="Output FITS file path (required when using --brava-catalog)",
+    )
+    parser.add_argument(
         "--output-dir",
         type=str,
         default="data/gaia/6d_full",
-        help="Output directory for FITS files (default: data/gaia/6d_full)",
+        help="Output directory for FITS files (default: data/gaia/6d_full). Ignored if --brava-catalog is used.",
     )
     parser.add_argument(
         "--l-min",
@@ -323,6 +507,28 @@ def main():
         print(f"ERROR: Failed to connect to Gaia TAP: {e}")
         print("Make sure astroquery is installed: pip install astroquery")
         sys.exit(1)
+    
+    # If BRAVA catalog provided, download only matching Gaia stars
+    if args.brava_catalog is not None:
+        brava_path = Path(args.brava_catalog)
+        if not brava_path.exists():
+            print(f"ERROR: BRAVA catalog not found: {brava_path}")
+            sys.exit(1)
+        
+        if args.output is None:
+            print("ERROR: --output is required when using --brava-catalog")
+            sys.exit(1)
+        
+        output_path = Path(args.output)
+        download_gaia_for_brava(
+            GaiaClass,
+            brava_path,
+            output_path,
+            ruwe_max=args.ruwe_max,
+            vis_min=args.vis_min,
+            chunk_size=5000,
+        )
+        return
     
     output_dir = Path(args.output_dir)
     
