@@ -363,7 +363,7 @@ def crossmatch_gaia_local(
     
     print(f"  Loaded {len(gaia_df):,} Gaia stars")
     
-    # Ensure Gaia has ra/dec columns (check common names)
+    # Ensure Gaia has ra/dec columns (check common names, or convert from Galactic)
     gaia_ra_col = None
     gaia_dec_col = None
     for ra_name in ['ra', 'RA', 'ra_icrs', 'RA_ICRS']:
@@ -375,8 +375,33 @@ def crossmatch_gaia_local(
             gaia_dec_col = dec_name
             break
     
+    # If no RA/Dec found, check for Galactic coordinates and convert
     if gaia_ra_col is None or gaia_dec_col is None:
-        raise ValueError(f"Gaia catalog missing ra/dec columns. Found: {list(gaia_df.columns)[:10]}")
+        l_col = None
+        b_col = None
+        for l_name in ['l', 'L', 'glon', 'GLON', 'l_deg', 'GLON_DEG']:
+            if l_name in gaia_df.columns:
+                l_col = l_name
+                break
+        for b_name in ['b', 'B', 'glat', 'GLAT', 'b_deg', 'GLAT_DEG']:
+            if b_name in gaia_df.columns:
+                b_col = b_name
+                break
+        
+        if l_col is not None and b_col is not None:
+            print(f"  Converting Galactic (l, b) to ICRS (ra, dec)...")
+            from astropy.coordinates import SkyCoord
+            gaia_coords = SkyCoord(
+                l=gaia_df[l_col].values * u.deg,
+                b=gaia_df[b_col].values * u.deg,
+                frame='galactic'
+            ).icrs
+            gaia_df['ra'] = gaia_coords.ra.deg
+            gaia_df['dec'] = gaia_coords.dec.deg
+            gaia_ra_col = 'ra'
+            gaia_dec_col = 'dec'
+        else:
+            raise ValueError(f"Gaia catalog missing ra/dec or l/b columns. Found: {list(gaia_df.columns)[:10]}")
     
     # Prepare input catalog
     table = catalog_table.copy()
@@ -415,38 +440,65 @@ def crossmatch_gaia_local(
         gaia_ra_gpu = cp.asarray(gaia_ra_rad)
         gaia_dec_gpu = cp.asarray(gaia_dec_rad)
         
-        # Compute separations for all pairs (vectorized)
-        # Using haversine formula on GPU
-        matches = []
+        # Compute separations using double batching to avoid OOM
+        # Batch both catalog stars and Gaia stars
         best_seps = cp.full(n, cp.inf)
-        best_indices = cp.full(n, -1, dtype=cp.int32)
+        best_indices = cp.full(n, -1, dtype=cp.int64)
         
-        # Process in batches to avoid OOM
-        batch_size = 10000
-        for i in tqdm(range(0, n, batch_size), desc="GPU crossmatch"):
-            end = min(i + batch_size, n)
-            batch_ra = cat_ra_gpu[i:end]
-            batch_dec = cat_dec_gpu[i:end]
+        catalog_batch_size = 1000  # Process catalog in small batches
+        gaia_batch_size = 50000    # Process Gaia in larger batches
+        
+        n_gaia = len(gaia_ra_gpu)
+        total_batches = (n + catalog_batch_size - 1) // catalog_batch_size * (n_gaia + gaia_batch_size - 1) // gaia_batch_size
+        
+        pbar = tqdm(total=n, desc="GPU crossmatch")
+        
+        for i in range(0, n, catalog_batch_size):
+            end_cat = min(i + catalog_batch_size, n)
+            batch_ra = cat_ra_gpu[i:end_cat]
+            batch_dec = cat_dec_gpu[i:end_cat]
+            batch_n = end_cat - i
             
-            # Compute separations: shape (batch_size, n_gaia)
-            ddec = batch_dec[:, None] - gaia_dec_gpu[None, :]
-            dra = batch_ra[:, None] - gaia_ra_gpu[None, :]
+            # Reset best for this catalog batch
+            batch_best_seps = cp.full(batch_n, cp.inf)
+            batch_best_indices = cp.full(batch_n, -1, dtype=cp.int64)
             
-            # Haversine formula
-            a = cp.sin(ddec / 2) ** 2 + cp.cos(batch_dec[:, None]) * cp.cos(gaia_dec_gpu[None, :]) * cp.sin(dra / 2) ** 2
-            sep_rad = 2 * cp.arcsin(cp.sqrt(a))
-            sep_deg = cp.rad2deg(sep_rad)
+            # Process Gaia in chunks
+            for j in range(0, n_gaia, gaia_batch_size):
+                end_gaia = min(j + gaia_batch_size, n_gaia)
+                gaia_ra_batch = gaia_ra_gpu[j:end_gaia]
+                gaia_dec_batch = gaia_dec_gpu[j:end_gaia]
+                gaia_batch_n = end_gaia - j
+                
+                # Compute separations: shape (batch_n, gaia_batch_n)
+                ddec = batch_dec[:, None] - gaia_dec_batch[None, :]
+                dra = batch_ra[:, None] - gaia_ra_batch[None, :]
+                
+                # Haversine formula
+                a = cp.sin(ddec / 2) ** 2 + cp.cos(batch_dec[:, None]) * cp.cos(gaia_dec_batch[None, :]) * cp.sin(dra / 2) ** 2
+                sep_rad = 2 * cp.arcsin(cp.sqrt(a))
+                sep_deg = cp.rad2deg(sep_rad)
+                
+                # Find best match in this Gaia batch
+                valid = sep_deg <= max_sep_deg
+                sep_deg = cp.where(valid, sep_deg, cp.inf)
+                
+                batch_gaia_best_idx = cp.argmin(sep_deg, axis=1)
+                batch_gaia_best_sep = sep_deg[cp.arange(batch_n), batch_gaia_best_idx]
+                
+                # Update best matches (accounting for global Gaia index)
+                better = batch_gaia_best_sep < batch_best_seps
+                batch_best_indices = cp.where(better, batch_gaia_best_idx + j, batch_best_indices)
+                batch_best_seps = cp.minimum(batch_best_seps, batch_gaia_best_sep)
             
-            # Find best match per catalog star
-            valid = sep_deg <= max_sep_deg
-            sep_deg = cp.where(valid, sep_deg, cp.inf)
+            # Update global best matches
+            better = batch_best_seps < best_seps[i:end_cat]
+            best_indices[i:end_cat] = cp.where(better, batch_best_indices, best_indices[i:end_cat])
+            best_seps[i:end_cat] = cp.minimum(best_seps[i:end_cat], batch_best_seps)
             
-            batch_best_idx = cp.argmin(sep_deg, axis=1)
-            batch_best_sep = sep_deg[cp.arange(len(batch_ra)), batch_best_idx]
-            
-            # Update best matches
-            best_indices[i:end] = cp.where(batch_best_sep < best_seps[i:end], batch_best_idx, best_indices[i:end])
-            best_seps[i:end] = cp.minimum(best_seps[i:end], batch_best_sep)
+            pbar.update(batch_n)
+        
+        pbar.close()
         
         # Get results back to CPU
         best_indices_cpu = best_indices.get()
