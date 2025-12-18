@@ -305,6 +305,227 @@ def _process_chunk_worker(args_tuple):
             time.sleep(sleep_s)
 
 
+def crossmatch_gaia_local(
+    catalog_table: Table,
+    gaia_catalog_path: Optional[Path] = None,
+    max_sep_arcsec: float = 2.0,
+    keep_unmatched: bool = True,
+    use_gpu: bool = True,
+) -> Optional[Table]:
+    """Fast local crossmatch against downloaded Gaia catalog using GPU acceleration.
+    
+    This is MUCH faster than TAP queries - uses GPU for spatial crossmatching
+    against the full 1.8M star local catalog.
+    
+    Parameters
+    ----------
+    catalog_table
+        Input table that must contain ra/dec columns.
+    gaia_catalog_path
+        Path to local Gaia catalog (CSV/FITS). If None, searches common locations.
+    max_sep_arcsec
+        Match radius.
+    keep_unmatched
+        If True, return full input table with masked Gaia columns for unmatched rows.
+    use_gpu
+        Use GPU acceleration (CuPy) for spatial crossmatching. Much faster than CPU.
+    """
+    # Find local Gaia catalog
+    if gaia_catalog_path is None:
+        possible_paths = [
+            PROJECT_ROOT / "data" / "gaia" / "gaia_processed_corrected.csv",
+            PROJECT_ROOT / "data" / "gaia" / "gaia_processed.csv",
+            PROJECT_ROOT / "data" / "gaia" / "gaia_processed_signed.csv",
+        ]
+        for path in possible_paths:
+            if path.exists():
+                gaia_catalog_path = path
+                break
+        
+        if gaia_catalog_path is None:
+            raise FileNotFoundError(
+                "Local Gaia catalog not found. Please specify --gaia-catalog-path or "
+                "place catalog at data/gaia/gaia_processed_corrected.csv"
+            )
+    
+    if not gaia_catalog_path.exists():
+        raise FileNotFoundError(f"Gaia catalog not found: {gaia_catalog_path}")
+    
+    print(f"\nLocal Gaia cross-match: Loading catalog from {gaia_catalog_path.name}...")
+    
+    # Load local Gaia catalog
+    if gaia_catalog_path.suffix == '.csv':
+        import pandas as pd
+        gaia_df = pd.read_csv(gaia_catalog_path, nrows=None)  # Load all
+    else:
+        gaia_table = Table.read(str(gaia_catalog_path))
+        gaia_df = gaia_table.to_pandas()
+    
+    print(f"  Loaded {len(gaia_df):,} Gaia stars")
+    
+    # Ensure Gaia has ra/dec columns (check common names)
+    gaia_ra_col = None
+    gaia_dec_col = None
+    for ra_name in ['ra', 'RA', 'ra_icrs', 'RA_ICRS']:
+        if ra_name in gaia_df.columns:
+            gaia_ra_col = ra_name
+            break
+    for dec_name in ['dec', 'DEC', 'dec_icrs', 'DEC_ICRS']:
+        if dec_name in gaia_df.columns:
+            gaia_dec_col = dec_name
+            break
+    
+    if gaia_ra_col is None or gaia_dec_col is None:
+        raise ValueError(f"Gaia catalog missing ra/dec columns. Found: {list(gaia_df.columns)[:10]}")
+    
+    # Prepare input catalog
+    table = catalog_table.copy()
+    table = ensure_radec_deg(table)
+    n = len(table)
+    if n == 0:
+        return None
+    
+    table["row_id"] = np.arange(n, dtype=np.int64)
+    
+    # Convert to arrays
+    catalog_ra = np.array(table["ra"], dtype=np.float64)
+    catalog_dec = np.array(table["dec"], dtype=np.float64)
+    gaia_ra = np.array(gaia_df[gaia_ra_col], dtype=np.float64)
+    gaia_dec = np.array(gaia_df[gaia_dec_col], dtype=np.float64)
+    
+    max_sep_deg = max_sep_arcsec / 3600.0
+    
+    print(f"  Cross-matching {n:,} targets against {len(gaia_df):,} Gaia stars...")
+    if use_gpu:
+        print("  Using GPU acceleration (CuPy)")
+    
+    cp = _get_cupy() if use_gpu else None
+    
+    if cp is not None:
+        # GPU-accelerated crossmatch
+        # Convert to radians for great circle distance
+        catalog_ra_rad = np.deg2rad(catalog_ra)
+        catalog_dec_rad = np.deg2rad(catalog_dec)
+        gaia_ra_rad = np.deg2rad(gaia_ra)
+        gaia_dec_rad = np.deg2rad(gaia_dec)
+        
+        # Move to GPU
+        cat_ra_gpu = cp.asarray(catalog_ra_rad)
+        cat_dec_gpu = cp.asarray(catalog_dec_rad)
+        gaia_ra_gpu = cp.asarray(gaia_ra_rad)
+        gaia_dec_gpu = cp.asarray(gaia_dec_rad)
+        
+        # Compute separations for all pairs (vectorized)
+        # Using haversine formula on GPU
+        matches = []
+        best_seps = cp.full(n, cp.inf)
+        best_indices = cp.full(n, -1, dtype=cp.int32)
+        
+        # Process in batches to avoid OOM
+        batch_size = 10000
+        for i in tqdm(range(0, n, batch_size), desc="GPU crossmatch"):
+            end = min(i + batch_size, n)
+            batch_ra = cat_ra_gpu[i:end]
+            batch_dec = cat_dec_gpu[i:end]
+            
+            # Compute separations: shape (batch_size, n_gaia)
+            ddec = batch_dec[:, None] - gaia_dec_gpu[None, :]
+            dra = batch_ra[:, None] - gaia_ra_gpu[None, :]
+            
+            # Haversine formula
+            a = cp.sin(ddec / 2) ** 2 + cp.cos(batch_dec[:, None]) * cp.cos(gaia_dec_gpu[None, :]) * cp.sin(dra / 2) ** 2
+            sep_rad = 2 * cp.arcsin(cp.sqrt(a))
+            sep_deg = cp.rad2deg(sep_rad)
+            
+            # Find best match per catalog star
+            valid = sep_deg <= max_sep_deg
+            sep_deg = cp.where(valid, sep_deg, cp.inf)
+            
+            batch_best_idx = cp.argmin(sep_deg, axis=1)
+            batch_best_sep = sep_deg[cp.arange(len(batch_ra)), batch_best_idx]
+            
+            # Update best matches
+            best_indices[i:end] = cp.where(batch_best_sep < best_seps[i:end], batch_best_idx, best_indices[i:end])
+            best_seps[i:end] = cp.minimum(best_seps[i:end], batch_best_sep)
+        
+        # Get results back to CPU
+        best_indices_cpu = best_indices.get()
+        best_seps_cpu = best_seps.get()
+        
+        # Filter out non-matches
+        matched_mask = best_seps_cpu < max_sep_deg
+        matched_indices = best_indices_cpu[matched_mask]
+        matched_seps = best_seps_cpu[matched_mask]
+        
+    else:
+        # CPU fallback (slower but works)
+        if use_gpu:
+            print("[warn] CuPy not available; using CPU (will be slower)")
+        
+        from astropy.coordinates import SkyCoord
+        catalog_coords = SkyCoord(ra=catalog_ra * u.deg, dec=catalog_dec * u.deg, frame='icrs')
+        gaia_coords = SkyCoord(ra=gaia_ra * u.deg, dec=gaia_dec * u.deg, frame='icrs')
+        
+        # Find matches (this is still faster than TAP for local data)
+        idx, sep2d, _ = catalog_coords.match_to_catalog_sky(gaia_coords)
+        matched_mask = sep2d.arcsec <= max_sep_arcsec
+        matched_indices = idx[matched_mask].astype(int)
+        matched_seps = sep2d[matched_mask].arcsec / 3600.0  # Convert to degrees
+    
+    n_matched = len(matched_indices)
+    print(f"  Found {n_matched:,} matches ({n_matched/n*100:.1f}%)")
+    
+    if n_matched == 0:
+        if not keep_unmatched:
+            return None
+        # Return input table with masked Gaia columns
+        out = table.copy()
+        for col in ['source_id', 'parallax', 'parallax_error', 'pmra', 'pmra_error', 
+                    'pmdec', 'pmdec_error', 'radial_velocity', 'radial_velocity_error',
+                    'phot_g_mean_mag', 'ruwe', 'visibility_periods_used']:
+            out[f'gaia_{col}'] = np.full(n, np.nan)
+        out['gaia_matched'] = np.zeros(n, dtype=bool)
+        out['gaia_sep_arcsec'] = np.full(n, np.nan)
+        return out
+    
+    # Build matched table
+    matched_gaia = gaia_df.iloc[matched_indices].copy()
+    # row_id should be the catalog row indices that have matches
+    matched_gaia['row_id'] = np.where(matched_mask)[0]
+    matched_gaia['sep'] = matched_seps
+    
+    # Convert to astropy Table
+    gaia_table = Table.from_pandas(matched_gaia)
+    
+    # Prefix Gaia columns
+    rename_map = {}
+    for col in gaia_table.colnames:
+        if col not in ['row_id', 'sep']:
+            rename_map[col] = f'gaia_{col}'
+    gaia_table.rename_columns(list(rename_map.keys()), list(rename_map.values()))
+    
+    # Join back to catalog
+    out = join(table, gaia_table, keys='row_id', join_type='left')
+    
+    # Add separation in arcsec
+    if 'gaia_sep' in out.colnames:
+        out['gaia_sep_arcsec'] = np.array(out['gaia_sep'], dtype=float) * 3600.0
+    
+    # Matched flag
+    out['gaia_matched'] = ~out['gaia_source_id'].mask if hasattr(out['gaia_source_id'], 'mask') else np.isfinite(out['gaia_source_id'])
+    
+    if not keep_unmatched:
+        out = out[out['gaia_matched']]
+    
+    # Clean up
+    if 'row_id' in out.colnames:
+        out.remove_column('row_id')
+    
+    n_match = int(np.sum(out['gaia_matched'])) if 'gaia_matched' in out.colnames else 0
+    print(f"  Gaia matches: {n_match:,}/{len(out):,} ({(n_match/max(len(out),1))*100:.1f}%)")
+    return out
+
+
 def crossmatch_gaia_bulk(
     catalog_table: Table,
     max_sep_arcsec: float = 2.0,
@@ -555,21 +776,30 @@ def crossmatch_gaia_per_star(
 
 def crossmatch_gaia(
     catalog_table: Table,
-    method: Literal["bulk", "per_star"] = "bulk",
+    method: Literal["bulk", "per_star", "local"] = "bulk",
     max_sep_arcsec: float = 2.0,
     chunk_size: int = 2000,
     max_stars: Optional[int] = None,
     keep_unmatched: bool = True,
     n_workers: Optional[int] = None,
     use_gpu: bool = False,
+    gaia_catalog_path: Optional[Path] = None,
 ) -> Optional[Table]:
-    """Dispatch to bulk/per-star crossmatch."""
+    """Dispatch to bulk/per-star/local crossmatch."""
     if method == "per_star":
         return crossmatch_gaia_per_star(
             catalog_table,
             max_sep_arcsec=max_sep_arcsec,
             max_stars=max_stars,
             keep_unmatched=keep_unmatched,
+        )
+    elif method == "local":
+        return crossmatch_gaia_local(
+            catalog_table,
+            gaia_catalog_path=gaia_catalog_path,
+            max_sep_arcsec=max_sep_arcsec,
+            keep_unmatched=keep_unmatched,
+            use_gpu=use_gpu,
         )
     return crossmatch_gaia_bulk(
         catalog_table,
@@ -584,13 +814,14 @@ def crossmatch_gaia(
 
 def process_catalog(
     catalog_name: str,
-    method: Literal["bulk", "per_star"],
+    method: Literal["bulk", "per_star", "local"],
     max_sep_arcsec: float,
     chunk_size: int,
     max_stars: Optional[int],
     keep_unmatched: bool,
     n_workers: Optional[int] = None,
     use_gpu: bool = False,
+    gaia_catalog_path: Optional[Path] = None,
 ) -> bool:
     """Process one catalog end-to-end."""
     print("=" * 70)
@@ -613,6 +844,7 @@ def process_catalog(
         keep_unmatched=keep_unmatched,
         n_workers=n_workers,
         use_gpu=use_gpu,
+        gaia_catalog_path=gaia_catalog_path,
     )
 
     if matched is None:
@@ -630,12 +862,13 @@ def process_catalog(
 def process_input_file(
     input_path: Path,
     output_path: Optional[Path],
-    method: Literal["bulk", "per_star"],
+    method: Literal["bulk", "per_star", "local"],
     max_sep_arcsec: float,
     chunk_size: int,
     max_stars: Optional[int],
     keep_unmatched: bool,
     use_gpu: bool = False,
+    gaia_catalog_path: Optional[Path] = None,
 ) -> bool:
     """Process an arbitrary input catalog file (not just BRAVA/APOGEE/GIBS)."""
     print("=" * 70)
@@ -663,6 +896,7 @@ def process_input_file(
         max_stars=max_stars,
         keep_unmatched=keep_unmatched,
         use_gpu=use_gpu,
+        gaia_catalog_path=gaia_catalog_path,
     )
     if matched is None:
         return False
@@ -710,9 +944,15 @@ def main() -> None:
     )
     parser.add_argument(
         "--method",
-        choices=["bulk", "per_star"],
+        choices=["bulk", "per_star", "local"],
         default="bulk",
-        help="Gaia crossmatch method (default: bulk)",
+        help="Gaia crossmatch method: 'bulk'=TAP queries (slow), 'local'=GPU crossmatch against downloaded catalog (fast, recommended if you have 1.8M Gaia stars), 'per_star'=debug only (default: bulk)",
+    )
+    parser.add_argument(
+        "--gaia-catalog-path",
+        type=str,
+        default=None,
+        help="Path to local Gaia catalog (CSV/FITS) for --method=local. If not specified, searches data/gaia/ automatically.",
     )
     parser.add_argument(
         "--chunk-size",
@@ -751,6 +991,8 @@ def main() -> None:
     args = parser.parse_args()
 
     keep_unmatched = not bool(args.matched_only)
+    
+    gaia_catalog_path = Path(args.gaia_catalog_path) if args.gaia_catalog_path else None
 
     # Custom input mode
     if args.input:
@@ -770,6 +1012,7 @@ def main() -> None:
             keep_unmatched=keep_unmatched,
             n_workers=args.n_workers,
             use_gpu=args.gpu,
+            gaia_catalog_path=gaia_catalog_path,
         )
         if matched is None:
             raise SystemExit("No matches (or Gaia query failed)")
@@ -807,6 +1050,7 @@ def main() -> None:
             keep_unmatched=keep_unmatched,
             n_workers=args.n_workers,
             use_gpu=args.gpu,
+            gaia_catalog_path=gaia_catalog_path,
         )
 
     print("\n" + "=" * 70)
