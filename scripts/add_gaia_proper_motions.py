@@ -358,9 +358,11 @@ def crossmatch_gaia_bulk(
     
     # Determine number of workers - maximize parallelism to saturate TAP
     if n_workers is None:
-        # More workers = more parallel TAP queries = faster (TAP can handle 12-16 concurrent)
-        # Cap at reasonable limit to avoid overwhelming TAP service
-        n_workers = min(cpu_count(), len(ranges), 12)
+        # TAP queries are I/O bound, so we can use more workers than CPU cores
+        # Use all CPU cores + some extra for I/O wait time
+        # TAP can typically handle 16-20 concurrent queries
+        cpu_cores = cpu_count()
+        n_workers = min(cpu_cores * 2, len(ranges), 20)  # 2x CPU cores, up to 20 workers
     
     print(f"\nBulk Gaia DR3 cross-match: {n:,} targets in {len(ranges)} chunk(s) (chunk_size={chunk_size})")
     if n_workers > 1:
@@ -738,7 +740,7 @@ def main() -> None:
         "--n-workers",
         type=int,
         default=None,
-        help="Number of parallel workers for bulk mode (default: min(CPU count, chunk count, 4))",
+        help="Number of parallel workers for bulk mode (default: 2x CPU cores, up to 20. TAP queries are I/O bound so more workers = faster)",
     )
     parser.add_argument(
         "--gpu",
