@@ -18,15 +18,19 @@ multi-day operation.
 
 The default mode here uses a **bulk** ADQL join against an uploaded
 `TAP_UPLOAD` table of query coordinates. In practice, this reduces runtime from
-minutes/star → minutes per 1–5k stars (depending on TAP service load).
+minutes/star → minutes per 5–10k stars (depending on TAP service load).
+Default chunk size is 5000 stars per query for optimal throughput.
 
 Usage
 -----
-    # Fast path (recommended)
-    python scripts/add_gaia_proper_motions.py --catalog BRAVA --method bulk --chunk-size 2000
+    # Fast path (recommended, default chunk-size=5000)
+    python scripts/add_gaia_proper_motions.py --catalog BRAVA --method bulk
 
     # Fast path with GPU reduction (needs CuPy + NVIDIA card)
-    python scripts/add_gaia_proper_motions.py --catalog BRAVA --method bulk --chunk-size 2000 --gpu
+    python scripts/add_gaia_proper_motions.py --catalog BRAVA --method bulk --gpu
+
+    # Larger chunks for very large catalogs (fewer queries = faster)
+    python scripts/add_gaia_proper_motions.py --catalog BRAVA --method bulk --chunk-size 10000 --gpu
 
     # Debug / fallback
     python scripts/add_gaia_proper_motions.py --catalog BRAVA --method per_star --max-stars 10
@@ -303,7 +307,7 @@ def _process_chunk_worker(args_tuple):
 def crossmatch_gaia_bulk(
     catalog_table: Table,
     max_sep_arcsec: float = 2.0,
-    chunk_size: int = 2000,
+    chunk_size: int = 5000,
     max_stars: Optional[int] = None,
     keep_unmatched: bool = True,
     n_workers: Optional[int] = None,
@@ -318,7 +322,8 @@ def crossmatch_gaia_bulk(
     max_sep_arcsec
         Match radius.
     chunk_size
-        Number of targets per TAP upload/query.
+        Number of targets per TAP upload/query. Larger chunks = fewer queries = faster.
+        Default 5000 is optimal for most cases. Can go up to 10000 if TAP is stable.
     max_stars
         Optional limit for testing.
     keep_unmatched
@@ -326,7 +331,8 @@ def crossmatch_gaia_bulk(
         unmatched rows. If False, return only matched rows.
     use_gpu
         If True and CuPy is installed, use GPU acceleration for best-match
-        selection (row_id/sep reduction).
+        selection (row_id/sep reduction). Note: GPU utilization may be low
+        because TAP query latency is the main bottleneck, not GPU reduction.
     """
     Gaia = _get_gaia()
 
@@ -348,9 +354,10 @@ def crossmatch_gaia_bulk(
 
     ranges = list(range(0, n, int(chunk_size)))
     
-    # Determine number of workers
+    # Determine number of workers - allow more parallelism for larger datasets
     if n_workers is None:
-        n_workers = min(cpu_count(), len(ranges), 4)  # Cap at 4 to avoid overwhelming Gaia TAP
+        # More workers = more parallel TAP queries = faster (up to TAP limits)
+        n_workers = min(cpu_count(), len(ranges), 8)  # Increased from 4 to 8
     
     print(f"\nBulk Gaia DR3 cross-match: {n:,} targets in {len(ranges)} chunk(s) (chunk_size={chunk_size})")
     if n_workers > 1:
@@ -705,8 +712,8 @@ def main() -> None:
     parser.add_argument(
         "--chunk-size",
         type=int,
-        default=2000,
-        help="Targets per TAP upload/query when --method=bulk (default: 2000)",
+        default=5000,
+        help="Targets per TAP upload/query when --method=bulk (default: 5000, larger = fewer queries = faster)",
     )
     parser.add_argument(
         "--max-sep",
