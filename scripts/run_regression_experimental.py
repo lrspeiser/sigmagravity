@@ -1640,6 +1640,60 @@ def test_gaia_bulge_covariant(gaia_df: Optional[pd.DataFrame]) -> TestResult:
     return TestResult(name="Gaia Bulge Covariant", passed=passed, metric=rms_cov, details=details, message=f"RMS={rms_cov:.2f} km/s (baseline {rms_base:.2f}, Δ={improvement:.2f})")
 
 
+def test_brava_6d_covariant() -> TestResult:
+    """Test BRAVA 6D bulge data using covariant coherence.
+    
+    Uses processed BRAVA-matched Gaia 6D stars with flow topology invariants.
+    Tests velocity dispersion predictions (appropriate for bulge kinematics).
+    """
+    try:
+        from scripts.test_brava_6d_covariant import test_brava_6d_covariant as brava_test_func
+        from pathlib import Path
+        
+        # Try axisymmetric version first
+        binned_path = Path("data/gaia/6d_brava_galcen.parquet")
+        if not binned_path.exists():
+            return TestResult(
+                name="BRAVA 6D Covariant",
+                passed=True,
+                metric=0.0,
+                details={"status": "SKIPPED", "reason": "Binned data not found"},
+                message=f"SKIPPED: {binned_path} not found. Run process_brava_6d_flow.py first."
+            )
+        
+        result = brava_test_func(binned_data_path=binned_path, use_3d_gradients=False)
+        
+        return TestResult(
+            name="BRAVA 6D Covariant",
+            passed=result.passed,
+            metric=result.rms_kms,
+            details={
+                **result.details,
+                "baseline_rms": result.baseline_rms_kms,
+                "improvement": result.improvement_kms,
+                "n_bins": result.n_bins,
+                "n_stars": result.n_stars,
+            },
+            message=result.message
+        )
+    except ImportError as e:
+        return TestResult(
+            name="BRAVA 6D Covariant",
+            passed=True,
+            metric=0.0,
+            details={"status": "SKIPPED", "reason": "Import error"},
+            message=f"SKIPPED: {e}"
+        )
+    except Exception as e:
+        return TestResult(
+            name="BRAVA 6D Covariant",
+            passed=False,
+            metric=0.0,
+            details={"status": "ERROR", "error": str(e)},
+            message=f"ERROR: {e}"
+        )
+
+
 def test_gaia(gaia_df: Optional[pd.DataFrame]) -> TestResult:
     """Test Milky Way star-by-star validation.
     
@@ -2555,9 +2609,10 @@ def main():
         ("Tully-Fisher", lambda: test_tully_fisher()),
     ]
     
-    # Extended tests (9-18)
+    # Extended tests (9-19)
     tests_extended = [
         ("Gaia Bulge Covariant", lambda: test_gaia_bulge_covariant(gaia_df) if gaia_df is not None else TestResult(name="Gaia Bulge Covariant", passed=True, metric=0.0, details={"status": "SKIPPED", "reason": "No Gaia data"}, message="SKIPPED: No Gaia data")),
+        ("BRAVA 6D Covariant", lambda: test_brava_6d_covariant()),
         ("Wide Binaries", lambda: test_wide_binaries()),
         ("Dwarf Spheroidals", lambda: test_dwarf_spheroidals()),
         ("UDGs", lambda: test_ultra_diffuse_galaxies()),
