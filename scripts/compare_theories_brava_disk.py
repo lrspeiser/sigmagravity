@@ -349,16 +349,46 @@ def bin_disk_data(
     return result_df
 
 
+def C_coherence(V: np.ndarray, sigma: float = 20.0) -> np.ndarray:
+    """Standard coherence: C = v²/(v²+σ²)"""
+    V_sq = V**2
+    sigma_sq = sigma**2
+    C = V_sq / (V_sq + sigma_sq)
+    return np.clip(C, 0.0, 1.0)
+
+
 def predict_rotation_curve_sigma_gravity(
     R_kpc: np.ndarray,
-    C_cov: np.ndarray,
     g_bar: np.ndarray,
+    sigma_kms: float = 20.0,
+    use_covariant: bool = False,
+    C_cov: Optional[np.ndarray] = None,
 ) -> np.ndarray:
-    """Sigma-Gravity prediction for rotation curve (V_circ)."""
+    """Sigma-Gravity prediction for rotation curve (V_circ).
+    
+    Uses fixed-point iteration with standard C = v²/(v²+σ²) coherence,
+    or C_cov if use_covariant=True.
+    """
     h = h_function(g_bar)
-    Sigma = 1.0 + A_0 * C_cov * h
-    V_circ = np.sqrt(g_bar * R_kpc * kpc_to_m) / 1000.0  # km/s
-    V_pred = V_circ * np.sqrt(Sigma)
+    V_bar = np.sqrt(g_bar * R_kpc * kpc_to_m) / 1000.0  # km/s
+    
+    if use_covariant and C_cov is not None:
+        # Use covariant coherence (for bulge/dispersion work)
+        Sigma = 1.0 + A_0 * C_cov * h
+        V_pred = V_bar * np.sqrt(Sigma)
+    else:
+        # Use standard coherence with fixed-point iteration (for rotation curves)
+        V = V_bar.copy()
+        for _ in range(10):  # Usually converges in 3-5 iterations
+            C = C_coherence(V, sigma_kms)
+            Sigma = 1.0 + A_0 * C * h
+            V_new = V_bar * np.sqrt(np.maximum(Sigma, 0.0))
+            V_new = np.nan_to_num(V_new, nan=V_bar, posinf=V_bar * 10, neginf=V_bar)
+            if np.allclose(V, V_new, rtol=1e-6):
+                break
+            V = V_new
+        V_pred = V
+    
     return V_pred
 
 
@@ -429,7 +459,9 @@ def compute_predictions_and_compare(df: pd.DataFrame) -> dict:
     sigma_gr = predict_gr_newtonian(R_kpc, g_bar)
     
     # Compute rotation curve predictions
-    V_sigma = predict_rotation_curve_sigma_gravity(R_kpc, C_cov, g_bar)
+    # Use standard C coherence for rotation curves (not C_cov)
+    # C_cov is for velocity dispersions, standard C is for rotation curves
+    V_sigma = predict_rotation_curve_sigma_gravity(R_kpc, g_bar, sigma_kms=20.0, use_covariant=False)
     V_mond = predict_rotation_curve_mond(R_kpc, g_bar)
     V_gr = predict_rotation_curve_gr(R_kpc, g_bar)
     
