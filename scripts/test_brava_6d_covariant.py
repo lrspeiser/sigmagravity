@@ -179,9 +179,10 @@ def test_brava_6d_covariant(
     rms_v = np.sqrt((resid_v**2).mean())
     
     # Baseline: no enhancement (Sigma = 1)
+    # Use same calibration factor as model for fair comparison
     V_pred_base = V_bar
-    calibration_factor = 0.85  # Same calibration for baseline
-    sigma_tot_pred_base = V_pred_base * calibration_factor
+    calibration_factor_base = 0.51  # Same mapping as model for apples-to-apples comparison
+    sigma_tot_pred_base = V_pred_base * calibration_factor_base
     resid_sigma_base = sigma_tot_obs - sigma_tot_pred_base
     rms_sigma_base = np.sqrt((resid_sigma_base**2).mean())
     
