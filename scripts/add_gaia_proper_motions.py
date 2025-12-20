@@ -27,6 +27,12 @@ Usage
     # Fast path (recommended, default chunk-size=10000)
     python scripts/add_gaia_proper_motions.py --catalog BRAVA --method bulk
 
+    # 2MASS cross-match (best for BRAVA, uses pre-computed cross-match table)
+    python scripts/add_gaia_proper_motions.py --catalog BRAVA --method 2mass
+
+    # 2MASS cross-match with 6D filter (only stars with complete 6D info)
+    python scripts/add_gaia_proper_motions.py --catalog BRAVA --method 2mass --require-6d
+
     # Fast path with GPU reduction (needs CuPy + NVIDIA card)
     python scripts/add_gaia_proper_motions.py --catalog BRAVA --method bulk --gpu
 
@@ -849,9 +855,180 @@ def crossmatch_gaia_per_star(
     return out
 
 
+def crossmatch_gaia_2mass(
+    catalog_table: Table,
+    tmass_id_column: str = "tmass_id",
+    require_6d: bool = False,
+    chunk_size: int = 5000,
+    max_stars: Optional[int] = None,
+    keep_unmatched: bool = True,
+) -> Optional[Table]:
+    """Cross-match catalog with Gaia DR3 using 2MASS IDs.
+    
+    This uses the pre-computed cross-match table gaiadr3.tmass_psc_xsc_best_neighbour
+    which is more reliable than positional matching for BRAVA stars.
+    
+    Parameters
+    ----------
+    catalog_table
+        Input table that must contain a 2MASS ID column.
+    tmass_id_column
+        Name of the column containing 2MASS IDs (default: "tmass_id").
+    require_6d
+        If True, only return stars with complete 6D info (parallax, pmra, pmdec, radial_velocity all not null).
+    chunk_size
+        Number of 2MASS IDs per TAP query. Default 5000.
+    max_stars
+        Optional limit for testing.
+    keep_unmatched
+        If True, return the full input table with Gaia columns masked for unmatched rows.
+    
+    Returns
+    -------
+    Table with Gaia columns added, optionally filtered to 6D stars only.
+    """
+    Gaia = _get_gaia()
+    
+    table = catalog_table.copy()
+    
+    # Check for 2MASS ID column
+    tmass_col_lower = tmass_id_column.lower()
+    tmass_col_found = None
+    for col in table.colnames:
+        if col.lower() == tmass_col_lower:
+            tmass_col_found = col
+            break
+    
+    if tmass_col_found is None:
+        raise ValueError(
+            f"Catalog missing 2MASS ID column '{tmass_id_column}'. "
+            f"Available columns: {table.colnames}"
+        )
+    
+    if max_stars is not None and len(table) > max_stars:
+        table = table[:max_stars]
+    
+    n = len(table)
+    if n == 0:
+        return None
+    
+    # Extract 2MASS IDs and filter out nulls
+    tmass_ids = np.array([str(x).strip() for x in table[tmass_col_found]])
+    valid_mask = (tmass_ids != '') & (tmass_ids != 'None') & (tmass_ids != 'nan')
+    valid_indices = np.where(valid_mask)[0]
+    valid_tmass_ids = tmass_ids[valid_indices]
+    
+    print(f"\n2MASS-Gaia cross-match: {len(valid_tmass_ids):,} valid 2MASS IDs out of {n:,} total")
+    
+    if len(valid_tmass_ids) == 0:
+        print("[warn] No valid 2MASS IDs found")
+        return None
+    
+    # Add row_id for mapping
+    table["row_id"] = np.arange(n, dtype=np.int64)
+    
+    # Query in chunks
+    all_matches: list[Table] = []
+    ranges = list(range(0, len(valid_tmass_ids), chunk_size))
+    
+    query_template = f"""
+    SELECT
+        t.row_id,
+        {GAIA_SELECT_COLS}
+    FROM {GAIA_TABLE} AS g
+    JOIN gaiadr3.tmass_psc_xsc_best_neighbour AS xmatch
+      ON g.source_id = xmatch.source_id
+    JOIN TAP_UPLOAD.t AS t
+      ON xmatch.original_ext_source_id = t.tmass_id
+    """
+    
+    print(f"Querying {len(ranges)} chunk(s) of up to {chunk_size} 2MASS IDs each...")
+    
+    for i, start in enumerate(tqdm(ranges, desc="2MASS cross-match chunks")):
+        end = min(start + chunk_size, len(valid_tmass_ids))
+        chunk_ids = valid_tmass_ids[start:end]
+        chunk_indices = valid_indices[start:end]
+        
+        # Create upload table with row_id and tmass_id
+        upload = Table({
+            "row_id": np.array(table["row_id"][chunk_indices], dtype=np.int64),
+            "tmass_id": chunk_ids,
+        })
+        
+        try:
+            job = Gaia.launch_job_async(
+                query_template,
+                upload_resource=upload,
+                upload_table_name="t",
+                dump_to_file=False,
+            )
+            res = job.get_results()
+            if res is not None and len(res) > 0:
+                all_matches.append(res)
+        except Exception as e:
+            print(f"\n[warn] Query failed for chunk {i+1}/{len(ranges)}: {e}")
+            continue
+    
+    if not all_matches:
+        print("[warn] No Gaia matches found via 2MASS cross-match")
+        return None
+    
+    # Combine all matches
+    gaia_matched = vstack(all_matches, metadata_conflicts="silent")
+    
+    # Filter for 6D stars if requested
+    if require_6d:
+        before = len(gaia_matched)
+        has_parallax = ~np.isnan(gaia_matched["parallax"]) & (gaia_matched["parallax"] != 0)
+        has_pmra = ~np.isnan(gaia_matched["pmra"])
+        has_pmdec = ~np.isnan(gaia_matched["pmdec"])
+        has_rv = ~np.isnan(gaia_matched["radial_velocity"])
+        has_6d = has_parallax & has_pmra & has_pmdec & has_rv
+        gaia_matched = gaia_matched[has_6d]
+        print(f"  Filtered to {len(gaia_matched):,} stars with complete 6D info (out of {before:,} matches)")
+    
+    # Prefix Gaia columns
+    rename_map = {}
+    for col in gaia_matched.colnames:
+        if col == "row_id":
+            continue
+        rename_map[col] = f"gaia_{col}"
+    gaia_matched.rename_columns(list(rename_map.keys()), list(rename_map.values()))
+    
+    # Join back to catalog
+    out = join(table, gaia_matched, keys="row_id", join_type="left" if keep_unmatched else "inner")
+    
+    # Add matched flag
+    if "gaia_source_id" in out.colnames:
+        out["gaia_matched"] = ~out["gaia_source_id"].mask if hasattr(out["gaia_source_id"], "mask") else np.isfinite(out["gaia_source_id"])
+    else:
+        out["gaia_matched"] = np.zeros(len(out), dtype=bool)
+    
+    # Add 6D flag (always compute, but only filter if require_6d=True)
+    if "gaia_parallax" in out.colnames:
+        has_parallax = ~np.isnan(out["gaia_parallax"]) & (out["gaia_parallax"] != 0)
+        has_pmra = ~np.isnan(out["gaia_pmra"]) if "gaia_pmra" in out.colnames else np.zeros(len(out), dtype=bool)
+        has_pmdec = ~np.isnan(out["gaia_pmdec"]) if "gaia_pmdec" in out.colnames else np.zeros(len(out), dtype=bool)
+        has_rv = ~np.isnan(out["gaia_radial_velocity"]) if "gaia_radial_velocity" in out.colnames else np.zeros(len(out), dtype=bool)
+        out["gaia_has_6d"] = has_parallax & has_pmra & has_pmdec & has_rv
+    else:
+        out["gaia_has_6d"] = np.zeros(len(out), dtype=bool)
+    
+    # Clean up
+    if "row_id" in out.colnames:
+        out.remove_column("row_id")
+    
+    n_match = int(np.sum(out["gaia_matched"])) if "gaia_matched" in out.colnames else 0
+    n_6d = int(np.sum(out["gaia_has_6d"])) if "gaia_has_6d" in out.colnames else 0
+    print(f"  Final result: {n_match:,} matched / {len(out):,} total ({n_match/len(out)*100:.1f}%)")
+    print(f"  Stars with 6D info: {n_6d:,} ({n_6d/len(out)*100:.1f}%)")
+    
+    return out
+
+
 def crossmatch_gaia(
     catalog_table: Table,
-    method: Literal["bulk", "per_star", "local"] = "bulk",
+    method: Literal["bulk", "per_star", "local", "2mass"] = "bulk",
     max_sep_arcsec: float = 2.0,
     chunk_size: int = 2000,
     max_stars: Optional[int] = None,
@@ -859,9 +1036,20 @@ def crossmatch_gaia(
     n_workers: Optional[int] = None,
     use_gpu: bool = False,
     gaia_catalog_path: Optional[Path] = None,
+    require_6d: bool = False,
+    tmass_id_column: str = "tmass_id",
 ) -> Optional[Table]:
-    """Dispatch to bulk/per-star/local crossmatch."""
-    if method == "per_star":
+    """Dispatch to bulk/per-star/local/2mass crossmatch."""
+    if method == "2mass":
+        return crossmatch_gaia_2mass(
+            catalog_table,
+            tmass_id_column=tmass_id_column,
+            require_6d=require_6d,
+            chunk_size=chunk_size,
+            max_stars=max_stars,
+            keep_unmatched=keep_unmatched,
+        )
+    elif method == "per_star":
         return crossmatch_gaia_per_star(
             catalog_table,
             max_sep_arcsec=max_sep_arcsec,
@@ -889,7 +1077,7 @@ def crossmatch_gaia(
 
 def process_catalog(
     catalog_name: str,
-    method: Literal["bulk", "per_star", "local"],
+    method: Literal["bulk", "per_star", "local", "2mass"],
     max_sep_arcsec: float,
     chunk_size: int,
     max_stars: Optional[int],
@@ -897,6 +1085,8 @@ def process_catalog(
     n_workers: Optional[int] = None,
     use_gpu: bool = False,
     gaia_catalog_path: Optional[Path] = None,
+    require_6d: bool = False,
+    tmass_id_column: str = "tmass_id",
 ) -> bool:
     """Process one catalog end-to-end."""
     print("=" * 70)
@@ -920,6 +1110,8 @@ def process_catalog(
         n_workers=n_workers,
         use_gpu=use_gpu,
         gaia_catalog_path=gaia_catalog_path,
+        require_6d=require_6d,
+        tmass_id_column=tmass_id_column,
     )
 
     if matched is None:
@@ -937,13 +1129,15 @@ def process_catalog(
 def process_input_file(
     input_path: Path,
     output_path: Optional[Path],
-    method: Literal["bulk", "per_star", "local"],
+    method: Literal["bulk", "per_star", "local", "2mass"],
     max_sep_arcsec: float,
     chunk_size: int,
     max_stars: Optional[int],
     keep_unmatched: bool,
     use_gpu: bool = False,
     gaia_catalog_path: Optional[Path] = None,
+    require_6d: bool = False,
+    tmass_id_column: str = "tmass_id",
 ) -> bool:
     """Process an arbitrary input catalog file (not just BRAVA/APOGEE/GIBS)."""
     print("=" * 70)
@@ -972,6 +1166,8 @@ def process_input_file(
         keep_unmatched=keep_unmatched,
         use_gpu=use_gpu,
         gaia_catalog_path=gaia_catalog_path,
+        require_6d=require_6d,
+        tmass_id_column=tmass_id_column,
     )
     if matched is None:
         return False
@@ -1019,9 +1215,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--method",
-        choices=["bulk", "per_star", "local"],
+        choices=["bulk", "per_star", "local", "2mass"],
         default="bulk",
-        help="Gaia crossmatch method: 'bulk'=TAP queries (slow), 'local'=GPU crossmatch against downloaded catalog (fast, recommended if you have 1.8M Gaia stars), 'per_star'=debug only (default: bulk)",
+        help="Gaia crossmatch method: 'bulk'=TAP positional queries, 'local'=GPU crossmatch against downloaded catalog, '2mass'=2MASS ID cross-match via pre-computed table (best for BRAVA), 'per_star'=debug only (default: bulk)",
     )
     parser.add_argument(
         "--gaia-catalog-path",
@@ -1062,6 +1258,17 @@ def main() -> None:
         action="store_true",
         help="Use CuPy on GPU (e.g., RTX 5090) to speed up post-query reductions",
     )
+    parser.add_argument(
+        "--require-6d",
+        action="store_true",
+        help="Only return stars with complete 6D info (parallax, pmra, pmdec, radial_velocity all not null). Only used with --method=2mass.",
+    )
+    parser.add_argument(
+        "--tmass-id-column",
+        type=str,
+        default="tmass_id",
+        help="Name of 2MASS ID column in input catalog (default: tmass_id). Only used with --method=2mass.",
+    )
 
     args = parser.parse_args()
 
@@ -1088,6 +1295,8 @@ def main() -> None:
             n_workers=args.n_workers,
             use_gpu=args.gpu,
             gaia_catalog_path=gaia_catalog_path,
+            require_6d=args.require_6d,
+            tmass_id_column=args.tmass_id_column,
         )
         if matched is None:
             raise SystemExit("No matches (or Gaia query failed)")
@@ -1126,6 +1335,8 @@ def main() -> None:
             n_workers=args.n_workers,
             use_gpu=args.gpu,
             gaia_catalog_path=gaia_catalog_path,
+            require_6d=args.require_6d,
+            tmass_id_column=args.tmass_id_column,
         )
 
     print("\n" + "=" * 70)

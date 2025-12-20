@@ -3,7 +3,11 @@
 from astropy.table import Table
 import numpy as np
 
-fits_file = 'data/gaia/6d_brava_test.fits'
+import sys
+if len(sys.argv) > 1:
+    fits_file = sys.argv[1]
+else:
+    fits_file = 'data/gaia/6d_brava_test.fits'
 
 print("Loading BRAVA-filtered Gaia 6D catalog...")
 t = Table.read(fits_file)
