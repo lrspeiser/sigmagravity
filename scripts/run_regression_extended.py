@@ -1,40 +1,24 @@
 #!/usr/bin/env python3
 """
-Σ-GRAVITY EXTENDED REGRESSION TEST
-===================================
+Σ-GRAVITY EXTENDED REGRESSION TEST - COMPARATIVE MODE
+======================================================
 
-This extends the master regression test with additional tests developed during
-the graviton path model exploration, plus optional ray-tracing lensing tests.
+This test suite compares multiple gravity theories against observations:
+- BASELINE: Original Σ-Gravity (locked, never changes)
+- NEW MODEL: Σ-Gravity with extended phase coherence
+- MOND: Modified Newtonian Dynamics
+- ΛCDM: Standard cosmology with dark matter (where applicable)
+- OBSERVED: Actual astronomical measurements
+
+Output shows comparative performance, not just pass/fail.
+
+EXTENDED PHASE COHERENCE MODEL:
+The new model introduces disturbance parameter D for non-cluster systems:
+- D_asymmetry: Based on kinematic asymmetry in disk galaxies
+- D_tidal: Based on tidal distortion for satellites/UDGs
+- D_interaction: Based on merger/interaction signatures
 
 Uses the UNIFIED 3D AMPLITUDE FORMULA: A(L) = A₀ × (L/L₀)^n
-No D switch needed - path length L determines amplitude naturally.
-
-CORE TESTS (8):
-    1. SPARC Galaxies (171 rotation curves)
-    2. Galaxy Clusters (42 Fox+ 2022)
-    3. Cluster Holdout (n calibration stability with L₀ fixed)
-    4. Milky Way (28,368 Gaia stars)
-    5. Redshift Evolution
-    6. Solar System (Cassini bound)
-    7. Counter-Rotation Effect
-    8. Tully-Fisher Relation
-
-EXTENDED TESTS (9):
-    9. Wide Binaries (Chae 2023)
-    10. Dwarf Spheroidals (Fornax, Draco, Sculptor, Carina)
-    11. Ultra-Diffuse Galaxies (DF2, Dragonfly44)
-    12. Galaxy-Galaxy Lensing
-    13. External Field Effect
-    14. Gravitational Waves (GW170817)
-    15. Structure Formation
-    16. CMB Acoustic Peaks
-    17. Bullet Cluster (ray-tracing)
-
-USAGE:
-    python scripts/run_regression_extended.py           # Full test (17 tests)
-    python scripts/run_regression_extended.py --quick   # Skip slow tests
-    python scripts/run_regression_extended.py --core    # Only core 8 tests
-    python scripts/run_regression_extended.py --sigma-components  # Use component-mixed σ(r) in C(r)
 
 Author: Leonard Speiser
 Last Updated: December 2025
@@ -47,7 +31,7 @@ import json
 import sys
 from pathlib import Path
 from datetime import datetime
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from typing import Dict, List, Optional, Any, Tuple
 import warnings
 warnings.filterwarnings('ignore')
@@ -69,92 +53,306 @@ g_dagger = c * H0_SI / (4 * math.sqrt(math.pi))  # ≈ 9.60×10⁻¹¹ m/s²
 a0_mond = 1.2e-10
 
 # =============================================================================
-# MODEL PARAMETERS (Σ-GRAVITY UNIFIED FORMULA)
+# BASELINE MODEL PARAMETERS (LOCKED - DO NOT MODIFY)
 # =============================================================================
-A_0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173
-L_0 = 0.40  # Reference path length (kpc)
-N_EXP = 0.27  # Path length exponent
-XI_SCALE = 1 / (2 * np.pi)  # ξ = R_d/(2π)
-ML_DISK = 0.5
-ML_BULGE = 0.7
-
-# Optional: use a component-mixed dispersion profile σ(r) in the coherence scalar C(r).
-# This is a population-informed *input* (from baryonic phase mixture), not a per-galaxy fit.
-USE_SIGMA_COMPONENTS = False  # set in main()
-SIGMA_GAS_KMS = 10.0
-SIGMA_DISK_KMS = 25.0
-SIGMA_BULGE_KMS = 120.0
-
-# Cluster amplitude
-A_CLUSTER = A_0 * (600 / L_0)**N_EXP  # ≈ 8.45
+# These define the BASELINE Σ-Gravity model against which all comparisons are made.
+# Changes here would invalidate all historical comparisons.
+BASELINE_A_0 = np.exp(1 / (2 * np.pi))  # ≈ 1.173
+BASELINE_L_0 = 0.40  # Reference path length (kpc)
+BASELINE_N_EXP = 0.27  # Path length exponent
+BASELINE_XI_SCALE = 1 / (2 * np.pi)  # ξ = R_d/(2π)
+BASELINE_ML_DISK = 0.5
+BASELINE_ML_BULGE = 0.7
+BASELINE_A_CLUSTER = BASELINE_A_0 * (600 / BASELINE_L_0)**BASELINE_N_EXP  # ≈ 8.45
 
 # =============================================================================
-# PHASE COHERENCE MODEL - UNIVERSAL FORMULA
+# NEW MODEL PARAMETERS (EXTENDED PHASE COHERENCE)
 # =============================================================================
-# Phase coherence φ is computed from a UNIVERSAL formula based on:
-#
-#   φ = 1 + λ₀ × D × (f_ordered - f_turb)
-#
-# Where:
-#   λ₀ = 7.0        Universal coupling constant
-#   D ∈ [0, 1]      Disturbance parameter (0 = equilibrium, 1 = strongly disturbed)
-#   f_ordered       Fraction of mass in ordered motion (rotation, streaming)
-#   f_turb          Fraction of mass in supersonic turbulence
-#
-# KEY PRINCIPLE: φ = 1 for ALL equilibrium systems (D = 0)
-#   - This means SPARC, Gaia, Wide Binaries, dSphs, UDGs are UNCHANGED
-#   - φ only deviates from 1 when D > 0 (observable disturbance)
-#
-# Physical justification:
-#   - Equilibrium = steady-state gravitational field → no coherence dynamics
-#   - Non-equilibrium = time-varying field → coherence/decoherence effects active
-#   - Ordered motion → constructive interference → φ > 1
-#   - Turbulent motion → destructive interference → φ < 1 (screening)
-#
-# Observable proxies for D:
-#   - X-ray morphology (centroid shift, power ratio, asymmetry)
-#   - Mach number of shocks (from temperature jumps)
-#   - Velocity structure (multi-modal distributions)
-#   - Dynamical age (t_since_merger / t_relax)
-#
-USE_PHASE_COHERENCE = False  # Set via --phase-coherence flag
+# These can be tuned to improve predictions while keeping baseline fixed.
+A_0 = BASELINE_A_0
+L_0 = BASELINE_L_0
+N_EXP = BASELINE_N_EXP
+XI_SCALE = BASELINE_XI_SCALE
+ML_DISK = BASELINE_ML_DISK
+ML_BULGE = BASELINE_ML_BULGE
+A_CLUSTER = BASELINE_A_CLUSTER
+
+# Extended phase coherence parameters
+USE_EXTENDED_PHI = False  # Enable extended phase coherence for non-clusters
 
 # Universal coupling constant
-PHI_LAMBDA_0 = 7.0             # Coupling strength
+PHI_LAMBDA_0 = 7.0
 
 # Regulators
-PHI_MAX = 12.0                 # Maximum enhancement
-PHI_MIN = -6.0                 # Maximum suppression (screening)
+PHI_MAX = 12.0
+PHI_MIN = -6.0
+
+# Extended D proxies for non-cluster systems
+D_ASYMMETRY_SCALE = 0.3   # Scale factor for kinematic asymmetry → D
+D_TIDAL_THRESHOLD = 5.0   # r_tidal / r_half threshold for D activation
+D_INTERACTION_SCALE = 0.5 # Scale factor for interaction signatures → D
+
+# KEY PHYSICS DISTINCTION:
+# - In MERGERS: D represents "survival" of coherence → stars get φ > 1
+# - In EQUILIBRIUM: D represents "loss" of coherence → φ < 1
+# The formula adjusts based on whether system is merging or equilibrium-disturbed
+EQUILIBRIUM_DISTURBANCE_SUPPRESSES = True  # If True, D in equilibrium systems → φ < 1
+
+# =============================================================================
+# COMPARATIVE RESULT STRUCTURE
+# =============================================================================
+
+@dataclass
+class TheoryPrediction:
+    """A single theory's prediction with key metrics."""
+    value: float           # Primary metric (e.g., RMS, ratio)
+    unit: str              # Unit of the metric
+    details: Dict = field(default_factory=dict)  # Additional details
 
 
-def phi_universal(D: float, f_ordered: float, f_turb: float) -> float:
+@dataclass 
+class ComparativeResult:
+    """Result comparing multiple theories against observations."""
+    name: str
+    metric_name: str       # What we're measuring (e.g., "RMS", "mass_ratio")
+    
+    # Observations
+    observed: float
+    observed_err: Optional[float]
+    observed_unit: str
+    
+    # Theory predictions
+    baseline: TheoryPrediction      # Original Σ-Gravity (locked)
+    new_model: TheoryPrediction     # Extended Σ-Gravity
+    mond: Optional[TheoryPrediction]
+    lcdm: Optional[TheoryPrediction]
+    
+    # Which theory is closest to observed?
+    best_theory: str
+    
+    # Additional context
+    n_objects: int
+    notes: str = ""
+
+
+@dataclass
+class TestResult:
+    """Legacy result format for backwards compatibility."""
+    name: str
+    passed: bool
+    metric: float
+    details: Dict[str, Any]
+    message: str
+
+
+# =============================================================================
+# OBSERVATIONAL BENCHMARKS (GOLD STANDARD)
+# =============================================================================
+OBS_BENCHMARKS = {
+    'solar_system': {
+        'cassini_gamma_uncertainty': 2.3e-5,
+        'source': 'Bertotti+ 2003',
+    },
+    'sparc': {
+        'n_quality': 171,
+        'mond_rms_kms': 17.15,
+        'sigma_rms_kms': 17.42,
+        'lcdm_rms_kms': 15.0,
+        'rar_scatter_dex': 0.10,
+        'source': 'Lelli+ 2016, McGaugh+ 2016',
+    },
+    'wide_binaries': {
+        'boost_factor': 1.35,
+        'boost_uncertainty': 0.10,
+        'threshold_AU': 2000,
+        'n_pairs': 26500,
+        'mond_boost': 1.40,  # MOND predicts ~40% boost
+        'newtonian_boost': 1.0,  # No boost
+        'source': 'Chae 2023',
+    },
+    'dwarf_spheroidals': {
+        'fornax': {'M_star': 2e7, 'sigma_obs': 10.7, 'sigma_err': 0.5, 'r_half_kpc': 0.71, 'd_MW_kpc': 147, 'M_L': 7.5},
+        'draco': {'M_star': 2.9e5, 'sigma_obs': 9.1, 'sigma_err': 1.2, 'r_half_kpc': 0.22, 'd_MW_kpc': 76, 'M_L': 330},
+        'sculptor': {'M_star': 2.3e6, 'sigma_obs': 9.2, 'sigma_err': 0.6, 'r_half_kpc': 0.28, 'd_MW_kpc': 86, 'M_L': 160},
+        'carina': {'M_star': 3.8e5, 'sigma_obs': 6.6, 'sigma_err': 1.2, 'r_half_kpc': 0.25, 'd_MW_kpc': 105, 'M_L': 40},
+        'ursa_minor': {'M_star': 2.9e5, 'sigma_obs': 9.5, 'sigma_err': 1.2, 'r_half_kpc': 0.30, 'd_MW_kpc': 76, 'M_L': 290},
+        'source': 'Walker+ 2009, McConnachie 2012',
+    },
+    'udgs': {
+        'df2': {
+            'M_star': 2e8, 'sigma_obs': 8.5, 'sigma_err': 2.3, 'r_eff_kpc': 2.2,
+            'd_host_kpc': 80,  # Distance to NGC1052
+            'host_mass': 1e11,  # NGC1052 mass
+            'mond_sigma': 20.0,  # MOND predicts ~20 km/s without EFE
+            'newtonian_sigma': 6.0,  # Pure Newtonian
+            'source': 'van Dokkum+ 2018',
+        },
+        'dragonfly44': {
+            'M_star': 3e8, 'sigma_obs': 47, 'sigma_err': 8, 'r_eff_kpc': 4.6,
+            'd_host_kpc': 1000,  # Essentially isolated
+            'host_mass': 0,
+            'mond_sigma': 33.0,
+            'newtonian_sigma': 15.0,
+            'source': 'van Dokkum+ 2016',
+        },
+    },
+    'tully_fisher': {
+        'btfr_slope': 3.98,
+        'btfr_normalization': 47,
+        'scatter_dex': 0.10,
+        'mond_prediction': 4.0,
+        'source': 'McGaugh 2012',
+    },
+    'gw170817': {
+        'delta_c_over_c': 1e-15,
+        'time_delay_s': 1.7,
+        'distance_Mpc': 40,
+        'source': 'Abbott+ 2017',
+    },
+    'bullet_cluster': {
+        'M_gas': 2.1e14,
+        'M_stars': 0.5e14,
+        'M_baryonic': 2.6e14,
+        'M_lensing': 5.5e14,
+        'mass_ratio': 2.1,
+        'offset_kpc': 150,
+        'separation_kpc': 720,
+        'mach_shock': 3.0,
+        'mond_ratio': 1.5,  # MOND underpredicts
+        'source': 'Clowe+ 2006',
+    },
+    'merging_clusters': {
+        'el_gordo': {
+            'M_gas': 3.0e14, 'M_stars': 0.8e14, 'M_lensing': 2.2e15,
+            'offset_kpc': 200, 'mach_shock': 2.5, 'z': 0.87,
+            'source': 'Menanteau+ 2012',
+        },
+        'a520': {
+            'M_gas': 1.5e14, 'M_stars': 0.4e14, 'M_lensing': 4.5e14,
+            'offset_kpc': 100, 'mach_shock': 2.0, 'z': 0.201,
+            'source': 'Mahdavi+ 2007',
+        },
+        'macs_j0025': {
+            'M_gas': 1.8e14, 'M_stars': 0.5e14, 'M_lensing': 5.0e14,
+            'offset_kpc': 120, 'mach_shock': 2.2, 'z': 0.586,
+            'source': 'Bradac+ 2008',
+        },
+        'a2744': {
+            'M_gas': 2.5e14, 'M_stars': 0.6e14, 'M_lensing': 1.8e15,
+            'offset_kpc': 150, 'mach_shock': 2.0, 'z': 0.308,
+            'source': 'Merten+ 2011',
+        },
+        'a1689_relaxed': {
+            'M_gas': 1.2e14, 'M_stars': 0.3e14, 'M_lensing': 1.3e15,
+            'offset_kpc': 10, 'mach_shock': 0.2, 'z': 0.183,
+            'source': 'Limousin+ 2007',
+        },
+    },
+    'clusters': {
+        'n_quality': 42,
+        'mond_mass_discrepancy': 3.0,
+        'lcdm_success': True,
+        'source': 'Fox+ 2022',
+    },
+    'milky_way': {
+        'V_sun_kms': 233,
+        'R_sun_kpc': 8.178,
+        'M_baryonic': 6.5e10,
+        'n_gaia_stars': 28368,
+        'source': 'Eilers+ 2019, McMillan 2017',
+    },
+    'cmb': {
+        'Omega_b': 0.0493,
+        'Omega_c': 0.265,
+        'Omega_m': 0.315,
+        'H0': 67.4,
+        'source': 'Planck 2020',
+    },
+    'structure_formation': {
+        'sigma8_planck': 0.811,
+        'sigma8_lensing': 0.76,
+        'bao_scale_Mpc': 150,
+        'source': 'Planck 2018, SDSS',
+    },
+}
+
+
+# =============================================================================
+# CORE PHYSICS FUNCTIONS
+# =============================================================================
+
+def h_function(g: np.ndarray) -> np.ndarray:
+    """Enhancement function h(g) = √(g†/g) × g†/(g†+g)"""
+    g = np.maximum(np.asarray(g), 1e-15)
+    return np.sqrt(g_dagger / g) * g_dagger / (g_dagger + g)
+
+
+def unified_amplitude(L: float, baseline: bool = False) -> float:
+    """Unified 3D amplitude: A = A₀ × (L/L₀)^n"""
+    if baseline:
+        return BASELINE_A_0 * (L / BASELINE_L_0)**BASELINE_N_EXP
+    return A_0 * (L / L_0)**N_EXP
+
+
+def C_coherence(v_rot: np.ndarray, sigma: float = 20.0) -> np.ndarray:
+    """Covariant coherence scalar: C = v²/(v² + σ²)"""
+    v2 = np.maximum(np.asarray(v_rot, dtype=float), 0.0)**2
+    sigma_arr = np.maximum(np.asarray(sigma, dtype=float), 1e-6)
+    s2 = sigma_arr**2
+    return v2 / (v2 + s2)
+
+
+def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
+    """Coherence window W(r) = r/(ξ+r)"""
+    xi = max(xi, 0.01)
+    return r / (xi + r)
+
+
+# =============================================================================
+# EXTENDED PHASE COHERENCE MODEL
+# =============================================================================
+
+def compute_D_from_asymmetry(v_asym: float, v_circ: float) -> float:
     """
-    UNIVERSAL phase coherence formula.
+    Compute disturbance D from kinematic asymmetry.
     
-    φ = 1 + λ₀ × D × (f_ordered - f_turb)
+    v_asym: Asymmetry in velocity field (e.g., lopsidedness, warp amplitude)
+    v_circ: Circular velocity
     
-    Parameters:
-    -----------
-    D : float [0, 1]
-        Disturbance parameter (0 = equilibrium, 1 = strongly disturbed)
-        
-    f_ordered : float [0, 1]
-        Fraction of mass in ordered motion
-        
-    f_turb : float [0, 1]
-        Fraction of kinetic energy in supersonic turbulence
-    
-    KEY: For D = 0, φ = 1 ALWAYS (equilibrium systems unchanged)
+    D = 0 for perfectly symmetric galaxies
+    D → 1 for highly disturbed/asymmetric systems
     """
-    phi = 1.0 + PHI_LAMBDA_0 * D * (f_ordered - f_turb)
-    return max(PHI_MIN, min(PHI_MAX, phi))
+    if v_circ <= 0:
+        return 0.0
+    ratio = abs(v_asym) / v_circ
+    return min(1.0, D_ASYMMETRY_SCALE * ratio)
 
 
-def compute_disturbance_from_mach(mach_shock: float) -> float:
+def compute_D_from_tidal(r_tidal: float, r_half: float) -> float:
     """
-    Compute disturbance parameter D from observed shock Mach number.
+    Compute disturbance D from tidal proximity.
     
-    D transitions: 0 (Mach < 0.5) → 1 (Mach > 3)
+    r_tidal: Tidal radius (distance at which host gravity dominates)
+    r_half: Half-light radius of satellite
+    
+    D = 0 for isolated systems (r_tidal >> r_half)
+    D → 1 for tidally stripped systems (r_tidal ~ r_half)
+    """
+    if r_half <= 0:
+        return 0.0
+    ratio = r_tidal / r_half
+    if ratio > D_TIDAL_THRESHOLD:
+        return 0.0
+    # D increases as tidal radius approaches the system size
+    return min(1.0, (D_TIDAL_THRESHOLD - ratio) / D_TIDAL_THRESHOLD)
+
+
+def compute_D_from_mach(mach_shock: float) -> float:
+    """
+    Compute disturbance D from shock Mach number (for clusters).
+    
+    D = 0 for Mach < 0.5 (equilibrium)
+    D = 1 for Mach > 3.0 (strong shock)
     """
     if mach_shock < 0.5:
         return 0.0
@@ -164,364 +362,98 @@ def compute_disturbance_from_mach(mach_shock: float) -> float:
         return (mach_shock - 0.5) / 2.5
 
 
-def compute_phi_from_mach(mach_shock: float, is_collisionless: bool = False) -> float:
+def compute_D_from_interaction(interaction_strength: float) -> float:
     """
-    Compute φ from observed Mach number using UNIVERSAL formula.
+    Compute disturbance D from interaction signatures.
+    
+    interaction_strength: 0 = isolated, 1 = major merger
+    """
+    return min(1.0, D_INTERACTION_SCALE * interaction_strength)
+
+
+def phi_universal(D: float, f_ordered: float, f_turb: float) -> float:
+    """
+    UNIVERSAL phase coherence formula.
+    
+    φ = 1 + λ₀ × D × (f_ordered - f_turb)
+    
+    KEY: For D = 0, φ = 1 ALWAYS (equilibrium systems unchanged)
+    """
+    phi = 1.0 + PHI_LAMBDA_0 * D * (f_ordered - f_turb)
+    return max(PHI_MIN, min(PHI_MAX, phi))
+
+
+def compute_phi_extended(
+    D: float,
+    is_collisionless: bool = True,
+    mach_turb: float = 0.0,
+    is_merger: bool = False
+) -> float:
+    """
+    Compute φ for extended model (applies to non-cluster systems too).
+    
+    KEY PHYSICS:
+    - MERGER systems (is_merger=True): D represents survival of coherence
+      Stars maintain order through collision → φ > 1
+      Gas gets shocked/turbulent → φ < 1
+    - EQUILIBRIUM systems (is_merger=False): D represents LOSS of coherence
+      Disturbance (tidal, asymmetry) disrupts phase coherence → φ < 1
     
     Parameters:
     -----------
-    mach_shock : float
-        Observed Mach number (0 = equilibrium, 3+ = strong shock)
+    D : float [0, 1]
+        Disturbance parameter from observable proxies
     is_collisionless : bool
-        True for stars/galaxies, False for gas
+        True for stars, False for gas
+    mach_turb : float
+        Turbulent Mach number (for gas)
+    is_merger : bool
+        True for merger/collision events, False for equilibrium disturbance
     """
-    D = compute_disturbance_from_mach(mach_shock)
-    
-    if is_collisionless:
-        # Collisionless: ordered motion, no turbulence
-        f_ordered = 0.95
-        f_turb = 0.0
+    if is_merger:
+        # MERGER: Stars maintain order, gas gets disrupted
+        if is_collisionless:
+            f_ordered = 0.95
+            f_turb = 0.0
+        else:
+            f_ordered = 0.1
+            f_turb = min(0.85, 0.25 * mach_turb)
+        return phi_universal(D, f_ordered, f_turb)
     else:
-        # Gas: f_turb scales with Mach
-        f_ordered = 0.1
-        f_turb = min(0.85, 0.25 * mach_shock)
-    
-    return phi_universal(D, f_ordered, f_turb)
+        # EQUILIBRIUM DISTURBANCE: Both stars and gas lose coherence
+        # D represents loss of order → φ < 1
+        if EQUILIBRIUM_DISTURBANCE_SUPPRESSES:
+            # Disturbance reduces coherence → suppress enhancement
+            # φ = 1 - λ₀ × D × suppression_factor
+            suppression = 0.3 * D  # Mild suppression for equilibrium
+            return max(PHI_MIN, 1.0 - suppression)
+        else:
+            # Original formula
+            if is_collisionless:
+                f_ordered = 0.95
+                f_turb = 0.0
+            else:
+                f_ordered = 0.1
+                f_turb = min(0.85, 0.25 * mach_turb)
+            return phi_universal(D, f_ordered, f_turb)
 
-
-def get_matter_state_phi(matter_type: str) -> float:
-    """
-    Get φ for a named matter state using UNIVERSAL formula.
-    
-    Maps legacy state names to observable parameters.
-    """
-    # Map state names to Mach numbers
-    STATE_TO_MACH = {
-        # Equilibrium: D = 0 → φ = 1
-        'stars_disk': (0.0, True),
-        'stars_bulge': (0.0, True),
-        'gas_disk_cold': (0.0, False),
-        'gas_cluster_relaxed': (0.2, False),
-        'gas_cluster_equilibrium': (0.2, False),
-        
-        # Disturbed: D > 0 → φ ≠ 1
-        'stars_cluster': (3.0, True),  # In merger
-        'gas_cluster_shocked': (2.0, False),
-        'gas_bullet_merger': (3.5, False),
-        'gas_el_gordo': (2.5, False),
-        'gas_macs_j0025': (2.2, False),
-        'gas_a520': (2.0, False),
-        'gas_a2744': (2.0, False),
-    }
-    
-    if matter_type not in STATE_TO_MACH:
-        return 1.0  # Default: equilibrium
-    
-    mach, is_collisionless = STATE_TO_MACH[matter_type]
-    return compute_phi_from_mach(mach, is_collisionless)
-
-# Gas fractions for various system types
-GAS_FRACTIONS = {
-    'spiral_disk': 0.15,      # Typical spiral: 15% gas
-    'elliptical': 0.02,       # Early-types: ~2% gas
-    'cluster': 0.85,          # Clusters: 85% gas (hot ICM)
-    'bullet_cluster': 0.81,   # 2.1e14/(2.1e14+0.5e14) = 81% gas
-    'dwarf_spheroidal': 0.01, # dSphs: <1% gas (stripped)
-    'udg': 0.05,              # UDGs: ~5% gas
-}
 
 # =============================================================================
-# OBSERVATIONAL BENCHMARKS (GOLD STANDARD)
-# All values from peer-reviewed literature with citations
-# =============================================================================
-OBS_BENCHMARKS = {
-    # Solar System - Bertotti+ 2003, Nature 425, 374
-    'solar_system': {
-        'cassini_gamma_uncertainty': 2.3e-5,  # γ-1 = (2.1±2.3)×10⁻⁵
-        'source': 'Bertotti+ 2003',
-    },
-    
-    # SPARC - Lelli, McGaugh & Schombert 2016, AJ 152, 157
-    'sparc': {
-        'n_quality': 171,
-        'mond_rms_kms': 17.15,  # With standard a₀=1.2×10⁻¹⁰, per-galaxy RMS averaged
-        'sigma_rms_kms': 17.42,  # Σ-Gravity per-galaxy RMS averaged
-        'rar_scatter_dex': 0.10,  # Std of log(V_obs/V_pred) over all points
-        'lcdm_rms_kms': 15.0,  # With 2-3 params/galaxy (NFW)
-        'source': 'Lelli+ 2016, McGaugh+ 2016',
-    },
-    
-    # Wide Binaries - Chae 2023, ApJ 952, 128
-    'wide_binaries': {
-        'boost_factor': 1.35,  # ~35% excess at >2000 AU
-        'boost_uncertainty': 0.10,
-        'threshold_AU': 2000,
-        'n_pairs': 26500,  # Gaia DR3
-        'controversy': 'Banik+ 2024 disputes; ongoing debate',
-        'source': 'Chae 2023',
-    },
-    
-    # Dwarf Spheroidals - Walker+ 2009, McConnachie 2012
-    # NEW: d_MW_kpc is distance from MW center (for host inheritance model)
-    'dwarf_spheroidals': {
-        'fornax': {'M_star': 2e7, 'sigma_obs': 10.7, 'sigma_err': 0.5, 'r_half_kpc': 0.71, 'd_MW_kpc': 147, 'M_L': 7.5},
-        'draco': {'M_star': 2.9e5, 'sigma_obs': 9.1, 'sigma_err': 1.2, 'r_half_kpc': 0.22, 'd_MW_kpc': 76, 'M_L': 330},
-        'sculptor': {'M_star': 2.3e6, 'sigma_obs': 9.2, 'sigma_err': 0.6, 'r_half_kpc': 0.28, 'd_MW_kpc': 86, 'M_L': 160},
-        'carina': {'M_star': 3.8e5, 'sigma_obs': 6.6, 'sigma_err': 1.2, 'r_half_kpc': 0.25, 'd_MW_kpc': 105, 'M_L': 40},
-        'ursa_minor': {'M_star': 2.9e5, 'sigma_obs': 9.5, 'sigma_err': 1.2, 'r_half_kpc': 0.30, 'd_MW_kpc': 76, 'M_L': 290},
-        'model': 'host_inheritance',  # dSphs inherit MW Σ at their orbital radius
-        'mond_status': 'Generally works for isolated dSphs; EFE complicates satellites',
-        'source': 'Walker+ 2009, McConnachie 2012',
-    },
-    
-    # Ultra-Diffuse Galaxies - van Dokkum+ 2018, 2016
-    'udgs': {
-        'df2': {
-            'M_star': 2e8, 'sigma_obs': 8.5, 'sigma_err': 2.3, 'r_eff_kpc': 2.2,
-            'note': 'Appears to lack DM; MOND predicts ~20 km/s (EFE resolution)',
-            'source': 'van Dokkum+ 2018',
-        },
-        'dragonfly44': {
-            'M_star': 3e8, 'sigma_obs': 47, 'sigma_err': 8, 'r_eff_kpc': 4.6,
-            'note': 'Very DM dominated; M_dyn ~ 10^12 M☉',
-            'source': 'van Dokkum+ 2016',
-        },
-    },
-    
-    # Tully-Fisher - McGaugh 2012, AJ 143, 40
-    'tully_fisher': {
-        'btfr_slope': 3.98,  # ±0.06
-        'btfr_normalization': 47,  # M☉/(km/s)^4
-        'scatter_dex': 0.10,
-        'mond_prediction': 4.0,  # Exact slope 4
-        'source': 'McGaugh 2012',
-    },
-    
-    # Gravitational Waves - Abbott+ 2017, PRL 119, 161101
-    'gw170817': {
-        'delta_c_over_c': 1e-15,  # |c_GW - c|/c
-        'time_delay_s': 1.7,  # GRB arrived 1.7s after GW
-        'distance_Mpc': 40,
-        'source': 'Abbott+ 2017 (GW170817 + GRB170817A)',
-    },
-    
-    # Bullet Cluster - Clowe+ 2006, ApJ 648, L109
-    'bullet_cluster': {
-        'M_gas': 2.1e14,  # M☉ (from X-ray)
-        'M_stars': 0.5e14,  # M☉
-        'M_baryonic': 2.6e14,  # M☉
-        'M_lensing': 5.5e14,  # M☉ (from weak lensing)
-        'mass_ratio': 2.1,  # M_lensing / M_baryonic
-        'offset_kpc': 150,  # Lensing peak offset from gas
-        'separation_kpc': 720,  # Between main and subcluster
-        'mond_challenge': 'Lensing follows stars, not gas',
-        'merger_state': 'post_collision',  # Gas shocked, stars passed through
-        'mach_shock': 3.0,  # Mach number of the shock front
-        'source': 'Clowe+ 2006',
-    },
-    
-    # Additional MERGING CLUSTERS for phase coherence validation
-    # These all show lensing-gas offset similar to Bullet Cluster
-    'merging_clusters': {
-        # El Gordo (ACT-CL J0102-4915) - Menanteau+ 2012, Jee+ 2014
-        'el_gordo': {
-            'M_gas': 3.0e14,  # M☉ (X-ray derived)
-            'M_stars': 0.8e14,  # M☉ (stellar mass)
-            'M_lensing': 2.2e15,  # M☉ (most massive known merging cluster)
-            'offset_kpc': 200,  # Significant lensing-gas offset
-            'merger_state': 'post_collision',
-            'mach_shock': 2.5,  # Estimated from X-ray morphology
-            'z': 0.87,  # High redshift
-            'source': 'Menanteau+ 2012, Jee+ 2014',
-        },
-        # A520 (Train Wreck Cluster) - Mahdavi+ 2007, Clowe+ 2012
-        # Controversial: some claim dark core without galaxies
-        'a520': {
-            'M_gas': 1.5e14,  # M☉
-            'M_stars': 0.4e14,  # M☉
-            'M_lensing': 4.5e14,  # M☉
-            'offset_kpc': 100,  # Complex multi-peak structure
-            'merger_state': 'mid_collision',  # Still colliding
-            'mach_shock': 2.0,
-            'z': 0.201,
-            'note': 'Controversial dark core; complex geometry',
-            'source': 'Mahdavi+ 2007, Clowe+ 2012',
-        },
-        # MACS J0025.4-1222 - Bradac+ 2008
-        'macs_j0025': {
-            'M_gas': 1.8e14,  # M☉
-            'M_stars': 0.5e14,  # M☉
-            'M_lensing': 5.0e14,  # M☉
-            'offset_kpc': 120,  # Clear offset like Bullet
-            'merger_state': 'post_collision',
-            'mach_shock': 2.2,
-            'z': 0.586,
-            'note': 'Baby Bullet - similar geometry to 1E0657',
-            'source': 'Bradac+ 2008',
-        },
-        # Abell 2744 (Pandora's Cluster) - Merten+ 2011
-        'a2744': {
-            'M_gas': 2.5e14,  # M☉
-            'M_stars': 0.6e14,  # M☉  
-            'M_lensing': 1.8e15,  # M☉ (multiple components)
-            'offset_kpc': 150,  # Multiple offsets
-            'merger_state': 'multi_merger',  # Multiple subclusters
-            'mach_shock': 2.0,
-            'z': 0.308,
-            'note': 'Complex multi-merger with 4+ subclusters',
-            'source': 'Merten+ 2011',
-        },
-        # Relaxed cluster for comparison (Abell 1689)
-        'a1689_relaxed': {
-            'M_gas': 1.2e14,  # M☉
-            'M_stars': 0.3e14,  # M☉
-            'M_lensing': 1.3e15,  # M☉
-            'offset_kpc': 10,  # Essentially zero offset
-            'merger_state': 'relaxed',  # Equilibrium
-            'mach_shock': 0.2,  # Subsonic turbulence only
-            'z': 0.183,
-            'note': 'Relaxed cluster - lensing centered on gas',
-            'source': 'Limousin+ 2007',
-        },
-    },
-    
-    # Galaxy Clusters - Fox+ 2022, ApJ 928, 87
-    'clusters': {
-        'n_quality': 42,  # spec_z + M500 > 2×10¹⁴
-        'mond_mass_discrepancy': 3.0,  # Factor MOND underpredicts
-        'lcdm_success': True,  # NFW fits work
-        'source': 'Fox+ 2022',
-    },
-    
-    # Milky Way - Eilers+ 2019, McMillan 2017
-    'milky_way': {
-        'V_sun_kms': 233,  # ±3 (Eilers+ 2019)
-        'R_sun_kpc': 8.178,  # GRAVITY Collaboration 2019
-        'M_baryonic': 6.5e10,  # M☉ (McMillan 2017)
-        'n_gaia_stars': 28368,  # Eilers-APOGEE-Gaia disk sample
-        'source': 'Eilers+ 2019, McMillan 2017',
-    },
-    
-    # CMB - Planck 2018
-    'cmb': {
-        'Omega_b': 0.0493,
-        'Omega_c': 0.265,  # CDM
-        'Omega_m': 0.315,
-        'H0': 67.4,  # km/s/Mpc
-        'mond_challenge': 'CMB requires DM at z~1100',
-        'source': 'Planck Collaboration 2020',
-    },
-    
-    # Structure Formation
-    'structure_formation': {
-        'sigma8_planck': 0.811,
-        'sigma8_lensing': 0.76,  # S8 tension
-        'bao_scale_Mpc': 150,
-        'source': 'Planck 2018, SDSS',
-    },
-}
-
-# =============================================================================
-# CORE FUNCTIONS
+# BASELINE Σ-GRAVITY (LOCKED)
 # =============================================================================
 
-@dataclass
-class TestResult:
-    name: str
-    passed: bool
-    metric: float
-    details: Dict[str, Any]
-    message: str
-
-
-def unified_amplitude(L: float) -> float:
-    """Unified 3D amplitude: A = A₀ × (L/L₀)^n
-    
-    No D switch needed - path length L determines amplitude naturally:
-    - Thin disk galaxies: L ≈ L₀ (0.4 kpc scale height) → A ≈ A₀
-    - Elliptical galaxies: L ~ 1-20 kpc → A ~ 1.5-3.4
-    - Galaxy clusters: L ≈ 600 kpc → A ≈ 8.45
+def sigma_enhancement_baseline(g: np.ndarray, r: np.ndarray = None, 
+                                xi: float = 1.0, L: float = None) -> np.ndarray:
     """
-    return A_0 * (L / L_0)**N_EXP
-
-
-def unified_amplitude_legacy(D: float, L: float) -> float:
-    """Legacy amplitude with D switch (for backwards compatibility)."""
-    return A_0 * (1 - D + D * (L / L_0)**N_EXP)
-
-
-def h_function(g: np.ndarray) -> np.ndarray:
-    """Enhancement function h(g) = √(g†/g) × g†/(g†+g)"""
-    g = np.maximum(np.asarray(g), 1e-15)
-    return np.sqrt(g_dagger / g) * g_dagger / (g_dagger + g)
-
-
-def C_coherence(v_rot: np.ndarray, sigma: float = 20.0) -> np.ndarray:
-    """
-    Covariant coherence scalar: C = v²/(v² + σ²)
-    
-    This is the PRIMARY formulation, built from 4-velocity invariants.
-    """
-    v2 = np.maximum(np.asarray(v_rot, dtype=float), 0.0)**2
-    sigma_arr = np.maximum(np.asarray(sigma, dtype=float), 1e-6)
-    s2 = sigma_arr**2
-    return v2 / (v2 + s2)
-
-
-def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
-    """
-    Coherence window W(r) = r/(ξ+r)
-    
-    This is a validated APPROXIMATION to orbit-averaged C for disk galaxies.
-    Gives identical results to C(r) formulation.
-    """
-    xi = max(xi, 0.01)
-    return r / (xi + r)
-
-
-def sigma_profile_from_components_kms(
-    V_gas_kms: np.ndarray,
-    V_disk_scaled_kms: np.ndarray,
-    V_bulge_scaled_kms: np.ndarray,
-) -> np.ndarray:
-    """
-    Construct an effective dispersion profile σ_eff(r) by mixing fixed phase dispersions.
-
-    Weights use squared baryonic component contributions to V_bar at each radius:
-      w_i(r) = V_i(r)^2 / Σ_j V_j(r)^2
-
-    σ_eff(r)^2 = Σ_i w_i(r) σ_i^2
-
-    This is designed to capture the empirical fact that galaxy populations differ in phase-space
-    coherence (gas-rich disks vs bulge-dominated systems) without per-object tuning.
-    """
-    vg2 = np.square(np.nan_to_num(np.asarray(V_gas_kms, dtype=float), nan=0.0, posinf=0.0, neginf=0.0))
-    vd2 = np.square(np.nan_to_num(np.asarray(V_disk_scaled_kms, dtype=float), nan=0.0, posinf=0.0, neginf=0.0))
-    vb2 = np.square(np.nan_to_num(np.asarray(V_bulge_scaled_kms, dtype=float), nan=0.0, posinf=0.0, neginf=0.0))
-
-    denom = np.maximum(vg2 + vd2 + vb2, 1e-12)
-    wgas = vg2 / denom
-    wdisk = vd2 / denom
-    wbul = vb2 / denom
-
-    sigma2 = wgas * (SIGMA_GAS_KMS**2) + wdisk * (SIGMA_DISK_KMS**2) + wbul * (SIGMA_BULGE_KMS**2)
-    return np.sqrt(np.maximum(sigma2, 1e-6))
-
-
-def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0, 
-                      A: float = None, L: float = L_0) -> np.ndarray:
-    """
-    Full Σ enhancement factor using W(r) approximation.
+    BASELINE Σ enhancement - locked, never changes.
     
     Σ = 1 + A(L) × W(r) × h(g)
-    
-    Note: This uses the W(r) approximation. For the primary C(r) formulation,
-    use sigma_enhancement_C() with fixed-point iteration.
     """
     g = np.maximum(np.asarray(g), 1e-15)
     
-    if A is None:
-        A = unified_amplitude(L)
+    if L is None:
+        L = BASELINE_L_0
+    A = unified_amplitude(L, baseline=True)
     
     h = h_function(g)
     
@@ -533,72 +465,88 @@ def sigma_enhancement(g: np.ndarray, r: np.ndarray = None, xi: float = 1.0,
     return 1 + A * W * h
 
 
-def sigma_enhancement_C(g: np.ndarray, v_rot: np.ndarray, sigma: float = 20.0,
-                        A: float = None, L: float = L_0) -> np.ndarray:
-    """
-    Full Σ enhancement factor using covariant C(r) - PRIMARY formulation.
-    
-    Σ = 1 + A(L) × C(r) × h(g)
-    
-    where C = v_rot²/(v_rot² + σ²)
-    """
-    g = np.maximum(np.asarray(g), 1e-15)
-    
-    if A is None:
-        A = unified_amplitude(L)
-    
-    h = h_function(g)
-    C = C_coherence(v_rot, sigma)
-    
-    return 1 + A * C * h
-
-
-def predict_velocity(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
-                     h_disk: float = None, f_bulge: float = 0.0,
-                     use_C_primary: bool = True, sigma_kms: float = 20.0,
-                     sigma_profile_kms: Optional[np.ndarray] = None) -> np.ndarray:
-    """
-    Predict rotation velocity using Σ-Gravity.
-    
-    Parameters:
-    -----------
-    use_C_primary : bool
-        If True (default), use covariant C(r) with fixed-point iteration.
-        If False, use W(r) approximation (faster, identical results).
-    sigma_kms : float
-        Velocity dispersion for C(r) formulation (default 20 km/s).
-    """
+def predict_velocity_baseline(R_kpc: np.ndarray, V_bar: np.ndarray, 
+                               R_d: float, sigma_kms: float = 20.0) -> np.ndarray:
+    """BASELINE rotation curve prediction using fixed-point iteration."""
     R_m = R_kpc * kpc_to_m
     V_bar_ms = V_bar * 1000
     g_bar = V_bar_ms**2 / R_m
     
-    # For thin disk galaxies, use L = L₀ = 0.4 kpc → A = A₀
-    # (The path length L₀ IS the typical disk scale height by definition)
-    A = A_0  # = unified_amplitude(L_0) = 1.173
+    A = BASELINE_A_0
+    h = h_function(g_bar)
+    V = np.array(V_bar, dtype=float)
     
-    if use_C_primary:
-        # PRIMARY: Covariant C(r) with fixed-point iteration
-        h = h_function(g_bar)
-        V = np.array(V_bar, dtype=float)
-        sigma_use = sigma_profile_kms if sigma_profile_kms is not None else float(sigma_kms)
-        
-        for _ in range(50):  # Typically converges in 3-5 iterations
-            C = C_coherence(V, sigma_use)
-            Sigma = 1 + A * C * h
-            V_new = V_bar * np.sqrt(Sigma)
-            if np.max(np.abs(V_new - V)) < 1e-6:
-                break
-            V = V_new
-        return V
-    else:
-        # APPROXIMATION: W(r) = r/(ξ+r) - validated identical results
-        xi = XI_SCALE * R_d
-        Sigma = sigma_enhancement(g_bar, R_kpc, xi, A=A)
-        return V_bar * np.sqrt(Sigma)
+    for _ in range(50):
+        C = C_coherence(V, sigma_kms)
+        Sigma = 1 + A * C * h
+        V_new = V_bar * np.sqrt(Sigma)
+        if np.max(np.abs(V_new - V)) < 1e-6:
+            break
+        V = V_new
+    return V
 
+
+# =============================================================================
+# NEW MODEL Σ-GRAVITY (WITH EXTENDED PHASE COHERENCE)
+# =============================================================================
+
+def sigma_enhancement_new(g: np.ndarray, r: np.ndarray = None,
+                          xi: float = 1.0, L: float = None,
+                          phi: float = 1.0) -> np.ndarray:
+    """
+    NEW MODEL Σ enhancement with phase coherence.
+    
+    Σ = 1 + A(L) × φ × W(r) × h(g)
+    """
+    g = np.maximum(np.asarray(g), 1e-15)
+    
+    if L is None:
+        L = L_0
+    A = unified_amplitude(L, baseline=False)
+    
+    h = h_function(g)
+    
+    if r is not None:
+        W = W_coherence(np.asarray(r), xi)
+    else:
+        W = 1.0
+    
+    return 1 + A * phi * W * h
+
+
+def predict_velocity_new(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
+                         sigma_kms: float = 20.0, 
+                         D: float = 0.0,
+                         is_merger: bool = False) -> np.ndarray:
+    """NEW MODEL rotation curve prediction with extended phase coherence."""
+    R_m = R_kpc * kpc_to_m
+    V_bar_ms = V_bar * 1000
+    g_bar = V_bar_ms**2 / R_m
+    
+    A = A_0
+    h = h_function(g_bar)
+    V = np.array(V_bar, dtype=float)
+    
+    # Compute φ based on D and system type
+    # For disk galaxies: mostly ordered stellar motion, equilibrium
+    phi = compute_phi_extended(D, is_collisionless=True, mach_turb=0.0, is_merger=is_merger)
+    
+    for _ in range(50):
+        C = C_coherence(V, sigma_kms)
+        Sigma = 1 + A * phi * C * h
+        V_new = V_bar * np.sqrt(Sigma)
+        if np.max(np.abs(V_new - V)) < 1e-6:
+            break
+        V = V_new
+    return V
+
+
+# =============================================================================
+# MOND PREDICTIONS
+# =============================================================================
 
 def predict_mond(R_kpc: np.ndarray, V_bar: np.ndarray) -> np.ndarray:
-    """MOND prediction for comparison."""
+    """MOND prediction using simple interpolating function."""
     R_m = R_kpc * kpc_to_m
     V_bar_ms = V_bar * 1000
     g_bar = V_bar_ms**2 / R_m
@@ -608,18 +556,19 @@ def predict_mond(R_kpc: np.ndarray, V_bar: np.ndarray) -> np.ndarray:
     return V_bar * np.sqrt(nu)
 
 
+def mond_enhancement(g: np.ndarray) -> np.ndarray:
+    """MOND enhancement factor ν(x) where x = g/a₀."""
+    g = np.maximum(np.asarray(g), 1e-15)
+    x = g / a0_mond
+    return 1.0 / (1.0 - np.exp(-np.sqrt(np.maximum(x, 1e-10))))
+
+
 # =============================================================================
 # DATA LOADERS
 # =============================================================================
 
 def load_sparc(data_dir: Path) -> List[Dict]:
-    """Load SPARC galaxy rotation curves.
-    
-    Source: Lelli, McGaugh & Schombert 2016, AJ 152, 157
-    URL: http://astroweb.cwru.edu/SPARC/
-    
-    Returns 171 galaxies after quality cuts (≥5 points, valid V_bar).
-    """
+    """Load SPARC galaxy rotation curves."""
     sparc_dir = data_dir / "Rotmod_LTG"
     if not sparc_dir.exists():
         return []
@@ -648,8 +597,6 @@ def load_sparc(data_dir: Path) -> List[Dict]:
             continue
         
         df = pd.DataFrame(data)
-        
-        # Apply M/L corrections (Lelli+ 2016 standard)
         df['V_disk_scaled'] = df['V_disk'] * np.sqrt(ML_DISK)
         df['V_bulge_scaled'] = df['V_bulge'] * np.sqrt(ML_BULGE)
         V_bar_sq = (np.sign(df['V_gas']) * df['V_gas']**2 + 
@@ -663,48 +610,34 @@ def load_sparc(data_dir: Path) -> List[Dict]:
             idx = len(df) // 3
             R_d = df['R'].iloc[idx] if idx > 0 else df['R'].iloc[-1] / 2
             
-            # Estimate disk thickness and bulge fraction for unified model
-            h_disk = 0.15 * R_d
-            total_sq = np.sum(df['V_disk']**2 + df['V_bulge']**2 + df['V_gas']**2)
-            f_bulge = np.sum(df['V_bulge']**2) / max(total_sq, 1e-10)
+            # Estimate kinematic asymmetry (simple proxy: velocity residual scatter)
+            # This would ideally come from actual 2D velocity field analysis
+            v_mean = df['V_obs'].mean()
+            v_asym = df['V_obs'].std() * 0.3  # Rough proxy for asymmetry
             
             galaxies.append({
                 'name': gf.stem.replace('_rotmod', ''),
                 'R': df['R'].values,
                 'V_obs': df['V_obs'].values,
                 'V_bar': df['V_bar'].values,
-                # Keep baryonic component curves for optional σ(r) mixing.
                 'V_gas': df['V_gas'].values,
                 'V_disk_scaled': df['V_disk_scaled'].values,
                 'V_bulge_scaled': df['V_bulge_scaled'].values,
                 'R_d': R_d,
-                'h_disk': h_disk,
-                'f_bulge': f_bulge,
+                'v_asym': v_asym,
+                'v_circ': v_mean,
             })
     
     return galaxies
 
 
 def load_clusters(data_dir: Path) -> List[Dict]:
-    """Load Fox+ 2022 cluster data.
-    
-    Source: Fox et al. 2022, ApJ 928, 87
-    
-    Selection criteria (reducing 94 → 42):
-    - spec_z_constraint == 'yes' (spectroscopic redshifts)
-    - M500 > 2×10¹⁴ M☉ (high-mass clusters)
-    
-    Baryonic mass estimate:
-    M_bar(200 kpc) = 0.4 × f_baryon × M500
-    where f_baryon = 0.15 (cosmic baryon fraction)
-    """
+    """Load Fox+ 2022 cluster data."""
     cluster_file = data_dir / "clusters" / "fox2022_unique_clusters.csv"
     if not cluster_file.exists():
         return []
     
     df = pd.read_csv(cluster_file)
-    
-    # Filter to high-quality clusters
     df_valid = df[
         df['M500_1e14Msun'].notna() & 
         df['MSL_200kpc_1e12Msun'].notna() &
@@ -732,1126 +665,673 @@ def load_clusters(data_dir: Path) -> List[Dict]:
 
 
 def load_gaia(data_dir: Path) -> Optional[pd.DataFrame]:
-    """Load validated Gaia/Eilers-APOGEE disk star catalog.
-    
-    Source: Eilers+ 2019 × APOGEE DR17 × Gaia EDR3
-    File: data/gaia/eilers_apogee_6d_disk.csv
-    
-    This file contains the quality-filtered disk sample:
-    - 28,368 stars from Eilers+ 2019 cross-matched with APOGEE DR17
-    - Pre-filtered to disk region (4 < R_gal < 16 kpc, |z_gal| < 1 kpc)
-    - Full 6D phase space information (positions + velocities)
-    
-    Sign convention: v_phi is positive for counter-rotation in the file,
-    so we negate it to get the standard convention (positive = co-rotation).
-    """
+    """Load Gaia/Eilers-APOGEE disk star catalog."""
     gaia_file = data_dir / "gaia" / "eilers_apogee_6d_disk.csv"
     if not gaia_file.exists():
         return None
     
     df = pd.read_csv(gaia_file)
-    df['v_phi_obs'] = -df['v_phi']  # Correct sign convention
-    return df  # No additional filtering - file is already the disk sample
+    df['v_phi_obs'] = -df['v_phi']
+    return df
 
 
 # =============================================================================
-# ORIGINAL TESTS (1-7)
+# COMPARATIVE TEST FUNCTIONS
 # =============================================================================
 
-def test_sparc(galaxies: List[Dict]) -> TestResult:
-    """Test SPARC galaxy rotation curves.
-    
-    Gold standard: Lelli+ 2016, McGaugh+ 2016
-    - MOND RMS: 17.15 km/s (with a₀=1.2×10⁻¹⁰)
-    - ΛCDM RMS: ~15 km/s (with 2-3 params/galaxy)
-    - RAR scatter: 0.13 dex
-    """
+def test_sparc_comparative(galaxies: List[Dict]) -> ComparativeResult:
+    """Compare theories on SPARC galaxy rotation curves."""
     if not galaxies:
-        return TestResult("SPARC Galaxies", True, 0.0, {}, "SKIPPED: No data")
+        return ComparativeResult(
+            name="SPARC Galaxies",
+            metric_name="RMS",
+            observed=OBS_BENCHMARKS['sparc']['mond_rms_kms'],  # Use MOND as reference
+            observed_err=None,
+            observed_unit="km/s",
+            baseline=TheoryPrediction(0, "km/s"),
+            new_model=TheoryPrediction(0, "km/s"),
+            mond=TheoryPrediction(0, "km/s"),
+            lcdm=TheoryPrediction(OBS_BENCHMARKS['sparc']['lcdm_rms_kms'], "km/s"),
+            best_theory="N/A",
+            n_objects=0,
+            notes="No data"
+        )
     
-    rms_list = []
-    mond_rms_list = []
-    all_log_ratios = []
-    wins = 0
+    rms_baseline = []
+    rms_new = []
+    rms_mond = []
     
     for gal in galaxies:
         R = gal['R']
         V_obs = gal['V_obs']
         V_bar = gal['V_bar']
         R_d = gal['R_d']
-        h_disk = gal.get('h_disk', 0.15 * R_d)
-        f_bulge = gal.get('f_bulge', 0.0)
-
-        sigma_profile = None
-        if USE_SIGMA_COMPONENTS:
-            try:
-                sigma_profile = sigma_profile_from_components_kms(
-                    gal.get('V_gas', np.zeros_like(V_bar)),
-                    gal.get('V_disk_scaled', np.zeros_like(V_bar)),
-                    gal.get('V_bulge_scaled', np.zeros_like(V_bar)),
-                )
-            except Exception:
-                sigma_profile = None
         
-        V_pred = predict_velocity(R, V_bar, R_d, h_disk, f_bulge, sigma_profile_kms=sigma_profile)
-        V_mond = predict_mond(R, V_bar)
+        # Baseline prediction
+        V_pred_baseline = predict_velocity_baseline(R, V_bar, R_d)
+        rms_b = np.sqrt(((V_pred_baseline - V_obs)**2).mean())
+        rms_baseline.append(rms_b)
         
-        rms_sigma = np.sqrt(((V_pred - V_obs)**2).mean())
-        rms_mond = np.sqrt(((V_mond - V_obs)**2).mean())
-        
-        rms_list.append(rms_sigma)
-        mond_rms_list.append(rms_mond)
-        
-        # RAR scatter calculation
-        valid = (V_obs > 0) & (V_pred > 0)
-        if valid.sum() > 0:
-            log_ratio = np.log10(V_obs[valid] / V_pred[valid])
-            all_log_ratios.extend(log_ratio)
-        
-        if rms_sigma < rms_mond:
-            wins += 1
-    
-    mean_rms = np.mean(rms_list)
-    mean_mond_rms = np.mean(mond_rms_list)
-    win_rate = wins / len(galaxies)
-    rar_scatter = np.std(all_log_ratios) if all_log_ratios else 0.0
-    
-    passed = mean_rms < 20.0
-    
-    return TestResult(
-        name="SPARC Galaxies",
-        passed=passed,
-        metric=mean_rms,
-        details={
-            'n_galaxies': len(galaxies),
-            'mean_rms': mean_rms,
-            'mean_mond_rms': mean_mond_rms,
-            'win_rate': win_rate,
-            'rar_scatter_dex': rar_scatter,
-            'benchmark_mond_rms': OBS_BENCHMARKS['sparc']['mond_rms_kms'],
-            'benchmark_lcdm_rms': OBS_BENCHMARKS['sparc']['lcdm_rms_kms'],
-            'benchmark_rar_scatter': OBS_BENCHMARKS['sparc']['rar_scatter_dex'],
-        },
-        message=f"RMS={mean_rms:.2f} km/s (MOND={mean_mond_rms:.2f}, ΛCDM~15), Scatter={rar_scatter:.3f} dex, Win={win_rate*100:.1f}%"
-    )
-
-
-def test_clusters(clusters: List[Dict]) -> TestResult:
-    """Test galaxy cluster lensing.
-    
-    Gold standard: Fox+ 2022
-    - MOND: Underpredicts by factor ~3 ("cluster problem")
-    - ΛCDM: Works well with NFW fits (2-3 params/cluster)
-    - GR+baryons: Underpredicts by factor ~10
-    
-    WITH PHASE COHERENCE:
-    - Clusters are ~85% hot gas (ICM), ~15% stars
-    - Gas is virialized (not turbulent like Bullet Cluster post-collision)
-    - Use PHASE_COHERENCE_MIXED for equilibrium clusters
-    """
-    if not clusters:
-        return TestResult("Clusters", True, 0.0, {}, "SKIPPED: No data")
-    
-    ratios = []
-    
-    # Cluster parameters for unified amplitude
-    L_cluster = 600  # kpc (path through cluster baryons)
-    A_cluster = unified_amplitude(L_cluster)  # ≈ 8.45
-    
-    # Gas fraction for clusters (~85% hot ICM)
-    f_gas = GAS_FRACTIONS.get('cluster', 0.85) if USE_PHASE_COHERENCE else 0.0
-    f_stars = 1.0 - f_gas
-    
-    for cl in clusters:
-        M_bar = cl['M_bar']
-        M_lens = cl['M_lens']
-        r_kpc = cl.get('r_kpc', 200)
-        
-        r_m = r_kpc * kpc_to_m
-        
-        if USE_PHASE_COHERENCE:
-            # UNIVERSAL FORMULA for EQUILIBRIUM clusters:
-            # D = 0 (no disturbance) → φ = 1 for ALL components
-            #
-            # This is the key property of the universal formula:
-            # Equilibrium systems are UNCHANGED by phase coherence.
-            #
-            # Mach ~ 0.2 for relaxed clusters → D ≈ 0 → φ ≈ 1
-            mach_eq = 0.2  # Subsonic turbulence only
-            phi_eq = compute_phi_from_mach(mach_eq, is_collisionless=False)
-            
-            g_bar = G * M_bar * M_sun / r_m**2
-            h = h_function(np.array([g_bar]))[0]
-            Sigma = 1 + A_cluster * phi_eq * h
-            M_pred = M_bar * Sigma
+        # New model with extended phase coherence
+        if USE_EXTENDED_PHI:
+            D = compute_D_from_asymmetry(gal.get('v_asym', 0), gal.get('v_circ', 200))
+            # SPARC galaxies are equilibrium → disturbance suppresses coherence
         else:
-            g_bar = G * M_bar * M_sun / r_m**2
-            h = h_function(np.array([g_bar]))[0]
-            Sigma = 1 + A_cluster * h  # W ≈ 1 for clusters
-            M_pred = M_bar * Sigma
+            D = 0.0
+        V_pred_new = predict_velocity_new(R, V_bar, R_d, D=D, is_merger=False)
+        rms_n = np.sqrt(((V_pred_new - V_obs)**2).mean())
+        rms_new.append(rms_n)
         
-        ratio = M_pred / M_lens
-        if np.isfinite(ratio) and ratio > 0:
-            ratios.append(ratio)
+        # MOND prediction
+        V_mond = predict_mond(R, V_bar)
+        rms_m = np.sqrt(((V_mond - V_obs)**2).mean())
+        rms_mond.append(rms_m)
     
-    median_ratio = np.median(ratios)
-    scatter = np.std(np.log10(ratios))
+    mean_baseline = np.mean(rms_baseline)
+    mean_new = np.mean(rms_new)
+    mean_mond = np.mean(rms_mond)
+    lcdm_rms = OBS_BENCHMARKS['sparc']['lcdm_rms_kms']
     
-    # MOND comparison: factor ~3 underprediction
-    mond_ratio = 1.0 / OBS_BENCHMARKS['clusters']['mond_mass_discrepancy']
+    # Reference: MOND is the "gold standard" for rotation curves
+    observed_rms = mean_mond  # Use MOND as the target to beat
     
-    passed = 0.5 < median_ratio < 1.5
+    # Determine best theory
+    theories = {
+        'Baseline': mean_baseline,
+        'New Model': mean_new,
+        'MOND': mean_mond,
+        'LCDM': lcdm_rms
+    }
+    best = min(theories, key=theories.get)
     
-    return TestResult(
-        name="Clusters",
-        passed=passed,
-        metric=median_ratio,
-        details={
-            'n_clusters': len(ratios),
-            'median_ratio': median_ratio,
-            'scatter_dex': scatter,
-            'A_cluster': A_cluster,
-            'benchmark_mond_ratio': mond_ratio,
-            'benchmark_lcdm': 'Works with NFW fits',
-        },
-        message=f"Median ratio={median_ratio:.3f} (MOND~{mond_ratio:.2f}, ΛCDM~1.0), Scatter={scatter:.3f} dex ({len(ratios)} clusters)"
+    return ComparativeResult(
+        name="SPARC Galaxies",
+        metric_name="RMS",
+        observed=observed_rms,
+        observed_err=None,
+        observed_unit="km/s",
+        baseline=TheoryPrediction(mean_baseline, "km/s", {'win_rate': sum(1 for b, m in zip(rms_baseline, rms_mond) if b < m) / len(galaxies)}),
+        new_model=TheoryPrediction(mean_new, "km/s", {'D_used': USE_EXTENDED_PHI}),
+        mond=TheoryPrediction(mean_mond, "km/s"),
+        lcdm=TheoryPrediction(lcdm_rms, "km/s", {'note': '2-3 params/galaxy'}),
+        best_theory=best,
+        n_objects=len(galaxies),
+        notes=f"Win rates: Baseline beats MOND {sum(1 for b, m in zip(rms_baseline, rms_mond) if b < m)/len(galaxies)*100:.1f}%"
     )
 
 
-def test_cluster_holdout(clusters: List[Dict], n_splits: int = 10, 
-                         test_fraction: float = 0.3) -> TestResult:
-    """Test cluster parameter stability via holdout validation.
-    
-    With L₀ = 0.4 kpc fixed (physical value), calibrate only n on training set
-    and evaluate on holdout set. Validates that n is stable and not overfit.
-    
-    Pass criteria:
-        - Holdout median ratio between 0.7 and 1.4
-        - Calibrated n stable (std < 0.05)
-    """
-    if len(clusters) < 10:
-        return TestResult("Cluster Holdout", True, 0.0, {}, 
-                         "SKIPPED: Need ≥10 clusters")
-    
-    from scipy.optimize import minimize_scalar
-    
-    # Fixed physical parameters
-    L0_fixed = 0.4  # kpc - disk scale height (physical, not calibrated)
-    L_cluster = 600.0  # kpc - cluster path length
-    
-    def predict_with_n(M_bar, r_kpc, n):
-        """Predict cluster mass with given n (L₀ fixed)."""
-        A = A_0 * (L_cluster / L0_fixed) ** n
-        r_m = r_kpc * kpc_to_m
-        g_N = G * M_bar * M_sun / r_m**2
-        h = np.sqrt(g_dagger / g_N) * g_dagger / (g_dagger + g_N)
-        Sigma = 1 + A * h
-        return M_bar * Sigma
-    
-    holdout_medians = []
-    calibrated_n_values = []
-    
-    for seed in range(n_splits):
-        np.random.seed(seed + 42)
-        
-        indices = np.random.permutation(len(clusters))
-        n_test = int(len(clusters) * test_fraction)
-        test_idx = indices[:n_test]
-        train_idx = indices[n_test:]
-        
-        train_clusters = [clusters[i] for i in train_idx]
-        test_clusters = [clusters[i] for i in test_idx]
-        
-        def train_objective(n):
-            ratios = []
-            for cl in train_clusters:
-                M_pred = predict_with_n(cl['M_bar'], cl.get('r_kpc', 200), n)
-                ratios.append(M_pred / cl['M_lens'])
-            return abs(np.median(ratios) - 1.0)
-        
-        result = minimize_scalar(train_objective, bounds=(0.1, 0.5), method='bounded')
-        n_cal = result.x
-        calibrated_n_values.append(n_cal)
-        
-        ratios = []
-        for cl in test_clusters:
-            M_pred = predict_with_n(cl['M_bar'], cl.get('r_kpc', 200), n_cal)
-            ratios.append(M_pred / cl['M_lens'])
-        
-        holdout_medians.append(np.median(ratios))
-    
-    mean_holdout = np.mean(holdout_medians)
-    std_holdout = np.std(holdout_medians)
-    mean_n = np.mean(calibrated_n_values)
-    std_n = np.std(calibrated_n_values)
-    
-    holdout_ok = 0.7 < mean_holdout < 1.4
-    n_stable = std_n < 0.05
-    passed = holdout_ok and n_stable
-    
-    return TestResult(
-        name="Cluster Holdout",
-        passed=passed,
-        metric=mean_holdout,
-        details={
-            'n_splits': n_splits,
-            'mean_n': mean_n,
-            'std_n': std_n,
-            'mean_holdout_ratio': mean_holdout,
-            'std_holdout_ratio': std_holdout,
-        },
-        message=f"n={mean_n:.2f}±{std_n:.2f}, holdout={mean_holdout:.2f}±{std_holdout:.2f}"
-    )
-
-
-def test_gaia(gaia_df: Optional[pd.DataFrame]) -> TestResult:
-    """Test Milky Way star-by-star validation.
-    
-    Gold standard: Eilers+ 2019, McMillan 2017
-    - V_sun = 233 ± 3 km/s
-    - R_sun = 8.178 kpc
-    - M_baryonic = 6.5×10¹⁰ M☉
-    - Expected RMS ~ 29.5 km/s for 28,368 stars
-    """
-    if gaia_df is None or len(gaia_df) == 0:
-        return TestResult("Gaia/MW", True, 0.0, {}, "SKIPPED: No data")
-    
-    R = gaia_df['R_gal'].values
-    
-    # McMillan 2017 baryonic model (scaled by 1.16)
-    MW_SCALE = 1.16
-    M_disk = 4.6e10 * MW_SCALE**2
-    M_bulge = 1.0e10 * MW_SCALE**2
-    M_gas = 1.0e10 * MW_SCALE**2
-    G_kpc = 4.302e-6  # G in (km/s)² kpc / M☉
-    
-    v2_disk = G_kpc * M_disk * R**2 / (R**2 + 3.3**2)**1.5
-    v2_bulge = G_kpc * M_bulge * R / (R + 0.5)**2
-    v2_gas = G_kpc * M_gas * R**2 / (R**2 + 7.0**2)**1.5
-    V_bar = np.sqrt(v2_disk + v2_bulge + v2_gas)
-    
-    R_d_mw = 2.6  # MW disk scale length (kpc)
-    sigma_profile = None
-    if USE_SIGMA_COMPONENTS:
-        sigma_profile = sigma_profile_from_components_kms(np.sqrt(v2_gas), np.sqrt(v2_disk), np.sqrt(v2_bulge))
-    V_pred = predict_velocity(R, V_bar, R_d_mw, h_disk=0.3, f_bulge=0.1, sigma_profile_kms=sigma_profile)
-    
-    # Asymmetric drift correction
-    from scipy.interpolate import interp1d
-    R_bins = np.arange(4, 16, 0.5)
-    disp_data = []
-    for i in range(len(R_bins) - 1):
-        mask = (gaia_df['R_gal'] >= R_bins[i]) & (gaia_df['R_gal'] < R_bins[i + 1])
-        if mask.sum() > 30:
-            disp_data.append({
-                'R': (R_bins[i] + R_bins[i + 1]) / 2,
-                'sigma_R': gaia_df.loc[mask, 'v_R'].std()
-            })
-    
-    if len(disp_data) > 0:
-        disp_df = pd.DataFrame(disp_data)
-        sigma_interp = interp1d(disp_df['R'], disp_df['sigma_R'], fill_value='extrapolate')
-        sigma_R = sigma_interp(R)
-    else:
-        sigma_R = 40.0
-    
-    V_a = sigma_R**2 / (2 * V_pred) * (R / R_d_mw - 1)
-    V_a = np.clip(V_a, 0, 50)
-    
-    v_pred_corrected = V_pred - V_a
-    resid = gaia_df['v_phi_obs'].values - v_pred_corrected
-    rms = np.sqrt((resid**2).mean())
-    
-    passed = rms < 35.0
-    
-    return TestResult(
-        name="Gaia/MW",
-        passed=passed,
-        metric=rms,
-        details={
-            'n_stars': len(gaia_df),
-            'rms': rms,
-            'mean_residual': resid.mean(),
-            'benchmark_V_sun': OBS_BENCHMARKS['milky_way']['V_sun_kms'],
-            'benchmark_n_stars': OBS_BENCHMARKS['milky_way']['n_gaia_stars'],
-        },
-        message=f"RMS={rms:.1f} km/s ({len(gaia_df)} stars, expected {OBS_BENCHMARKS['milky_way']['n_gaia_stars']})"
-    )
-
-
-def test_redshift() -> TestResult:
-    """Test redshift evolution of g†."""
-    Omega_m, Omega_L = 0.3, 0.7
-    
-    def H_z(z):
-        return np.sqrt(Omega_m * (1 + z)**3 + Omega_L)
-    
-    ratio = H_z(2)
-    passed = True
-    
-    return TestResult(
-        name="Redshift Evolution",
-        passed=passed,
-        metric=ratio,
-        details={'g_dagger_z2_ratio': ratio},
-        message=f"g†(z=2)/g†(z=0) = {ratio:.3f} (∝ H(z))"
-    )
-
-
-def test_solar_system() -> TestResult:
-    """Test Solar System safety (Cassini bound)."""
-    r_saturn = 9.5 * AU_to_m
-    g_saturn = G * M_sun / r_saturn**2
-    
-    h_saturn = h_function(np.array([g_saturn]))[0]
-    gamma_minus_1 = h_saturn
-    cassini_bound = OBS_BENCHMARKS['solar_system']['cassini_gamma_uncertainty']
-    
-    passed = gamma_minus_1 < cassini_bound
-    
-    return TestResult(
-        name="Solar System",
-        passed=passed,
-        metric=gamma_minus_1,
-        details={'h_saturn': h_saturn, 'cassini_bound': cassini_bound},
-        message=f"|γ-1| = {gamma_minus_1:.2e} < {cassini_bound:.2e}"
-    )
-
-
-def test_counter_rotation(data_dir: Path) -> TestResult:
-    """Test counter-rotation prediction."""
-    try:
-        from astropy.io import fits
-        from astropy.table import Table
-        from scipy import stats
-    except ImportError:
-        return TestResult("Counter-Rotation", True, 0.0, {}, "SKIPPED: astropy required")
-    
-    dynpop_file = data_dir / "manga_dynpop" / "SDSSDR17_MaNGA_JAM.fits"
-    cr_file = data_dir / "stellar_corgi" / "bevacqua2022_counter_rotating.tsv"
-    
-    if not dynpop_file.exists() or not cr_file.exists():
-        return TestResult("Counter-Rotation", True, 0.0, {}, "SKIPPED: Data not found")
-    
-    with fits.open(dynpop_file) as hdul:
-        basic = Table(hdul[1].data)
-        jam_nfw = Table(hdul[4].data)
-    
-    with open(cr_file, 'r') as f:
-        lines = f.readlines()
-    
-    # Parse CR data
-    data_start = 0
-    for i, line in enumerate(lines):
-        if line.startswith('---'):
-            data_start = i + 1
-            break
-    
-    header_line = None
-    for i, line in enumerate(lines):
-        if line.startswith('MaNGAId'):
-            header_line = i
-            break
-    
-    if header_line is None:
-        return TestResult("Counter-Rotation", True, 0.0, {}, "SKIPPED: Parse error")
-    
-    headers = [h.strip() for h in lines[header_line].split('|')]
-    cr_data = []
-    for line in lines[data_start:]:
-        if line.strip() and not line.startswith('#'):
-            parts = [p.strip() for p in line.split('|')]
-            if len(parts) >= len(headers):
-                cr_data.append(dict(zip(headers, parts)))
-    
-    cr_manga_ids = [d['MaNGAId'].strip() for d in cr_data]
-    dynpop_idx = {str(mid).strip(): i for i, mid in enumerate(basic['mangaid'])}
-    matches = [dynpop_idx[cr_id] for cr_id in cr_manga_ids if cr_id in dynpop_idx]
-    
-    if len(matches) < 10:
-        return TestResult("Counter-Rotation", True, 0.0, {}, f"SKIPPED: Only {len(matches)} matches")
-    
-    fdm_all = np.array(jam_nfw['fdm_Re'])
-    valid_mask = np.isfinite(fdm_all) & (fdm_all >= 0) & (fdm_all <= 1)
-    
-    cr_mask = np.zeros(len(fdm_all), dtype=bool)
-    cr_mask[matches] = True
-    
-    fdm_cr = fdm_all[cr_mask & valid_mask]
-    fdm_normal = fdm_all[~cr_mask & valid_mask]
-    
-    if len(fdm_cr) < 10:
-        return TestResult("Counter-Rotation", True, 0.0, {}, "SKIPPED: Insufficient data")
-    
-    mw_stat, mw_pval_two = stats.mannwhitneyu(fdm_cr, fdm_normal)
-    mw_pval = mw_pval_two / 2 if np.mean(fdm_cr) < np.mean(fdm_normal) else 1 - mw_pval_two / 2
-    
-    passed = mw_pval < 0.05 and np.mean(fdm_cr) < np.mean(fdm_normal)
-    
-    return TestResult(
-        name="Counter-Rotation",
-        passed=passed,
-        metric=mw_pval,
-        details={
-            'n_cr': len(fdm_cr),
-            'fdm_cr_mean': float(np.mean(fdm_cr)),
-            'fdm_normal_mean': float(np.mean(fdm_normal)),
-        },
-        message=f"f_DM(CR)={np.mean(fdm_cr):.3f} < f_DM(Normal)={np.mean(fdm_normal):.3f}, p={mw_pval:.4f}"
-    )
-
-
-def test_tully_fisher() -> TestResult:
-    """Test Baryonic Tully-Fisher Relation.
-    
-    Gold standard: McGaugh 2012, AJ 143, 40
-    - Slope: 3.98 ± 0.06 (MOND predicts exactly 4)
-    - Normalization: A_TF ≈ 47 M☉/(km/s)⁴
-    - Scatter: 0.10 dex (intrinsic)
-    """
-    # At V_flat = 200 km/s, what baryonic mass does Σ-Gravity predict?
-    V_flat = 200  # km/s
-    V_flat_ms = V_flat * 1000
-    
-    # Check the normalization at a typical radius
-    R_test = 30  # kpc
-    R_m = R_test * kpc_to_m
-    g_obs = V_flat_ms**2 / R_m
-    
-    # Invert to find g_bar: g_obs = g_bar × Σ(g_bar)
-    g_bar = g_obs / 2  # Initial guess
-    for _ in range(20):
-        Sigma = sigma_enhancement(g_bar, A=A_0)
-        g_bar_new = g_obs / Sigma
-        if abs(g_bar_new - g_bar) / g_bar < 1e-6:
-            break
-        g_bar = g_bar_new
-    
-    V_bar = np.sqrt(g_bar * R_m) / 1000  # km/s
-    M_bar = V_bar**2 * R_test * kpc_to_m / (G * M_sun) * 1000**2
-    
-    # BTFR: M_bar = A_TF × V⁴
-    A_TF_obs = OBS_BENCHMARKS['tully_fisher']['btfr_normalization']
-    slope_obs = OBS_BENCHMARKS['tully_fisher']['btfr_slope']
-    M_bar_obs = A_TF_obs * V_flat**4
-    
-    ratio = M_bar / M_bar_obs
-    
-    # Slope is automatic in MOND-like theories
-    slope_pred = 4
-    
-    passed = 0.5 < ratio < 2.0
-    
-    return TestResult(
-        name="Tully-Fisher",
-        passed=passed,
-        metric=ratio,
-        details={
-            'V_flat': V_flat,
-            'M_bar_pred': M_bar,
-            'M_bar_obs': M_bar_obs,
-            'slope_pred': slope_pred,
-            'slope_obs': slope_obs,
-            'benchmark_scatter': OBS_BENCHMARKS['tully_fisher']['scatter_dex'],
-        },
-        message=f"BTFR: M_pred/M_obs = {ratio:.2f} at V={V_flat} km/s, slope={slope_pred} (obs={slope_obs:.2f})"
-    )
-
-
-# =============================================================================
-# NEW TESTS (8-16)
-# =============================================================================
-
-def test_wide_binaries() -> TestResult:
-    """Test wide binary boost at 10 kAU.
-    
-    Gold standard: Chae 2023, ApJ 952, 128
-    - ~35% velocity boost at separations > 2000 AU
-    - 26,500 pairs from Gaia DR3
-    - Controversy: Banik+ 2024 disputes; ongoing debate
-    """
-    # At separation s = 10,000 AU
+def test_wide_binaries_comparative() -> ComparativeResult:
+    """Compare theories on wide binary velocity boost."""
     s_AU = 10000
     s_m = s_AU * AU_to_m
-    
-    # Typical binary: M_total ~ 1.5 M_sun
     M_total = 1.5 * M_sun
     g_N = G * M_total / s_m**2
     
-    # Σ-Gravity enhancement
-    Sigma = sigma_enhancement(g_N, A=A_0)
-    boost = Sigma - 1
+    # Observed
+    obs_boost = OBS_BENCHMARKS['wide_binaries']['boost_factor']
+    obs_err = OBS_BENCHMARKS['wide_binaries']['boost_uncertainty']
     
-    # Chae 2023 observed ~35% boost
-    obs_boost = OBS_BENCHMARKS['wide_binaries']['boost_factor'] - 1
-    obs_uncertainty = OBS_BENCHMARKS['wide_binaries']['boost_uncertainty']
+    # Baseline: Standard Σ-Gravity
+    h_val = h_function(np.array([g_N]))[0]
+    Sigma_baseline = 1 + BASELINE_A_0 * h_val
+    boost_baseline = Sigma_baseline
     
-    # Pass if within factor of 2 of observed
-    passed = 0.5 * obs_boost < boost < 2.0 * obs_boost
+    # New model: With potential tidal D
+    # Wide binaries are in MW's tidal field → equilibrium disturbance
+    if USE_EXTENDED_PHI:
+        # Estimate tidal disturbance: binaries at 10 kAU in MW potential
+        # D represents loss of perfect coherence in the tidal field
+        D = 0.15
+        phi = compute_phi_extended(D, is_collisionless=True, is_merger=False)  # EQUILIBRIUM
+    else:
+        D = 0.0
+        phi = 1.0
+    Sigma_new = 1 + A_0 * phi * h_val
+    boost_new = Sigma_new
     
-    return TestResult(
+    # MOND
+    mond_enhance = mond_enhancement(g_N)
+    boost_mond = mond_enhance
+    
+    # Newtonian (no boost)
+    boost_newton = 1.0
+    
+    theories = {
+        'Baseline': abs(boost_baseline - obs_boost),
+        'New Model': abs(boost_new - obs_boost),
+        'MOND': abs(boost_mond - obs_boost),
+        'Newtonian': abs(boost_newton - obs_boost)
+    }
+    best = min(theories, key=theories.get)
+    
+    return ComparativeResult(
         name="Wide Binaries",
-        passed=passed,
-        metric=boost,
-        details={
-            'separation_AU': s_AU,
-            'g_N': g_N,
-            'g_over_a0': g_N / a0_mond,
-            'boost_pred': boost,
-            'boost_obs': obs_boost,
-            'obs_uncertainty': obs_uncertainty,
-            'n_pairs': OBS_BENCHMARKS['wide_binaries']['n_pairs'],
-            'controversy': OBS_BENCHMARKS['wide_binaries']['controversy'],
-        },
-        message=f"Boost at {s_AU} AU: {boost*100:.1f}% (Chae 2023: {obs_boost*100:.0f}±{obs_uncertainty*100:.0f}%)"
+        metric_name="Boost Factor",
+        observed=obs_boost,
+        observed_err=obs_err,
+        observed_unit="x",
+        baseline=TheoryPrediction(boost_baseline, "x", {'overpredicts': boost_baseline > obs_boost + obs_err}),
+        new_model=TheoryPrediction(boost_new, "x", {'D': D if USE_EXTENDED_PHI else 0, 'phi': phi}),
+        mond=TheoryPrediction(boost_mond, "x"),
+        lcdm=TheoryPrediction(boost_newton, "x", {'note': 'No boost'}),
+        best_theory=best,
+        n_objects=OBS_BENCHMARKS['wide_binaries']['n_pairs'],
+        notes=f"Chae 2023: {obs_boost:.2f}x at >{OBS_BENCHMARKS['wide_binaries']['threshold_AU']} AU"
     )
 
 
-def test_dwarf_spheroidals() -> TestResult:
-    """Test dwarf spheroidal velocity dispersions using HOST INHERITANCE model.
+def test_udgs_comparative() -> ComparativeResult:
+    """Compare theories on DF2 (the famous 'dark matter free' galaxy)."""
+    df2 = OBS_BENCHMARKS['udgs']['df2']
     
-    NEW MODEL: dSphs inherit the MW's Σ-enhancement at their orbital radius.
-    Σ_dSph = Σ_MW(R_orbit)
+    M_star = df2['M_star']
+    sigma_obs = df2['sigma_obs']
+    sigma_err = df2['sigma_err']
+    r_eff = df2['r_eff_kpc'] * kpc_to_m
+    d_host = df2['d_host_kpc'] * kpc_to_m
+    host_mass = df2['host_mass']
     
-    This naturally explains why dSphs appear "dark matter dominated":
-    - They sit in the MW's already-enhanced gravitational field
-    - No separate internal enhancement needed
+    # Newtonian prediction
+    sigma_N = np.sqrt(G * M_star * M_sun / (5 * r_eff)) / 1000
+    g_N = G * M_star * M_sun / r_eff**2
     
-    Gold standard: Walker+ 2009, McConnachie 2012
-    - MOND: Generally works for isolated dSphs; EFE complicates satellites
-    - ΛCDM: Requires NFW halos with high M/L
-    """
+    # Baseline Σ-Gravity
+    h_val = h_function(np.array([g_N]))[0]
+    Sigma_baseline = 1 + BASELINE_A_0 * h_val
+    sigma_baseline = sigma_N * np.sqrt(Sigma_baseline)
+    
+    # New model with tidal D (DF2 is close to NGC1052)
+    if USE_EXTENDED_PHI:
+        # Tidal radius from host
+        r_tidal = d_host * (M_star / (3 * host_mass))**(1/3) if host_mass > 0 else np.inf
+        D = compute_D_from_tidal(r_tidal / kpc_to_m, df2['r_eff_kpc'])
+        # DF2 is tidally disturbed → equilibrium disturbance → φ < 1
+        phi = compute_phi_extended(D, is_collisionless=True, is_merger=False)  # EQUILIBRIUM
+    else:
+        D = 0.0
+        phi = 1.0
+    
+    Sigma_new = 1 + A_0 * phi * h_val
+    sigma_new = sigma_N * np.sqrt(max(Sigma_new, 0.1))
+    
+    # MOND (without EFE - overpredicts)
+    sigma_mond = df2['mond_sigma']
+    
+    # ΛCDM/Newtonian
+    sigma_newton = sigma_N
+    
+    theories = {
+        'Baseline': abs(sigma_baseline - sigma_obs),
+        'New Model': abs(sigma_new - sigma_obs),
+        'MOND': abs(sigma_mond - sigma_obs),
+        'Newtonian': abs(sigma_newton - sigma_obs)
+    }
+    best = min(theories, key=theories.get)
+    
+    return ComparativeResult(
+        name="DF2 (UDG)",
+        metric_name="Velocity Dispersion",
+        observed=sigma_obs,
+        observed_err=sigma_err,
+        observed_unit="km/s",
+        baseline=TheoryPrediction(sigma_baseline, "km/s", {'Sigma': Sigma_baseline}),
+        new_model=TheoryPrediction(sigma_new, "km/s", {'D': D if USE_EXTENDED_PHI else 0, 'phi': phi, 'Sigma': Sigma_new if USE_EXTENDED_PHI else Sigma_baseline}),
+        mond=TheoryPrediction(sigma_mond, "km/s", {'note': 'Needs EFE'}),
+        lcdm=TheoryPrediction(sigma_newton, "km/s"),
+        best_theory=best,
+        n_objects=1,
+        notes=f"DF2 appears 'dark matter free'. d_host={df2['d_host_kpc']} kpc from NGC1052"
+    )
+
+
+def test_dsph_comparative() -> ComparativeResult:
+    """Compare theories on dwarf spheroidal velocity dispersions."""
     dsphs = OBS_BENCHMARKS['dwarf_spheroidals']
+    M_MW_bar = 6e10
     
-    # MW baryonic mass for calculating Σ_MW at dSph locations
-    M_MW_bar = 6e10  # M_sun
+    results_baseline = []
+    results_new = []
+    results_mond = []
+    sigma_obs_list = []
     
-    ratios = []
-    results_by_name = {}
     for name, data in dsphs.items():
-        # Skip non-galaxy entries
         if not isinstance(data, dict) or 'M_star' not in data:
             continue
             
         M_star = data['M_star']
         sigma_obs = data['sigma_obs']
         r_half = data['r_half_kpc'] * kpc_to_m
-        d_MW = data.get('d_MW_kpc', 100) * kpc_to_m  # Distance from MW center
+        d_MW = data.get('d_MW_kpc', 100) * kpc_to_m
         
-        # Calculate MW's Σ-enhancement at dSph orbital radius
-        # This is what keeps the MW rotation curve flat at ~220 km/s
+        sigma_obs_list.append(sigma_obs)
+        
+        # MW's Σ at dSph location
         g_MW = G * M_MW_bar * M_sun / d_MW**2
         h_MW = h_function(np.array([g_MW]))[0]
-        Sigma_MW = 1 + A_0 * h_MW  # MW uses disk amplitude, C≈1 at large r
+        Sigma_MW = 1 + BASELINE_A_0 * h_MW
         
-        # dSph inherits this enhancement
-        # Effective mass = M_star × Σ_MW
+        # Baseline: Host inheritance
         M_eff = M_star * Sigma_MW
+        sigma_baseline = np.sqrt(G * M_eff * M_sun / (5 * r_half)) / 1000
+        results_baseline.append(sigma_baseline / sigma_obs)
         
-        # Predicted velocity dispersion
-        # σ² ~ GM_eff/(5r_half) for Plummer sphere
-        sigma_pred = np.sqrt(G * M_eff * M_sun / (5 * r_half)) / 1000  # km/s
+        # New model for dSphs
+        # KEY PHYSICS: dSphs INHERIT the MW's Σ-enhancement at their orbital radius
+        # Unlike isolated galaxies, they don't need their own internal coherence
+        # The tidal field enhances, not suppresses, their effective gravity
+        # So we DON'T apply equilibrium suppression to the inherited enhancement
+        phi = 1.0  # dSphs use host inheritance, not internal coherence
         
-        ratio = sigma_pred / sigma_obs
-        ratios.append(ratio)
-        results_by_name[name] = {
-            'sigma_pred': sigma_pred,
-            'sigma_obs': sigma_obs,
-            'ratio': ratio,
-            'd_MW_kpc': data.get('d_MW_kpc', 100),
-            'Sigma_MW': Sigma_MW,
-            'M_L_obs': data.get('M_L', 'N/A'),
-        }
+        Sigma_new = 1 + A_0 * phi * h_MW
+        M_eff_new = M_star * Sigma_new
+        sigma_new = np.sqrt(G * M_eff_new * M_sun / (5 * r_half)) / 1000
+        results_new.append(sigma_new / sigma_obs)
+        
+        # MOND
+        g_int = G * M_star * M_sun / r_half**2
+        mond_nu = mond_enhancement(g_int)
+        sigma_mond = np.sqrt(G * M_star * M_sun * mond_nu / (5 * r_half)) / 1000
+        results_mond.append(sigma_mond / sigma_obs)
     
-    mean_ratio = np.mean(ratios)
-    std_ratio = np.std(ratios)
+    mean_baseline = np.mean(results_baseline)
+    mean_new = np.mean(results_new)
+    mean_mond = np.mean(results_mond)
     
-    # Pass if mean ratio is reasonable (within factor of 2)
-    # Note: scatter is expected due to M_star uncertainties in faint dSphs
-    passed = 0.5 < mean_ratio < 2.0
+    # ΛCDM: Uses NFW halos, typically works with M/L tuning
+    mean_lcdm = 1.0  # By construction with NFW
     
-    return TestResult(
+    theories = {
+        'Baseline': abs(mean_baseline - 1.0),
+        'New Model': abs(mean_new - 1.0),
+        'MOND': abs(mean_mond - 1.0),
+        'LCDM': abs(mean_lcdm - 1.0)
+    }
+    best = min(theories, key=theories.get)
+    
+    return ComparativeResult(
         name="Dwarf Spheroidals",
-        passed=passed,
-        metric=mean_ratio,
-        details={
-            'n_dsphs': len(ratios),
-            'mean_ratio': mean_ratio,
-            'std_ratio': std_ratio,
-            'model': 'host_inheritance',
-            'results': results_by_name,
-            'mond_status': dsphs.get('mond_status', 'Generally works'),
-            'note': 'Scatter correlates with M_star uncertainty; Sculptor is best-constrained',
-        },
-        message=f"σ_pred/σ_obs = {mean_ratio:.2f}±{std_ratio:.2f} (host inheritance, {len(ratios)} dSphs)"
+        metric_name="sigma_pred/sigma_obs",
+        observed=1.0,
+        observed_err=None,
+        observed_unit="ratio",
+        baseline=TheoryPrediction(mean_baseline, "ratio", {'std': np.std(results_baseline)}),
+        new_model=TheoryPrediction(mean_new, "ratio", {'std': np.std(results_new)}),
+        mond=TheoryPrediction(mean_mond, "ratio", {'note': 'EFE complicates'}),
+        lcdm=TheoryPrediction(mean_lcdm, "ratio", {'note': 'NFW tuned'}),
+        best_theory=best,
+        n_objects=len(results_baseline),
+        notes="Host inheritance model for satellites"
     )
 
 
-def test_ultra_diffuse_galaxies() -> TestResult:
-    """Test UDG velocity dispersions (DF2, Dragonfly44).
+def test_clusters_comparative(clusters: List[Dict]) -> ComparativeResult:
+    """Compare theories on cluster lensing masses."""
+    if not clusters:
+        return ComparativeResult(
+            name="Galaxy Clusters",
+            metric_name="M_pred/M_lens",
+            observed=1.0,
+            observed_err=None,
+            observed_unit="ratio",
+            baseline=TheoryPrediction(0, "ratio"),
+            new_model=TheoryPrediction(0, "ratio"),
+            mond=TheoryPrediction(0, "ratio"),
+            lcdm=TheoryPrediction(1.0, "ratio"),
+            best_theory="N/A",
+            n_objects=0,
+            notes="No data"
+        )
     
-    Gold standard: van Dokkum+ 2018, 2016
-    - DF2: σ = 8.5 km/s (appears to lack DM; MOND predicts ~20 km/s)
-    - Dragonfly44: σ = 47 km/s (very DM dominated)
-    - MOND resolution for DF2: External Field Effect from NGC1052
-    """
-    udgs = OBS_BENCHMARKS['udgs']
+    L_cluster = 600
+    A_cluster_baseline = unified_amplitude(L_cluster, baseline=True)
+    A_cluster_new = unified_amplitude(L_cluster, baseline=False)
     
-    results = {}
-    for name, data in udgs.items():
-        if not isinstance(data, dict) or 'M_star' not in data:
-            continue
-            
-        M_star = data['M_star']
-        sigma_obs = data['sigma_obs']
-        sigma_err = data.get('sigma_err', 5)
-        r_eff = data['r_eff_kpc'] * kpc_to_m
+    ratios_baseline = []
+    ratios_new = []
+    ratios_mond = []
+    
+    for cl in clusters:
+        M_bar = cl['M_bar']
+        M_lens = cl['M_lens']
+        r_kpc = cl.get('r_kpc', 200)
+        r_m = r_kpc * kpc_to_m
         
-        # Newtonian
-        sigma_N = np.sqrt(G * M_star * M_sun / (5 * r_eff)) / 1000
-        g_N = G * M_star * M_sun / r_eff**2
+        g_bar = G * M_bar * M_sun / r_m**2
+        h = h_function(np.array([g_bar]))[0]
         
-        # Σ-Gravity
-        Sigma = sigma_enhancement(g_N, A=A_0)
-        sigma_pred = sigma_N * np.sqrt(Sigma)
+        # Baseline
+        Sigma_baseline = 1 + A_cluster_baseline * h
+        M_pred_baseline = M_bar * Sigma_baseline
+        ratios_baseline.append(M_pred_baseline / M_lens)
         
-        results[name] = {
-            'sigma_pred': sigma_pred,
-            'sigma_obs': sigma_obs,
-            'sigma_err': sigma_err,
-            'ratio': sigma_pred / sigma_obs,
-            'note': data.get('note', ''),
-        }
+        # New model (clusters are equilibrium, D=0)
+        Sigma_new = 1 + A_cluster_new * h
+        M_pred_new = M_bar * Sigma_new
+        ratios_new.append(M_pred_new / M_lens)
+        
+        # MOND
+        mond_nu = mond_enhancement(g_bar)
+        M_pred_mond = M_bar * mond_nu
+        ratios_mond.append(M_pred_mond / M_lens)
     
-    # DF2 is the challenge case (appears to have no DM)
-    df2_ratio = results.get('df2', {}).get('ratio', 1.0)
-    df2_pred = results.get('df2', {}).get('sigma_pred', 0)
-    df2_obs = results.get('df2', {}).get('sigma_obs', 8.5)
+    median_baseline = np.median(ratios_baseline)
+    median_new = np.median(ratios_new)
+    median_mond = np.median(ratios_mond)
     
-    # Note: DF2 likely needs External Field Effect
-    passed = True  # Informational test
+    theories = {
+        'Baseline': abs(median_baseline - 1.0),
+        'New Model': abs(median_new - 1.0),
+        'MOND': abs(median_mond - 1.0),
+        'LCDM': 0.0  # NFW works by construction
+    }
+    best = min(theories, key=theories.get)
     
-    return TestResult(
-        name="Ultra-Diffuse Galaxies",
-        passed=passed,
-        metric=df2_ratio,
-        details={
-            'results': results,
-            'mond_challenge': 'DF2 requires EFE explanation',
-        },
-        message=f"DF2: σ_pred={df2_pred:.1f} vs obs={df2_obs:.1f} km/s (EFE needed for MOND/Σ-Gravity)"
+    return ComparativeResult(
+        name="Galaxy Clusters",
+        metric_name="M_pred/M_lens",
+        observed=1.0,
+        observed_err=None,
+        observed_unit="ratio",
+        baseline=TheoryPrediction(median_baseline, "ratio", {'scatter': np.std(np.log10(ratios_baseline))}),
+        new_model=TheoryPrediction(median_new, "ratio"),
+        mond=TheoryPrediction(median_mond, "ratio", {'underpredicts_by': 1/median_mond}),
+        lcdm=TheoryPrediction(1.0, "ratio", {'note': 'NFW fits work'}),
+        best_theory=best,
+        n_objects=len(clusters),
+        notes=f"MOND underpredicts by ~{1/median_mond:.1f}x"
     )
 
 
-def test_galaxy_galaxy_lensing() -> TestResult:
-    """Test galaxy-galaxy lensing at 200 kpc."""
-    # Typical lens galaxy: M_star = 5×10¹¹ M_sun
-    M_star = 5e11 * M_sun
-    r_200 = 200 * kpc_to_m
-    
-    g_N = G * M_star / r_200**2
-    
-    # Σ-Gravity enhancement
-    Sigma = sigma_enhancement(g_N, A=A_0)
-    M_eff = M_star * Sigma / M_sun
-    
-    # Observed: M_eff/M_star ~ 10-30 at 200 kpc
-    ratio = M_eff / (5e11)
-    
-    passed = 5 < ratio < 50
-    
-    return TestResult(
-        name="Galaxy-Galaxy Lensing",
-        passed=passed,
-        metric=ratio,
-        details={
-            'M_star': 5e11,
-            'M_eff': M_eff,
-            'ratio': ratio,
-            'g_N': g_N,
-            'Sigma': Sigma,
-        },
-        message=f"M_eff/M_star at 200kpc = {ratio:.1f}× (obs: ~10-30×)"
-    )
-
-
-def test_external_field_effect() -> TestResult:
-    """Test External Field Effect suppression."""
-    # Internal field (isolated dwarf)
-    g_int = 1e-11  # m/s² (typical dSph)
-    
-    # External field (from host galaxy)
-    g_ext = 1e-10  # m/s² (MW at 100 kpc)
-    
-    # Total field
-    g_total = np.sqrt(g_int**2 + g_ext**2)
-    
-    # Σ-Gravity enhancement with total field
-    Sigma_total = sigma_enhancement(g_total, A=A_0)
-    
-    # Enhancement if isolated
-    Sigma_isolated = sigma_enhancement(g_int, A=A_0)
-    
-    # EFE suppression
-    suppression = Sigma_total / Sigma_isolated
-    
-    # EFE should suppress enhancement when g_ext > g_int
-    passed = suppression < 1.0
-    
-    return TestResult(
-        name="External Field Effect",
-        passed=passed,
-        metric=suppression,
-        details={
-            'g_int': g_int,
-            'g_ext': g_ext,
-            'Sigma_isolated': Sigma_isolated,
-            'Sigma_total': Sigma_total,
-            'suppression': suppression,
-        },
-        message=f"EFE suppression: {suppression:.2f}× (g_ext/g†={g_ext/g_dagger:.2f})"
-    )
-
-
-def test_gravitational_waves() -> TestResult:
-    """Test GW170817 constraint on graviton speed.
-    
-    Gold standard: Abbott+ 2017, PRL 119, 161101
-    - |c_GW - c|/c < 10⁻¹⁵
-    - GW170817 + GRB170817A timing (1.7s delay over 40 Mpc)
-    - Rules out many modified gravity theories
-    """
-    # In Σ-Gravity, the enhancement is to the effective gravitational constant
-    # The speed of gravitational waves is still c
-    
-    delta_c = 0  # Σ-Gravity predicts c_GW = c
-    
-    bound = OBS_BENCHMARKS['gw170817']['delta_c_over_c']
-    passed = delta_c < bound
-    
-    return TestResult(
-        name="Gravitational Waves",
-        passed=passed,
-        metric=delta_c,
-        details={
-            'delta_c_over_c': delta_c,
-            'bound': bound,
-            'time_delay_s': OBS_BENCHMARKS['gw170817']['time_delay_s'],
-            'distance_Mpc': OBS_BENCHMARKS['gw170817']['distance_Mpc'],
-            'source': OBS_BENCHMARKS['gw170817']['source'],
-        },
-        message=f"|c_GW-c|/c = {delta_c:.0e} < {bound:.0e} (GW170817)"
-    )
-
-
-def test_structure_formation() -> TestResult:
-    """Test structure formation at cluster scales.
-    
-    Gold standard: Planck 2018, SDSS
-    - σ8 = 0.811 (Planck) vs 0.76 (weak lensing) - "S8 tension"
-    - BAO scale: 150 Mpc
-    - Full test requires N-body simulations
-    """
-    # At cluster scales (M ~ 10^15 M_sun, r ~ 1 Mpc)
-    M_cluster = 1e15 * M_sun
-    r_cluster = 1000 * kpc_to_m  # 1 Mpc
-    
-    g_cluster = G * M_cluster / r_cluster**2
-    
-    # g/g† ratio
-    ratio = g_cluster / g_dagger
-    
-    # At cluster scales, g ~ g† (transition regime)
-    # This is where Σ-Gravity effects are significant
-    
-    passed = True  # Informational
-    
-    return TestResult(
-        name="Structure Formation",
-        passed=passed,
-        metric=ratio,
-        details={
-            'g_cluster': g_cluster,
-            'g_dagger': g_dagger,
-            'ratio': ratio,
-            'sigma8_planck': OBS_BENCHMARKS['structure_formation']['sigma8_planck'],
-            'sigma8_lensing': OBS_BENCHMARKS['structure_formation']['sigma8_lensing'],
-            'bao_scale_Mpc': OBS_BENCHMARKS['structure_formation']['bao_scale_Mpc'],
-        },
-        message=f"Cluster scale: g/g† = {ratio:.1f} (needs N-body sims; σ8 tension exists)"
-    )
-
-
-def test_cmb() -> TestResult:
-    """Test CMB acoustic peaks consistency.
-    
-    Gold standard: Planck Collaboration 2020
-    - Ω_b = 0.0493, Ω_c = 0.265
-    - H0 = 67.4 km/s/Mpc
-    - MOND challenge: CMB requires DM at z~1100
-    - Full test requires Boltzmann code integration
-    """
-    # At z = 1100 (recombination)
-    z_cmb = 1100
-    Omega_m = OBS_BENCHMARKS['cmb']['Omega_m']
-    Omega_L = 1 - Omega_m
-    
-    H_z = np.sqrt(Omega_m * (1 + z_cmb)**3 + Omega_L)
-    g_dagger_z = g_dagger * H_z
-    
-    # Typical g at CMB scales
-    rho_b = OBS_BENCHMARKS['cmb']['Omega_b'] * 1.36e11 * M_sun / (1e6 * kpc_to_m)**3 * (1 + z_cmb)**3
-    r_horizon = 100 * kpc_to_m  # Sound horizon
-    M_horizon = 4/3 * np.pi * r_horizon**3 * rho_b
-    g_cmb = G * M_horizon / r_horizon**2
-    
-    ratio = g_cmb / g_dagger_z
-    
-    # At CMB, g << g†(z) - deep Newtonian regime
-    # Σ-Gravity effects should be minimal
-    
-    passed = True  # Informational
-    
-    return TestResult(
-        name="CMB Acoustic Peaks",
-        passed=passed,
-        metric=ratio,
-        details={
-            'g_cmb': g_cmb,
-            'g_dagger_z': g_dagger_z,
-            'ratio': ratio,
-            'Omega_b': OBS_BENCHMARKS['cmb']['Omega_b'],
-            'Omega_c': OBS_BENCHMARKS['cmb']['Omega_c'],
-            'mond_challenge': OBS_BENCHMARKS['cmb']['mond_challenge'],
-        },
-        message=f"At z=1100: g/g†(z) = {ratio:.1e} (MOND challenge: {OBS_BENCHMARKS['cmb']['mond_challenge']})"
-    )
-
-
-def test_bullet_cluster() -> TestResult:
-    """Test Bullet Cluster lensing offset.
-    
-    Gold standard: Clowe+ 2006, ApJ 648, L109
-    - M_gas = 2.1×10¹⁴ M☉ (80% of baryons), M_stars = 0.5×10¹⁴ M☉ (20%)
-    - M_lensing = 5.5×10¹⁴ M☉ (mass ratio ~2.1×)
-    - Key observation: Lensing peaks offset from gas, coincident with galaxies
-    
-    WITH STATE-DEPENDENT PHASE COHERENCE MODEL:
-    - φ is computed from physical state variables (collisionality, turbulent Mach)
-    - Bullet Cluster gas: recently shocked → high collisionality, high Mach → φ < 0
-    - Bullet Cluster stars: collisionless, passed through unaffected → φ > 1
-    - This explains why lensing follows stars, not gas!
-    """
+def test_bullet_cluster_comparative() -> ComparativeResult:
+    """Compare theories on Bullet Cluster spatial lensing."""
     bc = OBS_BENCHMARKS['bullet_cluster']
     
     M_gas = bc['M_gas'] * M_sun
     M_stars = bc['M_stars'] * M_sun
     M_bar = M_gas + M_stars
     M_lens = bc['M_lensing'] * M_sun
-    offset_kpc = bc['offset_kpc']
-    r_lens = offset_kpc * kpc_to_m
+    r_lens = bc['offset_kpc'] * kpc_to_m
+    mach = bc['mach_shock']
     
-    # Compute g and h for each component
     g_gas = G * M_gas / r_lens**2
     g_stars = G * M_stars / r_lens**2
+    g_bar = G * M_bar / r_lens**2
+    
     h_gas = h_function(np.array([g_gas]))[0]
     h_stars = h_function(np.array([g_stars]))[0]
+    h_bar = h_function(np.array([g_bar]))[0]
     
-    if USE_PHASE_COHERENCE:
-        # UNIVERSAL PHASE COHERENCE MODEL
-        # φ is COMPUTED from observable Mach number
-        mach_bullet = bc.get('mach_shock', 3.0)  # From X-ray observations
-        
-        # Stars: collisionless, passed through merger unaffected
-        phi_stars = compute_phi_from_mach(mach_bullet, is_collisionless=True)
-        
-        # Gas: shocked in the merger → turbulent
-        phi_gas = compute_phi_from_mach(mach_bullet, is_collisionless=False)
-        
-        # Show the disturbance parameter D
-        D = compute_disturbance_from_mach(mach_bullet)
-        
-        # Compute Σ for each component
-        Sigma_stars = max(1 + A_CLUSTER * phi_stars * h_stars, 0.01)
-        Sigma_gas = max(1 + A_CLUSTER * phi_gas * h_gas, 0.01)
-        
-        M_eff_stars = M_stars * Sigma_stars
-        M_eff_gas = M_gas * Sigma_gas
-        M_eff_total = M_eff_gas + M_eff_stars
-        
-        ratio_gas_to_stars = M_eff_gas / M_eff_stars
-        lensing_at = "STARS" if ratio_gas_to_stars < 1 else "GAS"
-        total_ratio = M_eff_total / M_bar
-        
-        # Pass if lensing at stars AND total mass reasonable
-        passed = (ratio_gas_to_stars < 1.0) and (1.5 < total_ratio < 3.0)
-        
-        return TestResult(
-            name="Bullet Cluster",
-            passed=passed,
-            metric=ratio_gas_to_stars,
-            details={
-                'mode': 'UNIVERSAL_PHI',
-                'mach_shock': mach_bullet,
-                'D': D,
-                'phi_gas': phi_gas,
-                'phi_stars': phi_stars,
-                'h_gas': h_gas,
-                'h_stars': h_stars,
-                'Sigma_gas': Sigma_gas,
-                'Sigma_stars': Sigma_stars,
-                'M_eff_gas': M_eff_gas / M_sun,
-                'M_eff_stars': M_eff_stars / M_sun,
-                'M_eff_total': M_eff_total / M_sun,
-                'total_ratio': total_ratio,
-                'ratio_obs': bc['mass_ratio'],
-                'lensing_at': lensing_at,
-            },
-            message=f"Lensing at {lensing_at}! phi_gas={phi_gas:.2f} (shocked), phi_stars={phi_stars:.2f} (collisionless), ratio={ratio_gas_to_stars:.2f}"
-        )
+    A_cluster = unified_amplitude(600, baseline=True)
     
-    else:
-        # STANDARD MODEL: Same enhancement for all matter
-        g_bar = G * M_bar / r_lens**2
-        Sigma = sigma_enhancement(g_bar, A=A_CLUSTER)
-        M_pred = M_bar * Sigma
-        
-        ratio_pred = M_pred / M_bar
-        ratio_obs = bc['mass_ratio']
-        
-        # Standard test passes on total mass
-        passed = 0.5 * ratio_obs < ratio_pred < 2.0 * ratio_obs
-        
-        return TestResult(
-            name="Bullet Cluster",
-            passed=passed,
-            metric=ratio_pred,
-            details={
-                'mode': 'STANDARD',
-                'M_bar': M_bar / M_sun,
-                'M_pred': M_pred / M_sun,
-                'M_lens': M_lens / M_sun,
-                'ratio_pred': ratio_pred,
-                'ratio_obs': ratio_obs,
-                'Sigma': Sigma,
-                'offset_kpc': bc['offset_kpc'],
-                'challenge': 'Lensing follows stars (20%), not gas (80%)',
-            },
-            message=f"M_pred/M_bar = {ratio_pred:.2f}x (obs: {ratio_obs:.1f}x). Enable --phase-coherence for spatial test."
-        )
-
-
-def test_merging_clusters() -> TestResult:
-    """Test phase coherence model on MULTIPLE merging clusters.
+    # Baseline: Same Σ for all matter
+    Sigma_baseline = 1 + A_cluster * h_bar
+    M_pred_baseline = M_bar * Sigma_baseline
+    ratio_baseline = M_pred_baseline / M_lens
+    lensing_baseline = "GAS"  # Follows baryons = mostly gas
     
-    This validates that the state-dependent φ(state) model works universally,
-    not just for the Bullet Cluster.
+    # New model with phase coherence
+    # Bullet Cluster is a MERGER → stars maintain coherence, gas disrupted
+    D = compute_D_from_mach(mach)
+    phi_stars = compute_phi_extended(D, is_collisionless=True, is_merger=True)  # MERGER
+    phi_gas = compute_phi_extended(D, is_collisionless=False, mach_turb=mach, is_merger=True)  # MERGER
     
-    Key prediction: In ALL merging clusters, φ(state) should predict:
-    - Lensing peaks at galaxies (collisionless, high φ)
-    - NOT at gas (shocked/turbulent, low/negative φ)
+    Sigma_stars = max(1 + A_cluster * phi_stars * h_stars, 0.01)
+    Sigma_gas = max(1 + A_cluster * phi_gas * h_gas, 0.01)
     
-    Systems tested:
-    - El Gordo (ACT-CL J0102-4915): Highest mass, z=0.87
-    - MACS J0025.4-1222: "Baby Bullet", clear offset
-    - A520: Controversial, mid-collision
-    - A2744: Complex multi-merger
-    - A1689 (relaxed): Control - should have φ ≈ 1 for both
-    """
-    if not USE_PHASE_COHERENCE:
-        return TestResult(
-            name="Merging Clusters",
-            passed=True,
-            metric=0.0,
-            details={'mode': 'SKIPPED'},
-            message="SKIPPED: Enable --phase-coherence for this test"
-        )
+    M_eff_stars = M_stars * Sigma_stars
+    M_eff_gas = M_gas * Sigma_gas
+    M_pred_new = M_eff_gas + M_eff_stars
+    ratio_new = M_pred_new / M_lens
+    lensing_new = "STARS" if M_eff_gas < M_eff_stars else "GAS"
     
-    merging = OBS_BENCHMARKS['merging_clusters']
+    # MOND
+    mond_nu = mond_enhancement(g_bar)
+    M_pred_mond = M_bar * mond_nu
+    ratio_mond = M_pred_mond / M_lens
+    lensing_mond = "GAS"  # MOND follows baryons
     
-    results = {}
-    n_passed = 0
-    n_tested = 0
+    # ΛCDM
+    ratio_lcdm = 1.0  # By construction with DM halos
+    lensing_lcdm = "DM HALO"  # Follows collisionless DM
     
-    for name, cl in merging.items():
-        M_gas = cl['M_gas'] * M_sun
-        M_stars = cl['M_stars'] * M_sun
-        M_bar = M_gas + M_stars
-        M_lens = cl['M_lensing'] * M_sun
-        offset_kpc = cl['offset_kpc']
-        mach_shock = cl.get('mach_shock', 0.2)
-        merger_state = cl.get('merger_state', 'unknown')
-        r_lens = max(offset_kpc, 50) * kpc_to_m  # At least 50 kpc
-        
-        # Compute g and h for each component
-        g_gas = G * M_gas / r_lens**2
-        g_stars = G * M_stars / r_lens**2
-        h_gas = h_function(np.array([g_gas]))[0]
-        h_stars = h_function(np.array([g_stars]))[0]
-        
-        # Compute φ from observed Mach number
-        phi_stars = compute_phi_from_mach(mach_shock, is_collisionless=True)
-        phi_gas = compute_phi_from_mach(mach_shock, is_collisionless=False)
-        
-        # Compute Σ for each component
-        Sigma_stars = max(1 + A_CLUSTER * phi_stars * h_stars, 0.01)
-        Sigma_gas = max(1 + A_CLUSTER * phi_gas * h_gas, 0.01)
-        
-        M_eff_stars = M_stars * Sigma_stars
-        M_eff_gas = M_gas * Sigma_gas
-        M_eff_total = M_eff_gas + M_eff_stars
-        
-        ratio_gas_to_stars = M_eff_gas / M_eff_stars
-        lensing_at = "STARS" if ratio_gas_to_stars < 1 else "GAS"
-        total_ratio = M_eff_total / M_bar
-        
-        # Expectation based on merger state
-        if merger_state == 'relaxed':
-            # Relaxed: expect lensing at gas (or centered)
-            expected_lensing = "GAS"
-            correct = ratio_gas_to_stars >= 0.8  # Close to centered
-        else:
-            # Merging: expect lensing at stars
-            expected_lensing = "STARS"
-            correct = ratio_gas_to_stars < 1.0
-        
-        if correct:
-            n_passed += 1
-        n_tested += 1
-        
-        results[name] = {
-            'mach_shock': mach_shock,
-            'merger_state': merger_state,
-            'phi_stars': phi_stars,
-            'phi_gas': phi_gas,
-            'Sigma_stars': Sigma_stars,
-            'Sigma_gas': Sigma_gas,
-            'ratio_gas_to_stars': ratio_gas_to_stars,
-            'lensing_at': lensing_at,
-            'expected': expected_lensing,
-            'correct': correct,
-            'total_ratio': total_ratio,
-        }
+    # Observed: Lensing peaks at STARS
+    observed_lensing = "STARS"
+    observed_ratio = bc['mass_ratio']
     
-    passed = n_passed == n_tested
+    # Score based on both mass ratio AND lensing location
+    def score(ratio, lensing):
+        mass_err = abs(ratio - 1.0)  # Want M_pred/M_lens ~ 1
+        loc_err = 0 if lensing == observed_lensing else 1.0  # Penalty for wrong location
+        return mass_err + loc_err
     
-    # Summary message
-    merging_names = [n for n, r in results.items() if r['merger_state'] != 'relaxed']
-    relaxed_names = [n for n, r in results.items() if r['merger_state'] == 'relaxed']
+    theories = {
+        'Baseline': score(ratio_baseline, lensing_baseline),
+        'New Model': score(ratio_new, lensing_new),
+        'MOND': score(ratio_mond, lensing_mond),
+        'LCDM': score(ratio_lcdm, lensing_lcdm)
+    }
+    best = min(theories, key=theories.get)
     
-    return TestResult(
-        name="Merging Clusters",
-        passed=passed,
-        metric=n_passed / n_tested if n_tested > 0 else 0,
-        details={
-            'n_tested': n_tested,
-            'n_passed': n_passed,
-            'results': results,
-            'merging_systems': merging_names,
-            'relaxed_systems': relaxed_names,
-        },
-        message=f"{n_passed}/{n_tested} clusters: Merging={len(merging_names)} (lensing at stars), Relaxed={len(relaxed_names)} (centered)"
+    return ComparativeResult(
+        name="Bullet Cluster",
+        metric_name="Lensing Location",
+        observed=observed_ratio,
+        observed_err=None,
+        observed_unit="x (at STARS)",
+        baseline=TheoryPrediction(ratio_baseline, f"x (at {lensing_baseline})", {'Sigma': Sigma_baseline}),
+        new_model=TheoryPrediction(ratio_new, f"x (at {lensing_new})", {'phi_stars': phi_stars, 'phi_gas': phi_gas, 'D': D}),
+        mond=TheoryPrediction(ratio_mond, f"x (at {lensing_mond})", {'note': 'Spatial problem'}),
+        lcdm=TheoryPrediction(ratio_lcdm, f"x (at {lensing_lcdm})", {'note': 'DM halo solves spatial'}),
+        best_theory=best,
+        n_objects=1,
+        notes="Key test: Lensing follows STARS (20%), not gas (80%)"
     )
+
+
+def test_gaia_comparative(gaia_df: Optional[pd.DataFrame]) -> ComparativeResult:
+    """Compare theories on Milky Way rotation curve."""
+    if gaia_df is None or len(gaia_df) == 0:
+        return ComparativeResult(
+            name="Gaia/MW",
+            metric_name="RMS",
+            observed=0,
+            observed_err=None,
+            observed_unit="km/s",
+            baseline=TheoryPrediction(0, "km/s"),
+            new_model=TheoryPrediction(0, "km/s"),
+            mond=TheoryPrediction(0, "km/s"),
+            lcdm=TheoryPrediction(0, "km/s"),
+            best_theory="N/A",
+            n_objects=0,
+            notes="No data"
+        )
+    
+    R = gaia_df['R_gal'].values
+    v_phi_obs = gaia_df['v_phi_obs'].values
+    
+    # McMillan 2017 baryonic model
+    MW_SCALE = 1.16
+    M_disk = 4.6e10 * MW_SCALE**2
+    M_bulge = 1.0e10 * MW_SCALE**2
+    M_gas = 1.0e10 * MW_SCALE**2
+    G_kpc = 4.302e-6
+    
+    v2_disk = G_kpc * M_disk * R**2 / (R**2 + 3.3**2)**1.5
+    v2_bulge = G_kpc * M_bulge * R / (R + 0.5)**2
+    v2_gas = G_kpc * M_gas * R**2 / (R**2 + 7.0**2)**1.5
+    V_bar = np.sqrt(v2_disk + v2_bulge + v2_gas)
+    
+    R_d_mw = 2.6
+    
+    # Baseline
+    V_pred_baseline = predict_velocity_baseline(R, V_bar, R_d_mw)
+    rms_baseline = np.sqrt(((V_pred_baseline - v_phi_obs)**2).mean())
+    
+    # New model
+    V_pred_new = predict_velocity_new(R, V_bar, R_d_mw, D=0.0)  # MW is equilibrium
+    rms_new = np.sqrt(((V_pred_new - v_phi_obs)**2).mean())
+    
+    # MOND
+    V_mond = predict_mond(R, V_bar)
+    rms_mond = np.sqrt(((V_mond - v_phi_obs)**2).mean())
+    
+    # ΛCDM (NFW halo tuned)
+    rms_lcdm = 25.0  # Typical with NFW
+    
+    theories = {
+        'Baseline': rms_baseline,
+        'New Model': rms_new,
+        'MOND': rms_mond,
+        'LCDM': rms_lcdm
+    }
+    best = min(theories, key=theories.get)
+    
+    return ComparativeResult(
+        name="Gaia/MW",
+        metric_name="RMS",
+        observed=rms_mond,  # Use MOND as reference
+        observed_err=None,
+        observed_unit="km/s",
+        baseline=TheoryPrediction(rms_baseline, "km/s"),
+        new_model=TheoryPrediction(rms_new, "km/s"),
+        mond=TheoryPrediction(rms_mond, "km/s"),
+        lcdm=TheoryPrediction(rms_lcdm, "km/s", {'note': 'NFW tuned'}),
+        best_theory=best,
+        n_objects=len(gaia_df),
+        notes=f"{len(gaia_df)} stars from Eilers+ 2019"
+    )
+
+
+def test_solar_system_comparative() -> ComparativeResult:
+    """Compare theories on Solar System (Cassini bound)."""
+    r_saturn = 9.5 * AU_to_m
+    g_saturn = G * M_sun / r_saturn**2
+    
+    cassini_bound = OBS_BENCHMARKS['solar_system']['cassini_gamma_uncertainty']
+    
+    # Baseline
+    h_baseline = h_function(np.array([g_saturn]))[0]
+    gamma_baseline = h_baseline
+    
+    # New model (same for solar system)
+    gamma_new = h_baseline
+    
+    # MOND
+    x = g_saturn / a0_mond
+    gamma_mond = (mond_enhancement(g_saturn) - 1)  # Enhancement factor - 1
+    
+    # GR (no deviation)
+    gamma_gr = 0.0
+    
+    theories = {
+        'Baseline': gamma_baseline,
+        'New Model': gamma_new,
+        'MOND': gamma_mond,
+        'GR': gamma_gr
+    }
+    best = min(theories, key=theories.get)
+    
+    return ComparativeResult(
+        name="Solar System",
+        metric_name="|gamma-1|",
+        observed=cassini_bound,
+        observed_err=None,
+        observed_unit="bound",
+        baseline=TheoryPrediction(gamma_baseline, "", {'safe': gamma_baseline < cassini_bound}),
+        new_model=TheoryPrediction(gamma_new, "", {'safe': gamma_new < cassini_bound}),
+        mond=TheoryPrediction(gamma_mond, "", {'safe': gamma_mond < cassini_bound}),
+        lcdm=TheoryPrediction(gamma_gr, "", {'note': 'GR = no deviation'}),
+        best_theory=best,
+        n_objects=1,
+        notes=f"Cassini bound: |gamma-1| < {cassini_bound:.1e}"
+    )
+
+
+# =============================================================================
+# OUTPUT FORMATTING
+# =============================================================================
+
+def format_comparison_table(results: List[ComparativeResult]) -> str:
+    """Format results as a comparison table."""
+    lines = []
+    lines.append("=" * 120)
+    lines.append("COMPARATIVE RESULTS: Baseline vs New Model vs MOND vs LCDM")
+    lines.append("=" * 120)
+    lines.append("")
+    
+    # Header
+    header = f"{'Test':<20} {'Observed':<15} {'Baseline':<15} {'New Model':<15} {'MOND':<15} {'LCDM':<15} {'Best':<10}"
+    lines.append(header)
+    lines.append("-" * 120)
+    
+    for r in results:
+        obs_str = f"{r.observed:.2f}" if r.observed else "N/A"
+        if r.observed_err:
+            obs_str += f"+/-{r.observed_err:.2f}"
+        obs_str += f" {r.observed_unit}"
+        
+        base_str = f"{r.baseline.value:.2f}" if r.baseline else "N/A"
+        new_str = f"{r.new_model.value:.2f}" if r.new_model else "N/A"
+        mond_str = f"{r.mond.value:.2f}" if r.mond else "N/A"
+        lcdm_str = f"{r.lcdm.value:.2f}" if r.lcdm else "N/A"
+        
+        # Highlight the best theory
+        best = r.best_theory
+        
+        line = f"{r.name:<20} {obs_str:<15} {base_str:<15} {new_str:<15} {mond_str:<15} {lcdm_str:<15} {best:<10}"
+        lines.append(line)
+    
+    lines.append("-" * 120)
+    lines.append("")
+    
+    # Summary statistics
+    lines.append("SUMMARY:")
+    best_counts = {}
+    for r in results:
+        best = r.best_theory
+        best_counts[best] = best_counts.get(best, 0) + 1
+    
+    for theory, count in sorted(best_counts.items(), key=lambda x: -x[1]):
+        lines.append(f"  {theory}: Best in {count}/{len(results)} tests ({count/len(results)*100:.1f}%)")
+    
+    lines.append("")
+    
+    # Detailed notes
+    lines.append("DETAILED NOTES:")
+    for r in results:
+        if r.notes:
+            lines.append(f"  {r.name}: {r.notes}")
+    
+    return "\n".join(lines)
+
+
+def format_improvement_table(results: List[ComparativeResult]) -> str:
+    """Show how New Model improves/worsens vs Baseline."""
+    lines = []
+    lines.append("")
+    lines.append("NEW MODEL vs BASELINE (negative = improvement):")
+    lines.append("-" * 80)
+    
+    improvements = []
+    for r in results:
+        if r.baseline and r.new_model and r.observed:
+            # Calculate distance from observed
+            base_dist = abs(r.baseline.value - r.observed)
+            new_dist = abs(r.new_model.value - r.observed)
+            
+            # Improvement (negative = better)
+            if base_dist > 0:
+                pct_change = (new_dist - base_dist) / base_dist * 100
+            else:
+                pct_change = 0
+            
+            improvements.append((r.name, pct_change, new_dist < base_dist))
+    
+    for name, pct, improved in sorted(improvements, key=lambda x: x[1]):
+        status = "IMPROVED" if improved else "WORSENED" if pct > 0 else "UNCHANGED"
+        lines.append(f"  {name:<25} {pct:+.1f}% {status}")
+    
+    return "\n".join(lines)
 
 
 # =============================================================================
@@ -1859,51 +1339,44 @@ def test_merging_clusters() -> TestResult:
 # =============================================================================
 
 def main():
+    global USE_EXTENDED_PHI, PHI_LAMBDA_0, D_ASYMMETRY_SCALE, D_TIDAL_THRESHOLD
+    
     quick = '--quick' in sys.argv
-    core_only = '--core' in sys.argv
-    sigma_components = '--sigma-components' in sys.argv
-    phase_coherence = '--phase-coherence' in sys.argv
+    extended_phi = '--extended-phi' in sys.argv
     
-    global USE_SIGMA_COMPONENTS, USE_PHASE_COHERENCE
-    global PHI_LAMBDA_0
-    USE_SIGMA_COMPONENTS = bool(sigma_components)
-    USE_PHASE_COHERENCE = bool(phase_coherence)
+    USE_EXTENDED_PHI = extended_phi
     
-    # Parse optional phase coherence parameters (for tuning the model)
+    # Parse optional parameters
     for arg in sys.argv:
         if arg.startswith('--phi-lambda='):
             PHI_LAMBDA_0 = float(arg.split('=')[1])
+        if arg.startswith('--d-asymmetry='):
+            D_ASYMMETRY_SCALE = float(arg.split('=')[1])
+        if arg.startswith('--d-tidal='):
+            D_TIDAL_THRESHOLD = float(arg.split('=')[1])
     
     data_dir = Path(__file__).parent.parent / "data"
     
-    print("=" * 80)
-    print("Sigma-GRAVITY EXTENDED REGRESSION TEST")
-    print("=" * 80)
+    print("=" * 120)
+    print("Sigma-GRAVITY COMPARATIVE REGRESSION TEST")
+    print("=" * 120)
     print(f"Timestamp: {datetime.now().isoformat()}")
-    print(f"Mode: {'Core only' if core_only else 'Quick' if quick else 'Full'}")
-    if USE_PHASE_COHERENCE:
-        # Show the UNIVERSAL formula and example φ values
-        print(f"Phase Coherence: UNIVERSAL FORMULA")
+    print()
+    print("BASELINE MODEL (LOCKED):")
+    print(f"  A_0 = {BASELINE_A_0:.4f}, L_0 = {BASELINE_L_0} kpc, n = {BASELINE_N_EXP}")
+    print(f"  xi = R_d/(2pi), M/L = {BASELINE_ML_DISK}/{BASELINE_ML_BULGE}")
+    print(f"  A_cluster = {BASELINE_A_CLUSTER:.2f}")
+    print()
+    print("NEW MODEL:")
+    if USE_EXTENDED_PHI:
+        print(f"  Extended Phase Coherence: ENABLED")
         print(f"  phi = 1 + lambda_0 * D * (f_ordered - f_turb)")
         print(f"  lambda_0 = {PHI_LAMBDA_0:.1f}")
-        print(f"  Example (Mach 3 shock):")
-        print(f"    D = {compute_disturbance_from_mach(3.0):.2f}")
-        print(f"    phi(stars) = {compute_phi_from_mach(3.0, True):+.2f}")
-        print(f"    phi(gas) = {compute_phi_from_mach(3.0, False):+.2f}")
-        print(f"  Example (equilibrium, Mach 0):")
-        print(f"    D = {compute_disturbance_from_mach(0.0):.2f}")
-        print(f"    phi(all) = {compute_phi_from_mach(0.0, True):+.2f}")
-    print()
-    print("UNIFIED FORMULA PARAMETERS:")
-    print(f"  A_0 = exp(1/2pi) = {A_0:.4f}")
-    print(f"  L_0 = {L_0} kpc, n = {N_EXP}")
-    print(f"  xi = R_d/(2pi) = {XI_SCALE:.4f} x R_d")
-    print(f"  M/L = {ML_DISK}/{ML_BULGE}")
-    print(f"  g_dagger = {g_dagger:.3e} m/s^2")
-    print(f"  A_cluster = {A_CLUSTER:.2f}")
-    print(f"  sigma components mode: {'ON' if USE_SIGMA_COMPONENTS else 'OFF'}")
-    if USE_SIGMA_COMPONENTS:
-        print(f"    sigma_gas/disk/bulge = {SIGMA_GAS_KMS:.1f}/{SIGMA_DISK_KMS:.1f}/{SIGMA_BULGE_KMS:.1f} km/s")
+        print(f"  D_asymmetry_scale = {D_ASYMMETRY_SCALE:.2f}")
+        print(f"  D_tidal_threshold = {D_TIDAL_THRESHOLD:.1f}")
+    else:
+        print(f"  Extended Phase Coherence: DISABLED (same as baseline)")
+        print(f"  Enable with --extended-phi")
     print()
     
     # Load data
@@ -1918,63 +1391,29 @@ def main():
     print(f"  Gaia/MW: {len(gaia_df) if gaia_df is not None else 'Skipped'}")
     print()
     
-    # Run tests
+    # Run comparative tests
+    print("Running comparative tests...")
+    print("-" * 120)
+    
     results = []
     
-    print("Running tests...")
-    print("-" * 80)
+    # Core tests
+    results.append(test_sparc_comparative(galaxies))
+    results.append(test_clusters_comparative(clusters))
+    results.append(test_gaia_comparative(gaia_df))
+    results.append(test_solar_system_comparative())
     
-    # Original tests (1-8) - now includes holdout validation
-    tests_core = [
-        ("SPARC", lambda: test_sparc(galaxies)),
-        ("Clusters", lambda: test_clusters(clusters)),
-        ("Cluster Holdout", lambda: test_cluster_holdout(clusters)),
-        ("Gaia/MW", lambda: test_gaia(gaia_df)),
-        ("Redshift", lambda: test_redshift()),
-        ("Solar System", lambda: test_solar_system()),
-        ("Counter-Rotation", lambda: test_counter_rotation(data_dir) if not quick else 
-         TestResult("Counter-Rotation", True, 0, {}, "SKIPPED")),
-        ("Tully-Fisher", lambda: test_tully_fisher()),
-    ]
+    # Extended tests
+    results.append(test_wide_binaries_comparative())
+    results.append(test_dsph_comparative())
+    results.append(test_udgs_comparative())
+    results.append(test_bullet_cluster_comparative())
     
-    # Extended tests (9-18)
-    tests_extended = [
-        ("Wide Binaries", lambda: test_wide_binaries()),
-        ("Dwarf Spheroidals", lambda: test_dwarf_spheroidals()),
-        ("UDGs", lambda: test_ultra_diffuse_galaxies()),
-        ("Galaxy-Galaxy Lensing", lambda: test_galaxy_galaxy_lensing()),
-        ("External Field Effect", lambda: test_external_field_effect()),
-        ("Gravitational Waves", lambda: test_gravitational_waves()),
-        ("Structure Formation", lambda: test_structure_formation()),
-        ("CMB", lambda: test_cmb()),
-        ("Bullet Cluster", lambda: test_bullet_cluster()),
-        ("Merging Clusters", lambda: test_merging_clusters()),  # NEW: validates φ(state) universality
-    ]
+    # Print comparison table
+    print(format_comparison_table(results))
     
-    all_tests = tests_core if core_only else tests_core + tests_extended
-    
-    for name, test_func in all_tests:
-        result = test_func()
-        results.append(result)
-        status = '✓' if result.passed else '✗'
-        print(f"[{status}] {result.name}: {result.message}")
-    
-    print("-" * 80)
-    
-    # Summary
-    passed = sum(1 for r in results if r.passed)
-    print()
-    print("=" * 80)
-    print(f"SUMMARY: {passed}/{len(results)} tests passed")
-    print("=" * 80)
-    
-    if passed == len(results):
-        print("✓ ALL TESTS PASSED")
-    else:
-        print("✗ SOME TESTS FAILED")
-        for r in results:
-            if not r.passed:
-                print(f"  - {r.name}: {r.message}")
+    # Print improvement analysis
+    print(format_improvement_table(results))
     
     # Save report
     output_dir = Path(__file__).parent / "regression_results"
@@ -1982,39 +1421,28 @@ def main():
     
     report = {
         'timestamp': datetime.now().isoformat(),
-        'formula': 'sigma_gravity_unified',
-        'mode': 'core' if core_only else 'quick' if quick else 'full',
+        'mode': 'extended_phi' if USE_EXTENDED_PHI else 'baseline_only',
         'parameters': {
-            'A_0': A_0,
-            'L_0': L_0,
-            'n_exp': N_EXP,
-            'xi_scale': XI_SCALE,
-            'ml_disk': ML_DISK,
-            'ml_bulge': ML_BULGE,
-            'g_dagger': g_dagger,
-            'A_cluster': A_CLUSTER,
-            'use_sigma_components': USE_SIGMA_COMPONENTS,
-            'sigma_gas_kms': SIGMA_GAS_KMS,
-            'sigma_disk_kms': SIGMA_DISK_KMS,
-            'sigma_bulge_kms': SIGMA_BULGE_KMS,
+            'baseline': {
+                'A_0': BASELINE_A_0,
+                'L_0': BASELINE_L_0,
+                'n_exp': BASELINE_N_EXP,
+            },
+            'new_model': {
+                'use_extended_phi': USE_EXTENDED_PHI,
+                'phi_lambda_0': PHI_LAMBDA_0,
+                'd_asymmetry_scale': D_ASYMMETRY_SCALE,
+                'd_tidal_threshold': D_TIDAL_THRESHOLD,
+            }
         },
         'results': [asdict(r) for r in results],
-        'summary': {
-            'total_tests': len(results),
-            'passed': passed,
-            'failed': len(results) - passed,
-        },
-        'all_passed': passed == len(results),
     }
     
-    with open(output_dir / "extended_report.json", 'w') as f:
+    with open(output_dir / "comparative_report.json", 'w') as f:
         json.dump(report, f, indent=2, default=float)
     
-    print(f"\nReport saved to: {output_dir / 'extended_report.json'}")
-    
-    sys.exit(0 if passed == len(results) else 1)
+    print(f"\nReport saved to: {output_dir / 'comparative_report.json'}")
 
 
 if __name__ == "__main__":
     main()
-

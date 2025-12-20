@@ -1,0 +1,314 @@
+{
+  "timestamp": "2025-12-20T09:02:03.943889",
+  "mode": "extended_phi",
+  "parameters": {
+    "baseline": {
+      "A_0": 1.17251960642002,
+      "L_0": 0.4,
+      "n_exp": 0.27
+    },
+    "new_model": {
+      "use_extended_phi": true,
+      "phi_lambda_0": 7.0,
+      "d_asymmetry_scale": 0.8,
+      "d_tidal_threshold": 10.0
+    }
+  },
+  "results": [
+    {
+      "name": "SPARC Galaxies",
+      "metric_name": "RMS",
+      "observed": 17.154025922937112,
+      "observed_err": null,
+      "observed_unit": "km/s",
+      "baseline": {
+        "value": 17.415478722054278,
+        "unit": "km/s",
+        "details": {
+          "win_rate": 0.4269005847953216
+        }
+      },
+      "new_model": {
+        "value": 17.290192255966815,
+        "unit": "km/s",
+        "details": {
+          "D_used": true
+        }
+      },
+      "mond": {
+        "value": 17.154025922937112,
+        "unit": "km/s",
+        "details": {}
+      },
+      "lcdm": {
+        "value": 15.0,
+        "unit": "km/s",
+        "details": {
+          "note": "2-3 params/galaxy"
+        }
+      },
+      "best_theory": "LCDM",
+      "n_objects": 171,
+      "notes": "Win rates: Baseline beats MOND 42.7%"
+    },
+    {
+      "name": "Galaxy Clusters",
+      "metric_name": "M_pred/M_lens",
+      "observed": 1.0,
+      "observed_err": null,
+      "observed_unit": "ratio",
+      "baseline": {
+        "value": 0.9871624332060389,
+        "unit": "ratio",
+        "details": {
+          "scatter": 0.13242324291818125
+        }
+      },
+      "new_model": {
+        "value": 0.9871624332060389,
+        "unit": "ratio",
+        "details": {}
+      },
+      "mond": {
+        "value": 0.3893990782130966,
+        "unit": "ratio",
+        "details": {
+          "underpredicts_by": 2.5680594946163566
+        }
+      },
+      "lcdm": {
+        "value": 1.0,
+        "unit": "ratio",
+        "details": {
+          "note": "NFW fits work"
+        }
+      },
+      "best_theory": "LCDM",
+      "n_objects": 42,
+      "notes": "MOND underpredicts by ~2.6x"
+    },
+    {
+      "name": "Gaia/MW",
+      "metric_name": "RMS",
+      "observed": 38.65626174053483,
+      "observed_err": null,
+      "observed_unit": "km/s",
+      "baseline": {
+        "value": 33.814750864626845,
+        "unit": "km/s",
+        "details": {}
+      },
+      "new_model": {
+        "value": 33.814750864626845,
+        "unit": "km/s",
+        "details": {}
+      },
+      "mond": {
+        "value": 38.65626174053483,
+        "unit": "km/s",
+        "details": {}
+      },
+      "lcdm": {
+        "value": 25.0,
+        "unit": "km/s",
+        "details": {
+          "note": "NFW tuned"
+        }
+      },
+      "best_theory": "LCDM",
+      "n_objects": 28368,
+      "notes": "28368 stars from Eilers+ 2019"
+    },
+    {
+      "name": "Solar System",
+      "metric_name": "|gamma-1|",
+      "observed": 2.3e-05,
+      "observed_err": null,
+      "observed_unit": "bound",
+      "baseline": {
+        "value": 1.7650918961610334e-09,
+        "unit": "",
+        "details": {
+          "safe": 1.0
+        }
+      },
+      "new_model": {
+        "value": 1.7650918961610334e-09,
+        "unit": "",
+        "details": {
+          "safe": 1.0
+        }
+      },
+      "mond": {
+        "value": 0.0,
+        "unit": "",
+        "details": {
+          "safe": 1.0
+        }
+      },
+      "lcdm": {
+        "value": 0.0,
+        "unit": "",
+        "details": {
+          "note": "GR = no deviation"
+        }
+      },
+      "best_theory": "MOND",
+      "n_objects": 1,
+      "notes": "Cassini bound: |gamma-1| < 2.3e-05"
+    },
+    {
+      "name": "Wide Binaries",
+      "metric_name": "Boost Factor",
+      "observed": 1.35,
+      "observed_err": 0.1,
+      "observed_unit": "x",
+      "baseline": {
+        "value": 1.6320490128970924,
+        "unit": "x",
+        "details": {
+          "overpredicts": 1.0
+        }
+      },
+      "new_model": {
+        "value": 1.6036068073167233,
+        "unit": "x",
+        "details": {
+          "D": 0.15,
+          "phi": 0.955
+        }
+      },
+      "mond": {
+        "value": 1.732241706448329,
+        "unit": "x",
+        "details": {}
+      },
+      "lcdm": {
+        "value": 1.0,
+        "unit": "x",
+        "details": {
+          "note": "No boost"
+        }
+      },
+      "best_theory": "New Model",
+      "n_objects": 26500,
+      "notes": "Chae 2023: 1.35x at >2000 AU"
+    },
+    {
+      "name": "Dwarf Spheroidals",
+      "metric_name": "sigma_pred/sigma_obs",
+      "observed": 1.0,
+      "observed_err": null,
+      "observed_unit": "ratio",
+      "baseline": {
+        "value": 0.8701534304791707,
+        "unit": "ratio",
+        "details": {
+          "std": 0.6252832719666661
+        }
+      },
+      "new_model": {
+        "value": 0.8701534304791707,
+        "unit": "ratio",
+        "details": {
+          "std": 0.6252832719666661
+        }
+      },
+      "mond": {
+        "value": 0.6336949438121028,
+        "unit": "ratio",
+        "details": {
+          "note": "EFE complicates"
+        }
+      },
+      "lcdm": {
+        "value": 1.0,
+        "unit": "ratio",
+        "details": {
+          "note": "NFW tuned"
+        }
+      },
+      "best_theory": "LCDM",
+      "n_objects": 5,
+      "notes": "Host inheritance model for satellites"
+    },
+    {
+      "name": "DF2 (UDG)",
+      "metric_name": "Velocity Dispersion",
+      "observed": 8.5,
+      "observed_err": 2.3,
+      "observed_unit": "km/s",
+      "baseline": {
+        "value": 20.769590891311665,
+        "unit": "km/s",
+        "details": {
+          "Sigma": 5.5156094879458895
+        }
+      },
+      "new_model": {
+        "value": 18.94947855784039,
+        "unit": "km/s",
+        "details": {
+          "D": 0.6823343764595277,
+          "phi": 0.7952996870621417,
+          "Sigma": 4.591262812658203
+        }
+      },
+      "mond": {
+        "value": 20.0,
+        "unit": "km/s",
+        "details": {
+          "note": "Needs EFE"
+        }
+      },
+      "lcdm": {
+        "value": 8.84364268317179,
+        "unit": "km/s",
+        "details": {}
+      },
+      "best_theory": "Newtonian",
+      "n_objects": 1,
+      "notes": "DF2 appears 'dark matter free'. d_host=80 kpc from NGC1052"
+    },
+    {
+      "name": "Bullet Cluster",
+      "metric_name": "Lensing Location",
+      "observed": 2.1,
+      "observed_err": null,
+      "observed_unit": "x (at STARS)",
+      "baseline": {
+        "value": 0.5275473695233568,
+        "unit": "x (at GAS)",
+        "details": {
+          "Sigma": 1.1159655893763318
+        }
+      },
+      "new_model": {
+        "value": 1.0326300352781663,
+        "unit": "x (at STARS)",
+        "details": {
+          "phi_stars": 7.6499999999999995,
+          "phi_gas": -3.55,
+          "D": 1.0
+        }
+      },
+      "mond": {
+        "value": 0.48516575612643736,
+        "unit": "x (at GAS)",
+        "details": {
+          "note": "Spatial problem"
+        }
+      },
+      "lcdm": {
+        "value": 1.0,
+        "unit": "x (at DM HALO)",
+        "details": {
+          "note": "DM halo solves spatial"
+        }
+      },
+      "best_theory": "New Model",
+      "n_objects": 1,
+      "notes": "Key test: Lensing follows STARS (20%), not gas (80%)"
+    }
+  ]
+}

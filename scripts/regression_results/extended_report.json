@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-20T08:25:25.959056",
+  "timestamp": "2025-12-20T08:36:46.222494",
   "formula": "sigma_gravity_unified",
   "mode": "full",
   "parameters": {
@@ -284,111 +284,28 @@
     {
       "name": "Bullet Cluster",
       "passed": 1.0,
-      "metric": 0.19449076796548093,
+      "metric": 1.1159655893763318,
       "details": {
-        "mode": "UNIVERSAL_PHI",
-        "mach_shock": 3.0,
-        "D": 1.0,
-        "phi_gas": -3.55,
-        "phi_stars": 7.6499999999999995,
-        "h_gas": 0.018664588201002735,
-        "h_stars": 0.13169656702193513,
-        "Sigma_gas": 0.44035642908177586,
-        "Sigma_stars": 9.50943338591637,
-        "M_eff_gas": 92474850107172.92,
-        "M_eff_stars": 475471669295818.56,
-        "M_eff_total": 567946519402991.5,
-        "total_ratio": 2.1844096900115058,
+        "mode": "STANDARD",
+        "M_bar": 259999999999999.97,
+        "M_pred": 290151053237846.25,
+        "M_lens": 550000000000000.06,
+        "ratio_pred": 1.1159655893763318,
         "ratio_obs": 2.1,
-        "lensing_at": "STARS"
+        "Sigma": 1.1159655893763318,
+        "offset_kpc": 150,
+        "challenge": "Lensing follows stars (20%), not gas (80%)"
       },
-      "message": "Lensing at STARS! phi_gas=-3.55 (shocked), phi_stars=7.65 (collisionless), ratio=0.19"
+      "message": "M_pred/M_bar = 1.12x (obs: 2.1x). Enable --phase-coherence for spatial test."
     },
     {
       "name": "Merging Clusters",
       "passed": true,
-      "metric": 1.0,
+      "metric": 0.0,
       "details": {
-        "n_tested": 5,
-        "n_passed": 5,
-        "results": {
-          "el_gordo": {
-            "mach_shock": 2.5,
-            "merger_state": "post_collision",
-            "phi_stars": 6.32,
-            "phi_gas": -1.9400000000000004,
-            "Sigma_stars": 9.022763733519072,
-            "Sigma_gas": 0.5824446054705882,
-            "ratio_gas_to_stars": 0.24207297619914886,
-            "lensing_at": "STARS",
-            "expected": "STARS",
-            "correct": 1.0,
-            "total_ratio": 2.3593538955860582
-          },
-          "a520": {
-            "mach_shock": 2.0,
-            "merger_state": "mid_collision",
-            "phi_stars": 4.99,
-            "phi_gas": -0.6800000000000002,
-            "Sigma_stars": 3.5684928864014482,
-            "Sigma_gas": 0.9459827075671042,
-            "ratio_gas_to_stars": 0.9940989841663824,
-            "lensing_at": "STARS",
-            "expected": "STARS",
-            "correct": 1.0,
-            "total_ratio": 1.4980901136374924
-          },
-          "macs_j0025": {
-            "mach_shock": 2.2,
-            "merger_state": "post_collision",
-            "phi_stars": 5.522,
-            "phi_gas": -1.1420000000000008,
-            "Sigma_stars": 4.437668500100246,
-            "Sigma_gas": 0.8817868200647205,
-            "ratio_gas_to_stars": 0.7153379194866142,
-            "lensing_at": "STARS",
-            "expected": "STARS",
-            "correct": 1.0,
-            "total_ratio": 1.6548045765941826
-          },
-          "a2744": {
-            "mach_shock": 2.0,
-            "merger_state": "multi_merger",
-            "phi_stars": 4.99,
-            "phi_gas": -0.6800000000000002,
-            "Sigma_stars": 5.395806805170888,
-            "Sigma_gas": 0.9165527306675924,
-            "ratio_gas_to_stars": 0.7077662060574869,
-            "lensing_at": "STARS",
-            "expected": "STARS",
-            "correct": 1.0,
-            "total_ratio": 1.783505132184359
-          },
-          "a1689_relaxed": {
-            "mach_shock": 0.2,
-            "merger_state": "relaxed",
-            "phi_stars": 1.0,
-            "phi_gas": 1.0,
-            "Sigma_stars": 1.1098118264866734,
-            "Sigma_gas": 1.0143089115321136,
-            "ratio_gas_to_stars": 3.6557869985693237,
-            "lensing_at": "GAS",
-            "expected": "GAS",
-            "correct": 1.0,
-            "total_ratio": 1.0334094945230254
-          }
-        },
-        "merging_systems": [
-          "el_gordo",
-          "a520",
-          "macs_j0025",
-          "a2744"
-        ],
-        "relaxed_systems": [
-          "a1689_relaxed"
-        ]
+        "mode": "SKIPPED"
       },
-      "message": "5/5 clusters: Merging=4 (lensing at stars), Relaxed=1 (centered)"
+      "message": "SKIPPED: Enable --phase-coherence for this test"
     }
   ],
   "summary": {
