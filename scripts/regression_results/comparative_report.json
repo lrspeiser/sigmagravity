@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-20T09:02:03.943889",
+  "timestamp": "2025-12-20T10:26:11.121988",
   "mode": "extended_phi",
   "parameters": {
     "baseline": {
@@ -11,7 +11,7 @@
       "use_extended_phi": true,
       "phi_lambda_0": 7.0,
       "d_asymmetry_scale": 0.8,
-      "d_tidal_threshold": 10.0
+      "d_tidal_threshold": 5.0
     }
   },
   "results": [
@@ -32,7 +32,18 @@
         "value": 17.290192255966815,
         "unit": "km/s",
         "details": {
-          "D_used": true
+          "D_stats": {
+            "min": 0.005294117647058824,
+            "max": 0.13680110499695738,
+            "mean": 0.05811281463328322,
+            "std": 0.032275525562015864,
+            "n_nonzero": 167
+          },
+          "phi_stats": {
+            "min": 0.9589596685009127,
+            "max": 0.9984117647058823,
+            "mean": 0.982566155610015
+          }
         }
       },
       "mond": {
@@ -195,6 +206,44 @@
       "notes": "Chae 2023: 1.35x at >2000 AU"
     },
     {
+      "name": "DF2 (UDG)",
+      "metric_name": "Velocity Dispersion",
+      "observed": 8.5,
+      "observed_err": 2.3,
+      "observed_unit": "km/s",
+      "baseline": {
+        "value": 20.769590891311665,
+        "unit": "km/s",
+        "details": {
+          "Sigma": 5.5156094879458895
+        }
+      },
+      "new_model": {
+        "value": 19.817652141489937,
+        "unit": "km/s",
+        "details": {
+          "D": 0.36466875291905526,
+          "phi": 0.8905993741242835,
+          "Sigma": 5.021598983754285
+        }
+      },
+      "mond": {
+        "value": 20.0,
+        "unit": "km/s",
+        "details": {
+          "note": "Needs EFE"
+        }
+      },
+      "lcdm": {
+        "value": 8.84364268317179,
+        "unit": "km/s",
+        "details": {}
+      },
+      "best_theory": "Newtonian",
+      "n_objects": 1,
+      "notes": "DF2 appears 'dark matter free'. d_host=80 kpc from NGC1052"
+    },
+    {
       "name": "Dwarf Spheroidals",
       "metric_name": "sigma_pred/sigma_obs",
       "observed": 1.0,
@@ -231,44 +280,6 @@
       "best_theory": "LCDM",
       "n_objects": 5,
       "notes": "Host inheritance model for satellites"
-    },
-    {
-      "name": "DF2 (UDG)",
-      "metric_name": "Velocity Dispersion",
-      "observed": 8.5,
-      "observed_err": 2.3,
-      "observed_unit": "km/s",
-      "baseline": {
-        "value": 20.769590891311665,
-        "unit": "km/s",
-        "details": {
-          "Sigma": 5.5156094879458895
-        }
-      },
-      "new_model": {
-        "value": 18.94947855784039,
-        "unit": "km/s",
-        "details": {
-          "D": 0.6823343764595277,
-          "phi": 0.7952996870621417,
-          "Sigma": 4.591262812658203
-        }
-      },
-      "mond": {
-        "value": 20.0,
-        "unit": "km/s",
-        "details": {
-          "note": "Needs EFE"
-        }
-      },
-      "lcdm": {
-        "value": 8.84364268317179,
-        "unit": "km/s",
-        "details": {}
-      },
-      "best_theory": "Newtonian",
-      "n_objects": 1,
-      "notes": "DF2 appears 'dark matter free'. d_host=80 kpc from NGC1052"
     },
     {
       "name": "Bullet Cluster",

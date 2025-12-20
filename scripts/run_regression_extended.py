@@ -615,6 +615,15 @@ def load_sparc(data_dir: Path) -> List[Dict]:
             v_mean = df['V_obs'].mean()
             v_asym = df['V_obs'].std() * 0.3  # Rough proxy for asymmetry
             
+            # Compute component fractions (at outermost radius for representative value)
+            V_gas_sq = np.sign(df['V_gas'].values[-1]) * df['V_gas'].values[-1]**2
+            V_disk_sq = df['V_disk_scaled'].values[-1]**2
+            V_bulge_sq = df['V_bulge_scaled'].values[-1]**2
+            V_total_sq = max(abs(V_gas_sq) + V_disk_sq + V_bulge_sq, 1e-10)
+            
+            f_gas = abs(V_gas_sq) / V_total_sq
+            f_bulge = V_bulge_sq / V_total_sq
+            
             galaxies.append({
                 'name': gf.stem.replace('_rotmod', ''),
                 'R': df['R'].values,
@@ -626,6 +635,8 @@ def load_sparc(data_dir: Path) -> List[Dict]:
                 'R_d': R_d,
                 'v_asym': v_asym,
                 'v_circ': v_mean,
+                'f_gas': f_gas,
+                'f_bulge': f_bulge,
             })
     
     return galaxies
@@ -676,16 +687,158 @@ def load_gaia(data_dir: Path) -> Optional[pd.DataFrame]:
 
 
 # =============================================================================
+# SPARC BINNING STRUCTURE
+# =============================================================================
+
+@dataclass
+class SPARCBinResult:
+    """Results for a bin of SPARC galaxies."""
+    bin_name: str
+    n_galaxies: int
+    rms_baseline: float
+    rms_new: float
+    rms_mond: float
+    improvement_pct: float  # (new - baseline) / baseline * 100
+    D_mean: float
+    D_std: float
+    phi_mean: float
+    best_theory: str
+
+
+def compute_sparc_bins(galaxies: List[Dict], results_per_galaxy: List[Dict]) -> Dict[str, List[SPARCBinResult]]:
+    """
+    Compute SPARC results binned by galaxy type.
+    
+    Bins:
+    - By bulge fraction: disk-dominated, intermediate, bulge-dominated
+    - By disturbance D: D≈0, low D, mid D, high D
+    - By gas fraction: gas-rich, mixed, star-dominated
+    """
+    bins = {
+        'by_bulge': [],
+        'by_D': [],
+        'by_gas': [],
+    }
+    
+    # Define bin thresholds
+    bulge_bins = [
+        ('Disk-dominated (B/T<0.1)', lambda g: g.get('f_bulge', 0) < 0.1),
+        ('Intermediate (0.1-0.3)', lambda g: 0.1 <= g.get('f_bulge', 0) < 0.3),
+        ('Bulge-dominated (B/T>0.3)', lambda g: g.get('f_bulge', 0) >= 0.3),
+    ]
+    
+    D_bins = [
+        ('D=0 (undisturbed)', lambda r: r['D'] < 0.01),
+        ('Low D (0.01-0.05)', lambda r: 0.01 <= r['D'] < 0.05),
+        ('Mid D (0.05-0.15)', lambda r: 0.05 <= r['D'] < 0.15),
+        ('High D (>0.15)', lambda r: r['D'] >= 0.15),
+    ]
+    
+    gas_bins = [
+        ('Gas-rich (f_gas>0.5)', lambda g: g.get('f_gas', 0.5) > 0.5),
+        ('Mixed (0.2-0.5)', lambda g: 0.2 <= g.get('f_gas', 0.5) <= 0.5),
+        ('Star-dominated (f_gas<0.2)', lambda g: g.get('f_gas', 0.5) < 0.2),
+    ]
+    
+    # Compute bins by bulge fraction
+    for bin_name, condition in bulge_bins:
+        matching = [(g, r) for g, r in zip(galaxies, results_per_galaxy) if condition(g)]
+        if matching:
+            rms_b = np.mean([r['rms_baseline'] for _, r in matching])
+            rms_n = np.mean([r['rms_new'] for _, r in matching])
+            rms_m = np.mean([r['rms_mond'] for _, r in matching])
+            D_vals = [r['D'] for _, r in matching]
+            phi_vals = [r['phi'] for _, r in matching]
+            
+            improvement = (rms_n - rms_b) / rms_b * 100 if rms_b > 0 else 0
+            theories = {'Baseline': rms_b, 'New': rms_n, 'MOND': rms_m}
+            best = min(theories, key=theories.get)
+            
+            bins['by_bulge'].append(SPARCBinResult(
+                bin_name=bin_name,
+                n_galaxies=len(matching),
+                rms_baseline=rms_b,
+                rms_new=rms_n,
+                rms_mond=rms_m,
+                improvement_pct=improvement,
+                D_mean=np.mean(D_vals),
+                D_std=np.std(D_vals),
+                phi_mean=np.mean(phi_vals),
+                best_theory=best,
+            ))
+    
+    # Compute bins by D value
+    for bin_name, condition in D_bins:
+        matching = [(g, r) for g, r in zip(galaxies, results_per_galaxy) if condition(r)]
+        if matching:
+            rms_b = np.mean([r['rms_baseline'] for _, r in matching])
+            rms_n = np.mean([r['rms_new'] for _, r in matching])
+            rms_m = np.mean([r['rms_mond'] for _, r in matching])
+            D_vals = [r['D'] for _, r in matching]
+            phi_vals = [r['phi'] for _, r in matching]
+            
+            improvement = (rms_n - rms_b) / rms_b * 100 if rms_b > 0 else 0
+            theories = {'Baseline': rms_b, 'New': rms_n, 'MOND': rms_m}
+            best = min(theories, key=theories.get)
+            
+            bins['by_D'].append(SPARCBinResult(
+                bin_name=bin_name,
+                n_galaxies=len(matching),
+                rms_baseline=rms_b,
+                rms_new=rms_n,
+                rms_mond=rms_m,
+                improvement_pct=improvement,
+                D_mean=np.mean(D_vals),
+                D_std=np.std(D_vals),
+                phi_mean=np.mean(phi_vals),
+                best_theory=best,
+            ))
+    
+    # Compute bins by gas fraction
+    for bin_name, condition in gas_bins:
+        matching = [(g, r) for g, r in zip(galaxies, results_per_galaxy) if condition(g)]
+        if matching:
+            rms_b = np.mean([r['rms_baseline'] for _, r in matching])
+            rms_n = np.mean([r['rms_new'] for _, r in matching])
+            rms_m = np.mean([r['rms_mond'] for _, r in matching])
+            D_vals = [r['D'] for _, r in matching]
+            phi_vals = [r['phi'] for _, r in matching]
+            
+            improvement = (rms_n - rms_b) / rms_b * 100 if rms_b > 0 else 0
+            theories = {'Baseline': rms_b, 'New': rms_n, 'MOND': rms_m}
+            best = min(theories, key=theories.get)
+            
+            bins['by_gas'].append(SPARCBinResult(
+                bin_name=bin_name,
+                n_galaxies=len(matching),
+                rms_baseline=rms_b,
+                rms_new=rms_n,
+                rms_mond=rms_m,
+                improvement_pct=improvement,
+                D_mean=np.mean(D_vals),
+                D_std=np.std(D_vals),
+                phi_mean=np.mean(phi_vals),
+                best_theory=best,
+            ))
+    
+    return bins
+
+
+# =============================================================================
 # COMPARATIVE TEST FUNCTIONS
 # =============================================================================
 
-def test_sparc_comparative(galaxies: List[Dict]) -> ComparativeResult:
-    """Compare theories on SPARC galaxy rotation curves."""
+def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple[ComparativeResult, Dict]:
+    """
+    Compare theories on SPARC galaxy rotation curves.
+    
+    Returns both the overall result and detailed per-bin analysis.
+    """
     if not galaxies:
-        return ComparativeResult(
+        empty_result = ComparativeResult(
             name="SPARC Galaxies",
             metric_name="RMS",
-            observed=OBS_BENCHMARKS['sparc']['mond_rms_kms'],  # Use MOND as reference
+            observed=OBS_BENCHMARKS['sparc']['mond_rms_kms'],
             observed_err=None,
             observed_unit="km/s",
             baseline=TheoryPrediction(0, "km/s"),
@@ -696,10 +849,16 @@ def test_sparc_comparative(galaxies: List[Dict]) -> ComparativeResult:
             n_objects=0,
             notes="No data"
         )
+        return empty_result, {}
+    
+    # Store per-galaxy results for binning
+    results_per_galaxy = []
     
     rms_baseline = []
     rms_new = []
     rms_mond = []
+    D_values = []
+    phi_values = []
     
     for gal in galaxies:
         R = gal['R']
@@ -715,9 +874,14 @@ def test_sparc_comparative(galaxies: List[Dict]) -> ComparativeResult:
         # New model with extended phase coherence
         if USE_EXTENDED_PHI:
             D = compute_D_from_asymmetry(gal.get('v_asym', 0), gal.get('v_circ', 200))
-            # SPARC galaxies are equilibrium → disturbance suppresses coherence
+            phi = compute_phi_extended(D, is_collisionless=True, is_merger=False)
         else:
             D = 0.0
+            phi = 1.0
+        
+        D_values.append(D)
+        phi_values.append(phi)
+        
         V_pred_new = predict_velocity_new(R, V_bar, R_d, D=D, is_merger=False)
         rms_n = np.sqrt(((V_pred_new - V_obs)**2).mean())
         rms_new.append(rms_n)
@@ -726,14 +890,59 @@ def test_sparc_comparative(galaxies: List[Dict]) -> ComparativeResult:
         V_mond = predict_mond(R, V_bar)
         rms_m = np.sqrt(((V_mond - V_obs)**2).mean())
         rms_mond.append(rms_m)
+        
+        # Store per-galaxy result for binning
+        results_per_galaxy.append({
+            'name': gal['name'],
+            'rms_baseline': rms_b,
+            'rms_new': rms_n,
+            'rms_mond': rms_m,
+            'D': D,
+            'phi': phi,
+            'f_bulge': gal.get('f_bulge', 0),
+            'f_gas': gal.get('f_gas', 0.5),
+        })
     
     mean_baseline = np.mean(rms_baseline)
     mean_new = np.mean(rms_new)
     mean_mond = np.mean(rms_mond)
     lcdm_rms = OBS_BENCHMARKS['sparc']['lcdm_rms_kms']
     
+    # D and phi statistics
+    D_stats = {
+        'min': np.min(D_values),
+        'max': np.max(D_values),
+        'mean': np.mean(D_values),
+        'std': np.std(D_values),
+        'n_nonzero': sum(1 for d in D_values if d > 0.01),
+    }
+    phi_stats = {
+        'min': np.min(phi_values),
+        'max': np.max(phi_values),
+        'mean': np.mean(phi_values),
+    }
+    
+    # Compute bins
+    bins = compute_sparc_bins(galaxies, results_per_galaxy) if USE_EXTENDED_PHI else {}
+    
+    # Print verbose bin analysis
+    if verbose and USE_EXTENDED_PHI:
+        print("\n  SPARC BINNED ANALYSIS:")
+        print("  " + "-" * 90)
+        print(f"  {'Bin':<35} {'N':>4} {'Baseline':>10} {'New':>10} {'MOND':>10} {'Improv%':>10} {'Best':>8}")
+        print("  " + "-" * 90)
+        
+        for category, bin_list in bins.items():
+            print(f"  {category.upper()}:")
+            for b in bin_list:
+                print(f"    {b.bin_name:<33} {b.n_galaxies:>4} {b.rms_baseline:>10.2f} {b.rms_new:>10.2f} {b.rms_mond:>10.2f} {b.improvement_pct:>+10.1f} {b.best_theory:>8}")
+        
+        print("  " + "-" * 90)
+        print(f"  D stats: min={D_stats['min']:.3f}, max={D_stats['max']:.3f}, mean={D_stats['mean']:.3f}, n_nonzero={D_stats['n_nonzero']}")
+        print(f"  phi stats: min={phi_stats['min']:.3f}, max={phi_stats['max']:.3f}, mean={phi_stats['mean']:.3f}")
+    
     # Reference: MOND is the "gold standard" for rotation curves
-    observed_rms = mean_mond  # Use MOND as the target to beat
+    observed_rms = mean_mond
     
     # Determine best theory
     theories = {
@@ -744,23 +953,33 @@ def test_sparc_comparative(galaxies: List[Dict]) -> ComparativeResult:
     }
     best = min(theories, key=theories.get)
     
-    return ComparativeResult(
+    result = ComparativeResult(
         name="SPARC Galaxies",
         metric_name="RMS",
         observed=observed_rms,
         observed_err=None,
         observed_unit="km/s",
         baseline=TheoryPrediction(mean_baseline, "km/s", {'win_rate': sum(1 for b, m in zip(rms_baseline, rms_mond) if b < m) / len(galaxies)}),
-        new_model=TheoryPrediction(mean_new, "km/s", {'D_used': USE_EXTENDED_PHI}),
+        new_model=TheoryPrediction(mean_new, "km/s", {'D_stats': D_stats, 'phi_stats': phi_stats}),
         mond=TheoryPrediction(mean_mond, "km/s"),
         lcdm=TheoryPrediction(lcdm_rms, "km/s", {'note': '2-3 params/galaxy'}),
         best_theory=best,
         n_objects=len(galaxies),
         notes=f"Win rates: Baseline beats MOND {sum(1 for b, m in zip(rms_baseline, rms_mond) if b < m)/len(galaxies)*100:.1f}%"
     )
+    
+    # Return result and detailed bin analysis
+    analysis = {
+        'bins': bins,
+        'D_stats': D_stats,
+        'phi_stats': phi_stats,
+        'per_galaxy': results_per_galaxy if verbose else None,
+    }
+    
+    return result, analysis
 
 
-def test_wide_binaries_comparative() -> ComparativeResult:
+def test_wide_binaries_comparative() -> Tuple[ComparativeResult, Dict]:
     """Compare theories on wide binary velocity boost."""
     s_AU = 10000
     s_m = s_AU * AU_to_m
@@ -789,6 +1008,9 @@ def test_wide_binaries_comparative() -> ComparativeResult:
     Sigma_new = 1 + A_0 * phi * h_val
     boost_new = Sigma_new
     
+    # Analysis dict
+    analysis = {'D': D, 'phi': phi, 'h': h_val, 'g_N': g_N}
+    
     # MOND
     mond_enhance = mond_enhancement(g_N)
     boost_mond = mond_enhance
@@ -804,23 +1026,24 @@ def test_wide_binaries_comparative() -> ComparativeResult:
     }
     best = min(theories, key=theories.get)
     
-    return ComparativeResult(
+    result = ComparativeResult(
         name="Wide Binaries",
         metric_name="Boost Factor",
         observed=obs_boost,
         observed_err=obs_err,
         observed_unit="x",
         baseline=TheoryPrediction(boost_baseline, "x", {'overpredicts': boost_baseline > obs_boost + obs_err}),
-        new_model=TheoryPrediction(boost_new, "x", {'D': D if USE_EXTENDED_PHI else 0, 'phi': phi}),
+        new_model=TheoryPrediction(boost_new, "x", {'D': D, 'phi': phi}),
         mond=TheoryPrediction(boost_mond, "x"),
         lcdm=TheoryPrediction(boost_newton, "x", {'note': 'No boost'}),
         best_theory=best,
         n_objects=OBS_BENCHMARKS['wide_binaries']['n_pairs'],
         notes=f"Chae 2023: {obs_boost:.2f}x at >{OBS_BENCHMARKS['wide_binaries']['threshold_AU']} AU"
     )
+    return result, analysis
 
 
-def test_udgs_comparative() -> ComparativeResult:
+def test_udgs_comparative() -> Tuple[ComparativeResult, Dict]:
     """Compare theories on DF2 (the famous 'dark matter free' galaxy)."""
     df2 = OBS_BENCHMARKS['udgs']['df2']
     
@@ -868,20 +1091,23 @@ def test_udgs_comparative() -> ComparativeResult:
     }
     best = min(theories, key=theories.get)
     
-    return ComparativeResult(
+    result = ComparativeResult(
         name="DF2 (UDG)",
         metric_name="Velocity Dispersion",
         observed=sigma_obs,
         observed_err=sigma_err,
         observed_unit="km/s",
         baseline=TheoryPrediction(sigma_baseline, "km/s", {'Sigma': Sigma_baseline}),
-        new_model=TheoryPrediction(sigma_new, "km/s", {'D': D if USE_EXTENDED_PHI else 0, 'phi': phi, 'Sigma': Sigma_new if USE_EXTENDED_PHI else Sigma_baseline}),
+        new_model=TheoryPrediction(sigma_new, "km/s", {'D': D, 'phi': phi, 'Sigma': Sigma_new}),
         mond=TheoryPrediction(sigma_mond, "km/s", {'note': 'Needs EFE'}),
         lcdm=TheoryPrediction(sigma_newton, "km/s"),
         best_theory=best,
         n_objects=1,
         notes=f"DF2 appears 'dark matter free'. d_host={df2['d_host_kpc']} kpc from NGC1052"
     )
+    
+    analysis = {'D': D, 'phi': phi, 'Sigma_baseline': Sigma_baseline, 'Sigma_new': Sigma_new}
+    return result, analysis
 
 
 def test_dsph_comparative() -> ComparativeResult:
@@ -1396,17 +1622,29 @@ def main():
     print("-" * 120)
     
     results = []
+    analyses = {}
     
-    # Core tests
-    results.append(test_sparc_comparative(galaxies))
+    # Core tests - handle tuple returns
+    verbose = '--verbose' in sys.argv or '-v' in sys.argv
+    
+    sparc_result, sparc_analysis = test_sparc_comparative(galaxies, verbose=verbose)
+    results.append(sparc_result)
+    analyses['sparc'] = sparc_analysis
+    
     results.append(test_clusters_comparative(clusters))
     results.append(test_gaia_comparative(gaia_df))
     results.append(test_solar_system_comparative())
     
     # Extended tests
-    results.append(test_wide_binaries_comparative())
+    wb_result, wb_analysis = test_wide_binaries_comparative()
+    results.append(wb_result)
+    analyses['wide_binaries'] = wb_analysis
+    
+    udg_result, udg_analysis = test_udgs_comparative()
+    results.append(udg_result)
+    analyses['udg'] = udg_analysis
+    
     results.append(test_dsph_comparative())
-    results.append(test_udgs_comparative())
     results.append(test_bullet_cluster_comparative())
     
     # Print comparison table
