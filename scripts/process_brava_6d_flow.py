@@ -529,10 +529,18 @@ def main():
     
     # Compute Sigma (enhancement factor)
     print("Computing Sigma (enhancement factor)...")
-    R_m = binned_df['R_kpc'].values * kpc_to_m
-    # Simplified baryonic acceleration (from density)
-    M_enclosed = 4.6e10 * M_sun  # Simplified: use total disk mass
-    g_bar = G * M_enclosed / R_m**2  # m/s²
+    R_kpc_arr = binned_df['R_kpc'].values
+    R_m = R_kpc_arr * kpc_to_m
+    
+    # Proper MW baryonic acceleration: bulge + disk
+    M_bulge = 1.0e10 * M_sun  # kg
+    M_disk = 4.6e10 * M_sun  # kg
+    R_d = 2.5 * kpc_to_m  # disk scale length in m
+    
+    # Enclosed mass: bulge (point mass approx) + disk (exponential)
+    M_enc = M_bulge + M_disk * (1.0 - np.exp(-R_m / R_d))
+    g_bar = G * M_enc / np.maximum(R_m**2, 1e-9)  # m/s²
+    binned_df['g_bar'] = g_bar  # Save for Jeans test
     h = h_function(g_bar)
     
     # Enhancement: Σ = 1 + A₀ × C_cov × h
