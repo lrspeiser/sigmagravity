@@ -310,23 +310,91 @@ def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
 
 
 # =============================================================================
-# EXTENDED PHASE COHERENCE MODEL
+# EXTENDED PHASE COHERENCE MODEL (UNIFIED)
 # =============================================================================
+#
+# The SINGLE authoritative φ mechanism:
+#   φ = 1 + λ₀ × D × (f_ordered - f_turb)
+#
+# D is the DISTURBANCE PARAMETER sourced from observables:
+#   - DISK GALAXIES: D_disk from kinematic asymmetry
+#   - BULGE REGIONS: D_bulge from Ω/H₀ and compactness (disordered collisionless)
+#   - CLUSTER MERGERS: D from Mach number (shock strength)
+#   - SATELLITES/UDGs: D from tidal proximity
+#   - WIDE BINARIES: D from MW tidal environment
+#
+# f_ordered and f_turb encode the MATTER STATE:
+#   - Ordered disk stars: f_ordered ≈ 0.95, f_turb ≈ 0
+#   - Disordered bulge stars: f_ordered ≈ 0.3-0.5 (velocity dispersion dominated)
+#   - Collisional gas (shocked): f_ordered ≈ 0.1, f_turb ∝ Mach
+#
+# Physical regimes:
+#   - D=0 (equilibrium): φ=1 always (no modification)
+#   - MERGERS: stars survive → φ>1, gas shocked → φ<1
+#   - EQUILIBRIUM DISTURBANCE: disruption → φ<1
+
+# Bulge-specific parameters
+D_BULGE_OMEGA_SCALE = 0.5   # How Ω/H₀ maps to D for bulges
+D_BULGE_COMPACT_SCALE = 0.3 # How compactness (R/L₀) contributes to D
 
 def compute_D_from_asymmetry(v_asym: float, v_circ: float) -> float:
     """
-    Compute disturbance D from kinematic asymmetry.
+    Compute disturbance D from kinematic asymmetry (for DISK regions).
     
-    v_asym: Asymmetry in velocity field (e.g., lopsidedness, warp amplitude)
+    v_asym: Asymmetry in velocity field (approaching vs receding, lopsidedness)
     v_circ: Circular velocity
     
-    D = 0 for perfectly symmetric galaxies
+    D = 0 for perfectly symmetric disk
     D → 1 for highly disturbed/asymmetric systems
     """
     if v_circ <= 0:
         return 0.0
     ratio = abs(v_asym) / v_circ
     return min(1.0, D_ASYMMETRY_SCALE * ratio)
+
+
+def compute_D_from_bulge(omega_over_H0: float, R_over_L0: float, v_over_sigma: float) -> float:
+    """
+    Compute disturbance D for BULGE regions.
+    
+    Bulges are collisionless but DISORDERED (multi-stream, phase-mixed).
+    Key predictors from residual analysis: Ω/H₀ and compactness.
+    
+    Parameters:
+    -----------
+    omega_over_H0 : float
+        Orbital frequency Ω = V/R normalized by Hubble constant
+        High values → central, dynamically hot regions → higher D
+    R_over_L0 : float
+        Radius normalized by reference length L₀
+        Low values (compact) → more disordered → higher D
+    v_over_sigma : float
+        Rotation-to-dispersion ratio V/σ
+        Low values → dispersion-dominated → higher D
+        
+    Returns:
+    --------
+    D : float [0, 1]
+        Disturbance parameter representing degree of phase disorder in bulge
+    """
+    # High Ω/H₀ → dynamically hot, disordered → higher D
+    D_omega = min(1.0, D_BULGE_OMEGA_SCALE * omega_over_H0 / 100.0)
+    
+    # Compact regions (low R/L₀) → more disordered → higher D
+    if R_over_L0 > 0:
+        D_compact = min(1.0, D_BULGE_COMPACT_SCALE * (L_0 / R_over_L0))
+    else:
+        D_compact = 1.0
+    
+    # Low V/σ → dispersion-dominated → higher D
+    if v_over_sigma > 0:
+        D_dispersion = min(1.0, 0.5 / v_over_sigma)
+    else:
+        D_dispersion = 1.0
+    
+    # Combine: take the dominant effect
+    D = max(D_omega, D_compact, D_dispersion)
+    return min(1.0, D)
 
 
 def compute_D_from_tidal(r_tidal: float, r_half: float) -> float:
@@ -344,7 +412,6 @@ def compute_D_from_tidal(r_tidal: float, r_half: float) -> float:
     ratio = r_tidal / r_half
     if ratio > D_TIDAL_THRESHOLD:
         return 0.0
-    # D increases as tidal radius approaches the system size
     return min(1.0, (D_TIDAL_THRESHOLD - ratio) / D_TIDAL_THRESHOLD)
 
 
@@ -372,71 +439,83 @@ def compute_D_from_interaction(interaction_strength: float) -> float:
     return min(1.0, D_INTERACTION_SCALE * interaction_strength)
 
 
-def phi_universal(D: float, f_ordered: float, f_turb: float) -> float:
+def compute_phi(
+    D: float,
+    matter_type: str = "disk_stars",
+    mach_turb: float = 0.0,
+    is_merger: bool = False,
+    v_over_sigma: float = 10.0
+) -> float:
     """
-    UNIVERSAL phase coherence formula.
+    UNIFIED phase coherence computation.
     
-    φ = 1 + λ₀ × D × (f_ordered - f_turb)
+    This is the SINGLE authoritative φ function.
     
-    KEY: For D = 0, φ = 1 ALWAYS (equilibrium systems unchanged)
+    Parameters:
+    -----------
+    D : float [0, 1]
+        Disturbance parameter from appropriate observable proxy
+    matter_type : str
+        One of: "disk_stars", "bulge_stars", "gas", "collisionless"
+    mach_turb : float
+        Turbulent Mach number (for gas)
+    is_merger : bool
+        True for merger/collision events, False for equilibrium disturbance
+    v_over_sigma : float
+        Rotation-to-dispersion ratio (for bulge stars)
+    
+    Returns:
+    --------
+    φ : float
+        Phase coherence factor (φ=1 is neutral, φ>1 enhances, φ<1 suppresses)
     """
-    phi = 1.0 + PHI_LAMBDA_0 * D * (f_ordered - f_turb)
+    # Determine f_ordered and f_turb based on matter type
+    if matter_type == "disk_stars":
+        # Cold, ordered disk: high f_ordered
+        f_ordered = 0.95
+        f_turb = 0.0
+    elif matter_type == "bulge_stars":
+        # Disordered, dispersion-supported: intermediate f_ordered
+        # f_ordered depends on V/σ: high V/σ → more ordered
+        f_ordered = min(0.9, 0.3 + 0.1 * v_over_sigma)  # 0.3 to 0.9
+        f_turb = 0.1  # Some "effective turbulence" from velocity dispersion
+    elif matter_type == "gas":
+        # Collisional gas: ordered if laminar, turbulent if shocked
+        f_ordered = 0.1
+        f_turb = min(0.85, 0.25 * mach_turb)
+    else:  # "collisionless" generic
+        f_ordered = 0.8
+        f_turb = 0.0
+    
+    # Apply the universal formula
+    if is_merger:
+        # MERGER: D represents survival of coherence
+        # Stars: high f_ordered → φ > 1
+        # Gas: high f_turb → φ < 1 (screening)
+        phi = 1.0 + PHI_LAMBDA_0 * D * (f_ordered - f_turb)
+    else:
+        # EQUILIBRIUM DISTURBANCE: D represents LOSS of coherence
+        if EQUILIBRIUM_DISTURBANCE_SUPPRESSES:
+            # Disturbance → suppression (φ < 1)
+            # The amount of suppression depends on how ordered the matter was
+            suppression = 0.3 * D * f_ordered
+            phi = 1.0 - suppression
+        else:
+            phi = 1.0 + PHI_LAMBDA_0 * D * (f_ordered - f_turb)
+    
     return max(PHI_MIN, min(PHI_MAX, phi))
 
 
+# Legacy function for backwards compatibility
 def compute_phi_extended(
     D: float,
     is_collisionless: bool = True,
     mach_turb: float = 0.0,
     is_merger: bool = False
 ) -> float:
-    """
-    Compute φ for extended model (applies to non-cluster systems too).
-    
-    KEY PHYSICS:
-    - MERGER systems (is_merger=True): D represents survival of coherence
-      Stars maintain order through collision → φ > 1
-      Gas gets shocked/turbulent → φ < 1
-    - EQUILIBRIUM systems (is_merger=False): D represents LOSS of coherence
-      Disturbance (tidal, asymmetry) disrupts phase coherence → φ < 1
-    
-    Parameters:
-    -----------
-    D : float [0, 1]
-        Disturbance parameter from observable proxies
-    is_collisionless : bool
-        True for stars, False for gas
-    mach_turb : float
-        Turbulent Mach number (for gas)
-    is_merger : bool
-        True for merger/collision events, False for equilibrium disturbance
-    """
-    if is_merger:
-        # MERGER: Stars maintain order, gas gets disrupted
-        if is_collisionless:
-            f_ordered = 0.95
-            f_turb = 0.0
-        else:
-            f_ordered = 0.1
-            f_turb = min(0.85, 0.25 * mach_turb)
-        return phi_universal(D, f_ordered, f_turb)
-    else:
-        # EQUILIBRIUM DISTURBANCE: Both stars and gas lose coherence
-        # D represents loss of order → φ < 1
-        if EQUILIBRIUM_DISTURBANCE_SUPPRESSES:
-            # Disturbance reduces coherence → suppress enhancement
-            # φ = 1 - λ₀ × D × suppression_factor
-            suppression = 0.3 * D  # Mild suppression for equilibrium
-            return max(PHI_MIN, 1.0 - suppression)
-        else:
-            # Original formula
-            if is_collisionless:
-                f_ordered = 0.95
-                f_turb = 0.0
-            else:
-                f_ordered = 0.1
-                f_turb = min(0.85, 0.25 * mach_turb)
-            return phi_universal(D, f_ordered, f_turb)
+    """Legacy wrapper - use compute_phi() for new code."""
+    matter_type = "disk_stars" if is_collisionless else "gas"
+    return compute_phi(D, matter_type, mach_turb, is_merger)
 
 
 # =============================================================================
@@ -518,8 +597,19 @@ def sigma_enhancement_new(g: np.ndarray, r: np.ndarray = None,
 def predict_velocity_new(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
                          sigma_kms: float = 20.0, 
                          D: float = 0.0,
-                         is_merger: bool = False) -> np.ndarray:
-    """NEW MODEL rotation curve prediction with extended phase coherence."""
+                         is_merger: bool = False,
+                         # Per-point arrays for advanced φ
+                         f_bulge_r: np.ndarray = None,
+                         Omega_over_H0: np.ndarray = None,
+                         R_over_L0: np.ndarray = None,
+                         v_over_sigma: float = 5.0) -> np.ndarray:
+    """
+    NEW MODEL rotation curve prediction with extended phase coherence.
+    
+    Supports per-point φ when f_bulge_r is provided:
+    - Disk-dominated points (f_bulge < 0.3): use D_disk from asymmetry
+    - Bulge-dominated points (f_bulge > 0.3): use D_bulge from Ω/H₀, compactness
+    """
     R_m = R_kpc * kpc_to_m
     V_bar_ms = V_bar * 1000
     g_bar = V_bar_ms**2 / R_m
@@ -528,9 +618,24 @@ def predict_velocity_new(R_kpc: np.ndarray, V_bar: np.ndarray, R_d: float,
     h = h_function(g_bar)
     V = np.array(V_bar, dtype=float)
     
-    # Compute φ based on D and system type
-    # For disk galaxies: mostly ordered stellar motion, equilibrium
-    phi = compute_phi_extended(D, is_collisionless=True, mach_turb=0.0, is_merger=is_merger)
+    # Compute per-point φ if bulge info is available
+    if f_bulge_r is not None and USE_EXTENDED_PHI:
+        phi = np.ones_like(R_kpc)
+        
+        for i in range(len(R_kpc)):
+            if f_bulge_r[i] > 0.3:
+                # BULGE-DOMINATED: use bulge-specific D
+                omega_H0 = Omega_over_H0[i] if Omega_over_H0 is not None else 100.0
+                r_L0 = R_over_L0[i] if R_over_L0 is not None else 1.0
+                D_bulge = compute_D_from_bulge(omega_H0, r_L0, v_over_sigma)
+                phi[i] = compute_phi(D_bulge, matter_type="bulge_stars", 
+                                    is_merger=is_merger, v_over_sigma=v_over_sigma)
+            else:
+                # DISK-DOMINATED: use disk asymmetry D
+                phi[i] = compute_phi(D, matter_type="disk_stars", is_merger=is_merger)
+    else:
+        # Scalar φ for entire galaxy
+        phi = compute_phi(D, matter_type="disk_stars", is_merger=is_merger)
     
     for _ in range(50):
         C = C_coherence(V, sigma_kms)
@@ -569,7 +674,14 @@ def mond_enhancement(g: np.ndarray) -> np.ndarray:
 # =============================================================================
 
 def load_sparc(data_dir: Path) -> List[Dict]:
-    """Load SPARC galaxy rotation curves."""
+    """
+    Load SPARC galaxy rotation curves with enhanced per-point analysis.
+    
+    Computes per-point quantities for the new φ model:
+    - f_bulge(r): Local bulge fraction at each radius
+    - Omega(r): Orbital frequency = V/R
+    - v_over_sigma_est(r): Estimated V/σ ratio
+    """
     sparc_dir = data_dir / "Rotmod_LTG"
     if not sparc_dir.exists():
         return []
@@ -611,24 +723,48 @@ def load_sparc(data_dir: Path) -> List[Dict]:
             idx = len(df) // 3
             R_d = df['R'].iloc[idx] if idx > 0 else df['R'].iloc[-1] / 2
             
-            # Estimate kinematic asymmetry (simple proxy: velocity residual scatter)
-            # This would ideally come from actual 2D velocity field analysis
+            # Estimate kinematic asymmetry 
+            # TODO: Replace with actual approaching/receding asymmetry when available
             v_mean = df['V_obs'].mean()
-            v_asym = df['V_obs'].std() * 0.3  # Rough proxy for asymmetry
+            v_asym = df['V_obs'].std() * 0.3  # Rough proxy
             
-            # Compute component fractions (at outermost radius for representative value)
-            V_gas_sq = np.sign(df['V_gas'].values[-1]) * df['V_gas'].values[-1]**2
-            V_disk_sq = df['V_disk_scaled'].values[-1]**2
-            V_bulge_sq = df['V_bulge_scaled'].values[-1]**2
-            V_total_sq = max(abs(V_gas_sq) + V_disk_sq + V_bulge_sq, 1e-10)
+            # Per-point bulge fraction: f_bulge(r) = V_bulge²(r) / V_bar²(r)
+            V_total_sq = np.maximum(df['V_bar'].values**2, 1e-10)
+            f_bulge_r = df['V_bulge_scaled'].values**2 / V_total_sq
+            f_gas_r = np.abs(np.sign(df['V_gas'].values) * df['V_gas'].values**2) / V_total_sq
+            f_disk_r = df['V_disk_scaled'].values**2 / V_total_sq
             
-            f_gas = abs(V_gas_sq) / V_total_sq
-            f_bulge = V_bulge_sq / V_total_sq
+            # Global fractions (outer region average)
+            outer_idx = max(1, len(df) - 3)
+            f_gas = np.mean(f_gas_r[outer_idx:])
+            f_bulge = np.mean(f_bulge_r[outer_idx:])
+            
+            # Per-point orbital frequency: Ω(r) = V(r) / R(r)  [km/s/kpc]
+            R_vals = df['R'].values
+            V_vals = df['V_obs'].values
+            Omega = V_vals / np.maximum(R_vals, 0.01)  # km/s/kpc
+            
+            # Ω/H₀ where H₀ ≈ 70 km/s/Mpc = 0.07 km/s/kpc
+            H0_kpc = 0.07  # km/s/kpc
+            Omega_over_H0 = Omega / H0_kpc
+            
+            # R/L₀ (compactness proxy)
+            R_over_L0 = R_vals / L_0
+            
+            # Estimate V/σ from rotation curve shape
+            # Steeper inner rise → more rotation-dominated → higher V/σ
+            # Flat curve → dispersion-dominated → lower V/σ
+            # Simple proxy: use gradient of V(R) near center
+            if len(V_vals) >= 3:
+                inner_gradient = (V_vals[2] - V_vals[0]) / (R_vals[2] - R_vals[0] + 0.01)
+                v_over_sigma_est = np.clip(inner_gradient / 50.0, 0.5, 10.0)  # Rough scaling
+            else:
+                v_over_sigma_est = 5.0  # Default moderate value
             
             galaxies.append({
                 'name': gf.stem.replace('_rotmod', ''),
-                'R': df['R'].values,
-                'V_obs': df['V_obs'].values,
+                'R': R_vals,
+                'V_obs': V_vals,
                 'V_bar': df['V_bar'].values,
                 'V_gas': df['V_gas'].values,
                 'V_disk_scaled': df['V_disk_scaled'].values,
@@ -638,6 +774,14 @@ def load_sparc(data_dir: Path) -> List[Dict]:
                 'v_circ': v_mean,
                 'f_gas': f_gas,
                 'f_bulge': f_bulge,
+                # Per-point arrays for new model
+                'f_bulge_r': f_bulge_r,
+                'f_gas_r': f_gas_r,
+                'f_disk_r': f_disk_r,
+                'Omega': Omega,
+                'Omega_over_H0': Omega_over_H0,
+                'R_over_L0': R_over_L0,
+                'v_over_sigma_est': v_over_sigma_est,
             })
     
     return galaxies
@@ -874,16 +1018,36 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
         
         # New model with extended phase coherence
         if USE_EXTENDED_PHI:
+            # Global D from disk asymmetry
             D = compute_D_from_asymmetry(gal.get('v_asym', 0), gal.get('v_circ', 200))
-            phi = compute_phi_extended(D, is_collisionless=True, is_merger=False)
+            
+            # Per-point arrays for bulge-aware φ
+            f_bulge_r = gal.get('f_bulge_r', None)
+            Omega_over_H0 = gal.get('Omega_over_H0', None)
+            R_over_L0 = gal.get('R_over_L0', None)
+            v_over_sigma = gal.get('v_over_sigma_est', 5.0)
+            
+            # Compute mean phi for reporting (actual per-point phi is in predict_velocity_new)
+            phi = compute_phi(D, matter_type="disk_stars", is_merger=False)
         else:
             D = 0.0
             phi = 1.0
+            f_bulge_r = None
+            Omega_over_H0 = None
+            R_over_L0 = None
+            v_over_sigma = 5.0
         
         D_values.append(D)
         phi_values.append(phi)
         
-        V_pred_new = predict_velocity_new(R, V_bar, R_d, D=D, is_merger=False)
+        # Predict with per-point φ when available
+        V_pred_new = predict_velocity_new(
+            R, V_bar, R_d, D=D, is_merger=False,
+            f_bulge_r=f_bulge_r,
+            Omega_over_H0=Omega_over_H0,
+            R_over_L0=R_over_L0,
+            v_over_sigma=v_over_sigma
+        )
         rms_n = np.sqrt(((V_pred_new - V_obs)**2).mean())
         rms_new.append(rms_n)
         
@@ -893,6 +1057,10 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
         rms_mond.append(rms_m)
         
         # Store per-galaxy result for binning
+        # Track if galaxy has bulge points
+        has_bulge = (f_bulge_r is not None and np.any(f_bulge_r > 0.3))
+        n_bulge_pts = np.sum(f_bulge_r > 0.3) if f_bulge_r is not None else 0
+        
         results_per_galaxy.append({
             'name': gal['name'],
             'rms_baseline': rms_b,
@@ -902,6 +1070,8 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
             'phi': phi,
             'f_bulge': gal.get('f_bulge', 0),
             'f_gas': gal.get('f_gas', 0.5),
+            'has_bulge': has_bulge,
+            'n_bulge_pts': n_bulge_pts,
         })
     
     mean_baseline = np.mean(rms_baseline)

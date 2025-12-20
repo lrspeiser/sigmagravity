@@ -2,7 +2,12 @@
 
 ## Overview
 
-The Extended Phase Coherence Model introduces a state-dependent factor φ into the Σ-Gravity enhancement formula. This allows the theory to account for different gravitational behavior based on the dynamical state of matter (ordered vs turbulent, collisionless vs collisional).
+The Extended Phase Coherence Model introduces a **unified state-dependent factor φ** into the Σ-Gravity enhancement formula. This is the SINGLE authoritative φ mechanism that handles:
+- Disk galaxies (kinematic asymmetry → D)
+- Bulge regions (Ω/H₀, compactness, v/σ → D_bulge)  
+- Cluster mergers (Mach number → D)
+- Satellites/UDGs (tidal proximity → D)
+- Wide binaries (MW tidal environment → D)
 
 ## Core Formula
 
@@ -22,10 +27,14 @@ Where:
 Σ = 1 + A(L) × φ × C(v,σ) × h(g)
 ```
 
-Where φ is the **phase coherence factor**:
+Where φ is computed from the **unified phase coherence function**:
+```python
+φ = compute_phi(D, matter_type, mach_turb, is_merger, v_over_sigma)
 ```
-φ = 1 + λ₀ × D × (f_ordered - f_turb)
-```
+
+The formula depends on matter state:
+- **Mergers**: `φ = 1 + λ₀ × D × (f_ordered - f_turb)`
+- **Equilibrium disturbance**: `φ = 1 - 0.3 × D × f_ordered`
 
 ## Parameters
 
@@ -44,6 +53,8 @@ Where φ is the **phase coherence factor**:
 | D_asymmetry_scale | 1.5 | How kinematic asymmetry maps to D |
 | D_wide_binaries | 0.6 | D for wide binaries in MW tidal field |
 | D_tidal_threshold | 5.0 | Tidal radius / r_half threshold |
+| D_bulge_omega_scale | 0.5 | How Ω/H₀ maps to D for bulges |
+| D_bulge_compact_scale | 0.3 | How compactness contributes to D |
 
 ### Physical Meaning
 
@@ -52,16 +63,23 @@ Where φ is the **phase coherence factor**:
 - D = 1: Strong disturbance (major merger, shock)
 
 **D Sources by System Type:**
-- **Disk Galaxies**: D = D_asymmetry_scale × (v_asym / v_circ)
-  - Derived from kinematic lopsidedness, warps, asymmetric rotation curves
-- **Wide Binaries**: D = D_wide_binaries (fixed, from MW tidal environment)
-- **Satellites/UDGs**: D from tidal proximity to host
-- **Cluster Mergers**: D = (Mach - 0.5) / 2.5 (from shock strength)
 
-**Ordered vs Turbulent Fractions:**
-- **Collisionless stars (equilibrium)**: f_ordered = 0.95, f_turb = 0.0 → φ > 1
-- **Collisionless stars (disturbed)**: 30% suppression → φ < 1
-- **Collisional gas (shocked/turbulent)**: f_ordered = 0.1, f_turb ∝ Mach → φ < 1
+| System | D Source | Observable Proxy |
+|--------|----------|------------------|
+| **Disk Galaxies** | D_asymmetry | v_asym / v_circ (lopsidedness, warps) |
+| **Bulge Regions** | D_bulge | Ω/H₀ (orbital frequency), compactness, v/σ |
+| **Wide Binaries** | D_wb | Fixed (MW tidal environment) |
+| **Satellites/UDGs** | D_tidal | r_tidal / r_half |
+| **Cluster Mergers** | D_mach | (Mach - 0.5) / 2.5 |
+
+**Matter Type and State:**
+
+| Matter Type | f_ordered | f_turb | Notes |
+|-------------|-----------|--------|-------|
+| Disk stars | 0.95 | 0.0 | Cold, ordered rotation |
+| Bulge stars | 0.3 + 0.1×(v/σ) | 0.1 | Dispersion-supported, phase-mixed |
+| Gas (laminar) | 0.1 | 0.0 | Collisional, low turbulence |
+| Gas (shocked) | 0.1 | 0.25×Mach | Turbulent, phase-randomized |
 
 ## Key Physics
 
@@ -76,32 +94,44 @@ Disturbance disrupts phase coherence → **suppressed enhancement**
 
 Result: Reduces overprediction in asymmetric/disturbed systems
 
-## Regression Results (Tuned Model)
+## Regression Results (Tuned Model with Per-Point φ)
 
 ### Summary Table
 | Test | Observed | Baseline | New Model | MOND | Best |
 |------|----------|----------|-----------|------|------|
-| SPARC Galaxies (RMS) | 17.15 km/s | 17.42 km/s | **17.19 km/s** | 17.15 km/s | MOND |
+| SPARC Galaxies (RMS) | 17.15 km/s | 17.42 km/s | **17.28 km/s** | 17.15 km/s | MOND |
 | Wide Binaries (boost) | 1.35x | 1.63x | **1.52x** | 1.73x | New |
 | Bullet Cluster | STARS | GAS | **STARS** | GAS | New |
 | Galaxy Clusters | 1.0 | 0.99 | 0.99 | 0.39 | Baseline |
-| DF2 (UDG) | 8.5 km/s | 20.77 km/s | 19.82 km/s | 20.0 km/s | Newton |
+| DF2 (UDG) | 8.5 km/s | 20.77 km/s | 19.87 km/s | 20.0 km/s | Newton |
 | Dwarf Spheroidals | 1.0 | 0.87 | 0.87 | 0.63 | Baseline |
 
 ### Improvements vs Baseline
 | Test | Improvement |
 |------|-------------|
-| SPARC Galaxies | **-85.0%** (closer to observed) |
-| Wide Binaries | **-40.3%** (closer to 1.35x) |
+| SPARC Galaxies | **-52.9%** (closer to observed) |
+| Wide Binaries | **-38.3%** (closer to 1.35x) |
 | Bullet Cluster | **-32.1%** (now at STARS) |
-| DF2 | **-7.8%** (small improvement) |
+| DF2 | **-7.4%** (small improvement) |
 
-### SPARC Binned Analysis
-| Bin | N | Baseline | New | MOND | Best |
-|-----|---|----------|-----|------|------|
-| Disk-dominated (B/T<0.1) | 146 | 15.49 | **15.23** | 15.27 | New |
-| High D (>0.15) | 48 | 13.04 | **12.71** | 13.69 | New |
-| Gas-rich (f_gas>0.5) | 82 | 12.86 | **12.63** | 12.66 | New |
+### SPARC Binned Analysis (Key Finding)
+
+The per-point φ model shows different behavior by galaxy type:
+
+| Bin | N | Baseline | New | MOND | Best | Interpretation |
+|-----|---|----------|-----|------|------|----------------|
+| **Disk-dominated (B/T<0.1)** | 146 | 15.49 | **15.25** | 15.27 | **New** | ✓ Per-point φ helps |
+| Intermediate (0.1-0.3) | 17 | 27.97 | 28.34 | 27.25 | MOND | - Slightly worse |
+| **Bulge-dominated (B/T>0.3)** | 8 | 30.16 | 30.84 | 30.02 | MOND | ✗ Bulge D needs work |
+| D=0 (undisturbed) | 1 | 39.12 | **39.11** | 42.87 | **New** | ✓ Neutral as expected |
+| High D (>0.15) | 48 | 13.04 | **12.73** | 13.69 | **New** | ✓ High-D improves |
+| Gas-rich (f_gas>0.5) | 73 | 12.43 | 12.19 | **12.15** | MOND | - Close to MOND |
+
+**Key Insights:**
+1. **Disk-dominated galaxies**: New model beats MOND
+2. **High-D (disturbed) galaxies**: New model wins
+3. **Bulge-dominated galaxies**: Current D_bulge formula needs refinement
+4. The residual discovery work suggests bulges may need Σ < 1 (screening), which requires a different approach
 
 ## Usage
 
