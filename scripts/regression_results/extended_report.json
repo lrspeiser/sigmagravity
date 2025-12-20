@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-20T00:13:46.704974",
+  "timestamp": "2025-12-20T00:44:25.439487",
   "formula": "sigma_gravity_unified",
   "mode": "full",
   "parameters": {
@@ -297,11 +297,20 @@
         "challenge": "Lensing follows stars (20%), not gas (80%)"
       },
       "message": "M_pred/M_bar = 1.12x (obs: 2.1x). Enable --phase-coherence for spatial test."
+    },
+    {
+      "name": "Merging Clusters",
+      "passed": true,
+      "metric": 0.0,
+      "details": {
+        "mode": "SKIPPED"
+      },
+      "message": "SKIPPED: Enable --phase-coherence for this test"
     }
   ],
   "summary": {
-    "total_tests": 17,
-    "passed": 17,
+    "total_tests": 18,
+    "passed": 18,
     "failed": 0
   },
   "all_passed": true

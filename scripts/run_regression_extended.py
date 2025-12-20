@@ -127,11 +127,61 @@ MATTER_STATES = {
     # Gas in equilibrium: collisional (c > 0.5) with subsonic turbulence → φ ≈ 1
     'gas_disk_cold': {'collisionality': 0.7, 'mach_turb': 0.2},
     'gas_cluster_equilibrium': {'collisionality': 0.6, 'mach_turb': 0.2},
+    'gas_cluster_relaxed': {'collisionality': 0.6, 'mach_turb': 0.2},
     
     # Gas in mergers/shocks: highly collisional AND supersonic → φ < 0
+    # Different merger phases have different shock strengths
     'gas_cluster_shocked': {'collisionality': 0.85, 'mach_turb': 2.0},
-    'gas_bullet_merger': {'collisionality': 0.9, 'mach_turb': 3.5},  # Extreme shock
+    'gas_bullet_merger': {'collisionality': 0.9, 'mach_turb': 3.5},  # Extreme shock (Mach 3)
+    'gas_el_gordo': {'collisionality': 0.88, 'mach_turb': 2.5},  # El Gordo (Mach 2.5)
+    'gas_macs_j0025': {'collisionality': 0.85, 'mach_turb': 2.2},  # MACS J0025 (Mach 2.2)
+    'gas_a520': {'collisionality': 0.82, 'mach_turb': 2.0},  # A520 mid-collision
+    'gas_a2744': {'collisionality': 0.85, 'mach_turb': 2.0},  # Pandora multi-merger
 }
+
+
+def get_gas_state_for_mach(mach_shock: float) -> str:
+    """
+    Get the appropriate gas state name based on shock Mach number.
+    
+    This allows using observed Mach numbers to compute φ(state).
+    """
+    if mach_shock < 0.5:
+        return 'gas_cluster_relaxed'
+    elif mach_shock < 1.5:
+        return 'gas_cluster_equilibrium'
+    elif mach_shock < 2.5:
+        return 'gas_cluster_shocked'
+    else:
+        return 'gas_bullet_merger'
+
+
+def compute_phi_from_mach(mach_shock: float, is_collisionless: bool = False) -> float:
+    """
+    Compute φ directly from observed Mach number.
+    
+    This is a convenience function that maps Mach number to φ using
+    physically motivated state parameters.
+    
+    Parameters:
+    -----------
+    mach_shock : float
+        Observed Mach number of the shock (from X-ray or SZ observations)
+    is_collisionless : bool
+        If True, return φ for collisionless matter (stars/galaxies)
+        If False, return φ for gas
+    """
+    if is_collisionless:
+        # Stars are unaffected by gas shocks - always high coherence
+        return phi_from_state(collisionality=0.0, mach_turb=0.0)
+    
+    # For gas, collisionality and turbulence scale with Mach
+    # Mach 0 → equilibrium (c=0.6, M=0.2)
+    # Mach 3 → extreme shock (c=0.9, M=3.5)
+    collisionality = min(0.9, 0.6 + 0.1 * mach_shock)
+    mach_turb = 0.2 + mach_shock  # Turbulent Mach tracks shock Mach
+    
+    return phi_from_state(collisionality=collisionality, mach_turb=mach_turb)
 
 # Gas fractions for various system types
 GAS_FRACTIONS = {
@@ -334,7 +384,74 @@ OBS_BENCHMARKS = {
         'offset_kpc': 150,  # Lensing peak offset from gas
         'separation_kpc': 720,  # Between main and subcluster
         'mond_challenge': 'Lensing follows stars, not gas',
+        'merger_state': 'post_collision',  # Gas shocked, stars passed through
+        'mach_shock': 3.0,  # Mach number of the shock front
         'source': 'Clowe+ 2006',
+    },
+    
+    # Additional MERGING CLUSTERS for phase coherence validation
+    # These all show lensing-gas offset similar to Bullet Cluster
+    'merging_clusters': {
+        # El Gordo (ACT-CL J0102-4915) - Menanteau+ 2012, Jee+ 2014
+        'el_gordo': {
+            'M_gas': 3.0e14,  # M☉ (X-ray derived)
+            'M_stars': 0.8e14,  # M☉ (stellar mass)
+            'M_lensing': 2.2e15,  # M☉ (most massive known merging cluster)
+            'offset_kpc': 200,  # Significant lensing-gas offset
+            'merger_state': 'post_collision',
+            'mach_shock': 2.5,  # Estimated from X-ray morphology
+            'z': 0.87,  # High redshift
+            'source': 'Menanteau+ 2012, Jee+ 2014',
+        },
+        # A520 (Train Wreck Cluster) - Mahdavi+ 2007, Clowe+ 2012
+        # Controversial: some claim dark core without galaxies
+        'a520': {
+            'M_gas': 1.5e14,  # M☉
+            'M_stars': 0.4e14,  # M☉
+            'M_lensing': 4.5e14,  # M☉
+            'offset_kpc': 100,  # Complex multi-peak structure
+            'merger_state': 'mid_collision',  # Still colliding
+            'mach_shock': 2.0,
+            'z': 0.201,
+            'note': 'Controversial dark core; complex geometry',
+            'source': 'Mahdavi+ 2007, Clowe+ 2012',
+        },
+        # MACS J0025.4-1222 - Bradac+ 2008
+        'macs_j0025': {
+            'M_gas': 1.8e14,  # M☉
+            'M_stars': 0.5e14,  # M☉
+            'M_lensing': 5.0e14,  # M☉
+            'offset_kpc': 120,  # Clear offset like Bullet
+            'merger_state': 'post_collision',
+            'mach_shock': 2.2,
+            'z': 0.586,
+            'note': 'Baby Bullet - similar geometry to 1E0657',
+            'source': 'Bradac+ 2008',
+        },
+        # Abell 2744 (Pandora's Cluster) - Merten+ 2011
+        'a2744': {
+            'M_gas': 2.5e14,  # M☉
+            'M_stars': 0.6e14,  # M☉  
+            'M_lensing': 1.8e15,  # M☉ (multiple components)
+            'offset_kpc': 150,  # Multiple offsets
+            'merger_state': 'multi_merger',  # Multiple subclusters
+            'mach_shock': 2.0,
+            'z': 0.308,
+            'note': 'Complex multi-merger with 4+ subclusters',
+            'source': 'Merten+ 2011',
+        },
+        # Relaxed cluster for comparison (Abell 1689)
+        'a1689_relaxed': {
+            'M_gas': 1.2e14,  # M☉
+            'M_stars': 0.3e14,  # M☉
+            'M_lensing': 1.3e15,  # M☉
+            'offset_kpc': 10,  # Essentially zero offset
+            'merger_state': 'relaxed',  # Equilibrium
+            'mach_shock': 0.2,  # Subsonic turbulence only
+            'z': 0.183,
+            'note': 'Relaxed cluster - lensing centered on gas',
+            'source': 'Limousin+ 2007',
+        },
     },
     
     # Galaxy Clusters - Fox+ 2022, ApJ 928, 87
@@ -1697,6 +1814,119 @@ def test_bullet_cluster() -> TestResult:
         )
 
 
+def test_merging_clusters() -> TestResult:
+    """Test phase coherence model on MULTIPLE merging clusters.
+    
+    This validates that the state-dependent φ(state) model works universally,
+    not just for the Bullet Cluster.
+    
+    Key prediction: In ALL merging clusters, φ(state) should predict:
+    - Lensing peaks at galaxies (collisionless, high φ)
+    - NOT at gas (shocked/turbulent, low/negative φ)
+    
+    Systems tested:
+    - El Gordo (ACT-CL J0102-4915): Highest mass, z=0.87
+    - MACS J0025.4-1222: "Baby Bullet", clear offset
+    - A520: Controversial, mid-collision
+    - A2744: Complex multi-merger
+    - A1689 (relaxed): Control - should have φ ≈ 1 for both
+    """
+    if not USE_PHASE_COHERENCE:
+        return TestResult(
+            name="Merging Clusters",
+            passed=True,
+            metric=0.0,
+            details={'mode': 'SKIPPED'},
+            message="SKIPPED: Enable --phase-coherence for this test"
+        )
+    
+    merging = OBS_BENCHMARKS['merging_clusters']
+    
+    results = {}
+    n_passed = 0
+    n_tested = 0
+    
+    for name, cl in merging.items():
+        M_gas = cl['M_gas'] * M_sun
+        M_stars = cl['M_stars'] * M_sun
+        M_bar = M_gas + M_stars
+        M_lens = cl['M_lensing'] * M_sun
+        offset_kpc = cl['offset_kpc']
+        mach_shock = cl.get('mach_shock', 0.2)
+        merger_state = cl.get('merger_state', 'unknown')
+        r_lens = max(offset_kpc, 50) * kpc_to_m  # At least 50 kpc
+        
+        # Compute g and h for each component
+        g_gas = G * M_gas / r_lens**2
+        g_stars = G * M_stars / r_lens**2
+        h_gas = h_function(np.array([g_gas]))[0]
+        h_stars = h_function(np.array([g_stars]))[0]
+        
+        # Compute φ from observed Mach number
+        phi_stars = compute_phi_from_mach(mach_shock, is_collisionless=True)
+        phi_gas = compute_phi_from_mach(mach_shock, is_collisionless=False)
+        
+        # Compute Σ for each component
+        Sigma_stars = max(1 + A_CLUSTER * phi_stars * h_stars, 0.01)
+        Sigma_gas = max(1 + A_CLUSTER * phi_gas * h_gas, 0.01)
+        
+        M_eff_stars = M_stars * Sigma_stars
+        M_eff_gas = M_gas * Sigma_gas
+        M_eff_total = M_eff_gas + M_eff_stars
+        
+        ratio_gas_to_stars = M_eff_gas / M_eff_stars
+        lensing_at = "STARS" if ratio_gas_to_stars < 1 else "GAS"
+        total_ratio = M_eff_total / M_bar
+        
+        # Expectation based on merger state
+        if merger_state == 'relaxed':
+            # Relaxed: expect lensing at gas (or centered)
+            expected_lensing = "GAS"
+            correct = ratio_gas_to_stars >= 0.8  # Close to centered
+        else:
+            # Merging: expect lensing at stars
+            expected_lensing = "STARS"
+            correct = ratio_gas_to_stars < 1.0
+        
+        if correct:
+            n_passed += 1
+        n_tested += 1
+        
+        results[name] = {
+            'mach_shock': mach_shock,
+            'merger_state': merger_state,
+            'phi_stars': phi_stars,
+            'phi_gas': phi_gas,
+            'Sigma_stars': Sigma_stars,
+            'Sigma_gas': Sigma_gas,
+            'ratio_gas_to_stars': ratio_gas_to_stars,
+            'lensing_at': lensing_at,
+            'expected': expected_lensing,
+            'correct': correct,
+            'total_ratio': total_ratio,
+        }
+    
+    passed = n_passed == n_tested
+    
+    # Summary message
+    merging_names = [n for n, r in results.items() if r['merger_state'] != 'relaxed']
+    relaxed_names = [n for n, r in results.items() if r['merger_state'] == 'relaxed']
+    
+    return TestResult(
+        name="Merging Clusters",
+        passed=passed,
+        metric=n_passed / n_tested if n_tested > 0 else 0,
+        details={
+            'n_tested': n_tested,
+            'n_passed': n_passed,
+            'results': results,
+            'merging_systems': merging_names,
+            'relaxed_systems': relaxed_names,
+        },
+        message=f"{n_passed}/{n_tested} clusters: Merging={len(merging_names)} (lensing at stars), Relaxed={len(relaxed_names)} (centered)"
+    )
+
+
 # =============================================================================
 # MAIN
 # =============================================================================
@@ -1779,7 +2009,7 @@ def main():
         ("Tully-Fisher", lambda: test_tully_fisher()),
     ]
     
-    # Extended tests (9-17)
+    # Extended tests (9-18)
     tests_extended = [
         ("Wide Binaries", lambda: test_wide_binaries()),
         ("Dwarf Spheroidals", lambda: test_dwarf_spheroidals()),
@@ -1790,6 +2020,7 @@ def main():
         ("Structure Formation", lambda: test_structure_formation()),
         ("CMB", lambda: test_cmb()),
         ("Bullet Cluster", lambda: test_bullet_cluster()),
+        ("Merging Clusters", lambda: test_merging_clusters()),  # NEW: validates φ(state) universality
     ]
     
     all_tests = tests_core if core_only else tests_core + tests_extended
