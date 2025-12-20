@@ -89,99 +89,136 @@ SIGMA_BULGE_KMS = 120.0
 A_CLUSTER = A_0 * (600 / L_0)**N_EXP  # ≈ 8.45
 
 # =============================================================================
-# PHASE COHERENCE MODEL - STATE-DEPENDENT (Universal, not system-specific)
+# PHASE COHERENCE MODEL - UNIVERSAL FORMULA
 # =============================================================================
-# Phase coherence φ is computed from PHYSICAL STATE VARIABLES, not matter type.
-# The same matter can have different φ depending on its dynamical state.
+# Phase coherence φ is computed from a UNIVERSAL formula based on:
 #
-# Key state variables:
-# - collisionality: 0 = fully collisionless (stars), 1 = highly collisional
-# - mach_turb: turbulent Mach number (0 = equilibrium, >1 = supersonic turbulence)
-# - omega2, theta2: flow invariants (vorticity, expansion rate)
+#   φ = 1 + λ₀ × D × (f_ordered - f_turb)
 #
-# Physical interpretation:
-# - Ordered trajectories (collisionless, low turbulence): graviton paths add
-#   constructively → φ > 1
-# - Disordered/turbulent: graviton paths have phase noise → destructive
-#   interference → φ < 1 or even < 0 (screening)
+# Where:
+#   λ₀ = 7.0        Universal coupling constant
+#   D ∈ [0, 1]      Disturbance parameter (0 = equilibrium, 1 = strongly disturbed)
+#   f_ordered       Fraction of mass in ordered motion (rotation, streaming)
+#   f_turb          Fraction of mass in supersonic turbulence
 #
-# Formula: Σ_eff = 1 + A(L) × φ(state) × h(g)
+# KEY PRINCIPLE: φ = 1 for ALL equilibrium systems (D = 0)
+#   - This means SPARC, Gaia, Wide Binaries, dSphs, UDGs are UNCHANGED
+#   - φ only deviates from 1 when D > 0 (observable disturbance)
+#
+# Physical justification:
+#   - Equilibrium = steady-state gravitational field → no coherence dynamics
+#   - Non-equilibrium = time-varying field → coherence/decoherence effects active
+#   - Ordered motion → constructive interference → φ > 1
+#   - Turbulent motion → destructive interference → φ < 1 (screening)
+#
+# Observable proxies for D:
+#   - X-ray morphology (centroid shift, power ratio, asymmetry)
+#   - Mach number of shocks (from temperature jumps)
+#   - Velocity structure (multi-modal distributions)
+#   - Dynamical age (t_since_merger / t_relax)
 #
 USE_PHASE_COHERENCE = False  # Set via --phase-coherence flag
 
-# Tuned parameters for φ(state) model
-PHI_LAMBDA_ORDERED = 7.05      # Collisionless enhancement coefficient
-PHI_LAMBDA_TURB = 5.76         # Turbulence suppression coefficient  
-PHI_LAMBDA_FLOW = 2.0          # Flow invariant coefficient
-PHI_MAX = 12.0                 # Regulator: maximum enhancement
-PHI_MIN = -6.0                 # Regulator: maximum suppression (screening)
+# Universal coupling constant
+PHI_LAMBDA_0 = 7.0             # Coupling strength
 
-# Typical state parameters for different matter states
-# These are DERIVED from physical considerations, not fitted
-MATTER_STATES = {
-    # Stars: fully collisionless → φ ≈ 1 + λ_ordered ≈ 8
-    'stars_disk': {'collisionality': 0.0, 'mach_turb': 0.0},
-    'stars_bulge': {'collisionality': 0.0, 'mach_turb': 0.0},
-    'stars_cluster': {'collisionality': 0.0, 'mach_turb': 0.0},
-    
-    # Gas in equilibrium: collisional (c > 0.5) with subsonic turbulence → φ ≈ 1
-    'gas_disk_cold': {'collisionality': 0.7, 'mach_turb': 0.2},
-    'gas_cluster_equilibrium': {'collisionality': 0.6, 'mach_turb': 0.2},
-    'gas_cluster_relaxed': {'collisionality': 0.6, 'mach_turb': 0.2},
-    
-    # Gas in mergers/shocks: highly collisional AND supersonic → φ < 0
-    # Different merger phases have different shock strengths
-    'gas_cluster_shocked': {'collisionality': 0.85, 'mach_turb': 2.0},
-    'gas_bullet_merger': {'collisionality': 0.9, 'mach_turb': 3.5},  # Extreme shock (Mach 3)
-    'gas_el_gordo': {'collisionality': 0.88, 'mach_turb': 2.5},  # El Gordo (Mach 2.5)
-    'gas_macs_j0025': {'collisionality': 0.85, 'mach_turb': 2.2},  # MACS J0025 (Mach 2.2)
-    'gas_a520': {'collisionality': 0.82, 'mach_turb': 2.0},  # A520 mid-collision
-    'gas_a2744': {'collisionality': 0.85, 'mach_turb': 2.0},  # Pandora multi-merger
-}
+# Regulators
+PHI_MAX = 12.0                 # Maximum enhancement
+PHI_MIN = -6.0                 # Maximum suppression (screening)
 
 
-def get_gas_state_for_mach(mach_shock: float) -> str:
+def phi_universal(D: float, f_ordered: float, f_turb: float) -> float:
     """
-    Get the appropriate gas state name based on shock Mach number.
+    UNIVERSAL phase coherence formula.
     
-    This allows using observed Mach numbers to compute φ(state).
+    φ = 1 + λ₀ × D × (f_ordered - f_turb)
+    
+    Parameters:
+    -----------
+    D : float [0, 1]
+        Disturbance parameter (0 = equilibrium, 1 = strongly disturbed)
+        
+    f_ordered : float [0, 1]
+        Fraction of mass in ordered motion
+        
+    f_turb : float [0, 1]
+        Fraction of kinetic energy in supersonic turbulence
+    
+    KEY: For D = 0, φ = 1 ALWAYS (equilibrium systems unchanged)
+    """
+    phi = 1.0 + PHI_LAMBDA_0 * D * (f_ordered - f_turb)
+    return max(PHI_MIN, min(PHI_MAX, phi))
+
+
+def compute_disturbance_from_mach(mach_shock: float) -> float:
+    """
+    Compute disturbance parameter D from observed shock Mach number.
+    
+    D transitions: 0 (Mach < 0.5) → 1 (Mach > 3)
     """
     if mach_shock < 0.5:
-        return 'gas_cluster_relaxed'
-    elif mach_shock < 1.5:
-        return 'gas_cluster_equilibrium'
-    elif mach_shock < 2.5:
-        return 'gas_cluster_shocked'
+        return 0.0
+    elif mach_shock > 3.0:
+        return 1.0
     else:
-        return 'gas_bullet_merger'
+        return (mach_shock - 0.5) / 2.5
 
 
 def compute_phi_from_mach(mach_shock: float, is_collisionless: bool = False) -> float:
     """
-    Compute φ directly from observed Mach number.
-    
-    This is a convenience function that maps Mach number to φ using
-    physically motivated state parameters.
+    Compute φ from observed Mach number using UNIVERSAL formula.
     
     Parameters:
     -----------
     mach_shock : float
-        Observed Mach number of the shock (from X-ray or SZ observations)
+        Observed Mach number (0 = equilibrium, 3+ = strong shock)
     is_collisionless : bool
-        If True, return φ for collisionless matter (stars/galaxies)
-        If False, return φ for gas
+        True for stars/galaxies, False for gas
     """
+    D = compute_disturbance_from_mach(mach_shock)
+    
     if is_collisionless:
-        # Stars are unaffected by gas shocks - always high coherence
-        return phi_from_state(collisionality=0.0, mach_turb=0.0)
+        # Collisionless: ordered motion, no turbulence
+        f_ordered = 0.95
+        f_turb = 0.0
+    else:
+        # Gas: f_turb scales with Mach
+        f_ordered = 0.1
+        f_turb = min(0.85, 0.25 * mach_shock)
     
-    # For gas, collisionality and turbulence scale with Mach
-    # Mach 0 → equilibrium (c=0.6, M=0.2)
-    # Mach 3 → extreme shock (c=0.9, M=3.5)
-    collisionality = min(0.9, 0.6 + 0.1 * mach_shock)
-    mach_turb = 0.2 + mach_shock  # Turbulent Mach tracks shock Mach
+    return phi_universal(D, f_ordered, f_turb)
+
+
+def get_matter_state_phi(matter_type: str) -> float:
+    """
+    Get φ for a named matter state using UNIVERSAL formula.
     
-    return phi_from_state(collisionality=collisionality, mach_turb=mach_turb)
+    Maps legacy state names to observable parameters.
+    """
+    # Map state names to Mach numbers
+    STATE_TO_MACH = {
+        # Equilibrium: D = 0 → φ = 1
+        'stars_disk': (0.0, True),
+        'stars_bulge': (0.0, True),
+        'gas_disk_cold': (0.0, False),
+        'gas_cluster_relaxed': (0.2, False),
+        'gas_cluster_equilibrium': (0.2, False),
+        
+        # Disturbed: D > 0 → φ ≠ 1
+        'stars_cluster': (3.0, True),  # In merger
+        'gas_cluster_shocked': (2.0, False),
+        'gas_bullet_merger': (3.5, False),
+        'gas_el_gordo': (2.5, False),
+        'gas_macs_j0025': (2.2, False),
+        'gas_a520': (2.0, False),
+        'gas_a2744': (2.0, False),
+    }
+    
+    if matter_type not in STATE_TO_MACH:
+        return 1.0  # Default: equilibrium
+    
+    mach, is_collisionless = STATE_TO_MACH[matter_type]
+    return compute_phi_from_mach(mach, is_collisionless)
 
 # Gas fractions for various system types
 GAS_FRACTIONS = {
@@ -192,112 +229,6 @@ GAS_FRACTIONS = {
     'dwarf_spheroidal': 0.01, # dSphs: <1% gas (stripped)
     'udg': 0.05,              # UDGs: ~5% gas
 }
-
-
-def phi_from_state(
-    collisionality: float,
-    mach_turb: float,
-    omega2: float = 0.0,
-    theta2: float = 0.0,
-) -> float:
-    """
-    Compute phase coherence factor φ from physical state variables.
-    
-    This is the UNIVERSAL φ(state) function that replaces hardcoded values.
-    
-    Parameters:
-    -----------
-    collisionality : float [0, 1]
-        0 = fully collisionless (stars, dark matter)
-        1 = highly collisional (gas)
-        
-    mach_turb : float [0, ∞)
-        Turbulent Mach number = σ_turb / c_s
-        0 = equilibrium (thermal motions only)
-        >1 = supersonic turbulence
-        
-    omega2 : float
-        Squared vorticity from flow invariants (if available)
-        
-    theta2 : float
-        Squared expansion rate from flow invariants (if available)
-    
-    Returns:
-    --------
-    phi : float
-        Phase coherence factor. φ > 1 = enhancement, φ < 0 = screening
-    
-    Physical interpretation:
-    ------------------------
-    The key insight is that φ depends on the ORDERING of trajectories:
-    
-    1. COLLISIONLESS matter (stars, dark matter):
-       - Ordered, long-lived trajectories on well-defined orbits
-       - Graviton "paths" add constructively → φ >> 1
-       - φ = 1 + λ_ordered ≈ 8
-       
-    2. COLLISIONAL matter in EQUILIBRIUM (virialized gas):
-       - Random thermal motions, but in statistical equilibrium
-       - Graviton paths average out → φ ≈ 1 (neutral)
-       - No enhancement, but no screening either
-       
-    3. COLLISIONAL matter in TURBULENCE (shocked gas):
-       - Chaotic, time-varying velocity field
-       - Graviton paths acquire random phases → destructive interference
-       - φ < 1, can go negative for strong shocks → SCREENING
-       
-    4. Flow invariants (if available):
-       - High ω² (vorticity): ordered rotation → boost
-       - High θ² (expansion): chaotic compression → suppress
-    """
-    # Start with neutral (no enhancement/suppression)
-    phi = 1.0
-    
-    # 1. Collisionless enhancement: ONLY for collisionless matter
-    # This is the key: collisional matter starts at φ = 1, not enhanced
-    if collisionality < 0.5:
-        # Transition from collisionless (c=0) → collisional (c=0.5)
-        # At c=0: full enhancement
-        # At c=0.5: no enhancement
-        enhancement_fraction = 1.0 - 2.0 * collisionality  # 1→0 as c: 0→0.5
-        phi += PHI_LAMBDA_ORDERED * enhancement_fraction
-    
-    # 2. Turbulence effect: ONLY for collisional matter
-    # Collisionless matter isn't affected by turbulence (no collisions to transmit it)
-    if collisionality > 0.3 and mach_turb > 0.1:
-        # Saturating suppression, scales with both collisionality and Mach
-        turb_susceptibility = min(1.0, 2.0 * (collisionality - 0.3))  # 0→1 as c: 0.3→0.8
-        phi_turb = -PHI_LAMBDA_TURB * mach_turb / (1 + mach_turb) * turb_susceptibility
-        phi += phi_turb
-    
-    # 3. Flow invariant effect (if available from Gaia/BRAVA analysis)
-    # ω² >> θ² → coherent (vorticity-dominated) → boost
-    # θ² >> ω² → chaotic (expansion-dominated) → suppress
-    if omega2 + theta2 > 1e-20:
-        flow_ratio = (omega2 - theta2) / (omega2 + theta2)  # ∈ [-1, 1]
-        phi += PHI_LAMBDA_FLOW * flow_ratio
-    
-    # Apply regulators to prevent blowup
-    phi = max(PHI_MIN, min(PHI_MAX, phi))
-    
-    return phi
-
-
-def get_matter_state_phi(matter_type: str) -> float:
-    """
-    Get φ for a named matter state using the state-dependent model.
-    
-    This is a convenience function that looks up typical state parameters
-    and computes φ using phi_from_state().
-    """
-    if matter_type not in MATTER_STATES:
-        return 1.0  # Default: no enhancement/suppression
-    
-    state = MATTER_STATES[matter_type]
-    return phi_from_state(
-        collisionality=state['collisionality'],
-        mach_turb=state['mach_turb'],
-    )
 
 # =============================================================================
 # OBSERVATIONAL BENCHMARKS (GOLD STANDARD)
@@ -939,23 +870,19 @@ def test_clusters(clusters: List[Dict]) -> TestResult:
         r_m = r_kpc * kpc_to_m
         
         if USE_PHASE_COHERENCE:
-            # STATE-DEPENDENT φ for EQUILIBRIUM clusters:
-            # - Gas is virialized (hydrostatic equilibrium), NOT turbulent
-            # - φ is computed from state, not hardcoded
+            # UNIVERSAL FORMULA for EQUILIBRIUM clusters:
+            # D = 0 (no disturbance) → φ = 1 for ALL components
             #
-            # For equilibrium clusters:
-            # - Gas has low turbulence (subsonic) → φ ≈ 1
-            # - Stars are collisionless → φ > 1
-            # - Net effect: slight enhancement, close to standard model
-            phi_gas_eq = get_matter_state_phi('gas_cluster_equilibrium')
-            phi_stars_eq = get_matter_state_phi('stars_cluster')
-            
-            # Weighted average φ based on mass fractions
-            phi_weighted = f_gas * phi_gas_eq + f_stars * phi_stars_eq
+            # This is the key property of the universal formula:
+            # Equilibrium systems are UNCHANGED by phase coherence.
+            #
+            # Mach ~ 0.2 for relaxed clusters → D ≈ 0 → φ ≈ 1
+            mach_eq = 0.2  # Subsonic turbulence only
+            phi_eq = compute_phi_from_mach(mach_eq, is_collisionless=False)
             
             g_bar = G * M_bar * M_sun / r_m**2
             h = h_function(np.array([g_bar]))[0]
-            Sigma = 1 + A_cluster * phi_weighted * h
+            Sigma = 1 + A_cluster * phi_eq * h
             M_pred = M_bar * Sigma
         else:
             g_bar = G * M_bar * M_sun / r_m**2
@@ -1731,18 +1658,18 @@ def test_bullet_cluster() -> TestResult:
     h_stars = h_function(np.array([g_stars]))[0]
     
     if USE_PHASE_COHERENCE:
-        # STATE-DEPENDENT PHASE COHERENCE MODEL
-        # φ is COMPUTED from physical state, not hardcoded
+        # UNIVERSAL PHASE COHERENCE MODEL
+        # φ is COMPUTED from observable Mach number
+        mach_bullet = bc.get('mach_shock', 3.0)  # From X-ray observations
         
         # Stars: collisionless, passed through merger unaffected
-        phi_stars = get_matter_state_phi('stars_cluster')
+        phi_stars = compute_phi_from_mach(mach_bullet, is_collisionless=True)
         
-        # Gas: shocked in the merger → high collisionality, supersonic turbulence
-        phi_gas = get_matter_state_phi('gas_bullet_merger')
+        # Gas: shocked in the merger → turbulent
+        phi_gas = compute_phi_from_mach(mach_bullet, is_collisionless=False)
         
-        # For debugging: also show the raw state parameters
-        state_stars = MATTER_STATES['stars_cluster']
-        state_gas = MATTER_STATES['gas_bullet_merger']
+        # Show the disturbance parameter D
+        D = compute_disturbance_from_mach(mach_bullet)
         
         # Compute Σ for each component
         Sigma_stars = max(1 + A_CLUSTER * phi_stars * h_stars, 0.01)
@@ -1764,11 +1691,11 @@ def test_bullet_cluster() -> TestResult:
             passed=passed,
             metric=ratio_gas_to_stars,
             details={
-                'mode': 'STATE_DEPENDENT_PHI',
+                'mode': 'UNIVERSAL_PHI',
+                'mach_shock': mach_bullet,
+                'D': D,
                 'phi_gas': phi_gas,
                 'phi_stars': phi_stars,
-                'state_gas': state_gas,
-                'state_stars': state_stars,
                 'h_gas': h_gas,
                 'h_stars': h_stars,
                 'Sigma_gas': Sigma_gas,
@@ -1938,16 +1865,14 @@ def main():
     phase_coherence = '--phase-coherence' in sys.argv
     
     global USE_SIGMA_COMPONENTS, USE_PHASE_COHERENCE
-    global PHI_LAMBDA_ORDERED, PHI_LAMBDA_TURB
+    global PHI_LAMBDA_0
     USE_SIGMA_COMPONENTS = bool(sigma_components)
     USE_PHASE_COHERENCE = bool(phase_coherence)
     
     # Parse optional phase coherence parameters (for tuning the model)
     for arg in sys.argv:
-        if arg.startswith('--phi-lambda-ordered='):
-            PHI_LAMBDA_ORDERED = float(arg.split('=')[1])
-        elif arg.startswith('--phi-lambda-turb='):
-            PHI_LAMBDA_TURB = float(arg.split('=')[1])
+        if arg.startswith('--phi-lambda='):
+            PHI_LAMBDA_0 = float(arg.split('=')[1])
     
     data_dir = Path(__file__).parent.parent / "data"
     
@@ -1957,14 +1882,17 @@ def main():
     print(f"Timestamp: {datetime.now().isoformat()}")
     print(f"Mode: {'Core only' if core_only else 'Quick' if quick else 'Full'}")
     if USE_PHASE_COHERENCE:
-        # Show the φ values that will be computed from state
-        phi_stars_ex = get_matter_state_phi('stars_cluster')
-        phi_gas_shock = get_matter_state_phi('gas_bullet_merger')
-        phi_gas_eq = get_matter_state_phi('gas_cluster_equilibrium')
-        print(f"Phase Coherence: STATE-DEPENDENT MODEL")
-        print(f"  phi(stars_cluster) = {phi_stars_ex:+.2f}")
-        print(f"  phi(gas_equilibrium) = {phi_gas_eq:+.2f}")
-        print(f"  phi(gas_shocked) = {phi_gas_shock:+.2f}")
+        # Show the UNIVERSAL formula and example φ values
+        print(f"Phase Coherence: UNIVERSAL FORMULA")
+        print(f"  phi = 1 + lambda_0 * D * (f_ordered - f_turb)")
+        print(f"  lambda_0 = {PHI_LAMBDA_0:.1f}")
+        print(f"  Example (Mach 3 shock):")
+        print(f"    D = {compute_disturbance_from_mach(3.0):.2f}")
+        print(f"    phi(stars) = {compute_phi_from_mach(3.0, True):+.2f}")
+        print(f"    phi(gas) = {compute_phi_from_mach(3.0, False):+.2f}")
+        print(f"  Example (equilibrium, Mach 0):")
+        print(f"    D = {compute_disturbance_from_mach(0.0):.2f}")
+        print(f"    phi(all) = {compute_phi_from_mach(0.0, True):+.2f}")
     print()
     print("UNIFIED FORMULA PARAMETERS:")
     print(f"  A_0 = exp(1/2pi) = {A_0:.4f}")
