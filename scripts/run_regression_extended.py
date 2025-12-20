@@ -275,6 +275,25 @@ OBS_BENCHMARKS = {
         'bao_scale_Mpc': 150,
         'source': 'Planck 2018, SDSS',
     },
+    'bulge_dispersion': {
+        # Milky Way bulge from BRAVA/ARGOS/Gaia
+        'mw_bulge': {
+            'R_kpc': [0.5, 1.0, 1.5, 2.0],
+            'sigma_obs': [120, 110, 95, 80],  # km/s velocity dispersion
+            'sigma_err': [10, 8, 8, 10],
+            'source': 'Zoccali+ 2014, ARGOS, BRAVA',
+        },
+        # External galaxy bulges (from ATLAS3D, SAURON)
+        'external_bulges': {
+            'M31_bulge': {'R_kpc': 1.0, 'sigma_obs': 160, 'sigma_err': 15, 'M_star': 3e10},
+            'NGC4649': {'R_kpc': 2.0, 'sigma_obs': 340, 'sigma_err': 20, 'M_star': 2e11},
+            'NGC3377': {'R_kpc': 0.5, 'sigma_obs': 145, 'sigma_err': 10, 'M_star': 1e10},
+            'source': 'ATLAS3D, Cappellari+ 2013',
+        },
+        # Key physics: These are dispersion-supported (v/σ < 1)
+        'v_over_sigma_typical': 0.5,
+        'notes': 'Bulges are dispersion-supported. Use σ, not v_circ.',
+    },
 }
 
 
@@ -1005,61 +1024,60 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
     D_values = []
     phi_values = []
     
+    # Track excluded bulge points
+    total_points = 0
+    excluded_bulge_points = 0
+    
     for gal in galaxies:
         R = gal['R']
         V_obs = gal['V_obs']
         V_bar = gal['V_bar']
         R_d = gal['R_d']
+        f_bulge_r = gal.get('f_bulge_r', np.zeros_like(R))
         
-        # Baseline prediction
-        V_pred_baseline = predict_velocity_baseline(R, V_bar, R_d)
-        rms_b = np.sqrt(((V_pred_baseline - V_obs)**2).mean())
+        # EXCLUDE bulge-dominated points from rotation curve test
+        # Reason: Bulges are dispersion-supported (v/sigma < 1), rotation is wrong observable
+        disk_mask = f_bulge_r < 0.3  # Only use points with <30% bulge contribution
+        
+        total_points += len(R)
+        excluded_bulge_points += np.sum(~disk_mask)
+        
+        # If galaxy has too few disk points, skip it
+        if np.sum(disk_mask) < 3:
+            continue
+        
+        R_disk = R[disk_mask]
+        V_obs_disk = V_obs[disk_mask]
+        V_bar_disk = V_bar[disk_mask]
+        
+        # Baseline prediction (disk points only)
+        V_pred_baseline = predict_velocity_baseline(R_disk, V_bar_disk, R_d)
+        rms_b = np.sqrt(((V_pred_baseline - V_obs_disk)**2).mean())
         rms_baseline.append(rms_b)
         
-        # New model with extended phase coherence
+        # New model with extended phase coherence (disk points only)
         if USE_EXTENDED_PHI:
-            # Global D from disk asymmetry
             D = compute_D_from_asymmetry(gal.get('v_asym', 0), gal.get('v_circ', 200))
-            
-            # Per-point arrays for bulge-aware φ
-            f_bulge_r = gal.get('f_bulge_r', None)
-            Omega_over_H0 = gal.get('Omega_over_H0', None)
-            R_over_L0 = gal.get('R_over_L0', None)
-            v_over_sigma = gal.get('v_over_sigma_est', 5.0)
-            
-            # Compute mean phi for reporting (actual per-point phi is in predict_velocity_new)
             phi = compute_phi(D, matter_type="disk_stars", is_merger=False)
         else:
             D = 0.0
             phi = 1.0
-            f_bulge_r = None
-            Omega_over_H0 = None
-            R_over_L0 = None
-            v_over_sigma = 5.0
         
         D_values.append(D)
         phi_values.append(phi)
         
-        # Predict with per-point φ when available
-        V_pred_new = predict_velocity_new(
-            R, V_bar, R_d, D=D, is_merger=False,
-            f_bulge_r=f_bulge_r,
-            Omega_over_H0=Omega_over_H0,
-            R_over_L0=R_over_L0,
-            v_over_sigma=v_over_sigma
-        )
-        rms_n = np.sqrt(((V_pred_new - V_obs)**2).mean())
+        # Predict for disk points only (no bulge φ needed since we excluded bulge points)
+        V_pred_new = predict_velocity_new(R_disk, V_bar_disk, R_d, D=D, is_merger=False)
+        rms_n = np.sqrt(((V_pred_new - V_obs_disk)**2).mean())
         rms_new.append(rms_n)
         
-        # MOND prediction
-        V_mond = predict_mond(R, V_bar)
-        rms_m = np.sqrt(((V_mond - V_obs)**2).mean())
+        # MOND prediction (disk points only)
+        V_mond = predict_mond(R_disk, V_bar_disk)
+        rms_m = np.sqrt(((V_mond - V_obs_disk)**2).mean())
         rms_mond.append(rms_m)
         
-        # Store per-galaxy result for binning
-        # Track if galaxy has bulge points
-        has_bulge = (f_bulge_r is not None and np.any(f_bulge_r > 0.3))
-        n_bulge_pts = np.sum(f_bulge_r > 0.3) if f_bulge_r is not None else 0
+        # Store per-galaxy result
+        n_bulge_pts = np.sum(~disk_mask)
         
         results_per_galaxy.append({
             'name': gal['name'],
@@ -1070,8 +1088,9 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
             'phi': phi,
             'f_bulge': gal.get('f_bulge', 0),
             'f_gas': gal.get('f_gas', 0.5),
-            'has_bulge': has_bulge,
+            'has_bulge': n_bulge_pts > 0,
             'n_bulge_pts': n_bulge_pts,
+            'n_disk_pts': np.sum(disk_mask),
         })
     
     mean_baseline = np.mean(rms_baseline)
@@ -1096,21 +1115,26 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
     # Compute bins
     bins = compute_sparc_bins(galaxies, results_per_galaxy) if USE_EXTENDED_PHI else {}
     
-    # Print verbose bin analysis
-    if verbose and USE_EXTENDED_PHI:
-        print("\n  SPARC BINNED ANALYSIS:")
-        print("  " + "-" * 90)
-        print(f"  {'Bin':<35} {'N':>4} {'Baseline':>10} {'New':>10} {'MOND':>10} {'Improv%':>10} {'Best':>8}")
-        print("  " + "-" * 90)
+    # Print verbose analysis
+    if verbose:
+        pct_excluded = excluded_bulge_points / total_points * 100 if total_points > 0 else 0
+        print(f"\n  SPARC DISK-ONLY ANALYSIS (bulge points excluded):")
+        print(f"  Total points: {total_points}, Excluded bulge points: {excluded_bulge_points} ({pct_excluded:.1f}%)")
+        print(f"  Galaxies used: {len(results_per_galaxy)} (skipped galaxies with <3 disk points)")
         
-        for category, bin_list in bins.items():
-            print(f"  {category.upper()}:")
-            for b in bin_list:
-                print(f"    {b.bin_name:<33} {b.n_galaxies:>4} {b.rms_baseline:>10.2f} {b.rms_new:>10.2f} {b.rms_mond:>10.2f} {b.improvement_pct:>+10.1f} {b.best_theory:>8}")
-        
-        print("  " + "-" * 90)
-        print(f"  D stats: min={D_stats['min']:.3f}, max={D_stats['max']:.3f}, mean={D_stats['mean']:.3f}, n_nonzero={D_stats['n_nonzero']}")
-        print(f"  phi stats: min={phi_stats['min']:.3f}, max={phi_stats['max']:.3f}, mean={phi_stats['mean']:.3f}")
+        if USE_EXTENDED_PHI:
+            print("  " + "-" * 90)
+            print(f"  {'Bin':<35} {'N':>4} {'Baseline':>10} {'New':>10} {'MOND':>10} {'Improv%':>10} {'Best':>8}")
+            print("  " + "-" * 90)
+            
+            for category, bin_list in bins.items():
+                print(f"  {category.upper()}:")
+                for b in bin_list:
+                    print(f"    {b.bin_name:<33} {b.n_galaxies:>4} {b.rms_baseline:>10.2f} {b.rms_new:>10.2f} {b.rms_mond:>10.2f} {b.improvement_pct:>+10.1f} {b.best_theory:>8}")
+            
+            print("  " + "-" * 90)
+            print(f"  D stats: min={D_stats['min']:.3f}, max={D_stats['max']:.3f}, mean={D_stats['mean']:.3f}, n_nonzero={D_stats['n_nonzero']}")
+            print(f"  phi stats: min={phi_stats['min']:.3f}, max={phi_stats['max']:.3f}, mean={phi_stats['mean']:.3f}")
     
     # Reference: MOND is the "gold standard" for rotation curves
     observed_rms = mean_mond
@@ -1124,19 +1148,25 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
     }
     best = min(theories, key=theories.get)
     
+    # Calculate win rate safely
+    n_tested = len(rms_baseline)
+    win_rate = sum(1 for b, m in zip(rms_baseline, rms_mond) if b < m) / n_tested * 100 if n_tested > 0 else 0
+    
+    pct_excluded = excluded_bulge_points / total_points * 100 if total_points > 0 else 0
+    
     result = ComparativeResult(
-        name="SPARC Galaxies",
+        name="SPARC Disk-Only",
         metric_name="RMS",
         observed=observed_rms,
         observed_err=None,
         observed_unit="km/s",
-        baseline=TheoryPrediction(mean_baseline, "km/s", {'win_rate': sum(1 for b, m in zip(rms_baseline, rms_mond) if b < m) / len(galaxies)}),
+        baseline=TheoryPrediction(mean_baseline, "km/s", {'win_rate': win_rate}),
         new_model=TheoryPrediction(mean_new, "km/s", {'D_stats': D_stats, 'phi_stats': phi_stats}),
         mond=TheoryPrediction(mean_mond, "km/s"),
         lcdm=TheoryPrediction(lcdm_rms, "km/s", {'note': '2-3 params/galaxy'}),
         best_theory=best,
-        n_objects=len(galaxies),
-        notes=f"Win rates: Baseline beats MOND {sum(1 for b, m in zip(rms_baseline, rms_mond) if b < m)/len(galaxies)*100:.1f}%"
+        n_objects=n_tested,
+        notes=f"Disk only ({pct_excluded:.0f}% bulge pts excluded). Baseline beats MOND {win_rate:.1f}%"
     )
     
     # Return result and detailed bin analysis
@@ -1357,6 +1387,102 @@ def test_dsph_comparative() -> ComparativeResult:
         best_theory=best,
         n_objects=len(results_baseline),
         notes="Host inheritance model for satellites"
+    )
+
+
+def test_bulge_dispersion_comparative() -> ComparativeResult:
+    """
+    Compare theories on BULGE velocity dispersions.
+    
+    Unlike rotation curves, bulges are dispersion-supported systems (v/σ < 1).
+    The correct observable is velocity dispersion σ, not rotation velocity.
+    
+    This is a separate test from SPARC rotation curves because:
+    1. Different observable (σ vs v_circ)
+    2. Different physics (pressure support vs rotation)
+    3. Different coherence regime (disordered vs ordered)
+    """
+    bulge_data = OBS_BENCHMARKS['bulge_dispersion']
+    
+    # Use MW bulge data (best constrained)
+    mw = bulge_data['mw_bulge']
+    R_kpc = np.array(mw['R_kpc'])
+    sigma_obs = np.array(mw['sigma_obs'])
+    sigma_err = np.array(mw['sigma_err'])
+    
+    # MW bulge mass model (Hernquist profile)
+    M_bulge = 1.5e10  # Solar masses
+    r_s = 0.5  # Scale radius in kpc
+    
+    results_baseline = []
+    results_new = []
+    results_mond = []
+    results_lcdm = []
+    
+    for R, obs, err in zip(R_kpc, sigma_obs, sigma_err):
+        r_m = R * kpc_to_m
+        
+        # Hernquist enclosed mass: M(<r) = M_total * r² / (r + r_s)²
+        M_enc = M_bulge * R**2 / (R + r_s)**2
+        
+        # Newtonian prediction: σ² ~ GM/r (virial theorem)
+        g_N = G * M_enc * M_sun / r_m**2
+        sigma_N = np.sqrt(G * M_enc * M_sun / (3 * r_m)) / 1000  # km/s
+        
+        # BASELINE Σ-Gravity: enhance gravity
+        h_val = h_function(np.array([g_N]))[0]
+        Sigma_baseline = 1 + BASELINE_A_0 * h_val
+        sigma_baseline = sigma_N * np.sqrt(Sigma_baseline)
+        results_baseline.append(sigma_baseline)
+        
+        # NEW MODEL: bulge-specific treatment
+        # Bulges are disordered → use reduced coherence
+        # D from compactness/Omega
+        v_over_sigma = 0.5  # Typical for bulges
+        D_bulge = compute_D_from_bulge(100 / R, R / L_0, v_over_sigma)  # Omega/H0 ~ 100/R approx
+        phi = compute_phi(D_bulge, matter_type="bulge_stars", is_merger=False, v_over_sigma=v_over_sigma)
+        
+        Sigma_new = 1 + A_0 * phi * h_val
+        sigma_new = sigma_N * np.sqrt(max(Sigma_new, 0.01))
+        results_new.append(sigma_new)
+        
+        # MOND prediction
+        mond_nu = mond_enhancement(g_N)
+        sigma_mond = sigma_N * np.sqrt(mond_nu)
+        results_mond.append(sigma_mond)
+        
+        # ΛCDM with dark matter halo (typical NFW)
+        # DM typically contributes 50% extra mass in bulge region
+        sigma_lcdm = sigma_N * np.sqrt(1.5)
+        results_lcdm.append(sigma_lcdm)
+    
+    # Compute RMS for each theory
+    rms_baseline = np.sqrt(((np.array(results_baseline) - sigma_obs)**2).mean())
+    rms_new = np.sqrt(((np.array(results_new) - sigma_obs)**2).mean())
+    rms_mond = np.sqrt(((np.array(results_mond) - sigma_obs)**2).mean())
+    rms_lcdm = np.sqrt(((np.array(results_lcdm) - sigma_obs)**2).mean())
+    
+    theories = {
+        'Baseline': rms_baseline,
+        'New Model': rms_new,
+        'MOND': rms_mond,
+        'LCDM': rms_lcdm
+    }
+    best = min(theories, key=theories.get)
+    
+    return ComparativeResult(
+        name="Bulge Dispersion",
+        metric_name="RMS(sigma)",
+        observed=np.mean(sigma_obs),
+        observed_err=np.mean(sigma_err),
+        observed_unit="km/s",
+        baseline=TheoryPrediction(rms_baseline, "km/s", {'mean_pred': np.mean(results_baseline)}),
+        new_model=TheoryPrediction(rms_new, "km/s", {'mean_pred': np.mean(results_new)}),
+        mond=TheoryPrediction(rms_mond, "km/s", {'mean_pred': np.mean(results_mond)}),
+        lcdm=TheoryPrediction(rms_lcdm, "km/s", {'mean_pred': np.mean(results_lcdm)}),
+        best_theory=best,
+        n_objects=len(R_kpc),
+        notes=f"MW bulge σ (dispersion-supported, v/sigma~0.5)"
     )
 
 
@@ -1817,6 +1943,7 @@ def main():
     analyses['udg'] = udg_analysis
     
     results.append(test_dsph_comparative())
+    results.append(test_bulge_dispersion_comparative())  # NEW: Separate bulge test
     results.append(test_bullet_cluster_comparative())
     
     # Print comparison table
