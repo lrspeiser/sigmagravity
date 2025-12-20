@@ -87,10 +87,11 @@ PHI_LAMBDA_0 = 7.0
 PHI_MAX = 12.0
 PHI_MIN = -6.0
 
-# Extended D proxies for non-cluster systems
-D_ASYMMETRY_SCALE = 0.3   # Scale factor for kinematic asymmetry → D
+# Extended D proxies for non-cluster systems (TUNED)
+D_ASYMMETRY_SCALE = 1.5   # Scale factor for kinematic asymmetry → D  [TUNED]
 D_TIDAL_THRESHOLD = 5.0   # r_tidal / r_half threshold for D activation
 D_INTERACTION_SCALE = 0.5 # Scale factor for interaction signatures → D
+D_WIDE_BINARIES = 0.6     # D for wide binaries in MW tidal field     [TUNED]
 
 # KEY PHYSICS DISTINCTION:
 # - In MERGERS: D represents "survival" of coherence → stars get φ > 1
@@ -998,9 +999,8 @@ def test_wide_binaries_comparative() -> Tuple[ComparativeResult, Dict]:
     # New model: With potential tidal D
     # Wide binaries are in MW's tidal field → equilibrium disturbance
     if USE_EXTENDED_PHI:
-        # Estimate tidal disturbance: binaries at 10 kAU in MW potential
-        # D represents loss of perfect coherence in the tidal field
-        D = 0.15
+        # D for wide binaries - represents loss of perfect coherence in MW tidal field
+        D = D_WIDE_BINARIES
         phi = compute_phi_extended(D, is_collisionless=True, is_merger=False)  # EQUILIBRIUM
     else:
         D = 0.0
@@ -1565,7 +1565,7 @@ def format_improvement_table(results: List[ComparativeResult]) -> str:
 # =============================================================================
 
 def main():
-    global USE_EXTENDED_PHI, PHI_LAMBDA_0, D_ASYMMETRY_SCALE, D_TIDAL_THRESHOLD
+    global USE_EXTENDED_PHI, PHI_LAMBDA_0, D_ASYMMETRY_SCALE, D_TIDAL_THRESHOLD, D_WIDE_BINARIES
     
     quick = '--quick' in sys.argv
     extended_phi = '--extended-phi' in sys.argv
@@ -1580,6 +1580,8 @@ def main():
             D_ASYMMETRY_SCALE = float(arg.split('=')[1])
         if arg.startswith('--d-tidal='):
             D_TIDAL_THRESHOLD = float(arg.split('=')[1])
+        if arg.startswith('--d-wb='):
+            D_WIDE_BINARIES = float(arg.split('=')[1])
     
     data_dir = Path(__file__).parent.parent / "data"
     
