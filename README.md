@@ -461,12 +461,3 @@ We thank Emmanuel N. Saridakis (National Observatory of Athens) for detailed fee
 
 [20] D. Bevacqua et al., Mon. Not. R. Astron. Soc. **511**, 139 (2022). [Counter-rotating galaxies]
 
----
-
-## Appendix A: Derivation Details
-
-Extended derivations including mode-counting arguments for the amplitude, path-length scaling, and PPN analysis are provided in the Supplementary Information document.
-
-## Appendix B: Additional Validation
-
-Rotation curve galleries, RAR comparisons, and cluster scatter distributions are provided in the Supplementary Information.
