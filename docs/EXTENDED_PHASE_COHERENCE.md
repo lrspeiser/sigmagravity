@@ -130,16 +130,20 @@ Disturbance disrupts phase coherence → **suppressed enhancement (φ < 1)**
 
 Result: Reduces overprediction in asymmetric/disturbed systems
 
-## Regression Results (Latest Run: 2025-12-20)
+## Regression Results (Latest Run: 2025-12-21)
+
+### Key Finding: φ(state) Works for Non-Equilibrium, Not SPARC
+
+The extended phase coherence model captures **real physics for systems with distinct matter-state separation** (mergers, tidal disturbance, wide binaries) but does **not** materially improve equilibrium disk galaxies.
 
 ### Summary Table
 
 | Test | Observed | Baseline | New Model | MOND | ΛCDM | Best |
 |------|----------|----------|-----------|------|------|------|
-| **SPARC Disk-Only** (RMS) | 16.06 km/s | 16.37 km/s | 16.54 km/s | 16.06 km/s | 15.00 km/s | ΛCDM |
 | **Wide Binaries** (boost) | 1.35x | 1.63x | **1.52x** | 1.73x | 1.00x | **New Model** |
 | **Bullet Cluster** | STARS | GAS (0.53) | **STARS (1.03)** | GAS (0.49) | STARS (1.0) | **New Model** |
 | **Bulge Dispersion** (RMS) | 101.25 km/s | 10.43 km/s | **10.40 km/s** | 10.83 km/s | 14.45 km/s | **New Model** |
+| SPARC Disk-Only (RMS) | 16.06 km/s | 16.37 km/s | 16.67 km/s | 16.06 km/s | 15.00 km/s | ΛCDM |
 | Galaxy Clusters | 1.0 | 0.99 | 0.99 | 0.39 | 1.0 | ΛCDM |
 | Gaia/MW | 38.66 km/s | 33.81 km/s | 33.81 km/s | 38.66 km/s | 25.0 km/s | ΛCDM |
 | DF2 (UDG) | 8.5 km/s | 20.77 km/s | 19.87 km/s | 20.0 km/s | 8.84 km/s | Newtonian |
@@ -147,14 +151,15 @@ Result: Reduces overprediction in asymmetric/disturbed systems
 
 ### Improvements vs Baseline
 
-| Test | Improvement | Notes |
-|------|-------------|-------|
-| Wide Binaries | **-38.3%** | Closer to observed 1.35x |
-| Bullet Cluster | **-32.1%** | Now correctly at STARS |
-| DF2 | **-7.4%** | Small improvement |
-| Galaxy Clusters | 0.0% | Unchanged (equilibrium) |
-| Gaia/MW | 0.0% | Unchanged (equilibrium) |
-| Dwarf Spheroidals | 0.0% | Unchanged (host inheritance) |
+| Test | Improvement | Physics |
+|------|-------------|---------|
+| Wide Binaries | **-38.3%** | MW tidal field suppresses coherence |
+| Bullet Cluster | **-32.1%** | Shocked gas screened, stars enhanced |
+| DF2 | **-7.4%** | Tidal proximity suppresses coherence |
+| Galaxy Clusters | 0.0% | Equilibrium → φ = 1 |
+| Gaia/MW | 0.0% | Equilibrium → φ = 1 |
+| Dwarf Spheroidals | 0.0% | Host inheritance model |
+| SPARC | +1.8% | No improvement (equilibrium) |
 
 ### SPARC Binned Analysis
 

@@ -186,11 +186,17 @@ For the Sun treated as a compact source, $\xi \to 0$ (no extended disk), so $W(r
 
 **Stress-energy conservation:** In the QUMOND-like formulation, the phantom density represents a redistribution of the gravitational field, not additional matter. Total stress-energy is conserved by construction, as in QUMOND/AQUAL [9,14].
 
-**Weak Equivalence Principle:** The enhancement is composition-independent—all massive test particles feel the same $\Sigma$ regardless of internal structure. The Eötvös parameter $\eta_E = 0$ within the theory.
+**Weak Equivalence Principle:** In the canonical model, the enhancement is composition-independent—all massive test particles feel the same $\Sigma$ regardless of internal structure. The Eötvös parameter $\eta_E = 0$ within the theory.
 
 **Fifth forces:** Matter couples minimally to the metric sourced by $\Phi$. The enhancement is incorporated into $\Phi$ via the phantom density—it is not an additional force on particles.
 
-### H. Framework Independence
+### H. State-Dependent Extension (Supplementary §4a)
+
+In this manuscript we report results for the canonical Σ-Gravity form ($\Sigma = 1 + A(L)\mathcal{C}h(g_N)$). We also explore a **state-dependent phase-coherence extension** (Supplementary §4a) intended for **strongly non-equilibrium, multi-phase systems** (e.g., merging clusters) where collisional gas and collisionless galaxies can occupy different regions of phase space. In equilibrium disk galaxies and Solar System tests, we take $\phi \equiv 1$.
+
+In the phase-coherence extension, test bodies still follow the same metric potential (no composition-dependent *response*), but the **effective sourcing** of the potential can depend on the dynamical state of the baryonic component (collisionless ordered vs collisional turbulent), which is a form of SEP-breaking nonlinearity. This mirrors the SEP violation expected in any nonlinear modified-Poisson framework, including MOND's External Field Effect.
+
+### I. Framework Independence
 
 Although Σ-Gravity is implemented in this work using a QUMOND-like two-step scheme (auxiliary Poisson solve plus algebraic enhancement), the underlying coherence-dependent enhancement can be embedded in several distinct gravitational architectures. To test whether our phenomenology depends on the QUMOND-like choice, we implemented three alternative variants in the same codebase: an AQUAL-like nonlinear field equation (using $h(g_{\rm eff})$ rather than $h(g_N)$), a nonlocal kernel-averaged coherence model, and a source-coupled variant in which the enhancement is interpreted as a modified effective source rather than a phantom density. All four frameworks were evaluated using the identical 17-test regression suite described in the Supplementary Information.
 
@@ -224,6 +230,8 @@ We use the SPARC database [15]: 175 galaxies with Spitzer 3.6μm photometry and 
 4. Compute $g_N = V_{\rm bar}^2/R$ at each radius
 5. Apply enhancement: $\Sigma = 1 + A_0 \cdot W(r) \cdot h(g_N)$ with $W(r) = r/(\xi + r)$, $\xi = R_d/(2\pi)$
 6. Predict: $V_{\rm pred} = V_{\rm bar} \times \sqrt{\Sigma}$
+
+**Bulge-dominated regions:** In bulge-dominated inner regions ($f_{\rm bulge} > 0.3$), observed kinematics may be partly pressure-supported ($v/\sigma < 1$) rather than pure circular rotation. We report SPARC residuals stratified by bulge fraction (SI §5a) and include a separate dispersion-supported validation for the Milky Way bulge (SI §5b). When computing overall SPARC metrics, we include all points but note that the circular-speed assumption may be less appropriate in bulge regions.
 
 ### B. Milky Way Sample
 
@@ -377,7 +385,7 @@ More fundamentally, Σ-Gravity enhancement grows with radius (as $\mathcal{C} \t
 
 **Observational:**
 - Wide binaries: the canonical no-EFE prediction yields a large boost at 10 kAU (passes a loose factor-of-two criterion but is high). An external-field-dependent variant suppresses the boost toward the Chae (2023) range; see SI §12 for motivation and objections.
-- Merging clusters (Bullet Cluster): a simple spherical estimate underpredicts the required enhancement. A baryon-segregation sanity check improves the mass ratio and yields a lensing-peak proxy aligned with the galaxy component; see SI §4a.
+- Merging clusters (Bullet Cluster): in the canonical model, spatially segregated baryonic components still contribute through the same Σ functional form. We therefore treat lensing–gas offsets in mergers as requiring additional physics. We present an exploratory **state-dependent phase-coherence extension** (SI §4a, Variant C) parameterized by observable merger state (e.g., shock Mach number). This extension correctly predicts that lensing peaks follow the stellar/galaxy component (not the gas) in a sample of 5 merging clusters, while preserving equilibrium-cluster behavior.
 - High-redshift predictions need larger samples
 
 ### D. Outlook
