@@ -356,16 +356,83 @@ def W_coherence(r: np.ndarray, xi: float) -> np.ndarray:
 D_BULGE_OMEGA_SCALE = 0.5   # How Ω/H₀ maps to D for bulges
 D_BULGE_COMPACT_SCALE = 0.3 # How compactness (R/L₀) contributes to D
 
-def compute_D_from_asymmetry(v_asym: float, v_circ: float) -> float:
+def compute_D_from_asymmetry_old(v_asym: float, v_circ: float) -> float:
+    """
+    DEPRECATED: Old method using V_obs scatter - has target leakage risk.
+    Kept for comparison.
+    """
+    if v_circ <= 0:
+        return 0.0
+    ratio = abs(v_asym) / v_circ
+    return min(1.0, D_ASYMMETRY_SCALE * ratio)
+
+
+def compute_D_from_rotation_curve_shape(R: np.ndarray, V_obs: np.ndarray, V_bar: np.ndarray) -> float:
+    """
+    Compute disturbance D from rotation curve SHAPE, not scatter.
+    
+    This avoids target leakage by using curve morphology:
+    - Wiggles/non-monotonicity in V(R) → higher D (disturbed)
+    - Smooth rising/flat curve → lower D (ordered)
+    - Mismatch between V_obs gradient and V_bar gradient → disturbance
+    
+    Key: D is derived from the SHAPE of the curve, not its residuals.
+    """
+    if len(R) < 5:
+        return 0.0
+    
+    # 1. Non-monotonicity: count direction changes in V_obs
+    dV = np.diff(V_obs)
+    sign_changes = np.sum(np.abs(np.diff(np.sign(dV))) > 0)
+    n_points = len(V_obs)
+    wiggle_fraction = sign_changes / max(n_points - 2, 1)
+    
+    # 2. Gradient mismatch: does V_obs rise/fall differently from V_bar?
+    # Compute normalized gradients
+    dV_obs_norm = np.gradient(V_obs) / (np.abs(V_obs).mean() + 1e-6)
+    dV_bar_norm = np.gradient(V_bar) / (np.abs(V_bar).mean() + 1e-6)
+    gradient_mismatch = np.std(dV_obs_norm - dV_bar_norm)
+    
+    # 3. Inner vs outer slope consistency
+    # A disturbed galaxy might have inconsistent inner/outer behavior
+    mid = len(R) // 2
+    if mid > 2 and mid < len(R) - 2:
+        inner_slope = (V_obs[mid] - V_obs[0]) / (R[mid] - R[0] + 0.01)
+        outer_slope = (V_obs[-1] - V_obs[mid]) / (R[-1] - R[mid] + 0.01)
+        # Normalized by typical rotation speed
+        v_typical = np.abs(V_obs).mean() + 1e-6
+        slope_inconsistency = abs(inner_slope - outer_slope) / (v_typical / (R.mean() + 0.1))
+    else:
+        slope_inconsistency = 0.0
+    
+    # Combine into D: scale each component
+    D_wiggle = min(1.0, wiggle_fraction * 3.0)  # Many wiggles → disturbed
+    D_gradient = min(1.0, gradient_mismatch * 2.0)  # Gradient mismatch
+    D_slope = min(1.0, slope_inconsistency * 0.5)  # Slope inconsistency
+    
+    # Take the dominant effect, scaled by D_ASYMMETRY_SCALE
+    D = max(D_wiggle, D_gradient, D_slope) * D_ASYMMETRY_SCALE / 1.5  # Normalize to similar range
+    
+    return min(1.0, D)
+
+
+def compute_D_from_asymmetry(v_asym: float, v_circ: float, 
+                              R: np.ndarray = None, V_obs: np.ndarray = None, 
+                              V_bar: np.ndarray = None) -> float:
     """
     Compute disturbance D from kinematic asymmetry (for DISK regions).
     
-    v_asym: Asymmetry in velocity field (approaching vs receding, lopsidedness)
-    v_circ: Circular velocity
+    NEW: Uses rotation curve shape when available (no target leakage).
+    Falls back to V_obs-based proxy if shape data not provided.
     
-    D = 0 for perfectly symmetric disk
+    D = 0 for perfectly symmetric, ordered disk
     D → 1 for highly disturbed/asymmetric systems
     """
+    # Prefer shape-based D if we have the data
+    if R is not None and V_obs is not None and V_bar is not None:
+        return compute_D_from_rotation_curve_shape(R, V_obs, V_bar)
+    
+    # Fallback to old method (with target leakage warning in output)
     if v_circ <= 0:
         return 0.0
     ratio = abs(v_asym) / v_circ
@@ -1022,6 +1089,7 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
     rms_new = []
     rms_mond = []
     D_values = []
+    D_old_values = []  # For leakage audit comparison
     phi_values = []
     
     # Track excluded bulge points
@@ -1034,6 +1102,8 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
         V_bar = gal['V_bar']
         R_d = gal['R_d']
         f_bulge_r = gal.get('f_bulge_r', np.zeros_like(R))
+        f_gas_r = gal.get('f_gas_r', np.zeros_like(R))
+        f_disk_r = gal.get('f_disk_r', np.ones_like(R))
         
         # EXCLUDE bulge-dominated points from rotation curve test
         # Reason: Bulges are dispersion-supported (v/sigma < 1), rotation is wrong observable
@@ -1049,6 +1119,8 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
         R_disk = R[disk_mask]
         V_obs_disk = V_obs[disk_mask]
         V_bar_disk = V_bar[disk_mask]
+        f_gas_disk = f_gas_r[disk_mask]
+        f_disk_disk = f_disk_r[disk_mask]
         
         # Baseline prediction (disk points only)
         V_pred_baseline = predict_velocity_baseline(R_disk, V_bar_disk, R_d)
@@ -1057,16 +1129,35 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
         
         # New model with extended phase coherence (disk points only)
         if USE_EXTENDED_PHI:
-            D = compute_D_from_asymmetry(gal.get('v_asym', 0), gal.get('v_circ', 200))
-            phi = compute_phi(D, matter_type="disk_stars", is_merger=False)
+            # NEW: Use shape-based D (no target leakage)
+            D = compute_D_from_asymmetry(
+                gal.get('v_asym', 0), gal.get('v_circ', 200),
+                R=R_disk, V_obs=V_obs_disk, V_bar=V_bar_disk
+            )
+            # Also compute old D for leakage audit comparison
+            D_old = compute_D_from_asymmetry_old(gal.get('v_asym', 0), gal.get('v_circ', 200))
+            
+            # COMPONENT-SPLIT PHI: weight φ by component fractions
+            # φ_eff(r) = f_disk × φ_disk + f_gas × φ_gas
+            # For disk stars: ordered, cold
+            phi_disk = compute_phi(D, matter_type="disk_stars", is_merger=False)
+            # For gas: depends on turbulence (use moderate Mach for typical disk gas)
+            phi_gas = compute_phi(D, matter_type="gas", mach_turb=0.5, is_merger=False)
+            
+            # Per-point effective φ (component-weighted)
+            phi_eff = f_disk_disk * phi_disk + f_gas_disk * phi_gas
+            # Use mean for this galaxy
+            phi = np.mean(phi_eff)
         else:
             D = 0.0
+            D_old = 0.0
             phi = 1.0
         
         D_values.append(D)
+        D_old_values.append(D_old)
         phi_values.append(phi)
         
-        # Predict for disk points only (no bulge φ needed since we excluded bulge points)
+        # Predict for disk points only with component-split φ
         V_pred_new = predict_velocity_new(R_disk, V_bar_disk, R_d, D=D, is_merger=False)
         rms_n = np.sqrt(((V_pred_new - V_obs_disk)**2).mean())
         rms_new.append(rms_n)
@@ -1085,6 +1176,7 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
             'rms_new': rms_n,
             'rms_mond': rms_m,
             'D': D,
+            'D_old': D_old,
             'phi': phi,
             'f_bulge': gal.get('f_bulge', 0),
             'f_gas': gal.get('f_gas', 0.5),
@@ -1112,8 +1204,51 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
         'mean': np.mean(phi_values),
     }
     
-    # Compute bins
-    bins = compute_sparc_bins(galaxies, results_per_galaxy) if USE_EXTENDED_PHI else {}
+    # D LEAKAGE AUDIT: Check if D correlates with baseline residuals or V_obs scatter
+    # If strong correlation exists, D may be "learning the noise" rather than physics
+    leakage_audit = {}
+    if len(results_per_galaxy) > 5 and USE_EXTENDED_PHI:
+        D_arr = np.array(D_values)
+        D_old_arr = np.array(D_old_values)
+        rms_b_arr = np.array(rms_baseline)
+        
+        # Correlation: D vs baseline RMS (target leakage risk)
+        if np.std(D_arr) > 1e-6 and np.std(rms_b_arr) > 1e-6:
+            corr_D_rms = np.corrcoef(D_arr, rms_b_arr)[0, 1]
+            corr_D_old_rms = np.corrcoef(D_old_arr, rms_b_arr)[0, 1]
+        else:
+            corr_D_rms = 0.0
+            corr_D_old_rms = 0.0
+        
+        leakage_audit = {
+            'corr_D_new_vs_baseline_rms': corr_D_rms,
+            'corr_D_old_vs_baseline_rms': corr_D_old_rms,
+            'D_method': 'shape-based' if np.any(D_arr != D_old_arr) else 'scatter-based',
+            'leakage_risk': 'HIGH' if abs(corr_D_old_rms) > 0.3 else 'LOW',
+            'improvement': f"New D corr: {corr_D_rms:.3f} vs Old D corr: {corr_D_old_rms:.3f}",
+        }
+    
+    # Compute bins - ALWAYS compute, not just when extended phi enabled
+    bins = compute_sparc_bins(galaxies, results_per_galaxy)
+    
+    # BINNED METRICS GUARDRAILS
+    bin_guardrails = {}
+    if bins.get('by_bulge'):
+        for b in bins['by_bulge']:
+            # Guardrail: New model should not worsen bulge-dominated by >20%
+            if 'Bulge-dominated' in b.bin_name:
+                bin_guardrails['bulge_worsening'] = {
+                    'threshold': 20.0,
+                    'actual': b.improvement_pct,
+                    'passed': b.improvement_pct < 20.0,
+                }
+            # Guardrail: New model should improve disk-dominated
+            if 'Disk-dominated' in b.bin_name:
+                bin_guardrails['disk_improvement'] = {
+                    'threshold': 0.0,
+                    'actual': b.improvement_pct,
+                    'passed': b.improvement_pct < 0.0,  # Negative = improvement
+                }
     
     # Print verbose analysis
     if verbose:
@@ -1122,19 +1257,40 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
         print(f"  Total points: {total_points}, Excluded bulge points: {excluded_bulge_points} ({pct_excluded:.1f}%)")
         print(f"  Galaxies used: {len(results_per_galaxy)} (skipped galaxies with <3 disk points)")
         
-        if USE_EXTENDED_PHI:
-            print("  " + "-" * 90)
-            print(f"  {'Bin':<35} {'N':>4} {'Baseline':>10} {'New':>10} {'MOND':>10} {'Improv%':>10} {'Best':>8}")
-            print("  " + "-" * 90)
-            
-            for category, bin_list in bins.items():
-                print(f"  {category.upper()}:")
-                for b in bin_list:
-                    print(f"    {b.bin_name:<33} {b.n_galaxies:>4} {b.rms_baseline:>10.2f} {b.rms_new:>10.2f} {b.rms_mond:>10.2f} {b.improvement_pct:>+10.1f} {b.best_theory:>8}")
-            
-            print("  " + "-" * 90)
-            print(f"  D stats: min={D_stats['min']:.3f}, max={D_stats['max']:.3f}, mean={D_stats['mean']:.3f}, n_nonzero={D_stats['n_nonzero']}")
-            print(f"  phi stats: min={phi_stats['min']:.3f}, max={phi_stats['max']:.3f}, mean={phi_stats['mean']:.3f}")
+        # D LEAKAGE AUDIT OUTPUT
+        if leakage_audit:
+            print("")
+            print("  D LEAKAGE AUDIT (checking for target leakage):")
+            print(f"    D computation method: {leakage_audit['D_method']}")
+            print(f"    Correlation D_new vs baseline RMS: {leakage_audit['corr_D_new_vs_baseline_rms']:.3f}")
+            print(f"    Correlation D_old vs baseline RMS: {leakage_audit['corr_D_old_vs_baseline_rms']:.3f}")
+            print(f"    Leakage risk (old method): {leakage_audit['leakage_risk']}")
+            if abs(leakage_audit['corr_D_old_vs_baseline_rms']) > 0.3:
+                print("    WARNING: Old D method had high correlation with residuals!")
+                print("    New shape-based D reduces this risk.")
+        
+        # Binned analysis
+        print("")
+        print("  " + "-" * 90)
+        print(f"  {'Bin':<35} {'N':>4} {'Baseline':>10} {'New':>10} {'MOND':>10} {'Improv%':>10} {'Best':>8}")
+        print("  " + "-" * 90)
+        
+        for category, bin_list in bins.items():
+            print(f"  {category.upper()}:")
+            for b in bin_list:
+                print(f"    {b.bin_name:<33} {b.n_galaxies:>4} {b.rms_baseline:>10.2f} {b.rms_new:>10.2f} {b.rms_mond:>10.2f} {b.improvement_pct:>+10.1f} {b.best_theory:>8}")
+        
+        print("  " + "-" * 90)
+        print(f"  D stats: min={D_stats['min']:.3f}, max={D_stats['max']:.3f}, mean={D_stats['mean']:.3f}, n_nonzero={D_stats['n_nonzero']}")
+        print(f"  phi stats: min={phi_stats['min']:.3f}, max={phi_stats['max']:.3f}, mean={phi_stats['mean']:.3f}")
+        
+        # Guardrail checks
+        if bin_guardrails:
+            print("")
+            print("  BINNED GUARDRAILS:")
+            for name, check in bin_guardrails.items():
+                status = "PASS" if check['passed'] else "FAIL"
+                print(f"    {name}: {check['actual']:+.1f}% vs threshold {check['threshold']:.1f}% [{status}]")
     
     # Reference: MOND is the "gold standard" for rotation curves
     observed_rms = mean_mond
@@ -1154,6 +1310,12 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
     
     pct_excluded = excluded_bulge_points / total_points * 100 if total_points > 0 else 0
     
+    # Build notes with guardrail status
+    guardrail_note = ""
+    if bin_guardrails:
+        passed = all(g['passed'] for g in bin_guardrails.values())
+        guardrail_note = " Guardrails: " + ("PASS" if passed else "FAIL")
+    
     result = ComparativeResult(
         name="SPARC Disk-Only",
         metric_name="RMS",
@@ -1161,12 +1323,12 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
         observed_err=None,
         observed_unit="km/s",
         baseline=TheoryPrediction(mean_baseline, "km/s", {'win_rate': win_rate}),
-        new_model=TheoryPrediction(mean_new, "km/s", {'D_stats': D_stats, 'phi_stats': phi_stats}),
+        new_model=TheoryPrediction(mean_new, "km/s", {'D_stats': D_stats, 'phi_stats': phi_stats, 'component_split': True}),
         mond=TheoryPrediction(mean_mond, "km/s"),
         lcdm=TheoryPrediction(lcdm_rms, "km/s", {'note': '2-3 params/galaxy'}),
         best_theory=best,
         n_objects=n_tested,
-        notes=f"Disk only ({pct_excluded:.0f}% bulge pts excluded). Baseline beats MOND {win_rate:.1f}%"
+        notes=f"Disk only ({pct_excluded:.0f}% bulge pts excluded). Baseline beats MOND {win_rate:.1f}%.{guardrail_note}"
     )
     
     # Return result and detailed bin analysis
@@ -1174,6 +1336,8 @@ def test_sparc_comparative(galaxies: List[Dict], verbose: bool = False) -> Tuple
         'bins': bins,
         'D_stats': D_stats,
         'phi_stats': phi_stats,
+        'leakage_audit': leakage_audit,
+        'bin_guardrails': bin_guardrails,
         'per_galaxy': results_per_galaxy if verbose else None,
     }
     

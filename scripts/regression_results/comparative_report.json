@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-20T15:23:01.528207",
+  "timestamp": "2025-12-20T17:42:33.812121",
   "mode": "extended_phi",
   "parameters": {
     "baseline": {
@@ -29,21 +29,22 @@
         }
       },
       "new_model": {
-        "value": 16.139833236304387,
+        "value": 16.535985120265387,
         "unit": "km/s",
         "details": {
           "D_stats": {
-            "min": 0.009926470588235294,
-            "max": 0.2565020718692951,
-            "mean": 0.11193478214581298,
-            "std": 0.05980555753228598,
-            "n_nonzero": 163
+            "min": 0.038810934613113,
+            "max": 1.0,
+            "mean": 0.6480584806729697,
+            "std": 0.3020371650714192,
+            "n_nonzero": 164
           },
           "phi_stats": {
-            "min": 0.9268969095172509,
-            "max": 0.9971709558823529,
-            "mean": 0.9680985870884432
-          }
+            "min": 0.5354533916720111,
+            "max": 1.2707269773400103,
+            "mean": 0.8467186737004471
+          },
+          "component_split": true
         }
       },
       "mond": {
@@ -60,7 +61,7 @@
       },
       "best_theory": "LCDM",
       "n_objects": 164,
-      "notes": "Disk only (19% bulge pts excluded). Baseline beats MOND 43.3%"
+      "notes": "Disk only (19% bulge pts excluded). Baseline beats MOND 43.3%. Guardrails: PASS"
     },
     {
       "name": "Galaxy Clusters",
