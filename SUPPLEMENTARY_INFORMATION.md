@@ -321,7 +321,7 @@ This section documents the full 17-test regression suite and highlights model va
 | 6 | Solar System | Bertotti+ 2003 | 1.77×10⁻⁹ | ~10⁻⁵ | 0 |
 | 7 | Counter-Rotation | Bevacqua+ 2022 | p=0.004 | N/A | N/A |
 | 8 | Tully-Fisher | McGaugh 2012 | slope=4 | slope=4 | slope~3.5 |
-| 9 | Wide Binaries | Chae 2023 | 63% boost (canonical); 22% with EFE-style $g_{\\rm tot}$ | ~35% | 0% |
+| 9 | Wide Binaries | Chae 2023 | 63% boost (canonical); 22% with EFE-style g_tot | ~35% | 0% |
 | 10 | Dwarf Spheroidals | Walker+ 2009 | 0.87× (host inherit) | ~1× | ~1× (fitted) |
 | 11 | Ultra-Diffuse Galaxies | van Dokkum+ 2018 | EFE needed | EFE needed | Fitted |
 | 12 | Galaxy-Galaxy Lensing | Stacking | 9.5× | ~10× | ~15× |
@@ -396,7 +396,7 @@ Running `python scripts/run_regression_extended.py` produces:
 | Solar System | \|γ-1\| = 1.77×10⁻⁹ |
 | Counter-Rotation | f_DM(CR) = 0.169 < f_DM(Normal) = 0.302, p = 0.004 |
 | Tully-Fisher | M_pred/M_obs = 0.87, slope = 4 |
-| Wide Binaries | 63.2% boost at 10 kAU (canonical); 22.0% with EFE-style $g_{\\rm tot}$ |
+| Wide Binaries | 63.2% boost at 10 kAU (canonical); 22.0% with EFE-style g_tot |
 | Dwarf Spheroidals | σ_pred/σ_obs = 0.87±0.63 (host inheritance, 5 dSphs) |
 | Ultra-Diffuse Galaxies | DF2: σ_pred = 20.8 km/s (EFE needed) |
 | Galaxy-Galaxy Lensing | M_eff/M_star = 9.5× at 200 kpc |
@@ -416,7 +416,7 @@ In nonlinear modified-Poisson frameworks (including QUMOND-like constructions), 
 
 $$g_{\rm tot} = \sqrt{g_{\rm int}^2 + g_{\rm ext}^2}, \qquad \Sigma = 1 + A \cdot \mathcal{C} \cdot h(g_{\rm tot}).$$
 
-For wide binaries embedded in the Milky Way, taking $g_{\rm ext} \sim V_c^2/R$ at the Solar radius suppresses the predicted 10 kAU boost from the canonical $\sim 63\\%$ to $\sim 22\\%$ (closer to the Chae 2023 benchmark $35\\%\\pm10\\%$).
+For wide binaries embedded in the Milky Way, taking $g_{\rm ext} \sim V_c^2/R$ at the Solar radius suppresses the predicted 10 kAU boost from the canonical ~63% to ~22% (closer to the Chae 2023 benchmark 35% ± 10%).
 
 **Academic objection:** this violates the strong equivalence principle (SEP).  
 **How we frame it:** SEP violation is expected in nonlinear field equations; the weak equivalence principle can still hold. The virtue is falsifiability: the same $g_{\rm ext}$ prescription predicts environment-dependent suppression across wide binaries, satellites, and low-acceleration systems.
@@ -425,7 +425,7 @@ For wide binaries embedded in the Milky Way, taking $g_{\rm ext} \sim V_c^2/R$ a
 
 The Bullet Cluster is often summarized as "gas dominates baryons but lensing follows galaxies." Even with **one potential** (no special law for light vs stars), a nonlinear dependence on $g_N$ means that spatially segregated baryonic components can contribute differently.
 
-A coarse sanity check is to model gas and stars with different characteristic radii ($r_{\rm gas} > r_{\\rm stars}$), compute separate enhancements $\Sigma_{\\rm gas}$ and $\Sigma_{\\rm stars}$, and compare a simple peak proxy proportional to $(M\\Sigma)/r^2$. With fiducial scales (gas more extended than galaxies), this raises the predicted enhancement from $\sim 1.12\\times$ (spherical baseline) to $\sim 1.60\\times$ and yields a peak proxy that follows the stellar/galaxy component.
+A coarse sanity check is to model gas and stars with different characteristic radii ($r_{\rm gas} > r_{\rm stars}$), compute separate enhancements $\Sigma_{\rm gas}$ and $\Sigma_{\rm stars}$, and compare a simple peak proxy proportional to $(M\Sigma)/r^2$. With fiducial scales (gas more extended than galaxies), this raises the predicted enhancement from $\sim 1.12\times$ (spherical baseline) to $\sim 1.60\times$ and yields a peak proxy that follows the stellar/galaxy component.
 
 **Academic objection:** this is a toy model; the radii are ad hoc.  
 **How we frame it:** this is explicitly a proof-of-principle sanity check. A publishable treatment requires forward-modeling using observed baryon maps (gas + galaxies) and ray-tracing the lensing signal across a sample of merging clusters.
