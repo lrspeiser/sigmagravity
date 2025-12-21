@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-20T17:42:33.812121",
+  "timestamp": "2025-12-21T00:07:51.477005",
   "mode": "extended_phi",
   "parameters": {
     "baseline": {
@@ -18,37 +18,37 @@
     {
       "name": "SPARC Disk-Only",
       "metric_name": "RMS",
-      "observed": 16.056310332161605,
+      "observed": 18.49779901271625,
       "observed_err": null,
       "observed_unit": "km/s",
       "baseline": {
-        "value": 16.365710299604682,
+        "value": 19.10521322651408,
         "unit": "km/s",
         "details": {
-          "win_rate": 43.292682926829265
+          "win_rate": 41.66666666666667
         }
       },
       "new_model": {
-        "value": 16.535985120265387,
+        "value": 20.281887283193893,
         "unit": "km/s",
         "details": {
           "D_stats": {
-            "min": 0.038810934613113,
-            "max": 1.0,
-            "mean": 0.6480584806729697,
-            "std": 0.3020371650714192,
-            "n_nonzero": 164
+            "min": 0.0,
+            "max": 0.267783309471603,
+            "mean": 0.09453604957026189,
+            "std": 0.0853109604413456,
+            "n_nonzero": 18
           },
           "phi_stats": {
-            "min": 0.5354533916720111,
-            "max": 1.2707269773400103,
-            "mean": 0.8467186737004471
+            "min": 0.6953445607583454,
+            "max": 1.0974537743221717,
+            "mean": 0.9503383721606594
           },
           "component_split": true
         }
       },
       "mond": {
-        "value": 16.056310332161605,
+        "value": 18.49779901271625,
         "unit": "km/s",
         "details": {}
       },
@@ -60,8 +60,8 @@
         }
       },
       "best_theory": "LCDM",
-      "n_objects": 164,
-      "notes": "Disk only (19% bulge pts excluded). Baseline beats MOND 43.3%. Guardrails: PASS"
+      "n_objects": 24,
+      "notes": "Disk only (36% bulge pts excluded). Baseline beats MOND 41.7%. Guardrails: FAIL"
     },
     {
       "name": "Galaxy Clusters",
