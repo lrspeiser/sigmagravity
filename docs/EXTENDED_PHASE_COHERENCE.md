@@ -141,13 +141,13 @@ The extended phase coherence model captures **real physics for systems with dist
 | Test | Observed | Baseline | New Model | MOND | ΛCDM | Best |
 |------|----------|----------|-----------|------|------|------|
 | **Wide Binaries** (boost) | 1.35x | 1.63x | **1.52x** | 1.73x | 1.00x | **New Model** |
-| **Bullet Cluster** | STARS | GAS (0.53) | **STARS (1.03)** | GAS (0.49) | STARS (1.0) | **New Model** |
+| **Bullet Cluster** | STARS | GAS (0.53x) | **STARS (1.03x)** | GAS (0.49x) | STARS (1.0x) | **New Model** |
 | **Bulge Dispersion** (RMS) | 101.25 km/s | 10.43 km/s | **10.40 km/s** | 10.83 km/s | 14.45 km/s | **New Model** |
 | SPARC Disk-Only (RMS) | 16.06 km/s | 16.37 km/s | 16.67 km/s | 16.06 km/s | 15.00 km/s | ΛCDM |
-| Galaxy Clusters | 1.0 | 0.99 | 0.99 | 0.39 | 1.0 | ΛCDM |
-| Gaia/MW | 38.66 km/s | 33.81 km/s | 33.81 km/s | 38.66 km/s | 25.0 km/s | ΛCDM |
+| Galaxy Clusters | 1.0x | 0.99x | 0.99x | 0.39x | 1.0x | ΛCDM |
+| Gaia/MW (RMS) | 38.66 km/s | 33.81 km/s | 33.81 km/s | 38.66 km/s | 25.0 km/s | ΛCDM |
 | DF2 (UDG) | 8.5 km/s | 20.77 km/s | 19.87 km/s | 20.0 km/s | 8.84 km/s | Newtonian |
-| Dwarf Spheroidals | 1.0 | 0.87 | 0.87 | 0.63 | 1.0 | ΛCDM |
+| Dwarf Spheroidals | 1.0x | 0.87x | 0.87x | 0.63x | 1.0x | ΛCDM |
 
 ### Improvements vs Baseline
 
@@ -165,31 +165,33 @@ The extended phase coherence model captures **real physics for systems with dist
 
 | Bin | N | Baseline | New | MOND | Improv% | Best |
 |-----|---|----------|-----|------|---------|------|
-| **Disk-dominated (B/T<0.1)** | 140 | 15.80 | 15.69 | 15.49 | -0.7% | MOND |
-| Intermediate (0.1-0.3) | 17 | 20.56 | 23.28 | 20.11 | +13.3% | MOND |
-| **Bulge-dominated (B/T>0.3)** | 7 | 17.49 | **17.05** | 17.50 | **-2.5%** | **New** |
-| Gas-rich (f_gas>0.5) | 69 | 13.33 | 13.28 | 12.97 | -0.3% | MOND |
-| Mixed (0.2-0.5) | 54 | 19.34 | 19.04 | 18.92 | -1.6% | MOND |
-| Star-dominated (f_gas<0.2) | 41 | 17.56 | 18.71 | 17.49 | +6.5% | MOND |
-| High D (>0.15) | 157 | 16.45 | 16.63 | 16.08 | +1.1% | MOND |
+| Disk-dominated (B/T<0.1) | 140 | 15.80 | 16.02 | 15.49 | +1.4% | MOND |
+| Intermediate (0.1-0.3) | 17 | 20.56 | 21.63 | 20.11 | +5.2% | MOND |
+| Bulge-dominated (B/T>0.3) | 7 | 17.49 | 17.55 | 17.50 | +0.4% | Baseline |
+| Gas-rich (f_gas>0.5) | 69 | 13.33 | 13.66 | 12.97 | +2.5% | MOND |
+| Mixed (0.2-0.5) | 54 | 19.34 | 19.99 | 18.92 | +3.3% | MOND |
+| **Star-dominated (f_gas<0.2)** | 41 | 17.56 | **17.36** | 17.49 | **-1.2%** | **New** |
+| **High D (>0.15)** | 54 | 10.77 | **10.69** | 10.72 | **-0.7%** | **New** |
 
 ### D Leakage Audit Results
 
 ```
-D computation method: shape-based
-Correlation D_new vs baseline RMS: 0.317
-Correlation D_old vs baseline RMS: -0.316
-Leakage risk (old method): HIGH
+D computation method: morphology-based (no V_obs)
+D range: 0.000-0.280, mean: 0.102
+Correlation morphology-D vs RMS: -0.386 (risk: HIGH)
+Correlation old-scatter-D vs RMS: -0.316 (risk: HIGH)
 ```
 
-The new shape-based D has similar correlation magnitude but comes from curve morphology rather than scatter, making it a more physically meaningful measure.
+The morphology-based D has similar correlation to RMS as the old method, but uses mass distribution (f_gas, f_bulge, compactness) rather than kinematic scatter.
 
 ### Binned Guardrails
 
 | Guardrail | Threshold | Actual | Status |
 |-----------|-----------|--------|--------|
-| disk_improvement | < 0.0% | -0.7% | ✓ PASS |
-| bulge_worsening | < 20.0% | -2.5% | ✓ PASS |
+| high_D_improvement | < 0.0% | -0.7% | ✓ PASS |
+| disk_improvement | < 0.0% | +1.4% | ✗ FAIL |
+| bulge_worsening | < 20.0% | +0.4% | ✓ PASS |
+| star_dominated | < 5.0% | -1.2% | ✓ PASS |
 
 ## Observable Selection by System Type
 

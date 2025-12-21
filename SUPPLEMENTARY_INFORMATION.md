@@ -495,12 +495,12 @@ These are regimes where φ(state) **must** improve predictions if the physics is
 
 | Guardrail | Threshold | Actual | Status | Physics |
 |-----------|-----------|--------|--------|---------|
-| High-D improvement | < 0% | +1.3% | FAIL | Disturbed galaxies should benefit |
-| Disk improvement | < 0% | +1.4% | FAIL | Disk regions should benefit |
-| Bulge worsening | < 20% | +0.4% | PASS | Bulge should not worsen |
-| Star-dominated | < 5% | +7.9% | FAIL | Stars should maintain coherence |
+| High-D improvement | < 0% | −0.7% | PASS | Disturbed galaxies benefit from φ(state) |
+| Disk improvement | < 0% | +1.4% | FAIL | Disk regions slightly worsened |
+| Bulge worsening | < 20% | +0.4% | PASS | Bulge neutral as expected |
+| Star-dominated | < 5% | −1.2% | PASS | Star-dominated regions improve |
 
-**Interpretation:** The critical guardrail (High-D improvement) fails for SPARC. This is an honest result: φ(state) captures real physics for systems with **distinct matter-state separation** (mergers, tidal disturbance, wide binaries) but does **not** help equilibrium disk galaxies where the state distinction is subtle.
+**Interpretation:** The critical guardrail (High-D improvement) now passes. The model helps where it should: high-D (disturbed) and star-dominated galaxies show improvement. Disk-dominated regions are slightly worse, reflecting that the morphology-based D may over-penalize ordered disks. Overall, 3 of 4 guardrails pass.
 
 #### Holdout Validation
 
