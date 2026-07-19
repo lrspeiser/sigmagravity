@@ -1,0 +1,26 @@
+id,phase,hypothesis,dataset_or_fixture,test,primary_metric,comparison,pass_gate,status
+BLC-000,0,H0,repository core suite,Reproduce locked canonical baseline,metric delta from documented baseline,current README and SI,"all core metrics within documented numerical tolerance",planned
+BLC-001,1,HM and HL,analytic units,Dimensional and limiting-case audit,number of failed invariants,required limits in MODEL_SPEC.md,zero failed invariants,planned
+BLC-002,1,HM and HL,isolated point sets,Reciprocity and total force closure,normalized net force,asymmetric negative control,"less than 1e-10 and control fails",planned
+BLC-003,1,HM and HL,isolated point sets,Total torque closure,normalized net torque,asymmetric negative control,"less than 1e-10 and control fails",planned
+BLC-004,1,HL,synthetic radiation fields,Radiative and interaction energy budget,unaccounted energy fraction,GR stress-energy accounting,zero unexplained source term,planned
+BLC-005,1,HM and HL,causal-kernel specification,Past-light-cone support and conserved dynamics,checklist completion,static kernel,all required causal items specified,planned
+BLC-010,2,HM,analytic disk,Recover one-over-r outer acceleration,outer log slope,canonical radial window,"slope between -1.1 and -0.9",planned
+BLC-011,2,H0,null synthetic catalog,False-positive calibration,false-positive rate,nominal confidence level,"at or below nominal rate",planned
+BLC-012,2,HM vs HL,blinded injected catalogs,Model identification accuracy,correct classification rate,H0 and wrong carrier,"at least 90 percent",planned
+BLC-013,2,HM,matched radial profiles with azimuthal gaps,Topology sensitivity,recovered effect direction,canonical radial window,preregistered sign recovered,planned
+BLC-014,2,HM,source-count refinement,N-squared saturation and convergence,parameter drift with resolution,un-normalized negative control,no material drift,planned
+BLC-020,3,HM,SPARC galaxy holdout,Mass-normalized kernel parity,galaxy-balanced RMS,canonical Sigma Gravity,"no more than 5 percent worse with at most 2 new globals",planned
+BLC-021,3,HM,SPARC galaxy holdout,Incremental boundary prediction,held-out log likelihood plus complexity penalty,canonical and shuffled openness,improves and survives shuffles,planned
+BLC-022,3,HL-phase,SPARC galaxy holdout,Luminosity phase-carrier ablation,held-out log likelihood,HM and stratified luminosity shuffle,preregistered improvement survives controls,planned
+BLC-023,3,HL-energy,SPARC plus luminosity data,Literal radiative-energy magnitude test,required-to-available energy ratio,physical radiative energy budget,"ratio at or below 1",planned
+BLC-024,3,HM and HL,SPARC untouched test split,Confirmatory replication,effect sign and likelihood gain,validation result,same sign and corrected significance,planned
+BLC-030,4,HM,SPARC plus independent environment map,Scalar openness test,partial effect and held-out likelihood,external-field nulls,preregistered sign survives controls,planned
+BLC-031,4,HM,rotation curves plus environment directions,Orientation anisotropy,angular residual statistic,randomized sky directions,preregistered angular pattern survives correction,planned
+BLC-032,4,HM,matched isolated and connected galaxies,Matched environment contrast,effect size,matched H0 sample,preregistered sign in untouched test set,planned
+BLC-033,4,H0,environment catalog,Survey-systematics negative controls,null-test p-values,sky distance and depth proxies,no significant control leakage,planned
+BLC-040,5,HM,MaNGA counter-rotation sample,Pairwise coherence validation,effect direction and magnitude,canonical scalar,no retuning and improved held-out score,blocked_by_G3a
+BLC-041,5,HM,independent cluster lensing maps,Lensing and dynamics consistency,map likelihood and centroid offset,canonical and halo baselines,same global model passes held-out cluster data,blocked_by_G3a
+BLC-042,5,HM and HL,Solar System and wide binaries,Compact-system constraints,maximum deviation,published bounds,all bounds pass without system-specific screening,blocked_by_G3a
+BLC-043,5,HM and HL,satellites and ultra-diffuse galaxies,Environment transfer test,held-out likelihood,canonical and external-field baselines,same parameter set improves prediction,blocked_by_G3a
+BLC-050,6,selected variant,covariant theory,Action initial-value and propagation audit,completed theory checklist,GR and nonlocal-gravity requirements,all six Phase 6 deliverables complete,blocked_by_G5
