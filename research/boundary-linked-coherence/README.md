@@ -4,8 +4,9 @@
 
 This folder defines a falsifiable evaluation of a speculative physical interpretation of
 Σ-Gravity: long-baseline correlations from interior baryonic sources may remain open in
-low-acceleration, weakly screened directions and couple collectively to outer baryonic matter.
-The resulting response could become disk-aligned and fall approximately as `1/r`.
+low-acceleration, weakly screened directions, align toward a particular distant baryonic mass,
+and redistribute gravitational response into a shared source–target channel. The resulting
+response could behave like a string, ribbon, or directed flux tube.
 
 The proposal is called **boundary-linked coherence (BLC)** here. “Link” means a nonlocal
 correlation kernel, not a literal string and not a claim that photons gain mass or gravity.
@@ -40,7 +41,9 @@ Can one kernel, derived only from source-side observables, do all of the followi
 3. Produce a `1/r` outer acceleration without unbounded `N²` growth.
 4. Obey reciprocity, momentum conservation, weak-equivalence-principle behavior, and causal
    propagation.
-5. Make at least one correct held-out prediction that the canonical radial window, MOND, and a
+5. Rotate or disappear when the distant target is rotated or removed, with an equal reaction on
+   the interior source distribution and compensating flux outside the channel.
+6. Make at least one correct held-out prediction that the canonical radial window, MOND, and a
    conventional halo fit do not make.
 
 If it cannot, BLC should be rejected as a physical mechanism even if a flexible version can fit
@@ -73,6 +76,8 @@ alternative rather than being ruled out by wording alone.
 
 - [`MODEL_SPEC.md`](MODEL_SPEC.md) — minimal operational model, variants, and consistency
   requirements.
+- [`DIRECTED_STRING_MODEL.md`](DIRECTED_STRING_MODEL.md) — the explicit target-selection,
+  fixed-budget channel allocation, force-law family, and reaction-force tests.
 - [`EVALUATION_PLAN.md`](EVALUATION_PLAN.md) — phased work plan, data products, statistics, and
   go/no-go gates.
 - [`EXPERIMENT_MATRIX.csv`](EXPERIMENT_MATRIX.csv) — machine-readable experiment and decision

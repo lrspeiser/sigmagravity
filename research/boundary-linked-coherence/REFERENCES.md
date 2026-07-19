@@ -57,6 +57,25 @@ coherence exists.
    Cassini Spacecraft,” *Nature* **425**, 374–376 (2003).
    [DOI](https://doi.org/10.1038/nature01997) — anchors the compact-system post-Newtonian gate.
 
+## Direction-preserving observational data
+
+10. Abdurro'uf et al., “The Seventeenth Data Release of the Sloan Digital Sky Surveys: Complete
+    Release of MaNGA, MaStar, and APOGEE-2 Data,” *Astrophysical Journal Supplement Series* (2022).
+    [DOI](https://doi.org/10.3847/1538-4365/ac4414) and
+    [official MaNGA DAP documentation](https://www.sdss4.org/dr17/manga/manga-analysis-pipeline/) —
+    provides resolved stellar and emission-line velocity and dispersion maps for the primary
+    directional test.
+
+11. S. Feng, S.-Y. Shen, F.-T. Yuan, R. A. Riffel, and K. Pan, “SDSS-IV MaNGA: Kinematic
+    Asymmetry as an Indicator of Galaxy Interaction in Paired Galaxies,” *Astrophysical Journal
+    Letters* (2020). [DOI](https://doi.org/10.3847/2041-8213/ab7dba) — establishes a relevant
+    paired-galaxy kinematic methodology and, importantly, the ordinary-interaction confound that a
+    directed-string test must outperform.
+
+12. D. A. Hunter et al., “LITTLE THINGS,” *Astronomical Journal* **144**, 134 (2012).
+    [DOI](https://doi.org/10.1088/0004-6256/144/5/134) — provides public high-resolution H I maps
+    and multiwavelength observations for a lower-mass directional confirmation sample.
+
 ## Reading rule
 
 References are added because they directly constrain a preregistered test or define a comparison.

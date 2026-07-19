@@ -68,6 +68,13 @@ test deliverable, not a full relativistic solver.
 Failure ends the “physical mechanism” track, though a phenomenological kernel may still be studied
 under that label.
 
+### T5. Directed source–target allocation
+
+Implement the symmetric fixed-budget allocation in `DIRECTED_STRING_MODEL.md`. Verify that a
+distant target collects aligned links from many interior cells, that stronger allocation along the
+channel is compensated elsewhere, and that differentiating the full interaction energy produces an
+equal reaction on the source.
+
 ## Phase 2 — Synthetic discriminators
 
 Build source distributions for which the canonical radial window and BLC make different
@@ -79,6 +86,9 @@ predictions:
 4. Smooth disk versus a disk with a disruption annulus.
 5. Equal baryonic mass and geometry, different emissivity profiles.
 6. Source-count refinement at fixed continuous density.
+7. One target rotated through multiple position angles.
+8. Two equal opposite targets and two unequal targets.
+9. An open corridor versus an identical corridor with an intervening closure region.
 
 ### Primary synthetic metrics
 
@@ -88,6 +98,9 @@ predictions:
 - force/torque closure;
 - stability to mesh and source-count refinement;
 - ability to distinguish `HM` from `HL` in blinded injections.
+- target-selection accuracy, angular channel width, and compensated off-axis suppression;
+- source–target reaction-force closure;
+- recovered force exponent across the discrete `p={0,1,2}` string/ribbon/inverse-square family.
 
 ### Gate G2
 
@@ -97,6 +110,10 @@ predictions:
   false-positive rate no greater than 5%.
 - Infer `HM` versus `HL` correctly in at least 90% of powered synthetic catalogs.
 - No fitted quantity drifts materially with particle count or grid resolution.
+- The channel rotates with the target, disappears when the target is removed, and produces no
+  arbitrary winner for two symmetric targets.
+- The full energy gradient closes total force and torque; a frozen-allocation negative control does
+  not.
 
 ## Phase 3 — SPARC mechanism and luminosity ablation
 
@@ -168,6 +185,15 @@ This is the distinctive BLC phase. Crossmatch the SPARC test galaxies, or a larg
 rotation-curve sample, to an external baryonic density reconstruction without using rotation-curve
 residuals during matching.
 
+SPARC's one-dimensional curves cannot by themselves establish a target-seeking channel. The
+confirmatory sample must include resolved two-dimensional velocity fields or galaxy-pair dynamics
+with an independently identified target direction.
+
+Use MaNGA DR17 velocity/dispersion maps and its close-pair metadata as the primary directional
+sample. Use LITTLE THINGS H I velocity fields as a lower-mass confirmation set where companion and
+environment information is adequate. Keep one pair-dynamics or lensing dataset untouched until the
+force exponent and corridor rule have been frozen.
+
 ### Precomputed predictors
 
 - scalar external baryonic field;
@@ -176,6 +202,9 @@ residuals during matching.
 - disk-axis alignment with the external field or filament;
 - forward/backward openness asymmetry;
 - local neighbor density and an isolation flag.
+- collective path-alignment order `C_align` from interior baryons to the external target;
+- predicted fixed-budget channel strength and angular width;
+- predicted separation exponent for `p=0`, `p=1`, and `p=2`.
 
 ### Tests
 
@@ -184,6 +213,10 @@ residuals during matching.
 2. Are receding/approaching or azimuthal residuals aligned with the external-field direction?
 3. Do matched isolated and environmentally connected galaxies differ in the predicted direction?
 4. Does the effect survive sky-position, survey-depth, and distance negative controls?
+5. Does the channel rotate with the independently located companion or mass concentration?
+6. Is enhanced attraction along the pair axis accompanied by the predicted off-axis compensation?
+7. Does the residual separation scaling differ from the ordinary tidal `D^-3` expectation in the
+   preregistered direction?
 
 The analysis should reuse the independent external-field estimates and caveats developed in
 published SPARC environment studies rather than infer “environment” from the target residuals.
@@ -194,6 +227,10 @@ The sign and angular dependence must match the preregistration, survive multiple
 appear in the untouched test sample, and remain when the dominant external object is removed one at
 a time. A scalar environment correlation without the predicted orientation is insufficient evidence
 for a boundary link.
+
+A scalar environment correlation is therefore only a screening result. Evidence for the string
+idea requires the target-aligned angular prediction, reaction/compensation structure, and distance
+law to pass together.
 
 ## Phase 5 — Cross-scale and gravity constraints
 

@@ -72,6 +72,11 @@ The BLC enhancement is
 This is an operational bridge to the current QUMOND-like pipeline, not yet a fundamental field
 equation.
 
+`Q_M` measures the scalar activation envelope. The clarified hypothesis also requires a particular
+distant mass to collect aligned channels from many source elements. That stronger directional
+construction, including its fixed flux budget and conservative interaction energy, is defined in
+`DIRECTED_STRING_MODEL.md`.
+
 ## 4. Literal luminosity alternative
 
 The literal-radiation hypothesis replaces baryonic density in the numerator with a normalized
@@ -200,6 +205,7 @@ Before interpreting any coefficient, the pipeline must report:
 - performance when each BLC factor is shuffled within mass and surface-brightness strata;
 - recovery from null and injected synthetic catalogs;
 - ablations of `B`, `C`, `K_R`, luminosity, and the anisotropic moment.
+- comparison with the fixed-budget source–target allocation in `DIRECTED_STRING_MODEL.md`.
 
 A coefficient is not evidence for a link if the same held-out score is obtained from a shuffled or
 purely radial proxy.
