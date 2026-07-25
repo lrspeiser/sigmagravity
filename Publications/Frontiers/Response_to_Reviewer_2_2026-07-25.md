@@ -17,6 +17,10 @@ For clarity, I distinguish changes completed in this revision from investigation
 
 **Response.** I agree that the submitted work did not derive the physical origin of the response. The revised manuscript is explicitly presented as a phenomenological study rather than a completed theory of gravity.
 
+I respectfully do not agree, however, that the absence of a first-principles completion by itself makes a narrower, explicitly phenomenological Original Research article unpublishable. [Frontiers in Astronomy and Space Sciences defines Original Research](https://www.frontiersin.org/journals/astronomy-and-space-sciences/for-authors/article-types) to include confirming and disconfirming studies that permit hypothesis elimination or reformulation, and it separately recognizes testable novel models under its Hypothesis and Theory article type. I selected this journal because that scope permits empirically testable phenomenology when the distinction between observation, parameterization, and fundamental mechanism is made explicit.
+
+That scope is also reflected in published Frontiers work. *[A new empirical fit to galaxy rotation curves](https://doi.org/10.3389/fspas.2025.1680387)* is an Original Research article in the same Extragalactic Astronomy section that explicitly presents an empirical model rather than new physics. *[Dark matter as an effect of a minimal length](https://doi.org/10.3389/fspas.2022.932276)* likewise describes a phenomenological gravity model while acknowledging that a complete quantum theory of gravity remains open. I cite these examples only to explain the journal fit, not to suggest that precedent establishes the validity of the present manuscript or guarantees publication. I ask that the revised paper be evaluated on the transparency and reproducibility of its tests, the falsifiability of its empirical response, and the claims it now actually makes, rather than on whether it already supplies a complete fundamental theory.
+
 To make the theoretical status precise, the revision distinguishes:
 
 1. the empirical response \(\Sigma(g_N,B)=1+B h(g_N)\);
