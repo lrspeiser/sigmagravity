@@ -2,13 +2,13 @@
 
 ## Primary reviewer-continuity manuscript
 
-- `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.pdf` — compiled 9-page revised manuscript
-- `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.tex` — authoritative REVTeX source
+- `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.pdf` — compiled revised manuscript in the original two-column format with continuous line numbers
+- `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.tex` — authoritative line-numbered REVTeX source
 - `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.bbl` — compiled numbered bibliography
 - `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25_Source.zip` — self-contained LaTeX source bundle
 - `Reviewer_Continuity/figures/` — the four manuscript figures in vector PDF and 360-dpi PNG formats
 
-This is the recommended manuscript for resubmission. It preserves the two-column REVTeX appearance, US Letter page size, numbered citations, and original major-section sequence. The revision incorporates the analyses required by peer review while presenting the scientific results as a standalone paper.
+This is the recommended manuscript for resubmission. It preserves the original two-column REVTeX appearance, US Letter page size, numbered citations, and major-section sequence, while adding continuous line numbers for peer review. The revision incorporates the analyses required by peer review while presenting the scientific results as a standalone paper.
 
 ## Optional Frontiers-template version
 

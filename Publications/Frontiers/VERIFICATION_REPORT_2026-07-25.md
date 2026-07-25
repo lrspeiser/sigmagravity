@@ -87,10 +87,12 @@ Verdict: radial suppression contributes useful behavior, but the measured photom
 
 The following compiled successfully:
 
-- 9-page US Letter REVTeX reviewer-continuity manuscript;
+- 9-page US Letter REVTeX reviewer-continuity manuscript in the original two-column format with continuous line numbers;
 - 16-page Frontiers-template manuscript with line numbers; and
 - 9-page Frontiers Supplementary Material.
 
-Every page of all three PDFs was rendered to PNG and visually inspected. Equations, tables, figures, captions, references, page breaks, the scale-length section, and the staged future-investigations section are legible. The reviewer-response page and section references were updated against the final 9-page REVTeX proof.
+Every page of all three PDFs was rendered to PNG and visually inspected. Equations, tables, figures, captions, references, line numbers, page breaks, the scale-length section, and the staged future-investigations section are legible. The reviewer-response page and section references were checked against the final line-numbered REVTeX proof.
+
+The original and revised manuscript sources use the same `revtex4-2` class options (`aps,prd,reprint,superscriptaddress,showpacs,floatfix,longbibliography`) and both compile at US Letter size. The only submission-format additions to the revised source are the `lineno` package, continuous-numbering command, and line-number spacing setting.
 
 The partially resolved reviewer issues are now presented as a conditional research program rather than deferred claims. The manuscript specifies advancement gates for independently measured coherence, no-refit cluster transfer, source-field construction, exact field solutions, relativistic completion, cosmology, and independent statistical review. The two reviewer responses separately identify completed revisions, remaining limitations, and these future tests.
