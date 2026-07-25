@@ -23,7 +23,7 @@
 \maketitle
 
 \begin{center}
-\small Manuscript ID 1866133 \quad Word count: 3210 \quad Figures: 4 \quad Tables: 2
+\small Manuscript ID 1866133 \quad Word count: 3636 \quad Figures: 4 \quad Tables: 2
 \end{center}
 
 \begin{abstract}
@@ -107,7 +107,14 @@ A_0=e^{1/(2\pi)} .
 
 The iteration uses \(V_\Sigma\), not the observed velocity, and therefore does not directly fit the observed outcome. However, \(F(V_\Sigma)\) is endogenous to the prediction rather than an independently measured phase-space quantity. It is treated here as a phenomenological regularizer, not as a measured covariant coherence scalar.
 
-The catalog photometric scale length \(R_d\), a radial window \(r/(R_d/2\pi+r)\), the reference length \(L_0\), and the exponent \(n\) do not enter this locked galaxy predictor and are not used to obtain the SPARC results reported below. The results therefore test the fixed-point implementation in Equation (6); incorporating a scale-length-dependent window would define a distinct extension requiring independent specification and evaluation.
+The locked galaxy predictor in Equation (6) does not use the catalog photometric scale length \(R_d\). As a separate no-refit structural sensitivity, we test the literal scale-length candidate
+
+\[
+W(r,R_d)=\frac{r}{R_d/(2\pi)+r},
+\qquad B_{R_d}=A_0W(r,R_d),
+\]
+
+with the catalog value of \(R_d\) assigned to each galaxy and all other baryonic and model choices held fixed. This candidate replaces \(F(V_\Sigma)\); it is not multiplied by it and is not used to alter the headline Equation (6) result. The reference length \(L_0\) and exponent \(n\) do not enter either galaxy calculation.
 
 A second velocity moment can schematically be decomposed in a stationary axisymmetric system as \(\langle v^2\rangle\simeq v_{\rm rot}^2+\sigma^2\). The ratio \(v_{\rm rot}^2/\langle v^2\rangle\) motivates a bounded measure of rotational support, but it is not a derivation of Equation (5). The decomposition is frame dependent; anisotropic systems require the dispersion tensor; and the implemented velocity is predicted rather than measured. No unique covariant reduction is claimed.
 
@@ -181,9 +188,11 @@ SPARC provides near-infrared photometry and resolved H I/H\(\alpha\) rotation cu
 \tag{14}
 \]
 
-and no galaxy-specific halo or response amplitude is fitted. A radial point is excluded from the primary disk analysis when the scaled bulge contribution is at least 30\% of \(V_{\rm bar}^2\). Galaxies with fewer than three remaining points are excluded. The locked sample contains 164 galaxies and 2,745 disk-dominated radial points.
+and no galaxy-specific halo or response amplitude is fitted. Because the circular-speed approximation is least secure where a spheroidal bulge dominates, a radial point is excluded from the primary disk analysis when the scaled bulge contribution is at least 30\% of \(V_{\rm bar}^2\). Galaxies with fewer than three remaining points are excluded. The locked sample contains 164 galaxies and 2,745 disk-dominated radial points. Sensitivity checks repeat the analysis at 20\% and 40\% thresholds and with all 171 usable galaxies and all 3,373 valid radial points.
 
-For each galaxy, we calculate an unweighted velocity root-mean-square (RMS) residual for \(\Sigma\)-Gravity and for MOND. Galaxies, not radial measurements, are the independent resampling units. Uncertainty intervals use 20,000 galaxy bootstrap resamples. We use an exact binomial comparison of the fraction of galaxies for which each model has lower RMS and a paired sign-flip test of the mean RMS difference.
+For each galaxy, we calculate an unweighted velocity root-mean-square (RMS) residual for \(\Sigma\)-Gravity and for MOND. This primary statistic gives each retained radius equal weight within a galaxy and each galaxy equal weight in the sample; a secondary calculation weights radial residuals by the reported velocity uncertainties. Galaxies, not radial measurements, are the independent resampling units. Uncertainty intervals use 20,000 galaxy bootstrap resamples. We use an exact binomial comparison of the fraction of galaxies for which each model has lower RMS and a paired sign-flip test of the mean RMS difference.
+
+For the scale-length candidate, catalog \(R_d\) values are used without fitting. Two negative controls test whether the galaxy-to-galaxy assignments carry information: 2,000 permutations of \(R_d\) among the 164 galaxies and a common \(R_d\) fixed to the sample median. These calculations test this particular radial window, not every possible dependence on baryonic geometry.
 
 The frozen nuisance grid contains 81 combinations of common disk and bulge mass-to-light ratios, a global distance scale, a global inclination offset, and the \(A_0\) normalization. A separate diagnostic varies \(\sigma\) from 10 to \(50\ {\rm km\,s^{-1}}\). These are sensitivity analyses, not fitted alternatives.
 
@@ -240,9 +249,17 @@ Its galaxy-weighted mean is \(+0.309\ {\rm km\,s^{-1}}\), with bootstrap 95\% in
 
 The conclusion is sensitive to common nuisance choices. Across the 81 frozen combinations, the mean paired contrast ranges from \(-3.286\) to \(+2.779\ {\rm km\,s^{-1}}\) and retains the central sign in 64.2\% of cases (Figure~\ref{fig:1}). This dependence is a reason not to overinterpret the small difference between the two prescriptions.
 
+Weighting each galaxy's radial residuals by its reported velocity uncertainties gives mean RMS values of \(15.847\ {\rm km\,s^{-1}}\) for \(\Sigma\)-Gravity and \(15.654\ {\rm km\,s^{-1}}\) for MOND. The paired mean is \(+0.193\ {\rm km\,s^{-1}}\), with bootstrap 95\% interval \([-0.177,+0.564]\ {\rm km\,s^{-1}}\), preserving the comparable-performance conclusion. The 20\%, 30\%, and 40\% bulge thresholds and the all-valid-points sample likewise retain a positive mean \(\Sigma\)-minus-MOND contrast; full results are given in Supplement Section S4.
+
 \subsection{Endogenous-factor ablation}\label{endogenous-factor-ablation}
 
 Replacing Equation (6) with the acceleration-only form \(B=A_0\) gives a mean galaxy RMS of \(16.882\ {\rm km\,s^{-1}}\). The locked endogenous factor therefore improves the mean RMS by \(0.517\ {\rm km\,s^{-1}}\), with bootstrap 95\% interval \(0.242\)--\(0.795\ {\rm km\,s^{-1}}\). This establishes that the factor changes the predictor; it does not establish an independent coherence effect because \(F\) is calculated from \(V_\Sigma\). The correct interpretation is an internal ablation of the phenomenological equation.
+
+\subsection{Photometric scale-length hypothesis}\label{photometric-scale-length-hypothesis}
+
+Using the measured SPARC scale length in \(B_{R_d}=A_0W(r,R_d)\) gives a mean galaxy RMS of \(16.513\ {\rm km\,s^{-1}}\), compared with \(16.366\ {\rm km\,s^{-1}}\) for the locked predictor. The paired scale-length-minus-locked difference is \(+0.147\ {\rm km\,s^{-1}}\), with bootstrap 95\% interval \([-0.088,+0.385]\ {\rm km\,s^{-1}}\). The same candidate improves on the acceleration-only ablation by \(0.370\ {\rm km\,s^{-1}}\), with interval \([0.111,0.620]\ {\rm km\,s^{-1}}\), but is worse than the tested MOND prescription by \(0.456\ {\rm km\,s^{-1}}\), with interval \([0.075,0.843]\ {\rm km\,s^{-1}}\).
+
+The catalog assignments do not outperform random reassignment: their mean RMS lies within the 2,000-permutation distribution, with one-sided \(p=0.711\). A fixed median \(R_d=2.3\) kpc gives \(16.413\ {\rm km\,s^{-1}}\), also slightly better than the galaxy-specific catalog assignments. Thus radial suppression can improve on the acceleration-only response, but this test does not support the measured photometric scale length as the controlling variable in the particular window above. Equation (6) is therefore retained as the locked predictor, while source geometry remains a testable physical hypothesis rather than an established component.
 
 \subsection{Algebraic approximation error}\label{algebraic-approximation-error}
 
@@ -299,7 +316,7 @@ in the system barycentric frame. This quantity would be small for a dispersion-s
 
 \subsection{Path length and source concentration}\label{path-length-and-source-concentration}
 
-A path-length power law can compactly relate galaxy and cluster amplitudes, but no unique functional for a general three-dimensional baryonic distribution is defined here. Because every Fox cluster received \(L=600\) kpc, the sample cannot identify the exponent \(n\) independently. Path length is therefore retained as a possible motivation for future work, not as a derived part of the canonical model.
+A path-length power law can compactly relate galaxy and cluster amplitudes, but no unique functional for a general three-dimensional baryonic distribution is defined here. Because every Fox cluster received \(L=600\) kpc, the sample cannot identify the exponent \(n\) independently. The direct SPARC scale-length sensitivity adds a narrower result: the tested radial window benefits from suppression relative to the acceleration-only response, but the actual catalog \(R_d\) assignments carry no detectable advantage over permuted or fixed values. Path length and source concentration are therefore retained as possible motivations for future work, not as derived parts of the canonical model. More general density- or geometry-sourced fields remain distinct hypotheses that require held-out tests.
 
 \subsection{Relation to Refracted Gravity}\label{relation-to-refracted-gravity}
 
@@ -337,6 +354,8 @@ The Fox cluster result is an in-sample calibration conditional on a simplified b
 An action-based nonrelativistic QUMOND embedding exists for independently specified \(B\), but the physical origin and dynamics of that amplitude remain unknown. Coherence or another property of baryonic organization is a possible explanation worth testing; it is not established by the current data. The matched counterrotation result is consistent with zero and is reported as a negative secondary diagnostic.
 
 Together, these results establish a fixed low-parameter galaxy response with a measurable incremental contribution, a QUMOND action embedding for independently specified \(B\), and an external cluster test that rejects unbiased transfer of the fixed Fox-calibrated amplitude under the present assumptions. \(\Sigma\)-Gravity therefore merits continued investigation as a galaxy-scale phenomenological alternative. Direct phase-space measurements and independently measured cluster baryon profiles are required to determine whether the empirical response reflects new physics or a compact description of correlated astrophysical structure; no relativistic or cosmological extension is developed here.
+
+The measured SPARC scale lengths do not improve the tested radial-window extension over the locked predictor or its negative controls. This negative result preserves the empirical core while narrowing the claim: coherence, scale length, and source organization are candidate explanations for \(B\), not observationally established dependencies.
 
 \section*{Data Availability Statement}
 
@@ -376,6 +395,7 @@ The Supplementary Material contains the full statistical procedures, identifiabi
 Dataset or analysis & Role & Independent unit & Determines a model parameter? \\
 \midrule
 SPARC disk sample & Locked cross-domain empirical evaluation & Galaxy & No per-galaxy parameter \\
+SPARC photometric scale-length test & Secondary structural-hypothesis sensitivity & Galaxy & No; catalog values used without fitting \\
 Fox clusters & Calibration & Cluster & Yes, one effective cluster amplitude \\
 Repeated Fox splits & Calibration-stability diagnostic & Held-out cluster within Fox & Refits on each training subset \\
 Non-overlapping Tian/CLASH profiles & No-refit external profile check & Cluster, with radii grouped & No \\
@@ -400,7 +420,8 @@ Quantity & Role & Status & Principal limitation \\
 \(B_{\rm Fox}=8.446\) & Cluster response & Calibrated & Does not transfer as a universal radial amplitude \\
 \(0.4\times0.15M_{500}\) & Fox baryon mass inside 200 kpc & Approximation & Material amplitude sensitivity \\
 Lensing closure & Relates response to lensing target & Assumed & Gravitational slip is undetermined \\
-\(R_d,L_0,n\) & Scale-length/path hypothesis & Not used in locked galaxy result & No unique operational 3D functional \\
+\(R_d\) & Photometric scale length & Tested only in a secondary no-refit window & Catalog assignments do not outperform permutation or fixed-median controls \\
+\(L_0,n\) & System-scale path hypothesis & Not used in locked galaxy result & No unique operational 3D functional; not separately identified \\
 \bottomrule
 \end{tabularx}
 \end{table}

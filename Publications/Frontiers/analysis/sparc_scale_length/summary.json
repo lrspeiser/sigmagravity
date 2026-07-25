@@ -1,0 +1,150 @@
+{
+  "design": {
+    "seed": 20260725,
+    "bootstrap_resamples": 20000,
+    "sign_flip_resamples": 50000,
+    "rdisk_permutations": 2000,
+    "parameters_fitted": 0
+  },
+  "primary_sample": {
+    "n_galaxies": 164,
+    "n_points": 2745,
+    "mean_rms_kms": {
+      "locked": 16.365710303623107,
+      "window_catalog": 16.512551335593148,
+      "window_heuristic": 16.468247417375355,
+      "acceleration_only": 16.882271990317133,
+      "mond": 16.056310332161605
+    },
+    "mean_weighted_rms_locked_kms": 15.847333733617639,
+    "mean_weighted_rms_mond_kms": 15.654365481663307
+  },
+  "comparisons": {
+    "locked_minus_mond": {
+      "n": 164,
+      "mean": 0.3093999714614994,
+      "mean_ci95": [
+        -0.03938933935582386,
+        0.6605489902574643
+      ],
+      "win_fraction": 0.4329268292682927,
+      "win_fraction_ci95": [
+        0.3597560975609756,
+        0.5121951219512195
+      ],
+      "wins": 71,
+      "losses": 93,
+      "exact_binomial_p_two_sided": 0.1007487303239412,
+      "sign_flip_p_two_sided": 0.08483830323393532
+    },
+    "locked_minus_acceleration_only": {
+      "n": 164,
+      "mean": -0.5165616866940259,
+      "mean_ci95": [
+        -0.7922941825038107,
+        -0.23968063797115463
+      ],
+      "win_fraction": 0.6341463414634146,
+      "win_fraction_ci95": [
+        0.5609756097560976,
+        0.7073170731707317
+      ],
+      "wins": 104,
+      "losses": 60,
+      "exact_binomial_p_two_sided": 0.0007362473784032279,
+      "sign_flip_p_two_sided": 0.0003599928001439971
+    },
+    "window_catalog_minus_locked": {
+      "n": 164,
+      "mean": 0.1468410319700465,
+      "mean_ci95": [
+        -0.08805072546890041,
+        0.3853628756138087
+      ],
+      "win_fraction": 0.4573170731707317,
+      "win_fraction_ci95": [
+        0.38414634146341464,
+        0.5306402439024257
+      ],
+      "wins": 75,
+      "losses": 89,
+      "exact_binomial_p_two_sided": 0.31003856280344166,
+      "sign_flip_p_two_sided": 0.2251154976900462
+    },
+    "window_catalog_minus_acceleration_only": {
+      "n": 164,
+      "mean": -0.36972065472397936,
+      "mean_ci95": [
+        -0.6197300228080722,
+        -0.11083964251668453
+      ],
+      "win_fraction": 0.6036585365853658,
+      "win_fraction_ci95": [
+        0.5304878048780488,
+        0.676829268292683
+      ],
+      "wins": 99,
+      "losses": 65,
+      "exact_binomial_p_two_sided": 0.009756084718005738,
+      "sign_flip_p_two_sided": 0.0051998960020799585
+    },
+    "window_catalog_minus_mond": {
+      "n": 164,
+      "mean": 0.4562410034315459,
+      "mean_ci95": [
+        0.075261650502914,
+        0.8432718791143342
+      ],
+      "win_fraction": 0.4024390243902439,
+      "win_fraction_ci95": [
+        0.32926829268292684,
+        0.47560975609756095
+      ],
+      "wins": 66,
+      "losses": 98,
+      "exact_binomial_p_two_sided": 0.015235025933514236,
+      "sign_flip_p_two_sided": 0.01985960280794384
+    },
+    "weighted_locked_minus_mond": {
+      "n": 164,
+      "mean": 0.19296825195433026,
+      "mean_ci95": [
+        -0.17730250040662712,
+        0.5636682904347767
+      ],
+      "win_fraction": 0.43902439024390244,
+      "win_fraction_ci95": [
+        0.36585365853658536,
+        0.5182926829268293
+      ],
+      "wins": 72,
+      "losses": 92,
+      "exact_binomial_p_two_sided": 0.1376616501974655,
+      "sign_flip_p_two_sided": 0.3132137357252855
+    }
+  },
+  "rdisk_permutation": {
+    "actual_mean_galaxy_rms_kms": 16.512551335593148,
+    "random_mean_galaxy_rms_kms": 16.460056092045487,
+    "random_ci95_kms": [
+      16.27201842337261,
+      16.636990811739096
+    ],
+    "one_sided_p_actual_better": 0.711144427786107
+  },
+  "fixed_median_rdisk": {
+    "rdisk_kpc": 2.3,
+    "mean_window_rms_kms": 16.412514523661432
+  },
+  "all_valid_points": {
+    "n_galaxies": 171,
+    "n_points": 3373,
+    "mean_rms_kms": {
+      "locked": 17.41547872502288,
+      "window_catalog": 17.57756626327037,
+      "window_heuristic": 17.502579085219246,
+      "acceleration_only": 17.906043670304904,
+      "mond": 17.154025922937112
+    }
+  }
+}

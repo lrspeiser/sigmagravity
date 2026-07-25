@@ -2,7 +2,7 @@
 
 ## Primary reviewer-continuity manuscript
 
-- `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.pdf` — compiled 8-page revised manuscript
+- `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.pdf` — compiled 9-page revised manuscript
 - `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.tex` — authoritative REVTeX source
 - `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.bbl` — compiled numbered bibliography
 - `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25_Source.zip` — self-contained LaTeX source bundle
@@ -12,7 +12,7 @@ This is the recommended manuscript for resubmission. It preserves the two-column
 
 ## Optional Frontiers-template version
 
-- `SigmaGravity_Resubmission_2026-07-25.pdf` — compiled 14-page manuscript with line numbers
+- `SigmaGravity_Resubmission_2026-07-25.pdf` — compiled 15-page manuscript with line numbers
 - `SigmaGravity_Resubmission_2026-07-25.tex` — Frontiers Harvard LaTeX source
 - `SigmaGravity_Resubmission_2026-07-25.bib` — bibliography
 - `SigmaGravity_Resubmission_2026-07-25.md` — editable Markdown source
@@ -44,6 +44,7 @@ From the repository root:
 
 ```powershell
 python "Publications/Frontiers/scripts/generate_revision_figures.py"
+python "Publications/Frontiers/scripts/run_sparc_scale_length_sensitivity.py"
 python "Publications/Frontiers/scripts/build_frontiers_sources.py"
 ```
 
@@ -53,8 +54,11 @@ To compile the recommended reviewer-continuity manuscript, run Tectonic or anoth
 
 - Reviewer-continuity manuscript, optional Frontiers-template manuscript, and Supplement compile successfully.
 - All pages were rendered and visually inspected.
-- The manuscript-facing test subset passed: 19 tests.
-- No new cluster amplitude or replacement response formula was introduced.
+- The manuscript-facing test subset passed: 24 tests.
+- The actual SPARC photometric scale lengths were evaluated in a no-refit candidate window with permutation and fixed-median controls. The candidate was not promoted to the canonical response.
+- No new cluster amplitude or replacement cluster formula was introduced.
+
+The scale-length script, tests, and machine-readable outputs are in `scripts/` and `analysis/sparc_scale_length/` within this folder. The QUMOND, cluster, and original paired-SPARC audit packages used by the manuscript are preserved at `research/reviewer_derivation_audit/` and `research/sparc_statistical_validation/` in the repository root.
 
 ## Author check before upload
 

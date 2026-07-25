@@ -113,7 +113,11 @@ V_\Sigma&=V_{\rm bar}\sqrt{1+B_{\rm gal}h(g_N)}.&&
 \end{equation}
 The iteration uses $V_\Sigma$, not the observed velocity, and therefore does not directly fit the observed outcome. However, $F(V_\Sigma)$ is endogenous to the prediction rather than an independently measured phase-space quantity. It is treated as a phenomenological regularizer, not as a measured covariant coherence scalar.
 
-The catalog photometric scale length $R_d$, a radial window $r/(R_d/2\pi+r)$, the reference length $L_0$, and the exponent $n$ do not enter this locked galaxy predictor and are not used to obtain the SPARC results reported below. The results therefore test the fixed-point implementation in Eq.~(\ref{eq:galaxy}); incorporating a scale-length-dependent window would define a distinct extension requiring independent specification and evaluation. A second velocity moment can schematically be decomposed in a stationary axisymmetric system as $\langle v^2\rangle\simeq v_{\rm rot}^2+\sigma^2$, but that frame-dependent statement is not a covariant derivation of Eq.~(\ref{eq:F}). No general covariant reduction is claimed.
+The locked predictor in Eq.~(\ref{eq:galaxy}) does not use the catalog photometric scale length $R_d$. As a separate no-refit structural sensitivity, we test
+\[
+W(r,R_d)=\frac{r}{R_d/(2\pi)+r},\qquad B_{R_d}=A_0W(r,R_d),
+\]
+using each galaxy's catalog $R_d$ while holding all other choices fixed. This candidate replaces $F(V_\Sigma)$; it is not multiplied by it and does not alter the headline locked result. The reference length $L_0$ and exponent $n$ do not enter either galaxy calculation. A second velocity moment can schematically be decomposed in a stationary axisymmetric system as $\langle v^2\rangle\simeq v_{\rm rot}^2+\sigma^2$, but that frame-dependent statement is not a covariant derivation of Eq.~(\ref{eq:F}). No general covariant reduction is claimed.
 
 \subsection{Nonrelativistic Action Embedding}
 
@@ -171,6 +175,7 @@ The nonrelativistic action determines neither photon propagation nor the two rel
 Dataset or analysis & Role & Independent unit & Determines a parameter?\\
 \hline
 SPARC disk sample & Locked empirical evaluation & Galaxy & No per-galaxy parameter\\
+SPARC scale-length test & Structural sensitivity & Galaxy & No fitted parameter\\
 Fox clusters & Calibration & Cluster & One effective cluster amplitude\\
 Repeated Fox splits & Calibration-stability diagnostic & Cluster within Fox & Refits each training subset\\
 Non-overlapping Tian/CLASH profiles & No-refit profile check & Cluster, radii grouped & No\\
@@ -193,7 +198,8 @@ $\Upsilon_{\rm disk},\Upsilon_{\rm bulge}$ & Stellar contributions & Fixed & Aff
 $B_{\rm Fox}=8.446$ & Cluster response & Calibrated & Not a universal radial amplitude\\
 $0.4\times0.15M_{500}$ & Fox aperture baryon mass & Approximation & Material sensitivity\\
 Lensing closure & Connects response to lensing target & Assumed & Slip is undetermined\\
-$R_d,L_0,n$ & Scale-length/path hypothesis & Not used in galaxy result & No operational 3D functional\\
+$R_d$ & Photometric scale length & Secondary no-refit test & Does not beat assignment controls\\
+$L_0,n$ & System-scale path hypothesis & Not used in galaxy result & No operational 3D functional\\
 \end{tabular}
 \end{ruledtabular}
 \end{table*}
@@ -210,7 +216,7 @@ SPARC provides near-infrared photometry and resolved H\,I/H$\alpha$ rotation cur
 \Upsilon_{\rm bulge}=0.7,
 \label{eq:ml}
 \end{equation}
-and no galaxy-specific halo or response amplitude is fitted. A radial point is excluded from the primary disk analysis when the scaled bulge contribution is at least 30\% of $V_{\rm bar}^2$. Galaxies with fewer than three remaining points are excluded. The locked sample contains 164 galaxies and 2,745 disk-dominated radial points.
+and no galaxy-specific halo or response amplitude is fitted. Because the circular-speed approximation is least secure where a spheroidal bulge dominates, a radial point is excluded from the primary disk analysis when the scaled bulge contribution is at least 30\% of $V_{\rm bar}^2$. Galaxies with fewer than three remaining points are excluded. The locked sample contains 164 galaxies and 2,745 disk-dominated radial points. Sensitivity checks use 20\% and 40\% thresholds and all 171 usable galaxies with 3,373 valid points.
 
 \subsection{MOND Comparison and Statistics}
 
@@ -223,7 +229,7 @@ a_0&=1.2\times10^{-10}\ {\rm m\,s^{-2}}.&&
 \end{aligned}
 \label{eq:mond}
 \end{equation}
-For each galaxy, we calculate an unweighted velocity RMS residual for $\Sigma$-Gravity and MOND. Galaxies, not radial measurements, are the independent resampling units. Uncertainty intervals use 20,000 galaxy-bootstrap resamples. We use an exact binomial comparison of the fraction of galaxies for which each model has lower RMS and a paired sign-flip test of the mean RMS difference.
+For each galaxy, we calculate an unweighted velocity RMS residual for $\Sigma$-Gravity and MOND. This gives each retained radius equal weight within a galaxy and each galaxy equal weight in the sample; a secondary calculation weights radial residuals by the reported velocity uncertainties. Galaxies, not radial measurements, are the independent resampling units. Uncertainty intervals use 20,000 galaxy-bootstrap resamples. We use an exact binomial comparison of the fraction of galaxies for which each model has lower RMS and a paired sign-flip test of the mean RMS difference. The scale-length sensitivity uses catalog $R_d$ without fitting, plus 2,000 galaxy-level assignment permutations and a fixed-median negative control.
 
 The frozen nuisance grid contains 81 combinations of common disk and bulge mass-to-light ratios, a global distance scale, a global inclination offset, and the $A_0$ normalization. A separate diagnostic varies $\sigma$ from 10 to $50\ {\rm km\,s^{-1}}$. These are sensitivity analyses, not fitted alternatives.
 
@@ -259,11 +265,19 @@ Its galaxy-weighted mean is $+0.309\ {\rm km\,s^{-1}}$, with bootstrap 95\% inte
 
 Across the 81 frozen nuisance combinations, the mean paired contrast ranges from $-3.286$ to $+2.779\ {\rm km\,s^{-1}}$ and retains the central sign in 64.2\% of cases. Replacing Eq.~(\ref{eq:galaxy}) with the acceleration-only form $B=A_0$ gives a mean RMS of $16.882\ {\rm km\,s^{-1}}$. The locked endogenous factor improves the mean RMS by $0.517\ {\rm km\,s^{-1}}$, with bootstrap 95\% interval $[0.242,0.795]\ {\rm km\,s^{-1}}$. This is an internal ablation of the empirical equation, not evidence for an independently measured coherence effect.
 
+Uncertainty weighting gives mean RMS values of $15.847$ and $15.654\ {\rm km\,s^{-1}}$ for $\Sigma$-Gravity and MOND, respectively, with paired mean $+0.193\ {\rm km\,s^{-1}}$ and 95\% interval $[-0.177,+0.564]\ {\rm km\,s^{-1}}$. The mean $\Sigma$-minus-MOND contrast remains positive at 20\%, 30\%, and 40\% bulge thresholds and in the all-valid-points sample. These checks preserve the comparable-performance conclusion.
+
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figure_1_sparc_paired.pdf}
 \caption{\label{fig:sparc}Locked SPARC comparison and nuisance sensitivity. Left: per-galaxy velocity RMS for $\Sigma$-Gravity and the tested MOND prescription. Center: distribution of the paired contrast; its 95\% galaxy-bootstrap interval includes zero. Right: mean contrast for the 81 frozen nuisance combinations. Negative values favor $\Sigma$-Gravity and positive values favor MOND.}
 \end{figure*}
+
+\subsection{Photometric Scale-Length Hypothesis}
+
+The catalog-scale-length candidate gives mean galaxy RMS $16.513\ {\rm km\,s^{-1}}$, compared with $16.366\ {\rm km\,s^{-1}}$ for the locked predictor. Their paired difference is $+0.147\ {\rm km\,s^{-1}}$, with bootstrap 95\% interval $[-0.088,+0.385]\ {\rm km\,s^{-1}}$. The candidate improves on the acceleration-only ablation by $0.370\ {\rm km\,s^{-1}}$ but is worse than the tested MOND prescription by $0.456\ {\rm km\,s^{-1}}$.
+
+The actual catalog assignments do not outperform random reassignment (one-sided $p=0.711$), and a common median $R_d=2.3$ kpc gives a lower mean RMS of $16.413\ {\rm km\,s^{-1}}$. Thus radial suppression is useful relative to the acceleration-only response, but this test does not support measured photometric scale length as its controlling variable. Equation~(\ref{eq:galaxy}) is retained as the locked predictor.
 
 \subsection{Galaxy Cluster Calibration and No-Refit Check}
 
@@ -326,7 +340,7 @@ The empirical response does not identify its physical mechanism. One possibility
 \end{equation}
 in the system barycentric frame. This quantity would be small for a dispersion-supported cluster, whereas the Fox calibration uses a single effective response rather than an independently measured $\mathcal C_{\rm kin}$. One measured coherence definition therefore does not currently explain both disks and clusters.
 
-A path-length power law can compactly relate galaxy and cluster amplitudes, but no unique functional for a general three-dimensional baryonic distribution is defined here. Because every Fox cluster received $L=600$ kpc, the sample cannot identify the exponent $n$ independently. Coherence and path length should advance only if independently measured quantities improve held-out predictions relative to an acceleration-only model.
+A path-length power law can compactly relate galaxy and cluster amplitudes, but no unique functional for a general three-dimensional baryonic distribution is defined here. Because every Fox cluster received $L=600$ kpc, the sample cannot identify the exponent $n$ independently. The direct SPARC sensitivity shows that the tested window improves on acceleration-only behavior but that actual catalog $R_d$ assignments carry no advantage over permuted or fixed controls. Coherence, path length, and source organization should advance only if independently measured quantities improve held-out predictions relative to an acceleration-only model.
 
 A related but distinct future direction is Refracted Gravity, in which a density-dependent gravitational permittivity modifies the Poisson equation and can redirect field lines in nonspherical sources \cite{ref12,ref13,ref14}. This literature illustrates how density and source geometry might enter a developed theory, but it does not derive or validate the empirical $\Sigma$ response.
 
@@ -362,6 +376,8 @@ The Fox cluster result is an in-sample calibration conditional on a simplified b
 An action-based nonrelativistic QUMOND embedding exists for independently specified $B$, but the physical origin and dynamics of that amplitude remain unknown. Coherence or another property of baryonic organization is a possible explanation worth testing; it is not established by the current data. The matched counterrotation result is consistent with zero and is reported as a negative secondary diagnostic.
 
 Together, these results establish a fixed low-parameter galaxy response with a measurable incremental contribution, a QUMOND action embedding for independently specified $B$, and an external cluster test that rejects unbiased transfer of the fixed Fox-calibrated amplitude under the present assumptions. $\Sigma$-Gravity therefore merits continued investigation as a galaxy-scale phenomenological alternative. Direct phase-space measurements and independently measured cluster baryon profiles are required to determine whether the response reflects new physics or a compact description of correlated astrophysical structure; no relativistic or cosmological extension is developed here.
+
+The measured SPARC scale lengths do not improve the tested radial-window extension over the locked predictor or its assignment controls. This negative result preserves the empirical core while narrowing the claim: coherence, scale length, and source organization are candidate explanations for $B$, not observationally established dependencies.
 
 \medskip\hrule\medskip
 

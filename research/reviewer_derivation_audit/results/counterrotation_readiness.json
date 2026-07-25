@@ -1,0 +1,24 @@
+{
+  "catalogued_counterrotators": 66,
+  "counterrotators_with_complete_JAM_matching_fields": 62,
+  "matched_controls": 310,
+  "unique_matched_controls": 307,
+  "maximum_absolute_SMD_after_matching": 0.07129655356470772,
+  "balanced_at_abs_SMD_below_0_1": true,
+  "direct_DAP_maps_present": false,
+  "environment_measure_present": false,
+  "merger_indicator_present": false,
+  "primary_direct_test_gate_passed": false,
+  "gate_failures": [
+    "MaNGA velocity/dispersion MAPS are absent from the repository.",
+    "Environment and merger-history covariates are absent."
+  ],
+  "secondary_JAM_NFW_fdm_comparison": {
+    "mean_matched_difference_case_minus_control": -0.006896927803379414,
+    "bootstrap_95_percent_interval": [
+      -0.05672784562211984,
+      0.04655957373271888
+    ]
+  },
+  "secondary_warning": "fdm_Re is inferred under a JAM/NFW model and is not a direct observable or a validation test of modified gravity."
+}

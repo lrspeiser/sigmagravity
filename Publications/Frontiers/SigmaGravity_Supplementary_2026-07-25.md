@@ -2,9 +2,9 @@
 
 ## S1. Scope and reproducibility contract
 
-This Supplement accompanies “Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters.” It documents the equations, data roles, exclusions, grouped uncertainty procedures, prespecified statistical checks, and software regression status used in the revised manuscript.
+This Supplement accompanies “Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters.” It documents the equations, data roles, exclusions, grouped uncertainty procedures, statistical checks, and software regression status used in the manuscript.
 
-The analyses use the model defined in Equations (1)–(15) of the main manuscript. No alternative response or path-length formula is introduced in the reported tests.
+The primary analyses use the model defined in Equations (1)–(15) of the main manuscript. A secondary, no-refit photometric scale-length window is evaluated as a structural hypothesis; it is not promoted to the canonical response or used to retune the headline result.
 
 No result in this Supplement changes a calibration into validation. The roles are fixed as follows:
 
@@ -13,6 +13,7 @@ No result in this Supplement changes a calibration into validation. The roles ar
 - Non-overlapping Tian/CLASH profiles: no-refit radial evaluation.
 - Matched MaNGA catalog: secondary counterrotation diagnostic.
 - Numerical disks: algebraic-approximation diagnostic.
+- SPARC photometric scale lengths: secondary no-refit structural sensitivity with permutation and fixed-value controls.
 
 ## S2. Canonical response, dimensions, and asymptotes
 
@@ -77,7 +78,7 @@ Thus a baryonic Tully–Fisher normalization identifies \(B^2g^\dagger\). It can
 | CLASH radial profiles | \(B_{\rm obs}(r)\) conditional on \(g_{\rm bar}\) | A universal source equation |
 | Lensing aperture masses | An effective mass ratio under closure | Gravitational slip or photon geodesics |
 
-Unused window variables were removed from the canonical galaxy model. In particular, \(R_d\), \(L_0\), and \(n\) are not silently varied or used to obtain the locked SPARC result.
+The canonical galaxy model does not use \(R_d\), \(L_0\), or \(n\). The catalog \(R_d\) values are evaluated separately in Section S4.5 through an explicitly defined radial window; \(L_0\) and \(n\) are not used to obtain any galaxy result.
 
 ## S3. Nonrelativistic action variation
 
@@ -155,7 +156,7 @@ V_{\rm bar}^2
 \tag{S14}
 \]
 
-Signed products preserve the convention of the SPARC component files. The Newtonian acceleration is \(g_N=V_{\rm bar}^2/r\) after unit conversion. A point is classified as disk dominated when the scaled bulge term is below 30% of \(V_{\rm bar}^2\). At least three retained points are required. The final sample contains 164 galaxies and 2,745 radial measurements.
+Signed products preserve the convention of the SPARC component files. The Newtonian acceleration is \(g_N=V_{\rm bar}^2/r\) after unit conversion. The algebraic calculation treats the retained velocity as circular motion in the disk plane, so the primary analysis classifies a point as disk dominated when the scaled bulge term is below 30% of \(V_{\rm bar}^2\). This threshold reduces application of the disk approximation in strongly spheroid-dominated regions; it is not selected by optimizing either model's residual. At least three retained points are required. The final sample contains 164 galaxies and 2,745 radial measurements.
 
 The production galaxy factor is obtained by fixed-point iteration:
 
@@ -187,6 +188,18 @@ where \(k\in\{\Sigma,{\rm MOND}\}\). The primary contrast is
 
 Twenty thousand bootstrap samples draw 164 galaxies with replacement and recompute the mean contrast and the fraction with \(\Delta_i<0\). Radial points are not independently resampled. The sign-flip test multiplies each \(\Delta_i\) by an independent random sign under the paired null. The exact binomial test compares the observed number with \({\rm Binomial}(164,0.5)\).
 
+The unweighted per-galaxy RMS is primary because it gives every retained radius equal influence within a galaxy and every galaxy equal influence in the sample. As a secondary sensitivity, the reported velocity uncertainty \(s_{ij}\) defines
+
+\[
+{\rm RMS}^{(w)}_{k,i}
+=\left[
+\frac{\sum_j (V_{k,ij}-V_{{\rm obs},ij})^2/s_{ij}^2}
+{\sum_j 1/s_{ij}^2}
+\right]^{1/2}.
+\]
+
+The weighted mean RMS values are 15.8473 km s\(^{-1}\) for Σ-Gravity and 15.6544 km s\(^{-1}\) for MOND. Their paired mean difference is +0.1930 km s\(^{-1}\), with galaxy-bootstrap 95% interval [−0.1773, +0.5637] km s\(^{-1}\); the paired sign-flip \(p\)-value is 0.3132. The weighting choice therefore does not change the comparable-performance conclusion.
+
 Primary results:
 
 | Quantity | Result |
@@ -217,12 +230,53 @@ The 81 frozen combinations vary common stellar mass-to-light assumptions, distan
 
 The acceleration-only ablation \(B=A_0\) gives mean RMS \(16.8823\ {\rm km\,s^{-1}}\). The full locked model improves the mean by \(0.5166\ {\rm km\,s^{-1}}\), with galaxy-bootstrap 95% interval [0.2420, 0.7945] km s\(^{-1}\). Because the factor uses \(V_\Sigma\), this is an equation ablation, not evidence for measured coherence.
 
+The primary 30% bulge threshold is bracketed by stricter and looser cuts and by a calculation retaining all valid points:
+
+| Sample | Galaxies | Points | Mean Σ RMS | Mean MOND RMS | Mean Σ−MOND RMS |
+|---|---:|---:|---:|---:|---:|
+| 20% bulge threshold | 155 | 2,511 | 15.4900 | 15.3794 | +0.1106 |
+| 30% primary threshold | 164 | 2,745 | 16.3657 | 16.0563 | +0.3094 |
+| 40% bulge threshold | 166 | 2,850 | 16.6182 | 16.1768 | +0.4414 |
+| All valid points | 171 | 3,373 | 17.4155 | 17.1540 | +0.2615 |
+
+The mean contrast remains positive in each sample, while its magnitude varies. This sensitivity supports the bounded claim of comparable aggregate performance and shows that the 164-galaxy selection is not solely responsible for the conclusion.
+
 Machine-readable inputs and results:
 
 - `research/sparc_statistical_validation/results/decision.json`
 - `research/sparc_statistical_validation/results/galaxy_metrics.csv`
 - `research/sparc_statistical_validation/results/nuisance_grid.csv`
 - `research/sparc_statistical_validation/results/quality_strata.csv`
+
+### S4.5 Photometric scale-length hypothesis
+
+The secondary structural candidate uses
+
+\[
+W(r,R_d)=\frac{r}{R_d/(2\pi)+r},
+\qquad
+V_{R_d}=V_{\rm bar}
+\sqrt{1+A_0W(r,R_d)h(g_N)}.
+\]
+
+The SPARC catalog value of \(R_d\) is used for each galaxy. No parameter is fitted, and the candidate replaces rather than multiplies the endogenous factor \(F(V_\Sigma)\). It therefore tests whether this specific photometric scale supplies the radial suppression already seen to be useful in the fixed-point ablation.
+
+| Comparison on 164 galaxies | Mean RMS difference | Galaxy-bootstrap 95% interval |
+|---|---:|---:|
+| Scale-length candidate minus locked Equation (6) | +0.1468 km s\(^{-1}\) | [−0.0881, +0.3854] |
+| Scale-length candidate minus acceleration-only | −0.3697 km s\(^{-1}\) | [−0.6197, −0.1108] |
+| Scale-length candidate minus MOND | +0.4562 km s\(^{-1}\) | [+0.0753, +0.8433] |
+
+The mean scale-length-candidate RMS is 16.5126 km s\(^{-1}\). In 2,000 galaxy-level permutations of the catalog \(R_d\) assignments, the random-assignment mean is 16.4601 km s\(^{-1}\), with central 95% interval [16.2720, 16.6370] km s\(^{-1}\). The one-sided probability that a permuted assignment performs at least as well as the actual assignment is 0.7111. A common \(R_d\) fixed to the sample median, 2.3 kpc, gives 16.4125 km s\(^{-1}\). With all 171 valid galaxies, the locked, scale-length, and MOND mean RMS values are 17.4155, 17.5776, and 17.1540 km s\(^{-1}\), respectively.
+
+These controls show that radial suppression is beneficial relative to the acceleration-only response, but the galaxy-specific measured \(R_d\) values do not add detectable information through this window. The result rejects this particular scale-length implementation as a replacement for Equation (6); it does not reject all density-, concentration-, or geometry-dependent source fields.
+
+Machine-readable outputs:
+
+- `Publications/Frontiers/analysis/sparc_scale_length/summary.json`
+- `Publications/Frontiers/analysis/sparc_scale_length/per_galaxy_primary.csv`
+- `Publications/Frontiers/analysis/sparc_scale_length/rdisk_permutation.csv`
+- `Publications/Frontiers/analysis/sparc_scale_length/bulge_threshold_sensitivity.csv`
 
 ## S5. Algebraic versus numerical QUMOND
 
@@ -346,16 +400,18 @@ From the repository root:
 
 ```powershell
 python -m pytest -q research/reviewer_derivation_audit/tests `
-  research/sparc_statistical_validation/tests
+  research/sparc_statistical_validation/tests `
+  Publications/Frontiers/scripts/test_sparc_scale_length_sensitivity.py
 ```
 
-Result: **19 passed, 0 failed, 0 errors**.
+Result: **24 passed, 0 failed, 0 errors**.
 
 ### S8.2 Main reproducible analyses
 
 ```powershell
 python research/reviewer_derivation_audit/run_sprint.py
 python research/sparc_statistical_validation/run_validation.py
+python "Publications/Frontiers/scripts/run_sparc_scale_length_sensitivity.py"
 python "Publications/Frontiers/scripts/generate_revision_figures.py"
 ```
 

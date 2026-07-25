@@ -15,7 +15,7 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[3]
-OUT = ROOT / "Frontier Feedback" / "Resubmission" / "figures"
+OUT = Path(__file__).resolve().parent.parent / "figures"
 
 SPARC = ROOT / "research" / "sparc_statistical_validation" / "results"
 AUDIT = ROOT / "research" / "reviewer_derivation_audit" / "results"

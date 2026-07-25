@@ -1,0 +1,103 @@
+{
+  "deep_btfr": {
+    "parameters": [
+      "log_B",
+      "log_g_dagger"
+    ],
+    "shape": [
+      1,
+      2
+    ],
+    "rank": 1,
+    "nullity": 1,
+    "jacobian": [
+      [
+        2.0,
+        1.0
+      ]
+    ],
+    "observable": "log(V^4/(G M_b)) = 2 log(B) + log(g_dagger)",
+    "conclusion": "BTFR identifies B^2 g_dagger, not B and g_dagger separately."
+  },
+  "fox_clusters_fixed_L": {
+    "parameters": [
+      "log_A0",
+      "n",
+      "log_L0"
+    ],
+    "shape": [
+      1,
+      3
+    ],
+    "rank": 1,
+    "nullity": 2,
+    "jacobian": [
+      [
+        1.0,
+        7.313220387090301,
+        -0.27
+      ]
+    ],
+    "conclusion": "With one L and C=1, n is a re-expression of one fitted B."
+  },
+  "hypothetical_varied_L": {
+    "parameters": [
+      "log_A0",
+      "n",
+      "log_L0"
+    ],
+    "shape": [
+      5,
+      3
+    ],
+    "rank": 2,
+    "nullity": 1,
+    "jacobian": [
+      [
+        1.0,
+        -0.6931471805599453,
+        -0.27
+      ],
+      [
+        1.0,
+        0.0,
+        -0.27
+      ],
+      [
+        1.0,
+        0.9162907318741551,
+        -0.27
+      ],
+      [
+        1.0,
+        2.5257286443082556,
+        -0.27
+      ],
+      [
+        1.0,
+        7.313220387090301,
+        -0.27
+      ]
+    ],
+    "conclusion": "Even varied L leaves the A0/L0 normalization degenerate without an external anchor."
+  },
+  "cluster_coherence_fixed_zero": {
+    "parameters": [
+      "density_coupling",
+      "coherence_coupling"
+    ],
+    "shape": [
+      1,
+      2
+    ],
+    "rank": 1,
+    "nullity": 1,
+    "jacobian": [
+      [
+        1.0,
+        0.0
+      ]
+    ],
+    "conclusion": "Dispersion-supported clusters alone cannot identify a coherence-source coupling."
+  }
+}

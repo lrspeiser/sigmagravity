@@ -1,0 +1,16 @@
+{
+  "static_checks": {
+    "coherence_uses_iterated_predicted_velocity": true,
+    "cluster_C_is_one": true,
+    "cluster_length_fixed_600_kpc": true,
+    "cluster_baryon_shortcut_present": true,
+    "baseline_prediction_uses_Rdisk_argument": false,
+    "unused_window_function_present": true
+  },
+  "scale_lengths": {
+    "n_galaxies": 171,
+    "pearson_correlation": 0.5429617562033282,
+    "median_heuristic_to_catalog_ratio": 1.7347670250896057,
+    "catalog_scale_length_used_by_baseline_prediction": false
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "design_frozen_before_results": true,
+  "central_summary": {
+    "n_galaxies": 164,
+    "n_disk_points": 2745,
+    "n_valid_points_before_bulge_cut": 3071,
+    "n_bulge_points_excluded": 326,
+    "mean_rms_sigma_kms": 16.365710299604682,
+    "mean_rms_acceleration_only_kms": 16.882271990317133,
+    "mean_rms_mond_kms": 16.056310332161605,
+    "median_delta_sigma_minus_mond_kms": 0.4075244169194461,
+    "mean_delta_sigma_minus_mond_kms": 0.30939996744307696,
+    "sigma_win_fraction": 0.4329268292682927,
+    "pooled_rmse_sigma_kms": 20.951546930952347,
+    "pooled_rmse_acceleration_only_kms": 21.131446974350343,
+    "pooled_rmse_mond_kms": 20.362831661219033
+  },
+  "sigma_vs_mond_verdict": "comparable",
+  "submitted_coherence_improves_acceleration_only": true,
+  "coherence_caveat": "The submitted C is computed from model-predicted velocity and is not an independently measured kinematic variable.",
+  "nuisance_grid_cases": 81,
+  "nuisance_mean_delta_range_kms": [
+    -3.2861312687652555,
+    2.779457194803493
+  ],
+  "nuisance_sign_stability_fraction": 0.6419753086419753,
+  "coherence_sigma_sign_stable": true,
+  "rdisk_catalog_matches": 164,
+  "rdisk_l0_n_structurally_inert": true,
+  "bootstrap": {
+    "seed": 20260718,
+    "bootstrap_resamples": 20000,
+    "sign_flip_resamples": 50000,
+    "sigma_minus_mond": {
+      "n": 164,
+      "mean": 0.30939996744307696,
+      "mean_ci95": [
+        -0.039523983797427095,
+        0.6585628437932155
+      ],
+      "median": 0.4075244169194461,
+      "median_ci95": [
+        -0.011134082338719153,
+        0.6758457419458805
+      ],
+      "win_fraction": 0.4329268292682927,
+      "win_fraction_ci95": [
+        0.3597560975609756,
+        0.5060975609756098
+      ],
+      "wins": 71,
+      "losses": 93,
+      "ties": 0,
+      "exact_binomial_p_two_sided": 0.1007487303239412,
+      "sign_flip_p_two_sided": 0.08841823163536729
+    },
+    "sigma_minus_acceleration_only": {
+      "n": 164,
+      "mean": -0.5165616907124485,
+      "mean_ci95": [
+        -0.7945458623391839,
+        -0.2419825087003716
+      ],
+      "median": -0.4212943614287763,
+      "median_ci95": [
+        -0.6069907856579775,
+        -0.18295811001765472
+      ],
+      "win_fraction": 0.6341463414634146,
+      "win_fraction_ci95": [
+        0.5609756097560976,
+        0.7073170731707317
+      ],
+      "wins": 104,
+      "losses": 60,
+      "ties": 0,
+      "exact_binomial_p_two_sided": 0.0007362473784032279,
+      "sign_flip_p_two_sided": 0.0003999920001599968
+    }
+  }
+}

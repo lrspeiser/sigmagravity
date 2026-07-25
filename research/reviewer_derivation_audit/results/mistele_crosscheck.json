@@ -1,0 +1,9 @@
+{
+  "matched_clusters": 14,
+  "matched_points": 24,
+  "clusters_with_mass_covariance": 14,
+  "mean_difference_dex": 0.05470482040372889,
+  "rms_difference_dex": 0.13576334042032223,
+  "median_abs_difference_dex": 0.11813252954657738,
+  "interpretation": "This checks reconstruction consistency. The catalogs share CLASH lensing inputs and therefore do not constitute independent physical validation."
+}

@@ -140,6 +140,7 @@ def main_tables() -> str:
 Dataset or analysis & Role & Independent unit & Determines a model parameter? \\
 \midrule
 SPARC disk sample & Locked cross-domain empirical evaluation & Galaxy & No per-galaxy parameter \\
+SPARC photometric scale-length test & Secondary structural-hypothesis sensitivity & Galaxy & No; catalog values used without fitting \\
 Fox clusters & Calibration & Cluster & Yes, one effective cluster amplitude \\
 Repeated Fox splits & Calibration-stability diagnostic & Held-out cluster within Fox & Refits on each training subset \\
 Non-overlapping Tian/CLASH profiles & No-refit external profile check & Cluster, with radii grouped & No \\
@@ -164,7 +165,8 @@ Quantity & Role & Status & Principal limitation \\
 \(B_{\rm Fox}=8.446\) & Cluster response & Calibrated & Does not transfer as a universal radial amplitude \\
 \(0.4\times0.15M_{500}\) & Fox baryon mass inside 200 kpc & Approximation & Material amplitude sensitivity \\
 Lensing closure & Relates response to lensing target & Assumed & Gravitational slip is undetermined \\
-\(R_d,L_0,n\) & Scale-length/path hypothesis & Not used in locked galaxy result & No unique operational 3D functional \\
+\(R_d\) & Photometric scale length & Tested only in a secondary no-refit window & Catalog assignments do not outperform permutation or fixed-median controls \\
+\(L_0,n\) & System-scale path hypothesis & Not used in locked galaxy result & No unique operational 3D functional; not separately identified \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -332,7 +334,14 @@ def copy_frontiers_template_files() -> None:
         "logo1.pdf",
     ]
     for name in targets:
-        shutil.copy2(template / name, RESUBMISSION / name)
+        source = template / name
+        destination = RESUBMISSION / name
+        if source.exists():
+            shutil.copy2(source, destination)
+        elif not destination.exists():
+            raise FileNotFoundError(
+                f"Frontiers template asset is missing from both {source} and {destination}"
+            )
     # Tectonic/XeTeX does not include EPS graphics. The template bundle ships
     # an equivalent PDF logo, so point both copied classes at that asset.
     for class_name in ("FrontiersinHarvard.cls", "frontiers_suppmat.cls"):

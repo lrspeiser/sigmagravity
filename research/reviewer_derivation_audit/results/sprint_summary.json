@@ -1,0 +1,494 @@
+{
+  "datasets": {
+    "tian2020": {
+      "dataset": "Tian et al. 2020 CLASH radial acceleration catalog",
+      "readme": "https://cdsarc.cds.unistra.fr/viz-bin/ReadMe/J/ApJ/896/70?format=html&tex=true",
+      "files": [
+        {
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/896/70/fig2.dat",
+          "path": "tian2020/fig2.dat",
+          "sha256": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+          "bytes": 3612
+        }
+      ]
+    },
+    "mistele2025": {
+      "dataset": "Mistele et al. 2025 CLASH acceleration profiles",
+      "zenodo_record": "https://zenodo.org/records/15476959",
+      "record_id": 15476959,
+      "files": [
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj1931-M-corr.csv/content",
+          "path": "mistele2025/macsj1931-M-corr.csv",
+          "sha256": "a1ae5e3f7eb2ae28a981e34ffb1a0ad7f835ff6b4116b0423e0d19a842768418",
+          "bytes": 1949
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/rxj1347-M-corr.csv/content",
+          "path": "mistele2025/rxj1347-M-corr.csv",
+          "sha256": "ca6491730ce09c99789509491471161547e866ebc30d3b826bae46834b82a851",
+          "bytes": 1934
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj1720-M-corr.csv/content",
+          "path": "mistele2025/macsj1720-M-corr.csv",
+          "sha256": "ad1ae0bbdfb5ce1d7e4108e6eac29ad40f9d0b3808e070325ff8b6faa00415b5",
+          "bytes": 1929
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0717.csv/content",
+          "path": "mistele2025/macsj0717.csv",
+          "sha256": "92a9b1fceb7cae568f90b8157000832ad80ad4ce5a05322bd632c637016585b1",
+          "bytes": 2970
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/rxj1532.csv/content",
+          "path": "mistele2025/rxj1532.csv",
+          "sha256": "74b32d4522f2f4ee10ff2ce10cd0d8a3e1631384246a692f69f06aed602123b5",
+          "bytes": 2996
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0647-M-corr.csv/content",
+          "path": "mistele2025/macsj0647-M-corr.csv",
+          "sha256": "4d3c44dd8fdab035d1e18168ca4fc3316f16333e4bb5e49885017859c54608f7",
+          "bytes": 1916
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/rxj2248-M-corr.csv/content",
+          "path": "mistele2025/rxj2248-M-corr.csv",
+          "sha256": "0cd6e9a7756dd78259fdcfdb561ab9dfd17d2140160e38267725f2136277075e",
+          "bytes": 1913
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/abell209-M-corr.csv/content",
+          "path": "mistele2025/abell209-M-corr.csv",
+          "sha256": "a182c84c9de0a63d4558d4b6f5f35ed785aeb7c375b84eb60a8ba711a87e853e",
+          "bytes": 1862
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0647.csv/content",
+          "path": "mistele2025/macsj0647.csv",
+          "sha256": "f2452b9ab3c166bd4d3d32ec528651b54396f3ddf8d5a01aa5a0eab6a4f54ea9",
+          "bytes": 2987
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj1206-M-corr.csv/content",
+          "path": "mistele2025/macsj1206-M-corr.csv",
+          "sha256": "b391770ade51da319061408f9eb0e096ea511c13edcb086d1b757685e2138bde",
+          "bytes": 1975
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj1149-M-corr.csv/content",
+          "path": "mistele2025/macsj1149-M-corr.csv",
+          "sha256": "2259d8ca035b1d453f17c9e182e95087a21e8579efc400e18afb0564610095eb",
+          "bytes": 1533
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/vflat-Mb-M200c.csv/content",
+          "path": "mistele2025/vflat-Mb-M200c.csv",
+          "sha256": "770b835ba3907fe114e089e7e6961bae94a68633ca6883b587f203928c25b44c",
+          "bytes": 7275
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj1206.csv/content",
+          "path": "mistele2025/macsj1206.csv",
+          "sha256": "84f72e560030556429f39e96e08c185e2c8352e9c4a98634931c2beb8d9158a1",
+          "bytes": 3005
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/abell611-M-corr.csv/content",
+          "path": "mistele2025/abell611-M-corr.csv",
+          "sha256": "7372a8ec6d1da1298b355afadfd546de1decd949841ef84a230f9f97d69bd0f6",
+          "bytes": 1963
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0429-M-corr.csv/content",
+          "path": "mistele2025/macsj0429-M-corr.csv",
+          "sha256": "8bff258c94977108854fed8691355bf9d9e58a4626bab96446cb0f174527e116",
+          "bytes": 1897
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/abell383.csv/content",
+          "path": "mistele2025/abell383.csv",
+          "sha256": "b94d51b18c5157200cd47fd5b8753f9bd15b3ef6759e74cc88f8cf5131d08848",
+          "bytes": 3000
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0717-M-corr.csv/content",
+          "path": "mistele2025/macsj0717-M-corr.csv",
+          "sha256": "3b2cb9d928138dc3f24cc48acc1551cfe0d0739050698dae3abe7ae97a25ece4",
+          "bytes": 1923
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj1115-M-corr.csv/content",
+          "path": "mistele2025/macsj1115-M-corr.csv",
+          "sha256": "d75d9c643f8f08724ddaff5b40d3498025d56f7b0af0ea202cbebfc2ad6f7cee",
+          "bytes": 1939
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/rxj2129-M-corr.csv/content",
+          "path": "mistele2025/rxj2129-M-corr.csv",
+          "sha256": "81b04f67cf5e84deba6075eae779260dcaa2d8e000792ae7838004196a95755f",
+          "bytes": 1968
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj1149.csv/content",
+          "path": "mistele2025/macsj1149.csv",
+          "sha256": "97e029ba448942649b082e66f4d64fa37b24a9bbf8c22cbc2109a7fbc1e5764e",
+          "bytes": 2725
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0416-M-corr.csv/content",
+          "path": "mistele2025/macsj0416-M-corr.csv",
+          "sha256": "6f07b971d92bc0c6562d7edc5d82119ccd700932804adc9ec22c7ab27fde844f",
+          "bytes": 1923
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0329.csv/content",
+          "path": "mistele2025/macsj0329.csv",
+          "sha256": "887862ec4b51a5adf8a88cfb5bfddd4f867130a0f9ba400911d11486163e4eb9",
+          "bytes": 2986
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0416.csv/content",
+          "path": "mistele2025/macsj0416.csv",
+          "sha256": "c558a00bbb08046b4944f4ad6fa82ba92d17719a08b1249357a24b44b9e3de60",
+          "bytes": 2969
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/rxj2248.csv/content",
+          "path": "mistele2025/rxj2248.csv",
+          "sha256": "3d8d6f9a418549bc6c40686b97734d9c96a9295a0fd1091b46cbacbb2ac232f6",
+          "bytes": 2999
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/rxj2129.csv/content",
+          "path": "mistele2025/rxj2129.csv",
+          "sha256": "4828b3c83bcab6ada0314cc680e265d234d4b0eb1ac3dae514ea5e4f029b8908",
+          "bytes": 2996
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/ms2137-M-corr.csv/content",
+          "path": "mistele2025/ms2137-M-corr.csv",
+          "sha256": "5272f6ecfddd9efa62c9f1b659772615ede5a99564bf89692a988725028566c3",
+          "bytes": 1951
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/abell2261.csv/content",
+          "path": "mistele2025/abell2261.csv",
+          "sha256": "38b23772ffcec5f0cc17d925e264cb57c825a39ef2f0bf7c26f7841290cc91e1",
+          "bytes": 2990
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0329-M-corr.csv/content",
+          "path": "mistele2025/macsj0329-M-corr.csv",
+          "sha256": "59d41335fc31065e8760489120aa4579bb2f1c2873f1568abbfb2d6220bfb1c1",
+          "bytes": 1963
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/ms2137.csv/content",
+          "path": "mistele2025/ms2137.csv",
+          "sha256": "26de0ab5b9d91c2f7d6b5424fd6709dd989ae816dbf20c4c293769532a22c3ef",
+          "bytes": 2997
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/abell209.csv/content",
+          "path": "mistele2025/abell209.csv",
+          "sha256": "20597fe50637ef4b505f46b27b7d9a544d6b3e26249460e07536c7834512e9fb",
+          "bytes": 2983
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/rxj1532-M-corr.csv/content",
+          "path": "mistele2025/rxj1532-M-corr.csv",
+          "sha256": "00208f5fae8562fce01823e0ee4ed1d89bd147bce1fb7fe3b09a5ac8b5a703c5",
+          "bytes": 1896
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj1115.csv/content",
+          "path": "mistele2025/macsj1115.csv",
+          "sha256": "301b9d75b7e9c11bacf736d2a7f5a4f05a62ef2eb798df672c2433bb98cf4cce",
+          "bytes": 2998
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/abell2261-M-corr.csv/content",
+          "path": "mistele2025/abell2261-M-corr.csv",
+          "sha256": "3ee59499072f0a7948483862f84e0fd93d82aaf7ec2c131dc98791b49261f271",
+          "bytes": 1932
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/abell611.csv/content",
+          "path": "mistele2025/abell611.csv",
+          "sha256": "ccadf240b730ca5b8ff784d292ddaf3bca2ad45df267c33dc634f22bca38310c",
+          "bytes": 2991
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0744.csv/content",
+          "path": "mistele2025/macsj0744.csv",
+          "sha256": "1ecb8c079209015ae36b5f3729425458a82216d294cb4ce5e8f1b1b98e96da5d",
+          "bytes": 2992
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0744-M-corr.csv/content",
+          "path": "mistele2025/macsj0744-M-corr.csv",
+          "sha256": "2d9b899a6b77dea29c043cbdf5be498bb9e16b601cde4d1ffc2b8f1f75f35691",
+          "bytes": 1926
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj0429.csv/content",
+          "path": "mistele2025/macsj0429.csv",
+          "sha256": "97062cffe4fd31f4c94f45569471b1bd5ef349cd3dfefb7881468b6a0b8d8bf2",
+          "bytes": 2989
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/rxj1347.csv/content",
+          "path": "mistele2025/rxj1347.csv",
+          "sha256": "1e3e5dc6a3ed63946c4e934715eb374aafe30cf7390b08423ddfb1e23d5c83ee",
+          "bytes": 2995
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/abell383-M-corr.csv/content",
+          "path": "mistele2025/abell383-M-corr.csv",
+          "sha256": "21a2157975e756139704e44c9ad6719681d0825ed8650d617e1b4c7bf80f2665",
+          "bytes": 1884
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj1931.csv/content",
+          "path": "mistele2025/macsj1931.csv",
+          "sha256": "6fb4c5e089ccd0338c1bc4f0cae9fb7d59b52bf37945ac80c0cc4ad7cbcb8371",
+          "bytes": 2992
+        },
+        {
+          "url": "https://zenodo.org/api/records/15476959/files/macsj1720.csv/content",
+          "path": "mistele2025/macsj1720.csv",
+          "sha256": "4bf85ced0f147ba91cfbeac5d108cf1df83f3d5d0863ae6ff43b6e570cd73edb",
+          "bytes": 2990
+        }
+      ]
+    }
+  },
+  "cluster": {
+    "submitted": {
+      "B": 8.446265977972306,
+      "disjoint_points": 73,
+      "disjoint_clusters": 17,
+      "fox_overlap_clusters": [
+        "MACS0416",
+        "MACS0717",
+        "MACS1149"
+      ],
+      "median_predicted_observed": 1.3175361648686388,
+      "mean_residual_dex": 0.14106683232242362,
+      "rms_dex": 0.18833726396695236,
+      "median_abs_dex": 0.1222550770055797
+    },
+    "all_points_constant_refit": {
+      "B": 5.200071382686762,
+      "equivalent_n_at_600_kpc": 0.20367462362687794,
+      "chi2_per_dof": 1.9247734817815436,
+      "rms_dex": 0.12108700530787822,
+      "median_abs_dex": 0.0968750097180271
+    },
+    "all_points_radial_diagnostic": {
+      "B200": 5.378466338650448,
+      "radial_exponent": -0.16094887440692146,
+      "chi2_per_dof": 1.30796493782553,
+      "rms_dex": 0.097585080356873,
+      "median_abs_dex": 0.06125917322879104
+    },
+    "leave_one_cluster_out": {
+      "constant_B": {
+        "n_points": 84,
+        "n_clusters": 20,
+        "rms_dex": 0.12285048318922828,
+        "median_abs_dex": 0.09710215572745273,
+        "mean_residual_dex": -0.03308025027728956
+      },
+      "radial_B_diagnostic": {
+        "n_points": 84,
+        "n_clusters": 20,
+        "rms_dex": 0.10157714046565901,
+        "median_abs_dex": 0.06193397233709064,
+        "mean_residual_dex": 0.0028378449380332326
+      }
+    },
+    "by_radius": [
+      {
+        "radius_kpc": 14.3,
+        "n": 13,
+        "median_predicted_observed": 1.062837927797425,
+        "median_B_obs_positive": 7.79000386609665
+      },
+      {
+        "radius_kpc": 16.2,
+        "n": 1,
+        "median_predicted_observed": 1.3175361648686388,
+        "median_B_obs_positive": 6.140891203014444
+      },
+      {
+        "radius_kpc": 17.2,
+        "n": 1,
+        "median_predicted_observed": 1.2058486003935316,
+        "median_B_obs_positive": 6.329203457122741
+      },
+      {
+        "radius_kpc": 22.2,
+        "n": 2,
+        "median_predicted_observed": 0.9437503912319847,
+        "median_B_obs_positive": 9.749606731468605
+      },
+      {
+        "radius_kpc": 23.6,
+        "n": 2,
+        "median_predicted_observed": 1.2074738462414856,
+        "median_B_obs_positive": 6.500341545739783
+      },
+      {
+        "radius_kpc": 30.3,
+        "n": 1,
+        "median_predicted_observed": 1.1154149318703364,
+        "median_B_obs_positive": 7.43582706317811
+      },
+      {
+        "radius_kpc": 100.0,
+        "n": 18,
+        "median_predicted_observed": 1.1830460199411048,
+        "median_B_obs_positive": 6.925040829954218
+      },
+      {
+        "radius_kpc": 200.0,
+        "n": 20,
+        "median_predicted_observed": 1.3392228101306611,
+        "median_B_obs_positive": 6.09779530766024
+      },
+      {
+        "radius_kpc": 400.0,
+        "n": 15,
+        "median_predicted_observed": 1.6617244780968574,
+        "median_B_obs_positive": 4.821156876137837
+      },
+      {
+        "radius_kpc": 600.0,
+        "n": 11,
+        "median_predicted_observed": 1.9758756528098096,
+        "median_B_obs_positive": 4.0141700192126875
+      }
+    ]
+  },
+  "mistele_crosscheck": {
+    "matched_clusters": 14,
+    "matched_points": 24,
+    "clusters_with_mass_covariance": 14,
+    "mean_difference_dex": 0.05470482040372889,
+    "rms_difference_dex": 0.13576334042032223,
+    "median_abs_difference_dex": 0.11813252954657738,
+    "interpretation": "This checks reconstruction consistency. The catalogs share CLASH lensing inputs and therefore do not constitute independent physical validation."
+  },
+  "baseline": {
+    "static_checks": {
+      "coherence_uses_iterated_predicted_velocity": true,
+      "cluster_C_is_one": true,
+      "cluster_length_fixed_600_kpc": true,
+      "cluster_baryon_shortcut_present": true,
+      "baseline_prediction_uses_Rdisk_argument": false,
+      "unused_window_function_present": true
+    },
+    "scale_lengths": {
+      "n_galaxies": 171,
+      "pearson_correlation": 0.5429617562033282,
+      "median_heuristic_to_catalog_ratio": 1.7347670250896057,
+      "catalog_scale_length_used_by_baseline_prediction": false
+    }
+  },
+  "qumond": [
+    {
+      "galaxy": "F574-2",
+      "mass_msun": 3700830000.0000005,
+      "Rdisk_kpc": 3.76,
+      "B": 1.0,
+      "grid_size": 65,
+      "n_radial_samples": 17,
+      "median_absolute_fractional_error": 0.05192519681899843,
+      "maximum_absolute_fractional_error": 0.2053749494368453,
+      "mean_signed_fractional_error": 0.07342944197783773,
+      "surface_density_class": "low",
+      "baryonic_mass_msun": 3700830000.0000005,
+      "surface_density_proxy_msun_kpc2": 41662332.22348766,
+      "construction": "analytic exponential disk using catalog M/L=0.5 plus 1.33 M_HI"
+    },
+    {
+      "galaxy": "UGC05716",
+      "mass_msun": 1749020000.0000002,
+      "Rdisk_kpc": 1.14,
+      "B": 1.0,
+      "grid_size": 65,
+      "n_radial_samples": 17,
+      "median_absolute_fractional_error": 0.04883825369709194,
+      "maximum_absolute_fractional_error": 0.18304647348097003,
+      "mean_signed_fractional_error": 0.06832054982202544,
+      "surface_density_class": "median",
+      "baryonic_mass_msun": 1749020000.0000002,
+      "surface_density_proxy_msun_kpc2": 214192965.9638249,
+      "construction": "analytic exponential disk using catalog M/L=0.5 plus 1.33 M_HI"
+    },
+    {
+      "galaxy": "NGC3741",
+      "mass_msun": 256060000.0,
+      "Rdisk_kpc": 0.2,
+      "B": 1.0,
+      "grid_size": 65,
+      "n_radial_samples": 17,
+      "median_absolute_fractional_error": 0.039635011082733484,
+      "maximum_absolute_fractional_error": 0.07727513734347702,
+      "mean_signed_fractional_error": 0.042753152492935154,
+      "surface_density_class": "high",
+      "baryonic_mass_msun": 256060000.0,
+      "surface_density_proxy_msun_kpc2": 1018830368.202768,
+      "construction": "analytic exponential disk using catalog M/L=0.5 plus 1.33 M_HI"
+    }
+  ],
+  "counterrotation": {
+    "catalogued_counterrotators": 66,
+    "counterrotators_with_complete_JAM_matching_fields": 62,
+    "matched_controls": 310,
+    "unique_matched_controls": 307,
+    "maximum_absolute_SMD_after_matching": 0.07129655356470772,
+    "balanced_at_abs_SMD_below_0_1": true,
+    "direct_DAP_maps_present": false,
+    "environment_measure_present": false,
+    "merger_indicator_present": false,
+    "primary_direct_test_gate_passed": false,
+    "gate_failures": [
+      "MaNGA velocity/dispersion MAPS are absent from the repository.",
+      "Environment and merger-history covariates are absent."
+    ],
+    "secondary_JAM_NFW_fdm_comparison": {
+      "mean_matched_difference_case_minus_control": -0.006896927803379414,
+      "bootstrap_95_percent_interval": [
+        -0.05672784562211984,
+        0.04655957373271888
+      ]
+    },
+    "secondary_warning": "fdm_Re is inferred under a JAM/NFW model and is not a direct observable or a validation test of modified gravity."
+  },
+  "decision": {
+    "canonical_B_equals_A_times_C": true,
+    "qumond_action_derivative_max_absolute_error": 2.27057475399306e-06,
+    "qumond_action_derivative_max_relative_error": 6.828796041292939e-08,
+    "nonrelativistic_action_embedding_passed": true,
+    "independent_coherence_dataset_available": false,
+    "independent_coherence_gate_passed": false,
+    "cluster_operational_coherence_conflicts_with_submitted_assumption": true,
+    "submitted_path_length_validation_passed": false,
+    "constant_B_loco_rms_dex": 0.12285048318922828,
+    "radial_diagnostic_loco_rms_dex": 0.10157714046565901,
+    "density_action_field_loco_rms_dex": 0.34163477325227715,
+    "coupled_action_field_loco_rms_dex": 0.17744296536753038,
+    "best_action_field_loco_rms_dex": 0.17744296536753038,
+    "density_action_field_outperforms_constant_B": false,
+    "derive_A_of_L_gate_passed": false,
+    "go_no_go_derived_coherence_and_path_length": "NO-GO",
+    "go_no_go_honest_acceleration_phenomenology": "GO",
+    "reason": "The QUMOND embedding is mathematically viable, but B is not independently derived: cluster C_kin conflicts with C=1, direct galaxy coherence maps are absent, and the submitted fixed path length fails the disjoint CLASH profile test.",
+    "g_dagger_SI": 9.598924108127284e-11
+  }
+}

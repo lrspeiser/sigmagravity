@@ -1,0 +1,60 @@
+{
+  "solver": "three-dimensional padded periodic FFT, axisymmetric exponential-sech^2 disk",
+  "warning": "These are analytic reconstructions selected from SPARC catalog masses and true Rdisk, not exact gas/bulge density maps.",
+  "grid_convergence": {
+    "galaxy": "UGC05716",
+    "grids": [
+      49,
+      65
+    ],
+    "median_absolute_fractional_difference": 0.007232695890923013,
+    "maximum_absolute_fractional_difference": 0.03671229101446838
+  },
+  "galaxies": [
+    {
+      "galaxy": "F574-2",
+      "mass_msun": 3700830000.0000005,
+      "Rdisk_kpc": 3.76,
+      "B": 1.0,
+      "grid_size": 65,
+      "n_radial_samples": 17,
+      "median_absolute_fractional_error": 0.05192519681899843,
+      "maximum_absolute_fractional_error": 0.2053749494368453,
+      "mean_signed_fractional_error": 0.07342944197783773,
+      "surface_density_class": "low",
+      "baryonic_mass_msun": 3700830000.0000005,
+      "surface_density_proxy_msun_kpc2": 41662332.22348766,
+      "construction": "analytic exponential disk using catalog M/L=0.5 plus 1.33 M_HI"
+    },
+    {
+      "galaxy": "UGC05716",
+      "mass_msun": 1749020000.0000002,
+      "Rdisk_kpc": 1.14,
+      "B": 1.0,
+      "grid_size": 65,
+      "n_radial_samples": 17,
+      "median_absolute_fractional_error": 0.04883825369709194,
+      "maximum_absolute_fractional_error": 0.18304647348097003,
+      "mean_signed_fractional_error": 0.06832054982202544,
+      "surface_density_class": "median",
+      "baryonic_mass_msun": 1749020000.0000002,
+      "surface_density_proxy_msun_kpc2": 214192965.9638249,
+      "construction": "analytic exponential disk using catalog M/L=0.5 plus 1.33 M_HI"
+    },
+    {
+      "galaxy": "NGC3741",
+      "mass_msun": 256060000.0,
+      "Rdisk_kpc": 0.2,
+      "B": 1.0,
+      "grid_size": 65,
+      "n_radial_samples": 17,
+      "median_absolute_fractional_error": 0.039635011082733484,
+      "maximum_absolute_fractional_error": 0.07727513734347702,
+      "mean_signed_fractional_error": 0.042753152492935154,
+      "surface_density_class": "high",
+      "baryonic_mass_msun": 256060000.0,
+      "surface_density_proxy_msun_kpc2": 1018830368.202768,
+      "construction": "analytic exponential disk using catalog M/L=0.5 plus 1.33 M_HI"
+    }
+  ]
+}

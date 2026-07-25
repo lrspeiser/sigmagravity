@@ -1,0 +1,21 @@
+{
+  "canonical_B_equals_A_times_C": true,
+  "qumond_action_derivative_max_absolute_error": 2.27057475399306e-06,
+  "qumond_action_derivative_max_relative_error": 6.828796041292939e-08,
+  "nonrelativistic_action_embedding_passed": true,
+  "independent_coherence_dataset_available": false,
+  "independent_coherence_gate_passed": false,
+  "cluster_operational_coherence_conflicts_with_submitted_assumption": true,
+  "submitted_path_length_validation_passed": false,
+  "constant_B_loco_rms_dex": 0.12285048318922828,
+  "radial_diagnostic_loco_rms_dex": 0.10157714046565901,
+  "density_action_field_loco_rms_dex": 0.34163477325227715,
+  "coupled_action_field_loco_rms_dex": 0.17744296536753038,
+  "best_action_field_loco_rms_dex": 0.17744296536753038,
+  "density_action_field_outperforms_constant_B": false,
+  "derive_A_of_L_gate_passed": false,
+  "go_no_go_derived_coherence_and_path_length": "NO-GO",
+  "go_no_go_honest_acceleration_phenomenology": "GO",
+  "reason": "The QUMOND embedding is mathematically viable, but B is not independently derived: cluster C_kin conflicts with C=1, direct galaxy coherence maps are absent, and the submitted fixed path length fails the disjoint CLASH profile test.",
+  "g_dagger_SI": 9.598924108127284e-11
+}

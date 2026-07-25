@@ -1,0 +1,12 @@
+{
+  "dataset": "Tian et al. 2020 CLASH radial acceleration catalog",
+  "readme": "https://cdsarc.cds.unistra.fr/viz-bin/ReadMe/J/ApJ/896/70?format=html&tex=true",
+  "files": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/896/70/fig2.dat",
+      "path": "tian2020/fig2.dat",
+      "sha256": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+      "bytes": 3612
+    }
+  ]
+}
