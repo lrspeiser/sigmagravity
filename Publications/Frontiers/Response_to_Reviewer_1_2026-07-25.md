@@ -19,6 +19,8 @@ The most important changes are:
 - The counterrotation claim is replaced by a balanced matched-control analysis whose interval includes zero.
 - Lensing, Solar-System, equivalence-principle, and cosmological claims are limited to what the present equations calculate.
 
+For clarity, the responses below distinguish work completed in this revision from investigations that remain open. I do not present an open item as resolved by relabeling it “future work”; where the requested calculation could not be completed within the present nonrelativistic framework, I state the limitation and the observation or derivation that would be required to resolve it.
+
 ## 1. Theoretical basis of coherence, path length, covariance, and conservation
 
 **Reviewer comment.** The coherence scalar, path length \(L\), and \(A(L)\) are phenomenological; the manuscript does not justify its claims about covariance, conservation, or equivalence principles.
@@ -183,7 +185,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0069\), w
 | “supports the framework’s validity” | “supports continued phenomenological investigation” |
 | “alternative to dark matter” without qualification | “galaxy-scale phenomenological alternative; not a replacement cosmology” |
 
-**Location.** Revised manuscript p. 1, Abstract and Sec. I.C; pp. 4–5, Secs. IV.A–IV.E; pp. 5–7, Sec. V; and pp. 7–8, Sec. VI.
+**Location.** Revised manuscript p. 1, Abstract and Sec. I.C; pp. 4–5, Secs. IV.A–IV.E; pp. 5–8, Sec. V; and p. 8, Sec. VI.
 
 ## 12. Figures and tables
 
@@ -217,6 +219,21 @@ The revision also:
 **After.** Object-level paired statistics and explicit uncertainty intervals determine the wording.
 
 **Location.** Revised manuscript p. 3, Sec. III.B; pp. 4–5, Secs. IV.A–IV.C; p. 5, Sec. IV.E; Table I on p. 4; Figures 1–2 on p. 6; and Figure 4 on p. 7. See also Supplement Sections S4, S6, and S7.
+
+## Defined future investigations
+
+The revised manuscript now consolidates the unresolved work in Sec. V.E, “Staged Future Investigations.” The sequence is designed to prevent a more flexible formula from substituting for an independent test:
+
+1. **Measured coherence.** Forward-model MaNGA velocity and dispersion maps and evaluate an independently measured phase-space estimator on complete held-out galaxies. An acceleration-plus-coherence model advances only if it improves on the acceleration-only response by a prespecified margin with a stable sign across morphology and mass.
+2. **Cluster transfer.** Assemble a disjoint sample with radial X-ray gas, brightest-cluster-galaxy, satellite, intracluster-light, and lensing covariance fixed before inference. A cluster response is called predictive only if it transfers without refitting across systems and radii.
+3. **Path length and source geometry.** Derive a density-, concentration-, or geometry-sourced field without system-class switches or per-object parameters, then compare it with constant \(B\) on held-out systems. The unsuccessful SPARC \(R_d\) window is not promoted.
+4. **Exact field solutions.** Replace the algebraic disk approximation with axisymmetric or three-dimensional solutions using observed gas, stellar, and bulge maps and propagate the resulting field-solution uncertainty through the galaxy likelihood.
+5. **Fundamental and relativistic completion.** Promote \(B\) to an independently varied field with explicit kinetic and source terms, test stability and conservation in a closed action, and only then derive the two metric potentials, photon propagation, PPN limits, equivalence-principle behavior, and gravitational-wave propagation.
+6. **Confirmatory inference.** Freeze samples, covariance models, and decision thresholds before evaluation and obtain independent statistical review before making stronger observational claims.
+
+These items are proposed tests with failure conditions, not additional results claimed by the present manuscript.
+
+**Location.** Revised manuscript pp. 7–8, Sec. V.E, “Staged Future Investigations.”
 
 ## Closing response
 

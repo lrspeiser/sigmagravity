@@ -9,6 +9,8 @@ I apologize for the time taken to provide this response. The interval allowed me
 
 The core formula has not been retuned to preserve the submitted claims. Instead, I have narrowed those claims and added only the analyses needed to answer the review: paired and uncertainty-weighted SPARC statistics, sample-threshold sensitivity, a zero-parameter test of the actual SPARC photometric scale lengths, an exact-versus-algebraic field comparison, a no-refit cluster profile check, and a matched counterrotation control.
 
+For clarity, I distinguish changes completed in this revision from investigations that remain open. The nonrelativistic action addresses the absence of an action embedding for fixed \(B\); it does not turn the empirical response into a first-principles or relativistic theory. Likewise, the added observational analyses test the submitted claims but do not convert unfavorable or null results into validation.
+
 ## 1. Lack of a fundamental theoretical foundation
 
 **Reviewer comment.** The model is phenomenological, has no first-principles mechanism or covariant completion, and does not justify the specific response, path-length scaling, or exponent.
@@ -27,7 +29,7 @@ The action produces the stated nonrelativistic field equations, but it does not 
 
 **After.** The title now says “Coherence-Motivated” rather than “Coherence-Dependent.” The Abstract, Introduction, action section, Discussion, and Conclusions consistently identify the model as a bounded phenomenological alternative.
 
-**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.F and Eqs. (4)–(12); pp. 5–7, Sec. V; and pp. 7–8, Sec. VI. See also Supplement Sections S2–S3.
+**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.F and Eqs. (4)–(12); pp. 5–8, Sec. V; and p. 8, Sec. VI. See also Supplement Sections S2–S3.
 
 **Remaining limitation.** The paper does not provide a first-principles origin for \(B\) or a relativistic theory, and says so directly.
 
@@ -116,7 +118,7 @@ The term “alternative” is now explicitly limited to a galaxy-scale empirical
 
 **After.** The successes of ΛCDM and the missing cosmological calculations are stated as major scope boundaries.
 
-**Location.** Revised manuscript p. 1, Abstract and Secs. I.A–I.C; p. 7, Sec. V.D; and pp. 7–8, Sec. VI.
+**Location.** Revised manuscript p. 1, Abstract and Secs. I.A–I.C; p. 7, Sec. V.D; and p. 8, Sec. VI.
 
 ## 6. Statistical-methods assessment
 
@@ -135,11 +137,26 @@ The term “alternative” is now explicitly limited to a galaxy-scale empirical
 - matches counterrotators and reports prespecified balance diagnostics; and
 - preserves residuals, sample membership, and procedures in the Supplement.
 
-I have not claimed that these additions solve the need for a future joint covariance-bearing cluster likelihood or direct map-level counterrotation model. The manuscript identifies both as required next tests.
+I have not claimed that these additions solve the need for a future joint covariance-bearing cluster likelihood or direct map-level counterrotation model. The manuscript identifies both as required next tests. I also do not represent an external statistical consultation as having occurred. Before making stronger confirmatory claims, I intend to freeze the analysis plan and seek independent statistical review; I would be pleased to provide an additional statistical assessment if the Editor requires it in the present review round.
 
-**Location.** Revised manuscript pp. 3–4, Secs. III.B–III.D and Table I; pp. 4–5, Secs. IV.A–IV.E; and p. 7, Sec. V.E. See also Supplement Sections S4, S6, and S7.
+**Location.** Revised manuscript pp. 3–4, Secs. III.B–III.D and Table I; pp. 4–5, Secs. IV.A–IV.E; and pp. 7–8, Sec. V.E. See also Supplement Sections S4, S6, and S7.
 
-## 7. Figure-quality assessment
+## 7. Defined future investigations and decision gates
+
+The revised manuscript now consolidates the unresolved work in Sec. V.E, “Staged Future Investigations.” This is a conditional program rather than an assertion that the present revision has solved the theoretical gaps:
+
+1. **Independent coherence test.** Use MaNGA velocity and dispersion maps to construct a phase-space estimator without using the target outcome. The coherence hypothesis advances only if it improves galaxy-grouped held-out predictions over the acceleration-only response by a prespecified margin and remains stable across morphology and mass.
+2. **Independent cluster test.** Freeze radial gas, stellar, satellite, intracluster-light, and lensing covariance models on a disjoint cluster sample before inferring an amplitude. A cluster law is predictive only if it transfers without refitting across clusters and radii.
+3. **Source equation for \(B\).** Compare constant-\(B\), density-sourced, coherence-sourced, and combined fields without system-type switches or per-object parameters. Promote \(B\) to a physical field only if a closed action yields stable solutions and the new field improves held-out prediction.
+4. **Exact nonrelativistic solutions.** Replace the algebraic disk relation with axisymmetric or three-dimensional field solutions using observed baryonic maps and propagate the geometry-dependent error into the likelihood.
+5. **Relativistic and cosmological development.** Only after the nonrelativistic mechanism passes should a covariant completion derive both metric potentials, lensing, PPN behavior, equivalence-principle limits, and gravitational-wave propagation. Cosmological background and perturbation calculations, including CMB, primordial-abundance, and structure-growth tests, remain contingent follow-on work.
+6. **Independent inference review.** Confirmatory analyses will use frozen samples, covariance models, and decision thresholds and should receive independent statistical review.
+
+Refracted Gravity remains a related published example of density- and geometry-dependent field behavior, not a derivation of Σ-Gravity. Any connection would be a separate theoretical and observational investigation.
+
+**Location.** Revised manuscript pp. 7–8, Sec. V.E, “Staged Future Investigations.”
+
+## 8. Figure-quality assessment
 
 Reviewer 2 found the submitted figures satisfactory, while Reviewer 1 did not. To make the revision consistent and easier to audit, all central figures were regenerated from frozen machine-readable outputs and supplied in vector PDF and high-resolution PNG formats. Figures 1–2 are on p. 6, while Figures 3–4 are on p. 7. Figure 2 explicitly separates calibration from no-refit evaluation, and Figure 4 displays both covariate balance and the matched interval.
 

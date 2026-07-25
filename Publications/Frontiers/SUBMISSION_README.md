@@ -12,7 +12,7 @@ This is the recommended manuscript for resubmission. It preserves the two-column
 
 ## Optional Frontiers-template version
 
-- `SigmaGravity_Resubmission_2026-07-25.pdf` — compiled 15-page manuscript with line numbers
+- `SigmaGravity_Resubmission_2026-07-25.pdf` — compiled 16-page manuscript with line numbers
 - `SigmaGravity_Resubmission_2026-07-25.tex` — Frontiers Harvard LaTeX source
 - `SigmaGravity_Resubmission_2026-07-25.bib` — bibliography
 - `SigmaGravity_Resubmission_2026-07-25.md` — editable Markdown source
