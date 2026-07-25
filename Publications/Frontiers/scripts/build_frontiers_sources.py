@@ -164,7 +164,7 @@ Quantity & Role & Status & Principal limitation \\
 \(B_{\rm Fox}=8.446\) & Cluster response & Calibrated & Does not transfer as a universal radial amplitude \\
 \(0.4\times0.15M_{500}\) & Fox baryon mass inside 200 kpc & Approximation & Material amplitude sensitivity \\
 Lensing closure & Relates response to lensing target & Assumed & Gravitational slip is undetermined \\
-\(R_d,L_0,n\) & Submitted window/path interpretation & Not used in locked galaxy result & No unique operational 3D functional \\
+\(R_d,L_0,n\) & Scale-length/path hypothesis & Not used in locked galaxy result & No unique operational 3D functional \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -179,7 +179,7 @@ def main_figures() -> str:
         ),
         (
             "figure_2_cluster_roles.pdf",
-            r"""Cluster calibration and no-refit radial evaluation. Left: predicted and observed 200-kpc aperture masses for the 42 Fox clusters under the submitted baryon proxy and calibrated \(B_{\rm Fox}\). This panel is an in-sample calibration, not validation. Right: predicted-to-observed acceleration ratios for 73 Tian/CLASH radial measurements in 17 clusters after obvious Fox overlaps are removed, with \(B_{\rm Fox}\) frozen. Large markers show radius-bin medians. The systematic increase with radius demonstrates failure of a universal fixed cluster amplitude.""",
+            r"""Cluster calibration and no-refit radial evaluation. Left: predicted and observed 200-kpc aperture masses for the 42 Fox clusters under the simplified baryon proxy and calibrated \(B_{\rm Fox}\). This panel is an in-sample calibration, not validation. Right: predicted-to-observed acceleration ratios for 73 Tian/CLASH radial measurements in 17 clusters after obvious Fox overlaps are removed, with \(B_{\rm Fox}\) frozen. Large markers show radius-bin medians. The systematic increase with radius shows that the fixed Fox-calibrated amplitude does not transfer without bias under the present baryonic and lensing assumptions.""",
         ),
         (
             "figure_3_qumond_approximation.pdf",
@@ -253,7 +253,7 @@ def build_main() -> None:
     endmatter = r"""
 \section*{Data Availability Statement}
 
-SPARC data are publicly available at \href{http://astroweb.cwru.edu/SPARC/}{astroweb.cwru.edu/SPARC}. The CLASH radial-acceleration catalog is available through VizieR as J/ApJ/896/70. The Fox cluster table used for the submitted calibration, frozen residuals, split definitions, matched samples, parameter diagnostics, and figure-generation code are provided in the accompanying repository and Supplementary Material.
+SPARC data are publicly available at \href{http://astroweb.cwru.edu/SPARC/}{astroweb.cwru.edu/SPARC}. The CLASH radial-acceleration catalog is available through VizieR as J/ApJ/896/70. The Fox cluster table used for calibration, frozen residuals, split definitions, matched samples, parameter diagnostics, and figure-generation code are provided in the accompanying repository and Supplementary Material.
 
 \section*{Author Contributions}
 

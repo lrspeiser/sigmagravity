@@ -8,7 +8,7 @@
 - `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25_Source.zip` — self-contained LaTeX source bundle
 - `Reviewer_Continuity/figures/` — the four manuscript figures in vector PDF and 360-dpi PNG formats
 
-This is the recommended manuscript for resubmission. It preserves the original title, two-column REVTeX appearance, US Letter page size, numbered citations, and original major-section sequence. The substantive changes are limited to the reviewer responses and the analyses required to support the revised wording.
+This is the recommended manuscript for resubmission. It preserves the two-column REVTeX appearance, US Letter page size, numbered citations, and original major-section sequence. The revision incorporates the analyses required by peer review while presenting the scientific results as a standalone paper.
 
 ## Optional Frontiers-template version
 
@@ -43,8 +43,8 @@ The `figures` folder contains four publication figures in vector PDF and 360-dpi
 From the repository root:
 
 ```powershell
-python "Frontier Feedback/Resubmission/scripts/generate_revision_figures.py"
-python "Frontier Feedback/Resubmission/scripts/build_frontiers_sources.py"
+python "Publications/Frontiers/scripts/generate_revision_figures.py"
+python "Publications/Frontiers/scripts/build_frontiers_sources.py"
 ```
 
 To compile the recommended reviewer-continuity manuscript, run Tectonic or another REVTeX-compatible LaTeX engine from the `Reviewer_Continuity` folder. The optional Frontiers-template source is generated separately by the commands above.

@@ -4,11 +4,11 @@
 
 This Supplement accompanies “Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters.” It documents the equations, data roles, exclusions, grouped uncertainty procedures, prespecified statistical checks, and software regression status used in the revised manuscript.
 
-The analyses use the model defined in Equations (1)–(15) of the main manuscript. No replacement response or path-length formula is introduced in the revision.
+The analyses use the model defined in Equations (1)–(15) of the main manuscript. No alternative response or path-length formula is introduced in the reported tests.
 
 No result in this Supplement changes a calibration into validation. The roles are fixed as follows:
 
-- Fox clusters: calibration under the submitted baryon proxy.
+- Fox clusters: calibration under the simplified baryon proxy.
 - Repeated Fox splits: within-catalog calibration stability.
 - Non-overlapping Tian/CLASH profiles: no-refit radial evaluation.
 - Matched MaNGA catalog: secondary counterrotation diagnostic.
@@ -251,7 +251,7 @@ Machine-readable output:
 
 ### S6.1 Fox calibration
 
-The Fox table contains the selected 42 clusters, \(M_{500}\), and 200-kpc strong-lensing aperture masses. The submitted baryon proxy is
+The Fox table contains the selected 42 clusters, \(M_{500}\), and 200-kpc strong-lensing aperture masses. The simplified baryon proxy is
 
 \[
 M_b(<200{\rm\,kpc})=0.06M_{500}.
@@ -299,7 +299,7 @@ Quoted uncertainties in both accelerations are retained in the machine table. Ag
 
 Across all 73 measurements, the median ratio is 1.3175 and the RMS log residual is 0.1883 dex.
 
-No replacement amplitude or radial response is fitted for the revised manuscript. The external catalog is used only to test whether the submitted calibration transfers without adjustment.
+No replacement amplitude or radial response is fitted in this no-refit analysis. The external catalog is used only to test whether the Fox calibration transfers without adjustment.
 
 Machine-readable output:
 
@@ -356,7 +356,7 @@ Result: **19 passed, 0 failed, 0 errors**.
 ```powershell
 python research/reviewer_derivation_audit/run_sprint.py
 python research/sparc_statistical_validation/run_validation.py
-python "Frontier Feedback/Resubmission/scripts/generate_revision_figures.py"
+python "Publications/Frontiers/scripts/generate_revision_figures.py"
 ```
 
 ## S9. Frozen figure sources
