@@ -3,9 +3,9 @@
 **Manuscript ID:** 1866133  
 **Manuscript title:** *Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters*
 
-We thank the Reviewer for the constructive report. We agreed with the central concern that the submitted manuscript stated several theoretical and observational conclusions more strongly than the evidence allowed. We have retained the empirical formula, two-column manuscript format, and major-section sequence, while revising the relevant passages to distinguish fixed assumptions, calibration, no-refit evaluation, and unresolved theoretical questions. We made one limited title change, from “Coherence-Dependent” to “Coherence-Motivated,” to distinguish the proposed physical interpretation from what the present data establish.
+I thank the Reviewer for the constructive report. I agreed with the central concern that the submitted manuscript stated several theoretical and observational conclusions more strongly than the evidence allowed. I have retained the empirical formula, two-column manuscript format, and major-section sequence, while revising the relevant passages to distinguish fixed assumptions, calibration, no-refit evaluation, and unresolved theoretical questions. I made one limited title change, from “Coherence-Dependent” to “Coherence-Motivated,” to distinguish the proposed physical interpretation from what the present data establish.
 
-We apologize for the time taken to provide this response. The interval allowed us to complete the analyses and manuscript changes needed to reflect the reviewers' feedback accurately. We would be pleased to undertake another focused revision round if the Reviewer or Editor believes that it would be useful.
+I apologize for the time taken to provide this response. The interval allowed me to complete the analyses and manuscript changes needed to reflect the reviewers' feedback accurately. I would be pleased to undertake another focused revision round if the Reviewer or Editor believes that it would be useful.
 
 The most important changes are:
 
@@ -22,9 +22,9 @@ The most important changes are:
 
 **Reviewer comment.** The coherence scalar, path length \(L\), and \(A(L)\) are phenomenological; the manuscript does not justify its claims about covariance, conservation, or equivalence principles.
 
-**Response.** We agree. The revision separates the observable response \(B\) from its possible interpretation. The data identify \(B=A\mathcal C\), not \(A\) and a physical coherence field separately. The implemented galaxy factor is described as an endogenous phenomenological regularizer because it uses the model-predicted velocity.
+**Response.** I agree. The revision separates the observable response \(B\) from its possible interpretation. The data identify \(B=A\mathcal C\), not \(A\) and a physical coherence field separately. The implemented galaxy factor is described as an endogenous phenomenological regularizer because it uses the model-predicted velocity.
 
-We also added a nonrelativistic QUMOND action for an independently specified \(B\). The text states precisely that this construction does not derive \(B\), and that conservation cannot be inferred if \(B\) is inserted from observed or predicted kinematics rather than varied as part of a closed action.
+I also added a nonrelativistic QUMOND action for an independently specified \(B\). The text states precisely that this construction does not derive \(B\), and that conservation cannot be inferred if \(B\) is inserted from observed or predicted kinematics rather than varied as part of a closed action.
 
 **Before.** The submitted manuscript presented a covariant coherence scalar and suggested that the construction supported conservation and equivalence-principle conclusions.
 
@@ -38,7 +38,7 @@ We also added a nonrelativistic QUMOND action for an independently specified \(B
 
 **Reviewer comment.** The manuscript states that the covariant expression reduces to the observational coherence equation but does not demonstrate the reduction.
 
-**Response.** We agree and have removed that claimed reduction. The revised text gives only a schematic second-moment motivation for the bounded galaxy factor and lists the frame, anisotropy, inclination, and endogeneity limitations.
+**Response.** I agree and have removed that claimed reduction. The revised text gives only a schematic second-moment motivation for the bounded galaxy factor and lists the frame, anisotropy, inclination, and endogeneity limitations.
 
 **Before.** A general covariant reduction was asserted.
 
@@ -50,9 +50,9 @@ We also added a nonrelativistic QUMOND action for an independently specified \(B
 
 **Reviewer comment.** The exponent was calibrated on the same 42 clusters used to quote the median ratio 0.987; random holdouts are not independent validation.
 
-**Response.** We agree. The 42 Fox clusters are now labeled the calibration sample, and 0.987 is called an in-sample calibration result. Repeated Fox splits are described only as calibration-stability checks.
+**Response.** I agree. The 42 Fox clusters are now labeled the calibration sample, and 0.987 is called an in-sample calibration result. Repeated Fox splits are described only as calibration-stability checks.
 
-To answer the request for a non-refit check, we added 73 radial measurements from 17 Tian/CLASH clusters after removing obvious Fox overlaps. With the submitted amplitude frozen, the median predicted-to-observed ratio is 1.318 and rises with radius. We report this unfavorable result rather than recalibrating the manuscript to it.
+To answer the request for a non-refit check, I added 73 radial measurements from 17 Tian/CLASH clusters after removing obvious Fox overlaps. With the submitted amplitude frozen, the median predicted-to-observed ratio is 1.318 and rises with radius. I report this unfavorable result rather than recalibrating the manuscript to it.
 
 **Before.** The Fox ratio and within-catalog holdouts were described as prediction or validation.
 
@@ -66,7 +66,7 @@ To answer the request for a non-refit check, we added 73 radial measurements fro
 
 **Reviewer comment.** The universal baryon fraction and fixed 0.4 concentration factor are oversimplified and materially affect the main cluster result.
 
-**Response.** We agree. Equation (16) is now labeled a simplified baryon-concentration prescription used only to reproduce the submitted calibration. The manuscript reports that changing the 0.4 factor by 25% changes the predicted mass ratio by approximately 30%.
+**Response.** I agree. Equation (16) is now labeled a simplified baryon-concentration prescription used only to reproduce the submitted calibration. The manuscript reports that changing the 0.4 factor by 25% changes the predicted mass ratio by approximately 30%.
 
 **Before.** The baryon proxy supported a precision cluster-success claim.
 
@@ -74,13 +74,13 @@ To answer the request for a non-refit check, we added 73 radial measurements fro
 
 **Location.** Revised manuscript p. 3, Sec. III.C and Eq. (15); pp. 4–5, Sec. IV.B; and Table II on p. 4. See also Supplement Section S6.1.
 
-**Remaining limitation.** We have not reconstructed gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles for all 42 Fox systems. The text identifies this as required future work.
+**Remaining limitation.** I have not reconstructed gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles for all 42 Fox systems. The text identifies this as required future work.
 
 ## 5. No operational definition of path length \(L\)
 
 **Reviewer comment.** Characteristic values are assigned by system class, but \(L\) cannot be calculated uniquely from a general three-dimensional baryonic distribution.
 
-**Response.** We agree. Because every Fox cluster received the same \(L=600\) kpc, the sample identifies one effective amplitude, not the exponent \(n\) independently. The path-length relation is no longer part of the canonical galaxy predictor or presented as derived.
+**Response.** I agree. Because every Fox cluster received the same \(L=600\) kpc, the sample identifies one effective amplitude, not the exponent \(n\) independently. The path-length relation is no longer part of the canonical galaxy predictor or presented as derived.
 
 **Before.** \(A(L)\) was presented as a cross-scale law connecting disks and clusters.
 
@@ -92,7 +92,7 @@ To answer the request for a non-refit check, we added 73 radial measurements fro
 
 **Reviewer comment.** The analysis should use actual SPARC photometric scale lengths.
 
-**Response.** The code audit showed that the locked production predictor does not use \(R_d\). The submitted discussion implied a role for \(R_d\), \(L_0\), and \(n\) that was absent from the calculation. We therefore removed those quantities from the canonical galaxy equation rather than inserting catalog scale lengths into a term that does not generate the reported result.
+**Response.** The code audit showed that the locked production predictor does not use \(R_d\). The submitted discussion implied a role for \(R_d\), \(L_0\), and \(n\) that was absent from the calculation. I therefore removed those quantities from the canonical galaxy equation rather than inserting catalog scale lengths into a term that does not generate the reported result.
 
 **Before.** The manuscript discussed a photometric/path-length window as if it entered the locked prediction.
 
@@ -106,7 +106,7 @@ To answer the request for a non-refit check, we added 73 radial measurements fro
 
 **Reviewer comment.** The algebraic field approximation requires justification.
 
-**Response.** We agree. The relation \(g_{\rm eff}\simeq\Sigma g_N\) is now explicitly labeled an approximation. We compare it with numerical axisymmetric QUMOND solutions for analytic disk reconstructions representative of F574-2, UGC05716, and NGC3741.
+**Response.** I agree. The relation \(g_{\rm eff}\simeq\Sigma g_N\) is now explicitly labeled an approximation. I compare it with numerical axisymmetric QUMOND solutions for analytic disk reconstructions representative of F574-2, UGC05716, and NGC3741.
 
 Median absolute differences are 5.19%, 4.88%, and 3.96%, with local maxima of 20.54%, 18.30%, and 7.73%, respectively.
 
@@ -122,9 +122,9 @@ Median absolute differences are 5.19%, 4.88%, and 3.96%, with local maxima of 20
 
 **Reviewer comment.** The unmatched populations may differ in mass, morphology, size, inclination, environment, merger history, and data quality; a matched control or multivariate analysis is needed. The statement that ΛCDM predicts no difference is too strong.
 
-**Response.** We agree. We matched 62 counterrotators to 310 controls on stellar mass, physical size, Sérsic index, axis ratio, inclination, redshift, and JAM fit quality. The maximum post-match absolute standardized mean difference is 0.071, below the prespecified 0.1 threshold.
+**Response.** I agree. I matched 62 counterrotators to 310 controls on stellar mass, physical size, Sérsic index, axis ratio, inclination, redshift, and JAM fit quality. The maximum post-match absolute standardized mean difference is 0.071, below the prespecified 0.1 threshold.
 
-The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0069\), with bootstrap 95% interval \([-0.0567,+0.0466]\). The result is consistent with zero. We removed “confirmed prediction,” the unmatched headline \(p\)-value, and the claim that ΛCDM predicts no difference.
+The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0069\), with bootstrap 95% interval \([-0.0567,+0.0466]\). The result is consistent with zero. I removed “confirmed prediction,” the unmatched headline \(p\)-value, and the claim that ΛCDM predicts no difference.
 
 **Before.** A large unmatched association was described as confirmation.
 
@@ -138,7 +138,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0069\), w
 
 **Reviewer comment.** Assigning the Sun \(\mathcal C=0\) is imposed rather than derived.
 
-**Response.** We agree and removed that assignment. The revision states only that the empirical acceleration function is small at high Newtonian acceleration and that this is not a PPN calculation.
+**Response.** I agree and removed that assignment. The revision states only that the empirical acceleration function is small at high Newtonian acceleration and that this is not a PPN calculation.
 
 **Before.** The manuscript claimed Solar-System compatibility from an imposed coherence value.
 
@@ -150,7 +150,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0069\), w
 
 **Reviewer comment.** Equality of lensing and dynamical mass was assumed by setting gravitational slip to zero; a modified-gravity theory must derive the two metric potentials.
 
-**Response.** We agree. The revised manuscript writes the weak-field metric and states that nonrelativistic dynamics constrains \(\Psi\), while lensing depends on \(\Phi+\Psi\). The present action does not determine \(\eta=\Phi/\Psi\).
+**Response.** I agree. The revised manuscript writes the weak-field metric and states that nonrelativistic dynamics constrains \(\Psi\), while lensing depends on \(\Phi+\Psi\). The present action does not determine \(\eta=\Phi/\Psi\).
 
 **Before.** The cluster comparison was described as a lensing prediction.
 
@@ -162,7 +162,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0069\), w
 
 **Reviewer comment.** Phrases such as “successfully predicts cluster lensing masses,” “confirmed prediction,” and “supports the framework’s validity” exceed the evidence.
 
-**Response.** We agree and removed them.
+**Response.** I agree and removed them.
 
 | Submitted wording | Revised wording |
 |---|---|
@@ -214,4 +214,4 @@ The revision does not change the core empirical response to obtain a more favora
 - the matched counterrotation result does not confirm coherence; and
 - coherence and path length remain hypotheses requiring further work.
 
-We thank the Reviewer for identifying the changes needed to separate an interesting phenomenological finding from conclusions that the current theory and data cannot yet support.
+I thank the Reviewer for identifying the changes needed to separate an interesting phenomenological finding from conclusions that the current theory and data cannot yet support.
