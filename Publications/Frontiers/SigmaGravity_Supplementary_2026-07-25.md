@@ -1,0 +1,371 @@
+# Supplementary Material
+
+## S1. Scope and reproducibility contract
+
+This Supplement accompanies “Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters.” It documents the equations, data roles, exclusions, grouped uncertainty procedures, prespecified statistical checks, and software regression status used in the revised manuscript.
+
+The analyses use the model defined in Equations (1)–(15) of the main manuscript. No replacement response or path-length formula is introduced in the revision.
+
+No result in this Supplement changes a calibration into validation. The roles are fixed as follows:
+
+- Fox clusters: calibration under the submitted baryon proxy.
+- Repeated Fox splits: within-catalog calibration stability.
+- Non-overlapping Tian/CLASH profiles: no-refit radial evaluation.
+- Matched MaNGA catalog: secondary counterrotation diagnostic.
+- Numerical disks: algebraic-approximation diagnostic.
+
+## S2. Canonical response, dimensions, and asymptotes
+
+The empirical response is
+
+\[
+\Sigma(g_N,B)=1+B\,h(g_N),
+\qquad
+h(g_N)=\sqrt{\frac{g^\dagger}{g_N}}
+\frac{g^\dagger}{g^\dagger+g_N}.
+\tag{S1}
+\]
+
+The quantities \(\Sigma\), \(B\), and \(h\) are dimensionless; \(g_N\) and \(g^\dagger\) have dimensions of acceleration. For \(x=g_N/g^\dagger\),
+
+\[
+h(x)=\frac{x^{-1/2}}{1+x}.
+\tag{S2}
+\]
+
+The asymptotic forms are
+
+\[
+h(x)=x^{-1/2}+\mathcal O(x^{1/2})
+\quad (x\ll1),
+\tag{S3}
+\]
+
+and
+
+\[
+h(x)=x^{-3/2}+\mathcal O(x^{-5/2})
+\quad (x\gg1).
+\tag{S4}
+\]
+
+For a point baryonic mass \(M_b\), \(g_N=GM_b/r^2\). In the low-acceleration limit,
+
+\[
+g_{\rm eff}\simeq B\sqrt{g^\dagger g_N},
+\qquad
+V^2=r g_{\rm eff}\simeq B\sqrt{GM_b g^\dagger},
+\tag{S5}
+\]
+
+so
+
+\[
+V^4=B^2GM_b g^\dagger.
+\tag{S6}
+\]
+
+Thus a baryonic Tully–Fisher normalization identifies \(B^2g^\dagger\). It cannot identify a separate amplitude \(A\), coherence \(\mathcal C\), and acceleration scale when the response contains only their product.
+
+### S2.1 Jacobian/identifiability summary
+
+| Dataset/limit | Directly constrains | Does not separately constrain |
+|---|---|---|
+| Low-acceleration disk normalization | \(B_{\rm gal}^2g^\dagger\) | \(B_{\rm gal}\) and \(g^\dagger\) |
+| Galaxy fixed-point response | \(A_0F(V_\Sigma)\) through predicted velocities | A measured coherence field |
+| Fox endpoints with common \(L\) | One effective \(B_{\rm Fox}\) | \(n\), \(L_0\), and normalization independently |
+| CLASH radial profiles | \(B_{\rm obs}(r)\) conditional on \(g_{\rm bar}\) | A universal source equation |
+| Lensing aperture masses | An effective mass ratio under closure | Gravitational slip or photon geodesics |
+
+Unused window variables were removed from the canonical galaxy model. In particular, \(R_d\), \(L_0\), and \(n\) are not silently varied or used to obtain the locked SPARC result.
+
+## S3. Nonrelativistic action variation
+
+For independently specified \(B\), define
+
+\[
+z=\frac{|\nabla\Phi_N|^2}{(g^\dagger)^2}
+\tag{S7}
+\]
+
+and
+
+\[
+Q(z,B)=z+4B\left[z^{1/4}-\arctan(z^{1/4})\right].
+\tag{S8}
+\]
+
+Let \(u=z^{1/4}\). Since
+
+\[
+\frac{d}{dz}\left[u-\arctan u\right]
+=\frac{1}{4}z^{-3/4}\left(1-\frac{1}{1+\sqrt z}\right)
+=\frac{1}{4}\frac{z^{-1/4}}{1+\sqrt z},
+\tag{S9}
+\]
+
+we obtain
+
+\[
+Q_z=1+B\frac{z^{-1/4}}{1+\sqrt z}
+=1+B h(g_N).
+\tag{S10}
+\]
+
+The action is
+
+\[
+S=\int dt\,d^3x\left\{
+-\frac{1}{8\pi G}
+\left[2\nabla\Phi\cdot\nabla\Phi_N-(g^\dagger)^2Q(z,B)\right]
+-\rho_b\Phi+\mathcal L_{\rm matter}
+\right\}.
+\tag{S11}
+\]
+
+Variation with respect to \(\Phi\), followed by integration by parts and vanishing boundary variations, gives
+
+\[
+\nabla^2\Phi_N=4\pi G\rho_b.
+\tag{S12}
+\]
+
+Variation with respect to \(\Phi_N\) gives
+
+\[
+\nabla^2\Phi=\nabla\cdot\left[Q_z\nabla\Phi_N\right].
+\tag{S13}
+\]
+
+These equations establish an action embedding only for fixed or independently supplied \(B\). If \(B=B(\mathbf x,t)\) is a field, Equation (S11) is incomplete unless its kinetic and source terms are specified and it is varied. If \(B\) is calculated from predicted or observed velocities after solving the field equations, conservation cannot be claimed from the fixed-\(B\) action alone.
+
+Unit tests differentiate \(Q\) numerically and symbolically, test the dimensions of every public function, and verify the limits in Equations (S3)–(S4).
+
+## S4. SPARC sample construction and statistics
+
+### S4.1 Inputs and exclusions
+
+The local archive includes 171 usable files from the 175-galaxy SPARC catalog. At each radius,
+
+\[
+V_{\rm bar}^2
+=V_{\rm gas}|V_{\rm gas}|
++0.5V_{\rm disk}|V_{\rm disk}|
++0.7V_{\rm bulge}|V_{\rm bulge}|.
+\tag{S14}
+\]
+
+Signed products preserve the convention of the SPARC component files. The Newtonian acceleration is \(g_N=V_{\rm bar}^2/r\) after unit conversion. A point is classified as disk dominated when the scaled bulge term is below 30% of \(V_{\rm bar}^2\). At least three retained points are required. The final sample contains 164 galaxies and 2,745 radial measurements.
+
+The production galaxy factor is obtained by fixed-point iteration:
+
+1. initialize \(V_\Sigma=V_{\rm bar}\);
+2. calculate \(F=V_\Sigma^2/(V_\Sigma^2+\sigma^2)\);
+3. set \(B=A_0F\);
+4. update \(V_\Sigma=V_{\rm bar}\sqrt{1+B h(g_N)}\);
+5. repeat to the numerical tolerance used in the repository implementation.
+
+Observed velocities are not used in this iteration. They enter only when the residual is calculated.
+
+### S4.2 Primary paired statistics
+
+For galaxy \(i\) with \(m_i\) retained radii,
+
+\[
+{\rm RMS}_{k,i}
+=\left[\frac{1}{m_i}\sum_{j=1}^{m_i}
+\left(V_{k,ij}-V_{{\rm obs},ij}\right)^2\right]^{1/2},
+\tag{S15}
+\]
+
+where \(k\in\{\Sigma,{\rm MOND}\}\). The primary contrast is
+
+\[
+\Delta_i={\rm RMS}_{\Sigma,i}-{\rm RMS}_{{\rm MOND},i}.
+\tag{S16}
+\]
+
+Twenty thousand bootstrap samples draw 164 galaxies with replacement and recompute the mean contrast and the fraction with \(\Delta_i<0\). Radial points are not independently resampled. The sign-flip test multiplies each \(\Delta_i\) by an independent random sign under the paired null. The exact binomial test compares the observed number with \({\rm Binomial}(164,0.5)\).
+
+Primary results:
+
+| Quantity | Result |
+|---|---:|
+| Mean Σ RMS | 16.3657 km s\(^{-1}\) |
+| Mean MOND RMS | 16.0563 km s\(^{-1}\) |
+| Mean paired contrast | +0.3094 km s\(^{-1}\) |
+| Bootstrap 95% interval | [−0.0395, +0.6586] km s\(^{-1}\) |
+| Σ lower-RMS count | 71/164 |
+| Σ lower-RMS fraction | 43.29% |
+| Fraction bootstrap interval | [35.98%, 50.61%] |
+| Exact binomial \(p\) | 0.1008 |
+| Paired sign-flip \(p\) | 0.0884 |
+
+### S4.3 Quality strata
+
+| SPARC quality flag | Galaxies | Mean \(\Delta_i\) | Σ lower-RMS fraction |
+|---|---:|---:|---:|
+| 1 (high) | 95 | +0.786 km s\(^{-1}\) | 34.7% |
+| 2 (medium) | 57 | −0.238 km s\(^{-1}\) | 52.6% |
+| 3 (low) | 12 | −0.865 km s\(^{-1}\) | 66.7% |
+
+The strata were not used for tuning. Their variation reinforces the aggregate “comparable” conclusion rather than a superiority claim.
+
+### S4.4 Nuisance grid and ablation
+
+The 81 frozen combinations vary common stellar mass-to-light assumptions, distance scale, inclination offset, and \(A_0\). The mean paired contrast ranges from −3.286 to +2.779 km s\(^{-1}\), and 64.2% of combinations retain the sign of the central result. This grid is descriptive; it does not marginalize over a calibrated astrophysical likelihood.
+
+The acceleration-only ablation \(B=A_0\) gives mean RMS \(16.8823\ {\rm km\,s^{-1}}\). The full locked model improves the mean by \(0.5166\ {\rm km\,s^{-1}}\), with galaxy-bootstrap 95% interval [0.2420, 0.7945] km s\(^{-1}\). Because the factor uses \(V_\Sigma\), this is an equation ablation, not evidence for measured coherence.
+
+Machine-readable inputs and results:
+
+- `research/sparc_statistical_validation/results/decision.json`
+- `research/sparc_statistical_validation/results/galaxy_metrics.csv`
+- `research/sparc_statistical_validation/results/nuisance_grid.csv`
+- `research/sparc_statistical_validation/results/quality_strata.csv`
+
+## S5. Algebraic versus numerical QUMOND
+
+The algebraic estimate \(\mathbf g\simeq Q_z\mathbf g_N\) is exact in spherical symmetry but not for a general disk. The diagnostic solves
+
+\[
+\nabla^2\Phi=\nabla\cdot[Q_z\nabla\Phi_N]
+\tag{S17}
+\]
+
+on an axisymmetric grid for analytic baryonic reconstructions representative of three SPARC systems. The comparison radius is expressed in units of the adopted disk scale length. Boundary and convergence checks are included in the research package.
+
+| Reconstruction | Median \(|V_{\rm alg}-V_{\rm num}|/V_{\rm num}\) | Maximum |
+|---|---:|---:|
+| F574-2 | 5.19% | 20.54% |
+| UGC05716 | 4.88% | 18.30% |
+| NGC3741 | 3.96% | 7.73% |
+
+These are not full reconstructions of the observed gas, disk, and bulge maps. Their role is to quantify the scale of the algebraic approximation error and to prevent the algebraic relation from being described as the exact field solution.
+
+Machine-readable output:
+
+- `research/reviewer_derivation_audit/results/qumond_axisym_validation.csv`
+
+## S6. Cluster calibration, profile evaluation, and uncertainty
+
+### S6.1 Fox calibration
+
+The Fox table contains the selected 42 clusters, \(M_{500}\), and 200-kpc strong-lensing aperture masses. The submitted baryon proxy is
+
+\[
+M_b(<200{\rm\,kpc})=0.06M_{500}.
+\tag{S18}
+\]
+
+For each cluster,
+
+\[
+g_{\rm bar}=\frac{GM_b}{r^2},
+\qquad
+M_{\Sigma}=\left[1+B_{\rm Fox}h(g_{\rm bar})\right]M_b,
+\tag{S19}
+\]
+
+with \(r=200\) kpc. The calibrated amplitude is \(B_{\rm Fox}=8.4463\). The median \(M_\Sigma/M_{\rm SL}=0.987\), with 0.132 dex scatter.
+
+The amplitude and the baryon proxy are not independently identified. Perturbing the concentration factor 0.4 by ±25% changes the predicted-to-observed ratio by approximately 30%. The Fox scatter is therefore not a full error budget.
+
+Machine-readable input/output:
+
+- `data/clusters/fox2022_sigma_results.csv`
+- `research/reviewer_derivation_audit/results/fox_parameter_audit.json`
+
+### S6.2 Tian/CLASH no-refit evaluation
+
+The public catalog provides cluster name, radius, \(\log g_{\rm bar}\), \(\log g_{\rm tot}\), and quoted standard errors. Obvious Fox overlaps were identified by normalized cluster names and removed before scoring. The resulting set contains 17 clusters and 73 measurements.
+
+For each point, the no-refit prediction uses \(B=8.4463\). Log residuals are
+
+\[
+\epsilon_{ij}
+=\log_{10}g_{{\rm pred},ij}-\log_{10}g_{{\rm tot},ij}.
+\tag{S20}
+\]
+
+Quoted uncertainties in both accelerations are retained in the machine table. Aggregate descriptive values are not interpreted as 73 independent clusters; leave-one-cluster-out calculations hold out complete systems.
+
+| Radius | Median \(g_{\rm pred}/g_{\rm tot}\) |
+|---:|---:|
+| 100 kpc | 1.183 |
+| 200 kpc | 1.339 |
+| 400 kpc | 1.662 |
+| 600 kpc | 1.976 |
+
+Across all 73 measurements, the median ratio is 1.3175 and the RMS log residual is 0.1883 dex.
+
+No replacement amplitude or radial response is fitted for the revised manuscript. The external catalog is used only to test whether the submitted calibration transfers without adjustment.
+
+Machine-readable output:
+
+- `research/reviewer_derivation_audit/results/tian_submitted_residuals.csv`
+- `research/reviewer_derivation_audit/results/tian_cluster_audit.json`
+
+## S7. Counterrotation matching
+
+The counterrotator list contains 66 cataloged systems. Sixty-two have complete fields for matching. Five controls per case are selected from the available comparison pool using the frozen matching procedure, producing 310 matches and 307 unique control galaxies.
+
+Matched covariates are:
+
+1. \(\log M_\star\);
+2. \(\log R_e\);
+3. Sérsic \(n\);
+4. axis ratio;
+5. inclination;
+6. redshift; and
+7. JAM fit quality.
+
+The maximum absolute SMD declines from 0.684 before matching to 0.071 after matching. The secondary outcome is
+
+\[
+\Delta f_{\rm DM}=-0.006897,
+\tag{S21}
+\]
+
+with galaxy-bootstrap 95% interval [−0.056728, +0.046560].
+
+Environment, merger indicators, map-level data-quality covariates, point-spread functions, and velocity/dispersion covariances are not present in the local catalog. The result is therefore not promoted to a direct theory test. The required primary experiment is a common map-level forward model with complete-galaxy cross-validation.
+
+Machine-readable output:
+
+- `research/reviewer_derivation_audit/results/counterrotation_matches.csv`
+- `research/reviewer_derivation_audit/results/counterrotation_smd_before.csv`
+- `research/reviewer_derivation_audit/results/counterrotation_smd_after.csv`
+- `research/reviewer_derivation_audit/results/counterrotation_readiness.json`
+
+## S8. Software regression and commands
+
+### S8.1 Controlled manuscript suite
+
+From the repository root:
+
+```powershell
+python -m pytest -q research/reviewer_derivation_audit/tests `
+  research/sparc_statistical_validation/tests
+```
+
+Result: **19 passed, 0 failed, 0 errors**.
+
+### S8.2 Main reproducible analyses
+
+```powershell
+python research/reviewer_derivation_audit/run_sprint.py
+python research/sparc_statistical_validation/run_validation.py
+python "Frontier Feedback/Resubmission/scripts/generate_revision_figures.py"
+```
+
+## S9. Frozen figure sources
+
+| Figure | Frozen source |
+|---|---|
+| Main Figure 1 | SPARC `decision.json`, `galaxy_metrics.csv`, nuisance grid |
+| Main Figure 2 | Fox calibration table; Tian no-refit residuals |
+| Main Figure 3 | QUMOND axisymmetric validation CSV |
+| Main Figure 4 | Counterrotation SMD files and readiness JSON |
+
+The figure script performs plotting only. It does not refit amplitudes, rematch galaxies, or change sample membership.
