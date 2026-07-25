@@ -43,9 +43,12 @@ def pandoc_body(source: Path, destination: Path, *, listings: bool = False) -> s
 
 
 def approximate_word_count(markdown: str) -> int:
-    start = markdown.index("## Abstract")
+    # Frontiers counts the main body but excludes the abstract, section titles,
+    # figure/table captions, acknowledgments, and references.
+    start = markdown.index("## 1 Introduction")
     end = markdown.index("## Data availability statement")
     text = markdown[start:end]
+    text = re.sub(r"^#{1,6}.*$", " ", text, flags=re.M)
     text = re.sub(r"```.*?```", " ", text, flags=re.S)
     text = re.sub(r"\$\$.*?\$\$", " ", text, flags=re.S)
     text = re.sub(r"\\\[.*?\\\]", " ", text, flags=re.S)
@@ -135,16 +138,16 @@ def main_tables() -> str:
 \centering
 \caption{Role of each dataset and analysis.}\label{tab:roles}
 \scriptsize
-\begin{tabularx}{\textwidth}{p{0.20\textwidth}p{0.25\textwidth}p{0.20\textwidth}X}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}X}
 \toprule
 Dataset or analysis & Role & Independent unit & Determines a model parameter? \\
 \midrule
-SPARC disk sample & Locked cross-domain empirical evaluation & Galaxy & No per-galaxy parameter \\
+SPARC disk sample & Retrospective evaluation & Galaxy & No per-galaxy parameter \\
 SPARC photometric scale-length test & Secondary structural-hypothesis sensitivity & Galaxy & No; catalog values used without fitting \\
-Fox clusters & Calibration & Cluster & Yes, one effective cluster amplitude \\
+Fox clusters & Illustrative in-sample calibration & Cluster & Yes, one effective cluster amplitude \\
 Repeated Fox splits & Calibration-stability diagnostic & Held-out cluster within Fox & Refits on each training subset \\
 Non-overlapping Tian/CLASH profiles & No-refit external profile check & Cluster, with radii grouped & No \\
-Matched MaNGA/JAM catalog & Secondary counterrotation diagnostic & Counterrotator/control set & No \\
+Matched MaNGA/JAM catalog & Secondary counterrotation diagnostic & Galaxy/control set & No \\
 Numerical QUMOND disks & Algebraic-approximation diagnostic & Reconstructed galaxy model & No \\
 \bottomrule
 \end{tabularx}
@@ -154,7 +157,7 @@ Numerical QUMOND disks & Algebraic-approximation diagnostic & Reconstructed gala
 \centering
 \caption{Parameter and assumption accounting.}\label{tab:parameters}
 \scriptsize
-\begin{tabularx}{\textwidth}{p{0.18\textwidth}p{0.22\textwidth}p{0.18\textwidth}X}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.18\textwidth}>{\raggedright\arraybackslash}p{0.22\textwidth}>{\raggedright\arraybackslash}p{0.18\textwidth}>{\raggedright\arraybackslash}X}
 \toprule
 Quantity & Role & Status & Principal limitation \\
 \midrule
@@ -162,7 +165,7 @@ Quantity & Role & Status & Principal limitation \\
 \(A_0=e^{1/(2\pi)}\) & Galaxy normalization before \(F(V_\Sigma)\) & Fixed model choice & Not uniquely derived from the data \\
 \(\sigma=20\ {\rm km\,s^{-1}}\) & Regulator in \(F(V_\Sigma)\) & Fixed & Endogenous; sensitivity tested from 10--50 km s\(^{-1}\) \\
 \(\Upsilon_{\rm disk},\Upsilon_{\rm bulge}\) & Stellar baryonic contributions & Fixed astrophysical assumptions & Change relative \(\Sigma\)/MOND performance \\
-\(B_{\rm Fox}=8.446\) & Cluster response & Calibrated & Does not transfer as a universal radial amplitude \\
+\(B_{\rm Fox}=8.446\) & Cluster response & Illustrative calibration & Does not transfer as a universal radial amplitude \\
 \(0.4\times0.15M_{500}\) & Fox baryon mass inside 200 kpc & Approximation & Material amplitude sensitivity \\
 Lensing closure & Relates response to lensing target & Assumed & Gravitational slip is undetermined \\
 \(R_d\) & Photometric scale length & Tested only in a secondary no-refit window & Catalog assignments do not outperform permutation or fixed-median controls \\
@@ -181,7 +184,7 @@ def main_figures() -> str:
         ),
         (
             "figure_2_cluster_roles.pdf",
-            r"""Cluster calibration and no-refit radial evaluation. Left: predicted and observed 200-kpc aperture masses for the 42 Fox clusters under the simplified baryon proxy and calibrated \(B_{\rm Fox}\). This panel is an in-sample calibration, not validation. Right: predicted-to-observed acceleration ratios for 73 Tian/CLASH radial measurements in 17 clusters after obvious Fox overlaps are removed, with \(B_{\rm Fox}\) frozen. Large markers show radius-bin medians. The systematic increase with radius shows that the fixed Fox-calibrated amplitude does not transfer without bias under the present baryonic and lensing assumptions.""",
+            r"""Illustrative cluster calibration and no-refit radial evaluation. Left: predicted and observed 200-kpc aperture masses for the 42 Fox clusters under the simplified baryon proxy and calibrated \(B_{\rm Fox}\). This panel is an illustrative in-sample calibration, not validation. Right: predicted-to-observed acceleration ratios for 73 Tian/CLASH radial measurements in 17 clusters after obvious Fox overlaps are removed, with \(B_{\rm Fox}\) frozen. Large markers show radius-bin medians. The systematic increase with radius shows that the fixed Fox-calibrated amplitude does not transfer without bias under the present baryonic and lensing assumptions.""",
         ),
         (
             "figure_3_qumond_approximation.pdf",

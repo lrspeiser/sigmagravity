@@ -12,8 +12,10 @@ The most important changes are:
 - Σ-Gravity is now presented as a nonrelativistic phenomenological alternative for selected missing-mass observations, not as a completed fundamental or cosmological theory.
 - The title now describes coherence as motivation rather than as an established physical dependence.
 - Coherence and path length are hypotheses rather than established causes of the response.
-- The Fox cluster result is explicitly labeled calibration.
+- The Fox cluster result is explicitly labeled an illustrative calibration and is no longer presented as a positive cluster result in the Abstract.
 - A no-refit CLASH profile check is reported separately and reveals radial bias.
+- The manuscript now explains the provenance and non-uniqueness of \(h(g_N)\), \(g^\dagger\), \(A_0\), \(F\), and \(\sigma\), and defines exactly what “locked” means.
+- The action section now states explicitly that the fixed-\(B\) action is not an action for the endogenous galaxy prescription.
 - The actual SPARC photometric scale lengths are tested in a zero-parameter radial-window sensitivity with permutation and fixed-value controls.
 - The algebraic disk calculation is compared with numerical axisymmetric QUMOND solutions.
 - The counterrotation claim is replaced by a balanced matched-control analysis whose interval includes zero.
@@ -27,13 +29,15 @@ For clarity, the responses below distinguish work completed in this revision fro
 
 **Response.** I agree. The revision separates the observable response \(B\) from its possible interpretation. The data identify \(B=A\mathcal C\), not \(A\) and a physical coherence field separately. The implemented galaxy factor is described as an endogenous phenomenological regularizer because it uses the model-predicted velocity.
 
-I also added a nonrelativistic QUMOND action for an independently specified \(B\). The text states precisely that this construction does not derive \(B\), and that conservation cannot be inferred if \(B\) is inserted from observed or predicted kinematics rather than varied as part of a closed action.
+I also added a nonrelativistic QUMOND action for an independently specified \(B\). The final text states explicitly that Equation (10) embeds only the fixed-\(B\) response and is not an action for the endogenous rotational-support prescription in Equation (6). It does not derive \(B\), and conservation cannot be inferred if \(B\) is inserted from observed or predicted kinematics rather than varied as part of a closed action.
+
+The final manuscript also gives the provenance of the fixed empirical choices. The square-root part of \(h(g_N)\) supplies the deep-acceleration scaling, while its rational gate suppresses the response at high acceleration; this constrains the asymptotes but does not make the exact transition unique. The geometric factor in \(g^\dagger\), the mode-counting motivation for \(A_0\), and the characteristic-dispersion motivation for \(\sigma=20\ {\rm km\,s^{-1}}\) are now labeled heuristics rather than derivations.
 
 **Before.** The submitted manuscript presented a covariant coherence scalar and suggested that the construction supported conservation and equivalence-principle conclusions.
 
 **After.** Those claims are withdrawn. The title now says “Coherence-Motivated” rather than “Coherence-Dependent,” and coherence is described as a possible physical motivation requiring independent phase-space data and its own dynamical field equation.
 
-**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.D and Eqs. (4)–(11); p. 3, Sec. II.F; pp. 5–6, Sec. V.B; and p. 7, Sec. V.D. See also Supplement Sections S2–S3.
+**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.D and Eqs. (4)–(11); p. 3, Sec. II.F; p. 7, Sec. V.B; and pp. 7–8, Sec. V.D. See also Supplement Sections S2–S3.
 
 **Remaining limitation.** No covariant coherence field, relativistic completion, or first-principles source equation for \(B\) is claimed.
 
@@ -53,15 +57,15 @@ I also added a nonrelativistic QUMOND action for an independently specified \(B\
 
 **Reviewer comment.** The exponent was calibrated on the same 42 clusters used to quote the median ratio 0.987; random holdouts are not independent validation.
 
-**Response.** I agree. The 42 Fox clusters are now labeled the calibration sample, and 0.987 is called an in-sample calibration result. Repeated Fox splits are described only as calibration-stability checks.
+**Response.** I agree. The 42 Fox clusters are now labeled an illustrative calibration sample, and 0.987 is called an in-sample calibration result. Repeated Fox splits are described only as calibration-stability checks. The final Abstract no longer presents the near-unity Fox ratio as a positive cluster result; it states instead that the simplified calibration is secondary and that its normalization fails to transfer without radial bias.
 
 To answer the request for a non-refit check, I added 73 radial measurements from 17 Tian/CLASH clusters after removing obvious Fox overlaps. With the submitted amplitude frozen, the median predicted-to-observed ratio is 1.318 and rises with radius. I report this unfavorable result rather than recalibrating the manuscript to it.
 
 **Before.** The Fox ratio and within-catalog holdouts were described as prediction or validation.
 
-**After.** Calibration and no-refit evaluation are separated. No replacement cluster amplitude or formula is introduced.
+**After.** The Fox calculation is visibly secondary and illustrative, calibration and no-refit evaluation are separated, and no replacement cluster amplitude or formula is introduced.
 
-**Location.** Revised manuscript pp. 3–4, Sec. III.C; p. 5, Sec. IV.C; Table I on p. 4; and Figure 2 on p. 6. See also Supplement Section S6.
+**Location.** Revised manuscript p. 4, Sec. III.C; p. 5, Sec. IV.C; Table I on p. 4; and Figure 2 on p. 6. See also Supplement Section S6.
 
 **Remaining limitation.** The CLASH analysis is a no-refit profile check, not a complete joint baryon/lensing likelihood on a new survey. A definitive validation still requires independently measured gas, stellar, intracluster-light, and lensing profiles with covariance fixed in advance.
 
@@ -69,13 +73,13 @@ To answer the request for a non-refit check, I added 73 radial measurements from
 
 **Reviewer comment.** The universal baryon fraction and fixed 0.4 concentration factor are oversimplified and materially affect the main cluster result.
 
-**Response.** I agree. Equation (15) is now labeled a simplified baryon-concentration prescription used only to reproduce the submitted calibration. The manuscript reports that changing the 0.4 factor by 25% changes the predicted mass ratio by approximately 30%.
+**Response.** I agree. Equation (15) is now labeled a simplified baryon-concentration prescription used only to reproduce the submitted calibration. The manuscript reports that changing the 0.4 factor by 25% changes the predicted mass ratio by approximately 30%. Because measured gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles were not available for all 42 Fox systems, I adopted the conservative alternative of demoting this exercise: it is now described as illustrative in the Abstract, Results, Discussion, Conclusions, Table I, Table II, and Figure 2.
 
 **Before.** The baryon proxy supported a precision cluster-success claim.
 
-**After.** The Fox result is explicitly conditional on the proxy and is not used as precision evidence for a universal law.
+**After.** The Fox result is explicitly conditional on the proxy, is not used as precision evidence for a universal law, and is not treated as a principal positive test of the framework.
 
-**Location.** Revised manuscript pp. 3–4, Sec. III.C and Eq. (15); p. 5, Sec. IV.C; and Table II on p. 4. See also Supplement Section S6.1.
+**Location.** Revised manuscript p. 4, Sec. III.C and Eq. (15); p. 5, Sec. IV.C; and Table II on p. 4. See also Supplement Section S6.1.
 
 **Remaining limitation.** I have not reconstructed gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles for all 42 Fox systems. The text identifies this as required future work.
 
@@ -83,13 +87,13 @@ To answer the request for a non-refit check, I added 73 radial measurements from
 
 **Reviewer comment.** Characteristic values are assigned by system class, but \(L\) cannot be calculated uniquely from a general three-dimensional baryonic distribution.
 
-**Response.** I agree. Because every Fox cluster received the same \(L=600\) kpc, the sample identifies one effective amplitude, not the exponent \(n\) independently. The path-length relation is no longer part of the canonical galaxy predictor or presented as derived.
+**Response.** I agree. Because every Fox cluster received the same \(L=600\) kpc, the sample identifies one effective amplitude, not the exponent \(n\) independently. Because the available data do not identify a general path-length functional, I removed the relation from the canonical response rather than replacing it with a more flexible fitted law.
 
 **Before.** \(A(L)\) was presented as a cross-scale law connecting disks and clusters.
 
-**After.** Path length is retained only as a possible motivation for future work. No substitute formula is fitted in this revision.
+**After.** Path length is retained only as a possible motivation for future work. No substitute formula is fitted in this revision, and the paper states directly that the request was not solved by an operational definition.
 
-**Location.** Revised manuscript p. 2, Sec. II.C; p. 3, Sec. II.F; Table II on p. 4; and p. 6, Sec. V.B. See also Supplement Section S2.1.
+**Location.** Revised manuscript p. 2, Sec. II.C; p. 3, Sec. II.F; Table II on p. 4; and p. 7, Sec. V.B. See also Supplement Section S2.1.
 
 ## 6. Actual SPARC photometric scale lengths
 
@@ -111,7 +115,7 @@ I also tested whether the actual galaxy-to-galaxy assignments contain informatio
 
 **After.** The manuscript preserves Equation (6) as the canonical predictor, defines and reports the catalog-\(R_d\) candidate as a separate structural sensitivity, and states that \(L_0\) and \(n\) are not used for the galaxy result. The negative controls are reported so the result does not imply support for a measured scale-length mechanism.
 
-**Location.** Revised manuscript p. 2, Sec. II.C; p. 3, Secs. III.A–III.B; p. 4, Tables I–II; p. 5, Sec. IV.B; and p. 6, Sec. V.B. See also Supplement Sections S2.1 and S4.5 and the machine-readable outputs in `Publications/Frontiers/analysis/sparc_scale_length/`.
+**Location.** Revised manuscript pp. 2–3, Sec. II.C; pp. 3–4, Secs. III.A–III.B; p. 4, Tables I–II; p. 5, Sec. IV.B; and p. 7, Sec. V.B. See also Supplement Sections S2.1 and S4.5 and the machine-readable outputs in `Publications/Frontiers/analysis/sparc_scale_length/`.
 
 **Interpretation.** The test shows that radial suppression can improve on the acceleration-only ablation, but the actual catalog \(R_d\) assignments do not add detectable information through this window. I therefore retain source geometry as a future physical hypothesis without incorporating this unsuccessful candidate into the core formula.
 
@@ -143,7 +147,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0069\), w
 
 **After.** The matched null result is reported as a secondary diagnostic, and counterrotation is retained only as a proposed direct future test.
 
-**Location.** Revised manuscript p. 4, Sec. III.D; p. 5, Sec. IV.E and Eq. (17); and Figure 4 on p. 7. See also Supplement Section S7.
+**Location.** Revised manuscript p. 5, Sec. III.D; p. 6, Sec. IV.E and Eq. (17); and Figure 4 on p. 7. See also Supplement Section S7.
 
 **Remaining limitation.** Environment and merger-history covariates were not available in the local catalog. A direct test requires common forward modeling of the MaNGA velocity and dispersion maps.
 
@@ -157,7 +161,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0069\), w
 
 **After.** Solar-System, compact-source, equivalence-principle, and PPN behavior are explicitly undetermined.
 
-**Location.** Revised manuscript p. 3, Sec. II.F, final paragraph; and p. 7, Sec. V.D, second paragraph.
+**Location.** Revised manuscript p. 3, Sec. II.F, final paragraph; and pp. 7–8, Sec. V.D.
 
 ## 10. Lensing and gravitational slip
 
@@ -169,7 +173,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0069\), w
 
 **After.** It is an empirical mass comparison conditional on a lensing closure assumption.
 
-**Location.** Revised manuscript p. 3, Sec. II.F; Table II on p. 4; and p. 7, Sec. V.D and Eq. (19).
+**Location.** Revised manuscript p. 3, Sec. II.F; Table II on p. 4; and pp. 7–8, Sec. V.D, including Eq. (19).
 
 ## 11. Overstated claims
 
@@ -185,7 +189,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0069\), w
 | “supports the framework’s validity” | “supports continued phenomenological investigation” |
 | “alternative to dark matter” without qualification | “galaxy-scale phenomenological alternative; not a replacement cosmology” |
 
-**Location.** Revised manuscript p. 1, Abstract and Sec. I.C; pp. 4–5, Secs. IV.A–IV.E; pp. 5–8, Sec. V; and p. 8, Sec. VI.
+**Location.** Revised manuscript p. 1, Abstract and Sec. I.C; pp. 5–6, Secs. IV.A–IV.E; pp. 6–8, Sec. V; and p. 8, Sec. VI.
 
 ## 12. Figures and tables
 
@@ -218,7 +222,7 @@ The revision also:
 
 **After.** Object-level paired statistics and explicit uncertainty intervals determine the wording.
 
-**Location.** Revised manuscript p. 3, Sec. III.B; pp. 4–5, Secs. IV.A–IV.C; p. 5, Sec. IV.E; Table I on p. 4; Figures 1–2 on p. 6; and Figure 4 on p. 7. See also Supplement Sections S4, S6, and S7.
+**Location.** Revised manuscript p. 4, Sec. III.B; p. 5, Secs. IV.A–IV.C; p. 6, Sec. IV.E; Table I on p. 4; Figures 1–2 on p. 6; and Figure 4 on p. 7. See also Supplement Sections S4, S6, and S7.
 
 ## Defined future investigations
 

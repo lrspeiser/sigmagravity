@@ -95,4 +95,15 @@ Every page of all three PDFs was rendered to PNG and visually inspected. Equatio
 
 The original and revised manuscript sources use the same `revtex4-2` class options (`aps,prd,reprint,superscriptaddress,showpacs,floatfix,longbibliography`) and both compile at US Letter size. The only submission-format additions to the revised source are the `lineno` package, continuous-numbering command, and line-number spacing setting.
 
+## Final feedback audit
+
+The final audit of the proposed revision identified four clarifications that could be added without changing the fitted formula or selecting a more favorable result. They are now present in the manuscript and in the point-by-point responses:
+
+- the Fox result is consistently described as a secondary illustrative calibration and is not used as a positive result in the Abstract;
+- the asymptotic motivation and non-uniqueness of `h(g_N)`, `g^\dagger`, `A_0`, `F`, and `\sigma` are stated explicitly;
+- “locked” is defined as retrospective non-reoptimization of the submitted equations and constants, not prospective registration or independent validation; and
+- the QUMOND action is limited explicitly to independently specified `B` and is not presented as an action for the endogenous rotational-support prescription.
+
+The audit did not trigger a new cluster amplitude, a replacement path-length formula, or a claim that an external statistical consultation had occurred. The path-length relation was withdrawn from the canonical response because no operational three-dimensional functional was established; it was not relabeled as solved.
+
 The partially resolved reviewer issues are now presented as a conditional research program rather than deferred claims. The manuscript specifies advancement gates for independently measured coherence, no-refit cluster transfer, source-field construction, exact field solutions, relativistic completion, cosmology, and independent statistical review. The two reviewer responses separately identify completed revisions, remaining limitations, and these future tests.
