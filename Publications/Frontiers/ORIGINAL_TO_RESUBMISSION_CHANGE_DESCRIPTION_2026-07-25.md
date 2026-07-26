@@ -217,7 +217,7 @@ The catalog-\(R_d\) candidate gives mean RMS 16.513 km s\(^{-1}\), compared with
 
 **Reviewer 1 concern.** Equality between lensing and dynamical mass was assumed rather than derived from a relativistic theory.
 
-**Change.** The revised paper writes the weak-field metric, distinguishes the potential governing nonrelativistic dynamics from the sum of potentials governing lensing, and states that the present nonrelativistic action does not determine the slip η = Φ/Ψ. Cluster comparisons are described as empirical mass comparisons conditional on a closure assumption.
+**Change.** The revised paper writes the dimensionally explicit weak-field metric, maps the nonrelativistic potential \(\Phi\) in the action to the dynamical metric potential \(\Psi\), denotes the independent spatial potential by \(\Phi_{\rm L}\), and states that the present nonrelativistic action does not determine the slip \(\eta=\Phi_{\rm L}/\Psi\). Cluster comparisons are described as empirical mass comparisons conditional on a closure assumption.
 
 **Resolution status.** The assumption is now transparent; it is not theoretically derived.
 

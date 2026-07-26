@@ -12,7 +12,7 @@ No result in this Supplement changes a calibration into validation. The roles ar
 
 - Fox clusters: calibration under the simplified baryon proxy.
 - Repeated Fox splits: within-catalog calibration stability.
-- Non-overlapping Tian/CLASH profiles: no-refit radial evaluation.
+- Tian/CLASH profiles outside the Fox calibration sample: no-refit radial evaluation.
 - Matched MaNGA catalog: secondary counterrotation diagnostic.
 - Numerical disks: algebraic-approximation diagnostic.
 - SPARC photometric scale lengths: secondary no-refit structural sensitivity with permutation and fixed-value controls.
@@ -271,7 +271,7 @@ V_{R_d}=V_{\rm bar}
 \sqrt{1+A_0W(r,R_d)h(g_N)}.
 \]
 
-The SPARC catalog value of \(R_d\) is used for each galaxy. The rational window and the scale \(R_d/(2\pi)\) are the previously specified structural form associated with the model; no alternate form was screened in this sensitivity calculation. No parameter is fitted, and the candidate replaces rather than multiplies the endogenous factor \(F(V_\Sigma)\). It therefore tests whether this specific photometric scale supplies the radial suppression already seen to be useful in the fixed-point ablation.
+The archived production SPARC predictions use the fixed-point Equation (6) of the main manuscript. Although earlier documentation described the \(R_d\) window as the galaxy predictor, that window was present but unused in the archived production path. The SPARC catalog value of \(R_d\) is used for each galaxy only in this separate no-refit sensitivity. The rational window and the scale \(R_d/(2\pi)\) are the previously specified structural form associated with the model; no alternate form was screened. No parameter is fitted, and the candidate replaces rather than multiplies the endogenous factor \(F(V_\Sigma)\). It therefore tests whether this specific photometric scale supplies the radial suppression already seen to be useful in the fixed-point ablation.
 
 | Comparison on 164 galaxies | Mean RMS difference | Galaxy-bootstrap 95% interval |
 |---|---:|---:|

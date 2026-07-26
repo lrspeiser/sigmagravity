@@ -146,7 +146,7 @@ SPARC disk sample & Retrospective evaluation & Galaxy & No per-galaxy parameter 
 SPARC photometric scale-length test & Secondary structural-hypothesis sensitivity & Galaxy & No; catalog values used without fitting \\
 Fox clusters & Illustrative in-sample calibration & Cluster & Yes, one effective cluster amplitude \\
 Repeated Fox splits & Calibration-stability diagnostic & Held-out cluster within Fox & Refits on each training subset \\
-Non-overlapping Tian/CLASH profiles & No-refit external profile check & Cluster, with radii grouped & No \\
+Tian/CLASH profiles outside the Fox calibration sample & No-refit external profile check & Cluster, with radii grouped & No \\
 Matched MaNGA/JAM catalog & Secondary counterrotation diagnostic & Galaxy/control set & No \\
 Numerical QUMOND disks & Algebraic-approximation diagnostic & Reconstructed galaxy model & No \\
 \bottomrule
@@ -169,7 +169,7 @@ Quantity & Role & Status & Principal limitation \\
 \(0.4\times0.15M_{500}\) & Fox baryon mass inside 200 kpc & Approximation & Material amplitude sensitivity \\
 Lensing closure & Relates response to lensing target & Assumed & Gravitational slip is undetermined \\
 \(R_d\) & Photometric scale length & Tested only in a secondary no-refit window & Catalog assignments do not outperform permutation or fixed-median controls \\
-\(L_0,n\) & System-scale path hypothesis & Not used in locked galaxy result & No unique operational 3D functional; not separately identified \\
+\(L_0,n\) & Historical path-length parameterization & Hypothesis only; not used in the canonical response & No operational 3D path-length functional \\
 \bottomrule
 \end{tabularx}
 \end{table}

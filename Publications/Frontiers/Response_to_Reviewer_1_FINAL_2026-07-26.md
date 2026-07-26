@@ -101,7 +101,7 @@ The revised title describes the response as â€œTested in Galaxies and Clusters.â
 
 **Reviewer comment.** The analysis should use actual SPARC photometric scale lengths.
 
-**Response.** I agree that the earlier wording was not sufficient. My first code audit established that the locked production predictor uses the fixed-point factor \(F(V_\Sigma)\) and does not use \(R_d\). I initially corrected the documentation by separating \(R_d\), \(L_0\), and \(n\) from the canonical equation. I then performed the literal no-refit test requested by the Reviewer, using each galaxy's catalog photometric scale length in
+**Response.** I agree that the earlier wording was not sufficient. The submitted manuscript incorrectly described the \(R_d\)-based window as the function used in the archived production SPARC predictions. Audit of the submitted production code showed that those predictions used the fixed-point factor \(F(V_\Sigma)\) in Equation (6), while the \(R_d\) window was present but unused in that production path. I therefore retain the archived fixed-point implementation as the locked predictor, separate \(R_d\), \(L_0\), and \(n\) from the canonical equation, and evaluate the catalog-\(R_d\) expression separately as a no-refit sensitivity. I performed that literal test using each galaxy's catalog photometric scale length in
 
 \[
 W(r,R_d)=\frac{r}{R_d/(2\pi)+r},\qquad B_{R_d}=A_0W(r,R_d),
@@ -171,7 +171,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0081\), w
 
 **Reviewer comment.** Equality of lensing and dynamical mass was assumed by setting gravitational slip to zero; a modified-gravity theory must derive the two metric potentials.
 
-**Response.** I agree. The revised manuscript writes the weak-field metric and states that nonrelativistic dynamics constrains \(\Psi\), while lensing depends on \(\Phi+\Psi\). The present action does not determine \(\eta=\Phi/\Psi\).
+**Response.** I agree. The revised manuscript writes the dimensionally explicit weak-field metric and states that the nonrelativistic potential \(\Phi\) in Equations (10) and (12) corresponds to the dynamical metric potential \(\Psi\). The independent spatial potential is denoted \(\Phi_{\rm L}\); lensing depends on \(\Phi_{\rm L}+\Psi\), and the present action does not determine \(\eta=\Phi_{\rm L}/\Psi\).
 
 **Before.** The cluster comparison was described as a lensing prediction.
 
