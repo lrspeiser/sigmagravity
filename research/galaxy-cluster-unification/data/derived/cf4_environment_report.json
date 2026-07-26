@@ -1,0 +1,106 @@
+{
+  "status": "frozen independent environment table",
+  "rows": 175,
+  "primary_score": "void_score = -delta_grouped_64",
+  "h0_km_s_mpc": 74.6,
+  "coordinate_frame": "observer-centered ICRS to Supergalactic Cartesian",
+  "coordinate_units": "h100^-1 Mpc",
+  "interpolation": "trilinear at voxel centers",
+  "fits_convention": {
+    "published_fits_axes": [
+      "SGZ",
+      "SGY",
+      "SGX"
+    ],
+    "numpy_array_axes": [
+      "SGX",
+      "SGY",
+      "SGZ"
+    ],
+    "source": "https://projets.ip2i.in2p3.fr/cosmicflows/"
+  },
+  "guardrail": "No SPARC velocity, residual, or fitted model quantity was used.",
+  "grid_files": [
+    {
+      "key": "grouped_64",
+      "path": "CF4gp_new_64-z008_delta.fits",
+      "shape": [
+        64,
+        64,
+        64
+      ],
+      "box_size_hmpc": 500.0,
+      "voxel_size_hmpc": 7.8125,
+      "sha256": "fe954d85dd21a4f99bd0157fb9f06c3329aa5940f6446d6a07e2d42de0b573f8"
+    },
+    {
+      "key": "ungrouped_64",
+      "path": "CF4_new_64-z008_delta.fits",
+      "shape": [
+        64,
+        64,
+        64
+      ],
+      "box_size_hmpc": 500.0,
+      "voxel_size_hmpc": 7.8125,
+      "sha256": "f6fe90b44f653da4255a5777fe5f7c8ecd38e84062d52354207ef5be740576b9"
+    },
+    {
+      "key": "ungrouped_128",
+      "path": "CF4_new_128-z008_delta.fits",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "box_size_hmpc": 1000.0,
+      "voxel_size_hmpc": 7.8125,
+      "sha256": "947f368a7d48649cecf2411615836287646208c9e8b4a5a21af66a87dc6dc9d1"
+    }
+  ],
+  "score_summary": {
+    "void_score_grouped_64": {
+      "minimum": -0.5863188328024949,
+      "maximum": 1.1969553166687417,
+      "mean": 0.019930162570301495,
+      "standard_deviation": 0.318412360318907
+    },
+    "void_score_ungrouped_64": {
+      "minimum": -1.1607545473972123,
+      "maximum": 2.362654191631092,
+      "mean": 0.08036914293513683,
+      "standard_deviation": 0.4606654807822432
+    },
+    "void_score_ungrouped_128": {
+      "minimum": -1.7288199959579789,
+      "maximum": 0.976281941187286,
+      "mean": 0.009105383148482133,
+      "standard_deviation": 0.390174458995529
+    }
+  },
+  "spearman_score_correlations": {
+    "void_score_grouped_64": {
+      "void_score_grouped_64": 1.0,
+      "void_score_ungrouped_64": 0.8103672189879086,
+      "void_score_ungrouped_128": 0.5637371249440215
+    },
+    "void_score_ungrouped_64": {
+      "void_score_grouped_64": 0.8103672189879086,
+      "void_score_ungrouped_64": 1.0,
+      "void_score_ungrouped_128": 0.5656784594715629
+    },
+    "void_score_ungrouped_128": {
+      "void_score_grouped_64": 0.5637371249440215,
+      "void_score_ungrouped_64": 0.5656784594715629,
+      "void_score_ungrouped_128": 1.0
+    }
+  },
+  "catalog_coordinate_validation": {
+    "rows": 38053,
+    "max_astropy_sgl_residual_deg": 0.0013093234310588286,
+    "max_astropy_sgb_residual_deg": 9.495740632914362e-05,
+    "xyz_direction_rows_above_200_km_s": 38006,
+    "median_xyz_direction_residual_deg": 0.0021913103165387853,
+    "max_xyz_direction_residual_deg": 0.16453699793825285
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "verdict": "The current data do not support the specific claim that a stronger CF4 void environment increases the additional galactic acceleration.",
+  "full_radial_holdout": [
+    {
+      "label": "Newtonian",
+      "directory": "results/cf4_primary_comparison_5000/newtonian",
+      "train_chi2_per_point": 7.984500062158907,
+      "outer_chi2_per_point": 75.63751201207705,
+      "outer_rmse_kms": 35.54587891110914,
+      "outer_mae_kms": 27.607769321381262,
+      "power_p": NaN,
+      "environment_beta": NaN,
+      "transition_width_dex": NaN
+    },
+    {
+      "label": "RAR",
+      "directory": "results/cf4_primary_comparison_5000/rar",
+      "train_chi2_per_point": 2.511529341488706,
+      "outer_chi2_per_point": 4.748329074168812,
+      "outer_rmse_kms": 10.324221513263549,
+      "outer_mae_kms": 7.593510241537752,
+      "power_p": NaN,
+      "environment_beta": NaN,
+      "transition_width_dex": NaN
+    },
+    {
+      "label": "NFW",
+      "directory": "results/cf4_primary_comparison_5000/nfw",
+      "train_chi2_per_point": 1.662100923587523,
+      "outer_chi2_per_point": 15.99244862448803,
+      "outer_rmse_kms": 17.810543562153544,
+      "outer_mae_kms": 10.496872239122048,
+      "power_p": NaN,
+      "environment_beta": NaN,
+      "transition_width_dex": NaN
+    },
+    {
+      "label": "Void free p",
+      "directory": "results/cf4_primary_comparison_5000/void",
+      "train_chi2_per_point": 2.207957636881574,
+      "outer_chi2_per_point": 5.849191991629254,
+      "outer_rmse_kms": 10.71755770162432,
+      "outer_mae_kms": 8.045183527730076,
+      "power_p": 0.4020008584538428,
+      "environment_beta": 0.0,
+      "transition_width_dex": 0.04738436399894898
+    },
+    {
+      "label": "Void p=0.5",
+      "directory": "results/cf4_primary_comparison_5000/void_p05",
+      "train_chi2_per_point": 2.4932122180760166,
+      "outer_chi2_per_point": 4.590797537822803,
+      "outer_rmse_kms": 10.204412693630175,
+      "outer_mae_kms": 7.424407930356628,
+      "power_p": 0.5,
+      "environment_beta": 0.0,
+      "transition_width_dex": 0.4500167244505151
+    },
+    {
+      "label": "Void env grouped 64",
+      "directory": "results/cf4_primary_comparison_5000/void_env",
+      "train_chi2_per_point": 2.163033508218103,
+      "outer_chi2_per_point": 5.483041866610926,
+      "outer_rmse_kms": 10.525897060387797,
+      "outer_mae_kms": 7.940956789859625,
+      "power_p": 0.3691671587148566,
+      "environment_beta": 0.12241748726721768,
+      "transition_width_dex": 0.041164443548319676
+    },
+    {
+      "label": "Void p=0.5 env grouped 64",
+      "directory": "results/cf4_full_sensitivity_5000/void_p05_env_grouped64",
+      "train_chi2_per_point": 2.477148818648054,
+      "outer_chi2_per_point": 4.846372151088633,
+      "outer_rmse_kms": 10.69137761713468,
+      "outer_mae_kms": 7.5942223246038,
+      "power_p": 0.5,
+      "environment_beta": 0.11725694085785081,
+      "transition_width_dex": 0.3671296340243768
+    },
+    {
+      "label": "Void env ungrouped 64",
+      "directory": "results/cf4_full_sensitivity_5000/void_env_ungrouped64",
+      "train_chi2_per_point": 2.1114492357468815,
+      "outer_chi2_per_point": 5.8950478618531585,
+      "outer_rmse_kms": 10.780805726608238,
+      "outer_mae_kms": 8.05393346696997,
+      "power_p": 0.39305224286065726,
+      "environment_beta": 0.19053774509368432,
+      "transition_width_dex": 0.04558130375091841
+    },
+    {
+      "label": "Void env ungrouped 128",
+      "directory": "results/cf4_full_sensitivity_5000/void_env_ungrouped128",
+      "train_chi2_per_point": 2.190315907261469,
+      "outer_chi2_per_point": 5.671092705074062,
+      "outer_rmse_kms": 10.681028000210905,
+      "outer_mae_kms": 8.008300874228262,
+      "power_p": 0.4037501599827036,
+      "environment_beta": -0.057579397791861324,
+      "transition_width_dex": 0.04795278825400427
+    }
+  ],
+  "paired_radial_bootstrap": {
+    "free_grouped64_vs_no_environment": {
+      "galaxies": 131,
+      "points": 968,
+      "candidate_minus_baseline_chi2_per_point": -0.36615012501833233,
+      "chi2_ci95_low": -1.7867213660070993,
+      "chi2_ci95_high": 0.6282604338338108,
+      "bootstrap_probability_candidate_improves": 0.67733,
+      "candidate_minus_baseline_rmse_kms": -0.1916606412365276,
+      "rmse_ci95_low_kms": -1.0537518422895735,
+      "rmse_ci95_high_kms": 0.5112205976434446,
+      "galaxy_win_fraction": 0.4198473282442748
+    },
+    "free_ungrouped64_vs_no_environment": {
+      "galaxies": 131,
+      "points": 968,
+      "candidate_minus_baseline_chi2_per_point": 0.04585587022390226,
+      "chi2_ci95_low": -0.716431192250139,
+      "chi2_ci95_high": 0.754806863363836,
+      "bootstrap_probability_candidate_improves": 0.44308,
+      "candidate_minus_baseline_rmse_kms": 0.06324802498391513,
+      "rmse_ci95_low_kms": -0.6346823229159132,
+      "rmse_ci95_high_kms": 0.759813041901222,
+      "galaxy_win_fraction": 0.5190839694656488
+    },
+    "free_ungrouped128_vs_no_environment": {
+      "galaxies": 131,
+      "points": 968,
+      "candidate_minus_baseline_chi2_per_point": -0.17809928655519616,
+      "chi2_ci95_low": -0.7036648581588067,
+      "chi2_ci95_high": 0.16949391599790223,
+      "bootstrap_probability_candidate_improves": 0.72731,
+      "candidate_minus_baseline_rmse_kms": -0.036529701413417826,
+      "rmse_ci95_low_kms": -0.27511030754567245,
+      "rmse_ci95_high_kms": 0.17291083020103892,
+      "galaxy_win_fraction": 0.48854961832061067
+    },
+    "fixed_p_grouped64_vs_no_environment": {
+      "galaxies": 131,
+      "points": 968,
+      "candidate_minus_baseline_chi2_per_point": 0.2555746132658277,
+      "chi2_ci95_low": -0.18455415605288714,
+      "chi2_ci95_high": 0.7417712464006381,
+      "bootstrap_probability_candidate_improves": 0.13585,
+      "candidate_minus_baseline_rmse_kms": 0.48696492350450526,
+      "rmse_ci95_low_kms": 0.03698331268849602,
+      "rmse_ci95_high_kms": 0.9937440523732827,
+      "galaxy_win_fraction": 0.4351145038167939
+    }
+  },
+  "strict_galaxy_cross_validation": {
+    "status": "completed strict galaxy-level cross-validation",
+    "folds": 5,
+    "steps_per_fitted_model": 5000,
+    "bootstrap_draws": 100000,
+    "device": "cuda",
+    "design": "Global parameters train on all radii of the non-held-out galaxy folds. Held-out galaxies use catalog baryonic inputs, CF4 score, and nuisance-prior centers; none of their rotation velocities enter optimization. Folds are balanced over the primary score.",
+    "variant_metrics": {
+      "newtonian_reference": {
+        "galaxies": 131,
+        "points": 3034,
+        "chi2_per_point": 206.7800348123573,
+        "rmse_kms": 60.72126456321679
+      },
+      "rar_reference": {
+        "galaxies": 131,
+        "points": 3034,
+        "chi2_per_point": 21.339526379776007,
+        "rmse_kms": 23.08531306609442
+      },
+      "void_env_grouped_64": {
+        "galaxies": 131,
+        "points": 3034,
+        "chi2_per_point": 28.601478343922373,
+        "rmse_kms": 25.82241126309727
+      },
+      "void_env_ungrouped_128": {
+        "galaxies": 131,
+        "points": 3034,
+        "chi2_per_point": 26.76192490882792,
+        "rmse_kms": 25.28347427262412
+      },
+      "void_env_ungrouped_64": {
+        "galaxies": 131,
+        "points": 3034,
+        "chi2_per_point": 29.184667708031025,
+        "rmse_kms": 26.43734349758991
+      },
+      "void_no_environment": {
+        "galaxies": 131,
+        "points": 3034,
+        "chi2_per_point": 27.61034543240145,
+        "rmse_kms": 25.62217738806471
+      }
+    },
+    "paired_environment_vs_no_environment": {
+      "void_env_grouped_64": {
+        "galaxies": 131,
+        "points": 3034,
+        "candidate_minus_baseline_chi2_per_point": 0.9911329115209202,
+        "chi2_per_point_bootstrap_ci95_low": -0.7159855123846891,
+        "chi2_per_point_bootstrap_ci95_high": 2.614629504531016,
+        "bootstrap_probability_candidate_improves_chi2": 0.11983,
+        "candidate_minus_baseline_rmse_kms": 0.20023387503255918,
+        "rmse_bootstrap_ci95_low_kms": -0.6250683771108728,
+        "rmse_bootstrap_ci95_high_kms": 1.0249286092741832,
+        "galaxy_chi2_win_fraction": 0.44274809160305345,
+        "fold_beta_values": [
+          0.09394962609623445,
+          0.11044879865042184,
+          0.10024587947042729,
+          0.12191176454719398,
+          0.10394081299424734
+        ],
+        "all_fold_betas_positive": true,
+        "mean_fold_beta": 0.106099376351705
+      },
+      "void_env_ungrouped_64": {
+        "galaxies": 131,
+        "points": 3034,
+        "candidate_minus_baseline_chi2_per_point": 1.5743222756295767,
+        "chi2_per_point_bootstrap_ci95_low": -0.985207245974909,
+        "chi2_per_point_bootstrap_ci95_high": 4.394676227023268,
+        "bootstrap_probability_candidate_improves_chi2": 0.11785,
+        "candidate_minus_baseline_rmse_kms": 0.815166109525201,
+        "rmse_bootstrap_ci95_low_kms": -0.5396269903046677,
+        "rmse_bootstrap_ci95_high_kms": 2.2056100190346215,
+        "galaxy_chi2_win_fraction": 0.44274809160305345,
+        "fold_beta_values": [
+          0.0891508079526088,
+          0.18203845341869013,
+          0.1398881065336609,
+          0.14626093465650772,
+          0.14241956202152303
+        ],
+        "all_fold_betas_positive": true,
+        "mean_fold_beta": 0.13995157291659813
+      },
+      "void_env_ungrouped_128": {
+        "galaxies": 131,
+        "points": 3034,
+        "candidate_minus_baseline_chi2_per_point": -0.848420523573528,
+        "chi2_per_point_bootstrap_ci95_low": -2.7361176923526633,
+        "chi2_per_point_bootstrap_ci95_high": 0.7604240630682502,
+        "bootstrap_probability_candidate_improves_chi2": 0.83133,
+        "candidate_minus_baseline_rmse_kms": -0.33870311544059106,
+        "rmse_bootstrap_ci95_low_kms": -0.9670938106002418,
+        "rmse_bootstrap_ci95_high_kms": 0.30803462858390435,
+        "galaxy_chi2_win_fraction": 0.549618320610687,
+        "fold_beta_values": [
+          -0.004849700398053106,
+          0.07633784320039975,
+          -0.060522295198258774,
+          -0.09892314815264708,
+          -0.05248534065820644
+        ],
+        "all_fold_betas_positive": false,
+        "mean_fold_beta": -0.028088528241353126
+      }
+    }
+  },
+  "fold_parameter_summary": {
+    "('environment_beta', 'mean')": {
+      "void_env_grouped_64": 0.10609937635170492,
+      "void_env_ungrouped_128": -0.0280885282413531,
+      "void_env_ungrouped_64": 0.1399515729165981,
+      "void_no_environment": 0.0
+    },
+    "('environment_beta', 'min')": {
+      "void_env_grouped_64": 0.0939496260962344,
+      "void_env_ungrouped_128": -0.098923148152647,
+      "void_env_ungrouped_64": 0.0891508079526088,
+      "void_no_environment": 0.0
+    },
+    "('environment_beta', 'max')": {
+      "void_env_grouped_64": 0.1219117645471939,
+      "void_env_ungrouped_128": 0.0763378432003997,
+      "void_env_ungrouped_64": 0.1820384534186901,
+      "void_no_environment": 0.0
+    },
+    "('power_p', 'mean')": {
+      "void_env_grouped_64": 0.38850029336990105,
+      "void_env_ungrouped_128": 0.3921900607179566,
+      "void_env_ungrouped_64": 0.3917322589275657,
+      "void_no_environment": 0.3876248910581155
+    },
+    "('power_p', 'min')": {
+      "void_env_grouped_64": 0.3706125512508861,
+      "void_env_ungrouped_128": 0.3736482459130014,
+      "void_env_ungrouped_64": 0.3782006175738205,
+      "void_no_environment": 0.3725704593488385
+    },
+    "('power_p', 'max')": {
+      "void_env_grouped_64": 0.4032757314984083,
+      "void_env_ungrouped_128": 0.4056543357607074,
+      "void_env_ungrouped_64": 0.4109160141108134,
+      "void_no_environment": 0.4004624509700519
+    },
+    "('transition_width_dex', 'mean')": {
+      "void_env_grouped_64": 0.06605230181024128,
+      "void_env_ungrouped_128": 0.06646229594633182,
+      "void_env_ungrouped_64": 0.0667338171092775,
+      "void_no_environment": 0.0657312071891068
+    },
+    "('transition_width_dex', 'min')": {
+      "void_env_grouped_64": 0.0609246117851874,
+      "void_env_ungrouped_128": 0.0581364376542813,
+      "void_env_ungrouped_64": 0.0625915547382719,
+      "void_no_environment": 0.0587355585240277
+    },
+    "('transition_width_dex', 'max')": {
+      "void_env_grouped_64": 0.0725077621566835,
+      "void_env_ungrouped_128": 0.0743561984266618,
+      "void_env_ungrouped_64": 0.0716683106292177,
+      "void_no_environment": 0.0723075860987818
+    }
+  }
+}

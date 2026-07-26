@@ -1,0 +1,91 @@
+{
+  "registry_version": "2026-07-26.1",
+  "status": "frozen_before_fit",
+  "random_seed": 20260726,
+  "domains": {
+    "galaxies": {
+      "dataset": "SPARC",
+      "cuts": {
+        "quality_max": 2,
+        "minimum_inclination_deg": 30.0,
+        "minimum_points": 8
+      },
+      "fixed_disk_mass_to_light": 0.5,
+      "fixed_bulge_mass_to_light": 0.7,
+      "velocity_error_floor_km_s": 5.0
+    },
+    "clusters": {
+      "dataset": "Tian2020_CLASH_fig2",
+      "rows": 84,
+      "groups": 20,
+      "observable": "lensing-derived spherical total acceleration",
+      "intrinsic_scatter_sensitivity_dex": 0.063
+    }
+  },
+  "shared_definitions": {
+    "a0_m_s2": 1.2e-10,
+    "potential_zero": "zero at infinity",
+    "potential_proxy": "Phi_bar(r_j)=integral_rj^rmax gbar(r) dr + gbar(rmax)*rmax",
+    "chi": "abs(Phi_bar)/c^2",
+    "coherence_length": "ell_bar=abs(Phi_bar)/gbar",
+    "rar_closure": "gpred=gbar/[1-exp(-sqrt(gbar/a_eff))]",
+    "metric_slip": "Phi=Psi (eta=1); no fitted lensing multiplier"
+  },
+  "models": {
+    "fixed_rar": {
+      "parameters": 0,
+      "a_eff": "a0"
+    },
+    "joint_a0": {
+      "parameters": 1,
+      "a_eff": "a_joint",
+      "bounds": {
+        "a_joint_m_s2": [1e-12, 1e-8]
+      }
+    },
+    "U0_emond_like": {
+      "parameters": 3,
+      "prior_art_control": true,
+      "activation": "S=logistic[(log10(chi)-log10(chi_t))/w]",
+      "a_eff": "a0*exp[ln(F)*S]",
+      "bounds": {
+        "F": [1.0, 100.0],
+        "chi_t": [1e-9, 1e-4],
+        "w_dex": [0.1, 2.0]
+      }
+    },
+    "U1_coherence_length": {
+      "parameters": 2,
+      "hypothesis": "edge activation through the baryonic field scale length",
+      "a_eff": "a0*[1+(ell_bar/ell_c)^q]",
+      "bounds": {
+        "ell_c_kpc": [1.0, 1000.0],
+        "q": [0.05, 2.0]
+      }
+    },
+    "domain_oracle": {
+      "parameters": 1,
+      "unified_candidate": false,
+      "description": "fixed galaxy a0 plus a separately fitted cluster a0",
+      "bounds": {
+        "cluster_a0_m_s2": [1e-12, 1e-8]
+      }
+    }
+  },
+  "validation": {
+    "folds": 5,
+    "assignment": "seeded permutation of sorted system names, then round-robin",
+    "held_out_units": ["whole galaxies", "whole clusters"],
+    "fit_objective": "sum of standardized residual squares across both training domains; no domain reweighting",
+    "cluster_primary_sigma": "sqrt(err_log_gtot^2 + [dloggpred/dloggbar*err_log_gbar]^2)",
+    "optimizer": "bounded scipy least_squares with 16 deterministic starts",
+    "primary_comparator": "fixed_rar",
+    "advancement_gate": [
+      "lower held-out cluster chi2 per point than fixed_rar",
+      "held-out galaxy chi2 per point no more than 5 percent above fixed_rar",
+      "lower equal-domain macro chi2 than fixed_rar",
+      "paired grouped-bootstrap interval supports the claimed improvement"
+    ],
+    "bootstrap_draws": 100000
+  }
+}

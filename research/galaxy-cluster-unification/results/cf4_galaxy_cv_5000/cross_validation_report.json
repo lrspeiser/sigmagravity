@@ -1,0 +1,243 @@
+{
+  "status": "completed strict galaxy-level cross-validation",
+  "folds": 5,
+  "steps_per_fitted_model": 5000,
+  "bootstrap_draws": 100000,
+  "include_potential_P0": true,
+  "include_potential_extensions": true,
+  "device": "cuda",
+  "design": "Global parameters train on all radii of the non-held-out galaxy folds. Held-out galaxies use catalog baryonic inputs, CF4 score, and nuisance-prior centers; none of their rotation velocities enter optimization. Folds are balanced over the primary score.",
+  "variant_metrics": {
+    "newtonian_reference": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 206.7800348123573,
+      "rmse_kms": 60.72126456321679
+    },
+    "potential_B1_boundary": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 23.01055843764911,
+      "rmse_kms": 24.446598129475724
+    },
+    "potential_P0": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 22.139961679787934,
+      "rmse_kms": 23.409413478465567
+    },
+    "potential_P1_environment": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 23.347286389382496,
+      "rmse_kms": 24.495280640951147
+    },
+    "rar_reference": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 21.339526379776007,
+      "rmse_kms": 23.08531306609442
+    },
+    "void_env_grouped_64": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 28.601478343922373,
+      "rmse_kms": 25.82241126309727
+    },
+    "void_env_ungrouped_128": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 26.76192490882792,
+      "rmse_kms": 25.28347427262412
+    },
+    "void_env_ungrouped_64": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 29.184667708031025,
+      "rmse_kms": 26.43734349758991
+    },
+    "void_no_environment": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 27.61034543240145,
+      "rmse_kms": 25.62217738806471
+    }
+  },
+  "paired_environment_vs_no_environment": {
+    "void_env_grouped_64": {
+      "galaxies": 131,
+      "points": 3034,
+      "candidate_minus_baseline_chi2_per_point": 0.9911329115209202,
+      "chi2_per_point_bootstrap_ci95_low": -0.7159855123846891,
+      "chi2_per_point_bootstrap_ci95_high": 2.614629504531016,
+      "bootstrap_probability_candidate_improves_chi2": 0.11983,
+      "candidate_minus_baseline_rmse_kms": 0.20023387503255918,
+      "rmse_bootstrap_ci95_low_kms": -0.6250683771108728,
+      "rmse_bootstrap_ci95_high_kms": 1.0249286092741832,
+      "galaxy_chi2_win_fraction": 0.44274809160305345,
+      "fold_beta_values": [
+        0.09394962609623445,
+        0.11044879865042184,
+        0.10024587947042729,
+        0.12191176454719398,
+        0.10394081299424734
+      ],
+      "all_fold_betas_positive": true,
+      "mean_fold_beta": 0.106099376351705
+    },
+    "void_env_ungrouped_64": {
+      "galaxies": 131,
+      "points": 3034,
+      "candidate_minus_baseline_chi2_per_point": 1.5743222756295767,
+      "chi2_per_point_bootstrap_ci95_low": -0.985207245974909,
+      "chi2_per_point_bootstrap_ci95_high": 4.394676227023268,
+      "bootstrap_probability_candidate_improves_chi2": 0.11785,
+      "candidate_minus_baseline_rmse_kms": 0.815166109525201,
+      "rmse_bootstrap_ci95_low_kms": -0.5396269903046677,
+      "rmse_bootstrap_ci95_high_kms": 2.2056100190346215,
+      "galaxy_chi2_win_fraction": 0.44274809160305345,
+      "fold_beta_values": [
+        0.0891508079526088,
+        0.18203845341869013,
+        0.1398881065336609,
+        0.14626093465650772,
+        0.14241956202152303
+      ],
+      "all_fold_betas_positive": true,
+      "mean_fold_beta": 0.13995157291659813
+    },
+    "void_env_ungrouped_128": {
+      "galaxies": 131,
+      "points": 3034,
+      "candidate_minus_baseline_chi2_per_point": -0.848420523573528,
+      "chi2_per_point_bootstrap_ci95_low": -2.7361176923526633,
+      "chi2_per_point_bootstrap_ci95_high": 0.7604240630682502,
+      "bootstrap_probability_candidate_improves_chi2": 0.83133,
+      "candidate_minus_baseline_rmse_kms": -0.33870311544059106,
+      "rmse_bootstrap_ci95_low_kms": -0.9670938106002418,
+      "rmse_bootstrap_ci95_high_kms": 0.30803462858390435,
+      "galaxy_chi2_win_fraction": 0.549618320610687,
+      "fold_beta_values": [
+        -0.004849700398053106,
+        0.07633784320039975,
+        -0.060522295198258774,
+        -0.09892314815264708,
+        -0.05248534065820644
+      ],
+      "all_fold_betas_positive": false,
+      "mean_fold_beta": -0.028088528241353126
+    },
+    "potential_P0_vs_void_no_environment": {
+      "galaxies": 131,
+      "points": 3034,
+      "candidate_minus_baseline_chi2_per_point": -5.470383752613517,
+      "chi2_per_point_bootstrap_ci95_low": -13.248140198257683,
+      "chi2_per_point_bootstrap_ci95_high": 1.1154843986559164,
+      "bootstrap_probability_candidate_improves_chi2": 0.93988,
+      "candidate_minus_baseline_rmse_kms": -2.2127639095991434,
+      "rmse_bootstrap_ci95_low_kms": -4.436716804929569,
+      "rmse_bootstrap_ci95_high_kms": 0.28157556517356996,
+      "galaxy_chi2_win_fraction": 0.5267175572519084,
+      "fold_power_p": [
+        0.41203763240949165,
+        0.4220032130974132,
+        0.41802049345517306,
+        0.4120679206462907,
+        0.4262764687745443
+      ],
+      "fold_transition_potential_chi": [
+        1.4288230878853965e-06,
+        1.557241480763625e-06,
+        6.061329101242013e-06,
+        1.3086469503492714e-06,
+        1.515143509373121e-06
+      ]
+    },
+    "potential_P0_vs_rar_reference": {
+      "galaxies": 131,
+      "points": 3034,
+      "candidate_minus_baseline_chi2_per_point": 0.800435300011928,
+      "chi2_per_point_bootstrap_ci95_low": -0.8658839297170503,
+      "chi2_per_point_bootstrap_ci95_high": 2.530823092296878,
+      "bootstrap_probability_candidate_improves_chi2": 0.17579,
+      "candidate_minus_baseline_rmse_kms": 0.32410041237114484,
+      "rmse_bootstrap_ci95_low_kms": -0.46115840111928885,
+      "rmse_bootstrap_ci95_high_kms": 1.0870975499484103,
+      "galaxy_chi2_win_fraction": 0.5038167938931297,
+      "fold_power_p": [
+        0.41203763240949165,
+        0.4220032130974132,
+        0.41802049345517306,
+        0.4120679206462907,
+        0.4262764687745443
+      ],
+      "fold_transition_potential_chi": [
+        1.4288230878853965e-06,
+        1.557241480763625e-06,
+        6.061329101242013e-06,
+        1.3086469503492714e-06,
+        1.515143509373121e-06
+      ]
+    },
+    "potential_P1_environment_vs_P0": {
+      "galaxies": 131,
+      "points": 3034,
+      "candidate_minus_baseline_chi2_per_point": 1.2073247095945603,
+      "chi2_per_point_bootstrap_ci95_low": -0.10845574942623132,
+      "chi2_per_point_bootstrap_ci95_high": 2.701919484735494,
+      "bootstrap_probability_candidate_improves_chi2": 0.03801,
+      "candidate_minus_baseline_rmse_kms": 1.085867162485581,
+      "rmse_bootstrap_ci95_low_kms": -0.0013882392005714701,
+      "rmse_bootstrap_ci95_high_kms": 2.440575372941777,
+      "galaxy_chi2_win_fraction": 0.42748091603053434,
+      "fold_parameter_name": "environment_shift_zeta_dex_per_sigma",
+      "fold_parameter_values": [
+        -0.05096311321402486,
+        0.6720032946636332,
+        0.46508012902623896,
+        0.11744215907127065,
+        -0.06593742444556663
+      ],
+      "all_fold_parameters_positive": false,
+      "one_sided_bootstrap_p_improvement": 0.96199,
+      "holm_adjusted_one_sided_p": 1.0
+    },
+    "potential_B1_boundary_vs_P0": {
+      "galaxies": 131,
+      "points": 3034,
+      "candidate_minus_baseline_chi2_per_point": 0.8705967578611771,
+      "chi2_per_point_bootstrap_ci95_low": -0.7607597813520491,
+      "chi2_per_point_bootstrap_ci95_high": 2.8213147841326323,
+      "bootstrap_probability_candidate_improves_chi2": 0.16794,
+      "candidate_minus_baseline_rmse_kms": 1.0371846510101577,
+      "rmse_bootstrap_ci95_low_kms": 0.10502294661482835,
+      "rmse_bootstrap_ci95_high_kms": 2.0561711555274953,
+      "galaxy_chi2_win_fraction": 0.46564885496183206,
+      "fold_parameter_name": "boundary_kappa",
+      "fold_parameter_values": [
+        0.15733441104053134,
+        0.5460607252379696,
+        -1.6442046948308957,
+        0.18236042796320268,
+        0.1746966068774103
+      ],
+      "all_fold_parameters_positive": false,
+      "one_sided_bootstrap_p_improvement": 0.83206,
+      "holm_adjusted_one_sided_p": 1.0
+    }
+  },
+  "potential_extension_holm_family": {
+    "family": [
+      "potential_P1_environment_vs_P0",
+      "potential_B1_boundary_vs_P0"
+    ],
+    "raw_one_sided_p": {
+      "potential_P1_environment_vs_P0": 0.96199,
+      "potential_B1_boundary_vs_P0": 0.83206
+    },
+    "holm_adjusted_p": {
+      "potential_B1_boundary_vs_P0": 1.0,
+      "potential_P1_environment_vs_P0": 1.0
+    }
+  }
+}

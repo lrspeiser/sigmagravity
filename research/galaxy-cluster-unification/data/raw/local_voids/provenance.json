@@ -1,0 +1,532 @@
+﻿{
+    "dataset":  "Malandrino et al. Bayesian catalog of 100 high-significance Local Universe voids",
+    "paper":  "https://arxiv.org/abs/2507.06866",
+    "repository":  "https://github.com/RosaMalandrino/LocalVoids",
+    "commit":  "bbbc34594d92eeef32897d67d291d54eb384be6e",
+    "archive_url":  "https://github.com/RosaMalandrino/LocalVoids/archive/bbbc34594d92eeef32897d67d291d54eb384be6e.zip",
+    "archive_sha256":  "641cdcd9985c0e9abeb473011378aec9426afb83abe4b53994499ffde44dd779",
+    "downloaded_utc":  "2026-07-26T14:58:08.4443451Z",
+    "boundary_rule":  "individual Voronoi-cloud overlap \u003e 0.37",
+    "files":  [
+                  {
+                      "path":  "README.md",
+                      "bytes":  5713,
+                      "sha256":  "4d6e392cf872be8841eb60d3d7eb6ed612faf9fa1e9a3bb04ef68aa4a3d81799"
+                  },
+                  {
+                      "path":  "truncation_vs_radius.npy",
+                      "bytes":  936,
+                      "sha256":  "bbfb402f9cc318b23526b2187cd032aa7865233f7f8782d68fc70f3966cbe13c"
+                  },
+                  {
+                      "path":  "voids_catalog.csv",
+                      "bytes":  33456,
+                      "sha256":  "25286892e8551447d1310af7dd5b7aa7347b3ffa12631a4b251815c6c177cbd7"
+                  },
+                  {
+                      "path":  "Voronoi_cloud_all_voids_N64.npy",
+                      "bytes":  8388736,
+                      "sha256":  "05082a327631cbcc13cb37c796c36849f63a5c76704b0b448d44f98fcd0c8b45"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_0_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "70005878f8de110365681906878b513bb28748e5ddd4c84fa415c6e84054c386"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_1_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "1c5728d2ace28d17c3aa144c12721e90cb0b588e67f92bdb7ebf8451b797bd37"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_10_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "ca382b33503d8d36d373beac921dfd52cef30d44cff91c2e05f68952cd4b5435"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_11_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "baf48dc1b4f468f38ebbc9749a81dc545bae95f7882f239c4b3a027a7e570520"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_12_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "e21c8719be6ddb716891976f0c8a4f2258d43d4b127ea9ed5460901b2877cc3e"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_13_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "7afc1d8958634d132d128e88721047dfa81a8823306aea9d385183721db73bfa"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_14_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "351a87907b1f41a38364739c3c9bd2a0fdd45420273504f909b59bb80501c419"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_15_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "536845b6d4e7db2e546dca9c35b38fc9ff0f41a6081c2e81ebbf851f5a251a28"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_16_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "2fe1fcf72e467671303f28a88b448ee04ddcd6bfdf8b995388897898e281e2a7"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_17_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "d7a39ff5c98de085e6daaa75221b5ffda82873f169316f711d31d60039f36bce"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_18_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "b422c7d5f024562de4ba275fdb37d745fbcd5810a36df1e86d661f4afb5ede9e"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_19_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "170ccde766add41582dadeeb4208c7857d9400c4bb417b16d4f348b61aa7f220"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_2_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "598303920a34c9ac61d8fd40324019939af4d7f728f028f2ae3a9e86dcd5e1af"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_20_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "28be935c5321d52a35876352422b67483a0b2917cd07f9dd5058f1d5eb0a227c"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_21_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "07a1532ad06e57b5efa77077777c51d0651ea570d84664aa85d5e5494bfa9064"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_22_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "57c47fdb70a2bf7569d9f85b78c1a824b59220c60b8364efcd4dc19fd40c9a8b"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_23_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "0361f3942e9360f290abca456d943131cfafa31770bc50e421f3b95a894eeb50"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_24_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "4faa5806e7f02185a4475db2bba8f58cb94db2ba42ee8bca8e3a70388a9042a0"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_25_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "e9968dd9ed80f98c97490d70fb5d781a1687e19c69a49831f09e485760bf817b"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_26_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "8dd9c84d4af906ca1f920ca7fbba6dab433e70497f59c0245105bb6af43ab3c4"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_27_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "def5dfe071ab90362bbea900f732d2cf993a75ae1efe31ba38c4019c102c5cda"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_28_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "58be8a2abc77ae582925fac117c7c94f84aa647bd17d89a071399330d35193bb"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_29_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "c03a4c750606c574dfb1657f549d6bef3ea03f2f1056ca715fc28ea1d8b80080"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_3_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "f9add899798ac40f3165901c93a7d8e5b670e1d9d8392ac6b9fbf1c5915582f7"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_30_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "f46a9de4937d44994c528dd32e643c180b154d55b9fa7909a08bfdbcba3c7d3e"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_31_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "197bb8f31df63f9eb3047c4a0289d5825f91e32667515f2a6db7a29b0f6ddeb5"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_32_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "e067c48bc2fd5d6db7f99b0e4dd10121e398466538b164f86b6b6cefddf9ee24"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_33_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "bcad6f2785d3240e9e3f6a8bc3cd3bf05b4141ef767b23717a89baefe88f7bfc"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_34_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "d9d2c01cf91fa887c1ceb418f440b8527d571a21925ae0eb2ce9e36f3493637e"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_35_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "c6a099ddcdd1b9bbb92de8d1e44998d42ca314738bb3051a2c28cc97cf0c4619"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_36_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "ae51e912e6d8ca4a21618d26ac4677a31f98de92231c8384c539a0601beea908"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_37_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "d02d65df26278398921a5b7aeca4ae542242da3ae6b6a0cf742d8dc157db6ce3"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_38_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "26205d61e4e85e20b5595d28e13c9702bdfe7c7973be25747b05afda3e1ad3d0"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_39_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "0d928f564c2830c206c77aab46287179641a178ca897a09ffdaf4b67d8c40df5"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_4_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "dbe23417cc3bf31c81e202f998be05fcaf7f7b09394c6170e88bf8c52f9ee370"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_40_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "4981133c40b3a0a3bc6eab2f7bb347d05de00d1a9f4bc7f53dfa98f50602f1ce"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_41_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "543bea5cc036a42ec7a8d467bd76c690479eb7e013c42aae997423a44a054133"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_42_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "1d3f5dba508544c2e0ba601c377a5c3307eb7d4741e0fd5dca0f5894acd11b5d"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_43_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "b73ddd20eddcbb2facddc453ec06f506ae471ccf4813e710a5a2d261c0bec10d"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_44_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "1b0984ec4add3b0ffba559c3e30f71c97ac2618507a79acd6980a977fa133bf5"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_45_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "a729ca32dcf18b0a15f0c11b7465481ee8e94bbd0616c4d84c1d2486a527d2dd"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_46_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "54b8e971de7788ebaa4a12be2bcffb5ffb05609d633f8715a7b55373e804f31c"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_47_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "6c64b5b8703045986cb2c492dc820e7d97c556b8b32ced0b61197bbd7b1de5ca"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_48_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "62be07d3fbf5849d4f281f76c7d73bb5150471c38118a9f3190f80df0df3abb0"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_49_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "80b49e77aabe72bfa3083d030b28bb4d2c6625439831246b39424b5f2c815300"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_5_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "147921bc35c1bc1f856083f8d9e0b9dbd6a863e9b58b4af7e958a3a2e099c921"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_50_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "92410e471df00496686706ed09f2b42eaebfdaff48ed60e39d228f717fac10d7"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_51_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "028fa81eeabc60b8c87a65205581162446455b5e9c9376fdef6336c2755fe5f9"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_52_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "7d4d4f4812d511a6bdf51caa42f0c60456c995b0e4e5136c4d7e70c01a07ea49"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_53_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "4e0a6a465bc1a931f8d9f6e30ebf0f3caeb25dcaf11b552b8ed81dc6c8bb61cc"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_54_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "2eca41dfe06202f4b953de8c93c252621dac1e90cc10a7cc6e61ad7eb5624ec7"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_55_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "9c730e1fc742f9e02202addd94a410e960b5c35eeb587ce51a4cbdd95bc087db"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_56_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "e906b6c5e04f35d7fd11d901d4d70b94d19b2307fbb5fabd3dd098bebc15beb0"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_57_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "7235864139bd1c7ac4235ea1fed938f5780997d3cb8f41991f8764db34273560"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_58_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "80e5492156c41b2f20bd21fb9cfcba1ad670bdf2e59459acdd19285b99a4f967"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_59_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "0933583c41946de09dea166dfd4acdd3bec4873b5495591a7cf65a642aaf4341"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_6_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "8f2a3dc1f0e6df97b7eac4c0e9d83b687550db6b923dbe3e64dfe241ca7a4b75"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_60_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "fab2d9bd293299ef1d14530808ed9c58debb89a8a2704e3c436d3ce124e0b702"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_61_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "ca758e71aede2bd4e674021184f1a169972a107c3878617344943e1d2ae08de6"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_62_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "88853984c29b2a56a945c99b64fef2e789d0393f59236fe4321693d2cc0173e5"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_63_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "86d3aa9544d11a1277be582098da0cfbd40534dfd5ca659a163a25b6f4c7aef6"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_64_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "376a09cdc65b64c71ef4084abfa46e003aa519a7bf1031158099d375469bd0dc"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_65_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "1befa202d8205cceb757ef72f2990bf269c32d84460d5a133df8d94f1818024b"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_66_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "0f77ea3c5c382730204667acd125cd505283c36932e4527783d4b48b93146d9c"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_67_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "4f76df1aebd8d6cb505091120d3973f56d11dd52111c0727580e01d2601017bd"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_68_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "d9074572f65f953517c8b9717576ac64db9dc141658ecf331888bb3e958771f0"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_69_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "559af46a012caab199f800ddcd252d920de3fe6c7df7b8d8774350fe1d603e39"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_7_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "d8abf033a04d3c98bd4023768f1a4ac990911d95bd2e4687c4a17821c85606a3"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_70_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "d3aed524d9ff714f8587b38fbaee06ed4bc8469d10b8184ed6f7cebdd7a0d6ba"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_71_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "841cc847291f3c4b2af9628dadbf129f070e5a54184a6842c030556c98c0c435"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_72_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "e4e72d263b4bb6ae46c6f3bf36069be8068c23b90e766f6e484457d27af19e43"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_73_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "82f4c6510418c7fd06b995974b364cf429f3cd26c5830e3d5cbe29072f42f956"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_74_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "4c8cb3c8ffc7bc89377a155371ddf5d338b3c8aa5759861729d89055790ef887"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_75_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "4a803463b234907aeb5e002422a73151f9ee196160e8af25dcbb3ab1b5dc4cf9"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_76_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "b6bf1ad634d116d2bae31e00ae72ea092f8d0708cc8ea74d7693412f40b5c9f7"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_77_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "51a049734d9e7d0c69d471962d54cd7defb8fb96b66e109f5719e31e7d406738"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_78_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "77a87c0296bc7197415f24d6cb362e468ca330cce6664354e0fb1c325bc578cd"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_79_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "e6a9be8f7a2d4dcea750a5f4c7e2848006c2000c95e3e94221dbf418f4c7b9ad"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_8_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "f74502ce9c684eccc3fbf14fa277aa615a3b018c4fbbd7db54f42b868a288f41"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_80_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "6fc56736c064f4ea4efa76d91b91adf29713b5421020714db7dd6480aca16a08"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_81_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "fcb9aef5d76ae66b44df2d615aad1fb3eb44ee9cdc8dbbcfbbf000041513f041"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_82_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "9d70beac2135dc50c9a679b58f133edf56024ff86b00aaedd3c61cdc4a08e8a7"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_83_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "154585ff0994f22f8ae03e4638c8c5a803a2141144ef0aafdbc3d83bb08ad0c4"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_84_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "5fabb7128e0bae00a759a9ac8eb1601bd79451d66a6acfc9db2b083fa70b4696"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_85_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "c73aec2d843475a982f9069bac5223782ea4c2dfc268eb3f51d3980e0a63c89f"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_86_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "ed09b8355670e13a3d63eda7548f0354d0e330fd7bb4d5af8a6efc27287387ee"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_87_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "96323b8ea0c445db98f2f62ef285dd78365f6c4aa80e0fce84a19797d56290ed"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_88_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "5b1aefcd7bea30328067040abbefd6e1553b5378caffc7700d7fbae5e5d13f11"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_89_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "9933c8b93287b0ae80ad2cdf0190fc41461579b50b1d16f6d4d89f191e592bac"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_9_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "1cf5a482a7337980b8209ff8ecf20a2017d3b6a0f7ea0f50eb861d7a4720f6e8"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_90_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "4157dd0f35fdda4830c1aa0d1709181dceb812e759df411b964f82a9c8005084"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_91_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "451446b6c7301748ed13d25d532d50ccaf88a3db7f663396d0eea91c263cd601"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_92_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "a3e19f97b0137e57d321853ed0b100d6a7ae4a5ac98cff10e4a3e7f04d50fcce"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_93_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "742ef7f8a3e6df700d3a3b39909e062efac4b70bf48a5cad453ed6ae4e283f1f"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_94_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "39747a79d457f3c0f94e9b0e3899221cfe23edbacb39efef93b6e45ffa50b8c2"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_95_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "edc0b03087cc2a926f5e8b0de74201beb7321cebe10ec32b8b79b4fdae4ae047"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_96_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "4291c9503200fa12bb8aafe92542a96776b6e05643493d21733fde8e6ac6cdb6"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_97_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "f9ff625f76873a0b6fc1816923d95c917ae615c0a71c05b6c03dff6e5070b608"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_98_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "b78a2ea262f77b9bb758b6ba54bebe8ae306c5bfa45edd89ef078f3892b6adc2"
+                  },
+                  {
+                      "path":  "VoronoiClouds/Voronoi_cloud_void_99_N32.npy",
+                      "bytes":  1048704,
+                      "sha256":  "e0ea3a53db287f38394eed1212af4187df9bbc9cca1d056ca82c4dfe3dbff79d"
+                  }
+              ]
+}

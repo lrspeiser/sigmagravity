@@ -1,0 +1,55 @@
+{
+  "status": "completed post-discovery external BCG check",
+  "bcg_values_used_in_fit": false,
+  "development_fit": {
+    "SPARC_galaxies": 131,
+    "CLASH_clusters": 20,
+    "train_chi2": 27456.878928784445,
+    "parameters": {
+      "F": 29.98687730309382,
+      "chi_t": 3.2252362056373694e-06,
+      "w_dex": 0.2136314539812839
+    },
+    "optimizer_success": true,
+    "starts": 16
+  },
+  "bcg_geometry": {
+    "potential": "gbar*r_last point-mass tail; BCG baryons only",
+    "chi_min": 2.6959742823495166e-07,
+    "chi_median": 1.1668349299864818e-06,
+    "chi_max": 2.5618355744443262e-06,
+    "U0_activation_median": 0.11235727073637293,
+    "U0_a_eff_median_m_s2": 1.7584315921643246e-10
+  },
+  "metrics": {
+    "U0_emond_like": {
+      "bcgs": 50,
+      "chi2_per_point": 7.148508814903434,
+      "rms_dex": 0.2993221619774074,
+      "median_abs_dex": 0.2535218914339472,
+      "mean_residual_dex": -0.2575499188399136
+    },
+    "cluster_scale_rar": {
+      "bcgs": 50,
+      "chi2_per_point": 2.187781927899612,
+      "rms_dex": 0.13314315893839548,
+      "median_abs_dex": 0.11451745581370076,
+      "mean_residual_dex": 0.08123583372957568
+    },
+    "fixed_galaxy_rar": {
+      "bcgs": 50,
+      "chi2_per_point": 9.961901669195111,
+      "rms_dex": 0.326574011858262,
+      "median_abs_dex": 0.283697132982911,
+      "mean_residual_dex": -0.2927873920899449
+    }
+  },
+  "U0_vs_fixed_galaxy_rar": {
+    "bcgs": 50,
+    "candidate_minus_fixed_chi2_per_point": -2.8133928542916777,
+    "bootstrap_ci95_low": -3.475059021287786,
+    "bootstrap_ci95_high": -2.1946941094830934,
+    "bootstrap_probability_candidate_improves": 1.0
+  },
+  "guardrail": "This is an external prediction from the frozen U0 formula but not a blind test; the paper's aggregate BCG result was known. No host-cluster potential was added."
+}

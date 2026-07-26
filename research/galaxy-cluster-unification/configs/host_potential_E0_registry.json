@@ -1,0 +1,51 @@
+{
+  "registry_version": "2026-07-26.1",
+  "status": "frozen_before_host_profile_acquisition",
+  "purpose": "Test whether independently measured total baryonic potential, rather than a galaxy/cluster class label, completes the U0 bridge.",
+  "prior_art": "Potential-dependent acceleration scales and external-potential effects are not claimed as original; U0 remains an EMOND-like control.",
+  "frozen_U0_parameters": {
+    "a0_m_s2": 1.2e-10,
+    "F": 29.98687730309382,
+    "chi_t": 3.2252362056373694e-06,
+    "w_dex": 0.2136314539812839
+  },
+  "model": {
+    "name": "E0_independent_total_baryon_potential",
+    "free_parameters": 0,
+    "chi_total": "chi_self + chi_host_bar",
+    "chi_host_bar": "[integral_r_to_rmax g_host_bar(s) ds + g_host_bar(rmax)*rmax]/c^2",
+    "host_components": [
+      "hot gas",
+      "intracluster light and satellite stars",
+      "central stellar component only if it is not already included in chi_self"
+    ],
+    "activation": "S=logistic[(log10(chi_total)-log10(chi_t))/w_dex]",
+    "a_eff": "a0*exp[ln(F)*S]",
+    "g_pred": "gbar/[1-exp(-sqrt(gbar/a_eff))]",
+    "metric_slip": "Phi=Psi; no lensing multiplier"
+  },
+  "measurement_firewall": {
+    "host_profile_must_be_independent_of_target_observable": true,
+    "forbidden_inputs": [
+      "a constant host-potential offset inferred from BCG residuals",
+      "a galaxy/cluster class indicator",
+      "dark-matter mass inferred from the target dynamics or lensing",
+      "refitting F, chi_t, w_dex, or a0"
+    ],
+    "primary_confirmation_sample": "systems whose target kinematics or lensing values were not used in SPARC+CLASH fitting and were not among the 50 inspected MaNGA BCG rows",
+    "manga_bcg_role": "conditional reconstruction check only; no longer a blind confirmation sample"
+  },
+  "uncertainty": {
+    "profile_method": "propagate gas and stellar profile posteriors into chi_host_bar and g_pred",
+    "resampling_unit": "complete host system",
+    "bootstrap_draws": 100000
+  },
+  "advancement_gate": [
+    "lower held-out chi2 per point than the frozen self-only U0 prediction",
+    "paired 95 percent complete-system bootstrap interval for E0 minus self-only U0 lies below zero",
+    "absolute mean log-residual magnitude is smaller than for self-only U0",
+    "no fitted potential offset or class label is introduced",
+    "the sign and scale of the effect survive documented gas-profile extrapolation alternatives"
+  ],
+  "rejection_rule": "Reject E0 in this form if independently measured host baryonic potentials do not remove the systematic underprediction or if success requires fitting an offset from the target observable."
+}

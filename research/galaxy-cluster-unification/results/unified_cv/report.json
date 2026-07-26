@@ -1,0 +1,267 @@
+{
+  "status": "completed preregistered joint validation",
+  "design": {
+    "galaxy_holdout_unit": "whole galaxy",
+    "cluster_holdout_unit": "whole cluster",
+    "folds": 5,
+    "optimizer_starts": 16,
+    "bootstrap_draws": 100000,
+    "likelihood_weighting": "ordinary summed standardized residuals; no domain reweighting",
+    "metric_slip": "fixed Phi=Psi; no fitted lensing multiplier"
+  },
+  "data": {
+    "galaxy_systems": 131,
+    "galaxy_points": 3034,
+    "cluster_systems": 20,
+    "cluster_points": 84,
+    "clash_sha256": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+    "registry_sha256": "be85f75c34cbc420add6416ded6eeb2a5db6339c97fad36e78a316abeae9b67d"
+  },
+  "heldout_metrics": {
+    "fixed_rar": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "chi2": 27213.070683790833,
+        "chi2_per_point": 8.96937069340502,
+        "rmse": 23.085346219949397,
+        "median_abs_residual": 11.316510694014823,
+        "residual_unit": "km/s"
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "chi2": 3611.230797869573,
+        "chi2_per_point": 42.99084283178063,
+        "rmse": 0.5083084712163342,
+        "median_abs_residual": 0.5004016103772599,
+        "residual_unit": "dex",
+        "chi2_per_point_with_0p063_dex_intrinsic_scatter": 23.752257788677724
+      },
+      "equal_domain_macro_chi2_per_point": 25.980106762592825
+    },
+    "joint_a0": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "chi2": 27726.87920789871,
+        "chi2_per_point": 9.13872089910966,
+        "rmse": 23.212769254734695,
+        "median_abs_residual": 11.687430310198742,
+        "residual_unit": "km/s"
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "chi2": 3489.5863159752016,
+        "chi2_per_point": 41.54269423780002,
+        "rmse": 0.4994385208173743,
+        "median_abs_residual": 0.49230286875533213,
+        "residual_unit": "dex",
+        "chi2_per_point_with_0p063_dex_intrinsic_scatter": 22.95068161587024
+      },
+      "equal_domain_macro_chi2_per_point": 25.34070756845484
+    },
+    "U0_emond_like": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "chi2": 28286.40158337979,
+        "chi2_per_point": 9.323138293796898,
+        "rmse": 23.318451638468684,
+        "median_abs_residual": 12.003575448905544,
+        "residual_unit": "km/s"
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "chi2": 419.5360803857633,
+        "chi2_per_point": 4.994477147449563,
+        "rmse": 0.16891995396438864,
+        "median_abs_residual": 0.09944902985105752,
+        "residual_unit": "dex",
+        "chi2_per_point_with_0p063_dex_intrinsic_scatter": 2.757433528842568
+      },
+      "equal_domain_macro_chi2_per_point": 7.15880772062323
+    },
+    "U1_coherence_length": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "chi2": 39608.38230398254,
+        "chi2_per_point": 13.054839256421403,
+        "rmse": 26.396586174063906,
+        "median_abs_residual": 11.524301266723782,
+        "residual_unit": "km/s"
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "chi2": 590.2531309553237,
+        "chi2_per_point": 7.026822987563378,
+        "rmse": 0.23682530445879046,
+        "median_abs_residual": 0.19455702314012502,
+        "residual_unit": "dex",
+        "chi2_per_point_with_0p063_dex_intrinsic_scatter": 4.376994238812785
+      },
+      "equal_domain_macro_chi2_per_point": 10.04083112199239
+    },
+    "domain_oracle": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "chi2": 27213.070683790833,
+        "chi2_per_point": 8.96937069340502,
+        "rmse": 23.085346219949397,
+        "median_abs_residual": 11.316510694014823,
+        "residual_unit": "km/s"
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "chi2": 138.42287013479063,
+        "chi2_per_point": 1.6478913111284599,
+        "rmse": 0.11137848001631415,
+        "median_abs_residual": 0.07189284011883412,
+        "residual_unit": "dex",
+        "chi2_per_point_with_0p063_dex_intrinsic_scatter": 0.9624570672006686
+      },
+      "equal_domain_macro_chi2_per_point": 5.30863100226674
+    }
+  },
+  "paired_comparisons_vs_fixed_rar": {
+    "joint_a0": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "candidate_minus_fixed_rar_chi2_per_point": 0.16935020570463957,
+        "bootstrap_ci95_low": -0.12546105796973303,
+        "bootstrap_ci95_high": 0.47313346233953224,
+        "bootstrap_probability_candidate_improves": 0.13127
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "candidate_minus_fixed_rar_chi2_per_point": -1.448148593980608,
+        "bootstrap_ci95_low": -1.9602072257181964,
+        "bootstrap_ci95_high": -0.9628602018664372,
+        "bootstrap_probability_candidate_improves": 1.0
+      },
+      "equal_domain_macro": {
+        "galaxy_systems": 131,
+        "cluster_systems": 20,
+        "candidate_minus_fixed_rar_macro_chi2": -0.6393991941379842,
+        "bootstrap_ci95_low": -0.9342345417676847,
+        "bootstrap_ci95_high": -0.35380733617746035,
+        "bootstrap_probability_candidate_improves": 1.0
+      },
+      "advancement_gate": {
+        "cluster_improves": true,
+        "galaxy_within_5_percent": true,
+        "macro_improves": true,
+        "macro_bootstrap_ci_excludes_zero": true,
+        "passes_all": true
+      }
+    },
+    "U0_emond_like": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "candidate_minus_fixed_rar_chi2_per_point": 0.35376760039187605,
+        "bootstrap_ci95_low": -0.20936070797142942,
+        "bootstrap_ci95_high": 0.945427905008018,
+        "bootstrap_probability_candidate_improves": 0.11108
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "candidate_minus_fixed_rar_chi2_per_point": -37.99636568433107,
+        "bootstrap_ci95_low": -46.4639503527196,
+        "bootstrap_ci95_high": -29.567202351999562,
+        "bootstrap_probability_candidate_improves": 1.0
+      },
+      "equal_domain_macro": {
+        "galaxy_systems": 131,
+        "cluster_systems": 20,
+        "candidate_minus_fixed_rar_macro_chi2": -18.821299041969596,
+        "bootstrap_ci95_low": -23.107657753849406,
+        "bootstrap_ci95_high": -14.547639863618734,
+        "bootstrap_probability_candidate_improves": 1.0
+      },
+      "advancement_gate": {
+        "cluster_improves": true,
+        "galaxy_within_5_percent": true,
+        "macro_improves": true,
+        "macro_bootstrap_ci_excludes_zero": true,
+        "passes_all": true
+      }
+    },
+    "U1_coherence_length": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "candidate_minus_fixed_rar_chi2_per_point": 4.085468563016382,
+        "bootstrap_ci95_low": -0.1216510997725007,
+        "bootstrap_ci95_high": 12.386981227433463,
+        "bootstrap_probability_candidate_improves": 0.06403
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "candidate_minus_fixed_rar_chi2_per_point": -35.96401984421726,
+        "bootstrap_ci95_low": -44.91790250630132,
+        "bootstrap_ci95_high": -27.010938925251214,
+        "bootstrap_probability_candidate_improves": 1.0
+      },
+      "equal_domain_macro": {
+        "galaxy_systems": 131,
+        "cluster_systems": 20,
+        "candidate_minus_fixed_rar_macro_chi2": -15.93927564060044,
+        "bootstrap_ci95_low": -21.384792573911916,
+        "bootstrap_ci95_high": -9.821455295585627,
+        "bootstrap_probability_candidate_improves": 1.0
+      },
+      "advancement_gate": {
+        "cluster_improves": true,
+        "galaxy_within_5_percent": false,
+        "macro_improves": true,
+        "macro_bootstrap_ci_excludes_zero": true,
+        "passes_all": false
+      }
+    },
+    "domain_oracle": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "candidate_minus_fixed_rar_chi2_per_point": 0.0,
+        "bootstrap_ci95_low": 0.0,
+        "bootstrap_ci95_high": 0.0,
+        "bootstrap_probability_candidate_improves": 0.0
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "candidate_minus_fixed_rar_chi2_per_point": -41.34295152065217,
+        "bootstrap_ci95_low": -50.23499023052047,
+        "bootstrap_ci95_high": -32.45712726887044,
+        "bootstrap_probability_candidate_improves": 1.0
+      },
+      "equal_domain_macro": {
+        "galaxy_systems": 131,
+        "cluster_systems": 20,
+        "candidate_minus_fixed_rar_macro_chi2": -20.671475760326086,
+        "bootstrap_ci95_low": -25.063959729741594,
+        "bootstrap_ci95_high": -16.193294454103626,
+        "bootstrap_probability_candidate_improves": 1.0
+      },
+      "advancement_gate": {
+        "cluster_improves": true,
+        "galaxy_within_5_percent": true,
+        "macro_improves": true,
+        "macro_bootstrap_ci_excludes_zero": true,
+        "passes_all": true
+      }
+    }
+  },
+  "interpretation_guardrail": "U0 is an EMOND-like prior-art control. U1 is a phenomenological closure, not a covariant theory. Passing predicts these observables only under the declared symmetry and no-slip assumptions."
+}

@@ -1,0 +1,8 @@
+{
+  "source": "data\\raw\\manga_bcg_tian2024\\RAR_BCG.tex",
+  "source_sha256": "1865ea4ac61e2850532867306e1729fe731aef7582b4b34e67072a406adb5655",
+  "output": "data\\derived\\manga_bcg_tian2024.csv",
+  "rows": 50,
+  "unique_plateifu": 50,
+  "radius_definition": "effective_radius_kpc * last_radius_re"
+}

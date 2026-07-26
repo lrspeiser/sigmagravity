@@ -1,0 +1,36 @@
+{
+  "status": "frozen external void-wall environment table",
+  "rows": 175,
+  "primary_score": "void_score = void_wall_score",
+  "guardrail": "Uses only SPARC sky position/distance and the external Local Voids geometry; no rotation velocity or residual.",
+  "catalog": {
+    "paper": "https://arxiv.org/abs/2507.06866",
+    "repository": "https://github.com/RosaMalandrino/LocalVoids",
+    "commit": "bbbc34594d92eeef32897d67d291d54eb384be6e",
+    "provenance_sha256": "d53b7f21899e8eec05afcf5662cd1a076c093a9e24283514f35455974f4e49c1"
+  },
+  "geometry": {
+    "coordinate_h": 0.681,
+    "box_center_hmpc": [
+      340.5,
+      340.5,
+      340.5
+    ],
+    "inside_rule": "trilinear Voronoi overlap > 0.37",
+    "overlap_assignment": "largest overlap; exact tie retains lower void index",
+    "wall_distance": "Euclidean distance transform minus half voxel, trilinearly sampled, clipped to zero inside",
+    "normalization": "published mean effective radius"
+  },
+  "coverage": {
+    "inside_count": 72,
+    "outside_count": 103,
+    "inside_fraction": 0.4114285714285714,
+    "unique_assigned_voids": 12
+  },
+  "score_summary": {
+    "minimum": 0.0,
+    "median_all": 0.0,
+    "median_inside": 0.06338117503113576,
+    "maximum": 0.4369582834489976
+  }
+}

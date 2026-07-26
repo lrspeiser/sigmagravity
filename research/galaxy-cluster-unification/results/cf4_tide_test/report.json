@@ -1,0 +1,61 @@
+{
+  "status": "completed zero-parameter ordinary-gravity tide check",
+  "mechanism": "T0 CF4 density-deficit peculiar tidal field",
+  "fit_parameters": 0,
+  "h0_km_s_mpc": 74.6,
+  "omega_m_scale_convention": 0.3,
+  "padding_factor": 2,
+  "grid": {
+    "file": "CF4gp_new_64-z008_delta.fits",
+    "sha256": "fe954d85dd21a4f99bd0157fb9f06c3329aa5940f6446d6a07e2d42de0b573f8",
+    "shape": [
+      64,
+      64,
+      64
+    ],
+    "box_size_hmpc": 500.0
+  },
+  "galaxies": 131,
+  "uniform_field_note": "Accelerates a galaxy and its contents together; excluded from the internal-force comparison.",
+  "comparison_note": "The most compressive eigenvalue is an orientation-optimistic upper bound on an inward disk tide.",
+  "uniform_field_m_s2": {
+    "count": 131,
+    "minimum": 2.2437668152976115e-13,
+    "median": 4.813660970210466e-13,
+    "maximum": 1.0205175402494716e-12
+  },
+  "spectral_tide_at_10kpc_m_s2": {
+    "count": 131,
+    "minimum": 1.3902162985591198e-16,
+    "median": 2.6680256653232143e-16,
+    "maximum": 5.135777346591858e-16
+  },
+  "maximum_inward_tide_at_outer_radius_m_s2": {
+    "count": 120,
+    "minimum": 1.0109613651583531e-17,
+    "median": 2.794579142541552e-16,
+    "maximum": 3.733441700964587e-15
+  },
+  "outer_required_extra_m_s2": {
+    "count": 131,
+    "minimum": 3.1298861503084894e-12,
+    "median": 2.1052393447709024e-11,
+    "maximum": 1.8498645951572116e-10
+  },
+  "inward_tide_to_required_ratio": {
+    "count": 120,
+    "minimum": 4.2598371213689876e-07,
+    "median": 1.3265138936327272e-05,
+    "maximum": 0.0002870082970540428
+  },
+  "orders_of_magnitude_shortfall": {
+    "count": 120,
+    "minimum": 3.542105548169485,
+    "median": 4.877289615246006,
+    "maximum": 6.3706070062125395
+  },
+  "median_tidal_trace_s2": {
+    "underdense": 6.285520472867519e-37,
+    "overdense": -3.510509794851195e-37
+  }
+}

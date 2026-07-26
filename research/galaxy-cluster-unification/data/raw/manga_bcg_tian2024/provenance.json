@@ -1,0 +1,20 @@
+﻿{
+    "dataset":  "Tian et al. 2024 MaNGA brightest-cluster-galaxy acceleration table",
+    "downloaded_utc":  "2026-07-26T17:30:38.3670021Z",
+    "citation":  "Tian et al., Astronomy \u0026 Astrophysics 684, A180 (2024)",
+    "citation_doi":  "10.1051/0004-6361/202347868",
+    "source_url":  "https://arxiv.org/e-print/2402.12016",
+    "arxiv_id":  "2402.12016",
+    "files":  [
+                  {
+                      "path":  "arxiv_2402.12016_source.tar",
+                      "bytes":  418438,
+                      "sha256":  "04b7b619484eb4eaad7e168ced68253e788baa3121df76a77dad0c1c876c457c"
+                  },
+                  {
+                      "path":  "RAR_BCG.tex",
+                      "bytes":  51961,
+                      "sha256":  "1865ea4ac61e2850532867306e1729fe731aef7582b4b34e67072a406adb5655"
+                  }
+              ]
+}

@@ -1,0 +1,98 @@
+{
+  "registry_version": 1,
+  "frozen_date": "2026-07-26",
+  "status": "prospective-development-after-CF4-amplitude-test",
+  "claim_guardrail": "The components have substantial prior art. This registry defines a synthesis and test protocol, not a claim of a new fundamental theory.",
+  "data_roles": {
+    "SPARC": "development_and_nested_cross_validation",
+    "CF4": "environment_and_physical_tide_inputs",
+    "LITTLE_THINGS_nonoverlap": "candidate_external_confirmation"
+  },
+  "fixed_constants": {
+    "acceleration_reference_m_s2": 1.2e-10,
+    "speed_of_light_m_s": 299792458.0,
+    "outer_potential_tail": "g_bar(R_max) * R_max"
+  },
+  "models": {
+    "A0": {
+      "name": "acceleration_screened_reference",
+      "screen_variable": "g_bar_m_s2",
+      "environment_coupling": "none",
+      "already_tested": true
+    },
+    "P0": {
+      "name": "self_potential_screened_background",
+      "potential_depth": "integral_R_to_Rmax(g_bar dR) + g_bar(Rmax)*Rmax",
+      "screen_variable": "chi = abs(Phi_bar)/c^2",
+      "additional_acceleration": "A0*a_ref*(g_bar/a_ref)^p*S_phi",
+      "bounds": {
+        "chi_transition": [1e-10, 1e-5],
+        "A0": [0.0001, 100.0],
+        "width_dex": [0.03, 1.5],
+        "p": [0.05, 1.5]
+      }
+    },
+    "P1": {
+      "name": "environment_shifted_potential_screen",
+      "parent": "P0",
+      "environment_score": "standardized_frozen_CF4_void_score",
+      "transition": "log10(chi_t_i) = log10(chi_t_0) + zeta*V_i",
+      "predicted_sign": "zeta > 0",
+      "bounds": {
+        "zeta_dex_per_environment_sigma": [-1.5, 1.5]
+      },
+      "prior": {
+        "zeta_mean": 0.0,
+        "zeta_sigma": 0.5
+      }
+    },
+    "B1": {
+      "name": "potential_boundary_layer",
+      "parent": "P0",
+      "boundary_acceleration": "kappa*a_ref*dS_phi/dlnR",
+      "predicted_sign": "kappa > 0",
+      "bounds": {
+        "kappa": [-2.0, 2.0]
+      },
+      "prior": {
+        "kappa_mean": 0.0,
+        "kappa_sigma": 0.5
+      }
+    },
+    "W1": {
+      "name": "void_wall_shifted_potential_screen",
+      "parent": "P0",
+      "catalog": {
+        "name": "Malandrino et al. Bayesian Local Voids",
+        "paper": "https://arxiv.org/abs/2507.06866",
+        "repository": "https://github.com/RosaMalandrino/LocalVoids",
+        "commit": "bbbc34594d92eeef32897d67d291d54eb384be6e",
+        "boundary_product": "individual 32^3 Voronoi clouds",
+        "inside_threshold": "overlap > 0.37",
+        "threshold_reason": "authors' volume-preserving recommendation",
+        "wall_distance": "Euclidean distance transform of the thresholded individual cloud, subtracting one half voxel at the cell-center boundary, then trilinearly sampled and clipped at zero inside",
+        "coordinate_h": 0.681,
+        "simulation_box_center_hmpc": [340.5, 340.5, 340.5]
+      },
+      "overlap_assignment": "among clouds with interpolated overlap > 0.37, choose maximum overlap; ties use lowest catalog index",
+      "wall_score": "inside ? min(signed_distance_to_actual_wall/R_eff, 1) : 0",
+      "transition": "log10(chi_t_i) = log10(chi_t_0) + zeta_wall*D_wall_i",
+      "predicted_sign": "zeta_wall > 0"
+    },
+    "T0": {
+      "name": "cf4_density_deficit_tide",
+      "fit_parameters": 0,
+      "field": "G*rho_bar*integral(delta(x_prime)*(x_prime-x)/abs(x_prime-x)^3 d3x_prime)",
+      "internal_effect": "Delta_g approximately T_env*r",
+      "amplification_forbidden": true
+    }
+  },
+  "ordered_gates": [
+    "synthetic_recovery_and_derivative_checks",
+    "SPARC_strict_galaxy_cross_validation_P0_vs_A0_and_RAR",
+    "conditional_P1_and_B1_with_paired_bootstrap_and_Holm_correction",
+    "freeze_void_geometry_then_W1",
+    "T0_physical_scale_and_direction_check",
+    "nonoverlapping_external_confirmation"
+  ]
+}

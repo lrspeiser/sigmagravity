@@ -1,0 +1,24 @@
+{
+  "status": "post hoc physical-scale diagnostic; not a fitted model",
+  "frozen_U0_parameters": {
+    "F": 29.98687730309382,
+    "chi_t": 3.2252362056373694e-06,
+    "w_dex": 0.2136314539812839
+  },
+  "bcgs": 50,
+  "finite_U0_host_solution": 47,
+  "required_host_delta_chi_median": 3.0781998192120787e-06,
+  "required_host_potential_speed_km_s": {
+    "median": 525.9798502512803,
+    "p10": 343.8480682487684,
+    "p90": 757.5862089323671
+  },
+  "CLASH_extended_baryon_potential_speed_km_s": {
+    "clusters": 20,
+    "median": 807.5369898211109,
+    "p10": 688.5955657901624,
+    "p90": 1068.2833974980356
+  },
+  "fraction_of_finite_BCG_requirements_within_CLASH_p10_p90": 0.19148936170212766,
+  "interpretation": "The inferred host term is a scale check only. It was solved from each BCG's observed acceleration and is not a prediction. A valid next test needs independently measured host gas+stellar potential profiles for the same MaNGA BCGs."
+}

@@ -1,0 +1,69 @@
+{
+  "status": "completed strict wall-balanced galaxy-level cross-validation",
+  "folds": 5,
+  "steps_per_fitted_model": 5000,
+  "bootstrap_draws": 100000,
+  "device": "cuda",
+  "design": "Folds are balanced on the frozen external void-wall score. Global parameters train on all radii of non-held-out galaxies; no held-out velocity enters optimization.",
+  "wall_geometry_report": "C:\\Users\\henry\\Documents\\Codex\\2026-07-25\\be\\outputs\\void-screening-lab\\data\\derived\\void_wall_scores_local_report.json",
+  "inside_counts_by_fold": {
+    "0": 11,
+    "1": 10,
+    "2": 10,
+    "3": 10,
+    "4": 10
+  },
+  "variant_metrics": {
+    "potential_P0": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 22.277804845633383,
+      "rmse_kms": 23.51640120054359
+    },
+    "potential_W1_void_wall": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 26.420003497752646,
+      "rmse_kms": 25.693333945695663
+    },
+    "rar_reference": {
+      "galaxies": 131,
+      "points": 3034,
+      "chi2_per_point": 21.339526379776007,
+      "rmse_kms": 23.08531306609442
+    }
+  },
+  "potential_W1_vs_P0": {
+    "galaxies": 131,
+    "points": 3034,
+    "candidate_minus_baseline_chi2_per_point": 4.142198652119263,
+    "chi2_per_point_bootstrap_ci95_low": -2.0248779181418395,
+    "chi2_per_point_bootstrap_ci95_high": 11.936172267628734,
+    "bootstrap_probability_candidate_improves_chi2": 0.12653,
+    "candidate_minus_baseline_rmse_kms": 2.1769327451520724,
+    "rmse_bootstrap_ci95_low_kms": -0.3551298717713456,
+    "rmse_bootstrap_ci95_high_kms": 4.606220500774578,
+    "galaxy_chi2_win_fraction": 0.44274809160305345,
+    "fold_zeta_values": [
+      0.3936363832418538,
+      0.49386710777735454,
+      0.07543175755477105,
+      0.8965497418608938,
+      0.428536488107757
+    ],
+    "all_fold_zetas_positive": true,
+    "one_sided_bootstrap_p_improvement": 0.87347
+  },
+  "potential_P0_vs_RAR": {
+    "galaxies": 131,
+    "points": 3034,
+    "candidate_minus_baseline_chi2_per_point": 0.9382784658573775,
+    "chi2_per_point_bootstrap_ci95_low": -1.3093536747615062,
+    "chi2_per_point_bootstrap_ci95_high": 3.2079593669985966,
+    "bootstrap_probability_candidate_improves_chi2": 0.20309,
+    "candidate_minus_baseline_rmse_kms": 0.43108813444916905,
+    "rmse_bootstrap_ci95_low_kms": -0.39874558737679244,
+    "rmse_bootstrap_ci95_high_kms": 1.3108603672218033,
+    "galaxy_chi2_win_fraction": 0.48854961832061067
+  }
+}

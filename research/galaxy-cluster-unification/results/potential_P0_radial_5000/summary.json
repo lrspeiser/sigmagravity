@@ -1,0 +1,88 @@
+{
+  "aic_train": 16546.40570845059,
+  "best_objective": 6369.764281570545,
+  "bic_train": 19520.82488348141,
+  "boundary_layer_enabled": false,
+  "data": {
+    "environment_fingerprint_sha256": null,
+    "environment_score_column": null,
+    "fingerprint_sha256": "b53afed87b43a351cc7db2db02b3186ea5880929fc97a4947364b2993054edaf",
+    "galaxies": 131,
+    "outer_holdout_points": 968,
+    "points": 3034,
+    "train_points": 2066
+  },
+  "elapsed_seconds": 48.32771969999885,
+  "environment_enabled": false,
+  "fixed_flat_power": false,
+  "global_parameters": {
+    "acceleration_reference_m_s2": 1.2e-10,
+    "amplitude_A0": 0.603588524390404,
+    "boundary_kappa": 0.0,
+    "boundary_layer_enabled": false,
+    "environment_enabled": false,
+    "environment_shift_zeta_dex_per_sigma": 0.0,
+    "potential_tail": "g_bar(R_max) * R_max",
+    "power_p": 0.39152150201266206,
+    "transition_potential_chi": 1.5684749251530208e-06,
+    "transition_width_dex": 0.030214106235334694
+  },
+  "information_criteria_note": "AIC/BIC are approximate because nuisance parameters are MAP-regularized by explicit priors. Held-out predictive scores are the primary comparison.",
+  "interpretation_guardrail": "A rotation-curve fit tests the phenomenology only. A void origin additionally requires a positive, out-of-sample beta from an independent environment reconstruction.",
+  "machine": {
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_devices": [
+      {
+        "capability": [
+          12,
+          0
+        ],
+        "index": 0,
+        "memory_bytes": 34190458880,
+        "name": "NVIDIA GeForce RTX 5090"
+      }
+    ],
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10",
+    "torch": "2.12.1+cu130",
+    "torch_cuda_build": "13.0"
+  },
+  "model": "potential",
+  "optimization": {
+    "bulge_mass_to_light_prior": 0.7,
+    "disk_mass_to_light_prior": 0.5,
+    "hubble_km_s_mpc": 70.0,
+    "learning_rate": 0.03,
+    "log_mass_to_light_prior_sigma": 0.25,
+    "rar_acceleration_m_s2": 1.2e-10,
+    "seed": 5090,
+    "steps": 5000,
+    "velocity_error_floor_kms": 2.0
+  },
+  "outer_holdout": {
+    "chi2": 5682.9815300639275,
+    "chi2_per_point": 5.87084868808257,
+    "log_likelihood": -5321.259899503239,
+    "mae_kms": 8.045297205385884,
+    "mean_standardized_residual": 0.17779664226908257,
+    "n": 968,
+    "rmse_kms": 10.780446210217573
+  },
+  "parameter_count": 528,
+  "run_label": "potential",
+  "runtime": {
+    "dtype": "float64",
+    "requested_device": "cuda",
+    "used_device": "cuda"
+  },
+  "train": {
+    "chi2": 4874.951381322044,
+    "chi2_per_point": 2.359608606641841,
+    "log_likelihood": -7745.202854225296,
+    "mae_kms": 6.208751667298593,
+    "mean_standardized_residual": 0.06737573517267761,
+    "n": 2066,
+    "rmse_kms": 11.391298845803584
+  }
+}

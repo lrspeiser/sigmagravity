@@ -1,0 +1,60 @@
+﻿{
+    "dataset":  "Cosmicflows-4 three-dimensional density reconstructions",
+    "downloaded_utc":  "2026-07-26T07:11:37.0302248Z",
+    "official_landing_page":  "https://projets.ip2i.in2p3.fr/cosmicflows/",
+    "citation":  "Courtois et al., Astronomy \u0026 Astrophysics 670, L15 (2023)",
+    "citation_doi":  "10.1051/0004-6361/202245331",
+    "zenodo_record":  "https://doi.org/10.5281/zenodo.20653238",
+    "coordinate_order":  "The FITS files have no WCS. The official page declares FITS axes (SGZ,SGY,SGX); scripts/build_cf4_environment.py applies FITS-to-NumPy axis reversal, the published 7.8125 h^-1 Mpc voxel scale, and validates the sky-to-supergalactic transform against the companion catalog.",
+    "files":  [
+                  {
+                      "path":  "CF4gp_new_64-z008_delta.fits",
+                      "role":  "Grouped Cosmicflows-4 density contrast grid",
+                      "url":  "https://projets.ip2i.in2p3.fr/cosmicflows/CF4gp_new_64-z008_delta.fits",
+                      "bytes":  1054080,
+                      "sha256":  "fe954d85dd21a4f99bd0157fb9f06c3329aa5940f6446d6a07e2d42de0b573f8"
+                  },
+                  {
+                      "path":  "CF4gp_new_64-z008_delta_error.fits",
+                      "role":  "Grouped Cosmicflows-4 published delta error product (2-D)",
+                      "url":  "https://projets.ip2i.in2p3.fr/cosmicflows/CF4gp_new_64-z008_delta_error.fits",
+                      "bytes":  37440,
+                      "sha256":  "2a786be2f7f24dc5ae8bdf985d108ad04b98beab3b93afea677091656cb42df9"
+                  },
+                  {
+                      "path":  "CF4_new_64-z008_delta.fits",
+                      "role":  "Ungrouped Cosmicflows-4 density contrast grid",
+                      "url":  "https://projets.ip2i.in2p3.fr/cosmicflows/CF4_new_64-z008_delta.fits",
+                      "bytes":  1054080,
+                      "sha256":  "f6fe90b44f653da4255a5777fe5f7c8ecd38e84062d52354207ef5be740576b9"
+                  },
+                  {
+                      "path":  "CF4_new_64-z008_delta_error.fits",
+                      "role":  "Ungrouped Cosmicflows-4 published delta error product (2-D)",
+                      "url":  "https://projets.ip2i.in2p3.fr/cosmicflows/CF4_new_64-z008_delta_error.fits",
+                      "bytes":  37440,
+                      "sha256":  "5c46c5c0da4813fbcd5c2a1f6a417b656b666f40a81adcda3352ad62d53dc429"
+                  },
+                  {
+                      "path":  "CF4_catalog_ReadMe.txt",
+                      "role":  "VizieR J/ApJ/944/94 machine-readable catalog documentation",
+                      "url":  "https://cdsarc.cds.unistra.fr/ftp/cats/J/ApJ/944/94/ReadMe",
+                      "bytes":  19918,
+                      "sha256":  "2cfed1418147d5a626dee1fa37c47252124477c9828490508d9bbe511d34edb4"
+                  },
+                  {
+                      "path":  "CF4_table4_groups.dat.gz",
+                      "role":  "Cosmicflows-4 group distances and peculiar velocities (38,053 rows)",
+                      "url":  "https://cdsarc.cds.unistra.fr/ftp/cats/J/ApJ/944/94/table4.dat.gz",
+                      "bytes":  2528953,
+                      "sha256":  "be91d4fae6fa01552ab3bc85db695411fca3249eeae08b566a712e6ea790bd99"
+                  },
+                  {
+                      "path":  "CF4_new_128-z008_delta.fits",
+                      "role":  "Official 2026 ungrouped 128^3 density grid for sensitivity and convention checks",
+                      "url":  "https://zenodo.org/records/20653238/files/CF4_new_128-z008_delta.fits?download=1",
+                      "bytes":  8392320,
+                      "sha256":  "947f368a7d48649cecf2411615836287646208c9e8b4a5a21af66a87dc6dc9d1"
+                  }
+              ]
+}
