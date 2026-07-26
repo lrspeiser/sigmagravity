@@ -35,7 +35,7 @@ The model was developed with SPARC as its principal galaxy benchmark before subm
 
 **Before.** The phenomenological construction was presented with theory-level implications.
 
-**After.** The title now says “A Coherence-Motivated Empirical Response Tested” rather than “Coherence-Dependent Gravitational Enhancement.” The Abstract, Introduction, action section, Discussion, and Conclusions consistently identify the model as a bounded phenomenological alternative.
+**After.** The title now says “A Coherence-Motivated Empirical Response Tested” rather than “Coherence-Dependent Gravitational Enhancement.” The Abstract, Introduction, action section, Discussion, and Conclusions consistently identify the model as a phenomenological response with a bounded rotational-support factor.
 
 **Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–4, Secs. II.B–II.F and Eqs. (4)–(12); pp. 6–9, Sec. V; and p. 9, Sec. VI.
 

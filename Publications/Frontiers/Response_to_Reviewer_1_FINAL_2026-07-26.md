@@ -45,7 +45,7 @@ The final manuscript also gives the provenance of the fixed empirical choices. T
 
 **Reviewer comment.** The manuscript states that the covariant expression reduces to the observational coherence equation but does not demonstrate the reduction.
 
-**Response.** I agree and have removed that claimed reduction. The revised text gives only a schematic second-moment motivation for the bounded galaxy factor and lists the frame, anisotropy, inclination, and endogeneity limitations.
+**Response.** I agree and have removed that claimed reduction. The revised text gives only a schematic second-moment motivation for the bounded galaxy factor, states explicitly that the implemented factor is endogenous and that the second-moment statement is frame-dependent, and makes no claim of a general covariant reduction.
 
 **Before.** A general covariant reduction was asserted.
 
