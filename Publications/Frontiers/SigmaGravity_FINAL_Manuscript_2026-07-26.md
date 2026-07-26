@@ -346,10 +346,6 @@ The measured SPARC scale lengths do not improve the tested radial-window extensi
 
 SPARC data are publicly available at [astroweb.cwru.edu/SPARC](http://astroweb.cwru.edu/SPARC/). The CLASH radial-acceleration catalog is available through VizieR as J/ApJ/896/70. The Fox cluster table used for calibration, frozen residuals, split definitions, matched samples, parameter diagnostics, and figure-generation code are provided in the [public repository](https://github.com/lrspeiser/sigmagravity/tree/main/Publications/Frontiers) and Supplementary Material.
 
-## Author contributions
-
-LS conceived the study, developed the model, assembled the data and code, performed the analyses, interpreted the results, and wrote and revised the manuscript.
-
 ## Funding
 
 The author declares that no financial support was received for the research, authorship, and/or publication of this article.
