@@ -27,7 +27,7 @@ For clarity, the responses below distinguish work completed in this revision fro
 
 **Reviewer comment.** The coherence scalar, path length \(L\), and \(A(L)\) are phenomenological; the manuscript does not justify its claims about covariance, conservation, or equivalence principles.
 
-**Response.** I agree. The revision separates the observable response \(B\) from its possible interpretation. The data identify \(B=A\mathcal C\), not \(A\) and a physical coherence field separately. The implemented galaxy factor is described as an endogenous phenomenological regularizer because it uses the model-predicted velocity.
+**Response.** I agree. The revision separates the observable response \(B\) from its possible interpretation. The empirical law depends only on the combined response amplitude \(B\); the present observables do not separately identify an amplitude \(A\) and a physical coherence variable \(\mathcal C\). The implemented galaxy factor is described as an endogenous phenomenological regularizer because it uses the model-predicted velocity.
 
 I also added a nonrelativistic QUMOND action for an independently prescribed, spatially constant \(B\). The final text states explicitly that Equation (10) reproduces the prescribed fixed-\(B\) response only; it is not an action for the endogenous rotational-support prescription in Equation (6), and it does not establish the conservation or dynamical consistency of that prescription. It does not derive \(B\). If \(B\) is inferred from observed or predicted kinematics, a closed theory would have to vary it as an independent field with its own source, kinetic, and backreaction terms before Noether-conservation claims could be made.
 
@@ -59,7 +59,7 @@ The final manuscript also gives the provenance of the fixed empirical choices. T
 
 **Response.** I agree. The 42 Fox clusters are now labeled an illustrative calibration sample, and 0.987 is called an in-sample calibration result. Repeated Fox splits are described only as calibration-stability checks. The final Abstract no longer presents the near-unity Fox ratio as a positive cluster result; it states instead that the simplified calibration is secondary and that its normalization fails to transfer without radial bias.
 
-To answer the request for a no-refit check, I used the 20 Tian/CLASH systems as the starting catalog. Cluster identifiers were case-normalized, stripped of non-alphanumeric characters, standardized for the documented Abell and MACS aliases, and compared for exact equality with a Fox calibration name. This procedure excluded MACS0416, MACS0717, and MACS1149, leaving 73 radial measurements in 17 disjoint clusters. I froze the cluster calculation at \(B=8.45\), \(g^\dagger=9.60\times10^{-11}\ {\rm m\,s^{-2}}\), and the stated response \(h(g_{\rm bar})\). The median predicted-to-observed ratio is 1.318. The radius-bin medians are 1.170, 1.228, 1.613, and 1.961 at 100, 200, 400, and 600 kpc. A weighted residual trend is \(+0.162\) dex per decade in radius, with a 95% cluster-bootstrap interval \([+0.115,+0.217]\). The Fox-calibrated amplitude therefore does not transfer successfully to these radial data and provides no support for a universal fixed cluster-amplitude law under the present assumptions. I report this unfavorable transfer result rather than recalibrating the manuscript to it.
+To answer the request for a no-refit check, I used the 20 Tian/CLASH systems as the starting catalog. Cluster identifiers were case-normalized, stripped of non-alphanumeric characters, standardized for the documented Abell and MACS aliases, and compared for exact equality with a Fox calibration name. This procedure excluded MACS0416, MACS0717, and MACS1149, leaving 73 radial measurements in 17 disjoint clusters. I froze the cluster calculation at \(B=8.446\), \(g^\dagger=9.60\times10^{-11}\ {\rm m\,s^{-2}}\), and the stated response \(h(g_{\rm bar})\). The median predicted-to-observed ratio is 1.318. The radius-bin medians are 1.170, 1.228, 1.613, and 1.961 at 100, 200, 400, and 600 kpc. A weighted residual trend is \(+0.162\) dex per decade in radius, with a 95% cluster-bootstrap interval \([+0.115,+0.217]\). The Fox-calibrated amplitude therefore does not transfer successfully to these radial data and provides no support for a universal fixed cluster-amplitude law under the present assumptions. I report this unfavorable transfer result rather than recalibrating the manuscript to it.
 
 **Before.** The Fox ratio and within-catalog holdouts were described as prediction or validation.
 
@@ -73,13 +73,13 @@ To answer the request for a no-refit check, I used the 20 Tian/CLASH systems as 
 
 **Reviewer comment.** The universal baryon fraction and fixed 0.4 concentration factor are oversimplified and materially affect the main cluster result.
 
-**Response.** I agree. I was not able to complete the requested component-by-component baryonic reconstruction for the 42 Fox systems, and I do not present the Fox exercise as satisfying that request. Equation (15) is now labeled a simplified baryon-concentration prescription used only to reproduce the submitted calibration. The manuscript reports that changing the 0.4 factor by 25% changes the predicted mass ratio by approximately 30%. Because measured gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles were not available for all 42 systems, I removed this exercise as a principal positive test and retained it only to document the submitted calibration and motivate the independent no-refit transfer check. It is now described as illustrative in the Abstract, Results, Discussion, Conclusions, Table I, Table II, and Figure 2.
+**Response.** I agree. I was not able to complete the requested component-by-component baryonic reconstruction for the 42 Fox systems, and I do not present the Fox exercise as satisfying that request. Equation (16) is now labeled a simplified baryon-concentration prescription used only to reproduce the submitted calibration. The manuscript reports that changing the 0.4 factor by 25% changes the predicted mass ratio by approximately 30%. Because measured gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles were not available for all 42 systems, I removed this exercise as a principal positive test and retained it only to document the submitted calibration and motivate the independent no-refit transfer check. It is now described as illustrative in the Abstract, Results, Discussion, Conclusions, Table I, Table II, and Figure 2.
 
 **Before.** The baryon proxy supported a precision cluster-success claim.
 
 **After.** The Fox result is explicitly conditional on the proxy, is not used as precision evidence for a universal law, and is not treated as a principal positive test of the framework.
 
-**Location.** Revised manuscript p. 4, Sec. III.C and Eq. (15); p. 6, Sec. IV.C; and Table II on p. 5.
+**Location.** Revised manuscript p. 4, Sec. III.C and Eq. (16); p. 6, Sec. IV.C; and Table II on p. 5.
 
 **Remaining limitation.** I have not reconstructed gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles for all 42 Fox systems. The text identifies this as required future work.
 
@@ -143,7 +143,7 @@ Median absolute acceleration differences are 5.19%, 4.88%, and 3.96%, with local
 
 **Reviewer comment.** The unmatched populations may differ in mass, morphology, size, inclination, environment, merger history, and data quality; a matched control or multivariate analysis is needed. The statement that ΛCDM predicts no difference is too strong.
 
-**Response.** I agree. I first retained one MaNGA observation per physical galaxy, choosing the lowest JAM \(\chi^2\) where duplicate observations existed. I then matched 62 counterrotators to 310 unique controls on stellar mass, physical size, Sérsic index, axis ratio, inclination, redshift, and JAM fit quality. Matching used greedy nearest neighbors on jointly standardized covariates, processed the hardest-to-match case first, selected five controls per case without replacement, and used no caliper. Eligibility required complete matching and outcome fields, a nonnegative quality flag, and positive \(R_e\); no additional common-support trimming was imposed, and all 62 eligible cases were matched. The maximum post-match absolute standardized mean difference is 0.066, below the stated 0.1 balance threshold.
+**Response.** I agree. I first retained one MaNGA observation per physical galaxy, choosing the lowest JAM \(\chi^2\) where duplicate observations existed. I then matched 62 counterrotators to 310 unique controls on stellar mass, physical size, Sérsic index, axis ratio, inclination, redshift, and JAM fit quality. Matching used greedy nearest neighbors on jointly standardized covariates. Before matching, each counterrotator was assigned its minimum standardized Euclidean distance to any eligible control; cases were processed once in descending order of that initial minimum distance. Five controls were then selected per case without replacement and without a caliper. Eligibility required complete matching and outcome fields, a nonnegative quality flag, and positive \(R_e\); no additional common-support trimming was imposed, and all 62 eligible cases were matched. The maximum post-match absolute standardized mean difference is 0.066, below the stated 0.1 balance threshold.
 
 The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0081\), with bootstrap 95% interval \([-0.0577,+0.0453]\). The bootstrap resamples the 62 complete matched sets and retains each five-control mean. The result is consistent with zero. I removed “confirmed prediction,” the unmatched headline \(p\)-value, and the claim that ΛCDM predicts no difference.
 
@@ -177,7 +177,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0081\), w
 
 **After.** It is an empirical mass comparison conditional on a lensing closure assumption.
 
-**Location.** Revised manuscript pp. 3–4, Sec. II.F; Table II on p. 5; and p. 8, Sec. V.D, including Eq. (19).
+**Location.** Revised manuscript pp. 3–4, Sec. II.F; Table II on p. 5; and p. 8, Sec. V.D, including Eq. (20).
 
 ## 11. Overstated claims
 

@@ -388,7 +388,7 @@ Machine-readable output:
 
 ## S7. Counterrotation matching
 
-The counterrotator list contains 66 cataloged systems. Repeat MaNGA observations are reduced to one row per physical galaxy by retaining the entry with the lowest JAM \(\chi^2\), and 62 counterrotators then have complete fields for matching. Covariates are standardized on the combined eligible pool. A greedy Euclidean nearest-neighbor procedure processes the case with the largest nearest-control distance first and selects five controls per case without replacement and without a caliper. Completeness of matching and outcome fields, nonnegative quality flag, and positive \(R_e\) define eligibility; all 62 eligible cases remain. The result contains 310 matches and 310 unique control galaxies.
+The counterrotator list contains 66 cataloged systems. Repeat MaNGA observations are reduced to one row per physical galaxy by retaining the entry with the lowest JAM \(\chi^2\), and 62 counterrotators then have complete fields for matching. Covariates are standardized on the combined eligible pool. Before matching, each counterrotator is assigned its minimum standardized Euclidean distance to any eligible control. Cases are processed once in descending order of that initial minimum distance, and five controls are then selected per case without replacement and without a caliper. Completeness of matching and outcome fields, nonnegative quality flag, and positive \(R_e\) define eligibility; all 62 eligible cases remain. The result contains 310 matches and 310 unique control galaxies.
 
 Matched covariates are:
 
