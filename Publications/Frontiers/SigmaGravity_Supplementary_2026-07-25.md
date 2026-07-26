@@ -236,7 +236,7 @@ The strata were not used for tuning. Their variation cautions against a superior
 
 ### S4.4 Nuisance grid and ablation
 
-The submitted central configuration remains the primary result and was not selected from the grid. The 81 frozen combinations vary common stellar mass-to-light assumptions, distance scale, inclination offset, and \(A_0\). The mean paired contrast ranges from −3.286 to +2.779 km s\(^{-1}\), and 64.2% of combinations retain the sign of the central result. This grid is descriptive; it does not marginalize over a calibrated astrophysical likelihood.
+The central fixed configuration remains the primary result and was not selected from the grid. The 81 frozen combinations vary common stellar mass-to-light assumptions, distance scale, inclination offset, and \(A_0\). The mean paired contrast ranges from −3.286 to +2.779 km s\(^{-1}\), and 64.2% of combinations retain the sign of the central result. This grid is descriptive; it does not marginalize over a calibrated astrophysical likelihood.
 
 The acceleration-only ablation \(B=A_0\) gives mean RMS \(16.8823\ {\rm km\,s^{-1}}\). The full locked model improves the mean by \(0.5166\ {\rm km\,s^{-1}}\), with galaxy-bootstrap 95% interval [0.2420, 0.7945] km s\(^{-1}\). Because the factor uses \(V_\Sigma\), this is an equation ablation, not evidence for measured coherence.
 
@@ -269,7 +269,7 @@ V_{R_d}=V_{\rm bar}
 \sqrt{1+A_0W(r,R_d)h(g_N)}.
 \]
 
-The SPARC catalog value of \(R_d\) is used for each galaxy. The rational window and the scale \(R_d/(2\pi)\) are inherited literally from the submitted manuscript; they were not selected from alternative windows after inspecting the revision results, and no alternate form was screened in this reviewer-directed test. No parameter is fitted, and the candidate replaces rather than multiplies the endogenous factor \(F(V_\Sigma)\). It therefore tests whether this specific submitted photometric scale supplies the radial suppression already seen to be useful in the fixed-point ablation.
+The SPARC catalog value of \(R_d\) is used for each galaxy. The rational window and the scale \(R_d/(2\pi)\) are the prespecified structural form associated with the model; no alternate form was screened in this sensitivity calculation. No parameter is fitted, and the candidate replaces rather than multiplies the endogenous factor \(F(V_\Sigma)\). It therefore tests whether this specific photometric scale supplies the radial suppression already seen to be useful in the fixed-point ablation.
 
 | Comparison on 164 galaxies | Mean RMS difference | Galaxy-bootstrap 95% interval |
 |---|---:|---:|
@@ -309,9 +309,9 @@ These are not full reconstructions of the observed gas, disk, and bulge maps. Th
 
 Machine-readable output:
 
-- [`research/reviewer_derivation_audit/results/qumond_axisymmetric_residuals.csv`](https://github.com/lrspeiser/sigmagravity/blob/main/research/reviewer_derivation_audit/results/qumond_axisymmetric_residuals.csv)
-- [`research/reviewer_derivation_audit/results/qumond_axisymmetric_summary.json`](https://github.com/lrspeiser/sigmagravity/blob/main/research/reviewer_derivation_audit/results/qumond_axisymmetric_summary.json)
-- [`research/reviewer_derivation_audit/results/qumond_grid_convergence.csv`](https://github.com/lrspeiser/sigmagravity/blob/main/research/reviewer_derivation_audit/results/qumond_grid_convergence.csv)
+- [`research/derivation_audit/results/qumond_axisymmetric_residuals.csv`](https://github.com/lrspeiser/sigmagravity/blob/main/research/derivation_audit/results/qumond_axisymmetric_residuals.csv)
+- [`research/derivation_audit/results/qumond_axisymmetric_summary.json`](https://github.com/lrspeiser/sigmagravity/blob/main/research/derivation_audit/results/qumond_axisymmetric_summary.json)
+- [`research/derivation_audit/results/qumond_grid_convergence.csv`](https://github.com/lrspeiser/sigmagravity/blob/main/research/derivation_audit/results/qumond_grid_convergence.csv)
 
 ## S6. Cluster calibration, profile evaluation, and uncertainty
 
@@ -340,7 +340,7 @@ The amplitude and the baryon proxy are not independently identified. Perturbing 
 Machine-readable input/output:
 
 - `data/clusters/fox2022_sigma_results.csv`
-- `research/reviewer_derivation_audit/results/fox_parameter_audit.json`
+- `research/derivation_audit/results/fox_parameter_audit.json`
 
 ### S6.2 Tian/CLASH no-refit evaluation
 
@@ -354,7 +354,7 @@ For each point, the no-refit prediction uses \(B=8.4463\). Log residuals are
 \tag{S20}
 \]
 
-Quoted uncertainties in both accelerations are retained in the machine table. Aggregate descriptive values are not interpreted as 73 independent clusters. The radial trend fits \(\epsilon\) against \(\log_{10}(r/200\ {\rm kpc})\), weights by the propagated residual variance, and obtains its interval from 5,000 bootstrap samples of the 17 complete clusters. The submitted Fox calibration fixes \(B=8.4463\), \(h(g_N)\), and \(g^\dagger\); no CLASH quantity is used to alter them.
+Quoted uncertainties in both accelerations are retained in the machine table. Aggregate descriptive values are not interpreted as 73 independent clusters. The radial trend fits \(\epsilon\) against \(\log_{10}(r/200\ {\rm kpc})\), weights by the propagated residual variance, and obtains its interval from 5,000 bootstrap samples of the 17 complete clusters. The Fox calibration fixes \(B=8.4463\), \(h(g_N)\), and \(g^\dagger\); no CLASH quantity is used to alter them.
 
 | Radius | Median \(g_{\rm pred}/g_{\rm tot}\) |
 |---:|---:|
@@ -369,8 +369,8 @@ No replacement amplitude or radial response is fitted in this no-refit analysis.
 
 Machine-readable output:
 
-- `research/reviewer_derivation_audit/results/tian_submitted_residuals.csv`
-- `research/reviewer_derivation_audit/results/tian_cluster_audit.json`
+- `research/derivation_audit/results/tian_fox_frozen_residuals.csv`
+- `research/derivation_audit/results/tian_cluster_audit.json`
 
 ## S7. Counterrotation matching
 
@@ -399,10 +399,10 @@ Environment, merger indicators, map-level data-quality covariates, point-spread 
 
 Machine-readable output:
 
-- `research/reviewer_derivation_audit/results/counterrotation_matched_controls.csv`
-- `research/reviewer_derivation_audit/results/counterrotation_smd_before.csv`
-- `research/reviewer_derivation_audit/results/counterrotation_smd_after.csv`
-- `research/reviewer_derivation_audit/results/counterrotation_readiness.json`
+- `research/derivation_audit/results/counterrotation_matched_controls.csv`
+- `research/derivation_audit/results/counterrotation_smd_before.csv`
+- `research/derivation_audit/results/counterrotation_smd_after.csv`
+- `research/derivation_audit/results/counterrotation_readiness.json`
 
 ## S8. Software regression and commands
 
@@ -411,7 +411,7 @@ Machine-readable output:
 From the repository root:
 
 ```powershell
-python -m pytest -q research/reviewer_derivation_audit/tests `
+python -m pytest -q research/derivation_audit/tests `
   research/sparc_statistical_validation/tests `
   Publications/Frontiers/scripts/test_sparc_scale_length_sensitivity.py
 ```
@@ -421,10 +421,10 @@ Result: **27 passed, 0 failed, 0 errors**.
 ### S8.2 Main reproducible analyses
 
 ```powershell
-python research/reviewer_derivation_audit/run_sprint.py
+python research/derivation_audit/run_sprint.py
 python research/sparc_statistical_validation/run_validation.py
 python "Publications/Frontiers/scripts/run_sparc_scale_length_sensitivity.py"
-python "Publications/Frontiers/scripts/generate_revision_figures.py"
+python "Publications/Frontiers/scripts/generate_publication_figures.py"
 ```
 
 ## S9. Frozen figure sources

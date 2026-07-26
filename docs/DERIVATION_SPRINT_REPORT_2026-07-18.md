@@ -6,7 +6,7 @@
 [`REVIEWER_REVISION_PLAN_2026-07-18.md`](REVIEWER_REVISION_PLAN_2026-07-18.md)
 
 **Research package:**
-[`research/reviewer_derivation_audit`](../research/reviewer_derivation_audit/README.md)
+[`research/derivation_audit`](../research/derivation_audit/README.md)
 
 ## Executive verdict
 
@@ -37,21 +37,21 @@ during this sprint.
 From the repository root:
 
 ```powershell
-python research/reviewer_derivation_audit/run_sprint.py
-python -m pytest research/reviewer_derivation_audit/tests -q
+python research/derivation_audit/run_sprint.py
+python -m pytest research/derivation_audit/tests -q
 ```
 
 The final run completed all stages and the test suite reports `12 passed`.
 The environment is frozen in
-[`environment.json`](../research/reviewer_derivation_audit/results/environment.json),
+[`environment.json`](../research/derivation_audit/results/environment.json),
 and downloaded file hashes and source URLs are in the two dataset manifests:
 
-- [Tian et al. 2020 manifest](../research/reviewer_derivation_audit/data/tian2020/manifest.json)
-- [Mistele et al. 2025 manifest](../research/reviewer_derivation_audit/data/mistele2025/manifest.json)
+- [Tian et al. 2020 manifest](../research/derivation_audit/data/tian2020/manifest.json)
+- [Mistele et al. 2025 manifest](../research/derivation_audit/data/mistele2025/manifest.json)
 
 Random operations use seed `20260718`. Cluster validation uses fixed
 leave-one-cluster-out splits recorded in
-[`cluster_split_definitions.csv`](../research/reviewer_derivation_audit/results/cluster_split_definitions.csv).
+[`cluster_split_definitions.csv`](../research/derivation_audit/results/cluster_split_definitions.csv).
 
 ## 1. Canonical baseline and code audit
 
@@ -87,7 +87,7 @@ The production-code audit confirms:
 All 171 SPARC galaxies already have catalog photometric scale lengths. The
 production heuristic has correlation 0.543 with the catalog value and a
 median heuristic/catalog ratio of 1.735. The row-level comparison is frozen in
-[`sparc_scale_length_audit.csv`](../research/reviewer_derivation_audit/results/sparc_scale_length_audit.csv).
+[`sparc_scale_length_audit.csv`](../research/derivation_audit/results/sparc_scale_length_audit.csv).
 
 ## 2. Honest nonrelativistic action
 
@@ -210,7 +210,7 @@ The Jacobian audit gives:
 | Dispersion-supported clusters with (C_{\rm kin}=0) | density and coherence couplings | 1 of 2 | Cluster data cannot identify the coherence coupling. |
 
 The exact matrices are in
-[`identifiability_audit.json`](../research/reviewer_derivation_audit/results/identifiability_audit.json).
+[`identifiability_audit.json`](../research/derivation_audit/results/identifiability_audit.json).
 
 ## 4. Independent CLASH cluster test
 
@@ -320,11 +320,11 @@ so the current (A(L)) derivation should be abandoned rather than promoted.
 
 All residuals, fits, and fold parameters are in:
 
-- [`tian_submitted_residuals.csv`](../research/reviewer_derivation_audit/results/tian_submitted_residuals.csv)
-- [`tian_loco_residuals.csv`](../research/reviewer_derivation_audit/results/tian_loco_residuals.csv)
-- [`cluster_bootstrap_posteriors.csv`](../research/reviewer_derivation_audit/results/cluster_bootstrap_posteriors.csv)
-- [`density_field_loco_residuals.csv`](../research/reviewer_derivation_audit/results/density_field_loco_residuals.csv)
-- [`coupled_action_loco_residuals.csv`](../research/reviewer_derivation_audit/results/coupled_action_loco_residuals.csv)
+- [`tian_fox_frozen_residuals.csv`](../research/derivation_audit/results/tian_fox_frozen_residuals.csv)
+- [`tian_loco_residuals.csv`](../research/derivation_audit/results/tian_loco_residuals.csv)
+- [`cluster_bootstrap_posteriors.csv`](../research/derivation_audit/results/cluster_bootstrap_posteriors.csv)
+- [`density_field_loco_residuals.csv`](../research/derivation_audit/results/density_field_loco_residuals.csv)
+- [`coupled_action_loco_residuals.csv`](../research/derivation_audit/results/coupled_action_loco_residuals.csv)
 
 ## 5. Mistele covariance reconstruction check
 
@@ -342,7 +342,7 @@ This is not an independent validation because both products use CLASH lensing
 inputs. It does show that catalog/reconstruction choice is material at roughly
 the same scale as the constant-(B) residuals. The covariance-aware diagnostics
 are in
-[`mistele_cluster_covariance_diagnostics.csv`](../research/reviewer_derivation_audit/results/mistele_cluster_covariance_diagnostics.csv).
+[`mistele_cluster_covariance_diagnostics.csv`](../research/derivation_audit/results/mistele_cluster_covariance_diagnostics.csv).
 
 ## 6. Exact versus algebraic QUMOND for disks
 
@@ -368,9 +368,9 @@ The algebraic approximation is usable as a several-percent approximation in
 these reconstructions, but it is not exact and reaches about 20% locally. A
 revision should either solve the field equation for the tested mass maps or
 include this geometry-dependent systematic. Results are in
-[`qumond_axisymmetric_residuals.csv`](../research/reviewer_derivation_audit/results/qumond_axisymmetric_residuals.csv)
+[`qumond_axisymmetric_residuals.csv`](../research/derivation_audit/results/qumond_axisymmetric_residuals.csv)
 and
-[`qumond_grid_convergence.csv`](../research/reviewer_derivation_audit/results/qumond_grid_convergence.csv).
+[`qumond_grid_convergence.csv`](../research/derivation_audit/results/qumond_grid_convergence.csv).
 
 ## 7. Independent coherence gate
 
@@ -438,7 +438,7 @@ covariate matching.
 This is not the primary test because JAM/NFW (f_{\rm DM}) is model-derived.
 The direct gate remains failed because DAP MAPS, environment measures, and
 merger indicators are absent. The exact required object manifest is frozen in
-[`counterrotation_required_map_manifest.csv`](../research/reviewer_derivation_audit/results/counterrotation_required_map_manifest.csv).
+[`counterrotation_required_map_manifest.csv`](../research/derivation_audit/results/counterrotation_required_map_manifest.csv).
 
 The manuscript should not call the current counterrotation result a confirmed
 prediction. At most, it can motivate collection and forward modeling of the
@@ -466,7 +466,7 @@ therefore remain explicitly exploratory.
 ## 10. Final decision and manuscript handoff
 
 The machine-readable verdict is
-[`decision_gates.json`](../research/reviewer_derivation_audit/results/decision_gates.json).
+[`decision_gates.json`](../research/derivation_audit/results/decision_gates.json).
 
 The reviewer-revision phase should now proceed with these constraints:
 

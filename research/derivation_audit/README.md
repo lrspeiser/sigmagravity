@@ -21,8 +21,8 @@ check, and counterrotation data-readiness checks.
 Run from the repository root:
 
 ```powershell
-python research/reviewer_derivation_audit/run_sprint.py
-python -m pytest research/reviewer_derivation_audit/tests -q
+python research/derivation_audit/run_sprint.py
+python -m pytest research/derivation_audit/tests -q
 ```
 
 Downloaded public data and all generated tables are confined to this

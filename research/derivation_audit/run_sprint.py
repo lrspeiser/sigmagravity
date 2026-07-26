@@ -80,7 +80,7 @@ def main():
     fox_names = fox_overlap_names(repo_root / "data" / "clusters" / "fox2022_unique_clusters.csv")
 
     cluster_summary, submitted_rows, loco_rows = audit_tian(tian, fox_names)
-    submitted_rows.to_csv(result_root / "tian_submitted_residuals.csv", index=False)
+    submitted_rows.to_csv(result_root / "tian_fox_frozen_residuals.csv", index=False)
     loco_rows.to_csv(result_root / "tian_loco_residuals.csv", index=False)
     write_json(result_root / "tian_cluster_audit.json", cluster_summary)
     split_definitions = pd.DataFrame(

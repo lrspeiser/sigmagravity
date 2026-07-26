@@ -274,7 +274,7 @@ The author declares that the research was conducted in the absence of any commer
 
 \section*{Acknowledgments}
 
-The author thanks the reviewers and editor for comments that materially improved the scope, statistical presentation, and claim boundaries of the manuscript.
+The author thanks Emmanuel N. Saridakis, Rafael Ferraro, and Tiberiu Harko for earlier discussions concerning theoretical consistency and modified-gravity frameworks.
 
 \section*{Supplemental Data}
 

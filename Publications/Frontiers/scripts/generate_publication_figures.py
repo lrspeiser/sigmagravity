@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[3]
 OUT = Path(__file__).resolve().parent.parent / "figures"
 
 SPARC = ROOT / "research" / "sparc_statistical_validation" / "results"
-AUDIT = ROOT / "research" / "reviewer_derivation_audit" / "results"
+AUDIT = ROOT / "research" / "derivation_audit" / "results"
 FOX = ROOT / "data" / "clusters" / "fox2022_sigma_results.csv"
 
 
@@ -108,7 +108,7 @@ def figure_1_sparc() -> None:
 
 def figure_2_clusters() -> None:
     fox = pd.read_csv(FOX)
-    clash = pd.read_csv(AUDIT / "tian_submitted_residuals.csv")
+    clash = pd.read_csv(AUDIT / "tian_fox_frozen_residuals.csv")
     clash = clash[~clash["overlaps_fox_calibration"].astype(bool)].copy()
 
     fig, axes = plt.subplots(1, 2, figsize=(8.8, 3.7))
@@ -295,7 +295,7 @@ def main() -> None:
     figure_2_clusters()
     figure_3_qumond()
     figure_4_counterrotation()
-    print(f"Wrote revision figures to {OUT}")
+    print(f"Wrote publication figures to {OUT}")
 
 
 if __name__ == "__main__":

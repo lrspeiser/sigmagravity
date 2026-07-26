@@ -37,7 +37,7 @@ The final manuscript also gives the provenance of the fixed empirical choices. T
 
 **After.** Those claims are withdrawn. The title now says “Coherence-Motivated” rather than “Coherence-Dependent,” and coherence is described as a possible physical motivation requiring independent phase-space data and its own dynamical field equation.
 
-**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.D and Eqs. (4)–(11); p. 3, Sec. II.F; pp. 7–8, Sec. V.B; and p. 8, Sec. V.D. See also Supplement Sections S2–S3.
+**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.D and Eqs. (4)–(11); pp. 3–4, Sec. II.F; pp. 7–8, Sec. V.B; and p. 8, Sec. V.D. See also Supplement Sections S2–S3.
 
 **Remaining limitation.** No covariant coherence field, relativistic completion, or first-principles source equation for \(B\) is claimed.
 
@@ -59,13 +59,13 @@ The final manuscript also gives the provenance of the fixed empirical choices. T
 
 **Response.** I agree. The 42 Fox clusters are now labeled an illustrative calibration sample, and 0.987 is called an in-sample calibration result. Repeated Fox splits are described only as calibration-stability checks. The final Abstract no longer presents the near-unity Fox ratio as a positive cluster result; it states instead that the simplified calibration is secondary and that its normalization fails to transfer without radial bias.
 
-To answer the request for a no-refit check, I used the 20 Tian/CLASH systems as the starting catalog and applied an objective name-normalization rule: uppercase alphanumeric identifiers with punctuation removed. This excludes the three systems also present in Fox---MACS0416, MACS0717, and MACS1149---leaving 73 radial measurements in 17 disjoint clusters. I froze the submitted cluster calculation exactly at \(B=8.45\), \(g^\dagger=1.2\times10^{-10}\ {\rm m\,s^{-2}}\), and the submitted response \(h(g_{\rm bar})\). The median predicted-to-observed ratio is 1.318. The radius-bin medians are 1.170, 1.228, 1.613, and 1.961 at 100, 200, 400, and 600 kpc. A weighted residual trend is \(+0.162\) dex per decade in radius, with a 95% cluster-bootstrap interval \([+0.115,+0.217]\). I report this unfavorable transfer result rather than recalibrating the manuscript to it.
+To answer the request for a no-refit check, I used the 20 Tian/CLASH systems as the starting catalog and applied an objective name-normalization rule: uppercase alphanumeric identifiers with punctuation removed. This excludes the three systems also present in Fox---MACS0416, MACS0717, and MACS1149---leaving 73 radial measurements in 17 disjoint clusters. I froze the cluster calculation at \(B=8.45\), \(g^\dagger=9.60\times10^{-11}\ {\rm m\,s^{-2}}\), and the stated response \(h(g_{\rm bar})\). The median predicted-to-observed ratio is 1.318. The radius-bin medians are 1.170, 1.228, 1.613, and 1.961 at 100, 200, 400, and 600 kpc. A weighted residual trend is \(+0.162\) dex per decade in radius, with a 95% cluster-bootstrap interval \([+0.115,+0.217]\). The Fox-calibrated amplitude therefore does not transfer successfully to these radial data and provides no support for a universal fixed cluster-amplitude law under the present assumptions. I report this unfavorable transfer result rather than recalibrating the manuscript to it.
 
 **Before.** The Fox ratio and within-catalog holdouts were described as prediction or validation.
 
 **After.** The Fox calculation is visibly secondary and illustrative, calibration and no-refit evaluation are separated, and no replacement cluster amplitude or formula is introduced.
 
-**Location.** Revised manuscript p. 5, Sec. III.C; pp. 6–7, Sec. IV.C; Table I on p. 4; and Figure 2 on p. 7. See also Supplement Section S6.
+**Location.** Revised manuscript p. 4, Sec. III.C; p. 6, Sec. IV.C; Table I on p. 5; and Figure 2 on p. 7. See also Supplement Section S6.
 
 **Remaining limitation.** The CLASH analysis is a no-refit profile check, not a complete joint baryon/lensing likelihood on a new survey. A definitive validation still requires independently measured gas, stellar, intracluster-light, and lensing profiles with covariance fixed in advance.
 
@@ -79,7 +79,7 @@ To answer the request for a no-refit check, I used the 20 Tian/CLASH systems as 
 
 **After.** The Fox result is explicitly conditional on the proxy, is not used as precision evidence for a universal law, and is not treated as a principal positive test of the framework.
 
-**Location.** Revised manuscript p. 5, Sec. III.C and Eq. (15); pp. 6–7, Sec. IV.C; and Table II on p. 4. See also Supplement Section S6.1.
+**Location.** Revised manuscript p. 4, Sec. III.C and Eq. (15); p. 6, Sec. IV.C; and Table II on p. 5. See also Supplement Section S6.1.
 
 **Remaining limitation.** I have not reconstructed gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles for all 42 Fox systems. The text identifies this as required future work.
 
@@ -89,13 +89,13 @@ I retain “and Clusters” in the title because the revised paper reports a pre
 
 **Reviewer comment.** Characteristic values are assigned by system class, but \(L\) cannot be calculated uniquely from a general three-dimensional baryonic distribution.
 
-**Response.** I agree. Because every Fox cluster received the same \(L=600\) kpc, the sample identifies one effective amplitude, not the exponent \(n\) independently. Because the available data do not identify a general path-length functional, I removed the relation from the canonical response rather than replacing it with a more flexible fitted law.
+**Response.** I agree. Because every Fox cluster received the same \(L=600\) kpc, the sample identifies one effective amplitude, not the exponent \(n\) independently. The reported \(n=0.27\) is therefore only a historical reparameterization of the Fox-calibrated amplitude for the adopted reference constants; it is not used in the canonical response or claimed as an independently measured law. Because the available data do not identify a general path-length functional, I removed the relation from the canonical response rather than replacing it with a more flexible fitted law.
 
 **Before.** \(A(L)\) was presented as a cross-scale law connecting disks and clusters.
 
 **After.** I could not supply a unique operational definition of \(L\) from a general baryonic distribution. I therefore removed \(A(L)\) from the predictive response and removed conclusions that used it to connect disks and clusters. Path length is retained only as a possible motivation for future work; no substitute formula is fitted in this revision.
 
-**Location.** Revised manuscript pp. 2–3, Sec. II.C; p. 3, Sec. II.F; Table II on p. 4; and pp. 7–8, Sec. V.B. See also Supplement Section S2.1.
+**Location.** Revised manuscript pp. 2–3, Sec. II.C; pp. 3–4, Sec. II.F; Table II on p. 5; and pp. 7–8, Sec. V.B. See also Supplement Section S2.1.
 
 ## 6. Actual SPARC photometric scale lengths
 
@@ -119,7 +119,7 @@ I also tested whether the actual galaxy-to-galaxy assignments contain informatio
 
 The window \(W=r/[R_d/(2\pi)+r]\) is the literal scale-length form already documented with the submitted research model; it was not chosen after reviewing these results, and I did not screen alternative windows in this reviewer-requested test.
 
-**Location.** Revised manuscript pp. 2–3, Sec. II.C; pp. 4–5, Secs. III.A–III.B; p. 4, Tables I–II; p. 6, Sec. IV.B; and pp. 7–8, Sec. V.B. See also Supplement Sections S2.1 and S4.5 and the [archived scale-length outputs](https://github.com/lrspeiser/sigmagravity/tree/main/Publications/Frontiers/analysis/sparc_scale_length).
+**Location.** Revised manuscript pp. 2–3, Sec. II.C; p. 4, Secs. III.A–III.B; p. 5, Tables I–II; p. 6, Sec. IV.B; and pp. 7–8, Sec. V.B. See also Supplement Sections S2.1 and S4.5 and the [archived scale-length outputs](https://github.com/lrspeiser/sigmagravity/tree/main/Publications/Frontiers/analysis/sparc_scale_length).
 
 **Interpretation.** The test shows that radial suppression can improve on the acceleration-only ablation, but the actual catalog \(R_d\) assignments do not add detectable information through this window. I therefore retain source geometry as a future physical hypothesis without incorporating this unsuccessful candidate into the core formula.
 
@@ -135,7 +135,7 @@ Median absolute acceleration differences are 5.19%, 4.88%, and 3.96%, with local
 
 **After.** The error is quantified and treated as a geometry-dependent model systematic.
 
-**Location.** Revised manuscript p. 3, Sec. II.E and Eq. (12); p. 7, Sec. IV.D and Figure 3. See also Supplement Section S5.
+**Location.** Revised manuscript p. 3, Sec. II.E and Eq. (12); p. 6, Sec. IV.D; and Figure 3 on p. 8. See also Supplement Section S5.
 
 **Remaining limitation.** The three solutions use analytic reconstructions rather than full observed gas and bulge maps.
 
@@ -151,7 +151,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0081\), w
 
 **After.** The matched null result is reported as a secondary diagnostic, and counterrotation is retained only as a proposed direct future test.
 
-**Location.** Revised manuscript p. 5, Sec. III.D; p. 7, Sec. IV.E, Eq. (17), and Figure 4. See also Supplement Section S7.
+**Location.** Revised manuscript p. 4, Sec. III.D; p. 6, Sec. IV.E and Eq. (18); and Figure 4 on p. 8. See also Supplement Section S7.
 
 **Remaining limitation.** Environment and merger-history covariates were not available in the local catalog. A direct test requires common forward modeling of the MaNGA velocity and dispersion maps.
 
@@ -165,7 +165,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0081\), w
 
 **After.** Solar-System, compact-source, equivalence-principle, and PPN behavior are explicitly undetermined.
 
-**Location.** Revised manuscript p. 3, Sec. II.F, final paragraph; and p. 8, Sec. V.D.
+**Location.** Revised manuscript pp. 3–4, Sec. II.F, final paragraph; and p. 8, Sec. V.D.
 
 ## 10. Lensing and gravitational slip
 
@@ -177,7 +177,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0081\), w
 
 **After.** It is an empirical mass comparison conditional on a lensing closure assumption.
 
-**Location.** Revised manuscript p. 3, Sec. II.F; Table II on p. 4; and p. 8, Sec. V.D, including Eq. (19).
+**Location.** Revised manuscript pp. 3–4, Sec. II.F; Table II on p. 5; and p. 8, Sec. V.D, including Eq. (19).
 
 ## 11. Overstated claims
 
@@ -193,7 +193,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0081\), w
 | “supports the framework’s validity” | “motivates further prespecified testing” |
 | “alternative to dark matter” without qualification | “galaxy-scale phenomenological alternative; not a replacement cosmology” |
 
-**Location.** Revised manuscript p. 1, Abstract and Sec. I.C; pp. 5–7, Secs. IV.A–IV.E; pp. 7–9, Sec. V; and p. 9, Sec. VI.
+**Location.** Revised manuscript p. 1, Abstract and Sec. I.C; pp. 5–8, Secs. IV.A–IV.E and Figures 1–4; pp. 6–9, Sec. V; and p. 9, Sec. VI.
 
 ## 12. Figures and tables
 
@@ -203,7 +203,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0081\), w
 
 The figures use distinct colors and marker shapes, remain interpretable in grayscale, and are also supplied as 360-dpi PNG files.
 
-**Location.** Revised manuscript Tables I–II on p. 4; Figure 1 on p. 6; and Figures 2–4 on p. 7.
+**Location.** Revised manuscript Tables I–II on p. 5; Figures 1–2 on p. 7; and Figures 3–4 on p. 8.
 
 ## 13. Statistical methods
 
@@ -226,7 +226,7 @@ The revision also:
 
 **After.** Object-level paired statistics and explicit uncertainty intervals determine the wording.
 
-**Location.** Revised manuscript pp. 4–5, Sec. III.B; pp. 5–7, Secs. IV.A–IV.C and IV.E; Table I on p. 4; Figure 1 on p. 6; and Figures 2 and 4 on p. 7. See also Supplement Sections S4, S6, and S7.
+**Location.** Revised manuscript p. 4, Sec. III.B; pp. 5–6, Secs. IV.A–IV.C and IV.E; Table I on p. 5; Figures 1–2 on p. 7; and Figure 4 on p. 8. See also Supplement Sections S4, S6, and S7.
 
 ## Defined future investigations
 
@@ -237,7 +237,7 @@ The revised manuscript now consolidates the unresolved work in Sec. V.E, “Stag
 3. **Path length and source geometry.** Derive a density-, concentration-, or geometry-sourced field without system-class switches or per-object parameters, then compare it with constant \(B\) on held-out systems. The unsuccessful SPARC \(R_d\) window is not promoted.
 4. **Exact field solutions.** Replace the algebraic disk approximation with axisymmetric or three-dimensional solutions using observed gas, stellar, and bulge maps and propagate the resulting field-solution uncertainty through the galaxy likelihood.
 5. **Fundamental and relativistic completion.** Promote \(B\) to an independently varied field with explicit kinetic and source terms, test stability and conservation in a closed action, and only then derive the two metric potentials, photon propagation, PPN limits, equivalence-principle behavior, and gravitational-wave propagation.
-6. **Confirmatory inference.** Freeze samples, covariance models, and decision thresholds before evaluation and obtain independent statistical review before making stronger observational claims.
+6. **Confirmatory inference.** Freeze samples, covariance models, and decision thresholds before evaluation; preserve public code, machine-readable residuals, and complete split definitions for independent replication.
 
 These items are proposed tests with failure conditions, not additional results claimed by the present manuscript.
 
@@ -252,5 +252,7 @@ The revision does not change the core empirical response to obtain a more favora
 - the external radial cluster check limits universality;
 - the matched counterrotation result does not confirm coherence; and
 - the tested photometric scale-length window does not outperform its controls, so coherence, path length, and source organization remain hypotheses requiring further work.
+
+Coherence remains the principal physical motivation for the bounded factor. The internal ablation supplies an initial reason to test that hypothesis, but the response now makes clear that only independently measured phase-space data and held-out prediction can determine whether coherence is the cause.
 
 I thank the Reviewer for identifying the changes needed to separate an interesting phenomenological finding from conclusions that the current theory and data cannot yet support.

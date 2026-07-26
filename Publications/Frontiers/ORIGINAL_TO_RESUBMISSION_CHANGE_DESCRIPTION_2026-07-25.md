@@ -156,7 +156,7 @@ The revision also adds:
 
 **Location.** Sections 2.5, 3.1–3.7, Table 1, and Figures 1–4.
 
-**Remaining limitation.** Reviewer 2 marked statistical consultation as required. No external statistical consultation is documented in the paper. Obtaining a short independent statistical review before resubmission would reduce this residual editorial risk.
+**Remaining limitation.** Reviewer 2 marked statistical consultation as required. No external statistical consultation occurred or is promised. The response instead asks that the bounded claims be evaluated on the object-level methods, frozen code, residuals, sensitivity analyses, and reproducible outputs now supplied. If consultation is treated as a mandatory procedural condition, that condition remains unfulfilled.
 
 ### 8. Claims throughout the paper were too strong
 
@@ -276,7 +276,7 @@ showing that disk normalization constrains \(B^2g^\dagger\), not \(B\) and \(g^\
 
 **Change.** The statistical design has been substantially upgraded, including independent-unit resampling, paired intervals and tests, frozen nuisance analyses, sample-threshold checks, matching diagnostics, and machine-readable residuals and split definitions.
 
-**Resolution status.** Methodologically improved, but not fully closed because an external statistical consultation is not documented. This is the clearest remaining procedural item the author could complete before resubmission.
+**Resolution status.** The methodological substance is addressed through reproducible object-level analyses, but the request for an external statistician is not fulfilled. The response says this directly and does not promise a consultation.
 
 ## Concerns that were answered by limitation rather than solved
 
@@ -290,7 +290,7 @@ Several reviewer requests cannot honestly be described as fully solved within th
 6. **Measured coherence:** the locked factor is endogenous, not an independent phase-space observable.
 7. **General path length:** no unique functional for arbitrary three-dimensional baryonic distributions is supplied.
 8. **Cosmology:** no CMB, primordial-abundance, or structure-formation calculation is attempted.
-9. **External statistical review:** the methods were improved, but an independent statistician has not been documented.
+9. **External statistical review:** the methods were improved and made reproducible, but no independent statistician was retained; the response does not claim otherwise.
 
 These are not omitted from the revised paper. They define its scope and the next decisive tests. Revised Section 4.7, “Staged future investigations,” now orders them into conditional steps with explicit advancement criteria: independently measured coherence must improve held-out galaxy predictions; a cluster law must transfer without refitting under frozen baryon and covariance models; a physical $B$ field must arise from a closed, stable action; and relativistic or cosmological development remains contingent on those earlier tests. The reviewer responses reproduce the same distinction between completed revisions and future investigations.
 

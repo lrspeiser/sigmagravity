@@ -9,7 +9,7 @@ This report records the regression, analysis, build, and visual checks performed
 Command:
 
 ```powershell
-python -m pytest -q research/reviewer_derivation_audit/tests `
+python -m pytest -q research/derivation_audit/tests `
   research/sparc_statistical_validation/tests `
   Publications/Frontiers/scripts/test_sparc_scale_length_sensitivity.py
 ```
@@ -109,4 +109,4 @@ The final audit of the proposed revision identified four clarifications that cou
 
 The audit did not trigger a new cluster amplitude, a replacement path-length formula, or a claim that an external statistical consultation had occurred. The path-length relation was withdrawn from the canonical response because no operational three-dimensional functional was established; it was not relabeled as solved.
 
-The partially resolved reviewer issues are now presented as a conditional research program rather than deferred claims. The manuscript specifies advancement gates for independently measured coherence, no-refit cluster transfer, source-field construction, exact field solutions, relativistic completion, cosmology, and independent statistical review. The two reviewer responses separately identify completed revisions, remaining limitations, and these future tests.
+The partially resolved reviewer issues are now presented as a conditional research program rather than deferred claims. The manuscript specifies advancement gates for independently measured coherence, no-refit cluster transfer, source-field construction, exact field solutions, relativistic completion, cosmology, and reproducible confirmatory inference. The Reviewer 2 response states explicitly that no statistician was retained or promised and asks that the bounded claims be evaluated on the documented code-based procedures. The two reviewer responses separately identify completed revisions, remaining limitations, and future tests.
