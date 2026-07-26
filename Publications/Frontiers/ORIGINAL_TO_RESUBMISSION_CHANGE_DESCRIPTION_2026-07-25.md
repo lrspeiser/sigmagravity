@@ -2,7 +2,7 @@
 
 **Manuscript ID:** 1866133
 **Original title:** *Σ-Gravity: Coherence-Dependent Gravitational Enhancement in Galaxies and Clusters*
-**Revised title:** *Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters*
+**Revised title:** *Σ-Gravity: A Coherence-Motivated Empirical Response Tested in Galaxies and Clusters*
 
 ## Documents compared
 
@@ -67,7 +67,7 @@ The broader exploratory tests remain available in the research repository, but t
 
 **Original paper.** The manuscript described a “covariant coherence scalar,” a unified galaxy-to-cluster amplitude, geodesic motion in an enhanced potential, conservation by construction, Solar-System safety, and implications distinct from both MOND and ΛCDM. Although it acknowledged the absence of a first-principles derivation, the surrounding language still implied theory-level consistency.
 
-**Revised paper.** The paper now calls Σ-Gravity an “alternative nonrelativistic phenomenological parameterization of selected missing-mass observations.” The title changes only one word, from “Coherence-Dependent” to “Coherence-Motivated.” The Abstract, Introduction, Discussion, and Conclusions distinguish the empirical response from any proposed physical mechanism.
+**Revised paper.** The paper now calls Σ-Gravity an “alternative nonrelativistic phenomenological parameterization of selected missing-mass observations.” The title changes from “Coherence-Dependent Gravitational Enhancement” to “A Coherence-Motivated Empirical Response Tested” so that it identifies the model as phenomenological and does not imply successful performance in every test regime. The Abstract, Introduction, Discussion, and Conclusions distinguish the empirical response from any proposed physical mechanism.
 
 **How this addresses the concern.** This preserves the empirical proposal while no longer claiming that coherence has been derived as a cause of modified gravity or that the model is already a complete gravitational theory.
 
@@ -162,7 +162,7 @@ The revision also adds:
 
 | Original claim or implication | Revised statement |
 |---|---|
-| “Coherence-Dependent” | “Coherence-Motivated” |
+| “Coherence-Dependent Gravitational Enhancement” | “A Coherence-Motivated Empirical Response Tested” |
 | Coherence is the operative physical scalar | The data identify \(B\); coherence is one possible explanation |
 | Unified path-length relationship | One effective Fox amplitude; no identified 3D path functional |
 | Cluster lensing success or prediction | Fox in-sample calibration conditional on baryons and lensing closure |

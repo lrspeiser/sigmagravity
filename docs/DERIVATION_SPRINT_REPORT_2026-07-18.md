@@ -420,18 +420,20 @@ five controls using stellar mass, physical size, Sérsic index, axis ratio,
 inclination, redshift, and JAM fit quality. Neither (f_{\rm DM}) nor another
 outcome/coherence proxy was used for matching.
 
-The 310 matches use 307 unique controls. The largest post-match absolute
-standardized mean difference is 0.071, below the prespecified 0.1 balance
-threshold.
+The final deduplicated, no-replacement implementation uses 310 unique controls.
+The largest post-match absolute standardized mean difference is 0.066, below
+the prespecified 0.1 balance threshold. These are the final values after repeat
+observations and control reuse were removed; they supersede the preliminary
+matching audit.
 
 As a secondary analysis only, the matched JAM/NFW (f_{\rm DM}(<R_e))
 difference is
 
 \[
-\Delta f_{\rm DM}=f_{\rm DM,CR}-f_{\rm DM,control}=-0.0069,
+\Delta f_{\rm DM}=f_{\rm DM,CR}-f_{\rm DM,control}=-0.0081,
 \]
 
-with cluster/pair bootstrap 95% interval ([-0.0567,+0.0466]). The interval
+with matched-set bootstrap 95% interval ([-0.0577,+0.0453]). The interval
 includes zero and does not reproduce a large suppression after available
 covariate matching.
 

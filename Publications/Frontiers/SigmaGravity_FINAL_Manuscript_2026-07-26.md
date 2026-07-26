@@ -1,4 +1,4 @@
-# Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters
+# Σ-Gravity: A Coherence-Motivated Empirical Response Tested in Galaxies and Clusters
 
 **Article type:** Original Research  
 **Journal/section:** *Frontiers in Astronomy and Space Sciences* — Extragalactic Astronomy  

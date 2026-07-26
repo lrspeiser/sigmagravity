@@ -48,7 +48,10 @@ viability without the corresponding calculation.
 7. **Upgrade statistical reporting.** Use galaxy- or cluster-grouped splits,
    uncertainty propagation, effect sizes, confidence or posterior intervals,
    covariate-balance diagnostics, multiplicity disclosure, and sensitivity
-   analyses. Engage a statistician before resubmission.
+   analyses. If no external statistician is retained, state explicitly that
+   the consultation request remains unfulfilled and provide complete code,
+   grouped residuals, random seeds, and sensitivity outputs for independent
+   audit rather than implying that reproducibility substitutes for consultation.
 8. **Moderate all conclusions.** Replace “confirmed prediction,” “successfully
    predicts,” and “supports the framework's validity” with language that
    distinguishes calibration, consistency, correlation, and independent

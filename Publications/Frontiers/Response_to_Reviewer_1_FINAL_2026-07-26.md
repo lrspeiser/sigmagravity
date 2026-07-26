@@ -1,16 +1,16 @@
 # Response to Reviewer 1
 
 **Manuscript ID:** 1866133  
-**Manuscript title:** *Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters*
+**Manuscript title:** *Σ-Gravity: A Coherence-Motivated Empirical Response Tested in Galaxies and Clusters*
 
-I thank the Reviewer for the constructive report. I agree with the central concern that the submitted manuscript stated several theoretical and observational conclusions more strongly than the evidence allowed. I have retained the empirical response while revising the relevant passages to distinguish fixed assumptions, calibration, no-refit evaluation, and unresolved theoretical questions. I made one limited title change, from “Coherence-Dependent” to “Coherence-Motivated,” to distinguish the proposed physical interpretation from what the present data establish.
+I thank the Reviewer for the constructive report. I agree with the central concern that the submitted manuscript stated several theoretical and observational conclusions more strongly than the evidence allowed. I have retained the empirical response while revising the relevant passages to distinguish fixed assumptions, calibration, no-refit evaluation, and unresolved theoretical questions. I revised the title from “Coherence-Dependent Gravitational Enhancement” to “A Coherence-Motivated Empirical Response Tested” so that coherence is identified as the proposed interpretation and galaxies and clusters are identified as test regimes, without implying that the present data establish a physical dependence or successful performance in both regimes.
 
-I apologize for the time taken to provide this response. I used the interval to complete the analyses reported in this revision and to make the manuscript changes needed to reflect the reviewers' feedback accurately. I would be pleased to undertake another focused revision round if the Reviewer or Editor believes that it would be useful.
+I apologize for the time taken to provide this response. I used the interval to complete the analyses reported in this revision and to make the manuscript changes needed to reflect the reviewers' feedback accurately.
 
 The most important changes are:
 
 - Σ-Gravity is now presented as a nonrelativistic phenomenological alternative for selected missing-mass observations, not as a completed fundamental or cosmological theory.
-- The title now describes coherence as motivation rather than as an established physical dependence.
+- The title now describes a coherence-motivated empirical response tested in galaxies and clusters rather than an established coherence dependence or a successful application in both regimes.
 - Coherence and path length are hypotheses rather than established causes of the response.
 - The Fox cluster result is explicitly labeled an illustrative calibration and is no longer presented as a positive cluster result in the Abstract.
 - A no-refit CLASH profile check is reported separately and reveals radial bias.
@@ -35,9 +35,9 @@ The final manuscript also gives the provenance of the fixed empirical choices. T
 
 **Before.** The submitted manuscript presented a covariant coherence scalar and suggested that the construction supported conservation and equivalence-principle conclusions.
 
-**After.** Those claims are withdrawn. The title now says “Coherence-Motivated” rather than “Coherence-Dependent,” and coherence is described as a possible physical motivation requiring independent phase-space data and its own dynamical field equation.
+**After.** Those claims are withdrawn. The title now says “A Coherence-Motivated Empirical Response Tested” rather than “Coherence-Dependent Gravitational Enhancement,” and coherence is described as a possible physical motivation requiring independent phase-space data and its own dynamical field equation.
 
-**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.D and Eqs. (4)–(11); pp. 3–4, Sec. II.F; pp. 7–8, Sec. V.B; and p. 8, Sec. V.D. See also Supplement Sections S2–S3.
+**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.D and Eqs. (4)–(11); pp. 3–4, Sec. II.F; pp. 7–8, Sec. V.B; and p. 8, Sec. V.D.
 
 **Remaining limitation.** No covariant coherence field, relativistic completion, or first-principles source equation for \(B\) is claimed.
 
@@ -65,7 +65,7 @@ To answer the request for a no-refit check, I used the 20 Tian/CLASH systems as 
 
 **After.** The Fox calculation is visibly secondary and illustrative, calibration and no-refit evaluation are separated, and no replacement cluster amplitude or formula is introduced.
 
-**Location.** Revised manuscript p. 4, Sec. III.C; p. 6, Sec. IV.C; Table I on p. 5; and Figure 2 on p. 7. See also Supplement Section S6.
+**Location.** Revised manuscript p. 4, Sec. III.C; p. 6, Sec. IV.C; Table I on p. 5; and Figure 2 on p. 7.
 
 **Remaining limitation.** The CLASH analysis is a no-refit profile check, not a complete joint baryon/lensing likelihood on a new survey. A definitive validation still requires independently measured gas, stellar, intracluster-light, and lensing profiles with covariance fixed in advance.
 
@@ -73,17 +73,17 @@ To answer the request for a no-refit check, I used the 20 Tian/CLASH systems as 
 
 **Reviewer comment.** The universal baryon fraction and fixed 0.4 concentration factor are oversimplified and materially affect the main cluster result.
 
-**Response.** I agree. Equation (15) is now labeled a simplified baryon-concentration prescription used only to reproduce the submitted calibration. The manuscript reports that changing the 0.4 factor by 25% changes the predicted mass ratio by approximately 30%. Because measured gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles were not available for all 42 Fox systems, I adopted the conservative alternative of demoting this exercise: it is now described as illustrative in the Abstract, Results, Discussion, Conclusions, Table I, Table II, and Figure 2.
+**Response.** I agree. I was not able to complete the requested component-by-component baryonic reconstruction for the 42 Fox systems, and I do not present the Fox exercise as satisfying that request. Equation (15) is now labeled a simplified baryon-concentration prescription used only to reproduce the submitted calibration. The manuscript reports that changing the 0.4 factor by 25% changes the predicted mass ratio by approximately 30%. Because measured gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles were not available for all 42 systems, I removed this exercise as a principal positive test and retained it only to document the submitted calibration and motivate the independent no-refit transfer check. It is now described as illustrative in the Abstract, Results, Discussion, Conclusions, Table I, Table II, and Figure 2.
 
 **Before.** The baryon proxy supported a precision cluster-success claim.
 
 **After.** The Fox result is explicitly conditional on the proxy, is not used as precision evidence for a universal law, and is not treated as a principal positive test of the framework.
 
-**Location.** Revised manuscript p. 4, Sec. III.C and Eq. (15); p. 6, Sec. IV.C; and Table II on p. 5. See also Supplement Section S6.1.
+**Location.** Revised manuscript p. 4, Sec. III.C and Eq. (15); p. 6, Sec. IV.C; and Table II on p. 5.
 
 **Remaining limitation.** I have not reconstructed gas, brightest-cluster-galaxy, satellite, and intracluster-light profiles for all 42 Fox systems. The text identifies this as required future work.
 
-I retain “and Clusters” in the title because the revised paper reports a prespecified cross-system transfer test and its failure, not because it claims a successful cluster application. The Introduction and Abstract now make that evidentiary role explicit.
+The revised title describes the response as “Tested in Galaxies and Clusters.” This retains the scope of the prespecified cross-system transfer test while avoiding an implication that the cluster application succeeded. The Introduction and Abstract make the unfavorable cluster result explicit.
 
 ## 5. No operational definition of path length \(L\)
 
@@ -95,7 +95,7 @@ I retain “and Clusters” in the title because the revised paper reports a pre
 
 **After.** I could not supply a unique operational definition of \(L\) from a general baryonic distribution. I therefore removed \(A(L)\) from the predictive response and removed conclusions that used it to connect disks and clusters. Path length is retained only as a possible motivation for future work; no substitute formula is fitted in this revision.
 
-**Location.** Revised manuscript pp. 2–3, Sec. II.C; pp. 3–4, Sec. II.F; Table II on p. 5; and pp. 7–8, Sec. V.B. See also Supplement Section S2.1.
+**Location.** Revised manuscript pp. 2–3, Sec. II.C; pp. 3–4, Sec. II.F; Table II on p. 5; and pp. 7–8, Sec. V.B.
 
 ## 6. Actual SPARC photometric scale lengths
 
@@ -119,7 +119,7 @@ I also tested whether the actual galaxy-to-galaxy assignments contain informatio
 
 The window \(W=r/[R_d/(2\pi)+r]\) is the literal scale-length form already documented with the submitted research model; it was not chosen after reviewing these results, and I did not screen alternative windows in this reviewer-requested test.
 
-**Location.** Revised manuscript pp. 2–3, Sec. II.C; p. 4, Secs. III.A–III.B; p. 5, Tables I–II; p. 6, Sec. IV.B; and pp. 7–8, Sec. V.B. See also Supplement Sections S2.1 and S4.5 and the [archived scale-length outputs](https://github.com/lrspeiser/sigmagravity/tree/main/Publications/Frontiers/analysis/sparc_scale_length).
+**Location.** Revised manuscript pp. 2–3, Sec. II.C; p. 4, Secs. III.A–III.B; p. 5, Tables I–II; p. 6, Sec. IV.B; and pp. 7–8, Sec. V.B. The [archived scale-length outputs](https://github.com/lrspeiser/sigmagravity/tree/main/Publications/Frontiers/analysis/sparc_scale_length) provide the machine-readable audit.
 
 **Interpretation.** The test shows that radial suppression can improve on the acceleration-only ablation, but the actual catalog \(R_d\) assignments do not add detectable information through this window. I therefore retain source geometry as a future physical hypothesis without incorporating this unsuccessful candidate into the core formula.
 
@@ -135,7 +135,7 @@ Median absolute acceleration differences are 5.19%, 4.88%, and 3.96%, with local
 
 **After.** The error is quantified and treated as a geometry-dependent model systematic.
 
-**Location.** Revised manuscript p. 3, Sec. II.E and Eq. (12); p. 6, Sec. IV.D; and Figure 3 on p. 8. See also Supplement Section S5.
+**Location.** Revised manuscript p. 3, Sec. II.E and Eq. (12); p. 6, Sec. IV.D; and Figure 3 on p. 8.
 
 **Remaining limitation.** The three solutions use analytic reconstructions rather than full observed gas and bulge maps.
 
@@ -151,7 +151,7 @@ The matched difference in JAM/NFW-derived \(f_{\rm DM}(<R_e)\) is \(-0.0081\), w
 
 **After.** The matched null result is reported as a secondary diagnostic, and counterrotation is retained only as a proposed direct future test.
 
-**Location.** Revised manuscript p. 4, Sec. III.D; p. 6, Sec. IV.E and Eq. (18); and Figure 4 on p. 8. See also Supplement Section S7.
+**Location.** Revised manuscript p. 4, Sec. III.D; p. 6, Sec. IV.E and Eq. (18); and Figure 4 on p. 8.
 
 **Remaining limitation.** Environment and merger-history covariates were not available in the local catalog. A direct test requires common forward modeling of the MaNGA velocity and dispersion maps.
 
@@ -226,7 +226,7 @@ The revision also:
 
 **After.** Object-level paired statistics and explicit uncertainty intervals determine the wording.
 
-**Location.** Revised manuscript p. 4, Sec. III.B; pp. 5–6, Secs. IV.A–IV.C and IV.E; Table I on p. 5; Figures 1–2 on p. 7; and Figure 4 on p. 8. See also Supplement Sections S4, S6, and S7.
+**Location.** Revised manuscript p. 4, Sec. III.B; pp. 5–6, Secs. IV.A–IV.C and IV.E; Table I on p. 5; Figures 1–2 on p. 7; and Figure 4 on p. 8.
 
 ## Defined future investigations
 

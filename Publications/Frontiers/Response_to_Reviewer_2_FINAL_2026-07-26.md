@@ -1,11 +1,11 @@
 # Response to Reviewer 2
 
 **Manuscript ID:** 1866133  
-**Manuscript title:** *Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters*
+**Manuscript title:** *Σ-Gravity: A Coherence-Motivated Empirical Response Tested in Galaxies and Clusters*
 
-I thank the Reviewer for the direct and detailed criticism. I agree that the submitted manuscript blurred three distinct propositions: an empirical response, a possible coherence interpretation, and a completed fundamental theory. The revision supports only the first proposition, treats the second as a hypothesis, and explicitly withdraws the third. I made one limited title change, from “Coherence-Dependent” to “Coherence-Motivated,” to distinguish the proposed interpretation from an empirically established dependence.
+I thank the Reviewer for the direct and detailed criticism. I agree that the submitted manuscript blurred three distinct propositions: an empirical response, a possible coherence interpretation, and a completed fundamental theory. The revision supports only the first proposition, treats the second as a hypothesis, and explicitly withdraws the third. I revised the title from “Coherence-Dependent Gravitational Enhancement” to “A Coherence-Motivated Empirical Response Tested” so that it identifies both the phenomenological status of the model and the evidentiary role of the galaxy and cluster analyses.
 
-I apologize for the time taken to provide this response. I used the interval to complete the analyses reported in this revision and to make the manuscript changes needed to reflect the reviewers' feedback accurately. I would be pleased to undertake another focused revision round if the Reviewer or Editor believes that it would be useful.
+I apologize for the time taken to provide this response. I used the interval to complete the analyses reported in this revision and to make the manuscript changes needed to reflect the reviewers' feedback accurately.
 
 The core formula has not been retuned to preserve the submitted claims. Instead, I have narrowed those claims and added only the analyses needed to answer the review: paired and uncertainty-weighted SPARC statistics, sample-threshold sensitivity, a zero-parameter test of the actual SPARC photometric scale lengths, an exact-versus-algebraic field comparison, a no-refit cluster profile check, and a matched counterrotation control. The final manuscript also states the provenance and non-uniqueness of the fixed functional choices and defines “locked” as retrospective non-reoptimization rather than prospective validation.
 
@@ -17,7 +17,7 @@ For clarity, I distinguish changes completed in this revision from investigation
 
 **Response.** I agree that the submitted work did not derive the physical origin of the response. The revised manuscript is explicitly presented as a phenomenological study rather than a completed theory of gravity.
 
-I respectfully disagree only with the proposition that the absence of a first-principles completion, by itself, makes a narrower phenomenological study unpublishable. I selected Frontiers because its Original Research scope permits empirical confirming or disconfirming studies that can eliminate or reformulate hypotheses. Like MOND as an empirical phenomenology, Σ-Gravity can be evaluated before every fundamental and cosmological question is answered, provided its evidentiary status is explicit. I do not offer journal scope or precedent as evidence that Σ-Gravity is physically correct; I ask that the paper be evaluated on the transparency, reproducibility, and falsifiability of the limited empirical claims it now makes.
+I agree that the revised work remains phenomenological and does not provide the physical explanation requested by the Reviewer. I have therefore removed claims that it is a completed theory of gravity or a cosmological alternative. The revised manuscript asks the narrower question of whether the specified empirical response produces reproducible and falsifiable results under fixed assumptions. I recognize that the absence of a first-principles mechanism remains a fundamental limitation, and I leave the journal-level assessment of that narrower contribution to the Reviewer and Editor.
 
 To make the theoretical status precise, the revision distinguishes:
 
@@ -35,9 +35,9 @@ The model was developed with SPARC as its principal galaxy benchmark before subm
 
 **Before.** The phenomenological construction was presented with theory-level implications.
 
-**After.** The title now says “Coherence-Motivated” rather than “Coherence-Dependent.” The Abstract, Introduction, action section, Discussion, and Conclusions consistently identify the model as a bounded phenomenological alternative.
+**After.** The title now says “A Coherence-Motivated Empirical Response Tested” rather than “Coherence-Dependent Gravitational Enhancement.” The Abstract, Introduction, action section, Discussion, and Conclusions consistently identify the model as a bounded phenomenological alternative.
 
-**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–4, Secs. II.B–II.F and Eqs. (4)–(12); pp. 6–9, Sec. V; and p. 9, Sec. VI. See also Supplement Sections S2–S3.
+**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–4, Secs. II.B–II.F and Eqs. (4)–(12); pp. 6–9, Sec. V; and p. 9, Sec. VI.
 
 **Remaining limitation.** The paper does not provide a first-principles origin for \(B\) or a relativistic theory, and says so directly.
 
@@ -69,9 +69,9 @@ I also tested the actual catalog \(R_d\) values without fitting a parameter. The
 
 **After.** The Fox exercise is visibly secondary and illustrative; calibration, stability, and no-refit evaluation are separate; parameter identifiability is explicit; the requested photometric scale-length hypothesis is tested against negative controls; and no new cluster formula is introduced.
 
-I retain “and Clusters” in the title because the revised paper reports the cross-system transfer test and its unfavorable result as a limitation, not because it claims a successful cluster application. The Introduction and Abstract now make that evidentiary role explicit.
+The revised title describes the response as “Tested in Galaxies and Clusters.” This retains the cross-system transfer test and its unfavorable result while avoiding an implication that the cluster application succeeded. The Introduction and Abstract make that evidentiary role explicit.
 
-**Location.** Revised manuscript pp. 2–4, Secs. II.B–II.C and II.F; p. 4, Sec. III.C; Tables I–II on p. 5; p. 6, Secs. IV.B–IV.C; and Figure 2 on p. 7. See also Supplement Sections S2.1, S4.5, and S6.
+**Location.** Revised manuscript pp. 2–4, Secs. II.B–II.C and II.F; p. 4, Sec. III.C; Tables I–II on p. 5; p. 6, Secs. IV.B–IV.C; and Figure 2 on p. 7.
 
 ### Galaxy sensitivity
 
@@ -79,7 +79,7 @@ The frozen 81-combination nuisance grid varies common stellar mass-to-light assu
 
 I additionally repeated the primary comparison with reported velocity-uncertainty weighting. The paired mean is \(+0.193\ {\rm km\,s^{-1}}\), with bootstrap 95% interval \([-0.177,+0.564]\), so this sensitivity likewise does not resolve a statistically significant aggregate difference; no equivalence margin was specified or tested. The mean contrast remains positive at 20%, 30%, and 40% bulge-contribution thresholds and when all 171 usable galaxies are included. These checks make the dependence on the 164-galaxy selection and the unweighted RMS choice explicit.
 
-**Location.** Revised manuscript p. 4, Sec. III.B; p. 5, Sec. IV.A; and Figure 1 on p. 7. See also Supplement Sections S4.2, S4.4, and S4.5.
+**Location.** Revised manuscript p. 4, Sec. III.B; p. 5, Sec. IV.A; and Figure 1 on p. 7.
 
 ## 3. Counterrotation is not a valid confirmation
 
@@ -93,7 +93,7 @@ I first retained one MaNGA observation per physical galaxy, choosing the lowest 
 
 **After.** The balanced result is reported as a null secondary diagnostic. Counterrotation is retained only as a proposed future discriminant.
 
-**Location.** Revised manuscript p. 4, Sec. III.D; p. 6, Sec. IV.E and Eq. (18); and Figure 4 on p. 8. See also Supplement Section S7.
+**Location.** Revised manuscript p. 4, Sec. III.D; p. 6, Sec. IV.E and Eq. (18); and Figure 4 on p. 8.
 
 **Remaining limitation.** The primary experiment still requires common forward modeling of MaNGA velocity and dispersion maps, including point-spread function, masks, inverse variance, inclination, and anisotropy, with complete galaxies held out.
 
@@ -116,7 +116,7 @@ The cluster section no longer presents the calibrated Fox comparison as independ
 | Fox holdouts as independent validation | within-catalog calibration stability |
 | counterrotation confirmed | matched secondary result consistent with zero |
 
-**Location.** Revised manuscript pp. 5–6, Secs. IV.A–IV.E; Figures 1–2 on p. 7; and Figure 4 on p. 8. See also Supplement Sections S4, S6, and S7.
+**Location.** Revised manuscript pp. 5–6, Secs. IV.A–IV.E; Figures 1–2 on p. 7; and Figure 4 on p. 8.
 
 ## 5. Cosmological context
 
@@ -147,11 +147,11 @@ The term “alternative” is now explicitly limited to a galaxy-scale empirical
 - uses a frozen nuisance grid rather than post-result assumption selection;
 - distinguishes cluster calibration from no-refit evaluation;
 - matches counterrotators and reports prespecified balance diagnostics; and
-- preserves residuals, sample membership, and procedures in the Supplement.
+- preserves residuals, sample membership, and procedures in machine-readable repository files.
 
 I have not claimed that these additions solve the need for a future joint covariance-bearing cluster likelihood or direct map-level counterrotation model. The manuscript identifies both as required next tests. I did not retain a statistician, and I do not represent an external statistical consultation as having occurred or promise one. Reproducible code is not a substitute for specialist judgment, but it makes the choices and calculations auditable: the repository preserves the object-level residuals, sample membership, random seeds, grouped resampling procedures, sensitivity grid, negative controls, and automated tests needed for replication. I respectfully ask that the statistical adequacy of the bounded claims be evaluated on those explicit procedures. If external consultation is made a mandatory condition, I cannot describe that condition as fulfilled; the manuscript therefore limits its conclusions to the analyses reported here.
 
-**Location.** Revised manuscript pp. 4–5, Secs. III.B–III.D and Table I; pp. 5–6, Secs. IV.A–IV.E; and pp. 8–9, Sec. V.E. See also Supplement Sections S4, S6, and S7.
+**Location.** Revised manuscript pp. 4–5, Secs. III.B–III.D and Table I; pp. 5–6, Secs. IV.A–IV.E; and pp. 8–9, Sec. V.E.
 
 ## 7. Defined future investigations and decision gates
 

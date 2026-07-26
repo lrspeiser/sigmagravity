@@ -2,7 +2,7 @@
 
 ## S1. Scope and reproducibility contract
 
-This Supplement accompanies “Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters.” It documents the equations, data roles, exclusions, grouped uncertainty procedures, statistical checks, and software regression status used in the manuscript.
+This Supplement accompanies “Σ-Gravity: A Coherence-Motivated Empirical Response Tested in Galaxies and Clusters.” It documents the equations, data roles, exclusions, grouped uncertainty procedures, statistical checks, and software regression status used in the manuscript.
 
 All repository-relative files cited below are available in the [public Σ-Gravity repository](https://github.com/lrspeiser/sigmagravity). The paths identify the corresponding uploaded machine-readable files and analysis code.
 

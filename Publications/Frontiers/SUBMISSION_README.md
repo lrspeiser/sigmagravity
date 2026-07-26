@@ -2,20 +2,20 @@
 
 ## Primary reviewer-continuity manuscript
 
-- `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.pdf` — compiled revised manuscript in the original two-column format with continuous line numbers
-- `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.tex` — authoritative line-numbered REVTeX source
-- `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.bbl` — compiled numbered bibliography
-- `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25_Source.zip` — self-contained LaTeX source bundle
+- `Reviewer_Continuity/SigmaGravity_FINAL_REVTeX_2026-07-26.pdf` — final compiled manuscript in the original two-column format with continuous line numbers
+- `Reviewer_Continuity/SigmaGravity_FINAL_REVTeX_2026-07-26.tex` — authoritative final line-numbered REVTeX source
+- `Reviewer_Continuity/SigmaGravity_FINAL_REVTeX_2026-07-26.bbl` — compiled numbered bibliography
+- `Reviewer_Continuity/SigmaGravity_FINAL_REVTeX_2026-07-26_Source.zip` — self-contained final LaTeX source bundle
 - `Reviewer_Continuity/figures/` — the four manuscript figures in vector PDF and 360-dpi PNG formats
 
-This is the recommended manuscript for resubmission. It is a 10-page, approximately 4,302-word proof that preserves the original two-column REVTeX appearance, US Letter page size, numbered citations, and major-section sequence, while adding continuous line numbers for peer review. The revision incorporates the analyses required by peer review while presenting the scientific results as a standalone paper.
+This is the recommended manuscript for resubmission. It is a 10-page, approximately 4,304-word proof that preserves the original two-column REVTeX appearance, US Letter page size, numbered citations, and major-section sequence, while adding continuous line numbers for peer review. The revision incorporates the analyses required by peer review while presenting the scientific results as a standalone paper.
 
 ## Optional Frontiers-template version
 
-- `SigmaGravity_Resubmission_2026-07-25.pdf` — compiled 17-page manuscript with line numbers
-- `SigmaGravity_Resubmission_2026-07-25.tex` — Frontiers Harvard LaTeX source
-- `SigmaGravity_Resubmission_2026-07-25.bib` — bibliography
-- `SigmaGravity_Resubmission_2026-07-25.md` — editable Markdown source
+- `SigmaGravity_FINAL_Manuscript_2026-07-26.pdf` — final compiled 17-page manuscript with line numbers
+- `SigmaGravity_FINAL_Manuscript_2026-07-26.tex` — final Frontiers Harvard LaTeX source
+- `SigmaGravity_FINAL_Manuscript_2026-07-26.bib` — bibliography
+- `SigmaGravity_FINAL_Manuscript_2026-07-26.md` — editable final Markdown source
 - `FrontiersinHarvard.cls`
 - `Frontiers-Harvard.bst`
 - `logo1.pdf`
@@ -29,10 +29,10 @@ This is the recommended manuscript for resubmission. It is a 10-page, approximat
 
 ## Reviewer responses
 
-- `Response_to_Reviewer_1_2026-07-25.md`
-- `Response_to_Reviewer_2_2026-07-25.md`
+- `Response_to_Reviewer_1_FINAL_2026-07-26.md`
+- `Response_to_Reviewer_2_FINAL_2026-07-26.md`
 
-The response files are formatted for copying into the interactive review forum. Their page, section, equation, table, and figure references correspond to `Reviewer_Continuity/SigmaGravity_Resubmission_REVTeX_2026-07-25.pdf`.
+The response files are formatted for copying into the interactive review forum. Their page, section, equation, table, and figure references correspond to `Reviewer_Continuity/SigmaGravity_FINAL_REVTeX_2026-07-26.pdf`. They refer only to the revised manuscript and do not require references to the Supplementary Material.
 
 ## Figures
 

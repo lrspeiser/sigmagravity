@@ -18,9 +18,9 @@ HERE = Path(__file__).resolve().parent
 RESUBMISSION = HERE.parent
 ROOT = RESUBMISSION.parents[1]
 TMP = ROOT / "tmp"
-MAIN_MD = RESUBMISSION / "SigmaGravity_Resubmission_2026-07-25.md"
+MAIN_MD = RESUBMISSION / "SigmaGravity_FINAL_Manuscript_2026-07-26.md"
 SUPP_MD = RESUBMISSION / "SigmaGravity_Supplementary_2026-07-25.md"
-MAIN_TEX = RESUBMISSION / "SigmaGravity_Resubmission_2026-07-25.tex"
+MAIN_TEX = RESUBMISSION / "SigmaGravity_FINAL_Manuscript_2026-07-26.tex"
 SUPP_TEX = RESUBMISSION / "SigmaGravity_Supplementary_2026-07-25.tex"
 
 
@@ -235,7 +235,7 @@ def build_main() -> None:
 \begin{{document}}
 \onecolumn
 \firstpage{{1}}
-\title[$\Sigma$-Gravity]{{$\Sigma$-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters}}
+\title[$\Sigma$-Gravity]{{$\Sigma$-Gravity: A Coherence-Motivated Empirical Response Tested in Galaxies and Clusters}}
 \author[\firstAuthorLast]{{\Authors}}
 \address{{}}
 \correspondance{{}}
@@ -281,7 +281,7 @@ The author thanks Emmanuel N. Saridakis, Rafael Ferraro, and Tiberiu Harko for e
 The Supplementary Material contains the full statistical procedures, identifiability audit, frozen dataset roles, software-regression commands, and machine-readable output manifest.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{SigmaGravity_Resubmission_2026-07-25}
+\bibliography{SigmaGravity_FINAL_Manuscript_2026-07-26}
 """
 
     content = "\n\n".join(
