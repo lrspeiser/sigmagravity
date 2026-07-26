@@ -151,7 +151,7 @@ The term “alternative” is therefore limited to a galaxy-scale empirical comp
 
 An external statistical consultation was not obtained, and I do not represent the Reviewer's requested consultation as completed. The revised manuscript therefore limits its claims to the object-grouped analyses described above and provides the residuals, sample definitions, random seeds, resampling procedures, sensitivity grid, negative controls, and automated tests needed for independent audit. I recognize that the Editor may still request specialist statistical review.
 
-**Location.** Revised manuscript pp. 4–5, Secs. III.B–III.D and Table I; pp. 5–6, Secs. IV.A–IV.E; and pp. 8–9, Sec. V.E.
+**Location.** Revised manuscript pp. 4–5, Secs. III.B–III.D and Table I; pp. 5–6, Secs. IV.A–IV.E; and p. 9, Sec. V.E.
 
 ## 7. Defined future investigations and decision gates
 
@@ -166,7 +166,7 @@ The revised manuscript now consolidates the unresolved work in Sec. V.E, “Stag
 
 Refracted Gravity remains a related published example of density- and geometry-dependent field behavior, not a derivation of Σ-Gravity. Any connection would be a separate theoretical and observational investigation.
 
-**Location.** Revised manuscript pp. 8–9, Sec. V.E, “Staged Future Investigations.”
+**Location.** Revised manuscript p. 9, Sec. V.E, “Staged Future Investigations.”
 
 ## 8. Figure-quality assessment
 

@@ -37,7 +37,7 @@ The final manuscript also gives the provenance of the fixed empirical choices. T
 
 **After.** Those claims are withdrawn. The title now says “A Coherence-Motivated Empirical Response Tested” rather than “Coherence-Dependent Gravitational Enhancement,” and coherence is described as a possible physical motivation requiring independent phase-space data and its own dynamical field equation.
 
-**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.D and Eqs. (4)–(11); pp. 3–4, Sec. II.F; pp. 7–8, Sec. V.B; and p. 8, Sec. V.D.
+**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.D and Eqs. (4)–(12); pp. 3–4, Sec. II.F; pp. 7–8, Sec. V.B; and p. 8, Sec. V.D.
 
 **Remaining limitation.** No covariant coherence field, relativistic completion, or first-principles source equation for \(B\) is claimed.
 
@@ -135,7 +135,7 @@ Median absolute acceleration differences are 5.19%, 4.88%, and 3.96%, with local
 
 **After.** The error is quantified and treated as a geometry-dependent model systematic.
 
-**Location.** Revised manuscript p. 3, Sec. II.E and Eq. (12); p. 6, Sec. IV.D; and Figure 3 on p. 8.
+**Location.** Revised manuscript p. 3, Sec. II.E and Eq. (13); p. 6, Sec. IV.D; and Figure 3 on p. 8.
 
 **Remaining limitation.** The three solutions use analytic reconstructions rather than full observed gas and bulge maps.
 
@@ -219,7 +219,7 @@ The revision also:
 - tests the actual photometric scale-length assignments against 2,000 galaxy-level permutations and a fixed-median negative control;
 - separates cluster calibration from no-refit evaluation;
 - groups radial cluster measurements by system;
-- reports matched covariate balance and a galaxy-bootstrap interval for counterrotation; and
+- reports matched covariate balance and a matched-set bootstrap interval for counterrotation; and
 - preserves split definitions and residuals in machine-readable files.
 
 **Before.** Point-level and unmatched comparisons supported stronger claims than their sampling structure allowed.
@@ -241,7 +241,7 @@ The revised manuscript now consolidates the unresolved work in Sec. V.E, “Stag
 
 These items are proposed tests with failure conditions, not additional results claimed by the present manuscript.
 
-**Location.** Revised manuscript pp. 8–9, Sec. V.E, “Staged Future Investigations.”
+**Location.** Revised manuscript p. 9, Sec. V.E, “Staged Future Investigations.”
 
 ## Closing response
 
