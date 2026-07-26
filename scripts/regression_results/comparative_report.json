@@ -1,6 +1,6 @@
 {
-  "timestamp": "2025-12-21T14:16:32.672851",
-  "mode": "extended_phi",
+  "timestamp": "2026-07-25T22:59:53.909799",
+  "mode": "baseline_only",
   "parameters": {
     "baseline": {
       "A_0": 1.17251960642002,
@@ -8,7 +8,7 @@
       "n_exp": 0.27
     },
     "new_model": {
-      "use_extended_phi": true,
+      "use_extended_phi": false,
       "phi_lambda_0": 7.0,
       "d_asymmetry_scale": 1.5,
       "d_tidal_threshold": 5.0
@@ -29,20 +29,20 @@
         }
       },
       "new_model": {
-        "value": 16.6688389739386,
+        "value": 16.365710299604682,
         "unit": "km/s",
         "details": {
           "D_stats": {
             "min": 0.0,
-            "max": 0.27951898001769454,
-            "mean": 0.10206100159436048,
-            "std": 0.0854429765170722,
-            "n_nonzero": 128
+            "max": 0.0,
+            "mean": 0.0,
+            "std": 0.0,
+            "n_nonzero": 0
           },
           "phi_stats": {
-            "min": 0.6915660840498937,
-            "max": 1.2989744351294827,
-            "mean": 0.9650183952328022
+            "min": 1.0,
+            "max": 1.0,
+            "mean": 1.0
           },
           "component_split": true
         }
@@ -183,11 +183,11 @@
         }
       },
       "new_model": {
-        "value": 1.5239686316916896,
+        "value": 1.6320490128970924,
         "unit": "x",
         "details": {
-          "D": 0.6,
-          "phi": 0.829
+          "D": 0.0,
+          "phi": 1.0
         }
       },
       "mond": {
@@ -202,7 +202,7 @@
           "note": "No boost"
         }
       },
-      "best_theory": "New Model",
+      "best_theory": "Baseline",
       "n_objects": 26500,
       "notes": "Chae 2023: 1.35x at >2000 AU"
     },
@@ -220,12 +220,12 @@
         }
       },
       "new_model": {
-        "value": 19.86633244639454,
+        "value": 20.769590891311665,
         "unit": "km/s",
         "details": {
-          "D": 0.36466875291905526,
-          "phi": 0.8960694054180692,
-          "Sigma": 5.046299508963864
+          "D": 0.0,
+          "phi": 1.0,
+          "Sigma": 5.5156094879458895
         }
       },
       "mond": {

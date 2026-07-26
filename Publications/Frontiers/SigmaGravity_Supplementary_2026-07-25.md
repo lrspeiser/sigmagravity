@@ -4,6 +4,8 @@
 
 This Supplement accompanies “Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters.” It documents the equations, data roles, exclusions, grouped uncertainty procedures, statistical checks, and software regression status used in the manuscript.
 
+All repository-relative files cited below are available in the [public Σ-Gravity repository](https://github.com/lrspeiser/sigmagravity). The paths identify the corresponding uploaded machine-readable files and analysis code.
+
 The primary analyses use the model defined in Equations (1)–(15) of the main manuscript. A secondary, no-refit photometric scale-length window is evaluated as a structural hypothesis; it is not promoted to the canonical response or used to retune the headline result.
 
 No result in this Supplement changes a calibration into validation. The roles are fixed as follows:
@@ -138,7 +140,7 @@ Variation with respect to \(\Phi_N\) gives
 \tag{S13}
 \]
 
-These equations establish an action embedding only for fixed or independently supplied \(B\). If \(B=B(\mathbf x,t)\) is a field, Equation (S11) is incomplete unless its kinetic and source terms are specified and it is varied. If \(B\) is calculated from predicted or observed velocities after solving the field equations, conservation cannot be claimed from the fixed-\(B\) action alone.
+These equations reproduce the prescribed response only for independently supplied, spatially constant \(B\). They are not an action or a dynamical-consistency result for the endogenous galaxy prescription. If \(B=B(\mathbf x,t)\) is a field, Equation (S11) is incomplete unless its kinetic, source, and backreaction terms are specified and it is varied. If \(B\) is calculated from predicted or observed velocities after solving the field equations, conservation cannot be claimed from the fixed-\(B\) action alone.
 
 Unit tests differentiate \(Q\) numerically and symbolically, test the dimensions of every public function, and verify the limits in Equations (S3)–(S4).
 
@@ -168,6 +170,14 @@ The production galaxy factor is obtained by fixed-point iteration:
 
 Observed velocities are not used in this iteration. They enter only when the residual is calculated.
 
+The fixed point is mathematically single valued. With \(x=V_\Sigma^2\), \(b=V_{\rm bar}^2\), \(s=\sigma^2\), and \(K=A_0h(g_N)\), Equation (6) becomes
+
+\[
+x^2+[s-b(1+K)]x-bs=0.
+\]
+
+For positive \(b\) and \(s\), the product of the two roots is \(-bs<0\), so exactly one root is positive. Initialization at \(V_{\rm bar}\) converges monotonically to that root and cannot select a second positive branch. The implementation stops when the largest velocity update is below \(10^{-6}\ {\rm km\,s^{-1}}\), with a limit of 50 iterations. All 2,745 primary points converged; the maximum was 26 iterations and the median galaxy-level maximum was 11 iterations.
+
 ### S4.2 Primary paired statistics
 
 For galaxy \(i\) with \(m_i\) retained radii,
@@ -186,7 +196,7 @@ where \(k\in\{\Sigma,{\rm MOND}\}\). The primary contrast is
 \tag{S16}
 \]
 
-Twenty thousand bootstrap samples draw 164 galaxies with replacement and recompute the mean contrast and the fraction with \(\Delta_i<0\). Radial points are not independently resampled. The sign-flip test multiplies each \(\Delta_i\) by an independent random sign under the paired null. The exact binomial test compares the observed number with \({\rm Binomial}(164,0.5)\).
+Twenty thousand bootstrap samples draw 164 galaxies with replacement and recompute the mean contrast and the fraction with \(\Delta_i<0\). Radial points are not independently resampled. The sign-flip test multiplies each \(\Delta_i\) by an independent random sign under the paired null. There are no exact RMS ties. The exact binomial test uses the null that either prescription has probability 0.5 of a strictly lower galaxy RMS and compares the observed count with \({\rm Binomial}(164,0.5)\).
 
 The unweighted per-galaxy RMS is primary because it gives every retained radius equal influence within a galaxy and every galaxy equal influence in the sample. As a secondary sensitivity, the reported velocity uncertainty \(s_{ij}\) defines
 
@@ -198,7 +208,7 @@ The unweighted per-galaxy RMS is primary because it gives every retained radius 
 \right]^{1/2}.
 \]
 
-The weighted mean RMS values are 15.8473 km s\(^{-1}\) for Σ-Gravity and 15.6544 km s\(^{-1}\) for MOND. Their paired mean difference is +0.1930 km s\(^{-1}\), with galaxy-bootstrap 95% interval [−0.1773, +0.5637] km s\(^{-1}\); the paired sign-flip \(p\)-value is 0.3132. The weighting choice therefore does not change the comparable-performance conclusion.
+The weighted mean RMS values are 15.8473 km s\(^{-1}\) for Σ-Gravity and 15.6544 km s\(^{-1}\) for MOND. Their paired mean difference is +0.1930 km s\(^{-1}\), with galaxy-bootstrap 95% interval [−0.1773, +0.5637] km s\(^{-1}\); the paired sign-flip \(p\)-value is 0.3132. The weighted analysis likewise does not resolve a statistically significant difference and is not an equivalence test.
 
 Primary results:
 
@@ -222,11 +232,11 @@ Primary results:
 | 2 (medium) | 57 | −0.238 km s\(^{-1}\) | 52.6% |
 | 3 (low) | 12 | −0.865 km s\(^{-1}\) | 66.7% |
 
-The strata were not used for tuning. Their variation reinforces the aggregate “comparable” conclusion rather than a superiority claim.
+The strata were not used for tuning. Their variation cautions against a superiority claim and does not establish equivalence.
 
 ### S4.4 Nuisance grid and ablation
 
-The 81 frozen combinations vary common stellar mass-to-light assumptions, distance scale, inclination offset, and \(A_0\). The mean paired contrast ranges from −3.286 to +2.779 km s\(^{-1}\), and 64.2% of combinations retain the sign of the central result. This grid is descriptive; it does not marginalize over a calibrated astrophysical likelihood.
+The submitted central configuration remains the primary result and was not selected from the grid. The 81 frozen combinations vary common stellar mass-to-light assumptions, distance scale, inclination offset, and \(A_0\). The mean paired contrast ranges from −3.286 to +2.779 km s\(^{-1}\), and 64.2% of combinations retain the sign of the central result. This grid is descriptive; it does not marginalize over a calibrated astrophysical likelihood.
 
 The acceleration-only ablation \(B=A_0\) gives mean RMS \(16.8823\ {\rm km\,s^{-1}}\). The full locked model improves the mean by \(0.5166\ {\rm km\,s^{-1}}\), with galaxy-bootstrap 95% interval [0.2420, 0.7945] km s\(^{-1}\). Because the factor uses \(V_\Sigma\), this is an equation ablation, not evidence for measured coherence.
 
@@ -239,7 +249,7 @@ The primary 30% bulge threshold is bracketed by stricter and looser cuts and by 
 | 40% bulge threshold | 166 | 2,850 | 16.6182 | 16.1768 | +0.4414 |
 | All valid points | 171 | 3,373 | 17.4155 | 17.1540 | +0.2615 |
 
-The mean contrast remains positive in each sample, while its magnitude varies. This sensitivity supports the bounded claim of comparable aggregate performance and shows that the 164-galaxy selection is not solely responsible for the conclusion.
+The mean contrast remains positive in each sample, while its magnitude varies. This sensitivity shows that the 164-galaxy selection is not solely responsible for the sign, but it neither establishes a significant aggregate difference nor equivalence.
 
 Machine-readable inputs and results:
 
@@ -259,7 +269,7 @@ V_{R_d}=V_{\rm bar}
 \sqrt{1+A_0W(r,R_d)h(g_N)}.
 \]
 
-The SPARC catalog value of \(R_d\) is used for each galaxy. No parameter is fitted, and the candidate replaces rather than multiplies the endogenous factor \(F(V_\Sigma)\). It therefore tests whether this specific photometric scale supplies the radial suppression already seen to be useful in the fixed-point ablation.
+The SPARC catalog value of \(R_d\) is used for each galaxy. The rational window and the scale \(R_d/(2\pi)\) are inherited literally from the submitted manuscript; they were not selected from alternative windows after inspecting the revision results, and no alternate form was screened in this reviewer-directed test. No parameter is fitted, and the candidate replaces rather than multiplies the endogenous factor \(F(V_\Sigma)\). It therefore tests whether this specific submitted photometric scale supplies the radial suppression already seen to be useful in the fixed-point ablation.
 
 | Comparison on 164 galaxies | Mean RMS difference | Galaxy-bootstrap 95% interval |
 |---|---:|---:|
@@ -287,9 +297,9 @@ The algebraic estimate \(\mathbf g\simeq Q_z\mathbf g_N\) is exact in spherical 
 \tag{S17}
 \]
 
-on an axisymmetric grid for analytic baryonic reconstructions representative of three SPARC systems. The comparison radius is expressed in units of the adopted disk scale length. Boundary and convergence checks are included in the research package.
+on a three-dimensional periodic FFT grid for axisymmetric analytic baryonic reconstructions representative of three SPARC systems. It maps the Σ response through \(Q_z=1+B h(g_N)\) with spatially constant \(B=1\). \(B\) is not recomputed from the numerical circular velocity, so this diagnostic tests the prescribed fixed-\(B\) response and not the endogenous galaxy prescription. The density is an exponential--\({\rm sech}^2\) disk with scale height \(0.2R_d\); the box half-width is \(8R_d\), the primary grid is \(65^3\), and the comparison spans \(0.75\le r/R_d\le5\). A \(49^3\)-to-\(65^3\) check for UGC05716 gives a median absolute acceleration change of 0.72% and a maximum of 3.67%. The reported percentages compare radial acceleration, not circular velocity.
 
-| Reconstruction | Median \(|V_{\rm alg}-V_{\rm num}|/V_{\rm num}\) | Maximum |
+| Reconstruction | Median \(|g_{\rm alg}-g_{\rm num}|/g_{\rm num}\) | Maximum |
 |---|---:|---:|
 | F574-2 | 5.19% | 20.54% |
 | UGC05716 | 4.88% | 18.30% |
@@ -299,7 +309,9 @@ These are not full reconstructions of the observed gas, disk, and bulge maps. Th
 
 Machine-readable output:
 
-- `research/reviewer_derivation_audit/results/qumond_axisym_validation.csv`
+- [`research/reviewer_derivation_audit/results/qumond_axisymmetric_residuals.csv`](https://github.com/lrspeiser/sigmagravity/blob/main/research/reviewer_derivation_audit/results/qumond_axisymmetric_residuals.csv)
+- [`research/reviewer_derivation_audit/results/qumond_axisymmetric_summary.json`](https://github.com/lrspeiser/sigmagravity/blob/main/research/reviewer_derivation_audit/results/qumond_axisymmetric_summary.json)
+- [`research/reviewer_derivation_audit/results/qumond_grid_convergence.csv`](https://github.com/lrspeiser/sigmagravity/blob/main/research/reviewer_derivation_audit/results/qumond_grid_convergence.csv)
 
 ## S6. Cluster calibration, profile evaluation, and uncertainty
 
@@ -332,7 +344,7 @@ Machine-readable input/output:
 
 ### S6.2 Tian/CLASH no-refit evaluation
 
-The public catalog provides cluster name, radius, \(\log g_{\rm bar}\), \(\log g_{\rm tot}\), and quoted standard errors. Obvious Fox overlaps were identified by normalized cluster names and removed before scoring. The resulting set contains 17 clusters and 73 measurements.
+The public catalog provides cluster name, radius, \(\log g_{\rm bar}\), \(\log g_{\rm tot}\), and quoted standard errors. The exclusion rule lowercases names, removes non-alphanumeric characters, maps full Abell names to `A` aliases and full MACS names to their four-digit aliases, and then requires exact equality with a Fox calibration name. It excludes MACS0416, MACS0717, and MACS1149. The resulting disjoint set contains 17 clusters and 73 measurements.
 
 For each point, the no-refit prediction uses \(B=8.4463\). Log residuals are
 
@@ -342,16 +354,16 @@ For each point, the no-refit prediction uses \(B=8.4463\). Log residuals are
 \tag{S20}
 \]
 
-Quoted uncertainties in both accelerations are retained in the machine table. Aggregate descriptive values are not interpreted as 73 independent clusters; leave-one-cluster-out calculations hold out complete systems.
+Quoted uncertainties in both accelerations are retained in the machine table. Aggregate descriptive values are not interpreted as 73 independent clusters. The radial trend fits \(\epsilon\) against \(\log_{10}(r/200\ {\rm kpc})\), weights by the propagated residual variance, and obtains its interval from 5,000 bootstrap samples of the 17 complete clusters. The submitted Fox calibration fixes \(B=8.4463\), \(h(g_N)\), and \(g^\dagger\); no CLASH quantity is used to alter them.
 
 | Radius | Median \(g_{\rm pred}/g_{\rm tot}\) |
 |---:|---:|
-| 100 kpc | 1.183 |
-| 200 kpc | 1.339 |
-| 400 kpc | 1.662 |
-| 600 kpc | 1.976 |
+| 100 kpc | 1.170 |
+| 200 kpc | 1.228 |
+| 400 kpc | 1.613 |
+| 600 kpc | 1.961 |
 
-Across all 73 measurements, the median ratio is 1.3175 and the RMS log residual is 0.1883 dex.
+Across all 73 measurements, the median ratio is 1.3175 and the RMS log residual is 0.1883 dex. The weighted radial slope is 0.1619 dex per dex, with cluster-bootstrap 95% interval [0.1146, 0.2168].
 
 No replacement amplitude or radial response is fitted in this no-refit analysis. The external catalog is used only to test whether the Fox calibration transfers without adjustment.
 
@@ -362,7 +374,7 @@ Machine-readable output:
 
 ## S7. Counterrotation matching
 
-The counterrotator list contains 66 cataloged systems. Sixty-two have complete fields for matching. Five controls per case are selected from the available comparison pool using the frozen matching procedure, producing 310 matches and 307 unique control galaxies.
+The counterrotator list contains 66 cataloged systems. Repeat MaNGA observations are reduced to one row per physical galaxy by retaining the entry with the lowest JAM \(\chi^2\), and 62 counterrotators then have complete fields for matching. Covariates are standardized on the combined eligible pool. A greedy Euclidean nearest-neighbor procedure processes the case with the largest nearest-control distance first and selects five controls per case without replacement and without a caliper. Completeness of matching and outcome fields, nonnegative quality flag, and positive \(R_e\) define eligibility; all 62 eligible cases remain. The result contains 310 matches and 310 unique control galaxies.
 
 Matched covariates are:
 
@@ -374,20 +386,20 @@ Matched covariates are:
 6. redshift; and
 7. JAM fit quality.
 
-The maximum absolute SMD declines from 0.684 before matching to 0.071 after matching. The secondary outcome is
+The maximum absolute SMD declines from 0.684 before matching to 0.066 after matching. The secondary outcome is
 
 \[
-\Delta f_{\rm DM}=-0.006897,
+\Delta f_{\rm DM}=-0.008061,
 \tag{S21}
 \]
 
-with galaxy-bootstrap 95% interval [−0.056728, +0.046560].
+with matched-set bootstrap 95% interval [−0.057668, +0.045266]. Each of 5,000 bootstrap draws resamples the 62 complete case sets and retains the mean of that case's five controls.
 
 Environment, merger indicators, map-level data-quality covariates, point-spread functions, and velocity/dispersion covariances are not present in the local catalog. The result is therefore not promoted to a direct theory test. The required primary experiment is a common map-level forward model with complete-galaxy cross-validation.
 
 Machine-readable output:
 
-- `research/reviewer_derivation_audit/results/counterrotation_matches.csv`
+- `research/reviewer_derivation_audit/results/counterrotation_matched_controls.csv`
 - `research/reviewer_derivation_audit/results/counterrotation_smd_before.csv`
 - `research/reviewer_derivation_audit/results/counterrotation_smd_after.csv`
 - `research/reviewer_derivation_audit/results/counterrotation_readiness.json`
@@ -404,7 +416,7 @@ python -m pytest -q research/reviewer_derivation_audit/tests `
   Publications/Frontiers/scripts/test_sparc_scale_length_sensitivity.py
 ```
 
-Result: **24 passed, 0 failed, 0 errors**.
+Result: **27 passed, 0 failed, 0 errors**.
 
 ### S8.2 Main reproducible analyses
 

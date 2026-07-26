@@ -112,6 +112,7 @@ def greedy_match_controls(
 
 
 def _bootstrap_secondary_effect(case_values, matched_control_values, seed=20260718):
+    """Resample complete matched case sets, retaining each five-control mean."""
     rng = np.random.default_rng(seed)
     differences = np.asarray(case_values) - np.asarray(matched_control_values)
     bootstrap = np.array(
@@ -133,6 +134,13 @@ def counterrotation_readiness(counterrotator_path, jam_path):
     required = MATCH_FEATURES + ["fdm_Re_secondary", "mangaid", "plateifu"]
     eligible = jam.replace([np.inf, -np.inf], np.nan).dropna(subset=required).copy()
     eligible = eligible[(eligible["quality_flag"] >= 0) & (eligible["Re_kpc"] > 0)]
+    # MaNGA contains repeat observations. Retain one row per physical galaxy so
+    # a control cannot enter twice under different plate-IFU identifiers.
+    eligible = (
+        eligible.sort_values(["mangaid", "jam_chi2_dof", "plateifu"])
+        .drop_duplicates("mangaid", keep="first")
+        .reset_index(drop=True)
+    )
     cases = eligible[eligible["is_counterrotator"]].reset_index(drop=True)
     controls = eligible[~eligible["is_counterrotator"]].reset_index(drop=True)
     matches = greedy_match_controls(cases, controls)
@@ -175,6 +183,16 @@ def counterrotation_readiness(counterrotator_path, jam_path):
         "counterrotators_with_complete_JAM_matching_fields": int(len(cases)),
         "matched_controls": int(len(matches)),
         "unique_matched_controls": int(matches["control_mangaid"].nunique()),
+        "matching_method": (
+            "greedy Euclidean nearest-neighbor matching on jointly standardized covariates; "
+            "five controls per case; hardest case first; without replacement; no caliper"
+        ),
+        "repeat_observation_rule": "retain the lowest-JAM-chi2 row per MaNGA galaxy",
+        "common_support_exclusions": (
+            "complete matching and outcome fields, nonnegative quality flag, and positive Re; "
+            "no additional common-support trimming was imposed; all 62 eligible cases were matched"
+        ),
+        "bootstrap_unit": "62 complete matched case sets, each retaining its five-control mean",
         "maximum_absolute_SMD_after_matching": max_after_smd,
         "balanced_at_abs_SMD_below_0_1": bool(max_after_smd < 0.1),
         "direct_DAP_maps_present": direct_maps_present,

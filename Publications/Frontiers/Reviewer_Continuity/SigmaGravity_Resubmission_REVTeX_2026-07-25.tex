@@ -29,12 +29,12 @@
 \date{July 25, 2026}
 
 \begin{abstract}
-The dynamics of galaxies and galaxy clusters exceed the predictions obtained from directly observed baryonic matter, a discrepancy conventionally modeled with nonbaryonic dark matter or, at galaxy scales, phenomenological modifications such as modified Newtonian dynamics (MOND). We investigate $\Sigma$-Gravity as an alternative nonrelativistic phenomenological parameterization of selected missing-mass observations. Its empirical response is $\Sigma(g_N,B)=1+B h(g_N)$, where $h(g_N)=\sqrt{g^\dagger/g_N}\,g^\dagger/(g^\dagger+g_N)$ and $g^\dagger=cH_0/(4\sqrt{\pi})$; the locked galaxy implementation supplements this acceleration dependence with a bounded factor motivated by rotational support. For a disk-dominated sample of 164 SPARC galaxies, using fixed stellar mass-to-light ratios and no per-galaxy halo fitting, the mean velocity root-mean-square residual is $16.366\ {\rm km\,s^{-1}}$ for $\Sigma$-Gravity and $16.056\ {\rm km\,s^{-1}}$ for the MOND prescription tested with the same baryonic inputs. Their paired difference is statistically consistent with comparable aggregate performance. Relative to the acceleration-only form, the bounded factor improves the mean RMS by $0.517\ {\rm km\,s^{-1}}$, with a galaxy-bootstrap 95\% interval of $[0.242,0.795]\ {\rm km\,s^{-1}}$. Thus the factor makes a measurable contribution within the locked predictor, although its endogenous construction does not establish independently measured coherence. The cluster exercise is secondary and illustrative: 42 Fox et al. strong-lensing systems determine one effective amplitude under a simplified baryon proxy, while a no-refit check using 73 radial measurements in 17 non-overlapping CLASH clusters gives a median predicted-to-observed ratio of 1.32 and reveals a radius-dependent bias. The Fox normalization therefore does not transfer as a universal cluster law under the present assumptions. An action-based QUMOND embedding exists for independently specified $B$. Together, these results identify a low-parameter galaxy response competitive with MOND and expose a falsifiable limitation of its fixed cluster amplitude. The physical origin of $B$, including possible kinematic coherence or another property of baryonic organization, remains open; no relativistic or cosmological extension is developed here.
+The dynamics of galaxies and galaxy clusters exceed the predictions obtained from directly observed baryonic matter, a discrepancy conventionally modeled with nonbaryonic dark matter or, at galaxy scales, phenomenological modifications such as modified Newtonian dynamics (MOND). We investigate $\Sigma$-Gravity as an alternative nonrelativistic phenomenological parameterization of selected missing-mass observations. Its empirical response is $\Sigma(g_N,B)=1+B h(g_N)$, where $h(g_N)=\sqrt{g^\dagger/g_N}\,g^\dagger/(g^\dagger+g_N)$ and $g^\dagger=cH_0/(4\sqrt{\pi})$; the locked galaxy implementation supplements this acceleration dependence with a bounded factor motivated by rotational support. For a disk-dominated sample of 164 SPARC galaxies, using fixed stellar mass-to-light ratios and no per-galaxy halo fitting, the mean velocity root-mean-square residual is $16.366\ {\rm km\,s^{-1}}$ for $\Sigma$-Gravity and $16.056\ {\rm km\,s^{-1}}$ for the MOND prescription tested with the same baryonic inputs. The paired analysis does not resolve a statistically significant difference between these prescriptions under the tested assumptions. Relative to the acceleration-only form, the bounded factor improves the mean RMS by $0.517\ {\rm km\,s^{-1}}$, with a galaxy-bootstrap 95\% interval of $[0.242,0.795]\ {\rm km\,s^{-1}}$. Thus the factor makes a measurable contribution within the locked predictor, although its endogenous construction does not establish independently measured coherence. The cluster exercise is secondary and illustrative: 42 Fox et al. strong-lensing systems determine one effective amplitude under a simplified baryon proxy, while a no-refit check using 73 radial measurements in 17 non-overlapping CLASH clusters gives a median predicted-to-observed ratio of 1.32 and reveals a radius-dependent bias. The Fox normalization therefore does not transfer as a universal cluster law under the present assumptions. An auxiliary QUMOND action reproduces the response for independently prescribed, spatially constant $B$, but not the endogenous galaxy prescription. Together, these results identify a low-parameter galaxy response whose aggregate difference from the tested MOND prescription is unresolved and expose a falsifiable limitation of its fixed cluster amplitude. The physical origin of $B$, including possible kinematic coherence or another property of baryonic organization, remains open; no relativistic or cosmological extension is developed here.
 \end{abstract}
 
 \maketitle
 
-\noindent\textit{Manuscript ID 1866133; 3,769 words; 4 figures; 2 tables.}
+\noindent\textit{Manuscript ID 1866133; 4,115 words; 4 figures; 2 tables.}
 
 \section{Introduction}
 
@@ -54,11 +54,11 @@ The observations analyzed here identify the combined response amplitude $B$, rat
 
 \subsection{Relation to Previous Work}
 
-The response retains a QUMOND-like nonrelativistic architecture \cite{ref6}, for which an action embedding is given below when $B$ is independently specified. The acceleration scale $g^\dagger\sim cH_0$ is treated as a fixed phenomenological choice. At galaxy scale, the central empirical questions are whether the locked low-parameter response remains competitive with a specified MOND prescription under common baryonic assumptions and whether its bounded factor contributes beyond the acceleration-only form.
+This study defines the empirical response and its identifiable parameters, measures the contribution of the bounded galaxy factor through an acceleration-only ablation, gives an auxiliary fixed-$B$ QUMOND construction, compares the locked galaxy predictor with MOND under common baryonic assumptions, and distinguishes cluster calibration from a no-refit external transfer-failure test. The cluster analysis is retained to expose a limitation, not as a successful application. These analyses preserve a falsifiable phenomenology while specifying what a deeper theory would need to derive.
 
 \subsection{Paper Organization}
 
-Section II defines the empirical response, its identifiable parameters, and a nonrelativistic action embedding. Section III describes the SPARC, cluster, and counterrotation analyses. Section IV reports the results while separating calibration from no-refit evaluation. Section V discusses interpretation and scope, and Section VI summarizes the conclusions.
+Section II defines the empirical response, its identifiable parameters, and an auxiliary fixed-$B$ action. Section III describes the SPARC, cluster, and counterrotation analyses. Section IV reports the results while separating calibration from no-refit evaluation. Section V discusses interpretation and scope, and Section VI summarizes the conclusions.
 
 \medskip\hrule\medskip
 
@@ -118,17 +118,17 @@ The form $F=V^2/(V^2+\sigma^2)$ is the simplest bounded ratio suggested by an or
 
 The formula was developed with SPARC as its principal galaxy benchmark before submission. Here ``locked'' means that Eqs.~(\ref{eq:sigma}), (\ref{eq:h}), (\ref{eq:F}), and (\ref{eq:galaxy}) and their constants were not re-optimized in response to the reviews and that no per-galaxy response parameter is fitted. It does not mean that SPARC is a prospectively registered or external validation sample. The new scale-length, nuisance, ablation, and weighting calculations are retrospective sensitivity tests of the submitted predictor.
 
-The iteration uses $V_\Sigma$, not the observed velocity, and therefore does not directly fit the observed outcome. However, $F(V_\Sigma)$ is endogenous to the prediction rather than an independently measured phase-space quantity. It is treated as a phenomenological regularizer, not as a measured covariant coherence scalar.
+The iteration uses $V_\Sigma$, not the observed velocity, and therefore does not directly fit the observed outcome. However, $F(V_\Sigma)$ is endogenous to the prediction rather than an independently measured phase-space quantity. It is treated as a phenomenological regularizer, not as a measured covariant coherence scalar. Writing $x=V_\Sigma^2$, $b=V_{\rm bar}^2$, and $K=A_0h(g_N)$ reduces the fixed point to $x^2+[\sigma^2-b(1+K)]x-b\sigma^2=0$. The product of its roots is negative, so there is exactly one positive physical solution. Initialization at $V_{\rm bar}$ reached the $10^{-6}\ {\rm km\,s^{-1}}$ tolerance for all 2,745 retained points within 26 iterations; no alternative branch is selected by initialization.
 
 The locked predictor in Eq.~(\ref{eq:galaxy}) does not use the catalog photometric scale length $R_d$. As a separate no-refit structural sensitivity, we test
 \[
 W(r,R_d)=\frac{r}{R_d/(2\pi)+r},\qquad B_{R_d}=A_0W(r,R_d),
 \]
-using each galaxy's catalog $R_d$ while holding all other choices fixed. This candidate replaces $F(V_\Sigma)$; it is not multiplied by it and does not alter the headline locked result. The reference length $L_0$ and exponent $n$ do not enter either galaxy calculation. A second velocity moment can schematically be decomposed in a stationary axisymmetric system as $\langle v^2\rangle\simeq v_{\rm rot}^2+\sigma^2$, but that frame-dependent statement is not a covariant derivation of Eq.~(\ref{eq:F}). No general covariant reduction is claimed.
+using each galaxy's catalog $R_d$ while holding all other choices fixed. This is the literal window and $R_d/(2\pi)$ scale proposed in the submitted manuscript, not a function selected after inspecting the revision results; no alternate windows were screened for this reviewer-directed sensitivity. This candidate replaces $F(V_\Sigma)$; it is not multiplied by it and does not alter the headline locked result. The reference length $L_0$ and exponent $n$ do not enter either galaxy calculation. A second velocity moment can schematically be decomposed in a stationary axisymmetric system as $\langle v^2\rangle\simeq v_{\rm rot}^2+\sigma^2$, but that frame-dependent statement is not a covariant derivation of Eq.~(\ref{eq:F}). No general covariant reduction is claimed.
 
-\subsection{Nonrelativistic Action Embedding}
+\subsection{Auxiliary Fixed-$B$ QUMOND Action}
 
-An action-based embedding can be written in the QUMOND framework \cite{ref6} when $B$ is independently specified. Define
+An auxiliary action can be written in the QUMOND framework \cite{ref6} when $B$ is independently prescribed and spatially constant. Define
 \begin{equation}
 z=\frac{|\nabla\Phi_N|^2}{(g^\dagger)^2}
 \label{eq:z}
@@ -157,7 +157,7 @@ together with the matter coupling $-\rho_b\Phi$, gives by variation
 \nabla^2\Phi=\nabla\cdot\left[Q_z\nabla\Phi_N\right].
 \label{eq:fields}
 \end{equation}
-This is a nonrelativistic action embedding of the fixed-$B$ response. Equation~(\ref{eq:action}) is not an action for the endogenous rotational-support prescription in Eq.~(\ref{eq:galaxy}), and it does not derive $B$. If $B$ is promoted to a dynamical field, its kinetic and source terms, Euler--Lagrange equation, and backreaction are required. Noether conservation follows for a closed action with the relevant symmetries and all dynamical fields varied; it cannot be inferred by inserting a value of $B$ from observed or predicted kinematics after variation.
+This auxiliary construction reproduces the nonrelativistic response for prescribed, spatially constant $B$. Equation~(\ref{eq:action}) is not an action for the endogenous rotational-support prescription in Eq.~(\ref{eq:galaxy}), does not derive $B$, and does not establish conservation or dynamical consistency for that prescription. If $B$ is promoted to a dynamical field, its kinetic and source terms, Euler--Lagrange equation, and backreaction are required. Noether conservation follows for a closed action with the relevant symmetries and all dynamical fields varied; it cannot be inferred by inserting a value of $B$ from observed or predicted kinematics after variation.
 
 \subsection{Algebraic Approximation}
 
@@ -167,11 +167,11 @@ g_{\rm eff}\simeq\Sigma g_N,\qquad
 V_\Sigma\simeq V_{\rm bar}\sqrt{\Sigma}.
 \label{eq:algebraic}
 \end{equation}
-This relation is not exact for a general nonspherical mass distribution because Eq.~(\ref{eq:fields}) contains a curl-field contribution. We compare it below with numerical axisymmetric QUMOND solutions for three analytic disk reconstructions. The comparison quantifies approximation error; it is not a validation of exact SPARC geometries.
+This relation is not exact for a general nonspherical mass distribution because Eq.~(\ref{eq:fields}) contains a curl-field contribution. We compare the algebraic acceleration with numerical solutions of the fixed-$B$ QUMOND equation for three analytic axisymmetric disk reconstructions. The diagnostic uses spatially constant $B=1$ and does not recompute the endogenous factor from the numerical circular velocity. A three-dimensional periodic FFT solver uses a $65^3$ grid, a box half-width of $8R_d$, and an exponential--${\rm sech}^2$ disk with scale height $0.2R_d$; the comparison spans $0.75\le r/R_d\le5$. A $49^3$-to-$65^3$ check gives 0.72\% median and 3.67\% maximum acceleration change. The comparison quantifies fixed-response geometry error; it is not a validation of the endogenous prescription or exact SPARC geometries.
 
 \subsection{Path Length, Lensing, and Compact Sources}
 
-Writing the Fox response through a path-length power law assigns every system $L=600$ kpc. Consequently that sample identifies one effective cluster amplitude, not the exponent of a general path-length functional. No unique operational definition of $L$ for an arbitrary three-dimensional baryonic distribution is supplied here. Because the available data do not identify a general path-length functional, it has been removed from the canonical response rather than replaced by a more flexible fitted law; path length is retained only as a hypothesis.
+Writing the Fox response through a path-length power law assigns every system $L=600$ kpc. Consequently that sample identifies one effective cluster amplitude, not the exponent of a general path-length functional. I could not supply a unique operational definition of $L$ for an arbitrary three-dimensional baryonic distribution. I therefore removed $A(L)$ from the predictive response and removed conclusions that used it to connect disks and clusters, rather than replacing it with a more flexible fitted law; path length is retained only as a hypothesis.
 
 The nonrelativistic action determines neither photon propagation nor the two relativistic metric potentials. Equality between a phenomenological dynamical mass and a lensing mass is therefore a closure assumption, not a derived prediction. At Solar-System accelerations $h(g_N)$ is small, but this is not a parameterized post-Newtonian calculation and does not derive the assumption that a compact source has no additional response. Equivalence-principle, post-Newtonian, lensing-slip, and gravitational-wave behavior remain open.
 
@@ -236,7 +236,7 @@ a_0&=1.2\times10^{-10}\ {\rm m\,s^{-2}}.&&
 \end{aligned}
 \label{eq:mond}
 \end{equation}
-For each galaxy, we calculate an unweighted velocity RMS residual for $\Sigma$-Gravity and MOND. This gives each retained radius equal weight within a galaxy and each galaxy equal weight in the sample; a secondary calculation weights radial residuals by the reported velocity uncertainties. Galaxies, not radial measurements, are the independent resampling units. Uncertainty intervals use 20,000 galaxy-bootstrap resamples. We use an exact binomial comparison of the fraction of galaxies for which each model has lower RMS and a paired sign-flip test of the mean RMS difference. The scale-length sensitivity uses catalog $R_d$ without fitting, plus 2,000 galaxy-level assignment permutations and a fixed-median negative control.
+For each galaxy, we calculate an unweighted velocity RMS residual for $\Sigma$-Gravity and MOND. This gives each retained radius equal weight within a galaxy and each galaxy equal weight in the sample; a secondary calculation weights radial residuals by the reported velocity uncertainties. Galaxies, not radial measurements, are the independent resampling units. Uncertainty intervals use 20,000 galaxy-bootstrap resamples. We use an exact binomial comparison of the fraction of galaxies for which each model has lower RMS, with no ties in the primary result and null probability 0.5, and a paired sign-flip test of the mean RMS difference. The scale-length sensitivity uses catalog $R_d$ without fitting, plus 2,000 galaxy-level assignment permutations and a fixed-median negative control.
 
 The frozen nuisance grid contains 81 combinations of common disk and bulge mass-to-light ratios, a global distance scale, a global inclination offset, and the $A_0$ normalization. A separate diagnostic varies $\sigma$ from 10 to $50\ {\rm km\,s^{-1}}$. These are sensitivity analyses, not fitted alternatives.
 
@@ -249,11 +249,11 @@ M_b(<200\ {\rm kpc})=0.4\times0.15\,M_{500}.
 \end{equation}
 The factor 0.4 is a simplified baryon-concentration prescription rather than a measured gas-plus-stellar profile and provides a reproducible baseline for the Fox calibration. The calibrated cluster amplitude is $B_{\rm Fox}=8.446$. Writing this amplitude through a power law with $L=600$ kpc for every cluster does not identify a path-length exponent because $L$ does not vary within the sample. Repeated train/test splits within Fox refit the same catalog and are described only as calibration-stability checks.
 
-The no-refit radial check uses the Tian et al. CLASH radial-acceleration catalog \cite{ref9}. After removing three clusters with obvious Fox overlap, it contains 73 measurements in 17 clusters, with quoted uncertainties in $\log g_{\rm bar}$ and $\log g_{\rm tot}$. The Fox-calibrated $B_{\rm Fox}$ is frozen before comparison. Residual summaries group repeated radii by cluster.
+The no-refit radial check uses the Tian et al. CLASH radial-acceleration catalog \cite{ref9}. Cluster names are lowercased, stripped of non-alphanumeric characters, normalized for Abell and MACS aliases, and excluded only on exact equality with a Fox calibration name. This rule excludes MACS0416, MACS0717, and MACS1149, leaving 73 measurements in 17 clusters. The submitted Fox-calibrated $B_{\rm Fox}=8.446$, $h(g_N)$, and $g^\dagger$ are frozen before comparison. Repeated radii are retained within cluster and complete clusters are resampled for uncertainty; a weighted trend of log residual against $\log_{10}(r/200\ {\rm kpc})$ uses 5,000 cluster-bootstrap draws.
 
 \subsection{Counterrotation Diagnostic}
 
-The counterrotator catalog is based on the MaNGA sample of Bevacqua et al. \cite{ref10}, and the secondary dynamical quantities are drawn from MaNGA DynPop \cite{ref11}. Sixty-two counterrotating systems with complete matching fields were matched to 310 controls on stellar mass, physical size, S\'ersic index, axis ratio, inclination, redshift, and JAM fit quality. Balance was assessed with the absolute standardized mean difference (SMD), using 0.1 as the prespecified threshold.
+The counterrotator catalog is based on the MaNGA sample of Bevacqua et al. \cite{ref10}, and the secondary dynamical quantities are drawn from MaNGA DynPop \cite{ref11}. Repeat observations are reduced to one row per galaxy by retaining the lowest-JAM-$\chi^2$ entry. Sixty-two counterrotating systems with complete fields are matched to five unique controls each on stellar mass, physical size, S\'ersic index, axis ratio, inclination, redshift, and JAM fit quality. The greedy Euclidean nearest-neighbor procedure standardizes covariates on the combined pool, processes the hardest case first, uses no replacement and no caliper, and retains all 62 eligible cases. Balance is assessed with the absolute standardized mean difference (SMD), using 0.1 as the prespecified threshold. Bootstrap samples resample the 62 complete matched sets while retaining each five-control mean.
 
 The compared outcome, $f_{\rm DM}(<R_e)$, is inferred within a Newtonian JAM/NFW model. It is not a direct observable and is retained only as a secondary diagnostic. A direct test would require common forward modeling of MaNGA velocity and dispersion maps with complete galaxies held out.
 
@@ -268,21 +268,21 @@ For 164 galaxies and 2,745 disk-dominated radial points, the mean galaxy RMS is 
 \Delta_i={\rm RMS}_{\Sigma,i}-{\rm RMS}_{{\rm MOND},i}.
 \label{eq:delta}
 \end{equation}
-Its galaxy-weighted mean is $+0.309\ {\rm km\,s^{-1}}$, with bootstrap 95\% interval $[-0.040,+0.659]\ {\rm km\,s^{-1}}$. $\Sigma$-Gravity has lower RMS for 71 of 164 galaxies, or 43.3\%, with exact two-sided binomial $p=0.101$. The paired sign-flip value is $p=0.088$. The prescriptions therefore show comparable aggregate performance; neither analysis establishes superiority.
+Its galaxy-weighted mean is $+0.309\ {\rm km\,s^{-1}}$, with bootstrap 95\% interval $[-0.040,+0.659]\ {\rm km\,s^{-1}}$. $\Sigma$-Gravity has lower RMS for 71 of 164 galaxies, or 43.3\%. There are no exact ties; the two-sided exact binomial test uses null probability 0.5 and gives $p=0.101$. The paired sign-flip value is $p=0.088$. The analysis therefore does not resolve a statistically significant difference between the prescriptions under the tested assumptions; no equivalence or noninferiority claim is made.
 
 Across the 81 frozen nuisance combinations, including common changes in $A_0$, the mean paired contrast ranges from $-3.286$ to $+2.779\ {\rm km\,s^{-1}}$ and retains the central sign in 64.2\% of cases. Changing $\sigma$ from the submitted 20 km s$^{-1}$ to 10, 30, and 50 km s$^{-1}$ gives mean $\Sigma$-Gravity RMS values of 16.695, 16.347, and 17.600 km s$^{-1}$, respectively, compared with 16.366 km s$^{-1}$ at 20 km s$^{-1}$. The 30 km s$^{-1}$ value is only 0.019 km s$^{-1}$ lower than the submitted choice, and no alternative is selected. All four $\sigma$ choices retain a positive mean $\Sigma$-minus-MOND contrast. These sensitivities show that the fixed choices are not uniquely identified. Replacing Eq.~(\ref{eq:galaxy}) with the acceleration-only form $B=A_0$ gives a mean RMS of $16.882\ {\rm km\,s^{-1}}$. The locked endogenous factor improves the mean RMS by $0.517\ {\rm km\,s^{-1}}$, with bootstrap 95\% interval $[0.242,0.795]\ {\rm km\,s^{-1}}$. This is an internal ablation of the empirical equation, not evidence for an independently measured coherence effect.
 
-Uncertainty weighting gives mean RMS values of $15.847$ and $15.654\ {\rm km\,s^{-1}}$ for $\Sigma$-Gravity and MOND, respectively, with paired mean $+0.193\ {\rm km\,s^{-1}}$ and 95\% interval $[-0.177,+0.564]\ {\rm km\,s^{-1}}$. The mean $\Sigma$-minus-MOND contrast remains positive at 20\%, 30\%, and 40\% bulge thresholds and in the all-valid-points sample. These checks preserve the comparable-performance conclusion.
+Uncertainty weighting gives mean RMS values of $15.847$ and $15.654\ {\rm km\,s^{-1}}$ for $\Sigma$-Gravity and MOND, respectively, with paired mean $+0.193\ {\rm km\,s^{-1}}$ and 95\% interval $[-0.177,+0.564]\ {\rm km\,s^{-1}}$. The mean $\Sigma$-minus-MOND contrast remains positive at 20\%, 30\%, and 40\% bulge thresholds and in the all-valid-points sample. These checks likewise do not resolve a statistically significant aggregate difference.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figure_1_sparc_paired.pdf}
-\caption{\label{fig:sparc}Locked SPARC comparison and nuisance sensitivity. Left: per-galaxy velocity RMS for $\Sigma$-Gravity and the tested MOND prescription. Center: distribution of the paired contrast; its 95\% galaxy-bootstrap interval includes zero. Right: mean contrast for the 81 frozen nuisance combinations. Negative values favor $\Sigma$-Gravity and positive values favor MOND.}
+\caption{\label{fig:sparc}Locked SPARC comparison and nuisance sensitivity. Left: per-galaxy velocity RMS for $\Sigma$-Gravity and the tested MOND prescription. Center: distribution of the paired contrast; its 95\% galaxy-bootstrap interval includes zero. Right: mean contrast for the 81 frozen nuisance combinations. Negative values favor $\Sigma$-Gravity and positive values favor MOND. Neither the primary paired interval nor this sensitivity grid establishes a statistically significant difference or equivalence.}
 \end{figure*}
 
 \subsection{Photometric Scale-Length Hypothesis}
 
-The catalog-scale-length candidate gives mean galaxy RMS $16.513\ {\rm km\,s^{-1}}$, compared with $16.366\ {\rm km\,s^{-1}}$ for the locked predictor. Their paired difference is $+0.147\ {\rm km\,s^{-1}}$, with bootstrap 95\% interval $[-0.088,+0.385]\ {\rm km\,s^{-1}}$. The candidate improves on the acceleration-only ablation by $0.370\ {\rm km\,s^{-1}}$ but is worse than the tested MOND prescription by $0.456\ {\rm km\,s^{-1}}$.
+The catalog-scale-length candidate gives mean galaxy RMS $16.513\ {\rm km\,s^{-1}}$, compared with $16.366\ {\rm km\,s^{-1}}$ for the locked predictor. Their paired difference is $+0.147\ {\rm km\,s^{-1}}$, with bootstrap 95\% interval $[-0.088,+0.385]\ {\rm km\,s^{-1}}$; this does not resolve a statistically significant paired difference and is not an equivalence test. The candidate improves on the acceleration-only ablation by $0.370\ {\rm km\,s^{-1}}$ but is worse than the tested MOND prescription by $0.456\ {\rm km\,s^{-1}}$.
 
 The actual catalog assignments do not outperform random reassignment (one-sided $p=0.711$), and a common median $R_d=2.3$ kpc gives a lower mean RMS of $16.413\ {\rm km\,s^{-1}}$. Thus radial suppression is useful relative to the acceleration-only response, but this test does not support measured photometric scale length as its controlling variable. Equation~(\ref{eq:galaxy}) is retained as the locked predictor.
 
@@ -290,39 +290,39 @@ The actual catalog assignments do not outperform random reassignment (one-sided 
 
 For continuity with the submitted analysis, Eq.~(\ref{eq:clusterbaryon}) is used to calibrate the common cluster response on the 42 Fox systems, giving a median predicted-to-observed mass ratio of 0.987 and a scatter of 0.132 dex. Because the amplitude and simplified baryon proxy are inseparable in this calculation, the exercise is retained only as an illustrative in-sample calibration. Varying the 0.4 concentration factor by 25\% changes the predicted mass ratio by approximately 30\%, so the calibrated amplitude cannot be separated from the assumed baryonic aperture mass.
 
-With $B_{\rm Fox}=8.446$ held fixed, the 73 measurements in 17 non-overlapping CLASH clusters give a median predicted-to-observed ratio of 1.318 and an RMS residual of 0.188 dex. Median ratios are 1.18 at 100 kpc, 1.34 at 200 kpc, 1.66 at 400 kpc, and 1.98 at 600 kpc. Thus the Fox-calibrated amplitude increasingly overpredicts the profile at larger radius under the present baryonic and lensing assumptions. This no-refit result does not identify a replacement amplitude or cluster formula; it shows that the calibrated amplitude does not transfer without radial bias under the present assumptions.
+With $B_{\rm Fox}=8.446$ held fixed, the 73 measurements in 17 non-overlapping CLASH clusters give a median predicted-to-observed ratio of 1.318 and an RMS residual of 0.188 dex. Disjoint-sample median ratios are 1.17 at 100 kpc, 1.23 at 200 kpc, 1.61 at 400 kpc, and 1.96 at 600 kpc. The weighted log-residual slope is 0.162 dex per dex in radius, with a 5,000-draw cluster-bootstrap 95\% interval $[0.115,0.217]$. Thus the Fox-calibrated amplitude increasingly overpredicts the profile at larger radius under the present baryonic and lensing assumptions. This no-refit result does not identify a replacement amplitude or cluster formula; it shows that the calibrated amplitude does not transfer without radial bias under the present assumptions.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figure_2_cluster_roles.pdf}
-\caption{\label{fig:clusters}Illustrative cluster calibration and no-refit radial evaluation. Left: the 42 Fox clusters under the simplified baryon proxy and calibrated $B_{\rm Fox}$; this is illustrative in-sample calibration. Right: 73 Tian/CLASH radial measurements in 17 clusters with $B_{\rm Fox}$ frozen. The systematic increase with radius shows that the fixed Fox-calibrated amplitude does not transfer without bias under the present baryonic and lensing assumptions.}
+\caption{\label{fig:clusters}Illustrative cluster calibration and no-refit radial evaluation. Left: the 42 Fox clusters under the simplified baryon proxy and calibrated $B_{\rm Fox}$; this is illustrative in-sample calibration. Right: 73 Tian/CLASH radial measurements in 17 clusters after the prespecified name-normalization rule excludes MACS0416, MACS0717, and MACS1149, with $B_{\rm Fox}$ frozen. Large markers show disjoint-sample radius-bin medians. The systematic increase with radius shows that the fixed Fox-calibrated amplitude does not transfer without bias under the present baryonic and lensing assumptions.}
 \end{figure*}
 
 \subsection{Algebraic Approximation}
 
-Numerical axisymmetric QUMOND solutions for analytic disk reconstructions representative of F574-2, UGC05716, and NGC3741 give median absolute velocity differences of 5.19\%, 4.88\%, and 3.96\%, respectively, relative to Eq.~(\ref{eq:algebraic}). Maximum local differences are 20.54\%, 18.30\%, and 7.73\%. The radius-dependent geometry error is comparable to or larger than the aggregate RMS separation between $\Sigma$-Gravity and MOND for some galaxies and should be included in future object-level likelihoods.
+Numerical three-dimensional QUMOND solutions for analytic axisymmetric disk reconstructions representative of F574-2, UGC05716, and NGC3741 give median absolute acceleration differences of 5.19\%, 4.88\%, and 3.96\%, respectively, relative to Eq.~(\ref{eq:algebraic}). Maximum local differences are 20.54\%, 18.30\%, and 7.73\%. These are fixed-$B$ field-geometry checks, not solutions of the endogenous Eq.~(\ref{eq:galaxy}) model. The radius-dependent geometry error is comparable to or larger than the aggregate RMS separation between $\Sigma$-Gravity and MOND for some galaxies and should be included in future object-level likelihoods.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figure_3_qumond_approximation.pdf}
-\caption{\label{fig:qumond}Fractional velocity difference between the algebraic relation and numerical QUMOND solutions for three analytic disk reconstructions. The result is an approximation-error diagnostic, not a fit to full observed gas and bulge maps.}
+\caption{\label{fig:qumond}Fractional acceleration difference between the algebraic relation and numerical fixed-$B$ QUMOND solutions for three analytic disk reconstructions. The result is an approximation-error diagnostic, not a fit to the locked endogenous prescription or full observed gas and bulge maps.}
 \end{figure}
 
 \subsection{Counterrotation}
 
-Matching reduces the maximum absolute SMD from 0.684 to 0.071, below the 0.1 balance threshold. The matched mean difference is
+Matching reduces the maximum absolute SMD from 0.684 to 0.066, below the 0.1 balance threshold. The matched mean difference is
 \begin{equation}
 \Delta f_{\rm DM}
 =f_{{\rm DM},{\rm counter}}-f_{{\rm DM},{\rm control}}
-=-0.0069 ,
+=-0.0081 ,
 \label{eq:fdm}
 \end{equation}
-with bootstrap 95\% interval $[-0.0567,+0.0466]$. The result is consistent with zero and does not reproduce the large unmatched association. Because $f_{\rm DM}$ is JAM/NFW-derived, this is not a direct test of $\Sigma$-Gravity. Counterrotation remains a proposed future discriminant rather than a confirmed prediction.
+with matched-set bootstrap 95\% interval $[-0.0577,+0.0453]$. The result is consistent with zero and does not reproduce the large unmatched association. Because $f_{\rm DM}$ is JAM/NFW-derived, this is not a direct test of $\Sigma$-Gravity. Counterrotation remains a proposed future discriminant rather than a confirmed prediction.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figure_4_counterrotation_matched.pdf}
-\caption{\label{fig:counter}Matched counterrotation diagnostic. Left: covariate balance before and after matching. Right: matched difference in JAM/NFW-derived $f_{\rm DM}(<R_e)$; the galaxy-bootstrap 95\% interval includes zero.}
+\caption{\label{fig:counter}Matched counterrotation diagnostic. Left: covariate balance before and after matching. Right: matched difference in JAM/NFW-derived $f_{\rm DM}(<R_e)$; the matched-set bootstrap 95\% interval includes zero.}
 \end{figure}
 
 \medskip\hrule\medskip
@@ -347,13 +347,13 @@ The empirical response does not identify its physical mechanism. One possibility
 \end{equation}
 in the system barycentric frame. This quantity would be small for a dispersion-supported cluster, whereas the Fox calibration uses a single effective response rather than an independently measured $\mathcal C_{\rm kin}$. One measured coherence definition therefore does not currently explain both disks and clusters.
 
-A path-length power law can compactly relate galaxy and cluster amplitudes, but no unique functional for a general three-dimensional baryonic distribution is defined here. Because every Fox cluster received $L=600$ kpc, the sample cannot identify the exponent $n$ independently. Because the available data do not identify a general path-length functional, it has been removed from the canonical response rather than replaced by a more flexible fitted law. The direct SPARC sensitivity shows that the tested window improves on acceleration-only behavior but that actual catalog $R_d$ assignments carry no advantage over permuted or fixed controls. Coherence, path length, and source organization should advance only if independently measured quantities improve held-out predictions relative to an acceleration-only model.
+I could not supply a unique operational path-length functional for a general three-dimensional baryonic distribution. Because every Fox cluster received $L=600$ kpc, the sample cannot identify the exponent $n$ independently. I therefore removed $A(L)$ from the predictive response and removed conclusions that used it to connect disks and clusters. The direct SPARC sensitivity shows that the tested window improves on acceleration-only behavior but that actual catalog $R_d$ assignments carry no advantage over permuted or fixed controls. Coherence, path length, and source organization should advance only if independently measured quantities improve held-out predictions relative to an acceleration-only model.
 
 A related but distinct future direction is Refracted Gravity, in which a density-dependent gravitational permittivity modifies the Poisson equation and can redirect field lines in nonspherical sources \cite{ref12,ref13,ref14}. This literature illustrates how density and source geometry might enter a developed theory, but it does not derive or validate the empirical $\Sigma$ response.
 
 \subsection{Comparison with MOND}
 
-The tested $\Sigma$-Gravity and MOND prescriptions use the same baryonic inputs and no per-galaxy halo fitting. Their aggregate SPARC performance is statistically comparable under the locked assumptions. This statement is narrower than comparing complete theories: neither the nonrelativistic $\Sigma$ response nor the MOND interpolation function used here provides by itself a full relativistic or cosmological model.
+The tested $\Sigma$-Gravity and MOND prescriptions use the same baryonic inputs and no per-galaxy halo fitting. The paired analysis does not resolve a statistically significant aggregate difference under the locked assumptions, and no equivalence or noninferiority claim is made. This statement is narrower than comparing complete theories: neither the nonrelativistic $\Sigma$ response nor the MOND interpolation function used here provides by itself a full relativistic or cosmological model.
 
 \subsection{Lensing, Solar-System, and Cosmological Limitations}
 
@@ -380,13 +380,13 @@ Third, the algebraic disk approximation should be replaced in the likelihood by 
 
 \section{Conclusions}
 
-$\Sigma$-Gravity provides a compact acceleration-based phenomenology for selected missing-mass observations. On a locked sample of 164 SPARC galaxies, its aggregate rotation-curve performance is statistically comparable to the MOND prescription tested with the same fixed baryonic assumptions and without fitting an individual halo or response amplitude to each galaxy. Within the $\Sigma$-Gravity predictor, the bounded rotational-support-motivated factor improves the mean RMS over the acceleration-only form by $0.517\ {\rm km\,s^{-1}}$, with a 95\% interval of $[0.242,0.795]\ {\rm km\,s^{-1}}$. This is a statistically supported internal contribution, although its endogenous construction does not establish independently measured coherence.
+$\Sigma$-Gravity provides a compact acceleration-based phenomenology for selected missing-mass observations. On a locked sample of 164 SPARC galaxies, the paired analysis does not resolve a statistically significant rotation-curve difference from the MOND prescription tested with the same fixed baryonic assumptions and without fitting an individual halo or response amplitude to each galaxy. This is not an equivalence or noninferiority result. Within the $\Sigma$-Gravity predictor, the bounded rotational-support-motivated factor improves the mean RMS over the acceleration-only form by $0.517\ {\rm km\,s^{-1}}$, with a 95\% interval of $[0.242,0.795]\ {\rm km\,s^{-1}}$. This is a statistically supported internal contribution, although its endogenous construction does not establish independently measured coherence.
 
 The Fox cluster result is an illustrative in-sample calibration conditional on a simplified baryon model and an assumed relation to lensing mass, not a principal positive test of the framework. A no-refit CLASH profile check reveals increasing radial overprediction. The calibrated $B=8.446$ is therefore not established as a universal cluster value, and a path-length interpretation remains a hypothesis.
 
-An action-based nonrelativistic QUMOND embedding exists for independently specified $B$, but the physical origin and dynamics of that amplitude remain unknown. Coherence or another property of baryonic organization is a possible explanation worth testing; it is not established by the current data. The matched counterrotation result is consistent with zero and is reported as a negative secondary diagnostic.
+An auxiliary nonrelativistic QUMOND action reproduces the response for independently prescribed, spatially constant $B$, but it is not an action for the endogenous galaxy prescription, and the physical origin and dynamics of that amplitude remain unknown. Coherence or another property of baryonic organization is a possible explanation worth testing; it is not established by the current data. The matched counterrotation result is consistent with zero and is reported as a negative secondary diagnostic.
 
-Together, these results establish a fixed low-parameter galaxy response with a measurable incremental contribution, a QUMOND action embedding for independently specified $B$, and an external cluster test that rejects unbiased transfer of the fixed Fox-calibrated amplitude under the present assumptions. $\Sigma$-Gravity therefore merits continued investigation as a galaxy-scale phenomenological alternative. The next evidentiary step is not a more flexible response law, but a preregistered test using independently measured phase-space order and cluster baryon profiles on held-out systems. Those tests can determine whether the response reflects new physics or a compact description of correlated astrophysical structure; relativistic and cosmological development remains contingent on their outcome.
+Together, these results establish a fixed low-parameter galaxy response with a measurable incremental contribution, an auxiliary fixed-$B$ QUMOND construction, and an external cluster test that rejects unbiased transfer of the Fox-calibrated amplitude under the present assumptions. They motivate further prespecified testing of $\Sigma$-Gravity as a galaxy-scale phenomenological alternative. The next evidentiary step is not a more flexible response law, but a preregistered test using independently measured phase-space order and cluster baryon profiles on held-out systems. Those tests can determine whether the response reflects new physics or a compact description of correlated astrophysical structure; relativistic and cosmological development remains contingent on their outcome.
 
 The measured SPARC scale lengths do not improve the tested radial-window extension over the locked predictor or its assignment controls. This negative result preserves the empirical core while narrowing the claim: coherence, scale length, and source organization are candidate explanations for $B$, not observationally established dependencies.
 
@@ -394,7 +394,7 @@ The measured SPARC scale lengths do not improve the tested radial-window extensi
 
 \section{Data and Code Availability}
 
-SPARC data are publicly available at \url{http://astroweb.cwru.edu/SPARC/}. The CLASH radial-acceleration catalog is available through VizieR as J/ApJ/896/70. The Fox calibration table, frozen residuals, split definitions, matched samples, parameter diagnostics, and figure-generation code are provided in the accompanying repository and Supplementary Material.
+SPARC data are publicly available at \url{http://astroweb.cwru.edu/SPARC/}. The CLASH radial-acceleration catalog is available through VizieR as J/ApJ/896/70. The Fox calibration table, frozen residuals, split definitions, matched samples, parameter diagnostics, and figure-generation code are provided at \url{https://github.com/lrspeiser/sigmagravity/tree/main/Publications/Frontiers} and in the Supplementary Material.
 
 \section{Author Contributions}
 

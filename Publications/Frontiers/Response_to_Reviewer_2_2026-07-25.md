@@ -3,13 +3,13 @@
 **Manuscript ID:** 1866133  
 **Manuscript title:** *Σ-Gravity: Coherence-Motivated Gravitational Enhancement in Galaxies and Clusters*
 
-I thank the Reviewer for the direct and detailed criticism. I agree that the submitted manuscript blurred three distinct propositions: an empirical response, a possible coherence interpretation, and a completed fundamental theory. The revision retains the original two-column format and major-section sequence, but supports only the first proposition, treats the second as a hypothesis, and explicitly withdraws the third. I made one limited title change, from “Coherence-Dependent” to “Coherence-Motivated,” to distinguish the proposed interpretation from an empirically established dependence.
+I thank the Reviewer for the direct and detailed criticism. I agree that the submitted manuscript blurred three distinct propositions: an empirical response, a possible coherence interpretation, and a completed fundamental theory. The revision supports only the first proposition, treats the second as a hypothesis, and explicitly withdraws the third. I made one limited title change, from “Coherence-Dependent” to “Coherence-Motivated,” to distinguish the proposed interpretation from an empirically established dependence.
 
-I apologize for the time taken to provide this response. The interval allowed me to complete the analyses and manuscript changes needed to reflect the reviewers' feedback accurately. I would be pleased to undertake another focused revision round if the Reviewer or Editor believes that it would be useful.
+I apologize for the time taken to provide this response. I used the interval to complete the analyses reported in this revision and to make the manuscript changes needed to reflect the reviewers' feedback accurately. I would be pleased to undertake another focused revision round if the Reviewer or Editor believes that it would be useful.
 
 The core formula has not been retuned to preserve the submitted claims. Instead, I have narrowed those claims and added only the analyses needed to answer the review: paired and uncertainty-weighted SPARC statistics, sample-threshold sensitivity, a zero-parameter test of the actual SPARC photometric scale lengths, an exact-versus-algebraic field comparison, a no-refit cluster profile check, and a matched counterrotation control. The final manuscript also states the provenance and non-uniqueness of the fixed functional choices and defines “locked” as retrospective non-reoptimization rather than prospective validation.
 
-For clarity, I distinguish changes completed in this revision from investigations that remain open. The nonrelativistic action addresses the absence of an action embedding for fixed \(B\); it does not turn the empirical response into a first-principles or relativistic theory. Likewise, the added observational analyses test the submitted claims but do not convert unfavorable or null results into validation.
+For clarity, I distinguish changes completed in this revision from investigations that remain open. The nonrelativistic action reproduces the prescribed response for spatially constant \(B\); it does not provide an action, conservation result, or dynamical-consistency proof for the endogenous Equation (6) prescription, and it does not turn the empirical response into a first-principles or relativistic theory. Likewise, the added observational analyses test the submitted claims but do not convert unfavorable or null results into validation.
 
 ## 1. Lack of a fundamental theoretical foundation
 
@@ -24,10 +24,10 @@ That scope is also reflected in published Frontiers work. *[A new empirical fit 
 To make the theoretical status precise, the revision distinguishes:
 
 1. the empirical response \(\Sigma(g_N,B)=1+B h(g_N)\);
-2. a nonrelativistic QUMOND action embedding for independently specified \(B\); and
+2. a nonrelativistic QUMOND action reproducing the response for independently prescribed, spatially constant \(B\); and
 3. the unresolved origin and dynamics of \(B\).
 
-The action produces the stated nonrelativistic field equations, but it does not explain the value of \(B\), derive a coherence field, or provide a relativistic completion. The final text now says explicitly that Equation (10) is not an action for the endogenous rotational-support prescription in Equation (6). If \(B\) is dynamical, a source equation and backreaction are still required. Unsupported covariance, stress-energy, equivalence-principle, PPN, lensing, and cosmology claims have been removed.
+The action produces the stated fixed-\(B\) nonrelativistic field equations, but it does not explain the value of \(B\), derive a coherence field, establish conservation for the endogenous prescription, or provide a relativistic completion. The final text now says explicitly that Equation (10) is not an action for the endogenous rotational-support prescription in Equation (6). If \(B\) is dynamical, source, kinetic, and backreaction terms are still required. Unsupported covariance, stress-energy, equivalence-principle, PPN, lensing, and cosmology claims have been removed.
 
 The final manuscript also addresses the provenance of the specific empirical choices. The square-root component of \(h(g_N)\) supplies the deep-acceleration scaling associated with flat rotation curves and the baryonic Tully–Fisher relation, while the rational gate suppresses the response at high acceleration. These asymptotic criteria motivate the structure but do not make the exact transition function unique. The factor \(4\sqrt{\pi}\) in \(g^\dagger\), the mode-counting motivation for \(A_0=e^{1/(2\pi)}\), and the characteristic cold-disk scale used for \(\sigma=20\ {\rm km\,s^{-1}}\) are identified as submitted heuristics and fixed model choices, not first-principles derivations.
 
@@ -37,7 +37,7 @@ The model was developed with SPARC as its principal galaxy benchmark before subm
 
 **After.** The title now says “Coherence-Motivated” rather than “Coherence-Dependent.” The Abstract, Introduction, action section, Discussion, and Conclusions consistently identify the model as a bounded phenomenological alternative.
 
-**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.F and Eqs. (4)–(12); pp. 6–8, Sec. V; and p. 8, Sec. VI. See also Supplement Sections S2–S3.
+**Location.** Revised manuscript p. 1, title, Abstract, and Sec. I.C; pp. 2–3, Secs. II.B–II.F and Eqs. (4)–(12); pp. 7–9, Sec. V; and p. 9, Sec. VI. See also Supplement Sections S2–S3.
 
 **Remaining limitation.** The paper does not provide a first-principles origin for \(B\) or a relativistic theory, and says so directly.
 
@@ -45,7 +45,7 @@ The model was developed with SPARC as its principal galaxy benchmark before subm
 
 The Discussion includes one limited future-work paragraph on Refracted Gravity, a distinct program in which density-dependent gravitational permittivity can redirect field lines in nonspherical systems. Published galaxy applications and a scalar–tensor formulation show how density and geometry might enter a developed theory. I do not claim that this literature derives, validates, or collaborates on Σ-Gravity.
 
-**Location.** Revised manuscript p. 7, Sec. V.B, paragraph beginning “A related but distinct future direction.”
+**Location.** Revised manuscript p. 8, Sec. V.B, paragraph beginning “A related but distinct future direction.”
 
 ## 2. Calibration and validation circularity
 
@@ -53,7 +53,7 @@ The Discussion includes one limited future-work paragraph on Refracted Gravity, 
 
 **Response.** I agree. The 42 Fox systems are now labeled an illustrative calibration sample. Their median ratio of 0.987 is an in-sample calibration result under the submitted baryon proxy, and repeated Fox splits are called calibration-stability checks. Because the baryon proxy was not replaced by measured component profiles for all 42 systems, the final Abstract no longer presents the near-unity Fox ratio as a positive cluster result.
 
-I added a no-refit radial check using 73 measurements in 17 Tian/CLASH clusters after removing obvious Fox overlaps. With the submitted cluster amplitude frozen, the median predicted-to-observed ratio is 1.318 and increases from 1.18 at 100 kpc to 1.98 at 600 kpc. This limits the universal cluster claim. I do not fit or introduce a replacement amplitude in the revised paper.
+I added a no-refit radial check by normalizing the 20 Tian/CLASH and Fox cluster identifiers to uppercase alphanumeric strings and excluding the three exact overlaps: MACS0416, MACS0717, and MACS1149. This leaves 73 measurements in 17 disjoint Tian/CLASH clusters. With \(B=8.45\), \(g^\dagger=1.2\times10^{-10}\ {\rm m\,s^{-2}}\), and the submitted \(h(g_{\rm bar})\) frozen, the median predicted-to-observed ratio is 1.318. The radius-bin medians are 1.170, 1.228, 1.613, and 1.961 at 100, 200, 400, and 600 kpc. The weighted residual trend is \(+0.162\) dex per decade in radius, with a 95% cluster-bootstrap interval \([+0.115,+0.217]\). This is an unfavorable transfer test. I do not fit or introduce a replacement amplitude in the revised paper.
 
 The identifiability analysis also shows:
 
@@ -61,23 +61,25 @@ The identifiability analysis also shows:
 V^4\rightarrow B^2GM_b g^\dagger ,
 \]
 
-so disk normalization constrains \(B^2g^\dagger\), not its factors independently. Assigning the same \(L=600\) kpc to every Fox cluster identifies one effective cluster amplitude, not \(n\) independently of the adopted reference values. Because the data do not identify a general path-length functional, I removed that relation from the canonical response instead of replacing it with a more flexible fit. The locked galaxy predictor does not use \(R_d\), \(L_0\), or \(n\), and the revised equation no longer implies that it does.
+so disk normalization constrains \(B^2g^\dagger\), not its factors independently. Assigning the same \(L=600\) kpc to every Fox cluster identifies one effective cluster amplitude, not \(n\) independently of the adopted reference values. I could not supply the requested operational path-length functional for a general baryonic distribution. I therefore removed \(A(L)\) from the predictive response and removed conclusions that used it to connect disks and clusters, rather than replacing it with a more flexible fit. The locked galaxy predictor does not use \(R_d\), \(L_0\), or \(n\), and the revised equation no longer implies that it does.
 
-I also tested the actual catalog \(R_d\) values without fitting a parameter. The candidate \(B_{R_d}=A_0r/[R_d/(2\pi)+r]\) gives mean galaxy RMS \(16.513\ {\rm km\,s^{-1}}\), compared with \(16.366\ {\rm km\,s^{-1}}\) for the locked predictor. The paired difference is \(+0.147\ {\rm km\,s^{-1}}\), with 95% interval \([-0.088,+0.385]\). More importantly for identifiability, the actual \(R_d\) assignments do not outperform 2,000 random galaxy-level reassignments (one-sided \(p=0.711\)) or a common median \(R_d\), which gives mean RMS 16.413 km s\(^{-1}\). I therefore report the test but do not promote the measured scale length to the canonical formula.
+I also tested the actual catalog \(R_d\) values without fitting a parameter. The candidate \(B_{R_d}=A_0r/[R_d/(2\pi)+r]\) gives mean galaxy RMS \(16.513\ {\rm km\,s^{-1}}\), compared with \(16.366\ {\rm km\,s^{-1}}\) for the locked predictor. The paired difference is \(+0.147\ {\rm km\,s^{-1}}\), with 95% interval \([-0.088,+0.385]\); this does not resolve a statistically significant paired difference and is not an equivalence test. More importantly for identifiability, the actual \(R_d\) assignments do not outperform 2,000 random galaxy-level reassignments (one-sided \(p=0.711\)) or a common median \(R_d\), which gives mean RMS 16.413 km s\(^{-1}\). The window is the literal submitted scale-length form, not a post-review choice, and no alternative windows were screened in this test. I therefore report the test but do not promote the measured scale length to the canonical formula.
 
 **Before.** Fox calibration and holdouts were described as validation, and the path-length parameters were presented as independently meaningful.
 
 **After.** The Fox exercise is visibly secondary and illustrative; calibration, stability, and no-refit evaluation are separate; parameter identifiability is explicit; the requested photometric scale-length hypothesis is tested against negative controls; and no new cluster formula is introduced.
 
-**Location.** Revised manuscript p. 2, Secs. II.B–II.C; pp. 3–4, Secs. II.F and III.C; Tables I–II on p. 4; p. 5, Secs. IV.B–IV.C; and Figure 2 on p. 6. See also Supplement Sections S2.1, S4.5, and S6.
+I retain “and Clusters” in the title because the revised paper reports the cross-system transfer test and its unfavorable result as a limitation, not because it claims a successful cluster application. The Introduction and Abstract now make that evidentiary role explicit.
+
+**Location.** Revised manuscript pp. 2–3, Secs. II.B–II.C and II.F; p. 5, Sec. III.C; Tables I–II on p. 4; pp. 6–7, Secs. IV.B–IV.C; and Figure 2 on p. 7. See also Supplement Sections S2.1, S4.5, and S6.
 
 ### Galaxy sensitivity
 
 The frozen 81-combination nuisance grid varies common stellar mass-to-light assumptions, distance scale, inclination offset, and normalization. The mean Σ-minus-MOND contrast ranges from \(-3.286\) to \(+2.779\ {\rm km\,s^{-1}}\), retaining the central sign in 64.2% of cases. Varying \(\sigma\) from the submitted 20 km s\(^{-1}\) to 10, 30, and 50 km s\(^{-1}\) gives mean Σ-Gravity RMS values of 16.695, 16.347, and 17.600 km s\(^{-1}\), compared with 16.366 km s\(^{-1}\) at the submitted value. The 30 km s\(^{-1}\) result is only 0.019 km s\(^{-1}\) lower, no alternative is selected, and all four settings retain a positive mean Σ-minus-MOND contrast. These sensitivities are why the revision neither claims uniqueness nor uses the small central difference as model selection.
 
-I additionally repeated the primary comparison with reported velocity-uncertainty weighting. The paired mean is \(+0.193\ {\rm km\,s^{-1}}\), with bootstrap 95% interval \([-0.177,+0.564]\), again consistent with comparable performance. The mean contrast remains positive at 20%, 30%, and 40% bulge-contribution thresholds and when all 171 usable galaxies are included. These checks make the dependence on the 164-galaxy selection and the unweighted RMS choice explicit.
+I additionally repeated the primary comparison with reported velocity-uncertainty weighting. The paired mean is \(+0.193\ {\rm km\,s^{-1}}\), with bootstrap 95% interval \([-0.177,+0.564]\), so this sensitivity likewise does not resolve a statistically significant aggregate difference; no equivalence margin was specified or tested. The mean contrast remains positive at 20%, 30%, and 40% bulge-contribution thresholds and when all 171 usable galaxies are included. These checks make the dependence on the 164-galaxy selection and the unweighted RMS choice explicit.
 
-**Location.** Revised manuscript p. 4, Sec. III.B; p. 5, Sec. IV.A; and Figure 1 on p. 6. See also Supplement Sections S4.2, S4.4, and S4.5.
+**Location.** Revised manuscript pp. 4–5, Sec. III.B; pp. 5–6, Sec. IV.A; and Figure 1 on p. 6. See also Supplement Sections S4.2, S4.4, and S4.5.
 
 ## 3. Counterrotation is not a valid confirmation
 
@@ -85,13 +87,13 @@ I additionally repeated the primary comparison with reported velocity-uncertaint
 
 **Response.** I agree. The phrases “confirmed prediction” and “ΛCDM predicts no difference” have been removed.
 
-I matched 62 counterrotating systems to 310 controls on stellar mass, physical size, Sérsic index, axis ratio, inclination, redshift, and JAM fit quality. The maximum post-match absolute standardized mean difference is 0.071. The matched difference in \(f_{\rm DM}(<R_e)\) is \(-0.0069\), with bootstrap 95% interval \([-0.0567,+0.0466]\), consistent with zero.
+I first retained one MaNGA observation per physical galaxy, choosing the lowest JAM \(\chi^2\) where duplicate observations existed. I then matched 62 counterrotating systems to 310 unique controls on stellar mass, physical size, Sérsic index, axis ratio, inclination, redshift, and JAM fit quality. Greedy nearest-neighbor matching used jointly standardized covariates, hardest-case-first ordering, five controls per case, no replacement, and no caliper. Eligibility required complete matching and outcome fields, a nonnegative quality flag, and positive \(R_e\); no additional common-support trimming was imposed, and all 62 eligible cases were matched. The maximum post-match absolute standardized mean difference is 0.066. The matched difference in \(f_{\rm DM}(<R_e)\) is \(-0.0081\), with a matched-set bootstrap 95% interval \([-0.0577,+0.0453]\), consistent with zero.
 
 **Before.** A large unmatched difference and \(p<0.01\) were presented as confirmation.
 
 **After.** The balanced result is reported as a null secondary diagnostic. Counterrotation is retained only as a proposed future discriminant.
 
-**Location.** Revised manuscript p. 5, Sec. III.D; p. 6, Sec. IV.E and Eq. (17); and Figure 4 on p. 7. See also Supplement Section S7.
+**Location.** Revised manuscript p. 5, Sec. III.D; p. 7, Sec. IV.E, Eq. (17), and Figure 4. See also Supplement Section S7.
 
 **Remaining limitation.** The primary experiment still requires common forward modeling of MaNGA velocity and dispersion maps, including point-spread function, masks, inverse variance, inclination, and anisotropy, with complete galaxies held out.
 
@@ -99,20 +101,20 @@ I matched 62 counterrotating systems to 310 controls on stellar mass, physical s
 
 **Reviewer comment.** A 47% “win rate” is not a win over MOND, and a cluster-calibrated model cannot be presented as an independent comparison with fixed MOND.
 
-**Response.** I agree. The locked revised sample contains 164 galaxies. Σ-Gravity has lower RMS for 71 galaxies, or 43.3%, with exact two-sided binomial \(p=0.101\). The mean paired RMS difference is \(+0.309\ {\rm km\,s^{-1}}\), with galaxy-bootstrap 95% interval \([-0.040,+0.659]\). The paper therefore states “statistically comparable aggregate performance,” not a win.
+**Response.** I agree. The locked revised sample contains 164 galaxies. Σ-Gravity has lower RMS for 71 galaxies, or 43.3%, with no ties and exact two-sided binomial \(p=0.101\) under the null \(p=0.5\). The mean paired RMS difference is \(+0.309\ {\rm km\,s^{-1}}\), with galaxy-bootstrap 95% interval \([-0.040,+0.659]\). The paper therefore states that the analysis does not resolve a statistically significant aggregate difference; it does not call the models equivalent or claim a win.
 
-The observational-error-weighted sensitivity gives the same conclusion, with paired mean \(+0.193\ {\rm km\,s^{-1}}\) and 95% interval \([-0.177,+0.564]\). The measured-scale-length candidate is not presented as an improvement: it is statistically comparable to the locked response on their paired contrast, does not beat its assignment controls, and is worse than the tested MOND prescription by \(+0.456\ {\rm km\,s^{-1}}\), with 95% interval \([+0.075,+0.843]\).
+The observational-error-weighted sensitivity gives the same unresolved conclusion, with paired mean \(+0.193\ {\rm km\,s^{-1}}\) and 95% interval \([-0.177,+0.564]\). The measured-scale-length candidate is not presented as an improvement: its paired interval relative to the locked response includes zero, it does not beat its assignment controls, and it is worse than the tested MOND prescription by \(+0.456\ {\rm km\,s^{-1}}\), with 95% interval \([+0.075,+0.843]\).
 
 The cluster section no longer presents the calibrated Fox comparison as independent model selection. It reports the conditional calibration and the unfavorable no-refit CLASH transfer result.
 
 | Submitted claim | Revised claim |
 |---|---|
-| “key result” or “win rate” over MOND | “comparable aggregate performance” |
+| “key result” or “win rate” over MOND | “no statistically significant aggregate difference resolved; no equivalence claim” |
 | cluster success as prediction | Fox in-sample calibration |
 | Fox holdouts as independent validation | within-catalog calibration stability |
 | counterrotation confirmed | matched secondary result consistent with zero |
 
-**Location.** Revised manuscript pp. 5–6, Secs. IV.A–IV.E; Figures 1–2 on p. 6; and Figure 4 on p. 7. See also Supplement Sections S4, S6, and S7.
+**Location.** Revised manuscript pp. 5–7, Secs. IV.A–IV.E; Figure 1 on p. 6; and Figures 2 and 4 on p. 7. See also Supplement Sections S4, S6, and S7.
 
 ## 5. Cosmological context
 
@@ -126,7 +128,7 @@ The term “alternative” is now explicitly limited to a galaxy-scale empirical
 
 **After.** The successes of ΛCDM and the missing cosmological calculations are stated as major scope boundaries.
 
-**Location.** Revised manuscript p. 1, Abstract and Secs. I.A–I.C; pp. 7–8, Sec. V.D; and p. 8, Sec. VI.
+**Location.** Revised manuscript p. 1, Abstract and Secs. I.A–I.C; p. 8, Sec. V.D; and p. 9, Sec. VI.
 
 ## 6. Statistical-methods assessment
 
@@ -136,7 +138,7 @@ The term “alternative” is now explicitly limited to a galaxy-scale empirical
 
 - treats galaxies or clusters, not repeated radial measurements, as independent units;
 - reports paired effect sizes and bootstrap intervals for SPARC;
-- includes a paired sign-flip test and exact object-level binomial comparison;
+- includes a paired sign-flip test and an exact object-level binomial comparison with no ties and null \(p=0.5\);
 - repeats the comparison with observational-error weighting;
 - brackets the 30% bulge threshold with 20%, 40%, and all-valid-point samples;
 - tests catalog photometric scale lengths against 2,000 galaxy-level permutations and a fixed-median control;
@@ -147,7 +149,7 @@ The term “alternative” is now explicitly limited to a galaxy-scale empirical
 
 I have not claimed that these additions solve the need for a future joint covariance-bearing cluster likelihood or direct map-level counterrotation model. The manuscript identifies both as required next tests. I also do not represent an external statistical consultation as having occurred. Before making stronger confirmatory claims, I intend to freeze the analysis plan and seek independent statistical review; I would be pleased to provide an additional statistical assessment if the Editor requires it in the present review round.
 
-**Location.** Revised manuscript pp. 4–5, Secs. III.B–III.D and Table I; pp. 5–6, Secs. IV.A–IV.E; and pp. 7–8, Sec. V.E. See also Supplement Sections S4, S6, and S7.
+**Location.** Revised manuscript pp. 4–5, Secs. III.B–III.D and Table I; pp. 5–7, Secs. IV.A–IV.E; and pp. 8–9, Sec. V.E. See also Supplement Sections S4, S6, and S7.
 
 ## 7. Defined future investigations and decision gates
 
@@ -162,7 +164,7 @@ The revised manuscript now consolidates the unresolved work in Sec. V.E, “Stag
 
 Refracted Gravity remains a related published example of density- and geometry-dependent field behavior, not a derivation of Σ-Gravity. Any connection would be a separate theoretical and observational investigation.
 
-**Location.** Revised manuscript pp. 7–8, Sec. V.E, “Staged Future Investigations.”
+**Location.** Revised manuscript pp. 8–9, Sec. V.E, “Staged Future Investigations.”
 
 ## 8. Figure-quality assessment
 
@@ -180,4 +182,4 @@ The revised paper does not claim:
 - superiority to MOND on SPARC; or
 - a cosmological replacement for ΛCDM.
 
-It makes the narrower claim that an explicit empirical acceleration response can be evaluated reproducibly and has aggregate SPARC performance statistically comparable to the tested MOND prescription under common baryonic assumptions. The cluster and counterrotation results now define the limits of that finding rather than being used to overstate it.
+It makes the narrower claim that an explicit empirical acceleration response can be evaluated reproducibly and that the present SPARC comparison does not resolve a statistically significant aggregate difference from the tested MOND prescription under common baryonic assumptions. No equivalence or noninferiority claim is made. The cluster and counterrotation results now define the limits of that finding rather than being used to overstate it.

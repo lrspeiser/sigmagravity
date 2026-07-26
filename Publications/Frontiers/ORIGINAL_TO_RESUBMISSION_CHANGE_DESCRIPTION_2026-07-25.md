@@ -91,7 +91,7 @@ The broader exploratory tests remain available in the research repository, but t
 
 **Original paper.** The amplitude law \(A(L)=A_0(L/L_0)^n\), with \(L_0=0.4\) kpc and \(n=0.27\), was presented as a principled connection between disks and clusters. Every Fox cluster was nevertheless assigned the same \(L=600\) kpc.
 
-**Revised paper.** The canonical empirical law is written in terms of \(B\). Because \(L\) is constant within the Fox calibration sample, the paper states that those data identify one effective cluster amplitude rather than a path-length exponent. \(L_0\) and \(n\) are not used in the locked galaxy result. Path length and source concentration remain possible motivations, not established parts of the canonical predictor.
+**Revised paper.** The canonical empirical law is written in terms of \(B\). Because \(L\) is constant within the Fox calibration sample, the paper states that those data identify one effective cluster amplitude rather than a path-length exponent. I could not supply a unique operational definition of \(L\) for a general baryonic distribution, so \(A(L)\) is removed from the predictive response and conclusions using it to connect disks and clusters are withdrawn. \(L_0\) and \(n\) are not used in the locked galaxy result. Path length and source concentration remain possible motivations, not established parts of the canonical predictor.
 
 **How this addresses the concern.** The revision removes the appearance that a general three-dimensional path-length functional was derived or validated.
 
@@ -103,7 +103,7 @@ The broader exploratory tests remain available in the research repository, but t
 
 **Original paper.** The exponent \(n\) was calibrated on 42 Fox clusters, while the resulting median predicted-to-observed mass ratio of 0.987 and repeated splits of the same catalog were used to support cluster success and cross-domain consistency.
 
-**Revised paper.** The Fox systems are called the calibration sample, 0.987 is called an in-sample calibration result, and repeated Fox splits are called calibration-stability checks. A separate no-refit check freezes \(B_{\rm Fox}=8.446\) and applies it to 73 radial measurements in 17 non-overlapping Tian/CLASH clusters. That external check gives a median predicted-to-observed ratio of 1.318 and a bias that rises from approximately 1.18 at 100 kpc to 1.98 at 600 kpc.
+**Revised paper.** The Fox systems are called the calibration sample, 0.987 is called an in-sample calibration result, and repeated Fox splits are called calibration-stability checks. A prespecified name-normalization rule excludes the exact Fox overlaps MACS0416, MACS0717, and MACS1149 from Tian/CLASH. A separate no-refit check then freezes \(B_{\rm Fox}=8.446\), \(h(g_N)\), and \(g^\dagger\) and applies them to 73 radial measurements in 17 disjoint clusters. That external check gives a median predicted-to-observed ratio of 1.318; radius-bin medians are 1.170, 1.228, 1.613, and 1.961 at 100, 200, 400, and 600 kpc. The weighted log-residual slope is +0.162 dex per dex, with a 5,000-draw cluster-bootstrap 95% interval of [+0.115, +0.217].
 
 **How this addresses the concern.** Calibration and external evaluation are now visibly separate. The unfavorable no-refit result is reported, and the revised paper does not fit \(B\approx5.2\) or another replacement amplitude to restore the cluster claim.
 
@@ -127,7 +127,7 @@ The broader exploratory tests remain available in the research repository, but t
 
 **Original paper.** Sixty-three counterrotators were compared with more than 10,000 normal galaxies. The reported 44% lower JAM/NFW-inferred dark-matter fraction and \(p<0.01\) were described as a confirmed prediction, and the paper stated too strongly that ΛCDM predicted no difference.
 
-**Revised paper.** Sixty-two counterrotators are matched to 310 controls on stellar mass, physical size, Sérsic index, axis ratio, inclination, redshift, and JAM fit quality. The maximum post-match absolute standardized mean difference is 0.071. The matched difference in \(f_{\rm DM}(<R_e)\) is −0.0069 with a 95% bootstrap interval of [−0.0567, +0.0466], which is consistent with zero. The “confirmed prediction” and “ΛCDM predicts no difference” statements are removed.
+**Revised paper.** Repeat MaNGA observations are first reduced to one row per physical galaxy. Sixty-two counterrotators are then matched to 310 unique controls on stellar mass, physical size, Sérsic index, axis ratio, inclination, redshift, and JAM fit quality. Greedy nearest-neighbor matching uses standardized covariates, hardest-case-first ordering, five controls per case, no replacement, and no caliper. The maximum post-match absolute standardized mean difference is 0.066. The matched difference in \(f_{\rm DM}(<R_e)\) is −0.0081 with a matched-set bootstrap 95% interval of [−0.0577, +0.0453], which is consistent with zero. The “confirmed prediction” and “ΛCDM predicts no difference” statements are removed.
 
 **How this addresses the concern.** The manuscript now reports the balanced null result rather than preserving the original association as evidence.
 
@@ -139,7 +139,7 @@ The broader exploratory tests remain available in the research repository, but t
 
 **Original paper.** The 47% win rate was highlighted as a key result even though MOND won the complementary 53%, and repeated radial measurements and unmatched populations supported stronger claims than their dependence structure allowed.
 
-**Revised paper.** The primary sample contains 164 galaxies and 2,745 disk-dominated radial points. Mean per-galaxy RMS is 16.366 km s\(^{-1}\) for Σ-Gravity and 16.056 km s\(^{-1}\) for the tested MOND prescription. The mean paired difference is +0.309 km s\(^{-1}\), with a galaxy-bootstrap 95% interval of [−0.040, +0.659]. Σ-Gravity has lower RMS for 71 of 164 galaxies, or 43.3%, with exact binomial \(p=0.101\). The paper therefore says “comparable aggregate performance,” not “win.”
+**Revised paper.** The primary sample contains 164 galaxies and 2,745 disk-dominated radial points. Mean per-galaxy RMS is 16.366 km s\(^{-1}\) for Σ-Gravity and 16.056 km s\(^{-1}\) for the tested MOND prescription. The mean paired difference is +0.309 km s\(^{-1}\), with a galaxy-bootstrap 95% interval of [−0.040, +0.659]. Σ-Gravity has lower RMS for 71 of 164 galaxies, with no ties and exact two-sided binomial \(p=0.101\) under the null \(p=0.5\). The paper therefore states that the comparison does not resolve a statistically significant aggregate difference; it does not claim a win, equivalence, or noninferiority.
 
 The revision also adds:
 
@@ -167,7 +167,7 @@ The revision also adds:
 | Unified path-length relationship | One effective Fox amplitude; no identified 3D path functional |
 | Cluster lensing success or prediction | Fox in-sample calibration conditional on baryons and lensing closure |
 | Fox holdouts provide independent validation | Fox splits measure within-catalog calibration stability |
-| SPARC “win rate” | Statistically comparable aggregate performance |
+| SPARC “win rate” | No statistically significant aggregate difference resolved; no equivalence claim |
 | Counterrotation confirms the theory | Matched secondary diagnostic consistent with zero |
 | Solar-System constraints are satisfied | High-acceleration sanity check only; PPN behavior is undetermined |
 | Lensing and dynamics use the same derived potential | Equality is an empirical closure; gravitational slip is undetermined |
@@ -201,7 +201,7 @@ The catalog-\(R_d\) candidate gives mean RMS 16.513 km s\(^{-1}\), compared with
 
 **Reviewer 1 concern.** The paper used \(g_{\rm eff}\simeq\Sigma g_N\) without quantifying its error for disks.
 
-**Change.** The revised paper labels the relation an approximation and compares it with numerical axisymmetric QUMOND solutions for analytic reconstructions representative of F574-2, UGC05716, and NGC3741. Median absolute velocity differences are 5.19%, 4.88%, and 3.96%; local maxima are 20.54%, 18.30%, and 7.73%.
+**Change.** The revised paper labels the relation an approximation and compares it with three-dimensional periodic-FFT QUMOND solutions for axisymmetric analytic reconstructions representative of F574-2, UGC05716, and NGC3741. The check uses spatially constant \(B=1\), a \(65^3\) grid with box half-width \(8R_d\), and reports radial acceleration differences over \(0.75\le r/R_d\le5\). Median absolute acceleration differences are 5.19%, 4.88%, and 3.96%; local maxima are 20.54%, 18.30%, and 7.73%. A \(49^3\)-to-\(65^3\) check gives 0.72% median and 3.67% maximum acceleration change.
 
 **Resolution status.** The approximation error is quantified. A full exact-field SPARC likelihood using observed gas and bulge maps remains future work.
 
@@ -282,7 +282,7 @@ showing that disk normalization constrains \(B^2g^\dagger\), not \(B\) and \(g^\
 
 Several reviewer requests cannot honestly be described as fully solved within this revision:
 
-1. **First-principles mechanism:** the QUMOND action embeds a fixed \(B\), but no dynamical equation derives \(B\) from matter organization.
+1. **First-principles mechanism:** the auxiliary QUMOND action reproduces the response for prescribed, spatially constant \(B\), but it is not an action for the endogenous galaxy prescription and no dynamical equation derives \(B\) from matter organization.
 2. **Relativistic completion:** gravitational slip, photon propagation, PPN parameters, gravitational waves, and compact-source behavior remain undetermined.
 3. **Universal cluster law:** the external CLASH result rejects unbiased transfer of the fixed Fox amplitude under the current assumptions.
 4. **Cluster baryon reconstruction:** the Fox calibration still uses a simplified aperture-mass proxy.
@@ -296,8 +296,8 @@ These are not omitted from the revised paper. They define its scope and the next
 
 ## Concise submission description
 
-The revised manuscript retains the original empirical acceleration response and locked galaxy predictor but substantially narrows their interpretation. Coherence and path length are now presented as possible physical motivations rather than established dependencies. The Fox cluster result is relabeled as an in-sample calibration under a simplified baryon and lensing closure, and a new no-refit CLASH profile check reveals radius-dependent overprediction. The SPARC comparison is reanalyzed with galaxy-level paired uncertainty, error weighting, sample-threshold sensitivity, and a frozen nuisance grid, leading to the conclusion of statistically comparable performance with the tested MOND prescription. Actual SPARC photometric scale lengths are tested without refitting and do not outperform permutation or fixed-scale controls. The algebraic disk approximation is compared with numerical axisymmetric QUMOND solutions. The original counterrotation confirmation is replaced by a balanced matched-control analysis consistent with zero. Unsupported covariance, conservation, Solar-System, gravitational-slip, and cosmological claims are removed or explicitly bounded. A nonrelativistic QUMOND action is supplied for independently specified \(B\), while the origin and dynamics of \(B\) remain an open first-principles problem.
+The revised manuscript retains the original empirical acceleration response and locked galaxy predictor but substantially narrows their interpretation. Coherence and path length are now presented as possible physical motivations rather than established dependencies, and \(A(L)\) is removed from the predictive response because no operational three-dimensional path functional was established. The Fox cluster result is relabeled as an in-sample calibration under a simplified baryon and lensing closure, and a new no-refit CLASH profile check reveals a cluster-bootstrap-supported radial overprediction. The SPARC comparison is reanalyzed with galaxy-level paired uncertainty, error weighting, sample-threshold sensitivity, and a frozen nuisance grid; it does not resolve a statistically significant aggregate difference from the tested MOND prescription, and no equivalence claim is made. Actual SPARC photometric scale lengths are tested without refitting and do not outperform permutation or fixed-scale controls. The algebraic disk approximation is compared with numerical fixed-\(B\) QUMOND solutions. The original counterrotation confirmation is replaced by a balanced matched-control analysis consistent with zero. Unsupported covariance, conservation, Solar-System, gravitational-slip, and cosmological claims are removed or explicitly bounded. An auxiliary nonrelativistic QUMOND action reproduces the response for prescribed, spatially constant \(B\), while the origin and dynamics of \(B\) remain an open first-principles problem.
 
 ## Bottom line
 
-The revised paper's defensible contribution is narrower but stronger: it presents a fixed, low-parameter galaxy response whose aggregate SPARC performance is comparable to the tested MOND prescription, quantifies the contribution and limitations of its bounded galaxy factor, embeds a fixed response in a nonrelativistic action, and reports rather than conceals the failure of the submitted cluster amplitude to transfer without radial bias. It does not claim that coherence has been demonstrated, that cluster lensing is solved, that counterrotation confirms the model, or that Σ-Gravity replaces ΛCDM cosmology.
+The revised paper's defensible contribution is narrower but stronger: it presents a fixed, low-parameter galaxy response for which the present SPARC comparison does not resolve a statistically significant aggregate difference from the tested MOND prescription, quantifies the contribution and limitations of its bounded galaxy factor, supplies an auxiliary fixed-\(B\) nonrelativistic action construction, and reports rather than conceals the failure of the submitted cluster amplitude to transfer without radial bias. It does not claim equivalence, that coherence has been demonstrated, that cluster lensing is solved, that counterrotation confirms the model, or that Σ-Gravity replaces ΛCDM cosmology.

@@ -109,6 +109,7 @@ def figure_1_sparc() -> None:
 def figure_2_clusters() -> None:
     fox = pd.read_csv(FOX)
     clash = pd.read_csv(AUDIT / "tian_submitted_residuals.csv")
+    clash = clash[~clash["overlaps_fox_calibration"].astype(bool)].copy()
 
     fig, axes = plt.subplots(1, 2, figsize=(8.8, 3.7))
 
@@ -210,7 +211,7 @@ def figure_3_qumond() -> None:
     ax.axhline(0, linestyle="--", color=BLACK, linewidth=1.2)
     ax.set(
         xlabel=r"Radius / $R_{\rm disk}$",
-        ylabel="Algebraic minus numerical QUMOND [%]",
+        ylabel="Algebraic minus numerical acceleration [%]",
     )
     ax.legend(frameon=False, ncol=3)
     fig.tight_layout()

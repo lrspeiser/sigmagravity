@@ -8,10 +8,21 @@
       "MACS0717",
       "MACS1149"
     ],
+    "overlap_rule": "lowercase cluster names, remove non-alphanumeric characters, normalize Abell and MACS aliases, then require exact equality with a Fox calibration name",
     "median_predicted_observed": 1.3175361648686388,
     "mean_residual_dex": 0.14106683232242362,
     "rms_dex": 0.18833726396695236,
-    "median_abs_dex": 0.1222550770055797
+    "median_abs_dex": 0.1222550770055797,
+    "radial_residual_trend": {
+      "definition": "weighted residual_dex versus log10(radius_kpc/200), cluster bootstrap",
+      "slope_dex_per_radius_dex": 0.16189479474973836,
+      "bootstrap_draws": 5000,
+      "bootstrap_seed": 20260718,
+      "bootstrap_95_percent_interval": [
+        0.1146065418227911,
+        0.216837896075874
+      ]
+    }
   },
   "all_points_constant_refit": {
     "B": 5.200071382686762,
@@ -46,9 +57,9 @@
   "by_radius": [
     {
       "radius_kpc": 14.3,
-      "n": 13,
-      "median_predicted_observed": 1.062837927797425,
-      "median_B_obs_positive": 7.79000386609665
+      "n": 10,
+      "median_predicted_observed": 1.0395969213900766,
+      "median_B_obs_positive": 8.06420829698697
     },
     {
       "radius_kpc": 16.2,
@@ -82,27 +93,27 @@
     },
     {
       "radius_kpc": 100.0,
-      "n": 18,
-      "median_predicted_observed": 1.1830460199411048,
-      "median_B_obs_positive": 6.925040829954218
+      "n": 17,
+      "median_predicted_observed": 1.169499729870048,
+      "median_B_obs_positive": 6.910768767696922
     },
     {
       "radius_kpc": 200.0,
-      "n": 20,
-      "median_predicted_observed": 1.3392228101306611,
-      "median_B_obs_positive": 6.09779530766024
+      "n": 17,
+      "median_predicted_observed": 1.2284069379444185,
+      "median_B_obs_positive": 6.622342074653205
     },
     {
       "radius_kpc": 400.0,
-      "n": 15,
-      "median_predicted_observed": 1.6617244780968574,
-      "median_B_obs_positive": 4.821156876137837
+      "n": 12,
+      "median_predicted_observed": 1.6129931751003026,
+      "median_B_obs_positive": 5.019788927121574
     },
     {
       "radius_kpc": 600.0,
-      "n": 11,
-      "median_predicted_observed": 1.9758756528098096,
-      "median_B_obs_positive": 4.0141700192126875
+      "n": 10,
+      "median_predicted_observed": 1.9614311994173783,
+      "median_B_obs_positive": 4.021714797431807
     }
   ]
 }

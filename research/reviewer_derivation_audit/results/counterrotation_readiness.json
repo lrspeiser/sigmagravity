@@ -2,8 +2,12 @@
   "catalogued_counterrotators": 66,
   "counterrotators_with_complete_JAM_matching_fields": 62,
   "matched_controls": 310,
-  "unique_matched_controls": 307,
-  "maximum_absolute_SMD_after_matching": 0.07129655356470772,
+  "unique_matched_controls": 310,
+  "matching_method": "greedy Euclidean nearest-neighbor matching on jointly standardized covariates; five controls per case; hardest case first; without replacement; no caliper",
+  "repeat_observation_rule": "retain the lowest-JAM-chi2 row per MaNGA galaxy",
+  "common_support_exclusions": "complete matching and outcome fields, nonnegative quality flag, and positive Re; no additional common-support trimming was imposed; all 62 eligible cases were matched",
+  "bootstrap_unit": "62 complete matched case sets, each retaining its five-control mean",
+  "maximum_absolute_SMD_after_matching": 0.065907451576992,
   "balanced_at_abs_SMD_below_0_1": true,
   "direct_DAP_maps_present": false,
   "environment_measure_present": false,
@@ -14,10 +18,10 @@
     "Environment and merger-history covariates are absent."
   ],
   "secondary_JAM_NFW_fdm_comparison": {
-    "mean_matched_difference_case_minus_control": -0.006896927803379414,
+    "mean_matched_difference_case_minus_control": -0.008061290322580645,
     "bootstrap_95_percent_interval": [
-      -0.05672784562211984,
-      0.04655957373271888
+      -0.0576683870967742,
+      0.04526556451612896
     ]
   },
   "secondary_warning": "fdm_Re is inferred under a JAM/NFW model and is not a direct observable or a validation test of modified gravity."

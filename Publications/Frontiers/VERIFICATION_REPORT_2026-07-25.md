@@ -14,7 +14,7 @@ python -m pytest -q research/reviewer_derivation_audit/tests `
   Publications/Frontiers/scripts/test_sparc_scale_length_sensitivity.py
 ```
 
-Result: **24 passed, 0 failed, 0 errors**.
+Result: **27 passed, 0 failed, 0 errors**.
 
 This suite covers the analytic response and QUMOND derivative, dimensions and asymptotic limits, identifiability, grouped cluster handling, coherence-feature leakage, axisymmetric field diagnostics, SPARC sample construction, paired statistics, and the new scale-length calculation and controls.
 
@@ -81,15 +81,15 @@ Verdict: radial suppression contributes useful behavior, but the measured photom
 
 - Observational-error weighting gives mean RMS 15.8473 km/s for the locked predictor and 15.6544 km/s for MOND. Their paired mean is +0.1930 km/s, with 95% interval [−0.1773, +0.5637] km/s.
 - The mean locked-minus-MOND contrast remains positive at 20%, 30%, and 40% bulge thresholds and with all valid points: +0.1106, +0.3094, +0.4414, and +0.2615 km/s, respectively.
-- These checks retain the paper's “comparable aggregate performance” wording and do not establish superiority.
+- These checks likewise do not resolve a statistically significant aggregate difference. No equivalence or noninferiority margin was specified or tested.
 
 ## Build and visual verification
 
 The following compiled successfully:
 
-- 9-page US Letter REVTeX reviewer-continuity manuscript in the original two-column format with continuous line numbers;
-- 16-page Frontiers-template manuscript with line numbers; and
-- 9-page Frontiers Supplementary Material.
+- 10-page US Letter REVTeX reviewer-continuity manuscript in the original two-column format with continuous line numbers;
+- 17-page Frontiers-template manuscript with line numbers; and
+- 11-page Frontiers Supplementary Material.
 
 Every page of all three PDFs was rendered to PNG and visually inspected. Equations, tables, figures, captions, references, line numbers, page breaks, the scale-length section, and the staged future-investigations section are legible. The reviewer-response page and section references were checked against the final line-numbered REVTeX proof.
 
@@ -102,7 +102,10 @@ The final audit of the proposed revision identified four clarifications that cou
 - the Fox result is consistently described as a secondary illustrative calibration and is not used as a positive result in the Abstract;
 - the asymptotic motivation and non-uniqueness of `h(g_N)`, `g^\dagger`, `A_0`, `F`, and `\sigma` are stated explicitly;
 - “locked” is defined as retrospective non-reoptimization of the submitted equations and constants, not prospective registration or independent validation; and
-- the QUMOND action is limited explicitly to independently specified `B` and is not presented as an action for the endogenous rotational-support prescription.
+- the auxiliary QUMOND action is limited explicitly to prescribed, spatially constant `B` and is not presented as an action, conservation result, or dynamical-consistency proof for the endogenous rotational-support prescription;
+- the no-refit CLASH figure and summaries use only the 17 clusters remaining after the objective overlap rule excludes MACS0416, MACS0717, and MACS1149;
+- the CLASH radial trend is quantified with complete-cluster bootstrap resampling; and
+- repeat MaNGA observations are deduplicated before no-replacement counterrotation matching, and uncertainty is estimated by resampling complete matched sets.
 
 The audit did not trigger a new cluster amplitude, a replacement path-length formula, or a claim that an external statistical consultation had occurred. The path-length relation was withdrawn from the canonical response because no operational three-dimensional functional was established; it was not relabeled as solved.
 

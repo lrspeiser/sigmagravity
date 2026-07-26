@@ -179,6 +179,48 @@ def grouped_bootstrap_posteriors(frame: pd.DataFrame, draws: int = 500, seed: in
     return pd.DataFrame(rows)
 
 
+def _weighted_radial_residual_slope(frame: pd.DataFrame) -> float:
+    """Weighted slope of log residual against log10(radius / 200 kpc)."""
+    x = np.log10(frame["radius_kpc"].to_numpy(dtype=float) / 200.0)
+    y = frame["residual_dex"].to_numpy(dtype=float)
+    sigma = frame["sigma_residual_dex"].to_numpy(dtype=float)
+    weights = 1.0 / np.maximum(sigma, 1e-12) ** 2
+    design = np.column_stack([np.ones(len(x)), x])
+    normal = design.T @ (weights[:, None] * design)
+    target = design.T @ (weights * y)
+    return float(np.linalg.solve(normal, target)[1])
+
+
+def cluster_bootstrap_radial_trend(
+    frame: pd.DataFrame,
+    draws: int = 5000,
+    seed: int = 20260718,
+) -> dict:
+    """Quantify the no-refit radial bias while resampling complete clusters."""
+    clusters = np.asarray(sorted(frame["cluster"].unique()))
+    rng = np.random.default_rng(seed)
+    slopes = []
+    for _ in range(draws):
+        sampled = rng.choice(clusters, size=len(clusters), replace=True)
+        pieces = []
+        for occurrence, cluster in enumerate(sampled):
+            piece = frame[frame["cluster"] == cluster].copy()
+            piece["bootstrap_group"] = f"{cluster}_{occurrence}"
+            pieces.append(piece)
+        slopes.append(_weighted_radial_residual_slope(pd.concat(pieces, ignore_index=True)))
+    slopes = np.asarray(slopes)
+    return {
+        "definition": "weighted residual_dex versus log10(radius_kpc/200), cluster bootstrap",
+        "slope_dex_per_radius_dex": _weighted_radial_residual_slope(frame),
+        "bootstrap_draws": int(draws),
+        "bootstrap_seed": int(seed),
+        "bootstrap_95_percent_interval": [
+            float(np.quantile(slopes, 0.025)),
+            float(np.quantile(slopes, 0.975)),
+        ],
+    }
+
+
 def audit_tian(frame: pd.DataFrame, fox_names: set[str]) -> tuple[dict, pd.DataFrame, pd.DataFrame]:
     data = frame.copy()
     data["normalized_cluster"] = data["cluster"].map(normalize_cluster_name)
@@ -193,7 +235,7 @@ def audit_tian(frame: pd.DataFrame, fox_names: set[str]) -> tuple[dict, pd.DataF
     by_radius = []
     _, all_submitted_rows = score_prediction(data, submitted_B)
     all_submitted_rows["B_obs"] = infer_B(all_submitted_rows["gbar"], all_submitted_rows["gtot"])
-    for radius, group in all_submitted_rows.groupby("radius_kpc"):
+    for radius, group in submitted_rows.groupby("radius_kpc"):
         positive = group[group["B_obs"] > 0]
         by_radius.append(
             {
@@ -210,10 +252,15 @@ def audit_tian(frame: pd.DataFrame, fox_names: set[str]) -> tuple[dict, pd.DataF
             "disjoint_points": int(len(disjoint)),
             "disjoint_clusters": int(disjoint["cluster"].nunique()),
             "fox_overlap_clusters": sorted(data.loc[data["overlaps_fox_calibration"], "cluster"].unique()),
+            "overlap_rule": (
+                "lowercase cluster names, remove non-alphanumeric characters, normalize "
+                "Abell and MACS aliases, then require exact equality with a Fox calibration name"
+            ),
             "median_predicted_observed": float(submitted_rows["ratio_predicted_observed"].median()),
             "mean_residual_dex": float(submitted_rows["residual_dex"].mean()),
             "rms_dex": submitted_score.rms_dex,
             "median_abs_dex": submitted_score.median_abs_dex,
+            "radial_residual_trend": cluster_bootstrap_radial_trend(submitted_rows),
         },
         "all_points_constant_refit": {
             **constant.parameters,
