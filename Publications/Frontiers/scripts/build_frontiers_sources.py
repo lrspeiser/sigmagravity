@@ -184,7 +184,7 @@ def main_figures() -> str:
         ),
         (
             "figure_2_cluster_roles.pdf",
-            r"""Illustrative cluster calibration and no-refit radial evaluation. Left: predicted and observed 200-kpc aperture masses for the 42 Fox clusters under the simplified baryon proxy and calibrated \(B_{\rm Fox}\). This panel is an illustrative in-sample calibration, not validation. Right: predicted-to-observed acceleration ratios for 73 Tian/CLASH radial measurements in 17 clusters after the prespecified name-normalization rule excludes MACS0416, MACS0717, and MACS1149, with \(B_{\rm Fox}\) frozen. Large markers show disjoint-sample radius-bin medians. The systematic increase with radius shows that the fixed Fox-calibrated amplitude does not transfer without bias under the present baryonic and lensing assumptions.""",
+            r"""Illustrative cluster calibration and no-refit radial evaluation. Left: predicted and observed 200-kpc aperture masses for the 42 Fox clusters under the simplified baryon proxy and calibrated \(B_{\rm Fox}\). This panel is an illustrative in-sample calibration, not validation. Right: predicted-to-observed acceleration ratios for 73 Tian/CLASH radial measurements in 17 clusters after the fixed name-normalization rule excludes MACS0416, MACS0717, and MACS1149, with \(B_{\rm Fox}\) frozen. Large markers show disjoint-sample radius-bin medians. The systematic increase with radius shows that the fixed Fox-calibrated amplitude does not transfer without bias under the present baryonic and lensing assumptions.""",
         ),
         (
             "figure_3_qumond_approximation.pdf",
@@ -192,7 +192,7 @@ def main_figures() -> str:
         ),
         (
             "figure_4_counterrotation_matched.pdf",
-            r"""Matched counterrotation diagnostic. Left: absolute standardized mean differences before and after matching counterrotators to controls. All post-match values are below the prespecified 0.1 threshold. Right: matched difference in the JAM/NFW-derived \(f_{\rm DM}(<R_e)\), with matched-set bootstrap 95\% interval. The interval includes zero. Because the outcome is model derived, this is a secondary catalog diagnostic rather than a direct test of \(\Sigma\)-Gravity.""",
+            r"""Matched counterrotation diagnostic. Left: absolute standardized mean differences before and after matching counterrotators to controls. All post-match values are below the stated 0.1 balance threshold. Right: matched difference in the JAM/NFW-derived \(f_{\rm DM}(<R_e)\), with matched-set bootstrap 95\% interval. The interval includes zero. Because the outcome is model derived, this is a secondary catalog diagnostic rather than a direct test of \(\Sigma\)-Gravity.""",
         ),
     ]
     blocks = [r"\section*{Figure captions}"]

@@ -208,6 +208,8 @@ The unweighted per-galaxy RMS is primary because it gives every retained radius 
 \right]^{1/2}.
 \]
 
+The galaxy-level weighted RMS values are averaged with equal weight across galaxies, and galaxies remain the bootstrap units.
+
 The weighted mean RMS values are 15.8473 km s\(^{-1}\) for Σ-Gravity and 15.6544 km s\(^{-1}\) for MOND. Their paired mean difference is +0.1930 km s\(^{-1}\), with galaxy-bootstrap 95% interval [−0.1773, +0.5637] km s\(^{-1}\); the paired sign-flip \(p\)-value is 0.3132. The weighted analysis likewise does not resolve a statistically significant difference and is not an equivalence test.
 
 Primary results:
@@ -269,7 +271,7 @@ V_{R_d}=V_{\rm bar}
 \sqrt{1+A_0W(r,R_d)h(g_N)}.
 \]
 
-The SPARC catalog value of \(R_d\) is used for each galaxy. The rational window and the scale \(R_d/(2\pi)\) are the prespecified structural form associated with the model; no alternate form was screened in this sensitivity calculation. No parameter is fitted, and the candidate replaces rather than multiplies the endogenous factor \(F(V_\Sigma)\). It therefore tests whether this specific photometric scale supplies the radial suppression already seen to be useful in the fixed-point ablation.
+The SPARC catalog value of \(R_d\) is used for each galaxy. The rational window and the scale \(R_d/(2\pi)\) are the previously specified structural form associated with the model; no alternate form was screened in this sensitivity calculation. No parameter is fitted, and the candidate replaces rather than multiplies the endogenous factor \(F(V_\Sigma)\). It therefore tests whether this specific photometric scale supplies the radial suppression already seen to be useful in the fixed-point ablation.
 
 | Comparison on 164 galaxies | Mean RMS difference | Galaxy-bootstrap 95% interval |
 |---|---:|---:|
@@ -344,7 +346,7 @@ Machine-readable input/output:
 
 ### S6.2 Tian/CLASH no-refit evaluation
 
-The public catalog provides cluster name, radius, \(\log g_{\rm bar}\), \(\log g_{\rm tot}\), and quoted standard errors. The exclusion rule lowercases names, removes non-alphanumeric characters, maps full Abell names to `A` aliases and full MACS names to their four-digit aliases, and then requires exact equality with a Fox calibration name. It excludes MACS0416, MACS0717, and MACS1149. The resulting disjoint set contains 17 clusters and 73 measurements.
+The public catalog provides cluster name, radius, \(\log g_{\rm bar}\), \(\log g_{\rm tot}\), and quoted standard errors. Cluster identifiers were case-normalized, stripped of non-alphanumeric characters, standardized for the documented Abell and MACS aliases, and compared for exact equality with a Fox calibration name. This procedure excluded MACS0416, MACS0717, and MACS1149. The resulting disjoint set contains 17 clusters and 73 measurements.
 
 For each point, the no-refit prediction uses \(B=8.4463\). Log residuals are
 
@@ -354,7 +356,19 @@ For each point, the no-refit prediction uses \(B=8.4463\). Log residuals are
 \tag{S20}
 \]
 
-Quoted uncertainties in both accelerations are retained in the machine table. Aggregate descriptive values are not interpreted as 73 independent clusters. The radial trend fits \(\epsilon\) against \(\log_{10}(r/200\ {\rm kpc})\), weights by the propagated residual variance, and obtains its interval from 5,000 bootstrap samples of the 17 complete clusters. The Fox calibration fixes \(B=8.4463\), \(h(g_N)\), and \(g^\dagger\); no CLASH quantity is used to alter them.
+The propagated residual variance is
+
+\[
+\sigma_{\epsilon,ij}^2
+=\sigma_{\log g_{\rm tot},ij}^2
++\left[s_{ij}\sigma_{\log g_{\rm bar},ij}\right]^2,
+\qquad
+s_{ij}=\frac{d\log_{10}g_{\rm pred}}{d\log_{10}g_{\rm bar}},
+\]
+
+and the radial regression uses weights \(1/\sigma_{\epsilon,ij}^2\).
+
+Quoted uncertainties in both accelerations are retained in the machine table. Aggregate descriptive values are not interpreted as 73 independent clusters. The radial trend fits \(\epsilon\) against \(\log_{10}(r/200\ {\rm kpc})\) and obtains its interval from 5,000 bootstrap samples of the 17 complete clusters. The Fox calibration fixes \(B=8.4463\), \(h(g_N)\), and \(g^\dagger\); no CLASH quantity is used to alter them.
 
 | Radius | Median \(g_{\rm pred}/g_{\rm tot}\) |
 |---:|---:|
