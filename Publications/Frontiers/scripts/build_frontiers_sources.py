@@ -260,10 +260,6 @@ def build_main() -> None:
 
 SPARC data are publicly available at \href{http://astroweb.cwru.edu/SPARC/}{astroweb.cwru.edu/SPARC}. The CLASH radial-acceleration catalog is available through VizieR as J/ApJ/896/70. The Fox cluster table used for calibration, frozen residuals, split definitions, matched samples, parameter diagnostics, and figure-generation code are provided in the accompanying repository and Supplementary Material.
 
-\section*{Author Contributions}
-
-LS conceived the study, developed the model, assembled the data and code, performed the analyses, interpreted the results, and wrote and revised the manuscript.
-
 \section*{Funding}
 
 The author declares that no financial support was received for the research, authorship, and/or publication of this article.
