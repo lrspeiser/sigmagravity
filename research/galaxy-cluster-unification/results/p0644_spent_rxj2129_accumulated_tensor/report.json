@@ -1,0 +1,170 @@
+{
+  "report_version": "P0644-SPENT-RXJ2129-ACCUMULATED-TENSOR-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "protocol_sha256": "8e3cc8612666ab10851e5a57c051c334a69ae7826544cccb72d7a18b7f6ff71c",
+  "source_sha256": "c8173f3a559b381f1913083be81900bab0bcd33ddad3fe8aba6070422bb32134",
+  "coverage": {
+    "cluster": "RX J2129.7+0005",
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "lambda_rows": 7,
+    "ordinary_geometry_parameters_refit": 6,
+    "universal_gravity_parameters_screened": 1,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "field_audit": {
+    "operator": "finite_path_accumulated_component_tensor",
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "proxy_total_mass_msun": 100000000000000.0,
+    "proxy_mass_changes_deflection_normalization": false,
+    "activation_weighted_mean": 0.017360175088600795,
+    "activation_maximum": 0.3241241274715432,
+    "cancellation_mean": 0.05965835554406635,
+    "survival_mean": 0.5421245570277584,
+    "trace_length_median_kpc": 7.3652493746128895,
+    "source_integral_fraction": 7.504770816674159e-18,
+    "normalized_curl_RMS": 2.792971589944961e-17,
+    "unit_deflection_RMS_arcsec": 0.3758012934714318,
+    "unit_deflection_maximum_arcsec": 2.4648260637511457,
+    "maximum_edge_correction_arcsec": 0.15670984142737102,
+    "carrier_deflection_median_arcsec": 21.25739757728231
+  },
+  "map_audits": {
+    "hst": {
+      "system_label": "RXJ2129",
+      "map_kind": "hst_f160w",
+      "input_count": 2,
+      "native_pixel_scale_arcsec": 0.0650000000000009,
+      "background": -0.0033761123195290565,
+      "masked_fraction": 0.01795127705200111,
+      "positive_cells": 12435,
+      "map_sum_before_normalization": 405.6119888731333
+    },
+    "xray": {
+      "system_label": "RXJ2129",
+      "map_kind": "chandra_soft_rate",
+      "input_count": 2,
+      "total_exposure_ks": 39.6040961730402,
+      "soft_events_on_grid": 15401,
+      "point_source_seed_cells": 37,
+      "point_source_masked_fraction": 0.009767092411720512,
+      "unmasked_map_sum": 0.792017083914403,
+      "masked_map_sum": 0.7662815305616146
+    }
+  },
+  "radial_parent_diagnostic": {
+    "r50_kpc": 355.55892554848015,
+    "r80_kpc": 504.64375503118424,
+    "concentration_r50_over_r80": 0.704574111942609,
+    "shape_gate": 0.7399562389719418,
+    "source_gbar_at_r80_m_s2": 1.5686153584660897e-11,
+    "source_acceleration_gate": 0.9997081134494022,
+    "potential_depth_at_image_min": 8.072280858376818e-06,
+    "potential_depth_at_image_max": 6.960645635933779e-06,
+    "P0599_amplitude_fraction_at_image_min": 2.218698234712414,
+    "P0599_amplitude_fraction_at_image_max": 2.218275798129555
+  },
+  "screen_scores": [
+    {
+      "variant_id": "lambda_0",
+      "lambda": 0.0,
+      "training_RMS_arcsec": 0.4952426246284921,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.8086634342148817,
+      "heldout_roots_converged": 7
+    },
+    {
+      "variant_id": "lambda_0p5",
+      "lambda": 0.5,
+      "training_RMS_arcsec": 0.5069192136820158,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.6687359712888505,
+      "heldout_roots_converged": 7
+    },
+    {
+      "variant_id": "lambda_1",
+      "lambda": 1.0,
+      "training_RMS_arcsec": 0.5234420711430394,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.5722865200698704,
+      "heldout_roots_converged": 7
+    },
+    {
+      "variant_id": "lambda_2",
+      "lambda": 2.0,
+      "training_RMS_arcsec": 0.5676607823363694,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.4156769612524152,
+      "heldout_roots_converged": 7
+    },
+    {
+      "variant_id": "lambda_5",
+      "lambda": 5.0,
+      "training_RMS_arcsec": 0.7554061324252349,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.139918492302971,
+      "heldout_roots_converged": 7
+    },
+    {
+      "variant_id": "lambda_10",
+      "lambda": 10.0,
+      "training_RMS_arcsec": 1.2471669127719132,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": null,
+      "heldout_roots_converged": 6
+    },
+    {
+      "variant_id": "lambda_20",
+      "lambda": 20.0,
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 14,
+      "heldout_RMS_arcsec": null,
+      "heldout_roots_converged": 3
+    }
+  ],
+  "selection": {
+    "selected_lambda": 0.0,
+    "selected_on": "training exact-root RMS only",
+    "spent_heldout_used_for_selection": false
+  },
+  "exact_refit": {
+    "training_RMS_arcsec": 0.49517116115467863,
+    "training_roots": 15,
+    "spent_heldout_RMS_arcsec": 1.8131428529541076,
+    "spent_heldout_roots": 7,
+    "optimizer_cost": 48.156659897228465,
+    "training_improvement_fraction_vs_P0599": 0.00014429992534958913,
+    "spent_heldout_worsening_fraction_vs_P0599": 0.002476645822881318
+  },
+  "comparators": {
+    "P0599_training_RMS_arcsec": 0.49524262462844243,
+    "P0599_spent_heldout_RMS_arcsec": 1.8086634342147614,
+    "previous_locked_candidate_heldout_RMS_arcsec": 1.0642772678285497,
+    "compact_one_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "prior_P0554_heldout_RMS_arcsec": 1.245,
+    "published_multi_halo_reference_RMS_arcsec": 0.29
+  },
+  "gate_results": {
+    "field_curl": true,
+    "source_integral": true,
+    "lambda_not_upper_endpoint": true,
+    "training_roots": true,
+    "heldout_roots": true,
+    "training_improvement": false,
+    "heldout_not_materially_worse": true,
+    "fixed_screen_root_safety": false
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "Every RX J2129 image is spent; this can reject or tune a mechanism but cannot validate it.",
+    "The HST and X-ray maps set geometry using fixed 10/90 stellar/gas mass fractions; they are not independent absolute mass maps for this cluster.",
+    "The scalar parent is P0599, not a covariant relativistic theory.",
+    "A useful lambda must transfer unchanged to other spent systems and then be frozen before P0640 unsealing.",
+    "The baseline already refits external shear; an improvement is therefore not obtained by withholding ordinary shear from the control."
+  ]
+}

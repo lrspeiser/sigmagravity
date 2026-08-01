@@ -1,0 +1,60 @@
+{
+  "protocol_version": "P0644-SPENT-RXJ2129-ACCUMULATED-TENSOR-1.0.0",
+  "status": "frozen_before_any_P0644_score",
+  "frozen_utc": "2026-08-02T01:38:00Z",
+  "purpose": "Determine on spent RX J2129 raw images whether the P0643 activation can generate useful absolute deflection and topology beyond a radial parent that already refits ellipticity and external shear.",
+  "candidate": {
+    "equation": "laplacian(delta_psi)=div[A(x) h_hat h_hat grad(psi_P0599-minus-baryons)]",
+    "activation": "A=[a0/(a0+gbar)] C_cancel [1-exp(-ell/10 kpc)]",
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "a0_m_s2": 1.2e-10,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "component_fraction_provenance": "fixed cluster baryon fractions, not fit to lens images",
+    "taper_inner_arcsec": 50.0,
+    "support_radius_arcsec": 58.0,
+    "lambda_grid": [0.0, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0],
+    "lambda_sign": "nonnegative because the tensor correction must remain positive semidefinite",
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "inputs": {
+    "raw_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "P0601_protocol": "configs/p0601_frozen_potential_raw_lensing_protocol.json",
+    "P0601_parameters": "results/p0601_frozen_potential_raw_lensing/fitted_parameters.csv",
+    "P0601_report": "results/p0601_frozen_potential_raw_lensing/report.json",
+    "component_screen_protocol": "configs/p0554_all_baryon_route_screen_protocol.json",
+    "component_acquisition_protocol": "configs/p0554_all_baryon_route_acquisition_protocol.json",
+    "reused_hst_protocol": "configs/clash_stellar_morphology_acquisition_protocol.json",
+    "component_input_audit": "results/p0554_all_baryon_route_input_audit/report.json"
+  },
+  "selection": {
+    "screen_geometry": "frozen 16-start P0601 P0599 geometry including ordinary ellipticity and external shear",
+    "screen_source_positions": "profile separately on 15 training images",
+    "screen_metric": "exact root RMS on training only",
+    "eligibility": "all 15 training roots and finite RMS",
+    "tie_break": "smaller lambda",
+    "selected_exact_refit_starts": 8,
+    "random_seed": 2129644
+  },
+  "predeclared_progression_gates": {
+    "field_normalized_curl_RMS_max": 1e-10,
+    "field_source_integral_fraction_max": 1e-4,
+    "selected_lambda_not_upper_endpoint": true,
+    "all_training_roots_after_refit": true,
+    "all_spent_heldout_roots_after_refit": true,
+    "training_RMS_improvement_fraction_min": 0.005,
+    "spent_heldout_RMS_worsening_fraction_max": 0.10,
+    "fixed_geometry_root_failures_allowed": 0
+  },
+  "outputs": {
+    "directory": "results/p0644_spent_rxj2129_accumulated_tensor"
+  },
+  "claim_boundary": [
+    "Every RX J2129 image is spent; this can reject or tune a mechanism but cannot validate it.",
+    "The HST and X-ray maps set geometry using fixed 10/90 stellar/gas mass fractions; they are not independent absolute mass maps for this cluster.",
+    "The scalar parent is P0599, not a covariant relativistic theory.",
+    "A useful lambda must transfer unchanged to other spent systems and then be frozen before P0640 unsealing.",
+    "The baseline already refits external shear; an improvement is therefore not obtained by withholding ordinary shear from the control."
+  ]
+}
