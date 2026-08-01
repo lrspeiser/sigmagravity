@@ -1,0 +1,202 @@
+{
+  "protocol_version": "R1-J0946-Jackpot-feasibility-0.1",
+  "status": "frozen_before_any_J0946_science_pixel_download_or_inspection",
+  "frozen_utc": "2026-07-27T14:20:00Z",
+  "selection_blind": true,
+  "system": "SDSS J0946+1006",
+  "alias": "Jackpot",
+  "selection_basis": "The system was selected from published observable geometry only: one foreground galaxy, three spectroscopic source planes, spatially resolved stellar kinematics, HST imaging, and public-archive identifiers. No gravity residual, dark-matter slope, subhalo score, or alternative-gravity parameter was used to select it.",
+  "target": {
+    "ra_hms": "09:46:56.68",
+    "dec_dms": "+10:06:52.6",
+    "ra_deg": 146.73616666666665,
+    "dec_deg": 10.11461111111111,
+    "frame": "ICRS/J2000",
+    "lens_redshift": 0.222,
+    "published_scale_kpc_per_arcsec": 3.69
+  },
+  "primary_sources": [
+    {
+      "role": "resolved stellar kinematics and accepted dynamical support",
+      "citation": "Turner, Smith & Collett 2024, MNRAS, arXiv:2401.08771",
+      "url": "https://arxiv.org/abs/2401.08771",
+      "source_archive_url": "https://export.arxiv.org/e-print/2401.08771"
+    },
+    {
+      "role": "third source plane and three published ring radii",
+      "citation": "Collett & Smith 2020, MNRAS, arXiv:2004.00649",
+      "url": "https://arxiv.org/abs/2004.00649",
+      "source_archive_url": "https://export.arxiv.org/e-print/2004.00649"
+    },
+    {
+      "role": "spectroscopic redshift of the second source plane",
+      "citation": "Smith & Collett 2021, MNRAS, arXiv:2104.12790",
+      "url": "https://arxiv.org/abs/2104.12790",
+      "source_archive_url": "https://export.arxiv.org/e-print/2104.12790"
+    },
+    {
+      "role": "recent three-source-plane pixel-level lens analysis and data-product search target",
+      "citation": "Ballard et al. 2024, MNRAS, arXiv:2309.04535",
+      "url": "https://arxiv.org/abs/2309.04535",
+      "source_archive_url": "https://export.arxiv.org/e-print/2309.04535"
+    }
+  ],
+  "published_lens_geometry": {
+    "source_planes_sorted_by_ring_radius": [
+      {
+        "source_plane": 1,
+        "source_redshift": 0.609,
+        "ring_radius_arcsec": 1.4,
+        "ring_radius_kpc_at_published_scale": 5.1659999999999995,
+        "redshift_status": "spectroscopic"
+      },
+      {
+        "source_plane": 2,
+        "source_redshift": 2.035,
+        "ring_radius_arcsec": 2.1,
+        "ring_radius_kpc_at_published_scale": 7.749,
+        "redshift_status": "spectroscopic"
+      },
+      {
+        "source_plane": 3,
+        "source_redshift": 5.975,
+        "ring_radius_arcsec": 2.5,
+        "ring_radius_kpc_at_published_scale": 9.225,
+        "redshift_status": "spectroscopic"
+      }
+    ],
+    "third_source_image_radii_arcsec": [
+      1.35,
+      3.56
+    ],
+    "third_source_radius_note": "The published 2.5-arcsec value is an approximate or naive Einstein radius inferred from the two-image separation, not an additional directly measured image location. The two reported image radii are 1.35 and 3.56 arcsec, so only one is inside the current 1.95-arcsec accepted dynamics support.",
+    "distinct_source_planes": 3,
+    "distinct_published_ring_radii": 3,
+    "important_limit": "Three rings are a pre-fit geometric upper bound, not proof of three independent marginalized Weyl-response modes. Pixel likelihoods, source-plane nuisance parameters, and cross-plane covariance must still be propagated."
+  },
+  "published_dynamics_support": {
+    "measured_inner_radius_kpc": 1.0,
+    "measured_outer_radius_kpc": 10.0,
+    "measured_outer_radius_arcsec": 2.7,
+    "voronoi_bins_total": 53,
+    "accepted_axisymmetric_model_outer_radius_arcsec": 1.95,
+    "accepted_axisymmetric_model_outer_radius_kpc": 7.1955,
+    "excluded_outer_bins": 9,
+    "published_exclusion_reason": "The outer kinematics are not dynamically simple; the paper cites an asymmetric envelope and possible tidal interaction, so its oblate-axisymmetric Jeans models exclude the nine outermost bins.",
+    "accepted_support_definition": "For admission to the ten-system identifiability sample, accepted same-support dynamics stop at 1.95 arcsec. Merely measuring light or kinematics to 2.7 arcsec does not authorize counting rings outside the model-valid support."
+  },
+  "frozen_geometry_gate": {
+    "minimum_distinct_spectroscopic_source_planes": 3,
+    "minimum_distinct_ring_radii": 3,
+    "minimum_rings_inside_accepted_dynamics_support": 3,
+    "minimum_pre_fit_structural_radial_rank_upper_bound": 3,
+    "maximum_allowed_unmodeled_ring_radius_arcsec": 0.0,
+    "published_rings_inside_current_accepted_support": [
+      1.4
+    ],
+    "published_rings_outside_current_accepted_support": [
+      2.1,
+      2.5
+    ],
+    "current_same_support_ring_count": 1,
+    "current_pre_fit_ring_scale_rank_upper_bound": 1,
+    "full_image_level_structural_rank": "not_yet_established_from_observable_level_pixels_and_covariance",
+    "current_gate_pass": false,
+    "no_post_selection_relaxation": true
+  },
+  "repair_hypothesis": {
+    "description": "A future non-axisymmetric or tidal dynamical model could attempt to validate the measured 1.95-2.7 arcsec kinematics. This is a new upstream dynamics result, not a reinterpretation of the published accepted support.",
+    "minimum_required_outer_radius_arcsec": 2.5,
+    "minimum_required_outer_radius_kpc": 9.225,
+    "required_checks": [
+      "retain all predeclared azimuthal sectors spanning each of the three ring radii",
+      "pass opposite-half and quadrant consistency checks",
+      "include PSF, template, sky, binning, and tidal/asymmetry systematics in the covariance",
+      "show that the outer response is not driven by the nine bins rejected by the published axisymmetric model",
+      "freeze the full numerical reduction and model-validity thresholds before science-array inspection"
+    ],
+    "promotion_rule": "Only a separately preregistered repair analysis that passes every check may raise the same-support rank ceiling above one. Failure preserves this candidate as rank-one and triggers replacement; it does not relax the 2.5-arcsec requirement."
+  },
+  "archive_targets": {
+    "eso_muse": {
+      "proposal_id": "0102.A-0950",
+      "instrument": "MUSE",
+      "published_total_integration_hours": 5.2,
+      "metadata_query_authorized": true,
+      "science_download_authorized_now": false,
+      "required_before_download": "Pass the frozen geometry gate or freeze a separate outer-dynamics repair protocol that can make the gate testable."
+    },
+    "hst": [
+      {
+        "proposal_id": "10886",
+        "instrument": "ACS/WFC",
+        "filter": "F814W",
+        "metadata_query_authorized": true,
+        "science_download_authorized_now": false
+      },
+      {
+        "proposal_id": "11202",
+        "instrument": "WFC3/IR",
+        "filter": "F160W",
+        "metadata_query_authorized": true,
+        "science_download_authorized_now": false
+      },
+      {
+        "proposal_id": "11202",
+        "instrument": "WFPC2/PC",
+        "filter": "F606W",
+        "metadata_query_authorized": true,
+        "science_download_authorized_now": false
+      },
+      {
+        "proposal_id": "11701",
+        "instrument": "WFC3/UVIS",
+        "filter": "F336W",
+        "metadata_query_authorized": true,
+        "science_download_authorized_now": false
+      },
+      {
+        "proposal_id": "11701",
+        "instrument": "WFC3/UVIS",
+        "filter": "F438W",
+        "metadata_query_authorized": true,
+        "science_download_authorized_now": false
+      }
+    ],
+    "required_lens_products": [
+      "image-plane pixels and PSF with immutable archive provenance",
+      "noise or exposure products sufficient to construct a likelihood",
+      "three source-plane redshifts and source-plane nuisance model",
+      "observable-level image or surface-brightness likelihood usable without importing a GR-fitted mass posterior",
+      "full cross-plane covariance or the ingredients to reconstruct it"
+    ],
+    "required_baryonic_products": [
+      "unsubtracted HST photometry and PSF",
+      "source-light subtraction uncertainty",
+      "published MGE parameters as a check, not as a fixed GR-derived baryonic truth",
+      "stellar-population mass-to-light nuisance prior including IMF and radial-gradient alternatives"
+    ]
+  },
+  "decision_rules": {
+    "admit_to_new_rank_three_candidate_queue": "All geometry, accepted-dynamics, public-archive, likelihood, baryonic, and covariance gates pass without using a gravity residual.",
+    "retain_as_repair_candidate": "Raw MUSE and HST products are public and traceable, but current accepted same-support rank is below three; a separately frozen outer-dynamics repair remains possible.",
+    "reject_and_replace": "The public data cannot support a model-valid dynamics result through 2.5 arcsec, observable-level lens likelihood, or independently propagated covariance.",
+    "current_decision": "retain_as_rank_one_repair_candidate_not_a_ten_system_promotion"
+  },
+  "progress_checkpoint": {
+    "time_box": "one metadata/source-product audit plus one frozen outer-dynamics feasibility audit",
+    "advance_if": "The repair route is demonstrably testable with public products and an a priori numerical validity gate through at least 2.5 arcsec.",
+    "rethink_if": "No public observable-level lens likelihood is recoverable, or the frozen outer-dynamics feasibility gate cannot validate 2.5 arcsec support. Stop work on this object and search another triple-source-plane or extended-lensing galaxy; do not spend a reduction cycle on a rank-one endpoint."
+  },
+  "authorization": {
+    "download_primary_article_sources": true,
+    "query_archive_metadata": true,
+    "download_science_pixels": false,
+    "inspect_science_pixels": false,
+    "extract_stellar_kinematics": false,
+    "infer_dynamical_or_Weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false,
+    "count_toward_ten_system_target": false
+  }
+}

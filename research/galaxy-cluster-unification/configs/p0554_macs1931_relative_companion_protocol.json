@@ -1,0 +1,71 @@
+{
+  "protocol_version": "P0554-MACS1931-RELATIVE-COMPANION-0.1.0",
+  "frozen_utc": "2026-08-01T00:28:00Z",
+  "status": "frozen_after_absolute_position_audit_before_any_anchor_registered_companion_pixel_inspection",
+  "motivation": "The absolute audit found that each modeled anchor itself misses observed image 2c by 1.95 to 5.88 arcseconds. A fair local topology test must register that anchor to 2c before asking where its paired companion should appear.",
+  "question": "After the unique translation that maps each formula's nearest root onto observed image 2c, is its opposite-parity companion present in the published family-2 catalog or CLASH F160W mosaic?",
+  "prediction": {
+    "registered_companion_x": "observed_2c_x + companion_root_x - anchor_root_x",
+    "registered_companion_y": "observed_2c_y + companion_root_y - anchor_root_y",
+    "translation_parameters_fit": 0,
+    "translation_is_fixed_by": "the already-declared identification of the nearest root as the anchor corresponding to observed image 2c",
+    "rotation_or_scale_allowed": false,
+    "formula_parameters_fit": 0,
+    "geometry_parameters_refit": 0,
+    "photometry_parameters_fit": 0
+  },
+  "astrometry": {
+    "model_center_ra_deg": 292.9570833333,
+    "model_center_dec_deg": -26.5756166667,
+    "published_catalog_match_radius_arcsec": 0.476751,
+    "drizzled_wcs": "linear celestial WCS with residual SIP terms disabled"
+  },
+  "photometry": {
+    "aperture_radius_arcsec": 0.325,
+    "background_annulus_inner_arcsec": 0.65,
+    "background_annulus_outer_arcsec": 1.30,
+    "minimum_valid_weight_fraction": 0.95,
+    "formal_detection_snr": 5.0,
+    "strong_expected_companion_snr": 10.0,
+    "minimum_predicted_companion_to_anchor_flux_ratio": 0.25
+  },
+  "display_and_grouping": {
+    "root_grouping_radius_arcsec": 0.5,
+    "overview_half_width_arcsec": 13.0,
+    "cutout_half_width_arcsec": 2.5,
+    "representative_variants": ["combined_parent", "combined_power_240", "route_parent"]
+  },
+  "classification_rules": {
+    "catalogued_family2_companion": "a published family-2 image lies within 0.476751 arcseconds of the anchor-registered companion",
+    "formal_blank": "expected companion SNR is at least 10, measured aperture SNR is below 5, and valid weight fraction is at least 0.95",
+    "visual_blank": "the frozen cutout contains no plausible source centered at the registered coordinate and no masking or foreground ambiguity",
+    "rejection_scope": "a blank rejects the formula's local extra-pair prediction in this spent simplified MACS1931 realization; it does not by itself reject every possible baryonic routing law",
+    "no_formula_promotion": true
+  },
+  "inputs": {
+    "absolute_protocol": "configs/p0554_macs1931_companion_audit_protocol.json",
+    "absolute_root_audit": "results/p0554_macs1931_companion_audit/root_audit.csv",
+    "absolute_report": "results/p0554_macs1931_companion_audit/report.json",
+    "global_assignments": "results/p0554_caustic_margin/global_MACS1931_family2_assignments.csv",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "science_fits": "data/raw/clash_stellar_morphology_f160w/hlsp_clash_hst_wfc3ir_macs1931_f160w_v1_drz.fits",
+    "weight_fits": "data/raw/clash_stellar_morphology_f160w/hlsp_clash_hst_wfc3ir_macs1931_f160w_v1_wht.fits"
+  },
+  "outputs": {
+    "directory": "results/p0554_macs1931_relative_companion",
+    "registered_audit": "registered_companion_audit.csv",
+    "position_groups": "position_groups.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "overview_figure": "macs1931_registered_companion_overview.png",
+    "cutout_figure": "macs1931_registered_companion_cutouts.png"
+  },
+  "claim_limits": [
+    "This secondary protocol was motivated by the absolute audit's observed anchor offsets, but was frozen before any registered-position pixels were inspected.",
+    "Translation removes only the anchor offset; no rotation, scale, shear, or position-specific adjustment is allowed.",
+    "The simplified lens has large residuals elsewhere, so even registered relative positions can be inaccurate.",
+    "F160W alone cannot confirm a source identity, while a clean blank is more informative because the predicted flux ratio is near unity.",
+    "Drizzle correlation, foreground subtraction, and caustic magnification uncertainty remain limitations.",
+    "No formula is promoted."
+  ]
+}

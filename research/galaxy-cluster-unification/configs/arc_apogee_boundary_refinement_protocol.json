@@ -1,0 +1,50 @@
+{
+  "protocol_version": "ARC-APOGEE-BOUNDARY-REFINEMENT-0.1.0",
+  "frozen_utc": "2026-08-01T00:20:00Z",
+  "status": "frozen_after_factorial_boundary_discovery_before_refinement_scores",
+  "question": "How much square-root mass normalization is actually required, and do the alpha, apogee, and screen boundaries continue improving when refined?",
+  "placement_change": {
+    "scalar_amplitude": "g=gbar*[1+q*A(r/Rb)*S(gbar)] with no extent multiplier",
+    "directional_kernel": "K=(1-s(C))*Klocal+s(C)*Karc using the cluster-derived soft extent gate",
+    "reason": "The first factorial sweep found extent gating to be the largest galaxy harm but the largest cluster-shape benefit, indicating that it belongs in directional redistribution rather than scalar amplitude"
+  },
+  "scale_interpolation": {
+    "equation": "Rb=R80^(1-mu)*RM^mu",
+    "RM": "sqrt(G*Mforce/a0)",
+    "mu_values": [0.0, 0.25, 0.5, 0.75, 1.0],
+    "interpretation": "mu=0 is measured baryonic extent; mu=1 is the MOND-like square-root mass radius"
+  },
+  "grid": {
+    "alpha_values": [0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9, 1.0],
+    "apogee_ratios": [1.0, 2.0, 4.0, 10.0, 100.0, 1000000.0],
+    "screen_exponents": [0.5, 0.75, 1.0, 1.25, 1.5, 2.0],
+    "universal_q_bounds": [0.0, 1000.0]
+  },
+  "inputs": {
+    "points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "parent_report": "results/arc_apogee_cross_domain/report.json"
+  },
+  "solar_gates": {
+    "Cassini_fractional_force_proxy_max": 2.3e-5,
+    "Earth_fractional_force_proxy_max": 1e-10,
+    "Mercury_supplementary_precession_absolute_max_mas_per_century": 3.1,
+    "PPN_gamma_assumption": 1.0
+  },
+  "outputs": {
+    "directory": "results/arc_apogee_boundary_refinement",
+    "scores": "scores.csv",
+    "predictions": "selected_predictions.csv",
+    "morphology_scores": "morphology_scores.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "arc_apogee_boundary_refinement.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This is a post-boundary exploratory refinement and cannot confirm any selected coefficients.",
+    "The mass-radius endpoint mu=1 is mathematically close to importing the square-root mass scaling that makes MOND/RAR successful.",
+    "Fixed RAR nuisances are reused for all variants to isolate formula effects.",
+    "Solar tests remain zero-slip force and first-order perihelion proxies."
+  ]
+}

@@ -1,0 +1,13 @@
+system_label,coordinate,best_main_effect_level,main_effect_span_arcsec
+MACS0329,minimum_permittivity,0.25,0.019508862458483378
+MACS0329,anisotropy_tau,1.2,0.01586820101318054
+MACS0329,smoothing_r80_fraction,0.8,0.00011128308177887902
+MACS0429,minimum_permittivity,1.0,0.058071657435132096
+MACS0429,anisotropy_tau,1.2,0.08376877071819422
+MACS0429,smoothing_r80_fraction,0.8,0.0006206573307405705
+MACS1115,minimum_permittivity,0.25,0.18153866308732347
+MACS1115,anisotropy_tau,-1.2,1.1347688493124721
+MACS1115,smoothing_r80_fraction,0.8,0.00018417130433867612
+MACS1931,minimum_permittivity,1.0,0.07671963240602553
+MACS1931,anisotropy_tau,1.2,0.3602556608656622
+MACS1931,smoothing_r80_fraction,0.8,0.00885021327039226

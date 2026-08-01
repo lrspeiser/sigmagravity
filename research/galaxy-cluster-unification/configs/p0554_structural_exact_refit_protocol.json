@@ -1,0 +1,119 @@
+{
+  "protocol_version": "P0554-STRUCTURAL-EXACT-REFIT-0.1.0",
+  "frozen_utc": "2026-07-31T21:45:04Z",
+  "status": "frozen_after_structural_screen_before_any_selected_exact_refit_score",
+  "question": "Which influential P0554 structural directions survive refitting ordinary cluster-lens geometry, and which fixed-geometry effects were caustic-placement artifacts?",
+  "selection_evidence": {
+    "report": "results/p0554_structural_microvariations/report.json",
+    "rules": [
+      "screen softness was the only material structural coordinate with a common fixed-geometry direction across multiple non-Solar domains",
+      "screen softness 0.98 tests the smallest shared direction and 0.90 tests the first all-root fixed-geometry response",
+      "dynamics addition softness is the strongest galaxy and Mercury structural lever; both 0.98 and 1.02 are Solar safe but point toward opposite galaxy and cluster objectives",
+      "lensing addition softness is the strongest CLASH structural lever and has opposite fixed-geometry signs in RX J2129 and the other four clusters",
+      "potential-to-radius coupling +0.01 is a tiny structural change that improves the fixed SPARC, CLASH, and RX directions and recovers a raw root, but conflicts with the other clusters"
+    ]
+  },
+  "baseline": {
+    "alpha": 0.75,
+    "apogee_ratio": 100.0,
+    "screen_exponent": 1.0,
+    "screen_scale": 1.0,
+    "mass_radius_delta": 0.0,
+    "extent_leak": 0.0,
+    "invariant_mode": "potential_depth",
+    "invariant_power": 1.2,
+    "invariant_scale": 0.000002,
+    "secondary_path_ratio_power": 0.25,
+    "photon_extra_multiplier": 1.75,
+    "universal_q": 1.2300686115098052,
+    "residence_softness": 1.0,
+    "screen_softness": 1.0,
+    "potential_softness": 1.0,
+    "potential_path_cross": 1.0,
+    "response_addition_softness": 1.0,
+    "lensing_addition_softness": 1.0,
+    "extent_scale_coupling": 0.0,
+    "potential_scale_coupling": 0.0,
+    "mass_growth_power": 0.0
+  },
+  "variants": [
+    {"variant_id": "baseline", "role": "P0554 parent", "changes": {}},
+    {"variant_id": "screen_softness_098", "role": "smallest shared screen direction", "changes": {"screen_softness": 0.98}},
+    {"variant_id": "screen_softness_090", "role": "fixed-geometry all-root screen direction", "changes": {"screen_softness": 0.90}},
+    {"variant_id": "dynamics_softness_102", "role": "galaxy and Solar favored addition direction", "changes": {"response_addition_softness": 1.02}},
+    {"variant_id": "dynamics_softness_098", "role": "CLASH-favored Solar-safe addition direction", "changes": {"response_addition_softness": 0.98}},
+    {"variant_id": "lensing_softness_098", "role": "CLASH and RX fixed-geometry direction", "changes": {"lensing_addition_softness": 0.98}},
+    {"variant_id": "lensing_softness_102", "role": "other-four fixed-geometry direction", "changes": {"lensing_addition_softness": 1.02}},
+    {"variant_id": "potential_scale_plus_001", "role": "tiny potential-to-radius coupling", "changes": {"potential_scale_coupling": 0.01}}
+  ],
+  "evaluation": {
+    "formula_parameters_fit": 0,
+    "geometry_parameters_refit_per_cluster": 6,
+    "source_positions_profiled_per_family": true,
+    "optimization_starts_per_variant_system": 8,
+    "maximum_function_evaluations": 2500,
+    "random_seed": 554311337,
+    "galaxy": "131 SPARC galaxies with fixed nuisance parameters and exact nonlinear dynamical response.",
+    "derived_cluster": "84 CLASH equivalent-acceleration points in 20 systems, no cluster amplitude fit.",
+    "raw": "RX J2129 plus four Caminha/CLASH clusters; exact held-out roots after refitting only ordinary geometry.",
+    "solar": "Same analytic Cassini, Earth, Saturn, and Mercury proxies."
+  },
+  "comparison_scopes": {
+    "RXJ2129": ["RXJ2129"],
+    "four_cluster": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "historical_validation": ["MACS1115", "MACS1931"],
+    "all_five": ["RXJ2129", "MACS0329", "MACS0429", "MACS1115", "MACS1931"]
+  },
+  "interpretation_rules": {
+    "all_raw_roots_required_for_accuracy_claim": true,
+    "matched_comparison_rule": "Compare candidate and parent RMS only on systems complete for both; report recovered and lost systems separately.",
+    "fixed_direction_survival": "A direction survives only when the sign of its exact-refit matched RMS change agrees with its fixed-geometry matched RMS change on the same requested scope.",
+    "solar_mercury_margin_mas_per_century": 3.1,
+    "no_variant_is_promoted": true
+  },
+  "inputs": {
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "structural_screen_report": "results/p0554_structural_microvariations/report.json",
+    "structural_fixed_raw": "results/p0554_structural_microvariations/raw_system_scores.csv",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ2129_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "RXJ2129_geometry": "results/arc_invariant_pareto_refinement/raw_RXJ2129_parameters.csv",
+    "four_cluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "four_cluster_geometry": "results/adaptive_route_multicluster_raw/geometry.csv",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "compact_halo_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "fixed_variant_mapping": {
+    "baseline": "baseline",
+    "screen_softness_098": "screen_softness_minus_u010",
+    "screen_softness_090": "screen_softness_minus_u050",
+    "dynamics_softness_102": "response_addition_softness_plus_u010",
+    "dynamics_softness_098": "response_addition_softness_minus_u010",
+    "lensing_softness_098": "lensing_addition_softness_minus_u010",
+    "lensing_softness_102": "lensing_addition_softness_plus_u010",
+    "potential_scale_plus_001": "potential_scale_coupling_plus_u010"
+  },
+  "outputs": {
+    "directory": "results/p0554_structural_exact_refit",
+    "variant_scores": "variant_scores.csv",
+    "galaxy_morphology": "galaxy_morphology_scores.csv",
+    "raw_scores": "raw_system_scores.csv",
+    "raw_predictions": "raw_predictions.csv",
+    "geometry": "geometry.csv",
+    "matched_comparisons": "matched_comparisons.csv",
+    "fixed_vs_refit": "fixed_vs_refit.csv",
+    "report": "report.json",
+    "figure": "p0554_structural_exact_refit.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The shortlist was selected after inspecting spent structural-screen data and is descriptive.",
+    "The five raw clusters are spent at project level; exact refitting tests nuisance robustness, not fresh confirmation.",
+    "CLASH equivalent accelerations are conventional-GR/NFW-derived targets.",
+    "The structural operators are phenomenological and are not derived from an action.",
+    "The compact-halo comparator is deliberately limited and is not a full modern dark-matter fit."
+  ]
+}

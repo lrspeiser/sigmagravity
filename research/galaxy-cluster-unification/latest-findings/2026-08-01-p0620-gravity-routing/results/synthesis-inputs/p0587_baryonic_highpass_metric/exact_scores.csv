@@ -1,0 +1,16 @@
+row_type,model_id,system_label,training_exact_RMS_arcsec,heldout_exact_RMS_arcsec,all_training_roots,all_heldout_roots,finite_systems
+system,zero,MACS0329,7.271849708078716,19.59885367094459,True,True,
+system,zero,MACS0429,3.74797698398798,14.639154879216555,True,True,
+system,zero,MACS1115,0.09809636787988275,24.635293871889314,True,True,
+system,zero,MACS1931,2.8311236099162964,8.520400449262269,True,True,
+system,raw_metric,MACS0329,7.379270305465106,19.337367096065858,True,True,
+system,raw_metric,MACS0429,3.7835320086427973,14.482020028202287,True,True,
+system,raw_metric,MACS1115,0.09591078769687106,24.64431783439589,True,True,
+system,raw_metric,MACS1931,2.86996724813271,7.255248095746112,True,True,
+system,highpass_primary,MACS0329,7.3783247851488545,19.287944723379546,True,True,
+system,highpass_primary,MACS0429,3.799806777548473,14.743801517978593,True,True,
+system,highpass_primary,MACS1115,0.09663060867536105,24.644627617176784,True,True,
+system,highpass_primary,MACS1931,2.856177245850581,7.2575802595151115,True,True,
+aggregate,zero,all_four,4.328741544646806,17.873967444043615,True,True,4.0
+aggregate,raw_metric,all_four,4.387899713590055,17.63266639478282,True,True,4.0
+aggregate,highpass_primary,all_four,4.3887724398769175,17.673671353642888,True,True,4.0

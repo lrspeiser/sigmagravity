@@ -1,0 +1,29 @@
+{
+  "protocol_version": "P0568C-WIDTH-COUPLING-INTERACTION-0.1.0",
+  "frozen_utc": "2026-08-01T01:42:00Z",
+  "status": "frozen_after_p0568b_boundary_hit_before_extended_interaction_scores",
+  "question": "Does the P0568B development preference stabilize inside the original positive-definite coupling domain, or does width-coupling degeneracy improve development while degrading transfer?",
+  "parent_protocol": "configs/p0568_baryon_only_tensor_forward_protocol.json",
+  "family": "tidal_low_density",
+  "source_smoothing_kpc": [100.0, 125.0, 150.0],
+  "coupling_t": [-0.9, -0.75, -0.6, -0.525, -0.45, -0.375, -0.3, -0.225, -0.15, 0.0],
+  "selection": "minimum equal-system development Jensen-Shannon divergence only",
+  "diagnostics": {
+    "stability": "selected coupling must not be a grid boundary",
+    "transfer": "descriptive P0568 holdout score must not worsen relative to P0568's original 0.035707331457040026",
+    "degeneracy": "compare each tensor setting with every local Gaussian width by its ten-system score vector and report the closest local-equivalent width"
+  },
+  "outputs": {
+    "directory": "results/p0568c_width_coupling_interaction",
+    "scores": "scores.csv",
+    "candidates": "candidates.csv",
+    "report": "report.json",
+    "figure": "p0568c_width_coupling_interaction.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The holdouts are descriptive after P0568.",
+    "The test remains first-order and member-light-only.",
+    "A fit ridge is a parameter-identifiability result, not a new physical effect."
+  ]
+}

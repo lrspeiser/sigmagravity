@@ -1,0 +1,159 @@
+{
+  "report_version": "P0616-FROZEN-SELF-COUPLED-TRANSFER-RESULTS-0.1.0",
+  "status": "complete_chronologically_prospective_formula_transfer",
+  "chronology": {
+    "prospective_relative_to_P0615_formula": true,
+    "pristine_project_holdout": false,
+    "reason": "Both systems were used by other field families, but neither their P0554 excess at R80, member-light quadrupole amplitude, nor response to the P0615 endpoint field was computed before this freeze."
+  },
+  "locked_formula": {
+    "Delta80": "alpha_P0554(R80)/alpha_b(R80)-1",
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "angular_amplitude": "epsilon=Q^2/(1+Delta80)",
+    "return_length_over_R80": 0.36,
+    "width_over_R80": 0.23,
+    "contrast_mode": "tanh",
+    "contrast_cap": 20.0,
+    "new_fitted_gravity_parameters": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "coverage": {
+    "systems": 2,
+    "member_sources": 124,
+    "raw_fits": 4,
+    "complete_matched_systems": 1
+  },
+  "system_states": [
+    {
+      "system_label": "A383",
+      "R80_kpc": 131.23682857842118,
+      "parent_alpha_R80_arcsec": 14.113927822315258,
+      "baryonic_alpha_R80_arcsec": 1.6654433535986728,
+      "Delta80": 7.47457692981153,
+      "self_routed_fraction": 0.882000009170695,
+      "quadrupole_Q": 0.3882188759892523,
+      "epsilon_scalar_control": 0.0,
+      "epsilon_linear_Q_over_total": 0.045809823806494857,
+      "epsilon_quadratic_Q2_over_total": 0.017784238307423126,
+      "epsilon_quadratic_Q2_routed": 0.01568569835024102,
+      "epsilon_quadratic_Q2_strong_screen": 0.002098539957182103,
+      "epsilon_quartic_Q4_over_total": 0.0026803318369128986,
+      "selected_epsilon": 0.017784238307423126
+    },
+    {
+      "system_label": "MS2137",
+      "R80_kpc": 263.20723765954597,
+      "parent_alpha_R80_arcsec": 11.233037048034815,
+      "baryonic_alpha_R80_arcsec": 1.3272793808257952,
+      "Delta80": 7.463204665355338,
+      "self_routed_fraction": 0.8818414490088414,
+      "quadrupole_Q": 0.5878702684299809,
+      "epsilon_scalar_control": 0.0,
+      "epsilon_linear_Q_over_total": 0.06946189908846999,
+      "epsilon_quadratic_Q2_over_total": 0.0408345852627951,
+      "epsilon_quadratic_Q2_routed": 0.0360096298378183,
+      "epsilon_quadratic_Q2_strong_screen": 0.004824955424976787,
+      "epsilon_quartic_Q4_over_total": 0.01411208363336525,
+      "selected_epsilon": 0.0408345852627951
+    }
+  ],
+  "scores": [
+    {
+      "system_label": "A383",
+      "variant_id": "P0554_scalar_control",
+      "effective_strength": 0.0,
+      "training_images": 10,
+      "heldout_images": 4,
+      "training_RMS_arcsec": 0.8493722230188442,
+      "training_roots_converged": 10,
+      "heldout_RMS_arcsec": 9.096624055914212,
+      "heldout_roots_converged": 4,
+      "optimizer_cost": 17.492203800701468
+    },
+    {
+      "system_label": "A383",
+      "variant_id": "P0615_quadratic_self_route",
+      "effective_strength": 0.017784238307423126,
+      "training_images": 10,
+      "heldout_images": 4,
+      "training_RMS_arcsec": 0.853238686311762,
+      "training_roots_converged": 10,
+      "heldout_RMS_arcsec": 9.136824083945461,
+      "heldout_roots_converged": 4,
+      "optimizer_cost": 17.538002974657516
+    },
+    {
+      "system_label": "MS2137",
+      "variant_id": "P0554_scalar_control",
+      "effective_strength": 0.0,
+      "training_images": 8,
+      "heldout_images": 3,
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 7,
+      "heldout_RMS_arcsec": null,
+      "heldout_roots_converged": 2,
+      "optimizer_cost": 324.4971022749735
+    },
+    {
+      "system_label": "MS2137",
+      "variant_id": "P0615_quadratic_self_route",
+      "effective_strength": 0.0408345852627951,
+      "training_images": 8,
+      "heldout_images": 3,
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 7,
+      "heldout_RMS_arcsec": null,
+      "heldout_roots_converged": 2,
+      "optimizer_cost": 324.7253386914617
+    }
+  ],
+  "responses": [
+    {
+      "system_label": "A383",
+      "complete_pair": true,
+      "heldout_pair_complete": true,
+      "heldout_improvement_fraction": -0.004419224954681056
+    },
+    {
+      "system_label": "MS2137",
+      "complete_pair": false,
+      "heldout_pair_complete": false,
+      "heldout_improvement_fraction": null
+    }
+  ],
+  "aggregate": {
+    "matched_baseline_RMS_arcsec": 9.096624055914212,
+    "matched_candidate_RMS_arcsec": 9.136824083945461,
+    "matched_improvement_fraction": -0.004419224954681056
+  },
+  "inherited_cross_domain": {
+    "SPARC_outer_RMSE_km_s": 12.59204382085389,
+    "SPARC_to_RAR_ratio": 1.2168029635346302,
+    "Solar_all_proxies_pass": true
+  },
+  "gates": {
+    "all_training_and_heldout_roots_each_system_pass": false,
+    "both_systems_not_worse_pass": false,
+    "equal_system_heldout_improvement_pass": false,
+    "equal_system_absolute_RMS_pass": false,
+    "galaxy_near_RAR_pass": true,
+    "Solar_all_proxies_pass": true,
+    "zero_fitted_gravity_parameters_pass": true,
+    "all_transfer_gates_pass": false
+  },
+  "interpretation": {
+    "formula_promoted": false,
+    "advance_candidate": false,
+    "per_object_gravity_parameters": 0,
+    "pristine_project_holdout": false,
+    "conclusion": "The fixed-geometry P0615 gain did not transfer: A383 worsened slightly and MS2137 was inconclusive because neither control nor candidate achieved complete roots."
+  },
+  "claim_limits": [
+    "A383 and MS2137 are chronologically prospective for the P0615 formula but project-spent under other formula families.",
+    "The CLASH photometric member selection contains contamination and F160W light is not a stellar-mass map.",
+    "The source catalog omits hot gas and diffuse intracluster light.",
+    "Six conventional lens-geometry variables and training-family source positions are refitted per variant.",
+    "Two relatively relaxed systems cannot validate a population law.",
+    "The P0554 scalar parent remains phenomenological and the endpoint operator is not derived from a covariant action."
+  ]
+}

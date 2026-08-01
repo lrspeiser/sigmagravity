@@ -1,0 +1,163 @@
+{
+  "protocol_version": "R1-E325-acquisition-J1-0.1",
+  "status": "frozen_before_E325_science_array_download_or_inspection",
+  "frozen_utc": "2026-07-27T14:23:00Z",
+  "upstream_report": "results/r1_e325_feasibility/report.json",
+  "selection_blind": true,
+  "science_arrays_seen_at_freeze": false,
+  "gravity_residuals_seen_at_freeze": false,
+  "system": "ESO 325-G004",
+  "center": {
+    "ra_deg": 205.88833333333332,
+    "dec_deg": -38.17611111111111,
+    "frame": "ICRS/J2000"
+  },
+  "acquisition": {
+    "output_root": "data/raw/r1_e325_science",
+    "products": [
+      {
+        "archive": "HST_MAST",
+        "proposal_id": "10429",
+        "filter": "F814W",
+        "obsid": "26426842",
+        "product_filename": "hst_10429_09_acs_wfc_f814w_j95t09_drc.fits",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AHST%2Fproduct%2Fhst_10429_09_acs_wfc_f814w_j95t09_drc.fits",
+        "expected_bytes": 369486720,
+        "role": "deep visit-level lens-light image with DRC science, weight, and context extensions"
+      },
+      {
+        "archive": "HST_MAST",
+        "proposal_id": "10429",
+        "filter": "F814W",
+        "obsid": "26425554",
+        "product_filename": "hst_10429_10_acs_wfc_f814w_j95t10_drc.fits",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AHST%2Fproduct%2Fhst_10429_10_acs_wfc_f814w_j95t10_drc.fits",
+        "expected_bytes": 367695360,
+        "role": "second deep visit-level lens-light image with DRC science, weight, and context extensions"
+      },
+      {
+        "archive": "HST_MAST",
+        "proposal_id": "10710",
+        "filter": "F475W",
+        "obsid": "26394658",
+        "product_filename": "hst_10710_01_acs_wfc_f475w_j9ed01_drc.fits",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AHST%2Fproduct%2Fhst_10710_01_acs_wfc_f475w_j9ed01_drc.fits",
+        "expected_bytes": 369849600,
+        "role": "first extended-arc visit with DRC science, weight, and context extensions"
+      },
+      {
+        "archive": "HST_MAST",
+        "proposal_id": "10710",
+        "filter": "F475W",
+        "obsid": "26431490",
+        "product_filename": "hst_10710_02_acs_wfc_f475w_j9ed02_drc.fits",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AHST%2Fproduct%2Fhst_10710_02_acs_wfc_f475w_j9ed02_drc.fits",
+        "expected_bytes": 369849600,
+        "role": "second extended-arc visit with DRC science, weight, and context extensions"
+      },
+      {
+        "archive": "ESO_SODA",
+        "proposal_id": "097.A-0987(A)",
+        "product_id": "ADP.2016-09-07T12:23:32.515",
+        "product_filename": "ADP.2016-09-07T12_23_32.515_E325_6arcsec_4750_5600A.fits",
+        "url": "https://dataportal.eso.org/dataPortal/soda/sync?ID=ivo%3A%2F%2Feso.org%2FID%3FADP.2016-09-07T12%3A23%3A32.515&CIRCLE=205.88833333333332+-38.17611111111111+0.0016666666666666668&BAND=4.75017e-7+5.6e-7",
+        "expected_bytes": 19736640,
+        "soda_circle": "205.88833333333332 -38.17611111111111 0.0016666666666666668 degrees",
+        "soda_band_meters": [4.75017e-7, 5.6e-7],
+        "role": "six-arcsecond-radius science-cube cutout covering the accepted four-arcsecond kinematic support plus PSF margin in the published fitting band"
+      }
+    ],
+    "excluded_at_this_stage": [
+      "the two 4.7-GB reduced sky cubes because the level-2 science cube contains propagated variance and the published 4750-5600 A kinematic band; acquire sky cubes only if the frozen residual-background gate fails",
+      "article figure assets as substitutes for HST or MUSE measurements",
+      "the published joint GR/gamma posterior or best-fit mass decomposition as observable data"
+    ],
+    "receipt_requirements": [
+      "exact URL and archive identifier",
+      "remote and local byte counts",
+      "SHA-256 of every received file",
+      "FITS HDU names, shapes, bit depths, WCS footprint, filter or spectral range, exposure metadata, and finite-value fractions",
+      "no rendered image or spectral fit until all five files pass the immutable receipt gate"
+    ]
+  },
+  "image_level_jacobian": {
+    "purpose": "Test whether the extended arcs supply at least three observable radial Weyl-response directions after nuisance marginalization; this is not a gravity fit.",
+    "data_vector": "Joint F475W visit pixels in a preregistered annular arc mask, with F814W visits used in a simultaneous PSF-convolved lens-light model. Never count raw pixels as independent radial modes.",
+    "mask_freeze_rule": {
+      "initial_radial_domain_arcsec": [2.0, 3.9],
+      "center": "the preregistered ICRS center above, transformed only by WCS",
+      "construction": "detect connected positive F475W-minus-colour-scaled-F814W features at >=5 sigma on a detection coadd, then freeze the union after one-pixel dilation; the same mask is used for all response perturbations",
+      "negative_control": "an equal-area 90-degree-rotated annular mask excluding detected sources",
+      "allowed_blind_variants": ["one-pixel erosion", "one-pixel dilation"]
+    },
+    "response_basis": {
+      "quantity": "axisymmetric radial deflection perturbation delta_alpha(theta) about the preregistered center",
+      "number_of_basis_directions": 4,
+      "basis": "natural cubic cardinal functions at fixed radii, with zero perturbation at theta=0 and at 4.0 arcsec",
+      "knot_radii_arcsec": [2.065, 2.655, 3.245, 3.835],
+      "knot_radii_as_einstein_radius_fraction": [0.7, 0.9, 1.1, 1.3],
+      "finite_difference_amplitude_arcsec": 0.0295,
+      "finite_difference_amplitude_definition": "one percent of the published 2.95-arcsec Einstein radius",
+      "derivative": "symmetric central finite difference at plus and minus one amplitude, checked against half amplitude"
+    },
+    "mandatory_nuisance_blocks": [
+      "pixelized source surface brightness on 60x60, 80x80, and 100x100 adaptive grids",
+      "source regularization amplitude and both gradient and curvature regularizers",
+      "F814W-derived lens light with radial colour gradient and flexible residual basis",
+      "per-visit sky levels, correlated-noise scale, relative astrometric shift, and photometric scale",
+      "empirical or library PSF core width, ellipticity, orientation, and wing amplitude",
+      "lens centroid, ellipticity, position angle, external shear components, and smooth angular multipoles m=3 and m=4",
+      "explicit constant convergence or mass-sheet direction and source-position transformation control",
+      "six F814W MGE mass-to-light directions, black-hole amplitude, and shared baryonic-centering uncertainty when the lensing and dynamics blocks are joined"
+    ],
+    "projection_and_rank": {
+      "whitening": "use the Cholesky or symmetric square root of the image covariance including drizzle correlations",
+      "nuisance_projection": "project the whitened four-column response Jacobian into the orthogonal complement of the whitened nuisance Jacobian, equivalently using the Schur complement with identical priors",
+      "column_normalization": "one unit is the fixed 0.0295-arcsec deflection perturbation; do not rescale columns after nuisance projection",
+      "singular_direction_detection_threshold": 3.0,
+      "threshold_units": "whitened signal-to-noise for a one-unit perturbation",
+      "relative_numerical_floor": 0.001,
+      "minimum_rank_for_promotion": 3,
+      "condition_number_maximum_for_retained_subspace": 1000,
+      "required_perturbation_stability": "rank >=3 at full and half finite-difference amplitude, for both regularizers, every source grid, both mask perturbations, and all frozen PSF variants",
+      "singular_value_fractional_change_maximum": 0.25,
+      "retained_subspace_principal_angle_maximum_deg": 15.0
+    },
+    "controls": {
+      "synthetic_injection": "before interpreting E325, inject three known response modes into a noise-realistic synthetic source and require unbiased recovery within 0.25 posterior sigma and >=95 percent interval coverage over 100 simulations",
+      "negative_mask": "the rotated blank-sky control must have zero retained response modes at the 3-sigma threshold",
+      "visit_holdout": "fit one F475W visit and predict the other; require held-out reduced chi-square between 0.8 and 1.2 and no >5-sigma coherent arc residual component",
+      "source_flexibility_control": "promotion fails if rank three appears only for one source grid or one regularizer"
+    }
+  },
+  "dynamics_follow_on_gate": {
+    "authorized_only_after_receipt": true,
+    "required_output": "at least three non-overlapping numerical velocity-second-moment bins with covariance inside 2.0-3.9 arcsec, plus central bins needed for nuisance control",
+    "spectral_template_systematic": "repeat Indo-US/MILES/CvD-compatible template families and carry the published 2.2-percent library shift as a correlated systematic rather than selecting the best-looking library",
+    "support_limit_arcsec": 4.0,
+    "failure": "If fewer than three usable numerical bins overlap retained lens response support, E325 cannot enter the same-system pilot even if the image Jacobian rank passes."
+  },
+  "concrete_stage_outcomes": {
+    "advance": "All five files are hash-locked; at least three nuisance-projected lens-response singular directions pass every stability/control gate; and at least three numerical MUSE bins with covariance overlap those retained directions inside 4 arcsec.",
+    "partial": "If acquisition and kinematics pass but image rank is one or two, retain E325 as a documented one- or two-mode control and search another system.",
+    "fail": "If receipt integrity, held-out visit prediction, synthetic coverage, or overlapping dynamics fails, do not repair thresholds after viewing the result; document the obstruction and replace the candidate.",
+    "effect_of_advance": "Promote E325 only to a structural rank-three candidate, increasing the current ceiling from 3/10 to 4/10. It is still not strict-ready and does not authorize R2.",
+    "effect_of_non_advance": "The ceiling remains 3/10 and at least seven new rank-three systems remain necessary."
+  },
+  "progress_checkpoint": {
+    "time_box": "one immutable download/receipt cycle plus one image-Jacobian implementation cycle",
+    "rethink_if": "No rank/control result is produced within those two cycles, or the same acquisition/implementation blocker recurs three times; stop work on E325 and select another pre-fit candidate without loosening thresholds."
+  },
+  "authorization": {
+    "download_only_the_five_frozen_products": true,
+    "inspect_headers_after_hash_receipt": true,
+    "inspect_science_arrays_after_complete_receipt": true,
+    "fit_observable_level_image_jacobian_after_complete_receipt": true,
+    "fit_MUSE_kinematics_after_complete_receipt": true,
+    "use_published_gamma_or_GR_posterior_as_data": false,
+    "count_toward_ten_system_target_before_rank_and_dynamics_pass": false,
+    "infer_gravity_response": false,
+    "fit_new_force_or_action": false,
+    "authorize_R2": false
+  }
+}

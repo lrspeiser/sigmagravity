@@ -1,0 +1,89 @@
+{
+  "protocol_version": "P0554-CAUSTIC-MARGIN-0.1.0",
+  "frozen_utc": "2026-07-31T23:08:00Z",
+  "status": "frozen_after_route_softness_root_results_before_any_multistart_or_caustic_margin_score",
+  "question": "Do baryon-derived local lens Jacobians and source-to-caustic margins predict which tiny P0554 route/softness changes create or delete the apparent MACS1931 image root, and was the prior one-seed root status physical or numerical?",
+  "diagnostic_hypotheses": [
+    "A genuinely fragile image branch should have a small minimum Jacobian singular value, small image-to-critical-curve distance, and small source-to-caustic margin.",
+    "If formulas classed as failed by the observed-position seed have the same globally searched image multiplicity as successful formulas, the prior status was a numerical basin diagnostic rather than image creation.",
+    "If global multiplicity changes with the formula and the disappearing matched branch approaches zero caustic margin, the topology interpretation survives."
+  ],
+  "evaluation": {
+    "formula_parameters_fit": 0,
+    "geometry_parameters_refit": 0,
+    "geometry_source": "archived eight-start fits from the frozen 18-formula route/softness interaction",
+    "source_positions_source": "training-profiled source positions archived with the raw predictions",
+    "jacobian_primary_step_arcsec": 0.0002,
+    "jacobian_step_checks_arcsec": [0.0001, 0.0002, 0.0005],
+    "critical_gradient_step_arcsec": 0.02,
+    "critical_projection_iterations": 12,
+    "critical_projection_tolerance": 0.00000001,
+    "critical_projection_max_step_arcsec": 5.0,
+    "critical_projection_max_distance_arcsec": 60.0,
+    "critical_curve_search_angles": 24,
+    "critical_curve_radial_step_arcsec": 0.5,
+    "root_closure_tolerance_arcsec": 0.000001,
+    "root_deduplication_arcsec": 0.05,
+    "local_search_radii_arcsec": [0.0, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0, 16.0, 32.0],
+    "local_search_angles": 16,
+    "global_target_system": "MACS1931",
+    "global_target_family": 2,
+    "global_search_half_width_arcsec": 120.0,
+    "global_search_spacing_arcsec": 10.0,
+    "global_root_aperture_arcsec": 120.0,
+    "assignment": "Hungarian minimum-distance assignment from every observed family-2 image to unique globally searched roots",
+    "old_root_status_used_to_define_margin": false
+  },
+  "cross_domain_controls": {
+    "galaxy": "Reuse exact 131-SPARC scores for the unchanged 18 formulas.",
+    "derived_cluster": "Reuse exact 20-CLASH scores for the unchanged 18 formulas.",
+    "solar": "Reuse analytic Cassini, Earth, Saturn, and Mercury proxies for the unchanged 18 formulas.",
+    "raw": "Reconstruct all 18 formulas in all five raw clusters and diagnose all 324 held-out formula-image rows."
+  },
+  "inputs": {
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "interaction_report": "results/p0554_route_softness_interaction/report.json",
+    "interaction_scores": "results/p0554_route_softness_interaction/variant_scores.csv",
+    "interaction_raw_scores": "results/p0554_route_softness_interaction/raw_system_scores.csv",
+    "interaction_predictions": "results/p0554_route_softness_interaction/raw_predictions.csv",
+    "interaction_geometry": "results/p0554_route_softness_interaction/geometry.csv",
+    "route_candidate_specs": "results/adaptive_route_kernel/candidate_specs.csv",
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ2129_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "RXJ2129_geometry": "results/arc_invariant_pareto_refinement/raw_RXJ2129_parameters.csv",
+    "RXJ2129_route_protocol": "configs/adaptive_route_raw_rxj2129_protocol.json",
+    "four_cluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "four_cluster_geometry": "results/adaptive_route_multicluster_raw/geometry.csv",
+    "four_cluster_route_protocol": "configs/adaptive_route_multicluster_raw_protocol.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat"
+  },
+  "outputs": {
+    "directory": "results/p0554_caustic_margin",
+    "image_diagnostics": "image_diagnostics.csv",
+    "global_roots": "global_MACS1931_family2_roots.csv",
+    "global_assignments": "global_MACS1931_family2_assignments.csv",
+    "variant_summary": "variant_summary.csv",
+    "parameter_pair_summary": "parameter_pair_summary.csv",
+    "report": "report.json",
+    "figure": "p0554_caustic_margin.png",
+    "summary": "SUMMARY.md"
+  },
+  "interpretation_rules": {
+    "physical_multiplicity_change": "At least one formula has fewer unique accepted family-2 roots inside the frozen aperture than another, and the observed family cannot be assigned one-to-one without reuse.",
+    "not_a_physical_multiplicity_change": "Every formula has sufficient unique family-2 roots for all observed images; the old one-seed label is then a branch-placement/basin diagnostic rather than demonstrated image creation.",
+    "branch_placement_effect": "Report the one-to-one assigned distance for image 2c without imposing a post-hoc success threshold; a finite but distant root is not treated as an accurate image prediction.",
+    "margin_predictive_only_within_image": "Because all seven prior failures are MACS1931 image 2c, primary discrimination is restricted to the 18 variants of that one image; pooled-image AUC is diagnostic only.",
+    "no_formula_promotion": true
+  },
+  "claim_limits": [
+    "All formulas and clusters are spent exploratory evidence.",
+    "A critical curve in the simplified radial-plus-shear lens is not the critical curve of a full multi-component cluster reconstruction.",
+    "The global search is finite and can miss roots outside the frozen 120-arcsecond aperture or between its seeds.",
+    "The member route still omits registered gas and diffuse ICL maps.",
+    "Cross-domain scores are preservation controls because this stage changes no formula."
+  ]
+}

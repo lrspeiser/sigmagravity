@@ -1,0 +1,36 @@
+{
+  "protocol_version": "GRAVITY-ARC-FRESH-ANALYSIS-0.1.0",
+  "frozen_utc": "2026-07-31T20:25:00Z",
+  "status": "frozen_after_geometry_audit_before_fresh_kappa_pixel_read",
+  "acquisition_protocol": "configs/gravity_arc_fresh_sample_protocol.json",
+  "acquisition_protocol_sha256": "78ac4280ce993878f702c417bf25aec8b33292c5ba728f88eaa0f19c0af0b79a",
+  "input_audit": "results/gravity_arc_fresh_sample_input_audit/report.json",
+  "input_audit_status_required": "completed_without_inspecting_fresh_kappa_pixel_values",
+  "sources": "results/gravity_arc_fresh_sample_input_audit/sources.csv",
+  "systems": "results/gravity_arc_fresh_sample_input_audit/systems.csv",
+  "targets": {
+    "primary": "mean of the 100 individually background-subtracted, clipped, smoothed, and unit-normalized Lenstool range maps",
+    "primary_uncertainty": "score every locked prediction against each of the 100 Lenstool range maps",
+    "lenstool_best_sensitivity": "identically processed Lenstool best map",
+    "independent_method_control": "identically processed GLAFIC best map",
+    "method_disagreement": "Jensen-Shannon divergence and Pearson correlation between the Lenstool ensemble-mean and GLAFIC best normalized maps"
+  },
+  "scoring": {
+    "primary_metric": "Jensen-Shannon divergence",
+    "secondary_metrics": ["Pearson correlation", "normalized RMSE", "centroid offset kpc"],
+    "lower_primary_is_better": true,
+    "no_fresh_selection": "All 15 candidates are scored as locked. C0351 alone is judged by the confirmation gates; no fresh winner replaces it.",
+    "parameter_impact": "For each frozen one-at-a-time variant, report median delta JS relative to C0351, 16th-84th cluster interval, win fraction, and whether the sign agrees between Lenstool and GLAFIC. Rank absolute median primary delta as impact, not as evidence for a new best formula."
+  },
+  "outputs": {
+    "directory": "results/gravity_arc_fresh_sample",
+    "scores": "scores.csv",
+    "uncertainty": "lenstool_uncertainty.csv",
+    "comparisons": "locked_comparisons.csv",
+    "variant_impacts": "variant_impacts.csv",
+    "method_disagreement": "method_disagreement.csv",
+    "report": "report.json",
+    "figure": "gravity_arc_fresh_sample.png",
+    "summary": "SUMMARY.md"
+  }
+}

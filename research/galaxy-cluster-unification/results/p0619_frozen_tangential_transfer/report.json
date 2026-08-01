@@ -1,0 +1,153 @@
+{
+  "report_version": "P0619-FROZEN-TANGENTIAL-TRANSFER-RESULTS-0.1.0",
+  "status": "complete_chronologically_prospective_tangential_transfer",
+  "chronology": {
+    "prospective_relative_to_P0618_phase_selection": true,
+    "pristine_project_holdout": false,
+    "reason": "A383 and MS2137 were used by earlier field families and P0616, but the P0618 +90-degree support-phase formula was frozen before evaluating it on either system."
+  },
+  "locked_formula": {
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "angular_amplitude": "epsilon=Q^2/(1+Delta80)",
+    "width_over_R80": "0.23*sqrt(1+Q^2)",
+    "return_length_over_R80": 0.36,
+    "travel_mode": "constant",
+    "universal_phase_degrees": 90.0,
+    "new_fitted_gravity_parameters": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "coverage": {
+    "systems": 2,
+    "candidate_refits": 2,
+    "complete_matched_systems": 1
+  },
+  "system_states": [
+    {
+      "system_label": "A383",
+      "R80_kpc": 131.23682857842118,
+      "parent_alpha_R80_arcsec": 14.113927822315258,
+      "baryonic_alpha_R80_arcsec": 1.6654433535986728,
+      "Delta80": 7.47457692981153,
+      "self_routed_fraction": 0.882000009170695,
+      "quadrupole_Q": 0.3882188759892523,
+      "epsilon_scalar_control": 0.0,
+      "epsilon_linear_Q_over_total": 0.045809823806494857,
+      "epsilon_quadratic_Q2_over_total": 0.017784238307423126,
+      "epsilon_quadratic_Q2_routed": 0.01568569835024102,
+      "epsilon_quadratic_Q2_strong_screen": 0.002098539957182103,
+      "epsilon_quartic_Q4_over_total": 0.0026803318369128986,
+      "selected_epsilon": 0.017784238307423126,
+      "universal_phase_degrees": 90.0
+    },
+    {
+      "system_label": "MS2137",
+      "R80_kpc": 263.20723765954597,
+      "parent_alpha_R80_arcsec": 11.233037048034815,
+      "baryonic_alpha_R80_arcsec": 1.3272793808257952,
+      "Delta80": 7.463204665355338,
+      "self_routed_fraction": 0.8818414490088414,
+      "quadrupole_Q": 0.5878702684299809,
+      "epsilon_scalar_control": 0.0,
+      "epsilon_linear_Q_over_total": 0.06946189908846999,
+      "epsilon_quadratic_Q2_over_total": 0.0408345852627951,
+      "epsilon_quadratic_Q2_routed": 0.0360096298378183,
+      "epsilon_quadratic_Q2_strong_screen": 0.004824955424976787,
+      "epsilon_quartic_Q4_over_total": 0.01411208363336525,
+      "selected_epsilon": 0.0408345852627951,
+      "universal_phase_degrees": 90.0
+    }
+  ],
+  "responses": [
+    {
+      "system_label": "A383",
+      "complete_pair": true,
+      "tangential_improvement_fraction": 0.0017444069541364682,
+      "prior_radial_improvement_fraction": -0.004419224954681056,
+      "tangential_minus_radial_improvement": 0.006163631908817524
+    },
+    {
+      "system_label": "MS2137",
+      "complete_pair": false,
+      "tangential_improvement_fraction": null,
+      "prior_radial_improvement_fraction": null,
+      "tangential_minus_radial_improvement": null
+    }
+  ],
+  "scores": [
+    {
+      "system_label": "A383",
+      "variant_id": "P0554_scalar_control",
+      "effective_strength": 0.0,
+      "training_images": 10,
+      "heldout_images": 4,
+      "training_RMS_arcsec": 0.8493722230188442,
+      "training_roots_converged": 10,
+      "heldout_RMS_arcsec": 9.096624055914212,
+      "heldout_roots_converged": 4,
+      "optimizer_cost": 17.492203800701468
+    },
+    {
+      "system_label": "MS2137",
+      "variant_id": "P0554_scalar_control",
+      "effective_strength": 0.0,
+      "training_images": 8,
+      "heldout_images": 3,
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 7,
+      "heldout_RMS_arcsec": null,
+      "heldout_roots_converged": 2,
+      "optimizer_cost": 324.4971022749735
+    },
+    {
+      "system_label": "A383",
+      "variant_id": "P0619_tangential_self_route",
+      "effective_strength": 0.017784238307423126,
+      "training_images": 10,
+      "heldout_images": 4,
+      "training_RMS_arcsec": 0.8522510987253152,
+      "training_roots_converged": 10,
+      "heldout_RMS_arcsec": 9.08075584165191,
+      "heldout_roots_converged": 4,
+      "optimizer_cost": 17.6334170450503
+    },
+    {
+      "system_label": "MS2137",
+      "variant_id": "P0619_tangential_self_route",
+      "effective_strength": 0.0408345852627951,
+      "training_images": 8,
+      "heldout_images": 3,
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 7,
+      "heldout_RMS_arcsec": null,
+      "heldout_roots_converged": 2,
+      "optimizer_cost": 322.9918684476721
+    }
+  ],
+  "inherited_cross_domain": {
+    "SPARC_outer_RMSE_km_s": 12.59204382085389,
+    "SPARC_to_RAR_ratio": 1.2168029635346302,
+    "Solar_all_proxies_pass": true
+  },
+  "gates": {
+    "A383_all_roots_pass": true,
+    "A383_nonworsening_pass": true,
+    "A383_absolute_RMS_pass": false,
+    "galaxy_near_RAR_pass": true,
+    "Solar_all_proxies_pass": true,
+    "zero_new_fitted_gravity_parameters_pass": true,
+    "all_transfer_gates_pass": false
+  },
+  "interpretation": {
+    "formula_promoted": false,
+    "advance_candidate": false,
+    "MS2137_comparison_inconclusive_if_control_incomplete": true,
+    "per_object_gravity_parameters": 0
+  },
+  "claim_limits": [
+    "The formula chronology is prospective relative to P0618 but neither system is a pristine project holdout.",
+    "MS2137's P0616 scalar baseline is root-incomplete, so its RMS comparison remains inconclusive unless both variants become complete.",
+    "The CLASH member-light proxy omits gas, diffuse intracluster light, contamination corrections, and stellar mass-to-light variation.",
+    "Six conventional lens-geometry variables and training-family source positions are refitted; these are ordinary nuisance parameters, not gravity settings.",
+    "A successful A383 response would still require more chronologically frozen complete-baseline systems and an absolute error competitive with halo models."
+  ]
+}

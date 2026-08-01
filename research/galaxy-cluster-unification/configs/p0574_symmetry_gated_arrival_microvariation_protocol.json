@@ -1,0 +1,84 @@
+{
+  "protocol_version": "P0574-SYMMETRY-GATED-ARRIVAL-MICROVARIATION-0.1.0",
+  "frozen_utc": "2026-08-01T06:40:00Z",
+  "status": "frozen_after_P0573_before_any_symmetry_gated_lens_score",
+  "trigger": "P0573 replicated the locked cluster morphology signal but falsified the assumed null for an extended axisymmetric disk.",
+  "question": "Can one universal symmetry factor remove the angular response of an axisymmetric galaxy while retaining the replicated cluster-lensing morphology gain?",
+  "formula": {
+    "base_activation": "A=(1-C)^alpha * B_T^beta",
+    "carrier": "D=A*||T||_F",
+    "quarter_turn_asymmetry": "Q90=sum_inside_300kpc |B50(x)-R90[B50](x)| / (2*sum_inside_300kpc B50)",
+    "symmetry_gate": "H=Q90^n/(Q90^n+Q0^n)",
+    "effective_route_fraction": "f_eff=f*H",
+    "prediction": "Sigma_pred=(1-f_eff)*B100+f_eff*normalize[G_width*D]",
+    "interpretation": "Q90 is zero for a centered circular baryon distribution and nonzero for a clumpy or non-circular projected environment; it is dimensionless and uses no lens target.",
+    "universal_parameters": ["alpha", "beta", "arrival width", "f", "Q0", "n"],
+    "per_system_fits": 0
+  },
+  "candidate_grid": [
+    {"candidate_id": "no_gate_baseline", "alpha": 0.5, "beta": 1.0, "width_kpc": 50.0, "f": 0.8, "Q0": 0.0, "n": 4.0},
+    {"candidate_id": "gate_reference", "alpha": 0.5, "beta": 1.0, "width_kpc": 50.0, "f": 0.8, "Q0": 0.05, "n": 4.0},
+    {"candidate_id": "Q0_low", "alpha": 0.5, "beta": 1.0, "width_kpc": 50.0, "f": 0.8, "Q0": 0.03, "n": 4.0},
+    {"candidate_id": "Q0_high", "alpha": 0.5, "beta": 1.0, "width_kpc": 50.0, "f": 0.8, "Q0": 0.08, "n": 4.0},
+    {"candidate_id": "gate_soft", "alpha": 0.5, "beta": 1.0, "width_kpc": 50.0, "f": 0.8, "Q0": 0.05, "n": 2.0},
+    {"candidate_id": "gate_sharp", "alpha": 0.5, "beta": 1.0, "width_kpc": 50.0, "f": 0.8, "Q0": 0.05, "n": 6.0},
+    {"candidate_id": "width_40", "alpha": 0.5, "beta": 1.0, "width_kpc": 40.0, "f": 0.8, "Q0": 0.05, "n": 4.0},
+    {"candidate_id": "width_60", "alpha": 0.5, "beta": 1.0, "width_kpc": 60.0, "f": 0.8, "Q0": 0.05, "n": 4.0},
+    {"candidate_id": "fraction_0p7", "alpha": 0.5, "beta": 1.0, "width_kpc": 50.0, "f": 0.7, "Q0": 0.05, "n": 4.0},
+    {"candidate_id": "fraction_0p9", "alpha": 0.5, "beta": 1.0, "width_kpc": 50.0, "f": 0.9, "Q0": 0.05, "n": 4.0},
+    {"candidate_id": "cancellation_0p4", "alpha": 0.4, "beta": 1.0, "width_kpc": 50.0, "f": 0.8, "Q0": 0.05, "n": 4.0},
+    {"candidate_id": "cancellation_0p6", "alpha": 0.6, "beta": 1.0, "width_kpc": 50.0, "f": 0.8, "Q0": 0.05, "n": 4.0},
+    {"candidate_id": "tidal_0p8", "alpha": 0.5, "beta": 0.8, "width_kpc": 50.0, "f": 0.8, "Q0": 0.05, "n": 4.0},
+    {"candidate_id": "tidal_1p2", "alpha": 0.5, "beta": 1.2, "width_kpc": 50.0, "f": 0.8, "Q0": 0.05, "n": 4.0}
+  ],
+  "validation": {
+    "development_systems": "The 10 P0567 systems plus the 3 P0567 pilot systems; all are historically spent.",
+    "selection": "Among symmetry-gated candidates only, choose minimum equal-system mean Lenstool-ensemble-mean Jensen-Shannon divergence on the 13 historical systems.",
+    "variant_validation_systems": ["RXC J2211.7-0350", "SMACS J0723.3-7327", "SPT-CL J0615-5746"],
+    "validation_limit": "P0573 already exposed these target pixels to the no-gate formula, but no symmetry-gated candidate score was inspected before this freeze.",
+    "uncertainty": "Score the single historically selected symmetry-gated candidate against all 300 P0573 Lenstool realizations.",
+    "method_control": "Score it against the 3 P0573 GLAFIC maps without reselection."
+  },
+  "cross_domain": {
+    "SPARC": "Every SPARC mass model is a one-dimensional deprojected axisymmetric radial profile, so Q90=0 by construction and this angular layer changes every catalogued rotation speed by exactly zero.",
+    "extended_disk": "A numerical centered circular exponential disk must have Q90=0 and f_eff=0.",
+    "solar": "A centered one-source field has C=1 and Q90=0, so both activation and f_eff are zero."
+  },
+  "advance_gates": {
+    "variant_validation_improvement_vs_local_fraction_min": 0.10,
+    "variant_validation_systems_improved_min": 3,
+    "retain_fraction_of_P0573_no_gate_gain_min": 0.75,
+    "lenstool_realizations_improved_fraction_min": 0.70,
+    "glafic_improvement_vs_local_fraction_min": 0.05,
+    "glafic_systems_improved_min": 2,
+    "extended_disk_effective_route_fraction_max": 1e-12,
+    "solar_effective_route_fraction_max": 1e-12,
+    "SPARC_velocity_change_max_km_s": 0.0
+  },
+  "inputs": {
+    "p0567_protocol": "configs/p0567_baryon_flux_tensor_backtrack_protocol.json",
+    "p0573_protocol": "configs/p0573_tidal_arrival_fresh_replication_protocol.json",
+    "p0573_report": "results/p0573_tidal_arrival_fresh_replication/report.json",
+    "SPARC_rotmod_directory": "data/raw/sparc/rotmod"
+  },
+  "outputs": {
+    "directory": "results/p0574_symmetry_gated_arrival_microvariation",
+    "candidate_scores": "candidate_scores.csv",
+    "system_scores": "system_scores.csv",
+    "validation_scores": "validation_scores.csv",
+    "uncertainty": "uncertainty.csv",
+    "glafic_scores": "glafic_scores.csv",
+    "asymmetry_audit": "asymmetry_audit.csv",
+    "SPARC_null_audit": "sparc_null_audit.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0574_symmetry_gated_arrival_microvariation.png"
+  },
+  "claim_limits": [
+    "Q90 is a projected environmental statistic, not yet a covariant scalar derived from an action.",
+    "The cluster targets remain standard-GR normalized convergence reconstructions rather than raw lens observables.",
+    "A zero SPARC change means compatibility with a separate radial law, not an explanation of galaxy rotation curves.",
+    "The P0573 systems are prospective only to the symmetry modification, not globally untouched.",
+    "The experiment tests morphology and symmetry separation, not absolute gravity strength."
+  ]
+}

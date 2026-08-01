@@ -1,0 +1,249 @@
+{
+  "status": "completed frozen EMOG-Q0 pre-fit derivation checkpoint",
+  "inputs": {
+    "config_sha256": "96a31787c07330fd77b6062362ffdfd6e6ef745de098ee3646d0b39339677e87",
+    "sparc_fingerprint": "b53afed87b43a351cc7db2db02b3186ea5880929fc97a4947364b2993054edaf",
+    "clash_sha256": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+    "bcg_sha256": "4280a63e3c4f3166015c6859807f63d3f46c2fa1d420c3c9a9ac029495752352",
+    "sparc_systems": 131,
+    "sparc_points": 3034,
+    "clash_systems": 20,
+    "clash_points": 84,
+    "bcg_systems": 34
+  },
+  "action_audit": {
+    "candidate": "EMOG-Q0 chameleon scalar plus universal Proca vector",
+    "one_physical_metric": "g_ab; all matter and light use this one metric",
+    "global_physical_parameter_count": 5,
+    "parameters": [
+      "beta",
+      "Lambda_s",
+      "n",
+      "mu",
+      "alpha"
+    ],
+    "per_object_parameters": 0,
+    "lensing_only_parameters": 0,
+    "universal_composition_independent_current": true,
+    "universal_vector_range": true,
+    "positive_energy_proca_signs": true,
+    "reciprocal_scalar_sources_retained": "The scalar equation retains F_s R/2. Mu and kappa are constants, so the Proca sector creates no omitted scalar source."
+  },
+  "dimensions": {
+    "s": "dimensionless",
+    "F_and_beta_and_n_and_alpha": "dimensionless",
+    "Lambda_s_and_mu": "inverse length (mass in c=hbar=1)",
+    "phi_a": "mass",
+    "kappa": "inverse mass",
+    "each_lagrangian_density_term": "mass^4"
+  },
+  "field_health": {
+    "conditions": [
+      "F=exp(-2 beta s)>0",
+      "Einstein-frame scalar kinetic K=1/F+6 beta^2>0",
+      "U_ss=n(n+1)Lambda_s^2*s^(-n-2)>0",
+      "canonical Proca kinetic sign and mu^2>0"
+    ],
+    "linear_mode_speeds_squared": {
+      "tensor": 1.0,
+      "scalar": 1.0,
+      "proca_transverse": 1.0,
+      "proca_longitudinal": 1.0
+    },
+    "tensor_wave_speed_fractional_difference": 0.0,
+    "local_linear_kinetic_and_gradient_health_passes": true,
+    "nonlinear_global_well_posedness": "not established beyond the regular F>0 Einstein-frame domain"
+  },
+  "solar_system": {
+    "unscreened_beta_max_at_F_approximately_1": 0.003391301494194886,
+    "gamma_absolute_limit": 2.3e-05,
+    "universal_long_range_vector": {
+      "derivation": "At mu*r_AU<<1, massive dynamics measures E-alpha while light measures E. After normalizing E-alpha=1, the effective gamma shift is 2*alpha.",
+      "alpha_max": 1.15e-05,
+      "best_favorable_envelope_alpha_over_max": 85489.55579989757,
+      "gamma_shift_at_matched_best_envelope_alpha": 1.966259783397644,
+      "passes_at_best_envelope_value": false
+    },
+    "chameleon_screening": "The action can make the scalar massive at high density, but no parameter set survives the structural target gate, so a thin-shell solar solution is not promoted as a fitted success."
+  },
+  "spherical_solution": {
+    "metric_potentials_constant_s": "Phi=Psi=-G_N*M/(F0*r); the same Weyl potential lenses light",
+    "proca_potential": "phi_0=kappa*M*exp(-mu*r)/(4*pi*r)",
+    "massive_particle_enhancement": "1/F0-alpha*(1+mu*r)*exp(-mu*r)",
+    "matched_environment_condition": "1/F0=1+alpha",
+    "matched_short_distance_limit": "1+alpha*(mu*r)^2/2+O(r^3)",
+    "matched_large_distance_limit": "1+alpha",
+    "lensing_enhancement_constant_s": "1/F0",
+    "exact_spherical_shell_kernel_implemented": true,
+    "point_mass_extra_acceleration_one_over_r_slope": {
+      "mu_r_at_exact_slope_minus_one": 1.7932821329007613,
+      "mu_r_interval_for_slope_minus_one_plus_or_minus_0p05": [
+        1.6820903838525731,
+        1.908273444162009
+      ],
+      "radial_width_factor": 1.1344654618329117,
+      "radial_width_dex": 0.054791278569382776
+    }
+  },
+  "constant_field_control": {
+    "best_log10_range_kpc": 4.958796913212288,
+    "best_range_kpc": 90948.78742641564,
+    "best_log10_alpha": -3.9903303218721455,
+    "best_alpha": 0.00010225149774610911,
+    "minimum_maximum_fractional_error": 14.225368750000014,
+    "passes_5_percent": false
+  },
+  "favorable_environmental_envelope": {
+    "interpretation": "The scalar is granted instantaneous tracking of its spherical mean-density minimum at every scored radius. This is more flexible than a finite-Compton-wavelength solution.",
+    "best_effective_parameters_not_adopted": {
+      "log10_z_reference": -0.662648944690687,
+      "z_reference": 0.2174458158685468,
+      "p": 0.22936213393897886,
+      "equivalent_n": 3.3599175802316488,
+      "log10_range_kpc": 4.279727370325792,
+      "range_kpc": 19042.64934603507,
+      "log10_alpha": -0.007389099134969435,
+      "alpha": 0.983129891698822
+    },
+    "optimizer_runs": [
+      {
+        "seed": 20260726,
+        "maximum_fractional_error": 0.9958804819238087,
+        "vector": [
+          -0.662648944690687,
+          0.22936213393897886,
+          4.279727370325792,
+          -0.007389099134969435
+        ],
+        "success": true,
+        "message": "Optimization terminated successfully.",
+        "function_evaluations": 23241
+      },
+      {
+        "seed": 20260727,
+        "maximum_fractional_error": 0.9958804820924627,
+        "vector": [
+          -0.6626489628770684,
+          0.22936213600184546,
+          3.7450905171854156,
+          -0.007389101092555972
+        ],
+        "success": true,
+        "message": "Optimization terminated successfully.",
+        "function_evaluations": 22953
+      },
+      {
+        "seed": 20260728,
+        "maximum_fractional_error": 0.9958804820684316,
+        "vector": [
+          -0.6626489392650201,
+          0.2293621332055113,
+          3.995477530054779,
+          -0.007389098122384752
+        ],
+        "success": true,
+        "message": "Optimization terminated successfully.",
+        "function_evaluations": 21993
+      }
+    ],
+    "minimum_maximum_fractional_error": 0.9958804819238087,
+    "gate_maximum_fractional_error": 0.05,
+    "passes_5_percent": false,
+    "by_domain": {
+      "CLASH": {
+        "systems": 20,
+        "points": 84,
+        "absolute_fractional_error": {
+          "count": 84,
+          "min": 0.47151890371366323,
+          "p05": 0.5724828094560501,
+          "median": 0.7987596754194566,
+          "p95": 0.8716545611384332,
+          "max": 0.9218502087046244
+        },
+        "points_passing_5_percent": 0,
+        "rms_dex": 0.7042224808403403,
+        "mean_residual_dex": -0.6863566663674552
+      },
+      "SPARC": {
+        "systems": 131,
+        "points": 3034,
+        "absolute_fractional_error": {
+          "count": 3034,
+          "min": 0.13750786489726696,
+          "p05": 0.8271320888345535,
+          "median": 0.9046500964354436,
+          "p95": 0.9597636057573892,
+          "max": 0.9958804819238087
+        },
+        "points_passing_5_percent": 0,
+        "rms_dex": 1.061701548599694,
+        "mean_residual_dex": -1.0409521164101678
+      },
+      "SPIDERS-MaNGA BCG": {
+        "systems": 34,
+        "points": 34,
+        "absolute_fractional_error": {
+          "count": 34,
+          "min": 0.8875863043627706,
+          "p05": 0.899872692141215,
+          "median": 0.9282748872706126,
+          "p95": 0.9508877362328093,
+          "max": 0.9704978124693316
+        },
+        "points_passing_5_percent": 0,
+        "rms_dex": 1.1605433394449978,
+        "mean_residual_dex": -1.1554443998745025
+      }
+    }
+  },
+  "environmental_response": {
+    "adiabatic_minimum": "s_min=[n*Lambda_s^2*Mpl^2/(beta*rho_bar)]^(1/(n+1))",
+    "monotonic_prediction": "For beta,n>0, 1/F increases as baryonic density decreases.",
+    "clash_monotonicity_contradiction": {
+      "contradiction_found": true,
+      "logic": "The frozen chameleon has enhancement nonincreasing with density. For this ordered pair, any such prediction has a minimax relative error at least (nu_high-nu_low)/(nu_high+nu_low).",
+      "lower_density_point": {
+        "domain": "CLASH",
+        "system": "RXJ1347",
+        "radius_kpc": 100.0,
+        "mean_density_kg_m3": 1.1944146507228682e-22,
+        "required_enhancement": 4.216965034285822
+      },
+      "higher_density_point": {
+        "domain": "CLASH",
+        "system": "MACS1206",
+        "radius_kpc": 14.3,
+        "mean_density_kg_m3": 2.3271216381122513e-22,
+        "required_enhancement": 16.3681652142781
+      },
+      "required_enhancement_ratio_high_over_low": 3.8815036599064863,
+      "model_independent_minimax_fractional_error_lower_bound": 0.5902901770971297
+    },
+    "vector_cancellation_lock": "alpha is fixed by the conserved universal current while 1/F(s) changes with environment; the action locks them only at one background value, so exact short-distance cancellation is not preserved across environments.",
+    "ea_q0_failure_repeated": false,
+    "new_failure": "The consistent scalar response has the wrong ordering and cannot remain locked to the universal vector charge."
+  },
+  "decision": {
+    "prefit_checkpoint_passes": false,
+    "failed_gates": [
+      "joint 5-percent spherical force shape",
+      "CLASH density-response ordering",
+      "environment-independent metric-vector cancellation lock",
+      "Solar-System light/dynamics consistency for a universal long-range vector"
+    ],
+    "stage_3_configuration_frozen": false,
+    "stage_4_replay_frozen": false,
+    "astrophysical_fit_performed": false,
+    "emog_q0_retired": true,
+    "next_action": "premise-level rethink of the one-field environmental unification target; do not add interpolation terms"
+  },
+  "guardrails": [
+    "The feasibility scan is a minimax falsification envelope, not a fit.",
+    "No optimizer value is adopted as a physical parameter estimate.",
+    "No per-object, object-class, or lensing-only parameter is present.",
+    "The vector range and charge are universal.",
+    "All scored points are retained, including gobs<=gbar SPARC points.",
+    "No Stage 3 or Stage 4 configuration is frozen after failure."
+  ]
+}

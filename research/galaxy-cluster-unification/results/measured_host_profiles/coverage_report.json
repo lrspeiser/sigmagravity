@@ -1,0 +1,52 @@
+{
+  "status": "completed frozen-host archival and profile-constraint inventory",
+  "selection": {
+    "sample": "data/derived/bcg_bridge_sample.csv",
+    "sample_sha256": "f47bd78b8a6a5ae1c78c82e5e7ddfb01d1611eb371632f816359508d5388fa9d",
+    "systems": 34,
+    "bcg_residual_used": false,
+    "xray_match": "5 arcmin and |delta z| <= 0.02(1+z)",
+    "pointed_match": "12 arcmin around the SPIDERS X-ray position",
+    "redmapper_match": "3 arcmin and |delta z| <= 0.02(1+z)"
+  },
+  "coverage": {
+    "frozen_hosts": 34,
+    "spiders_target_member_hosts": 28,
+    "redmapper_cluster_hosts": 12,
+    "independent_satellite_catalog_union_hosts": 30,
+    "erass_direct_hosts": 5,
+    "chandra_pointed_hosts": 4,
+    "xmm_pointed_hosts": 7,
+    "pointed_xray_union_hosts": 9,
+    "direct_xray_union_hosts": 10,
+    "population_profile_constrained_hosts": 34,
+    "minimum_required": 30
+  },
+  "passes_profile_constrained_count_gate": true,
+  "interpretation": {
+    "direct_profile_route": "The public pointed/eRASS archive does not cover 30 frozen hosts, so the Stage 4 score must not be described as 30 directly measured radial profiles.",
+    "profile_constrained_route": "All 34 hosts have an independently measured SPIDERS halo scale. Gas mass is conditioned on that scale by the independently calibrated eRASS relation and radial gas shapes are drawn from 46 published Chandra profiles. Satellite mass and radial shape use independent published population constraints.",
+    "satellite_catalog_check": "Independent SPIDERS/redMaPPer member-catalog support exists for the reported union, but member luminosities were not normalized to the BCG residual and do not enter the frozen score."
+  },
+  "sources": {
+    "spiders_target_main_sha256": "fe8924ddf795ef92d42c80db3e76d364c8634623a9aaaa6d370883262413391d",
+    "spiders_target_sequels_sha256": "f7d593beca33dfd1cc005c0acefcc49660fa75016b55dd43fdf6de2088df635c",
+    "spiders_cluster_sha256": "b8c716b561f6984f64ea6a2536344ffad2ddd69aff1c51f3052f3aba3a8247d0",
+    "erass_sha256": "e79c392e2d7b9e26105ead7d56787713465aa853feb040a227891fb9571b9a54",
+    "redmapper": {
+      "source": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "table": "J/ApJS/224/1/cat_dr8",
+      "query": "SELECT \"ID\",\"RAJ2000\",\"DEJ2000\",\"zlambda\",\"lambda\" FROM \"J/ApJS/224/1/cat_dr8\"",
+      "rows": 26111,
+      "file": "clusters.vot",
+      "sha256": "e9b6bac547f66cef46bb26a01aa9dd411156b9d95e98c4e1f6daeba88b86fab3",
+      "paper": "Rykoff et al. 2016, ApJS 224, 1",
+      "doi": "10.3847/0067-0049/224/1/1"
+    },
+    "heasarc_api": "https://heasarc.gsfc.nasa.gov/xamin/query"
+  },
+  "output": {
+    "path": "data/derived/host_profile_coverage.csv",
+    "sha256": "6bcdd05a1e61d26bd99efc38b97f90f012e87502e73fedb67c1a0879f86662ff"
+  }
+}

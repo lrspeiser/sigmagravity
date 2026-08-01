@@ -1,0 +1,122 @@
+{
+  "protocol_version": "R1B1-A1689-HST-photometry-astrometry-0.1",
+  "status": "frozen_after_HST9289_geometry_gate_before_reading_any_selected_science_pixel",
+  "freeze_date": "2026-07-26",
+  "disclosure": "The 40-exposure four-band footprint gate passed, the six target image coordinates and radii were known, and the program-11710 all-exposure center-coverage gate had failed. No program-9289 science value, source detection, PSF star, BCG profile, lens centroid, covariance, lens residual, mass residual, or gravity residual had been inspected.",
+  "purpose": "Measure a theory-neutral BCG tracer-light profile and empirical image-position covariance on the same A1689 support as the raw GMOS dynamics, without fitting a lens mass model or a gravitational response.",
+  "inputs": {
+    "acquisition_report": "results/r1_a1689_hst9289_acquisition/report.json",
+    "raw_directory": "data/raw/r1_a1689_hst9289",
+    "lens_images": "data/derived/r1_a1689_lens_prescreen_images.csv",
+    "common_center_ra_deg": 197.873,
+    "common_center_dec_deg": -1.3410833333333333,
+    "kpc_per_arcsec": 3.0425531914893615,
+    "gaia_dr3_psf_query": {
+      "center_ra_deg": 197.8775,
+      "center_dec_deg": -1.341388888889,
+      "radius_deg": 0.035,
+      "maximum_g_mag": 21.0,
+      "maximum_ruwe": 1.4,
+      "required_astrometric_params_solved": 31,
+      "output": "data/raw/r1_a1689_hst9289/gaia_dr3_psf_candidates.csv",
+      "provenance": "data/raw/r1_a1689_hst9289/gaia_dr3_psf_candidates_provenance.json"
+    }
+  },
+  "registration_and_psf": {
+    "common_grid": "north-up ICRS tangent plane at the frozen common center with 0.05 arcsec pixels; resample science once with Lanczos3 and inverse variance with the squared interpolation kernel",
+    "per_exposure_registration": "Fit a six-parameter affine correction from Gaia DR3 stars plus internally matched compact sources detected at >=10 sigma; no arc or BCG residual may enter registration.",
+    "minimum_internal_registration_sources": 20,
+    "maximum_leave_one_source_registration_rms_arcsec": 0.05,
+    "empirical_psf_star_rule": "Begin with Gaia candidates satisfying the frozen query. Retain unsaturated, isolated candidates whose measured FWHM is 0.05-0.18 arcsec and whose ellipticity is <0.25 in at least three filters. Selection uses only point-source morphology, never BCG, arc, lens, or gravity residuals.",
+    "minimum_empirical_psf_stars": 3,
+    "psf_model": "oversampled ePSF per exposure and filter, normalized to unit flux; propagate leave-one-star variation",
+    "failure_rule": "If fewer than three empirical PSF stars or the registration RMS gate fails, stop both photometry and astrometry; do not substitute a post-result analytic PSF."
+  },
+  "source_mask": {
+    "detection_image": "inverse-variance sum of the six DRC science images after scalar photometric calibration",
+    "segmentation": "3-sigma connected detection with at least 5 pixels; retain the BCG segment but mask all other segments after dilation by twice their Kron radius",
+    "known_lens_images": "Mask all cataloged lens images during BCG-profile extraction using 0.8-arcsec circular masks; do not mask the six targets during their own astrometric fits.",
+    "mask_sensitivity": "Repeat with 1.5 and 2.5 Kron-radius dilation; all variants enter systematic covariance.",
+    "manual_residual_masks": false
+  },
+  "bcg_tracer_light": {
+    "center": "joint four-filter PSF-convolved elliptical Moffat centroid on 0.2-2.0 arcsec support, bounded within 0.15 arcsec of the frozen common center",
+    "radial_profile": "circularized nonparametric surface brightness in fixed annuli; no Sersic decomposition is required or used as the primary profile",
+    "radial_edges_arcsec": [0.0, 0.1, 0.15, 0.22, 0.32, 0.46, 0.65, 0.9, 1.2, 1.55, 1.95, 2.4, 2.9, 3.45, 4.05, 4.7, 4.929],
+    "baseline_sky_annulus_arcsec": [50.0, 80.0],
+    "sky_model": "masked affine plane per exposure and filter",
+    "sky_sensitivity_annuli_arcsec": [[40.0, 60.0], [60.0, 90.0]],
+    "covariance": "200-replicate exposure bootstrap stratified by filter and visit, with shared registration, ePSF, center, sky-plane, and mask-variant perturbations; retain full cross-filter and cross-radius covariance",
+    "minimum_complete_bootstrap_replicates": 180,
+    "minimum_finite_radial_bins_per_filter": 14,
+    "minimum_outer_support_arcsec": 4.7,
+    "minimum_signal_to_noise_per_bin_in_f775w_or_f850lp": 5.0,
+    "maximum_filter_center_range_arcsec": 0.05,
+    "maximum_integrated_light_shift_fraction_over_sky_and_mask_grid": 0.10,
+    "maximum_any_radial_bin_shift_fraction_over_sky_and_mask_grid": 0.20,
+    "maximum_covariance_diagonal_fractional_change_between_bootstrap_halves": 0.25,
+    "covariance_psd_relative_eigenvalue_tolerance": 1e-10,
+    "interpretation": "This measures tracer light relative to an outer sky and retains ICL/sky ambiguity as a nuisance. It does not yet assign stellar mass or separate BCG from ICL."
+  },
+  "lens_astrometry": {
+    "targets": "the six independently redshift-anchored images inside the realized 15-kpc dynamics support",
+    "bcg_subtraction": "subtract only the frozen nonparametric four-band BCG light model while jointly perturbing its covariance",
+    "baseline_cutout_radius_arcsec": 0.5,
+    "sensitivity_cutout_radii_arcsec": [0.35, 0.7],
+    "per_filter_model": "PSF-convolved elliptical Moffat plus affine local background, with one common sky centroid per filter and exposure-specific flux; fit all unmasked FLC pixels jointly",
+    "cross_filter_combination": "Generalized least-squares mean of accepted filter centroids; include exposure bootstrap, affine-registration covariance, PSF leave-one-star covariance, BCG subtraction covariance, and between-filter centroid scatter",
+    "minimum_detection_signal_to_noise": 10.0,
+    "minimum_filters_per_image": 2,
+    "minimum_exposures_per_image": 5,
+    "maximum_interfilter_centroid_range_arcsec": 0.10,
+    "maximum_leave_one_filter_centroid_shift_arcsec": 0.05,
+    "minimum_one_coordinate_uncertainty_arcsec": 0.003,
+    "maximum_one_coordinate_uncertainty_arcsec": 0.15,
+    "minimum_accepted_images_from_distinct_families": 3,
+    "minimum_distinct_radii": 3,
+    "joint_coordinate_covariance_required": true,
+    "covariance_psd_relative_eigenvalue_tolerance": 1e-10,
+    "failure_rule": "Retain every failed image/filter fit. Do not recenter an aperture, discard a filter, or borrow a positional error from a fitted lens residual."
+  },
+  "stage_outcomes": [
+    {
+      "stage": "A1689-H1",
+      "outcome": "Empirical ePSFs and a residual-blind common astrometric frame.",
+      "advance_if": ">=3 PSF stars, >=20 registration sources, and <=0.05 arcsec leave-one-source RMS.",
+      "rethink_if": "Stop this HST route on PSF or registration failure; do not use the lens fit to calibrate coordinates."
+    },
+    {
+      "stage": "A1689-H2",
+      "outcome": "Four-band 16-bin BCG tracer-light profile with full covariance to >=4.7 arcsec.",
+      "advance_if": "Every stated center, S/N, support, bootstrap, sky/mask sensitivity, and PSD gate passes.",
+      "rethink_if": "Keep only the raw photometry shortfall and do not map light to stellar mass."
+    },
+    {
+      "stage": "A1689-H3",
+      "outcome": "A joint coordinate covariance for >=3 independent lens images/radii on the dynamics support.",
+      "advance_if": "Every retained image meets the detection, exposure/filter, centroid-stability, uncertainty, and PSD gates.",
+      "rethink_if": "Keep A1689 as numerical dynamics plus geometry only; do not infer a Weyl response."
+    }
+  ],
+  "outputs": {
+    "registration_report": "results/r1_a1689_hst_registration_psf/report.json",
+    "tracer_profile": "data/derived/r1_a1689_hst_tracer_light_profile.csv",
+    "tracer_covariance": "data/derived/r1_a1689_hst_tracer_light_covariance.npz",
+    "tracer_report": "results/r1_a1689_hst_tracer_light/report.json",
+    "lens_positions": "data/derived/r1_a1689_hst_lens_positions.csv",
+    "lens_covariance": "data/derived/r1_a1689_hst_lens_position_covariance.npz",
+    "lens_report": "results/r1_a1689_hst_lens_astrometry/report.json"
+  },
+  "authorization": {
+    "query_gaia_psf_candidates": true,
+    "execute_registration_and_psf_gate": true,
+    "extract_bcg_tracer_light_after_H1": true,
+    "extract_lens_astrometry_after_H1_and_H2": true,
+    "assign_stellar_mass": false,
+    "fit_lens_mass_model": false,
+    "infer_dynamical_response": false,
+    "infer_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

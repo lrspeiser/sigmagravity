@@ -1,0 +1,41 @@
+{
+  "protocol_version": "REOPENED-HYBRID-SLOPE-ADAPTIVE-CARRIER-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-07-31T21:45:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay the slope-adaptive carrier's best compromises, hard-switch lens branch, root failures, endpoints, controls, and five exact duplicate settings with eight lens-geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_slope_adaptive_carrier_protocol.json",
+  "source_report": "results/reopened_hybrid_slope_adaptive_carrier/report.json",
+  "selected_variants": [
+    "smooth_gate_strength:radial_memory_slope_gate_strength=0",
+    "sharp_gate_strength:radial_memory_slope_gate_strength=0",
+    "smooth_gate_strength:radial_memory_slope_gate_strength=0.25",
+    "smooth_gate_strength:radial_memory_slope_gate_strength=0.75",
+    "smooth_gate_strength:radial_memory_slope_gate_strength=1",
+    "gate_sharpness:radial_memory_slope_gate_sharpness=0.25",
+    "smooth_gate_pivot:radial_memory_slope_gate_pivot=-1",
+    "smooth_steep_radius:radial_memory_steep_radius_power=1.5",
+    "smooth_steep_gbar:radial_memory_steep_gbar_power=-0.5",
+    "gate_sharpness:radial_memory_slope_gate_sharpness=2",
+    "gate_sharpness:radial_memory_slope_gate_sharpness=16",
+    "smooth_gate_pivot:radial_memory_slope_gate_pivot=-0.5",
+    "smooth_gate_pivot:radial_memory_slope_gate_pivot=0",
+    "smooth_steep_radius:radial_memory_steep_radius_power=2",
+    "sharp_gate_strength:radial_memory_slope_gate_strength=1"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_slope_adaptive_carrier_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_slope_adaptive_carrier_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_slope_adaptive_carrier_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_slope_adaptive_carrier_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_slope_adaptive_carrier_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Universal gravity parameters, gate settings, and carrier endpoints remain fixed from bridge-only fits.",
+    "Only lens geometry, shear, center, and source positions are reoptimized; no gravity parameter is fitted to raw lensing.",
+    "Five exact duplicate structural settings are retained to measure fit-seed and lens-optimizer repeatability rather than discarded as redundant.",
+    "Candidates with missing held-out roots remain failures even when their RMS over surviving roots is small.",
+    "This is an optimizer robustness replay selected after two-start results, not an independent scientific holdout."
+  ]
+}

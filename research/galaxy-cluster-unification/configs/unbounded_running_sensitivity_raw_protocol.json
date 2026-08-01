@@ -1,0 +1,22 @@
+{
+  "protocol_version": "UNBOUNDED-RUNNING-SENSITIVITY-RAW-0.3.1",
+  "frozen_utc": "2026-07-29T08:28:00Z",
+  "status": "frozen_before_raw_scores",
+  "selection_warning": "Post-transfer exploratory raw check; variants were selected after inspecting bridge and SPARC sensitivity results.",
+  "variants": [
+    "curvature_power:p=2",
+    "curvature_power:p=3",
+    "curvature_additive_power:alpha=3",
+    "curvature_additive_power:alpha=10"
+  ],
+  "inputs": {
+    "sensitivity_report": "results/unbounded_running_sensitivity/report.json",
+    "raw_solver_protocol": "configs/unbounded_running_full_test_protocol.json",
+    "raw_reference_report": "results/sigma_covariant_weak_field/report.json"
+  },
+  "outputs": {
+    "report": "results/unbounded_running_sensitivity_raw/report.json",
+    "predictions": "results/unbounded_running_sensitivity_raw/predictions.csv",
+    "summary": "results/unbounded_running_sensitivity_raw/SUMMARY.md"
+  }
+}

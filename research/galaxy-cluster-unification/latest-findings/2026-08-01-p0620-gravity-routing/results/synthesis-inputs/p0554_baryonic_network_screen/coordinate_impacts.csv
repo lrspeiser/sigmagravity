@@ -1,0 +1,7 @@
+coordinate,tested_values,profile_RMS_span_arcsec,best_variant_id,best_value,best_improvement_fraction_vs_network_parent
+target_weight_power,0.5+1.5+2.0,5.902362199332821,network_target_050,0.5,0.011322049339907325
+top_k,1.0+3.0+10.0,1.2063461888291371,network_parent,1.0,0.0
+hop_fraction,0.8+0.9+1.1+1.2,1.0875540809094844,network_hop_090,0.9,0.008858657083660626
+softening_kpc,100.0+300.0,0.19283278252292035,network_soft_100,100.0,0.004094475450607704
+link_scale_kpc,125.0+500.0,0.13401633352985698,network_link_125,125.0,0.002464004673280118
+distance_power,1.5+2.5,0.04813234710383796,network_power_250,2.5,0.0006832100652930384

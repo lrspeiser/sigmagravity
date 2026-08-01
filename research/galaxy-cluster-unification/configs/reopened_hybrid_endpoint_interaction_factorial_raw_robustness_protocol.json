@@ -1,0 +1,24 @@
+{
+  "protocol_version": "REOPENED-HYBRID-ENDPOINT-INTERACTION-FACTORIAL-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-01T13:32:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay every frozen interaction-factorial and exact-repeat row with eight raw-lens geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_endpoint_interaction_factorial_protocol.json",
+  "source_report": "results/reopened_hybrid_endpoint_interaction_factorial/report.json",
+  "selected_variants": "all",
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_endpoint_interaction_factorial_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_endpoint_interaction_factorial_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_endpoint_interaction_factorial_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_endpoint_interaction_factorial_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_endpoint_interaction_factorial_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Every frozen factorial and repeat row is replayed, so raw-lensing selection is not favorable-only.",
+    "All structural and gravity settings are frozen; only declared lens nuisance geometry is reoptimized.",
+    "Eight-start outcomes supersede shallow root classifications for these rows.",
+    "Interaction effects apply only to the tested local factorial region and do not reject a parent mechanism."
+  ]
+}

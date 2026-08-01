@@ -1,0 +1,84 @@
+{
+  "protocol_version": "R1B1-A1689-HST11710-acquisition-0.1",
+  "status": "frozen_before_downloading_or_inspecting_program_11710_fits_pixels",
+  "freeze_date": "2026-07-26",
+  "system": "Abell 1689",
+  "purpose": "Acquire the deep public ACS/F814W imaging needed to measure the BCG/tracer-light profile and derive lens-image astrometric covariance independently of a fitted lens or gravity residual.",
+  "selection_basis": {
+    "paper": "Alamo-Martinez and Blakeslee 2017, ApJ 849:6, arXiv:1710.01322",
+    "paper_role": "Primary source identifies the 28-orbit ACS/F814W data, presents A1689 galaxy/ICL luminosity profiles, and reports a core-Sersic BCG profile.",
+    "archive": "MAST HST collection",
+    "proposal_id": "11710",
+    "target_name": "ABELL1689",
+    "instrument": "ACS/WFC",
+    "filter": "F814W",
+    "parent_observation_ids": [24831255, 24831256, 24831257, 24831258, 24831259, 24831260, 24831261],
+    "visit_ids": ["jb2g01", "jb2g02", "jb2g03", "jb2g04", "jb2g05", "jb2g06", "jb2g07"],
+    "archive_query_date": "2026-07-26",
+    "public_data": true
+  },
+  "frozen_product_selection": {
+    "individual_exposures": {
+      "subgroup": "FLC",
+      "legacy_filename_regex": "^jb2g[0-9a-z]{5}_flc\\.fits$",
+      "expected_unique_files": 56,
+      "expected_total_archive_bytes": 9433105920,
+      "role": "CTE-corrected, calibrated individual exposures for empirical astrometric scatter, PSF variation, cosmic-ray rejection, and a new common-grid combination."
+    },
+    "visit_mosaics": {
+      "subgroup": "DRZ",
+      "legacy_filename_regex": "^jb2g0[1-7]010_drz\\.fits$",
+      "expected_unique_files": 7,
+      "expected_total_archive_bytes": 1652264640,
+      "role": "Independent visit-level photometric and astrometric cross-checks; not a substitute for the individual-exposure likelihood."
+    },
+    "association_tables": {
+      "subgroup": "ASN",
+      "legacy_filename_regex": "^jb2g0[1-7]010_asn\\.fits$",
+      "expected_unique_files": 7,
+      "expected_total_archive_bytes": 80640,
+      "role": "Source-traceable mapping from visits to individual exposures."
+    },
+    "excluded": [
+      "MAST HAP hst_* aliases of the same individual exposures",
+      "single-exposure HAP drizzles",
+      "uncorrected FLT products because FLC is available",
+      "level-1 RAW products because the first likelihood stage begins from calibrated CTE-corrected exposures",
+      "any image, mask, or covariance selected after viewing a lens or gravity residual"
+    ]
+  },
+  "expected_archive_totals": {
+    "files": 70,
+    "bytes": 11085451200,
+    "f814w_exposure_seconds": 75172.287963
+  },
+  "paper_products": {
+    "pdf_url": "https://arxiv.org/pdf/1710.01322",
+    "source_url": "https://export.arxiv.org/e-print/1710.01322"
+  },
+  "outputs": {
+    "directory": "data/raw/r1_a1689_hst11710",
+    "observation_query": "data/raw/r1_a1689_hst11710/mast_observation_query.json",
+    "product_query": "data/raw/r1_a1689_hst11710/mast_product_query.json",
+    "manifest": "data/raw/r1_a1689_hst11710/manifest.json",
+    "paper_pdf": "data/raw/r1_a1689_hst11710/alamo_martinez2017_a1689.pdf",
+    "paper_source": "data/raw/r1_a1689_hst11710/alamo_martinez2017_a1689_source.tar"
+  },
+  "advance_gate": {
+    "exact_selected_file_count": 70,
+    "exact_selected_archive_bytes": 11085451200,
+    "sha256_every_file": true,
+    "all_fits_open_and_match_proposal_instrument_filter": true,
+    "all_56_flc_exposures_cover_the_frozen_bcg_center": true,
+    "minimum_distinct_visits": 7
+  },
+  "authorization": {
+    "download_selected_products": true,
+    "audit_raw_astrometric_and_photometric_adequacy": true,
+    "freeze_profile_and_astrometric_likelihood_after_acquisition_audit": true,
+    "measure_bcg_or_lens_positions_before_likelihood_freeze": false,
+    "infer_weyl_or_dynamical_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

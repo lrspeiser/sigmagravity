@@ -1,0 +1,50 @@
+{
+  "protocol_version": "P0572B-PILOT-ARRIVAL-TRANSFER-0.1.0",
+  "frozen_utc": "2026-08-01T05:00:00Z",
+  "status": "frozen_before_pilot_arrival_map_scores",
+  "question": "Does the best P0572 setting that descriptively improved both development and holdout means transfer to the three P0567 pilot cluster maps?",
+  "locked_formula": {
+    "activation": "A=sqrt(1-C)*B_T with p=2, 50 kpc field softening, and F160W weight power one",
+    "carrier": "tidal_weighted: D=A*||T||_F",
+    "arrival_smoothing_kpc": 50.0,
+    "route_fraction_f": 0.8,
+    "local_control_width_kpc": 100.0,
+    "selection_history": "Among the 14 post-hoc P0572 candidates that improved both the seven-system development mean and three-system holdout mean versus local, this candidate had the lowest development JS. It was locked before any P0572B pilot map score."
+  },
+  "data": {
+    "systems": ["A2537", "MACS J0417", "MACS J0949"],
+    "primary_target": "mean of 100 Lenstool convergence realizations with the P0567 background subtraction, positive clipping, smoothing, and normalization",
+    "uncertainty": "score locked and local predictions against all 100 maps per system",
+    "independence_limit": "These systems are globally spent and their P0567 peak locations entered P0571B pilot validation. P0572B is a forward-map replication stress test, not untouched validation."
+  },
+  "advance_gates": {
+    "equal_system_improvement_vs_local_fraction_min": 0.10,
+    "systems_improved_min": 3,
+    "realizations_improved_fraction_min": 0.70,
+    "mean_Pearson_not_decrease": true,
+    "axisymmetric_and_solar_null": true
+  },
+  "cross_domain": {
+    "galaxy": "exact angular null in the net axisymmetric limit; no SPARC rotation change",
+    "solar": "exact one-source null; no Solar or Mercury change"
+  },
+  "inputs": {
+    "p0567_protocol": "configs/p0567_baryon_flux_tensor_backtrack_protocol.json",
+    "p0572_protocol": "configs/p0572_tidal_cancellation_arrival_forward_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0572b_pilot_arrival_transfer",
+    "system_scores": "system_scores.csv",
+    "uncertainty": "uncertainty.csv",
+    "report": "report.json",
+    "figure": "p0572b_pilot_arrival_transfer.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The lens targets are standard-GR normalized convergence maps, not raw observables or absolute lens strength.",
+    "The source catalogs omit gas, ICL, and resolved stellar mass-to-light variation.",
+    "The locked setting was selected post-hoc from P0572's spent development and holdout aggregates.",
+    "P0571B already inspected peak locations in these same pilot lens maps.",
+    "Even a pass would authorize only a future fresh-sample and raw-lensing test, not a theory claim."
+  ]
+}

@@ -1,0 +1,5 @@
+route_geometry,scalar_completion,candidate_id,strength,route_fraction,gate_power,outer_RMSE_km_s,outer_equal_galaxy_RMSE_km_s,outer_mean_residual_km_s
+contract,RAR,contract__s0.05__f0.25__n1__RAR,0.05,0.25,1.0,10.425837227063196,10.91099286619587,2.5016401187178845
+contract,none,contract__s0.4__f1__n0__none,0.4,1.0,0.0,68.86903241545978,63.37895640606941,-61.92172145867294
+diffuse,RAR,diffuse__s0.75__f0.25__n2__RAR,0.75,0.25,2.0,10.100794488580359,10.493763140891172,0.9027540075698912
+diffuse,none,diffuse__s0.25__f0.25__n1__none,0.25,0.25,1.0,71.86299748090623,66.2345021808688,-65.89807419683184

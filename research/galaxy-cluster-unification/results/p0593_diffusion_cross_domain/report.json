@@ -1,0 +1,124 @@
+{
+  "report_version": "P0593-DIFFUSION-CROSS-DOMAIN-RESULTS-0.1.0",
+  "status": "complete_SPARC_Solar_cross_domain",
+  "coverage": {
+    "candidates": 320,
+    "galaxies": 131,
+    "outer_points": 968,
+    "route_profiles": 1310
+  },
+  "references": {
+    "Newtonian": {
+      "outer_RMSE_km_s": 72.39921475798786,
+      "outer_equal_galaxy_RMSE_km_s": 66.60707470287704,
+      "outer_mean_residual_km_s": -66.21824927749422
+    },
+    "fixed_RAR": {
+      "outer_RMSE_km_s": 10.348465773189677,
+      "outer_equal_galaxy_RMSE_km_s": 10.716437036615254,
+      "outer_mean_residual_km_s": 1.742624817150273
+    }
+  },
+  "cluster_locked_primary": {
+    "route_geometry": "diffuse",
+    "strength": 0.5,
+    "route_fraction": 1.0,
+    "gate_power": 0.0,
+    "scalar_completion": "none",
+    "outer_RMSE_km_s": 75.49877954303832,
+    "outer_equal_galaxy_RMSE_km_s": 69.81158548781629,
+    "outer_mean_residual_km_s": -70.02159036190088,
+    "to_Newtonian_RMSE_ratio": 1.0428121326372326,
+    "to_RAR_RMSE_ratio": 7.295649538566098
+  },
+  "best_conservative_none": {
+    "candidate_id": "contract__s0.4__f1__n0__none",
+    "route_geometry": "contract",
+    "strength": 0.4,
+    "route_fraction": 1.0,
+    "gate_power": 0.0,
+    "scalar_completion": "none",
+    "outer_RMSE_km_s": 68.86903241545978,
+    "outer_equal_galaxy_RMSE_km_s": 63.37895640606941,
+    "outer_mean_residual_km_s": -61.92172145867294
+  },
+  "best_RAR_completion": {
+    "candidate_id": "diffuse__s0.75__f0.25__n2__RAR",
+    "route_geometry": "diffuse",
+    "strength": 0.75,
+    "route_fraction": 0.25,
+    "gate_power": 2.0,
+    "scalar_completion": "RAR",
+    "outer_RMSE_km_s": 10.100794488580359,
+    "outer_equal_galaxy_RMSE_km_s": 10.493763140891172,
+    "outer_mean_residual_km_s": 0.9027540075698912
+  },
+  "parameter_impacts": [
+    {
+      "parameter": "scalar_completion",
+      "best_level": "RAR",
+      "worst_level": "none",
+      "median_RMSE_span_km_s": 61.143000958058664,
+      "best_median_RMSE_km_s": 10.566424323051525,
+      "worst_median_RMSE_km_s": 71.70942528111019
+    },
+    {
+      "parameter": "strength",
+      "best_level": "0.2",
+      "worst_level": "0.75",
+      "median_RMSE_span_km_s": 2.496339608262474,
+      "best_median_RMSE_km_s": 40.75945106188754,
+      "worst_median_RMSE_km_s": 43.25579067015001
+    },
+    {
+      "parameter": "route_geometry",
+      "best_level": "contract",
+      "worst_level": "diffuse",
+      "median_RMSE_span_km_s": 1.9539613011488157,
+      "best_median_RMSE_km_s": 40.864010454760894,
+      "worst_median_RMSE_km_s": 42.81797175590971
+    },
+    {
+      "parameter": "route_fraction",
+      "best_level": "0.5",
+      "worst_level": "1.0",
+      "median_RMSE_span_km_s": 0.6193071009125646,
+      "best_median_RMSE_km_s": 40.70168212227392,
+      "worst_median_RMSE_km_s": 41.32098922318649
+    },
+    {
+      "parameter": "gate_power",
+      "best_level": "1.0",
+      "worst_level": "0.0",
+      "median_RMSE_span_km_s": 0.506590659535199,
+      "best_median_RMSE_km_s": 40.81439856365129,
+      "worst_median_RMSE_km_s": 41.32098922318649
+    }
+  ],
+  "maximum_mass_conservation_error": 4.440892098500626e-16,
+  "solar": {
+    "maximum_tested_diffusion_sigma_m": 417420000.0,
+    "mercury_exterior_mass_tail_upper_bound": 0.0,
+    "saturn_exterior_mass_tail_upper_bound": 0.0,
+    "RAR_fractional_force_change_at_Mercury": 0.0,
+    "RAR_fractional_force_change_at_Saturn": 0.0,
+    "Mercury_precession_change_mas_per_century_upper_bound": 0.0,
+    "finite_source_tail_pass": true,
+    "planetary_force_null_pass": true,
+    "PPN_Cassini_defined": false
+  },
+  "gates": {
+    "cluster_primary_within_50_percent_of_RAR": false,
+    "best_conservative_none_within_50_percent_of_RAR": false,
+    "best_RAR_completion_within_10_percent_of_fixed_RAR": true,
+    "mass_conservation_pass": true,
+    "solar_tail_pass": true,
+    "solar_planetary_force_pass": true
+  },
+  "claim_limits": [
+    "The spherical force-equivalent mass is not a literal deprojection of a disk.",
+    "Contraction is a projected-focusing control motivated by anisotropic diffusion; it is not the same formula as cluster-plane broadening unless a geometry tensor supplies the sign.",
+    "The RAR completion is an empirical scalar control and cannot be claimed as an independent derivation.",
+    "Solar force tests do not replace a covariant PPN/Cassini calculation, which is undefined until the metric completion exists."
+  ]
+}

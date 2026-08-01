@@ -1,0 +1,63 @@
+{
+  "protocol_version": "P0586D-SIGNED-METRIC-EXACT-0.1.0",
+  "frozen_utc": "2026-08-02T00:20:00Z",
+  "status": "frozen_before_any_signed_metric_exact_score",
+  "question": "Does the one P0586C universal signed compromise preserve and improve nonlinear multiple-image roots, or was its four-cluster source-plane gain another linear-screen artifact?",
+  "primary": {
+    "minimum_permittivity": 1.0,
+    "a0_m_s2": 2.4e-10,
+    "gate_power": 4.0,
+    "anisotropy_tau": -1.2,
+    "smoothing_r80_fraction": 0.8,
+    "selection_lineage": "minimum all-four fixed-geometry RMS among 108 signed P0586C candidates; one of four candidates that improved all four source-plane scores"
+  },
+  "exact_models": [
+    {"model_id": "zero", "anisotropy_tau": 0.0, "starts": 12},
+    {"model_id": "tau_m0p3", "anisotropy_tau": -0.3, "starts": 12},
+    {"model_id": "tau_m0p6", "anisotropy_tau": -0.6, "starts": 12},
+    {"model_id": "tau_m0p9", "anisotropy_tau": -0.9, "starts": 12},
+    {"model_id": "primary_tau_m1p2", "anisotropy_tau": -1.2, "starts": 12}
+  ],
+  "validation": {
+    "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "roles": "zero and four frozen negative strengths are each independently refit; the primary remains tau=-1.2 regardless of sensitivity results",
+    "metric": "equal-system nonlinear heldout image-position RMS with explicit training and heldout root completeness",
+    "basin_control": "twelve deterministic multistarts per system and model",
+    "spent_disclosure": "all systems and the primary are project-spent"
+  },
+  "numerical_audits": {
+    "maximum_affine_mass_sheet_R2": 0.95,
+    "maximum_normalized_curl_RMS": 0.002,
+    "minimum_metric_eigenvalue": 0.05
+  },
+  "advance_gates": {
+    "primary_all_training_and_heldout_roots": true,
+    "primary_all_four_systems_improve": true,
+    "primary_equal_system_improvement_fraction_min": 0.05,
+    "primary_to_compact_halo_RMS_ratio_max": 1.25,
+    "maximum_affine_mass_sheet_R2": 0.95,
+    "per_cluster_gravity_parameters": 0
+  },
+  "inputs": {
+    "p0586_protocol": "configs/p0586_continuous_baryonic_metric_protocol.json",
+    "p0586c_report": "results/p0586c_signed_metric_response/report.json",
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0586d_signed_metric_exact",
+    "exact_scores": "exact_scores.csv",
+    "predictions": "predictions.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "figure": "p0586d_signed_metric_exact.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This is an exact replay on project-spent clusters, not independent validation.",
+    "The cluster correction remains an angular closure on an inherited radial scalar lens parent.",
+    "The selected epsilon0=1 law is Newtonian in the spherical galaxy limit and does not explain SPARC rotation curves.",
+    "The projected baryon and missing stellar/ICL limitations are unchanged from P0586.",
+    "Sensitivity strengths diagnose topology but cannot replace the preselected tau=-1.2 primary."
+  ]
+}

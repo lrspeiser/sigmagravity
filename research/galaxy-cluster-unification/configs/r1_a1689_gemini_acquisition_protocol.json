@@ -1,0 +1,100 @@
+{
+  "protocol_version": "R1B1-A1689-Gemini-acquisition-0.1",
+  "frozen_before_raw_download": true,
+  "system": "Abell 1689",
+  "archive": "Gemini Observatory Archive",
+  "program_id": "GN-2008B-Q-5",
+  "selection_basis": "The independently frozen lens-geometry prescreen passed with six redshift-anchored images from six families inside 15 kpc.",
+  "science_expectation": {
+    "instrument": "GMOS-N",
+    "mode": "long-slit spectroscopy",
+    "object": "Abell 1689",
+    "exact_science_frames": 4,
+    "exact_total_exposure_seconds_nominal": 7200,
+    "science_filenames": [
+      "N20090615S0079.fits",
+      "N20090621S0034.fits",
+      "N20090621S0035.fits",
+      "N20090621S0038.fits"
+    ],
+    "exposure_seconds_each": 1800,
+    "grating": "B600",
+    "central_wavelengths_um": [0.461, 0.466],
+    "slit": "0.75arcsec",
+    "binning": "2x2",
+    "read_speed": "slow",
+    "gain": "low",
+    "roi": "Full Frame",
+    "archive_qa_required": "Pass"
+  },
+  "exact_program_associated_download": [
+    "N20090615S0075.fits",
+    "N20090615S0076.fits",
+    "N20090615S0077.fits",
+    "N20090615S0078.fits",
+    "N20090615S0079.fits",
+    "N20090615S0080.fits",
+    "N20090621S0030.fits",
+    "N20090621S0031.fits",
+    "N20090621S0032.fits",
+    "N20090621S0033.fits",
+    "N20090621S0034.fits",
+    "N20090621S0035.fits",
+    "N20090621S0036.fits",
+    "N20090621S0037.fits",
+    "N20090621S0038.fits",
+    "N20090621S0039.fits",
+    "N20090621S0040.fits"
+  ],
+  "calibration_gate": {
+    "program_associated_flats_required": 4,
+    "program_associated_arcs_required": 3,
+    "same_configuration_bias_frames_required_before_reduction": true,
+    "bias_frame_minimum": 10,
+    "bias_date_window": "Select the five same-date public GMOS-N 2x2 slow/low full-frame QA-pass biases for each of the two science nights, without inspecting extracted velocity dispersions.",
+    "exact_bias_download": [
+      "N20090615S0531.fits",
+      "N20090615S0532.fits",
+      "N20090615S0533.fits",
+      "N20090615S0534.fits",
+      "N20090615S0535.fits",
+      "N20090621S0193.fits",
+      "N20090621S0194.fits",
+      "N20090621S0195.fits",
+      "N20090621S0196.fits",
+      "N20090621S0197.fits"
+    ],
+    "spectrophotometric_standard_required_only_for_flux_calibrated_baryonic_use": false
+  },
+  "post_download_manifest_amendment": {
+    "amendment_utc": "2026-07-27T05:05:00Z",
+    "field": "calibration_gate.program_associated_flats_required",
+    "original_value": 3,
+    "corrected_value": 4,
+    "basis": "All 17 program-associated files were fixed before download. The raw FITS OBSTYPE headers identify N20090615S0078, N20090621S0033, N20090621S0036, and N20090621S0039 as FLAT exposures; the original archive-metadata count of three was a clerical error.",
+    "scientific_values_inspected": false,
+    "thresholds_changed": false
+  },
+  "download_checks": {
+    "exact_program_associated_file_count": 17,
+    "archive_file_md5_must_match": true,
+    "local_sha256_required": true,
+    "fits_header_metadata_audit_required": true
+  },
+  "reduction_authorization": {
+    "program_associated_download_complete": false,
+    "bias_calibration_complete": false,
+    "reduction_protocol_frozen": false,
+    "start_science_reduction": false
+  },
+  "failure_policy": "Retain every acquired frame and exact missing calibration. Do not begin extraction, choose apertures, or change the 15-kpc support until the raw integrity audit and a separate reduction/covariance protocol pass.",
+  "authorization": {
+    "download_exact_program_associated_files": true,
+    "query_and_download_matching_biases": true,
+    "reduce_spectra": false,
+    "fit_stellar_kinematics": false,
+    "infer_dynamical_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

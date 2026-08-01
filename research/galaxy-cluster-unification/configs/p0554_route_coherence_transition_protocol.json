@@ -1,0 +1,59 @@
+{
+  "protocol_version": "P0554-ROUTE-COHERENCE-TRANSITION-0.1.0",
+  "frozen_utc": "2026-08-01T03:45:00Z",
+  "status": "frozen_after_full-network_RXJ1347_failure_before_any_partial-coherence_score",
+  "question": "How quickly does lensing performance change as one coherent local route is replaced by separately preserved baryon-to-baryon branches?",
+  "formula": "alpha_zeta=(1-zeta)*alpha_local_vector+zeta*alpha_network, with both fields individually curl-free and zero-circular-monopole",
+  "network": {
+    "variant_id": "network_target_050",
+    "target_weight_power": 0.5,
+    "distance_power": 2.0,
+    "softening_kpc": 200.0,
+    "link_scale_kpc": 250.0,
+    "hop_fraction": 1.0,
+    "top_k": null
+  },
+  "branch_fractions": [0.0, 0.1, 0.25, 0.5, 0.75, 0.9, 1.0],
+  "evaluation": {
+    "discovery_systems": ["RXJ2129","MACS0329","MACS0429","MACS1115","MACS1931"],
+    "discovery_geometry": "fixed eta=0 exact-refit geometry",
+    "discovery_score": "equal-system heldout Jacobian-linearized RMS",
+    "selected_positive_branch_fraction": "lowest discovery RMS among zeta>0, selected before reading any partial-coherence RXJ1347 score",
+    "holdout_system": "RXJ1347",
+    "holdout_geometry": "archived P0554 eta=0 all-image ordinary geometry from the frozen network holdout",
+    "holdout_score": "exact root RMS for the three second images after each first image fixes its family source",
+    "transfer_gate": "selected positive-zeta formula converges all roots and beats zeta=0 on RXJ1347",
+    "no_formula_promotion": true
+  },
+  "inputs": {
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "route_protocol": "configs/adaptive_route_multicluster_raw_protocol.json",
+    "fixed_geometry": "results/p0554_subcritical_route_transfer/geometry.csv",
+    "network_screen_report": "results/p0554_baryonic_network_screen/report.json",
+    "network_holdout_protocol": "configs/p0554_baryonic_network_rxj1347_holdout_protocol.json",
+    "network_holdout_report": "results/p0554_baryonic_network_rxj1347_holdout/report.json",
+    "RXJ1347_geometry": "results/p0554_baryonic_network_rxj1347_holdout/baseline_geometry.csv",
+    "raw_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ1347_member_catalog": "data/raw/r1_clash_caminha2019/RXJ1347-P2-shear_mcmc/members_lenstool_v2.dat"
+  },
+  "outputs": {
+    "directory": "results/p0554_route_coherence_transition",
+    "discovery_scores": "discovery_scores.csv",
+    "discovery_system_scores": "discovery_system_scores.csv",
+    "holdout_scores": "holdout_scores.csv",
+    "holdout_predictions": "holdout_predictions.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_route_coherence_transition.png"
+  },
+  "claim_limits": [
+    "The coherence interpolation is phenomenological and operates only on the angular zero-monopole response.",
+    "The five discovery clusters are spent and RXJ1347 provides only a fixed-geometry formula holdout.",
+    "The RXJ1347 geometry was fitted using all six images before formula comparisons.",
+    "A preference for coherent vector summation identifies a useful structural feature; it does not identify a microscopic propagation mechanism.",
+    "Galaxy radial and Solar results are identical across zeta by construction."
+  ]
+}

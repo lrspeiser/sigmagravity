@@ -12,3 +12,7 @@ __pycache__/
 *.blg
 *.synctex.gz
 *Notes.bib
+
+# Local research runtimes and scratch work
+.pytest_cache/
+tmp/

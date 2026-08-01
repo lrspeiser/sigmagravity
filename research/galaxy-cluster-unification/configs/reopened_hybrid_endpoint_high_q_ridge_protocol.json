@@ -1,0 +1,104 @@
+{
+  "protocol_version": "REOPENED-HYBRID-ENDPOINT-HIGH-Q-RIDGE-0.1.0",
+  "frozen_utc": "2026-08-01T12:10:00Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Universally refit the bracketed high-q,p ridge, matched effective-power paths, high-q memory controls, and exact repeats before raw-lensing inspection.",
+  "claim_boundary": [
+    "Three fixed audits show that the first q turnover was a fixed-p artifact and that the correlated ridge is bracketed near q=9 to 10 only after p is allowed to move.",
+    "Five q slices perturb the local ridge in p; separate paths hold median-SPARC or median-CLASH effective power fixed.",
+    "Memory scale and strength are perturbed around the high-q candidate because exponent changes can move their optima.",
+    "The prior q=3.5 endpoint is refit under the new seed as a stage control, and four exact copies measure bridge-optimizer repeatability.",
+    "Every formula uses one bridge-fitted universal parameter set frozen for galaxy, raw-lensing, and Solar transfer.",
+    "Only these formulas and tested ranges can be ranked; no parent nonlocal, history, or new-physics mechanism is rejected."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "common_variant": {
+    "combination": "interaction",
+    "interaction_eta": 1.0,
+    "screen_power": 1.5,
+    "rg_saturation_ceiling": 2.0,
+    "sigma_saturation_ceiling": 1.5,
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 0.5,
+    "radial_memory_gbar_power": 2.56986,
+    "radial_memory_radius_power": 10.0,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false,
+    "radial_memory_slope_gate_strength": 0.0
+  },
+  "sensitivity_families": {
+    "ridge_q_8": {"fixed_name": "radial_memory_gbar_power", "values": [1.25, 1.5, 1.75], "base_variant": {"radial_memory_radius_power": 8.0}},
+    "ridge_q_9": {"fixed_name": "radial_memory_gbar_power", "values": [1.875, 2.125, 2.375], "base_variant": {"radial_memory_radius_power": 9.0}},
+    "ridge_q_10": {"fixed_name": "radial_memory_gbar_power", "values": [2.45, 2.7, 2.95], "base_variant": {"radial_memory_radius_power": 10.0}},
+    "ridge_q_11": {"fixed_name": "radial_memory_gbar_power", "values": [3.0, 3.25, 3.5], "base_variant": {"radial_memory_radius_power": 11.0}},
+    "ridge_q_12": {"fixed_name": "radial_memory_gbar_power", "values": [3.6, 3.85, 4.1], "base_variant": {"radial_memory_radius_power": 12.0}},
+    "constant_sparc_e6_q_8": {"fixed_name": "radial_memory_gbar_power", "values": [1.28493], "base_variant": {"radial_memory_radius_power": 8.0}},
+    "constant_sparc_e6_q_10": {"fixed_name": "radial_memory_gbar_power", "values": [2.56986], "base_variant": {"radial_memory_radius_power": 10.0}},
+    "constant_sparc_e6_q_12": {"fixed_name": "radial_memory_gbar_power", "values": [3.854789], "base_variant": {"radial_memory_radius_power": 12.0}},
+    "constant_sparc_e5p8_q_8": {"fixed_name": "radial_memory_gbar_power", "values": [1.413423], "base_variant": {"radial_memory_radius_power": 8.0}},
+    "constant_sparc_e5p8_q_10": {"fixed_name": "radial_memory_gbar_power", "values": [2.698353], "base_variant": {"radial_memory_radius_power": 10.0}},
+    "constant_sparc_e5p8_q_12": {"fixed_name": "radial_memory_gbar_power", "values": [3.983282], "base_variant": {"radial_memory_radius_power": 12.0}},
+    "constant_clash_e8p849_q_9": {"fixed_name": "radial_memory_gbar_power", "values": [0.336754], "base_variant": {"radial_memory_radius_power": 9.0}},
+    "constant_clash_e8p849_q_10": {"fixed_name": "radial_memory_gbar_power", "values": [2.56986], "base_variant": {"radial_memory_radius_power": 10.0}},
+    "constant_clash_e8p849_q_11": {"fixed_name": "radial_memory_gbar_power", "values": [4.802966], "base_variant": {"radial_memory_radius_power": 11.0}},
+    "high_q_memory_scale": {"fixed_name": "radial_memory_log_scale", "values": [0.3, 0.4, 0.5, 0.6, 0.7], "base_variant": {"radial_memory_gbar_power": 2.56986, "radial_memory_radius_power": 10.0}},
+    "high_q_memory_strength": {"fixed_name": "radial_memory_strength", "values": [0.0, 0.6, 0.7, 0.8, 0.9, 1.0], "base_variant": {"radial_memory_gbar_power": 2.56986, "radial_memory_radius_power": 10.0}},
+    "prior_endpoint_control": {"fixed_name": "radial_memory_log_scale", "values": [0.5], "base_variant": {"radial_memory_gbar_power": -0.875, "radial_memory_radius_power": 3.5}},
+    "repeat_high_q_1": {"fixed_name": "radial_memory_log_scale", "values": [0.5], "base_variant": {"radial_memory_gbar_power": 2.56986, "radial_memory_radius_power": 10.0}},
+    "repeat_high_q_2": {"fixed_name": "radial_memory_log_scale", "values": [0.5], "base_variant": {"radial_memory_gbar_power": 2.56986, "radial_memory_radius_power": 10.0}},
+    "repeat_high_q_3": {"fixed_name": "radial_memory_log_scale", "values": [0.5], "base_variant": {"radial_memory_gbar_power": 2.56986, "radial_memory_radius_power": 10.0}},
+    "repeat_high_q_4": {"fixed_name": "radial_memory_log_scale", "values": [0.5], "base_variant": {"radial_memory_gbar_power": 2.56986, "radial_memory_radius_power": 10.0}}
+  },
+  "baseline_variant_name": "prior_endpoint_control:radial_memory_log_scale=0.5",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20261259,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_endpoint_high_q_ridge/report.json",
+    "scores": "results/reopened_hybrid_endpoint_high_q_ridge/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_endpoint_high_q_ridge/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_endpoint_high_q_ridge/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_endpoint_high_q_ridge/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_endpoint_high_q_ridge/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_endpoint_high_q_ridge/family_impacts.csv",
+    "figure": "results/reopened_hybrid_endpoint_high_q_ridge/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_endpoint_high_q_ridge/SUMMARY.md"
+  }
+}

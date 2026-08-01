@@ -1,0 +1,76 @@
+{
+  "protocol_version": "PHEN-PROTECT-0.3",
+  "frozen_utc": "2026-07-28T08:25:00Z",
+  "status": "gate constants fixed from predictor-only potential distributions before scoring this formula",
+  "question": "Can a fixed potential gate protect SPARC-like low-potential outskirts while allowing an RG susceptibility in BCG and cluster basins?",
+  "sample": {
+    "galaxy_domain": "44 MaNGA BCG last-radius points",
+    "cluster_domain": "72 CLASH NFW-deprojected points in 20 systems",
+    "cluster_target_warning": "NFW-derived target",
+    "grouping": "complete systems",
+    "folds": 5,
+    "seed": 20260728,
+    "objective": "equal-domain mean of equal-system MSE"
+  },
+  "fixed_references": {
+    "newtonian": "g_bar",
+    "galaxy_RAR": "McGaugh empirical RAR",
+    "galaxy_RAR_g_dagger_m_s2": 1.2e-10,
+    "simple_MOND": "simple interpolation",
+    "simple_MOND_a0_m_s2": 1.2e-10,
+    "cluster_RAR_diagnostic_g_dagger_m_s2": 2.02e-9,
+    "cluster_NFW_reference": "reported g_obs is reconstructed from NFW lensing fits"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "potential_reference": 1.0e-5,
+    "sigma_g_dagger_m_s2": 9.6e-11,
+    "rar_acceleration_m_s2": 1.2e-10,
+    "fixed_gate_log10_phi_c": -6.3,
+    "fixed_gate_sharpness": 4.0
+  },
+  "optimization": {
+    "differential_evolution_maxiter": 220,
+    "differential_evolution_popsize": 14,
+    "local_polish": "L-BFGS-B",
+    "paired_system_bootstrap_draws": 20000
+  },
+  "models": {
+    "RG": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0]],
+      "equation": "E=1/epsilon_RG"
+    },
+    "RAR_fixed_potential_gated_RG": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0]],
+      "equation": "E=E_RAR+sigmoid[4 ln((g_bar*r/c^2)/10^-6.3)]*(1/epsilon_RG-1)"
+    }
+  },
+  "diagnostic_surfaces": {
+    "linear_g_rho": "information control",
+    "quadratic_g_rho": "information control",
+    "quadratic_g_rho_potential": "information control",
+    "ridge_penalty": 1.0e-6,
+    "claim_boundary": "not theory"
+  },
+  "advance_gates": {
+    "primary_equal_domain_RMSE_dex_max": 0.12,
+    "BCG_RMSE_relative_to_fixed_galaxy_RAR_max": 1.25,
+    "cluster_diagonal_error_normalized_RMS_max": 1.5,
+    "absolute_cluster_radial_residual_slope_dex_per_dex_max": 0.10,
+    "improvement_over_RG_equal_domain_RMSE_dex_min": 0.01,
+    "maximum_domain_regression_vs_RG_dex": 0.01,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "failure_policy": {
+    "no_formula_passes_but_flexible_surface_passes": "require a nonlocal or geometric observable",
+    "flexible_surfaces_also_fail": "acquire theory-neutral data",
+    "any_formula_passes": "run fixed transfer on SPARC and raw lensing"
+  },
+  "claim_boundary": [
+    "The fixed potential scale is empirically motivated and resembles established potential-dependent modified-gravity ideas.",
+    "The score is exploratory and CLASH is NFW-deprojected.",
+    "No relativistic lensing equation is implied."
+  ]
+}

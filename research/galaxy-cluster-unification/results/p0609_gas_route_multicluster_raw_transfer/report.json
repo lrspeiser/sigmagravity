@@ -1,0 +1,254 @@
+{
+  "report_version": "P0609-GAS-ROUTE-MULTICLUSTER-RAW-TRANSFER-RESULTS-0.1.0",
+  "status": "complete_locked_four_cluster_spent_transfer",
+  "coverage": {
+    "systems": 4,
+    "variants": 3,
+    "variant_system_refits": 12,
+    "training_images": 44,
+    "heldout_images": 11
+  },
+  "locked_route": {
+    "radial_parent": "P0599 bounded potential-shape field",
+    "component_direction": "registered point-source-masked Chandra 0.7-2.0 keV morphology",
+    "angular_strength": 0.0025,
+    "route_length_over_R80": 0.25,
+    "route_width_over_R80": 0.5,
+    "route_radius_exponent": 0.0,
+    "contrast_cap": 20.0,
+    "redshift_exponents": [
+      0.0,
+      1.0
+    ],
+    "standard_single_plane_gamma": 1.0,
+    "formula_parameters_fit_per_cluster": 0
+  },
+  "aggregate_scores": [
+    {
+      "variant_id": "P0599_no_route",
+      "systems": 4,
+      "complete_systems": 3,
+      "all_systems_complete": false,
+      "equal_system_heldout_RMS_arcsec": 21.385761837877546,
+      "median_system_heldout_RMS_arcsec": 21.885875461772617
+    },
+    {
+      "variant_id": "gas_route_gamma0",
+      "systems": 4,
+      "complete_systems": 3,
+      "all_systems_complete": false,
+      "equal_system_heldout_RMS_arcsec": 19.949612803576972,
+      "median_system_heldout_RMS_arcsec": 22.106392474530825
+    },
+    {
+      "variant_id": "gas_route_gamma1",
+      "systems": 4,
+      "complete_systems": 3,
+      "all_systems_complete": false,
+      "equal_system_heldout_RMS_arcsec": 19.89268580131843,
+      "median_system_heldout_RMS_arcsec": 21.940365058425726
+    }
+  ],
+  "matched_comparisons": [
+    {
+      "variant_id": "gas_route_gamma0",
+      "matched_systems": 3,
+      "matched_labels": [
+        "MACS0329",
+        "MACS0429",
+        "MACS1115"
+      ],
+      "reference_RMS_arcsec": 21.385761837877546,
+      "candidate_RMS_arcsec": 19.949612803576972,
+      "fractional_improvement": 0.06715444814114258,
+      "systems_improved": 1
+    },
+    {
+      "variant_id": "gas_route_gamma1",
+      "matched_systems": 3,
+      "matched_labels": [
+        "MACS0329",
+        "MACS0429",
+        "MACS1115"
+      ],
+      "reference_RMS_arcsec": 21.385761837877546,
+      "candidate_RMS_arcsec": 19.89268580131843,
+      "fractional_improvement": 0.06981635949553333,
+      "systems_improved": 1
+    }
+  ],
+  "per_system": [
+    {
+      "system_label": "MACS0329",
+      "variant_id": "P0599_no_route",
+      "gamma": null,
+      "training_images": 20,
+      "heldout_images": 3,
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 19,
+      "heldout_RMS_arcsec": 21.885875461772617,
+      "heldout_roots_converged": 3,
+      "optimizer_cost": 1171.766376224502
+    },
+    {
+      "system_label": "MACS0329",
+      "variant_id": "gas_route_gamma0",
+      "gamma": 0.0,
+      "training_images": 20,
+      "heldout_images": 3,
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 19,
+      "heldout_RMS_arcsec": 22.106392474530825,
+      "heldout_roots_converged": 3,
+      "optimizer_cost": 1171.904684309756
+    },
+    {
+      "system_label": "MACS0329",
+      "variant_id": "gas_route_gamma1",
+      "gamma": 1.0,
+      "training_images": 20,
+      "heldout_images": 3,
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 19,
+      "heldout_RMS_arcsec": 21.940365058425726,
+      "heldout_roots_converged": 3,
+      "optimizer_cost": 1171.9841218253998
+    },
+    {
+      "system_label": "MACS0429",
+      "variant_id": "P0599_no_route",
+      "gamma": null,
+      "training_images": 5,
+      "heldout_images": 2,
+      "training_RMS_arcsec": 3.0808325530527267,
+      "training_roots_converged": 5,
+      "heldout_RMS_arcsec": 16.932273704251358,
+      "heldout_roots_converged": 2,
+      "optimizer_cost": 88.68855835484635
+    },
+    {
+      "system_label": "MACS0429",
+      "variant_id": "gas_route_gamma0",
+      "gamma": 0.0,
+      "training_images": 5,
+      "heldout_images": 2,
+      "training_RMS_arcsec": 3.0714806493590188,
+      "training_roots_converged": 5,
+      "heldout_RMS_arcsec": 9.945167568064564,
+      "heldout_roots_converged": 2,
+      "optimizer_cost": 88.29311848398434
+    },
+    {
+      "system_label": "MACS0429",
+      "variant_id": "gas_route_gamma1",
+      "gamma": 1.0,
+      "training_images": 5,
+      "heldout_images": 2,
+      "training_RMS_arcsec": 3.0722384061357877,
+      "training_roots_converged": 5,
+      "heldout_RMS_arcsec": 9.970762393100564,
+      "heldout_roots_converged": 2,
+      "optimizer_cost": 88.30026889790847
+    },
+    {
+      "system_label": "MACS1115",
+      "variant_id": "P0599_no_route",
+      "gamma": null,
+      "training_images": 4,
+      "heldout_images": 2,
+      "training_RMS_arcsec": 0.10846924124074332,
+      "training_roots_converged": 4,
+      "heldout_RMS_arcsec": 24.624357669497815,
+      "heldout_roots_converged": 2,
+      "optimizer_cost": 0.812137375359162
+    },
+    {
+      "system_label": "MACS1115",
+      "variant_id": "gas_route_gamma0",
+      "gamma": 0.0,
+      "training_images": 4,
+      "heldout_images": 2,
+      "training_RMS_arcsec": 0.10852449001282927,
+      "training_roots_converged": 4,
+      "heldout_RMS_arcsec": 24.624422974824217,
+      "heldout_roots_converged": 2,
+      "optimizer_cost": 0.8121167553483972
+    },
+    {
+      "system_label": "MACS1115",
+      "variant_id": "gas_route_gamma1",
+      "gamma": 1.0,
+      "training_images": 4,
+      "heldout_images": 2,
+      "training_RMS_arcsec": 0.10841751543833185,
+      "training_roots_converged": 4,
+      "heldout_RMS_arcsec": 24.62440097897349,
+      "heldout_roots_converged": 2,
+      "optimizer_cost": 0.812073695831302
+    },
+    {
+      "system_label": "MACS1931",
+      "variant_id": "P0599_no_route",
+      "gamma": null,
+      "training_images": 15,
+      "heldout_images": 4,
+      "training_RMS_arcsec": 0.959009631201659,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": null,
+      "heldout_roots_converged": 3,
+      "optimizer_cost": 29.356439578525794
+    },
+    {
+      "system_label": "MACS1931",
+      "variant_id": "gas_route_gamma0",
+      "gamma": 0.0,
+      "training_images": 15,
+      "heldout_images": 4,
+      "training_RMS_arcsec": 0.9597320966614108,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": null,
+      "heldout_roots_converged": 3,
+      "optimizer_cost": 29.378988554544883
+    },
+    {
+      "system_label": "MACS1931",
+      "variant_id": "gas_route_gamma1",
+      "gamma": 1.0,
+      "training_images": 15,
+      "heldout_images": 4,
+      "training_RMS_arcsec": 0.9602231228726462,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": null,
+      "heldout_roots_converged": 3,
+      "optimizer_cost": 29.405529353623656
+    }
+  ],
+  "transfer_gate": {
+    "all_heldout_roots_pass": false,
+    "matched_improvement_fraction": 0.06981635949553333,
+    "matched_improvement_pass": true,
+    "systems_improved": 1,
+    "systems_improved_pass": false,
+    "absolute_RMS_arcsec": 19.89268580131843,
+    "absolute_RMS_pass": false,
+    "all_gates_pass": false
+  },
+  "cross_domain_controls": {
+    "galaxy_outer_equal_RMSE_km_s": 10.883031245894069,
+    "cluster_radial_equal_RMSE_dex": 0.11960216849884785,
+    "Solar_change": 0.0,
+    "reason": "Only the zero-monopole angular layer transfers; the P0599 radial parent and its galaxy/Solar controls are unchanged"
+  },
+  "interpretation": {
+    "standard_gas_route_transfers": false,
+    "gamma0_beats_gamma1_equal_system": false,
+    "absolute_gas_mass_claimed": false
+  },
+  "claim_limits": [
+    "The four clusters and their image splits are spent elsewhere in the project, although they did not select the P0607 gas route.",
+    "The P0599 radial law was developed using CLASH radial reconstructions that include these systems.",
+    "Chandra brightness supplies direction only and is not interpreted as gas mass.",
+    "The route amplitude and both gamma values are fixed; only six ordinary structural geometry parameters are refit per cluster.",
+    "A transfer failure rejects this projected gas-attraction implementation, not every possible baryonic nonlocal field."
+  ]
+}

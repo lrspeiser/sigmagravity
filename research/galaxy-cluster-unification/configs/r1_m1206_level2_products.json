@@ -1,0 +1,65 @@
+{
+  "inventory_version": "R1A2-M1206-level2-0.1",
+  "purpose": "Reconstruct a spatially uniform MACS J1206 BCG cube from the six central-pointing 095.A-0181(A) level-2 products, avoiding the east/west pointing boundary in the public level-3 mosaic.",
+  "selection_rule": "Select every public calibrated MUSE cube from proposal 095.A-0181(A) whose footprint fully contains the published BCG plus the 12-arcsec semimajor extraction ellipse. Selection uses archive geometry only, not a kinematic result.",
+  "cutout": {
+    "center_ra_deg": 181.550625,
+    "center_dec_deg": -8.8009444444,
+    "radius_deg": 0.0041666667,
+    "wavelength_min_m": 4.86e-7,
+    "wavelength_max_m": 7.16e-7
+  },
+  "products": [
+    {
+      "dp_id": "ADP.2016-06-14T09:38:30.866",
+      "exposure_seconds": 1750.178,
+      "local_path": "data/raw/r1_muse_bcg_cubes/macs_j1206_level2/ADP.2016-06-14T09-38-30.866.fits"
+    },
+    {
+      "dp_id": "ADP.2016-06-15T07:18:31.607",
+      "exposure_seconds": 1371.287,
+      "local_path": "data/raw/r1_muse_bcg_cubes/macs_j1206_level2/ADP.2016-06-15T07-18-31.607.fits"
+    },
+    {
+      "dp_id": "ADP.2016-06-15T07:27:13.701",
+      "exposure_seconds": 3416.208,
+      "local_path": "data/raw/r1_muse_bcg_cubes/macs_j1206_level2/ADP.2016-06-15T07-27-13.701.fits"
+    },
+    {
+      "dp_id": "ADP.2016-06-15T09:09:04.915",
+      "exposure_seconds": 3426.722,
+      "local_path": "data/raw/r1_muse_bcg_cubes/macs_j1206_level2/ADP.2016-06-15T09-09-04.915.fits"
+    },
+    {
+      "dp_id": "ADP.2016-06-17T14:24:04.484",
+      "exposure_seconds": 3470.325,
+      "local_path": "data/raw/r1_muse_bcg_cubes/macs_j1206_level2/ADP.2016-06-17T14-24-04.484.fits"
+    },
+    {
+      "dp_id": "ADP.2016-06-17T15:03:28.152",
+      "exposure_seconds": 3420.499,
+      "local_path": "data/raw/r1_muse_bcg_cubes/macs_j1206_level2/ADP.2016-06-17T15-03-28.152.fits"
+    }
+  ],
+  "total_exposure_seconds": 16855.219,
+  "coadd_protocol": {
+    "spatial_method": "register the fixed-n, fixed-q, fixed-PA BCG continuum model independently in each cube and extract the same sky-oriented elliptical annuli; do not image-coadd the offset pixel grids",
+    "spectral_grid": "intersection of the six observed wavelength grids at the median native step",
+    "spectral_resampling": "linear flux and conservative linear variance interpolation onto the common grid",
+    "relative_flux_normalization_angstrom": [6200.0, 6800.0],
+    "coadd_weighting": "inverse propagated variance after per-spectrum continuum normalization",
+    "minimum_contributing_products_each_wavelength": 4,
+    "outer_systematic_check": "repeat the outermost full-annulus and opposite-half fits six times, omitting one product at a time"
+  },
+  "success_thresholds": {
+    "maximum_registration_offset_arcsec_each_product": 3.0,
+    "maximum_leave_one_out_velocity_shift_km_s": 100.0,
+    "maximum_leave_one_out_sigma_shift_fraction": 0.2,
+    "inherit_coadd_profile_and_half_field_thresholds_from": "configs/r1_m1206_ppxf_protocol.json"
+  },
+  "authorization": {
+    "download_and_uniform_coadd": true,
+    "replace_published_likelihood": false,
+    "gravity_response_fit": false
+  }
+}

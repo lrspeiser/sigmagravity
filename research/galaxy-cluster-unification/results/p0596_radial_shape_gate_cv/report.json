@@ -1,0 +1,255 @@
+{
+  "report_version": "P0596-RADIAL-SHAPE-GATE-CV-RESULTS-0.1.0",
+  "status": "complete_whole_galaxy_cross_validation",
+  "coverage": {
+    "galaxies": 131,
+    "outer_points": 968,
+    "candidates": 360,
+    "folds": 5
+  },
+  "oof_metrics": {
+    "shape_gate": {
+      "equal_galaxy_RMSE_km_s": 10.366597111196505,
+      "pooled_RMSE_km_s": 10.105550765338323
+    },
+    "no_shape": {
+      "equal_galaxy_RMSE_km_s": 10.558820273968573,
+      "pooled_RMSE_km_s": 10.26767991653782
+    },
+    "fixed_RAR": {
+      "equal_galaxy_RMSE_km_s": 10.716437036615254,
+      "pooled_RMSE_km_s": 10.348465773189677
+    }
+  },
+  "equal_galaxy_improvement_fraction_vs_fixed_RAR": 0.03264517154567681,
+  "equal_galaxy_improvement_fraction_vs_no_shape_family": 0.01820498481690891,
+  "galaxies_improved_vs_fixed_RAR": 73,
+  "galaxies_improved_vs_fixed_RAR_fraction": 0.5572519083969466,
+  "folds_improved_vs_fixed_RAR": 5,
+  "bootstrap_probability_equal_galaxy_MSE_improvement_vs_fixed_RAR": 0.895,
+  "shape_fold_selections": [
+    {
+      "candidate_id": "q3__f0.3__n0__hc0.6_w0.1__RAR",
+      "q_R80": 3.0,
+      "route_fraction_max": 0.3,
+      "acceleration_gate_power": 0.0,
+      "shape_gate": "c0.6_w0.1",
+      "shape_midpoint": 0.6,
+      "shape_width": 0.1,
+      "fold": 0,
+      "training_galaxies": 109,
+      "test_galaxies": 22,
+      "training_equal_galaxy_RMSE_km_s": 10.3772678128,
+      "test_equal_galaxy_RMSE_km_s": 8.3481799285,
+      "family": "shape_gate",
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 8.4469283962,
+      "test_equal_galaxy_improvement_fraction": 0.0116904587
+    },
+    {
+      "candidate_id": "q2__f0.3__n4__hc0.5_w0.1__RAR",
+      "q_R80": 2.0,
+      "route_fraction_max": 0.3,
+      "acceleration_gate_power": 4.0,
+      "shape_gate": "c0.5_w0.1",
+      "shape_midpoint": 0.5,
+      "shape_width": 0.1,
+      "fold": 1,
+      "training_galaxies": 97,
+      "test_galaxies": 34,
+      "training_equal_galaxy_RMSE_km_s": 10.389320147,
+      "test_equal_galaxy_RMSE_km_s": 9.0417801335,
+      "family": "shape_gate",
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 9.9262730571,
+      "test_equal_galaxy_improvement_fraction": 0.0891062455
+    },
+    {
+      "candidate_id": "q3__f0.3__n4__hc0.6_w0.05__RAR",
+      "q_R80": 3.0,
+      "route_fraction_max": 0.3,
+      "acceleration_gate_power": 4.0,
+      "shape_gate": "c0.6_w0.05",
+      "shape_midpoint": 0.6,
+      "shape_width": 0.05,
+      "fold": 2,
+      "training_galaxies": 108,
+      "test_galaxies": 23,
+      "training_equal_galaxy_RMSE_km_s": 10.3847324306,
+      "test_equal_galaxy_RMSE_km_s": 8.2826571085,
+      "family": "shape_gate",
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 8.4044959667,
+      "test_equal_galaxy_improvement_fraction": 0.0144968668
+    },
+    {
+      "candidate_id": "q2__f0.3__n0__hc0.6_w0.05__RAR",
+      "q_R80": 2.0,
+      "route_fraction_max": 0.3,
+      "acceleration_gate_power": 0.0,
+      "shape_gate": "c0.6_w0.05",
+      "shape_midpoint": 0.6,
+      "shape_width": 0.05,
+      "fold": 3,
+      "training_galaxies": 106,
+      "test_galaxies": 25,
+      "training_equal_galaxy_RMSE_km_s": 8.9170534469,
+      "test_equal_galaxy_RMSE_km_s": 13.811369976,
+      "family": "shape_gate",
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 14.2001672945,
+      "test_equal_galaxy_improvement_fraction": 0.0273797703
+    },
+    {
+      "candidate_id": "q3__f0.3__n0__hc0.7_w0.05__RAR",
+      "q_R80": 3.0,
+      "route_fraction_max": 0.3,
+      "acceleration_gate_power": 0.0,
+      "shape_gate": "c0.7_w0.05",
+      "shape_midpoint": 0.7,
+      "shape_width": 0.05,
+      "fold": 4,
+      "training_galaxies": 104,
+      "test_galaxies": 27,
+      "training_equal_galaxy_RMSE_km_s": 9.7846032639,
+      "test_equal_galaxy_RMSE_km_s": 11.252211116,
+      "family": "shape_gate",
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 11.3182985548,
+      "test_equal_galaxy_improvement_fraction": 0.0058389906
+    }
+  ],
+  "no_shape_fold_selections": [
+    {
+      "candidate_id": "q3__f0.2__n1__hnone__RAR",
+      "q_R80": 3.0,
+      "route_fraction_max": 0.2,
+      "acceleration_gate_power": 1.0,
+      "shape_gate": "none",
+      "shape_midpoint": null,
+      "shape_width": null,
+      "fold": 0,
+      "training_galaxies": 109,
+      "test_galaxies": 22,
+      "training_equal_galaxy_RMSE_km_s": 10.7199534378,
+      "test_equal_galaxy_RMSE_km_s": 8.456854354,
+      "family": "no_shape",
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 8.4469283962,
+      "test_equal_galaxy_improvement_fraction": -0.0011750967
+    },
+    {
+      "candidate_id": "q1.25__f0.3__n1__hnone__RAR",
+      "q_R80": 1.25,
+      "route_fraction_max": 0.3,
+      "acceleration_gate_power": 1.0,
+      "shape_gate": "none",
+      "shape_midpoint": null,
+      "shape_width": null,
+      "fold": 1,
+      "training_galaxies": 97,
+      "test_galaxies": 34,
+      "training_equal_galaxy_RMSE_km_s": 10.5464414619,
+      "test_equal_galaxy_RMSE_km_s": 9.9348348902,
+      "family": "no_shape",
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 9.9262730571,
+      "test_equal_galaxy_improvement_fraction": -0.0008625426
+    },
+    {
+      "candidate_id": "q3__f0.2__n1__hnone__RAR",
+      "q_R80": 3.0,
+      "route_fraction_max": 0.2,
+      "acceleration_gate_power": 1.0,
+      "shape_gate": "none",
+      "shape_midpoint": null,
+      "shape_width": null,
+      "fold": 2,
+      "training_galaxies": 108,
+      "test_galaxies": 23,
+      "training_equal_galaxy_RMSE_km_s": 10.7430847948,
+      "test_equal_galaxy_RMSE_km_s": 8.4305428434,
+      "family": "no_shape",
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 8.4044959667,
+      "test_equal_galaxy_improvement_fraction": -0.0030991599
+    },
+    {
+      "candidate_id": "q2__f0.2__n4__hnone__RAR",
+      "q_R80": 2.0,
+      "route_fraction_max": 0.2,
+      "acceleration_gate_power": 4.0,
+      "shape_gate": "none",
+      "shape_midpoint": null,
+      "shape_width": null,
+      "fold": 3,
+      "training_galaxies": 106,
+      "test_galaxies": 25,
+      "training_equal_galaxy_RMSE_km_s": 9.3927745185,
+      "test_equal_galaxy_RMSE_km_s": 13.7919886085,
+      "family": "no_shape",
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 14.2001672945,
+      "test_equal_galaxy_improvement_fraction": 0.0287446392
+    },
+    {
+      "candidate_id": "q3__f0.1__n4__hnone__RAR",
+      "q_R80": 3.0,
+      "route_fraction_max": 0.1,
+      "acceleration_gate_power": 4.0,
+      "shape_gate": "none",
+      "shape_midpoint": null,
+      "shape_width": null,
+      "fold": 4,
+      "training_galaxies": 104,
+      "test_galaxies": 27,
+      "training_equal_galaxy_RMSE_km_s": 10.23649631,
+      "test_equal_galaxy_RMSE_km_s": 11.0312758525,
+      "family": "no_shape",
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 11.3182985548,
+      "test_equal_galaxy_improvement_fraction": 0.025359174
+    }
+  ],
+  "unique_shape_selected_candidates": 5,
+  "global_all_data_best_candidate": {
+    "candidate_id": "q3__f0.3__n4__hc0.6_w0.1__RAR",
+    "q_R80": 3.0,
+    "route_fraction_max": 0.3,
+    "acceleration_gate_power": 4.0,
+    "shape_gate": "c0.6_w0.1",
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "all_equal_galaxy_RMSE_km_s": 10.029786637518617
+  },
+  "parameter_impacts": [
+    {
+      "parameter": "route_fraction_max",
+      "best_level": "0.3",
+      "worst_level": "0.1",
+      "median_RMSE_span_km_s": 0.359428991839426
+    },
+    {
+      "parameter": "q_R80",
+      "best_level": "3.0",
+      "worst_level": "0.75",
+      "median_RMSE_span_km_s": 0.27942732189918473
+    },
+    {
+      "parameter": "shape_gate",
+      "best_level": "c0.5_w0.05",
+      "worst_level": "c0.7_w0.2",
+      "median_RMSE_span_km_s": 0.2185913901087364
+    },
+    {
+      "parameter": "acceleration_gate_power",
+      "best_level": "0.0",
+      "worst_level": "1.0",
+      "median_RMSE_span_km_s": 0.03334890602926066
+    }
+  ],
+  "gates": {
+    "improvement_vs_fixed_RAR_pass": true,
+    "improvement_vs_no_shape_pass": true,
+    "fold_count_pass": true,
+    "galaxy_fraction_pass": false,
+    "bootstrap_probability_pass": false
+  },
+  "all_advance_gates_pass": false,
+  "claim_limits": [
+    "This is whole-galaxy formula cross-validation with previously fitted nuisance values, not a nested nuisance refit.",
+    "R50/R80 is a radial-distribution ratio; calling larger values more concentrated would be ambiguous without specifying a profile family.",
+    "The shape-gate hypothesis was prompted by P0595 outcomes, so it requires later independent data.",
+    "RAR is still an empirical scalar completion and normalized cluster maps cannot validate lensing amplitude."
+  ]
+}

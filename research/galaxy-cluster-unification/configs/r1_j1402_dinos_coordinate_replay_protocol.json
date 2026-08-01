@@ -1,0 +1,152 @@
+{
+  "protocol_version": "R1-J1402-Dinos-C1-0.1",
+  "status": "frozen_after_checksum_integrity_and_read_only_coordinate_declaration_audit_before_software_install_or_forward_model_evaluation",
+  "frozen_utc": "2026-07-27T15:15:00Z",
+  "upstream_protocol": "configs/r1_j1402_acquisition_replay_jacobian_protocol.json",
+  "upstream_report": "results/r1_j1402_acquisition/report.json",
+  "science_fit_seen_at_freeze": false,
+  "lens_response_seen_at_freeze": false,
+  "gravity_residuals_seen_at_freeze": false,
+  "reproducibility_boundary": {
+    "exact_original_environment_known": false,
+    "known_facts": [
+      "the J1402 settings file first appears in Project-Dinos/dinos-i commit 5d4e7114542a86dfe7a29713c75376eac2474731 dated 2024-03-25T02:19:50Z",
+      "the full-chain Google Drive file reports a 2024-03-25 last-modified date",
+      "Dolphin v0.0.1 at commit 1593c573541d26ae5791835430c68858988a969b was released 2024-03-23 before those artifacts",
+      "Dolphin v0.0.1 requirements explicitly cap lenstronomy at <=1.11.5",
+      "neither the settings file nor the full-chain HDF5 records an exact Python, NumPy, SciPy, or lenstronomy version"
+    ],
+    "consequence": "The primary environment is the closest date-bounded public reconstruction, not a claim about the authors' unrecorded exact environment. Failure to replay is reported as an environment/provenance boundary before it is interpreted as a physical failure."
+  },
+  "software_lock": {
+    "python": "3.10.x",
+    "environment_path": ".venv-r1-j1402-dolphin-v001",
+    "Dolphin": {
+      "repository": "https://github.com/ajshajib/dolphin",
+      "tag": "v0.0.1",
+      "commit": "1593c573541d26ae5791835430c68858988a969b",
+      "expected_requirements_blob_sha1": "a289b4e0a8ee4176901fab02983be4fffd6cd23a",
+      "source_receipt": "data/raw/r1_j1402/software/dolphin-v0.0.1-source.tar.gz"
+    },
+    "critical_packages": {
+      "lenstronomy": "1.11.5",
+      "numpy": "1.26.4",
+      "scipy": "1.11.4",
+      "h5py": "3.11.0",
+      "PyYAML": "6.0.2",
+      "emcee": "3.1.6",
+      "schwimmbad": "0.4.2",
+      "corner": "2.2.3",
+      "matplotlib": "3.8.4"
+    },
+    "receipt_files": {
+      "source_manifest": "data/raw/r1_j1402/software/source_manifest.json",
+      "pip_freeze": "data/derived/r1_j1402_dinos_environment_pip_freeze.txt",
+      "environment_report": "results/r1_j1402_dinos_environment/report.json"
+    },
+    "modern_version_control": {
+      "lenstronomy": "1.14.2",
+      "role": "secondary compatibility sensitivity only after the primary replay passes; it cannot rescue a failed primary coordinate map"
+    }
+  },
+  "released_inputs": {
+    "data_directory": "data/raw/r1_j1402/dinos_repo/2_dolphin_modelling/data/SDSSJ1402+6321",
+    "settings": "data/raw/r1_j1402/dinos_repo/2_dolphin_modelling/settings/SDSSJ1402+6321_config.yml",
+    "chain": "data/raw/r1_j1402/dinos_output/output_SDSSJ1402+6321_dinos_i.h5",
+    "untrusted_numpy_object_array": "data/raw/r1_j1402/dinos_repo/3_model_parameters/pkl_files/image_SDSSJ1402+6321_F555W..npy",
+    "numpy_object_array_policy": "do not load with allow_pickle=True; the chain, settings, images, and PSFs are sufficient for theory-neutral replay"
+  },
+  "coordinate_contract": {
+    "authoritative_image_coordinates": ["ra_at_xy_0", "dec_at_xy_0", "transform_pix2angle", "ra_shift", "dec_shift"],
+    "source_of_authority": "each band-specific image HDF5 dictionary",
+    "Dolphin_interface_evidence": "Dolphin v0.0.1 processor/data.py returns a deep copy of the full HDF5 dictionary as kwargs_data and processor/core.py passes it unchanged into lenstronomy's multi_band_list",
+    "scalar_pixel_size_field": 0.04,
+    "matrix_implied_pixel_scale_arcsec": "approximately 0.05 in all three bands",
+    "scalar_field_treatment": "record but never substitute for transform_pix2angle",
+    "band_order": ["F435W", "F555W", "F814W"],
+    "image_sizes_pixels": [120, 140, 140],
+    "required_checks": [
+      "HDF5 image shapes equal the frozen settings sizes",
+      "HDF5 ra_at_xy_0 and transform_pix2angle equal the settings arrays bit-for-bit",
+      "every transform is finite, invertible, and round-trips pixel-to-angle-to-pixel to 1e-10 pixel",
+      "the released custom F435W mask equals the settings custom_mask bit-for-bit",
+      "every 61x61 PSF is finite, nonnegative, odd-sized, and normalized to 1 within 1e-6",
+      "image data, exposure maps, and background RMS values are finite, with positive exposure on retained pixels",
+      "the three-band coordinate dictionaries instantiate in the locked lenstronomy version without dropping or rewriting coordinate keys"
+    ],
+    "stop_if": "any operative coordinate field is ignored, rewritten, singular, inconsistent with its settings declaration, or cannot instantiate in the primary environment"
+  },
+  "chain_contract": {
+    "group": "fit_output/0",
+    "samples_shape": [1104000, 23],
+    "walker_ratio": 16,
+    "walkers": 368,
+    "steps": 3000,
+    "parameter_count": 23,
+    "stored_max_log_likelihood": -200012404.1189446,
+    "best_sample_index": 1101277,
+    "required_checks": [
+      "all samples and log likelihoods are finite",
+      "the HDF5 parameter names exactly equal the locked ModelConfig/Param nonlinear parameter order",
+      "the maximum-likelihood sample converts to kwargs without using the object-pickle NPY",
+      "the public settings produce PEMD plus SHEAR_GAMMA_PSI, six lens-light components, and six source-light components",
+      "a multi-linear forward solve at the stored maximum-likelihood nonlinear coordinates completes in all three bands"
+    ]
+  },
+  "forward_replay_gate": {
+    "nonlinear_parameters": "fixed first at the stored maximum-likelihood sample; do not optimize them for the coordinate gate",
+    "linear_parameters": "solve with the released multi-linear source and lens-light model exactly as the locked software implements it",
+    "likelihood_tolerance": {
+      "maximum_absolute_delta_per_used_pixel": 0.01,
+      "maximum_fractional_total_delta": 1e-8
+    },
+    "predictive_thresholds": {
+      "maximum_masked_reduced_chi_square_per_band": 1.5,
+      "maximum_six_sector_heldout_reduced_chi_square": 1.5,
+      "maximum_coherent_heldout_residual_sigma": 5.0
+    },
+    "coordinate_controls": [
+      "operative HDF5 transforms",
+      "forbidden 0.04-arcsec scalar substitution negative control",
+      "zero all ra_shift and dec_shift negative control",
+      "swap the F555W and F814W transforms negative control"
+    ],
+    "negative_control_requirement": "each coordinate corruption must worsen the held-out pixel likelihood; otherwise the coordinate map is not empirically identified",
+    "stop_if": "the primary reconstruction cannot instantiate, parameter names disagree, the stored likelihood cannot be reproduced within both tolerances, predictive closure fails, or coordinate corruptions are not detected"
+  },
+  "execution_order": [
+    "run the no-fit HDF5/config/mask/PSF/chain structural coordinate audit",
+    "download and checksum only Dolphin commit 1593c573541d26ae5791835430c68858988a969b",
+    "create the isolated Python 3.10 environment and verify exact package versions",
+    "instantiate the three released kwargs_data dictionaries without evaluating the lens model",
+    "verify the locked ModelConfig parameter order against the released HDF5 chain",
+    "evaluate the stored maximum-likelihood sample and multi-linear forward solution",
+    "run the held-out sectors and three coordinate corruptions",
+    "authorize the frozen lens-response Jacobian only if every replay gate passes"
+  ],
+  "outputs": {
+    "structural_coordinate_report": "results/r1_j1402_dinos_coordinate_audit/report.json",
+    "environment_report": "results/r1_j1402_dinos_environment/report.json",
+    "replay_products": "data/derived/r1_j1402_dinos_replay_products.npz",
+    "replay_report": "results/r1_j1402_dinos_replay/report.json"
+  },
+  "concrete_outcomes": {
+    "advance": "The primary date-bounded environment reproduces the declared coordinates, parameter order, likelihood, predictive images, held-out sectors, and detects every coordinate corruption. This authorizes only the already-frozen four-direction lens-response Jacobian.",
+    "partial": "If coordinate and predictive closure pass but the historical total-likelihood normalization does not, report both per-pixel residual closure and the exact provenance boundary; do not compute the Jacobian until the discrepancy is explained and a correction protocol is frozen.",
+    "fail": "Any parameter-order, coordinate, predictive, or negative-control failure stops J1402 lens promotion.",
+    "rethink": "A J1402 structural failure is the third consecutive external zero-promotion outcome after J0946 and E325 and triggers the frozen premise/data-requirement rethink."
+  },
+  "authorization": {
+    "run_no_fit_structural_coordinate_audit": true,
+    "download_only_locked_Dolphin_source": true,
+    "create_only_locked_isolated_environment": true,
+    "evaluate_only_stored_chain_coordinates_for_replay": true,
+    "optimize_new_nonlinear_lens_model": false,
+    "load_external_numpy_pickle": false,
+    "compute_lens_response_before_replay_pass": false,
+    "count_toward_ten_system_target": false,
+    "infer_gravity_response": false,
+    "fit_new_force_or_action": false,
+    "authorize_R2": false
+  }
+}

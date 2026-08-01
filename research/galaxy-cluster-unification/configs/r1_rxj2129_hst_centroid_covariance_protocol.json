@@ -1,0 +1,234 @@
+{
+  "protocol_version": "R1B3-RXJ2129-HST-centroid-covariance-0.4",
+  "status": "refrozen_after_v0_3_H1_engineering_audit_before_corrected_H1_rerun",
+  "frozen_utc": "2026-07-27T08:27:01Z",
+  "selection_blind": true,
+  "engineering_amendment": {
+    "updated_utc": "2026-07-27T13:25:00Z",
+    "known_before_amendment": [
+      "The four declared science/weight files retain their frozen checksums and 5000x5000 shapes.",
+      "Their primary WCS headers use the same nominal 0.065-arcsec pixel scale and aligned CD matrix.",
+      "A separate BCG-light PSF audit had already measured three catalog-selected stars; those three outcomes are disclosed but are not used to set the H1 detection thresholds.",
+      "No H1 detection catalog, matched-source count, affine residual, union segmentation map, H1 PSF-star count, arc centroid, lens residual, or gravity residual was measured."
+    ],
+    "reason": "Protocol 0.1 required fixed morphology and saturation cuts but did not give executable numerical values. Version 0.2 supplies them before H1 pixel access without changing any scientific acceptance gate."
+  },
+  "post_freeze_engineering_correction": {
+    "updated_utc": "2026-07-27T13:33:00Z",
+    "trigger": "The first H1 execution stopped during tiled-background construction before source detection because the implementation required at least 95 percent of all 128-pixel tiles to satisfy the per-tile 50-percent valid-pixel rule. That global 95-percent condition was not present in protocol 0.2 and is incompatible with the expected zero-weight mosaic perimeter.",
+    "observed_coverage_geometry": {
+      "F814W_valid_pixel_fraction": 0.45676,
+      "F814W_tiles_meeting_per_tile_rule": 694,
+      "F814W_total_tiles": 1600,
+      "F125W_valid_pixel_fraction": 0.16916572,
+      "F125W_tiles_meeting_per_tile_rule": 256,
+      "F125W_total_tiles": 1600
+    },
+    "correction": "Remove only the unintended global 95-percent tile requirement. Retain the frozen 50-percent per-tile rule, fill failed perimeter tiles from the nearest valid background tile solely for interpolation, and continue to require strictly positive WHT for every pixel used in detection or fitting.",
+    "H1_source_detection_match_registration_PSF_arc_lens_or_gravity_result_known": false,
+    "scientific_acceptance_threshold_changed": false
+  },
+  "post_detection_engineering_correction": {
+    "updated_utc": "2026-07-27T13:35:00Z",
+    "invalid_result": "results/r1_rxj2129_hst_h1/invalid_v0_3/report.json",
+    "known_v0_3_outcome": "The invalid implementation found 39 mutual matches, 0.37856-arcsec cross-validated RMS, 526/612 successful F814W PSF fits, and 177/203 successful F125W fits. H1 failed and H2 remained locked.",
+    "WCS_trigger": "Astropy reported inconsistent SIP information: SIP coefficients were present although the drizzled-image CTYPE values omit the -SIP suffix. Two false mutual matches with 10.44- and 31.86-pixel coordinate discrepancies dominated an otherwise approximately 0.01-arcsec residual distribution.",
+    "WCS_correction": "For these distortion-corrected drizzled mosaics, set the Astropy WCS sip attribute to None whenever CTYPE omits -SIP; retain the frozen 0.3-arcsec mutual-nearest sky match and all affine acceptance thresholds.",
+    "PSF_trigger": "The implementation bounded Moffat alpha scale radii to 1-8 pixels and then rejected the converted FWHM outside 1-8 pixels. Protocol 0.2 explicitly declared FWHM_bounds_pixels, so the code applied the bounds to the wrong parameters.",
+    "PSF_correction": "Parameterize the Moffat fit directly by major and minor FWHM and apply the unchanged 1-8 pixel bounds to those declared parameters. Retain every source, the 90-percent successful-fit threshold, beta bounds, source cuts, and star-count gate.",
+    "scientific_acceptance_threshold_or_source_selection_changed": false,
+    "arc_centroid_lens_gravity_or_force_law_result_known": false
+  },
+  "system": "RX J2129",
+  "purpose": "Replace the fixed 0.5-arcsec lens-coordinate likelihood convention with a full 42x42 image-measurement/WCS covariance, without using a lens mass model, model residual, or gravity response.",
+  "parent_protocol": "configs/r1_rxj2129_strict_observable_next_stage.json",
+  "inputs": {
+    "F814W": {
+      "path": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_acs_rxj2129_f814w_v1_drz.fits",
+      "weight_path": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_acs_rxj2129_f814w_v1_wht.fits",
+      "weight_bytes": 100062720,
+      "weight_sha256": "C9D2651AEBB1AA679B8FE45DBF6D4904EFAEA7E40F88E93D4113B10269FAFCD8",
+      "bytes": 100062720,
+      "sha256": "C22EF27B2F6F4976151702A967D3DFA25346B1031A4D5F0B114D650145C91F1C",
+      "shape": [5000, 5000]
+    },
+    "F125W": {
+      "path": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_wfc3ir_rxj2129_f125w_v1_drz.fits",
+      "weight_path": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_wfc3ir_rxj2129_f125w_v1_wht.fits",
+      "weight_bytes": 100042560,
+      "weight_sha256": "EDD1056BF86C895CB6B0361FE756B14531354521C36DC9E06BC076D3FD3E3E0F",
+      "bytes": 100042560,
+      "sha256": "61248FA08C8EBAE9C2DB12B0520D1594B71D835177F9347BC0E22A87EE8CEA82",
+      "shape": [5000, 5000]
+    },
+    "coordinate_ledger": "data/derived/r1_rxj2129_lens_observables.csv",
+    "selection": "likelihood_included=True and redshift_kind=spectroscopic",
+    "required_images": 21,
+    "required_families": 7,
+    "required_inner_images": ["5.2", "6.3", "8.2"]
+  },
+  "registration": {
+    "reference_frame": "F814W drizzled WCS",
+    "source_selection": "Detect compact, unsaturated, non-edge sources independently in each band at >=20 total-flux S/N, match within 0.3 arcsec, and retain every match passing fixed morphology and saturation cuts.",
+    "minimum_matches": 20,
+    "transform": "six-parameter affine F125W-to-F814W mapping under a Student-t residual likelihood with 4 degrees of freedom",
+    "bootstrap_draws": 500,
+    "rule": "Refit the same transform in 500 matched-source bootstrap draws. No match may be added or removed by eye; if fewer than 20 matches pass, fail the branch.",
+    "maximum_cross_validated_registration_RMS_arcsec": 0.12
+  },
+  "H1_execution_freeze": {
+    "weight_interpretation": "The CLASH WHT image is inverse variance. A pixel is valid only when science and weight are finite and weight is strictly positive.",
+    "background": {
+      "tile_size_pixels": 128,
+      "minimum_valid_fraction_per_tile": 0.5,
+      "location": "tile median",
+      "scale": "1.4826 times tile MAD with an inverse-weight median floor",
+      "interpolation": "bilinear interpolation of tile centers to the science grid"
+    },
+    "compact_source_detection": {
+      "threshold_local_sigma": 5.0,
+      "minimum_connected_pixels": 5,
+      "connectivity": 8,
+      "centroid_aperture_radius_pixels": 6.0,
+      "background_annulus_pixels": [8.0, 12.0],
+      "minimum_total_flux_SNR": 20.0,
+      "total_flux_SNR_definition": "sum of background-subtracted per-pixel standardized residuals inside radius 6 divided by the square root of the valid aperture-pixel count",
+      "minimum_edge_distance_pixels": 30,
+      "minimum_moment_FWHM_pixels": 1.5,
+      "maximum_moment_FWHM_pixels": 6.0,
+      "maximum_moment_ellipticity": 0.35,
+      "saturation_limit_electrons_per_pixel": 60000.0,
+      "saturation_rule": "For ELECTRONS/S multiply by EXPTIME before applying the limit; also reject a source with two or more equal-valued central peak pixels.",
+      "isolation_radius_pixels": 15.0,
+      "maximum_neighbor_to_source_flux_ratio": 0.1,
+      "rule": "Detect independently in each band and retain every source passing all cuts; no ranking or manual deletion is allowed."
+    },
+    "matching_and_affine_fit": {
+      "sky_match_radius_arcsec": 0.3,
+      "duplicate_rule": "Mutual nearest neighbors only",
+      "model": "F125W pixel coordinates to F814W pixel coordinates with six affine parameters",
+      "likelihood": "Student-t with 4 degrees of freedom",
+      "solver": "joint radial-residual IRLS, maximum 50 iterations, relative coefficient tolerance 1e-10",
+      "cross_validation": "leave one matched source out, refit on all remaining matches, and compute the RMS held-out sky residual",
+      "bootstrap_draws": 500,
+      "bootstrap_seed": "first 64 bits of SHA-256('RXJ2129|H1-registration|draw_index')",
+      "minimum_full_rank_draw_fraction": 0.95
+    },
+    "segmentation_implementation": {
+      "registration_interpolation_order": 3,
+      "standardization": "subtract the frozen tiled background and multiply by sqrt(WHT) in each band; transform F125W onto F814W before summing and divide the sum by sqrt(2)",
+      "threshold_sigma": 1.5,
+      "minimum_connected_pixels": 5,
+      "dilation_pixels": 2,
+      "connectivity": 8,
+      "output_dtype": "uint8"
+    },
+    "spatial_PSF": {
+      "arc_exclusion_radius_arcsec": 3.0,
+      "stamp_size_pixels": 31,
+      "model": "elliptical Moffat plus constant background",
+      "beta_bounds": [1.2, 10.0],
+      "FWHM_bounds_pixels": [1.0, 8.0],
+      "field_coordinates": "x and y centered on 2499.5 and divided by 2500",
+      "linear_fields": ["log_geometric_FWHM", "ellipticity_e1", "ellipticity_e2", "log_beta"],
+      "bootstrap_draws": 500,
+      "bootstrap_seed": "first 64 bits of SHA-256('RXJ2129|H1-PSF|band|draw_index')",
+      "minimum_successful_fit_fraction": 0.9
+    }
+  },
+  "union_segmentation_mask": {
+    "detection_image": "inverse-local-variance standardized sum of F814W and registered F125W",
+    "threshold_sigma": 1.5,
+    "minimum_connected_pixels": 5,
+    "dilation_pixels": 2,
+    "rule": "Freeze one segmentation map before any arc centroid fit. Within each arc stamp, unmask only the connected component containing the published coordinate; mask all other components identically in both bands.",
+    "manual_editing": false
+  },
+  "psf": {
+    "source_rule": "Use every isolated, unsaturated compact source passing the same registration morphology cuts, excluding a 3-arcsec radius around any ledger image.",
+    "model": "per-band spatially varying elliptical Moffat PSF with linear focal-plane variation of width and ellipticity",
+    "minimum_stars": 12,
+    "fallback": "No synthetic or borrowed PSF fallback is allowed. Fewer than 12 accepted stars fails the centroid branch before arc fitting."
+  },
+  "centroid_model": {
+    "stamp_width_arcsec": 2.4,
+    "bands_fit_independently": true,
+    "source_model": "three positive elliptical Gaussian components sharing one centroid, each with free amplitude, covariance, and scale, convolved with the frozen local PSF",
+    "background_model": "tilted plane plus one band-specific constant",
+    "optimizer_starts": 12,
+    "bootstrap_draws": 500,
+    "bootstrap": "Use 3x3-pixel moving-block resampling of background residuals plus Poisson source noise and the per-band PSF bootstrap draw. Seeds are SHA-256(image_id|band|draw_index) truncated to 64 bits.",
+    "acceptance": {
+      "minimum_successful_bootstrap_fraction": 0.95,
+      "minimum_source_flux_SNR_each_band": 10.0,
+      "centroid_must_remain_inside_central_stamp_fraction": 0.5,
+      "maximum_cross_band_centroid_difference_arcsec": 0.2,
+      "minimum_per_coordinate_standard_error_arcsec": 0.02,
+      "maximum_per_coordinate_standard_error_arcsec": 0.3
+    },
+    "forbidden": [
+      "moving a stamp after viewing a fit",
+      "changing Gaussian-component count per image",
+      "relabeling or deleting a ledger image",
+      "using a lens model, critical curve, predicted image, or lens residual",
+      "using the previous fixed 0.5-arcsec convention as measurement noise"
+    ]
+  },
+  "covariance": {
+    "coordinate_order": "ledger row order, [RA_east, Dec_north] for each of 21 images",
+    "combination": "For each of 500 joint draws, draw the shared affine WCS solution and independent per-band centroid/bootstrap states, transform both bands to F814W, and precision-combine the two band centroids. Compute the sample covariance of the resulting 42-vectors.",
+    "off_diagonal_sources": [
+      "shared F125W-to-F814W affine registration draws",
+      "shared per-band PSF field draws"
+    ],
+    "forbidden_off_diagonal_sources": [
+      "lens mass-model residuals",
+      "source-family lens equations",
+      "gravity-model predictions"
+    ],
+    "required_shape": [42, 42],
+    "positive_semidefinite_required": true,
+    "minimum_eigenvalue_tolerance": -1e-12,
+    "minimum_all_field_images_accepted": 18,
+    "required_inner_image_acceptance": 3
+  },
+  "stage_outcomes": [
+    {
+      "stage": "H1",
+      "outcome": ">=20 registration matches, >=12 PSF stars, one frozen union segmentation mask, and 500 WCS draws.",
+      "advance_if": "Registration cross-validated RMS <=0.12 arcsec and every checksum/mask/PSF gate passes.",
+      "rethink_if": "Stop before arc fitting; do not borrow a mass model or synthetic error."
+    },
+    {
+      "stage": "H2",
+      "outcome": ">=18 of 21 spectroscopic images, including 5.2, 6.3, and 8.2, pass independent two-band centroid gates.",
+      "advance_if": "All accepted images satisfy cross-band, S/N, bootstrap, and per-coordinate uncertainty gates.",
+      "rethink_if": "Retain the source ledger but do not claim measurement covariance."
+    },
+    {
+      "stage": "H3",
+      "outcome": "One PSD 42x42 coordinate covariance in immutable ledger order, with off-diagonals only from shared measurement systematics.",
+      "advance_if": "Authorize same-system observable-package assembly only after independent XMM X3 success.",
+      "rethink_if": "Keep RX J2129 structural-only if the matrix or image-count gate fails."
+    }
+  ],
+  "outputs": {
+    "H1_detection_ledger": "data/derived/r1_rxj2129_hst_h1_detection_ledger.csv",
+    "H1_match_ledger": "data/derived/r1_rxj2129_hst_h1_match_ledger.csv",
+    "H1_registration_draws": "data/derived/r1_rxj2129_hst_h1_registration_draws.npz",
+    "H1_union_segmentation": "data/derived/r1_rxj2129_hst_h1_union_segmentation.fits",
+    "H1_PSF_star_ledger": "data/derived/r1_rxj2129_hst_h1_psf_star_ledger.csv",
+    "H1_PSF_field": "data/derived/r1_rxj2129_hst_h1_psf_field.npz",
+    "H1_report": "results/r1_rxj2129_hst_h1/report.json",
+    "H1_diagnostic": "results/r1_rxj2129_hst_h1/diagnostic.png"
+  },
+  "authorization": {
+    "read_declared_HST_pixels": true,
+    "freeze_union_segmentation_and_registration": true,
+    "fit_declared_centroid_models": true,
+    "assemble_measurement_covariance_after_H2": true,
+    "use_lens_or_gravity_model": false,
+    "infer_dynamical_or_Weyl_response": false,
+    "fit_new_force_or_action": false
+  }
+}

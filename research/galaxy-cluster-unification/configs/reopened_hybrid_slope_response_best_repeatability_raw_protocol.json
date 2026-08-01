@@ -1,0 +1,30 @@
+{
+  "protocol_version": "REOPENED-HYBRID-SLOPE-RESPONSE-BEST-REPEATABILITY-RAW-0.1.0",
+  "frozen_utc": "2026-08-01T03:10:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay all five independent bridge-fit branches of the same pivot-zero, scale-0.8 formula with eight lens-geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_slope_response_best_repeatability_protocol.json",
+  "source_report": "results/reopened_hybrid_slope_response_best_repeatability/report.json",
+  "selected_variants": [
+    "repeat_1:radial_memory_log_scale=0.8",
+    "repeat_2:radial_memory_log_scale=0.8",
+    "repeat_3:radial_memory_log_scale=0.8",
+    "repeat_4:radial_memory_log_scale=0.8",
+    "repeat_5:radial_memory_log_scale=0.8"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_slope_response_best_repeatability_raw/report.json",
+    "predictions": "results/reopened_hybrid_slope_response_best_repeatability_raw/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_slope_response_best_repeatability_raw/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_slope_response_best_repeatability_raw/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_slope_response_best_repeatability_raw/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Every row is the same structural formula with independently bridge-fitted gravity parameters.",
+    "Raw lensing fits nuisance geometry only and leaves all gravity parameters fixed.",
+    "The spread across rows measures combined bridge-branch and lens-geometry sensitivity.",
+    "This is a reproducibility diagnostic on development data, not a new holdout."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "protocol_version": "P0554-SUBCRITICAL-ROUTE-SCAN-0.1.0",
+  "frozen_utc": "2026-08-01T01:18:00Z",
+  "status": "frozen_after_multifamily_route_tradeoff_before_any_route_continuation_score",
+  "question": "Can a single reduced amplitude of the existing conservative angular route preserve its smooth MACS1931 position benefit without creating the extra root pairs in families 2 and 3?",
+  "formula": {
+    "radial_parent": "combined_parent P0554 with lensing_addition_softness=0.98",
+    "angular_parent": "A0279 route with route_power=2.5",
+    "continuation": "alpha_eta = alpha_radial + eta * s_route * delta_alpha_A0279",
+    "eta_values": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+    "eta_parameters_fit": 0,
+    "new_per_cluster_gravity_parameters": 0
+  },
+  "evaluation": {
+    "system": "MACS1931",
+    "source_families": 7,
+    "published_images": 19,
+    "ordinary_geometry_parameters_refit": 6,
+    "source_positions_profiled_on_training": true,
+    "optimization_starts_per_eta": 8,
+    "maximum_function_evaluations": 2500,
+    "random_seed": 554410001,
+    "global_search_half_width_arcsec": 120.0,
+    "global_root_aperture_arcsec": 120.0,
+    "global_grid_spacing_arcsec": 12.0,
+    "interlaced_grid_offset_arcsec": 6.0,
+    "local_seed_radii_arcsec": [0.0, 0.5, 1.0, 2.0, 4.0, 8.0, 16.0, 32.0],
+    "local_seed_angles": 12,
+    "root_closure_tolerance_arcsec": 0.000001,
+    "root_deduplication_arcsec": 0.05,
+    "jacobian_step_arcsec": 0.0002,
+    "potentially_observable_surplus_fraction": 0.25
+  },
+  "selection_rules": {
+    "baseline_topology": "the seven-family global root-count vector at eta=0 after its own exact geometry refit",
+    "subcritical": "the eta formula retains the eta=0 root count in every family and does not increase potentially observable surplus roots",
+    "primary_accuracy": "equal-family RMS of global one-to-one assigned image distances among families with every image assigned",
+    "secondary_accuracy": "held-out observed-seed exact-root RMS and convergence, reported without rewarding an unsupported extra pair",
+    "descriptive_survivor": "among subcritical eta values, lowest primary accuracy RMS; no promotion because eta is selected on spent MACS1931",
+    "no_formula_promotion": true
+  },
+  "inputs": {
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "multifamily_protocol": "configs/p0554_multifamily_multiplicity_protocol.json",
+    "multifamily_report": "results/p0554_multifamily_multiplicity/report.json",
+    "macs1931_companion_report": "results/p0554_macs1931_relative_companion/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0554_subcritical_route_scan",
+    "eta_summary": "eta_summary.csv",
+    "family_summary": "family_summary.csv",
+    "global_roots": "global_roots.csv",
+    "assignments": "assignments.csv",
+    "geometry": "geometry.csv",
+    "heldout_predictions": "heldout_predictions.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_subcritical_route_scan.png"
+  },
+  "claim_limits": [
+    "Eta is selected on spent MACS1931 and cannot be called universal without frozen transfer.",
+    "The scan changes only angular-route amplitude; it does not exhaust route shape or covariant completions.",
+    "The lens remains simplified and many exact geometry fits can touch nuisance bounds.",
+    "Root detectability uses a relative-magnification screen rather than calibrated multiband completeness.",
+    "No formula is promoted."
+  ]
+}

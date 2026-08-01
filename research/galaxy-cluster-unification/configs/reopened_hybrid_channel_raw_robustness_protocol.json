@@ -1,0 +1,35 @@
+{
+  "protocol_version": "REOPENED-HYBRID-CHANNEL-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-07-31T08:20:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay the most informative channel-saturation candidates with eight lens-geometry starts, including two incomplete-root candidates whose two-start scores would otherwise look unusually favorable.",
+  "source_protocol": "configs/reopened_hybrid_channel_saturation_protocol.json",
+  "source_report": "results/reopened_hybrid_channel_saturation/report.json",
+  "selected_variants": [
+    "baseline_unsaturated:screen_power=1.5",
+    "sigma_only:sigma_saturation_ceiling=6",
+    "rg_only:rg_saturation_ceiling=2",
+    "rg_only:rg_saturation_ceiling=3",
+    "rg_only:rg_saturation_ceiling=6",
+    "rg_2_plus_sigma:sigma_saturation_ceiling=1",
+    "rg_2_plus_sigma:sigma_saturation_ceiling=2",
+    "rg_4_plus_sigma:sigma_saturation_ceiling=1"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_channel_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_channel_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_channel_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_channel_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_channel_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Universal gravity constants are copied unchanged from the channel-saturation bridge fit.",
+    "No gravity constant is fitted to raw lensing.",
+    "Only pseudo-elliptical geometry, shear, center, and source positions are fitted to raw training images.",
+    "Candidates with missing held-out roots are retained as failures even when the RMS over surviving roots is small.",
+    "The same four raw systems and within-family held-out images are used.",
+    "This checks numerical robustness; it does not remove the spherical-baryon, density-interpolation, or zero-slip approximations."
+  ]
+}

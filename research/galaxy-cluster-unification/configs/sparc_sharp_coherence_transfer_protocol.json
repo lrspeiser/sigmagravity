@@ -1,0 +1,30 @@
+{
+  "protocol_version": "SPARC-LOCAL-FORCE-COHERENCE-0.3-SQUARED",
+  "frozen_utc": "2026-07-28T09:50:00Z",
+  "status": "fixed before scoring squared gate on SPARC",
+  "candidate": "RAR_sharp_coherence_gated_RG fixed bridge parameters",
+  "candidate_model": "RAR_sharp_coherence_gated_RG",
+  "coherence_gate_power": 2.0,
+  "selection": "same 131 galaxies and 968 outer-holdout points as fixed RAR",
+  "coherence_mappings": {
+    "primary": "one minus local bulge force fraction",
+    "controls": ["C=1", "one minus global baryonic B/T", "one minus global stellar B/T"]
+  },
+  "density_sensitivity": {
+    "disk_hz_over_Rdisk": [0.1, 0.2, 0.3],
+    "gas_RHI_divisor": [2.5, 3.2, 4.0],
+    "gas_hz_over_Rgas": [0.05, 0.1, 0.2],
+    "primary": [0.2, 3.2, 0.1]
+  },
+  "advance_gate": {
+    "outer_RMSE_relative_to_RAR_max": 1.15,
+    "outer_chi2_per_point_relative_to_RAR_max": 1.25,
+    "median_absolute_extra_velocity_km_s_max": 5.0
+  },
+  "claim_boundary": [
+    "The squared gate is post-failure exploratory.",
+    "Local force fraction is a geometry proxy, not measured 3D coherence.",
+    "RAR success is inherited prior art.",
+    "This fixed transfer uses modeled gas density and RAR-fitted nuisance parameters."
+  ]
+}

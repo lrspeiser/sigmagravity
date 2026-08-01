@@ -1,0 +1,159 @@
+{
+  "report_version": "P0611-FROZEN-DUAL-MISALIGNMENT-RAW-TRANSFER-RESULTS-0.1.0",
+  "status": "complete_chronologically_prospective_project_spent_transfer",
+  "chronology": {
+    "prospective_relative_to_P0610": true,
+    "pristine_project_wide_holdout": false,
+    "reason": "Both systems were used by earlier, different field families, but neither system's P0610 direction cosines, gate activation, or gas-route response was computed before this freeze."
+  },
+  "coverage": {
+    "systems": 2,
+    "member_sources": 124,
+    "raw_variant_fits": 4,
+    "complete_matched_systems": 1
+  },
+  "locked_gate": {
+    "gas_member_cosine": "c_gm=<d_gas dot d_member> weighted by selected member F160W light",
+    "gas_star_cosine": "c_gs=<d_gas dot d_star> weighted by selected member F160W light",
+    "dual_misalignment": "A_dual=sqrt(max(0,1-c_gm)*max(0,1-c_gs))",
+    "activation": "H=A_dual^4/(A_dual^4+0.3^4)",
+    "effective_strength": "s_eff=0.0025*H",
+    "threshold": 0.3,
+    "power": 4.0,
+    "base_strength": 0.0025,
+    "redshift_exponent": 1.0,
+    "parameters_retuned_per_cluster": 0
+  },
+  "direction_audits": [
+    {
+      "system_label": "A383",
+      "members": 35,
+      "mean_alignment_gas_member": 0.9955476338518839,
+      "mean_alignment_gas_star": 0.9955792010834741,
+      "dual_misalignment": 0.004436554456283405,
+      "candidate_gate_H": 4.7829762768084284e-08,
+      "effective_strength": 1.1957440692021073e-10,
+      "star_centroid_x_arcsec": -4.101557555832304,
+      "star_centroid_y_arcsec": 1.4692349574129746,
+      "gas_centroid_x_arcsec": 0.1849556430655569,
+      "gas_centroid_y_arcsec": -1.0876648874033716,
+      "member_direction_finite": true,
+      "HST_positive_cells": 11928,
+      "Chandra_exposure_ks": 48.7566700906052,
+      "Chandra_soft_events": 24115
+    },
+    {
+      "system_label": "MS2137",
+      "members": 89,
+      "mean_alignment_gas_member": 0.6823770626398795,
+      "mean_alignment_gas_star": 0.6566510787170662,
+      "dual_misalignment": 0.33023551129052464,
+      "candidate_gate_H": 0.5948602376283506,
+      "effective_strength": 0.0014871505940708765,
+      "star_centroid_x_arcsec": 15.65687084478579,
+      "star_centroid_y_arcsec": 18.41544171625524,
+      "gas_centroid_x_arcsec": 0.5353822175079944,
+      "gas_centroid_y_arcsec": 0.014893192003183717,
+      "member_direction_finite": true,
+      "HST_positive_cells": 12764,
+      "Chandra_exposure_ks": 141.534377124764,
+      "Chandra_soft_events": 74942
+    }
+  ],
+  "raw_scores": [
+    {
+      "system_label": "A383",
+      "variant_id": "P0599_no_route",
+      "effective_strength": 0.0,
+      "training_images": 10,
+      "heldout_images": 4,
+      "training_RMS_arcsec": 0.7152084846388912,
+      "training_roots_converged": 10,
+      "heldout_RMS_arcsec": 9.459411663381385,
+      "heldout_roots_converged": 4,
+      "optimizer_cost": 12.23844269647685
+    },
+    {
+      "system_label": "A383",
+      "variant_id": "P0610_gated_gas_route",
+      "effective_strength": 1.1957440692021073e-10,
+      "training_images": 10,
+      "heldout_images": 4,
+      "training_RMS_arcsec": 0.7142692268010056,
+      "training_roots_converged": 10,
+      "heldout_RMS_arcsec": 9.498700302239914,
+      "heldout_roots_converged": 4,
+      "optimizer_cost": 12.237683296227864
+    },
+    {
+      "system_label": "MS2137",
+      "variant_id": "P0599_no_route",
+      "effective_strength": 0.0,
+      "training_images": 8,
+      "heldout_images": 3,
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 7,
+      "heldout_RMS_arcsec": 13.5697703639697,
+      "heldout_roots_converged": 3,
+      "optimizer_cost": 281.49124134175173
+    },
+    {
+      "system_label": "MS2137",
+      "variant_id": "P0610_gated_gas_route",
+      "effective_strength": 0.0014871505940708765,
+      "training_images": 8,
+      "heldout_images": 3,
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 7,
+      "heldout_RMS_arcsec": 13.566236821047054,
+      "heldout_roots_converged": 3,
+      "optimizer_cost": 281.5303981507503
+    }
+  ],
+  "responses": [
+    {
+      "system_label": "A383",
+      "complete_pair": true,
+      "heldout_pair_complete": true,
+      "heldout_only_diagnostic_improvement_fraction": -0.004153391379573934,
+      "heldout_improvement_fraction": -0.004153391379573934,
+      "candidate_gate_H": 4.7829762768084284e-08
+    },
+    {
+      "system_label": "MS2137",
+      "complete_pair": false,
+      "heldout_pair_complete": true,
+      "heldout_only_diagnostic_improvement_fraction": 0.00026039813702583015,
+      "heldout_improvement_fraction": null,
+      "candidate_gate_H": 0.5948602376283506
+    }
+  ],
+  "aggregate": {
+    "matched_baseline_RMS_arcsec": 9.459411663381385,
+    "matched_candidate_RMS_arcsec": 9.498700302239914,
+    "matched_improvement_fraction": -0.004153391379573934
+  },
+  "gate_audit": {
+    "all_training_and_heldout_roots_each_system_pass": false,
+    "activation_response_ordering_pass": false,
+    "both_systems_not_worse_pass": false,
+    "equal_system_heldout_improvement_fraction": -0.004153391379573934,
+    "equal_system_heldout_improvement_pass": false,
+    "equal_system_candidate_RMS_arcsec": 9.498700302239914,
+    "equal_system_absolute_RMS_pass": false,
+    "all_gates_pass": false
+  },
+  "interpretation": {
+    "P0610_gate_transfers_to_both_systems": false,
+    "can_count_as_pristine_project_holdout": false,
+    "per_cluster_gravity_retuning": false
+  },
+  "claim_limits": [
+    "A383 and MS2137 are chronologically prospective for P0610 but project-spent under other formula families.",
+    "The CLASH photometric membership cut is a reproducible proxy and includes contamination; it is not a spectroscopic member census.",
+    "F160W traces light rather than stellar mass and Chandra count rate traces emissivity rather than gas mass.",
+    "The baseline radial law used CLASH reconstructed profiles, so this is not an independent test of the full parent formula.",
+    "Two comparatively relaxed clusters cannot validate a population law or a merger-specific gate.",
+    "Raw image positions can reject the projected route implementation but cannot observe a hidden three-dimensional field path."
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "protocol_version": "REOPENED-HYBRID-SMOOTHED-LOCAL-SLOPE-0.1.0",
+  "frozen_utc": "2026-08-01T04:30:00Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Universally refit a derivative-safe smoothed-local-slope response and measure which small bandwidth, pivot, memory, sharpness, and strength changes matter across galaxies, cluster dynamics/lensing, and Solar proxies.",
+  "claim_boundary": [
+    "The formula uses only the baryonic radial profile; no galaxy or cluster label enters its gate.",
+    "Every structural setting and smoothing bandwidth is universal and never fitted per object.",
+    "The same four gravity parameters are fitted only to the BCG plus CLASH bridge and transferred unchanged to SPARC, raw lensing, and Solar tests.",
+    "Mode 4 blends completed endpoint responses, avoiding a point-dependent exponent inside the transported source.",
+    "Two-start lens scores are provisional until selected settings receive eight-start replay, and a missing root remains a failure.",
+    "A failure can disfavor only this equation over the frozen ranges; it cannot reject slope-sensitive, nonlocal, or new gravity generally."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "common_variant": {
+    "combination": "interaction",
+    "interaction_eta": 1.0,
+    "screen_power": 1.5,
+    "rg_saturation_ceiling": 2.0,
+    "sigma_saturation_ceiling": 1.5,
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 0.8,
+    "radial_memory_gbar_power": -1.0,
+    "radial_memory_radius_power": -0.5,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false,
+    "radial_memory_slope_gate_strength": 1.0,
+    "radial_memory_slope_gate_mode": 4,
+    "radial_memory_slope_gate_pivot": 0.5,
+    "radial_memory_slope_gate_sharpness": 4.0,
+    "radial_memory_slope_smoothing_log_scale": 0.2,
+    "radial_memory_steep_gbar_power": -0.5,
+    "radial_memory_steep_radius_power": 1.5
+  },
+  "sensitivity_families": {
+    "response_mode_control": {
+      "fixed_name": "radial_memory_slope_gate_mode",
+      "values": [2, 3, 4],
+      "base_variant": {"radial_memory_slope_gate_pivot": 0.0}
+    },
+    "smoothing_scale_pivot_0": {
+      "fixed_name": "radial_memory_slope_smoothing_log_scale",
+      "values": [0.03, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 4.0],
+      "base_variant": {"radial_memory_slope_gate_pivot": 0.0}
+    },
+    "smoothing_scale_pivot_0p75": {
+      "fixed_name": "radial_memory_slope_smoothing_log_scale",
+      "values": [0.05, 0.1, 0.2, 0.5, 1.0],
+      "base_variant": {"radial_memory_slope_gate_pivot": 0.75}
+    },
+    "pivot_smoothing_0p2": {
+      "fixed_name": "radial_memory_slope_gate_pivot",
+      "values": [-0.25, 0.0, 0.25, 0.5, 0.75, 1.0, 1.25],
+      "base_variant": {}
+    },
+    "memory_scale_pivot_0p75": {
+      "fixed_name": "radial_memory_log_scale",
+      "values": [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.25],
+      "base_variant": {"radial_memory_slope_gate_pivot": 0.75}
+    },
+    "sharpness_pivot_0p75": {
+      "fixed_name": "radial_memory_slope_gate_sharpness",
+      "values": [1.0, 2.0, 4.0, 8.0, 16.0],
+      "base_variant": {"radial_memory_slope_gate_pivot": 0.75}
+    },
+    "strength_pivot_0p75": {
+      "fixed_name": "radial_memory_slope_gate_strength",
+      "values": [0.5, 0.75, 0.9, 1.0],
+      "base_variant": {"radial_memory_slope_gate_pivot": 0.75}
+    }
+  },
+  "baseline_variant_name": "response_mode_control:radial_memory_slope_gate_mode=2",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20261109,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_smoothed_local_slope/report.json",
+    "scores": "results/reopened_hybrid_smoothed_local_slope/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_smoothed_local_slope/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_smoothed_local_slope/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_smoothed_local_slope/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_smoothed_local_slope/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_smoothed_local_slope/family_impacts.csv",
+    "figure": "results/reopened_hybrid_smoothed_local_slope/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_smoothed_local_slope/SUMMARY.md"
+  }
+}

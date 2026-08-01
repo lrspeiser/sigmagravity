@@ -1,0 +1,218 @@
+{
+  "report_version": "P0599-BOUNDED-POTENTIAL-AMPLITUDE-RESULTS-0.1.0",
+  "status": "complete_whole_object_cross_validation",
+  "coverage": {
+    "candidates": 480,
+    "galaxies": 131,
+    "galaxy_outer_points": 968,
+    "clusters": 20,
+    "cluster_points": 84,
+    "folds": 5
+  },
+  "measured_support": {
+    "galaxy_potential_depth_range": [
+      8.615936617008556e-10,
+      6.744785601700965e-07
+    ],
+    "cluster_potential_depth_range": [
+      1.797914896277214e-06,
+      1.8476274610710972e-05
+    ],
+    "support_gap_ratio": 2.6656368377725728
+  },
+  "references": {
+    "fixed_RAR": {
+      "galaxy_equal_RMSE_km_s": 10.716437036615254,
+      "galaxy_pooled_RMSE_km_s": 10.348465773189677,
+      "cluster_equal_RMSE_dex": 0.5094447663238366,
+      "cluster_pooled_RMSE_dex": 0.5083084712163342,
+      "cluster_mean_residual_dex": -0.49365059466519656,
+      "cluster_median_observed_over_predicted": 3.1652604599541805
+    },
+    "P0598_spatial_RAR": {
+      "galaxy_equal_RMSE_km_s": 10.029725300432679,
+      "galaxy_pooled_RMSE_km_s": 9.712820891325814,
+      "cluster_equal_RMSE_dex": 0.5265721359055371,
+      "cluster_pooled_RMSE_dex": 0.5248854800079373,
+      "cluster_mean_residual_dex": -0.5094114463378319,
+      "cluster_median_observed_over_predicted": 3.360449835958744
+    }
+  },
+  "oof_metrics": {
+    "galaxy_equal_RMSE_km_s": 10.882535667450584,
+    "galaxy_pooled_RMSE_km_s": 10.545627554453542,
+    "cluster_equal_RMSE_dex": 0.11958533621134067,
+    "cluster_pooled_RMSE_dex": 0.1192980843761034,
+    "cluster_mean_residual_dex": 0.018356110364366563,
+    "cluster_median_observed_over_predicted": 1.0048087501467693
+  },
+  "cluster_improvement_fraction_vs_fixed_RAR": 0.7652633923903649,
+  "galaxy_RMSE_ratio_to_fixed_RAR": 1.0154994267467643,
+  "clusters_improved_vs_fixed_RAR": 20,
+  "cluster_folds_improved_vs_fixed_RAR": 5,
+  "fold_selections": [
+    {
+      "candidate_id": "local__potential_shape__A3__ct1e-06__p4",
+      "spatial_mode": "local",
+      "carrier": "potential_shape",
+      "amplitude_A": 3.0,
+      "potential_threshold_chi": 1e-06,
+      "potential_power": 4.0,
+      "fold": 0,
+      "training_galaxies": 104,
+      "test_galaxies": 27,
+      "training_clusters": 16,
+      "test_clusters": 4,
+      "training_galaxy_equal_RMSE_km_s": 10.984353016091228,
+      "test_galaxy_equal_RMSE_km_s": 10.481112026715408,
+      "training_galaxy_RMSE_ratio_to_fixed_RAR": 1.017784283981988,
+      "test_galaxy_RMSE_ratio_to_fixed_RAR": 1.0060005537573509,
+      "training_cluster_equal_RMSE_dex": 0.125565093339334,
+      "test_cluster_equal_RMSE_dex": 0.09185255860690159,
+      "carrier_complexity": 1
+    },
+    {
+      "candidate_id": "local__potential_shape__A3__ct1e-06__p4",
+      "spatial_mode": "local",
+      "carrier": "potential_shape",
+      "amplitude_A": 3.0,
+      "potential_threshold_chi": 1e-06,
+      "potential_power": 4.0,
+      "fold": 1,
+      "training_galaxies": 105,
+      "test_galaxies": 26,
+      "training_clusters": 16,
+      "test_clusters": 4,
+      "training_galaxy_equal_RMSE_km_s": 11.337494348393712,
+      "test_galaxy_equal_RMSE_km_s": 8.809312410960642,
+      "training_galaxy_RMSE_ratio_to_fixed_RAR": 1.017200862121815,
+      "test_galaxy_RMSE_ratio_to_fixed_RAR": 1.0043338252451683,
+      "training_cluster_equal_RMSE_dex": 0.11297857473402968,
+      "test_cluster_equal_RMSE_dex": 0.1429917123058746,
+      "carrier_complexity": 1
+    },
+    {
+      "candidate_id": "local__potential_shape__A3__ct1e-06__p4",
+      "spatial_mode": "local",
+      "carrier": "potential_shape",
+      "amplitude_A": 3.0,
+      "potential_threshold_chi": 1e-06,
+      "potential_power": 4.0,
+      "fold": 2,
+      "training_galaxies": 105,
+      "test_galaxies": 26,
+      "training_clusters": 16,
+      "test_clusters": 4,
+      "training_galaxy_equal_RMSE_km_s": 10.126102364957813,
+      "test_galaxy_equal_RMSE_km_s": 13.513228075309033,
+      "training_galaxy_RMSE_ratio_to_fixed_RAR": 1.0168928143893177,
+      "test_galaxy_RMSE_ratio_to_fixed_RAR": 1.0123607680462712,
+      "training_cluster_equal_RMSE_dex": 0.12238028611634189,
+      "test_cluster_equal_RMSE_dex": 0.10768252162828523,
+      "carrier_complexity": 1
+    },
+    {
+      "candidate_id": "local__potential_shape__A3__ct1e-06__p4",
+      "spatial_mode": "local",
+      "carrier": "potential_shape",
+      "amplitude_A": 3.0,
+      "potential_threshold_chi": 1e-06,
+      "potential_power": 4.0,
+      "fold": 3,
+      "training_galaxies": 105,
+      "test_galaxies": 26,
+      "training_clusters": 16,
+      "test_clusters": 4,
+      "training_galaxy_equal_RMSE_km_s": 10.79882593377548,
+      "test_galaxy_equal_RMSE_km_s": 11.214238806001317,
+      "training_galaxy_RMSE_ratio_to_fixed_RAR": 1.0161537638380083,
+      "test_galaxy_RMSE_ratio_to_fixed_RAR": 1.0130602434165492,
+      "training_cluster_equal_RMSE_dex": 0.11538102847781323,
+      "test_cluster_equal_RMSE_dex": 0.13510046725864847,
+      "carrier_complexity": 1
+    },
+    {
+      "candidate_id": "local__potential_shape__A3__ct1e-06__p4",
+      "spatial_mode": "local",
+      "carrier": "potential_shape",
+      "amplitude_A": 3.0,
+      "potential_threshold_chi": 1e-06,
+      "potential_power": 4.0,
+      "fold": 4,
+      "training_galaxies": 105,
+      "test_galaxies": 26,
+      "training_clusters": 16,
+      "test_clusters": 4,
+      "training_galaxy_equal_RMSE_km_s": 11.127521597970121,
+      "test_galaxy_equal_RMSE_km_s": 9.831254984039344,
+      "training_galaxy_RMSE_ratio_to_fixed_RAR": 1.0098206170824777,
+      "test_galaxy_RMSE_ratio_to_fixed_RAR": 1.0464908624069431,
+      "training_cluster_equal_RMSE_dex": 0.12117258768852339,
+      "test_cluster_equal_RMSE_dex": 0.11301362375999349,
+      "carrier_complexity": 1
+    }
+  ],
+  "unique_selected_candidates": 1,
+  "parameter_impacts": [
+    {
+      "parameter": "carrier",
+      "best_level": "potential_shape",
+      "worst_level": "potential_inverse_shape",
+      "median_cluster_RMSE_span_dex": 0.16069610339827675,
+      "best_median_cluster_RMSE_dex": 0.22838110776811024,
+      "worst_median_cluster_RMSE_dex": 0.389077211166387
+    },
+    {
+      "parameter": "amplitude_A",
+      "best_level": "4.0",
+      "worst_level": "1.0",
+      "median_cluster_RMSE_span_dex": 0.13538025128788095,
+      "best_median_cluster_RMSE_dex": 0.21988653501612887,
+      "worst_median_cluster_RMSE_dex": 0.3552667863040098
+    },
+    {
+      "parameter": "potential_threshold_chi",
+      "best_level": "1e-06",
+      "worst_level": "5e-07",
+      "median_cluster_RMSE_span_dex": 0.09379612189139128,
+      "best_median_cluster_RMSE_dex": 0.23889808887962552,
+      "worst_median_cluster_RMSE_dex": 0.3326942107710168
+    },
+    {
+      "parameter": "potential_power",
+      "best_level": "4.0",
+      "worst_level": "1.0",
+      "median_cluster_RMSE_span_dex": 0.09072277259471051,
+      "best_median_cluster_RMSE_dex": 0.26601546463498293,
+      "worst_median_cluster_RMSE_dex": 0.35673823722969344
+    },
+    {
+      "parameter": "spatial_mode",
+      "best_level": "local",
+      "worst_level": "shape_diffusion",
+      "median_cluster_RMSE_span_dex": 0.023516503449750203,
+      "best_median_cluster_RMSE_dex": 0.2616592243995339,
+      "worst_median_cluster_RMSE_dex": 0.2851757278492841
+    }
+  ],
+  "Solar": {
+    "source_g_R80_m_s2": 254.55253269745893,
+    "source_screen_activation": 4.938730118393774e-50,
+    "maximum_tested_amplitude_fraction_upper_bound": 1.9754920473575096e-49
+  },
+  "gates": {
+    "galaxy_preservation_pass": true,
+    "cluster_improvement_pass": true,
+    "cluster_fold_count_pass": true,
+    "cluster_system_count_pass": true,
+    "Solar_amplitude_screen_pass": true
+  },
+  "all_interpretation_gates_pass": true,
+  "claim_limits": [
+    "The potential gap between current SPARC and CLASH samples makes a threshold easy to place; intermediate-potential BCG data are required to test whether this is physics or an object-class separator.",
+    "The CLASH target is NFW-deprojected and has no public radial covariance in the table.",
+    "The sparse 3-5 point cluster baryon profiles make the one-dimensional diffusion endpoint approximate.",
+    "RAR remains the galaxy scalar base; the new term tests a bounded amplitude carrier, not a derivation of galaxy phenomenology.",
+    "All systems and earlier potential trends were already disclosed; cross-validation protects whole objects but this is not a fresh-data confirmation."
+  ]
+}

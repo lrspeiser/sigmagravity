@@ -1,0 +1,128 @@
+{
+  "report_version": "P0614-COMPOSITE-FORMULA-AUDIT-RESULTS-0.1.0",
+  "status": "complete_composite_accounting_audit",
+  "composite_equation": {
+    "scalar": "g_dyn=g_b(1+Delta_0554)",
+    "lensing": "alpha_test=alpha_P0554+grad(psi_endpoint)",
+    "endpoint_source": "Only the P0554 excess above baryonic GR is redistributed; the baryonic base stays local.",
+    "endpoint_constraint": "The endpoint correction is curl-free and has zero circular monopole.",
+    "symmetry": "The endpoint layer is exactly zero on the axisymmetric SPARC and point-source Solar controls, so those domains retain the P0554 scalar prediction.",
+    "per_object_gravity_parameters": 0
+  },
+  "P0554_scalar_parameters": {
+    "alpha": 0.75,
+    "apogee_ratio": 100.0,
+    "screen_exponent": 1.0,
+    "screen_scale": 1.0,
+    "mass_radius_delta": 0.0,
+    "extent_leak": 0.0,
+    "invariant_mode": "potential_depth",
+    "invariant_power": 1.2,
+    "invariant_scale": 2e-06,
+    "secondary_path_ratio_power": 0.25,
+    "photon_extra_multiplier": 1.75,
+    "universal_q": 1.2300686115098052
+  },
+  "endpoint_parameters": {
+    "route_fraction_multiplier": 1.0,
+    "width_over_R80": 0.23,
+    "contrast_cap": 20.0,
+    "return_length_over_R80": 0.36,
+    "gate": "cluster_logistic(C=R50/R80)"
+  },
+  "parameter_accounting": {
+    "per_object_gravity_parameters": 0,
+    "explicit_global_scalar_constants_listed": 11,
+    "additional_selected_endpoint_numbers": 4,
+    "ordinary_nuisance_parameters_still_present": true,
+    "one_parameter_theory": false
+  },
+  "coverage": {
+    "SPARC_galaxies": 131,
+    "SPARC_outer_points": 968,
+    "raw_factorial_clusters": 4,
+    "raw_factorial_heldout_images": 11,
+    "route_formula_transfer_clusters": 1,
+    "route_formula_transfer_heldout_images": 7
+  },
+  "scorecard": [
+    {
+      "domain": "SPARC outer rotation",
+      "composite_value": 12.59204382085389,
+      "unit": "km/s RMSE",
+      "comparator": "fixed RAR",
+      "comparator_value": 10.348465773189679,
+      "ratio_to_comparator": 1.2168029635346302,
+      "status": "within_50_percent_not_better"
+    },
+    {
+      "domain": "SPARC outer rotation",
+      "composite_value": 12.59204382085389,
+      "unit": "km/s RMSE",
+      "comparator": "simple MOND",
+      "comparator_value": 10.385167718947924,
+      "ratio_to_comparator": 1.2125026924581566,
+      "status": "within_50_percent_not_better"
+    },
+    {
+      "domain": "four raw clusters",
+      "composite_value": 19.159352387520663,
+      "unit": "arcsec RMS",
+      "comparator": "matched P0554 scalar parent",
+      "comparator_value": 21.391241889093465,
+      "ratio_to_comparator": 0.9907833101431559,
+      "status": "root_complete_but_subpercent_matched_gain"
+    },
+    {
+      "domain": "raw validation clusters",
+      "composite_value": 19.07556990937222,
+      "unit": "arcsec RMS",
+      "comparator": "compact halo",
+      "comparator_value": 9.989136027113078,
+      "ratio_to_comparator": 1.9096316095402275,
+      "status": "worse_than_compact_halo"
+    },
+    {
+      "domain": "RXJ2129 route transfer",
+      "composite_value": 14.129878355246074,
+      "unit": "arcsec RMS",
+      "comparator": "P0554 scalar parent",
+      "comparator_value": 1.256170108342776,
+      "ratio_to_comparator": 11.248379707018469,
+      "status": "formula_transfer_failed"
+    },
+    {
+      "domain": "Solar Mercury",
+      "composite_value": -1.729829450133022,
+      "unit": "mas/century",
+      "comparator": "published project margin absolute 3.1",
+      "comparator_value": 3.1,
+      "ratio_to_comparator": 0.5580095000429103,
+      "status": "pass"
+    }
+  ],
+  "gates": {
+    "galaxy_near_fixed_RAR_pass": true,
+    "raw_four_cluster_roots_pass": true,
+    "raw_validation_near_compact_halo_pass": false,
+    "RXJ2129_route_transfer_improvement_pass": false,
+    "RXJ2129_all_roots_pass": true,
+    "Solar_all_proxies_pass": true,
+    "zero_per_object_gravity_parameters_pass": true,
+    "composite_unification_pass": false
+  },
+  "interpretation": {
+    "formula_promoted": false,
+    "galaxy_success_carried_by_scalar_parent": true,
+    "endpoint_layer_explains_galaxy_rotation": false,
+    "endpoint_layer_main_observed_effect": "raw lens caustic topology",
+    "distinct_next_test": "Derive route fraction from the scalar excess itself, f_self=Delta_0554(R80)/(1+Delta_0554(R80)), eliminating the independent extent-gate strength before scoring raw roots."
+  },
+  "claim_limits": [
+    "This stage recombines already-computed predictions and does not create a new holdout.",
+    "The P0554 scalar formula and endpoint operator were selected in earlier project-spent stages.",
+    "The compact-halo comparator is limited to the historical validation subset and is not a full dark-matter posterior comparison.",
+    "Zero per-object gravity parameters does not mean zero nuisance parameters: ordinary galaxy and lens geometry nuisances remain.",
+    "The P0554 parent contains multiple universal constants selected from exploratory grids; it is not a one-parameter theory."
+  ]
+}

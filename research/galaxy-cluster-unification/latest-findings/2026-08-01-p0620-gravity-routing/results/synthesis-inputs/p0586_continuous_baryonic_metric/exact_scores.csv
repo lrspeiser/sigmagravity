@@ -1,0 +1,15 @@
+row_type,role,system_label,subset,candidate_id,training_exact_RMS_arcsec,heldout_exact_RMS_arcsec,all_training_roots,all_heldout_roots,finite_systems
+system,zero,MACS0329,selection,identity,7.2734764309981,19.66597369570519,True,True,
+system,selected,MACS0329,selection,e1d00_a2d4_n4_tp0d6_w0d50,7.245843440764754,19.99710229725916,True,True,
+system,zero,MACS0429,selection,identity,3.747950547969432,14.639042649473398,True,True,
+system,selected,MACS0429,selection,e1d00_a2d4_n4_tp0d6_w0d50,3.746673956674901,14.517392114053735,True,True,
+system,zero,MACS1115,validation,identity,0.09809703493804676,24.6352934222693,True,True,
+system,selected,MACS1115,validation,e1d00_a2d4_n4_tp0d6_w0d50,0.09059735237690582,24.638775860960024,True,True,
+system,zero,MACS1931,validation,identity,2.833089665612414,8.510084438063089,True,True,
+system,selected,MACS1931,validation,e1d00_a2d4_n4_tp0d6_w0d50,2.9208579945049187,8.872814533555047,True,True,
+aggregate,zero,selection,selection,identity,5.785783987598795,17.335687051473755,True,True,2.0
+aggregate,selected,selection,selection,e1d00_a2d4_n4_tp0d6_w0d50,5.768007147434007,17.473390828345785,True,True,2.0
+aggregate,zero,validation,validation,identity,2.0044974534360844,18.42985647182675,True,True,2.0
+aggregate,selected,validation,validation,e1d00_a2d4_n4_tp0d6_w0d50,2.0663517735759562,18.51750676621305,True,True,2.0
+aggregate,zero,all_four,all_four,identity,4.329740546036584,17.89113824102269,True,True,4.0
+aggregate,selected,all_four,all_four,e1d00_a2d4_n4_tp0d6_w0d50,4.33241942250576,18.003019800534364,True,True,4.0

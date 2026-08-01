@@ -1,0 +1,81 @@
+{
+  "protocol_version": "P0589-MACS0416-BARYON-FIELD-0.1.0",
+  "frozen_utc": "2026-08-01T07:34:00Z",
+  "status": "frozen_before_any_macs0416_kappa_map_pixel_or_lens_residual_was_read",
+  "question": "Can a registered member plus BCG plus gas plus bounded-ICL baryon field be constructed for MACS J0416 without using an apparent-dark target, and which baryonic uncertainties materially change the frozen P0586D response field?",
+  "coordinate_system": {
+    "reference_ra_deg": 64.0381416667,
+    "reference_dec_deg": -24.0674722222,
+    "x_convention": "positive west",
+    "y_convention": "positive north",
+    "redshift": 0.396,
+    "scale_kpc_per_arcsec_planck18": 5.507436625858681
+  },
+  "stellar_model": {
+    "member_catalog": "data/raw/p0588_macs0416_transfer/hlsp_buffalo_hst_ir-weighted_macs0416_multi_v2.0_catalog.fits",
+    "nominal_abs_dz": 0.02,
+    "minimum_zspec_quality": 3.0,
+    "nominal_aperture_arcsec": 120.0,
+    "bcg_exclusion_radius_arcsec": 3.0,
+    "f160w_reference_ab_magnitude": 17.02,
+    "f160w_reference_flux_cgs": 5.649369748e-27,
+    "nominal_mass_to_light_exponent": 1.0,
+    "north_bcg_mass_msun": 314000000000.0,
+    "north_bcg_sersic_n": 3.78,
+    "north_bcg_effective_radius_kpc": 56.2,
+    "north_bcg": {"ra_deg": 64.038158, "dec_deg": -24.067460, "f814w_ab": 17.62},
+    "south_bcg": {"ra_deg": 64.032008, "dec_deg": -24.077314, "f814w_ab": 17.34},
+    "south_to_north_mass_ratio": 1.29419584145,
+    "bcg_coordinate_and_ratio_source": "data/raw/p0589_macs0416_baryons/vizier_j_mnras_492_503_tablea2.tsv"
+  },
+  "gas_model": {
+    "component_source": "configs/p0588_independent_transfer_readiness_protocol.json",
+    "total_mass_formula": "M=pi*(3/2)*sigma_LT^2*(r_cut-r_core)/G",
+    "nominal_multiplier": 1.0
+  },
+  "icl_model": {
+    "status": "unmeasured_bounded_nuisance_not_a_detection",
+    "nominal_mass_fraction_of_discrete_stars": 0.15,
+    "center": "midpoint_of_two_BCGs",
+    "major_sigma_arcsec": 40.0,
+    "axis_ratio": 0.45,
+    "position_angle": "two_BCG_axis"
+  },
+  "map": {"half_width_arcsec": 220.0, "pixels_per_axis": 221, "compression_blocks_per_axis": 10},
+  "p0586d_field": {
+    "minimum_permittivity": 1.0,
+    "a0_m_s2": 2.4e-10,
+    "gate_power": 4.0,
+    "anisotropy_tau": -1.2,
+    "smoothing_r80_fraction": 0.8,
+    "half_width_arcsec": 192.0,
+    "pixels_per_axis": 128,
+    "point_softening_arcsec": 2.0
+  },
+  "one_at_a_time_variants": {
+    "member_abs_dz": [0.01, 0.02, 0.03],
+    "member_aperture_arcsec": [90.0, 120.0, 180.0],
+    "mass_to_light_exponent": [0.8, 1.0, 1.2],
+    "gas_mass_multiplier": [0.7, 1.0, 1.3],
+    "icl_fraction": [0.0, 0.15, 0.3],
+    "south_to_north_bcg_mass_ratio": [1.0, 1.29419584145, 1.6]
+  },
+  "lens_geometry_sampling_only": "data/derived/r1_replacement_cycle1_extension_images.csv",
+  "outputs": {
+    "directory": "results/p0589_macs0416_baryon_field",
+    "variant_metrics": "variant_metrics.csv",
+    "nominal_sources": "data/derived/p0589_macs0416_nominal_baryon_sources.csv",
+    "nominal_maps": "nominal_baryon_maps.npz",
+    "nominal_metric_field": "nominal_p0586d_field.npz",
+    "report": "report.json",
+    "figure": "p0589_macs0416_baryon_field.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The BUFFALO catalog was produced after bright-galaxy and ICL subtraction, so the ICL component is a bounded geometric nuisance rather than a measurement.",
+    "A single F160W-anchored stellar mass-to-light rule is not a stellar-population fit.",
+    "The four gas dPIE components are a published Chandra-derived model without a full public covariance.",
+    "Sampling the frozen field at image coordinates measures where the field is evaluated, not whether it predicts the images.",
+    "No kappa map, dark-halo coordinate, image residual, or formula score may be used to choose these baryonic variants."
+  ]
+}

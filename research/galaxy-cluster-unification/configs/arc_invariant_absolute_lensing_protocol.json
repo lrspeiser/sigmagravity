@@ -1,0 +1,74 @@
+{
+  "protocol_version": "ARC-INVARIANT-ABSOLUTE-LENSING-0.1.0",
+  "frozen_utc": "2026-08-01T01:35:00Z",
+  "status": "exploratory_micro_grid_frozen_after_baseline_CLASH_diagnostic_before_any_variation_or_raw_RXJ2129_score",
+  "question": "Which small universal change to the Solar-safe arc-apogee law most improves absolute cluster lensing without erasing its galaxy or Solar behavior?",
+  "baseline": {
+    "mass_radius_delta": 0.0,
+    "alpha": 0.75,
+    "apogee_ratio": 100.0,
+    "screen_exponent": 1.0,
+    "screen_scale": 1.0,
+    "extent_leak": 0.0,
+    "invariant_mode": "none",
+    "invariant_power": 0.0,
+    "invariant_scale": 1.0,
+    "photon_extra_multiplier": 1.0
+  },
+  "constants": {
+    "a0_m_s2": 1.2e-10,
+    "mass_radius_pivot_solar": 10000000000.0,
+    "universal_q_bounds": [0.0, 1000.0]
+  },
+  "one_at_a_time": {
+    "mass_radius_delta": [-0.1, -0.05, 0.05, 0.1],
+    "alpha": [0.65, 0.7, 0.8, 0.85],
+    "apogee_ratio": [30.0, 60.0, 200.0, 1000000.0],
+    "screen_exponent": [0.9, 1.1, 1.25, 1.5],
+    "screen_scale": [0.5, 0.75, 1.5, 2.0],
+    "extent_leak": [-0.1, -0.05, 0.05, 0.1, 0.2],
+    "photon_extra_multiplier": [1.5, 2.0, 2.5, 3.0, 4.0, 5.0]
+  },
+  "invariant_families": [
+    {"mode": "path_ratio", "powers": [0.1, 0.25, 0.5, 1.0], "scales": [1.0]},
+    {"mode": "mass_growth", "powers": [0.1, 0.25, 0.5, 1.0], "scales": [1.0]},
+    {"mode": "coherence_length", "powers": [0.25, 0.5, 1.0], "scales": [30.0, 100.0, 300.0]},
+    {"mode": "potential_depth", "powers": [0.25, 0.5, 1.0], "scales": [1e-7, 3e-7, 1e-6]}
+  ],
+  "inputs": {
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ2129_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "RXJ2129_previous_parameters": "results/rxj2129_raw_theory_lensing/fitted_parameters.csv"
+  },
+  "tests": {
+    "galaxy": "fit q on inner radii only, five-fold held-out-galaxy outer velocity RMSE",
+    "CLASH": "no cluster refit; compare absolute equivalent lens acceleration at 84 points in 20 systems",
+    "Solar": "Earth fractional force, Mercury supplementary precession, and photon-channel Cassini proxy",
+    "raw_RXJ2129": "run only the pre-CLASH-defined shortlist: baseline, best zero-slip cluster, best cluster with galaxy RMSE <= 1.5 RAR, and best photon-multiplier candidate"
+  },
+  "raw_lensing": {
+    "optimization_starts": 4,
+    "shortlist_is_selected_without_raw_image_scores": true
+  },
+  "outputs": {
+    "directory": "results/arc_invariant_absolute_lensing",
+    "scores": "variant_scores.csv",
+    "galaxy_predictions": "selected_galaxy_predictions.csv",
+    "cluster_predictions": "cluster_predictions.csv",
+    "raw_predictions": "raw_RXJ2129_predictions.csv",
+    "raw_parameters": "raw_RXJ2129_parameters.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "arc_invariant_absolute_lensing.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "CLASH equivalent accelerations were deprojected from conventional NFW lensing profiles and are not theory-neutral raw observables.",
+    "All formula variations are exploratory and use RAR-derived galaxy nuisance parameters.",
+    "The photon-extra multiplier is a phenomenological gravitational-slip diagnostic, not a derived relativistic coupling.",
+    "RX J2129 was used in earlier formula development; its image holdout is raw but the cluster is not independent.",
+    "Potential and enclosed-mass invariants use a spherical profile closure for both disks and clusters."
+  ]
+}

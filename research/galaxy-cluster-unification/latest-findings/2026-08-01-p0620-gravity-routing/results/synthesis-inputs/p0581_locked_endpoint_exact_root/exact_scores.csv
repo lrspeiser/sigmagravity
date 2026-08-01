@@ -1,0 +1,5 @@
+system,system_label,variant,training_images,heldout_images,training_RMS_arcsec,training_converged_roots,training_all_roots,heldout_RMS_arcsec,heldout_converged_roots,heldout_all_roots,optimizer_cost
+MACS J0329.7-0211,MACS0329,K0338_primary,20,3,inf,19,False,inf,2,False,1482.4721307320103
+MACS J0429.6-0253,MACS0429,K0338_primary,5,2,3.57066571066334,5,True,15.171747792708025,2,True,117.05998358534704
+MACS J1115.9+0129,MACS1115,K0338_primary,4,2,0.10704706675153287,4,True,24.61928606145917,2,True,0.897970596247158
+MACS J1931.8-2635,MACS1931,K0338_primary,15,4,4.897990247218952,15,True,10.920836065429105,4,True,672.7676516688125

@@ -1,0 +1,84 @@
+{
+  "protocol_version": "P0554-LOCAL-NEIGHBOR-EXACT-0.1.0",
+  "frozen_utc": "2026-08-01T04:00:00Z",
+  "status": "frozen_after_localization_screen_before_any_local_soft_200_geometry_refit_or_global_root_score",
+  "question": "Does the fixed-screen winner, a 200 kpc-softened local baryonic-neighbor route at eta=0.30, survive exact geometry refitting and global image-root tests better than no route and the original global-centroid route?",
+  "candidate": {
+    "variant_id": "local_soft_200",
+    "radial_parent": "P0554 combined-parent radial law with lensing_addition_softness=0.98",
+    "angular_strength": "0.30 * f_route^2.5",
+    "direction": "normalized softened inverse-square vector from every other cataloged member galaxy",
+    "local_mix": 1.0,
+    "softening_kpc": 200.0,
+    "symmetric_bend_degrees": 0.0,
+    "center_mode": "light_centroid",
+    "new_per_cluster_gravity_parameters": 0
+  },
+  "references": {
+    "eta_000": "archived exact-refit and global-root result from p0554_subcritical_route_transfer",
+    "global_centroid": "archived eta_030 exact-refit and global-root result from p0554_subcritical_route_transfer"
+  },
+  "evaluation": {
+    "systems": ["RXJ2129", "MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "selection_system_excluded_from_primary_transfer": "MACS1931",
+    "source_families": 27,
+    "published_images": 77,
+    "ordinary_geometry_parameters_refit_per_cluster": 6,
+    "source_positions_profiled_on_training": true,
+    "optimization_starts_per_cluster": 8,
+    "maximum_function_evaluations": 2500,
+    "random_seed": 554430001,
+    "global_search_half_width_arcsec": 120.0,
+    "global_root_aperture_arcsec": 120.0,
+    "global_grid_spacing_arcsec": 12.0,
+    "interlaced_grid_offset_arcsec": 6.0,
+    "local_seed_radii_arcsec": [0.0, 0.5, 1.0, 2.0, 4.0, 8.0, 16.0, 32.0],
+    "local_seed_angles": 12,
+    "root_closure_tolerance_arcsec": 0.000001,
+    "root_deduplication_arcsec": 0.05,
+    "jacobian_step_arcsec": 0.0002,
+    "potentially_observable_surplus_fraction": 0.25
+  },
+  "gates": {
+    "primary_common_family_assignment_RMS_improvement_vs_eta0_minimum": 0.01,
+    "primary_systems_heldout_RMS_improved_vs_eta0_minimum": 3,
+    "candidate_primary_assignment_RMS_must_beat_global_centroid": true,
+    "additional_primary_observable_surplus_roots_maximum": 0,
+    "additional_primary_missing_families_maximum": 0,
+    "lost_primary_observed_seed_heldout_roots_maximum": 0,
+    "all_gates_required_for_strong_survival": true
+  },
+  "inputs": {
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "screen_protocol": "configs/p0554_route_localization_screen_protocol.json",
+    "screen_report": "results/p0554_route_localization_screen/report.json",
+    "reference_transfer_protocol": "configs/p0554_subcritical_route_transfer_protocol.json",
+    "reference_system_scores": "results/p0554_subcritical_route_transfer/system_scores.csv",
+    "reference_family_summary": "results/p0554_subcritical_route_transfer/family_summary.csv",
+    "reference_global_roots": "results/p0554_subcritical_route_transfer/global_roots.csv"
+  },
+  "outputs": {
+    "directory": "results/p0554_local_neighbor_exact",
+    "candidate_system_scores": "candidate_system_scores.csv",
+    "candidate_family_summary": "candidate_family_summary.csv",
+    "candidate_global_roots": "candidate_global_roots.csv",
+    "candidate_assignments": "candidate_assignments.csv",
+    "candidate_geometry": "candidate_geometry.csv",
+    "candidate_heldout_predictions": "candidate_heldout_predictions.csv",
+    "comparison_system_scores": "comparison_system_scores.csv",
+    "comparison_family_summary": "comparison_family_summary.csv",
+    "variant_summary": "variant_summary.csv",
+    "paired_position_comparisons": "paired_position_comparisons.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_local_neighbor_exact.png"
+  },
+  "claim_limits": [
+    "The local-neighbor formula was selected on a fixed-geometry screen using these same spent clusters.",
+    "MACS1931 is excluded from primary transfer because it selected eta=0.30 in an earlier stage.",
+    "Cataloged member light omits accepted registered hot gas and separately measured diffuse ICL.",
+    "The local-neighbor direction is a phenomenological projected proxy rather than a covariant law.",
+    "Four of five reference geometries touched nuisance bounds, so exact-refit comparisons remain model-limited.",
+    "No formula is promoted by this descriptive follow-up."
+  ]
+}

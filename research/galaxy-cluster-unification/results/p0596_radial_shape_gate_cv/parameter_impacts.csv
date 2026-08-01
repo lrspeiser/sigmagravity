@@ -1,0 +1,5 @@
+parameter,best_level,worst_level,median_RMSE_span_km_s
+route_fraction_max,0.3,0.1,0.359428991839426
+q_R80,3.0,0.75,0.27942732189918473
+shape_gate,c0.5_w0.05,c0.7_w0.2,0.2185913901087364
+acceleration_gate_power,0.0,1.0,0.03334890602926066

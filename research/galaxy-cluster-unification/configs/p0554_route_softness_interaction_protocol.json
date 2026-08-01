@@ -1,0 +1,132 @@
+{
+  "protocol_version": "P0554-ROUTE-SOFTNESS-INTERACTION-0.1.0",
+  "frozen_utc": "2026-07-31T22:00:39Z",
+  "status": "frozen_after_separate_route_and_softness_results_before_any_combined_score",
+  "question": "Can the zero-monopole A0279 angular route supply the missing raw-image topology while a slightly softer P0554 photon-addition law improves continuous lensing accuracy, and which small route or response change has the largest geometry-refit impact?",
+  "hypothesis": {
+    "radial_parent": "P0554",
+    "radial_change": "generalized lensing addition with exact parent at k_lens=1",
+    "angular_change": "A0279 center-return redistribution of only the P0554 excess, with exact annular convergence and circular radial-deflection monopoles removed",
+    "angular_strength": "s_theta=f_route^p",
+    "new_per_cluster_gravity_parameters": 0,
+    "ordinary_geometry_parameters_refit_per_cluster": 6
+  },
+  "selection_history": [
+    "A0279 and p=2.5 were selected in prior spent exploratory stages and are not fresh hypotheses.",
+    "Lensing-addition softness 0.98 was the broadest surviving continuous lensing-only direction in the prior structural exact-refit stage.",
+    "The combination and every listed small perturbation were frozen before any combined raw-image score was computed."
+  ],
+  "baseline": {
+    "alpha": 0.75,
+    "apogee_ratio": 100.0,
+    "screen_exponent": 1.0,
+    "screen_scale": 1.0,
+    "mass_radius_delta": 0.0,
+    "extent_leak": 0.0,
+    "invariant_mode": "potential_depth",
+    "invariant_power": 1.2,
+    "invariant_scale": 0.000002,
+    "secondary_path_ratio_power": 0.25,
+    "photon_extra_multiplier": 1.75,
+    "universal_q": 1.2300686115098052,
+    "residence_softness": 1.0,
+    "screen_softness": 1.0,
+    "potential_softness": 1.0,
+    "potential_path_cross": 1.0,
+    "response_addition_softness": 1.0,
+    "lensing_addition_softness": 1.0,
+    "extent_scale_coupling": 0.0,
+    "potential_scale_coupling": 0.0,
+    "mass_growth_power": 0.0
+  },
+  "route_parent": {
+    "candidate_id": "A0279",
+    "route_power": 2.5,
+    "contrast_cap": 20.0,
+    "centroid_mode": "light_centroid"
+  },
+  "variants": [
+    {"variant_id": "baseline", "route": false, "lensing_softness": 1.0, "role": "P0554 scalar parent"},
+    {"variant_id": "lensing_softness_098", "route": false, "lensing_softness": 0.98, "role": "surviving radial photon response"},
+    {"variant_id": "route_parent", "route": true, "lensing_softness": 1.0, "route_power": 2.5, "role": "A0279 angular route alone"},
+    {"variant_id": "combined_parent", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "role": "orthogonal radial-plus-angular parent"},
+    {"variant_id": "combined_lens_097", "route": true, "lensing_softness": 0.97, "route_power": 2.5, "role": "photon softness low"},
+    {"variant_id": "combined_lens_099", "route": true, "lensing_softness": 0.99, "route_power": 2.5, "role": "photon softness high"},
+    {"variant_id": "combined_power_240", "route": true, "lensing_softness": 0.98, "route_power": 2.4, "role": "angular bridge exponent low"},
+    {"variant_id": "combined_power_260", "route": true, "lensing_softness": 0.98, "route_power": 2.6, "role": "angular bridge exponent high"},
+    {"variant_id": "combined_fraction_095", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "route_changes": {"base_fraction_multiplier": 0.95}, "role": "routed fraction low"},
+    {"variant_id": "combined_fraction_105", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "route_changes": {"base_fraction_multiplier": 1.05}, "role": "routed fraction high"},
+    {"variant_id": "combined_extent_095", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "route_changes": {"extent_slope_multiplier": 0.95}, "role": "extent gate low"},
+    {"variant_id": "combined_extent_105", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "route_changes": {"extent_slope_multiplier": 1.05}, "role": "extent gate high"},
+    {"variant_id": "combined_length_095", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "route_changes": {"base_length_kpc_multiplier": 0.95}, "role": "route length low"},
+    {"variant_id": "combined_length_105", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "route_changes": {"base_length_kpc_multiplier": 1.05}, "role": "route length high"},
+    {"variant_id": "combined_width_095", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "route_changes": {"base_width_kpc_multiplier": 0.95}, "role": "route width low"},
+    {"variant_id": "combined_width_105", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "route_changes": {"base_width_kpc_multiplier": 1.05}, "role": "route width high"},
+    {"variant_id": "combined_source_095", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "route_changes": {"source_weight_power_multiplier": 0.95}, "role": "source-light exponent low"},
+    {"variant_id": "combined_source_105", "route": true, "lensing_softness": 0.98, "route_power": 2.5, "route_changes": {"source_weight_power_multiplier": 1.05}, "role": "source-light exponent high"}
+  ],
+  "impact_pairs": [
+    {"parameter": "lensing_addition_softness", "low": "combined_lens_097", "high": "combined_lens_099", "low_value": 0.97, "high_value": 0.99},
+    {"parameter": "route_power", "low": "combined_power_240", "high": "combined_power_260", "low_value": 2.4, "high_value": 2.6},
+    {"parameter": "base_fraction", "low": "combined_fraction_095", "high": "combined_fraction_105", "low_value": 0.4275, "high_value": 0.4725},
+    {"parameter": "extent_slope", "low": "combined_extent_095", "high": "combined_extent_105", "low_value": 0.95, "high_value": 1.05},
+    {"parameter": "base_length_kpc", "low": "combined_length_095", "high": "combined_length_105", "low_value": 237.5, "high_value": 262.5},
+    {"parameter": "base_width_kpc", "low": "combined_width_095", "high": "combined_width_105", "low_value": 57.0, "high_value": 63.0},
+    {"parameter": "source_weight_power", "low": "combined_source_095", "high": "combined_source_105", "low_value": 0.95, "high_value": 1.05}
+  ],
+  "evaluation": {
+    "formula_parameters_fit": 0,
+    "geometry_parameters_refit_per_cluster": 6,
+    "source_positions_profiled_per_family": true,
+    "optimization_starts_per_variant_system": 8,
+    "maximum_function_evaluations": 2500,
+    "random_seed": 554327501,
+    "raw_comparison_rule": "Accuracy is compared only on systems with every held-out root for both formulas; root creation or loss is reported separately.",
+    "galaxy": "131 SPARC galaxies with fixed nuisance parameters and exact nonlinear dynamical response.",
+    "derived_cluster": "84 CLASH equivalent-acceleration points in 20 systems with no amplitude fit; the angular route has zero circular monopole here.",
+    "raw": "RX J2129 plus four Caminha/CLASH systems with exact held-out lens-equation roots after ordinary geometry refits.",
+    "solar": "Analytic Cassini, Earth, Saturn, and Mercury proxies; the angular route is absent for the point-mass control."
+  },
+  "comparison_scopes": {
+    "RXJ2129": ["RXJ2129"],
+    "four_cluster": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "historical_validation": ["MACS1115", "MACS1931"],
+    "all_five": ["RXJ2129", "MACS0329", "MACS0429", "MACS1115", "MACS1931"]
+  },
+  "inputs": {
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ2129_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "RXJ2129_geometry": "results/arc_invariant_pareto_refinement/raw_RXJ2129_parameters.csv",
+    "RXJ2129_route_protocol": "configs/adaptive_route_raw_rxj2129_protocol.json",
+    "four_cluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "four_cluster_geometry": "results/adaptive_route_multicluster_raw/geometry.csv",
+    "four_cluster_route_protocol": "configs/adaptive_route_multicluster_raw_protocol.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "route_candidate_specs": "results/adaptive_route_kernel/candidate_specs.csv",
+    "compact_halo_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0554_route_softness_interaction",
+    "variant_scores": "variant_scores.csv",
+    "raw_scores": "raw_system_scores.csv",
+    "raw_predictions": "raw_predictions.csv",
+    "geometry": "geometry.csv",
+    "field_audits": "field_audits.csv",
+    "matched_comparisons": "matched_comparisons.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0554_route_softness_interaction.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "A0279, p=2.5, lensing softness 0.98, and all five raw clusters are spent exploratory evidence.",
+    "The member catalogs omit a registered hot-gas map and separately measured diffuse ICL.",
+    "CLASH equivalent accelerations and the target mass maps were reconstructed under conventional gravity assumptions.",
+    "The zero-monopole route tests angular redistribution, not a complete covariant or gas-inclusive field equation.",
+    "The compact-halo control is deliberately limited and is not a full modern dark-matter analysis."
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "gate_version": "R1B0-RXJ2129-readiness-0.5",
+  "status": "kinematics_satellite_stellar_and_lens_engineering_pass_heldout_predictive_claim_unauthorized_bcg_icl_nonidentifiable_gas_reduction_active",
+  "purpose": "Turn the structurally promoted RX J2129 system into the first strict R1-ready same-object dynamics-plus-lensing data package without inspecting or fitting any gravity residual.",
+  "current_state": {
+    "structural_promotion": true,
+    "four_bin_kinematic_baseline_internal_consistency": true,
+    "kinematic_covariance_complete": true,
+    "published_bcg_parametric_baseline_with_shared_covariance": true,
+    "empirical_f125w_f814w_psf_gate_pass": true,
+    "nonparametric_f125w_f814w_profile_gate_pass": true,
+    "bcg_icl_identifiability_gate_pass": false,
+    "bcg_icl_nonidentifiability_explicit": true,
+    "satellite_membership_probability_gate_pass": true,
+    "off_center_satellite_stellar_force_gate_pass": true,
+    "lens_observable_input_gate_pass": true,
+    "independent_lens_all_image_engineering_gate_pass": true,
+    "independent_lens_heldout_predictive_closure_established": false,
+    "chandra_raw_event_adequacy_gate_pass": true,
+    "chandra_calibrated_reduction_gate_pass": false,
+    "baryonic_public_data_obstructions_quantified": true,
+    "complete_baryonic_forward_inputs": false,
+    "rerunnable_lens_likelihood_or_posterior": false,
+    "strict_r1_ready": false
+  },
+  "kinematic_covariance_result": {
+    "status": "passed_resolution_corrected_protocol",
+    "protocol": "configs/r1_rxj2129_covariance_resolution_corrected_protocol.json",
+    "report": "results/r1_rxj2129_covariance_xsl/report.json",
+    "profile": "data/derived/r1_rxj2129_ppxf_xsl_profile_with_covariance.csv",
+    "successful_bootstrap_replicates": 100,
+    "successful_nonbaseline_sensitivity_protocols": 9,
+    "total_sigma_errors_km_s": [
+      6.741505373106794,
+      1.9114469359060327,
+      2.074269107026348,
+      3.3191793157174607
+    ],
+    "maximum_fractional_total_sigma_uncertainty": 0.02300451319883279,
+    "maximum_protocol_shift_fraction": 0.03909825821549474,
+    "covariance_eigenvalues_km2_s2": [
+      3.5132123838463385,
+      4.067088334991368,
+      10.9858974320231,
+      45.85486959180206
+    ],
+    "invalidated_predecessor": "results/r1_rxj2129_covariance/report.json",
+    "predecessor_failure": "The E-MILES baseline was broader than MUSE in the fitted rest-frame range, making its nominal instrumental-resolution variants non-informative."
+  },
+  "baryonic_partial_result": {
+    "status": "partial_reconstruction_complete_strict_component_gate_failed",
+    "protocol": "configs/r1_rxj2129_baryonic_protocol.json",
+    "report": "results/r1_rxj2129_baryons/report.json",
+    "published_bcg_profile": "data/derived/r1_rxj2129_bcg_hernquist_profile.csv",
+    "published_bcg_covariance": "data/derived/r1_rxj2129_bcg_hernquist_acceleration_covariance.csv",
+    "satellite_ledger": "data/derived/r1_rxj2129_satellite_candidates.csv",
+    "component_inventory": "data/derived/r1_rxj2129_baryonic_component_inventory.csv",
+    "empirical_psf_protocol": "configs/r1_rxj2129_hst_psf_protocol.json",
+    "empirical_psf_report": "results/r1_rxj2129_hst_psf/report.json",
+    "empirical_psf_product": "data/derived/r1_rxj2129_empirical_hst_psf.npz",
+    "bcg_icl_protocol": "configs/r1_rxj2129_bcg_icl_protocol.json",
+    "bcg_icl_report": "results/r1_rxj2129_bcg_icl/report.json",
+    "nonparametric_profile_report": "results/r1_rxj2129_bcg_icl/profile_extraction_report.json",
+    "nonparametric_profile": "data/derived/r1_rxj2129_hst_surface_brightness_profile.csv",
+    "nonparametric_profile_covariance": "data/derived/r1_rxj2129_hst_surface_brightness_covariance.csv",
+    "satellite_membership_report": "results/r1_rxj2129_satellite_membership/classifier_report.json",
+    "satellite_force_report": "results/r1_rxj2129_satellite_membership/force_report.json",
+    "passed": "The Tian/Cooke published Hernquist BCG baseline is numeric in all four bins and preserves the shared 10-percent total-mass and effective-radius nuisances.",
+    "psf_result": "Three predeclared field stars pass the F125W and F814W centroid, FWHM, encircled-energy, pairwise-profile, and leave-one-out gates. A PSF-aware BCG/ICL decomposition may now proceed.",
+    "profile_result": "The frozen masked extraction yields 49 usable radial bins in each band, a positive-definite 98x98 cross-band covariance, and a fitted center offset of 0.0464 arcsec. Two Sersic terms improve held-out chi2 by 69.8% in F125W and 77.1% in F814W, but their 94.9% outer-light fraction violates the frozen 5-80% BCG/ICL gate. Total light is measured; the physical component split is explicitly non-identifiable.",
+    "satellite_result": "A 43-label candidate-domain classifier passes grouped held-out gates with 57.1% Brier improvement, 30.6% log-loss improvement, AUC 0.918, and calibration error 0.077. Its 2000-draw off-center stellar-force profile has a positive 4x4 covariance; Plummer-scale shifts peak at 1.18% of BCG acceleration and the worst-case outer tidal bound peaks at 0.871%, below its frozen 1% limit.",
+    "failed": "The frozen BCG/ICL identifiability gate failed and therefore does not authorize Cooke-aperture component mass mapping. The four-bin hot-gas profile remains incomplete; lens member dark-subhalo scaling is also separate from the completed satellite stellar-force term.",
+    "public_gas_obstruction": "Tian transcribes one 14.3-kpc Chandra cumulative-mass point. The Donahue source archive contains a plotted profile and model equations but no machine-readable radial samples or covariance; no radial gas law was invented from the single anchor.",
+    "strict_baryonic_gate_pass": false
+  },
+  "workstreams": {
+    "kinematic_covariance": {
+      "status": "passed_resolution_corrected_protocol",
+      "required_outputs": [
+        "four-bin velocity-dispersion profile with statistical and protocol-systematic errors",
+        "4x4 covariance matrix with all off-diagonal terms",
+        "machine-readable bootstrap and sensitivity-run ledger"
+      ],
+      "required_runs": {
+        "deterministic_2x2_spaxel_block_bootstrap_replicates": 100,
+        "instrumental_fwhm_angstrom": [
+          2.5,
+          2.6,
+          2.7
+        ],
+        "high_variance_mask_sigma": [
+          5.0,
+          6.0,
+          8.0
+        ],
+        "template_families": "E-MILES plus XSL when available; otherwise record a hard template-availability shortfall rather than treating the component as zero"
+      },
+      "advance_thresholds": {
+        "finite_bins": 4,
+        "maximum_fractional_total_sigma_uncertainty_each_bin": 0.3,
+        "maximum_template_or_mask_shift_fraction_each_bin": 0.1,
+        "covariance_symmetric": true,
+        "covariance_positive_semidefinite": true
+      },
+      "result": "All 100 XSL block-bootstrap replicates and all nine non-baseline protocols completed. The 4x4 covariance is positive definite; every total fractional uncertainty is below 0.024 and the maximum protocol shift is 0.0391.",
+      "failure_response": "Stop the RX J2129 dynamics branch if any bin fails after the frozen sensitivity grid. Do not tune annuli, masks, templates, or thresholds after seeing the result."
+    },
+    "baryonic_forward_inputs": {
+      "status": "published_bcg_total_light_and_satellite_stellar_numeric_bcg_icl_nonidentifiable_gas_gate_failed",
+      "required_components": [
+        "BCG stellar light or surface-mass profile over 0-5 arcsec with PSF and stellar-M/L uncertainty",
+        "intracluster-light contribution over 0-5 arcsec with normalization uncertainty",
+        "hot-gas projected mass profile with uncertainty",
+        "satellite and other explicitly modeled cluster-galaxy contributions with nuisance priors"
+      ],
+      "negligible_component_rule": "A component may be omitted only if an observable-based upper bound shows that its projected acceleration is below 1 percent of the total baryonic acceleration in every analysis bin.",
+      "advance_thresholds": {
+        "analysis_bins_covered": 4,
+        "all_required_components_numeric_or_negligibly_bounded": true,
+        "stellar_mass_to_light_uncertainty_included": true,
+        "shared_nuisance_covariance_preserved": true
+      },
+      "result": "A four-bin published Hernquist BCG baseline and covariance, the empirical F125W/F814W PSF, a 49-bin-per-band total-light profile, and a normalized off-center satellite stellar-force likelihood are complete. The two-Sersic total-light shape fails the physical component-fraction gate, so BCG/ICL is non-identifiable and no component mass mapping is authorized. Radial gas remains missing.",
+      "evidence": [
+        "results/r1_rxj2129_baryons/report.json",
+        "results/r1_rxj2129_bcg_icl/report.json",
+        "results/r1_rxj2129_satellite_membership/classifier_report.json",
+        "results/r1_rxj2129_satellite_membership/force_report.json"
+      ],
+      "failure_response": "Record the exact missing profile or uncertainty as a public-data obstruction and keep strict R1-ready false."
+    },
+    "observable_lens_likelihood": {
+      "status": "all_image_engineering_fit_passed_heldout_predictive_claim_not_authorized",
+      "protocol": "configs/r1_rxj2129_lens_protocol.json",
+      "independent_model_protocol": "configs/r1_rxj2129_lens_model_protocol.json",
+      "observable_report": "results/r1_rxj2129_lens_observables/report.json",
+      "independent_model_report": "results/r1_rxj2129_lens_model/report.json",
+      "observable_ledger": "data/derived/r1_rxj2129_lens_observables.csv",
+      "coordinate_covariance": "data/derived/r1_rxj2129_lens_coordinate_covariance.csv",
+      "fixed_observables": {
+        "spectroscopic_image_positions": 21,
+        "position_error_arcsec_per_coordinate": 0.5,
+        "strict_images_inside_5_arcsec": 3,
+        "inner_source_families": 3,
+        "published_reference_image_plane_rms_arcsec": 0.29
+      },
+      "required_outputs": [
+        "rerunnable lens configuration or independently implemented image-position likelihood",
+        "explicit source-position and mass-component nuisance parameters and priors",
+        "posterior samples or an equivalent numerical covariance product",
+        "posterior-predictive image positions and per-image residuals"
+      ],
+      "advance_thresholds": {
+        "all_21_spectroscopic_positions_represented": true,
+        "all_three_inner_families_reproduced": true,
+        "image_plane_rms_arcsec_maximum": 0.5,
+        "posterior_or_covariance_finite": true,
+        "source_positions_marginalized": true
+      },
+      "known_obstruction": "Jauzac et al. 2021 provide the image catalog and likelihood error but no public model chain/configuration. The independent observable-level replacement fit passes its all-image engineering gate but cannot establish predictive closure because its frozen protocol omitted a numerical heldout-adequacy threshold.",
+      "current_result": "The independent smooth-halo model reproduces all 21 images with exact radial RMS 0.3833 arcsec, reduced coordinate chi2 0.6856, and a finite 24x24 Laplace covariance. Its seven-image blind holdout is much worse at 1.4299 arcsec, and adding the 66-member layer worsens heldout RMS to 2.7265 arcsec. The holdout validly rejects the added member layer, but the missing predeclared adequacy threshold forbids a predictive or Weyl-response claim. No published model residual, best-fit mass parameter, or GR mass map was used.",
+      "failure_response": "Retain the all-image fit as an engineering control. Correct predictive adequacy only on a fresh blind system or genuinely unspent split; do not tune RX J2129 on its spent holdout or substitute a published GR-derived convergence map."
+    },
+    "assembled_same_object_package": {
+      "advance_thresholds": {
+        "common_center_verified": true,
+        "four_dynamics_bins_and_three_inner_images_on_0_to_5_arcsec_support": true,
+        "dynamics_covariance_complete": true,
+        "baryonic_forward_inputs_complete": true,
+        "lens_nuisance_posterior_complete": true
+      },
+      "success_outcome": "Set RX J2129 strict_r1_ready=true and authorize only the nuisance-marginalized dynamical/Weyl Jacobian audit.",
+      "failure_response": "Keep the structural promotion as an engineering result, publish the failed gate, and continue the replacement inventory without fitting a gravity law."
+    }
+  },
+  "authorization": {
+    "kinematic_covariance_runs": true,
+    "baryonic_data_acquisition": true,
+    "observable_lens_likelihood_construction": true,
+    "nuisance_marginalized_jacobian_after_all_readiness_gates_pass": true,
+    "jacobian_before_all_readiness_gates_pass": false,
+    "gravity_response_fit": false,
+    "new_gravity_law_fit": false
+  },
+  "rethink_clock": {
+    "rethink_after_consecutive_failed_readiness_workstreams": 2,
+    "rethink_after_active_research_days": 7,
+    "on_rethink": "Do not loosen a numerical gate. Decide whether to seek non-public products, promote another structurally qualified system, or issue a hard public-data shortfall for strict R1 readiness."
+  }
+}

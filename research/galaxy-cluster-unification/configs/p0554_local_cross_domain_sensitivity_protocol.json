@@ -1,0 +1,78 @@
+{
+  "protocol_version": "P0554-LOCAL-CROSS-DOMAIN-SENSITIVITY-0.1.0",
+  "frozen_utc": "2026-07-31T21:07:25Z",
+  "status": "frozen_before_any_new_local_variant_score",
+  "question": "Which small changes around P0554 most affect galaxy rotation, derived cluster lensing, raw cluster image positions, root topology, and Solar-System bounds when all ordinary lens geometries and the universal amplitude are held fixed?",
+  "baseline": {
+    "alpha": 0.75,
+    "apogee_ratio": 100.0,
+    "screen_exponent": 1.0,
+    "screen_scale": 1.0,
+    "mass_radius_delta": 0.0,
+    "extent_leak": 0.0,
+    "invariant_mode": "potential_depth",
+    "invariant_power": 1.2,
+    "invariant_scale": 0.000002,
+    "secondary_path_ratio_power": 0.25,
+    "photon_extra_multiplier": 1.75,
+    "universal_q": 1.2300686115098052
+  },
+  "perturbations": {
+    "universal_q": {"mode": "multiplicative", "low": 0.9, "high": 1.1, "concept": "total excess amplitude"},
+    "alpha": {"mode": "multiplicative", "low": 0.9, "high": 1.1, "concept": "radial residence shape"},
+    "apogee_ratio": {"mode": "multiplicative", "low": 0.8, "high": 1.2, "concept": "maximum path reach"},
+    "screen_exponent": {"mode": "multiplicative", "low": 0.8, "high": 1.2, "concept": "high-acceleration suppression sharpness"},
+    "screen_scale": {"mode": "multiplicative", "low": 0.8, "high": 1.2, "concept": "screen transition location"},
+    "invariant_power": {"mode": "multiplicative", "low": 0.9, "high": 1.1, "concept": "potential-depth response curvature"},
+    "invariant_scale": {"mode": "multiplicative", "low": 0.8, "high": 1.2, "concept": "potential-depth transition"},
+    "secondary_path_ratio_power": {"mode": "multiplicative", "low": 0.8, "high": 1.2, "concept": "path-history contribution"},
+    "photon_extra_multiplier": {"mode": "absolute", "low": 1.5, "high": 2.0, "concept": "lensing-to-matter response ratio"},
+    "mass_radius_delta": {"mode": "absolute", "low": -0.05, "high": 0.05, "concept": "baryonic-mass dependence of transition radius"},
+    "extent_leak": {"mode": "absolute", "low": -0.05, "high": 0.05, "concept": "concentration leaking into scalar amplitude"}
+  },
+  "evaluation": {
+    "universal_q_rule": "Keep q fixed at the P0554 value except in the explicit q low/high pair; do not refit any formula parameter.",
+    "galaxy": "Use all 131 SPARC galaxies and the untouched outer-radius split with the previously fixed nuisance parameters.",
+    "derived_cluster": "Use all 84 CLASH equivalent-acceleration points in 20 systems with no cluster refit; this is a conventional-GR-derived target.",
+    "raw_RXJ2129": "Profile training-family source positions at the frozen P0554 geometry and solve seven held-out image roots; no geometry or gravity refit.",
+    "raw_four_cluster": "Profile training-family source positions at each frozen P0554 scalar geometry and solve eleven held-out roots across MACS0329, MACS0429, MACS1115, and MACS1931; no geometry or gravity refit.",
+    "solar": "Evaluate the same Cassini, Earth, Saturn, and Mercury proxy equations used in the P0554 parent search."
+  },
+  "inputs": {
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "parent_scores": "results/arc_invariant_pareto_refinement/variant_scores.csv",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ2129_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "RXJ2129_geometry": "results/arc_invariant_pareto_refinement/raw_RXJ2129_parameters.csv",
+    "four_cluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "four_cluster_geometry": "results/adaptive_route_multicluster_raw/geometry.csv",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat"
+  },
+  "impact_rules": {
+    "material_fraction_of_baseline": 0.05,
+    "root_change_is_separate_from_RMS": true,
+    "pairwise_RMS_rule": "Compare low and high only on systems where both variants have every held-out root; never call a dropped root an RMS improvement.",
+    "solar_mercury_margin_mas_per_century": 3.1
+  },
+  "outputs": {
+    "directory": "results/p0554_local_cross_domain_sensitivity",
+    "variant_scores": "variant_scores.csv",
+    "galaxy_morphology": "galaxy_morphology_scores.csv",
+    "raw_scores": "raw_system_scores.csv",
+    "raw_predictions": "raw_predictions.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0554_local_cross_domain_sensitivity.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This is a local sensitivity experiment around a post-hoc P0554 law, not a fresh theory-selection sample.",
+    "CLASH equivalent accelerations are derived from conventional NFW lens profiles and are not raw theory-neutral lensing observables.",
+    "The five raw cluster systems and their geometries are spent at project level; holding geometry fixed isolates formula response but is not a full predictive refit.",
+    "The Solar tests are analytic weak-field proxies rather than an ephemeris likelihood.",
+    "A large local effect identifies a consequential parameter; it does not imply that either direction is physically correct."
+  ]
+}

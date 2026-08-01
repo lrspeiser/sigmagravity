@@ -1,0 +1,87 @@
+{
+  "protocol_version": "MASS-PATH-COMPLETION-FULL-TEST-0.1.0",
+  "frozen_utc": "2026-07-29T05:41:39Z",
+  "status": "post_path_failure_frozen_before_mass_path_scores",
+  "motivation": "The predefined distance/tidal/matter path family changed radial slopes but over-completed galaxies. This explicitly post-failure family tests the user's proposal that total mass controls the recovery rate or available fraction.",
+  "root_model": {
+    "effective_mass": "M_eff(r)=g_bar(r) r^2/G; M_history(r)=max_{s<=r} M_eff(s)",
+    "bounded_completion": "G_measured=C_solar G_max and C_solar <= C(r) <= 1",
+    "mass_weighted_path": "d tau/dr=[1+(M_star/M_history)^q]^-1/ell",
+    "mass_amplified_path": "d tau/dr=(M_history/M_star)^q/ell",
+    "mass_ceiling_path": "distance recovery is capped by availability=[1+(M_star/M_history)^q]^-1",
+    "completion": "logit C=logit C_solar+tau except the explicitly mass-capped ceiling variant"
+  },
+  "models": {
+    "mass_weighted_path": {
+      "parameters": ["C_solar", "log10_recovery_length_kpc", "log10_M_star_solar", "mass_power"],
+      "bounds": [[0.02, 0.8], [-3.0, 4.0], [8.0, 14.5], [0.1, 4.0]]
+    },
+    "mass_amplified_path": {
+      "parameters": ["C_solar", "log10_recovery_length_kpc", "log10_M_star_solar", "mass_power"],
+      "bounds": [[0.02, 0.8], [-3.0, 4.0], [8.0, 14.5], [0.1, 4.0]]
+    },
+    "mass_ceiling_path": {
+      "parameters": ["C_solar", "log10_recovery_length_kpc", "log10_M_star_solar", "mass_power"],
+      "bounds": [[0.02, 0.8], [-3.0, 4.0], [8.0, 14.5], [0.1, 4.0]]
+    }
+  },
+  "sample": {
+    "bridge_folds": 5,
+    "bridge_seed": 20260731,
+    "bridge_objective": "equal-domain mean of equal-system mean squared log residual",
+    "SPARC": "131 galaxies with inner nuisance fitting and 968 untouched outer points",
+    "raw_lensing": "RX J2129 spent-holdout diagnostic"
+  },
+  "optimization": {
+    "differential_evolution_maxiter": 120,
+    "differential_evolution_popsize": 12,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "selection": {
+    "rule": "rank on held-out bridge only; run every model downstream; require every frozen gate",
+    "parameters_fit_to_SPARC": 0,
+    "parameters_fit_to_raw_images": 0
+  },
+  "advance_gates": {
+    "bridge_equal_domain_RMSE_dex_max": 0.15,
+    "BCG_equal_system_RMSE_dex_max": 0.15,
+    "cluster_equal_system_RMSE_dex_max": 0.18,
+    "SPARC_outer_RMSE_relative_to_fixed_RAR_max": 1.10,
+    "raw_heldout_RMS_arcsec_max": 2.5361068843508456,
+    "solar_Earth_fractional_change_max": 1e-10,
+    "completion_fraction_max": 1.000000000001,
+    "no_full_fit_parameter_at_boundary": true
+  },
+  "solar_diagnostics": {
+    "solar_GM_m3_s2": 1.32712440018e20,
+    "solar_radius_m": 695700000.0,
+    "astronomical_unit_m": 149597870700.0,
+    "probe_AU": [1.0, 100.0, 100000.0]
+  },
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "bridge_reference_report": "results/rar_sharp_coherence_rg_sweep/report.json",
+    "SPARC_protocol": "configs/sparc_independent_nuisance_refit_protocol.json",
+    "SPARC_reference_report": "results/sparc_independent_nuisance_refit/report.json",
+    "SPARC_raw": "data/raw/sparc",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "RXJ_profile": "results/sigma_action_exploration/radial_profiles.csv",
+    "raw_lensing_reference_report": "results/sigma_covariant_weak_field/report.json",
+    "path_family_reference_report": "results/path_completion_full_test/report.json"
+  },
+  "claim_limits": [
+    "These options were created after observing the first path family's galaxy failure and are exploratory, not preregistered confirmation.",
+    "M_eff=g_bar r^2/G is a spherical proxy and is not true enclosed mass for a disk or irregular cluster.",
+    "The laws remain weak-field radial kernels rather than a covariant action.",
+    "The maximum-G interpretation is not independently distinguishable from a bounded effective coupling in these data.",
+    "RX J2129 is an already-inspected diagnostic."
+  ],
+  "outputs": {
+    "report": "results/mass_path_completion_full_test/report.json",
+    "bridge_predictions": "results/mass_path_completion_full_test/bridge_predictions.csv",
+    "SPARC_predictions": "results/mass_path_completion_full_test/sparc_predictions.csv",
+    "raw_lensing_predictions": "results/mass_path_completion_full_test/raw_lensing_predictions.csv",
+    "figure": "results/mass_path_completion_full_test/mass_path_completion_full_test.png",
+    "summary": "results/mass_path_completion_full_test/SUMMARY.md"
+  }
+}

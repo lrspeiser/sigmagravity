@@ -1,0 +1,115 @@
+{
+  "registry_version": "2026-07-26.1",
+  "status": "prospective_after_U0_results_before_H7_fit",
+  "scope": "Maxwell-Heaviside-inspired environment field with one physical metric",
+  "complexity_limits": {
+    "global_physical_parameters_max": 5,
+    "per_object_force_parameters_max": 0,
+    "lensing_only_parameters_max": 0,
+    "environment_inputs_must_exclude_scored_kinematics": true
+  },
+  "stage_0_controls": {
+    "expected_data": {
+      "sparc_systems": 131,
+      "sparc_points": 3034,
+      "clash_systems": 20,
+      "clash_points": 84,
+      "manga_bcg_systems": 50
+    },
+    "direct_void_tide": {
+      "advance_as_primary_if_median_required_amplification_at_most": 100.0,
+      "rethink_if_median_required_amplification_at_least": 1000.0,
+      "current_order_of_magnitude": 100000.0
+    }
+  },
+  "stage_1_constitutive_target": {
+    "minimum_fraction_with_gobs_above_gbar_for_pointwise_inverse": 0.7,
+    "round_trip_max_relative_error": 1e-10,
+    "required_transition_support_systems_per_domain": 10,
+    "fallback_if_inverse_fraction_fails": "fit the forward likelihood; do not discard points or clip gobs to gbar"
+  },
+  "stage_2_weak_field": {
+    "global_physical_parameters_max": 5,
+    "deep_limit": {
+      "condition_gbar_over_ax_at_most": 0.001,
+      "max_relative_error_from_sqrt_ax_gbar": 0.05
+    },
+    "newtonian_limit": {
+      "condition_gbar_over_ax_at_least": 100000.0,
+      "max_fractional_fifth_force": 1e-05
+    },
+    "required_properties": [
+      "mu is positive",
+      "d(mu*g)/dg is positive",
+      "no singularity over the observed gbar, chi, and radius support",
+      "one physical metric supplies dynamics and lensing"
+    ],
+    "development_median_absolute_log10_acceleration_residual_max_each_domain": 0.1
+  },
+  "stage_3_whole_system_validation": {
+    "folds": 5,
+    "continue_gate": {
+      "sparc_chi2_per_point_max": 9.417839228075271,
+      "clash_raw_chi2_per_point_max": 5.0,
+      "equal_domain_macro_chi2_per_point_max": 7.2,
+      "environment_sign_consistent_folds_required": 5,
+      "parameters_at_hard_bounds_allowed": 0
+    },
+    "scientific_success_gate": {
+      "sparc_chi2_per_point_max": 9.417839228075271,
+      "clash_chi2_per_point_with_0p063_dex_scatter_max": 2.5,
+      "clash_rms_dex_max": 0.16,
+      "paired_macro_bootstrap_ci95_high_max": 0.0
+    },
+    "benchmarks": {
+      "fixed_rar_sparc_chi2_per_point": 8.96937069340502,
+      "U0_sparc_chi2_per_point": 9.323138293796898,
+      "U0_clash_raw_chi2_per_point": 4.994477147449563,
+      "U0_clash_with_intrinsic_scatter_chi2_per_point": 2.757433528842568,
+      "U0_clash_rms_dex": 0.16891995396438864,
+      "U0_equal_domain_macro_chi2_per_point": 7.15880772062323,
+      "domain_oracle_clash_raw_chi2_per_point": 1.6478913111284599
+    }
+  },
+  "stage_4_independent_environment": {
+    "host_profile_systems_min": 30,
+    "host_profile_coverage_fraction_min": 0.8,
+    "continue_gate": {
+      "bcg_chi2_per_point_max": 5.0,
+      "bcg_absolute_mean_residual_dex_max": 0.15
+    },
+    "scientific_success_gate": {
+      "bcg_chi2_per_point_max": 3.0,
+      "bcg_rms_dex_max": 0.17,
+      "bcg_absolute_mean_residual_dex_max": 0.1
+    },
+    "benchmarks": {
+      "U0_bcg_chi2_per_point": 7.148508814903434,
+      "U0_bcg_rms_dex": 0.2993221619774074,
+      "U0_bcg_mean_residual_dex": -0.2575499188399136,
+      "cluster_scale_rar_bcg_chi2_per_point": 2.187781927899612
+    }
+  },
+  "stage_5_relativistic_consistency": {
+    "requirements": {
+      "absolute_ppn_gamma_minus_one_max": 2.3e-05,
+      "absolute_tensor_wave_speed_fractional_difference_max": 1e-15,
+      "kinetic_eigenvalues_positive": true,
+      "gradient_speed_squared_positive": true,
+      "well_posed_initial_value_problem": true,
+      "universal_matter_metric": true
+    }
+  },
+  "rethink_policy": {
+    "focused_cycles_per_stage_max": 3,
+    "active_research_days_without_checkpoint_max": 7,
+    "minimum_fraction_of_metric_gap_closed_per_cycle": 0.2,
+    "same_structural_failure_before_revisiting_action": 2,
+    "candidate_order": [
+      "EV-SVT minimal H3+H4+H6+H7",
+      "environmental generalized Aether H8",
+      "environmental MOG benchmark H5"
+    ],
+    "stop_condition": "If all three candidate families fail the same gate, stop adding terms and revisit the void-coupling premise or the one-field unification target."
+  }
+}

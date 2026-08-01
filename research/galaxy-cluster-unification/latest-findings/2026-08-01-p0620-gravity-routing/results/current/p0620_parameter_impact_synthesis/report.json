@@ -1,0 +1,142 @@
+{
+  "report_version": "P0620-PARAMETER-IMPACT-SYNTHESIS-0.1.0",
+  "status": "complete_P0612_through_P0619_stage_synthesis",
+  "current_formula": {
+    "lensing": "alpha_test(x)=alpha_P0554(r)+epsilon*R_90[delta_alpha_route(x)]",
+    "Delta80": "alpha_P0554(R80)/alpha_b(R80)-1",
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "epsilon": "Q^2/(1+Delta80)",
+    "width": "0.23 R80 sqrt(1+Q^2)",
+    "return_length": "0.36 R80",
+    "phase": "+90 degrees shared by all systems",
+    "galaxy_and_solar_route_limit": "zero under the defined axisymmetric-disk and point-source symmetries"
+  },
+  "most_impactful_findings": {
+    "most_recurrent": "spatial width/support",
+    "largest_new_lens_response": "universal angular phase",
+    "most_explosive_but_destructive": "routed fraction/strength",
+    "most_important_unresolved_variable": "a baryon-predicted angular direction that explains why two clusters resist the shared tangential phase"
+  },
+  "parameter_findings": [
+    {
+      "coordinate": "angular_phase",
+      "impact_label": "largest new raw-lens response",
+      "quantitative_evidence": "+90 deg: 1.685% mean; 8.241% RXJ2129",
+      "transfer_evidence": "A383 +0.174% vs radial -0.442%",
+      "main_limit": "only 3/5 opened-data systems improve; A383 remains 9.081 arcsec RMS"
+    },
+    {
+      "coordinate": "spatial_width",
+      "impact_label": "most recurrent cross-stage coordinate",
+      "quantitative_evidence": "P0612 priority 3.046; local response span 0.256 percentage points",
+      "transfer_evidence": "mild widening participates in the A383 tangential transfer",
+      "main_limit": "aggressive linear widening loses a raw image root"
+    },
+    {
+      "coordinate": "width_return_coupling",
+      "impact_label": "largest support-law interaction",
+      "quantitative_evidence": "local mean-response span 0.289 percentage points",
+      "transfer_evidence": "not independently transferred apart from the frozen widened +90 law",
+      "main_limit": "changes magnitude but not the cluster-dependent sign"
+    },
+    {
+      "coordinate": "routed_fraction_or_strength",
+      "impact_label": "most explosive and destructive coordinate",
+      "quantitative_evidence": "root-count span 1.111; SPARC span 0.305 km/s",
+      "transfer_evidence": "large independent route strengths failed RXJ2129 transfer",
+      "main_limit": "route-only galaxy RMSE is 6.854x fixed RAR"
+    },
+    {
+      "coordinate": "amplitude_functional_form",
+      "impact_label": "root-safety regulator",
+      "quantitative_evidence": "Q^2 law: 0.105% four-cluster and 0.826% RXJ2129 at fixed geometry",
+      "transfer_evidence": "radial A383 transfer -0.442%",
+      "main_limit": "linear Q loses a root; Q^2 radial gain did not transfer"
+    },
+    {
+      "coordinate": "return_length",
+      "impact_label": "moderate support coordinate",
+      "quantitative_evidence": "local mean-response span 0.228 percentage points; RX span 2.052",
+      "transfer_evidence": "fixed at 0.36 R80 in the A383 transfer",
+      "main_limit": "no tested law resolves all five response signs"
+    },
+    {
+      "coordinate": "center_crossing_rule",
+      "impact_label": "low local leverage",
+      "quantitative_evidence": "local mean-response span 0.095 percentage points",
+      "transfer_evidence": "not selected for transfer",
+      "main_limit": "smaller effect than width, return length, or phase"
+    },
+    {
+      "coordinate": "contrast_cap",
+      "impact_label": "interaction-only topology control",
+      "quantitative_evidence": "main root span 0.000; SPARC span 0.000 km/s",
+      "transfer_evidence": "tanh cap 20 retained for numerical safety",
+      "main_limit": "near-zero marginal effect in the bounded factorial"
+    }
+  ],
+  "cross_domain_scorecard": [
+    {
+      "domain": "galaxy rotation",
+      "current_value": 12.59204382085389,
+      "unit": "km/s RMSE",
+      "comparator": "fixed RAR 10.348 km/s",
+      "ratio_or_change": 1.2168029635346302,
+      "outcome": "near but worse; carried entirely by P0554 scalar parent"
+    },
+    {
+      "domain": "Solar Mercury",
+      "current_value": -1.729829450133022,
+      "unit": "mas/century",
+      "comparator": "absolute margin 3.1 mas/century",
+      "ratio_or_change": 0.5580095000429103,
+      "outcome": "pass; angular route is an exact point-source null"
+    },
+    {
+      "domain": "five-cluster frozen-geometry phase diagnostic",
+      "current_value": 1.6849758640456836,
+      "unit": "% mean improvement",
+      "comparator": "P0554 scalar at same geometry",
+      "ratio_or_change": 0.6,
+      "outcome": "18/18 roots, but only 3/5 systems improve"
+    },
+    {
+      "domain": "A383 chronological formula transfer",
+      "current_value": 9.08075584165191,
+      "unit": "arcsec RMS",
+      "comparator": "P0554 scalar 9.097 arcsec",
+      "ratio_or_change": 0.0017444069541364682,
+      "outcome": "directional transfer positive but absolute 2 arcsec gate fails"
+    },
+    {
+      "domain": "raw validation clusters",
+      "current_value": 19.07556990937222,
+      "unit": "arcsec RMS",
+      "comparator": "compact halo 9.989 arcsec",
+      "ratio_or_change": 1.9096316095402275,
+      "outcome": "1.91x compact-halo error"
+    },
+    {
+      "domain": "MS2137 transfer",
+      "current_value": null,
+      "unit": "arcsec RMS",
+      "comparator": "P0554 scalar",
+      "ratio_or_change": null,
+      "outcome": "inconclusive: control and candidate both root-incomplete"
+    }
+  ],
+  "universal_truths": [
+    "The scalar P0554 parent, not the route layer, carries galaxy-rotation accuracy.",
+    "Exact symmetry nulls protect Solar tests but do not validate cluster physics.",
+    "Increasing route strength changes roots quickly and does not repair galaxy amplitudes.",
+    "Width and path length regulate how strongly a conservative route is expressed, but usually do not select its beneficial sign.",
+    "Angular phase produced the largest robust local lens response and converted A383 from a radial loss to a tangential gain under a frozen full refit.",
+    "No tested universal phase improves all clusters, and absolute cluster error remains far above the frozen target and compact-halo comparison."
+  ],
+  "decision": {
+    "formula_promoted": false,
+    "stage_objective_met": true,
+    "next_required_observation": "independent baryonic direction data such as gas-versus-stellar centroids, external tidal axes, or resolved multipole orientation on new complete-baseline clusters",
+    "next_required_test": "freeze a baryon-only phase predictor before raw image scoring and require full-root, full-refit, multi-cluster transfer"
+  }
+}

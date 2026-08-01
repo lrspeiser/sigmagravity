@@ -1,0 +1,46 @@
+{
+  "protocol_version": "P0612-CROSS-STAGE-PARAMETER-IMPACT-0.1.0",
+  "status": "frozen_descriptive_synthesis",
+  "purpose": "Separate formula sensitivity from successful transfer by putting completed galaxy, reconstructed-cluster, raw-lensing, topology, and Solar-null experiments on a within-experiment normalized scale.",
+  "normalization": {
+    "rule": "raw_span divided by the largest raw_span within the same stage, domain, observable, and metric",
+    "reason": "Arcseconds, Jensen-Shannon divergence, km/s, and image-root counts are not commensurate.",
+    "family_priority": "median normalized leverage times log2(1 + independent stages), with a 25 percent breadth bonus for each additional observed domain",
+    "claim_limit": "Priority ranks sensitivity and recurrence, not physical correctness or statistical evidence."
+  },
+  "inputs": {
+    "P0554_network": "results/p0554_baryonic_network_screen/coordinate_impacts.csv",
+    "P0572_arrival": "results/p0572_tidal_cancellation_arrival_forward/parameter_impacts.csv",
+    "P0574_symmetry": "results/p0574_symmetry_gated_arrival_microvariation/report.json",
+    "P0579_raw_return": "results/p0579_extent_gated_return_raw/parameter_impacts.csv",
+    "P0580_galaxy_return": "results/p0580_conservative_return_sparc/parameter_impacts.csv",
+    "P0581_exact_root": "results/p0581_locked_endpoint_exact_root/parameter_impacts.csv",
+    "P0582_saturation": "results/p0582_smooth_endpoint_saturation/summary_grid.csv",
+    "P0586_metric": "results/p0586_continuous_baryonic_metric/parameter_impacts.csv",
+    "P0586C_signed_metric": "results/p0586c_signed_metric_response/parameter_impacts.csv",
+    "P0587_highpass": "results/p0587_baryonic_highpass_metric/parameter_impacts.csv",
+    "P0603_tensor_route": "results/p0603_tensor_routing/parameter_impacts.csv",
+    "P0604_cross_domain": "results/p0604_cross_domain_routing_balance/parameter_impacts.csv",
+    "P0606_raw_sensitivity": "results/p0606_raw_route_sensitivity/parameter_impacts.csv",
+    "P0610_gate_driver": "results/p0610_dual_component_misalignment_driver/report.json",
+    "P0611_gate_transfer": "results/p0611_frozen_dual_misalignment_raw_transfer/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0612_cross_stage_parameter_impact",
+    "observations": "observations.csv",
+    "family_summary": "family_summary.csv",
+    "stage_winners": "stage_winners.csv",
+    "transfer_evidence": "transfer_evidence.csv",
+    "report": "report.json",
+    "figure": "p0612_cross_stage_parameter_impact.png",
+    "summary": "SUMMARY.md"
+  },
+  "advance_rule": {
+    "required": [
+      "At least one coordinate family is measured in both galaxy and cluster domains.",
+      "The next formula must use no object-specific gravity parameter.",
+      "The next test must report raw image-root stability separately from RMS.",
+      "A Solar null or screen must be evaluated even when it is exact by construction."
+    ]
+  }
+}

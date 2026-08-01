@@ -1,0 +1,73 @@
+{
+  "protocol_version": "R1B1-A1689-HST9289-acquisition-0.1",
+  "status": "frozen_after_HST11710_chip_gap_failure_but_before_downloading_or_inspecting_program_9289_pixels",
+  "freeze_date": "2026-07-26",
+  "disclosure": "Program 11710 had 49/56 FLC exposures covering the BCG and failed its preregistered all-56 coverage rule. The Coe image coordinates, program-9289 archive metadata, filters, exposure counts, and byte inventory were known. No program-9289 pixel, footprint, BCG profile, arc centroid, astrometric covariance, lens residual, or gravity residual had been inspected.",
+  "system": "Abell 1689",
+  "purpose": "Acquire an independent four-band ACS data set for deterministic footprint qualification, source-color checks, BCG tracer light, empirical PSF, and per-exposure lens-image astrometric covariance.",
+  "selection_basis": {
+    "lens_catalog_paper": "Coe et al. 2010, ApJ 723:1678, arXiv:1005.0398",
+    "archive": "MAST HST collection",
+    "proposal_id": "9289",
+    "target_name": "ABELL1689",
+    "instrument": "ACS/WFC",
+    "filters": ["F475W", "F625W", "F775W", "F850LP"],
+    "aggregate_parent_observation_ids": [26326498, 26325817, 26324451, 26325680, 26325821, 26326558],
+    "visits": ["j8e951", "j8e952", "j8e953", "j8e954", "j8e955", "j8e956"],
+    "public_data": true
+  },
+  "frozen_product_selection": {
+    "individual_exposures": {
+      "subgroup": "FLC",
+      "rule": "Legacy filename starts j8e and ends _flc.fits; exclude HAP aliases.",
+      "expected_unique_files": 40,
+      "expected_total_archive_bytes": 6738036480
+    },
+    "aggregate_filter_visit_mosaics": {
+      "subgroup": "DRC",
+      "rule": "HAP filename starts hst_9289 and has a six-character visit root immediately before _drc.fits; exclude single-exposure drizzles.",
+      "expected_unique_files": 6,
+      "expected_total_archive_bytes": 2336705280
+    },
+    "association_tables": {
+      "subgroup": "ASN",
+      "rule": "Legacy filename starts j8e and ends _asn.fits.",
+      "expected_unique_files": 20,
+      "expected_total_archive_bytes": 230400
+    }
+  },
+  "expected_archive_totals": {
+    "files": 66,
+    "bytes": 9074972160,
+    "exposure_seconds_by_filter": {"F475W": 9500.0, "F625W": 9500.0, "F775W": 11800.0, "F850LP": 16600.0}
+  },
+  "frozen_geometry_gate": {
+    "bcg_center_ra_deg": 197.873,
+    "bcg_center_dec_deg": -1.3410833333333333,
+    "minimum_fraction_of_all_flc_exposures_covering_bcg_center": 0.75,
+    "minimum_flc_exposures_per_filter_covering_bcg_center": 3,
+    "lens_image_source": "data/derived/r1_a1689_lens_prescreen_images.csv",
+    "lens_image_selection": "the six independently redshift-anchored images already frozen inside 15 kpc",
+    "expected_selected_lens_images": 6,
+    "minimum_flc_exposures_covering_each_lens_image": 3,
+    "minimum_distinct_filters_covering_each_lens_image": 2,
+    "minimum_distinct_science_filters": 4
+  },
+  "outputs": {
+    "directory": "data/raw/r1_a1689_hst9289",
+    "product_query": "data/raw/r1_a1689_hst9289/mast_product_query.json",
+    "manifest": "data/raw/r1_a1689_hst9289/manifest.json",
+    "audit_ledger": "data/derived/r1_a1689_hst9289_acquisition_ledger.csv",
+    "lens_coverage_ledger": "data/derived/r1_a1689_hst9289_lens_coverage_ledger.csv",
+    "audit_report": "results/r1_a1689_hst9289_acquisition/report.json"
+  },
+  "authorization": {
+    "download_selected_products": true,
+    "audit_headers_and_wcs_footprints": true,
+    "freeze_photometry_astrometry_and_covariance_protocol_after_geometry_gate": true,
+    "measure_science_pixels_before_likelihood_freeze": false,
+    "infer_weyl_or_dynamical_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

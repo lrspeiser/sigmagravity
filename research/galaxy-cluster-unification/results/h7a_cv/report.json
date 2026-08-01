@@ -1,0 +1,145 @@
+{
+  "status": "completed first H7 weak-field cycle",
+  "model": "H7a_simple_mu_potential",
+  "derivation": "docs/H7A_WEAK_FIELD_DERIVATION.md",
+  "design": {
+    "folds": 5,
+    "starts": 16,
+    "bootstrap_draws": 100000,
+    "global_parameters": 3,
+    "per_object_force_parameters": 0,
+    "lensing_only_parameters": 0,
+    "preliminary_metric_assumption": "Phi=Psi; H6 relativistic completion not yet derived"
+  },
+  "heldout_metrics": {
+    "fixed_rar": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "chi2_per_point": 8.96937069340502,
+        "rms": 23.085346219949397,
+        "median_abs_residual": 11.316510694014823,
+        "residual_unit": "km/s"
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "chi2_per_point": 42.99084283178063,
+        "rms": 0.5083084712163342,
+        "median_abs_residual": 0.5004016103772599,
+        "residual_unit": "dex",
+        "chi2_per_point_with_0p063_dex_intrinsic_scatter": 23.75225778867774
+      },
+      "equal_domain_macro_chi2_per_point": 25.980106762592825
+    },
+    "U0_emond_like": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "chi2_per_point": 9.323138293796898,
+        "rms": 23.318451638468684,
+        "median_abs_residual": 12.003575448905544,
+        "residual_unit": "km/s"
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "chi2_per_point": 4.994477147449563,
+        "rms": 0.1689199539643886,
+        "median_abs_residual": 0.09944902985105744,
+        "residual_unit": "dex",
+        "chi2_per_point_with_0p063_dex_intrinsic_scatter": 2.7574335288425695
+      },
+      "equal_domain_macro_chi2_per_point": 7.15880772062323
+    },
+    "H7a_simple_mu_potential": {
+      "galaxy": {
+        "systems": 131,
+        "points": 3034,
+        "chi2_per_point": 9.138429342717433,
+        "rms": 23.17469156115665,
+        "median_abs_residual": 11.727084054378622,
+        "residual_unit": "km/s"
+      },
+      "cluster": {
+        "systems": 20,
+        "points": 84,
+        "chi2_per_point": 4.808921664044818,
+        "rms": 0.16477281343339603,
+        "median_abs_residual": 0.08804689864408655,
+        "residual_unit": "dex",
+        "chi2_per_point_with_0p063_dex_intrinsic_scatter": 2.6133266359489924
+      },
+      "equal_domain_macro_chi2_per_point": 6.973675503381125
+    }
+  },
+  "paired_comparisons": {
+    "fixed_rar": {
+      "galaxy": {
+        "candidate_minus_comparator_chi2_per_point": 0.16905864931241252,
+        "bootstrap_ci95_low": -0.3630422754614686,
+        "bootstrap_ci95_high": 0.7150297623748687,
+        "bootstrap_probability_candidate_improves": 0.26271
+      },
+      "cluster": {
+        "candidate_minus_comparator_chi2_per_point": -38.18192116773581,
+        "bootstrap_ci95_low": -46.64114143189493,
+        "bootstrap_ci95_high": -29.62917313014254,
+        "bootstrap_probability_candidate_improves": 1.0
+      },
+      "macro": {
+        "candidate_minus_comparator_chi2_per_point": -19.0064312592117,
+        "bootstrap_ci95_low": -23.23466646880178,
+        "bootstrap_ci95_high": -14.7148557630104,
+        "bootstrap_probability_candidate_improves": 1.0
+      }
+    },
+    "U0_emond_like": {
+      "galaxy": {
+        "candidate_minus_comparator_chi2_per_point": -0.1847089510794636,
+        "bootstrap_ci95_low": -0.4821338066910031,
+        "bootstrap_ci95_high": 0.11671304012260662,
+        "bootstrap_probability_candidate_improves": 0.88448
+      },
+      "cluster": {
+        "candidate_minus_comparator_chi2_per_point": -0.1855554834047437,
+        "bootstrap_ci95_low": -0.9023332322720065,
+        "bootstrap_ci95_high": 0.42005056116382655,
+        "bootstrap_probability_candidate_improves": 0.69294
+      },
+      "macro": {
+        "candidate_minus_comparator_chi2_per_point": -0.18513221724210366,
+        "bootstrap_ci95_low": -0.5715581763322996,
+        "bootstrap_ci95_high": 0.15597821622151792,
+        "bootstrap_probability_candidate_improves": 0.83821
+      }
+    }
+  },
+  "fold_parameter_summary": {
+    "F_min": 16.906926917699693,
+    "F_max": 77.35196943375658,
+    "chi_t_min": 2.4908028773290288e-06,
+    "chi_t_max": 5.343038884433489e-06,
+    "w_dex_min": 0.10000000000000002,
+    "w_dex_max": 0.2947867079405218,
+    "folds_at_hard_bound": 4
+  },
+  "gate_audit": {
+    "continue": {
+      "sparc": true,
+      "clash_raw": true,
+      "equal_domain_macro": true,
+      "environment_sign_all_folds": true,
+      "no_parameter_at_hard_bound": false,
+      "passes_all": false
+    },
+    "scientific_success": {
+      "sparc": true,
+      "clash_with_intrinsic_scatter": false,
+      "clash_rms": false,
+      "macro_beats_fixed_rar": true,
+      "passes_all": false
+    }
+  },
+  "decision_rule": "Advance to H7b only if the continue gate passes. If the constitutive shape fails while U0 passes, test one other action-derived mu family without adding an environment parameter."
+}

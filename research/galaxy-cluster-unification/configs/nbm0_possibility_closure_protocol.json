@@ -1,0 +1,43 @@
+{
+  "protocol_version": "NBM0-A4-0.1-possibility-closure",
+  "frozen_utc": "2026-07-28T04:03:00Z",
+  "status": "frozen after the A1-A3 reports and before synthesis",
+  "purpose": "Close the finite first-principles search over pure negative-void-gravity mechanisms and state which premise any future candidate must genuinely escape.",
+  "input_reports": [
+    "results/nbm0_action_space/report.json",
+    "results/nbm0_survivor_derivation/report.json",
+    "results/nbm0_constitutive_basin/report.json",
+    "results/void_cage_test/report.json",
+    "results/void_cage_galaxy_scaling_test/report.json",
+    "results/void_cage_transition_isolation/report.json"
+  ],
+  "fixed_premises": [
+    "baryons and cosmological boundary data are the only source inputs",
+    "no independent gravitating dark component",
+    "no MOND/AQUAL galaxy equation",
+    "one universal physical metric",
+    "no per-object or object-class force parameters",
+    "at most four new global physical parameters",
+    "positive kinetic and gradient energies",
+    "one theory must predict both dynamics and lensing"
+  ],
+  "complete_weak_field_mechanism_classes": [
+    "healthy additive linear field or spectral exchange",
+    "local nonlinear isotropic flux law",
+    "single-field nonlinear/nonlocal response",
+    "direct external void force or regular tide",
+    "self-gravitating basin field energy",
+    "constitutive/boundary flux refraction",
+    "linear logarithmic/fractional or higher-derivative response",
+    "modified inertia without a metric lensing completion",
+    "multi-field or independent-state hybrid"
+  ],
+  "closure_claim": "No mechanism class survives all fixed premises. This is a closure of the declared weak-field theory space, not a proof against every mathematical modification of gravity.",
+  "reopen_rule": "A new candidate may reopen the search only by identifying which classification assumption it evades, deriving a reciprocal healthy action, and giving a preregistered observable not already represented by radial shape, baryonic mass scaling, environment direction, gravitational slip, or field-energy budget.",
+  "allowed_premise_relaxations_for_future_work": [
+    "permit a self-gravitating vacuum/condensate component and acknowledge that it is observationally a dark sector",
+    "permit a MOND/AQUAL-like galaxy limit plus an independently derived cluster component",
+    "permit more than one latent response field after same-system data demonstrate that one field is insufficient",
+    "defer action selection until raw same-system dynamics and lensing identify the required response dimension"
+  ]
+}

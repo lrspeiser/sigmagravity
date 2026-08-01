@@ -1,0 +1,99 @@
+{
+  "protocol_version": "CPR0-0.6-measured-density-clash-lensing-bridge",
+  "frozen_utc": "2026-07-28T05:45:07Z",
+  "status": "selection and gates frozen after identifier/radius-only overlap audit and before fitting the ACCEPT-matched CLASH outcomes",
+  "question": "Does a shared local-density response predict held-out galaxy dynamics and the measured radial shape of CLASH lensing accelerations once the galaxy-cluster density gap is filled with Chandra profiles?",
+  "datasets": {
+    "cluster_local_density": "Cavagnolo et al. 2009 ACCEPT electron-density profiles",
+    "cluster_accelerations": "Tian et al. 2020 CLASH baryonic and lensing-derived radial accelerations",
+    "galaxy_dynamics": "same 44 quality-selected Tian et al. 2024 MaNGA BCG plus DynPop sample used by CPR0-0.4",
+    "overlap_expected": 18,
+    "unmatched_clash_systems": ["MACS0416", "RXJ2248"]
+  },
+  "cluster_name_map": {
+    "A209": "ABELL_0209",
+    "A383": "ABELL_0383",
+    "A611": "ABELL_0611",
+    "A2261": "ABELL_2261",
+    "MACS0329": "MACS_J0329.6-0211",
+    "MACS0429": "MACS_J0429.6-0253",
+    "MACS0647": "RX_J0647.7+7015",
+    "MACS0717": "MACS_J0717.5+3745",
+    "MACS0744": "MACS_J0744.8+3927",
+    "MACS1115": "MACS_J1115.8+0129",
+    "MACS1149": "MACS_J1149.5+2223",
+    "MACS1206": "MACS_J1206.2-0847",
+    "MACS1720": "RX_J1720.2+3536",
+    "MACS1931": "MACS_J1931.8-2634",
+    "MS2137": "MS_2137.3-2353",
+    "RXJ1347": "RX_J1347.5-1145",
+    "RXJ1532": "RX_J1532.9+3021",
+    "RXJ2129": "RX_J2129.6+0005"
+  },
+  "observable_construction": {
+    "profile_radius": "500*(Rin+Rout) kpc",
+    "electron_density_interpolation": "linear interpolation in log10(ne) versus log10(radius)",
+    "local_density": "rho_hot=1.17*m_proton*ne",
+    "primary_radius_cut_kpc": 100.0,
+    "primary_reason": "ACCEPT measures hot gas but not local BCG/ICL stellar density; the omission is most serious at the 14-24 kpc points",
+    "secondary_radius_cut_kpc": 0.0,
+    "extrapolation": "forbidden; a CLASH row is selected only inside the ACCEPT midpoint range",
+    "coherence": "C=0 for every cluster point; the cluster catalog has no independent coherence observable",
+    "density_scale_sensitivity": [0.6, 0.8, 1.0, 1.2, 1.4]
+  },
+  "fixed_parameters": {
+    "prior_joint_RG_median_fold_fit": {
+      "epsilon_0": 0.12764500716274252,
+      "log10_rho_c_g_cm3": -23.69076802186393,
+      "Q": 0.3741078877542296,
+      "source": "median fold parameters from CPR0-0.4, fixed before the ACCEPT-CLASH score"
+    },
+    "prior_joint_CPR0_median_fold_fit": {
+      "epsilon_0": 0.12774933221620738,
+      "log10_rho_c_g_cm3": -23.638852836005224,
+      "Q": 0.3750143075655519,
+      "source": "median fold parameters from CPR0-0.4, fixed before the ACCEPT-CLASH score"
+    },
+    "published_rg_sets": {
+      "disk_galaxies": {"epsilon_0": 0.666, "log10_rho_c_g_cm3": -24.54, "Q": 1.79},
+      "elliptical_galaxies": {"epsilon_0": 0.089, "log10_rho_c_g_cm3": -24.25, "Q": 0.47},
+      "MACS1206": {"epsilon_0": 0.18, "log10_rho_c_g_cm3": -25.25, "Q": 5.21},
+      "AbellS1063": {"epsilon_0": 0.13, "log10_rho_c_g_cm3": -25.383, "Q": 23.62}
+    }
+  },
+  "cross_validation": {
+    "folds": 5,
+    "seed": 20260728,
+    "group": "cluster identifier or BCG plateifu; all radial points for a held-out cluster remain in one fold",
+    "objective": "equal-domain mean of equal-system mean squared log10 acceleration residual",
+    "fixed_sigma_response_amplitude": 1.1725,
+    "bounds": {
+      "constant_epsilon": [0.03, 1.0],
+      "epsilon_0": [0.03, 0.9],
+      "log10_rho_c_g_cm3": [-31.0, -20.0],
+      "Q": [0.1, 30.0]
+    }
+  },
+  "advance_gates": {
+    "overlap_systems_min": 15,
+    "primary_cluster_points_min": 40,
+    "density_gap_dex_max": 1.0,
+    "locked_prior_RG_cluster_RMSE_dex_max": 0.12,
+    "cluster_RG_CV_RMSE_dex_max": 0.12,
+    "cluster_RG_CV_improvement_vs_constant_min_dex": 0.02,
+    "joint_RG_BCG_RMSE_dex_max": 0.12,
+    "joint_RG_cluster_RMSE_dex_max": 0.12,
+    "joint_RG_equal_domain_RMSE_dex_max": 0.12,
+    "CPR0_improvement_vs_density_only_RG_min_dex": 0.01,
+    "cluster_absolute_radial_residual_slope_dex_per_dex_max": 0.10,
+    "cluster_absolute_residual_density_correlation_max": 0.30,
+    "log10_rho_c_fold_range_max_dex": 1.5
+  },
+  "claim_boundary": [
+    "The CLASH target is a spherical acceleration derived from a joint lens-model posterior, not a raw shear catalog, and its public table omits radial covariance.",
+    "The primary density is measured hot gas; stellar and intracluster-light density are not included locally.",
+    "The outcome table and earlier results were already known, so the joint refit is exploratory even though this exact match, selection, and gates were fixed before fitting.",
+    "C=0 makes the cluster-only test a density-response test, not a test of the coherence interpolation.",
+    "The zero-slip acceleration mapping is still provisional until a relativistic action derives photon propagation."
+  ]
+}

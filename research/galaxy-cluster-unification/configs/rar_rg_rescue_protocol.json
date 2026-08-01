@@ -1,0 +1,90 @@
+{
+  "protocol_version": "PHEN-RESCUE-0.2",
+  "frozen_utc": "2026-07-28T08:00:00Z",
+  "status": "frozen after PHEN-SWEEP-0.1 and its fixed-B SPARC transfer failed, before evaluating these rescue formulas",
+  "question": "Can the successful fixed galaxy RAR asymptote be retained while one refracted-density channel supplies the additional BCG and cluster acceleration?",
+  "sample": {
+    "galaxy_domain": "44 MaNGA BCG last-kinematic-radius acceleration measurements",
+    "cluster_domain": "72 CLASH NFW-deprojected acceleration points in 20 systems with ACCEPT+BCG local density",
+    "cluster_target_warning": "The CLASH target is NFW-derived and is not an independent dark-matter score.",
+    "grouping": "hold out complete systems",
+    "folds": 5,
+    "seed": 20260728,
+    "objective": "equal-domain mean of equal-system mean squared log10 acceleration residual"
+  },
+  "fixed_references": {
+    "newtonian": "g_pred=g_bar",
+    "galaxy_RAR": "g_pred=g_bar/[1-exp(-sqrt(g_bar/g_dagger))]",
+    "galaxy_RAR_g_dagger_m_s2": 1.2e-10,
+    "simple_MOND": "g_pred=(g_bar+sqrt(g_bar^2+4*a0*g_bar))/2",
+    "simple_MOND_a0_m_s2": 1.2e-10,
+    "cluster_RAR_diagnostic_g_dagger_m_s2": 2.02e-9,
+    "cluster_NFW_reference": "reported g_obs is reconstructed from NFW lensing fits; compare residuals with public diagonal errors"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "potential_reference": 1.0e-5,
+    "sigma_g_dagger_m_s2": 9.6e-11,
+    "rar_acceleration_m_s2": 1.2e-10
+  },
+  "optimization": {
+    "differential_evolution_maxiter": 220,
+    "differential_evolution_popsize": 14,
+    "local_polish": "L-BFGS-B",
+    "paired_system_bootstrap_draws": 20000
+  },
+  "models": {
+    "RG": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0]],
+      "equation": "E=1/epsilon_RG"
+    },
+    "RAR_RG_additive": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0]],
+      "equation": "E=E_RAR+(1/epsilon_RG-1)"
+    },
+    "RAR_RG_quadrature": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0]],
+      "equation": "E=1+sqrt[(E_RAR-1)^2+(1/epsilon_RG-1)^2]"
+    },
+    "RAR_RG_product": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0]],
+      "equation": "E=E_RAR/epsilon_RG"
+    },
+    "RAR_potential_gated_RG": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "log10_phi_c", "k_phi"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [-9.0, -3.0], [0.1, 10.0]],
+      "equation": "E=E_RAR+sigmoid[k_phi*ln((g_bar*r/c^2)/phi_c)]*(1/epsilon_RG-1)"
+    }
+  },
+  "diagnostic_surfaces": {
+    "linear_g_rho": "information-content control",
+    "quadratic_g_rho": "information-content control",
+    "quadratic_g_rho_potential": "information-content control",
+    "ridge_penalty": 1.0e-6,
+    "claim_boundary": "not physical theories"
+  },
+  "advance_gates": {
+    "primary_equal_domain_RMSE_dex_max": 0.12,
+    "BCG_RMSE_relative_to_fixed_galaxy_RAR_max": 1.25,
+    "cluster_diagonal_error_normalized_RMS_max": 1.5,
+    "absolute_cluster_radial_residual_slope_dex_per_dex_max": 0.10,
+    "improvement_over_RG_equal_domain_RMSE_dex_min": 0.01,
+    "maximum_domain_regression_vs_RG_dex": 0.01,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "failure_policy": {
+    "no_formula_passes_but_flexible_surface_passes": "do not add more local interpolation terms without an independent predictor",
+    "flexible_surfaces_also_fail": "acquire theory-neutral same-system observables",
+    "any_formula_passes": "check SPARC protection quantitatively and then test raw non-NFW lensing observables"
+  },
+  "claim_boundary": [
+    "RAR is established MOND-like phenomenology; retaining it is not an originality claim.",
+    "This post-failure rescue family is exploratory even with grouped cross-validation.",
+    "The potential gate is a local proxy, not a derived covariant field equation.",
+    "CLASH total accelerations are NFW-deprojected."
+  ]
+}

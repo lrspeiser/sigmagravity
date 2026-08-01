@@ -1,0 +1,107 @@
+{
+  "protocol_version": "REOPENED-HYBRID-ENDPOINT-HIGH-Q-AUDIT-0.1.0",
+  "frozen_utc": "2026-08-01T10:05:00Z",
+  "status": "frozen_before_fixed_parameter_scores",
+  "purpose": "Determine whether the short-memory exact-endpoint improvement forms a finite p,q ridge or continues as unbounded exterior radius weighting.",
+  "claim_boundary": [
+    "The bracketed refit surface improved toward its upper q edge 3.5, so this fixed audit extends q to 8 rather than declaring an optimum.",
+    "Eight p slices retain both sides of the preceding p ridge and test whether its orientation moves with q.",
+    "All rows reuse one q=3.5 gravity branch and therefore isolate structural direction before refit compensation.",
+    "Large q values are stress tests of the formula's exterior weighting, not proposed constants.",
+    "Only this formula and tested range can be ranked; no parent mechanism is rejected."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv"
+  },
+  "base_sources": {
+    "high_q_endpoint": {
+      "report": "results/reopened_hybrid_endpoint_boundary_refinement/report.json",
+      "variant": "surface_q_3p5:radial_memory_gbar_power=-0.875",
+      "settings": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5
+      }
+    }
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"]
+  },
+  "common_memory": {
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 0.5,
+    "radial_memory_gbar_power": -0.875,
+    "radial_memory_radius_power": 3.5,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false,
+    "radial_memory_slope_gate_strength": 0.0
+  },
+  "audit_designs": {
+    "q_at_p_minus_1p5": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0],
+      "overrides": {"radial_memory_gbar_power": -1.5}
+    },
+    "q_at_p_minus_1p25": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0],
+      "overrides": {"radial_memory_gbar_power": -1.25}
+    },
+    "q_at_p_minus_1": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0],
+      "overrides": {"radial_memory_gbar_power": -1.0}
+    },
+    "q_at_p_minus_0p875": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0],
+      "overrides": {"radial_memory_gbar_power": -0.875}
+    },
+    "q_at_p_minus_0p75": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0],
+      "overrides": {"radial_memory_gbar_power": -0.75}
+    },
+    "q_at_p_minus_0p625": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0],
+      "overrides": {"radial_memory_gbar_power": -0.625}
+    },
+    "q_at_p_minus_0p5": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0],
+      "overrides": {"radial_memory_gbar_power": -0.5}
+    },
+    "q_at_p_minus_0p375": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0],
+      "overrides": {"radial_memory_gbar_power": -0.375}
+    }
+  },
+  "references": {
+    "SPARC_fixed_RAR_outer_RMSE_km_s": 10.681519066526649,
+    "bridge_target_RMSE_dex": 0.139
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1,
+    "audit_mercury_quadrature_points": 4096
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_endpoint_high_q_audit/report.json",
+    "scores": "results/reopened_hybrid_endpoint_high_q_audit/scores.csv",
+    "family_impacts": "results/reopened_hybrid_endpoint_high_q_audit/family_impacts.csv",
+    "summary": "results/reopened_hybrid_endpoint_high_q_audit/SUMMARY.md"
+  }
+}

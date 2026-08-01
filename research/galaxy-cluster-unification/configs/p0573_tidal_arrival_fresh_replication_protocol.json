@@ -1,0 +1,158 @@
+{
+  "protocol_version": "P0573-TIDAL-ARRIVAL-FRESH-REPLICATION-0.1.0",
+  "frozen_utc": "2026-08-01T06:10:00Z",
+  "status": "frozen_before_download_or_fresh_map_spatial_inspection",
+  "question": "Does the P0572B tidal-weighted 50 kpc, f=0.8 baryon-only arrival law improve normalized cluster convergence morphology on genuinely unused RELICS systems?",
+  "sample_freeze": {
+    "inventory_source": "The official MAST RELICS directory inventory was audited by filenames and directory coverage only; no candidate kappa pixel values or scores were opened.",
+    "inclusion_rule": "Unused by every prior local gravity-arc score, combined ACS+WFC3IR photometric catalog present, 100-map Lenstool kappa ensemble present, and independent GLAFIC best kappa map present.",
+    "included": [
+      "RXC J2211.7-0350",
+      "SMACS J0723.3-7327",
+      "SPT-CL J0615-5746"
+    ],
+    "coverage_only_exclusions": {
+      "WHL J24.3324-8.477": "Lenstool and GLAFIC best maps exist but no Lenstool range ensemble is published in the archive directory.",
+      "other_unused_RELICS_systems": "At least one of Lenstool, its 100-map range ensemble, or GLAFIC was absent from the official model directory."
+    },
+    "selection_lock": "Systems cannot be added, removed, or reordered after acquisition unless a pre-score input-integrity gate fails; any such failure must be reported and the remaining set is not replaced."
+  },
+  "locked_formula": {
+    "activation": "A=sqrt(1-C)*B_T",
+    "coherence": "C=|sum_i g_i|/sum_i|g_i|",
+    "tidal_balance": "B_T=shear(T)/(shear(T)+|trace(T)|/2)",
+    "source_field": "g_i=w_i*(x_i-x)/(|x_i-x|^2+(50 kpc)^2)^(3/2)",
+    "carrier": "D=A*||T||_F",
+    "arrival_smoothing_kpc": 50.0,
+    "route_fraction_f": 0.8,
+    "local_control_width_kpc": 100.0,
+    "prediction": "Sigma_pred=0.2*B_100+0.8*normalize[G_50*D]",
+    "free_parameters_fit_on_fresh_systems": 0
+  },
+  "primary_evaluation": {
+    "target": "Mean of 100 Lenstool convergence realizations after the P0567 background subtraction, positive clipping, 20 kpc smoothing, and unit normalization inside 250 kpc.",
+    "metric": "Equal-system mean Jensen-Shannon divergence, locked prediction versus 100 kpc local-light control.",
+    "uncertainty": "Score locked and local predictions against all 100 Lenstool maps per system.",
+    "method_control": "Score the same locked predictions against each independent GLAFIC best map without reselection.",
+    "pearson_control": "Mean in-aperture Pearson correlation must not decrease."
+  },
+  "advance_gates": {
+    "equal_system_improvement_vs_local_fraction_min": 0.10,
+    "systems_improved_min": 3,
+    "lenstool_realizations_improved_fraction_min": 0.70,
+    "glafic_equal_system_improvement_vs_local_fraction_min": 0.05,
+    "glafic_systems_improved_min": 2,
+    "mean_Pearson_not_decrease": true,
+    "axisymmetric_and_solar_null": true
+  },
+  "systems": [
+    {
+      "label": "RXC J2211.7-0350",
+      "slug": "rxc2211m03",
+      "cluster_redshift": 0.397,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_rxc2211m03_multi_v1_cat.txt",
+      "catalog_bytes": 3920534,
+      "catalog_etag": "3bd296-534cba3e12500",
+      "models": [
+        {
+          "method": "lenstool",
+          "version": "v1",
+          "base_url": "https://archive.stsci.edu/hlsps/relics/rxc2211m03/models/lenstool/",
+          "best_filename": "hlsp_relics_model_model_rxc2211m03_lenstool_v1_kappa.fits",
+          "range_count": 100
+        },
+        {
+          "method": "glafic",
+          "version": "v2",
+          "base_url": "https://archive.stsci.edu/hlsps/relics/rxc2211m03/models/glafic/v2/",
+          "best_filename": "hlsp_relics_model_model_rxc2211m03_glafic_v2_kappa.fits",
+          "range_count": 0
+        }
+      ]
+    },
+    {
+      "label": "SMACS J0723.3-7327",
+      "slug": "smacs0723m73",
+      "cluster_redshift": 0.39,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_smacs0723m73_multi_v1_cat.txt",
+      "catalog_bytes": 2663841,
+      "catalog_etag": "28a5a1-54d758ca9bd80",
+      "models": [
+        {
+          "method": "lenstool",
+          "version": "v1",
+          "base_url": "https://archive.stsci.edu/hlsps/relics/smacs0723m73/models/lenstool/",
+          "best_filename": "hlsp_relics_model_model_smacs0723m73_lenstool_v1_kappa.fits",
+          "range_count": 100
+        },
+        {
+          "method": "glafic",
+          "version": "v2",
+          "base_url": "https://archive.stsci.edu/hlsps/relics/smacs0723m73/models/glafic/v2/",
+          "best_filename": "hlsp_relics_model_model_smacs0723m73_glafic_v2_kappa.fits",
+          "range_count": 0
+        }
+      ]
+    },
+    {
+      "label": "SPT-CL J0615-5746",
+      "slug": "spt0615m57",
+      "cluster_redshift": 0.972,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_spt0615m57_multi_v1_cat.txt",
+      "catalog_bytes": 11293710,
+      "catalog_etag": "ac540e-553b0f054ebc0",
+      "models": [
+        {
+          "method": "lenstool",
+          "version": "v1",
+          "base_url": "https://archive.stsci.edu/hlsps/relics/spt0615m57/models/lenstool/",
+          "best_filename": "hlsp_relics_model_model_spt0615m57_lenstool_v1_kappa.fits",
+          "range_count": 100
+        },
+        {
+          "method": "glafic",
+          "version": "v2",
+          "base_url": "https://archive.stsci.edu/hlsps/relics/spt0615m57/models/glafic/v2/",
+          "best_filename": "hlsp_relics_model_model_spt0615m57_glafic_v2_kappa.fits",
+          "range_count": 0
+        }
+      ]
+    }
+  ],
+  "acquisition": {
+    "catalog_url_template": "https://archive.stsci.edu/hlsps/relics/{slug}/catalogs/{catalog_filename}",
+    "download_range_for_methods": ["lenstool"],
+    "maximum_workers": 8,
+    "output_directory": "data/raw/relics_p0573_tidal_arrival_fresh",
+    "provenance": "data/raw/relics_p0573_tidal_arrival_fresh/provenance.json",
+    "manifest": "data/raw/relics_p0573_tidal_arrival_fresh/manifest.csv"
+  },
+  "spatial_preprocessing": {
+    "cosmology": "Planck18",
+    "reference_coordinate": "CRVAL of the frozen Lenstool best map; kappa pixel values are not inspected to choose the center",
+    "common_radius_kpc": 300.0,
+    "score_radius_kpc": 250.0,
+    "grid_spacing_kpc": 10.0,
+    "pixels_per_axis": 256,
+    "target_smoothing_kpc": 20.0,
+    "background_annulus_kpc": [250.0, 300.0],
+    "source_rule": "hard photo-z members only: stellarity <0.8, positive F160W at >=5 sigma, cluster redshift within BPZ 95% interval, ODDS >0.5, radius <=300 kpc",
+    "target_rule": "subtract median kappa in 250-300 kpc annulus, clip positive, smooth, normalize inside 250 kpc",
+    "minimum_finite_aperture_fraction": 0.95
+  },
+  "cross_domain": {
+    "galaxy": "Exact angular null for a net axisymmetric baryonic component field; no SPARC rotation change.",
+    "solar": "Exact one-source null; no Solar force, Cassini gamma, or Mercury perihelion change."
+  },
+  "outputs": {
+    "input_audit_directory": "results/p0573_tidal_arrival_fresh_input_audit",
+    "result_directory": "results/p0573_tidal_arrival_fresh_replication"
+  },
+  "claim_limits": [
+    "The targets are standard-GR lens reconstructions rather than raw multiple-image positions or shear catalogs.",
+    "The baryon proxy omits hot gas, intracluster light, and stellar mass-to-light variation.",
+    "The test compares normalized morphology and does not predict absolute lensing strength.",
+    "The formula was selected on earlier spent systems; only these three systems are fresh to every local score.",
+    "A pass would justify raw-lensing follow-up, not establish a gravity theory or eliminate dark matter."
+  ]
+}

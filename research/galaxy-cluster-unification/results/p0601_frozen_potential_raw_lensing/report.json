@@ -1,0 +1,92 @@
+{
+  "report_version": "P0601-FROZEN-POTENTIAL-RAW-LENSING-RESULTS-0.1.0",
+  "status": "complete_frozen_single_cluster_raw_replay",
+  "coverage": {
+    "cluster": "RX J2129.7+0005",
+    "training_images": 15,
+    "heldout_images": 7,
+    "source_families": 7,
+    "optimization_starts_per_law": 16,
+    "fitted_gravity_parameters": 0,
+    "fitted_structural_geometry_parameters": 6
+  },
+  "frozen_formula": "g=RAR(g_b,a0)*[1+A*S4*H(C)*chi^p/(chi^p+chi_t^p)]",
+  "frozen_constants": {
+    "a0_m_s2": 1.2e-10,
+    "amplitude_A": 3.0,
+    "potential_threshold_chi": 1e-06,
+    "potential_power": 4.0,
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "source_acceleration_gate_power": 4.0
+  },
+  "field_diagnostics": {
+    "r50_kpc": 355.55892554848015,
+    "r80_kpc": 504.64375503118424,
+    "concentration_r50_over_r80": 0.704574111942609,
+    "shape_gate": 0.7399562389719418,
+    "source_gbar_at_r80_m_s2": 1.5686153584660897e-11,
+    "source_acceleration_gate": 0.9997081134494022,
+    "potential_depth_at_image_min": 8.072280858376818e-06,
+    "potential_depth_at_image_max": 6.960645635933779e-06,
+    "P0599_amplitude_fraction_at_image_min": 2.218698234712414,
+    "P0599_amplitude_fraction_at_image_max": 2.218275798129555
+  },
+  "scores": [
+    {
+      "model": "fixed_RAR",
+      "training_RMS_arcsec": null,
+      "heldout_RMS_arcsec": null,
+      "training_roots_converged": 11,
+      "heldout_roots_converged": 3,
+      "heldout_all_roots_converged": false,
+      "maximum_heldout_residual_arcsec": 18.926612432641832,
+      "heldout_reduced_chi2": null,
+      "optimizer_success": true,
+      "optimizer_cost": 2934.3555823078004,
+      "any_geometry_near_bound": true
+    },
+    {
+      "model": "P0599_potential_shape",
+      "training_RMS_arcsec": 0.49524262462844243,
+      "heldout_RMS_arcsec": 1.8086634342147614,
+      "training_roots_converged": 15,
+      "heldout_roots_converged": 7,
+      "heldout_all_roots_converged": true,
+      "maximum_heldout_residual_arcsec": 2.8511058027782683,
+      "heldout_reduced_chi2": 42.458908506670795,
+      "optimizer_success": true,
+      "optimizer_cost": 48.15754179125845,
+      "any_geometry_near_bound": false
+    }
+  ],
+  "comparators": {
+    "previous_locked_candidate_heldout_RMS_arcsec": 1.0642772678285497,
+    "compact_one_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "prior_P0554_heldout_RMS_arcsec": 1.245,
+    "published_multi_halo_reference_RMS_arcsec": 0.29
+  },
+  "P0599_vs_fixed_RAR_heldout_RMS_ratio": null,
+  "P0599_vs_previous_locked_candidate_heldout_RMS_ratio": 1.6994287944390531,
+  "advance_gate_audit": {
+    "all_heldout_roots_converged": true,
+    "heldout_RMS_arcsec_max": false,
+    "heldout_RMS_below_previous_locked_candidate": false,
+    "no_geometry_parameter_near_bound": true,
+    "passes_all": false
+  },
+  "strict_interpretation": {
+    "amplitude_or_gravity_parameter_fit_to_RXJ2129": false,
+    "raw_image_positions_used": true,
+    "independent_cluster_population_validation": false,
+    "covariant_field_equation_derived": false,
+    "publication_grade_dark_matter_comparator": false
+  },
+  "claim_limits": [
+    "RX J2129 is one spent cluster pilot, not an independent population validation.",
+    "The image positions are raw observables but the baryonic radial profile is a literature reconstruction with a spherical tail closure.",
+    "The pseudo-elliptical potential and external shear are fitted structural approximations, not predictions of the scalar field law.",
+    "The P0599 amplitude was selected using NFW-deprojected CLASH acceleration profiles, although it was frozen before this raw replay.",
+    "Passing a compact one-halo comparator is not equivalent to beating a publication-grade multi-halo dark-matter reconstruction."
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "protocol_version": "REOPENED-HYBRID-GEOMETRY-GATE-0.1.0",
+  "frozen_utc": "2026-07-31T09:10:00Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Test whether label-free baryonic scale and distribution indicators can continuously select the empirically distinct Sigma-galaxy and RG-cluster saturation responses.",
+  "claim_boundary": [
+    "The candidate indicators and approximate pivots were selected after a development-sample separation audit; this is not an independent confirmation stage.",
+    "The formula receives only baryonic acceleration, local baryonic density, and radius. Galaxy and cluster labels are never formula inputs.",
+    "The RG ceiling 2.75 and Sigma ceiling 6.5 were selected from the preceding channel sensitivity study and are held fixed here.",
+    "Every setting uses one universal formula and four universal fitted gravity parameters; no gravity constant is fitted per galaxy or raw lens system.",
+    "The CLASH bridge accelerations are GR/NFW-deprojected summaries and are not theory-neutral.",
+    "SPARC uses 968 real outer rotation points with previously RAR-fitted nuisance parameters frozen.",
+    "Raw lensing uses a zero-slip pseudo-elliptical closure and interpolated spherical baryon/density profiles.",
+    "Solar tests remain weak-field proxies; a relativistic completion must derive PPN gamma.",
+    "Missing held-out lens roots remain failures regardless of RMS over surviving images."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "sensitivity_families": {
+    "mass_pivot": {
+      "fixed_name": "channel_gate_log10_pivot",
+      "values": [10.5, 11.0, 11.25, 11.5, 11.75, 12.0, 12.5],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "equivalent_mass",
+        "channel_gate_sharpness": 4.0,
+        "channel_gate_cluster_high": true
+      }
+    },
+    "mass_sharpness": {
+      "fixed_name": "channel_gate_sharpness",
+      "values": [0.5, 1.0, 2.0, 3.0, 4.0, 6.0, 8.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "equivalent_mass",
+        "channel_gate_log10_pivot": 11.58,
+        "channel_gate_cluster_high": true
+      }
+    },
+    "density_ratio_pivot": {
+      "fixed_name": "channel_gate_log10_pivot",
+      "values": [-0.75, -0.5, -0.25, -0.159, 0.0, 0.25, 0.5],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "local_to_mean_density",
+        "channel_gate_sharpness": 4.0,
+        "channel_gate_cluster_high": false
+      }
+    },
+    "density_ratio_sharpness": {
+      "fixed_name": "channel_gate_sharpness",
+      "values": [0.5, 1.0, 2.0, 3.0, 4.0, 6.0, 8.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "local_to_mean_density",
+        "channel_gate_log10_pivot": -0.159,
+        "channel_gate_cluster_high": false
+      }
+    },
+    "radius_pivot": {
+      "fixed_name": "channel_gate_log10_pivot",
+      "values": [1.25, 1.5, 1.75, 1.877, 2.0, 2.25],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "radius",
+        "channel_gate_sharpness": 4.0,
+        "channel_gate_cluster_high": true
+      }
+    },
+    "tidal_pivot": {
+      "fixed_name": "channel_gate_log10_pivot",
+      "values": [-32.5, -32.25, -32.0, -31.75, -31.5, -31.25],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "tidal_curvature",
+        "channel_gate_sharpness": 4.0,
+        "channel_gate_cluster_high": false
+      }
+    },
+    "mass_orientation_control": {
+      "fixed_name": "channel_gate_cluster_high",
+      "values": [0.0, 1.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "equivalent_mass",
+        "channel_gate_log10_pivot": 11.58,
+        "channel_gate_sharpness": 4.0
+      }
+    },
+    "density_ratio_orientation_control": {
+      "fixed_name": "channel_gate_cluster_high",
+      "values": [0.0, 1.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "local_to_mean_density",
+        "channel_gate_log10_pivot": -0.159,
+        "channel_gate_sharpness": 4.0
+      }
+    }
+  },
+  "baseline_variant_name": "mass_pivot:channel_gate_log10_pivot=11.5",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20260806,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_geometry_gate/report.json",
+    "scores": "results/reopened_hybrid_geometry_gate/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_geometry_gate/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_geometry_gate/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_geometry_gate/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_geometry_gate/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_geometry_gate/family_impacts.csv",
+    "figure": "results/reopened_hybrid_geometry_gate/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_geometry_gate/SUMMARY.md"
+  }
+}

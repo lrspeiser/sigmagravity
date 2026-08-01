@@ -1,0 +1,78 @@
+{
+  "protocol_version": "MEMBER-FULL-TIDAL-METRIC-0.1.0",
+  "frozen_utc": "2026-07-30T00:50:00Z",
+  "status": "frozen_before_full_member_tidal_scores",
+  "question": "Does retaining the circular/radial member tidal stress, rather than only member lumpiness, produce one transferable cluster-lensing correction while leaving isolated galaxies unchanged?",
+  "weak_field_equation": {
+    "matter_split": "Phi=Phi_N+phi_Sigma with fixed RAR for matter",
+    "locked_slip_s": 5.0,
+    "tensor_operator": "partial_i[(delta_ij+t*Q_ij_full_members)*partial_j phi_Sigma]=source_Sigma",
+    "first_order_equation": "laplacian(delta_phi)=-partial_i(Q_ij_full_members*partial_j phi_Sigma)",
+    "new_universal_parameters": ["t"],
+    "per_cluster_gravity_parameters": 0
+  },
+  "environment_tensor": {
+    "input": "observed member positions and relative photometric light weights",
+    "subtract_circular_mean": false,
+    "difference_from_prior_test": "The prior member-tidal test removed the polar spin-2 circular mean. This test retains that radial stress and solves it analytically while solving only the decaying angular contrast by FFT.",
+    "primary_softening_kpc": 10.0,
+    "gas_included": false,
+    "isolated_galaxy_rule": "Q_full_members is an external-member field and is zero for an isolated SPARC galaxy and the Solar System, so the locked fixed-RAR matter score is unchanged."
+  },
+  "tensor_coupling": {
+    "primary_grid": [-0.9, -0.6, -0.3, 0.0, 0.3, 0.6, 0.9],
+    "diagnostic_extended_grid": [],
+    "selection_metric": "minimum complete-root equal-system exact training radial RMS on MACS0329 and MACS0429; ties favor smaller absolute t",
+    "ellipticity_preserving_domain": "|t|<1 for a full tensor whose eigenvalue magnitude is bounded by one"
+  },
+  "cluster_split": {
+    "selection_labels": ["MACS0329", "MACS0429"],
+    "validation_labels": ["MACS1115", "MACS1931"],
+    "within_family_rule": "hold out the lexicographically last image in every family with at least three images",
+    "disclosure": "The systems are spent at project level. The formula distinction, grid, selection rule, and gates were frozen before this full-tensor score."
+  },
+  "numerics": {
+    "field_half_width_arcsec": 256.0,
+    "field_pixels_per_axis": 512,
+    "polar_mean_radii": 384,
+    "polar_mean_azimuths": 720,
+    "fft_boundary_rule": "Solve the circular tensor analytically and require only the non-circular solver tensor to be small at the FFT boundary.",
+    "interpolation": "bilinear with zero angular-contrast correction outside the grid"
+  },
+  "optimization": {
+    "starts_per_selection_grid_point": 2,
+    "starts_selected_validation": 6,
+    "maximum_function_evaluations": 2000,
+    "random_seed": 20260806
+  },
+  "controls": {
+    "zero_tensor": "t=0 must reproduce the locked scalar-slip lens",
+    "member_angle_randomizations": 32,
+    "randomization_rule": "Preserve member radius and light weight, randomize polar angle, and score held-out images with selected geometry and sources fixed."
+  },
+  "advance_gates": {
+    "selected_t_not_primary_grid_boundary": true,
+    "validation_all_roots_converged": true,
+    "validation_RMS_improvement_over_scalar_slip_fraction_min": 0.20,
+    "validation_to_compact_halo_RMS_ratio_max": 1.25,
+    "actual_member_map_randomization_p_max": 0.05,
+    "maximum_solver_edge_Q_eigenvalue": 0.10,
+    "maximum_normalized_curl_RMS": 0.001
+  },
+  "inputs": {
+    "base_multicluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "member_system_protocol": "configs/unbounded_running_spatial_vector_protocol.json",
+    "metric_slip_protocol": "configs/metric_slip_raw_lensing_protocol.json",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "xmm_response_report": "results/r1_rxj2129_xmm_x4_responses/report.json",
+    "xmm_gas_protocol": "configs/r1_rxj2129_xmm_gas_likelihood_protocol.json"
+  },
+  "claim_boundary": [
+    "This is a first-order projected weak-field closure, not a complete covariant action.",
+    "The full member tensor retains radial information already correlated with the spherical baryonic profile, so success would still require a gas-inclusive forward-map confirmation.",
+    "No accepted projected gas map is included.",
+    "Only held-out cross-cluster improvement with complete exact roots can qualify."
+  ]
+}

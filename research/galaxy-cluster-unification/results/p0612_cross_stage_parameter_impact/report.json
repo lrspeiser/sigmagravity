@@ -1,0 +1,288 @@
+{
+  "report_version": "P0612-CROSS-STAGE-PARAMETER-IMPACT-RESULTS-0.1.0",
+  "status": "complete_descriptive_cross_stage_synthesis",
+  "coverage": {
+    "impact_observations": 75,
+    "stages": 14,
+    "coordinate_families": 17,
+    "domains": [
+      "cluster_raw_lensing",
+      "cluster_reconstructed_lensing",
+      "galaxy_rotation"
+    ],
+    "cross_domain_families": 7
+  },
+  "normalization": {
+    "rule": "raw_span divided by the largest raw_span within the same stage, domain, observable, and metric",
+    "reason": "Arcseconds, Jensen-Shannon divergence, km/s, and image-root counts are not commensurate.",
+    "family_priority": "median normalized leverage times log2(1 + independent stages), with a 25 percent breadth bonus for each additional observed domain",
+    "claim_limit": "Priority ranks sensitivity and recurrence, not physical correctness or statistical evidence."
+  },
+  "highest_priority_families": [
+    {
+      "priority_rank": 1,
+      "coordinate_family": "spatial_width",
+      "observations": 16,
+      "independent_stages": 13,
+      "domain_count": 3,
+      "domains": "cluster_raw_lensing+cluster_reconstructed_lensing+galaxy_rotation",
+      "median_normalized_leverage": 0.5333333333333333,
+      "mean_normalized_leverage": 0.5155388303971494,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 5,
+      "high_leverage_count": 8,
+      "impact_priority_score": 3.0458839376460833
+    },
+    {
+      "priority_rank": 2,
+      "coordinate_family": "residence_rule",
+      "observations": 3,
+      "independent_stages": 3,
+      "domain_count": 2,
+      "domains": "cluster_raw_lensing+galaxy_rotation",
+      "median_normalized_leverage": 1.0,
+      "mean_normalized_leverage": 0.8576142179680453,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 2,
+      "high_leverage_count": 3,
+      "impact_priority_score": 2.5
+    },
+    {
+      "priority_rank": 3,
+      "coordinate_family": "routed_fraction",
+      "observations": 12,
+      "independent_stages": 9,
+      "domain_count": 3,
+      "domains": "cluster_raw_lensing+cluster_reconstructed_lensing+galaxy_rotation",
+      "median_normalized_leverage": 0.35595214224230465,
+      "mean_normalized_leverage": 0.44452420793947534,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 3,
+      "high_leverage_count": 5,
+      "impact_priority_score": 1.7736711326250818
+    },
+    {
+      "priority_rank": 4,
+      "coordinate_family": "anisotropy_strength",
+      "observations": 2,
+      "independent_stages": 2,
+      "domain_count": 1,
+      "domains": "cluster_raw_lensing",
+      "median_normalized_leverage": 1.0,
+      "mean_normalized_leverage": 1.0,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 2,
+      "high_leverage_count": 2,
+      "impact_priority_score": 1.584962500721156
+    },
+    {
+      "priority_rank": 5,
+      "coordinate_family": "path_length",
+      "observations": 12,
+      "independent_stages": 8,
+      "domain_count": 3,
+      "domains": "cluster_raw_lensing+cluster_reconstructed_lensing+galaxy_rotation",
+      "median_normalized_leverage": 0.3015935211985529,
+      "mean_normalized_leverage": 0.3347949993652933,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 1,
+      "high_leverage_count": 3,
+      "impact_priority_score": 1.4340432646804724
+    },
+    {
+      "priority_rank": 6,
+      "coordinate_family": "destination_topology",
+      "observations": 3,
+      "independent_stages": 3,
+      "domain_count": 2,
+      "domains": "cluster_raw_lensing+cluster_reconstructed_lensing",
+      "median_normalized_leverage": 0.4053605618143285,
+      "mean_normalized_leverage": 0.38864610277910333,
+      "maximum_normalized_leverage": 0.5561941204273996,
+      "rank_one_count": 0,
+      "high_leverage_count": 1,
+      "impact_priority_score": 1.0134014045358213
+    },
+    {
+      "priority_rank": 7,
+      "coordinate_family": "destination_weighting",
+      "observations": 1,
+      "independent_stages": 1,
+      "domain_count": 1,
+      "domains": "cluster_raw_lensing",
+      "median_normalized_leverage": 1.0,
+      "mean_normalized_leverage": 1.0,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 1,
+      "high_leverage_count": 1,
+      "impact_priority_score": 1.0
+    },
+    {
+      "priority_rank": 8,
+      "coordinate_family": "saturation_shape",
+      "observations": 1,
+      "independent_stages": 1,
+      "domain_count": 1,
+      "domains": "cluster_raw_lensing",
+      "median_normalized_leverage": 1.0,
+      "mean_normalized_leverage": 1.0,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 1,
+      "high_leverage_count": 1,
+      "impact_priority_score": 1.0
+    }
+  ],
+  "cross_domain_families": [
+    {
+      "priority_rank": 1,
+      "coordinate_family": "spatial_width",
+      "observations": 16,
+      "independent_stages": 13,
+      "domain_count": 3,
+      "domains": "cluster_raw_lensing+cluster_reconstructed_lensing+galaxy_rotation",
+      "median_normalized_leverage": 0.5333333333333333,
+      "mean_normalized_leverage": 0.5155388303971494,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 5,
+      "high_leverage_count": 8,
+      "impact_priority_score": 3.0458839376460833
+    },
+    {
+      "priority_rank": 2,
+      "coordinate_family": "residence_rule",
+      "observations": 3,
+      "independent_stages": 3,
+      "domain_count": 2,
+      "domains": "cluster_raw_lensing+galaxy_rotation",
+      "median_normalized_leverage": 1.0,
+      "mean_normalized_leverage": 0.8576142179680453,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 2,
+      "high_leverage_count": 3,
+      "impact_priority_score": 2.5
+    },
+    {
+      "priority_rank": 3,
+      "coordinate_family": "routed_fraction",
+      "observations": 12,
+      "independent_stages": 9,
+      "domain_count": 3,
+      "domains": "cluster_raw_lensing+cluster_reconstructed_lensing+galaxy_rotation",
+      "median_normalized_leverage": 0.35595214224230465,
+      "mean_normalized_leverage": 0.44452420793947534,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 3,
+      "high_leverage_count": 5,
+      "impact_priority_score": 1.7736711326250818
+    },
+    {
+      "priority_rank": 5,
+      "coordinate_family": "path_length",
+      "observations": 12,
+      "independent_stages": 8,
+      "domain_count": 3,
+      "domains": "cluster_raw_lensing+cluster_reconstructed_lensing+galaxy_rotation",
+      "median_normalized_leverage": 0.3015935211985529,
+      "mean_normalized_leverage": 0.3347949993652933,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 1,
+      "high_leverage_count": 3,
+      "impact_priority_score": 1.4340432646804724
+    },
+    {
+      "priority_rank": 6,
+      "coordinate_family": "destination_topology",
+      "observations": 3,
+      "independent_stages": 3,
+      "domain_count": 2,
+      "domains": "cluster_raw_lensing+cluster_reconstructed_lensing",
+      "median_normalized_leverage": 0.4053605618143285,
+      "mean_normalized_leverage": 0.38864610277910333,
+      "maximum_normalized_leverage": 0.5561941204273996,
+      "rank_one_count": 0,
+      "high_leverage_count": 1,
+      "impact_priority_score": 1.0134014045358213
+    },
+    {
+      "priority_rank": 11,
+      "coordinate_family": "environmental_gate",
+      "observations": 13,
+      "independent_stages": 8,
+      "domain_count": 3,
+      "domains": "cluster_raw_lensing+cluster_reconstructed_lensing+galaxy_rotation",
+      "median_normalized_leverage": 0.07404282611139884,
+      "mean_normalized_leverage": 0.2181112797573528,
+      "maximum_normalized_leverage": 1.0,
+      "rank_one_count": 2,
+      "high_leverage_count": 2,
+      "impact_priority_score": 0.3520653085019532
+    },
+    {
+      "priority_rank": 15,
+      "coordinate_family": "distance_falloff",
+      "observations": 2,
+      "independent_stages": 2,
+      "domain_count": 2,
+      "domains": "cluster_raw_lensing+cluster_reconstructed_lensing",
+      "median_normalized_leverage": 0.0643739114282729,
+      "mean_normalized_leverage": 0.0643739114282729,
+      "maximum_normalized_leverage": 0.12059306286752333,
+      "rank_one_count": 0,
+      "high_leverage_count": 0,
+      "impact_priority_score": 0.12753779454819703
+    }
+  ],
+  "transfer_evidence": [
+    {
+      "stage_id": "P0610",
+      "coordinate_family": "environmental_gate",
+      "candidate": "dual_component_misalignment",
+      "systems": 4,
+      "status": "posthoc_outlier_dominated_candidate",
+      "diagnostic_value": 0.23011297240435888,
+      "diagnostic_name": "minimum_leave_one_out_Pearson_r",
+      "passes": false
+    },
+    {
+      "stage_id": "P0611",
+      "coordinate_family": "environmental_gate",
+      "candidate": "dual_component_misalignment",
+      "systems": 2,
+      "status": "frozen_transfer_failed_all_advance_gates",
+      "diagnostic_value": 0.00026039813702583015,
+      "diagnostic_name": "high_activation_system_heldout_improvement_fraction",
+      "passes": false
+    }
+  ],
+  "universal_truths": [
+    "Routed fraction is the most explosive raw-position coordinate, but its largest responses are destructive: the P0606 training optimum is zero route and five of eight fraction variants lose at least one exact root.",
+    "Spatial width or support recurs across reconstructed clusters, raw lenses, and galaxy rotation. It is a robust sensitivity coordinate, not a demonstrated universal correction.",
+    "Endpoint residence is repeatedly the least-bad return rule in raw heldout diagnostics and SPARC, while conservative return remains about 6.85 times the fixed-RAR galaxy RMSE.",
+    "Anisotropy strength can be locally large, but preferred signs conflict by cluster; tensor orientation itself is consistently low leverage.",
+    "Environmental gates and response saturation influence image-root topology more than their smooth-score spans suggest, yet the frozen dual-misalignment gate failed transfer.",
+    "Distance falloff and detailed tensor orientation are low-leverage compared with fraction, width, path length, residence, and saturation coordinates in the tested ranges.",
+    "Solar compatibility has generally been supplied by an exact symmetry null or high-acceleration screen; that protects local tests but is not evidence for the cluster mechanism."
+  ],
+  "next_test": {
+    "formula_family": "bounded endpoint residence with baryonic-size width and no object-specific gravity parameter",
+    "freeze_coordinates": [
+      "endpoint residence rule",
+      "width_over_R80",
+      "smooth response saturation",
+      "one universal routed fraction or strength"
+    ],
+    "required_scores": [
+      "SPARC outer velocity RMSE",
+      "raw cluster heldout RMS",
+      "exact image-root count",
+      "Solar maximum fractional change and Mercury precession proxy"
+    ],
+    "reason": "These coordinates combine recurrence, topology control, and direct cross-domain observability; destination networks, tensor orientation, and the dual-misalignment gate have already failed transfer."
+  },
+  "claim_limits": [
+    "Every input experiment is already project-spent; this is a synthesis, not a new holdout.",
+    "Within-experiment normalization preserves ranks but discards absolute scale, so normalized leverage must not be read as percent improvement.",
+    "High impact includes harmful responses and topology failures.",
+    "Reconstructed convergence-map response is not equivalent to raw multiple-image prediction."
+  ]
+}

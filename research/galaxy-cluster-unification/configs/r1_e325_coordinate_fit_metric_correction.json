@@ -1,0 +1,33 @@
+{
+  "protocol_version": "R1-E325-J2-coordinate-metric-correction-0.1",
+  "status": "frozen_after_invalid_v0_1_before_metric_recomputation",
+  "frozen_utc": "2026-07-27T14:36:30Z",
+  "invalid_report": "results/r1_e325_coordinate_lens_fit/invalid_v0_1/report.json",
+  "invalid_source": "results/r1_e325_coordinate_lens_fit/invalid_v0_1/coordinate_lens_source.npz",
+  "failure_observed": "The source-edge absolute-flux fraction was 0.1024 because the implementation summed regularization-filled source pixels even when the image operator had exactly zero sensitivity to those pixels.",
+  "classification": "metric implementation error, not a scientific-threshold failure",
+  "unchanged": [
+    "all input files and hashes",
+    "40x40 engineering source grid and fixed source-plane bounds",
+    "EPL plus shear coordinate map",
+    "all parameter bounds, optimizer budget, and regularization",
+    "maximum allowed source-edge absolute-flux fraction of 0.05",
+    "all downstream rank and held-out thresholds"
+  ],
+  "correction": {
+    "data_constrained_source_cell": "a source cell whose column in the final whitened image operator has nonzero Euclidean norm",
+    "occupied_fraction": "fraction of data-constrained cells whose absolute source value is at least one percent of the maximum absolute value among data-constrained cells",
+    "edge_flux_fraction": "absolute fitted source flux in data-constrained outer-row or outer-column cells divided by total absolute fitted flux in all data-constrained cells",
+    "threshold": 0.05,
+    "additional_failure": "fail if no data-constrained source cells exist or if any image-mapped source coordinate reaches or exceeds a fixed source-plane boundary"
+  },
+  "authorization": {
+    "recompute_only_the_corrected_metrics_from_the_preserved_fit": true,
+    "rerun_optimizer": false,
+    "change_threshold": false,
+    "continue_only_if_corrected_gate_passes": true,
+    "count_toward_ten_system_target": false,
+    "infer_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

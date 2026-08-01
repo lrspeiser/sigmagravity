@@ -1,0 +1,164 @@
+{
+  "protocol_version": "P0566-A383-MS2137-MORPHOLOGY-GATE-TRANSFER-0.1.0",
+  "frozen_utc": "2026-08-01T05:20:00Z",
+  "status": "frozen_after_verified_acquisition_before_first_new_fits_array_open_or_transfer_score",
+  "question": "Does the unchanged P0565 coherent-core/twisted-outskirts rule predict the sign of a physical baryon-tensor response in both A383 and MS2137?",
+  "interpretation": "prospective two-cluster data-channel transfer; neither target supplied a morphology label or tensor response to P0564 or P0565",
+  "field_hypothesis": {
+    "potential_split": "Phi=Phi_N+phi_Sigma and Psi=Phi_N+(1+s)phi_Sigma",
+    "locked_metric_slip_s": 5.0,
+    "lensing_extra_to_matter_extra_ratio": 3.5,
+    "tensor_equation": "partial_i[(delta_ij+t*Q_ij(baryons))*partial_j phi_Sigma]=source_Sigma",
+    "first_order_solution": "laplacian(delta_phi)=-partial_i(Q_ij*partial_j phi_Sigma)",
+    "environment_input": "Q is constructed from projected ACCEPT gas mass modulated only in angle by Chandra morphology, plus F160W light normalized to the Tian stellar-mass anchor",
+    "new_gravity_parameters_in_transfer": 0,
+    "per_cluster_gravity_parameters": 0
+  },
+  "systems": [
+    {
+      "label": "A383",
+      "system": "A383",
+      "lens_redshift": 0.187,
+      "center_ra_deg": 42.0140833333,
+      "center_dec_deg": -3.5291722222,
+      "position_sigma_arcsec": 0.5,
+      "expected_images": 14,
+      "expected_families": 5,
+      "expected_training_images": 10,
+      "expected_heldout_images": 4,
+      "accept_name": "ABELL_0383"
+    },
+    {
+      "label": "MS2137",
+      "system": "MS2137",
+      "lens_redshift": 0.313,
+      "center_ra_deg": 325.0631666667,
+      "center_dec_deg": -23.6611388889,
+      "position_sigma_arcsec": 0.5,
+      "expected_images": 11,
+      "expected_families": 3,
+      "expected_training_images": 8,
+      "expected_heldout_images": 3,
+      "accept_name": "MS_2137.3-2353"
+    }
+  ],
+  "coordinates_and_split": {
+    "catalog_x_conversion": "internal x_arcsec=-delta_x_west_arcsec so positive x is east; y_arcsec=delta_y_north_arcsec",
+    "within_family_rule": "hold out the lexicographically last image in every family with at least three images; two-image families remain training-only",
+    "source_positions": "profile independently on the training images in every exact fit",
+    "cosmology": {
+      "H0_km_s_Mpc": 70.0,
+      "Omega_m": 0.27,
+      "reference_source_redshift": 2.0
+    }
+  },
+  "registered_map_construction": {
+    "axis_min_arcsec": -60.0,
+    "axis_max_arcsec": 60.0,
+    "grid_spacing_arcsec": 1.0,
+    "known_image_mask_radius_arcsec": 4.0,
+    "hst_background_annulus_arcsec": [75.0, 90.0],
+    "hst_native_cut_radius_arcsec": 96.0,
+    "hst_negative_flux_rule": "subtract frozen outer-annulus median and clip negative flux to zero",
+    "hst_mask_fill": "same-radius 0.5-arcsec-annulus median before common-grid interpolation",
+    "xray_band_keV": [0.7, 2.0],
+    "xray_observation_combination": "sum each observation sky histogram divided by its header exposure",
+    "xray_point_source_detection": {
+      "small_gaussian_sigma_arcsec": 1.5,
+      "broad_gaussian_sigma_arcsec": 6.0,
+      "difference_significance_threshold": 5.0,
+      "protected_cluster_core_radius_arcsec": 5.0,
+      "mask_dilation_radius_arcsec": 3.0,
+      "mask_fill": "broad Gaussian rate map"
+    }
+  },
+  "frozen_sign_gate": {
+    "source_protocol": "configs/p0565_rxj2129_morphology_gate_transfer_protocol.json",
+    "inner_correlation_aperture_arcsec": 30.0,
+    "inner_star_gas_correlation_threshold": 0.3278835,
+    "outer_alignment_aperture_arcsec": 120.0,
+    "outer_quadrupole_cos2_threshold": 0.0744005,
+    "rule": "t=-0.3 only if inner correlation exceeds its threshold AND outer cos2 alignment is below its threshold; otherwise t=+0.3",
+    "universal_magnitude": 0.3,
+    "parameters_carried_from_p0565": 2,
+    "per_cluster_fitted_gravity_parameters": 0,
+    "grid_clipping_disclosure": "The inherited P0564/P0565 120-arcsec descriptor was evaluated on a square map extending only +/-60 arcsec; it is therefore a full-square outer descriptor rather than a complete circular 120-arcsec aperture. P0566 reproduces that limitation exactly so the transfer is unchanged."
+  },
+  "physical_tensor_map": {
+    "accept_projection": "exact line-of-sight projection of contiguous piecewise-constant ACCEPT ne shells with mu_e=1.17",
+    "gas_angular_modulation": "3-arcsec Gaussian-smoothed, point-source-masked Chandra rate; divide by one-pixel annular mean; square-root power; cap to [0.25,4]; renormalize each annulus to mean one",
+    "stellar_amplitude": "normalize the positive F160W map to the Tian BCG stellar-mass anchor",
+    "gas_normalization": "accept_absolute",
+    "gas_power": 0.5,
+    "include_stars": true,
+    "operator": "contrast",
+    "subtract_circular_mean": true,
+    "softening_kpc": 20.0,
+    "field_half_width_arcsec": 256.0,
+    "pixels_per_axis": 512,
+    "polar_mean_radii": 384,
+    "polar_mean_azimuths": 720
+  },
+  "response_and_exact_score": {
+    "near_zero_pair": [-0.25, 0.25],
+    "exploratory_grid_min": -6.0,
+    "exploratory_grid_max": 6.0,
+    "exploratory_grid_step": 0.25,
+    "exploratory_grid_rule": "retain only couplings with minimum tensor permittivity eigenvalue above 0.05; the optimum cannot modify the frozen gate",
+    "source_plane_rule": "unweighted training-family source mean with held-out source-plane separation, as in P0563",
+    "exact_models": ["zero", "morphology_gated_t"],
+    "starts_per_exact_fit": 24,
+    "optimizer_seed_ensembles": [20260741, 20261741],
+    "maximum_function_evaluations": 2500,
+    "initial_geometry": [0.8, 0.0, 0.0, 0.0, 0.0, 0.0]
+  },
+  "comparators": {
+    "baryons_GR": "s=-2 makes the extra RAR force invisible to light; six geometry nuisances, zero halo parameters",
+    "RAR_equal_light_matter": "s=0 applies the fixed RAR enhancement equally to light and matter; six geometry nuisances",
+    "compact_halo": "baryonic GR plus an object-specific non-singular isothermal ellipsoid and shear; eight fitted per-cluster lens/geometry parameters, used only as a dark-matter-style yardstick",
+    "starts_per_comparator_fit": 24
+  },
+  "advance_gates": {
+    "morphology_sign_matches_near_zero_sign_for_both_systems_and_ensembles": true,
+    "exact_candidate_all_roots_for_both_systems_and_ensembles": true,
+    "exact_candidate_improves_zero_for_both_systems_and_ensembles": true,
+    "equal_system_exact_candidate_improves_zero_in_both_ensembles": true,
+    "candidate_gate_validated": false
+  },
+  "inputs": {
+    "acquisition_protocol": "configs/p0566_a383_ms2137_transfer_acquisition_protocol.json",
+    "acquisition_provenance": "data/raw/p0566_a383_ms2137_transfer/provenance.json",
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "p0557_protocol": "configs/p0557_baryon_proxy_tidal_protocol.json",
+    "metric_slip_protocol": "configs/metric_slip_raw_lensing_protocol.json",
+    "image_catalog": "data/derived/r1_strong_lens_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "tian_table": "data/raw/clash_tian2020/table1.dat",
+    "accept_profiles": "data/raw/accept_cavagnolo2009/all_profiles.dat.txt"
+  },
+  "outputs": {
+    "directory": "results/p0566_a383_ms2137_morphology_gate_transfer",
+    "map_audits": "map_audits.csv",
+    "morphology": "morphology.csv",
+    "physical_map_audit": "physical_map_audit.csv",
+    "tensor_audit": "tensor_audit.csv",
+    "source_plane_response": "source_plane_response.csv",
+    "exact_scores": "exact_scores.csv",
+    "comparator_scores": "comparator_scores.csv",
+    "predictions": "predictions.csv",
+    "report": "report.json",
+    "figure": "p0566_a383_ms2137_morphology_gate_transfer.png",
+    "map_figure": "p0566_a383_ms2137_maps.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The two targets were selected after P0565, although their new morphology descriptors and tensor responses were unread when this protocol was frozen.",
+    "The sign gate still contains two thresholds derived post hoc from one negative and three positive systems; two transfers cannot establish a population law.",
+    "The outer descriptor inherits a clipped-aperture implementation and must be retested later on genuinely larger common maps.",
+    "F160W light has no resolved mass-to-light map, and X-ray brightness modulates angular gas shape but does not set gas mass.",
+    "The source-plane response is a conditioning-resistant directional diagnostic; only exact image-plane roots are the primary score.",
+    "The compact-halo comparator is flexible and fitted separately per cluster, so it is a performance yardstick rather than a parameter-matched model.",
+    "This is a projected weak-field equation, not a covariant four-dimensional theory.",
+    "No formula can be promoted from P0566."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "protocol_version": "P0554-RADIAL-FLUX-REMAP-FORENSICS-0.1.0",
+  "frozen_utc": "2026-08-01T06:35:00Z",
+  "status": "frozen_after-remap-screens-before-object-property-correlations",
+  "question": "Which measured baryonic or profile invariant predicts whether an object prefers an inward or outward radial remap?",
+  "symmetric_probe": {
+    "inward_candidate": "f001_l098",
+    "outward_candidate": "f001_l102",
+    "sensitivity": "(RMSE_inward-RMSE_outward)/mean(RMSE_inward,RMSE_outward); positive means outward is better",
+    "reason": "smallest available nearly symmetric perturbation around the exact parent"
+  },
+  "statistics": {
+    "univariate": "Spearman rank correlation against every preregistered finite object property",
+    "minimum_objects": 8,
+    "multiple_testing": "Benjamini-Hochberg false-discovery q values within each domain",
+    "raw_cluster_role": "six-system descriptive sign check only; no p-value claim from n=6",
+    "promotion_rule": "No invariant is promoted unless its FDR q<0.10 in both the galaxy and derived-cluster domains with the same physical direction"
+  },
+  "features": {
+    "common": ["log10_baryonic_mass", "concentration_r50_over_r80", "median_log10_gbar", "median_potential_depth", "maximum_potential_depth", "median_path_ratio", "maximum_path_ratio", "radial_log_span", "parent_fractional_RMSE"],
+    "galaxy_only": ["gas_fraction", "stellar_bulge_fraction", "hubble_type", "log10_effective_radius", "log10_disk_scale", "log10_surface_density"],
+    "raw_metadata": ["heldout_images", "parent_RMS_arcsec"]
+  },
+  "inputs": {
+    "radial_protocol": "configs/p0554_radial_flux_remap_protocol.json",
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "galaxy_predictions": "results/p0554_radial_flux_remap/galaxy_predictions.csv",
+    "cluster_predictions": "results/p0554_radial_flux_remap/cluster_predictions.csv",
+    "multicluster_raw_scores": "results/p0554_radial_flux_remap_multicluster_raw/system_scores.csv",
+    "RXJ1347_raw_scores": "results/p0554_radial_flux_remap/rxj1347_scores.csv"
+  },
+  "outputs": {
+    "directory": "results/p0554_radial_flux_remap_forensics",
+    "object_sensitivities": "object_sensitivities.csv",
+    "correlations": "correlations.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_radial_flux_remap_forensics.png"
+  },
+  "claim_limits": [
+    "The object properties and responses come from spent exploratory data.",
+    "Univariate correlations do not establish a causal field invariant.",
+    "Galaxy nuisance parameters were previously fitted and CLASH acceleration targets are conventionally reconstructed.",
+    "Six raw clusters are too few for a stable multivariable or significance claim.",
+    "A correlation may reflect the parent model residual rather than new gravity."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "protocol_version": "REOPENED-HYBRID-TIDAL-SHAPE-GATE-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-07-31T10:55:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay representative tidal-shape gates with eight lens-geometry starts, including the best two-start cross-domain setting, the best complete-root lensing setting, an attractive missing-root setting, and endpoints from each directional invariant.",
+  "source_protocol": "configs/reopened_hybrid_tidal_shape_gate_protocol.json",
+  "source_report": "results/reopened_hybrid_tidal_shape_gate/report.json",
+  "selected_variants": [
+    "middle_orientation_control:channel_gate_cluster_high=0",
+    "dominance_orientation_control:channel_gate_cluster_high=1",
+    "middle_ratio_pivot:channel_gate_pivot=0.85",
+    "middle_ratio_sharpness:channel_gate_sharpness=5",
+    "dominance_pivot:channel_gate_pivot=0.453",
+    "dominance_sharpness:channel_gate_sharpness=10",
+    "third_axis_pivot:channel_gate_pivot=0.5",
+    "dominance_sharpness:channel_gate_sharpness=5"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_tidal_shape_gate_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_tidal_shape_gate_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_tidal_shape_gate_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_tidal_shape_gate_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_tidal_shape_gate_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Universal gravity constants are copied unchanged from the tidal-shape bridge fit.",
+    "No gravity constant is fitted to raw lensing.",
+    "Only pseudo-elliptical geometry, shear, center, and source positions are fitted to raw training images.",
+    "Candidates with missing held-out roots remain failures even when RMS over surviving roots is small.",
+    "The replay was selected after viewing two-start results and is a numerical robustness test, not an independent holdout.",
+    "SPARC uses an axisymmetric midplane tidal closure while the spherical lensing calculation uses a spherical closure; apparent channel separation may therefore reflect the approximations."
+  ]
+}

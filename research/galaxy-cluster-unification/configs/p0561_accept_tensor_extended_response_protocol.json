@@ -1,0 +1,57 @@
+{
+  "protocol_version": "P0561-ACCEPT-TENSOR-EXTENDED-RESPONSE-0.1.0",
+  "frozen_utc": "2026-08-01T00:05:00Z",
+  "status": "frozen_before_any_extended_coupling_response_score",
+  "question": "Does the P0560 negative-boundary trend saturate, reverse, or become topologically unstable within the actual elliptic range of the measured tensors?",
+  "interpretation": "post-P0560 optimizer-stability and extended-range diagnostic on spent systems; never independent validation and never formula promotion",
+  "locked_map": {
+    "gas_normalization": "accept_absolute",
+    "gas_power": 0.5,
+    "include_stars": true,
+    "operator": "contrast",
+    "softening_kpc": 20.0,
+    "pixels_per_axis": 512,
+    "new_map_parameters": 0,
+    "per_cluster_parameters": 0
+  },
+  "coupling_grid": [-6.0, -4.0, -2.0, -1.0, 0.0, 1.0, 2.0, 4.0, 6.0],
+  "coupling_bound_reason": "the measured maximum |Q| is below 0.15 in every map, so |t|<=6 leaves every eigenvalue of I+tQ positive",
+  "ellipticity": {
+    "minimum_eigenvalue": 0.05,
+    "rule": "require 1-|t| max|Q| > 0.05 separately for every physical cluster map"
+  },
+  "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+  "optimization": {
+    "starts_per_exact_fit": 8,
+    "maximum_function_evaluations": 2000,
+    "random_seed": 20260735
+  },
+  "response_checks": {
+    "near_zero_pair": [-1.0, 1.0],
+    "common_nonzero_requires_all_roots": true,
+    "leave_one_system_out_selection": "minimum equal-system exact RMS on the other three, root-complete candidates only"
+  },
+  "inputs": {
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "p0557_protocol": "configs/p0557_baryon_proxy_tidal_protocol.json",
+    "member_tidal_protocol": "configs/member_tidal_metric_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0561_accept_tensor_extended_response",
+    "scores": "scores.csv",
+    "response_summary": "response_summary.csv",
+    "leave_one_out": "leave_one_out.csv",
+    "predictions": "predictions.csv",
+    "tensor_audits": "tensor_audits.csv",
+    "report": "report.json",
+    "figure": "p0561_accept_tensor_extended_response.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The range and denser optimizer audit were chosen after seeing P0560; this is an explicitly post-hoc response diagnostic.",
+    "All four systems have already influenced the research program and provide no independent validation.",
+    "A per-system optimum diagnoses compatibility but is not an allowed model parameter.",
+    "Positive ellipticity is a mathematical well-posedness gate, not evidence that large coupling is physically valid.",
+    "No formula can be promoted from P0561."
+  ]
+}

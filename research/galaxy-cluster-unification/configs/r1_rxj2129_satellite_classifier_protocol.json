@@ -1,0 +1,68 @@
+{
+  "protocol_version": "R1B2-RXJ2129-satellite-classifier-0.1",
+  "status": "frozen_before_membership_classifier_performance_inspection",
+  "purpose": "Turn the conservative Molino interval-overlap candidate set into spectroscopically calibrated membership probabilities with held-out and bootstrap uncertainty.",
+  "freeze_date": "2026-07-26",
+  "disclosure": "The viable 112-object crossmatch, the candidate-domain counts of 43 labels with 25 members and 18 nonmembers, and the photo-z versus spectroscopic-z diagnostic were known before this freeze. No classifier, held-out probability, Brier score, log loss, AUC, calibration error, or candidate probability had been evaluated.",
+  "inputs": {
+    "training_ledger": "data/derived/r1_rxj2129_muse_molino_training.csv",
+    "molino_catalog": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_ir_rxj2129_cat-molino.txt",
+    "candidate_ledger": "data/derived/r1_rxj2129_satellite_candidates.csv",
+    "crossmatch_report": "results/r1_rxj2129_satellite_membership/crossmatch_report.json"
+  },
+  "training_domain": {
+    "bcg_exclusion_radius_arcsec": 1.0,
+    "cluster_redshift": 0.234,
+    "rule": "Use only extended spectroscopic matches outside 1 arcsec whose Molino 95-percent first-peak interval contains the cluster redshift, matching the frozen conservative candidate domain.",
+    "features": [
+      "absolute BPZ first-peak offset from cluster redshift",
+      "BPZ first-peak 95-percent interval width",
+      "BPZ Odds_1",
+      "log1p BPZ Chi2",
+      "F814W mass-aperture magnitude",
+      "F606W minus F814W mass-aperture color",
+      "BPZ template type Tb_1",
+      "catalog log10 stellar mass"
+    ],
+    "missing_values": "Values >=90 or non-finite are set missing and median-imputed within each training fold with missingness indicators.",
+    "spatial_groups": "12 fixed polar-angle sectors about the BCG",
+    "cross_validation": "five-fold shuffled StratifiedGroupKFold with spatial sector as group and random seed 2129"
+  },
+  "model": {
+    "family": "L2 logistic regression",
+    "regularization_C": 0.5,
+    "class_weight": null,
+    "maximum_iterations": 2000,
+    "bootstrap_replicates": 500,
+    "bootstrap_rule": "stratified resampling within the member and nonmember classes, preserving observed candidate-domain prevalence",
+    "random_seed": 2129
+  },
+  "advance_thresholds": {
+    "minimum_oof_brier_improvement_fraction_over_fold_prevalence": 0.10,
+    "minimum_oof_log_loss_improvement_fraction_over_fold_prevalence": 0.05,
+    "minimum_oof_roc_auc": 0.70,
+    "maximum_five_bin_expected_calibration_error": 0.20,
+    "minimum_spatial_folds_beating_prevalence_brier": 3,
+    "candidate_probabilities_and_intervals_finite_and_bounded": true
+  },
+  "candidate_scope": {
+    "maximum_radius_arcsec": 30.0,
+    "rule": "Predict only for the frozen candidate ledger inside 30 arcsec. Override probabilities to 0 or 1 for unique MUSE-matched nonmembers or members; retain classifier probabilities for unmatched photometric candidates.",
+    "mass_uncertainty_dex": 0.30
+  },
+  "outputs": {
+    "oof_predictions": "data/derived/r1_rxj2129_satellite_membership_oof.csv",
+    "membership_likelihood": "data/derived/r1_rxj2129_satellite_membership_likelihood.csv",
+    "membership_probability_bootstrap": "data/derived/r1_rxj2129_satellite_membership_bootstrap.npz",
+    "report": "results/r1_rxj2129_satellite_membership/classifier_report.json",
+    "diagnostic": "results/r1_rxj2129_satellite_membership/classifier_diagnostic.png"
+  },
+  "authorization": {
+    "membership_classifier_fit": true,
+    "membership_probability_likelihood": true,
+    "off_center_mass_acceleration_likelihood": false,
+    "lens_residual_read": false,
+    "gravity_response_fit": false,
+    "strict_r1_ready": false
+  }
+}

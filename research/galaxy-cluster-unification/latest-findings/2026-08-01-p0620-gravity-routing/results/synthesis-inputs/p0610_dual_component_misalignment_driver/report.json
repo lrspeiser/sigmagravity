@@ -1,0 +1,82 @@
+{
+  "report_version": "P0610-DUAL-COMPONENT-MISALIGNMENT-DRIVER-RESULTS-0.1.0",
+  "status": "complete_posthoc_candidate_generator_only",
+  "coverage": {
+    "systems_with_direction_maps": 5,
+    "systems_with_finite_raw_response": 4
+  },
+  "correlations": {
+    "Pearson_r": 0.9630730946207562,
+    "Pearson_p": 0.03692690537924381,
+    "Spearman_rho": 0.7999999999999999,
+    "Spearman_p": 0.20000000000000007,
+    "minimum_leave_one_out_Pearson_r": 0.23011297240435888,
+    "minimum_leave_one_out_Spearman_rho": 0.5
+  },
+  "candidate_gate": {
+    "formula": "H=A_dual^4/(A_dual^4+0.3^4)",
+    "base_strength": 0.0025,
+    "largest_activation_system": "MACS0429",
+    "largest_activation": 0.9378131607507241,
+    "next_largest_activation": 0.14964600277171752
+  },
+  "driver_table": [
+    {
+      "system_label": "RXJ2129",
+      "mean_alignment_with_member": 0.8318779730277294,
+      "mean_alignment_with_star": 0.7754306026066679,
+      "dual_misalignment": 0.19430661925345816,
+      "candidate_gate_H": 0.14964600277171752,
+      "candidate_effective_strength": 0.00037411500692929384,
+      "raw_improvement_fraction": -0.0010802671107041917
+    },
+    {
+      "system_label": "MACS0329",
+      "mean_alignment_with_member": 0.9696080186794018,
+      "mean_alignment_with_star": 0.9575505816289464,
+      "dual_misalignment": 0.03591826736081961,
+      "candidate_gate_H": 0.00020544106860229466,
+      "candidate_effective_strength": 5.136026715057367e-07,
+      "raw_improvement_fraction": -0.0024897151931748684
+    },
+    {
+      "system_label": "MACS0429",
+      "mean_alignment_with_member": 0.4126584178098438,
+      "mean_alignment_with_star": 0.4049401062590902,
+      "dual_misalignment": 0.5911881422082924,
+      "candidate_gate_H": 0.9378131607507241,
+      "candidate_effective_strength": 0.00234453290187681,
+      "raw_improvement_fraction": 0.411138600328844
+    },
+    {
+      "system_label": "MACS1115",
+      "mean_alignment_with_member": 0.6765490467769645,
+      "mean_alignment_with_star": 0.9880322886631746,
+      "dual_misalignment": 0.06221710086298061,
+      "candidate_gate_H": 0.001846508846761921,
+      "candidate_effective_strength": 4.6162721169048025e-06,
+      "raw_improvement_fraction": -1.758806311258354e-06
+    },
+    {
+      "system_label": "MACS1931",
+      "mean_alignment_with_member": 0.9349550324610402,
+      "mean_alignment_with_star": 0.6864756731018186,
+      "dual_misalignment": 0.1428046906294273,
+      "candidate_gate_H": 0.04883602048226027,
+      "candidate_effective_strength": 0.00012209005120565066,
+      "raw_improvement_fraction": null
+    }
+  ],
+  "interpretation": {
+    "same_data_evidence": false,
+    "candidate_for_fresh_predeclared_gate": true,
+    "single_outlier_dominates": true
+  },
+  "claim_limits": [
+    "The driver and threshold are post hoc after inspecting P0609.",
+    "Only four systems have finite matched raw responses, so p-values and jackknives are descriptive.",
+    "MACS0429 is a high-leverage point and has only two held-out images.",
+    "The candidate gate must be frozen and tested on a different cluster before it can enter the field formula.",
+    "Directional alignment uses proxy maps and is not a component mass measurement."
+  ]
+}

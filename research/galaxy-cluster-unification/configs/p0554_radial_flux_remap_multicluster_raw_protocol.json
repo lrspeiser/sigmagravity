@@ -1,0 +1,45 @@
+{
+  "protocol_version": "P0554-RADIAL-FLUX-REMAP-MULTICLUSTER-RAW-0.1.0",
+  "frozen_utc": "2026-08-01T05:55:00Z",
+  "status": "frozen_after_scalar-and-RXJ1347-screen-before-other-raw-cluster-scores",
+  "question": "Is the RXJ1347 preference for outward radial flux remapping shared by other raw strong-lens systems, or is the sign system-dependent?",
+  "formula": "Use the unchanged 49-setting radial-remap grid and P0554 parent from the prior frozen protocol; select no new setting from this raw diagnostic.",
+  "systems": ["RXJ2129", "MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+  "geometry": {
+    "source": "archived lensing_softness_098 geometry from P0554 route-softness interaction",
+    "ordinary_parameters_refit_now": 0,
+    "gravity_parameters_refit_now": 0,
+    "source_positions": "profiled on each candidate's training images",
+    "heldout": "exact lens-equation roots at the pre-existing predictive split"
+  },
+  "comparison": {
+    "accuracy": "compare candidate and parent only on systems where both recover every held-out root",
+    "topology": "report root creation and loss separately",
+    "aggregate": "equal-system RMS across matched complete systems",
+    "selection_history": "f001_l080 was frozen by galaxy plus derived-cluster discovery scores before any RXJ1347 or these five-system raw scores"
+  },
+  "inputs": {
+    "radial_protocol": "configs/p0554_radial_flux_remap_protocol.json",
+    "radial_report": "results/p0554_radial_flux_remap/report.json",
+    "radial_scores": "results/p0554_radial_flux_remap/candidate_scores.csv",
+    "context_protocol": "configs/p0554_local_cross_domain_sensitivity_protocol.json",
+    "fixed_geometry": "results/p0554_route_softness_interaction/geometry.csv"
+  },
+  "outputs": {
+    "directory": "results/p0554_radial_flux_remap_multicluster_raw",
+    "system_scores": "system_scores.csv",
+    "candidate_scores": "candidate_scores.csv",
+    "predictions": "predictions.csv",
+    "profiles": "radial_profiles.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_radial_flux_remap_multicluster_raw.png"
+  },
+  "claim_limits": [
+    "All five systems and their P0554 geometries are spent exploratory evidence.",
+    "Holding ordinary geometry fixed isolates formula sensitivity but is not a new optimized fit.",
+    "The baryonic input is a sparse spherical profile and omits a registered two-dimensional gas and ICL map.",
+    "An exact-root loss is a topology failure and is never counted as an accuracy improvement.",
+    "This diagnoses a radial weak-field operator and does not validate a covariant gravity theory."
+  ]
+}

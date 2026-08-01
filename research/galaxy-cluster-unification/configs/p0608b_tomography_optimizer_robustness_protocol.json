@@ -1,0 +1,44 @@
+{
+  "protocol_version": "P0608B-TOMOGRAPHY-OPTIMIZER-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-02T00:05:00Z",
+  "status": "frozen_after_P0608_refit_basin_divergence_before_any_P0608B_repeat_score",
+  "question": "Is the apparent gamma=0 versus gamma=1 refit difference larger than ordinary one-start geometry-basin variation?",
+  "locked_formula": {
+    "component": "gas",
+    "angular_strength": 0.0025,
+    "gammas": [0.0, 1.0],
+    "geometry_family": "same six P0601 pseudo-elliptical and shear parameters",
+    "gravity_parameters_fit": 0
+  },
+  "robustness": {
+    "independent_one_start_fits_per_gamma": 24,
+    "seed": 21292039,
+    "primary_comparison": "best complete training fit for each gamma",
+    "distribution_comparison": "median and 16-84 percentile training and spent-heldout RMS across complete one-start fits"
+  },
+  "inputs": {
+    "P0608_protocol": "configs/p0608_route_redshift_tomography_protocol.json",
+    "P0608_report": "results/p0608_route_redshift_tomography/report.json",
+    "P0607_protocol": "configs/p0607_component_direction_raw_lensing_protocol.json",
+    "P0601_protocol": "configs/p0601_frozen_potential_raw_lensing_protocol.json",
+    "P0601_parameters": "results/p0601_frozen_potential_raw_lensing/fitted_parameters.csv",
+    "raw_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "route_source_protocol": "configs/adaptive_route_raw_rxj2129_protocol.json",
+    "component_screen_protocol": "configs/p0554_all_baryon_route_screen_protocol.json",
+    "component_acquisition_protocol": "configs/p0554_all_baryon_route_acquisition_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0608b_tomography_optimizer_robustness",
+    "fits": "one_start_fits.csv",
+    "summary_table": "gamma_summary.csv",
+    "report": "report.json",
+    "figure": "p0608b_tomography_optimizer_robustness.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This audit is post hoc after observing P0608 optimizer-basin divergence.",
+    "RX J2129 and every image split remain spent.",
+    "A stable gamma difference would still be phenomenological and would require transfer to a different cluster.",
+    "An unstable result demonstrates non-identifiability in this model; it does not prove single-plane gravity."
+  ]
+}

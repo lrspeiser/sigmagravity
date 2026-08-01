@@ -1,0 +1,94 @@
+{
+  "protocol_version": "REOPENED-HYBRID-THRESHOLD-SATURATION-0.1.0",
+  "frozen_utc": "2026-07-31T07:07:00Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Cross the Solar-safe saturation ceiling with an acceleration-moving RG density threshold to test whether disk suppression and cluster enhancement can be separated.",
+  "claim_boundary": [
+    "This cross-grid was selected after the screened-structure study showed a positive threshold power reduced SPARC error without materially changing cluster scores.",
+    "Every candidate is a phenomenological weak-field formula, not a covariant theory.",
+    "The CLASH bridge accelerations are GR/NFW-deprojected lensing summaries and are not theory-neutral.",
+    "SPARC uses 968 real outer rotation points with previously RAR-fitted nuisance parameters frozen; no gravity parameter is fitted per galaxy.",
+    "The raw strong-lensing test uses spectroscopic multiple-image coordinates, but its zero-slip pseudo-elliptical closure and interpolated spherical baryon/density profiles are approximations.",
+    "The Cassini force-fraction test assumes zero gravitational slip; a relativistic completion must derive PPN gamma.",
+    "Failure labels apply only to the exact variants and scanned bounds."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "sensitivity_families": {
+    "ceiling_3": {
+      "fixed_name": "threshold_acceleration_power",
+      "values": [0.0, 0.5, 1.0, 1.5],
+      "base_variant": {"combination": "interaction", "interaction_eta": 1.0, "screen_power": 1.5, "saturation_ceiling": 3.0}
+    },
+    "ceiling_4": {
+      "fixed_name": "threshold_acceleration_power",
+      "values": [0.0, 0.5, 1.0, 1.5],
+      "base_variant": {"combination": "interaction", "interaction_eta": 1.0, "screen_power": 1.5, "saturation_ceiling": 4.0}
+    },
+    "ceiling_6": {
+      "fixed_name": "threshold_acceleration_power",
+      "values": [0.0, 0.5, 1.0, 1.5],
+      "base_variant": {"combination": "interaction", "interaction_eta": 1.0, "screen_power": 1.5, "saturation_ceiling": 6.0}
+    },
+    "ceiling_8": {
+      "fixed_name": "threshold_acceleration_power",
+      "values": [0.0, 0.5, 1.0, 1.5],
+      "base_variant": {"combination": "interaction", "interaction_eta": 1.0, "screen_power": 1.5, "saturation_ceiling": 8.0}
+    },
+    "ceiling_12": {
+      "fixed_name": "threshold_acceleration_power",
+      "values": [0.0, 0.5, 1.0, 1.5],
+      "base_variant": {"combination": "interaction", "interaction_eta": 1.0, "screen_power": 1.5, "saturation_ceiling": 12.0}
+    }
+  },
+  "baseline_variant_name": "ceiling_8:threshold_acceleration_power=0",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20260803,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_threshold_saturation/report.json",
+    "scores": "results/reopened_hybrid_threshold_saturation/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_threshold_saturation/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_threshold_saturation/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_threshold_saturation/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_threshold_saturation/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_threshold_saturation/family_impacts.csv",
+    "figure": "results/reopened_hybrid_threshold_saturation/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_threshold_saturation/SUMMARY.md"
+  }
+}

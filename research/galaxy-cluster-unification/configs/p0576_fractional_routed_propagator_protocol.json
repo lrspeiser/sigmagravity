@@ -1,0 +1,62 @@
+{
+  "protocol_version": "P0576-FRACTIONAL-ROUTED-PROPAGATOR-0.1.0",
+  "frozen_utc": "2026-08-01T08:10:00Z",
+  "status": "frozen_after_P0575B_before_any_fractional_propagator_score",
+  "trigger": "P0575-P0575B showed that the replicated arrival density worsens raw source-plane consistency under the ordinary Poisson relation in every family split.",
+  "question": "Can the same baryonic destination field predict held-out raw image positions if only its conversion into deflection has a different scale response?",
+  "formula": {
+    "local_field": "alpha_B(k)=-2 i k B100(k)/k^2",
+    "routed_field": "alpha_D,p(k)=(-2 i k D60(k)/k^2)*(k/k0)^(2*(1-p))",
+    "mixture": "alpha=(1-f_alpha*H)*alpha_B+(f_alpha*H)*alpha_D,p",
+    "reference_wavenumber": "k0=2*pi/(60 kpc)",
+    "symmetry_gate": "H=Q90^4/(Q90^4+0.05^4)",
+    "ordinary_Poisson_limit": "p=1",
+    "interpretation": "p>1 emphasizes long-wavelength routed deflection; p<1 emphasizes short-wavelength routed deflection. This breaks the ordinary single-Poisson link between apparent density and deflection and is explicitly a new-physics diagnostic."
+  },
+  "grid": {
+    "fractional_power_p": [0.5, 0.75, 1.0, 1.25, 1.5],
+    "deflection_route_fraction": [0.2, 0.4, 0.6, 0.8, 1.0],
+    "candidates": 25,
+    "padding_factor": 3,
+    "reference_length_kpc": 60.0
+  },
+  "selection": {
+    "calibration_families": ["1", "2"],
+    "heldout_families": ["5", "19"],
+    "rule": "Select one p and f_alpha by minimum source-plane RMS on calibration families only, fitting one positive overall amplitude per candidate; score the locked candidate on held-out families without refit.",
+    "controls": ["local standard-Poisson field", "P0574 p=1 f_alpha=0.8 field", "processed Lenstool map reference"]
+  },
+  "advance_gates": {
+    "heldout_improvement_vs_local_fraction_min": 0.10,
+    "heldout_families_improved_min": 2,
+    "selected_calibration_amplitude_positive": true,
+    "solar_SPARC_exact_standard_limit": true,
+    "selected_not_fraction_boundary": false
+  },
+  "cross_domain": {
+    "Solar": "Q90=0 and C=1, so the routed component is absent and the standard local field remains.",
+    "SPARC": "Deprojected axisymmetric profiles have Q90=0, so the fractional routed propagator changes all 175 rotation curves by exactly zero.",
+    "cluster_map": "The P0574 destination morphology and its 60 kpc spatial extent are held fixed; only the deflection propagator changes."
+  },
+  "inputs": {
+    "p0575_protocol": "configs/p0575_smacs0723_raw_position_protocol.json",
+    "p0575_images": "results/p0575_smacs0723_raw_position/raw_images.csv",
+    "p0573_protocol": "configs/p0573_tidal_arrival_fresh_replication_protocol.json",
+    "p0574_protocol": "configs/p0574_symmetry_gated_arrival_microvariation_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0576_fractional_routed_propagator",
+    "candidate_scores": "candidate_scores.csv",
+    "heldout_family_scores": "heldout_family_scores.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0576_fractional_routed_propagator.png"
+  },
+  "claim_limits": [
+    "A successful fractional power would be phenomenology, not a covariant field equation or derivation from an action.",
+    "The same one cluster and 12 positions are reused; only the family split is prospective to this propagator grid.",
+    "One normalized-map amplitude is still fitted and absolute gravity strength is not predicted.",
+    "The baryon proxy omits gas, intracluster light, and stellar mass-to-light variation.",
+    "The source-plane statistic is not full image-plane root finding."
+  ]
+}

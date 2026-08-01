@@ -1,0 +1,53 @@
+{
+  "protocol_version": "P0586C-SIGNED-METRIC-RESPONSE-0.1.0",
+  "frozen_utc": "2026-08-01T23:35:00Z",
+  "status": "frozen_before_any_signed_metric_response_score",
+  "question": "Can negative tidal orientation or a stronger scalar permeability remove the P0586B MACS1115 conflict, or do the four clusters require incompatible continuous-metric directions?",
+  "locked": {
+    "a0_m_s2": 2.4e-10,
+    "gate_power": 4.0,
+    "component": "absolute ACCEPT gas with sqrt Chandra morphology plus registered F160W stars",
+    "field_pixels_per_axis": 256,
+    "field_half_width_arcsec": 256.0,
+    "point_softening_arcsec": 2.0
+  },
+  "factorial": {
+    "minimum_permittivity": [0.25, 0.5, 0.75, 1.0],
+    "anisotropy_tau": [-1.2, -0.9, -0.6, -0.3, 0.0, 0.3, 0.6, 0.9, 1.2],
+    "smoothing_r80_fraction": [0.2, 0.5, 0.8],
+    "candidate_count": 108
+  },
+  "validation": {
+    "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "screen": "fit each zero-field geometry and source solution with eight starts, hold it fixed, and score every signed candidate on all four clusters",
+    "primary_diagnostic": "count universal candidates that improve every cluster and compare each system's independent optimum and response correlations",
+    "no_exact_refit": "P0586B already showed that the positive selection winner loses a required exact training root; this stage maps the structural sign response only",
+    "spent_disclosure": "all systems are project-spent"
+  },
+  "advance_gates": {
+    "at_least_one_candidate_improves_all_four": true,
+    "common_optimum_same_tau_sign": true,
+    "per_cluster_gravity_parameters": 0
+  },
+  "inputs": {
+    "p0586_protocol": "configs/p0586_continuous_baryonic_metric_protocol.json",
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0586c_signed_metric_response",
+    "screen_scores": "screen_scores.csv",
+    "candidate_scores": "candidate_scores.csv",
+    "per_system_optima": "per_system_optima.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "response_correlations": "response_correlations.csv",
+    "report": "report.json",
+    "figure": "p0586c_signed_metric_response.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This is a fixed-geometry source-plane response diagnostic, not an image-root validation.",
+    "All clusters and the formula family are project-spent.",
+    "The physical baryon and projected-acceleration limitations are unchanged from P0586.",
+    "Per-cluster optima are reported only to diagnose conflict and are never allowed theory parameters."
+  ]
+}

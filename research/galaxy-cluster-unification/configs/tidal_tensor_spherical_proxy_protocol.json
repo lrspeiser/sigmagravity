@@ -1,0 +1,53 @@
+{
+  "protocol_version": "TIDAL-TENSOR-SPHERICAL-PROXY-0.1.0",
+  "frozen_utc": "2026-07-31T07:35:00Z",
+  "status": "frozen_before_spherical_proxy_scoring",
+  "question": "Can a positive-definite one-parameter tidal-response mapping survive galaxy and cluster amplitude tests before full 3-D PDE reconstruction?",
+  "inputs": {
+    "SPARC_predictions": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_rows": "model=fixed_RAR, scenario=invariant, split=outer_holdout",
+    "CLASH_points": "results/clash_lensing_universal_comparison/point_comparison.csv",
+    "a0_m_s2": 1.2e-10,
+    "spherical_radial_Q_eigenvalue": 0.6666666666666666
+  },
+  "formula_families": {
+    "linear": "B=1/[1-kappa*q*S_n], 0<=kappa<1",
+    "reciprocal": "B=1+kappa*q*S_n, kappa>=0",
+    "exponential": "B=exp(kappa*q*S_n), kappa>=0",
+    "gate": "S_n=1/[1+(gbar/a0)^n]",
+    "gate_powers": [1.0, 2.0]
+  },
+  "parameter_grids": {
+    "linear": [0.0, 0.999, 1000],
+    "reciprocal": [0.0, 40.0, 1601],
+    "exponential": [0.0, 8.0, 1601]
+  },
+  "validation": {
+    "folds": 5,
+    "fold_seed": 20260739,
+    "fit_unit": "complete galaxy and complete cluster",
+    "training_objective": "equal weight to mean complete-system squared log10 residual in SPARC and CLASH",
+    "one_kappa": "one value per formula family and gate power, shared by every galaxy and cluster"
+  },
+  "advance_gates": {
+    "SPARC_outer_RMSE_km_s_max": 10.8,
+    "CLASH_equal_cluster_RMSE_dex_max": 0.139,
+    "fold_kappa_relative_range_max": 0.35,
+    "per_object_gravity_parameters": 0
+  },
+  "claim_boundary": [
+    "This is a spherical radial eigenvalue proxy, not a solution of the full anisotropic field equation.",
+    "SPARC nuisance values were previously fitted under fixed RAR and therefore favor the RAR comparator.",
+    "The CLASH target is NFW-deprojected rather than a raw image or shear likelihood.",
+    "Failure of every nonlinear mapping would retire this spherical proxy but not prove that full 3-D field-line redistribution is impossible."
+  ],
+  "outputs": {
+    "directory": "results/tidal_tensor_spherical_proxy",
+    "report": "results/tidal_tensor_spherical_proxy/report.json",
+    "model_scores": "results/tidal_tensor_spherical_proxy/model_scores.csv",
+    "fold_scores": "results/tidal_tensor_spherical_proxy/fold_scores.csv",
+    "predictions": "results/tidal_tensor_spherical_proxy/predictions.csv",
+    "figure": "results/tidal_tensor_spherical_proxy/tidal_tensor_spherical_proxy.png",
+    "summary": "results/tidal_tensor_spherical_proxy/SUMMARY.md"
+  }
+}

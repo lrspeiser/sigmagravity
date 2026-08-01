@@ -1,0 +1,122 @@
+{
+  "report_version": "P0597-SIMPLE-SHAPE-LAW-CROSS-DOMAIN-RESULTS-0.1.0",
+  "status": "complete_posthoc_cross_domain_replay",
+  "selection_disclosure": "The settings are a post-hoc simplification of P0596: q and f are its common fold boundaries, C0=0.6 and w=0.1 are the central recurring gate, and the weak acceleration gate is removed. No result here is a fresh formula holdout.",
+  "parameters": {
+    "q_R80": 3.0,
+    "route_fraction_max": 0.3,
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "acceleration_gate_power": 0.0
+  },
+  "coverage": {
+    "galaxies": 131,
+    "galaxy_outer_points": 968,
+    "clusters": 10,
+    "cluster_holdouts": 3,
+    "lenstool_realizations": 1000
+  },
+  "galaxy": {
+    "metrics": {
+      "simple_shape": {
+        "outer_RMSE_km_s": 9.841443959066897,
+        "outer_equal_galaxy_RMSE_km_s": 10.065125448959725,
+        "outer_mean_residual_km_s": -1.0350562278173234
+      },
+      "fixed_RAR": {
+        "outer_RMSE_km_s": 10.348465773189677,
+        "outer_equal_galaxy_RMSE_km_s": 10.716437036615254,
+        "outer_mean_residual_km_s": 1.742624817150273
+      }
+    },
+    "equal_galaxy_improvement_fraction_vs_fixed_RAR": 0.06077687812004762,
+    "galaxies_improved": 76,
+    "galaxies_improved_fraction": 0.5801526717557252,
+    "folds": [
+      {
+        "fold": 0,
+        "galaxies": 22,
+        "simple_shape_equal_RMSE_km_s": 8.348179928472305,
+        "fixed_RAR_equal_RMSE_km_s": 8.446928396182184,
+        "improvement_fraction": 0.011690458718048413
+      },
+      {
+        "fold": 1,
+        "galaxies": 34,
+        "simple_shape_equal_RMSE_km_s": 8.652011398628533,
+        "fixed_RAR_equal_RMSE_km_s": 9.926273057050434,
+        "improvement_fraction": 0.12837261790988297
+      },
+      {
+        "fold": 2,
+        "galaxies": 23,
+        "simple_shape_equal_RMSE_km_s": 7.899544203851252,
+        "fixed_RAR_equal_RMSE_km_s": 8.404495966695642,
+        "improvement_fraction": 0.06008114761972083
+      },
+      {
+        "fold": 3,
+        "galaxies": 25,
+        "simple_shape_equal_RMSE_km_s": 13.656571093944436,
+        "fixed_RAR_equal_RMSE_km_s": 14.200167294471264,
+        "improvement_fraction": 0.038280971572671074
+      },
+      {
+        "fold": 4,
+        "galaxies": 27,
+        "simple_shape_equal_RMSE_km_s": 10.706517484341735,
+        "fixed_RAR_equal_RMSE_km_s": 11.318298554788052,
+        "improvement_fraction": 0.05405238848267635
+      }
+    ],
+    "folds_improved": 5,
+    "bootstrap_probability_equal_galaxy_MSE_improvement": 0.9852
+  },
+  "cluster": {
+    "holdout_mean_jsd": {
+      "cluster_locked": 0.04535660736641054,
+      "local": 0.17994190895937376,
+      "simple_shape": 0.14478040748174553
+    },
+    "holdout_improvement_fraction_vs_local": 0.1954047374565021,
+    "cluster_locked_improvement_fraction_vs_local": 0.7479375003371177,
+    "cluster_locked_gain_retained_fraction": 0.26125810962604146,
+    "holdout_systems_improved": 3,
+    "holdout_realizations_improved_fraction": 1.0,
+    "holdout_realizations_beating_cluster_locked_fraction": 0.0,
+    "GLAFIC_holdout_mean_jsd": {
+      "cluster_locked": 0.0496128079272436,
+      "local": 0.15482480322302095,
+      "simple_shape": 0.12620711380434668
+    },
+    "GLAFIC_improvement_fraction_vs_local": 0.18483917836763697
+  },
+  "solar": {
+    "uniform_sphere_C_R50_over_R80": 0.8549879733383484,
+    "shape_activation": 0.9275654346047096,
+    "effective_route_fraction": 0.2782696303814129,
+    "diffusion_sigma_m": 1937492010.9266462,
+    "Mercury_exterior_mass_tail_upper_bound": 3.1397468037683963e-121,
+    "planetary_exterior_force_change_upper_bound": 3.1397468037683963e-121,
+    "PPN_Cassini_defined": false,
+    "stellar_interior_tested": false
+  },
+  "gates": {
+    "galaxy_equal_RMSE_improvement_pass": true,
+    "galaxy_fold_count_pass": true,
+    "galaxy_bootstrap_pass": true,
+    "cluster_holdout_improvement_pass": true,
+    "cluster_holdout_system_count_pass": true,
+    "cluster_realization_fraction_pass": true,
+    "cluster_GLAFIC_improvement_pass": true,
+    "solar_exterior_tail_pass": true
+  },
+  "all_interpretation_gates_pass": true,
+  "claim_limits": [
+    "The formula was simplified after inspecting P0596 and is not independently selected or validated.",
+    "The galaxy scalar response remains empirical RAR; this experiment tests whether one conservative spatial layer adds transferable information.",
+    "Cluster scores use normalized morphology and do not test absolute convergence amplitude.",
+    "The cluster baryon proxy omits hot gas, ICL, and stellar mass-to-light variation.",
+    "The Solar calculation uses spherical shell-theorem and finite-source-tail controls, not a covariant PPN metric or stellar-interior test."
+  ]
+}

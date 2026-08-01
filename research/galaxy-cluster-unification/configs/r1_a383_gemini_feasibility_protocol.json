@@ -1,0 +1,110 @@
+{
+  "protocol_version": "R1B2-A383-Gemini-feasibility-0.1",
+  "status": "frozen_before_any_A383_raw_download_or_pixel_inspection",
+  "frozen_utc": "2026-07-27T07:15:00Z",
+  "selection_blind": true,
+  "system": "A383",
+  "archive_object": "Abell 0383",
+  "program_id": "GS-2007B-Q-36",
+  "selection_basis": "A383 is the unique non-disturbed primary pilot with pre-existing structural radial rank 2 in the same-system ledger. It was promoted using only the previously ingested Loubser/Newman/Kaleidoscope/CLASH geometry and archive metadata, without a gravity residual, mass fit, or science pixel.",
+  "pre_pixel_overlap_target": {
+    "existing_numerical_dynamics_support_arcsec": 7.26,
+    "kpc_per_arcsec_flat_lcdm_h0_70_omega_m_0p3": 3.1688907,
+    "preidentified_images_sorted_by_radius": [
+      {"image_id": "1.2", "family_id": "1", "radius_arcsec": 1.5811388300841898},
+      {"image_id": "1.1", "family_id": "1", "radius_arcsec": 2.9154759474226504},
+      {"image_id": "5.1", "family_id": "5", "radius_arcsec": 10.324727599312245, "radius_kpc": 32.717928}
+    ],
+    "minimum_images_inside_accepted_dynamics_support": 3,
+    "minimum_independent_families_inside_accepted_dynamics_support": 2,
+    "frozen_outer_signed_bin_edge_arcsec": 10.5,
+    "frozen_outer_signed_bin_edge_kpc": 33.27335235,
+    "support_rule": "Both signed sides must retain an accepted outer bin whose outer edge is at least 10.5 arcsec. Detector coverage alone and a one-sided bin do not count.",
+    "no_post_pixel_relaxation": true
+  },
+  "science_selection": {
+    "instrument": "GMOS-S",
+    "mode": "long-slit spectroscopy",
+    "selection_rule": "Use every public archive-QA Pass A383 science exposure in this program and no archive-QA Usable science exposure. This rule was fixed before raw download and avoids inspecting or selectively dropping a spectrum.",
+    "excluded_usable_science_frames": [
+      "S20070920S0063.fits",
+      "S20070920S0066.fits",
+      "S20070920S0070.fits"
+    ],
+    "science_filenames": [
+      "S20071013S0038.fits",
+      "S20071013S0039.fits",
+      "S20071016S0037.fits",
+      "S20071016S0039.fits"
+    ],
+    "exact_science_frames": 4,
+    "selected_archive_exposure_seconds": 7513.844243,
+    "minimum_selected_exposure_seconds": 7200.0,
+    "grating": "B600",
+    "central_wavelengths_um": [0.461, 0.466],
+    "slit": "0.75arcsec",
+    "published_slit_position_angle_deg": 2.0,
+    "binning": "2x2",
+    "read_speed": "slow",
+    "gain": "low",
+    "roi": "Full Frame",
+    "archive_qa_required": "Pass"
+  },
+  "calibration_selection": {
+    "installed_gemini_calibration_rule_source": "fits_storage/cal/calibration/calibration_gmos.py installed with DRAGONS 4.2.2",
+    "maximum_bias_separation_days": 90,
+    "maximum_spectroscopy_flat_separation_days": 180,
+    "maximum_arc_separation_days": 365,
+    "exact_bias_download": [
+      "S20071010S0138.fits",
+      "S20071010S0139.fits",
+      "S20071010S0140.fits",
+      "S20071010S0141.fits",
+      "S20071010S0142.fits"
+    ],
+    "exact_flat_download": [
+      "S20071013S0037.fits",
+      "S20071013S0040.fits",
+      "S20071016S0036.fits",
+      "S20071016S0038.fits",
+      "S20071016S0041.fits"
+    ],
+    "exact_arc_download": [
+      "S20071013S0041.fits",
+      "S20071016S0040.fits"
+    ],
+    "science_to_flat_arc_mapping": {
+      "S20071013S0038.fits": ["S20071013S0037.fits", "S20071013S0041.fits"],
+      "S20071013S0039.fits": ["S20071013S0040.fits", "S20071013S0041.fits"],
+      "S20071016S0037.fits": ["S20071016S0036.fits", "S20071016S0040.fits"],
+      "S20071016S0039.fits": ["S20071016S0038.fits", "S20071016S0040.fits"]
+    },
+    "retained_flat_sensitivity_control": "S20071016S0041.fits",
+    "flat_qa_allowed_at_feasibility": ["Pass", "Usable"],
+    "flat_pixel_acceptance_deferred": "Every mapped flat must later pass the frozen numerical uniformity gate; an archive Usable label is not treated as a pixel-level pass.",
+    "arc_qa_required": "Pass",
+    "bias_qa_required": "Pass",
+    "minimum_bias_frames": 5,
+    "required_bpm": "bpm_20030101_gmos-s_EEV_22_full_3amp.fits"
+  },
+  "metadata_gate": {
+    "all_exact_files_must_exist": true,
+    "science_metadata_must_match": true,
+    "calibration_metadata_must_match": true,
+    "calibration_time_windows_must_pass": true,
+    "lens_target_must_match_existing_observable_ledger": true,
+    "raw_download_authorized_only_if_all_pass": true
+  },
+  "failure_policy": "If metadata or calibration feasibility fails, record A383 as a hard archive shortfall and do not download science pixels. If it passes, download only the frozen files and BPM, verify archive MD5/local SHA256/FITS headers, then freeze all numerical reduction, extraction, covariance, and systematic gates before reducing a science frame.",
+  "authorization": {
+    "query_archive_metadata": true,
+    "inspect_existing_observable_ledgers": true,
+    "download_exact_files_after_metadata_gate": true,
+    "inspect_science_pixels": false,
+    "reduce_spectra": false,
+    "fit_stellar_kinematics": false,
+    "infer_dynamical_or_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

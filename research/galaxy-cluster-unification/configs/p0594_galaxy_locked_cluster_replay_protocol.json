@@ -1,0 +1,43 @@
+{
+  "protocol_version": "P0594-GALAXY-LOCKED-CLUSTER-REPLAY-0.1.0",
+  "frozen_utc": "2026-08-01T11:12:00Z",
+  "status": "replay_frozen_after_P0593B_and_after_P0592_ensemble_candidate_scores_before_GLAFIC_and_realization_replay",
+  "question": "How much cluster morphology improvement is retained by the spatial parameters selected only from the P0593B galaxy discovery sample?",
+  "source_protocols": [
+    "configs/p0593b_diffusion_formula_holdout_protocol.json",
+    "configs/p0592_diffusive_propagator_transfer_protocol.json"
+  ],
+  "candidates": {
+    "local": {"q_R80": 0.0, "routed_fraction": 0.0},
+    "galaxy_locked": {"q_R80": 0.75, "routed_fraction": 0.25, "galaxy_gate_power": 4.0},
+    "cluster_locked": {"q_R80": 0.5, "routed_fraction": 1.0}
+  },
+  "cluster_gate_treatment": "Use S=1, the low-acceleration asymptote and maximum possible galaxy-locked route fraction, because the ten-cluster member-light proxy has no physical mass normalization from which to calculate g_b(R80).",
+  "comparisons": [
+    "Lenstool ensemble target for all ten systems",
+    "all 100 Lenstool range-map realizations per system",
+    "independent GLAFIC target map"
+  ],
+  "interpretation_gates": {
+    "holdout_mean_jsd_improvement_fraction_vs_local_min": 0.1,
+    "holdout_systems_improved_vs_local_min": 2,
+    "holdout_realizations_improved_vs_local_fraction_min": 0.7,
+    "holdout_glafic_improvement_fraction_vs_local_min": 0.05,
+    "holdout_cluster_locked_gain_retained_fraction_min": 0.5
+  },
+  "outputs": {
+    "directory": "results/p0594_galaxy_locked_cluster_replay",
+    "system_scores": "system_scores.csv",
+    "uncertainty": "uncertainty.csv",
+    "glafic_scores": "glafic_scores.csv",
+    "report": "report.json",
+    "figure": "p0594_galaxy_locked_cluster_replay.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "P0592 already disclosed the galaxy-locked candidate's ensemble target score, so this is a parameter replay and not an untouched cluster formula holdout.",
+    "Setting the unavailable acceleration gate to S=1 is favorable to the model and gives the largest transferred spatial correction, not a measured cluster activation.",
+    "Normalized map morphology cannot test absolute lensing amplitude or distinguish modified gravity from dark mass.",
+    "The cluster baryon proxy omits hot gas, ICL, and stellar mass-to-light variations."
+  ]
+}

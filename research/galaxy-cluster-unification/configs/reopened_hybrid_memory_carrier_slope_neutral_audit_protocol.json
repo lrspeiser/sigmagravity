@@ -1,0 +1,119 @@
+{
+  "protocol_version": "REOPENED-HYBRID-MEMORY-CARRIER-SLOPE-NEUTRAL-AUDIT-0.1.1",
+  "frozen_utc": "2026-07-31T20:20:00Z",
+  "status": "frozen_before_fixed_parameter_scores",
+  "purpose": "Map a fine neighborhood around carrier exponents that are approximately radially neutral for measured CLASH profiles but remain outward-weighted for steeper SPARC profiles.",
+  "claim_boundary": [
+    "This is a fixed-parameter range-selection experiment, not a full refit or raw-lensing result.",
+    "The preceding dual-cap local-law gravity parameters are copied unchanged into every row so the audit isolates carrier structure.",
+    "The grid uses no galaxy or cluster label; it varies only universal powers in X=F (g_N/g_ref)^p (r/1 kpc)^q.",
+    "Approximate CLASH neutrality is motivated by the measured median slope and is not imposed separately on individual objects.",
+    "Version 0.1.1 removes a shared p=0 default that overwrote the intended base powers in an invalid dry run; those dry-run outputs were overwritten and were never used for selection.",
+    "Every selected survivor still requires bridge refitting and raw-lensing root tests before it can be treated as a cross-domain candidate."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv"
+  },
+  "base_sources": {
+    "pminus0p5": {
+      "report": "results/reopened_hybrid_channel_saturation_fine/report.json",
+      "variant": "rg_2_sigma_fine:sigma_saturation_ceiling=1.5",
+      "settings": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5,
+        "radial_memory_gbar_power": -0.5
+      }
+    },
+    "pminus0p75": {
+      "report": "results/reopened_hybrid_channel_saturation_fine/report.json",
+      "variant": "rg_2_sigma_fine:sigma_saturation_ceiling=1.5",
+      "settings": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5,
+        "radial_memory_gbar_power": -0.75
+      }
+    },
+    "pminus1": {
+      "report": "results/reopened_hybrid_channel_saturation_fine/report.json",
+      "variant": "rg_2_sigma_fine:sigma_saturation_ceiling=1.5",
+      "settings": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5,
+        "radial_memory_gbar_power": -1.0
+      }
+    },
+    "pminus1p25": {
+      "report": "results/reopened_hybrid_channel_saturation_fine/report.json",
+      "variant": "rg_2_sigma_fine:sigma_saturation_ceiling=1.5",
+      "settings": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5,
+        "radial_memory_gbar_power": -1.25
+      }
+    },
+    "pminus1p5": {
+      "report": "results/reopened_hybrid_channel_saturation_fine/report.json",
+      "variant": "rg_2_sigma_fine:sigma_saturation_ceiling=1.5",
+      "settings": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5,
+        "radial_memory_gbar_power": -1.5
+      }
+    }
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"]
+  },
+  "common_memory": {
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 2.0,
+    "radial_memory_radius_power": 0.0,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false
+  },
+  "audit_designs": {
+    "radius_power_fine": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [-1.0, -0.75, -0.5, -0.25, 0.0, 0.25, 0.5]
+    }
+  },
+  "references": {
+    "SPARC_fixed_RAR_outer_RMSE_km_s": 10.681519066526649,
+    "bridge_target_RMSE_dex": 0.139
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1,
+    "audit_mercury_quadrature_points": 4096
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_memory_carrier_slope_neutral_audit/report.json",
+    "scores": "results/reopened_hybrid_memory_carrier_slope_neutral_audit/scores.csv",
+    "family_impacts": "results/reopened_hybrid_memory_carrier_slope_neutral_audit/family_impacts.csv",
+    "summary": "results/reopened_hybrid_memory_carrier_slope_neutral_audit/SUMMARY.md"
+  }
+}

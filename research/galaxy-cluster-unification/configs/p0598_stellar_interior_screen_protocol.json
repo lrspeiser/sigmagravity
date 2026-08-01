@@ -1,0 +1,44 @@
+{
+  "protocol_version": "P0598-STELLAR-INTERIOR-SCREEN-0.1.0",
+  "frozen_utc": "2026-08-01T13:48:00Z",
+  "status": "frozen_after_P0597_exterior_Solar_pass_before_stellar_interior_scores",
+  "question": "What acceleration-gate power is required to keep the simple radial-shape law inactive inside a Solar-density source while retaining its galaxy fit and activation in a physically normalized cluster?",
+  "parent_formula": {
+    "q_R80": 3.0,
+    "route_fraction_max": 0.3,
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "acceleration_gate": "S_n=1/[1+(g_b(R80)/a0)^n], n=0 means S=1"
+  },
+  "gate_powers": [0.0, 1.0, 2.0, 4.0],
+  "data": {
+    "galaxy_protocol": "configs/p0593_diffusion_cross_domain_protocol.json",
+    "macs0416_protocol": "configs/p0589_macs0416_baryon_field_protocol.json",
+    "macs0416_report": "results/p0589_macs0416_baryon_field/report.json",
+    "macs0416_sources": "data/derived/p0589_macs0416_nominal_baryon_sources.csv"
+  },
+  "stellar_proxy": {
+    "profile": "uniform-density sphere with Solar mass and radius",
+    "radial_samples": 1024,
+    "maximum_interior_fractional_force_change": 1e-8
+  },
+  "interpretation_gates": {
+    "galaxy_equal_RMSE_improvement_fraction_min": 0.03,
+    "stellar_maximum_interior_force_change_max": 1e-8,
+    "macs0416_activation_min": 0.99
+  },
+  "outputs": {
+    "directory": "results/p0598_stellar_interior_screen",
+    "gate_scores": "gate_scores.csv",
+    "solar_profiles": "solar_profiles.csv",
+    "report": "report.json",
+    "figure": "p0598_stellar_interior_screen.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "A uniform-density sphere is a screening diagnostic, not a standard solar model or helioseismic likelihood.",
+    "The MACS J0416 activation uses one physically normalized baryon reconstruction and does not prove activation for all ten relative-light cluster maps.",
+    "Galaxy nuisance values and candidate constants were selected in earlier disclosed work; this is a safety comparison, not a fresh formula test.",
+    "Passing this algebraic screen does not supply a covariant metric, PPN parameters, or stellar-evolution calculation."
+  ]
+}

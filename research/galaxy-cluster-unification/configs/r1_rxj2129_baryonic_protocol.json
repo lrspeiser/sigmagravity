@@ -1,0 +1,119 @@
+{
+  "protocol_version": "R1B0-RXJ2129-baryons-0.1",
+  "status": "frozen_partial_reconstruction_protocol",
+  "purpose": "Reconstruct only observable-traceable RX J2129 baryonic inputs on the four frozen dynamics bins, quantify shared covariance, and expose rather than fill missing components before any gravity response is evaluated.",
+  "freeze_date": "2026-07-26",
+  "selection_blinding": {
+    "gravity_residual_inspected": false,
+    "kinematic_values_used_for_selection": false,
+    "lens_residual_used_for_selection": false,
+    "pre_freeze_disclosure": "Before this exact rule was frozen, the catalog row nearest the BCG, four sources within 5 arcsec, and two sources just outside 5 arcsec were inspected. No aggregate satellite mass, membership count, acceleration bound, baryonic profile, or gravity residual had been calculated.",
+    "consequence": "Treat the satellite audit as disclosed engineering rather than a fully blind science result; do not tune membership or uncertainty thresholds after execution."
+  },
+  "inputs": {
+    "tian_table": "data/raw/clash_tian2020/table1.dat",
+    "tian_cds_readme": "data/raw/r1_rxj2129_baryons/tian2020_cds_readme.txt",
+    "tian_source_archive": "data/raw/r1_rxj2129_baryons/tian2020_arxiv_source.tar.gz",
+    "donahue_source_archive": "data/raw/r1_rxj2129_baryons/donahue2014_arxiv_source.tar.gz",
+    "cooke_source_archive": "data/raw/r1_rxj2129_baryons/cooke2016_arxiv_source.tar.gz",
+    "molino_catalog": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_ir_rxj2129_cat-molino.txt",
+    "sdss_petrosian_photometry": "data/raw/r1_rxj2129_sdss/sdss_dr18_rxj2129_bcg_photometry.csv",
+    "f125w_science": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_wfc3ir_rxj2129_f125w_v1_drz.fits",
+    "f125w_weight": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_wfc3ir_rxj2129_f125w_v1_wht.fits",
+    "f814w_science": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_acs_rxj2129_f814w_v1_drz.fits",
+    "f814w_weight": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_acs_rxj2129_f814w_v1_wht.fits",
+    "dynamics_bins": "data/derived/r1_rxj2129_ppxf_xsl_profile_with_covariance.csv"
+  },
+  "cluster": {
+    "name": "RX J2129.7+0005",
+    "catalog_alias": "RXJ2129",
+    "redshift": 0.234,
+    "center_ra_deg": 322.4165,
+    "center_dec_deg": 0.0892138888888889,
+    "cosmology": {
+      "model": "FlatLambdaCDM",
+      "H0_km_s_Mpc": 70.0,
+      "Omega_m": 0.27,
+      "Omega_lambda": 0.73,
+      "lineage": "Tian et al. 2020 adopted cosmology; used only for angular-to-physical coordinate conversion"
+    }
+  },
+  "analysis_bins": {
+    "center_definition": "arithmetic midpoint of each frozen semimajor-axis annulus",
+    "semimajor_edges_arcsec": [
+      [0.0, 0.6],
+      [0.6, 1.5],
+      [1.5, 3.0],
+      [3.0, 5.0]
+    ],
+    "centers_arcsec": [0.3, 1.05, 2.25, 4.0]
+  },
+  "published_bcg_baseline": {
+    "model": "spherical Hernquist",
+    "total_stellar_mass_msun": 581000000000.0,
+    "fractional_mass_sigma": 0.10,
+    "effective_radius_kpc": 41.4,
+    "effective_radius_sigma_kpc": 0.54,
+    "hernquist_scale_relation": "r_h = 0.551 R_e",
+    "enclosed_mass_relation": "M(<r) = M_total r^2 / (r + r_h)^2",
+    "acceleration_relation": "g_star(r) = G M_total / (r + r_h)^2",
+    "nuisance_covariance": "M_total and R_e treated as independent because no covariance is published; both remain shared across every radial bin",
+    "source_interpretation": "The paper text and Equation 6 define the Cooke mass as total M_total. The CDS byte description inconsistently appends M*(<Rad); the primary equation and prose control this reconstruction.",
+    "known_shape_obstruction": "Tian reports a fitted Sersic index n=2.70 but uses a Hernquist approximation to an n=4 profile. No uncertainty on n, PSF model, GALFIT configuration, or BCG/ICL decomposition is published. Cooke derives the mass from MAGPHYS using SDSS ugriz Petrosian and WISE profile-fit photometry. The independently queried DR18 row fixes the r-band Petrosian flux aperture at 2 times 9.373521 arcsec, but deblending, bandpass, and component-assignment differences still require an aperture nuisance when normalizing a new HST BCG/ICL split. This is a numeric published baseline but not a completed BCG-shape likelihood."
+  },
+  "cooke_mass_aperture": {
+    "sdss_objid": 1237663457778729698,
+    "coordinate_offset_arcsec": 0.1183198191405798,
+    "petrosian_radius_r_arcsec": 9.373521,
+    "petrosian_flux_aperture_radius_arcsec": 18.747042,
+    "definition": "All SDSS Petrosian-band fluxes use the circular aperture 2 times the r-band Petrosian radius.",
+    "remaining_nuisance": "Cooke combines SDSS Petrosian fluxes with WISE profile-fit photometry in MAGPHYS, and the SDSS child deblend is not an HST BCG/ICL component assignment. The HST fit must normalize within this measured aperture and propagate a deblend/bandpass sensitivity rather than treating the Cooke mass as an aperture-free total."
+  },
+  "gas_anchor": {
+    "radius_kpc": 14.3,
+    "cumulative_mass_msun": 218000000000.0,
+    "mass_sigma_msun": 7000000000.0,
+    "source": "Donahue et al. 2014 Chandra profile as transcribed by Tian et al. 2020",
+    "allowed_inference": "For radii below the anchor, cumulative gas mass is bounded only by 0 <= Mgas(<r) <= Mgas(<14.3 kpc) under monotonicity. For radii above it, the anchor supplies a lower bound but no finite upper bound.",
+    "forbidden_inference": "Do not fit or assume a beta, power-law, NFW, hydrostatic, or lens-calibrated gas profile from this single anchor."
+  },
+  "satellite_catalog_rule": {
+    "catalog_scope": "all Molino RX J2129 sources retained in the homogeneous 16-band footprint",
+    "bcg_exclusion_radius_arcsec": 1.0,
+    "secure_spectroscopic_quality_max": 1,
+    "secure_spectroscopic_velocity_window_km_s": 4500.0,
+    "velocity_definition": "c * (z_spec - z_cluster) / (1 + z_cluster)",
+    "photometric_possible_member_rule": "When no secure spectroscopic redshift exists, retain the source if the published 95 percent first-peak interval [zb_Min_1, zb_Max_1] contains z_cluster; do not cut on Odds or Chi2.",
+    "secure_spectroscopic_nonmember_rule": "A quality 0 or 1 spectroscopic redshift outside the velocity window overrides a coincident photometric interval.",
+    "stellar_mass_column": "Stell_Mass",
+    "valid_log10_stellar_mass_range": [6.0, 13.0],
+    "provisional_stellar_mass_sigma_dex": 0.30,
+    "mass_uncertainty_status": "conservative project nuisance width, not a catalog-published per-source uncertainty; therefore insufficient for strict readiness",
+    "inner_diagnostic_radius_arcsec": 30.0,
+    "effect_diagnostic": "Report member counts and projected stellar-mass sums. Do not replace off-center galaxies by a centered spherical mass or declare them negligible from a point-mass acceleration singularity."
+  },
+  "component_gates": {
+    "published_bcg_parametric_baseline_numeric": true,
+    "bcg_shape_and_psf_likelihood_complete": false,
+    "icl_profile_numeric_or_observably_below_one_percent": false,
+    "hot_gas_profile_numeric_in_all_four_bins": false,
+    "satellite_profile_and_membership_nuisance_complete_or_observably_below_one_percent": false,
+    "shared_covariance_preserved": true,
+    "complete_baryonic_forward_inputs": false
+  },
+  "outputs": {
+    "bcg_profile": "data/derived/r1_rxj2129_bcg_hernquist_profile.csv",
+    "bcg_covariance": "data/derived/r1_rxj2129_bcg_hernquist_acceleration_covariance.csv",
+    "satellite_candidates": "data/derived/r1_rxj2129_satellite_candidates.csv",
+    "component_inventory": "data/derived/r1_rxj2129_baryonic_component_inventory.csv",
+    "report": "results/r1_rxj2129_baryons/report.json",
+    "diagnostic": "results/r1_rxj2129_baryons/baryonic_diagnostics.png"
+  },
+  "authorization": {
+    "read_kinematic_bin_geometry": true,
+    "read_kinematic_values_or_residuals": false,
+    "read_lens_residuals": false,
+    "fit_gravity_response": false,
+    "set_strict_r1_ready": false
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "protocol_version": "ARC-APOGEE-CROSS-DOMAIN-0.1.0",
+  "frozen_utc": "2026-07-31T23:55:00Z",
+  "status": "exploratory_grid_frozen_before_arc_apogee_scores",
+  "question": "Which small changes to an extent-gated gravity-arc residence law most affect galaxy rotation, cluster lens morphology, and Solar-System screening?",
+  "law": {
+    "equation": "g=gbar*[1+q*s(C)*x^alpha/(1+(x/zeta)^alpha)/(1+(gbar/a0)^n)]",
+    "x": "r/Rb",
+    "concentration": "C=R50/R80",
+    "cluster_gate": "s(C)=1/[1+exp(-4.77637*(C-0.648526))]",
+    "interpretation": "q is a universal path-residence strength; alpha is accumulation; zeta*Rb is the apogee/saturation scale; n is the high-acceleration screen",
+    "screen_a0_m_s2": 1.2e-10
+  },
+  "galaxy_test": {
+    "input_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "input_model": "fixed_RAR",
+    "input_scenario": "invariant",
+    "morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "nuisance_policy": "Use the fixed-RAR inner-fitted baryonic, distance, and inclination nuisances unchanged for every arc variant",
+    "universal_q_fit": "Fit one q to all inner points using equal-galaxy mean squared velocity error; never fit q per galaxy",
+    "q_bounds": [0.0, 1000.0],
+    "scale_modes": ["baryon_r80", "mass_radius", "fixed_200kpc"],
+    "gate_modes": ["none", "cluster_logistic_soft", "cluster_logistic", "cluster_logistic_sharp"],
+    "alpha_values": [0.75, 1.0, 1.25],
+    "apogee_ratios": [0.5, 1.0, 2.0, 4.0, 1000000.0],
+    "screen_exponents": [1.0, 2.0, 3.0],
+    "primary_candidate": {"scale_mode": "baryon_r80", "gate_mode": "cluster_logistic", "alpha": 1.0, "apogee_ratio": 2.0, "screen_exponent": 2.0},
+    "mass_radius_control": "Rb=sqrt(G*Mproxy/a0), which exposes whether the fit requires the same square-root mass normalization underlying deep-MOND/RAR scaling"
+  },
+  "cluster_shape_test": {
+    "acquisition_protocol": "configs/gravity_arc_fresh_sample_protocol.json",
+    "input_audit": "results/gravity_arc_fresh_sample_input_audit/report.json",
+    "sources": "results/gravity_arc_fresh_sample_input_audit/sources.csv",
+    "systems": "results/gravity_arc_fresh_sample_input_audit/systems.csv",
+    "morphology": "results/gravity_arc_fresh_sample/source_morphology.csv",
+    "methods": ["lenstool_ensemble_mean", "glafic_best"],
+    "gate_modes": ["none", "cluster_logistic_soft", "cluster_logistic", "cluster_logistic_sharp"],
+    "return_length_over_R80": [0.25, 0.36, 0.5],
+    "width_over_R80": [0.18, 0.23, 0.28],
+    "deposition_modes": ["endpoint", "chord", "outward_arc_0.5", "outward_arc_1", "outward_arc_2"],
+    "interpretation": "Same-data descriptive replay against normalized standard-GR kappa maps; it ranks geometry changes but cannot validate the kernel or its absolute q"
+  },
+  "solar_test": {
+    "conservative_solar_extent_gate": 1.0,
+    "Cassini_fractional_force_proxy_max": 2.3e-5,
+    "Earth_fractional_force_proxy_max": 1e-10,
+    "Mercury_supplementary_precession_absolute_max_mas_per_century": 3.1,
+    "PPN_gamma_assumption": 1.0,
+    "limitation": "First-order force and perihelion proxies, not a multi-planet ephemeris or derived PPN calculation"
+  },
+  "outputs": {
+    "directory": "results/arc_apogee_cross_domain",
+    "galaxy_scores": "galaxy_variant_scores.csv",
+    "galaxy_predictions": "galaxy_point_predictions.csv",
+    "galaxy_properties": "galaxy_arc_properties.csv",
+    "cluster_scores": "cluster_variant_scores.csv",
+    "cluster_impacts": "cluster_parameter_impacts.csv",
+    "solar_scores": "solar_variant_scores.csv",
+    "parameter_impacts": "cross_domain_parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "arc_apogee_cross_domain.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The formula family and extent gate were proposed after viewing the ten cluster maps, so all rankings are exploratory.",
+    "SPARC uses fixed nuisances inherited from RAR rather than independently refitting each arc variant; this isolates formula response but is not a final likelihood comparison.",
+    "The galaxy R50/R80 values are force-equivalent baryonic profile proxies within the observed radial range.",
+    "Cluster tests use normalized reconstructed kappa morphology and do not determine absolute lensing strength.",
+    "Solar checks impose zero gravitational slip and are phenomenological proxies."
+  ]
+}

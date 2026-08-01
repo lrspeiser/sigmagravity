@@ -1,0 +1,115 @@
+{
+  "protocol_version": "SPHERICAL-SPACETIME-CAVITY-0.1.0",
+  "frozen_utc": "2026-07-29T23:55:00Z",
+  "status": "frozen_before_spherical_spacetime_scores",
+  "question": "Can gravity flowing through a closed three-dimensional spatial geometry, or around matter-exclusion cavities, reproduce galaxy and cluster observables with universal constants?",
+  "interpretations": {
+    "closed_3sphere": {
+      "equation": "g=g_bar [x/sin(x)]^2, x=r/L",
+      "basis": "Gauss flux spreads over A(r)=4 pi L^2 sin^2(r/L) rather than 4 pi r^2.",
+      "validity": "Every evaluated radius must remain below 0.95 pi L."
+    },
+    "local_mass_curvature": {
+      "equation": "g/g_bar=E(x_total)/E(x_GR), E(x)=[x/sin(x)]^2, x_total^2=(g_bar r/c^2)[1+lambda W], W=1 or [1+(g_bar/a_screen)^n]^-1",
+      "basis": "Ordinary GR-scale curvature is the baseline rather than an anomalous Solar-System force. Extra local positive curvature is tied to the dimensionless baryonic potential; the screened version is a phenomenological local-sphere closure because K varies with radius.",
+      "pilot_amendment": "Frozen after the first execution exposed that counting x_GR itself as a deviation incorrectly made the GR-strength control fail the extra-force Earth gate; corrected scores measure only curvature beyond that baseline."
+    },
+    "hard_cavity_flow": {
+      "equation": "u_r/U=[1-(a/r)^3]cos(theta); u_theta/U=-[1+(a/r)^3/2]sin(theta)",
+      "basis": "Exact incompressible potential flow around an impermeable sphere.",
+      "isotropic_RMS": "sqrt[1+0.5(a/r)^6]",
+      "best_axis_upper_bound": "1+0.5(a/r)^3"
+    }
+  },
+  "models": {
+    "closed_global_cluster_safe": {
+      "parameters": ["log10_L_kpc"],
+      "bounds": [[3.04, 7.0]],
+      "eligible_to_advance": true
+    },
+    "closed_global_galaxy_only_diagnostic": {
+      "parameters": ["log10_L_kpc"],
+      "bounds": [[1.42, 7.0]],
+      "eligible_to_advance": false
+    },
+    "local_GR_curvature": {
+      "parameters": [],
+      "bounds": [],
+      "eligible_to_advance": true
+    },
+    "local_amplified_unscreened": {
+      "parameters": ["log10_lambda"],
+      "bounds": [[-12.0, 12.0]],
+      "eligible_to_advance": true
+    },
+    "local_amplified_screened": {
+      "parameters": ["log10_lambda", "log10_a_screen_m_s2", "screen_power_n"],
+      "bounds": [[0.0, 12.0], [-14.0, -8.0], [0.5, 8.0]],
+      "eligible_to_advance": true
+    }
+  },
+  "fit": {
+    "target": "fixed-RAR velocity with already fixed nuisance parameters",
+    "training_radii": "inner_train only",
+    "validation_radii": "outer_holdout only",
+    "galaxies": 131,
+    "inner_points": 2066,
+    "outer_points": 968,
+    "galaxy_folds": 5,
+    "fold_seed": 20260804,
+    "differential_evolution_maxiter": 140,
+    "differential_evolution_popsize": 12,
+    "boundary_fraction_tolerance": 0.005
+  },
+  "domain": {
+    "maximum_cluster_radius_kpc": 3000.0,
+    "maximum_closed_sphere_x": 2.9845130209103035
+  },
+  "solar_gates": {
+    "maximum_fractional_change_limb_to_Saturn": 2.3e-5,
+    "maximum_Earth_orbit_fractional_change": 1.0e-10,
+    "penalty_coefficient": 1000000.0
+  },
+  "advance_gates": {
+    "outer_RMSE_relative_to_fixed_RAR_max": 1.10,
+    "outer_equal_galaxy_RMSE_relative_to_fixed_RAR_max": 1.10,
+    "BCG_RMSE_dex_max": 0.17,
+    "cluster_RMSE_dex_max": 0.17,
+    "solar_pass": true,
+    "cluster_domain_pass": true,
+    "no_parameter_at_boundary": true
+  },
+  "raw_lensing": {
+    "selection_labels": ["MACS0329", "MACS0429"],
+    "validation_labels": ["MACS1115", "MACS1931"],
+    "stress_labels": ["RXJ1347", "RXJ2129"],
+    "maximum_radius_kpc": 3000.0,
+    "starts_per_model": 6,
+    "maximum_function_evaluations": 2500,
+    "rule": "Transfer every galaxy-qualified model unchanged. If none qualifies, transfer the lowest outer-RMSE exact candidate as a disclosed failure diagnostic; fit geometry only."
+  },
+  "inputs": {
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_report": "results/sparc_independent_nuisance_refit/report.json",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "cluster_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "base_multicluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "base_multicluster_report": "results/unbounded_running_multicluster_raw/report.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat"
+  },
+  "outputs": {
+    "galaxy_report": "results/spherical_spacetime_cavity/galaxy_report.json",
+    "galaxy_predictions": "results/spherical_spacetime_cavity/galaxy_predictions.csv",
+    "figure": "results/spherical_spacetime_cavity/spherical_spacetime.png",
+    "raw_lensing_report": "results/spherical_spacetime_cavity/raw_lensing_report.json",
+    "raw_lensing_predictions": "results/spherical_spacetime_cavity/raw_lensing_predictions.csv",
+    "summary": "results/spherical_spacetime_cavity/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Closed spatial geometry is not the same thing as a material ether or a literal hole; the two interpretations are tested separately.",
+    "The hard-cavity formula is an exact potential-flow analogy, not a derivation of gravity from a microscopic spacetime medium.",
+    "The screened local-curvature formula is phenomenological and is not an exact solution on a space whose curvature varies with radius.",
+    "The raw lens uses a spherical baryonic profile with pseudo-ellipticity and shear; explicit member-galaxy and gas maps are absent."
+  ]
+}

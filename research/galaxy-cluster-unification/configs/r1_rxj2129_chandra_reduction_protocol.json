@@ -1,0 +1,110 @@
+{
+  "protocol_version": "R1B4-RXJ2129-Chandra-reduction-0.1",
+  "status": "frozen_before_ciao_reprocessing_or_calibrated_product_inspection",
+  "purpose": "Create and audit current-calibration Chandra event, exposure, PSF, blank-sky, and response products for RX J2129 without fitting a gas-density profile, a gas mass, or any gravity response.",
+  "freeze_date": "2026-07-26",
+  "disclosure": "Before this freeze, the archive event-adequacy audit had passed on the standard evt2 products: ObsIDs 9370 and 552 provide 39.604096 ks, 1434 combined 0.7-2.0 keV events inside 5 arcsec, four raw inner-annulus counts of 114, 275, 513, and 532, a 0.372-arcsec soft centroid offset, and a 0.243-arcsec smoothed-peak offset. No CIAO-reprocessed event count, flare-filtered exposure, blank-sky scale, center PSF size, response, calibrated spectrum, gas-density parameter, gas mass, gravity residual, or independent lens residual had been inspected.",
+  "software": {
+    "ciao_required": "4.18",
+    "caldb_required": "4.12.4",
+    "environment": "/home/henry/ciao-4.18",
+    "installation_source": "official CXC conda channel with conda-forge dependencies"
+  },
+  "inputs": {
+    "archive_root": "data/raw/r1_rxj2129_chandra",
+    "obsids": [552, 9370],
+    "archive_provenance": "data/raw/r1_rxj2129_chandra/provenance.json",
+    "event_adequacy_report": "results/r1_rxj2129_chandra_event_audit/report.json"
+  },
+  "frozen_center": {
+    "ra_deg": 322.41651,
+    "dec_deg": 0.08923,
+    "origin": "same BCG center used by the dynamics, baryonic, and lens-observable protocols"
+  },
+  "reprocessing": {
+    "tool": "chandra_repro",
+    "check_vf_pha": true,
+    "pix_adj": "EDSER",
+    "bad_pixel_update": "current CALDB",
+    "afterglow_and_status_filtering": "chandra_repro defaults recorded by tool logs",
+    "process_observations_separately": true
+  },
+  "flare_filter": {
+    "energy_keV": [2.5, 7.0],
+    "source_exclusion_annulus_arcsec": [120.0, 480.0],
+    "time_bin_seconds": 259.28,
+    "tool": "deflare",
+    "method": "clean",
+    "nsigma": 3.0,
+    "apply_gti_before_blank_sky_generation": true
+  },
+  "blank_sky": {
+    "tool": "blanksky",
+    "weight_method": "particle",
+    "input_is_unfiltered_in_energy": true,
+    "input_includes_flare_gti": true,
+    "scaling_source": "per-chip BKGSCALn keywords computed by blanksky",
+    "spectral_caveat": "Retain unscaled background events and BKGSCALn/AREASCAL metadata; do not background-subtract a PHA with modified AREASCAL. The later Poisson likelihood must model source and background counts explicitly.",
+    "soft_galactic_component": "required nuisance in the subsequent spectral likelihood, not estimated during reduction"
+  },
+  "imaging": {
+    "soft_band_keV": [0.7, 2.0],
+    "broad_band_keV": [0.7, 7.0],
+    "native_pixel_arcsec": 0.492,
+    "fluximage_binsize": 1,
+    "psf_energy_keV": 1.5,
+    "psf_encircled_counts_fraction": 0.9,
+    "point_source_detection": {
+      "tool": "wavdetect",
+      "band_keV": [0.7, 7.0],
+      "scales_pixels": [1, 2, 4, 8],
+      "sigthresh": 1e-6,
+      "central_exclusion_arcsec_for_later_mask": 10.0,
+      "note": "The source list is a preprocessing product. The central 10 arcsec is never masked as a point source; any unresolved central source is a PSF-convolved nuisance in the later spatial likelihood."
+    }
+  },
+  "spectra": {
+    "energy_keV": [0.7, 7.0],
+    "global_region_arcsec": [0.0, 60.0],
+    "diagnostic_annuli_arcsec": [[0.0, 5.0], [5.0, 15.0], [15.0, 30.0], [30.0, 60.0]],
+    "tool": "specextract",
+    "extended_source_weighted_responses": true,
+    "grouping": "none",
+    "minimum_counts_for_any_independent_temperature_annulus": 1500,
+    "rule": "The diagnostic annuli are not automatically independent temperature bins. If an annulus has fewer than 1500 source-band counts, it may constrain the projected spatial count likelihood but must share temperature/emissivity parameters or be combined under a separately frozen spectral model."
+  },
+  "reduction_advance_thresholds": {
+    "both_observations_reprocessed": true,
+    "minimum_retained_exposure_fraction_each_observation": 0.90,
+    "minimum_combined_retained_exposure_ks": 35.0,
+    "blank_sky_product_and_finite_positive_particle_scale_each_observation": true,
+    "allowed_blank_sky_particle_scale_interval": [0.5, 2.0],
+    "finite_positive_center_exposure_each_observation": true,
+    "maximum_center_r90_psf_arcsec_each_observation": 5.0,
+    "valid_global_pha_arf_rmf_each_observation": true,
+    "minimum_combined_global_0p7_7keV_events": 3000,
+    "maximum_leave_one_observation_inner_soft_fractional_difference": 0.35,
+    "comparison_annuli_arcsec": [[0.0, 1.0], [1.0, 2.0], [2.0, 3.5], [3.5, 5.0]],
+    "comparison_definition": "For each inner annulus compare exposure-normalized soft counts after blank-sky scaling; use |rate_552-rate_9370| divided by their inverse-variance pooled rate. The threshold is an instrument/reduction compatibility screen, not a gas-model fit."
+  },
+  "failure_rules": {
+    "software_or_calibration_mismatch": "Stop; do not substitute standard archive evt2 products for calibrated inference.",
+    "exposure_or_blank_sky_failure": "Stop the gas reconstruction and preserve the public-data/reduction shortfall.",
+    "psf_failure": "Do not claim four independent inner gas nodes; require a lower-dimensional PSF-forward spatial model or another pilot.",
+    "observation_compatibility_failure": "Do not coadd the observations. Diagnose time-dependent background, astrometry, and PSF effects under a separately frozen protocol.",
+    "pass": "Freeze the projected spatial-plus-spectral Poisson gas model before inspecting any fitted density or mass. Passing reduction alone does not authorize a gas profile or Weyl/dynamical response."
+  },
+  "outputs": {
+    "reduction_root": "data/derived/r1_rxj2129_chandra_reduction",
+    "audit_ledger": "data/derived/r1_rxj2129_chandra_reduction_audit.csv",
+    "audit_report": "results/r1_rxj2129_chandra_reduction/report.json",
+    "diagnostic": "results/r1_rxj2129_chandra_reduction/reduction_audit.png"
+  },
+  "authorization": {
+    "ciao_reprocessing_and_calibration_audit": true,
+    "gas_density_or_mass_fit": false,
+    "gravity_response_fit": false,
+    "weyl_response_reconstruction": false,
+    "strict_r1_ready": false
+  }
+}

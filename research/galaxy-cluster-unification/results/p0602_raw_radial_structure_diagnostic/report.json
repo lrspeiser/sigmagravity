@@ -1,0 +1,127 @@
+{
+  "report_version": "P0602-RAW-RADIAL-STRUCTURE-DIAGNOSTIC-RESULTS-0.1.0",
+  "status": "complete_posthoc_spent_data_diagnostic",
+  "coverage": {
+    "variants": 17,
+    "training_images": 15,
+    "spent_heldout_images": 7
+  },
+  "baseline": {
+    "model": "P0599_baseline",
+    "training_RMS_arcsec": 0.49524262462841695,
+    "heldout_RMS_arcsec": 1.8086634342181922,
+    "training_roots_converged": 15,
+    "heldout_roots_converged": 7,
+    "heldout_all_roots_converged": true,
+    "maximum_heldout_residual_arcsec": 2.8511058027961935,
+    "heldout_reduced_chi2": 42.45890850683187,
+    "optimizer_success": true,
+    "optimizer_cost": 48.157541790907835,
+    "any_geometry_near_bound": false,
+    "variant_id": "P0599_baseline",
+    "family": "baseline",
+    "A": 3.0,
+    "threshold": 1e-06,
+    "power": 4.0,
+    "carrier": "shape",
+    "eta": 0.0
+  },
+  "training_selected_variant": {
+    "model": "power_p2",
+    "training_RMS_arcsec": 0.44274432832614424,
+    "heldout_RMS_arcsec": 2.06731723294097,
+    "training_roots_converged": 15,
+    "heldout_roots_converged": 7,
+    "heldout_all_roots_converged": true,
+    "maximum_heldout_residual_arcsec": 2.987352142862185,
+    "heldout_reduced_chi2": 55.47119964689113,
+    "optimizer_success": true,
+    "optimizer_cost": 37.96257898029628,
+    "any_geometry_near_bound": false,
+    "variant_id": "power_p2",
+    "family": "power",
+    "A": 3.0,
+    "threshold": 1e-06,
+    "power": 2.0,
+    "carrier": "shape",
+    "eta": 0.0
+  },
+  "parameter_impacts": [
+    {
+      "family": "amplitude",
+      "variants_including_baseline": 4,
+      "finite_variants_including_baseline": 3,
+      "failed_exact_root_variants": 1,
+      "training_RMS_span_arcsec": 0.5946192162825039,
+      "heldout_RMS_span_arcsec": 2.3093856313969363,
+      "best_training_variant": "P0599_baseline",
+      "best_training_RMS_arcsec": 0.49524262462841695,
+      "corresponding_spent_heldout_RMS_arcsec": 1.8086634342181922
+    },
+    {
+      "family": "radial_power",
+      "variants_including_baseline": 5,
+      "finite_variants_including_baseline": 2,
+      "failed_exact_root_variants": 3,
+      "training_RMS_span_arcsec": 0.17600372579486723,
+      "heldout_RMS_span_arcsec": 1.21913996452635,
+      "best_training_variant": "P0599_baseline",
+      "best_training_RMS_arcsec": 0.49524262462841695,
+      "corresponding_spent_heldout_RMS_arcsec": 1.8086634342181922
+    },
+    {
+      "family": "carrier",
+      "variants_including_baseline": 5,
+      "finite_variants_including_baseline": 2,
+      "failed_exact_root_variants": 3,
+      "training_RMS_span_arcsec": 0.1609226526840879,
+      "heldout_RMS_span_arcsec": 0.0001925625875696113,
+      "best_training_variant": "P0599_baseline",
+      "best_training_RMS_arcsec": 0.49524262462841695,
+      "corresponding_spent_heldout_RMS_arcsec": 1.8086634342181922
+    },
+    {
+      "family": "threshold",
+      "variants_including_baseline": 4,
+      "finite_variants_including_baseline": 3,
+      "failed_exact_root_variants": 1,
+      "training_RMS_span_arcsec": 0.06708806878552176,
+      "heldout_RMS_span_arcsec": 1.402605516346631,
+      "best_training_variant": "P0599_baseline",
+      "best_training_RMS_arcsec": 0.49524262462841695,
+      "corresponding_spent_heldout_RMS_arcsec": 1.8086634342181922
+    },
+    {
+      "family": "power",
+      "variants_including_baseline": 3,
+      "finite_variants_including_baseline": 3,
+      "failed_exact_root_variants": 0,
+      "training_RMS_span_arcsec": 0.05249829630227271,
+      "heldout_RMS_span_arcsec": 0.7159109465904434,
+      "best_training_variant": "power_p2",
+      "best_training_RMS_arcsec": 0.44274432832614424,
+      "corresponding_spent_heldout_RMS_arcsec": 2.06731723294097
+    }
+  ],
+  "field_context": {
+    "r80_kpc": 504.64375503118424,
+    "shape_gate": 0.7399562389719418,
+    "source_acceleration_gate": 0.9997081134494022,
+    "image_annulus_kpc": [
+      15.8,
+      76.5
+    ]
+  },
+  "interpretation": {
+    "selection_used_training_images_only": true,
+    "heldout_is_fresh": false,
+    "better_training_fit_can_be_claimed_as_prediction": false,
+    "next_required_test": "freeze a physically motivated radial or two-dimensional carrier and replay it on another raw cluster"
+  },
+  "claim_limits": [
+    "Every RX J2129 image has now been inspected; heldout scores are diagnostic and cannot confirm a selected variant.",
+    "One optimization start is sufficient for local response ranking around the P0601 geometry but not a global model comparison.",
+    "The carriers are phenomenological probes of field structure, not derived field equations.",
+    "Any promising carrier must be frozen and tested on another raw cluster before promotion."
+  ]
+}

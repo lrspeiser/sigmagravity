@@ -1,0 +1,50 @@
+{
+  "protocol_version": "UNBOUNDED-RUNNING-SENSITIVITY-0.3.0",
+  "frozen_utc": "2026-07-29T08:12:00Z",
+  "status": "frozen_before_sensitivity_scores",
+  "question": "Is the apparent galaxy-cluster compromise stable across fixed power sharpness and additive mixing values?",
+  "bridge_folds": 5,
+  "bridge_seed": 20260731,
+  "optimization": {
+    "differential_evolution_maxiter": 110,
+    "differential_evolution_popsize": 10,
+    "Cassini_violation_penalty": 1000000.0
+  },
+  "solar_gates": {
+    "maximum_fractional_coupling_change_limb_to_Saturn": 2.3e-5,
+    "maximum_Earth_orbit_fractional_change": 1e-10
+  },
+  "families": {
+    "curvature_power": {
+      "parameters": ["log10_T_star_s2", "p", "epsilon"],
+      "free_indices": [0, 2],
+      "free_bounds": [[-38.0, -24.0], [0.0001, 3.0]],
+      "fixed_index": 1,
+      "fixed_name": "p",
+      "fixed_values": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 12.0]
+    },
+    "curvature_additive_power": {
+      "parameters": ["log10_T_star_s2", "p", "epsilon", "alpha"],
+      "free_indices": [0, 1, 2],
+      "free_bounds": [[-38.0, -24.0], [0.05, 12.0], [0.00001, 3.0]],
+      "fixed_index": 3,
+      "fixed_name": "alpha",
+      "fixed_values": [0.3, 1.0, 3.0, 10.0, 30.0, 100.0, 300.0]
+    }
+  },
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "bridge_reference_report": "results/rar_sharp_coherence_rg_sweep/report.json",
+    "SPARC_protocol": "configs/sparc_independent_nuisance_refit_protocol.json",
+    "SPARC_reference_report": "results/sparc_independent_nuisance_refit/report.json",
+    "SPARC_raw": "data/raw/sparc",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv"
+  },
+  "outputs": {
+    "report": "results/unbounded_running_sensitivity/report.json",
+    "bridge_predictions": "results/unbounded_running_sensitivity/bridge_predictions.csv",
+    "scores": "results/unbounded_running_sensitivity/scores.csv",
+    "figure": "results/unbounded_running_sensitivity/unbounded_running_sensitivity.png",
+    "summary": "results/unbounded_running_sensitivity/SUMMARY.md"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "protocol_version": "CLASH-STELLAR-MORPHOLOGY-ACQUISITION-0.1.0",
+  "frozen_utc": "2026-07-31T18:12:00Z",
+  "status": "frozen_before_f160w_download_or_pixel_inspection",
+  "purpose": "Acquire one common residual-blind stellar-light observable for the four raw-lensing clusters before defining or scoring any angular-gravity response.",
+  "selection_boundary": [
+    "The four systems were fixed by the existing raw-lensing transfer and were not selected from HST morphology or lens residuals.",
+    "F160W was selected before pixel inspection because it is the reddest common CLASH band, traces old stellar light more directly than the optical bands, and has a public science and inverse-variance mosaic for every system.",
+    "No convergence, shear, magnification, dark-matter, or lens-model map is an allowed input.",
+    "All known multiple-image pixels must be masked before a light template is constructed; held-out images receive the same mask as training images.",
+    "This acquisition cannot authorize a gravity result. A separate morphology-response protocol must be frozen after WCS/coverage validation and before any lens score is computed."
+  ],
+  "official_archive": {
+    "provider": "MAST/STScI CLASH high-level science products",
+    "collection_page": "https://archive.stsci.edu/prepds/clash/",
+    "pixel_scale_mas": 65,
+    "filter": "F160W",
+    "science_suffix": "drz",
+    "weight_suffix": "wht",
+    "weight_semantics": "inverse variance",
+    "wcs_rule": "Use the distortion-corrected linear WCS and wcs_world2pix/wcs_pix2world; do not re-apply SIP distortion."
+  },
+  "systems": [
+    {
+      "label": "MACS0329",
+      "system": "MACS J0329.7-0211",
+      "archive_slug": "macs0329",
+      "center_ra_deg": 52.4232083333,
+      "center_dec_deg": -2.1962027778,
+      "lens_redshift": 0.450,
+      "member_catalog": "data/raw/r1_clash_caminha2019/MACSJ0329-P2-shear_mcmc/members_lenstool_v2.dat",
+      "science": {
+        "url": "https://archive.stsci.edu/missions/hlsp/clash/macs0329/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_macs0329_f160w_v1_drz.fits",
+        "filename": "hlsp_clash_hst_wfc3ir_macs0329_f160w_v1_drz.fits",
+        "content_length": 100048320,
+        "etag": "\"5f69dc0-4b6be2171f300\""
+      },
+      "weight": {
+        "url": "https://archive.stsci.edu/missions/hlsp/clash/macs0329/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_macs0329_f160w_v1_wht.fits",
+        "filename": "hlsp_clash_hst_wfc3ir_macs0329_f160w_v1_wht.fits",
+        "content_length": 100048320,
+        "etag": "\"5f69dc0-4b6be21813540\""
+      }
+    },
+    {
+      "label": "MACS0429",
+      "system": "MACS J0429.6-0253",
+      "archive_slug": "macs0429",
+      "center_ra_deg": 67.4,
+      "center_dec_deg": -2.8852166667,
+      "lens_redshift": 0.399,
+      "member_catalog": "data/raw/r1_clash_caminha2019/MACSJ0429-P1_mcmc/members_lenstool_v1.dat",
+      "science": {
+        "url": "https://archive.stsci.edu/missions/hlsp/clash/macs0429/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_macs0429_f160w_v1_drz.fits",
+        "filename": "hlsp_clash_hst_wfc3ir_macs0429_f160w_v1_drz.fits",
+        "content_length": 100048320,
+        "etag": "\"5f69dc0-4d98b6b234e00\""
+      },
+      "weight": {
+        "url": "https://archive.stsci.edu/missions/hlsp/clash/macs0429/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_macs0429_f160w_v1_wht.fits",
+        "filename": "hlsp_clash_hst_wfc3ir_macs0429_f160w_v1_wht.fits",
+        "content_length": 100048320,
+        "etag": "\"5f69dc0-4d98b6b234e00\""
+      }
+    },
+    {
+      "label": "MACS1115",
+      "system": "MACS J1115.9+0129",
+      "archive_slug": "macs1115",
+      "center_ra_deg": 168.9662916667,
+      "center_dec_deg": 1.4986111111,
+      "lens_redshift": 0.355,
+      "member_catalog": "data/raw/r1_clash_caminha2019/MACSJ1115-P1_mcmc/members_lenstool_v2.dat",
+      "science": {
+        "url": "https://archive.stsci.edu/missions/hlsp/clash/macs1115/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_macs1115_f160w_v1_drz.fits",
+        "filename": "hlsp_clash_hst_wfc3ir_macs1115_f160w_v1_drz.fits",
+        "content_length": 100048320,
+        "etag": "\"5f69dc0-4be1aff454700\""
+      },
+      "weight": {
+        "url": "https://archive.stsci.edu/missions/hlsp/clash/macs1115/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_macs1115_f160w_v1_wht.fits",
+        "filename": "hlsp_clash_hst_wfc3ir_macs1115_f160w_v1_wht.fits",
+        "content_length": 100048320,
+        "etag": "\"5f69dc0-4be1aff454700\""
+      }
+    },
+    {
+      "label": "MACS1931",
+      "system": "MACS J1931.8-2635",
+      "archive_slug": "macs1931",
+      "center_ra_deg": 292.9570833333,
+      "center_dec_deg": -26.5756166667,
+      "lens_redshift": 0.352,
+      "member_catalog": "data/raw/r1_clash_caminha2019/MACSJ1931-P2_circular_mcmc/members_lenstool_v2.dat",
+      "science": {
+        "url": "https://archive.stsci.edu/missions/hlsp/clash/macs1931/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_macs1931_f160w_v1_drz.fits",
+        "filename": "hlsp_clash_hst_wfc3ir_macs1931_f160w_v1_drz.fits",
+        "content_length": 100048320,
+        "etag": "\"5f69dc0-4c86e8b3f93c0\""
+      },
+      "weight": {
+        "url": "https://archive.stsci.edu/missions/hlsp/clash/macs1931/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_macs1931_f160w_v1_wht.fits",
+        "filename": "hlsp_clash_hst_wfc3ir_macs1931_f160w_v1_wht.fits",
+        "content_length": 100048320,
+        "etag": "\"5f69dc0-4c86e8bc8e800\""
+      }
+    }
+  ],
+  "shared_inputs": {
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "radial_baryonic_profile": "data/raw/clash_tian2020/fig2.dat"
+  },
+  "outputs": {
+    "directory": "data/raw/clash_stellar_morphology_f160w",
+    "provenance": "data/raw/clash_stellar_morphology_f160w/provenance.json"
+  }
+}

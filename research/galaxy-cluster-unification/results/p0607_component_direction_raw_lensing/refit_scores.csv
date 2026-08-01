@@ -1,0 +1,4 @@
+role,component_id,angular_strength,training_RMS_arcsec,training_roots_converged,heldout_RMS_arcsec,heldout_roots_converged,optimizer_cost
+P0599_no_route_16_start_reference,none,0.0,0.49524262462844243,15,1.8086634342147614,7,48.15754179125845
+positive_route,gas,0.0025,0.49515317061070047,15,1.8106172738370763,7,48.15074523237065
+opposite_sign_control,stars,-0.005,0.49456917582832444,15,1.8258955411227,7,48.11507951435853

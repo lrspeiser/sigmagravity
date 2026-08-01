@@ -1,0 +1,67 @@
+{
+  "protocol_version": "P0582-SMOOTH-ENDPOINT-SATURATION-0.1.0",
+  "frozen_utc": "2026-08-01T03:20:00Z",
+  "status": "frozen_after_P0581_before_smooth_saturation_scores",
+  "trigger": "P0581's hard contrast cap 20 lost one exact held-out root, while post-open hard caps 5 and 10 restored all 11 roots with little change in common-system RMS.",
+  "question": "Is exact-root stability controlled mainly by the maximum endpoint contrast, by the nondifferentiable hard clipping rule, or by both?",
+  "hypotheses": {
+    "amplitude": "If maximum contrast is the driver, all bounded modes should gain roots as the asymptote is reduced.",
+    "kink": "If the hard clipping kink is the driver, smooth modes should retain more roots than hard clipping at the same nominal ceiling.",
+    "null": "If neither pattern repeats across clusters, the P0581 lower-cap result is cluster-specific caustic luck."
+  },
+  "locked_field": {
+    "source": "P0581 K0338 primary",
+    "route_fraction_multiplier": 1.0,
+    "return_length_over_R80": 0.36,
+    "width_over_R80": 0.23,
+    "gate_mode": "cluster_logistic",
+    "ordinary_geometry": "P0581 fitted geometry held fixed",
+    "source_positions": "P0581 fitted source positions held fixed",
+    "field_policy": "ordinary baryonic field local; only zero-monopole angular distribution of the P0554 excess changes"
+  },
+  "contrast_grid": {
+    "modes": ["hard", "tanh", "exponential", "rational"],
+    "nominal_caps": [3.0, 5.0, 7.5, 10.0, 15.0, 20.0],
+    "definitions": {
+      "hard": "T_A(x)=min(x,A)",
+      "tanh": "T_A(x)=A*tanh(x/A)",
+      "exponential": "T_A(x)=A*[1-exp(-x/A)]",
+      "rational": "T_A(x)=A*x/(A+x)"
+    },
+    "normalization": "After transformation, divide by the carrier-weighted annular mean so every annulus retains exactly zero added monopole."
+  },
+  "selection": {
+    "status": "diagnostic_only_on_spent_clusters",
+    "rule": "First maximize complete systems, then total converged roots, then minimize equal-system RMS across complete systems.",
+    "predictive_use": "No winner may be called predictive on these four clusters; any chosen form must be frozen for a new raw cluster."
+  },
+  "inputs": {
+    "p0581_protocol": "configs/p0581_locked_endpoint_exact_root_protocol.json",
+    "p0581_report": "results/p0581_locked_endpoint_exact_root/report.json",
+    "p0581_geometry": "results/p0581_locked_endpoint_exact_root/geometry.csv",
+    "p0581_predictions": "results/p0581_locked_endpoint_exact_root/predictions.csv"
+  },
+  "gates": {
+    "complete_systems_required": 4,
+    "heldout_roots_required": 11,
+    "maximum_annular_convergence_mean_fraction_max": 1e-10,
+    "normalized_curl_RMS_max": 1e-10,
+    "solar_and_axisymmetric_zero_monopole": true
+  },
+  "outputs": {
+    "directory": "results/p0582_smooth_endpoint_saturation",
+    "scores": "scores.csv",
+    "summary_grid": "summary_grid.csv",
+    "predictions": "predictions.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0582_smooth_endpoint_saturation.png"
+  },
+  "claim_limits": [
+    "All four clusters were opened in P0581, so this is formula exploration rather than validation.",
+    "Lens geometry and source positions are fixed at the P0581 cap-20 fit; no saturation variant is refitted.",
+    "The zero-monopole angular correction tests image placement and topology, not absolute missing cluster strength.",
+    "The Solar and axisymmetric galaxy response is null by construction and therefore does not constitute a new galaxy rotation fit."
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "protocol_version": "SOURCE-GATED-METRIC-0.1.0",
+  "frozen_utc": "2026-07-30T00:00:00Z",
+  "status": "frozen_before_source_gated_scores",
+  "question": "Can one universal source-distribution gate preserve the fixed-RAR galaxy result while improving cluster lensing, and does the same term work if it acts on matter as well as light?",
+  "equations": {
+    "fixed_matter_law": "g_RAR=g_bar/[1-exp(-sqrt(g_bar/a_dagger))]",
+    "enclosed_mass_slope": "m=d ln M_bar(<r)/d ln r=2+d ln g_bar/d ln r; where a cluster local density is available use the equivalent m=4*pi*r^3*rho_bar/M_bar",
+    "source_concentration": "C=1/(1+clip(m,0,3))",
+    "diffuseness": "D=a_dagger/(a_dagger+2*g_bar)",
+    "gate": "F=D^2*(1-C)^2",
+    "single_potential": "g_matter=g_light=g_RAR+kappa*F*(g_RAR-g_bar)",
+    "metric_slip": "Phi=Phi_N+phi_RAR; Psi=Phi_N+[1+2*kappa*F]*phi_RAR; g_lens=g_RAR+kappa*F*(g_RAR-g_bar)"
+  },
+  "fixed_constants": {
+    "a_dagger_m_s2": 1.2e-10,
+    "diffuseness_power": 2.0,
+    "concentration_power": 2.0,
+    "maximum_enclosed_mass_slope": 3.0
+  },
+  "parameter_rule": {
+    "free_gravity_parameters_per_formula": 1,
+    "parameter": "kappa",
+    "bounds": [0.0, 30.0],
+    "per_object_gravity_parameters": 0,
+    "powers_are_not_fit": true,
+    "negative_kappa_forbidden": "The stated hypothesis adds an environmental response; allowing negative kappa would reverse it after looking at residuals."
+  },
+  "inputs": {
+    "SPARC_fixed_RAR_predictions": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_report": "results/sparc_independent_nuisance_refit/report.json",
+    "CLASH_radial_points": "results/clash_lensing_universal_comparison/point_comparison.csv",
+    "CLASH_comparison_report": "results/clash_lensing_universal_comparison/report.json",
+    "raw_metric_slip_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "sample_and_splits": {
+    "galaxies": 131,
+    "galaxy_inner_training_points": 2066,
+    "galaxy_outer_test_points": 968,
+    "clusters": 20,
+    "cluster_radial_points": 72,
+    "folds": 5,
+    "fold_seed": 20260730,
+    "fold_unit": "complete galaxy or complete cluster",
+    "cluster_fold_source": "existing complete-cluster fold in the CLASH bridge",
+    "cluster_slope_source": "published-profile baryonic acceleration plus the bridge's local baryonic density reconstruction; the density identity permits scoring the two clusters having only one radial point",
+    "galaxy_fold_source": "deterministic seeded balanced assignment",
+    "disclosure": "The data and prior residuals were inspected in earlier project stages. These are leakage-controlled formula comparisons, not a pristine external discovery sample."
+  },
+  "fit_rules": {
+    "metric_slip": "fit kappa on training-fold clusters only; galaxy dynamics are identically fixed RAR",
+    "constant_slip_comparator": "fit kappa with F=1 on the identical training-fold clusters",
+    "single_potential": "fit kappa jointly on training-galaxy inner points and training-cluster points",
+    "joint_objective": "mean of each domain's equal-system normalized MSE divided by that domain's kappa=0 MSE",
+    "galaxy_nuisance_warning": "Distance, inclination, and stellar mass-to-light values remain those obtained by the earlier fixed-RAR inner fit; formula-specific nuisance refitting is not performed.",
+    "optimizer": "bounded deterministic scalar minimization with explicit endpoint comparison"
+  },
+  "primary_metrics": {
+    "galaxy": "outer-point RMSE in km/s and equal-galaxy RMSE",
+    "cluster": "held-out equal-cluster RMSE in log10 acceleration",
+    "uncertainty": "paired complete-system bootstrap",
+    "bootstrap_draws": 10000,
+    "bootstrap_seed": 20260730
+  },
+  "raw_lensing_advancement": {
+    "run_if": "gated metric slip held-out equal-cluster RMSE is at least 5% lower than fitted constant slip",
+    "maximum_ratio_to_constant_slip": 0.95,
+    "reason": "The raw model is expensive and the scalar radial gate cannot be justified if it adds no radial predictive information."
+  },
+  "claim_boundary": [
+    "The CLASH radial target is a spherical deprojection of per-cluster GR plus NFW lensing fits, not a raw image or shear likelihood.",
+    "The source-concentration statistic is a radial observable proxy. It does not reconstruct the full three-dimensional or multi-centre baryonic direction field.",
+    "Using spherical enclosed mass for disk galaxies is an approximation, although the same algorithm is applied without an object-type label.",
+    "The metric-slip equation is a weak-field phenomenological closure, not a covariant action.",
+    "The comparison can reject these exact formulas; it cannot reject every source-dependent modified-gravity theory."
+  ],
+  "outputs": {
+    "directory": "results/source_gated_metric",
+    "report": "results/source_gated_metric/report.json",
+    "predictions": "results/source_gated_metric/predictions.csv",
+    "fold_fits": "results/source_gated_metric/fold_fits.csv",
+    "figure": "results/source_gated_metric/source_gated_metric.png",
+    "summary": "results/source_gated_metric/SUMMARY.md"
+  }
+}

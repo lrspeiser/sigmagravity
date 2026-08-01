@@ -1,0 +1,70 @@
+{
+  "protocol_version": "SIGMA-FIELD-EXPLORATION-0.1",
+  "frozen_date": "2026-07-28",
+  "status": "exploratory_equations_and_grid_frozen_before_numerical_scores",
+  "intent": "Explore without an advancement verdict whether one screened vacuum-response field can recover Newtonian gravity in dense regions, build up in extended low-density regions, and generate useful galaxy, cluster, geometry, and diagnostic-lensing behavior.",
+  "equations": {
+    "gravity": "div[epsilon(Sigma) grad(Phi)] = 4*pi*G*rho_b",
+    "permittivity": "epsilon(Sigma) = 1 - eta*Sigma^2",
+    "sigma_field": "L_Sigma^2 laplacian(Sigma) = (rho_b/rho_s - 1)*Sigma + Sigma^3",
+    "field_range": "0 <= Sigma <= 1",
+    "outer_boundary": "Sigma approaches 1 in an extended vacuum",
+    "spherical_gravity": "g(r) = G*M_b(<r)/[epsilon(Sigma(r))*r^2]"
+  },
+  "universal_parameter_grid": {
+    "eta": [0.3, 0.6, 0.8, 0.9, 0.97],
+    "log10_rho_s_g_cm3": [-25.5, -25.0, -24.5, -24.0, -23.5],
+    "L_Sigma_kpc": [0.3, 1.0, 3.0, 10.0, 30.0]
+  },
+  "tests": {
+    "spherical_galaxy": {
+      "baryons": "Hernquist",
+      "mass_solar": 60000000000.0,
+      "scale_kpc": 3.0,
+      "score_radii_kpc": [5.0, 50.0],
+      "far_slope_radii_kpc": [100.0, 250.0],
+      "comparison_only": "fixed empirical RAR with g_dagger=1.2e-10 m/s^2"
+    },
+    "cluster_transfer": {
+      "system": "RXJ2129",
+      "gbar_gobs_source": "data/raw/clash_tian2020/fig2.dat",
+      "density_source": "results/rar_sharp_coherence_rg_sweep/sample.csv",
+      "warning": "The target is NFW-deprojected and is used only to rank this exploratory grid."
+    },
+    "void_buildup": {
+      "geometry": "empty spherical cavity with Sigma=0 at a dense wall",
+      "cavity_radius_over_L": [0.1, 0.3, 1.0, 3.0, 10.0]
+    },
+    "disk_and_solar_environment": {
+      "disk_mass_solar": 50000000000.0,
+      "disk_scale_kpc": 3.0,
+      "disk_half_thickness_kpc": 0.6,
+      "bulge_mass_solar": 10000000000.0,
+      "bulge_scale_kpc": 0.7,
+      "solar_radius_kpc": 8.0,
+      "probe_R_kpc": 12.0,
+      "probe_z_kpc": 3.0
+    },
+    "lensing": {
+      "system": "RX J2129.7+0005",
+      "closure": "same effective potential, zero gravitational slip, no lensing multiplier",
+      "fit": "six common structural geometry/shear nuisances on 15 training images; exact roots on seven spent heldout images",
+      "warning": "Diagnostic only because the ranked parameters use the RXJ2129 NFW-deprojected radial target and the image holdout has already been inspected."
+    }
+  },
+  "interpretation_rules": [
+    "This is a permissive exploration, not a preregistered theory acceptance test.",
+    "Do not insert RAR, MOND, a cluster label, coherence, or a lensing normalization into the Sigma-field prediction.",
+    "Separate mathematical behavior from empirical closeness.",
+    "A zero-slip lensing calculation is not a relativistic completion.",
+    "Report parameter tradeoffs and structural limitations even if one score is promising."
+  ],
+  "outputs": {
+    "report": "results/sigma_field_exploration/report.json",
+    "grid": "results/sigma_field_exploration/parameter_grid.csv",
+    "radial_profiles": "results/sigma_field_exploration/radial_profiles.csv",
+    "void_buildup": "results/sigma_field_exploration/void_buildup.csv",
+    "axisymmetric_profiles": "results/sigma_field_exploration/axisymmetric_profiles.csv",
+    "figure": "results/sigma_field_exploration/sigma_field_exploration.png"
+  }
+}

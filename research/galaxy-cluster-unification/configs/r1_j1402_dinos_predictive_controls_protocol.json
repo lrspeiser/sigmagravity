@@ -1,0 +1,57 @@
+{
+  "protocol_version": "R1-J1402-Dinos-P1-0.1",
+  "status": "frozen_after_exact_total_likelihood_and_full-mask_summary_before_any_sector-specific_or_corrupted-coordinate_score",
+  "frozen_utc": "2026-07-27T15:45:00Z",
+  "upstream_protocol": "configs/r1_j1402_dinos_coordinate_replay_protocol.json",
+  "upstream_replay_report": "results/r1_j1402_dinos_replay/report.json",
+  "sector_scores_seen_at_freeze": false,
+  "coordinate_corruption_scores_seen_at_freeze": false,
+  "nonlinear_parameters": "fix all 23 nonlinear parameters at released chain row 1101277 for every fit",
+  "linear_parameters": "solve independently on the five training sectors in each band, then predict the omitted sector without resolving or updating any amplitude",
+  "implementation_contract": {
+    "linear_solve": "use lenstronomy image_linear_solve only to estimate the training-mask linear amplitudes",
+    "heldout_prediction": "after the solve updates the linear amplitudes, evaluate SingleBandMultiModel.image on the complete image plane; do not score the zero-filled masked array returned by image_linear_solve",
+    "coordinate_delivery": "instantiate every released or corrupted kwargs_data dictionary inside the scoring FittingSequence and verify each corruption changes at least one instantiated pixel-coordinate map"
+  },
+  "sector_geometry": {
+    "count": 6,
+    "common_center_arcsec": [0.0, 0.0],
+    "coordinate_source": "each uncorrupted released HDF5 coordinate dictionary as instantiated by lenstronomy ImageData.pixel_coordinates",
+    "angle": "atan2(dec_arcsec, ra_arcsec) modulo 2*pi",
+    "phase_degrees": 0.0,
+    "sector_index": "floor((angle modulo 2*pi)/(2*pi/6)), giving sector 0 on [0,60 degrees) and half-open intervals thereafter",
+    "application": "hold out the same sky-angle sector simultaneously in F435W, F555W, and F814W; intersect with each released operative likelihood mask",
+    "minimum_heldout_pixels_per_band_sector": 100
+  },
+  "predictive_metrics": {
+    "variance": "released lenstronomy model-dependent C_D_model plus absolute PSF model-error map",
+    "heldout_reduced_chi_square": "sum of squared standardized residuals divided by heldout retained pixels; pool all three bands separately for each of six sector fits",
+    "maximum_six_sector_heldout_reduced_chi_square": 1.5,
+    "coherent_residual": "PSF-matched standardized-residual significance: correlate heldout z pixels with the normalized operative PSF and divide by sqrt of the heldout-mask correlation with PSF squared; inspect pixels with at least 80 percent of the full PSF L2 support",
+    "maximum_coherent_heldout_residual_sigma": 5.0,
+    "full_masked_reduced_chi_square_per_band_maximum": 1.5
+  },
+  "coordinate_controls": {
+    "baseline": "released five-field per-band coordinate mappings",
+    "scalar_0p04": "rescale each released 2x2 transform_pix2angle by 0.04/sqrt(abs(det(matrix))), preserving its rotation and handedness while substituting the forbidden scalar scale",
+    "zero_shifts": "set all released ra_shift and dec_shift values to exactly zero",
+    "swap_F555W_F814W_coordinate_maps": "exchange the complete five-field coordinate maps (ra_at_xy_0, dec_at_xy_0, transform_pix2angle, ra_shift, dec_shift) between F555W and F814W while leaving their images, exposure maps, noise, masks, PSFs, and numerics in place",
+    "comparison": "sum heldout chi-square over all six sector fits and three bands",
+    "minimum_worsening_total_chi_square": 1e-6,
+    "requirement": "every corruption must have a strictly larger aggregate heldout chi-square than the released mapping by at least the frozen numerical floor"
+  },
+  "decision": {
+    "advance": "all full-mask and sector predictive thresholds pass and every coordinate corruption is detected; authorize only the already-frozen lens-response Jacobian",
+    "fail": "any predictive or coordinate-identification failure stops J1402 lens promotion; do not tune sectors, masks, thresholds, coordinates, or nonlinear parameters"
+  },
+  "authorization": {
+    "run_fixed_nonlinear_sector_linear_solves": true,
+    "run_three_frozen_coordinate_corruptions": true,
+    "optimize_nonlinear_model": false,
+    "compute_lens_response_before_controls_pass": false,
+    "reduce_KCWI": false,
+    "infer_gravity_response": false,
+    "fit_new_force_or_action": false,
+    "authorize_R2": false
+  }
+}

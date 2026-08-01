@@ -1,0 +1,196 @@
+{
+  "status": "completed Stage 1 constitutive target reconstruction",
+  "interpretation": "Pointwise inverse values are diagnostics, not fitted measurements. Rows with gobs<=gbar are retained and marked invalid for the inverse.",
+  "inputs": {
+    "clash_sha256": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+    "u0_report_sha256": "27441847c01cecdc6fa6686f8199a50da557dc167f04e367e8c4ce22752db27d",
+    "stage_gate_registry_sha256": "a804b869a00d74425d80a77cdd1864c7e9d77d7aed8a447a7d5ffe182219d966"
+  },
+  "frozen_u0_parameters": {
+    "F": 29.98687730309382,
+    "chi_t": 3.2252362056373694e-06,
+    "w_dex": 0.2136314539812839
+  },
+  "domain_summaries": {
+    "galaxy": {
+      "systems": 131,
+      "points": 3034,
+      "pointwise_inverse_valid_points": 2847,
+      "pointwise_inverse_valid_fraction": 0.9383651944627555,
+      "log10_chi": {
+        "p05": -8.126279061287658,
+        "p10": -7.889337810352025,
+        "median": -6.887168759191459,
+        "p90": -6.012298158703445,
+        "p95": -5.877441420447018
+      },
+      "log10_gbar_m_s2": {
+        "p05": -11.572297876824894,
+        "p10": -11.430019680677287,
+        "median": -10.638165330163798,
+        "p90": -9.421926956992415,
+        "p95": -9.11821711529357
+      },
+      "log10_gobs_m_s2": {
+        "p05": -10.845941906714183,
+        "p10": -10.729680548571862,
+        "median": -10.189244178307858,
+        "p90": -9.323658816416296,
+        "p95": -9.094243273278579
+      },
+      "nu_required": {
+        "p05": 0.9611113656173308,
+        "p10": 1.1180564943935136,
+        "median": 2.7096343456034715,
+        "p90": 6.265234313966884,
+        "p95": 7.969282192275032
+      },
+      "mu_required": {
+        "p05": 0.12548191964416858,
+        "p10": 0.1596117001314883,
+        "median": 0.36905351348157145,
+        "p90": 0.8944091943104334,
+        "p95": 1.040462501592403
+      },
+      "log10_rar_a_eff_m_s2_valid": {
+        "p05": -10.625047643607306,
+        "p10": -10.40298187785333,
+        "median": -9.921925575494134,
+        "p90": -9.480859228887088,
+        "p95": -9.291528351593145
+      },
+      "log10_simple_a_x_m_s2_valid": {
+        "p05": -10.721489201884262,
+        "p10": -10.45615105132841,
+        "median": -9.949231819863636,
+        "p90": -9.49116841962875,
+        "p95": -9.308828750309111
+      },
+      "log10_standard_a_x_m_s2_valid": {
+        "p05": -10.371443121268449,
+        "p10": -10.197022714758385,
+        "median": -9.750973897795348,
+        "p90": -9.265264335998733,
+        "p95": -9.131460892593113
+      },
+      "frozen_u0_full_data_rms_dex": 0.19870006320824754,
+      "frozen_u0_full_data_median_abs_dex": 0.08465761290539622,
+      "frozen_u0_full_data_mean_residual_dex": 0.02625716701053731
+    },
+    "cluster": {
+      "systems": 20,
+      "points": 84,
+      "pointwise_inverse_valid_points": 84,
+      "pointwise_inverse_valid_fraction": 1.0,
+      "log10_chi": {
+        "p05": -5.617610864969735,
+        "p10": -5.55070349158905,
+        "median": -5.221762620539327,
+        "p90": -4.936276712710787,
+        "p95": -4.892725148887527
+      },
+      "log10_gbar_m_s2": {
+        "p05": -10.7826,
+        "p10": -10.751,
+        "median": -10.471499999999999,
+        "p90": -9.99,
+        "p95": -9.900649999999999
+      },
+      "log10_gobs_m_s2": {
+        "p05": -9.83955,
+        "p10": -9.788499999999999,
+        "median": -9.5415,
+        "p90": -9.329799999999999,
+        "p95": -9.2972
+      },
+      "nu_required": {
+        "p05": 2.909956228570499,
+        "p10": 4.222804422148696,
+        "median": 7.861407121525839,
+        "p90": 11.660045407658206,
+        "p95": 12.770204465089085
+      },
+      "mu_required": {
+        "p05": 0.07834307663863392,
+        "p10": 0.08576305481128778,
+        "median": 0.12720385931126038,
+        "p90": 0.23681050639173337,
+        "p95": 0.3495865290338974
+      },
+      "log10_rar_a_eff_m_s2_valid": {
+        "p05": -9.186618728099885,
+        "p10": -9.1080760470789,
+        "median": -8.722360950305207,
+        "p90": -8.478254578879149,
+        "p95": -8.444389259198099
+      },
+      "log10_simple_a_x_m_s2_valid": {
+        "p05": -9.189004098344162,
+        "p10": -9.110304178633,
+        "median": -8.723961769146964,
+        "p90": -8.478708660696062,
+        "p95": -8.44468966798646
+      },
+      "log10_standard_a_x_m_s2_valid": {
+        "p05": -9.105458415919392,
+        "p10": -8.962656810247038,
+        "median": -8.66548376136237,
+        "p90": -8.428129464111526,
+        "p95": -8.406446389441125
+      },
+      "frozen_u0_full_data_rms_dex": 0.1724414502677303,
+      "frozen_u0_full_data_median_abs_dex": 0.11805397888644256,
+      "frozen_u0_full_data_mean_residual_dex": -0.04440331647267731
+    }
+  },
+  "support_overlap": {
+    "full_log10_chi_overlap_dex": 0.2689861681591381,
+    "central_10_to_90_percent_log10_chi_overlap_dex": 0.0,
+    "galaxy_p90_to_cluster_p10_gap_dex": 0.46159466711439556
+  },
+  "frozen_u0_transition_support": {
+    "galaxy": {
+      "activation_interval": "frozen U0 activation from 0.1 to 0.9",
+      "chi_low": 1.0943726862906416e-06,
+      "chi_high": 9.505124453911626e-06,
+      "systems": 31,
+      "points": 241
+    },
+    "cluster": {
+      "activation_interval": "frozen U0 activation from 0.1 to 0.9",
+      "chi_low": 1.0943726862906416e-06,
+      "chi_high": 9.505124453911626e-06,
+      "systems": 20,
+      "points": 67
+    }
+  },
+  "round_trip": {
+    "rar_max_relative_error": 4.440892098500626e-16,
+    "simple_mu_max_relative_error": 2.220446049250313e-16,
+    "standard_mu_max_relative_error": 2.220446049250313e-16
+  },
+  "gate_audit": {
+    "data_counts": {
+      "sparc_systems": true,
+      "sparc_points": true,
+      "clash_systems": true,
+      "clash_points": true
+    },
+    "inverse_fraction": {
+      "galaxy": true,
+      "cluster": true
+    },
+    "analytic_round_trip": {
+      "rar_max_relative_error": true,
+      "simple_mu_max_relative_error": true,
+      "standard_mu_max_relative_error": true
+    },
+    "transition_system_support": {
+      "galaxy": true,
+      "cluster": true
+    },
+    "pointwise_inverse_usable": true,
+    "continuous_transition_independently_supported": true
+  },
+  "next_action": "Use the forward likelihood for all points while deriving the minimal H7 closure. Treat insufficient cross-domain transition support as requiring independent BCG host potentials, not as permission to tune the logistic transition."
+}

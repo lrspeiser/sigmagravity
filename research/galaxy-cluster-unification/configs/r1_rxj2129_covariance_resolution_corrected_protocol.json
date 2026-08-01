@@ -1,0 +1,171 @@
+{
+  "protocol_version": "R1B0-RXJ2129-covariance-0.2-resolution-corrected",
+  "status": "frozen_before_xsl_bootstrap_and_resolution_mask_grid",
+  "parent_profile_protocol": "configs/r1_rxj2129_ppxf_resolution_corrected_protocol.json",
+  "purpose": "Estimate the full four-bin RX J2129 velocity-dispersion covariance with a resolution-valid XSL baseline and retain the resolution-mismatched E-MILES difference only as a conservative template-plus-resolution diagnostic.",
+  "amendment_reason": "Protocol 0.1 completed numerically but its E-MILES 2.5-2.7-A resolution variants were identical because the 2.51-A rest-frame templates are broader than MUSE after redshift correction and pPXF clips negative resolution differences. Protocol 0.1 is retained as a failed/provisional technical record and cannot satisfy the covariance gate.",
+  "post_result_disclosure": "Before this amendment was frozen, protocol 0.1 exposed the E-MILES bootstrap and the full-annulus XSL 2.6-A, 6-sigma result, and the corrected XSL profile and half-field checks were run. The 100-replicate XSL bootstrap and the XSL resolution/mask grid had not been run. All spatial choices and numerical pass thresholds remain unchanged.",
+  "blindness_rule": "The amendment is forced by deterministic template-resolution metadata. No gravity residual or lensing mass residual is used, and no annulus, mask-construction rule, or threshold changes.",
+  "inputs": {
+    "cube_path": "data/raw/r1_muse_bcg_cubes/rxj2129_bcg_4860_7160A_r10arcsec.fits",
+    "cube_sha256": "5CA2713AA2DF418A150AE0B1645B8187882542A4F4698AD6C4DB71569E718408",
+    "baseline_profile_path": "data/derived/r1_rxj2129_ppxf_xsl_engineering_profile.csv",
+    "baseline_report_path": "results/r1_rxj2129_ppxf_xsl/report.json",
+    "invalidated_predecessor_report": "results/r1_rxj2129_covariance/report.json",
+    "template_products": [
+      {
+        "family": "E-MILES",
+        "path": "data/raw/r1_ppxf_templates/spectra_emiles_9.0.npz",
+        "sha256": "6A1B1A70DB4D95F67AFE0ADBE254F111EB2B50412B9F311714C54FFBA18C6F0E",
+        "role": "conservative template-plus-resolution mismatch diagnostic only"
+      },
+      {
+        "family": "XSL",
+        "path": "data/raw/r1_ppxf_templates/spectra_xsl_9.0.npz",
+        "sha256": "B8BEE334EE1705A0D4E7FF0F161990C248D68AC1B8C8EB138B0D8C05CF37D853",
+        "role": "resolution-valid baseline, bootstrap, and resolution-mask grid"
+      }
+    ]
+  },
+  "spatial_block_bootstrap": {
+    "replicates": 100,
+    "block_shape_spaxels": [
+      2,
+      2
+    ],
+    "block_grid_origin_pixel": [
+      0,
+      0
+    ],
+    "resampling": "Within each unchanged frozen annulus, sample its intersecting anchored 2x2 spatial blocks with replacement, retaining all valid annular spaxels in each selected block. Fit all four resampled annuli for every replicate.",
+    "spectral_configuration": {
+      "template_family": "XSL",
+      "instrumental_fwhm_angstrom": 2.6,
+      "high_variance_mask_sigma": 6.0
+    },
+    "random_seed": 2129
+  },
+  "sensitivity_grid": {
+    "baseline_protocol_id": "xsl_fwhm2.6_mask6",
+    "protocols": [
+      {
+        "protocol_id": "xsl_fwhm2.5_mask5",
+        "template_family": "XSL",
+        "instrumental_fwhm_angstrom": 2.5,
+        "high_variance_mask_sigma": 5.0,
+        "baseline": false,
+        "include_in_systematic_covariance": false
+      },
+      {
+        "protocol_id": "xsl_fwhm2.5_mask6",
+        "template_family": "XSL",
+        "instrumental_fwhm_angstrom": 2.5,
+        "high_variance_mask_sigma": 6.0,
+        "baseline": false,
+        "include_in_systematic_covariance": true
+      },
+      {
+        "protocol_id": "xsl_fwhm2.5_mask8",
+        "template_family": "XSL",
+        "instrumental_fwhm_angstrom": 2.5,
+        "high_variance_mask_sigma": 8.0,
+        "baseline": false,
+        "include_in_systematic_covariance": false
+      },
+      {
+        "protocol_id": "xsl_fwhm2.6_mask5",
+        "template_family": "XSL",
+        "instrumental_fwhm_angstrom": 2.6,
+        "high_variance_mask_sigma": 5.0,
+        "baseline": false,
+        "include_in_systematic_covariance": true
+      },
+      {
+        "protocol_id": "xsl_fwhm2.6_mask6",
+        "template_family": "XSL",
+        "instrumental_fwhm_angstrom": 2.6,
+        "high_variance_mask_sigma": 6.0,
+        "baseline": true,
+        "include_in_systematic_covariance": false
+      },
+      {
+        "protocol_id": "xsl_fwhm2.6_mask8",
+        "template_family": "XSL",
+        "instrumental_fwhm_angstrom": 2.6,
+        "high_variance_mask_sigma": 8.0,
+        "baseline": false,
+        "include_in_systematic_covariance": true
+      },
+      {
+        "protocol_id": "xsl_fwhm2.7_mask5",
+        "template_family": "XSL",
+        "instrumental_fwhm_angstrom": 2.7,
+        "high_variance_mask_sigma": 5.0,
+        "baseline": false,
+        "include_in_systematic_covariance": false
+      },
+      {
+        "protocol_id": "xsl_fwhm2.7_mask6",
+        "template_family": "XSL",
+        "instrumental_fwhm_angstrom": 2.7,
+        "high_variance_mask_sigma": 6.0,
+        "baseline": false,
+        "include_in_systematic_covariance": true
+      },
+      {
+        "protocol_id": "xsl_fwhm2.7_mask8",
+        "template_family": "XSL",
+        "instrumental_fwhm_angstrom": 2.7,
+        "high_variance_mask_sigma": 8.0,
+        "baseline": false,
+        "include_in_systematic_covariance": false
+      },
+      {
+        "protocol_id": "emiles_fwhm2.6_mask6",
+        "template_family": "E-MILES",
+        "instrumental_fwhm_angstrom": 2.6,
+        "high_variance_mask_sigma": 6.0,
+        "baseline": false,
+        "include_in_systematic_covariance": true,
+        "interpretation": "conservative template-family plus unresolved resolution-mismatch shift; not a resolution-valid alternate baseline"
+      }
+    ],
+    "systematic_covariance_protocols": [
+      "xsl_fwhm2.5_mask6",
+      "xsl_fwhm2.7_mask6",
+      "xsl_fwhm2.6_mask5",
+      "xsl_fwhm2.6_mask8",
+      "emiles_fwhm2.6_mask6"
+    ],
+    "systematic_covariance": "Use the five predeclared one-factor shifts from the XSL baseline: two XSL resolution shifts, two XSL mask shifts, and one conservative E-MILES template-plus-resolution shift. Average their outer products. Run the four XSL cross-combinations as interaction diagnostics and include them in the maximum-shift gate without overweighting them in the covariance."
+  },
+  "covariance_construction": {
+    "bootstrap_covariance": "Unbiased sample covariance of the 100 four-bin XSL bootstrap dispersion vectors.",
+    "systematic_covariance": "Second moment about the frozen XSL baseline of the five predeclared one-factor sensitivity shifts.",
+    "reported_total_covariance": "bootstrap covariance plus systematic covariance",
+    "formal_errors": "Retained but not separately added because the spatial bootstrap resamples spectra carrying the measured pixel-noise realization.",
+    "positive_semidefinite_tolerance": -1e-10
+  },
+  "success_thresholds": {
+    "required_successful_bootstrap_replicates": 100,
+    "required_successful_bins_per_replicate": 4,
+    "maximum_fractional_total_sigma_uncertainty_each_bin": 0.3,
+    "maximum_template_or_mask_shift_fraction_each_bin": 0.1,
+    "covariance_symmetric_absolute_tolerance": 1e-10,
+    "covariance_positive_semidefinite": true
+  },
+  "outputs": {
+    "bootstrap_ledger": "data/derived/r1_rxj2129_ppxf_xsl_bootstrap.csv",
+    "sensitivity_ledger": "data/derived/r1_rxj2129_ppxf_xsl_sensitivity.csv",
+    "covariance_long_table": "data/derived/r1_rxj2129_ppxf_xsl_covariance.csv",
+    "profile_with_total_errors": "data/derived/r1_rxj2129_ppxf_xsl_profile_with_covariance.csv",
+    "report": "results/r1_rxj2129_covariance_xsl/report.json",
+    "diagnostic_plot": "results/r1_rxj2129_covariance_xsl/covariance_diagnostics.png"
+  },
+  "authorization": {
+    "execute_frozen_covariance_protocol": true,
+    "change_annuli_or_spatial_mask_after_result": false,
+    "gravity_response_fit": false,
+    "strict_r1_ready_from_covariance_alone": false
+  }
+}

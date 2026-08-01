@@ -1,0 +1,77 @@
+{
+  "status": "completed frozen Stage 4 profile-constrained validation",
+  "honesty_note": "The point construction was inspected during development. It is confirmatory against the pre-existing Stage 4 thresholds, but it is not a newly blind test.",
+  "sample": {
+    "source": "data/derived/bcg_bridge_sample.csv",
+    "required_systems": 30,
+    "frozen_systems": 34,
+    "selection_may_use_bcg_residual": false,
+    "score_all_profile_constrained_hosts": true
+  },
+  "potential_definition": {
+    "formula": "chi_b(r)=G/c^2*[M_b(<r)/r + integral_r^R dM_b(s)/s]",
+    "gas_outer_radius": "R500c",
+    "satellite_outer_radius": "R500c",
+    "mass_beyond_R500": "excluded conservatively",
+    "fitted_host_normalization": false
+  },
+  "mass_conversion": {
+    "model": "truncated NFW M200c-to-M500c conversion",
+    "fiducial_c200": 4.0,
+    "uncertainty_distribution": "uniform",
+    "c200_min": 3.0,
+    "c200_max": 5.0
+  },
+  "gas_mass": {
+    "calibration_catalog": "eRASS1 erass1cl_main_v3.2",
+    "validity": "finite positive M500 and 0<FGAS500<0.3",
+    "log_mass_percentile_range": [1.0, 99.0],
+    "equal_log_mass_bins": 12,
+    "estimator": "OLS line through per-bin median log10(FGAS500)",
+    "host_values_used_in_calibration": false,
+    "fgas_floor": 0.005,
+    "fgas_ceiling": 0.15
+  },
+  "gas_profile": {
+    "source": "Elkholy et al. 2015 Chandra density profiles, J/ApJ/805/3",
+    "systems": 46,
+    "shape": "published Vikhlinin-form electron-density profile",
+    "fiducial": "median potential factor across all valid published profiles at each BCG r/R500",
+    "uncertainty": "one independent published profile draw per host and Monte Carlo realization"
+  },
+  "bcg_stars": {
+    "shape": "Prugniel-Simien deprojection of each NSA Sersic n and Re",
+    "normalization": "observed enclosed gbar*r^2/G; exterior shells add no fitted normalization",
+    "exterior_log_scatter_dex": 0.1
+  },
+  "satellite_stars": {
+    "mass_relation": "log10(Msat500/Msun)=12.52+0.75*[log10(M500/Msun)-14.5]",
+    "source": "Kravtsov, Vikhlinin & Meshscheryakov 2018 combined 21-cluster relation",
+    "normalization": 12.52,
+    "normalization_sigma": 0.03,
+    "slope": 0.75,
+    "slope_sigma": 0.085,
+    "intrinsic_scatter_dex": 0.1,
+    "profile": "truncated NFW stellar distribution",
+    "scale_radius_mpc": 0.34,
+    "scale_radius_sigma_mpc": 0.035,
+    "scale_radius_bounds_mpc": [0.2, 0.5],
+    "profile_source": "Wang et al. 2018 redMaPPer satellite scale radius"
+  },
+  "monte_carlo": {
+    "realizations": 5000,
+    "seed": 20260726,
+    "continue_pass_probability_min": 0.8,
+    "scientific_pass_probability_min": 0.5
+  },
+  "decision": {
+    "continue_failure": "retire algebraic H7s host-potential closure and derive environmental generalized Aether",
+    "science_success": "retain measured baryonic potential as the environment variable, but repair Stage 3 action identifiability before relativistic completion",
+    "forbidden": [
+      "widen F",
+      "fit a host normalization to BCG residuals",
+      "drop systems using their residuals",
+      "add a post-hoc interpolation parameter"
+    ]
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "target_version": "R1B-same-system-pilot-0.1",
+  "frozen_before_gap_audit": true,
+  "purpose": "Move from catalog coverage to an identifiable same-system pilot without inspecting gravity residuals or relaxing the three-dynamics-plus-three-lensing radial-overlap rule.",
+  "strict_system_definition": {
+    "numerical_dynamics_radial_points_minimum": 3,
+    "independent_lensing_radial_points_on_dynamics_support_minimum": 3,
+    "common_bcg_center_required": true,
+    "measured_baryonic_profile_points_minimum": 3,
+    "complete_baryonic_components_required": [
+      "BCG total stellar light and mass-to-light nuisance",
+      "ICL treatment or explicit non-identifiability marginalization",
+      "satellite stellar mass",
+      "hot gas"
+    ],
+    "dynamics_covariance_or_raw_reconstruction_required": true,
+    "source_redshift_likelihood_required": true,
+    "coordinate_covariance_not_borrowed_from_fitted_gr_residuals_required": true,
+    "selection_must_be_gravity_residual_blind": true
+  },
+  "frozen_candidate_sources": [
+    "eleven Newman2013/Kaleidoscope2025 hosts with numerical velocity profiles",
+    "MACS J1206 public-MUSE reconstruction",
+    "RX J2129 public-MUSE reconstruction",
+    "Loubser2018 hosts as acquisition candidates only until their figure-only profiles are reconstructed from raw spectra"
+  ],
+  "current_verified_baseline": {
+    "numerical_resolved_dynamics_systems": 13,
+    "systems_with_local_observable_lens_positions": 12,
+    "systems_passing_three_plus_three_structural_overlap": 2,
+    "structural_pass_systems": ["MACS J1206", "RX J2129"],
+    "systems_with_complete_baryonic_forward_inputs": 0,
+    "systems_with_theory_neutral_joint_covariance": 0,
+    "strict_r1_ready_systems": 0,
+    "target_strict_systems": 10
+  },
+  "stage_checkpoints": [
+    {
+      "id": "R1B.1",
+      "outcome": "Produce a checksum/source-traceable gap ledger for every numerical-dynamics host and every promising Loubser strong-lens overlap, including exact radial support, covariance origin, baryonic components, and one primary obstruction.",
+      "success": "Every candidate has a disposition and at least three additional systems pass the frozen 3+3 structural gate, reducing the structural gap from eight to five or fewer.",
+      "rethink": "If one complete acquisition cycle adds fewer than two structural passes, stop broad catalog expansion and compare a pre-registered extended-kinematics route against a smaller identifiable pilot with a formal sample-size limitation."
+    },
+    {
+      "id": "R1B.2",
+      "outcome": "Bring at least two structural-pass systems through complete baryonic and covariance gates using raw-data reductions whose masks and nuisance models were frozen before residual inspection.",
+      "success": "At least two systems are strict R1-ready and a held-out forward prediction is defined for both dynamics and lensing.",
+      "rethink": "If neither MACS J1206 nor RX J2129 becomes strict-ready after its frozen raw-data protocol completes, do not repair thresholds post hoc; replace the failed system and record the failed gate."
+    },
+    {
+      "id": "R1C",
+      "outcome": "Freeze ten system identities, radial masks, covariance models, baryonic nuisance priors, and grouped validation splits before inspecting any gravity residual.",
+      "success": "Ten strict R1-ready systems with at least three common-support dynamical and lensing constraints each.",
+      "rethink": "After three acquisition cycles or seven active research days, whichever comes first, if fewer than ten systems are strict-ready, report the public-data identifiability ceiling and do not claim a ten-system unification test."
+    }
+  ],
+  "cycle_1_priority": [
+    {
+      "system": "RX J2129",
+      "action": "Finish the already frozen two-ObsID Chandra reduction and preserve every failed calibration gate; define a fresh, thresholded blind lens-prediction split before any Weyl reconstruction.",
+      "success": "Calibrated gas likelihood passes its pre-registered checks and an unspent lens split meets a threshold frozen before fitting.",
+      "failure": "Retain as a structural-only system; do not infer a gravity response."
+    },
+    {
+      "system": "MACS J1206",
+      "action": "Keep the failed level-2 pPXF consistency result paused unless genuinely new raw/calibration information arrives.",
+      "success": "A new independent data product passes the existing consistency protocol without threshold changes.",
+      "failure": "Replace rather than tune the reconstruction."
+    },
+    {
+      "system": "Abell 2261",
+      "action": "Audit raw Gemini spectra and HST astrometric products because the nearest measured image is 15.4901 kpc, only 0.4901 kpc outside the published 15 kpc dynamics support.",
+      "success": "A frozen raw-spectra extraction yields at least three numerical dynamics bins with covariance whose verified support includes at least three independent lensing radii; a raw-image centroid covariance is derived independently of lens residuals.",
+      "failure": "Preserve the 0.4901 kpc near miss and do not expand the support after seeing a fit."
+    },
+    {
+      "system": "Abell 1689",
+      "action": "Acquire a primary multiple-image catalog and audit it against the Loubser slit support before reconstructing any spectrum.",
+      "success": "At least three independently redshift-anchored measured images fall on verified dynamics support, authorizing a frozen raw-Gemini reconstruction.",
+      "failure": "Do not spend a dynamics reduction cycle on this host."
+    }
+  ],
+  "cycle_1_progress": {
+    "Abell 1689": "Primary Coe et al. image catalog passes the frozen 3+3 geometry screen with six images from six families on the 15-kpc support. All 17 program-associated GMOS files and ten matched biases are checksum-verified. Reduction remains closed until its detector, extraction, covariance, and acceptance protocol is frozen.",
+    "RX J2129": "The independently frozen two-ObsID Chandra reduction is still being processed; every calibration failure remains binding.",
+    "MACS J1206": "Paused after the frozen internal-consistency failure.",
+    "Abell 2261": "Retained as a 0.4901-kpc geometry near miss; the support will not be enlarged after inspection."
+  },
+  "authorization": {
+    "audit_same_system_gaps": true,
+    "acquire_raw_spectra_images_and_catalogs": true,
+    "freeze_reduction_and_covariance_protocols": true,
+    "inspect_gravity_residuals": false,
+    "infer_dynamical_or_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

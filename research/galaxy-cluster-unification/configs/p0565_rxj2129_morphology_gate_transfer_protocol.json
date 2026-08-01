@@ -1,0 +1,70 @@
+{
+  "protocol_version": "P0565-RXJ2129-MORPHOLOGY-GATE-TRANSFER-0.1.0",
+  "frozen_utc": "2026-08-01T03:00:00Z",
+  "status": "frozen_before_rxj2129_morphology_descriptor_or_physical_tensor_response_score",
+  "question": "Does the four-cluster coherent-core/twisted-outskirts sign rule predict RX J2129's physical-tensor response?",
+  "interpretation": "new data-channel transfer to a globally spent cluster; not untouched project validation",
+  "sign_gate": {
+    "inner_correlation_aperture_arcsec": 30.0,
+    "inner_star_gas_correlation_threshold": 0.3278835,
+    "inner_threshold_source": "midpoint between P0564 MACS0429 value 0.505048 and positive-group maximum 0.150719",
+    "outer_alignment_aperture_arcsec": 120.0,
+    "outer_quadrupole_cos2_threshold": 0.0744005,
+    "outer_threshold_source": "midpoint between P0564 MACS0429 value -0.491632 and positive-group minimum 0.640433",
+    "rule": "t=-0.3 only if inner correlation exceeds its threshold AND outer cos2 alignment is below its threshold; otherwise t=+0.3",
+    "universal_magnitude": 0.3,
+    "parameters_derived_from_four_cluster_morphology": 2,
+    "per_cluster_fitted_gravity_parameters": 0
+  },
+  "map": {
+    "gas_normalization": "accept_absolute",
+    "gas_power": 0.5,
+    "include_stars": true,
+    "operator": "contrast",
+    "softening_kpc": 20.0,
+    "pixels_per_axis": 512
+  },
+  "response": {
+    "coupling_grid_min": -6.0,
+    "coupling_grid_max": 6.0,
+    "coupling_grid_step": 0.25,
+    "near_zero_pair": [-0.25, 0.25],
+    "source_plane_rule": "P0563 unweighted training-family source mean with held-out source-plane separation",
+    "exact_models": ["zero", "morphology_gated_t"],
+    "starts_per_exact_fit": 12,
+    "optimizer_seed_ensembles": [20260740, 20261740],
+    "maximum_function_evaluations": 2000
+  },
+  "advance_gates": {
+    "morphology_sign_matches_near_zero_sign_in_both_ensembles": true,
+    "exact_candidate_all_roots_in_both_ensembles": true,
+    "exact_candidate_improves_zero_in_both_ensembles": true,
+    "candidate_gate_validated": false
+  },
+  "inputs": {
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "p0557_protocol": "configs/p0557_baryon_proxy_tidal_protocol.json",
+    "metric_slip_protocol": "configs/metric_slip_raw_lensing_protocol.json",
+    "p0554_interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "p0564_report": "results/p0564_baryon_morphology_sign_audit/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0565_rxj2129_morphology_gate_transfer",
+    "morphology": "morphology.csv",
+    "source_plane_response": "source_plane_response.csv",
+    "exact_scores": "exact_scores.csv",
+    "predictions": "predictions.csv",
+    "tensor_audit": "tensor_audit.csv",
+    "physical_map_audit": "physical_map_audit.csv",
+    "report": "report.json",
+    "figure": "p0565_rxj2129_morphology_gate_transfer.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "RX J2129 is globally spent in earlier project work, although its P0564 descriptors and this tensor response were not used to derive the gate.",
+    "Two thresholds were chosen from a one-versus-three post-hoc separation and carry a high overfitting risk.",
+    "X-ray brightness supplies angular morphology while ACCEPT supplies the radial gas profile.",
+    "One transfer cluster cannot validate a population-level environmental gate.",
+    "No formula can be promoted from P0565."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "protocol_version": "P0608C-TOMOGRAPHY-RANDOM-START-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-02T00:20:00Z",
+  "status": "frozen_after_P0608B_deterministic_start_issue_before_any_P0608C_repeat_score",
+  "question": "When every repeat adds one independently randomized legal geometry start to the fixed P0601 start, is the gamma=0 versus gamma=1 difference stable across optimizer basins?",
+  "locked_formula": {
+    "component": "gas",
+    "angular_strength": 0.0025,
+    "gammas": [0.0, 1.0],
+    "geometry_family": "same six P0601 pseudo-elliptical and shear parameters",
+    "gravity_parameters_fit": 0
+  },
+  "robustness": {
+    "independent_one_start_fits_per_gamma": 24,
+    "starts_per_repeat": 2,
+    "repeat_definition": "Each repeat contains the fixed P0601 start plus one seed-dependent random legal start; retain the lower training cost.",
+    "seed": 21292040,
+    "primary_comparison": "best complete training fit for each gamma",
+    "distribution_comparison": "median and 16-84 percentile training and spent-heldout RMS across repeats"
+  },
+  "inputs": {
+    "P0608_protocol": "configs/p0608_route_redshift_tomography_protocol.json",
+    "P0608_report": "results/p0608_route_redshift_tomography/report.json",
+    "P0607_protocol": "configs/p0607_component_direction_raw_lensing_protocol.json",
+    "P0601_protocol": "configs/p0601_frozen_potential_raw_lensing_protocol.json",
+    "P0601_parameters": "results/p0601_frozen_potential_raw_lensing/fitted_parameters.csv",
+    "raw_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "route_source_protocol": "configs/adaptive_route_raw_rxj2129_protocol.json",
+    "component_screen_protocol": "configs/p0554_all_baryon_route_screen_protocol.json",
+    "component_acquisition_protocol": "configs/p0554_all_baryon_route_acquisition_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0608c_tomography_random_start_robustness",
+    "fits": "two_start_repeats.csv",
+    "summary_table": "gamma_summary.csv",
+    "report": "report.json",
+    "figure": "p0608c_tomography_random_start_robustness.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This audit is post hoc after P0608 and after the deterministic-repeat issue in P0608B.",
+    "Each repeat compares one random start to the same fixed start, so the retained distribution is censored at the deterministic solution.",
+    "RX J2129 and every image split remain spent.",
+    "A stable gamma difference would still require transfer to a different cluster.",
+    "An unstable result demonstrates non-identifiability in this model; it does not prove single-plane gravity."
+  ]
+}

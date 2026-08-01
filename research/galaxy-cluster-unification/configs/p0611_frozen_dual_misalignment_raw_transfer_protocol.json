@@ -1,0 +1,86 @@
+{
+  "protocol_version": "P0611-FROZEN-DUAL-MISALIGNMENT-RAW-TRANSFER-0.1.0",
+  "frozen_utc": "2026-08-02T03:10:00Z",
+  "status": "frozen_after_P0610_before_computing_A383_or_MS2137_direction_cosines_gate_activations_or_P0611_lens_scores",
+  "question": "Does the exact posthoc P0610 dual gas/member/star misalignment gate predict whether the locked gas route helps two raw cluster lenses that did not create the gate?",
+  "systems": ["A383", "MS2137"],
+  "chronology": {
+    "prospective_relative_to_P0610": true,
+    "pristine_project_wide_holdout": false,
+    "reason": "Both systems were used by earlier, different field families, but neither system's P0610 direction cosines, gate activation, or gas-route response was computed before this freeze."
+  },
+  "member_selection": {
+    "catalog": "public CLASH ACS+IR photometric+BPZ catalog",
+    "rule": "flag5sig=0, stellarity<0.8, valid F160W magnitude, BPZ 95% interval contains the lens redshift, odds>=0.5, and projected radius<=300 kpc",
+    "aperture_kpc": 300.0,
+    "stellarity_max": 0.8,
+    "photoz_odds_min": 0.5,
+    "minimum_members": 10,
+    "weight": "10^[-0.4*(F160W-F160W_brightest)] normalized over selected members"
+  },
+  "locked_gate": {
+    "gas_member_cosine": "c_gm=<d_gas dot d_member> weighted by selected member F160W light",
+    "gas_star_cosine": "c_gs=<d_gas dot d_star> weighted by selected member F160W light",
+    "dual_misalignment": "A_dual=sqrt(max(0,1-c_gm)*max(0,1-c_gs))",
+    "activation": "H=A_dual^4/(A_dual^4+0.3^4)",
+    "effective_strength": "s_eff=0.0025*H",
+    "threshold": 0.3,
+    "power": 4.0,
+    "base_strength": 0.0025,
+    "redshift_exponent": 1.0,
+    "parameters_retuned_per_cluster": 0
+  },
+  "locked_route_geometry": {
+    "source": "configs/p0607_component_direction_raw_lensing_protocol.json",
+    "length_over_R80": 0.25,
+    "width_over_R80": 0.5,
+    "direction_softening_kpc": 200.0,
+    "direction_distance_power": 2.0,
+    "contrast_cap": 20.0,
+    "monopole": "zero annular convergence mean and zero circular deflection mean"
+  },
+  "raw_fit": {
+    "radial_parent": "P0599 bounded potential-shape field",
+    "variants": ["P0599_no_route", "P0610_gated_gas_route"],
+    "ordinary_geometry_parameters_per_cluster": 6,
+    "optimization_starts_per_variant_cluster": 16,
+    "seed": 21372061,
+    "selection": "none; every field parameter is fixed before both scores"
+  },
+  "advance_gates": {
+    "all_training_and_heldout_roots_each_system": true,
+    "activation_response_ordering": "the system with larger frozen H must have at least as large held-out fractional improvement",
+    "both_systems_not_worse": true,
+    "equal_system_heldout_improvement_fraction_min": 0.01,
+    "equal_system_heldout_RMS_arcsec_max": 2.0
+  },
+  "inputs": {
+    "P0566_protocol": "configs/p0566_a383_ms2137_morphology_gate_transfer_protocol.json",
+    "P0566_acquisition_protocol": "configs/p0566_a383_ms2137_transfer_acquisition_protocol.json",
+    "base_raw_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "metric_protocol": "configs/metric_slip_raw_lensing_protocol.json",
+    "P0601_protocol": "configs/p0601_frozen_potential_raw_lensing_protocol.json",
+    "P0607_protocol": "configs/p0607_component_direction_raw_lensing_protocol.json",
+    "A383_member_catalog": "data/raw/r1_lens_nuisance_inputs/a383/hlsp_clash_hst_acs-ir_a383_cat.txt",
+    "MS2137_member_catalog": "data/raw/r1_lens_nuisance_inputs/ms2137/hlsp_clash_hst_acs-ir_ms2137_cat.txt"
+  },
+  "outputs": {
+    "directory": "results/p0611_frozen_dual_misalignment_raw_transfer",
+    "member_sources": "member_sources.csv",
+    "direction_audits": "direction_audits.csv",
+    "field_audits": "field_audits.csv",
+    "system_scores": "system_scores.csv",
+    "predictions": "predictions.csv",
+    "report": "report.json",
+    "figure": "p0611_frozen_dual_misalignment_raw_transfer.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "A383 and MS2137 are chronologically prospective for P0610 but project-spent under other formula families.",
+    "The CLASH photometric membership cut is a reproducible proxy and includes contamination; it is not a spectroscopic member census.",
+    "F160W traces light rather than stellar mass and Chandra count rate traces emissivity rather than gas mass.",
+    "The baseline radial law used CLASH reconstructed profiles, so this is not an independent test of the full parent formula.",
+    "Two comparatively relaxed clusters cannot validate a population law or a merger-specific gate.",
+    "Raw image positions can reject the projected route implementation but cannot observe a hidden three-dimensional field path."
+  ]
+}

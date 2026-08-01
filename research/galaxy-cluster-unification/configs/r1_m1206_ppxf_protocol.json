@@ -1,0 +1,70 @@
+{
+  "protocol_version": "R1A2-M1206-pPXF-0.1",
+  "status": "frozen_engineering_protocol_pending_execution",
+  "purpose": "Reconstruct the six-point MACS J1206 BCG line-of-sight velocity-dispersion profile from public calibrated spectra without using Figure 2 as numerical input.",
+  "blindness_rule": "Freeze spatial masks, spectral masks, templates, resolution treatment, uncertainty calculation, and success thresholds before comparing reconstructed dispersions with the publication figure or any gravity residual.",
+  "input": {
+    "cube_path": "data/raw/r1_muse_bcg_cubes/macs_j1206_bcg_4860_7160A_r15arcsec.fits",
+    "cube_sha256": "B2250F1DEDDD7E452697C26497422EA832D94B220183797EE552C7BA3868DF7F",
+    "data_extension": "DATA",
+    "variance_extension": "STAT",
+    "observed_wavelength_range_angstrom": [4860.0, 7160.0],
+    "bcg_redshift_initial": 0.4398,
+    "bcg_center_ra_deg": 181.550625,
+    "bcg_center_dec_deg": -8.8009444444,
+    "astrometric_registration": "fit the fixed-n=4.05, fixed-q, fixed-PA continuum model robustly and treat the offset from the published sky coordinate as a global cube-WCS correction",
+    "maximum_allowed_registration_offset_arcsec": 3.0
+  },
+  "spatial_extraction": {
+    "annulus_semimajor_edges_arcsec": [0.0, 0.6, 1.5, 3.0, 5.0, 8.0, 12.0],
+    "position_angle_deg_east_of_north": 185.0,
+    "axis_ratio_b_over_a": 0.625,
+    "minimum_valid_spaxel_fraction_per_bin": 0.7,
+    "mask_protocol": {
+      "stage_1": "mask non-finite DATA/STAT values and non-positive variance",
+      "stage_2": "construct a white-light image from the median over 6000-7000 Angstrom",
+      "stage_3": "subtract a 3-pixel Gaussian-smoothed white-light image to form a compact-source detection image",
+      "stage_4": "flag positive compact residual components above 6 robust sigma with 2-300 connected pixels, excluding the registered central 3.0 arcsec",
+      "stage_5": "dilate flagged components by 8 pixels to remove source wings and freeze the resulting mask before spectral fitting"
+    }
+  },
+  "spectral_fit": {
+    "software": "pPXF",
+    "software_version": "9.4.8",
+    "template_family_baseline": "E-MILES",
+    "template_path": "data/raw/r1_ppxf_templates/spectra_emiles_9.0.npz",
+    "template_sha256": "6A1B1A70DB4D95F67AFE0ADBE254F111EB2B50412B9F311714C54FFBA18C6F0E",
+    "template_source": "https://raw.githubusercontent.com/micappe/ppxf_data/main/spectra_emiles_9.0.npz",
+    "galaxy_fwhm_angstrom_baseline": 2.6,
+    "moments": 2,
+    "additive_polynomial_degree": 8,
+    "multiplicative_polynomial_degree": 0,
+    "initial_sigma_km_s": 300.0,
+    "mask_emission_lines": true,
+    "mask_high_variance_pixels": "exclude wavelength planes whose annular variance median exceeds the local 21-pixel median by 6 robust sigma",
+    "noise_model": "sum STAT variance over unmasked spaxels; rescale formal noise to unit robust residual variance only for reported conditional errors"
+  },
+  "covariance_protocol": {
+    "spatial_resampling": "100 deterministic spatial block-bootstrap replicates within each annulus using 2x2-spaxel blocks",
+    "template_systematic": "repeat with XSL templates if available; otherwise mark this component missing rather than treating it as zero",
+    "resolution_systematic_fwhm_angstrom": [2.5, 2.6, 2.7],
+    "spectral_mask_systematic": "repeat with 5-sigma and 8-sigma high-variance masks",
+    "reported_covariance": "sum the bootstrap covariance and between-protocol covariance; preserve all six-by-six off-diagonal terms",
+    "random_seed": 1206
+  },
+  "success_thresholds": {
+    "six_bins_return_finite_sigma": true,
+    "minimum_outer_bin_median_signal_to_noise_per_angstrom": 8.0,
+    "maximum_fractional_sigma_uncertainty_each_bin": 0.3,
+    "maximum_template_or_mask_shift_fraction": 0.1,
+    "maximum_opposite_half_velocity_difference_km_s": 100.0,
+    "maximum_opposite_half_sigma_difference_fraction": 0.2,
+    "covariance_must_be_positive_semidefinite": true,
+    "publication_figure_use": "visual validation only after all preceding outputs are frozen"
+  },
+  "authorization": {
+    "engineering_profile_reconstruction": true,
+    "gravity_response_fit": false,
+    "claim_as_published_likelihood": false
+  }
+}

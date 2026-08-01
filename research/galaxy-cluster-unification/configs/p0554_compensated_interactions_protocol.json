@@ -1,0 +1,99 @@
+{
+  "protocol_version": "P0554-COMPENSATED-INTERACTIONS-0.1.0",
+  "frozen_utc": "2026-07-31T21:10:55Z",
+  "status": "frozen_after_local_fixed_geometry_screen_before_any_compensated_interaction_refit",
+  "question": "Do the locally consequential P0554 changes survive ordinary lens-geometry refits, and can a sharper high-acceleration screen retain the raw-lens response of alpha-low while restoring Solar safety?",
+  "selection_evidence": {
+    "report": "results/p0554_local_cross_domain_sensitivity/report.json",
+    "rules": [
+      "extent_leak=+0.05 was the only small scalar change that kept Solar safety, produced all 18 fixed-geometry held-out roots, and moved RX J2129 and the four-cluster raw aggregate in the same favorable direction",
+      "alpha=0.675 produced all 18 fixed-geometry roots but failed Mercury at -3.510 mas/century",
+      "screen_exponent=1.2 strongly suppresses the Solar response and is tested as a compensation rather than a free rescue",
+      "apogee_ratio=80 improved RX J2129 and the matched four-cluster raw score with small galaxy and CLASH changes",
+      "screen_scale=0.8 moved galaxy, CLASH, and matched four-cluster metrics in the same direction while retaining Solar safety",
+      "invariant_power=1.08 improved CLASH and matched four-cluster RMS but lost one RX J2129 root"
+    ]
+  },
+  "baseline": {
+    "alpha": 0.75,
+    "apogee_ratio": 100.0,
+    "screen_exponent": 1.0,
+    "screen_scale": 1.0,
+    "mass_radius_delta": 0.0,
+    "extent_leak": 0.0,
+    "invariant_mode": "potential_depth",
+    "invariant_power": 1.2,
+    "invariant_scale": 0.000002,
+    "secondary_path_ratio_power": 0.25,
+    "photon_extra_multiplier": 1.75,
+    "universal_q": 1.2300686115098052
+  },
+  "variants": [
+    {"variant_id": "baseline", "role": "parent", "changes": {}},
+    {"variant_id": "extent_high", "role": "single", "changes": {"extent_leak": 0.05}},
+    {"variant_id": "apogee_low", "role": "single", "changes": {"apogee_ratio": 80.0}},
+    {"variant_id": "alpha_low_unsafe", "role": "Solar-failing control", "changes": {"alpha": 0.675}},
+    {"variant_id": "alpha_screen_compensated", "role": "Solar compensation", "changes": {"alpha": 0.675, "screen_exponent": 1.2}},
+    {"variant_id": "extent_apogee", "role": "topology plus reach interaction", "changes": {"extent_leak": 0.05, "apogee_ratio": 80.0}},
+    {"variant_id": "extent_alpha_screen", "role": "topology plus Solar-compensated radial shape", "changes": {"extent_leak": 0.05, "alpha": 0.675, "screen_exponent": 1.2}},
+    {"variant_id": "extent_apogee_alpha_screen", "role": "three-mechanism interaction", "changes": {"extent_leak": 0.05, "apogee_ratio": 80.0, "alpha": 0.675, "screen_exponent": 1.2}},
+    {"variant_id": "screen_scale_low", "role": "same-direction control", "changes": {"screen_scale": 0.8}},
+    {"variant_id": "extent_screen_scale", "role": "topology plus screen-location interaction", "changes": {"extent_leak": 0.05, "screen_scale": 0.8}},
+    {"variant_id": "invariant_power_low", "role": "CLASH-favored control", "changes": {"invariant_power": 1.08}},
+    {"variant_id": "extent_invariant_power", "role": "topology plus potential-curvature interaction", "changes": {"extent_leak": 0.05, "invariant_power": 1.08}}
+  ],
+  "evaluation": {
+    "formula_parameters_fit": 0,
+    "geometry_parameters_refit_per_cluster": 6,
+    "source_positions_profiled_per_family": true,
+    "optimization_starts_per_variant_system": 8,
+    "maximum_function_evaluations": 2500,
+    "random_seed": 554211055,
+    "galaxy": "131 SPARC galaxies with fixed nuisances and untouched outer radii",
+    "derived_cluster": "84 CLASH equivalent acceleration points in 20 systems, no cluster amplitude fit",
+    "raw": "RX J2129 plus four Caminha/CLASH clusters, exact held-out image roots after refitting only ordinary geometry",
+    "solar": "same P0554 analytic Cassini, Earth, Saturn, and Mercury proxies"
+  },
+  "inputs": {
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "local_screen_report": "results/p0554_local_cross_domain_sensitivity/report.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ2129_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "RXJ2129_geometry": "results/arc_invariant_pareto_refinement/raw_RXJ2129_parameters.csv",
+    "four_cluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "four_cluster_geometry": "results/adaptive_route_multicluster_raw/geometry.csv",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "compact_halo_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "interpretation_rules": {
+    "all_raw_roots_required_for_accuracy_claim": true,
+    "matched_comparison_rule": "A candidate-to-parent RMS change is computed only on systems complete for both; recovery of a missing parent root is reported separately.",
+    "material_galaxy_change_km_s": 0.5,
+    "material_CLASH_change_dex": 0.01,
+    "material_raw_change_arcsec": 0.25,
+    "solar_mercury_margin_mas_per_century": 3.1,
+    "no_variant_is_promoted": true
+  },
+  "outputs": {
+    "directory": "results/p0554_compensated_interactions",
+    "variant_scores": "variant_scores.csv",
+    "galaxy_morphology": "galaxy_morphology_scores.csv",
+    "raw_scores": "raw_system_scores.csv",
+    "raw_predictions": "raw_predictions.csv",
+    "geometry": "geometry.csv",
+    "matched_comparisons": "matched_comparisons.csv",
+    "report": "report.json",
+    "figure": "p0554_compensated_interactions.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The variants were generated after inspecting a spent local sensitivity screen and are descriptive interaction tests.",
+    "The five raw clusters are spent at project level and no result is a fresh confirmation.",
+    "CLASH equivalent accelerations are conventional-GR/NFW-derived targets.",
+    "Geometry refits can absorb some radial formula response; this stage tests robustness to that nuisance freedom.",
+    "The photon multiplier and nonlocal potential/path response do not yet have a covariant action."
+  ]
+}

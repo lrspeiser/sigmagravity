@@ -1,0 +1,160 @@
+{
+  "protocol_version": "RXJ2129-RAW-THEORY-LENSING-0.1.1",
+  "frozen_utc": "2026-07-28T23:30:00Z",
+  "status": "frozen_before_any_candidate_MOND_or_halo_score_on_the_Caminha2019_RXJ2129_catalog",
+  "purpose": "Forward-model raw spectroscopic multiple-image positions under fixed baryon-only, fixed simple-MOND, locked universal-candidate, cluster-retuned RAR, and conventional GR-plus-halo deflection laws.",
+  "pre_freeze_disclosure": [
+    "The Caminha et al. RX J2129 catalog contains 22 metric-neutral image rows in seven spectroscopic families with 0.196272-arcsec per-coordinate errors.",
+    "No candidate, MOND, baryon-only, or independent conventional-halo score has been evaluated on this 22-image catalog.",
+    "The separate Jauzac et al. 21-image catalog and the prior conventional engineering scores on that catalog are known and are not used for fitting or model selection here.",
+    "The published Jauzac et al. RX J2129 image-plane RMS of 0.29 arcsec and the existence of a 71-halo published model are known reference facts, not likelihood inputs."
+  ],
+  "raw_lensing_inputs": {
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "system_exact_name": "RX J2129.7+0005",
+    "metric_neutral_rows_only": true,
+    "images": 22,
+    "source_families": 7,
+    "position_sigma_arcsec_per_coordinate": 0.196272,
+    "source_redshifts": "fixed independent MUSE spectroscopic measurements",
+    "coordinate_cross_image_covariance": "none published; use the declared diagonal errors"
+  },
+  "baryonic_inputs": {
+    "radial_profile": "data/raw/clash_tian2020/fig2.dat",
+    "density_profile": "results/rar_sharp_coherence_rg_sweep/sample.csv",
+    "system_label": "RXJ2129",
+    "baryonic_acceleration_radii_kpc": [14.3, 100.0, 200.0, 400.0, 600.0],
+    "local_density_radii_kpc": [14.3, 100.0, 200.0, 400.0],
+    "density_600kpc_rule": "continue the measured 200-400 kpc log-density slope; this correction was frozen after a pre-score count mismatch stopped the first execution",
+    "strong_lens_impact_radius_range_kpc_expected": [15.8, 76.5],
+    "interpolation": "linear in log10 radius versus log10 acceleration or density",
+    "inner_tail": "continue the first measured log slope",
+    "outer_tail": "force g_bar proportional to r^-2 beyond 600 kpc and continue the last measured density slope",
+    "warning": "The Tian baryonic profile uses Chandra gas, HST BCG photometry, and a mean cold-baryon relation. It is independent of the raw image-position residuals but lacks a full component covariance and is not a completed same-system baryon reconstruction."
+  },
+  "cosmology_and_coordinates": {
+    "lens_redshift": 0.235,
+    "reference_source_redshift": 2.0,
+    "H0_km_s_Mpc": 70.0,
+    "Omega_m": 0.27,
+    "center_ra_deg": 322.41651,
+    "center_dec_deg": 0.08923,
+    "angular_scale_kpc_per_arcsec": 3.741653570564318
+  },
+  "photon_closure": {
+    "name": "same_effective_potential_zero_slip",
+    "spherical_deflection": "alpha_hat(b)=4*b/c^2*integral_0^infinity[g(sqrt(b^2+z^2))/sqrt(b^2+z^2)]dz",
+    "equivalent_integration": "alpha_hat(b)=4*b/c^2*integral_0^infinity g(b*cosh(t))dt",
+    "reduced_deflection": "alpha=(D_ds/D_s)*alpha_hat",
+    "lensing_multiplier": 1.0,
+    "gravitational_slip_parameter": 0.0,
+    "status": "diagnostic closure rather than a derived covariant action"
+  },
+  "radial_models": {
+    "baryons_GR": {
+      "equation": "g=g_bar",
+      "gravity_parameters_fit_to_RXJ2129": 0
+    },
+    "fixed_simple_MOND": {
+      "equation": "g/g_bar=0.5*(1+sqrt(1+4*a0/g_bar))",
+      "a0_m_s2": 1.2e-10,
+      "gravity_parameters_fit_to_RXJ2129": 0
+    },
+    "locked_universal_candidate": {
+      "equation": "E=E_RAR+[1-(3C^2-2C^3)]^2*(1/epsilon_RG-1)",
+      "cluster_coherence": 0.0,
+      "g_dagger_m_s2": 1.2e-10,
+      "epsilon_0": 0.12950519927041917,
+      "log10_rho_c_g_cm3": -23.785246000655626,
+      "Q": 0.4271580606729452,
+      "coherence_gate_power": 2.0,
+      "gravity_parameters_fit_to_RXJ2129": 0
+    },
+    "cluster_retuned_RAR_diagnostic": {
+      "equation": "fixed RAR",
+      "g_dagger_m_s2": 2.02e-9,
+      "gravity_parameters_fit_to_RXJ2129": 0,
+      "universality_status": "fails because the scale is 16.83 times the galaxy value"
+    },
+    "GR_plus_cluster_halo": {
+      "equation": "fixed spherical baryonic deflection plus one non-singular isothermal ellipsoid and external shear",
+      "object_specific_halo_parameters": [
+        "theta_E_ref_arcsec",
+        "axis_ratio_q",
+        "position_angle_phi_radian",
+        "log10_core_arcsec",
+        "center_x_arcsec",
+        "center_y_arcsec"
+      ],
+      "interpretation": "A deliberately compact conventional dark-halo comparator, less flexible than the published 71-halo RX J2129 model."
+    }
+  },
+  "common_structural_nuisances": {
+    "fixed_radial_models": [
+      "axis_ratio_q",
+      "position_angle_phi_radian",
+      "center_x_arcsec",
+      "center_y_arcsec",
+      "external_shear_gamma1",
+      "external_shear_gamma2"
+    ],
+    "elliptical_potential_coordinate": "R_e=sqrt(q*x_prime^2+y_prime^2/q)",
+    "bounds": {
+      "axis_ratio_q": [0.55, 1.0],
+      "position_angle_phi_radian": [-1.5707963267948966, 1.5707963267948966],
+      "center_x_arcsec": [-3.0, 3.0],
+      "center_y_arcsec": [-3.0, 3.0],
+      "external_shear_gamma1": [-0.25, 0.25],
+      "external_shear_gamma2": [-0.25, 0.25]
+    },
+    "source_positions": "two profiled coordinates per source family",
+    "classification": "object-specific lens-geometry and source nuisances, reported separately from gravity-law or halo-amplitude parameters"
+  },
+  "predictive_split": {
+    "training": "images a and b in every family plus image 3c",
+    "heldout": ["1c", "2c", "3d", "4c", "5c", "6c", "7c"],
+    "training_images": 15,
+    "heldout_images": 7,
+    "model_selection_on_heldout": false,
+    "post_score_rule": "Do not alter the field equations, radial interpolation, tail closure, geometry family, bounds, or priors after inspecting heldout residuals."
+  },
+  "optimization": {
+    "method": "bounded nonlinear least squares on first-order image-plane residuals with exact nonlinear lens-equation roots for scoring",
+    "multi_starts": 16,
+    "random_seed": 21292026,
+    "maximum_function_evaluations": 3000
+  },
+  "primary_metrics": [
+    "exact heldout radial RMS in arcsec",
+    "exact heldout coordinate chi-square",
+    "all heldout roots converged",
+    "all-image descriptive radial RMS after a separately labeled refit"
+  ],
+  "advance_gates": {
+    "candidate_all_heldout_roots_converged": true,
+    "candidate_maximum_heldout_radial_RMS_arcsec": 0.5,
+    "candidate_heldout_RMS_lower_than_fixed_simple_MOND": true,
+    "candidate_to_compact_halo_heldout_RMS_ratio_max": 1.25,
+    "candidate_no_fitted_lensing_amplitude_or_slip": true,
+    "no_primary_geometry_parameter_within_fraction_of_bound": 0.01
+  },
+  "frozen_sensitivities": {
+    "global_log10_gbar_shifts_dex": [-0.1, 0.1],
+    "candidate_log10_density_shifts_dex": [-0.3, 0.3],
+    "rule": "Repeat the complete training fit and heldout score without selecting a favorable shift."
+  },
+  "claim_boundary": [
+    "The lens-side likelihood uses raw observed image positions and spectroscopic source redshifts and never reads a published NFW mass or residual.",
+    "The baryonic radial input is a literature reconstruction rather than a native joint photon-count and HST stellar-mass likelihood.",
+    "The pseudo-elliptical potential and external shear are structural closures not predicted by the scalar radial formula.",
+    "The labeled-root score is conditional on the known image associations and does not model missing-image completeness.",
+    "One cluster is a pilot, not a population test or a general victory over MOND or dark matter."
+  ],
+  "outputs": {
+    "report": "results/rxj2129_raw_theory_lensing/report.json",
+    "predictions": "results/rxj2129_raw_theory_lensing/image_predictions.csv",
+    "parameters": "results/rxj2129_raw_theory_lensing/fitted_parameters.csv",
+    "radial_profiles": "results/rxj2129_raw_theory_lensing/radial_deflection_profiles.csv",
+    "diagnostic": "results/rxj2129_raw_theory_lensing/raw_lensing_comparison.png"
+  }
+}

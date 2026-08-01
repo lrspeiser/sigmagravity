@@ -1,0 +1,73 @@
+{
+  "protocol_version": "P0615-SELF-COUPLED-QUADRUPOLE-ROUTE-0.1.0",
+  "status": "frozen_after_P0614_before_self_coupled_scores",
+  "trigger": "P0614 showed that the independent endpoint strength is not unified with the P0554 scalar parent and fails RXJ2129 by a factor of 11.25. P0583B independently showed that RXJ2129 only tolerates a very small positive angular amplitude.",
+  "question": "Can the scalar excess and baryonic shape determine endpoint routing with no independent route-strength parameter?",
+  "derived_quantities": {
+    "scalar_excess_at_R80": "Delta80=alpha_P0554(R80)/alpha_b(R80)-1",
+    "self_routed_fraction": "f_self=Delta80/(1+Delta80)",
+    "baryonic_quadrupole": "Q=sqrt(Qxx^2+Qxy^2), the centroided spin-2 member-light asymmetry",
+    "reason_for_Q_squared": "Q is spin-2; Q^2 is the lowest even rotational scalar and is exactly zero for an axisymmetric source."
+  },
+  "locked_route": {
+    "route_mode": "endpoint",
+    "return_length_over_R80": 0.36,
+    "width_over_R80": 0.23,
+    "contrast_mode": "tanh",
+    "contrast_cap": 20.0,
+    "extent_gate": "none; replaced by f_self",
+    "carrier": "P0554 excess above local baryonic gravity",
+    "zero_monopole": true
+  },
+  "amplitude_laws": {
+    "scalar_control": "epsilon=0",
+    "linear_Q_over_total": "epsilon=Q/(1+Delta80)",
+    "quadratic_Q2_over_total": "epsilon=Q^2/(1+Delta80)",
+    "quadratic_Q2_routed": "epsilon=Q^2*Delta80/(1+Delta80)^2",
+    "quadratic_Q2_strong_screen": "epsilon=Q^2/(1+Delta80)^2",
+    "quartic_Q4_over_total": "epsilon=Q^4/(1+Delta80)"
+  },
+  "parameter_policy": {
+    "new_fitted_gravity_parameters": 0,
+    "per_object_gravity_parameters": 0,
+    "selection": "Diagnostic ranking only; all systems are project-spent and the law family follows failure inspection."
+  },
+  "inputs": {
+    "P0581_protocol": "configs/p0581_locked_endpoint_exact_root_protocol.json",
+    "four_cluster_protocol": "configs/adaptive_route_multicluster_raw_protocol.json",
+    "P0581_geometry": "results/p0581_locked_endpoint_exact_root/geometry.csv",
+    "P0581_predictions": "results/p0581_locked_endpoint_exact_root/predictions.csv",
+    "P0583_protocol": "configs/p0583_tanh_endpoint_rxj2129_protocol.json",
+    "P0583_parameters": "results/p0583_tanh_endpoint_rxj2129/parameters.csv",
+    "P0583_predictions": "results/p0583_tanh_endpoint_rxj2129/predictions.csv",
+    "P0554_report": "results/arc_invariant_pareto_refinement/report.json",
+    "SPARC_report": "results/sparc_independent_nuisance_refit/report.json"
+  },
+  "gates": {
+    "four_cluster_heldout_roots_required": 11,
+    "RXJ2129_heldout_roots_required": 7,
+    "four_cluster_matched_improvement_min": 0.0,
+    "RXJ2129_improvement_min": 0.0,
+    "galaxy_RMSE_to_fixed_RAR_max": 1.5,
+    "all_solar_proxies_required": true
+  },
+  "outputs": {
+    "directory": "results/p0615_self_coupled_quadrupole_route",
+    "system_states": "system_states.csv",
+    "scores": "scores.csv",
+    "summary_scores": "summary_scores.csv",
+    "predictions": "predictions.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "figure": "p0615_self_coupled_quadrupole_route.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The amplitude family was motivated after inspecting P0583-P0614 and is not prospective.",
+    "All five raw systems are project-spent.",
+    "The four-cluster geometry and source positions are held at the P0581 K0338 fit; RXJ2129 uses its P0583 scalar fit.",
+    "F160W member light is a baryonic proxy and omits hot gas, intracluster light, and stellar mass-to-light variation.",
+    "The angular correction is zero-monopole and cannot repair missing absolute cluster convergence.",
+    "No improvement in this diagnostic can promote the formula without a future raw-cluster transfer."
+  ]
+}

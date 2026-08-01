@@ -1,0 +1,62 @@
+{
+  "protocol_version": "P0596-RADIAL-SHAPE-GATE-CV-0.1.0",
+  "frozen_utc": "2026-08-01T12:15:00Z",
+  "status": "frozen_after_P0595_morphology_associations_before_shape_gate_scores",
+  "question": "Can one dimensionless radial-shape gate suppress the galaxies harmed by diffuse redistribution while remaining computable from both galaxy and cluster baryon maps?",
+  "parent_protocol": "configs/p0593_diffusion_cross_domain_protocol.json",
+  "formula": {
+    "shape": "C=R50_b/R80_b",
+    "shape_gate": "H_C=1/[1+exp(-(C-C0)/w_C)] or H_C=1 for the no-shape control",
+    "acceleration_gate": "S_n=1/[1+(g_b(R80)/a0)^n], with n=0 meaning S_n=1",
+    "effective_route_fraction": "f_eff=f_max*H_C*S_n",
+    "prediction": "diffuse conservative mass by q*R80, mix by f_eff, then apply fixed RAR scalar completion"
+  },
+  "grid": {
+    "q_R80": [0.75, 1.25, 2.0, 3.0],
+    "route_fraction_max": [0.1, 0.2, 0.3],
+    "acceleration_gate_power": [0.0, 1.0, 4.0],
+    "shape_gate": [
+      {"id": "none", "midpoint": null, "width": null},
+      {"id": "c0.5_w0.05", "midpoint": 0.5, "width": 0.05},
+      {"id": "c0.5_w0.1", "midpoint": 0.5, "width": 0.1},
+      {"id": "c0.5_w0.2", "midpoint": 0.5, "width": 0.2},
+      {"id": "c0.6_w0.05", "midpoint": 0.6, "width": 0.05},
+      {"id": "c0.6_w0.1", "midpoint": 0.6, "width": 0.1},
+      {"id": "c0.6_w0.2", "midpoint": 0.6, "width": 0.2},
+      {"id": "c0.7_w0.05", "midpoint": 0.7, "width": 0.05},
+      {"id": "c0.7_w0.1", "midpoint": 0.7, "width": 0.1},
+      {"id": "c0.7_w0.2", "midpoint": 0.7, "width": 0.2}
+    ],
+    "candidate_count": 360
+  },
+  "cross_validation": {
+    "folds": 5,
+    "rule": "int(SHA256(galaxy)[0:8],16) mod 5",
+    "selection_metric": "training equal-galaxy outer RMSE"
+  },
+  "bootstrap": {"seed": 5961, "draws": 5000, "unit": "galaxy"},
+  "advance_gates": {
+    "oof_equal_galaxy_improvement_vs_fixed_RAR_fraction_min": 0.01,
+    "oof_equal_galaxy_improvement_vs_no_shape_family_fraction_min": 0.005,
+    "folds_improved_vs_fixed_RAR_min": 4,
+    "galaxies_improved_vs_fixed_RAR_fraction_min": 0.6,
+    "bootstrap_probability_vs_fixed_RAR_min": 0.9
+  },
+  "outputs": {
+    "directory": "results/p0596_radial_shape_gate_cv",
+    "candidate_fold_scores": "candidate_fold_scores.csv",
+    "fold_selections": "fold_selections.csv",
+    "oof_predictions": "oof_predictions.csv",
+    "galaxy_scores": "galaxy_scores.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0596_radial_shape_gate_cv.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This is whole-galaxy formula cross-validation with previously fitted nuisance values, not a nested nuisance refit.",
+    "R50/R80 is a radial-distribution ratio; calling larger values more concentrated would be ambiguous without specifying a profile family.",
+    "The shape-gate hypothesis was prompted by P0595 outcomes, so it requires later independent data.",
+    "RAR is still an empirical scalar completion and normalized cluster maps cannot validate lensing amplitude."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "protocol_version": "P0597-SIMPLE-SHAPE-LAW-CROSS-DOMAIN-0.1.0",
+  "frozen_utc": "2026-08-01T13:02:00Z",
+  "status": "posthoc_simplification_frozen_after_P0596_before_exact_cluster_and_Solar_replay",
+  "question": "What does the simplest P0596 consensus law do when one fixed formula is replayed on every galaxy, cluster map, Lenstool realization, GLAFIC map, and the finite-source Solar audit?",
+  "formula": {
+    "radial_shape": "C=R50_b/R80_b",
+    "shape_gate": "H=1/[1+exp(-(C-0.6)/0.1)]",
+    "route_fraction": "f_eff=0.3*H",
+    "diffusion_length": "ell=3*R80_b",
+    "spatial_response": "M_eff=(1-f_eff)M_b+f_eff*(G_ell convolved with M_b)",
+    "galaxy_scalar_completion": "g_obs=g_eff/[1-exp(-sqrt(g_eff/a0))], a0=1.2e-10 m/s^2",
+    "cluster_map_response": "Sigma_pred=(1-f_eff)B_20+f_eff*(G_ell convolved with B_20)"
+  },
+  "parameters": {
+    "q_R80": 3.0,
+    "route_fraction_max": 0.3,
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "acceleration_gate_power": 0.0
+  },
+  "selection_disclosure": "The settings are a post-hoc simplification of P0596: q and f are its common fold boundaries, C0=0.6 and w=0.1 are the central recurring gate, and the weak acceleration gate is removed. No result here is a fresh formula holdout.",
+  "source_protocols": {
+    "galaxy": "configs/p0593_diffusion_cross_domain_protocol.json",
+    "cluster": "configs/p0592_diffusive_propagator_transfer_protocol.json"
+  },
+  "bootstrap": {"seed": 5971, "draws": 5000, "unit": "galaxy"},
+  "interpretation_gates": {
+    "galaxy_equal_RMSE_improvement_fraction_min": 0.03,
+    "galaxy_folds_improved_min": 4,
+    "galaxy_bootstrap_probability_min": 0.9,
+    "cluster_holdout_improvement_fraction_min": 0.1,
+    "cluster_holdout_systems_improved_min": 2,
+    "cluster_holdout_realizations_improved_fraction_min": 0.7,
+    "cluster_GLAFIC_improvement_fraction_min": 0.05,
+    "solar_exterior_tail_fraction_max": 1e-20
+  },
+  "outputs": {
+    "directory": "results/p0597_simple_shape_law_cross_domain",
+    "galaxy_predictions": "galaxy_predictions.csv",
+    "galaxy_scores": "galaxy_scores.csv",
+    "cluster_system_scores": "cluster_system_scores.csv",
+    "cluster_uncertainty": "cluster_uncertainty.csv",
+    "cluster_glafic_scores": "cluster_glafic_scores.csv",
+    "report": "report.json",
+    "figure": "p0597_simple_shape_law_cross_domain.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The formula was simplified after inspecting P0596 and is not independently selected or validated.",
+    "The galaxy scalar response remains empirical RAR; this experiment tests whether one conservative spatial layer adds transferable information.",
+    "Cluster scores use normalized morphology and do not test absolute convergence amplitude.",
+    "The cluster baryon proxy omits hot gas, ICL, and stellar mass-to-light variation.",
+    "The Solar calculation uses spherical shell-theorem and finite-source-tail controls, not a covariant PPN metric or stellar-interior test."
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "protocol_version": "ADAPTIVE-ROUTE-RAW-RXJ2129-0.1.0",
+  "frozen_utc": "2026-08-01T06:05:00Z",
+  "status": "frozen_after_map_transfer_gate_before_adaptive_route_raw_image_scores",
+  "question": "Does the all-cluster selected extent-adaptive center-return kernel improve raw RX J2129 image positions when translated into a curl-free, zero-monopole deflection of the fixed P0554 scalar parent?",
+  "locked_map_result": {
+    "report": "results/adaptive_route_kernel/report.json",
+    "required_gate": "LOOCV_gate_passed",
+    "candidate_id": "A0279",
+    "candidate_specs": "results/adaptive_route_kernel/candidate_specs.csv"
+  },
+  "raw_inputs": {
+    "raw_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "parent_scores": "results/arc_invariant_pareto_refinement/variant_scores.csv",
+    "parent_parameters": "results/arc_invariant_pareto_refinement/raw_RXJ2129_parameters.csv",
+    "molino_catalog": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_ir_rxj2129_cat-molino.txt",
+    "parent_candidate": "P0554"
+  },
+  "source_catalog": {
+    "aperture_kpc": 300.0,
+    "galaxy_rule": "PointS < 0.8 and valid positive F160W_WFC3_PHOTOZ magnitude",
+    "hard_membership_rule": "cluster redshift lies within [zb_Min_1,zb_Max_1] and Odds_1 >= 0.5",
+    "weight_rule": "10^(-0.4*F160W_WFC3_PHOTOZ), normalized",
+    "coordinate_center": "fixed RX J2129 center from the raw lensing protocol"
+  },
+  "route_to_deflection_translation": {
+    "grid_half_width_arcsec": 255.5,
+    "grid_spacing_arcsec": 1.0,
+    "route_smoothing_kpc": "locked A0279 base_width_kpc",
+    "source_radius_exponent": -0.5,
+    "source_reference_radius_kpc": 100.0,
+    "carrier": "P0554 lensing excess over baryons",
+    "contrast_cap": 20.0,
+    "annulus_width_arcsec": 1.0,
+    "taper_inner_arcsec": 180.0,
+    "support_radius_arcsec": 220.0,
+    "monopole_rule": "subtract exact annular convergence mean and independently sampled circular radial deflection",
+    "new_amplitude_parameters": 0
+  },
+  "variants": [
+    {"label": "A0279_primary", "candidate_id": "A0279", "contrast_cap": 20.0, "centroid_mode": "light_centroid"},
+    {"label": "A0279_cap5", "candidate_id": "A0279", "contrast_cap": 5.0, "centroid_mode": "light_centroid"},
+    {"label": "A0279_cap100", "candidate_id": "A0279", "contrast_cap": 100.0, "centroid_mode": "light_centroid"},
+    {"label": "A0279_origin_center", "candidate_id": "A0279", "contrast_cap": 20.0, "centroid_mode": "cluster_origin"},
+    {"label": "fixed_C0351_translation", "candidate_id": "A0000", "contrast_cap": 20.0, "centroid_mode": "light_centroid"},
+    {"label": "shallow_source_weights", "candidate_id": "A0042", "contrast_cap": 20.0, "centroid_mode": "light_centroid"},
+    {"label": "steep_source_weights", "candidate_id": "A0045", "contrast_cap": 20.0, "centroid_mode": "light_centroid"}
+  ],
+  "fit": {
+    "baseline_starts": 16,
+    "primary_starts": 16,
+    "sensitivity_starts": 3,
+    "random_seed": 21292032,
+    "only_six_existing_geometry_nuisances_refit": true,
+    "gravity_or_route_parameters_fit_to_RXJ2129": 0
+  },
+  "randomization": {
+    "primary_radius_preserving_angle_trials": 32,
+    "score_at_primary_fixed_geometry": true
+  },
+  "gates": {
+    "all_heldout_roots_required": true,
+    "heldout_improvement_over_scalar_parent_fraction": 0.05,
+    "absolute_heldout_RMS_arcsec": 1.0,
+    "random_angle_empirical_p_max": 0.05
+  },
+  "outputs": {
+    "directory": "results/adaptive_route_raw_rxj2129",
+    "source_catalog": "source_catalog.csv",
+    "variant_scores": "variant_scores.csv",
+    "predictions": "predictions.csv",
+    "parameters": "parameters.csv",
+    "field_audits": "field_audits.csv",
+    "randomizations": "randomization_scores.csv",
+    "report": "report.json",
+    "figure": "adaptive_route_raw_rxj2129.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "RX J2129 raw images are spent at project level, but neither their positions nor residuals selected A0279.",
+    "The CLASH photometric catalog is not a complete gas-plus-stellar baryonic map and hard photo-z membership is imperfect.",
+    "Annular monopole removal preserves the scalar parent profile but makes this an angular test of the map law rather than a full nonlocal field solve.",
+    "Sensitivity variants are descriptive after the locked primary and cannot replace it.",
+    "The construction is a weak-field thin-lens phenomenology, not a covariant theory."
+  ]
+}

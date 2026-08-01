@@ -1,0 +1,117 @@
+{
+  "protocol_version": "ADAPTIVE-ROUTE-MULTICLUSTER-RAW-0.1.0",
+  "frozen_utc": "2026-07-31T20:52:38Z",
+  "status": "frozen_before_any_A0279_route_score_on_the_four_raw_CLASH_systems",
+  "question": "Does the post-hoc RX J2129 amplitude bridge transfer without retuning when the A0279 baryonic center-return route is replayed on four other raw cluster lenses?",
+  "primary_hypothesis": {
+    "map_candidate": "A0279",
+    "angular_strength_law": "s_theta=f_route^p",
+    "locked_power": 2.5,
+    "selection_history": "p=2.5 was the only descriptive RX J2129 bridge value to improve its held-out RMS, but it was not selected by RX J2129 training data; this is therefore an external replay of an explicitly post-hoc hypothesis",
+    "gravity_budget": "Only the P0554 lensing excess above the baryonic GR field is routed; the baryonic base remains local",
+    "route_geometry": "Each cataloged member launches a radial center-return path toward the member-light centroid; the map is converted to a curl-free deflection and its circular monopole is removed"
+  },
+  "inputs": {
+    "raw_cluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "member_catalog_protocol": "configs/clash_stellar_morphology_acquisition_protocol.json",
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "parent_scores": "results/arc_invariant_pareto_refinement/variant_scores.csv",
+    "adaptive_map_report": "results/adaptive_route_kernel/report.json",
+    "adaptive_candidate_specs": "results/adaptive_route_kernel/candidate_specs.csv",
+    "RXJ2129_bridge_report": "results/adaptive_route_amplitude_bridge/report.json",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "systems": {
+    "labels": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "historical_selection_labels": ["MACS0329", "MACS0429"],
+    "historical_validation_labels": ["MACS1115", "MACS1931"],
+    "formula_use": "A0279 and p=2.5 are locked for all four systems; neither subset selects a route parameter in this experiment",
+    "within_family_split": "Hold out the lexicographically last image in each family with at least three images; fit only six geometry nuisances and training-family source positions"
+  },
+  "member_sources": {
+    "columns": ["member_id", "RA_deg", "Dec_deg", "axis_a", "axis_b", "position_angle", "magnitude", "flag"],
+    "aperture_kpc": 300.0,
+    "selection": "finite RA, Dec and positive finite magnitude within 300 kpc; catalogs are the fixed Caminha/Lenstool member lists",
+    "weight": "10^[-0.4*(magnitude-minimum_magnitude)], normalized",
+    "minimum_members": 10
+  },
+  "route_to_deflection_translation": {
+    "grid_half_width_arcsec": 255.5,
+    "grid_spacing_arcsec": 1.0,
+    "source_radius_exponent": -0.5,
+    "source_reference_radius_kpc": 100.0,
+    "carrier": "P0554 lensing excess over baryons",
+    "contrast_cap": 20.0,
+    "annulus_width_arcsec": 1.0,
+    "taper_inner_arcsec": 180.0,
+    "support_radius_arcsec": 220.0,
+    "centroid_mode": "member_light_centroid",
+    "monopole_rule": "subtract exact annular convergence mean and independently sampled circular radial deflection"
+  },
+  "exact_refit_variants": [
+    {"label": "scalar_baseline", "kind": "scalar"},
+    {"label": "A0279_power_2.0", "kind": "route", "fraction_power": 2.0},
+    {"label": "A0279_primary_power_2.5", "kind": "route", "fraction_power": 2.5},
+    {"label": "A0279_power_3.0", "kind": "route", "fraction_power": 3.0}
+  ],
+  "one_at_a_time_variants": [
+    {"label": "fraction_low", "parameter": "base_fraction", "multiplier": 0.8},
+    {"label": "fraction_high", "parameter": "base_fraction", "multiplier": 1.2},
+    {"label": "extent_slope_low", "parameter": "extent_slope", "multiplier": 0.75},
+    {"label": "extent_slope_high", "parameter": "extent_slope", "multiplier": 1.25},
+    {"label": "length_low", "parameter": "base_length_kpc", "multiplier": 0.8},
+    {"label": "length_high", "parameter": "base_length_kpc", "multiplier": 1.2},
+    {"label": "width_low", "parameter": "base_width_kpc", "multiplier": 0.8},
+    {"label": "width_high", "parameter": "base_width_kpc", "multiplier": 1.2},
+    {"label": "source_weight_shallow", "parameter": "source_weight_power", "value": 0.75},
+    {"label": "source_weight_steep", "parameter": "source_weight_power", "value": 1.25}
+  ],
+  "fit": {
+    "maximum_function_evaluations": 2500,
+    "baseline_starts": 8,
+    "primary_starts": 8,
+    "amplitude_sensitivity_starts": 4,
+    "random_seed": 32904291115,
+    "gravity_parameters_fit_to_cluster_images": 0,
+    "ordinary_geometry_parameters_refit_per_cluster": 6
+  },
+  "sensitivity_scoring": {
+    "method": "At the frozen primary fit geometry and source positions, score each one-at-a-time variant on training and held-out images without a new fit",
+    "purpose": "Measure local formula sensitivity; these rows cannot replace the primary"
+  },
+  "gates": {
+    "all_heldout_roots_required": true,
+    "equal_system_heldout_improvement_over_scalar_min": 0.05,
+    "historical_validation_improvement_over_scalar_min": 0.05,
+    "absolute_equal_system_heldout_RMS_arcsec_max": 2.0,
+    "validation_to_compact_halo_RMS_ratio_max": 1.25
+  },
+  "cross_scale_controls": {
+    "galaxy_outer_RMSE_km_s": 12.59204382085389,
+    "cluster_summary_RMSE_dex": 0.19907732958364824,
+    "solar_proxies_pass": true,
+    "reason_unchanged": "The route correction has zero circular monopole and is absent for the axisymmetric galaxy and point-mass Solar controls"
+  },
+  "outputs": {
+    "directory": "results/adaptive_route_multicluster_raw",
+    "members": "member_sources.csv",
+    "exact_scores": "exact_scores.csv",
+    "predictions": "predictions.csv",
+    "geometry": "geometry.csv",
+    "field_audits": "field_audits.csv",
+    "sensitivity_scores": "sensitivity_scores.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "adaptive_route_multicluster_raw.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "These four clusters are spent elsewhere in the project, but their image residuals have not selected A0279 or p=2.5.",
+    "The member catalogs omit intracluster gas and diffuse light, and were prepared for conventional lens models.",
+    "The zero-monopole construction tests angular routing only; it does not derive the scalar P0554 parent or a relativistic action.",
+    "The p=2.5 primary is explicitly post-hoc from RX J2129 and becomes credible only if it transfers here without change.",
+    "One-at-a-time variants are descriptive and cannot be promoted from this experiment."
+  ]
+}

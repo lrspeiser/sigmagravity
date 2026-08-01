@@ -1,0 +1,292 @@
+{
+  "report_version": "P0603-TENSOR-ROUTING-RESULTS-0.1.0",
+  "status": "complete_spent_map_cross_validation_and_cross_domain_transfer",
+  "coverage": {
+    "tensor_candidates": 30,
+    "clusters": 10,
+    "cluster_targets": 20,
+    "cluster_folds": 5,
+    "galaxies": 131,
+    "galaxy_outer_points": 968
+  },
+  "cluster_oof": {
+    "lenstool_best": {
+      "tensor_equal_JS": 0.06966541864406338,
+      "tensor_equal_Pearson": 0.7505646046702412,
+      "controls": {
+        "LOCAL75": {
+          "equal_JS": 0.08434362482693353,
+          "tensor_improvement_fraction": 0.17402863835872207,
+          "systems_tensor_better": 4
+        },
+        "CENTRAL100": {
+          "equal_JS": 0.07935733343613605,
+          "tensor_improvement_fraction": 0.12213004611441958,
+          "systems_tensor_better": 5
+        },
+        "C0351": {
+          "equal_JS": 0.0673508319552236,
+          "tensor_improvement_fraction": -0.03436611874933604,
+          "systems_tensor_better": 6
+        },
+        "W060": {
+          "equal_JS": 0.06232755924888437,
+          "tensor_improvement_fraction": -0.11773057510366658,
+          "systems_tensor_better": 3
+        }
+      }
+    },
+    "glafic_best": {
+      "tensor_equal_JS": 0.07440842125524734,
+      "tensor_equal_Pearson": 0.7446980357338764,
+      "controls": {
+        "LOCAL75": {
+          "equal_JS": 0.08924416899837,
+          "tensor_improvement_fraction": 0.16623772633698486,
+          "systems_tensor_better": 4
+        },
+        "CENTRAL100": {
+          "equal_JS": 0.0933030410293605,
+          "tensor_improvement_fraction": 0.20250808082629834,
+          "systems_tensor_better": 7
+        },
+        "C0351": {
+          "equal_JS": 0.0720043832431341,
+          "tensor_improvement_fraction": -0.033387384265144426,
+          "systems_tensor_better": 7
+        },
+        "W060": {
+          "equal_JS": 0.06822040575769937,
+          "tensor_improvement_fraction": -0.09070622534152228,
+          "systems_tensor_better": 3
+        }
+      }
+    }
+  },
+  "fold_selections": [
+    {
+      "fold": 0,
+      "selected_candidate_id": "T004_fraction_max_1.0",
+      "training_equal_JS": 0.0644141116015765,
+      "training_systems": 8,
+      "heldout_systems": 2,
+      "fraction_max": 1.0,
+      "length_over_R80": 1.0,
+      "radius_exponent": -0.5,
+      "width_over_R80": 0.25,
+      "external_direction_mix": 0.0,
+      "tensor_axis_ratio": 1.5,
+      "tensor_orientation": "tidal",
+      "shape_gate": "H",
+      "candidate_id": "T004_fraction_max_1.0",
+      "changed_parameter": "fraction_max",
+      "changed_level": "1.0"
+    },
+    {
+      "fold": 1,
+      "selected_candidate_id": "T003_fraction_max_0.75",
+      "training_equal_JS": 0.05572548481750987,
+      "training_systems": 8,
+      "heldout_systems": 2,
+      "fraction_max": 0.75,
+      "length_over_R80": 1.0,
+      "radius_exponent": -0.5,
+      "width_over_R80": 0.25,
+      "external_direction_mix": 0.0,
+      "tensor_axis_ratio": 1.5,
+      "tensor_orientation": "tidal",
+      "shape_gate": "H",
+      "candidate_id": "T003_fraction_max_0.75",
+      "changed_parameter": "fraction_max",
+      "changed_level": "0.75"
+    },
+    {
+      "fold": 2,
+      "selected_candidate_id": "T006_length_over_R80_0.75",
+      "training_equal_JS": 0.06591654640362182,
+      "training_systems": 8,
+      "heldout_systems": 2,
+      "fraction_max": 0.6,
+      "length_over_R80": 0.75,
+      "radius_exponent": -0.5,
+      "width_over_R80": 0.25,
+      "external_direction_mix": 0.0,
+      "tensor_axis_ratio": 1.5,
+      "tensor_orientation": "tidal",
+      "shape_gate": "H",
+      "candidate_id": "T006_length_over_R80_0.75",
+      "changed_parameter": "length_over_R80",
+      "changed_level": "0.75"
+    },
+    {
+      "fold": 3,
+      "selected_candidate_id": "T003_fraction_max_0.75",
+      "training_equal_JS": 0.06877137249158126,
+      "training_systems": 8,
+      "heldout_systems": 2,
+      "fraction_max": 0.75,
+      "length_over_R80": 1.0,
+      "radius_exponent": -0.5,
+      "width_over_R80": 0.25,
+      "external_direction_mix": 0.0,
+      "tensor_axis_ratio": 1.5,
+      "tensor_orientation": "tidal",
+      "shape_gate": "H",
+      "candidate_id": "T003_fraction_max_0.75",
+      "changed_parameter": "fraction_max",
+      "changed_level": "0.75"
+    },
+    {
+      "fold": 4,
+      "selected_candidate_id": "T021_tensor_axis_ratio_1.0",
+      "training_equal_JS": 0.061549441334716515,
+      "training_systems": 8,
+      "heldout_systems": 2,
+      "fraction_max": 0.6,
+      "length_over_R80": 1.0,
+      "radius_exponent": -0.5,
+      "width_over_R80": 0.25,
+      "external_direction_mix": 0.0,
+      "tensor_axis_ratio": 1.0,
+      "tensor_orientation": "tidal",
+      "shape_gate": "H",
+      "candidate_id": "T021_tensor_axis_ratio_1.0",
+      "changed_parameter": "tensor_axis_ratio",
+      "changed_level": "1.0"
+    }
+  ],
+  "unique_selected_tensor_candidates": 4,
+  "consensus_candidate": {
+    "fraction_max": 0.75,
+    "length_over_R80": 1.0,
+    "radius_exponent": -0.5,
+    "width_over_R80": 0.25,
+    "external_direction_mix": 0.0,
+    "tensor_axis_ratio": 1.5,
+    "tensor_orientation": "tidal",
+    "shape_gate": "H",
+    "candidate_id": "T003_fraction_max_0.75",
+    "changed_parameter": "fraction_max",
+    "changed_level": "0.75"
+  },
+  "consensus_selected_folds": 2,
+  "parameter_impacts": [
+    {
+      "parameter": "length_over_R80",
+      "best_level": "0.75",
+      "worst_level": "1.5",
+      "equal_JS_span": 0.025890091229958556,
+      "best_equal_JS": 0.06505671534548832,
+      "worst_equal_JS": 0.09094680657544688
+    },
+    {
+      "parameter": "width_over_R80",
+      "best_level": "0.25",
+      "worst_level": "0.1",
+      "equal_JS_span": 0.01738536748802892,
+      "best_equal_JS": 0.06588225241798516,
+      "worst_equal_JS": 0.08326761990601408
+    },
+    {
+      "parameter": "external_direction_mix",
+      "best_level": "0.0",
+      "worst_level": "1.0",
+      "equal_JS_span": 0.014399916519431927,
+      "best_equal_JS": 0.06588225241798516,
+      "worst_equal_JS": 0.08028216893741709
+    },
+    {
+      "parameter": "fraction_max",
+      "best_level": "0.75",
+      "worst_level": "0.3",
+      "equal_JS_span": 0.011042115161982724,
+      "best_equal_JS": 0.06397437913441818,
+      "worst_equal_JS": 0.0750164942964009
+    },
+    {
+      "parameter": "tensor_axis_ratio",
+      "best_level": "1.0",
+      "worst_level": "3.0",
+      "equal_JS_span": 0.004657727416494409,
+      "best_equal_JS": 0.06487731057988644,
+      "worst_equal_JS": 0.06953503799638085
+    },
+    {
+      "parameter": "shape_gate",
+      "best_level": "sqrt_H",
+      "worst_level": "H2",
+      "equal_JS_span": 0.00426893981053382,
+      "best_equal_JS": 0.06478857715202142,
+      "worst_equal_JS": 0.06905751696255524
+    },
+    {
+      "parameter": "radius_exponent",
+      "best_level": "-0.5",
+      "worst_level": "-1.0",
+      "equal_JS_span": 0.0031221653993403348,
+      "best_equal_JS": 0.06588225241798516,
+      "worst_equal_JS": 0.0690044178173255
+    },
+    {
+      "parameter": "tensor_orientation",
+      "best_level": "external",
+      "worst_level": "tidal",
+      "equal_JS_span": 0.0005079649659697066,
+      "best_equal_JS": 0.06537428745201546,
+      "worst_equal_JS": 0.06588225241798516
+    }
+  ],
+  "galaxy_reference_fixed_RAR": {
+    "outer_RMSE_km_s": 10.348465773189677,
+    "outer_equal_galaxy_RMSE_km_s": 10.716437036615254,
+    "outer_mean_residual_km_s": 1.742624817150273
+  },
+  "consensus_galaxy": {
+    "fraction_max": 0.75,
+    "length_over_R80": 1.0,
+    "radius_exponent": -0.5,
+    "width_over_R80": 0.25,
+    "external_direction_mix": 0.0,
+    "tensor_axis_ratio": 1.5,
+    "tensor_orientation": "tidal",
+    "shape_gate": "H",
+    "changed_parameter": "fraction_max",
+    "changed_level": "0.75",
+    "outer_RMSE_km_s": 11.437226074189427,
+    "outer_equal_galaxy_RMSE_km_s": 12.063391149414793,
+    "outer_mean_residual_km_s": 4.006355686575064,
+    "solar_activation": 4.938730118393774e-50,
+    "solar_effective_route_fraction": 3.435746511497468e-50,
+    "solar_maximum_absolute_interior_force_change": 0.0
+  },
+  "galaxy_equal_RMSE_ratio_to_fixed_RAR": 1.1256904797926166,
+  "solar": {
+    "activation": 4.938730118393774e-50,
+    "effective_route_fraction": 3.435746511497468e-50,
+    "maximum_absolute_interior_force_change": 0.0,
+    "proxy_gate": 1e-08,
+    "passes_proxy_gate": true,
+    "PPN_or_Cassini_metric_derived": false
+  },
+  "field_equation_diagnostics": {
+    "maximum_full_grid_mass_conservation_error": 3.3306690738754696e-16,
+    "maximum_relative_curl_norm": 3.01336646796693e-17,
+    "maximum_relative_Poisson_residual": 1.3453206111731546e-16,
+    "maximum_radial_projection_conservation_error": 6.661338147750939e-16
+  },
+  "strict_interpretation": {
+    "cluster_targets_are_fresh": false,
+    "whole_system_cross_validation_used": true,
+    "GLAFIC_used_for_selection": false,
+    "dark_component_inserted": false,
+    "covariant_action_derived": false,
+    "raw_cluster_lensing_tested": false
+  },
+  "claim_limits": [
+    "The cluster targets are model-dependent convergence reconstructions, not raw image or shear likelihoods.",
+    "F160W member light omits a same-resolution gas map and uses luminosity as a baryonic source proxy.",
+    "The tensor kernel is a phenomenological Green function, not yet derived from a covariant action.",
+    "The radial galaxy projection is an axisymmetric closure of the two-dimensional kernel, not an exact disk calculation.",
+    "All ten cluster maps are spent; any selected tensor law requires a different raw cluster for confirmation."
+  ]
+}

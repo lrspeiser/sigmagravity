@@ -1,0 +1,137 @@
+{
+  "protocol_version": "CLASH-STELLAR-MORPHOLOGY-RESPONSE-0.2.0",
+  "frozen_utc": "2026-07-31T18:40:00Z",
+  "status": "frozen_before_light_template_construction_or_lens_scores",
+  "question": "Does real continuous stellar-light morphology improve transferable raw cluster lensing when it redistributes, but never adds, the radial lensing budget; and which placement, scale, contrast, or strength matters most?",
+  "pre_score_disclosure": [
+    "The unscored 0.1 draft used a 128-arcsec FFT half-width and an edge-deflection gate. It was superseded before map construction because a mass-conserving quadrupole has a physical nonzero far-field deflection; 0.2 instead pads the zero-convergence source to 256 arcsec and gates the source edge itself.",
+    "All four lens catalogs and prior residuals are spent at project level. The new distinction, F160W maps, processing, formula, grids, split, and gates are frozen before any new lens score.",
+    "This is a stellar-light morphology test, not a complete baryonic map. It contains BCG/ICL/member light but no accepted gas surface-density map.",
+    "Every known training and held-out multiple-image coordinate is masked identically before smoothing, so target light cannot become a mass predictor.",
+    "F160W foreground/background contamination is bounded by radial normalization and the frozen contrast caps, but a multiband membership/stellar-mass map remains a required confirmation after any positive result.",
+    "The perturbation has zero annular surface-density mean and an independently subtracted circular deflection mean. Galaxy rotation, radial bridge, and Solar point-mass predictions therefore remain exact parent controls."
+  ],
+  "formula": {
+    "base": "kappa_parent(R)",
+    "light_weight": "W_c(R,theta)=clip[L_s/<L_s>_annulus,0,c]/<clip[L_s/<L_s>_annulus,0,c]>_annulus",
+    "perturbed_convergence": "kappa=kappa_parent+f*T(R)*kappa_carrier(R)*(W_c-1)",
+    "carrier_options": {
+      "baryonic": "kappa_carrier=kappa_baryons",
+      "extra": "kappa_carrier=kappa_parent-kappa_baryons",
+      "full": "kappa_carrier=kappa_parent"
+    },
+    "deflection_equation": "laplacian(psi_delta)=2*kappa_delta; alpha_delta=grad(psi_delta)",
+    "circular_closure": "Subtract the numerically sampled azimuthal mean of alpha_delta,R at every interpolation radius.",
+    "new_object_specific_gravity_parameters": 0
+  },
+  "parent_radial_laws": {
+    "fixed_RAR_zero_slip": {
+      "matter": "g_RAR=gbar/[1-exp(-sqrt(gbar/a_dagger))]",
+      "lensing": "g_lens=g_RAR",
+      "a_dagger_m_s2": 1.2e-10,
+      "locked_galaxy_outer_RMSE_km_s": 10.348465773189679
+    },
+    "fixed_RAR_slip_s5": {
+      "matter": "g_RAR=gbar/[1-exp(-sqrt(gbar/a_dagger))]",
+      "lensing": "g_lens=gbar+3.5*(g_RAR-gbar)",
+      "slip_s": 5.0,
+      "a_dagger_m_s2": 1.2e-10,
+      "locked_galaxy_outer_RMSE_km_s": 10.348465773189679
+    },
+    "curvature_additive_alpha10": {
+      "source": "locked curvature_additive_alpha10 row from the four-cluster raw transfer",
+      "locked_galaxy_outer_RMSE_km_s": 16.765,
+      "parameter_source": "configs/unbounded_running_multicluster_raw_protocol.json"
+    }
+  },
+  "light_template": {
+    "input": "MAST CLASH 65-mas F160W drz plus inverse-variance weight mosaics",
+    "common_half_width_arcsec": 256.0,
+    "pixels_per_axis": 512,
+    "grid_spacing_arcsec": 1.0,
+    "complete_data_radius_arcsec": 60.0,
+    "radial_taper": "T=1 through 55 arcsec, half-cosine from 55 to 60 arcsec, zero outside 60 arcsec",
+    "background": "median of finite positive-weight pixels from 75 to 90 arcsec; only available footprint pixels enter",
+    "invalid_pixel_fill": "same-radius median of unmasked positive-weight pixels in 0.5-arcsec annuli",
+    "known_lens_image_mask_radius_arcsec": 4.0,
+    "known_lens_image_fill": "same-radius median before smoothing",
+    "negative_flux_rule": "subtract the frozen background and clip negative flux to zero",
+    "smoothing_boundary": "normalized Gaussian convolution of flux and valid-mask weight",
+    "annular_normalization_width_arcsec": 1.0,
+    "no_photometric_mass_calibration": "Only angular weights are used; every radial mass/convergence normalization comes from the pre-existing baryonic parent profile."
+  },
+  "factor_grid": {
+    "carrier": ["baryonic", "extra", "full"],
+    "smoothing_kpc": [5.0, 10.0, 20.0],
+    "contrast_cap": [2.0, 5.0, 20.0],
+    "redistribution_fraction": [0.0, 0.125, 0.25, 0.5, 0.75, 1.0],
+    "zero_fraction_deduplication": "One exact control per parent; duplicated zero cells are not rescored.",
+    "screen_metric": "profiled training-image RMS at the parent's newly refitted zero-f control geometry",
+    "shortlist_per_parent": 8,
+    "selection_refit_starts": 4,
+    "final_replay_starts": 8
+  },
+  "systems_and_split": {
+    "systems_source": "configs/clash_stellar_morphology_acquisition_protocol.json",
+    "selection_labels": ["MACS0329", "MACS0429"],
+    "validation_labels": ["MACS1115", "MACS1931"],
+    "within_family_rule": "Hold out the lexicographically last image in each family with at least three images; fit geometry and source positions only to the remaining images.",
+    "selection_rule": "For each parent, select the complete-root shortlisted setting with minimum equal-system exact training RMS; ties favor lower f, larger smoothing, lower cap, then carrier order baryonic-extra-full.",
+    "validation_rule": "Lock carrier, smoothing, cap, and f; refit only the six ordinary geometry nuisance parameters on each validation cluster's training images, then score its held-out images."
+  },
+  "geometry": {
+    "parameters": ["axis_ratio_q", "position_angle", "center_x", "center_y", "external_shear_gamma1", "external_shear_gamma2"],
+    "source_positions_profiled_per_family": true,
+    "geometry_is_nuisance_not_gravity": true
+  },
+  "numerical_audits": {
+    "maximum_annular_weight_mean_error": 1e-10,
+    "maximum_annular_convergence_mean_fraction": 1e-8,
+    "maximum_independent_circular_mean_deflection_arcsec": 0.01,
+    "maximum_normalized_curl_RMS": 1e-8,
+    "maximum_edge_delta_convergence": 1e-12,
+    "minimum_padding_from_support_arcsec": 196.0,
+    "f_zero_exact_tolerance_arcsec": 1e-12
+  },
+  "outcome_gates": {
+    "stable_result_requires_all_heldout_roots": true,
+    "development_improvement_over_parent_fraction_min": 0.05,
+    "validation_improvement_over_parent_fraction_min": 0.05,
+    "validation_to_compact_halo_RMS_ratio_max": 1.25,
+    "absolute_raw_lensing_RMS_arcsec_target": 2.0,
+    "galaxy_bridge_solar_rule": "exactly unchanged from each parent because the perturbation has no angular contrast for the axisymmetric/point-mass controls and zero circular mean for the radial bridge"
+  },
+  "references": {
+    "raw_baryons_RMS_arcsec": 27.43864684589079,
+    "raw_simple_MOND_RMS_arcsec": 28.188493432162694,
+    "raw_compact_halo_RMS_arcsec": 9.048410306058654,
+    "fixed_RAR_galaxy_RMSE_km_s": 10.348465773189679
+  },
+  "optimization": {
+    "maximum_function_evaluations": 2500,
+    "random_seed": 20260831
+  },
+  "inputs": {
+    "acquisition_protocol": "configs/clash_stellar_morphology_acquisition_protocol.json",
+    "acquisition_provenance": "data/raw/clash_stellar_morphology_f160w/provenance.json",
+    "input_audit": "results/clash_stellar_morphology_input_audit/report.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "metric_slip_protocol": "configs/metric_slip_raw_lensing_protocol.json",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json",
+    "curvature_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "curvature_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "outputs": {
+    "directory": "results/clash_stellar_morphology_response",
+    "report": "results/clash_stellar_morphology_response/report.json",
+    "map_audit": "results/clash_stellar_morphology_response/map_audit.csv",
+    "screen": "results/clash_stellar_morphology_response/factor_screen.csv",
+    "selection_refits": "results/clash_stellar_morphology_response/selection_refits.csv",
+    "predictions": "results/clash_stellar_morphology_response/predictions.csv",
+    "geometry": "results/clash_stellar_morphology_response/geometry.csv",
+    "effects": "results/clash_stellar_morphology_response/factor_effects.csv",
+    "figure": "results/clash_stellar_morphology_response/stellar_morphology_response.png",
+    "summary": "results/clash_stellar_morphology_response/SUMMARY.md"
+  }
+}

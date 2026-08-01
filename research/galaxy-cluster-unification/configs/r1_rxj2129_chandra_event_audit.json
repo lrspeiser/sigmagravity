@@ -1,0 +1,59 @@
+{
+  "protocol_version": "R1B3-RXJ2129-Chandra-event-audit-0.1",
+  "status": "frozen_before_combined_event_adequacy_evaluation",
+  "purpose": "Determine whether the public Chandra archive contains enough source-traceable RX J2129 events to replace the missing machine-readable gas profile with a separately frozen raw spectral/imaging likelihood.",
+  "freeze_date": "2026-07-26",
+  "disclosure": "Before this freeze, the official TAP result (ObsIDs 9370 and 552; 39.604 ks total), archive file listings, and successful download of 61 standard products were known. A one-observation engineering read of ObsID 9370 found 87, 194, 375, and 409 events in the 0.7-2.0 keV band at 0-1, 1-2, 2-3.5, and 3.5-5 arcsec, respectively. ObsID 552, combined counts, background-scaled counts, X-ray centroid/peak, and every gas-density or gas-mass result were unknown. No gravity residual or independent lens residual was used to select this audit.",
+  "inputs": {
+    "archive_provenance": "data/raw/r1_rxj2129_chandra/provenance.json",
+    "obsid_9370_evt2": "data/raw/r1_rxj2129_chandra/9370/primary/acisf09370N003_evt2.fits.gz",
+    "obsid_552_evt2": "data/raw/r1_rxj2129_chandra/552/primary/acisf00552N004_evt2.fits.gz"
+  },
+  "frozen_center": {
+    "ra_deg": 322.41651,
+    "dec_deg": 0.08923,
+    "origin": "same BCG center used by the lens and dynamics protocols"
+  },
+  "bands_keV": {
+    "soft_imaging": [0.7, 2.0],
+    "spectral_screen": [0.7, 8.0],
+    "particle_control": [9.5, 12.0]
+  },
+  "radial_edges_arcsec": [0.0, 1.0, 2.0, 3.5, 5.0, 10.0, 20.0, 40.0, 60.0],
+  "background_screen": {
+    "annulus_arcsec": [40.0, 60.0],
+    "interpretation": "Area-scaled outer-annulus counts are a conservative local contamination screen, not the final blank-sky plus soft-Galactic background model. Cluster emission in this annulus biases the estimated background high."
+  },
+  "center_diagnostics": {
+    "centroid_aperture_arcsec": 20.0,
+    "peak_histogram_pixel_arcsec": 0.492,
+    "peak_gaussian_sigma_pixels": 1.5
+  },
+  "advance_thresholds": {
+    "public_evt2_observations": 2,
+    "minimum_combined_exposure_ks": 35.0,
+    "minimum_combined_soft_events_inside_5arcsec": 1200,
+    "minimum_combined_soft_events_each_of_four_inner_annuli": 100,
+    "minimum_conservative_source_fraction_each_inner_annulus": 0.75,
+    "maximum_soft_centroid_offset_arcsec": 2.0,
+    "all_fits_headers_and_event_columns_valid": true,
+    "no_gas_density_or_mass_inferred_in_adequacy_audit": true
+  },
+  "failure_rules": {
+    "count_or_background_failure": "Retain the raw archive but do not invest in a four-bin gas likelihood; continue the 30-host inventory.",
+    "centering_failure": "Treat the fixed BCG-centered spherical gas model as structurally invalid and require a two-dimensional gas likelihood or a different pilot.",
+    "pass": "Freeze a separate CIAO/CALDB response, PSF, blank-sky, spectral, and deprojection protocol before fitting electron density or gas mass."
+  },
+  "outputs": {
+    "event_ledger": "data/derived/r1_rxj2129_chandra_event_adequacy.csv",
+    "report": "results/r1_rxj2129_chandra_event_audit/report.json",
+    "diagnostic": "results/r1_rxj2129_chandra_event_audit/event_adequacy.png"
+  },
+  "authorization": {
+    "raw_event_adequacy_audit": true,
+    "subsequent_frozen_ciao_reduction_if_passed": true,
+    "gas_density_or_mass_fit_in_this_audit": false,
+    "gravity_response_fit": false,
+    "strict_r1_ready": false
+  }
+}

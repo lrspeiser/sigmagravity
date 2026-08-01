@@ -5,6 +5,7 @@ from voidscreen.data import KPC_M
 from voidscreen.models import (
     NewtonianModel,
     PotentialScreeningModel,
+    SigmaTransferModel,
     TensorDataset,
     VoidScreeningModel,
     radial_potential_depth,
@@ -45,6 +46,19 @@ def test_signed_gas_contribution_is_preserved() -> None:
     assert torch.allclose(
         prediction.velocity_baryonic_kms, torch.tensor([10.0], dtype=torch.float64)
     )
+
+
+def test_sigma_transfer_matches_declared_enhancement() -> None:
+    data = make_tensor_data(
+        radius_kpc=[1.0], gas=[0.0], disk=[100.0], bulge=[0.0]
+    )
+    model = SigmaTransferModel(
+        n_galaxies=1, response_amplitude=5.0, g_dagger_m_s2=9.6e-11
+    )
+    prediction = model(data)
+    gbar = prediction.baryonic_acceleration_m_s2
+    h = torch.sqrt(torch.tensor(9.6e-11) / gbar) * 9.6e-11 / (9.6e-11 + gbar)
+    assert torch.allclose(prediction.predicted_acceleration_m_s2 / gbar, 1.0 + 5.0 * h)
 
 
 def test_fixed_half_power_has_flat_outer_added_velocity_limit() -> None:

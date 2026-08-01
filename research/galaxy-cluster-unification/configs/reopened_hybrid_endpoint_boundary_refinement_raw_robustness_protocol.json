@@ -1,0 +1,25 @@
+{
+  "protocol_version": "REOPENED-HYBRID-ENDPOINT-BOUNDARY-REFINEMENT-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-01T09:55:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay every bracketed short-memory p,q surface row, scale neighbor, unfavorable control, and exact repeat with eight lens-geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_endpoint_boundary_refinement_protocol.json",
+  "source_report": "results/reopened_hybrid_endpoint_boundary_refinement/report.json",
+  "selected_variants": "all",
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_endpoint_boundary_refinement_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_endpoint_boundary_refinement_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_endpoint_boundary_refinement_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_endpoint_boundary_refinement_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_endpoint_boundary_refinement_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Every one of the 47 refinement rows is replayed, so no favorable-only selection is possible.",
+    "All gravity and structural settings are frozen; only declared lens nuisance geometry is reoptimized.",
+    "The exact repeat group measures bridge-fit and lens-geometry repeatability independently of formula leverage.",
+    "Eight-start scores supersede shallow classifications for these rows.",
+    "A root loss or poor score applies only to that frozen row, not the parent mechanism."
+  ]
+}

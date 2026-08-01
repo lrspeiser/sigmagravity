@@ -1,0 +1,4 @@
+variant_id,systems,complete_systems,all_systems_complete,equal_system_heldout_RMS_arcsec,median_system_heldout_RMS_arcsec
+P0599_no_route,4,3,False,21.385761837877546,21.885875461772617
+gas_route_gamma0,4,3,False,19.949612803576972,22.106392474530825
+gas_route_gamma1,4,3,False,19.89268580131843,21.940365058425726

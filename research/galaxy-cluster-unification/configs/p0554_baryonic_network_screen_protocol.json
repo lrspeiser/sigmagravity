@@ -1,0 +1,80 @@
+{
+  "protocol_version": "P0554-BARYONIC-NETWORK-SCREEN-0.1.0",
+  "frozen_utc": "2026-08-01T03:10:00Z",
+  "status": "frozen_after_halo_backtrack_before_any_network-kernel_lens_score",
+  "question": "Does preserving discrete baryon-to-baryon branches matter more for raw cluster lensing than collapsing every source's neighbors into one averaged route direction?",
+  "formula": {
+    "transition": "T_ij proportional to w_j^beta * (d_ij^2+s^2)^(-p/2) * exp(-d_ij/ell), i not equal j, with every source row normalized",
+    "endpoint": "y_ij=x_i+lambda*(x_j-x_i)",
+    "route_map": "Sigma_route=(1-f)Sigma_local+f*sum_ij w_i*T_ij*Gaussian(y-y_ij;width)",
+    "angular_strength": "eta*f^2.5 with eta=0.30",
+    "conservation": "Every route map has unit integral and the deflection builder removes the circular monopole before adding the angular response.",
+    "new_per_cluster_gravity_parameters": 0
+  },
+  "network_parent": {
+    "target_weight_power": 1.0,
+    "distance_power": 2.0,
+    "softening_kpc": 200.0,
+    "link_scale_kpc": 250.0,
+    "hop_fraction": 1.0,
+    "top_k": null
+  },
+  "variants": [
+    {"variant_id":"eta_000","mode":"none","coordinate":"reference","coordinate_value":0.0},
+    {"variant_id":"local_vector_s200","mode":"local_vector","coordinate":"reference","coordinate_value":1.0},
+    {"variant_id":"network_parent","mode":"network","coordinate":"parent","coordinate_value":1.0},
+    {"variant_id":"network_hop_080","mode":"network","coordinate":"hop_fraction","coordinate_value":0.8,"hop_fraction":0.8},
+    {"variant_id":"network_hop_090","mode":"network","coordinate":"hop_fraction","coordinate_value":0.9,"hop_fraction":0.9},
+    {"variant_id":"network_hop_110","mode":"network","coordinate":"hop_fraction","coordinate_value":1.1,"hop_fraction":1.1},
+    {"variant_id":"network_hop_120","mode":"network","coordinate":"hop_fraction","coordinate_value":1.2,"hop_fraction":1.2},
+    {"variant_id":"network_soft_100","mode":"network","coordinate":"softening_kpc","coordinate_value":100.0,"softening_kpc":100.0},
+    {"variant_id":"network_soft_300","mode":"network","coordinate":"softening_kpc","coordinate_value":300.0,"softening_kpc":300.0},
+    {"variant_id":"network_power_150","mode":"network","coordinate":"distance_power","coordinate_value":1.5,"distance_power":1.5},
+    {"variant_id":"network_power_250","mode":"network","coordinate":"distance_power","coordinate_value":2.5,"distance_power":2.5},
+    {"variant_id":"network_target_050","mode":"network","coordinate":"target_weight_power","coordinate_value":0.5,"target_weight_power":0.5},
+    {"variant_id":"network_target_150","mode":"network","coordinate":"target_weight_power","coordinate_value":1.5,"target_weight_power":1.5},
+    {"variant_id":"network_target_200","mode":"network","coordinate":"target_weight_power","coordinate_value":2.0,"target_weight_power":2.0},
+    {"variant_id":"network_link_125","mode":"network","coordinate":"link_scale_kpc","coordinate_value":125.0,"link_scale_kpc":125.0},
+    {"variant_id":"network_link_500","mode":"network","coordinate":"link_scale_kpc","coordinate_value":500.0,"link_scale_kpc":500.0},
+    {"variant_id":"network_top_001","mode":"network","coordinate":"top_k","coordinate_value":1,"top_k":1},
+    {"variant_id":"network_top_003","mode":"network","coordinate":"top_k","coordinate_value":3,"top_k":3},
+    {"variant_id":"network_top_010","mode":"network","coordinate":"top_k","coordinate_value":10,"top_k":10}
+  ],
+  "evaluation": {
+    "discovery_systems": ["RXJ2129","MACS0329","MACS0429","MACS1115","MACS1931"],
+    "fixed_geometry_source": "eta=0 exact-refit geometry from p0554_subcritical_route_transfer",
+    "source_positions": "profiled on training images independently for each kernel at fixed geometry",
+    "heldout_score": "Jacobian-linearized image-plane residual at each observed heldout coordinate",
+    "primary_statistic": "equal-system heldout RMS over all five spent discovery clusters",
+    "descriptive_transfer_rule": "Always carry the lowest-RMS network variant unchanged into the separately frozen RXJ1347 formula holdout.",
+    "exact_shortlist_minimum_improvement_fraction_vs_eta0": 0.005,
+    "exact_shortlist_minimum_systems_improved": 3,
+    "exact_shortlist_maximum_single_system_worsening_fraction": 0.01,
+    "no_formula_promotion": true
+  },
+  "inputs": {
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "fixed_geometry": "results/p0554_subcritical_route_transfer/geometry.csv",
+    "inverse_report": "results/p0554_halo_backtrack_capacity/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0554_baryonic_network_screen",
+    "scores": "scores.csv",
+    "system_scores": "system_scores.csv",
+    "image_residuals": "image_residuals.csv",
+    "field_audits": "field_audits.csv",
+    "coordinate_impacts": "coordinate_impacts.csv",
+    "shortlist": "shortlist.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_baryonic_network_screen.png"
+  },
+  "claim_limits": [
+    "All five discovery clusters and their member catalogs are spent exploratory evidence.",
+    "This is a fixed-geometry Jacobian-linearized screen, not an exact root or caustic calculation.",
+    "Member luminosity is a projected baryonic proxy and omits gas, diffuse ICL, and mass-to-light uncertainty.",
+    "The network kernel is a phenomenological projected law, not a derived covariant propagation equation.",
+    "Galaxy radial, derived-CLASH radial, and Solar scores are unchanged by the zero-monopole construction; this is preservation rather than new evidence.",
+    "The best network variant is transferred to RXJ1347 regardless of discovery success so the holdout measures generalization rather than serving as a promotion gate."
+  ]
+}

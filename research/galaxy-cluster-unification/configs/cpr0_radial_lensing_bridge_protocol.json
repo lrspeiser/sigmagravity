@@ -1,0 +1,44 @@
+{
+  "protocol_version": "CPR0-0.5-radial-lensing-density-bridge",
+  "frozen_utc": "2026-07-28T06:31:00Z",
+  "status": "frozen after the one-radius joint result and before constructing or scoring radial lensing points",
+  "question": "Does the shared local-density response predict the radial shape of weak-lensing NFW profiles, rather than merely separate two density plateaus?",
+  "radial_construction": {
+    "systems": "same 14 Elkholy2015 x Herbonnet2020 overlap clusters",
+    "total_mass_profile": "NFW profile reconstructed from each published weak-lensing M_NFW200 and M_NFW500 pair",
+    "radius_range": "five logarithmically spaced radii from max(0.35*r_NFW500, 0.5 Mpc) to r_NFW500",
+    "reason_for_0.5_Mpc_floor": "Herbonnet weak-lensing NFW fits use a conservative 0.5 Mpc inner radius",
+    "gas_profile": "renormalized Elkholy electron-density profile integrated at each radius",
+    "nominal_stellar_mass": "0.10*Mgas at every radial point; a declared approximation because the satellite stellar profile is not in either catalog",
+    "coherence": "C=0 for cluster points; measured Lambda_Re for BCG points"
+  },
+  "cross_validation": {
+    "folds": 5,
+    "seed": 20260728,
+    "group": "cluster name or BCG plateifu; every radial point from a held-out cluster stays in the same fold",
+    "objective": "0.5*equal-BCG MSE + 0.5*equal-cluster MSE, where each cluster first averages its radial residuals",
+    "models": ["universal density-only RG", "universal measured-coherence CPR0"],
+    "bounds": {
+      "epsilon_0": [0.03, 0.9],
+      "log10_rho_c_g_cm3": [-31.0, -20.0],
+      "Q": [0.1, 30.0]
+    },
+    "fixed_sigma_response_amplitude": 1.1725
+  },
+  "advance_gates": {
+    "BCG_RMSE_dex_max": 0.12,
+    "cluster_equal_system_RMSE_dex_max": 0.12,
+    "equal_domain_RMSE_dex_max": 0.12,
+    "CPR0_improvement_vs_density_only_RG_min_dex": 0.01,
+    "cluster_absolute_radial_residual_slope_dex_per_dex_max": 0.10,
+    "cluster_absolute_residual_density_correlation_max": 0.30,
+    "maximum_unmeasured_density_gap_dex": 1.0,
+    "log10_rho_c_fold_range_max_dex": 1.5
+  },
+  "claim_boundary": [
+    "The radial target is a lensing-derived NFW fit, not independent lensing measurements at each reported radius.",
+    "Grouped folds prevent radial points from the same cluster leaking between training and validation.",
+    "The hot-gas profile is measured, but the radial stellar correction is only a bracketable approximation.",
+    "This can reject a radial response shape; it cannot by itself derive gravitational slip or photon propagation."
+  ]
+}

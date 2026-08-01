@@ -1,0 +1,99 @@
+{
+  "protocol_version": "TENSOR-COMPLETION-FULL-TEST-0.1.0",
+  "frozen_utc": "2026-07-29T06:00:00Z",
+  "status": "frozen_before_tensor_scores",
+  "family_label": "bounded tidal-tensor completion",
+  "question": "Can a larger universal G transfer across galaxies and cluster lensing when completion is a bounded tensor whose projection depends on the local tidal eigendirections?",
+  "root_equation": {
+    "weak_field": "g_i=(G_max/G_local) C_ij gbar_j",
+    "local_calibration": "G_local=C_solar G_max",
+    "completion_tensor": "C_ij=C_solar delta_ij+(1-C_solar) A_T P_ij",
+    "tidal_gate": "A_T=1/[1+(||H(Phi_bar)||_F/T_star)^n]",
+    "projection": "g_parallel/gbar=n_i C_ij n_j/C_solar",
+    "solar_limit": "large tidal norm implies A_T -> 0, C_ij -> C_solar delta_ij, and g -> gbar",
+    "maximum_limit": "all eigenvalues of P lie in [0,1], so no eigenvalue of C exceeds one"
+  },
+  "sample": {
+    "bridge": "44 MaNGA BCG points plus 72 density-resolved CLASH radial points",
+    "bridge_folds": 5,
+    "bridge_seed": 20260729,
+    "bridge_objective": "equal-domain mean of equal-system mean squared log residual",
+    "SPARC": "131 galaxies; nuisances fit on 2066 inner points and tested on 968 untouched outer points",
+    "raw_lensing": "RX J2129 15 training and 7 already-spent heldout image positions",
+    "tensor_reconstruction": "spherical Poisson closure for bridge; axisymmetric Poisson closure for SPARC; resolved spherical derivative for RX J2129"
+  },
+  "models": {
+    "tensor_isotropic": {
+      "parameters": ["C_solar", "log10_T_star_s2", "n"],
+      "bounds": [[0.02, 0.95], [-34.0, -28.0], [0.25, 8.0]],
+      "P_eigenvalues": "(1,1,1)"
+    },
+    "tensor_alignment": {
+      "parameters": ["C_solar", "log10_T_star_s2", "n", "q"],
+      "bounds": [[0.02, 0.95], [-34.0, -28.0], [0.25, 8.0], [0.1, 8.0]],
+      "P_eigenvalues": "(|lambda_a|/||H||_F)^q"
+    },
+    "tensor_competition": {
+      "parameters": ["C_solar", "log10_T_star_s2", "n", "q"],
+      "bounds": [[0.02, 0.95], [-34.0, -28.0], [0.25, 8.0], [0.1, 8.0]],
+      "P_eigenvalues": "|lambda_a|^q/sum_b |lambda_b|^q"
+    },
+    "tensor_dominance": {
+      "parameters": ["C_solar", "log10_T_star_s2", "n", "q"],
+      "bounds": [[0.02, 0.95], [-34.0, -28.0], [0.25, 8.0], [0.1, 8.0]],
+      "P_eigenvalues": "(|lambda_a|/max_b |lambda_b|)^q"
+    }
+  },
+  "optimization": {
+    "differential_evolution_maxiter": 180,
+    "differential_evolution_popsize": 14,
+    "local_polish": "L-BFGS-B",
+    "boundary_fraction_tolerance": 0.01
+  },
+  "selection": {
+    "rule": "lowest five-fold heldout bridge equal-domain RMSE; SPARC and raw images remain unseen during selection",
+    "gravity_parameters_fit_to_SPARC": 0,
+    "gravity_or_lensing_amplitudes_fit_to_raw_images": 0,
+    "SPARC_density_geometry": "primary"
+  },
+  "advance_gates": {
+    "bridge_equal_domain_RMSE_dex_max": 0.15,
+    "BCG_equal_system_RMSE_dex_max": 0.15,
+    "cluster_equal_system_RMSE_dex_max": 0.18,
+    "SPARC_outer_RMSE_relative_to_fixed_RAR_max": 1.10,
+    "raw_heldout_RMS_arcsec_max": 2.5361068843508456,
+    "solar_Earth_fractional_change_max": 1e-10,
+    "all_completion_tensor_eigenvalues_at_most_one": true,
+    "no_full_fit_parameter_at_boundary": true
+  },
+  "solar_diagnostics": {
+    "solar_GM_m3_s2": 1.32712440018e20,
+    "Earth_orbit_m": 149597870700.0,
+    "astronomical_unit_m": 149597870700.0
+  },
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "bridge_reference_report": "results/rar_sharp_coherence_rg_sweep/report.json",
+    "SPARC_protocol": "configs/sparc_independent_nuisance_refit_protocol.json",
+    "SPARC_reference_report": "results/sparc_independent_nuisance_refit/report.json",
+    "SPARC_raw": "data/raw/sparc",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "RXJ_profile": "results/sigma_action_exploration/radial_profiles.csv",
+    "raw_lensing_reference_report": "results/sigma_covariant_weak_field/report.json"
+  },
+  "claim_limits": [
+    "This is a weak-field constitutive tensor, not a derived covariant action.",
+    "The tidal tensor is reconstructed from the available symmetry and density data rather than measured as a full three-dimensional tensor.",
+    "SPARC vertical curvature depends on a frozen primary scale-height model and must pass geometry sensitivity checks if the primary transfer succeeds.",
+    "RX J2129 uses a spherical tensor reconstruction before the existing pseudo-elliptical lens projection; it is not yet a full three-dimensional ray-traced tensor lens.",
+    "RX J2129 coordinates are an already-inspected diagnostic, not an independent holdout."
+  ],
+  "outputs": {
+    "report": "results/tensor_completion_full_test/report.json",
+    "bridge_predictions": "results/tensor_completion_full_test/bridge_predictions.csv",
+    "SPARC_predictions": "results/tensor_completion_full_test/sparc_predictions.csv",
+    "raw_lensing_predictions": "results/tensor_completion_full_test/raw_lensing_predictions.csv",
+    "figure": "results/tensor_completion_full_test/tensor_completion_full_test.png",
+    "summary": "results/tensor_completion_full_test/SUMMARY.md"
+  }
+}

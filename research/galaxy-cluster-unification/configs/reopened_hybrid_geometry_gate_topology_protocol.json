@@ -1,0 +1,156 @@
+{
+  "protocol_version": "REOPENED-HYBRID-GEOMETRY-GATE-TOPOLOGY-0.1.0",
+  "frozen_utc": "2026-07-31T09:40:00Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Measure whether RG and Sigma saturation should act on the cluster-like side, galaxy-like side, or independently under the best-performing local-to-mean density gate.",
+  "claim_boundary": [
+    "The density-ratio property, pivot -0.25, and channel ceilings were selected after earlier development sweeps.",
+    "The formula receives only baryonic acceleration, local baryonic density, and radius; labels are never inputs.",
+    "Role flags are universal formula choices and never vary by object.",
+    "Every setting uses four universal fitted gravity parameters with no per-galaxy or per-lens gravity fit.",
+    "The CLASH bridge is GR/NFW-deprojected, SPARC nuisance parameters are frozen from RAR, and raw lensing uses an approximate zero-slip pseudo-elliptical closure.",
+    "Missing held-out lens roots remain failures regardless of RMS over surviving images."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "sensitivity_families": {
+    "dual_rg_cluster": {
+      "fixed_name": "sigma_cap_cluster_weight",
+      "values": [0.0, 1.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "local_to_mean_density",
+        "channel_gate_log10_pivot": -0.25,
+        "channel_gate_sharpness": 4.0,
+        "channel_gate_cluster_high": false,
+        "rg_cap_cluster_weight": true
+      }
+    },
+    "dual_rg_galaxy": {
+      "fixed_name": "sigma_cap_cluster_weight",
+      "values": [0.0, 1.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "local_to_mean_density",
+        "channel_gate_log10_pivot": -0.25,
+        "channel_gate_sharpness": 4.0,
+        "channel_gate_cluster_high": false,
+        "rg_cap_cluster_weight": false
+      }
+    },
+    "rg_only_cluster": {
+      "fixed_name": "channel_gate_sharpness",
+      "values": [0.5, 1.0, 2.0, 4.0, 8.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "channel_gate_property": "local_to_mean_density",
+        "channel_gate_log10_pivot": -0.25,
+        "channel_gate_cluster_high": false,
+        "rg_cap_cluster_weight": true
+      }
+    },
+    "rg_only_galaxy": {
+      "fixed_name": "channel_gate_sharpness",
+      "values": [0.5, 1.0, 2.0, 4.0, 8.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.75,
+        "channel_gate_property": "local_to_mean_density",
+        "channel_gate_log10_pivot": -0.25,
+        "channel_gate_cluster_high": false,
+        "rg_cap_cluster_weight": false
+      }
+    },
+    "sigma_only_cluster": {
+      "fixed_name": "channel_gate_sharpness",
+      "values": [0.5, 1.0, 2.0, 4.0, 8.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "local_to_mean_density",
+        "channel_gate_log10_pivot": -0.25,
+        "channel_gate_cluster_high": false,
+        "sigma_cap_cluster_weight": true
+      }
+    },
+    "sigma_only_galaxy": {
+      "fixed_name": "channel_gate_sharpness",
+      "values": [0.5, 1.0, 2.0, 4.0, 8.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "sigma_saturation_ceiling": 6.5,
+        "channel_gate_property": "local_to_mean_density",
+        "channel_gate_log10_pivot": -0.25,
+        "channel_gate_cluster_high": false,
+        "sigma_cap_cluster_weight": false
+      }
+    }
+  },
+  "baseline_variant_name": "dual_rg_cluster:sigma_cap_cluster_weight=0",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20260807,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_geometry_gate_topology/report.json",
+    "scores": "results/reopened_hybrid_geometry_gate_topology/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_geometry_gate_topology/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_geometry_gate_topology/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_geometry_gate_topology/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_geometry_gate_topology/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_geometry_gate_topology/family_impacts.csv",
+    "figure": "results/reopened_hybrid_geometry_gate_topology/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_geometry_gate_topology/SUMMARY.md"
+  }
+}

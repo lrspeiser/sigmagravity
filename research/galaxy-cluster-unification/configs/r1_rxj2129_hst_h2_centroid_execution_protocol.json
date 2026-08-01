@@ -1,0 +1,156 @@
+{
+  "protocol_version": "R1B3-RXJ2129-HST-H2-centroids-0.1",
+  "status": "static_reaudit_pass_H2_execution_active_after_frame_correction",
+  "frozen_utc": "2026-07-27T13:40:00Z",
+  "selection_blind": true,
+  "scope": "Independent two-band image-centroid measurement for the 21 immutable spectroscopic RX J2129 lens images; no lens equation, critical curve, source-family prediction, mass model, gravity model, or residual-based source selection is permitted.",
+  "parent_protocol": {
+    "path": "configs/r1_rxj2129_hst_centroid_covariance_protocol.json",
+    "bytes": 14606,
+    "sha256": "AE482FEF473B1E54331F84F548DD5DBB52509DF3546D3D153C0ACDD92EC49D7A",
+    "required_version": "R1B3-RXJ2129-HST-centroid-covariance-0.4"
+  },
+  "H1_gate": {
+    "report": "results/r1_rxj2129_hst_h1/report.json",
+    "bytes": 5677,
+    "sha256": "903163B5491C32A6EB7F08B3F7DF48966F5A2F33E4E8E63168EA8A0BEDBE26CA",
+    "required_status": "pass",
+    "invalid_predecessor_preserved": "results/r1_rxj2129_hst_h1/invalid_v0_3/report.json"
+  },
+  "post_freeze_engineering_correction": {
+    "updated_utc": "2026-07-27T13:48:00Z",
+    "trigger": "The first H2 execution completed the internal F814W fit for immutable image 1.1, then Astropy spherical_offsets_to rejected the output because the WCS SkyCoord frame and the scalar ledger SkyCoord frame were not identical frame objects. The runner recorded only the exception text, began the F125W fit, and was manually interrupted before any H2 product or numerical centroid was written.",
+    "correction": "Transform every WCS-derived SkyCoord explicitly to published.frame, then transform it to SkyOffsetFrame(origin=published) and use the resulting longitude and latitude as east/north offsets. This changes only coordinate-frame compatibility; no pixel, source, mask, model, optimizer, bootstrap, or acceptance rule changes.",
+    "HST_arc_pixels_accessed_during_invalid_first_execution": true,
+    "H2_centroid_cross_band_acceptance_or_covariance_result_known": false,
+    "scientific_acceptance_threshold_source_selection_or_model_changed": false
+  },
+  "inputs": {
+    "coordinate_ledger": {
+      "path": "data/derived/r1_rxj2129_lens_observables.csv",
+      "bytes": 4347,
+      "sha256": "156FE8E7FF9C3455F12A10669146F2561A6B27753FBE8F60C9789713236E6FD0",
+      "selection": "likelihood_included=True and redshift_kind=spectroscopic",
+      "required_rows": 21,
+      "immutable_order": true,
+      "required_inner_images": ["5.2", "6.3", "8.2"]
+    },
+    "registration_draws": {
+      "path": "data/derived/r1_rxj2129_hst_h1_registration_draws.npz",
+      "bytes": 21908,
+      "sha256": "F05728C8A387B4C9113764B8E7960DEAC8036CDCE507B095340AFF4117816C1D"
+    },
+    "union_segmentation": {
+      "path": "data/derived/r1_rxj2129_hst_h1_union_segmentation.fits",
+      "bytes": 25061760,
+      "sha256": "929DAD9B53B83904C49EF7AB27A089A0B9A238A5107B8558A6FBF5AE6E6D07E3"
+    },
+    "PSF_field": {
+      "path": "data/derived/r1_rxj2129_hst_h1_psf_field.npz",
+      "bytes": 93061,
+      "sha256": "41E52BF6E7118F0237C34CCB310A3ECB228CB93AD9F09F6862BBC134286B5523"
+    },
+    "science_and_weight_files_from_parent": ["F814W", "F125W"]
+  },
+  "pixel_geometry": {
+    "reference_frame": "F814W zero-indexed pixel frame",
+    "drizzled_WCS_rule": "Construct Astropy WCS from the frozen header and set wcs.sip=None whenever both CTYPE values omit -SIP.",
+    "published_coordinate_start": "Convert each immutable published sky coordinate to F814W pixel coordinates with the corrected drizzled WCS.",
+    "F125W_start": "Map the F814W published-coordinate pixel through the inverse H1 best-fit pixel affine transform; do not recenter from image peaks.",
+    "stamp_width_arcsec": 2.4,
+    "pixel_scale_arcsec": 0.065,
+    "stamp_size_pixels": 37,
+    "stamp_rule": "Round the published-coordinate starting pixel to the nearest integer for slicing a fixed 37x37 native-pixel stamp; retain fractional coordinates inside the model and fail a band if the stamp crosses an image boundary.",
+    "F125W_to_F814W_centroid_rule": "Apply the H1 best-fit affine transform to every fitted or bootstrap F125W native-pixel centroid before the cross-band comparison or sky conversion.",
+    "sky_conversion": "Convert both F814W-frame pixel centroids to ICRS with the corrected F814W drizzled WCS. Report RA offsets as east-positive great-circle small-angle offsets."
+  },
+  "masking": {
+    "connectivity": 8,
+    "interpolation": "Nearest-neighbor sampling of the frozen F814W union mask for F125W pixels after applying the H1 best-fit affine transform.",
+    "target_component_rule": "Within each band stamp, label the sampled frozen binary segmentation with 8-connectivity. The target is exactly the labeled component at the nearest pixel to the immutable published-coordinate start. If that pixel has label zero, fail that band without searching for a nearby component.",
+    "fit_pixel_rule": "A fit pixel must have finite science and WHT values and strictly positive WHT. Unmask the target component and all segmentation-zero background pixels; mask every other positive segmentation component. No manual mask edit is allowed.",
+    "minimum_fit_pixels": 300,
+    "minimum_background_3x3_blocks": 12
+  },
+  "local_PSF": {
+    "stamp_size_pixels": 31,
+    "field_evaluation": "Evaluate the H1 linear field [1,(x-2499.5)/2500,(y-2499.5)/2500] at the immutable published-coordinate start for the baseline and at the same location in each matching H1 PSF bootstrap field for bootstrap draw d.",
+    "parameter_mapping": "Exponentiate log geometric FWHM and log beta. Let e=hypot(e1,e2), theta=atan2(e2,e1)/2, major/minor=(1+e)/(1-e), FWHM_major=FWHM_geometric*sqrt(major/minor), and FWHM_minor=FWHM_geometric/sqrt(major/minor). Fail a fit if e>=0.95, beta is outside 1.2-10, or either FWHM is outside 1-8 pixels.",
+    "kernel": "Evaluate the normalized elliptical Moffat kernel on the fixed 31x31 pixel-center grid using FWHM_factor=2*sqrt(2^(1/beta)-1); normalize the discrete kernel to unit sum.",
+    "subpixel_shift": "Shift the intrinsic source model through its continuous shared centroid before FFT convolution; the PSF kernel remains centered on its middle pixel."
+  },
+  "source_model": {
+    "components": 3,
+    "model": "Sum of three positive elliptical Gaussians sharing one continuous centroid, convolved with the frozen local PSF, plus c0+cx*(x-x_start)+cy*(y-y_start).",
+    "component_parameters": "Each component has positive total flux, major-axis sigma, axis ratio, and position angle. Components are exchangeable; sort by fitted major-axis sigma only when serializing.",
+    "total_flux_bounds": "For each component use [1e-4,100] times F0, where F0=max(sum(max(data-initial_plane,0) over valid target-component pixels), median_sigma*sqrt(N_valid), 1e-12).",
+    "sigma_major_bounds_pixels": [0.3, 12.0],
+    "axis_ratio_bounds": [0.15, 1.0],
+    "position_angle_bounds_radians": [-1.5707963267948966, 1.5707963267948966],
+    "centroid_bounds": "The shared centroid may move at most 18 pixels in x or y from the immutable published-coordinate start during optimization.",
+    "background_initialization": "Fit the tilted plane by WHT-weighted linear least squares to valid segmentation-zero pixels only; fail if fewer than 30 such pixels exist.",
+    "background_bounds": "c0 is initial c0 plus or minus 20 median WHT sigma; cx and cy are initial slopes plus or minus 5 median WHT sigma per pixel.",
+    "component_initialization": "Initial flux fractions are [0.5,0.3,0.2], major sigmas [1,3,6] pixels, axis ratios [0.7,0.7,0.7], and angles [0,0,0].",
+    "optimizer_starts": 12,
+    "start_centroids": "Start 0 is the immutable published coordinate. Starts 1-11 lie on a 1.5-pixel radius at angles 2*pi*k/11 for k=0..10.",
+    "optimizer": "scipy.optimize.least_squares with bounded parameters, linear loss, x_scale='jac', max_nfev=2000, ftol=xtol=gtol=1e-9. Choose the converged finite solution with minimum ordinary WHT chi-square; do not rank images or bands against one another."
+  },
+  "likelihood_and_metrics": {
+    "baseline_residual": "(science-model)*sqrt(WHT) on fit pixels; HST WHT is the sole baseline inverse-variance map.",
+    "source_flux_SNR": "Discrete convolved source-model sum on fit pixels divided by sqrt(sum(1/WHT) on fit pixels).",
+    "centroid_inside_central_stamp_fraction": 0.5,
+    "central_fraction_rule": "Both centroid coordinates must remain within stamp_width_pixels*0.5/2=9.25 pixels of the immutable published-coordinate start.",
+    "maximum_cross_band_centroid_difference_arcsec": 0.2,
+    "minimum_source_flux_SNR_each_band": 10.0,
+    "minimum_per_coordinate_standard_error_arcsec": 0.02,
+    "maximum_per_coordinate_standard_error_arcsec": 0.3
+  },
+  "bootstrap": {
+    "draws": 500,
+    "minimum_successful_fraction": 0.95,
+    "seed": "First 64 bits of SHA-256('RXJ2129|H2|image_id|band|draw_index').",
+    "background_patch_pool": "From the baseline residual image, enumerate every 3x3 patch whose nine pixels are valid segmentation-zero background pixels. Fail the band if fewer than 12 patches exist.",
+    "moving_block_resample": "Fill a 37x37 residual field in row-major non-overlapping 3x3 output blocks by sampling background patches independently with replacement, preserving within-patch orientation, and crop the final row and column as needed.",
+    "Poisson_source_noise": "For ELECTRONS/S data, draw Poisson(max(source_rate,0)*EXPTIME)/EXPTIME-source_rate independently per pixel; for ELECTRONS data use Poisson(max(source_electrons,0))-source_electrons. Add no Poisson term for any other BUNIT and fail the band.",
+    "PSF_draw": "Use the same integer draw index in the band-specific 500-row H1 PSF-field bootstrap array.",
+    "synthetic_image": "Baseline intrinsic source convolved with the draw-specific PSF plus the baseline tilted plane plus the moving-block background residual plus source Poisson noise.",
+    "refit": "Refit each synthetic image from the baseline best-fit parameters with one bounded linear-loss least-squares start and max_nfev=1000; record failure without replacement.",
+    "uncertainty": "Transform every successful centroid to the F814W sky frame, compute sample standard deviations separately for east and north, then apply the unchanged 0.02-arcsec minimum uncertainty floor only when serializing accepted measurements."
+  },
+  "image_acceptance": {
+    "required_band_fits": ["F814W", "F125W"],
+    "minimum_successful_bootstrap_fraction_each_band": 0.95,
+    "minimum_source_flux_SNR_each_band": 10.0,
+    "centroid_must_remain_inside_central_stamp_fraction": 0.5,
+    "maximum_cross_band_centroid_difference_arcsec": 0.2,
+    "minimum_per_coordinate_standard_error_arcsec": 0.02,
+    "maximum_per_coordinate_standard_error_arcsec": 0.3,
+    "minimum_total_images_accepted": 18,
+    "required_inner_images": ["5.2", "6.3", "8.2"],
+    "failure_accounting": "Attempt every immutable row in order. Record every band and image failure reason. Do not move a stamp, relabel an image, change component count, or delete a row."
+  },
+  "implementation": {
+    "runner": "scripts/run_r1_rxj2129_hst_h2.py",
+    "runner_sha256": "6E9C7DAEDA2F40BF4B8C0B9587945028E0ED5D42D9F2A4FB650503381EF1077E",
+    "static_audit": "scripts/audit_r1_rxj2129_hst_h2_freeze.py",
+    "static_audit_report": "results/r1_rxj2129_hst_h2_freeze/report.json",
+    "self_test_required": true,
+    "arc_pixels_read_before_runner_hash_freeze": false
+  },
+  "outputs": {
+    "H2_band_fit_ledger": "data/derived/r1_rxj2129_hst_h2_band_fit_ledger.csv",
+    "H2_image_ledger": "data/derived/r1_rxj2129_hst_h2_image_ledger.csv",
+    "H2_centroid_draws": "data/derived/r1_rxj2129_hst_h2_centroid_draws.npz",
+    "H2_report": "results/r1_rxj2129_hst_h2/report.json",
+    "H2_diagnostic": "results/r1_rxj2129_hst_h2/diagnostic.png"
+  },
+  "authorization": {
+    "run_self_test_without_HST_pixels": true,
+    "read_arc_stamps": true,
+    "execute_H2_after_static_audit": true,
+    "assemble_H3_covariance": false,
+    "use_lens_or_gravity_model": false,
+    "infer_dynamical_or_Weyl_response": false,
+    "fit_new_force_or_action": false
+  }
+}

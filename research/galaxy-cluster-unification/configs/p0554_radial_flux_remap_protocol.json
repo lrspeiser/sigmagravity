@@ -1,0 +1,100 @@
+{
+  "protocol_version": "P0554-RADIAL-FLUX-REMAP-0.1.0",
+  "frozen_utc": "2026-08-01T05:15:00Z",
+  "status": "frozen_before_any_radial-remap_score",
+  "question": "Can a small universal radial relocation of the P0554 extra gravity response improve galaxy rotation and cluster lensing together while remaining Solar-System safe?",
+  "formula": {
+    "effective_enclosed_extra_flux": "F_X(<r)=a_X(r)*r^2",
+    "remap": "F_X,route(<r)=(1-f)*F_X(<r)+f*F_X(<r/lambda)",
+    "acceleration": "g_new(r)=g_bar(r)+F_X,route(<r)/r^2",
+    "interpretation": "lambda<1 compresses the extra response inward; lambda>1 expands it outward; f=0 or lambda=1 is exactly the parent",
+    "new_amplitude_parameter": false,
+    "universal_grid_selected_parameters": ["route_fraction_f", "radial_scale_lambda"]
+  },
+  "parent": {
+    "candidate": "P0554 combined radial parent",
+    "alpha": 0.75,
+    "apogee_ratio": 100.0,
+    "screen_exponent": 1.0,
+    "screen_scale": 1.0,
+    "mass_radius_delta": 0.0,
+    "extent_leak": 0.0,
+    "invariant_mode": "potential_depth",
+    "invariant_power": 1.2,
+    "invariant_scale": 0.000002,
+    "secondary_path_ratio_power": 0.25,
+    "photon_extra_multiplier": 1.75,
+    "universal_q": 1.2300686115098052,
+    "residence_softness": 1.0,
+    "screen_softness": 1.0,
+    "potential_softness": 1.0,
+    "potential_path_cross": 1.0,
+    "response_addition_softness": 1.0,
+    "lensing_addition_softness": 0.98,
+    "extent_scale_coupling": 0.0,
+    "potential_scale_coupling": 0.0,
+    "mass_growth_power": 0.0
+  },
+  "grid": {
+    "route_fractions": [0.01, 0.03, 0.1, 0.25, 0.5, 1.0],
+    "radial_scales": [0.8, 0.9, 0.95, 0.98, 1.02, 1.05, 1.1, 1.2],
+    "include_exact_parent": true,
+    "candidate_count": 49
+  },
+  "object_split": {
+    "rule": "SHA256(UTF-8 object name), first eight hex digits modulo 4",
+    "discovery_remainders": [1, 2, 3],
+    "holdout_remainder": 0,
+    "galaxy_rows": "outer_holdout radii only; all per-galaxy nuisance values remain frozen",
+    "cluster_rows": "all radii of a system remain in the same partition"
+  },
+  "selection": {
+    "solar_gate": "Cassini, Earth, and Mercury proxies must all pass",
+    "galaxy_metric": "equal-galaxy outer-rotation RMSE in km/s",
+    "cluster_metric": "equal-system CLASH acceleration RMSE in dex",
+    "gain": "1-candidate_RMSE/parent_RMSE in each discovery domain",
+    "primary_rank": "maximize the smaller of galaxy gain and cluster gain",
+    "tie_break": "maximize mean of the two gains, then smaller route fraction, then lambda closest to one",
+    "selected_candidate_is_frozen_before": ["galaxy formula holdout", "CLASH-system formula holdout", "RXJ1347 raw-image formula transfer"]
+  },
+  "evaluation": {
+    "SPARC_galaxies": 131,
+    "CLASH_systems": 20,
+    "formula_parameters_continuously_fit": 0,
+    "universal_grid_parameters_selected": 2,
+    "RXJ1347_geometry": "archived all-six-image ordinary geometry; no geometry or gravity refit",
+    "RXJ1347_score": "exact roots for three second images after each first image fixes its source"
+  },
+  "inputs": {
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "raw_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ1347_baseline_geometry": "results/p0554_baryonic_network_rxj1347_holdout/baseline_geometry.csv"
+  },
+  "outputs": {
+    "directory": "results/p0554_radial_flux_remap",
+    "scores": "candidate_scores.csv",
+    "partition_scores": "partition_scores.csv",
+    "galaxy_predictions": "galaxy_predictions.csv",
+    "cluster_predictions": "cluster_predictions.csv",
+    "raw_scores": "rxj1347_scores.csv",
+    "raw_predictions": "rxj1347_predictions.csv",
+    "radial_profiles": "rxj1347_radial_profiles.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_radial_flux_remap.png"
+  },
+  "claim_limits": [
+    "The remap is a phenomenological weak-field operator, not a derived covariant field equation.",
+    "P0554 and the SPARC/CLASH data were used in earlier exploratory stages; these partitions are formula holdouts only, not pristine theory-validation samples.",
+    "CLASH accelerations and RXJ1347 target products were reconstructed under conventional lens modeling assumptions.",
+    "The radial extrapolation over a shifted endpoint uses the local log-log slope of the inferred extra-flux profile.",
+    "The Solar test is an isolated-Sun proxy and not a full ephemeris or post-Newtonian parameter fit.",
+    "A grid winner is two-parameter model selection and is not equivalent to a parameter-free prediction."
+  ]
+}

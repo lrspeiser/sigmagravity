@@ -1,0 +1,3 @@
+model,training_RMS_arcsec,heldout_RMS_arcsec,training_roots_converged,heldout_roots_converged,heldout_all_roots_converged,maximum_heldout_residual_arcsec,heldout_reduced_chi2,optimizer_success,optimizer_cost,any_geometry_near_bound
+strict_route_RAR,0.8080038149577445,5.043463114559598,15,7,True,7.6062608182053975,330.1497755750129,True,133.6068281942464,True
+strict_route_P0599,inf,inf,12,4,False,29.3371846083507,inf,True,946.9137146692838,True

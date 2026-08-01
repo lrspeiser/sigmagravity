@@ -1,0 +1,53 @@
+{
+  "protocol_version": "R1B1-A1689-GMOS-final-covariance-assembly-0.1",
+  "status": "frozen_after_baseline_kinematics_but_before_bootstrap_covariance_or_systematic_grid_outputs",
+  "freeze_date": "2026-07-26",
+  "disclosure": "The nine baseline signed-bin pPXF values and their side-consistency checks were known. No completed bootstrap covariance, bootstrap-half diagnostic, systematic-grid fit, final covariance, or five-bin GLS profile had been inspected.",
+  "inputs": {
+    "parent_protocol": "configs/r1_a1689_gmos_reduction_covariance_protocol.json",
+    "baseline_report": "results/r1_a1689_gmos_baseline_ppxf/report.json",
+    "baseline_profile": "data/derived/r1_a1689_gmos_baseline_ppxf_profile.csv",
+    "bootstrap_report": "results/r1_a1689_gmos_bootstrap/report.json",
+    "bootstrap_covariance": "data/derived/r1_a1689_gmos_bootstrap_covariance.npz",
+    "systematic_report": "results/r1_a1689_gmos_systematics/report.json",
+    "systematic_grid": "data/derived/r1_a1689_gmos_systematic_grid.csv",
+    "lens_images": "data/derived/r1_a1689_lens_prescreen_images.csv"
+  },
+  "assembly": {
+    "parameter_order": "velocity signed bins 1..9 followed by dispersion signed bins 1..9",
+    "bootstrap_covariance": "Unbiased joint sample covariance of the complete nine-bin velocity and dispersion bootstrap vectors.",
+    "systematic_covariance": "Uncentered second moment about the frozen baseline: mean over all 27 complete grid runs of delta times delta-transpose. The exact baseline run remains in the ensemble with zero delta.",
+    "total_covariance": "bootstrap covariance plus systematic covariance; do not add pPXF formal variances again because the joint wild/exposure bootstrap already propagates measurement noise.",
+    "bootstrap_halves": "Split by requested replicate number 1-100 versus 101-200. For every signed dispersion bin compare each half-covariance diagonal and standard error to the full-bootstrap counterpart.",
+    "covariance_diagonal_fractional_change": "absolute difference between half diagonals divided by the full-bootstrap diagonal; take the maximum over both halves and all nine bins.",
+    "sigma_error_fractional_change": "absolute difference between each half standard error and the full-bootstrap standard error divided by the full-bootstrap standard error; take the maximum over both halves and all nine bins.",
+    "symmetrization": "For velocity and dispersion separately, retain signed bin 5 as the central radial bin. For pairs (4,6), (3,7), (2,8), and (1,9), use inverse-2x2-covariance weights normalized to sum to one. Apply the resulting fixed 5x9 matrices to the full joint 18x18 covariance so cross-parameter and cross-radius covariance is retained.",
+    "radial_edges_arcsec": [[0.0, 0.3], [0.3, 1.0], [1.0, 2.0], [2.0, 3.5], [3.5, 4.929]],
+    "radial_coordinate": "midpoint of each absolute-radius interval",
+    "realized_lens_overlap": "Recount distinct independently redshift-anchored image radii at or inside the outer edge of the outermost finite radial bin."
+  },
+  "gates": {
+    "minimum_complete_bootstrap_replicates": 180,
+    "maximum_covariance_diagonal_fractional_change_between_bootstrap_halves": 0.2,
+    "maximum_sigma_error_fractional_change_between_bootstrap_halves": 0.15,
+    "covariance_psd_relative_eigenvalue_tolerance": 1e-10,
+    "minimum_finite_symmetrized_radial_bins": 4,
+    "maximum_fractional_sigma_uncertainty_each_retained_radial_bin": 0.3,
+    "minimum_distinct_lens_radii_inside_realized_support": 3,
+    "require_parent_side_consistency_gate": true,
+    "require_frozen_systematic_grid_gate": true
+  },
+  "outputs": {
+    "profile": "data/derived/r1_a1689_gmos_final_profile.csv",
+    "covariance": "data/derived/r1_a1689_gmos_final_covariance.npz",
+    "report": "results/r1_a1689_gmos_final_profile/report.json",
+    "diagnostic": "results/r1_a1689_gmos_final_profile/profile_and_lens_overlap.png"
+  },
+  "authorization": {
+    "assemble_only_after_bootstrap_and_systematic_grid": true,
+    "promote_to_numerical_dynamics_only_if_every_gate_passes": true,
+    "derive_dynamical_gravity_response": false,
+    "infer_weyl_response": false,
+    "fit_new_force_or_action": false
+  }
+}

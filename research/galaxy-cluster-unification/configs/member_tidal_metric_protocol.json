@@ -1,0 +1,100 @@
+{
+  "protocol_version": "MEMBER-TIDAL-METRIC-0.1.0",
+  "frozen_utc": "2026-07-29T23:58:00Z",
+  "status": "frozen_before_member_tidal_scores",
+  "question": "Can the observed, non-circular distribution of cluster galaxies supply the missing directional information while retaining the fixed-RAR galaxy law and one universal metric-slip normalization?",
+  "weak_field_equation": {
+    "matter_split": "Phi=Phi_N+phi_Sigma, where Phi_N is the baryonic Newtonian potential and phi_Sigma is the fixed-RAR extra potential",
+    "scalar_metric_slip": "Phi=Phi_N+phi_Sigma; Psi=Phi_N+(1+s)phi_Sigma",
+    "locked_slip_s": 5.0,
+    "locked_extra_force_lensing_to_dynamics_ratio": 3.5,
+    "tensor_operator": "partial_i[(delta_ij+t*Q_ij_env)*partial_j phi_Sigma]=source_Sigma",
+    "first_order_equation": "laplacian(delta_phi)=-partial_i(Q_ij_env*partial_j phi_Sigma)",
+    "lensing_potential": "psi_lens=psi_fixed_RAR_slip+t*delta_psi",
+    "reason_for_potential_solution": "Solving for one scalar potential keeps the deflection curl-free instead of rotating deflection vectors by hand.",
+    "new_universal_parameters": ["t"],
+    "per_cluster_gravity_parameters": 0
+  },
+  "environment_tensor": {
+    "input": "observed member positions and relative photometric light weights only",
+    "raw_components": "Qxx+iQxy=sum_a w_a[(dx_a^2-dy_a^2)+2i dx_a dy_a]/(dx_a^2+dy_a^2+h^2)^2 divided by sum_a w_a(dx_a^2+dy_a^2)/(dx_a^2+dy_a^2+h^2)^2",
+    "circular_subtraction": "Subtract the exact polar spin-2 circular mean and divide the contrast by two, so an axisymmetric member distribution produces Q_env=0 and the eigenvalue magnitude is bounded by one.",
+    "subtract_circular_mean": true,
+    "primary_softening_kpc": 10.0,
+    "softening_sensitivity_kpc": [5.0, 20.0],
+    "light_to_mass_normalization_needed": false,
+    "gas_included": false,
+    "gas_exclusion_reason": "The RX J2129 X4 response package passes, but no accepted X5 temperature/density posterior or projected gas map exists yet."
+  },
+  "tensor_coupling": {
+    "primary_grid": [-0.9, -0.6, -0.3, 0.0, 0.3, 0.6, 0.9],
+    "ellipticity_preserving_domain": "|t|<1 because every normalized Q_env eigenvalue has magnitude at most one",
+    "selection_metric": "minimum equal-system exact training radial RMS on MACS0329 and MACS0429; ties favor smaller |t|",
+    "diagnostic_extended_grid": [-3.0, -2.0, -1.5, -1.2, 1.2, 1.5, 2.0, 3.0],
+    "extended_grid_claim_rule": "Exploratory only; it permits a sign reversal in an eigen-direction and cannot qualify as the primary model."
+  },
+  "cluster_split": {
+    "selection_labels": ["MACS0329", "MACS0429"],
+    "validation_labels": ["MACS1115", "MACS1931"],
+    "within_family_rule": "hold out the lexicographically last image in every family with at least three images",
+    "disclosure": "These image catalogs have been inspected by earlier project tests; this is a frozen-formula exploratory transfer test, not untouched validation."
+  },
+  "numerics": {
+    "field_half_width_arcsec": 256.0,
+    "field_pixels_per_axis": 512,
+    "polar_mean_radii": 384,
+    "polar_mean_azimuths": 720,
+    "fft_boundary_rule": "The circular-subtracted tensor contrast must be small at the boundary; solve the first-order longitudinal field by FFT and audit the edge and curl residuals.",
+    "interpolation": "bilinear with zero correction outside the grid"
+  },
+  "optimization": {
+    "starts_per_selection_grid_point": 2,
+    "starts_selected_validation": 6,
+    "maximum_function_evaluations": 2000,
+    "random_seed": 20260805
+  },
+  "controls": {
+    "zero_tensor": "t=0 must reproduce the locked s=5 scalar-slip lens within numerical tolerance",
+    "member_angle_randomizations": 32,
+    "randomization_rule": "On validation systems, preserve each member radius and light weight, randomize its polar angle, and score the held-out images at the selected t with the actual-map geometry and source positions fixed.",
+    "softening_sensitivity": "Refit only the selected t at 5 and 20 kpc; these cannot replace the 10 kpc primary after scores are inspected.",
+    "galaxy_and_solar_transfer": "Q_env is defined as a non-circular external-member contrast, so Q_env=0 for the axisymmetric isolated galaxy and Solar-System limits; the previously locked fixed-RAR galaxy and Cassini results are unchanged."
+  },
+  "advance_gates": {
+    "selected_t_not_primary_grid_boundary": true,
+    "validation_all_roots_converged": true,
+    "validation_RMS_improvement_over_scalar_slip_fraction_min": 0.20,
+    "validation_to_compact_halo_RMS_ratio_max": 1.25,
+    "actual_member_map_randomization_p_max": 0.05,
+    "softening_sensitivity_max_fractional_RMS_change": 0.20,
+    "maximum_edge_Q_eigenvalue": 0.10,
+    "maximum_normalized_curl_RMS": 0.001
+  },
+  "inputs": {
+    "base_multicluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "member_system_protocol": "configs/unbounded_running_spatial_vector_protocol.json",
+    "metric_slip_protocol": "configs/metric_slip_raw_lensing_protocol.json",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "xmm_response_report": "results/r1_rxj2129_xmm_x4_responses/report.json",
+    "xmm_gas_protocol": "configs/r1_rxj2129_xmm_gas_likelihood_protocol.json"
+  },
+  "outputs": {
+    "report": "results/member_tidal_metric/report.json",
+    "grid_scores": "results/member_tidal_metric/grid_scores.csv",
+    "predictions": "results/member_tidal_metric/predictions.csv",
+    "geometry": "results/member_tidal_metric/geometry.csv",
+    "map_audit": "results/member_tidal_metric/map_audit.csv",
+    "randomizations": "results/member_tidal_metric/randomizations.csv",
+    "figure": "results/member_tidal_metric/member_tidal_metric.png",
+    "summary": "results/member_tidal_metric/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "This is a first-order projected weak-field closure, not a complete four-dimensional covariant action.",
+    "The member catalogs provide positions and photometric light weights but not a complete theory-neutral stellar-mass map.",
+    "No accepted gas surface-density map is included, so failure cannot reject a gas-inclusive tensor theory and success cannot establish one.",
+    "The fixed-RAR radial baryonic inputs are Tian et al. derived products, while the primary score uses raw image positions.",
+    "A qualifying result requires transfer to held-out clusters and superiority to the compact-halo comparator; a better training fit alone is not evidence."
+  ]
+}

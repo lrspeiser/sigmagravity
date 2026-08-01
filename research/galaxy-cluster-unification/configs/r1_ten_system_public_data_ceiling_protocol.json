@@ -1,0 +1,53 @@
+{
+  "protocol_version": "R1C-public-data-ceiling-0.1",
+  "status": "frozen_after_third_external_nonpromotion_before_RXJ2129_H2_or_X4_outcome",
+  "frozen_utc": "2026-07-27T15:54:46Z",
+  "selection_blind": true,
+  "gravity_residuals_seen": false,
+  "purpose": "Decide whether the preregistered ten-system same-object identifiability sample remains attainable from the audited public-data universe without replacing failed gates, counting proxy observables, or selecting another one-off target.",
+  "scope": {
+    "source_screened_BCG_hosts_minimum": 30,
+    "strict_same_system_target": 10,
+    "minimum_dynamics_modes": 3,
+    "minimum_lensing_modes": 3,
+    "complete_baryonic_and_theory_neutral_covariance_required": true,
+    "failed_frozen_reductions_and_predictive_gates_remain_binding": true
+  },
+  "evidence_classes": [
+    "the completed 45-host residual-blind BCG inventory",
+    "the 15-system same-object gap ledger and its structural ceiling",
+    "the all-14 SLACS-KCWI primary-source and public-product screen",
+    "the frozen J0946, ESO 325-G004, and J1402 external-candidate dispositions",
+    "the active but outcome-unseen RX J2129 strict-observable production gates"
+  ],
+  "hard_shortfall_gate": {
+    "inventory_boundary": "at least 30 unique BCG hosts source-screened",
+    "candidate_universe_ceiling": "audited current-universe structural ceiling below 10",
+    "replacement_evidence": "three consecutively completed residual-blind external candidates with zero promotion",
+    "bulk_sample_evidence": "all 14 SLACS-KCWI systems screened and zero public numerical kinematic maps identified",
+    "mathematical_deficit": "at least seven genuinely new rank-three systems remain necessary even if every existing ceiling system were repaired",
+    "decision": "all five conditions establish a hard public-data identifiability shortfall for the ten-system sample"
+  },
+  "RXJ2129_branches": {
+    "if_strict_ready": "retain RX J2129 only as a single-system pipeline/identifiability demonstration; it cannot authorize population cross-validation or a universal latent response",
+    "if_not_strict_ready": "retain RX J2129 as structural-only and perform no dynamical or Weyl response reconstruction",
+    "unchanged_in_both_branches": "the audited public-data universe cannot supply ten systems, R2 population cross-validation is empirically unidentifiable, and no unification or new-force-law claim is authorized"
+  },
+  "forbidden_rescues": [
+    "select a fourth one-off external target after inspecting J1402",
+    "count repeated images at one radius as independent Weyl modes",
+    "use GR-fit mass, slope, kappa, or residual covariance as theory-neutral response data",
+    "extend a dynamics validity range after inspecting lens overlap",
+    "weaken any failed calibration, covariance, predictive, or coherent-residual gate",
+    "call a one-system method demonstration population cross-validation"
+  ],
+  "authorization": {
+    "finish_RXJ2129_H2_and_X4": true,
+    "finalize_hard_public_data_ceiling": true,
+    "select_fourth_external_one_off_target": false,
+    "freeze_ten_system_sample": false,
+    "run_population_R2_cross_validation": false,
+    "infer_universal_latent_response": false,
+    "fit_new_force_or_action": false
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "protocol_version": "P0554-ALL-BARYON-ROUTE-SCREEN-0.1.0",
+  "frozen_utc": "2026-08-01T06:45:00Z",
+  "status": "frozen_after_input_adequacy_before_map_construction_or_any_route_score",
+  "question": "Do registered continuous stellar light or hot-gas morphology provide a more transferable gravity-route direction than member galaxies alone?",
+  "parent": {
+    "radial_formula": "lensing_softness_0.98",
+    "eta": 0.30,
+    "route_power": 2.5,
+    "direction_softening_kpc": 200.0,
+    "distance_power": 2.0,
+    "source_weight_power": 1.0,
+    "new_per_cluster_gravity_parameters": 0
+  },
+  "map_construction": {
+    "axis_min_arcsec": -60.0,
+    "axis_max_arcsec": 60.0,
+    "grid_spacing_arcsec": 1.0,
+    "known_image_mask_radius_arcsec": 4.0,
+    "hst_background_annulus_arcsec": [75.0, 90.0],
+    "hst_native_cut_radius_arcsec": 96.0,
+    "hst_negative_flux_rule": "subtract frozen outer-annulus median and clip negative flux to zero",
+    "hst_mask_fill": "same-radius 0.5-arcsec-annulus median before common-grid interpolation",
+    "xray_band_keV": [0.7, 2.0],
+    "xray_observation_combination": "sum each observation's sky histogram divided by its header exposure; normalize only after combination",
+    "xray_point_source_detection": {
+      "small_gaussian_sigma_arcsec": 1.5,
+      "broad_gaussian_sigma_arcsec": 6.0,
+      "difference_significance_threshold": 5.0,
+      "protected_cluster_core_radius_arcsec": 5.0,
+      "mask_dilation_radius_arcsec": 3.0,
+      "mask_fill": "broad Gaussian rate map"
+    },
+    "map_use": "Each positive map is normalized; it supplies only a softened direction, never route amplitude or radial convergence."
+  },
+  "direction_law": "d_map(x_i)=unit integral Sigma_proxy(x)(x-x_i)/(|x-x_i|^2+s^2)^((p+1)/2)d2x",
+  "variants": [
+    {"variant_id": "eta_000", "direction": "none"},
+    {"variant_id": "member_parent", "direction": "member"},
+    {"variant_id": "member_star_050", "direction": "member_star", "second_fraction": 0.50},
+    {"variant_id": "star_continuous", "direction": "star"},
+    {"variant_id": "gas_unmasked", "direction": "gas_unmasked"},
+    {"variant_id": "gas_masked", "direction": "gas_masked"},
+    {"variant_id": "star_gas_025", "direction": "star_gas", "second_fraction": 0.25},
+    {"variant_id": "star_gas_050", "direction": "star_gas", "second_fraction": 0.50},
+    {"variant_id": "star_gas_075", "direction": "star_gas", "second_fraction": 0.75},
+    {"variant_id": "member_all_050", "direction": "member_all", "second_fraction": 0.50, "gas_fraction_inside_all": 0.50}
+  ],
+  "evaluation": {
+    "systems": ["RXJ2129", "MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "spent_selection_system": "MACS1931",
+    "fixed_geometry_source": "eta=0 exact-refit geometry from p0554_subcritical_route_transfer",
+    "source_positions": "profiled on training images separately for each direction",
+    "primary_scope": "equal-system held-out Jacobian-linearized RMS over the four systems other than MACS1931",
+    "exact_followup_minimum_improvement_fraction_vs_member_parent": 0.005,
+    "exact_followup_minimum_primary_systems_improved_vs_member_parent": 3,
+    "exact_followup_maximum_single_system_worsening_fraction_vs_member_parent": 0.005,
+    "no_formula_promotion": true
+  },
+  "inputs": {
+    "input_audit": "results/p0554_all_baryon_route_input_audit/report.json",
+    "acquisition_protocol": "configs/p0554_all_baryon_route_acquisition_protocol.json",
+    "reused_hst_protocol": "configs/clash_stellar_morphology_acquisition_protocol.json",
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "fixed_geometry": "results/p0554_subcritical_route_transfer/geometry.csv",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv"
+  },
+  "outputs": {
+    "directory": "results/p0554_all_baryon_route_screen",
+    "map_audits": "map_audits.csv",
+    "direction_audits": "direction_audits.csv",
+    "field_audits": "field_audits.csv",
+    "system_scores": "system_scores.csv",
+    "scores": "scores.csv",
+    "shortlist": "shortlist.csv",
+    "report": "report.json",
+    "figure": "p0554_all_baryon_route_screen.png",
+    "map_figure": "p0554_all_baryon_maps.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This is a spent-data fixed-geometry local-response screen, not an exact root or caustic test.",
+    "F160W flux is a stellar-light proxy with foreground/background and mass-to-light uncertainty.",
+    "Exposure-normalized X-ray event brightness is proportional to emissivity, not projected gas mass.",
+    "The X-ray maps are not fully exposure corrected and retain a frozen approximate point-source mask.",
+    "Galaxy, radial-CLASH, and Solar values are unchanged by construction.",
+    "Any shortlist requires a separately frozen exact-refit/global-root test and later gas-mass confirmation."
+  ]
+}

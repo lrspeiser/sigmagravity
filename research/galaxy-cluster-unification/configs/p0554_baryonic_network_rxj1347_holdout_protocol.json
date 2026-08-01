@@ -1,0 +1,61 @@
+{
+  "protocol_version": "P0554-BARYONIC-NETWORK-RXJ1347-HOLDOUT-0.1.0",
+  "frozen_utc": "2026-08-01T03:30:00Z",
+  "status": "frozen_after_discovery_screen_before_any_P0554_or_network_score_on_RXJ1347",
+  "question": "Does the least-bad discovery network kernel transfer unchanged to RXJ1347, and is its effect better or worse than the no-route and averaged local-vector references?",
+  "candidate": {
+    "variant_id": "network_target_050",
+    "selection_rule": "lowest five-cluster equal-system RMS among explicit network variants, transferred regardless of whether it beat eta=0",
+    "target_weight_power": 0.5,
+    "distance_power": 2.0,
+    "softening_kpc": 200.0,
+    "link_scale_kpc": 250.0,
+    "hop_fraction": 1.0,
+    "top_k": null,
+    "eta": 0.30,
+    "route_power": 2.5,
+    "new_cluster_gravity_parameters": 0
+  },
+  "references": ["eta_000", "local_vector_s200"],
+  "evaluation": {
+    "system": "RX J1347.5-1145",
+    "label": "RXJ1347",
+    "images": 6,
+    "families": 3,
+    "baseline_geometry": "Fit the P0554 eta=0 radial law to all six images using six ordinary geometry nuisances, then hold that geometry fixed for every route formula.",
+    "pair_split": "Within each two-image family, use the lexicographically first image to infer the source and the second as the formula holdout.",
+    "qualification": "The geometry has seen all six images, so this is an untouched-formula/fixed-geometry transfer, not a fully blind image prediction.",
+    "baseline_fit_starts": 8,
+    "maximum_function_evaluations": 3000,
+    "random_seed": 1347554,
+    "transfer_gate": "Candidate must converge all three heldout roots and have lower exact heldout RMS than both references; failure is retained as a sensitivity result, not tuned."
+  },
+  "inputs": {
+    "network_screen_protocol": "configs/p0554_baryonic_network_screen_protocol.json",
+    "network_screen_report": "results/p0554_baryonic_network_screen/report.json",
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "route_protocol": "configs/adaptive_route_multicluster_raw_protocol.json",
+    "raw_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "member_catalog": "data/raw/r1_clash_caminha2019/RXJ1347-P2-shear_mcmc/members_lenstool_v2.dat",
+    "initial_geometry": "results/unbounded_running_multicluster_raw/fitted_geometry.csv"
+  },
+  "outputs": {
+    "directory": "results/p0554_baryonic_network_rxj1347_holdout",
+    "scores": "scores.csv",
+    "predictions": "predictions.csv",
+    "field_audits": "field_audits.csv",
+    "baseline_geometry": "baseline_geometry.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_baryonic_network_rxj1347_holdout.png"
+  },
+  "claim_limits": [
+    "RXJ1347 has only three two-image families, so its baseline geometry cannot be fitted on an independent within-family training subset.",
+    "The eta=0 ordinary geometry is fitted using all six images before route formulas are compared; only the route formula is held out.",
+    "The Tian spherical baryonic profile and member-light catalog omit full gas/ICL covariance.",
+    "The fixed route candidate failed its discovery improvement gate and is transferred to measure failure generalization, not to seek confirmation.",
+    "No result from this one cluster promotes a gravity formula."
+  ]
+}

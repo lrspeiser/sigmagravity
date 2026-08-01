@@ -1,0 +1,144 @@
+{
+  "audit_version": "R1A2-dynamics-public-data-0.1",
+  "purpose": "Distinguish published numerical BCG likelihood inputs from public raw observations that require an independent reduction. Raw-cube availability does not make a system R1-ready.",
+  "selection_rule": "Audit data availability only. Do not inspect gravity residuals, inferred dark-matter slopes, or alternative-gravity fit quality.",
+  "systems": [
+    {
+      "system": "MACS J1206",
+      "redshift": 0.4398,
+      "publication": {
+        "citation": "Biviano et al. 2023, ApJ 958, 148",
+        "doi": "10.3847/1538-4357/acf832",
+        "arxiv": "2307.06804",
+        "local_source_directory": "data/raw/r1_replacement_search_sources/biviano2023_macs_j1206_dynamics",
+        "required_local_files": [
+          "innerslopefinal.tex",
+          "M1206_sigma_profiles.pdf"
+        ]
+      },
+      "bcg_profile": {
+        "profile_points": 6,
+        "radial_support_kpc": 50.0,
+        "annulus_edges_arcsec": [0.0, 0.6, 1.5, 3.0, 5.0, 8.0, 12.0],
+        "published_numerical_values_table": false,
+        "published_measurement_covariance": false,
+        "published_likelihood_or_posterior": false,
+        "publication_package_state": "annulus geometry is numerical; dispersion values and one-sigma errors occur only in Figure 2"
+      },
+      "archive": {
+        "service": "ESO Science Archive TAP/ObsCore and DataLink/SODA",
+        "tap_url": "https://archive.eso.org/tap_obs/sync",
+        "proposal_ids": ["095.A-0181(A)", "097.A-0269(A)"],
+        "products": [
+          {
+            "dp_id": "ADP.2017-06-19T11:32:26.411",
+            "target_name": "MACS1206",
+            "calibration_level": 3,
+            "exposure_seconds": 17477.713,
+            "content_length_bytes": 11454782400,
+            "public_release": true,
+            "download_url": "https://dataportal.eso.org/dataPortal/file/ADP.2017-06-19T11:32:26.411",
+            "datalink_url": "https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2017-06-19T11:32:26.411",
+            "cutout": {
+              "center_ra_deg": 181.550625,
+              "center_dec_deg": -8.8009444444,
+              "radius_deg": 0.0041666667,
+              "wavelength_min_m": 4.86e-7,
+              "wavelength_max_m": 7.16e-7,
+              "local_path": "data/raw/r1_muse_bcg_cubes/macs_j1206_bcg_4860_7160A_r15arcsec.fits"
+            }
+          }
+        ]
+      },
+      "reconstruction_requirements": [
+        "apply the paper's six elliptical annuli with position angle 185 degrees and axis ratio a/b=1.6",
+        "recreate the source/interloper mask shown but not tabulated in Figure 2",
+        "run pPXF over 4860-7160 Angstrom with the stated stellar library and spectral masks",
+        "estimate statistical plus template, sky-line, PSF, and bin-coupling covariance",
+        "validate the reconstructed profile against Figure 2 without using it as numerical input"
+      ],
+      "extraction_protocol_frozen": false,
+      "readiness": "public_raw_reconstruction_possible_not_published_likelihood"
+    },
+    {
+      "system": "Abell S1063",
+      "redshift": 0.3458,
+      "publication": {
+        "citation": "Sartoris et al. 2020, A&A 637, A34",
+        "doi": "10.1051/0004-6361/202037521",
+        "arxiv": "2003.08475",
+        "local_source_directory": "data/raw/r1_replacement_search_sources/sartoris2020_abell_s1063_dynamics",
+        "required_local_files": [
+          "sartoris.tex",
+          "figures/R2248_sigma_profile.ps"
+        ]
+      },
+      "bcg_profile": {
+        "profile_points": 9,
+        "radial_support_kpc": 40.0,
+        "annulus_edges_arcsec": [],
+        "published_numerical_values_table": false,
+        "published_measurement_covariance": false,
+        "published_likelihood_or_posterior": false,
+        "publication_package_state": "five NE and four SW dispersion measurements are described numerically only by count and support; values and errors occur only in Figure 2"
+      },
+      "archive": {
+        "service": "ESO Science Archive TAP/ObsCore and DataLink/SODA",
+        "tap_url": "https://archive.eso.org/tap_obs/sync",
+        "proposal_ids": ["60.A-9345(A)", "095.A-0653(A)"],
+        "products": [
+          {
+            "dp_id": "ADP.2017-03-23T15:58:03.937",
+            "target_name": "AS1063",
+            "calibration_level": 3,
+            "exposure_seconds": 7877.057,
+            "content_length_bytes": 5727075840,
+            "public_release": true,
+            "download_url": "https://dataportal.eso.org/dataPortal/file/ADP.2017-03-23T15:58:03.937",
+            "datalink_url": "https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2017-03-23T15:58:03.937",
+            "cutout": {
+              "center_ra_deg": 342.1832916667,
+              "center_dec_deg": -44.5308277778,
+              "radius_deg": 0.0041666667,
+              "wavelength_min_m": 4.86e-7,
+              "wavelength_max_m": 7.16e-7,
+              "local_path": "data/raw/r1_muse_bcg_cubes/abell_s1063_sw_bcg_4860_7160A_r15arcsec.fits"
+            }
+          },
+          {
+            "dp_id": "ADP.2017-03-28T12:46:01.331",
+            "target_name": "AS1063-NE",
+            "calibration_level": 3,
+            "exposure_seconds": 15885.258,
+            "content_length_bytes": 5780370240,
+            "public_release": true,
+            "download_url": "https://dataportal.eso.org/dataPortal/file/ADP.2017-03-28T12:46:01.331",
+            "datalink_url": "https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2017-03-28T12:46:01.331",
+            "cutout": {
+              "center_ra_deg": 342.1832916667,
+              "center_dec_deg": -44.5308277778,
+              "radius_deg": 0.0041666667,
+              "wavelength_min_m": 4.86e-7,
+              "wavelength_max_m": 7.16e-7,
+              "local_path": "data/raw/r1_muse_bcg_cubes/abell_s1063_ne_bcg_4860_7160A_r15arcsec.fits"
+            }
+          }
+        ]
+      },
+      "reconstruction_requirements": [
+        "recreate the separate NE and SW elliptical extraction regions and object masks",
+        "run pPXF with the paper's 4860-7160 Angstrom setup and NOAO template library",
+        "exclude the SW central region affected by the pointing gap",
+        "estimate statistical plus template, sky-line, PSF, pointing-edge, and bin-coupling covariance",
+        "validate the reconstructed nine-point profile against Figure 2 without using it as numerical input"
+      ],
+      "extraction_protocol_frozen": false,
+      "readiness": "public_raw_reconstruction_possible_not_published_likelihood"
+    }
+  ],
+  "decision_rule": {
+    "published_likelihood_ready": "numerical profile values, uncertainties/covariance, bin geometry, baryonic inputs, and likelihood or sufficient nuisance description are all public",
+    "raw_reconstruction_ready": "public calibrated cube is local and all unreported extraction choices have been independently frozen",
+    "figure_digitization": "engineering cross-check only; never count as R1-ready evidence"
+  }
+}

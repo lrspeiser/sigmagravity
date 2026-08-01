@@ -1,0 +1,206 @@
+{
+  "report_version": "P0586C-SIGNED-METRIC-RESPONSE-RESULTS-0.1.0",
+  "status": "complete_signed_metric_response",
+  "protocol": {
+    "path": "configs\\p0586c_signed_metric_response_protocol.json",
+    "sha256": "06b69bce398e539b1716f2e8d340ecda5e4dbbdb7b045f193d9c7b2f5e21a905"
+  },
+  "coverage": {
+    "clusters": 4,
+    "candidates": 108,
+    "system_scores": 432
+  },
+  "zero_source_plane_RMS_arcsec": {
+    "MACS0329": 16.017662834650846,
+    "MACS0429": 9.180961422423024,
+    "MACS1115": 12.23167736762921,
+    "MACS1931": 3.779313561766855
+  },
+  "best_common_candidate": {
+    "candidate_id": "e1d00_a2d4_n4_tm1d2_w0d80",
+    "minimum_permittivity": 1.0,
+    "anisotropy_tau": -1.2,
+    "smoothing_r80_fraction": 0.8,
+    "all_four_RMS_arcsec": 10.984652289307961,
+    "systems_improved": 4,
+    "all_four_improve": true
+  },
+  "candidates_improving_all_four": 4,
+  "best_all_four_if_any": [
+    {
+      "candidate_id": "e1d00_a2d4_n4_tm1d2_w0d80",
+      "minimum_permittivity": 1.0,
+      "anisotropy_tau": -1.2,
+      "smoothing_r80_fraction": 0.8,
+      "all_four_RMS_arcsec": 10.984652289307961,
+      "systems_improved": 4,
+      "all_four_improve": true
+    }
+  ],
+  "per_system_optima": [
+    {
+      "system_label": "MACS0329",
+      "candidate_id": "e1d00_a2d4_n4_tm1d2_w0d80",
+      "minimum_permittivity": 1.0,
+      "anisotropy_tau": -1.2,
+      "smoothing_r80_fraction": 0.8,
+      "source_plane_RMS_arcsec": 15.916491629088368,
+      "zero_source_plane_RMS_arcsec": 16.017662834650846,
+      "improvement_fraction": 0.006316227692320764
+    },
+    {
+      "system_label": "MACS0429",
+      "candidate_id": "e1d00_a2d4_n4_tp1d2_w0d50",
+      "minimum_permittivity": 1.0,
+      "anisotropy_tau": 1.2,
+      "smoothing_r80_fraction": 0.5,
+      "source_plane_RMS_arcsec": 8.989149403398741,
+      "zero_source_plane_RMS_arcsec": 9.180961422423024,
+      "improvement_fraction": 0.020892367389303335
+    },
+    {
+      "system_label": "MACS1115",
+      "candidate_id": "e1d00_a2d4_n4_tm1d2_w0d50",
+      "minimum_permittivity": 1.0,
+      "anisotropy_tau": -1.2,
+      "smoothing_r80_fraction": 0.5,
+      "source_plane_RMS_arcsec": 11.35128083461738,
+      "zero_source_plane_RMS_arcsec": 12.23167736762921,
+      "improvement_fraction": 0.07197676218486393
+    },
+    {
+      "system_label": "MACS1931",
+      "candidate_id": "e1d00_a2d4_n4_tp1d2_w0d50",
+      "minimum_permittivity": 1.0,
+      "anisotropy_tau": 1.2,
+      "smoothing_r80_fraction": 0.5,
+      "source_plane_RMS_arcsec": 3.238932654981564,
+      "zero_source_plane_RMS_arcsec": 3.779313561766855,
+      "improvement_fraction": 0.14298387735064233
+    }
+  ],
+  "response_correlations": [
+    {
+      "left_system": "MACS0329",
+      "right_system": "MACS0429",
+      "Spearman_response_correlation": 0.3953698851998285,
+      "two_sided_p": 2.2867791155951112e-05
+    },
+    {
+      "left_system": "MACS0329",
+      "right_system": "MACS1115",
+      "Spearman_response_correlation": -0.18952031629590818,
+      "two_sided_p": 0.049474788384929726
+    },
+    {
+      "left_system": "MACS0329",
+      "right_system": "MACS1931",
+      "Spearman_response_correlation": 0.7396370218644311,
+      "two_sided_p": 6.109171761765986e-20
+    },
+    {
+      "left_system": "MACS0429",
+      "right_system": "MACS1115",
+      "Spearman_response_correlation": -0.5720668794360025,
+      "two_sided_p": 9.972184755217389e-11
+    },
+    {
+      "left_system": "MACS0429",
+      "right_system": "MACS1931",
+      "Spearman_response_correlation": 0.7831658171771544,
+      "two_sided_p": 1.3177763822705785e-23
+    },
+    {
+      "left_system": "MACS1115",
+      "right_system": "MACS1931",
+      "Spearman_response_correlation": -0.6770256752250752,
+      "two_sided_p": 8.700327244728204e-16
+    }
+  ],
+  "parameter_impacts": [
+    {
+      "system_label": "MACS0329",
+      "coordinate": "minimum_permittivity",
+      "best_main_effect_level": 0.25,
+      "main_effect_span_arcsec": 0.019508862458483378
+    },
+    {
+      "system_label": "MACS0329",
+      "coordinate": "anisotropy_tau",
+      "best_main_effect_level": 1.2,
+      "main_effect_span_arcsec": 0.01586820101318054
+    },
+    {
+      "system_label": "MACS0329",
+      "coordinate": "smoothing_r80_fraction",
+      "best_main_effect_level": 0.8,
+      "main_effect_span_arcsec": 0.00011128308177887902
+    },
+    {
+      "system_label": "MACS0429",
+      "coordinate": "minimum_permittivity",
+      "best_main_effect_level": 1.0,
+      "main_effect_span_arcsec": 0.058071657435132096
+    },
+    {
+      "system_label": "MACS0429",
+      "coordinate": "anisotropy_tau",
+      "best_main_effect_level": 1.2,
+      "main_effect_span_arcsec": 0.08376877071819422
+    },
+    {
+      "system_label": "MACS0429",
+      "coordinate": "smoothing_r80_fraction",
+      "best_main_effect_level": 0.8,
+      "main_effect_span_arcsec": 0.0006206573307405705
+    },
+    {
+      "system_label": "MACS1115",
+      "coordinate": "minimum_permittivity",
+      "best_main_effect_level": 0.25,
+      "main_effect_span_arcsec": 0.18153866308732347
+    },
+    {
+      "system_label": "MACS1115",
+      "coordinate": "anisotropy_tau",
+      "best_main_effect_level": -1.2,
+      "main_effect_span_arcsec": 1.1347688493124721
+    },
+    {
+      "system_label": "MACS1115",
+      "coordinate": "smoothing_r80_fraction",
+      "best_main_effect_level": 0.8,
+      "main_effect_span_arcsec": 0.00018417130433867612
+    },
+    {
+      "system_label": "MACS1931",
+      "coordinate": "minimum_permittivity",
+      "best_main_effect_level": 1.0,
+      "main_effect_span_arcsec": 0.07671963240602553
+    },
+    {
+      "system_label": "MACS1931",
+      "coordinate": "anisotropy_tau",
+      "best_main_effect_level": 1.2,
+      "main_effect_span_arcsec": 0.3602556608656622
+    },
+    {
+      "system_label": "MACS1931",
+      "coordinate": "smoothing_r80_fraction",
+      "best_main_effect_level": 0.8,
+      "main_effect_span_arcsec": 0.00885021327039226
+    }
+  ],
+  "gates": {
+    "at_least_one_candidate_improves_all_four": true,
+    "common_optimum_same_tau_sign": false,
+    "per_cluster_gravity_parameters": 0,
+    "formula_promoted": false
+  },
+  "claim_limits": [
+    "This is a fixed-geometry source-plane response diagnostic, not an image-root validation.",
+    "All clusters and the formula family are project-spent.",
+    "The physical baryon and projected-acceleration limitations are unchanged from P0586.",
+    "Per-cluster optima are reported only to diagnose conflict and are never allowed theory parameters."
+  ]
+}

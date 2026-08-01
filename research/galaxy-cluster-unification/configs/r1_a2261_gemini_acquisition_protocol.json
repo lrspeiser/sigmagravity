@@ -1,0 +1,102 @@
+{
+  "protocol_version": "R1B2-A2261-Gemini-acquisition-0.1",
+  "frozen_before_raw_download": true,
+  "system": "Abell 2261",
+  "archive": "Gemini Observatory Archive",
+  "program_id": "GN-2008A-Q-103",
+  "selection_basis": "A2261 was selected without gravity residuals because it independently occurs in the Loubser resolved-BCG sample and the CLASH strong-lens sample. The already-ingested Coe catalog fixes the first three independent-family image radii before any raw spectral pixel is inspected.",
+  "pre_pixel_overlap_target": {
+    "kpc_per_arcsec": 3.59,
+    "minimum_one_sided_accepted_dynamics_support_kpc": 36.0,
+    "minimum_one_sided_accepted_dynamics_support_arcsec": 10.027855153203343,
+    "minimum_images_inside_support": 3,
+    "minimum_independent_families_inside_support": 3,
+    "required_preidentified_images": [
+      {"image_id": "6b", "family_id": "6", "radius_kpc": 15.490101463333456},
+      {"image_id": "11b", "family_id": "11", "radius_kpc": 30.834310383075056},
+      {"image_id": "7a", "family_id": "7", "radius_kpc": 35.70823613867673}
+    ],
+    "support_rule": "The outer edge of an accepted signed spatial bin, on at least one side and with the opposite side retained as a consistency check, must reach 36.0 kpc. Detector coverage alone is not sufficient.",
+    "no_post_pixel_relaxation": true
+  },
+  "science_expectation": {
+    "instrument": "GMOS-N",
+    "mode": "long-slit spectroscopy",
+    "object": "Abell 2261",
+    "exact_science_frames": 4,
+    "published_total_exposure_seconds_nominal": 7200,
+    "archive_total_exposure_seconds": 7469.432067,
+    "archive_exposure_tolerance_seconds": 1.0,
+    "science_filenames": [
+      "N20080315S0113.fits",
+      "N20080315S0114.fits",
+      "N20080316S0116.fits",
+      "N20080316S0117.fits"
+    ],
+    "grating": "B600",
+    "central_wavelengths_um": [0.461, 0.466],
+    "slit": "0.75arcsec",
+    "published_slit_position_angle_deg": 174.0,
+    "binning": "2x2",
+    "read_speed": "slow",
+    "gain": "low",
+    "roi": "Full Frame",
+    "archive_qa_required": "Pass"
+  },
+  "exact_target_associated_download": [
+    "N20080315S0109.fits",
+    "N20080315S0110.fits",
+    "N20080315S0111.fits",
+    "N20080315S0112.fits",
+    "N20080315S0113.fits",
+    "N20080315S0114.fits",
+    "N20080315S0115.fits",
+    "N20080315S0116.fits",
+    "N20080316S0111.fits",
+    "N20080316S0112.fits",
+    "N20080316S0113.fits",
+    "N20080316S0114.fits",
+    "N20080316S0115.fits",
+    "N20080316S0116.fits",
+    "N20080316S0117.fits",
+    "N20080316S0118.fits",
+    "N20080316S0119.fits"
+  ],
+  "calibration_gate": {
+    "target_associated_flats_required": 4,
+    "target_associated_arcs_required": 2,
+    "same_configuration_bias_frames_required_before_reduction": true,
+    "bias_frame_minimum": 10,
+    "bias_selection": "All five same-date public GMOS-N 2x2 slow/low full-frame QA-pass biases from each of the two science nights, selected from archive metadata before raw download.",
+    "exact_bias_download": [
+      "N20080315S0159.fits",
+      "N20080315S0160.fits",
+      "N20080315S0161.fits",
+      "N20080315S0162.fits",
+      "N20080315S0163.fits",
+      "N20080316S0230.fits",
+      "N20080316S0231.fits",
+      "N20080316S0232.fits",
+      "N20080316S0233.fits",
+      "N20080316S0234.fits"
+    ]
+  },
+  "download_checks": {
+    "exact_target_associated_file_count": 17,
+    "archive_file_md5_must_match": true,
+    "local_sha256_required": true,
+    "fits_header_metadata_audit_required": true
+  },
+  "failure_policy": "Retain the data and exact failed gate. Do not reduce spectra until a separate detector/extraction/covariance protocol is frozen. If accepted kinematics cannot reach 36.0 kpc under that protocol, reject A2261 as a same-radius bridge; do not shrink the three-image rule or redefine support after fitting.",
+  "authorization": {
+    "download_exact_target_associated_files": true,
+    "download_exact_matching_biases": true,
+    "inspect_fits_headers_and_detector_geometry": true,
+    "reduce_spectra": false,
+    "fit_stellar_kinematics": false,
+    "infer_dynamical_response": false,
+    "fit_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

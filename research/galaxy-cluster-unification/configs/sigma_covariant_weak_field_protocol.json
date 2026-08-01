@@ -1,0 +1,75 @@
+{
+  "protocol_version": "SIGMA-COVARIANT-WEAK-FIELD-0.1.0",
+  "frozen_utc": "2026-07-29T03:10:00Z",
+  "status": "frozen_before_covariant_characteristic_or_metric_slip_scores",
+  "question": "Can the current Sigma-refracted AQUAL law be embedded in a minimal time-dependent weak-field metric closure that is mathematically healthy and improves cluster lensing without changing galaxy rotation dynamics?",
+  "base_candidate": {
+    "profile": "results/sigma_action_exploration/radial_profiles.csv",
+    "model": "sigma_refracted_AQUAL",
+    "eta": 0.6,
+    "log10_rho_s_g_cm3": -23.5,
+    "L_Sigma_kpc": 3.0,
+    "a0_m_s2": 1.2e-10,
+    "activation": 1.0
+  },
+  "covariant_prototype": {
+    "background": "Einstein-Hilbert metric plus a canonical time-dependent Sigma field and an AQUAL-like gravitational degree of freedom",
+    "sigma_wave_operator": "L_Sigma^2 Box(Sigma), reducing locally to L_Sigma^2[-d_t^2/c^2 + laplacian]Sigma",
+    "weak_field_metric": "ds^2=-(1+2 Phi/c^2)c^2dt^2+(1-2 Psi/c^2)dx^2",
+    "potential_split": "Phi=Phi_N+phi; Psi=Phi_N+(1+zeta*Sigma^2)phi",
+    "dynamics": "g_dyn=g_bar+g_phi, unchanged from the fixed Sigma-refracted AQUAL row",
+    "lensing": "g_lens=g_bar+[1+zeta*Sigma^2/2]*(g_dyn-g_bar)",
+    "limits": {
+      "zeta_minus_2_at_Sigma_1": "conformal cancellation: the extra scalar force does not enhance light bending",
+      "zeta_0": "zero slip: the current diagnostic assumption g_lens=g_dyn",
+      "Sigma_0": "dense screened limit: g_dyn=g_lens=g_bar"
+    },
+    "warning": "The metric-slip relation is a weak-field ansatz, not yet derived from a complete scalar-vector-tensor action."
+  },
+  "mathematical_gates": {
+    "positive_time_kinetic_coefficient": true,
+    "positive_parallel_gradient_coefficient": true,
+    "maximum_characteristic_speed_squared_over_c2": 1.000001,
+    "canonical_Sigma_wave_speed_squared_over_c2": 1.0,
+    "require_full_metric_slip_action_derivation": true
+  },
+  "metric_slip_scan": {
+    "zeta": [-2.0, -1.0, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 6.0],
+    "selection_metric": "minimum RXJ2129 radial lensing acceleration RMSE at the five Tian2020 radii",
+    "raw_image_positions_used_for_zeta_selection": false,
+    "raw_lensing_candidates": ["conformal", "zero_slip", "radial_selected"],
+    "raw_lensing_geometry_starts": 8
+  },
+  "observational_gates": {
+    "radial_cluster_RMSE_dex_max": 0.1,
+    "raw_heldout_RMS_arcsec_max": 1.0,
+    "raw_heldout_RMS_must_improve_over_zero_slip": true,
+    "raw_heldout_RMS_to_compact_halo_ratio_max": 1.25,
+    "selected_zeta_must_not_be_scan_boundary": true,
+    "gravity_or_lensing_amplitudes_fit_to_raw_images": 0
+  },
+  "inputs": {
+    "cluster_radial_target": "data/raw/clash_tian2020/fig2.dat",
+    "raw_lensing_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "raw_lensing_reference_report": "results/rxj2129_raw_theory_lensing/report.json",
+    "action_reference_report": "results/sigma_action_exploration/report.json"
+  },
+  "scope": [
+    "This is the weak-field and perturbative gateway to a covariant theory, not a full solution of the Einstein-Sigma equations.",
+    "The RX J2129 radial target selects zeta and the already-inspected raw coordinates diagnose geometry; neither is independent validation.",
+    "Galaxy rotation predictions are unchanged by construction, but galaxy strong-lensing transfer remains a required external test.",
+    "Passing an image score cannot rescue a ghost, gradient instability, superluminal naive scalar cone, or underived photon metric."
+  ],
+  "primary_sources": {
+    "TeVeS": "https://arxiv.org/abs/astro-ph/0403694",
+    "generalized_Einstein_Aether": "https://arxiv.org/abs/astro-ph/0607411",
+    "modern_relativistic_MOND": "https://arxiv.org/abs/2007.00082"
+  },
+  "outputs": {
+    "report": "results/sigma_covariant_weak_field/report.json",
+    "characteristics": "results/sigma_covariant_weak_field/characteristics.csv",
+    "zeta_scan": "results/sigma_covariant_weak_field/zeta_scan.csv",
+    "raw_predictions": "results/sigma_covariant_weak_field/raw_lensing_predictions.csv",
+    "figure": "results/sigma_covariant_weak_field/sigma_covariant_weak_field.png"
+  }
+}

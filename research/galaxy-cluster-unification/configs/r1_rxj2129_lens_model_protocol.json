@@ -1,0 +1,126 @@
+{
+  "protocol_version": "R1B3-RXJ2129-independent-lens-model-0.1",
+  "status": "frozen_before_independent_image_residual_evaluation",
+  "purpose": "Test whether a source-traceable, nuisance-explicit conventional lens mapping can reproduce the 21 spectroscopic RX J2129 image positions without importing the published convergence map, source reconstruction, residuals, or best-fit mass parameters.",
+  "freeze_date": "2026-07-26",
+  "disclosure": "Before this freeze, the Jauzac et al. image table, seven spectroscopic source families, the paper's 0.5-arcsec per-coordinate likelihood convention, its reported aggregate 0.29-arcsec model RMS, and the existence of published PIEMD parameters were known. No independent model residual, source position, lens parameter estimate, train/holdout score, or model-A-versus-model-B comparison had been evaluated.",
+  "inputs": {
+    "image_ledger": "data/derived/r1_rxj2129_lens_observables.csv",
+    "coordinate_covariance": "data/derived/r1_rxj2129_lens_coordinate_covariance.csv",
+    "central_stellar_baseline": "results/r1_rxj2129_baryons/report.json",
+    "member_likelihood": "data/derived/r1_rxj2129_satellite_membership_likelihood.csv",
+    "member_probability_bootstrap": "data/derived/r1_rxj2129_satellite_membership_bootstrap.npz"
+  },
+  "cosmology_and_coordinates": {
+    "lens_redshift": 0.235,
+    "reference_source_redshift": 2.0,
+    "H0_km_s_Mpc": 70.0,
+    "Omega_m": 0.27,
+    "center_ra_deg": 322.41651,
+    "center_dec_deg": 0.08923,
+    "coordinate_convention": "x is east and y is north in arcseconds from the frozen BCG center",
+    "source_redshift_scaling": "Every mass-plane deflection is parameterized at z_source=2.0 and rescaled by D_ds/D_s to each spectroscopic family redshift. Source redshifts are fixed observables."
+  },
+  "likelihood": {
+    "included_images": 21,
+    "source_families": 7,
+    "sigma_arcsec_per_coordinate": 0.5,
+    "source_positions": "Two free nuisance coordinates per source family, profiled analytically at each lens parameter vector.",
+    "optimization_residual": "For each observed image, transform its source-plane displacement from the profiled family source through the inverse local lens Jacobian. This is a first-order image-plane residual used only for numerical optimization.",
+    "validation_residual": "Solve the nonlinear lens equation from each labeled observed-image basin with the source fixed by the training images, then score the exact predicted-versus-observed image-plane displacement. Optimization residuals cannot satisfy an advance gate.",
+    "covariance_rule": "Use the frozen 42x42 coordinate covariance exactly. Do not add unpublished off-diagonal astrometric covariance.",
+    "conditional_label_caveat": "The exact validation is conditional on the published image labels and initializes one root solve in each observed-image basin. It is not a survey-completeness or missing-image likelihood."
+  },
+  "blind_split": {
+    "training_rule": "Use images ending in .1 and .2 in every family.",
+    "heldout_rule": "Hold out the image ending in .3 in every family.",
+    "training_images": 14,
+    "heldout_images": 7,
+    "selection_information_allowed": "Only training-image coordinates and fixed non-lensing nuisance inputs may affect fitted parameters.",
+    "heldout_use": "The seven exact heldout image residuals may select between the two predeclared nested nuisance models, but may not tune their form, priors, or bounds."
+  },
+  "model_A": {
+    "name": "smooth_plus_central_stars",
+    "profiles": [
+      "one non-singular isothermal ellipsoid for the smooth cluster-scale Weyl field",
+      "one spherical Hernquist term for unresolved total central stellar light",
+      "one external shear term"
+    ],
+    "free_lens_parameters": [
+      "theta_E_ref",
+      "axis_ratio_q",
+      "position_angle_phi",
+      "log10_core_arcsec",
+      "center_x_arcsec",
+      "center_y_arcsec",
+      "gamma1",
+      "gamma2",
+      "log10_central_mass_msun",
+      "log10_central_Rs_arcsec"
+    ],
+    "interpretation": "A conventional interpolation of the lensing deflection field, not a dark-matter detection and not an alternative-gravity fit. Because the BCG/ICL split failed, the central term is a broad total-light nuisance and is not labeled BCG or ICL."
+  },
+  "model_B": {
+    "name": "smooth_plus_central_stars_plus_members",
+    "nested_in": "model_A",
+    "added_profiles": "One spherical pseudo-Jaffe profile at each of the 66 frozen candidates inside 30 arcsec.",
+    "fixed_member_inputs": "Catalog position, geometric-mean Molino size, stellar mass, and expected membership probability.",
+    "free_lens_parameters": [
+      "log10_total_to_stellar_member_mass_ratio",
+      "log10_pseudo_jaffe_cut_to_core_ratio"
+    ],
+    "membership_sensitivity": "After fitting, repeat exact scoring over 64 pre-indexed correlated membership-bootstrap vectors. This sensitivity cannot refit or select the mass model.",
+    "interpretation": "A predeclared structural-nuisance test. Its shared mass ratio is not a measured subhalo mass function."
+  },
+  "bounds_and_priors": {
+    "theta_E_ref_arcsec": {"bounds": [5.0, 35.0], "prior": "Gaussian 15 +/- 15 arcsec"},
+    "axis_ratio_q": {"bounds": [0.3, 1.0], "prior": "Gaussian 0.7 +/- 0.3"},
+    "position_angle_phi_radian": {"bounds": [-1.5707963267948966, 1.5707963267948966], "prior": "uniform"},
+    "log10_core_arcsec": {"bounds": [-1.3, 1.3], "prior": "Gaussian 0 +/- 1 dex"},
+    "smooth_center_arcsec": {"bounds_each": [-5.0, 5.0], "prior": "Gaussian 0 +/- 3 arcsec each"},
+    "external_shear_components": {"bounds_each": [-0.2, 0.2], "prior": "Gaussian 0 +/- 0.1 each"},
+    "log10_central_mass_msun": {"bounds": [11.0, 12.5], "prior": "Gaussian log10(5.81e11) +/- 0.30 dex"},
+    "log10_central_Rs_arcsec": {"bounds": [0.2, 1.4], "prior": "Gaussian log10(22.8114/3.741653570564318) +/- 0.30 dex"},
+    "log10_total_to_stellar_member_mass_ratio": {"bounds": [0.0, 2.0], "prior": "Gaussian 1.0 +/- 0.7 dex"},
+    "log10_pseudo_jaffe_cut_to_core_ratio": {"bounds": [0.5, 1.7], "prior": "Gaussian 1.0 +/- 0.4 dex"}
+  },
+  "optimization": {
+    "method": "bounded scipy least_squares with deterministic multi-starts",
+    "multi_starts_each_model": 24,
+    "random_seed": 2129,
+    "selection_objective": "training likelihood plus the frozen weak parameter priors",
+    "post_selection_refit": "Refit the selected nuisance model to all 21 images without changing its form, bounds, or priors.",
+    "covariance": "Report the local observed-Hessian/Laplace covariance for lens parameters and source coordinates; label it engineering-only if rank deficient or if an exact residual gate fails."
+  },
+  "model_selection_and_advance_gates": {
+    "model_B_minimum_heldout_radial_rms_improvement_fraction": 0.10,
+    "model_B_requires_all_heldout_roots_converged": true,
+    "selected_model_all_image_exact_root_count": 21,
+    "selected_model_maximum_all_image_exact_radial_rms_arcsec": 1.0,
+    "selected_model_maximum_exact_coordinate_reduced_chi2": 4.0,
+    "selected_model_maximum_absolute_standardized_source_closure_mean": 0.5,
+    "no_fitted_lens_parameter_within_fraction_of_bound": 0.01,
+    "covariance_symmetric_positive_semidefinite": true,
+    "member_bootstrap_exact_rms_p84_maximum_arcsec": 1.25,
+    "published_residual_or_mass_parameters_used": false,
+    "gravity_response_or_new_force_fit": false
+  },
+  "failure_rules": {
+    "heldout_failure": "Keep the observable likelihood but mark this mass family inadequate; do not tune or add components after seeing which image failed.",
+    "all_image_failure": "Do not promote RX J2129 to a reconstructed Weyl-response pilot. A new lens family requires a new disclosed protocol version and must be evaluated on a new holdout split or a different system.",
+    "covariance_failure": "Retain point estimates as diagnostics only; no dynamical-versus-Weyl comparison is authorized."
+  },
+  "outputs": {
+    "parameter_table": "data/derived/r1_rxj2129_lens_model_parameters.csv",
+    "image_predictions": "data/derived/r1_rxj2129_lens_image_predictions.csv",
+    "parameter_covariance": "data/derived/r1_rxj2129_lens_parameter_covariance.csv",
+    "report": "results/r1_rxj2129_lens_model/report.json",
+    "diagnostic": "results/r1_rxj2129_lens_model/lens_model_diagnostic.png"
+  },
+  "authorization": {
+    "independent_conventional_lens_model_fit": true,
+    "published_gr_mass_map_or_best_fit_import": false,
+    "new_force_or_action_fit": false,
+    "strict_r1_ready": false
+  }
+}

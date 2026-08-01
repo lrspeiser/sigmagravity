@@ -1,0 +1,192 @@
+{
+  "report_version": "P0618-UNIVERSAL-ROUTE-PHASE-RESULTS-0.1.0",
+  "status": "complete_opened_data_universal_phase_test",
+  "coverage": {
+    "raw_systems": 5,
+    "heldout_images": 18,
+    "universal_phases": 9,
+    "score_rows_including_control": 50,
+    "new_fitted_gravity_parameters": 0
+  },
+  "frozen_formula": {
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "angular_amplitude": "epsilon=Q^2/(1+Delta80)",
+    "width_over_R80": "0.23*sqrt(1+Q^2), selected as the P0617 safety-first diagnostic",
+    "return_length_over_R80": 0.36,
+    "travel_mode": "constant",
+    "contrast_mode": "tanh",
+    "contrast_cap": 20.0,
+    "phase_operation": "rotate the complete positive route template about the lens origin before annular monopole removal"
+  },
+  "selected_universal_phase": {
+    "phase_degrees": 90.0,
+    "combined_roots": 18,
+    "all_18_roots": true,
+    "systems_not_worse": 3,
+    "minimum_system_improvement": -0.0031983502825869703,
+    "mean_system_improvement": 0.016849758640456836,
+    "four_cluster_improvement": 0.001319681724821553,
+    "RXJ2129_improvement": 0.08241097555247723
+  },
+  "universal_phase_responses": [
+    {
+      "phase_degrees": 90.0,
+      "combined_roots": 18,
+      "all_18_roots": true,
+      "systems_not_worse": 3,
+      "minimum_system_improvement": -0.0031983502825869703,
+      "mean_system_improvement": 0.016849758640456836,
+      "four_cluster_improvement": 0.001319681724821553,
+      "RXJ2129_improvement": 0.08241097555247723
+    },
+    {
+      "phase_degrees": 67.5,
+      "combined_roots": 18,
+      "all_18_roots": true,
+      "systems_not_worse": 3,
+      "minimum_system_improvement": -0.004217837393788226,
+      "mean_system_improvement": 0.01877172203450328,
+      "four_cluster_improvement": 0.0014885172802758806,
+      "RXJ2129_improvement": 0.09175444968210367
+    },
+    {
+      "phase_degrees": 45.0,
+      "combined_roots": 18,
+      "all_18_roots": true,
+      "systems_not_worse": 3,
+      "minimum_system_improvement": -0.006330177645788471,
+      "mean_system_improvement": 0.014665231708689674,
+      "four_cluster_improvement": 0.0014915020383210464,
+      "RXJ2129_improvement": 0.07114880293545411
+    },
+    {
+      "phase_degrees": 22.5,
+      "combined_roots": 18,
+      "all_18_roots": true,
+      "systems_not_worse": 3,
+      "minimum_system_improvement": -0.00671023237411017,
+      "mean_system_improvement": 0.008624174921919026,
+      "four_cluster_improvement": 0.00157618956074157,
+      "RXJ2129_improvement": 0.040370195231846484
+    },
+    {
+      "phase_degrees": 0.0,
+      "combined_roots": 18,
+      "all_18_roots": true,
+      "systems_not_worse": 2,
+      "minimum_system_improvement": -0.005136398571772283,
+      "mean_system_improvement": 0.0022701540042955105,
+      "four_cluster_improvement": 0.001317097174690418,
+      "RXJ2129_improvement": 0.008917890518439942
+    },
+    {
+      "phase_degrees": -90.0,
+      "combined_roots": 17,
+      "all_18_roots": false,
+      "systems_not_worse": 3,
+      "minimum_system_improvement": null,
+      "mean_system_improvement": null,
+      "four_cluster_improvement": 0.005142991989784518,
+      "RXJ2129_improvement": null
+    },
+    {
+      "phase_degrees": -67.5,
+      "combined_roots": 17,
+      "all_18_roots": false,
+      "systems_not_worse": 3,
+      "minimum_system_improvement": null,
+      "mean_system_improvement": null,
+      "four_cluster_improvement": 0.007866405873011129,
+      "RXJ2129_improvement": null
+    },
+    {
+      "phase_degrees": -45.0,
+      "combined_roots": 17,
+      "all_18_roots": false,
+      "systems_not_worse": 3,
+      "minimum_system_improvement": null,
+      "mean_system_improvement": null,
+      "four_cluster_improvement": 0.006594969545108409,
+      "RXJ2129_improvement": null
+    },
+    {
+      "phase_degrees": -22.5,
+      "combined_roots": 17,
+      "all_18_roots": false,
+      "systems_not_worse": 1,
+      "minimum_system_improvement": null,
+      "mean_system_improvement": null,
+      "four_cluster_improvement": 0.0034758127332688016,
+      "RXJ2129_improvement": null
+    }
+  ],
+  "per_system_diagnostic_preferences": [
+    {
+      "system_label": "MACS0329",
+      "preferred_phase_degrees": 90.0,
+      "best_diagnostic_improvement": 0.0011564767584741897,
+      "phases_with_all_roots": 9
+    },
+    {
+      "system_label": "MACS0429",
+      "preferred_phase_degrees": -90.0,
+      "best_diagnostic_improvement": 0.0030553391367685867,
+      "phases_with_all_roots": 9
+    },
+    {
+      "system_label": "MACS1115",
+      "preferred_phase_degrees": -67.5,
+      "best_diagnostic_improvement": 0.017090583810821847,
+      "phases_with_all_roots": 9
+    },
+    {
+      "system_label": "MACS1931",
+      "preferred_phase_degrees": -90.0,
+      "best_diagnostic_improvement": 0.006605280019723936,
+      "phases_with_all_roots": 9
+    },
+    {
+      "system_label": "RXJ2129",
+      "preferred_phase_degrees": 67.5,
+      "best_diagnostic_improvement": 0.09175444968210367,
+      "phases_with_all_roots": 5
+    }
+  ],
+  "preferred_phase_spin2_resultant": 0.882842712474619,
+  "inherited_cross_domain": {
+    "SPARC_outer_RMSE_km_s": 12.59204382085389,
+    "fixed_RAR_outer_RMSE_km_s": 10.348465773189679,
+    "SPARC_to_RAR_ratio": 1.2168029635346302,
+    "Solar_all_proxies_pass": true,
+    "route_layer_axisymmetric_and_point_source_change": 0.0
+  },
+  "P0617_context": {
+    "formula_promoted": false,
+    "opened_data_diagnostic_only": true,
+    "future_full_refit_transfer_required": true,
+    "residual_alignment_sign_matches_all_five_responses": true,
+    "phase_lesson": "Support changes scale the effect, but whether a route helps is set by the angular alignment of its predicted shift with the pre-existing lens residual."
+  },
+  "gates": {
+    "all_18_roots_pass": true,
+    "all_five_systems_not_worse_pass": false,
+    "minimum_system_improvement_pass": false,
+    "galaxy_near_RAR_pass": true,
+    "Solar_all_proxies_pass": true,
+    "zero_new_fitted_gravity_parameters_pass": true,
+    "all_diagnostic_gates_pass": false
+  },
+  "interpretation": {
+    "formula_promoted": false,
+    "one_universal_phase_found": false,
+    "per_system_phase_selection_allowed": false,
+    "future_full_refit_transfer_required": true
+  },
+  "claim_limits": [
+    "The phase scan is frozen before its scores but follows inspection of the P0617 sign split and uses project-spent systems.",
+    "Rotating the route template is a phenomenological diagnostic of radial-versus-tangential phase, not a derived field equation.",
+    "Lens geometry and source positions are frozen, so responses require later full-refit transfer.",
+    "Choosing a different best angle for each cluster would be an impermissible per-object gravity fit.",
+    "Galaxy and Solar scores are inherited because the angular layer is an axisymmetric and point-source null."
+  ]
+}

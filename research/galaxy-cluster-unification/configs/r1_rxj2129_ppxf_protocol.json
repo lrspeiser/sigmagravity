@@ -1,0 +1,97 @@
+{
+  "protocol_version": "R1A2-RXJ2129-pPXF-0.1",
+  "status": "frozen_before_cube_download_or_kinematic_inspection",
+  "purpose": "Test whether public MUSE spectroscopy can supply at least three resolved RX J2129 BCG dynamical bins on the same 5-arcsec support as three spectroscopic strong-lens images from three source families.",
+  "blindness_rule": "The system, 5-arcsec target support, annuli, circular geometry, masks, templates, uncertainty checks, and pass thresholds are frozen from lens positions and archive metadata before extracting a BCG velocity dispersion.",
+  "structural_preselection": {
+    "lens_source": "Jauzac et al. 2021, arXiv:2006.10700",
+    "bcg_center_ra_deg": 322.41651,
+    "bcg_center_dec_deg": 0.08923,
+    "spectroscopic_images_total": 21,
+    "spectroscopic_images_inside_5_arcsec": 3,
+    "source_families_inside_5_arcsec": 3,
+    "family_wide_positions_for_inner_families": 9,
+    "family_wide_position_dof_after_source_coordinates": 12,
+    "conditional_radial_rank_upper_bound": 3,
+    "disturbance_state": "relaxed_with_reported_sloshing",
+    "disturbance_source": "Jimenez-Teja et al. 2024, arXiv:2408.11122",
+    "promotion_status": "conditional_on_independent_BCG_profile_passing_frozen_checks"
+  },
+  "input": {
+    "system_name": "RX J2129",
+    "cube_path": "data/raw/r1_muse_bcg_cubes/rxj2129_bcg_4860_7160A_r10arcsec.fits",
+    "cube_sha256": "5CA2713AA2DF418A150AE0B1645B8187882542A4F4698AD6C4DB71569E718408",
+    "archive_dp_id": "ADP.2017-12-14T12:30:03.217",
+    "archive_proposal_id": "097.A-0909(A)",
+    "archive_exposure_seconds": 11443.86,
+    "data_extension": "DATA",
+    "variance_extension": "STAT",
+    "observed_wavelength_range_angstrom": [4860.0, 7160.0],
+    "bcg_redshift_initial": 0.235,
+    "bcg_center_ra_deg": 322.41651,
+    "bcg_center_dec_deg": 0.08923,
+    "astrometric_registration": "fit a fixed-n=4.05 circular continuum model robustly and treat the offset from the published BCG center as a global cube-WCS correction",
+    "maximum_allowed_registration_offset_arcsec": 2.0
+  },
+  "cutout": {
+    "center_ra_deg": 322.41651,
+    "center_dec_deg": 0.08923,
+    "radius_deg": 0.0027777778,
+    "wavelength_min_m": 4.86e-7,
+    "wavelength_max_m": 7.16e-7
+  },
+  "spatial_extraction": {
+    "annulus_semimajor_edges_arcsec": [0.0, 0.6, 1.5, 3.0, 5.0],
+    "position_angle_deg_east_of_north": 0.0,
+    "axis_ratio_b_over_a": 1.0,
+    "geometry_rationale": "use circular annuli for the structural engineering gate so no Lenstool ellipticity or position-angle convention is imported into the dynamics",
+    "minimum_valid_spaxel_fraction_per_bin": 0.7,
+    "mask_protocol": {
+      "stage_1": "mask non-finite DATA/STAT values and non-positive variance",
+      "stage_2": "construct a white-light image from the median over 6000-7000 Angstrom",
+      "stage_3": "subtract a 3-pixel Gaussian-smoothed white-light image to form a compact-source detection image",
+      "stage_4": "flag positive compact residual components above 6 robust sigma with 2-300 connected pixels, excluding the registered central 3.0 arcsec",
+      "stage_5": "dilate flagged components by 8 pixels and freeze the mask before spectral fitting"
+    }
+  },
+  "spectral_fit": {
+    "software": "pPXF",
+    "software_version": "9.4.8",
+    "template_family_baseline": "E-MILES",
+    "template_path": "data/raw/r1_ppxf_templates/spectra_emiles_9.0.npz",
+    "template_sha256": "6A1B1A70DB4D95F67AFE0ADBE254F111EB2B50412B9F311714C54FFBA18C6F0E",
+    "template_source": "https://raw.githubusercontent.com/micappe/ppxf_data/main/spectra_emiles_9.0.npz",
+    "galaxy_fwhm_angstrom_baseline": 2.6,
+    "moments": 2,
+    "additive_polynomial_degree": 8,
+    "multiplicative_polynomial_degree": 0,
+    "initial_sigma_km_s": 300.0,
+    "mask_emission_lines": true,
+    "mask_high_variance_pixels": "exclude wavelength planes whose annular variance median exceeds the local 21-pixel median by 6 robust sigma",
+    "noise_model": "sum STAT variance over unmasked spaxels and rescale conditional pPXF errors by square root of reduced chi-square"
+  },
+  "covariance_protocol": {
+    "spatial_resampling": "100 deterministic spatial block-bootstrap replicates within each annulus using 2x2-spaxel blocks",
+    "template_systematic": "repeat with XSL templates if available; otherwise mark this component missing",
+    "resolution_systematic_fwhm_angstrom": [2.5, 2.6, 2.7],
+    "spectral_mask_systematic": "repeat with 5-sigma and 8-sigma high-variance masks",
+    "reported_covariance": "sum bootstrap and between-protocol covariance and preserve all off-diagonal terms",
+    "random_seed": 2129
+  },
+  "success_thresholds": {
+    "minimum_finite_sigma_bins": 4,
+    "minimum_outer_bin_median_signal_to_noise_per_angstrom": 10.0,
+    "maximum_fractional_sigma_uncertainty_each_bin": 0.3,
+    "maximum_template_or_mask_shift_fraction": 0.1,
+    "maximum_opposite_half_velocity_difference_km_s": 100.0,
+    "maximum_opposite_half_sigma_difference_fraction": 0.2,
+    "covariance_must_be_positive_semidefinite": true,
+    "publication_figure_use": "none; no published BCG dispersion profile is used as a numerical target"
+  },
+  "authorization": {
+    "engineering_profile_reconstruction": true,
+    "structural_promotion_after_baseline_pass": true,
+    "gravity_response_fit": false,
+    "claim_as_published_likelihood": false
+  }
+}

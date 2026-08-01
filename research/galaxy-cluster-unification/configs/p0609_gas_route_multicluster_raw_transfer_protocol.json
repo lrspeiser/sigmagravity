@@ -1,0 +1,69 @@
+{
+  "protocol_version": "P0609-GAS-ROUTE-MULTICLUSTER-RAW-TRANSFER-0.1.0",
+  "frozen_utc": "2026-08-02T01:05:00Z",
+  "status": "frozen_after_P0608C_nonidentification_before_any_P0609_non_RXJ_raw_score",
+  "question": "Does the tiny gas-directed route selected on RX J2129 transfer without retuning to four other raw CLASH cluster lenses?",
+  "locked_route": {
+    "radial_parent": "P0599 bounded potential-shape field",
+    "component_direction": "registered point-source-masked Chandra 0.7-2.0 keV morphology",
+    "angular_strength": 0.0025,
+    "route_length_over_R80": 0.25,
+    "route_width_over_R80": 0.5,
+    "route_radius_exponent": 0.0,
+    "contrast_cap": 20.0,
+    "redshift_exponents": [0.0, 1.0],
+    "standard_single_plane_gamma": 1.0,
+    "formula_parameters_fit_per_cluster": 0
+  },
+  "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+  "variants": [
+    {"variant_id": "P0599_no_route", "route": false},
+    {"variant_id": "gas_route_gamma0", "route": true, "gamma": 0.0},
+    {"variant_id": "gas_route_gamma1", "route": true, "gamma": 1.0}
+  ],
+  "fit": {
+    "ordinary_geometry_parameters_per_cluster": 6,
+    "optimization_starts_per_variant_cluster": 8,
+    "seed": 21292041,
+    "selection": "none; every route setting is locked from RX J2129 or is the standard gamma=1 comparator"
+  },
+  "transfer_gates": {
+    "all_heldout_roots": true,
+    "matched_equal_system_improvement_vs_no_route_min": 0.05,
+    "systems_improved_min": 3,
+    "maximum_equal_system_heldout_RMS_arcsec": 2.0
+  },
+  "inputs": {
+    "P0601_protocol": "configs/p0601_frozen_potential_raw_lensing_protocol.json",
+    "P0607_protocol": "configs/p0607_component_direction_raw_lensing_protocol.json",
+    "P0608_report": "results/p0608_route_redshift_tomography/report.json",
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "component_screen_protocol": "configs/p0554_all_baryon_route_screen_protocol.json",
+    "component_acquisition_protocol": "configs/p0554_all_baryon_route_acquisition_protocol.json",
+    "fixed_geometry": "results/p0554_subcritical_route_transfer/geometry.csv",
+    "component_input_audit": "results/p0554_all_baryon_route_input_audit/report.json"
+  },
+  "cross_domain_controls": {
+    "galaxy_outer_equal_RMSE_km_s": 10.883031245894068,
+    "cluster_radial_equal_RMSE_dex": 0.11960216849884784,
+    "Solar_change": 0.0,
+    "reason": "Only the zero-monopole angular layer transfers; the P0599 radial parent and its galaxy/Solar controls are unchanged"
+  },
+  "outputs": {
+    "directory": "results/p0609_gas_route_multicluster_raw_transfer",
+    "system_scores": "system_scores.csv",
+    "predictions": "predictions.csv",
+    "field_audits": "field_audits.csv",
+    "aggregate_scores": "aggregate_scores.csv",
+    "report": "report.json",
+    "figure": "p0609_gas_route_multicluster_raw_transfer.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The four clusters and their image splits are spent elsewhere in the project, although they did not select the P0607 gas route.",
+    "The P0599 radial law was developed using CLASH radial reconstructions that include these systems.",
+    "Chandra brightness supplies direction only and is not interpreted as gas mass.",
+    "The route amplitude and both gamma values are fixed; only six ordinary structural geometry parameters are refit per cluster.",
+    "A transfer failure rejects this projected gas-attraction implementation, not every possible baryonic nonlocal field."
+  ]
+}

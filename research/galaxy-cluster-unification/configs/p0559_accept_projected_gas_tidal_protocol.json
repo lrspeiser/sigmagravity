@@ -1,0 +1,81 @@
+{
+  "protocol_version": "P0559-ACCEPT-PROJECTED-GAS-TIDAL-0.1.0",
+  "frozen_utc": "2026-07-31T22:00:00Z",
+  "status": "frozen_before_any_accept_projected_gas_lens_score",
+  "question": "Does a gas-inclusive tensor built from measured ACCEPT electron-density shells and registered Chandra morphology transfer across the four raw cluster lenses?",
+  "locked_field": {
+    "tensor_t": 0.3,
+    "operator": "contrast",
+    "softening_kpc": 20.0,
+    "pixels_per_axis": 512,
+    "new_gravity_parameters": 0,
+    "per_cluster_gravity_parameters": 0,
+    "lineage": "locked P0557 coupling/operator; no lens score selects the gas construction"
+  },
+  "gas_map": {
+    "radial_profile": "exact line-of-sight projection of contiguous piecewise-constant ACCEPT electron-density shells; use ne and ne uncertainty only, never Mgrav",
+    "mu_e": 1.17,
+    "angular_modulation": "Gaussian-smooth point-source-masked Chandra 0.7-2.0 keV rate map, divide by its one-pixel annular mean, raise to q, cap, and renormalize every annulus to mean one",
+    "smoothing_sigma_arcsec": 3.0,
+    "contrast_min": 0.25,
+    "contrast_max": 4.0,
+    "primary_power": 0.5,
+    "linear_sensitivity_power": 1.0,
+    "spherical_power": 0.0
+  },
+  "stellar_map": {
+    "shape": "registered background-subtracted, lens-image-masked CLASH F160W light",
+    "amplitude": "normalize the full 120-arcsec map to the published Tian BCG total stellar mass",
+    "limitation": "satellite and ICL light in the image are assigned the BCG total; no separate stellar M/L map exists"
+  },
+  "exact_models": [
+    {"model_id": "zero", "tensor_t": 0.0, "gas_power": 0.0, "gas_normalization": "accept_absolute"},
+    {"model_id": "accept_absolute_sqrt", "tensor_t": 0.3, "gas_power": 0.5, "gas_normalization": "accept_absolute"},
+    {"model_id": "tian_anchor_sqrt", "tensor_t": 0.3, "gas_power": 0.5, "gas_normalization": "renormalize_accept_to_tian_spherical_anchor"}
+  ],
+  "fixed_fit_diagnostics": [
+    {"diagnostic_id": "accept_absolute_spherical", "gas_power": 0.0, "gas_normalization": "accept_absolute", "include_stars": true},
+    {"diagnostic_id": "accept_absolute_linear", "gas_power": 1.0, "gas_normalization": "accept_absolute", "include_stars": true},
+    {"diagnostic_id": "accept_absolute_gas_only_sqrt", "gas_power": 0.5, "gas_normalization": "accept_absolute", "include_stars": false}
+  ],
+  "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+  "optimization": {
+    "starts_per_exact_fit": 6,
+    "maximum_function_evaluations": 2000,
+    "random_seed": 20260733
+  },
+  "advance_gates": {
+    "absolute_primary_all_roots": true,
+    "absolute_primary_all_systems_improve": true,
+    "absolute_primary_equal_system_improvement_fraction_min": 0.05,
+    "absolute_primary_validation_subset_to_compact_halo_ratio_max": 1.25,
+    "accept_to_tian_anchor_mass_ratio_range": [0.5, 2.0]
+  },
+  "inputs": {
+    "p0557_protocol": "configs/p0557_baryon_proxy_tidal_protocol.json",
+    "member_tidal_protocol": "configs/member_tidal_metric_protocol.json",
+    "accept_profiles": "data/raw/accept_cavagnolo2009/all_profiles.dat.txt",
+    "accept_name_map_protocol": "configs/cpr0_accept_clash_bridge_protocol.json",
+    "tian_table": "data/raw/clash_tian2020/table1.dat",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0559_accept_projected_gas_tidal",
+    "physical_map_audits": "physical_map_audits.csv",
+    "scores": "scores.csv",
+    "fixed_fit_diagnostics": "fixed_fit_diagnostics.csv",
+    "predictions": "predictions.csv",
+    "tensor_audits": "tensor_audits.csv",
+    "report": "report.json",
+    "figure": "p0559_accept_projected_gas_tidal.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "ACCEPT shell density is measured, but shell covariance is unavailable and only diagonal ne errors are published.",
+    "Chandra brightness modulates non-circular shape and is not treated directly as gas mass.",
+    "The HST stellar map has one global BCG mass normalization and no resolved M/L, satellite, or ICL mass separation.",
+    "The Tian-anchor renormalization is an extreme cross-catalog sensitivity because the raw catalogs disagree by factors of 4-14 at the central anchor.",
+    "All systems and t=0.3 are spent; this is a fully specified diagnostic, not independent validation.",
+    "No formula can be promoted from P0559."
+  ]
+}

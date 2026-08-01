@@ -1,0 +1,74 @@
+{
+  "protocol_version": "RXJ2129-MEMBER-GEOMETRY-0.1.0",
+  "frozen_utc": "2026-07-29T00:45:00Z",
+  "status": "frozen_before_member_geometry_scores",
+  "question": "Does the measured angular arrangement of baryonic cluster galaxies improve RX J2129 strong-lens predictions when total mass and the radial mass profile are held fixed?",
+  "base_model": {
+    "radial_profile": "results/sigma_action_exploration/radial_profiles.csv",
+    "model": "sigma_refracted_AQUAL",
+    "domain": "RXJ2129",
+    "raw_lensing_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "expected_baseline_heldout_RMS_arcsec": 3.853014357076667,
+    "baseline_tolerance_arcsec": 0.1,
+    "execution_correction": "Before any member-layout score was evaluated, the current SciPy optimizer reproduced 3.807915 arcsec rather than the archived 3.853014 arcsec. The tolerance alone was widened to 0.1 arcsec; the expected score, physical inputs, variants, and interpretation gates were unchanged."
+  },
+  "member_catalog": {
+    "path": "data/derived/r1_rxj2129_satellite_membership_likelihood.csv",
+    "mass_rule": "stellar_mass_msun times membership_probability",
+    "mass_scale": 1.0,
+    "catalog_shape_pixel_scale_arcsec": 0.065,
+    "softening_rule": "max(floor, pixel_scale*sqrt(a*b))",
+    "softening_floor_arcsec": 0.13,
+    "softening_scale": 1.0
+  },
+  "geometry_control": {
+    "equation": "base + resolved_members - azimuthal_average_of_same_members",
+    "preserves": [
+      "total member stellar mass",
+      "each member cluster-centric radius",
+      "azimuthally averaged radial deflection profile",
+      "base Sigma parameters"
+    ],
+    "randomization": "independently randomize each member position angle while retaining radius, mass, and softening",
+    "random_seed": 21292027,
+    "fixed_geometry_randomizations": 256,
+    "refitted_geometry_randomizations": 32,
+    "refit_randomization_reference": "Compare the one-start randomized refits to a one-start actual-layout refit from the identical smooth-baseline parameters; retain the eight-start actual fit only as the best descriptive score. This conservative execution correction was added after the first full run exposed unequal optimizer effort."
+  },
+  "fits": {
+    "baseline_starts": 8,
+    "actual_layout_starts": 8,
+    "sensitivity_starts": 4,
+    "randomized_layout_starts": 1,
+    "fit_seed": 20260729,
+    "only_existing_six_geometry_nuisances_are_refit": true,
+    "member_masses_or_sizes_fit_to_lensing": false
+  },
+  "predeclared_sensitivities": [
+    {"label": "half_catalog_mass", "mass_scale": 0.5, "softening_scale": 1.0},
+    {"label": "central_catalog", "mass_scale": 1.0, "softening_scale": 1.0},
+    {"label": "double_catalog_mass", "mass_scale": 2.0, "softening_scale": 1.0},
+    {"label": "half_catalog_size", "mass_scale": 1.0, "softening_scale": 0.5},
+    {"label": "double_catalog_size", "mass_scale": 1.0, "softening_scale": 2.0}
+  ],
+  "interpretation_gates": {
+    "meaningful_fractional_heldout_RMS_improvement": 0.2,
+    "strong_absolute_heldout_RMS_arcsec": 1.0,
+    "randomization_empirical_p_max": 0.05
+  },
+  "scope": [
+    "This is an ordinary baryonic member-geometry overlay, not a nonlinear two-dimensional Sigma solve.",
+    "The original heldout image set has already been inspected, so this is an exploratory spent-holdout diagnostic.",
+    "The catalog stellar masses and membership probabilities are external to the raw image-position residuals.",
+    "A positive result motivates a two-dimensional coupled Sigma solve; it does not by itself establish modified gravity."
+  ],
+  "outputs": {
+    "report": "results/rxj2129_member_geometry/report.json",
+    "variant_scores": "results/rxj2129_member_geometry/variant_scores.csv",
+    "predictions": "results/rxj2129_member_geometry/image_predictions.csv",
+    "randomizations": "results/rxj2129_member_geometry/randomization_scores.csv",
+    "members": "results/rxj2129_member_geometry/member_catalog_used.csv",
+    "image_diagnostics": "results/rxj2129_member_geometry/image_diagnostics.csv",
+    "figure": "results/rxj2129_member_geometry/member_geometry_test.png"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "protocol_version": "NBM0-0.1-two-potential-basin-metric-prefit",
+  "frozen_utc": "2026-07-28T03:08:00Z",
+  "status": "frozen after retiring the MOND-BTFR-like mass scaling and before any NBM0 astrophysical fit",
+  "candidate": "Nonlocal Basin Metric zero-order closure (NBM0)",
+  "research_claim": "A covariantly defined basin field sourced by density contrast changes both metric potentials through one physical metric, so massive-particle dynamics and lensing are derived responses rather than separately normalized laws.",
+  "field_equation": "(Box-L_X^-2) X = -kappa_X (T-T_background)/M_Pl^2 with retarded cosmological boundary conditions",
+  "physical_metric": "g_tilde_mn = exp(2 alpha X) [g_mn + 2 beta X U_m U_n], with U_m U^m=-1",
+  "weak_field_mapping": {
+    "metric_convention": "ds_tilde^2=-(1+2 Psi/c^2)c^2dt^2+(1-2 Phi/c^2)dx^2",
+    "Psi": "U_N + c^2 (alpha-beta) X",
+    "Phi": "U_N - c^2 alpha X",
+    "Weyl_half": "(Phi+Psi)/2 = U_N - c^2 beta X/2",
+    "lensing_to_dynamics_extra_ratio": "q_X = -beta/[2(alpha-beta)]"
+  },
+  "special_limits": {
+    "pure_conformal_beta_zero": "q_X=0: the X response cancels from lensing",
+    "pure_disformal_alpha_zero": "q_X=1/2",
+    "no_slip_beta_equals_2alpha": "Phi=Psi and q_X=1",
+    "alpha_equals_beta": "dynamics is blind to X while lensing is not; ratio is singular"
+  },
+  "complexity_limits": {
+    "global_physical_parameters_max": 4,
+    "candidate_parameters": ["kappa_X", "L_X", "alpha", "beta"],
+    "per_object_force_parameters_max": 0,
+    "lensing_only_parameters_max": 0,
+    "object_class_switches_max": 0
+  },
+  "non_MON_D_boundary": [
+    "Do not use a fitted mu(g/a0), RAR interpolation, BTFR exponent, or mass-velocity amplitude law as the NBM0 field equation.",
+    "Do not infer beta from CLASH alone; alpha and beta must be frozen jointly from same-system dynamics and lensing or derived from a completed action.",
+    "Do not treat the GR/NFW-deprojected CLASH acceleration summaries as a theory-neutral likelihood."
+  ],
+  "input_audits": {
+    "observable_report": "results/r0_observable_audit/report.json",
+    "same_system_report": "results/r1_same_system_pilot_gap/report.json",
+    "public_data_ceiling_report": "results/r1_ten_system_public_data_ceiling/report.json",
+    "SPARC_directory": "data/raw/sparc",
+    "CLASH_summary": "data/raw/clash_tian2020/fig2.dat",
+    "BCG_summary": "data/derived/measured_host_profile_sample.csv"
+  },
+  "stage_gates": {
+    "algebraic_metric_gate": [
+      "one universal physical metric",
+      "finite derived Psi and Phi coefficients",
+      "lensing response derived from Phi+Psi",
+      "GR recovered when X is screened to zero"
+    ],
+    "empirical_identifiability_gate": {
+      "minimum_same_systems": 10,
+      "minimum_dynamics_points_per_system": 3,
+      "minimum_lensing_points_per_system": 3,
+      "minimum_baryonic_profile_points_per_system": 3,
+      "raw_or_rerunnable_lensing_likelihood_required": true
+    },
+    "action_health_gate": [
+      "reciprocal X, U, metric, and matter equations derived",
+      "positive kinetic eigenvalues",
+      "positive gradient speed squared",
+      "tensor speed consistent with light",
+      "Solar-System PPN recovery by dynamical screening rather than coefficient cancellation"
+    ]
+  },
+  "stop_rule": "No NBM0 galaxy or cluster parameter fit is authorized until the empirical identifiability gate passes. A failed data gate retains the equations as a theory candidate but withholds all empirical claims."
+}

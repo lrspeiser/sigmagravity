@@ -1,0 +1,117 @@
+{
+  "protocol_version": "R1A2-RXJ2129-pPXF-0.2-resolution-corrected",
+  "status": "frozen_after_deterministic_template_resolution_audit_before_corrected_half_field_execution",
+  "purpose": "Repeat the unchanged four-annulus RX J2129 BCG reconstruction with a template library whose native resolution is finer than MUSE throughout the fitted rest-frame range.",
+  "amendment_reason": "The E-MILES templates used in protocol 0.1 have FWHM 2.51 Angstrom over 3935-5798 Angstrom rest frame, while the 2.5-2.7 Angstrom observed MUSE range corresponds to 2.024-2.186 Angstrom rest frame. pPXF clips negative resolution differences, making the E-MILES instrumental-resolution sensitivity grid non-informative. XSL has 0.402-0.592 Angstrom FWHM over the same range and permits valid forward convolution.",
+  "post_result_disclosure": "The full-annulus XSL 2.6-A, 6-sigma sensitivity values were generated during the invalidated covariance-0.1 run before this amendment. System selection, center, annuli, mask construction, half-field checks, and numerical thresholds remain unchanged from protocol 0.1; the corrected half-field results and XSL bootstrap covariance were not inspected before this file was frozen.",
+  "blindness_rule": "No gravity residual or lensing mass residual is used. The correction is forced by template and instrument resolution metadata, not by the direction or size of a kinematic result.",
+  "structural_preselection": {
+    "lens_source": "Jauzac et al. 2021, arXiv:2006.10700",
+    "bcg_center_ra_deg": 322.41651,
+    "bcg_center_dec_deg": 0.08923,
+    "spectroscopic_images_total": 21,
+    "spectroscopic_images_inside_5_arcsec": 3,
+    "source_families_inside_5_arcsec": 3,
+    "family_wide_positions_for_inner_families": 9,
+    "family_wide_position_dof_after_source_coordinates": 12,
+    "conditional_radial_rank_upper_bound": 3,
+    "disturbance_state": "relaxed_with_reported_sloshing",
+    "disturbance_source": "Jimenez-Teja et al. 2024, arXiv:2408.11122",
+    "promotion_status": "structurally_promoted_under_unchanged_geometry_gate"
+  },
+  "input": {
+    "system_name": "RX J2129",
+    "cube_path": "data/raw/r1_muse_bcg_cubes/rxj2129_bcg_4860_7160A_r10arcsec.fits",
+    "cube_sha256": "5CA2713AA2DF418A150AE0B1645B8187882542A4F4698AD6C4DB71569E718408",
+    "archive_dp_id": "ADP.2017-12-14T12:30:03.217",
+    "archive_proposal_id": "097.A-0909(A)",
+    "archive_exposure_seconds": 11443.86,
+    "data_extension": "DATA",
+    "variance_extension": "STAT",
+    "observed_wavelength_range_angstrom": [
+      4860.0,
+      7160.0
+    ],
+    "bcg_redshift_initial": 0.235,
+    "bcg_center_ra_deg": 322.41651,
+    "bcg_center_dec_deg": 0.08923,
+    "astrometric_registration": "fit the unchanged fixed-n=4.05 circular continuum model and treat the offset from the published BCG center as a global cube-WCS correction",
+    "maximum_allowed_registration_offset_arcsec": 2.0
+  },
+  "spatial_extraction": {
+    "annulus_semimajor_edges_arcsec": [
+      0.0,
+      0.6,
+      1.5,
+      3.0,
+      5.0
+    ],
+    "position_angle_deg_east_of_north": 0.0,
+    "axis_ratio_b_over_a": 1.0,
+    "geometry_rationale": "unchanged circular annuli from protocol 0.1",
+    "minimum_valid_spaxel_fraction_per_bin": 0.7,
+    "mask_protocol": {
+      "stage_1": "mask non-finite DATA/STAT values and non-positive variance",
+      "stage_2": "construct a white-light image from the median over 6000-7000 Angstrom",
+      "stage_3": "subtract a 3-pixel Gaussian-smoothed white-light image to form a compact-source detection image",
+      "stage_4": "flag positive compact residual components above 6 robust sigma with 2-300 connected pixels, excluding the registered central 3.0 arcsec",
+      "stage_5": "dilate flagged components by 8 pixels and freeze the mask before spectral fitting"
+    }
+  },
+  "spectral_fit": {
+    "software": "pPXF",
+    "software_version": "9.4.8",
+    "template_family_baseline": "XSL",
+    "template_path": "data/raw/r1_ppxf_templates/spectra_xsl_9.0.npz",
+    "template_sha256": "B8BEE334EE1705A0D4E7FF0F161990C248D68AC1B8C8EB138B0D8C05CF37D853",
+    "template_source": "https://raw.githubusercontent.com/micappe/ppxf_data/main/spectra_xsl_9.0.npz",
+    "template_fwhm_rest_angstrom_over_fit_range": [
+      0.4018443504839091,
+      0.5919957894032082
+    ],
+    "galaxy_fwhm_rest_angstrom_over_sensitivity_range": [
+      2.0242914979757085,
+      2.1862348178137654
+    ],
+    "galaxy_fwhm_angstrom_baseline": 2.6,
+    "moments": 2,
+    "additive_polynomial_degree": 8,
+    "multiplicative_polynomial_degree": 0,
+    "initial_sigma_km_s": 300.0,
+    "mask_emission_lines": true,
+    "mask_high_variance_pixels": "exclude wavelength planes whose annular variance median exceeds the local 21-pixel median by 6 robust sigma",
+    "noise_model": "sum STAT variance over unmasked spaxels and rescale conditional pPXF errors by square root of reduced chi-square"
+  },
+  "covariance_protocol": {
+    "child_protocol": "configs/r1_rxj2129_covariance_resolution_corrected_protocol.json",
+    "spatial_resampling": "100 deterministic spatial block-bootstrap replicates within each annulus using anchored 2x2-spaxel blocks",
+    "template_systematic": "retain the E-MILES difference only as a conservative template-plus-resolution mismatch diagnostic; use XSL for the resolution-valid baseline and bootstrap",
+    "resolution_systematic_fwhm_angstrom": [
+      2.5,
+      2.6,
+      2.7
+    ],
+    "spectral_mask_systematic_sigma": [
+      5.0,
+      6.0,
+      8.0
+    ],
+    "random_seed": 2129
+  },
+  "success_thresholds": {
+    "minimum_finite_sigma_bins": 4,
+    "minimum_outer_bin_median_signal_to_noise_per_angstrom": 10.0,
+    "maximum_fractional_sigma_uncertainty_each_bin": 0.3,
+    "maximum_template_or_mask_shift_fraction": 0.1,
+    "maximum_opposite_half_velocity_difference_km_s": 100.0,
+    "maximum_opposite_half_sigma_difference_fraction": 0.2,
+    "covariance_must_be_positive_semidefinite": true,
+    "publication_figure_use": "none"
+  },
+  "authorization": {
+    "resolution_corrected_profile_reconstruction": true,
+    "structural_promotion_remains_geometry_only": true,
+    "gravity_response_fit": false,
+    "claim_as_published_likelihood": false
+  }
+}

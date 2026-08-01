@@ -1,0 +1,131 @@
+{
+  "report_version": "P0600-BCG-POTENTIAL-GAP-RESULTS-0.1.0",
+  "status": "complete_external_BCG_bridge",
+  "coverage": {
+    "systems": 34,
+    "direct_Tian2024": 11,
+    "calibrated_DynPop_proxy": 23,
+    "variants": 24
+  },
+  "frozen_formula": {
+    "amplitude_A": 3.0,
+    "potential_threshold_chi": 1e-06,
+    "potential_power": 4.0,
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "source_acceleration_gate_power": 4.0,
+    "a0_m_s2": 1.2e-10,
+    "equation": "g=RAR(gbar)*[1+3*S4*H(C)*chi^4/(chi^4+1e-24)]"
+  },
+  "derived_shape_brackets": {
+    "Hernquist_C_R50_over_R80": 0.28495925646098963,
+    "CLASH_median_C_R50_over_R80": 0.7172213873353213,
+    "H_at_Hernquist_C": 0.0410752271127491,
+    "H_at_CLASH_median_C": 0.763544950588903
+  },
+  "primary": {
+    "variant_id": "BCG_plus_eRASS_median_gas__CLASH_median_C__weak_host_S1",
+    "potential_source": "BCG_plus_eRASS_median_gas",
+    "radial_shape": "CLASH_median_C",
+    "source_screen": "weak_host_S1",
+    "median_potential_gate": 0.8063115134151557,
+    "median_shape_gate": 0.763544950588903,
+    "median_source_screen": 1.0,
+    "all_systems": 34,
+    "all_RMS_dex": 0.20293195740390554,
+    "all_median_absolute_residual_dex": 0.15794495898094052,
+    "all_mean_residual_dex": 0.16082991036412467,
+    "all_chi2_per_point": 3.684911433979064,
+    "direct_systems": 11,
+    "direct_RMS_dex": 0.23051062694569716,
+    "direct_median_absolute_residual_dex": 0.25030008013295024,
+    "direct_mean_residual_dex": 0.19716955646038964,
+    "direct_chi2_per_point": 6.174808606665562,
+    "proxy_systems": 23,
+    "proxy_RMS_dex": 0.18831983166164953,
+    "proxy_median_absolute_residual_dex": 0.1576018778040691,
+    "proxy_mean_residual_dex": 0.14345007962243272,
+    "proxy_chi2_per_point": 2.4940910470420437
+  },
+  "best_posthoc_variant": {
+    "variant_id": "BCG_only__CLASH_median_C__weak_host_S1",
+    "potential_source": "BCG_only",
+    "radial_shape": "CLASH_median_C",
+    "source_screen": "weak_host_S1",
+    "median_potential_gate": 0.4757374159149682,
+    "median_shape_gate": 0.763544950588903,
+    "median_source_screen": 1.0,
+    "all_systems": 34,
+    "all_RMS_dex": 0.19563334768389498,
+    "all_median_absolute_residual_dex": 0.1304844622300685,
+    "all_mean_residual_dex": 0.03391333515254272,
+    "all_chi2_per_point": 3.62583870733375,
+    "direct_systems": 11,
+    "direct_RMS_dex": 0.21095054851548847,
+    "direct_median_absolute_residual_dex": 0.18358457091186864,
+    "direct_mean_residual_dex": 0.11362093116025675,
+    "direct_chi2_per_point": 5.632673366682641,
+    "proxy_systems": 23,
+    "proxy_RMS_dex": 0.18786678392754605,
+    "proxy_median_absolute_residual_dex": 0.09776497735176193,
+    "proxy_mean_residual_dex": -0.00420768902505965,
+    "proxy_chi2_per_point": 2.6660482180799323
+  },
+  "comparators": {
+    "fixed_galaxy_rar": {
+      "systems": 34,
+      "RMS_dex": 0.2852495018109576,
+      "median_absolute_residual_dex": 0.25481753572619503,
+      "mean_residual_dex": -0.2628039855484082,
+      "chi2_per_point": 7.325919544226272
+    },
+    "cluster_scale_rar": {
+      "systems": 34,
+      "RMS_dex": 0.18589935818712333,
+      "median_absolute_residual_dex": 0.15630022165063107,
+      "mean_residual_dex": 0.14781999695095638,
+      "chi2_per_point": 3.3695085672376752
+    },
+    "H7s_standard_mu_erass_median_gas_host_r200": {
+      "systems": 34,
+      "RMS_dex": 0.2097477869242447,
+      "median_absolute_residual_dex": 0.16695206562587384,
+      "mean_residual_dex": -0.18381328035325975,
+      "chi2_per_point": 3.982424417715877
+    }
+  },
+  "probability_primary_better_than_fixed_RAR": 0.99395,
+  "parameter_impacts": [
+    {
+      "parameter": "radial_shape",
+      "best_level": "CLASH_median_C",
+      "worst_level": "Hernquist_BCG",
+      "median_RMS_span_dex": 0.05774758020193932
+    },
+    {
+      "parameter": "potential_source",
+      "best_level": "BCG_plus_eRASS_median_gas",
+      "worst_level": "BCG_only",
+      "median_RMS_span_dex": 0.022320437476714833
+    },
+    {
+      "parameter": "source_screen",
+      "best_level": "local_BCG_gbar",
+      "worst_level": "weak_host_S1",
+      "median_RMS_span_dex": 0.01632679650245178
+    }
+  ],
+  "gates": {
+    "primary_RMS_pass": false,
+    "primary_bias_pass": false,
+    "direct_RMS_pass": false,
+    "bootstrap_pass": true
+  },
+  "all_interpretation_gates_pass": false,
+  "claim_limits": [
+    "Eleven BCG accelerations are direct Tian et al. measurements; the remaining 23 are disjointly calibrated MaNGA DynPop/NSA proxies.",
+    "The SPIDERS hosts lack resolved baryon profiles, so potential, radial shape, and source acceleration are bracketed rather than measured together.",
+    "The CLASH median radial shape is an environment proxy, not a per-BCG measurement.",
+    "The formula constants were selected on disclosed SPARC and CLASH data; P0600 is an external bridge test only with respect to BCG values."
+  ]
+}

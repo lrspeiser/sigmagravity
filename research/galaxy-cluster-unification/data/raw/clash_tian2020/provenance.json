@@ -1,16 +1,3 @@
-﻿{
-    "dataset":  "Tian et al. 2020 CLASH radial acceleration catalog",
-    "downloaded_utc":  "2026-07-26T17:22:51.0026525Z",
-    "citation":  "Tian et al., Astrophysical Journal 896, 70 (2020)",
-    "citation_doi":  "10.3847/1538-4357/ab8db9",
-    "catalog_page":  "https://cdsarc.cds.unistra.fr/viz-bin/ReadMe/J/ApJ/896/70?format=html\u0026tex=true",
-    "independent_source":  "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/896/70/fig2.dat",
-    "local_sigmagravity_copy_used_for_expected_hash_only":  true,
-    "records":  84,
-    "clusters":  20,
-    "file":  {
-                 "path":  "fig2.dat",
-                 "bytes":  3612,
-                 "sha256":  "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b"
-             }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:11ea948ba2d2c8dc9701033fd2d35a247b0ecd0a45d74df3cbd84e3af35f71b2
+size 1232

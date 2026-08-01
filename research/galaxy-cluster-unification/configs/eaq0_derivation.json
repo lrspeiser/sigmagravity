@@ -1,0 +1,74 @@
+{
+  "status": "frozen before the EA-Q0 reciprocal-source calculation",
+  "candidate": "EA-Q0 local scalar-curvature environmental generalized Aether",
+  "units": "c=1 in the covariant derivation; SI in numerical checks",
+  "physical_metric": "g_ab; all matter and light are minimally coupled through S_m[g,psi]",
+  "action": {
+    "lagrangian": "(Mpl^2/2)*[(1+2*beta*Q)R-2*beta*((grad Q)^2+Q^2/L_Q^2)-K_EA+a_Q(Q)^2*H_s(Y)+lambda*(u^2+1)]",
+    "Y": "aether_acceleration_squared/a_Q(Q)^2",
+    "aether_acceleration": "a^b=u^a nabla_a u^b",
+    "standard_action_primitive": "F_s(Y)=sqrt(Y*(1+Y))-asinh(sqrt(Y))",
+    "aether_function": "H_s(Y)=2*(Y-F_s(Y))",
+    "environment_response": "a_Q(Q)=a0*exp(eta*Q)",
+    "environment_equation": "(box-L_Q^-2)Q=-R/2-[eta*a_Q^2/(2*beta)]*[H_s-Y*H_s,Y]",
+    "matter_coupling": "minimal and universal",
+    "per_object_parameters": 0,
+    "lensing_only_parameters": 0
+  },
+  "global_physical_parameters": [
+    "beta",
+    "L_Q",
+    "eta",
+    "c1",
+    "c14"
+  ],
+  "global_physical_parameter_count": 5,
+  "fixed_constants": {
+    "a0_m_s2": 1.2e-10,
+    "h7s_amplitude_not_widened": 100.0,
+    "h7s_transition_chi": 4.504241726150346e-6,
+    "eta_rule": "a_Q(chi_t)/a0=sqrt(F_H7s); no new astrophysical fit",
+    "eta_per_chi": 511203.71263067255
+  },
+  "high_field_aether_subspace": {
+    "c3": "-c1, so c13=0 exactly",
+    "c2": "c14/(1-2*c14), so alpha2=0",
+    "c4": "c14-c1",
+    "allowed": "0<c14<=c1; c14<=2.5e-5",
+    "mode_speeds_squared": {
+      "tensor": 1.0,
+      "vector": "c1/c14 >= 1",
+      "scalar": 1.0
+    }
+  },
+  "prefit_gates": {
+    "gamma_absolute_max": 2.3e-5,
+    "beta_most_permissive_for_feedback": 1.1500529024335119e-5,
+    "q_fractional_error_max": 0.05,
+    "point_source_minimum_L_over_r": 19.495725746223673,
+    "deep_gbar_over_aq_max": 0.001,
+    "deep_relative_error_max": 0.05,
+    "high_gbar_over_aq_min": 100000.0,
+    "high_fractional_correction_max": 1e-5
+  },
+  "conservative_feedback_test": {
+    "description": "Continue only the positive baryonic mass enclosed at each measured radius as a point source; omit all exterior baryons; use the shortest Yukawa range still compatible with a 5% point-source potential error; maximize beta subject to the PPN gamma gate.",
+    "reason": "These choices minimize the reciprocal Aether source. A failure is therefore not caused by an aggressive host profile or normalization.",
+    "required_domains": [
+      "SPARC",
+      "CLASH",
+      "SPIDERS-MaNGA BCG"
+    ]
+  },
+  "decision": {
+    "pass": "freeze exact EA-Q0 Stage 3 cross-validation and Stage 4 replay",
+    "fail": "retire this local Q coupling and move to the environmental MOG control",
+    "forbidden": [
+      "drop the reciprocal Q source",
+      "widen F",
+      "fit a host normalization",
+      "add an interpolation parameter",
+      "add a lensing-only multiplier"
+    ]
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "protocol_version": "SOLAR-SCREENED-GALAXY-MORPHOLOGY-0.1",
+  "frozen_utc": "2026-07-30T00:00:00Z",
+  "status": "fixed before solar-screened galaxy scores",
+  "question": "Does the cluster-selected, Solar-screened isothermal law predict untouched outer rotation-curve points across distinct SPARC galaxy morphologies without retuning its gravity constants?",
+  "law": {
+    "equation": "g=gbar+lambda*G*Mbar/(rstar*r)*a0/(a0+gbar)",
+    "lambda": 10.5,
+    "a0_m_s2": 1.2e-10,
+    "reference_radius_kpc": 200.0,
+    "lambda_source": "results/solar_screened_isothermal/report.json; selected on MACS0329 and MACS0429 before this SPARC morphology score",
+    "global_gravity_parameters_refit_to_galaxies": 0,
+    "per_galaxy_gravity_parameters": 0,
+    "source_mass_definition": "1.33*MHI + Upsilon_disk*L_disk + Upsilon_bulge*L_bulge, with only standard inner-fit baryonic nuisances and distance scaling",
+    "geometry": "SPARC tabulated gas, disk, and bulge radial force components set gbar; the added tail is source-centered and spherical"
+  },
+  "shared_test_design": {
+    "base_protocol": "configs/sparc_independent_nuisance_refit_protocol.json",
+    "sample": "same frozen 131 SPARC galaxies",
+    "inner_nuisance_calibration_fraction": 0.7,
+    "outer_prediction_fraction": 0.3,
+    "standard_nuisances": [
+      "disk mass-to-light ratio",
+      "bulge mass-to-light ratio",
+      "distance within catalog uncertainty",
+      "inclination within catalog uncertainty"
+    ],
+    "comparators": [
+      "fixed_RAR",
+      "simple_MOND",
+      "NFW inner-fit radial-extrapolation control"
+    ]
+  },
+  "predeclared_bins": {
+    "stellar_bulge_fraction": [
+      {"name": "disk_dominated", "condition": "B/T <= 0.05"},
+      {"name": "mixed_disk_bulge", "condition": "0.05 < B/T < 0.30"},
+      {"name": "bulge_dominated", "condition": "B/T >= 0.30"}
+    ],
+    "hubble_type": [
+      {"name": "early_S0_to_Sb", "condition": "T <= 3"},
+      {"name": "spiral_Sbc_to_Scd", "condition": "4 <= T <= 6"},
+      {"name": "late_Sd_to_BCD", "condition": "T >= 7"}
+    ],
+    "disk_central_surface_brightness_Lsun_pc2": [
+      {"name": "low_surface_brightness", "condition": "Sigma_disk < 100"},
+      {"name": "intermediate_surface_brightness", "condition": "100 <= Sigma_disk <= 500"},
+      {"name": "high_surface_brightness", "condition": "Sigma_disk > 500"}
+    ],
+    "baryonic_mass_solar": [
+      {"name": "dwarf_mass", "condition": "Mbar < 1e9"},
+      {"name": "intermediate_mass", "condition": "1e9 <= Mbar < 1e11"},
+      {"name": "giant_mass", "condition": "Mbar >= 1e11"}
+    ],
+    "gas_fraction": [
+      {"name": "gas_poor", "condition": "fgas < 0.2"},
+      {"name": "mixed_gas", "condition": "0.2 <= fgas < 0.5"},
+      {"name": "gas_rich", "condition": "fgas >= 0.5"}
+    ],
+    "inclination_deg": [
+      {"name": "moderate_inclination", "condition": "30 <= i < 50"},
+      {"name": "intermediate_inclination", "condition": "50 <= i < 70"},
+      {"name": "edge_on", "condition": "i >= 70"}
+    ],
+    "outer_rotation_shape": [
+      {"name": "declining", "condition": "dlnV/dlnR < -0.10"},
+      {"name": "approximately_flat", "condition": "-0.10 <= dlnV/dlnR <= 0.10"},
+      {"name": "rising", "condition": "dlnV/dlnR > 0.10"}
+    ]
+  },
+  "advance_gates": {
+    "all_outer_RMSE_relative_to_fixed_RAR_max": 1.10,
+    "each_structural_bin_RMSE_relative_to_fixed_RAR_max": 1.25,
+    "finite_fit_fraction_min": 1.0,
+    "optimizer_success_fraction_min": 0.95,
+    "nuisance_any_boundary_fraction_max": 0.05
+  },
+  "claim_boundary": [
+    "This is an inner-calibrated radial prediction test, not a new-galaxy prediction test.",
+    "The morphology bins were fixed before the screened-law SPARC scores were computed.",
+    "The outer-rotation-shape bin is descriptive because it is defined using observed velocities.",
+    "SPARC supplies in-plane axisymmetric disk and bulge force templates; this test does not predict vertical dynamics or non-axisymmetric bars and spirals.",
+    "The spherical added tail does not independently respond to disk thickness or bulge shape.",
+    "The NFW control fits two halo parameters per galaxy on inner points and is not a general test of dark matter.",
+    "The Solar result remains a first-order Mercury and force-fraction diagnostic, not a raw multi-planet ephemeris fit."
+  ]
+}

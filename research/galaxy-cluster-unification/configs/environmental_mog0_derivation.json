@@ -1,0 +1,76 @@
+{
+  "status": "frozen environmental MOG pre-fit derivation checkpoint",
+  "candidate": "EMOG-Q0 chameleon scalar plus universal Proca vector",
+  "honesty_note": "The broad feasibility bounds were frozen after an exploratory calculation against the already-known target. This is a falsification diagnostic, not a blind fit, and no resulting parameter value may be adopted as a theory fit.",
+  "conventions": {
+    "metric_signature": "(-,+,+,+)",
+    "units_for_action": "c=hbar=1",
+    "physical_metric": "g_ab; all matter and light use this one metric",
+    "vector_current": "J^a=kappa*j_m^a with conserved rest-mass current and one composition-independent kappa"
+  },
+  "action": {
+    "F_of_s": "exp(-2*beta*s)",
+    "U_of_s": "Lambda_s^2*s^(-n), s>0",
+    "vector": "-B_ab B^ab/4 - mu^2 phi_a phi^a/2",
+    "matter": "S_m0[g,psi] - integral sqrt(-g) phi_a J^a",
+    "global_physical_parameters": [
+      "beta",
+      "Lambda_s",
+      "n",
+      "mu",
+      "alpha"
+    ],
+    "parameter_count": 5,
+    "definitions": {
+      "kappa": "sqrt(4*pi*G_N*alpha)",
+      "range_kpc": "1/mu",
+      "metric_enhancement": "1/F=exp(2*beta*s)"
+    }
+  },
+  "hard_guardrails": {
+    "global_physical_parameters_max": 5,
+    "per_object_parameters": 0,
+    "lensing_only_parameters": 0,
+    "object_class_parameters": 0,
+    "universal_vector_range": true,
+    "extra_interpolation_terms": 0,
+    "fit_before_prefit_pass": false
+  },
+  "prefit_gates": {
+    "pointwise_fractional_error_max": 0.05,
+    "absolute_ppn_gamma_minus_one_max": 2.3e-05,
+    "solar_system_vector_range_assumption": "mu*r_AU << 1 for any range that affects kpc dynamics",
+    "tensor_wave_speed_fractional_difference_max": 1e-15,
+    "positive_kinetic_and_gradient_eigenvalues": true,
+    "newtonian_short_distance_limit": true,
+    "attractive_large_distance_limit": true,
+    "same_metric_for_dynamics_and_lensing": true
+  },
+  "favorable_chameleon_envelope": {
+    "interpretation": "The scalar is granted instantaneous tracking of its spherical mean-density minimum at every scored radius. This is more flexible than a finite-Compton-wavelength solution.",
+    "rho_reference_kg_m3": 4.0e-22,
+    "z_definition": "z=2*beta*s_min=z_ref*(rho_bar/rho_ref)^(-p)",
+    "p_definition": "p=1/(n+1), with n>0",
+    "log10_z_ref_bounds": [-6.0, 3.0],
+    "p_bounds": [0.02, 1.0],
+    "log10_range_kpc_bounds": [-3.0, 5.0],
+    "log10_alpha_bounds": [-4.0, 4.0],
+    "maximum_log_metric_enhancement": 50.0,
+    "optimizer": {
+      "method": "differential_evolution minimax fractional error",
+      "seeds": [20260726, 20260727, 20260728],
+      "population_size_multiplier": 24,
+      "maximum_iterations": 600,
+      "relative_tolerance": 1e-09,
+      "polish": true
+    }
+  },
+  "data": {
+    "sparc": "data/raw/sparc",
+    "clash": "data/raw/clash_tian2020/fig2.dat",
+    "bcg": "data/derived/measured_host_profile_sample.csv",
+    "bcg_target_column": "gobs_m_s2",
+    "bcg_environment_column": "total_profile_chi"
+  },
+  "failure_policy": "Retire EMOG-Q0 and return to a premise-level theory rethink. Do not add an interpolation term or make alpha or mu object-dependent."
+}

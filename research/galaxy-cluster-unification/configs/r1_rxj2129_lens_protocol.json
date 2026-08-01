@@ -1,0 +1,56 @@
+{
+  "protocol_version": "R1B2-RXJ2129-lens-observables-0.1",
+  "status": "frozen_before_independent_lens_residual_or_model_fit",
+  "purpose": "Extract a source-traceable RX J2129 image-position likelihood from the Jauzac et al. table without importing its GR-derived convergence map, source reconstruction, or residuals.",
+  "freeze_date": "2026-07-26",
+  "disclosure": "The published table size, the 21-spectroscopic-image readiness target, the 0.5-arcsec likelihood convention, the reported 0.29-arcsec aggregate reference RMS, and the existence of published best-fit PIEMD parameters were known before this freeze. No independent RX J2129 lens model or image residual has been evaluated.",
+  "source": {
+    "paper_source": "data/raw/r1_replacement_search_sources/jauzac2021_three_muse_cluster_lenses/muse_clusters.tex",
+    "source_archive": "data/raw/r1_replacement_search_sources/jauzac2021_three_muse_cluster_lenses_source.tar",
+    "source_archive_sha256": "ffa6c103e4c4b72d944edf346d7319c46dff315e7b07c064931c6ae9a59d4680",
+    "arxiv_id": "2006.10700",
+    "table_label": "mul_rxj2129",
+    "likelihood_equation_lines": [638, 646],
+    "position_sigma_arcsec_per_coordinate": 0.5,
+    "redshift_rule": "Retain the seven families with spectroscopic redshifts printed in the table. Exclude all four System 2 images because their z=1.61 value is a fixed photometric redshift and the system is an off-center galaxy-galaxy lens.",
+    "published_rms_rule": "Do not ingest or optimize against the table's per-image GR-model rms column. It is not an observable covariance."
+  },
+  "system": {
+    "name": "RX J2129",
+    "cluster_redshift": 0.235,
+    "center_ra_deg": 322.41651,
+    "center_dec_deg": 0.08923,
+    "dynamics_support_radius_arcsec": 5.0
+  },
+  "covariance": {
+    "coordinate_order": "image_id ascending numeric family then counterimage; east offset followed by north offset",
+    "model": "independent diagonal image-plane covariance",
+    "variance_arcsec2_per_coordinate": 0.25,
+    "systematic_covariance_status": "not published; do not invent off-diagonal terms"
+  },
+  "advance_thresholds": {
+    "listed_images": 25,
+    "spectroscopic_likelihood_images": 21,
+    "spectroscopic_source_families": 7,
+    "excluded_photometric_images": 4,
+    "strict_images_inside_dynamics_support": 3,
+    "strict_inner_source_families": 3,
+    "all_likelihood_coordinates_finite": true,
+    "coordinate_covariance_symmetric_positive_semidefinite": true,
+    "published_model_residual_used": false
+  },
+  "outputs": {
+    "image_ledger": "data/derived/r1_rxj2129_lens_observables.csv",
+    "coordinate_covariance": "data/derived/r1_rxj2129_lens_coordinate_covariance.csv",
+    "report": "results/r1_rxj2129_lens_observables/report.json",
+    "diagnostic": "results/r1_rxj2129_lens_observables/image_geometry.png"
+  },
+  "authorization": {
+    "observable_extraction": true,
+    "observable_likelihood_assembly": true,
+    "independent_lens_model_fit": false,
+    "published_gr_mass_map_use": false,
+    "gravity_response_fit": false,
+    "strict_r1_ready": false
+  }
+}

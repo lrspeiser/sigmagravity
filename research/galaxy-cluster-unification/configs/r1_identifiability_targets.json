@@ -1,0 +1,54 @@
+{
+  "audit_version": "R1A1-identifiability-0.1",
+  "stage": "R1A.1 marginalized inner-lensing identifiability pilot",
+  "selection_rule": "Select only from pre-fit observable geometry and published data quality; do not inspect gravity residuals or model preference.",
+  "pilot_order": [
+    {
+      "system": "A383",
+      "role": "primary non-disturbed pilot",
+      "disturbed": false
+    },
+    {
+      "system": "MS2137",
+      "role": "second non-disturbed pilot",
+      "disturbed": false
+    },
+    {
+      "system": "A2537",
+      "role": "disturbed engineering control only",
+      "disturbed": true
+    }
+  ],
+  "geometric_pre_screen": {
+    "minimum_selected_dynamics_bins": 3,
+    "minimum_observable_images_inside_dynamics_support": 3,
+    "minimum_structural_radial_rank_upper_bound": 3,
+    "minimum_family_wide_position_degrees_of_freedom_after_source_position": 4,
+    "note": "For a radial response, each strict inner image samples at most one scalar radial response value. Outer counterimages can anchor the source position but cannot add an in-support radial sample. Nuisance marginalization can only lower this structural rank bound."
+  },
+  "full_jacobian_gate": {
+    "inner_weyl_response_nodes": 3,
+    "node_parameterization": "three dimensionless fractional deflection-response nodes spanning the selected stellar-dynamics support",
+    "likelihood": "published image-plane positions, spectroscopic source redshifts, and declared per-coordinate errors",
+    "required_marginalization": [
+      "two source-plane coordinates per source family",
+      "BCG stellar M/L and light-profile uncertainty",
+      "cluster-halo center, ellipticity, orientation, and smooth-profile nuisance parameters",
+      "member-galaxy mass-scaling parameters and individually optimized perturbers",
+      "gas and extended intracluster-light nuisance parameters"
+    ],
+    "advance_threshold": {
+      "marginalized_weyl_rank_minimum": 3,
+      "maximum_whitened_condition_number": 1000.0,
+      "maximum_one_sigma_fractional_uncertainty_per_mode": 1.0,
+      "minimum_data_fraction_of_posterior_precision_per_mode": 0.5,
+      "non_disturbed_systems_passing_minimum": 1
+    },
+    "failure_response": "If no system has structural radial-rank upper bound at least three, do not build or fit the full Jacobian. Search for systems with longer BCG kinematic reach or at least three central image radii and rerun this same gate."
+  },
+  "progress_rule": {
+    "successful_cycle": "complete the nuisance model and marginalized Jacobian for at least one pilot or add at least two geometrically qualified replacement systems",
+    "rethink_after_consecutive_unsuccessful_cycles": 3,
+    "rethink_after_active_days": 7
+  }
+}

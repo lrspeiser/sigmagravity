@@ -1,0 +1,73 @@
+{
+  "protocol_version": "P0575-SMACS0723-RAW-POSITION-0.1.0",
+  "frozen_utc": "2026-08-01T07:20:00Z",
+  "status": "frozen_before_any_raw_image_source_plane_score",
+  "question": "Does the P0574 symmetry-gated baryon-only map make held-out spectroscopic multiple images map back to a more consistent source position than local baryon light?",
+  "raw_data": {
+    "cluster": "SMACS J0723.3-7327",
+    "cluster_redshift": 0.39,
+    "source": "Caminha et al. 2022, A&A 666 L9, arXiv:2207.07567v3, Table 1",
+    "source_url": "https://export.arxiv.org/e-print/2207.07567v3",
+    "source_archive": "data/raw/p0575_smacs0723_raw_images/arxiv_2207.07567v3_source.tar.gz",
+    "source_archive_bytes": 1847849,
+    "source_archive_sha256": "7672c10ebbd2724bb8e5c02f9908b9b0b51524bc58b7d122cc9328aede43e3ea",
+    "table_tex": "data/raw/p0575_smacs0723_raw_images/source/main.tex",
+    "table_tex_sha256": "5a15b0180218d6433297e41fb3552d1e0586332d7916306e233242cb629971e4",
+    "selection": "Use only the four pre-JWST families with exact spectroscopic redshifts: 1, 2, 5, and 19; three images per family, 12 positions total.",
+    "excluded": "Families 3 and 4 have lens-model redshifts; every dagger-marked family was discovered with JWST and is outside the pre-JWST replication target."
+  },
+  "split": {
+    "amplitude_calibration_families": ["1", "2"],
+    "heldout_families": ["5", "19"],
+    "selection_reason": "First two spectroscopic families calibrate one positive global deflection amplitude; the other two spectroscopic families test transfer with no amplitude or source-position refit beyond each family's analytic mean source position.",
+    "images_per_cohort": 6
+  },
+  "models": {
+    "null_no_lens": "Observed image positions with amplitude zero.",
+    "local_control": "The 100 kpc F160W member-light map used in P0573-P0574.",
+    "p0573_no_gate": "The frozen 50 kpc, f=0.8 tidal-weighted arrival map.",
+    "p0574_symmetry_gated": "The selected 60 kpc, f=0.8, Q0=0.05, n=4 quarter-turn-gated arrival map.",
+    "lenstool_map_reference": "The processed mean of 100 standard Lenstool convergence maps, evaluated through the same numerical potential solver and one-amplitude source-plane statistic."
+  },
+  "lensing_equation": {
+    "equation": "beta_i=theta_i-A*(D_ls/D_s)_i*alpha_map(theta_i)",
+    "potential": "laplacian(psi)=2*Sigma_map, alpha_map=grad(psi), solved on a two-times zero-padded grid",
+    "amplitude_fit": "For each model separately, fit one nonnegative A on families 1 and 2 by analytic least squares after subtracting each family's mean beta; hold A fixed for families 5 and 19.",
+    "metric": "RMS separation in arcseconds of inferred source positions from their family mean; this is source-plane scatter, not image-plane RMS.",
+    "nuisance_parameters": "One amplitude per compared map and one analytic two-coordinate family mean; no halo, shear, ellipticity, core radius, or per-family deflection amplitude."
+  },
+  "advance_gates": {
+    "heldout_improvement_vs_local_fraction_min": 0.10,
+    "heldout_not_worse_than_no_gate": true,
+    "all_heldout_families_improve_vs_local": true,
+    "positive_finite_calibration_amplitude": true,
+    "solar_SPARC_null_preserved": true
+  },
+  "published_context": {
+    "standard_model": "The paper's full pre-JWST Lenstool model used a cluster halo, 61 member halos, external shear, ten mass parameters, and two free source redshifts.",
+    "published_image_plane_RMS_arcsec": 0.39,
+    "comparison_limit": "The published 0.39 arcsec image-plane RMS is not numerically comparable to this source-plane scatter. It is recorded only as the standard-model context."
+  },
+  "inputs": {
+    "p0573_protocol": "configs/p0573_tidal_arrival_fresh_replication_protocol.json",
+    "p0574_protocol": "configs/p0574_symmetry_gated_arrival_microvariation_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0575_smacs0723_raw_position",
+    "images": "raw_images.csv",
+    "model_scores": "model_scores.csv",
+    "family_scores": "family_scores.csv",
+    "source_positions": "source_positions.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0575_smacs0723_raw_position.png"
+  },
+  "claim_limits": [
+    "The P0573 convergence target was reconstructed from overlapping HST strong-lensing information, so these positions are rawer but not statistically independent of the formula-selection history.",
+    "A fitted normalized-map amplitude does not predict absolute gravity strength or a universal stellar mass-to-light ratio.",
+    "Source-plane scatter can bias model comparisons differently from full image-plane root finding near critical curves.",
+    "Only one cluster and four nearly similar source redshifts are tested.",
+    "The baryon map still omits hot gas, intracluster light, and stellar mass-to-light variation.",
+    "The Lenstool reference here is a processed convergence map, not a reproduction of the paper's ten-parameter image-plane optimization."
+  ]
+}

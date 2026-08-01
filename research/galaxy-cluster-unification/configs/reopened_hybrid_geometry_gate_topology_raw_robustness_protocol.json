@@ -1,0 +1,32 @@
+{
+  "protocol_version": "REOPENED-HYBRID-GEOMETRY-GATE-TOPOLOGY-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-07-31T09:55:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay the RG cluster-side lensing sequence and RG galaxy-side galaxy sequence endpoints with eight lens-geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_geometry_gate_topology_protocol.json",
+  "source_report": "results/reopened_hybrid_geometry_gate_topology/report.json",
+  "selected_variants": [
+    "rg_only_cluster:channel_gate_sharpness=0.5",
+    "rg_only_cluster:channel_gate_sharpness=4",
+    "rg_only_galaxy:channel_gate_sharpness=0.5",
+    "rg_only_galaxy:channel_gate_sharpness=2",
+    "rg_only_galaxy:channel_gate_sharpness=8",
+    "dual_rg_galaxy:sigma_cap_cluster_weight=0"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_geometry_gate_topology_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_geometry_gate_topology_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_geometry_gate_topology_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_geometry_gate_topology_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_geometry_gate_topology_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Universal gravity constants are copied unchanged from the topology bridge fit.",
+    "No gravity constant is fitted to raw lensing.",
+    "Only pseudo-elliptical geometry, shear, center, and source positions are fitted to raw training images.",
+    "Candidates with missing held-out roots remain failures even when RMS over surviving roots is small.",
+    "The replay was selected after viewing two-start results and is a numerical robustness test, not an independent holdout."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "protocol_version": "P0591-DIRECTIONAL-RETURN-0.1.0",
+  "frozen_utc": "2026-08-01T08:40:00Z",
+  "status": "frozen_after_P0590B_smoothing_null_result_before_directional_scores",
+  "question": "Can a genuinely displaced return annulus recover information beyond Gaussian smoothing when its direction is fixed only by the baryonic mass quadrupole?",
+  "formula": {
+    "kernel": "R(r,theta) proportional to exp[-(r-L)^2/(2w^2)]*exp[kappa*cos(2*(theta-theta_b))]",
+    "theta_b": "major eigenvector of the frozen P0589 baryonic second-moment tensor",
+    "meaning": "kappa>0 favors return along the baryonic major axis; kappa<0 favors the perpendicular direction; kappa=0 is the isotropic ring",
+    "conservation": "each kernel is positive and unit normalized before convolution"
+  },
+  "base_protocol": "configs/p0590_gravity_return_backtrack_protocol.json",
+  "frozen_factorial": {
+    "return_radius_arcsec": [8.0, 12.0, 16.0, 24.0, 32.0],
+    "width_fraction": [0.2, 0.35, 0.5],
+    "directional_concentration": [-2.0, -1.0, -0.5, 0.0, 0.5, 1.0, 2.0],
+    "routed_fraction": [0.5, 0.75, 1.0],
+    "candidate_count": 315
+  },
+  "controls": {
+    "gaussian_smoothing": {"return_radius_arcsec": 0.0, "width_arcsec": 16.0, "routed_fraction": 1.0},
+    "strict_isotropic_ring": {"return_radius_arcsec": 16.0, "width_arcsec": 8.0, "routed_fraction": 1.0},
+    "axis_rotation_degrees": 45.0
+  },
+  "advance_gates": {
+    "development_improvement_over_gaussian_fraction_min": 0.05,
+    "holdout_improvement_over_gaussian_fraction_min": 0.05,
+    "both_holdouts_better_than_gaussian": true,
+    "baryon_axis_better_than_45deg_rotated_on_holdout": true
+  },
+  "outputs": {
+    "directory": "results/p0591_directional_return",
+    "candidate_scores": "candidate_scores.csv",
+    "map_scores": "map_scores.csv",
+    "backtracked_peaks": "backtracked_peaks.csv",
+    "report": "report.json",
+    "figure": "p0591_directional_return.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The baryonic major axis is a global projected summary, not a local spacetime connection or a three-dimensional field measurement.",
+    "The directional concentration is a new universal phenomenological parameter and must later transfer across clusters.",
+    "This stage reuses the MACS J0416 maps; it tests whether the morphology contains a directional clue, not whether the new field exists."
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "protocol_version": "P0569-MEASURED-BARYON-EXTENT-AUDIT-0.1.0",
+  "frozen_utc": "2026-08-01T02:20:00Z",
+  "status": "frozen_before_new_component_extent_computation",
+  "question": "Does the 75-125 kpc Gaussian extent preferred by P0568 correspond to the measured spatial extent of registered stars plus hot gas rather than a new gravity-routing length?",
+  "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+  "components": {
+    "members": "spectroscopic/photometric member-light catalog used by the raw-lens program",
+    "registered_starlight": "background-subtracted, lens-image-masked HST F160W light",
+    "accept_gas_spherical": "absolute line-of-sight projection of measured ACCEPT electron-density shells",
+    "accept_gas_sqrt_morphology": "same absolute radial gas mass modulated by square-root Chandra morphology with annular mass preserved",
+    "accept_gas_linear_morphology": "same absolute radial gas mass modulated linearly by Chandra morphology with annular mass preserved",
+    "stars_plus_gas": "absolute ACCEPT gas plus HST light normalized to published Tian BCG stellar mass",
+    "tian_anchor_sensitivity": "ACCEPT gas rescaled to the incompatible Tian central spherical gas anchor"
+  },
+  "extent_metrics": {
+    "center": "each component's own weighted centroid",
+    "metrics_kpc": ["weighted_RMS_radius", "R50", "R80", "R90"],
+    "equivalent_gaussian_sigma_from_RMS": "RMS/sqrt(2)",
+    "equivalent_gaussian_sigma_from_R80": "R80/sqrt(2*ln(5))",
+    "p0568_preferred_band_kpc": [75.0, 125.0],
+    "primary_component": "accept_absolute stars_plus_gas with square-root Chandra morphology"
+  },
+  "interpretation_gates": {
+    "extent_match": "median primary sigma equivalent lies inside 75-125 kpc",
+    "system_coverage": "at least three of four primary systems lie inside the band under either RMS- or R80-equivalent sigma",
+    "meaning": "Passing makes missing measured baryonic extent a sufficient scale explanation; it does not prove the map has the correct lensing amplitude or angular structure."
+  },
+  "inputs": {
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "p0559_report": "results/p0559_accept_projected_gas_tidal/report.json",
+    "p0568_report": "results/p0568_baryon_only_tensor_forward/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0569_measured_baryon_extent_audit",
+    "component_extents": "component_extents.csv",
+    "report": "report.json",
+    "figure": "p0569_measured_baryon_extent_audit.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The stellar map has one global BCG mass normalization and no resolved mass-to-light model for satellites or intracluster light.",
+    "ACCEPT publishes diagonal electron-density errors but not full shell covariance.",
+    "The registered map is limited to 120 arcsec across, truncating very extended gas.",
+    "The four systems and component constructions are spent; this is a scale audit, not validation.",
+    "Matching an extent does not establish a new field equation or reproduce raw lensing."
+  ]
+}

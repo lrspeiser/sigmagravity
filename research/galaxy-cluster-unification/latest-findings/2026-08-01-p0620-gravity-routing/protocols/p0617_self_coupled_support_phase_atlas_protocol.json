@@ -1,0 +1,73 @@
+{
+  "protocol_version": "P0617-SELF-COUPLED-SUPPORT-PHASE-ATLAS-0.1.0",
+  "status": "frozen_after_P0616_before_support_phase_scores",
+  "question": "With the P0615 amplitude frozen, which baryon-derived change to route width, travel length, or center-crossing rule most consistently changes raw cluster lensing?",
+  "frozen_formula": {
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "angular_amplitude": "epsilon=Q^2/(1+Delta80)",
+    "base_width_over_R80": 0.23,
+    "base_return_length_over_R80": 0.36,
+    "base_travel_mode": "constant",
+    "contrast_mode": "tanh",
+    "contrast_cap": 20.0
+  },
+  "dimensionless_factors": {
+    "fixed": "1",
+    "minus_linear": "1-Q",
+    "minus_rational": "1/(1+Q)",
+    "minus_even": "sqrt(1-Q^2)",
+    "plus_even": "sqrt(1+Q^2)",
+    "plus_linear": "1+Q"
+  },
+  "variants": [
+    {"variant_id": "fixed_support", "family": "baseline", "width_law": "fixed", "return_law": "fixed", "travel_mode": "constant"},
+    {"variant_id": "width_minus_linear", "family": "width", "width_law": "minus_linear", "return_law": "fixed", "travel_mode": "constant"},
+    {"variant_id": "width_minus_rational", "family": "width", "width_law": "minus_rational", "return_law": "fixed", "travel_mode": "constant"},
+    {"variant_id": "width_minus_even", "family": "width", "width_law": "minus_even", "return_law": "fixed", "travel_mode": "constant"},
+    {"variant_id": "width_plus_even", "family": "width", "width_law": "plus_even", "return_law": "fixed", "travel_mode": "constant"},
+    {"variant_id": "width_plus_linear", "family": "width", "width_law": "plus_linear", "return_law": "fixed", "travel_mode": "constant"},
+    {"variant_id": "return_minus_linear", "family": "return_length", "width_law": "fixed", "return_law": "minus_linear", "travel_mode": "constant"},
+    {"variant_id": "return_minus_rational", "family": "return_length", "width_law": "fixed", "return_law": "minus_rational", "travel_mode": "constant"},
+    {"variant_id": "return_minus_even", "family": "return_length", "width_law": "fixed", "return_law": "minus_even", "travel_mode": "constant"},
+    {"variant_id": "return_plus_even", "family": "return_length", "width_law": "fixed", "return_law": "plus_even", "travel_mode": "constant"},
+    {"variant_id": "return_plus_linear", "family": "return_length", "width_law": "fixed", "return_law": "plus_linear", "travel_mode": "constant"},
+    {"variant_id": "phase_hard_no_cross", "family": "center_crossing", "width_law": "fixed", "return_law": "fixed", "travel_mode": "hard_no_cross"},
+    {"variant_id": "phase_tanh_no_cross", "family": "center_crossing", "width_law": "fixed", "return_law": "fixed", "travel_mode": "tanh_no_cross"},
+    {"variant_id": "phase_rational_no_cross", "family": "center_crossing", "width_law": "fixed", "return_law": "fixed", "travel_mode": "rational_no_cross"},
+    {"variant_id": "joint_rational_narrow", "family": "joint", "width_law": "minus_rational", "return_law": "minus_rational", "travel_mode": "constant"},
+    {"variant_id": "joint_even_narrow", "family": "joint", "width_law": "minus_even", "return_law": "minus_even", "travel_mode": "constant"},
+    {"variant_id": "joint_even_wide", "family": "joint", "width_law": "plus_even", "return_law": "plus_even", "travel_mode": "constant"},
+    {"variant_id": "joint_width_narrow_return_wide", "family": "joint", "width_law": "minus_rational", "return_law": "plus_even", "travel_mode": "constant"},
+    {"variant_id": "joint_width_wide_return_narrow", "family": "joint", "width_law": "plus_even", "return_law": "minus_rational", "travel_mode": "constant"}
+  ],
+  "inputs": {
+    "P0615_protocol": "configs/p0615_self_coupled_quadrupole_route_protocol.json",
+    "P0615_report": "results/p0615_self_coupled_quadrupole_route/report.json",
+    "P0616_report": "results/p0616_frozen_self_coupled_transfer/report.json"
+  },
+  "gates": {
+    "combined_heldout_roots_required": 18,
+    "systems_not_worse_required": 5,
+    "galaxy_RMSE_to_fixed_RAR_max": 1.5,
+    "Solar_all_proxies_required": true
+  },
+  "outputs": {
+    "directory": "results/p0617_self_coupled_support_phase_atlas",
+    "scores": "scores.csv",
+    "summary_scores": "summary_scores.csv",
+    "variant_responses": "variant_responses.csv",
+    "family_impacts": "family_impacts.csv",
+    "residual_alignment": "residual_alignment.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "figure": "p0617_self_coupled_support_phase_atlas.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "All five lens systems and the Q-based laws are project-spent; this is a sensitivity atlas, not validation.",
+    "Lens geometry and source positions are frozen, so the atlas measures local field response rather than a full refit comparison.",
+    "The member-light catalog omits hot gas, diffuse intracluster light, contamination corrections, and stellar mass-to-light variation.",
+    "Galaxy and Solar scores are inherited because the angular route is defined to vanish for an axisymmetric disk and a point source.",
+    "No atlas winner can be promoted without a chronologically frozen full-refit transfer."
+  ]
+}

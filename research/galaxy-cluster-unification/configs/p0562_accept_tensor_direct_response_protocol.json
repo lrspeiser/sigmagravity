@@ -1,0 +1,60 @@
+{
+  "protocol_version": "P0562-ACCEPT-TENSOR-DIRECT-RESPONSE-0.1.0",
+  "frozen_utc": "2026-08-01T01:10:00Z",
+  "status": "frozen_before_any_direct_observed_image_response_score",
+  "question": "After removing inverse-root and geometry-refit changes, does the physical tensor point consistently toward lower held-out image residuals?",
+  "interpretation": "first-order observed-image response diagnostic on spent systems; not a predictive formula score",
+  "locked_map": {
+    "gas_normalization": "accept_absolute",
+    "gas_power": 0.5,
+    "include_stars": true,
+    "operator": "contrast",
+    "softening_kpc": 20.0,
+    "pixels_per_axis": 512,
+    "new_map_parameters": 0,
+    "per_cluster_parameters": 0
+  },
+  "baseline_fit": {
+    "coupling": 0.0,
+    "starts_per_seed_ensemble": 12,
+    "seed_ensembles": [20260736, 20261736],
+    "maximum_function_evaluations": 2000,
+    "rule": "fit zero-field geometry on training images; hold its six geometry parameters fixed over the entire response grid"
+  },
+  "response_grid": {
+    "minimum_coupling": -6.0,
+    "maximum_coupling": 6.0,
+    "step": 0.25,
+    "near_zero_pair": [-0.25, 0.25],
+    "source_rule": "reprofile source positions from training images at each t; apply those sources unchanged to held-out images",
+    "metric": "Jacobian-mapped local image-plane RMS at the observed positions; no inverse lens root is requested"
+  },
+  "ellipticity": {
+    "minimum_eigenvalue": 0.05,
+    "rule": "require 1-|t| max|Q| > 0.05 for every map"
+  },
+  "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+  "inputs": {
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "p0557_protocol": "configs/p0557_baryon_proxy_tidal_protocol.json",
+    "member_tidal_protocol": "configs/member_tidal_metric_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0562_accept_tensor_direct_response",
+    "geometry_ensembles": "geometry_ensembles.csv",
+    "response_scores": "response_scores.csv",
+    "aggregate_response": "aggregate_response.csv",
+    "per_system_summary": "per_system_summary.csv",
+    "tensor_audits": "tensor_audits.csv",
+    "report": "report.json",
+    "figure": "p0562_accept_tensor_direct_response.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The statistic is a local observed-image response and is not an exact inverse-lens prediction.",
+    "All systems and the response range are spent; this is not independent validation.",
+    "Holding lens geometry fixed isolates tensor direction but omits legitimate joint-parameter covariance.",
+    "Agreement across two optimizer seed ensembles is a stability diagnostic, not a population test.",
+    "No formula can be promoted from P0562."
+  ]
+}

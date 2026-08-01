@@ -1,0 +1,5 @@
+system_label,variant_id,effective_strength,training_images,heldout_images,training_RMS_arcsec,training_roots_converged,heldout_RMS_arcsec,heldout_roots_converged,optimizer_cost
+A383,P0554_scalar_control,0.0,10,4,0.8493722230188442,10,9.096624055914212,4,17.492203800701468
+A383,P0615_quadratic_self_route,0.017784238307423126,10,4,0.853238686311762,10,9.136824083945461,4,17.538002974657516
+MS2137,P0554_scalar_control,0.0,8,3,inf,7,inf,2,324.4971022749735
+MS2137,P0615_quadratic_self_route,0.0408345852627951,8,3,inf,7,inf,2,324.7253386914617

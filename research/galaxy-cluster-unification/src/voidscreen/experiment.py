@@ -31,6 +31,8 @@ class ExperimentSettings:
     velocity_error_floor_kms: float = 2.0
     rar_acceleration_m_s2: float = 1.2e-10
     hubble_km_s_mpc: float = 70.0
+    sigma_response_amplitude: float = 1.1725
+    sigma_g_dagger_m_s2: float = 9.6e-11
     learning_rate: float = 0.03
     steps: int = 5000
 
@@ -310,6 +312,8 @@ def run_experiment(
         log_ml_prior_sigma=settings.log_mass_to_light_prior_sigma,
         rar_acceleration_m_s2=settings.rar_acceleration_m_s2,
         hubble_km_s_mpc=settings.hubble_km_s_mpc,
+        sigma_response_amplitude=settings.sigma_response_amplitude,
+        sigma_g_dagger_m_s2=settings.sigma_g_dagger_m_s2,
         fixed_flat_power=fixed_flat_power,
         environment_enabled=environment_enabled,
         boundary_layer_enabled=boundary_layer_enabled,

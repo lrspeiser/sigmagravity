@@ -1,0 +1,84 @@
+{
+  "protocol_version": "P0607-COMPONENT-DIRECTION-RAW-LENSING-0.1.0",
+  "frozen_utc": "2026-08-01T23:05:00Z",
+  "status": "frozen_after_component_mass_readiness_audit_before_any_P0607_score",
+  "question": "If apparent halo gravity is baryonic gravity redirected through the cluster, do discrete galaxies, continuous starlight, or hot-gas morphology supply the direction that best predicts raw RX J2129 multiple-image positions?",
+  "field_law": {
+    "radial_parent": "P0599 bounded potential-shape field",
+    "carrier": "P0599 deflection minus baryons-only GR deflection",
+    "route_map": "Move a normalized copy of each member launch weight by L=0.25 R80 along an observed component-attraction direction and smooth the landing map by w=0.50 R80",
+    "angular_correction": "alpha=alpha_P0599+s_theta*grad[inverse_laplacian(2*delta_kappa_component)]",
+    "monopole_rule": "Remove the convergence mean in every one-arcsecond annulus and independently subtract the circular radial-deflection mean",
+    "axisymmetric_gate": "This angular layer is defined to be zero for a one-source Solar field and for the one-dimensional axisymmetric SPARC profiles",
+    "absolute_mass_limit": "F160W and Chandra maps choose direction only; neither flux nor X-ray count rate is treated as an absolute mass"
+  },
+  "route_geometry": {
+    "routing_fraction_inside_unit_template": 1.0,
+    "length_over_R80": 0.25,
+    "width_over_R80": 0.5,
+    "radius_exponent": 0.0,
+    "source_weight_power": 1.0,
+    "direction_softening_kpc": 200.0,
+    "direction_distance_power": 2.0,
+    "contrast_cap": 20.0,
+    "annulus_width_arcsec": 1.0,
+    "taper_inner_arcsec": 180.0,
+    "support_radius_arcsec": 220.0
+  },
+  "component_directions": [
+    {"component_id": "members", "definition": "pairwise attraction toward discrete hard photometric members"},
+    {"component_id": "stars", "definition": "attraction toward registered HST F160W positive light"},
+    {"component_id": "gas", "definition": "attraction toward registered point-source-masked Chandra 0.7-2.0 keV morphology"},
+    {"component_id": "stars_gas_050", "definition": "unit-vector blend of 50% starlight and 50% gas direction"},
+    {"component_id": "members_all_050", "definition": "50% member direction plus 50% of an equal starlight/gas direction blend"}
+  ],
+  "effective_angular_strength_grid": [-0.02, -0.01, -0.005, 0.0025, 0.005, 0.01, 0.02, 0.05],
+  "selection": {
+    "screen_geometry": "frozen 16-start P0601 P0599 geometry",
+    "screen_source_positions": "profiled on the 15 training images separately for every component/amplitude",
+    "screen_metric": "exact lens-equation root RMS at fixed geometry",
+    "positive_candidate": "lowest training RMS among s_theta>0 candidates with all 15 training roots",
+    "signed_control": "lowest training RMS among s_theta<0 candidates with all 15 training roots",
+    "spent_heldout_used_for_selection": false,
+    "selected_exact_refit_starts": 8,
+    "random_seed": 21292037
+  },
+  "inputs": {
+    "raw_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "P0601_protocol": "configs/p0601_frozen_potential_raw_lensing_protocol.json",
+    "P0601_parameters": "results/p0601_frozen_potential_raw_lensing/fitted_parameters.csv",
+    "P0601_report": "results/p0601_frozen_potential_raw_lensing/report.json",
+    "route_source_protocol": "configs/adaptive_route_raw_rxj2129_protocol.json",
+    "component_screen_protocol": "configs/p0554_all_baryon_route_screen_protocol.json",
+    "component_acquisition_protocol": "configs/p0554_all_baryon_route_acquisition_protocol.json",
+    "reused_hst_protocol": "configs/clash_stellar_morphology_acquisition_protocol.json",
+    "component_input_audit": "results/p0554_all_baryon_route_input_audit/report.json"
+  },
+  "cross_domain_controls": {
+    "galaxy_outer_equal_RMSE_km_s": 10.883031245894068,
+    "galaxy_reference": "P0599; angular component layer is exactly absent on catalogued axisymmetric profiles",
+    "cluster_radial_equal_RMSE_dex": 0.11960216849884784,
+    "Solar_change": 0.0,
+    "Solar_reference": "P0599 Solar proxies pass; a one-source angular route is identically absent"
+  },
+  "outputs": {
+    "directory": "results/p0607_component_direction_raw_lensing",
+    "component_audits": "component_audits.csv",
+    "screen_scores": "screen_scores.csv",
+    "screen_predictions": "screen_predictions.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "refit_scores": "refit_scores.csv",
+    "refit_predictions": "refit_predictions.csv",
+    "report": "report.json",
+    "figure": "p0607_component_direction_raw_lensing.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "Every RX J2129 image is spent; training-only selection prevents direct leakage but does not make the held-out result fresh.",
+    "F160W traces light rather than stellar mass and Chandra brightness traces emissivity rather than gas mass.",
+    "The component maps set only route direction; the angular strength grid is a post-audit mechanism bracket, not a fitted universal constant.",
+    "The raw lens model still refits six ordinary pseudo-elliptical geometry and shear parameters.",
+    "A projected thin-lens correction cannot determine the hidden height or time history of a gravity arc.",
+    "A favorable RX J2129 component must transfer unchanged to a different raw cluster before it can be treated as evidence."
+  ]
+}

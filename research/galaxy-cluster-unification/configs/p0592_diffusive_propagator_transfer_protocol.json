@@ -1,0 +1,52 @@
+{
+  "protocol_version": "P0592-DIFFUSIVE-PROPAGATOR-TRANSFER-0.1.0",
+  "frozen_utc": "2026-08-01T09:10:00Z",
+  "status": "frozen_after_MACS0416_gaussian_survivor_before_ten_cluster_scores",
+  "question": "Does a conservative distribution of return-path lengths, represented by one universal baryon-size-scaled diffusion kernel, improve apparent lensing morphology across ten clusters and transfer to three cluster holdouts?",
+  "formula": {
+    "evolution": "partial_s D=(ell^2/2)*laplacian(D)",
+    "endpoint": "D=exp[(ell^2/2)*laplacian] B = G_ell convolved with B",
+    "prediction": "Sigma_pred=(1-f)*B_20+f*D",
+    "universal_length": "ell=q*R80_b, with one dimensionless q for every cluster",
+    "conservation": "B_20 and D are separately positive and unit normalized inside 250 kpc",
+    "backtracking": "P(origin i|destination d) proportional to w_i*exp[-|d-x_i|^2/(2*ell^2)]"
+  },
+  "data": {
+    "p0568_protocol": "configs/p0568_baryon_only_tensor_forward_protocol.json",
+    "p0567_protocol": "configs/p0567_baryon_flux_tensor_backtrack_protocol.json",
+    "p0567_peaks": "results/p0567_baryon_flux_tensor_backtrack/peak_backtracks.csv",
+    "development_systems": ["A2163", "A3192", "ACT-CL J0102-4915", "CL J0152.7-1357", "MACS J0035.4-2015", "MACS J0257.1-2325", "MACS J0553.4-3342"],
+    "holdout_systems": ["RXC J0032.1+1808", "RXC J0142.9+4438", "RXC J0600.1-2007"],
+    "spent_disclosure": "The clusters and split are globally spent by P0568/P0572; P0592 is prospective only to the diffusion formula."
+  },
+  "preprocessing": {"grid_spacing_kpc": 10.0, "base_baryon_smoothing_kpc": 20.0, "score_radius_kpc": 250.0},
+  "factorial": {
+    "q_R80": [0.05, 0.1, 0.2, 0.3, 0.5, 0.75, 1.0, 1.5],
+    "routed_fraction": [0.25, 0.5, 0.75, 1.0],
+    "candidate_count": 32
+  },
+  "selection": "Choose q and f by equal-cluster mean Lenstool-ensemble JSD on seven development systems; transfer unchanged to three holdout systems, all 100 Lenstool realizations, and GLAFIC controls.",
+  "advance_gates": {
+    "holdout_mean_jsd_improvement_fraction_min": 0.1,
+    "holdout_systems_improved_min": 2,
+    "glafic_holdout_improvement_fraction_min": 0.05,
+    "holdout_uncertainty_realizations_improved_fraction_min": 0.7
+  },
+  "outputs": {
+    "directory": "results/p0592_diffusive_propagator_transfer",
+    "candidate_scores": "candidate_scores.csv",
+    "system_scores": "system_scores.csv",
+    "uncertainty": "uncertainty.csv",
+    "glafic_scores": "glafic_scores.csv",
+    "backtracked_peaks": "backtracked_peaks.csv",
+    "report": "report.json",
+    "figure": "p0592_diffusive_propagator_transfer.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The ten-cluster baryon proxy is member F160W light and omits hot gas, ICL, and stellar mass-to-light variation; MACS J0416 showed that gas can dominate the source field.",
+    "The target maps are standard-GR convergence reconstructions and reuse observations across methods.",
+    "Diffusion is an endpoint propagator, not yet a covariant causal field theory; it does not specify propagation time, signal speed, or the hidden coordinate.",
+    "A Gaussian endpoint can describe many mechanisms besides curved gravity paths, so transfer is necessary but not sufficient evidence."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "protocol_version": "REOPENED-HYBRID-MEMORY-CARRIER-SLOPE-NEUTRAL-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-07-31T20:10:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Test whether a carrier that is nearly radially neutral for the measured CLASH slope can preserve cluster lens roots while retaining differential outward weighting for steeper SPARC profiles.",
+  "source_protocol": "configs/reopened_hybrid_memory_carrier_protocol.json",
+  "source_report": "results/reopened_hybrid_memory_carrier/report.json",
+  "selected_variants": [
+    "dual_pminus1_radius:radial_memory_radius_power=-0.5",
+    "dual_pminus1_radius:radial_memory_radius_power=0",
+    "dual_pminus1_radius:radial_memory_radius_power=0.5",
+    "dual_gbar_power:radial_memory_gbar_power=-0.5"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_memory_carrier_slope_neutral_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_memory_carrier_slope_neutral_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_memory_carrier_slope_neutral_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_memory_carrier_slope_neutral_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_memory_carrier_slope_neutral_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "This is a deeper numerical replay of four already bridge-fitted settings selected after the measured slope audit.",
+    "Universal gravity parameters and transport powers remain fixed; raw lensing fits only common lens geometry, shear, center, and source positions.",
+    "The p=-1 q=-0.5 setting is approximately neutral only for the median measured CLASH log slope, not for every cluster radius or system.",
+    "A recovered or missing held-out root is an empirical result of the current pseudo-elliptical zero-slip lens closure, not a statement about every possible covariant completion.",
+    "The replay is a sensitivity and root-topology test, not an independent holdout."
+  ]
+}

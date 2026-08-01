@@ -1,0 +1,117 @@
+{
+  "protocol_version": "ONE-PARAMETER-MULTICLUSTER-LENS-0.1.0",
+  "frozen_utc": "2026-07-30T01:35:00Z",
+  "status": "frozen_before_one_parameter_scores",
+  "question": "What is the strongest raw multi-cluster lens law obtainable with exactly one universal fitted gravity parameter and no per-cluster force amplitude?",
+  "parameter_policy": {
+    "universal_fitted_gravity_parameters": 1,
+    "per_cluster_gravity_or_lensing_amplitudes": 0,
+    "allowed_fixed_constants": ["G", "c", "a0=1.2e-10 m/s^2", "reference_radius=200 kpc"],
+    "geometry_nuisances": "axis ratio, orientation, center, external shear, and source positions are fit independently on each cluster's training images",
+    "disallowed": ["per-cluster force scale", "per-cluster transition radius", "lensing multiplier", "post-validation formula choice"]
+  },
+  "selection_design": {
+    "development_clusters": ["MACS0329", "MACS0429"],
+    "cluster_holdouts": ["MACS1115", "MACS1931"],
+    "stress_only": ["RXJ1347", "RXJ2129"],
+    "within_family_holdout": "lexicographically last image in every source family with at least three images",
+    "primary_selection_metric": "minimum equal-system exact held-out radial RMS across the two development clusters, requiring every held-out root",
+    "tie_break": "fewer boundary geometry values, then smaller normalized parameter distance from the nested baryons value, then alphabetical family",
+    "adaptive_refinement": "refine only the winning coarse family between its adjacent grid values using nine deterministic points; development images only",
+    "disclosure": "All four catalogs were used by prior project analyses. This is a frozen replay holdout, not an untouched external validation."
+  },
+  "families": {
+    "constant_boost": {
+      "equation": "g=lambda*gbar",
+      "parameter": "lambda",
+      "nested_baryons_value": 1.0,
+      "grid": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 10.0, 12.0, 16.0, 20.0]
+    },
+    "mass_isothermal_tail": {
+      "equation": "g=gbar+lambda*gbar(200 kpc)*(200 kpc/r)",
+      "parameter": "lambda",
+      "nested_baryons_value": 0.0,
+      "grid": [0.0, 0.25, 0.5, 1.0, 2.0, 3.0, 4.0, 6.0, 8.0, 12.0, 16.0]
+    },
+    "mond_isothermal_tail": {
+      "equation": "g=gbar+lambda*sqrt(a0*gbar)",
+      "parameter": "lambda",
+      "nested_baryons_value": 0.0,
+      "grid": [0.0, 0.25, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0, 6.0, 8.0, 10.0]
+    },
+    "rar_acceleration_scale": {
+      "equation": "g/gbar=[1-exp(-sqrt(gbar/(lambda*a0)))]^-1",
+      "parameter": "lambda=a_eff/a0",
+      "nested_baryons_value": 0.0,
+      "grid": [0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0, 300.0, 1000.0]
+    },
+    "scaled_rar_extra": {
+      "equation": "g=gbar+lambda*(g_RAR-gbar)",
+      "parameter": "lambda",
+      "nested_baryons_value": 0.0,
+      "grid": [0.0, 0.5, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 10.0, 12.0]
+    },
+    "constant_acceleration": {
+      "equation": "g=gbar+lambda*a0",
+      "parameter": "lambda",
+      "nested_baryons_value": 0.0,
+      "grid": [0.0, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0, 300.0, 1000.0]
+    },
+    "harmonic_tide": {
+      "equation": "g=gbar+lambda*a0*(r/200 kpc)",
+      "parameter": "lambda",
+      "nested_baryons_value": 0.0,
+      "grid": [0.0, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0]
+    },
+    "rar_transition_power": {
+      "equation": "g=gbar*[1+(a0/gbar)^p]^(1/(2p))",
+      "parameter": "p",
+      "nested_baryons_value": 1000000.0,
+      "grid": [0.1, 0.2, 0.3, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 5.0, 10.0]
+    }
+  },
+  "field": {
+    "a0_m_s2": 1.2e-10,
+    "reference_radius_kpc": 200.0,
+    "maximum_radius_kpc": 3000.0,
+    "outer_baryonic_slope": -2.0,
+    "gravitational_slip": 0.0,
+    "lensing_multiplier": 1.0
+  },
+  "optimization": {
+    "starts_per_coarse_point": 3,
+    "starts_per_refined_point": 5,
+    "starts_final_validation": 8,
+    "maximum_function_evaluations": 2500,
+    "random_seed": 20260812
+  },
+  "comparators": {
+    "baryons_GR": "same validation clusters and held-out images",
+    "fixed_simple_MOND": "same validation clusters and held-out images",
+    "fixed_RAR_zero_slip": "same validation clusters and held-out images",
+    "GR_plus_compact_cluster_halo": "same validation clusters and held-out images; object-specific halo parameters"
+  },
+  "advance_gates": {
+    "all_validation_roots_converged": true,
+    "validation_equal_system_RMS_arcsec_max": 2.0,
+    "compact_halo_RMS_ratio_max": 1.25,
+    "both_validation_clusters_improve_over_baryons": true,
+    "selected_parameter_not_coarse_or_refined_boundary": true
+  },
+  "inputs": {
+    "base_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "base_report": "results/unbounded_running_multicluster_raw/report.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat"
+  },
+  "outputs": {
+    "report": "results/one_parameter_multicluster_lens/report.json",
+    "coarse_grid": "results/one_parameter_multicluster_lens/coarse_grid.csv",
+    "refined_grid": "results/one_parameter_multicluster_lens/refined_grid.csv",
+    "predictions": "results/one_parameter_multicluster_lens/predictions.csv",
+    "geometry": "results/one_parameter_multicluster_lens/geometry.csv",
+    "radial_profiles": "results/one_parameter_multicluster_lens/radial_profiles.csv",
+    "figure": "results/one_parameter_multicluster_lens/one_parameter_multicluster_lens.png",
+    "summary": "results/one_parameter_multicluster_lens/SUMMARY.md"
+  }
+}

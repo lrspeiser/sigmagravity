@@ -1,0 +1,80 @@
+{
+  "protocol_version": "P0571-APPARENT-PEAK-BARYON-INVARIANT-0.1.0",
+  "frozen_utc": "2026-08-01T04:20:00Z",
+  "status": "frozen_before_apparent_peak_invariant_scores",
+  "question": "Do apparent-dark residual peaks occupy baryon-only vector-cancellation, incoherence, or tidal-saddle environments more often than same-radius control locations, and does one invariant transfer to held-out clusters and a second lens reconstruction?",
+  "field_motivation": {
+    "source_vectors": "g_i(x)=w_i^gamma*(x_i-x)/(|x_i-x|^2+s^2)^((p+1)/2)",
+    "coherence": "C=|sum_i g_i|/sum_i|g_i|",
+    "candidate_activation": "S_b=1-C or another frozen baryon-only invariant if it survives validation",
+    "interpretation": "A stable low-coherence or saddle preference would identify where a baryon-sourced response might accumulate; it would not prove that gravity follows a path or that the standard convergence map is theory-neutral."
+  },
+  "data": {
+    "primary_peaks": "P0567 Lenstool-ensemble positive residual peaks in ten fresh RELICS systems",
+    "development_systems": ["A2163", "A3192", "ACT-CL J0102-4915", "CL J0152.7-1357", "MACS J0035.4-2015", "MACS J0257.1-2325", "MACS J0553.4-3342"],
+    "validation_systems": ["RXC J0032.1+1808", "RXC J0142.9+4438", "RXC J0600.1-2007"],
+    "method_control": "P0567 GLAFIC-best positive residual peaks",
+    "spent_disclosure": "The peak catalog and systems were inspected in P0567; the invariant definitions and gates are frozen before calculating their scores."
+  },
+  "factorial": {
+    "force_exponent_p": [1.0, 1.5, 2.0, 2.5, 3.0],
+    "softening_kpc": [10.0, 20.0, 50.0, 100.0],
+    "source_weight_power_gamma": [0.0, 0.5, 1.0],
+    "features": [
+      "vector_cancellation",
+      "radial_misalignment",
+      "transverse_fraction",
+      "log_effective_sources",
+      "tidal_balance",
+      "log_tidal_norm",
+      "log_local_density",
+      "log_nearest_distance"
+    ],
+    "same_radius_rotations": 71,
+    "rotation_step_degrees": 5.0,
+    "candidate_count": 480
+  },
+  "selection_and_validation": {
+    "per_peak_score": "midrank percentile of the real peak among 71 locations rotated by 5 through 355 degrees at the same cluster-centric radius",
+    "development_score": "absolute equal-system mean of percentile minus 0.5; the development sign is frozen as high or low",
+    "multiple_search_control": "256 deterministic pseudo-peak trials choose one same-radius rotation per development system and record the largest absolute score across all 480 candidates",
+    "validation_score": "development-signed equal-system mean centered percentile on the three different validation systems",
+    "method_score": "development-signed equal-system centered percentile for independently reconstructed GLAFIC peaks",
+    "forward_rule": "Run a separately frozen forward activation test only if every advance gate passes."
+  },
+  "advance_gates": {
+    "development_absolute_effect_min": 0.15,
+    "max_search_empirical_p_max": 0.10,
+    "validation_signed_effect_min": 0.10,
+    "validation_systems_same_direction_min": 2,
+    "method_control_signed_effect_min": 0.05,
+    "require_axisymmetric_and_solar_null": true
+  },
+  "cross_domain": {
+    "isolated_source": "For a centered point source, vector cancellation, radial misalignment, and transverse fraction are exactly zero.",
+    "axisymmetric_galaxy": "When bound baryonic components are represented by their net axisymmetric fields, those three invariants are exactly zero; this is an angular activation audit, not a standalone galaxy rotation law.",
+    "solar": "The centered point-source limit is exactly zero and therefore adds no Solar force.",
+    "null_safe_features": ["vector_cancellation", "radial_misalignment", "transverse_fraction"]
+  },
+  "inputs": {
+    "p0567_protocol": "configs/p0567_baryon_flux_tensor_backtrack_protocol.json",
+    "p0567_peaks": "results/p0567_baryon_flux_tensor_backtrack/peak_backtracks.csv"
+  },
+  "outputs": {
+    "directory": "results/p0571_apparent_peak_baryon_invariant",
+    "candidate_scores": "candidate_scores.csv",
+    "peak_scores": "peak_scores.csv",
+    "null_maxima": "null_maxima.csv",
+    "report": "report.json",
+    "figure": "p0571_apparent_peak_baryon_invariant.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The apparent-dark peaks come from standard-GR parametric convergence reconstructions, not direct dark-matter detections or raw lensing observables.",
+    "The baryon proxy contains photometric member light but omits hot gas, intracluster light, and mass-to-light variation.",
+    "Member-level vector coherence depends on the chosen physical coarse-graining; it is not defined by microscopic particles.",
+    "Same-radius rotations control cluster-centric radius but do not reproduce every selection effect of peak finding.",
+    "Twenty-five primary peaks across ten systems provide limited validation power.",
+    "A correlation identifies a possible activation coordinate, not a gravity field equation or an explanation of galaxy rotation."
+  ]
+}

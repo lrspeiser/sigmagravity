@@ -1,0 +1,102 @@
+{
+  "protocol_version": "ADAPTIVE-ROUTE-KERNEL-0.1.0",
+  "frozen_utc": "2026-08-01T05:10:00Z",
+  "status": "frozen_before_extent_adaptive_forward_map_scores",
+  "question": "Can a conservative center-return kernel whose strength or geometry depends on baryonic extent transfer across clusters better than a fixed return law?",
+  "physical_rule": {
+    "extra_field_only": "The ordinary local baryonic field remains local; the kernel redistributes only the scalar parent's excess response.",
+    "routing_fraction": "f=h_multi^p*logistic(logit(f0)+beta*z_extent)",
+    "return_scale": "L=L0*(R50/150 kpc)^delta",
+    "landing_width": "w=w0*((R50/R80)/0.65)^omega",
+    "multiplicity_gate": "h_multi=1-sum_i(weight_i^2)",
+    "extent_coordinates": {
+      "r50": "log(R50/150 kpc)/0.35",
+      "concentration": "log((R50/R80)/0.65)/0.25",
+      "combined": "mean of r50 and concentration coordinates"
+    },
+    "fixed_member_radius_exponent": -0.5,
+    "landing_mode": "endpoint"
+  },
+  "inputs": {
+    "acquisition_protocol": "configs/gravity_arc_fresh_sample_protocol.json",
+    "analysis_protocol": "configs/gravity_arc_fresh_analysis_protocol.json",
+    "sources": "results/gravity_arc_fresh_sample_input_audit/sources.csv",
+    "systems": "results/gravity_arc_fresh_sample_input_audit/systems.csv",
+    "morphology": "results/gravity_arc_fresh_sample/source_morphology.csv",
+    "inverse_driver_report": "results/gravity_flow_inverse/driver_report.json",
+    "scalar_parent_scores": "results/arc_invariant_pareto_refinement/variant_scores.csv"
+  },
+  "baseline": {
+    "feature": "none",
+    "base_fraction": 0.5,
+    "extent_slope": 0.0,
+    "base_length_kpc": 250.0,
+    "length_power": 0.0,
+    "base_width_kpc": 50.0,
+    "width_power": 0.0,
+    "gate_power": 0.0,
+    "source_weight_power": 1.0
+  },
+  "one_at_a_time": {
+    "base_fraction": [0.4, 0.45, 0.55, 0.6],
+    "extent_features": ["r50", "concentration", "combined"],
+    "extent_slope": [-2.0, -1.0, -0.5, 0.5, 1.0, 2.0],
+    "base_length_kpc": [200.0, 225.0, 275.0, 300.0],
+    "length_power": [-1.0, -0.5, 0.5, 1.0],
+    "base_width_kpc": [40.0, 45.0, 55.0, 60.0],
+    "width_power": [-1.0, -0.5, 0.5, 1.0],
+    "gate_power": [1.0, 2.0, 4.0],
+    "source_weight_power": [0.5, 0.75, 1.25, 1.5],
+    "landing_mode": ["tube"]
+  },
+  "interaction_grid": {
+    "feature": ["r50", "concentration", "combined"],
+    "base_fraction": [0.45, 0.5, 0.55],
+    "extent_slope": [0.5, 1.0, 2.0],
+    "length_power": [-0.5, 0.0, 0.5],
+    "base_width_kpc": [50.0, 60.0],
+    "gate_power": [0.0, 2.0],
+    "fixed": {
+      "base_length_kpc": 250.0,
+      "width_power": 0.0,
+      "source_weight_power": 1.0,
+      "landing_mode": "endpoint"
+    }
+  },
+  "validation": {
+    "selection": "For each held-out cluster, select one candidate by lowest equal-cluster mean Lenstool JS on the other nine clusters only.",
+    "independent_method": "Score that same selected candidate on the held-out GLAFIC map without method-specific selection.",
+    "comparators": ["C0351", "W060", "LOCAL75", "CENTRAL100"],
+    "primary_gate": {
+      "median_LOOCV_improvement_over_C0351": 0.0,
+      "clusters_better_than_C0351": 6,
+      "same_sign_improvement_between_methods": 7
+    },
+    "claim_status": "exploratory nested transfer because the extent features were discovered post hoc in these ten systems"
+  },
+  "cross_domain_controls": {
+    "scalar_parent": "P0554",
+    "galaxy_and_solar_rule": "The adaptive operator redistributes only scalar excess and collapses to the local source for a single centered component; inherit the scalar parent's already measured galaxy and Solar scores.",
+    "raw_RXJ2129_followup": "Only advance the all-cluster selected kernel if it improves the LOOCV primary median and wins at least six clusters."
+  },
+  "outputs": {
+    "directory": "results/adaptive_route_kernel",
+    "candidate_specs": "candidate_specs.csv",
+    "realized_parameters": "realized_parameters.csv",
+    "scores": "scores.csv",
+    "comparators": "comparator_scores.csv",
+    "loocv": "loocv_predictions.csv",
+    "one_at_a_time_impacts": "one_at_a_time_impacts.csv",
+    "interaction_impacts": "interaction_parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "adaptive_route_kernel.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The extent features were proposed after inspecting inverse paths in the same ten clusters, so LOOCV reduces formula tuning but is not an untouched confirmation.",
+    "Lenstool and GLAFIC convergence maps are standard-GR reconstruction products, not raw lensing likelihoods.",
+    "F160W member light omits hot gas and does not provide a complete baryonic mass map.",
+    "Normalized morphology cannot determine the absolute scalar field multiplier.",
+    "The route kernel is a weak-field phenomenology and not a covariant theory."
+  ]
+}

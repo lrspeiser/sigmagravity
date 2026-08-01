@@ -1,0 +1,100 @@
+{
+  "protocol_version": "R1-J1402-Dinos-C1-interface-correction-0.1",
+  "status": "frozen_after_initial_structural_gate_failure_before_software_install_or_forward_model_evaluation",
+  "frozen_utc": "2026-07-27T15:25:00Z",
+  "parent_protocol": "configs/r1_j1402_dinos_coordinate_replay_protocol.json",
+  "initial_failed_report": "results/r1_j1402_dinos_coordinate_audit/report.json",
+  "science_fit_seen_before_correction": false,
+  "forward_model_seen_before_correction": false,
+  "lens_response_seen_before_correction": false,
+  "reason_for_correction": "The initial gate encoded two storage-level assumptions that contradict the exact released Dolphin/lenstronomy interfaces. This addendum changes only those two interface invariants; it does not change any likelihood, predictive, rank, stability, held-out, injection, or negative-control threshold.",
+  "mask_correction": {
+    "initial_incorrect_invariant": "the standalone F435W mask HDF5 must equal the settings custom_mask bit-for-bit",
+    "observed_storage_relation": "the standalone 120x120 mask is exactly one minus the reshaped first-band custom_mask: 91 ones versus 91 zeros, with zero disagreeing pixels after complement",
+    "released_Dolphin_evidence": {
+      "repository": "https://github.com/ajshajib/dolphin",
+      "commit": "1593c573541d26ae5791835430c68858988a969b",
+      "file": "dolphin/processor/config.py",
+      "blob_sha1": "f329ac8cd464a024dffaba35ba016cf7b26f027b",
+      "semantics": "ModelConfig.get_masks constructs the operative likelihood mask from coordinates and multiplies it directly by the flattened settings custom_mask before array2image; it never reads the standalone mask HDF5"
+    },
+    "corrected_invariants": [
+      "the standalone F435W mask equals one minus reshape(settings custom_mask[0]) bit-for-bit",
+      "the operative likelihood mask is reconstructed only by the locked ModelConfig.get_masks implementation",
+      "the standalone mask cannot replace, invert, or modify the generated likelihood mask"
+    ]
+  },
+  "PSF_correction": {
+    "initial_incorrect_invariant": "each raw released PSF stamp must already sum to one within 1e-6",
+    "observed_raw_sums": {
+      "F435W": 0.9840983446555924,
+      "F555W": 0.9809816939890652,
+      "F814W": 0.9747153546421714
+    },
+    "released_lenstronomy_evidence": {
+      "repository": "https://github.com/lenstronomy/lenstronomy",
+      "tag": "v1.11.5",
+      "file": "lenstronomy/Data/psf.py",
+      "blob_sha1": "8f4c6f95c089eafa46a61b56413b7b5214be38f3",
+      "semantics": "PSF(..., kernel_point_source_normalisation=True) is the default and divides the pixel kernel by its sum during initialization"
+    },
+    "corrected_invariants": [
+      "each raw PSF is finite, nonnegative, 61x61, odd-sized, and has finite positive total flux",
+      "the locked lenstronomy PSF initializer receives the raw stamp with its default normalization enabled",
+      "the instantiated operative kernel sums to one within 1e-12 and preserves shape"
+    ]
+  },
+  "unchanged_scientific_gates": [
+    "stored likelihood replay tolerance",
+    "masked and held-out predictive chi-square ceilings",
+    "coordinate corruption negative controls",
+    "four-direction nuisance-marginalized lens rank thresholds",
+    "synthetic injection bias and coverage",
+    "three overlapping covariance-bearing KCWI bins"
+  ],
+  "Dolphin_packaging_correction": {
+    "observed_failure": "Installing the locked v0.0.1 source archive as a normal wheel produced dolphin 0.0.0 without dolphin.processor.",
+    "released_source_cause": "The locked setup.py packages list contains only the top-level dolphin package and omits the processor and analysis subpackages.",
+    "Project_Dinos_execution_evidence": "The pinned Project Dinos example notebook imports from dolphin.processor, consistent with running Dolphin from a source checkout rather than the incomplete built wheel.",
+    "corrected_environment_method": "Safely extract the checksum-locked commit archive without modifying it and install that exact root in editable/source-root mode so Python can resolve the released subpackages.",
+    "source_modifications_allowed": false,
+    "forward_model_seen_before_correction": false
+  },
+  "Astropy_compatibility_correction": {
+    "observed_failure": "lenstronomy 1.11.5 imports astropy.cosmology.utils.isiterable, which is absent from the initially resolved Astropy 6.1.7.",
+    "corrected_pin": "astropy==5.3.4",
+    "reason": "Astropy 5.3.4 is a Python 3.10-compatible pre-removal release that supplies the interface required by the locked lenstronomy source.",
+    "forward_model_seen_before_correction": false,
+    "scientific_threshold_changed": false
+  },
+  "candidate_bundle_interface_boundary": {
+    "observed_failure": "The high-level Processor constructor requires a sample-wide lens_list.txt that is not part of the locked single-candidate bundle.",
+    "corrected_audit_method": "Instantiate the exact released ImageData, PSFData, and ModelConfig classes that Processor calls internally, using the locked J1402 paths directly.",
+    "new_science_input_added": false,
+    "forward_model_seen_before_correction": false
+  },
+  "PSF_float32_normalization_correction": {
+    "initial_environment_report": "results/r1_j1402_dinos_environment/report.json",
+    "observed_operative_sums": {
+      "F435W": 0.9999999798891395,
+      "F555W": 1.0000001104951934,
+      "F814W": 1.0000000721005335
+    },
+    "cause": "The locked lenstronomy implementation normalizes the released big-endian float32 kernels in place, so the operative arrays retain float32 rounding.",
+    "superseded_interface_tolerance": 1e-12,
+    "corrected_maximum_absolute_sum_error": 5e-7,
+    "scientific_threshold_changed": false,
+    "forward_model_seen_before_correction": false
+  },
+  "corrected_report": "results/r1_j1402_dinos_coordinate_audit_corrected/report.json",
+  "authorization": {
+    "rerun_only_the_corrected_no_fit_structural_audit": true,
+    "install_locked_environment_after_corrected_gate_pass": true,
+    "evaluate_forward_model_before_environment_gate": false,
+    "compute_lens_response": false,
+    "reduce_KCWI": false,
+    "count_toward_ten_system_target": false,
+    "infer_gravity_response": false,
+    "authorize_R2": false
+  }
+}

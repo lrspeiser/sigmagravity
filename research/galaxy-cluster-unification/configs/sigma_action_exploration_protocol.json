@@ -1,0 +1,65 @@
+{
+  "protocol_version": "SIGMA-ACTION-EXPLORATION-0.1",
+  "date": "2026-07-28",
+  "status": "post-scouting exploratory comparison; exact equations and grid frozen before artifact generation",
+  "design_rule": "Retain the symmetron-like screened Sigma equation and test only compact force laws that descend from a static action and recover a recognized Newtonian, symmetron, or AQUAL limit.",
+  "sigma_equation": "L_Sigma^2 laplacian(Sigma) = (rho_b/rho_s - 1)*Sigma + Sigma^3",
+  "fixed_constants": {
+    "a0_m_s2": 1.2e-10,
+    "Sigma_range": [0.0, 1.0]
+  },
+  "environment_grid": {
+    "log10_rho_s_g_cm3": [-25.5, -25.0, -24.5, -24.0, -23.5],
+    "L_Sigma_kpc": [0.3, 1.0, 3.0, 10.0, 30.0]
+  },
+  "models": {
+    "conformal_symmetron": {
+      "force": "g = g_N + alpha*c^2*Sigma*dSigma/dr",
+      "coupling": "A(Sigma)=exp(alpha*Sigma^2/2)",
+      "log10_alpha": [-8.0, -7.0, -6.0, -5.0, -4.0, -3.0],
+      "photon_closure": "A purely conformal matter coupling does not directly change null paths; no enhanced-lensing claim is assigned."
+    },
+    "sigma_gated_AQUAL": {
+      "mu": "mu = y/(y + lambda*Sigma^2), y=g/a0",
+      "lambda": [0.1, 0.3, 1.0, 3.0, 10.0, 30.0],
+      "limits": "Sigma=0 gives Newton; Sigma=1 and lambda=1 gives the simple AQUAL/MOND interpolation."
+    },
+    "sigma_refracted_AQUAL": {
+      "mu": "mu = (1-eta*Sigma^2)*y/(y + Sigma^2), y=g/a0",
+      "eta": [0.3, 0.6, 0.8, 0.9, 0.97],
+      "limits": "Sigma=0 gives Newton; eta=0 and Sigma=1 gives simple AQUAL; nonzero eta retains one refracted-permittivity factor."
+    }
+  },
+  "tests": {
+    "spherical_galaxy": {
+      "baryons": "Hernquist",
+      "mass_solar": 60000000000.0,
+      "scale_kpc": 3.0,
+      "score_radii_kpc": [5.0, 50.0],
+      "far_slope_radii_kpc": [100.0, 250.0],
+      "comparison_only": "fixed empirical RAR with a0=1.2e-10 m/s^2"
+    },
+    "cluster_transfer": {
+      "system": "RXJ2129",
+      "gbar_gobs_source": "data/raw/clash_tian2020/fig2.dat",
+      "density_source": "results/rar_sharp_coherence_rg_sweep/sample.csv",
+      "warning": "NFW-deprojected derived target; descriptive ranking only."
+    },
+    "raw_lensing": {
+      "candidate": "best joint sigma_refracted_AQUAL row",
+      "closure": "same effective potential for matter and photons, TeVeS-inspired diagnostic",
+      "warning": "Not a covariant completion; RXJ2129 parameter ranking and spent coordinate holdout prevent independence."
+    }
+  },
+  "interpretation_rules": [
+    "Use one universal row for the galaxy and cluster.",
+    "Do not fit a gravity or lensing amplitude to raw image positions.",
+    "Treat the Sigma solution as the leading weak-backreaction environmental field; a fully coupled action is a later derivation.",
+    "Separate action provenance, mathematical limits, empirical closeness, and relativistic completeness."
+  ],
+  "primary_sources": {
+    "symmetron": "https://arxiv.org/abs/1001.4525",
+    "symmetron_galaxy_and_lensing_boundary": "https://arxiv.org/abs/1811.12301",
+    "TeVeS": "https://arxiv.org/abs/astro-ph/0403694"
+  }
+}

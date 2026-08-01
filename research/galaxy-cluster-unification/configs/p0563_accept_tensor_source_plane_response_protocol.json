@@ -1,0 +1,60 @@
+{
+  "protocol_version": "P0563-ACCEPT-TENSOR-SOURCE-PLANE-RESPONSE-0.1.0",
+  "frozen_utc": "2026-08-01T01:45:00Z",
+  "status": "frozen_after_p0562_conditioning_warning_before_any_source_plane_response_score",
+  "question": "Does the physical tensor have a consistent directional response when inverse-Jacobian critical-curve amplification is removed?",
+  "interpretation": "conditioning audit and unweighted source-plane closure diagnostic on spent systems; not an exact image prediction",
+  "locked_map": {
+    "gas_normalization": "accept_absolute",
+    "gas_power": 0.5,
+    "include_stars": true,
+    "operator": "contrast",
+    "softening_kpc": 20.0,
+    "pixels_per_axis": 512,
+    "new_map_parameters": 0,
+    "per_cluster_parameters": 0
+  },
+  "geometry": {
+    "source": "P0562 two frozen zero-field optimizer ensembles",
+    "refit": false,
+    "source_position_rule": "unweighted arithmetic mean of training-image ray-shooting positions within each family",
+    "heldout_rule": "Euclidean source-plane separation of the held-out image from its training-family mean",
+    "reason": "never invert the image-to-source Jacobian, so a critical curve cannot manufacture an arbitrarily large response"
+  },
+  "response_grid": {
+    "minimum_coupling": -6.0,
+    "maximum_coupling": 6.0,
+    "step": 0.25,
+    "near_zero_pair": [-0.25, 0.25]
+  },
+  "ellipticity": {
+    "minimum_eigenvalue": 0.05
+  },
+  "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+  "inputs": {
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "p0557_protocol": "configs/p0557_baryon_proxy_tidal_protocol.json",
+    "member_tidal_protocol": "configs/member_tidal_metric_protocol.json",
+    "p0562_protocol": "configs/p0562_accept_tensor_direct_response_protocol.json",
+    "geometry_ensembles": "results/p0562_accept_tensor_direct_response/geometry_ensembles.csv",
+    "p0562_local_response": "results/p0562_accept_tensor_direct_response/response_scores.csv"
+  },
+  "outputs": {
+    "directory": "results/p0563_accept_tensor_source_plane_response",
+    "response_scores": "response_scores.csv",
+    "aggregate_response": "aggregate_response.csv",
+    "per_system_summary": "per_system_summary.csv",
+    "conditioning_audit": "conditioning_audit.csv",
+    "tensor_audits": "tensor_audits.csv",
+    "report": "report.json",
+    "figure": "p0563_accept_tensor_source_plane_response.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "Source-plane closure is conditioning-robust but is not the final image-plane likelihood.",
+    "The unweighted source estimator is a directional diagnostic, not an error-covariance model.",
+    "The geometry ensembles, systems, and coupling range are spent and provide no independent validation.",
+    "A common response would require confirmation with a stable exact global lens inference.",
+    "No formula can be promoted from P0563."
+  ]
+}

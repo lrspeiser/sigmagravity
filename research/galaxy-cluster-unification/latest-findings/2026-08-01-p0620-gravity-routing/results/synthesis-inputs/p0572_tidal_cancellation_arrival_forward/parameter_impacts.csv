@@ -1,0 +1,4 @@
+coordinate,minimum_level,main_effect_span_JS,relative_span
+arrival_smoothing_kpc,100.0,0.007746716910235291,0.10003013488651871
+carrier,field_weighted,0.003140213518949539,0.040548271675962304
+route_fraction_f,0.6,0.002210948814286573,0.02854906287179108

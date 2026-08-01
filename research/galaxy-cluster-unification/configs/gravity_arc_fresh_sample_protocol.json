@@ -1,0 +1,210 @@
+{
+  "protocol_version": "GRAVITY-ARC-FRESH-0.1.0",
+  "frozen_utc": "2026-07-31T20:15:00Z",
+  "status": "frozen_before_download_or_fresh_map_spatial_inspection",
+  "question": "Does the exact strict-member C0351 gravity-return rule discovered in the spent three-cluster pilot predict normalized convergence morphology in ten untouched RELICS clusters, and which small formula changes have the largest transferable effect?",
+  "archive": {
+    "name": "MAST RELICS HLSP",
+    "landing_page": "https://archive.stsci.edu/hlsp/relics",
+    "doi": "10.17909/T9SP45",
+    "license": "CC BY 4.0"
+  },
+  "spent_discovery_evidence": {
+    "clusters": ["A2537", "MACS J0417", "MACS J0949"],
+    "protocol_sha256": "2cfda2716b78a94bf15218d89f778e8c571bdeec2c1488f37c4686ffbe6c05b9",
+    "report_sha256": "b751e7b46608fb46c68ba1027f5a8944b1f58b9b3946b0c2a059759843320b0c",
+    "selection_rule": "All formula and control settings below are locked from the strict-photo-z analysis of the three spent systems. No fresh cluster can select or alter the primary settings."
+  },
+  "systems": [
+    {
+      "label": "A2163",
+      "slug": "abell2163",
+      "cluster_redshift": 0.203,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_abell2163_multi_v1_cat.txt",
+      "catalog_bytes": 7842911,
+      "catalog_etag": "77ac5f-53565307caf40",
+      "models": [
+        {"method": "lenstool", "version": "v1", "base_url": "https://archive.stsci.edu/hlsps/relics/abell2163/models/lenstool/", "best_filename": "hlsp_relics_model_model_abell2163_lenstool_v1_kappa.fits", "range_count": 100},
+        {"method": "glafic", "version": "v2", "base_url": "https://archive.stsci.edu/hlsps/relics/abell2163/models/glafic/v2/", "best_filename": "hlsp_relics_model_model_abell2163_glafic_v2_kappa.fits", "range_count": 0}
+      ]
+    },
+    {
+      "label": "A3192",
+      "slug": "abell3192",
+      "cluster_redshift": 0.425,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_abell3192_multi_v1_cat.txt",
+      "catalog_bytes": 2741342,
+      "catalog_etag": "29d45e-549f7b8478d40",
+      "models": [
+        {"method": "lenstool", "version": "v1", "base_url": "https://archive.stsci.edu/hlsps/relics/abell3192/models/lenstool/", "best_filename": "hlsp_relics_model_model_abell3192_lenstool_v1_kappa.fits", "range_count": 100},
+        {"method": "glafic", "version": "v2", "base_url": "https://archive.stsci.edu/hlsps/relics/abell3192/models/glafic/v2/", "best_filename": "hlsp_relics_model_model_abell3192_glafic_v2_kappa.fits", "range_count": 0}
+      ]
+    },
+    {
+      "label": "ACT-CL J0102-4915",
+      "slug": "act0102m49",
+      "cluster_redshift": 0.870,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_act0102m49_multi_v1_cat.txt",
+      "catalog_bytes": 8108384,
+      "catalog_etag": "7bb960-542a612627500",
+      "models": [
+        {"method": "lenstool", "version": "v1", "base_url": "https://archive.stsci.edu/hlsps/relics/act0102m49/models/lenstool/", "best_filename": "hlsp_relics_model_model_act0102m49_lenstool_v1_kappa.fits", "range_count": 100},
+        {"method": "glafic", "version": "v3", "base_url": "https://archive.stsci.edu/hlsps/relics/act0102m49/models/glafic/v3/", "best_filename": "hlsp_relics_model_model_act0102m49_glafic_v3_kappa.fits", "range_count": 0}
+      ]
+    },
+    {
+      "label": "CL J0152.7-1357",
+      "slug": "cl0152m13",
+      "cluster_redshift": 0.833,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_cl0152m13_multi_v1_cat.txt",
+      "catalog_bytes": 13071077,
+      "catalog_etag": "c772e5-54d038bd84380",
+      "models": [
+        {"method": "lenstool", "version": "v1", "base_url": "https://archive.stsci.edu/hlsps/relics/cl0152m13/models/lenstool/", "best_filename": "hlsp_relics_model_model_cl0152m13_lenstool_v1_kappa.fits", "range_count": 100},
+        {"method": "glafic", "version": "v2", "base_url": "https://archive.stsci.edu/hlsps/relics/cl0152m13/models/glafic/v2/", "best_filename": "hlsp_relics_model_model_cl0152m13_glafic_v2_kappa.fits", "range_count": 0}
+      ]
+    },
+    {
+      "label": "MACS J0035.4-2015",
+      "slug": "macs0035m20",
+      "cluster_redshift": 0.352,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_macs0035m20_multi_v1_cat.txt",
+      "catalog_bytes": 2597507,
+      "catalog_etag": "27a283-54f45056e3680",
+      "models": [
+        {"method": "lenstool", "version": "v1", "base_url": "https://archive.stsci.edu/hlsps/relics/macs0035m20/models/lenstool/", "best_filename": "hlsp_relics_model_model_macs0035m20_lenstool_v1_kappa.fits", "range_count": 100},
+        {"method": "glafic", "version": "v2", "base_url": "https://archive.stsci.edu/hlsps/relics/macs0035m20/models/glafic/v2/", "best_filename": "hlsp_relics_model_model_macs0035m20_glafic_v2_kappa.fits", "range_count": 0}
+      ]
+    },
+    {
+      "label": "MACS J0257.1-2325",
+      "slug": "macs0257m23",
+      "cluster_redshift": 0.505,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_macs0257m23_multi_v1_cat.txt",
+      "catalog_bytes": 2636948,
+      "catalog_etag": "283c94-54938f61327c0",
+      "models": [
+        {"method": "lenstool", "version": "v1", "base_url": "https://archive.stsci.edu/hlsps/relics/macs0257m23/models/lenstool/", "best_filename": "hlsp_relics_model_model_macs0257m23_lenstool_v1_kappa.fits", "range_count": 100},
+        {"method": "glafic", "version": "v2", "base_url": "https://archive.stsci.edu/hlsps/relics/macs0257m23/models/glafic/v2/", "best_filename": "hlsp_relics_model_model_macs0257m23_glafic_v2_kappa.fits", "range_count": 0}
+      ]
+    },
+    {
+      "label": "MACS J0553.4-3342",
+      "slug": "macs0553m33",
+      "cluster_redshift": 0.430,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_macs0553m33_multi_v1_cat.txt",
+      "catalog_bytes": 2949034,
+      "catalog_etag": "2cffaa-551384ff49240",
+      "models": [
+        {"method": "lenstool", "version": "v1", "base_url": "https://archive.stsci.edu/hlsps/relics/macs0553m33/models/lenstool/", "best_filename": "hlsp_relics_model_model_macs0553m33_lenstool_v1_kappa.fits", "range_count": 100},
+        {"method": "glafic", "version": "v2", "base_url": "https://archive.stsci.edu/hlsps/relics/macs0553m33/models/glafic/v2/", "best_filename": "hlsp_relics_model_model_macs0553m33_glafic_v2_kappa.fits", "range_count": 0}
+      ]
+    },
+    {
+      "label": "RXC J0032.1+1808",
+      "slug": "rxc0032p18",
+      "cluster_redshift": 0.396,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_rxc0032p18_multi_v1_cat.txt",
+      "catalog_bytes": 2201556,
+      "catalog_etag": "2197d4-541895f22e280",
+      "models": [
+        {"method": "lenstool", "version": "v2", "base_url": "https://archive.stsci.edu/hlsps/relics/rxc0032p18/models/lenstool/v2/", "best_filename": "hlsp_relics_model_model_rxc0032p18_lenstool_v2_kappa.fits", "range_count": 100},
+        {"method": "glafic", "version": "v2", "base_url": "https://archive.stsci.edu/hlsps/relics/rxc0032p18/models/glafic/v2/", "best_filename": "hlsp_relics_model_model_rxc0032p18_glafic_v2_kappa.fits", "range_count": 0}
+      ]
+    },
+    {
+      "label": "RXC J0142.9+4438",
+      "slug": "rxc0142p44",
+      "cluster_redshift": 0.341,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_rxc0142p44_multi_v1_cat.txt",
+      "catalog_bytes": 4599389,
+      "catalog_etag": "462e5d-534da072603c0",
+      "models": [
+        {"method": "lenstool", "version": "v1", "base_url": "https://archive.stsci.edu/hlsps/relics/rxc0142p44/models/lenstool/", "best_filename": "hlsp_relics_model_model_rxc0142p44_lenstool_v1_kappa.fits", "range_count": 100},
+        {"method": "glafic", "version": "v2", "base_url": "https://archive.stsci.edu/hlsps/relics/rxc0142p44/models/glafic/v2/", "best_filename": "hlsp_relics_model_model_rxc0142p44_glafic_v2_kappa.fits", "range_count": 0}
+      ]
+    },
+    {
+      "label": "RXC J0600.1-2007",
+      "slug": "rxc0600m20",
+      "cluster_redshift": 0.460,
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_rxc0600m20_multi_v1_cat.txt",
+      "catalog_bytes": 3005258,
+      "catalog_etag": "2ddb4a-553addc98c3c0",
+      "models": [
+        {"method": "lenstool", "version": "v1", "base_url": "https://archive.stsci.edu/hlsps/relics/rxc0600m20/models/lenstool/", "best_filename": "hlsp_relics_model_model_rxc0600m20_lenstool_v1_kappa.fits", "range_count": 100},
+        {"method": "glafic", "version": "v3", "base_url": "https://archive.stsci.edu/hlsps/relics/rxc0600m20/models/glafic/v3/", "best_filename": "hlsp_relics_model_model_rxc0600m20_glafic_v3_kappa.fits", "range_count": 0}
+      ]
+    }
+  ],
+  "acquisition": {
+    "catalog_url_template": "https://archive.stsci.edu/hlsps/relics/{slug}/catalogs/{catalog_filename}",
+    "download_range_for_methods": ["lenstool"],
+    "maximum_workers": 8,
+    "output_directory": "data/raw/relics_gravity_arc_fresh_sample",
+    "provenance": "data/raw/relics_gravity_arc_fresh_sample/provenance.json",
+    "manifest": "data/raw/relics_gravity_arc_fresh_sample/manifest.csv"
+  },
+  "spatial_preprocessing": {
+    "cosmology": "Planck18",
+    "reference_coordinate": "CRVAL of the frozen Lenstool best map; kappa pixel values are not inspected to choose the center",
+    "common_radius_kpc": 300.0,
+    "grid_spacing_kpc": 10.0,
+    "pixels_per_axis": 256,
+    "target_smoothing_kpc": 20.0,
+    "background_annulus_kpc": [250.0, 300.0],
+    "source_rule": "hard photo-z members only: stellarity <0.8, positive F160W at >=5 sigma, cluster redshift within BPZ 95% interval, ODDS >=0.5, radius <=300 kpc",
+    "target_rule": "subtract median kappa in 250-300 kpc annulus, clip positive, smooth, normalize inside 300 kpc",
+    "minimum_finite_aperture_fraction": 0.95
+  },
+  "locked_candidates": [
+    {"candidate_id": "LOCAL75", "role": "primary_null", "family": "local_gaussian", "width_kpc": 75.0},
+    {"candidate_id": "CENTRAL100", "role": "primary_null", "family": "central_halo_null", "width_kpc": 100.0},
+    {"candidate_id": "C0351", "role": "primary_arc", "family": "center_return", "fraction": 0.5, "return_scale_kpc": 250.0, "exponent": -0.5, "width_kpc": 50.0, "landing_mode": "endpoint"},
+    {"candidate_id": "F040", "role": "one_at_a_time", "changed_parameter": "fraction", "family": "center_return", "fraction": 0.4, "return_scale_kpc": 250.0, "exponent": -0.5, "width_kpc": 50.0, "landing_mode": "endpoint"},
+    {"candidate_id": "F060", "role": "one_at_a_time", "changed_parameter": "fraction", "family": "center_return", "fraction": 0.6, "return_scale_kpc": 250.0, "exponent": -0.5, "width_kpc": 50.0, "landing_mode": "endpoint"},
+    {"candidate_id": "L200", "role": "one_at_a_time", "changed_parameter": "return_scale_kpc", "family": "center_return", "fraction": 0.5, "return_scale_kpc": 200.0, "exponent": -0.5, "width_kpc": 50.0, "landing_mode": "endpoint"},
+    {"candidate_id": "L300", "role": "one_at_a_time", "changed_parameter": "return_scale_kpc", "family": "center_return", "fraction": 0.5, "return_scale_kpc": 300.0, "exponent": -0.5, "width_kpc": 50.0, "landing_mode": "endpoint"},
+    {"candidate_id": "N075", "role": "one_at_a_time", "changed_parameter": "exponent", "family": "center_return", "fraction": 0.5, "return_scale_kpc": 250.0, "exponent": -0.75, "width_kpc": 50.0, "landing_mode": "endpoint"},
+    {"candidate_id": "N025", "role": "one_at_a_time", "changed_parameter": "exponent", "family": "center_return", "fraction": 0.5, "return_scale_kpc": 250.0, "exponent": -0.25, "width_kpc": 50.0, "landing_mode": "endpoint"},
+    {"candidate_id": "W040", "role": "one_at_a_time", "changed_parameter": "width_kpc", "family": "center_return", "fraction": 0.5, "return_scale_kpc": 250.0, "exponent": -0.5, "width_kpc": 40.0, "landing_mode": "endpoint"},
+    {"candidate_id": "W060", "role": "one_at_a_time", "changed_parameter": "width_kpc", "family": "center_return", "fraction": 0.5, "return_scale_kpc": 250.0, "exponent": -0.5, "width_kpc": 60.0, "landing_mode": "endpoint"},
+    {"candidate_id": "TUBE", "role": "structural_sensitivity", "changed_parameter": "landing_mode", "family": "center_return", "fraction": 0.5, "return_scale_kpc": 250.0, "exponent": -0.5, "width_kpc": 50.0, "landing_mode": "tube"},
+    {"candidate_id": "EXTERNAL", "role": "direction_sensitivity", "changed_parameter": "direction", "family": "external_field_return", "fraction": 0.5, "return_scale_kpc": 250.0, "exponent": -0.5, "width_kpc": 50.0, "landing_mode": "endpoint"},
+    {"candidate_id": "NEIGHBOR", "role": "direction_sensitivity", "changed_parameter": "direction", "family": "strongest_neighbor_return", "fraction": 0.5, "return_scale_kpc": 250.0, "exponent": -0.5, "width_kpc": 50.0, "landing_mode": "endpoint"},
+    {"candidate_id": "ISOTROPIC", "role": "direction_sensitivity", "changed_parameter": "direction", "family": "isotropic_return", "fraction": 0.5, "return_scale_kpc": 250.0, "exponent": 0.0, "width_kpc": 50.0, "landing_mode": "endpoint"}
+  ],
+  "fixed_forward_settings": {
+    "external_field_softening_kpc": 20.0,
+    "tube_samples": 9
+  },
+  "validation": {
+    "primary_method": "lenstool",
+    "independent_method_control": "glafic",
+    "primary_metric": "Jensen-Shannon divergence of normalized spatial shape",
+    "secondary_metrics": ["Pearson spatial correlation", "normalized RMSE", "centroid offset"],
+    "confirmation_gate": {
+      "median_improvement_over_LOCAL75": 0.10,
+      "median_improvement_over_CENTRAL100": 0.05,
+      "clusters_better_than_LOCAL75": 8,
+      "clusters_better_than_CENTRAL100": 7,
+      "maximum_median_Pearson_loss_vs_best_null": 0.02
+    },
+    "method_robustness_gate": {
+      "glafic_clusters_better_than_LOCAL75": 7,
+      "glafic_clusters_better_than_CENTRAL100": 6,
+      "same_sign_arc_advantage_over_best_null": 7
+    },
+    "variant_rule": "One-at-a-time variants are descriptive parameter-impact tests. They cannot replace C0351 in the confirmation gate and will not be tuned after fresh targets are inspected."
+  },
+  "outputs": {
+    "input_audit_directory": "results/gravity_arc_fresh_sample_input_audit",
+    "result_directory": "results/gravity_arc_fresh_sample"
+  },
+  "claim_boundary": [
+    "All targets remain standard-GR lens-model reconstructions rather than raw shear or image positions.",
+    "GLAFIC reduces dependence on Lenstool implementation but does not remove dependence on standard lensing physics or member-galaxy priors.",
+    "Normalized morphology cannot establish the absolute strength of a baryon-only gravitational field.",
+    "The fresh systems test transfer of a phenomenological kernel, not a completed covariant field theory."
+  ]
+}

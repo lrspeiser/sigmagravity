@@ -1,0 +1,88 @@
+{
+  "protocol_version": "VECTOR-COMPLETION-FULL-TEST-0.1.0",
+  "frozen_utc": "2026-07-29T04:52:25Z",
+  "status": "frozen_before_bounded_completion_scores",
+  "question": "Can gravity be a universally stronger maximum field whose source vectors are only partly completed in the Solar System, with the completion fraction changing universally with tidal curvature and vector coherence?",
+  "root_equation": {
+    "field": "partial_i[K_ij(Sigma) partial_j Phi] - Q(Sigma)/c^2 partial_t^2 Phi = 4 pi G_solar rho_b",
+    "flux_relation": "D_g=K g; div(D_g)=-4 pi G_solar rho_b",
+    "bounded_interpretation": "g/g_bar=C/C_solar with C_solar <= C <= 1; G_max/G_solar=1/C_solar",
+    "tidal_proxy": "T=g_bar/r in s^-2",
+    "low_curvature_activation": "A_T=1/[1+(T/T_star)^n]",
+    "isotropic_completion": "C=C_solar+(1-C_solar) A_T",
+    "coherence_completion": "C=C_solar+(1-C_solar) A_T (1-coherence)^q",
+    "solar_limit": "T >> T_star implies C=C_solar and g=g_bar exactly",
+    "maximum_limit": "T << T_star and full vector availability imply C=1 and g/g_bar=1/C_solar"
+  },
+  "sample": {
+    "bridge": "44 MaNGA BCG points plus 72 density-resolved CLASH radial points",
+    "bridge_folds": 5,
+    "bridge_seed": 20260729,
+    "bridge_objective": "equal-domain mean of equal-system mean squared log residual",
+    "SPARC": "131 galaxies; nuisance parameters fit on 2066 inner points and tested on 968 untouched outer points",
+    "raw_lensing": "RX J2129 15 training and 7 already-spent heldout image positions",
+    "cluster_target_warning": "CLASH acceleration target is deprojected from fitted NFW lensing profiles"
+  },
+  "models": {
+    "isotropic_completion": {
+      "parameters": ["C_solar", "log10_T_star_s2", "n"],
+      "bounds": [[0.02, 0.95], [-34.0, -28.0], [0.25, 8.0]]
+    },
+    "coherence_completion": {
+      "parameters": ["C_solar", "log10_T_star_s2", "n", "q"],
+      "bounds": [[0.02, 0.95], [-34.0, -28.0], [0.25, 8.0], [0.1, 8.0]],
+      "coherence_warning": "BCG Lambda_Re, cluster zero-coherence, and SPARC one-minus-bulge-force fraction are only provisional cross-domain proxies."
+    }
+  },
+  "optimization": {
+    "differential_evolution_maxiter": 180,
+    "differential_evolution_popsize": 14,
+    "local_polish": "L-BFGS-B",
+    "boundary_fraction_tolerance": 0.01
+  },
+  "selection": {
+    "rule": "lowest five-fold heldout bridge equal-domain RMSE; raw images and SPARC are not used for selection",
+    "gravity_parameters_fit_to_SPARC": 0,
+    "gravity_or_lensing_amplitudes_fit_to_raw_images": 0
+  },
+  "advance_gates": {
+    "bridge_equal_domain_RMSE_dex_max": 0.15,
+    "BCG_equal_system_RMSE_dex_max": 0.15,
+    "cluster_equal_system_RMSE_dex_max": 0.18,
+    "SPARC_outer_RMSE_relative_to_fixed_RAR_max": 1.10,
+    "raw_heldout_RMS_arcsec_max": 2.5361068843508456,
+    "solar_Earth_fractional_change_max": 1e-10,
+    "all_completion_fractions_at_most_one": true,
+    "no_full_fit_parameter_at_boundary": true
+  },
+  "solar_diagnostics": {
+    "solar_GM_m3_s2": 1.32712440018e20,
+    "Earth_orbit_m": 149597870700.0,
+    "astronomical_unit_m": 149597870700.0
+  },
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "bridge_reference_report": "results/rar_sharp_coherence_rg_sweep/report.json",
+    "SPARC_protocol": "configs/sparc_independent_nuisance_refit_protocol.json",
+    "SPARC_reference_report": "results/sparc_independent_nuisance_refit/report.json",
+    "SPARC_raw": "data/raw/sparc",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "RXJ_profile": "results/sigma_action_exploration/radial_profiles.csv",
+    "raw_lensing_reference_report": "results/sigma_covariant_weak_field/report.json"
+  },
+  "claim_limits": [
+    "This is a weak-field constitutive law, not yet a covariant action.",
+    "A bounded completion law is observationally equivalent to an environment-dependent enhancement relative to locally measured G; the interpretation alone is not new evidence.",
+    "The scalar tidal proxy g_bar/r is not the full three-dimensional tidal tensor.",
+    "The coherence observables are not geometrically identical across BCG, cluster, and SPARC samples.",
+    "RX J2129 coordinates are an already-inspected diagnostic, not an independent holdout."
+  ],
+  "outputs": {
+    "report": "results/vector_completion_full_test/report.json",
+    "bridge_predictions": "results/vector_completion_full_test/bridge_predictions.csv",
+    "SPARC_predictions": "results/vector_completion_full_test/sparc_predictions.csv",
+    "raw_lensing_predictions": "results/vector_completion_full_test/raw_lensing_predictions.csv",
+    "figure": "results/vector_completion_full_test/vector_completion_full_test.png",
+    "summary": "results/vector_completion_full_test/SUMMARY.md"
+  }
+}

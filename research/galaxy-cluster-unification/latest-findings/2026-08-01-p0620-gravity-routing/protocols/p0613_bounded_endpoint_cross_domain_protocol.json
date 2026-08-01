@@ -1,0 +1,77 @@
+{
+  "protocol_version": "P0613-BOUNDED-ENDPOINT-CROSS-DOMAIN-0.1.0",
+  "frozen_utc": "2026-08-01T20:00:00Z",
+  "status": "frozen_after_P0612_before_factorial_scores",
+  "trigger": "P0612 found that spatial width, endpoint residence, routed fraction, path length, and saturation dominate repeated formula sensitivity, while member networks, tensor orientation, and the dual-misalignment gate failed transfer.",
+  "question": "When endpoint residence and return length are fixed, can a smooth bounded response make the same universal width and routed-strength choices root-safe in raw clusters without worsening the already weak conservative galaxy response?",
+  "formula": {
+    "conservative_route": "Sigma_route=(1-f_eff)Sigma_b+f_eff K_(eta R80)*Sigma_endpoint",
+    "effective_fraction": "f_eff=q*s(C), C=R50/R80, with the already-fixed cluster_logistic extent law",
+    "endpoint": "each baryonic launch element deposits at the endpoint of a constant 0.36 R80 return toward the baryonic light centroid",
+    "angular_response": "T_A(x)=A*tanh(x/A); subtract its exact annular carrier-weighted mean so the cluster correction has zero monopole",
+    "universal_parameters": ["q", "eta", "A"],
+    "per_object_gravity_parameters": 0
+  },
+  "locked": {
+    "route_mode": "endpoint",
+    "return_length_over_R80": 0.36,
+    "gate_mode": "cluster_logistic",
+    "contrast_mode": "tanh",
+    "ordinary_cluster_geometry": "P0581 K0338 fit held fixed",
+    "source_positions": "P0581 K0338 fitted source positions held fixed",
+    "ordinary_baryonic_field": "local and unchanged",
+    "routed_carrier": "P0554 scalar excess over the baryonic field"
+  },
+  "factorial": {
+    "width_over_R80_eta": [0.18, 0.23, 0.28],
+    "route_fraction_multiplier_q": [0.5, 0.75, 1.0],
+    "smooth_saturation_A": [5.0, 10.0, 20.0],
+    "variants": 27
+  },
+  "selection": {
+    "status": "diagnostic_on_project_spent_systems",
+    "rule": "Require all 11 heldout image roots, then minimize equal-four-cluster RMS, then minimize SPARC outer RMSE.",
+    "prohibition": "The selected row is a response diagnostic and cannot be promoted as a validated formula."
+  },
+  "inputs": {
+    "P0581_protocol": "configs/p0581_locked_endpoint_exact_root_protocol.json",
+    "base_exact_protocol": "configs/adaptive_route_multicluster_raw_protocol.json",
+    "base_exact_scores": "results/adaptive_route_multicluster_raw/exact_scores.csv",
+    "P0581_geometry": "results/p0581_locked_endpoint_exact_root/geometry.csv",
+    "P0581_predictions": "results/p0581_locked_endpoint_exact_root/predictions.csv",
+    "P0581_report": "results/p0581_locked_endpoint_exact_root/report.json",
+    "P0580_candidate_scores": "results/p0580_conservative_return_sparc/candidate_scores.csv",
+    "P0580_report": "results/p0580_conservative_return_sparc/report.json"
+  },
+  "gates": {
+    "heldout_roots_required": 11,
+    "complete_systems_required": 4,
+    "galaxy_RMSE_to_fixed_RAR_max": 1.5,
+    "galaxy_improves_Newtonian": true,
+    "maximum_route_map_normalization_error": 1e-12,
+    "maximum_annular_convergence_mean_fraction": 1e-10,
+    "maximum_normalized_curl_RMS": 1e-10,
+    "solar_maximum_fractional_change": 0.0,
+    "Mercury_precession_mas_per_century": 0.0
+  },
+  "outputs": {
+    "directory": "results/p0613_bounded_endpoint_cross_domain",
+    "cluster_scores": "cluster_scores.csv",
+    "variant_scores": "variant_scores.csv",
+    "predictions": "predictions.csv",
+    "field_audits": "field_audits.csv",
+    "main_effect_levels": "main_effect_levels.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "interaction_effects": "interaction_effects.csv",
+    "report": "report.json",
+    "figure": "p0613_bounded_endpoint_cross_domain.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The four raw clusters and 131 SPARC galaxies are project-spent.",
+    "Cluster geometry and source positions are held at the P0581 fit, so this measures field response rather than a new end-to-end fit.",
+    "The SPARC rows reuse the exact P0580 conservative endpoint calculation; smooth angular saturation is null for the axisymmetric galaxy translation.",
+    "The zero-monopole cluster correction tests image placement, not the absolute missing cluster convergence.",
+    "The Solar result is an exact point-source null of this routing layer and is a compatibility check, not new evidence."
+  ]
+}

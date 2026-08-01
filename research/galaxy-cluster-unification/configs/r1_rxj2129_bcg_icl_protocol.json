@@ -1,0 +1,115 @@
+{
+  "protocol_version": "R1B1-RXJ2129-BCG-ICL-0.1",
+  "status": "frozen_after_empirical_psf_and_sdss_aperture_pass_before_hst_bcg_profile_measurement",
+  "purpose": "Test whether the public F125W/F814W mosaics identify a PSF-aware circular BCG plus ICL light profile, then propagate a source-traceable Cooke mass-aperture nuisance to the four frozen dynamics bins without using a gravity or lens residual.",
+  "freeze_date": "2026-07-26",
+  "disclosure": "The Tian one-component n=2.70 and Re=41.4 kpc summaries, the three-star empirical PSF diagnostics, the Molino BCG catalog row, and the nearest SDSS Petrosian row were known before this freeze. No HST BCG cutout, nonparametric radial profile, one- versus two-component fit, ICL fraction, stellar acceleration, kinematic residual, or lens residual had been inspected.",
+  "inputs": {
+    "f125w_science": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_wfc3ir_rxj2129_f125w_v1_drz.fits",
+    "f125w_weight": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_wfc3ir_rxj2129_f125w_v1_wht.fits",
+    "f814w_science": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_acs_rxj2129_f814w_v1_drz.fits",
+    "f814w_weight": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_acs_rxj2129_f814w_v1_wht.fits",
+    "catalog": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_ir_rxj2129_cat-molino.txt",
+    "empirical_psf": "data/derived/r1_rxj2129_empirical_hst_psf.npz",
+    "empirical_psf_report": "results/r1_rxj2129_hst_psf/report.json",
+    "sdss_petrosian_query": "data/raw/r1_rxj2129_sdss/sdss_dr18_rxj2129_bcg_photometry.csv",
+    "dynamics_bins": "data/derived/r1_rxj2129_ppxf_xsl_profile_with_covariance.csv"
+  },
+  "geometry": {
+    "center_ra_deg": 322.41651,
+    "center_dec_deg": 0.08923,
+    "profile_geometry": "circular",
+    "rationale": "Match the frozen circular dynamics and structural-identifiability geometry rather than importing a lens-model ellipticity convention.",
+    "maximum_fitted_centroid_offset_arcsec": 0.30,
+    "pixel_scale_arcsec": 0.065,
+    "fit_radius_arcsec": 30.0,
+    "background_annulus_arcsec": [35.0, 50.0],
+    "background_annulus_sensitivity_arcsec": [
+      [30.0, 45.0],
+      [35.0, 50.0],
+      [40.0, 55.0]
+    ]
+  },
+  "mask": {
+    "base_rule": "Mask every non-BCG Molino catalog source by an ellipse with semiaxes max(4 pixels, 3 times catalog a) and max(4 pixels, 3 times catalog b), using the catalog theta convention; also mask non-finite pixels and non-positive weights.",
+    "bcg_id": "clash_rxj2129_nir_0859",
+    "minimum_unmasked_fraction_per_radial_bin": 0.50,
+    "sensitivity_catalog_axis_multipliers": [2.5, 3.0, 3.5]
+  },
+  "nonparametric_profile": {
+    "radial_edges": "zero followed by 60 logarithmically spaced edges from 0.065 to 30 arcsec",
+    "azimuthal_sectors": 12,
+    "estimator": "inverse-variance mean within each unmasked sector and radial bin",
+    "covariance": "sector bootstrap covariance plus the diagonal inverse-weight variance multiplied by 1.15 squared for the CLASH drizzle correlated-noise allowance",
+    "whitening_regularization": "shrink the joint covariance 5 percent toward its diagonal, then floor eigenvalues at 1e-6 times the median positive diagonal variance",
+    "minimum_finite_sectors_per_bin": 6,
+    "random_seed": 2129,
+    "bootstrap_replicates": 500
+  },
+  "psf_forward_model": {
+    "require_empirical_psf_gate_pass": true,
+    "convolution": "native 0.065-arcsec two-dimensional FFT convolution before circular radial binning",
+    "sensitivity": "repeat with all three empirical leave-one-star-out PSFs in each band"
+  },
+  "candidate_models": {
+    "one_component": "one circular Sersic profile with shared Re and n across F125W/F814W, independent band amplitudes, and independent constant skies",
+    "two_component": "two co-centered circular Sersic profiles with shared component Re and n across bands, independent band amplitudes, independent constant skies, and the ordering Re_inner < Re_outer",
+    "parameter_bounds": {
+      "sersic_n": [0.3, 8.0],
+      "effective_radius_arcsec": [0.10, 80.0],
+      "outer_to_inner_effective_radius_minimum": 2.0,
+      "component_amplitudes": "strictly positive"
+    },
+    "optimizer": "bounded scipy least_squares with 20 deterministic multistarts per model and fit variant",
+    "radial_cross_validation": "two folds of interleaved radial bins; skies and all structural parameters are refit on each training fold"
+  },
+  "component_identifiability_gate": {
+    "minimum_two_component_heldout_chi2_improvement_fraction_both_bands": 0.20,
+    "outer_to_inner_effective_radius_minimum": 2.0,
+    "icl_f125w_light_fraction_within_30arcsec_range": [0.05, 0.80],
+    "maximum_icl_fraction_range_across_mask_background_psf_variants": 0.20,
+    "maximum_total_cumulative_light_fractional_shift_each_dynamics_radius": 0.10,
+    "failure_response": "Retain the nonparametric total-light profile and report BCG/ICL non-identifiability. Do not force a second component or declare ICL negligible."
+  },
+  "stellar_mass_mapping": {
+    "cooke_stellar_mass_msun": 581000000000.0,
+    "tian_adopted_fractional_mass_sigma": 0.10,
+    "cooke_method_sigma_dex": 0.12,
+    "method_sigma_lineage": "Cooke reports agreement within 30 percent with the independent Burke CLASH mass method.",
+    "sdss_petrosian_radius_r_arcsec": 9.373521,
+    "normalization_aperture_radius_arcsec": 18.747042,
+    "normalization_rule": "Normalize the combined HST stellar light inside the measured 2*r_Petro aperture to the Cooke MAGPHYS mass; do not assign that mass to a single fitted component.",
+    "icl_to_bcg_mass_to_light_ratio_prior": "log-uniform from 0.5 to 2.0, reported as a project nuisance rather than a measured color-M/L calibration",
+    "deprojection": "spherical numerical Abel deprojection of the accepted PSF-deconvolved total-light posterior; preserve the BCG and ICL contributions separately when two components are identifiable",
+    "posterior_draws": 2000
+  },
+  "advance_thresholds": {
+    "empirical_psf_gate_pass": true,
+    "finite_nonparametric_profile_bins_minimum": 40,
+    "all_four_dynamics_bins_covered": true,
+    "center_offset_arcsec_maximum": 0.30,
+    "stellar_acceleration_covariance_finite_and_positive_semidefinite": true,
+    "maximum_fractional_total_stellar_acceleration_uncertainty_each_dynamics_bin": 0.30,
+    "icl_numeric_or_nonidentifiability_explicit": true,
+    "gravity_residual_used": false
+  },
+  "outputs": {
+    "nonparametric_profile": "data/derived/r1_rxj2129_hst_surface_brightness_profile.csv",
+    "profile_covariance": "data/derived/r1_rxj2129_hst_surface_brightness_covariance.csv",
+    "profile_extraction_report": "results/r1_rxj2129_bcg_icl/profile_extraction_report.json",
+    "profile_diagnostic": "results/r1_rxj2129_bcg_icl/profile_extraction_diagnostic.png",
+    "model_variants": "data/derived/r1_rxj2129_bcg_icl_model_variants.csv",
+    "stellar_profile": "data/derived/r1_rxj2129_stellar_mass_profile.csv",
+    "stellar_acceleration_covariance": "data/derived/r1_rxj2129_stellar_acceleration_covariance.csv",
+    "report": "results/r1_rxj2129_bcg_icl/report.json",
+    "diagnostic": "results/r1_rxj2129_bcg_icl/bcg_icl_diagnostics.png"
+  },
+  "authorization": {
+    "hst_profile_extraction": true,
+    "one_and_two_component_light_fits": true,
+    "stellar_mass_profile_only_after_light_gate": true,
+    "gravity_response_fit": false,
+    "lens_mass_fit": false,
+    "strict_r1_ready": false
+  }
+}

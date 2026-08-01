@@ -1,0 +1,67 @@
+{
+  "protocol_version": "UNBOUNDED-RUNNING-REFINEMENT-0.2.0",
+  "frozen_utc": "2026-07-29T07:57:00Z",
+  "status": "frozen_before_refinement_scores",
+  "family_label": "Unbounded curvature-running refinement",
+  "question": "Can a smooth unbounded interpolation between logarithmic and power running preserve the power law's galaxy performance while recovering the logarithmic law's cluster performance?",
+  "sample": {
+    "bridge_folds": 5,
+    "bridge_seed": 20260730,
+    "bridge_objective": "equal-domain mean of equal-system mean squared log residual",
+    "SPARC": "131 galaxies; nuisance parameters fit on 2066 inner points and tested on 968 untouched outer points",
+    "raw_lensing": "run only for the three strongest compromises after transfer; exploratory because the refinement family was motivated by the broad transfer"
+  },
+  "models": {
+    "curvature_log": {"parameters": ["log10_T_star_s2", "p", "alpha"], "bounds": [[-38.0, -24.0], [0.05, 12.0], [0.001, 30.0]]},
+    "curvature_power": {"parameters": ["log10_T_star_s2", "p", "epsilon"], "bounds": [[-38.0, -24.0], [0.05, 12.0], [0.001, 3.0]]},
+    "curvature_stretched_power": {"parameters": ["log10_T_star_s2", "p", "epsilon", "stretch_s"], "bounds": [[-38.0, -24.0], [0.05, 12.0], [0.001, 3.0], [0.10, 1.50]]},
+    "curvature_mixed_power": {"parameters": ["log10_T_star_s2", "p", "epsilon", "eta"], "bounds": [[-38.0, -24.0], [0.05, 12.0], [0.0001, 3.0], [0.0001, 10.0]]},
+    "curvature_additive_power": {"parameters": ["log10_T_star_s2", "p", "epsilon", "alpha"], "bounds": [[-38.0, -24.0], [0.05, 12.0], [0.0001, 3.0], [0.01, 10.0]]},
+    "curvature_decelerating_power": {"parameters": ["log10_T_star_s2", "p", "epsilon", "slow_s"], "bounds": [[-38.0, -24.0], [0.05, 12.0], [0.001, 10.0], [0.0, 0.95]]}
+  },
+  "optimization": {
+    "differential_evolution_maxiter": 220,
+    "differential_evolution_popsize": 14,
+    "boundary_fraction_tolerance": 0.005,
+    "Cassini_violation_penalty": 1000000.0
+  },
+  "solar_gates": {
+    "zero_gravitational_slip_PPN_gamma": 1.0,
+    "Cassini_gamma_one_sigma": 2.3e-5,
+    "maximum_fractional_coupling_change_limb_to_Saturn": 2.3e-5,
+    "maximum_Earth_orbit_fractional_change": 1e-10,
+    "interpretation": "The coupling gate is a conservative phenomenological proxy in addition to the exact zero-slip gamma assumption; Cassini directly measured gamma, not G(r)."
+  },
+  "advance_gates": {
+    "bridge_equal_domain_RMSE_dex_max": 0.15,
+    "BCG_equal_system_RMSE_dex_max": 0.15,
+    "cluster_equal_system_RMSE_dex_max": 0.18,
+    "SPARC_outer_RMSE_relative_to_fixed_RAR_max": 1.10,
+    "Cassini_pass": true,
+    "Earth_orbit_pass": true,
+    "no_full_fit_parameter_at_boundary": true
+  },
+  "selection": {
+    "primary_rule": "fit universal gravity parameters only to the five-fold BCG+cluster bridge; SPARC is transfer-only",
+    "post_transfer_ranking": "Pareto ranking over bridge and SPARC, disclosed as post-broad-sweep exploratory",
+    "gravity_parameters_fit_to_SPARC": 0
+  },
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "bridge_reference_report": "results/rar_sharp_coherence_rg_sweep/report.json",
+    "SPARC_protocol": "configs/sparc_independent_nuisance_refit_protocol.json",
+    "SPARC_reference_report": "results/sparc_independent_nuisance_refit/report.json",
+    "SPARC_raw": "data/raw/sparc",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "RXJ_profile": "results/sigma_action_exploration/radial_profiles.csv",
+    "raw_lensing_reference_report": "results/sigma_covariant_weak_field/report.json"
+  },
+  "outputs": {
+    "report": "results/unbounded_running_refinement/report.json",
+    "bridge_predictions": "results/unbounded_running_refinement/bridge_predictions.csv",
+    "SPARC_predictions": "results/unbounded_running_refinement/sparc_predictions.csv",
+    "raw_lensing_predictions": "results/unbounded_running_refinement/raw_lensing_predictions.csv",
+    "figure": "results/unbounded_running_refinement/unbounded_running_refinement.png",
+    "summary": "results/unbounded_running_refinement/SUMMARY.md"
+  }
+}

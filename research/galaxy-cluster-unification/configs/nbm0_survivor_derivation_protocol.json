@@ -1,0 +1,80 @@
+{
+  "protocol_version": "NBM0-A2-0.1-survivor-derivation",
+  "frozen_utc": "2026-07-28T03:32:00Z",
+  "status": "frozen after A8 and A9 survived the NBM0-A1 scan and before executing their scaling and energy-budget gates",
+  "parent_protocol": "configs/nbm0_reciprocal_action_protocol.json",
+  "purpose": "Determine whether the two NBM0-A1 survivors can evade the linear radial theorem without becoming MOND/AQUAL, a ghost, an object-segmented nonadditive law, or an independent dark component.",
+  "premises_held_fixed": [
+    "one universal matter metric",
+    "no per-object or object-class force parameters",
+    "at most four new global physical parameters",
+    "no negative kinetic energy",
+    "no local MOND/AQUAL galaxy closure",
+    "no independent gravitating dark component",
+    "no astronomical parameter fit during derivation"
+  ],
+  "A8_subfamilies": [
+    {
+      "id": "A8.1",
+      "name": "static local nonlinear flux law",
+      "gate": "flat outer speed and v_flat^4 proportional to baryonic mass without the AQUAL power"
+    },
+    {
+      "id": "A8.2",
+      "name": "algebraic nonlinear map of one inverse field",
+      "gate": "flat outer speed and square-root baryonic amplitude from one mass-linear X field"
+    },
+    {
+      "id": "A8.3",
+      "name": "nonlinear effective source charge",
+      "gate": "square-root total charge while remaining additive under arbitrary subdivision of the same matter distribution"
+    },
+    {
+      "id": "A8.4",
+      "name": "retarded nonlinear memory",
+      "gate": "unique cosmological initial state and no object-specific history variable; static limit must evade A8.1-A8.3"
+    }
+  ],
+  "A9_subfamilies": [
+    {
+      "id": "A9.1",
+      "name": "canonical sourced scalar exterior energy",
+      "gate": "field energy comparable to missing lensing mass while direct fifth force remains order unity"
+    },
+    {
+      "id": "A9.2",
+      "name": "uniform negative-pressure vacuum in voids",
+      "gate": "broad inward galaxy support rather than an outward harmonic acceleration or shell-theorem cancellation"
+    },
+    {
+      "id": "A9.3",
+      "name": "nonminimal scalar curvature polarization",
+      "gate": "weak-field behavior not already in the linear scalar or nonlinear-flux branches"
+    },
+    {
+      "id": "A9.4",
+      "name": "independent basin condensate energy reservoir",
+      "gate": "remain a pure modified-gravity/void-pressure theory rather than a new gravitating dark component"
+    },
+    {
+      "id": "A9.5",
+      "name": "negative-energy basin medium",
+      "gate": "positive Hamiltonian and kinetic eigenvalues"
+    }
+  ],
+  "benchmark_compactness": {
+    "galaxy": 1e-6,
+    "cluster": 1e-5,
+    "target_field_energy_fraction": 5.0,
+    "maximum_order_unity_direct_force_amplitude": 10.0
+  },
+  "loophole_expansion_rule": "If A8 and A9 fail, admit one additional family only if it is not an additive force or algebraic response already covered. A boundary/constitutive gravitational-permittivity mechanism qualifies because it changes flux geometry.",
+  "prior_art_boundary": {
+    "known_family": "Refracted Gravity uses density-dependent gravitational permittivity and already claims galaxy and cluster dynamics; it is a benchmark, not an originality claim.",
+    "primary_sources": [
+      "https://arxiv.org/abs/1603.04943",
+      "https://arxiv.org/abs/2109.11217",
+      "https://arxiv.org/abs/2410.19698"
+    ]
+  }
+}

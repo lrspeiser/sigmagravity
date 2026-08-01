@@ -1,0 +1,181 @@
+{
+  "report_version": "P0579-EXTENT-GATED-RETURN-RAW-RESULTS-0.1.0",
+  "status": "complete_two_cluster_raw_return_geometry",
+  "protocol": {
+    "path": "configs/p0579_extent_gated_return_raw_protocol.json",
+    "sha256": "a1d946a885528f5d558db9695436b418f83813400b69fa8ae42ff3acd6aac6e0"
+  },
+  "coverage": {
+    "clusters": 2,
+    "candidates": 432,
+    "raw_images": 29,
+    "heldout_subfamilies": 5
+  },
+  "primary_inverse_candidate_id": "K0338",
+  "selected": {
+    "candidate_id": "K0107",
+    "gate_mode": "none",
+    "return_length_over_R80": 0.5,
+    "width_over_R80": 0.28,
+    "route_mode": "transverse_arc_0.5",
+    "route_fraction_multiplier": 1.0,
+    "equal_cluster_calibration_RMS_arcsec": 1.9997716834348382,
+    "equal_cluster_heldout_RMS_arcsec": 14.724288179714197,
+    "maximum_mass_sheet_R2": 0.9962820829649978
+  },
+  "result": {
+    "B100_equal_cluster_heldout_RMS_arcsec": 6.97685105385797,
+    "primary_inverse_equal_cluster_heldout_RMS_arcsec": 6.125571316534934,
+    "primary_inverse_improvement_vs_B100_fraction": 0.1220148933597065,
+    "primary_inverse_clusters_improved": 2,
+    "primary_inverse_heldout_subfamilies_improved_fraction": 0.6,
+    "selected_equal_cluster_heldout_RMS_arcsec": 14.724288179714197,
+    "selected_improvement_vs_B100_fraction": -1.1104489784932627,
+    "clusters_improved": 0,
+    "heldout_subfamilies_improved_fraction": 0.2,
+    "maximum_surface_conservation_error": 4.440892098500626e-16
+  },
+  "per_cluster": [
+    {
+      "cluster": "SMACS J0723.3-7327",
+      "B100_RMS_arcsec": 6.3845999550551324,
+      "primary_inverse_RMS_arcsec": 5.852373588746687,
+      "primary_inverse_improvement_fraction": 0.0833609576253943,
+      "selected_RMS_arcsec": 20.946736517245586,
+      "selected_improvement_fraction": -2.28082208199444
+    },
+    {
+      "cluster": "SPT-CL J0615-5746",
+      "B100_RMS_arcsec": 7.569102152660808,
+      "primary_inverse_RMS_arcsec": 6.39876904432318,
+      "primary_inverse_improvement_fraction": 0.15461980625089256,
+      "selected_RMS_arcsec": 8.501839842182806,
+      "selected_improvement_fraction": -0.12322963420359012
+    }
+  ],
+  "parameter_impacts": [
+    {
+      "parameter": "width_over_R80",
+      "calibration_best_level": "0.28",
+      "calibration_worst_level": "0.18",
+      "calibration_RMS_span_arcsec": 0.8222468680897919,
+      "heldout_best_level_posthoc": "0.28",
+      "heldout_worst_level_posthoc": "0.23",
+      "heldout_RMS_span_arcsec_posthoc": 1.7961461966656627
+    },
+    {
+      "parameter": "route_mode",
+      "calibration_best_level": "chord",
+      "calibration_worst_level": "transverse_arc_0.5",
+      "calibration_RMS_span_arcsec": 0.47101807808092033,
+      "heldout_best_level_posthoc": "endpoint",
+      "heldout_worst_level_posthoc": "transverse_arc_0.5",
+      "heldout_RMS_span_arcsec_posthoc": 8.527307364464278
+    },
+    {
+      "parameter": "return_length_over_R80",
+      "calibration_best_level": "0.36",
+      "calibration_worst_level": "0.65",
+      "calibration_RMS_span_arcsec": 0.31968452157617655,
+      "heldout_best_level_posthoc": "0.5",
+      "heldout_worst_level_posthoc": "0.65",
+      "heldout_RMS_span_arcsec_posthoc": 1.3415831848399336
+    },
+    {
+      "parameter": "gate_mode",
+      "calibration_best_level": "none",
+      "calibration_worst_level": "cluster_logistic",
+      "calibration_RMS_span_arcsec": 0.17863130683127437,
+      "heldout_best_level_posthoc": "none",
+      "heldout_worst_level_posthoc": "cluster_logistic_soft",
+      "heldout_RMS_span_arcsec_posthoc": 0.6313859363854792
+    },
+    {
+      "parameter": "route_fraction_multiplier",
+      "calibration_best_level": "1.0",
+      "calibration_worst_level": "0.5",
+      "calibration_RMS_span_arcsec": 0.09196914768558084,
+      "heldout_best_level_posthoc": "1.0",
+      "heldout_worst_level_posthoc": "0.5",
+      "heldout_RMS_span_arcsec_posthoc": 0.3869667847518876
+    }
+  ],
+  "gates": {
+    "equal_cluster_heldout_improvement_pass": false,
+    "cluster_count_pass": false,
+    "heldout_subfamily_fraction_pass": false,
+    "mass_sheet_pass": false,
+    "route_fraction_interior_pass": false,
+    "conservation_pass": true,
+    "solar_point_collapse_pass": true,
+    "universal_return_geometry_supported": false
+  },
+  "primary_inverse_replay_gates": {
+    "equal_cluster_heldout_improvement_pass": true,
+    "cluster_count_pass": true,
+    "heldout_subfamily_fraction_pass": true,
+    "mass_sheet_pass": false,
+    "conservation_pass": true,
+    "solar_point_collapse_pass": true,
+    "all_primary_replay_gates_pass": false
+  },
+  "posthoc_best_with_mass_sheet_R2_at_most_0p95": {
+    "candidate_id": "K0043",
+    "gate_mode": "none",
+    "return_length_over_R80": 0.36,
+    "width_over_R80": 0.18,
+    "route_mode": "radial_arc_0.5",
+    "route_fraction_multiplier": 0.75,
+    "equal_cluster_calibration_RMS_arcsec": 4.744824242882219,
+    "equal_cluster_heldout_RMS_arcsec": 5.413481960270833,
+    "maximum_mass_sheet_R2": 0.8593117965059387
+  },
+  "cross_domain": {
+    "same_field_family_galaxy_best": {
+      "scale_mix_mu": 1.0,
+      "alpha": 0.75,
+      "apogee_ratio": 100.0,
+      "screen_exponent": 1.0,
+      "candidate_id": "R1322",
+      "universal_q": 1.455674005470695,
+      "q_at_boundary": false,
+      "fold_q_min": 1.4468069760012336,
+      "fold_q_max": 1.4685448787907915,
+      "outer_RMSE_km_s": 12.947301263408695,
+      "outer_equal_galaxy_RMSE_km_s": 13.152660424934837,
+      "cross_galaxy_outer_RMSE_km_s": 12.966366834672476,
+      "cross_galaxy_outer_equal_galaxy_RMSE_km_s": 13.16856590575065,
+      "maximum_fractional_change_limb_to_Saturn": 1.3487033606588933e-08,
+      "Earth_orbit_fractional_change": 3.836800492813811e-11,
+      "Saturn_orbit_fractional_change": 1.3487033606588933e-08,
+      "Mercury_precession_mas_per_century": -2.0409383725400487,
+      "Cassini_proxy_pass": true,
+      "Earth_proxy_pass": true,
+      "Mercury_proxy_pass": true,
+      "all_solar_proxies_pass": true
+    },
+    "fixed_RAR_same_nuisance_outer_RMSE_km_s": 10.348465773189677,
+    "best_arc_to_RAR_RMSE_ratio": 1.2529748002129104,
+    "prior_normalized_map_selected_route_raw_replay": {
+      "candidate_id": "K0224",
+      "gate_mode": "cluster_logistic_soft",
+      "return_length_over_R80": 0.5,
+      "width_over_R80": 0.18,
+      "route_mode": "radial_arc_0.5",
+      "route_fraction_multiplier": 1.0,
+      "equal_cluster_calibration_RMS_arcsec": 4.6692160237548554,
+      "equal_cluster_heldout_RMS_arcsec": 10.89730741290838,
+      "maximum_mass_sheet_R2": 0.8904760818923492
+    },
+    "solar_point_route_change": 0.0,
+    "interpretation": "P0579 changes the directional placement kernel. The already completed arc-apogee sweep supplies the scalar SPARC and Solar response for the same two-channel field family; a direct conservative SPARC redistribution audit follows separately."
+  },
+  "claim_limits": [
+    "Hard-member F160W light is a stellar-light proxy and omits hot gas, intracluster light, and mass-to-light variation.",
+    "One amplitude per cluster remains calibrated, so this is a route-geometry test rather than an absolute-strength prediction.",
+    "The two clusters are fresh to the inverse-derived extent relation but have been used in P0573-P0578 formula work.",
+    "The linearized image-plane diagnostic is not a full nonlinear root solution.",
+    "Two clusters and five held-out subfamilies are insufficient to confirm a universal route law.",
+    "Projected path residence cannot determine an off-plane arc height or propagation time."
+  ]
+}

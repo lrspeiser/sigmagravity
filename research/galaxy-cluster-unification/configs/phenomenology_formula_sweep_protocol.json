@@ -1,0 +1,104 @@
+{
+  "protocol_version": "PHEN-SWEEP-0.1",
+  "frozen_utc": "2026-07-28T07:15:00Z",
+  "status": "frozen before evaluating any formula in this sweep",
+  "question": "Can one global weak-field response approach fixed galaxy RAR performance for BCG dynamics while also approaching the CLASH NFW-lensing reconstruction within its public diagonal errors?",
+  "sample": {
+    "galaxy_domain": "44 MaNGA BCG last-kinematic-radius acceleration measurements with outcome-blind local stellar-density estimates",
+    "cluster_domain": "72 CLASH acceleration points in 20 systems with ACCEPT gas plus Hernquist BCG local density",
+    "cluster_target_warning": "The CLASH total accelerations are spherical NFW deprojections of lensing summaries. NFW is therefore the construction reference, not an independent zero-residual competitor.",
+    "grouping": "hold out complete BCG or cluster systems",
+    "folds": 5,
+    "seed": 20260728,
+    "objective": "equal-domain mean of equal-system mean squared log10 acceleration residual"
+  },
+  "fixed_references": {
+    "newtonian": "g_pred=g_bar",
+    "galaxy_RAR": "g_pred=g_bar/[1-exp(-sqrt(g_bar/g_dagger))]",
+    "galaxy_RAR_g_dagger_m_s2": 1.2e-10,
+    "simple_MOND": "g_pred=(g_bar+sqrt(g_bar^2+4*a0*g_bar))/2",
+    "simple_MOND_a0_m_s2": 1.2e-10,
+    "cluster_RAR_diagnostic_g_dagger_m_s2": 2.02e-9,
+    "cluster_NFW_reference": "the reported g_obs itself; use its public diagonal uncertainty scale rather than claiming an independent NFW residual"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "potential_reference": 1.0e-5,
+    "sigma_g_dagger_m_s2": 9.6e-11
+  },
+  "optimization": {
+    "differential_evolution_maxiter": 220,
+    "differential_evolution_popsize": 14,
+    "local_polish": "L-BFGS-B",
+    "paired_system_bootstrap_draws": 20000
+  },
+  "models": {
+    "RG": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0]],
+      "equation": "E=1/epsilon_RG(rho)"
+    },
+    "RG_acceleration_threshold": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "alpha_g"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [-4.0, 4.0]],
+      "equation": "rho_c,eff=rho_c*(g_bar/g_ref)^alpha_g; E=1/epsilon_RG(rho;rho_c,eff)"
+    },
+    "RG_potential_threshold": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "alpha_phi"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [-4.0, 4.0]],
+      "equation": "u=g_bar*r/c^2; rho_c,eff=rho_c*(u/u_ref)^alpha_phi; E=1/epsilon_RG(rho;rho_c,eff)"
+    },
+    "RG_acceleration_floor": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "alpha_floor"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [-4.0, 4.0]],
+      "equation": "logit(epsilon_0,eff)=logit(epsilon_0)+alpha_floor*ln(g_bar/g_ref); E=1/epsilon_RG(rho;epsilon_0,eff)"
+    },
+    "RG_Sigma_additive": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]],
+      "equation": "E=1+(1/epsilon_RG-1)+B*h(g_bar)"
+    },
+    "RG_Sigma_quadrature": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]],
+      "equation": "E=1+sqrt[(1/epsilon_RG-1)^2+(B*h(g_bar))^2]"
+    },
+    "RG_Sigma_product": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]],
+      "equation": "E=(1+B*h(g_bar))/epsilon_RG"
+    },
+    "RG_density_gated_Sigma": {
+      "parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B", "s"],
+      "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0], [0.0, 8.0]],
+      "equation": "E=1+(1/epsilon_RG-1)+B*h(g_bar)*epsilon_RG^s"
+    }
+  },
+  "diagnostic_surfaces": {
+    "linear_g_rho": "cross-validated linear regression of log10(g_obs/g_bar) on standardized log10(g_bar) and log10(rho)",
+    "quadratic_g_rho": "add squared and interaction terms",
+    "quadratic_g_rho_potential": "also add standardized log10(g_bar*r/c^2), its square, and pairwise interactions",
+    "ridge_penalty": 1.0e-6,
+    "claim_boundary": "These are empirical information-content ceilings, not physical theories."
+  },
+  "advance_gates": {
+    "primary_equal_domain_RMSE_dex_max": 0.12,
+    "BCG_RMSE_relative_to_fixed_galaxy_RAR_max": 1.25,
+    "cluster_diagonal_error_normalized_RMS_max": 1.5,
+    "absolute_cluster_radial_residual_slope_dex_per_dex_max": 0.10,
+    "improvement_over_RG_equal_domain_RMSE_dex_min": 0.01,
+    "maximum_domain_regression_vs_RG_dex": 0.01,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "failure_policy": {
+    "no_formula_passes_but_flexible_surface_passes": "derive a new constitutive form from the surface residual structure, then preregister a fresh external validation; do not call this sweep confirmation",
+    "flexible_surfaces_also_fail": "stop tuning functions of only local g_bar, rho, and g_bar*r; acquire theory-neutral same-system lensing/dynamics plus geometry or nonlocal boundary-condition predictors",
+    "any_formula_passes": "rerun the survivor on full SPARC rotation curves and independent non-NFW lensing observables before any theory claim"
+  },
+  "claim_boundary": [
+    "This is an explicitly exploratory, finite formula family following rejection of CPR0; cross-validation limits but does not remove selection bias.",
+    "Similarity to MOND/RAR or Refracted Gravity is reported as prior art, not originality.",
+    "No algebraic acceleration fit establishes a relativistic lensing law.",
+    "The BCG local density is model-derived and the CLASH total acceleration is NFW-deprojected."
+  ]
+}

@@ -1,0 +1,7 @@
+domain,composite_value,unit,comparator,comparator_value,ratio_to_comparator,status
+SPARC outer rotation,12.59204382085389,km/s RMSE,fixed RAR,10.348465773189679,1.2168029635346302,within_50_percent_not_better
+SPARC outer rotation,12.59204382085389,km/s RMSE,simple MOND,10.385167718947924,1.2125026924581566,within_50_percent_not_better
+four raw clusters,19.159352387520663,arcsec RMS,matched P0554 scalar parent,21.391241889093465,0.9907833101431559,root_complete_but_subpercent_matched_gain
+raw validation clusters,19.07556990937222,arcsec RMS,compact halo,9.989136027113078,1.9096316095402275,worse_than_compact_halo
+RXJ2129 route transfer,14.129878355246074,arcsec RMS,P0554 scalar parent,1.256170108342776,11.248379707018469,formula_transfer_failed
+Solar Mercury,-1.729829450133022,mas/century,published project margin absolute 3.1,3.1,0.5580095000429103,pass

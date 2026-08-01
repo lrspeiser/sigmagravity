@@ -1,0 +1,226 @@
+{
+  "protocol_version": "R1-J1402-A1-J2-0.1",
+  "status": "frozen_before_any_J1402_science_array_download_or_inspection",
+  "frozen_utc": "2026-07-27T15:00:00Z",
+  "selection_blind": true,
+  "lens_pixels_seen_at_freeze": false,
+  "KCWI_science_pixels_seen_at_freeze": false,
+  "gravity_residuals_seen_at_freeze": false,
+  "upstream": {
+    "sample_protocol": "configs/r1_slacs_kcwi_sample_feasibility_protocol.json",
+    "sample_report": "results/r1_slacs_kcwi_sample_feasibility/report.json",
+    "candidate_ledger": "data/derived/r1_slacs_kcwi_candidate_ledger.csv",
+    "KCWI_metadata_report": "results/r1_j1402_kcwi_metadata/report.json",
+    "KCWI_night_inventory": "data/derived/r1_j1402_kcwi_night_inventory.csv"
+  },
+  "candidate": {
+    "name": "SDSSJ1402+6321",
+    "full_name": "SDSSJ140228.21+632133.5",
+    "right_ascension_deg": 210.61754166666663,
+    "declination_deg": 63.35930555555556,
+    "lens_redshift": 0.205,
+    "selection_reason": "first residual-blind candidate among the seven all-pre-pixel-gate passers in the frozen all-14 SLACS-KCWI screen",
+    "selection_variables": [
+      "common radial support",
+      "public HST imaging",
+      "rerunnable Project Dinos inputs and model products",
+      "public raw KCWI exposure and same-night calibration identities"
+    ],
+    "forbidden_selection_variables": [
+      "published dark-matter fraction or density slope",
+      "residual under GR, RAR, U0, or any negative-gravity model",
+      "post-download image or kinematic fit quality"
+    ],
+    "published_support_facts": {
+      "Dinos_Einstein_radius_arcsec": 1.371,
+      "KCWI_accepted_radius_arcsec": 2.65,
+      "common_support_to_Einstein_radius_ratio": 1.9328957,
+      "HST_filters": ["F435W", "F555W", "F814W"],
+      "Dinos_maximum_shapelet_order": 6,
+      "KCWI_science_frames": 4,
+      "KCWI_total_exposure_seconds": 7200
+    }
+  },
+  "acquisition": {
+    "receipt_manifest": "data/raw/r1_j1402/acquisition_manifest.json",
+    "partial_download_suffix": ".part",
+    "download_policy": "stream every file to a partial path, verify identity and size where locked, compute SHA-256, then atomically rename; never overwrite a verified receipt",
+    "Dinos_GitHub": {
+      "repository": "https://github.com/Project-Dinos/dinos-i",
+      "commit": "6810ea6d8b7f97e8a7c4699d2b81b5da311c64cb",
+      "raw_url_template": "https://raw.githubusercontent.com/Project-Dinos/dinos-i/6810ea6d8b7f97e8a7c4699d2b81b5da311c64cb/{path}",
+      "identity_check": "expected byte count plus Git blob SHA-1; record an independent SHA-256 on receipt",
+      "files": [
+        {"path": "2_dolphin_modelling/data/SDSSJ1402+6321/image_SDSSJ1402+6321_F435W.h5", "bytes": 179016, "git_blob_sha1": "4166e2d6b3a39de3c2e12c108c33e2f3af7d4a74"},
+        {"path": "2_dolphin_modelling/data/SDSSJ1402+6321/image_SDSSJ1402+6321_F555W.h5", "bytes": 163016, "git_blob_sha1": "d74a21e3b6918141f89a941ff0057b1dd7fad967"},
+        {"path": "2_dolphin_modelling/data/SDSSJ1402+6321/image_SDSSJ1402+6321_F814W.h5", "bytes": 163016, "git_blob_sha1": "d73efc649cd5a115569256efca5f053c32a70c26"},
+        {"path": "2_dolphin_modelling/data/SDSSJ1402+6321/mask_SDSSJ1402+6321_F435W.h5", "bytes": 59648, "git_blob_sha1": "d751d91d2326fcf63335872baf0488a15439c001"},
+        {"path": "2_dolphin_modelling/data/SDSSJ1402+6321/psf_SDSSJ1402+6321_F435W.h5", "bytes": 16932, "git_blob_sha1": "caea2e4db1823462f43a8d878be8a8e6ef5fe976"},
+        {"path": "2_dolphin_modelling/data/SDSSJ1402+6321/psf_SDSSJ1402+6321_F555W.h5", "bytes": 16932, "git_blob_sha1": "103bc14830e178b85304e2d7bb7339c852997b21"},
+        {"path": "2_dolphin_modelling/data/SDSSJ1402+6321/psf_SDSSJ1402+6321_F814W.h5", "bytes": 16932, "git_blob_sha1": "2d7805d28ca590102c44f5598cb578ec49cf7f94"},
+        {"path": "2_dolphin_modelling/settings/SDSSJ1402+6321_config.yml", "bytes": 118454, "git_blob_sha1": "91d7ee11146a9101a9c1d50a282bbda2fe2a95e3"},
+        {"path": "3_model_parameters/pkl_files/image_SDSSJ1402+6321_F555W..npy", "bytes": 502889, "git_blob_sha1": "f9b3b41df1cc7cf367c587f1f6253274609d21c1"}
+      ]
+    },
+    "Dinos_full_output": {
+      "provider": "Google Drive",
+      "folder_id": "1vh9lVTmE_ilxiCjkRYCsWdUk_XjDm7tt",
+      "file_id": "1BuAmGW5adsypaIbBrv5z3_Zdf96CXfm7",
+      "file_name": "output_SDSSJ1402+6321_dinos_i.h5",
+      "displayed_size_mb": 202.4,
+      "identity_check": "file ID and name must match; record exact byte count and SHA-256 on first successful receipt because the provider does not publish a cryptographic checksum"
+    },
+    "KCWI": {
+      "archive": "Keck Observatory Archive",
+      "TAP_service": "https://koa.ipac.caltech.edu/TAP",
+      "table": "koa_kcwi",
+      "program": "U020",
+      "observation_date": "2022-04-08",
+      "setup": {"camera": "BLUE", "grating": "BL", "filter": "KBlue", "slicer": "Small", "binning": "1,1", "ampmode": "TUP", "ccdspeed": "0", "wavelength_range_angstrom": [3600, 5600]},
+      "science_ids": [
+        "KB.20220408.44130.47.fits",
+        "KB.20220408.46107.23.fits",
+        "KB.20220408.48082.97.fits",
+        "KB.20220408.50056.67.fits"
+      ],
+      "bias_ids": [
+        "KB.20220408.07351.31.fits", "KB.20220408.07526.75.fits", "KB.20220408.07702.19.fits", "KB.20220408.07878.65.fits", "KB.20220408.08054.90.fits", "KB.20220408.08229.53.fits", "KB.20220408.08405.99.fits"
+      ],
+      "continuum_bar_ids": ["KB.20220408.08621.21.fits"],
+      "arc_ids": ["KB.20220408.08719.13.fits", "KB.20220408.08842.55.fits"],
+      "flat_ids": [
+        "KB.20220408.08892.53.fits", "KB.20220408.09073.70.fits", "KB.20220408.09254.63.fits", "KB.20220408.09436.19.fits", "KB.20220408.09617.75.fits", "KB.20220408.09798.29.fits", "KB.20220408.15905.30.fits", "KB.20220408.16193.69.fits", "KB.20220408.16481.33.fits", "KB.20220408.17861.39.fits", "KB.20220408.18132.71.fits", "KB.20220408.18478.49.fits", "KB.20220408.55164.83.fits", "KB.20220408.55523.87.fits", "KB.20220408.55858.43.fits", "KB.20220408.56223.59.fits", "KB.20220408.56576.51.fits"
+      ],
+      "standard_star_ids": [
+        {"koaid": "KB.20220408.19146.59.fits", "object": "Feige34", "exposure_seconds": 10},
+        {"koaid": "KB.20220408.19592.33.fits", "object": "gd108", "exposure_seconds": 10},
+        {"koaid": "KB.20220408.19897.31.fits", "object": "gd108", "exposure_seconds": 60},
+        {"koaid": "KB.20220408.54231.53.fits", "object": "bd26d2606", "exposure_seconds": 10},
+        {"koaid": "KB.20220408.54467.15.fits", "object": "bd26d2606", "exposure_seconds": 6}
+      ],
+      "file_handle_template": "/KCWI/2022/20220408/lev0/{koaid}",
+      "calibration_compatibility": {
+        "bias_and_flat": "same optical setup and same TUP/0 detector readout as the science frames",
+        "continuum_bar_and_arc": "same optical setup but ALL/1 detector readout rather than science TUP/0",
+        "required_validation": "the official DRP must accept the frozen continuum/arc frames and yield wavelength residuals within threshold; detector-readout mismatch is not waived or relabeled as an exact match",
+        "fallback": "if the geometry frames fail, stop KCWI promotion and publish the calibration shortfall; do not substitute a later-night set after seeing the kinematics"
+      }
+    },
+    "independent_HST_metadata": {
+      "role": "provenance cross-check only; the initial replay uses the checksum-locked Dinos processed images",
+      "ACS_programs": [10174, 10494],
+      "filters": ["F435W", "F555W", "F814W"],
+      "raw_visit_handles": ["j9c705010", "j9c705020"],
+      "download_now": false,
+      "trigger": "download calibrated/raw MAST products only if the Dinos image provenance or pixel scale cannot be verified from the locked HDF5 and configuration"
+    }
+  },
+  "lens_replay_gate": {
+    "software": "rerun the public Project Dinos configuration at the locked repository commit and inspect the locked full-chain output",
+    "published_posterior_role": "nuisance initialization and replay control only; the published power-law slope, dark-matter fraction, and GR mass posterior are not response data",
+    "must_reproduce": [
+      "all three image arrays, masks or common mask construction, PSFs, pixel scales, and noise conventions",
+      "the declared model components and priors in the locked configuration",
+      "a finite full-chain posterior and posterior-predictive images in all fitted bands"
+    ],
+    "predictive_closure": {
+      "maximum_masked_reduced_chi_square": 1.5,
+      "maximum_heldout_sector_reduced_chi_square": 1.5,
+      "maximum_coherent_heldout_residual_sigma": 5.0,
+      "minimum_nonempty_arc_pixels_per_band": 100
+    },
+    "stop_if": "the public images, PSFs, mask, configuration, and chain cannot be put in one verified coordinate system or do not close predictively"
+  },
+  "lens_response_basis": {
+    "quantity": "theory-free radial reduced-deflection perturbation in the image plane",
+    "Einstein_radius_arcsec": 1.371,
+    "knot_radii_in_Einstein_radii": [0.7, 0.9, 1.1, 1.3],
+    "knot_radii_arcsec": [0.9597, 1.2339, 1.5081, 1.7823],
+    "basis": "natural cubic radial splines, zero at the origin and at 1.5 Einstein radii, unit amplitude at one knot",
+    "derivative": "symmetric central finite difference of the full PSF-convolved three-band forward model with the frozen nuisance projection",
+    "nominal_finite_difference_arcsec": 0.01371,
+    "finite_difference_grid_arcsec": [0.006855, 0.01371, 0.02742]
+  },
+  "nuisance_projection": {
+    "source_light": ["shapelet coefficients", "source centroid", "source ellipticity and scale", "band amplitudes and colours"],
+    "lens_light": ["all configured surface-brightness components", "constant and linear sky per band", "low-order colour-gradient residuals"],
+    "lens_mapping": ["lens centroid", "ellipticity", "external shear", "angular m=3 and m=4 directions", "mass-sheet-like direction"],
+    "instrument": ["relative astrometry per band", "PSF width/ellipticity modes", "noise renormalization per band"],
+    "method": "whiten by the pixel covariance/noise model, then project each response column through the regularized Schur complement of the full nuisance Jacobian",
+    "source_positivity_for_rank": false,
+    "reason_source_positivity_not_used": "an active inequality boundary can create artificial local rank"
+  },
+  "lens_variant_grid": {
+    "shapelet_orders": [4, 6, 8],
+    "band_subsets": ["F435W+F555W+F814W", "F435W+F555W", "F435W+F814W", "F555W+F814W"],
+    "masks": ["eroded_one_pixel", "nominal", "dilated_one_pixel"],
+    "PSF_variants": ["nominal", "narrow_core", "broad_core", "ellipticity_plus", "ellipticity_minus"],
+    "finite_difference_arcsec": [0.006855, 0.01371, 0.02742],
+    "heldout_image_sectors": 6,
+    "synthetic_injections": 100,
+    "negative_control": "replace every radial deflection column by its 90-degree tangential quadrature while preserving amplitude and radial support"
+  },
+  "rank_gate": {
+    "minimum_whitened_singular_modes": 3,
+    "minimum_mode_signal_to_noise": 3.0,
+    "relative_numerical_floor": 0.001,
+    "maximum_retained_condition_number": 1000.0,
+    "maximum_singular_value_fractional_change": 0.25,
+    "maximum_retained_subspace_principal_angle_deg": 15.0,
+    "negative_control_maximum_rank": 0,
+    "synthetic_maximum_bias_posterior_sigma": 0.25,
+    "synthetic_minimum_interval_coverage": 0.95,
+    "all_named_variant_families_must_pass": true
+  },
+  "KCWI_reduction_and_dynamics_gate": {
+    "reduction": "official KCWI DRP with propagated variance and data-quality arrays, using only the frozen science/calibration identities",
+    "wavelength_solution_maximum_RMS_angstrom": 0.1,
+    "exposure_registration_maximum_arcsec": 0.1,
+    "standard_star_flux_shape_maximum_fractional_residual": 0.1,
+    "kinematic_extraction": "Voronoi-bin the registered cube to target continuum S/N 30 and fit stellar velocity and dispersion with template and polynomial systematics",
+    "minimum_independent_numerical_bins_in_lens_support": 3,
+    "lens_support_arcsec": [0.9597, 1.7823],
+    "required_observables": ["line-of-sight velocity", "velocity dispersion", "bin coordinates and footprints", "statistical covariance", "template/LSF/sky systematic covariance"],
+    "stability_variants": ["target_SNR_25", "target_SNR_30", "target_SNR_35", "additive_polynomial_grid", "multiplicative_polynomial_grid", "template_subsets", "sky_mask_dilation", "individual_exposure_jackknife"],
+    "minimum_velocity_dispersion_signal_to_noise_per_retained_bin": 3.0,
+    "maximum_exposure_jackknife_shift_sigma": 1.0,
+    "stop_if": "fewer than three stable covariance-bearing bins overlap the retained lens-response support"
+  },
+  "execution_order": [
+    "acquire and checksum all locked Dinos GitHub inputs and the locked full-chain output",
+    "acquire and checksum the four KCWI science frames, 27 calibration frames, and five standard-star frames",
+    "validate HDF5/config coordinates and replay the published imaging likelihood",
+    "require predictive closure before evaluating any response derivative",
+    "compute the frozen nuisance-marginalized lens Jacobian and all controls",
+    "reduce KCWI and construct the covariance-bearing kinematic map",
+    "apply the joint three-lens-mode plus three-dynamics-bin gate",
+    "only after the joint gate, freeze a separate dynamical-potential and Weyl-potential reconstruction protocol"
+  ],
+  "outputs": {
+    "acquisition_manifest": "data/raw/r1_j1402/acquisition_manifest.json",
+    "replay_report": "results/r1_j1402_dinos_replay/report.json",
+    "lens_variant_ledger": "data/derived/r1_j1402_lens_jacobian_variants.csv",
+    "lens_jacobian_products": "data/derived/r1_j1402_lens_jacobian_products.npz",
+    "KCWI_reduction_report": "results/r1_j1402_kcwi_reduction/report.json",
+    "kinematic_map": "data/derived/r1_j1402_kcwi_kinematics.fits",
+    "joint_report": "results/r1_j1402_joint_rank/report.json"
+  },
+  "concrete_outcomes": {
+    "advance": "At least three lens-response singular modes pass every frozen rank, stability, injection, negative-control, and held-out test, and at least three stable covariance-bearing KCWI bins overlap those modes. This promotes J1402 only to a same-system observable candidate and authorizes a separately frozen Phi versus Phi+Psi reconstruction.",
+    "partial": "Record the stable lens rank and usable KCWI-bin count, but do not count J1402 if either side is below three.",
+    "fail": "Any coordinate/replay failure, calibration failure, synthetic-coverage failure, negative-control rank, or fewer than three stable modes/bins ends J1402 promotion without weakening thresholds.",
+    "rethink_checkpoint": "If J1402 becomes the third consecutive external system with zero structural promotion after J0946 and E325, stop single-system acquisition and reconsider the ten-system premise/data requirement before selecting another target."
+  },
+  "authorization": {
+    "download_only_the_locked_Dinos_and_KCWI_files": true,
+    "inspect_science_arrays_after_checksum_manifest_is_complete": true,
+    "run_only_the_frozen_replay_rank_and_dynamics_tests": true,
+    "use_published_Dinos_mass_slope_as_observable": false,
+    "substitute_calibrations_after_seeing_kinematics": false,
+    "count_toward_ten_system_target_before_all_joint_gates": false,
+    "reconstruct_Phi_or_Phi_plus_Psi_before_separate_protocol": false,
+    "infer_gravity_response": false,
+    "fit_new_force_or_action": false,
+    "authorize_R2": false
+  }
+}

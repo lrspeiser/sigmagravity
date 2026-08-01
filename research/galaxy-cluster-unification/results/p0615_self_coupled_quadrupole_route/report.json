@@ -1,0 +1,350 @@
+{
+  "report_version": "P0615-SELF-COUPLED-QUADRUPOLE-ROUTE-RESULTS-0.1.0",
+  "status": "complete_opened_data_parameter_free_response_test",
+  "coverage": {
+    "raw_systems": 5,
+    "heldout_images": 18,
+    "amplitude_laws_including_control": 6,
+    "new_fitted_gravity_parameters": 0
+  },
+  "derived_quantities": {
+    "scalar_excess_at_R80": "Delta80=alpha_P0554(R80)/alpha_b(R80)-1",
+    "self_routed_fraction": "f_self=Delta80/(1+Delta80)",
+    "baryonic_quadrupole": "Q=sqrt(Qxx^2+Qxy^2), the centroided spin-2 member-light asymmetry",
+    "reason_for_Q_squared": "Q is spin-2; Q^2 is the lowest even rotational scalar and is exactly zero for an axisymmetric source."
+  },
+  "system_states": [
+    {
+      "cohort": "P0581_four",
+      "system_label": "MACS0329",
+      "R80_kpc": 244.14229945401135,
+      "parent_alpha_R80_arcsec": 12.426952899283638,
+      "baryonic_alpha_R80_arcsec": 1.512208296367969,
+      "Delta80": 7.217752097466182,
+      "self_routed_fraction": 0.878312221135469,
+      "quadrupole_Q": 0.27846805628929305,
+      "epsilon_scalar_control": 0.0,
+      "epsilon_linear_Q_over_total": 0.03388615925456725,
+      "epsilon_quadratic_Q2_over_total": 0.00943621290272878,
+      "epsilon_quadratic_Q2_routed": 0.008287941113702886,
+      "epsilon_quadratic_Q2_strong_screen": 0.0011482717890258932,
+      "epsilon_quartic_Q4_over_total": 0.0007317260186394835
+    },
+    {
+      "cohort": "P0581_four",
+      "system_label": "MACS0429",
+      "R80_kpc": 228.53855516930213,
+      "parent_alpha_R80_arcsec": 11.828173711638785,
+      "baryonic_alpha_R80_arcsec": 1.4767400426679058,
+      "Delta80": 7.009651915627471,
+      "self_routed_fraction": 0.8751506294488378,
+      "quadrupole_Q": 0.22234455758849056,
+      "epsilon_scalar_control": 0.0,
+      "epsilon_linear_Q_over_total": 0.027759578060399675,
+      "epsilon_quadratic_Q2_over_total": 0.006172191102682734,
+      "epsilon_quadratic_Q2_routed": 0.0054015969285913104,
+      "epsilon_quadratic_Q2_strong_screen": 0.0007705941740914229,
+      "epsilon_quartic_Q4_over_total": 0.0003051352428919498
+    },
+    {
+      "cohort": "P0581_four",
+      "system_label": "MACS1115",
+      "R80_kpc": 235.841224203368,
+      "parent_alpha_R80_arcsec": 14.005814539310782,
+      "baryonic_alpha_R80_arcsec": 1.7244233176098056,
+      "Delta80": 7.122028040495305,
+      "self_routed_fraction": 0.8768780414184563,
+      "quadrupole_Q": 0.3736004344320205,
+      "epsilon_scalar_control": 0.0,
+      "epsilon_linear_Q_over_total": 0.04599841721418599,
+      "epsilon_quadratic_Q2_over_total": 0.017185028654405216,
+      "epsilon_quadratic_Q2_routed": 0.015069174268194891,
+      "epsilon_quadratic_Q2_strong_screen": 0.0021158543862103214,
+      "epsilon_quartic_Q4_over_total": 0.0023986396354890196
+    },
+    {
+      "cohort": "P0581_four",
+      "system_label": "MACS1931",
+      "R80_kpc": 211.93048256927227,
+      "parent_alpha_R80_arcsec": 46.44345947844168,
+      "baryonic_alpha_R80_arcsec": 3.739392332807009,
+      "Delta80": 11.420055277692263,
+      "self_routed_fraction": 0.919485060441228,
+      "quadrupole_Q": 0.511758174814234,
+      "epsilon_scalar_control": 0.0,
+      "epsilon_linear_Q_over_total": 0.04120417851387553,
+      "epsilon_quadratic_Q2_over_total": 0.02108657519098082,
+      "epsilon_quadratic_Q2_routed": 0.0193887908639775,
+      "epsilon_quadratic_Q2_strong_screen": 0.0016977843270033226,
+      "epsilon_quartic_Q4_over_total": 0.005522498752673341
+    },
+    {
+      "cohort": "RXJ2129",
+      "system_label": "RXJ2129",
+      "R80_kpc": 184.29674534678944,
+      "parent_alpha_R80_arcsec": 28.78262867318192,
+      "baryonic_alpha_R80_arcsec": 2.556539695435304,
+      "Delta80": 10.25843213957258,
+      "self_routed_fraction": 0.9111776855246947,
+      "quadrupole_Q": 0.29417095226193507,
+      "epsilon_scalar_control": 0.0,
+      "epsilon_linear_Q_over_total": 0.02612894483130962,
+      "epsilon_quadratic_Q2_over_total": 0.007686376582625917,
+      "epsilon_quadratic_Q2_routed": 0.007003654824628295,
+      "epsilon_quadratic_Q2_strong_screen": 0.0006827217579976217,
+      "epsilon_quartic_Q4_over_total": 0.0006651525049638942
+    }
+  ],
+  "summary_scores": [
+    {
+      "cohort": "P0581_four",
+      "law": "scalar_control",
+      "systems": 4,
+      "complete_systems": 4,
+      "heldout_images": 11,
+      "heldout_converged_roots": 11,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 22.514165987894383,
+      "median_epsilon": 0.0,
+      "minimum_epsilon": 0.0,
+      "maximum_epsilon": 0.0,
+      "improvement_vs_frozen_scalar": 0.0
+    },
+    {
+      "cohort": "P0581_four",
+      "law": "linear_Q_over_total",
+      "systems": 4,
+      "complete_systems": 4,
+      "heldout_images": 11,
+      "heldout_converged_roots": 11,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 22.437421500965236,
+      "median_epsilon": 0.037545168884221394,
+      "minimum_epsilon": 0.027759578060399675,
+      "maximum_epsilon": 0.04599841721418599,
+      "improvement_vs_frozen_scalar": 0.003408719957488593
+    },
+    {
+      "cohort": "P0581_four",
+      "law": "quadratic_Q2_over_total",
+      "systems": 4,
+      "complete_systems": 4,
+      "heldout_images": 11,
+      "heldout_converged_roots": 11,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 22.490556761590422,
+      "median_epsilon": 0.013310620778566998,
+      "minimum_epsilon": 0.006172191102682734,
+      "maximum_epsilon": 0.02108657519098082,
+      "improvement_vs_frozen_scalar": 0.0010486387244660333
+    },
+    {
+      "cohort": "P0581_four",
+      "law": "quadratic_Q2_routed",
+      "systems": 4,
+      "complete_systems": 4,
+      "heldout_images": 11,
+      "heldout_converged_roots": 11,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 22.495041700683753,
+      "median_epsilon": 0.011678557690948888,
+      "minimum_epsilon": 0.0054015969285913104,
+      "maximum_epsilon": 0.0193887908639775,
+      "improvement_vs_frozen_scalar": 0.0008494335175868173
+    },
+    {
+      "cohort": "P0581_four",
+      "law": "quadratic_Q2_strong_screen",
+      "systems": 4,
+      "complete_systems": 4,
+      "heldout_images": 11,
+      "heldout_converged_roots": 11,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 22.50893193527385,
+      "median_epsilon": 0.0014230280580146079,
+      "minimum_epsilon": 0.0007705941740914229,
+      "maximum_epsilon": 0.0021158543862103214,
+      "improvement_vs_frozen_scalar": 0.0002324781927675046
+    },
+    {
+      "cohort": "P0581_four",
+      "law": "quartic_Q4_over_total",
+      "systems": 4,
+      "complete_systems": 4,
+      "heldout_images": 11,
+      "heldout_converged_roots": 11,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 22.515596884664486,
+      "median_epsilon": 0.0015651828270642515,
+      "minimum_epsilon": 0.0003051352428919498,
+      "maximum_epsilon": 0.005522498752673341,
+      "improvement_vs_frozen_scalar": -6.355539756053297e-05
+    },
+    {
+      "cohort": "RXJ2129",
+      "law": "scalar_control",
+      "systems": 1,
+      "complete_systems": 1,
+      "heldout_images": 7,
+      "heldout_converged_roots": 7,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 1.2561701083427703,
+      "median_epsilon": 0.0,
+      "minimum_epsilon": 0.0,
+      "maximum_epsilon": 0.0,
+      "improvement_vs_frozen_scalar": 0.0
+    },
+    {
+      "cohort": "RXJ2129",
+      "law": "linear_Q_over_total",
+      "systems": 1,
+      "complete_systems": 0,
+      "heldout_images": 7,
+      "heldout_converged_roots": 6,
+      "all_roots": false,
+      "equal_complete_system_RMS_arcsec": null,
+      "median_epsilon": 0.02612894483130962,
+      "minimum_epsilon": 0.02612894483130962,
+      "maximum_epsilon": 0.02612894483130962,
+      "improvement_vs_frozen_scalar": null
+    },
+    {
+      "cohort": "RXJ2129",
+      "law": "quadratic_Q2_over_total",
+      "systems": 1,
+      "complete_systems": 1,
+      "heldout_images": 7,
+      "heldout_converged_roots": 7,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 1.245798188893051,
+      "median_epsilon": 0.007686376582625917,
+      "minimum_epsilon": 0.007686376582625917,
+      "maximum_epsilon": 0.007686376582625917,
+      "improvement_vs_frozen_scalar": 0.008256779381100476
+    },
+    {
+      "cohort": "RXJ2129",
+      "law": "quadratic_Q2_routed",
+      "systems": 1,
+      "complete_systems": 1,
+      "heldout_images": 7,
+      "heldout_converged_roots": 7,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 1.243579245074267,
+      "median_epsilon": 0.007003654824628295,
+      "minimum_epsilon": 0.007003654824628295,
+      "maximum_epsilon": 0.007003654824628295,
+      "improvement_vs_frozen_scalar": 0.010023215156038101
+    },
+    {
+      "cohort": "RXJ2129",
+      "law": "quadratic_Q2_strong_screen",
+      "systems": 1,
+      "complete_systems": 1,
+      "heldout_images": 7,
+      "heldout_converged_roots": 7,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 1.2537688825017932,
+      "median_epsilon": 0.0006827217579976217,
+      "minimum_epsilon": 0.0006827217579976217,
+      "maximum_epsilon": 0.0006827217579976217,
+      "improvement_vs_frozen_scalar": 0.001911545120385827
+    },
+    {
+      "cohort": "RXJ2129",
+      "law": "quartic_Q4_over_total",
+      "systems": 1,
+      "complete_systems": 1,
+      "heldout_images": 7,
+      "heldout_converged_roots": 7,
+      "all_roots": true,
+      "equal_complete_system_RMS_arcsec": 1.2538289924815087,
+      "median_epsilon": 0.0006651525049638942,
+      "minimum_epsilon": 0.0006651525049638942,
+      "maximum_epsilon": 0.0006651525049638942,
+      "improvement_vs_frozen_scalar": 0.0018636933371628528
+    }
+  ],
+  "combined_diagnostic": [
+    {
+      "law": "quadratic_Q2_over_total",
+      "combined_roots": 18,
+      "all_18_roots": true,
+      "four_cluster_improvement": 0.0010486387244660333,
+      "RXJ2129_improvement": 0.008256779381100476
+    },
+    {
+      "law": "quadratic_Q2_routed",
+      "combined_roots": 18,
+      "all_18_roots": true,
+      "four_cluster_improvement": 0.0008494335175868173,
+      "RXJ2129_improvement": 0.010023215156038101
+    },
+    {
+      "law": "quadratic_Q2_strong_screen",
+      "combined_roots": 18,
+      "all_18_roots": true,
+      "four_cluster_improvement": 0.0002324781927675046,
+      "RXJ2129_improvement": 0.001911545120385827
+    },
+    {
+      "law": "scalar_control",
+      "combined_roots": 18,
+      "all_18_roots": true,
+      "four_cluster_improvement": 0.0,
+      "RXJ2129_improvement": 0.0
+    },
+    {
+      "law": "quartic_Q4_over_total",
+      "combined_roots": 18,
+      "all_18_roots": true,
+      "four_cluster_improvement": -6.355539756053297e-05,
+      "RXJ2129_improvement": 0.0018636933371628528
+    },
+    {
+      "law": "linear_Q_over_total",
+      "combined_roots": 17,
+      "all_18_roots": false,
+      "four_cluster_improvement": 0.003408719957488593,
+      "RXJ2129_improvement": null
+    }
+  ],
+  "diagnostic_winner": {
+    "law": "quadratic_Q2_over_total",
+    "combined_roots": 18,
+    "all_18_roots": true,
+    "four_cluster_improvement": 0.0010486387244660333,
+    "RXJ2129_improvement": 0.008256779381100476
+  },
+  "inherited_cross_domain": {
+    "SPARC_outer_RMSE_km_s": 12.59204382085389,
+    "fixed_RAR_outer_RMSE_km_s": 10.348465773189679,
+    "SPARC_to_RAR_ratio": 1.2168029635346302,
+    "Solar_all_proxies_pass": true,
+    "route_layer_axisymmetric_and_point_source_change": 0.0
+  },
+  "gates": {
+    "four_cluster_all_roots_pass": true,
+    "RXJ2129_all_roots_pass": true,
+    "four_cluster_improvement_pass": true,
+    "RXJ2129_improvement_pass": true,
+    "galaxy_near_RAR_pass": true,
+    "Solar_all_proxies_pass": true,
+    "zero_new_fitted_gravity_parameters_pass": true,
+    "all_diagnostic_gates_pass": true
+  },
+  "interpretation": {
+    "formula_promoted": false,
+    "parameter_reduction_achieved": true,
+    "quadratic_shape_has_first_principle_motivation": "Q^2 is the lowest even rotational scalar built from the spin-2 baryonic quadrupole.",
+    "future_transfer_required": true
+  },
+  "claim_limits": [
+    "The amplitude family was motivated after inspecting P0583-P0614 and is not prospective.",
+    "All five raw systems are project-spent.",
+    "The four-cluster geometry and source positions are held at the P0581 K0338 fit; RXJ2129 uses its P0583 scalar fit.",
+    "F160W member light is a baryonic proxy and omits hot gas, intracluster light, and stellar mass-to-light variation.",
+    "The angular correction is zero-monopole and cannot repair missing absolute cluster convergence.",
+    "No improvement in this diagnostic can promote the formula without a future raw-cluster transfer."
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "protocol_version": "P0576B-FRACTIONAL-BOUNDARY-EXTENSION-0.1.0",
+  "frozen_utc": "2026-08-01T08:45:00Z",
+  "status": "frozen_after_P0576_before_extended_power_scores",
+  "trigger": "P0576 selected both p=1.5 and f_alpha=1 at the upper boundaries while improving held-out raw-family scatter by 44.8%.",
+  "question": "Does the long-wavelength response have an interior optimum beyond p=1.5, and does one locked exponent remain useful across every source-family partition?",
+  "formula": "Identical to P0576: ordinary local field plus Q90-gated routed field multiplied by (k/k0)^(2*(1-p)), k0=2*pi/(60 kpc).",
+  "grid": {
+    "fractional_power_p": [1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6],
+    "deflection_route_fraction": [0.8, 0.9, 1.0],
+    "candidates": 39,
+    "padding_factor": 3,
+    "reference_length_kpc": 60.0
+  },
+  "selection": {
+    "calibration_families": ["1", "2"],
+    "heldout_families": ["5", "19"],
+    "rule": "Choose minimum calibration-family source-plane RMS; apply the one selected p and f to held-out families without refitting either coordinate.",
+    "postselection_robustness": "With p and f locked, enumerate all six two-family amplitude-calibration partitions; only the single overall amplitude is refitted in each partition."
+  },
+  "gates": {
+    "heldout_improvement_vs_local_fraction_min": 0.10,
+    "heldout_families_improved_min": 2,
+    "selected_power_interior": true,
+    "all_split_median_improvement_vs_local_fraction_min": 0.10,
+    "all_split_improved_count_min": 4,
+    "solar_SPARC_null": true
+  },
+  "inputs": {
+    "p0575_images": "results/p0575_smacs0723_raw_position/raw_images.csv",
+    "p0573_protocol": "configs/p0573_tidal_arrival_fresh_replication_protocol.json",
+    "p0574_protocol": "configs/p0574_symmetry_gated_arrival_microvariation_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0576b_fractional_boundary_extension",
+    "candidate_scores": "candidate_scores.csv",
+    "split_scores": "split_scores.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0576b_fractional_boundary_extension.png"
+  },
+  "claim_limits": [
+    "The extension reuses the same SMACS J0723 raw positions, and p=1.5 has already touched the held-out families.",
+    "Split robustness is within-cluster reuse, not external validation.",
+    "A fitted overall amplitude remains, so absolute strength is not predicted.",
+    "Only the routed angular component changes; galaxy rotation remains unexplained and exactly unchanged."
+  ]
+}

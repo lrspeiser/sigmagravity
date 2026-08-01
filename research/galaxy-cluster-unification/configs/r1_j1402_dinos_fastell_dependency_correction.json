@@ -1,0 +1,65 @@
+{
+  "protocol_version": "R1-J1402-Dinos-C2-fastell-0.1",
+  "status": "frozen_after_dependency_import_failure_before_any_J1402_forward_model_or_science_pixel_evaluation",
+  "frozen_utc": "2026-07-27T15:30:00Z",
+  "upstream_protocol": "configs/r1_j1402_dinos_coordinate_replay_protocol.json",
+  "upstream_environment_report": "results/r1_j1402_dinos_environment_corrected/report.json",
+  "initial_dependency_failure_report": "results/r1_j1402_dinos_replay_dependency_failure/report.json",
+  "observed_failure": {
+    "exception": "ImportError: module fastell4py not installed",
+    "stage": "lenstronomy PEMD class construction while requesting the frozen parameter order",
+    "science_pixel_evaluated": false,
+    "nonlinear_fit_performed": false,
+    "interpretation": "missing required released-model backend; not a coordinate, likelihood, predictive, or physical failure"
+  },
+  "primary_source_evidence": {
+    "lenstronomy_documentation": "https://lenstronomy.readthedocs.io/en/latest/installation.html#fastell",
+    "documented_semantics": "fastell4py and a Fortran compiler are required for PEMD; EPL is recommended only as an alternative implementation",
+    "repository": "https://github.com/sibirrer/fastell4py",
+    "commit": "3448d58033ebbf1c0ac3047459d6c999ba6701fe",
+    "commit_date": "2018-05-20T11:01:07-07:00",
+    "date_boundary": "the upstream repository has no later commit before the 2024-03-25 J1402 artifacts",
+    "archive": "data/raw/r1_j1402/software/fastell4py-3448d580-source.tar.gz",
+    "archive_bytes": 131227,
+    "archive_sha256": "46e308811034f4dd5bb968a85159659b00980f083482d387ea228ae53de42942"
+  },
+  "correction": {
+    "source_policy": "build the exact unmodified date-bounded fastell4py commit from the checksum-locked archive",
+    "execution_environment": ".venv-r1-j1402-dolphin-v001-linux-fastell",
+    "build_environment": ".toolchains/r1-j1402-gfortran",
+    "operating_system_role": "WSL2 Linux compatibility environment required only because the released Fortran extension has no public Windows wheel",
+    "python": "3.10.x",
+    "legacy_build_frontend": "setuptools 59.8.0 plus NumPy 1.26 direct F2PY generation from the unchanged fastell.pyf and src/fastell.f; the committed pre-generated 2015 C wrapper is excluded because it is incompatible with the frozen NumPy C API",
+    "scientific_packages": "unchanged from the frozen primary Dolphin reconstruction",
+    "forbidden_substitutions": [
+      "do not replace PEMD with EPL for the primary replay",
+      "do not set suppress_fastell=True",
+      "do not patch lenstronomy, Dolphin, fastell4py, the J1402 settings, or the released data",
+      "do not compile the obsolete committed _fastellmodule.c in place of regenerating it from the checksum-locked pyf interface",
+      "do not change any likelihood, predictive, held-out, coordinate-control, or response-rank threshold"
+    ],
+    "compiler_policy": "record the exact compiler and binary-module hashes; compiler identity is an unresolved provenance boundary because the original authors did not publish it"
+  },
+  "unchanged_scientific_gates": [
+    "exact 23-parameter order",
+    "stored likelihood replay maximum absolute delta per used pixel 0.01",
+    "stored likelihood replay maximum fractional total delta 1e-8",
+    "masked and held-out predictive chi-square ceilings",
+    "coordinate-corruption negative controls",
+    "four-direction nuisance-marginalized lens-response rank thresholds",
+    "synthetic-injection bias and coverage",
+    "three overlapping covariance-bearing KCWI bins"
+  ],
+  "authorization": {
+    "build_checksum_locked_fastell_backend": true,
+    "create_repo_local_Linux_compatibility_environment": true,
+    "evaluate_only_stored_chain_coordinates_after_environment_audit": true,
+    "optimize_nonlinear_model": false,
+    "substitute_EPL_for_primary_replay": false,
+    "compute_lens_response": false,
+    "reduce_KCWI": false,
+    "infer_gravity_response": false,
+    "fit_new_force_or_action": false,
+    "authorize_R2": false
+  }
+}

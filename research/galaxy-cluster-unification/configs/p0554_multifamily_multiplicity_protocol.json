@@ -1,0 +1,76 @@
+{
+  "protocol_version": "P0554-MULTIFAMILY-MULTIPLICITY-0.1.0",
+  "frozen_utc": "2026-08-01T00:58:00Z",
+  "status": "frozen_after_macs1931_companion_rejection_before_any_other_family_global_root_counts",
+  "question": "Does the MACS1931 surplus-image problem recur across the 26 other observed source families, and which P0554 components most often predict missing, exact, demagnified-surplus, or potentially observable-surplus image multiplicity?",
+  "variants": [
+    "baseline",
+    "lensing_softness_098",
+    "route_parent",
+    "combined_parent",
+    "combined_power_240"
+  ],
+  "variant_roles": {
+    "baseline": "scalar P0554",
+    "lensing_softness_098": "best simple continuous photon-response perturbation",
+    "route_parent": "angular route only",
+    "combined_parent": "radial plus angular parent",
+    "combined_power_240": "best complete descriptive route interaction"
+  },
+  "evaluation": {
+    "systems": "all five raw clusters used in the interaction experiment",
+    "families": "all 27 observed source families, including families without held-out images",
+    "formula_parameters_fit": 0,
+    "geometry_parameters_refit": 0,
+    "geometry_source": "archived eight-start interaction fits",
+    "source_source": "archived training-profiled source positions",
+    "global_search_half_width_arcsec": 120.0,
+    "global_root_aperture_arcsec": 120.0,
+    "global_grid_spacing_arcsec": 12.0,
+    "interlaced_grid_offset_arcsec": 6.0,
+    "local_seed_radii_arcsec": [0.0, 0.5, 1.0, 2.0, 4.0, 8.0, 16.0, 32.0],
+    "local_seed_angles": 12,
+    "root_closure_tolerance_arcsec": 0.000001,
+    "root_deduplication_arcsec": 0.05,
+    "jacobian_step_arcsec": 0.0002,
+    "assignment": "Hungarian minimum-distance one-to-one observed-image/root assignment",
+    "potentially_observable_surplus_threshold": "absolute magnification at least 0.25 times the faintest assigned root in that formula-family",
+    "exact_multiplicity": "number of global roots equals number of published images",
+    "demagnified_only_surplus": "root count exceeds published count but no unassigned root crosses the frozen relative-magnification threshold",
+    "potentially_observable_surplus": "at least one unassigned root crosses the frozen relative-magnification threshold",
+    "missing_multiplicity": "fewer global roots than published images"
+  },
+  "interpretation_rules": {
+    "primary_comparison": "family-level counts of missing, exact, demagnified-only-surplus, and potentially-observable-surplus classifications",
+    "do_not_assume_catalog_completeness": true,
+    "do_not_treat_all_extra_roots_as_failures": true,
+    "route_warning": "a route variant is disfavored if it increases potentially observable surplus families without improving matched image-position RMS",
+    "no_formula_promotion": true
+  },
+  "inputs": {
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "interaction_geometry": "results/p0554_route_softness_interaction/geometry.csv",
+    "interaction_predictions": "results/p0554_route_softness_interaction/raw_predictions.csv",
+    "interaction_scores": "results/p0554_route_softness_interaction/variant_scores.csv",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "macs1931_companion_report": "results/p0554_macs1931_relative_companion/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0554_multifamily_multiplicity",
+    "global_roots": "global_roots.csv",
+    "assignments": "assignments.csv",
+    "family_summary": "family_summary.csv",
+    "variant_summary": "variant_summary.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_multifamily_multiplicity.png"
+  },
+  "claim_limits": [
+    "All five clusters and formulas are spent exploratory evidence.",
+    "Published multiple-image catalogs can omit central, demagnified, obscured, or unrecognized images.",
+    "Relative magnification from the simplified lens is a screening proxy, not a calibrated detection completeness function.",
+    "The finite interlaced root search can miss very small attraction basins or roots outside 120 arcseconds.",
+    "Many archived geometry fits touch nuisance bounds and the lens omits registered gas and diffuse ICL.",
+    "No formula is promoted."
+  ]
+}

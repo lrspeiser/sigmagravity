@@ -1,0 +1,62 @@
+{
+  "protocol_version": "ARC-INVARIANT-PARETO-REFINEMENT-0.1.0",
+  "frozen_utc": "2026-08-01T02:25:00Z",
+  "status": "fine_grid_frozen_after_coarse_combined_CLASH_scan_before_intermediate_grid_or_combined_candidate_raw_RXJ2129_scores",
+  "question": "Can a smooth potential-depth times path-ratio response bridge galaxy dynamics and absolute cluster lensing, and does a photon multiplier add information that survives raw image positions?",
+  "law": {
+    "dynamic_equation": "g_dyn/gbar=1+q*A(r/RM)*S(gbar)*(ellPhi/r)^beta*[1+(Phi/(c^2*chi_t))^p]",
+    "lensing_equation": "g_lens/gbar=1+m_gamma*(g_dyn/gbar-1)",
+    "ellPhi": "Phi/gbar",
+    "RM": "sqrt(G*Mbar/a0)",
+    "fixed_terms": {"alpha": 0.75, "apogee_ratio": 100.0, "screen_exponent": 1.0, "screen_scale": 1.0, "mass_radius_delta": 0.0, "extent_leak": 0.0}
+  },
+  "grid": {
+    "potential_power": [0.5, 0.6, 0.7, 0.8, 1.0, 1.2],
+    "potential_scale": [1e-6, 1.25e-6, 1.5e-6, 2e-6],
+    "path_ratio_power": [0.25, 0.4, 0.5, 0.6],
+    "photon_extra_multiplier": [1.0, 1.5, 1.75, 2.0, 2.25, 2.5],
+    "universal_q_bounds": [0.0, 1000.0]
+  },
+  "selection_without_raw_scores": {
+    "galaxy_limit_relative_to_RAR": 1.5,
+    "cluster_good_threshold_dex": 0.2,
+    "shortlist_roles": [
+      "best_cluster_within_galaxy_limit",
+      "best_zero_slip_within_galaxy_limit",
+      "best_galaxy_below_cluster_threshold",
+      "best_zero_slip_cluster_overall"
+    ]
+  },
+  "inputs": {
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ2129_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "RXJ2129_previous_parameters": "results/rxj2129_raw_theory_lensing/fitted_parameters.csv",
+    "coarse_report": "results/arc_invariant_absolute_lensing/report.json"
+  },
+  "raw_lensing": {
+    "optimization_starts": 16,
+    "selection_uses_no_raw_image_score": true,
+    "heldout_images": 7
+  },
+  "outputs": {
+    "directory": "results/arc_invariant_pareto_refinement",
+    "scores": "variant_scores.csv",
+    "morphology_scores": "selected_morphology_scores.csv",
+    "cluster_predictions": "selected_cluster_predictions.csv",
+    "raw_predictions": "raw_RXJ2129_predictions.csv",
+    "raw_parameters": "raw_RXJ2129_parameters.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "arc_invariant_pareto_refinement.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The fine grid follows inspection of a coarse CLASH scan and is exploratory, not confirmatory.",
+    "The CLASH target is NFW-deprojected equivalent acceleration rather than a theory-neutral raw likelihood.",
+    "The potential profile is reconstructed with a spherical closure and a point-mass outer tail.",
+    "The photon multiplier is a phenomenological slip diagnostic and has no covariant derivation here.",
+    "RX J2129 is a raw-image holdout for these combined candidates but is not independent of all earlier project development."
+  ]
+}

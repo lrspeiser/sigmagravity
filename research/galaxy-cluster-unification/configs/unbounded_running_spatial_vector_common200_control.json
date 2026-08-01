@@ -1,0 +1,28 @@
+{
+  "parent_protocol": "configs/unbounded_running_spatial_vector_protocol.json",
+  "protocol_version": "UNBOUNDED-RUNNING-SPATIAL-VECTOR-COMMON200-0.2.0",
+  "frozen_utc": "2026-07-29T19:45:00Z",
+  "status": "frozen_after_primary_scores_before_common_aperture_scores",
+  "purpose": "Robustness control that gives all four member-light templates the same 200 kpc baryonic mass aperture, correcting the unequal outer-anchor aperture in the primary spatial-vector diagnostic.",
+  "additional_pre_score_disclosure": [
+    "The primary spatial-vector held-out scores are already known, so this common-aperture correction is a spent-data robustness control and cannot create an independent prediction.",
+    "The 200 kpc aperture was chosen because it is an exact Tian baryonic anchor shared by all four systems, not because of a residual score.",
+    "The gravity laws, member grid, split, and optimization remain identical to the primary frozen protocol."
+  ],
+  "overrides": {
+    "baryonic_profile": {
+      "normalization_mass": "Mbar enclosed at the common 200 kpc Tian anchor, calculated as gbar*r^2/G",
+      "normalization_aperture_kpc": 200.0
+    },
+    "outputs": {
+      "report": "results/unbounded_running_spatial_vector_common200/report.json",
+      "member_audit": "results/unbounded_running_spatial_vector_common200/member_audit.csv",
+      "grid_screen": "results/unbounded_running_spatial_vector_common200/grid_screen.csv",
+      "selection_refits": "results/unbounded_running_spatial_vector_common200/selection_refits.csv",
+      "predictions": "results/unbounded_running_spatial_vector_common200/predictions.csv",
+      "parameters": "results/unbounded_running_spatial_vector_common200/fitted_geometry.csv",
+      "figure": "results/unbounded_running_spatial_vector_common200/spatial_vector.png",
+      "summary": "results/unbounded_running_spatial_vector_common200/SUMMARY.md"
+    }
+  }
+}

@@ -203,6 +203,42 @@ class RARModel(RotationModel):
         return {"rar_acceleration_m_s2": self.rar_acceleration_m_s2}
 
 
+class SigmaTransferModel(RotationModel):
+    """Fixed Sigma acceleration channel transferred from the bridge fit."""
+
+    model_name = "sigma_transfer"
+
+    def __init__(
+        self,
+        *args,
+        response_amplitude: float,
+        g_dagger_m_s2: float = 9.6e-11,
+        **kwargs,
+    ) -> None:
+        super().__init__(*args, **kwargs)
+        if response_amplitude < 0.0 or g_dagger_m_s2 <= 0.0:
+            raise ValueError("Sigma constants must be nonnegative/positive")
+        self.response_amplitude = float(response_amplitude)
+        self.g_dagger_m_s2 = float(g_dagger_m_s2)
+
+    def predict_acceleration(
+        self, data: TensorDataset, inputs: dict[str, torch.Tensor]
+    ) -> torch.Tensor:
+        del data
+        g_bar = torch.clamp(inputs["baryonic_acceleration"], min=1e-30)
+        g_dagger = torch.as_tensor(
+            self.g_dagger_m_s2, dtype=g_bar.dtype, device=g_bar.device
+        )
+        h = torch.sqrt(g_dagger / g_bar) * g_dagger / (g_dagger + g_bar)
+        return g_bar * (1.0 + self.response_amplitude * h)
+
+    def physical_parameters(self) -> dict[str, float]:
+        return {
+            "response_amplitude_B": self.response_amplitude,
+            "g_dagger_m_s2": self.g_dagger_m_s2,
+        }
+
+
 def _logit(value: float) -> float:
     return math.log(value / (1.0 - value))
 
@@ -540,6 +576,8 @@ def build_model(
     log_ml_prior_sigma: float,
     rar_acceleration_m_s2: float,
     hubble_km_s_mpc: float,
+    sigma_response_amplitude: float = 1.1725,
+    sigma_g_dagger_m_s2: float = 9.6e-11,
     fixed_flat_power: bool = False,
     environment_enabled: bool = False,
     boundary_layer_enabled: bool = False,
@@ -554,6 +592,12 @@ def build_model(
         return NewtonianModel(**common)
     if name == "rar":
         return RARModel(**common, rar_acceleration_m_s2=rar_acceleration_m_s2)
+    if name == "sigma_transfer":
+        return SigmaTransferModel(
+            **common,
+            response_amplitude=sigma_response_amplitude,
+            g_dagger_m_s2=sigma_g_dagger_m_s2,
+        )
     if name == "nfw":
         return NFWModel(**common, hubble_km_s_mpc=hubble_km_s_mpc)
     if name == "void":

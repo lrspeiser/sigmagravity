@@ -1,0 +1,32 @@
+{
+  "protocol_version": "REOPENED-HYBRID-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-07-31T06:53:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Repeat the most informative Solar-valid hybrid raw-lensing transfers with eight geometry starts and no gravity refit.",
+  "source_protocol": "configs/reopened_hybrid_followup_protocol.json",
+  "source_report": "results/reopened_hybrid_followup/report.json",
+  "selected_variants": [
+    "fine_screen:screen_power=1.5",
+    "fine_screen:screen_power=1.6",
+    "fine_screen:screen_power=2",
+    "solar_safe_saturation:saturation_ceiling=3",
+    "solar_safe_saturation:saturation_ceiling=6",
+    "solar_safe_saturation:saturation_ceiling=8",
+    "solar_safe_saturation:saturation_ceiling=12"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Universal gravity constants are copied unchanged from the follow-up bridge fit.",
+    "Only pseudo-elliptical geometry, shear, center, and source positions are fitted to raw training images.",
+    "The same four raw systems and within-family held-out images are used.",
+    "This checks numerical robustness; it does not remove the spherical-baryon, density-interpolation, or zero-slip approximations."
+  ]
+}

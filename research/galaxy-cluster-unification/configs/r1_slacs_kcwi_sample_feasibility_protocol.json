@@ -1,0 +1,63 @@
+{
+  "protocol_version": "R1-SLACS-KCWI-sample-feasibility-0.1",
+  "status": "frozen_before_SLACS_KCWI_primary_source_download_or_candidate_level_archive_query",
+  "frozen_utc": "2026-07-27T14:39:00Z",
+  "selection_blind": true,
+  "source_sample": "Knabel et al. spatially resolved KCWI kinematics of 14 SLACS lenses",
+  "primary_source": {
+    "citation": "Knabel et al. 2025, arXiv:2409.10631v2",
+    "url": "https://arxiv.org/abs/2409.10631",
+    "source_archive_url": "https://export.arxiv.org/e-print/2409.10631",
+    "selection_facts_used": [
+      "14 galaxy-scale strong lenses from SLACS",
+      "spatially resolved KCWI stellar kinematics",
+      "spatial-bin systematics and covariance are quantified",
+      "the sample has existing HST strong-lens imaging by construction"
+    ],
+    "forbidden_selection_facts": [
+      "dark-matter fraction or density slope",
+      "GR or alternative-gravity residual",
+      "a candidate's fit quality under the proposed negative-gravity idea"
+    ]
+  },
+  "candidate_level_gate": {
+    "minimum_numerical_dynamics_bins": 3,
+    "accepted_dynamics_support_must_reach_arcsec": "the full detected HST arc radial span for that candidate",
+    "minimum_arc_radial_neighborhoods": 3,
+    "minimum_pre_fit_structural_rank_upper_bound": 3,
+    "public_KCWI_raw_or_numerical_kinematic_product_required": true,
+    "kinematic_covariance_or_reconstructible_spaxel_variance_required": true,
+    "public_HST_science_and_weight_products_required": true,
+    "rerunnable_lens_likelihood_or_public_source_and_lens_model_products_required": true,
+    "single_Einstein_radius_counts_as_modes": 1,
+    "extended_arc_pixels_count_as_modes_before_marginalized_Jacobian": 0,
+    "no_post_selection_relaxation": true
+  },
+  "screening_order": [
+    "extract all 14 sample identities, coordinates, redshifts, KCWI programs, exposure times, seeing, spatial bins, accepted radial support, and covariance statements from the exact primary source",
+    "extract each system's HST filter/program, published Einstein radius or arc span, source redshift, and public lens-model or likelihood reference from primary SLACS sources",
+    "query KOA and MAST metadata without downloading science arrays",
+    "rank candidates only by common radial support, released observable products, and nuisance-model rerunnability",
+    "freeze one or more exact acquisition/Jacobian protocols only for candidates passing every metadata gate"
+  ],
+  "sample_outcomes": {
+    "advance": "At least one of the 14 lenses passes every pre-pixel gate and has a source/lens product that prevents the E325 coordinate-map boundary failure from being rediscovered only after data download.",
+    "partial": "Retain any public numerical KCWI maps as dynamics controls, but do not download HST arrays for systems whose lens likelihood or common support is not established.",
+    "fail": "If none pass, publish a 14-row hard-shortfall ledger and move to RXJ1131-1231 or another named released-likelihood sample without weakening the gate."
+  },
+  "progress_checkpoint": {
+    "time_box": "one exact primary-source extraction and archive-metadata cycle for all 14 lenses",
+    "rethink_after": "three consecutive external candidates/source classes with zero structural promotion; J0946 and E325 currently count as two"
+  },
+  "authorization": {
+    "download_primary_article_source": true,
+    "query_primary_references_and_archive_metadata": true,
+    "download_science_arrays": false,
+    "inspect_science_arrays": false,
+    "fit_lens_or_dynamics": false,
+    "count_any_system_toward_ten_system_target": false,
+    "infer_gravity_response": false,
+    "fit_new_force_or_action": false,
+    "authorize_R2": false
+  }
+}

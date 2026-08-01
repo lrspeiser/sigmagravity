@@ -1,0 +1,57 @@
+{
+  "protocol_version": "P0600-BCG-POTENTIAL-GAP-0.1.0",
+  "frozen_utc": "2026-08-01T15:42:00Z",
+  "status": "frozen_after_P0599_before_any_P0599_formula_score_on_BCG_bridge",
+  "question": "Does the frozen P0599 bounded potential-shape law interpolate through the SPARC-CLASH potential gap on independent BCG dynamics, and which incomplete host-baryon assumption matters most?",
+  "frozen_formula": {
+    "amplitude_A": 3.0,
+    "potential_threshold_chi": 1e-6,
+    "potential_power": 4.0,
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "source_acceleration_gate_power": 4.0,
+    "a0_m_s2": 1.2e-10,
+    "equation": "g=RAR(gbar)*[1+3*S4*H(C)*chi^4/(chi^4+1e-24)]"
+  },
+  "data": {
+    "predictions": "results/bcg_bridge_sample/predictions.csv",
+    "systems": 34,
+    "direct_Tian2024": 11,
+    "calibrated_DynPop_proxy": 23
+  },
+  "brackets": {
+    "potential_source": ["BCG_only", "BCG_plus_eRASS_median_gas", "BCG_plus_eRASS_p90_gas", "BCG_plus_cosmic_baryon_host"],
+    "radial_shape": ["Hernquist_BCG", "CLASH_median_C", "neutral_H1"],
+    "source_screen": ["local_BCG_gbar", "weak_host_S1"],
+    "candidate_count": 24
+  },
+  "primary": {
+    "potential_source": "BCG_plus_eRASS_median_gas",
+    "radial_shape": "CLASH_median_C",
+    "source_screen": "weak_host_S1",
+    "reason": "measured median hot-gas host potential, extended-cluster radial shape, and low-acceleration host screening are the closest available proxies to the P0599 full baryon-system quantities"
+  },
+  "comparators": ["fixed_galaxy_rar", "cluster_scale_rar", "H7s_standard_mu_erass_median_gas_host_r200"],
+  "bootstrap": {"draws": 20000, "seed": 6001, "unit": "complete BCG system"},
+  "interpretation_gates": {
+    "primary_RMS_dex_max": 0.2,
+    "primary_absolute_mean_bias_dex_max": 0.1,
+    "direct_Tian_RMS_dex_max": 0.18,
+    "probability_better_than_fixed_RAR_min": 0.9
+  },
+  "outputs": {
+    "directory": "results/p0600_bcg_potential_gap",
+    "variant_scores": "variant_scores.csv",
+    "predictions": "predictions.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0600_bcg_potential_gap.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "Eleven BCG accelerations are direct Tian et al. measurements; the remaining 23 are disjointly calibrated MaNGA DynPop/NSA proxies.",
+    "The SPIDERS hosts lack resolved baryon profiles, so potential, radial shape, and source acceleration are bracketed rather than measured together.",
+    "The CLASH median radial shape is an environment proxy, not a per-BCG measurement.",
+    "The formula constants were selected on disclosed SPARC and CLASH data; P0600 is an external bridge test only with respect to BCG values."
+  ]
+}

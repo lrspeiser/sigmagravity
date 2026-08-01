@@ -1,0 +1,71 @@
+{
+  "protocol_version": "P0580-CONSERVATIVE-RETURN-SPARC-0.1.0",
+  "frozen_utc": "2026-08-01T00:42:00Z",
+  "status": "frozen_after_P0579_before_conservative_SPARC_scores",
+  "trigger": "P0579 found that the externally locked inverse-derived endpoint kernel improved both raw clusters, while the calibration-selected flexible route overfit. The earlier SPARC arc-apogee test added a scalar enhancement; this stage instead tests the stricter claim that routing alone redistributes a fixed baryonic gravity budget.",
+  "question": "Can the same extent-gated conservative return kernels used in P0579 improve galaxy rotation curves without adding integrated gravitational source strength?",
+  "radial_translation": {
+    "force_equivalent_mass": "M_b(<r)=g_b(r)*r^2/G, monotonized over the measured profile",
+    "shells": "Delta M_b are the positive increments of the force-equivalent cumulative mass",
+    "surface_analogue": "M_eff=(1-f_eff)*M_b+f_eff*M_route",
+    "effective_fraction": "f_eff=q_route*s(R50/R80)",
+    "endpoint": "each shell launched at r is deposited at |r-lambda*R80|",
+    "chord": "each shell is deposited uniformly along |r-t*lambda*R80|",
+    "radial_arc_0.5": "the chord receives an outward radial bow 0.5*R80*4t(1-t)",
+    "transverse_arc_0.5": "the radial residence is sqrt[(r-t*l)^2+(0.5*R80*4t(1-t))^2]",
+    "width": "the routed radial residence density is Gaussian-smoothed by eta*R80 and renormalized",
+    "velocity": "V_route(r)=sqrt[G*M_eff(<r)/r]",
+    "conservation": "Every routed shell profile is renormalized to the original total force-equivalent baryonic mass; no scalar q greater than one is fitted."
+  },
+  "candidate_source": {
+    "protocol": "configs/p0579_extent_gated_return_raw_protocol.json",
+    "scores": "results/p0579_extent_gated_return_raw/candidate_scores.csv",
+    "arc_apogee_report": "results/arc_apogee_boundary_refinement/report.json",
+    "candidate_count": 432,
+    "primary_inverse_candidate_id": "K0338",
+    "P0579_calibration_selected_id": "K0107",
+    "policy": "Evaluate all already-frozen P0579 candidates. No route parameter is selected or fitted on SPARC before scores."
+  },
+  "galaxy_test": {
+    "input_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "input_model": "fixed_RAR",
+    "input_scenario": "invariant",
+    "split_scored": "outer_holdout",
+    "nuisance_policy": "Reuse the fixed-RAR distance, inclination, disk M/L, and bulge M/L values so formula response is compared on identical adjusted points.",
+    "radial_grid_bins": 1024,
+    "path_samples": 33,
+    "minimum_profile_points": 3,
+    "expected_galaxies": 131,
+    "expected_outer_points": 968
+  },
+  "controls": {
+    "Newtonian": "V=sqrt(g_b*r) with the same nuisances",
+    "fixed_RAR": "saved fixed-RAR prediction with the same nuisances",
+    "arc_apogee_R1322": "the prior non-conservative scalar return law, for diagnostic context only"
+  },
+  "gates": {
+    "primary_improves_Newtonian_outer_RMSE": true,
+    "primary_within_50_percent_of_fixed_RAR_outer_RMSE": true,
+    "primary_improves_at_least_60_percent_of_galaxies_vs_Newtonian": true,
+    "maximum_total_mass_conservation_error": 1e-10,
+    "all_profiles_finite": true,
+    "solar_point_collapse": true
+  },
+  "outputs": {
+    "directory": "results/p0580_conservative_return_sparc",
+    "candidate_scores": "candidate_scores.csv",
+    "primary_predictions": "primary_predictions.csv",
+    "galaxy_properties": "galaxy_properties.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0580_conservative_return_sparc.png"
+  },
+  "claim_limits": [
+    "M_b(<r)=g_b*r^2/G is a spherical force-equivalent representation of disk, gas, and bulge forces, not a literal three-dimensional mass reconstruction.",
+    "Radial Gaussian residence is the one-dimensional analogue of the two-dimensional cluster kernel; vertical disk structure is not represented.",
+    "The same fixed-RAR nuisances are reused to isolate formula response and do not constitute an independent likelihood fit for the return law.",
+    "All 432 candidate rankings on SPARC are exploratory; only K0338 and K0107 were fixed without SPARC scores.",
+    "Conservative redistribution cannot increase the force outside a surface enclosing the entire routed source, which is a deliberate falsifiable restriction."
+  ]
+}

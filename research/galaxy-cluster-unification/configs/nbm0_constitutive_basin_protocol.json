@@ -1,0 +1,74 @@
+{
+  "protocol_version": "NBM0-A3-0.1-constitutive-basin",
+  "frozen_utc": "2026-07-28T03:48:00Z",
+  "status": "frozen before executing the analytic flux-geometry and SPARC boundary-inversion diagnostics",
+  "parent_protocol": "configs/nbm0_survivor_derivation_protocol.json",
+  "candidate": "A10 constitutive void-basin flux refraction",
+  "research_question": "Can low-density space alter gravitational flux geometry so a flattened galaxy receives an extended inward field without an additive negative-mass force, while spherical clusters receive a same-metric enhancement?",
+  "known_benchmark": {
+    "name": "Refracted Gravity",
+    "equation": "div[epsilon(rho) grad Phi] = 4 pi G rho",
+    "originality_rule": "Density-dependent gravitational permittivity, its disk-refraction mechanism, and its covariant scalar-tensor completion are established prior art and must never be presented as inventions of this project.",
+    "primary_sources": [
+      "https://arxiv.org/abs/1603.04943",
+      "https://arxiv.org/abs/2109.11217",
+      "https://arxiv.org/abs/2410.19698"
+    ]
+  },
+  "project_variant": {
+    "name": "Nonlocal Basin Permittivity zero-order candidate (NBP0)",
+    "weak_field_equations": [
+      "div[epsilon(X) grad Phi] = 4 pi G rho_b",
+      "(nabla^2-L_X^-2)X = S_contrast + C_epsilon epsilon'(X)|grad Phi|^2"
+    ],
+    "distinction_under_test": "epsilon is controlled by a reciprocal nonlocal basin field X and cosmological boundary solution, not assigned algebraically from the local density or fitted by object class.",
+    "reciprocity_rule": "The epsilon'(X)|grad Phi|^2 backreaction from varying the same action is mandatory and cannot be dropped after choosing epsilon(X).",
+    "relativistic_rule": "A later covariant action must derive both metric potentials and lensing; the Newtonian constitutive equation alone makes no cluster-lensing prediction."
+  },
+  "analytic_limits": {
+    "spherical": "For constant epsilon outside a spherical source, g=GM/(epsilon r^2); permittivity changes amplitude but cannot flatten the curve.",
+    "perfectly_confined_slab": "If flux is confined between planes separated by 2h, g=GM/(epsilon_in h r) and v_flat^2=GM/(epsilon_in h).",
+    "mass_scaling_requirement": "With universal epsilon_in, v_flat^4 proportional to M_b requires h proportional to sqrt(M_b). The boundary height must be predicted from non-kinematic structure or basin data, not inferred from V_flat."
+  },
+  "SPARC_boundary_inversion": {
+    "catalog": "data/raw/sparc/table1.dat",
+    "void_environment": "data/derived/void_scores_cf4.csv",
+    "stellar_mass_to_light_3p6": 0.5,
+    "helium_factor": 1.33,
+    "quality_max": 2,
+    "inclination_min_deg": 30.0,
+    "folds": 5,
+    "seed": 20260728,
+    "permutations": 256,
+    "models": {
+      "constant_h_over_Rdisk": ["log_Rdisk"],
+      "structure_only": ["log_Rdisk", "log_SBeff", "gas_fraction", "hubble_type"],
+      "structure_plus_void": ["log_Rdisk", "log_SBeff", "gas_fraction", "hubble_type", "void_score"]
+    },
+    "blindness_rule": "V_flat and its uncertainty define the inverted h_required target only. They are forbidden from every boundary predictor.",
+    "geometry_continue_gate": {
+      "heldout_log10_Vflat_rmse_max": 0.1
+    },
+    "void_specific_gate": {
+      "relative_rmse_improvement_min": 0.2,
+      "permutation_p_max": 0.05
+    },
+    "confounding_control_amendment": {
+      "frozen_utc": "2026-07-28T03:55:00Z",
+      "reason": "The initial geometry gate passed, exposing an identity-level confound: h_required=GM/V_flat^2 can be predicted from mass whenever the BTFR holds. A boundary interpretation therefore requires non-kinematic structure to outperform a mass-only BTFR control. No original threshold or result was changed.",
+      "mass_only_predictor": ["log_baryonic_mass_solar"],
+      "minimum_structure_relative_log_velocity_rmse_improvement": 0.2
+    }
+  },
+  "cluster_control": {
+    "source": "data/raw/clash_tian2020/fig2.dat",
+    "calculation": "At each cluster's outermost summary point, invert epsilon_required=gbar/gtot and report cross-system scatter without treating the GR/NFW-derived table as a theory-neutral likelihood.",
+    "fit_authorized": false
+  },
+  "stop_rules": [
+    "A successful slab inversion does not establish the reciprocal field or lensing action.",
+    "If non-kinematic structure cannot predict h_required, reject perfect flux confinement as an explanation rather than fitting h per galaxy.",
+    "If CF4 void information fails its frozen improvement and permutation gates, do not call the mechanism void-specific.",
+    "Do not fit epsilon(X) until its reciprocal backreaction and relativistic metric are derived and the same-system data gate passes."
+  ]
+}

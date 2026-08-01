@@ -1,0 +1,75 @@
+{
+  "report_version": "P0605-STRICT-ROUTE-RAW-LENSING-RESULTS-0.1.0",
+  "status": "complete_spent_raw_route_amplitude_decomposition",
+  "coverage": {
+    "models": 2,
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "optimization_starts_per_model": 16,
+    "fitted_gravity_parameters": 0
+  },
+  "selected_route": {
+    "fraction_max": 1.0,
+    "length_over_R80": 0.25,
+    "radius_exponent": -0.5,
+    "width_over_R80": 0.5,
+    "shape_gate": "H",
+    "source_acceleration_gate_power": 4.0
+  },
+  "field_diagnostic": {
+    "R50_kpc": 355.55892554848015,
+    "R80_kpc": 504.64375503118424,
+    "concentration_R50_over_R80": 0.704574111942609,
+    "shape_gate": 0.7399562389719418,
+    "source_acceleration_gate": 0.9997081134494022,
+    "effective_route_fraction": 0.739740255697755,
+    "radial_mass_conservation_error": 0.0
+  },
+  "scores": [
+    {
+      "model": "strict_route_RAR",
+      "training_RMS_arcsec": 0.8080038149577445,
+      "heldout_RMS_arcsec": 5.043463114559598,
+      "training_roots_converged": 15,
+      "heldout_roots_converged": 7,
+      "heldout_all_roots_converged": true,
+      "maximum_heldout_residual_arcsec": 7.6062608182053975,
+      "heldout_reduced_chi2": 330.1497755750129,
+      "optimizer_success": true,
+      "optimizer_cost": 133.6068281942464,
+      "any_geometry_near_bound": true
+    },
+    {
+      "model": "strict_route_P0599",
+      "training_RMS_arcsec": null,
+      "heldout_RMS_arcsec": null,
+      "training_roots_converged": 12,
+      "heldout_roots_converged": 4,
+      "heldout_all_roots_converged": false,
+      "maximum_heldout_residual_arcsec": 29.3371846083507,
+      "heldout_reduced_chi2": null,
+      "optimizer_success": true,
+      "optimizer_cost": 946.9137146692838,
+      "any_geometry_near_bound": true
+    }
+  ],
+  "comparators": {
+    "P0599_no_route_heldout_RMS_arcsec": 1.8086634342147614,
+    "previous_locked_candidate_heldout_RMS_arcsec": 1.0642772678285497,
+    "compact_one_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "published_multi_halo_reference_RMS_arcsec": 0.29
+  },
+  "strict_interpretation": {
+    "raw_data_are_fresh": false,
+    "route_or_amplitude_fit_to_RXJ2129": false,
+    "structural_geometry_parameters_fit": 6,
+    "next_confirmation_requires_different_cluster": true
+  },
+  "claim_limits": [
+    "RX J2129 is spent data and this result cannot confirm the strict route.",
+    "The baryonic radial input remains a literature spherical reconstruction.",
+    "Six structural lens-geometry parameters are fitted, although no gravity amplitude is fitted.",
+    "The route is an axisymmetric projection of the two-dimensional Green kernel.",
+    "A successful diagnostic would still require freezing and replaying on a different raw cluster."
+  ]
+}

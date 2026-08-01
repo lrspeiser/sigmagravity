@@ -1,0 +1,79 @@
+{
+  "protocol_version": "P0570-PHYSICAL-BARYON-RESIDUAL-LENSING-0.1.0",
+  "frozen_utc": "2026-08-01T02:55:00Z",
+  "status": "frozen_before_any_physical_residual_lens_score",
+  "question": "Can the directly calculated noncircular deflection of measured stars and hot gas replace the phenomenological 75-125 kpc member-light broadening in raw cluster lensing?",
+  "field_equation": {
+    "deflection": "alpha=alpha_locked_scalar+q*[alpha_map-<alpha_map dot e_r>_phi e_r]+alpha_shear",
+    "map_deflection": "standard weak-field point-mass sum of the registered projected baryon map at distance ratio D_ls/D_s=1",
+    "circular_subtraction": "remove the curl-free circular radial monopole to avoid double counting the radial baryon profile already present in the locked scalar field",
+    "q": "one universal response multiplier; q=1 is the physical GR-strength angular baryon residual and q=0 is the locked scalar control",
+    "per_cluster_gravity_parameters": 0
+  },
+  "components": [
+    "registered_starlight",
+    "accept_gas_spherical",
+    "accept_gas_sqrt_morphology",
+    "stars_plus_gas_spherical",
+    "stars_plus_gas_sqrt_morphology"
+  ],
+  "factorial": {
+    "extent_scale": [0.75, 1.0, 1.25],
+    "response_q": [0.5, 1.0, 2.0],
+    "meaning": "extent rescales component positions about their measured centroid without changing mass; q rescales only the noncircular residual"
+  },
+  "numerics": {
+    "field_half_width_arcsec": 256.0,
+    "field_pixels_per_axis": 256,
+    "point_softening_arcsec": 2.0,
+    "polar_mean_radii": 256,
+    "polar_mean_azimuths": 360,
+    "maximum_normalized_curl_RMS": 0.002,
+    "maximum_circular_source_residual_fraction": 0.01
+  },
+  "validation": {
+    "selection_systems": ["MACS0329", "MACS0429"],
+    "validation_systems": ["MACS1115", "MACS1931"],
+    "zero_fit": "fit q=0 geometry and source positions with six starts per system",
+    "screen": "at fixed q=0 geometry and sources, select the nonzero candidate with minimum equal-system unweighted source-plane heldout RMS on the two selection systems",
+    "exact_selection_check": "exactly refit the selected candidate on selection systems with three starts and require every image root",
+    "exact_validation": "exactly refit q=0 and the single selected candidate on the two different validation systems with six starts",
+    "spent_disclosure": "All systems and maps are spent; the split is prospective only to P0570."
+  },
+  "cross_domain": {
+    "galaxy": "The circular residual is exactly zero for an isolated axisymmetric galaxy; inherit the locked fixed-RAR outer RMSE only as an angular-closure test, not a baryon-only replacement for RAR.",
+    "solar": "The circular residual is exactly zero for a centered point mass; numerical circular-source residual is explicitly audited.",
+    "fixed_RAR_outer_RMSE_km_s": 10.348465773189679,
+    "solar_fractional_change": 0.0
+  },
+  "advance_gates": {
+    "validation_all_roots": true,
+    "validation_improvement_vs_zero_fraction_min": 0.05,
+    "validation_to_compact_halo_RMS_ratio_max": 1.25,
+    "maximum_normalized_curl_RMS": 0.002,
+    "per_cluster_gravity_parameters": 0
+  },
+  "inputs": {
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "p0559_report": "results/p0559_accept_projected_gas_tidal/report.json",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0570_physical_baryon_residual_lensing",
+    "field_audits": "field_audits.csv",
+    "screen_scores": "screen_scores.csv",
+    "exact_scores": "exact_scores.csv",
+    "predictions": "predictions.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0570_physical_baryon_residual_lensing.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The map contains measured gas-shell density but incomplete stellar mass-to-light and intracluster-light information.",
+    "Subtracting the circular monopole makes this an angular closure on top of the locked scalar RAR/slip parent, not a standalone no-MOND theory.",
+    "The field is calculated in one projected lens plane and does not include line-of-sight structures.",
+    "The selection and validation systems are project-spent.",
+    "A non-unit q would be new gravitational response physics; q=1 alone is the physical baryon-deflection benchmark."
+  ]
+}

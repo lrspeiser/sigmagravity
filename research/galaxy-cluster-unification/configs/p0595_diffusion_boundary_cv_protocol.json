@@ -1,0 +1,58 @@
+{
+  "protocol_version": "P0595-DIFFUSION-BOUNDARY-CV-0.1.0",
+  "frozen_utc": "2026-08-01T11:42:00Z",
+  "status": "frozen_after_P0593B_boundary_observation_before_extended_grid_scores",
+  "question": "Does the P0593B galaxy gain persist when the broadening and mixing boundaries are extended under whole-galaxy cross-validation, and which measured galaxy properties track the change?",
+  "parent_protocol": "configs/p0593_diffusion_cross_domain_protocol.json",
+  "family": "diffuse conservative redistribution followed by the fixed empirical RAR scalar completion",
+  "grid": {
+    "q_R80": [0.5, 0.75, 1.0, 1.25, 1.5, 2.0],
+    "route_fraction": [0.05, 0.1, 0.15, 0.2, 0.25, 0.35],
+    "gate_power": [0.0, 1.0, 2.0, 4.0, 6.0, 8.0],
+    "candidate_count": 216
+  },
+  "cross_validation": {
+    "folds": 5,
+    "rule": "int(SHA256(galaxy)[0:8],16) mod 5",
+    "selection_metric": "training equal-galaxy outer RMSE",
+    "tie_break": ["route_fraction", "q_R80", "gate_power", "candidate_id"]
+  },
+  "morphology": {
+    "path": "data/derived/nbp0_sparc_morphology.csv",
+    "features": [
+      "log10_baryonic_mass_solar",
+      "gas_fraction",
+      "baryonic_bulge_fraction",
+      "log10_effective_surface_brightness",
+      "hubble_type",
+      "concentration_R50_over_R80",
+      "log10_R80_kpc",
+      "log10_g_R80_over_a0"
+    ],
+    "association": "Spearman rank correlation with per-galaxy out-of-fold delta MSE; Benjamini-Hochberg FDR is exploratory"
+  },
+  "bootstrap": {"seed": 5951, "draws": 5000, "unit": "galaxy"},
+  "advance_gates": {
+    "oof_equal_galaxy_improvement_fraction_min": 0.01,
+    "oof_galaxies_improved_fraction_min": 0.6,
+    "folds_improved_min": 4,
+    "bootstrap_probability_improvement_min": 0.9
+  },
+  "outputs": {
+    "directory": "results/p0595_diffusion_boundary_cv",
+    "candidate_fold_scores": "candidate_fold_scores.csv",
+    "fold_selections": "fold_selections.csv",
+    "oof_predictions": "oof_predictions.csv",
+    "galaxy_scores": "galaxy_scores.csv",
+    "morphology_associations": "morphology_associations.csv",
+    "report": "report.json",
+    "figure": "p0595_diffusion_boundary_cv.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This is cross-validation of formula settings with previously fitted nuisance values, not a fully nested nuisance refit.",
+    "Different universal settings are selected in each training fold; the out-of-fold result measures the candidate family's generalization, while parameter stability determines whether one final law is credible.",
+    "RAR remains an empirical scalar completion and the spherical force-equivalent mapping is not a disk-field derivation.",
+    "Morphology correlations are exploratory and do not establish causation."
+  ]
+}

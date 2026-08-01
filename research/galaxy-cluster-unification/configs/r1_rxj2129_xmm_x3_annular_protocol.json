@@ -1,0 +1,203 @@
+{
+  "protocol_version": "R1B3-RXJ2129-XMM-X3-annular-products-0.4",
+  "status": "corrected_and_refrozen_after_ESAS_pn_badpixel_resolution_and_quadrant_support_audit_before_admissible_X3_products",
+  "frozen_utc": "2026-07-27T10:58:00Z",
+  "selection_blind": true,
+  "system": "RX J2129",
+  "obsid": "0093030201",
+  "purpose": "Construct and audit MOS2+pn annular source, OOT, QPB, RMF, and ARF products before fitting any temperature, density, gas mass, dynamical response, Weyl response, or gravity law.",
+  "known_before_freeze": [
+    "X1 calibration and X2a flare gates pass for MOS1, MOS2, and pn.",
+    "The immutable X2b1 mask contains 87 sources based on 783 calibrated PSF evaluations.",
+    "The strict sector-level FWC/corner gate retains MOS2 and pn and excludes MOS1 because MOS1 CCD5 has scale 0.3533430850668397.",
+    "The 650-900 kpc local hard-band transfer scales are 1.3134244395380283 for MOS2 and 0.7419486890802747 for pn.",
+    "No 10-500 kpc cluster radial count profile, annular spectrum, annular response, temperature, density, gas mass, lens residual, dynamical residual, or gravity residual was inspected to select these edges or adequacy rules."
+  ],
+  "correction_log": [
+    {
+      "version": "0.2",
+      "utc": "2026-07-27T10:29:10Z",
+      "trigger": "The first MOS2 X3 annulus produced zero selected events and a zero-area ARF before any usable radial count was available.",
+      "cause": "The immutable detection catalog includes source_id 50 at 1.075 arcsec from the predeclared cluster center with a 31.869 arcsec circle, so the generic point-source mask deletes the target cluster core itself.",
+      "correction": "Keep the 87-detection catalog immutable, but for X3 exclude only the 86 circles that do not contain the frozen target center. Retain source_id 50 in the science spectra and require an unresolved central-emission nuisance in the later likelihood.",
+      "selection_rule": "The correction is determined only by containment of the center frozen before XMM processing; exactly one catalog circle qualifies. No nonzero radial count, temperature, density, gas mass, lens residual, dynamical residual, or gravity residual was inspected.",
+      "annular_edges_energy_band_background_multipliers_or_thresholds_changed": false,
+      "other_catalog_source_or_radius_changed": false,
+      "invalid_partial_products_admitted": false,
+      "invalid_product_root": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x3/annular_products_invalid_central_target_mask"
+    },
+    {
+      "version": "0.3",
+      "utc": "2026-07-27T10:40:30Z",
+      "trigger": "The corrected first pn source/OOT/RMF/ARF task completed, but the ESAS pnspectra wrapper wrote zero BACKSCAL for every quadrant and pnback aborted before creating an admissible QPB spectrum.",
+      "cause": "The official ESAS documentation records that complex selection expressions can make backscale fail at zero. The full 86-circle table expands the DSS detector-map bounds to the entire field even though most circles are disjoint from a given annulus.",
+      "correction": "For each immutable annulus, derive a compact FITS exclusion table containing exactly the unchanged catalog circles whose closed disks geometrically intersect that annulus. Circles disjoint from the annulus cannot change its event selection; removing them from the table changes only the SAS expression complexity and detector-map bounds. If the geometric subset is empty, disable source removal for that annulus because there is no intersecting exclusion to apply; retain the zero-row table as an auditable provenance product.",
+      "selection_rule": "Circle-annulus intersection is decided from the frozen center, annular edges, catalog positions, and calibrated radii only: separation-radius < outer and separation+radius > inner. No count value, spectrum, temperature, density, gas mass, lens residual, dynamical residual, or gravity residual enters.",
+      "catalog_source_position_radius_annular_edge_energy_band_background_multiplier_or_threshold_changed": false,
+      "invalid_partial_products_admitted": false,
+      "invalid_product_root": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x3/annular_products_invalid_all86_mask_backscale"
+    },
+    {
+      "version": "0.4",
+      "utc": "2026-07-27T10:58:00Z",
+      "trigger": "With compact masks, pn source/OOT/RMF/ARF construction completed, but pnspectra's default badpixelresolution=16 left every FOV/FWC quadrant BACKSCAL at zero and pnback aborted before producing an admissible QPB spectrum.",
+      "cause": "The official pnspectra documentation states that 16 is the default bad-pixel resolution and that a smaller number is more accurate. The official backscale/arfgen documentation gives 1.0 as the refinement example. The inner annulus intersects only pn quadrant 2, while selecting all four quadrants creates zero-support products for the other three.",
+      "correction": "Set pn badpixelresolution=1.0 and, for each immutable annulus, enable exactly the pn quadrant detector boxes that geometrically intersect its support. A quarantined a01 interface test then gave BACKSCAL=172000 for the source, OOT, FWC, and FWC-OOT q2 spectra and pnback ended normally with a positive QPB product.",
+      "selection_rule": "Quadrant admission is the closed annulus-versus-fixed detector-box intersection test. It uses only the frozen center, frozen annular edges, and pnspectra detector boxes; no event-count magnitude, spectrum, temperature, density, gas mass, lens residual, dynamical residual, or gravity residual enters.",
+      "catalog_source_position_radius_annular_edge_energy_band_background_multiplier_or_threshold_changed": false,
+      "invalid_partial_products_admitted": false,
+      "invalid_product_root": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x3/annular_products_invalid_compact_mask_pn_FWC_backscale"
+    }
+  ],
+  "prerequisites": {
+    "event_processing_report": "results/r1_rxj2129_xmm_event_processing/report.json",
+    "reduction_manifest": "data/derived/r1_rxj2129_xmm_reduction_manifest.json",
+    "required_X2_gate": "R1B3_XMM_X2_flare_background_gate_passed",
+    "required_passing_instruments": [
+      "MOS2",
+      "pn"
+    ],
+    "immutable_source_mask_manifest": "data/derived/r1_rxj2129_xmm_x2/point_source_mask_manifest.json"
+  },
+  "fixed_geometry": {
+    "center_ra_deg": 322.41651,
+    "center_dec_deg": 0.08923,
+    "cluster_redshift": 0.235,
+    "cosmology_for_coordinate_conversion_only": {
+      "model": "flat LambdaCDM",
+      "H0_km_s_Mpc": 70.0,
+      "Omega_m": 0.3,
+      "kpc_per_arcsec": 3.734271755152817
+    },
+    "radial_edges_kpc": [
+      10.0,
+      50.0,
+      100.0,
+      175.0,
+      275.0,
+      380.0,
+      500.0
+    ],
+    "radial_edges_arcsec": [
+      2.677898304053871,
+      13.389491520269354,
+      26.77898304053871,
+      46.86322032094274,
+      73.64220336148145,
+      101.7601355540471,
+      133.89491520269354
+    ],
+    "radial_edges_detector_units": [
+      53.55796608107742,
+      267.7898304053871,
+      535.5796608107742,
+      937.2644064188547,
+      1472.844067229629,
+      2035.202711080942,
+      2677.8983040538706
+    ],
+    "annulus_ids": [
+      "a01_010_050kpc",
+      "a02_050_100kpc",
+      "a03_100_175kpc",
+      "a04_175_275kpc",
+      "a05_275_380kpc",
+      "a06_380_500kpc"
+    ],
+    "edge_selection_rule": "Six monotonically widening physical annuli were fixed before radial count inspection. No edge may move and no annulus may be merged, split, deleted, or replaced after extraction.",
+    "minimum_accepted_annuli": 5,
+    "minimum_total_net_counts": 2000.0,
+    "minimum_signal_to_noise_each_annulus": 5.0
+  },
+  "extraction": {
+    "energy_band_eV": [
+      700.0,
+      7000.0
+    ],
+    "PI_channels_inclusive": [
+      141,
+      1400
+    ],
+    "MOS2": {
+      "event_file": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x2b/background/MOS2_corner_preserving_events.ds",
+      "pattern_maximum": 12,
+      "ccds": "T T T T F T T",
+      "spectra_task": "mosspectra",
+      "background_task": "mosback"
+    },
+    "pn": {
+      "event_file": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x2b/background/pn_corner_preserving_events.ds",
+      "oot_event_file": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x2b/background/pn_oot_corner_preserving_events.ds",
+      "pattern_maximum": 4,
+      "badpixelresolution_arcsec": 1.0,
+      "frozen_detector_center": [-374.9, 239.0],
+      "quadrant_detector_boxes": {
+        "1": {"center": [-10241.5, 7115.0], "half_widths": [8041.5, 8210.0]},
+        "2": {"center": [5840.0, 7115.0], "half_widths": [8040.0, 8210.0]},
+        "3": {"center": [5840.0, -9311.0], "half_widths": [8040.0, 8216.0]},
+        "4": {"center": [-10241.5, -9311.0], "half_widths": [8041.5, 8216.0]}
+      },
+      "active_quadrants_by_annulus": {
+        "a01_010_050kpc": "F T F F",
+        "a02_050_100kpc": "F T F F",
+        "a03_100_175kpc": "F T F F",
+        "a04_175_275kpc": "F T T F",
+        "a05_275_380kpc": "T T T F",
+        "a06_380_500kpc": "T T T T"
+      },
+      "quadrant_selection_rule": "Enable a quadrant exactly when its fixed detector box intersects the closed annular support around the frozen pn detector center; the mapping is frozen before the rerun and is independent of event-count magnitude.",
+      "OOT_scale": 0.0232,
+      "spectra_task": "pnspectra",
+      "background_task": "pnback"
+    },
+    "source_catalog": "The immutable 87-detection catalog and all calibrated radii remain unchanged.",
+    "source_mask": "For each annulus and instrument use the compact subset of the derived target-aware 86-row mask containing exactly those unchanged exclusion circles that geometrically intersect the annulus. If that subset is empty, set withsrcrem=no because no catalog exclusion intersects the extraction support, while retaining the zero-row mask as provenance. The only non-excluded catalog component that could intersect the target is source_id 50, selected because its original circle contains the predeclared target center.",
+    "source_mask_manifest": "data/derived/r1_rxj2129_xmm_x3_source_mask_manifest.json",
+    "central_target_component": "Retain source_id 50 in the source spectrum; a later XMM-specific likelihood must include an unresolved central-emission nuisance rather than assuming all retained central counts are diffuse gas.",
+    "response": "Generate a region-specific RMF and ARF for every instrument-annulus pair; a full-field or another-annulus response is not substitutable.",
+    "invalid_product_rule": "A failed or interrupted task directory is quarantined under an explicit invalid name and none of its products are admitted."
+  },
+  "prefit_adequacy": {
+    "scientific_role": "Product and count-information gate only; it is not a fitted celestial-background, temperature, density, or gas-mass result.",
+    "observed_counts": "MOS2 source PHA counts; pn source PHA counts minus 0.0232 times the matching pn OOT PHA counts, all in PI channels 141-1400.",
+    "QPB_counts": "Counts in the matching ESAS mosback/pnback QPB spectrum in PI channels 141-1400.",
+    "conservative_QPB_multiplier": {
+      "MOS2": 1.3134244395380283,
+      "pn": 1.0
+    },
+    "multiplier_rule": "For each instrument use max(1, frozen 650-900 kpc hard-band transfer scale), so the prefit adequacy test never lowers an ESAS QPB prediction.",
+    "combined_net_counts": "Sum over MOS2 and pn of observed_counts minus conservative_QPB_multiplier times QPB_counts.",
+    "combined_variance": "Sum over MOS2 and pn of max(observed_counts,0) plus max(conservative_QPB_multiplier times QPB_counts,0).",
+    "combined_signal_to_noise": "combined_net_counts / sqrt(combined_variance)",
+    "annulus_pass_rule": "Every required product exists and is nonempty; all SAS tasks end normally without task error records; combined net counts are positive; and combined S/N is at least 5.",
+    "stage_pass_rule": "At least five of the six immutable annuli pass and the total combined net counts across passing annuli are at least 2000.",
+    "forbidden_interpretation": "Passing authorizes the separately frozen gas spectral likelihood only. It does not validate a temperature, density, hydrostatic mass, force law, dynamical response, or Weyl response."
+  },
+  "next_gate_after_pass": {
+    "protocol_required": "A new XMM-specific joint spectral/spatial gas-likelihood protocol must be frozen before fitting; the existing Chandra-specific gas protocol cannot be reused unchanged.",
+    "minimum_fractional_density_precision_each_accepted_annulus": 0.2,
+    "minimum_fractional_temperature_precision_each_accepted_annulus": 0.3,
+    "minimum_joint_posterior_draws": 2000,
+    "positive_semidefinite_covariance_required": true
+  },
+  "failure_rules": {
+    "fewer_than_five_annuli": "Stop the RX J2129 XMM gas branch. Do not move, merge, or split annular edges and do not restore MOS1.",
+    "fewer_than_2000_net_counts": "Stop the RX J2129 XMM gas branch without changing the energy band, QPB multiplier, or count definition.",
+    "task_or_product_failure": "Diagnose only the engineering fault under a versioned protocol correction; do not change a scientific edge, mask, instrument, or threshold.",
+    "pass": "Freeze an XMM-specific gas likelihood before any spectral fit, retaining fluorescence, soft-proton, and celestial backgrounds as nuisance components."
+  },
+  "outputs": {
+    "external_product_root": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x3/annular_products",
+    "annular_count_ledger": "data/derived/r1_rxj2129_xmm_x3_annular_count_ledger.csv",
+    "product_manifest": "data/derived/r1_rxj2129_xmm_x3_annular_product_manifest.json",
+    "audit_report": "results/r1_rxj2129_xmm_x3_annular_products/report.json"
+  },
+  "authorization": {
+    "read_X3_annular_counts_during_declared_extraction_and_audit": true,
+    "construct_region_specific_MOS2_and_pn_products": true,
+    "fit_temperature_or_density": false,
+    "infer_gas_mass": false,
+    "infer_dynamical_or_Weyl_response": false,
+    "fit_new_force_or_action": false
+  }
+}

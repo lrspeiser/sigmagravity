@@ -1,0 +1,127 @@
+{
+  "status": "completed frozen EA-Q0 derivation checkpoint",
+  "inputs": {
+    "config_sha256": "ad043748d3b691cf0bc516efb629910de6dbc0cea19b77b7dc0fd1e8bc41277b",
+    "clash_sha256": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+    "bcg_sha256": "4280a63e3c4f3166015c6859807f63d3f46c2fa1d420c3c9a9ac029495752352",
+    "sparc_systems": 131,
+    "sparc_points": 3034,
+    "clash_systems": 20,
+    "clash_points": 84,
+    "bcg_systems": 34
+  },
+  "action_audit": {
+    "universal_matter_metric": "g_ab; all matter and light are minimally coupled through S_m[g,psi]",
+    "global_physical_parameter_count": 5,
+    "per_object_parameters": 0,
+    "lensing_only_parameters": 0,
+    "unit_constraint_from_lambda": "u^a u_a=-1",
+    "on_shell_conservation": "verified by the diffeomorphism Noether identity after imposing the metric, Aether, Q, constraint, and matter equations",
+    "reciprocal_q_source_retained": true
+  },
+  "frozen_parameters_for_most_conservative_check": {
+    "eta_per_chi": 511203.71263067255,
+    "beta": 1.150052902433512e-05,
+    "L_Q_over_each_test_radius": 19.495725746223687,
+    "required_aq_over_a0_at_chi_t": 10.0
+  },
+  "high_field_health": {
+    "representative_c1": 2e-05,
+    "representative_c14": 1e-05,
+    "coefficients": {
+      "c1": 2e-05,
+      "c2": 1.000020000400008e-05,
+      "c3": -2e-05,
+      "c4": -1e-05,
+      "c13": 0.0
+    },
+    "mode_speeds_squared": {
+      "tensor": 1.0,
+      "vector": 2.0,
+      "scalar": 1.0
+    },
+    "kinetic_conditions_positive": true,
+    "c13_is_zero": true
+  },
+  "weak_field_limits": {
+    "deep_relative_error": 0.00025003124218536676,
+    "deep_relative_error_max": 0.05,
+    "high_fractional_correction": 5.000000413701855e-11,
+    "high_fractional_correction_max": 1e-05,
+    "mu_positive": true,
+    "d_mu_times_g_dg_positive": true,
+    "passes": true
+  },
+  "conservative_source_ordering": {
+    "gbar_range_m_s2": [
+      1.409034473671463e-29,
+      7.340073789094082e-09
+    ],
+    "a_q_range_m_s2": [
+      1.2e-10,
+      1.9000916053869526e-06
+    ],
+    "increases_with_gbar": true,
+    "increases_with_a_q": true,
+    "supports_enclosed_mass_only_lower_bound": true
+  },
+  "q_feedback": {
+    "gate_absolute_fraction_max": 0.05,
+    "by_domain": {
+      "CLASH": {
+        "count": 84,
+        "min": 42.676393815227236,
+        "p05": 204.78104236834668,
+        "median": 21297.662514069467,
+        "p95": 243691.00948352268,
+        "max": 410964.68714294763,
+        "passes_5_percent": 0,
+        "pass_fraction": 0.0
+      },
+      "SPARC": {
+        "count": 3034,
+        "min": 2.012881838760146e-15,
+        "p05": 11.23631909474771,
+        "median": 1088.533678462693,
+        "p95": 6859.365107564279,
+        "max": 10658.827519127151,
+        "passes_5_percent": 8,
+        "pass_fraction": 0.0026367831245880024
+      },
+      "SPIDERS-MaNGA BCG": {
+        "count": 34,
+        "min": 215.8685786967664,
+        "p05": 751.0305450405777,
+        "median": 3155.668211561482,
+        "p95": 4548.370161584273,
+        "max": 5211.167705561941,
+        "passes_5_percent": 0,
+        "pass_fraction": 0.0
+      }
+    },
+    "all_points_pass": false,
+    "eta_max_for_all_bcg_to_pass": 6.051970462559429,
+    "aq_over_a0_at_chi_t_for_eta_max": 1.0000272599094275,
+    "required_eta_over_allowed_eta": 84468.97019627558,
+    "beta_required_for_best_bcg": 0.049652057094882636,
+    "beta_required_for_median_bcg": 0.7258370771646904,
+    "beta_required_for_all_bcg": 1.198623708969859,
+    "gamma_shift_at_beta_required_for_all_bcg": -0.4137112010344704
+  },
+  "decision": {
+    "prefit_checkpoint_passes": false,
+    "failed_gate": "reciprocal Q-source backreaction",
+    "stage_3_configuration_frozen": false,
+    "stage_4_replay_frozen": false,
+    "local_eaq0_coupling_retired": true,
+    "next_action": "derive the environmental MOG control without adding an interpolation term"
+  },
+  "guardrails": [
+    "No new astrophysical fit was performed.",
+    "The H7s amplitude was not widened.",
+    "The Q equation retained the reciprocal source required by the action.",
+    "Only already enclosed baryonic mass was used in the exterior feedback test.",
+    "The shortest point-source range compatible with 5% Q accuracy was used.",
+    "Beta was maximized subject to the frozen PPN gamma gate, minimizing feedback."
+  ]
+}

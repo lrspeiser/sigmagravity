@@ -1,0 +1,53 @@
+{
+  "protocol_version": "CPR0-0.7-accept-clash-bcg-local-density",
+  "frozen_utc": "2026-07-28T06:02:00Z",
+  "status": "frozen after the gas-only CPR0-0.6 result and before constructing or scoring local BCG stellar densities",
+  "question": "Does adding the observed, deprojected BCG stellar density rescue one shared local-density response across BCG dynamics and CLASH lensing?",
+  "base_protocol": "configs/cpr0_accept_clash_bridge_protocol.json",
+  "added_dataset": "Tian et al. 2020 CDS table1.dat: total BCG stellar mass, HST effective radius, and central evaluation radius for all 20 CLASH clusters",
+  "observable_construction": {
+    "stellar_profile": "Hernquist rho_star=M_star*a/[2*pi*r*(r+a)^3] with a=0.551*Re, exactly matching the deprojection convention in Tian et al. 2020",
+    "central_points": "all 20 CLASH rows below 100 kpc use the measured BCG stellar density; ACCEPT gas is added only when the radius lies inside measured profile coverage",
+    "outer_points": "the 52 no-extrapolation ACCEPT points at 100-600 kpc from CPR0-0.6, plus the much smaller Hernquist BCG density",
+    "missing_central_gas": "set to zero only where ACCEPT has no measured shell; Tian et al. state hot gas is subdominant to BCG stars inside Re",
+    "satellite_and_ICL_local_density": "not available and not added; the gas-density scale bracket covers a larger fractional correction at outer radii",
+    "stellar_mass_scale_sensitivity": [0.8, 1.0, 1.2],
+    "gas_density_scale_sensitivity": [0.6, 1.0, 1.4],
+    "coherence": "C=0 for all cluster points"
+  },
+  "cross_validation": {
+    "folds": 5,
+    "seed": 20260728,
+    "group": "cluster identifier or BCG plateifu",
+    "objective": "equal-domain mean of equal-system mean squared log10 acceleration residual",
+    "fixed_sigma_response_amplitude": 1.1725,
+    "bounds": {
+      "constant_epsilon": [0.03, 1.0],
+      "epsilon_0": [0.03, 0.9],
+      "log10_rho_c_g_cm3": [-31.0, -20.0],
+      "Q": [0.1, 30.0]
+    }
+  },
+  "advance_gates": {
+    "cluster_systems_min": 20,
+    "cluster_points_min": 70,
+    "locked_prior_RG_cluster_RMSE_dex_max": 0.12,
+    "cluster_RG_CV_RMSE_dex_max": 0.12,
+    "cluster_RG_CV_improvement_vs_constant_min_dex": 0.02,
+    "central_points_RG_CV_RMSE_dex_max": 0.15,
+    "joint_RG_BCG_RMSE_dex_max": 0.12,
+    "joint_RG_cluster_RMSE_dex_max": 0.12,
+    "joint_RG_equal_domain_RMSE_dex_max": 0.12,
+    "CPR0_improvement_vs_density_only_RG_min_dex": 0.01,
+    "cluster_absolute_radial_residual_slope_dex_per_dex_max": 0.10,
+    "cluster_absolute_residual_density_correlation_max": 0.30,
+    "log10_rho_c_fold_range_max_dex": 1.5
+  },
+  "claim_boundary": [
+    "This is an added-data sensitivity motivated by the already inspected gas-only result, not pristine external validation.",
+    "The stellar density is directly tied to observed mass and size but retains the Hernquist and constant mass-to-light assumptions of Tian et al.",
+    "Satellite-galaxy and intracluster-light local densities remain unmeasured; they are most relevant outside the BCG.",
+    "The CLASH acceleration target still lacks public radial covariance and still assumes a spherical NFW deprojection.",
+    "No relativistic photon-propagation law has yet been derived for CPR0."
+  ]
+}

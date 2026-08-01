@@ -1,0 +1,77 @@
+{
+  "protocol_version": "P0587-BARYONIC-HIGHPASS-METRIC-0.1.0",
+  "frozen_utc": "2026-08-02T01:25:00Z",
+  "status": "frozen_before_any_baryonic_highpass_metric_score",
+  "question": "Does the non-affine part of P0586D's broad signed tidal metric retain any exact cluster-lensing gain after long-wavelength mass-sheet and shear modes are removed using baryons alone?",
+  "locked_base_metric": {
+    "minimum_permittivity": 1.0,
+    "a0_m_s2": 2.4e-10,
+    "gate_power": 4.0,
+    "anisotropy_tau": -1.2,
+    "smoothing_r80_fraction": 0.8,
+    "lineage": "P0586C common signed candidate and P0586D exact primary"
+  },
+  "highpass_formula": {
+    "fit": "uniformly fit a constant plus symmetric affine deflection inside a circular aperture centered on the baryonic centroid",
+    "potential": "convert the fit to a scalar quadratic potential, multiply by a cosine window that is one inside the aperture and zero at twice its radius, and subtract its gradient",
+    "target_independence": "the centroid, R80, grid, fit points, and coefficients come only from the baryonic field; image positions and lensing targets never define the subtraction",
+    "primary": {
+      "mode": "symmetric",
+      "aperture_r80_fraction": 1.0,
+      "removal_fraction": 1.0,
+      "taper_outer_factor": 2.0
+    }
+  },
+  "factorial": {
+    "modes": ["trace", "symmetric"],
+    "aperture_r80_fraction": [0.75, 1.0, 1.25, 1.5],
+    "removal_fraction": [0.5, 1.0],
+    "include_raw_metric_control": true,
+    "candidate_count": 17
+  },
+  "validation": {
+    "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "screen": "hold twelve-start zero-field geometry and source positions fixed and score all 17 structurally declared fields",
+    "exact": "independently refit zero, raw P0586D metric, and the predeclared symmetric 1.0-R80 full-removal primary with twelve starts",
+    "no_reselection": "factorial results measure sensitivity; they cannot replace the predeclared primary",
+    "spent_disclosure": "all systems and the base metric are project-spent"
+  },
+  "numerical_audits": {
+    "maximum_affine_R2_on_images": 0.95,
+    "maximum_normalized_curl_RMS": 0.002,
+    "minimum_metric_eigenvalue": 0.05
+  },
+  "advance_gates": {
+    "primary_all_training_and_heldout_roots": true,
+    "primary_all_four_systems_improve": true,
+    "primary_improvement_vs_zero_fraction_min": 0.05,
+    "primary_improvement_vs_raw_metric_fraction_min": 0.0,
+    "primary_to_compact_halo_RMS_ratio_max": 1.25,
+    "maximum_affine_R2_on_images": 0.95,
+    "per_cluster_gravity_parameters": 0
+  },
+  "inputs": {
+    "p0586_protocol": "configs/p0586_continuous_baryonic_metric_protocol.json",
+    "p0586d_report": "results/p0586d_signed_metric_exact/report.json",
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0587_baryonic_highpass_metric",
+    "screen_scores": "screen_scores.csv",
+    "field_audits": "field_audits.csv",
+    "exact_scores": "exact_scores.csv",
+    "predictions": "predictions.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0587_baryonic_highpass_metric.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This is a target-independent field construction but an evaluation on project-spent clusters.",
+    "Removing fitted long-wavelength modes is a diagnostic constitutive choice, not yet derived from a covariant action.",
+    "The correction remains an angular closure on an inherited radial scalar lens parent.",
+    "The epsilon0=1 base remains Newtonian in the spherical galaxy limit.",
+    "The physical baryon-map limitations are unchanged from P0586."
+  ]
+}

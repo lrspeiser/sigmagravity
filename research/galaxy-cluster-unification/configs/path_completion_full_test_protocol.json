@@ -1,0 +1,101 @@
+{
+  "protocol_version": "PATH-COMPLETION-FULL-TEST-0.1.0",
+  "frozen_utc": "2026-07-29T05:12:18Z",
+  "status": "frozen_before_path_completion_scores",
+  "question": "Can a universal maximum G larger than locally measured G, combined with bounded path-dependent recovery of gravity vectors, fit galaxies, BCGs, cluster lensing, and raw image positions?",
+  "root_model": {
+    "field": "g(r)=G_max M_b(<r) C(r)/r^2 with G_measured=C_solar G_max",
+    "bounded_completion": "logit C(r)=logit C_solar+tau(r), so C_solar <= C(r) < 1",
+    "path_memory": "tau(r) is a nonnegative recovery optical depth accumulated from the source center to r",
+    "effective_exponent": "p_eff=-d ln g/d ln r; outside baryons p_eff=2-d ln C/d ln r",
+    "flat_curve_condition": "d ln C/d ln r approximately 1 gives g proportional to 1/r",
+    "maximum_coupling": "G_max/G_measured=1/C_solar; values greater than one are explicitly allowed"
+  },
+  "models": {
+    "distance_path": {
+      "parameters": ["C_solar", "log10_recovery_length_kpc", "distance_power"],
+      "bounds": [[0.02, 0.8], [-2.0, 4.0], [0.25, 3.0]],
+      "optical_depth": "tau=(r/ell)^gamma"
+    },
+    "tidal_path": {
+      "parameters": ["C_solar", "log10_recovery_length_kpc", "log10_T_star_s2", "tidal_power"],
+      "bounds": [[0.02, 0.8], [-2.0, 4.0], [-35.0, -27.0], [0.25, 6.0]],
+      "optical_depth": "tau=integral dr/[ell*(1+(T/T_star)^n)]"
+    },
+    "matter_path": {
+      "parameters": ["C_solar", "log10_recovery_length_kpc", "log10_g_star_m_s2", "matter_power"],
+      "bounds": [[0.02, 0.8], [-2.0, 4.0], [-14.0, -8.0], [0.25, 6.0]],
+      "optical_depth": "tau=integral dr/[ell*(1+(g_bar/g_star)^m)]",
+      "interpretation": "g_bar is a spherical surface-density proxy for matter encountered by the path"
+    },
+    "hybrid_path": {
+      "parameters": ["C_solar", "log10_recovery_length_kpc", "log10_T_star_s2", "log10_g_star_m_s2"],
+      "bounds": [[0.02, 0.8], [-2.0, 4.0], [-35.0, -27.0], [-14.0, -8.0]],
+      "optical_depth": "tau=integral dr/[ell*(1+T/T_star)*(1+g_bar/g_star)]"
+    }
+  },
+  "sample": {
+    "bridge": "44 MaNGA BCG points plus 72 density-resolved CLASH radial points",
+    "bridge_folds": 5,
+    "bridge_seed": 20260730,
+    "bridge_objective": "equal-domain mean of equal-system mean squared log residual",
+    "SPARC": "131 galaxies; nuisance parameters fit on 2066 inner points and tested on 968 untouched outer points",
+    "raw_lensing": "RX J2129 15 training and 7 already-spent heldout image positions",
+    "cluster_target_warning": "CLASH acceleration targets were deprojected from fitted NFW lensing profiles"
+  },
+  "optimization": {
+    "differential_evolution_maxiter": 160,
+    "differential_evolution_popsize": 14,
+    "local_polish": "L-BFGS-B",
+    "boundary_fraction_tolerance": 0.01
+  },
+  "selection": {
+    "bridge_ranking": "lowest five-fold heldout bridge equal-domain RMSE",
+    "downstream_rule": "run every predefined model on SPARC and raw lensing; a survivor must pass every frozen gate",
+    "gravity_parameters_fit_to_SPARC": 0,
+    "gravity_or_lensing_amplitudes_fit_to_raw_images": 0
+  },
+  "advance_gates": {
+    "bridge_equal_domain_RMSE_dex_max": 0.15,
+    "BCG_equal_system_RMSE_dex_max": 0.15,
+    "cluster_equal_system_RMSE_dex_max": 0.18,
+    "SPARC_outer_RMSE_relative_to_fixed_RAR_max": 1.10,
+    "raw_heldout_RMS_arcsec_max": 2.5361068843508456,
+    "solar_Earth_fractional_change_max": 1e-10,
+    "completion_fraction_max": 1.000000000001,
+    "no_full_fit_parameter_at_boundary": true
+  },
+  "solar_diagnostics": {
+    "solar_GM_m3_s2": 1.32712440018e20,
+    "solar_radius_m": 695700000.0,
+    "astronomical_unit_m": 149597870700.0,
+    "probe_AU": [1.0, 100.0, 100000.0]
+  },
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "bridge_reference_report": "results/rar_sharp_coherence_rg_sweep/report.json",
+    "SPARC_protocol": "configs/sparc_independent_nuisance_refit_protocol.json",
+    "SPARC_reference_report": "results/sparc_independent_nuisance_refit/report.json",
+    "SPARC_raw": "data/raw/sparc",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "RXJ_profile": "results/sigma_action_exploration/radial_profiles.csv",
+    "raw_lensing_reference_report": "results/sigma_covariant_weak_field/report.json",
+    "local_completion_reference_report": "results/vector_completion_full_test/report.json"
+  },
+  "claim_limits": [
+    "This is a spherical weak-field transport prototype, not a covariant action.",
+    "The BCG sample has one radial point per system, so its unobserved inner path is approximated by the declared center boundary.",
+    "SPARC disks and irregular clusters are not actually spherical; g_bar/r and radial path length are proxies.",
+    "The maximum-G interpretation is observationally equivalent to a bounded environment-dependent effective coupling until independently tested.",
+    "RX J2129 coordinates are an already-inspected diagnostic, not an independent holdout."
+  ],
+  "outputs": {
+    "report": "results/path_completion_full_test/report.json",
+    "bridge_predictions": "results/path_completion_full_test/bridge_predictions.csv",
+    "SPARC_predictions": "results/path_completion_full_test/sparc_predictions.csv",
+    "raw_lensing_predictions": "results/path_completion_full_test/raw_lensing_predictions.csv",
+    "profile_diagnostics": "results/path_completion_full_test/profile_diagnostics.csv",
+    "figure": "results/path_completion_full_test/path_completion_full_test.png",
+    "summary": "results/path_completion_full_test/SUMMARY.md"
+  }
+}

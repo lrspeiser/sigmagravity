@@ -1,0 +1,71 @@
+{
+  "protocol_version": "R1-E325-HST-P1-0.1",
+  "status": "frozen_after_hash_receipt_before_E325_image_morphology_inspection",
+  "frozen_utc": "2026-07-27T14:28:00Z",
+  "upstream_report": "results/r1_e325_acquisition/report.json",
+  "selection_blind": true,
+  "image_morphology_seen_at_freeze": false,
+  "gravity_residuals_seen_at_freeze": false,
+  "common_grid": {
+    "projection": "RA---TAN,DEC--TAN",
+    "center_ra_deg": 205.88833333333332,
+    "center_dec_deg": -38.17611111111111,
+    "shape_yx": [256, 256],
+    "pixel_scale_arcsec": 0.05,
+    "orientation": "north up, east left",
+    "field_width_arcsec": 12.8,
+    "science_support_radius_arcsec": 6.0
+  },
+  "reprojection": {
+    "science_interpolation": "bilinear",
+    "weight_interpolation": "bilinear with nonpositive or nonfinite values set to zero",
+    "flux_unit": "retain input ELECTRONS/S surface-brightness pixels on the equal-scale grid",
+    "visit_combination": "inverse-variance weighted mean independently in F475W and F814W",
+    "wcs_shift_fit_before_arc_mask": false,
+    "relative_shift_nuisance_later_pixels": [-0.1, 0.1],
+    "outlier_rejection": "none; preserve both visit arrays for held-out prediction"
+  },
+  "noise": {
+    "initial_variance": "inverse of each DRC WHT extension where positive",
+    "drizzle_correlation": "estimate one scalar inflation per visit from the frozen negative-control annulus after the arc mask is frozen",
+    "minimum_positive_weight_fraction": 0.99,
+    "never_treat_visits_as_independent_if_they_share_input_exposures": true
+  },
+  "psf_family": {
+    "initial_model": "normalized elliptical Moffat sampled on the common grid",
+    "stamp_shape_yx": [41, 41],
+    "beta": 3.5,
+    "nominal_fwhm_arcsec": {
+      "F475W": 0.08,
+      "F814W": 0.085
+    },
+    "frozen_fwhm_multipliers": [0.9, 1.0, 1.1],
+    "frozen_axis_ratios": [0.9, 1.0],
+    "frozen_position_angles_deg": [0.0, 45.0, 90.0],
+    "empirical_upgrade_rule": "replace the nominal family only if at least five unsaturated isolated stars pass one residual-blind selection in both visits; otherwise retain the full frozen Moffat family as a nuisance grid"
+  },
+  "outputs": {
+    "registered_cutouts": "data/derived/r1_e325_hst_registered_cutouts.fits",
+    "psf_family": "data/derived/r1_e325_hst_psf_family.npz",
+    "report": "results/r1_e325_hst_preprocessing/report.json"
+  },
+  "gates": {
+    "all_8_visit_science_and_weight_cutouts_finite": true,
+    "all_visit_positive_weight_fraction_minimum": 0.99,
+    "all_common_grid_center_offsets_arcsec_maximum": 0.001,
+    "all_output_pixel_scale_fractional_error_maximum": 1e-6,
+    "coadd_exposure_seconds": {
+      "F475W": 4800.0,
+      "F814W": 18882.0
+    }
+  },
+  "authorization": {
+    "construct_only_frozen_grid_and_psf_family": true,
+    "inspect_image_morphology_after_preprocessing_gate": true,
+    "freeze_arc_and_negative_control_masks_after_preprocessing_gate": true,
+    "fit_lens_or_source_before_mask_freeze": false,
+    "count_toward_ten_system_target": false,
+    "infer_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

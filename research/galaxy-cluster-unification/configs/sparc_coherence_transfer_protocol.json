@@ -1,0 +1,29 @@
+{
+  "protocol_version": "SPARC-COHERENCE-TRANSFER-0.1",
+  "frozen_utc": "2026-07-28T09:10:00Z",
+  "status": "frozen before scoring SPARC morphology-based coherence transfer",
+  "candidate": "RAR_coherence_gated_RG parameters transferred from results/rar_coherence_rg_sweep/report.json",
+  "selection": "same 131 galaxies and 968 outer-holdout points as fixed RAR",
+  "coherence_mappings": {
+    "C_unity": "optimistic rotationally supported endpoint C=1",
+    "C_one_minus_baryonic_BT": "C=clip(1-M_bulge/M_baryon,0,1)",
+    "C_one_minus_stellar_BT": "C=clip(1-M_bulge/M_stars,0,1)"
+  },
+  "density_sensitivity": {
+    "disk_hz_over_Rdisk": [0.1, 0.2, 0.3],
+    "gas_RHI_divisor": [2.5, 3.2, 4.0],
+    "gas_hz_over_Rgas": [0.05, 0.1, 0.2],
+    "primary": [0.2, 3.2, 0.1]
+  },
+  "advance_gate": {
+    "outer_RMSE_relative_to_RAR_max": 1.15,
+    "outer_chi2_per_point_relative_to_RAR_max": 1.25,
+    "median_absolute_extra_velocity_km_s_max": 5.0
+  },
+  "claim_boundary": [
+    "C=1 is an optimistic endpoint; bulge-fraction mappings are geometry proxies, not measured 3D source coherence.",
+    "The RAR endpoint is established phenomenology and is not evidence for originality.",
+    "Local SPARC gas density remains a declared exponential-disk sensitivity model.",
+    "This is a fixed transfer using RAR-fitted nuisance parameters, not a joint refit."
+  ]
+}

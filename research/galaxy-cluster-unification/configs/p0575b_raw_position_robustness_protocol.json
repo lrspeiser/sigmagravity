@@ -1,0 +1,43 @@
+{
+  "protocol_version": "P0575B-RAW-POSITION-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-01T07:45:00Z",
+  "status": "frozen_after_primary_P0575_before_split_or_padding_robustness_scores",
+  "trigger": "The primary families 1+2 to 5+19 transfer made P0574 6.63% worse than local light while the processed Lenstool reference was substantially better.",
+  "question": "Is the raw-position failure caused by the arbitrary family split or finite FFT boundary convention?",
+  "split_robustness": {
+    "families": ["1", "2", "5", "19"],
+    "rule": "Enumerate all six unordered choices of two amplitude-calibration families and use the other two as held out; refit one positive amplitude per map on each calibration pair.",
+    "selection": "No split may select a formula or tune a parameter. Report median gain and the count of splits where P0574 beats local light."
+  },
+  "solver_robustness": {
+    "primary_calibration_families": ["1", "2"],
+    "padding_factors": [2, 3, 4],
+    "rule": "Repeat the primary split with two-, three-, and four-times zero padding using identical maps and source positions."
+  },
+  "robustness_gates": {
+    "median_heldout_improvement_vs_local_fraction_min": 0.0,
+    "splits_improved_vs_local_min": 4,
+    "all_padding_conventions_improve_vs_local": true,
+    "lenstool_reference_median_better_than_baryon_models": true
+  },
+  "inputs": {
+    "p0575_protocol": "configs/p0575_smacs0723_raw_position_protocol.json",
+    "p0573_protocol": "configs/p0573_tidal_arrival_fresh_replication_protocol.json",
+    "p0574_protocol": "configs/p0574_symmetry_gated_arrival_microvariation_protocol.json",
+    "p0575_images": "results/p0575_smacs0723_raw_position/raw_images.csv"
+  },
+  "outputs": {
+    "directory": "results/p0575b_raw_position_robustness",
+    "split_scores": "split_scores.csv",
+    "padding_scores": "padding_scores.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0575b_raw_position_robustness.png"
+  },
+  "claim_limits": [
+    "All family partitions reuse one cluster and the same 12 image positions; they test robustness, not independent replication.",
+    "The normalized map amplitude remains a fitted nuisance rather than an absolute gravity prediction.",
+    "The statistic remains source-plane scatter and does not perform full image-plane root finding.",
+    "Changing FFT padding probes one numerical boundary choice but not every potential-solver systematic."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "search_version": "R1A2-replacement-0.3",
+  "stage": "R1A.2 residual-blind replacement qualification",
+  "selection_rule": "Freeze candidates from observable coverage and data quality only. Do not inspect gravity residuals, inferred dark-matter slopes, alternative-gravity parameters, or model preference.",
+  "starting_state": {
+    "unique_bcg_hosts_source_screened": 11,
+    "systems_structurally_audited": 10,
+    "systems_passing_three_radial_mode_structural_gate": 0,
+    "remaining_hosts_to_30_target": 19
+  },
+  "current_state": {
+    "unique_bcg_hosts_source_screened": 45,
+    "systems_structurally_audited": 17,
+    "non_disturbed_systems_passing_structural_gate": 2,
+    "structural_promotion_systems": [
+      "MACS J1206",
+      "RX J2129"
+    ],
+    "remaining_hosts_to_30_target": 0,
+    "remaining_non_disturbed_promotions": 0,
+    "full_r1_ready_systems": 0,
+    "cycle_1_status": "completed_named_sample_exhausted_and_public_data_obstruction_tested",
+    "cycle_2_status": "structural_promotion_threshold_met",
+    "cycle_3_status": "completed_named_32_bcg_sample_exhausted_inventory_boundary_reached"
+  },
+  "host_inventory_outcome": {
+    "minimum_unique_bcg_hosts": 30,
+    "hard_shortfall_alternative": "A reproducible source-by-source ledger showing the search space, every located host, exact public products, and the specific missing observable for each exclusion.",
+    "required_fields_per_host": [
+      "system identity and redshift",
+      "disturbance flag defined without gravity residuals",
+      "resolved BCG stellar-kinematic source, bin count, and radial support",
+      "BCG light and other baryonic-profile source and uncertainty",
+      "strong-lens image positions, source redshifts, and stated positional errors",
+      "number of strict image positions inside the dynamics support",
+      "structural radial-rank upper bound",
+      "lens nuisance model, covariance, or posterior-product availability",
+      "stable URL or DOI, local file, checksum, and exclusion reason"
+    ]
+  },
+  "structural_promotion_gate": {
+    "minimum_selected_dynamics_bins": 3,
+    "minimum_strict_inner_image_positions": 3,
+    "minimum_structural_radial_rank_upper_bound": 3,
+    "minimum_family_wide_position_degrees_of_freedom_after_source_position": 4,
+    "common_bcg_center_and_overlapping_radial_support_required": true,
+    "observable_level_lens_inputs_required": true,
+    "non_disturbed_promotions_required": 2
+  },
+  "post_promotion_jacobian_gate": {
+    "marginalized_weyl_rank_minimum": 3,
+    "maximum_whitened_condition_number": 1000.0,
+    "maximum_one_sigma_fractional_uncertainty_per_mode": 1.0,
+    "minimum_data_fraction_of_posterior_precision_per_mode": 0.5
+  },
+  "first_strict_readiness_target": {
+    "system": "RX J2129",
+    "gate": "configs/r1_rxj2129_readiness_targets.json",
+    "status": "kinematic_covariance_psf_and_nonparametric_hst_profile_pass_decomposition_gas_satellite_and_lens_nuisance_pending"
+  },
+  "cycle_control": {
+    "cycle_definition": "Screen at least 10 previously unaudited BCG hosts or exhaust one named primary-source resolved-BCG sample, whichever occurs first.",
+    "successful_cycle": "Add at least two systems that pass the structural promotion gate, or complete and test a named public-data obstruction that changes the next acquisition query.",
+    "rethink_after_consecutive_unsuccessful_cycles": 3,
+    "rethink_after_active_days": 7,
+    "on_rethink": "Do not lower the three-mode gate. Publish the hard-shortfall ledger and decide whether to redesign the observable target, seek proprietary data, or stop the public-data unification claim."
+  },
+  "authorization": {
+    "full_jacobian_current_ten": false,
+    "full_jacobian_rxj2129_before_readiness_gate": false,
+    "gravity_response_fit": false,
+    "new_covariant_action": false,
+    "replacement_source_search_and_observable_ingest": true,
+    "rxj2129_strict_readiness_preparation": true
+  }
+}

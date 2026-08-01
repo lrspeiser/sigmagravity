@@ -1,0 +1,67 @@
+{
+  "protocol_version": "P0588-INDEPENDENT-TRANSFER-READINESS-0.1.0",
+  "frozen_utc": "2026-08-01T07:02:41.6179440Z",
+  "status": "frozen_before_fresh_cluster_formula_score",
+  "question": "Which local or publicly obtainable products can support a genuinely fresh transfer of the frozen P0586D baryonic metric, and which products only look independent because they are already GR/NFW lens reconstructions?",
+  "classification": {
+    "raw_observable": "detector counts, calibrated imaging, catalog photometry/redshift, multiple-image sky positions, or per-source shear/magnification measurements",
+    "baryonic_forward_input": "stellar or gas mass/light product constructed without using the scored lens residual",
+    "model_dependent_lens_summary": "kappa, NFW mass, or dark-halo location inferred under a standard lens model",
+    "spent": "a lens observable already used to select or tune this formula branch",
+    "fresh": "a system whose lens residual was not used anywhere in P0586-P0587"
+  },
+  "strict_fresh_strong_lens_gates": [
+    "formula_untouched_system",
+    "raw_multiple_image_positions_and_source_redshifts",
+    "declared_coordinate_error_or_covariance_not_tuned_to_the_fitted_lens_model",
+    "registered_gas_surface_mass_with_uncertainty",
+    "registered_stellar_member_and_diffuse_ICL_mass_with_uncertainty"
+  ],
+  "independent_second_channel_gate": "raw weak-shear or magnification likelihood with covariance",
+  "macs0416": {
+    "redshift": 0.396,
+    "spectroscopic_member_window_abs_dz": 0.02,
+    "minimum_spectroscopic_quality": 3,
+    "expected_multiple_images": 237,
+    "expected_source_families": 88,
+    "published_reference_model_rms_arcsec": 0.43,
+    "hot_gas_components": [
+      {"component": 1, "x_arcsec": -18.1, "y_arcsec": -12.1, "ellipticity": 0.12, "theta_deg": -156.8, "sigma_LT_km_s": 433.0, "r_core_arcsec": 149.2, "r_cut_arcsec": 149.8},
+      {"component": 2, "x_arcsec": 30.8, "y_arcsec": -48.7, "ellipticity": 0.42, "theta_deg": -71.5, "sigma_LT_km_s": 249.0, "r_core_arcsec": 34.8, "r_cut_arcsec": 165.8},
+      {"component": 3, "x_arcsec": -2.4, "y_arcsec": -1.3, "ellipticity": 0.42, "theta_deg": -54.7, "sigma_LT_km_s": 102.0, "r_core_arcsec": 8.3, "r_cut_arcsec": 37.6},
+      {"component": 4, "x_arcsec": -20.1, "y_arcsec": 14.7, "ellipticity": 0.40, "theta_deg": -49.3, "sigma_LT_km_s": 282.0, "r_core_arcsec": 51.7, "r_cut_arcsec": 52.3}
+    ],
+    "gas_parameter_source": "data/raw/r1_replacement_search_sources/bergamini2023_macs_j0416_lensing/paper.tex",
+    "lens_position_source": "data/derived/r1_replacement_cycle1_extension_images.csv",
+    "buffalo_catalog": "data/raw/p0588_macs0416_transfer/hlsp_buffalo_hst_ir-weighted_macs0416_multi_v2.0_catalog.fits",
+    "buffalo_readme": "data/raw/p0588_macs0416_transfer/hlsp_buffalo_hst_ir-weighted_macs0416_multi_v2.0_readme.txt"
+  },
+  "inputs": {
+    "p0559_report": "results/p0559_accept_projected_gas_tidal/report.json",
+    "p0586d_report": "results/p0586d_signed_metric_exact/report.json",
+    "p0587_report": "results/p0587_baryonic_highpass_metric/report.json",
+    "rxj2129_bcg_icl_report": "results/r1_rxj2129_bcg_icl/report.json",
+    "rxj2129_terminal_report": "results/r1_rxj2129_terminal_observable_disposition/report.json",
+    "ten_system_ceiling_report": "results/r1_ten_system_public_data_ceiling/report.json",
+    "clash_coverage_report": "results/r1_clash_observable_coverage/report.json",
+    "cccp_mass_summaries": "data/raw/cccp_meneacs_herbonnet2020/weak_lensing_masses.csv",
+    "relics_kappa_profiles": "data/derived/relics_radial_kappa_profiles.csv",
+    "relics_kappa_covariance": "data/derived/relics_radial_kappa_covariance.csv"
+  },
+  "outputs": {
+    "directory": "results/p0588_independent_transfer_readiness",
+    "readiness": "readiness.csv",
+    "evidence_inventory": "evidence_inventory.csv",
+    "macs0416_members": "data/derived/p0588_macs0416_spectroscopic_member_candidates.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md"
+  },
+  "decision_rule": "Select the fresh system with the most raw lens constraints and the largest number of independently reconstructible baryonic components. Do not score a derived kappa or NFW mass as raw evidence.",
+  "claim_limits": [
+    "A catalog produced after ICL subtraction does not preserve the subtracted ICL map.",
+    "The four published MACS J0416 gas dPIE components are a Chandra-derived baryonic model, not raw X-ray counts, and the quoted table does not supply their full covariance.",
+    "The Bergamini positional errors were rescaled using the fitted standard lens model; the published 0.43 arcsec RMS is a descriptive scoring scale, not an independent covariance.",
+    "CCCP weak-lensing masses and RELICS kappa profiles are useful comparisons but are not raw alternative-metric likelihoods.",
+    "No fresh formula score is authorized by this readiness audit alone."
+  ]
+}

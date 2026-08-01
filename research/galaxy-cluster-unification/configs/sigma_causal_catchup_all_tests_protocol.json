@@ -1,0 +1,74 @@
+{
+  "protocol_version": "SIGMA-CAUSAL-CATCHUP-ALL-TESTS-0.1.0",
+  "frozen_utc": "2026-07-29T04:23:25Z",
+  "status": "frozen_before_all_galaxy_cluster_catchup_scores",
+  "question": "Can a universal causal time coefficient make gravity vectors catch up across curved low-density regions while preserving the existing galaxy and cluster fits?",
+  "equation": {
+    "weak_field": "div[mu(Sigma,y) grad(Phi)] - Q(Sigma,y)/c^2 d_t^2 Phi = 4 pi G rho_b",
+    "mu": "(1-eta Sigma^2) y/(y+activation Sigma^2), with y=|grad Phi|/a0",
+    "parallel_spatial_coefficient": "L_parallel=mu+2 X mu_X=mu[1+activation Sigma^2/(y+activation Sigma^2)]",
+    "causal_time_coefficient": "Q=L_parallel+delta Sigma^2",
+    "parallel_speed": "v_parallel/c=sqrt(L_parallel/Q)",
+    "perpendicular_speed": "v_perpendicular/c=sqrt(mu/Q)",
+    "static_limit": "d_t^2 Phi=0, so delta changes no equilibrium rotation or lensing prediction",
+    "local_fourier_response": "A_dynamic/A_quasistatic=1/[1-(Q/L_parallel)(v/c)^2] for omega=v/R and k=1/R"
+  },
+  "fixed_spatial_parameters": {
+    "a0_m_s2": 1.2e-10,
+    "activation": 1.0,
+    "eta": 0.6,
+    "log10_rho_screen_g_cm3": -23.5,
+    "sigma_density_proxy": "sqrt(max(0,1-rho/rho_screen)); local no-gradient diagnostic only"
+  },
+  "delta_scan": [0.0, 1.0, 10.0, 100.0, 1000.0, 10000.0, 100000.0, 1000000.0],
+  "selection_rule": {
+    "name": "largest_scanned_perturbatively_safe_delta",
+    "maximum_response_parameter": 0.1,
+    "definition": "largest delta for which every density-resolved row has r=(Q/L_parallel)(v/c)^2 <= 0.1",
+    "warning": "This is a stability-margin diagnostic, not a parameter fit or empirical determination of delta."
+  },
+  "mathematical_gates": {
+    "minimum_q_time_coefficient": 0.0,
+    "maximum_characteristic_speed_over_c": 1.000001,
+    "maximum_response_parameter_for_selected_delta": 0.1,
+    "maximum_static_prediction_change": 1e-14
+  },
+  "inputs": {
+    "sparc_raw_directory": "data/raw/sparc",
+    "sparc_density_rows": "results/sparc_density_transfer/primary_predictions.csv",
+    "clash_radial_table": "data/raw/clash_tian2020/fig2.dat",
+    "bcg_cluster_density_rows": "results/phenomenology_formula_sweep/sample.csv",
+    "bcg_cluster_predictions": "results/rar_sharp_coherence_rg_sweep/predictions.csv",
+    "galaxy_benchmark_report": "results/sparc_independent_nuisance_refit/report.json",
+    "cluster_benchmark_report": "results/clash_lensing_universal_comparison/report.json",
+    "bridge_benchmark_report": "results/rar_sharp_coherence_rg_sweep/report.json",
+    "raw_lensing_report": "results/sigma_covariant_weak_field/report.json"
+  },
+  "coverage": {
+    "static_invariance": [
+      "all SPARC rotation-curve rows",
+      "all CLASH radial lensing rows",
+      "all BCG bridge rows",
+      "all RX J2129 raw image-plane predictions"
+    ],
+    "density_resolved_characteristics": [
+      "SPARC outer-holdout density rows",
+      "CLASH bridge rows with reconstructed local density",
+      "BCG bridge rows with reconstructed local density"
+    ]
+  },
+  "interpretation_limits": [
+    "Equilibrium galaxy and lensing data can prove invariance but cannot measure delta.",
+    "The local density proxy is not a solved three-dimensional Sigma field.",
+    "The Fourier response is a linear local diagnostic, not a merger simulation.",
+    "An observed catch-up delay requires time-dependent systems such as mergers, variable lenses, or gravitational-wave timing."
+  ],
+  "outputs": {
+    "report": "results/sigma_causal_catchup_all_tests/report.json",
+    "characteristics": "results/sigma_causal_catchup_all_tests/characteristics.csv",
+    "delta_scan": "results/sigma_causal_catchup_all_tests/delta_scan.csv",
+    "static_invariance": "results/sigma_causal_catchup_all_tests/static_invariance.csv",
+    "figure": "results/sigma_causal_catchup_all_tests/sigma_causal_catchup_all_tests.png",
+    "summary": "results/sigma_causal_catchup_all_tests/SUMMARY.md"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "protocol_version": "P0610-DUAL-COMPONENT-MISALIGNMENT-DRIVER-0.1.0",
+  "frozen_utc": "2026-08-02T01:45:00Z",
+  "status": "posthoc_candidate_generator_frozen_after_P0609_before_computed_correlations_and_gate_table",
+  "question": "Is the raw response to a gas-directed route associated with gas being misaligned with both discrete members and continuous starlight?",
+  "driver": {
+    "gas_member_cosine": "c_gm=<d_gas dot d_member>_luminosity_weighted",
+    "gas_star_cosine": "c_gs=<d_gas dot d_star>_luminosity_weighted",
+    "dual_misalignment": "A_dual=sqrt(max(0,1-c_gm)*max(0,1-c_gs))",
+    "candidate_future_gate": "H=A_dual^4/(A_dual^4+0.3^4)",
+    "candidate_effective_strength": "s_eff=0.0025*H",
+    "selection_status": "A_dual and the gate were proposed after observing that MACS0429 alone improved; they cannot validate P0609"
+  },
+  "inputs": {
+    "direction_audits": "results/p0554_all_baryon_route_screen/direction_audits.csv",
+    "RXJ2129_refits": "results/p0607_component_direction_raw_lensing/refit_scores.csv",
+    "multicluster_scores": "results/p0609_gas_route_multicluster_raw_transfer/system_scores.csv"
+  },
+  "outputs": {
+    "directory": "results/p0610_dual_component_misalignment_driver",
+    "driver_table": "driver_table.csv",
+    "jackknife": "jackknife.csv",
+    "report": "report.json",
+    "figure": "p0610_dual_component_misalignment_driver.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The driver and threshold are post hoc after inspecting P0609.",
+    "Only four systems have finite matched raw responses, so p-values and jackknives are descriptive.",
+    "MACS0429 is a high-leverage point and has only two held-out images.",
+    "The candidate gate must be frozen and tested on a different cluster before it can enter the field formula.",
+    "Directional alignment uses proxy maps and is not a component mass measurement."
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "protocol_version": "R1B2-MS2137-pPXF-covariance-0.1",
+  "status": "frozen_before_first_MS2137_DATA_or_STAT_array_read",
+  "frozen_utc": "2026-07-27T07:25:00Z",
+  "purpose": "Determine whether the single public MS2137 MUSE level-2 cube can provide a source-traceable, covariance-bearing stellar-dynamics profile through 14 arcsec (64.20 kpc), overlapping four strong-lens image positions from three source families.",
+  "blindness_rule": "The cube, center, annuli, source mask, spectral range, templates, polynomial orders, resolution treatment, S/N and consistency thresholds, covariance construction, and stop rules are frozen before reading a DATA or STAT array. Published MS2137 dispersions may be used only as a post-decision diagnostic and no gravity or lens residual is an input.",
+  "parent_gates": {
+    "feasibility_report": "results/r1_ms2137_muse_feasibility/report.json",
+    "acquisition_report": "results/r1_ms2137_muse_acquisition/report.json",
+    "required_feasibility_decision": "authorize_frozen_soda_cutout_acquisition",
+    "required_acquisition_decision": "authorize_numerical_protocol_freeze"
+  },
+  "input": {
+    "system_name": "MS2137",
+    "cube_path": "data/raw/r1_muse_bcg_cubes/ms2137_bcg_4860_7160A_r18arcsec.fits",
+    "cube_sha256": "EEC593788696A9F640A6DA7C17FEACEC9AABBF998773A4BA1C9676B10F95716D",
+    "archive_dp_id": "ADP.2019-07-31T03:40:02.259",
+    "archive_proposal_id": "0103.A-0777(A)",
+    "archive_exposure_seconds": 2683.869,
+    "data_extension": "DATA",
+    "variance_extension": "STAT",
+    "observed_wavelength_range_angstrom": [4860.3134765625, 7160.3134765625],
+    "corresponding_rest_wavelength_range_angstrom": [3701.6858161176694, 5453.399449781036],
+    "spectral_range_limitation": "This pre-pixel acquisition uses the established project observed-frame 4860-7160-A range. At z=0.313 it does not reproduce the paper's stated rest-frame 4860-7160-A fit; it instead retains the Ca H+K, G-band, H-beta, and Mg-b-region absorption information available in rest 3702-5453 A. The limitation is part of the final decision and cannot be repaired post-result by silently changing bands.",
+    "bcg_redshift_initial": 0.313,
+    "bcg_center_ra_deg": 325.06316666666663,
+    "bcg_center_dec_deg": -23.66113611111111,
+    "astrometric_registration": "Fit a robust fixed-n=4.05 circular Sersic continuum model near the WCS-predicted BCG position and treat the fitted offset as a global cube-WCS correction.",
+    "maximum_allowed_registration_offset_arcsec": 1.0
+  },
+  "preflight": {
+    "required_python_packages": {
+      "ppxf": "9.4.8"
+    },
+    "expected_fits_extensions": ["PRIMARY", "DATA", "STAT"],
+    "expected_shape_spectral_y_x": [1841, 180, 180],
+    "science_array_reads_authorized_only_after_protocol_audit": true
+  },
+  "structural_target": {
+    "frozen_outer_edge_arcsec": 14.0,
+    "frozen_outer_edge_kpc": 64.20265708832595,
+    "required_lens_images_inside_support": 3,
+    "required_lens_families_inside_support": 2,
+    "actual_preidentified_lens_images_inside_support": 4,
+    "actual_preidentified_lens_families_inside_support": 3,
+    "no_support_shrink_after_pixel_inspection": true
+  },
+  "spatial_extraction": {
+    "annulus_edges_arcsec": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.5, 5.5, 8.5, 14.0],
+    "annulus_count": 9,
+    "position_angle_deg_east_of_north": 0.0,
+    "axis_ratio_b_over_a": 1.0,
+    "geometry_rationale": "Use circular annuli as in the published MS2137 MUSE analysis and as a theory-neutral structural gate. The inner boundaries retain the published 0.5-arcsec cadence; progressively wider outer annuli trade radial resolution for S/N without moving the frozen 14-arcsec edge.",
+    "white_light_range_angstrom": [6000.0, 7000.0],
+    "minimum_valid_wavelength_fraction_per_bin": 0.7,
+    "maximum_masked_spaxel_fraction_per_bin": 0.5,
+    "minimum_unmasked_spaxels_per_opposite_half": 20,
+    "mask_protocol": {
+      "stage_1": "Mask non-finite DATA/STAT samples and non-positive variance.",
+      "stage_2": "Construct a white-light image as the median of native planes from 6000-7000 Angstrom.",
+      "stage_3": "Subtract a 3-pixel Gaussian-smoothed white-light image to form a compact-source detection image.",
+      "stage_4": "In the 3-17 arcsec reference zone, flag positive connected components 2-300 pixels in area above 6 robust sigma.",
+      "stage_5": "Dilate accepted components by 8 pixels; never mask the registered central 3 arcsec through this compact-source rule; freeze the resulting mask for every baseline, half-field, bootstrap, and sensitivity fit."
+    }
+  },
+  "spectral_fit": {
+    "software": "pPXF",
+    "software_version": "9.4.8",
+    "template_family_baseline": "XSL",
+    "template_path": "data/raw/r1_ppxf_templates/spectra_xsl_9.0.npz",
+    "template_sha256": "B8BEE334EE1705A0D4E7FF0F161990C248D68AC1B8C8EB138B0D8C05CF37D853",
+    "template_family_diagnostic": "E-MILES",
+    "diagnostic_template_path": "data/raw/r1_ppxf_templates/spectra_emiles_9.0.npz",
+    "diagnostic_template_sha256": "6A1B1A70DB4D95F67AFE0ADBE254F111EB2B50412B9F311714C54FFBA18C6F0E",
+    "template_resolution_rationale": "XSL is the resolution-valid baseline. E-MILES is broader than the MUSE rest-frame instrumental FWHM over much of this band and is retained only as a conservative template-plus-resolution diagnostic.",
+    "galaxy_fwhm_angstrom_baseline": 2.6,
+    "moments": 2,
+    "additive_polynomial_degree": 5,
+    "multiplicative_polynomial_degree": 3,
+    "polynomial_rationale": "These orders are the published MS2137-specific choices: fifth-order additive and third-order multiplicative.",
+    "initial_sigma_km_s": 340.0,
+    "mask_emission_lines": true,
+    "high_variance_mask_sigma_baseline": 6.0,
+    "noise_model": "Sum STAT variance over unmasked spaxels and rescale conditional pPXF errors by square root of reduced chi-square. Spatial block bootstrap carries the measured pixel-noise realization into the covariance."
+  },
+  "stage_gates": {
+    "P1_environment": {
+      "cube_and_both_template_sha256_must_match": true,
+      "ppxf_version_must_match": true,
+      "parent_reports_must_pass": true
+    },
+    "P2_geometry_and_signal": {
+      "registration_offset_arcsec_max": 1.0,
+      "all_nine_annuli_must_exist": true,
+      "minimum_valid_wavelength_fraction_each_annulus": 0.7,
+      "maximum_masked_spaxel_fraction_each_annulus": 0.5,
+      "minimum_median_signal_to_noise_each_annulus": 10.0,
+      "both_opposite_halves_required": true,
+      "stop_before_ppxf_if_failed": true
+    },
+    "P3_baseline_internal_consistency": {
+      "all_nine_sigma_fits_required": true,
+      "sigma_range_km_s": [100.0, 700.0],
+      "maximum_fractional_formal_sigma_error_each_bin": 0.3,
+      "maximum_opposite_half_velocity_difference_km_s": 100.0,
+      "maximum_opposite_half_sigma_difference_fraction": 0.2,
+      "outer_8p5_to_14arcsec_bin_must_pass": true,
+      "stop_before_covariance_if_failed": true
+    },
+    "P4_covariance_and_systematics": {
+      "required_successful_bootstrap_replicates": 100,
+      "required_successful_bins_per_replicate": 9,
+      "maximum_fractional_total_sigma_uncertainty_each_bin": 0.3,
+      "maximum_template_resolution_or_mask_shift_fraction_each_bin": 0.1,
+      "covariance_must_be_symmetric": true,
+      "covariance_must_be_positive_semidefinite": true
+    }
+  },
+  "covariance_protocol": {
+    "spatial_block_bootstrap": {
+      "replicates": 100,
+      "block_shape_spaxels": [2, 2],
+      "block_grid_origin_pixel": [0, 0],
+      "random_seed": 2137,
+      "configuration": "XSL, instrumental FWHM 2.6 Angstrom, high-variance mask 6 sigma"
+    },
+    "sensitivity_protocols": [
+      {"protocol_id": "xsl_fwhm2.5_mask6", "template": "XSL", "fwhm": 2.5, "mask_sigma": 6.0, "covariance": true},
+      {"protocol_id": "xsl_fwhm2.7_mask6", "template": "XSL", "fwhm": 2.7, "mask_sigma": 6.0, "covariance": true},
+      {"protocol_id": "xsl_fwhm2.6_mask5", "template": "XSL", "fwhm": 2.6, "mask_sigma": 5.0, "covariance": true},
+      {"protocol_id": "xsl_fwhm2.6_mask8", "template": "XSL", "fwhm": 2.6, "mask_sigma": 8.0, "covariance": true},
+      {"protocol_id": "emiles_fwhm2.6_mask6", "template": "E-MILES", "fwhm": 2.6, "mask_sigma": 6.0, "covariance": true},
+      {"protocol_id": "xsl_fwhm2.5_mask5", "template": "XSL", "fwhm": 2.5, "mask_sigma": 5.0, "covariance": false},
+      {"protocol_id": "xsl_fwhm2.5_mask8", "template": "XSL", "fwhm": 2.5, "mask_sigma": 8.0, "covariance": false},
+      {"protocol_id": "xsl_fwhm2.7_mask5", "template": "XSL", "fwhm": 2.7, "mask_sigma": 5.0, "covariance": false},
+      {"protocol_id": "xsl_fwhm2.7_mask8", "template": "XSL", "fwhm": 2.7, "mask_sigma": 8.0, "covariance": false}
+    ],
+    "construction": "Add the unbiased 100-vector block-bootstrap covariance to the mean outer product of the five predeclared one-factor shifts from the frozen XSL baseline. Preserve all 9x9 off-diagonal terms. The four cross-combinations enter the maximum-shift gate but are not overweighted in the systematic covariance.",
+    "positive_semidefinite_tolerance": -1.0e-10
+  },
+  "decision_rule": "Promote MS2137 to a numerical same-system dynamics pilot only if P1-P4 all pass and the accepted covariance-bearing profile reaches the unchanged 14.0-arcsec edge. A failed outer bin, one-sided inconsistency, incomplete bootstrap, non-PSD covariance, or greater-than-10-percent systematic shift closes this attempt. Do not shrink support to 6.8 or 3.34 arcsec, merge bins after seeing their spectra, change templates, lower S/N, or compare to the published dispersion curve to tune a rerun.",
+  "outputs": {
+    "geometry_report": "results/r1_ms2137_ppxf_geometry/report.json",
+    "mask_diagnostic": "results/r1_ms2137_ppxf_geometry/mask_diagnostic.png",
+    "baseline_profile": "data/derived/r1_ms2137_ppxf_profile.csv",
+    "baseline_report": "results/r1_ms2137_ppxf/report.json",
+    "bootstrap_ledger": "data/derived/r1_ms2137_ppxf_bootstrap.csv",
+    "sensitivity_ledger": "data/derived/r1_ms2137_ppxf_sensitivity.csv",
+    "covariance_long_table": "data/derived/r1_ms2137_ppxf_covariance.csv",
+    "profile_with_total_errors": "data/derived/r1_ms2137_ppxf_profile_with_covariance.csv",
+    "covariance_report": "results/r1_ms2137_ppxf_covariance/report.json"
+  },
+  "authorization": {
+    "audit_frozen_protocol_without_array_reads": true,
+    "execute_P2_after_protocol_audit": true,
+    "execute_P3_only_after_P2_pass": true,
+    "execute_P4_only_after_P3_pass": true,
+    "change_support_or_thresholds_after_result": false,
+    "infer_dynamical_or_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

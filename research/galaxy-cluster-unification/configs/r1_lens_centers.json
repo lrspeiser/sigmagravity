@@ -1,0 +1,53 @@
+{
+  "audit_version": "R1-lens-centers-0.1",
+  "systems": {
+    "MS2137": {
+      "bcg_ra_deg": 325.06316666666663,
+      "bcg_dec_deg": -23.66113611111111,
+      "centering_verified": true,
+      "source": "Kaleidoscope 2025, arXiv:2506.21531, Table tab.ms2137model caption",
+      "source_note": "The best-fit lens-model parameter table defines its reference coordinate as the center of the MS2137 BCG.",
+      "profile_center": "published BCG coordinate"
+    },
+    "A2537": {
+      "bcg_ra_deg": 347.0929166666666,
+      "bcg_dec_deg": -2.192222222222222,
+      "centering_verified": true,
+      "source": "Stott et al. 2011, arXiv:1101.4652, Table 2 source row",
+      "source_note": "The independent BCG surface-photometry table gives A2537 at 23:08:22.3, -02:11:32. This replaces the unusable Cerny et al. 2018 Table 10 caption, which prints the Abell 2163 coordinate.",
+      "profile_center": "independent published BCG coordinate"
+    },
+    "MACS J0326": {
+      "bcg_ra_deg": 51.70816666666667,
+      "bcg_dec_deg": -0.7309638888888889,
+      "centering_verified": true,
+      "source": "Kaleidoscope 2025, arXiv:2506.21531, Table tab.ms0326model caption",
+      "source_note": "The best-fit lens-model parameter table defines all offsets relative to this BCG coordinate.",
+      "profile_center": "published BCG coordinate"
+    },
+    "MACS J0417": {
+      "bcg_ra_deg": 64.394552,
+      "bcg_dec_deg": -11.908843222222222,
+      "centering_verified": true,
+      "source": "Mahler et al. 2019, arXiv:1810.13439, best-fit parameter table",
+      "source_note": "Reference coordinate is 64.394552,-11.908871 deg; BCG1 is fixed at offset (0.0,+0.1) arcsec, positive north-west.",
+      "profile_center": "published BCG coordinate"
+    },
+    "MACS J0949": {
+      "bcg_ra_deg": 147.4659012,
+      "bcg_dec_deg": 17.1195939,
+      "centering_verified": true,
+      "source": "Allingham et al. 2023, arXiv:2207.10520, best-fit parameter table",
+      "source_note": "The model center is defined as the cluster center/BCG position.",
+      "profile_center": "published BCG coordinate"
+    },
+    "MACS J1427": {
+      "bcg_ra_deg": null,
+      "bcg_dec_deg": null,
+      "centering_verified": false,
+      "source": "Kaleidoscope 2025, arXiv:2506.21531, Table tab.ms1427model caption",
+      "source_note": "The MACS J1427 caption repeats the MS2137 BCG coordinate, so the absolute BCG center cannot be verified from this source.",
+      "profile_center": "not recoverable from the published source table"
+    }
+  }
+}

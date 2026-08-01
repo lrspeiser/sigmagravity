@@ -1,0 +1,40 @@
+{
+  "protocol_version": "P0593B-DIFFUSION-FORMULA-HOLDOUT-0.1.0",
+  "frozen_utc": "2026-08-01T10:48:00Z",
+  "status": "frozen_after_P0593_all_sample_screen_before_formula_holdout_scores",
+  "question": "Does the small RAR-plus-redistribution gain found in P0593 transfer to galaxies excluded from formula selection?",
+  "parent_protocol": "configs/p0593_diffusion_cross_domain_protocol.json",
+  "candidate_filter": {"scalar_completion": "RAR", "candidate_count": 160},
+  "partition": {
+    "unit": "whole galaxy",
+    "rule": "formula_holdout iff int(SHA256(galaxy)[0:8],16) mod 4 equals 0; otherwise discovery",
+    "expected_discovery_galaxies": 91,
+    "expected_holdout_galaxies": 40
+  },
+  "selection": {
+    "metric": "discovery_equal_galaxy_RMSE_km_s",
+    "direction": "minimize",
+    "tie_break": ["route_fraction", "strength", "gate_power", "candidate_id"]
+  },
+  "bootstrap": {"seed": 5931, "draws": 5000, "unit": "formula-holdout galaxy"},
+  "advance_gates": {
+    "holdout_equal_galaxy_improvement_fraction_min": 0.01,
+    "holdout_pooled_RMSE_not_worse": true,
+    "holdout_galaxies_improved_fraction_min": 0.6,
+    "bootstrap_probability_improvement_min": 0.9
+  },
+  "outputs": {
+    "directory": "results/p0593b_diffusion_formula_holdout",
+    "candidate_scores": "candidate_scores.csv",
+    "selected_predictions": "selected_predictions.csv",
+    "galaxy_scores": "holdout_galaxy_scores.csv",
+    "report": "report.json",
+    "figure": "p0593b_diffusion_formula_holdout.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The holdout is formula-level only: nuisance values were previously fit in the parent SPARC analysis.",
+    "The candidate family contains an empirical RAR scalar completion, so success would validate only the added spatial perturbation, not derive RAR.",
+    "The force-equivalent spherical mapping is a diagnostic approximation to disk gravity, not a covariant field equation."
+  ]
+}

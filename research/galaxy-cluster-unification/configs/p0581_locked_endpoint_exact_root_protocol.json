@@ -1,0 +1,100 @@
+{
+  "protocol_version": "P0581-LOCKED-ENDPOINT-EXACT-ROOT-0.1.0",
+  "frozen_utc": "2026-08-01T01:38:00Z",
+  "status": "frozen_after_P0580_before_K0338_exact_root_scores",
+  "trigger": "P0579's inverse-derived K0338 endpoint rule improved both SMACS0723 and SPT0615 under a linearized image-plane metric, but narrowly failed its mass-sheet gate. This stage asks whether the fixed geometry survives full nonlinear image-root solving on four independent raw clusters.",
+  "question": "Does the locked K0338 endpoint geometry improve or stabilize exact held-out image roots when it routes only the scalar parent's excess over baryonic gravity?",
+  "locked_geometry": {
+    "source": "P0579 candidate K0338, fixed without reference to these four systems",
+    "concentration": "C=R50/R80 from fixed member-light positions and weights about the cluster origin",
+    "route_fraction": "s(C)=1/[1+exp(-4.7763726277*(C-0.6485259912))]",
+    "return_length": "0.36*R80, constant for all member launch radii",
+    "endpoint_width": "0.23*R80",
+    "destination": "member-light weighted centroid",
+    "residence": "endpoint only",
+    "normalization": "(1-s) local member map plus s endpoint map, normalized to unit total weight"
+  },
+  "field_translation": {
+    "scalar_parent": "P0554 from the frozen arc-invariant Pareto program",
+    "ordinary_baryonic_base": "left unchanged and local",
+    "carrier": "P0554 reduced deflection minus baryonic reduced deflection",
+    "angular_response": "multiply the carrier convergence by the normalized endpoint-map contrast, remove its exact annular mean, solve one curl-free potential, and add only the zero-monopole correction to the scalar parent",
+    "primary_contrast_strength": 1.0,
+    "primary_contrast_cap": 20.0,
+    "support_radius_arcsec": 220.0,
+    "taper_inner_arcsec": 180.0,
+    "annulus_width_arcsec": 1.0,
+    "grid_half_width_arcsec": 255.5,
+    "grid_spacing_arcsec": 1.0
+  },
+  "sensitivity_grid": {
+    "policy": "Fit geometry only for the locked primary. At that fixed fit and its fitted source positions, score exact roots for each one-at-a-time field change; sensitivities cannot replace the primary.",
+    "coordinates": {
+      "route_fraction_multiplier": [0.5, 0.75, 1.0],
+      "return_length_over_R80": [0.30, 0.36, 0.42],
+      "width_over_R80": [0.18, 0.23, 0.28],
+      "gate_mode": ["none", "cluster_logistic_soft", "cluster_logistic"],
+      "contrast_cap": [5.0, 10.0, 20.0]
+    },
+    "primary": {
+      "route_fraction_multiplier": 1.0,
+      "return_length_over_R80": 0.36,
+      "width_over_R80": 0.23,
+      "gate_mode": "cluster_logistic",
+      "contrast_cap": 20.0
+    }
+  },
+  "inputs": {
+    "base_exact_protocol": "configs/adaptive_route_multicluster_raw_protocol.json",
+    "base_exact_report": "results/adaptive_route_multicluster_raw/report.json",
+    "base_exact_scores": "results/adaptive_route_multicluster_raw/exact_scores.csv",
+    "base_exact_geometry": "results/adaptive_route_multicluster_raw/geometry.csv",
+    "p0579_protocol": "configs/p0579_extent_gated_return_raw_protocol.json",
+    "p0579_report": "results/p0579_extent_gated_return_raw/report.json"
+  },
+  "systems": {
+    "labels": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "historical_validation_labels": ["MACS1115", "MACS1931"],
+    "independence": "None of these four systems entered the ten-cluster inverse driver that fixed K0338 or the two-cluster P0579 raw replay. They have been used by other formula families in this project."
+  },
+  "fit": {
+    "maximum_function_evaluations": 2500,
+    "primary_starts": 8,
+    "random_seed": 3602300581,
+    "gravity_parameters_fit_to_cluster_images": 0,
+    "ordinary_geometry_parameters_refit_per_cluster": 6,
+    "baseline_policy": "Use the already frozen scalar-baseline exact fits from the identical raw-cluster protocol; initialize each new primary fit at that system's scalar geometry."
+  },
+  "gates": {
+    "all_heldout_roots_required": true,
+    "matched_complete_equal_system_improvement_over_scalar_min": 0.05,
+    "historical_validation_improvement_over_scalar_min": 0.05,
+    "absolute_equal_system_heldout_RMS_arcsec_max": 2.0,
+    "validation_to_compact_halo_RMS_ratio_max": 1.25,
+    "systems_improved_or_root_recovered_min": 3,
+    "route_map_normalization_error_max": 1e-12,
+    "maximum_annular_convergence_mean_fraction_max": 1e-10,
+    "normalized_curl_RMS_max": 1e-10,
+    "solar_and_axisymmetric_zero_monopole": true
+  },
+  "outputs": {
+    "directory": "results/p0581_locked_endpoint_exact_root",
+    "members": "member_sources.csv",
+    "exact_scores": "exact_scores.csv",
+    "predictions": "predictions.csv",
+    "geometry": "geometry.csv",
+    "field_audits": "field_audits.csv",
+    "sensitivity_scores": "sensitivity_scores.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0581_locked_endpoint_exact_root.png"
+  },
+  "claim_limits": [
+    "The four systems are independent of K0338 selection but are not globally fresh to the research project.",
+    "Member catalogs omit intracluster gas and diffuse light and were prepared within conventional lens-model workflows.",
+    "The scalar P0554 parent is phenomenological; the endpoint correction is not derived from a covariant action.",
+    "The correction is explicitly zero-monopole, so this stage tests angular endpoint placement rather than absolute cluster lensing strength.",
+    "Only the primary result is predictive; all one-at-a-time sensitivity rankings are descriptive after the exact-root replay."
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "protocol_version": "R1B1-RXJ2129-HST-PSF-0.1",
+  "status": "frozen_after_point_source_availability_check_before_psf_measurement",
+  "purpose": "Determine whether the RX J2129 CLASH field supports an empirical F125W/F814W PSF suitable for the separately frozen BCG plus ICL decomposition.",
+  "freeze_date": "2026-07-26",
+  "disclosure": "Before freezing the numerical PSF rules, the Molino catalog was queried with the intended point-source, S/N, flag, and magnitude cuts. Three candidate IDs and their approximate catalog FWHM values were seen. No image-stamp PSF, encircled-energy curve, BCG/ICL fit, mass profile, or gravity residual had been measured.",
+  "inputs": {
+    "catalog": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_ir_rxj2129_cat-molino.txt",
+    "f125w_science": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_wfc3ir_rxj2129_f125w_v1_drz.fits",
+    "f125w_weight": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_wfc3ir_rxj2129_f125w_v1_wht.fits",
+    "f814w_science": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_acs_rxj2129_f814w_v1_drz.fits",
+    "f814w_weight": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_acs_rxj2129_f814w_v1_wht.fits"
+  },
+  "candidate_selection": {
+    "PointS_minimum": 0.8,
+    "catalog_s2n_minimum": 30.0,
+    "photoflag_required": 0,
+    "f125w_ab_magnitude_minimum": 16.0,
+    "f125w_ab_magnitude_maximum": 24.0,
+    "minimum_candidates": 3,
+    "position_source": "Molino x and y detection-frame coordinates, converted from one-indexed to zero-indexed pixels"
+  },
+  "stamp_and_normalization": {
+    "stamp_size_pixels": 51,
+    "background_annulus_pixels": [16.0, 23.0],
+    "centroid_search_radius_pixels": 6.0,
+    "normalization_radius_pixels": 10.0,
+    "recentering_interpolation_order": 3,
+    "combination": "pixelwise median after background subtraction, positive clipping, recentering, and per-star aperture normalization"
+  },
+  "quality_gates": {
+    "maximum_centroid_shift_pixels": 5.0,
+    "minimum_moment_fwhm_pixels": 1.0,
+    "maximum_moment_fwhm_pixels": 6.0,
+    "maximum_pairwise_encircled_energy_r3_spread": 0.15,
+    "maximum_pairwise_l1_difference_within_r10": 0.35,
+    "maximum_leave_one_out_l1_shift_within_r10": 0.30,
+    "both_filters_must_pass": true
+  },
+  "outputs": {
+    "psf_npz": "data/derived/r1_rxj2129_empirical_hst_psf.npz",
+    "star_ledger": "data/derived/r1_rxj2129_empirical_hst_psf_stars.csv",
+    "report": "results/r1_rxj2129_hst_psf/report.json",
+    "diagnostic": "results/r1_rxj2129_hst_psf/psf_diagnostics.png"
+  },
+  "authorization": {
+    "bcg_icl_decomposition_if_psf_gate_passes": true,
+    "bcg_icl_decomposition_if_psf_gate_fails": false,
+    "gravity_response_fit": false,
+    "strict_r1_ready": false
+  },
+  "failure_response": "If either filter fails, do not loosen these thresholds or fit the BCG without a PSF. Acquire a public exposure-specific HST PSF or freeze a synthetic-PSF protocol."
+}

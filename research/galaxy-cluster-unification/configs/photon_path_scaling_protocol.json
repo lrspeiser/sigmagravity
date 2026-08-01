@@ -1,0 +1,67 @@
+{
+  "protocol_version": "PHOTON-PATH-SCALING-0.1.0",
+  "frozen_utc": "2026-07-31T06:10:00Z",
+  "status": "frozen_before_SPARC_distance_scoring",
+  "question": "Could an optical-metric effect accumulate after photons leave a galaxy, making the inferred rotation excess grow with propagation distance?",
+  "effective_metric": {
+    "line_element": "ds_gamma^2=-(1+2*Phi_gamma)c^2dt^2+2*A_gamma_i*c*dt*dx^i+(1-2*Psi_gamma)dx^2",
+    "bending": "alpha_gamma is sourced by transverse gradients of Phi_gamma+Psi_gamma and by curl A_gamma",
+    "frequency": "Delta ln(nu) can be sourced by endpoint A_gamma dot n or by an explicitly time-dependent optical metric",
+    "unification_idea": "The same optical field supplies a spatial-gradient lensing term and a directional frequency term.",
+    "new_physics": "Phi_gamma, Psi_gamma, and A_gamma are not ordinary GR potentials unless they are derived from a stable gauge-invariant field action."
+  },
+  "input": {
+    "SPARC_directory": "data/raw/sparc",
+    "catalog_galaxies": 175,
+    "fixed_disk_mass_to_light": 0.5,
+    "fixed_bulge_mass_to_light": 0.7,
+    "RAR_acceleration_scale_m_s2": 1.2e-10
+  },
+  "sample": {
+    "maximum_quality_flag": 2,
+    "minimum_inclination_deg": 30.0,
+    "minimum_radius_in_disk_scale_lengths": 2.0,
+    "maximum_baryonic_acceleration_m_s2": 1.2e-10,
+    "minimum_selected_points_per_galaxy": 3,
+    "per_galaxy_statistic": "median fixed-RAR velocity residual over selected outer low-acceleration points",
+    "galaxy_uncertainty": "max(5 km/s, median point error/sqrt(N), 1.4826*MAD/sqrt(N))"
+  },
+  "models": {
+    "null": "delta_v_RAR=c",
+    "unsaturated_log_path": "delta_v_RAR=c+A*ln(D/10 Mpc)",
+    "power_path_exponents": [0.25, 0.5, 1.0, 2.0],
+    "saturation_lengths_Mpc": [0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0],
+    "saturating_path": "delta_v_RAR=c+A*[1-exp(-D/L)]"
+  },
+  "uncertainty": {
+    "folds": 5,
+    "fold_seed": 20260735,
+    "complete_galaxy_bootstrap_draws": 20000,
+    "bootstrap_seed": 20260736
+  },
+  "advance_gate": {
+    "minimum_growth_over_distance_decade_km_s": 30.0,
+    "requirements": [
+      "unsaturated log-path model improves held-out weighted RMS over the distance-independent null",
+      "fitted growth over a factor of ten in distance is positive",
+      "bootstrap 95 percent upper limit reaches 30 km/s per distance decade",
+      "sign is not reversed when Hubble-flow distances are excluded"
+    ]
+  },
+  "interpretation_boundary": [
+    "A null distance trend rejects only unsaturated path accumulation over the sampled 0.98 to 127.8 Mpc range.",
+    "An effect that saturates before the nearest SPARC galaxies is not identifiable from this sample.",
+    "SPARC radii and baryonic contributions depend on adopted distance, so distance-method subsets and fixed-RAR residuals are required controls.",
+    "A successful phenomenological distance trend would still need a covariant field theory and independent redshift, polarization, dispersion, and time-delay tests."
+  ],
+  "outputs": {
+    "directory": "results/photon_path_scaling",
+    "report": "results/photon_path_scaling/report.json",
+    "galaxy_summary": "results/photon_path_scaling/galaxy_summary.csv",
+    "cross_validated_predictions": "results/photon_path_scaling/cross_validated_predictions.csv",
+    "model_scan": "results/photon_path_scaling/model_scan.csv",
+    "bootstrap": "results/photon_path_scaling/bootstrap.csv",
+    "figure": "results/photon_path_scaling/photon_path_scaling.png",
+    "summary": "results/photon_path_scaling/SUMMARY.md"
+  }
+}

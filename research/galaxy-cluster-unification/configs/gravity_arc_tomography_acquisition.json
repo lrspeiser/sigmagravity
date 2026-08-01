@@ -1,0 +1,62 @@
+{
+  "protocol_version": "GRAVITY-ARC-TOMOGRAPHY-ACQUISITION-0.1.0",
+  "frozen_utc": "2026-07-31T18:40:00Z",
+  "status": "frozen_before_catalog_download_or_map_correlation",
+  "purpose": "Acquire registered galaxy photometry for the three RELICS clusters that already have local best-fit and 100-realization Lenstool convergence ensembles. The convergence maps are used only as model-dependent inverse targets for apparent dark-matter locations.",
+  "archive": {
+    "name": "MAST RELICS HLSP",
+    "landing_page": "https://archive.stsci.edu/hlsp/relics",
+    "doi": "10.17909/T9SP45",
+    "license": "CC BY 4.0"
+  },
+  "systems": [
+    {
+      "label": "A2537",
+      "archive_slug": "abell2537",
+      "cluster_redshift": 0.297,
+      "catalog_url": "https://archive.stsci.edu/hlsps/relics/abell2537/catalogs/hlsp_relics_hst_acs-wfc3ir_abell2537_multi_v1_cat.txt",
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_abell2537_multi_v1_cat.txt",
+      "expected_bytes": 1937119,
+      "etag": "\"1d8edf-5415e5148a580\"",
+      "lensing_directory": "data/raw/relics_lens_models/A2537"
+    },
+    {
+      "label": "MACS J0417",
+      "archive_slug": "macs0417m11",
+      "cluster_redshift": 0.443,
+      "catalog_url": "https://archive.stsci.edu/hlsps/relics/macs0417m11/catalogs/hlsp_relics_hst_acs-wfc3ir_macs0417m11_multi_v1_cat.txt",
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_macs0417m11_multi_v1_cat.txt",
+      "expected_bytes": 2182873,
+      "etag": "\"214ed9-5524f1aad1cc0\"",
+      "lensing_directory": "data/raw/relics_lens_models/MACS_J0417"
+    },
+    {
+      "label": "MACS J0949",
+      "archive_slug": "rxc0949p17",
+      "cluster_redshift": 0.383,
+      "catalog_url": "https://archive.stsci.edu/hlsps/relics/rxc0949p17/catalogs/hlsp_relics_hst_acs-wfc3ir_rxc0949p17_multi_v1_cat.txt",
+      "catalog_filename": "hlsp_relics_hst_acs-wfc3ir_rxc0949p17_multi_v1_cat.txt",
+      "expected_bytes": 4191757,
+      "etag": "\"3ff60d-534cb67617940\"",
+      "lensing_directory": "data/raw/relics_lens_models/MACS_J0949"
+    }
+  ],
+  "cross_validation": {
+    "rule": "Three leave-one-cluster-out folds. No target-cluster convergence pixels may set a forward-law parameter.",
+    "folds": [
+      {"validation": "A2537", "training": ["MACS J0417", "MACS J0949"]},
+      {"validation": "MACS J0417", "training": ["A2537", "MACS J0949"]},
+      {"validation": "MACS J0949", "training": ["A2537", "MACS J0417"]}
+    ]
+  },
+  "claim_boundary": [
+    "The RELICS kappa maps are standard-lens-equation Lenstool reconstructions, not theory-independent observations.",
+    "The galaxy catalog is a stellar-light tracer, not a complete baryonic mass map; intracluster gas is absent from this first morphology test.",
+    "Inverse transport can describe paths that reproduce a target. Only held-out forward prediction can support a universal routing law.",
+    "The first stage tests spatial shape and source attribution. It cannot determine the absolute strength of redirected gravity without stellar-mass and gas calibration."
+  ],
+  "outputs": {
+    "directory": "data/raw/relics_gravity_arc_catalogs",
+    "provenance": "data/raw/relics_gravity_arc_catalogs/provenance.json"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "report_version": "P0598-STELLAR-INTERIOR-SCREEN-RESULTS-0.1.0",
+  "status": "complete_stellar_interior_screen",
+  "selected_safe_gate": {
+    "gate_power": 4.0,
+    "outer_RMSE_km_s": 9.712866954051567,
+    "outer_equal_galaxy_RMSE_km_s": 10.029786637518617,
+    "outer_mean_residual_km_s": -0.26916362230842455,
+    "galaxy_equal_RMSE_improvement_fraction_vs_fixed_RAR": 0.06407450505709433,
+    "solar_g_R80_m_s2": 254.55253269745893,
+    "solar_activation": 4.938730118393774e-50,
+    "solar_effective_route_fraction": 1.374298604598987e-50,
+    "solar_maximum_absolute_interior_force_change": 0.0,
+    "macs0416_g_R80_m_s2": 8.389588950693998e-12,
+    "macs0416_activation": 0.9999761093826589,
+    "macs0416_effective_route_fraction": 0.1256151924262253
+  },
+  "fixed_RAR_reference": {
+    "outer_RMSE_km_s": 10.348465773189677,
+    "outer_equal_galaxy_RMSE_km_s": 10.716437036615254,
+    "outer_mean_residual_km_s": 1.742624817150273
+  },
+  "macs0416": {
+    "source_mass_solar": 56906350119801.53,
+    "R50_arcsec": 89.56814150494145,
+    "R80_arcsec": 157.9128048475637,
+    "C_R50_over_R80": 0.5671999911052389,
+    "shape_activation": 0.41872731174139277,
+    "g_R80_m_s2": 8.389588950693998e-12,
+    "report_R80_arcsec_crosscheck": 157.9128048475637
+  },
+  "solar_proxy": {
+    "C_R50_over_R80": 0.8549879733383484,
+    "shape_activation": 0.9275654346047096,
+    "g_R80_m_s2": 254.55253269745893
+  },
+  "gate_comparison": [
+    {
+      "gate_power": 0.0,
+      "outer_RMSE_km_s": 9.841443959066897,
+      "outer_equal_galaxy_RMSE_km_s": 10.065125448959725,
+      "outer_mean_residual_km_s": -1.0350562278173234,
+      "galaxy_equal_RMSE_improvement_fraction_vs_fixed_RAR": 0.06077687812004762,
+      "solar_g_R80_m_s2": 254.55253269745893,
+      "solar_activation": 1.0,
+      "solar_effective_route_fraction": 0.2782696303814129,
+      "solar_maximum_absolute_interior_force_change": 66423.5066253968,
+      "macs0416_g_R80_m_s2": 8.389588950693998e-12,
+      "macs0416_activation": 1.0,
+      "macs0416_effective_route_fraction": 0.12561819352241782
+    },
+    {
+      "gate_power": 1.0,
+      "outer_RMSE_km_s": 9.739763204990085,
+      "outer_equal_galaxy_RMSE_km_s": 10.058725296133739,
+      "outer_mean_residual_km_s": -0.03871824097922677,
+      "galaxy_equal_RMSE_improvement_fraction_vs_fixed_RAR": 0.06137410579974356,
+      "solar_g_R80_m_s2": 254.55253269745893,
+      "solar_activation": 4.714154627664458e-13,
+      "solar_effective_route_fraction": 1.3118060658010158e-13,
+      "solar_maximum_absolute_interior_force_change": 3.131306813841661e-08,
+      "macs0416_g_R80_m_s2": 8.389588950693998e-12,
+      "macs0416_activation": 0.9346552238443891,
+      "macs0416_effective_route_fraction": 0.11740970078562322
+    },
+    {
+      "gate_power": 2.0,
+      "outer_RMSE_km_s": 9.719935525570683,
+      "outer_equal_galaxy_RMSE_km_s": 10.045133065207635,
+      "outer_mean_residual_km_s": -0.1931517537059587,
+      "galaxy_equal_RMSE_improvement_fraction_vs_fixed_RAR": 0.06264245934669799,
+      "solar_g_R80_m_s2": 254.55253269745893,
+      "solar_activation": 2.222325385355118e-25,
+      "solar_effective_route_fraction": 6.184056635699996e-26,
+      "solar_maximum_absolute_interior_force_change": 0.0,
+      "macs0416_g_R80_m_s2": 8.389588950693998e-12,
+      "macs0416_activation": 0.9951359136764256,
+      "macs0416_effective_route_fraction": 0.1250071757853133
+    },
+    {
+      "gate_power": 4.0,
+      "outer_RMSE_km_s": 9.712866954051567,
+      "outer_equal_galaxy_RMSE_km_s": 10.029786637518617,
+      "outer_mean_residual_km_s": -0.26916362230842455,
+      "galaxy_equal_RMSE_improvement_fraction_vs_fixed_RAR": 0.06407450505709433,
+      "solar_g_R80_m_s2": 254.55253269745893,
+      "solar_activation": 4.938730118393774e-50,
+      "solar_effective_route_fraction": 1.374298604598987e-50,
+      "solar_maximum_absolute_interior_force_change": 0.0,
+      "macs0416_g_R80_m_s2": 8.389588950693998e-12,
+      "macs0416_activation": 0.9999761093826589,
+      "macs0416_effective_route_fraction": 0.1256151924262253
+    }
+  ],
+  "gates": {
+    "galaxy_improvement_pass": true,
+    "stellar_interior_screen_pass": true,
+    "macs0416_activation_pass": true
+  },
+  "all_interpretation_gates_pass": true,
+  "claim_limits": [
+    "A uniform-density sphere is a screening diagnostic, not a standard solar model or helioseismic likelihood.",
+    "The MACS J0416 activation uses one physically normalized baryon reconstruction and does not prove activation for all ten relative-light cluster maps.",
+    "Galaxy nuisance values and candidate constants were selected in earlier disclosed work; this is a safety comparison, not a fresh formula test.",
+    "Passing this algebraic screen does not supply a covariant metric, PPN parameters, or stellar-evolution calculation."
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "protocol_version": "R1B2-A2537-Gemini-acquisition-0.2",
+  "status": "frozen_after_header_only_semantic_correction_and_before_any_science_array_access",
+  "frozen_utc": "2026-07-27T07:28:00Z",
+  "selection_blind": true,
+  "science_arrays_opened_before_freeze": false,
+  "disturbed_control": true,
+  "counts_as_non_disturbed_pilot": false,
+  "exact_file_selection_source": "configs/r1_a2537_gemini_feasibility_protocol.json",
+  "first_header_audit": {
+    "result": "failed_audit_implementation_semantics_not_raw_integrity",
+    "failed_gate": "fits_header_metadata_passed",
+    "incorrect_comparison": "The first audit compared the raw FITS slit PA keyword with the archive cass_rotator_pa field. The four archive values were 104.290416988234, 117.547570009414, 76.018122274907, and 81.594239252278 degrees, while all four raw science headers reported PA=124.0 degrees.",
+    "correction": "Do not equate cass_rotator_pa with slit PA. Require the four independently downloaded raw science headers to agree exactly at the now-frozen 124.0-degree slit PA. Continue to verify all archive MD5 values, local SHA-256 values, detector identity, and the full frozen file list.",
+    "science_pixels_read": false,
+    "science_threshold_or_target_changed": false
+  },
+  "header_rules": {
+    "instrument": "GMOS-S",
+    "science_object": "Abell 2537",
+    "program_id": "GS-2008B-Q-4",
+    "science_observation_class": "science",
+    "science_observation_type": "OBJECT",
+    "science_grating_prefix": "B600",
+    "science_mask": "0.75arcsec",
+    "ccdsum": "2 2",
+    "expected_science_slit_pa_deg": 124.0,
+    "science_slit_pa_tolerance_deg": 0.000001,
+    "require_science_bpm_detector_label_match": true
+  },
+  "authorization": {
+    "inspect_headers_and_verify_checksums": true,
+    "inspect_science_arrays": false,
+    "reduce_spectra": false,
+    "fit_stellar_kinematics": false,
+    "count_as_non_disturbed_pilot": false,
+    "fit_new_force_or_action": false
+  }
+}

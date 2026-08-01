@@ -1,0 +1,98 @@
+{
+  "protocol_version": "REOPENED-HYBRID-CHANNEL-SATURATION-FINE-0.1.0",
+  "frozen_utc": "2026-07-31T08:30:00Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Resolve the narrow RG root-convergence transition, the Sigma-only raw-lensing minimum, and the dual-channel galaxy-versus-lensing frontier with small ceiling changes.",
+  "claim_boundary": [
+    "This local sweep was selected after the broad channel study; it is a sensitivity map, not an independent confirmation set.",
+    "Every setting uses one universal formula and four universal fitted gravity parameters; no gravity constant is fitted per galaxy or raw lensing system.",
+    "The n=1.5 high-acceleration screen is fixed from the earlier Solar sensitivity study.",
+    "The CLASH bridge accelerations are GR/NFW-deprojected lensing summaries and are not theory-neutral.",
+    "SPARC uses 968 real outer rotation points with previously RAR-fitted nuisance parameters frozen.",
+    "Raw lensing uses a zero-slip pseudo-elliptical closure and interpolated spherical baryon/density profiles.",
+    "Missing held-out lens roots remain failures regardless of the RMS over surviving images.",
+    "Failure labels apply only to the exact variants and scanned parameter bounds."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "sensitivity_families": {
+    "sigma_fine": {
+      "fixed_name": "sigma_saturation_ceiling",
+      "values": [4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5
+      }
+    },
+    "rg_fine": {
+      "fixed_name": "rg_saturation_ceiling",
+      "values": [2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75, 4.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5
+      }
+    },
+    "rg_2_sigma_fine": {
+      "fixed_name": "sigma_saturation_ceiling",
+      "values": [1.0, 1.25, 1.5, 1.75, 2.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0
+      }
+    }
+  },
+  "baseline_variant_name": "sigma_fine:sigma_saturation_ceiling=6",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20260805,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_channel_saturation_fine/report.json",
+    "scores": "results/reopened_hybrid_channel_saturation_fine/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_channel_saturation_fine/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_channel_saturation_fine/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_channel_saturation_fine/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_channel_saturation_fine/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_channel_saturation_fine/family_impacts.csv",
+    "figure": "results/reopened_hybrid_channel_saturation_fine/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_channel_saturation_fine/SUMMARY.md"
+  }
+}

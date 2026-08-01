@@ -1,0 +1,87 @@
+{
+  "protocol_version": "PHOTON-KINEMATIC-ILLUSION-0.1.0",
+  "frozen_utc": "2026-07-31T04:00:00Z",
+  "status": "frozen_before_maser_channel_comparison",
+  "question": "Can a photon-frequency anomaly make spectroscopic Galactic rotation appear faster than the transverse motion of the same sources, while leaving open a broader new optical-metric theory?",
+  "new_physics_framework": {
+    "gauge_invariant_interaction": "L_gamma=-F_mn F^mn/4-xi*S(X)*B_m B_n F^ma F^n_a/2",
+    "geometric_optics_limit": "g_opt^mn k_m k_n=0 with g_opt^mn=g^mn+xi*S(X)*B^m B^n",
+    "regime_gate": "S(X) tends to zero in high-acceleration Solar-System conditions and can approach one in galactic or cluster conditions",
+    "standard_QED_limit": "ordinary curvature-QED terms remain present but are negligible; xi and the dynamical B field represent new physics",
+    "frequency_requirement": "a static scalar optical index can bend rays but conserves Killing frequency; an apparent rotation signal requires a moving, vortical, direction-dependent, or explicitly time-dependent B field"
+  },
+  "observable_models": {
+    "null": "DeltaTheta=Theta_radial_velocity-Theta_proper_motion=0",
+    "frequency_constant": "DeltaTheta=A",
+    "frequency_low_acceleration": "DeltaTheta=A*f(R), f=a_star/(a_star+Theta_ref^2/R)",
+    "broader_optical_metric": "If both channels agree, a static angular remapping cannot inflate v_transverse=4.74047*mu/parallax because the same local Jacobian multiplies mu and parallax; a surviving model must distinguish secular motion from annual parallax or be time dependent."
+  },
+  "data": {
+    "catalog": "data/raw/bessel_reid2019/table1.tsv",
+    "provenance": "data/raw/bessel_reid2019/provenance.json",
+    "expected_rows": 199,
+    "source": "VizieR J/ApJ/885/131, Reid et al. 2019",
+    "observables": ["parallax", "east proper motion", "north proper motion", "LSR radial velocity"],
+    "same_source_requirement": true
+  },
+  "galactic_constants": {
+    "R0_kpc": 8.15,
+    "Theta0_km_s": 236.0,
+    "solar_peculiar_UVW_km_s": [10.6, 10.7, 7.6],
+    "catalog_LSR_standard_UVW_km_s": [10.3, 15.3, 7.7],
+    "a_star_m_s2": 1.2e-10,
+    "proper_motion_conversion_km_s_per_masyr_kpc": 4.74047
+  },
+  "primary_sample": {
+    "maximum_fractional_parallax_error": 0.20,
+    "minimum_galactocentric_radius_kpc": 4.0,
+    "maximum_galactocentric_radius_kpc": 16.0,
+    "maximum_absolute_height_kpc": 0.20,
+    "excluded_arm_labels": ["GC", "Con", "3kN", "3kF", "???"],
+    "minimum_absolute_channel_projection": 0.25,
+    "peculiar_velocity_sigma_per_channel_km_s": 10.0,
+    "reason_for_projection_cut": "Avoid dividing a nearly uninformative line-of-sight or transverse channel by a near-zero circular-motion projection."
+  },
+  "uncertainty": {
+    "monte_carlo_draws_per_source": 4000,
+    "monte_carlo_seed": 20260731,
+    "complete_source_bootstrap_draws": 20000,
+    "bootstrap_seed": 20260732,
+    "folds": 5,
+    "fold_seed": 20260733,
+    "fit": "weighted least squares on training sources",
+    "validation": "each complete source appears in exactly one held-out fold"
+  },
+  "frequency_only_advance_gate": {
+    "minimum_required_positive_amplitude_km_s": 30.0,
+    "context": "The local outer-SPARC diagnostic needs a median 61.4 km/s apparent excess; 30 km/s is a deliberately conservative survival threshold.",
+    "requirements": [
+      "cross-validated model improves held-out RMSE relative to DeltaTheta=0",
+      "full-sample 95 percent upper interval for A reaches at least 30 km/s",
+      "the fitted sign is positive"
+    ]
+  },
+  "sensitivity_checks": {
+    "maximum_fractional_parallax_errors": [0.10, 0.15, 0.20],
+    "minimum_absolute_channel_projections": [0.20, 0.25, 0.35, 0.45],
+    "peculiar_velocity_sigmas_km_s": [5.0, 10.0, 15.0],
+    "radial_trend": "post-primary diagnostic DeltaTheta=A0+A1*ln(R/R0)"
+  },
+  "claim_boundary": [
+    "The catalog combines heterogeneous maser transitions and uses inferred central-star motions; residual source peculiar velocities are modeled as noise.",
+    "The comparison tests a frequency-only illusion directly. Agreement of Doppler and astrometric channels does not reject explicitly time-dependent or annual-parallax-sensitive photon physics.",
+    "The Galactic constants are fixed to the Reid et al. scale; sensitivity checks must show whether the anomaly estimate is driven by this convention.",
+    "This is a Milky Way same-source test, not yet a joint fit to extragalactic spectral cubes and raw cluster lensing.",
+    "No claim of a complete quantum theory is made until the B-field dynamics, stability, causality, and radiative corrections are derived."
+  ],
+  "outputs": {
+    "directory": "results/photon_kinematic_illusion",
+    "report": "results/photon_kinematic_illusion/report.json",
+    "source_estimates": "results/photon_kinematic_illusion/source_estimates.csv",
+    "cross_validated_predictions": "results/photon_kinematic_illusion/cross_validated_predictions.csv",
+    "fold_fits": "results/photon_kinematic_illusion/fold_fits.csv",
+    "sensitivity": "results/photon_kinematic_illusion/sensitivity.csv",
+    "figure": "results/photon_kinematic_illusion/photon_kinematic_illusion.png",
+    "summary": "results/photon_kinematic_illusion/SUMMARY.md"
+  }
+}

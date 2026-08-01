@@ -10,6 +10,17 @@
 
 ---
 
+## Latest galaxy/cluster unification research snapshot
+
+The complete 2026-08-01 P0620 gravity-routing snapshot is collected in
+[`research/galaxy-cluster-unification/latest-findings/2026-08-01-p0620-gravity-routing`](research/galaxy-cluster-unification/latest-findings/2026-08-01-p0620-gravity-routing/README.md).
+It contains the latest findings, prior-art audit, frozen protocols, analysis
+scripts, implementation modules, tests, derived tables, machine-readable
+reports, generated figures, and the scientific source data stored through Git
+LFS. Machine-local software runtimes and scratch products are excluded.
+
+---
+
 ## Abstract
 
 The observed dynamics of galaxies and galaxy clusters systematically exceed predictions from visible matter—a discrepancy conventionally attributed to dark matter. We present Σ-Gravity, a phenomenological framework where gravitational enhancement depends on both local acceleration and kinematic coherence of the source. The enhancement factor $\Sigma = 1 + A \cdot \mathcal{C} \cdot h(g_N)$ combines a covariant coherence scalar $\mathcal{C} = v_{\rm rot}^2/(v_{\rm rot}^2 + \sigma^2)$, an acceleration function $h(g_N)$ with critical scale $g^\dagger = cH_0/(4\sqrt{\pi}) \approx 9.6 \times 10^{-11}$ m/s², and a unified amplitude connecting galaxies and clusters. Adopting a QUMOND-like formulation with minimal matter coupling, test particles follow geodesics of the enhanced potential.

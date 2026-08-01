@@ -1,0 +1,84 @@
+{
+  "protocol_version": "SOLAR-SCREENED-ISOTHERMAL-0.1.0",
+  "frozen_utc": "2026-07-30T18:30:00Z",
+  "status": "frozen_before_screened_cluster_and_solar_scores",
+  "question": "Can a fixed high-acceleration screen preserve the one-parameter cluster lens result while keeping the same locked law inside Mercury's published supplementary-precession margin?",
+  "law": {
+    "family": "screened_mass_isothermal_tail",
+    "equation": "g=gbar+lambda*gbar(rstar)*(rstar/r)*a0/(a0+gbar)",
+    "parameter": "lambda",
+    "universal_fitted_gravity_parameters": 1,
+    "per_object_gravity_or_lensing_amplitudes": 0,
+    "fixed_constants": {
+      "a0_m_s2": 1.2e-10,
+      "reference_radius_kpc": 200.0,
+      "maximum_lens_radius_kpc": 3000.0,
+      "gravitational_slip": 0.0
+    },
+    "coarse_grid": [0.0, 2.0, 4.0, 6.0, 8.0, 9.0, 10.0, 12.0, 14.0, 16.0, 20.0, 24.0, 30.0],
+    "refinement_points": 9
+  },
+  "selection_design": {
+    "development_clusters": ["MACS0329", "MACS0429"],
+    "cluster_holdouts": ["MACS1115", "MACS1931"],
+    "stress_only": ["RXJ1347", "RXJ2129"],
+    "within_family_holdout": "lexicographically last image in every source family with at least three images",
+    "selection_metric": "minimum equal-system exact held-out radial RMS across development clusters, requiring all held-out roots",
+    "refinement": "nine fixed linear points between the coarse winner's adjacent grid values; development images only",
+    "disclosure": "The clusters and their earlier scores have already been viewed. This is a deterministic replay holdout, not untouched external validation."
+  },
+  "solar_source_convention": {
+    "primary": "isolated point-mass Sun with gbar(r)=GM_sun/r^2 and gbar(rstar)=GM_sun/rstar^2",
+    "scope": "first-order secular osculating-orbit diagnostic; standard GR precession is the baseline and the reported value is the additional precession",
+    "limitation": "This source-local convention is not yet a covariant multi-source field equation and does not perform a raw planetary-ephemeris refit."
+  },
+  "published_constraints": {
+    "Mercury_supplementary_precession_mas_per_century": {
+      "central": 0.0,
+      "one_sigma": 3.1,
+      "gate_sigma_multiplier": 1.0,
+      "source": "Fienga et al. 2016, INPOP15a conservative criterion 1, https://arxiv.org/abs/1601.00947"
+    },
+    "Cassini_gamma_minus_one": {
+      "central": 2.1e-5,
+      "one_sigma": 2.3e-5,
+      "phenomenological_fractional_force_proxy_max": 2.3e-5,
+      "source": "Bertotti, Iess and Tortora 2003, https://doi.org/10.1038/nature01997",
+      "limitation": "Cassini measured metric light-time parameter gamma, not a radial force fraction; zero slip is imposed here rather than derived."
+    }
+  },
+  "advance_gates": {
+    "Mercury_within_published_one_sigma_margin": true,
+    "Cassini_fractional_force_proxy_pass": true,
+    "all_validation_heldout_roots_converged": true,
+    "both_validation_clusters_improve_over_baryons": true,
+    "validation_equal_system_RMS_arcsec_max": 12.486420033891348,
+    "validation_threshold_definition": "1.25 times the pre-existing 9.989136027113078-arcsec compact-halo comparator",
+    "selected_parameter_not_refined_boundary": true
+  },
+  "optimization": {
+    "starts_per_coarse_point": 3,
+    "starts_per_refined_point": 5,
+    "starts_final_validation": 8,
+    "maximum_function_evaluations": 2500,
+    "random_seed": 20260813
+  },
+  "inputs": {
+    "base_one_parameter_protocol": "configs/one_parameter_multicluster_lens_protocol.json",
+    "base_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "base_report": "results/unbounded_running_multicluster_raw/report.json",
+    "one_parameter_report": "results/one_parameter_multicluster_lens/report.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat"
+  },
+  "outputs": {
+    "report": "results/solar_screened_isothermal/report.json",
+    "coarse_grid": "results/solar_screened_isothermal/coarse_grid.csv",
+    "refined_grid": "results/solar_screened_isothermal/refined_grid.csv",
+    "predictions": "results/solar_screened_isothermal/predictions.csv",
+    "geometry": "results/solar_screened_isothermal/geometry.csv",
+    "radial_profiles": "results/solar_screened_isothermal/radial_profiles.csv",
+    "solar_diagnostics": "results/solar_screened_isothermal/solar_diagnostics.csv",
+    "summary": "results/solar_screened_isothermal/SUMMARY.md"
+  }
+}

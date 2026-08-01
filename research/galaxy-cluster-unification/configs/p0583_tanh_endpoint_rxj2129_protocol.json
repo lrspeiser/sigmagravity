@@ -1,0 +1,67 @@
+{
+  "protocol_version": "P0583-TANH-ENDPOINT-RXJ2129-0.1.0",
+  "frozen_utc": "2026-08-01T04:25:00Z",
+  "status": "frozen_after_P0582_before_RXJ2129_K0338_scores",
+  "trigger": "P0582 found that 20*tanh(x/20) was the only smooth saturation curve to preserve all exact roots across the four P0581 clusters.",
+  "question": "Does the fully locked K0338 endpoint rule with tanh-20 saturation transfer to exact RX J2129 raw image roots without choosing any gravity parameter on RX J2129?",
+  "independence": {
+    "formula_selection": "RX J2129 was not in the ten-cluster inverse driver that set the K0338 extent relation, the two P0579 raw clusters, or the four P0581-P0582 exact-root clusters.",
+    "project_history": "RX J2129 raw images have been used extensively by other formula families, so this is new to K0338/tanh-20 but not globally fresh data."
+  },
+  "locked_formula": {
+    "route_fraction_multiplier": 1.0,
+    "return_length_over_R80": 0.36,
+    "width_over_R80": 0.23,
+    "gate_mode": "cluster_logistic",
+    "residence": "endpoint only toward the member-light centroid",
+    "carrier": "P0554 scalar excess over local baryonic gravity",
+    "monopole": "exact carrier-weighted annular mean removal",
+    "new_gravity_parameters_fit_to_RXJ2129": 0
+  },
+  "variants": [
+    {"label": "scalar_baseline", "kind": "scalar"},
+    {"label": "K0338_hard20_parent", "kind": "endpoint", "contrast_mode": "hard", "contrast_cap": 20.0},
+    {"label": "K0338_hard5_control", "kind": "endpoint", "contrast_mode": "hard", "contrast_cap": 5.0},
+    {"label": "K0338_tanh20_candidate", "kind": "endpoint", "contrast_mode": "tanh", "contrast_cap": 20.0}
+  ],
+  "fit": {
+    "starts_per_variant": 16,
+    "random_seed": 21290583,
+    "ordinary_geometry_parameters_refit_per_variant": 6,
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "within_family_split": "Use the already frozen RX J2129 training/held-out image split."
+  },
+  "inputs": {
+    "p0581_protocol": "configs/p0581_locked_endpoint_exact_root_protocol.json",
+    "p0582_protocol": "configs/p0582_smooth_endpoint_saturation_protocol.json",
+    "p0582_report": "results/p0582_smooth_endpoint_saturation/report.json",
+    "rxj_route_protocol": "configs/adaptive_route_raw_rxj2129_protocol.json",
+    "inverse_driver_table": "results/gravity_flow_inverse/cluster_driver_table.csv"
+  },
+  "gates": {
+    "all_heldout_roots_required": 7,
+    "tanh20_improvement_over_scalar_fraction_min": 0.0,
+    "absolute_heldout_RMS_arcsec_max": 2.0,
+    "maximum_annular_convergence_mean_fraction_max": 1e-10,
+    "normalized_curl_RMS_max": 1e-10,
+    "solar_and_axisymmetric_zero_monopole": true
+  },
+  "outputs": {
+    "directory": "results/p0583_tanh_endpoint_rxj2129",
+    "source_catalog": "source_catalog.csv",
+    "scores": "scores.csv",
+    "predictions": "predictions.csv",
+    "parameters": "parameters.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0583_tanh_endpoint_rxj2129.png"
+  },
+  "claim_limits": [
+    "RX J2129 is independent of K0338/tanh-20 selection but is spent at the broader project level.",
+    "The hard photometric member catalog omits hot gas and diffuse intracluster light.",
+    "Six conventional lens-geometry nuisances and training-family source positions are refitted per variant.",
+    "The zero-monopole endpoint channel tests angular placement, not absolute cluster lensing strength.",
+    "A one-cluster transfer cannot establish universality."
+  ]
+}

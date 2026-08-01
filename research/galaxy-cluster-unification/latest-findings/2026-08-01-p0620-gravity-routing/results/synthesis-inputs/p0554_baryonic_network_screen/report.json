@@ -1,0 +1,143 @@
+{
+  "report_version": "P0554-BARYONIC-NETWORK-SCREEN-RESULTS-0.1.0",
+  "status": "complete",
+  "protocol": {
+    "path": "configs\\p0554_baryonic_network_screen_protocol.json",
+    "sha256": "4b12f947c10f0d49bf7e9effbab4e3d9c251501d4b32cd49c26fdb1be38d027b"
+  },
+  "coverage": {
+    "variants": 19,
+    "network_variants": 17,
+    "systems": 5,
+    "variant_system_scores": 95,
+    "route_fields": 90
+  },
+  "references": {
+    "eta0": {
+      "variant_id": "eta_000",
+      "mode": "none",
+      "coordinate": "reference",
+      "coordinate_value": 0.0,
+      "equal_system_RMS_arcsec": 31.996072440975713,
+      "improvement_fraction_vs_eta0": 0.0,
+      "improvement_fraction_vs_local_vector": 0.009792283973464988,
+      "systems_improved_vs_eta0": 0,
+      "minimum_system_improvement_fraction": 0.0,
+      "maximum_system_improvement_fraction": 0.0
+    },
+    "local_vector_s200": {
+      "variant_id": "local_vector_s200",
+      "mode": "local_vector",
+      "coordinate": "reference",
+      "coordinate_value": 1.0,
+      "equal_system_RMS_arcsec": 32.31248547463177,
+      "improvement_fraction_vs_eta0": -0.009889121055084438,
+      "improvement_fraction_vs_local_vector": 0.0,
+      "systems_improved_vs_eta0": 4,
+      "minimum_system_improvement_fraction": -0.013308853584027114,
+      "maximum_system_improvement_fraction": 0.01752715323450238
+    },
+    "network_parent": {
+      "variant_id": "network_parent",
+      "mode": "network",
+      "coordinate": "parent",
+      "coordinate_value": 1.0,
+      "equal_system_RMS_arcsec": 33.4052833674011,
+      "improvement_fraction_vs_eta0": -0.044043247152443676,
+      "improvement_fraction_vs_local_vector": -0.03381967919574835,
+      "systems_improved_vs_eta0": 3,
+      "minimum_system_improvement_fraction": -0.05261761134435483,
+      "maximum_system_improvement_fraction": 0.008462749348542187
+    }
+  },
+  "best_network": {
+    "variant_id": "network_target_050",
+    "mode": "network",
+    "coordinate": "target_weight_power",
+    "coordinate_value": 0.5,
+    "equal_system_RMS_arcsec": 33.027067100901796,
+    "improvement_fraction_vs_eta0": -0.032222537995186595,
+    "improvement_fraction_vs_local_vector": -0.02211472177932694,
+    "systems_improved_vs_eta0": 3,
+    "minimum_system_improvement_fraction": -0.038868849940992156,
+    "maximum_system_improvement_fraction": 0.008180388056467036
+  },
+  "coordinate_impacts": [
+    {
+      "coordinate": "target_weight_power",
+      "tested_values": "0.5+1.5+2.0",
+      "profile_RMS_span_arcsec": 5.902362199332821,
+      "best_variant_id": "network_target_050",
+      "best_value": 0.5,
+      "best_improvement_fraction_vs_network_parent": 0.011322049339907325
+    },
+    {
+      "coordinate": "top_k",
+      "tested_values": "1.0+3.0+10.0",
+      "profile_RMS_span_arcsec": 1.2063461888291371,
+      "best_variant_id": "network_parent",
+      "best_value": 1.0,
+      "best_improvement_fraction_vs_network_parent": 0.0
+    },
+    {
+      "coordinate": "hop_fraction",
+      "tested_values": "0.8+0.9+1.1+1.2",
+      "profile_RMS_span_arcsec": 1.0875540809094844,
+      "best_variant_id": "network_hop_090",
+      "best_value": 0.9,
+      "best_improvement_fraction_vs_network_parent": 0.008858657083660626
+    },
+    {
+      "coordinate": "softening_kpc",
+      "tested_values": "100.0+300.0",
+      "profile_RMS_span_arcsec": 0.19283278252292035,
+      "best_variant_id": "network_soft_100",
+      "best_value": 100.0,
+      "best_improvement_fraction_vs_network_parent": 0.004094475450607704
+    },
+    {
+      "coordinate": "link_scale_kpc",
+      "tested_values": "125.0+500.0",
+      "profile_RMS_span_arcsec": 0.13401633352985698,
+      "best_variant_id": "network_link_125",
+      "best_value": 125.0,
+      "best_improvement_fraction_vs_network_parent": 0.002464004673280118
+    },
+    {
+      "coordinate": "distance_power",
+      "tested_values": "1.5+2.5",
+      "profile_RMS_span_arcsec": 0.04813234710383796,
+      "best_variant_id": "network_power_250",
+      "best_value": 2.5,
+      "best_improvement_fraction_vs_network_parent": 0.0006832100652930384
+    }
+  ],
+  "shortlist": [],
+  "descriptive_holdout_transfer_variant": "network_target_050",
+  "cross_domain_preservation": {
+    "galaxy_outer_RMSE_km_s": 12.57091168672948,
+    "CLASH_radial_RMSE_dex": 0.1964137112984443,
+    "Mercury_precession_mas_per_century": -1.729829450133022,
+    "all_solar_proxies_pass": true,
+    "interpretation": "unchanged because this screen changes only a conservative zero-circular-monopole angular term"
+  },
+  "field_invariants": {
+    "maximum_route_map_normalization_error": 3.3306690738754696e-16,
+    "maximum_annular_convergence_error": 3.3248595231450764e-16,
+    "maximum_normalized_curl_RMS": 3.7026569210407817e-17
+  },
+  "verdict": {
+    "best_network_beats_eta0": false,
+    "best_network_beats_local_vector": false,
+    "any_variant_meets_exact_shortlist": false,
+    "no_formula_promoted": true
+  },
+  "claim_limits": [
+    "All five discovery clusters and their member catalogs are spent exploratory evidence.",
+    "This is a fixed-geometry Jacobian-linearized screen, not an exact root or caustic calculation.",
+    "Member luminosity is a projected baryonic proxy and omits gas, diffuse ICL, and mass-to-light uncertainty.",
+    "The network kernel is a phenomenological projected law, not a derived covariant propagation equation.",
+    "Galaxy radial, derived-CLASH radial, and Solar scores are unchanged by the zero-monopole construction; this is preservation rather than new evidence.",
+    "The best network variant is transferred to RXJ1347 regardless of discovery success so the holdout measures generalization rather than serving as a promotion gate."
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "report_version": "P0606-RAW-ROUTE-SENSITIVITY-RESULTS-0.1.0",
+  "status": "complete_posthoc_spent_raw_route_response",
+  "coverage": {
+    "variants": 16,
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "optimization_starts_per_variant": 1
+  },
+  "training_selected_variant": {
+    "model": "no_route",
+    "training_RMS_arcsec": 0.49524262462835045,
+    "heldout_RMS_arcsec": 1.8086634342220647,
+    "training_roots_converged": 15,
+    "heldout_roots_converged": 7,
+    "heldout_all_roots_converged": true,
+    "maximum_heldout_residual_arcsec": 2.8511058027961993,
+    "heldout_reduced_chi2": 42.45890850701368,
+    "optimizer_success": true,
+    "optimizer_cost": 48.1575417908872,
+    "any_geometry_near_bound": false,
+    "variant_id": "no_route",
+    "changed_parameter": "fraction_max",
+    "changed_level": 0.0,
+    "fraction_max": 0.0,
+    "length_over_R80": 0.25,
+    "radius_exponent": -0.5,
+    "width_over_R80": 0.5,
+    "shape_gate": "H",
+    "source_acceleration_gate_power": 4.0,
+    "effective_route_fraction_RXJ2129": 0.0
+  },
+  "no_route_reference": {
+    "model": "no_route",
+    "training_RMS_arcsec": 0.49524262462835045,
+    "heldout_RMS_arcsec": 1.8086634342220647,
+    "training_roots_converged": 15,
+    "heldout_roots_converged": 7,
+    "heldout_all_roots_converged": true,
+    "maximum_heldout_residual_arcsec": 2.8511058027961993,
+    "heldout_reduced_chi2": 42.45890850701368,
+    "optimizer_success": true,
+    "optimizer_cost": 48.1575417908872,
+    "any_geometry_near_bound": false,
+    "variant_id": "no_route",
+    "changed_parameter": "fraction_max",
+    "changed_level": 0.0,
+    "fraction_max": 0.0,
+    "length_over_R80": 0.25,
+    "radius_exponent": -0.5,
+    "width_over_R80": 0.5,
+    "shape_gate": "H",
+    "source_acceleration_gate_power": 4.0,
+    "effective_route_fraction_RXJ2129": 0.0
+  },
+  "parameter_impacts": [
+    {
+      "parameter": "fraction_max",
+      "variants": 8,
+      "failed_exact_root_variants": 5,
+      "training_RMS_span_arcsec": 5.411963604900104,
+      "spent_heldout_RMS_span_arcsec": 16.462397548488134,
+      "best_training_variant": "no_route",
+      "best_training_RMS_arcsec": 0.49524262462835045,
+      "corresponding_spent_heldout_RMS_arcsec": 1.8086634342220647
+    },
+    {
+      "parameter": "width_over_R80",
+      "variants": 5,
+      "failed_exact_root_variants": 2,
+      "training_RMS_span_arcsec": 0.7610469197742716,
+      "spent_heldout_RMS_span_arcsec": 2.676919344374822,
+      "best_training_variant": "width_over_R80_1",
+      "best_training_RMS_arcsec": 0.8396759576861138,
+      "corresponding_spent_heldout_RMS_arcsec": 1.8815594311384682
+    },
+    {
+      "parameter": "length_over_R80",
+      "variants": 5,
+      "failed_exact_root_variants": 3,
+      "training_RMS_span_arcsec": 0.07099207233120652,
+      "spent_heldout_RMS_span_arcsec": 0.44911568796007195,
+      "best_training_variant": "length_over_R80_0.1",
+      "best_training_RMS_arcsec": 1.155495406940903,
+      "corresponding_spent_heldout_RMS_arcsec": 3.030206982577015
+    }
+  ],
+  "strict_interpretation": {
+    "heldout_is_fresh": false,
+    "selection_uses_training_only": true,
+    "one_start_global_optimum_claimed": false
+  },
+  "claim_limits": [
+    "Every RX J2129 image is spent and no heldout value is confirmatory.",
+    "One optimization start provides a local parameter-response diagnostic only.",
+    "The route uses a spherical projection and a literature baryon profile.",
+    "Any favorable setting must be selected without and tested on another raw cluster."
+  ]
+}

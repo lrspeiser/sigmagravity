@@ -1,0 +1,4 @@
+left_parameter,right_parameter,root_count_interaction_RMS,root_safe_interaction_RMS,SPARC_RMSE_interaction_RMS_km_s
+width_over_R80,route_fraction_multiplier,0.46259244432580743,0.07407407407407408,0.016271589130368642
+width_over_R80,contrast_cap,0.22222222222222232,0.07407407407407408,0.0
+route_fraction_multiplier,contrast_cap,0.256600119639834,0.07407407407407407,1.4210854715202004e-14

@@ -1,0 +1,104 @@
+{
+  "protocol_version": "REOPENED-HYBRID-PROFILE-DIFFUSION-0.1.0",
+  "frozen_utc": "2026-07-31T17:03:25Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Measure whether a symmetric no-flux spatial derivative can redistribute a fixed amount of response across a measured radial profile more usefully than a local law or the existing one-sided radial memory.",
+  "claim_boundary": [
+    "The complete 38-row protocol is frozen before bridge, galaxy, raw-lensing, or Solar scores are inspected.",
+    "The diffusion operator is the no-flux heat equation in log radius and conserves the quadrature integral of its transported carrier; it does not create a new net carrier normalization.",
+    "Fractional excess, added acceleration, and added circular-speed-squared are tested as separate physical carriers.",
+    "Three universal log-radius smoothing lengths and three universal redistribution strengths are crossed for every carrier.",
+    "A second factorial applies fractional diffusion after the preceding best one-sided-memory setting, while exact zero-diffusion local and memory controls isolate numerical changes.",
+    "One-point profiles are exact identities, so they cannot spuriously constrain a spatial derivative.",
+    "Every row fits the same four universal bridge parameters and transfers them unchanged to SPARC, raw lensing, and Solar proxies.",
+    "No object-specific gravity parameter or lensing multiplier is allowed; missing held-out image roots remain failures.",
+    "This is a radial spatial-derivative proxy, not a substitute for unavailable common two-dimensional gas, BCG, ICL, and member maps."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "common_variant": {
+    "combination": "interaction",
+    "interaction_eta": 1.0,
+    "screen_power": 1.5,
+    "rg_saturation_ceiling": 2.0,
+    "sigma_saturation_ceiling": 1.5,
+    "radial_memory_strength": 0.0,
+    "radial_memory_log_scale": 0.35,
+    "radial_memory_gbar_power": 0.0,
+    "radial_memory_radius_power": 0.0,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false,
+    "radial_memory_slope_gate_strength": 0.0,
+    "radial_diffusion_strength": 0.0,
+    "radial_diffusion_log_scale": 0.35,
+    "radial_diffusion_gbar_power": 0.0,
+    "radial_diffusion_radius_power": 0.0
+  },
+  "sensitivity_families": {
+    "diff_fractional_l0p15": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_diffusion_log_scale": 0.15, "radial_diffusion_gbar_power": 0.0, "radial_diffusion_radius_power": 0.0}},
+    "diff_fractional_l0p35": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_diffusion_log_scale": 0.35, "radial_diffusion_gbar_power": 0.0, "radial_diffusion_radius_power": 0.0}},
+    "diff_fractional_l0p7": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_diffusion_log_scale": 0.7, "radial_diffusion_gbar_power": 0.0, "radial_diffusion_radius_power": 0.0}},
+    "diff_added_acceleration_l0p15": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_diffusion_log_scale": 0.15, "radial_diffusion_gbar_power": 1.0, "radial_diffusion_radius_power": 0.0}},
+    "diff_added_acceleration_l0p35": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_diffusion_log_scale": 0.35, "radial_diffusion_gbar_power": 1.0, "radial_diffusion_radius_power": 0.0}},
+    "diff_added_acceleration_l0p7": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_diffusion_log_scale": 0.7, "radial_diffusion_gbar_power": 1.0, "radial_diffusion_radius_power": 0.0}},
+    "diff_speed_squared_l0p15": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_diffusion_log_scale": 0.15, "radial_diffusion_gbar_power": 1.0, "radial_diffusion_radius_power": 1.0}},
+    "diff_speed_squared_l0p35": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_diffusion_log_scale": 0.35, "radial_diffusion_gbar_power": 1.0, "radial_diffusion_radius_power": 1.0}},
+    "diff_speed_squared_l0p7": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_diffusion_log_scale": 0.7, "radial_diffusion_gbar_power": 1.0, "radial_diffusion_radius_power": 1.0}},
+    "best_memory_plus_diffusion_l0p15": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_memory_strength": 1.0, "radial_memory_log_scale": 0.35, "radial_memory_gbar_power": 1.927395, "radial_memory_radius_power": 9.0, "radial_diffusion_log_scale": 0.15, "radial_diffusion_gbar_power": 0.0, "radial_diffusion_radius_power": 0.0}},
+    "best_memory_plus_diffusion_l0p35": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_memory_strength": 1.0, "radial_memory_log_scale": 0.35, "radial_memory_gbar_power": 1.927395, "radial_memory_radius_power": 9.0, "radial_diffusion_log_scale": 0.35, "radial_diffusion_gbar_power": 0.0, "radial_diffusion_radius_power": 0.0}},
+    "best_memory_plus_diffusion_l0p7": {"fixed_name": "radial_diffusion_strength", "values": [0.25, 0.5, 1.0], "base_variant": {"radial_memory_strength": 1.0, "radial_memory_log_scale": 0.35, "radial_memory_gbar_power": 1.927395, "radial_memory_radius_power": 9.0, "radial_diffusion_log_scale": 0.7, "radial_diffusion_gbar_power": 0.0, "radial_diffusion_radius_power": 0.0}},
+    "local_control": {"fixed_name": "radial_diffusion_strength", "values": [0.0], "base_variant": {"radial_memory_strength": 0.0}},
+    "best_memory_control": {"fixed_name": "radial_diffusion_strength", "values": [0.0], "base_variant": {"radial_memory_strength": 1.0, "radial_memory_log_scale": 0.35, "radial_memory_gbar_power": 1.927395, "radial_memory_radius_power": 9.0}}
+  },
+  "baseline_variant_name": "local_control:radial_diffusion_strength=0",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20261331,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_profile_diffusion/report.json",
+    "scores": "results/reopened_hybrid_profile_diffusion/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_profile_diffusion/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_profile_diffusion/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_profile_diffusion/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_profile_diffusion/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_profile_diffusion/family_impacts.csv",
+    "figure": "results/reopened_hybrid_profile_diffusion/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_profile_diffusion/SUMMARY.md"
+  }
+}

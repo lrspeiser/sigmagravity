@@ -1,0 +1,89 @@
+{
+  "protocol_version": "TIDAL-TENSOR-RESPONSE-NEXT-0.1.0",
+  "status": "designed_after_photon_tests_before_tensor_scores",
+  "question": "Can one universal anisotropic gravitational response derived from the baryonic tidal tensor match galaxy motion and cluster lensing while remaining screened in the Solar System?",
+  "weak_field_candidate": {
+    "field_equation": "div[K grad(Phi)]=4*pi*G*rho_b",
+    "response_tensor": "K^ij=[exp(-kappa*S_a*Q)]^ij",
+    "solar_gate": "S_a=a0^2/[a0^2+|grad(Phi_N)|^2]",
+    "direction_tensor": "Q^ij=E^i_k E^kj/[E_mn E^mn], with E_ij=partial_i partial_j Phi_N-delta_ij laplacian(Phi_N)/3",
+    "parameter_domain": "kappa>=0; the matrix exponential is positive definite for finite kappa",
+    "fixed_constants": {
+      "G": "CODATA",
+      "c": "exact",
+      "a0_m_s2": 1.2e-10
+    },
+    "fitted_gravity_parameters": [
+      "one universal kappa"
+    ],
+    "matter_closure": "nonrelativistic matter follows -grad(Phi)",
+    "photon_closure_stage_1": "zero slip: the same Phi governs weak-field light deflection",
+    "reason_for_tensor": "The response is sensitive to distributed multi-centre geometry without a galaxy-versus-cluster label."
+  },
+  "prior_art_boundary": {
+    "known_nearby_family": "Refracted gravity uses a scalar density-dependent gravitational permittivity.",
+    "novelty_status": "not established",
+    "required_review": "Search tensor dielectric gravity, anisotropic MOND, tidal modified gravity, Einstein-aether, and disformal scalar/vector theories before any originality claim."
+  },
+  "stages": [
+    {
+      "stage": "T0",
+      "task": "Prove ellipticity and Solar screening analytically; reject any kappa or discretization that makes K non-positive."
+    },
+    {
+      "stage": "T1",
+      "task": "Build axisymmetric 3-D baryon grids for a residual-blind SPARC training subset and solve the anisotropic Poisson equation."
+    },
+    {
+      "stage": "T2",
+      "task": "Lock kappa on training galaxies and score complete held-out galaxies with no gravity refits."
+    },
+    {
+      "stage": "T3",
+      "task": "Transfer the same kappa to registered 2-D/3-D cluster baryon maps and score CLASH radial profiles."
+    },
+    {
+      "stage": "T4",
+      "task": "Lock the solver and score untouched raw multiple-image cluster holdouts."
+    },
+    {
+      "stage": "T5",
+      "task": "Attempt a covariant action and test stability, causality, gravitational waves, and cosmology."
+    }
+  ],
+  "data_requirements": {
+    "galaxies": [
+      "stellar surface-density maps",
+      "gas surface-density maps",
+      "disk and gas scale heights",
+      "rotation curves and uncertainties"
+    ],
+    "clusters": [
+      "registered X-ray gas mass maps",
+      "BCG and intracluster-light maps",
+      "member-galaxy stellar mass maps",
+      "multiple-image coordinates and source redshifts"
+    ],
+    "photon_null_test": [
+      "raw VLBI epoch astrometry",
+      "parallax-ellipse residuals",
+      "multi-frequency same-source positions"
+    ]
+  },
+  "advance_gates": {
+    "SPARC_outer_holdout_RMSE_km_s_max": 10.4,
+    "CLASH_derived_equal_cluster_RMSE_dex_max": 0.139,
+    "raw_cluster_initial_RMS_arcsec_max": 10.0,
+    "raw_cluster_decisive_RMS_arcsec_max": 2.0,
+    "Cassini_fractional_limit": 2.3e-5,
+    "per_object_gravity_parameters": 0,
+    "universal_kappa": true,
+    "positive_definite_K": true
+  },
+  "claim_boundary": [
+    "The formula is a weak-field research ansatz until derived from a covariant action.",
+    "The current radial SPARC and CLASH summaries cannot test the full tensor response.",
+    "Success on NFW-deprojected CLASH profiles is not equivalent to success on raw lensing observables.",
+    "No originality claim is authorized until the prior-art review is complete."
+  ]
+}

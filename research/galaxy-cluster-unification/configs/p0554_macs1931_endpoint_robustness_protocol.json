@@ -1,0 +1,61 @@
+{
+  "protocol_version": "P0554-MACS1931-ENDPOINT-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-01T02:05:00Z",
+  "status": "frozen_after_primary_subaru_endpoint_result_before_star-veto_or_color-locus_scores",
+  "question": "Is the mild count-only Subaru excess at the southern MACS1931 halo robust to foreground-star rejection, cluster-color consistency, and magnitude stratification?",
+  "selection_history": "This is a spent follow-up triggered by the primary result: count ratio 1.4289 and p=0.0278, but luminosity ratio 1.0702 and p=0.3472. It cannot retroactively change the frozen primary gate.",
+  "inputs": {
+    "parent_protocol": "configs/p0554_macs1931_subaru_endpoint_protocol.json",
+    "parent_report": "results/p0554_macs1931_subaru_endpoint/report.json",
+    "subaru_catalog": "data/raw/p0554_macs1931_subaru/hlsp_clash_subaru_suprimecam_macs1931_photoz-cat.txt",
+    "legacy_catalog": "data/raw/p0554_macs1931_wide_field/ls_dr10_macs1931_wide.csv",
+    "legacy_provenance": "data/raw/p0554_macs1931_wide_field/provenance.json",
+    "known_member_catalog": "data/raw/r1_clash_caminha2019/MACSJ1931-P2_circular_mcmc/members_lenstool_v2.dat"
+  },
+  "crossmatch": {
+    "subaru_to_legacy_radius_arcsec": 1.0,
+    "known_member_to_subaru_radius_arcsec": 1.0,
+    "legacy_extended_types": ["REX", "EXP", "DEV", "SER"],
+    "legacy_star_rule": "A matched source is vetoed when type=PSF or gaia_phot_g_mean_mag is finite and positive; unmatched sources are retained by the star-veto variant."
+  },
+  "color_locus": {
+    "features": ["B-V", "V-RC", "RC-IC", "IC-Z"],
+    "training": "For each color, fit a Theil-Sen line versus IC using Subaru counterparts to the published member catalog.",
+    "minimum_training_members_per_color": 20,
+    "minimum_valid_colors_per_source": 3,
+    "minimum_residual_scale_mag": 0.05,
+    "maximum_rms_standardized_residual": 2.5,
+    "caveat": "Published members are themselves a cluster-selected sample, so this is a contamination sensitivity rather than independent validation."
+  },
+  "selection_variants": [
+    "photoz_tight_parent",
+    "tight_legacy_star_veto",
+    "tight_legacy_extended_confirmation",
+    "tight_cluster_color_locus",
+    "tight_star_veto_and_color_locus"
+  ],
+  "endpoint_test": {
+    "kernel_width_kpc": 100.0,
+    "weights": ["unit_count", "capped_ic_luminosity"],
+    "rotation_angles_deg": [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,200,205,210,215,220,225,230,235,240,245,250,255,260,265,270,275,280,285,290,295,300,305,310,315,320,325,330,335,340,345,350,355],
+    "robustness_signal": "The count excess is called robust only if tight_star_veto_and_color_locus has p<=0.05 and density ratio>=1.5; luminosity weighting is reported separately.",
+    "magnitude_bins_ic": [[17.0,21.0],[21.0,23.0],[23.0,24.5],[24.5,25.5]]
+  },
+  "outputs": {
+    "directory": "results/p0554_macs1931_endpoint_robustness",
+    "selection_audit": "selection_audit.csv",
+    "color_locus_fits": "color_locus_fits.csv",
+    "endpoint_scores": "endpoint_scores.csv",
+    "rotation_nulls": "rotation_nulls.csv",
+    "magnitude_scores": "magnitude_scores.csv",
+    "report": "report.json",
+    "figure": "p0554_macs1931_endpoint_robustness.png",
+    "summary": "SUMMARY.md"
+  },
+  "limits": [
+    "This follow-up was chosen after viewing the primary endpoint result and is not an independent confirmation.",
+    "Legacy morphology comes from g-band-only imaging in this patch; it is useful as a star veto but not as a cluster-membership measurement.",
+    "The color locus is trained on published cluster members and may reject genuine blue or unusual members.",
+    "Neither a surviving nor disappearing weak overdensity establishes a new gravity law."
+  ]
+}

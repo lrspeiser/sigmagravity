@@ -1,0 +1,59 @@
+{
+  "protocol_version": "P0604-CROSS-DOMAIN-ROUTING-BALANCE-0.1.0",
+  "frozen_utc": "2026-08-01T20:05:00Z",
+  "status": "frozen_after_P0603_before_P0604_scores",
+  "question": "After P0603 found tidal anisotropy and orientation weak, can the simpler conservative inward Green kernel find a universal galaxy-cluster balance?",
+  "simplified_operator": {
+    "kernel": "isotropic Gaussian centered L_i inward from each baryonic source",
+    "travel": "L_i=ell*R80*clip[(r_i/R80)^(-1/2),0.2,3]",
+    "mixture": "route fraction=f_max*G(C)*S4; S4 is set to one only for normalized cluster morphology where physical acceleration is unavailable",
+    "dropped_after_P0603": ["tidal orientation", "tensor axis ratio", "external-direction mixing"],
+    "reason": "their P0603 cluster response was small or adverse, while length, width, and fraction dominated"
+  },
+  "grid": {
+    "fraction_max": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.75, 1.0],
+    "length_over_R80": [0.25, 0.5, 0.75, 1.0, 1.25],
+    "width_over_R80": [0.2, 0.25, 0.35, 0.5, 0.75, 1.0],
+    "shape_gate": ["sqrt_H", "H", "H2"],
+    "candidate_count": 720
+  },
+  "fixed_constants": {
+    "radius_exponent": -0.5,
+    "local_width_over_R80": 0.25,
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "source_acceleration_gate_power": 4.0,
+    "a0_m_s2": 1.2e-10,
+    "radial_bins": 1024
+  },
+  "inputs": {
+    "P0603_protocol": "configs/p0603_tensor_routing_protocol.json",
+    "cluster_acquisition": "configs/gravity_arc_fresh_sample_protocol.json",
+    "galaxy_protocol": "configs/p0593_diffusion_cross_domain_protocol.json"
+  },
+  "validation": {
+    "cluster_folds": 5,
+    "galaxy_RMSE_ratio_budgets": [1.02, 1.05, 1.1],
+    "primary_galaxy_RMSE_ratio_budget": 1.05,
+    "selection": "within each cluster fold choose minimum training Lenstool equal-cluster JS among candidates whose all-galaxy equal RMSE satisfies the fixed-RAR budget",
+    "heldout": "two complete clusters per fold; GLAFIC remains a method control not used in selection",
+    "data_status": "all galaxy and cluster data are spent; the exercise maps cross-domain parameter response rather than confirming a formula"
+  },
+  "outputs": {
+    "directory": "results/p0604_cross_domain_routing_balance",
+    "candidate_scores": "candidate_scores.csv",
+    "fold_selections": "fold_selections.csv",
+    "oof_scores": "oof_scores.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0604_cross_domain_routing_balance.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "All cluster targets and galaxy curves are spent data; whole-object folds do not make this a fresh confirmation.",
+    "Cluster maps use member light without a matched gas map and are lens-model reconstructions.",
+    "The galaxy test is an axisymmetric radial projection of the same conservative kernel.",
+    "The Solar result is an acceleration-screened uniform-Sun proxy, not a PPN derivation.",
+    "A balanced candidate must still be frozen and tested on raw lensing from another cluster."
+  ]
+}

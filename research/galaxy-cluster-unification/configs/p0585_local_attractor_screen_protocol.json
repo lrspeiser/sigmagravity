@@ -1,0 +1,51 @@
+{
+  "protocol_version": "P0585-LOCAL-ATTRACTOR-SCREEN-0.1.0",
+  "frozen_utc": "2026-08-01T05:52:00Z",
+  "status": "frozen_after_P0584_before_local_attractor_scores",
+  "trigger": "P0583-P0584 showed that one global centroid-return pattern is mostly misaligned in RX J2129 and that smooth no-cross travel is preferable. Prior project work also found small gains from local baryonic directions.",
+  "question": "Can multiple baryon-derived local attractors improve held-out RX J2129 roots more consistently than one global centroid when every route uses smooth no-cross travel?",
+  "formula": {
+    "local_attractor": "c_i=sum_{j!=i} w_j K_ij x_j / sum_{j!=i} w_j K_ij",
+    "kernel": "K_ij=[|x_i-x_j|^2+h^2]^(-p/2)",
+    "mixed_destination": "d_i=(1-mu)*c_global+mu*c_i",
+    "travel": "ell_i=L*tanh(|d_i-x_i|/L)",
+    "locked_route_fraction": "K0338 concentration gate",
+    "locked_length": "L=0.36 R80",
+    "locked_width": "0.23 R80",
+    "locked_contrast": "20*tanh(x/20) before exact annular normalization"
+  },
+  "structural_grid": {
+    "local_mix": [0.25, 0.5, 0.75, 1.0],
+    "softening_over_R80": [0.1, 0.25, 0.5, 1.0],
+    "distance_power": [1.0, 2.0],
+    "include_global_tanh_no_cross_control": true,
+    "candidates": 33
+  },
+  "positive_amplitudes": [0.0, 0.0025, 0.005, 0.0075, 0.01, 0.015, 0.025],
+  "fit_policy": "Hold the P0583 scalar geometry and source positions fixed; fit no parameter.",
+  "selection": "Among all-root rows, minimize held-out RMS. This is opened-data screening only.",
+  "inputs": {
+    "p0581_protocol": "configs/p0581_locked_endpoint_exact_root_protocol.json",
+    "p0583_protocol": "configs/p0583_tanh_endpoint_rxj2129_protocol.json",
+    "p0583_parameters": "results/p0583_tanh_endpoint_rxj2129/parameters.csv",
+    "p0583_predictions": "results/p0583_tanh_endpoint_rxj2129/predictions.csv",
+    "p0584_report": "results/p0584_no_overshoot_endpoint/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0585_local_attractor_screen",
+    "candidate_specs": "candidate_specs.csv",
+    "scores": "scores.csv",
+    "predictions": "predictions.csv",
+    "field_audits": "field_audits.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0585_local_attractor_screen.png"
+  },
+  "claim_limits": [
+    "RX J2129 is opened development data and selects no predictive coefficient.",
+    "The member-light catalog is an incomplete baryon proxy without registered gas or diffuse ICL.",
+    "A candidate must transfer unchanged to other exact-root clusters before it has evidential value.",
+    "The weak-field angular correction remains phenomenological rather than covariantly derived."
+  ]
+}

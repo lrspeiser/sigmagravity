@@ -1,0 +1,7 @@
+domain,current_value,unit,comparator,ratio_or_change,outcome
+galaxy rotation,12.59204382085389,km/s RMSE,fixed RAR 10.348 km/s,1.2168029635346302,near but worse; carried entirely by P0554 scalar parent
+Solar Mercury,-1.729829450133022,mas/century,absolute margin 3.1 mas/century,0.5580095000429103,pass; angular route is an exact point-source null
+five-cluster frozen-geometry phase diagnostic,1.6849758640456836,% mean improvement,P0554 scalar at same geometry,0.6,"18/18 roots, but only 3/5 systems improve"
+A383 chronological formula transfer,9.08075584165191,arcsec RMS,P0554 scalar 9.097 arcsec,0.0017444069541364682,directional transfer positive but absolute 2 arcsec gate fails
+raw validation clusters,19.07556990937222,arcsec RMS,compact halo 9.989 arcsec,1.9096316095402275,1.91x compact-halo error
+MS2137 transfer,,arcsec RMS,P0554 scalar,,inconclusive: control and candidate both root-incomplete

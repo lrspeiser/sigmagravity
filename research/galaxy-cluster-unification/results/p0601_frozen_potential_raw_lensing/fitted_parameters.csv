@@ -1,0 +1,13 @@
+model,parameter,value,near_bound
+fixed_RAR,axis_ratio_q,0.5500000082028629,True
+fixed_RAR,position_angle_phi_radian,0.4178314464825531,False
+fixed_RAR,center_x_arcsec,-2.9998200881915906,True
+fixed_RAR,center_y_arcsec,2.9998976164975804,True
+fixed_RAR,external_shear_gamma1,-0.24999999801343942,True
+fixed_RAR,external_shear_gamma2,-0.24999999897397102,True
+P0599_potential_shape,axis_ratio_q,0.7166211938368898,False
+P0599_potential_shape,position_angle_phi_radian,0.4021206695685602,False
+P0599_potential_shape,center_x_arcsec,-0.5458041342322617,False
+P0599_potential_shape,center_y_arcsec,-0.2392646451807501,False
+P0599_potential_shape,external_shear_gamma1,0.053130789614486924,False
+P0599_potential_shape,external_shear_gamma2,0.017897537195908905,False

@@ -1,0 +1,25 @@
+{
+  "protocol_version": "P0554-MACS1931-MEMBER-APERTURE-0.1.0",
+  "frozen_utc": "2026-08-01T10:55:00Z",
+  "status": "frozen_after_identifying_the_parent_300kpc_truncation_before_transport_scores_with_restored_members",
+  "question": "How much of the apparent long route to the southern MACS1931 halo was caused by the parent pipeline's 300 kpc member aperture?",
+  "parent_capacity_protocol": "configs/p0554_halo_backtrack_capacity_protocol.json",
+  "member_catalog": "data/raw/r1_clash_caminha2019/MACSJ1931-P2_circular_mcmc/members_lenstool_v2.dat",
+  "apertures_kpc": [300.0, 350.0, 400.0, 450.0],
+  "capacity_multipliers": [1.0, 2.0, 4.0, 8.0],
+  "selection_history": "The published file was found to contain 120 members to 434.52 kpc after the balanced/capacity inverse; this is a spent aperture sensitivity, not fresh validation.",
+  "outputs": {
+    "directory": "results/p0554_macs1931_member_aperture",
+    "scores": "scores.csv",
+    "halo_origins": "halo_origins.csv",
+    "report": "report.json",
+    "figure": "p0554_macs1931_member_aperture.png",
+    "summary": "SUMMARY.md"
+  },
+  "limits": [
+    "The aperture series was motivated by inspecting the spent MACS1931 inverse.",
+    "The member catalog itself stops at about 435 kpc and still does not reach the median southern halo at about 683 kpc radius.",
+    "The halo target is model-dependent and comes from the same lens observations.",
+    "This diagnoses source-catalog truncation; it cannot promote a gravity law."
+  ]
+}

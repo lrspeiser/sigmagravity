@@ -1,0 +1,25 @@
+{
+  "protocol_version": "REOPENED-HYBRID-ENDPOINT-POWER-MEMORY-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-01T09:05:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay all exact-endpoint power, constant-domain, memory-length, memory-strength, duplicate, favorable, and unfavorable rows with eight lens-geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_endpoint_power_memory_protocol.json",
+  "source_report": "results/reopened_hybrid_endpoint_power_memory/report.json",
+  "selected_variants": "all",
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_endpoint_power_memory_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_endpoint_power_memory_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_endpoint_power_memory_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_endpoint_power_memory_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_endpoint_power_memory_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Every one of the 66 source-power and kernel variants is replayed; no favorable-only selection is possible.",
+    "Every gravity, source-power, and memory parameter is frozen, and only declared lens nuisance geometry is reoptimized.",
+    "The replay includes exact structural duplicates to separate optimizer branches from formula leverage.",
+    "Eight-start scores supersede shallow root classifications for these rows.",
+    "A root loss or poor score applies only to the frozen equation and parameter row, not its parent mechanism."
+  ]
+}

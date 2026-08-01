@@ -1,0 +1,72 @@
+{
+  "protocol_version": "PHOTON-JOINT-FORWARD-0.1.0",
+  "frozen_utc": "2026-07-31T05:25:00Z",
+  "status": "frozen_before_raw_channel_forward_scoring",
+  "question": "Does a photon-sector term improve same-source radial-velocity and proper-motion data after fitting a shared Milky Way rotation curve directly to the measured channel velocities?",
+  "motivation": "The earlier source-by-source circular-speed inversion divides by geometric projections and produced a strong radial diagnostic that may be a projection artifact. This stage fits the measured velocities without division.",
+  "equations": {
+    "proper_motion_channel": "v_l=p_l*Theta(R)-e_l dot v_sun",
+    "radial_channel": "v_r=p_r*[Theta(R)+DeltaTheta_gamma(R)]-e_r dot v_sun",
+    "shared_rotation_curve": "Theta(R)=sum_j c_j*[(R-R0)/R0]^j",
+    "constant_photon_term": "DeltaTheta_gamma=A",
+    "low_acceleration_photon_term": "DeltaTheta_gamma=A*a_star/[a_star+Theta_ref^2/R]",
+    "post_primary_radial_term": "DeltaTheta_gamma=A0+A1*ln(R/R0)"
+  },
+  "new_physics_interpretation": {
+    "effective_action": "L_gamma=-F_mn F^mn/4-xi*S(X)*B_m B_n F^ma F^n_a/2",
+    "observable_meaning": "A nonzero DeltaTheta_gamma is an effective geometric-optics signature, not yet a fundamental derivation of B_m dynamics.",
+    "open_branch": "An anisotropic or time-dependent optical metric could affect annual parallax and secular proper motion differently; catalog-level astrometry cannot close that branch.",
+    "non_identifiability": "A photon term that changes both channels by exactly the same circular-speed amount is algebraically absorbed into Theta(R) and cannot be identified with this test."
+  },
+  "input": {
+    "source_estimates": "results/photon_kinematic_illusion/source_estimates.csv",
+    "parent_protocol": "configs/photon_kinematic_illusion_protocol.json",
+    "primary_sample_column": "primary_sample"
+  },
+  "ordinary_nuisance_model": {
+    "rotation_curve_orders": [0, 1, 2, 3],
+    "primary_rotation_curve_order": 1,
+    "fit_solar_cartesian_x_y": true,
+    "fixed_solar_cartesian_z_km_s": 7.6,
+    "reason": "Fitting x and y absorbs uncertainty in the adopted Solar motion instead of attributing it to photon physics; z is effectively unconstrained by this thin-disk sample and has negligible leverage."
+  },
+  "photon_models": [
+    "null",
+    "frequency_constant",
+    "frequency_low_acceleration",
+    "frequency_radial_log_post_primary"
+  ],
+  "uncertainty": {
+    "folds": 5,
+    "fold_seed": 20260733,
+    "complete_source_bootstrap_draws": 10000,
+    "bootstrap_seed": 20260734,
+    "velocity_error_floor_km_s": 1.0
+  },
+  "advance_gate": {
+    "primary_model": "frequency_constant",
+    "minimum_required_positive_amplitude_km_s": 30.0,
+    "requirements": [
+      "lower held-out weighted RMS than the null with the same rotation-curve order",
+      "complete-source bootstrap 95 percent upper limit reaches 30 km/s",
+      "positive fitted amplitude",
+      "amplitude sign and scale remain stable for rotation-curve orders 0 through 3"
+    ]
+  },
+  "claim_boundary": [
+    "The radial-log model was motivated by the prior diagnostic and is exploratory, not a pristine confirmatory test.",
+    "The model assumes a photon anomaly that projects like circular motion; other directional tensors require separately frozen predictions.",
+    "The catalog is a Milky Way maser sample and does not by itself establish extragalactic rotation or cluster lensing behavior.",
+    "New physics remains admissible only if it produces additional falsifiable observables and passes stability, causality, polarization, frequency, and Solar-System tests."
+  ],
+  "outputs": {
+    "directory": "results/photon_joint_forward",
+    "report": "results/photon_joint_forward/report.json",
+    "full_fits": "results/photon_joint_forward/full_fits.csv",
+    "cross_validated_predictions": "results/photon_joint_forward/cross_validated_predictions.csv",
+    "fold_fits": "results/photon_joint_forward/fold_fits.csv",
+    "bootstrap": "results/photon_joint_forward/bootstrap.csv",
+    "figure": "results/photon_joint_forward/photon_joint_forward.png",
+    "summary": "results/photon_joint_forward/SUMMARY.md"
+  }
+}

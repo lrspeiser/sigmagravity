@@ -1,0 +1,56 @@
+{
+  "protocol_version": "P0608-ROUTE-REDSHIFT-TOMOGRAPHY-0.1.0",
+  "frozen_utc": "2026-08-01T23:40:00Z",
+  "status": "frozen_after_P0607_gas_direction_selection_before_any_P0608_gamma_score",
+  "question": "Does the tiny gas-directed RX J2129 route scale with source redshift like an ordinary single-plane field, or do raw images prefer a nonstandard scaling that could motivate a multi-plane or off-plane arc model?",
+  "formula": {
+    "base": "P0599 radial parent plus the frozen P0607 gas-directed angular template",
+    "reference_strength": 0.0025,
+    "standard_distance_ratio": "beta(z_s)=D_ls/D_s",
+    "tomographic_route": "delta_alpha(z_s)=s_theta*delta_alpha_ref*[beta(z_s)/beta(z_ref)]^gamma",
+    "reference_redshift": 1.52,
+    "standard_single_plane_value": 1.0,
+    "interpretation": "gamma != 1 is only an operational redshift-scaling test; it is not by itself a derived path height or a covariant multi-plane theory"
+  },
+  "primary_gamma_grid": [0.0, 0.5, 1.0, 1.5, 2.0, 3.0],
+  "amplitude_leverage_diagnostics": [0.01, 0.05],
+  "selection": {
+    "primary_strength_locked_from_P0607": true,
+    "component_locked_from_P0607": "gas",
+    "geometry": "frozen P0601 P0599 geometry for the screen",
+    "source_positions": "profiled on training images for each gamma",
+    "metric": "exact lens-equation root RMS",
+    "select_gamma": "lowest complete 15-image training RMS; heldout images are not used",
+    "selected_gamma_exact_refit_starts": 8,
+    "random_seed": 21292038
+  },
+  "inputs": {
+    "P0607_protocol": "configs/p0607_component_direction_raw_lensing_protocol.json",
+    "P0607_report": "results/p0607_component_direction_raw_lensing/report.json",
+    "P0601_protocol": "configs/p0601_frozen_potential_raw_lensing_protocol.json",
+    "P0601_parameters": "results/p0601_frozen_potential_raw_lensing/fitted_parameters.csv",
+    "P0601_report": "results/p0601_frozen_potential_raw_lensing/report.json",
+    "raw_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "route_source_protocol": "configs/adaptive_route_raw_rxj2129_protocol.json",
+    "component_screen_protocol": "configs/p0554_all_baryon_route_screen_protocol.json",
+    "component_acquisition_protocol": "configs/p0554_all_baryon_route_acquisition_protocol.json",
+    "reused_hst_protocol": "configs/clash_stellar_morphology_acquisition_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0608_route_redshift_tomography",
+    "distance_ratios": "distance_ratios.csv",
+    "screen_scores": "screen_scores.csv",
+    "family_scores": "family_scores.csv",
+    "refit_scores": "refit_scores.csv",
+    "report": "report.json",
+    "figure": "p0608_route_redshift_tomography.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "All RX J2129 images and the P0607 gas direction are spent exploratory data.",
+    "The reference angular strength is only 0.0025, so a null gamma result may be an amplitude-limited identifiability failure rather than evidence for gamma=1.",
+    "Several source redshifts are photometric or fixed rather than spectroscopic.",
+    "A distance-ratio exponent is phenomenology and cannot reconstruct an off-plane path height.",
+    "Time delays, weak shear or magnification, and a different raw cluster are required for an independent arc test."
+  ]
+}

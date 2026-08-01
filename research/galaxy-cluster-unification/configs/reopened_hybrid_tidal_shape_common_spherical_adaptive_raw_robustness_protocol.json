@@ -1,0 +1,35 @@
+{
+  "protocol_version": "REOPENED-HYBRID-TIDAL-SHAPE-COMMON-SPHERICAL-ADAPTIVE-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-07-31T12:55:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay representative common-spherical nonlinear tidal gates with eight lens-geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_tidal_shape_common_spherical_adaptive_protocol.json",
+  "source_report": "results/reopened_hybrid_tidal_shape_common_spherical_adaptive/report.json",
+  "selected_variants": [
+    "positive_fraction_pivot:channel_gate_pivot=0.82",
+    "positive_fraction_sharpness:channel_gate_sharpness=10",
+    "traceless_fraction_sharpness:channel_gate_sharpness=40",
+    "third_axis_common_orientation:channel_gate_cluster_high=0",
+    "determinant_orientation:channel_gate_cluster_high=1",
+    "positive_fraction_orientation:channel_gate_cluster_high=1",
+    "third_axis_common_sharpness:channel_gate_sharpness=10",
+    "traceless_fraction_pivot:channel_gate_pivot=0.93"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_tidal_shape_common_spherical_adaptive_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_tidal_shape_common_spherical_adaptive_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_tidal_shape_common_spherical_adaptive_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_tidal_shape_common_spherical_adaptive_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_tidal_shape_common_spherical_adaptive_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Universal gravity constants are copied unchanged from the adaptive common-spherical bridge fit.",
+    "No gravity constant is fitted to raw lensing.",
+    "Only pseudo-elliptical geometry, shear, center, and source positions are fitted to raw training images.",
+    "Candidates with missing held-out roots remain failures even when RMS over surviving roots is small.",
+    "The replay was selected after viewing two-start results and is a numerical robustness test, not an independent holdout.",
+    "All tested scale-free spherical tidal coordinates are deterministic functions of local-to-mean density ratio and are not independent directional mechanisms."
+  ]
+}

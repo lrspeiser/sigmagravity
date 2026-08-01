@@ -1,0 +1,257 @@
+{
+  "protocol_version": "R1B1-A1689-GMOS-reduction-covariance-0.1",
+  "status": "frozen_after_raw_integrity_and_lens_geometry_gates_before_any_science_reduction_or_kinematic_extraction",
+  "frozen_utc": "2026-07-27T05:20:00Z",
+  "selection_blind": true,
+  "system": "Abell 1689",
+  "purpose": "Reconstruct a numerical, source-traceable stellar line-of-sight velocity and dispersion profile with a full covariance on the same pre-registered 15-kpc support as the independent strong-lensing geometry screen.",
+  "forbidden_inputs_at_freeze": [
+    "digitized values from the published A1689 velocity or dispersion panels",
+    "any gravity, mass, lens-model, dark-matter, negative-gravity, or void residual",
+    "any post-fit change to the spatial bins, fit windows, bootstrap construction, or pass thresholds"
+  ],
+  "prerequisite_reports": {
+    "raw_acquisition": "results/r1_a1689_gemini_acquisition/report.json",
+    "raw_acquisition_gate": "raw_acquisition_gate_passed must be true",
+    "lens_geometry": "results/r1_a1689_lens_prescreen/report.json",
+    "lens_geometry_gate": "same_radius_bridge_passed must be true"
+  },
+  "primary_method_sources": [
+    {
+      "source": "Gemini DRAGONS GMOS longslit tutorial 4.2.1",
+      "url": "https://dragons.readthedocs.io/projects/gmosls-drtutorial/en/v4.2.1/ex1_gmosls_dithered_cmdline.html",
+      "role": "bias, individual non-stacked spectroscopic flats, individual arcs, calibration association, wavelength and distortion processing"
+    },
+    {
+      "source": "Loubser et al. 2018, arXiv:1802.07745",
+      "local_source": "data/raw/r1_replacement_search_sources/loubser2018_bcg_kinematics/source/BCG_datapaper_mnrasv3.tex",
+      "role": "nine-bin CCCP layout, S/N >= 5 convention, pPXF moments, XSL/MILES-resolution comparison target, and published 15-kpc support"
+    }
+  ],
+  "software_environment": {
+    "baseline_reduction_engine": "DRAGONS 4.2.2 in an isolated Python 3.12 conda environment",
+    "baseline_kinematic_engine": "pPXF 9.4.8 or the locally pinned installed version if its exact version is recorded before execution",
+    "operating_environment": "WSL2 Linux bash",
+    "environment_manifest_required": true,
+    "commands_and_logs_must_be_retained": true,
+    "no_interactive_parameter_tuning": true
+  },
+  "raw_inputs": {
+    "directory": "data/raw/r1_a1689_gemini",
+    "science_to_flat_arc_mapping": {
+      "N20090615S0079.fits": ["N20090615S0078.fits", "N20090615S0080.fits"],
+      "N20090621S0034.fits": ["N20090621S0033.fits", "N20090621S0037.fits"],
+      "N20090621S0035.fits": ["N20090621S0036.fits", "N20090621S0037.fits"],
+      "N20090621S0038.fits": ["N20090621S0039.fits", "N20090621S0040.fits"]
+    },
+    "night_bias_groups": {
+      "2009-06-15": ["N20090615S0531.fits", "N20090615S0532.fits", "N20090615S0533.fits", "N20090615S0534.fits", "N20090615S0535.fits"],
+      "2009-06-21": ["N20090621S0193.fits", "N20090621S0194.fits", "N20090621S0195.fits", "N20090621S0196.fits", "N20090621S0197.fits"]
+    },
+    "bad_pixel_mask": {
+      "required_before_reduction": true,
+      "selection": "Archive-provided GMOS-N EEV, full-frame, 2x2-compatible BPM valid on 2009-06-15; freeze filename and SHA256 before preprocessing",
+      "selected_filename": "bpm_20010801_gmos-n_EEV_22_full_3amp.fits",
+      "valid_from_utc": "2001-08-01T16:50:26Z",
+      "archive_query_disposition": "The Gemini BPM/GMOS-N/2x2 query returns six masks. This is the latest mask whose valid-from date precedes 2009-06-15 and whose filename identifies the EEV detector, 2x2 binning, full frame, and three-amplifier readout. The next candidate is e2v and valid only from 2011-10-25.",
+      "frozen_before_preprocessing": true,
+      "fallback": "If no archive BPM can be provenance-matched, stop. Do not synthesize a BPM after viewing the science residuals."
+    }
+  },
+  "detector_and_2d_reduction": {
+    "bias": "Overscan-correct each amplifier and sigma-clipped-median combine the five same-night biases; never mix nights.",
+    "flat": "Process each GCAL spectroscopic flat individually and associate by the fixed mapping; do not stack flats.",
+    "arc": "Process each CuAr arc individually, fit the wavelength solution at multiple slit positions, and associate by the fixed mapping.",
+    "science": "Bias subtract, flat correct, mosaic, wavelength calibrate, distortion correct, propagate variance and DQ, and cosmic-ray flag each science exposure separately before combination.",
+    "flux_calibration": "Not required or applied; only relative continuum shape is needed and pPXF polynomials absorb it.",
+    "sky_model": {
+      "baseline_windows_arcsec_from_photometric_center": [[-50.0, -35.0], [35.0, 50.0]],
+      "fit": "per-wavelength inverse-variance linear spatial model with 4-sigma clipping",
+      "sensitivity_windows_arcsec": [
+        [[-45.0, -30.0], [30.0, 45.0]],
+        [[-55.0, -40.0], [40.0, 55.0]]
+      ],
+      "source_or_kinematic_values_may_not_select_windows": true
+    },
+    "combination": "Register only by the continuum centroid, resample once to a common linear wavelength/spatial grid, and inverse-variance combine with 4-sigma clipping; retain all four individual calibrated 2-D exposures for covariance resampling."
+  },
+  "calibration_acceptance": {
+    "science_2d_products_required": 4,
+    "minimum_inputs_per_night_master_bias": 5,
+    "maximum_master_bias_overscan_residual_absolute_mean_adu": 1.0,
+    "maximum_master_bias_overscan_residual_rms_adu": 5.0,
+    "maximum_flat_unmasked_fraction_outside_0p8_to_1p2": 0.05,
+    "minimum_cuar_lines_per_arc": 12,
+    "maximum_wavelength_solution_rms_angstrom": 0.2,
+    "maximum_continuum_centroid_range_between_exposures_arcsec": 0.3,
+    "minimum_unmasked_exposure_coverage_per_combined_pixel": 3,
+    "maximum_sky_residual_absolute_median_over_robust_sigma": 0.25,
+    "failure_policy": "Any failed calibration threshold remains a failed raw reconstruction. Frames, apertures, windows, or thresholds may not be removed or changed after seeing a velocity or dispersion value."
+  },
+  "spatial_extraction": {
+    "photometric_coordinate_zero": {
+      "ra_deg": 197.873,
+      "dec_deg": -1.3410833333333333,
+      "source": "Loubser et al. 2018 Table 1: 13:11:29.52, -01:20:27.9",
+      "local_source": "data/raw/r1_replacement_search_sources/loubser2018_bcg_kinematics/source/BCG_datapaper_mnrasv3.tex",
+      "role": "Convert each rectified WCS row to a signed along-slit angular offset before inspecting the continuum profile; this is a coordinate zero, not a fixed spectroscopic centroid."
+    },
+    "continuum_center_fit": {
+      "joint_model": "shared Moffat center, alpha, and beta with one nonnegative amplitude and constant background per exposure",
+      "individual_diagnostic_model": "independent Moffat plus constant per exposure for the frozen centroid-range gate",
+      "fit_support_arcsec_from_photometric_coordinate_zero": [-12.0, 12.0],
+      "center_bound_arcsec": [-2.0, 2.0],
+      "alpha_bound_arcsec": [0.05, 5.0],
+      "beta_bound": [1.1, 10.0],
+      "optimizer": "variance-weighted scipy least_squares with no residual-driven masking",
+      "frozen_before_continuum_collapse": true
+    },
+    "sky_fit_execution": {
+      "clipping_iterations": 3,
+      "minimum_valid_rows_per_wavelength": 20,
+      "coefficient_covariance": "retain the 2x2 inverse-normal matrix at every wavelength and add its predicted diagonal variance to each sky-subtracted pixel",
+      "all_three_window_variants_run_before_ppxf": true,
+      "frozen_before_continuum_collapse": true
+    },
+    "combination_execution": {
+      "common_wavelength_range_angstrom": [4550.0, 5600.0],
+      "common_wavelength_step_angstrom": 0.9,
+      "common_signed_spatial_range_arcsec": [-6.0, 6.0],
+      "common_signed_spatial_step_arcsec": 0.1454,
+      "registration": "Shift each exposure only by its independently fitted continuum centroid; do not use spectral or kinematic residuals.",
+      "resampling": "Linear interpolation for cleaned SCI and VAR, nearest-neighbor DQ, followed by inverse-variance combination.",
+      "combination_clipping_iterations": 2,
+      "coverage_gate_region": "Within the frozen signed-bin support [-4.929, 4.929] arcsec and the full 4550-5600 Angstrom range, deterministically mask every common-grid pixel retaining fewer than three exposures after clipping; every unmasked combined pixel must have coverage >= 3, matching the preregistered chip-gap/coverage mask.",
+      "frozen_before_combination": true
+    },
+    "signed_spectrum_extraction": {
+      "operation": "Sum the registered combined SCI values and variances over every spatial row whose center lies in the signed bin; require the frozen valid-pixel fraction independently at each wavelength.",
+      "signal_to_noise_definition": "Median of summed flux divided by square-root summed variance and by sqrt(wavelength_step_Angstrom), over the baseline 4600-5550 Angstrom fit range after all fixed masks.",
+      "high_variance_mask": "Divide noise by its 21-pixel median filter and reject values above the median ratio plus six times max(robust_sigma, 0.02).",
+      "signed_bin_retention": "Retain bins with median S/N per Angstrom >= 5; at least seven of nine must survive before pPXF, matching minimum_finite_signed_bins.",
+      "frozen_before_signed_spectrum_extraction": true
+    },
+    "center_estimator": "Fit a Moffat plus constant to the 4800-5400 Angstrom observed-frame continuum collapsed along wavelength, jointly across all four individually calibrated exposures, before any pPXF call.",
+    "signed_bin_edges_arcsec": [-4.929, -3.5, -2.0, -1.0, -0.3, 0.3, 1.0, 2.0, 3.5, 4.929],
+    "kpc_per_arcsec": 3.0425531914893615,
+    "signed_bins": 9,
+    "maximum_support_kpc": 15.0,
+    "rationale": "One central bin and four bins per side match the published CCCP layout; the central width is 0.6 arcsec, below the published 0.8-arcsec seeing-warning width, and outer bins widen without using any kinematic result.",
+    "minimum_valid_pixel_fraction_per_bin": 0.7,
+    "minimum_median_signal_to_noise_per_angstrom_per_signed_bin": 5.0,
+    "symmetrized_output": "After signed-side consistency gates, generalized least-squares combine the four opposite-side pairs and retain the central bin, producing five radial bins and a full 5x5 covariance."
+  },
+  "stellar_kinematic_fit": {
+    "redshift_initial": 0.183,
+    "observed_fit_range_angstrom": [4600.0, 5550.0],
+    "template_family": "XSL",
+    "template_path": "data/raw/r1_ppxf_templates/spectra_xsl_9.0.npz",
+    "template_sha256": "B8BEE334EE1705A0D4E7FF0F161990C248D68AC1B8C8EB138B0D8C05CF37D853",
+    "lsf": "Measure an arc-line FWHM spline every approximately 200 Angstrom and forward-convolve the higher-resolution XSL templates; never apply a negative resolution correction.",
+    "lsf_execution": {
+      "arc_extraction_rows_zero_based_half_open": [1149, 1159],
+      "line_fit_half_width_pixels": 7,
+      "gaussian_center_tolerance_pixels": 2.0,
+      "gaussian_sigma_bounds_pixels": [0.5, 4.0],
+      "observed_wavelength_bin_edges_angstrom": [4550.0, 4750.0, 4950.0, 5150.0, 5350.0, 5550.0],
+      "minimum_accepted_lines_per_200_angstrom_bin": 3,
+      "bin_estimator": "median accepted Gaussian FWHM in Angstrom; line-fit uncertainties and the robust MAD/sqrt(N) bin uncertainty are retained",
+      "interpolation": "linear between bin centers and constant beyond the measured centers",
+      "frozen_before_individual_arc_line_width_measurement": true
+    },
+    "ppxf_execution": {
+      "input_mask_log_rebin_retention_threshold": 0.99,
+      "normalization": "median retained log-rebinned galaxy flux",
+      "variance_log_rebin": "Apply the identical pPXF log_rebin operation to the linear-grid variance; covariance is supplied by the later frozen exposure/block bootstrap.",
+      "stellar_start_velocity_km_s_relative_to_initial_redshift": 0.0,
+      "gas_start_velocity_km_s_relative_to_initial_redshift": 0.0,
+      "gas_start_sigma_km_s": 100.0,
+      "gas_component_rule": "All in-range H-delta, H-gamma, and [Ne III] templates share one gas component that is independent of the stellar component.",
+      "regularization": 0.0,
+      "frozen_before_baseline_ppxf": true
+    },
+    "moments": 2,
+    "initial_sigma_km_s": 300.0,
+    "additive_polynomial_degree": 8,
+    "multiplicative_polynomial_degree": 0,
+    "gas_components": "Simultaneously fit H-delta, H-gamma, and [Ne III] if their redshifted wavelengths enter the fit range; gas templates do not share stellar kinematics.",
+    "fixed_masks": [
+      "all nonzero DQ and nonpositive variance pixels",
+      "chip-gap and combined-coverage pixels with fewer than three exposures",
+      "5577 Angstrom sky line plus or minus 8 Angstrom",
+      "pixels exceeding a local 21-pixel variance median by 6 robust sigma"
+    ],
+    "conditional_errors": "Scale the formal pPXF covariance by square root of reduced chi-square before bootstrap aggregation."
+  },
+  "covariance_protocol": {
+    "replicates": 200,
+    "random_seed": 1689,
+    "joint_resampling": "Resample the four calibrated exposures with replacement and apply shared 8-pixel spectral wild-bootstrap block signs across all nine spatial bins, preserving exposure, spectral, and cross-bin covariance.",
+    "center_uncertainty": "Perturb the shared spatial center in every replicate using its continuum-only fit covariance.",
+    "wavelength_lsf_uncertainty": "Perturb each arc solution and LSF spline from the arc-fit covariance in every replicate.",
+    "pre_registered_systematic_grid": {
+      "additive_polynomial_degree": [6, 8, 10],
+      "observed_fit_range_angstrom": [[4550.0, 5500.0], [4600.0, 5550.0], [4700.0, 5550.0]],
+      "sky_window_variant": ["inner", "baseline", "outer"]
+    },
+    "assembly": "Compute the signed-bin joint sample covariance over accepted replicates, then transform it through the fixed generalized least-squares side symmetrization; retain replicate products and the 9x9 and 5x5 matrices.",
+    "minimum_successful_replicates": 180,
+    "positive_semidefinite_required": true
+  },
+  "covariance_execution": {
+    "exposure_resampling": "Draw four exposure indices with replacement and recombine their registered baseline arrays with the frozen inverse-variance and coverage rules.",
+    "center_perturbation": "Draw one shared center offset from the joint Moffat center covariance and linearly resample the recombined 2-D frame in the spatial direction before signed extraction.",
+    "wavelength_perturbation": "Draw each of the three CuAr Chebyshev coefficient vectors from its measured covariance and linearly resample every selected exposure along wavelength using its frozen science-to-arc mapping.",
+    "lsf_perturbation": "Draw the five 200-Angstrom LSF nodes independently from their retained robust standard errors and forward-convolve one XSL library per replicate.",
+    "wild_bootstrap": "Add the baseline normalized pPXF residual multiplied by shared Rademacher signs in contiguous eight-pixel common-grid spectral blocks to every signed-bin spectrum.",
+    "failed_replicates": "Retain every failed bin/replicate; only replicates with all nine finite stellar fits enter the joint covariance.",
+    "frozen_before_covariance_replicates": true
+  },
+  "profile_acceptance": {
+    "minimum_finite_signed_bins": 7,
+    "minimum_finite_symmetrized_radial_bins": 4,
+    "minimum_distinct_radial_bins_for_structural_promotion": 3,
+    "maximum_fractional_sigma_uncertainty_each_retained_radial_bin": 0.3,
+    "maximum_median_opposite_side_velocity_difference_km_s": 100.0,
+    "maximum_any_opposite_side_velocity_difference_km_s": 150.0,
+    "maximum_median_opposite_side_sigma_difference_fraction": 0.2,
+    "maximum_any_opposite_side_sigma_difference_fraction": 0.35,
+    "maximum_sigma_shift_fraction_over_systematic_grid": 0.1,
+    "maximum_covariance_diagonal_fractional_change_between_bootstrap_halves": 0.2,
+    "maximum_sigma_error_fractional_change_between_bootstrap_halves": 0.15,
+    "covariance_psd_relative_eigenvalue_tolerance": 1e-10,
+    "exact_lens_overlap_must_be_recomputed_from_realized_valid_support": true,
+    "external_publication_check": "Only after all internal gates are recorded, digitize the published A1689 panels as a validation control; never use the figure to replace or tune the raw reconstruction."
+  },
+  "stage_outcomes": [
+    {
+      "stage": "A1689-P1",
+      "outcome": "A provenance-matched BPM and exact DRAGONS/pPXF environment manifest.",
+      "advance_if": "The BPM covers GMOS-N EEV full-frame data valid in June 2009 and all raw files are recognized without metadata edits.",
+      "rethink_if": "No compatible BPM or science-quality processing route exists; report a hard software/calibration shortfall and do not hand-roll post-result corrections."
+    },
+    {
+      "stage": "A1689-P2",
+      "outcome": "Four independently calibrated 2-D spectra with propagated variance/DQ and frozen sky subtraction.",
+      "advance_if": "Every calibration_acceptance threshold passes.",
+      "rethink_if": "Any wavelength, flat, bias, centroid, coverage, or sky gate fails; retain the failure and replace the candidate rather than tune it."
+    },
+    {
+      "stage": "A1689-P3",
+      "outcome": "Nine signed kinematic bins, five symmetrized radial bins, 200-replicate covariance, and a realized lens-overlap recount.",
+      "advance_if": "All profile_acceptance thresholds pass and at least three independent lens radii remain inside valid dynamical support.",
+      "rethink_if": "Fewer than four radial bins survive, covariance is unstable, or side/template sensitivity fails; keep A1689 geometry-only."
+    }
+  ],
+  "authorization": {
+    "acquire_provenance_matched_bad_pixel_mask": true,
+    "install_isolated_reduction_environment": true,
+    "execute_reduction_after_P1_gate": true,
+    "derive_stellar_kinematics_after_P2_gate": true,
+    "derive_dynamical_gravity_response": false,
+    "fit_lens_mass_model": false,
+    "infer_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

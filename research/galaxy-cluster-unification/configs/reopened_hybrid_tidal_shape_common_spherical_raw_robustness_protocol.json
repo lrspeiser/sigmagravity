@@ -1,0 +1,27 @@
+{
+  "protocol_version": "REOPENED-HYBRID-TIDAL-SHAPE-COMMON-SPHERICAL-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-07-31T13:15:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Directly replay the best common-spherical closure-control compromise with eight lens-geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_tidal_shape_common_spherical_protocol.json",
+  "source_report": "results/reopened_hybrid_tidal_shape_common_spherical/report.json",
+  "selected_variants": [
+    "middle_orientation_control:channel_gate_cluster_high=0"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_tidal_shape_common_spherical_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_tidal_shape_common_spherical_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_tidal_shape_common_spherical_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_tidal_shape_common_spherical_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_tidal_shape_common_spherical_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Universal gravity constants are copied unchanged from the common-spherical bridge fit.",
+    "No gravity constant is fitted to raw lensing.",
+    "Only pseudo-elliptical geometry, shear, center, and source positions are fitted to raw training images.",
+    "Candidates with missing held-out roots remain failures even when RMS over surviving roots is small.",
+    "This direct replay verifies a closure-control result selected after viewing earlier stages; it is not an independent holdout."
+  ]
+}

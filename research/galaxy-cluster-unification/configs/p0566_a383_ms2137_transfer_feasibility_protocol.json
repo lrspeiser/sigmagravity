@@ -1,0 +1,84 @@
+{
+  "protocol_version": "P0566-A383-MS2137-TRANSFER-FEASIBILITY-0.1.0",
+  "frozen_utc": "2026-08-01T04:20:00Z",
+  "status": "frozen_before_remote_archive_metadata_query_or_new_science_pixel_access",
+  "question": "Can A383 and MS2137 supply an unchanged-rule, two-cluster transfer of the P0565 coherent-core/twisted-outskirts morphology gate?",
+  "target_selection": {
+    "rule": "Take every locally identified cluster that is CLASH-imaged, has a likelihood-ready measured strong-lens image catalog with at least three source families, has Tian stellar and gas anchors, has an ACCEPT radial gas profile, and was not used to construct or first transfer the P0565 sign gate.",
+    "selected": ["A383", "MS2137"],
+    "selection_frozen_before_morphology": true,
+    "excluded_result_channels": [
+      "all earlier A383 and MS2137 stellar-dynamics outcomes",
+      "all Tian dark-matter or total-mass fit outcomes beyond the fixed baryonic anchors",
+      "all morphology descriptors until this feasibility gate passes and acquisition is frozen"
+    ]
+  },
+  "systems": [
+    {
+      "label": "A383",
+      "archive_slug": "a383",
+      "accept_name": "ABELL_0383",
+      "center_ra_deg": 42.0140833333,
+      "center_dec_deg": -3.5291722222,
+      "lens_redshift": 0.187,
+      "expected_likelihood_ready_images": 14,
+      "expected_source_families": 5,
+      "expected_family_sizes": [3, 3, 3, 3, 2]
+    },
+    {
+      "label": "MS2137",
+      "archive_slug": "ms2137",
+      "accept_name": "MS_2137.3-2353",
+      "center_ra_deg": 325.0631666667,
+      "center_dec_deg": -23.6611388889,
+      "lens_redshift": 0.313,
+      "expected_likelihood_ready_images": 11,
+      "expected_source_families": 3,
+      "expected_family_sizes": [4, 3, 4]
+    }
+  ],
+  "metadata_queries": {
+    "hst": {
+      "official_root": "https://archive.stsci.edu/missions/hlsp/clash",
+      "filter": "F160W",
+      "pixel_scale_mas": 65,
+      "products": ["drz", "wht"],
+      "method": "HTTP HEAD or zero-byte range request only; do not read FITS pixels"
+    },
+    "chandra": {
+      "official_tap": "https://cda.cfa.harvard.edu/cxctap/sync",
+      "cone_radius_deg": 0.16,
+      "selection": "all public ACIS observations without a grating whose pointing lies within 0.16 degrees of the frozen center; no residual- or morphology-based filtering",
+      "method": "TAP metadata only; do not download an event file"
+    },
+    "local_accept": "data/raw/accept_cavagnolo2009/all_profiles.dat.txt",
+    "local_lensing": "data/derived/r1_strong_lens_image_observables.csv",
+    "local_baryons": "data/raw/clash_tian2020/table1.dat"
+  },
+  "advance_gates": {
+    "exact_selected_systems": 2,
+    "minimum_likelihood_ready_images_each": 10,
+    "minimum_source_families_each": 3,
+    "minimum_images_per_family": 2,
+    "minimum_accept_shells_each": 20,
+    "required_hst_products_each": 2,
+    "minimum_hst_content_length_bytes": 1000000,
+    "minimum_public_chandra_observations_each": 1,
+    "minimum_public_chandra_exposure_ks_each": 10.0,
+    "all_gates_must_pass": true
+  },
+  "next_stage_if_passed": "Freeze exact URLs, content lengths, Chandra ObsIDs, exposure totals, download paths, pixel-level morphology construction, the unchanged P0565 sign rule, and transfer scoring before acquisition.",
+  "outputs": {
+    "directory": "results/p0566_a383_ms2137_transfer_feasibility",
+    "metadata_inventory": "metadata_inventory.json",
+    "report": "report.json",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "P0566 feasibility cannot score morphology, gravity, dark matter, MOND, or a new field equation.",
+    "The two targets were discovered after the one-cluster P0565 result, so this is a prospective data-channel transfer, not a pristine project-wide holdout.",
+    "A383 and MS2137 are comparatively relaxed cluster cores and do not span the full merger or mass morphology population.",
+    "The frozen P0565 gate contains two thresholds derived post hoc from four systems and therefore remains high risk even if this feasibility gate passes.",
+    "No formula can be promoted from archive availability."
+  ]
+}

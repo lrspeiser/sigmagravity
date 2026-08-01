@@ -1,0 +1,28 @@
+{
+  "protocol_version": "REOPENED-SMOOTHED-SLOPE-GEOMETRY-AUDIT-0.1.0",
+  "frozen_utc": "2026-08-01T04:45:00Z",
+  "status": "frozen_before_geometry_scores",
+  "purpose": "Measure how a universal local log-radius smoothing scale separates observed galaxy and cluster baryonic profiles and how strongly it depends on the raw-lensing extrapolation cutoff.",
+  "smoothing_log_scales": [0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 4.0],
+  "gate_pivot": 0.5,
+  "gate_sharpness": 4.0,
+  "raw_cutoffs_kpc": [3000.0, 10000.0, 100000.0, 1000000.0],
+  "raw_probe_radii_kpc": [10.0, 30.0, 100.0, 300.0, 1000.0],
+  "raw_grid_points": 1536,
+  "inputs": {
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json"
+  },
+  "outputs": {
+    "report": "results/reopened_smoothed_slope_geometry_audit/report.json",
+    "profile_summaries": "results/reopened_smoothed_slope_geometry_audit/profile_summaries.csv",
+    "raw_cutoff_sensitivity": "results/reopened_smoothed_slope_geometry_audit/raw_cutoff_sensitivity.csv",
+    "summary": "results/reopened_smoothed_slope_geometry_audit/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "This is a descriptive baryonic-profile audit, not evidence that the slope coordinate causes gravity.",
+    "SPARC slopes use the same outer held-out rows available to the transfer test; they are not full resolved mass maps.",
+    "Raw-lensing profiles include the pipeline's interpolation and isolated outer tail, so cutoff sensitivity diagnoses the implemented formula rather than new astronomical information."
+  ]
+}

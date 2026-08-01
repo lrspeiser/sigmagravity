@@ -1,0 +1,59 @@
+{
+  "protocol_version": "P0578-TWO-CLUSTER-BARYON-BROADENING-0.1.0",
+  "frozen_utc": "2026-08-01T10:40:00Z",
+  "status": "frozen_after_P0577_before_broadening_scores",
+  "trigger": "Fractional propagation did not transfer from SMACS to SPT, while spatial extent repeatedly dominated normalized-map parameter impacts.",
+  "question": "Can an ordinary Poisson field with one universal symmetry-gated baryonic broadening scale improve raw image-plane consistency in both clusters?",
+  "formula": {
+    "surface": "Sigma=(1-f_b*H)*B20+(f_b*H)*B_w",
+    "symmetry_gate": "H=Q90^4/(Q90^4+0.05^4)",
+    "deflection": "ordinary laplacian(psi)=2*Sigma, alpha=grad(psi)",
+    "interpretation": "B_w is the observed member-light map convolved to one universal physical width w; no fractional propagator is used."
+  },
+  "grid": {
+    "broad_width_kpc": [40.0, 60.0, 80.0, 100.0, 125.0, 150.0, 200.0, 250.0],
+    "broad_fraction": [0.25, 0.5, 0.75, 1.0],
+    "candidates": 32,
+    "padding_factor": 3,
+    "linearized_image_singular_value_floor": 0.02
+  },
+  "selection": {
+    "clusters": ["SMACS J0723.3-7327", "SPT-CL J0615-5746"],
+    "rule": "For each candidate fit one positive amplitude per cluster on its frozen calibration subfamilies. Select minimum equal-cluster mean calibration image-plane RMS; score both frozen held-out cohorts without refitting width, fraction, or amplitudes.",
+    "controls": ["B20 compact", "B100 prior local control", "P0574 ordinary routed field", "processed Lenstool reference"]
+  },
+  "gates": {
+    "equal_cluster_heldout_improvement_vs_B100_fraction_min": 0.10,
+    "clusters_improved_vs_B100_min": 2,
+    "heldout_subfamilies_improved_vs_B100_fraction_min": 0.60,
+    "selected_width_interior": true,
+    "mass_sheet_R2_max_each": 0.95,
+    "solar_SPARC_null": true
+  },
+  "cross_domain": {
+    "Solar": "H=0 in the one-source limit, so the broad component is absent and the unsmoothed ordinary field remains.",
+    "SPARC": "Q90=0 for deprojected axisymmetric profiles, so broadening changes all 175 rotation curves by exactly zero.",
+    "scope": "The physical widths describe the cluster member-field response only where the same symmetry gate is active."
+  },
+  "inputs": {
+    "p0573_protocol": "configs/p0573_tidal_arrival_fresh_replication_protocol.json",
+    "SMACS_images": "results/p0575_smacs0723_raw_position/raw_images.csv",
+    "SPT_images": "results/p0577_spt0615_raw_response/raw_images.csv"
+  },
+  "outputs": {
+    "directory": "results/p0578_two_cluster_baryon_broadening",
+    "candidate_scores": "candidate_scores.csv",
+    "cluster_scores": "cluster_scores.csv",
+    "heldout_subfamily_scores": "heldout_subfamily_scores.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0578_two_cluster_baryon_broadening.png"
+  },
+  "claim_limits": [
+    "F160W member light is only a proxy for stellar baryons and omits gas, ICL, and mass-to-light variation.",
+    "One amplitude per cluster is still calibrated, so absolute strength is not universal or predicted.",
+    "The same raw positions used in P0575-P0577 are reused; this compares a new formula family rather than providing new data.",
+    "Linearized image-plane residuals are not full nonlinear root finding.",
+    "A fixed physical width is phenomenological and not derived from a covariant field equation."
+  ]
+}

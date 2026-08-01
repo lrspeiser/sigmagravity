@@ -1,0 +1,67 @@
+{
+  "protocol_version": "P0554-ROUTE-LOCALIZATION-SCREEN-0.1.0",
+  "frozen_utc": "2026-08-01T03:30:00Z",
+  "status": "frozen_after_eta030_transfer_before_any_direction_or_bend_variant_score",
+  "question": "At the topology-safe universal amplitude eta=0.30, which small baryon-only change to route direction or arc geometry most strongly and consistently changes raw cluster image residuals?",
+  "formula": {
+    "radial_parent": "P0554 combined-parent radial law with lensing_addition_softness=0.98",
+    "angular_strength": "0.30 * f_route^2.5",
+    "route_budget": "Every positive route map has unit integral and the deflection builder removes its circular monopole.",
+    "new_per_cluster_gravity_parameters": 0,
+    "geometry_parameters_refit": 0
+  },
+  "variants": [
+    {"variant_id": "eta_000", "mode": "none", "local_mix": 0.0, "softening_kpc": 100.0, "symmetric_bend_degrees": 0.0, "center_mode": "light_centroid"},
+    {"variant_id": "global_centroid", "mode": "global_center", "local_mix": 0.0, "softening_kpc": 100.0, "symmetric_bend_degrees": 0.0, "center_mode": "light_centroid"},
+    {"variant_id": "global_origin", "mode": "global_center", "local_mix": 0.0, "softening_kpc": 100.0, "symmetric_bend_degrees": 0.0, "center_mode": "cluster_origin"},
+    {"variant_id": "local_mix_025", "mode": "mixed_local", "local_mix": 0.25, "softening_kpc": 100.0, "symmetric_bend_degrees": 0.0, "center_mode": "light_centroid"},
+    {"variant_id": "local_mix_050", "mode": "mixed_local", "local_mix": 0.50, "softening_kpc": 100.0, "symmetric_bend_degrees": 0.0, "center_mode": "light_centroid"},
+    {"variant_id": "local_mix_075", "mode": "mixed_local", "local_mix": 0.75, "softening_kpc": 100.0, "symmetric_bend_degrees": 0.0, "center_mode": "light_centroid"},
+    {"variant_id": "local_soft_050", "mode": "mixed_local", "local_mix": 1.00, "softening_kpc": 50.0, "symmetric_bend_degrees": 0.0, "center_mode": "light_centroid"},
+    {"variant_id": "local_soft_100", "mode": "mixed_local", "local_mix": 1.00, "softening_kpc": 100.0, "symmetric_bend_degrees": 0.0, "center_mode": "light_centroid"},
+    {"variant_id": "local_soft_200", "mode": "mixed_local", "local_mix": 1.00, "softening_kpc": 200.0, "symmetric_bend_degrees": 0.0, "center_mode": "light_centroid"},
+    {"variant_id": "bend_015", "mode": "global_center", "local_mix": 0.0, "softening_kpc": 100.0, "symmetric_bend_degrees": 15.0, "center_mode": "light_centroid"},
+    {"variant_id": "bend_030", "mode": "global_center", "local_mix": 0.0, "softening_kpc": 100.0, "symmetric_bend_degrees": 30.0, "center_mode": "light_centroid"},
+    {"variant_id": "bend_045", "mode": "global_center", "local_mix": 0.0, "softening_kpc": 100.0, "symmetric_bend_degrees": 45.0, "center_mode": "light_centroid"}
+  ],
+  "evaluation": {
+    "systems": ["RXJ2129", "MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "spent_selection_system": "MACS1931",
+    "images": 77,
+    "source_families": 27,
+    "fixed_geometry_source": "eta=0 exact-refit geometry from the frozen subcritical transfer",
+    "source_positions": "profiled from training images separately for each route shape at fixed geometry",
+    "heldout_score": "Jacobian-linearized image-plane residual at each observed held-out coordinate using only the training-profiled source position",
+    "primary_scope": "equal-system RMS over RXJ2129, MACS0329, MACS0429, and MACS1115",
+    "secondary_scope": "all five clusters including spent MACS1931",
+    "shortlist_rule": "retain the lowest primary equal-system RMS geometry plus the most direction-consistent non-baseline geometry if different",
+    "minimum_direction_consistency": 0.75,
+    "no_formula_promotion": true
+  },
+  "inputs": {
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "transfer_protocol": "configs/p0554_subcritical_route_transfer_protocol.json",
+    "fixed_geometry": "results/p0554_subcritical_route_transfer/geometry.csv",
+    "transfer_report": "results/p0554_subcritical_route_transfer/report.json",
+    "route_candidate_specs": "results/adaptive_route_kernel/candidate_specs.csv"
+  },
+  "outputs": {
+    "directory": "results/p0554_route_localization_screen",
+    "scores": "scores.csv",
+    "system_scores": "system_scores.csv",
+    "image_residuals": "image_residuals.csv",
+    "field_audits": "field_audits.csv",
+    "shortlist": "shortlist.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_route_localization_screen.png"
+  },
+  "claim_limits": [
+    "This is a fixed-geometry local-response screen, not an exact nonlinear image-root or caustic test.",
+    "The five clusters and member catalogs are spent exploratory evidence.",
+    "The source catalogs omit accepted registered hot-gas maps and separately measured diffuse ICL.",
+    "The local-neighbor direction is a phenomenological baryonic field proxy, not a covariant propagation law.",
+    "The angular construction preserves galaxy, radial-CLASH, and Solar scores by construction rather than independently improving them.",
+    "Only a frozen exact-refit and global-root follow-up can validate a shortlisted shape."
+  ]
+}

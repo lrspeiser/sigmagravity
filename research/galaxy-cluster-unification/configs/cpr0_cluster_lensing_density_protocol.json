@@ -1,0 +1,55 @@
+{
+  "protocol_version": "CPR0-0.3-local-density-weak-lensing-endpoint",
+  "frozen_utc": "2026-07-28T06:03:00Z",
+  "status": "frozen before cross-matching or scoring the added weak-lensing catalog",
+  "reason_for_added_data": "The 20-object CLASH acceleration table lacks machine-readable local baryon-density profiles, and its legacy JACO configuration files are no longer exposed in the current MAST CLASH directory tree.",
+  "datasets": {
+    "local_gas_density": "Elkholy et al. 2015 Chandra profiles, VizieR J/ApJ/805/3/clusters",
+    "total_mass": "Herbonnet et al. 2020 CCCP+MENeaCS simulation-corrected deprojected weak-lensing aperture M500",
+    "join": "canonical published cluster name",
+    "minimum_overlap": 12
+  },
+  "observable_construction": {
+    "radius": "Herbonnet weak-lensing R_ap500",
+    "gobs": "G*M_ap500/R_ap500^2",
+    "electron_density": "published Vikhlinin-form n_e(r), renormalized by the ratio of published Mgas(<Elkholy R500) to the profile integral",
+    "gas_mass": "integral of the renormalized electron-density profile to the weak-lensing R_ap500 with mu_e=1.17",
+    "nominal_stellar_mass": "0.10*Mgas inside R500; zero and 0.20*Mgas are mandatory brackets",
+    "local_baryon_density": "renormalized hot-gas density at R_ap500; local stellar density is neglected at this radius",
+    "coherence": "C=0 pressure-supported spherical endpoint; this added catalog does not measure the intermediate coherence interpolation"
+  },
+  "fixed_parameters": {
+    "published_rg_sets": {
+      "disk_galaxies": {"epsilon_0": 0.666, "log10_rho_c_g_cm3": -24.54, "Q": 1.79},
+      "elliptical_galaxies": {"epsilon_0": 0.089, "log10_rho_c_g_cm3": -24.25, "Q": 0.47},
+      "MACS1206": {"epsilon_0": 0.18, "log10_rho_c_g_cm3": -25.25, "Q": 5.21},
+      "AbellS1063": {"epsilon_0": 0.13, "log10_rho_c_g_cm3": -25.383, "Q": 23.62}
+    }
+  },
+  "heldout_test": {
+    "folds": 5,
+    "fold_seed": 20260728,
+    "fit_objective": "unweighted training mean squared log10 acceleration residual",
+    "bounds": {
+      "constant_epsilon": [0.03, 0.5],
+      "epsilon_0": [0.03, 0.5],
+      "log10_rho_c_g_cm3": [-31.0, -24.0],
+      "Q": [0.1, 30.0]
+    }
+  },
+  "advance_gates": {
+    "overlap_systems_min": 12,
+    "best_zero_fit_transfer_RMSE_dex_max": 0.12,
+    "RG_CV_RMSE_improvement_vs_constant_epsilon_min_dex": 0.02,
+    "RG_CV_absolute_mean_residual_dex_max": 0.05,
+    "RG_CV_absolute_residual_density_correlation_max": 0.25,
+    "log10_rho_c_fold_range_max_dex": 1.5
+  },
+  "claim_boundary": [
+    "Weak-lensing mass is the target, so this track is independent of hydrostatic total-mass assumptions.",
+    "The gas density and gas mass are both X-ray derived and share a profile model.",
+    "The stellar correction is bracketed, not measured cluster by cluster.",
+    "One point per cluster near R500 primarily tests the low-density normalization; it may have too little density leverage to identify rho_c or Q.",
+    "C=0 means this tests the RG endpoint of CPR0, not the coherence interpolation."
+  ]
+}

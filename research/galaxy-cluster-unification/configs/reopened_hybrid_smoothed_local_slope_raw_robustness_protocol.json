@@ -1,0 +1,50 @@
+{
+  "protocol_version": "REOPENED-HYBRID-SMOOTHED-LOCAL-SLOPE-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-01T05:35:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay smoothed-local-slope winners, controls, bandwidth extremes, and both sides of observed root transitions with eight lens-geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_smoothed_local_slope_protocol.json",
+  "source_report": "results/reopened_hybrid_smoothed_local_slope/report.json",
+  "selected_variants": [
+    "response_mode_control:radial_memory_slope_gate_mode=2",
+    "response_mode_control:radial_memory_slope_gate_mode=3",
+    "response_mode_control:radial_memory_slope_gate_mode=4",
+    "smoothing_scale_pivot_0:radial_memory_slope_smoothing_log_scale=0.03",
+    "smoothing_scale_pivot_0:radial_memory_slope_smoothing_log_scale=0.2",
+    "smoothing_scale_pivot_0:radial_memory_slope_smoothing_log_scale=4",
+    "smoothing_scale_pivot_0p75:radial_memory_slope_smoothing_log_scale=0.1",
+    "smoothing_scale_pivot_0p75:radial_memory_slope_smoothing_log_scale=0.2",
+    "smoothing_scale_pivot_0p75:radial_memory_slope_smoothing_log_scale=1",
+    "pivot_smoothing_0p2:radial_memory_slope_gate_pivot=0",
+    "pivot_smoothing_0p2:radial_memory_slope_gate_pivot=0.75",
+    "pivot_smoothing_0p2:radial_memory_slope_gate_pivot=1",
+    "pivot_smoothing_0p2:radial_memory_slope_gate_pivot=1.25",
+    "memory_scale_pivot_0p75:radial_memory_log_scale=0.5",
+    "memory_scale_pivot_0p75:radial_memory_log_scale=0.6",
+    "memory_scale_pivot_0p75:radial_memory_log_scale=0.7",
+    "memory_scale_pivot_0p75:radial_memory_log_scale=0.8",
+    "memory_scale_pivot_0p75:radial_memory_log_scale=0.9",
+    "memory_scale_pivot_0p75:radial_memory_log_scale=1.25",
+    "sharpness_pivot_0p75:radial_memory_slope_gate_sharpness=2",
+    "sharpness_pivot_0p75:radial_memory_slope_gate_sharpness=8",
+    "strength_pivot_0p75:radial_memory_slope_gate_strength=0.5",
+    "strength_pivot_0p75:radial_memory_slope_gate_strength=0.75",
+    "strength_pivot_0p75:radial_memory_slope_gate_strength=0.9",
+    "strength_pivot_0p75:radial_memory_slope_gate_strength=1"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_smoothed_local_slope_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_smoothed_local_slope_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_smoothed_local_slope_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_smoothed_local_slope_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_smoothed_local_slope_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "The replay leaves all gravity and structural parameters fixed and refits only declared lens nuisance geometry.",
+    "Selection includes winners, controls, extremes, and root-transition neighbors rather than only favorable two-start rows.",
+    "Root existence and eight-start error supersede the shallow two-start classification for these rows.",
+    "This remains a development-data robustness test and cannot validate the parent new-physics mechanism."
+  ]
+}

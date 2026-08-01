@@ -1,0 +1,100 @@
+{
+  "protocol_version": "P0554-STRUCTURAL-MICROVARIATIONS-0.1.0",
+  "frozen_utc": "2026-07-31T21:35:17Z",
+  "status": "frozen_before_any_structural_variant_score",
+  "question": "Which parent-preserving changes to the algebraic structure of P0554 most affect galaxies, radial cluster lensing, raw image topology, and Solar bounds?",
+  "baseline": {
+    "alpha": 0.75,
+    "apogee_ratio": 100.0,
+    "screen_exponent": 1.0,
+    "screen_scale": 1.0,
+    "mass_radius_delta": 0.0,
+    "extent_leak": 0.0,
+    "invariant_mode": "potential_depth",
+    "invariant_power": 1.2,
+    "invariant_scale": 0.000002,
+    "secondary_path_ratio_power": 0.25,
+    "photon_extra_multiplier": 1.75,
+    "universal_q": 1.2300686115098052,
+    "residence_softness": 1.0,
+    "screen_softness": 1.0,
+    "potential_softness": 1.0,
+    "potential_path_cross": 1.0,
+    "response_addition_softness": 1.0,
+    "lensing_addition_softness": 1.0,
+    "extent_scale_coupling": 0.0,
+    "potential_scale_coupling": 0.0,
+    "mass_growth_power": 0.0
+  },
+  "coordinate_steps": [0.1, 0.25, 0.5, 1.0],
+  "parameter_coordinates": {
+    "residence_softness": {"mode": "fractional", "reference_change": 0.2, "concept": "soft-min shape joining radial accumulation to its apogee"},
+    "screen_softness": {"mode": "fractional", "reference_change": 0.2, "concept": "midpoint-preserving shape of the high-acceleration screen"},
+    "potential_softness": {"mode": "fractional", "reference_change": 0.2, "concept": "midpoint-preserving addition of potential depth to unity"},
+    "potential_path_cross": {"mode": "fractional", "reference_change": 0.2, "concept": "cross term between potential depth and path history"},
+    "response_addition_softness": {"mode": "fractional", "reference_change": 0.2, "concept": "generalized addition of the new dynamical channel to baryonic gravity"},
+    "lensing_addition_softness": {"mode": "fractional", "reference_change": 0.2, "concept": "generalized addition of the new lensing channel to baryonic GR"},
+    "extent_scale_coupling": {"mode": "additive", "reference_change": 0.05, "concept": "baryonic extent moves the accumulation radius instead of its amplitude"},
+    "potential_scale_coupling": {"mode": "additive", "reference_change": 0.1, "concept": "potential depth moves the accumulation radius as well as amplitude"},
+    "mass_growth_power": {"mode": "additive", "reference_change": 0.1, "concept": "enclosed baryonic mass growth supplies an additional profile-shape factor"}
+  },
+  "operator_definitions": {
+    "generalized_addition": "A_k(z)=[1+(2^k-1)z^k]^(1/k), with A_1(z)=1+z and A_k(1)=2.",
+    "generalized_screen": "S_k(y)=[1+(2^k-1)y^(nk)]^(-1/k), preserving S(1)=1/2 and the high-field power y^-n.",
+    "generalized_residence": "C_k=(C_open^-k+C_apogee^-k)^(-1/k), with k=1 equal to the P0554 rational saturation.",
+    "potential_path_cross": "I=P+R-1+k_cross(P-1)(R-1), with k_cross=1 equal to P*R.",
+    "extent_scale": "r_s receives E^eta rather than changing scalar amplitude.",
+    "potential_scale": "r_s receives P^eta in addition to the inherited potential-amplitude factor.",
+    "mass_growth": "I receives [1+max(d ln M_b/d ln r,0)]^eta."
+  },
+  "evaluation": {
+    "formula_parameters_fit": 0,
+    "lens_geometry_parameters_fit": 0,
+    "universal_q_rule": "Keep the P0554 universal q fixed for every structural variant.",
+    "galaxy": "131 SPARC galaxies with fixed nuisance parameters and untouched outer-radius predictions.",
+    "derived_cluster": "84 CLASH equivalent-acceleration points in 20 systems with no per-cluster adjustment.",
+    "raw": "RX J2129 plus four Caminha/CLASH clusters at frozen P0554 geometries; profile source positions and solve exact held-out roots.",
+    "solar": "Same analytic Cassini, Earth, Saturn, and Mercury proxies as P0554."
+  },
+  "analysis_rules": {
+    "central_slope": "[metric(+u)-metric(-u)]/[2*u*normalizer]",
+    "central_curvature": "[metric(+u)+metric(-u)-2*metric(0)]/[u^2*normalizer]",
+    "raw_common_system_rule": "A raw slope uses only systems complete for -u, baseline, and +u; root changes are separate.",
+    "stable_direction_rule": "At least three finite step sizes, at least 75 percent sign agreement, and median absolute normalized slope at least 0.02.",
+    "material_median_slope": 0.02,
+    "solar_mercury_normalizer_mas_per_century": 3.1,
+    "no_candidate_selection": true
+  },
+  "inputs": {
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ2129_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "RXJ2129_geometry": "results/arc_invariant_pareto_refinement/raw_RXJ2129_parameters.csv",
+    "four_cluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "four_cluster_geometry": "results/adaptive_route_multicluster_raw/geometry.csv",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat"
+  },
+  "outputs": {
+    "directory": "results/p0554_structural_microvariations",
+    "variant_scores": "variant_scores.csv",
+    "galaxy_morphology": "galaxy_morphology_scores.csv",
+    "raw_scores": "raw_system_scores.csv",
+    "raw_predictions": "raw_predictions.csv",
+    "central_differences": "central_differences.csv",
+    "parameter_summary": "parameter_summary.csv",
+    "report": "report.json",
+    "figure": "p0554_structural_microvariations.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "These algebraic deformations are phenomenological operators, not equations derived from an action.",
+    "The parent and all systems are spent exploratory data.",
+    "Fixed ordinary lens geometry isolates structural field response but is not a predictive geometry refit.",
+    "CLASH accelerations are conventional-GR/NFW-derived targets.",
+    "Solar diagnostics are analytic proxies rather than an ephemeris likelihood.",
+    "A raw root change is a topology observation, not an accuracy improvement."
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "protocol_version": "ARC-MEMBER-INTERACTION-0.1.0",
+  "frozen_utc": "2026-08-01T03:45:00Z",
+  "status": "frozen_before_any_new_parent_by_member_interaction_score",
+  "question": "Can observed cluster-member geometry redirect a fixed potential/path gravity field toward raw strong-lens image constraints without adding radial mass or changing galaxy and Solar-System predictions?",
+  "equation": "alpha=alpha_parent+f_route*(alpha_resolved_members-alpha_azimuthal_average_of_same_members)",
+  "preserved_quantities": [
+    "summed effective member stellar mass",
+    "each member cluster-centric radius",
+    "azimuthally averaged parent deflection profile",
+    "all universal scalar-parent parameters",
+    "isolated axisymmetric galaxy predictions",
+    "spherical Solar-System predictions"
+  ],
+  "inputs": {
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "parent_scores": "results/arc_invariant_pareto_refinement/variant_scores.csv",
+    "parent_parameters": "results/arc_invariant_pareto_refinement/raw_RXJ2129_parameters.csv",
+    "raw_lensing_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "member_catalog": "data/derived/r1_rxj2129_satellite_membership_likelihood.csv"
+  },
+  "parents": [
+    {"candidate_id": "P0554", "role": "best_galaxy_below_cluster_0.2dex"},
+    {"candidate_id": "P0396", "role": "best_zero_slip_cluster"}
+  ],
+  "member_catalog": {
+    "mass_rule": "stellar_mass_msun times membership_probability",
+    "catalog_shape_pixel_scale_arcsec": 0.065,
+    "softening_floor_arcsec": 0.13
+  },
+  "grid": {
+    "routing_fraction": [-1.0, -0.5, -0.25, 0.0, 0.25, 0.5, 1.0, 1.5, 2.0],
+    "member_mass_power": [0.5, 0.75, 1.0, 1.25, 1.5],
+    "softening_scale": [0.5, 1.0, 2.0],
+    "radial_dressing": ["none", "dynamic_enhancement", "lensing_enhancement"]
+  },
+  "selection": {
+    "screen_metric": "training profiled image-plane RMS at the archived parent geometry",
+    "shortlist": "baseline plus the best training-only screen candidate at each routing fraction for each parent",
+    "shortlist_fit_starts": 3,
+    "final_fit_starts": 16,
+    "select_on": "lowest exact training RMS with all 15 roots converged",
+    "heldout_images": 7,
+    "heldout_used_for_selection": false
+  },
+  "randomization": {
+    "rule": "randomize every member position angle while preserving radius, routed weight, and softening",
+    "seed": 21292031,
+    "fixed_geometry_trials": 128,
+    "one_start_refit_trials": 16
+  },
+  "interpretation_gates": {
+    "meaningful_fractional_heldout_RMS_improvement": 0.2,
+    "strong_absolute_heldout_RMS_arcsec": 1.0,
+    "randomization_empirical_p_max": 0.05
+  },
+  "outputs": {
+    "directory": "results/arc_member_interaction",
+    "screen": "screen_scores.csv",
+    "shortlist": "shortlist_training_scores.csv",
+    "final": "final_scores.csv",
+    "predictions": "final_predictions.csv",
+    "parameters": "final_parameters.csv",
+    "randomizations": "randomization_scores.csv",
+    "impacts": "parameter_impacts.csv",
+    "member_weights": "selected_member_weights.csv",
+    "report": "report.json",
+    "figure": "arc_member_interaction.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "RX J2129 is a spent exploratory holdout after earlier project stages, not an untouched confirmatory sample.",
+    "The member catalog traces stellar baryons and does not directly measure a dark-matter map or three-dimensional member depth.",
+    "The angular-contrast operator is a thin-lens phenomenology, not yet a covariant field equation.",
+    "A positive result would identify a useful routing variable; it would not establish that gravity literally propagates along the inferred arcs."
+  ]
+}

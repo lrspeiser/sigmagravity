@@ -1,0 +1,20 @@
+{
+  "correction_id": "R1-J1402-Dinos-P1-IC1",
+  "status": "implementation_correction_without_scientific_gate_change",
+  "discovered_after_first_execution": true,
+  "scientific_protocol_changed": false,
+  "sectors_masks_thresholds_coordinates_and_parameters_changed": false,
+  "invalid_first_execution": {
+    "aggregate_chi_square": 56940640.64289635,
+    "aggregate_reduced_chi_square": 2206.402938849783,
+    "all_four_coordinate_variants_identical": true,
+    "reason_invalid": "lenstronomy image_linear_solve returns an image reconstructed only on the active likelihood mask and fills pixels outside that mask with zero; the first implementation incorrectly scored that zero-filled return on the heldout sector"
+  },
+  "correction": "retain the training-mask linear amplitudes updated by image_linear_solve, then evaluate SingleBandMultiModel.image over the complete image plane before scoring the heldout sector",
+  "guardrails": [
+    "record that the direct solver return is zero on every heldout sector",
+    "record that the complete forward model is nonzero on every heldout sector",
+    "verify every frozen coordinate corruption changes at least one instantiated pixel-coordinate map",
+    "retain all originally frozen gates and stop rules"
+  ]
+}

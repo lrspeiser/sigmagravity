@@ -1,0 +1,57 @@
+{
+  "protocol_version": "P0619-FROZEN-TANGENTIAL-TRANSFER-0.1.0",
+  "status": "frozen_after_P0618_before_A383_MS2137_tangential_scores",
+  "question": "Does the universal +90-degree route phase survive full ordinary-geometry refits on the chronological A383/MS2137 formula-transfer systems?",
+  "chronology": {
+    "prospective_relative_to_P0618_phase_selection": true,
+    "pristine_project_holdout": false,
+    "reason": "A383 and MS2137 were used by earlier field families and P0616, but the P0618 +90-degree support-phase formula was frozen before evaluating it on either system."
+  },
+  "locked_formula": {
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "angular_amplitude": "epsilon=Q^2/(1+Delta80)",
+    "width_over_R80": "0.23*sqrt(1+Q^2)",
+    "return_length_over_R80": 0.36,
+    "travel_mode": "constant",
+    "universal_phase_degrees": 90.0,
+    "new_fitted_gravity_parameters": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "systems": ["A383", "MS2137"],
+  "fit": {
+    "ordinary_geometry_parameters_per_system": 6,
+    "starts_per_candidate_system": 16,
+    "seed": 38321370615,
+    "baseline_replay": "P0616 scalar control used the same initial geometry, starts, and seed"
+  },
+  "inputs": {
+    "P0616_protocol": "configs/p0616_frozen_self_coupled_transfer_protocol.json",
+    "P0616_scores": "results/p0616_frozen_self_coupled_transfer/scores.csv",
+    "P0618_protocol": "configs/p0618_universal_route_phase_protocol.json",
+    "P0618_report": "results/p0618_universal_route_phase/report.json"
+  },
+  "gates": {
+    "A383_all_roots_required": true,
+    "A383_nonworsening_required": true,
+    "A383_heldout_RMS_arcsec_max": 2.0,
+    "galaxy_RMSE_to_fixed_RAR_max": 1.5,
+    "Solar_all_proxies_required": true
+  },
+  "outputs": {
+    "directory": "results/p0619_frozen_tangential_transfer",
+    "system_states": "system_states.csv",
+    "scores": "scores.csv",
+    "predictions": "predictions.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "figure": "p0619_frozen_tangential_transfer.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The formula chronology is prospective relative to P0618 but neither system is a pristine project holdout.",
+    "MS2137's P0616 scalar baseline is root-incomplete, so its RMS comparison remains inconclusive unless both variants become complete.",
+    "The CLASH member-light proxy omits gas, diffuse intracluster light, contamination corrections, and stellar mass-to-light variation.",
+    "Six conventional lens-geometry variables and training-family source positions are refitted; these are ordinary nuisance parameters, not gravity settings.",
+    "A successful A383 response would still require more chronologically frozen complete-baseline systems and an absolute error competitive with halo models."
+  ]
+}

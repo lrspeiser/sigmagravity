@@ -1,0 +1,38 @@
+{
+  "protocol_version": "R1B3-RXJ2129-terminal-observable-disposition-0.1",
+  "status": "frozen_while_H2_and_X4_active_before_either_final_gate",
+  "frozen_utc": "2026-07-27T16:01:13Z",
+  "selection_blind": true,
+  "gravity_residuals_seen": false,
+  "final_H2_gate_seen": false,
+  "final_X4_gate_seen": false,
+  "partial_execution_progress_seen": true,
+  "purpose": "Issue the terminal RX J2129 observable-production disposition after the two already-running immutable jobs finish, while applying the independently frozen ten-system public-data ceiling to any local downstream authorization.",
+  "inputs": {
+    "public_data_ceiling": "results/r1_ten_system_public_data_ceiling/report.json",
+    "H2_report": "results/r1_rxj2129_hst_h2/report.json",
+    "X4_report": "results/r1_rxj2129_xmm_x4_responses/report.json"
+  },
+  "branch_rules": {
+    "both_pass": "Record two successful local observable-production gates and retain their products as a one-system methodological resource. The global public-data ceiling supersedes H2 authorization to assemble H3 and X4 authorization to construct X5; do not run either downstream stage.",
+    "H2_fail": "Record the exact immutable image and band failures; do not assemble H3, alter masks or models, or rerun thresholds.",
+    "X4_fail": "Record the exact response, energy-grid, coverage, marker, or task-log failures; do not construct X5, substitute response products, or rerun thresholds.",
+    "any_branch": "RX J2129 does not change the ten-system hard shortfall, no population dynamical/Weyl response is identifiable, and no latent-response or force-law fit is authorized."
+  },
+  "supersession": {
+    "principle": "A passed component gate can authorize its local next interface, but a later independent global sample-identifiability ceiling can prohibit spending that authorization.",
+    "H2_local_authorization_if_pass": "assemble_H3_covariance",
+    "X4_local_authorization_if_pass": "construct_X5_joint_likelihood_scaffold",
+    "global_result": "both local authorizations are terminally withheld because even an RX J2129 success leaves a nine-system strict-readiness deficit"
+  },
+  "authorization": {
+    "allow_running_H2_and_X4_to_finish": true,
+    "audit_and_hash_completed_H2_and_X4_products": true,
+    "assemble_H3_covariance": false,
+    "construct_X5_joint_likelihood": false,
+    "select_another_system": false,
+    "reconstruct_dynamical_or_Weyl_response": false,
+    "cross_validate_latent_response": false,
+    "fit_new_force_or_action": false
+  }
+}

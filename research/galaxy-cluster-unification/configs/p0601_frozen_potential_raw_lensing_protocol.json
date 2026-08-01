@@ -1,0 +1,57 @@
+{
+  "protocol_version": "P0601-FROZEN-POTENTIAL-RAW-LENSING-0.1.0",
+  "frozen_utc": "2026-08-01T17:35:00Z",
+  "status": "frozen_after_P0599_selection_and_P0600_BCG_bridge_before_P0601_raw_scores",
+  "question": "Does the universal P0599 potential-shape amplitude law, frozen on SPARC and 20 CLASH radial profiles, predict held-out raw RX J2129 multiple-image positions?",
+  "inputs": {
+    "raw_lensing_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "previous_raw_parameters": "results/rxj2129_raw_theory_lensing/fitted_parameters.csv",
+    "previous_raw_report": "results/rxj2129_raw_theory_lensing/report.json",
+    "p0599_report": "results/p0599_bounded_potential_amplitude/report.json"
+  },
+  "frozen_laws": {
+    "fixed_RAR": "g=RAR(g_b,a0)",
+    "P0599_potential_shape": "g=RAR(g_b,a0)*[1+A*S4*H(C)*chi^p/(chi^p+chi_t^p)]"
+  },
+  "constants": {
+    "a0_m_s2": 1.2e-10,
+    "amplitude_A": 3.0,
+    "potential_threshold_chi": 1e-6,
+    "potential_power": 4.0,
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "source_acceleration_gate_power": 4.0
+  },
+  "validation": {
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "structural_geometry_parameters": 6,
+    "training_images": 15,
+    "heldout_images": 7,
+    "optimization_starts": 16,
+    "same_geometry_family_and_priors_for_both_laws": true,
+    "amplitude_selected_from_raw_images": false
+  },
+  "advance_gates": {
+    "all_heldout_roots_converged": true,
+    "heldout_RMS_arcsec_max": 0.5,
+    "heldout_RMS_below_previous_locked_candidate": true,
+    "no_geometry_parameter_near_bound": true
+  },
+  "outputs": {
+    "directory": "results/p0601_frozen_potential_raw_lensing",
+    "scores": "scores.csv",
+    "predictions": "image_predictions.csv",
+    "parameters": "fitted_parameters.csv",
+    "profiles": "radial_profiles.csv",
+    "report": "report.json",
+    "figure": "p0601_frozen_potential_raw_lensing.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "RX J2129 is one spent cluster pilot, not an independent population validation.",
+    "The image positions are raw observables but the baryonic radial profile is a literature reconstruction with a spherical tail closure.",
+    "The pseudo-elliptical potential and external shear are fitted structural approximations, not predictions of the scalar field law.",
+    "The P0599 amplitude was selected using NFW-deprojected CLASH acceleration profiles, although it was frozen before this raw replay.",
+    "Passing a compact one-halo comparator is not equivalent to beating a publication-grade multi-halo dark-matter reconstruction."
+  ]
+}

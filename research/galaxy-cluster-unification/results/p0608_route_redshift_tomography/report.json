@@ -1,0 +1,117 @@
+{
+  "report_version": "P0608-ROUTE-REDSHIFT-TOMOGRAPHY-RESULTS-0.1.0",
+  "status": "complete_spent_source_redshift_arc_identifiability_test",
+  "coverage": {
+    "source_redshifts": 7,
+    "minimum_source_redshift": 0.6786,
+    "maximum_source_redshift": 3.427,
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "primary_gammas": 6,
+    "screen_variants": 18
+  },
+  "locked_route": {
+    "component": "gas",
+    "angular_strength": 0.0025,
+    "R80_kpc": 184.29674534678944,
+    "Chandra_exposure_ks": 39.6040961730402,
+    "gas_map_centroid_arcsec": [
+      -0.4486877433367396,
+      -1.5135152974311519
+    ]
+  },
+  "distance_ratio_leverage": {
+    "reference_distance_ratio": 0.820262331219831,
+    "minimum_relative_ratio": 0.748448374798376,
+    "maximum_relative_ratio": 1.0514958607672515
+  },
+  "training_selected": {
+    "variant_id": "s0.0025__gamma0",
+    "role": "primary_locked_strength",
+    "angular_strength": 0.0025,
+    "gamma": 0.0,
+    "training_RMS_arcsec": 0.49518509553676343,
+    "training_roots_converged": 15,
+    "heldout_RMS_arcsec": 1.8041480847351101,
+    "heldout_roots_converged": 7
+  },
+  "standard_single_plane_screen": {
+    "variant_id": "s0.0025__gamma1",
+    "role": "primary_locked_strength",
+    "angular_strength": 0.0025,
+    "gamma": 1.0,
+    "training_RMS_arcsec": 0.49524801648779715,
+    "training_roots_converged": 15,
+    "heldout_RMS_arcsec": 1.8042487751159004,
+    "heldout_roots_converged": 7
+  },
+  "primary_gamma_response": {
+    "training_RMS_span_arcsec": 0.00015476955700050032,
+    "heldout_RMS_span_arcsec": 0.00016452339003714123,
+    "training_fractional_span": 0.0003125489001900098,
+    "heldout_fractional_span": 9.119173277912883e-05
+  },
+  "amplitude_leverage": [
+    {
+      "angular_strength": 0.0025,
+      "training_RMS_gamma_span_arcsec": 0.00015476955700050032,
+      "heldout_RMS_gamma_span_arcsec": 0.00016452339003714123
+    },
+    {
+      "angular_strength": 0.01,
+      "training_RMS_gamma_span_arcsec": 0.0006046569606010799,
+      "heldout_RMS_gamma_span_arcsec": 0.000580072936163134
+    },
+    {
+      "angular_strength": 0.05,
+      "training_RMS_gamma_span_arcsec": 0.002614490760139976,
+      "heldout_RMS_gamma_span_arcsec": 0.0027420490324170377
+    }
+  ],
+  "exact_refits": [
+    {
+      "role": "P0599_no_route_reference",
+      "gamma": null,
+      "angular_strength": 0.0,
+      "training_RMS_arcsec": 0.49524262462844243,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.8086634342147614,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 48.15754179125845
+    },
+    {
+      "role": "training_selected_gamma",
+      "gamma": 0.0,
+      "angular_strength": 0.0025,
+      "training_RMS_arcsec": 0.4951909779247956,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.8037530525371621,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 48.143511428082356
+    },
+    {
+      "role": "standard_single_plane_gamma",
+      "gamma": 1.0,
+      "angular_strength": 0.0025,
+      "training_RMS_arcsec": 0.4944807230545869,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.8814721267964238,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 47.845808469425165
+    }
+  ],
+  "interpretation": {
+    "selected_gamma_differs_from_standard": true,
+    "selected_gamma_beats_standard_training_after_refit": false,
+    "selected_gamma_beats_standard_spent_heldout_after_refit": true,
+    "gamma_identified": false,
+    "hidden_arc_height_identified": false
+  },
+  "claim_limits": [
+    "All RX J2129 images and the P0607 gas direction are spent exploratory data.",
+    "The reference angular strength is only 0.0025, so a null gamma result may be an amplitude-limited identifiability failure rather than evidence for gamma=1.",
+    "Several source redshifts are photometric or fixed rather than spectroscopic.",
+    "A distance-ratio exponent is phenomenology and cannot reconstruct an off-plane path height.",
+    "Time delays, weak shear or magnification, and a different raw cluster are required for an independent arc test."
+  ]
+}

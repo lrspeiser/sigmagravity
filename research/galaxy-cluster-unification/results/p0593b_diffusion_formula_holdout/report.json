@@ -1,0 +1,58 @@
+{
+  "report_version": "P0593B-DIFFUSION-FORMULA-HOLDOUT-RESULTS-0.1.0",
+  "status": "complete_formula_holdout",
+  "coverage": {
+    "candidates": 160,
+    "discovery_galaxies": 91,
+    "holdout_galaxies": 40,
+    "holdout_points": 254
+  },
+  "selection_metric": "discovery_equal_galaxy_RMSE_km_s",
+  "selected_candidate": {
+    "candidate_id": "diffuse__s0.75__f0.25__n4__RAR",
+    "route_geometry": "diffuse",
+    "strength": 0.75,
+    "route_fraction": 0.25,
+    "gate_power": 4.0
+  },
+  "all_data_screen_best_candidate": "diffuse__s0.75__f0.25__n2__RAR",
+  "selected_discovery": {
+    "pooled_RMSE_km_s": 10.561820918530493,
+    "equal_galaxy_RMSE_km_s": 11.172032288157393,
+    "mean_residual_km_s": 0.5845993393931923
+  },
+  "selected_holdout": {
+    "pooled_RMSE_km_s": 8.687475531886054,
+    "equal_galaxy_RMSE_km_s": 8.715570617059361,
+    "mean_residual_km_s": 1.5893140082644466
+  },
+  "fixed_RAR_reference": {
+    "discovery": {
+      "pooled_RMSE_km_s": 10.714680925960549,
+      "equal_galaxy_RMSE_km_s": 11.272699201707878,
+      "mean_residual_km_s": 1.353161781073701
+    },
+    "formula_holdout": {
+      "pooled_RMSE_km_s": 9.241618354321798,
+      "equal_galaxy_RMSE_km_s": 9.328175033114663,
+      "mean_residual_km_s": 2.837414611475755
+    }
+  },
+  "holdout_equal_galaxy_improvement_fraction": 0.06567248297556372,
+  "holdout_pooled_improvement_fraction": 0.0599616648502479,
+  "holdout_galaxies_improved": 27,
+  "holdout_galaxies_improved_fraction": 0.675,
+  "bootstrap_probability_equal_galaxy_MSE_improvement": 0.985,
+  "gates": {
+    "holdout_equal_galaxy_improvement_pass": true,
+    "holdout_pooled_RMSE_not_worse_pass": true,
+    "holdout_galaxies_improved_fraction_pass": true,
+    "bootstrap_probability_improvement_pass": true
+  },
+  "all_advance_gates_pass": true,
+  "claim_limits": [
+    "The holdout is formula-level only: nuisance values were previously fit in the parent SPARC analysis.",
+    "The candidate family contains an empirical RAR scalar completion, so success would validate only the added spatial perturbation, not derive RAR.",
+    "The force-equivalent spherical mapping is a diagnostic approximation to disk gravity, not a covariant field equation."
+  ]
+}

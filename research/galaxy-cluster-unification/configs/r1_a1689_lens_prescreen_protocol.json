@@ -1,0 +1,66 @@
+{
+  "protocol_version": "R1B1-A1689-lens-prescreen-0.1",
+  "frozen_before_local_catalog_ingest": true,
+  "system": "Abell 1689",
+  "purpose": "Decide from public image geometry alone whether the figure-only Loubser BCG dynamics host is worth a frozen raw-Gemini reconstruction. This is an acquisition prescreen, not a lens or gravity fit.",
+  "selection_blinding": "A1689 was selected because it independently appears in the completed Loubser dynamics inventory and has a primary machine-readable multiple-image catalog. No gravity residual or model preference was inspected.",
+  "center": {
+    "ra_hms": "13:11:29.52",
+    "dec_dms": "-01:20:27.9",
+    "origin": "Loubser et al. 2018 BCG coordinates",
+    "common_center_required": true
+  },
+  "distance_conversion": {
+    "cluster_redshift": 0.183,
+    "kpc_per_arcsec": 3.0425531914893615,
+    "origin": "Coe et al. 2010 reports 47.0 arcsec as 143 kpc for A1689; the ratio is used only for frozen radial-support bookkeeping",
+    "role": "geometry only; not a gravity or cosmology target"
+  },
+  "dynamics_support": {
+    "one_sided_radius_kpc": 15.0,
+    "origin": "typical one-sided support stated for the Loubser et al. radial profiles",
+    "reported_spatial_bins": 9,
+    "machine_readable_profile": false,
+    "published_covariance": false
+  },
+  "lens_source": {
+    "primary_catalog": "Coe et al. 2010, ApJ 723, 1678, CDS J/ApJ/723/1678 tables 5 and 7",
+    "expected_image_count": 135,
+    "expected_family_count": 42,
+    "catalog_coordinates": "corrected ICRS/J2000 multiple-image positions",
+    "independent_redshift_policy": "Use a table-5 spectroscopic redshift when present. Otherwise retain the table-5 Bayesian photometric redshift and its published 95-percent interval. Table-7 input/output lens redshifts remain audit-only.",
+    "forbidden_as_input": [
+      "LensPerfect optimized output redshifts",
+      "table-7 input redshifts lacking independent table-5 spectroscopy or photometry",
+      "published convergence or NFW mass maps",
+      "published magnifications"
+    ]
+  },
+  "pre_registered_gates": {
+    "catalog_integrity": {
+      "exact_image_count": 135,
+      "exact_family_count": 42,
+      "unique_coordinate_rows_required": true
+    },
+    "same_radius_bridge": {
+      "minimum_independently_redshift_anchored_images_inside_dynamics_support": 3,
+      "minimum_independently_redshift_anchored_families_inside_dynamics_support": 2,
+      "minimum_distinct_image_radii_inside_dynamics_support": 3
+    },
+    "raw_dynamics_reconstruction_authorization": {
+      "catalog_integrity_gate_required": true,
+      "same_radius_bridge_gate_required": true,
+      "raw_gemini_products_must_be_public_and_source_matched": true
+    }
+  },
+  "failure_policy": "If the same-radius gate fails, retain A1689 as a valid lens catalog and documented geometry shortfall, but do not spend a raw-spectra reduction cycle or extend the 15-kpc support after inspecting a model.",
+  "authorization": {
+    "download_hash_and_normalize_observables": true,
+    "compute_geometry_and_gate_outcomes": true,
+    "download_or_reduce_raw_gemini_spectra_before_prescreen_pass": false,
+    "fit_lens_mass_model": false,
+    "infer_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

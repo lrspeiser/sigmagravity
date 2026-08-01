@@ -1,0 +1,172 @@
+{
+  "status": "completed frozen Stage 4 measured/profile-constrained host validation",
+  "inputs": {
+    "config_sha256": "0033445251a7b25e5ecd8b363232ef1fc96d424fa5b26720a4ce4bce16e6a9a8",
+    "gates_sha256": "a804b869a00d74425d80a77cdd1864c7e9d77d7aed8a447a7d5ffe182219d966",
+    "sample_sha256": "f47bd78b8a6a5ae1c78c82e5e7ddfb01d1611eb371632f816359508d5388fa9d",
+    "prior_report_sha256": "2f555af4185f414dae60c305386521cfcb4b76dcb4b0d6482a441fca8d0574fc",
+    "coverage_report_sha256": "efa98bf345d53f43d62097964b60e3d8dbe55b87b9c5cbdc1238ecfaa3932d32",
+    "erass_sha256": "e79c392e2d7b9e26105ead7d56787713465aa853feb040a227891fb9571b9a54",
+    "gas_profiles_sha256": "d872b173a3388af2ce3dc6e9e1274bfbee894e25d2e276f8e8870183de325cac"
+  },
+  "sample": {
+    "systems": 34,
+    "profile_constrained_systems": 34,
+    "direct_xray_systems": 10,
+    "independent_satellite_catalog_systems": 30,
+    "minimum_required": 30,
+    "passes_coverage": true,
+    "bcg_residual_used_for_selection": false
+  },
+  "frozen_h7s_parameters": {
+    "SPARC_systems": 131,
+    "CLASH_systems": 20,
+    "parameters": {
+      "F": 99.99999999999677,
+      "chi_t": 4.504241726150346e-06,
+      "w_dex": 0.5729980591636848
+    },
+    "raw_vector": [
+      1.999999999999986,
+      -5.346378310537656,
+      0.5729980591636848
+    ],
+    "optimizer_success": true,
+    "starts": 16,
+    "bcg_values_used": false
+  },
+  "gas_fraction_relation": {
+    "catalog_systems": 10439,
+    "slope": 0.5151243512427957,
+    "intercept_at_1e14_msun": -1.3583096746695,
+    "coefficient_covariance_slope_intercept": [
+      [
+        0.0012160591575965521,
+        -1.609466907586476e-05
+      ],
+      [
+        -1.609466907586476e-05,
+        0.00033825268190239337
+      ]
+    ],
+    "robust_scatter_dex": 0.17748223502069546
+  },
+  "profile_inputs": {
+    "published_gas_profiles": 46,
+    "gas_profile_population_potential_factor": {
+      "p05": 2.033294590278179,
+      "p16": 2.125782043497751,
+      "median": 2.440777566368686,
+      "p84": 2.764172658259865,
+      "p95": 2.9619771328702527
+    },
+    "host_fiducial_gas_potential_factor": {
+      "p05": 2.436470928575253,
+      "p16": 2.439337174347373,
+      "median": 2.4473142337764195,
+      "p84": 2.4493841384990094,
+      "p95": 2.4498765764012047
+    },
+    "bcg_potential_factor": {
+      "p05": 1.5023833165038842,
+      "p16": 1.5629058376178044,
+      "median": 1.758161469428209,
+      "p84": 2.1047372006050358,
+      "p95": 3.309202429367347
+    },
+    "satellite_potential_factor": {
+      "p05": 2.917945098070231,
+      "p16": 2.9976268466847356,
+      "median": 3.104661737389758,
+      "p84": 3.273294705312972,
+      "p95": 3.466006277230398
+    },
+    "fgas500": {
+      "p05": 0.030450383023442426,
+      "p16": 0.03568098861329737,
+      "median": 0.04350897772195713,
+      "p84": 0.05584159579516604,
+      "p95": 0.07323020942608327
+    }
+  },
+  "point_metrics": {
+    "systems": 34,
+    "chi2_per_point": 1.6578496712129958,
+    "rms_dex": 0.13195362885758202,
+    "median_abs_dex": 0.08884317407933207,
+    "mean_residual_dex": -0.08268018981568105,
+    "by_measurement_source": {
+      "DynPop_NSA_calibrated_proxy": {
+        "systems": 23,
+        "chi2_per_point": 1.1286301671465226,
+        "rms_dex": 0.1279094466528326,
+        "median_abs_dex": 0.09934414428275495,
+        "mean_residual_dex": -0.07423425600180607
+      },
+      "Tian2024_direct": {
+        "systems": 11,
+        "chi2_per_point": 2.764399543351985,
+        "rms_dex": 0.1400327348890235,
+        "median_abs_dex": 0.07462389652578061,
+        "mean_residual_dex": -0.10033986960832873
+      }
+    }
+  },
+  "point_gates": {
+    "continue": {
+      "chi2_per_point": true,
+      "absolute_mean_residual": true,
+      "passes_all": true
+    },
+    "scientific_success": {
+      "chi2_per_point": true,
+      "absolute_mean_residual": true,
+      "rms": true,
+      "passes_all": true
+    }
+  },
+  "uncertainty_propagation": {
+    "realizations": 5000,
+    "seed": 20260726,
+    "chi2_per_point": {
+      "p05": 1.4931390686730357,
+      "p16": 1.5573620082681023,
+      "median": 1.6510448182691186,
+      "p84": 1.7504468433494036,
+      "p95": 1.8175819916870974
+    },
+    "rms_dex": {
+      "p05": 0.12490839139375029,
+      "p16": 0.12772473443728963,
+      "median": 0.13195799612423476,
+      "p84": 0.13630111902784664,
+      "p95": 0.13911370542301554
+    },
+    "mean_residual_dex": {
+      "p05": -0.0873973541494688,
+      "p16": -0.08396778854596355,
+      "median": -0.07884823976612446,
+      "p84": -0.07353675295779016,
+      "p95": -0.07031680887617187
+    },
+    "continue_pass_probability": 1.0,
+    "scientific_success_pass_probability": 1.0,
+    "required_continue_probability": 0.8,
+    "required_scientific_probability": 0.5
+  },
+  "decision": {
+    "robust_continue": true,
+    "robust_scientific_success": true,
+    "stage_4_mechanism_supported": true,
+    "next_action": "retain measured baryonic potential as the environment variable, but repair Stage 3 action identifiability before relativistic completion",
+    "stage_3_identifiability_failure_still_active": true
+  },
+  "guardrails": [
+    "No BCG acceleration or residual set a host mass, profile, or normalization.",
+    "The H7s parameters are copied unchanged from the SPARC+CLASH development fit.",
+    "All 34 frozen systems are scored; none is removed using its residual.",
+    "Gas and satellite mass outside R500 is excluded.",
+    "Passing Stage 4 does not override the Stage 3 hard-bound failure.",
+    "The point construction was inspected during development. It is confirmatory against the pre-existing Stage 4 thresholds, but it is not a newly blind test."
+  ]
+}

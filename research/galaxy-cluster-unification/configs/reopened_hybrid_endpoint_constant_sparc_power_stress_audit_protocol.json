@@ -1,0 +1,63 @@
+{
+  "protocol_version": "REOPENED-HYBRID-ENDPOINT-CONSTANT-SPARC-POWER-STRESS-AUDIT-0.1.0",
+  "frozen_utc": "2026-08-01T11:50:00Z",
+  "status": "frozen_before_fixed_parameter_scores",
+  "purpose": "Test whether the high-q moving ridge is governed by approximately constant SPARC effective power while its CLASH effective power continues to change.",
+  "claim_boundary": [
+    "The measured median SPARC slope is -1.5565053, so each q slice samples e_SPARC=q-1.5565053*p near 5.6, 5.8, and 6.0.",
+    "The same rows deliberately do not hold CLASH effective power fixed because the measured CLASH slope is -0.4478067.",
+    "q through 20 and the corresponding p values are stress tests for coordinate redundancy, not proposed constants.",
+    "All rows reuse one gravity branch, omit raw lensing, and are used only to choose a compact full-refit range.",
+    "Approximate invariance can identify an empirical coordinate but cannot establish a microscopic power law."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv"
+  },
+  "base_sources": {
+    "high_q_endpoint": {
+      "report": "results/reopened_hybrid_endpoint_boundary_refinement/report.json",
+      "variant": "surface_q_3p5:radial_memory_gbar_power=-0.875",
+      "settings": {"combination": "interaction", "interaction_eta": 1.0, "screen_power": 1.5, "rg_saturation_ceiling": 2.0, "sigma_saturation_ceiling": 1.5}
+    }
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {"names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"]},
+  "common_memory": {
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 0.5,
+    "radial_memory_gbar_power": 1.413423,
+    "radial_memory_radius_power": 8.0,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false,
+    "radial_memory_slope_gate_strength": 0.0
+  },
+  "audit_designs": {
+    "constant_sparc_power_q_8": {"fixed_name": "radial_memory_gbar_power", "values": [1.284930, 1.413423, 1.541916], "overrides": {"radial_memory_radius_power": 8.0}},
+    "constant_sparc_power_q_10": {"fixed_name": "radial_memory_gbar_power", "values": [2.569860, 2.698353, 2.826845], "overrides": {"radial_memory_radius_power": 10.0}},
+    "constant_sparc_power_q_12": {"fixed_name": "radial_memory_gbar_power", "values": [3.854789, 3.983282, 4.111775], "overrides": {"radial_memory_radius_power": 12.0}},
+    "constant_sparc_power_q_14": {"fixed_name": "radial_memory_gbar_power", "values": [5.139719, 5.268212, 5.396705], "overrides": {"radial_memory_radius_power": 14.0}},
+    "constant_sparc_power_q_16": {"fixed_name": "radial_memory_gbar_power", "values": [6.424649, 6.553142, 6.681635], "overrides": {"radial_memory_radius_power": 16.0}},
+    "constant_sparc_power_q_18": {"fixed_name": "radial_memory_gbar_power", "values": [7.709579, 7.838072, 7.966565], "overrides": {"radial_memory_radius_power": 18.0}},
+    "constant_sparc_power_q_20": {"fixed_name": "radial_memory_gbar_power", "values": [8.994508, 9.123001, 9.251494], "overrides": {"radial_memory_radius_power": 20.0}}
+  },
+  "references": {"SPARC_fixed_RAR_outer_RMSE_km_s": 10.681519066526649, "bridge_target_RMSE_dex": 0.139},
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1,
+    "audit_mercury_quadrature_points": 4096
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_endpoint_constant_sparc_power_stress_audit/report.json",
+    "scores": "results/reopened_hybrid_endpoint_constant_sparc_power_stress_audit/scores.csv",
+    "family_impacts": "results/reopened_hybrid_endpoint_constant_sparc_power_stress_audit/family_impacts.csv",
+    "summary": "results/reopened_hybrid_endpoint_constant_sparc_power_stress_audit/SUMMARY.md"
+  }
+}

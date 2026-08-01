@@ -1,0 +1,147 @@
+{
+  "report_version": "P0580-CONSERVATIVE-RETURN-SPARC-RESULTS-0.1.0",
+  "status": "complete_conservative_return_SPARC_sweep",
+  "protocol": {
+    "path": "configs/p0580_conservative_return_sparc_protocol.json",
+    "sha256": "aee4d814e3a154466f08880bdc2ab3cefbca8cde6e5a6213e9bb55dbea0b17bc"
+  },
+  "coverage": {
+    "candidates": 432,
+    "galaxies": 131,
+    "outer_points": 968,
+    "route_profiles": 6288
+  },
+  "references": {
+    "Newtonian_same_nuisance": {
+      "outer_RMSE_km_s": 72.39921475798786,
+      "outer_equal_galaxy_RMSE_km_s": 66.60707470287704,
+      "outer_mean_residual_km_s": -66.21824927749422
+    },
+    "fixed_RAR_same_nuisance": {
+      "outer_RMSE_km_s": 10.348465773189677,
+      "outer_equal_galaxy_RMSE_km_s": 10.716437036615254,
+      "outer_mean_residual_km_s": 1.742624817150273
+    },
+    "arc_apogee_R1322": {
+      "scale_mix_mu": 1.0,
+      "alpha": 0.75,
+      "apogee_ratio": 100.0,
+      "screen_exponent": 1.0,
+      "candidate_id": "R1322",
+      "universal_q": 1.455674005470695,
+      "q_at_boundary": false,
+      "fold_q_min": 1.4468069760012336,
+      "fold_q_max": 1.4685448787907915,
+      "outer_RMSE_km_s": 12.947301263408695,
+      "outer_equal_galaxy_RMSE_km_s": 13.152660424934837,
+      "cross_galaxy_outer_RMSE_km_s": 12.966366834672476,
+      "cross_galaxy_outer_equal_galaxy_RMSE_km_s": 13.16856590575065,
+      "maximum_fractional_change_limb_to_Saturn": 1.3487033606588933e-08,
+      "Earth_orbit_fractional_change": 3.836800492813811e-11,
+      "Saturn_orbit_fractional_change": 1.3487033606588933e-08,
+      "Mercury_precession_mas_per_century": -2.0409383725400487,
+      "Cassini_proxy_pass": true,
+      "Earth_proxy_pass": true,
+      "Mercury_proxy_pass": true,
+      "all_solar_proxies_pass": true
+    }
+  },
+  "primary_inverse_candidate": {
+    "gate_mode": "cluster_logistic",
+    "return_length_over_R80": 0.36,
+    "width_over_R80": 0.23,
+    "route_mode": "endpoint",
+    "route_fraction_multiplier": 1.0,
+    "outer_RMSE_km_s": 70.92603164566839,
+    "outer_equal_galaxy_RMSE_km_s": 65.2005479813258,
+    "outer_mean_residual_km_s": -64.56010267912538,
+    "galaxies_improved_vs_Newtonian": 110,
+    "galaxy_improved_fraction": 0.8396946564885496
+  },
+  "P0579_calibration_selected_candidate": {
+    "gate_mode": "none",
+    "return_length_over_R80": 0.5,
+    "width_over_R80": 0.28,
+    "route_mode": "transverse_arc_0.5",
+    "route_fraction_multiplier": 1.0,
+    "outer_RMSE_km_s": 71.96697589308305,
+    "outer_equal_galaxy_RMSE_km_s": 66.24133678993559,
+    "outer_mean_residual_km_s": -65.99711758192596,
+    "galaxies_improved_vs_Newtonian": 43,
+    "galaxy_improved_fraction": 0.3282442748091603
+  },
+  "posthoc_best_candidate": {
+    "candidate_id": "K0110",
+    "gate_mode": "none",
+    "return_length_over_R80": 0.65,
+    "width_over_R80": 0.18,
+    "route_mode": "endpoint",
+    "route_fraction_multiplier": 1.0,
+    "outer_RMSE_km_s": 69.32136911742643,
+    "outer_equal_galaxy_RMSE_km_s": 63.56279130656263,
+    "outer_mean_residual_km_s": -62.388127422132435,
+    "galaxies_improved_vs_Newtonian": 119,
+    "galaxy_improved_fraction": 0.9083969465648855
+  },
+  "primary_to_Newtonian_RMSE_ratio": 0.9796519462642799,
+  "primary_to_RAR_RMSE_ratio": 6.85377264612695,
+  "maximum_total_mass_conservation_error": 6.661338147750939e-16,
+  "parameter_impacts": [
+    {
+      "parameter": "route_mode",
+      "best_level": "endpoint",
+      "best_median_outer_RMSE_km_s": 70.909157320436,
+      "worst_level": "radial_arc_0.5",
+      "worst_median_outer_RMSE_km_s": 72.73206274044172,
+      "outer_RMSE_impact_span_km_s": 1.8229054200057249
+    },
+    {
+      "parameter": "return_length_over_R80",
+      "best_level": "0.65",
+      "best_median_outer_RMSE_km_s": 71.29110707230956,
+      "worst_level": "0.25",
+      "worst_median_outer_RMSE_km_s": 71.76665462383713,
+      "outer_RMSE_impact_span_km_s": 0.4755475515275691
+    },
+    {
+      "parameter": "width_over_R80",
+      "best_level": "0.18",
+      "best_median_outer_RMSE_km_s": 71.39597974513018,
+      "worst_level": "0.28",
+      "worst_median_outer_RMSE_km_s": 71.6201896405549,
+      "outer_RMSE_impact_span_km_s": 0.22420989542472114
+    },
+    {
+      "parameter": "gate_mode",
+      "best_level": "cluster_logistic",
+      "best_median_outer_RMSE_km_s": 71.51013999181683,
+      "worst_level": "none",
+      "worst_median_outer_RMSE_km_s": 71.55756429478782,
+      "outer_RMSE_impact_span_km_s": 0.04742430297099531
+    },
+    {
+      "parameter": "route_fraction_multiplier",
+      "best_level": "1.0",
+      "best_median_outer_RMSE_km_s": 71.50453189125409,
+      "worst_level": "0.5",
+      "worst_median_outer_RMSE_km_s": 71.53033839441582,
+      "outer_RMSE_impact_span_km_s": 0.025806503161732053
+    }
+  ],
+  "gates": {
+    "primary_improves_Newtonian_outer_RMSE": true,
+    "primary_within_50_percent_of_fixed_RAR_outer_RMSE": false,
+    "primary_improves_at_least_60_percent_of_galaxies_vs_Newtonian": true,
+    "mass_conservation_pass": true,
+    "all_profiles_finite_pass": true,
+    "solar_point_collapse_pass": true,
+    "primary_conservative_return_supported": false
+  },
+  "claim_limits": [
+    "M_b(<r)=g_b*r^2/G is a spherical force-equivalent representation of disk, gas, and bulge forces, not a literal three-dimensional mass reconstruction.",
+    "Radial Gaussian residence is the one-dimensional analogue of the two-dimensional cluster kernel; vertical disk structure is not represented.",
+    "The same fixed-RAR nuisances are reused to isolate formula response and do not constitute an independent likelihood fit for the return law.",
+    "All 432 candidate rankings on SPARC are exploratory; only K0338 and K0107 were fixed without SPARC scores.",
+    "Conservative redistribution cannot increase the force outside a surface enclosing the entire routed source, which is a deliberate falsifiable restriction."
+  ]
+}

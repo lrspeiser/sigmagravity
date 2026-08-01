@@ -1,0 +1,137 @@
+{
+  "protocol_version": "NBM0-A1-0.1-reciprocal-action-space",
+  "frozen_utc": "2026-07-28T03:07:00Z",
+  "status": "frozen before executing the reciprocal-source and radial-shape gates",
+  "parent_protocol": "configs/nonlocal_basin_metric_protocol.json",
+  "purpose": "Complete the minimal reciprocal action, remove unobservable parameter duplications, and exhaust a declared ten-family weak-field search space before any astronomical parameter fit.",
+  "canonical_action": {
+    "signature": "(-,+,+,+)",
+    "equation": "S = integral sqrt(-g) [M_Pl^2 R/2 - M_Pl^2((grad X)^2 + L_X^-2 X^2)/2 - M_Pl^2 c_U F_U^2/4 + lambda(U^2+1)] + S_m[g_tilde, matter]",
+    "physical_metric": "g_tilde_mn = exp(2 alpha X) [g_mn + 2 beta X U_m U_n]",
+    "matter_variation": "J_X = (sqrt(-g_tilde)/sqrt(-g))/2 T_tilde^mn partial_X g_tilde_mn",
+    "scalar_equation": "(Box-L_X^-2)X = -J_X/M_Pl^2",
+    "dust_limit": "J_X = (beta-alpha) rho c^2, so (nabla^2-L_X^-2)X = (alpha-beta) 8 pi G rho/c^2",
+    "cosmological_contrast_rule": "T-T_background is not inserted as a one-way local source. First solve the homogeneous cosmological background; the perturbation delta X is then sourced by delta J_X on the U-defined slicing.",
+    "vector_caveat": "The Maxwell-aether truncation is a weak-field control only. Its complete scalar/vector mode health and preferred-frame PPN limits are not assumed to pass."
+  },
+  "weak_field_observables": {
+    "source_coupling": "d = alpha-beta",
+    "point_source_field": "X = -2 d G M exp(-r/L_X)/(c^2 r)",
+    "dynamics_amplitude": "A_dyn = 2 d^2",
+    "lensing_amplitude": "A_lens = -beta d",
+    "lensing_to_dynamics_ratio": "q = A_lens/A_dyn = -beta/[2(alpha-beta)]",
+    "identifiable_parameters": [
+      "A_dyn",
+      "L_X",
+      "q"
+    ],
+    "field_sign_degeneracy": "(alpha,beta,X) -> (-alpha,-beta,-X) leaves all weak-field observables unchanged",
+    "removed_parameter": "kappa_X is not independent in the canonical reciprocal action"
+  },
+  "search_boundary": {
+    "source": "universal baryonic stress-energy contrast plus cosmological boundary data; no per-object charge",
+    "metric": "one universal physical metric; no lensing-only normalization",
+    "new_global_parameters_max": 4,
+    "per_object_parameters_max": 0,
+    "astronomical_fit_authorized": false,
+    "MOND_boundary": "A local scale-invariant p-Laplacian that recreates the MOND/AQUAL galaxy equation is recorded but not pursued, following the user's direction to leave that branch.",
+    "meaning_of_exhaustive": "Exhaustive over the ten declared combinations of linear/nonlinear/local/nonlocal response and conformal/disformal/self-stress metric completion. This is not a claim to enumerate every mathematically possible field theory."
+  },
+  "candidate_families": [
+    {
+      "id": "A0",
+      "name": "canonical conformal scalar",
+      "operator": "local linear Klein-Gordon",
+      "metric_channel": "conformal only",
+      "gate": "additional Weyl/lensing response must be nonzero"
+    },
+    {
+      "id": "A1",
+      "name": "prescribed-time disformal scalar",
+      "operator": "local linear Klein-Gordon",
+      "metric_channel": "disformal with nondynamical U",
+      "gate": "preferred time direction must have reciprocal dynamical equations"
+    },
+    {
+      "id": "A2",
+      "name": "reciprocal canonical scalar plus dynamical aether",
+      "operator": "local finite-range Klein-Gordon",
+      "metric_channel": "conformal-disformal",
+      "gate": "outer point-mass circular-speed slope must reach -0.1 to +0.1 over at least one radial decade"
+    },
+    {
+      "id": "A3",
+      "name": "massless reciprocal scalar limit",
+      "operator": "local massless wave operator",
+      "metric_channel": "conformal-disformal",
+      "gate": "flat-curve radial shape and a specified Solar-System screening mechanism"
+    },
+    {
+      "id": "A4",
+      "name": "positive spectral Yukawa continuum",
+      "operator": "linear causal response with nonnegative spectral weights",
+      "metric_channel": "conformal-disformal",
+      "gate": "a healthy spectral mixture must produce a nondecreasing force enhancement with radius"
+    },
+    {
+      "id": "A5",
+      "name": "fractional linear infrared operator",
+      "operator": "(-nabla^2)^p with p=3/2 for a logarithmic potential",
+      "metric_channel": "conformal-disformal",
+      "gate": "simultaneously flat rotation and v_flat^4 proportional to baryonic mass"
+    },
+    {
+      "id": "A6",
+      "name": "local scale-invariant nonlinear p-Laplacian",
+      "operator": "div(|grad X| grad X)",
+      "metric_channel": "conformal-disformal",
+      "gate": "outside the retired MOND/AQUAL galaxy branch"
+    },
+    {
+      "id": "A7",
+      "name": "regular external void basin",
+      "operator": "smooth local or finite-range boundary field near a galaxy center",
+      "metric_channel": "tidal response",
+      "gate": "isotropic internal acceleration must approximate 1/r over a radial decade"
+    },
+    {
+      "id": "A8",
+      "name": "causal nonlinear nonlocal basin response",
+      "operator": "retarded nonlinear form factor acting on density contrast",
+      "metric_channel": "one conformal-disformal metric",
+      "gate": "derive a localized reciprocal action, stable spectrum, flat-curve and mass-scaling limits, and cluster slip without per-class switches"
+    },
+    {
+      "id": "A9",
+      "name": "self-gravitating basin phase",
+      "operator": "stable basin field whose stress-energy and nonminimal coupling gravitate",
+      "metric_channel": "Einstein metric plus derived field stress and slip",
+      "gate": "derive positive-energy accumulation, void repulsion, halo-like lensing, screening, and a unique action with at most four globals"
+    }
+  ],
+  "synthetic_recovery": {
+    "mass_solar": 80000000000.0,
+    "dynamics_amplitude": 1.8,
+    "range_kpc": 24.0,
+    "lensing_to_dynamics_ratio": 2.4,
+    "radius_over_range_min": 0.2,
+    "radius_over_range_max": 8.0,
+    "points": 80,
+    "maximum_log_residual": 1e-8,
+    "maximum_jacobian_condition_number": 100.0
+  },
+  "structural_gates": {
+    "reciprocity": "source and force must follow from variation of the same matter action",
+    "radial_shape": "a candidate intended to explain galaxy outskirts must permit |d ln v/d ln r| <= 0.1 over one radial decade for a finite baryonic source",
+    "mass_scaling": "a flat linear point-source solution must not predict v_flat^4 proportional to M_b^2",
+    "lensing": "the same constants and metric must determine both Psi and Phi",
+    "health": "positive kinetic and gradient matrices, a well-posed causal problem, luminal tensor propagation, and an explicit Solar-System screening limit",
+    "data": "no empirical coupling fit until the separate same-system observable gate passes"
+  },
+  "prior_art_primary_sources": [
+    "https://arxiv.org/abs/astro-ph/0403694",
+    "https://arxiv.org/abs/gr-qc/0402005",
+    "https://arxiv.org/abs/0801.1547",
+    "https://arxiv.org/abs/2112.13103"
+  ]
+}

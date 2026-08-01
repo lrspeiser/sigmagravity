@@ -1,0 +1,4 @@
+parameter,mean_root_count_span,safe_variant_fraction_span,mean_system_root_pattern_span,maximum_system_root_pattern_span,safe_cluster_RMS_span_arcsec,SPARC_RMSE_span_km_s
+width_over_R80,1.0,0.1111111111111111,0.75,1.3333333333333335,0.0,0.15652061554480667
+route_fraction_multiplier,1.1111111111111107,0.1111111111111111,0.4722222222222222,1.3333333333333335,0.0,0.30451563976731677
+contrast_cap,0.0,0.1111111111111111,0.0,0.0,0.0,0.0

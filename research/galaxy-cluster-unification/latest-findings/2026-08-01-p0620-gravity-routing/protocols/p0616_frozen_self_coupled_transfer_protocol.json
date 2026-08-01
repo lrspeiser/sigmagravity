@@ -1,0 +1,72 @@
+{
+  "protocol_version": "P0616-FROZEN-SELF-COUPLED-TRANSFER-0.1.0",
+  "frozen_utc": "2026-08-01T21:20:00Z",
+  "status": "frozen_after_P0615_before_A383_MS2137_self_coupled_scores",
+  "question": "Does the parameter-free P0615 quadratic self-coupling transfer to A383 and MS2137 under full ordinary-geometry refits?",
+  "chronology": {
+    "prospective_relative_to_P0615_formula": true,
+    "pristine_project_holdout": false,
+    "reason": "Both systems were used by other field families, but neither their P0554 excess at R80, member-light quadrupole amplitude, nor response to the P0615 endpoint field was computed before this freeze."
+  },
+  "locked_formula": {
+    "Delta80": "alpha_P0554(R80)/alpha_b(R80)-1",
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "angular_amplitude": "epsilon=Q^2/(1+Delta80)",
+    "return_length_over_R80": 0.36,
+    "width_over_R80": 0.23,
+    "contrast_mode": "tanh",
+    "contrast_cap": 20.0,
+    "new_fitted_gravity_parameters": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "systems": ["A383", "MS2137"],
+  "fit": {
+    "ordinary_geometry_parameters_per_system": 6,
+    "starts_per_variant_system": 16,
+    "seed": 38321370615,
+    "paired_random_starts": true
+  },
+  "inputs": {
+    "P0611_protocol": "configs/p0611_frozen_dual_misalignment_raw_transfer_protocol.json",
+    "P0566_protocol": "configs/p0566_a383_ms2137_morphology_gate_transfer_protocol.json",
+    "P0566_acquisition_protocol": "configs/p0566_a383_ms2137_transfer_acquisition_protocol.json",
+    "base_raw_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "metric_protocol": "configs/metric_slip_raw_lensing_protocol.json",
+    "P0554_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "P0554_scores": "results/arc_invariant_pareto_refinement/variant_scores.csv",
+    "P0615_protocol": "configs/p0615_self_coupled_quadrupole_route_protocol.json",
+    "P0581_protocol": "configs/p0581_locked_endpoint_exact_root_protocol.json",
+    "P0554_report": "results/arc_invariant_pareto_refinement/report.json",
+    "SPARC_report": "results/sparc_independent_nuisance_refit/report.json",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "A383_member_catalog": "data/raw/r1_lens_nuisance_inputs/a383/hlsp_clash_hst_acs-ir_a383_cat.txt",
+    "MS2137_member_catalog": "data/raw/r1_lens_nuisance_inputs/ms2137/hlsp_clash_hst_acs-ir_ms2137_cat.txt"
+  },
+  "gates": {
+    "all_training_and_heldout_roots_each_system": true,
+    "both_systems_not_worse": true,
+    "equal_system_heldout_improvement_fraction_min": 0.0,
+    "equal_system_heldout_RMS_arcsec_max": 2.0,
+    "galaxy_RMSE_to_fixed_RAR_max": 1.5,
+    "Solar_all_proxies_required": true
+  },
+  "outputs": {
+    "directory": "results/p0616_frozen_self_coupled_transfer",
+    "member_sources": "member_sources.csv",
+    "system_states": "system_states.csv",
+    "scores": "scores.csv",
+    "predictions": "predictions.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "figure": "p0616_frozen_self_coupled_transfer.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "A383 and MS2137 are chronologically prospective for the P0615 formula but project-spent under other formula families.",
+    "The CLASH photometric member selection contains contamination and F160W light is not a stellar-mass map.",
+    "The source catalog omits hot gas and diffuse intracluster light.",
+    "Six conventional lens-geometry variables and training-family source positions are refitted per variant.",
+    "Two relatively relaxed systems cannot validate a population law.",
+    "The P0554 scalar parent remains phenomenological and the endpoint operator is not derived from a covariant action."
+  ]
+}

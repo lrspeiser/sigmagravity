@@ -1,0 +1,71 @@
+{
+  "protocol_version": "R1-CLASH-Zitrin2015-0.1",
+  "frozen_before_local_product_ingest": true,
+  "purpose": "Close observable-catalog coverage for the seven remaining Tian2020 CLASH systems using the complete published CLASH multiple-image table, while keeping its model-selected redshifts, archived LTM likelihood scale, and GR-derived maps out of the metric-neutral response target.",
+  "primary_source": {
+    "citation": "Zitrin et al. 2015, ApJ 801, 44",
+    "arxiv": "1411.1414v4",
+    "cds_catalog": "J/ApJ/801/44",
+    "doi": "10.1088/0004-637X/801/1/44"
+  },
+  "systems": [
+    {"system": "A209", "catalog_id": "A209", "mast_alias": "a209"},
+    {"system": "MACS0647", "catalog_id": "M0647", "mast_alias": "macs0647"},
+    {"system": "MACS0717", "catalog_id": "M0717", "mast_alias": "macs0717"},
+    {"system": "MACS0744", "catalog_id": "M0744", "mast_alias": "macs0744"},
+    {"system": "MACS1149", "catalog_id": "M1149", "mast_alias": "macs1149"},
+    {"system": "MACS1720", "catalog_id": "M1720", "mast_alias": "macs1720"},
+    {"system": "RXJ1532", "catalog_id": "M1532", "mast_alias": "rxj1532"}
+  ],
+  "pre_registered_row_policy": {
+    "measured_position_row": "Keep a published sky coordinate only when the arc identifier contains none of c, p, or ?. The paper defines c as candidate, p as a predicted location for a missing counterimage, and ? as additionally ambiguous.",
+    "independent_spectroscopic_redshift": "Treat abs(z.in) as spectroscopic only when the published value is negative, exactly following the table note.",
+    "independent_photometric_redshift": "When no spectroscopic value exists, retain the row-level CLASH catalog zph and its published 95-percent bounds as an independent photometric summary. Do not convert the interval to a Gaussian error.",
+    "family_summary": "A family is independently redshift-anchored only when at least one retained measured image has a spectroscopic z.in flag or a finite zph summary. Preserve row-level values; do not average them after inspecting lens residuals.",
+    "model_redshift": "Retain positive z.in and both LTM/NFW predicted redshifts for audit only; never use them as metric-neutral inputs.",
+    "position_error": "Record the archived Zitrin LTM v2 sigma_pos convention, but label it model-dependent because it is the optimization scale used by a GR lens model rather than a published astrometric measurement covariance.",
+    "coordinate_covariance": "Do not manufacture a metric-neutral covariance matrix. A diagonal matrix based on sigma_pos may be exported only as an explicitly model-dependent control covariance.",
+    "duplicate_policy": "Reject exact duplicate cluster-plus-arc identifiers and duplicate coordinates within a cluster."
+  },
+  "product_separation": {
+    "metric_neutral_observables": [
+      "published measured image sky coordinates",
+      "negative-sign spectroscopic z.in values and their references",
+      "CLASH catalog photometric-redshift summaries and published 95-percent bounds"
+    ],
+    "model_dependent_audit_products": [
+      "positive adopted z.in values",
+      "LTM and PIEMDeNFW predicted source redshifts",
+      "archived Zitrin LTM v2 sigma_pos likelihood convention",
+      "archived LTM parameter summaries"
+    ],
+    "intentionally_not_downloaded": [
+      "convergence maps",
+      "deflection maps",
+      "shear maps",
+      "magnification maps",
+      "MCMC range map ensembles"
+    ]
+  },
+  "pre_registered_checks": {
+    "exact_system_count": 7,
+    "published_table2_record_count": 579,
+    "at_least_one_measured_position_per_system": true,
+    "at_least_one_independently_redshift_anchored_family_per_system": true,
+    "all_fourteen_mast_readme_and_parameter_files_required": true,
+    "all_downloaded_files_checksum_audited": true,
+    "metric_neutral_position_covariance_expected": false,
+    "metric_neutral_weyl_posterior_expected": false
+  },
+  "success_outcome": "All seven systems receive a checksum-audited measured-position catalog and at least one independently redshift-anchored family, raising raw observable coverage from 13/20 to 20/20.",
+  "failure_policy": "Retain exact system-level shortfalls. Do not reinstate ambiguous or predicted images, infer missing source redshifts from a lens model, reinterpret sigma_pos as astrometric covariance, or use GR-derived maps as observables.",
+  "authorization": {
+    "download_and_hash_public_products": true,
+    "normalize_measured_positions_and_independent_redshifts": true,
+    "export_model_dependent_sigma_control": true,
+    "declare_metric_neutral_coordinate_likelihood_ready": false,
+    "infer_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

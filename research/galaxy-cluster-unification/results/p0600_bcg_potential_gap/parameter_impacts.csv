@@ -1,0 +1,4 @@
+parameter,best_level,worst_level,median_RMS_span_dex
+radial_shape,CLASH_median_C,Hernquist_BCG,0.05774758020193932
+potential_source,BCG_plus_eRASS_median_gas,BCG_only,0.022320437476714833
+source_screen,local_BCG_gbar,weak_host_S1,0.01632679650245178

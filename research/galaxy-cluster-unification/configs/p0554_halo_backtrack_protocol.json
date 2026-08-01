@@ -1,0 +1,102 @@
+{
+  "protocol_version": "P0554-HALO-BACKTRACK-0.1.0",
+  "frozen_utc": "2026-08-01T07:35:00Z",
+  "status": "frozen_after_rejecting_coordinate-mismatched_and_support-clipped_diagnostic_runs_before_final_inverse_scoring",
+  "question": "If cluster-scale halos in published Lenstool posteriors mark where baryon-generated gravity appears to arrive, which observed baryonic structures are the least-distance launch points, and does their angular layout matter beyond their radial distribution?",
+  "claim_status": "descriptive inverse reconstruction; it cannot establish that gravity followed the inferred paths or that the Lenstool halo locations are model-independent observations",
+  "field_interpretation": {
+    "weak_field_form": "laplacian(Phi)(y)=4*pi*G*[rho_b(y)+q*integral rho_b(x) K(y|x,E_b) dx]",
+    "source_rule": "Only baryons launch the candidate response; the posterior halo maps are arrival-location targets, not material sources in this interpretation.",
+    "amplitude_rule": "q is left unidentified. Every source and destination is normalized, so this stage tests geometry only.",
+    "arc_family": "Gamma_ij(t)=((1-t)x_i+t*y_j,4*h_ij*t*(1-t)); projected data constrain x_i and y_j but not the off-plane height h_ij."
+  },
+  "systems": [
+    {"label": "RXJ2129", "chain_directory": "RXJ2129-P1_mcmc"},
+    {"label": "MACS0329", "chain_directory": "MACSJ0329-P2-shear_mcmc"},
+    {"label": "MACS0429", "chain_directory": "MACSJ0429-P1_mcmc"},
+    {"label": "MACS1115", "chain_directory": "MACSJ1115-P1_mcmc"},
+    {"label": "MACS1931", "chain_directory": "MACSJ1931-P2_circular_mcmc"}
+  ],
+  "halo_target": {
+    "posterior_samples_per_system": 256,
+    "coordinate_rule": "Lenstool posterior x is west-positive; convert to the project's east-positive registered frame with x_east=-x_Lenstool. Posterior y and project y are both north-positive. This was verified because the frozen MACS0329 second-halo initialization (36.7307733,17.0150976) arcsec maps to member 719 at project coordinates (-36.7306572,17.0150976) arcsec.",
+    "component_rule": "Include only posterior objects with x, y, core radius, and velocity dispersion columns; exclude external shear and member-galaxy potfile terms.",
+    "primary_target": "posterior_centers_sigma2_w50",
+    "primary_kernel_width_kpc": 50.0,
+    "grid_min_kpc": -1210.0,
+    "grid_max_kpc": 1210.0,
+    "grid_spacing_kpc": 20.0,
+    "maximum_radius_kpc": 1200.0,
+    "support_gate": "Every retained posterior halo center must lie inside the common 1200 kpc target aperture. The initial 650 kpc diagnostic support was rejected because it clipped the broad MACS1931 second-halo posterior.",
+    "minimum_relative_component_density": 0.0001,
+    "component_weight": "posterior mean of sigma^2; sensitivity target gives every cluster-scale halo equal integrated weight",
+    "target_variants": [
+      {"target_kind": "posterior_centers_sigma2_w25", "width_mode": "fixed", "width_kpc": 25.0, "weight_mode": "sigma2"},
+      {"target_kind": "posterior_centers_sigma2_w50", "width_mode": "fixed", "width_kpc": 50.0, "weight_mode": "sigma2"},
+      {"target_kind": "posterior_centers_sigma2_w100", "width_mode": "fixed", "width_kpc": 100.0, "weight_mode": "sigma2"},
+      {"target_kind": "posterior_centers_sigma2_core", "width_mode": "core_plus_floor", "width_kpc": 25.0, "weight_mode": "sigma2"},
+      {"target_kind": "posterior_centers_equal_w50", "width_mode": "fixed", "width_kpc": 50.0, "weight_mode": "equal"}
+    ],
+    "interpretation_limit": "The Gaussian occupancy kernels represent posterior halo locations and extents for backtracking. They are deliberately not claimed to be exact Lenstool dPIE convergence maps."
+  },
+  "baryonic_sources": {
+    "primary_source": "member_catalog_light",
+    "source_variants": ["member_catalog_light", "continuous_f160w_light", "xray_emissivity_proxy", "equal_f160w_xray_morphology"],
+    "continuous_map_block_factor": 4,
+    "continuous_map_retained_weight": 0.995,
+    "continuous_map_maximum_radius_kpc": 450.0,
+    "xray_limit": "Soft X-ray event-rate morphology is an emissivity proxy, not a gas-mass measurement. Equal F160W/X-ray mixing is a sensitivity analysis, not a physical mass fraction."
+  },
+  "inverse_transport": {
+    "method": "balanced entropic optimal transport",
+    "cost": "squared projected physical source-to-arrival distance",
+    "primary_entropy_length_kpc": 50.0,
+    "entropy_sensitivity_kpc": [25.0, 100.0],
+    "iterations": 500,
+    "tolerance": 1e-9,
+    "adaptive_retry_iterations": [2000, 10000],
+    "maximum_saved_marginal_error": 1e-6,
+    "path_samples": 17,
+    "path_map_retained_transport_weight": 0.995,
+    "off_plane_height_ratios_for_length_only": [0.0, 0.25, 0.5, 1.0]
+  },
+  "controls": {
+    "radial_angle_shuffles": 32,
+    "maximum_saved_marginal_error": 0.00005,
+    "shuffle_seed": 805542026,
+    "shuffle_rule": "Preserve every member galaxy radius and light weight about the fixed origin while randomizing its polar angle; keep the halo posterior target fixed.",
+    "primary_statistic": "unregularized RMS projected transport distance from the regularized plan",
+    "interpretation": "A shorter real route than the shuffled routes means the observed member angles align with the assumed halo arrivals beyond radial concentration alone."
+  },
+  "inputs": {
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "all_baryon_screen_protocol": "configs/p0554_all_baryon_route_screen_protocol.json",
+    "chain_root": "data/raw/r1_clash_caminha2019"
+  },
+  "outputs": {
+    "directory": "results/p0554_halo_backtrack",
+    "halo_posterior_summary": "halo_posterior_summary.csv",
+    "route_statistics": "route_statistics.csv",
+    "member_routes": "member_routes.csv",
+    "halo_inflows": "halo_inflows.csv",
+    "radial_shuffle_nulls": "radial_shuffle_nulls.csv",
+    "off_plane_lengths": "off_plane_arc_lengths.csv",
+    "path_maps": "path_maps.npz",
+    "figure": "p0554_halo_backtrack.png",
+    "report": "report.json",
+    "summary": "SUMMARY.md"
+  },
+  "limits": [
+    "Lenstool halo posteriors were inferred from the same strong-lensing observations and under the standard lens equation; this is circular if used as proof of a new field law.",
+    "Optimal transport selects the least projected-distance coupling and is not a unique physical trajectory.",
+    "The 2-D data cannot determine an arc height, travel time, causal propagation law, or stress-energy conservation law.",
+    "Normalized maps cannot identify the absolute response strength q.",
+    "F160W light has mass-to-light and membership uncertainty, while X-ray brightness is not gas mass.",
+    "All five clusters are spent exploratory systems. Any law derived here must be frozen and tested on new raw lens observables."
+  ],
+  "numerical_amendments": [
+    "The first diagnostic output was rejected before interpretation because Lenstool west-positive x coordinates had not yet been converted to the registered east-positive frame.",
+    "The coordinate-corrected 650 kpc diagnostic output was rejected because it clipped the broad MACS1931 second-halo posterior; the final common support is 1200 kpc and must contain every retained halo center.",
+    "Difficult entropic-transport cases are retried at 2000 and then 10000 iterations; no solution outside the frozen marginal gates is saved."
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "protocol_version": "REOPENED-HYBRID-SLOPE-RESPONSE-MODES-0.1.0",
+  "frozen_utc": "2026-07-31T23:55:00Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Refit and transfer derivative-safe slope-sensitive radial-memory laws across galaxies, cluster bridge data, raw strong lensing, and Solar-System proxies.",
+  "claim_boundary": [
+    "These are phenomenological spatial-response tests and not yet covariant field equations.",
+    "All slope coordinates, carrier powers, gate settings, and memory scales are fixed universally and never fitted per object.",
+    "The same four gravity parameters are fitted only to the BCG plus CLASH bridge and transferred unchanged to SPARC, raw lensing, and Solar tests.",
+    "Mode 0 is the prior pointwise exponent control; modes 1 through 3 remove its pointwise exponent-derivative mechanism in different ways.",
+    "Two-start raw-lens scores are provisional; selected settings require eight-start replay and every missing held-out root remains a failure.",
+    "Results can disfavor only the tested formulas and ranges, never a broader new-physics premise."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "common_variant": {
+    "combination": "interaction",
+    "interaction_eta": 1.0,
+    "screen_power": 1.5,
+    "rg_saturation_ceiling": 2.0,
+    "sigma_saturation_ceiling": 1.5,
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 2.0,
+    "radial_memory_gbar_power": -1.0,
+    "radial_memory_radius_power": -0.5,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false,
+    "radial_memory_slope_gate_strength": 1.0,
+    "radial_memory_slope_gate_mode": 2,
+    "radial_memory_slope_gate_pivot": -1.0,
+    "radial_memory_slope_gate_sharpness": 4.0,
+    "radial_memory_steep_gbar_power": -0.5,
+    "radial_memory_steep_radius_power": 1.5
+  },
+  "sensitivity_families": {
+    "fixed_galaxy_carrier_control": {
+      "fixed_name": "radial_memory_gbar_power",
+      "values": [-0.5],
+      "base_variant": {
+        "radial_memory_radius_power": 1.5,
+        "radial_memory_slope_gate_strength": 0.0
+      }
+    },
+    "fixed_balanced_carrier_control": {
+      "fixed_name": "radial_memory_gbar_power",
+      "values": [-1.0],
+      "base_variant": {
+        "radial_memory_radius_power": -0.5,
+        "radial_memory_slope_gate_strength": 0.0
+      }
+    },
+    "point_exponent_sharpness": {
+      "fixed_name": "radial_memory_slope_gate_sharpness",
+      "values": [0.25, 4.0, 16.0],
+      "base_variant": {"radial_memory_slope_gate_mode": 0}
+    },
+    "profile_exponent_sharpness": {
+      "fixed_name": "radial_memory_slope_gate_sharpness",
+      "values": [0.25, 4.0, 16.0],
+      "base_variant": {"radial_memory_slope_gate_mode": 1}
+    },
+    "profile_response_sharpness": {
+      "fixed_name": "radial_memory_slope_gate_sharpness",
+      "values": [0.25, 4.0, 16.0],
+      "base_variant": {"radial_memory_slope_gate_mode": 2}
+    },
+    "point_response_sharpness": {
+      "fixed_name": "radial_memory_slope_gate_sharpness",
+      "values": [0.25, 4.0, 16.0],
+      "base_variant": {"radial_memory_slope_gate_mode": 3}
+    },
+    "profile_response_strength": {
+      "fixed_name": "radial_memory_slope_gate_strength",
+      "values": [0.25, 0.5, 0.75],
+      "base_variant": {"radial_memory_slope_gate_mode": 2}
+    },
+    "profile_response_pivot": {
+      "fixed_name": "radial_memory_slope_gate_pivot",
+      "values": [-2.0, -1.5, -0.5, 0.0],
+      "base_variant": {"radial_memory_slope_gate_mode": 2}
+    },
+    "profile_response_steep_radius_power": {
+      "fixed_name": "radial_memory_steep_radius_power",
+      "values": [0.5, 2.5],
+      "base_variant": {"radial_memory_slope_gate_mode": 2}
+    },
+    "profile_response_steep_gbar_power": {
+      "fixed_name": "radial_memory_steep_gbar_power",
+      "values": [-1.0, 0.0],
+      "base_variant": {"radial_memory_slope_gate_mode": 2}
+    },
+    "profile_response_memory_scale": {
+      "fixed_name": "radial_memory_log_scale",
+      "values": [0.5, 8.0],
+      "base_variant": {"radial_memory_slope_gate_mode": 2}
+    }
+  },
+  "baseline_variant_name": "fixed_balanced_carrier_control:radial_memory_gbar_power=-1",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20261033,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_slope_response_modes/report.json",
+    "scores": "results/reopened_hybrid_slope_response_modes/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_slope_response_modes/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_slope_response_modes/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_slope_response_modes/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_slope_response_modes/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_slope_response_modes/family_impacts.csv",
+    "figure": "results/reopened_hybrid_slope_response_modes/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_slope_response_modes/SUMMARY.md"
+  }
+}

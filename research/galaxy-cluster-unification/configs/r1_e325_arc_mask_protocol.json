@@ -1,0 +1,76 @@
+{
+  "protocol_version": "R1-E325-HST-M1-0.1",
+  "status": "frozen_after_blind_preprocessing_before_arc_morphology_inspection",
+  "frozen_utc": "2026-07-27T14:30:00Z",
+  "upstream_report": "results/r1_e325_hst_preprocessing/report.json",
+  "selection_blind": true,
+  "arc_morphology_seen_at_freeze": false,
+  "gravity_residuals_seen_at_freeze": false,
+  "inputs": {
+    "registered_cutouts": "data/derived/r1_e325_hst_registered_cutouts.fits",
+    "psf_family": "data/derived/r1_e325_hst_psf_family.npz"
+  },
+  "common_psf": {
+    "method": "cross-convolve F475W by the nominal circular F814W Moffat and F814W by the nominal circular F475W Moffat",
+    "f475_psf_key": "F475W_m1.0_q1.0_pa000",
+    "f814_psf_key": "F814W_m1.0_q1.0_pa000",
+    "variance_propagation": "convolve input variance by the squared cross-convolution kernel"
+  },
+  "lens_colour_model": {
+    "fit_radial_domain_arcsec": [0.3, 5.5],
+    "basis": "F814W surface brightness multiplied by circular piecewise-linear radial hat functions plus constant and linear x/y sky terms",
+    "radial_knots_arcsec": [0.3, 0.75, 1.25, 1.75, 2.25, 2.75, 3.25, 3.75, 4.5, 5.5],
+    "weighted_solver": "linear least squares using propagated F475W plus current colour-scaled F814W variance",
+    "iterations": 4,
+    "positive_clip_sigma": 3.0,
+    "absolute_clip_sigma": 6.0,
+    "clip_rule": "after each fit, exclude positive residuals above 3 sigma and either-sign residuals above 6 sigma; never add excluded pixels back"
+  },
+  "detection": {
+    "radial_domain_arcsec": [2.0, 3.9],
+    "matched_filter": "nominal common circular PSF",
+    "noise_inflation": "maximum of one and 1.4826 times the MAD of matched-filter S/N in negative/control annular pixels after excluding absolute values above 4",
+    "corrected_signal_to_noise_threshold": 5.0,
+    "minimum_connected_pixels_before_dilation": 8,
+    "connectivity": 8,
+    "dilation_pixels": 1,
+    "mask_variants": ["one-pixel erosion of the frozen mask", "frozen one-pixel-dilated mask", "one additional pixel dilation"],
+    "minimum_final_pixels": 50,
+    "minimum_connected_components": 2,
+    "minimum_azimuthal_span_deg": 90.0
+  },
+  "negative_control": {
+    "construction": "rotate the frozen arc mask by 90 degrees about the fixed half-pixel center, remove overlap with the arc mask, then add nearest available same-radius pixels in increasing absolute angular offset from the rotated locations until equal area",
+    "required_equal_area": true,
+    "maximum_arc_overlap_pixels": 0
+  },
+  "pre_rank_radial_support": {
+    "response_knots_arcsec": [2.065, 2.655, 3.245, 3.835],
+    "knot_neighborhood_half_width_arcsec": 0.15,
+    "minimum_knot_neighborhoods_intersected": 3,
+    "interpretation": "This is only support for attempting a four-column Jacobian; it is not a rank measurement."
+  },
+  "visit_controls": {
+    "minimum_integrated_arc_signal_to_noise_each_F475W_visit": 5.0,
+    "maximum_visit_difference_reduced_chi_square": 2.0,
+    "difference_degrees_of_freedom": "number of frozen arc pixels after fitting one relative scale and one sky offset"
+  },
+  "outputs": {
+    "masks_and_residuals": "data/derived/r1_e325_arc_masks.fits",
+    "colour_model": "data/derived/r1_e325_lens_colour_model.npz",
+    "report": "results/r1_e325_arc_mask/report.json"
+  },
+  "concrete_outcomes": {
+    "advance": "The >=5-sigma connected arc mask passes size, component, azimuthal-span, equal-area negative-control, at least three knot-neighborhood, and both-visit consistency gates.",
+    "fail": "If any gate fails, do not hand-edit the mask or lower thresholds. Retain E325 as an acquired control and replace it unless a separately frozen instrument-systematics test explains a specific failure without using a lens model."
+  },
+  "authorization": {
+    "inspect_HST_morphology_with_only_this_algorithm": true,
+    "write_frozen_arc_and_control_masks": true,
+    "implement_image_level_jacobian_only_after_all_mask_gates_pass": true,
+    "manual_mask_edit": false,
+    "count_toward_ten_system_target": false,
+    "infer_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

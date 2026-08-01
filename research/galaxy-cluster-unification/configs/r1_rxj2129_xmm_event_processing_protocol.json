@@ -1,0 +1,206 @@
+{
+  "protocol_version": "R1B3-RXJ2129-XMM-event-processing-0.4",
+  "status": "frozen_before_event_array_analysis_with_post_execution_SAS_OOT_semantics_correction_logged",
+  "frozen_utc": "2026-07-27T08:27:01Z",
+  "correction_log": [
+    {
+      "version": "0.2",
+      "utc": "2026-07-27T08:36:00Z",
+      "trigger": "X1 task-output audit before event-array analysis",
+      "correction": "The frozen 0.1 command epproc withoutoftime=yes creates an OOT event list instead of a normal event list; it does not emit both. Preserve that product as 0529_0093030201_EPN_S003_OutOfTimeEvts.ds, then run epproc withoutoftime=no to create the normal 0529_0093030201_EPN_S003_ImagingEvts.ds product.",
+      "basis": "Official SAS documentation states that the pipeline is run twice: first with withoutoftime=yes for the simulated OOT list, then with withoutoftime=no for normal calibrated events.",
+      "data_driven": false,
+      "thresholds_or_science_selection_changed": false
+    },
+    {
+      "version": "0.3",
+      "utc": "2026-07-27T08:38:00Z",
+      "trigger": "X1 passed and before any count-rate array was read",
+      "correction": "Pin the previously unspecified 100-second bin phase to XMM mission TIME multiples of 100 seconds. For this observation use the common half-open range [152241400,152300200), covering every calibrated event-list TSTART/TSTOP.",
+      "basis": "A deterministic common bin phase prevents detector-specific first-event times from changing the flare classification.",
+      "data_driven": false,
+      "thresholds_or_science_selection_changed": false
+    },
+    {
+      "version": "0.4",
+      "utc": "2026-07-27T08:40:00Z",
+      "trigger": "SAS rate-product schema audit before any flare-bin classification",
+      "correction": "SAS 22.1 evselect rate products carry detector-specific STDGTI extensions but no FRACEXP column. Compute each bin's overlap fraction independently for every detector STDGTI and use the minimum detector fraction for the frozen >=0.5 live-bin gate.",
+      "basis": "The minimum is a conservative, rate-independent aggregation that cannot admit a bin unless every active detector CCD meets the live-fraction gate.",
+      "data_driven": false,
+      "thresholds_or_science_selection_changed": false
+    }
+  ],
+  "selection_blind": true,
+  "system": "RX J2129",
+  "obsid": "0093030201",
+  "center_ra_deg": 322.41651,
+  "center_dec_deg": 0.08923,
+  "cluster_redshift": 0.235,
+  "purpose": "Produce and quality-gate calibrated EPIC event lists, flare GTIs, one immutable point-source mask, and background-ready spectra before any gas-profile or gravity fit. The gate is independent of the HST centroid branch.",
+  "parent_protocol": "configs/r1_rxj2129_strict_observable_next_stage.json",
+  "environment_protocol": "configs/r1_rxj2129_xmm_environment_protocol.json",
+  "environment_manifest": "data/derived/r1_rxj2129_xmm_environment_manifest.json",
+  "environment_report": "results/r1_rxj2129_xmm_environment/report.json",
+  "inputs": {
+    "archive_root": "data/raw/r1_rxj2129_xmm/0093030201",
+    "compressed_ODF": "data/raw/r1_rxj2129_xmm/0093030201/ODF",
+    "archive_provenance": "data/raw/r1_rxj2129_xmm/provenance.json",
+    "ODF_files": 284,
+    "primary_EPIC_exposures": {
+      "MOS1": "M1S001",
+      "MOS2": "M2S002",
+      "pn": "PNS003"
+    },
+    "raw_summary": "0529_0093030201_SCX00000SUM.ASC",
+    "known_only_from_filenames_and_summary_metadata": [
+      "MOS1 has one scheduled imaging exposure M1S001 with seven CCD image files.",
+      "MOS2 has one scheduled imaging exposure M2S002 with seven CCD image files.",
+      "pn has one scheduled imaging exposure PNS003 with twelve CCD image files.",
+      "The ODF is gzip-compressed and must be staged before SAS processing."
+    ]
+  },
+  "paths": {
+    "wsl_work_root": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201",
+    "staged_ODF": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/ODF",
+    "analysis_root": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/analysis",
+    "ccf_cif": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/analysis/ccf.cif",
+    "dated_CCF": "/home/henry/.local/share/sigmagravity-xmm/ccf/2026-07-27",
+    "repo_reduction_manifest": "data/derived/r1_rxj2129_xmm_reduction_manifest.json",
+    "repo_quality_report": "results/r1_rxj2129_xmm_event_processing/report.json"
+  },
+  "staging": {
+    "rule": "For every file in compressed_ODF, verify its archived size against acquisition provenance. Gzip-test every .gz file and decompress it into staged_ODF with only the final .gz suffix removed; byte-copy the uncompressed SUM.ASC. Never modify or delete the archived input.",
+    "reject_if": "Any gzip test, source size, staged file count, or deterministic source-to-staged mapping fails.",
+    "pixel_interpretation_during_staging": false
+  },
+  "sas_initialization": {
+    "CONDA_PREFIX": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+    "HEASoft_initialization": "source $CONDA_PREFIX/bin/heainit.sh",
+    "SAS_initialization": "source /home/henry/.local/share/sigmagravity-xmm/sas-22.1.0/xmmsas_22.1.0-a8f2c2afa-20250304/setsas.sh",
+    "SAS_CCFPATH": "/home/henry/.local/share/sigmagravity-xmm/ccf/2026-07-27",
+    "SAS_CCF": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/analysis/ccf.cif",
+    "initial_SAS_ODF": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/ODF",
+    "analysis_date": "2026-07-27",
+    "serial_execution_only": true
+  },
+  "calibration_commands_in_order": [
+    "cifbuild withccfpath=no analysisdate=2026-07-27 category=XMMCCF calindexset=$SAS_CCF fullpath=yes",
+    "odfingest odfdir=$SAS_ODF withodfdir=yes outdir=$ANALYSIS_ROOT usecanonicalname=yes writepath=yes usehousekeeping=yes findinstrumentmodes=yes oalcheck=yes",
+    "set SAS_ODF to the sole newly generated 0529_0093030201_SCX00000SUM.SAS after verifying OBS_ID and staged ODF path",
+    "emproc",
+    "epproc withoutoftime=yes; preserve the resulting PNS003 ImagingEvts product as PNS003 OutOfTimeEvts with checksum",
+    "epproc withoutoftime=no; retain the resulting PNS003 ImagingEvts as the normal calibrated event list"
+  ],
+  "calibration_gate": {
+    "required_CIF_analysis_date": "2026-07-27",
+    "required_exposures": ["M1S001", "M2S002", "PNS003"],
+    "event_list_discovery": {
+      "MOS1": "the sole emproc calibrated event list 0529_0093030201_EMOS1_S001_ImagingEvts.ds",
+      "MOS2": "the sole emproc calibrated event list 0529_0093030201_EMOS2_S002_ImagingEvts.ds",
+      "pn": "the sole normal epproc event list 0529_0093030201_EPN_S003_ImagingEvts.ds generated with withoutoftime=no",
+      "pn_OOT": "the preserved epproc event list 0529_0093030201_EPN_S003_OutOfTimeEvts.ds generated with withoutoftime=yes"
+    },
+    "reject_if": "Any required exposure has zero or multiple calibrated event-list matches, an exposure/instrument/filter/mode mismatch, SAS error, missing GTI, non-finite exposure, or absent pn OOT product. Do not substitute PPS events."
+  },
+  "flare_filter": {
+    "time_bin_seconds": 100,
+    "time_bin_alignment": {
+      "coordinate": "XMM mission TIME seconds",
+      "rule": "left edges are integer multiples of 100 seconds and bins are left-closed/right-open",
+      "common_timemin": 152241400,
+      "common_timemax": 152300200
+    },
+    "minimum_bin_live_fraction": 0.5,
+    "live_fraction_source": "minimum across detector-specific STDGTI overlap fractions in each aligned 100-second bin; SAS 22.1 rate tables have no FRACEXP column",
+    "diagnostic_event_rules": {
+      "MOS1": "#XMMEA_EM && PATTERN==0 && PI in [10000:12000]",
+      "MOS2": "#XMMEA_EM && PATTERN==0 && PI in [10000:12000]",
+      "pn": "FLAG==0 && PATTERN==0 && PI in [12000:14000]"
+    },
+    "iterative_rule": "Starting from every live bin, retain bins no higher than min(fixed ceiling, median + 2.5*1.4826*MAD); recompute until membership is unchanged or 10 iterations. If MAD is zero, use the fixed ceiling only. No lower clipping and no manual GTI edits.",
+    "fixed_rate_ceiling_counts_per_second": {
+      "MOS1": 0.35,
+      "MOS2": 0.35,
+      "pn": 0.4
+    },
+    "science_event_rules": {
+      "MOS1": "#XMMEA_EM && PATTERN<=12 && PI in [300:10000] && GTI(frozen_MOS1_gti,TIME)",
+      "MOS2": "#XMMEA_EM && PATTERN<=12 && PI in [300:10000] && GTI(frozen_MOS2_gti,TIME)",
+      "pn": "FLAG==0 && PATTERN<=4 && PI in [300:10000] && GTI(frozen_pn_gti,TIME)"
+    },
+    "minimum_cleaned_exposure_seconds_each_passing_instrument": 15000,
+    "minimum_cleaned_to_raw_exposure_fraction_each_passing_instrument": 0.25,
+    "minimum_instruments_passing": 2,
+    "failure": "Stop the XMM route if fewer than two instruments pass. Never widen GTIs or alter rate ceilings after viewing a profile."
+  },
+  "point_source_mask": {
+    "detection_bands_keV": [[0.5, 1.2], [1.2, 2.0], [2.0, 7.0]],
+    "instruments": ["MOS1", "MOS2", "pn"],
+    "minimum_detection_likelihood": 10.0,
+    "pointlike_maximum_extent_arcsec": 6.0,
+    "mask_radius_rule": "For every pointlike detection meeting the likelihood gate in any band or instrument, use max(15 arcsec, min(60 arcsec, 1.5 times the local 80-percent encircled-energy radius)). The final mask is the union and is applied unchanged to all bands, instruments, annuli, and background regions.",
+    "central_rule": "Do not add or remove a central source by eye. The gas domain already excludes r<10 kpc; any automatically detected point source remains in the union mask.",
+    "manual_editing": false
+  },
+  "background": {
+    "method": "Use ESAS filter-wheel-closed products with unexposed-corner normalization independently for each detector/CCD, plus a local outer-annulus spectral cross-check. Retain instrumental lines and residual soft-proton components as nuisance terms rather than subtracting them without uncertainty.",
+    "local_outer_annulus_kpc": [650, 900],
+    "FWC_scale_allowed": [0.5, 2.0],
+    "outer_annulus_transfer_scale_allowed": [0.5, 2.0],
+    "gate": "Every fitted or corner-derived background scale must lie strictly inside [0.5,2.0], with no posterior pile-up at a bound. Fail an instrument whose corner area is absent or whose FWC product cannot be matched; require at least two instruments afterward.",
+    "forbidden": [
+      "using the cluster radial profile to tune flare filtering",
+      "selecting a visually cleaner background region",
+      "dropping one detector after inspecting its fitted temperature",
+      "treating background-subtracted counts as independent Poisson data"
+    ]
+  },
+  "spectral_annuli": {
+    "domain_kpc": [10, 500],
+    "candidate_edges_kpc": [10, 18, 32, 56, 100, 178, 316, 500],
+    "deterministic_merging": "Traverse outward from 10 kpc and merge adjacent candidate rings until the combined passing-instrument, background-model net count estimate is at least 2000 and S/N is at least 5. Close that annulus and continue. Never split, move, or merge an annulus after a temperature or density fit. If the final remainder fails, merge it inward once.",
+    "minimum_accepted_annuli": 5,
+    "minimum_net_counts_each_annulus": 2000,
+    "minimum_signal_to_noise_each_annulus": 5.0,
+    "spectral_range_keV": [0.5, 7.0],
+    "fit_statistic": "joint Poisson source-plus-background likelihood (XSPEC W-stat/C-stat equivalent), not chi-square on background-subtracted spectra",
+    "cluster_model": "cross-calibration constant times tbabs times single-temperature apec at frozen z=0.235 in each projected annulus; metallicity is shared between adjacent low-information annuli through a hierarchical nuisance prior, never fixed after seeing a fit",
+    "response_rule": "Generate one RMF and extended-source ARF for every accepted instrument-annulus pair using the same frozen point-source mask and detector map.",
+    "posterior_draws": 2000,
+    "maximum_fractional_density_uncertainty": 0.2,
+    "maximum_fractional_temperature_uncertainty": 0.3,
+    "projection": "Use the same joint posterior draws for emissivity deprojection, electron density, spherical gas mass, and projected gas surface density. Preserve all cross-annulus and density-temperature covariance.",
+    "failure": "Fail if fewer than five annuli meet counts, S/N, temperature, density, response, background, and covariance gates. Do not publish a diagonal or one-anchor substitute."
+  },
+  "stage_outcomes": [
+    {
+      "stage": "X1",
+      "outcome": "One dated CIF/SOSF and exactly one calibrated event list for each of M1S001, M2S002, and PNS003, plus pn OOT.",
+      "advance_if": "All calibration identity and task-exit gates pass.",
+      "rethink_if": "Stop on any identity ambiguity; do not use PPS events as a replacement."
+    },
+    {
+      "stage": "X2",
+      "outcome": "At least two EPIC instruments retain >=15 ks and >=25% raw exposure under frozen flare rules; all their background scales lie in [0.5,2].",
+      "advance_if": "Exposure, mask, corner, FWC, and outer-annulus gates pass independently of gas fits.",
+      "rethink_if": "If fewer than two pass, RX J2129 remains structural-only and the route moves to MACS J1206."
+    },
+    {
+      "stage": "X3",
+      "outcome": "At least five 10-500 kpc annuli pass counts, S/N, response, temperature, density, posterior-draw, and covariance gates.",
+      "advance_if": "Publish one source-traceable gas likelihood and authorize observable-package assembly only.",
+      "rethink_if": "Retain event/background diagnostics but do not claim a gas likelihood."
+    }
+  ],
+  "authorization": {
+    "stage_and_decompress_archived_ODF": true,
+    "run_declared_cifbuild_odfingest_emproc_epproc": true,
+    "read_event_arrays_for_declared_flare_mask_background_and_spectra": true,
+    "inspect_or_tune_on_cluster_profile": false,
+    "infer_gas_likelihood_before_X2": false,
+    "measure_HST_arc_pixels": false,
+    "infer_dynamical_or_Weyl_response": false,
+    "fit_new_force_or_action": false
+  }
+}

@@ -1,0 +1,4 @@
+role,gamma,angular_strength,training_RMS_arcsec,training_roots_converged,heldout_RMS_arcsec,heldout_roots_converged,optimizer_cost
+P0599_no_route_reference,,0.0,0.49524262462844243,15,1.8086634342147614,7,48.15754179125845
+training_selected_gamma,0.0,0.0025,0.4951909779247956,15,1.8037530525371621,7,48.143511428082356
+standard_single_plane_gamma,1.0,0.0025,0.4944807230545869,15,1.8814721267964238,7,47.845808469425165

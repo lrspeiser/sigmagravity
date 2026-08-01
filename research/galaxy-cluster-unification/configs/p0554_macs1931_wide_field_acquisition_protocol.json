@@ -1,0 +1,46 @@
+{
+  "protocol_version": "P0554-MACS1931-WIDE-FIELD-ACQUISITION-0.1.0",
+  "frozen_utc": "2026-08-01T10:10:00Z",
+  "status": "frozen_after_three-row_and-count_endpoint_checks_before_full_catalog_download",
+  "question": "Does the off-center MACS1931 Lenstool halo align with a wider-field baryonic galaxy concentration that is absent from the current 300 kpc member catalog and 120 arcsec HST/X-ray maps?",
+  "selection_boundary": [
+    "MACS1931 was selected because it is the only one of seven modeled halo components whose capacity-relaxed dominant baryonic origin remains about 499 kpc from the posterior median halo center.",
+    "The rectangular sky window, returned columns, and no-prefilter rule are frozen before the full catalog is downloaded or spatially inspected.",
+    "All Tractor morphological types are retained so foreground-star contamination is measured rather than hidden by acquisition filtering.",
+    "Photometric-redshift fields are obtained by a left join; objects without a photo-z remain in the raw catalog.",
+    "This acquisition cannot authorize a gravity result. Membership, background controls, and a forward test require a later frozen analysis protocol."
+  ],
+  "official_source": {
+    "provider": "NSF NOIRLab Astro Data Lab",
+    "survey": "DESI Legacy Imaging Surveys DR10-South",
+    "catalog_documentation": "https://beta.datalab.noirlab.edu/data/legacy-surveys",
+    "tap_endpoint": "https://datalab.noirlab.edu/tap/sync",
+    "image_cutout_documentation": "https://www.legacysurvey.org/viewer/cutout.jpg"
+  },
+  "field": {
+    "center_ra_deg": 292.9570833333,
+    "center_dec_deg": -26.5756166667,
+    "ra_min_deg": 292.789,
+    "ra_max_deg": 293.125,
+    "dec_min_deg": -26.7257,
+    "dec_max_deg": -26.4256,
+    "approximate_half_width_arcmin": 9.0,
+    "cluster_redshift": 0.352,
+    "preflight_object_count": 9489
+  },
+  "catalog_query": "SELECT L.ls_id,L.ra,L.dec,L.type,L.flux_g,L.flux_r,L.flux_i,L.flux_z,L.flux_ivar_g,L.flux_ivar_r,L.flux_ivar_i,L.flux_ivar_z,L.mw_transmission_g,L.mw_transmission_r,L.mw_transmission_i,L.mw_transmission_z,L.maskbits,L.fitbits,L.shape_r,L.shape_e1,L.shape_e2,L.ref_cat,L.gaia_phot_g_mean_mag,P.z_phot_mean,P.z_phot_median,P.z_phot_std,P.z_phot_l68,P.z_phot_u68,P.z_phot_l95,P.z_phot_u95,P.z_phot_mean_i,P.z_phot_median_i,P.z_phot_std_i,P.z_phot_l68_i,P.z_phot_u68_i,P.z_phot_l95_i,P.z_phot_u95_i,P.z_spec,P.survey FROM ls_dr10.tractor_s AS L LEFT OUTER JOIN ls_dr10.photo_z AS P ON L.ls_id=P.ls_id WHERE L.ra BETWEEN 292.789 AND 293.125 AND L.dec BETWEEN -26.7257 AND -26.4256",
+  "cutout": {
+    "layer": "ls-dr10",
+    "bands": "griz",
+    "pixel_scale_arcsec": 1.0,
+    "size_pixels": 1200,
+    "required": false,
+    "failure_policy": "Record an unavailable preview in provenance and continue; the catalog is the required analysis input. The endpoint returned HTTP 503 on 2026-08-01 despite bounded retries."
+  },
+  "outputs": {
+    "directory": "data/raw/p0554_macs1931_wide_field",
+    "catalog": "data/raw/p0554_macs1931_wide_field/ls_dr10_macs1931_wide.csv",
+    "jpeg": "data/raw/p0554_macs1931_wide_field/ls_dr10_macs1931_wide.jpg",
+    "provenance": "data/raw/p0554_macs1931_wide_field/provenance.json"
+  }
+}

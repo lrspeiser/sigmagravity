@@ -1,0 +1,68 @@
+{
+  "report_version": "P0608C-TOMOGRAPHY-RANDOM-START-ROBUSTNESS-0.1.0-RESULTS",
+  "status": "complete_posthoc_geometry_basin_audit",
+  "coverage": {
+    "gammas": 2,
+    "repeats_per_gamma": 24,
+    "starts_per_repeat": 2,
+    "total_fits": 48,
+    "complete_fits": 48
+  },
+  "gamma_summary": [
+    {
+      "gamma": 0.0,
+      "attempted_fits": 24,
+      "complete_fits": 24,
+      "training_RMS_best_arcsec": 0.49378218236309906,
+      "training_RMS_median_arcsec": 0.4951909779247956,
+      "training_RMS_p16_arcsec": 0.494867235303224,
+      "training_RMS_p84_arcsec": 0.4951909779247956,
+      "heldout_RMS_at_best_training_arcsec": 1.8912927766693586,
+      "heldout_RMS_median_arcsec": 1.8037530525371621,
+      "heldout_RMS_p16_arcsec": 1.8037530525371621,
+      "heldout_RMS_p84_arcsec": 1.8193334102114462
+    },
+    {
+      "gamma": 1.0,
+      "attempted_fits": 24,
+      "complete_fits": 24,
+      "training_RMS_best_arcsec": 0.49428438131640123,
+      "training_RMS_median_arcsec": 0.49525425198429246,
+      "training_RMS_p16_arcsec": 0.4952499124942388,
+      "training_RMS_p84_arcsec": 0.49525425198429246,
+      "heldout_RMS_at_best_training_arcsec": 1.842924291534559,
+      "heldout_RMS_median_arcsec": 1.8038034563215586,
+      "heldout_RMS_p16_arcsec": 1.8038034563215586,
+      "heldout_RMS_p84_arcsec": 1.8038034563215586
+    }
+  ],
+  "best_training_comparison": {
+    "gamma0_training_RMS_arcsec": 0.49378218236309906,
+    "gamma1_training_RMS_arcsec": 0.49428438131640123,
+    "absolute_training_difference_arcsec": 0.0005021989533021687,
+    "gamma0_heldout_RMS_arcsec": 1.8912927766693586,
+    "gamma1_heldout_RMS_arcsec": 1.842924291534559,
+    "absolute_heldout_difference_arcsec": 0.04836848513479963
+  },
+  "basin_noise": {
+    "pooled_training_p16_p84_span_arcsec": 7.355568904593435e-05,
+    "pooled_heldout_p16_p84_span_arcsec": 5.0403784396468865e-05,
+    "median_training_gamma_difference_arcsec": 6.327405949685394e-05,
+    "median_heldout_gamma_difference_arcsec": 5.0403784396468865e-05,
+    "median_training_gamma_difference_to_basin_span_ratio": 0.8602197915288415,
+    "median_heldout_gamma_difference_to_basin_span_ratio": 1.0
+  },
+  "interpretation": {
+    "gamma_separable_from_optimizer_basin": false,
+    "heldout_order_is_stable": false,
+    "gamma_identified": false,
+    "independent_random_start_realized": true
+  },
+  "claim_limits": [
+    "This audit is post hoc after P0608 and after the deterministic-repeat issue in P0608B.",
+    "Each repeat compares one random start to the same fixed start, so the retained distribution is censored at the deterministic solution.",
+    "RX J2129 and every image split remain spent.",
+    "A stable gamma difference would still require transfer to a different cluster.",
+    "An unstable result demonstrates non-identifiability in this model; it does not prove single-plane gravity."
+  ]
+}

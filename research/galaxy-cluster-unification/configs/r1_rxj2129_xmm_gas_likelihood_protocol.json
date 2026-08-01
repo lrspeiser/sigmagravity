@@ -1,0 +1,265 @@
+{
+  "protocol_version": "R1B3-RXJ2129-XMM-X4-X5-gas-likelihood-0.6",
+  "status": "promoted_map_resolution_convergence_passed_before_full_X4_production",
+  "frozen_utc": "2026-07-27T11:40:00Z",
+  "updated_utc": "2026-07-27T13:21:00Z",
+  "selection_blind": true,
+  "known_before_freeze": [
+    "The X3 count gate passes all six annuli with 76279.25959701487 conservative net counts and minimum annular S/N 84.09084365198409.",
+    "The X3 outer-region RMF task reported detector-map bounds exceeded, so no X3 response is admitted to the likelihood.",
+    "The X2 outer-annulus QPB transfer posteriors and the retained central source_id 50 position, radius, and detection likelihood were known.",
+    "No annular temperature, density, abundance, gas mass, celestial-background fit, lens residual, dynamical residual, Weyl response, or gravity response was inspected."
+  ],
+  "engineering_correction_log": [
+    {
+      "version": "0.2",
+      "trigger": "The quarantined MOS2 interface v0.1 reproduced detmapYBoundsExceeded because evselect clipped the requested detector-map bounds to the DETX/DETY column legal limits.",
+      "correction": "Set evselect ignorelegallimits=yes while retaining fixed bounds [-26000,26000], requested 2048x2048 square sampling, the same event selections, spectra, annuli, detectors, PSF model, and calibration snapshot.",
+      "result": "SAS produced 2001x2001 detector maps with 26-detector-unit pixels and detector-center bounds approximately [-25987.5,26012.5]. MOS2 has 317 and pn has 321 map-pixel centers in a01, both above the required 300. Both instruments then produced finite positive RMFs, direct ARFs, a02-to-a01 cross-region ARFs, and central-source ARFs without a detector-map coverage or zero-normalization warning.",
+      "invalid_root": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x4/interface_v0_1_mos2_a01_from_a02",
+      "science_geometry_energy_band_instruments_background_or_threshold_changed": false
+    },
+    {
+      "version": "0.3",
+      "trigger": "The official cross-region algorithm scales over detector-map samples in both the input and output regions. A single map sized by a01 would oversample the much larger outer-annulus pairs by up to a factor of about 44 in area without adding calibrated spatial information.",
+      "correction": "Freeze four deterministic full-field uniform map resolutions. For each direct or central response use its output-annulus map size; for each cross-region response use the larger requested dimension of its input and output annuli. Every realized input and output region must still contain at least 301 map-pixel centers, and no map pixel may exceed 80 detector units (4 arcsec).",
+      "selection_rule": "Requested dimensions are derived only from the immutable annular areas, the fixed [-26000,26000] detector bounds, a target of 340 pixels in the smaller region, and the 80-detector-unit maximum pixel size. No spectrum, temperature, density, gas mass, lens residual, dynamics residual, or gravity response enters.",
+      "science_geometry_energy_band_instruments_background_or_threshold_changed": false
+    },
+    {
+      "version": "0.4",
+      "trigger": "SAS realized the nominal 650-pixel full-field request as 642x642 with 81-detector-unit pixels, exceeding the frozen maximum of 80 detector units even though the requested dimension was derived to meet it.",
+      "correction": "Reject the nominal baseline before inspecting any gas, lensing, dynamics, or gravity residual; preserve its response comparison as an invalid engineering record; promote the entire requested production ladder by sqrt(2); and compare the promoted 920 request against the predeclared next 1302 request for both detectors before full X4.",
+      "invalid_comparison_result": "MOS2 650-to-920 changes were 3.8174 percent integrated, 3.8834 percent median fit-band, and 4.2100 percent p95; pn changes were 3.4798 percent, 3.4824 percent, and 3.5623 percent. Both detectors fail the unchanged 2-percent integrated and median thresholds, in addition to the 81-unit pixel-size failure.",
+      "invalid_baseline_root": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x4/map_resolution_convergence_v0_1",
+      "invalid_baseline_report": "results/r1_rxj2129_xmm_x4_map_resolution_convergence_v0_1/report.json",
+      "science_geometry_energy_band_instruments_background_or_acceptance_threshold_changed": false
+    },
+    {
+      "version": "0.5",
+      "trigger": "The first parallel 1302 arfgen launch placed MOS2 and pn in one process working directory. SAS uses fixed temporary names including rawpixellist.ds, so MOS2 encountered FITS error 107 while the pn task was accessing the same temporary namespace.",
+      "correction": "Quarantine both ARF attempts after the unaffected process exits, retain their independently generated detector maps, and rerun the two detectors in separate instrument-specific working directories. Apply the same working-directory isolation to full X4 production.",
+      "invalid_parallel_attempt_root": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x4/map_resolution_convergence_v0_2/invalid_parallel_attempt_20260727T123323Z",
+      "science_geometry_energy_band_instruments_background_map_resolution_or_acceptance_threshold_changed": false
+    }
+  ],
+  "system": "RX J2129",
+  "obsid": "0093030201",
+  "purpose": "Construct coverage-complete MOS2+pn direct and PSF cross-region responses, then infer one nuisance-marginalized hot-gas density and temperature posterior that predicts every annular PHA without using hydrostatic equilibrium, a lens residual, a dynamical residual, or a gravity law.",
+  "primary_method_references": {
+    "SAS_arfgen_current": "https://xmm-tools.cosmos.esa.int/external/sas/current/doc/arfgen/",
+    "SAS_cross_region_example": "https://xmm-tools.cosmos.esa.int/external/sas/current/doc/arfgen/node12.html",
+    "XMM_ESAS_v22_cookbook": "https://heasarc.gsfc.nasa.gov/docs/xmm/esas/cookbook/xmm-esas.html",
+    "XMM_ESAS_spectral_backgrounds": "https://heasarc.gsfc.nasa.gov/docs/xmm/esas/cookbook/node52.html"
+  },
+  "prerequisites": {
+    "X3_protocol": "configs/r1_rxj2129_xmm_x3_annular_protocol.json",
+    "X3_report": "results/r1_rxj2129_xmm_x3_annular_products/report.json",
+    "required_X3_status": "pass",
+    "required_passing_annuli": 6,
+    "required_passing_instruments": ["MOS2", "pn"],
+    "X3_result": {
+      "passing_annuli": 6,
+      "conservative_net_counts": 76279.25959701487,
+      "minimum_annular_signal_to_noise": 84.09084365198409
+    }
+  },
+  "fixed_geometry": {
+    "center_ra_deg": 322.41651,
+    "center_dec_deg": 0.08923,
+    "cluster_redshift": 0.235,
+    "radial_edges_kpc": [10.0, 50.0, 100.0, 175.0, 275.0, 380.0, 500.0],
+    "annulus_ids": [
+      "a01_010_050kpc",
+      "a02_050_100kpc",
+      "a03_100_175kpc",
+      "a04_175_275kpc",
+      "a05_275_380kpc",
+      "a06_380_500kpc"
+    ],
+    "energy_band_keV": [0.7, 7.0],
+    "edge_changes_allowed": false,
+    "instrument_changes_allowed": false
+  },
+  "X4_response_calibration": {
+    "scientific_role": "Instrument-response construction only. X4 cannot estimate a temperature, density, gas mass, dynamical response, Weyl response, or force law.",
+    "invalid_X3_response_rule": "The X3 count products remain valid, but no X3 RMF or ARF is admissible for fitting because the outer-region task reported detector-map bounds exceeded. X4 must regenerate all fit responses.",
+    "required_interface_report": "results/r1_rxj2129_xmm_x4_response_interface/report.json",
+    "required_interface_status": "pass for MOS2 and pn",
+    "detector_maps": {
+      "coordinate_system": "DETX/DETY",
+      "coverage": "For each detector, one immutable detector map must cover the union of all six output regions, every input region, source-mask holes, chip gaps, bad pixels, and a PSF padding collar outside 500 kpc.",
+      "padding_arcsec": 90.0,
+      "minimum_map_pixels_in_each_output_region": 301,
+      "pixel_size_rule": "Choose the coarsest deterministic map from the frozen annulus-size ladder that leaves at least 301 realized pixel centers in both the input and output regions, with no pixel wider than 80 detector units (4 arcsec).",
+      "frozen_evselect_bounds_detector_units": [-26000, 26000],
+      "requested_image_dimensions": [2048, 2048],
+      "ignorelegallimits": true,
+      "realized_dimensions": [2001, 2001],
+      "realized_pixel_size_detector_units": 26.0,
+      "realized_a01_pixels": {"MOS2": 317, "pn": 321},
+      "production_requested_dimensions_by_annulus": {
+        "a01_010_050kpc": 2917,
+        "a02_050_100kpc": 1651,
+        "a03_100_175kpc": 996,
+        "a04_175_275kpc": 920,
+        "a05_275_380kpc": 920,
+        "a06_380_500kpc": 920
+      },
+      "cross_region_map_rule": "Use max(requested_dimension[input], requested_dimension[output]).",
+      "resolution_convergence_gate": {
+        "representative_pair": "a04_175_275kpc output from a04_175_275kpc input",
+        "instruments": ["MOS2", "pn"],
+        "baseline_requested_dimension": 920,
+        "refined_requested_dimension": 1302,
+        "maximum_band_integrated_fractional_change": 0.02,
+        "maximum_median_fit_band_fractional_change": 0.02,
+        "maximum_95th_percentile_fit_band_fractional_change": 0.05,
+        "advance_if": "Both instruments pass all three comparisons with finite positive responses and no fatal task record.",
+        "rethink_if": "If either detector fails, promote the refined map ladder and repeat against the next sqrt(2) refinement before constructing the full matrix.",
+        "execution_result": {
+          "report": "results/r1_rxj2129_xmm_x4_map_resolution_convergence/report.json",
+          "status": "pass",
+          "MOS2_fractional_changes_integrated_median_p95": [0.018030353007698507, 0.01841417066476462, 0.020339428594528898],
+          "pn_fractional_changes_integrated_median_p95": [0.004639680499232801, 0.004625597608621452, 0.00523269707188427],
+          "full_X4_baseline_resolution_authorized": true
+        }
+      },
+      "fatal_warnings": ["detmapXBoundsExceeded", "detmapYBoundsExceeded", "zeroSumDetmap"]
+    },
+    "direct_responses": {
+      "required_RMFs": 12,
+      "required_direct_ARFs": 12,
+      "extended_source": true,
+      "detmaptype": "dataset",
+      "badpixelresolution_arcsec": 1.0,
+      "applyxcaladjustment": false,
+      "applyabsfluxcorr": false,
+      "rule": "Regenerate one RMF and one direct ARF for each detector-output-annulus pair using the fixed coverage-complete detector map and the exact X3 spectrum DSS."
+    },
+    "cross_region_responses": {
+      "method": "SAS arfgen crossregionarf=yes; spectrumset is the output-annulus PHA and crossreg_spectrumset is the input-annulus PHA.",
+      "matrix_order": "rows are six output detector annuli; columns are six input sky annuli, both in fixed annulus_ids order",
+      "required_ARFs_per_instrument": 36,
+      "required_ARFs_total": 72,
+      "baseline_spatial_weight": "uniform surface brightness within each fixed input annulus using the coverage-complete detector map",
+      "sensitivity_spatial_weight": "repeat with a frozen 0.7-2.0 keV exposure-corrected, QPB-subtracted detector image constructed without any temperature, lens, dynamics, or gravity prediction",
+      "sensitivity_rule": "If the baseline-versus-image-weighted mixing change moves any reported density or temperature median by more than 0.5 of its baseline posterior standard deviation, include the response choice as a discrete nuisance rather than selecting one after the fit.",
+      "validity": "Every ARF must have the declared input and output identities, the direct-response energy grid, finite nonnegative SPECRESP values, and a positive energy-integrated response whenever the calibrated PSF assigns nonzero support. Distant geometrically supported entries may be numerically zero only when arfgen ends normally and the audit records the calibrated support test."
+    },
+    "warning_policy": "EnergyOutsideValidityRange is admissible only when every displayed request is exactly 0 eV, the requested fit band remains 0.7-7.0 keV, and every fit-band response row is finite and positive. RangeStateVariable::set for pn ccd=0 is admissible only when rmfgen ends normally and the final RMF is finite, nonnegative, and positive.",
+    "central_unresolved_source_response": {
+      "catalog_source_id": 50,
+      "ra_deg": 322.4166857950391,
+      "dec_deg": 0.08898852034328401,
+      "separation_from_frozen_center_arcsec": 1.0752871898209737,
+      "reason": "Its immutable 31.86934-arcsec detection circle contains the predeclared cluster center, so it was retained rather than deleting the cluster core.",
+      "required_point_to_output_ARFs": 12,
+      "rule": "Generate one point-source PSF-through-output-annulus ARF for each detector-output pair at the immutable source coordinate; never absorb these counts into the diffuse-gas response."
+    },
+    "pass_rule": "All 12 regenerated RMFs, 12 direct ARFs, 72 cross-region ARFs, and 12 central point-to-output ARFs pass identity, coverage, task-error, energy-grid, finiteness, and support checks for a complete product manifest.",
+    "failure_rule": "Stop the XMM branch if X4 cannot pass without moving an annular edge, restoring MOS1, shrinking the fitted radial range, or ignoring PSF cross-talk."
+  },
+  "X5_joint_spectral_likelihood": {
+    "authorization_condition": "Locked until an immutable X4 audit reports pass.",
+    "data_model": "Joint Poisson likelihood for the native, un-subtracted MOS2 and pn annular PHA channels. pn OOT is a separately propagated Poisson template with the frozen 0.0232 scale. No background-subtracted Gaussian likelihood is allowed.",
+    "response_model": "For each detector-output annulus, sum the six projected diffuse-shell spectra folded through that detector's six X4 cross-region ARFs and output RMF, plus the central point component folded through its point-to-output ARF.",
+    "cross_calibration": {
+      "reference_detector": "MOS2",
+      "pn_multiplicative_prior": "lognormal with median 1.0 and log standard deviation 0.05",
+      "rule": "The factor multiplies celestial components only, not QPB or soft-proton templates."
+    },
+    "hot_gas": {
+      "emission_model": "tbabs*apec",
+      "galactic_NH_cm2": 4.3e20,
+      "NH_fixed": true,
+      "redshift_fixed": 0.235,
+      "shells": "Six spherical shells on the fixed annular edges plus one 500-1500 kpc overflow shell whose projected emission is marginalized but not reported as an accepted annulus.",
+      "parameters": "One log electron-density and one log temperature per shell and one shared metallicity in the baseline. A separately reported frozen sensitivity fit adds one monotonic radial-gradient coefficient; it cannot replace the baseline after inspecting fit quality.",
+      "temperature_keV_prior": [0.5, 20.0],
+      "abundance_solar_prior": [0.05, 1.5],
+      "density_prior": "log-uniform from 1e-6 to 1 cm^-3 per shell with a learned half-normal second-difference scale; publish the unregularized sensitivity fit.",
+      "projection": "Analytic spherical shell-to-annulus emission-measure matrix with ne/nH=1.2 and explicit overflow-shell projection.",
+      "forbidden": [
+        "hydrostatic equilibrium",
+        "a total-mass or dark-matter profile",
+        "a lens model or lens residual",
+        "a stellar-dynamics residual",
+        "a void field or negative-gravity prediction"
+      ]
+    },
+    "central_unresolved_source": {
+      "model": "absorbed power law",
+      "photon_index_prior": [1.2, 2.8],
+      "normalization_prior": "nonnegative log-uniform over eight decades",
+      "spatial_response": "X4 point-to-output ARF vector",
+      "identifiability_rule": "If its normalization is prior dominated and its covariance with the innermost gas emission measure prevents the frozen density/temperature precision gate, the gas branch fails; do not delete the component."
+    },
+    "backgrounds": {
+      "QPB": {
+        "model": "ESAS mosback/pnback annular spectral templates, not folded through celestial ARFs",
+        "MOS2_shared_scale_prior": "Gamma(shape=149.5, rate=113.4439070224762)",
+        "pn_shared_scale_prior": "Gamma(shape=391.38, rate=526.8288841975553)",
+        "rule": "One instrument-wide transfer draw is shared across annuli; retain ESAS template counting uncertainty and detector-sector uncertainty."
+      },
+      "soft_protons": "Per-detector broken power law folded only through the ESAS diagonal response; share shape across annuli and couple nonnegative annular normalizations through frozen protonscale factors.",
+      "fluorescence": "Detector-specific unvignetted Gaussian line templates with shared centroids and hierarchical nonnegative annular normalizations; never fold them through the celestial ARF.",
+      "cosmic_and_galactic_sky": "One vignetted absorbed extragalactic power law plus unabsorbed Local-Hot-Bubble and absorbed halo thermal components, shared across annuli after solid angle and detector response.",
+      "SWCX": "Nonnegative narrow-line nuisance set shared across this single observation. If it is inseparable from cluster line emission, propagate that degeneracy or fail the temperature gate.",
+      "outer_cluster_rule": "Cluster emission is not forced to zero in an outer background annulus; the overflow shell is marginalized jointly."
+    },
+    "sampling": {
+      "minimum_retained_joint_draws": 2000,
+      "minimum_chains": 4,
+      "maximum_rank_normalized_Rhat": 1.01,
+      "minimum_bulk_ESS_each_reported_parameter": 400,
+      "minimum_tail_ESS_each_reported_parameter": 400,
+      "posterior_predictive_checks": "Publish detector-by-annulus channel residuals and replicated counts without using them to change the frozen model family."
+    },
+    "acceptance": {
+      "minimum_accepted_annuli": 5,
+      "maximum_fractional_density_uncertainty_each_accepted_annulus": 0.2,
+      "maximum_fractional_temperature_uncertainty_each_accepted_annulus": 0.3,
+      "covariance_positive_semidefinite_required": true,
+      "no_parameter_boundary_dominance": "No reported gas parameter may have more than 5 percent posterior mass in the outermost 2 percent of either finite prior bound.",
+      "response_sensitivity_required": true,
+      "failure_rule": "If fewer than five annuli pass, stop the RX J2129 gas branch without merging bins, fixing a nuisance to its best fit, or using a hydrostatic or lens prior."
+    }
+  },
+  "gas_outputs_after_X5_pass": {
+    "one_joint_posterior": "electron density, temperature, metallicity, central source, all backgrounds, response sensitivity, and detector cross-calibration",
+    "spherical_gas_mass": "M3D(<r)=4*pi*mu_e*m_p*integral ne(r) r^2 dr with mu_e=1.17",
+    "projected_gas_surface_density": "Project the same density draw along the line of sight; no separately fitted lensing gas profile.",
+    "covariance": "Publish full cross-radius and cross-observable covariance for ne, temperature, M3D, and projected gas quantities.",
+    "external_validation_only": "The published Mgas(<14.3 kpc)=2.18+/-0.07e11 Msun is not used in fitting or model selection."
+  },
+  "stage_outcomes": [
+    {
+      "stage": "X4",
+      "outcome": "A complete, coverage-valid direct, 6x6 PSF-mixing, and central-source response package for MOS2 and pn.",
+      "advance_if": "The frozen X4 pass rule is satisfied for every required product.",
+      "rethink_if": "Stop XMM for RX J2129 if response coverage or mixing cannot be made valid without changing the X3 science design."
+    },
+    {
+      "stage": "X5",
+      "outcome": "At least five annuli meet 20-percent density and 30-percent temperature precision in one converged nuisance-marginalized posterior with PSD covariance.",
+      "advance_if": "Assemble the same-system gas contribution, but only after independent HST H3 also passes.",
+      "rethink_if": "If precision or identifiability fails, keep RX J2129 structural-only and move the availability screen to MACS J1206."
+    }
+  ],
+  "outputs": {
+    "X4_external_product_root": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/x4/cross_region_responses",
+    "X4_manifest": "data/derived/r1_rxj2129_xmm_x4_response_manifest.json",
+    "X4_report": "results/r1_rxj2129_xmm_x4_responses/report.json",
+    "X4_interface_report": "results/r1_rxj2129_xmm_x4_response_interface/report.json",
+    "X5_posterior": "data/derived/r1_rxj2129_xmm_gas_joint_posterior.npz",
+    "X5_report": "results/r1_rxj2129_xmm_gas_likelihood/report.json"
+  },
+  "authorization": {
+    "construct_X4_direct_and_cross_region_responses": true,
+    "fit_X5_temperature_or_density_before_X4_pass": false,
+    "infer_gas_mass_before_X5_pass": false,
+    "infer_dynamical_or_Weyl_response": false,
+    "fit_new_force_or_action": false
+  }
+}

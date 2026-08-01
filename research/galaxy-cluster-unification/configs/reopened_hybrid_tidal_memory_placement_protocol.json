@@ -1,0 +1,106 @@
+{
+  "protocol_version": "REOPENED-HYBRID-TIDAL-MEMORY-PLACEMENT-0.1.0",
+  "frozen_utc": "2026-07-31T16:26:53Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Measure whether the high-leverage middle-tidal coordinate is more useful when it gates the RG ceiling, generalized radial-memory strength, both mechanisms, or neither.",
+  "claim_boundary": [
+    "The 2x2x2x2 both-placement factorial and matched controls were frozen before any new bridge, SPARC, raw-lensing, or Solar score was inspected.",
+    "The coordinate is label-free, but SPARC uses an axisymmetric midplane closure while BCG, CLASH, raw clusters, and the Solar System use a spherical density closure.",
+    "Under spherical closure the middle-to-maximum tidal ratio is a re-expression of local-to-mean density; this is not a common tensor-map calculation.",
+    "The generalized carrier is fixed at the preceding global-best p=1.927395, q=9, memory length 0.35 endpoint; only cap placement, memory placement, sharpness, and maximum memory strength vary.",
+    "Disabling cap gating retains the same global RG and Sigma ceilings while leaving the measured coordinate available to gate memory.",
+    "Every row fits the same four universal bridge parameters and transfers them unchanged to SPARC, raw lensing, and Solar proxies.",
+    "No object-specific gravity parameter or lensing multiplier is allowed; missing held-out image roots remain failures."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "common_variant": {
+    "combination": "interaction",
+    "interaction_eta": 1.0,
+    "screen_power": 1.5,
+    "rg_saturation_ceiling": 2.0,
+    "sigma_saturation_ceiling": 1.5,
+    "channel_gate_property": "tidal_middle_to_max",
+    "channel_gate_topology": "monotonic",
+    "channel_gate_pivot": 0.685,
+    "channel_gate_cluster_high": true,
+    "sigma_cap_gate_enabled": false,
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 0.35,
+    "radial_memory_gbar_power": 1.927395,
+    "radial_memory_radius_power": 9.0,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false,
+    "radial_memory_slope_gate_strength": 0.0
+  },
+  "sensitivity_families": {
+    "both_cap_high_memory_high_s5": {"fixed_name": "radial_memory_strength", "values": [0.5, 1.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": true, "radial_memory_gate_mode": "channel", "channel_gate_sharpness": 5.0}},
+    "both_cap_high_memory_low_s5": {"fixed_name": "radial_memory_strength", "values": [0.5, 1.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": true, "radial_memory_gate_mode": "complement", "channel_gate_sharpness": 5.0}},
+    "both_cap_low_memory_high_s5": {"fixed_name": "radial_memory_strength", "values": [0.5, 1.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": false, "radial_memory_gate_mode": "channel", "channel_gate_sharpness": 5.0}},
+    "both_cap_low_memory_low_s5": {"fixed_name": "radial_memory_strength", "values": [0.5, 1.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": false, "radial_memory_gate_mode": "complement", "channel_gate_sharpness": 5.0}},
+    "both_cap_high_memory_high_s10": {"fixed_name": "radial_memory_strength", "values": [0.5, 1.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": true, "radial_memory_gate_mode": "channel", "channel_gate_sharpness": 10.0}},
+    "both_cap_high_memory_low_s10": {"fixed_name": "radial_memory_strength", "values": [0.5, 1.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": true, "radial_memory_gate_mode": "complement", "channel_gate_sharpness": 10.0}},
+    "both_cap_low_memory_high_s10": {"fixed_name": "radial_memory_strength", "values": [0.5, 1.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": false, "radial_memory_gate_mode": "channel", "channel_gate_sharpness": 10.0}},
+    "both_cap_low_memory_low_s10": {"fixed_name": "radial_memory_strength", "values": [0.5, 1.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": false, "radial_memory_gate_mode": "complement", "channel_gate_sharpness": 10.0}},
+    "memory_only_high_s5": {"fixed_name": "radial_memory_strength", "values": [1.0], "base_variant": {"rg_cap_gate_enabled": false, "radial_memory_gate_mode": "channel", "channel_gate_sharpness": 5.0}},
+    "memory_only_low_s5": {"fixed_name": "radial_memory_strength", "values": [1.0], "base_variant": {"rg_cap_gate_enabled": false, "radial_memory_gate_mode": "complement", "channel_gate_sharpness": 5.0}},
+    "memory_only_high_s10": {"fixed_name": "radial_memory_strength", "values": [1.0], "base_variant": {"rg_cap_gate_enabled": false, "radial_memory_gate_mode": "channel", "channel_gate_sharpness": 10.0}},
+    "memory_only_low_s10": {"fixed_name": "radial_memory_strength", "values": [1.0], "base_variant": {"rg_cap_gate_enabled": false, "radial_memory_gate_mode": "complement", "channel_gate_sharpness": 10.0}},
+    "cap_only_high_s5": {"fixed_name": "radial_memory_strength", "values": [0.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": true, "radial_memory_gate_mode": "none", "channel_gate_sharpness": 5.0}},
+    "cap_only_low_s5": {"fixed_name": "radial_memory_strength", "values": [0.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": false, "radial_memory_gate_mode": "none", "channel_gate_sharpness": 5.0}},
+    "cap_only_high_s10": {"fixed_name": "radial_memory_strength", "values": [0.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": true, "radial_memory_gate_mode": "none", "channel_gate_sharpness": 10.0}},
+    "cap_only_low_s10": {"fixed_name": "radial_memory_strength", "values": [0.0], "base_variant": {"rg_cap_gate_enabled": true, "rg_cap_cluster_weight": false, "radial_memory_gate_mode": "none", "channel_gate_sharpness": 10.0}},
+    "global_memory_control": {"fixed_name": "radial_memory_strength", "values": [0.0, 0.5, 1.0], "base_variant": {"rg_cap_gate_enabled": false, "radial_memory_gate_mode": "none", "channel_gate_sharpness": 5.0}}
+  },
+  "baseline_variant_name": "global_memory_control:radial_memory_strength=1",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20260831,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_tidal_memory_placement/report.json",
+    "scores": "results/reopened_hybrid_tidal_memory_placement/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_tidal_memory_placement/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_tidal_memory_placement/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_tidal_memory_placement/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_tidal_memory_placement/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_tidal_memory_placement/family_impacts.csv",
+    "figure": "results/reopened_hybrid_tidal_memory_placement/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_tidal_memory_placement/SUMMARY.md"
+  }
+}

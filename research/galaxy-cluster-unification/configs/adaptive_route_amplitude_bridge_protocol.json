@@ -1,0 +1,58 @@
+{
+  "protocol_version": "ADAPTIVE-ROUTE-AMPLITUDE-BRIDGE-0.1.0",
+  "frozen_utc": "2026-08-01T06:40:00Z",
+  "status": "frozen_after_A0279_raw_failure_before_fraction_power_scores",
+  "question": "Can the map-level routed fraction predict the potential-level angular contrast through the universal bridge s_theta=f_route^p?",
+  "formula": {
+    "base": "the locked A0279 route map and P0554 excess carrier",
+    "angular_strength": "s_theta=f_route^p",
+    "radial_constraint": "the angular correction retains zero annular convergence and zero circular radial deflection mean",
+    "new_per_cluster_parameters": 0
+  },
+  "inputs": {
+    "raw_translation_protocol": "configs/adaptive_route_raw_rxj2129_protocol.json",
+    "raw_translation_report": "results/adaptive_route_raw_rxj2129/report.json",
+    "raw_translation_parameters": "results/adaptive_route_raw_rxj2129/parameters.csv",
+    "candidate_specs": "results/adaptive_route_kernel/candidate_specs.csv"
+  },
+  "grid": {
+    "fraction_power": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
+  },
+  "selection": {
+    "screen": "profiled training RMS at the archived P0554 geometry",
+    "training_refit_starts": 4,
+    "select": "lowest exact 15-image training RMS with all roots; ties prefer larger power",
+    "heldout_images_used_for_selection": false,
+    "final_selected_starts": 16,
+    "random_seed": 21292033
+  },
+  "randomization": {
+    "radius_preserving_angle_trials": 64,
+    "score_at_selected_fixed_geometry": true
+  },
+  "gates": {
+    "all_heldout_roots_required": true,
+    "heldout_improvement_over_scalar_fraction": 0.05,
+    "absolute_heldout_RMS_arcsec": 1.0,
+    "random_angle_empirical_p_max": 0.05
+  },
+  "outputs": {
+    "directory": "results/adaptive_route_amplitude_bridge",
+    "screen": "screen_scores.csv",
+    "training_refits": "training_refits.csv",
+    "final_scores": "final_scores.csv",
+    "predictions": "predictions.csv",
+    "parameters": "parameters.csv",
+    "randomizations": "randomization_scores.csv",
+    "report": "report.json",
+    "figure": "adaptive_route_amplitude_bridge.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The bridge family was proposed after observing the unit-strength A0279 raw failure, so it is a post hoc mechanism test.",
+    "RX J2129 remains one spent raw cluster and cannot establish that the selected exponent is universal.",
+    "The seven held-out images do not select the exponent, but their p=0 outcome was already known before this protocol.",
+    "Any survivor requires a locked multi-cluster raw-lensing replay.",
+    "The bridge is a weak-field phenomenology, not a covariant derivation."
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "protocol_version": "UNBOUNDED-RUNNING-SPATIAL-VECTOR-0.1.0",
+  "frozen_utc": "2026-07-29T18:30:00Z",
+  "status": "frozen_before_spatial_vector_scores",
+  "purpose": "Test whether observed 2D cluster-member geometry rescues the two locked curvature-running laws while preserving each Tian spherical baryonic monopole and using no object-specific gravity amplitude.",
+  "pre_score_disclosure": [
+    "All four systems and all gravity constants were already used or scored in earlier bridge and raw-image work; this is a structural diagnostic, not external validation.",
+    "The Caminha member magnitudes are lens-model light proxies, not a complete stellar-mass catalog, and the gas and intracluster-light maps are unavailable.",
+    "A fraction f of the outer-anchor baryonic mass is placed at member-light positions, while the exact azimuthal mean of that same component is subtracted. The perturbation therefore has zero circular-average deflection at every tabulated impact radius and adds no far-field mass.",
+    "The universal f and softening are selected only with training images. Held-out images remain untouched until selection is complete.",
+    "The locked-running dressing is a thin-lens vector closure, not yet a derivation from a covariant action."
+  ],
+  "models": {
+    "curvature_power_p2": {
+      "running_model": "curvature_power",
+      "parameters": [-28.30851641358452, 2.0, 0.12124817480126633],
+      "gravity_parameters_fit_to_cluster": 0
+    },
+    "curvature_additive_alpha10": {
+      "running_model": "curvature_additive_power",
+      "parameters": [-29.25048647482217, 1.4591902794259402, 0.05790824504656011, 10.0],
+      "gravity_parameters_fit_to_cluster": 0
+    }
+  },
+  "systems": [
+    {
+      "system": "MACS J0329.7-0211",
+      "label": "MACS0329",
+      "lens_redshift": 0.450,
+      "center_ra_deg": 52.4232083333,
+      "center_dec_deg": -2.1962027778,
+      "images": 23,
+      "families": 9,
+      "position_sigma_arcsec": 0.5,
+      "member_catalog": "data/raw/r1_clash_caminha2019/MACSJ0329-P2-shear_mcmc/members_lenstool_v2.dat"
+    },
+    {
+      "system": "MACS J0429.6-0253",
+      "label": "MACS0429",
+      "lens_redshift": 0.399,
+      "center_ra_deg": 67.4,
+      "center_dec_deg": -2.8852166667,
+      "images": 7,
+      "families": 2,
+      "position_sigma_arcsec": 0.5,
+      "member_catalog": "data/raw/r1_clash_caminha2019/MACSJ0429-P1_mcmc/members_lenstool_v1.dat"
+    },
+    {
+      "system": "MACS J1115.9+0129",
+      "label": "MACS1115",
+      "lens_redshift": 0.355,
+      "center_ra_deg": 168.9662916667,
+      "center_dec_deg": 1.4986111111,
+      "images": 6,
+      "families": 2,
+      "position_sigma_arcsec": 0.5,
+      "member_catalog": "data/raw/r1_clash_caminha2019/MACSJ1115-P1_mcmc/members_lenstool_v2.dat"
+    },
+    {
+      "system": "MACS J1931.8-2635",
+      "label": "MACS1931",
+      "lens_redshift": 0.352,
+      "center_ra_deg": 292.9570833333,
+      "center_dec_deg": -26.5756166667,
+      "images": 19,
+      "families": 7,
+      "position_sigma_arcsec": 0.476751,
+      "member_catalog": "data/raw/r1_clash_caminha2019/MACSJ1931-P2_circular_mcmc/members_lenstool_v2.dat"
+    }
+  ],
+  "split": {
+    "rule": "Within every family containing at least three images, hold out the lexicographically last image; train on every other image. Families with two images remain training-only.",
+    "minimum_training_images_per_family": 2
+  },
+  "baryonic_profile": {
+    "input": "data/raw/clash_tian2020/fig2.dat",
+    "normalization_mass": "Mbar enclosed at the outermost Tian anchor, calculated as gbar*r^2/G",
+    "outer_tail": "gbar proportional to r^-2 beyond the last anchor",
+    "primary_cutoff_kpc": 1000000.0
+  },
+  "spatial_vector_grid": {
+    "member_weight": "10^(-0.4*magnitude), normalized to unity within each catalog",
+    "mass_fractions": [0.0, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8],
+    "softening_arcsec": [0.2, 0.5, 1.0, 2.0, 5.0, 10.0],
+    "dressings": ["GR_linear", "locked_running"],
+    "azimuth_samples": 256,
+    "radial_samples": 700,
+    "radial_range_arcsec": [0.05, 500.0],
+    "screening": "Evaluate every grid point at the prior training-only best geometry and reprofile source positions; shortlist by equal-system training RMS.",
+    "shortlist_per_model_and_dressing": 4,
+    "shortlist_refit_multistarts": 4,
+    "final_refit_multistarts": 8,
+    "universal_hyperparameters": 2,
+    "object_specific_gravity_parameters": 0
+  },
+  "cosmology": {
+    "H0_km_s_Mpc": 70.0,
+    "Omega_m": 0.27,
+    "reference_source_redshift": 2.0
+  },
+  "optimization": {
+    "random_seed": 20260817,
+    "maximum_function_evaluations": 3000
+  },
+  "advance_gates": {
+    "all_heldout_roots_converged": true,
+    "equal_system_heldout_radial_RMS_arcsec_max": 0.75,
+    "improvement_over_same_locked_spherical_model_fraction_min": 0.2,
+    "candidate_to_compact_halo_equal_system_RMS_ratio_max": 1.25,
+    "no_geometry_parameter_at_boundary": true
+  },
+  "inputs": {
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baseline_report": "results/unbounded_running_multicluster_raw/report.json",
+    "baseline_geometry": "results/unbounded_running_multicluster_raw/fitted_geometry.csv"
+  },
+  "outputs": {
+    "report": "results/unbounded_running_spatial_vector/report.json",
+    "member_audit": "results/unbounded_running_spatial_vector/member_audit.csv",
+    "grid_screen": "results/unbounded_running_spatial_vector/grid_screen.csv",
+    "selection_refits": "results/unbounded_running_spatial_vector/selection_refits.csv",
+    "predictions": "results/unbounded_running_spatial_vector/predictions.csv",
+    "parameters": "results/unbounded_running_spatial_vector/fitted_geometry.csv",
+    "figure": "results/unbounded_running_spatial_vector/spatial_vector.png",
+    "summary": "results/unbounded_running_spatial_vector/SUMMARY.md"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "protocol_version": "R1-E325-feasibility-0.2",
+  "status": "frozen_before_any_E325_science_pixel_download_or_inspection",
+  "frozen_utc": "2026-07-27T14:25:00Z",
+  "selection_blind": true,
+  "system": "ESO 325-G004",
+  "alias": "E325",
+  "selection_basis": "Selected after the Jackpot rank-three failure because the published abstract identifies a nearby galaxy-scale strong lens with spatially resolved stellar kinematics and a self-consistent HST-lensing plus dynamics analysis. Selection used no gravity residual, reported gamma value, dark-matter parameter, or alternative-gravity score.",
+  "target": {
+    "ra_hms": "13:43:33.2",
+    "dec_dms": "-38:10:34",
+    "ra_deg": 205.88833333333332,
+    "dec_deg": -38.17611111111111,
+    "frame": "ICRS/J2000",
+    "lens_redshift": 0.035
+  },
+  "primary_source": {
+    "citation": "Collett et al. 2018, Science, arXiv:1806.08300",
+    "url": "https://arxiv.org/abs/1806.08300",
+    "source_archive_url": "https://export.arxiv.org/e-print/1806.08300",
+    "local_source_path": "data/raw/r1_e325_primary_source/1806.08300/ScienceFormat3.tex",
+    "source_archive_path": "data/raw/r1_e325_primary_source/collett2018_source.tar",
+    "source_archive_bytes": 6957401,
+    "source_archive_sha256": "83596168541178c6891aef977272031d2f37791edf2f13fdc8208dd7734cda7d",
+    "published_einstein_radius_arcsec": 2.95,
+    "source_redshift": 2.1,
+    "published_observable_claims": [
+      "HST imaging resolves lensed arcs around the foreground galaxy",
+      "MUSE supplies spatially resolved stellar kinematics",
+      "the paper models the observed arc light and kinematics jointly"
+    ]
+  },
+  "published_dynamics_support": {
+    "muse_program_id": "097.A-0987(A)",
+    "observation_date": "2016-04-04",
+    "on_source_exposures": 5,
+    "sky_exposures": 2,
+    "seconds_per_exposure": 330,
+    "science_exposure_seconds_in_public_product": 1349.097,
+    "spatial_pixel_arcsec": 0.2,
+    "psf_fwhm_arcsec": 0.57,
+    "kinematic_bin_size_arcsec": 0.6,
+    "accepted_model_outer_radius_arcsec": 4.0,
+    "accepted_support_basis": "The primary source explicitly models only the central 4 arcseconds; this validity support, not the full cube footprint, defines overlap."
+  },
+  "published_lens_geometry": {
+    "distinct_spectroscopic_source_planes": 1,
+    "einstein_radius_arcsec": 2.95,
+    "einstein_radius_inside_accepted_dynamics_support": true,
+    "extended_surface_brightness_arcs": true,
+    "published_radial_magnification_sensitivity": true,
+    "published_lens_image_pixels": "thousands",
+    "published_source_grid": "80x80 adaptive pixels",
+    "interpretation": "The extended arcs establish sensitivity beyond one enclosed-mass number, but do not establish three nuisance-marginalized response modes."
+  },
+  "archive_targets": {
+    "eso_muse": {
+      "proposal_id": "097.A-0987",
+      "instrument": "MUSE",
+      "expected_public_products": 3,
+      "expected_public_science_cubes": 1,
+      "expected_public_level3_products": 0
+    },
+    "hst": [
+      {
+        "proposal_id": "10429",
+        "instrument_contains": "ACS/WFC",
+        "filter": "F814W",
+        "published_exposure_seconds": 18900,
+        "minimum_public_exposure_seconds": 18800,
+        "purpose": "lens light and PSF-aware baryonic light model"
+      },
+      {
+        "proposal_id": "10710",
+        "instrument_contains": "ACS/WFC",
+        "filter": "F475W",
+        "published_exposure_seconds": 4800,
+        "minimum_public_exposure_seconds": 4700,
+        "purpose": "extended arc surface brightness after lens-light subtraction"
+      }
+    ]
+  },
+  "frozen_pre_pixel_gate": {
+    "minimum_numerical_dynamics_bins": 3,
+    "minimum_observable_lens_radii_inside_accepted_dynamics_support": 3,
+    "minimum_pre_fit_structural_radial_rank_upper_bound": 3,
+    "minimum_family_wide_position_degrees_of_freedom_after_source_position": 4,
+    "accepted_dynamics_support_must_come_from_published_validity_mask_not_cube_coverage": true,
+    "einstein_ring_radius_alone_counts_as_radial_modes": 1,
+    "extended_arc_pixels_may_raise_rank_only_after_observable_level_jacobian_audit": true,
+    "current_pre_fit_ring_only_radial_rank_upper_bound": 1,
+    "current_extended_arc_structural_rank_upper_bound": "potentially_at_least_3_but_not_numerically_established",
+    "current_full_image_level_rank": "not_yet_audited",
+    "current_gate_pass": false,
+    "no_post_selection_relaxation": true
+  },
+  "source_and_metadata_audit": {
+    "required_facts": [
+      "exact MUSE proposal and public product identifiers",
+      "exact HST proposal, filters, exposure products, PSF, and noise inputs",
+      "published accepted dynamics support and number of numerical bins",
+      "observable arc masks or image positions and source redshift likelihood",
+      "whether the public likelihood can be rerun without importing the paper's GR-fitted posterior",
+      "baryonic light model and mass-to-light nuisance inputs",
+      "kinematic, lensing, and shared systematic covariance availability"
+    ],
+    "success": "Public raw products are source-traceable, the extended arcs lie inside accepted dynamics support, and a frozen observable-level Jacobian can test at least three lens-response basis directions after source-light and lens-nuisance marginalization.",
+    "failure": "Retain E325 only as a one-effective-radius control if the marginalized image-level Jacobian rank is below three; never promote it from pixel count alone."
+  },
+  "progress_checkpoint": {
+    "time_box": "one primary-source and archive-metadata audit",
+    "advance_if": "The source and archive audit supports freezing an exact acquisition and image-level Jacobian protocol without inspecting science arrays.",
+    "rethink_if": "The frozen nuisance-marginalized Jacobian supplies fewer than three singular directions above its predeclared numerical and perturbation-stability thresholds. Retain the object as a one-radius control rather than treating high pixel count as independent radial rank."
+  },
+  "authorization": {
+    "download_primary_article_source": true,
+    "query_archive_metadata": true,
+    "download_science_pixels": false,
+    "inspect_science_pixels": false,
+    "infer_dynamical_or_Weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false,
+    "count_toward_ten_system_target": false
+  }
+}

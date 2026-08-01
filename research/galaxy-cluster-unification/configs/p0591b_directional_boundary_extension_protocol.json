@@ -1,0 +1,19 @@
+{
+  "protocol_version": "P0591B-DIRECTIONAL-BOUNDARY-EXTENSION-0.1.0",
+  "frozen_utc": "2026-08-01T08:54:00Z",
+  "status": "frozen_after_P0591_upper_boundary_result_before_extension_scores",
+  "question": "Does extending only the P0591 return-radius and directional-concentration upper boundaries overturn the Gaussian-smoothing null?",
+  "base_protocol": "configs/p0590_gravity_return_backtrack_protocol.json",
+  "disclosed_P0591_best": {"return_radius_arcsec": 32.0, "width_fraction": 0.35, "directional_concentration": 2.0, "routed_fraction": 1.0},
+  "factorial": {
+    "return_radius_arcsec": [24.0, 32.0, 40.0, 48.0, 64.0],
+    "width_fraction": [0.2, 0.3, 0.4, 0.5],
+    "directional_concentration": [1.5, 2.0, 3.0, 4.0, 6.0],
+    "routed_fraction": [0.75, 1.0],
+    "candidate_count": 200
+  },
+  "gaussian_control": {"return_radius_arcsec": 0.0, "width_arcsec": 16.0, "routed_fraction": 1.0},
+  "gates": {"development_improvement_over_gaussian_fraction_min": 0.05, "holdout_improvement_over_gaussian_fraction_min": 0.05, "both_holdouts_better_than_gaussian": true},
+  "outputs": {"directory": "results/p0591b_directional_boundary_extension", "candidate_scores": "candidate_scores.csv", "map_scores": "map_scores.csv", "report": "report.json", "summary": "SUMMARY.md"},
+  "claim_limits": ["This is a disclosed post-boundary extension on reused maps, not a prospective discovery test.", "Failure closes only the global-axis ring family, not every possible curved-path field equation."]
+}

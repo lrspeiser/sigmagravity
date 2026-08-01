@@ -1,0 +1,96 @@
+{
+  "status": "completed survivor activation and outlier diagnostic",
+  "outer_sample": {
+    "points": 968,
+    "galaxies": 131
+  },
+  "coherence_active_subset": {
+    "points": 351,
+    "point_fraction": 0.36260330578512395,
+    "galaxies": 30,
+    "candidate_RMSE_km_s": 11.558970197010366,
+    "independently_refit_RAR_RMSE_km_s": 10.94881350617895,
+    "RAR_same_candidate_nuisance_RMSE_km_s": 15.627942299542301,
+    "formula_velocity_delta_median_km_s": 1.4196776815666396,
+    "formula_velocity_delta_p95_km_s": 21.34353508678035,
+    "formula_velocity_delta_max_km_s": 37.95162530135542,
+    "active_galaxies_candidate_better": 12,
+    "active_galaxies_candidate_worse": 18,
+    "median_absolute_nuisance_shift_candidate_vs_RAR": {
+      "disk_mass_to_light": 0.04547509244094913,
+      "bulge_mass_to_light": 0.027843660669128578,
+      "distance_scale": 0.030144673067562078,
+      "inclination_adjusted_deg": 0.11304203145856917
+    }
+  },
+  "all_galaxy_comparison": {
+    "candidate_better": 12,
+    "candidate_worse": 18,
+    "identical": 101,
+    "largest_improvements": [
+      {
+        "galaxy": "UGC02916",
+        "candidate_RMSE_km_s": 15.233276644041194,
+        "RAR_RMSE_km_s": 26.122704634514104,
+        "delta_MSE_candidate_minus_RAR_km2_s2": -450.3429801081737
+      },
+      {
+        "galaxy": "IC4202",
+        "candidate_RMSE_km_s": 17.70662963873103,
+        "RAR_RMSE_km_s": 19.389473242200264,
+        "delta_MSE_candidate_minus_RAR_km2_s2": -62.42693944681184
+      },
+      {
+        "galaxy": "NGC5985",
+        "candidate_RMSE_km_s": 7.603700505586659,
+        "RAR_RMSE_km_s": 9.78623768876818,
+        "delta_MSE_candidate_minus_RAR_km2_s2": -37.954186722407954
+      },
+      {
+        "galaxy": "UGC09133",
+        "candidate_RMSE_km_s": 7.81114385625349,
+        "RAR_RMSE_km_s": 8.447615805367715,
+        "delta_MSE_candidate_minus_RAR_km2_s2": -10.34824445201179
+      },
+      {
+        "galaxy": "NGC5033",
+        "candidate_RMSE_km_s": 18.382726121935587,
+        "RAR_RMSE_km_s": 18.466447712851103,
+        "delta_MSE_candidate_minus_RAR_km2_s2": -3.085071457370759
+      }
+    ],
+    "largest_regressions": [
+      {
+        "galaxy": "UGC06614",
+        "candidate_RMSE_km_s": 37.25153265887079,
+        "RAR_RMSE_km_s": 24.52193562263683,
+        "delta_MSE_candidate_minus_RAR_km2_s2": 786.3513587541715
+      },
+      {
+        "galaxy": "NGC2955",
+        "candidate_RMSE_km_s": 25.296049299525503,
+        "RAR_RMSE_km_s": 16.2614213951169,
+        "delta_MSE_candidate_minus_RAR_km2_s2": 375.45628437445896
+      },
+      {
+        "galaxy": "UGC06787",
+        "candidate_RMSE_km_s": 15.836658070737057,
+        "RAR_RMSE_km_s": 10.415030163692613,
+        "delta_MSE_candidate_minus_RAR_km2_s2": 142.32688553881422
+      },
+      {
+        "galaxy": "UGC05253",
+        "candidate_RMSE_km_s": 12.498552865587401,
+        "RAR_RMSE_km_s": 10.096223634197846,
+        "delta_MSE_candidate_minus_RAR_km2_s2": 54.28009206214786
+      },
+      {
+        "galaxy": "NGC6195",
+        "candidate_RMSE_km_s": 9.564440337663209,
+        "RAR_RMSE_km_s": 6.398007823679545,
+        "delta_MSE_candidate_minus_RAR_km2_s2": 50.54401486085446
+      }
+    ]
+  },
+  "interpretation": "Aggregate competitiveness is partly produced by exact RAR recovery in inactive galaxies. The active subset is the discriminating sample and must be replicated."
+}

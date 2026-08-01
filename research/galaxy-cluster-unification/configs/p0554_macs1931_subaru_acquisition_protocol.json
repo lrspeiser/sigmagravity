@@ -1,0 +1,51 @@
+{
+  "protocol_version": "P0554-MACS1931-SUBARU-ACQUISITION-0.1.0",
+  "frozen_utc": "2026-08-01T01:40:32Z",
+  "status": "frozen_after_archive_listing_head_and_comment_header_checks_before_local_download",
+  "question": "Does the official wide-field Subaru BVRIz/BPZ catalog contain the baryonic structure needed to audit the broad southern MACS1931 lens-halo endpoint?",
+  "selection_boundary": [
+    "MACS1931 was selected before this acquisition because its second Lenstool halo is the only one of seven reconstructed components whose capacity-relaxed dominant origin remains more than 400 kpc from a published member after restoring the full existing member catalog.",
+    "The archive directory, three text products, expected byte lengths, and raw-only acquisition rule were frozen before any complete catalog was downloaded or spatially scored.",
+    "Remote inspection was limited to the archive listing, HTTP metadata, the README, and leading comment/schema lines. No complete catalog rows were examined.",
+    "This acquisition cannot establish a gravity-routing effect. A separate frozen analysis protocol controls membership, target, null rotations, and interpretation."
+  ],
+  "official_source": {
+    "provider": "Mikulski Archive for Space Telescopes",
+    "program": "CLASH",
+    "instrument": "Subaru Suprime-Cam",
+    "archive_landing_page": "https://archive.stsci.edu/prepds/clash/",
+    "directory": "https://archive.stsci.edu/missions/hlsp/clash/macs1931/catalogs/subaru/",
+    "documentation_claim": "The archive README describes a 40 by 40 arcmin co-added BVRIz catalog and BPZ photometric redshifts; the scientific reduction is attributed there to Umetsu et al. (2014)."
+  },
+  "products": [
+    {
+      "role": "multiband_photometry",
+      "filename": "hlsp_clash_subaru_suprimecam_macs1931_cat.txt",
+      "expected_bytes": 17394266,
+      "last_modified_http": "Thu, 23 May 2013 21:18:05 GMT"
+    },
+    {
+      "role": "archive_readme",
+      "filename": "hlsp_clash_subaru_suprimecam_macs1931_catalog_readme.txt",
+      "expected_bytes": 6207,
+      "last_modified_http": "Fri, 19 Dec 2014 20:11:02 GMT"
+    },
+    {
+      "role": "bpz_photometric_redshifts",
+      "filename": "hlsp_clash_subaru_suprimecam_macs1931_photoz-cat.txt",
+      "expected_bytes": 25580136,
+      "last_modified_http": "Thu, 23 May 2013 21:20:02 GMT"
+    }
+  ],
+  "field": {
+    "cluster": "MACS J1931.8-2635",
+    "center_ra_deg": 292.9570833333,
+    "center_dec_deg": -26.5756166667,
+    "cluster_redshift": 0.352,
+    "catalog_field_of_view_arcmin": [40.0, 40.0]
+  },
+  "outputs": {
+    "directory": "data/raw/p0554_macs1931_subaru",
+    "provenance": "data/raw/p0554_macs1931_subaru/provenance.json"
+  }
+}

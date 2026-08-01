@@ -1,0 +1,13 @@
+model,parameter,value,near_bound
+strict_route_RAR,axis_ratio_q,0.550000267437919,True
+strict_route_RAR,position_angle_phi_radian,0.5065442212376934,False
+strict_route_RAR,center_x_arcsec,-1.384775641406173,False
+strict_route_RAR,center_y_arcsec,0.8423428894266302,False
+strict_route_RAR,external_shear_gamma1,-0.24999998252231334,True
+strict_route_RAR,external_shear_gamma2,-0.24999999990834662,True
+strict_route_P0599,axis_ratio_q,0.5958093380468835,False
+strict_route_P0599,position_angle_phi_radian,-1.0361102140574394,False
+strict_route_P0599,center_x_arcsec,-1.3943467998148955,False
+strict_route_P0599,center_y_arcsec,2.997440516248918,True
+strict_route_P0599,external_shear_gamma1,0.20112688766979459,False
+strict_route_P0599,external_shear_gamma2,-0.2499999999357621,True

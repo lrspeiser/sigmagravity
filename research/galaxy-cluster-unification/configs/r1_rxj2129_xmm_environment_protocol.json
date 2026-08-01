@@ -1,0 +1,179 @@
+{
+  "protocol_version": "R1B3-RXJ2129-XMM-environment-0.6",
+  "status": "corrected_and_refrozen_after_SAS_command_interface_audit_and_before_successful_environment_verification_or_XMM_task_execution",
+  "frozen_utc": "2026-07-27T08:22:20Z",
+  "selection_blind": true,
+  "system": "RX J2129",
+  "obsid": "0093030201",
+  "purpose": "Create an isolated, versioned XMM reduction and spectral-fitting environment. This gate installs software and calibration files only; it does not run cifbuild, odfingest, EPIC reduction, event filtering, image creation, or array inspection.",
+  "known_before_freeze": [
+    "The complete public archive acquisition passed its size, category, ETag, SHA-256, and no-partial-file gates.",
+    "The host has WSL Ubuntu 24.04 on x86_64, mamba 2.5.0, and sufficient local storage.",
+    "No usable SAS or HEASoft command was present in the default shell.",
+    "SAS 22.1.0 is the current official Ubuntu 24.04 binary exposed by HEASARC; HEASoft 6.36 is the current release and has an official conda package.",
+    "HEASARC states that XSPEC model use requires the separate xspec-data package and that the XMM CCF is distributed separately from SAS.",
+    "The exact SAS archive was downloaded without extraction and has 1,534,501,526 bytes, SHA-256 f8085d71b0231b9b21fc7a4545746c948f4bc5920d7fa7cce953b2b560bed88c, ETag 5b76a296-62f869dcf5e00, and Last-Modified 2025-03-04T16:18:00Z.",
+    "Inspection of only the outer archive member names and install.sh showed that the installer creates the child directory xmmsas_22.1.0-a8f2c2afa-20250304. No executable, calibration, event, image, or science array was opened."
+  ],
+  "corrections": [
+    {
+      "withdrawn_protocol_version": "R1B3-RXJ2129-XMM-environment-0.1",
+      "reason": "The first freeze treated the installation parent as the SAS executable prefix. The official install.sh revealed the deterministic child directory before extraction or installation.",
+      "scientific_effect": "none; source, archive, checksum, software version, CCF date, thresholds, and all science prohibitions are unchanged"
+    },
+    {
+      "withdrawn_protocol_version": "R1B3-RXJ2129-XMM-environment-0.2",
+      "reason": "The official SAS configurator stopped before completion because SAS_PERL was undefined; its bundled dependency ledger also requires Python >=3.8 and named Python modules. The exact host Perl, isolated-environment Python, and bundled module mapping are now declared.",
+      "scientific_effect": "none; the failed configuration did not invoke a SAS task or access calibration, event, image, or science arrays"
+    },
+    {
+      "withdrawn_protocol_version": "R1B3-RXJ2129-XMM-environment-0.3",
+      "reason": "The strict conda solve showed that the SAS-bundled pyds9 module name is absent from both declared conda channels. PyPI exposes one exact source release, pyds9 1.8.1, with a published SHA-256; only that module is now routed through the hash-pinned source distribution.",
+      "scientific_effect": "none; the failed dependency solve made no environment change and no SAS or science task ran"
+    },
+    {
+      "withdrawn_protocol_version": "R1B3-RXJ2129-XMM-environment-0.4",
+      "reason": "SAS configuration completed and wrote its environment scripts, but the subsequent version command correctly failed because the conda HEASoft package exposes bin/heainit.sh rather than the source-build headas.sh path described in the generic manual initialization example. The exact conda activation sequence is now declared.",
+      "scientific_effect": "none; only installer configuration and version-command attempts occurred, with no SAS science task or data access"
+    },
+    {
+      "withdrawn_protocol_version": "R1B3-RXJ2129-XMM-environment-0.5",
+      "reason": "The SAS common task interface reserves uppercase -V for verbosity and uses lowercase -v/--version for a task version. The executable probe stopped on the first missing verbosity argument, before any task processing.",
+      "scientific_effect": "none; the attempted cifbuild invocation failed argument parsing before calibration or data access"
+    }
+  ],
+  "host": {
+    "wsl_distribution": "Ubuntu-24.04",
+    "linux_distribution": "ubuntu",
+    "linux_version": "24.04",
+    "architecture": "x86_64",
+    "shell": "bash",
+    "no_root_install": true
+  },
+  "paths": {
+    "environment_root": "/home/henry/.local/share/sigmagravity-xmm",
+    "installer_directory": "/home/henry/.local/share/sigmagravity-xmm/installers",
+    "sas_install_parent": "/home/henry/.local/share/sigmagravity-xmm/sas-22.1.0",
+    "sas_prefix": "/home/henry/.local/share/sigmagravity-xmm/sas-22.1.0/xmmsas_22.1.0-a8f2c2afa-20250304",
+    "heasoft_prefix": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+    "ccf_snapshot": "/home/henry/.local/share/sigmagravity-xmm/ccf/2026-07-27",
+    "mamba_executable": "/home/henry/.local/share/sigmagravity-dragons/miniforge3/bin/mamba",
+    "repo_environment_manifest": "data/derived/r1_rxj2129_xmm_environment_manifest.json",
+    "repo_environment_report": "results/r1_rxj2129_xmm_environment/report.json"
+  },
+  "sas": {
+    "version": "22.1.0",
+    "build": "a8f2c2afa-20250304",
+    "platform_build": "ubuntu24.04-gcc13.3.0-x86_64",
+    "archive_filename": "sas_22.1.0-a8f2c2afa-20250304-ubuntu24.04-gcc13.3.0-x86_64.tgz",
+    "official_url": "https://heasarc.gsfc.nasa.gov/FTP/xmm/software/sas/latest/Linux/Ubuntu24.04/sas_22.1.0-a8f2c2afa-20250304-ubuntu24.04-gcc13.3.0-x86_64.tgz",
+    "archive_bytes": 1534501526,
+    "archive_sha256": "f8085d71b0231b9b21fc7a4545746c948f4bc5920d7fa7cce953b2b560bed88c",
+    "archive_etag": "5b76a296-62f869dcf5e00",
+    "archive_last_modified_utc": "2025-03-04T16:18:00Z",
+    "download_policy": "Download exactly this archive, record its byte count and SHA-256 before extraction, retain the archive, and reject redirects to a differently named build.",
+    "install_policy": "Extract the outer archive under sas_install_parent and let the unmodified official install.sh create the declared sas_prefix child. Do not modify a system SAS installation or shell startup files.",
+    "runtime_bindings": {
+      "SAS_PERL": "/usr/bin/perl",
+      "python": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/python",
+      "CONDA_PREFIX": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+      "HEASoft_initialization": "source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh",
+      "configuration_success_marker": "/home/henry/.local/share/sigmagravity-xmm/sas-22.1.0/xmmsas_22.1.0-a8f2c2afa-20250304/.configuration_complete"
+    },
+    "bundled_python_requirement_mapping": {
+      "astropy": "astropy",
+      "numpy": "numpy",
+      "matplotlib": "matplotlib-base",
+      "requests": "requests",
+      "pyds9": "pip:pyds9==1.8.1@sha256:b4f198f5d29b749f721c491f8384f6293e43ec417bd0492be36bffb5c3904b2a",
+      "PyQt5": "pyqt",
+      "beautifultable": "beautifultable",
+      "scipy": "scipy",
+      "notebook": "notebook",
+      "astroquery>=0.4.3": "astroquery>=0.4.3",
+      "pytest": "pytest",
+      "PyPDF2": "pypdf2"
+    },
+    "verification_commands": [
+      "sasversion",
+      "cifbuild -v",
+      "odfingest -v",
+      "emproc -v",
+      "epproc -v"
+    ]
+  },
+  "heasoft": {
+    "version": "6.36",
+    "packages": [
+      "heasoft=6.36",
+      "xspec-data"
+    ],
+    "channels_in_priority_order": [
+      "https://heasarc.gsfc.nasa.gov/FTP/software/conda/",
+      "conda-forge"
+    ],
+    "solver": "mamba 2.5.0",
+    "environment_policy": "Create an exact-prefix environment separate from the DRAGONS environment. Export an explicit package URL lock and package inventory after solving.",
+    "verification_commands": [
+      "ftversion",
+      "xspec --version"
+    ]
+  },
+  "ccf": {
+    "source": "https://heasarc.gsfc.nasa.gov/FTP/xmm/data/CCF/",
+    "official_mirror_command": "wget -m -nH --no-remove-listing -N -np -r --cut-dirs=4 -e robots=off -l 1 -R index.html* https://heasarc.gsfc.nasa.gov/FTP/xmm/data/CCF/",
+    "snapshot_date_utc": "2026-07-27",
+    "minimum_total_bytes": 5000000000,
+    "minimum_constituent_files": 1000,
+    "snapshot_policy": "Mirror once into the dated directory, then write a sorted SHA-256 manifest and never update this directory during the frozen run. Any later CCF refresh must use a new dated directory and a new protocol.",
+    "cif_policy": "For ObsID 0093030201, run cifbuild only after the event-processing protocol is separately frozen. Set SAS_CCFPATH to this snapshot and set analysisdate=2026-07-27 so later calibration releases cannot enter this run.",
+    "observation_local_cif_required": true,
+    "analysis_date": "2026-07-27"
+  },
+  "environment_gate": {
+    "require_sas_version": "22.1.0",
+    "require_heasoft_version": "6.36",
+    "require_xspec_model_data": true,
+    "require_explicit_conda_lock": true,
+    "require_sas_archive_sha256": true,
+    "require_ccf_sorted_sha256_manifest": true,
+    "require_ccf_snapshot_thresholds": true,
+    "require_all_verification_commands_exit_zero": true,
+    "failure": "Stop before cifbuild or odfingest if any version, checksum, command, package-lock, or CCF-snapshot gate fails. Do not substitute an unpinned system tool or a newer calibration directory."
+  },
+  "provenance_sources": [
+    {
+      "authority": "NASA HEASARC",
+      "url": "https://heasarc.gsfc.nasa.gov/docs/xmm/sas-convert.html",
+      "claim": "SAS 22.1.0 has an exact Ubuntu 24.04 x86_64 binary build."
+    },
+    {
+      "authority": "NASA HEASARC",
+      "url": "https://heasarc.gsfc.nasa.gov/docs/software/conda.html",
+      "claim": "HEASoft is available through the official conda channel; a separate environment is recommended; xspec-data is required for XSPEC models."
+    },
+    {
+      "authority": "NASA HEASARC XMM GOF",
+      "url": "https://heasarc.gsfc.nasa.gov/docs/xmm/xmmgof_mirror.html",
+      "claim": "The CCF mirror command and current approximate CCF volume are documented here."
+    },
+    {
+      "authority": "NASA HEASARC XMM GOF",
+      "url": "https://heasarc.gsfc.nasa.gov/docs/xmm/esas/index.html/node29.html",
+      "claim": "A local ccf.cif records exactly which calibration constituents were used for an observation."
+    }
+  ],
+  "authorization": {
+    "download_and_install_exact_SAS_archive": true,
+    "create_exact_HEASoft_XSPEC_environment": true,
+    "mirror_and_hash_dated_CCF_snapshot": true,
+    "run_environment_verification_commands": true,
+    "run_cifbuild_or_odfingest": false,
+    "inspect_XMM_event_arrays": false,
+    "run_EPIC_reduction": false,
+    "infer_gas_profile": false,
+    "measure_HST_arc_pixels": false,
+    "infer_dynamical_or_Weyl_response": false,
+    "fit_new_force_or_action": false
+  }
+}

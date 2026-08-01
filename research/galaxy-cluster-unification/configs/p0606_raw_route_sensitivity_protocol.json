@@ -1,0 +1,48 @@
+{
+  "protocol_version": "P0606-RAW-ROUTE-SENSITIVITY-0.1.0",
+  "frozen_utc": "2026-08-01T21:35:00Z",
+  "status": "post_P0605_spent_raw_diagnostic_frozen_before_P0606_variant_scores",
+  "question": "Does raw RX J2129 reject conservative routing itself, or only the large route fraction selected by normalized morphology?",
+  "fixed_scalar": "P0599 bounded potential-shape amplitude",
+  "base_route": {
+    "fraction_max": 0.2,
+    "length_over_R80": 0.25,
+    "radius_exponent": -0.5,
+    "width_over_R80": 0.5,
+    "shape_gate": "H",
+    "source_acceleration_gate_power": 4.0
+  },
+  "one_at_a_time": {
+    "no_route": [0.0],
+    "fraction_max": [0.05, 0.1, 0.2, 0.3, 0.5, 0.75, 1.0],
+    "length_over_R80": [0.1, 0.15, 0.35, 0.5],
+    "width_over_R80": [0.25, 0.35, 0.75, 1.0],
+    "candidate_count": 16
+  },
+  "inputs": {
+    "P0605_protocol": "configs/p0605_strict_route_raw_lensing_protocol.json",
+    "raw_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "initial_parameters": "results/p0601_frozen_potential_raw_lensing/fitted_parameters.csv"
+  },
+  "validation": {
+    "optimization_starts_per_variant": 1,
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "selection": "rank training RMS only; heldout scores are spent posthoc diagnostics"
+  },
+  "outputs": {
+    "directory": "results/p0606_raw_route_sensitivity",
+    "scores": "variant_scores.csv",
+    "predictions": "image_predictions.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0606_raw_route_sensitivity.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "Every RX J2129 image is spent and no heldout value is confirmatory.",
+    "One optimization start provides a local parameter-response diagnostic only.",
+    "The route uses a spherical projection and a literature baryon profile.",
+    "Any favorable setting must be selected without and tested on another raw cluster."
+  ]
+}

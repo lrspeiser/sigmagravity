@@ -1,0 +1,95 @@
+{
+  "protocol_version": "R1B0-RXJ2129-covariance-0.1",
+  "status": "executed_then_invalidated_by_template_resolution_preflight",
+  "superseded_by": "configs/r1_rxj2129_covariance_resolution_corrected_protocol.json",
+  "invalidation_reason": "E-MILES FWHM is 2.51 Angstrom throughout the fitted rest-frame range, broader than the 2.024-2.186 Angstrom MUSE rest-frame sensitivity range, so pPXF clips the negative resolution difference and the nominal E-MILES resolution grid is non-informative.",
+  "parent_profile_protocol": "configs/r1_rxj2129_ppxf_protocol.json",
+  "purpose": "Estimate the full four-bin RX J2129 BCG velocity-dispersion covariance and predeclared template, resolution, and spectral-mask sensitivity without changing the selected system, center, annuli, spatial mask, or success thresholds.",
+  "blindness_rule": "This execution protocol is frozen after the baseline internal-consistency gate but before any bootstrap or sensitivity result is calculated. No gravity residual or lensing mass residual is an input.",
+  "inputs": {
+    "cube_path": "data/raw/r1_muse_bcg_cubes/rxj2129_bcg_4860_7160A_r10arcsec.fits",
+    "cube_sha256": "5CA2713AA2DF418A150AE0B1645B8187882542A4F4698AD6C4DB71569E718408",
+    "baseline_profile_path": "data/derived/r1_rxj2129_ppxf_engineering_profile.csv",
+    "baseline_report_path": "results/r1_rxj2129_ppxf/report.json",
+    "template_products": [
+      {
+        "family": "E-MILES",
+        "path": "data/raw/r1_ppxf_templates/spectra_emiles_9.0.npz",
+        "sha256": "6A1B1A70DB4D95F67AFE0ADBE254F111EB2B50412B9F311714C54FFBA18C6F0E",
+        "role": "baseline_and_resolution_mask_grid"
+      },
+      {
+        "family": "XSL",
+        "path": "data/raw/r1_ppxf_templates/spectra_xsl_9.0.npz",
+        "sha256": "B8BEE334EE1705A0D4E7FF0F161990C248D68AC1B8C8EB138B0D8C05CF37D853",
+        "role": "independent_template_family_systematic_at_baseline_resolution_and_mask"
+      }
+    ]
+  },
+  "spatial_block_bootstrap": {
+    "replicates": 100,
+    "block_shape_spaxels": [
+      2,
+      2
+    ],
+    "block_grid_origin_pixel": [
+      0,
+      0
+    ],
+    "resampling": "Within each frozen annulus, sample its intersecting anchored 2x2 spatial blocks with replacement, retaining all valid annular spaxels in each selected block. Fit all four resampled annuli for every replicate.",
+    "spectral_configuration": {
+      "template_family": "E-MILES",
+      "instrumental_fwhm_angstrom": 2.6,
+      "high_variance_mask_sigma": 6.0
+    },
+    "random_seed": 2129
+  },
+  "sensitivity_grid": {
+    "emiles_instrumental_fwhm_angstrom": [
+      2.5,
+      2.6,
+      2.7
+    ],
+    "emiles_high_variance_mask_sigma": [
+      5.0,
+      6.0,
+      8.0
+    ],
+    "xsl_runs": [
+      {
+        "instrumental_fwhm_angstrom": 2.6,
+        "high_variance_mask_sigma": 6.0
+      }
+    ],
+    "systematic_covariance": "For every non-baseline protocol, form the four-bin shift from the frozen E-MILES 2.6-A, 6-sigma baseline. The between-protocol covariance is the arithmetic mean of the outer products of those shift vectors, preserving coherent off-diagonal shifts."
+  },
+  "covariance_construction": {
+    "bootstrap_covariance": "Unbiased sample covariance of the 100 four-bin bootstrap dispersion vectors.",
+    "systematic_covariance": "Second moment about the frozen baseline of all non-baseline sensitivity shifts.",
+    "reported_total_covariance": "bootstrap covariance plus systematic covariance",
+    "formal_errors": "Retained in the profile and ledger but not added as a separate diagonal term because the spatial bootstrap resamples spectra carrying the measured pixel noise; adding both would double count the same statistical information.",
+    "positive_semidefinite_tolerance": -1e-10
+  },
+  "success_thresholds": {
+    "required_successful_bootstrap_replicates": 100,
+    "required_successful_bins_per_replicate": 4,
+    "maximum_fractional_total_sigma_uncertainty_each_bin": 0.3,
+    "maximum_template_or_mask_shift_fraction_each_bin": 0.1,
+    "covariance_symmetric_absolute_tolerance": 1e-10,
+    "covariance_positive_semidefinite": true
+  },
+  "outputs": {
+    "bootstrap_ledger": "data/derived/r1_rxj2129_ppxf_bootstrap.csv",
+    "sensitivity_ledger": "data/derived/r1_rxj2129_ppxf_sensitivity.csv",
+    "covariance_long_table": "data/derived/r1_rxj2129_ppxf_covariance.csv",
+    "profile_with_total_errors": "data/derived/r1_rxj2129_ppxf_profile_with_covariance.csv",
+    "report": "results/r1_rxj2129_covariance/report.json",
+    "diagnostic_plot": "results/r1_rxj2129_covariance/covariance_diagnostics.png"
+  },
+  "authorization": {
+    "execute_frozen_covariance_protocol": true,
+    "change_annuli_or_spatial_mask_after_result": false,
+    "gravity_response_fit": false,
+    "strict_r1_ready_from_covariance_alone": false
+  }
+}

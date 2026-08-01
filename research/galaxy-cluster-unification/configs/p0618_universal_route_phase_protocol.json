@@ -1,0 +1,51 @@
+{
+  "protocol_version": "P0618-UNIVERSAL-ROUTE-PHASE-0.1.0",
+  "status": "frozen_after_P0617_before_universal_phase_scores",
+  "question": "Can one universal rotation of the conservative baryonic route field resolve the cluster-dependent sign split without per-system gravity choices?",
+  "frozen_formula": {
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "angular_amplitude": "epsilon=Q^2/(1+Delta80)",
+    "width_over_R80": "0.23*sqrt(1+Q^2), selected as the P0617 safety-first diagnostic",
+    "return_length_over_R80": 0.36,
+    "travel_mode": "constant",
+    "contrast_mode": "tanh",
+    "contrast_cap": 20.0,
+    "phase_operation": "rotate the complete positive route template about the lens origin before annular monopole removal"
+  },
+  "universal_phase_degrees": [-90.0, -67.5, -45.0, -22.5, 0.0, 22.5, 45.0, 67.5, 90.0],
+  "parameter_policy": {
+    "new_fitted_gravity_parameters": 0,
+    "per_object_gravity_parameters": 0,
+    "phase_is_universal_within_each_variant": true,
+    "per_system_best_phase_is_diagnostic_only": true
+  },
+  "inputs": {
+    "P0615_protocol": "configs/p0615_self_coupled_quadrupole_route_protocol.json",
+    "P0615_report": "results/p0615_self_coupled_quadrupole_route/report.json",
+    "P0617_report": "results/p0617_self_coupled_support_phase_atlas/report.json"
+  },
+  "gates": {
+    "combined_heldout_roots_required": 18,
+    "systems_not_worse_required": 5,
+    "minimum_system_improvement": 0.0,
+    "galaxy_RMSE_to_fixed_RAR_max": 1.5,
+    "Solar_all_proxies_required": true
+  },
+  "outputs": {
+    "directory": "results/p0618_universal_route_phase",
+    "scores": "scores.csv",
+    "universal_phase_responses": "universal_phase_responses.csv",
+    "system_phase_preferences": "system_phase_preferences.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "figure": "p0618_universal_route_phase.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The phase scan is frozen before its scores but follows inspection of the P0617 sign split and uses project-spent systems.",
+    "Rotating the route template is a phenomenological diagnostic of radial-versus-tangential phase, not a derived field equation.",
+    "Lens geometry and source positions are frozen, so responses require later full-refit transfer.",
+    "Choosing a different best angle for each cluster would be an impermissible per-object gravity fit.",
+    "Galaxy and Solar scores are inherited because the angular layer is an axisymmetric and point-source null."
+  ]
+}

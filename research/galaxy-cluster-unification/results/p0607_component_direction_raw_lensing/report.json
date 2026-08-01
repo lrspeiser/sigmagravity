@@ -1,0 +1,199 @@
+{
+  "report_version": "P0607-COMPONENT-DIRECTION-RAW-LENSING-RESULTS-0.1.0",
+  "status": "complete_spent_component_direction_mechanism_test",
+  "coverage": {
+    "components": 5,
+    "angular_strengths_per_component": 8,
+    "screen_variants_including_no_route": 41,
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "hard_photometric_members": 51,
+    "Chandra_exposure_ks": 39.6040961730402
+  },
+  "realized_route": {
+    "R80_kpc": 184.29674534678944,
+    "sources": 51
+  },
+  "map_readiness": {
+    "HST_positive_cells": 12435,
+    "Chandra_soft_events_on_grid": 15401,
+    "absolute_component_mass_ready": false,
+    "use_in_this_test": "direction only"
+  },
+  "direction_alignment": {
+    "stars_vs_members": 0.9827787863225033,
+    "gas_vs_members": 0.8318779730277291,
+    "gas_vs_stars": 0.7754306026066676,
+    "star_map_centroid_arcsec": [
+      -6.7615123891641415,
+      0.9799333771298188
+    ],
+    "gas_map_centroid_arcsec": [
+      -0.4486877433367396,
+      -1.5135152974311519
+    ]
+  },
+  "fixed_geometry_training_selection": {
+    "global_including_no_route": {
+      "variant_id": "stars__sm0.0050",
+      "component_id": "stars",
+      "angular_strength": -0.005,
+      "training_RMS_arcsec": 0.49511667156994016,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.8186563836290839,
+      "heldout_roots_converged": 7
+    },
+    "best_positive_route": {
+      "variant_id": "gas__sp0.0025",
+      "component_id": "gas",
+      "angular_strength": 0.0025,
+      "training_RMS_arcsec": 0.49524801648779715,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.8042487751159004,
+      "heldout_roots_converged": 7
+    },
+    "best_opposite_sign_control": {
+      "variant_id": "stars__sm0.0050",
+      "component_id": "stars",
+      "angular_strength": -0.005,
+      "training_RMS_arcsec": 0.49511667156994016,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.8186563836290839,
+      "heldout_roots_converged": 7
+    }
+  },
+  "exact_refits": [
+    {
+      "role": "P0599_no_route_16_start_reference",
+      "component_id": "none",
+      "angular_strength": 0.0,
+      "training_RMS_arcsec": 0.49524262462844243,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.8086634342147614,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 48.15754179125845
+    },
+    {
+      "role": "positive_route",
+      "component_id": "gas",
+      "angular_strength": 0.0025,
+      "training_RMS_arcsec": 0.49515317061070047,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.8106172738370763,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 48.15074523237065
+    },
+    {
+      "role": "opposite_sign_control",
+      "component_id": "stars",
+      "angular_strength": -0.005,
+      "training_RMS_arcsec": 0.49456917582832444,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 1.8258955411227,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 48.11507951435853
+    }
+  ],
+  "parameter_impacts": [
+    {
+      "component_id": "stars",
+      "complete_variants": 8,
+      "failed_variants": 0,
+      "training_RMS_span_arcsec": 0.020555544377136636,
+      "heldout_RMS_span_arcsec": 0.13573615732947975,
+      "best_positive_strength": 0.0025,
+      "best_positive_training_RMS_arcsec": 0.4954373125726312,
+      "best_positive_heldout_RMS_arcsec": 1.803702739023957,
+      "best_signed_strength": -0.005,
+      "best_signed_training_RMS_arcsec": 0.49511667156994016,
+      "best_signed_heldout_RMS_arcsec": 1.8186563836290839
+    },
+    {
+      "component_id": "members",
+      "complete_variants": 8,
+      "failed_variants": 0,
+      "training_RMS_span_arcsec": 0.018969100539960537,
+      "heldout_RMS_span_arcsec": 0.1253488596060428,
+      "best_positive_strength": 0.0025,
+      "best_positive_training_RMS_arcsec": 0.4953587205965879,
+      "best_positive_heldout_RMS_arcsec": 1.8040032113188171,
+      "best_signed_strength": -0.005,
+      "best_signed_training_RMS_arcsec": 0.49527703562473663,
+      "best_signed_heldout_RMS_arcsec": 1.8181047444170217
+    },
+    {
+      "component_id": "members_all_050",
+      "complete_variants": 8,
+      "failed_variants": 0,
+      "training_RMS_span_arcsec": 0.015181282408466612,
+      "heldout_RMS_span_arcsec": 0.11767910355485234,
+      "best_positive_strength": 0.0025,
+      "best_positive_training_RMS_arcsec": 0.4953260417390022,
+      "best_positive_heldout_RMS_arcsec": 1.8042885994731537,
+      "best_signed_strength": -0.005,
+      "best_signed_training_RMS_arcsec": 0.49529226504724955,
+      "best_signed_heldout_RMS_arcsec": 1.817532672296921
+    },
+    {
+      "component_id": "stars_gas_050",
+      "complete_variants": 8,
+      "failed_variants": 0,
+      "training_RMS_span_arcsec": 0.012833923025351024,
+      "heldout_RMS_span_arcsec": 0.11429370756970325,
+      "best_positive_strength": 0.0025,
+      "best_positive_training_RMS_arcsec": 0.4953104232591178,
+      "best_positive_heldout_RMS_arcsec": 1.8044199145309032,
+      "best_signed_strength": -0.005,
+      "best_signed_training_RMS_arcsec": 0.49529090503080353,
+      "best_signed_heldout_RMS_arcsec": 1.817267873370009
+    },
+    {
+      "component_id": "gas",
+      "complete_variants": 8,
+      "failed_variants": 0,
+      "training_RMS_span_arcsec": 0.006470695103409252,
+      "heldout_RMS_span_arcsec": 0.12012747243453492,
+      "best_positive_strength": 0.0025,
+      "best_positive_training_RMS_arcsec": 0.49524801648779715,
+      "best_positive_heldout_RMS_arcsec": 1.8042487751159004,
+      "best_signed_strength": 0.0025,
+      "best_signed_training_RMS_arcsec": 0.49524801648779715,
+      "best_signed_heldout_RMS_arcsec": 1.8042487751159004
+    }
+  ],
+  "cross_domain_controls": {
+    "galaxy_outer_equal_RMSE_km_s": 10.883031245894069,
+    "galaxy_reference": "P0599; angular component layer is exactly absent on catalogued axisymmetric profiles",
+    "cluster_radial_equal_RMSE_dex": 0.11960216849884785,
+    "Solar_change": 0.0,
+    "Solar_reference": "P0599 Solar proxies pass; a one-source angular route is identically absent"
+  },
+  "interpretation": {
+    "positive_route_beats_no_route_training": true,
+    "positive_route_beats_no_route_spent_heldout": false,
+    "opposite_sign_beats_positive_training": true,
+    "opposite_sign_beats_positive_spent_heldout": false,
+    "component_mass_claimed": false,
+    "hidden_arc_height_identified": false
+  },
+  "radial_parent_diagnostic": {
+    "r50_kpc": 355.55892554848015,
+    "r80_kpc": 504.64375503118424,
+    "concentration_r50_over_r80": 0.704574111942609,
+    "shape_gate": 0.7399562389719418,
+    "source_gbar_at_r80_m_s2": 1.5686153584660897e-11,
+    "source_acceleration_gate": 0.9997081134494022,
+    "potential_depth_at_image_min": 8.072280858376818e-06,
+    "potential_depth_at_image_max": 6.960645635933779e-06,
+    "P0599_amplitude_fraction_at_image_min": 2.218698234712414,
+    "P0599_amplitude_fraction_at_image_max": 2.218275798129555
+  },
+  "claim_limits": [
+    "Every RX J2129 image is spent; training-only selection prevents direct leakage but does not make the held-out result fresh.",
+    "F160W traces light rather than stellar mass and Chandra brightness traces emissivity rather than gas mass.",
+    "The component maps set only route direction; the angular strength grid is a post-audit mechanism bracket, not a fitted universal constant.",
+    "The raw lens model still refits six ordinary pseudo-elliptical geometry and shear parameters.",
+    "A projected thin-lens correction cannot determine the hidden height or time history of a gravity arc.",
+    "A favorable RX J2129 component must transfer unchanged to a different raw cluster before it can be treated as evidence."
+  ]
+}

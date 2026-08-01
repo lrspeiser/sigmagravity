@@ -1,0 +1,183 @@
+{
+  "protocol_version": "REOPENED-HYBRID-ENDPOINT-POWER-MEMORY-0.1.0",
+  "frozen_utc": "2026-08-01T08:35:00Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Universally refit the bracketed exact-endpoint power ridge, approximate constant-domain effective-power paths, and small memory-length and strength interactions, then transfer every row to SPARC, raw multi-cluster lensing, and Solar proxies.",
+  "claim_boundary": [
+    "The grid was frozen from two fixed-parameter audits before these universal refit and raw-lensing scores were computed.",
+    "Every formula uses one universal four-parameter bridge fit and freezes it for all galaxy, raw-lensing, and Solar transfers.",
+    "The constant-effective-power paths are approximate coordinates derived from measured median slopes; they are empirical controls, not new fitted object labels.",
+    "The grid deliberately contains duplicates where ridge, scale, and strength families intersect so optimizer-branch variation remains visible.",
+    "Two-start raw-lensing scores are provisional; selected favorable and unfavorable branches require eight-start replay.",
+    "Only these equations and ranges can be ranked; no parent endpoint, nonlocal, or history-dependent mechanism is rejected."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "common_variant": {
+    "combination": "interaction",
+    "interaction_eta": 1.0,
+    "screen_power": 1.5,
+    "rg_saturation_ceiling": 2.0,
+    "sigma_saturation_ceiling": 1.5,
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 0.8,
+    "radial_memory_gbar_power": -0.5,
+    "radial_memory_radius_power": 1.5,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false,
+    "radial_memory_slope_gate_strength": 0.0
+  },
+  "sensitivity_families": {
+    "grid_q_1p5": {
+      "fixed_name": "radial_memory_gbar_power",
+      "values": [-1.25, -1.0, -0.875, -0.75, -0.625, -0.5],
+      "base_variant": {"radial_memory_radius_power": 1.5}
+    },
+    "grid_q_1p75": {
+      "fixed_name": "radial_memory_gbar_power",
+      "values": [-1.25, -1.0, -0.875, -0.75, -0.625, -0.5],
+      "base_variant": {"radial_memory_radius_power": 1.75}
+    },
+    "grid_q_2": {
+      "fixed_name": "radial_memory_gbar_power",
+      "values": [-1.25, -1.0, -0.875, -0.75, -0.625, -0.5],
+      "base_variant": {"radial_memory_radius_power": 2.0}
+    },
+    "grid_q_2p25": {
+      "fixed_name": "radial_memory_gbar_power",
+      "values": [-1.25, -1.0, -0.875, -0.75, -0.625, -0.5],
+      "base_variant": {"radial_memory_radius_power": 2.25}
+    },
+    "grid_q_2p5": {
+      "fixed_name": "radial_memory_gbar_power",
+      "values": [-1.25, -1.0, -0.875, -0.75, -0.625, -0.5],
+      "base_variant": {"radial_memory_radius_power": 2.5}
+    },
+    "grid_q_2p75": {
+      "fixed_name": "radial_memory_gbar_power",
+      "values": [-1.25, -1.0, -0.875, -0.75, -0.625, -0.5],
+      "base_variant": {"radial_memory_radius_power": 2.75}
+    },
+    "constant_clash_p_minus_1p5": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.0521933023355403],
+      "base_variant": {"radial_memory_gbar_power": -1.5}
+    },
+    "constant_clash_p_minus_1p25": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.1641449767516554],
+      "base_variant": {"radial_memory_gbar_power": -1.25}
+    },
+    "constant_clash_p_minus_1": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.2760966511677701],
+      "base_variant": {"radial_memory_gbar_power": -1.0}
+    },
+    "constant_clash_p_minus_0p75": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.3880483255841149],
+      "base_variant": {"radial_memory_gbar_power": -0.75}
+    },
+    "constant_clash_p_minus_0p5": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.5],
+      "base_variant": {"radial_memory_gbar_power": -0.5}
+    },
+    "constant_sparc_p_minus_1p5": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [-0.0565053030708258],
+      "base_variant": {"radial_memory_gbar_power": -1.5}
+    },
+    "constant_sparc_p_minus_1p25": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [0.3326210226968806],
+      "base_variant": {"radial_memory_gbar_power": -1.25}
+    },
+    "constant_sparc_p_minus_1": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [0.7217473484645870],
+      "base_variant": {"radial_memory_gbar_power": -1.0}
+    },
+    "constant_sparc_p_minus_0p75": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.1108736742322934],
+      "base_variant": {"radial_memory_gbar_power": -0.75}
+    },
+    "constant_sparc_p_minus_0p5": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.5],
+      "base_variant": {"radial_memory_gbar_power": -0.5}
+    },
+    "scale_p_minus_1_q_2p25": {
+      "fixed_name": "radial_memory_log_scale",
+      "values": [0.65, 0.725, 0.8, 0.875, 0.95],
+      "base_variant": {"radial_memory_gbar_power": -1.0, "radial_memory_radius_power": 2.25}
+    },
+    "scale_p_minus_0p75_q_2p5": {
+      "fixed_name": "radial_memory_log_scale",
+      "values": [0.65, 0.725, 0.8, 0.875, 0.95],
+      "base_variant": {"radial_memory_gbar_power": -0.75, "radial_memory_radius_power": 2.5}
+    },
+    "scale_p_minus_0p625_q_2p75": {
+      "fixed_name": "radial_memory_log_scale",
+      "values": [0.65, 0.725, 0.8, 0.875, 0.95],
+      "base_variant": {"radial_memory_gbar_power": -0.625, "radial_memory_radius_power": 2.75}
+    },
+    "strength_p_minus_0p75_q_2p5": {
+      "fixed_name": "radial_memory_strength",
+      "values": [0.6, 0.7, 0.8, 0.9, 1.0],
+      "base_variant": {"radial_memory_gbar_power": -0.75, "radial_memory_radius_power": 2.5}
+    }
+  },
+  "baseline_variant_name": "grid_q_1p5:radial_memory_gbar_power=-0.5",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20261211,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_endpoint_power_memory/report.json",
+    "scores": "results/reopened_hybrid_endpoint_power_memory/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_endpoint_power_memory/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_endpoint_power_memory/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_endpoint_power_memory/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_endpoint_power_memory/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_endpoint_power_memory/family_impacts.csv",
+    "figure": "results/reopened_hybrid_endpoint_power_memory/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_endpoint_power_memory/SUMMARY.md"
+  }
+}

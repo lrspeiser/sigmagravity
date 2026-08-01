@@ -1,0 +1,60 @@
+{
+  "protocol_version": "P0586B-METRIC-BOUNDARY-RESPONSE-0.1.0",
+  "frozen_utc": "2026-08-01T22:40:00Z",
+  "status": "frozen_before_any_metric_boundary_extension_score",
+  "question": "Did P0586 stop before a shared optimum in tidal anisotropy or baryonic reach, or do the four raw clusters prefer incompatible continuous-metric responses?",
+  "locked_from_p0586": {
+    "a0_m_s2": 2.4e-10,
+    "gate_power": 4.0,
+    "component": "absolute ACCEPT gas with sqrt Chandra morphology plus registered F160W stars",
+    "metric": "K_b=epsilon(S) exp[tau*S*H*Q_b]",
+    "field_pixels_per_axis": 256,
+    "field_half_width_arcsec": 256.0,
+    "point_softening_arcsec": 2.0
+  },
+  "factorial": {
+    "minimum_permittivity": [0.85, 0.925, 1.0],
+    "anisotropy_tau": [0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2],
+    "smoothing_r80_fraction": [0.35, 0.5, 0.65, 0.8],
+    "candidate_count": 84,
+    "meaning": "extend the P0586 tau=0.6 and eta=0.5 boundaries while testing only small scalar leakage around epsilon0=1"
+  },
+  "validation": {
+    "selection_systems": ["MACS0329", "MACS0429"],
+    "validation_systems": ["MACS1115", "MACS1931"],
+    "screen": "hold each eight-start zero-field geometry and source solution fixed and score every candidate separately on all four clusters",
+    "selection": "choose one candidate using only equal-system source-plane RMS in the original two selection clusters",
+    "exact": "refit the one selection winner with eight starts on all four systems",
+    "diagnostic": "also report each cluster's independent best grid point and whether any candidate improves all four fixed-geometry scores",
+    "spent_disclosure": "all systems are spent and this is response characterization, not independent validation"
+  },
+  "advance_gates": {
+    "interior_selection_optimum": true,
+    "all_four_fixed_geometry_improve": true,
+    "validation_all_roots": true,
+    "validation_improvement_vs_zero_fraction_min": 0.05,
+    "per_cluster_gravity_parameters": 0
+  },
+  "inputs": {
+    "p0586_protocol": "configs/p0586_continuous_baryonic_metric_protocol.json",
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv"
+  },
+  "outputs": {
+    "directory": "results/p0586b_metric_boundary_response",
+    "screen_scores": "screen_scores.csv",
+    "candidate_scores": "candidate_scores.csv",
+    "per_system_optima": "per_system_optima.csv",
+    "exact_scores": "exact_scores.csv",
+    "predictions": "predictions.csv",
+    "report": "report.json",
+    "figure": "p0586b_metric_boundary_response.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This extension uses project-spent systems and cannot validate a new law.",
+    "The source-plane screen is only a directional diagnostic; exact image roots remain authoritative.",
+    "The projected baryonic acceleration proxy and incomplete stellar/ICL mass construction are unchanged from P0586.",
+    "A boundary optimum would motivate another scale test, not prove a force law."
+  ]
+}

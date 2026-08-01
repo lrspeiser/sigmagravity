@@ -1,0 +1,224 @@
+{
+  "audit_version": "R0.2-instance-provenance",
+  "freeze_rule": "Audit provenance and coverage only; do not inspect residuals or fit a force law.",
+  "pilot_gate": {
+    "minimum_systems": 10,
+    "minimum_dynamics_radial_points": 3,
+    "minimum_lensing_radial_points": 3,
+    "minimum_forward_model_baryonic_radial_points": 3
+  },
+  "required_score_columns": {
+    "SPARC": ["radius_kpc", "gbar_m_s2", "observed_velocity_km_s", "velocity_error_km_s", "chi", "ell_bar_kpc"],
+    "CLASH": ["radius_kpc", "gbar_m_s2", "log_gtot", "err_log_gbar", "err_log_gtot", "chi", "ell_bar_kpc"],
+    "BCG": ["radius_kpc", "gbar_m_s2", "log_gbar", "err_log_gbar", "log_gobs", "err_log_gobs", "total_profile_chi"]
+  },
+  "score_units": {
+    "SPARC": {
+      "radius_kpc": "kpc",
+      "gbar_m_s2": "m s^-2",
+      "observed_velocity_km_s": "km s^-1",
+      "velocity_error_km_s": "km s^-1",
+      "chi": "dimensionless",
+      "ell_bar_kpc": "kpc"
+    },
+    "CLASH": {
+      "radius_kpc": "kpc",
+      "gbar_m_s2": "m s^-2",
+      "log_gtot": "log10(m s^-2)",
+      "err_log_gbar": "dex",
+      "err_log_gtot": "dex",
+      "chi": "dimensionless",
+      "ell_bar_kpc": "kpc"
+    },
+    "BCG": {
+      "radius_kpc": "kpc",
+      "gbar_m_s2": "m s^-2",
+      "log_gbar": "log10(m s^-2)",
+      "err_log_gbar": "dex",
+      "log_gobs": "log10(m s^-2)",
+      "err_log_gobs": "dex",
+      "total_profile_chi": "dimensionless"
+    }
+  },
+  "lineages": {
+    "sparc_radius": {
+      "raw_observable": "angular position along the HI/H-alpha rotation curve plus adopted galaxy distance",
+      "local_file": "data/raw/sparc/rotmod/*_rotmod.dat; data/raw/sparc/table1.dat",
+      "publication": "Lelli, McGaugh and Schombert 2016, AJ 152, 157, doi:10.3847/0004-6256/152/6/157",
+      "transformation": "published angular coordinate converted to kpc using the catalog distance",
+      "metric_or_dynamics_assumptions": "distance calibration; disk center and geometry",
+      "covariance_status": "shared_distance_systematic_no_matrix",
+      "evidence_level": "published_resolved_measurement",
+      "alternative_theory_forward_modeling": "ready_with_distance_nuisance"
+    },
+    "sparc_velocity": {
+      "raw_observable": "HI/H-alpha line-of-sight velocity field",
+      "local_file": "data/raw/sparc/rotmod/*_rotmod.dat",
+      "publication": "Lelli, McGaugh and Schombert 2016, AJ 152, 157",
+      "transformation": "tilted-ring/circular-speed reconstruction with systemic-velocity and inclination corrections",
+      "metric_or_dynamics_assumptions": "tracer follows approximately circular orbits; weak-field conversion from redshift to speed",
+      "covariance_status": "per_point_error_only_with_shared_inclination_distance_and_noncircular_systematics",
+      "evidence_level": "published_resolved_kinematic_summary",
+      "alternative_theory_forward_modeling": "ready_if_geometry_and_nuisances_are_forward_modeled"
+    },
+    "sparc_velocity_error": {
+      "raw_observable": "reported rotation-speed uncertainty",
+      "local_file": "data/raw/sparc/rotmod/*_rotmod.dat",
+      "publication": "Lelli, McGaugh and Schombert 2016, AJ 152, 157",
+      "transformation": "published point uncertainty; current score adds no system covariance",
+      "metric_or_dynamics_assumptions": "same geometry as the reported circular speed",
+      "covariance_status": "diagonal_only",
+      "evidence_level": "published_uncertainty_summary",
+      "alternative_theory_forward_modeling": "usable_but_requires_correlated_nuisance_model"
+    },
+    "sparc_gbar": {
+      "raw_observable": "HI surface density and 3.6 micron disk/bulge photometry represented by unit-M/L component speed curves",
+      "local_file": "data/raw/sparc/rotmod/*_rotmod.dat",
+      "publication": "Lelli, McGaugh and Schombert 2016, AJ 152, 157",
+      "transformation": "[sign(Vgas)Vgas^2 + 0.5 Vdisk^2 + 0.7 Vbulge^2] / r",
+      "metric_or_dynamics_assumptions": "Newtonian component fields; fixed disk M/L=0.5 and bulge M/L=0.7",
+      "covariance_status": "no_component_covariance_matrix_and_fixed_ML_in_current_score",
+      "evidence_level": "derived_from_published_baryonic_components",
+      "alternative_theory_forward_modeling": "forward_model_source_photometry_and_gas_not_the_derived_acceleration"
+    },
+    "project_baryonic_coordinate": {
+      "raw_observable": "none; project-derived from the scored baryonic acceleration curve",
+      "local_file": "src/voidscreen/unified.py",
+      "publication": "project-defined diagnostic",
+      "transformation": "radial gbar integral with exterior-tail closure; chi=phi/c^2 and ell=phi/gbar",
+      "metric_or_dynamics_assumptions": "one-dimensional radial potential proxy and chosen outer boundary closure",
+      "covariance_status": "not_propagated_from_shared_baryonic_nuisances",
+      "evidence_level": "project_derived_coordinate",
+      "alternative_theory_forward_modeling": "not_an_observable; recompute_inside_each_source_model"
+    },
+    "clash_radius": {
+      "raw_observable": "angular cluster-centric coordinate plus assumed cosmology",
+      "local_file": "data/raw/clash_tian2020/fig2.dat",
+      "publication": "Tian et al. 2020, ApJ 896, 70, doi:10.3847/1538-4357/ab8e3d",
+      "transformation": "angular radius to spherical physical kpc; outer values selected/interpolated at 100, 200, 400 and 600 kpc",
+      "metric_or_dynamics_assumptions": "flat LCDM, Omega_m=0.27, Omega_Lambda=0.73, h=0.7",
+      "covariance_status": "shared_cosmology_and_profile_covariance_not_in_scored_catalog",
+      "evidence_level": "published_derived_coordinate",
+      "alternative_theory_forward_modeling": "requires_reprocessing_from_angular_data"
+    },
+    "clash_gtot": {
+      "raw_observable": "strong-lensing multiple images, weak-lensing shear and magnification",
+      "local_file": "data/raw/clash_tian2020/fig2.dat",
+      "publication": "Tian et al. 2020 using Umetsu et al. 2016, ApJ 821, 116",
+      "transformation": "joint lensing reconstruction -> NFW posterior (M200,c200) -> spherical 3D M(<r) -> log10[G M(<r)/r^2]",
+      "metric_or_dynamics_assumptions": "standard GR light deflection, NFW profile and spherical deprojection",
+      "covariance_status": "Umetsu_full_profile_covariance_exists_but_Tian_score_uses_diagonal_errors_and_ignores_radial_covariance",
+      "evidence_level": "model_dependent_lensing_reconstruction",
+      "alternative_theory_forward_modeling": "not_from_scored_summary; needs_raw_lensing_likelihood_or_profile_covariance"
+    },
+    "clash_gbar": {
+      "raw_observable": "Chandra gas profile, HST BCG photometry and cluster stellar-mass scaling relation",
+      "local_file": "data/raw/clash_tian2020/fig2.dat; data/raw/clash_tian2020/table1.dat",
+      "publication": "Tian et al. 2020; Donahue et al. 2014; Cooke et al. 2016; Chiu et al. 2018",
+      "transformation": "gas + Hernquist BCG + mean cold-baryon relation for other stars -> G Mbar(<r)/r^2",
+      "metric_or_dynamics_assumptions": "spherical mass; SPS M/L; Hernquist BCG; empirical mean cold-baryon fraction",
+      "covariance_status": "diagonal_error_only_with_incomplete_shared_systematics",
+      "evidence_level": "mixed_measurement_and_empirical_baryon_model",
+      "alternative_theory_forward_modeling": "requires_component_profiles_and_nuisance_covariance"
+    },
+    "bcg_direct_radius": {
+      "raw_observable": "last MaNGA dispersion radius in units of SDSS effective radius",
+      "local_file": "data/derived/manga_bcg_tian2024.csv",
+      "publication": "Tian et al. 2024, A&A 684, A180, doi:10.1051/0004-6361/202347868",
+      "transformation": "effective_radius_kpc * last_radius_re",
+      "metric_or_dynamics_assumptions": "SDSS Sersic geometry and adopted distance",
+      "covariance_status": "single_summary_radius",
+      "evidence_level": "published_single_radius_summary",
+      "alternative_theory_forward_modeling": "needs_underlying_IFS_radial_bins"
+    },
+    "bcg_direct_gobs": {
+      "raw_observable": "MaNGA line-of-sight stellar velocity-dispersion profile",
+      "local_file": "data/derived/manga_bcg_tian2024.csv",
+      "publication": "Tian et al. 2024, A&A 684, A180",
+      "transformation": "linear ODR dispersion fit -> isotropic spherical Jeans equation via Abel inversion -> gobs at last radius",
+      "metric_or_dynamics_assumptions": "equilibrium, spherical symmetry, beta=0 isotropy, Sersic light and Newtonian Jeans interpretation",
+      "covariance_status": "single_published_point_no_radial_IFS_likelihood_ingested",
+      "evidence_level": "model_dependent_dynamical_summary",
+      "alternative_theory_forward_modeling": "not_from_published_summary; forward_model_IFS_kinematics"
+    },
+    "bcg_direct_gbar": {
+      "raw_observable": "SDSS model photometry and limited MaNGA gas estimates",
+      "local_file": "data/derived/manga_bcg_tian2024.csv",
+      "publication": "Tian et al. 2024, A&A 684, A180",
+      "transformation": "Sersic accumulated stellar mass, plus gas for marked systems, -> G Mbar(<r)/r^2",
+      "metric_or_dynamics_assumptions": "model-photometry stellar mass, Sersic deprojection and spherical acceleration",
+      "covariance_status": "single_marginal_error_and_shared_ML_systematic",
+      "evidence_level": "model_dependent_baryonic_summary",
+      "alternative_theory_forward_modeling": "requires_photometry_and_gas_profiles"
+    },
+    "bcg_proxy_radius": {
+      "raw_observable": "JAM MGE effective radius plus catalog distance",
+      "local_file": "data/raw/manga_dynpop/SDSSDR17_MaNGA_JAM.fits",
+      "publication": "MaNGA DynPop DR17 JAM catalog",
+      "transformation": "MGE effective radius converted from arcsec to kpc",
+      "metric_or_dynamics_assumptions": "adopted distance and MGE geometry",
+      "covariance_status": "shared_distance_and_model_systematics_no_matrix",
+      "evidence_level": "catalog_model_radius",
+      "alternative_theory_forward_modeling": "needs_original_imaging_and_distance_nuisance"
+    },
+    "bcg_proxy_gobs": {
+      "raw_observable": "MaNGA kinematics summarized by mass-follows-light JAM mass within Re",
+      "local_file": "data/raw/manga_dynpop/SDSSDR17_MaNGA_JAM.fits; data/derived/bcg_bridge_sample.csv",
+      "publication": "MaNGA DynPop DR17 JAM catalog; project calibration to disjoint Tian2024 objects",
+      "transformation": "log10[G M_JAM,MFL(<Re)/Re^2] plus median calibration offset",
+      "metric_or_dynamics_assumptions": "axisymmetric JAM, mass follows light, inclination/anisotropy priors and Newtonian mass interpretation",
+      "covariance_status": "calibration_RMS_with_0.05_dex_floor_not_measurement_likelihood",
+      "evidence_level": "calibrated_dynamical_proxy",
+      "alternative_theory_forward_modeling": "not_valid_for_potential_reconstruction"
+    },
+    "bcg_proxy_gbar": {
+      "raw_observable": "NSA Sersic stellar mass and radius",
+      "local_file": "data/raw/manga_dr17/drpall-v3_1_1.fits; data/derived/bcg_bridge_sample.csv",
+      "publication": "SDSS/MaNGA DR17 NSA metadata; project calibration to disjoint Tian2024 objects",
+      "transformation": "Sersic mass at MGE Re -> log10[G M(<Re)/Re^2] plus median calibration offset",
+      "metric_or_dynamics_assumptions": "Sersic mass follows light, catalog stellar mass, no central gas correction",
+      "covariance_status": "calibration_RMS_with_0.05_dex_floor_not_component_covariance",
+      "evidence_level": "calibrated_baryonic_proxy",
+      "alternative_theory_forward_modeling": "not_valid_as_measured_baryonic_profile"
+    },
+    "bcg_profile_chi": {
+      "raw_observable": "none; project combination of BCG, gas and satellite population/profile models",
+      "local_file": "data/derived/measured_host_profile_sample.csv",
+      "publication": "project-derived from MaNGA/SPIDERS, eRASS1 and Elkholy et al. 2015 profile priors",
+      "transformation": "deprojected Sersic BCG chi + eRASS-calibrated gas chi + satellite NFW chi",
+      "metric_or_dynamics_assumptions": "spherical profiles, NFW conversion and cross-sample gas/satellite priors",
+      "covariance_status": "Monte_Carlo_prior_draws_exist_but_not_same_object_observable_covariance",
+      "evidence_level": "cross_catalog_empirical_profile_completion",
+      "alternative_theory_forward_modeling": "boundary_prior_only_not_a_measured_same_object_profile"
+    }
+  },
+  "records": [
+    {"dataset":"SPARC","source_variant":"all_scored_galaxies","scored_column":"radius_kpc","score_role":"radial_coordinate","lineage_id":"sparc_radius"},
+    {"dataset":"SPARC","source_variant":"all_scored_galaxies","scored_column":"observed_velocity_km_s","score_role":"dynamics_target","lineage_id":"sparc_velocity"},
+    {"dataset":"SPARC","source_variant":"all_scored_galaxies","scored_column":"velocity_error_km_s","score_role":"dynamics_uncertainty","lineage_id":"sparc_velocity_error"},
+    {"dataset":"SPARC","source_variant":"all_scored_galaxies","scored_column":"gbar_m_s2","score_role":"baryonic_predictor","lineage_id":"sparc_gbar"},
+    {"dataset":"SPARC","source_variant":"all_scored_galaxies","scored_column":"chi","score_role":"baryonic_boundary_predictor","lineage_id":"project_baryonic_coordinate"},
+    {"dataset":"SPARC","source_variant":"all_scored_galaxies","scored_column":"ell_bar_kpc","score_role":"baryonic_geometry_predictor","lineage_id":"project_baryonic_coordinate"},
+    {"dataset":"CLASH","source_variant":"Tian2020_NFW_deprojected","scored_column":"radius_kpc","score_role":"radial_coordinate","lineage_id":"clash_radius"},
+    {"dataset":"CLASH","source_variant":"Tian2020_NFW_deprojected","scored_column":"log_gtot","score_role":"lensing_target","lineage_id":"clash_gtot"},
+    {"dataset":"CLASH","source_variant":"Tian2020_NFW_deprojected","scored_column":"err_log_gtot","score_role":"lensing_uncertainty","lineage_id":"clash_gtot"},
+    {"dataset":"CLASH","source_variant":"Tian2020_baryonic_model","scored_column":"gbar_m_s2","score_role":"baryonic_predictor","lineage_id":"clash_gbar"},
+    {"dataset":"CLASH","source_variant":"Tian2020_baryonic_model","scored_column":"err_log_gbar","score_role":"baryonic_uncertainty","lineage_id":"clash_gbar"},
+    {"dataset":"CLASH","source_variant":"Tian2020_baryonic_model","scored_column":"chi","score_role":"baryonic_boundary_predictor","lineage_id":"project_baryonic_coordinate"},
+    {"dataset":"CLASH","source_variant":"Tian2020_baryonic_model","scored_column":"ell_bar_kpc","score_role":"baryonic_geometry_predictor","lineage_id":"project_baryonic_coordinate"},
+    {"dataset":"BCG","source_variant":"Tian2024_direct","scored_column":"radius_kpc","score_role":"radial_coordinate","lineage_id":"bcg_direct_radius"},
+    {"dataset":"BCG","source_variant":"Tian2024_direct","scored_column":"log_gobs","score_role":"dynamics_target","lineage_id":"bcg_direct_gobs"},
+    {"dataset":"BCG","source_variant":"Tian2024_direct","scored_column":"err_log_gobs","score_role":"dynamics_uncertainty","lineage_id":"bcg_direct_gobs"},
+    {"dataset":"BCG","source_variant":"Tian2024_direct","scored_column":"log_gbar","score_role":"baryonic_predictor","lineage_id":"bcg_direct_gbar"},
+    {"dataset":"BCG","source_variant":"Tian2024_direct","scored_column":"err_log_gbar","score_role":"baryonic_uncertainty","lineage_id":"bcg_direct_gbar"},
+    {"dataset":"BCG","source_variant":"Tian2024_direct","scored_column":"gbar_m_s2","score_role":"baryonic_predictor_linear","lineage_id":"bcg_direct_gbar"},
+    {"dataset":"BCG","source_variant":"Tian2024_direct","scored_column":"total_profile_chi","score_role":"baryonic_boundary_predictor","lineage_id":"bcg_profile_chi"},
+    {"dataset":"BCG","source_variant":"DynPop_NSA_calibrated_proxy","scored_column":"radius_kpc","score_role":"radial_coordinate","lineage_id":"bcg_proxy_radius"},
+    {"dataset":"BCG","source_variant":"DynPop_NSA_calibrated_proxy","scored_column":"log_gobs","score_role":"dynamics_target","lineage_id":"bcg_proxy_gobs"},
+    {"dataset":"BCG","source_variant":"DynPop_NSA_calibrated_proxy","scored_column":"err_log_gobs","score_role":"dynamics_uncertainty","lineage_id":"bcg_proxy_gobs"},
+    {"dataset":"BCG","source_variant":"DynPop_NSA_calibrated_proxy","scored_column":"log_gbar","score_role":"baryonic_predictor","lineage_id":"bcg_proxy_gbar"},
+    {"dataset":"BCG","source_variant":"DynPop_NSA_calibrated_proxy","scored_column":"err_log_gbar","score_role":"baryonic_uncertainty","lineage_id":"bcg_proxy_gbar"},
+    {"dataset":"BCG","source_variant":"DynPop_NSA_calibrated_proxy","scored_column":"gbar_m_s2","score_role":"baryonic_predictor_linear","lineage_id":"bcg_proxy_gbar"},
+    {"dataset":"BCG","source_variant":"DynPop_NSA_calibrated_proxy","scored_column":"total_profile_chi","score_role":"baryonic_boundary_predictor","lineage_id":"bcg_profile_chi"}
+  ]
+}

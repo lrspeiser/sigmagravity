@@ -1,0 +1,94 @@
+{
+  "protocol_version": "P0586-CONTINUOUS-BARYONIC-METRIC-0.1.0",
+  "frozen_utc": "2026-08-01T21:30:00Z",
+  "status": "frozen_before_any_continuous_baryonic_metric_score",
+  "question": "Can a continuous positive field metric built only from measured baryonic acceleration and tidal geometry redirect gravity more usefully than discrete return endpoints, and which small formula changes matter most?",
+  "weak_field_equation": {
+    "equation": "partial_i[K_b^ij partial_j Phi]=4 pi G rho_b",
+    "metric": "K_b=epsilon(S) exp[tau*S*H*Q_b]",
+    "scalar_gate": "S=1/[1+(g_b/a0)^n], epsilon=1-(1-epsilon0)S",
+    "direction": "Q_b is the normalized trace-free Hessian direction of the smoothed baryonic lens potential",
+    "symmetry": "H=q_b^4/(q_b^4+0.05^4), where q_b is the flux-weighted global baryonic quadrupole asymmetry",
+    "first_order_lens_response": "laplacian(delta_Phi)=-partial_i[(K_b-I)^ij partial_j Phi_b]",
+    "conservative_projection": "the response is solved as one scalar potential and its circular monopole is removed only when adding it to the already-radial locked raw-lens parent",
+    "positive_metric": "matrix exponential keeps both constitutive eigenvalues positive for every scanned tau",
+    "per_cluster_gravity_parameters": 0
+  },
+  "physical_baryons": {
+    "component": "registered F160W stars plus physically projected ACCEPT gas with square-root Chandra angular morphology",
+    "gas_normalization": "absolute ACCEPT electron-density shells",
+    "acceleration_proxy": "softened three-dimensional Newtonian acceleration evaluated from the observed projected mass pixels",
+    "scale_rule": "Gaussian state-variable smoothing width equals eta times each system's measured baryonic R80",
+    "known_limit": "projected acceleration is not a deprojected three-dimensional cluster field; satellite stellar M/L and separately normalized ICL remain unavailable"
+  },
+  "factorial": {
+    "minimum_permittivity": [0.25, 0.5, 0.75, 1.0],
+    "a0_m_s2": [6.0e-11, 1.2e-10, 2.4e-10],
+    "gate_power": [1.0, 2.0, 4.0],
+    "anisotropy_tau": [-0.6, 0.0, 0.6],
+    "smoothing_r80_fraction": [0.2, 0.35, 0.5],
+    "candidate_count": 324,
+    "identity": "epsilon0=1 and tau=0 is the exact zero-metric control independent of a0, n, and eta"
+  },
+  "numerics": {
+    "field_half_width_arcsec": 256.0,
+    "field_pixels_per_axis": 256,
+    "point_softening_arcsec": 2.0,
+    "asymmetry_threshold": 0.05,
+    "asymmetry_power": 4.0,
+    "maximum_normalized_curl_RMS": 0.002,
+    "minimum_metric_eigenvalue": 0.05
+  },
+  "validation": {
+    "selection_systems": ["MACS0329", "MACS0429"],
+    "validation_systems": ["MACS1115", "MACS1931"],
+    "screen": "fit the zero-field geometry and source positions with eight starts, hold them fixed, and select the nonidentity candidate with minimum equal-system unweighted heldout source-plane RMS on the two selection systems",
+    "exact": "refit zero and the one selected candidate with eight starts on all four systems; require nonlinear heldout image roots",
+    "spent_disclosure": "all four clusters and SPARC are project-spent; the split is prospective only to P0586"
+  },
+  "cross_domain": {
+    "galaxy": "outside a spherical baryonic source the same scalar equation gives g=g_bar/epsilon(g_bar); tau is structurally absent when H=0",
+    "galaxy_data": "968 outer-holdout points in 131 SPARC galaxies with frozen inner-radius nuisance values",
+    "solar": "evaluate the same spherical limit from 1.6 Solar radii through Saturn, at Earth, and in a first-order Mercury precession integral",
+    "comparators": {
+      "fixed_RAR_outer_RMSE_km_s": 10.348465773189679,
+      "compact_halo_validation_RMS_source": "results/metric_slip_raw_lensing/report.json"
+    }
+  },
+  "advance_gates": {
+    "validation_all_roots": true,
+    "validation_improvement_vs_zero_fraction_min": 0.05,
+    "validation_to_compact_halo_RMS_ratio_max": 1.25,
+    "SPARC_outer_RMSE_km_s_max": 10.8,
+    "Cassini_fractional_limit": 2.3e-5,
+    "Earth_fractional_limit": 1.0e-10,
+    "Mercury_mas_per_century_limit": 3.1,
+    "maximum_normalized_curl_RMS": 0.002,
+    "minimum_metric_eigenvalue": 0.05,
+    "per_cluster_gravity_parameters": 0
+  },
+  "inputs": {
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0586_continuous_baryonic_metric",
+    "screen_scores": "screen_scores.csv",
+    "field_audits": "field_audits.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "cross_domain": "cross_domain.csv",
+    "exact_scores": "exact_scores.csv",
+    "predictions": "predictions.csv",
+    "report": "report.json",
+    "figure": "p0586_continuous_baryonic_metric.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This is a first-order projected weak-field constitutive test, not a completed covariant metric theory.",
+    "The raw-lens correction removes its circular monopole because the inherited scalar parent already fits a radial field; cluster amplitude is therefore not yet a standalone no-MOND prediction.",
+    "The SPARC calculation is the spherical exterior limit, not a full three-dimensional disk solve.",
+    "The ACCEPT gas maps lack shell covariance and the stellar maps lack resolved mass-to-light and separate satellite/ICL normalizations.",
+    "All observational systems are spent and no candidate can be described as independently validated."
+  ]
+}

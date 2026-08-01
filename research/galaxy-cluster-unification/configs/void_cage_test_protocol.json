@@ -1,0 +1,94 @@
+{
+  "protocol_version": "void-cage-0.1-preregistered-before-geometry-and-residuals",
+  "frozen_utc": "2026-07-27T18:00:00Z",
+  "research_claim": "Underdense regions surrounding a galaxy generate a compressive differential field that is weak at the center and increases the centripetal acceleration of exterior tracers.",
+  "source_definition": {
+    "void_charge": "q_v(x) = max(-delta_CF4(x), 0)",
+    "local_exclusion_h100_inverse_mpc": 7.8125,
+    "outer_shell_h100_inverse_mpc": 62.5,
+    "reason": "Use only resolved CF4 cells exterior to one voxel around the galaxy and limit the source to an eight-voxel surrounding shell. No rotation residual enters the source construction."
+  },
+  "geometry_inputs": {
+    "primary": "grouped_64",
+    "robustness": [
+      "ungrouped_64",
+      "ungrouped_128"
+    ],
+    "galaxy_coordinates": "data/derived/void_scores_cf4.csv",
+    "density_directory": "data/raw/cosmicflows4"
+  },
+  "kernels": {
+    "inverse_square_null": {
+      "force_power_p": 2.0,
+      "prediction": "The isotropic compressive trace is exactly zero outside sources by the shell theorem."
+    },
+    "power_law_primary": {
+      "force_power_p": 3.0,
+      "unit_hessian": "H = integral q_v dV [(p+1) n n^T - I] / d^(p+1)",
+      "relative_acceleration": "Delta a = -A_v H r"
+    },
+    "yukawa_primary": {
+      "range_h100_inverse_mpc": 15.625,
+      "unit_potential": "Phi_v/A_v = integral q_v dV exp(-d/lambda)/d",
+      "relative_acceleration": "Delta a = -A_v Hessian(Phi_v/A_v) r"
+    },
+    "yukawa_range_robustness_h100_inverse_mpc": [
+      7.8125,
+      31.25,
+      62.5
+    ]
+  },
+  "rotation_sample": {
+    "dataset": "SPARC",
+    "quality_max": 2,
+    "minimum_inclination_deg": 30.0,
+    "minimum_points": 8,
+    "expected_galaxies": 131,
+    "expected_points": 3034,
+    "disk_mass_to_light": 0.5,
+    "bulge_mass_to_light": 0.7,
+    "velocity_error_floor_km_s": 2.0
+  },
+  "models": {
+    "newtonian_baryons": "v_pred^2 = v_bar^2",
+    "fixed_rar": "g_pred = g_bar / [1 - exp(-sqrt(g_bar/a0))], a0=1.2e-10 m/s^2",
+    "direct_harmonic_blind": "v_pred^2 = v_bar^2 + kappa_0 r^2",
+    "direct_harmonic_environment": "v_pred^2 = v_bar^2 + kappa_0 E_i^m r^2",
+    "screened_radial_blind": "v_pred^2 = v_bar^2 + V_0^2 r^2/[r^2+(c_R R_d)^2]",
+    "screened_radial_environment": "v_pred^2 = v_bar^2 + V_0^2 E_i^m r^2/[r^2+(c_R R_d)^2]",
+    "environment_definition": "E_i is the positive unit-strength compressive trace divided by the training-fold median."
+  },
+  "validation": {
+    "folds": 5,
+    "holdout_unit": "whole galaxy",
+    "fold_balance": "rank-balanced on the primary geometry score",
+    "heldout_nuisance_rule": "catalog distances and inclinations with fixed declared stellar mass-to-light ratios; no heldout velocity enters optimization",
+    "optimizer_starts": 12,
+    "paired_bootstrap_draws": 100000,
+    "environment_permutations": 64,
+    "seed": 5090
+  },
+  "primary_success_gates": {
+    "screened_environment_vs_screened_blind_rmse_fraction_max": 0.95,
+    "screened_environment_vs_fixed_rar_rmse_fraction_max": 0.95,
+    "paired_bootstrap_probability_improves_min": 0.95,
+    "environment_exponent_positive_in_all_folds": true,
+    "environment_exponent_not_at_bound_in_all_folds": true,
+    "real_score_permutation_percentile_min": 0.95,
+    "reconstruction_sign_stable": true,
+    "no_lensing_only_parameter": true
+  },
+  "stop_rules": {
+    "direct_cage": "Reject a literal external cage if the harmonic environment model does not materially improve heldout predictions over its geometry-blind counterpart.",
+    "screened_cage": "Reject the tested screened conversion if it fails any primary success gate; do not repair it by assigning per-galaxy cage amplitudes, centers, ranges, or mass-class switches.",
+    "void_origin": "Withhold a void-origin claim if the environment-dependent model does not beat the identical radial model with E_i=1 and shuffled-environment controls.",
+    "unification": "Withhold a galaxy-lensing unification claim unless parameters fitted without lensing predict theory-neutral raw lensing observables for at least ten same systems."
+  },
+  "known_identifiability_limits": [
+    "CF4 resolves approximately 7.8125 h100^-1 Mpc cells, not the galaxy-scale screening boundary.",
+    "SPARC supplies one-dimensional rotation curves and cannot test the predicted void-aligned velocity dipole.",
+    "The screened radial shape is halo-degenerate unless its amplitude is predicted by independent void geometry.",
+    "Current CLASH acceleration summaries are GR/NFW-derived rather than raw theory-neutral lensing likelihoods.",
+    "The current public same-system audit has zero strict-ready systems and cannot identify a population relation between Phi and Phi+Psi."
+  ]
+}

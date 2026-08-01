@@ -1,0 +1,36 @@
+{
+  "protocol_version": "P0576C-SOURCE-PLANE-DEGENERACY-AUDIT-0.1.0",
+  "frozen_utc": "2026-08-01T09:05:00Z",
+  "status": "frozen_after_P0576B_before_mass_sheet_diagnostics",
+  "trigger": "The extended source-plane scan improved monotonically to p=2.6 and nearly zero scatter, with no interior optimum.",
+  "question": "Is the apparent fractional-propagator gain a physical family-mapping improvement or a near-critical mass-sheet/source-collapse degeneracy?",
+  "diagnostic_powers": [1.0, 1.5, 2.0, 2.6],
+  "diagnostics": {
+    "global_mass_sheet_R2": "Fit theta=A*alpha+b over all image positions and report explained positional variance.",
+    "family_mean_source_dispersion": "RMS separation of inferred family-mean beta values from their global mean after the primary amplitude fit.",
+    "source_radius_collapse": "RMS norm of all inferred beta positions divided by the no-lens theta RMS after removing a global mean.",
+    "interpretation": "A physical lens may reduce within-family scatter, but forcing unrelated family means toward the same beta and making alpha nearly affine in theta signals the source-plane/mass-sheet degeneracy."
+  },
+  "decision_gates": {
+    "p2p6_global_mass_sheet_R2_max": 0.95,
+    "p2p6_source_radius_ratio_min": 0.10,
+    "monotonic_boundary_gain_allowed": false
+  },
+  "inputs": {
+    "p0575_images": "results/p0575_smacs0723_raw_position/raw_images.csv",
+    "p0573_protocol": "configs/p0573_tidal_arrival_fresh_replication_protocol.json",
+    "p0574_protocol": "configs/p0574_symmetry_gated_arrival_microvariation_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0576c_source_plane_degeneracy_audit",
+    "diagnostics": "diagnostics.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0576c_source_plane_degeneracy_audit.png"
+  },
+  "claim_limits": [
+    "This audit diagnoses the current statistic; it does not by itself reject every possible non-Poisson propagator.",
+    "A mass-sheet-resistant image-plane calculation is required before selecting another exponent.",
+    "Only one cluster is used."
+  ]
+}

@@ -1,0 +1,352 @@
+{
+  "protocol_version": "R1B3-RXJ2129-XMM-X2b-background-mask-1.3",
+  "status": "completed_X2b2_with_MOS2_and_pn_before_X3_annular_construction",
+  "frozen_utc": "2026-07-27T10:17:04.508584+00:00",
+  "correction_log": [
+    {
+      "version": "0.2",
+      "utc": "2026-07-27T08:56:00Z",
+      "trigger": "post-emldetect cheese-wrapper output audit before catalog filtering",
+      "correction": "All three emldetect likelihood tasks ended and wrote emllist.fits, after which cheese attempted to construct an explicitly unused intermediate mask. Because ratetotal=1000 left no bkgregtsky file, makemask emitted NoInfile. Judge detection on clean emldetect completion plus the emllist schema and use only the separately frozen PSF mask; never use or require the cheese mask.",
+      "data_driven": false,
+      "detection_likelihood_extent_or_mask_radius_changed": false,
+      "X2b1_passed_by_this_correction": false
+    },
+    {
+      "version": "0.3",
+      "utc": "2026-07-27T08:58:00Z",
+      "trigger": "single PSF command-interface trial before bulk PSF execution",
+      "correction": "psfgen requires an image WCS when x/y are supplied as EQPOS coordinates even when withinstrument=yes. Supply the corresponding calibrated cheese band image via withimage=yes for each instrument-energy call. The first interface-only call failed with noImageSupplied and produced no PSF; its retry passed.",
+      "data_driven": false,
+      "detection_likelihood_extent_or_mask_radius_changed": false,
+      "X2b1_passed_by_this_correction": false
+    },
+    {
+      "version": "0.4",
+      "utc": "2026-07-27T09:01:00Z",
+      "trigger": "emanom input audit before any CCD inclusion decision",
+      "correction": "The X2a science-clean event lists apply field-of-view FLAG filters and therefore cannot support unexposed-corner analysis; emanom returned U for every CCD. Those results are invalid and deprecated. Create separate background working event lists from the X1 calibrated normal/OOT files using only the already frozen flare GTI, retaining all flags, patterns, energies, and corner events. Run emanom and ESAS only on those background lists.",
+      "data_driven": false,
+      "flare_GTI_or_threshold_changed": false,
+      "CCD_inclusion_decision_made_from_invalid_trial": false,
+      "X2b2_passed_by_this_correction": false
+    },
+    {
+      "version": "0.5",
+      "utc": "2026-07-27T09:03:00Z",
+      "trigger": "valid corner-preserving emanom gate passed and before ESAS spectral extraction",
+      "correction": "Freeze CCD controls to MOS1='T T T T T T T' and MOS2='T T T T F T T' because the valid corner-preserving emanom run classified MOS2 CCD5 bad and every other MOS outer CCD good. Convert the immutable 87-source sky circles separately to each instrument's DETX/DETY frame with convregion mode=2, and concatenate those negative circles as the withregion selection in mosspectra/pnspectra.",
+      "data_driven": true,
+      "data_driven_field": "only the predeclared emanom CCD anomaly decision",
+      "threshold_or_manual_image_decision_changed": false,
+      "X2b2_passed_by_this_correction": false
+    },
+    {
+      "version": "0.6",
+      "utc": "2026-07-27T09:06:00Z",
+      "trigger": "first convregion mode-2 execution before any ESAS spectral extraction",
+      "correction": "SAS 22.1.0 convregion-0.12.2 invokes esky2det through /bin/sh using the non-POSIX redirect >& detpos.txt; on Ubuntu /bin/sh is dash, so the task stopped with NOdetpos before converting any source. Reproduce convregion's documented circle-only transformation directly: run the same calibrated esky2det call for every frozen sky centre and convert each radius from arcminutes to 0.05-arcsec detector units using radius_det=1200*radius_arcmin. Require exactly 87 exclusions per instrument.",
+      "data_driven": false,
+      "sky_mask_coordinate_or_radius_changed": false,
+      "X2b2_passed_by_this_correction": false
+    },
+    {
+      "version": "0.7",
+      "utc": "2026-07-27T09:09:00Z",
+      "trigger": "first mosspectra task log before completion of the first MOS extraction",
+      "correction": "mosspectra-0.20.3 read only the first physical line from the 87-line region file; its logged evselect expression therefore contained one exclusion, not 87. Terminate that invalid MOS1 run, preserve its partial directory under the explicit name MOS1_invalid_multiline_region, and admit none of its products. Encode the identical 87 detector circles as one physical line containing 87 concatenated &&! circle clauses, then require the task log to contain all 87 clauses before accepting any extraction.",
+      "data_driven": false,
+      "sky_mask_coordinate_or_radius_changed": false,
+      "invalid_partial_products_admitted": false,
+      "X2b2_passed_by_this_correction": false
+    },
+    {
+      "version": "0.8",
+      "utc": "2026-07-27T09:13:00Z",
+      "trigger": "second mosspectra task log before completion of the first MOS extraction",
+      "correction": "The one-line region string was accepted but truncated by mosspectra's fixed-length region buffer after 18 of 87 circles, causing downstream evselect syntax errors. Terminate and quarantine that run as MOS1_invalid_singleline_truncated; admit none of its products. Represent the unchanged 87 circles in the SAS-standard FITS REGION schema (SHAPE, DETX/DETY or X/Y, R, ROTANG, COMPONENT), with !CIRCLE rows and MTYPE1/MFORM1 metadata. Supply detector and sky tables through withsrcrem=yes maskdet/masksky, keep withregion=no, and require 87 rows in every table before execution.",
+      "data_driven": false,
+      "sky_mask_coordinate_or_radius_changed": false,
+      "invalid_partial_products_admitted": false,
+      "X2b2_passed_by_this_correction": false
+    },
+    {
+      "version": "0.9",
+      "utc": "2026-07-27T09:16:00Z",
+      "trigger": "first native FITS-mask mosspectra task log before any spectral product was created",
+      "correction": "An independent evselect trial proved that the 87-row detector FITS table is valid and reduces MOS1 FLAG==0/PATTERN<=12 events from 129064 to 94026. However, mosspectra also stores the mask filename inside a fixed-length internal expression and truncated the absolute path at /rxj2, producing syntax errors. Quarantine that run as MOS1_invalid_long_mask_path. Copy the checksum-verified authoritative FITS tables into each instrument work directory as the short local names srcdet.fits and srcsky.fits, then pass those names to maskdet/masksky.",
+      "data_driven": false,
+      "sky_mask_coordinate_or_radius_changed": false,
+      "invalid_partial_products_admitted": false,
+      "X2b2_passed_by_this_correction": false
+    },
+    {
+      "version": "1.0",
+      "utc": "2026-07-27T09:55:00Z",
+      "trigger": "normal pnspectra end record and complete product-set audit",
+      "correction": "The extraction wrapper's post-run assertion searched for MOS wording ('DET coord region mask') while pnspectra reports 'DET region file selected also exists'. pnspectra itself reached Step 19 and its normal ended record after creating nonempty FOV, OOT, RMF, ARF, four-quadrant corner, and FWC products with region(srcdet.fits) present in executed evselect expressions. Correct only the assertion text and allow the completion marker to be recovered from that full evidence set; do not rerun or alter any spectrum.",
+      "data_driven": false,
+      "sky_mask_coordinate_or_radius_changed": false,
+      "spectral_product_changed_or_rerun": false,
+      "X2b2_passed_by_this_correction": false
+    },
+    {
+      "version": "1.1",
+      "utc": "2026-07-27T10:02:00Z",
+      "trigger": "normal mosback/pnback end records and complete QPB product sets, before any local-outer-annulus extraction",
+      "correction": "Make the previously singular FWC/corner scale operational at detector-sector resolution: in the frozen 0.5-7.0 keV band, divide observation-corner counts by FWC-corner counts transferred to the same EXPOSURE and BACKSCAL, applying the pn OOT factor to both. Require every included outer MOS CCD or pn quadrant to pass the unchanged scale and posterior bounds; report but never use the pooled value to hide a sector failure. MOS1 therefore fails only this subgate because included CCD5 has scale 0.353343; MOS2 and pn pass, satisfying the predeclared minimum of two. Freeze the independent local-annulus transfer statistic now, before extracting that annulus, as observed/model-QPB hard-band counts in the unchanged 650-900 kpc annulus.",
+      "data_driven": false,
+      "operational_definition_added_after_products_existed": true,
+      "scale_bounds_or_minimum_instruments_changed": false,
+      "mask_annulus_or_detector_controls_changed": false,
+      "pooled_scale_allowed_to_override_sector_failure": false,
+      "local_outer_annulus_inspected_before_definition": false,
+      "X2b2_passed_by_this_correction": false
+    },
+    {
+      "version": "1.2",
+      "utc": "2026-07-27T10:07:00Z",
+      "trigger": "first local-outer-annulus mosspectra execution before completion of any annulus spectrum",
+      "correction": "The annulus wrapper set SAS_CLOBBER=yes, but this SAS build accepts its normal task default and interpreted that nonnumeric environment override as clobber disabled. Internal in-place updates therefore emitted clobberFailed. Interrupt the run, preserve every partial product under esas_outer_annulus_invalid_clobber_flag_yes, admit none of it, remove only that environment override, and restart in new empty directories. This does not change the frozen annulus, source mask, detector controls, energy bands, scale definition, or thresholds.",
+      "data_driven": false,
+      "invalid_partial_products_admitted": false,
+      "annulus_counts_or_scale_inspected": false,
+      "mask_annulus_detector_controls_or_thresholds_changed": false,
+      "X2b2_passed_by_this_correction": false
+    }
+  ],
+  "selection_blind": true,
+  "system": "RX J2129",
+  "obsid": "0093030201",
+  "parent_protocol": "configs/r1_rxj2129_xmm_event_processing_protocol.json",
+  "X2a_report": "results/r1_rxj2129_xmm_event_processing/report.json",
+  "purpose": "Create one immutable point-source mask and test detector-corner/FWC plus local-outer-annulus background adequacy without inspecting a cluster gas profile or fitting gravity.",
+  "software": {
+    "SAS": "22.1.0-a8f2c2afa-20250304",
+    "cheese": "0.20.4",
+    "emanom": "0.20.5",
+    "mosspectra": "0.20.3",
+    "pnspectra": "0.18.2",
+    "mosback": "0.22.3",
+    "pnback": "0.19.3",
+    "PSF_model": "ELLBETA"
+  },
+  "inputs": {
+    "MOS1_clean": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/analysis/MOS1_clean_events.ds",
+    "MOS2_clean": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/analysis/MOS2_clean_events.ds",
+    "pn_clean": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/analysis/pn_clean_events.ds",
+    "pn_OOT_calibrated": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/analysis/0529_0093030201_EPN_S003_OutOfTimeEvts.ds",
+    "pn_flare_GTI": "data/derived/r1_rxj2129_xmm_x2/pn_flare_gti.fits",
+    "required_X2a_passing_instruments": [
+      "MOS1",
+      "MOS2",
+      "pn"
+    ]
+  },
+  "pn_OOT_cleaning": {
+    "expression": "FLAG==0 && PATTERN<=4 && PI in [300:10000] && GTI(frozen_pn_flare_gti,TIME)",
+    "output": "/home/henry/.local/share/sigmagravity-xmm/work/rxj2129/0093030201/analysis/pn_oot_clean_events.ds",
+    "gate": "The output must retain OBS_ID=0093030201, EXPIDSTR=S003, IMAGING/Medium identity, at least one event, and positive finite LIVETIME."
+  },
+  "source_detection": {
+    "method": "Run cheese independently in each frozen band using all three cleaned instruments and the cleaned pn OOT list, retain only its completed emldetect emllist catalog, and then union the three catalogs. The downstream cheese mask is forbidden and not a gate input.",
+    "bands_eV": [
+      [
+        500,
+        1200
+      ],
+      [
+        1200,
+        2000
+      ],
+      [
+        2000,
+        7000
+      ]
+    ],
+    "cheese_parameters": {
+      "mlmin": 10.0,
+      "scale_for_intermediate_unused_cheese_mask": 0.8,
+      "ratetotal_for_intermediate_unused_cheese_mask_1e-14_units": 1000.0,
+      "dist_arcsec": 0.0,
+      "keepinterfiles": true
+    },
+    "catalog_filter": "Retain every detection with maximum-likelihood >=10 and fitted extent <=6 arcsec. Treat a missing/undefined extent as zero only when the catalog marks the source as pointlike.",
+    "catalog_task_gate": "For each band, emllist.fits must contain one finite ID_INST=0/ID_BAND=0 summary row per ML_ID_SRC, the log must contain an emldetect ended record, and no emldetect error record may occur. A cheese makemask error occurring strictly after the emldetect ended record is recorded but cannot supply or modify the final mask.",
+    "cross_band_merge": "Sort by RA then Dec then decreasing likelihood; detections within 6 arcsec are one source and keep the inverse-position-variance centroid if finite, otherwise the highest-likelihood centroid. A detection in any one band is sufficient.",
+    "manual_source_add_remove": false
+  },
+  "immutable_mask": {
+    "PSF_energy_eV_by_band": [
+      774.5966692414834,
+      1549.1933384829667,
+      3741.657386773941
+    ],
+    "PSF_rule": "At each retained source position run psfgen ELLBETA for EMOS1, EMOS2, and EPN at the three frozen geometric-mean band energies, supplying the corresponding calibrated band image through withimage=yes solely for its WCS. Numerically integrate each calibrated PSF image about its intensity centroid and take the maximum circular r80 across all nine instrument-energy combinations.",
+    "radius_arcsec": "max(15,min(60,1.5*maximum_local_r80_arcsec))",
+    "geometry": "one sky circle per merged source; the final mask is their union and is reused unchanged for every instrument, energy band, source annulus, and background region",
+    "central_rule": "No central manual exception. Any automatically detected pointlike source is masked; the gas domain separately excludes r<10 kpc.",
+    "outputs": {
+      "catalog": "data/derived/r1_rxj2129_xmm_x2/point_source_catalog.csv",
+      "regions": "data/derived/r1_rxj2129_xmm_x2/point_source_mask_fk5.reg",
+      "manifest": "data/derived/r1_rxj2129_xmm_x2/point_source_mask_manifest.json"
+    }
+  },
+  "MOS_anomaly_gate": {
+    "method": "From each X1 calibrated event list, create a background working list selected only by its frozen flare GTI so unexposed-corner flags/patterns/energies remain available. Run emanom on those working files with writekeys=true, writelog=true, and keepcorner=true. The deprecated trial on X2a science-clean lists is not evidence.",
+    "rule": "Exclude only CCDs marked anomalous by emanom. Do not inspect the cluster image to override an inclusion or exclusion.",
+    "minimum_passing_CCDs_per_MOS": 4,
+    "frozen_result_after_valid_corner_run": {
+      "MOS1_ccds": "T T T T T T T",
+      "MOS2_ccds": "T T T T F T T",
+      "MOS2_excluded_CCD": 5,
+      "manual_override": false
+    }
+  },
+  "mask_application_to_ESAS_spectra": {
+    "method": "Write the 87 immutable sky exclusions as !CIRCLE RA DEC radius_arcmin ASCII records. For each instrument, reproduce convregion's documented circle-only transformation directly because convregion-0.12.2 is not POSIX-sh portable: use esky2det with that instrument's calibrated sky image for every DETX/DETY centre and ecoordconv for every X/Y centre; convert every radius to 0.05-arcsec units with radius=1200*radius_arcmin. Encode all exclusions as 87 !CIRCLE rows in SAS-standard detector and sky FITS REGION tables, require exactly 87 rows in each, copy checksum-identical tables into the instrument work directory under short names to stay inside the ESAS expression buffer, and supply srcdet.fits/srcsky.fits through maskdet/masksky with withsrcrem=yes and withregion=no.",
+    "withsrcrem": true,
+    "reason": "The custom PSF-radius FITS REGION tables are authoritative and use the native ESAS source-mask channel; cheese-generated masks remain forbidden.",
+    "required_exclusion_count_each_instrument": 87
+  },
+  "background": {
+    "method": "Use mosspectra/pnspectra to extract observation-corner, FWC-corner, and FWC-FOV products under the immutable source mask; use mosback/pnback for detector-specific QPB models.",
+    "cosmology_for_coordinate_conversion_only": {
+      "model": "flat LambdaCDM",
+      "H0_km_s_Mpc": 70.0,
+      "Omega_m": 0.3,
+      "redshift": 0.235,
+      "kpc_per_arcsec": 3.734271755152817
+    },
+    "local_outer_annulus": {
+      "kpc": [
+        650.0,
+        900.0
+      ],
+      "arcsec": [
+        174.06338976350162,
+        241.0108473648484
+      ],
+      "center_ra_deg": 322.41651,
+      "center_dec_deg": 0.08923
+    },
+    "FWC_corner_scale_allowed_open_interval": [
+      0.5,
+      2.0
+    ],
+    "outer_annulus_transfer_scale_allowed_open_interval": [
+      0.5,
+      2.0
+    ],
+    "FWC_corner_scale_definition": {
+      "energy_band_eV": [
+        500.0,
+        7000.0
+      ],
+      "PI_channels_inclusive": [
+        101,
+        1400
+      ],
+      "sector_scale": "observation_corner_counts / (FWC_corner_counts * observation_exposure * observation_BACKSCAL / (FWC_exposure * FWC_BACKSCAL))",
+      "pn_OOT_rule": "Subtract the pnback Observation OOT Scale Factor times the matching OOT counts from both the observation and FWC corner counts before forming the ratio.",
+      "instrument_pass_rule": "Every included outer MOS CCD or pn quadrant must pass the scale interval and posterior-bound rule. The pooled scale is diagnostic only and cannot override a sector failure.",
+      "posterior": "Jeffreys-Poisson scale posterior conditional on the ESAS FWC template; the much larger FWC exposure makes its omitted template-count uncertainty negligible for this gate."
+    },
+    "FWC_corner_subgate_result": {
+      "artifact": "results/r1_rxj2129_xmm_event_processing/qpb_background_audit.json",
+      "MOS1": "fail: CCD5 scale 0.3533430850668397 is outside the unchanged open interval",
+      "MOS2": "pass",
+      "pn": "pass",
+      "passing_instruments": [
+        "MOS2",
+        "pn"
+      ],
+      "minimum_instrument_gate_passed": true,
+      "full_X2_passed": false
+    },
+    "local_outer_annulus_transfer_scale_definition": {
+      "frozen_before_annulus_extraction": true,
+      "region": "The unchanged 650-900 kpc circular sky annulus centered at the frozen RX J2129 center, intersected with the selected detector FOV and the immutable 87-source mask; no sector selection is allowed.",
+      "MOS_energy_band_eV": [
+        9500.0,
+        11500.0
+      ],
+      "pn_energy_band_eV": [
+        10000.0,
+        12000.0
+      ],
+      "scale": "Observed local-annulus hard-band counts divided by the ESAS model-QPB counts for the identical local annulus; pn observation counts are OOT-subtracted using the frozen pnback factor.",
+      "minimum_observed_hard_band_counts": 25,
+      "instrument_pass_rule": "Require at least 25 observed hard-band counts, scale inside the unchanged open interval, and less than 5 percent posterior mass in the outermost 2 percent of either bound.",
+      "scientific_role": "This is a QPB-transfer and residual-soft-proton diagnostic, not an estimate of celestial or cluster surface brightness. Fluorescence and residual soft-proton terms remain later fit nuisances."
+    },
+    "posterior_bound_rule": "Reject an instrument if either scale is outside (0.5,2.0) or if a fitted scale has more than 5 percent posterior mass in the outermost 2 percent of either bound.",
+    "minimum_instruments_after_background_gate": 2,
+    "residual_components": "Retain fluorescence lines and residual soft-proton terms as nuisance components in later joint spectra; never subtract them as known counts.",
+    "forbidden": [
+      "changing the source catalog or mask after viewing a radial cluster profile",
+      "choosing a cleaner outer sector by eye",
+      "dropping an instrument after inspecting its fitted temperature",
+      "claiming X2 pass from flare exposure alone"
+    ],
+    "local_outer_annulus_subgate_result": {
+      "artifact": "results/r1_rxj2129_xmm_event_processing/outer_annulus_transfer_audit.json",
+      "MOS2": {
+        "observed_hard_band_counts": 149.0,
+        "ESAS_model_QPB_counts": 113.4439070224762,
+        "transfer_scale": 1.3134244395380283,
+        "passed": true
+      },
+      "pn": {
+        "observed_hard_band_counts_after_OOT_subtraction": 390.88,
+        "ESAS_model_QPB_counts": 526.8288841975553,
+        "transfer_scale": 0.7419486890802747,
+        "passed": true
+      },
+      "passing_instruments": [
+        "MOS2",
+        "pn"
+      ],
+      "full_X2b2_background_gate_passed": true
+    }
+  },
+  "stage_outcomes": [
+    {
+      "stage": "X2b1",
+      "outcome": "One source catalog and immutable PSF-derived sky mask with complete per-source radius provenance.",
+      "advance_if": "All three emldetect catalog-task gates pass, every retained source has a finite 15-60 arcsec radius, and the union mask is frozen before any background or radial profile result is inspected.",
+      "rethink_if": "Stop on catalog ambiguity, failed PSF calibration, or any need for manual source editing."
+    },
+    {
+      "stage": "X2b2",
+      "outcome": "At least two instruments pass MOS anomaly, FWC/corner, local-annulus transfer, and scale-bound gates.",
+      "advance_if": "Set the full X2 gate true and authorize only X3 annular count/response construction.",
+      "rethink_if": "Keep RX J2129 structural-only for gas if fewer than two instruments pass; do not widen scale bounds."
+    }
+  ],
+  "authorization": {
+    "read_cleaned_event_arrays_for_declared_detection_and_background_tasks": true,
+    "build_immutable_point_source_mask": true,
+    "run_declared_ESAS_background_tasks_after_mask_gate": true,
+    "inspect_or_tune_on_cluster_radial_profile": false,
+    "fit_temperature_or_density_before_full_X2_pass": false,
+    "infer_dynamical_or_Weyl_response": false,
+    "fit_new_force_or_action": false,
+    "construct_X3_annular_count_response_products": true,
+    "fit_temperature_or_density_before_X3_adequacy_pass": false
+  },
+  "execution_result": {
+    "generated_utc": "2026-07-27T10:17:04.508584+00:00",
+    "FWC_corner_artifact": "results/r1_rxj2129_xmm_event_processing/qpb_background_audit.json",
+    "outer_annulus_artifact": "results/r1_rxj2129_xmm_event_processing/outer_annulus_transfer_audit.json",
+    "retained_instruments": [
+      "MOS2",
+      "pn"
+    ],
+    "excluded_instruments": {
+      "MOS1": "Predeclared all-sector rule failed: CCD5 FWC/corner scale 0.3533430850668397 is below 0.5."
+    },
+    "full_X2_gate_passed": true,
+    "next_gate": "X3 annular count/response construction and adequacy audit"
+  }
+}

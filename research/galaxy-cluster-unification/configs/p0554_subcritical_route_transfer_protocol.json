@@ -1,0 +1,71 @@
+{
+  "protocol_version": "P0554-SUBCRITICAL-ROUTE-TRANSFER-0.1.0",
+  "frozen_utc": "2026-08-01T02:30:00Z",
+  "status": "frozen_after_macs1931_eta_selection_before_any_other_cluster_eta030_refit_or_global_root_score",
+  "question": "Does the MACS1931-selected subcritical route amplitude eta=0.30 transfer unchanged to four other raw clusters without a position or image-multiplicity liability?",
+  "formula": {
+    "radial_parent": "combined_parent P0554 with lensing_addition_softness=0.98",
+    "angular_parent": "A0279 conservative route with route_power=2.5",
+    "baseline": "alpha_eta0 = alpha_radial",
+    "candidate": "alpha_eta030 = alpha_radial + 0.30 * s_route * delta_alpha_A0279",
+    "universal_eta": 0.30,
+    "eta_parameters_fit": 0,
+    "new_per_cluster_gravity_parameters": 0
+  },
+  "evaluation": {
+    "systems": ["RXJ2129", "A2261", "MACS1931", "MACS1206", "RXJ1532"],
+    "selection_system_excluded_from_primary_transfer": "MACS1931",
+    "source_families": 27,
+    "published_images": 77,
+    "ordinary_geometry_parameters_refit_per_variant_cluster": 6,
+    "source_positions_profiled_on_training": true,
+    "optimization_starts_per_variant_cluster": 8,
+    "maximum_function_evaluations": 2500,
+    "random_seed": 554430001,
+    "global_search_half_width_arcsec": 120.0,
+    "global_root_aperture_arcsec": 120.0,
+    "global_grid_spacing_arcsec": 12.0,
+    "interlaced_grid_offset_arcsec": 6.0,
+    "local_seed_radii_arcsec": [0.0, 0.5, 1.0, 2.0, 4.0, 8.0, 16.0, 32.0],
+    "local_seed_angles": 12,
+    "root_closure_tolerance_arcsec": 0.000001,
+    "root_deduplication_arcsec": 0.05,
+    "jacobian_step_arcsec": 0.0002,
+    "potentially_observable_surplus_fraction": 0.25
+  },
+  "primary_transfer_gates": {
+    "primary_position_comparison": "equal-family mean assignment RMS over other-cluster families for which both eta=0 and eta=0.30 assign every published image",
+    "aggregate_other_four_equal_family_assignment_RMS_improvement_fraction_minimum": 0.01,
+    "other_four_systems_improved_minimum": 3,
+    "other_four_additional_potentially_observable_surplus_roots_maximum": 0,
+    "other_four_additional_missing_multiplicity_families_maximum": 0,
+    "other_four_lost_observed_seed_heldout_roots_maximum": 0,
+    "interpretation": "All gates must pass for strong transfer. Positive aggregate RMS with no topology cost is reported separately as weak transfer."
+  },
+  "inputs": {
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "selection_protocol": "configs/p0554_subcritical_route_scan_protocol.json",
+    "selection_report": "results/p0554_subcritical_route_scan/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0554_subcritical_route_transfer",
+    "system_scores": "system_scores.csv",
+    "family_summary": "family_summary.csv",
+    "variant_summary": "variant_summary.csv",
+    "global_roots": "global_roots.csv",
+    "assignments": "assignments.csv",
+    "geometry": "geometry.csv",
+    "heldout_predictions": "heldout_predictions.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_subcritical_route_transfer.png"
+  },
+  "claim_limits": [
+    "Eta=0.30 was selected on spent MACS1931; only the other four clusters are primary transfer evidence.",
+    "Ordinary lens geometry is independently refit, but no gravity parameter is fit per cluster.",
+    "The lens is simplified and nuisance solutions can touch allowed bounds.",
+    "Root detectability uses a relative-magnification screen rather than calibrated multiband completeness.",
+    "The five raw clusters and 27 published source families are not a population-complete survey.",
+    "No formula is promoted by this transfer alone."
+  ]
+}

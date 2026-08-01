@@ -1,0 +1,85 @@
+{
+  "protocol_version": "CPR0-0.1-formula-and-cluster-proxy-screen",
+  "frozen_utc": "2026-07-28T05:15:18Z",
+  "status": "exploratory protocol frozen before executing the CPR0 cluster proxy fit",
+  "candidate_name": "Coherence-Partitioned Response (CPR0)",
+  "naming_warning": "Do not call this Covariant Refracted Gravity or CRG; that name and acronym belong to Sanna, Matsakos, and Diaferio.",
+  "parent_models": {
+    "sigma": {
+      "equations": [
+        "nabla^2 Phi_N = 4 pi G rho_b",
+        "nabla^2 Phi = div[(1+B h(g_N)) grad Phi_N]",
+        "h(g_N)=sqrt(g_dagger/g_N) g_dagger/(g_dagger+g_N)"
+      ],
+      "fixed_g_dagger_m_s2": 9.60e-11,
+      "galaxy_response_amplitude_reference": 1.1725,
+      "cluster_response_amplitude_control": 8.446
+    },
+    "refracted_gravity": {
+      "equations": [
+        "div[epsilon_RG(rho_b) grad Phi] = 4 pi G rho_b",
+        "epsilon_RG=epsilon_0+(1-epsilon_0){tanh[Q ln(rho_b/rho_c)]+1}/2"
+      ],
+      "published_galaxy_reference": {
+        "epsilon_0": 0.089,
+        "log10_rho_c_g_cm3": -24.25,
+        "Q": 0.47
+      }
+    }
+  },
+  "candidate_equations": [
+    "w(C)=3 C^2-2 C^3",
+    "epsilon_mix=w+(1-w) epsilon_RG",
+    "nu_source=1+w B h(g_N)",
+    "div[epsilon_mix grad Phi]=div[nu_source grad Phi_N]"
+  ],
+  "exact_endpoint_requirements": [
+    "C=1 recovers the fixed-B Sigma QUMOND equation",
+    "C=0 recovers phenomenological Refracted Gravity",
+    "rho_b >> rho_c and g_N >> g_dagger recovers Newtonian gravity",
+    "all response coefficients remain finite and positive"
+  ],
+  "rejected_primary_combination": "Multiplying Sigma enhancement by 1/epsilon_RG double counts two missing-gravity responses and is retained only as a diagnostic control.",
+  "coherence_rule": {
+    "required_observable": "C_kin=|v_stream,barycentric|^2/(|v_stream,barycentric|^2+tr sigma^2)",
+    "leakage_rule": "C may use measured positions and velocities but never the target acceleration, inferred missing mass, fitted halo, or model-predicted velocity.",
+    "current_cluster_screen": "C=0 endpoint only; this does not test the coherence hypothesis or the intermediate interpolation."
+  },
+  "cluster_proxy_screen": {
+    "data": "data/raw/clash_tian2020/fig2.dat",
+    "systems": 20,
+    "points": 84,
+    "geometry": "spherical endpoint",
+    "lensing_mapping": "zero-slip effective-acceleration proxy only; CPR0 does not yet derive the two metric potentials or photon propagation",
+    "density_proxy": "mean enclosed baryonic density 3 g_bar/(4 pi G r), not the local density required by exact RG",
+    "folds": 5,
+    "fold_seed": 20260728,
+    "fit_objective": "equal-cluster mean of unweighted squared log10 acceleration residuals",
+    "models": [
+      "fixed Sigma B=8.446",
+      "cross-validated universal Sigma B",
+      "cross-validated constant epsilon oracle",
+      "published galaxy RG parameters without refit",
+      "cross-validated universal RG parameters using the declared density proxy"
+    ],
+    "bounds": {
+      "Sigma_B": [0.0, 20.0],
+      "epsilon_0": [0.03, 0.30],
+      "log10_rho_c_g_cm3": [-27.2, -23.0],
+      "Q": [0.1, 30.0]
+    },
+    "advance_gates": {
+      "equal_system_RMSE_improvement_vs_fixed_Sigma_min": 0.10,
+      "median_predicted_to_observed_range": [0.9, 1.1],
+      "absolute_global_radial_residual_slope_dex_per_dex_max": 0.10,
+      "folds_with_all_parameters_away_from_bounds_min": 4,
+      "log10_rho_c_fold_range_max_dex": 1.5
+    }
+  },
+  "claim_boundary": [
+    "A pass would justify acquiring local baryon-density and measured-coherence profiles; it would not validate CPR0.",
+    "A failure of the mean-density proxy does not by itself falsify exact Refracted Gravity.",
+    "CPR0 has no closed covariant action, derived gravitational slip, photon equation, PPN solution, or cosmology.",
+    "The exact CPR0 interpolation was not found in a targeted literature search, but no originality claim is made without a comprehensive ADS/INSPIRE and citation audit."
+  ]
+}

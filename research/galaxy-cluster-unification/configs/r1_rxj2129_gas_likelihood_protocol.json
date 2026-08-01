@@ -1,0 +1,137 @@
+{
+  "protocol_version": "R1B5-RXJ2129-gas-likelihood-0.1",
+  "status": "frozen_before_calibrated_reduction_product_or_gas_fit_inspection",
+  "purpose": "Infer the smallest source-traceable three-dimensional hot-gas density representation that jointly predicts the two Chandra observations and propagates one density posterior into spherical dynamical mass and projected lensing mass, without using either gravity residual.",
+  "freeze_date": "2026-07-26",
+  "disclosure": "Before this freeze, only the standard-archive raw-event adequacy result was known: 39.604096 ks, 1434 soft events inside 5 arcsec, four raw inner counts 114/275/513/532, conservative local source fractions above 0.96, and sub-arcsecond X-ray/BCG centering. The published cumulative gas mass 2.18 +/- 0.07e11 Msun at 14.3 kpc was also known and is reserved as an external validation anchor. No CIAO-reprocessed event count, retained flare exposure, BKGSCAL value, calibrated PSF radius, response, spectrum, density parameter, gas mass, gravity residual, or independent lens residual was inspected or used to select this protocol.",
+  "prerequisite": {
+    "protocol": "configs/r1_rxj2129_chandra_reduction_protocol.json",
+    "report": "results/r1_rxj2129_chandra_reduction/report.json",
+    "required_gate": "calibrated_reduction_gate_pass"
+  },
+  "fixed_geometry": {
+    "center_ra_deg": 322.41651,
+    "center_dec_deg": 0.08923,
+    "cluster_redshift": 0.235,
+    "cosmology": {
+      "H0_km_s_Mpc": 70.0,
+      "Omega_m": 0.3,
+      "Omega_Lambda": 0.7
+    },
+    "spherical_baseline": true,
+    "radial_edges_arcsec": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.5, 5.0, 7.5, 10.0, 15.0, 20.0, 30.0, 40.0, 60.0],
+    "azimuthal_sectors": 12,
+    "training_sector_indices_zero_based": [0, 2, 3, 5, 6, 8, 9, 11],
+    "heldout_sector_indices_zero_based": [1, 4, 7, 10],
+    "sector_split_rule": "fixed before calibrated images; every third sector is held out after a one-sector phase offset so each quadrant is represented"
+  },
+  "observations": {
+    "obsids": [552, 9370],
+    "fit_separately_not_coadded": true,
+    "spatial_band_keV": [0.7, 2.0],
+    "spectral_band_keV": [0.7, 7.0],
+    "global_spectral_aperture_arcsec": 60.0,
+    "point_source_mask": "mask wavdetect sources outside 10 arcsec using their reported 90-percent regions expanded by 1.5; never mask the central 10 arcsec",
+    "central_unresolved_source": "shared nonnegative flux nuisance convolved with each observation's calibrated center PSF",
+    "exposure_and_psf": "forward-model each observation with its own exposure map and circular CALDB PSF approximation; the PSF-radius uncertainty is a shared 10-percent multiplicative nuisance per observation",
+    "particle_background": "blank-sky events weighted by BKGSCALn, with a Gaussian 5-percent normalization nuisance per observation",
+    "soft_sky_background": "one nonnegative vignetted surface-brightness nuisance per observation with a log-uniform prior; cluster emission is not forced to zero in an outer annulus"
+  },
+  "spectral_emissivity": {
+    "model": "tbabs * apec",
+    "galactic_NH_cm2": 4.3e20,
+    "NH_origin": "Donahue et al. CLASH X-ray analysis",
+    "redshift_fixed": 0.235,
+    "temperature_keV_prior": [1.0, 20.0],
+    "abundance_solar_prior": [0.05, 1.5],
+    "temperature_and_abundance_shared_between_observations": true,
+    "response_treatment": "Poisson source and blank-sky PHA likelihood with each observation's ARF/RMF; never subtract the background spectrum",
+    "annular_temperature_rule": "No independent annular temperature parameter is allowed unless that annulus has at least 1500 source-band counts under the frozen reduction protocol; otherwise global temperature and abundance set the emissivity conversion."
+  },
+  "density_models": {
+    "reference_radius_kpc": 1.0,
+    "model_A": {
+      "name": "one_component_cusped_beta",
+      "electron_density": "ne(r)=n0*(r/r0)^(-alpha)*(1+(r/rc)^2)^(-3*beta/2)",
+      "parameters": {
+        "log10_n0_cm3": [-4.0, 1.0],
+        "alpha": [0.0, 2.0],
+        "log10_rc_kpc": [-1.0, 2.5],
+        "beta": [0.3, 1.5]
+      }
+    },
+    "model_B": {
+      "name": "two_component_cusped_beta",
+      "electron_density": "ne(r)=component_A(r)+n1*(1+(r/rc1)^2)^(-3*beta1/2)",
+      "additional_parameters": {
+        "log10_n1_cm3": [-5.0, 0.0],
+        "log10_rc1_kpc": [0.0, 3.0],
+        "beta1": [0.3, 1.5]
+      },
+      "ordering_constraint": "rc1 > rc",
+      "selection_rule": "select only if all heldout roots/count predictions are finite, heldout Poisson deviance improves by at least 10 percent over model_A in both observations jointly, no added parameter has more than 5 percent posterior mass in the outermost 2 percent of its prior interval, and the gas-mass covariance remains full finite and positive semidefinite"
+    },
+    "model_selection_uses_training_fit_and_heldout_sector_score_only": true,
+    "published_mass_anchor_used_in_fit": false,
+    "gravity_or_lens_residual_used_in_fit": false
+  },
+  "projection_and_mass": {
+    "emission_measure_integral": "surface brightness proportional to line-of-sight integral ne*nH*Lambda(T,Z,response), with ne/nH=1.2",
+    "line_of_sight_limit_kpc": 3000.0,
+    "mean_mass_per_electron_mu_e": 1.17,
+    "spherical_gas_mass": "M3D(<r)=4*pi*mu_e*m_p*integral_0^r ne(s)*s^2 ds",
+    "projected_gas_mass": "M2D(<R)=2*pi*integral_0^R Sigma_gas(S)*S dS using the same selected ne posterior",
+    "reported_radii": "the four dynamics-bin effective radii plus 14.3 kpc and all resolved lens-image radii",
+    "covariance": "posterior covariance for every reported M3D and M2D value, including all cross-radius and M3D-M2D blocks"
+  },
+  "sampling": {
+    "method": "affine-invariant ensemble MCMC initialized from multiple deterministic maximum-posterior starts",
+    "walkers_minimum": 64,
+    "post_burn_samples_minimum": 20000,
+    "maximum_split_Rhat": 1.01,
+    "minimum_bulk_effective_sample_size_each_science_parameter": 1000,
+    "random_seed": 20260726
+  },
+  "advance_thresholds": {
+    "heldout_joint_poisson_deviance_per_cell_maximum": 2.0,
+    "heldout_absolute_standardized_residual_mean_maximum": 0.5,
+    "heldout_fraction_cells_with_absolute_standardized_residual_above_3_maximum": 0.05,
+    "posterior_predictive_tail_probability_interval": [0.05, 0.95],
+    "maximum_central_point_source_fraction_inside_1arcsec_p95": 0.20,
+    "leave_one_observation_M3D_14p3kpc_consistency_sigma_maximum": 2.0,
+    "external_published_M3D_14p3kpc_consistency_sigma_maximum": 3.0,
+    "published_validation_anchor": {
+      "radius_kpc": 14.3,
+      "mass_msun": 2.18e11,
+      "sigma_msun": 7.0e9,
+      "used_for_selection_or_fitting": false
+    },
+    "mass_covariance_symmetric_positive_semidefinite": true,
+    "mass_covariance_finite": true,
+    "no_science_parameter_prior_edge_pileup_fraction_maximum": 0.05
+  },
+  "failure_rules": {
+    "central_source_failure": "Do not report an independent innermost gas node or gas acceleration there; retain only a PSF-marginalized upper/censored contribution.",
+    "heldout_spatial_failure": "Reject the spherical gas reconstruction for strict readiness; do not tune annuli, sector phase, mask expansion, or density priors on the heldout data.",
+    "observation_consistency_failure": "Do not combine ObsIDs or quote a common gas mass; diagnose calibration/background mismatch under a new protocol.",
+    "published_anchor_failure": "Report the independent reconstruction and discrepancy, but do not promote the baryonic gas component to strict readiness.",
+    "model_A_pass": "Retain model_A even if model_B fits training data better unless every frozen model_B heldout and identifiability condition passes.",
+    "pass": "Publish the selected density posterior and its coupled M3D/M2D covariance as a baryonic input only; it does not authorize a Weyl or dynamical response fit until every other RX J2129 readiness gate passes."
+  },
+  "outputs": {
+    "count_ledger": "data/derived/r1_rxj2129_gas_count_likelihood.csv",
+    "posterior_samples": "data/derived/r1_rxj2129_gas_posterior_samples.npz",
+    "gas_mass_profile": "data/derived/r1_rxj2129_gas_mass_profile.csv",
+    "gas_mass_covariance": "data/derived/r1_rxj2129_gas_mass_covariance.csv",
+    "report": "results/r1_rxj2129_gas_likelihood/report.json",
+    "diagnostic": "results/r1_rxj2129_gas_likelihood/gas_likelihood_diagnostic.png"
+  },
+  "authorization": {
+    "gas_likelihood_after_calibrated_reduction_pass": true,
+    "use_published_mass_anchor_as_fit_constraint": false,
+    "gravity_response_fit": false,
+    "weyl_response_reconstruction": false,
+    "new_force_or_action_fit": false,
+    "strict_r1_ready": false
+  }
+}

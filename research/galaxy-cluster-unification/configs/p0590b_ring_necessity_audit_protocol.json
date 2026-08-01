@@ -1,0 +1,46 @@
+{
+  "protocol_version": "P0590B-RING-NECESSITY-AUDIT-0.1.0",
+  "frozen_utc": "2026-08-01T08:22:00Z",
+  "status": "frozen_after_P0590_boundary_result_and_before_any_extended_null_score",
+  "question": "Does the P0590 improvement require a nonzero return radius—evidence for an arc/return morphology—or is ordinary baryon-map smoothing sufficient?",
+  "disclosed_P0590_result": {
+    "selected_return_radius_arcsec": 8.252339441052857,
+    "selected_width_arcsec": 8.252339441052857,
+    "selected_routed_fraction": 1.0,
+    "boundary_flags": ["minimum_lambda", "maximum_eta", "maximum_routed_fraction"],
+    "reason_for_audit": "A ring whose width equals its radius has substantial central support and can mimic a Gaussian smoothing kernel."
+  },
+  "base_protocol": "configs/p0590_gravity_return_backtrack_protocol.json",
+  "factorial": {
+    "return_radius_arcsec": [0.0, 2.0, 4.0, 6.0, 8.0, 12.0, 16.0, 24.0, 32.0],
+    "width_arcsec": [2.0, 4.0, 6.0, 8.0, 12.0, 16.0, 24.0],
+    "routed_fraction": [0.25, 0.5, 0.75, 1.0],
+    "candidate_count": 252
+  },
+  "families": {
+    "general_return": "all candidates",
+    "gaussian_smoothing_null": "return_radius_arcsec equals zero",
+    "strict_arc_return": "return radius at least 8 arcsec and width no more than half the return radius"
+  },
+  "selection": "Lock the best member of each family by mean development-map JSD, then transfer all three unchanged to the same Bradac and Williams method holdouts.",
+  "ring_necessity_gates": {
+    "general_nonzero_return_radius": true,
+    "general_development_improvement_over_gaussian_fraction_min": 0.05,
+    "general_holdout_improvement_over_gaussian_fraction_min": 0.05,
+    "strict_arc_both_holdouts_better_than_gaussian": true
+  },
+  "outputs": {
+    "directory": "results/p0590b_ring_necessity_audit",
+    "candidate_scores": "candidate_scores.csv",
+    "family_scores": "family_scores.csv",
+    "map_scores": "map_scores.csv",
+    "report": "report.json",
+    "figure": "p0590b_ring_necessity_audit.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This audit reuses all four already opened MACS J0416 model maps and is a diagnostic, not a new holdout.",
+    "A nonzero ring outperforming a Gaussian would establish morphological necessity only; it would not show that gravity traveled through a hidden coordinate.",
+    "If Gaussian smoothing is competitive, P0590 cannot be cited as evidence for arcing gravity even if it fits far better than the unsmoothed baryon map."
+  ]
+}

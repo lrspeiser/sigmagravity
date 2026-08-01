@@ -1,0 +1,48 @@
+{
+  "report_version": "P0594-GALAXY-LOCKED-CLUSTER-REPLAY-RESULTS-0.1.0",
+  "status": "complete_cluster_replay",
+  "coverage": {
+    "clusters": 10,
+    "development": 7,
+    "holdout": 3,
+    "candidates": 3,
+    "lenstool_realizations": 1000
+  },
+  "galaxy_locked_candidate": {
+    "q_R80": 0.75,
+    "routed_fraction": 0.25,
+    "galaxy_gate_power": 4.0
+  },
+  "cluster_gate_treatment": "Use S=1, the low-acceleration asymptote and maximum possible galaxy-locked route fraction, because the ten-cluster member-light proxy has no physical mass normalization from which to calculate g_b(R80).",
+  "holdout_mean_jsd": {
+    "cluster_locked": 0.04535660736641054,
+    "galaxy_locked": 0.10762938023548407,
+    "local": 0.17994190895937376
+  },
+  "holdout_improvement_fraction_vs_local": 0.4018659640885325,
+  "cluster_locked_improvement_fraction_vs_local": 0.7479375003371177,
+  "cluster_locked_gain_retained_fraction": 0.5372988570667997,
+  "holdout_systems_improved_vs_local": 3,
+  "holdout_realizations_improved_vs_local_fraction": 1.0,
+  "holdout_realizations_beating_cluster_locked_fraction": 0.0,
+  "glafic_holdout_mean_jsd": {
+    "cluster_locked": 0.0496128079272436,
+    "galaxy_locked": 0.09011902569865769,
+    "local": 0.15482480322302095
+  },
+  "glafic_holdout_improvement_fraction_vs_local": 0.4179290151020333,
+  "gates": {
+    "holdout_mean_improvement_vs_local_pass": true,
+    "holdout_system_count_pass": true,
+    "holdout_realization_fraction_pass": true,
+    "holdout_glafic_improvement_pass": true,
+    "cluster_locked_gain_retained_pass": true
+  },
+  "all_interpretation_gates_pass": true,
+  "claim_limits": [
+    "P0592 already disclosed the galaxy-locked candidate's ensemble target score, so this is a parameter replay and not an untouched cluster formula holdout.",
+    "Setting the unavailable acceleration gate to S=1 is favorable to the model and gives the largest transferred spatial correction, not a measured cluster activation.",
+    "Normalized map morphology cannot test absolute lensing amplitude or distinguish modified gravity from dark mass.",
+    "The cluster baryon proxy omits hot gas, ICL, and stellar mass-to-light variations."
+  ]
+}

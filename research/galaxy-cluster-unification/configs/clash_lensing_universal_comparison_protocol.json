@@ -1,0 +1,99 @@
+{
+  "protocol_version": "CLASH-LENSING-UNIVERSAL-COMPARISON-0.1",
+  "frozen_utc": "2026-07-28T21:00:00Z",
+  "status": "frozen after aggregate bridge metrics were known and before residual-distribution and cluster-bootstrap scoring",
+  "question": "How closely does the unchanged squared-coherence candidate reproduce the CLASH lensing-inferred radial field compared with fixed-a0 MOND, a cluster-retuned MOND/RAR diagnostic, and the per-cluster NFW construction?",
+  "input": {
+    "predictions": "results/rar_sharp_coherence_rg_sweep/predictions.csv",
+    "bridge_report": "results/rar_sharp_coherence_rg_sweep/report.json",
+    "domain": "cluster",
+    "systems": 20,
+    "points": 72,
+    "target": "CLASH strong-plus-weak-lensing radial acceleration table used by Tian et al. (2020)",
+    "target_warning": "g_obs was obtained by spherical deprojection of individually fit NFW lensing profiles; it is not a raw shear or image-position likelihood"
+  },
+  "photon_closure": {
+    "name": "same-effective-potential_zero-slip_diagnostic",
+    "rule": "Identify each model's predicted radial acceleration with the Weyl acceleration that deflects photons; use no gravitational-slip, photon-coupling, or lensing-normalization parameter.",
+    "candidate_status": "added diagnostic hypothesis, not derived from the current nonrelativistic formula",
+    "MOND_status": "TeVeS-like comparison convention in which the potential governing dynamics also governs light deflection",
+    "forbidden_during_primary_scoring": [
+      "object-specific gravity parameters",
+      "cluster-specific acceleration scale",
+      "lensing-only multiplier",
+      "post-hoc gravitational slip"
+    ]
+  },
+  "models": {
+    "candidate": {
+      "predictions_model_label": "RAR_sharp_coherence_gated_RG",
+      "equation": "E=E_RAR+[1-(3C^2-2C^3)]^2*(1/epsilon_RG-1)",
+      "universal_settings": {
+        "g_dagger_m_s2": 1.2e-10,
+        "epsilon_0": 0.12950519927041917,
+        "log10_rho_c_g_cm3": -23.785246000655626,
+        "Q": 0.4271580606729452,
+        "coherence_gate_power": 2.0
+      },
+      "bridge_fitted_global_parameters": 3,
+      "object_specific_gravity_parameters": 0,
+      "prediction_provenance": "five-fold complete-system held-out predictions from a joint 44-BCG plus 20-cluster bridge"
+    },
+    "fixed_simple_MOND": {
+      "predictions_model_label": "simple_MOND",
+      "equation": "g/g_bar=0.5*(1+sqrt(1+4*a0/g_bar))",
+      "a0_m_s2": 1.2e-10,
+      "universal_gravity_parameters": 1,
+      "object_specific_gravity_parameters": 0
+    },
+    "cluster_retuned_RAR_diagnostic": {
+      "predictions_model_label": "cluster_scale_RAR_diagnostic",
+      "g_dagger_m_s2": 2.02e-9,
+      "scale_ratio_to_galaxy_value": 16.833333333333332,
+      "universality_status": "fails unchanged galaxy-to-cluster scale requirement"
+    },
+    "GR_plus_per_cluster_NFW": {
+      "predictions_model_label": null,
+      "score_rule": "predicted_log_gobs equals target log_gobs",
+      "profile_parameters_per_cluster": ["mass", "concentration"],
+      "minimum_object_specific_gravity_parameters": 40,
+      "score_status": "zero by construction and therefore not an independent goodness-of-fit score"
+    }
+  },
+  "metrics": {
+    "primary": "equal-cluster RMSE in log10 acceleration",
+    "secondary": [
+      "point RMSE in log10 acceleration",
+      "mean signed residual",
+      "median absolute residual",
+      "diagonal-error-normalized RMS",
+      "radial residual slope",
+      "fraction within multiplicative factors 1.10, 1.25, 1.50, and 2.00"
+    ],
+    "uncertainty": {
+      "method": "paired complete-cluster bootstrap",
+      "draws": 20000,
+      "seed": 20260728,
+      "contrasts": [
+        "candidate minus fixed simple MOND equal-cluster RMSE",
+        "candidate minus cluster-retuned RAR equal-cluster RMSE"
+      ]
+    },
+    "forbidden_diagnostic": "Report the single post-hoc global multiplier that removes mean log residual, but never use it in primary scores or advancement decisions."
+  },
+  "interpretation_rules": {
+    "beat_fixed_MOND_on_this_derived_target": "candidate primary RMSE is lower with the same unchanged settings and zero lensing multiplier",
+    "dark_matter_closeness": "report distance from the NFW-derived target and error-normalized residual; do not interpret NFW's construction zero as independent evidence",
+    "raw_lensing_claim": "withheld unless a theory-neutral image/shear likelihood, complete same-system baryons, an unspent validation set, and a declared relativistic action or closure are all available",
+    "universality_claim": "limited to zero object-specific candidate gravity parameters in the tested bridge"
+  },
+  "raw_RXJ2129_readiness": {
+    "spectroscopic_images": 21,
+    "source_families": 7,
+    "image_coordinate_likelihood_available": true,
+    "complete_baryonic_forward_inputs": false,
+    "numeric_radial_hot_gas_profile_available": false,
+    "unspent_lens_holdout_available": false,
+    "candidate_image_plane_score_authorized": false
+  }
+}

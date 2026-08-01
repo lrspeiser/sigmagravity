@@ -1,0 +1,88 @@
+{
+  "protocol_version": "P0579-EXTENT-GATED-RETURN-RAW-0.1.0",
+  "frozen_utc": "2026-07-31T23:58:00Z",
+  "status": "frozen_before_P0579_raw_image_scores",
+  "trigger": "The ten-cluster gravity-flow inversion found that R50 and R50/R80 strongly track the inferred inward-return fraction, while the earlier scalar arc-apogee sweep showed that radial strength alone drifts back toward the MOND mass scale. This stage tests the distinct two-dimensional route geometry on raw image families.",
+  "question": "Can one baryon-derived extent gate and one shared return geometry improve held-out raw image-plane consistency in both SMACS0723 and SPT0615 without using either cluster's reconstructed halo map to place endpoints?",
+  "formula": {
+    "surface": "Sigma=(1-f_eff)*B_w+f_eff*R_{ell,w,m}[B]",
+    "effective_fraction": "f_eff=q_route*s(C)",
+    "concentration": "C=R50/R80 from hard-member F160W weights about the frozen lens-map origin, matching the ten-cluster inverse driver definition; routes point toward the weighted light centroid",
+    "extent_gate": "s(C)=1/[1+exp(-beta*(C-0.6485259912))]",
+    "return_length": "ell=lambda*R80",
+    "endpoint_width": "w=eta*R80",
+    "route_modes": {
+      "endpoint": "deposit only at x+ell*c_hat",
+      "chord": "deposit uniformly along the launch-to-return chord",
+      "radial_arc_0.5": "deposit along a path with a 0.5*R80 outward radial bow",
+      "transverse_arc_0.5": "split the route equally over opposite transverse bows of height 0.5*R80 so no handedness is inserted"
+    },
+    "field": "ordinary two-dimensional Poisson deflection; no fractional propagator",
+    "conservation": "Every local and routed surface is separately normalized; the kernel redistributes normalized source weight rather than creating map-integrated weight."
+  },
+  "grid": {
+    "gate_modes": ["none", "cluster_logistic_soft", "cluster_logistic"],
+    "gate_beta": {
+      "none": 0.0,
+      "cluster_logistic_soft": 2.388186313844878,
+      "cluster_logistic": 4.776372627689756
+    },
+    "return_length_over_R80": [0.25, 0.36, 0.5, 0.65],
+    "width_over_R80": [0.18, 0.23, 0.28],
+    "route_modes": ["endpoint", "chord", "radial_arc_0.5", "transverse_arc_0.5"],
+    "route_fraction_multiplier": [0.5, 0.75, 1.0],
+    "path_samples": 17,
+    "padding_factor": 3,
+    "linearized_image_singular_value_floor": 0.02,
+    "candidates": 432
+  },
+  "primary_inverse_candidate": {
+    "gate_mode": "cluster_logistic",
+    "return_length_over_R80": 0.36,
+    "width_over_R80": 0.23,
+    "route_mode": "endpoint",
+    "route_fraction_multiplier": 1.0,
+    "selection_role": "locked replay of the inverse-derived values; it is scored whether or not calibration selects it"
+  },
+  "selection": {
+    "clusters": ["SMACS J0723.3-7327", "SPT-CL J0615-5746"],
+    "rule": "Fit one positive normalization per cluster on its frozen calibration image families for each candidate. Select the minimum equal-cluster mean linearized image-plane RMS. Freeze that candidate and both normalizations before scoring every held-out family.",
+    "controls": ["B20 compact", "B100 local", "P0574 ordinary routed", "P0578 fixed 125 kpc broadening", "processed Lenstool reference"]
+  },
+  "gates": {
+    "equal_cluster_heldout_improvement_vs_B100_fraction_min": 0.10,
+    "clusters_improved_vs_B100_min": 2,
+    "heldout_subfamilies_improved_vs_B100_fraction_min": 0.60,
+    "mass_sheet_R2_max_each": 0.95,
+    "route_fraction_not_at_boundary": true,
+    "solar_limit": "An isolated point has R50=R80=0 and the route collapses to its launch point, giving exactly no force change.",
+    "galaxy_limit": "The same conservative radial redistribution is evaluated separately on SPARC after this raw-cluster selection; no galaxy null is assumed."
+  },
+  "inputs": {
+    "p0573_protocol": "configs/p0573_tidal_arrival_fresh_replication_protocol.json",
+    "SMACS_images": "results/p0575_smacs0723_raw_position/raw_images.csv",
+    "SPT_images": "results/p0577_spt0615_raw_response/raw_images.csv",
+    "inverse_driver_report": "results/gravity_flow_inverse/driver_report.json",
+    "arc_apogee_report": "results/arc_apogee_boundary_refinement/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0579_extent_gated_return_raw",
+    "geometry": "baryon_geometry.csv",
+    "candidate_scores": "candidate_scores.csv",
+    "candidate_cluster_scores": "candidate_cluster_scores.csv",
+    "cluster_scores": "cluster_scores.csv",
+    "heldout_subfamily_scores": "heldout_subfamily_scores.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0579_extent_gated_return_raw.png"
+  },
+  "claim_limits": [
+    "Hard-member F160W light is a stellar-light proxy and omits hot gas, intracluster light, and mass-to-light variation.",
+    "One amplitude per cluster remains calibrated, so this is a route-geometry test rather than an absolute-strength prediction.",
+    "The two clusters are fresh to the inverse-derived extent relation but have been used in P0573-P0578 formula work.",
+    "The linearized image-plane diagnostic is not a full nonlinear root solution.",
+    "Two clusters and five held-out subfamilies are insufficient to confirm a universal route law.",
+    "Projected path residence cannot determine an off-plane arc height or propagation time."
+  ]
+}

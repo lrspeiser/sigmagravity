@@ -1,0 +1,53 @@
+{
+  "protocol_version": "P0564-BARYON-MORPHOLOGY-SIGN-AUDIT-0.1.0",
+  "frozen_utc": "2026-08-01T02:15:00Z",
+  "status": "frozen_after_p0563_sign_split_before_any_morphology_descriptor_score",
+  "question": "Is the opposite MACS0429 response sign associated with a directly observed star-gas morphology distinction?",
+  "interpretation": "post-hoc four-system descriptor audit that may nominate, but cannot validate, an environmental gate",
+  "maps": {
+    "stars": "registered nonnegative CLASH F160W light after lens-image masking",
+    "gas": "registered point-source-masked Chandra 0.7-2.0 keV map, Gaussian smoothed at 3 arcsec and square-root transformed",
+    "normalization": "normalize each component independently inside every aperture",
+    "apertures_arcsec": [30.0, 60.0, 120.0]
+  },
+  "descriptors": [
+    "centroid_x_over_aperture",
+    "centroid_y_over_aperture",
+    "centroid_radius_over_aperture",
+    "peak_radius_over_aperture",
+    "quadrupole_magnitude",
+    "quadrupole_angle_deg",
+    "half_aperture_concentration",
+    "rot180_asymmetry",
+    "star_gas_centroid_offset_over_aperture",
+    "star_gas_quadrupole_misalignment_deg",
+    "star_gas_quadrupole_cos2_alignment",
+    "star_gas_normalized_correlation"
+  ],
+  "ranking": {
+    "negative_system": "MACS0429",
+    "positive_systems": ["MACS0329", "MACS1115", "MACS1931"],
+    "score": "signed difference from positive-group mean divided by positive-group sample standard deviation with a 1e-6 floor",
+    "claim_rule": "rank candidates descriptively; no threshold, p-value, formula selection, or promotion"
+  },
+  "inputs": {
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "member_tidal_protocol": "configs/member_tidal_metric_protocol.json",
+    "p0563_report": "results/p0563_accept_tensor_source_plane_response/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0564_baryon_morphology_sign_audit",
+    "descriptors": "descriptors.csv",
+    "ranked_separators": "ranked_separators.csv",
+    "report": "report.json",
+    "figure": "p0564_baryon_morphology_sign_audit.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "One negative-sign cluster and three positive-sign clusters cannot establish a population relationship.",
+    "The response labels were known before this descriptor audit, so every ranking is post-hoc.",
+    "X-ray brightness remains an angular morphology proxy rather than a local gas-mass measurement.",
+    "Any nominated gate must be frozen and tested on new clusters before entering a gravity formula.",
+    "No formula can be promoted from P0564."
+  ]
+}

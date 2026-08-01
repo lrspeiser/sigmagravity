@@ -1,0 +1,42 @@
+{
+  "protocol_version": "P0614-COMPOSITE-FORMULA-AUDIT-0.1.0",
+  "status": "frozen_accounting_audit_after_P0613",
+  "question": "What does the actual P0554 scalar parent plus bounded endpoint operator predict when the same composite equation, rather than the conservative route in isolation, is compared across galaxies, raw clusters, a route-formula transfer cluster, and the Solar System?",
+  "composite_equation": {
+    "scalar": "g_dyn=g_b(1+Delta_0554)",
+    "lensing": "alpha_test=alpha_P0554+grad(psi_endpoint)",
+    "endpoint_source": "Only the P0554 excess above baryonic GR is redistributed; the baryonic base stays local.",
+    "endpoint_constraint": "The endpoint correction is curl-free and has zero circular monopole.",
+    "symmetry": "The endpoint layer is exactly zero on the axisymmetric SPARC and point-source Solar controls, so those domains retain the P0554 scalar prediction.",
+    "per_object_gravity_parameters": 0
+  },
+  "inputs": {
+    "P0554_report": "results/arc_invariant_pareto_refinement/report.json",
+    "SPARC_report": "results/sparc_independent_nuisance_refit/report.json",
+    "P0613_report": "results/p0613_bounded_endpoint_cross_domain/report.json",
+    "P0613_cluster_scores": "results/p0613_bounded_endpoint_cross_domain/cluster_scores.csv",
+    "P0581_protocol": "configs/p0581_locked_endpoint_exact_root_protocol.json",
+    "P0583_report": "results/p0583_tanh_endpoint_rxj2129/report.json"
+  },
+  "gates": {
+    "galaxy_RMSE_to_fixed_RAR_max": 1.5,
+    "raw_validation_RMS_to_compact_halo_max": 1.25,
+    "RXJ2129_improvement_over_scalar_required": true,
+    "all_route_formula_transfer_roots_required": true,
+    "all_solar_proxies_required": true
+  },
+  "outputs": {
+    "directory": "results/p0614_composite_formula_audit",
+    "scorecard": "scorecard.csv",
+    "report": "report.json",
+    "figure": "p0614_composite_formula_audit.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This stage recombines already-computed predictions and does not create a new holdout.",
+    "The P0554 scalar formula and endpoint operator were selected in earlier project-spent stages.",
+    "The compact-halo comparator is limited to the historical validation subset and is not a full dark-matter posterior comparison.",
+    "Zero per-object gravity parameters does not mean zero nuisance parameters: ordinary galaxy and lens geometry nuisances remain.",
+    "The P0554 parent contains multiple universal constants selected from exploratory grids; it is not a one-parameter theory."
+  ]
+}

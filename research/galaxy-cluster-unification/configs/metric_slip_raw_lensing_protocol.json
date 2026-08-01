@@ -1,0 +1,80 @@
+{
+  "protocol_version": "METRIC-SLIP-RAW-LENSING-0.2.0",
+  "frozen_utc": "2026-07-29T23:15:00Z",
+  "status": "frozen_before_metric_slip_scores",
+  "question": "Can one universal metric-slip coefficient preserve the fixed-RAR galaxy matter law while predicting raw cluster image positions across clusters?",
+  "matter_law": {
+    "name": "fixed_RAR",
+    "equation": "g_dyn/g_bar = 1/[1-exp(-sqrt(g_bar/a_dagger))]",
+    "a_dagger_m_s2": 1.2e-10,
+    "gravity_parameters_fit_to_lensing": 0,
+    "locked_galaxy_outer_RMSE_km_s": 10.348465773189679
+  },
+  "metric_slip": {
+    "potential_split": "Phi=Phi_N+phi; Psi=Phi_N+(1+s)phi",
+    "eta": "Psi/Phi = 1+s*(g_dyn-g_bar)/g_dyn",
+    "lensing_acceleration": "g_lens=g_bar+(1+s/2)*(g_dyn-g_bar)",
+    "extra_force_lensing_to_dynamics_ratio": "1+s/2",
+    "shared_slip_parameters": 1,
+    "per_object_slip_parameters": 0,
+    "grid": [-1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0],
+    "selection_metric": "minimum equal-system exact training radial RMS on the two selection clusters; ties favor smaller absolute s"
+  },
+  "cluster_split": {
+    "slip_selection_labels": ["MACS0329", "MACS0429"],
+    "cross_cluster_validation_labels": ["MACS1115", "MACS1931"],
+    "stress_test_labels": ["RXJ1347", "RXJ2129"],
+    "within_family_rule": "hold out the lexicographically last image in every family with at least three images",
+    "disclosure": "All four selection/validation catalogs were inspected by earlier zero-slip research. This is a prospectively frozen formula/split test, not untouched-project validation."
+  },
+  "field_closure": {
+    "primary_maximum_radius_kpc": 3000.0,
+    "far_tail_control_maximum_radius_kpc": 1000000.0,
+    "baryonic_outer_acceleration_slope": -2.0,
+    "warning": "RAR has a 1/r low-acceleration tail around a finite source, so the lensing integral requires an environmental or cosmological closure."
+  },
+  "geometry": {
+    "fit_on_training_images_per_system": ["axis_ratio_q", "position_angle", "center_x", "center_y", "external_shear_gamma1", "external_shear_gamma2"],
+    "source_positions_profiled_per_family": true,
+    "geometry_is_nuisance_not_gravity": true
+  },
+  "optimization": {
+    "starts_per_grid_point": 3,
+    "starts_selected_stress_test": 8,
+    "maximum_function_evaluations": 2000,
+    "random_seed": 20260804
+  },
+  "advance_gates": {
+    "galaxy_outer_RMSE_relative_to_RAR_max": 1.10,
+    "selected_s_not_grid_boundary": true,
+    "cross_cluster_all_roots_converged": true,
+    "cross_cluster_equal_system_heldout_RMS_arcsec_max": 0.75,
+    "cross_cluster_to_compact_halo_RMS_ratio_max": 1.25,
+    "cross_cluster_improves_over_zero_slip": true,
+    "far_tail_fractional_RMS_change_max": 0.20,
+    "Solar_System_eta_minus_one_max": 2.3e-5
+  },
+  "inputs": {
+    "galaxy_matter_report": "results/metric_slip_galaxy_matter/report.json",
+    "base_multicluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "base_multicluster_report": "results/unbounded_running_multicluster_raw/report.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "BCG_cluster_sample": "results/phenomenology_formula_sweep/sample.csv"
+  },
+  "outputs": {
+    "report": "results/metric_slip_raw_lensing/report.json",
+    "grid_scores": "results/metric_slip_raw_lensing/grid_scores.csv",
+    "predictions": "results/metric_slip_raw_lensing/predictions.csv",
+    "geometry": "results/metric_slip_raw_lensing/geometry.csv",
+    "radial_profiles": "results/metric_slip_raw_lensing/radial_profiles.csv",
+    "figure": "results/metric_slip_raw_lensing/metric_slip.png",
+    "summary": "results/metric_slip_raw_lensing/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "The slip coefficient is a phenomenological weak-field parameter, not derived from a complete covariant action.",
+    "The raw lens uses a spherical baryonic profile deformed into one pseudo-elliptical potential plus constant shear; member galaxies and gas substructure are not modeled separately.",
+    "The Tian radial target is a GR+NFW-deprojected lensing product and is only a secondary diagnostic.",
+    "The 44 BCG points are non-photon cluster-environment tracers, but no strict same-object cluster gas/dynamics+lensing likelihood is locally complete."
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "protocol_version": "R1B2-A2537-Gemini-feasibility-0.1",
+  "status": "frozen_before_any_A2537_raw_download_or_pixel_inspection",
+  "frozen_utc": "2026-07-27T07:40:00Z",
+  "selection_blind": true,
+  "system": "A2537",
+  "archive_object": "Abell 2537",
+  "program_id": "GS-2008B-Q-4",
+  "selection_basis": "A2537 is the final residual-blind ranked target and was predeclared only as the disturbed engineering control. It follows failures of the non-disturbed A383 and MS2137 pilots. No gravity residual, mass fit, or A2537 science pixel selected it, and it cannot be relabeled as a non-disturbed success.",
+  "disturbance_status": {
+    "disturbed_control": true,
+    "source": "Newman et al. 2013, arXiv:1209.1392",
+    "evidence": "Bimodal cluster-galaxy velocity structure and possible line-of-sight merger; no cool core; possible second northern mass concentration."
+  },
+  "published_bcg_center": {
+    "ra_hms": "23:08:22.3",
+    "dec_dms": "-02:11:32",
+    "ra_deg": 347.0929166666666,
+    "dec_deg": -2.192222222222222,
+    "source": "Stott et al. 2011, arXiv:1101.4652, Table 2",
+    "source_file": "data/raw/a2537_bcg_center/bcgsize.tex",
+    "source_file_sha256": "220FE43FFE0E821BC1F3C92AB222209A2D8698BFE1DD0AC1CA09C801A90A1B7A"
+  },
+  "pre_pixel_overlap_target": {
+    "existing_numerical_dynamics_support_arcsec": 3.65,
+    "redshift": 0.294,
+    "kpc_per_arcsec_flat_lcdm_h0_70_omega_m_0p3": 4.392239605487973,
+    "preidentified_images_sorted_by_radius": [
+      {"image_id": "3.5", "family_id": "3", "radius_arcsec": 1.16619037896906, "radius_kpc": 5.121186},
+      {"image_id": "4.3", "family_id": "4", "radius_arcsec": 7.3, "radius_kpc": 32.062349},
+      {"image_id": "3.1", "family_id": "3", "radius_arcsec": 15.886157496386597, "radius_kpc": 69.773829}
+    ],
+    "minimum_images_inside_accepted_dynamics_support": 3,
+    "minimum_independent_families_inside_accepted_dynamics_support": 2,
+    "frozen_outer_signed_bin_edge_arcsec": 16.0,
+    "frozen_outer_signed_bin_edge_kpc": 70.27583368780756,
+    "support_rule": "Both signed sides of the long slit must retain an accepted outer bin whose outer edge is at least 16.0 arcsec. Detector coverage, a one-sided bin, or the pre-existing 3.65-arcsec profile does not count.",
+    "no_post_pixel_relaxation": true
+  },
+  "science_selection": {
+    "instrument": "GMOS-S",
+    "mode": "long-slit spectroscopy",
+    "selection_rule": "Use every public archive-QA Pass A2537 long-slit science exposure in GS-2008B-Q-4 and no MOS exposure from the separate GS-2008A-Q-5 program.",
+    "science_filenames": [
+      "S20080921S0047.fits",
+      "S20080921S0048.fits",
+      "S20080922S0031.fits",
+      "S20080922S0032.fits"
+    ],
+    "exact_science_frames": 4,
+    "selected_archive_exposure_seconds": 7201.848034,
+    "minimum_selected_exposure_seconds": 7200.0,
+    "grating": "B600",
+    "central_wavelengths_um": [0.461, 0.466],
+    "slit": "0.75arcsec",
+    "binning": "2x2",
+    "read_speed": "slow",
+    "gain": "low",
+    "roi": "Full Frame",
+    "archive_qa_required": "Pass",
+    "maximum_archive_pointing_offset_from_published_bcg_arcsec": 4.0
+  },
+  "calibration_selection": {
+    "maximum_bias_separation_days": 90,
+    "maximum_spectroscopy_flat_separation_days": 180,
+    "maximum_arc_separation_days": 365,
+    "exact_bias_download": [
+      "S20080921S0103.fits", "S20080921S0104.fits", "S20080921S0105.fits", "S20080921S0106.fits", "S20080921S0107.fits",
+      "S20080922S0146.fits", "S20080922S0147.fits", "S20080922S0148.fits", "S20080922S0149.fits", "S20080922S0150.fits"
+    ],
+    "exact_flat_download": [
+      "S20080921S0046.fits", "S20080921S0049.fits", "S20080922S0030.fits", "S20080922S0033.fits"
+    ],
+    "exact_arc_download": ["S20080921S0050.fits", "S20080922S0034.fits"],
+    "science_to_flat_arc_mapping": {
+      "S20080921S0047.fits": ["S20080921S0046.fits", "S20080921S0050.fits"],
+      "S20080921S0048.fits": ["S20080921S0049.fits", "S20080921S0050.fits"],
+      "S20080922S0031.fits": ["S20080922S0030.fits", "S20080922S0034.fits"],
+      "S20080922S0032.fits": ["S20080922S0033.fits", "S20080922S0034.fits"]
+    },
+    "arc_qa_required": "Pass",
+    "flat_qa_required": "Pass",
+    "bias_qa_required": "Pass",
+    "minimum_bias_frames": 10,
+    "required_bpm": "bpm_20030101_gmos-s_EEV_22_full_3amp.fits"
+  },
+  "failure_policy": "If the center, disturbed-control label, exact archive set, calibration mapping, or 16-arcsec lens target fails, record a hard public-data shortfall and do not download pixels. If all pass, acquire only the frozen files and BPM, verify checksums/headers, then freeze the reduction and covariance protocol before reducing science.",
+  "authorization": {
+    "query_archive_metadata": true,
+    "download_exact_files_after_metadata_gate": true,
+    "inspect_science_pixels": false,
+    "reduce_spectra": false,
+    "fit_stellar_kinematics": false,
+    "count_as_non_disturbed_pilot": false,
+    "infer_dynamical_or_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

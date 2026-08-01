@@ -1,0 +1,36 @@
+{
+  "protocol_version": "SPARC-DENSITY-TRANSFER-0.1",
+  "frozen_utc": "2026-07-28T08:25:00Z",
+  "status": "frozen before constructing or scoring SPARC local-density transfer predictions",
+  "base_predictions": "results/initial_comparison/rar/predictions.csv with RAR-fitted nuisance parameters",
+  "selection": "the same 131 galaxies and 968 outer-holdout points as the initial comparison",
+  "density_model": {
+    "stellar_disk": "rho=Upsilon*I_3.6(R)/(2*h_z), using the SPARC local surface-brightness column",
+    "bulge": "Hernquist density using the residual-blind bulge scale and luminosity fit",
+    "gas": "optional exponential disk with total 1.33*M_HI, R_gas=R_HI/divisor, and vertical half-thickness h_gas=f_h*R_gas",
+    "primary_disk_hz_over_Rdisk": 0.2,
+    "primary_gas_RHI_divisor": 3.2,
+    "primary_gas_hz_over_Rgas": 0.1,
+    "disk_hz_over_Rdisk_sensitivity": [0.1, 0.2, 0.3],
+    "gas_RHI_divisor_sensitivity": [2.5, 3.2, 4.0],
+    "gas_hz_over_Rgas_sensitivity": [0.05, 0.1, 0.2],
+    "include_stellar_only_floor": true
+  },
+  "fixed_transfer_models": [
+    "fixed RAR",
+    "RAR_RG_additive from rescue full fit",
+    "RAR_RG_product from rescue full fit",
+    "RAR_potential_gated_RG from rescue full fit",
+    "RAR_fixed_potential_gated_RG from protected-gate full fit"
+  ],
+  "advance_gate": {
+    "outer_RMSE_relative_to_RAR_max": 1.15,
+    "outer_chi2_per_point_relative_to_RAR_max": 1.25,
+    "median_absolute_extra_velocity_km_s_max": 5.0
+  },
+  "claim_boundary": [
+    "SPARC does not provide a gas surface-density profile in this local snapshot; the gas volume density is a declared sensitivity model.",
+    "This reuses RAR-fitted nuisance parameters and is a fixed transfer screen, not a refit of the candidate.",
+    "A pass would require a later joint nuisance refit; a strong positive acceleration excess is already informative because every tested RG term is nonnegative."
+  ]
+}

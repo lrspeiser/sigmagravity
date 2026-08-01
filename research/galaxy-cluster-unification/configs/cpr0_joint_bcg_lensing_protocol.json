@@ -1,0 +1,46 @@
+{
+  "protocol_version": "CPR0-0.4-joint-bcg-dynamics-cluster-lensing",
+  "frozen_utc": "2026-07-28T06:17:00Z",
+  "status": "exploratory joint protocol frozen after separate-track results and before any shared-parameter fit",
+  "question": "Can one shared local-density response predict held-out BCG dynamics and held-out cluster weak lensing, and does measured BCG coherence improve that transfer?",
+  "domains": {
+    "BCG": "44 Tian2024 MaNGA BCGs after the frozen DynPop quality selection; local Sersic density and C=Lambda_Re",
+    "cluster": "14 Elkholy2015 gas-profile systems cross-matched to Herbonnet2020 weak-lensing aperture M500; nominal Mstar/Mgas=0.10 and C=0"
+  },
+  "models": [
+    "universal constant epsilon control",
+    "universal density-only RG",
+    "universal CPR0 using measured BCG coherence and C=0 for clusters"
+  ],
+  "shared_parameters": ["epsilon_0", "log10_rho_c_g_cm3", "Q"],
+  "fixed_sigma_response_amplitude": 1.1725,
+  "cross_validation": {
+    "folds": 5,
+    "seed": 20260728,
+    "split": "separate deterministic system-level folds within each domain; every held-out fold contains both domains",
+    "objective": "0.5*MSE_BCG + 0.5*MSE_cluster in log10 acceleration",
+    "bounds": {
+      "constant_epsilon": [0.03, 1.0],
+      "epsilon_0": [0.03, 0.9],
+      "log10_rho_c_g_cm3": [-31.0, -20.0],
+      "Q": [0.1, 30.0]
+    }
+  },
+  "advance_gates": {
+    "BCG_RMSE_dex_max": 0.12,
+    "cluster_lensing_RMSE_dex_max": 0.10,
+    "equal_domain_RMSE_dex_max": 0.11,
+    "CPR0_improvement_vs_density_only_RG_min_dex": 0.01,
+    "absolute_domain_mean_residual_dex_max": 0.05,
+    "absolute_domain_residual_density_correlation_max": 0.30,
+    "log10_rho_c_fold_range_max_dex": 1.5,
+    "maximum_unmeasured_density_gap_dex": 1.0
+  },
+  "claim_boundary": [
+    "This joint exercise is exploratory because both separate-domain outcomes were inspected before this protocol was frozen.",
+    "System-level cross-validation prevents row leakage but does not provide a pristine external validation set.",
+    "A good score across disjoint density ranges can be a two-plateau interpolation rather than evidence for the transition law.",
+    "The density gap must pass its own gate before a shared fit can count as support for a continuous unification.",
+    "The model still lacks a relativistic action and derived photon propagation; cluster lensing is scored with a zero-slip effective-acceleration mapping."
+  ]
+}

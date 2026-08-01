@@ -1,0 +1,53 @@
+{
+  "protocol_version": "P0560-ACCEPT-TENSOR-COUPLING-RESPONSE-0.1.0",
+  "frozen_utc": "2026-07-31T23:30:00Z",
+  "status": "frozen_before_any_two_sided_coupling_response_score",
+  "question": "Do the four physical ACCEPT baryon tensors prefer one common coupling sign and scale, or cluster-specific field reversal?",
+  "interpretation": "diagnostic response map on already spent systems; never independent validation and never formula promotion",
+  "locked_map": {
+    "gas_normalization": "accept_absolute",
+    "gas_power": 0.5,
+    "include_stars": true,
+    "operator": "contrast",
+    "softening_kpc": 20.0,
+    "pixels_per_axis": 512,
+    "new_map_parameters": 0,
+    "per_cluster_parameters": 0
+  },
+  "coupling_grid": [-1.0, -0.6, -0.3, -0.15, 0.0, 0.15, 0.3, 0.6, 1.0],
+  "coupling_bound_reason": "abs(t)<=1 conservatively preserves positive ellipticity for a tensor whose eigenvalue magnitude is bounded by one",
+  "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+  "optimization": {
+    "starts_per_exact_fit": 4,
+    "maximum_function_evaluations": 2000,
+    "random_seed": 20260734
+  },
+  "response_checks": {
+    "near_zero_pair": [-0.15, 0.15],
+    "common_nonzero_requires_all_roots": true,
+    "leave_one_system_out_selection": "minimum equal-system exact RMS on the other three, root-complete candidates only"
+  },
+  "inputs": {
+    "p0559_protocol": "configs/p0559_accept_projected_gas_tidal_protocol.json",
+    "p0557_protocol": "configs/p0557_baryon_proxy_tidal_protocol.json",
+    "member_tidal_protocol": "configs/member_tidal_metric_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0560_accept_tensor_coupling_response",
+    "scores": "scores.csv",
+    "response_summary": "response_summary.csv",
+    "leave_one_out": "leave_one_out.csv",
+    "predictions": "predictions.csv",
+    "tensor_audits": "tensor_audits.csv",
+    "report": "report.json",
+    "figure": "p0560_accept_tensor_coupling_response.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "All four systems have already influenced the research program; the sweep is a diagnostic, not validation.",
+    "The same physical map and equation are held fixed while only the universal dimensionless coupling changes.",
+    "A per-system optimum diagnoses compatibility but is not an allowed model parameter.",
+    "The small four-system sample cannot establish a population correlation.",
+    "No formula can be promoted from P0560."
+  ]
+}

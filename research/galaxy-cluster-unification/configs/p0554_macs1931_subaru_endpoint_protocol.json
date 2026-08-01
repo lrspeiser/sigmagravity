@@ -1,0 +1,109 @@
+{
+  "protocol_version": "P0554-MACS1931-SUBARU-ENDPOINT-0.1.0",
+  "frozen_utc": "2026-08-01T01:45:00Z",
+  "status": "frozen_after_raw_download_before_complete_catalog_parse_or_spatial_score_with_runtime_only_transport_grid_amendment",
+  "question": "Is the broad southern MACS1931 Lenstool halo endpoint unusually aligned with plausible cluster-redshift galaxies once the public 40 arcmin Subaru field is used?",
+  "claim_boundary": "This is an endpoint counterpart audit. A positive result favors an omitted baryonic group over a baryon-free endpoint; a null result leaves a nonlocal response possible but does not prove arcing gravity.",
+  "inputs": {
+    "acquisition_protocol": "configs/p0554_macs1931_subaru_acquisition_protocol.json",
+    "provenance": "data/raw/p0554_macs1931_subaru/provenance.json",
+    "photoz_catalog": "data/raw/p0554_macs1931_subaru/hlsp_clash_subaru_suprimecam_macs1931_photoz-cat.txt",
+    "halo_backtrack_protocol": "configs/p0554_halo_backtrack_protocol.json",
+    "capacity_protocol": "configs/p0554_halo_backtrack_capacity_protocol.json",
+    "known_member_catalog": "data/raw/r1_clash_caminha2019/MACSJ1931-P2_circular_mcmc/members_lenstool_v2.dat",
+    "member_aperture_report": "results/p0554_macs1931_member_aperture/report.json"
+  },
+  "coordinate_and_target": {
+    "center_ra_deg": 292.9570833333,
+    "center_dec_deg": -26.5756166667,
+    "angular_scale_kpc_per_arcsec": 4.996269752867861,
+    "cluster_redshift": 0.352,
+    "halo_object_id": 2,
+    "posterior_samples": 256,
+    "frame": "east-positive x and north-positive y; Lenstool posterior x is sign-flipped",
+    "minimum_posterior_samples_inside_catalog_footprint_fraction": 0.99,
+    "known_member_crossmatch_radius_arcsec": 1.0
+  },
+  "catalog_columns": [
+    "id", "RA", "Dec", "x", "y", "area", "B", "dB", "V", "dV", "RC", "dRC", "IC", "dIC", "Z", "dZ", "zb", "zbmin", "zbmax", "tb", "odds", "zml", "tml", "chisq", "chisq2", "nfdet", "nfobs"
+  ],
+  "quality": {
+    "require_positive_segment_area": true,
+    "minimum_detected_filters": 4,
+    "minimum_observed_filters": 4,
+    "minimum_odds": 0.5,
+    "ic_magnitude_range": [17.0, 25.5],
+    "invalid_magnitude_sentinel": -99.0,
+    "luminosity_weight_band": "IC",
+    "luminosity_weight_upper_quantile_cap": 0.99
+  },
+  "selection_variants": [
+    {
+      "selection_kind": "photoz_tight",
+      "primary": true,
+      "rule": "quality cuts and |zb-0.352| <= 0.05*(1+0.352)"
+    },
+    {
+      "selection_kind": "photoz_medium",
+      "primary": false,
+      "rule": "quality cuts and |zb-0.352| <= 0.10*(1+0.352)"
+    },
+    {
+      "selection_kind": "photoz_95_overlap",
+      "primary": false,
+      "rule": "quality cuts, zbmin <= 0.352 <= zbmax, and |zb-0.352| <= 0.15*(1+0.352)"
+    }
+  ],
+  "endpoint_test": {
+    "primary_selection": "photoz_tight",
+    "primary_weight": "unit_count",
+    "weights": ["unit_count", "capped_ic_luminosity"],
+    "kernel_widths_kpc": [50.0, 100.0, 200.0],
+    "primary_kernel_width_kpc": 100.0,
+    "aperture_radii_kpc": [50.0, 100.0, 200.0],
+    "rotation_angles_deg": [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,200,205,210,215,220,225,230,235,240,245,250,255,260,265,270,275,280,285,290,295,300,305,310,315,320,325,330,335,340,345,350,355],
+    "density_statistic": "posterior-mean sum of source weights times exp(-distance^2/(2*width^2)); each nonzero null angle rotates the complete halo posterior around the cluster center",
+    "p_value": "(1 + number of rotation scores at least the real score)/(1 + number of rotations)",
+    "density_ratio": "real score divided by the median nonzero-rotation score",
+    "counterpart_gate": {
+      "maximum_primary_p_value": 0.05,
+      "minimum_primary_density_ratio": 1.5,
+      "minimum_selected_objects_within_200kpc_of_posterior_median": 5
+    }
+  },
+  "descriptive_backtrack": {
+    "enabled": true,
+    "source_aperture_kpc": 1200.0,
+    "capacity_multiplier": 4.0,
+    "entropy_length_kpc": 50.0,
+    "transport_grid_spacing_kpc": 40.0,
+    "source_weights": ["unit_count", "capped_ic_luminosity"],
+    "target_kind": "posterior_centers_sigma2_w50",
+    "purpose": "Measure whether replacing the truncated member list with photo-z-selected wide-field sources shortens the already-spent inverse route. This cannot validate a forward law."
+  },
+  "numerical_amendments": [
+    "The first execution was terminated before any output was accepted because the inherited 20 kpc destination grid made each wide-source transport solve unnecessarily slow. The transport-only grid was changed to 40 kpc while retaining the frozen posterior-centers_sigma2_w50 target, source selection, capacity, entropy scale, and endpoint test. No spatial or density score had been viewed before this amendment."
+  ],
+  "outputs": {
+    "directory": "results/p0554_macs1931_subaru_endpoint",
+    "catalog_audit": "catalog_audit.csv",
+    "known_member_matches": "known_member_matches.csv",
+    "selected_sources": "selected_sources.csv",
+    "endpoint_scores": "endpoint_scores.csv",
+    "rotation_nulls": "rotation_nulls.csv",
+    "candidate_counterparts": "candidate_counterparts.csv",
+    "transport_scores": "transport_scores.csv",
+    "transport_origins": "transport_origins.csv",
+    "report": "report.json",
+    "figure": "p0554_macs1931_subaru_endpoint.png",
+    "summary": "SUMMARY.md"
+  },
+  "limits": [
+    "BVRIz BPZ redshifts are photometric, not spectroscopy, and the MACS1931 sightline is crowded with foreground stars.",
+    "The Lenstool halo target is broad, model-dependent, and inferred from the same strong-lensing observations.",
+    "A galaxy overdensity at the target is ordinary evidence for an omitted baryonic group, not evidence that gravity traveled along an arc.",
+    "A blank target can result from photo-z failures, low-luminosity members, intracluster gas, or an inaccurate second-halo parameterization.",
+    "The inverse capacity and flux weights are attribution diagnostics, not physical gravity constants.",
+    "MACS1931 is a spent exploratory system. Any propagation formula derived from it must be frozen before tests on other clusters."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "protocol_version": "REOPENED-HYBRID-SLOPE-RESPONSE-FINE-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-01T01:45:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay the fine-grid Pareto survivors, low-galaxy-error root boundaries, and short-scale low-RMS branches with eight raw-lens geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_slope_response_fine_protocol.json",
+  "source_report": "results/reopened_hybrid_slope_response_fine/report.json",
+  "selected_variants": [
+    "scale_strength_0p9:radial_memory_log_scale=0.6",
+    "strength_scale_0p75:radial_memory_slope_gate_strength=0.8",
+    "scale_strength_0p75:radial_memory_log_scale=1",
+    "scale_strength_0p75:radial_memory_log_scale=0.75",
+    "strength_scale_0p75:radial_memory_slope_gate_strength=0.7",
+    "pivot_scale_0p75_strength_1:radial_memory_slope_gate_pivot=0",
+    "pivot_scale_0p75_strength_1:radial_memory_slope_gate_pivot=-0.5",
+    "scale_strength_1:radial_memory_log_scale=0.8",
+    "scale_strength_1:radial_memory_log_scale=0.75",
+    "scale_strength_1:radial_memory_log_scale=0.9",
+    "scale_strength_1:radial_memory_log_scale=0.7",
+    "scale_strength_1:radial_memory_log_scale=0.6",
+    "strength_scale_0p75:radial_memory_slope_gate_strength=0.9",
+    "scale_strength_0p9:radial_memory_log_scale=0.9",
+    "scale_strength_1:radial_memory_log_scale=0.5",
+    "scale_strength_0p75:radial_memory_log_scale=0.5"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_slope_response_fine_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_slope_response_fine_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_slope_response_fine_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_slope_response_fine_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_slope_response_fine_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Universal gravity constants are copied unchanged from each fine-grid bridge fit.",
+    "No gravity constant, slope gate, carrier exponent, response strength, or memory scale is fitted to raw lensing.",
+    "Only pseudo-elliptical geometry, shear, center, and source positions are fitted to raw training images.",
+    "Candidates with missing held-out roots remain failures even when RMS over surviving roots is small.",
+    "Selection followed the two-start fine-grid results and is a numerical robustness test rather than an independent holdout."
+  ]
+}

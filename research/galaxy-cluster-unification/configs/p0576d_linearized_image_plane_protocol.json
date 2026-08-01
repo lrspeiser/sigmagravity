@@ -1,0 +1,54 @@
+{
+  "protocol_version": "P0576D-LINEARIZED-IMAGE-PLANE-0.1.0",
+  "frozen_utc": "2026-08-01T09:35:00Z",
+  "status": "frozen_after_P0576C_before_image_plane_scores",
+  "trigger": "P0576C proved that high-p source-plane gains are a near-affine mass-sheet/source-collapse degeneracy.",
+  "question": "Does any modest routed propagator improve held-out raw positions when source residuals are converted back to the image plane through the local lens Jacobian?",
+  "metric": {
+    "source_residual": "delta_beta_i=beta_i-mean_family(beta)",
+    "jacobian": "J_i=I-A*(D_ls/D_s)*partial(alpha)/partial(theta)",
+    "image_residual": "delta_theta_i=J_i^(-1)*delta_beta_i",
+    "reported_statistic": "RMS norm of delta_theta in arcseconds",
+    "singular_value_floor": 0.02,
+    "reason": "The Jacobian inversion prevents a near-critical affine mass sheet from receiving an artificially zero score."
+  },
+  "grid": {
+    "fractional_power_p": [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0],
+    "deflection_route_fraction": [0.0, 0.2, 0.4, 0.6, 0.8, 1.0],
+    "candidates": 42,
+    "padding_factor": 3,
+    "reference_length_kpc": 60.0
+  },
+  "selection": {
+    "calibration_families": ["1", "2"],
+    "heldout_families": ["5", "19"],
+    "amplitude": "For each candidate, minimize calibration image-plane RMS over one nonnegative overall amplitude using a fixed dense scan plus bounded refinement.",
+    "candidate": "Select minimum calibration image-plane RMS, then score held-out families without refitting p, f, or amplitude."
+  },
+  "gates": {
+    "heldout_improvement_vs_local_fraction_min": 0.10,
+    "heldout_families_improved_min": 2,
+    "selected_power_interior": true,
+    "mass_sheet_R2_max": 0.95,
+    "solar_SPARC_null": true
+  },
+  "inputs": {
+    "p0575_images": "results/p0575_smacs0723_raw_position/raw_images.csv",
+    "p0573_protocol": "configs/p0573_tidal_arrival_fresh_replication_protocol.json",
+    "p0574_protocol": "configs/p0574_symmetry_gated_arrival_microvariation_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0576d_linearized_image_plane",
+    "candidate_scores": "candidate_scores.csv",
+    "heldout_family_scores": "heldout_family_scores.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0576d_linearized_image_plane.png"
+  },
+  "claim_limits": [
+    "Linearized image-plane residuals are stronger than source-plane scatter but are not full nonlinear root finding.",
+    "The singular-value floor is a declared numerical regularization and must be varied later.",
+    "The same SMACS positions are reused and only this metric/formula selection is prospective.",
+    "One overall amplitude is fitted; absolute gravity strength remains unpredicted."
+  ]
+}

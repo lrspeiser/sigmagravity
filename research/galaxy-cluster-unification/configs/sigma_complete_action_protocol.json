@@ -1,0 +1,32 @@
+{
+  "protocol_version": "SIGMA-COMPLETE-ACTION-0.1",
+  "date": "2026-07-28",
+  "status": "post-derivation exploratory consistency test",
+  "plain_language_question": "If Sigma is a real field, do its feedback and stored energy naturally supply the missing cluster gravity without making galaxies too strong?",
+  "action": {
+    "gravity": "a0^2 F(X,Sigma)/(8*pi*G)",
+    "sigma": "K_Sigma*[L_Sigma^2 |grad Sigma|^2/2 + V_eff(Sigma,rho)]",
+    "backreaction": "chi = a0^2/(8*pi*G*K_Sigma)",
+    "meaning": "chi controls both sides of the same coin: how easily gravity moves Sigma, and how much energy a given Sigma pattern stores."
+  },
+  "fixed_candidate": {
+    "eta": 0.6,
+    "log10_rho_s_g_cm3": -23.5,
+    "L_Sigma_kpc": 3.0,
+    "a0_m_s2": 1.2e-10
+  },
+  "feedback_values": [0.001, 0.003, 0.01, 0.03],
+  "stress_energy_grid": {
+    "eta": [0.3, 0.6, 0.8, 0.9],
+    "log10_rho_s_g_cm3": [-25.5, -25.0, -24.5, -24.0, -23.5],
+    "L_Sigma_kpc": [0.3, 1.0, 3.0, 10.0, 30.0],
+    "log10_chi": [-3.0, -6.0, -8.0, -9.0, -10.0, -11.0, -12.0, -13.0]
+  },
+  "interpretation_rules": [
+    "Use the scalar normalization implied by chi; do not fit an independent field-mass amplitude.",
+    "Count only positive scalar energy relative to the vacuum minimum.",
+    "Keep galaxy and cluster parameters universal.",
+    "Explain dex scores as ordinary multiplicative factors and mass contributions as fractions of baryonic mass.",
+    "This is a spherical weak-field consistency test, not a completed relativistic theory."
+  ]
+}

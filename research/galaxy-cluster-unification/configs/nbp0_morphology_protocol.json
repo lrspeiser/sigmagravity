@@ -1,0 +1,134 @@
+{
+  "protocol_version": "NBP0-M1-0.1-axisymmetric-morphology",
+  "frozen_utc": "2026-07-28T04:42:00Z",
+  "status": "frozen after identifying the untested disk-versus-bulge loophole and before inspecting any morphology-residual result",
+  "parent_protocol": "configs/nbm0_constitutive_basin_protocol.json",
+  "reopen_reason": "The prior slab inversion used disk scale, surface brightness, gas fraction, and Hubble type but did not explicitly solve the different 3D fields of a thin disk and a vertically extended bulge. A constitutive theory makes a directional morphology prediction that can break the mass-only BTFR confound.",
+  "candidate": "Nonlocal Basin Permittivity morphology test (NBP0-M1)",
+  "weak_field_system": [
+    "div[epsilon(X) grad Phi] = 4 pi G rho_b",
+    "(1-L_X^2 nabla^2)X = rho_b",
+    "epsilon(X) = epsilon_0 + (1-epsilon_0) (X/rho_c)^Q/[1+(X/rho_c)^Q]"
+  ],
+  "claim_boundary": "This is an axisymmetric weak-field benchmark. Density-dependent permittivity and refracted gravity are prior art; a reciprocal covariant action and lensing prediction remain unproved.",
+  "solver": {
+    "coordinates": "cell-centered axisymmetric R>=0,z>=0 quadrant with reflection at R=0 and z=0",
+    "operator": "finite-volume div(epsilon grad Phi)",
+    "face_permittivity": "harmonic mean",
+    "outer_boundary": "far-field monopole -GM/(epsilon_0 sqrt(R^2+z^2))",
+    "sweep_grid": {
+      "radial_cells": 72,
+      "vertical_cells": 96,
+      "radial_max_Rdisk": 12.0,
+      "vertical_max_Rdisk": 6.0
+    },
+    "reference_grid": {
+      "radial_cells": 128,
+      "vertical_cells": 160,
+      "radial_max_Rdisk": 12.0,
+      "vertical_max_Rdisk": 6.0
+    },
+    "validation_gates": {
+      "constant_epsilon_relative_error_max": 1e-9,
+      "analytic_Miyamoto_Nagai_p95_force_error_max": 0.08,
+      "selected_case_median_enhancement_resolution_change_max": 0.05,
+      "selected_case_maximum_enhancement_resolution_change_max": 0.12
+    }
+  },
+  "SPARC_inputs": {
+    "directory": "data/raw/sparc",
+    "disk_mass_to_light": 0.5,
+    "bulge_mass_to_light": 0.7,
+    "helium_factor": 1.33,
+    "quality_max": 2,
+    "inclination_min_deg": 30.0,
+    "minimum_rotation_points": 8,
+    "disk_velocity_profile_fractional_rms_max": 0.25,
+    "bulge_velocity_profile_fractional_rms_max": 0.25,
+    "bulge_scale_over_disk_scale_range": [0.01, 5.0],
+    "residual_blindness": "Morphology, component masses, and bulge scale are derived only from SPARC photometry and Vgas/Vdisk/Vbul baryonic component fields. Vobs is forbidden until the catalog and folds are frozen."
+  },
+  "synthetic_sources": {
+    "total_mass": 1.0,
+    "disk_scale": 1.0,
+    "baseline": {
+      "stellar_bulge_fraction": 0.3,
+      "disk_vertical_scale_over_Rdisk": 0.15,
+      "bulge_scale_over_Rdisk": 0.2,
+      "gas_fraction": 0.2,
+      "gas_radial_scale_over_Rdisk": 2.5,
+      "gas_vertical_scale_over_Rdisk": 0.08,
+      "minimum_permittivity": 0.1,
+      "log10_critical_density_dimensionless": -2.0,
+      "sharpness": 2.0,
+      "smoothing_length_over_Rdisk": 0.3
+    },
+    "one_at_a_time_values": {
+      "stellar_bulge_fraction": [0.0, 0.05, 0.15, 0.3, 0.5, 0.7, 0.9, 1.0],
+      "disk_vertical_scale_over_Rdisk": [0.0625, 0.1, 0.2, 0.4, 0.8],
+      "bulge_scale_over_Rdisk": [0.05, 0.1, 0.2, 0.4, 0.8],
+      "gas_fraction": [0.0, 0.1, 0.3, 0.5, 0.7],
+      "gas_radial_scale_over_Rdisk": [1.5, 2.5, 4.0],
+      "gas_vertical_scale_over_Rdisk": [0.0625, 0.15, 0.3],
+      "minimum_permittivity": [0.03, 0.05, 0.1, 0.2, 0.4, 0.7, 0.9, 1.0],
+      "log10_critical_density_dimensionless": [-5.0, -4.0, -3.0, -2.0, -1.0, 0.0, 1.0],
+      "sharpness": [0.5, 1.0, 2.0, 4.0, 8.0],
+      "smoothing_length_over_Rdisk": [0.0, 0.1, 0.3, 1.0, 3.0]
+    },
+    "morphology_factorial": {
+      "stellar_bulge_fraction": [0.0, 0.05, 0.15, 0.3, 0.5, 0.7, 0.9, 1.0],
+      "disk_vertical_scale_over_Rdisk": [0.0625, 0.1, 0.2, 0.4, 0.8],
+      "bulge_scale_over_Rdisk": [0.05, 0.1, 0.2, 0.4, 0.8]
+    },
+    "sobol_cases": 512,
+    "paired_environment_cases": 128,
+    "sobol_seed": 20260728,
+    "response_radii_over_Rdisk": [1.0, 2.2, 4.0, 6.0, 8.0],
+    "outer_slope_interval_over_Rdisk": [4.0, 8.0]
+  },
+  "empirical_morphology_test": {
+    "whole_galaxy_folds": 5,
+    "fold_seed": 20260728,
+    "permutations": 512,
+    "mass_to_light_sensitivity": {
+      "disk_values": [0.3, 0.5, 0.7],
+      "bulge_values": [0.5, 0.7, 0.9],
+      "primary_pair": [0.5, 0.7]
+    },
+    "outer_radius_min_over_Rdisk": 3.0,
+    "minimum_outer_points_per_galaxy": 2,
+    "primary_target": "whole-galaxy median residual in log10(gobs/gRAR_fixed) beyond 3 Rdisk",
+    "baseline_predictors": [
+      "log10_baryonic_mass",
+      "log10_disk_scale",
+      "log10_effective_surface_brightness",
+      "gas_fraction",
+      "median_log10_gbar",
+      "median_radius_over_Rdisk"
+    ],
+    "morphology_predictors": [
+      "baryonic_bulge_fraction",
+      "bulge_scale_over_disk_scale"
+    ],
+    "predicted_direction": "At fixed baryonic controls, thinner and more disk-dominated systems receive a larger positive outer residual than bulge-dominated systems.",
+    "advance_gates": {
+      "relative_heldout_RMSE_improvement_min": 0.1,
+      "permutation_p_max": 0.05,
+      "partial_bulge_coefficient_must_be_negative": true,
+      "synthetic_parameter_fraction_with_predicted_sign_min": 0.8
+    },
+    "controls": [
+      "mass-only BTFR",
+      "fixed RAR",
+      "Hubble type without explicit bulge geometry",
+      "permuted whole-galaxy morphology",
+      "matched disk-dominated and bulge-dominated systems in mass, size, gas fraction, and surface brightness"
+    ]
+  },
+  "stop_rules": [
+    "No per-galaxy permittivity, transition density, smoothing length, disk thickness, or bulge scale may be fitted to Vobs.",
+    "If morphology response changes sign over the allowed global parameter space, report the sign boundary instead of choosing a favorable region after seeing SPARC.",
+    "A galaxy morphology pass cannot establish cluster lensing or a covariant action.",
+    "If the empirical sign or permutation gate fails, NBP0-M1 is not supported even if selected synthetic parameter values produce attractive example curves."
+  ]
+}

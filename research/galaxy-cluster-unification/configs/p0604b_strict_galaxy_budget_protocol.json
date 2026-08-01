@@ -1,0 +1,19 @@
+{
+  "protocol_version": "P0604B-STRICT-GALAXY-BUDGET-0.1.0",
+  "frozen_utc": "2026-08-01T20:42:00Z",
+  "status": "frozen_posthoc_after_P0604_frontier_inspection_before_strict_budget_OOF_scores",
+  "question": "Does a conservative inward route selected under a no-galaxy-degradation constraint retain a whole-cluster morphology advantage?",
+  "parent_protocol": "configs/p0604_cross_domain_routing_balance_protocol.json",
+  "galaxy_RMSE_ratio_budgets": [0.95, 0.98, 1.0],
+  "primary_budget": 1.0,
+  "selection": "within each of five whole-cluster folds choose minimum training Lenstool JS among candidates satisfying the stated all-galaxy equal-RMSE budget",
+  "status_warning": "The strict budgets were motivated by the already-inspected P0604 frontier. This is a stability diagnostic, not prospective validation.",
+  "outputs": {
+    "directory": "results/p0604b_strict_galaxy_budget",
+    "fold_selections": "fold_selections.csv",
+    "oof_scores": "oof_scores.csv",
+    "report": "report.json",
+    "figure": "p0604b_strict_galaxy_budget.png",
+    "summary": "SUMMARY.md"
+  }
+}

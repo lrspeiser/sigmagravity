@@ -1,0 +1,41 @@
+{
+  "protocol_version": "P0554-ALL-BARYON-ROUTE-INPUT-AUDIT-0.1.0",
+  "frozen_utc": "2026-08-01T06:30:00Z",
+  "status": "frozen_after_acquisition_before_fits_pixel_audit_or_route_score",
+  "inputs": {
+    "acquisition_protocol": "configs/p0554_all_baryon_route_acquisition_protocol.json",
+    "acquisition_provenance": "data/raw/p0554_all_baryon_route/provenance.json",
+    "reused_hst_protocol": "configs/clash_stellar_morphology_acquisition_protocol.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv"
+  },
+  "bands_keV": {
+    "soft_morphology": [0.7, 2.0]
+  },
+  "audit_aperture_arcsec": 100.0,
+  "hst_common_coverage_radius_arcsec": 60.0,
+  "gates": {
+    "expected_systems": 5,
+    "expected_hst_files": 10,
+    "expected_chandra_evt2_observations": 11,
+    "minimum_total_chandra_exposure_ks": 300.0,
+    "minimum_each_system_chandra_exposure_ks": 20.0,
+    "minimum_each_system_soft_events_inside_aperture": 1000,
+    "minimum_hst_covered_fraction_inside_common_radius": 0.99,
+    "require_every_known_image_positive_hst_weight": true,
+    "require_all_hashes_verified": true
+  },
+  "forbidden": [
+    "gas mass inference",
+    "gravity or lens-residual scoring",
+    "point-source-mask tuning against a lens residual",
+    "selection of observations after viewing a route score"
+  ],
+  "outputs": {
+    "directory": "results/p0554_all_baryon_route_input_audit",
+    "hst_ledger": "hst_ledger.csv",
+    "chandra_ledger": "chandra_ledger.csv",
+    "report": "report.json",
+    "figure": "p0554_all_baryon_route_input_audit.png",
+    "summary": "SUMMARY.md"
+  }
+}

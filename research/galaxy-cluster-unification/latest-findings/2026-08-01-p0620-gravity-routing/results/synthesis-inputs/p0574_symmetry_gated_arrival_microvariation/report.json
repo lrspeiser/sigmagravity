@@ -1,0 +1,121 @@
+{
+  "report_version": "P0574-SYMMETRY-GATED-ARRIVAL-MICROVARIATION-RESULTS-0.1.0",
+  "status": "complete_symmetry_gated_microvariation",
+  "protocol": {
+    "path": "configs/p0574_symmetry_gated_arrival_microvariation_protocol.json",
+    "sha256": "53567291add2b72739354d4f728b609a37563f49574a30dfd525afd960710aa1"
+  },
+  "coverage": {
+    "historical_development_clusters": 13,
+    "candidates": 14,
+    "variant_validation_clusters": 3,
+    "validation_lenstool_realizations": 300,
+    "validation_glafic_maps": 3,
+    "SPARC_galaxies_exact_angular_null": 175
+  },
+  "result": {
+    "selected_candidate": {
+      "candidate_id": "width_60",
+      "alpha": 0.5,
+      "beta": 1.0,
+      "width_kpc": 60.0,
+      "f": 0.8,
+      "Q0": 0.05,
+      "n": 4.0
+    },
+    "development_mean_JS": 0.056856777839650076,
+    "validation_local_equal_system_JS": 0.0389006218396717,
+    "validation_selected_equal_system_JS": 0.03276628951035223,
+    "validation_improvement_vs_local_fraction": 0.15769239768459287,
+    "validation_systems_improved": 3,
+    "retained_fraction_of_P0573_no_gate_gain": 0.8584262252437554,
+    "validation_realizations_improved_fraction": 0.8433333333333334,
+    "glafic_improvement_vs_local_fraction": 0.2496721836841268,
+    "glafic_systems_improved": 3
+  },
+  "parameter_impacts": [
+    {
+      "coordinate": "arrival_width",
+      "JS_span": 0.003033096254695576,
+      "relative_span": 0.052091689113439754,
+      "best_candidate": "width_60"
+    },
+    {
+      "coordinate": "route_fraction",
+      "JS_span": 0.0006448132436504411,
+      "relative_span": 0.011122881213262634,
+      "best_candidate": "fraction_0p9"
+    },
+    {
+      "coordinate": "tidal_power",
+      "JS_span": 0.00035539185317687294,
+      "relative_span": 0.006132662014906726,
+      "best_candidate": "tidal_0p8"
+    },
+    {
+      "coordinate": "cancellation_power",
+      "JS_span": 0.00011870998452220838,
+      "relative_span": 0.002047749103144812,
+      "best_candidate": "cancellation_0p6"
+    },
+    {
+      "coordinate": "gate_sharpness_n",
+      "JS_span": 4.5037723777674454e-05,
+      "relative_span": 0.0007772401488975509,
+      "best_candidate": "gate_sharp"
+    },
+    {
+      "coordinate": "Q0",
+      "JS_span": 9.960377643558616e-06,
+      "relative_span": 0.00017192601872936363,
+      "best_candidate": "Q0_low"
+    }
+  ],
+  "per_validation_system": [
+    {
+      "system": "RXC J2211.7-0350",
+      "Q90": 0.17917269130476346,
+      "effective_route_fraction": 0.7951776700225175,
+      "improvement_fraction": 0.31777295102570247
+    },
+    {
+      "system": "SMACS J0723.3-7327",
+      "Q90": 0.4206899171902813,
+      "effective_route_fraction": 0.7998403992453704,
+      "improvement_fraction": 0.21862067412676567
+    },
+    {
+      "system": "SPT-CL J0615-5746",
+      "Q90": 0.5389205379241456,
+      "effective_route_fraction": 0.7999407294593671,
+      "improvement_fraction": 0.004607576586357798
+    }
+  ],
+  "cross_domain": {
+    "extended_axisymmetric_disk_Q90": 0.0,
+    "extended_axisymmetric_disk_effective_route_fraction": 0.0,
+    "solar_effective_route_fraction": 0.0,
+    "SPARC_galaxies": 175,
+    "SPARC_maximum_angular_layer_velocity_change_km_s": 0.0,
+    "galaxy_interpretation": "This angular layer is now exactly inert on the deprojected axisymmetric profiles in SPARC; it still requires a separate tested radial acceleration law to explain their speeds."
+  },
+  "gates": {
+    "variant_validation_improvement_pass": true,
+    "variant_validation_system_count_pass": true,
+    "retained_no_gate_gain_pass": true,
+    "lenstool_uncertainty_pass": true,
+    "glafic_improvement_pass": true,
+    "glafic_system_count_pass": true,
+    "extended_disk_null_pass": true,
+    "solar_null_pass": true,
+    "SPARC_null_pass": true,
+    "raw_lensing_followup_authorized": true
+  },
+  "claim_limits": [
+    "Q90 is a projected environmental statistic, not yet a covariant scalar derived from an action.",
+    "The cluster targets remain standard-GR normalized convergence reconstructions rather than raw lens observables.",
+    "A zero SPARC change means compatibility with a separate radial law, not an explanation of galaxy rotation curves.",
+    "The P0573 systems are prospective only to the symmetry modification, not globally untouched.",
+    "The experiment tests morphology and symmetry separation, not absolute gravity strength."
+  ]
+}

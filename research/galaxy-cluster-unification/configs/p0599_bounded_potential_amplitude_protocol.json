@@ -1,0 +1,77 @@
+{
+  "protocol_version": "P0599-BOUNDED-POTENTIAL-AMPLITUDE-0.1.0",
+  "frozen_utc": "2026-08-01T15:06:00Z",
+  "status": "frozen_after_P0598_and_prior_CLASH_potential_disclosure_before_P0599_scores",
+  "question": "Can a bounded baryonic-potential gate supply the absolute cluster amplitude missing from the screened radial-shape spatial law while preserving fixed-RAR-level galaxy accuracy and stellar screening?",
+  "formula": {
+    "spatial_base": "g_s is either local g_b or the P0598 conservative q=3, f=0.3*H(C)*S4 redistribution",
+    "scalar_base": "g_0=RAR(g_s,a0)",
+    "potential_gate": "P=1/[1+(chi_t/chi)^p], chi=Phi_b/c^2",
+    "path_gate": "J=(ell_Phi/r)/[1+ell_Phi/r]",
+    "amplitude": "g_pred=g_0*[1+A*S4*P*W]",
+    "carrier_options": {
+      "potential": "W=1",
+      "potential_shape": "W=H(C)",
+      "potential_inverse_shape": "W=1-H(C)",
+      "potential_path": "W=J",
+      "potential_shape_path": "W=H(C)*J"
+    }
+  },
+  "fixed_spatial_parameters": {
+    "q_R80": 3.0,
+    "route_fraction_max": 0.3,
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "source_acceleration_gate_power": 4.0,
+    "a0_m_s2": 1.2e-10
+  },
+  "grid": {
+    "spatial_mode": ["local", "shape_diffusion"],
+    "carrier": ["potential", "potential_shape", "potential_inverse_shape", "potential_path", "potential_shape_path"],
+    "amplitude_A": [1.0, 2.0, 3.0, 4.0],
+    "potential_threshold_chi": [5e-7, 1e-6, 2e-6, 4e-6],
+    "potential_power": [1.0, 2.0, 4.0],
+    "candidate_count": 480
+  },
+  "data": {
+    "arc_protocol": "configs/arc_invariant_absolute_lensing_protocol.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "CLASH_points": "data/raw/clash_tian2020/fig2.dat",
+    "galaxies": 131,
+    "galaxy_outer_points": 968,
+    "clusters": 20,
+    "cluster_points": 84
+  },
+  "validation": {
+    "folds": 5,
+    "assignment": "within each domain, sort complete systems by SHA256(name), then round-robin into five folds",
+    "selection": "within each fold choose minimum training equal-cluster RMSE among candidates whose training equal-galaxy RMSE is no more than 1.02 times fixed RAR",
+    "target_warning": "CLASH g_obs is a spherical deprojection of NFW strong+weak lensing and magnification posteriors, not a raw theory-neutral likelihood"
+  },
+  "interpretation_gates": {
+    "oof_galaxy_RMSE_ratio_to_fixed_RAR_max": 1.05,
+    "oof_cluster_RMSE_improvement_fraction_vs_fixed_RAR_min": 0.5,
+    "cluster_folds_improved_min": 4,
+    "clusters_improved_min": 16,
+    "Solar_amplitude_fraction_max": 1e-12
+  },
+  "outputs": {
+    "directory": "results/p0599_bounded_potential_amplitude",
+    "candidate_scores": "candidate_scores.csv",
+    "candidate_fold_scores": "candidate_fold_scores.csv",
+    "fold_selections": "fold_selections.csv",
+    "galaxy_oof_predictions": "galaxy_oof_predictions.csv",
+    "cluster_oof_predictions": "cluster_oof_predictions.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0599_bounded_potential_amplitude.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The potential gap between current SPARC and CLASH samples makes a threshold easy to place; intermediate-potential BCG data are required to test whether this is physics or an object-class separator.",
+    "The CLASH target is NFW-deprojected and has no public radial covariance in the table.",
+    "The sparse 3-5 point cluster baryon profiles make the one-dimensional diffusion endpoint approximate.",
+    "RAR remains the galaxy scalar base; the new term tests a bounded amplitude carrier, not a derivation of galaxy phenomenology.",
+    "All systems and earlier potential trends were already disclosed; cross-validation protects whole objects but this is not a fresh-data confirmation."
+  ]
+}

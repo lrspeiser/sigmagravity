@@ -1,0 +1,87 @@
+{
+  "report_version": "P0572-TIDAL-CANCELLATION-ARRIVAL-FORWARD-RESULTS-0.1.0",
+  "status": "complete_tidal_cancellation_forward_map_test",
+  "protocol": {
+    "path": "configs\\p0572_tidal_cancellation_arrival_forward_protocol.json",
+    "sha256": "280da6d2809933f1771f6b19e55d5d83fd03fd162e2c8f86c1ade1f4735d5df7"
+  },
+  "coverage": {
+    "clusters": 10,
+    "development_clusters": 7,
+    "holdout_clusters": 3,
+    "candidates": 63,
+    "system_candidate_scores": 640,
+    "lenstool_realization_comparisons": 1000
+  },
+  "selected": {
+    "candidate_id": "field_weighted__w100__f1",
+    "carrier": "field_weighted",
+    "arrival_smoothing_kpc": 100.0,
+    "route_fraction_f": 1.0,
+    "development_mean_JS": 0.06876675262142631,
+    "holdout_mean_JS": 0.04976010626118421,
+    "development_mean_Pearson": 0.7039739526278554,
+    "holdout_mean_Pearson": 0.7228845135838919,
+    "holdout_improvement_vs_local_fraction": -0.28186773923682873,
+    "holdout_systems_improved": 0,
+    "glafic_holdout_improvement_vs_local_fraction": -0.4456458886580805,
+    "holdout_uncertainty_improved_fraction": 0.0
+  },
+  "local_control": {
+    "candidate_id": "local_control",
+    "carrier": "local_control",
+    "arrival_smoothing_kpc": 0.0,
+    "route_fraction_f": 0.0,
+    "development_mean_JS": 0.0788394544133582,
+    "holdout_mean_JS": 0.03881844026343102,
+    "development_mean_Pearson": 0.5270064728355399,
+    "holdout_mean_Pearson": 0.8080321612341135
+  },
+  "parameter_impacts": [
+    {
+      "coordinate": "arrival_smoothing_kpc",
+      "minimum_level": "100.0",
+      "main_effect_span_JS": 0.007746716910235291,
+      "relative_span": 0.10003013488651871
+    },
+    {
+      "coordinate": "carrier",
+      "minimum_level": "field_weighted",
+      "main_effect_span_JS": 0.003140213518949539,
+      "relative_span": 0.040548271675962304
+    },
+    {
+      "coordinate": "route_fraction_f",
+      "minimum_level": "0.6",
+      "main_effect_span_JS": 0.002210948814286573,
+      "relative_span": 0.02854906287179108
+    }
+  ],
+  "numerical": {
+    "axisymmetric_activation_RMS": 0.0,
+    "axisymmetric_activation_maximum": 0.0,
+    "maximum_activation": 0.9759185662609117
+  },
+  "cross_domain": {
+    "SPARC_rotation_change_km_s": 0.0,
+    "solar_fractional_change": 0.0,
+    "Mercury_precession_change_mas_per_century": 0.0,
+    "interpretation": "exact angular null; not an independent galaxy force law"
+  },
+  "gates": {
+    "holdout_improvement_pass": false,
+    "holdout_system_count_pass": false,
+    "glafic_holdout_pass": false,
+    "uncertainty_pass": false,
+    "axisymmetric_null_pass": true,
+    "no_per_cluster_parameters": true,
+    "raw_lensing_followup_authorized": false
+  },
+  "claim_limits": [
+    "The targets are normalized standard-GR convergence reconstructions, not raw lensing observables or absolute mass.",
+    "The source map contains photometric member light but omits gas, ICL, and mass-to-light variation.",
+    "The carrier and smoothing choices translate an empirical location invariant into a destination law; they are not derived from an action.",
+    "The development/holdout systems are globally spent, and P0571B was motivated by their prior peak analysis.",
+    "A successful normalized map does not establish correct image multiplicity, shear, time delays, or gravity strength."
+  ]
+}

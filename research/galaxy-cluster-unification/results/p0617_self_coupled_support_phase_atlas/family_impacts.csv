@@ -1,0 +1,6 @@
+family,variants,minimum_combined_roots,maximum_combined_roots,mean_system_improvement_span,four_cluster_improvement_span,RXJ2129_improvement_span,best_variant
+joint,5,18,18,0.002892816444994328,0.003747652791109113,0.01459795378879114,joint_even_wide
+width,5,17,18,0.002555269405218463,0.0027587103813981884,0.007066764623847033,width_plus_even
+return_length,5,18,18,0.0022778018447380255,0.003629636203021258,0.02051830213122463,return_minus_linear
+center_crossing,3,18,18,0.0009480674123182099,0.001092821761548901,0.0025315970975674507,phase_rational_no_cross
+baseline,1,18,18,0.0,0.0,0.0,fixed_support

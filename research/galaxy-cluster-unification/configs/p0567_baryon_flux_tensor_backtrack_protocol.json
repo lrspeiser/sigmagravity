@@ -1,0 +1,91 @@
+{
+  "protocol_version": "P0567-BARYON-FLUX-TENSOR-BACKTRACK-0.1.1",
+  "frozen_utc": "2026-07-31T23:58:00Z",
+  "status": "amended_after_total_peak_overlap_audit_before_residual_peak_recomputation",
+  "audit_amendment": {
+    "reason": "The first completed geometry computation showed that total-convergence maxima usually begin inside the frozen 20 kpc baryon-arrival radius, making the peak backtrack length nearly zero. This is a valid overlap observation but not a useful test of an apparent diffuse dark component.",
+    "preserved_primary": "The full-field tensor feasibility, minimum anisotropy, uncertainty, and method-control definitions are unchanged.",
+    "added_diagnostic": "Weight the same field-alignment test and select backtrack starting peaks using the positive residual after subtracting the non-negative least-squares projection of the normalized local baryon-light map from the normalized lensing map.",
+    "selection_limit": "The residual diagnostic is descriptive and cannot alter the predeclared full-field gates."
+  },
+  "question": "Can the apparent cluster gravity field inferred from standard lensing maps be interpreted as a locally redirected, conserved field sourced only by baryonic matter, and from which baryonic structures would its high-convergence locations backtrack?",
+  "field_ansatz": {
+    "conserved_flux": "div(J_b)=-C*Sigma_b",
+    "observed_acceleration": "g_L=-grad(Psi_L), with laplacian(Psi_L)=2*kappa_L",
+    "routing_relation": "J_b=K(x)*g_L",
+    "tensor": "K=R(theta)*diag(exp(u+v),exp(u-v))*R(theta)^T",
+    "positivity": "K is symmetric positive definite so it redirects and rescales a field without locally reversing its energy-sign analogue",
+    "apparent_dark_component": "rho_app-rho_b is proportional to div[(I-K)*g_L]; it is a response-divergence pattern, not a material source",
+    "local_existence_test": "A positive-definite K mapping g_L to J_b exists at a pixel if and only if dot(g_L,J_b)>0",
+    "minimum_anisotropy": "chi_min=(1+abs(sin(theta)))/(1-abs(sin(theta))), where theta is the angle between g_L and J_b",
+    "scope": "This stage measures the pointwise lower bound. It does not yet solve a globally smooth K or a covariant four-dimensional completion."
+  },
+  "data": {
+    "pilot_systems": ["A2537", "MACS J0417", "MACS J0949"],
+    "fresh_systems": ["A2163", "A3192", "ACT-CL J0102-4915", "CL J0152.7-1357", "MACS J0035.4-2015", "MACS J0257.1-2325", "MACS J0553.4-3342", "RXC J0032.1+1808", "RXC J0142.9+4438", "RXC J0600.1-2007"],
+    "development_systems": ["A2163", "A3192", "ACT-CL J0102-4915", "CL J0152.7-1357", "MACS J0035.4-2015", "MACS J0257.1-2325", "MACS J0553.4-3342"],
+    "new_analysis_holdout_systems": ["RXC J0032.1+1808", "RXC J0142.9+4438", "RXC J0600.1-2007"],
+    "holdout_caveat": "The holdout is untouched by P0567 model selection but is globally spent because earlier gravity-arc experiments inspected it.",
+    "baryon_proxy": "strict photometric member positions weighted by positive F160W flux",
+    "lensing_primary": "mean of 100 Lenstool convergence realizations",
+    "lensing_method_control": "GLAFIC best convergence map where locally available",
+    "model_dependence": "Every convergence map is a standard-GR parametric reconstruction and can contain member-galaxy priors; it is an assumed apparent-mass location map, not a raw observation."
+  },
+  "preprocessing": {
+    "grid_pixels": 256,
+    "grid_spacing_kpc": 10.0,
+    "baryon_source_radius_kpc": 300.0,
+    "field_score_radius_kpc": 250.0,
+    "background_annulus_kpc": [250.0, 300.0],
+    "baryon_smoothing_kpc": 20.0,
+    "lensing_smoothing_kpc": 20.0,
+    "lensing_positive_residual": "subtract finite 250-300 kpc annular median, clip at zero, smooth, and normalize",
+    "poisson_boundary": "zero-pad each compact source map to twice its linear size before FFT inversion",
+    "field_floor_percentile": 10.0,
+    "destination_weight": "positive background-subtracted convergence",
+    "uncertainty_realizations": 16,
+    "uncertainty_indices": [0, 7, 13, 20, 26, 33, 40, 46, 53, 59, 66, 73, 79, 86, 92, 99]
+  },
+  "backtracking": {
+    "peaks_per_map": 5,
+    "peak_minimum_separation_kpc": 50.0,
+    "step_kpc": 5.0,
+    "maximum_path_kpc": 1000.0,
+    "arrival_radius_kpc": 20.0,
+    "peak_target": "positive residual after subtracting the non-negative least-squares projection of the normalized baryon-light map from normalized convergence",
+    "rule": "Start at each high-residual apparent-dark peak and integrate along the baryon-flux direction until it reaches a catalogued baryonic member or leaves the analysis domain.",
+    "interpretation": "These paths are source attributions under the baryonic field, not observed three-dimensional trajectories."
+  },
+  "predeclared_diagnostics": {
+    "local_feasibility_gate": "pooled convergence-weighted feasible fraction at least 0.90 and every fresh system at least 0.75",
+    "practical_distortion_gate": "pooled feasible-pixel median chi_min at most 4 and 90th percentile at most 20",
+    "method_robustness_gate": "median absolute Lenstool-versus-GLAFIC feasible-fraction difference at most 0.10",
+    "no_promotion": "Passing establishes only that a local tensor representation is geometrically possible; it does not establish a predictive law or remove dark matter."
+  },
+  "inputs": {
+    "pilot_acquisition": "configs/gravity_arc_tomography_acquisition.json",
+    "pilot_sources": "results/gravity_arc_tomography_input_audit/sources.csv",
+    "fresh_acquisition": "configs/gravity_arc_fresh_sample_protocol.json",
+    "fresh_analysis": "configs/gravity_arc_fresh_analysis_protocol.json",
+    "fresh_sources": "results/gravity_arc_fresh_sample_input_audit/sources.csv",
+    "fresh_systems_audit": "results/gravity_arc_fresh_sample_input_audit/systems.csv",
+    "fresh_manifest": "data/raw/relics_gravity_arc_fresh_sample/manifest.csv"
+  },
+  "outputs": {
+    "directory": "results/p0567_baryon_flux_tensor_backtrack",
+    "field_metrics": "field_metrics.csv",
+    "uncertainty": "uncertainty.csv",
+    "peak_backtracks": "peak_backtracks.csv",
+    "report": "report.json",
+    "figure": "p0567_baryon_flux_tensor_backtrack.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "F160W member light omits hot gas, intracluster light, and stellar mass-to-light variation, so failure can diagnose an inadequate baryon map rather than the field ansatz alone.",
+    "The lensing convergence targets are model products, not direct measurements and not independent of standard-GR assumptions.",
+    "A two-dimensional map cannot determine whether a route bends in the lens plane, along the line of sight, or through an additional field dimension.",
+    "Pointwise K is underdetermined. The reported chi_min is only the least anisotropy any local positive tensor would require.",
+    "Absolute gravity strength is deliberately factored out in this morphology test.",
+    "A useful theory must later compress K into a universal baryon-only law and predict raw image positions, shear, time delays, galaxy dynamics, and Solar-system nulls."
+  ]
+}

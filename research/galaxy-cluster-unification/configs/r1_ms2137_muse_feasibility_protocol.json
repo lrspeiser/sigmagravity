@@ -1,0 +1,104 @@
+{
+  "protocol_version": "R1B2-MS2137-MUSE-feasibility-0.1",
+  "status": "frozen_before_any_MS2137_cube_download_or_pixel_inspection",
+  "frozen_utc": "2026-07-27T07:10:53Z",
+  "selection_blind": true,
+  "system": "MS2137",
+  "selection_basis": "MS2137 is the residual-blind rank-1 remaining candidate and the designated second non-disturbed pilot in the previously frozen geometric ledger. A2537 remains the lower-priority disturbed engineering control and lacks a recoverable published BCG center. No gravity residual, mass fit, or MS2137 science pixel selected this target.",
+  "published_bcg_center": {
+    "ra_hms": "21:40:15.16",
+    "dec_dms": "-23:39:40.09",
+    "ra_deg": 325.06316666666663,
+    "dec_deg": -23.66113611111111,
+    "frame": "ICRS/J2000",
+    "source": "Kaleidoscope 2025, arXiv:2506.21531, Table tab.ms2137model caption",
+    "source_file": "data/raw/replacement_sample_audit/kaleidoscope2025_main.tex",
+    "source_line": 1010
+  },
+  "pre_pixel_overlap_target": {
+    "existing_numerical_dynamics_support_arcsec": 3.5,
+    "redshift": 0.313,
+    "cosmology": "flat LCDM, H0=70 km/s/Mpc, Omega_m=0.3",
+    "kpc_per_arcsec": 4.585904077737568,
+    "preidentified_images_inside_frozen_support_sorted_by_radius": [
+      {"image_id": "2c", "family_id": "2", "radius_arcsec": 3.337663853655727, "radius_kpc": 15.306206276597084},
+      {"image_id": "2a", "family_id": "2", "radius_arcsec": 6.800735254367721, "radius_kpc": 31.187519534618566},
+      {"image_id": "1d", "family_id": "1", "radius_arcsec": 13.644412775931398, "radius_kpc": 62.57196818747836},
+      {"image_id": "3c", "family_id": "3", "radius_arcsec": 13.875518008348372, "radius_kpc": 63.631794615205855}
+    ],
+    "minimum_images_inside_accepted_dynamics_support": 3,
+    "minimum_independent_families_inside_accepted_dynamics_support": 2,
+    "frozen_outer_radial_edge_arcsec": 14.0,
+    "frozen_outer_radial_edge_kpc": 64.20265708832595,
+    "support_rule": "The final accepted dynamics profile must include a radial bin whose outer edge is at least 14.0 arcsec, retain both predeclared opposite-half checks, and pass the later frozen S/N, valid-spaxel, covariance, and systematic gates. Cube coverage alone does not count.",
+    "no_post_pixel_relaxation": true
+  },
+  "archive_product": {
+    "dp_id": "ADP.2019-07-31T03:40:02.259",
+    "publisher_id": "ivo://eso.org/ID?ADP.2019-07-31T03:40:02.259",
+    "proposal_id": "0103.A-0777(A)",
+    "target_name": "MACSJ2140.2-2339",
+    "instrument_name": "MUSE",
+    "obs_collection": "MUSE",
+    "dataproduct_type": "cube",
+    "calib_level": 2,
+    "archive_exposure_seconds": 2683.869,
+    "cube_center_ra_deg": 325.063447,
+    "cube_center_dec_deg": -23.661171,
+    "bcg_to_cube_center_arcsec": 0.9328555890834294,
+    "maximum_bcg_to_cube_center_arcsec": 2.0,
+    "archive_spatial_fov_deg": 0.02522611222,
+    "archive_wavelength_min_m": 4.75031e-7,
+    "archive_wavelength_max_m": 9.35031e-7,
+    "archive_access_estsize_kib": 3033046,
+    "full_product_content_length_bytes": 3033046080,
+    "original_filename": "MU_SCBC_2300499_2019-06-28T09:20:52.163_WFM-NOAO-N_OBJ.fits",
+    "tap_url": "https://archive.eso.org/tap_obs/sync",
+    "datalink_url": "https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2019-07-31T03:40:02.259",
+    "soda_url": "https://dataportal.eso.org/dataPortal/soda/sync"
+  },
+  "frozen_cutout_request": {
+    "center_ra_deg": 325.06316666666663,
+    "center_dec_deg": -23.66113611111111,
+    "radius_deg": 0.005,
+    "radius_arcsec": 18.0,
+    "wavelength_min_m": 4.86e-7,
+    "wavelength_max_m": 7.16e-7,
+    "local_path": "data/raw/r1_muse_bcg_cubes/ms2137_bcg_4860_7160A_r18arcsec.fits",
+    "rationale": "The 18-arcsec cutout contains the frozen 14-arcsec dynamics support plus a 4-arcsec local margin while avoiding an unnecessary 3.03-GB full-cube acquisition. The spectral range matches the established project MUSE reconstruction range and is frozen before download."
+  },
+  "protocol_amendments": [
+    {
+      "amendment_id": "A1-native-spectral-grid-semantics",
+      "recorded_utc": "2026-07-27T07:16:00Z",
+      "trigger": "The header-only acquisition audit found that the ESO SODA response placed the first and last native pixel centers at 4860.3134765625 and 7160.3134765625 Angstrom for the requested 4860-7160 Angstrom interval.",
+      "rule": "Accept a SODA endpoint offset no larger than one native spectral pixel at each end while retaining every returned native bin; the requested BAND values and all later scientific thresholds remain unchanged.",
+      "maximum_endpoint_offset_native_pixels": 1.0,
+      "scope": "Archive discretization semantics only. No DATA or STAT array, spectrum, S/N, velocity, dispersion, lens residual, or gravity residual was read before this amendment."
+    }
+  ],
+  "metadata_gate": {
+    "exact_dp_id_and_proposal_must_match": true,
+    "product_must_be_level2_muse_cube": true,
+    "archive_alias_must_match_MS2137_sky_position": true,
+    "published_bcg_center_must_be_source_traceable": true,
+    "bcg_center_offset_must_not_exceed_arcsec": 2.0,
+    "soda_sync_cutout_service_must_exist": true,
+    "requested_circle_must_fit_service_limits": true,
+    "requested_band_must_fit_product_and_service_limits": true,
+    "lens_target_must_match_existing_observable_ledger": true,
+    "residual_blind_rank_must_match_existing_geometric_ledger": true,
+    "download_authorized_only_if_all_pass": true
+  },
+  "failure_policy": "If any metadata, center, SODA, wavelength, or lens-overlap check fails, record MS2137 as a hard public-data shortfall and do not download the cube. If all pass, download only the frozen cutout, verify SHA-256 and FITS/WCS dimensions, and then freeze every numerical reduction, extraction, covariance, systematic, and advancement threshold before inspecting a science array.",
+  "authorization": {
+    "query_archive_metadata": true,
+    "inspect_existing_observable_ledgers": true,
+    "download_frozen_cutout_after_metadata_gate": true,
+    "inspect_science_pixels": false,
+    "extract_stellar_kinematics": false,
+    "infer_dynamical_or_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

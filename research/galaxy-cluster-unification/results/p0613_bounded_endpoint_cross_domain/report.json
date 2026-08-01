@@ -1,0 +1,155 @@
+{
+  "report_version": "P0613-BOUNDED-ENDPOINT-CROSS-DOMAIN-RESULTS-0.1.0",
+  "status": "complete_spent_factorial_response_test",
+  "coverage": {
+    "universal_variants": 27,
+    "raw_clusters": 4,
+    "heldout_images": 11,
+    "SPARC_galaxies": 131,
+    "SPARC_outer_points": 968,
+    "root_safe_variants": 1
+  },
+  "formula": {
+    "conservative_route": "Sigma_route=(1-f_eff)Sigma_b+f_eff K_(eta R80)*Sigma_endpoint",
+    "effective_fraction": "f_eff=q*s(C), C=R50/R80, with the already-fixed cluster_logistic extent law",
+    "endpoint": "each baryonic launch element deposits at the endpoint of a constant 0.36 R80 return toward the baryonic light centroid",
+    "angular_response": "T_A(x)=A*tanh(x/A); subtract its exact annular carrier-weighted mean so the cluster correction has zero monopole",
+    "universal_parameters": [
+      "q",
+      "eta",
+      "A"
+    ],
+    "per_object_gravity_parameters": 0
+  },
+  "locked": {
+    "route_mode": "endpoint",
+    "return_length_over_R80": 0.36,
+    "gate_mode": "cluster_logistic",
+    "contrast_mode": "tanh",
+    "ordinary_cluster_geometry": "P0581 K0338 fit held fixed",
+    "source_positions": "P0581 K0338 fitted source positions held fixed",
+    "ordinary_baryonic_field": "local and unchanged",
+    "routed_carrier": "P0554 scalar excess over the baryonic field"
+  },
+  "diagnostic_winner": {
+    "variant": "eta0p23_q1p0_A20p0",
+    "width_over_R80": 0.23,
+    "route_fraction_multiplier": 1.0,
+    "contrast_cap": 20.0,
+    "complete_systems": 4,
+    "heldout_converged_roots": 11,
+    "all_four_complete": true,
+    "cluster_equal_complete_RMS_arcsec": 19.159352387520663,
+    "cluster_median_complete_RMS_arcsec": 18.881566986397146,
+    "complete_labels": "MACS0329+MACS0429+MACS1115+MACS1931",
+    "SPARC_outer_RMSE_km_s": 70.92603164566839,
+    "SPARC_equal_galaxy_RMSE_km_s": 65.2005479813258,
+    "SPARC_galaxies_improved_vs_Newtonian": 110
+  },
+  "matched_winner_vs_scalar": {
+    "matched_systems": 3,
+    "matched_labels": [
+      "MACS0329",
+      "MACS0429",
+      "MACS1115"
+    ],
+    "scalar_RMS_arcsec": 21.391241889093465,
+    "candidate_RMS_arcsec": 21.194085446948957,
+    "fractional_improvement": 0.009216689856844096
+  },
+  "comparators": {
+    "Newtonian_SPARC_outer_RMSE_km_s": 72.39921475798786,
+    "fixed_RAR_SPARC_outer_RMSE_km_s": 10.348465773189677,
+    "winner_to_Newtonian_ratio": 0.9796519462642799,
+    "winner_to_fixed_RAR_ratio": 6.85377264612695
+  },
+  "parameter_impacts": [
+    {
+      "parameter": "width_over_R80",
+      "mean_root_count_span": 1.0,
+      "safe_variant_fraction_span": 0.1111111111111111,
+      "mean_system_root_pattern_span": 0.75,
+      "maximum_system_root_pattern_span": 1.3333333333333335,
+      "safe_cluster_RMS_span_arcsec": 0.0,
+      "SPARC_RMSE_span_km_s": 0.15652061554480667
+    },
+    {
+      "parameter": "route_fraction_multiplier",
+      "mean_root_count_span": 1.1111111111111107,
+      "safe_variant_fraction_span": 0.1111111111111111,
+      "mean_system_root_pattern_span": 0.4722222222222222,
+      "maximum_system_root_pattern_span": 1.3333333333333335,
+      "safe_cluster_RMS_span_arcsec": 0.0,
+      "SPARC_RMSE_span_km_s": 0.30451563976731677
+    },
+    {
+      "parameter": "contrast_cap",
+      "mean_root_count_span": 0.0,
+      "safe_variant_fraction_span": 0.1111111111111111,
+      "mean_system_root_pattern_span": 0.0,
+      "maximum_system_root_pattern_span": 0.0,
+      "safe_cluster_RMS_span_arcsec": 0.0,
+      "SPARC_RMSE_span_km_s": 0.0
+    }
+  ],
+  "interaction_effects": [
+    {
+      "left_parameter": "width_over_R80",
+      "right_parameter": "route_fraction_multiplier",
+      "root_count_interaction_RMS": 0.46259244432580743,
+      "root_safe_interaction_RMS": 0.07407407407407408,
+      "SPARC_RMSE_interaction_RMS_km_s": 0.016271589130368642
+    },
+    {
+      "left_parameter": "width_over_R80",
+      "right_parameter": "contrast_cap",
+      "root_count_interaction_RMS": 0.22222222222222232,
+      "root_safe_interaction_RMS": 0.07407407407407408,
+      "SPARC_RMSE_interaction_RMS_km_s": 0.0
+    },
+    {
+      "left_parameter": "route_fraction_multiplier",
+      "right_parameter": "contrast_cap",
+      "root_count_interaction_RMS": 0.256600119639834,
+      "root_safe_interaction_RMS": 0.07407407407407407,
+      "SPARC_RMSE_interaction_RMS_km_s": 1.4210854715202004e-14
+    }
+  ],
+  "solar": {
+    "maximum_fractional_change": 0.0,
+    "Mercury_precession_mas_per_century": 0.0,
+    "reason": "The routing layer collapses to its local point-source null; this does not test the P0554 scalar parent independently."
+  },
+  "gates": {
+    "all_heldout_roots_pass": true,
+    "all_cluster_systems_complete_pass": true,
+    "matched_cluster_improvement_pass": true,
+    "galaxy_improves_Newtonian_pass": true,
+    "galaxy_near_RAR_pass": false,
+    "route_normalization_pass": true,
+    "annular_monopole_pass": true,
+    "curl_free_pass": true,
+    "solar_fractional_change_pass": true,
+    "Mercury_precession_pass": true,
+    "universal_parameter_count_pass": true,
+    "cross_domain_advance_pass": false
+  },
+  "interpretation": {
+    "formula_promoted": false,
+    "smooth_bounded_endpoint_is_root_safe_somewhere": true,
+    "same_formula_near_RAR_for_galaxies": false,
+    "parameter_or_formula_changes_most_impactful": [
+      "Read mean_root_count_span for topology sensitivity.",
+      "Read mean_system_root_pattern_span when total root counts cancel across clusters.",
+      "Read safe_cluster_RMS_span_arcsec only among all-root variants.",
+      "Read SPARC_RMSE_span_km_s for galaxy sensitivity; contrast cap is an exact galaxy null."
+    ]
+  },
+  "claim_limits": [
+    "The four raw clusters and 131 SPARC galaxies are project-spent.",
+    "Cluster geometry and source positions are held at the P0581 fit, so this measures field response rather than a new end-to-end fit.",
+    "The SPARC rows reuse the exact P0580 conservative endpoint calculation; smooth angular saturation is null for the axisymmetric galaxy translation.",
+    "The zero-monopole cluster correction tests image placement, not the absolute missing cluster convergence.",
+    "The Solar result is an exact point-source null of this routing layer and is a compatibility check, not new evidence."
+  ]
+}

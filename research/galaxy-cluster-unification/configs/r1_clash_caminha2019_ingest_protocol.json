@@ -1,0 +1,63 @@
+{
+  "protocol_version": "R1-CLASH-Caminha2019-0.1",
+  "frozen_before_local_product_ingest": true,
+  "purpose": "Acquire a public observable catalog and rerunnable nuisance-model packages for eight CLASH clusters, six of which are in the Tian2020 20-cluster target, without treating a GR/Lenstool posterior as a metric-neutral response likelihood.",
+  "primary_source": {
+    "citation": "Caminha et al. 2019, A&A 632, A36",
+    "arxiv": "1903.05103",
+    "cds_catalog": "J/A+A/632/A36",
+    "doi": "10.1051/0004-6361/201935454"
+  },
+  "systems": [
+    {"system": "MACS J0329.7-0211", "model_id": "MACSJ0329-P2-shear", "tian2020_target": true},
+    {"system": "MACS J0429.6-0253", "model_id": "MACSJ0429-P1", "tian2020_target": true},
+    {"system": "MACS J1115.9+0129", "model_id": "MACSJ1115-P1", "tian2020_target": true},
+    {"system": "MACS J1311.0-0310", "model_id": "MACSJ1311-P1", "tian2020_target": false},
+    {"system": "MACS J1931.8-2635", "model_id": "MACSJ1931-P2_circular", "tian2020_target": true},
+    {"system": "MACS J2129.4-0741", "model_id": "MACSJ2129-P2", "tian2020_target": false},
+    {"system": "RX J1347.5-1145", "model_id": "RXJ1347-P2-shear", "tian2020_target": true},
+    {"system": "RX J2129.7+0005", "model_id": "RXJ2129-P1", "tian2020_target": true}
+  ],
+  "product_separation": {
+    "metric_neutral_observables": [
+      "tablea2 multiple-image sky positions",
+      "spectroscopic source redshifts and their provenance",
+      "observed-arc coordinates in each Lenstool input package"
+    ],
+    "model_dependent_nuisance_products": [
+      "Lenstool input parameter file",
+      "cluster-member catalog",
+      "bayes.dat MCMC chain",
+      "chain convergence and confidence diagnostic images"
+    ],
+    "intentionally_not_downloaded": [
+      "convergence maps",
+      "deflection maps",
+      "shear maps",
+      "magnification maps",
+      "best-fit mass profiles"
+    ]
+  },
+  "pre_registered_checks": {
+    "exact_cluster_count": 8,
+    "exact_tian2020_intersection_count": 6,
+    "published_tablea2_record_count": 150,
+    "one_observed_arc_catalog_per_cluster_required": true,
+    "one_lenstool_input_file_per_cluster_required": true,
+    "one_member_catalog_per_cluster_required": true,
+    "one_bayes_chain_per_cluster_required": true,
+    "spectroscopic_redshift_required_for_metric_neutral_rows": true,
+    "declared_image_position_error_must_be_extracted_before_likelihood_ready": true,
+    "chain_parameter_schema_must_be_extracted_before_nuisance_marginalization": true
+  },
+  "failure_policy": "Retain every verified observable and exact public shortfall. Do not substitute convergence maps, infer missing errors after seeing a model fit, or count a GR/Lenstool chain as a metric-neutral Weyl-response posterior.",
+  "authorization": {
+    "download_and_hash_public_products": true,
+    "normalize_image_positions_and_redshifts": true,
+    "audit_model_inputs_and_chain_shapes": true,
+    "run_or_refit_lenstool": false,
+    "infer_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

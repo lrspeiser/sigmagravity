@@ -1,0 +1,65 @@
+{
+  "protocol_version": "REOPENED-HYBRID-ENDPOINT-HIGH-Q-MOVING-RIDGE-EXTENSION-AUDIT-0.1.0",
+  "frozen_utc": "2026-08-01T11:35:00Z",
+  "status": "frozen_before_fixed_parameter_scores",
+  "purpose": "Extend the correlated high-q,p ridge until its diminishing fixed-parameter galaxy improvement is bracketed or reaches a numerical stress boundary.",
+  "claim_boundary": [
+    "The q=3.5 to 8 moving-ridge audit improved monotonically but with rapidly diminishing increments.",
+    "Nine q slices from 8 through 16 follow the same p=q/2-2.625 ridge and perturb p by plus or minus 0.25.",
+    "Extreme exponents are empirical stress tests, not proposed constants or a microscopic derivation.",
+    "All rows reuse one q=3.5 gravity branch and omit raw lensing; only a predeclared compact subset will be promoted to full tests.",
+    "Only the tested equation, branch, and exponent range may be disfavored."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv"
+  },
+  "base_sources": {
+    "high_q_endpoint": {
+      "report": "results/reopened_hybrid_endpoint_boundary_refinement/report.json",
+      "variant": "surface_q_3p5:radial_memory_gbar_power=-0.875",
+      "settings": {"combination": "interaction", "interaction_eta": 1.0, "screen_power": 1.5, "rg_saturation_ceiling": 2.0, "sigma_saturation_ceiling": 1.5}
+    }
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {"names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"]},
+  "common_memory": {
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 0.5,
+    "radial_memory_gbar_power": 1.375,
+    "radial_memory_radius_power": 8.0,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false,
+    "radial_memory_slope_gate_strength": 0.0
+  },
+  "audit_designs": {
+    "moving_ridge_ext_q_8": {"fixed_name": "radial_memory_gbar_power", "values": [1.125, 1.375, 1.625], "overrides": {"radial_memory_radius_power": 8.0}},
+    "moving_ridge_ext_q_9": {"fixed_name": "radial_memory_gbar_power", "values": [1.625, 1.875, 2.125], "overrides": {"radial_memory_radius_power": 9.0}},
+    "moving_ridge_ext_q_10": {"fixed_name": "radial_memory_gbar_power", "values": [2.125, 2.375, 2.625], "overrides": {"radial_memory_radius_power": 10.0}},
+    "moving_ridge_ext_q_11": {"fixed_name": "radial_memory_gbar_power", "values": [2.625, 2.875, 3.125], "overrides": {"radial_memory_radius_power": 11.0}},
+    "moving_ridge_ext_q_12": {"fixed_name": "radial_memory_gbar_power", "values": [3.125, 3.375, 3.625], "overrides": {"radial_memory_radius_power": 12.0}},
+    "moving_ridge_ext_q_13": {"fixed_name": "radial_memory_gbar_power", "values": [3.625, 3.875, 4.125], "overrides": {"radial_memory_radius_power": 13.0}},
+    "moving_ridge_ext_q_14": {"fixed_name": "radial_memory_gbar_power", "values": [4.125, 4.375, 4.625], "overrides": {"radial_memory_radius_power": 14.0}},
+    "moving_ridge_ext_q_15": {"fixed_name": "radial_memory_gbar_power", "values": [4.625, 4.875, 5.125], "overrides": {"radial_memory_radius_power": 15.0}},
+    "moving_ridge_ext_q_16": {"fixed_name": "radial_memory_gbar_power", "values": [5.125, 5.375, 5.625], "overrides": {"radial_memory_radius_power": 16.0}}
+  },
+  "references": {"SPARC_fixed_RAR_outer_RMSE_km_s": 10.681519066526649, "bridge_target_RMSE_dex": 0.139},
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1,
+    "audit_mercury_quadrature_points": 4096
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_endpoint_high_q_moving_ridge_extension_audit/report.json",
+    "scores": "results/reopened_hybrid_endpoint_high_q_moving_ridge_extension_audit/scores.csv",
+    "family_impacts": "results/reopened_hybrid_endpoint_high_q_moving_ridge_extension_audit/family_impacts.csv",
+    "summary": "results/reopened_hybrid_endpoint_high_q_moving_ridge_extension_audit/SUMMARY.md"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "status": "frozen before scoring the SPIDERS-MaNGA bridge sample",
+  "catalog_selection": {
+    "gema_brightest_group_flag": 1,
+    "jam_minimum_visual_quality": 0,
+    "spiders_maximum_projected_separation_kpc": 200.0,
+    "spiders_maximum_abs_delta_z_factor": 0.01,
+    "require_positive_xray_luminosity": true,
+    "require_positive_r200": true,
+    "deduplicate_on": "SPIDERS CLUS_ID",
+    "deduplication_order": [
+      "highest JAM visual quality",
+      "smallest projected separation",
+      "largest JAM MGE effective radius"
+    ]
+  },
+  "measurement_split": {
+    "direct": "Use published Tian 2024 accelerations for matched test objects.",
+    "proxy": "Use MaNGA DynPop mass-follows-light dynamics and NSA Sersic stellar mass for all other test objects.",
+    "calibration": "Fit additive log-acceleration offsets on Tian 2024 objects absent from the SPIDERS test set and having JAM quality >= 0.",
+    "offset_estimator": "median(reference_log_g - raw_proxy_log_g)",
+    "proxy_uncertainty": "RMS calibrated residual with a 0.05 dex floor",
+    "test_objects_used_to_calibrate_proxy": false
+  },
+  "acceleration_proxy": {
+    "dynamical": "G*M_JAM_MFL(<Re_MGE)/Re_MGE^2",
+    "baryonic": "G*M_NSA_Sersic(<Re_MGE)/Re_MGE^2",
+    "nsa_mass_h": 0.677,
+    "gas_correction": "none; central-galaxy gas is expected to be subdominant and is a declared systematic",
+    "environment_for_first_score": "BCG baryonic potential only; X-ray host columns are retained but not converted into a fitted force"
+  },
+  "frozen_model_score": {
+    "candidate": "H7s standard-mu potential closure",
+    "fit_data": ["SPARC", "CLASH"],
+    "bcg_values_used_in_theory_fit": false,
+    "comparators": ["fixed galaxy RAR", "cluster-scale RAR"],
+    "purpose": "diagnostic independent bridge score; it cannot override the failed Stage 3 identifiability gate"
+  },
+  "host_completion": {
+    "status": "frozen before the first host-completed score",
+    "r200_source": "SPIDERS R200C_DEG converted at SCREEN_CLUZSPEC with Planck18",
+    "mass_definition": "M200=(4*pi/3)*200*rho_critical(z)*R200^3",
+    "baryon_fraction": "Planck18 Ob0/Om0",
+    "host_chi": "G*(Ob0/Om0)*M200/(R200*c^2)",
+    "profile_factor": 1.0,
+    "combined_environment": "chi_BCG_baryons + chi_host",
+    "fitted_to_bcg_accelerations": false,
+    "external_gas_controls": [
+      "eRASS1 median FGAS500 applied to the SPIDERS M200/R200 scale",
+      "eRASS1 p90 FGAS500 applied as a gas-rich upper control"
+    ],
+    "guardrail": "These are catalog-scale potential controls, not resolved gas density profiles."
+  }
+}

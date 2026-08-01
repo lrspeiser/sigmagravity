@@ -1,0 +1,67 @@
+{
+  "protocol_version": "P0558-MASS-ANCHOR-PROXY-TIDAL-0.1.0",
+  "frozen_utc": "2026-07-31T21:00:00Z",
+  "status": "frozen_before_any_mass_anchor_proxy_lens_score",
+  "question": "Does replacing the universal star/gas morphology mixture by each cluster's independently measured central BCG and gas masses make the P0557 angular tensor more consistent?",
+  "locked_field": {
+    "equation": "partial_i[(delta_ij+t*Q_ij_contrast)*partial_j phi_Sigma]=source_Sigma",
+    "tensor_t": 0.3,
+    "subtract_circular_mean": true,
+    "softening_kpc": 20.0,
+    "pixels_per_axis": 512,
+    "new_gravity_parameters": 0,
+    "per_cluster_gravity_parameters": 0,
+    "lineage": "P0557 exact-selection result; no coupling or operator is refit here"
+  },
+  "mass_anchor_rule": {
+    "source": "Tian et al. 2020 CDS table1.dat",
+    "stellar_mass": "published BCG total stellar mass with 10 percent uncertainty",
+    "gas_mass": "published cumulative Chandra gas mass within the listed 14.3-22.2 kpc aperture and its published uncertainty",
+    "mixture": "f_gas = k_gas*Mgas/(Mstar+k_gas*Mgas); combine separately normalized registered star and X-ray morphology maps with weights 1-f_gas and f_gas",
+    "interpretation": "measured per-object baryonic input, not a gravity parameter",
+    "known_mismatch": "Mstar is a BCG total while Mgas is aperture cumulative; the registered F160W map also contains satellites/ICL, so this is a mass-anchor proxy rather than a complete surface-density map"
+  },
+  "models": [
+    {"model_id": "zero", "tensor_t": 0.0, "gas_transform": "sqrt", "gas_mass_multiplier": 1.0, "role": "control"},
+    {"model_id": "measured_sqrt", "tensor_t": 0.3, "gas_transform": "sqrt", "gas_mass_multiplier": 1.0, "role": "primary"},
+    {"model_id": "measured_linear", "tensor_t": 0.3, "gas_transform": "linear", "gas_mass_multiplier": 1.0, "role": "brightness_transform_sensitivity"},
+    {"model_id": "half_gas_sqrt", "tensor_t": 0.3, "gas_transform": "sqrt", "gas_mass_multiplier": 0.5, "role": "universal_mass_scale_sensitivity"},
+    {"model_id": "double_gas_sqrt", "tensor_t": 0.3, "gas_transform": "sqrt", "gas_mass_multiplier": 2.0, "role": "universal_mass_scale_sensitivity"}
+  ],
+  "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+  "spent_data_disclosure": "All four systems and the t=0.3 contrast choice are spent from prior work. P0558 is a fully specified diagnostic, not fresh validation.",
+  "optimization": {
+    "starts_per_fit": 6,
+    "maximum_function_evaluations": 2000,
+    "random_seed": 20260732
+  },
+  "advance_gates": {
+    "primary_all_heldout_roots_converged": true,
+    "primary_all_four_systems_improve": true,
+    "primary_equal_system_RMS_improvement_fraction_min": 0.05,
+    "validation_subset_to_compact_halo_RMS_ratio_max": 1.25
+  },
+  "inputs": {
+    "p0557_protocol": "configs/p0557_baryon_proxy_tidal_protocol.json",
+    "member_tidal_protocol": "configs/member_tidal_metric_protocol.json",
+    "tian_table": "data/raw/clash_tian2020/table1.dat",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0558_mass_anchor_proxy_tidal",
+    "mass_anchors": "mass_anchors.csv",
+    "scores": "scores.csv",
+    "predictions": "predictions.csv",
+    "tensor_audits": "tensor_audits.csv",
+    "report": "report.json",
+    "figure": "p0558_mass_anchor_proxy_tidal.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The central gas and BCG stellar masses do not constitute radial two-dimensional component mass maps.",
+    "X-ray brightness and its square root remain morphology proxies.",
+    "The four systems are spent, so the result is diagnostic even though the rule is frozen before this score.",
+    "Galaxy and Solar preservation remains by external-environment scope.",
+    "No formula can be promoted from P0558."
+  ]
+}

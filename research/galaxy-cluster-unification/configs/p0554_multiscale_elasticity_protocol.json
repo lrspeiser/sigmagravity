@@ -1,0 +1,85 @@
+{
+  "protocol_version": "P0554-MULTISCALE-ELASTICITY-0.1.0",
+  "frozen_utc": "2026-07-31T21:25:50Z",
+  "status": "frozen_before_any_multiscale_variant_score",
+  "question": "Which P0554 parameter effects persist from very small to previously tested perturbations, which are nonlinear, and which primarily trigger raw-lens root bifurcations?",
+  "baseline": {
+    "alpha": 0.75,
+    "apogee_ratio": 100.0,
+    "screen_exponent": 1.0,
+    "screen_scale": 1.0,
+    "mass_radius_delta": 0.0,
+    "extent_leak": 0.0,
+    "invariant_mode": "potential_depth",
+    "invariant_power": 1.2,
+    "invariant_scale": 0.000002,
+    "secondary_path_ratio_power": 0.25,
+    "photon_extra_multiplier": 1.75,
+    "universal_q": 1.2300686115098052
+  },
+  "coordinate_steps": [0.1, 0.25, 0.5, 1.0],
+  "parameter_coordinates": {
+    "universal_q": {"mode": "fractional", "reference_change": 0.1, "concept": "total excess amplitude"},
+    "alpha": {"mode": "fractional", "reference_change": 0.1, "concept": "radial residence shape"},
+    "apogee_ratio": {"mode": "fractional", "reference_change": 0.2, "concept": "maximum path reach"},
+    "screen_exponent": {"mode": "fractional", "reference_change": 0.2, "concept": "high-acceleration suppression sharpness"},
+    "screen_scale": {"mode": "fractional", "reference_change": 0.2, "concept": "screen transition location"},
+    "invariant_power": {"mode": "fractional", "reference_change": 0.1, "concept": "potential-depth response curvature"},
+    "invariant_scale": {"mode": "fractional", "reference_change": 0.2, "concept": "potential-depth transition"},
+    "secondary_path_ratio_power": {"mode": "fractional", "reference_change": 0.2, "concept": "path-history contribution"},
+    "photon_extra_multiplier": {"mode": "additive", "reference_change": 0.25, "concept": "lensing-to-matter response ratio"},
+    "mass_radius_delta": {"mode": "additive", "reference_change": 0.05, "concept": "baryonic-mass dependence of transition radius"},
+    "extent_leak": {"mode": "additive", "reference_change": 0.05, "concept": "concentration leaking into scalar amplitude"}
+  },
+  "evaluation": {
+    "formula_parameters_fit": 0,
+    "lens_geometry_parameters_fit": 0,
+    "universal_q_rule": "Keep q fixed at the P0554 value except for its explicit central-difference coordinate.",
+    "galaxy": "131 SPARC galaxies with fixed nuisance parameters and untouched outer-radius predictions.",
+    "derived_cluster": "84 CLASH equivalent-acceleration points in 20 systems with no per-cluster adjustment.",
+    "raw": "RX J2129 plus four Caminha/CLASH systems at frozen P0554 geometries; profile only source positions and solve exact held-out roots.",
+    "solar": "The same analytic Cassini, Earth, Saturn, and Mercury proxies as the P0554 parent."
+  },
+  "analysis_rules": {
+    "dimensionless_coordinate": "For fractional parameters p=p0*(1+u*reference_change); for additive parameters p=p0+u*reference_change.",
+    "central_slope": "[metric(+u)-metric(-u)]/[2*u*normalizer]",
+    "central_curvature": "[metric(+u)+metric(-u)-2*metric(0)]/[u^2*normalizer]",
+    "raw_common_system_rule": "A raw slope uses only systems with every held-out root for -u, baseline, and +u. Root changes are reported separately.",
+    "stable_direction_rule": "At least three available step sizes and at least 75 percent of nonzero central slopes have the same sign.",
+    "material_median_slope": 0.02,
+    "solar_mercury_normalizer_mas_per_century": 3.1,
+    "no_candidate_selection": true
+  },
+  "inputs": {
+    "parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ2129_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "RXJ2129_geometry": "results/arc_invariant_pareto_refinement/raw_RXJ2129_parameters.csv",
+    "four_cluster_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "four_cluster_geometry": "results/adaptive_route_multicluster_raw/geometry.csv",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat"
+  },
+  "outputs": {
+    "directory": "results/p0554_multiscale_elasticity",
+    "variant_scores": "variant_scores.csv",
+    "galaxy_morphology": "galaxy_morphology_scores.csv",
+    "raw_scores": "raw_system_scores.csv",
+    "raw_predictions": "raw_predictions.csv",
+    "central_differences": "central_differences.csv",
+    "parameter_summary": "parameter_summary.csv",
+    "report": "report.json",
+    "figure": "p0554_multiscale_elasticity.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "All systems and the P0554 parent are spent exploratory data; this experiment estimates local response, not fresh predictive performance.",
+    "Fixed ordinary lens geometry isolates field-law sensitivity but cannot show whether a change survives a geometry refit.",
+    "A strong-lensing root bifurcation is a topology observation, not an accuracy improvement.",
+    "CLASH equivalent accelerations are conventional-GR/NFW-derived targets.",
+    "Solar tests are analytic weak-field proxies rather than an ephemeris likelihood.",
+    "Parameter-coordinate normalizations are declared comparison scales, not measured physical priors."
+  ]
+}

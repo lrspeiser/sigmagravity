@@ -1,0 +1,64 @@
+{
+  "protocol_version": "R1B2-RXJ2129-satellite-force-0.1",
+  "status": "frozen_before_off_center_force_evaluation",
+  "purpose": "Propagate the calibrated satellite membership and stellar-mass likelihood through explicit off-center geometry on the four RX J2129 dynamics radii.",
+  "freeze_date": "2026-07-26",
+  "disclosure": "The 66-candidate inner ledger, classifier validation metrics, retained membership bootstrap, previously reported nominal mass sums, and one very low-mass candidate inside 5 arcsec were known before this freeze. No satellite force, covariance, Plummer-scale sensitivity, or outer-candidate tidal bound had been evaluated.",
+  "inputs": {
+    "membership_likelihood": "data/derived/r1_rxj2129_satellite_membership_likelihood.csv",
+    "membership_probability_bootstrap": "data/derived/r1_rxj2129_satellite_membership_bootstrap.npz",
+    "full_candidate_ledger": "data/derived/r1_rxj2129_satellite_candidates.csv",
+    "dynamics_bins": "data/derived/r1_rxj2129_ppxf_xsl_profile_with_covariance.csv",
+    "published_bcg_profile": "data/derived/r1_rxj2129_bcg_hernquist_profile.csv",
+    "membership_report": "results/r1_rxj2129_satellite_membership/classifier_report.json"
+  },
+  "geometry": {
+    "center_ra_deg": 322.41651,
+    "center_dec_deg": 0.08923,
+    "angular_scale_kpc_per_arcsec": 3.741653570564318,
+    "inner_membership_radius_arcsec": 30.0,
+    "azimuth_samples_per_radius": 360,
+    "force_quantity": "Differential acceleration at each ring point relative to the BCG center, projected onto the inward radial direction. A constant external acceleration cancels.",
+    "line_of_sight_rule": "Set line-of-sight separation to zero, maximizing the force at fixed projected separation; report this as a conservative projected-plane likelihood."
+  },
+  "galaxy_profile": {
+    "model": "spherical Plummer stellar-mass profile",
+    "scale_arcsec": "max(0.065, sqrt(Molino a*b)*0.065)",
+    "scale_sensitivity_multipliers": [0.5, 1.0, 2.0],
+    "mass_uncertainty_dex": 0.30
+  },
+  "monte_carlo": {
+    "draws": 2000,
+    "random_seed": 2131,
+    "membership_rule": "Select one of the 500 correlated classifier-bootstrap probability vectors, then draw Bernoulli membership for each galaxy; spectroscopic 0/1 columns remain exact.",
+    "mass_rule": "Draw independent log10 stellar masses from the catalog value with sigma 0.30 dex for selected members."
+  },
+  "outer_tidal_bound": {
+    "rule": "For every frozen candidate beyond 30 arcsec, set membership to one and mass to the +0.30-dex value, then sum the point-mass differential tidal bound 2*G*M*r/(R-r)^3 in each bin.",
+    "maximum_fraction_of_published_bcg_acceleration_each_bin": 0.01
+  },
+  "advance_thresholds": {
+    "inner_candidates": 66,
+    "monte_carlo_draws": 2000,
+    "posterior_profile_finite": true,
+    "four_by_four_covariance_symmetric_positive_semidefinite": true,
+    "maximum_plummer_scale_shift_fraction_of_bcg_each_bin": 0.10,
+    "outer_tidal_bound_fraction_of_bcg_each_bin": 0.01,
+    "membership_bootstrap_correlation_preserved": true,
+    "gravity_or_lens_residual_used": false
+  },
+  "outputs": {
+    "profile": "data/derived/r1_rxj2129_satellite_acceleration_profile.csv",
+    "covariance": "data/derived/r1_rxj2129_satellite_acceleration_covariance.csv",
+    "draws": "data/derived/r1_rxj2129_satellite_acceleration_draws.npz",
+    "report": "results/r1_rxj2129_satellite_membership/force_report.json",
+    "diagnostic": "results/r1_rxj2129_satellite_membership/force_diagnostic.png"
+  },
+  "authorization": {
+    "off_center_mass_acceleration_likelihood": true,
+    "lens_member_dark_subhalo_likelihood": false,
+    "lens_residual_read": false,
+    "gravity_response_fit": false,
+    "strict_r1_ready": false
+  }
+}

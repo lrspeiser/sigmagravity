@@ -1,0 +1,6 @@
+parameter,calibration_best_level,calibration_worst_level,calibration_RMS_span_arcsec,heldout_best_level_posthoc,heldout_worst_level_posthoc,heldout_RMS_span_arcsec_posthoc
+width_over_R80,0.28,0.18,0.8222468680897919,0.28,0.23,1.7961461966656627
+route_mode,chord,transverse_arc_0.5,0.47101807808092033,endpoint,transverse_arc_0.5,8.527307364464278
+return_length_over_R80,0.36,0.65,0.31968452157617655,0.5,0.65,1.3415831848399336
+gate_mode,none,cluster_logistic,0.17863130683127437,none,cluster_logistic_soft,0.6313859363854792
+route_fraction_multiplier,1.0,0.5,0.09196914768558084,1.0,0.5,0.3869667847518876

@@ -60,6 +60,8 @@ def _dataset_and_settings(args: argparse.Namespace):
         velocity_error_floor_kms=float(config["velocity_error_floor_kms"]),
         rar_acceleration_m_s2=float(config["rar_acceleration_m_s2"]),
         hubble_km_s_mpc=float(config["hubble_km_s_mpc"]),
+        sigma_response_amplitude=float(config.get("sigma_response_amplitude", 1.1725)),
+        sigma_g_dagger_m_s2=float(config.get("sigma_g_dagger_m_s2", 9.6e-11)),
         learning_rate=float(
             args.learning_rate if args.learning_rate is not None else config["learning_rate"]
         ),
@@ -72,7 +74,9 @@ def main_fit(argv: list[str] | None = None) -> int:
     root = _project_root()
     parser = _common_parser("Fit one SPARC rotation-curve model with radial holdout")
     parser.add_argument(
-        "--model", choices=["newtonian", "rar", "nfw", "void", "potential"], default="void"
+        "--model",
+        choices=["newtonian", "rar", "nfw", "void", "potential", "sigma_transfer"],
+        default="void",
     )
     parser.add_argument("--fixed-flat-power", action="store_true")
     parser.add_argument("--boundary-layer", action="store_true")
@@ -134,6 +138,7 @@ def main_compare(argv: list[str] | None = None) -> int:
             "potential",
             "potential_env",
             "potential_boundary",
+            "sigma_transfer",
         ],
     )
     args = parser.parse_args(argv)

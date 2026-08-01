@@ -1,0 +1,36 @@
+{
+  "protocol_version": "P0583B-SIGNED-ENDPOINT-AMPLITUDE-0.1.0",
+  "frozen_utc": "2026-08-01T04:55:00Z",
+  "status": "frozen_after_P0583_before_signed_amplitude_scores",
+  "trigger": "The locked K0338 tanh-20 field retained all RX J2129 roots but worsened held-out RMS from 1.256 to 14.130 arcsec and pushed three nuisance parameters to their bounds.",
+  "question": "At the scalar fit held fixed, does any small positive tanh-20 endpoint amplitude help RX J2129, or do zero/negative amplitudes show that the angular pattern or sign is wrong?",
+  "formula": "alpha=alpha_P0554+epsilon*alpha_K0338,tanh20",
+  "signed_amplitudes": [-0.2, -0.1, -0.05, -0.025, 0.0, 0.025, 0.05, 0.1, 0.2, 0.4, 0.6, 0.8, 1.0],
+  "fit_policy": "Hold the P0583 scalar geometry and its fitted training-family source positions fixed; fit no parameter.",
+  "interpretation": {
+    "positive_minimum": "The route pattern may be useful but P0583's unit amplitude is too strong.",
+    "zero_minimum": "The endpoint pattern adds no held-out information near the scalar solution.",
+    "negative_minimum": "The tested endpoint pattern has the wrong angular sign for RX J2129."
+  },
+  "inputs": {
+    "p0581_protocol": "configs/p0581_locked_endpoint_exact_root_protocol.json",
+    "p0582_report": "results/p0582_smooth_endpoint_saturation/report.json",
+    "p0583_protocol": "configs/p0583_tanh_endpoint_rxj2129_protocol.json",
+    "p0583_report": "results/p0583_tanh_endpoint_rxj2129/report.json",
+    "p0583_parameters": "results/p0583_tanh_endpoint_rxj2129/parameters.csv",
+    "p0583_predictions": "results/p0583_tanh_endpoint_rxj2129/predictions.csv"
+  },
+  "outputs": {
+    "directory": "results/p0583b_signed_endpoint_amplitude",
+    "scores": "scores.csv",
+    "predictions": "predictions.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0583b_signed_endpoint_amplitude.png"
+  },
+  "claim_limits": [
+    "This is opened-data failure forensics, not validation or coefficient fitting.",
+    "Negative epsilon reverses the zero-monopole angular correction and is a sign diagnostic, not the proposed return-gravity interpretation.",
+    "Fixed scalar geometry isolates local field response but does not allow ordinary nuisance parameters to readjust."
+  ]
+}

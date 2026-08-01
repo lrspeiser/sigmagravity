@@ -1,0 +1,4 @@
+parameter,variants,failed_exact_root_variants,training_RMS_span_arcsec,spent_heldout_RMS_span_arcsec,best_training_variant,best_training_RMS_arcsec,corresponding_spent_heldout_RMS_arcsec
+fraction_max,8,5,5.411963604900104,16.462397548488134,no_route,0.49524262462835045,1.8086634342220647
+width_over_R80,5,2,0.7610469197742716,2.676919344374822,width_over_R80_1,0.8396759576861138,1.8815594311384682
+length_over_R80,5,3,0.07099207233120652,0.44911568796007195,length_over_R80_0.1,1.155495406940903,3.030206982577015

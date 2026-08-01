@@ -1,0 +1,46 @@
+{
+  "protocol_version": "P0584-NO-OVERSHOOT-ENDPOINT-0.1.0",
+  "frozen_utc": "2026-08-01T05:18:00Z",
+  "status": "frozen_after_P0583B_before_no_overshoot_scores",
+  "trigger": "P0583B showed that the constant-distance K0338 endpoint pattern is locally harmful in RX J2129. The constant 0.36 R80 displacement can carry inner members through the light centroid and deposit their returned field on the opposite side.",
+  "question": "Does forbidding center overshoot make any small positive endpoint amplitude informative at the frozen RX J2129 scalar solution?",
+  "locked_formula": {
+    "route_fraction_multiplier": 1.0,
+    "return_length_over_R80": 0.36,
+    "width_over_R80": 0.23,
+    "gate_mode": "cluster_logistic",
+    "contrast_mode": "tanh",
+    "contrast_cap": 20.0
+  },
+  "travel_modes": {
+    "constant": "ell_i=L",
+    "hard_no_cross": "ell_i=min(L,d_i)",
+    "tanh_no_cross": "ell_i=L*tanh(d_i/L)",
+    "rational_no_cross": "ell_i=L*d_i/(L+d_i)"
+  },
+  "positive_amplitudes": [0.0, 0.005, 0.01, 0.015, 0.025, 0.05, 0.1, 0.2, 0.4, 1.0],
+  "fit_policy": "Hold P0583 scalar geometry and source positions fixed; fit no parameter.",
+  "selection": "Among rows retaining all seven roots, minimize held-out RMS. Treat every result as opened-data forensics.",
+  "inputs": {
+    "p0581_protocol": "configs/p0581_locked_endpoint_exact_root_protocol.json",
+    "p0583_protocol": "configs/p0583_tanh_endpoint_rxj2129_protocol.json",
+    "p0583_report": "results/p0583_tanh_endpoint_rxj2129/report.json",
+    "p0583_parameters": "results/p0583_tanh_endpoint_rxj2129/parameters.csv",
+    "p0583_predictions": "results/p0583_tanh_endpoint_rxj2129/predictions.csv",
+    "p0583b_report": "results/p0583b_signed_endpoint_amplitude/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0584_no_overshoot_endpoint",
+    "scores": "scores.csv",
+    "predictions": "predictions.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0584_no_overshoot_endpoint.png"
+  },
+  "claim_limits": [
+    "RX J2129 is opened failure-forensics data, not validation.",
+    "The amplitude grid is descriptive and cannot be promoted from this system.",
+    "The test isolates endpoint travel geometry at fixed scalar nuisances and source positions."
+  ]
+}

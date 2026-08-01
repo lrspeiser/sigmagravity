@@ -1,0 +1,51 @@
+{
+  "protocol_version": "M33-PHOTON-ILLUSION-0.1.0",
+  "frozen_utc": "2026-07-31T06:45:00Z",
+  "status": "frozen_before_M33_uncertainty_propagation",
+  "question": "Does direct angular rotation of M33 agree with its spectroscopic H I rotation strongly enough to constrain a photon-frequency illusion?",
+  "source": {
+    "paper": "Brunthaler et al. 2005, Science 307, 1440",
+    "doi": "10.1126/science.1108342",
+    "arxiv": "astro-ph/0503058",
+    "local_pdf": "data/raw/m33_brunthaler2005/brunthaler2005_m33_science.pdf",
+    "provenance": "data/raw/m33_brunthaler2005/provenance.json"
+  },
+  "published_inputs": {
+    "relative_right_ascension_proper_motion_microarcsec_per_year": 30.8,
+    "proper_motion_standard_error_microarcsec_per_year": 4.0,
+    "HI_model_relative_right_ascension_velocity_km_s": 106.0,
+    "HI_model_systematic_standard_error_km_s": 20.0,
+    "independent_TRGB_distance_kpc": 794.0,
+    "TRGB_distance_standard_error_kpc": 23.0,
+    "paper_geometric_distance_kpc": 730.0,
+    "paper_geometric_statistical_error_kpc": 100.0,
+    "paper_geometric_systematic_error_kpc": 135.0
+  },
+  "definitions": {
+    "astrometric_transverse_velocity": "v_ast=4.74047*mu_mas_per_year*D_kpc",
+    "frequency_illusion": "Delta_v_gamma=v_HI_model-v_ast",
+    "positive_sign": "positive Delta_v_gamma means Doppler spectroscopy overstates the actual transverse motion"
+  },
+  "uncertainty": {
+    "monte_carlo_draws": 1000000,
+    "seed": 20260737,
+    "independent_gaussian_inputs": true
+  },
+  "comparison_targets_km_s": [
+    30.0,
+    61.4
+  ],
+  "claim_boundary": [
+    "This comparison uses one relative sky component from two maser regions, not a full two-dimensional rotation curve.",
+    "The H I tilted-ring model has a conservatively assigned 20 km/s systematic uncertainty.",
+    "The TRGB distance is independent of rotation dynamics but remains an electromagnetic distance indicator.",
+    "A theory that changes Doppler frequency, angular astrometry, and TRGB luminosity in a coordinated way is not excluded, but must predict all three effects with the same field equations."
+  ],
+  "outputs": {
+    "directory": "results/m33_photon_illusion",
+    "report": "results/m33_photon_illusion/report.json",
+    "samples": "results/m33_photon_illusion/monte_carlo_quantiles.csv",
+    "figure": "results/m33_photon_illusion/m33_photon_illusion.png",
+    "summary": "results/m33_photon_illusion/SUMMARY.md"
+  }
+}

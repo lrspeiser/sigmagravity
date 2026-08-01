@@ -1,0 +1,36 @@
+{
+  "protocol_version": "P0554-HALO-BACKTRACK-CAPACITY-0.1.0",
+  "frozen_utc": "2026-08-01T09:45:00Z",
+  "status": "frozen_after_balanced_inverse_before_capacity-relaxed_scores",
+  "question": "Do the inferred baryonic origins remain stable if the halo-arrival target may draw from only part of the available baryonic launch capacity instead of forcing every galaxy to route in proportion to its light?",
+  "parent_protocol": "configs/p0554_halo_backtrack_protocol.json",
+  "parent_report": "results/p0554_halo_backtrack/report.json",
+  "formula": {
+    "optimization": "min sum_ij P_ij |y_j-x_i|^2 + epsilon sum_ij P_ij(log(P_ij)-1)",
+    "target_constraint": "sum_i P_ij=e_j",
+    "source_constraint": "sum_j P_ij<=q_cap*b_i",
+    "implementation": "A zero-cost unused-capacity sink makes the inequality an exactly balanced augmented transport problem.",
+    "interpretation": "q_cap is an inverse attribution capacity, not the physical gravity amplitude q and not a fitted cluster parameter."
+  },
+  "capacity_multipliers": [1.0, 2.0, 4.0, 8.0],
+  "target_kind": "posterior_centers_sigma2_w50",
+  "source_kind": "member_catalog_light",
+  "entropy_length_kpc": 50.0,
+  "iterations": [500, 2000, 10000],
+  "maximum_target_marginal_error": 1e-6,
+  "maximum_source_capacity_excess": 1e-8,
+  "outputs": {
+    "directory": "results/p0554_halo_backtrack_capacity",
+    "route_statistics": "route_statistics.csv",
+    "halo_origins": "halo_origins.csv",
+    "report": "report.json",
+    "figure": "p0554_halo_backtrack_capacity.png",
+    "summary": "SUMMARY.md"
+  },
+  "limits": [
+    "Capacity relaxation identifies economical origins but does not measure how much gravity any galaxy can reroute.",
+    "The posterior halo target remains model-dependent and comes from the same lens observations.",
+    "The capacity values are a sensitivity grid, not fitted or promoted constants.",
+    "A forward law still must predict destinations from baryons alone on unused raw lens data."
+  ]
+}

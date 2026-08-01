@@ -1,0 +1,116 @@
+{
+  "protocol_version": "SOLAR-SCREENED-IMPROVER-FORENSICS-0.1",
+  "frozen_utc": "2026-07-30T00:00:00Z",
+  "status": "post-result exploratory protocol fixed before exhaustive feature and subgroup scan; feature-family ablations declared before the final rerun",
+  "disclosure": "The 41/90 win-loss split and the earlier mass, bulge, gas, and outer-slope summaries were already known. This analysis is forensic and hypothesis-generating, not independent confirmation.",
+  "question": "What distinguishes the SPARC galaxies in which the locked cluster-selected Solar-screened law has lower untouched-outer-point error than independently refit fixed RAR?",
+  "sample": {
+    "galaxies": 131,
+    "inner_train_points": 2066,
+    "outer_holdout_points": 968,
+    "base_protocol": "configs/sparc_independent_nuisance_refit_protocol.json",
+    "screened_protocol": "configs/solar_screened_galaxy_morphology_protocol.json"
+  },
+  "outcomes": {
+    "primary_binary": "outer MSE of independently inner-refit screened law is lower than outer MSE of independently inner-refit fixed RAR",
+    "primary_continuous": "skill=(MSE_RAR-MSE_screened)/mean(Vobs_adjusted^2); positive favors screened law",
+    "secondary": [
+      "screened versus simple MOND outer MSE",
+      "screened versus RAR outer chi-square per point",
+      "screened versus RAR catalog-space outer MSE",
+      "screened versus RAR at the same screened-law nuisance parameters",
+      "at least 10 percent and at least 20 percent outer-MSE improvement",
+      "quality-1-only, no-boundary, and leave-one-galaxy robustness"
+    ]
+  },
+  "feature_tiers": {
+    "core_preoutcome": "catalog photometry, morphology, HI, measurement quality, distance method, coordinates, independent density/void summaries, component-only geometry, and inner-observed-curve summaries",
+    "extended_environment": "all locally available multiscale Cosmicflows void-cage and tidal descriptors",
+    "mechanistic_inner_fit": "core and extended features plus inner-fitted nuisances, inner residuals, and tail/force predictions that do not use outer observed velocities",
+    "outer_descriptive_leakage": "features derived from observed outer velocities; descriptive only and excluded from primary predictive claims"
+  },
+  "univariate_tests": {
+    "minimum_nonmissing_per_feature": 30,
+    "minimum_unique_values": 3,
+    "continuous": [
+      "Spearman correlation with continuous skill",
+      "Mann-Whitney improver-versus-worsener test",
+      "Hedges g",
+      "Cliff delta",
+      "single-feature ROC AUC"
+    ],
+    "categorical": [
+      "Fisher exact for binary levels",
+      "chi-square and bias-corrected Cramer V for multilevel variables"
+    ],
+    "multiplicity": "Benjamini-Hochberg FDR reported separately by test family and globally; q<=0.05 is the exploratory flag"
+  },
+  "cross_validation": {
+    "folds": 5,
+    "repeats": 8,
+    "seed": 20260730,
+    "classification_models": {
+      "logistic_L2": {"C": 1.0, "class_weight": "balanced", "max_iter": 5000},
+      "random_forest": {"trees": 200, "max_depth": 4, "min_samples_leaf": 5, "class_weight": "balanced_subsample"}
+    },
+    "regression_models": {
+      "ridge": {"alpha": 10.0},
+      "random_forest": {"trees": 200, "max_depth": 4, "min_samples_leaf": 5}
+    },
+    "metrics": [
+      "ROC AUC",
+      "average precision",
+      "balanced accuracy",
+      "Brier score",
+      "continuous-skill R2",
+      "continuous-skill Spearman correlation",
+      "MAE"
+    ],
+    "feature_family_ablations": [
+      "intrinsic catalog and inner-curve features without void, sky-position, or reference-code fields",
+      "environment and sky-position features only",
+      "inner-fit mechanistic features only",
+      "intrinsic plus mechanistic features",
+      "all core pre-outcome features",
+      "core plus all extended multiscale environment features",
+      "core plus mechanistic features",
+      "all pre-outcome features",
+      "all features including the explicitly labeled outer-outcome leakage control"
+    ],
+    "fixed_primary_permutation_test": {
+      "model": "logistic_L2",
+      "feature_tier": "core_preoutcome",
+      "permutations": 500,
+      "permutation_repeats": 5,
+      "metric": "mean repeated-five-fold ROC AUC"
+    }
+  },
+  "subgroup_scan": {
+    "one_feature_thresholds": "every distinct numeric midpoint leaving at least 15 galaxies in subgroup and complement, plus every eligible categorical/boolean level",
+    "pairwise_rules": "both directions at 25th, 50th, and 75th percentiles for core and mechanistic summary features; conjunctions require at least 12 galaxies in subgroup and complement",
+    "minimum_one_feature_group": 15,
+    "minimum_pairwise_group": 12,
+    "bootstrap_draws_for_top_rules": 5000,
+    "multiplicity": "Benjamini-Hochberg over every scanned one-feature rule and separately over every pairwise conjunction"
+  },
+  "claim_rules": [
+    "Outer-observed-velocity features can explain a result descriptively but cannot establish prospective predictability.",
+    "A cross-validated AUC near 0.5 means the apparent subgroups do not generalize, even if an in-sample split looks striking.",
+    "No individual p-value is interpreted without its FDR q-value and effect size.",
+    "High-dimensional environment features are an exploratory family and must replicate in independent galaxies before theory use.",
+    "The screened and RAR models fit different standard nuisances; same-nuisance and independent-nuisance outcomes are both required.",
+    "No result from this analysis changes the failed universal galaxy-transfer verdict."
+  ],
+  "known_unavailable_distinctions": [
+    "bar presence and bar strength",
+    "spiral-arm multiplicity and pitch angle",
+    "resolved warps, lopsidedness, and noncircular-flow maps",
+    "vertical disk thickness and vertical stellar kinematics",
+    "molecular gas and circumgalactic gas profiles",
+    "stellar age, color, metallicity, IMF, and mass-to-light gradients",
+    "complete group membership, nearest massive neighbor, and external tidal field below the Cosmicflows resolution",
+    "halo shape or independently measured dark-halo mass",
+    "full point-to-point rotation-curve covariance",
+    "galaxy-scale weak or strong lensing for the same objects"
+  ]
+}

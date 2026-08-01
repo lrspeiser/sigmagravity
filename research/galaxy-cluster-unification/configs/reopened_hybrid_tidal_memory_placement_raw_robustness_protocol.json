@@ -1,0 +1,25 @@
+{
+  "protocol_version": "REOPENED-HYBRID-TIDAL-MEMORY-PLACEMENT-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-07-31T16:26:53Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay every tidal memory-placement setting with eight lens-geometry starts so cap-placement and memory-placement effects are compared on equally robust roots.",
+  "source_protocol": "configs/reopened_hybrid_tidal_memory_placement_protocol.json",
+  "source_report": "results/reopened_hybrid_tidal_memory_placement/report.json",
+  "selected_variants": "all",
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_tidal_memory_placement_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_tidal_memory_placement_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_tidal_memory_placement_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_tidal_memory_placement_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_tidal_memory_placement_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Universal gravity constants are copied unchanged from the tidal memory-placement bridge fits.",
+    "No gravity constant is fitted to raw lensing; only lens geometry, shear, centers, and source positions are reoptimized.",
+    "This is a numerical robustness replay on already inspected development clusters, not an external holdout.",
+    "All 27 settings are replayed because both cap and memory placement can cross image-root boundaries.",
+    "The mixed axisymmetric-galaxy/spherical-cluster closure remains a proxy rather than a common map-based tensor theory."
+  ]
+}

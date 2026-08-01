@@ -1,0 +1,28 @@
+{
+  "protocol_version": "SPARC-LOCAL-FORCE-COHERENCE-0.2",
+  "frozen_utc": "2026-07-28T09:30:00Z",
+  "status": "frozen after global B/T coherence failed and before scoring local force-fraction coherence",
+  "candidate": "RAR_coherence_gated_RG fixed bridge parameters",
+  "selection": "same 131 galaxies and 968 outer-holdout points as fixed RAR",
+  "coherence_mappings": {
+    "C_one_minus_local_bulge_force": "C(r)=1-Upsilon_b V_bulge^2/[|V_gas|^2+Upsilon_d V_disk^2+Upsilon_b V_bulge^2]",
+    "controls": ["C=1", "one minus global baryonic B/T", "one minus global stellar B/T"]
+  },
+  "density_sensitivity": {
+    "disk_hz_over_Rdisk": [0.1, 0.2, 0.3],
+    "gas_RHI_divisor": [2.5, 3.2, 4.0],
+    "gas_hz_over_Rgas": [0.05, 0.1, 0.2],
+    "primary": [0.2, 3.2, 0.1]
+  },
+  "advance_gate": {
+    "outer_RMSE_relative_to_RAR_max": 1.15,
+    "outer_chi2_per_point_relative_to_RAR_max": 1.25,
+    "median_absolute_extra_velocity_km_s_max": 5.0
+  },
+  "claim_boundary": [
+    "The local bulge force fraction is outcome-blind but is not the same observable as MaNGA Lambda_Re.",
+    "Gas and disk are grouped as the planar/coherent channel; this assignment is a model choice.",
+    "The RAR endpoint is inherited prior art, not a new prediction.",
+    "This is a fixed transfer using RAR-fitted nuisance parameters and modeled gas volume densities."
+  ]
+}

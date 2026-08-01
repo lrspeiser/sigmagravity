@@ -1,0 +1,70 @@
+{
+  "protocol_version": "P0554-MASS-EXTENT-SCREEN-FACTORIAL-0.1.0",
+  "frozen_utc": "2026-08-01T08:05:00Z",
+  "status": "frozen_after-individual-sensitivity-before-any-three-coordinate-score",
+  "question": "Can small compensating changes in mass-scaled transition radius, concentration leakage, and Solar screening improve galaxy rotation, derived cluster lensing, and raw cluster topology together?",
+  "motivation": {
+    "mass_radius_delta": "largest local derived-cluster span and large galaxy span, but high values damage raw roots and Mercury",
+    "extent_leak": "largest RXJ2129 raw span and recovers MACS1931 at +0.05, but worsens galaxy rotation",
+    "screen_exponent": "dominant Solar lever and can compensate otherwise unsafe weak-field changes",
+    "prior_joint_test": "no prior protocol crossed mass_radius_delta with extent_leak and screen_exponent"
+  },
+  "grid": {
+    "mass_radius_delta": [0.0, 0.01, 0.02, 0.03],
+    "extent_leak": [0.0, 0.02, 0.04, 0.06],
+    "screen_exponent": [1.0, 1.05, 1.1, 1.15],
+    "candidates": 64,
+    "exact_parent": [0.0, 0.0, 1.0]
+  },
+  "selection": {
+    "galaxy_discovery": "91 SHA256-partition discovery galaxies, outer radii, fixed nuisance values",
+    "derived_cluster_discovery": "13 SHA256-partition discovery CLASH systems",
+    "raw_discovery": ["MACS0329", "MACS0429", "MACS1115"],
+    "solar_gate": "Cassini, Earth, and Mercury proxies all pass",
+    "root_gate": "every raw-discovery held-out image root converges",
+    "rank": "maximize the minimum fractional gain across discovery galaxy, derived-cluster, and raw-lens equal-object RMS; tie by mean gain then smallest normalized step",
+    "gravity_parameters_continuously_fit": 0,
+    "universal_grid_coordinates_selected": 3
+  },
+  "transfer": {
+    "galaxy_formula_holdout": "40 SHA256-partition galaxies",
+    "derived_cluster_formula_holdout": "7 SHA256-partition CLASH systems",
+    "raw_formula_holdout": ["RXJ2129", "MACS1931", "RXJ1347"],
+    "ordinary_geometry_refit": 0,
+    "source_positions": "profiled independently on each formula's training images",
+    "MACS1931_rule": "parent lacks one held-out root; report topology recovery separately and exclude it from matched parent RMS"
+  },
+  "factor_analysis": {
+    "main_effect": "span of level-mean gain for each coordinate",
+    "pair_interaction": "span of the two-factor cell residual after removing grand and both main effects",
+    "purpose": "rank leverage and compensation, not assign significance to an adaptive exploratory grid"
+  },
+  "inputs": {
+    "radial_parent_protocol": "configs/p0554_radial_flux_remap_protocol.json",
+    "context_protocol": "configs/p0554_local_cross_domain_sensitivity_protocol.json",
+    "fixed_geometry": "results/p0554_route_softness_interaction/geometry.csv",
+    "raw_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ1347_geometry": "results/p0554_baryonic_network_rxj1347_holdout/baseline_geometry.csv"
+  },
+  "outputs": {
+    "directory": "results/p0554_mass_extent_screen_factorial",
+    "candidate_scores": "candidate_scores.csv",
+    "partition_scores": "partition_scores.csv",
+    "raw_system_scores": "raw_system_scores.csv",
+    "raw_predictions": "raw_predictions.csv",
+    "factor_impacts": "factor_impacts.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_mass_extent_screen_factorial.png"
+  },
+  "claim_limits": [
+    "The three coordinates were chosen after inspecting spent one-at-a-time sensitivity results.",
+    "The datasets and ordinary lens geometries are spent exploratory evidence.",
+    "CLASH acceleration targets and Tian baryonic profiles retain conventional reconstruction assumptions.",
+    "Fixed ordinary geometry isolates formula sensitivity but is not a new optimized lens fit.",
+    "The 64-setting grid performs model selection and is not a parameter-free prediction.",
+    "Solar diagnostics are analytic proxies rather than a full ephemeris likelihood."
+  ]
+}

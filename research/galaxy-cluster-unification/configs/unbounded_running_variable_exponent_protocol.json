@@ -1,0 +1,78 @@
+{
+  "protocol_version": "UNBOUNDED-RUNNING-VARIABLE-EXPONENT-0.1.0",
+  "frozen_utc": "2026-07-29T20:30:00Z",
+  "status": "frozen_before_variable_exponent_scores",
+  "family_label": "Universal baryon-conditioned exponent test",
+  "question": "Can a single bounded function that makes the curvature exponent depend on measured baryonic mass, local density, or distribution shape improve galaxy and cluster predictions without per-object gravity parameters?",
+  "equation": "g_pred = g_bar [1 + (T_star/(g_bar/r))^p(X)]^epsilon; p(X)=p0 exp(beta tanh(ln(X/X_star)))",
+  "sample": {
+    "bridge_folds": 5,
+    "bridge_seed": 20260801,
+    "bridge_objective": "equal-domain mean of equal-system mean squared log residual",
+    "SPARC": "131 galaxies; nuisance parameters fit on 2066 inner points and tested on 968 untouched outer points",
+    "raw_lensing": "RX J2129 image-position diagnostic for the three predeclared models; local density for raw profiles is the spherical derivative of the baryonic force profile"
+  },
+  "models": {
+    "curvature_variable_mass_power": {
+      "X": "spherical-equivalent enclosed baryonic mass in solar masses, M_eq=g_bar r^2/G",
+      "parameters": ["log10_T_star_s2", "p0", "beta", "log10_X_star", "epsilon"],
+      "bounds": [[-38.0, -24.0], [0.2, 4.0], [-1.2, 1.2], [8.0, 15.0], [0.001, 2.0]]
+    },
+    "curvature_variable_density_power": {
+      "X": "local baryonic volume density in g/cm^3",
+      "parameters": ["log10_T_star_s2", "p0", "beta", "log10_X_star", "epsilon"],
+      "bounds": [[-38.0, -24.0], [0.2, 4.0], [-1.2, 1.2], [-30.0, -20.0], [0.001, 2.0]]
+    },
+    "curvature_variable_shape_power": {
+      "X": "local baryonic density divided by spherical-equivalent mean enclosed baryonic density",
+      "parameters": ["log10_T_star_s2", "p0", "beta", "log10_X_star", "epsilon"],
+      "bounds": [[-38.0, -24.0], [0.2, 4.0], [-1.2, 1.2], [-4.0, 1.0], [0.001, 2.0]]
+    }
+  },
+  "optimization": {
+    "differential_evolution_maxiter": 220,
+    "differential_evolution_popsize": 14,
+    "boundary_fraction_tolerance": 0.005,
+    "Cassini_violation_penalty": 1000000.0
+  },
+  "solar_gates": {
+    "zero_gravitational_slip_PPN_gamma": 1.0,
+    "Cassini_gamma_one_sigma": 2.3e-5,
+    "maximum_fractional_coupling_change_limb_to_Saturn": 2.3e-5,
+    "maximum_Earth_orbit_fractional_change": 1e-10,
+    "interpretation": "This remains a phenomenological zero-slip proxy rather than a relativistic derivation. Cassini directly constrained gamma, not a running G."
+  },
+  "advance_gates": {
+    "bridge_equal_domain_RMSE_dex_max": 0.1383,
+    "BCG_equal_system_RMSE_dex_max": 0.15,
+    "cluster_equal_system_RMSE_dex_max": 0.18,
+    "SPARC_outer_RMSE_km_s_max": 14.583,
+    "Cassini_pass": true,
+    "Earth_orbit_pass": true,
+    "no_full_fit_parameter_at_boundary": true
+  },
+  "selection": {
+    "primary_rule": "fit all five universal gravity parameters only to the five-fold BCG+cluster bridge; SPARC is transfer-only",
+    "constant_exponent_control": "locked curvature_power result from UNBOUNDED-RUNNING-REFINEMENT-0.2.0",
+    "no_per_object_gravity_parameters": true,
+    "post_transfer_warning": "comparisons among these candidates become exploratory after SPARC inspection"
+  },
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "bridge_reference_report": "results/rar_sharp_coherence_rg_sweep/report.json",
+    "SPARC_protocol": "configs/sparc_independent_nuisance_refit_protocol.json",
+    "SPARC_reference_report": "results/sparc_independent_nuisance_refit/report.json",
+    "SPARC_raw": "data/raw/sparc",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "RXJ_profile": "results/sigma_action_exploration/radial_profiles.csv",
+    "raw_lensing_reference_report": "results/sigma_covariant_weak_field/report.json"
+  },
+  "outputs": {
+    "report": "results/unbounded_running_variable_exponent/report.json",
+    "bridge_predictions": "results/unbounded_running_variable_exponent/bridge_predictions.csv",
+    "SPARC_predictions": "results/unbounded_running_variable_exponent/sparc_predictions.csv",
+    "raw_lensing_predictions": "results/unbounded_running_variable_exponent/raw_lensing_predictions.csv",
+    "figure": "results/unbounded_running_variable_exponent/unbounded_running_variable_exponent.png",
+    "summary": "results/unbounded_running_variable_exponent/SUMMARY.md"
+  }
+}

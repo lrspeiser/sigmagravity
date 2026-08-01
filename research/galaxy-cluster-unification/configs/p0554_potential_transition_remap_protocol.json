@@ -1,0 +1,52 @@
+{
+  "protocol_version": "P0554-POTENTIAL-TRANSITION-REMAP-0.1.0",
+  "frozen_utc": "2026-08-01T07:05:00Z",
+  "status": "frozen_after-forensic-correlation-before-any-potential-transition-score",
+  "question": "Can one smooth baryonic-potential-dependent radial remap replace the failed constant direction and transfer across galaxies, cluster lensing, raw image positions, and the Solar System?",
+  "formula": {
+    "radial_scale": "ln(lambda(r))=A*tanh(ln(Phi_b(r)/Phi_*))",
+    "flux_remap": "F_X,new(<r)=F_X,parent(<r/lambda(r))",
+    "potential_depth": "Phi_b=|baryonic Newtonian potential|/c^2",
+    "fixed_pivot": 0.000002,
+    "fixed_sharpness": 1.0,
+    "one_new_universal_parameter": "signed log-scale amplitude A",
+    "domain_labels_used": false,
+    "exact_parent": "A=0"
+  },
+  "amplitude_grid": [-0.2, -0.15, -0.1, -0.075, -0.05, -0.03, -0.02, -0.01, -0.005, 0.0, 0.005, 0.01, 0.02, 0.03, 0.05, 0.075, 0.1, 0.15, 0.2],
+  "partitions": {
+    "rule": "reuse the frozen SHA256 object-name modulo-4 discovery/formula-holdout split",
+    "selection": "maximize the smaller discovery gain across equal-object SPARC rotation and derived CLASH acceleration, subject to all Solar proxies",
+    "raw_order": "freeze the amplitude before scoring all six raw strong-lens systems"
+  },
+  "raw_systems": ["RXJ2129", "MACS0329", "MACS0429", "MACS1115", "MACS1931", "RXJ1347"],
+  "inputs": {
+    "radial_protocol": "configs/p0554_radial_flux_remap_protocol.json",
+    "context_protocol": "configs/p0554_local_cross_domain_sensitivity_protocol.json",
+    "fixed_geometry": "results/p0554_route_softness_interaction/geometry.csv",
+    "raw_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "baryonic_profile": "data/raw/clash_tian2020/fig2.dat",
+    "RXJ1347_geometry": "results/p0554_baryonic_network_rxj1347_holdout/baseline_geometry.csv"
+  },
+  "outputs": {
+    "directory": "results/p0554_potential_transition_remap",
+    "scalar_scores": "scalar_scores.csv",
+    "partition_scores": "partition_scores.csv",
+    "raw_system_scores": "raw_system_scores.csv",
+    "raw_candidate_scores": "raw_candidate_scores.csv",
+    "raw_predictions": "raw_predictions.csv",
+    "raw_profiles": "raw_profiles.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_potential_transition_remap.png"
+  },
+  "claim_limits": [
+    "The potential pivot was inherited from the post-hoc P0554 law and cleanly separates most galaxy and cluster points, so this may behave like a smooth domain switch.",
+    "The discovery and formula-holdout partitions are not pristine because P0554 used these datasets earlier.",
+    "All six raw lens systems and ordinary geometries are spent exploratory evidence.",
+    "The local radial remap is phenomenological and is not a covariant field equation.",
+    "CLASH acceleration targets and baryonic profiles retain conventional reconstruction assumptions.",
+    "Solar diagnostics are analytic proxies, not a full ephemeris likelihood."
+  ]
+}

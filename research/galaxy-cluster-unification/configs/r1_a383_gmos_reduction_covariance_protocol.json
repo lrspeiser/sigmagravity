@@ -1,0 +1,176 @@
+{
+  "protocol_version": "R1B2-A383-GMOS-reduction-covariance-0.1",
+  "status": "frozen_after_raw_integrity_and_before_any_science_reduction_or_array_inspection",
+  "frozen_utc": "2026-07-27T07:00:30Z",
+  "selection_blind": true,
+  "system": "A383",
+  "purpose": "Test whether the four archive-QA Pass GMOS-S spectra support a covariance-complete stellar kinematic profile through 10.5 arcsec (33.27 kpc), fixed by the third observable strong-lens image before any A383 science array is read.",
+  "forbidden_inputs_at_freeze": [
+    "A383 science-array values or a continuum collapse",
+    "digitized values from any published A383 velocity-dispersion panel",
+    "any gravity, mass, dark-matter, negative-gravity, void, or fitted residual",
+    "any post-pixel change to the 10.5-arcsec support, spatial bins, fit windows, bootstrap construction, or pass thresholds"
+  ],
+  "prerequisite_reports": {
+    "metadata_feasibility": "results/r1_a383_gemini_feasibility/report.json",
+    "raw_acquisition": "results/r1_a383_gemini_acquisition/report.json",
+    "preidentified_image_radii_arcsec": [1.5811388300841898, 2.9154759474226504, 10.324727599312245]
+  },
+  "software_environment": {
+    "baseline_reduction_engine": "DRAGONS 4.2.2 in the existing isolated Python 3.12 conda environment",
+    "baseline_kinematic_engine": "pPXF 9.4.8",
+    "operating_environment": "WSL2 Linux bash",
+    "environment_manifest_required": true,
+    "commands_and_logs_must_be_retained": true,
+    "no_interactive_parameter_tuning": true
+  },
+  "raw_inputs": {
+    "directory": "data/raw/r1_a383_gemini",
+    "science_to_flat_arc_mapping": {
+      "S20071013S0038.fits": ["S20071013S0037.fits", "S20071013S0041.fits"],
+      "S20071013S0039.fits": ["S20071013S0040.fits", "S20071013S0041.fits"],
+      "S20071016S0037.fits": ["S20071016S0036.fits", "S20071016S0040.fits"],
+      "S20071016S0039.fits": ["S20071016S0038.fits", "S20071016S0040.fits"]
+    },
+    "flat_sensitivity_controls": ["S20071016S0041.fits"],
+    "night_bias_groups": {
+      "2007-10-10": ["S20071010S0138.fits", "S20071010S0139.fits", "S20071010S0140.fits", "S20071010S0141.fits", "S20071010S0142.fits"]
+    },
+    "bad_pixel_mask": {
+      "selected_filename": "bpm_20030101_gmos-s_EEV_22_full_3amp.fits",
+      "selected_sha256": "7284D844541F0483AE10540D457064A9CFC77DC14CEAC20371047F3316CDAEF0",
+      "selection": "Archive GMOS-S EEV full-frame 2x2 three-amplifier BPM dated 2003-01-01, preceding the October 2007 science and matching its exact detector label.",
+      "frozen_before_preprocessing": true
+    }
+  },
+  "detector_and_2d_reduction": {
+    "bias": "Overscan-correct and sigma-clipped-median combine all five frozen biases.",
+    "flat_arc": "Process each mapped GCAL flat and CuAr arc individually; also process the fifth predeclared flat as a sensitivity control.",
+    "science": "Bias subtract, flat correct, mosaic, wavelength calibrate, distortion correct, propagate variance/DQ, and cosmic-ray flag every exposure independently.",
+    "sky_windows_arcsec_from_continuum_center": [[-50.0, -35.0], [35.0, 50.0]],
+    "sky_sensitivity_windows_arcsec": [
+      [[-45.0, -30.0], [30.0, 45.0]],
+      [[-55.0, -40.0], [40.0, 55.0]]
+    ],
+    "sky_fit": "Per-wavelength inverse-variance linear spatial model with three iterations of 4-sigma clipping.",
+    "combination": "Register by continuum centroid only, resample once, inverse-variance combine with 4-sigma clipping, and retain all four individual calibrated frames."
+  },
+  "calibration_acceptance": {
+    "science_2d_products_required": 4,
+    "minimum_inputs_master_bias": 5,
+    "maximum_master_bias_overscan_residual_absolute_mean_adu": 1.0,
+    "maximum_master_bias_overscan_residual_rms_adu": 5.0,
+    "maximum_flat_unmasked_fraction_outside_0p8_to_1p2": 0.05,
+    "minimum_cuar_lines_per_arc": 12,
+    "maximum_wavelength_solution_rms_angstrom": 0.2,
+    "maximum_continuum_centroid_range_between_exposures_arcsec": 0.3,
+    "minimum_unmasked_exposure_coverage_per_combined_pixel": 3,
+    "maximum_sky_residual_absolute_median_over_robust_sigma": 0.25,
+    "failure_policy": "Any failed threshold ends this reconstruction. Do not remove frames or change apertures, windows, mappings, or thresholds after a velocity or dispersion is seen."
+  },
+  "spatial_extraction": {
+    "photometric_coordinate_zero": {
+      "ra_deg": 42.01408333333333,
+      "dec_deg": -3.529138888888889,
+      "source": "Loubser et al. 2018 Table 1: 02:48:03.38, -03:31:44.9"
+    },
+    "continuum_center_fit": {
+      "joint_model": "Shared Moffat center, alpha, and beta with one nonnegative amplitude and constant per exposure",
+      "continuum_window_angstrom": [4800.0, 5400.0],
+      "fit_support_arcsec": [-15.0, 15.0],
+      "center_bound_arcsec": [-2.0, 2.0],
+      "alpha_bound_arcsec": [0.05, 6.0],
+      "beta_bound": [1.1, 10.0]
+    },
+    "common_wavelength_range_angstrom": [4550.0, 5600.0],
+    "common_wavelength_step_angstrom": 0.9,
+    "common_signed_spatial_range_arcsec": [-12.0, 12.0],
+    "common_signed_spatial_step_arcsec": 0.1454,
+    "signed_bin_edges_arcsec": [-10.5, -7.0, -4.5, -2.0, -0.3, 0.3, 2.0, 4.5, 7.0, 10.5],
+    "signed_bins": 9,
+    "kpc_per_arcsec": 3.1688907,
+    "maximum_support_kpc": 33.27335235,
+    "required_realized_support_kpc": 32.717928,
+    "minimum_valid_pixel_fraction_per_bin": 0.7,
+    "minimum_median_signal_to_noise_per_angstrom_per_signed_bin": 5.0,
+    "signed_bin_retention": "All nine signed bins, including both 7.0-10.5 arcsec outer bins, must pass S/N and valid-pixel gates.",
+    "symmetrized_output": "After side-consistency gates, generalized least-squares combine four opposite-side pairs plus the central bin into five radial bins with a full 5x5 covariance."
+  },
+  "stellar_kinematic_fit": {
+    "redshift_initial": 0.190,
+    "observed_fit_range_angstrom": [4600.0, 5550.0],
+    "template_family": "XSL",
+    "template_path": "data/raw/r1_ppxf_templates/spectra_xsl_9.0.npz",
+    "template_sha256": "B8BEE334EE1705A0D4E7FF0F161990C248D68AC1B8C8EB138B0D8C05CF37D853",
+    "lsf": "Measure an arc-line FWHM spline in 200-Angstrom bins and forward-convolve XSL templates; never apply a negative correction.",
+    "moments": 2,
+    "initial_sigma_km_s": 300.0,
+    "additive_polynomial_degree": 8,
+    "multiplicative_polynomial_degree": 0,
+    "fixed_masks": [
+      "all nonzero DQ and nonpositive variance pixels",
+      "chip-gap and combined-coverage pixels with fewer than three exposures",
+      "5577 Angstrom sky line plus or minus 8 Angstrom",
+      "pixels exceeding a local 21-pixel variance median by 6 robust sigma"
+    ]
+  },
+  "covariance_protocol": {
+    "replicates": 200,
+    "random_seed": 383,
+    "joint_resampling": "Resample four calibrated exposures with replacement; use shared eight-pixel spectral Rademacher blocks across all signed bins; perturb continuum center, wavelength solution, and LSF from their pre-kinematic covariances.",
+    "pre_registered_systematic_grid": {
+      "additive_polynomial_degree": [6, 8, 10],
+      "observed_fit_range_angstrom": [[4550.0, 5500.0], [4600.0, 5550.0], [4700.0, 5550.0]],
+      "sky_window_variant": ["inner", "baseline", "outer"]
+    },
+    "minimum_successful_replicates": 180,
+    "positive_semidefinite_required": true
+  },
+  "profile_acceptance": {
+    "minimum_finite_signed_bins": 9,
+    "minimum_finite_symmetrized_radial_bins": 5,
+    "both_outer_signed_bins_required": true,
+    "minimum_realized_support_arcsec": 10.324727599312245,
+    "minimum_realized_support_kpc": 32.717928,
+    "minimum_lens_images_inside_realized_support": 3,
+    "minimum_independent_lens_families_inside_realized_support": 2,
+    "maximum_fractional_sigma_uncertainty_each_retained_radial_bin": 0.3,
+    "maximum_median_opposite_side_velocity_difference_km_s": 100.0,
+    "maximum_any_opposite_side_velocity_difference_km_s": 150.0,
+    "maximum_median_opposite_side_sigma_difference_fraction": 0.2,
+    "maximum_any_opposite_side_sigma_difference_fraction": 0.35,
+    "maximum_sigma_shift_fraction_over_systematic_grid": 0.1,
+    "maximum_covariance_diagonal_fractional_change_between_bootstrap_halves": 0.2,
+    "maximum_sigma_error_fractional_change_between_bootstrap_halves": 0.15,
+    "covariance_psd_relative_eigenvalue_tolerance": 1e-10
+  },
+  "stage_outcomes": [
+    {
+      "stage": "A383-P1",
+      "outcome": "All 17 raw/calibration/BPM files are recognized without header edits under exact DRAGONS 4.2.2/pPXF 9.4.8.",
+      "advance_if": "Every recognition, version, and BPM checksum gate passes.",
+      "rethink_if": "Stop with an environment/calibration shortfall."
+    },
+    {
+      "stage": "A383-P2",
+      "outcome": "Four independent calibrated 2-D spectra plus three frozen sky variants.",
+      "advance_if": "All bias, flat, wavelength, centroid, coverage, and sky thresholds pass.",
+      "rethink_if": "Any numerical calibration or center/sky threshold fails; do not remove an exposure."
+    },
+    {
+      "stage": "A383-P3",
+      "outcome": "Nine signed bins through 10.5 arcsec, five radial bins, a 200-replicate covariance, and the frozen 27-run systematic grid.",
+      "advance_if": "Both outer bins and every uncertainty, side-consistency, covariance, and <=10% systematic-shift gate pass, leaving images 1.2, 1.1, and 5.1 inside accepted support.",
+      "rethink_if": "Any outer bin, stability gate, or 10.325-arcsec overlap condition fails; retain A383 as a failed attempt and move to the next residual-blind candidate."
+    }
+  ],
+  "authorization": {
+    "audit_environment": true,
+    "execute_calibration_reduction_after_P1_gate": true,
+    "execute_science_reduction_after_calibration_gate": true,
+    "derive_stellar_kinematics_after_P2_gate": true,
+    "derive_dynamical_or_weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

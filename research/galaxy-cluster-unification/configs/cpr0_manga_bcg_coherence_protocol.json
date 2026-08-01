@@ -1,0 +1,86 @@
+{
+  "protocol_version": "CPR0-0.2-measured-coherence-bcg",
+  "frozen_utc": "2026-07-28T05:42:00Z",
+  "status": "frozen after predictor-only join audit and before reading BCG acceleration outcomes",
+  "question": "Does an outcome-blind measured coherence proxy improve transfer or held-out prediction when CPR0 uses a local baryonic density rather than mean enclosed density?",
+  "sample": {
+    "acceleration_table": "data/derived/manga_bcg_tian2024.csv",
+    "coherence_catalog": "data/raw/manga_dynpop/SDSSDR17_MaNGA_JAM.fits",
+    "join_key": "plateifu",
+    "required_match_fraction": 1.0,
+    "selection": [
+      "DynPop Qual >= 0",
+      "DynPop drp3qual == 1",
+      "finite 0 <= Lambda_Re <= 1",
+      "finite positive radius, effective radius, Sersic n, gbar, and gobs"
+    ],
+    "predictor_only_audit": {
+      "published_bcg_rows": 50,
+      "matched_dynpop_rows": 50,
+      "expected_selected_rows": 44,
+      "selected_lambda_re_median": 0.095
+    }
+  },
+  "coherence": {
+    "observable": "DynPop Lambda_Re, beam-corrected projected specific stellar angular momentum inside the elliptical half-light isophote",
+    "mapping": "C = clip(Lambda_Re, 0, 1); w(C)=3 C^2-2 C^3",
+    "leakage_rule": "No gobs, gbar residual, halo fit, missing-mass estimate, or CPR0 prediction enters C.",
+    "limitation": "Lambda_Re is a projected proxy for, not an exact measurement of, C_kin=v_stream^2/(v_stream^2+tr sigma^2); it shares the MaNGA kinematic data source with the Jeans outcome."
+  },
+  "local_density": {
+    "shape": "Prugniel-Simien deprojection of the published Sersic n and Re",
+    "normalization": "Mbar(<r)=gbar*r^2/G at the published last kinematic radius",
+    "unit": "g cm^-3",
+    "declared_systematics": [
+      "Prugniel-Simien is an analytic approximation to exact Sersic deprojection",
+      "spherical symmetry",
+      "constant stellar mass-to-light ratio",
+      "reported gas fraction is below 3.2 percent",
+      "a 20 percent density-normalization sensitivity is reported"
+    ]
+  },
+  "fixed_parameters": {
+    "sigma_response_amplitude": 1.1725,
+    "g_dagger_m_s2": 9.60e-11,
+    "published_rg_sets": {
+      "disk_galaxies": {"epsilon_0": 0.666, "log10_rho_c_g_cm3": -24.54, "Q": 1.79},
+      "elliptical_galaxies": {"epsilon_0": 0.089, "log10_rho_c_g_cm3": -24.25, "Q": 0.47},
+      "MACS1206": {"epsilon_0": 0.18, "log10_rho_c_g_cm3": -25.25, "Q": 5.21},
+      "AbellS1063": {"epsilon_0": 0.13, "log10_rho_c_g_cm3": -25.383, "Q": 23.62}
+    }
+  },
+  "heldout_test": {
+    "folds": 5,
+    "fold_seed": 20260728,
+    "split_unit": "plateifu (one row per system)",
+    "fit_objective": "unweighted training mean squared log10 acceleration residual",
+    "models": [
+      "constant epsilon cross-validated control",
+      "Sigma B cross-validated control",
+      "density-only RG cross-validated",
+      "measured-coherence CPR0 cross-validated with fixed Sigma B=1.1725"
+    ],
+    "bounds": {
+      "constant_epsilon": [0.03, 1.0],
+      "Sigma_B": [0.0, 30.0],
+      "epsilon_0": [0.03, 0.9],
+      "log10_rho_c_g_cm3": [-28.0, -20.0],
+      "Q": [0.1, 30.0]
+    }
+  },
+  "advance_gates": {
+    "selected_systems_min": 40,
+    "best_zero_fit_transfer_RMSE_dex_max": 0.15,
+    "CPR0_CV_RMSE_improvement_vs_RG_min_dex": 0.02,
+    "CPR0_CV_RMSE_improvement_vs_constant_epsilon_min_dex": 0.02,
+    "CPR0_CV_absolute_mean_residual_dex_max": 0.05,
+    "CPR0_CV_absolute_residual_lambda_correlation_max": 0.25,
+    "log10_rho_c_fold_range_max_dex": 1.5
+  },
+  "claim_boundary": [
+    "This is a spherical one-radius-per-BCG diagnostic, not a field-equation solution.",
+    "The BCG outcome is dynamics, not lensing; lensing remains a separate required track.",
+    "A held-out fit tests empirical predictiveness, not parameter universality across galaxies and clusters.",
+    "Failure of Lambda_Re does not falsify every possible coherence observable, but it rejects this predeclared mapping."
+  ]
+}

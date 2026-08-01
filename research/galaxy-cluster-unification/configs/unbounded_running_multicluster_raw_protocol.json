@@ -1,0 +1,84 @@
+{
+  "protocol_version": "UNBOUNDED-RUNNING-MULTICLUSTER-RAW-0.4.0",
+  "frozen_utc": "2026-07-29T08:55:00Z",
+  "status": "frozen_before_multicluster_raw_scores",
+  "purpose": "Transfer two locked unbounded curvature-running laws to spectroscopic multiple-image coordinates in every Caminha2019/Tian2020 overlap cluster without fitting a gravity amplitude.",
+  "pre_score_disclosure": [
+    "The universal constants were selected after the BCG+Tian bridge, SPARC transfer, and RXJ2129 raw pilot; RXJ2129 is a spent diagnostic.",
+    "The other four predictive image likelihoods have not been scored with either locked law, but their systems contributed Tian derived-field rows to the bridge. This is raw-observable transfer, not an external-system validation.",
+    "RXJ1347 has three two-image families and therefore cannot support a within-family predictive holdout; it is descriptive only.",
+    "The Tian baryonic profiles are independent of these coordinate residuals but are sparse spherical reconstructions without full component covariance.",
+    "The zero-slip pseudo-elliptical potential and external shear are diagnostic structural closures, not derived field equations."
+  ],
+  "models": {
+    "curvature_power_p2": {
+      "running_model": "curvature_power",
+      "parameters": [-28.30851641358452, 2.0, 0.12124817480126633],
+      "gravity_parameters_fit_to_cluster": 0
+    },
+    "curvature_additive_alpha10": {
+      "running_model": "curvature_additive_power",
+      "parameters": [-29.25048647482217, 1.4591902794259402, 0.05790824504656011, 10.0],
+      "gravity_parameters_fit_to_cluster": 0
+    }
+  },
+  "comparators": {
+    "baryons_GR": {"gravity_parameters_fit_to_cluster": 0},
+    "fixed_simple_MOND": {"a0_m_s2": 1.2e-10, "gravity_parameters_fit_to_cluster": 0},
+    "GR_plus_cluster_halo": {"object_specific_halo_parameters": 6}
+  },
+  "systems": [
+    {"system": "MACS J0329.7-0211", "label": "MACS0329", "lens_redshift": 0.450, "center_ra_deg": 52.4232083333, "center_dec_deg": -2.1962027778, "images": 23, "families": 9, "position_sigma_arcsec": 0.5, "predictive_status": "raw_observable_unseen_same_bridge_system"},
+    {"system": "MACS J0429.6-0253", "label": "MACS0429", "lens_redshift": 0.399, "center_ra_deg": 67.4, "center_dec_deg": -2.8852166667, "images": 7, "families": 2, "position_sigma_arcsec": 0.5, "predictive_status": "raw_observable_unseen_same_bridge_system"},
+    {"system": "MACS J1115.9+0129", "label": "MACS1115", "lens_redshift": 0.355, "center_ra_deg": 168.9662916667, "center_dec_deg": 1.4986111111, "images": 6, "families": 2, "position_sigma_arcsec": 0.5, "predictive_status": "raw_observable_unseen_same_bridge_system"},
+    {"system": "MACS J1931.8-2635", "label": "MACS1931", "lens_redshift": 0.352, "center_ra_deg": 292.9570833333, "center_dec_deg": -26.5756166667, "images": 19, "families": 7, "position_sigma_arcsec": 0.476751, "predictive_status": "raw_observable_unseen_same_bridge_system"},
+    {"system": "RX J1347.5-1145", "label": "RXJ1347", "lens_redshift": 0.451, "center_ra_deg": 206.8775416667, "center_dec_deg": -11.7525916667, "images": 6, "families": 3, "position_sigma_arcsec": 0.5, "predictive_status": "descriptive_no_family_holdout"},
+    {"system": "RX J2129.7+0005", "label": "RXJ2129", "lens_redshift": 0.234, "center_ra_deg": 322.4165, "center_dec_deg": 0.0892138889, "images": 22, "families": 7, "position_sigma_arcsec": 0.196272, "predictive_status": "spent_prior_raw_diagnostic"}
+  ],
+  "split": {
+    "rule": "Within every family containing at least three images, hold out the lexicographically last image; train on every other image. Families with two images remain training-only.",
+    "minimum_training_images_per_family": 2,
+    "minimum_predictive_families_per_system": 2
+  },
+  "baryonic_profile": {
+    "input": "data/raw/clash_tian2020/fig2.dat",
+    "interpolation": "log radius versus log acceleration",
+    "inner_tail": "continue first measured logarithmic slope",
+    "outer_tail": "gbar proportional to r^-2 beyond last anchor"
+  },
+  "photon_and_environment_closure": {
+    "gravitational_slip": 0.0,
+    "lensing_multiplier": 1.0,
+    "primary_isolated_tail_cutoff_kpc": 1000000.0,
+    "cluster_environment_sensitivity_cutoff_kpc": 3000.0,
+    "interpretation": "The primary literal isolated-tail integral is bracketed by a 3 Mpc cluster-environment truncation because the phenomenology has no cosmological embedding."
+  },
+  "geometry": {
+    "fitted_per_system_on_training_only": ["axis_ratio_q", "position_angle", "center_x", "center_y", "external_shear_gamma1", "external_shear_gamma2"],
+    "source_positions_profiled_per_family": true,
+    "gravity_or_lensing_amplitude_fit": false
+  },
+  "cosmology": {"H0_km_s_Mpc": 70.0, "Omega_m": 0.27, "reference_source_redshift": 2.0},
+  "optimization": {"multi_starts": 8, "random_seed": 20260801, "maximum_function_evaluations": 3000},
+  "advance_gates": {
+    "all_candidate_heldout_roots_converged": true,
+    "equal_system_heldout_radial_RMS_arcsec_max": 0.75,
+    "equal_system_heldout_RMS_lower_than_fixed_simple_MOND": true,
+    "candidate_to_compact_halo_equal_system_RMS_ratio_max": 1.25,
+    "candidate_no_geometry_parameter_at_boundary": true,
+    "primary_to_3Mpc_cutoff_RMS_fractional_change_max": 0.20
+  },
+  "inputs": {
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "coordinate_covariances": "data/derived/r1_clash_caminha2019_coordinate_covariances.npz",
+    "sensitivity_report": "results/unbounded_running_sensitivity/report.json"
+  },
+  "outputs": {
+    "report": "results/unbounded_running_multicluster_raw/report.json",
+    "predictions": "results/unbounded_running_multicluster_raw/predictions.csv",
+    "parameters": "results/unbounded_running_multicluster_raw/fitted_geometry.csv",
+    "radial_profiles": "results/unbounded_running_multicluster_raw/radial_profiles.csv",
+    "figure": "results/unbounded_running_multicluster_raw/multicluster_raw.png",
+    "summary": "results/unbounded_running_multicluster_raw/SUMMARY.md"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "protocol_version": "R1B2-RXJ2129-satellite-membership-0.2-source-count-corrected",
+  "status": "source_count_corrected_before_muse_molino_crossmatch_execution",
+  "purpose": "Determine whether public MUSE redshifts provide enough labeled Molino photometry to support a normalized RX J2129 satellite-membership likelihood.",
+  "freeze_date": "2026-07-26",
+  "disclosure": "The Jauzac prose count of 158 redshifts and 43 members, several pre-existing Molino candidate rows, and the absence of per-object BPZ posterior files in the official MAST directory were known before the initial freeze. The first parser stopped before crossmatching because the active appendix contains 156 rows, not 158. Six additional rows are commented out in the source and are not active table entries. This corrected freeze requires all 156 active rows; crossmatch identities, match counts, class balance, and classifier performance remain uninspected.",
+  "inputs": {
+    "jauzac_source": "data/raw/r1_replacement_search_sources/jauzac2021_three_muse_cluster_lenses/muse_clusters.tex",
+    "molino_catalog": "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_ir_rxj2129_cat-molino.txt",
+    "candidate_ledger": "data/derived/r1_rxj2129_satellite_candidates.csv"
+  },
+  "labels": {
+    "expected_jauzac_active_table_redshifts": 156,
+    "published_prose_redshift_count": 158,
+    "commented_source_rows": 6,
+    "source_count_inconsistency": "The prose reports 158 extracted sources, while the active machine-readable appendix has 156 rows. Six commented rows are excluded and do not reconcile the count. The active table controls this audit.",
+    "quality_flags": [2, 3],
+    "cluster_member_redshift_interval_inclusive": [0.2145, 0.2410],
+    "exclude_molino_point_sources": true
+  },
+  "crossmatch": {
+    "maximum_separation_arcsec": 0.5,
+    "rule": "For each MUSE source choose the nearest Molino object, retain matches within 0.5 arcsec, then enforce one Molino object per label by keeping the smallest-separation match.",
+    "center_ra_deg": 322.41651,
+    "center_dec_deg": 0.08923,
+    "inner_diagnostic_radius_arcsec": 30.0
+  },
+  "training_viability_thresholds": {
+    "unique_extended_matches_minimum": 100,
+    "member_matches_minimum": 25,
+    "nonmember_matches_minimum": 50,
+    "unique_match_fraction_minimum": 0.95,
+    "labeled_matches_inside_30arcsec_minimum": 50,
+    "member_matches_inside_30arcsec_minimum": 15
+  },
+  "outputs": {
+    "matched_training_ledger": "data/derived/r1_rxj2129_muse_molino_training.csv",
+    "report": "results/r1_rxj2129_satellite_membership/crossmatch_report.json",
+    "diagnostic": "results/r1_rxj2129_satellite_membership/crossmatch_diagnostic.png"
+  },
+  "authorization": {
+    "crossmatch_audit": true,
+    "membership_classifier_fit": false,
+    "satellite_mass_likelihood": false,
+    "lens_residual_read": false,
+    "gravity_response_fit": false,
+    "strict_r1_ready": false
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "protocol_version": "R1A2-a2261-observable-0.1",
+  "frozen_before_local_catalog_ingest": true,
+  "system": "Abell 2261",
+  "purpose": "Test whether a newly inventoried resolved-BCG dynamics host also supplies independent, observable-level strong-lens constraints over the same radial support. This is an acquisition and identifiability test, not a gravity fit.",
+  "selection_blinding": "A2261 was selected because it independently appears in the 32-host Loubser dynamics source and the 20-system CLASH sample. No gravity residual or alternative-theory fit was inspected.",
+  "center": {
+    "ra_hms": "17:22:27.23",
+    "dec_dms": "+32:07:57.7",
+    "origin": "Loubser et al. 2018 BCG coordinates",
+    "common_center_required": true
+  },
+  "distance_conversion": {
+    "cluster_redshift": 0.224,
+    "kpc_per_arcsec": 3.59,
+    "origin": "Coe et al. 2012 states 1 arcsec approximately 3.59 kpc at z=0.225 in its declared cosmology",
+    "role": "radial-support bookkeeping only; it is not a gravity target"
+  },
+  "dynamics_support": {
+    "one_sided_radius_kpc": 15.0,
+    "origin": "typical one-sided support stated for the Loubser et al. radial profiles",
+    "machine_readable_profile": false,
+    "published_covariance": false
+  },
+  "lens_sources": {
+    "primary_catalog": "Coe et al. 2012, ApJ 757, 22, CDS J/ApJ/757/22 table3",
+    "expected_image_count": 30,
+    "expected_family_count": 12,
+    "catalog_coordinates": "HST image positions in ICRS/J2000",
+    "catalog_redshift_policy": "Use only the starred best-isolated arc's photometric redshift and its published asymmetric 95-percent interval as the family-level independent redshift summary. For family 4, replace the photometric summary by the later MOSFIRE spectroscopic redshift z=3.377 from Rydberg et al. 2017.",
+    "forbidden_as_input": [
+      "LensPerfect zLens values",
+      "published GR-derived mass maps",
+      "published NFW or other mass-profile summaries",
+      "counterimage positions predicted by a lens model"
+    ]
+  },
+  "pre_registered_gates": {
+    "catalog_integrity": {
+      "exact_image_count": 30,
+      "exact_family_count": 12,
+      "unique_coordinate_rows_required": true
+    },
+    "observable_likelihood": {
+      "minimum_families_with_lens_independent_redshift": 3,
+      "minimum_images_in_those_families": 9,
+      "stated_or_reconstructed_positional_error_required": true,
+      "coordinate_covariance_required": true
+    },
+    "same_radius_bridge": {
+      "minimum_images_inside_dynamics_support": 3,
+      "minimum_families_inside_dynamics_support": 2,
+      "minimum_structural_radial_rank_upper_bound": 3
+    },
+    "strict_readiness": {
+      "complete_machine_readable_dynamics_profile_required": true,
+      "dynamics_covariance_required": true,
+      "complete_baryonic_profiles_required": true,
+      "observable_likelihood_gate_required": true,
+      "same_radius_bridge_gate_required": true
+    }
+  },
+  "failure_policy": "Keep the catalog as a valid CLASH observable acquisition, but do not promote A2261 to the same-system response sample, fit a Weyl response, infer a mass map, or relax the 15-kpc overlap requirement.",
+  "authorization": {
+    "download_and_normalize_observables": true,
+    "compute_geometry_and_gate_outcomes": true,
+    "fit_lens_mass_model": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

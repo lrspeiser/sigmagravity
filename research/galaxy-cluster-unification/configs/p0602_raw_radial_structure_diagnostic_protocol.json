@@ -1,0 +1,50 @@
+{
+  "protocol_version": "P0602-RAW-RADIAL-STRUCTURE-DIAGNOSTIC-0.1.0",
+  "frozen_utc": "2026-08-01T18:12:00Z",
+  "status": "post_P0601_score_diagnostic_only_RXJ2129_heldout_is_spent",
+  "question": "Is the P0601 raw-lensing miss controlled by scalar amplitude or by radial structure within the strong-lensing annulus?",
+  "base_formula": "g=RAR(g_b,a0)*[1+A*S4*P(chi)*W(r)]",
+  "base_constants": {
+    "a0_m_s2": 1.2e-10,
+    "amplitude_A": 3.0,
+    "potential_threshold_chi": 1e-6,
+    "potential_power": 4.0,
+    "shape_midpoint": 0.6,
+    "shape_width": 0.1,
+    "source_acceleration_gate_power": 4.0
+  },
+  "one_at_a_time_variants": {
+    "baseline": ["P0599"],
+    "amplitude_A": [1.0, 2.0, 4.0],
+    "potential_threshold_chi": [5e-7, 2e-6, 4e-6],
+    "potential_power": [1.0, 2.0],
+    "carrier": ["uniform", "path_normalized", "potential_gradient_normalized", "mass_growth_normalized"],
+    "bounded_radial_power_eta": [-0.5, -0.25, 0.25, 0.5]
+  },
+  "candidate_count": 17,
+  "carrier_bounds": [0.1, 3.0],
+  "validation": {
+    "optimization_starts_per_variant": 1,
+    "initial_geometry": "P0601 best-fit geometry",
+    "selection_metric": "training image RMS only",
+    "heldout_status": "reported only as spent posthoc diagnostic",
+    "gravity_parameters_fit_to_RXJ2129": 0
+  },
+  "outputs": {
+    "directory": "results/p0602_raw_radial_structure_diagnostic",
+    "scores": "variant_scores.csv",
+    "profiles": "radial_profiles.csv",
+    "predictions": "image_predictions.csv",
+    "parameters": "fitted_parameters.csv",
+    "impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0602_raw_radial_structure_diagnostic.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "Every RX J2129 image has now been inspected; heldout scores are diagnostic and cannot confirm a selected variant.",
+    "One optimization start is sufficient for local response ranking around the P0601 geometry but not a global model comparison.",
+    "The carriers are phenomenological probes of field structure, not derived field equations.",
+    "Any promising carrier must be frozen and tested on another raw cluster before promotion."
+  ]
+}

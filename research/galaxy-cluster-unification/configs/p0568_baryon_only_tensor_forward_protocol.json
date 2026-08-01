@@ -1,0 +1,93 @@
+{
+  "protocol_version": "P0568-BARYON-ONLY-TENSOR-FORWARD-0.1.0",
+  "frozen_utc": "2026-08-01T00:45:00Z",
+  "status": "frozen_before_any_new_baryon_tensor_forward_map_score",
+  "question": "Can a small tensor computed only from baryonic map geometry predict normalized cluster convergence morphology, and which tiny operator changes have the largest transferable effect?",
+  "relationship_to_prior_work": {
+    "p0567": "P0567 proved only pointwise inverse feasibility using the target lens field. P0568 never uses a target map to construct its tensor or prediction.",
+    "member_tidal_metric": "Earlier member-only tidal tests scored raw multiple-image positions and selected zero coupling. P0568 is a distinct convergence-morphology compression audit; it cannot overturn that stronger raw-lensing failure.",
+    "tidal_spherical_proxy": "The spherical amplitude proxy already failed joint SPARC and CLASH tests. P0568 tests directional map information and retains that failure as a cross-domain comparator.",
+    "novelty": "No originality claim. This is a phenomenological weak-field constitutive screen."
+  },
+  "weak_field_screen": {
+    "equation": "div[(I+t*Q_b) grad(Phi)]=Sigma_b",
+    "first_order": "laplacian(Phi)=Sigma_b-t*div[Q_b grad(Phi_N)]+O(t^2)",
+    "positive_domain": "Every Q_b is rescaled to spectral radius at most one and abs(t)<=0.9, so I+t*Q_b remains positive definite.",
+    "prediction": "clip the first-order apparent convergence at zero and normalize it inside 250 kpc",
+    "parameters": "one universal signed coupling t plus one universal source-smoothing width; no cluster-specific gravity parameters"
+  },
+  "tensor_families": {
+    "field_aligned": "unit traceless spin-2 tensor aligned with the Newtonian baryonic acceleration",
+    "gradient_aligned": "unit traceless spin-2 tensor aligned with the baryonic surface-density gradient",
+    "tidal_full": "normalized traceless Hessian of the Newtonian baryonic potential",
+    "tidal_low_density": "tidal_full multiplied by B50/(B+B50), where B50 is the within-map positive median fixed by the baryon map",
+    "isotropic_low_density": "identity multiplied by B50/(B+B50)",
+    "tidal_gradient_blend": "equal pre-normalization blend of tidal_full and gradient_aligned",
+    "noncircular_tidal": "tidal_full after subtracting its circular spin-2 mean at each radius",
+    "noncircular_gradient": "gradient_aligned after subtracting its circular spin-2 mean at each radius",
+    "noncircular_blend": "equal blend of noncircular_tidal and noncircular_gradient"
+  },
+  "grids": {
+    "source_smoothing_kpc": [20.0, 50.0, 75.0, 100.0],
+    "coupling_t": [-0.9, -0.75, -0.6, -0.45, -0.3, -0.15, 0.0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9],
+    "central_null_width_kpc": [50.0, 75.0, 100.0, 150.0, 200.0],
+    "grid_pixels": 256,
+    "grid_spacing_kpc": 10.0,
+    "score_radius_kpc": 250.0,
+    "tensor_taper_start_kpc": 300.0,
+    "tensor_taper_end_kpc": 400.0
+  },
+  "validation": {
+    "development_systems": ["A2163", "A3192", "ACT-CL J0102-4915", "CL J0152.7-1357", "MACS J0035.4-2015", "MACS J0257.1-2325", "MACS J0553.4-3342"],
+    "locked_holdout_systems": ["RXC J0032.1+1808", "RXC J0142.9+4438", "RXC J0600.1-2007"],
+    "holdout_caveat": "The split is prospective only to P0568; all systems are globally spent by earlier project analyses.",
+    "selection": "Choose one family, t, and width by minimum equal-system mean Jensen-Shannon divergence on the seven development systems only.",
+    "primary_target": "mean of 100 Lenstool convergence realizations after the frozen P0567 background subtraction, positive clipping, and normalization",
+    "method_control": "score the locked prediction against GLAFIC best maps with no reselection",
+    "uncertainty": "score the locked prediction against all 100 Lenstool realizations in every system",
+    "primary_metric": "Jensen-Shannon divergence",
+    "secondary_metrics": ["Pearson correlation", "normalized RMSE", "centroid offset kpc"]
+  },
+  "cross_domain": {
+    "galaxy_data": "968 outer-holdout points in 131 SPARC galaxies with frozen inner-radius nuisance values",
+    "galaxy_proxy": "For full tensors use spherical radial eigenvalue q=1 and K_r=1+t*S_a*q; for explicitly noncircular tensors q=0 in the axisymmetric limit. This is a conservative structural proxy, not a disk PDE solution.",
+    "solar_gate": "S_a=a0^2/(a0^2+g_b^2), with a0=1.2e-10 m/s^2",
+    "solar_tests": "maximum fractional force from 1.6 Solar radii to Saturn, Earth fraction, and first-order Mercury precession",
+    "comparators": "fixed RAR outer RMSE 10.348 km/s; Newtonian baryon-only score is recomputed on the same frozen SPARC rows",
+    "noncircular_truth": "The noncircular tensors are numerically checked on centered circular source maps rather than merely declared zero."
+  },
+  "advance_gates": {
+    "cluster_holdout_improvement_vs_best_local_fraction": 0.10,
+    "cluster_holdout_improvement_vs_central_null_fraction": 0.05,
+    "SPARC_outer_RMSE_km_s_max": 10.8,
+    "Cassini_fractional_limit": 2.3e-5,
+    "Earth_fractional_limit": 1.0e-10,
+    "Mercury_mas_per_century_limit": 3.1,
+    "per_cluster_gravity_parameters": 0
+  },
+  "inputs": {
+    "p0567_protocol": "configs/p0567_baryon_flux_tensor_backtrack_protocol.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "spherical_proxy_report": "results/tidal_tensor_spherical_proxy/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0568_baryon_only_tensor_forward",
+    "candidate_scores": "candidate_scores.csv",
+    "system_scores": "system_scores.csv",
+    "family_impacts": "family_impacts.csv",
+    "uncertainty": "uncertainty.csv",
+    "cross_domain": "cross_domain.csv",
+    "numerical_audit": "numerical_audit.csv",
+    "report": "report.json",
+    "figure": "p0568_baryon_only_tensor_forward.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The baryon maps contain member-galaxy F160W light but omit hot gas and diffuse intracluster light.",
+    "Normalized convergence morphology does not test absolute lensing strength.",
+    "The target maps are standard-GR parametric lens reconstructions, not raw shear or image positions.",
+    "The field solve is first order in t and clips negative apparent-convergence pixels for comparison to the frozen positive target.",
+    "The galaxy transfer is a spherical radial proxy; only explicitly noncircular families have an exact axisymmetric null.",
+    "Earlier exact raw-lensing failure remains authoritative even if a family improves this weaker map-shape target."
+  ]
+}

@@ -1,0 +1,5 @@
+parameter,galaxy_impact_span_km_s,cluster_impact_span_dex,best_galaxy_level,best_cluster_level
+invariant_power,0.9524458970860508,0.13834041585574702,1.2,0.6
+photon_extra_multiplier,0.0,0.07037774230588928,1.0,2.0
+secondary_path_ratio_power,1.2751935208841534,0.03766383248368488,0.25,0.5
+invariant_scale,1.6953478758061777,0.013903512858131878,2e-06,2e-06

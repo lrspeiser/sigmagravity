@@ -1,0 +1,80 @@
+{
+  "protocol_version": "P0554-MACS1931-COMPANION-AUDIT-0.1.0",
+  "frozen_utc": "2026-07-31T23:55:00Z",
+  "status": "frozen_after_global_root_locations_before_any_hst_pixel_or_companion_photometry_inspection",
+  "question": "Do the extra MACS1931 family-2 image roots predicted by the five-root P0554 variants coincide with a published counterimage or a detectable source in the existing CLASH F160W mosaic?",
+  "selection": {
+    "system": "MACS1931",
+    "source_family": 2,
+    "reference_image": "2c",
+    "formula_selection": "all variants with five unique roots in the frozen P0554 caustic-margin output",
+    "anchor_root": "of the two roots within 15 arcseconds of observed image 2c, the root nearest 2c",
+    "companion_root": "the second-nearest root to observed image 2c",
+    "formula_parameters_fit": 0,
+    "geometry_parameters_refit": 0,
+    "photometry_parameters_fit": 0
+  },
+  "astrometry": {
+    "model_center_ra_deg": 292.9570833333,
+    "model_center_dec_deg": -26.5756166667,
+    "model_x_definition": "(RA-center_RA)*3600*cos(center_Dec)",
+    "model_y_definition": "(Dec-center_Dec)*3600",
+    "drizzled_wcs": "linear celestial WCS with residual SIP terms disabled because the CLASH product is already distortion corrected",
+    "published_catalog_match_radius_arcsec": 0.476751
+  },
+  "display_and_grouping": {
+    "root_grouping_radius_arcsec": 0.5,
+    "overview_half_width_arcsec": 18.0,
+    "cutout_half_width_arcsec": 2.5,
+    "representative_variants": ["combined_parent", "combined_power_240", "route_parent"]
+  },
+  "photometry": {
+    "band": "HST WFC3/IR F160W",
+    "aperture_radius_arcsec": 0.325,
+    "background_annulus_inner_arcsec": 0.65,
+    "background_annulus_outer_arcsec": 1.30,
+    "minimum_valid_weight_fraction": 0.95,
+    "formal_detection_snr": 5.0,
+    "strong_expected_companion_snr": 10.0,
+    "minimum_predicted_companion_to_anchor_flux_ratio": 0.25,
+    "predicted_flux_ratio": "absolute companion magnification divided by absolute anchor magnification, using signed determinant of the frozen lens Jacobian",
+    "noise_warning": "the drizzle weight map omits some correlated-noise and foreground-subtraction systematics; formal aperture SNR is diagnostic rather than a final completeness calibration"
+  },
+  "classification_rules": {
+    "catalogued_family2_companion": "a published family-2 image falls within the frozen catalog match radius of the companion root",
+    "blank_rejection_candidate": "predicted flux ratio is at least 0.25, expected companion SNR from observed 2c is at least 10, measured companion aperture SNR is below 5, valid weight fraction is at least 0.95, and visual audit finds no foreground/mask ambiguity",
+    "source_consistent_not_confirmed": "a source is present at the predicted position but single-band imaging cannot establish common family redshift or morphology",
+    "inconclusive": "crowding, foreground light, bad weight, inaccurate root position, or single-band ambiguity prevents the blank test",
+    "no_formula_promotion": true
+  },
+  "inputs": {
+    "caustic_protocol": "configs/p0554_caustic_margin_protocol.json",
+    "caustic_report": "results/p0554_caustic_margin/report.json",
+    "global_roots": "results/p0554_caustic_margin/global_MACS1931_family2_roots.csv",
+    "global_assignments": "results/p0554_caustic_margin/global_MACS1931_family2_assignments.csv",
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "interaction_geometry": "results/p0554_route_softness_interaction/geometry.csv",
+    "interaction_predictions": "results/p0554_route_softness_interaction/raw_predictions.csv",
+    "image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "science_fits": "data/raw/clash_stellar_morphology_f160w/hlsp_clash_hst_wfc3ir_macs1931_f160w_v1_drz.fits",
+    "weight_fits": "data/raw/clash_stellar_morphology_f160w/hlsp_clash_hst_wfc3ir_macs1931_f160w_v1_wht.fits",
+    "mosaic_provenance": "data/raw/clash_stellar_morphology_f160w/provenance.json"
+  },
+  "outputs": {
+    "directory": "results/p0554_macs1931_companion_audit",
+    "root_audit": "root_audit.csv",
+    "position_groups": "position_groups.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "overview_figure": "macs1931_companion_overview.png",
+    "cutout_figure": "macs1931_companion_cutouts.png"
+  },
+  "claim_limits": [
+    "This is a spent-cluster audit of a prediction discovered on MACS1931, not independent validation.",
+    "The simplified lens has multi-arcsecond position residuals, so absence at an exact predicted coordinate is not decisive by itself.",
+    "F160W alone cannot confirm that a detected source shares the family-2 redshift or source morphology.",
+    "Aperture SNR from a drizzle weight map does not fully model correlated noise, intracluster light, or foreground subtraction.",
+    "Magnification and parity are predictions of the simplified frozen lens and can be unreliable extremely close to a caustic.",
+    "No formula is promoted by this audit."
+  ]
+}

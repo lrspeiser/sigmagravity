@@ -1,0 +1,103 @@
+{
+  "protocol_version": "SPARC-INDEPENDENT-NUISANCE-REFIT-0.1",
+  "frozen_utc": "2026-07-28T18:00:00Z",
+  "status": "fixed before scoring",
+  "question": "Does the fixed RAR plus squared-coherence-gated RG survivor remain competitive when it must infer its own galaxy nuisance parameters from inner radii and predict untouched outer radii?",
+  "sample": {
+    "source": "local SPARC snapshot",
+    "quality_max": 2,
+    "minimum_inclination_deg": 30.0,
+    "minimum_points": 8,
+    "train_fraction": 0.7,
+    "minimum_train_points": 5,
+    "minimum_holdout_points": 2,
+    "expected_galaxies": 131,
+    "expected_train_points": 2066,
+    "expected_outer_points": 968
+  },
+  "models": {
+    "fixed_RAR": {
+      "equation": "g=RAR(gbar; gdagger=1.2e-10 m/s^2)",
+      "global_parameters_fit_to_SPARC": 0
+    },
+    "simple_MOND": {
+      "equation": "g/gbar=0.5*(1+sqrt(1+4*a0/gbar)); a0=1.2e-10 m/s^2",
+      "global_parameters_fit_to_SPARC": 0
+    },
+    "RAR_sharp_coherence_gated_RG": {
+      "equation": "E=E_RAR+[1-(3C^2-2C^3)]^2*(1/epsilon_RG-1)",
+      "coherence": "C=1-local bulge force fraction",
+      "bridge_parameters": "fixed from results/rar_sharp_coherence_rg_sweep/report.json",
+      "global_parameters_fit_to_SPARC": 0
+    },
+    "NFW": {
+      "equation": "baryons plus one spherical NFW halo per galaxy",
+      "halo_parameters": "V200 and concentration fit on inner radii with weak priors",
+      "claim_boundary": "Flexible halo comparator, not a cosmological dark-matter population model"
+    }
+  },
+  "nuisance_fit": {
+    "radii_used": "inner training radii only",
+    "disk_mass_to_light_prior": 0.5,
+    "bulge_mass_to_light_prior": 0.7,
+    "log_mass_to_light_prior_sigma": 0.25,
+    "distance_z_prior_sigma": 1.0,
+    "inclination_z_prior_sigma": 1.0,
+    "velocity_error_floor_km_s": 2.0,
+    "bounds": {
+      "disk_log_shift": [-2.0, 2.0],
+      "bulge_log_shift": [-2.0, 2.0],
+      "distance_z": [-5.0, 5.0],
+      "inclination_z": [-5.0, 5.0],
+      "NFW_V200_km_s": [5.0, 800.0],
+      "NFW_concentration": [1.0, 40.0]
+    },
+    "NFW_weak_priors": {
+      "log_V200_center_km_s": 100.0,
+      "log_V200_sigma": 1.0,
+      "log_concentration_center": 10.0,
+      "log_concentration_sigma": 0.6
+    },
+    "optimizer": "L-BFGS-B",
+    "starts_per_galaxy": 4,
+    "random_start_scale": 0.5,
+    "max_iterations": 1000,
+    "seed": 20260728
+  },
+  "candidate_density_scenarios": [
+    {"name": "primary", "disk_hz_over_Rdisk": 0.2, "gas_RHI_divisor": 3.2, "gas_hz_over_Rgas": 0.1},
+    {"name": "thin_disk", "disk_hz_over_Rdisk": 0.1, "gas_RHI_divisor": 3.2, "gas_hz_over_Rgas": 0.1},
+    {"name": "thick_disk", "disk_hz_over_Rdisk": 0.3, "gas_RHI_divisor": 3.2, "gas_hz_over_Rgas": 0.1},
+    {"name": "compact_gas", "disk_hz_over_Rdisk": 0.2, "gas_RHI_divisor": 4.0, "gas_hz_over_Rgas": 0.1},
+    {"name": "extended_gas", "disk_hz_over_Rdisk": 0.2, "gas_RHI_divisor": 2.5, "gas_hz_over_Rgas": 0.1},
+    {"name": "thin_gas", "disk_hz_over_Rdisk": 0.2, "gas_RHI_divisor": 3.2, "gas_hz_over_Rgas": 0.05},
+    {"name": "thick_gas", "disk_hz_over_Rdisk": 0.2, "gas_RHI_divisor": 3.2, "gas_hz_over_Rgas": 0.2}
+  ],
+  "uncertainty": {
+    "galaxy_folds": 5,
+    "paired_galaxy_bootstrap_draws": 20000
+  },
+  "advance_gates": {
+    "primary_outer_RMSE_relative_to_RAR_max": 1.1,
+    "primary_outer_chi2_per_point_relative_to_RAR_max": 1.15,
+    "bootstrap_delta_equal_galaxy_RMSE_95pct_upper_km_s_max": 2.0,
+    "worst_fold_outer_RMSE_relative_to_RAR_max": 1.2,
+    "worst_density_sensitivity_outer_RMSE_relative_to_RAR_max": 1.15,
+    "finite_fit_fraction_min": 1.0,
+    "optimizer_success_fraction_min": 0.95,
+    "nuisance_any_boundary_fraction_max": 0.05
+  },
+  "rethink_policy": {
+    "candidate_fails_primary": "Do not tune the three bridge constants on SPARC. Diagnose residual structure, then change or reject the coherence/density mapping.",
+    "candidate_passes_but_is_indistinguishable_from_RAR": "Treat the candidate only as a cluster-side extension of RAR; it has not earned a distinct galaxy prediction.",
+    "candidate_beats_RAR": "Require replication with independent galaxy data and a relativistic raw-lensing forward law before advancing the theory claim."
+  },
+  "claim_boundary": [
+    "The squared coherence gate was selected after inspecting an earlier linear-gate failure.",
+    "The density field is reconstructed from axisymmetric disk, Hernquist bulge, and exponential gas proxies.",
+    "Per-galaxy nuisance parameters are calibrated on inner radii of the same galaxy, so this is radial prediction rather than new-galaxy prediction.",
+    "RAR and simple MOND are prior-art benchmarks.",
+    "The NFW control has two additional halo parameters per galaxy and is not a full dark-matter population analysis.",
+    "No relativistic photon law or theory-neutral lensing likelihood is supplied by this test."
+  ]
+}

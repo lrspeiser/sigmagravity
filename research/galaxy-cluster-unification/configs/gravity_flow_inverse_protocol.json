@@ -1,0 +1,74 @@
+{
+  "protocol_version": "GRAVITY-FLOW-INVERSE-0.1.0",
+  "frozen_utc": "2026-07-31T23:10:00Z",
+  "status": "exploratory_protocol_frozen_before_new_inverse_transport_computation",
+  "question": "If baryonic matter is the only source, which baryonic galaxies can most economically supply the spatial convergence that standard lens models place away from local starlight, and are those inferred routes stable across Lenstool and GLAFIC?",
+  "claim_status": "descriptive inverse reconstruction on clusters already used for a prior forward test; it may generate but cannot confirm a new routing law",
+  "field_ansatz": {
+    "weak_field_equation": "laplacian(Phi)(y)=4*pi*G*[rho_b(y)+q*integral rho_b(x) K(y|x,E_b) dx]",
+    "source_rule": "rho_b is the only material source; K is a nonlocal metric-memory or field-return response, not a dark-matter density",
+    "shape_constraint": "integral K(y|x,E_b) dy=1 for every x",
+    "amplitude_limit": "q and absolute mass-to-light normalization are not identifiable from normalized maps and are not fit in this analysis",
+    "path_family": "Gamma_ij(t)=((1-t)x_i+t*y_j, 4*h_ij*t*(1-t)); the projected endpoints and coupling can be inferred, but h_ij cannot be inferred from a 2-D kappa map"
+  },
+  "inputs": {
+    "acquisition_protocol": "configs/gravity_arc_fresh_sample_protocol.json",
+    "analysis_protocol": "configs/gravity_arc_fresh_analysis_protocol.json",
+    "input_audit": "results/gravity_arc_fresh_sample_input_audit/report.json",
+    "sources": "results/gravity_arc_fresh_sample_input_audit/sources.csv",
+    "systems": "results/gravity_arc_fresh_sample_input_audit/systems.csv"
+  },
+  "targets": {
+    "methods": ["lenstool_ensemble_mean", "glafic_best"],
+    "primary_destination": "positive residual after subtracting the non-negative least-squares projection of a 20 kpc-smoothed normalized F160W member-light template from the normalized kappa shape",
+    "sensitivity_destinations": [
+      "full normalized positive kappa shape",
+      "positive residual after half of the fitted local-light projection"
+    ],
+    "interpretation": "The residual is an operational apparent-excess map, not a model-independent observation of dark matter. The fitted coefficient is morphological and is not a mass fraction."
+  },
+  "inverse_transport": {
+    "method": "balanced entropic optimal transport",
+    "projected_cost": "squared physical source-to-destination distance",
+    "target_grid_spacing_kpc": 20.0,
+    "entropy_lengths_kpc": [25.0, 50.0, 100.0],
+    "primary_entropy_length_kpc": 50.0,
+    "iterations": 1000,
+    "tolerance": 1e-9,
+    "path_samples": 17,
+    "path_map_retained_transport_weight": 0.995,
+    "off_plane_height_ratios_for_length_only": [0.0, 0.25, 0.5, 1.0]
+  },
+  "controls": {
+    "radial_angle_shuffles": 32,
+    "shuffle_rule": "preserve each galaxy's radius and flux weight about the fixed map origin while randomizing its polar angle",
+    "shuffle_seed": 7312026,
+    "control_iterations": 300,
+    "control_tolerance": 0.0,
+    "maximum_control_source_marginal_error": 0.00005,
+    "numerical_amendment": "The first completed computation was rejected before reporting because a 100-iteration control approximation reached source-marginal error 0.00222 in its worst randomized layout. All 640 controls are therefore rerun at 300 iterations; no failed value is retained. An independent 20/50/100/200/500/1000-iteration check found RMS transport 105.09629 kpc at 100 versus 105.09628 kpc at 1000 for the first shuffle. Every saved control must still pass the 5e-5 marginal-error gate.",
+    "primary_statistic": "regularized plan's unregularized RMS projected transport distance",
+    "cross_method_control": "compare Lenstool and GLAFIC path-density maps and route summaries for the same baryonic sources"
+  },
+  "outputs": {
+    "directory": "results/gravity_flow_inverse",
+    "route_statistics": "route_statistics.csv",
+    "source_routes": "source_routes.csv",
+    "dominant_routes": "dominant_routes.csv",
+    "peak_origins": "peak_origins.csv",
+    "null_costs": "radial_shuffle_nulls.csv",
+    "method_agreement": "method_agreement.csv",
+    "off_plane_lengths": "off_plane_arc_lengths.csv",
+    "path_maps": "path_maps.npz",
+    "report": "report.json",
+    "figure": "gravity_flow_inverse.png",
+    "summary": "SUMMARY.md"
+  },
+  "limits": [
+    "The inverse solution is non-unique; optimal transport selects the least projected-distance attribution under the stated entropy regularization.",
+    "RELICS kappa maps are standard-GR lens-model products, not raw shear or multiple-image positions, and member-galaxy structure can be built into them.",
+    "F160W member light omits hot intracluster gas and does not provide a complete baryonic mass map.",
+    "A 2-D lens map cannot determine whether a route is a straight chord, a curved path within the lens plane, or an off-plane arc.",
+    "Normalized morphology cannot determine the absolute gravity multiplier q."
+  ]
+}

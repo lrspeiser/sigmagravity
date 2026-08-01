@@ -1,0 +1,59 @@
+{
+  "target_version": "R1-CLASH-observable-coverage-0.2",
+  "stage": "R1B CLASH observable acquisition",
+  "purpose": "Replace the 20 Tian2020 GR+NFW-deprojected acceleration summaries with source-traceable image-position/redshift catalogs or an equally raw lensing likelihood before any alternative-metric response inference.",
+  "target_systems": [
+    "A209",
+    "A2261",
+    "A383",
+    "A611",
+    "MACS0329",
+    "MACS0416",
+    "MACS0429",
+    "MACS0647",
+    "MACS0717",
+    "MACS0744",
+    "MACS1115",
+    "MACS1149",
+    "MACS1206",
+    "MACS1720",
+    "MACS1931",
+    "MS2137",
+    "RXJ1347",
+    "RXJ1532",
+    "RXJ2129",
+    "RXJ2248"
+  ],
+  "acquisition_definition": {
+    "minimum": "Measured strong-lens image positions grouped by source family plus a lens-independent spectroscopic or photometric source-redshift summary. A raw shear catalog with calibration metadata would also qualify.",
+    "likelihood_ready": "The minimum catalog plus declared positional errors/covariance or a rerunnable likelihood definition.",
+    "not_sufficient": [
+      "GR-derived convergence map alone",
+      "NFW mass or acceleration summary",
+      "critical radius without image-level coordinates",
+      "model-predicted counterimage without an observed counterpart"
+    ]
+  },
+  "frozen_next_queue": [
+    "RXJ1532"
+  ],
+  "numeric_outcomes": {
+    "current_raw_or_likelihood_catalogs": 19,
+    "target_raw_or_likelihood_catalogs": 20,
+    "documented_primary_source_hard_shortfalls": 1,
+    "resolved_catalog_or_shortfall_dispositions": 20,
+    "remaining_catalogs": 1,
+    "completed_cycle_outcome": "Six of the seven named systems were added from Zitrin et al. 2015. RXJ1532 remains candidate-only, matching the official CLASH release statement that its one multiple-image family is unconfirmed.",
+    "stage_advance": "All 20 systems have either a local checksum-audited raw/likelihood-level catalog or a primary-source hard-shortfall disposition, with explicit metric-dependence labels.",
+    "next_stage_success": "Freeze at least ten same systems having measured baryonic profiles plus at least three overlapping radial dynamical constraints and three lensing constraints; every included lens must have an explicit source-redshift likelihood and coordinate covariance that is not borrowed from a fitted GR model.",
+    "next_stage_rethink_trigger": "After two frozen acquisition cycles, if fewer than ten systems satisfy the same-system overlap rule, stop expanding source names and pre-register either a raw HST/spectroscopic re-reduction for the exact deficit or a smaller identifiable pilot with a formal power/coverage limitation."
+  },
+  "authorization": {
+    "search_download_and_normalize_public_observables": true,
+    "audit_declared_likelihoods_and_model_chains": true,
+    "use_derived_gr_mass_maps_as_observables": false,
+    "infer_weyl_response_before_20_of_20": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false
+  }
+}

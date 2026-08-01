@@ -1,0 +1,49 @@
+{
+  "protocol_version": "REOPENED-HYBRID-SMOOTHED-LOCAL-PIVOT-EXTENSION-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-01T07:05:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay every finite-pivot, bandwidth, memory, exact-endpoint, and endpoint-repeat branch with eight lens-geometry starts so the slope-versus-endpoint conclusion is not selected from a shallow optimizer run.",
+  "source_protocol": "configs/reopened_hybrid_smoothed_local_pivot_extension_protocol.json",
+  "source_report": "results/reopened_hybrid_smoothed_local_pivot_extension/report.json",
+  "selected_variants": [
+    "pivot_extension:radial_memory_slope_gate_pivot=1.25",
+    "pivot_extension:radial_memory_slope_gate_pivot=2",
+    "pivot_extension:radial_memory_slope_gate_pivot=3",
+    "pivot_extension:radial_memory_slope_gate_pivot=4",
+    "pivot_extension:radial_memory_slope_gate_pivot=6",
+    "bandwidth_pivot_1p25:radial_memory_slope_smoothing_log_scale=0.03",
+    "bandwidth_pivot_1p25:radial_memory_slope_smoothing_log_scale=0.05",
+    "bandwidth_pivot_1p25:radial_memory_slope_smoothing_log_scale=0.1",
+    "bandwidth_pivot_1p25:radial_memory_slope_smoothing_log_scale=0.2",
+    "memory_pivot_4:radial_memory_log_scale=0.6",
+    "memory_pivot_4:radial_memory_log_scale=0.7",
+    "memory_pivot_4:radial_memory_log_scale=0.8",
+    "memory_pivot_4:radial_memory_log_scale=0.9",
+    "memory_pivot_4:radial_memory_log_scale=1",
+    "steep_endpoint_scale:radial_memory_log_scale=0.6",
+    "steep_endpoint_scale:radial_memory_log_scale=0.7",
+    "steep_endpoint_scale:radial_memory_log_scale=0.8",
+    "steep_endpoint_scale:radial_memory_log_scale=0.9",
+    "steep_endpoint_scale:radial_memory_log_scale=1",
+    "endpoint_repeat_1:radial_memory_log_scale=0.8",
+    "endpoint_repeat_2:radial_memory_log_scale=0.8",
+    "endpoint_repeat_3:radial_memory_log_scale=0.8",
+    "endpoint_repeat_4:radial_memory_log_scale=0.8"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_smoothed_local_pivot_extension_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_smoothed_local_pivot_extension_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_smoothed_local_pivot_extension_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_smoothed_local_pivot_extension_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_smoothed_local_pivot_extension_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "All 23 variants are replayed, including unfavorable rows; selection cannot hide a lens-root reversal.",
+    "The replay freezes every gravity and structural parameter and reoptimizes only declared lens nuisance geometry.",
+    "The exact endpoint duplicates measure bridge-fit branch repeatability separately from structural formula leverage.",
+    "Eight-start scores supersede the shallow two-start classifications for these rows.",
+    "These data can distinguish the tested finite-pivot and endpoint equations, but cannot validate or reject the parent new-physics mechanism."
+  ]
+}

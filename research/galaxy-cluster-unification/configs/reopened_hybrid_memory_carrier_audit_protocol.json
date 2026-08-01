@@ -1,0 +1,148 @@
+{
+  "protocol_version": "REOPENED-HYBRID-MEMORY-CARRIER-AUDIT-0.1.0",
+  "frozen_utc": "2026-07-31T18:10:00Z",
+  "status": "frozen_before_fixed_parameter_scores",
+  "purpose": "Identify whether radial memory most usefully transports fractional enhancement, added acceleration, orbital-speed-squared contribution, or individual RG/Sigma channels before expensive refitting and raw lensing.",
+  "claim_boundary": [
+    "This audit holds the four universal gravity parameters fixed at preceding local-law fits.",
+    "It is a range-selection experiment, not a final cross-domain result.",
+    "The transported source is X=F (g_N/g_ref)^p (r/1 kpc)^q and is converted back to fractional excess after exponential memory.",
+    "Channel code 0 transports the combined screened fractional excess, 1 transports RG before recombination, 2 transports Sigma before recombination, and 3 transports RG and Sigma independently.",
+    "Raw lensing is deliberately deferred until a smaller full-refit protocol is frozen.",
+    "Invalid, nonfinite, or Solar-unsafe variants remain recorded rather than silently removed."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv"
+  },
+  "base_sources": {
+    "unsaturated": {
+      "report": "results/reopened_hybrid_channel_saturation/report.json",
+      "variant": "baseline_unsaturated:screen_power=1.5",
+      "settings": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5
+      }
+    },
+    "dual": {
+      "report": "results/reopened_hybrid_channel_saturation_fine/report.json",
+      "variant": "rg_2_sigma_fine:sigma_saturation_ceiling=1.5",
+      "settings": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5
+      }
+    }
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"]
+  },
+  "common_memory": {
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 2.0,
+    "radial_memory_gbar_power": 0.0,
+    "radial_memory_radius_power": 0.0,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false
+  },
+  "audit_designs": {
+    "gbar_power": {
+      "fixed_name": "radial_memory_gbar_power",
+      "values": [-1.0, -0.5, 0.0, 0.5, 1.0, 1.5]
+    },
+    "radius_power": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [-1.0, -0.5, 0.0, 0.5, 1.0, 1.5]
+    },
+    "acceleration_radius_power": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [-1.0, -0.5, 0.0, 0.5, 1.0, 1.5],
+      "overrides": {
+        "radial_memory_gbar_power": 1.0
+      }
+    },
+    "fractional_channel": {
+      "fixed_name": "radial_memory_channel_code",
+      "values": [0, 1, 2, 3]
+    },
+    "acceleration_channel": {
+      "fixed_name": "radial_memory_channel_code",
+      "values": [0, 1, 2, 3],
+      "overrides": {
+        "radial_memory_gbar_power": 1.0
+      }
+    },
+    "speed_squared_channel": {
+      "fixed_name": "radial_memory_channel_code",
+      "values": [0, 1, 2, 3],
+      "overrides": {
+        "radial_memory_gbar_power": 1.0,
+        "radial_memory_radius_power": 1.0
+      }
+    },
+    "fractional_strength": {
+      "fixed_name": "radial_memory_strength",
+      "values": [0.0, 0.25, 0.5, 0.75, 1.0]
+    },
+    "acceleration_strength": {
+      "fixed_name": "radial_memory_strength",
+      "values": [0.0, 0.25, 0.5, 0.75, 1.0],
+      "overrides": {
+        "radial_memory_gbar_power": 1.0
+      }
+    },
+    "speed_squared_strength": {
+      "fixed_name": "radial_memory_strength",
+      "values": [0.0, 0.25, 0.5, 0.75, 1.0],
+      "overrides": {
+        "radial_memory_gbar_power": 1.0,
+        "radial_memory_radius_power": 1.0
+      }
+    },
+    "fractional_scale": {
+      "fixed_name": "radial_memory_log_scale",
+      "values": [0.1, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0]
+    },
+    "acceleration_scale": {
+      "fixed_name": "radial_memory_log_scale",
+      "values": [0.1, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0],
+      "overrides": {
+        "radial_memory_gbar_power": 1.0
+      }
+    },
+    "speed_squared_scale": {
+      "fixed_name": "radial_memory_log_scale",
+      "values": [0.1, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0],
+      "overrides": {
+        "radial_memory_gbar_power": 1.0,
+        "radial_memory_radius_power": 1.0
+      }
+    }
+  },
+  "references": {
+    "SPARC_fixed_RAR_outer_RMSE_km_s": 10.681519066526649,
+    "bridge_target_RMSE_dex": 0.139
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1,
+    "audit_mercury_quadrature_points": 4096
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_memory_carrier_audit/report.json",
+    "scores": "results/reopened_hybrid_memory_carrier_audit/scores.csv",
+    "family_impacts": "results/reopened_hybrid_memory_carrier_audit/family_impacts.csv",
+    "summary": "results/reopened_hybrid_memory_carrier_audit/SUMMARY.md"
+  }
+}

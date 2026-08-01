@@ -1,0 +1,552 @@
+{
+  "status": "completed independent inner-nuisance outer-radius prediction",
+  "inputs": {
+    "protocol_sha256": "962da47438d8618c3e0d6f7a8a0636819845d7f37ae5877464839293d4a93594",
+    "candidate_report_sha256": "981f6c64fb83e4b569f4c729f4296395432d5d8bb77f47509f79e360b7b5d526",
+    "morphology_sha256": "43961d539778bcc71c9fee277a9a3b5f8a89aed2c9f192dc91471cb8a1ddd416"
+  },
+  "candidate_parameters_fixed_before_SPARC_refit": {
+    "epsilon_0": 0.12950519927041917,
+    "log10_rho_c_g_cm3": -23.785246000655626,
+    "Q": 0.4271580606729452
+  },
+  "sample": {
+    "galaxies": 131,
+    "inner_train_points": 2066,
+    "outer_holdout_points": 968
+  },
+  "scores": {
+    "fixed_RAR:invariant": {
+      "inner_train": {
+        "points": 2066,
+        "galaxies": 131,
+        "chi2_per_point": 2.5455739098917425,
+        "RMSE_km_s": 11.361578823060395,
+        "equal_galaxy_RMSE_km_s": 9.932438393429987,
+        "catalog_space_RMSE_km_s": 12.089525583385438,
+        "MAE_km_s": 6.325779255953418,
+        "mean_standardized_residual": 0.07305403315833851,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "coherence_gate_active_point_fraction": 0.0
+      },
+      "outer_holdout": {
+        "points": 968,
+        "galaxies": 131,
+        "chi2_per_point": 4.780216429722085,
+        "RMSE_km_s": 10.348465773189679,
+        "equal_galaxy_RMSE_km_s": 10.716437036615254,
+        "catalog_space_RMSE_km_s": 10.8054941859693,
+        "MAE_km_s": 7.614543308538894,
+        "mean_standardized_residual": 0.3145514814569665,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "coherence_gate_active_point_fraction": 0.0
+      }
+    },
+    "simple_MOND:invariant": {
+      "inner_train": {
+        "points": 2066,
+        "galaxies": 131,
+        "chi2_per_point": 2.54420387049851,
+        "RMSE_km_s": 11.374658249414306,
+        "equal_galaxy_RMSE_km_s": 9.89841919007818,
+        "catalog_space_RMSE_km_s": 12.11949177139823,
+        "MAE_km_s": 6.328609742906986,
+        "mean_standardized_residual": 0.07519606219215597,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.6681494169944386,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 5.014817252726246,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 6.622465668274799,
+        "coherence_gate_active_point_fraction": 0.0
+      },
+      "outer_holdout": {
+        "points": 968,
+        "galaxies": 131,
+        "chi2_per_point": 4.836435146615933,
+        "RMSE_km_s": 10.385167718947924,
+        "equal_galaxy_RMSE_km_s": 10.707800903551433,
+        "catalog_space_RMSE_km_s": 10.86710510087722,
+        "MAE_km_s": 7.62765286658025,
+        "mean_standardized_residual": 0.26400664719105665,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.20579389570922046,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 1.9417776995993985,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 4.091988339812673,
+        "coherence_gate_active_point_fraction": 0.0
+      }
+    },
+    "NFW:invariant": {
+      "inner_train": {
+        "points": 2066,
+        "galaxies": 131,
+        "chi2_per_point": 1.6646178950506083,
+        "RMSE_km_s": 9.76324032762089,
+        "equal_galaxy_RMSE_km_s": 7.899520012574714,
+        "catalog_space_RMSE_km_s": 10.617971083863461,
+        "MAE_km_s": 5.069907950039321,
+        "mean_standardized_residual": 0.10637040491844318,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 3.138624094012286,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 49.27510599212797,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 104.1752879460469,
+        "coherence_gate_active_point_fraction": 0.0
+      },
+      "outer_holdout": {
+        "points": 968,
+        "galaxies": 131,
+        "chi2_per_point": 15.972570205908845,
+        "RMSE_km_s": 17.80400126728755,
+        "equal_galaxy_RMSE_km_s": 14.498315711029706,
+        "catalog_space_RMSE_km_s": 18.851874551640698,
+        "MAE_km_s": 10.489718112355172,
+        "mean_standardized_residual": 0.39595993684282493,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": -0.6299789211204967,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 57.108702430917674,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 163.74307809594077,
+        "coherence_gate_active_point_fraction": 0.0
+      }
+    },
+    "RAR_sharp_coherence_gated_RG:primary": {
+      "inner_train": {
+        "points": 2066,
+        "galaxies": 131,
+        "chi2_per_point": 2.6588860797871754,
+        "RMSE_km_s": 11.629642605102012,
+        "equal_galaxy_RMSE_km_s": 10.130557595442173,
+        "catalog_space_RMSE_km_s": 12.382542201098731,
+        "MAE_km_s": 6.4935766979681295,
+        "mean_standardized_residual": 0.06922205427480396,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 8.89900496482494,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 34.58728084170522,
+        "coherence_gate_active_point_fraction": 0.37463697967086157
+      },
+      "outer_holdout": {
+        "points": 968,
+        "galaxies": 131,
+        "chi2_per_point": 5.171762838756202,
+        "RMSE_km_s": 10.586334337658865,
+        "equal_galaxy_RMSE_km_s": 11.043219820105026,
+        "catalog_space_RMSE_km_s": 10.868474659051133,
+        "MAE_km_s": 7.842855939924776,
+        "mean_standardized_residual": 0.21260418571250903,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 11.086093015602897,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 37.95162530135542,
+        "coherence_gate_active_point_fraction": 0.36260330578512395
+      }
+    },
+    "RAR_sharp_coherence_gated_RG:thin_disk": {
+      "inner_train": {
+        "points": 2066,
+        "galaxies": 131,
+        "chi2_per_point": 2.6238597735075473,
+        "RMSE_km_s": 11.538052428886294,
+        "equal_galaxy_RMSE_km_s": 10.039859678587534,
+        "catalog_space_RMSE_km_s": 12.29250451921452,
+        "MAE_km_s": 6.4298103326231075,
+        "mean_standardized_residual": 0.07010989527791729,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 6.792713905345572,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 26.211626109697704,
+        "coherence_gate_active_point_fraction": 0.37463697967086157
+      },
+      "outer_holdout": {
+        "points": 968,
+        "galaxies": 131,
+        "chi2_per_point": 4.984631349200199,
+        "RMSE_km_s": 10.368246265556285,
+        "equal_galaxy_RMSE_km_s": 10.793180343025309,
+        "catalog_space_RMSE_km_s": 10.718619890719895,
+        "MAE_km_s": 7.719024003936306,
+        "mean_standardized_residual": 0.26542184573046623,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 9.270431556782231,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 42.62516158617058,
+        "coherence_gate_active_point_fraction": 0.36260330578512395
+      }
+    },
+    "RAR_sharp_coherence_gated_RG:thick_disk": {
+      "inner_train": {
+        "points": 2066,
+        "galaxies": 131,
+        "chi2_per_point": 2.674223905807587,
+        "RMSE_km_s": 11.680837932912416,
+        "equal_galaxy_RMSE_km_s": 10.17948105070409,
+        "catalog_space_RMSE_km_s": 12.428818572230634,
+        "MAE_km_s": 6.5256422423619975,
+        "mean_standardized_residual": 0.06854256378796586,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 10.833523719714648,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 39.74048699282895,
+        "coherence_gate_active_point_fraction": 0.37463697967086157
+      },
+      "outer_holdout": {
+        "points": 968,
+        "galaxies": 131,
+        "chi2_per_point": 5.300285652516612,
+        "RMSE_km_s": 10.763210286946938,
+        "equal_galaxy_RMSE_km_s": 11.225252059611634,
+        "catalog_space_RMSE_km_s": 10.98154482715006,
+        "MAE_km_s": 7.906984629550769,
+        "mean_standardized_residual": 0.17531084079327308,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 12.1660583515299,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 40.38274231860913,
+        "coherence_gate_active_point_fraction": 0.36260330578512395
+      }
+    },
+    "RAR_sharp_coherence_gated_RG:compact_gas": {
+      "inner_train": {
+        "points": 2066,
+        "galaxies": 131,
+        "chi2_per_point": 2.6577408353054475,
+        "RMSE_km_s": 11.625346802764158,
+        "equal_galaxy_RMSE_km_s": 10.126383677539753,
+        "catalog_space_RMSE_km_s": 12.386668314984242,
+        "MAE_km_s": 6.491475293126458,
+        "mean_standardized_residual": 0.06891034748334351,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 8.914665017937821,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 33.16060166640631,
+        "coherence_gate_active_point_fraction": 0.37463697967086157
+      },
+      "outer_holdout": {
+        "points": 968,
+        "galaxies": 131,
+        "chi2_per_point": 5.187216256214847,
+        "RMSE_km_s": 10.54264087151758,
+        "equal_galaxy_RMSE_km_s": 10.991670256148993,
+        "catalog_space_RMSE_km_s": 10.858499415652844,
+        "MAE_km_s": 7.832442754010957,
+        "mean_standardized_residual": 0.2210538888101782,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 10.040763377290956,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 37.261403684282044,
+        "coherence_gate_active_point_fraction": 0.36260330578512395
+      }
+    },
+    "RAR_sharp_coherence_gated_RG:extended_gas": {
+      "inner_train": {
+        "points": 2066,
+        "galaxies": 131,
+        "chi2_per_point": 2.64359444878696,
+        "RMSE_km_s": 11.470694618947853,
+        "equal_galaxy_RMSE_km_s": 10.06957779670337,
+        "catalog_space_RMSE_km_s": 12.203156437253869,
+        "MAE_km_s": 6.407009876971904,
+        "mean_standardized_residual": 0.07794403092181461,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 13.637438289171612,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 68.48647506300117,
+        "coherence_gate_active_point_fraction": 0.37463697967086157
+      },
+      "outer_holdout": {
+        "points": 968,
+        "galaxies": 131,
+        "chi2_per_point": 5.7580227191694595,
+        "RMSE_km_s": 10.999475535921244,
+        "equal_galaxy_RMSE_km_s": 11.21084602252004,
+        "catalog_space_RMSE_km_s": 11.238831466153858,
+        "MAE_km_s": 7.988651546353163,
+        "mean_standardized_residual": 0.16083342150062954,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 22.134584824467453,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 68.16154941179838,
+        "coherence_gate_active_point_fraction": 0.36260330578512395
+      }
+    },
+    "RAR_sharp_coherence_gated_RG:thin_gas": {
+      "inner_train": {
+        "points": 2066,
+        "galaxies": 131,
+        "chi2_per_point": 2.6512511236409297,
+        "RMSE_km_s": 11.604830420163248,
+        "equal_galaxy_RMSE_km_s": 10.098713620368146,
+        "catalog_space_RMSE_km_s": 12.371422058275705,
+        "MAE_km_s": 6.470594220758981,
+        "mean_standardized_residual": 0.06836331247677134,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 8.113144332052492,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 32.2536141907581,
+        "coherence_gate_active_point_fraction": 0.37463697967086157
+      },
+      "outer_holdout": {
+        "points": 968,
+        "galaxies": 131,
+        "chi2_per_point": 5.294926632245853,
+        "RMSE_km_s": 10.584908867096498,
+        "equal_galaxy_RMSE_km_s": 11.001104439329886,
+        "catalog_space_RMSE_km_s": 10.928751265646598,
+        "MAE_km_s": 7.83827328604604,
+        "mean_standardized_residual": 0.20032804845000654,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 6.976786778568652,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 37.510780588395136,
+        "coherence_gate_active_point_fraction": 0.36260330578512395
+      }
+    },
+    "RAR_sharp_coherence_gated_RG:thick_gas": {
+      "inner_train": {
+        "points": 2066,
+        "galaxies": 131,
+        "chi2_per_point": 2.6226850940098982,
+        "RMSE_km_s": 11.455371796937715,
+        "equal_galaxy_RMSE_km_s": 10.059749919601552,
+        "catalog_space_RMSE_km_s": 12.185015235631056,
+        "MAE_km_s": 6.39204897376345,
+        "mean_standardized_residual": 0.07703121388802327,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 13.35457607243842,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 73.27263925340284,
+        "coherence_gate_active_point_fraction": 0.37463697967086157
+      },
+      "outer_holdout": {
+        "points": 968,
+        "galaxies": 131,
+        "chi2_per_point": 5.542584855030077,
+        "RMSE_km_s": 10.87477302508918,
+        "equal_galaxy_RMSE_km_s": 11.1672018869427,
+        "catalog_space_RMSE_km_s": 11.093714957222161,
+        "MAE_km_s": 7.957022658948748,
+        "mean_standardized_residual": 0.20129104467736716,
+        "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+        "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 24.50092804677214,
+        "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 74.0765488147112,
+        "coherence_gate_active_point_fraction": 0.36260330578512395
+      }
+    }
+  },
+  "fit_diagnostics": {
+    "fixed_RAR:invariant": {
+      "finite_fit_fraction": 1.0,
+      "optimizer_success_fraction": 1.0,
+      "nuisance_any_boundary_fraction": 0.030534351145038167,
+      "median_evaluations": 445.0
+    },
+    "simple_MOND:invariant": {
+      "finite_fit_fraction": 1.0,
+      "optimizer_success_fraction": 1.0,
+      "nuisance_any_boundary_fraction": 0.030534351145038167,
+      "median_evaluations": 450.0
+    },
+    "NFW:invariant": {
+      "finite_fit_fraction": 1.0,
+      "optimizer_success_fraction": 1.0,
+      "nuisance_any_boundary_fraction": 0.015267175572519083,
+      "median_evaluations": 1253.0
+    },
+    "RAR_sharp_coherence_gated_RG:primary": {
+      "finite_fit_fraction": 1.0,
+      "optimizer_success_fraction": 1.0,
+      "nuisance_any_boundary_fraction": 0.030534351145038167,
+      "median_evaluations": 445.0
+    },
+    "RAR_sharp_coherence_gated_RG:thin_disk": {
+      "finite_fit_fraction": 1.0,
+      "optimizer_success_fraction": 1.0,
+      "nuisance_any_boundary_fraction": 0.030534351145038167,
+      "median_evaluations": 445.0
+    },
+    "RAR_sharp_coherence_gated_RG:thick_disk": {
+      "finite_fit_fraction": 1.0,
+      "optimizer_success_fraction": 1.0,
+      "nuisance_any_boundary_fraction": 0.04580152671755725,
+      "median_evaluations": 445.0
+    },
+    "RAR_sharp_coherence_gated_RG:compact_gas": {
+      "finite_fit_fraction": 1.0,
+      "optimizer_success_fraction": 0.9923664122137404,
+      "nuisance_any_boundary_fraction": 0.030534351145038167,
+      "median_evaluations": 445.0
+    },
+    "RAR_sharp_coherence_gated_RG:extended_gas": {
+      "finite_fit_fraction": 1.0,
+      "optimizer_success_fraction": 1.0,
+      "nuisance_any_boundary_fraction": 0.030534351145038167,
+      "median_evaluations": 445.0
+    },
+    "RAR_sharp_coherence_gated_RG:thin_gas": {
+      "finite_fit_fraction": 1.0,
+      "optimizer_success_fraction": 1.0,
+      "nuisance_any_boundary_fraction": 0.030534351145038167,
+      "median_evaluations": 445.0
+    },
+    "RAR_sharp_coherence_gated_RG:thick_gas": {
+      "finite_fit_fraction": 1.0,
+      "optimizer_success_fraction": 1.0,
+      "nuisance_any_boundary_fraction": 0.030534351145038167,
+      "median_evaluations": 445.0
+    }
+  },
+  "candidate_sensitivity": {
+    "primary": {
+      "points": 968,
+      "galaxies": 131,
+      "chi2_per_point": 5.171762838756202,
+      "RMSE_km_s": 10.586334337658865,
+      "equal_galaxy_RMSE_km_s": 11.043219820105026,
+      "catalog_space_RMSE_km_s": 10.868474659051133,
+      "MAE_km_s": 7.842855939924776,
+      "mean_standardized_residual": 0.21260418571250903,
+      "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+      "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 11.086093015602897,
+      "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 37.95162530135542,
+      "coherence_gate_active_point_fraction": 0.36260330578512395
+    },
+    "thin_disk": {
+      "points": 968,
+      "galaxies": 131,
+      "chi2_per_point": 4.984631349200199,
+      "RMSE_km_s": 10.368246265556285,
+      "equal_galaxy_RMSE_km_s": 10.793180343025309,
+      "catalog_space_RMSE_km_s": 10.718619890719895,
+      "MAE_km_s": 7.719024003936306,
+      "mean_standardized_residual": 0.26542184573046623,
+      "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+      "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 9.270431556782231,
+      "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 42.62516158617058,
+      "coherence_gate_active_point_fraction": 0.36260330578512395
+    },
+    "thick_disk": {
+      "points": 968,
+      "galaxies": 131,
+      "chi2_per_point": 5.300285652516612,
+      "RMSE_km_s": 10.763210286946938,
+      "equal_galaxy_RMSE_km_s": 11.225252059611634,
+      "catalog_space_RMSE_km_s": 10.98154482715006,
+      "MAE_km_s": 7.906984629550769,
+      "mean_standardized_residual": 0.17531084079327308,
+      "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+      "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 12.1660583515299,
+      "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 40.38274231860913,
+      "coherence_gate_active_point_fraction": 0.36260330578512395
+    },
+    "compact_gas": {
+      "points": 968,
+      "galaxies": 131,
+      "chi2_per_point": 5.187216256214847,
+      "RMSE_km_s": 10.54264087151758,
+      "equal_galaxy_RMSE_km_s": 10.991670256148993,
+      "catalog_space_RMSE_km_s": 10.858499415652844,
+      "MAE_km_s": 7.832442754010957,
+      "mean_standardized_residual": 0.2210538888101782,
+      "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+      "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 10.040763377290956,
+      "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 37.261403684282044,
+      "coherence_gate_active_point_fraction": 0.36260330578512395
+    },
+    "extended_gas": {
+      "points": 968,
+      "galaxies": 131,
+      "chi2_per_point": 5.7580227191694595,
+      "RMSE_km_s": 10.999475535921244,
+      "equal_galaxy_RMSE_km_s": 11.21084602252004,
+      "catalog_space_RMSE_km_s": 11.238831466153858,
+      "MAE_km_s": 7.988651546353163,
+      "mean_standardized_residual": 0.16083342150062954,
+      "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+      "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 22.134584824467453,
+      "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 68.16154941179838,
+      "coherence_gate_active_point_fraction": 0.36260330578512395
+    },
+    "thin_gas": {
+      "points": 968,
+      "galaxies": 131,
+      "chi2_per_point": 5.294926632245853,
+      "RMSE_km_s": 10.584908867096498,
+      "equal_galaxy_RMSE_km_s": 11.001104439329886,
+      "catalog_space_RMSE_km_s": 10.928751265646598,
+      "MAE_km_s": 7.83827328604604,
+      "mean_standardized_residual": 0.20032804845000654,
+      "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+      "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 6.976786778568652,
+      "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 37.510780588395136,
+      "coherence_gate_active_point_fraction": 0.36260330578512395
+    },
+    "thick_gas": {
+      "points": 968,
+      "galaxies": 131,
+      "chi2_per_point": 5.542584855030077,
+      "RMSE_km_s": 10.87477302508918,
+      "equal_galaxy_RMSE_km_s": 11.1672018869427,
+      "catalog_space_RMSE_km_s": 11.093714957222161,
+      "MAE_km_s": 7.957022658948748,
+      "mean_standardized_residual": 0.20129104467736716,
+      "median_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 0.0,
+      "p95_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 24.50092804677214,
+      "maximum_formula_velocity_delta_vs_RAR_same_nuisance_km_s": 74.0765488147112,
+      "coherence_gate_active_point_fraction": 0.36260330578512395
+    }
+  },
+  "paired_galaxy_bootstrap": {
+    "draws": 20000,
+    "delta_candidate_minus_RAR_equal_galaxy_RMSE_km_s": 0.3267827834897723,
+    "interval_95_km_s": [
+      -0.2927982616857901,
+      1.0439480239753107
+    ],
+    "probability_candidate_better_than_RAR": 0.16415
+  },
+  "fold_stability": [
+    {
+      "fold": 0,
+      "galaxies": 27,
+      "candidate_RMSE_km_s": 8.378553210769589,
+      "RAR_RMSE_km_s": 8.329608428327445,
+      "candidate_to_RAR_RMSE_ratio": 1.005876000398253
+    },
+    {
+      "fold": 1,
+      "galaxies": 26,
+      "candidate_RMSE_km_s": 9.261722329846316,
+      "RAR_RMSE_km_s": 9.212570447419681,
+      "candidate_to_RAR_RMSE_ratio": 1.0053353060046777
+    },
+    {
+      "fold": 2,
+      "galaxies": 26,
+      "candidate_RMSE_km_s": 12.381887819332704,
+      "RAR_RMSE_km_s": 11.650912035371725,
+      "candidate_to_RAR_RMSE_ratio": 1.0627397908199603
+    },
+    {
+      "fold": 3,
+      "galaxies": 26,
+      "candidate_RMSE_km_s": 8.601691590481597,
+      "RAR_RMSE_km_s": 9.97536590100565,
+      "candidate_to_RAR_RMSE_ratio": 0.8622933410005974
+    },
+    {
+      "fold": 4,
+      "galaxies": 26,
+      "candidate_RMSE_km_s": 13.011793549253474,
+      "RAR_RMSE_km_s": 11.81857788559322,
+      "candidate_to_RAR_RMSE_ratio": 1.1009610187630763
+    }
+  ],
+  "gate_audit": {
+    "primary_outer_RMSE": true,
+    "primary_outer_chi2": true,
+    "bootstrap_upper": true,
+    "worst_fold": true,
+    "density_sensitivity": true,
+    "finite_fits": true,
+    "optimizer_success": true,
+    "nuisance_boundaries": true,
+    "passes_all": true
+  },
+  "interpretation": {
+    "galaxy_result": "competitive with fixed RAR under the preregistered gates",
+    "distinct_from_RAR": "not established; candidate inherits the RAR term and is tested for harmful leakage",
+    "lensing_status": "not tested here; local CLASH accelerations are NFW-deprojected and the raw same-system lensing+baryon likelihood is not yet complete"
+  },
+  "claim_boundary": [
+    "The squared coherence gate was selected after inspecting an earlier linear-gate failure.",
+    "The density field is reconstructed from axisymmetric disk, Hernquist bulge, and exponential gas proxies.",
+    "Per-galaxy nuisance parameters are calibrated on inner radii of the same galaxy, so this is radial prediction rather than new-galaxy prediction.",
+    "RAR and simple MOND are prior-art benchmarks.",
+    "The NFW control has two additional halo parameters per galaxy and is not a full dark-matter population analysis.",
+    "No relativistic photon law or theory-neutral lensing likelihood is supplied by this test."
+  ]
+}

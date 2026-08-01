@@ -1,0 +1,164 @@
+{
+  "report_version": "P0595-DIFFUSION-BOUNDARY-CV-RESULTS-0.1.0",
+  "status": "complete_whole_galaxy_cross_validation",
+  "coverage": {
+    "galaxies": 131,
+    "outer_points": 968,
+    "candidates": 216,
+    "folds": 5
+  },
+  "oof": {
+    "equal_galaxy_RMSE_km_s": 10.605408686916656,
+    "fixed_RAR_equal_galaxy_RMSE_km_s": 10.716437036615254,
+    "equal_galaxy_improvement_fraction": 0.010360565673016464,
+    "pooled_RMSE_km_s": 10.302684509678391,
+    "fixed_RAR_pooled_RMSE_km_s": 10.348465773189677,
+    "pooled_improvement_fraction": 0.004423966268496837,
+    "galaxies_improved": 75,
+    "galaxies_improved_fraction": 0.5725190839694656,
+    "folds_improved": 3,
+    "bootstrap_probability_equal_galaxy_MSE_improvement": 0.644
+  },
+  "fold_selections": [
+    {
+      "candidate_id": "q2__f0.15__n0__RAR",
+      "q_R80": 2.0,
+      "route_fraction": 0.15,
+      "gate_power": 0.0,
+      "fold": 0,
+      "training_galaxies": 109,
+      "test_galaxies": 22,
+      "training_equal_galaxy_RMSE_km_s": 10.724981033846598,
+      "test_equal_galaxy_RMSE_km_s": 8.729436222882693,
+      "test_pooled_RMSE_km_s": 8.914913740647005,
+      "fixed_RAR_test_pooled_RMSE_km_s": 8.319855853035179,
+      "test_pooled_improvement_fraction": -0.07152261987745168,
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 8.446928396182184,
+      "test_equal_galaxy_improvement_fraction": -0.03344503628421869
+    },
+    {
+      "candidate_id": "q1__f0.35__n1__RAR",
+      "q_R80": 1.0,
+      "route_fraction": 0.35,
+      "gate_power": 1.0,
+      "fold": 1,
+      "training_galaxies": 97,
+      "test_galaxies": 34,
+      "training_equal_galaxy_RMSE_km_s": 10.547734490682759,
+      "test_equal_galaxy_RMSE_km_s": 9.994360219239054,
+      "test_pooled_RMSE_km_s": 9.928942031090276,
+      "fixed_RAR_test_pooled_RMSE_km_s": 9.247459853708607,
+      "test_pooled_improvement_fraction": -0.07369398604183908,
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 9.926273057050434,
+      "test_equal_galaxy_improvement_fraction": -0.006859287649785051
+    },
+    {
+      "candidate_id": "q2__f0.2__n8__RAR",
+      "q_R80": 2.0,
+      "route_fraction": 0.2,
+      "gate_power": 8.0,
+      "fold": 2,
+      "training_galaxies": 108,
+      "test_galaxies": 23,
+      "training_equal_galaxy_RMSE_km_s": 10.755324176136387,
+      "test_equal_galaxy_RMSE_km_s": 8.392633461745943,
+      "test_pooled_RMSE_km_s": 9.155481582294804,
+      "fixed_RAR_test_pooled_RMSE_km_s": 8.663065611322311,
+      "test_pooled_improvement_fraction": -0.05684084515404386,
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 8.404495966695642,
+      "test_equal_galaxy_improvement_fraction": 0.0014114475153187422
+    },
+    {
+      "candidate_id": "q2__f0.15__n8__RAR",
+      "q_R80": 2.0,
+      "route_fraction": 0.15,
+      "gate_power": 8.0,
+      "fold": 3,
+      "training_galaxies": 106,
+      "test_galaxies": 25,
+      "training_equal_galaxy_RMSE_km_s": 9.375419026347636,
+      "test_equal_galaxy_RMSE_km_s": 13.788803193538898,
+      "test_pooled_RMSE_km_s": 11.443212352620986,
+      "fixed_RAR_test_pooled_RMSE_km_s": 12.251757783651795,
+      "test_pooled_improvement_fraction": 0.06599423897440226,
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 14.200167294471264,
+      "test_equal_galaxy_improvement_fraction": 0.028968961590510767
+    },
+    {
+      "candidate_id": "q2__f0.15__n1__RAR",
+      "q_R80": 2.0,
+      "route_fraction": 0.15,
+      "gate_power": 1.0,
+      "fold": 4,
+      "training_galaxies": 104,
+      "test_galaxies": 27,
+      "training_equal_galaxy_RMSE_km_s": 10.230282748172307,
+      "test_equal_galaxy_RMSE_km_s": 11.035698643117748,
+      "test_pooled_RMSE_km_s": 11.527216964655317,
+      "fixed_RAR_test_pooled_RMSE_km_s": 12.355063965333363,
+      "test_pooled_improvement_fraction": 0.06700467136397459,
+      "fixed_RAR_test_equal_galaxy_RMSE_km_s": 11.318298554788052,
+      "test_equal_galaxy_improvement_fraction": 0.024968409368451794
+    }
+  ],
+  "global_all_data_best_candidate": {
+    "candidate_id": "q2__f0.2__n1__RAR",
+    "equal_galaxy_RMSE_km_s": 10.361600732478237
+  },
+  "unique_fold_selected_candidates": 5,
+  "boundary_flags": {
+    "q_R80_at_upper_boundary": true,
+    "route_fraction_at_lower_boundary": false,
+    "gate_power_at_upper_boundary": true
+  },
+  "strongest_morphology_associations": [
+    {
+      "feature": "concentration_R50_over_R80",
+      "galaxies": 131,
+      "spearman_rho": 0.23305396893183153,
+      "p_value": 0.0073875060978869835,
+      "BH_FDR_q": 0.024510544881174507
+    },
+    {
+      "feature": "baryonic_bulge_fraction",
+      "galaxies": 131,
+      "spearman_rho": -0.22865923749285277,
+      "p_value": 0.008615643128843125,
+      "BH_FDR_q": 0.024510544881174507
+    },
+    {
+      "feature": "gas_fraction",
+      "galaxies": 131,
+      "spearman_rho": 0.22678695350451075,
+      "p_value": 0.00919145433044044,
+      "BH_FDR_q": 0.024510544881174507
+    },
+    {
+      "feature": "log10_effective_surface_brightness",
+      "galaxies": 131,
+      "spearman_rho": -0.2123161801824127,
+      "p_value": 0.014908092764321755,
+      "BH_FDR_q": 0.02981618552864351
+    },
+    {
+      "feature": "log10_R80_kpc",
+      "galaxies": 131,
+      "spearman_rho": 0.19333262157689637,
+      "p_value": 0.026931918596464707,
+      "BH_FDR_q": 0.04309106975434353
+    }
+  ],
+  "gates": {
+    "oof_equal_galaxy_improvement_pass": true,
+    "oof_galaxies_improved_fraction_pass": false,
+    "fold_count_pass": false,
+    "bootstrap_probability_pass": false
+  },
+  "all_advance_gates_pass": false,
+  "claim_limits": [
+    "This is cross-validation of formula settings with previously fitted nuisance values, not a fully nested nuisance refit.",
+    "Different universal settings are selected in each training fold; the out-of-fold result measures the candidate family's generalization, while parameter stability determines whether one final law is credible.",
+    "RAR remains an empirical scalar completion and the spherical force-equivalent mapping is not a disk-field derivation.",
+    "Morphology correlations are exploratory and do not establish causation."
+  ]
+}

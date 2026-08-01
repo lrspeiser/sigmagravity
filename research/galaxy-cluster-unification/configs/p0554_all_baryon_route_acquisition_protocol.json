@@ -1,0 +1,93 @@
+{
+  "protocol_version": "P0554-ALL-BARYON-ROUTE-ACQUISITION-0.1.0",
+  "frozen_utc": "2026-08-01T06:10:00Z",
+  "status": "frozen_before_rxj2129_f160w_or_new_chandra_pixel_download_and_inspection",
+  "question": "Can registered continuous stellar light and hot-gas morphology replace the member-only proxy in the P0554 launch-to-arrival route test?",
+  "selection_boundary": [
+    "The five clusters are fixed by the existing raw-lensing sample and were not selected from gas or diffuse-light morphology.",
+    "Only public HST F160W science/weight mosaics and public Chandra primary event/image products are acquired.",
+    "Four F160W systems are reused from the separately frozen CLASH morphology acquisition; RX J2129 F160W is added here before pixel inspection.",
+    "Every archived, public, imaging-mode ACIS observation within 0.16 degrees of each frozen center is included; no observation is selected by a lens residual.",
+    "The acquisition cannot authorize a gravity result. Registration, point-source masking, gas-proxy construction, route formula, and validation gates require a later frozen protocol.",
+    "X-ray surface brightness is not gas mass without exposure, temperature, emissivity, and deprojection modeling. It may initially be used only as a morphology proxy."
+  ],
+  "official_sources": {
+    "hst": "MAST/STScI CLASH high-level science products",
+    "hst_collection": "https://archive.stsci.edu/prepds/clash/",
+    "chandra": "Chandra Data Archive primary products",
+    "chandra_tap": "https://cda.cfa.harvard.edu/cxctap/sync",
+    "chandra_download_root": "https://cxc.cfa.harvard.edu/cdaftp/byobsid"
+  },
+  "hst": {
+    "reused_acquisition_protocol": "configs/clash_stellar_morphology_acquisition_protocol.json",
+    "reused_labels": ["MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "new_system": {
+      "label": "RXJ2129",
+      "center_ra_deg": 322.4165,
+      "center_dec_deg": 0.0892138889,
+      "lens_redshift": 0.234,
+      "filter": "F160W",
+      "pixel_scale_mas": 65,
+      "science": {
+        "url": "https://archive.stsci.edu/missions/hlsp/clash/rxj2129/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_rxj2129_f160w_v1_drz.fits",
+        "filename": "hlsp_clash_hst_wfc3ir_rxj2129_f160w_v1_drz.fits",
+        "content_length": 100054080,
+        "etag": "\"5f6b440-4c95b068db600\""
+      },
+      "weight": {
+        "url": "https://archive.stsci.edu/missions/hlsp/clash/rxj2129/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_rxj2129_f160w_v1_wht.fits",
+        "filename": "hlsp_clash_hst_wfc3ir_rxj2129_f160w_v1_wht.fits",
+        "content_length": 100054080,
+        "etag": "\"5f6b440-4c95b06cabf00\""
+      }
+    }
+  },
+  "chandra": {
+    "tap_selection": "Archived ACIS, no-grating observations in a rectangular prefilter covering 0.16 degrees around each center; the listed results are all on-target imaging observations and were frozen before pixel inspection.",
+    "product_selection": ["primary/*evt2.fits.gz", "primary/*cntr_img2.fits.gz", "primary/*full_img2.fits.gz"],
+    "systems": [
+      {
+        "label": "RXJ2129",
+        "center_ra_deg": 322.4165,
+        "center_dec_deg": 0.0892138889,
+        "obsids": [552, 9370],
+        "exposure_ks": 39.6040961730402,
+        "source": "reused:data/raw/r1_rxj2129_chandra"
+      },
+      {
+        "label": "MACS0329",
+        "center_ra_deg": 52.4232083333,
+        "center_dec_deg": -2.1962027778,
+        "obsids": [3257, 3582, 7719, 6108],
+        "exposure_ks": 76.4444105911084
+      },
+      {
+        "label": "MACS0429",
+        "center_ra_deg": 67.4,
+        "center_dec_deg": -2.8852166667,
+        "obsids": [3271],
+        "exposure_ks": 23.165581673783
+      },
+      {
+        "label": "MACS1115",
+        "center_ra_deg": 168.9662916667,
+        "center_dec_deg": 1.4986111111,
+        "obsids": [3275, 9375],
+        "exposure_ks": 55.529573346303
+      },
+      {
+        "label": "MACS1931",
+        "center_ra_deg": 292.9570833333,
+        "center_dec_deg": -26.5756166667,
+        "obsids": [3282, 9382],
+        "exposure_ks": 112.514818794651
+      }
+    ]
+  },
+  "outputs": {
+    "directory": "data/raw/p0554_all_baryon_route",
+    "hst_directory": "data/raw/p0554_all_baryon_route/hst",
+    "chandra_directory": "data/raw/p0554_all_baryon_route/chandra",
+    "provenance": "data/raw/p0554_all_baryon_route/provenance.json"
+  }
+}

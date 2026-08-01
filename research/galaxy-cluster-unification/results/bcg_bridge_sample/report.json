@@ -1,0 +1,318 @@
+{
+  "status": "completed frozen SPIDERS-MaNGA BCG bridge and host-scale controls",
+  "inputs": {
+    "registry_sha256": "5da8f7e3a20f9f7fcd48892611cf21935c1f5da258abe9709258d05e1921a1f1",
+    "jam_sha256": "04ca6385c646d1554f254ec7fb3227fcadb08d326d02a67e5863cac28bb8ce91",
+    "gema_sha256": "244e9286f225b9e1dbef73bb93e1101d840a2a62ec5dabf3aa16ec88cfef1597",
+    "spiders_sha256": "b8c716b561f6984f64ea6a2536344ffad2ddd69aff1c51f3052f3aba3a8247d0",
+    "erass_sha256": "e79c392e2d7b9e26105ead7d56787713465aa853feb040a227891fb9571b9a54",
+    "tian_sha256": "1865ea4ac61e2850532867306e1729fe731aef7582b4b34e67072a406adb5655"
+  },
+  "selection": {
+    "gema_brightest_group_flag": 1,
+    "jam_minimum_visual_quality": 0,
+    "spiders_maximum_projected_separation_kpc": 200.0,
+    "spiders_maximum_abs_delta_z_factor": 0.01,
+    "require_positive_xray_luminosity": true,
+    "require_positive_r200": true,
+    "deduplicate_on": "SPIDERS CLUS_ID",
+    "deduplication_order": [
+      "highest JAM visual quality",
+      "smallest projected separation",
+      "largest JAM MGE effective radius"
+    ]
+  },
+  "sample": {
+    "systems": 34,
+    "unique_spiders_hosts": 34,
+    "direct_tian_accelerations": 11,
+    "calibrated_dynpop_proxies": 23,
+    "jam_quality_counts": {
+      "0": 24,
+      "1": 10
+    },
+    "host_xray_coverage_fraction": 1.0,
+    "host_cosmic_baryon_chi_r200": {
+      "p10": 6.772507905503929e-07,
+      "median": 1.0183585977353706e-06,
+      "p90": 1.6085654104038285e-06
+    },
+    "projected_separation_kpc": {
+      "median": 0.182471956663782,
+      "maximum": 169.98054336063063
+    }
+  },
+  "disjoint_proxy_calibration": {
+    "test_plateifus_used": false,
+    "calibration_systems": 33,
+    "metrics": {
+      "gobs": {
+        "systems": 33,
+        "offset_dex": 0.0957527281276036,
+        "mean_residual_dex": -0.018602892777732787,
+        "rms_residual_dex": 0.09320242691730342,
+        "median_abs_residual_dex": 0.05617792089549667,
+        "correlation": 0.9174233334183638
+      },
+      "gbar": {
+        "systems": 33,
+        "offset_dex": 0.19449842189236932,
+        "mean_residual_dex": 0.008436747920953227,
+        "rms_residual_dex": 0.09755469298015274,
+        "median_abs_residual_dex": 0.0683499063961932,
+        "correlation": 0.9565037987426335
+      }
+    }
+  },
+  "frozen_h7s_development_fit": {
+    "SPARC_systems": 131,
+    "CLASH_systems": 20,
+    "parameters": {
+      "F": 99.99999999999677,
+      "chi_t": 4.504241726150346e-06,
+      "w_dex": 0.5729980591636848
+    },
+    "raw_vector": [
+      1.999999999999986,
+      -5.346378310537656,
+      0.5729980591636848
+    ],
+    "optimizer_success": true,
+    "starts": 16,
+    "bcg_values_used": false
+  },
+  "metrics": {
+    "fixed_galaxy_rar": {
+      "systems": 34,
+      "chi2_per_point": 7.325919544226258,
+      "rms_dex": 0.2852495018109574,
+      "median_abs_dex": 0.25481753572619237,
+      "mean_residual_dex": -0.26280398554840795,
+      "by_measurement_source": {
+        "DynPop_NSA_calibrated_proxy": {
+          "systems": 23,
+          "chi2_per_point": 6.246465554582412,
+          "rms_dex": 0.29268369461036065,
+          "median_abs_dex": 0.2616660473231498,
+          "mean_residual_dex": -0.2647238559970812
+        },
+        "Tian2024_direct": {
+          "systems": 11,
+          "chi2_per_point": 9.582959704390664,
+          "rms_dex": 0.269042295517038,
+          "median_abs_dex": 0.24796902412923494,
+          "mean_residual_dex": -0.2587897109739094
+        }
+      }
+    },
+    "cluster_scale_rar": {
+      "systems": 34,
+      "chi2_per_point": 3.3695085672376766,
+      "rms_dex": 0.1858993581871235,
+      "median_abs_dex": 0.15630022165063018,
+      "mean_residual_dex": 0.14781999695095654,
+      "by_measurement_source": {
+        "DynPop_NSA_calibrated_proxy": {
+          "systems": 23,
+          "chi2_per_point": 3.780695850752806,
+          "rms_dex": 0.21058695528141338,
+          "median_abs_dex": 0.1771382691693031,
+          "mean_residual_dex": 0.17070946974509027
+        },
+        "Tian2024_direct": {
+          "systems": 11,
+          "chi2_per_point": 2.5097533380696806,
+          "rms_dex": 0.11871031004893744,
+          "median_abs_dex": 0.11729782936988009,
+          "mean_residual_dex": 0.09996019019958605
+        }
+      }
+    },
+    "H7s_standard_mu_potential": {
+      "systems": 34,
+      "chi2_per_point": 5.218007691196071,
+      "rms_dex": 0.2526982681090899,
+      "median_abs_dex": 0.21730139164681805,
+      "mean_residual_dex": -0.22686196597699226,
+      "by_measurement_source": {
+        "DynPop_NSA_calibrated_proxy": {
+          "systems": 23,
+          "chi2_per_point": 4.4375191272986045,
+          "rms_dex": 0.2581700293191051,
+          "median_abs_dex": 0.22442836096248797,
+          "mean_residual_dex": -0.2266806012191486
+        },
+        "Tian2024_direct": {
+          "systems": 11,
+          "chi2_per_point": 6.849938324799862,
+          "rms_dex": 0.24085595980187455,
+          "median_abs_dex": 0.20485852628114642,
+          "mean_residual_dex": -0.22724118319793812
+        }
+      }
+    },
+    "H7s_standard_mu_cosmic_baryon_host_r200": {
+      "systems": 34,
+      "chi2_per_point": 2.8144060318899213,
+      "rms_dex": 0.1680438997590895,
+      "median_abs_dex": 0.12249654924902131,
+      "mean_residual_dex": -0.13450286245424253,
+      "by_measurement_source": {
+        "DynPop_NSA_calibrated_proxy": {
+          "systems": 23,
+          "chi2_per_point": 1.9834540193130896,
+          "rms_dex": 0.16441796606217912,
+          "median_abs_dex": 0.11430906355898962,
+          "mean_residual_dex": -0.1250459844434291
+        },
+        "Tian2024_direct": {
+          "systems": 11,
+          "chi2_per_point": 4.551851149096024,
+          "rms_dex": 0.17538332625208816,
+          "median_abs_dex": 0.130684034939053,
+          "mean_residual_dex": -0.1542763346586706
+        }
+      }
+    },
+    "H7s_standard_mu_erass_median_gas_host_r200": {
+      "systems": 34,
+      "chi2_per_point": 3.9824244177158645,
+      "rms_dex": 0.20974778692424442,
+      "median_abs_dex": 0.16695206562587206,
+      "mean_residual_dex": -0.18381328035325945,
+      "by_measurement_source": {
+        "DynPop_NSA_calibrated_proxy": {
+          "systems": 23,
+          "chi2_per_point": 3.0879307925921715,
+          "rms_dex": 0.2092130786427671,
+          "median_abs_dex": 0.17368516460175698,
+          "mean_residual_dex": -0.17853943546077436
+        },
+        "Tian2024_direct": {
+          "systems": 11,
+          "chi2_per_point": 5.85272927024722,
+          "rms_dex": 0.21086143182361886,
+          "median_abs_dex": 0.16021896664998714,
+          "mean_residual_dex": -0.19484041058300103
+        }
+      }
+    },
+    "H7s_standard_mu_erass_p90_gas_host_r200": {
+      "systems": 34,
+      "chi2_per_point": 3.4930984914494716,
+      "rms_dex": 0.19261976797091435,
+      "median_abs_dex": 0.1477325624252055,
+      "mean_residual_dex": -0.16455959106485007,
+      "by_measurement_source": {
+        "DynPop_NSA_calibrated_proxy": {
+          "systems": 23,
+          "chi2_per_point": 2.602106696024939,
+          "rms_dex": 0.19049255798552597,
+          "median_abs_dex": 0.15047868455401492,
+          "mean_residual_dex": -0.15750320693870973
+        },
+        "Tian2024_direct": {
+          "systems": 11,
+          "chi2_per_point": 5.35608133642804,
+          "rms_dex": 0.1969933578822014,
+          "median_abs_dex": 0.14498644029639607,
+          "mean_residual_dex": -0.1793138487831435
+        }
+      }
+    }
+  },
+  "host_completion": {
+    "status": "frozen before the first host-completed score",
+    "r200_source": "SPIDERS R200C_DEG converted at SCREEN_CLUZSPEC with Planck18",
+    "mass_definition": "M200=(4*pi/3)*200*rho_critical(z)*R200^3",
+    "baryon_fraction": "Planck18 Ob0/Om0",
+    "host_chi": "G*(Ob0/Om0)*M200/(R200*c^2)",
+    "profile_factor": 1.0,
+    "combined_environment": "chi_BCG_baryons + chi_host",
+    "fitted_to_bcg_accelerations": false,
+    "external_gas_controls": [
+      "eRASS1 median FGAS500 applied to the SPIDERS M200/R200 scale",
+      "eRASS1 p90 FGAS500 applied as a gas-rich upper control"
+    ],
+    "guardrail": "These are catalog-scale potential controls, not resolved gas density profiles."
+  },
+  "external_erass_gas_fraction": {
+    "systems": 10440,
+    "p10": 0.02,
+    "median": 0.064,
+    "p90": 0.098
+  },
+  "gate_audit": {
+    "sample": {
+      "systems": 34,
+      "systems_minimum": 30,
+      "systems_pass": true,
+      "host_xray_coverage_fraction": 1.0,
+      "coverage_minimum": 0.8,
+      "coverage_pass": true,
+      "passes_all": true
+    },
+    "scores": {
+      "H7s_standard_mu_potential": {
+        "continue": {
+          "chi2_per_point": false,
+          "absolute_mean_residual": false,
+          "passes_all": false
+        },
+        "scientific_success": {
+          "chi2_per_point": false,
+          "rms": false,
+          "absolute_mean_residual": false,
+          "passes_all": false
+        }
+      },
+      "H7s_standard_mu_erass_median_gas_host_r200": {
+        "continue": {
+          "chi2_per_point": true,
+          "absolute_mean_residual": false,
+          "passes_all": false
+        },
+        "scientific_success": {
+          "chi2_per_point": false,
+          "rms": false,
+          "absolute_mean_residual": false,
+          "passes_all": false
+        }
+      },
+      "H7s_standard_mu_erass_p90_gas_host_r200": {
+        "continue": {
+          "chi2_per_point": true,
+          "absolute_mean_residual": false,
+          "passes_all": false
+        },
+        "scientific_success": {
+          "chi2_per_point": false,
+          "rms": false,
+          "absolute_mean_residual": false,
+          "passes_all": false
+        }
+      },
+      "H7s_standard_mu_cosmic_baryon_host_r200": {
+        "continue": {
+          "chi2_per_point": true,
+          "absolute_mean_residual": true,
+          "passes_all": true
+        },
+        "scientific_success": {
+          "chi2_per_point": true,
+          "rms": true,
+          "absolute_mean_residual": false,
+          "passes_all": false
+        }
+      }
+    }
+  },
+  "interpretation_guardrails": [
+    "This is a new, disjoint BCG bridge sample except for direct Tian test values; no BCG value entered the H7s theory fit.",
+    "The DynPop/NSA proxy offsets were calibrated only on Tian systems absent from the test sample.",
+    "JAM quality zero systems are retained with the empirical proxy-calibration scatter propagated as measurement uncertainty.",
+    "The host-completed score uses a zero-fit cosmic-baryon potential scale derived from SPIDERS R200; it does not fit a host normalization to BCG accelerations.",
+    "The eRASS median and p90 gas-fraction controls are derived from 10,440 independent catalog systems and likewise use no BCG acceleration.",
+    "SPIDERS R200 is inferred from X-ray scaling and is not a resolved gas density profile, so even a passing score would license a resolved-profile test rather than complete Stage 4."
+  ]
+}

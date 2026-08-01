@@ -1,0 +1,58 @@
+{
+  "protocol_version": "P0554-LOCAL-NEIGHBOR-PARAMETER-SCREEN-0.1.0",
+  "frozen_utc": "2026-08-01T04:25:00Z",
+  "status": "frozen_after_local_soft_200_exact_result_before_any_distance_or_weight_profile_score",
+  "question": "Which universal part of the local-neighbor direction is most impactful: coherence length, distance falloff, or baryonic source weighting?",
+  "parent": {
+    "variant_id": "local_s200_p2_w1",
+    "eta": 0.30,
+    "local_mix": 1.0,
+    "softening_kpc": 200.0,
+    "distance_power": 2.0,
+    "neighbor_weight_power": 1.0,
+    "symmetric_bend_degrees": 0.0,
+    "center_mode": "light_centroid"
+  },
+  "coordinates": {
+    "softening_kpc": [50.0, 75.0, 100.0, 150.0, 200.0, 250.0, 300.0, 400.0, 600.0, 1000.0],
+    "distance_power": [0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
+    "neighbor_weight_power": [0.5, 0.75, 1.0, 1.25, 1.5, 2.0]
+  },
+  "coordinate_rule": "Vary one coordinate at a time around the parent; duplicate parent values are evaluated once.",
+  "field_law": "v_i=sum_{j!=i} w_j^(p_w) (x_j-x_i)/(distance_ij^2+s^2)^((p_d+1)/2), followed by unit normalization",
+  "evaluation": {
+    "systems": ["RXJ2129", "MACS0329", "MACS0429", "MACS1115", "MACS1931"],
+    "spent_selection_system": "MACS1931",
+    "fixed_geometry_source": "eta=0 exact-refit geometry from p0554_subcritical_route_transfer",
+    "source_positions": "profiled on training images separately for each formula",
+    "primary_scope": "equal-system held-out Jacobian-linearized RMS over the four systems other than MACS1931",
+    "shortlist_minimum_improvement_fraction_vs_local_parent": 0.002,
+    "shortlist_minimum_primary_systems_improved": 3,
+    "shortlist_maximum_single_system_worsening_fraction": 0.005,
+    "no_formula_promotion": true
+  },
+  "inputs": {
+    "interaction_protocol": "configs/p0554_route_softness_interaction_protocol.json",
+    "localization_protocol": "configs/p0554_route_localization_screen_protocol.json",
+    "local_exact_report": "results/p0554_local_neighbor_exact/report.json",
+    "fixed_geometry": "results/p0554_subcritical_route_transfer/geometry.csv"
+  },
+  "outputs": {
+    "directory": "results/p0554_local_neighbor_parameter_screen",
+    "scores": "scores.csv",
+    "system_scores": "system_scores.csv",
+    "coordinate_summary": "coordinate_summary.csv",
+    "shortlist": "shortlist.csv",
+    "field_audits": "field_audits.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0554_local_neighbor_parameter_screen.png"
+  },
+  "claim_limits": [
+    "This is a spent-data fixed-geometry local-response sensitivity analysis, not an exact root test.",
+    "The member catalog omits accepted registered gas and diffuse ICL.",
+    "Parameter optima may absorb catalog selection and projected-geometry artifacts.",
+    "Galaxy, radial-CLASH, and Solar values are unchanged by construction.",
+    "A candidate must pass a separately frozen exact-refit and global-root test before any stronger interpretation."
+  ]
+}

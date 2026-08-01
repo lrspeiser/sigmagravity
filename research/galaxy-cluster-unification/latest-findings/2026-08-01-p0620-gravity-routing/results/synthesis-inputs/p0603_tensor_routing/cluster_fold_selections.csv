@@ -1,0 +1,6 @@
+fold,selected_candidate_id,training_equal_JS,training_systems,heldout_systems,fraction_max,length_over_R80,radius_exponent,width_over_R80,external_direction_mix,tensor_axis_ratio,tensor_orientation,shape_gate,candidate_id,changed_parameter,changed_level
+0,T004_fraction_max_1.0,0.0644141116015765,8,2,1.0,1.0,-0.5,0.25,0.0,1.5,tidal,H,T004_fraction_max_1.0,fraction_max,1.0
+1,T003_fraction_max_0.75,0.05572548481750987,8,2,0.75,1.0,-0.5,0.25,0.0,1.5,tidal,H,T003_fraction_max_0.75,fraction_max,0.75
+2,T006_length_over_R80_0.75,0.06591654640362182,8,2,0.6,0.75,-0.5,0.25,0.0,1.5,tidal,H,T006_length_over_R80_0.75,length_over_R80,0.75
+3,T003_fraction_max_0.75,0.06877137249158126,8,2,0.75,1.0,-0.5,0.25,0.0,1.5,tidal,H,T003_fraction_max_0.75,fraction_max,0.75
+4,T021_tensor_axis_ratio_1.0,0.061549441334716515,8,2,0.6,1.0,-0.5,0.25,0.0,1.0,tidal,H,T021_tensor_axis_ratio_1.0,tensor_axis_ratio,1.0

@@ -1,0 +1,115 @@
+{
+  "protocol_version": "P0557-BARYON-PROXY-TIDAL-0.1.0",
+  "frozen_utc": "2026-07-31T20:00:00Z",
+  "status": "frozen_before_any_baryon_proxy_tidal_score",
+  "question": "Can registered stellar-light or X-ray morphology supply the missing environmental tensor direction even before a spectroscopy-derived gas-mass map exists?",
+  "weak_field_equation": {
+    "matter_split": "Phi=Phi_N+phi_Sigma with fixed RAR for matter",
+    "locked_slip_s": 5.0,
+    "tensor_operator": "partial_i[(delta_ij+t*Q_ij(proxy))*partial_j phi_Sigma]=source_Sigma",
+    "first_order_equation": "laplacian(delta_phi)=-partial_i(Q_ij(proxy)*partial_j phi_Sigma)",
+    "new_universal_parameters": ["t"],
+    "discrete_structural_choice": "one predeclared proxy mixture and one of contrast/full tensor",
+    "per_cluster_gravity_parameters": 0
+  },
+  "proxy_maps": {
+    "axis_min_arcsec": -60.0,
+    "axis_max_arcsec": 60.0,
+    "grid_spacing_arcsec": 1.0,
+    "compression_block_pixels": 8,
+    "stellar_proxy": "background-subtracted, image-masked CLASH F160W light",
+    "gas_linear_proxy": "point-source-masked 0.7-2.0 keV Chandra count-rate morphology",
+    "gas_sqrt_proxy": "square root of the same count-rate morphology; density-like only under an intentionally naive constant-depth, constant-emissivity approximation",
+    "amplitude_rule": "each component is normalized to unit weight before a frozen mixture; neither flux nor counts set gravity amplitude"
+  },
+  "morphology_variants": [
+    {"variant_id": "member", "member_fraction": 1.0, "star_fraction": 0.0, "gas_fraction": 0.0, "gas_transform": "sqrt"},
+    {"variant_id": "star", "member_fraction": 0.0, "star_fraction": 1.0, "gas_fraction": 0.0, "gas_transform": "sqrt"},
+    {"variant_id": "gas_linear", "member_fraction": 0.0, "star_fraction": 0.0, "gas_fraction": 1.0, "gas_transform": "linear"},
+    {"variant_id": "gas_sqrt", "member_fraction": 0.0, "star_fraction": 0.0, "gas_fraction": 1.0, "gas_transform": "sqrt"},
+    {"variant_id": "member75_gas25", "member_fraction": 0.75, "star_fraction": 0.0, "gas_fraction": 0.25, "gas_transform": "sqrt"},
+    {"variant_id": "member50_gas50", "member_fraction": 0.50, "star_fraction": 0.0, "gas_fraction": 0.50, "gas_transform": "sqrt"},
+    {"variant_id": "star75_gas25", "member_fraction": 0.0, "star_fraction": 0.75, "gas_fraction": 0.25, "gas_transform": "sqrt"},
+    {"variant_id": "star50_gas50", "member_fraction": 0.0, "star_fraction": 0.50, "gas_fraction": 0.50, "gas_transform": "sqrt"},
+    {"variant_id": "member50_star25_gas25", "member_fraction": 0.50, "star_fraction": 0.25, "gas_fraction": 0.25, "gas_transform": "sqrt"}
+  ],
+  "tensor_operators": [
+    {"operator_id": "contrast", "subtract_circular_mean": true},
+    {"operator_id": "full", "subtract_circular_mean": false}
+  ],
+  "tensor_coupling": {
+    "grid": [-0.9, -0.6, -0.3, 0.0, 0.3, 0.6, 0.9],
+    "ellipticity_preserving_domain": "abs(t)<1 because every proxy tensor is normalized to eigenvalue magnitude at most one"
+  },
+  "cluster_split": {
+    "selection_labels": ["MACS0329", "MACS0429"],
+    "validation_labels": ["MACS1115", "MACS1931"],
+    "within_family_rule": "hold out the lexicographically last image in every family with at least three images",
+    "disclosure": "all clusters are spent at project level, but validation proxy-tensor scores remain unread until the structural candidate is chosen on the selection clusters"
+  },
+  "stages": {
+    "screen": {
+      "pixels_per_axis": 256,
+      "fixed_source_and_geometry": true,
+      "selection_metric": "equal-system local training RMS on the two selection clusters",
+      "nonzero_candidates_for_exact_refit": 4,
+      "candidate_diversity_rule": "retain only the best nonzero t for each morphology/operator pair before taking the four best pairs"
+    },
+    "exact_selection": {
+      "pixels_per_axis": 512,
+      "starts_per_fit": 2,
+      "eligibility": "all exact training and held-out roots converge in both selection clusters",
+      "choice": "minimum equal-system exact training RMS among eligible nonzero candidates; always retain t=0 as control"
+    },
+    "validation": {
+      "pixels_per_axis": 512,
+      "starts_per_fit": 6,
+      "rule": "score the single exact-selection choice and t=0 on the two different validation clusters"
+    }
+  },
+  "environment_tensor": {
+    "primary_softening_kpc": 20.0,
+    "softening_sensitivity_kpc": [10.0, 30.0],
+    "field_half_width_arcsec": 256.0,
+    "polar_mean_radii": 384,
+    "polar_mean_azimuths": 720
+  },
+  "optimization": {
+    "baseline_starts": 2,
+    "maximum_function_evaluations": 2000,
+    "random_seed": 20260731
+  },
+  "advance_gates": {
+    "validation_all_roots_converged": true,
+    "validation_RMS_improvement_over_zero_fraction_min": 0.10,
+    "validation_to_compact_halo_RMS_ratio_max": 1.25,
+    "maximum_solver_edge_Q_eigenvalue": 0.12,
+    "maximum_normalized_curl_RMS": 0.001
+  },
+  "inputs": {
+    "member_tidal_protocol": "configs/member_tidal_metric_protocol.json",
+    "all_baryon_protocol": "configs/p0554_all_baryon_route_screen_protocol.json",
+    "all_baryon_input_audit": "results/p0554_all_baryon_route_input_audit/report.json",
+    "metric_slip_report": "results/metric_slip_raw_lensing/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0557_baryon_proxy_tidal",
+    "component_audits": "component_audits.csv",
+    "tensor_audits": "tensor_audits.csv",
+    "screen_scores": "screen_scores.csv",
+    "exact_selection_scores": "exact_selection_scores.csv",
+    "validation_scores": "validation_scores.csv",
+    "predictions": "predictions.csv",
+    "report": "report.json",
+    "figure": "p0557_baryon_proxy_tidal.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "X-ray brightness is not projected gas mass; linear and square-root transformations are morphology stress tests only.",
+    "F160W is a light proxy with mass-to-light, foreground/background, and masking uncertainty.",
+    "The compressed pseudo-source catalog preserves coarse shape, not native image resolution.",
+    "This is a first-order projected weak-field closure, not a covariant field theory.",
+    "Galaxy and Solar scores are inherited unchanged only because this candidate is explicitly an external cluster-environment tensor; that restriction itself would need a universal covariant definition.",
+    "No formula can be promoted without a spectroscopy-derived gas surface-density map and independent clusters."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "protocol_version": "UNBOUNDED-RUNNING-MULTICLUSTER-FAILURE-0.4.1",
+  "frozen_utc": "2026-07-29T09:08:00Z",
+  "status": "frozen_after_primary_failure_before_amplitude_scores",
+  "purpose": "Determine whether the failed raw-image transfer is primarily a missing per-cluster normalization or angular/substructure information.",
+  "claim_boundary": "The amplitude is deliberately non-universal and forbidden as a survivor. It is chosen on training images only and used solely to diagnose the locked-law failure.",
+  "candidate_models": ["curvature_power_p2", "curvature_additive_alpha10"],
+  "amplitude_grid": [0.25, 0.35, 0.5, 0.7, 1.0, 1.4, 2.0, 2.8, 4.0],
+  "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+  "optimization": {"multi_starts_per_grid_value": 4, "random_seed": 20260802},
+  "diagnostic_thresholds": {
+    "normalization_rescue_fraction_of_locked_RMS_max": 0.5,
+    "amplitude_universality_fractional_range_max": 0.2,
+    "compact_halo_geometry_adequate_RMS_arcsec_max": 2.0,
+    "candidate_within_compact_halo_ratio_max": 1.25
+  },
+  "inputs": {
+    "primary_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "primary_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "outputs": {
+    "report": "results/unbounded_running_multicluster_failure_diagnostic/report.json",
+    "grid": "results/unbounded_running_multicluster_failure_diagnostic/amplitude_grid.csv",
+    "predictions": "results/unbounded_running_multicluster_failure_diagnostic/predictions.csv",
+    "summary": "results/unbounded_running_multicluster_failure_diagnostic/SUMMARY.md"
+  }
+}

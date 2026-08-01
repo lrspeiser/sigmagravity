@@ -1,0 +1,38 @@
+{
+  "protocol_version": "TENSOR-DIRECTIONAL-TRADEOFF-0.1.0",
+  "frozen_utc": "2026-07-29T06:30:00Z",
+  "status": "postfailure_frozen_before_exact_refits",
+  "disclosure": "These q values were chosen after inspecting the primary tensor run and a fixed-nuisance q scan. Results are exploratory and not independent confirmation.",
+  "options": {
+    "alignment_q035": {
+      "base_model": "tensor_alignment",
+      "fixed_q": 0.35,
+      "parameters": ["C_solar", "log10_T_star_s2", "n"],
+      "bounds": [[0.02, 0.95], [-34.0, -28.0], [0.25, 8.0]]
+    },
+    "dominance_q035": {
+      "base_model": "tensor_dominance",
+      "fixed_q": 0.35,
+      "parameters": ["C_solar", "log10_T_star_s2", "n"],
+      "bounds": [[0.02, 0.95], [-34.0, -28.0], [0.25, 8.0]]
+    }
+  },
+  "bridge_folds": 5,
+  "bridge_seed": 20260729,
+  "optimization": {
+    "differential_evolution_maxiter": 180,
+    "differential_evolution_popsize": 14,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "inputs": {
+    "primary_protocol": "configs/tensor_completion_full_test_protocol.json",
+    "primary_report": "results/tensor_completion_full_test/report.json"
+  },
+  "outputs": {
+    "report": "results/tensor_directional_tradeoff/report.json",
+    "bridge_predictions": "results/tensor_directional_tradeoff/bridge_predictions.csv",
+    "SPARC_predictions": "results/tensor_directional_tradeoff/sparc_predictions.csv",
+    "raw_lensing_predictions": "results/tensor_directional_tradeoff/raw_lensing_predictions.csv",
+    "summary": "results/tensor_directional_tradeoff/SUMMARY.md"
+  }
+}

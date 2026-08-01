@@ -1,0 +1,162 @@
+{
+  "protocol_version": "REOPENED-HYBRID-ENDPOINT-POWER-EXTENSION-AUDIT-0.1.0",
+  "frozen_utc": "2026-08-01T08:15:00Z",
+  "status": "frozen_before_fixed_parameter_scores",
+  "purpose": "Bracket the boundary source-power direction and test constant-CLASH-effective-power and constant-SPARC-effective-power paths around the exact endpoint.",
+  "claim_boundary": [
+    "The preceding 5 by 5 local grid improved monotonically toward more negative acceleration power p and more positive radius power q, so this fixed audit extends both boundaries before any refit winner is selected.",
+    "The constant-effective-power paths use measured median log slopes, not galaxy or cluster labels inside the gravity formula.",
+    "Holding one domain's approximate effective radial power fixed tests whether p supplies differential leverage beyond the shared q shift.",
+    "This is a fixed-parameter structural screen; full bridge refitting, raw lensing, and eight-start replay remain required.",
+    "Only these equations and ranges can be ranked; no parent mechanism is rejected."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv"
+  },
+  "base_sources": {
+    "representative_endpoint": {
+      "report": "results/reopened_hybrid_smoothed_local_pivot_extension/report.json",
+      "variant": "steep_endpoint_scale:radial_memory_log_scale=0.8",
+      "settings": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5
+      }
+    }
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"]
+  },
+  "common_memory": {
+    "radial_memory_strength": 1.0,
+    "radial_memory_log_scale": 0.8,
+    "radial_memory_gbar_power": -0.5,
+    "radial_memory_radius_power": 1.5,
+    "radial_memory_channel_code": 0,
+    "radial_memory_outer_to_inner": false,
+    "radial_memory_pre_screen": false,
+    "radial_memory_slope_gate_strength": 0.0
+  },
+  "audit_designs": {
+    "q_at_p_minus_1p25": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5],
+      "overrides": {"radial_memory_gbar_power": -1.25}
+    },
+    "q_at_p_minus_1": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5],
+      "overrides": {"radial_memory_gbar_power": -1.0}
+    },
+    "q_at_p_minus_0p875": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5],
+      "overrides": {"radial_memory_gbar_power": -0.875}
+    },
+    "q_at_p_minus_0p75": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5],
+      "overrides": {"radial_memory_gbar_power": -0.75}
+    },
+    "q_at_p_minus_0p625": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5],
+      "overrides": {"radial_memory_gbar_power": -0.625}
+    },
+    "constant_clash_p_minus_1p5": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.0521933023355403],
+      "overrides": {"radial_memory_gbar_power": -1.5}
+    },
+    "constant_clash_p_minus_1p25": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.1641449767516554],
+      "overrides": {"radial_memory_gbar_power": -1.25}
+    },
+    "constant_clash_p_minus_1": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.2760966511677701],
+      "overrides": {"radial_memory_gbar_power": -1.0}
+    },
+    "constant_clash_p_minus_0p875": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.3320724883759728],
+      "overrides": {"radial_memory_gbar_power": -0.875}
+    },
+    "constant_clash_p_minus_0p75": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.3880483255841149],
+      "overrides": {"radial_memory_gbar_power": -0.75}
+    },
+    "constant_clash_p_minus_0p625": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.4440241627920574],
+      "overrides": {"radial_memory_gbar_power": -0.625}
+    },
+    "constant_clash_p_minus_0p5": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.5],
+      "overrides": {"radial_memory_gbar_power": -0.5}
+    },
+    "constant_sparc_p_minus_1p5": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [-0.0565053030708258],
+      "overrides": {"radial_memory_gbar_power": -1.5}
+    },
+    "constant_sparc_p_minus_1p25": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [0.3326210226968806],
+      "overrides": {"radial_memory_gbar_power": -1.25}
+    },
+    "constant_sparc_p_minus_1": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [0.7217473484645870],
+      "overrides": {"radial_memory_gbar_power": -1.0}
+    },
+    "constant_sparc_p_minus_0p875": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [0.9163105113484402],
+      "overrides": {"radial_memory_gbar_power": -0.875}
+    },
+    "constant_sparc_p_minus_0p75": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.1108736742322934],
+      "overrides": {"radial_memory_gbar_power": -0.75}
+    },
+    "constant_sparc_p_minus_0p625": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.3054368371161467],
+      "overrides": {"radial_memory_gbar_power": -0.625}
+    },
+    "constant_sparc_p_minus_0p5": {
+      "fixed_name": "radial_memory_radius_power",
+      "values": [1.5],
+      "overrides": {"radial_memory_gbar_power": -0.5}
+    }
+  },
+  "references": {
+    "SPARC_fixed_RAR_outer_RMSE_km_s": 10.681519066526649,
+    "bridge_target_RMSE_dex": 0.139
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1,
+    "audit_mercury_quadrature_points": 4096
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_endpoint_power_extension_audit/report.json",
+    "scores": "results/reopened_hybrid_endpoint_power_extension_audit/scores.csv",
+    "family_impacts": "results/reopened_hybrid_endpoint_power_extension_audit/family_impacts.csv",
+    "summary": "results/reopened_hybrid_endpoint_power_extension_audit/SUMMARY.md"
+  }
+}

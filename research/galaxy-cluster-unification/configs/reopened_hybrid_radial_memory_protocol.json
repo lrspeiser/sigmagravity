@@ -1,0 +1,173 @@
+{
+  "protocol_version": "REOPENED-HYBRID-RADIAL-MEMORY-0.1.0",
+  "frozen_utc": "2026-07-31T14:20:00Z",
+  "status": "frozen_before_reopened_hybrid_scores",
+  "purpose": "Test whether a universal causal radial memory of the excess force changes galaxies and cluster lensing differently, and rank strength, log-radius scale, direction, and screen placement.",
+  "claim_boundary": [
+    "Radial memory is a phenomenological nonlocal formula test, not a derived field equation or claim that gravity literally propagates along radius.",
+    "The memory is an exponential running average in log radius and uses one universal strength and scale per formula setting.",
+    "Single-point profiles reduce exactly to the local law; 46 of 64 bridge systems have one point, so the bridge weakly constrains profile memory.",
+    "SPARC, resolved CLASH profiles, raw cluster profiles, and the Solar radial scan use their measured or constructed ordered radii with no per-system memory parameter.",
+    "The unsaturated n=1.5 and dual-cap RG=2/Sigma=1.5 bases were selected from preceding stages.",
+    "Every setting retains the same four universal fitted gravity parameters with no per-galaxy or per-lens gravity fit.",
+    "Missing held-out lens roots remain failures regardless of RMS over surviving images."
+  ],
+  "inputs": {
+    "bridge_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "sparc_outer_sample": "results/sparc_density_transfer/primary_predictions.csv",
+    "raw_lensing_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+    "raw_image_catalog": "data/derived/r1_clash_caminha2019_image_observables.csv",
+    "tian_baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "raw_reference_report": "results/unbounded_running_multicluster_raw/report.json"
+  },
+  "shared_constants": {
+    "g_reference_m_s2": 1.0e-10,
+    "g_dagger_m_s2": 9.6e-11,
+    "acceleration_screen_m_s2": 1.2e-10,
+    "interplanetary_density_g_cm3": 1.0e-30
+  },
+  "universal_parameters": {
+    "names": ["epsilon_0", "log10_rho_c_g_cm3", "Q", "B"],
+    "bounds": [[0.03, 0.9], [-31.0, -20.0], [0.1, 30.0], [0.0, 30.0]]
+  },
+  "sensitivity_families": {
+    "unsaturated_strength": {
+      "fixed_name": "radial_memory_strength",
+      "values": [0.0, 0.25, 0.5, 0.75, 1.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "radial_memory_log_scale": 1.0,
+        "radial_memory_outer_to_inner": false,
+        "radial_memory_pre_screen": false
+      }
+    },
+    "unsaturated_scale": {
+      "fixed_name": "radial_memory_log_scale",
+      "values": [0.1, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "radial_memory_strength": 1.0,
+        "radial_memory_outer_to_inner": false,
+        "radial_memory_pre_screen": false
+      }
+    },
+    "unsaturated_direction": {
+      "fixed_name": "radial_memory_outer_to_inner",
+      "values": [0.0, 1.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "radial_memory_strength": 1.0,
+        "radial_memory_log_scale": 1.0,
+        "radial_memory_pre_screen": false
+      }
+    },
+    "unsaturated_placement": {
+      "fixed_name": "radial_memory_pre_screen",
+      "values": [0.0, 1.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "radial_memory_strength": 1.0,
+        "radial_memory_log_scale": 1.0,
+        "radial_memory_outer_to_inner": false
+      }
+    },
+    "dual_strength": {
+      "fixed_name": "radial_memory_strength",
+      "values": [0.0, 0.25, 0.5, 0.75, 1.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5,
+        "radial_memory_log_scale": 1.0,
+        "radial_memory_outer_to_inner": false,
+        "radial_memory_pre_screen": false
+      }
+    },
+    "dual_scale": {
+      "fixed_name": "radial_memory_log_scale",
+      "values": [0.1, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5,
+        "radial_memory_strength": 1.0,
+        "radial_memory_outer_to_inner": false,
+        "radial_memory_pre_screen": false
+      }
+    },
+    "dual_direction": {
+      "fixed_name": "radial_memory_outer_to_inner",
+      "values": [0.0, 1.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5,
+        "radial_memory_strength": 1.0,
+        "radial_memory_log_scale": 1.0,
+        "radial_memory_pre_screen": false
+      }
+    },
+    "dual_placement": {
+      "fixed_name": "radial_memory_pre_screen",
+      "values": [0.0, 1.0],
+      "base_variant": {
+        "combination": "interaction",
+        "interaction_eta": 1.0,
+        "screen_power": 1.5,
+        "rg_saturation_ceiling": 2.0,
+        "sigma_saturation_ceiling": 1.5,
+        "radial_memory_strength": 1.0,
+        "radial_memory_log_scale": 1.0,
+        "radial_memory_outer_to_inner": false
+      }
+    }
+  },
+  "baseline_variant_name": "unsaturated_strength:radial_memory_strength=0",
+  "optimization": {
+    "bridge_folds": 5,
+    "bridge_seed": 20260905,
+    "differential_evolution_maxiter": 60,
+    "differential_evolution_popsize": 8,
+    "boundary_fraction_tolerance": 0.01
+  },
+  "solar_tests": {
+    "cassini_fractional_force_proxy_limit": 2.3e-5,
+    "earth_orbit_fractional_change_max": 1.0e-10,
+    "mercury_supplementary_precession_absolute_max_mas_per_century": 3.1
+  },
+  "raw_lensing": {
+    "systems": ["MACS J0329.7-0211", "MACS J0429.6-0253", "MACS J1115.9+0129", "MACS J1931.8-2635"],
+    "gravity_parameters_fit_to_raw_lensing": 0,
+    "geometry_multi_starts": 2,
+    "maximum_function_evaluations": 1800,
+    "radial_grid_points": 1536,
+    "impact_grid_points": 360,
+    "line_of_sight_integration_points": 500,
+    "isolated_tail_cutoff_kpc": 1000000.0
+  },
+  "outputs": {
+    "report": "results/reopened_hybrid_radial_memory/report.json",
+    "scores": "results/reopened_hybrid_radial_memory/scores.csv",
+    "bridge_predictions": "results/reopened_hybrid_radial_memory/bridge_predictions.csv",
+    "sparc_predictions": "results/reopened_hybrid_radial_memory/sparc_predictions.csv",
+    "raw_predictions": "results/reopened_hybrid_radial_memory/raw_predictions.csv",
+    "raw_geometry": "results/reopened_hybrid_radial_memory/raw_geometry.csv",
+    "family_impacts": "results/reopened_hybrid_radial_memory/family_impacts.csv",
+    "figure": "results/reopened_hybrid_radial_memory/sensitivity_map.png",
+    "summary": "results/reopened_hybrid_radial_memory/SUMMARY.md"
+  }
+}

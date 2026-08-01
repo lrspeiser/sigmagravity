@@ -1,0 +1,39 @@
+{
+  "protocol_version": "P0568B-TENSOR-WIDTH-REFINEMENT-0.1.0",
+  "frozen_utc": "2026-08-01T01:20:00Z",
+  "status": "frozen_after_p0568_before_extended_width_or_refined_coupling_scores",
+  "question": "Did P0568 select a real low-density tensor effect, or did its 100 kpc smoothing boundary absorb most of the apparent gain?",
+  "parent": {
+    "protocol": "configs/p0568_baryon_only_tensor_forward_protocol.json",
+    "report": "results/p0568_baryon_only_tensor_forward/report.json",
+    "selected_family": "tidal_low_density",
+    "selected_width_kpc": 100.0,
+    "selected_coupling_t": -0.15,
+    "secondary_family": "isotropic_low_density"
+  },
+  "frozen_refinement": {
+    "families": ["tidal_low_density", "isotropic_low_density"],
+    "source_smoothing_kpc": [75.0, 100.0, 125.0, 150.0, 175.0, 200.0],
+    "coupling_t": [-0.3, -0.225, -0.15, -0.075, 0.0, 0.075, 0.15, 0.225, 0.3],
+    "selection": "minimum equal-system mean Jensen-Shannon divergence on the same seven P0568 development clusters",
+    "transfer": "score the locked setting on the three now-spent P0568 holdouts and GLAFIC maps without reselection",
+    "diagnostic_rule": "If the refined best tensor improves development by less than one percent over the refined local-width null or selects t=0, smoothing dominates the P0568 tensor lead."
+  },
+  "cross_domain": {
+    "rule": "Transfer the refined t through the same P0568 SPARC spherical and Solar acceleration-screen proxies.",
+    "no_new_parameters": true
+  },
+  "outputs": {
+    "directory": "results/p0568b_tensor_width_refinement",
+    "scores": "scores.csv",
+    "candidates": "candidates.csv",
+    "report": "report.json",
+    "figure": "p0568b_tensor_width_refinement.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The P0568 holdouts are no longer prospective after the parent result and are descriptive transfer only.",
+    "This refinement does not add hot gas or diffuse light to the baryon maps.",
+    "The same first-order, normalized convergence-shape and spherical galaxy-proxy limits apply."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "protocol_version": "REOPENED-HYBRID-SLOPE-RESPONSE-MODES-RAW-ROBUSTNESS-0.1.0",
+  "frozen_utc": "2026-08-01T00:35:00Z",
+  "status": "frozen_before_raw_robustness_scores",
+  "purpose": "Replay the strongest derivative-safe slope-response compromises, their neighbors, and key fixed or pointwise controls with eight raw-lens geometry starts.",
+  "source_protocol": "configs/reopened_hybrid_slope_response_modes_protocol.json",
+  "source_report": "results/reopened_hybrid_slope_response_modes/report.json",
+  "selected_variants": [
+    "profile_response_memory_scale:radial_memory_log_scale=0.5",
+    "point_response_sharpness:radial_memory_slope_gate_sharpness=16",
+    "point_response_sharpness:radial_memory_slope_gate_sharpness=4",
+    "profile_exponent_sharpness:radial_memory_slope_gate_sharpness=4",
+    "profile_response_sharpness:radial_memory_slope_gate_sharpness=4",
+    "profile_response_steep_radius_power:radial_memory_steep_radius_power=2.5",
+    "profile_response_pivot:radial_memory_slope_gate_pivot=-1.5",
+    "profile_response_strength:radial_memory_slope_gate_strength=0.5",
+    "profile_response_pivot:radial_memory_slope_gate_pivot=-2",
+    "profile_response_strength:radial_memory_slope_gate_strength=0.25",
+    "profile_response_steep_radius_power:radial_memory_steep_radius_power=0.5",
+    "fixed_galaxy_carrier_control:radial_memory_gbar_power=-0.5",
+    "fixed_balanced_carrier_control:radial_memory_gbar_power=-1",
+    "point_exponent_sharpness:radial_memory_slope_gate_sharpness=0.25",
+    "profile_exponent_sharpness:radial_memory_slope_gate_sharpness=16"
+  ],
+  "geometry_multi_starts": 8,
+  "maximum_function_evaluations": 3000,
+  "outputs": {
+    "report": "results/reopened_hybrid_slope_response_modes_raw_robustness/report.json",
+    "predictions": "results/reopened_hybrid_slope_response_modes_raw_robustness/raw_predictions.csv",
+    "geometry": "results/reopened_hybrid_slope_response_modes_raw_robustness/raw_geometry.csv",
+    "profiles": "results/reopened_hybrid_slope_response_modes_raw_robustness/raw_radial_profiles.csv",
+    "summary": "results/reopened_hybrid_slope_response_modes_raw_robustness/SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Universal gravity constants are copied unchanged from the bridge fit.",
+    "No gravity constant, slope gate, carrier exponent, strength, or memory scale is fitted to raw lensing.",
+    "Only pseudo-elliptical geometry, shear, center, and source positions are fitted to raw training images.",
+    "Candidates with missing held-out roots remain failures even when their RMS over surviving roots is small.",
+    "This replay was selected after viewing the two-start results and is a numerical robustness test, not an independent holdout."
+  ]
+}

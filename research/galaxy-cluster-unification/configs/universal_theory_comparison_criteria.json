@@ -1,0 +1,60 @@
+{
+  "criteria_version": "UNIVERSAL-THEORY-COMPARISON-0.2",
+  "adopted_utc": "2026-07-28T19:00:00Z",
+  "status": "user-defined decision criteria adopted after the current derived-target scores and before raw-lensing scoring",
+  "parameter_accounting": {
+    "universal_gravity_settings": "Constants or functional choices shared unchanged by every galaxy and cluster",
+    "object_specific_gravity_parameters": "Halo, acceleration-scale, slip, or force-law parameters independently adjusted for an individual object",
+    "observational_nuisance_parameters": "Distance, inclination, stellar mass-to-light, source position, and calibration quantities required by every theory and reported separately",
+    "measured_physical_inputs": "Baryonic density, gas profile, morphology, and coherence measurements; inputs are not free gravity parameters when inferred without gravity residuals"
+  },
+  "beat_MOND_operational_gate": {
+    "galaxy_parity": "One unchanged candidate setting predicts galaxy rotation curves comparably to or better than fixed-a0 MOND under identical nuisance treatment",
+    "cluster_lensing": "The same unchanged candidate setting predicts raw cluster-lensing observables better than the fixed-a0 MOND comparator under frozen relativistic closures and the same covariance",
+    "prohibited_shortcut": "No separate cluster acceleration scale, lensing multiplier, or object-specific gravity parameter"
+  },
+  "beat_per_object_dark_matter_operational_gate": {
+    "universality": "The candidate uses zero object-specific gravity parameters across galaxies and clusters",
+    "predictive_performance": "The universal candidate matches or beats the declared per-object halo comparator on held-out galaxy and raw cluster-lensing observables",
+    "complexity": "Report global gravity settings, object-specific gravity parameters, and observational nuisances separately",
+    "claim_boundary": "Passing beats the tested per-object halo-fitting protocol, not every dark-matter model or Lambda-CDM"
+  },
+  "current_candidate_accounting": {
+    "universal_settings": [
+      "RAR acceleration scale g_dagger=1.2e-10 m/s^2",
+      "epsilon_0=0.12950519927041917",
+      "log10 rho_c[g/cm^3]=-23.785246000655626",
+      "Q=0.4271580606729452",
+      "coherence gate exponent=2"
+    ],
+    "bridge_fitted_universal_parameters": 3,
+    "object_specific_gravity_parameters_per_galaxy": 0,
+    "observational_nuisance_parameters_per_galaxy": 4
+  },
+  "current_comparator_accounting": {
+    "fixed_simple_MOND": {
+      "universal_gravity_settings": 1,
+      "object_specific_gravity_parameters_per_galaxy": 0,
+      "observational_nuisance_parameters_per_galaxy": 4
+    },
+    "inner_fit_NFW_control": {
+      "universal_halo_law": "NFW",
+      "object_specific_gravity_parameters_per_galaxy": 2,
+      "parameters": ["V200", "concentration"],
+      "observational_nuisance_parameters_per_galaxy": 4
+    }
+  },
+  "current_status": {
+    "galaxy_parity_with_MOND": "pass",
+    "derived_cluster_target_vs_fixed_a0_MOND": "pass_but_NFW_deprojection_dependent_0.1387_vs_0.5184_dex",
+    "derived_cluster_target_complete_cluster_bootstrap": "candidate_better_probability_1.0_interval_minus_0.421_to_minus_0.336_dex",
+    "derived_cluster_target_vs_cluster_retuned_RAR": "candidate_28.1_percent_worse_but_retuned_scale_is_16.83_times_galaxy_value",
+    "raw_cluster_lensing_with_unchanged_setting": "RXJ2129_relative_pilot_pass_but_absolute_gate_fail_1.064_arcsec_vs_0.5_arcsec_gate_all_7_roots",
+    "zero_object_specific_candidate_gravity_parameters": "pass",
+    "galaxy_prediction_vs_inner_fit_NFW_control": "pass",
+    "closeness_to_NFW_derived_cluster_field": "0.1387_dex_equal_cluster_RMSE_1.365_error_normalized_RMS",
+    "raw_cluster_lensing_vs_per_object_dark_matter": "candidate_1.064_arcsec_vs_compact_one_halo_2.536_arcsec_heldout_but_not_established_against_standard_71_halo_model_or_multiple_clusters",
+    "beat_MOND": false,
+    "beat_tested_per_object_dark_matter_protocol": false
+  }
+}

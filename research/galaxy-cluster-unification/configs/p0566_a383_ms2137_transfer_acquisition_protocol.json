@@ -1,0 +1,119 @@
+{
+  "protocol_version": "P0566-A383-MS2137-TRANSFER-ACQUISITION-0.1.0",
+  "frozen_utc": "2026-08-01T04:50:00Z",
+  "status": "frozen_after_metadata_feasibility_before_new_f160w_or_evt2_pixel_download_and_inspection",
+  "question": "Acquire the complete predeclared A383 and MS2137 morphology inputs without opening a science array.",
+  "inputs": {
+    "feasibility_protocol": "configs/p0566_a383_ms2137_transfer_feasibility_protocol.json",
+    "feasibility_report": "results/p0566_a383_ms2137_transfer_feasibility/report.json"
+  },
+  "selection_boundary": [
+    "Targets, centers, lens-family counts, ACCEPT coverage, and archive gates were frozen in P0566 before the remote metadata queries.",
+    "Acquire exactly the two CLASH F160W high-level science/weight mosaics and every frozen public no-grating ACIS evt2 observation listed below.",
+    "Do not open a FITS array, calculate morphology, inspect a thumbnail, or score a lens residual during acquisition.",
+    "A failed length or hash-safe download stops acquisition; it does not authorize choosing a substitute observation.",
+    "Acquisition cannot authorize a gravity result."
+  ],
+  "systems": [
+    {
+      "label": "A383",
+      "hst": [
+        {
+          "kind": "hst_f160w_science",
+          "filename": "hlsp_clash_hst_wfc3ir_a383_f160w_v1_drz.fits",
+          "url": "https://archive.stsci.edu/missions/hlsp/clash/a383/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_a383_f160w_v1_drz.fits",
+          "content_length": 100051200,
+          "etag": "\"5f6a900-4a5c4f1fe71c0\""
+        },
+        {
+          "kind": "hst_f160w_weight",
+          "filename": "hlsp_clash_hst_wfc3ir_a383_f160w_v1_wht.fits",
+          "url": "https://archive.stsci.edu/missions/hlsp/clash/a383/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_a383_f160w_v1_wht.fits",
+          "content_length": 100051200,
+          "etag": "\"5f6a900-4a5c4f21cf640\""
+        }
+      ],
+      "chandra": [
+        {
+          "obsid": 524,
+          "exposure_ks": 9.961839418835199,
+          "filename": "acisf00524N004_evt2.fits.gz",
+          "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/4/524/primary/acisf00524N004_evt2.fits.gz",
+          "content_length": 1473474,
+          "etag": "\"167bc2-5bdb62bc9c9e8\""
+        },
+        {
+          "obsid": 2320,
+          "exposure_ks": 19.285043671658002,
+          "filename": "acisf02320N004_evt2.fits.gz",
+          "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/0/2320/primary/acisf02320N004_evt2.fits.gz",
+          "content_length": 3000881,
+          "etag": "\"2dca31-5bdb771e9fa6c\""
+        },
+        {
+          "obsid": 2321,
+          "exposure_ks": 19.509787000112002,
+          "filename": "acisf02321N005_evt2.fits.gz",
+          "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/2321/primary/acisf02321N005_evt2.fits.gz",
+          "content_length": 5774417,
+          "etag": "\"581c51-5bdb77168999f\""
+        }
+      ]
+    },
+    {
+      "label": "MS2137",
+      "hst": [
+        {
+          "kind": "hst_f160w_science",
+          "filename": "hlsp_clash_hst_wfc3ir_ms2137_f160w_v1_drz.fits",
+          "url": "https://archive.stsci.edu/missions/hlsp/clash/ms2137/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_ms2137_f160w_v1_drz.fits",
+          "content_length": 100048320,
+          "etag": "\"5f69dc0-4b43bd11929c0\""
+        },
+        {
+          "kind": "hst_f160w_weight",
+          "filename": "hlsp_clash_hst_wfc3ir_ms2137_f160w_v1_wht.fits",
+          "url": "https://archive.stsci.edu/missions/hlsp/clash/ms2137/data/hst/scale_65mas/hlsp_clash_hst_wfc3ir_ms2137_f160w_v1_wht.fits",
+          "content_length": 100048320,
+          "etag": "\"5f69dc0-4b43bd11929c0\""
+        }
+      ],
+      "chandra": [
+        {
+          "obsid": 928,
+          "exposure_ks": 43.606022373348,
+          "filename": "acisf00928N005_evt2.fits.gz",
+          "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/8/928/primary/acisf00928N005_evt2.fits.gz",
+          "content_length": 15641069,
+          "etag": "\"eea9ed-61bd10b9347c0\""
+        },
+        {
+          "obsid": 4974,
+          "exposure_ks": 57.380851454728996,
+          "filename": "acisf04974N004_evt2.fits.gz",
+          "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/4/4974/primary/acisf04974N004_evt2.fits.gz",
+          "content_length": 24873431,
+          "etag": "\"17b89d7-5bf5089d612cc\""
+        },
+        {
+          "obsid": 5250,
+          "exposure_ks": 40.547503296687,
+          "filename": "acisf05250N004_evt2.fits.gz",
+          "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/0/5250/primary/acisf05250N004_evt2.fits.gz",
+          "content_length": 11634842,
+          "etag": "\"b1889a-5bf50b2c05fe4\""
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    "directory": "data/raw/p0566_a383_ms2137_transfer",
+    "provenance": "data/raw/p0566_a383_ms2137_transfer/provenance.json"
+  },
+  "claim_limits": [
+    "Downloaded pixels remain unexamined until a pixel-processing and scoring protocol is separately frozen.",
+    "The CLASH images trace F160W light, not a resolved stellar-mass-to-light ratio.",
+    "The Chandra event maps trace soft-X-ray photon rate, not gas surface mass without the separately fixed ACCEPT projection.",
+    "No formula can be promoted from acquisition."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "protocol_version": "P0592B-DIFFUSION-SCALE-NULL-0.1.0",
+  "frozen_utc": "2026-08-01T09:38:00Z",
+  "status": "frozen_after_P0592_pass_before_fixed_width_reselection",
+  "question": "Does the baryon-size-scaled diffusion length contain transferable information beyond an ordinary fixed physical smoothing width?",
+  "base_protocol": "configs/p0592_diffusive_propagator_transfer_protocol.json",
+  "disclosed_P0592_choice": {"q_R80": 0.5, "routed_fraction": 1.0},
+  "fixed_width_null_kpc": [40.0, 60.0, 80.0, 100.0, 120.0, 160.0, 200.0],
+  "selection": "Select the fixed physical width by development mean JSD only, then compare its locked holdout performance with the already locked P0592 q=0.5 propagator.",
+  "gates": {"adaptive_development_improvement_fraction_min": 0.05, "adaptive_holdout_improvement_fraction_min": 0.05, "adaptive_improves_at_least_two_holdout_systems": true, "adaptive_glafic_holdout_improvement_fraction_min": 0.05},
+  "outputs": {"directory": "results/p0592b_diffusion_scale_null", "fixed_candidates": "fixed_candidates.csv", "map_scores": "map_scores.csv", "report": "report.json", "summary": "SUMMARY.md"},
+  "claim_limits": ["A fixed smoothing width is a descriptive null, not a dark-matter likelihood fit.", "The source maps omit gas and ICL, so a failed adaptive scale can reflect an incomplete baryon map rather than failure of every nonlocal field."]
+}

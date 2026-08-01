@@ -1,0 +1,63 @@
+{
+  "protocol_version": "P0571B-NULL-SAFE-TIDAL-CANCELLATION-0.1.0",
+  "frozen_utc": "2026-08-01T04:35:00Z",
+  "status": "frozen_before_tidal_cancellation_interaction_scores",
+  "question": "Can the suggestive P0571 tidal-saddle preference be multiplied by a vector-cancellation gate so it remains exactly zero for an isolated or axisymmetric source, and does that interaction transfer to the three P0567 pilot systems not used in P0571?",
+  "formula": {
+    "source_field": "g_i=w_i*(x_i-x)/(|x_i-x|^2+s^2)^(3/2), corresponding to p=2",
+    "coherence": "C=|sum_i g_i|/sum_i|g_i|",
+    "tidal_balance": "B_T=shear(T)/(shear(T)+|trace(T)|/2)",
+    "activation": "A=(1-C)^alpha * B_T^beta",
+    "fixed_softening_kpc": 50.0,
+    "fixed_source_weight_power": 1.0,
+    "meaning": "The response can activate only where multiple bound baryonic source fields cancel and the local tidal tensor has comparable stretching and compression."
+  },
+  "factorial": {
+    "cancellation_power_alpha": [0.5, 1.0, 2.0],
+    "tidal_power_beta": [0.5, 1.0, 2.0],
+    "candidates": 9,
+    "same_radius_rotations": 71,
+    "rotation_step_degrees": 5.0
+  },
+  "selection_and_validation": {
+    "selection": "Choose the largest absolute equal-system centered-rank effect on the seven P0571 development systems and freeze its high/low direction.",
+    "spent_validation_diagnostic": "Report the signed effect on the three P0571 validation systems, which became spent when their constituent features were inspected.",
+    "primary_validation": "Apply the single selected interaction to P0567's three spent-pilot systems A2537, MACS J0417, and MACS J0949; none entered P0571 invariant selection or inspection.",
+    "method_control": "Apply it to the GLAFIC peaks of all ten fresh systems.",
+    "search_control": "Use 256 deterministic same-radius pseudo-peak trials and the maximum across all nine interactions."
+  },
+  "advance_gates": {
+    "development_absolute_effect_min": 0.15,
+    "max_search_empirical_p_max": 0.10,
+    "pilot_validation_signed_effect_min": 0.10,
+    "pilot_systems_same_direction_min": 2,
+    "method_control_signed_effect_min": 0.05,
+    "fresh_spent_validation_signed_effect_min": 0.05,
+    "exact_axisymmetric_and_solar_null": true
+  },
+  "cross_domain": {
+    "galaxy": "For net axisymmetric baryonic component fields C=1, so A=0; the formula cannot by itself alter an axisymmetric SPARC rotation curve.",
+    "solar": "For a centered point source C=1, so A=0 exactly.",
+    "interpretation": "Passing would identify an angular cluster activation coordinate only, not a standalone replacement for the galaxy scalar force."
+  },
+  "inputs": {
+    "p0571_protocol": "configs/p0571_apparent_peak_baryon_invariant_protocol.json",
+    "p0567_protocol": "configs/p0567_baryon_flux_tensor_backtrack_protocol.json",
+    "p0567_peaks": "results/p0567_baryon_flux_tensor_backtrack/peak_backtracks.csv"
+  },
+  "outputs": {
+    "directory": "results/p0571b_null_safe_tidal_cancellation",
+    "candidate_scores": "candidate_scores.csv",
+    "peak_scores": "peak_scores.csv",
+    "null_maxima": "null_maxima.csv",
+    "report": "report.json",
+    "figure": "p0571b_null_safe_tidal_cancellation.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The three pilot systems and their lens maps are globally spent and contain only five primary peaks.",
+    "The interaction was motivated by the P0571 constituent result and is therefore a refinement, not an independent theory discovery.",
+    "The same peak-selection, incomplete-baryon, standard-GR-map, and coarse-graining limits from P0571 remain.",
+    "An angular activation null in galaxies preserves a parent score but cannot explain galaxy rotation without a separate radial law."
+  ]
+}

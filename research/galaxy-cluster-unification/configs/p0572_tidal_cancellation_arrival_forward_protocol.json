@@ -1,0 +1,73 @@
+{
+  "protocol_version": "P0572-TIDAL-CANCELLATION-ARRIVAL-FORWARD-0.1.0",
+  "frozen_utc": "2026-08-01T04:48:00Z",
+  "status": "frozen_before_any_tidal_cancellation_forward_map_score",
+  "question": "Can the P0571B baryon-only activation calculate an apparent-gravity arrival map that predicts normalized cluster lens morphology without using the target map?",
+  "formula": {
+    "activation": "A(x)=sqrt(1-C(x))*B_T(x)",
+    "coherence": "C=|sum_i g_i|/sum_i|g_i|",
+    "tidal_balance": "B_T=shear(T)/(shear(T)+|trace(T)|/2)",
+    "source_field": "g_i=w_i*(x_i-x)/(|x_i-x|^2+(50 kpc)^2)^(3/2)",
+    "arrival_carriers": {
+      "activation_only": "D=A",
+      "field_weighted": "D=A*sum_i|g_i|",
+      "tidal_weighted": "D=A*||T||_F"
+    },
+    "prediction": "Sigma_pred=(1-f)*B_100+f*normalize[G_w*D]",
+    "conservation": "B_100 and every arrival map are nonnegative and separately unit normalized inside 250 kpc; f only redistributes normalized response.",
+    "parameters": "one universal routed fraction f plus one universal arrival smoothing width; no cluster-specific parameter"
+  },
+  "factorial": {
+    "carrier": ["activation_only", "field_weighted", "tidal_weighted"],
+    "arrival_smoothing_kpc": [20.0, 50.0, 100.0],
+    "route_fraction_f": [0.05, 0.1, 0.2, 0.4, 0.6, 0.8, 1.0],
+    "candidates": 63,
+    "locked_local_width_kpc": 100.0
+  },
+  "validation": {
+    "development_systems": ["A2163", "A3192", "ACT-CL J0102-4915", "CL J0152.7-1357", "MACS J0035.4-2015", "MACS J0257.1-2325", "MACS J0553.4-3342"],
+    "holdout_systems": ["RXC J0032.1+1808", "RXC J0142.9+4438", "RXC J0600.1-2007"],
+    "selection": "Choose one carrier, width, and fraction by minimum equal-system mean Lenstool-ensemble Jensen-Shannon divergence on development systems only.",
+    "holdout": "Score the single locked candidate on the three different systems.",
+    "method_control": "Score the locked candidate and local control against GLAFIC best maps without reselection.",
+    "uncertainty": "Score both against all 100 Lenstool realizations per system.",
+    "spent_disclosure": "All ten systems are globally spent and the split was previously used by P0568; P0572 is prospective only to this activation formula."
+  },
+  "advance_gates": {
+    "holdout_improvement_vs_local_fraction_min": 0.10,
+    "holdout_systems_improved_min": 3,
+    "glafic_holdout_improvement_vs_local_fraction_min": 0.05,
+    "holdout_uncertainty_realizations_improved_fraction_min": 0.70,
+    "axisymmetric_activation_RMS_max": 1e-12,
+    "per_cluster_gravity_parameters": 0,
+    "raw_lensing_followup": "Authorize a separately frozen raw-image-position test only if every gate passes."
+  },
+  "cross_domain": {
+    "galaxy": "The activation is zero for net axisymmetric baryonic component fields, so this layer changes no SPARC rotation speed and cannot replace the required radial scalar law.",
+    "solar": "The activation is exactly zero for one centered source, giving zero Solar force and zero Mercury change.",
+    "scope": "P0572 tests a possible angular destination law, not absolute lensing strength or galaxy dynamics."
+  },
+  "inputs": {
+    "p0568_protocol": "configs/p0568_baryon_only_tensor_forward_protocol.json",
+    "p0567_protocol": "configs/p0567_baryon_flux_tensor_backtrack_protocol.json"
+  },
+  "outputs": {
+    "directory": "results/p0572_tidal_cancellation_arrival_forward",
+    "candidate_scores": "candidate_scores.csv",
+    "system_scores": "system_scores.csv",
+    "uncertainty": "uncertainty.csv",
+    "glafic_scores": "glafic_scores.csv",
+    "activation_audit": "activation_audit.csv",
+    "parameter_impacts": "parameter_impacts.csv",
+    "report": "report.json",
+    "figure": "p0572_tidal_cancellation_arrival_forward.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The targets are normalized standard-GR convergence reconstructions, not raw lensing observables or absolute mass.",
+    "The source map contains photometric member light but omits gas, ICL, and mass-to-light variation.",
+    "The carrier and smoothing choices translate an empirical location invariant into a destination law; they are not derived from an action.",
+    "The development/holdout systems are globally spent, and P0571B was motivated by their prior peak analysis.",
+    "A successful normalized map does not establish correct image multiplicity, shear, time delays, or gravity strength."
+  ]
+}

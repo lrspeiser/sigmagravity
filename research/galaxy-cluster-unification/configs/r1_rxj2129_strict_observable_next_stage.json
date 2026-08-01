@@ -1,0 +1,199 @@
+{
+  "protocol_version": "R1B3-RXJ2129-strict-observable-next-stage-0.7",
+  "status": "X4_full_response_and_hash_locked_HST_H2_centroid_production_active",
+  "frozen_utc": "2026-07-27T10:17:04.508584+00:00",
+  "selection_blind": true,
+  "system": "RX J2129",
+  "cluster_redshift": 0.235,
+  "center_ra_deg": 322.41651,
+  "center_dec_deg": 0.08923,
+  "purpose": "Attempt the shortest premise-level path from an existing 3+3 structural promotion to one covariance-complete observable package by replacing the failed Chandra gas route with independent XMM data and replacing the 0.5-arcsec lens convention with image-measurement covariance. No dynamical, Weyl, or gravity response is fit.",
+  "disclosure": [
+    "HEASARC metadata for XMM ObsID 0093030201, including archived status, 58,916-second duration, public availability, and approximately 706 MB located data, were known before this freeze.",
+    "At the initial freeze, a published analysis implied substantially shorter flare-cleaned exposure than the gross XMM duration; exact cleaned values had not yet been measured locally.",
+    "The existing Jauzac table has 21 spectroscopic images from seven families, including three images from three families inside the frozen 5-arcsec dynamics support.",
+    "The existing 0.5-arcsec diagonal coordinate covariance is a declared likelihood convention, not a measurement covariance, and cannot satisfy this stage.",
+    "Execution update: XMM X1, X2a, X2b1, and X2b2 now pass. MOS2 and pn are retained; MOS1 is excluded by its CCD5 FWC/corner sector scale.",
+    "Execution update: all six immutable X3 annuli pass with 76,279.260 conservative net counts and minimum annular S/N 84.091. This authorizes X4 response calibration and an XMM-specific likelihood freeze, not a temperature, density, gas-mass, response, or gravity fit.",
+    "Execution update: the MOS2+pn X4 direct, a02-to-a01 cross-region, and central-source interface passes. The nominal 650 map request is rejected because SAS realized 81-detector-unit pixels versus the frozen 80-unit ceiling.",
+    "Execution update: the promoted 920-to-1302 convergence gate passes for MOS2 and pn under all unchanged response and geometry thresholds. This authorizes the full X4 response package, not a gas, dynamics, lensing, or gravity fit."
+  ],
+  "completed_inputs": {
+    "dynamics_profile": "Four finite MUSE pPXF bins on 0-5 arcsec support with frozen covariance and accepted baseline/sensitivity checks.",
+    "stellar_light": "Published Hernquist baseline plus local two-band HST total-light profile; physical BCG/ICL split is non-identifiable and must remain marginalized.",
+    "satellite_stars": "Held-out-validated membership likelihood and 2000-draw off-center acceleration covariance.",
+    "lens_coordinates": "21 spectroscopic image coordinates and redshifts are source-traceable; measurement-level coordinate covariance is missing.",
+    "gas": "The Chandra reduction route failed its frozen exposure/background/CALDB gates; no gas likelihood is accepted."
+  },
+  "xmm_metadata_gate": {
+    "catalog": "xmmmaster",
+    "required_obsid": "0093030201",
+    "required_status": "archived",
+    "minimum_gross_duration_seconds": 50000,
+    "required_data_in_heasarc": "Y",
+    "maximum_located_data_bytes": 1000000000,
+    "selection_rule": "Use the sole archived XMM pointing within 12 arcmin of the frozen RX J2129 center; do not add off-axis or unrelated fields after seeing a gas profile."
+  },
+  "xmm_reduction_gate": {
+    "software": "Freeze an exact XMM SAS plus calibration-file environment manifest before event processing.",
+    "instruments_required": [
+      "MOS1",
+      "MOS2",
+      "pn"
+    ],
+    "minimum_instruments_passing": 2,
+    "minimum_cleaned_exposure_seconds_each_passing_instrument": 15000,
+    "minimum_cleaned_to_gross_exposure_fraction_each_passing_instrument": 0.25,
+    "flare_filter": "Predeclare high-energy light-curve bands, bins, and iterative clipping before viewing the cluster surface-brightness profile.",
+    "background": "Use filter-wheel-closed plus unexposed-corner normalization and a local outer-annulus cross-check; require every fitted background scale to remain in [0.5, 2.0].",
+    "point_sources": "Freeze an energy-band-independent union mask before radial gas fitting.",
+    "failure": "If fewer than two EPIC instruments pass exposure, background, calibration, and field-center gates, stop the XMM route without changing thresholds."
+  },
+  "gas_likelihood_gate": {
+    "radial_range_kpc": [
+      10,
+      500
+    ],
+    "minimum_accepted_annuli": 5,
+    "minimum_net_counts_all_passing_instruments": 2000,
+    "minimum_signal_to_noise_each_annulus": 5.0,
+    "maximum_fractional_density_uncertainty_each_annulus": 0.2,
+    "maximum_fractional_temperature_uncertainty_each_annulus": 0.3,
+    "minimum_joint_posterior_draws": 2000,
+    "covariance_positive_semidefinite_required": true,
+    "projection": "Publish one joint posterior for electron-density and temperature parameters and propagate the same draws into spherical gas mass and projected gas surface density; never fit separate dynamical and lensing gas profiles.",
+    "failure": "Stop if five annuli or their covariance cannot be supported. Do not report a one-anchor or diagonal-only substitute."
+  },
+  "hst_astrometric_covariance_gate": {
+    "local_images": [
+      "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_acs_rxj2129_f814w_v1_drz.fits",
+      "data/raw/r1_rxj2129_baryons/hlsp_clash_hst_wfc3ir_rxj2129_f125w_v1_drz.fits"
+    ],
+    "source_ledger": "data/derived/r1_rxj2129_lens_observables.csv",
+    "spectroscopic_images_required": 21,
+    "spectroscopic_families_required": 7,
+    "inner_images_required": [
+      "5.2",
+      "6.3",
+      "8.2"
+    ],
+    "measurement": "For each source-table coordinate, fit a local PSF-convolved flexible elliptical light model plus tilted background independently in F814W and F125W; use 500 noise and local-background bootstrap draws. A union segmentation mask is frozen before centroid fitting.",
+    "minimum_bootstrap_draws": 500,
+    "maximum_cross_band_centroid_difference_arcsec": 0.2,
+    "minimum_per_coordinate_standard_error_arcsec": 0.02,
+    "maximum_per_coordinate_standard_error_arcsec": 0.3,
+    "required_inner_image_acceptance": 3,
+    "minimum_all_field_images_accepted": 18,
+    "covariance": "Combine per-image bootstrap covariance with shared WCS-registration draws to create a full 42x42 measurement covariance. Off-diagonal terms must arise only from shared astrometric registration, not from a mass model or fitted lens residual.",
+    "forbidden": [
+      "published or independently fitted lens-model residuals",
+      "the existing fixed 0.5-arcsec coordinate convention as a measurement error",
+      "moving, deleting, or relabeling an image after inspecting a lens prediction"
+    ],
+    "failure": "If any of images 5.2, 6.3, or 8.2 fails, or fewer than 18 field images pass, retain the source coordinates but do not claim theory-neutral joint covariance."
+  },
+  "stage_outcomes": [
+    {
+      "stage": "R1B3-P1",
+      "outcome": "One exact public XMM observation and the two local HST bands pass source, duration, size, coordinate, and checksum/header feasibility gates.",
+      "advance_if": "Every metadata gate passes and exact files are frozen before download or centroid measurement.",
+      "rethink_if": "Move the same feasibility screen to MACS J1206; do not return to failed RX J2129 Chandra products."
+    },
+    {
+      "stage": "R1B3-P2",
+      "outcome": "At least two EPIC instruments retain at least 15 ks and 25% exposure, with accepted calibration/background products, while at least 18 HST images including all three inner images yield measurement covariances.",
+      "advance_if": "Both the XMM reduction and HST astrometric gates pass independently.",
+      "rethink_if": "Stop the failed branch exactly; do not repair one branch with a lens or gravity model."
+    },
+    {
+      "stage": "R1B3-P3",
+      "outcome": "At least five gas annuli from 10-500 kpc and a full 42x42 image-coordinate covariance join the already accepted dynamics, light, and satellite likelihoods in one source-traceable same-system observable package.",
+      "advance_if": "All uncertainty, covariance, component-marginalization, and common-center gates pass. This authorizes only a separate dynamical/Weyl identifiability audit.",
+      "rethink_if": "If either gas or astrometry fails, RX J2129 stays structural-only and MACS J1206 becomes the next availability screen."
+    }
+  ],
+  "authorization": {
+    "query_XMM_metadata": true,
+    "audit_local_HST_headers_and_coordinate_ledger": true,
+    "download_exact_XMM_observation_after_P1": true,
+    "measure_HST_arc_pixels_after_separate_execution_freeze": true,
+    "reduce_XMM_after_environment_freeze": true,
+    "infer_dynamical_or_Weyl_response": false,
+    "fit_gravity_response": false,
+    "fit_new_force_or_action": false,
+    "construct_X3_annular_count_response_products": true,
+    "freeze_XMM_specific_gas_likelihood_protocol": true,
+    "construct_X4_cross_region_response_products": true,
+    "fit_XMM_temperature_or_density": false
+  },
+  "execution_status": {
+    "XMM_X1_calibration": "pass",
+    "XMM_X2a_flare_exposure": "pass: MOS1 42291.665 s; MOS2 43062.073 s; pn 32012.166 s",
+    "XMM_X2b1_immutable_source_mask": "pass: 87 sources and 783 PSF evaluations",
+    "XMM_X2b2_background": "pass: MOS2 and pn; MOS1 excluded",
+    "XMM_X3_annular_count_response_adequacy": "pass: 6/6 annuli; 76279.260 conservative net counts; minimum S/N 84.091",
+    "XMM_X4_response_interface": "pass: MOS2 and pn direct, cross-region, and central-source products",
+    "XMM_X4_nominal_map_resolution": "fail: requested 650 realized 642x642 with 81-detector-unit pixels versus maximum 80",
+    "XMM_X4_map_resolution_convergence": "pass: MOS2 1.803/1.841/2.034 percent and pn 0.464/0.463/0.523 percent integrated/median/p95 changes",
+    "XMM_X4_PSF_cross_region_response_matrix": "active: full 12 RMF, 12 direct, 72 cross-region, and 12 central-source response production",
+    "HST_H1_registration_segmentation_PSF": "pass: 178 mutual matches; 0.024001 arcsec cross-validated RMS; 607/612 F814W and 203/203 F125W successful PSF fits; every 500-draw bootstrap complete",
+    "HST_H2_centroid_implementation": "pass: exact runner synthetically validated, checksum-locked, and statically audited; the first frame-conversion error is logged and the frame-only correction re-hashed without a written centroid result",
+    "HST_42x42_measurement_covariance": "active H2 measurement; H3 remains locked until at least 18 images including 5.2, 6.3, and 8.2 pass",
+    "gas_temperature_density_likelihood": "locked_until_X4_response_gate_pass",
+    "evidence": [
+      "data/derived/r1_rxj2129_xmm_reduction_manifest.json",
+      "results/r1_rxj2129_xmm_event_processing/qpb_background_audit.json",
+      "results/r1_rxj2129_xmm_event_processing/outer_annulus_transfer_audit.json",
+      "results/r1_rxj2129_xmm_x3_annular_products/report.json",
+      "data/derived/r1_rxj2129_xmm_x3_annular_count_ledger.csv",
+      "results/r1_rxj2129_xmm_x4_response_interface/report.json",
+      "results/r1_rxj2129_xmm_x4_map_resolution_convergence/report.json",
+      "configs/r1_rxj2129_xmm_gas_likelihood_protocol.json",
+      "configs/r1_rxj2129_hst_centroid_covariance_protocol.json",
+      "results/r1_rxj2129_hst_h1/invalid_v0_3/report.json",
+      "results/r1_rxj2129_hst_h1/report.json",
+      "configs/r1_rxj2129_hst_h2_centroid_execution_protocol.json",
+      "results/r1_rxj2129_hst_h2_freeze/report.json"
+    ]
+  },
+  "next_concrete_outcomes": {
+    "X3_annular_products": {
+      "radial_range_kpc": [
+        10,
+        500
+      ],
+      "minimum_accepted_annuli": 5,
+      "minimum_net_counts_all_passing_instruments": 2000,
+      "minimum_signal_to_noise_each_annulus": 5.0,
+      "result": "pass: all 6 annuli; 76279.260 conservative net counts; minimum annular S/N 84.091",
+      "advance_if": "Satisfied. MOS2+pn source, QPB, RMF, and ARF products are complete and the count/SNR thresholds pass under one frozen annular partition.",
+      "rethink_if": "No frozen partition can support five annuli and 2000 net counts; stop the XMM branch without merging below five annuli or changing instruments."
+    },
+    "X4_cross_region_response_matrix": {
+      "instruments": ["MOS2", "pn"],
+      "annuli": 6,
+      "required_cross_region_ARFs": 72,
+      "required_central_point_to_output_ARFs": 12,
+      "advance_if": "Every explicitly sized detector map covers its complete region, every direct response is valid, and every 6x6 input-to-output PSF cross-region ARF matrix passes the frozen audit for both detectors.",
+      "rethink_if": "If calibrated response coverage or PSF mixing cannot be represented without moving an annular edge, stop the XMM branch; do not use the default wide-annulus responses or an independent-annulus approximation."
+    },
+    "HST_measurement_covariance": {
+      "required_images": 21,
+      "required_inner_images": [
+        "5.2",
+        "6.3",
+        "8.2"
+      ],
+      "minimum_images_accepted": 18,
+      "bootstrap_draws": 500,
+      "required_covariance_shape": [
+        42,
+        42
+      ],
+      "H1_result": "pass: 178 matches, 0.024001-arcsec cross-validated RMS, both PSF-fit fractions above 0.9, frozen segmentation, and all 500-draw bootstraps complete",
+      "next_action": "Complete the executing hash-locked H2 runner on every immutable row, preserving all failure reasons. Authorize H3 only if at least 18 images including 5.2, 6.3, and 8.2 pass unchanged gates.",
+      "advance_if": "All three inner images and at least 18 total images pass; covariance is PSD.",
+      "rethink_if": "H1, H2, or H3 fails under the frozen pixel-measurement protocol."
+    }
+  }
+}
