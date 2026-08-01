@@ -1,0 +1,201 @@
+{
+  "status": "pass",
+  "all_primary_gates_pass": true,
+  "gate_results": {
+    "radial_null": true,
+    "physical_path_accumulation": true,
+    "registered_domain_separation": true,
+    "galaxy_channel_small": true,
+    "cluster_channel_present": true,
+    "mass_sensitivity_sign_stable": true,
+    "solar_proxy": true,
+    "rotation_covariance": true,
+    "translation_covariance": true,
+    "sealed_targets_untouched": true
+  },
+  "primary_metrics": {
+    "radial_activation": 3.0408785342331674e-16,
+    "small_offset_activation": 0.0012172084504523408,
+    "large_offset_activation": 0.05093896192050048,
+    "large_over_small_ratio": 41.84900450006773,
+    "registered_galaxy_median_activation": 0.001126900727002061,
+    "registered_cluster_median_activation": 0.021022386822975084,
+    "registered_cluster_to_galaxy_ratio": 18.655047706732585,
+    "mass_sensitivity_cluster_to_galaxy_ratios": {
+      "low": 19.033791244182957,
+      "nominal": 18.655047706732585,
+      "high": 14.949507885176718
+    },
+    "solar_1au_max_future_lambda_coefficient": 4.047038073817436e-07,
+    "rotation_covariance_relative_error": 2.220446049250313e-16,
+    "translation_covariance_relative_error": 1.0551381990353548e-10
+  },
+  "candidate_advanced": true,
+  "candidate": {
+    "base_geometry": "component_cancellation",
+    "Lc_kpc": 10.0,
+    "q": 1.0,
+    "spatial_gravity_parameters": 0,
+    "universal_new_constants": 1
+  },
+  "primary_domain_summary": [
+    {
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "high",
+      "systems": 4,
+      "median_activation": 0.02161848449364008,
+      "minimum_activation": 0.009357756375357703,
+      "maximum_activation": 0.047171416852087686,
+      "median_trace_length_kpc": 168.02364323119468
+    },
+    {
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "low",
+      "systems": 4,
+      "median_activation": 0.01902316226110344,
+      "minimum_activation": 0.006517159754694462,
+      "maximum_activation": 0.040350771894505894,
+      "median_trace_length_kpc": 191.49057053241842
+    },
+    {
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "nominal",
+      "systems": 4,
+      "median_activation": 0.021022386822975084,
+      "minimum_activation": 0.00825713988205149,
+      "maximum_activation": 0.04554622151670161,
+      "median_trace_length_kpc": 176.91366515467993
+    },
+    {
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "high",
+      "systems": 13,
+      "median_activation": 0.0014461000763159588,
+      "minimum_activation": 0.00028041908736521295,
+      "maximum_activation": 0.004112225639172237,
+      "median_trace_length_kpc": 1.0863297631071207
+    },
+    {
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "low",
+      "systems": 13,
+      "median_activation": 0.0009994415729928337,
+      "minimum_activation": 0.0003086509497977299,
+      "maximum_activation": 0.0024322482071996747,
+      "median_trace_length_kpc": 1.0834197284028844
+    },
+    {
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "nominal",
+      "systems": 13,
+      "median_activation": 0.001126900727002061,
+      "minimum_activation": 0.00037398817618695425,
+      "maximum_activation": 0.0034663533001359445,
+      "median_trace_length_kpc": 1.0835040251608592
+    }
+  ],
+  "sensitivity_summary": [
+    {
+      "Lc_kpc": 3.0,
+      "q": 0.5,
+      "sealed_cluster_baryons_only": 0.02153716371520256,
+      "sealed_galaxy_baryons_only": 0.007871764132591427,
+      "cluster_to_galaxy_ratio": 2.7360021657702296
+    },
+    {
+      "Lc_kpc": 3.0,
+      "q": 1.0,
+      "sealed_cluster_baryons_only": 0.0222227379518025,
+      "sealed_galaxy_baryons_only": 0.003170585658908866,
+      "cluster_to_galaxy_ratio": 7.009032507719819
+    },
+    {
+      "Lc_kpc": 3.0,
+      "q": 2.0,
+      "sealed_cluster_baryons_only": 0.022257062977874043,
+      "sealed_galaxy_baryons_only": 0.001299740735974508,
+      "cluster_to_galaxy_ratio": 17.12423282723869
+    },
+    {
+      "Lc_kpc": 10.0,
+      "q": 0.5,
+      "sealed_cluster_baryons_only": 0.019633585107797523,
+      "sealed_galaxy_baryons_only": 0.004745245830112151,
+      "cluster_to_galaxy_ratio": 4.1375274981978105
+    },
+    {
+      "Lc_kpc": 10.0,
+      "q": 1.0,
+      "sealed_cluster_baryons_only": 0.021022386822975084,
+      "sealed_galaxy_baryons_only": 0.001126900727002061,
+      "cluster_to_galaxy_ratio": 18.655047706732585
+    },
+    {
+      "Lc_kpc": 10.0,
+      "q": 2.0,
+      "sealed_cluster_baryons_only": 0.021741201818610216,
+      "sealed_galaxy_baryons_only": 0.00014214933106898115,
+      "cluster_to_galaxy_ratio": 152.94621265618065
+    },
+    {
+      "Lc_kpc": 30.0,
+      "q": 0.5,
+      "sealed_cluster_baryons_only": 0.016542909475955297,
+      "sealed_galaxy_baryons_only": 0.0028833369455542966,
+      "cluster_to_galaxy_ratio": 5.737418063976934
+    },
+    {
+      "Lc_kpc": 30.0,
+      "q": 1.0,
+      "sealed_cluster_baryons_only": 0.017319489986124398,
+      "sealed_galaxy_baryons_only": 0.0003971317368993075,
+      "cluster_to_galaxy_ratio": 43.61144773104786
+    },
+    {
+      "Lc_kpc": 30.0,
+      "q": 2.0,
+      "sealed_cluster_baryons_only": 0.017230197989838388,
+      "sealed_galaxy_baryons_only": 1.6276035684356896e-05,
+      "cluster_to_galaxy_ratio": 1058.6237535961259
+    },
+    {
+      "Lc_kpc": 100.0,
+      "q": 0.5,
+      "sealed_cluster_baryons_only": 0.012285286818610758,
+      "sealed_galaxy_baryons_only": 0.0016311268762614402,
+      "cluster_to_galaxy_ratio": 7.531778795018548
+    },
+    {
+      "Lc_kpc": 100.0,
+      "q": 1.0,
+      "sealed_cluster_baryons_only": 0.011053076320051019,
+      "sealed_galaxy_baryons_only": 0.00012160625288127835,
+      "cluster_to_galaxy_ratio": 90.89233537063186
+    },
+    {
+      "Lc_kpc": 100.0,
+      "q": 2.0,
+      "sealed_cluster_baryons_only": 0.009703836041750822,
+      "sealed_galaxy_baryons_only": 1.4703839821470551e-06,
+      "cluster_to_galaxy_ratio": 6599.525130558943
+    }
+  ],
+  "protocol_version": "P0643-ACCUMULATED-COMPONENT-TRANSPORT-1.0.0",
+  "protocol_sha256": "5315ff34ca49cc320355f15d49550c6b304099deba1e5989112a9714fde9150c",
+  "source_sha256": "6caeabd53b5697e72e9b315e3a550a4b61a709cd8220506af63d0c3f3f8296b4",
+  "coverage": {
+    "registered_galaxies": 13,
+    "registered_clusters": 4,
+    "mass_scenarios_per_system": 3,
+    "sensitivity_rows_per_scenario": 12,
+    "per_object_gravity_parameters": 0
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "A passing scale-separation screen would justify a spent-lensing ablation, not establish a gravity law.",
+    "Lc is a new universal dimensional constant. Its physical origin is unknown and must eventually be derived rather than merely fit.",
+    "The calculation remains projected and non-relativistic; it does not yet predict the relation between matter and photon metric potentials.",
+    "No P0633 velocity or P0640 multiple-image outcome may be opened in P0643."
+  ]
+}

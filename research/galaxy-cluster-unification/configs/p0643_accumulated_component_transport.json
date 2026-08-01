@@ -1,0 +1,54 @@
+{
+  "protocol_version": "P0643-ACCUMULATED-COMPONENT-TRANSPORT-1.0.0",
+  "status": "frozen_before_any_P0643_score",
+  "frozen_utc": "2026-08-02T01:05:00Z",
+  "purpose": "Test whether baryonic component-vector disagreement becomes cluster-selective only when it persists over a finite universal coherence length.",
+  "parent_result": "results/p0642_geometric_transport_operator_screen/report.json",
+  "field_equation": "laplacian(Phi)=div[(nu I + lambda S C_cancel F(ell/Lc,q) h_hat h_hat) grad(Phi_N)]",
+  "definitions": {
+    "C_cancel": "1-|g_star+g_gas|/(|g_star|+|g_gas|)",
+    "ell": "|g_N|/||grad g_N||_F along the baryon-only Newtonian field",
+    "F": "1-exp[-(ell/Lc)^q]",
+    "S": "a0/(a0+|g_N|)",
+    "a0_m_s2": 1.2e-10,
+    "primary_Lc_kpc": 10.0,
+    "primary_q": 1.0,
+    "primary_Lc_provenance": "The 10 kpc scale was the best opened-data length in P0629 and is reused before P0643 scores; it is not selected from P0633/P0640 targets.",
+    "maximum_future_lambda_for_solar_proxy": 20.0
+  },
+  "sensitivity_grid": {
+    "Lc_kpc": [3.0, 10.0, 30.0, 100.0],
+    "q": [0.5, 1.0, 2.0]
+  },
+  "map_inputs": {
+    "galaxies": "results/p0639_registered_baryonic_maps/maps",
+    "clusters": "results/p0641_registered_cluster_baryon_maps/maps",
+    "cluster_downsample_cells": 257,
+    "galaxy_stellar_scale_sensitivity": [0.5, 1.0, 2.0],
+    "cluster_sensitivity_maps": {
+      "low": ["stellar_surface_density_low_msun_kpc2", "gas_surface_density_low_msun_kpc2"],
+      "nominal": ["stellar_surface_density_msun_kpc2", "gas_surface_density_msun_kpc2"],
+      "high": ["stellar_surface_density_high_msun_kpc2", "gas_surface_density_high_msun_kpc2"]
+    },
+    "sealed_target_outcomes_opened": false
+  },
+  "predeclared_primary_gates": {
+    "radial_cocentered_activation_max": 1e-8,
+    "large_offset_over_small_offset_activation_ratio_min": 4.0,
+    "registered_cluster_to_galaxy_median_activation_ratio_min": 4.0,
+    "registered_galaxy_median_activation_max": 0.01,
+    "registered_cluster_median_activation_min": 0.01,
+    "cluster_ratio_above_one_in_all_mass_sensitivities": true,
+    "solar_1au_coefficient_max": 2e-6,
+    "rotation_covariance_relative_error_max": 0.03,
+    "translation_covariance_relative_error_max": 0.03,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "The primary Lc=10 kpc, q=1 row advances only if every primary gate passes. Sensitivity rows describe identifiability and are not allowed to replace a failed primary after scores are seen.",
+  "claim_boundary": [
+    "A passing scale-separation screen would justify a spent-lensing ablation, not establish a gravity law.",
+    "Lc is a new universal dimensional constant. Its physical origin is unknown and must eventually be derived rather than merely fit.",
+    "The calculation remains projected and non-relativistic; it does not yet predict the relation between matter and photon metric potentials.",
+    "No P0633 velocity or P0640 multiple-image outcome may be opened in P0643."
+  ]
+}
