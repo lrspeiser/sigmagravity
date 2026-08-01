@@ -1,0 +1,49 @@
+{
+  "protocol_version": "P0637-LITTLE-THINGS-PHOTOMETRIC-METADATA-1.0.0",
+  "status": "frozen_photometric_inputs_before_candidate_lock",
+  "parent_preregistration": "configs/p0633_external_validation_preregistration.json",
+  "parent_acquisition": "configs/p0636_little_things_baryon_acquisition.json",
+  "catalog": {
+    "name": "Hunter and Elmegreen 2006 UBV imaging of irregular galaxies",
+    "vizier_id": "J/ApJS/162/49",
+    "bibcode": "2006ApJS..162...49H",
+    "doi": "10.26093/cds/vizier.21620049",
+    "base_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv",
+    "tables": ["table1", "table2", "table3", "table5"]
+  },
+  "raw_directory": "data/raw/p0637_photometric_metadata",
+  "targets": [
+    "CVnIdwA", "DDO47", "DDO50", "DDO52", "DDO53", "DDO87", "DDO101",
+    "DDO126", "DDO133", "DDO210", "DDO216", "NGC1569", "UGC8508"
+  ],
+  "selection_rules": {
+    "name_matching": "remove ASCII spaces from the catalog Name field, then require one exact frozen target ID",
+    "distance_and_reddening": "take the unique table1 row",
+    "photometric_geometry": "among table2 rows whose filter string contains V, require one unique PA, b/a, center, and optical pixel scale",
+    "integrated_light": "take the table3 row with the largest tabulated aperture radius",
+    "inclination": "derive from table2 b/a using cos(i)^2=max(0,min(1,[(b/a)^2-q0^2]/[1-q0^2]))",
+    "published_inclination": "use table5 inclination only as a one-degree rounding audit, never as a fitted kinematic input"
+  },
+  "universal_geometry": {
+    "intrinsic_axis_ratio_q0": 0.3,
+    "reason": "the source catalog declares q0=0.3 for irregular galaxies; no target-specific thickness is permitted"
+  },
+  "stellar_normalization": {
+    "solar_absolute_v_magnitude": 4.81,
+    "nominal_v_band_mass_to_light_solar": 0.5,
+    "mandatory_universal_sensitivity_values": [0.25, 0.5, 1.0],
+    "per_galaxy_mass_to_light_fit_allowed": false,
+    "note": "This is a declared universal nuisance bracket, not a gravity-law parameter. The nominal value is used to commission map construction before any sealed target kinematics are opened."
+  },
+  "data_boundary": {
+    "allowed": [
+      "distance", "foreground reddening", "photometric PA", "photometric axis ratio",
+      "photometric center", "integrated V magnitude", "integrated B-V color"
+    ],
+    "forbidden": [
+      "H I cube", "moment 1", "moment 2", "velocity field", "rotation curve",
+      "kinematic inclination", "kinematic position angle", "per-target gravity fit"
+    ],
+    "P0633_target_observables_opened": false
+  }
+}

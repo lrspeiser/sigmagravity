@@ -1,0 +1,31 @@
+{
+  "status": "ready",
+  "protocol_version": "P0637-LITTLE-THINGS-PHOTOMETRIC-METADATA-1.0.0",
+  "targets": 13,
+  "expected_targets": 13,
+  "errors": [],
+  "universal_intrinsic_axis_ratio_q0": 0.3,
+  "nominal_universal_v_band_mass_to_light": 0.5,
+  "maximum_inclination_rounding_error_deg": 0.9951525740699196,
+  "source_files": {
+    "table1": {
+      "relative_path": "data/raw/p0637_photometric_metadata/table1.tsv",
+      "sha256": "3a86e6cc395a3fa7673d23b5bcf70e6fa2c20fc6da8e7bb9d9d1468f81b9a95e"
+    },
+    "table2": {
+      "relative_path": "data/raw/p0637_photometric_metadata/table2.tsv",
+      "sha256": "4259663c85b3494c4ebf47ca13e47577035dacf938512ed2d94db37fcbd024f0"
+    },
+    "table3": {
+      "relative_path": "data/raw/p0637_photometric_metadata/table3.tsv",
+      "sha256": "5cd63511a5ab28c53713df97334a98fb0798ccc5c0ff61077da84754d01bfcab"
+    },
+    "table5": {
+      "relative_path": "data/raw/p0637_photometric_metadata/table5.tsv",
+      "sha256": "55bea754756b34fb30862f6200c080de287bf96ea9661df6565f107e215c4573"
+    }
+  },
+  "sealed_target_observables_opened": false,
+  "per_galaxy_gravity_parameters_fit": false,
+  "config_sha256": "f8f30cf1f3fda395deb812f034abd206a6d503e8cabe1a7a95d50fbe2e17c954"
+}
