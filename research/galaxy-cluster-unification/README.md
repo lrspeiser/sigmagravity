@@ -21,6 +21,21 @@ It packages the P0612-P0621 findings, protocols, analysis code, implementation
 modules, tests, derived tables, reports, and figures; the parent repository also
 contains the scientific source data through Git LFS.
 
+## Untouched external validation (P0633)
+
+The next verdict is now preregistered before any selected target product is
+downloaded or scored. P0633 locks 13 non-SPARC LITTLE THINGS dwarfs with
+resolved HI data and four previously absent RELICS clusters. Dynamics and raw
+lensing targets remain sealed until the Poisson, AQUAL, and QUMOND solvers, the
+candidate equation, its one universal parameter vector, and all predictions are
+committed and hashed. The galaxy, raw-image, topology, critical-curve,
+universality, and Solar-System rejection gates are conjunctive.
+
+See
+[`docs/P0633_EXTERNAL_VALIDATION_PREREGISTRATION.md`](docs/P0633_EXTERNAL_VALIDATION_PREREGISTRATION.md)
+and reproduce the freeze with `python
+scripts/freeze_p0633_external_validation.py`.
+
 ## Latest density/path-survival investigation
 
 P0623-P0629 rigorously test the proposed dwarf/giant path-interference idea

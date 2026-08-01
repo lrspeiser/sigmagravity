@@ -1,0 +1,246 @@
+{
+  "protocol_version": "P0633-EXTERNAL-VALIDATION-PREREGISTRATION-1.0.0",
+  "frozen_utc": "2026-08-01T22:13:42Z",
+  "status": "frozen_before_any_P0633_target_product_download_or_score",
+  "baseline_commit": "aad813626dd32bfe8c6c96d703c5987896b150dd",
+  "question": "Can a baryon-only field law with one universal setting remain competitive with full-field MOND on genuinely new resolved dwarf galaxies while closing most of the raw cluster-lensing gap to per-cluster compact-halo fits and obeying Solar-System bounds?",
+  "selection_boundary": {
+    "target_selection_inputs": [
+      "survey membership",
+      "public product availability",
+      "redshift and broad morphology",
+      "absence from the preserved project baseline"
+    ],
+    "forbidden_selection_inputs": [
+      "target velocity residuals",
+      "target lensing residuals",
+      "target convergence-map similarity",
+      "performance of any new transport candidate on a selected target"
+    ],
+    "maximum_per_object_gravity_parameters": 0,
+    "universal_parameter_rule": "Every gravity or transport parameter must be one shared value frozen before any sealed target observable is parsed.",
+    "allowed_object_nuisance": [
+      "measured sky position and redshift",
+      "independently measured distance",
+      "photometric orientation and instrumental beam",
+      "one source-plane position per strong-lensing family, optimized identically for every comparator"
+    ],
+    "forbidden_object_nuisance": [
+      "dynamically refit stellar mass-to-light ratio in the primary score",
+      "velocity-refit distance or inclination in the primary score",
+      "per-cluster external shear in the primary score",
+      "per-object transport amplitude, scale, exponent, phase, or screening threshold"
+    ]
+  },
+  "sealed_data_policy": {
+    "commissioning_galaxy": "DDO154",
+    "commissioning_reason": "DDO154 is already project-spent and may be used to debug the 2D ingestion and field-projection pipeline.",
+    "open_before_candidate_lock": [
+      "HI moment-0 surface-density maps",
+      "optical or near-infrared stellar-light maps",
+      "WCS, beam, noise, distance, and photometric-orientation metadata",
+      "cluster-member light catalogs and imaging",
+      "X-ray surface-brightness products used only to construct a baryonic gas model"
+    ],
+    "sealed_until_candidate_lock": [
+      "HI moment-1 velocity fields",
+      "HI data cubes when spectral channels are exposed to fitting",
+      "published circular-velocity and dispersion profiles",
+      "strong-lensing image coordinates, family identities, and image multiplicities",
+      "published convergence, deflection, magnification, and critical-curve maps"
+    ],
+    "candidate_lock_requires": [
+      "a committed candidate equation",
+      "a complete universal parameter vector and SHA-256 hash",
+      "passing Newtonian, AQUAL, and QUMOND solver gates",
+      "a prediction manifest for every selected system",
+      "a statement that no P0633 target outcome was used to choose the equation or parameters"
+    ],
+    "unlock_manifest": "results/p0633_external_validation/unlock_manifest.json",
+    "after_unlock_rule": "Any formula change after a target score is seen is exploratory and cannot be called validation on P0633."
+  },
+  "galaxy_validation": {
+    "survey": "LITTLE THINGS",
+    "official_data_page": "https://science.nrao.edu/science/surveys/littlethings/data",
+    "survey_reference": "https://arxiv.org/abs/1208.5834",
+    "kinematic_reference": "https://doi.org/10.1093/mnras/stw3285",
+    "selection_rule": "Use every Iorio et al. 2017 3D-kinematic galaxy absent from SPARC and absent from the baseline tree, except WLM, whose token already occurred incidentally in baseline metadata.",
+    "excluded_overlap": ["DDO154", "DDO168", "NGC2366"],
+    "excluded_conservative_contamination": ["WLM"],
+    "systems": [
+      {"id": "CVnIdwA", "aliases": ["CVnIdwA"]},
+      {"id": "DDO47", "aliases": ["DDO47", "DDO 47"]},
+      {"id": "DDO50", "aliases": ["DDO50", "DDO 50"]},
+      {"id": "DDO52", "aliases": ["DDO52", "DDO 52"]},
+      {"id": "DDO53", "aliases": ["DDO53", "DDO 53"]},
+      {"id": "DDO87", "aliases": ["DDO87", "DDO 87"]},
+      {"id": "DDO101", "aliases": ["DDO101", "DDO 101"]},
+      {"id": "DDO126", "aliases": ["DDO126", "DDO 126"]},
+      {"id": "DDO133", "aliases": ["DDO133", "DDO 133"]},
+      {"id": "DDO210", "aliases": ["DDO210", "DDO 210"]},
+      {"id": "DDO216", "aliases": ["DDO216", "DDO 216"]},
+      {"id": "NGC1569", "aliases": ["NGC1569", "NGC 1569"]},
+      {"id": "UGC8508", "aliases": ["UGC8508", "UGC08508", "UGC 8508"]}
+    ],
+    "baryonic_inputs": [
+      "primary-beam-corrected HI moment-0 map",
+      "optical or near-infrared stellar-light map with calibration",
+      "helium correction fixed at 1.33",
+      "published distance and photometric orientation without velocity refitting"
+    ],
+    "sealed_targets": [
+      "3DBarolo asymmetric-drift-corrected circular velocity",
+      "3DBarolo velocity dispersion",
+      "LITTLE THINGS moment-1 velocity field"
+    ],
+    "primary_metrics": [
+      "equal-galaxy circular-speed RMSE in km/s",
+      "noise-weighted 2D line-of-sight velocity-field RMSE in km/s"
+    ],
+    "predefined_morphology_coordinates": [
+      "HI concentration",
+      "HI lopsidedness",
+      "HI clumpiness",
+      "photometric inclination"
+    ]
+  },
+  "cluster_validation": {
+    "survey": "RELICS",
+    "official_data_page": "https://archive.stsci.edu/hlsp/relics",
+    "archive_doi": "10.17909/T9SP45",
+    "selection_rule": "Choose four RELICS clusters with public HST catalogs and at least two archived lens-model methods, spanning redshift and morphology, with every canonical name and archive slug absent from the baseline tree.",
+    "systems": [
+      {
+        "id": "AS295",
+        "label": "Abell S295",
+        "slug": "abells295",
+        "redshift": 0.300,
+        "aliases": ["AS295", "Abell S295", "abells295"],
+        "lens_model_methods_for_comparator_only": ["glafic", "zitrin-ltm-gauss"],
+        "model_base_url": "https://archive.stsci.edu/hlsps/relics/abells295/models/"
+      },
+      {
+        "id": "MACS0025",
+        "label": "MACS J0025.4-1222",
+        "slug": "macs0025m12",
+        "redshift": 0.586,
+        "aliases": ["MACS J0025.4-1222", "macs0025m12"],
+        "lens_model_methods_for_comparator_only": ["glafic", "zitrin-ltm-gauss"],
+        "model_base_url": "https://archive.stsci.edu/hlsps/relics/macs0025m12/models/"
+      },
+      {
+        "id": "MACS0159",
+        "label": "MACS J0159.8-0849",
+        "slug": "macs0159m08",
+        "redshift": 0.405,
+        "aliases": ["MACS J0159.8-0849", "macs0159m08"],
+        "lens_model_methods_for_comparator_only": ["glafic", "zitrin-ltm-gauss"],
+        "model_base_url": "https://archive.stsci.edu/hlsps/relics/macs0159m08/models/"
+      },
+      {
+        "id": "PLCKG287",
+        "label": "PLCK G287.0+32.9",
+        "slug": "plckg287p32",
+        "redshift": 0.390,
+        "aliases": ["PLCK G287.0+32.9", "plckg287p32"],
+        "lens_model_methods_for_comparator_only": ["glafic", "zitrin-ltm-gauss"],
+        "model_base_url": "https://archive.stsci.edu/hlsps/relics/plckg287p32/models/"
+      }
+    ],
+    "baryonic_inputs": [
+      "HST member-galaxy light with a single population-calibrated stellar mass-to-light prescription",
+      "BCG light treated with the same universal stellar-population prescription",
+      "public X-ray gas morphology and normalization with uncertainty propagation",
+      "intracluster light included only when independently measured"
+    ],
+    "raw_constraint_readiness": {
+      "minimum_secure_families_per_cluster": 3,
+      "minimum_spectroscopic_families_per_cluster": 1,
+      "minimum_images_per_cluster": 8,
+      "failure_rule": "A selected cluster that lacks these constraints is a recorded data-readiness failure and may not be silently replaced after any selected target is scored."
+    },
+    "family_split": {
+      "salt": "P0633-RAW-LENS-FAMILY-V1",
+      "method": "Sort secure family IDs by SHA-256(salt|cluster_id|family_id); allocate the first ceiling(0.30*N) families to holdout and all remaining families to source-position fitting.",
+      "minimum_holdout_families": 1,
+      "family_integrity": "Every image from a family stays in the same partition."
+    },
+    "primary_metrics": [
+      "heldout image-plane RMS in arcsec",
+      "heldout family multiplicity and bright-extra-image topology",
+      "heldout root-convergence fraction",
+      "critical-curve symmetric 95th-percentile distance in arcsec"
+    ]
+  },
+  "comparators": {
+    "galaxy": [
+      {"id": "newtonian_poisson", "parameters": {}},
+      {"id": "li2018_algebraic_RAR", "g_dagger_m_s2": 1.2e-10},
+      {"id": "AQUAL_simple_mu", "a0_m_s2": 1.2e-10},
+      {"id": "QUMOND_simple_nu", "a0_m_s2": 1.2e-10}
+    ],
+    "cluster": [
+      "baryon-only GR using the same baryonic map",
+      "AQUAL/QUMOND potential used phenomenologically for photons and labeled non-relativistic",
+      "per-cluster compact-halo GR fit with parameter count reported"
+    ]
+  },
+  "field_solver_acceptance": {
+    "newtonian_poisson": {
+      "normalized_PDE_residual_RMS_max": 1e-5,
+      "plummer_force_median_relative_error_max": 0.01,
+      "plummer_force_p95_relative_error_max": 0.03,
+      "minimum_grid_convergence_order": 1.8
+    },
+    "AQUAL": {
+      "normalized_nonlinear_residual_RMS_max": 1e-5,
+      "spherical_solution_median_relative_error_max": 0.02,
+      "newtonian_limit_relative_error_max": 0.001,
+      "all_required_cases_converged": true
+    },
+    "QUMOND": {
+      "normalized_second_Poisson_residual_RMS_max": 1e-5,
+      "spherical_solution_median_relative_error_max": 0.01,
+      "newtonian_limit_relative_error_max": 0.001,
+      "all_required_cases_converged": true
+    }
+  },
+  "rejection_thresholds": {
+    "prerequisite": "Every field-solver acceptance gate must pass before a candidate can be evaluated on P0633 targets.",
+    "galaxy": {
+      "equal_galaxy_RMSE_ratio_to_best_frozen_MOND_max": 1.05,
+      "velocity_field_RMSE_ratio_to_best_frozen_MOND_max": 1.05,
+      "maximum_morphology_bin_RMSE_ratio_to_best_frozen_MOND": 1.25,
+      "minimum_valid_galaxies": 11,
+      "no_target_refit": true
+    },
+    "cluster": {
+      "minimum_ready_clusters": 4,
+      "heldout_root_convergence_fraction_min": 1.0,
+      "heldout_image_RMS_ratio_to_compact_halo_max": 1.25,
+      "minimum_fraction_of_baryon_to_halo_RMS_gap_closed": 0.75,
+      "critical_curve_distance_ratio_to_compact_halo_max": 1.25,
+      "all_heldout_family_topologies_correct": true,
+      "maximum_per_cluster_degradation_vs_baryon_only_fraction": 0.05
+    },
+    "solar_system": {
+      "absolute_PPN_gamma_minus_one_max": 2.3e-5,
+      "absolute_extra_Mercury_precession_mas_per_century_max": 3.1,
+      "metric_PPN_quantities_must_be_derived_not_assumed": true
+    },
+    "overall": "All prerequisite, galaxy, cluster, topology, universality, and Solar-System gates must pass independently; cross-domain averaging cannot rescue a failed gate."
+  },
+  "acquisition": {
+    "galaxy_input_directory": "data/raw/p0633_little_things_baryons",
+    "galaxy_sealed_directory": "data/sealed/p0633_little_things_kinematics",
+    "cluster_input_directory": "data/raw/p0633_relics_baryons",
+    "cluster_sealed_directory": "data/sealed/p0633_relics_lensing",
+    "provenance_requirement": "Record source URL, byte count, ETag or Last-Modified when available, and SHA-256 for every file."
+  },
+  "claim_boundary": [
+    "Passing would establish external empirical transfer for a phenomenological field law, not a complete relativistic theory.",
+    "AQUAL and QUMOND are non-relativistic; using their potentials for photons is a labeled diagnostic until a metric completion is derived.",
+    "Published lens models are comparator products, not raw observations, and cannot be used as baryonic input.",
+    "Failure on any locked gate is retained as evidence and the P0633 sample becomes project-spent immediately after unsealing."
+  ]
+}

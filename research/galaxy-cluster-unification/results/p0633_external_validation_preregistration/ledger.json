@@ -1,0 +1,288 @@
+{
+  "protocol_version": "P0633-EXTERNAL-VALIDATION-PREREGISTRATION-1.0.0",
+  "status": "frozen_targets_verified_and_unopened",
+  "generated_utc": "2026-08-01T22:16:51.929933+00:00",
+  "protocol_path": "configs/p0633_external_validation_preregistration.json",
+  "protocol_sha256": "aeff9ca3568c02836d0250bfe601119a8006d0bd3e6430649372b9f956535389",
+  "baseline_commit": "aad813626dd32bfe8c6c96d703c5987896b150dd",
+  "targets": {
+    "galaxies": 13,
+    "clusters": 4,
+    "aliases_checked": 35,
+    "baseline_alias_matches": 0
+  },
+  "target_directories_present": [],
+  "target_products_opened": false,
+  "contamination_scan": [
+    {
+      "domain": "galaxy",
+      "target_id": "CVnIdwA",
+      "alias": "CVnIdwA",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO47",
+      "alias": "DDO47",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO47",
+      "alias": "DDO 47",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO50",
+      "alias": "DDO50",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO50",
+      "alias": "DDO 50",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO52",
+      "alias": "DDO52",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO52",
+      "alias": "DDO 52",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO53",
+      "alias": "DDO53",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO53",
+      "alias": "DDO 53",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO87",
+      "alias": "DDO87",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO87",
+      "alias": "DDO 87",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO101",
+      "alias": "DDO101",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO101",
+      "alias": "DDO 101",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO126",
+      "alias": "DDO126",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO126",
+      "alias": "DDO 126",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO133",
+      "alias": "DDO133",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO133",
+      "alias": "DDO 133",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO210",
+      "alias": "DDO210",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO210",
+      "alias": "DDO 210",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO216",
+      "alias": "DDO216",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "DDO216",
+      "alias": "DDO 216",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "NGC1569",
+      "alias": "NGC1569",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "NGC1569",
+      "alias": "NGC 1569",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "UGC8508",
+      "alias": "UGC8508",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "UGC8508",
+      "alias": "UGC08508",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "galaxy",
+      "target_id": "UGC8508",
+      "alias": "UGC 8508",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "cluster",
+      "target_id": "AS295",
+      "alias": "AS295",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "cluster",
+      "target_id": "AS295",
+      "alias": "Abell S295",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "cluster",
+      "target_id": "AS295",
+      "alias": "abells295",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "cluster",
+      "target_id": "MACS0025",
+      "alias": "MACS J0025.4-1222",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "cluster",
+      "target_id": "MACS0025",
+      "alias": "macs0025m12",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "cluster",
+      "target_id": "MACS0159",
+      "alias": "MACS J0159.8-0849",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "cluster",
+      "target_id": "MACS0159",
+      "alias": "macs0159m08",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "cluster",
+      "target_id": "PLCKG287",
+      "alias": "PLCK G287.0+32.9",
+      "matches": 0,
+      "first_match": null
+    },
+    {
+      "domain": "cluster",
+      "target_id": "PLCKG287",
+      "alias": "plckg287p32",
+      "matches": 0,
+      "first_match": null
+    }
+  ],
+  "rejection_thresholds": {
+    "prerequisite": "Every field-solver acceptance gate must pass before a candidate can be evaluated on P0633 targets.",
+    "galaxy": {
+      "equal_galaxy_RMSE_ratio_to_best_frozen_MOND_max": 1.05,
+      "velocity_field_RMSE_ratio_to_best_frozen_MOND_max": 1.05,
+      "maximum_morphology_bin_RMSE_ratio_to_best_frozen_MOND": 1.25,
+      "minimum_valid_galaxies": 11,
+      "no_target_refit": true
+    },
+    "cluster": {
+      "minimum_ready_clusters": 4,
+      "heldout_root_convergence_fraction_min": 1.0,
+      "heldout_image_RMS_ratio_to_compact_halo_max": 1.25,
+      "minimum_fraction_of_baryon_to_halo_RMS_gap_closed": 0.75,
+      "critical_curve_distance_ratio_to_compact_halo_max": 1.25,
+      "all_heldout_family_topologies_correct": true,
+      "maximum_per_cluster_degradation_vs_baryon_only_fraction": 0.05
+    },
+    "solar_system": {
+      "absolute_PPN_gamma_minus_one_max": 2.3e-05,
+      "absolute_extra_Mercury_precession_mas_per_century_max": 3.1,
+      "metric_PPN_quantities_must_be_derived_not_assumed": true
+    },
+    "overall": "All prerequisite, galaxy, cluster, topology, universality, and Solar-System gates must pass independently; cross-domain averaging cannot rescue a failed gate."
+  }
+}

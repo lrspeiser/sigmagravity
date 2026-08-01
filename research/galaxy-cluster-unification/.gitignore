@@ -158,6 +158,8 @@ results/environmental_mog0/*
 !results/p0631_observation_matched_replicas/**
 !results/p0632_published_mond_replication/
 !results/p0632_published_mond_replication/**
+!results/p0633_external_validation_preregistration/
+!results/p0633_external_validation_preregistration/**
 data/raw/manga_dr17/*.fits
 data/raw/erass1_clusters/*.fits
 data/raw/manga_gema_dr17/*.fits
