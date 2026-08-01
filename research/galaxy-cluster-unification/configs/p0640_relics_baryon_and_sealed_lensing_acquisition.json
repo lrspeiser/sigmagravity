@@ -1,0 +1,132 @@
+{
+  "protocol_version": "P0640-RELICS-BARYON-SEALED-LENSING-ACQUISITION-1.0.0",
+  "status": "baryonic_inputs_open_lensing_constraints_opaque_before_candidate_lock",
+  "parent_preregistration": "configs/p0633_external_validation_preregistration.json",
+  "raw_directory": "data/raw/p0633_relics_baryons",
+  "sealed_directory": "data/sealed/p0633_relics_lensing",
+  "reference_directory": "data/raw/p0640_relics_reference_metadata",
+  "maximum_workers": 4,
+  "hst_archive": {
+    "name": "MAST RELICS HLSP",
+    "doi": "10.17909/T9SP45",
+    "base_url": "https://archive.stsci.edu/hlsps/relics"
+  },
+  "chandra_archive": {
+    "name": "Chandra Data Archive",
+    "product": "level-2 central broad-band count image",
+    "base_url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid"
+  },
+  "targets": [
+    {
+      "id": "AS295",
+      "slug": "abells295",
+      "redshift": 0.300,
+      "hst": {
+        "catalog_bytes": 2637868,
+        "f160w_image_bytes": 100128960,
+        "segmentation_bytes": 100074240
+      },
+      "chandra": [
+        [16282, "acisf16282N003_cntr_img2.fits.gz", 29341, 9025.5139119635],
+        [16127, "acisf16127N002_cntr_img2.fits.gz", 55264, 43321.334262554],
+        [16524, "acisf16524N003_cntr_img2.fits.gz", 59980, 44601.214979961],
+        [16525, "acisf16525N003_cntr_img2.fits.gz", 59588, 44478.915921634],
+        [16526, "acisf16526N002_cntr_img2.fits.gz", 53050, 44478.956356652],
+        [12260, "acisf12260N002_cntr_img2.fits.gz", 43747, 19794.940681493]
+      ]
+    },
+    {
+      "id": "MACS0025",
+      "slug": "macs0025m12",
+      "redshift": 0.586,
+      "hst": {
+        "catalog_bytes": 2332641,
+        "f160w_image_bytes": 100128960,
+        "segmentation_bytes": 100074240
+      },
+      "chandra": [
+        [10413, "acisf10413N004_cntr_img2.fits.gz", 70849, 75639.253956528],
+        [10786, "acisf10786N004_cntr_img2.fits.gz", 30793, 13908.469913148],
+        [10797, "acisf10797N003_cntr_img2.fits.gz", 38635, 23851.792242848],
+        [3251, "acisf03251N004_cntr_img2.fits.gz", 31336, 19326.756641816],
+        [5010, "acisf05010N009_cntr_img2.fits.gz", 35411, 24827.249671577]
+      ]
+    },
+    {
+      "id": "MACS0159",
+      "slug": "macs0159m08",
+      "redshift": 0.405,
+      "hst": {
+        "catalog_bytes": 2578441,
+        "f160w_image_bytes": 121127040,
+        "segmentation_bytes": 121072320
+      },
+      "chandra": [
+        [6106, "acisf06106N004_cntr_img2.fits.gz", 55506, 35303.046499771],
+        [9376, "acisf09376N003_cntr_img2.fits.gz", 42833, 19507.187120532],
+        [3265, "acisf03265N004_cntr_img2.fits.gz", 39009, 17901.031466117]
+      ]
+    },
+    {
+      "id": "PLCKG287",
+      "slug": "plckg287p32",
+      "redshift": 0.390,
+      "hst": {
+        "catalog_bytes": 3980733,
+        "f160w_image_bytes": 108288000,
+        "segmentation_bytes": 108233280
+      },
+      "chandra": [
+        [17494, "acisf17494N002_cntr_img2.fits.gz", 81210, 59286.837275424],
+        [17165, "acisf17165N002_cntr_img2.fits.gz", 79511, 55346.206126457],
+        [17166, "acisf17166N002_cntr_img2.fits.gz", 47552, 20842.799283933],
+        [18807, "acisf18807N002_cntr_img2.fits.gz", 55124, 28698.07474392],
+        [17495, "acisf17495N002_cntr_img2.fits.gz", 58963, 32228.611845131]
+      ]
+    }
+  ],
+  "sealed_constraint_containers": [
+    {
+      "id": "cibirka2018_three_cluster_source",
+      "systems": ["AS295", "MACS0025", "MACS0159"],
+      "url": "https://export.arxiv.org/e-print/1803.09557",
+      "filename": "cibirka2018_arxiv_1803.09557_source.tar.gz",
+      "bytes": 4586420,
+      "handling": "download_hash_only_do_not_list_or_extract_before_candidate_lock"
+    },
+    {
+      "id": "daddona2024_plckg287_multiple_images",
+      "systems": ["PLCKG287"],
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/686/A4/tablec1.dat",
+      "filename": "daddona2024_tablec1_multiple_images.dat",
+      "bytes": 13320,
+      "handling": "download_hash_only_do_not_parse_before_candidate_lock"
+    }
+  ],
+  "open_reference_metadata": [
+    {
+      "id": "daddona2024_vizier_readme",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/686/A4/ReadMe",
+      "filename": "daddona2024_vizier_ReadMe.txt",
+      "bytes": 13185
+    }
+  ],
+  "forbidden_raw_baryon_fragments": [
+    "kappa",
+    "gamma",
+    "magnification",
+    "deflection",
+    "critical",
+    "multiple_images",
+    "source.tar"
+  ],
+  "sealed_state": {
+    "constraint_container_payloads_opened": false,
+    "strong_lensing_coordinates_parsed": false,
+    "family_identities_parsed": false,
+    "image_multiplicities_parsed": false,
+    "derived_lens_maps_downloaded": false,
+    "candidate_equation_locked": false,
+    "P0633_target_score_computed": false
+  }
+}
