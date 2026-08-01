@@ -1,0 +1,55 @@
+{
+  "protocol_version": "P0639-REGISTERED-BARYONIC-MAPS-1.0.0",
+  "status": "frozen_before_any_target_kinematics_or_candidate_score",
+  "parent_maps": "configs/p0636_little_things_baryon_acquisition.json",
+  "parent_photometry": "configs/p0637_little_things_photometric_metadata.json",
+  "parent_astrometry": "configs/p0638_gaia_astrometric_registration.json",
+  "grid": {
+    "minimum_cells_per_axis": 65,
+    "maximum_cells_per_axis": 513,
+    "target_cells_per_radio_beam": 1.0,
+    "hi_weighted_radius_quantile": 0.995,
+    "half_extent_padding_factor": 1.25,
+    "minimum_half_extent_kpc": 0.75,
+    "interpolation_order": 1
+  },
+  "gas": {
+    "helium_factor": 1.33,
+    "negative_moment0_pixels": "clip to zero after recording signed integrated flux",
+    "normalization": "normalize the registered positive map to the signed moment-0 H I mass times the universal helium factor",
+    "nominal_scale_height_kpc": 0.15,
+    "scale_height_sensitivity_kpc": [0.0, 0.15, 0.3]
+  },
+  "stars": {
+    "source": "V-band image",
+    "sky_border_fraction": 0.15,
+    "foreground_cap_quantile": 0.995,
+    "foreground_cap_sigma_above_sky": 50.0,
+    "smoothing_sigma_arcsec": 3.0,
+    "aperture": "the largest independently published integrated V-band aperture",
+    "nominal_v_band_mass_to_light_solar": 0.5,
+    "mass_to_light_sensitivity_solar": [0.25, 0.5, 1.0],
+    "nominal_scale_height_kpc": 0.3,
+    "scale_height_sensitivity_kpc": [0.0, 0.3, 0.6],
+    "per_galaxy_mass_to_light_fit_allowed": false
+  },
+  "morphology": {
+    "clumpiness_smoothing_beam_sigma": 1.0,
+    "coordinates": ["H I concentration", "H I lopsidedness", "H I clumpiness", "photometric inclination", "gas-star centroid offset"]
+  },
+  "acceptance": {
+    "minimum_pre_normalization_gas_mass_fraction": 0.8,
+    "maximum_pre_normalization_gas_mass_fraction": 1.2,
+    "maximum_outer_cell_gas_mass_fraction": 0.02,
+    "maximum_outer_cell_stellar_mass_fraction": 0.02,
+    "minimum_cells_per_radio_beam": 0.95,
+    "maximum_mass_normalization_relative_error": 1e-10,
+    "all_maps_finite_and_nonnegative": true,
+    "all_13_systems_required": true
+  },
+  "data_boundary": {
+    "sealed_target_observables_opened": false,
+    "per_object_gravity_parameters": 0,
+    "forbidden": ["velocity field", "rotation curve", "velocity dispersion", "kinematic PA", "kinematic inclination", "candidate residual"]
+  }
+}

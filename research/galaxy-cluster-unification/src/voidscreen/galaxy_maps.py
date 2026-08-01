@@ -6,9 +6,12 @@ import re
 from collections.abc import Sequence
 from dataclasses import dataclass
 
+import astropy.units as u
 import numpy as np
+from astropy.coordinates import SkyCoord
 from astropy.io.fits import Header
 from astropy.stats import sigma_clipped_stats
+from astropy.wcs import WCS
 from scipy.ndimage import gaussian_filter, map_coordinates
 
 Array = np.ndarray
@@ -202,6 +205,7 @@ def optical_morphology_map(
     maximum_radius_pixel: float,
     border_fraction: float = 0.15,
     cap_quantile: float = 0.995,
+    cap_sigma_above_sky: float | None = None,
     smoothing_sigma_pixel: float = 3.0,
 ) -> tuple[Array, dict[str, float]]:
     """Make a robust stellar-light morphology map from a calibrated CCD image."""
@@ -218,7 +222,15 @@ def optical_morphology_map(
     )
     signal = np.clip(image - float(mean), 0.0, None)
     positive = signal[signal > 0.0]
-    cap = float(np.quantile(positive, cap_quantile))
+    quantile_cap = float(np.quantile(positive, cap_quantile))
+    sigma_cap = (
+        np.inf
+        if cap_sigma_above_sky is None
+        else float(cap_sigma_above_sky) * float(standard_deviation)
+    )
+    cap = min(quantile_cap, sigma_cap)
+    if not np.isfinite(cap) or cap <= 0.0:
+        raise ValueError("foreground cap is not finite and positive")
     signal = np.minimum(signal, cap)
     signal = gaussian_filter(signal, float(smoothing_sigma_pixel))
     yy, xx = np.indices(image.shape, dtype=float)
@@ -230,6 +242,8 @@ def optical_morphology_map(
         "sky_mean_counts": float(mean),
         "sky_median_counts": float(median),
         "sky_standard_deviation_counts": float(standard_deviation),
+        "foreground_quantile_cap_counts": quantile_cap,
+        "foreground_sigma_cap_counts": sigma_cap,
         "foreground_cap_counts": cap,
     }
 
@@ -249,3 +263,163 @@ def normalize_surface_density_mass(
     if current <= 0.0:
         raise ValueError("morphology has no positive integral")
     return image * float(total_mass_solar) / current
+
+
+def disk_grid_sky_coordinates(
+    center: SkyCoord,
+    *,
+    position_angle_deg: float,
+    inclination_deg: float,
+    distance_mpc: float,
+    disk_axis_kpc: Array,
+) -> SkyCoord:
+    """Project a face-on disk grid onto the celestial sphere.
+
+    Position angle is measured from north through east. The first disk axis is
+    the photometric major axis and the second is foreshortened by inclination.
+    """
+
+    axis = np.asarray(disk_axis_kpc, dtype=float)
+    if axis.ndim != 1 or axis.size < 5 or not np.all(np.diff(axis) > 0.0):
+        raise ValueError("disk_axis_kpc must be a strictly increasing one-dimensional grid")
+    if not 0.0 <= inclination_deg < 90.0 or distance_mpc <= 0.0:
+        raise ValueError("inclination or distance is outside its physical range")
+    major, minor = np.meshgrid(axis, axis, indexing="ij")
+    projected_minor = minor * np.cos(np.radians(inclination_deg))
+    angle = np.radians(position_angle_deg)
+    east_kpc = major * np.sin(angle) + projected_minor * np.cos(angle)
+    north_kpc = major * np.cos(angle) - projected_minor * np.sin(angle)
+    radians_per_kpc = 1.0 / (float(distance_mpc) * 1000.0)
+    return center.spherical_offsets_by(
+        east_kpc * radians_per_kpc * u.rad,
+        north_kpc * radians_per_kpc * u.rad,
+    )
+
+
+def reproject_wcs_to_disk_grid(
+    sky_image: Array,
+    sky_wcs: WCS,
+    *,
+    center: SkyCoord,
+    position_angle_deg: float,
+    inclination_deg: float,
+    distance_mpc: float,
+    disk_axis_kpc: Array,
+    interpolation_order: int = 1,
+) -> Array:
+    """Sample a registered sky image onto a common face-on disk grid."""
+
+    image = _image2(sky_image)
+    sky = disk_grid_sky_coordinates(
+        center,
+        position_angle_deg=position_angle_deg,
+        inclination_deg=inclination_deg,
+        distance_mpc=distance_mpc,
+        disk_axis_kpc=disk_axis_kpc,
+    )
+    source_x, source_y = sky_wcs.celestial.world_to_pixel(sky)
+    sampled = map_coordinates(
+        image,
+        [source_y.ravel(), source_x.ravel()],
+        order=int(interpolation_order),
+        mode="constant",
+        cval=0.0,
+        prefilter=interpolation_order > 1,
+    ).reshape(sky.shape)
+    return np.clip(sampled, 0.0, None)
+
+
+def sky_pixels_to_disk_coordinates(
+    pixel_x: Array,
+    pixel_y: Array,
+    sky_wcs: WCS,
+    *,
+    center: SkyCoord,
+    position_angle_deg: float,
+    inclination_deg: float,
+    distance_mpc: float,
+) -> tuple[Array, Array]:
+    """Convert registered sky pixels to deprojected major/minor disk coordinates."""
+
+    x = np.asarray(pixel_x, dtype=float)
+    y = np.asarray(pixel_y, dtype=float)
+    if x.shape != y.shape:
+        raise ValueError("pixel coordinate arrays must have the same shape")
+    if not 0.0 <= inclination_deg < 90.0 or distance_mpc <= 0.0:
+        raise ValueError("inclination or distance is outside its physical range")
+    sky = sky_wcs.celestial.pixel_to_world(x, y).icrs
+    reference = center.icrs
+    east, north = reference.spherical_offsets_to(sky.frame)
+    east_kpc = east.to_value(u.rad) * float(distance_mpc) * 1000.0
+    north_kpc = north.to_value(u.rad) * float(distance_mpc) * 1000.0
+    angle = np.radians(position_angle_deg)
+    major = east_kpc * np.sin(angle) + north_kpc * np.cos(angle)
+    projected_minor = east_kpc * np.cos(angle) - north_kpc * np.sin(angle)
+    minor = projected_minor / np.cos(np.radians(inclination_deg))
+    return np.asarray(major, dtype=float), np.asarray(minor, dtype=float)
+
+
+def weighted_radius_quantile(
+    x: Array, y: Array, weights: Array, quantile: float
+) -> float:
+    """Return a non-negative weighted quantile of radial distance."""
+
+    x_values = np.asarray(x, dtype=float).ravel()
+    y_values = np.asarray(y, dtype=float).ravel()
+    weight_values = np.asarray(weights, dtype=float).ravel()
+    if not (x_values.size == y_values.size == weight_values.size):
+        raise ValueError("coordinates and weights must contain the same number of values")
+    if not 0.0 < quantile <= 1.0 or np.any(weight_values < 0.0):
+        raise ValueError("quantile or weights are outside their valid range")
+    keep = np.isfinite(x_values) & np.isfinite(y_values) & (weight_values > 0.0)
+    if not np.any(keep):
+        raise ValueError("weighted radius sample is empty")
+    radius = np.hypot(x_values[keep], y_values[keep])
+    selected_weights = weight_values[keep]
+    order = np.argsort(radius)
+    cumulative = np.cumsum(selected_weights[order])
+    target = quantile * cumulative[-1]
+    return float(radius[order[min(int(np.searchsorted(cumulative, target)), len(order) - 1)]])
+
+
+def resolved_map_morphology(
+    surface_density: Array,
+    *,
+    disk_axis_kpc: Array,
+    smoothing_sigma_pixel: float,
+) -> dict[str, float]:
+    """Compute outcome-blind concentration, lopsidedness, and clumpiness."""
+
+    image = np.clip(_image2(surface_density), 0.0, None)
+    axis = np.asarray(disk_axis_kpc, dtype=float)
+    if image.shape != (len(axis), len(axis)) or smoothing_sigma_pixel <= 0.0:
+        raise ValueError("surface map and disk axis are inconsistent")
+    xx, yy = np.meshgrid(axis, axis, indexing="ij")
+    weights = image.ravel()
+    radius = np.hypot(xx, yy).ravel()
+    order = np.argsort(radius)
+    cumulative = np.cumsum(weights[order])
+    if cumulative[-1] <= 0.0:
+        raise ValueError("surface map has no positive mass")
+
+    def radius_at(fraction: float) -> float:
+        index = min(
+            int(np.searchsorted(cumulative, fraction * cumulative[-1])), len(order) - 1
+        )
+        return float(radius[order[index]])
+
+    r20 = radius_at(0.2)
+    r80 = radius_at(0.8)
+    concentration = 5.0 * np.log10(r80 / max(r20, np.finfo(float).tiny))
+    lopsidedness = float(
+        np.sum(np.abs(image - image[::-1, ::-1])) / (2.0 * np.sum(image))
+    )
+    smooth = gaussian_filter(image, float(smoothing_sigma_pixel))
+    clumpiness = float(np.sum(np.clip(image - smooth, 0.0, None)) / np.sum(image))
+    return {
+        "concentration_5log_r80_r20": float(concentration),
+        "lopsidedness_180": lopsidedness,
+        "clumpiness_positive_highpass": clumpiness,
+        "r20_kpc": r20,
+        "r80_kpc": r80,
+    }

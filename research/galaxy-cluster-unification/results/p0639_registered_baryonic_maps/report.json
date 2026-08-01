@@ -1,0 +1,19 @@
+{
+  "status": "pass",
+  "protocol_version": "P0639-REGISTERED-BARYONIC-MAPS-1.0.0",
+  "targets": 13,
+  "all_gates_pass": true,
+  "minimum_pre_normalization_gas_mass_fraction": 0.9965640627302044,
+  "maximum_pre_normalization_gas_mass_fraction": 1.0022238565317994,
+  "maximum_outer_cell_gas_mass_fraction": 0.00015602620400082453,
+  "maximum_outer_cell_stellar_mass_fraction": 0.016670949304098893,
+  "minimum_cells_per_radio_beam": 0.9959117937994192,
+  "maximum_mass_normalization_relative_error": 4.440892098500626e-16,
+  "gas_star_centroid_offset_kpc_range": [
+    0.026179710502928902,
+    0.7677281688945611
+  ],
+  "config_sha256": "36b5a169ac1e2c447229c2bbcfe9be534e8bfbd002df9f2c34fe3847b62eda52",
+  "sealed_target_observables_opened": false,
+  "per_object_gravity_parameters": 0
+}
