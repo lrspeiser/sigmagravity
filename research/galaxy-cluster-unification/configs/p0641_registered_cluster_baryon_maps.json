@@ -1,0 +1,78 @@
+{
+  "protocol_version": "P0641-REGISTERED-CLUSTER-BARYON-MAPS-1.0.0",
+  "status": "frozen_baryonic_map_rules_before_lensing_unseal",
+  "parent_acquisition": "configs/p0640_relics_baryon_and_sealed_lensing_acquisition.json",
+  "raw_directory": "data/raw/p0633_relics_baryons",
+  "map_rules": {
+    "grid_size": 1025,
+    "grid_half_extent_kpc": 1800.0,
+    "center": "F160W-mass-weighted centroid of strict photometric members",
+    "stellar_member_rule": "stellarity < 0.8; positive F160W at >=5 sigma; cluster z inside BPZ 95% interval; ODDS >=0.5",
+    "stellar_pixel_rule": "distribute each selected member mass over its positive finite F160W pixels carrying that member's segmentation ID",
+    "intracluster_light": "zero in the primary map because no independently calibrated ICL product is available for all four systems",
+    "xray_combination": "reproject every Chandra level-2 central count image, divide summed sampled counts by summed exposure, 5-pixel median point-source suppression, 99.5-percent winsorization, then 40 kpc Gaussian smoothing",
+    "xray_smoothing_kpc": 40.0,
+    "xray_point_source_winsor_quantile": 0.995,
+    "xray_background_mad_sigma": 2.0,
+    "xray_background": "median plus two robust MAD sigmas of the smoothed rate in the 1.05-1.15 normalization-radius annulus",
+    "gas_projection": "Sigma_gas is proportional to sqrt(max(S_X-background,0) times 2*sqrt(R_norm^2-r^2)); normalize its integral inside R_norm to the published gas mass",
+    "gas_morphology_sensitivity_exponents": [0.4, 0.5, 0.6]
+  },
+  "stellar_population": {
+    "observed_band": "HST WFC3/IR F160W",
+    "solar_absolute_ab_magnitude": 4.55,
+    "nominal_mass_to_light_solar": 0.8,
+    "mass_to_light_sensitivity_solar": [0.5, 0.8, 1.1],
+    "conversion": "m_AB=31.4-2.5log10(f_nJy); M_AB=m_AB-DM+2.5log10(1+z); L/L_sun=10^[-0.4(M_AB-M_sun,AB)]",
+    "interpretation": "single old-population near-IR conversion shared by every cluster; sensitivity is propagated and never selected per object"
+  },
+  "gas_normalizations": [
+    {
+      "id": "AS295",
+      "aperture_kpc": 1260.0,
+      "aperture_kind": "sphere_R500_mapped_through_depth_model",
+      "gas_mass_msun": 5.9159e13,
+      "gas_mass_sigma_msun": 9.6e12,
+      "source": "Pascut & Hughes 2019, arXiv:1902.06791",
+      "source_url": "https://arxiv.org/abs/1902.06791",
+      "derivation": "invert the same Vikhlinin et al. 2009 M500-YX relation used by the paper, with M500=(7.6+/-0.4)e14 Msun, core-excised T=(9.17+/-0.48) keV, z=0.3001, M0=(5.77+/-0.20)e14 Msun, slope=0.57+/-0.03; quoted sigma includes Monte-Carlo parameter propagation and 10 percent morphology/deprojection systematic"
+    },
+    {
+      "id": "MACS0025",
+      "aperture_kpc": 500.0,
+      "aperture_kind": "projected_cylinder",
+      "gas_mass_msun": 5.5e13,
+      "gas_mass_sigma_msun": 6.0e12,
+      "source": "Bradac et al. 2008, arXiv:0806.2320",
+      "source_url": "https://arxiv.org/abs/0806.2320",
+      "derivation": "direct published projected Chandra gas mass within 500 kpc"
+    },
+    {
+      "id": "MACS0159",
+      "aperture_kpc": 1300.0,
+      "aperture_kind": "sphere_R500_mapped_through_depth_model",
+      "gas_mass_msun": 1.20e14,
+      "gas_mass_sigma_msun": 1.0e13,
+      "source": "Mantz et al. 2016, Weighing the Giants V",
+      "source_url": "https://academic.oup.com/mnras/article/463/4/3582/2646439",
+      "derivation": "direct published Mgas,500=(1.20+/-0.10)e14 Msun and R500=1.30+/-0.03 Mpc"
+    },
+    {
+      "id": "PLCKG287",
+      "aperture_kpc": 1541.0,
+      "aperture_kind": "sphere_R500_mapped_through_depth_model",
+      "gas_mass_msun": 1.573e14,
+      "gas_mass_sigma_msun": 1.6e13,
+      "source": "Gitti et al. 2025, arXiv:2503.13735",
+      "source_url": "https://arxiv.org/abs/2503.13735",
+      "derivation": "direct deprojected table value Mgas(<R500)=(15.73+/-0.08)e13 Msun at R500=1541 kpc; adopted sigma adds a conservative 10 percent disturbed-cluster systematic"
+    }
+  ],
+  "blind_state": {
+    "sealed_constraint_payload_opened": false,
+    "strong_lensing_coordinate_used": false,
+    "lens_model_map_used": false,
+    "per_cluster_gravity_parameter": false,
+    "P0633_target_score_computed": false
+  }
+}
