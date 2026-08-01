@@ -1,0 +1,61 @@
+{
+  "protocol_version": "P0642-GEOMETRIC-TRANSPORT-OPERATOR-SCREEN-1.0.0",
+  "status": "frozen_before_any_P0642_operator_score",
+  "frozen_utc": "2026-08-02T00:35:00Z",
+  "purpose": "Choose a baryon-only geometric activation field before opening any P0633 galaxy kinematics or P0640 raw-lensing constraints.",
+  "candidate_field_equation": "laplacian(Phi)=div[(nu(|g_N|/a0) I + lambda S(|g_N|/a0) C_b h_hat h_hat) grad(Phi_N)]",
+  "definitions": {
+    "g_N": "minus grad(Phi_N), computed only from the registered baryonic surface-density map",
+    "nu": "the simple QUMOND interpolation 1/2+sqrt(1/4+a0/|g_N|)",
+    "S": "a0/(a0+|g_N|), so the geometric channel vanishes in high acceleration",
+    "ell": "beta |g_N| / ||H(Phi_N)||_F, clipped only for numerical domain support",
+    "path_incoherence": "1 minus the squared magnitude of the mean unit Newtonian-field direction traced for ell along its own field line",
+    "component_cancellation": "1 minus |g_star+g_gas|/(|g_star|+|g_gas|)",
+    "hybrid": "1-(1-path_incoherence)(1-component_cancellation)",
+    "h_hat": "normalized mean direction along the same baryon-only field-line trace",
+    "lambda": "one non-negative universal geometric strength; it is not fitted in P0642",
+    "beta": 1.0,
+    "a0_m_s2": 1.2e-10
+  },
+  "operator_variants": [
+    "path_incoherence",
+    "component_cancellation",
+    "hybrid"
+  ],
+  "synthetic_controls": {
+    "grid_cells": 257,
+    "half_width": 12.0,
+    "radial_plummer_scale": 1.0,
+    "binary_separation": 4.0,
+    "binary_component_scale": 0.8,
+    "offset_component_separation": 3.0,
+    "trace_steps": 24,
+    "trace_length_floor_cells": 1.0,
+    "trace_length_cap_cells": 48.0
+  },
+  "observational_inputs": {
+    "galaxy_map_directory": "results/p0639_registered_baryonic_maps/maps",
+    "cluster_map_directory": "results/p0641_registered_cluster_baryon_maps/maps",
+    "cluster_summary": "results/p0641_registered_cluster_baryon_maps/systems.csv",
+    "cluster_downsample_cells": 257,
+    "sealed_target_outcomes_opened": false
+  },
+  "predeclared_numerical_gates": {
+    "radial_path_incoherence_weighted_mean_max": 0.002,
+    "radial_component_cancellation_weighted_mean_max": 1e-8,
+    "binary_path_incoherence_gain_over_radial_min": 5.0,
+    "offset_component_cancellation_weighted_mean_min": 0.005,
+    "rotation_covariance_weighted_mean_relative_error_max": 0.03,
+    "translation_covariance_weighted_mean_relative_error_max": 0.03,
+    "all_activation_values_bounded_0_1": true,
+    "solar_1au_geometric_coefficient_at_lambda_5_max": 1e-7,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Advance the simplest variant that passes its applicable synthetic gates and shows the largest median cluster-to-galaxy activation ratio. Do not use any P0633/P0640 target outcome, lens residual, image family, velocity, or inferred dark-matter map in selection.",
+  "claim_boundary": [
+    "P0642 tests whether the geometry variable is measurable, invariant, screened, and domain-selective; it does not test whether the law fits rotation curves or lensing.",
+    "The thin-sheet calculation is a projected diagnostic of a dimension-independent field equation, not a relativistic completion.",
+    "A favorable cluster-to-galaxy separation can arise from map morphology alone and is not evidence that gravity physically travels along the traced paths.",
+    "lambda remains unselected until a spent-data ablation is run and must then be frozen before P0633/P0640 unsealing."
+  ]
+}

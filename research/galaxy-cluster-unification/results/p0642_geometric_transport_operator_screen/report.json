@@ -1,0 +1,110 @@
+{
+  "status": "fail",
+  "all_numerical_gates_pass": false,
+  "gate_results": {
+    "radial_path_null": false,
+    "radial_component_null": true,
+    "binary_path_activation": false,
+    "offset_component_activation": true,
+    "rotation_covariance": true,
+    "translation_covariance": true,
+    "bounded": true,
+    "solar_screen": false,
+    "sealed_targets_untouched": true
+  },
+  "synthetic_metrics": {
+    "radial_path_weighted_mean": 0.003813671371243531,
+    "radial_component_cancellation_weighted_mean": 5.839609801318382e-15,
+    "binary_path_weighted_mean": 0.015991491863469876,
+    "binary_path_gain_over_radial": 4.193201329315247,
+    "offset_component_cancellation_weighted_mean": 0.11405589647437236,
+    "rotation_covariance_relative_error": 6.508674077893326e-16,
+    "translation_covariance_relative_error": 2.169558025964442e-15,
+    "solar_1au_lambda5_max_coefficient": 1.011759518454359e-07,
+    "derived_field_normalized_curl": 0.04380188401812967
+  },
+  "variant_applicable_gate_pass": {
+    "path_incoherence": false,
+    "component_cancellation": true,
+    "hybrid": false
+  },
+  "cluster_to_galaxy_median_activation_ratio": {
+    "path_incoherence": 0.8074283879624934,
+    "component_cancellation": 0.9320351228953784,
+    "hybrid": 0.8448544248068551
+  },
+  "selected_operator": null,
+  "provisional_operator_before_universal_gates": "component_cancellation",
+  "selection_used_sealed_target_outcomes": false,
+  "domain_summary": [
+    {
+      "domain": "sealed_cluster_baryons_only",
+      "variant": "component_cancellation",
+      "systems": 4,
+      "median_activation": 0.022257062978768,
+      "minimum_activation": 0.008424246325346132,
+      "maximum_activation": 0.04813471953485075
+    },
+    {
+      "domain": "sealed_cluster_baryons_only",
+      "variant": "hybrid",
+      "systems": 4,
+      "median_activation": 0.08166670244647076,
+      "minimum_activation": 0.01792083699675847,
+      "maximum_activation": 0.12181808949712096
+    },
+    {
+      "domain": "sealed_cluster_baryons_only",
+      "variant": "path_incoherence",
+      "systems": 4,
+      "median_activation": 0.06192255533696179,
+      "minimum_activation": 0.009863857087710233,
+      "maximum_activation": 0.08060873420933061
+    },
+    {
+      "domain": "sealed_galaxy_baryons_only",
+      "variant": "component_cancellation",
+      "systems": 13,
+      "median_activation": 0.02388006892876114,
+      "minimum_activation": 0.010412074722798481,
+      "maximum_activation": 0.043853919867766614
+    },
+    {
+      "domain": "sealed_galaxy_baryons_only",
+      "variant": "hybrid",
+      "systems": 13,
+      "median_activation": 0.09666363819440354,
+      "minimum_activation": 0.044136002006082364,
+      "maximum_activation": 0.169201981247794
+    },
+    {
+      "domain": "sealed_galaxy_baryons_only",
+      "variant": "path_incoherence",
+      "systems": 13,
+      "median_activation": 0.07669108029904717,
+      "minimum_activation": 0.028792894077510532,
+      "maximum_activation": 0.14808437313255438
+    }
+  ],
+  "protocol_version": "P0642-GEOMETRIC-TRANSPORT-OPERATOR-SCREEN-1.0.0",
+  "protocol_sha256": "cb87c4a26cbbbd1c22e31049687379dc68f484455217d2fc0cb46ab2e5d45471",
+  "source_sha256": "436b30f63a4f63770723e2ba80e2c0b70cfbd9d0b10832f7bc9115f58cf52b57",
+  "coverage": {
+    "synthetic_cases": 5,
+    "registered_galaxies": 13,
+    "registered_clusters": 4,
+    "per_object_gravity_parameters": 0
+  },
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.2.6"
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0642 tests whether the geometry variable is measurable, invariant, screened, and domain-selective; it does not test whether the law fits rotation curves or lensing.",
+    "The thin-sheet calculation is a projected diagnostic of a dimension-independent field equation, not a relativistic completion.",
+    "A favorable cluster-to-galaxy separation can arise from map morphology alone and is not evidence that gravity physically travels along the traced paths.",
+    "lambda remains unselected until a spent-data ablation is run and must then be frozen before P0633/P0640 unsealing."
+  ]
+}
