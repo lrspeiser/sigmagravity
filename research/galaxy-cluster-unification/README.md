@@ -1237,3 +1237,19 @@ The eventual public researcher service—real/synthetic object catalog, safe
 formula submissions, reproducible batch scoring, and a Vercel front end backed
 by asynchronous field-solver workers—is specified in
 [`docs/PUBLIC_SIMULATOR_API_PLAN.md`](docs/PUBLIC_SIMULATOR_API_PLAN.md).
+
+## Sealed validation baryons acquired (P0636)
+
+All 13 P0633 LITTLE THINGS galaxies now have content-addressed H I moment-0,
+B-band, V-band, and UBV-calibration inputs: 52 permitted products totaling
+300,811,128 bytes. Every radio beam and FITS image passes ingestion checks.
+Kinematic cubes, moment-1/2 maps, circular velocities, and target scores remain
+sealed. See
+[`docs/P0636_LITTLE_THINGS_BARYON_ACQUISITION.md`](docs/P0636_LITTLE_THINGS_BARYON_ACQUISITION.md).
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/download_p0636_little_things_baryons.ps1
+$env:PYTHONPATH='src'
+python scripts/audit_p0636_little_things_baryons.py
+python -m pytest tests/test_p0636_little_things_baryon_acquisition.py -q
+```

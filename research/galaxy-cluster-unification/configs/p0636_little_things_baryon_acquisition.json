@@ -1,0 +1,47 @@
+{
+  "protocol_version": "P0636-LITTLE-THINGS-BARYON-ACQUISITION-1.0.0",
+  "status": "baryonic_inputs_only_before_candidate_lock",
+  "parent_preregistration": "configs/p0633_external_validation_preregistration.json",
+  "official_data_page": "https://science.nrao.edu/science/surveys/littlethings/data",
+  "raw_directory": "data/raw/p0633_little_things_baryons",
+  "products_per_target": [
+    "primary-beam-corrected natural-weight H I moment-0 map",
+    "B-band optical image",
+    "V-band optical image",
+    "UBV photometric calibration"
+  ],
+  "targets": [
+    {"id": "CVnIdwA", "archive_directory": "cvnidwa", "hi_filename": "CVnIdwA_NA_X0_P_R.FITS", "optical_prefix": "cvnidwa"},
+    {"id": "DDO47", "archive_directory": "ddo47", "hi_filename": "DDO47_NA_X0_P_R.FITS", "optical_prefix": "d47"},
+    {"id": "DDO50", "archive_directory": "ddo50", "hi_filename": "DDO50_NA_X0_P_R.FITS", "optical_prefix": "d50"},
+    {"id": "DDO52", "archive_directory": "ddo52", "hi_filename": "DDO52_NA_X0_P_R.FITS", "optical_prefix": "d52"},
+    {"id": "DDO53", "archive_directory": "ddo53", "hi_filename": "DDO53_NA_X0_P_R.FITS", "optical_prefix": "d53"},
+    {"id": "DDO87", "archive_directory": "ddo87", "hi_filename": "DDO87_NA_X0_P_R.FITS", "optical_prefix": "d87"},
+    {"id": "DDO101", "archive_directory": "ddo101", "hi_filename": "DDO101_NA_X0_P_R.FITS", "optical_prefix": "d101"},
+    {"id": "DDO126", "archive_directory": "ddo126", "hi_filename": "DDO126_NA_X0_P_R.FITS", "optical_prefix": "d126"},
+    {"id": "DDO133", "archive_directory": "ddo133", "hi_filename": "DDO133_NA_X0_P_R.FITS", "optical_prefix": "d133"},
+    {"id": "DDO210", "archive_directory": "ddo210", "hi_filename": "DDO210_NA_X0_P_R.FITS", "optical_prefix": "d210"},
+    {"id": "DDO216", "archive_directory": "ddo216", "hi_filename": "DDO216_NA_X0_P_R.FITS", "optical_prefix": "d216"},
+    {"id": "NGC1569", "archive_directory": "ngc1569", "hi_filename": "NGC1569_NA_X0_P_R.FITS", "optical_prefix": "n1569"},
+    {"id": "UGC8508", "archive_directory": "ugc8508", "hi_filename": "UGC8508_NA_X0_P_R.FITS", "optical_prefix": "u8508"}
+  ],
+  "forbidden_filename_fragments": [
+    "icl001",
+    "xmom1",
+    "xmom2",
+    "moment1",
+    "moment2",
+    "velocity",
+    "dispersion",
+    "rotation",
+    "rotmod",
+    "cube"
+  ],
+  "sealed_state": {
+    "H_I_cube_downloaded": false,
+    "moment_1_downloaded": false,
+    "moment_2_downloaded": false,
+    "published_circular_velocity_parsed": false,
+    "P0633_target_score_computed": false
+  }
+}
