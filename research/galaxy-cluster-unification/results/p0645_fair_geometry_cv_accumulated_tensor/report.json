@@ -1,0 +1,257 @@
+{
+  "report_version": "P0645-FAIR-GEOMETRY-CV-ACCUMULATED-TENSOR-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "protocol_sha256": "abf100b0f6052e4380f41e5766f6339b009f19970c901fb9066479a02e341638",
+  "source_sha256": "321d4e6f01c6d5bc8d28da60f58d0f018d398bf3e8e18d605dae978e187180d6",
+  "coverage": {
+    "CV_folds": 5,
+    "lambda_rows": 6,
+    "lambda_fold_refits": 30,
+    "CV_prediction_images": 90,
+    "ordinary_geometry_parameters_refit_per_run": 6,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "fold_definition": [
+    {
+      "fold": 0,
+      "fit_images": [
+        "1b",
+        "2a",
+        "2b",
+        "3a",
+        "3b",
+        "3c",
+        "4a",
+        "4b",
+        "5a",
+        "6b",
+        "7a",
+        "7b"
+      ],
+      "validation_images": [
+        "1a",
+        "5b",
+        "6a"
+      ]
+    },
+    {
+      "fold": 1,
+      "fit_images": [
+        "1a",
+        "2b",
+        "3a",
+        "3b",
+        "3c",
+        "4a",
+        "4b",
+        "5a",
+        "5b",
+        "6a",
+        "7b"
+      ],
+      "validation_images": [
+        "1b",
+        "2a",
+        "6b",
+        "7a"
+      ]
+    },
+    {
+      "fold": 2,
+      "fit_images": [
+        "1a",
+        "1b",
+        "2a",
+        "3b",
+        "3c",
+        "4a",
+        "4b",
+        "5a",
+        "5b",
+        "6a",
+        "6b",
+        "7a"
+      ],
+      "validation_images": [
+        "2b",
+        "3a",
+        "7b"
+      ]
+    },
+    {
+      "fold": 3,
+      "fit_images": [
+        "1a",
+        "1b",
+        "2a",
+        "2b",
+        "3a",
+        "3c",
+        "4b",
+        "5a",
+        "5b",
+        "6a",
+        "6b",
+        "7a",
+        "7b"
+      ],
+      "validation_images": [
+        "3b",
+        "4a"
+      ]
+    },
+    {
+      "fold": 4,
+      "fit_images": [
+        "1a",
+        "1b",
+        "2a",
+        "2b",
+        "3a",
+        "3b",
+        "4a",
+        "5b",
+        "6a",
+        "6b",
+        "7a",
+        "7b"
+      ],
+      "validation_images": [
+        "3c",
+        "4b",
+        "5a"
+      ]
+    }
+  ],
+  "field_audit": {
+    "operator": "finite_path_accumulated_component_tensor",
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "proxy_total_mass_msun": 100000000000000.0,
+    "common_smoothing_kpc": 25.0,
+    "proxy_mass_changes_deflection_normalization": false,
+    "activation_weighted_mean": 0.0024344162129744207,
+    "activation_maximum": 0.03490734623408106,
+    "cancellation_mean": 0.003594706024914429,
+    "survival_mean": 0.993761235780194,
+    "trace_length_median_kpc": 92.99394454051999,
+    "source_integral_fraction": 0.0,
+    "normalized_curl_RMS": 2.1538116338041944e-17,
+    "unit_deflection_RMS_arcsec": 0.06713973601237484,
+    "unit_deflection_maximum_arcsec": 0.33023784529305167,
+    "maximum_edge_correction_arcsec": 0.07317254299584193,
+    "carrier_deflection_median_arcsec": 21.25739757728231
+  },
+  "map_audits": {
+    "hst": {
+      "system_label": "RXJ2129",
+      "map_kind": "hst_f160w",
+      "input_count": 2,
+      "native_pixel_scale_arcsec": 0.0650000000000009,
+      "background": -0.0033761123195290565,
+      "masked_fraction": 0.01795127705200111,
+      "positive_cells": 12435,
+      "map_sum_before_normalization": 405.6119888731333
+    },
+    "xray": {
+      "system_label": "RXJ2129",
+      "map_kind": "chandra_soft_rate",
+      "input_count": 2,
+      "total_exposure_ks": 39.6040961730402,
+      "soft_events_on_grid": 15401,
+      "point_source_seed_cells": 37,
+      "point_source_masked_fraction": 0.009767092411720512,
+      "unmasked_map_sum": 0.792017083914403,
+      "masked_map_sum": 0.7662815305616146
+    }
+  },
+  "lambda_scores": [
+    {
+      "lambda": 0.0,
+      "pooled_CV_RMS_arcsec": 2.760255155353674,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 13,
+      "CV_images": 15,
+      "all_CV_roots": false
+    },
+    {
+      "lambda": 1.0,
+      "pooled_CV_RMS_arcsec": 2.9808181735447605,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": 2.853952253468305,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "lambda": 3.5,
+      "pooled_CV_RMS_arcsec": 3.081303895350096,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": 2.983475751272552,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    }
+  ],
+  "selection": {
+    "selected_lambda": 0.0,
+    "lambda0_CV_RMS_arcsec": 2.760255155353674,
+    "selected_CV_RMS_arcsec": 2.760255155353674,
+    "CV_improvement_fraction_vs_lambda0": 0.0,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "full_refit": {
+    "training_RMS_arcsec": 0.49526969831215123,
+    "training_roots": 15,
+    "spent_heldout_RMS_arcsec": 1.8103942416427785,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599": 0.0009569538451847936,
+    "near_bound": {
+      "axis_ratio_q": false,
+      "position_angle_phi_radian": false,
+      "center_x_arcsec": false,
+      "center_y_arcsec": false,
+      "external_shear_gamma1": false,
+      "external_shear_gamma2": false
+    }
+  },
+  "gate_results": {
+    "CV_root_completion": false,
+    "CV_improvement": false,
+    "nonzero_lambda": false,
+    "lambda_not_upper_endpoint": true,
+    "full_training_roots": true,
+    "spent_heldout_roots": true,
+    "spent_heldout_not_worse": true,
+    "geometry_interior": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "All RX J2129 images remain spent; internal CV can select a development constant but supplies no external validation.",
+    "A source family retains at least one image in every fold so its source position can be inferred; this is not leave-family-out prediction.",
+    "The 25 kpc common smoothing is fixed before scoring and is not selected from lens residuals.",
+    "The selected lambda must transfer unchanged to other spent clusters before it is eligible for a P0640 freeze.",
+    "A matched generic multipole control remains mandatory before interpreting an improvement as new gravity."
+  ]
+}

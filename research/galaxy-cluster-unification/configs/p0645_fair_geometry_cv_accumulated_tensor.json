@@ -1,0 +1,51 @@
+{
+  "protocol_version": "P0645-FAIR-GEOMETRY-CV-ACCUMULATED-TENSOR-1.0.0",
+  "status": "frozen_before_any_P0645_score",
+  "frozen_utc": "2026-08-02T02:05:00Z",
+  "purpose": "Remove P0644's zero-tensor geometry advantage by refitting identical conventional lens geometry for every lambda and selecting only with internal cross-validation on the 15 spent training images.",
+  "candidate": {
+    "equation": "identical to P0644",
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "a0_m_s2": 1.2e-10,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "common_physical_smoothing_kpc": 25.0,
+    "lambda_grid": [0.0, 0.5, 1.0, 2.0, 3.5, 5.0]
+  },
+  "cross_validation": {
+    "folds": 5,
+    "construction": "deterministic source-family-stratified round robin over the 15 P0601 training images; every held image leaves at least one other image from its source family in fit",
+    "geometry_refit_starts_per_lambda_fold": 2,
+    "selection_metric": "root-count-complete pooled exact radial RMS across all CV predictions",
+    "tie_break": "smaller lambda",
+    "full_training_refit_starts": 8,
+    "random_seed": 2129645,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "inputs": {
+    "P0644_protocol": "configs/p0644_spent_rxj2129_accumulated_tensor.json",
+    "P0644_report": "results/p0644_spent_rxj2129_accumulated_tensor/report.json"
+  },
+  "predeclared_progression_gates": {
+    "every_CV_root_converged": true,
+    "CV_improvement_fraction_vs_lambda0_min": 0.01,
+    "selected_lambda_nonzero": true,
+    "selected_lambda_not_upper_endpoint": true,
+    "full_training_roots": 15,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599_max": 0.10,
+    "ordinary_geometry_near_bound_allowed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "outputs": {
+    "directory": "results/p0645_fair_geometry_cv_accumulated_tensor"
+  },
+  "claim_boundary": [
+    "All RX J2129 images remain spent; internal CV can select a development constant but supplies no external validation.",
+    "A source family retains at least one image in every fold so its source position can be inferred; this is not leave-family-out prediction.",
+    "The 25 kpc common smoothing is fixed before scoring and is not selected from lens residuals.",
+    "The selected lambda must transfer unchanged to other spent clusters before it is eligible for a P0640 freeze.",
+    "A matched generic multipole control remains mandatory before interpreting an improvement as new gravity."
+  ]
+}

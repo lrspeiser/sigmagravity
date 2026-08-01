@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable
 
 import numpy as np
+from scipy import ndimage
 
 from voidscreen.geometric_transport import (
     component_cancellation,
@@ -62,6 +63,7 @@ def build_accumulated_transport_deflection_field(
     coherence_length_kpc: float = 10.0,
     accumulation_power: float = 1.0,
     a0_m_s2: float = 1.2e-10,
+    common_smoothing_kpc: float = 0.0,
     taper_inner_arcsec: float = 180.0,
     support_radius_arcsec: float = 220.0,
 ) -> StellarMorphologyDeflectionField:
@@ -84,10 +86,22 @@ def build_accumulated_transport_deflection_field(
     if not np.isclose(stellar_mass_fraction + gas_mass_fraction, 1.0):
         raise ValueError("component fractions must sum to one")
     cell_kpc = spacing * scale
+    star_proxy = np.asarray(stellar_proxy, dtype=np.float64)
+    gas_proxy_values = np.asarray(gas_proxy, dtype=np.float64)
+    if common_smoothing_kpc < 0.0:
+        raise ValueError("common_smoothing_kpc must be non-negative")
+    smoothing_pixels = float(common_smoothing_kpc) / cell_kpc
+    if smoothing_pixels > 0.0:
+        star_proxy = ndimage.gaussian_filter(star_proxy, smoothing_pixels, mode="constant")
+        gas_proxy_values = ndimage.gaussian_filter(
+            gas_proxy_values, smoothing_pixels, mode="constant"
+        )
     stars = _normalize_proxy(
-        stellar_proxy, stellar_mass_fraction, proxy_total_mass_msun, cell_kpc
+        star_proxy, stellar_mass_fraction, proxy_total_mass_msun, cell_kpc
     )
-    gas = _normalize_proxy(gas_proxy, gas_mass_fraction, proxy_total_mass_msun, cell_kpc)
+    gas = _normalize_proxy(
+        gas_proxy_values, gas_mass_fraction, proxy_total_mass_msun, cell_kpc
+    )
     star_field = thin_sheet_newtonian_field(stars, cell_kpc)
     gas_field = thin_sheet_newtonian_field(gas, cell_kpc)
     total_field = thin_sheet_newtonian_field(stars + gas, cell_kpc)
@@ -148,6 +162,7 @@ def build_accumulated_transport_deflection_field(
         "stellar_mass_fraction": float(stellar_mass_fraction),
         "gas_mass_fraction": float(gas_mass_fraction),
         "proxy_total_mass_msun": float(proxy_total_mass_msun),
+        "common_smoothing_kpc": float(common_smoothing_kpc),
         "proxy_mass_changes_deflection_normalization": False,
         "activation_weighted_mean": float(np.mean(activation[active])),
         "activation_maximum": float(np.max(activation[active])),

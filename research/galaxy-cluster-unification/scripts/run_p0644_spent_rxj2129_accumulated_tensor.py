@@ -107,6 +107,7 @@ def make_field(protocol, raw_protocol, anchors, parent, baryons, images):
         coherence_length_kpc=float(candidate["coherence_length_kpc"]),
         accumulation_power=float(candidate["accumulation_power"]),
         a0_m_s2=float(candidate["a0_m_s2"]),
+        common_smoothing_kpc=float(candidate.get("common_smoothing_kpc", 0.0)),
         taper_inner_arcsec=float(candidate["taper_inner_arcsec"]),
         support_radius_arcsec=float(candidate["support_radius_arcsec"]),
     )
