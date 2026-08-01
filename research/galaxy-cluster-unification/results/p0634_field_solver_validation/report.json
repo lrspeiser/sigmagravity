@@ -1,0 +1,89 @@
+{
+  "status": "pass",
+  "all_gates_pass": true,
+  "gate_results": {
+    "newtonian_residual": true,
+    "newtonian_median_force": true,
+    "newtonian_p95_force": true,
+    "poisson_convergence_order": true,
+    "qumond_residual": true,
+    "qumond_spherical": true,
+    "qumond_newtonian_limit": true,
+    "qumond_converged": true,
+    "aqual_residual": true,
+    "aqual_spherical": true,
+    "aqual_newtonian_limit": true,
+    "aqual_converged": true
+  },
+  "metrics": {
+    "newtonian_poisson": {
+      "points": 22,
+      "median_relative_error": 0.006665705822511692,
+      "p95_relative_error": 0.014214443065101322,
+      "maximum_relative_error": 0.021624533746949393,
+      "normalized_residual_RMS": 6.096697702827245e-14,
+      "grid_cells": 81,
+      "grid_convergence_order": 2.001544145091488
+    },
+    "QUMOND": {
+      "points": 14,
+      "median_relative_error": 0.009991212692163853,
+      "p95_relative_error": 0.020781893869537237,
+      "maximum_relative_error": 0.021037724534478386,
+      "normalized_residual_RMS": 2.936392314956313e-14,
+      "converged": true,
+      "nonlinear_iterations": 0,
+      "grid_cells": 65,
+      "newtonian_limit_relative_error": 1.535705191901826e-06
+    },
+    "AQUAL": {
+      "points": 10,
+      "median_relative_error": 0.017120962841154608,
+      "p95_relative_error": 0.039838401035184885,
+      "maximum_relative_error": 0.041476199457310736,
+      "normalized_residual_RMS": 4.64549270554662e-06,
+      "converged": true,
+      "nonlinear_iterations": 10,
+      "grid_cells": 49,
+      "newtonian_limit_relative_error": 1.5422672239306934e-06,
+      "newtonian_limit_converged": true
+    }
+  },
+  "manufactured_convergence": [
+    {
+      "cells": 17,
+      "spacing": 0.5,
+      "relative_L2_error": 0.0032189644400786362
+    },
+    {
+      "cells": 25,
+      "spacing": 0.3333333333333333,
+      "relative_L2_error": 0.0014291183165785729
+    },
+    {
+      "cells": 33,
+      "spacing": 0.25,
+      "relative_L2_error": 0.0008035776793812412
+    },
+    {
+      "cells": 49,
+      "spacing": 0.16666666666666666,
+      "relative_L2_error": 0.0003570500098625486
+    }
+  ],
+  "runtime_seconds": 7.52097730000969,
+  "protocol_version": "P0634-FIELD-SOLVER-VALIDATION-1.0.0",
+  "protocol_sha256": "b70a5f811ebb7b7edf3c4c07b0be16f6ba49b291bd46c6e6cb84f6038bcc1140",
+  "solver_source_sha256": "fdb452e6d568b66684f32be29043f5166144a3814beb6e0b9bc05094bbf1d6a8",
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.2.6",
+    "scipy": "1.16.1"
+  },
+  "target_observables_opened": false,
+  "claim_boundary": [
+    "Passing validates the numerical equations on analytic controls, not MOND or the new candidate theory on observations.",
+    "AQUAL and QUMOND remain non-relativistic field equations and do not supply a photon metric.",
+    "P0633 target kinematics and raw strong-lensing constraints remain sealed after P0634."
+  ]
+}

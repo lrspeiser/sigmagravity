@@ -1197,3 +1197,19 @@ $env:PYTHONPATH='src'
 python scripts/run_p0632_published_mond_replication.py
 python -m pytest tests/test_mond_benchmark.py tests/test_p0632_published_mond_replication.py -q
 ```
+
+## Real Cartesian field solvers (P0634)
+
+P0634 implements isolated three-dimensional Newtonian Poisson, two-step
+QUMOND, and nonlinear finite-volume AQUAL solvers on one shared baryonic grid.
+They pass the twelve numerical gates frozen in P0633: manufactured-solution
+grid convergence, Plummer forces, equation residuals, spherical MOND limits,
+and the high-acceleration return to Newtonian gravity. This validates the
+solver machinery, not an observational theory or a relativistic photon law.
+See [`docs/P0634_REAL_FIELD_SOLVER_VALIDATION.md`](docs/P0634_REAL_FIELD_SOLVER_VALIDATION.md).
+
+```powershell
+$env:PYTHONPATH='src'
+python scripts/run_p0634_field_solver_validation.py
+python -m pytest tests/test_field_solvers.py tests/test_p0634_field_solver_validation.py -q
+```

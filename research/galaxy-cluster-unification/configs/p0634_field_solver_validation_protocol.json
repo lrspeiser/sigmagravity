@@ -1,0 +1,60 @@
+{
+  "protocol_version": "P0634-FIELD-SOLVER-VALIDATION-1.0.0",
+  "status": "implementation_of_solver_gates_preregistered_in_P0633",
+  "gate_source_commit": "9c58e3d9154def1fc23eeff33b329e65032bd777",
+  "gate_source": "configs/p0633_external_validation_preregistration.json",
+  "purpose": "Require real Cartesian Newtonian Poisson, QUMOND, and AQUAL field solvers to pass analytic synthetic controls before any P0633 sealed target observable is opened.",
+  "shared_grid": {
+    "dimensions": 3,
+    "coordinates": "cell-centered uniform Cartesian",
+    "boundary_condition": "analytic Dirichlet",
+    "poisson_stencil": "second-order seven-point",
+    "acceleration_operator": "second-order numerical gradient"
+  },
+  "manufactured_poisson": {
+    "half_width": 4.0,
+    "grid_cells": [17, 25, 33, 49],
+    "potential": "product_i sin(pi*(x_i+L)/(2L))",
+    "source": "-3*(pi/(2L))^2*potential",
+    "metric": "relative interior L2 potential error"
+  },
+  "plummer": {
+    "gravitational_constant": 1.0,
+    "mass": 1.0,
+    "scale_radius": 1.0,
+    "half_width": 12.0,
+    "newtonian_grid_cells": 81,
+    "qumond_grid_cells": 65,
+    "aqual_grid_cells": 49,
+    "force_scoring_radial_range": "3 grid spacings through radius 6 for MOND; 2 grid spacings through radius 7 for Newtonian",
+    "a0": 0.03,
+    "newtonian_limit_a0": 1e-7,
+    "mu": "simple x/(1+x)",
+    "nu": "simple 1/2+sqrt(1/4+1/y)"
+  },
+  "acceptance": {
+    "newtonian_poisson": {
+      "normalized_PDE_residual_RMS_max": 1e-5,
+      "plummer_force_median_relative_error_max": 0.01,
+      "plummer_force_p95_relative_error_max": 0.03,
+      "minimum_grid_convergence_order": 1.8
+    },
+    "AQUAL": {
+      "normalized_nonlinear_residual_RMS_max": 1e-5,
+      "spherical_solution_median_relative_error_max": 0.02,
+      "newtonian_limit_relative_error_max": 0.001,
+      "all_required_cases_converged": true
+    },
+    "QUMOND": {
+      "normalized_second_Poisson_residual_RMS_max": 1e-5,
+      "spherical_solution_median_relative_error_max": 0.01,
+      "newtonian_limit_relative_error_max": 0.001,
+      "all_required_cases_converged": true
+    }
+  },
+  "claim_boundary": [
+    "Passing validates the numerical equations on analytic controls, not MOND or the new candidate theory on observations.",
+    "AQUAL and QUMOND remain non-relativistic field equations and do not supply a photon metric.",
+    "P0633 target kinematics and raw strong-lensing constraints remain sealed after P0634."
+  ]
+}

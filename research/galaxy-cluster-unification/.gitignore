@@ -160,6 +160,8 @@ results/environmental_mog0/*
 !results/p0632_published_mond_replication/**
 !results/p0633_external_validation_preregistration/
 !results/p0633_external_validation_preregistration/**
+!results/p0634_field_solver_validation/
+!results/p0634_field_solver_validation/**
 data/raw/manga_dr17/*.fits
 data/raw/erass1_clusters/*.fits
 data/raw/manga_gema_dr17/*.fits
