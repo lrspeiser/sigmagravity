@@ -1,0 +1,15 @@
+{
+  "status": "pass",
+  "protocol_version": "P0638-GAIA-ASTROMETRIC-REGISTRATION-1.0.0",
+  "targets": 13,
+  "all_gates_pass": true,
+  "minimum_inliers": 38,
+  "maximum_median_residual_pixel": 0.9087447629254284,
+  "maximum_p95_residual_pixel": 2.390329530819295,
+  "maximum_p95_residual_arcsec": 2.156198003188979,
+  "maximum_fractional_scale_error": 0.004714554395501835,
+  "maximum_existing_wcs_center_disagreement_pixel": 1.7042915800904905,
+  "failures": [],
+  "config_sha256": "8d1c1a540ca33bd579eef90335c214c01f5c5bbba80f6ea1f69005461dadabb7",
+  "sealed_target_observables_opened": false
+}

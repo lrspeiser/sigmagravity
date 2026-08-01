@@ -1,0 +1,48 @@
+{
+  "protocol_version": "P0638-GAIA-ASTROMETRIC-REGISTRATION-1.0.0",
+  "status": "frozen_before_physical_map_construction",
+  "parent_photometry": "configs/p0637_little_things_photometric_metadata.json",
+  "parent_maps": "configs/p0636_little_things_baryon_acquisition.json",
+  "purpose": "Measure a celestial WCS for every V-band image from foreground stars so real gas-star offsets are retained without consulting target kinematics.",
+  "catalog": {
+    "name": "Gaia DR3 main source catalog",
+    "vizier_id": "I/355/gaiadr3",
+    "base_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv",
+    "columns": ["Source", "RA_ICRS", "DE_ICRS", "Gmag"],
+    "maximum_g_magnitude": 19.0,
+    "maximum_rows": 3000,
+    "query_margin_arcmin": 3.0
+  },
+  "raw_directory": "data/raw/p0638_gaia_astrometry",
+  "algorithm": {
+    "initial_center": "put the independently cataloged photometric galaxy center at the geometric image center",
+    "initial_scale": "use the independently cataloged optical pixel scale",
+    "orientation_candidates": ["identity", "rotate_90", "rotate_180", "rotate_270", "flip_x", "flip_y", "swap", "negative_swap"],
+    "sigma_clip": 3.0,
+    "detection_threshold_sigma": 8.0,
+    "minimum_detection_separation_arcsec": 2.0,
+    "galaxy_exclusion_radius_arcsec": 90.0,
+    "maximum_detected_sources": 3000,
+    "maximum_translation_pixel": 450.0,
+    "translation_histogram_bin_pixel": 5.0,
+    "initial_match_radius_pixel": 15.0,
+    "ransac_residual_pixel": 3.0,
+    "ransac_max_trials": 5000,
+    "random_seed": 0,
+    "final_projection": "TAN"
+  },
+  "acceptance": {
+    "minimum_gaia_inliers_per_image": 30,
+    "maximum_median_residual_pixel": 1.0,
+    "maximum_p95_residual_pixel": 3.0,
+    "maximum_p95_residual_arcsec": 2.5,
+    "maximum_fractional_scale_error": 0.02,
+    "maximum_catalog_center_disagreement_for_existing_wcs_pixel": 2.5,
+    "all_13_images_must_pass": true
+  },
+  "data_boundary": {
+    "allowed": ["V-band image pixels", "Gaia foreground-star positions and magnitudes", "independent photometric center and pixel scale"],
+    "forbidden": ["H I velocity field", "rotation curve", "kinematic center", "kinematic PA", "kinematic inclination", "target performance score"],
+    "sealed_target_observables_opened": false
+  }
+}
