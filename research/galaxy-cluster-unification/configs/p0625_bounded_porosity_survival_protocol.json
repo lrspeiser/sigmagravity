@@ -1,0 +1,88 @@
+{
+  "protocol_version": "P0625-BOUNDED-POROSITY-SURVIVAL-0.1.0",
+  "frozen_utc": "2026-08-01T21:05:00Z",
+  "status": "frozen_after_P0624_before_any_P0625_score",
+  "question": "Can bounded pair-crowding survival, or a parameter-free OR-combination of shallow potential and low surface density, preserve the galaxy improvement without extrapolation failure in the Solar System or deep porous clusters?",
+  "parent_protocols": [
+    "configs/p0623_density_path_survival_protocol.json",
+    "configs/p0624_deep_porous_cross_domain_protocol.json"
+  ],
+  "atomic_candidates": [
+    "constant",
+    "inverse_hill0_m1__potential_depth",
+    "inverse_hillfloor_m2__mean_surface_R80",
+    "inverse_hill0_m0.5__pair_surface_L30p0kpc",
+    "inverse_hill0_m0.5__pair_count_L30p0kpc",
+    "inverse_hillfloor_m1__pair_surface_L30p0kpc",
+    "inverse_hill0_m0.5__pair_surface_L100p0kpc",
+    "inverse_hillfloor_m1__pair_surface_L100p0kpc"
+  ],
+  "composite_candidates": [
+    {
+      "candidate_id": "OR_max_potential_surface",
+      "components": ["inverse_hill0_m1__potential_depth", "inverse_hillfloor_m2__mean_surface_R80"],
+      "operator": "maximum",
+      "extra_parameters": 0,
+      "meaning": "The path is weakly screened if the system is either shallow or diffuse."
+    },
+    {
+      "candidate_id": "OR_rms_potential_surface",
+      "components": ["inverse_hill0_m1__potential_depth", "inverse_hillfloor_m2__mean_surface_R80"],
+      "operator": "root_mean_square",
+      "extra_parameters": 0,
+      "meaning": "Smooth OR-like blend of shallow-potential and diffuse-surface survival."
+    },
+    {
+      "candidate_id": "OR_max_potential_pair30",
+      "components": ["inverse_hill0_m1__potential_depth", "inverse_hill0_m0.5__pair_surface_L30p0kpc"],
+      "operator": "maximum",
+      "extra_parameters": 0,
+      "meaning": "A deep system can retain path strength when its 30 kpc pair crowding is low."
+    },
+    {
+      "candidate_id": "OR_rms_potential_pair30",
+      "components": ["inverse_hill0_m1__potential_depth", "inverse_hill0_m0.5__pair_surface_L30p0kpc"],
+      "operator": "root_mean_square",
+      "extra_parameters": 0,
+      "meaning": "Smooth potential-plus-pair porosity blend."
+    }
+  ],
+  "fit_and_validation": {
+    "atomic_parameters": "Fit only on P0623 development folds 0-3 with the same equal-galaxy objective.",
+    "composite_parameters": "None beyond the already fitted atomic laws.",
+    "galaxy_test": "Repeat four-fold development CV so composite components are trained inside each fold; report fold wins versus a fold-refit constant.",
+    "P0623_fold4": "Already spent; descriptive replay only and not a promotion gate.",
+    "cluster_and_solar": "No parameter refit of any kind."
+  },
+  "transfer_rules": {
+    "derived_pair": "Use the same smooth-profile non-porous control as P0624.",
+    "raw_pair": "Use member-position pair crowding with 2 kpc member kernels as P0624.",
+    "solar_pair": "Use the compact one-solar-mass limit; bounded laws may not exceed their fitted ceiling.",
+    "raw_geometry": "Frozen P0554 geometry and profiled source positions."
+  },
+  "decision_rules": {
+    "bounded_pair_viable": "At least 3/4 galaxy fold wins, all Solar proxies, no fewer raw roots than constant, and derived-cluster RMSE no worse than constant.",
+    "OR_viable": "Must preserve at least half the potential-only galaxy CV improvement while meeting the same Solar/root/derived-cluster gates.",
+    "raw_RMS": "Compare RMS only on common root-complete systems; topology is reported separately.",
+    "claim": "No candidate is a theory until it has an independent sample and a covariant field derivation."
+  },
+  "outputs": {
+    "directory": "results/p0625_bounded_porosity_survival",
+    "galaxy_cv": "galaxy_cv_scores.csv",
+    "galaxy_folds": "galaxy_fold_scores.csv",
+    "frozen_parameters": "frozen_atomic_parameters.csv",
+    "derived_cluster": "derived_cluster_scores.csv",
+    "solar": "solar_scores.csv",
+    "raw": "raw_cluster_scores.csv",
+    "report": "report.json",
+    "figure": "p0625_bounded_porosity_survival.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "All samples are project-spent mechanism tests.",
+    "The OR operators are phenomenological logic for path survival, not covariant field equations.",
+    "Member luminosity is only a proxy for baryonic mass in the raw pair statistic.",
+    "Fixed-geometry raw scores do not replace full blind lens reconstruction.",
+    "Solar results are analytic proxies."
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "report_version": "P0622-COMPREHENSIVE-REGIME-DIAGNOSTICS-RESULTS-0.1.0",
+  "status": "complete_cross_domain_regime_diagnostic",
+  "coverage": {
+    "SPARC_galaxies": 131,
+    "SPARC_outer_points": 968,
+    "galaxy_regime_rows": 32,
+    "galaxy_interaction_rows_minimum_five_systems": 32,
+    "galaxy_continuous_correlation_tests": 22,
+    "fixed_geometry_phase_systems": 5,
+    "phase_variants_per_system": 9,
+    "chronological_full_refit_transfer_systems": 2,
+    "parameter_domain_rows": 19,
+    "scenario_rows": 16,
+    "new_fitted_gravity_parameters": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "formula": {
+    "scalar_parent": "P0554 radial flux remap with universal q=1.2300686115098052",
+    "cluster_route": "alpha_test(x)=alpha_P0554(r)+[Q^2/(1+Delta80)] R_90[delta_alpha_route(x)]",
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "route_width": "0.23 R80 sqrt(1+Q^2)",
+    "return_length": "0.36 R80",
+    "universal_phase_degrees": 90.0,
+    "per_object_gravity_parameters": 0,
+    "galaxy_and_solar_route_limit": "exactly zero only for the defined axisymmetric-disk and point-source translations"
+  },
+  "suite_design": {
+    "copied_from_sigma_gravity": [
+      "multi-domain galaxy, cluster, and Solar scorecard",
+      "morphology and physical-regime splits",
+      "parameter sensitivity and robustness checks",
+      "holdout and comparator accounting"
+    ],
+    "strengthened_here": [
+      "raw image-root completeness is separate from residual RMS",
+      "raw lensing, GR/NFW-derived lensing products, inherited scores, synthetic invariants, and analytic proxies have distinct provenance labels",
+      "all interaction bins report sample size and bootstrap uncertainty",
+      "cluster means receive leave-one-system-out influence checks",
+      "exact symmetry nulls count as compatibility checks, not positive observational evidence",
+      "per-object best phase remains diagnostic and is never promoted as a universal formula"
+    ]
+  },
+  "headline_scores": {
+    "P0554_SPARC_outer_RMSE_km_s": 12.57091168672948,
+    "fixed_RAR_SPARC_outer_RMSE_km_s": 10.348465773189677,
+    "P0554_to_RAR_ratio": 1.2147609087423965,
+    "phase90_five_system_mean_improvement": 0.01684975864045688,
+    "phase90_five_system_median_improvement": 0.0011564767584744118,
+    "phase90_mean_without_RXJ2129": 0.00045945441245179297,
+    "phase90_systems_improved": 3,
+    "phase90_systems_tested": 5,
+    "raw_validation_to_compact_halo_RMS_ratio": 1.9096316095402275,
+    "Solar_all_proxies_pass": true
+  },
+  "differential_findings": {
+    "mass_bias_reversal": {
+      "dwarf_mean_residual_km_s": -6.038483909868682,
+      "giant_mean_residual_km_s": 4.672657322056645,
+      "interpretation": "P0554 tends to underpredict dwarf outer speeds and overpredict giant outer speeds; this is a scalar amplitude/transition problem, not an angular-route effect."
+    },
+    "gas_trend": {
+      "gas_rich_mean_residual_km_s": -6.247336053581282,
+      "gas_poor_mean_residual_km_s": 1.0013530786243285,
+      "interpretation": "The raw gas trend is strong, but much of it tracks baryonic mass; use the partial correlations before adding a gas parameter."
+    },
+    "strongest_supported_continuous_galaxy_driver": {
+      "feature": "inclination",
+      "target": "log_P0554_to_RAR_error_ratio",
+      "galaxies": 131,
+      "spearman_rho": 0.2520110696761891,
+      "p_value": 0.003686954230551921,
+      "partial_rho_controlling_log_mass": 0.25383013932632253,
+      "partial_p_value_controlling_log_mass": 0.0034396460059134544,
+      "input_safe_for_blind_prediction": true,
+      "BH_q_value": 0.011587570438877466,
+      "partial_BH_q_value": 0.025224070710031996
+    },
+    "best_interaction_bin": {
+      "left_dimension": "baryonic_mass_family",
+      "left_bin": "intermediate_mass",
+      "right_dimension": "stellar_structure",
+      "right_bin": "mixed_disk_bulge",
+      "galaxies": 7,
+      "P0554_equal_galaxy_RMSE_km_s": 11.122356290798274,
+      "RAR_equal_galaxy_RMSE_km_s": 12.282661312315017,
+      "P0554_to_RAR_ratio": 0.9055330931942753,
+      "ratio_bootstrap_2p5": 0.5753098061790345,
+      "ratio_bootstrap_97p5": 1.776266520310422,
+      "P0554_mean_residual_km_s": 1.3720052175116701,
+      "P0554_better_fraction": 0.42857142857142855,
+      "descriptive_outcome": "P0554_better"
+    },
+    "worst_interaction_bin": {
+      "left_dimension": "surface_brightness_family",
+      "left_bin": "high_surface_brightness",
+      "right_dimension": "outer_rotation_shape",
+      "right_bin": "rising",
+      "galaxies": 12,
+      "P0554_equal_galaxy_RMSE_km_s": 11.95711205833181,
+      "RAR_equal_galaxy_RMSE_km_s": 6.540484032560826,
+      "P0554_to_RAR_ratio": 1.8281692912642407,
+      "ratio_bootstrap_2p5": 1.2794824081861849,
+      "ratio_bootstrap_97p5": 2.4455781121674836,
+      "P0554_mean_residual_km_s": -7.135080526089958,
+      "P0554_better_fraction": 0.3333333333333333,
+      "descriptive_outcome": "fixed_RAR_better"
+    },
+    "cluster_phase_heterogeneity": {
+      "systems_improved": 3,
+      "systems_worsened": 2,
+      "mean_improvement_fraction": 0.01684975864045688,
+      "mean_without_RXJ2129": 0.00045945441245179297,
+      "interpretation": "RXJ2129 supplies most of the +90-degree mean gain; the other four systems are close to neutral and have mixed signs."
+    },
+    "cluster_direction_lesson": "Quadrupole Q and Delta80 determine route amplitude, but the pre-existing residual-vector alignment determines whether the induced shift helps. A baryon-predicted direction is still missing.",
+    "topology_lesson": "Small parameter or phase changes can cross caustics and lose or create roots; full root completeness must precede any RMS comparison.",
+    "symmetry_null_lesson": "The exact galaxy and Solar route nulls protect compatibility but provide no affirmative test of the angular route physics.",
+    "domain_conflict_lesson": "No scalar or route coordinate is both dominant and directionally consistent across galaxy rotation, raw cluster images, and Solar proxies."
+  },
+  "decision": {
+    "galaxy_parity_gate_pass": false,
+    "raw_cluster_halo_gate_pass": false,
+    "Solar_proxy_gate_pass": true,
+    "universal_phase_sign_gate_pass": false,
+    "per_object_phase_selection_used": false,
+    "formula_promoted": false,
+    "all_promotion_gates_pass": false
+  },
+  "next_discriminating_tests": [
+    "Fit a universal scalar correction only on a development subset, then require it to remove the dwarf-to-giant residual sign reversal on untouched SPARC galaxies without using observed rotation-curve shape as an input.",
+    "Construct a baryon-only angular predictor from gas-star centroid offsets, external tidal axes, or resolved multipole orientation; freeze it before raw image scoring.",
+    "Acquire at least five new complete-baseline clusters and require every held-out root plus a leave-one-cluster-out gain that stays positive when the most responsive system is removed.",
+    "Replace Solar proxies with a joint multi-planet ephemeris likelihood before making a Solar-System compatibility claim stronger than provisional.",
+    "Report dark-matter comparisons at matched flexibility: universal formula versus both compact-halo baselines and object-specific halo fits, with parameter counts explicit."
+  ],
+  "claim_limits": [
+    "The 131 SPARC galaxies and all named cluster systems are project-spent; this stage discovers conditional behavior and does not create a pristine validation set.",
+    "Galaxy morphology interactions are descriptive and are screened across many bins; bootstrap intervals quantify sampling variation but do not remove multiple-testing or model-selection bias.",
+    "Outer rotation shape uses observed velocities and therefore diagnoses failure but cannot be used as an input to a blind prediction.",
+    "The five-cluster phase scan holds lens geometry fixed; A383 is a chronological formula transfer with a full refit, while MS2137 is root-incomplete.",
+    "Raw image-root loss is a topology failure and is never converted into a favorable finite RMS.",
+    "The compact-halo comparison is a limited fitted comparator, not a proof that all dark-matter models achieve the quoted score.",
+    "Solar results are analytic proxies, not a raw multi-planet ephemeris likelihood.",
+    "No per-system phase, strength, width, or gravity constant is allowed in the promoted formula."
+  ]
+}

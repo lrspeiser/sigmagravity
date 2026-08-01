@@ -1,0 +1,99 @@
+{
+  "protocol_id": "P0631",
+  "replica_gate_pass": true,
+  "gate_results": {
+    "median_major_axis_light_rmse": true,
+    "p90_major_axis_light_rmse": true,
+    "median_rotation_rmse": true,
+    "p90_rotation_rmse": true,
+    "median_total_light": true,
+    "deterministic_replay": true
+  },
+  "split_counts": {
+    "train": 81,
+    "holdout": 23,
+    "development": 27
+  },
+  "aggregate": {
+    "all": {
+      "galaxies": 131,
+      "median_light_rmse_dex": 0.0,
+      "p90_light_rmse_dex": 0.0,
+      "median_angular_photometry_rmse_dex": 3.0821667891880604e-05,
+      "median_rotation_rmse_km_s": 0.0,
+      "p90_rotation_rmse_km_s": 0.0,
+      "median_pixelized_light_rmse_dex": 0.04070588788833682,
+      "median_pixelized_rotation_rmse_km_s": 0.22097682570873187,
+      "median_abs_total_light_fractional_error": 0.0036705424022498434
+    },
+    "train": {
+      "galaxies": 81,
+      "median_light_rmse_dex": 0.0,
+      "p90_light_rmse_dex": 0.0,
+      "median_angular_photometry_rmse_dex": 3.088150401591702e-05,
+      "median_rotation_rmse_km_s": 0.0,
+      "p90_rotation_rmse_km_s": 0.0,
+      "median_pixelized_light_rmse_dex": 0.039510220203161056,
+      "median_pixelized_rotation_rmse_km_s": 0.19472218131694236,
+      "median_abs_total_light_fractional_error": 0.004197918959373048
+    },
+    "development": {
+      "galaxies": 27,
+      "median_light_rmse_dex": 0.0,
+      "p90_light_rmse_dex": 0.0,
+      "median_angular_photometry_rmse_dex": 3.088689266415218e-05,
+      "median_rotation_rmse_km_s": 0.0,
+      "p90_rotation_rmse_km_s": 0.0,
+      "median_pixelized_light_rmse_dex": 0.044804549237495696,
+      "median_pixelized_rotation_rmse_km_s": 0.39849427563914436,
+      "median_abs_total_light_fractional_error": 0.0038756415998768556
+    },
+    "holdout": {
+      "galaxies": 23,
+      "median_light_rmse_dex": 0.0,
+      "p90_light_rmse_dex": 0.0,
+      "median_angular_photometry_rmse_dex": 3.066248016099696e-05,
+      "median_rotation_rmse_km_s": 0.0,
+      "p90_rotation_rmse_km_s": 0.0,
+      "median_pixelized_light_rmse_dex": 0.0381923783100254,
+      "median_pixelized_rotation_rmse_km_s": 0.21230407807746585,
+      "median_abs_total_light_fractional_error": 0.0031815159166317386
+    }
+  },
+  "particle_checks": [
+    {
+      "galaxy": "DDO154",
+      "particles": 65536,
+      "luminosity_fractional_error": -2.220446049250313e-16,
+      "fingerprint": "4f360d8a49d2356483e64c56542e95fc60fada119644587c8af7f0fe1aadb131"
+    },
+    {
+      "galaxy": "NGC2403",
+      "particles": 65536,
+      "luminosity_fractional_error": 0.0,
+      "fingerprint": "101b47a5261a3cfa5cbd7cb7f0334610721d7439a15c6a72953eeb990ad74783"
+    },
+    {
+      "galaxy": "NGC2841",
+      "particles": 65536,
+      "luminosity_fractional_error": -1.1102230246251565e-16,
+      "fingerprint": "d4f2c636a298cc9c4bb476d7b7642cad5f9cbb36d7ffcaa5357d8df9a0fd7777"
+    },
+    {
+      "galaxy": "NGC7814",
+      "particles": 65536,
+      "luminosity_fractional_error": 0.0,
+      "fingerprint": "d85fc51fc29b54033b7ebd9122cbadc6a9a3f7dc57a01f6ea94b2821b71e8b41"
+    }
+  ],
+  "provenance": {
+    "protocol_sha256": "70151089ffc4d20d5d3281d92fdd135e75dbbb8542214356d2b6c60579d41f19",
+    "sparc_replica_provenance_sha256": "3b0e3944c0c94f30896c04653110717fba6c90c80b6f103229f592ca6bcbf651"
+  },
+  "interpretation": {
+    "what_pass_means": "The generator and virtual telescope can reproduce the supplied radial light and rotation observables.",
+    "what_pass_does_not_mean": "The observed rotation curve is an input in replica mode, so this is not evidence that any gravity law predicts it.",
+    "blind_test_boundary": "Blind physics mode must call render_replica with theory-predicted velocities and may not use observed velocity or lensing targets.",
+    "morphology_limit": "The current SPARC products constrain radial photometry, not observed pixel-level bars, arms, warps, or lopsidedness."
+  }
+}

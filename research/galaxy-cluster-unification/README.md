@@ -21,6 +21,23 @@ It packages the P0612-P0621 findings, protocols, analysis code, implementation
 modules, tests, derived tables, reports, and figures; the parent repository also
 contains the scientific source data through Git LFS.
 
+## Latest density/path-survival investigation
+
+P0623-P0629 rigorously test the proposed dwarf/giant path-interference idea
+with 44 baryon-only density, pair-crowding, and local-column features; 485
+formula shapes; grouped galaxy cross-validation; derived and raw cluster
+lensing; and Solar proxies. Baryonic potential depth gives a repeatable galaxy
+gain but fails deep clusters. A potential-plus-surface compromise improves the
+five-fold galaxy score by 7.51% over the constant parent and retains all 18 raw
+lens roots, but it remains 9.28% worse than fixed RAR and 2.014 times the
+limited compact-halo raw-lensing error. No formula passes the final combined
+dwarf, giant, cluster, and Solar rules.
+
+See
+[`docs/P0623_P0629_DENSITY_PATH_SURVIVAL_RESULTS.md`](docs/P0623_P0629_DENSITY_PATH_SURVIVAL_RESULTS.md)
+for the equations, every variation, comparator accounting, failure modes, and
+the next external test.
+
 ## Latest field-physics candidate
 
 The newest directional stage turns every observed baryonic source into a
@@ -1095,3 +1112,73 @@ It distinguishes the exact P0620 test construction from QUMOND, refracted
 gravity, EMOND, relativistic MOND, gravitational polarization, and standard
 lens shear, and states the claim boundary required before treating the ansatz
 as a physical theory.
+
+The broad SigmaGravity validation pattern has now been adapted into a stricter
+regime-diagnostic suite with `python
+scripts/run_p0622_comprehensive_regime_diagnostics.py`. It reproduces the 131-
+galaxy outer holdout, splits results by ten physical/morphological dimensions,
+tests 32 two-way interaction bins with bootstrap intervals, audits five-cluster
+phase influence with leave-one-system-out scores, and keeps raw roots, derived
+lens products, Solar proxies, inherited nulls, and synthetic invariants in
+separate evidence classes. The key new findings are a dwarf-to-giant velocity-
+bias reversal and an RXJ2129-dominated cluster mean: the shared +90-degree route
+falls from +1.685% mean improvement to +0.046% when RXJ2129 is omitted. See
+[`docs/P0622_COMPREHENSIVE_REGIME_DIAGNOSTICS.md`](docs/P0622_COMPREHENSIVE_REGIME_DIAGNOSTICS.md).
+
+```powershell
+python scripts/run_p0622_validation_suite.py
+```
+
+## Observation-matched simulator correction (P0630-P0631)
+
+P0630 is a gravity-law forward laboratory, not by itself proof that its
+parametric particle scenes look like real galaxies. P0631 adds the missing
+observation-matched layer using official SPARC radial photometry and bulge/disk
+decompositions. It produces projected light maps, line-of-sight velocity maps,
+and deterministic luminosity-tracer scenes for the same 131-galaxy sample.
+
+The full replica run passes its frozen reconstruction gates, including all 23
+whole-galaxy holdouts: median angular-profile error is 0.0000308 dex, median
+finite-camera rotation loss is 0.221 km/s, and median total-light error is
+0.367%. Observed speed is deliberately an input only in replica mode. The blind
+renderer requires an explicit theory-predicted curve and has no observed-speed
+fallback.
+
+This validates the simulator's radial observation layer; it does not validate
+the gravity formula. The current P0630 transport law remains worse than fixed
+RAR on held-back galaxy speeds and worse than object-specific compact halos on
+raw cluster image positions. See
+[`docs/P0630_SYNTHETIC_UNIVERSE_RESULTS.md`](docs/P0630_SYNTHETIC_UNIVERSE_RESULTS.md)
+and
+[`docs/P0631_OBSERVATION_MATCHED_REPLICA_RESULTS.md`](docs/P0631_OBSERVATION_MATCHED_REPLICA_RESULTS.md).
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/download_p0631_sparc_replica_data.ps1
+$env:PYTHONPATH='src'
+python scripts/run_p0631_observation_matched_replicas.py
+python -m pytest tests/test_galaxy_replica.py tests/test_p0631_observation_matched_replicas.py -q
+```
+
+## Published MOND/RAR simulator calibration (P0632)
+
+The simulator now reproduces the Li et al. (2018) individual-SPARC RAR/MOND
+analysis from the authors' source table: all 175 fits, the 153-galaxy and 2,694-
+point scatter sample, 0.057161 dex versus 0.057 dex published after nuisance
+refits, and a 0.999976 correlation with the published per-galaxy reduced
+chi-square values. With catalog distance/inclination and fixed stellar
+mass-to-light ratios, it independently recovers 0.132766 dex versus the
+published approximately 0.13 dex.
+
+On the chronologically frozen 23 whole-galaxy holdouts, the fixed published
+RAR/MOND equation scores 23.326 km/s, simple-μ MOND 23.800 km/s, standard-μ
+MOND 22.715 km/s, and Newtonian baryons 52.180 km/s. The publication
+replication and blind holdout are kept separate because the former optimizes
+three or four nuisance quantities for each galaxy. See
+[`docs/P0632_PUBLISHED_MOND_REPLICATION_RESULTS.md`](docs/P0632_PUBLISHED_MOND_REPLICATION_RESULTS.md).
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/download_p0632_li2018_benchmark.ps1
+$env:PYTHONPATH='src'
+python scripts/run_p0632_published_mond_replication.py
+python -m pytest tests/test_mond_benchmark.py tests/test_p0632_published_mond_replication.py -q
+```

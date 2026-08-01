@@ -1,0 +1,61 @@
+{
+  "protocol_version": "P0627-OR-STRENGTH-PHASE-ATLAS-0.1.0",
+  "frozen_utc": "2026-08-01T21:50:00Z",
+  "status": "frozen_after_P0626_before_any_P0627_score",
+  "question": "Is the remaining one-percent raw-lensing gap stable across universal OR strength and route phase, or can one global combination preserve the galaxy gain, all roots, Solar safety, and raw RMS?",
+  "parent_protocols": [
+    "configs/p0626_compact_scalar_angular_route_protocol.json",
+    "configs/p0618_universal_route_phase_protocol.json"
+  ],
+  "formula": {
+    "scalar": "q_beta=q_constant+beta[max(q_potential,q_surface)-q_constant]",
+    "beta_values": [0.25, 0.5, 0.75, 1.0],
+    "angular": "alpha_test=alpha_beta+[Q^2/(1+Delta80)] R_phase[delta_alpha_route]",
+    "phase_degrees": [-90.0, -67.5, -45.0, -22.5, 0.0, 22.5, 45.0, 67.5, 90.0],
+    "global_formula_parameters_selected_in_this_atlas": 2,
+    "per_cluster_gravity_parameters": 0
+  },
+  "selection": {
+    "universal_only": true,
+    "lexicographic_order": [
+      "all 18 roots",
+      "most systems not worse than the same-beta scalar",
+      "best worst-system change",
+      "best equal-system raw RMS",
+      "largest retained galaxy CV gain"
+    ],
+    "per_cluster_phase_or_beta_forbidden": true,
+    "multiplicity_status": "opened-data diagnostic; any selected pair requires future chronological freeze"
+  },
+  "evaluation": {
+    "galaxy": "Four-fold development CV for each beta; route is an axisymmetric null.",
+    "derived_cluster": "Twenty-system no-refit transfer for each beta.",
+    "solar": "q_beta lies pointwise between two Solar-safe endpoint laws; verify endpoint and convex-bound safety.",
+    "raw": "Five P0618 fixed-geometry systems, 18 held-out images, all 36 beta-phase pairs plus four scalar parents."
+  },
+  "decision_rules": {
+    "minimum_galaxy_gain_fraction": 0.05,
+    "derived_cluster_nonworsening": true,
+    "Solar_all_proxies_required": true,
+    "all_18_raw_roots_required": true,
+    "raw_RMS_vs_same_beta_scalar_nonworsening": true,
+    "raw_RMS_vs_original_P0618_scalar_nonworsening": true
+  },
+  "outputs": {
+    "directory": "results/p0627_or_strength_phase_atlas",
+    "galaxy": "galaxy_scores.csv",
+    "derived": "derived_cluster_scores.csv",
+    "raw": "raw_scores.csv",
+    "atlas": "atlas_summary.csv",
+    "report": "report.json",
+    "figure": "p0627_or_strength_phase_atlas.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This atlas deliberately opens project-spent systems and adds multiplicity.",
+    "The P0618 phases were already tested on these clusters.",
+    "Any winning beta-phase pair is a hypothesis generator, not validation.",
+    "Fixed geometry is not a full blind lens reconstruction.",
+    "The construction remains phenomenological and non-covariant."
+  ]
+}

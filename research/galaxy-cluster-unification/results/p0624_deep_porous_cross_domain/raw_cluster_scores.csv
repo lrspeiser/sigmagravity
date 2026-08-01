@@ -1,0 +1,21 @@
+system_label,raw_group,candidate_id,role,training_images,training_RMS_arcsec,training_roots_converged,heldout_images,heldout_RMS_arcsec,heldout_roots_converged,heldout_all_roots,improvement_vs_constant_fraction
+RXJ2129,RXJ2129,constant,one-strength control,15,0.7300911201109435,15,7,1.148554021594815,7,True,0.0
+RXJ2129,RXJ2129,inverse_hill0_m1__potential_depth,P0623 primary winner,15,7.210303570020801,15,7,16.580659426259324,7,True,-13.436116294500794
+RXJ2129,RXJ2129,inverse_loglinear__pair_surface_L30p0kpc,best physical-scale pair-surface candidate,15,inf,13,7,inf,4,False,
+RXJ2129,RXJ2129,inverse_hillfloor_m2__mean_surface_R80,simple density candidate available in every domain,15,0.983465849110139,15,7,2.91647058109286,7,True,-1.5392541632854324
+MACS0329,four_cluster,constant,one-strength control,20,7.476564707937316,20,3,23.480356579161334,3,True,0.0
+MACS0329,four_cluster,inverse_hill0_m1__potential_depth,P0623 primary winner,20,inf,17,3,26.72159938712021,3,True,-0.13804061267261414
+MACS0329,four_cluster,inverse_loglinear__pair_surface_L30p0kpc,best physical-scale pair-surface candidate,20,inf,18,3,23.282537350583144,3,True,0.008424881790498606
+MACS0329,four_cluster,inverse_hillfloor_m2__mean_surface_R80,simple density candidate available in every domain,20,7.522170228571198,20,3,22.421735441169005,3,True,0.045085394441234716
+MACS0429,four_cluster,constant,one-strength control,5,3.8305739570424593,5,2,14.75960227180745,2,True,0.0
+MACS0429,four_cluster,inverse_hill0_m1__potential_depth,P0623 primary winner,5,inf,4,2,inf,1,False,
+MACS0429,four_cluster,inverse_loglinear__pair_surface_L30p0kpc,best physical-scale pair-surface candidate,5,inf,4,2,inf,1,False,
+MACS0429,four_cluster,inverse_hillfloor_m2__mean_surface_R80,simple density candidate available in every domain,5,3.9393039996885775,5,2,16.613476606733894,2,True,-0.12560462679049
+MACS1115,four_cluster,constant,one-strength control,4,0.2168639293770544,4,2,24.688639000113916,2,True,0.0
+MACS1115,four_cluster,inverse_hill0_m1__potential_depth,P0623 primary winner,4,7.264921892774001,4,2,30.060522017836604,2,True,-0.21758522281029347
+MACS1115,four_cluster,inverse_loglinear__pair_surface_L30p0kpc,best physical-scale pair-surface candidate,4,7.3341026416673,4,2,30.361188554137097,2,True,-0.22976355861483522
+MACS1115,four_cluster,inverse_hillfloor_m2__mean_surface_R80,simple density candidate available in every domain,4,0.9756762753950133,4,2,25.209385551470326,2,True,-0.021092558052876464
+MACS1931,four_cluster,constant,one-strength control,15,inf,11,4,inf,3,False,
+MACS1931,four_cluster,inverse_hill0_m1__potential_depth,P0623 primary winner,15,inf,14,4,20.310662315630687,4,True,
+MACS1931,four_cluster,inverse_loglinear__pair_surface_L30p0kpc,best physical-scale pair-surface candidate,15,inf,10,4,inf,2,False,
+MACS1931,four_cluster,inverse_hillfloor_m2__mean_surface_R80,simple density candidate available in every domain,15,inf,11,4,inf,3,False,

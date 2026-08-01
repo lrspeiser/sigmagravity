@@ -1,0 +1,149 @@
+{
+  "protocol_version": "P0625-BOUNDED-POROSITY-SURVIVAL-0.1.0",
+  "status": "complete",
+  "candidates": [
+    {
+      "candidate_id": "OR_max_potential_surface",
+      "galaxy_cv_improvement_fraction": 0.10183377205380528,
+      "galaxy_fold_wins": 4,
+      "derived_cluster_improvement_fraction": 0.0044323664550721675,
+      "solar_pass": true,
+      "raw_roots": 17,
+      "raw_images": 18,
+      "raw_complete_systems": 4,
+      "cross_domain_diagnostic_gate": true
+    },
+    {
+      "candidate_id": "inverse_hillfloor_m2__mean_surface_R80",
+      "galaxy_cv_improvement_fraction": 0.06207913149587618,
+      "galaxy_fold_wins": 3,
+      "derived_cluster_improvement_fraction": 0.0044323664550721675,
+      "solar_pass": true,
+      "raw_roots": 17,
+      "raw_images": 18,
+      "raw_complete_systems": 4,
+      "cross_domain_diagnostic_gate": true
+    },
+    {
+      "candidate_id": "inverse_hill0_m1__potential_depth",
+      "galaxy_cv_improvement_fraction": 0.1413244356970741,
+      "galaxy_fold_wins": 4,
+      "derived_cluster_improvement_fraction": -0.6943355079877025,
+      "solar_pass": true,
+      "raw_roots": 17,
+      "raw_images": 18,
+      "raw_complete_systems": 4,
+      "cross_domain_diagnostic_gate": false
+    },
+    {
+      "candidate_id": "OR_rms_potential_surface",
+      "galaxy_cv_improvement_fraction": 0.12065549868566183,
+      "galaxy_fold_wins": 4,
+      "derived_cluster_improvement_fraction": -0.026766833726723283,
+      "solar_pass": true,
+      "raw_roots": 14,
+      "raw_images": 18,
+      "raw_complete_systems": 2,
+      "cross_domain_diagnostic_gate": false
+    },
+    {
+      "candidate_id": "OR_rms_potential_pair30",
+      "galaxy_cv_improvement_fraction": 0.11749548262560294,
+      "galaxy_fold_wins": 4,
+      "derived_cluster_improvement_fraction": -0.11508406938206184,
+      "solar_pass": true,
+      "raw_roots": 16,
+      "raw_images": 18,
+      "raw_complete_systems": 3,
+      "cross_domain_diagnostic_gate": false
+    },
+    {
+      "candidate_id": "OR_max_potential_pair30",
+      "galaxy_cv_improvement_fraction": 0.10751245400111331,
+      "galaxy_fold_wins": 4,
+      "derived_cluster_improvement_fraction": 0.010310712752598428,
+      "solar_pass": false,
+      "raw_roots": 13,
+      "raw_images": 18,
+      "raw_complete_systems": 2,
+      "cross_domain_diagnostic_gate": false
+    },
+    {
+      "candidate_id": "inverse_hill0_m0.5__pair_count_L30p0kpc",
+      "galaxy_cv_improvement_fraction": 0.08040567895175121,
+      "galaxy_fold_wins": 4,
+      "derived_cluster_improvement_fraction": -0.05793777802517264,
+      "solar_pass": false,
+      "raw_roots": 14,
+      "raw_images": 18,
+      "raw_complete_systems": 2,
+      "cross_domain_diagnostic_gate": false
+    },
+    {
+      "candidate_id": "inverse_hill0_m0.5__pair_surface_L30p0kpc",
+      "galaxy_cv_improvement_fraction": 0.08036013908128903,
+      "galaxy_fold_wins": 4,
+      "derived_cluster_improvement_fraction": 0.010310712752598428,
+      "solar_pass": false,
+      "raw_roots": 13,
+      "raw_images": 18,
+      "raw_complete_systems": 2,
+      "cross_domain_diagnostic_gate": false
+    },
+    {
+      "candidate_id": "inverse_hill0_m0.5__pair_surface_L100p0kpc",
+      "galaxy_cv_improvement_fraction": 0.0799342896313534,
+      "galaxy_fold_wins": 4,
+      "derived_cluster_improvement_fraction": null,
+      "solar_pass": false,
+      "raw_roots": 16,
+      "raw_images": 18,
+      "raw_complete_systems": 3,
+      "cross_domain_diagnostic_gate": false
+    },
+    {
+      "candidate_id": "inverse_hillfloor_m1__pair_surface_L100p0kpc",
+      "galaxy_cv_improvement_fraction": 0.07970527674552863,
+      "galaxy_fold_wins": 4,
+      "derived_cluster_improvement_fraction": null,
+      "solar_pass": false,
+      "raw_roots": 13,
+      "raw_images": 18,
+      "raw_complete_systems": 2,
+      "cross_domain_diagnostic_gate": false
+    },
+    {
+      "candidate_id": "inverse_hillfloor_m1__pair_surface_L30p0kpc",
+      "galaxy_cv_improvement_fraction": 0.0782042240327987,
+      "galaxy_fold_wins": 3,
+      "derived_cluster_improvement_fraction": 0.013158328009449383,
+      "solar_pass": true,
+      "raw_roots": 14,
+      "raw_images": 18,
+      "raw_complete_systems": 3,
+      "cross_domain_diagnostic_gate": false
+    },
+    {
+      "candidate_id": "constant",
+      "galaxy_cv_improvement_fraction": 0.0,
+      "galaxy_fold_wins": 0,
+      "derived_cluster_improvement_fraction": 0.0,
+      "solar_pass": true,
+      "raw_roots": 17,
+      "raw_images": 18,
+      "raw_complete_systems": 4,
+      "cross_domain_diagnostic_gate": false
+    }
+  ],
+  "diagnostic_gate_passers": [
+    "OR_max_potential_surface",
+    "inverse_hillfloor_m2__mean_surface_R80"
+  ],
+  "claim_limits": [
+    "All samples are project-spent mechanism tests.",
+    "The OR operators are phenomenological logic for path survival, not covariant field equations.",
+    "Member luminosity is only a proxy for baryonic mass in the raw pair statistic.",
+    "Fixed-geometry raw scores do not replace full blind lens reconstruction.",
+    "Solar results are analytic proxies."
+  ]
+}

@@ -1,0 +1,757 @@
+{
+  "report_version": "P0630-SYNTHETIC-UNIVERSE-0.1.0",
+  "status": "completed P0630 seeded simulator and project-spent cross-domain holdouts",
+  "protocol": {
+    "path": "configs/p0630_synthetic_universe_protocol.json",
+    "sha256": "4726eb716c4363ac0fdaeb2e79edae873316cbe4d86925342db0eae2b00f002d"
+  },
+  "split_counts": {
+    "galaxy": {
+      "train": 81,
+      "development": 27,
+      "holdout": 23
+    },
+    "cluster": {
+      "train": 12,
+      "development": 4,
+      "holdout": 4
+    }
+  },
+  "simulator": {
+    "seed_target_separation": {
+      "allowed": [
+        "SPARC distance, inclination, quality, disk scale, light-derived stellar mass, gas mass, and baryonic force components",
+        "Tian et al. cluster baryonic acceleration anchors",
+        "metric-neutral cluster image positions and source redshifts for lens geometry training only"
+      ],
+      "forbidden": [
+        "observed SPARC rotation speed during seed construction",
+        "cluster observed total acceleration during seed construction",
+        "held-out cluster image position during lens geometry fitting",
+        "per-object gravity amplitudes or transition scales"
+      ],
+      "stellar_mass_to_light": {
+        "disk": 0.5,
+        "bulge": 0.7
+      }
+    },
+    "particle_scene_checks": [
+      {
+        "domain": "galaxy",
+        "system": "DDO154",
+        "particles": 4096,
+        "seed_mass_msun": 363651922.0189966,
+        "profile_force_equivalent_mass_msun": 363651922.0189967,
+        "relative_mass_error": -3.3306690738754696e-16,
+        "direct_force_finite_fraction": 1.0,
+        "direct_vs_radial_anchor_log_RMSE_dex": 0.3549490062947431,
+        "seed_fingerprint": "f497dc10a9f18d46b23ccd266d65c3177165e83ede093a57098bf9424f0027a1",
+        "interpretation": "geometry realization check; radial force knots remain the fidelity path for real scoring"
+      },
+      {
+        "domain": "galaxy",
+        "system": "NGC2841",
+        "particles": 4096,
+        "seed_mass_msun": 174372856298.7658,
+        "profile_force_equivalent_mass_msun": 174372856298.7658,
+        "relative_mass_error": 0.0,
+        "direct_force_finite_fraction": 1.0,
+        "direct_vs_radial_anchor_log_RMSE_dex": 0.16097611008627935,
+        "seed_fingerprint": "ad8cc56d911199ca1ad7860a1f46ceaeb8926dabd512e0023ae1de04c9ddc087",
+        "interpretation": "geometry realization check; radial force knots remain the fidelity path for real scoring"
+      },
+      {
+        "domain": "galaxy",
+        "system": "UGC00128",
+        "particles": 4096,
+        "seed_mass_msun": 23429479936.82132,
+        "profile_force_equivalent_mass_msun": 23429479936.82132,
+        "relative_mass_error": 0.0,
+        "direct_force_finite_fraction": 1.0,
+        "direct_vs_radial_anchor_log_RMSE_dex": 0.21677948563586358,
+        "seed_fingerprint": "ad6f453c18f492a22a9a6edb0c27eb52aec0f11977057bb3c3aa0a31d1140b9f",
+        "interpretation": "geometry realization check; radial force knots remain the fidelity path for real scoring"
+      },
+      {
+        "domain": "cluster",
+        "system": "MACS0329",
+        "particles": 8192,
+        "seed_mass_msun": 9350531873074.535,
+        "profile_force_equivalent_mass_msun": 9350531873074.537,
+        "relative_mass_error": -2.220446049250313e-16,
+        "direct_force_finite_fraction": 1.0,
+        "direct_vs_radial_anchor_log_RMSE_dex": 0.10674404450492696,
+        "seed_fingerprint": "ecd825e82d0595e569c7172cd5fca9a35a0a03afd74fcea6c9a9e932aef1ba85",
+        "interpretation": "geometry realization check; radial force knots remain the fidelity path for real scoring"
+      },
+      {
+        "domain": "cluster",
+        "system": "MACS1115",
+        "particles": 8192,
+        "seed_mass_msun": 10299978423311.516,
+        "profile_force_equivalent_mass_msun": 10299978423311.516,
+        "relative_mass_error": 0.0,
+        "direct_force_finite_fraction": 1.0,
+        "direct_vs_radial_anchor_log_RMSE_dex": 0.2813476605884528,
+        "seed_fingerprint": "1731c697e249351875cfba0f7c7a12f7d81ebe41c54fdfec00270ee9c29b0edc",
+        "interpretation": "geometry realization check; radial force knots remain the fidelity path for real scoring"
+      }
+    ],
+    "gravity_plugins": [
+      "baryons",
+      "rar",
+      "simple_mond",
+      "transport"
+    ],
+    "universal_fit": {
+      "development_fit": {
+        "parameters": [
+          -9.828865199475334,
+          20.0,
+          4.0,
+          0.4416354320883477,
+          3.699975079917907,
+          1.9795727985662679,
+          8.371114873659844
+        ],
+        "parameter_mapping": {
+          "log10_a0_m_s2": -9.828865199475334,
+          "diffuse_amplitude": 20.0,
+          "low_acceleration_power": 4.0,
+          "log10_surface_transition_msun_pc2": 0.4416354320883477,
+          "surface_power": 3.699975079917907,
+          "log10_extent_transition_kpc": 1.9795727985662679,
+          "return_amplitude": 8.371114873659844
+        },
+        "objective": 0.04866452184330144,
+        "success": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "function_evaluations": 7092,
+        "systems": 93,
+        "points": 1809,
+        "domain_counts": {
+          "galaxy": 81,
+          "cluster": 12
+        }
+      },
+      "final_fit_before_holdout_open": {
+        "parameters": [
+          -9.864658348381479,
+          4.519355194876579,
+          3.622271402721547,
+          2.935006145538263,
+          1.8224204762723437,
+          1.7809798008159747,
+          8.02104210273262
+        ],
+        "parameter_mapping": {
+          "log10_a0_m_s2": -9.864658348381479,
+          "diffuse_amplitude": 4.519355194876579,
+          "low_acceleration_power": 3.622271402721547,
+          "log10_surface_transition_msun_pc2": 2.935006145538263,
+          "surface_power": 1.8224204762723437,
+          "log10_extent_transition_kpc": 1.7809798008159747,
+          "return_amplitude": 8.02104210273262
+        },
+        "objective": 0.04486074392689318,
+        "success": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "function_evaluations": 7308,
+        "systems": 124,
+        "points": 2671,
+        "domain_counts": {
+          "galaxy": 108,
+          "cluster": 16
+        }
+      },
+      "universal_parameter_count": 7,
+      "per_object_gravity_parameters": 0,
+      "formula": "g=gbar+A*gbar*[a0/(a0+gbar)]^p*[0.2+0.8/(1+(Sigma/Sigma*)^n)]+B*W(R80/L)*gbar(200kpc)*(200kpc/r)*[a0/(a0+gbar)]^p"
+    },
+    "injected_truth": {
+      "known_parameters": {
+        "log10_a0_m_s2": -10.15,
+        "diffuse_amplitude": 2.4,
+        "low_acceleration_power": 1.1,
+        "log10_surface_transition_msun_pc2": 1.7,
+        "surface_power": 1.3,
+        "log10_extent_transition_kpc": 1.75,
+        "return_amplitude": 5.0
+      },
+      "recovered_parameters": {
+        "log10_a0_m_s2": -10.150139170472622,
+        "diffuse_amplitude": 2.4173488237160456,
+        "low_acceleration_power": 1.0967543687301453,
+        "log10_surface_transition_msun_pc2": 1.6869312324018317,
+        "surface_power": 1.2713205167386066,
+        "log10_extent_transition_kpc": 1.7503004414090273,
+        "return_amplitude": 4.992455903486215
+      },
+      "recovered_objective": 2.439393996577661e-05,
+      "heldout_equal_system_log_RMSE_dex": 0.0049128955312627495,
+      "gate_max_dex": 0.02,
+      "injected_law_recovered_on_holdout": true,
+      "aggregate": [
+        {
+          "domain": "galaxy",
+          "split": "holdout",
+          "law": "baryons",
+          "systems": 8,
+          "equal_system_log_acceleration_RMSE_dex": 0.3677806149311307,
+          "equal_system_velocity_RMSE_km_s": 9.743240608482099,
+          "mean_system_point_fraction_within_10_percent": 0.08125,
+          "mean_system_point_fraction_within_20_percent": 0.17500000000000002,
+          "median_system_absolute_fractional_velocity_error": 0.33948678399382537
+        },
+        {
+          "domain": "galaxy",
+          "split": "holdout",
+          "law": "transport",
+          "systems": 8,
+          "equal_system_log_acceleration_RMSE_dex": 0.005224910159233098,
+          "equal_system_velocity_RMSE_km_s": 0.22039232628906388,
+          "mean_system_point_fraction_within_10_percent": 1.0,
+          "mean_system_point_fraction_within_20_percent": 1.0,
+          "median_system_absolute_fractional_velocity_error": 0.004418130231808537
+        },
+        {
+          "domain": "cluster",
+          "split": "holdout",
+          "law": "baryons",
+          "systems": 4,
+          "equal_system_log_acceleration_RMSE_dex": 0.4681092175709479,
+          "equal_system_velocity_RMSE_km_s": 88.5222697797603,
+          "mean_system_point_fraction_within_10_percent": 0.175,
+          "mean_system_point_fraction_within_20_percent": 0.2,
+          "median_system_absolute_fractional_velocity_error": 0.36664090868830795
+        },
+        {
+          "domain": "cluster",
+          "split": "holdout",
+          "law": "transport",
+          "systems": 4,
+          "equal_system_log_acceleration_RMSE_dex": 0.004220219799867064,
+          "equal_system_velocity_RMSE_km_s": 1.505634056574423,
+          "mean_system_point_fraction_within_10_percent": 1.0,
+          "mean_system_point_fraction_within_20_percent": 1.0,
+          "median_system_absolute_fractional_velocity_error": 0.0035178624301379635
+        }
+      ],
+      "identifiability_warning": "Passing predictive recovery does not require every correlated coefficient to be numerically recovered; it validates the end-to-end forward prediction."
+    },
+    "million_scale_sweep": {
+      "synthetic_systems": 1048576,
+      "boost_distribution": {
+        "minimum": 1.0000096107402088,
+        "p01": 1.0022012325516254,
+        "median": 4.182052274508383,
+        "p99": 5.615601409382511,
+        "maximum": 10.606362617883091
+      },
+      "spearman_sensitivity": {
+        "log10_mass_msun": -0.662087592731475,
+        "gas_fraction": 0.10105469615612904,
+        "bulge_fraction": -0.020454438900043784,
+        "surface_density_msun_pc2": -0.9286524238317,
+        "concentration": 0.005036529318282546,
+        "clumpiness": 0.0073767014234519205,
+        "gbar_m_s2": -0.9777504091472957
+      }
+    },
+    "descriptive_heldout_actuals_figure": {
+      "path": "results/p0630_synthetic_universe/heldout_actuals.png",
+      "systems": [
+        "DDO064",
+        "UGC00191",
+        "UGC09037",
+        "NGC0801",
+        "A2261",
+        "MACS1115",
+        "MACS1931",
+        "RXJ2248"
+      ],
+      "selection": "galaxy baryonic-mass quantiles plus every radial-cluster holdout; no target residual used"
+    }
+  },
+  "development_replay": [
+    {
+      "domain": "galaxy",
+      "split": "development",
+      "law": "baryons",
+      "systems": 27,
+      "equal_system_log_acceleration_RMSE_dex": 0.5392998773742291,
+      "equal_system_velocity_RMSE_km_s": 62.484456752991164,
+      "mean_system_point_fraction_within_10_percent": 0.05742108359530783,
+      "mean_system_point_fraction_within_20_percent": 0.16608200645631033,
+      "median_system_absolute_fractional_velocity_error": 0.39659460375891165
+    },
+    {
+      "domain": "galaxy",
+      "split": "development",
+      "law": "rar",
+      "systems": 27,
+      "equal_system_log_acceleration_RMSE_dex": 0.14840261174366504,
+      "equal_system_velocity_RMSE_km_s": 18.8471740558205,
+      "mean_system_point_fraction_within_10_percent": 0.5255299910756317,
+      "mean_system_point_fraction_within_20_percent": 0.804137690344274,
+      "median_system_absolute_fractional_velocity_error": 0.08488310870928534
+    },
+    {
+      "domain": "galaxy",
+      "split": "development",
+      "law": "simple_mond",
+      "systems": 27,
+      "equal_system_log_acceleration_RMSE_dex": 0.14813740252248814,
+      "equal_system_velocity_RMSE_km_s": 18.549295896796064,
+      "mean_system_point_fraction_within_10_percent": 0.5385397459827028,
+      "mean_system_point_fraction_within_20_percent": 0.7991191216400686,
+      "median_system_absolute_fractional_velocity_error": 0.08458781446078117
+    },
+    {
+      "domain": "galaxy",
+      "split": "development",
+      "law": "transport",
+      "systems": 27,
+      "equal_system_log_acceleration_RMSE_dex": 0.16826759128072327,
+      "equal_system_velocity_RMSE_km_s": 21.91463137115308,
+      "mean_system_point_fraction_within_10_percent": 0.46855775449318116,
+      "mean_system_point_fraction_within_20_percent": 0.7912976418890147,
+      "median_system_absolute_fractional_velocity_error": 0.10336164926211744
+    },
+    {
+      "domain": "cluster",
+      "split": "development",
+      "law": "baryons",
+      "systems": 4,
+      "equal_system_log_acceleration_RMSE_dex": 0.83477815416233,
+      "equal_system_velocity_RMSE_km_s": 783.5051847834993,
+      "mean_system_point_fraction_within_10_percent": 0.0,
+      "mean_system_point_fraction_within_20_percent": 0.0,
+      "median_system_absolute_fractional_velocity_error": 0.6330002528525606
+    },
+    {
+      "domain": "cluster",
+      "split": "development",
+      "law": "rar",
+      "systems": 4,
+      "equal_system_log_acceleration_RMSE_dex": 0.5074734992224661,
+      "equal_system_velocity_RMSE_km_s": 551.64119248888,
+      "mean_system_point_fraction_within_10_percent": 0.0,
+      "mean_system_point_fraction_within_20_percent": 0.0,
+      "median_system_absolute_fractional_velocity_error": 0.4495549376861902
+    },
+    {
+      "domain": "cluster",
+      "split": "development",
+      "law": "simple_mond",
+      "systems": 4,
+      "equal_system_log_acceleration_RMSE_dex": 0.5019070925347221,
+      "equal_system_velocity_RMSE_km_s": 548.0950380225863,
+      "mean_system_point_fraction_within_10_percent": 0.0,
+      "mean_system_point_fraction_within_20_percent": 0.0,
+      "median_system_absolute_fractional_velocity_error": 0.4468823988290357
+    },
+    {
+      "domain": "cluster",
+      "split": "development",
+      "law": "transport",
+      "systems": 4,
+      "equal_system_log_acceleration_RMSE_dex": 0.21769560037062863,
+      "equal_system_velocity_RMSE_km_s": 249.69997544417126,
+      "mean_system_point_fraction_within_10_percent": 0.2,
+      "mean_system_point_fraction_within_20_percent": 0.4,
+      "median_system_absolute_fractional_velocity_error": 0.1954945381199893
+    }
+  ],
+  "heldout": {
+    "galaxy": [
+      {
+        "domain": "galaxy",
+        "split": "holdout",
+        "law": "baryons",
+        "systems": 23,
+        "equal_system_log_acceleration_RMSE_dex": 0.5308847649132338,
+        "equal_system_velocity_RMSE_km_s": 52.179770349452035,
+        "mean_system_point_fraction_within_10_percent": 0.07851839057259234,
+        "mean_system_point_fraction_within_20_percent": 0.1946539311117066,
+        "median_system_absolute_fractional_velocity_error": 0.4221551856636767
+      },
+      {
+        "domain": "galaxy",
+        "split": "holdout",
+        "law": "rar",
+        "systems": 23,
+        "equal_system_log_acceleration_RMSE_dex": 0.22076054297593894,
+        "equal_system_velocity_RMSE_km_s": 23.32573007693064,
+        "mean_system_point_fraction_within_10_percent": 0.4453363726251387,
+        "mean_system_point_fraction_within_20_percent": 0.7103353536404683,
+        "median_system_absolute_fractional_velocity_error": 0.11070567768382067
+      },
+      {
+        "domain": "galaxy",
+        "split": "holdout",
+        "law": "simple_mond",
+        "systems": 23,
+        "equal_system_log_acceleration_RMSE_dex": 0.22225251711236907,
+        "equal_system_velocity_RMSE_km_s": 23.800376031856715,
+        "mean_system_point_fraction_within_10_percent": 0.4454881478822411,
+        "mean_system_point_fraction_within_20_percent": 0.7062262702066855,
+        "median_system_absolute_fractional_velocity_error": 0.11169177383655637
+      },
+      {
+        "domain": "galaxy",
+        "split": "holdout",
+        "law": "transport",
+        "systems": 23,
+        "equal_system_log_acceleration_RMSE_dex": 0.24873798398338084,
+        "equal_system_velocity_RMSE_km_s": 29.297941265561146,
+        "mean_system_point_fraction_within_10_percent": 0.38190858039421594,
+        "mean_system_point_fraction_within_20_percent": 0.6513739459547621,
+        "median_system_absolute_fractional_velocity_error": 0.11782988218168122
+      }
+    ],
+    "cluster_radial": [
+      {
+        "domain": "cluster",
+        "split": "holdout",
+        "law": "baryons",
+        "systems": 4,
+        "equal_system_log_acceleration_RMSE_dex": 0.8503266529203156,
+        "equal_system_velocity_RMSE_km_s": 813.3351676752158,
+        "mean_system_point_fraction_within_10_percent": 0.0,
+        "mean_system_point_fraction_within_20_percent": 0.0,
+        "median_system_absolute_fractional_velocity_error": 0.6243857896196251
+      },
+      {
+        "domain": "cluster",
+        "split": "holdout",
+        "law": "rar",
+        "systems": 4,
+        "equal_system_log_acceleration_RMSE_dex": 0.49084237247224455,
+        "equal_system_velocity_RMSE_km_s": 549.0169349386395,
+        "mean_system_point_fraction_within_10_percent": 0.0,
+        "mean_system_point_fraction_within_20_percent": 0.0,
+        "median_system_absolute_fractional_velocity_error": 0.42800034224852235
+      },
+      {
+        "domain": "cluster",
+        "split": "holdout",
+        "law": "simple_mond",
+        "systems": 4,
+        "equal_system_log_acceleration_RMSE_dex": 0.486294158842561,
+        "equal_system_velocity_RMSE_km_s": 545.9800122855859,
+        "mean_system_point_fraction_within_10_percent": 0.0,
+        "mean_system_point_fraction_within_20_percent": 0.0,
+        "median_system_absolute_fractional_velocity_error": 0.4242860474068897
+      },
+      {
+        "domain": "cluster",
+        "split": "holdout",
+        "law": "transport",
+        "systems": 4,
+        "equal_system_log_acceleration_RMSE_dex": 0.19807832970222894,
+        "equal_system_velocity_RMSE_km_s": 200.5663762427467,
+        "mean_system_point_fraction_within_10_percent": 0.4666666666666667,
+        "mean_system_point_fraction_within_20_percent": 0.7166666666666666,
+        "median_system_absolute_fractional_velocity_error": 0.10971286800496655
+      }
+    ],
+    "raw_cluster_images": [
+      {
+        "model": "GR_plus_cluster_halo",
+        "clusters": 2,
+        "heldout_images": 6,
+        "clusters_training_all_roots": 2,
+        "clusters_all_roots": 2,
+        "all_training_roots_converged": true,
+        "all_roots_converged": true,
+        "equal_cluster_heldout_RMS_arcsec": 9.976914932465064,
+        "gravity_parameters_per_object": 2
+      },
+      {
+        "model": "baryons",
+        "clusters": 2,
+        "heldout_images": 6,
+        "clusters_training_all_roots": 2,
+        "clusters_all_roots": 2,
+        "all_training_roots_converged": true,
+        "all_roots_converged": true,
+        "equal_cluster_heldout_RMS_arcsec": 25.341876841944096,
+        "gravity_parameters_per_object": 0
+      },
+      {
+        "model": "rar",
+        "clusters": 2,
+        "heldout_images": 6,
+        "clusters_training_all_roots": 2,
+        "clusters_all_roots": 2,
+        "all_training_roots_converged": true,
+        "all_roots_converged": true,
+        "equal_cluster_heldout_RMS_arcsec": 25.725898723684637,
+        "gravity_parameters_per_object": 0
+      },
+      {
+        "model": "simple_mond",
+        "clusters": 2,
+        "heldout_images": 6,
+        "clusters_training_all_roots": 2,
+        "clusters_all_roots": 2,
+        "all_training_roots_converged": true,
+        "all_roots_converged": true,
+        "equal_cluster_heldout_RMS_arcsec": 25.629512791706706,
+        "gravity_parameters_per_object": 0
+      },
+      {
+        "model": "transport",
+        "clusters": 2,
+        "heldout_images": 6,
+        "clusters_training_all_roots": 1,
+        "clusters_all_roots": 2,
+        "all_training_roots_converged": false,
+        "all_roots_converged": true,
+        "equal_cluster_heldout_RMS_arcsec": 18.008321299441153,
+        "gravity_parameters_per_object": 0
+      }
+    ],
+    "raw_fit_audit": {
+      "MACS1115:baryons": {
+        "success": true,
+        "message": "`gtol` termination condition is satisfied.",
+        "function_evaluations": 10,
+        "parameters": [
+          0.5500000000000002,
+          1.5707963267948963,
+          -2.9999999999999996,
+          2.9999999999999996,
+          0.24999999999999997,
+          0.24999999999999997
+        ],
+        "geometry_at_boundary": {
+          "axis_ratio_q": true,
+          "position_angle_phi_radian": true,
+          "center_x_arcsec": true,
+          "center_y_arcsec": true,
+          "external_shear_gamma1": true,
+          "external_shear_gamma2": true
+        }
+      },
+      "MACS1115:rar": {
+        "success": true,
+        "message": "`xtol` termination condition is satisfied.",
+        "function_evaluations": 25,
+        "parameters": [
+          0.5500003813005138,
+          -1.2855169774186657,
+          -0.6807957361164855,
+          2.996417248842364,
+          0.2499815493015371,
+          0.24967890157616301
+        ],
+        "geometry_at_boundary": {
+          "axis_ratio_q": true,
+          "position_angle_phi_radian": false,
+          "center_x_arcsec": false,
+          "center_y_arcsec": true,
+          "external_shear_gamma1": true,
+          "external_shear_gamma2": true
+        }
+      },
+      "MACS1115:simple_mond": {
+        "success": true,
+        "message": "`xtol` termination condition is satisfied.",
+        "function_evaluations": 39,
+        "parameters": [
+          0.5500003215977058,
+          -1.3215327873238834,
+          -1.5318763861873146,
+          2.9838466546600406,
+          0.24997296241692896,
+          0.24996426915919848
+        ],
+        "geometry_at_boundary": {
+          "axis_ratio_q": true,
+          "position_angle_phi_radian": false,
+          "center_x_arcsec": false,
+          "center_y_arcsec": true,
+          "external_shear_gamma1": true,
+          "external_shear_gamma2": true
+        }
+      },
+      "MACS1115:transport": {
+        "success": true,
+        "message": "`ftol` termination condition is satisfied.",
+        "function_evaluations": 23,
+        "parameters": [
+          0.612977155005123,
+          -1.3408295998835478,
+          0.30138920012267145,
+          0.16998503973378956,
+          0.007474055605710574,
+          0.055426749047231626
+        ],
+        "geometry_at_boundary": {
+          "axis_ratio_q": false,
+          "position_angle_phi_radian": false,
+          "center_x_arcsec": false,
+          "center_y_arcsec": false,
+          "external_shear_gamma1": false,
+          "external_shear_gamma2": false
+        }
+      },
+      "MACS1115:GR_plus_cluster_halo": {
+        "success": true,
+        "message": "`xtol` termination condition is satisfied.",
+        "function_evaluations": 39,
+        "parameters": [
+          20.4180276649997,
+          0.48304027414606093,
+          -1.0945492780455939,
+          0.04745758211757209,
+          0.12656871776579742,
+          0.2903206719919384,
+          -0.005656066092126891,
+          0.02511660357366045
+        ],
+        "geometry_at_boundary": {
+          "theta_E_ref_arcsec": false,
+          "axis_ratio_q": false,
+          "position_angle_phi_radian": false,
+          "log10_core_arcsec": false,
+          "center_x_arcsec": false,
+          "center_y_arcsec": false,
+          "external_shear_gamma1": false,
+          "external_shear_gamma2": false
+        }
+      },
+      "MACS1931:baryons": {
+        "success": true,
+        "message": "`xtol` termination condition is satisfied.",
+        "function_evaluations": 34,
+        "parameters": [
+          0.5500007003329405,
+          -1.4158199793643798,
+          2.9920148125520494,
+          -2.99999081223991,
+          0.24999998849442223,
+          0.24998972495471683
+        ],
+        "geometry_at_boundary": {
+          "axis_ratio_q": true,
+          "position_angle_phi_radian": false,
+          "center_x_arcsec": true,
+          "center_y_arcsec": true,
+          "external_shear_gamma1": true,
+          "external_shear_gamma2": true
+        }
+      },
+      "MACS1931:rar": {
+        "success": true,
+        "message": "Both `ftol` and `xtol` termination conditions are satisfied.",
+        "function_evaluations": 37,
+        "parameters": [
+          0.5500006274412298,
+          -1.4170500694418997,
+          2.704334523410321,
+          -2.9999768659796797,
+          0.2499999836716419,
+          0.24999998202949059
+        ],
+        "geometry_at_boundary": {
+          "axis_ratio_q": true,
+          "position_angle_phi_radian": false,
+          "center_x_arcsec": false,
+          "center_y_arcsec": true,
+          "external_shear_gamma1": true,
+          "external_shear_gamma2": true
+        }
+      },
+      "MACS1931:simple_mond": {
+        "success": true,
+        "message": "`xtol` termination condition is satisfied.",
+        "function_evaluations": 27,
+        "parameters": [
+          0.5500000061409429,
+          -1.4349932921356792,
+          2.999999446165052,
+          -2.999999999856106,
+          0.2499999999785859,
+          0.24999999938248635
+        ],
+        "geometry_at_boundary": {
+          "axis_ratio_q": true,
+          "position_angle_phi_radian": false,
+          "center_x_arcsec": true,
+          "center_y_arcsec": true,
+          "external_shear_gamma1": true,
+          "external_shear_gamma2": true
+        }
+      },
+      "MACS1931:transport": {
+        "success": true,
+        "message": "`xtol` termination condition is satisfied.",
+        "function_evaluations": 28,
+        "parameters": [
+          0.8444902225474025,
+          1.4923495787483396,
+          -1.1643232726816382,
+          -0.7156381040320956,
+          0.24907945007547433,
+          0.05757405888758572
+        ],
+        "geometry_at_boundary": {
+          "axis_ratio_q": false,
+          "position_angle_phi_radian": false,
+          "center_x_arcsec": false,
+          "center_y_arcsec": false,
+          "external_shear_gamma1": true,
+          "external_shear_gamma2": false
+        }
+      },
+      "MACS1931:GR_plus_cluster_halo": {
+        "success": true,
+        "message": "`ftol` termination condition is satisfied.",
+        "function_evaluations": 20,
+        "parameters": [
+          26.178331605325972,
+          0.4932344103144906,
+          -1.4740248592501939,
+          0.9021589386890762,
+          -1.3268888074361715,
+          -0.9441147617818231,
+          0.04927676048116465,
+          -0.005470813771069973
+        ],
+        "geometry_at_boundary": {
+          "theta_E_ref_arcsec": false,
+          "axis_ratio_q": false,
+          "position_angle_phi_radian": false,
+          "log10_core_arcsec": false,
+          "center_x_arcsec": false,
+          "center_y_arcsec": false,
+          "external_shear_gamma1": false,
+          "external_shear_gamma2": false
+        }
+      }
+    }
+  },
+  "comparison": {
+    "transport_to_RAR_galaxy_RMSE_ratio": 1.25603533818378,
+    "transport_to_RAR_cluster_radial_RMSE_ratio": 0.40354773917451386,
+    "transport_to_per_cluster_halo_raw_RMS_ratio": 1.8049989822847687
+  },
+  "verdict": {
+    "end_to_end_injected_law_recovery_pass": true,
+    "candidate_generates_heldout_galaxy_actuals_better_than_RAR": false,
+    "candidate_generates_heldout_cluster_radial_actuals_better_than_RAR": true,
+    "candidate_matches_per_cluster_halo_raw_images": false,
+    "validated_new_field_theory": false
+  },
+  "claim_limits": [
+    "project-spent replay holdout; not untouched external confirmation",
+    "All cluster catalogs and every named system are project-spent. MACS1115 and MACS1931 are held out from P0630 fitting, but were viewed by earlier project stages.",
+    "Particle scenes test geometry and direct vector summation; real-system scores use higher-fidelity measured baryonic force knots rather than claiming a full hydrodynamic formation history.",
+    "The Tian cluster total-acceleration targets are model-derived radial summaries; raw image positions are the stronger cluster observable check.",
+    "The compact halo raw comparator fits object-specific halo parameters and is a performance ceiling, not a parameter-matched universal law.",
+    "The transport formula is phenomenological and has not been derived from a covariant action or conservation law."
+  ]
+}

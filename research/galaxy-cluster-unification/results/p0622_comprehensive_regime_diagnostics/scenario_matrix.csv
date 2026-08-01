@@ -1,0 +1,17 @@
+domain,condition,evidence_class,metric,candidate_value,comparator,result,diagnostic_lesson,passes_declared_gate
+galaxy,all 131 outer holdouts,raw_observation,RMSE km/s,12.57091168672948,fixed RAR 10.348,worse,scalar parent is close but not at the fixed-RAR level,False
+galaxy,dwarf mass,raw_observation,mean residual km/s,-6.038483909868682,RAR RMSE 6.315,underprediction,largest mass-bin relative penalty,False
+galaxy,giant mass,raw_observation,mean residual km/s,4.672657322056645,RAR RMSE 12.808,overprediction,bias reverses sign from dwarfs to giants,False
+galaxy,gas rich,raw_observation,mean residual km/s,-6.247336053581282,gas-poor +1.001,mass-linked underprediction,gas trend must be tested after controlling mass,False
+galaxy,axisymmetric route layer,inherited_result,route change,0.0,defined symmetry null,compatible but untested,zero change cannot validate the angular route,True
+cluster,20 CLASH derived acceleration profiles,derived_observation,RMSE dex,0.19907732958364824,NFW-derived target,descriptive only,radial target is not raw lensing,
+cluster,five fixed-geometry +90 phase systems,spent_diagnostic,mean improvement %,1.6849758640456836,P0554 scalar,3 of 5 improve,mean is strongly influenced by RXJ2129,False
+cluster,RXJ2129 +90 phase,spent_diagnostic,improvement %,8.241097555247723,P0554 scalar,large local gain,one cluster supplies most of the mean phase gain,True
+cluster,A383 frozen formula full refit,raw_observation,heldout RMS arcsec,9.08075584165191,P0554 9.097,0.174% gain but large absolute error,direction transfers; adequacy does not,False
+cluster,MS2137 frozen formula full refit,raw_observation,heldout roots,2.0,3 required,root incomplete,no RMS claim is permitted,False
+cluster,raw validation aggregate,raw_observation,RMS arcsec,19.07556990937222,compact halo 9.989,1.91x worse,current formula does not match the limited halo comparator,False
+topology,negative universal phase on RXJ2129,spent_diagnostic,combined roots,17.0,18 required,one root lost,phase response is non-smooth across a caustic,False
+topology,bounded width-strength factorial,spent_diagnostic,root-safe variants,1.0,27 variants,narrow safe region,RMS optimization must be subordinate to root completeness,False
+Solar,P0554 scalar proxies,analytic_proxy,Mercury mas/century,-1.729829450133022,absolute margin 3.1,pass,proxy safety is retained,True
+Solar,point-source angular route,synthetic_invariant,route change,0.0,exact null,compatible but untested,null says nothing about cluster correctness,True
+universality,same formula accounting,spent_diagnostic,formula promoted,0.0,all domains required,no,"galaxy, absolute lensing, and universality gates do not all pass",False

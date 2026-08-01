@@ -1,0 +1,54 @@
+{
+  "protocol_id": "P0631",
+  "status": "frozen_before_any_P0631_replica_score",
+  "question": "Can an observation-seeded simulator reproduce real galaxy observables before any candidate gravity law is tested?",
+  "scope": {
+    "replica_mode": "Observed 3.6 micron disk/bulge profiles and observed rotation curves are inputs. This tests scene generation and the virtual telescope, not gravity.",
+    "blind_physics_mode": "Observed rotation and lensing targets are forbidden inputs. A gravity law predicts them from the baryonic scene.",
+    "important_limit": "SPARC supplies radial photometry rather than resolved two-dimensional morphology here, so the replica is constrained to the observed axisymmetric radial light distribution, inclination, and rotation curve; bars, arms, and lopsidedness are not claimed to be reconstructed."
+  },
+  "inputs": {
+    "sparc_directory": "data/raw/sparc",
+    "photometric_profiles": "data/raw/sparc_replica/photometric_profiles",
+    "bulge_disk_decompositions": "data/raw/sparc_replica/bulge_disk_decompositions",
+    "provenance": "data/raw/sparc_replica/provenance.json"
+  },
+  "sample": {
+    "quality_max": 2,
+    "minimum_inclination_deg": 30.0,
+    "minimum_rotation_points": 8,
+    "expected_galaxies": 131,
+    "split_salt": "P0630-SYNTHETIC-UNIVERSE-2026-08-01",
+    "train_fraction": 0.60,
+    "development_fraction": 0.20,
+    "expected_split_counts": {
+      "train": 81,
+      "development": 27,
+      "holdout": 23
+    }
+  },
+  "renderer": {
+    "grid_pixels_all_galaxies": 257,
+    "grid_pixels_representatives": 501,
+    "intrinsic_disk_axis_ratio": 0.12,
+    "extent_multiplier": 1.08,
+    "representative_galaxies": ["DDO154", "NGC2403", "NGC2841", "NGC7814"],
+    "particle_count_representatives": 65536
+  },
+  "predeclared_replica_gates": {
+    "median_major_axis_light_rmse_dex_max": 0.025,
+    "p90_major_axis_light_rmse_dex_max": 0.060,
+    "median_rotation_rmse_km_s_max": 1.0,
+    "p90_rotation_rmse_km_s_max": 3.0,
+    "median_total_light_fractional_error_max": 0.03,
+    "deterministic_replay_required": true
+  },
+  "outputs": {
+    "directory": "results/p0631_observation_matched_replicas",
+    "catalog": "replica_catalog.csv",
+    "scores": "replica_scores.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "overview_figure": "p0631_replica_overview.png"
+  }
+}

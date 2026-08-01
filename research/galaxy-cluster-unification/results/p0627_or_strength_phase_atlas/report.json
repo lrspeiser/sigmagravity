@@ -1,0 +1,40 @@
+{
+  "protocol_version": "P0627-OR-STRENGTH-PHASE-ATLAS-0.1.0",
+  "status": "complete_opened_data_atlas",
+  "selected_lexicographic": {
+    "beta": 1.0,
+    "phase_degrees": -90.0,
+    "all_18_roots": true,
+    "roots": 18,
+    "systems_not_worse_than_own_scalar": 4,
+    "worst_system_improvement_fraction": -0.0011607728258349326,
+    "mean_system_improvement_fraction": 0.007702430175053077,
+    "equal_system_RMS_arcsec": 20.359610337179493,
+    "own_scalar_equal_system_RMS_arcsec": 20.461657572855607,
+    "improvement_vs_own_scalar_fraction": 0.004987241884620852,
+    "original_P0618_scalar_RMS_arcsec": 20.14511674755416,
+    "improvement_vs_original_P0618_scalar_fraction": -0.010647423507802456,
+    "galaxy_improvement_fraction": 0.10183377205380528,
+    "galaxy_fold_wins": 4,
+    "derived_cluster_improvement_fraction": 0.0044323664550721675,
+    "Solar_convex_endpoint_pass": true,
+    "all_cross_domain_diagnostic_rules": false
+  },
+  "cross_domain_rule_passers": [
+    {
+      "beta": 0.5,
+      "phase_degrees": -67.5
+    },
+    {
+      "beta": 0.5,
+      "phase_degrees": -45.0
+    }
+  ],
+  "claim_limits": [
+    "This atlas deliberately opens project-spent systems and adds multiplicity.",
+    "The P0618 phases were already tested on these clusters.",
+    "Any winning beta-phase pair is a hypothesis generator, not validation.",
+    "Fixed geometry is not a full blind lens reconstruction.",
+    "The construction remains phenomenological and non-covariant."
+  ]
+}

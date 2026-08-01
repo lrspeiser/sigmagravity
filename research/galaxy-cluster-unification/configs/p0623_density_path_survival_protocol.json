@@ -1,0 +1,132 @@
+{
+  "protocol_version": "P0623-DENSITY-PATH-SURVIVAL-0.1.0",
+  "frozen_utc": "2026-08-01T20:00:00Z",
+  "status": "frozen_before_any_P0623_candidate_score",
+  "question": "Can a baryon-only density or path-encounter variable explain why the fixed P0554 response is too weak in many diffuse dwarfs and too strong in many giants, while retaining one universal law and transferring without refitting to cluster lensing and Solar-System proxies?",
+  "physical_hypothesis": {
+    "plain_language": "Baryonic field or path contributions persist more completely through diffuse or porous environments and are more strongly redirected, cancelled, or screened in crowded environments.",
+    "formal_template": "g_test(r)=g_bar(r)[1+q_eff(X_b(r)) A_P0554(r)], where A_P0554 is the frozen unit-amplitude P0554 response and X_b contains baryonic information only.",
+    "survival_template": "q_eff=q_floor+(q_ceiling-q_floor)/(1+exp[m(log X_b-log X_star)]).",
+    "pair_proximity": "P_L=sum_ab f_a f_b L^2/(L^2+s_a^2+s_b^2), with moment-matched baryonic disk, bulge, and gas scales and no observed rotation velocity in X_b.",
+    "predicted_sign": "q_eff decreases as density or pair-crowding increases.",
+    "new_physics_status": "Phenomenological path-memory ansatz; it is not asserted to be standard QED or an established field equation."
+  },
+  "inputs": {
+    "SPARC_parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json",
+    "P0554_protocol": "configs/p0554_local_cross_domain_sensitivity_protocol.json",
+    "SPARC_points": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "CLASH_acceleration": "data/raw/clash_tian2020/fig2.dat",
+    "P0554_raw_scores": "results/p0554_local_cross_domain_sensitivity/raw_system_scores.csv"
+  },
+  "sample": {
+    "galaxy_points": "outer_holdout only",
+    "expected_galaxies": 131,
+    "expected_points": 968,
+    "development_galaxy_folds": [0, 1, 2, 3],
+    "chronological_formula_holdout_fold": 4,
+    "internal_cv": "leave one development galaxy_fold out; fit on the other three",
+    "equal_galaxy_weight_primary": true,
+    "warning": "All SPARC galaxies are project-spent; fold 4 is untouched only with respect to P0623 formula selection and is not a pristine external validation sample."
+  },
+  "baryonic_profile": {
+    "disk_scale": "catalog disk_scale_kpc",
+    "bulge_scale": "catalog bulge_scale_fit_kpc when finite and positive; otherwise 0.2 disk_scale_kpc when bulge mass is positive",
+    "gas_scale": "HI_radius_kpc/3.2 when finite and positive; otherwise 2.0 disk_scale_kpc",
+    "gaussian_moment_match": "s=sqrt(3) times the exponential scale",
+    "minimum_scale_kpc": 0.03,
+    "physical_kernel_scales_kpc": [0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0, 300.0],
+    "relative_kernel_scales_R80": [0.1, 0.3, 1.0, 3.0]
+  },
+  "feature_families": {
+    "global_density": [
+      "mean_surface_R80",
+      "mean_volume_R80",
+      "disk_surface_density",
+      "disk_volume_density",
+      "acceleration_R80",
+      "potential_depth",
+      "baryonic_mass",
+      "R80"
+    ],
+    "global_pair": [
+      "pair_proximity_physical_L",
+      "pair_surface_physical_L",
+      "pair_count_physical_L",
+      "pair_proximity_relative_R80",
+      "pair_surface_relative_R80"
+    ],
+    "local_path": [
+      "local_face_on_surface_density",
+      "local_volume_density",
+      "outward_radial_column",
+      "enclosed_mean_volume_density"
+    ]
+  },
+  "candidate_response_families": {
+    "constant": {"parameters": 1},
+    "inverse_hill_zero_floor": {"fixed_slopes": [0.5, 1.0, 2.0, 4.0], "parameters": 2},
+    "inverse_hill_free_floor": {"fixed_slopes": [1.0, 2.0], "parameters": 3},
+    "inverse_log_linear": {"parameters": 2},
+    "unconstrained_log_linear": {"parameters": 2},
+    "direct_hill_wrong_sign_control": {"fixed_slopes": [1.0, 2.0], "parameters": 2},
+    "quadratic_log_response_diagnostic": {"parameters": 3}
+  },
+  "fit": {
+    "q_bounds": [0.0, 6.0],
+    "feature_transform": "log10 followed by training-fold median and IQR scaling",
+    "optimizer": "deterministic multistart L-BFGS-B",
+    "objective": "mean per-galaxy outer-radius squared velocity residual",
+    "observed_velocity_allowed_in_feature": false,
+    "per_galaxy_formula_parameters": 0,
+    "per_cluster_formula_parameters": 0
+  },
+  "selection": {
+    "broad_screen_uses_development_folds_only": true,
+    "maximum_survivors_for_refinement": 12,
+    "minimum_internal_cv_improvement_vs_refit_constant_fraction": 0.03,
+    "minimum_fold_wins_out_of_4": 3,
+    "maximum_q_eff": 6.0,
+    "prefer_lower_parameter_count_within_relative_RMSE": 0.01,
+    "holdout_opened_once_after_family_selection": true,
+    "holdout_must_not_worsen_constant_RMSE_fraction": 0.0,
+    "full_sample_dwarf_and_giant_absolute_bias_reduction_target": 0.25
+  },
+  "transfer": {
+    "derived_cluster": "Apply the frozen galaxy-selected q_eff law to all 20 CLASH systems using baryonic mass and size proxies only; do not refit.",
+    "raw_cluster": "Apply at most the selected formula and two preregistered near-ties to the five fixed-geometry raw cluster tests; keep root completeness separate from RMS.",
+    "solar": "Evaluate the same Cassini, Earth, Saturn, and Mercury analytic proxies at the q_eff implied by a compact Solar baryonic source and also at the maximum q_eff as a conservative bound."
+  },
+  "decision_rules": {
+    "galaxy_promotion": "Requires the internal-CV gate and no worsening on the chronological P0623 fold-4 holdout.",
+    "mechanism_support": "Requires an inverse-density or inverse-crowding family to beat both the refit constant and wrong-sign controls; flexibility alone does not support the proposed mechanism.",
+    "cross_domain_promotion": "Requires galaxy promotion, all Solar proxies, all raw lens roots, and raw cluster RMS no worse than the fixed P0554 parent.",
+    "dark_matter_or_MOND_claim": "No result from this spent discovery stage can establish superiority to dark matter or MOND."
+  },
+  "outputs": {
+    "directory": "results/p0623_density_path_survival",
+    "feature_catalog": "feature_catalog.csv",
+    "feature_values": "galaxy_feature_values.csv",
+    "cv_candidates": "cv_candidate_scores.csv",
+    "cv_folds": "cv_fold_scores.csv",
+    "survivors": "survivors.csv",
+    "holdout": "chronological_holdout_scores.csv",
+    "per_galaxy": "per_galaxy_scores.csv",
+    "regimes": "regime_scores.csv",
+    "cluster_transfer": "cluster_transfer_scores.csv",
+    "raw_transfer": "raw_cluster_transfer_scores.csv",
+    "solar_transfer": "solar_transfer_scores.csv",
+    "report": "report.json",
+    "figure": "p0623_density_path_survival.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "This is formula discovery on a project-spent sample, not independent confirmation.",
+    "Baryonic component profiles are axisymmetric approximations and do not contain spiral arms, clumps, bars, or galaxy environment.",
+    "Several bulge and gas scales are imputed by frozen rules; the selected result must survive alternative scale prescriptions before physical interpretation.",
+    "The pair statistic is a phenomenological encounter proxy, not a derivation from QED.",
+    "CLASH equivalent accelerations are conventional-model-derived targets; raw image positions carry more direct evidential weight.",
+    "Fixed cluster geometry isolates formula transfer but is not a full blind lens reconstruction.",
+    "Solar checks are analytic weak-field proxies rather than an ephemeris likelihood."
+  ]
+}

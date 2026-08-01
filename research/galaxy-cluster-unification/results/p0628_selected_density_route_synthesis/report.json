@@ -1,0 +1,203 @@
+{
+  "protocol_version": "P0628-SELECTED-DENSITY-ROUTE-SYNTHESIS-0.1.0",
+  "status": "complete_selected_candidate_synthesis",
+  "selected_formula": {
+    "beta": 0.5,
+    "phase_degrees": -67.5,
+    "selection_source": "one of two P0627 opened-data rule passers; selected for the lower raw RMS",
+    "formula": "q_selected=q_constant+0.5[max(q_potential,q_surface)-q_constant] with the frozen -67.5 degree self-coupled angular route",
+    "per_object_gravity_parameters": 0
+  },
+  "galaxy": {
+    "selected_equal_galaxy_RMSE_km_s": 11.710598387805955,
+    "constant_equal_galaxy_RMSE_km_s": 12.661021913186593,
+    "RAR_equal_galaxy_RMSE_km_s": 10.716437036615254,
+    "improvement_vs_constant_fraction": 0.07506688890497548,
+    "ratio_to_RAR": 1.0927697655287771,
+    "bootstrap_improvement_95_interval": [
+      0.04903154709115788,
+      0.0751706407008671,
+      0.10441133702880138
+    ],
+    "P0623_fold4_selected_RMSE_km_s": 11.841185356244075,
+    "P0623_fold4_constant_RMSE_km_s": 12.87519421618955
+  },
+  "mass_regimes": [
+    {
+      "regime": "dwarf_below_1e9",
+      "dimension": "mass_regime",
+      "galaxies": 20,
+      "selected_equal_galaxy_RMSE_km_s": 8.114550208268511,
+      "selected_mean_galaxy_residual_km_s": -3.741206973062758,
+      "constant_equal_galaxy_RMSE_km_s": 9.794820243956925,
+      "constant_mean_galaxy_residual_km_s": -6.305241370733169,
+      "RAR_equal_galaxy_RMSE_km_s": 6.308781530325381,
+      "RAR_mean_galaxy_residual_km_s": -0.42447344097226153,
+      "selected_improvement_vs_constant_fraction": 0.1715467965555656
+    },
+    {
+      "regime": "giant_above_1e10",
+      "dimension": "mass_regime",
+      "galaxies": 62,
+      "selected_equal_galaxy_RMSE_km_s": 13.128707884080699,
+      "selected_mean_galaxy_residual_km_s": 1.809084082140297,
+      "constant_equal_galaxy_RMSE_km_s": 13.910463131127313,
+      "constant_mean_galaxy_residual_km_s": 1.418575696416063,
+      "RAR_equal_galaxy_RMSE_km_s": 11.800189035029893,
+      "RAR_mean_galaxy_residual_km_s": 3.175683531138268,
+      "selected_improvement_vs_constant_fraction": 0.056199081200775325
+    },
+    {
+      "regime": "intermediate_1e9_to_1e10",
+      "dimension": "mass_regime",
+      "galaxies": 49,
+      "selected_equal_galaxy_RMSE_km_s": 11.030264791602772,
+      "selected_mean_galaxy_residual_km_s": -1.4640292817315088,
+      "constant_equal_galaxy_RMSE_km_s": 12.023499294086823,
+      "constant_mean_galaxy_residual_km_s": -4.630309454454922,
+      "RAR_equal_galaxy_RMSE_km_s": 10.704885300272066,
+      "RAR_mean_galaxy_residual_km_s": 2.6168391303160887,
+      "selected_improvement_vs_constant_fraction": 0.08260777317735835
+    }
+  ],
+  "activation": [
+    {
+      "mass_regime": "dwarf_below_1e9",
+      "galaxies": 20,
+      "points": 98,
+      "potential_branch_fraction": 0.6938775510204082,
+      "surface_branch_fraction": 0.30612244897959184,
+      "q_constant_mean": 1.2368210970982034,
+      "q_potential_mean": 1.5986846043492817,
+      "q_surface_mean": 1.5604339437156691,
+      "q_selected_mean": 1.4393950942070566
+    },
+    {
+      "mass_regime": "giant_above_1e10",
+      "galaxies": 62,
+      "points": 583,
+      "potential_branch_fraction": 0.5608919382504288,
+      "surface_branch_fraction": 0.4391080617495712,
+      "q_constant_mean": 1.2367845980565122,
+      "q_potential_mean": 1.2210908835462164,
+      "q_surface_mean": 1.2090807221547106,
+      "q_selected_mean": 1.2482895886099041
+    },
+    {
+      "mass_regime": "intermediate_1e9_to_1e10",
+      "galaxies": 49,
+      "points": 287,
+      "potential_branch_fraction": 0.7247386759581882,
+      "surface_branch_fraction": 0.27526132404181186,
+      "q_constant_mean": 1.2379046705718197,
+      "q_potential_mean": 1.469668116748913,
+      "q_surface_mean": 1.4240103268537505,
+      "q_selected_mean": 1.370554798348557
+    }
+  ],
+  "cross_domain": [
+    {
+      "domain": "galaxy_rotation",
+      "metric": "five-fold OOF equal-galaxy RMSE km/s",
+      "candidate_value": 11.710598387805955,
+      "comparator": "fixed RAR same nuisance",
+      "comparator_value": 10.716437036615254,
+      "ratio": 1.0927697655287771,
+      "evidence": "raw rotation speeds; project-spent OOF"
+    },
+    {
+      "domain": "derived_cluster_lensing",
+      "metric": "equal-system RMSE dex",
+      "candidate_value": 0.193724,
+      "comparator": "constant scalar",
+      "comparator_value": 0.194199,
+      "ratio": 0.9975540553761862,
+      "evidence": "NFW-derived acceleration target"
+    },
+    {
+      "domain": "raw_cluster_lensing",
+      "metric": "five-system fixed-geometry equal-system RMS arcsec",
+      "candidate_value": 20.120376048639613,
+      "comparator": "original P0618 scalar",
+      "comparator_value": 20.14511674755416,
+      "ratio": 0.9987718761214154,
+      "evidence": "raw image positions; opened-data fixed geometry"
+    },
+    {
+      "domain": "raw_cluster_lensing",
+      "metric": "five-system fixed-geometry equal-system RMS arcsec",
+      "candidate_value": 20.120376048639613,
+      "comparator": "limited compact halo historical validation",
+      "comparator_value": 9.989136027113078,
+      "ratio": 2.0142258543709635,
+      "evidence": "scope-limited non-matched dark-matter comparator"
+    },
+    {
+      "domain": "Solar",
+      "metric": "Mercury mas/century",
+      "candidate_value": -1.9235972580759153,
+      "comparator": "absolute proxy margin",
+      "comparator_value": 3.1,
+      "ratio": 0.6205152445406178,
+      "evidence": "analytic proxy"
+    },
+    {
+      "domain": "raw_MACS0329",
+      "metric": "heldout RMS arcsec",
+      "candidate_value": 19.74997918788086,
+      "comparator": "same-beta scalar",
+      "comparator_value": 19.714477244459736,
+      "ratio": 1.001800805721648,
+      "evidence": "raw image positions; per-system value reported in raw artifact"
+    },
+    {
+      "domain": "raw_MACS0429",
+      "metric": "heldout RMS arcsec",
+      "candidate_value": 13.191061056220788,
+      "comparator": "same-beta scalar",
+      "comparator_value": 13.221752233725605,
+      "ratio": 0.9976787359979011,
+      "evidence": "raw image positions; per-system value reported in raw artifact"
+    },
+    {
+      "domain": "raw_MACS1115",
+      "metric": "heldout RMS arcsec",
+      "candidate_value": 27.09818970556192,
+      "comparator": "same-beta scalar",
+      "comparator_value": 27.613194094997475,
+      "ratio": 0.9813493365648397,
+      "evidence": "raw image positions; per-system value reported in raw artifact"
+    },
+    {
+      "domain": "raw_MACS1931",
+      "metric": "heldout RMS arcsec",
+      "candidate_value": 26.90188862735495,
+      "comparator": "same-beta scalar",
+      "comparator_value": 27.04372646594553,
+      "ratio": 0.9947552406001005,
+      "evidence": "raw image positions; per-system value reported in raw artifact"
+    },
+    {
+      "domain": "raw_RXJ2129",
+      "metric": "heldout RMS arcsec",
+      "candidate_value": 1.4347107532355103,
+      "comparator": "same-beta scalar",
+      "comparator_value": 1.5128887437841156,
+      "ratio": 0.948325353817451,
+      "evidence": "raw image positions; per-system value reported in raw artifact"
+    }
+  ],
+  "conclusion": {
+    "dwarf_and_giant_bias_both_improve": false,
+    "beats_fixed_RAR": false,
+    "beats_limited_compact_halo": false,
+    "validated_field_theory": false
+  },
+  "claim_limits": [
+    "The selected beta and phase came from an opened-data atlas on project-spent systems.",
+    "Five-fold galaxy OOF predictions prevent per-galaxy fitting but do not create an external sample.",
+    "Galaxy nuisance parameters were inherited from the same inner-radius RAR refit used by earlier stages.",
+    "The compact-halo comparator is limited and not matched to a full dark-matter model-selection analysis.",
+    "The candidate remains phenomenological and has more than one universal constant."
+  ]
+}

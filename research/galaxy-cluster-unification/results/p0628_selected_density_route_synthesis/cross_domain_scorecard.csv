@@ -1,0 +1,11 @@
+domain,metric,candidate_value,comparator,comparator_value,ratio,evidence
+galaxy_rotation,five-fold OOF equal-galaxy RMSE km/s,11.710598387805955,fixed RAR same nuisance,10.716437036615254,1.0927697655287771,raw rotation speeds; project-spent OOF
+derived_cluster_lensing,equal-system RMSE dex,0.193724,constant scalar,0.194199,0.9975540553761862,NFW-derived acceleration target
+raw_cluster_lensing,five-system fixed-geometry equal-system RMS arcsec,20.120376048639613,original P0618 scalar,20.14511674755416,0.9987718761214154,raw image positions; opened-data fixed geometry
+raw_cluster_lensing,five-system fixed-geometry equal-system RMS arcsec,20.120376048639613,limited compact halo historical validation,9.989136027113078,2.0142258543709635,scope-limited non-matched dark-matter comparator
+Solar,Mercury mas/century,-1.9235972580759153,absolute proxy margin,3.1,0.6205152445406178,analytic proxy
+raw_MACS0329,heldout RMS arcsec,19.74997918788086,same-beta scalar,19.714477244459736,1.001800805721648,raw image positions; per-system value reported in raw artifact
+raw_MACS0429,heldout RMS arcsec,13.191061056220788,same-beta scalar,13.221752233725605,0.9976787359979011,raw image positions; per-system value reported in raw artifact
+raw_MACS1115,heldout RMS arcsec,27.09818970556192,same-beta scalar,27.613194094997475,0.9813493365648397,raw image positions; per-system value reported in raw artifact
+raw_MACS1931,heldout RMS arcsec,26.90188862735495,same-beta scalar,27.04372646594553,0.9947552406001005,raw image positions; per-system value reported in raw artifact
+raw_RXJ2129,heldout RMS arcsec,1.4347107532355103,same-beta scalar,1.5128887437841156,0.948325353817451,raw image positions; per-system value reported in raw artifact

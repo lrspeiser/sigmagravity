@@ -1,0 +1,64 @@
+{
+  "protocol_version": "P0628-SELECTED-DENSITY-ROUTE-SYNTHESIS-0.1.0",
+  "frozen_utc": "2026-08-01T22:10:00Z",
+  "status": "frozen_after_P0627_before_selected_candidate_synthesis",
+  "purpose": "Quantify what the P0627 hypothesis-generating candidate actually fixes, what it does not fix, and how uncertain its apparent gains are.",
+  "selected_candidate": {
+    "beta": 0.5,
+    "phase_degrees": -67.5,
+    "selection_source": "one of two P0627 opened-data rule passers; selected for the lower raw RMS",
+    "formula": "q_selected=q_constant+0.5[max(q_potential,q_surface)-q_constant] with the frozen -67.5 degree self-coupled angular route",
+    "per_object_gravity_parameters": 0
+  },
+  "galaxy_evaluation": {
+    "folds": 5,
+    "procedure": "For every galaxy fold, refit the universal atomic parameters on the other four folds and predict the held-out fold; never fit an individual galaxy formula parameter.",
+    "bootstrap_draws": 10000,
+    "bootstrap_seed": 6282026,
+    "comparators": [
+      "fold-refit constant P0554 amplitude",
+      "fixed RAR with the same nuisance solution",
+      "published project simple-MOND aggregate",
+      "weak-prior NFW with two per-galaxy halo parameters fitted on inner radii"
+    ]
+  },
+  "regimes": {
+    "mass_solar": [1000000000.0, 10000000000.0],
+    "gas_fraction": [0.2, 0.5],
+    "stellar_bulge_fraction": [0.05, 0.2],
+    "surface_density": "tertiles determined inside each held-out prediction table only for descriptive reporting"
+  },
+  "cross_domain_comparators": {
+    "derived_cluster": "NFW-derived equivalent-acceleration target; descriptive, not raw theory-neutral evidence",
+    "raw_scalar": "original P0618 scalar at the same fixed geometry",
+    "compact_halo_RMS_arcsec": 9.989136027113078,
+    "compact_halo_scope": "limited historical validation comparator, not a full dark-matter posterior",
+    "Solar": "analytic proxy"
+  },
+  "interpretation_rules": {
+    "bootstrap": "Report paired galaxy-resampling intervals; an interval above zero is repeatability within this spent sample, not external confirmation.",
+    "regime": "Require both dwarf and giant absolute mean bias to fall relative to the constant control before saying the density split improved.",
+    "raw": "Report every system; a small aggregate gain cannot hide a large individual worsening.",
+    "theory": "Do not call the candidate a field theory without a local covariant equation, conservation law, and independent predictions."
+  },
+  "outputs": {
+    "directory": "results/p0628_selected_density_route_synthesis",
+    "galaxy_points": "galaxy_oof_predictions.csv",
+    "galaxy_scores": "galaxy_oof_scores.csv",
+    "galaxy_per_object": "galaxy_per_object_scores.csv",
+    "regimes": "galaxy_regime_scores.csv",
+    "bootstrap": "galaxy_bootstrap.csv",
+    "activation": "component_activation.csv",
+    "cross_domain": "cross_domain_scorecard.csv",
+    "report": "report.json",
+    "figure": "p0628_selected_density_route_synthesis.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The selected beta and phase came from an opened-data atlas on project-spent systems.",
+    "Five-fold galaxy OOF predictions prevent per-galaxy fitting but do not create an external sample.",
+    "Galaxy nuisance parameters were inherited from the same inner-radius RAR refit used by earlier stages.",
+    "The compact-halo comparator is limited and not matched to a full dark-matter model-selection analysis.",
+    "The candidate remains phenomenological and has more than one universal constant."
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "protocol_version": "P0626-COMPACT-SCALAR-ANGULAR-ROUTE-0.1.0",
+  "frozen_utc": "2026-08-01T21:30:00Z",
+  "status": "frozen_after_P0625_before_any_P0626_score",
+  "question": "Can the surviving dwarf/giant scalar correction be localized to compact baryonic systems while the already frozen +90-degree coherence route handles spatially asymmetric clusters?",
+  "parent_protocols": [
+    "configs/p0625_bounded_porosity_survival_protocol.json",
+    "configs/p0618_universal_route_phase_protocol.json"
+  ],
+  "scalar_parent": {
+    "formula": "q_OR=max(q_potential,q_mean_surface)",
+    "atomic_parameters": "fitted only on P0623 development folds 0-3",
+    "galaxy_CV_improvement_fraction": 0.101834,
+    "Solar_proxies": "pass"
+  },
+  "compact_localization": {
+    "formula": "q_compact=q_constant+W_L(R80)(q_OR-q_constant)",
+    "weight": "W_L=1/[1+(R80/L)^2]",
+    "coherence_scales_kpc": [30.0, 100.0],
+    "new_fitted_parameters": 0,
+    "rationale": "The scalar persistence correction is internal to a compact baryonic system; large multicomponent structures retain the base scalar and are tested through the angular route."
+  },
+  "angular_route": {
+    "formula": "alpha_test=alpha_scalar+[Q^2/(1+Delta80)] R_90[delta_alpha_route]",
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "width": "0.23 R80 sqrt(1+Q^2)",
+    "return_length": "0.36 R80",
+    "phase_degrees": 90.0,
+    "new_fitted_parameters": 0
+  },
+  "variants": [
+    "P0554_constant_scalar",
+    "OR_direct_scalar",
+    "OR_compact30_scalar",
+    "OR_compact100_scalar",
+    "P0554_constant_plus_route",
+    "OR_direct_plus_route",
+    "OR_compact30_plus_route",
+    "OR_compact100_plus_route"
+  ],
+  "evaluation": {
+    "galaxy": "Four-fold development CV for scalar variants; angular route is exactly null for the axisymmetric translation.",
+    "derived_cluster": "20 systems with no refit; angular route not scored because equivalent accelerations have no 2D image geometry.",
+    "raw_cluster": "Five P0618 fixed-geometry systems and 18 held-out images; recompute route state from each candidate scalar parent; no geometry, source, strength, phase, or scale fit.",
+    "Solar": "Inherited atomic diagnostics with compact weight effectively one; verify numerically."
+  },
+  "decision_rules": {
+    "scalar_viability": "At least 3/4 galaxy fold wins, all Solar proxies, and derived cluster nonworsening.",
+    "route_viability": "All 18 roots and raw common-system RMS no worse than its own scalar parent.",
+    "unified_diagnostic": "Both scalar and route viability plus raw RMS no worse than the P0554 constant scalar.",
+    "claim": "Even a passing spent-data diagnostic remains a candidate architecture, not a validated theory."
+  },
+  "outputs": {
+    "directory": "results/p0626_compact_scalar_angular_route",
+    "galaxy": "galaxy_scores.csv",
+    "derived_cluster": "derived_cluster_scores.csv",
+    "solar": "solar_scores.csv",
+    "raw": "raw_cluster_scores.csv",
+    "report": "report.json",
+    "figure": "p0626_compact_scalar_angular_route.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "All galaxy and cluster systems are project-spent.",
+    "The 30 and 100 kpc coherence scales were exposed by earlier pair screens and are not newly fitted here, but both choices create multiplicity.",
+    "The +90-degree route was selected on these raw systems in P0618 and is not prospective here.",
+    "Fixed lens geometry isolates formula response and is not a full reconstruction.",
+    "The architecture is phenomenological and lacks a covariant field derivation."
+  ]
+}

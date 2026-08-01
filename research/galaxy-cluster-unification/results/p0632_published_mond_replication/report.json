@@ -1,0 +1,138 @@
+{
+  "protocol_id": "P0632",
+  "published_replication_pass": true,
+  "gate_results": {
+    "published_table_entries": true,
+    "scatter_sample_galaxies": true,
+    "scatter_points": true,
+    "refit_scatter": true,
+    "per_galaxy_chi_correlation": true,
+    "per_galaxy_chi_absolute_difference": true,
+    "fixed_nuisance_scatter": true
+  },
+  "published_reproduction": {
+    "published_table_entries": 175,
+    "scatter_sample_galaxies": 153,
+    "scatter_points": 2694,
+    "replayed_scatter_dex": 0.0571611208034317,
+    "published_scatter_dex": 0.057,
+    "absolute_scatter_difference_dex": 0.00016112080343169688,
+    "reduced_chi_square_correlation": 0.9999755211683268,
+    "reduced_chi_square_median_absolute_difference": 0.005111974159646593,
+    "reduced_chi_square_RMSE": 0.04787059726452759
+  },
+  "strict_no_nuisance": {
+    "baryons": {
+      "points": 2694,
+      "log_acceleration_residual": {
+        "mean": 0.4307267902094205,
+        "standard_deviation": 0.28088241064996206,
+        "rms_about_zero": 0.5142183353563388,
+        "median_absolute": 0.4335860571736922
+      },
+      "point_weighted_velocity_RMSE_km_s": 63.35866679704475,
+      "equal_galaxy_velocity_RMSE_km_s": 54.432706093527145,
+      "galaxies_with_precision_points": 147
+    },
+    "li2018_rar_mond": {
+      "points": 2694,
+      "log_acceleration_residual": {
+        "mean": -0.0036772152306549194,
+        "standard_deviation": 0.13276636604775235,
+        "rms_about_zero": 0.13281727999540696,
+        "median_absolute": 0.07862681015988973
+      },
+      "point_weighted_velocity_RMSE_km_s": 22.870102596136228,
+      "equal_galaxy_velocity_RMSE_km_s": 19.86219259152706,
+      "galaxies_with_precision_points": 147
+    },
+    "simple_mond": {
+      "points": 2694,
+      "log_acceleration_residual": {
+        "mean": -0.009416691781543146,
+        "standard_deviation": 0.13268292491832784,
+        "rms_about_zero": 0.1330166630501277,
+        "median_absolute": 0.07900331570131268
+      },
+      "point_weighted_velocity_RMSE_km_s": 22.75189860473157,
+      "equal_galaxy_velocity_RMSE_km_s": 20.001094523705788,
+      "galaxies_with_precision_points": 147
+    },
+    "standard_mond": {
+      "points": 2694,
+      "log_acceleration_residual": {
+        "mean": 0.05811023950094939,
+        "standard_deviation": 0.13645226233208965,
+        "rms_about_zero": 0.14831055198603743,
+        "median_absolute": 0.09302449138135059
+      },
+      "point_weighted_velocity_RMSE_km_s": 28.27215846892935,
+      "equal_galaxy_velocity_RMSE_km_s": 22.50657056265278,
+      "galaxies_with_precision_points": 147
+    }
+  },
+  "whole_galaxy_holdout": [
+    {
+      "law": "baryons",
+      "galaxies": 23,
+      "points": 427,
+      "equal_galaxy_velocity_RMSE_km_s": 52.179770349452035,
+      "equal_galaxy_log_acceleration_RMSE_dex": 0.5308847649132338
+    },
+    {
+      "law": "li2018_rar_mond",
+      "galaxies": 23,
+      "points": 427,
+      "equal_galaxy_velocity_RMSE_km_s": 23.325730076930643,
+      "equal_galaxy_log_acceleration_RMSE_dex": 0.22076054297593897
+    },
+    {
+      "law": "simple_mond",
+      "galaxies": 23,
+      "points": 427,
+      "equal_galaxy_velocity_RMSE_km_s": 23.800376031856715,
+      "equal_galaxy_log_acceleration_RMSE_dex": 0.22225251711236907
+    },
+    {
+      "law": "standard_mond",
+      "galaxies": 23,
+      "points": 427,
+      "equal_galaxy_velocity_RMSE_km_s": 22.714723508973186,
+      "equal_galaxy_log_acceleration_RMSE_dex": 0.2136260946653752
+    }
+  ],
+  "representatives": [
+    {
+      "galaxy": "DDO154",
+      "strict_velocity_RMSE_km_s": 4.4326817589800145,
+      "published_refit_velocity_RMSE_km_s": 1.3360543973722028
+    },
+    {
+      "galaxy": "IC2574",
+      "strict_velocity_RMSE_km_s": 13.485312815223422,
+      "published_refit_velocity_RMSE_km_s": 2.4906158674078815
+    },
+    {
+      "galaxy": "NGC2403",
+      "strict_velocity_RMSE_km_s": 6.411088735411259,
+      "published_refit_velocity_RMSE_km_s": 4.649965892743402
+    },
+    {
+      "galaxy": "NGC2841",
+      "strict_velocity_RMSE_km_s": 55.507750072318565,
+      "published_refit_velocity_RMSE_km_s": 6.056433218098457
+    }
+  ],
+  "claim_boundary": {
+    "matched": "Li et al. 2018 algebraic RAR/MOND circular-orbit benchmark and its SPARC nuisance transformations.",
+    "not_matched": "A full AQUAL/QUMOND field solution, external-field effect, relativistic lensing theory, or galaxy formation history.",
+    "per_galaxy_published_refit": "Publication replication only; it uses each galaxy's rotation data to fit mass-to-light ratio, distance, and inclination.",
+    "strict_test": "Uses fixed M/L=(0.5,0.7), catalog distance/inclination, one published acceleration scale, and no per-galaxy fitted gravity or nuisance setting."
+  },
+  "provenance": {
+    "protocol_sha256": "147fd683bbb41d08fda52dccf9e2b1d64996d081634f6b5f257739e5db8f7461",
+    "li2018_table_sha256": "68c50a25734e62430aacc215e839b264f2327cad438e3957027982af459cbf61",
+    "li2018_provenance_sha256": "0bda5cf8e261f25efece27c93446a1839864475582ccc3499321800c4cce84be",
+    "p0630_split_ledger_sha256": "348da7f6c03f6121a1d8b92f67e39af0cccbb88d854e658f72a449a199394e99"
+  }
+}

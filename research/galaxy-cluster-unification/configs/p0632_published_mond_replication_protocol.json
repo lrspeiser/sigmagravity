@@ -1,0 +1,61 @@
+{
+  "protocol_id": "P0632",
+  "status": "frozen_before_P0632_full_catalog_score",
+  "question": "Does the observation-matched simulator reproduce the published SPARC RAR/MOND benchmark before it is used to compare new gravity laws?",
+  "published_benchmark": {
+    "paper": "Li, Lelli, McGaugh & Schombert (2018), A&A 615 A3",
+    "doi": "10.1051/0004-6361/201732547",
+    "arxiv": "1803.00022v2",
+    "equation": "g_tot = g_bar / [1 - exp(-sqrt(g_bar/g_dagger))]",
+    "g_dagger_m_s2": 1.2e-10,
+    "disk_mass_to_light_prior_center": 0.5,
+    "bulge_mass_to_light_prior_center": 0.7,
+    "mass_to_light_prior_sigma_dex": 0.1,
+    "published_fit_galaxies": 175,
+    "published_scatter_sample_galaxies": 153,
+    "published_scatter_points": 2694,
+    "published_refit_scatter_dex": 0.057,
+    "published_fixed_nuisance_scatter_dex": 0.13
+  },
+  "inputs": {
+    "sparc_directory": "data/raw/sparc",
+    "li2018_source_table": "data/raw/li2018_rar/source/Table.tex",
+    "li2018_provenance": "data/raw/li2018_rar/provenance.json",
+    "p0630_split_ledger": "results/p0630_synthetic_universe/split_ledger.json",
+    "p0631_replica_protocol": "configs/p0631_observation_matched_replica_protocol.json"
+  },
+  "sample_reproduction": {
+    "quality_max": 2,
+    "minimum_inclination_deg": 30.0,
+    "maximum_fractional_velocity_error_strictly_less_than": 0.1,
+    "rounding_epsilon_km_s": 1e-12
+  },
+  "laws": [
+    "baryons",
+    "li2018_rar_mond",
+    "simple_mond",
+    "standard_mond"
+  ],
+  "replication_gates": {
+    "published_table_entries_exact": 175,
+    "scatter_sample_galaxies_exact": 153,
+    "scatter_points_exact": 2694,
+    "absolute_refit_scatter_difference_dex_max": 0.001,
+    "published_reduced_chi2_correlation_min": 0.999,
+    "published_reduced_chi2_median_absolute_difference_max": 0.02,
+    "absolute_fixed_nuisance_scatter_difference_dex_max": 0.01
+  },
+  "representative_galaxies": ["DDO154", "IC2574", "NGC2403", "NGC2841"],
+  "outputs": {
+    "directory": "results/p0632_published_mond_replication",
+    "published_parameters": "li2018_published_parameters.csv",
+    "published_replay_system_scores": "published_replay_system_scores.csv",
+    "published_replay_points": "published_replay_points.csv",
+    "strict_points": "strict_mond_points.csv",
+    "strict_system_scores": "strict_mond_system_scores.csv",
+    "holdout_scores": "whole_galaxy_holdout_scores.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md",
+    "figure": "p0632_published_mond_replication.png"
+  }
+}

@@ -1,0 +1,9 @@
+feature,target,systems,spearman_rho,p_value,interpretation_limit,BH_q_value
+R80_kpc,phase90_improvement_fraction,5,-0.19999999999999998,0.747060078104662,descriptive only; five spent fixed-geometry systems,0.8728885715695383
+Delta80,phase90_improvement_fraction,5,0.3,0.6238376647810728,descriptive only; five spent fixed-geometry systems,0.8728885715695383
+self_routed_fraction,phase90_improvement_fraction,5,0.3,0.6238376647810728,descriptive only; five spent fixed-geometry systems,0.8728885715695383
+quadrupole_Q,phase90_improvement_fraction,5,0.3,0.6238376647810728,descriptive only; five spent fixed-geometry systems,0.8728885715695383
+epsilon_quadratic_Q2_over_total,phase90_improvement_fraction,5,0.09999999999999999,0.8728885715695383,descriptive only; five spent fixed-geometry systems,0.8728885715695383
+scalar_control_RMS_arcsec,phase90_improvement_fraction,5,-0.3,0.6238376647810728,descriptive only; five spent fixed-geometry systems,0.8728885715695383
+weighted_alignment_cosine,phase90_improvement_fraction,5,-0.7999999999999999,0.10408803866182788,descriptive only; five spent fixed-geometry systems,0.832704309294623
+route_shift_RMS_arcsec,phase90_improvement_fraction,5,0.09999999999999999,0.8728885715695383,descriptive only; five spent fixed-geometry systems,0.8728885715695383

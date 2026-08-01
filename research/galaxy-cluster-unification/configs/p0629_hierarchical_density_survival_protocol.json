@@ -1,0 +1,44 @@
+{
+  "protocol_version": "P0629-HIERARCHICAL-DENSITY-SURVIVAL-0.1.0",
+  "frozen_utc": "2026-08-01T22:35:00Z",
+  "status": "frozen_after_P0628_before_any_P0629_score",
+  "question": "Can one continuous baryonic-size hierarchy retain the potential law's dwarf/giant correction inside galaxies while switching to the porosity law in extended clusters?",
+  "formula": {
+    "compact_weight": "W_L(R80)=1/[1+(R80/L)^2]",
+    "scalar": "q_hierarchical=W_L q_potential+(1-W_L){q_constant+beta[max(q_potential,q_surface)-q_constant]}",
+    "coherence_scales_kpc": [10.0, 30.0, 100.0],
+    "porous_beta_values": [0.5, 1.0],
+    "route_phases_degrees": [-67.5, -45.0],
+    "per_object_gravity_parameters": 0
+  },
+  "selection": {
+    "primary_order": [
+      "both dwarf and giant absolute mean bias improve versus constant in five-fold OOF",
+      "at least 3/5 fold wins and at least 5 percent aggregate galaxy gain",
+      "derived cluster nonworsening",
+      "Solar proxy pass",
+      "all 18 raw roots",
+      "raw RMS nonworsening versus original P0618 scalar"
+    ],
+    "per_object_selection_forbidden": true,
+    "multiplicity": "12 opened-data combinations; hypothesis generation only"
+  },
+  "outputs": {
+    "directory": "results/p0629_hierarchical_density_survival",
+    "galaxy": "galaxy_scores.csv",
+    "mass_regimes": "mass_regime_scores.csv",
+    "derived": "derived_cluster_scores.csv",
+    "raw": "raw_scores.csv",
+    "candidate_matrix": "candidate_matrix.csv",
+    "report": "report.json",
+    "figure": "p0629_hierarchical_density_survival.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "All systems are project-spent and all tested global scales/phases add multiplicity.",
+    "The size transition is phenomenological and is not derived from a covariant action.",
+    "The raw phases were exposed in P0618/P0627.",
+    "A passing row would require chronological external transfer.",
+    "Fixed raw geometry and analytic Solar proxies remain limited evidence."
+  ]
+}

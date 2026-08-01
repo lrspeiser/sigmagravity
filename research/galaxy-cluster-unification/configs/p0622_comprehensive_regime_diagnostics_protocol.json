@@ -1,0 +1,123 @@
+{
+  "protocol_version": "P0622-COMPREHENSIVE-REGIME-DIAGNOSTICS-0.1.0",
+  "status": "frozen_before_P0622_regime_aggregation",
+  "question": "Under which measured galaxy, cluster, topology, and parameter regimes does the current P0554 plus self-coupled tangential route construction perform differently, and are those differences stable enough to guide the next formula rather than merely improve an aggregate score?",
+  "suite_design": {
+    "copied_from_sigma_gravity": [
+      "multi-domain galaxy, cluster, and Solar scorecard",
+      "morphology and physical-regime splits",
+      "parameter sensitivity and robustness checks",
+      "holdout and comparator accounting"
+    ],
+    "strengthened_here": [
+      "raw image-root completeness is separate from residual RMS",
+      "raw lensing, GR/NFW-derived lensing products, inherited scores, synthetic invariants, and analytic proxies have distinct provenance labels",
+      "all interaction bins report sample size and bootstrap uncertainty",
+      "cluster means receive leave-one-system-out influence checks",
+      "exact symmetry nulls count as compatibility checks, not positive observational evidence",
+      "per-object best phase remains diagnostic and is never promoted as a universal formula"
+    ]
+  },
+  "formula": {
+    "scalar_parent": "P0554 radial flux remap with universal q=1.2300686115098052",
+    "cluster_route": "alpha_test(x)=alpha_P0554(r)+[Q^2/(1+Delta80)] R_90[delta_alpha_route(x)]",
+    "self_routed_fraction": "Delta80/(1+Delta80)",
+    "route_width": "0.23 R80 sqrt(1+Q^2)",
+    "return_length": "0.36 R80",
+    "universal_phase_degrees": 90.0,
+    "per_object_gravity_parameters": 0,
+    "galaxy_and_solar_route_limit": "exactly zero only for the defined axisymmetric-disk and point-source translations"
+  },
+  "inputs": {
+    "P0554_protocol": "configs/p0554_local_cross_domain_sensitivity_protocol.json",
+    "P0554_report": "results/p0554_local_cross_domain_sensitivity/report.json",
+    "P0554_parameter_impacts": "results/p0554_local_cross_domain_sensitivity/parameter_impacts.csv",
+    "P0554_multiscale": "results/p0554_multiscale_elasticity/parameter_summary.csv",
+    "P0613_report": "results/p0613_bounded_endpoint_cross_domain/report.json",
+    "P0613_parameter_impacts": "results/p0613_bounded_endpoint_cross_domain/parameter_impacts.csv",
+    "P0613_interactions": "results/p0613_bounded_endpoint_cross_domain/interaction_effects.csv",
+    "P0614_report": "results/p0614_composite_formula_audit/report.json",
+    "P0615_states": "results/p0615_self_coupled_quadrupole_route/system_states.csv",
+    "P0617_family_impacts": "results/p0617_self_coupled_support_phase_atlas/family_impacts.csv",
+    "P0617_alignment": "results/p0617_self_coupled_support_phase_atlas/residual_alignment.csv",
+    "P0618_report": "results/p0618_universal_route_phase/report.json",
+    "P0618_scores": "results/p0618_universal_route_phase/scores.csv",
+    "P0618_preferences": "results/p0618_universal_route_phase/system_phase_preferences.csv",
+    "P0619_report": "results/p0619_frozen_tangential_transfer/report.json",
+    "P0619_scores": "results/p0619_frozen_tangential_transfer/scores.csv",
+    "P0619_states": "results/p0619_frozen_tangential_transfer/system_states.csv",
+    "P0620_report": "results/p0620_parameter_impact_synthesis/report.json",
+    "SPARC_morphology": "data/derived/nbp0_sparc_morphology.csv",
+    "SPARC_parent_protocol": "configs/arc_invariant_pareto_refinement_protocol.json"
+  },
+  "regimes": {
+    "galaxy_dimensions": [
+      "stellar_structure",
+      "hubble_family",
+      "surface_brightness_family",
+      "baryonic_mass_family",
+      "gas_fraction_family",
+      "inclination_family",
+      "outer_rotation_shape",
+      "outer_acceleration_family",
+      "outer_potential_family",
+      "radius_over_R80_family"
+    ],
+    "galaxy_interactions": [
+      ["baryonic_mass_family", "gas_fraction_family"],
+      ["baryonic_mass_family", "stellar_structure"],
+      ["surface_brightness_family", "outer_rotation_shape"],
+      ["stellar_structure", "surface_brightness_family"],
+      ["gas_fraction_family", "outer_rotation_shape"]
+    ],
+    "minimum_interaction_galaxies": 5,
+    "bootstrap_draws": 2000,
+    "bootstrap_seed": 62022,
+    "cluster_phase_degrees": [-90.0, -67.5, -45.0, -22.5, 0.0, 22.5, 45.0, 67.5, 90.0]
+  },
+  "evidence_classes": {
+    "raw_observation": "direct rotation-speed or image-position comparison",
+    "derived_observation": "observable transformed through a conventional model, such as NFW-derived acceleration",
+    "analytic_proxy": "weak-field or Solar proxy rather than a raw ephemeris likelihood",
+    "synthetic_invariant": "mathematical/operator behavior without new observational support",
+    "inherited_result": "score copied because the new route layer is defined to be null in that regime",
+    "spent_diagnostic": "post-selection or project-spent response useful for mechanism discovery but not validation"
+  },
+  "decision_rules": {
+    "minimum_cluster_systems_for_universal_sign_claim": 5,
+    "all_cluster_roots_required_for_RMS_claim": true,
+    "per_object_phase_selection_allowed": false,
+    "exact_null_counts_as_positive_evidence": false,
+    "formula_promotion_requires_all_domains": true,
+    "galaxy_RMSE_to_fixed_RAR_max": 1.1,
+    "cluster_raw_RMS_to_compact_halo_max": 1.0,
+    "solar_all_proxies_required": true
+  },
+  "outputs": {
+    "directory": "results/p0622_comprehensive_regime_diagnostics",
+    "galaxy_points": "galaxy_outer_predictions.csv",
+    "galaxy_scores": "galaxy_regime_scores.csv",
+    "galaxy_interactions": "galaxy_interaction_scores.csv",
+    "galaxy_correlations": "galaxy_residual_correlations.csv",
+    "galaxy_outliers": "galaxy_outliers.csv",
+    "cluster_scores": "cluster_regime_scores.csv",
+    "cluster_phases": "cluster_phase_responses.csv",
+    "cluster_correlations": "cluster_response_correlations.csv",
+    "cluster_leave_one_out": "cluster_leave_one_out.csv",
+    "parameter_matrix": "parameter_domain_matrix.csv",
+    "scenario_matrix": "scenario_matrix.csv",
+    "report": "report.json",
+    "figure": "p0622_comprehensive_regime_diagnostics.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "The 131 SPARC galaxies and all named cluster systems are project-spent; this stage discovers conditional behavior and does not create a pristine validation set.",
+    "Galaxy morphology interactions are descriptive and are screened across many bins; bootstrap intervals quantify sampling variation but do not remove multiple-testing or model-selection bias.",
+    "Outer rotation shape uses observed velocities and therefore diagnoses failure but cannot be used as an input to a blind prediction.",
+    "The five-cluster phase scan holds lens geometry fixed; A383 is a chronological formula transfer with a full refit, while MS2137 is root-incomplete.",
+    "Raw image-root loss is a topology failure and is never converted into a favorable finite RMS.",
+    "The compact-halo comparison is a limited fitted comparator, not a proof that all dark-matter models achieve the quoted score.",
+    "Solar results are analytic proxies, not a raw multi-planet ephemeris likelihood.",
+    "No per-system phase, strength, width, or gravity constant is allowed in the promoted formula."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "development_fit": {
+    "parameters": [
+      -9.828865199475334,
+      20.0,
+      4.0,
+      0.4416354320883477,
+      3.699975079917907,
+      1.9795727985662679,
+      8.371114873659844
+    ],
+    "parameter_mapping": {
+      "log10_a0_m_s2": -9.828865199475334,
+      "diffuse_amplitude": 20.0,
+      "low_acceleration_power": 4.0,
+      "log10_surface_transition_msun_pc2": 0.4416354320883477,
+      "surface_power": 3.699975079917907,
+      "log10_extent_transition_kpc": 1.9795727985662679,
+      "return_amplitude": 8.371114873659844
+    },
+    "objective": 0.04866452184330144,
+    "success": true,
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "function_evaluations": 7092,
+    "systems": 93,
+    "points": 1809,
+    "domain_counts": {
+      "galaxy": 81,
+      "cluster": 12
+    }
+  },
+  "final_fit_before_holdout_open": {
+    "parameters": [
+      -9.864658348381479,
+      4.519355194876579,
+      3.622271402721547,
+      2.935006145538263,
+      1.8224204762723437,
+      1.7809798008159747,
+      8.02104210273262
+    ],
+    "parameter_mapping": {
+      "log10_a0_m_s2": -9.864658348381479,
+      "diffuse_amplitude": 4.519355194876579,
+      "low_acceleration_power": 3.622271402721547,
+      "log10_surface_transition_msun_pc2": 2.935006145538263,
+      "surface_power": 1.8224204762723437,
+      "log10_extent_transition_kpc": 1.7809798008159747,
+      "return_amplitude": 8.02104210273262
+    },
+    "objective": 0.04486074392689318,
+    "success": true,
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "function_evaluations": 7308,
+    "systems": 124,
+    "points": 2671,
+    "domain_counts": {
+      "galaxy": 108,
+      "cluster": 16
+    }
+  },
+  "universal_parameter_count": 7,
+  "per_object_gravity_parameters": 0,
+  "formula": "g=gbar+A*gbar*[a0/(a0+gbar)]^p*[0.2+0.8/(1+(Sigma/Sigma*)^n)]+B*W(R80/L)*gbar(200kpc)*(200kpc/r)*[a0/(a0+gbar)]^p"
+}

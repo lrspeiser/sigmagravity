@@ -1,0 +1,217 @@
+{
+  "protocol_version": "P0630-SYNTHETIC-UNIVERSE-0.1.0",
+  "status": "locked before P0630 optimizer or holdout scoring",
+  "inputs": {
+    "protocol": {
+      "path": "configs/p0630_synthetic_universe_protocol.json",
+      "sha256": "4726eb716c4363ac0fdaeb2e79edae873316cbe4d86925342db0eae2b00f002d"
+    },
+    "SPARC_table": {
+      "path": "data/raw/sparc/table1.dat",
+      "sha256": "86771a7f9f7af768ba7932dc57c6a9d81de16a287d98f4cd49bd2b4fb2a42c5c"
+    },
+    "SPARC_morphology": {
+      "path": "data/derived/nbp0_sparc_morphology.csv",
+      "sha256": "43961d539778bcc71c9fee277a9a3b5f8a89aed2c9f192dc91471cb8a1ddd416"
+    },
+    "cluster_radial": {
+      "path": "data/raw/clash_tian2020/fig2.dat",
+      "sha256": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b"
+    },
+    "cluster_images": {
+      "path": "data/derived/r1_clash_caminha2019_image_observables.csv",
+      "sha256": "8cd92cc22ad0344f46bec45860332ddf56e08fef1fb3aeb4cc786203b97d3385"
+    }
+  },
+  "seed_policy": {
+    "allowed": [
+      "SPARC distance, inclination, quality, disk scale, light-derived stellar mass, gas mass, and baryonic force components",
+      "Tian et al. cluster baryonic acceleration anchors",
+      "metric-neutral cluster image positions and source redshifts for lens geometry training only"
+    ],
+    "forbidden": [
+      "observed SPARC rotation speed during seed construction",
+      "cluster observed total acceleration during seed construction",
+      "held-out cluster image position during lens geometry fitting",
+      "per-object gravity amplitudes or transition scales"
+    ],
+    "stellar_mass_to_light": {
+      "disk": 0.5,
+      "bulge": 0.7
+    }
+  },
+  "systems": {
+    "galaxy": {
+      "train": [
+        "CamB",
+        "DDO154",
+        "DDO161",
+        "DDO168",
+        "DDO170",
+        "ESO116-G012",
+        "ESO563-G021",
+        "F568-3",
+        "F571-8",
+        "F583-1",
+        "F583-4",
+        "IC2574",
+        "KK98-251",
+        "NGC0024",
+        "NGC0100",
+        "NGC0247",
+        "NGC0300",
+        "NGC1003",
+        "NGC2841",
+        "NGC2903",
+        "NGC2915",
+        "NGC2955",
+        "NGC2976",
+        "NGC3109",
+        "NGC3521",
+        "NGC3726",
+        "NGC3741",
+        "NGC3769",
+        "NGC3877",
+        "NGC3893",
+        "NGC3992",
+        "NGC4013",
+        "NGC4088",
+        "NGC4100",
+        "NGC4157",
+        "NGC4217",
+        "NGC4559",
+        "NGC5005",
+        "NGC5585",
+        "NGC5907",
+        "NGC5985",
+        "NGC6015",
+        "NGC6195",
+        "NGC6503",
+        "NGC7793",
+        "NGC7814",
+        "UGC01281",
+        "UGC02259",
+        "UGC02487",
+        "UGC02916",
+        "UGC03205",
+        "UGC03546",
+        "UGC04278",
+        "UGC04499",
+        "UGC05005",
+        "UGC05253",
+        "UGC05721",
+        "UGC05750",
+        "UGC05764",
+        "UGC05829",
+        "UGC05918",
+        "UGC05986",
+        "UGC06399",
+        "UGC06446",
+        "UGC06614",
+        "UGC06667",
+        "UGC06787",
+        "UGC06917",
+        "UGC06983",
+        "UGC07125",
+        "UGC07151",
+        "UGC07323",
+        "UGC07524",
+        "UGC07577",
+        "UGC07603",
+        "UGC08286",
+        "UGC08490",
+        "UGC08837",
+        "UGC11820",
+        "UGC12632",
+        "UGCA442"
+      ],
+      "development": [
+        "F568-V1",
+        "F574-1",
+        "NGC0055",
+        "NGC0289",
+        "NGC2403",
+        "NGC2683",
+        "NGC2998",
+        "NGC3198",
+        "NGC3917",
+        "NGC3972",
+        "NGC4010",
+        "NGC5033",
+        "NGC5055",
+        "NGC6946",
+        "UGC00128",
+        "UGC00731",
+        "UGC02885",
+        "UGC02953",
+        "UGC04483",
+        "UGC07089",
+        "UGC08699",
+        "UGC09133",
+        "UGC11455",
+        "UGC11914",
+        "UGC12506",
+        "UGC12732",
+        "UGCA444"
+      ],
+      "holdout": [
+        "D631-7",
+        "DDO064",
+        "ESO079-G014",
+        "IC4202",
+        "NGC0801",
+        "NGC0891",
+        "NGC1090",
+        "NGC3953",
+        "NGC4183",
+        "NGC5371",
+        "NGC6674",
+        "NGC7331",
+        "UGC00191",
+        "UGC03580",
+        "UGC04325",
+        "UGC05716",
+        "UGC06786",
+        "UGC06818",
+        "UGC06930",
+        "UGC07399",
+        "UGC08550",
+        "UGC09037",
+        "UGC11557"
+      ]
+    },
+    "cluster": {
+      "train": [
+        "A209",
+        "A383",
+        "A611",
+        "MACS0416",
+        "MACS0647",
+        "MACS0717",
+        "MACS0744",
+        "MACS1149",
+        "MACS1206",
+        "MACS1720",
+        "MS2137",
+        "RXJ1532"
+      ],
+      "development": [
+        "MACS0329",
+        "MACS0429",
+        "RXJ1347",
+        "RXJ2129"
+      ],
+      "holdout": [
+        "A2261",
+        "MACS1115",
+        "MACS1931",
+        "RXJ2248"
+      ]
+    }
+  },
+  "raw_image_holdouts": [
+    "MACS1115",
+    "MACS1931"
+  ],
+  "claim_status": "project-spent replay holdout; not untouched external confirmation"
+}

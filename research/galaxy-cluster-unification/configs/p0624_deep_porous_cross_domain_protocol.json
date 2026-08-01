@@ -1,0 +1,97 @@
+{
+  "protocol_version": "P0624-DEEP-POROUS-CROSS-DOMAIN-0.1.0",
+  "frozen_utc": "2026-08-01T20:35:00Z",
+  "status": "frozen_after_P0623_before_any_P0624_cluster_or_solar_score",
+  "question": "Does P0623 identify genuine baryonic crowding/path survival, or merely a galaxy-only potential-depth correction that fails for deep but spatially porous clusters?",
+  "parent": {
+    "protocol": "configs/p0623_density_path_survival_protocol.json",
+    "results": "results/p0623_density_path_survival",
+    "formula_selection_fold_is_now_spent": true
+  },
+  "frozen_candidates": [
+    {
+      "candidate_id": "constant",
+      "role": "one-strength control",
+      "transfer_feature": "none"
+    },
+    {
+      "candidate_id": "inverse_hill0_m1__potential_depth",
+      "role": "P0623 primary winner",
+      "transfer_feature": "local spherical baryonic potential depth"
+    },
+    {
+      "candidate_id": "inverse_hillfloor_m2__outward_radial_column",
+      "role": "best monotonic local path-density candidate",
+      "transfer_feature": "outward baryonic column; galaxy and Solar only because no equivalent disk column is observed for all derived clusters"
+    },
+    {
+      "candidate_id": "inverse_loglinear__pair_surface_L30p0kpc",
+      "role": "best physical-scale pair-surface candidate",
+      "transfer_feature": "30 kpc baryonic pair surface"
+    },
+    {
+      "candidate_id": "inverse_loglinear__pair_count_L30p0kpc",
+      "role": "best four-fold physical-scale pair-count candidate",
+      "transfer_feature": "30 kpc baryonic pair count"
+    },
+    {
+      "candidate_id": "inverse_hillfloor_m2__mean_surface_R80",
+      "role": "simple density candidate available in every domain",
+      "transfer_feature": "mean baryonic surface density inside R80"
+    }
+  ],
+  "parameter_rule": "Refit each frozen formula only on P0623 development folds 0-3, once. Hold all parameters and galaxy-derived feature normalization fixed in every transfer domain.",
+  "derived_cluster": {
+    "systems": 20,
+    "points": 84,
+    "evaluation": "no cluster parameter refit; q_eff may vary by radius only when its frozen galaxy formula is local",
+    "pair_profile_approximation": "Treat the smooth spherical baryonic profile as one moment-matched exponential with R_d=R80/3; mark this as a non-porous control, not a measurement of member-level porosity.",
+    "primary_metric": "equal-system log10 acceleration RMSE",
+    "baseline_parent_RMSE_dex": 0.19461516475256666
+  },
+  "raw_cluster": {
+    "systems": 5,
+    "heldout_images": 18,
+    "pair_feature": "Use cataloged member positions and luminosity weights; include a frozen 2 kpc Gaussian internal member scale and the same 30 kpc kernel.",
+    "potential_feature": "Recompute the spherical baryonic potential on the frozen raw profile grid and apply q_eff point by point.",
+    "geometry": "fixed P0554 geometry and profiled source positions; no lens geometry or gravity refit",
+    "all_roots_required_for_RMS_claim": true,
+    "roles_to_run": [
+      "one-strength control",
+      "P0623 primary winner",
+      "best physical-scale pair-surface candidate",
+      "simple density candidate available in every domain"
+    ]
+  },
+  "solar": {
+    "potential": "Use GM_sun/(r c^2) point by point.",
+    "surface_density": "Use M_sun/[pi (0.8 R_sun)^2] as the compact-source mean surface proxy.",
+    "outward_column": "Use a spherical compact-source upper-screen approximation and report it as sensitivity only.",
+    "requirements": ["Cassini proxy", "Earth orbit proxy", "Mercury precession within 3.1 mas/century"]
+  },
+  "decision_rules": {
+    "potential_only_falsification": "If the P0623 potential winner materially worsens the fixed P0554 parent on derived and raw cluster tests, it is a galaxy repair rather than the desired unification.",
+    "porosity_support": "A pair or surface-density formula must preserve its galaxy gain and outperform potential-only transfer in clusters without per-cluster parameters.",
+    "raw_topology": "A missing held-out image root is failure, never an RMS improvement.",
+    "promotion": "Requires galaxy gate, all Solar proxies, complete raw roots, and raw cluster improvement; otherwise retain only as a diagnostic component."
+  },
+  "outputs": {
+    "directory": "results/p0624_deep_porous_cross_domain",
+    "frozen_parameters": "frozen_galaxy_parameters.csv",
+    "derived_cluster": "derived_cluster_scores.csv",
+    "derived_predictions": "derived_cluster_predictions.csv",
+    "solar": "solar_scores.csv",
+    "raw": "raw_cluster_scores.csv",
+    "raw_predictions": "raw_cluster_predictions.csv",
+    "report": "report.json",
+    "figure": "p0624_deep_porous_cross_domain.png",
+    "summary": "SUMMARY.md"
+  },
+  "claim_limits": [
+    "All galaxy and cluster systems are project-spent; this is a mechanism stress test, not external validation.",
+    "The 20-system CLASH acceleration target is derived through conventional lens models.",
+    "The smooth-profile pair feature cannot measure cluster member porosity; member-level pair geometry is available only in the five raw systems.",
+    "Fixed raw lens geometry isolates the formula response but is not a blind full reconstruction.",
+    "Solar tests are analytic proxies rather than an ephemeris likelihood."
+  ]
+}
