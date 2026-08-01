@@ -1,0 +1,126 @@
+{
+  "status": "commissioned",
+  "galaxy": "DDO154",
+  "data_boundary": {
+    "little_things_velocity_products_downloaded": false,
+    "little_things_cube_downloaded": false,
+    "commissioning_kinematic_comparator": "existing project-spent SPARC DDO154 rotation curve",
+    "p0633_target_products_opened": false
+  },
+  "mass_inventory_solar": {
+    "raw_HI": 304619860.4552224,
+    "raw_HI_plus_helium": 405144414.4054459,
+    "gridded_HI_plus_helium": 401656125.52974844,
+    "gas_grid_fraction_of_raw": 0.9913900111869578,
+    "gridded_stars": 23663761.610801324,
+    "gridded_total_baryons": 425319887.1405498,
+    "gas_fraction": 0.9443624379525393
+  },
+  "geometry": {
+    "gas_center_pixel": [
+      498.3329873435209,
+      515.4127640617203
+    ],
+    "gas_position_angle_pixel_deg": 134.0108068374378,
+    "stellar_center_pixel": [
+      499.64690531529834,
+      464.08117330946544
+    ],
+    "stellar_position_angle_pixel_deg": 154.89730966058312,
+    "optical_preprocessing": {
+      "sky_mean_counts": 1030.2541994718813,
+      "sky_median_counts": 1028.7659912109375,
+      "sky_standard_deviation_counts": 13.394095829691413,
+      "foreground_cap_counts": 936.8051608796358
+    }
+  },
+  "field_solvers": {
+    "newtonian": {
+      "converged": true,
+      "normalized_residual_RMS": 5.532981457653893e-14,
+      "nonlinear_iterations": 0
+    },
+    "QUMOND": {
+      "converged": true,
+      "normalized_residual_RMS": 4.397575373046856e-14,
+      "nonlinear_iterations": 0
+    },
+    "AQUAL": {
+      "converged": true,
+      "normalized_residual_RMS": 5.2255880786484365e-06,
+      "nonlinear_iterations": 14
+    }
+  },
+  "spent_DDO154_rotation_scores": {
+    "newtonian_3d_map": {
+      "points": 12,
+      "RMSE_km_s": 25.031020717665385,
+      "weighted_RMSE_km_s": 27.753884911718433,
+      "mean_bias_km_s": -24.14848140639769
+    },
+    "QUMOND_3d_map": {
+      "points": 12,
+      "RMSE_km_s": 3.936047752283948,
+      "weighted_RMSE_km_s": 3.256147109601539,
+      "mean_bias_km_s": -1.3909434717208093
+    },
+    "AQUAL_3d_map": {
+      "points": 12,
+      "RMSE_km_s": 3.5998978783648288,
+      "weighted_RMSE_km_s": 2.73668232650794,
+      "mean_bias_km_s": -0.803405325377744
+    },
+    "algebraic_simple_mond": {
+      "points": 12,
+      "RMSE_km_s": 2.916081351928278,
+      "weighted_RMSE_km_s": 1.2255816436075178,
+      "mean_bias_km_s": 1.327429851089618
+    }
+  },
+  "three_dimensional_effects": {
+    "QUMOND_RMSE_change_vs_algebraic_km_s": 1.0199664003556697,
+    "AQUAL_RMSE_change_vs_algebraic_km_s": 0.6838165264365506
+  },
+  "runtime_seconds": 55.87265850009862,
+  "claim_boundary": [
+    "The per-object stellar-mass normalization is allowed only for commissioning and cannot be used in P0633 validation.",
+    "Morphology-moment registration removes component offsets and is a pipeline debug mode, not the final science registration.",
+    "AQUAL and QUMOND are non-relativistic and do not define cluster light bending."
+  ],
+  "protocol_version": "P0635-DDO154-MAP-COMMISSIONING-1.0.0",
+  "config_sha256": "234bb1414151c67513c35f8e194ff10601ccfe97ac34f38fae80c95bd178e7f3",
+  "raw_provenance": [
+    {
+      "filename": "DDO154_NA_X0_P_R.FITS",
+      "role": "primary-beam-corrected natural-weight H I moment 0",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo154/HI/DDO154_NA_X0_P_R.FITS",
+      "bytes": 4245120,
+      "sha256": "7dc505fffa9e35530c7d556b6e84357e73bd7be4c17624eab82d5f4c8874b911",
+      "verified": true
+    },
+    {
+      "filename": "d154b.fits",
+      "role": "B-band stellar morphology",
+      "url": "https://science.nrao.edu/science/surveys/littlethings/data/ddo154/d154b.fits",
+      "bytes": 4095360,
+      "sha256": "34d67c96d5b8649ba6c265ef3d71ab272aae1856ea0de8ff7443279e5e72c23b",
+      "verified": true
+    },
+    {
+      "filename": "d154v.fits",
+      "role": "V-band stellar morphology",
+      "url": "https://science.nrao.edu/science/surveys/littlethings/data/ddo154/d154v.fits",
+      "bytes": 3479040,
+      "sha256": "8e88d7db013d09a7bcdfd21a5f6c51c2d1a7a732af36131eb7d7ec1803d00181",
+      "verified": true
+    },
+    {
+      "filename": "d154_ubvcalib.txt",
+      "role": "UBV calibration metadata",
+      "url": "https://science.nrao.edu/science/surveys/littlethings/data/ddo154/d154_ubvcalib.txt",
+      "bytes": 32573,
+      "sha256": "75b925dcd3277948d4ce14a4526fd4950860024a17225da0cf47860369ace5c8",
+      "verified": true
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "status": "complete",
+  "galaxy": "DDO154",
+  "variants": [
+    "lumpy_razor_thin",
+    "lumpy_baseline_thickness",
+    "lumpy_thick",
+    "axisymmetric_baseline_thickness",
+    "lumpy_gas_only"
+  ],
+  "scores": [
+    {
+      "variant": "lumpy_razor_thin",
+      "law": "newtonian",
+      "points": 12,
+      "RMSE_km_s": 24.926560062350017,
+      "weighted_RMSE_km_s": 27.660835337398435,
+      "mean_bias_km_s": -24.02410212205211,
+      "normalized_residual_RMS": 5.210091366113421e-14,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_razor_thin",
+      "law": "QUMOND",
+      "points": 12,
+      "RMSE_km_s": 3.883432649559863,
+      "weighted_RMSE_km_s": 3.208588574713729,
+      "mean_bias_km_s": -1.2814561457880551,
+      "normalized_residual_RMS": 4.151181114331462e-14,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_razor_thin",
+      "law": "AQUAL",
+      "points": 12,
+      "RMSE_km_s": 3.526652937771236,
+      "weighted_RMSE_km_s": 2.660174412620638,
+      "mean_bias_km_s": -0.6297660431452403,
+      "normalized_residual_RMS": 5.6906593213071525e-06,
+      "converged": true,
+      "nonlinear_iterations": 14
+    },
+    {
+      "variant": "lumpy_razor_thin",
+      "law": "algebraic_simple_MOND",
+      "points": 12,
+      "RMSE_km_s": 2.968133961577387,
+      "weighted_RMSE_km_s": 1.2567625863495069,
+      "mean_bias_km_s": 1.51576796976528,
+      "normalized_residual_RMS": 0.0,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_baseline_thickness",
+      "law": "newtonian",
+      "points": 12,
+      "RMSE_km_s": 25.031020717665385,
+      "weighted_RMSE_km_s": 27.753884911718433,
+      "mean_bias_km_s": -24.14848140639769,
+      "normalized_residual_RMS": 5.532981457653893e-14,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_baseline_thickness",
+      "law": "QUMOND",
+      "points": 12,
+      "RMSE_km_s": 3.936047752283948,
+      "weighted_RMSE_km_s": 3.256147109601539,
+      "mean_bias_km_s": -1.3909434717208093,
+      "normalized_residual_RMS": 4.397575373046856e-14,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_baseline_thickness",
+      "law": "algebraic_simple_MOND",
+      "points": 12,
+      "RMSE_km_s": 2.916081351928278,
+      "weighted_RMSE_km_s": 1.2255816436075178,
+      "mean_bias_km_s": 1.327429851089618,
+      "normalized_residual_RMS": 0.0,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_thick",
+      "law": "newtonian",
+      "points": 12,
+      "RMSE_km_s": 26.026849227583146,
+      "weighted_RMSE_km_s": 28.822931769387683,
+      "mean_bias_km_s": -25.166141456816167,
+      "normalized_residual_RMS": 1.1559531120145758e-13,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_thick",
+      "law": "QUMOND",
+      "points": 12,
+      "RMSE_km_s": 4.067720595591327,
+      "weighted_RMSE_km_s": 4.004690432502248,
+      "mean_bias_km_s": -2.222058746271158,
+      "normalized_residual_RMS": 7.313050095134333e-14,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_thick",
+      "law": "algebraic_simple_MOND",
+      "points": 12,
+      "RMSE_km_s": 2.6912406515572385,
+      "weighted_RMSE_km_s": 1.9423385194345117,
+      "mean_bias_km_s": -0.22971263803926512,
+      "normalized_residual_RMS": 0.0,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "axisymmetric_baseline_thickness",
+      "law": "newtonian",
+      "points": 12,
+      "RMSE_km_s": 25.04177294128643,
+      "weighted_RMSE_km_s": 27.751110408541386,
+      "mean_bias_km_s": -24.163177678700993,
+      "normalized_residual_RMS": 5.855115520213083e-14,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "axisymmetric_baseline_thickness",
+      "law": "QUMOND",
+      "points": 12,
+      "RMSE_km_s": 4.015821773333716,
+      "weighted_RMSE_km_s": 3.301534184033637,
+      "mean_bias_km_s": -1.3311782806202601,
+      "normalized_residual_RMS": 4.5557845175999765e-14,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "axisymmetric_baseline_thickness",
+      "law": "AQUAL",
+      "points": 12,
+      "RMSE_km_s": 3.6601019208315066,
+      "weighted_RMSE_km_s": 2.7248732464660903,
+      "mean_bias_km_s": -0.7281381834734025,
+      "normalized_residual_RMS": 5.399419892250702e-06,
+      "converged": true,
+      "nonlinear_iterations": 14
+    },
+    {
+      "variant": "axisymmetric_baseline_thickness",
+      "law": "algebraic_simple_MOND",
+      "points": 12,
+      "RMSE_km_s": 2.8998801282516418,
+      "weighted_RMSE_km_s": 1.2208657093160318,
+      "mean_bias_km_s": 1.3042007737070829,
+      "normalized_residual_RMS": 0.0,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_gas_only",
+      "law": "newtonian",
+      "points": 12,
+      "RMSE_km_s": 25.819484255040337,
+      "weighted_RMSE_km_s": 28.523388155746854,
+      "mean_bias_km_s": -25.01004670179609,
+      "normalized_residual_RMS": 5.521695387935857e-14,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_gas_only",
+      "law": "QUMOND",
+      "points": 12,
+      "RMSE_km_s": 4.8552839205106,
+      "weighted_RMSE_km_s": 4.3515205136609145,
+      "mean_bias_km_s": -2.8232628161940947,
+      "normalized_residual_RMS": 4.2879160154599524e-14,
+      "converged": true,
+      "nonlinear_iterations": 0
+    },
+    {
+      "variant": "lumpy_gas_only",
+      "law": "algebraic_simple_MOND",
+      "points": 12,
+      "RMSE_km_s": 2.8262784537613106,
+      "weighted_RMSE_km_s": 1.5968484102583989,
+      "mean_bias_km_s": -0.0016780322561501155,
+      "normalized_residual_RMS": 0.0,
+      "converged": true,
+      "nonlinear_iterations": 0
+    }
+  ],
+  "diagnostics": {
+    "QUMOND_axisymmetry_RMSE_change_km_s": 0.07977402104976816,
+    "QUMOND_razor_minus_baseline_RMSE_km_s": -0.052615102724085094,
+    "QUMOND_thick_minus_baseline_RMSE_km_s": 0.13167284330737905,
+    "QUMOND_remove_stars_RMSE_change_km_s": 0.9192361682266523,
+    "axisymmetric_QUMOND_minus_algebraic_RMSE_km_s": 1.1159416450820743
+  },
+  "runtime_seconds": 111.03927920002025,
+  "claim_boundary": "Exploratory commissioning ablation on a project-spent galaxy; no P0633 target was opened and no candidate parameter was selected."
+}

@@ -1,0 +1,76 @@
+{
+  "protocol_version": "P0635-DDO154-MAP-COMMISSIONING-1.0.0",
+  "status": "commissioning_on_project_spent_galaxy",
+  "purpose": "Debug real 2D baryonic-map ingestion and field projection on DDO154 without spending a P0633 validation target.",
+  "galaxy": {
+    "id": "DDO154",
+    "distance_mpc": 4.04,
+    "inclination_deg": 64.0,
+    "stellar_mass_solar_commissioning_only": 23663761.610801324,
+    "stellar_mass_source": "existing SPARC photometric profile at the project's fixed disk mass-to-light ratio",
+    "helium_factor": 1.33
+  },
+  "raw_products": [
+    {
+      "filename": "DDO154_NA_X0_P_R.FITS",
+      "role": "primary-beam-corrected natural-weight H I moment 0",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo154/HI/DDO154_NA_X0_P_R.FITS",
+      "bytes": 4245120,
+      "sha256": "7dc505fffa9e35530c7d556b6e84357e73bd7be4c17624eab82d5f4c8874b911"
+    },
+    {
+      "filename": "d154b.fits",
+      "role": "B-band stellar morphology",
+      "url": "https://science.nrao.edu/science/surveys/littlethings/data/ddo154/d154b.fits",
+      "bytes": 4095360,
+      "sha256": "34d67c96d5b8649ba6c265ef3d71ab272aae1856ea0de8ff7443279e5e72c23b"
+    },
+    {
+      "filename": "d154v.fits",
+      "role": "V-band stellar morphology",
+      "url": "https://science.nrao.edu/science/surveys/littlethings/data/ddo154/d154v.fits",
+      "bytes": 3479040,
+      "sha256": "8e88d7db013d09a7bcdfd21a5f6c51c2d1a7a732af36131eb7d7ec1803d00181"
+    },
+    {
+      "filename": "d154_ubvcalib.txt",
+      "role": "UBV calibration metadata",
+      "url": "https://science.nrao.edu/science/surveys/littlethings/data/ddo154/d154_ubvcalib.txt",
+      "bytes": 32573,
+      "sha256": "75b925dcd3277948d4ce14a4526fd4950860024a17225da0cf47860369ace5c8"
+    }
+  ],
+  "grid": {
+    "cells_per_axis": 65,
+    "spacing_kpc": 0.375,
+    "gas_scale_height_kpc": 0.15,
+    "stellar_scale_height_kpc": 0.30
+  },
+  "optical_shape": {
+    "source": "d154v.fits",
+    "pixel_scale_arcsec": 1.134,
+    "detector_center_pixel": 512.0,
+    "maximum_radius_pixel": 150.0,
+    "foreground_cap_quantile": 0.995,
+    "smoothing_sigma_pixel": 3.0,
+    "registration": "Each component is centered and aligned by its own permitted morphology moments; this commissioning registration is not eligible for P0633 target scoring."
+  },
+  "field_laws": {
+    "gravitational_constant_kpc_km2_s2_per_solar_mass": 4.30091e-6,
+    "a0_km2_s2_per_kpc": 3702.813097,
+    "newtonian": "3D Poisson",
+    "QUMOND": "simple nu",
+    "AQUAL": "simple mu"
+  },
+  "data_boundary": {
+    "little_things_velocity_products_downloaded": false,
+    "little_things_cube_downloaded": false,
+    "commissioning_kinematic_comparator": "existing project-spent SPARC DDO154 rotation curve",
+    "p0633_target_products_opened": false
+  },
+  "claim_boundary": [
+    "The per-object stellar-mass normalization is allowed only for commissioning and cannot be used in P0633 validation.",
+    "Morphology-moment registration removes component offsets and is a pipeline debug mode, not the final science registration.",
+    "AQUAL and QUMOND are non-relativistic and do not define cluster light bending."
+  ]
+}

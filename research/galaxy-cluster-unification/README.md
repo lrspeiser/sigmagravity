@@ -1213,3 +1213,27 @@ $env:PYTHONPATH='src'
 python scripts/run_p0634_field_solver_validation.py
 python -m pytest tests/test_field_solvers.py tests/test_p0634_field_solver_validation.py -q
 ```
+
+## First real 2D baryonic map (P0635)
+
+The validated field equations now run on the official LITTLE THINGS DDO154 H I
+moment-0 map and optical stellar morphology. The gridded map retains 99.14% of
+the raw gas mass and is 94.44% gas by baryonic mass. On the deliberately spent
+DDO154 rotation curve, Newtonian/QUMOND/AQUAL score 25.03/3.94/3.60 km/s RMSE,
+while algebraic simple MOND scores 2.92 km/s. Thickness and axisymmetry
+ablations show that the remaining full-field difference is not a registration
+artifact. See
+[`docs/P0635_REAL_2D_DDO154_COMMISSIONING.md`](docs/P0635_REAL_2D_DDO154_COMMISSIONING.md).
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/download_p0635_ddo154_maps.ps1
+$env:PYTHONPATH='src'
+python scripts/run_p0635_ddo154_map_commissioning.py
+python scripts/run_p0635_map_geometry_sensitivity.py
+python -m pytest tests/test_galaxy_maps.py tests/test_p0635_ddo154_map_commissioning.py -q
+```
+
+The eventual public researcher service—real/synthetic object catalog, safe
+formula submissions, reproducible batch scoring, and a Vercel front end backed
+by asynchronous field-solver workers—is specified in
+[`docs/PUBLIC_SIMULATOR_API_PLAN.md`](docs/PUBLIC_SIMULATOR_API_PLAN.md).
