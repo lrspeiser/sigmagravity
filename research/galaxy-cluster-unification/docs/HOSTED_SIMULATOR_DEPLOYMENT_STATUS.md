@@ -11,11 +11,11 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/B1cvTnC1b2rLhoHoaK4twTBeySYb>
-- deployment ID: `dpl_B1cvTnC1b2rLhoHoaK4twTBeySYb`
-- public contract version: `0.9.0-preview`
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/7abCFs6pqQdKPoekpw4hnbrinQUP>
+- deployment ID: `dpl_7abCFs6pqQdKPoekpw4hnbrinQUP`
+- public contract version: `0.10.0-preview`
 
-The service passes its local production build, 68 automated hosted tests, and a live
+The service passes its local production build, 70 automated hosted tests, and a live
 HTTP smoke suite. The deployment credential was supplied only to the CLI
 process and was not stored in a file, repository setting, or generated
 artifact.
@@ -47,6 +47,10 @@ Implemented public capabilities:
     coordinate-safe 3D photon projection into deflection, convergence, shear,
     rotation, Jacobian, and magnification maps. The local reference worker
     executes it; velocity, deflection, and reduced-shear scores remain separate.
+11. Publish the `multiple_image_systems` target, example, and schema for raw
+    image-plane source profiling, global root search, one-to-one assignment,
+    explicit topology failure, and a separate image-position score channel.
+    The local reference worker executes it and adds no gravity parameter.
 
 ## Verification evidence
 
@@ -56,7 +60,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 68 passing tests and a build check confirming 175
+The current result is 70 passing tests and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
 `a5df1cb7c7a52da415a167d145a831fe0e0625243b46dd38047ca43ba0299681`.
@@ -109,13 +113,23 @@ solve. The batch schema must also expose `observationDataUploadId`, and the
 local P0733 acceptance must preserve a field job while changed observational
 uncertainty creates a new evaluation job.
 
-The v0.9 photon checks additionally require the health document to report
+The v0.10 photon checks additionally require the health document to report
 `localTypedPhotonLensingMaps=available_in_dev_server`, the observation-target
 schema to include `photon_lensing_map`, the published photon target example to
-name all three axes, and production raw multiple-image work to remain honestly
-marked `worker_not_connected`. P0734 passed its frozen analytic normalization,
+name all three axes, and production heavy execution to remain honestly marked
+`production_worker_not_connected`. P0734 passed its frozen analytic normalization,
 point-mass, affine-invariant, channel-separation, deterministic-map, decoupled
 parity, and composed-batch gates before deployment.
+
+The v0.10 raw-image checks additionally require the homepage to show local raw
+image roots as available, health to report
+`localRawMultipleImageLensing=available_in_dev_server`, the observation-target
+schema to include `multiple_image_systems`, and the published example to retain
+families, positions, uncertainties, axes, distance ratios, and root controls.
+P0735 passed source profiling, root closure, missing-topology non-scoring, axis
+permutation, multiple-distance-ratio, byte-parity, batch-channel, and real
+catalog round-trip gates before deployment. The AS295/PLCKG287 catalog is not
+called score-ready because it lacks published per-image positional errors.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
