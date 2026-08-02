@@ -1,5 +1,5 @@
 {
-  "protocol_version": "P0692-SPENT-LINEAR-ROUTING-CONTINUUM-ATLAS-1.0.0",
+  "protocol_version": "P0692-SPENT-LINEAR-ROUTING-CONTINUUM-ATLAS-1.0.1",
   "status": "frozen_before_any_P0692_intermediate_fraction_field_photon_fit_or_topology_score",
   "frozen_utc": "2026-08-02T13:30:00Z",
   "purpose": "Diagnose, without promotion or parameter selection, whether any preregistered linear mixture between the P0685 local generator and P0690 fully routed source produces viable raw RX J2129 image topology.",
@@ -63,7 +63,8 @@
     },
     "source_positions": "two coordinates profiled independently for seven spectroscopic families on training images",
     "multi_starts": 12,
-    "random_seed": 6922129,
+    "random_seed": 6912129,
+    "continuum_seed_rule": "use the identical P0691 optimizer starts for every fraction so basin changes are not confused with source-mixture changes",
     "map_interpolation": "bicubic; no ellipticity, rotation, radial amplitude, mass sheet, gravity amplitude, photon amplitude, or slip is fitted"
   },
   "global_topology": {

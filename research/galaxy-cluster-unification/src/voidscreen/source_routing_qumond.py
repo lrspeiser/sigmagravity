@@ -50,6 +50,14 @@ class MultipoleGatedRoutingSolution:
     mixed_source: np.ndarray
 
 
+@dataclass(frozen=True)
+class LinearRoutingMixtureSolution:
+    field: FieldSolution
+    routing: SourceRoutingSolution
+    routing_fraction: float
+    mixed_source: np.ndarray
+
+
 def normalized_baryonic_quadrupole(
     density: np.ndarray,
     spacing: float | Sequence[float],
@@ -235,23 +243,19 @@ def solve_multipole_gated_source_routing(
         light_speed=light_speed,
     )
     fraction, covariance = normalized_baryonic_quadrupole(density, spacing)
-    mixed_source = (
-        1.0 - fraction
-    ) * routing.local_generator_source + fraction * routing.routed_source
-    steps = _spacing3(spacing)
-    potential = solve_poisson_dirichlet(mixed_source, steps, routing.boundary_potential)
-    residual = laplacian(potential, steps) - mixed_source
-    residual_rms = normalized_residual_rms(residual, mixed_source)
+    mixture = solve_linear_routing_mixture(routing, spacing, fraction)
+    mixed_source = mixture.mixed_source
+    field = mixture.field
     field = FieldSolution(
-        potential=potential,
-        acceleration=acceleration_from_potential(potential, steps),
-        equation_source=mixed_source,
-        normalized_residual_rms=residual_rms,
-        converged=bool(routing.newtonian.converged and np.isfinite(residual_rms)),
+        potential=field.potential,
+        acceleration=field.acceleration,
+        equation_source=field.equation_source,
+        normalized_residual_rms=field.normalized_residual_rms,
+        converged=field.converged,
         metadata={
+            **field.metadata,
             "law": "multipole-gated source routing",
             "quadrupole_fraction": fraction,
-            "spacing": steps,
             "a0": float(a0),
             "transition_depth": float(transition_depth),
             "transition_power": float(transition_power),
@@ -264,5 +268,43 @@ def solve_multipole_gated_source_routing(
         routing=routing,
         quadrupole_fraction=fraction,
         covariance=covariance,
+        mixed_source=mixed_source,
+    )
+
+
+def solve_linear_routing_mixture(
+    routing: SourceRoutingSolution,
+    spacing: float | Sequence[float],
+    routing_fraction: float,
+) -> LinearRoutingMixtureSolution:
+    """Solve one declared mixture of the already-computed routing endpoints."""
+
+    fraction = float(routing_fraction)
+    if not np.isfinite(fraction) or not 0.0 <= fraction <= 1.0:
+        raise ValueError("routing_fraction must be finite and lie in [0, 1]")
+    steps = _spacing3(spacing)
+    mixed_source = (
+        (1.0 - fraction) * routing.local_generator_source
+        + fraction * routing.routed_source
+    )
+    potential = solve_poisson_dirichlet(mixed_source, steps, routing.boundary_potential)
+    residual = laplacian(potential, steps) - mixed_source
+    residual_rms = normalized_residual_rms(residual, mixed_source)
+    field = FieldSolution(
+        potential=potential,
+        acceleration=acceleration_from_potential(potential, steps),
+        equation_source=mixed_source,
+        normalized_residual_rms=residual_rms,
+        converged=bool(routing.newtonian.converged and np.isfinite(residual_rms)),
+        metadata={
+            "law": "linear source-routing mixture",
+            "routing_fraction": fraction,
+            "spacing": steps,
+        },
+    )
+    return LinearRoutingMixtureSolution(
+        field=field,
+        routing=routing,
+        routing_fraction=fraction,
         mixed_source=mixed_source,
     )

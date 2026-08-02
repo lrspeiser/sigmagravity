@@ -5,6 +5,7 @@ import numpy as np
 from voidscreen.field_solvers import boundary_mask, cell_coordinates
 from voidscreen.source_routing_qumond import (
     normalized_baryonic_quadrupole,
+    solve_linear_routing_mixture,
     solve_multipole_gated_source_routing,
     solve_source_conserving_baryonic_routing,
 )
@@ -79,3 +80,35 @@ def test_multipole_gated_source_is_exact_declared_linear_mixture():
     assert np.array_equal(solution.mixed_source, expected)
     assert solution.field.converged
     assert solution.field.normalized_residual_rms < 1e-10
+
+
+def test_linear_routing_mixture_has_exact_endpoints_and_rejects_extrapolation():
+    cells = 17
+    spacing = 0.8
+    x, y, z = cell_coordinates((cells,) * 3, spacing)
+    density = np.exp(-(x * x / 2.0 + y * y / 1.4 + z * z / 0.8))
+    density /= np.sum(density) * spacing**3
+    routing = solve_source_conserving_baryonic_routing(
+        density,
+        spacing,
+        gravitational_constant=1.0,
+        a0=0.03,
+        transition_depth=1e-4,
+        transition_power=4.0,
+        extra_spatial_channels=2.0,
+        path_power=0.5,
+        light_speed=1000.0,
+    )
+    local = solve_linear_routing_mixture(routing, spacing, 0.0)
+    routed = solve_linear_routing_mixture(routing, spacing, 1.0)
+    middle = solve_linear_routing_mixture(routing, spacing, 0.25)
+    assert np.array_equal(local.mixed_source, routing.local_generator_source)
+    assert np.array_equal(routed.mixed_source, routing.routed_source)
+    assert np.array_equal(
+        middle.mixed_source,
+        0.75 * routing.local_generator_source + 0.25 * routing.routed_source,
+    )
+    assert local.field.normalized_residual_rms < 1e-10
+    assert routed.field.normalized_residual_rms < 1e-10
+    with np.testing.assert_raises(ValueError):
+        solve_linear_routing_mixture(routing, spacing, 1.01)
