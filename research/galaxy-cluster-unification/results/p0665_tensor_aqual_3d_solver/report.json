@@ -1,0 +1,53 @@
+{
+  "report_version": "P0665-TENSOR-AQUAL-3D-SOLVER-RESULTS-1.0.0",
+  "status": "pass",
+  "all_progression_gates_pass": true,
+  "candidate_advanced_to_zero_slip_photon_deflection": true,
+  "protocol_sha256": "fa42a70b57025cc731ca42e0caeb8d9e657a8a064e9afb7b5f38028dc6969df5",
+  "source_sha256": "449d6d6980c3cb4f64187779e19156763492345d48c819fa74872a708ab392b7",
+  "solver_source_sha256": "b12a54eedf1b9a87cc4e2e3f3655c26e324952a7d512a69f6aac5943fc9523a2",
+  "coverage": {
+    "manufactured_grids": 3,
+    "nonlinear_cases": 1,
+    "density_lift_cases": 1,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "metrics": {
+    "manufactured_25_grid_relative_RMS_error": 0.001429118316584441,
+    "manufactured_convergence_order": 2.0064818757057963,
+    "rotation_covariance_relative_RMS_error": 8.62531225714235e-15,
+    "direction_reversal_relative_RMS_error": 0.0,
+    "sigma_zero_scalar_graph_AQUAL_relative_RMS_difference": 0.0,
+    "nonlinear_normalized_residual_RMS": 7.868964829407815e-06,
+    "nonlinear_iterations": 8,
+    "minimum_constitutive_eigenvalue": 9.875646951955768e-07,
+    "surface_density_lift_column_mass_relative_error": 1.336002862840727e-16,
+    "operator_symmetry_relative_error": 1.5767437611789364e-16
+  },
+  "gate_results": {
+    "P0664_parent": true,
+    "positive_eigenvalue": true,
+    "manufactured_accuracy": true,
+    "manufactured_order": true,
+    "rotation_covariance": true,
+    "direction_reversal": true,
+    "scalar_AQUAL_limit": true,
+    "nonlinear_residual": true,
+    "nonlinear_convergence": true,
+    "surface_density_lift": true,
+    "operator_symmetry": true,
+    "no_new_constants": true,
+    "no_per_object_parameters": true,
+    "spent_lensing_untouched": true,
+    "sealed_targets_untouched": true
+  },
+  "spent_RXJ2129_lensing_outcomes_opened": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0665 validates numerical machinery only; it does not establish a physical three-dimensional sigma construction or a relativistic metric.",
+    "The graph is a positive variational discretization of the stated elliptic equation, not a covariant action.",
+    "No spent RX J2129 image and no P0633/P0640 target may be used in P0665 development or selection."
+  ]
+}
