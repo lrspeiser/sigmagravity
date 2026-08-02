@@ -11,11 +11,11 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/D84U7kKnHDqCTbc8NPXpTUf3LKKU>
-- deployment ID: `dpl_D84U7kKnHDqCTbc8NPXpTUf3LKKU`
-- public contract version: `0.8.0-preview`
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/B1cvTnC1b2rLhoHoaK4twTBeySYb>
+- deployment ID: `dpl_B1cvTnC1b2rLhoHoaK4twTBeySYb`
+- public contract version: `0.9.0-preview`
 
-The service passes its local production build, 65 automated hosted tests, and a live
+The service passes its local production build, 68 automated hosted tests, and a live
 HTTP smoke suite. The deployment credential was supplied only to the CLI
 process and was not stored in a file, repository setting, or generated
 artifact.
@@ -43,6 +43,10 @@ Implemented public capabilities:
 9. Return an explicit `worker_not_connected` state for production field,
    observation-evaluation, and lensing tests instead of substituting a radial
    proxy.
+10. Publish the typed `photon_lensing_map` target, example, and schema for
+    coordinate-safe 3D photon projection into deflection, convergence, shear,
+    rotation, Jacobian, and magnification maps. The local reference worker
+    executes it; velocity, deflection, and reduced-shear scores remain separate.
 
 ## Verification evidence
 
@@ -52,7 +56,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 65 passing tests and a build check confirming 175
+The current result is 68 passing tests and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
 `a5df1cb7c7a52da415a167d145a831fe0e0625243b46dd38047ca43ba0299681`.
@@ -94,7 +98,7 @@ and point arrays. The accepted production smoke values are:
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
-The v0.8 live checks additionally require the homepage and OpenAPI document to
+The v0.9 live checks additionally require the homepage and OpenAPI document to
 advertise `/api/v1/observation-evaluation-jobs`, the observation submission
 schema to resolve with HTTP 200, and the production submission route to return
 HTTP 503 with `production_worker_not_connected` until durable storage and an
@@ -104,6 +108,14 @@ restart-recovery, and artifact-rehash gates without rerunning the source field
 solve. The batch schema must also expose `observationDataUploadId`, and the
 local P0733 acceptance must preserve a field job while changed observational
 uncertainty creates a new evaluation job.
+
+The v0.9 photon checks additionally require the health document to report
+`localTypedPhotonLensingMaps=available_in_dev_server`, the observation-target
+schema to include `photon_lensing_map`, the published photon target example to
+name all three axes, and production raw multiple-image work to remain honestly
+marked `worker_not_connected`. P0734 passed its frozen analytic normalization,
+point-mass, affine-invariant, channel-separation, deterministic-map, decoupled
+parity, and composed-batch gates before deployment.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
