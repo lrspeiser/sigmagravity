@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "sigma-p0734-typed-photon-lensing-adapter/1",
+  "stage": "P0734",
+  "status": "frozen_before_P0734_implementation_acceptance",
+  "purpose": "Add a formula-neutral 3D photon-lensing observation adapter whose observable type, projection geometry, relativistic normalization, map products, scores, and artifacts remain explicitly separate from massive-tracer rotation and velocity mappings.",
+  "parent": {
+    "commit": "38bb890ce89e3310f3d21c2907aaee8dd73e115a",
+    "observationTargetContract": "sigma-observation-target/1",
+    "fieldContract": "sigma-field-job-submit/1",
+    "observationEvaluationContract": "sigma-observation-evaluation-job-submit/1",
+    "composedBatchEvidence": "results/p0733_composed_batch_observation_jobs/report.json"
+  },
+  "projectionContract": {
+    "targetKind": "photon_lensing_map",
+    "requiredObservable": {
+      "target": ["photons", "both"],
+      "rank": "vector",
+      "unit": "m/s^2"
+    },
+    "geometry": "cartesian_3d",
+    "axisConvention": {
+      "required": ["northAxis", "eastAxis", "lineOfSightAxis"],
+      "constraint": "the three declared axes are a permutation of [0,1,2]",
+      "outputShape": "(north,east)"
+    },
+    "physicalDeflection": "alpha_perp_rad = -(2 * distanceRatio / c^2) * integral(a_photon_perp dl)",
+    "fixedConstants": {
+      "lightSpeedMPerS": 299792458,
+      "relativisticMultiplier": 2
+    },
+    "requiredGeometryValues": {
+      "distanceRatio": "explicit positive D_ls/D_s; never inferred from redshift or cosmology",
+      "lensAngularDiameterDistanceM": "explicit positive D_l used only to convert transverse physical grid spacing to angular spacing"
+    },
+    "derivedMaps": [
+      "alpha_east_radian",
+      "alpha_north_radian",
+      "alpha_east_arcsec",
+      "alpha_north_arcsec",
+      "convergence",
+      "shear_1",
+      "shear_2",
+      "shear_magnitude",
+      "reduced_shear_1",
+      "reduced_shear_2",
+      "rotation",
+      "jacobian_determinant",
+      "minimum_jacobian_eigenvalue",
+      "maximum_jacobian_eigenvalue",
+      "absolute_magnification"
+    ],
+    "optionalScoredChannels": {
+      "deflection_arcsec": "paired east/north deflection maps with positive arcsecond uncertainty maps",
+      "reduced_shear_dimensionless": "paired reduced-shear component maps with positive dimensionless uncertainty maps"
+    }
+  },
+  "separationContract": [
+    "photon_lensing_map rejects a massive_tracers observable",
+    "circular_speed_curve and line_of_sight_velocity_field continue to reject photons-only observables",
+    "velocity, deflection, and reduced-shear residuals are aggregated only within their own named channel and unit",
+    "no scalar aggregate may combine residuals having different physical units",
+    "observation evaluation adds zero gravity parameters and never re-solves or mutates the field"
+  ],
+  "acceptanceFixtures": [
+    {
+      "id": "uniform_transverse_field",
+      "purpose": "freeze sign, 2/c^2 normalization, path-length scaling, and distance-ratio scaling"
+    },
+    {
+      "id": "affine_deflection_field",
+      "purpose": "recover known convergence, both shear components, zero rotation, determinant, and magnification"
+    },
+    {
+      "id": "point_mass_gr",
+      "purpose": "recover 4GM/(c^2 b) away from the unresolved center"
+    },
+    {
+      "id": "axis_permutation",
+      "purpose": "produce the same named north/east maps after permuting storage axes and vector components"
+    },
+    {
+      "id": "synthetic_observation",
+      "purpose": "score exact deflection and reduced-shear maps and preserve channel separation"
+    },
+    {
+      "id": "decoupled_job_parity",
+      "purpose": "integrated and standalone observation evaluations emit byte-identical lensing score and map artifacts"
+    }
+  ],
+  "numericalGates": {
+    "uniformFieldRelativeErrorMaximum": 1e-12,
+    "linearPathLengthRatioRelativeErrorMaximum": 1e-12,
+    "linearDistanceRatioRelativeErrorMaximum": 1e-12,
+    "affineInvariantAbsoluteErrorMaximum": 1e-10,
+    "pointMassMedianRelativeErrorMaximum": 0.02,
+    "pointMassP95RelativeErrorMaximum": 0.04,
+    "axisPermutationRelativeErrorMaximum": 1e-12,
+    "gradientFieldRotationRmsMaximum": 1e-10,
+    "exactSyntheticDeflectionRmseArcsecMaximum": 1e-12,
+    "exactSyntheticReducedShearRmseMaximum": 1e-12,
+    "maximumPerObjectGravityParameters": 0,
+    "maximumGravityParametersAddedByObservationEvaluation": 0
+  },
+  "engineeringGates": {
+    "hostedPreflightMustRepeatPhotonTypeAndAxisChecks": true,
+    "mapArchiveMustBeContentHashed": true,
+    "standaloneAndIntegratedArtifactsMustMatch": true,
+    "composedBatchMustRetainPhotonChannelAggregates": true,
+    "changedObservationArraysMustPreserveFieldIdentity": true,
+    "legacyMassiveTracerTestsMustRemainGreen": true,
+    "fullPythonAndHostedSuitesMustPass": true
+  },
+  "claimBoundary": [
+    "P0734 validates the mapping from a submitted photon acceleration field to weak-lensing map observables; it does not validate the gravity equation that produced that field.",
+    "The fixed 2/c^2 projection is the declared weak-field zero-slip normalization for an acceleration-like photon observable, not a derivation of a covariant metric theory.",
+    "Convergence and reduced-shear map comparisons may depend on published reconstruction assumptions; provenance must identify those assumptions.",
+    "P0734 does not fit raw multiple-image positions, source positions, time delays, critical curves, or cosmological distances. Those require separately typed follow-on adapters.",
+    "A successful analytic or synthetic gate is numerical conformance, not evidence that a baryon-only theory explains cluster lensing."
+  ]
+}
