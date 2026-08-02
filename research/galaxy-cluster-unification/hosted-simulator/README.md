@@ -234,6 +234,13 @@ resolution-sensitive. Partial rows are now excluded from model ranks and
 plotted as missing. See
 `../docs/P0724_GRID_BOX_VERTICAL_SENSITIVITY_RESULTS.md`.
 
+P0725 added generic nonlinear initialization plus explicit requested/effective
+iteration-limit metadata. A unit-coefficient linearized warm start with fixed
+damping `0.20` converged both failed fine-grid AQUAL inputs under one universal
+setting. It is not yet the production default because no second successful
+method was available for the frozen solution-agreement gate. See
+`../docs/P0725_AQUAL_SOLVER_ROBUSTNESS_RESULTS.md`.
+
 Run the chained 3D HTTP acceptance test while `npm run dev` is active:
 
 ```text

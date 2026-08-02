@@ -1499,10 +1499,20 @@ Incomplete rows are excluded from ranks. This makes nonlinear solver
 hardening--without changing the physics--the next gate. See
 [`docs/P0724_GRID_BOX_VERTICAL_SENSITIVITY_RESULTS.md`](docs/P0724_GRID_BOX_VERTICAL_SENSITIVITY_RESULTS.md).
 
+P0725 then froze six universal solver variants on the two failed fine-grid
+inputs. A generic unit-coefficient warm start with damping `0.20` converged
+both at the strict `1e-8` residual target, while every other real-system
+variant failed. The stage remains a failed selection gate because a second
+independent successful method is required before choosing a production
+default. See
+[`docs/P0725_AQUAL_SOLVER_ROBUSTNESS_RESULTS.md`](docs/P0725_AQUAL_SOLVER_ROBUSTNESS_RESULTS.md).
+
 ```powershell
 python scripts/run_p0723_formula_neutral_api_comparators.py `
   --base-url http://127.0.0.1:4173
 
 python scripts/run_p0724_grid_box_vertical_sensitivity.py `
   --base-url http://127.0.0.1:4189
+
+python scripts/run_p0725_aqual_solver_robustness.py
 ```
