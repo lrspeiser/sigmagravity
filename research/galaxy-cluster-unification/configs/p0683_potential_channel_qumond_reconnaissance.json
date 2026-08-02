@@ -1,16 +1,16 @@
 {
-  "protocol_version": "P0683-POTENTIAL-CHANNEL-AQUAL-RECONNAISSANCE-1.0.0",
+  "protocol_version": "P0683-POTENTIAL-CHANNEL-QUMOND-RECONNAISSANCE-1.0.0",
   "status": "frozen_before_any_P0683_formula_score",
   "frozen_utc": "2026-08-02T03:23:28Z",
-  "purpose": "Test whether one smooth, baryon-derived potential-depth transition can leave the spent SPARC galaxy regime close to ordinary AQUAL while supplying the broad radial cluster amplification isolated by P0682, before any 3D solve, raw topology score, or sealed outcome is opened.",
+  "purpose": "Test whether one smooth, baryon-derived potential-depth transition can leave the spent SPARC galaxy regime close to the fixed RAR/QUMOND boost while supplying the broad radial cluster amplification isolated by P0682, before any 3D solve, raw topology score, or sealed outcome is opened.",
   "parent": "results/p0682_spent_multicluster_deflection_atlas/report.json",
   "equation": {
-    "field_form": "div[mu_0(|grad Phi|/a0)^p(chi_b) grad Phi] = 4 pi G rho_b",
-    "base_permittivity": "mu_0(x)=x/(1+x)",
+    "field_form": "laplacian(Phi)=div[nu_0(|grad Phi_N|/a0)^p(chi_b) grad Phi_N]",
+    "base_boost": "nu_0(y)=1/[1-exp(-sqrt(y))]",
     "baryonic_potential_coordinate": "chi_b=|Phi_b|/c^2 with Phi_b(infinity)=0 and Phi_b(r)=integral_r^infinity g_bar(s) ds",
     "transition": "S=chi_b^n/(chi_b^n+chi_t^n)",
     "channel_exponent": "p(chi_b)=1+(p_infinity-1)S",
-    "spherical_algebraic_reconnaissance": "g [g/(g+a0)]^p(chi_b)=g_bar",
+    "spherical_algebraic_reconnaissance": "g=g_bar nu_0(g_bar/a0)^p(chi_b)",
     "a0_m_s2": 1.2e-10,
     "primary_p_infinity": 4.0,
     "primary_transition_power_n": 2.0,
@@ -35,7 +35,7 @@
     "potential_closure": "integrate each measured outer profile to its last radius and close with a point-mass tail",
     "score": "equal-galaxy circular-speed RMSE_km_s",
     "comparators": ["baryons_Newton", "fixed_RAR_a0", "simple_AQUAL_algebraic_a0"],
-    "claim_limit": "development transfer, not new-galaxy validation and not a full disk AQUAL solve"
+    "claim_limit": "development transfer, not new-galaxy validation and not a full disk QUMOND solve"
   },
   "spent_cluster_test": {
     "baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
@@ -69,7 +69,7 @@
     "reliable_cluster_systems": 3,
     "primary_grid_rows": 11,
     "diagnostic_grid_rows": 264,
-    "all_implicit_roots_converged": true,
+    "all_algebraic_boost_evaluations_valid": true,
     "all_predictions_finite_and_positive": true,
     "gravity_parameters_fit_per_object": 0,
     "new_raw_image_root_score_computed": false,
@@ -82,24 +82,24 @@
     "galaxy_RMSE_ratio_to_fixed_RAR_max": 1.05,
     "all5_cluster_log_RMS_dex_max": 0.20,
     "reliable3_cluster_log_RMS_dex_max": 0.20,
-    "minimum_all5_gap_fraction_closed_from_simple_AQUAL": 0.75,
+    "minimum_all5_gap_fraction_closed_from_fixed_RAR": 0.75,
     "solar_limb_fractional_force_change_max": 2.3e-5,
     "Earth_fractional_force_change_max": 1e-10,
     "Saturn_fractional_force_change_max": 2.3e-5,
     "no_per_object_gravity_parameters": true,
     "one_new_universal_parameter": true
   },
-  "selection_rule": "Among only p_infinity=4 and n=2 rows that pass the galaxy and Solar gates, select the chi_t with the lowest all-five-cluster log RMS; ties within 1e-6 dex choose the larger chi_t. Advance it to a frozen 3D field/topology implementation only if every advancement gate passes. Diagnostic endpoints cannot advance even if they score better.",
+  "selection_rule": "Among only p_infinity=4 and n=2 rows that pass the galaxy and Solar gates, select the chi_t with the lowest all-five-cluster log RMS; ties within 1e-6 dex choose the larger chi_t. Advance it to a frozen 3D QUMOND field/topology implementation only if every advancement gate passes. Diagnostic endpoints cannot advance even if they score better.",
   "outputs": {
-    "directory": "results/p0683_potential_channel_aqual_reconnaissance",
+    "directory": "results/p0683_potential_channel_qumond_reconnaissance",
     "scores": "formula_scores.csv",
     "galaxy_predictions": "selected_spent_galaxy_predictions.csv",
     "cluster_predictions": "selected_spent_cluster_predictions.csv",
     "solar": "selected_solar_proxies.csv",
-    "figure": "potential_channel_aqual_response.png"
+    "figure": "potential_channel_qumond_response.png"
   },
   "claim_boundary": [
-    "P0683 is an algebraic/spherical reconnaissance of a proposed field coefficient, not a solved disk or cluster field equation.",
+    "P0683 is an algebraic/spherical reconnaissance of a proposed QUMOND source boost, not a solved disk or cluster field equation.",
     "The potential coordinate is baryon-derived but a future relativistic theory must replace or justify its Newtonian zero-at-infinity definition covariantly.",
     "The four-channel interpretation is dimensional motivation, not a microscopic derivation.",
     "The photon response is assumed equal to the matter response only for this spent deflection screen; no metric action or PPN prediction exists yet.",
