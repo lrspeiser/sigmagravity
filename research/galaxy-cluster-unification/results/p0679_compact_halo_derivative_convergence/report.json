@@ -1,0 +1,60 @@
+{
+  "report_version": "P0679-COMPACT-HALO-DERIVATIVE-CONVERGENCE-RESULTS-1.0.0",
+  "status": "fail",
+  "all_integrity_gates_pass": false,
+  "P0678_decomposition_numerically_qualified": false,
+  "protocol_sha256": "88688cb644fe0c34ac148ed34dfa8c2ca748d4d4eabfd578b45f1188bea8d5c9",
+  "source_sha256": "3f29fae3bb8b58291e48dae5eb32cf2ed910bd82b8e4ec62eccd755b3ea88053",
+  "parameter_table_sha256": "f69431208a468fcf04bc086d836eb9d60f8bcf4c2651588a45c6068e103f0625",
+  "parameter_rows": 8,
+  "metrics": {
+    "P0678_coarse_normalized_curl_RMS": 0.012543513280172393,
+    "nested_grid_normalized_curl_RMS": {
+      "33": 0.012543513280172393,
+      "65": 0.003785207206744676,
+      "129": 0.0009973991236561072,
+      "257": 0.00025259903812377
+    },
+    "grid_257_curl_improvement_factor_vs_33": 49.65780302784149,
+    "direct_step_normalized_curl_RMS": {
+      "0.5": 0.00025983630576738797,
+      "0.2": 4.1681111532622455e-05,
+      "0.1": 1.0424126610154314e-05,
+      "0.05": 2.606272358662589e-06,
+      "0.02": 4.1701436550792405e-07,
+      "0.01": 1.0425397829125642e-07
+    },
+    "direct_steps_below_original_P0678_threshold": 3,
+    "smallest_two_step_kappa_relative_RMS_difference": 4.832747477261228e-07,
+    "smallest_two_step_jacobian_determinant_relative_RMS_difference": 7.204090943188514e-07,
+    "direct_smallest_step_critical_points_negative_determinant": 6
+  },
+  "gate_results": {
+    "P0678_failed": true,
+    "P0678_exact_failure": true,
+    "grid_count": true,
+    "grid_cells": true,
+    "step_count": true,
+    "steps_decrease": true,
+    "grid_curl_decreases": true,
+    "grid_improvement": true,
+    "direct_smallest_curl": true,
+    "direct_threshold_count": false,
+    "kappa_step_stability": true,
+    "determinant_step_stability": true,
+    "finite": true,
+    "no_candidate_fit": true,
+    "no_raw_root_score": true,
+    "sealed_targets_untouched": true
+  },
+  "new_candidate_formula_fit": false,
+  "new_raw_image_root_score_computed": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0679 audits a known analytic comparator and cannot validate any new gravity law.",
+    "Passing direct derivatives would qualify the P0678 decomposition numerically but would not make the compact halo a unique physical target.",
+    "Critical sign cells remain coarse diagnostics and no image roots are recomputed.",
+    "P0633 and P0640 sealed outcomes remain untouched."
+  ]
+}
