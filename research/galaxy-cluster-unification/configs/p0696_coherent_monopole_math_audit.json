@@ -1,0 +1,83 @@
+{
+  "protocol_version": "P0696-COHERENT-MONOPOLE-MATH-AUDIT-1.0.0",
+  "status": "frozen_before_any_P0696_synthetic_coherent_or_hybrid_metric",
+  "frozen_utc": "2026-08-02T04:57:16Z",
+  "purpose": "Audit a parameter-free coherent-monopole completion that boosts only the shell-shared Newtonian radial field, retains measured Newtonian multipoles, and adds the projected routing correction with zero boundary difference.",
+  "failure_parent": "results/p0695b_cubic_radial_path_potential_math_audit/report.json",
+  "equation": {
+    "center": "x_c=integral rho_b x dV / integral rho_b dV",
+    "shell_coordinate": "n=round(|x-x_c|/h) on the native Cartesian grid",
+    "coherent_newtonian_acceleration": "g_N0(r_n)=mean_shell[-g_N dot r_hat]",
+    "coherent_mond_acceleration": "g_M0(r_n)=simple_MOND(g_N0(r_n),a0)",
+    "monopole_completion": "DeltaPhi_0(r)=integral_0^r [g_M0(s)-g_N0(s)] ds",
+    "coherent_potential": "Phi_coh(x)=Phi_N(x)+DeltaPhi_0(|x-x_c|)",
+    "physical_interpretation": "the shell-shared monopole is coherently enhanced; measured Newtonian multipoles are retained without the enhancement",
+    "projected_fraction": "e_2D=1-lambda_min(C_xy)/lambda_max(C_xy)",
+    "hybrid_potential": "Phi_joint=Phi_coh+e_2D(Phi_route-Phi_local)",
+    "spherical_limit": "Phi_coh has radial acceleration g_M0 up to native-grid shell discretization",
+    "high_acceleration_limit": "g_M0-g_N0 tends to zero, so Phi_coh tends to Phi_N with its multipoles",
+    "new_universal_constants": 0,
+    "fitted_physical_parameters": 0
+  },
+  "numerics": {
+    "grid_cells": 33,
+    "spacing": 0.4,
+    "density": "normalized Plummer-like rho proportional to (1+r^2/b^2)^(-5/2)",
+    "sphere_scale": 1.2,
+    "ellipsoid_scales": [1.7, 1.1, 0.7],
+    "gravitational_constant": 1.0,
+    "a0": 0.03,
+    "high_acceleration_a0": 1e-8,
+    "light_speed": 1000.0,
+    "transition_depth": 0.0001,
+    "transition_power": 4.0,
+    "extra_spatial_channels": 2.0,
+    "path_power": 0.5,
+    "shell_definition": "nearest integer native-grid radius; no smoothing width or fitted bin scale",
+    "comparison_radius_grid_cells": [4.0, 12.0],
+    "rotation_test": "swap x and y axes of the ellipsoid and compare correspondingly transposed fields"
+  },
+  "predeclared_integrity_gates": {
+    "P0695B_status": "fail",
+    "P0695B_candidate_advanced_to_spent_joint_screen": false,
+    "P0695B_failed_gates": ["sphere_tangential", "sphere_angular_scatter"],
+    "galaxy_or_cluster_outcomes_read": false,
+    "new_universal_constants": 0,
+    "fitted_physical_parameters": 0,
+    "sealed_target_outcomes_opened": false
+  },
+  "predeclared_math_gates": {
+    "all_potentials_accelerations_sources_finite": true,
+    "sphere_shell_mean_radial_acceleration_relative_RMS_max": 0.03,
+    "sphere_shell_mean_radial_acceleration_median_absolute_relative_error_max": 0.02,
+    "added_monopole_correction_tangential_to_radial_RMS_max": 0.03,
+    "added_monopole_correction_maximum_angular_scatter_fraction_max": 0.05,
+    "normalized_acceleration_curl_RMS_max": 1e-10,
+    "rotation_covariance_potential_relative_RMS_max": 1e-10,
+    "rotation_covariance_acceleration_relative_RMS_max": 1e-10,
+    "coherent_potential_identity_relative_RMS_max": 1e-14,
+    "high_acceleration_correction_to_newtonian_RMS_max": 0.0001,
+    "hybrid_potential_identity_relative_RMS_max": 1e-14,
+    "routing_correction_boundary_relative_mismatch_max": 1e-14,
+    "projected_fraction_min": 0.0,
+    "projected_fraction_max": 1.0,
+    "new_universal_constants": 0,
+    "fitted_physical_parameters": 0,
+    "no_observational_score": true,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Advance the exact coherent-monopole operator to a separately frozen spent joint screen only if every spherical-limit, correction-isotropy, curl, rotation, identity, high-acceleration, boundary, finite, accounting, no-observation, and sealed-target gate passes. No shell smoothing, scale, exponent, multiplier, or fitted physical quantity may be added after this audit.",
+  "outputs": {
+    "directory": "results/p0696_coherent_monopole_math_audit",
+    "report": "report.json",
+    "radial_table": "coherent_monopole_radial_audit.csv",
+    "figure": "coherent_monopole_math_audit.png",
+    "synthetic_fields": "coherent_monopole_synthetic_fields.npz"
+  },
+  "claim_boundary": [
+    "P0696 is a numerical and mathematical audit, not an observational test.",
+    "Shell averaging about one global baryonic centroid is nonlocal and not yet derived from a covariant action or causal evolution equation.",
+    "Retaining Newtonian multipoles while boosting only the monopole is a new phenomenological hypothesis.",
+    "P0633 and P0640 remain sealed."
+  ]
+}
