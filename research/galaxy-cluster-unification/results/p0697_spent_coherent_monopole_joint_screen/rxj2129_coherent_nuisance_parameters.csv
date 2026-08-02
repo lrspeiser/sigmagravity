@@ -1,0 +1,5 @@
+model,parameter,value,lower,upper
+coherent_monopole_projected_routing_P0697,map_center_x_arcsec,-2.9151964899712364,-3.0,3.0
+coherent_monopole_projected_routing_P0697,map_center_y_arcsec,2.8466859608291166,-3.0,3.0
+coherent_monopole_projected_routing_P0697,external_shear_gamma1_at_reference_source,-0.24999999999993988,-0.25,0.25
+coherent_monopole_projected_routing_P0697,external_shear_gamma2_at_reference_source,-0.24999999999984454,-0.25,0.25

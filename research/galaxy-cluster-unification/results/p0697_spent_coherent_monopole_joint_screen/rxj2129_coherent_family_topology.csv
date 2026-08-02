@@ -1,0 +1,8 @@
+system_label,variant_id,source_family,source_redshift,observed_images,global_roots,surplus_roots,missing_roots,unassigned_roots,potentially_observable_surplus_roots,faintest_assigned_abs_magnification,observable_surplus_abs_magnification_threshold,all_observed_images_assigned,assignment_RMS_arcsec,assignment_max_arcsec,multiplicity_classification,parity_diverse,critical_sign_change_cells,critical_curve_present
+RXJ2129,coherent_monopole_projected_routing_P0697,1,0.6786,3,1,0,2,0,0,24.92150871387995,6.230377178469987,False,,1.7988783292823862,missing_multiplicity,False,0,False
+RXJ2129,coherent_monopole_projected_routing_P0697,2,0.916,3,1,0,2,0,0,4.577217963069553,1.1443044907673883,False,,3.998137039586514,missing_multiplicity,False,62,True
+RXJ2129,coherent_monopole_projected_routing_P0697,3,1.5194,4,3,0,1,0,0,5.431295996473093,1.3578239991182732,False,,3.079640629787068,missing_multiplicity,True,92,True
+RXJ2129,coherent_monopole_projected_routing_P0697,4,1.5202,3,3,0,0,0,0,3.8638408719105652,0.9659602179776413,True,9.579870983193688,16.449596811427064,exact_multiplicity,True,92,True
+RXJ2129,coherent_monopole_projected_routing_P0697,5,1.521,3,1,0,2,0,0,4.9662924976558385,1.2415731244139596,False,,7.201287120123084,missing_multiplicity,False,92,True
+RXJ2129,coherent_monopole_projected_routing_P0697,6,3.0815,3,3,0,0,0,0,2.4606131150396338,0.6151532787599084,True,5.813853200683733,7.247004277816048,exact_multiplicity,True,122,True
+RXJ2129,coherent_monopole_projected_routing_P0697,7,3.427,3,3,0,0,0,0,3.4430735757753825,0.8607683939438456,True,9.63993521931222,16.64155700538853,exact_multiplicity,True,130,True
