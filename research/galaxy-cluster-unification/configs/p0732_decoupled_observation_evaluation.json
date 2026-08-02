@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "sigma-p0732-decoupled-observation-evaluation/1",
+  "stage": "P0732",
+  "status": "frozen_before_P0732_implementation_acceptance",
+  "purpose": "Separate observation-space projection and scoring from an immutable completed 2D/3D field solve, so changed observational data or nuisance declarations do not trigger or alter the gravity solve.",
+  "parent": {
+    "commit": "b951c723dc825712bedf8b82b2b3979d38b20c3b",
+    "fieldContract": "sigma-field-job-submit/1",
+    "observationContract": "sigma-observation-target/1",
+    "realDataParity": "results/p0731_real_velocity_field_adapter_parity/report.json"
+  },
+  "submissionContract": {
+    "schemaVersion": "sigma-observation-evaluation-job-submit/1",
+    "required": [
+      "fieldJobId",
+      "dataUploadId",
+      "observationTargets"
+    ],
+    "fieldRequirements": [
+      "completed field job state is succeeded",
+      "scientific result says converged",
+      "model, field job, scientific result, observable archive, and artifact hashes validate",
+      "every requested observation target names an observable present in the immutable archive"
+    ],
+    "observationRequirements": [
+      "observation bundle and archive hashes validate",
+      "target array keys, shapes, ranks, and units pass the existing public observation-target contract",
+      "target provenance and license remain explicit"
+    ]
+  },
+  "acceptanceFixtures": [
+    {
+      "id": "cartesian_2d_circular_curve",
+      "dimensions": 2,
+      "kind": "circular_speed_curve"
+    },
+    {
+      "id": "cartesian_3d_resolved_velocity_map",
+      "dimensions": 3,
+      "kind": "line_of_sight_velocity_field"
+    }
+  ],
+  "engineeringGates": {
+    "requiredDimensions": [2, 3],
+    "requiredTargetKinds": [
+      "circular_speed_curve",
+      "line_of_sight_velocity_field"
+    ],
+    "standaloneObservationScoreArtifactMustByteMatchIntegratedFieldJob": true,
+    "standalonePredictionArtifactMustByteMatchIntegratedFieldJob": true,
+    "sourceFieldSolverInvocationsDuringObservationJob": 0,
+    "sameFieldObservationAndWorkerHashesReturnSameJobId": true,
+    "changedObservationBundleOrTargetReturnsDifferentJobId": true,
+    "artifactDownloadsMustRehash": true,
+    "restartRecoveryMustNotReevaluateCompletedJobs": true,
+    "queuedAndRunningJobsMustBeCancellable": true,
+    "maximumPerObjectGravityParametersAddedByEvaluation": 0
+  },
+  "claimBoundary": [
+    "An observation-evaluation job tests only the declared mapping from an already solved field into an observation; it cannot validate the field equation by itself.",
+    "Changing a mask, beam, uncertainty, or target creates a new evaluation identity but leaves the source field identity unchanged.",
+    "Massive-tracer and photon mappings remain separately typed; P0732 does not add photon lensing.",
+    "The local reference queue is not the public durable worker infrastructure."
+  ]
+}
