@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "sigma-p0733-composed-batch-observation-jobs/1",
+  "stage": "P0733",
+  "status": "frozen_before_P0733_implementation_acceptance",
+  "purpose": "Make each multi-system batch compose an observation-independent field child with zero or one separately content-addressed observation-evaluation child, so changed masks, beams, uncertainties, or measured arrays reuse the same gravity solution.",
+  "parent": {
+    "commit": "613170ad35bf4aa0a64ac1275d590eee9e60aea7",
+    "batchContract": "sigma-batch-submit/1",
+    "fieldContract": "sigma-field-job-submit/1",
+    "observationEvaluationContract": "sigma-observation-evaluation-job-submit/1",
+    "decoupledEvaluationEvidence": "results/p0732_decoupled_observation_evaluation/report.json"
+  },
+  "compositionContract": {
+    "fieldPhase": [
+      "one field child is created or reused for every batch system",
+      "field child identity contains the frozen model, source bundle, solver controls, requested field observables, and worker hash",
+      "field child request contains no observation targets or measured observation arrays"
+    ],
+    "observationPhase": [
+      "a succeeded field child with declared observation targets creates or reuses one observation-evaluation child",
+      "a system without observation targets creates no observation child",
+      "a failed, cancelled, or nonconverged field child creates no observation child",
+      "the observation child independently binds the source field identity, target declarations, observation bundle, and evaluation worker hash"
+    ],
+    "reporting": [
+      "child_jobs.json and per_galaxy.csv retain both field and observation child identifiers",
+      "field and observation scientific hashes remain separate",
+      "aggregate scores come only from successful observation children",
+      "field failures and observation failures are classified separately",
+      "the deterministic manifest records both worker source hashes and the composed execution scope"
+    ]
+  },
+  "acceptanceFixtures": [
+    {
+      "id": "cartesian_2d_circular_curve",
+      "dimensions": 2,
+      "kind": "circular_speed_curve"
+    },
+    {
+      "id": "cartesian_3d_resolved_velocity_map",
+      "dimensions": 3,
+      "kind": "line_of_sight_velocity_field"
+    },
+    {
+      "id": "field_only_system",
+      "dimensions": 3,
+      "kind": "none"
+    }
+  ],
+  "engineeringGates": {
+    "fieldChildObservationTargetCount": 0,
+    "maximumObservationChildrenPerSystem": 1,
+    "changedObservationDataOrTargetMustPreserveFieldJobId": true,
+    "changedObservationDataOrTargetMustChangeObservationJobId": true,
+    "identicalSubmissionsMustReuseFieldAndObservationJobIds": true,
+    "composedScoresAndPredictionsMustByteMatchStandaloneEvaluation": true,
+    "fieldOnlySystemsMustCreateZeroObservationJobs": true,
+    "failedFieldSystemsMustCreateZeroObservationJobs": true,
+    "aggregateMustExcludeFailedObservationChildren": true,
+    "cancellationMustReachBothChildTypes": true,
+    "restartRecoveryMustResumeTheCorrectCompositionPhase": true,
+    "artifactDownloadsMustRehash": true,
+    "maximumPerObjectGravityParameters": 0,
+    "maximumGravityParametersAddedByObservationEvaluation": 0
+  },
+  "claimBoundary": [
+    "P0733 changes orchestration and provenance, not a gravity equation or an observation mapping.",
+    "A shared field identity demonstrates reuse only when model, source mass distribution, grid, boundaries, solver controls, and requested field observables are unchanged.",
+    "Massive-tracer and photon mappings remain separately typed; P0733 does not add photon lensing.",
+    "The local reference queue remains single-user and filesystem-backed; durable public execution is a later infrastructure milestone."
+  ]
+}
