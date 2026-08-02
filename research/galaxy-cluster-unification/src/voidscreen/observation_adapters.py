@@ -588,6 +588,11 @@ def evaluate_line_of_sight_velocity_field_target(
         sampled[plane_axes[0]].reshape(major.shape) * radial_x
         + sampled[plane_axes[1]].reshape(major.shape) * radial_y
     )
+    nonpositive_policy = str(target.get("nonPositiveInwardPolicy", "exclude"))
+    if nonpositive_policy not in {"exclude", "zero_speed"}:
+        raise ValueError(
+            "nonPositiveInwardPolicy must be exclude or zero_speed"
+        )
     circular_speed = np.sqrt(np.maximum(radius * inward, 0.0))
     predicted = (
         float(handedness)
@@ -595,18 +600,27 @@ def evaluate_line_of_sight_velocity_field_target(
         * circular_speed
         * radial_x
     )
-    support = (
-        np.isfinite(major)
-        & np.isfinite(minor)
-        & np.isfinite(inward)
-        & (radius > 0.0)
-        & (inward > 0.0)
+    intrinsic_support = np.isfinite(major) & np.isfinite(minor) & np.isfinite(inward)
+    if nonpositive_policy == "exclude":
+        intrinsic_support &= (radius > 0.0) & (inward > 0.0)
+    emission_mask = _optional_target_array(
+        arrays,
+        target.get("emissionMaskArrayKey"),
+        "emissionMaskArrayKey",
+        major.shape,
     )
-    mask = _optional_target_array(
-        arrays, target.get("maskArrayKey"), "maskArrayKey", major.shape
+    if emission_mask is not None:
+        intrinsic_support &= np.isfinite(emission_mask) & (emission_mask > 0.0)
+    legacy_mask_key = target.get("maskArrayKey")
+    score_mask_key = target.get("scoreMaskArrayKey")
+    if legacy_mask_key is not None and score_mask_key is not None:
+        raise ValueError("use either maskArrayKey or scoreMaskArrayKey, not both")
+    score_mask = _optional_target_array(
+        arrays,
+        score_mask_key if score_mask_key is not None else legacy_mask_key,
+        "scoreMaskArrayKey" if score_mask_key is not None else "maskArrayKey",
+        major.shape,
     )
-    if mask is not None:
-        support &= np.isfinite(mask) & (mask > 0.0)
     beam_kernel_key = target.get("beamKernelArrayKey")
     beam_diagnostics: dict[str, Any] | None = None
     if beam_kernel_key is not None:
@@ -622,26 +636,32 @@ def evaluate_line_of_sight_velocity_field_target(
         if np.any(~np.isfinite(kernel)) or np.any(kernel < 0.0) or float(kernel.sum()) <= 0:
             raise ValueError("beam kernel must be finite, non-negative, and non-zero")
         kernel = kernel / float(kernel.sum())
-        beam_support = support & np.isfinite(intensity) & (intensity > 0.0)
+        beam_support = intrinsic_support & np.isfinite(intensity) & (intensity > 0.0)
         numerator = fftconvolve(
             np.where(beam_support, predicted * intensity, 0.0), kernel, mode="same"
         )
         denominator = fftconvolve(
             np.where(beam_support, intensity, 0.0), kernel, mode="same"
         )
+        prediction_support = denominator > np.finfo(float).tiny
         predicted = np.divide(
             numerator,
             denominator,
             out=np.full_like(numerator, np.nan),
-            where=denominator > np.finfo(float).tiny,
+            where=prediction_support,
         )
-        support = beam_support & np.isfinite(predicted)
+        prediction_support &= np.isfinite(predicted)
         beam_diagnostics = {
             "kernelArrayKey": beam_kernel_key,
             "kernelShape": list(kernel.shape),
             "normalizedKernelSum": float(kernel.sum()),
             "intensityArrayKey": target.get("intensityWeightArrayKey"),
         }
+    else:
+        prediction_support = intrinsic_support & np.isfinite(predicted)
+    support = prediction_support.copy()
+    if score_mask is not None:
+        support &= np.isfinite(score_mask) & (score_mask > 0.0)
     minimum_valid = target.get("minimumValidPixels", 25)
     if (
         isinstance(minimum_valid, bool)
@@ -702,6 +722,7 @@ def evaluate_line_of_sight_velocity_field_target(
             "planeAxes": list(plane_axes),
             "inclinationDeg": inclination_deg,
             "handedness": int(handedness),
+            "nonPositiveInwardPolicy": nonpositive_policy,
             "mapShape": list(major.shape),
             "minimumValidPixels": minimum_valid,
             "beamConvolution": beam_diagnostics,
@@ -714,6 +735,8 @@ def evaluate_line_of_sight_velocity_field_target(
                     "uncertaintyArrayKey",
                     "intensityWeightArrayKey",
                     "maskArrayKey",
+                    "scoreMaskArrayKey",
+                    "emissionMaskArrayKey",
                     "beamKernelArrayKey",
                 )
                 if target.get(key) is not None
@@ -790,7 +813,7 @@ def evaluate_observation_targets(
             "claimBoundary": [
                 "Observation targets are evaluated after the field solve and cannot modify the submitted equations.",
                 "Circular-speed and line-of-sight velocity-field adapters are massive-tracer mappings, not photon-lensing predictions.",
-                "Velocity-field projection uses explicitly declared geometry, handedness, masks, uncertainties, intensity weights, and beam kernels.",
+                "Velocity-field projection uses explicitly declared geometry, handedness, emission support, post-convolution score masks, uncertainties, intensity weights, and beam kernels.",
             ],
         },
         rows,

@@ -113,9 +113,14 @@ export function validateObservationTargets({ targets = [], model, inputBundle, r
         throw new Error("inclinationDeg must lie strictly between 0 and 90 degrees");
       }
       if (![1, -1].includes(target.handedness)) throw new Error("handedness must be -1 or 1");
+      const nonpositivePolicy = target.nonPositiveInwardPolicy ?? "exclude";
+      if (!["exclude", "zero_speed"].includes(nonpositivePolicy)) throw new Error("nonPositiveInwardPolicy must be exclude or zero_speed");
       const major = observationArray(inputBundle, target.majorCoordinateArrayKey, "majorCoordinateArrayKey", { unit: "m" });
       observationArray(inputBundle, target.minorCoordinateArrayKey, "minorCoordinateArrayKey", { unit: "m", shape: major.shape });
+      if (target.maskArrayKey !== undefined && target.scoreMaskArrayKey !== undefined) throw new Error("use either maskArrayKey or scoreMaskArrayKey, not both");
       if (target.maskArrayKey !== undefined) observationArray(inputBundle, target.maskArrayKey, "maskArrayKey", { unit: "1", shape: major.shape });
+      if (target.scoreMaskArrayKey !== undefined) observationArray(inputBundle, target.scoreMaskArrayKey, "scoreMaskArrayKey", { unit: "1", shape: major.shape });
+      if (target.emissionMaskArrayKey !== undefined) observationArray(inputBundle, target.emissionMaskArrayKey, "emissionMaskArrayKey", { unit: "1", shape: major.shape });
       const hasObserved = target.observedVelocityArrayKey !== undefined;
       const hasUncertainty = target.uncertaintyArrayKey !== undefined;
       if (hasObserved !== hasUncertainty) throw new Error("resolved velocity scoring requires both observedVelocityArrayKey and uncertaintyArrayKey");
@@ -126,7 +131,7 @@ export function validateObservationTargets({ targets = [], model, inputBundle, r
       const weighting = target.weighting ?? "inverse_variance";
       if (!["inverse_variance", "intensity_inverse_variance"].includes(weighting)) throw new Error("unsupported velocity-field weighting");
       const requiresIntensity = weighting === "intensity_inverse_variance" || target.beamKernelArrayKey !== undefined;
-      if (requiresIntensity) observationArray(inputBundle, target.intensityWeightArrayKey, "intensityWeightArrayKey", { unit: "1", shape: major.shape });
+      if (requiresIntensity) observationArray(inputBundle, target.intensityWeightArrayKey, "intensityWeightArrayKey", { shape: major.shape });
       if (target.beamKernelArrayKey !== undefined) {
         const kernel = observationArray(inputBundle, target.beamKernelArrayKey, "beamKernelArrayKey", { unit: "1" });
         if (kernel.shape.some((value) => value % 2 === 0)) throw new Error("beam kernel dimensions must be odd");

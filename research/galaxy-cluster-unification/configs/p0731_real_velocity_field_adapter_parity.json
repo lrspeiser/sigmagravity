@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "sigma-p0731-real-velocity-field-adapter-parity/1",
+  "stage": "P0731",
+  "status": "frozen_before_P0731_adapter_scores",
+  "purpose": "Commission the formula-neutral resolved velocity-field adapter on all thirteen real LITTLE THINGS moment maps and independently reproduce the frozen P0712 projection, beam, mask, and scoring operations.",
+  "sampleStatus": "previously_unsealed_and_project_spent",
+  "parents": {
+    "fieldResults": "results/p0723_formula_neutral_api_comparators/report.json",
+    "fieldJobStore": "tmp/p0723-http-2",
+    "frozenVelocityPipeline": "scripts/run_p0712_external_galaxy_velocity_field_validation.py",
+    "frozenVelocityResults": "results/p0712_external_galaxy_velocity_field_validation/report.json",
+    "unlockManifest": "results/p0633_external_validation/unlock_manifest.json",
+    "photometricMetadata": "results/p0637_little_things_photometric_metadata/photometric_inputs.csv",
+    "registeredMapAudit": "results/p0639_registered_baryonic_maps/map_audit.csv",
+    "momentDirectory": "data/raw/p0633_little_things_kinematics",
+    "baryonDirectory": "data/raw/p0633_little_things_baryons"
+  },
+  "systems": [
+    "CVnIdwA", "DDO47", "DDO50", "DDO52", "DDO53", "DDO87", "DDO101",
+    "DDO126", "DDO133", "DDO210", "DDO216", "NGC1569", "UGC8508"
+  ],
+  "models": [
+    {
+      "id": "newtonian_poisson",
+      "fieldModelName": "Newtonian Poisson gravity",
+      "modelSha256": "43738f2c7bb3c4e94193763cf46f39b2a47fa852b25d1c063fef00fa7e1aa661",
+      "p0712Comparator": "Newtonian_3D"
+    },
+    {
+      "id": "aqual_simple_mu",
+      "fieldModelName": "AQUAL simple interpolation fixture",
+      "modelSha256": "37fe7ed1b60b8b3d05dbdf7a0b61c1ffdd3dfa22cdcd2e661e9e58e7c8e5a054",
+      "p0712Comparator": "AQUAL_simple_mu_3D"
+    },
+    {
+      "id": "qumond_simple_nu",
+      "fieldModelName": "QUMOND simple interpolation fixture",
+      "modelSha256": "68dee7e94c66fea1ee4c8a66e27dbf1636ca0a7fa4bd62d49c19ec2f00971332",
+      "p0712Comparator": "QUMOND_simple_nu_3D"
+    },
+    {
+      "id": "refracted_gravity_published_fixture",
+      "fieldModelName": "Refracted Gravity smooth permittivity",
+      "modelSha256": "4a0c9be0ba6f430d4d073f0ee6bf1e98de437908de81d0ad533261fea5d14bef",
+      "p0712Comparator": null
+    }
+  ],
+  "observation": {
+    "minimumValidPixels": 100,
+    "weighting": "intensity_inverse_variance",
+    "nonPositiveInwardPolicy": "zero_speed",
+    "systemicVelocitySource": "frozen P0712 published metadata",
+    "handednessRule": "sign of intensity-and-dispersion-weighted observed major-axis covariance, shared by every model",
+    "scoreMask": "finite moment-0, moment-1, and moment-2; positive moment-0; nonnegative moment-2; inside registered HI r995",
+    "emissionSupport": "finite positive moment-0 and finite model prediction before beam convolution",
+    "uncertainty": "sqrt(moment2^2 + (channel_width/2.355)^2)",
+    "beam": "measured elliptical AIPS CLEAN beam represented by the exact normalized P0712 Gaussian kernel"
+  },
+  "engineeringGates": {
+    "requiredSystems": 13,
+    "requiredModels": 4,
+    "requiredEvaluations": 52,
+    "minimumValidPixelsPerEvaluation": 100,
+    "maximumAdapterToIndependentPredictionRmseMPerS": 0.000001,
+    "maximumAdapterToIndependentPredictionAbsoluteDifferenceMPerS": 0.00001,
+    "maximumAdapterToIndependentDeclaredWeightedRmseDifferenceMPerS": 0.000001,
+    "exactValidPixelSupport": true,
+    "maximumPerObjectGravityParameters": 0,
+    "allFieldArtifactHashesMustValidate": true,
+    "allObservationBundleHashesMustValidate": true
+  },
+  "reporting": {
+    "primaryRealDataMetric": "equal-galaxy declared intensity-and-inverse-variance weighted RMSE",
+    "oldP0712Scores": "report as a reconstruction/grid comparison only; do not use as an adapter parity gate",
+    "noModelRankingGate": true
+  },
+  "claimBoundary": [
+    "P0731 is an engineering parity and spent-sample real-data run, not a new blind validation.",
+    "The P0723 33x33x9 generated baryonic replicas and their immutable acceleration fields are reused without changing any gravity parameter.",
+    "The zero_speed nonpositive-inward policy is declared solely to reproduce the frozen P0712 circular-speed convention; exclude remains the public default.",
+    "A velocity-field score tests the declared circular-equilibrium massive-tracer mapping and cannot validate pressure support, asymmetric drift, warps, radial flows, or photon lensing.",
+    "No ranking or formula selection is permitted from the adapter-parity gate."
+  ]
+}

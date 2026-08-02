@@ -235,6 +235,116 @@ def test_velocity_field_applies_declared_beam_and_intensity_weighting() -> None:
     assert target["score"]["weighting"] == "intensity_inverse_variance"
 
 
+def test_velocity_score_mask_is_applied_after_beam_convolution() -> None:
+    cells = 65
+    axis = np.linspace(-8.0, 8.0, cells)
+    x, y = np.meshgrid(axis, axis, indexing="ij")
+    observables = {
+        "acceleration__axis0": -x,
+        "acceleration__axis1": -y,
+    }
+    map_axis = np.linspace(-2.0, 2.0, 17)
+    major, minor = np.meshgrid(map_axis, map_axis, indexing="ij")
+    kernel_axis = np.arange(-3, 4)
+    kernel_x, kernel_y = np.meshgrid(kernel_axis, kernel_axis, indexing="ij")
+    score_mask = np.zeros_like(major)
+    score_mask[4:13, 4:13] = 1.0
+    arrays = {
+        "major": major,
+        "minor": minor,
+        "intensity": np.where(major > 0.5, 8.0, 1.0),
+        "beam": np.exp(-0.5 * (kernel_x**2 + kernel_y**2)),
+        "score_mask": score_mask,
+    }
+    geometry = {
+        "coordinateSystem": "cartesian_2d",
+        "dimensions": 2,
+        "spacing": [0.25, 0.25],
+        "origin": [-8.0, -8.0],
+    }
+    common = {
+        "schemaVersion": "sigma-observation-target/1",
+        "kind": "line_of_sight_velocity_field",
+        "observable": "acceleration",
+        "centerM": [0.0, 0.0],
+        "inclinationDeg": 45.0,
+        "handedness": 1,
+        "majorCoordinateArrayKey": "major",
+        "minorCoordinateArrayKey": "minor",
+        "intensityWeightArrayKey": "intensity",
+        "beamKernelArrayKey": "beam",
+        "minimumValidPixels": 50,
+        "provenance": {"kind": "post-convolution score-mask fixture"},
+        "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+    }
+    _full, full_rows = evaluate_observation_targets(
+        model(), observables, geometry, [{**common, "id": "full"}], arrays=arrays
+    )
+    _masked, masked_rows = evaluate_observation_targets(
+        model(),
+        observables,
+        geometry,
+        [{**common, "id": "masked", "scoreMaskArrayKey": "score_mask"}],
+        arrays=arrays,
+    )
+    full_predictions = {
+        (row["row_index"], row["column_index"]): row["predicted_velocity_m_s"]
+        for row in full_rows
+    }
+    assert len(masked_rows) == 9 * 9
+    for row in masked_rows:
+        key = (row["row_index"], row["column_index"])
+        assert row["predicted_velocity_m_s"] == pytest.approx(
+            full_predictions[key], abs=1e-12
+        )
+
+
+def test_velocity_nonpositive_inward_policy_is_explicit() -> None:
+    axis = np.linspace(-8.0, 8.0, 65)
+    x, y = np.meshgrid(axis, axis, indexing="ij")
+    observables = {
+        "acceleration__axis0": x,
+        "acceleration__axis1": y,
+    }
+    map_axis = np.linspace(-2.0, 2.0, 17)
+    major, minor = np.meshgrid(map_axis, map_axis, indexing="ij")
+    arrays = {"major": major, "minor": minor}
+    target = {
+        "schemaVersion": "sigma-observation-target/1",
+        "id": "nonpositive-inward",
+        "kind": "line_of_sight_velocity_field",
+        "observable": "acceleration",
+        "centerM": [0.0, 0.0],
+        "inclinationDeg": 45.0,
+        "handedness": 1,
+        "majorCoordinateArrayKey": "major",
+        "minorCoordinateArrayKey": "minor",
+        "minimumValidPixels": 200,
+        "provenance": {"kind": "nonpositive-inward fixture"},
+        "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+    }
+    geometry = {
+        "coordinateSystem": "cartesian_2d",
+        "dimensions": 2,
+        "spacing": [0.25, 0.25],
+        "origin": [-8.0, -8.0],
+    }
+    with pytest.raises(ValueError, match="too few valid"):
+        evaluate_observation_targets(
+            model(), observables, geometry, [target], arrays=arrays
+        )
+    evaluation, rows = evaluate_observation_targets(
+        model(),
+        observables,
+        geometry,
+        [{**target, "nonPositiveInwardPolicy": "zero_speed"}],
+        arrays=arrays,
+    )
+    assert evaluation["targets"][0]["nonPositiveInwardPolicy"] == "zero_speed"
+    assert len(rows) == 17 * 17
+    assert all(row["predicted_velocity_m_s"] == 0.0 for row in rows)
+
+
 def test_circular_speed_rejects_a_photon_observable() -> None:
     zeros = np.zeros((17, 17))
     target = {

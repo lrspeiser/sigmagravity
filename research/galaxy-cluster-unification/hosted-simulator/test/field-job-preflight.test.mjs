@@ -193,3 +193,48 @@ test("resolved velocity preflight rejects a unit-mismatched coordinate map", () 
   }];
   assert.throws(() => prepareFieldJob(request), /majorCoordinateArrayKey must reference a scalar m array/);
 });
+
+test("resolved velocity preflight separates emission and score masks", () => {
+  const request = payload();
+  const shape = request.inputBundle.arrays[0].shape;
+  for (const [key, unit] of [
+    ["major", "m"], ["minor", "m"], ["score_mask", "1"], ["emission_mask", "1"],
+  ]) {
+    request.inputBundle.arrays.push({
+      key,
+      npzKey: key,
+      unit,
+      rank: "scalar",
+      role: "auxiliary",
+      dtype: "<f8",
+      shape: shape.slice(0, 2),
+      elementCount: shape[0] * shape[1],
+      contentSha256: `${key.length}`.repeat(64).slice(0, 64),
+    });
+  }
+  const { bundleSha256: _oldHash, ...bundleCore } = request.inputBundle;
+  request.inputBundle = { ...bundleCore, bundleSha256: sha256(bundleCore) };
+  request.model.observables[0].target = "massive_tracers";
+  request.model.observables[0].unit = "m/s^2";
+  request.model.observables[0].rank = "vector";
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "separate-masks",
+    kind: "line_of_sight_velocity_field",
+    observable: request.model.observables[0].id,
+    centerM: [0, 0, 0],
+    inclinationDeg: 45,
+    handedness: 1,
+    majorCoordinateArrayKey: "major",
+    minorCoordinateArrayKey: "minor",
+    scoreMaskArrayKey: "score_mask",
+    emissionMaskArrayKey: "emission_mask",
+    minimumValidPixels: 25,
+    provenance: { kind: "test" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  const result = prepareFieldJob(request);
+  assert.equal(result.valid, true);
+  request.request.observationTargets[0].maskArrayKey = "score_mask";
+  assert.throws(() => prepareFieldJob(request), /either maskArrayKey or scoreMaskArrayKey/);
+});
