@@ -1,0 +1,5 @@
+stage,closure,lambda,pooled_CV_RMS_arcsec,CV_roots,CV_images,all_CV_roots,provenance
+stage2,lambda0_baseline,0.0,2.760255155353674,15,15,True,audited identical P0645 lambda-zero folds
+stage2,gas_minus_star_flux,5.0,2.6228742124657156,15,15,True,
+stage2,perpendicular_cw_flux,5.0,inf,14,15,False,
+stage2,isotropic_control,0.5,2.744998980060184,15,15,True,

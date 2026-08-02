@@ -64,6 +64,7 @@ def build_accumulated_transport_deflection_field(
     accumulation_power: float = 1.0,
     a0_m_s2: float = 1.2e-10,
     common_smoothing_kpc: float = 0.0,
+    closure: str = "path_tensor",
     taper_inner_arcsec: float = 180.0,
     support_radius_arcsec: float = 220.0,
 ) -> StellarMorphologyDeflectionField:
@@ -135,9 +136,44 @@ def build_accumulated_transport_deflection_field(
     radial_y = yy / safe_radius
     grad_x = carrier * radial_x
     grad_y = carrier * radial_y
-    projection = path.mean_direction_x * grad_x + path.mean_direction_y * grad_y
-    flux_x = activation * path.mean_direction_x * projection
-    flux_y = activation * path.mean_direction_y * projection
+    star_norm = np.maximum(star_field.magnitude_m_s2, np.finfo(float).tiny)
+    gas_norm = np.maximum(gas_field.magnitude_m_s2, np.finfo(float).tiny)
+    difference_x = gas_field.acceleration_x_m_s2 / gas_norm - star_field.acceleration_x_m_s2 / star_norm
+    difference_y = gas_field.acceleration_y_m_s2 / gas_norm - star_field.acceleration_y_m_s2 / star_norm
+    difference_norm = np.hypot(difference_x, difference_y)
+    valid_difference = difference_norm > 1e-12
+    difference_x = np.where(
+        valid_difference, difference_x / np.maximum(difference_norm, 1e-12), path.mean_direction_x
+    )
+    difference_y = np.where(
+        valid_difference, difference_y / np.maximum(difference_norm, 1e-12), path.mean_direction_y
+    )
+    perpendicular_x = -difference_y
+    perpendicular_y = difference_x
+
+    def rank_one(direction_x, direction_y):
+        projection = direction_x * grad_x + direction_y * grad_y
+        return activation * direction_x * projection, activation * direction_y * projection
+
+    closure_id = str(closure)
+    if closure_id == "path_tensor":
+        flux_x, flux_y = rank_one(path.mean_direction_x, path.mean_direction_y)
+    elif closure_id == "difference_tensor":
+        flux_x, flux_y = rank_one(difference_x, difference_y)
+    elif closure_id == "perpendicular_difference_tensor":
+        flux_x, flux_y = rank_one(perpendicular_x, perpendicular_y)
+    elif closure_id == "isotropic_control":
+        flux_x, flux_y = activation * grad_x, activation * grad_y
+    elif closure_id == "gas_minus_star_flux":
+        flux_x, flux_y = activation * carrier * difference_x, activation * carrier * difference_y
+    elif closure_id == "star_minus_gas_flux":
+        flux_x, flux_y = -activation * carrier * difference_x, -activation * carrier * difference_y
+    elif closure_id == "perpendicular_cw_flux":
+        flux_x, flux_y = activation * carrier * perpendicular_x, activation * carrier * perpendicular_y
+    elif closure_id == "perpendicular_ccw_flux":
+        flux_x, flux_y = -activation * carrier * perpendicular_x, -activation * carrier * perpendicular_y
+    else:
+        raise ValueError(f"unknown accumulated lens closure: {closure_id}")
     source = np.gradient(flux_x, spacing, axis=1, edge_order=2) + np.gradient(
         flux_y, spacing, axis=0, edge_order=2
     )
@@ -157,6 +193,7 @@ def build_accumulated_transport_deflection_field(
     active = radius_arcsec <= support_radius_arcsec
     audit = {
         "operator": "finite_path_accumulated_component_tensor",
+        "closure": closure_id,
         "coherence_length_kpc": float(coherence_length_kpc),
         "accumulation_power": float(accumulation_power),
         "stellar_mass_fraction": float(stellar_mass_fraction),

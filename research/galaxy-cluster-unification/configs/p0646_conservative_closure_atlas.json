@@ -1,0 +1,63 @@
+{
+  "protocol_version": "P0646-CONSERVATIVE-CLOSURE-ATLAS-1.0.0",
+  "status": "frozen_before_any_P0646_score",
+  "frozen_utc": "2026-08-02T02:55:00Z",
+  "purpose": "Hold the successful P0643 accumulation scalar fixed and test alternative conservative placements of its response on spent RX J2129 images.",
+  "fixed_activation": {
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "a0_m_s2": 1.2e-10,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "common_physical_smoothing_kpc": 25.0
+  },
+  "closures": [
+    {"id": "path_tensor", "kind": "positive_semidefinite_tensor", "definition": "A h_path h_path grad(psi_carrier)"},
+    {"id": "difference_tensor", "kind": "positive_semidefinite_tensor", "definition": "A d_gas-star d_gas-star grad(psi_carrier)"},
+    {"id": "perpendicular_difference_tensor", "kind": "positive_semidefinite_tensor", "definition": "A d_perp d_perp grad(psi_carrier)"},
+    {"id": "isotropic_control", "kind": "scalar_control", "definition": "A grad(psi_carrier)"},
+    {"id": "gas_minus_star_flux", "kind": "helmholtz_projected_flux", "definition": "A |grad psi_carrier| d_gas-star"},
+    {"id": "star_minus_gas_flux", "kind": "helmholtz_projected_flux", "definition": "-A |grad psi_carrier| d_gas-star"},
+    {"id": "perpendicular_cw_flux", "kind": "helmholtz_projected_flux", "definition": "A |grad psi_carrier| rotate90(d_gas-star)"},
+    {"id": "perpendicular_ccw_flux", "kind": "helmholtz_projected_flux", "definition": "-A |grad psi_carrier| rotate90(d_gas-star)"}
+  ],
+  "lambda_grid_nonzero": [0.5, 2.0, 5.0],
+  "cross_validation": {
+    "fold_definition": "reuse exact P0645 five source-family-stratified folds",
+    "stage1_refit_starts": 1,
+    "stage1_shortlist_rows": 2,
+    "stage2_refit_starts": 3,
+    "full_refit_starts": 8,
+    "selection_metric": "pooled exact CV RMS with complete roots",
+    "tie_break": "lower lambda then closure id",
+    "random_seed": 2129646,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "inputs": {
+    "P0644_protocol": "configs/p0644_spent_rxj2129_accumulated_tensor.json",
+    "P0645_protocol": "configs/p0645_fair_geometry_cv_accumulated_tensor.json",
+    "P0645_report": "results/p0645_fair_geometry_cv_accumulated_tensor/report.json"
+  },
+  "predeclared_progression_gates": {
+    "selected_stage2_all_CV_roots": true,
+    "selected_stage2_CV_improvement_fraction_vs_lambda0_min": 0.01,
+    "selected_beats_best_isotropic_control_fraction_min": 0.005,
+    "selected_lambda_not_stage1_upper_endpoint": true,
+    "full_training_roots": 15,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599_max": 0.10,
+    "selected_field_normalized_curl_RMS_max": 1e-10,
+    "selected_field_source_integral_fraction_max": 1e-4,
+    "sealed_target_outcomes_opened": false
+  },
+  "outputs": {
+    "directory": "results/p0646_conservative_closure_atlas"
+  },
+  "claim_boundary": [
+    "All scores use spent RX J2129 images and cannot validate a closure.",
+    "Stage 1 is a one-start screen; only stage-2 rows may advance.",
+    "Flux closures are made conservative by the final scalar Poisson/Helmholtz projection but are not positive-semidefinite local tensors.",
+    "The isotropic row is a matched activation control, not a generic lens multipole control.",
+    "Any survivor still needs resolution convergence, a generic-multipole comparator, and unchanged multi-cluster transfer before P0640."
+  ]
+}

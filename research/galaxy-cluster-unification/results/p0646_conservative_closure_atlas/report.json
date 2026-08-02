@@ -1,0 +1,513 @@
+{
+  "report_version": "P0646-CONSERVATIVE-CLOSURE-ATLAS-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "protocol_sha256": "f2c007ae6309088b0840f5556600d567f148e1c12d758e31effe7409b74bbe7d",
+  "source_sha256": "a01daadd333c672ee70d1f86b83ac32c86f91f6ae81a4750b77b476c9122b2e3",
+  "coverage": {
+    "closures": 8,
+    "stage1_nonzero_rows": 24,
+    "stage1_fold_refits": 125,
+    "stage2_rows_including_baseline": 4,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "field_audits": {
+    "path_tensor": {
+      "operator": "finite_path_accumulated_component_tensor",
+      "closure": "path_tensor",
+      "coherence_length_kpc": 10.0,
+      "accumulation_power": 1.0,
+      "stellar_mass_fraction": 0.1,
+      "gas_mass_fraction": 0.9,
+      "proxy_total_mass_msun": 100000000000000.0,
+      "common_smoothing_kpc": 25.0,
+      "proxy_mass_changes_deflection_normalization": false,
+      "activation_weighted_mean": 0.0024344162129744207,
+      "activation_maximum": 0.03490734623408106,
+      "cancellation_mean": 0.003594706024914429,
+      "survival_mean": 0.993761235780194,
+      "trace_length_median_kpc": 92.99394454051999,
+      "source_integral_fraction": 0.0,
+      "normalized_curl_RMS": 2.1538116338041944e-17,
+      "unit_deflection_RMS_arcsec": 0.06713973601237484,
+      "unit_deflection_maximum_arcsec": 0.33023784529305167,
+      "maximum_edge_correction_arcsec": 0.07317254299584193,
+      "carrier_deflection_median_arcsec": 21.25739757728231
+    },
+    "difference_tensor": {
+      "operator": "finite_path_accumulated_component_tensor",
+      "closure": "difference_tensor",
+      "coherence_length_kpc": 10.0,
+      "accumulation_power": 1.0,
+      "stellar_mass_fraction": 0.1,
+      "gas_mass_fraction": 0.9,
+      "proxy_total_mass_msun": 100000000000000.0,
+      "common_smoothing_kpc": 25.0,
+      "proxy_mass_changes_deflection_normalization": false,
+      "activation_weighted_mean": 0.0024344162129744207,
+      "activation_maximum": 0.03490734623408106,
+      "cancellation_mean": 0.003594706024914429,
+      "survival_mean": 0.993761235780194,
+      "trace_length_median_kpc": 92.99394454051999,
+      "source_integral_fraction": 2.932510015644263e-17,
+      "normalized_curl_RMS": 2.5907151671355797e-17,
+      "unit_deflection_RMS_arcsec": 0.029769347777801377,
+      "unit_deflection_maximum_arcsec": 0.25014755597877997,
+      "maximum_edge_correction_arcsec": 0.03915252605238046,
+      "carrier_deflection_median_arcsec": 21.25739757728231
+    },
+    "perpendicular_difference_tensor": {
+      "operator": "finite_path_accumulated_component_tensor",
+      "closure": "perpendicular_difference_tensor",
+      "coherence_length_kpc": 10.0,
+      "accumulation_power": 1.0,
+      "stellar_mass_fraction": 0.1,
+      "gas_mass_fraction": 0.9,
+      "proxy_total_mass_msun": 100000000000000.0,
+      "common_smoothing_kpc": 25.0,
+      "proxy_mass_changes_deflection_normalization": false,
+      "activation_weighted_mean": 0.0024344162129744207,
+      "activation_maximum": 0.03490734623408106,
+      "cancellation_mean": 0.003594706024914429,
+      "survival_mean": 0.993761235780194,
+      "trace_length_median_kpc": 92.99394454051999,
+      "source_integral_fraction": 0.0,
+      "normalized_curl_RMS": 1.9160741803721738e-17,
+      "unit_deflection_RMS_arcsec": 0.06170510971926195,
+      "unit_deflection_maximum_arcsec": 0.2817138989955654,
+      "maximum_edge_correction_arcsec": 0.05494139399610087,
+      "carrier_deflection_median_arcsec": 21.25739757728231
+    },
+    "isotropic_control": {
+      "operator": "finite_path_accumulated_component_tensor",
+      "closure": "isotropic_control",
+      "coherence_length_kpc": 10.0,
+      "accumulation_power": 1.0,
+      "stellar_mass_fraction": 0.1,
+      "gas_mass_fraction": 0.9,
+      "proxy_total_mass_msun": 100000000000000.0,
+      "common_smoothing_kpc": 25.0,
+      "proxy_mass_changes_deflection_normalization": false,
+      "activation_weighted_mean": 0.0024344162129744207,
+      "activation_maximum": 0.03490734623408106,
+      "cancellation_mean": 0.003594706024914429,
+      "survival_mean": 0.993761235780194,
+      "trace_length_median_kpc": 92.99394454051999,
+      "source_integral_fraction": 6.0165118572494476e-18,
+      "normalized_curl_RMS": 2.384876115042484e-17,
+      "unit_deflection_RMS_arcsec": 0.06737827823326017,
+      "unit_deflection_maximum_arcsec": 0.33310802135004636,
+      "maximum_edge_correction_arcsec": 0.07476347417819025,
+      "carrier_deflection_median_arcsec": 21.25739757728231
+    },
+    "gas_minus_star_flux": {
+      "operator": "finite_path_accumulated_component_tensor",
+      "closure": "gas_minus_star_flux",
+      "coherence_length_kpc": 10.0,
+      "accumulation_power": 1.0,
+      "stellar_mass_fraction": 0.1,
+      "gas_mass_fraction": 0.9,
+      "proxy_total_mass_msun": 100000000000000.0,
+      "common_smoothing_kpc": 25.0,
+      "proxy_mass_changes_deflection_normalization": false,
+      "activation_weighted_mean": 0.0024344162129744207,
+      "activation_maximum": 0.03490734623408106,
+      "cancellation_mean": 0.003594706024914429,
+      "survival_mean": 0.993761235780194,
+      "trace_length_median_kpc": 92.99394454051999,
+      "source_integral_fraction": 0.0,
+      "normalized_curl_RMS": 2.388570008168441e-17,
+      "unit_deflection_RMS_arcsec": 0.06828388190416103,
+      "unit_deflection_maximum_arcsec": 0.41825429781421486,
+      "maximum_edge_correction_arcsec": 0.10448564419341737,
+      "carrier_deflection_median_arcsec": 21.25739757728231
+    },
+    "star_minus_gas_flux": {
+      "operator": "finite_path_accumulated_component_tensor",
+      "closure": "star_minus_gas_flux",
+      "coherence_length_kpc": 10.0,
+      "accumulation_power": 1.0,
+      "stellar_mass_fraction": 0.1,
+      "gas_mass_fraction": 0.9,
+      "proxy_total_mass_msun": 100000000000000.0,
+      "common_smoothing_kpc": 25.0,
+      "proxy_mass_changes_deflection_normalization": false,
+      "activation_weighted_mean": 0.0024344162129744207,
+      "activation_maximum": 0.03490734623408106,
+      "cancellation_mean": 0.003594706024914429,
+      "survival_mean": 0.993761235780194,
+      "trace_length_median_kpc": 92.99394454051999,
+      "source_integral_fraction": 0.0,
+      "normalized_curl_RMS": 2.388570008168441e-17,
+      "unit_deflection_RMS_arcsec": 0.06828388190416103,
+      "unit_deflection_maximum_arcsec": 0.41825429781421486,
+      "maximum_edge_correction_arcsec": 0.10448564419341737,
+      "carrier_deflection_median_arcsec": 21.25739757728231
+    },
+    "perpendicular_cw_flux": {
+      "operator": "finite_path_accumulated_component_tensor",
+      "closure": "perpendicular_cw_flux",
+      "coherence_length_kpc": 10.0,
+      "accumulation_power": 1.0,
+      "stellar_mass_fraction": 0.1,
+      "gas_mass_fraction": 0.9,
+      "proxy_total_mass_msun": 100000000000000.0,
+      "common_smoothing_kpc": 25.0,
+      "proxy_mass_changes_deflection_normalization": false,
+      "activation_weighted_mean": 0.0024344162129744207,
+      "activation_maximum": 0.03490734623408106,
+      "cancellation_mean": 0.003594706024914429,
+      "survival_mean": 0.993761235780194,
+      "trace_length_median_kpc": 92.99394454051999,
+      "source_integral_fraction": 3.613640009601691e-17,
+      "normalized_curl_RMS": 2.769232314516777e-17,
+      "unit_deflection_RMS_arcsec": 0.05351093470255504,
+      "unit_deflection_maximum_arcsec": 0.27279222494861943,
+      "maximum_edge_correction_arcsec": 0.08894300643261935,
+      "carrier_deflection_median_arcsec": 21.25739757728231
+    },
+    "perpendicular_ccw_flux": {
+      "operator": "finite_path_accumulated_component_tensor",
+      "closure": "perpendicular_ccw_flux",
+      "coherence_length_kpc": 10.0,
+      "accumulation_power": 1.0,
+      "stellar_mass_fraction": 0.1,
+      "gas_mass_fraction": 0.9,
+      "proxy_total_mass_msun": 100000000000000.0,
+      "common_smoothing_kpc": 25.0,
+      "proxy_mass_changes_deflection_normalization": false,
+      "activation_weighted_mean": 0.0024344162129744207,
+      "activation_maximum": 0.03490734623408106,
+      "cancellation_mean": 0.003594706024914429,
+      "survival_mean": 0.993761235780194,
+      "trace_length_median_kpc": 92.99394454051999,
+      "source_integral_fraction": 3.613640009601691e-17,
+      "normalized_curl_RMS": 2.769232314516777e-17,
+      "unit_deflection_RMS_arcsec": 0.05351093470255504,
+      "unit_deflection_maximum_arcsec": 0.27279222494861943,
+      "maximum_edge_correction_arcsec": 0.08894300643261935,
+      "carrier_deflection_median_arcsec": 21.25739757728231
+    }
+  },
+  "stage1_scores": [
+    {
+      "stage": "stage1",
+      "closure": "lambda0_baseline",
+      "lambda": 0.0,
+      "pooled_CV_RMS_arcsec": 2.760211521517716,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "path_tensor",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": 2.6900617988319957,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "path_tensor",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false
+    },
+    {
+      "stage": "stage1",
+      "closure": "path_tensor",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": 2.983475751272552,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "difference_tensor",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": 2.76895579063325,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "difference_tensor",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false
+    },
+    {
+      "stage": "stage1",
+      "closure": "difference_tensor",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false
+    },
+    {
+      "stage": "stage1",
+      "closure": "perpendicular_difference_tensor",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": 2.740687161797296,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "perpendicular_difference_tensor",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": 2.8010125215695467,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "perpendicular_difference_tensor",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": 3.0081838857064214,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "isotropic_control",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": 2.720397185633992,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "isotropic_control",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false
+    },
+    {
+      "stage": "stage1",
+      "closure": "isotropic_control",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": 2.9664286303946326,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "gas_minus_star_flux",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": 2.7444723379213536,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "gas_minus_star_flux",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": 2.62960282934328,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "gas_minus_star_flux",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": 2.5051356058686736,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "star_minus_gas_flux",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": 2.7368257233996127,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "star_minus_gas_flux",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false
+    },
+    {
+      "stage": "stage1",
+      "closure": "star_minus_gas_flux",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false
+    },
+    {
+      "stage": "stage1",
+      "closure": "perpendicular_cw_flux",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": 2.7404265309613947,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "perpendicular_cw_flux",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": 2.7518760768073878,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "perpendicular_cw_flux",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": 2.6293767143962556,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "perpendicular_ccw_flux",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": 2.752624829539487,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "perpendicular_ccw_flux",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": 2.803523214456389,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "stage1",
+      "closure": "perpendicular_ccw_flux",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false
+    }
+  ],
+  "stage1_shortlist": [
+    {
+      "closure": "gas_minus_star_flux",
+      "lambda": 5.0
+    },
+    {
+      "closure": "perpendicular_cw_flux",
+      "lambda": 5.0
+    },
+    {
+      "closure": "isotropic_control",
+      "lambda": 0.5
+    }
+  ],
+  "stage2_scores": [
+    {
+      "stage": "stage2",
+      "closure": "lambda0_baseline",
+      "lambda": 0.0,
+      "pooled_CV_RMS_arcsec": 2.760255155353674,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "provenance": "audited identical P0645 lambda-zero folds"
+    },
+    {
+      "stage": "stage2",
+      "closure": "gas_minus_star_flux",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": 2.6228742124657156,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "provenance": NaN
+    },
+    {
+      "stage": "stage2",
+      "closure": "perpendicular_cw_flux",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false,
+      "provenance": NaN
+    },
+    {
+      "stage": "stage2",
+      "closure": "isotropic_control",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": 2.744998980060184,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "provenance": NaN
+    }
+  ],
+  "selection": {
+    "closure": "gas_minus_star_flux",
+    "lambda": 5.0,
+    "lambda0_CV_RMS_arcsec": 2.760255155353674,
+    "selected_CV_RMS_arcsec": 2.6228742124657156,
+    "improvement_fraction_vs_lambda0": 0.04977110272631857,
+    "best_isotropic_CV_RMS_arcsec": 2.744998980060184,
+    "improvement_fraction_vs_isotropic": 0.04448991365082067,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "full_refit": {
+    "training_RMS_arcsec": 0.4718914310061093,
+    "training_roots": 15,
+    "spent_heldout_RMS_arcsec": 1.8509703991428692,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599": 0.022412884755572016
+  },
+  "gate_results": {
+    "stage2_roots": true,
+    "CV_improvement": true,
+    "beats_isotropic": true,
+    "lambda_not_endpoint": false,
+    "full_training_roots": true,
+    "spent_heldout_roots": true,
+    "spent_heldout_not_worse": true,
+    "field_curl": true,
+    "field_source_integral": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "All scores use spent RX J2129 images and cannot validate a closure.",
+    "Stage 1 is a one-start screen; only stage-2 rows may advance.",
+    "Flux closures are made conservative by the final scalar Poisson/Helmholtz projection but are not positive-semidefinite local tensors.",
+    "The isotropic row is a matched activation control, not a generic lens multipole control.",
+    "Any survivor still needs resolution convergence, a generic-multipole comparator, and unchanged multi-cluster transfer before P0640."
+  ]
+}
