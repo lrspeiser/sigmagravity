@@ -1,0 +1,6 @@
+stage,closure,lambda,fold,fit_images,validation_images,fit_RMS_arcsec,fit_roots,validation_RMS_arcsec,validation_roots,optimizer_cost
+exact_zero_padded_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,0,12,3,0.39999439772676676,12,3.470605951184605,3,24.125653864309765
+exact_zero_padded_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,1,11,4,0.18540211036146817,11,inf,3,7.813338829781564
+exact_zero_padded_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,2,12,3,0.4004789879645504,12,1.3773344504795337,3,25.672576653225942
+exact_zero_padded_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,3,13,2,0.34083578631010136,13,1.1268209713701176,2,20.270839388515032
+exact_zero_padded_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,4,12,3,0.2423876255583693,12,1.8934721251824302,3,10.600935777618547
