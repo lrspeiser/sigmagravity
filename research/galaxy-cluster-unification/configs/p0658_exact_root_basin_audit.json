@@ -1,0 +1,53 @@
+{
+  "protocol_version": "P0658-EXACT-ROOT-BASIN-AUDIT-1.0.0",
+  "status": "frozen_before_any_P0658_audit",
+  "frozen_utc": "2026-08-02T01:34:00Z",
+  "purpose": "Distinguish numerical root-finder basin failures from genuinely absent local image roots for P0657 fold 1 without changing its fitted physics or acceptance tolerance.",
+  "fixed_target": {
+    "candidate": "P0657_field_line_diffusion",
+    "CV_fold": 1,
+    "expected_optimizer_cost": 5.692377432355883,
+    "expected_original_validation_roots": 2,
+    "expected_original_validation_images": 4,
+    "original_failed_images": ["1b", "6b"],
+    "root_acceptance_closure_arcsec_max": 1e-6,
+    "local_correspondence_radius_arcsec": 5.0
+  },
+  "search": {
+    "offset_radii_arcsec": [0.0, 0.05, 0.2, 1.0],
+    "nonzero_radius_angles": 8,
+    "starts_per_image": 25,
+    "algorithms": [
+      "scipy_root_hybr_with_lens_jacobian",
+      "scipy_root_lm_with_lens_jacobian",
+      "scipy_least_squares_trf_bounded_with_lens_jacobian",
+      "scipy_least_squares_dogbox_bounded_with_lens_jacobian"
+    ],
+    "solver_tolerance": 1e-10,
+    "maximum_function_evaluations": 2000,
+    "deduplication_radius_arcsec": 1e-4
+  },
+  "inputs": {
+    "P0644_protocol": "configs/p0644_spent_rxj2129_accumulated_tensor.json",
+    "P0645_protocol": "configs/p0645_fair_geometry_cv_accumulated_tensor.json",
+    "P0657_protocol": "configs/p0657_field_line_diffusion.json",
+    "P0657_report": "results/p0657_field_line_diffusion/report.json",
+    "P0657_fold_scores": "results/p0657_field_line_diffusion/fold_scores.csv"
+  },
+  "outputs": {
+    "directory": "results/p0658_exact_root_basin_audit"
+  },
+  "decision_rule": {
+    "numerical_solver_limitation_if": "either originally failed image has a finite solution within 5 arcsec and closure <= 1e-6 arcsec",
+    "local_topology_failure_if": "an originally failed image has no accepted root across all 100 preregistered attempts",
+    "next_if_numerical": "implement one universal robust solver and rescore every comparator; P0658 alone cannot advance P0657",
+    "next_if_topological": "retain P0657 failure and do not tune diffusion strength from this audit"
+  },
+  "claim_boundary": [
+    "P0657 parameters and profiled source positions are recomputed with its exact frozen fold, starts, and seed and must reproduce the stored optimizer cost.",
+    "No gravity parameter, source position, lens geometry, field amplitude, closure threshold, or physical formula is changed during the root search.",
+    "Accepted roots must lie within five arcseconds of the observed image so distant image branches cannot masquerade as recovery.",
+    "P0658 is diagnostic and cannot advance P0657 without a universal comparator rescore.",
+    "No sealed P0633 or P0640 outcome is opened."
+  ]
+}
