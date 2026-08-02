@@ -262,6 +262,12 @@ NGC1569 missed the relative-update gate, so deterministic reporting excludes
 the partial AQUAL row from ranks and leaves sensitivity incomplete. See
 `../docs/P0728_COMPLETE_FINE_GRID_AQUAL_RESULTS.md`.
 
+P0729 used the 80-step variant that had already qualified in P0727. It
+converged all four fine-grid fields, agreed with independent references, scored
+all 55 points, and restored a fair complete model comparison. The inherited
+resolution gates pass, with NGC1569 remaining close to the sensitivity limit.
+See `../docs/P0729_QUALIFIED_80STEP_FINE_GRID_AQUAL_RESULTS.md`.
+
 Run the chained 3D HTTP acceptance test while `npm run dev` is active:
 
 ```text

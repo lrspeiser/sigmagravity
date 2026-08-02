@@ -1530,6 +1530,15 @@ but NGC1569 missed the `1e-8` relative-update tolerance at `1.76e-8` despite a
 from ranking and stability classification. See
 [`docs/P0728_COMPLETE_FINE_GRID_AQUAL_RESULTS.md`](docs/P0728_COMPLETE_FINE_GRID_AQUAL_RESULTS.md).
 
+P0729 then applied the already-preregistered P0727 80-step hybrid universally.
+All four fine-grid fields converged and independently matched Picard
+references. AQUAL's complete equal-galaxy RMSE is `21.636 km/s`, ranking behind
+QUMOND (`16.502`) and the Refracted Gravity fixture (`18.982`) but ahead of
+Newtonian baryons (`24.420`). The reconstructed fine-grid stability gates pass,
+although NGC1569's `24.09%` prediction change is close to the scenario limit.
+See
+[`docs/P0729_QUALIFIED_80STEP_FINE_GRID_AQUAL_RESULTS.md`](docs/P0729_QUALIFIED_80STEP_FINE_GRID_AQUAL_RESULTS.md).
+
 ```powershell
 python scripts/run_p0723_formula_neutral_api_comparators.py `
   --base-url http://127.0.0.1:4173
@@ -1544,4 +1553,6 @@ python scripts/run_p0726_independent_nonlinear_crosscheck.py
 python scripts/run_p0727_hybrid_nonlinear_crosscheck.py
 
 python scripts/run_p0728_complete_fine_grid_aqual.py
+
+python scripts/run_p0729_qualified_80step_fine_grid_aqual.py
 ```

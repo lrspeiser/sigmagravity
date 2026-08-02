@@ -357,7 +357,11 @@ def main(
                 "reducedChiSquare": complete_aggregate["reducedChiSquare"],
                 "universalGravityParameters": 2,
                 "perObjectGravityParameters": 0,
-                "source": "P0728 selected universal hybrid",
+                "source": (
+                    "P0728 selected universal hybrid"
+                    if config["stage"] == "P0728"
+                    else f"{config['stage']} preregistered universal hybrid"
+                ),
             }
         )
     fine_summaries.sort(key=lambda row: float(row["equalGalaxyRmseKmS"]))

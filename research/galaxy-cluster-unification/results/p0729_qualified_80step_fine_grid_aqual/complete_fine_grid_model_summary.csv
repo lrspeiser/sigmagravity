@@ -1,0 +1,5 @@
+model,systems,scoredSystems,validObservationPoints,equalGalaxyRmseKmS,pointWeightedRmseKmS,reducedChiSquare,universalGravityParameters,perObjectGravityParameters,source,rank
+qumond_simple_nu,4,4,55,16.501957732720996,15.26917998117611,21.525001476063807,2,0,locked P0724 complete row,1
+refracted_gravity_published_fixture,4,4,55,18.98171792451412,17.92173942457273,27.46814493119393,4,0,locked P0724 complete row,2
+aqual_simple_mu,4,4,55,21.63620900763926,19.378270934704183,23.073351267476518,2,0,P0729 preregistered universal hybrid,3
+newtonian_poisson,4,4,55,24.419748236292026,23.55769340928677,45.07922862857688,1,0,locked P0724 complete row,4
