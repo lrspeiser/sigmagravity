@@ -1,0 +1,5 @@
+model,q_transfer,solar,root_convergence,finite_families,topology,RMS_ratio,all_gates
+AQUAL_contrast_source_fit,True,True,False,False,False,False,False
+AQUAL_contrast_hessian_fit,True,True,False,False,False,False,False
+QUMOND_contrast_source_fit,True,True,False,False,False,False,False
+P0707_plus_AQUAL_contrast_source_fit,False,True,False,False,False,False,False

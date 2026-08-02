@@ -1,0 +1,58 @@
+{
+  "stage": "P0718",
+  "status": "fail_raw_transfer_gates",
+  "evaluation_kind": "spent_componentwise_nonlinear_before_summation_transfer",
+  "sample_is_spent": true,
+  "formula": "W = Phi_N + q[(Phi_AQUAL,total-Phi_N,total) + sum_i(Phi_AQUAL,i-Phi_N,i)]",
+  "members": {
+    "AS295": {
+      "count": 125,
+      "stellar_mass_msun": 1911513807772.893
+    },
+    "PLCKG287": {
+      "count": 138,
+      "stellar_mass_msun": 2619244406987.9033
+    }
+  },
+  "q_by_training_cluster": {
+    "AS295": 2.9891737382637276,
+    "PLCKG287": 2.8110519239094396
+  },
+  "q_disagreement_fraction": 0.061418925651782724,
+  "gates": {
+    "q_transfer": true,
+    "root_convergence": false,
+    "finite_families": false,
+    "topology": false,
+    "RMS_ratio": false
+  },
+  "all_gates": false,
+  "scores": [
+    {
+      "train_cluster": "AS295",
+      "test_cluster": "PLCKG287",
+      "root_convergence_fraction": 0.851063829787234,
+      "finite_family_fraction": 0.8333333333333334,
+      "median_finite_RMS_arcsec": 25.00237923396272,
+      "median_RMS_ratio_to_halo": 13.472540589134153,
+      "topology_correct_fraction": 0.16666666666666666
+    },
+    {
+      "train_cluster": "PLCKG287",
+      "test_cluster": "AS295",
+      "root_convergence_fraction": 0.5555555555555556,
+      "finite_family_fraction": 0.3333333333333333,
+      "median_finite_RMS_arcsec": 12.782163106042244,
+      "median_RMS_ratio_to_halo": 20.81737342808151,
+      "topology_correct_fraction": 0.3333333333333333
+    }
+  ],
+  "resolution_finding": "A 257x257 thin-lens reconstruction changes arc deflections at the sub-arcsecond to arcsecond level but does not by itself repair the cross-cluster source mapping.",
+  "interpretation": "Nonlinear-before-summation is the strongest root-completeness improvement in this sequence, especially on PLCKG287, but the asymmetric transfer and large image RMS reject this implementation as a universal raw-lensing solution.",
+  "claim_boundary": [
+    "This ordering is a new diagnostic ansatz, not AQUAL or QUMOND.",
+    "The member catalog and stellar masses were frozen from baryonic photometry, but both lensing clusters were already unsealed.",
+    "The component model treats members as softened spherical sources and does not model three-dimensional depth or intracluster light.",
+    "Galaxy dynamics remain unchanged because only the Weyl potential is altered; a covariant field equation is still absent."
+  ]
+}

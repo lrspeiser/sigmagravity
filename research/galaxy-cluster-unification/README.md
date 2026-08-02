@@ -15,14 +15,18 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
-The latest external-validation status is
-[`docs/P0710_P0714_EXTERNAL_VALIDATION_RESULTS.md`](docs/P0710_P0714_EXTERNAL_VALIDATION_RESULTS.md).
-The frozen two-potential candidate beats the best frozen full-field MOND
-comparator on 13 new dwarf-galaxy rotation curves (`10.735` versus `12.403`
-km/s), but the four-cluster test is not validly evaluable because only two
-selected targets meet the preregistered raw-catalog readiness rules. On that
-ready subset, an exploratory root test finds one image root per source family,
-so no cluster-lensing success is claimed. The previous review entry is
+The latest formula-development status is
+[`docs/P0715_P0718_LENSING_STRUCTURE_AND_TRANSFER_RESULTS.md`](docs/P0715_P0718_LENSING_STRUCTURE_AND_TRANSFER_RESULTS.md).
+The coordinate-safe lens engine now has analytic and archived-map conformance
+tests, and the candidate's one-root behavior is numerically robust. At the real
+arcs it lacks both convergence and shear. A Solar-screened AQUAL contrast and a
+new nonlinear-before-summation member law improve root completeness, reaching
+`0.851` on PLCKG287, but fail cross-cluster image-position and topology gates;
+no formula advances. The preceding untouched external verdict remains in
+[`docs/P0710_P0714_EXTERNAL_VALIDATION_RESULTS.md`](docs/P0710_P0714_EXTERNAL_VALIDATION_RESULTS.md):
+the candidate beats the frozen full-field MOND comparators on 13 new dwarf
+rotation curves, while the four-cluster test is not validly evaluable because
+only two selected targets meet the frozen catalog-readiness rules. The previous review entry is
 [`latest-findings/2026-08-02-p0695b-cubic-path-audit`](latest-findings/2026-08-02-p0695b-cubic-path-audit/README.md).
 It completes the only preregistered numerical repair of the straight-ray path
 operator without reading observational scores. The prior P0695, P0694, P0693, P0692, P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in

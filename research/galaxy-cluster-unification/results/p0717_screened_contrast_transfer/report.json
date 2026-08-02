@@ -1,0 +1,62 @@
+{
+  "stage": "P0717",
+  "status": "fail_no_formula_passed_all_transfer_gates",
+  "evaluation_kind": "spent_two_cluster_cross_transfer",
+  "sample_is_spent": true,
+  "per_family_gravity_parameters": 0,
+  "per_cluster_gravity_parameters_at_test_time": 0,
+  "formula": "W = Phi_base + q (Phi_nonlinear - Phi_N)",
+  "matter_potential": "Psi remains the frozen RAR/coherent matter law",
+  "thresholds": {
+    "maximum_q_disagreement_fraction": 0.25,
+    "minimum_root_convergence_fraction": 0.75,
+    "minimum_finite_family_fraction": 0.5,
+    "minimum_topology_correct_fraction": 0.25,
+    "maximum_median_RMS_ratio_to_halo": 3.0,
+    "solar_PPN_limit": 2.3e-05
+  },
+  "survivors": [],
+  "best_mean_root_convergence_model": "P0707_plus_AQUAL_contrast_source_fit",
+  "best_mean_root_convergence_fraction": 0.7127659574468085,
+  "parameter_transfer": [
+    {
+      "formula": "AQUAL_contrast_hessian_fit",
+      "q_AS295_fit": 10.55820822264284,
+      "q_PLCKG287_fit": 10.079309412364552,
+      "q_disagreement_fraction": 0.0464105052504893,
+      "q_transfer_gate": true,
+      "solar_gate": true
+    },
+    {
+      "formula": "AQUAL_contrast_source_fit",
+      "q_AS295_fit": 12.343276247234401,
+      "q_PLCKG287_fit": 10.670340808007502,
+      "q_disagreement_fraction": 0.1453865713686974,
+      "q_transfer_gate": true,
+      "solar_gate": true
+    },
+    {
+      "formula": "P0707_plus_AQUAL_contrast_source_fit",
+      "q_AS295_fit": 4.746789108039243,
+      "q_PLCKG287_fit": 6.954128033516674,
+      "q_disagreement_fraction": 0.37729331791232773,
+      "q_transfer_gate": false,
+      "solar_gate": true
+    },
+    {
+      "formula": "QUMOND_contrast_source_fit",
+      "q_AS295_fit": 12.215266789675402,
+      "q_PLCKG287_fit": 10.692619741118708,
+      "q_disagreement_fraction": 0.13293649298549332,
+      "q_transfer_gate": true,
+      "solar_gate": true
+    }
+  ],
+  "solar_interpretation": "The AQUAL/QUMOND contrast tends to zero as a0/g in high acceleration; Psi is unchanged, so the current Mercury dynamics proxy remains exactly unchanged.",
+  "claim_boundary": [
+    "P0717 was designed after inspecting both clusters and is not blind validation.",
+    "The compact-halo comparator is constrained by the same arcs and is not pixelwise truth.",
+    "Passing the Solar proxy is not a substitute for a covariant PPN derivation.",
+    "A successful algebraic Weyl potential still requires a field equation and stability proof."
+  ]
+}

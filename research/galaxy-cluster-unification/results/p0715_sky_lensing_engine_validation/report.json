@@ -1,0 +1,47 @@
+{
+  "stage": "P0715",
+  "status": "pass",
+  "evaluation_kind": "software_measurement_validation_on_spent_cluster_sample",
+  "formula_rescored": false,
+  "coordinate_contract": {
+    "array_axis_0": "north",
+    "array_axis_1": "east",
+    "vector_component_0": "alpha_east",
+    "vector_component_1": "alpha_north"
+  },
+  "production_root_search_floor": {
+    "supplemental_grid_points": [
+      81,
+      161,
+      241
+    ],
+    "reason": "the archived 65x65 maps contain complementary narrow basins at the three grid phases"
+  },
+  "analytic_tests": [
+    "north/east asymmetric interpolation",
+    "affine convergence/shear/Jacobian",
+    "SIS two-image roots at 81/161/241 grids",
+    "SIS Einstein critical ring",
+    "source profiling and image assignment",
+    "north/east photon integration wrapper"
+  ],
+  "ready_clusters": [
+    "AS295",
+    "PLCKG287"
+  ],
+  "families": 18,
+  "models": [
+    "candidate_axis_repaired",
+    "glafic_v2_compact_halo"
+  ],
+  "root_count_conformance_to_P0714": true,
+  "maximum_source_position_difference_arcsec": 1.464821375527116e-14,
+  "maximum_RMS_difference_arcsec": 2.936539900133539e-13,
+  "all_model_root_count_stability_fraction": 1.0,
+  "glafic_root_count_stability_fraction": 1.0,
+  "claim_boundary": [
+    "P0715 validates software and coordinate semantics; it does not rehabilitate P0714 as a blind validation.",
+    "The candidate map is the disclosed post-unseal axis repair, never the frozen P0708 score.",
+    "Critical curves remain model-to-model diagnostics because the catalogs lack observed parity/orientation."
+  ]
+}

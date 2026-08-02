@@ -1,0 +1,39 @@
+{
+  "stage": "P0716",
+  "status": "completed_spent_structure_diagnostic",
+  "evaluation_kind": "post_unseal_no_fit_structure_deficit",
+  "formula_fitted": false,
+  "sample_is_spent": true,
+  "coordinate_contract": "north rows, east columns, explicit east/north vectors",
+  "candidate_overall": {
+    "median_kappa_needed": 0.32424580003768133,
+    "median_shear_needed": 0.14521577063072277,
+    "median_minimum_eigenvalue_gap": 0.46694743809208145,
+    "convergence_correlation_to_halo": 0.3293819034592618,
+    "shear_correlation_to_halo": -0.06679553184268759,
+    "median_shear_axis_error_deg": 17.660711187074128,
+    "candidate_near_critical_arc_fraction": 0.0,
+    "halo_near_critical_arc_fraction": 0.5230769230769231,
+    "determinant_sign_match_fraction": 0.6153846153846154,
+    "median_critical_curve_p95_distance_arcsec": 76.90496073571092
+  },
+  "cluster_contrast": {
+    "AS295": {
+      "median_kappa_needed": 0.06809085818721139,
+      "median_shear_needed": 0.14973486997670538,
+      "median_minimum_eigenvalue_gap": 0.22082176706391132
+    },
+    "PLCKG287": {
+      "median_kappa_needed": 0.36743511204418433,
+      "median_shear_needed": 0.14521577063072277,
+      "median_minimum_eigenvalue_gap": 0.4965613171397978
+    }
+  },
+  "main_inference": "The missing topology is a local Hessian problem, not only an amplitude problem: P0707 lacks both convergence and correctly oriented shear near the arcs, with a strong cluster-dependent split between those contributions.",
+  "next_formula_requirement": "A viable baryon-derived correction must alter the two-dimensional Hessian of the Weyl potential and transfer across clusters; a universal radial rescaling is insufficient.",
+  "claim_boundary": [
+    "The glafic map is a compact-halo reconstruction, not direct ground truth at every pixel.",
+    "The same image catalogs helped constrain the comparator; this stage is diagnostic, not validation.",
+    "AQUAL and QUMOND photon maps remain nonrelativistic diagnostics."
+  ]
+}
