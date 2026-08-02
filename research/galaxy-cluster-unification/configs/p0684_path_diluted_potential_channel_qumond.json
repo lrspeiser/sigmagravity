@@ -1,0 +1,112 @@
+{
+  "protocol_version": "P0684-PATH-DILUTED-POTENTIAL-CHANNEL-QUMOND-1.0.0",
+  "status": "frozen_before_any_P0684_formula_score",
+  "frozen_utc": "2026-08-02T03:34:49Z",
+  "purpose": "Test whether a dimensionless baryonic potential-path ratio can correct P0683's wrong within-cluster ordering while retaining its galaxy/cluster onset, Solar screening, universal settings, and single QUMOND-style field equation.",
+  "failure_parent": "results/p0683_potential_channel_qumond_reconnaissance/report.json",
+  "formula_generator": "P0683 post-result audit only; Spearman rho=-0.90 across five non-boundary spent clusters is hypothesis-generating and not validation",
+  "equation": {
+    "field_form": "laplacian(Phi)=div[nu_0(|grad Phi_N|/a0)^p(chi_b,eta_b) grad Phi_N]",
+    "base_boost": "nu_0(y)=1/[1-exp(-sqrt(y))]",
+    "baryonic_potential_coordinate": "chi_b=|Phi_b|/c^2 with Phi_b(infinity)=0",
+    "potential_path_ratio": "eta_b=|Phi_b|/[r |grad Phi_N|]",
+    "onset": "S=chi_b^n/(chi_b^n+chi_t^n)",
+    "path_survival": "C_eta=max(eta_b,1)^(-q)",
+    "channel_exponent": "p(chi_b,eta_b)=1+N_extra S C_eta",
+    "spherical_reconnaissance": "g=g_bar nu_0(g_bar/a0)^p(chi_b,eta_b)",
+    "a0_m_s2": 1.2e-10,
+    "primary_extra_spatial_channels": 3.0,
+    "primary_transition_power_n": 2.0,
+    "primary_path_power_q": 0.5,
+    "primary_interpretation": "one local channel plus three spatial channels whose coherent amplitude survives as the inverse square root of the number of local radial-acceleration lengths stored in the baryonic potential"
+  },
+  "primary_one_setting_grid": {
+    "chi_t": [3e-7, 5e-7, 8e-7, 1e-6, 1.5e-6, 2e-6, 3e-6, 5e-6, 8e-6, 1e-5, 2e-5],
+    "gravity_parameters_fit_per_object": 0,
+    "new_universal_parameters": 1
+  },
+  "diagnostic_sensitivity_grid": {
+    "extra_spatial_channels": [1.0, 2.0, 3.0, 4.0, 6.0],
+    "transition_power_n": [1.0, 2.0, 4.0],
+    "path_power_q": [0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0],
+    "chi_t": [3e-7, 5e-7, 8e-7, 1e-6, 1.5e-6, 2e-6, 3e-6, 5e-6, 8e-6, 1e-5, 2e-5],
+    "rows": 1155,
+    "selection_role": "response mapping only; only N_extra=3, n=2, q=1/2 can advance"
+  },
+  "spent_galaxy_test": {
+    "input": "results/sparc_density_transfer/primary_predictions.csv",
+    "systems": 131,
+    "points": 968,
+    "potential_and_path_closure": "integrate each measured outer baryonic profile to its last radius and close with a point-mass tail",
+    "score": "equal-galaxy circular-speed RMSE_km_s",
+    "fixed_RAR_comparator_a0_m_s2": 1.2e-10,
+    "claim_limit": "spent development transfer under an existing nuisance solution, not full disk QUMOND or new-galaxy validation"
+  },
+  "spent_cluster_test": {
+    "baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "target_profiles": "results/p0682_spent_multicluster_deflection_atlas/radial_ratio_profiles.csv",
+    "target_metrics": "results/p0682_spent_multicluster_deflection_atlas/system_deflection_metrics.csv",
+    "primary_systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931", "RXJ2129"],
+    "stress_systems": ["RXJ1347"],
+    "reliable_subset": ["MACS0429", "MACS1931", "RXJ2129"],
+    "target": "mean baryonic reduced deflection plus mean radial compact-halo deflection in each P0682 annular bin",
+    "prediction": "spherical line-of-sight deflection at reference source redshift z=2",
+    "acceleration_grid_points": 1536,
+    "line_of_sight_integration_points": 400,
+    "maximum_radius_kpc": 1000000.0,
+    "score": "equal-system RMS log10(predicted_deflection/target_deflection)",
+    "claim_limit": "spent low-parameter comparator target, not a unique physical halo map"
+  },
+  "solar_proxy": {
+    "source": "point-mass Sun, eta_b=1, chi_b=GM_sun/(r c^2)",
+    "radii": ["solar_limb", "Mercury", "Earth", "Saturn"],
+    "warning": "force screening is not a covariant PPN or Cassini-gamma derivation"
+  },
+  "predeclared_integrity_gates": {
+    "P0683_status": "pass",
+    "P0683_candidate_advanced_to_3D_topology": false,
+    "galaxy_systems": 131,
+    "galaxy_points": 968,
+    "cluster_systems": 6,
+    "primary_cluster_systems": 5,
+    "reliable_cluster_systems": 3,
+    "primary_grid_rows": 11,
+    "diagnostic_grid_rows": 1155,
+    "path_ratio_uses_only_baryonic_profile": true,
+    "all_predictions_finite_and_positive": true,
+    "gravity_parameters_fit_per_object": 0,
+    "new_raw_image_root_score_computed": false,
+    "full_3D_field_solve_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "predeclared_advancement_gates": {
+    "primary_extra_spatial_channels": 3.0,
+    "primary_transition_power_n": 2.0,
+    "primary_path_power_q": 0.5,
+    "galaxy_RMSE_ratio_to_fixed_RAR_max": 1.05,
+    "all5_cluster_log_RMS_dex_max": 0.20,
+    "reliable3_cluster_log_RMS_dex_max": 0.20,
+    "minimum_all5_gap_fraction_closed_from_fixed_RAR": 0.75,
+    "solar_limb_fractional_force_change_max": 2.3e-5,
+    "Earth_fractional_force_change_max": 1e-10,
+    "Saturn_fractional_force_change_max": 2.3e-5,
+    "no_per_object_gravity_parameters": true,
+    "one_new_universal_parameter": true
+  },
+  "selection_rule": "Among only N_extra=3, n=2, q=1/2 rows that pass the galaxy and Solar gates, select chi_t with the lowest all-five-cluster log RMS; ties within 1e-6 dex choose larger chi_t. Advance to registered 3D QUMOND only if every frozen gate passes. No diagnostic row may be promoted post hoc.",
+  "outputs": {
+    "directory": "results/p0684_path_diluted_potential_channel_qumond",
+    "scores": "formula_scores.csv",
+    "galaxy_predictions": "selected_spent_galaxy_predictions.csv",
+    "cluster_predictions": "selected_spent_cluster_predictions.csv",
+    "solar": "selected_solar_proxies.csv",
+    "figure": "path_diluted_potential_channel_response.png"
+  },
+  "claim_boundary": [
+    "The inverse-square-root path survival is a proposed vector-coherence interpretation, not derived quantum gravity.",
+    "The post-result five-cluster correlation generated this equation and cannot validate it.",
+    "The Newtonian potential and eta closures must be replaced or justified covariantly if the phenomenology survives.",
+    "The photon response remains a zero-slip working assumption without a relativistic action.",
+    "No image multiplicity, parity, critical curve, positional likelihood, or sealed target is evaluated."
+  ]
+}
