@@ -1,0 +1,147 @@
+{
+  "report_version": "P0662-PHYSICAL-TIDAL-LENGTH-TENSOR-AUDIT-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_real_map_field_solves": false,
+  "protocol_sha256": "c531c6bf15749b92332fde69e6c6ac5ace3da4b7ac8ae1fe297df26cbd247b4f",
+  "source_sha256": "d3f69a6ddb55b4bc29583fc15538a1923919234b45aaa869e49e6bcbfa0774b9",
+  "activation_source_sha256": "94f662c6b6e7721826260c9ef15f0e495ce578bb026f626584e91690dc22fab5",
+  "registered_map_manifest_sha256": "1dd7af5a986f14a007eebbd9b8152aa1e876811cc65e8ab64dd5b4121ce30eaa",
+  "coverage": {
+    "registered_galaxies": 13,
+    "registered_clusters": 4,
+    "mass_scenarios": 3,
+    "resolutions": 2,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "metrics": {
+    "radial_cocentered_sigma_weighted_mean": 4.600603988409434e-16,
+    "rotation_covariance_relative_error": 4.440892098500626e-16,
+    "direction_reversal_tensor_relative_error": 0.0,
+    "registered_galaxy_nominal_median_sigma": 0.0012113763661499694,
+    "registered_cluster_nominal_median_sigma": 0.07309847944193185,
+    "registered_cluster_to_galaxy_nominal_median_sigma_ratio": 60.34332638852407,
+    "mass_sensitivity_cluster_to_galaxy_ratios": {
+      "low": 59.07783228325512,
+      "nominal": 60.34332638852407,
+      "high": 56.41623375206338
+    },
+    "minimum_constitutive_eigenvalue_proxy": 1.3051612054186592e-05,
+    "maximum_domain_median_resolution_change_fraction": 0.5064052085473261,
+    "solar_1au_constitutive_anisotropy": 2.0235190369087182e-08,
+    "physical_length_scale_covariance_relative_error": 1.7763568394002505e-15,
+    "synthetic_resolution_median_change_fraction": 0.020299501673565867,
+    "minimum_mass_sensitivity_cluster_to_galaxy_ratio": 56.41623375206338
+  },
+  "gate_results": {
+    "P0659_parent": true,
+    "P0660_diagnostic_state": true,
+    "P0661_diagnostic_state": true,
+    "no_pixel_bounds": true,
+    "physical_scale_covariance": true,
+    "synthetic_resolution_stability": true,
+    "galaxy_coverage": true,
+    "cluster_coverage": true,
+    "bounded_sigma": true,
+    "positive_eigenvalue": true,
+    "radial_null": true,
+    "rotation_covariance": true,
+    "direction_reversal": true,
+    "registered_domain_separation": true,
+    "galaxy_channel_small": true,
+    "cluster_channel_present": true,
+    "mass_sensitivity_sign_stable": true,
+    "resolution_stability": false,
+    "solar_proxy": true,
+    "no_new_constants": true,
+    "no_per_object_parameters": true,
+    "sealed_targets_untouched": true
+  },
+  "domain_summary": [
+    {
+      "domain": "registered_cluster_baryons_only",
+      "scenario": "high",
+      "systems": 4,
+      "median_sigma": 0.07257886207794728,
+      "minimum_sigma": 0.04628605510720307,
+      "maximum_sigma": 0.1530596483883622,
+      "median_transverse_mismatch": 0.15730468171802303,
+      "median_survival": 0.9876674046295573,
+      "median_trace_length_kpc": 168.3987904119942
+    },
+    {
+      "domain": "registered_cluster_baryons_only",
+      "scenario": "low",
+      "systems": 4,
+      "median_sigma": 0.07045621056209117,
+      "minimum_sigma": 0.03981412217425967,
+      "maximum_sigma": 0.14754274750869442,
+      "median_transverse_mismatch": 0.12692827485701014,
+      "median_survival": 0.9937437220940105,
+      "median_trace_length_kpc": 192.62785588325403
+    },
+    {
+      "domain": "registered_cluster_baryons_only",
+      "scenario": "nominal",
+      "systems": 4,
+      "median_sigma": 0.07309847944193185,
+      "minimum_sigma": 0.04433140525912119,
+      "maximum_sigma": 0.15382756782492654,
+      "median_transverse_mismatch": 0.1454589412135628,
+      "median_survival": 0.9903056544597759,
+      "median_trace_length_kpc": 177.3821574325592
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "scenario": "high",
+      "systems": 13,
+      "median_sigma": 0.001286488963388003,
+      "minimum_sigma": 0.00010755569135382474,
+      "maximum_sigma": 0.008612807110990148,
+      "median_transverse_mismatch": 0.14767898894165346,
+      "median_survival": 0.018965689920235798,
+      "median_trace_length_kpc": 1.2172692910583125
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "scenario": "low",
+      "systems": 13,
+      "median_sigma": 0.001192599793172525,
+      "minimum_sigma": 0.00014282520243436334,
+      "maximum_sigma": 0.007719957040572455,
+      "median_transverse_mismatch": 0.10640528923051643,
+      "median_survival": 0.017868696447748682,
+      "median_trace_length_kpc": 1.2057115832895673
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "scenario": "nominal",
+      "systems": 13,
+      "median_sigma": 0.0012113763661499694,
+      "minimum_sigma": 0.00014376892479410906,
+      "maximum_sigma": 0.008692999868605382,
+      "median_transverse_mismatch": 0.1311951044457222,
+      "median_survival": 0.017394716074927707,
+      "median_trace_length_kpc": 1.1543541042301695
+    }
+  ],
+  "resolution_summary": [
+    {
+      "domain": "registered_cluster_baryons_only",
+      "median_absolute_fractional_change": 0.11758393565649455
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "median_absolute_fractional_change": 0.5064052085473261
+    }
+  ],
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0662 tests a resolution-invariant coefficient construction, not galaxy velocities or lensing outcomes.",
+    "Using the available forward map boundary as a path cap avoids invented pixel scales but makes finite field of view an explicit limitation.",
+    "The 10 kpc coherence length remains inherited and phenomenological.",
+    "No P0633 velocity, P0640 lens constraint, or spent lens residual may be used in P0662 development or selection."
+  ]
+}
