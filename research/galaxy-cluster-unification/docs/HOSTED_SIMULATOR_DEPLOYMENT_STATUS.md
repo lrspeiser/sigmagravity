@@ -4,13 +4,19 @@ Date: 2026-08-02
 
 ## Outcome
 
-The Vercel-ready radial research service is implemented and passes its local
-production build and ten automated tests. It has not been published because
-Vercel rejected the supplied credential as unauthorized for both identity and
-project listing. Its `vck_` prefix identifies it as a Vercel API key, not the
-`vcp_` personal access token accepted by the deployment CLI. No Vercel project
-was created, no deployment URL exists, and the credential was not stored in a
-file, repository setting, or generated artifact.
+The radial research service is live in the Horizon3 Vercel team:
+
+- production URL:
+  <https://sigma-gravity-research-simulator-five.vercel.app>
+- team and scope: `Horizon3` / `horizon3`
+- project: `sigma-gravity-research-simulator`
+- production deployment inspected at:
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/EYbBFCaLGLvBUH7jfY7WcLRL9QAP>
+
+The service passes its local production build, ten automated tests, and a live
+HTTP smoke suite. The deployment credential was supplied only to the CLI
+process and was not stored in a file, repository setting, or generated
+artifact.
 
 ## Deployable artifact
 
@@ -44,19 +50,16 @@ galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
 `a5df1cb7c7a52da415a167d145a831fe0e0625243b46dd38047ca43ba0299681`.
 
-## Authentication handoff
+## Redeployment
 
-Use either an already authenticated local Vercel CLI session or a valid Vercel
-personal access token with permission to create and deploy a project in the
-intended account/team. Never commit the token or place it in `.env` tracked by
-Git.
-
-Once authentication succeeds:
+Use either an authenticated local Vercel CLI session or a Vercel personal
+access token with permission to deploy inside `horizon3`. Never commit the
+token or place it in `.env` tracked by Git.
 
 ```powershell
 cd research/galaxy-cluster-unification/hosted-simulator
 npx.cmd vercel --yes
-npx.cmd vercel --prod --yes
+npx.cmd vercel --prod --yes --scope horizon3 --project sigma-gravity-research-simulator
 ```
 
 Then verify:
@@ -71,7 +74,20 @@ POST https://<deployment>/api/v1/runs
 
 The deployment is not accepted merely because the homepage loads. The hosted
 DDO154 fixed-MOND response must match the local run ID, manifest hash, scores,
-and point arrays.
+and point arrays. The accepted production smoke values are:
+
+- formula SHA-256:
+  `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
+- run ID: `run_5b5a7ce1fb73c49abc643832`
+- manifest SHA-256:
+  `5b5a7ce1fb73c49abc643832a54cafe34fc5afe3aeaae9d15a8ed0efd11cc9d9`
+- fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
+- Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
+
+The first attempted project was accidentally created in the personal
+`lrspeisers-projects` scope and contains only a failed build. It is not the
+production target and should be removed separately if account cleanup is
+desired.
 
 ## Worker milestone after Vercel
 

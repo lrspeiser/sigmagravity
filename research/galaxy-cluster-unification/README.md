@@ -59,6 +59,8 @@ packages all 175 SPARC galaxies, validates bounded dimension-aware formula
 trees, creates deterministic radial synthetic systems, and scores submitted
 laws against fixed MOND and Newtonian baryons. Its 2D/3D and raw-lensing routes
 remain explicitly unavailable until the separate scientific worker is wired.
+The verified Horizon3 production deployment is
+<https://sigma-gravity-research-simulator-five.vercel.app>.
 
 ## Absolute-field update through P0682
 

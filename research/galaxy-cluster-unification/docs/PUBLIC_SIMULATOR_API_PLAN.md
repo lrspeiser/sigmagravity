@@ -32,10 +32,10 @@ radial benchmark rather than a mock interface:
   than substituting an algebraic radial proxy.
 
 Ten catalog, formula, API, reproducibility, and simulator tests pass. The web
-application and serverless routes are production-shaped, but there is not yet
-a public deployment URL: the supplied Vercel credential was rejected by
-Vercel's identity and project-listing commands, and no credential was written
-to disk. Deployment resumes once the CLI has a valid authenticated account.
+application and serverless routes are deployed in the Horizon3 Vercel team at
+<https://sigma-gravity-research-simulator-five.vercel.app>. A production smoke
+run reproduced the local formula hash, run ID, manifest hash, full DDO154 point
+arrays, and comparator scores. No credential was written to disk.
 
 ## Deployment architecture
 
@@ -174,7 +174,7 @@ that is passed to Python.
 | Reproducibility | hosted formula/run hashes, frozen JSON protocols, CSV/JSON/PNG artifacts, regression tests | durable content-addressed artifact store and signed run manifest |
 | Formula submission | bounded dimension-aware AST, unit checker, canonicalizer, parameter counter, operator allowlist | translate field/PDE operators to immutable worker jobs |
 | Execution | deterministic hosted radial engine and local scientific CLI runs | queue, worker image, cancellation, quotas, caching, and event stream |
-| Public UI/API | Vercel-ready UI and serverless radial API; local tests pass | valid Vercel authentication, staging URL, auth/quotas, SDK, and worker connection |
+| Public UI/API | live Horizon3 Vercel UI and serverless radial API; local and production smoke tests pass | user auth/quotas, SDK, durable run storage, and worker connection |
 
 P0652 through P0677 and P0711 through P0714 are useful API fixtures. They include successful numerical
 invariants, real 2D-to-3D baryonic maps, Poisson/AQUAL/QUMOND solves, coefficient

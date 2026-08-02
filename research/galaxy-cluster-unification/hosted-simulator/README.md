@@ -1,5 +1,10 @@
 # Sigma Gravity Research Simulator — hosted preview
 
+Production: <https://sigma-gravity-research-simulator-five.vercel.app>
+
+- Vercel team: `Horizon3` (`horizon3`)
+- Vercel project: `sigma-gravity-research-simulator`
+
 This package is the deployable Vercel control plane for the galaxy/cluster
 research repository. Version 0.1 is intentionally narrow but functional:
 
@@ -36,6 +41,9 @@ Vercel project.
 The catalog build reads `../data/raw/sparc/table1.dat` and all 175 files under
 `../data/raw/sparc/rotmod`. The generated `data/sparc-v1.json` is committed so
 Vercel does not need access to the large scientific repository during deploy.
+`npm run build` copies the HTML, JavaScript, and CSS into the ignored `dist`
+directory expected by the Vercel project; serverless functions remain under
+`api`.
 
 ## Vercel deployment
 
