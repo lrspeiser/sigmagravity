@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0687-system-path-coordinate`](latest-findings/2026-08-02-p0687-system-path-coordinate/README.md).
-It tests the first topology-driven repair after the registered 3D failure. The
-prior P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0688-monotone-envelope`](latest-findings/2026-08-02-p0688-monotone-envelope/README.md).
+It completes the topology-driven repair audit and retires the local-path
+exponent family. The prior P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0687-system-path-coordinate`](latest-findings/2026-08-02-p0687-system-path-coordinate/README.md),
 [`latest-findings/2026-08-02-p0686-locked-path-topology`](latest-findings/2026-08-02-p0686-locked-path-topology/README.md),
 [`latest-findings/2026-08-02-p0684-path-diluted-qumond`](latest-findings/2026-08-02-p0684-path-diluted-qumond/README.md),
 [`latest-findings/2026-08-02-p0683-potential-channel-qumond`](latest-findings/2026-08-02-p0683-potential-channel-qumond/README.md),
@@ -101,6 +102,17 @@ of the fixed-RAR gap. A capped-local diagnostic retains `0.154/0.177 dex` but
 also retains the forbidden outward-rising exponent. No form advances. The next
 generator is a parameter-free inward monotone envelope of the local exponent.
 See [`docs/P0687_SYSTEM_PATH_COORDINATE_QUMOND_RESULTS.md`](docs/P0687_SYSTEM_PATH_COORDINATE_QUMOND_RESULTS.md).
+
+P0688 applies the smallest pointwise nonhollow repair,
+`p_env(r)=max_{s>=r} p_local(s)`. It adds no constant, preserves every local
+response, guarantees a nonincreasing exponent, and remains `1.030x` fixed RAR
+on galaxies. It nevertheless scores `0.216/0.271 dex` on the all-five and
+reliable-three cluster sets and closes 63.0% of the gap. It nearly fixes the
+two most underpredicted clusters but over-bends MACS1931, RXJ1347, and RXJ2129
+by `0.29-0.35 dex`. The scalar local-path family is retired. The next branch
+will redistribute the effective source while conserving its far-field
+monopole and preserving baryonic multipoles. See
+[`docs/P0688_MONOTONE_ENVELOPE_QUMOND_RESULTS.md`](docs/P0688_MONOTONE_ENVELOPE_QUMOND_RESULTS.md).
 
 ## Untouched external validation (P0633)
 

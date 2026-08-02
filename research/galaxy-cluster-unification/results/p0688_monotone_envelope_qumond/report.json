@@ -1,0 +1,104 @@
+{
+  "report_version": "P0688-MONOTONE-ENVELOPE-QUMOND-1.0.0",
+  "status": "pass",
+  "candidate_advanced_to_3D_potential_shell_freeze": false,
+  "protocol": {
+    "path": "configs/p0688_monotone_envelope_qumond.json",
+    "sha256": "5f9964e183a79f4cfd1386166ec6adf8916804b1814e8e7bb5a83550a2f0c808"
+  },
+  "source_sha256": "004068e4a8c50be5cf33eb1b8188c5643d49376123e87059487e5f26cc630057",
+  "operator_source_sha256": "5897693caff02c23cfd39886820185221db58e45e44b89290af312530899519b",
+  "input_hashes": {
+    "failure_parent": "ecaeafc2d1ae6d77d0ed2e3dd341ea73dc8f979dcd0d800f93b0aa81786d97c7",
+    "radial_comparator_report": "e191a2cb3f08abb43147e1ef362b880851609dea9372ff9e72546f5dff61ff3a",
+    "galaxies": "9c12c6f9cae76c3345f4e3a54a12c86521d13e42eec01dd3c2f05a13ded3a291",
+    "baryonic_profiles": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+    "target_profiles": "6c19f24eac2e97eaaa3eab4d666a2cbbcec8f99e824a7279ec4a8b0883be98f9"
+  },
+  "integrity_audit": {
+    "galaxy_systems": 131,
+    "galaxy_points": 968,
+    "cluster_systems": 6,
+    "primary_cluster_systems": 5,
+    "reliable_cluster_systems": 3,
+    "formula_variants": 2,
+    "all_profiles_sorted_before_envelope": true,
+    "all_predictions_finite_and_positive": true,
+    "gravity_parameters_fit_per_object": 0,
+    "new_raw_image_root_score_computed": false,
+    "full_3D_field_solve_computed": false,
+    "sealed_target_outcomes_opened": false,
+    "all_gates_pass": true
+  },
+  "fixed_RAR_comparators": {
+    "galaxy_equal_RMSE_km_s": 10.925025796849075,
+    "cluster_all5_log_RMS_dex": 0.5829825756582082
+  },
+  "variant_scores": [
+    {
+      "variant": "inward_monotone_majorant_primary",
+      "galaxy_equal_RMSE_km_s": 11.252618760828103,
+      "cluster_all5_log_RMS_dex": 0.21589132365598646,
+      "cluster_reliable3_log_RMS_dex": 0.27135625788853074,
+      "cluster_all6_stress_log_RMS_dex": 0.23489380456897,
+      "all_profiles_nonincreasing_and_majorizing": true,
+      "solar_solar_limb_fractional_force_change": 0.0,
+      "solar_Mercury_fractional_force_change": 0.0,
+      "solar_Earth_fractional_force_change": 0.0,
+      "solar_Saturn_fractional_force_change": 0.0,
+      "galaxy_ratio_to_fixed_RAR": 1.0299855551895822,
+      "all5_gap_fraction_closed_from_fixed_RAR": 0.6296779137657118,
+      "galaxy_gate_pass": true,
+      "all5_cluster_gate_pass": false,
+      "reliable3_cluster_gate_pass": false,
+      "gap_closed_gate_pass": false,
+      "solar_gate_pass": true
+    },
+    {
+      "variant": "local_P0685_control",
+      "galaxy_equal_RMSE_km_s": 11.252618773273852,
+      "cluster_all5_log_RMS_dex": 0.14522876354958342,
+      "cluster_reliable3_log_RMS_dex": 0.16471684761988434,
+      "cluster_all6_stress_log_RMS_dex": 0.16648102046002597,
+      "all_profiles_nonincreasing_and_majorizing": false,
+      "solar_solar_limb_fractional_force_change": 0.0,
+      "solar_Mercury_fractional_force_change": 0.0,
+      "solar_Earth_fractional_force_change": 0.0,
+      "solar_Saturn_fractional_force_change": 0.0,
+      "galaxy_ratio_to_fixed_RAR": 1.0299855563287785,
+      "all5_gap_fraction_closed_from_fixed_RAR": 0.7508866137455052,
+      "galaxy_gate_pass": true,
+      "all5_cluster_gate_pass": true,
+      "reliable3_cluster_gate_pass": true,
+      "gap_closed_gate_pass": true,
+      "solar_gate_pass": true
+    }
+  ],
+  "primary_advancement_gates": {
+    "primary_variant_fixed": true,
+    "galaxy_gate_pass": true,
+    "all5_cluster_gate_pass": false,
+    "reliable3_cluster_gate_pass": false,
+    "gap_closed_gate_pass": false,
+    "solar_gate_pass": true,
+    "all_profiles_nonincreasing": true,
+    "envelope_pointwise_majorizes_local": true,
+    "no_new_constants": true,
+    "no_per_object_fitted_gravity_parameters": true,
+    "no_raw_image_root_score": true,
+    "sealed_targets_untouched": true,
+    "all_gates_pass": false
+  },
+  "selection": {
+    "advance": false,
+    "next_action_if_pass": "Freeze a 3D potential-depth-shell implementation and raw RXJ2129 topology audit with no retuning.",
+    "next_action_if_fail": "Retire further local-path topology patches and return to a different field variable or source operator."
+  },
+  "claim_boundary": [
+    "P0688 is generated from spent radial and raw-topology failures and cannot validate the envelope.",
+    "The radial envelope is nonlocal and has not been derived from a covariant action or causal field dynamics.",
+    "A spherical radial pass would still require a separately frozen potential-shell definition in registered 3D.",
+    "The zero-slip photon closure remains diagnostic only.",
+    "No sealed P0633 or P0640 outcome may be opened."
+  ]
+}

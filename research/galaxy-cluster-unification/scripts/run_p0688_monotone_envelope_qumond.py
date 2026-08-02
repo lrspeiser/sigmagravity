@@ -388,21 +388,11 @@ def main():
         title="Envelope: solid prediction, dashed target",
     )
     axes[1, 0].legend(fontsize=8)
-    example = primary_galaxy[primary_galaxy.galaxy.eq(primary_galaxy.galaxy.iloc[0])]
-    axes[1, 1].plot(
-        example.radius_adjusted_kpc,
-        example.local_channel_exponent,
-        marker="o",
-        label="local",
-    )
-    axes[1, 1].plot(
-        example.radius_adjusted_kpc,
-        example.channel_exponent,
-        marker="s",
-        label="monotone envelope",
-    )
-    axes[1, 1].set(xlabel="radius (kpc)", ylabel="channel exponent", title="Example profile repair")
-    axes[1, 1].legend()
+    cluster_bias = primary_cluster.groupby("label", sort=True).log10_prediction_to_target.mean()
+    axes[1, 1].bar(cluster_bias.index, cluster_bias.values)
+    axes[1, 1].axhline(0.0, color="black", linestyle="--")
+    axes[1, 1].tick_params(axis="x", rotation=20)
+    axes[1, 1].set(ylabel="mean log10 prediction / target", title="Envelope cluster bias")
     for axis in axes.ravel():
         axis.grid(alpha=0.2)
     figure.savefig(output / protocol["outputs"]["figure"], dpi=180)
@@ -418,6 +408,8 @@ def main():
             "path": str(config_path.relative_to(ROOT)).replace("\\", "/"),
             "sha256": sha256(config_path),
         },
+        "source_sha256": sha256(Path(__file__).resolve()),
+        "operator_source_sha256": sha256(ROOT / "src/voidscreen/potential_channel_qumond.py"),
         "input_hashes": {
             "failure_parent": sha256(parent_path),
             "radial_comparator_report": sha256(comparator_path),
