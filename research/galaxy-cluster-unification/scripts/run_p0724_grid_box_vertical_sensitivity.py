@@ -376,7 +376,11 @@ def main() -> None:
             scenario_id = str(scenario["id"])
             for specification in config["models"]:
                 summary, per_galaxy, predictions = run_model_batch(
-                    base, specification, systems_by_scenario[scenario_id], targets
+                    base,
+                    specification,
+                    systems_by_scenario[scenario_id],
+                    targets,
+                    timeout=7200.0,
                 )
                 summary["scenario"] = scenario_id
                 summary["scenarioRole"] = scenario["role"]

@@ -372,6 +372,8 @@ def run_model_batch(
     specification: dict[str, Any],
     systems: list[dict[str, Any]],
     targets: dict[str, dict[str, Any]],
+    *,
+    timeout: float = 1800.0,
 ) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
     manifest_path = ROOT / specification["manifest"]
     model = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -397,7 +399,7 @@ def run_model_batch(
             },
         },
     )
-    completed = wait(base, submission, timeout=1800.0)
+    completed = wait(base, submission, timeout=timeout)
     artifact_index, artifacts = download_artifacts(base, submission)
     aggregate = json.loads(artifacts["aggregate_scores.json"])
     per_galaxy = read_csv(artifacts["per_galaxy.csv"])
