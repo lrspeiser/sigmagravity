@@ -1,0 +1,15 @@
+system_label,variant_id,source_family,source_redshift,observed_images,global_roots,surplus_roots,missing_roots,unassigned_roots,potentially_observable_surplus_roots,faintest_assigned_abs_magnification,observable_surplus_abs_magnification_threshold,all_observed_images_assigned,assignment_RMS_arcsec,assignment_max_arcsec,multiplicity_classification,parity_diverse,critical_sign_change_cells,critical_curve_present
+RXJ2129,scalar_absolute_AQUAL,1,0.6786,3,1,0,2,0,0,2.4013656947970334,0.6003414236992584,False,,2.5385616866878635,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,2,0.916,3,1,0,2,0,0,2.9099117264934113,0.7274779316233528,False,,7.562025675001613,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,3,1.5194,4,1,0,3,0,0,2.9995439276263056,0.7498859819065764,False,,1.5391665875936635,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,4,1.5202,3,1,0,2,0,0,2.941361249756848,0.735340312439212,False,,4.730395873108769,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,5,1.521,3,1,0,2,0,0,1.7282537973014467,0.43206344932536167,False,,7.35114725265011,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,6,3.0815,3,1,0,2,0,0,2.1540328835512117,0.5385082208878029,False,,11.254204590516078,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,7,3.427,3,1,0,2,0,0,2.920648250911927,0.7301620627279818,False,,5.214395205116393,missing_multiplicity,False,0,False
+RXJ2129,compound_absolute_P0673,1,0.6786,3,1,0,2,0,0,2.312420645728581,0.5781051614321453,False,,2.640588948330739,missing_multiplicity,False,0,False
+RXJ2129,compound_absolute_P0673,2,0.916,3,1,0,2,0,0,2.5382329006990054,0.6345582251747514,False,,7.2230967913590725,missing_multiplicity,False,0,False
+RXJ2129,compound_absolute_P0673,3,1.5194,4,1,0,3,0,0,2.789323355441021,0.6973308388602553,False,,1.5068274079949782,missing_multiplicity,False,0,False
+RXJ2129,compound_absolute_P0673,4,1.5202,3,1,0,2,0,0,2.6526971624029794,0.6631742906007448,False,,4.827153754641359,missing_multiplicity,False,0,False
+RXJ2129,compound_absolute_P0673,5,1.521,3,1,0,2,0,0,1.6817316853844686,0.42043292134611715,False,,7.413837864253058,missing_multiplicity,False,0,False
+RXJ2129,compound_absolute_P0673,6,3.0815,3,1,0,2,0,0,1.9808644181195685,0.4952161045298921,False,,11.183161749535783,missing_multiplicity,False,0,False
+RXJ2129,compound_absolute_P0673,7,3.427,3,1,0,2,0,0,2.6440094266388914,0.6610023566597228,False,,4.95951517660703,missing_multiplicity,False,0,False

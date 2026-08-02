@@ -1,0 +1,9 @@
+model,parameter,value,lower,upper
+scalar_absolute_AQUAL,map_center_x_arcsec,-2.9999999999999996,-3.0,3.0
+scalar_absolute_AQUAL,map_center_y_arcsec,2.9999999999999996,-3.0,3.0
+scalar_absolute_AQUAL,external_shear_gamma1_at_reference_source,-0.24999999999999997,-0.25,0.25
+scalar_absolute_AQUAL,external_shear_gamma2_at_reference_source,-0.24999999999999997,-0.25,0.25
+compound_absolute_P0673,map_center_x_arcsec,-2.734358880095616,-3.0,3.0
+compound_absolute_P0673,map_center_y_arcsec,2.9999999999999964,-3.0,3.0
+compound_absolute_P0673,external_shear_gamma1_at_reference_source,-0.24999999999999997,-0.25,0.25
+compound_absolute_P0673,external_shear_gamma2_at_reference_source,-0.24999999999999997,-0.25,0.25

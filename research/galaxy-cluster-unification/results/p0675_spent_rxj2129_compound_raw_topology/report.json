@@ -1,0 +1,98 @@
+{
+  "report_version": "P0675-SPENT-RXJ2129-COMPOUND-RAW-TOPOLOGY-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_spent_robustness": false,
+  "protocol_sha256": "18f5a7be02995aa4f18b4d09ea248f22c5f7eb5e3890ae1e40eadaf3ec987c61",
+  "source_sha256": "f0bc84bf6fde404569d09152275f7d49219829258994e06eae8908fa20028519",
+  "field_sha256": "bed26237aa06dab375c5e057fddb366d3fbdb516343c9f8db83277a1d7fd7380",
+  "coverage": {
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "source_families": 7,
+    "ordinary_nuisance_parameters": 4,
+    "profiled_source_coordinates": 14,
+    "gravity_parameters": 0,
+    "photon_amplitudes": 0
+  },
+  "fit_scores": [
+    {
+      "model": "scalar_absolute_AQUAL",
+      "training_RMS_arcsec": 7.0869075004738,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 17.83733584047062,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 6201.196216239036,
+      "nuisance_parameters_near_bound": 4
+    },
+    {
+      "model": "compound_absolute_P0673",
+      "training_RMS_arcsec": 7.098669971366944,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 17.82661325806193,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 6495.609361974136,
+      "nuisance_parameters_near_bound": 3
+    }
+  ],
+  "comparisons": {
+    "compound_training_improvement_fraction_vs_scalar": -0.0016597466373531322,
+    "compound_heldout_worsening_fraction_vs_scalar": -0.0006011313855717182,
+    "compact_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "compound_to_compact_halo_heldout_RMS_ratio": 7.029125376403415,
+    "published_multi_halo_reference_RMS_arcsec": 0.29
+  },
+  "topology": {
+    "scalar_absolute_AQUAL": {
+      "families": 7,
+      "missing_multiplicity_families": 7,
+      "exact_multiplicity_families": 0,
+      "demagnified_only_surplus_families": 0,
+      "potentially_observable_surplus_families": 0,
+      "exact_or_demagnified_only_families": 0,
+      "parity_diverse_families": 0,
+      "critical_curve_present_families": 0,
+      "total_global_roots": 7,
+      "total_observed_images": 22
+    },
+    "compound_absolute_P0673": {
+      "families": 7,
+      "missing_multiplicity_families": 7,
+      "exact_multiplicity_families": 0,
+      "demagnified_only_surplus_families": 0,
+      "potentially_observable_surplus_families": 0,
+      "exact_or_demagnified_only_families": 0,
+      "parity_diverse_families": 0,
+      "critical_curve_present_families": 0,
+      "total_global_roots": 7,
+      "total_observed_images": 22
+    }
+  },
+  "gate_results": {
+    "P0674_parent": true,
+    "training_roots": true,
+    "heldout_roots": true,
+    "training_improvement": false,
+    "heldout_stability": true,
+    "heldout_absolute_RMS": false,
+    "compact_halo_comparison": false,
+    "no_missing_multiplicity": false,
+    "observable_surplus": true,
+    "acceptable_multiplicity": false,
+    "parity_diversity": false,
+    "critical_curves": false,
+    "nuisance_bounds": false,
+    "no_fitted_gravity": true,
+    "no_fitted_photon_amplitude": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "Every RX J2129 image is spent; P0675 can reject or diagnose the mechanism but cannot validate it.",
+    "The nuisance settings, global search, and numerical thresholds are copied from P0672 before P0675 scoring.",
+    "The global finite seed search can miss roots with very small basins or beyond 48 arcseconds.",
+    "The 33-cell physical field and bicubic interpolation are coarse for cluster critical curves; a successful topology audit would still require frozen resolution convergence.",
+    "P0633 galaxy kinematics and P0640 cluster lens constraints remain sealed."
+  ]
+}
