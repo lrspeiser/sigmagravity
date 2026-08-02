@@ -1,0 +1,2 @@
+model,training_RMS_arcsec,training_roots_converged,heldout_RMS_arcsec,heldout_roots_converged,optimizer_cost,nuisance_parameters_near_bound
+multipole_gated_routing_P0691,inf,13,inf,5,217.25471632504755,1

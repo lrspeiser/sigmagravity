@@ -1,0 +1,116 @@
+{
+  "report_version": "P0691-MULTIPOLE-GATED-SOURCE-ROUTING-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_real_2D_galaxy_and_robustness": false,
+  "protocol_sha256": "0fa1bea2eac17fe60205433516a59c38f961ff8239efd4f3cfd06ed6c353e954",
+  "source_sha256": "9f68d1ce65f19c62298ea021f2f61a4e30734957ba2d21b428a276d85a027bac",
+  "operator_source_sha256": "94c885f8dcff5c1daf773ff4acb6b49cfd70a543cb9602dcd1cad445bab43f99",
+  "map_sha256": "4804b357f9c67bb204b058e98de4d1ddf00340e301b86d001bb0a21132c47a77",
+  "field_sha256": "960abdc85714972b01ce4b26a310071fc15d0a171872375e31c90a010ccaae22",
+  "quadrupole": {
+    "fraction": 0.11886289195733203,
+    "covariance_m2": [
+      [
+        6.335115456426192e+42,
+        5.817980473716021e+41,
+        4.163859406764037e+24
+      ],
+      [
+        5.81798047371602e+41,
+        4.985328909147457e+42,
+        2.712678215148492e+24
+      ],
+      [
+        7.394908305218804e+24,
+        4.4047222763856206e+24,
+        7.236002427325525e+42
+      ]
+    ],
+    "eigenvalues_m2": [
+      4.7691722971299836e+42,
+      6.551272068443666e+42,
+      7.236002427325525e+42
+    ]
+  },
+  "field": {
+    "normalized_residual_RMS": 3.197341127740863e-14,
+    "mixed_source_identity_relative_RMS": 0.0,
+    "boundary_maximum_relative_mismatch": 0.0,
+    "strong_lens_median_physical_deflection_arcsec": 10.394025874176528,
+    "strong_lens_RMS_physical_deflection_arcsec": 10.224077324688517,
+    "normalized_deflection_curl_RMS": 3.920553143515081e-16
+  },
+  "inherited_spherical_limit": {
+    "q_b": 0.0,
+    "source": "exact P0684 local generator",
+    "spent_local_control_galaxy_RMSE_ratio_to_fixed_RAR": 1.0299855563,
+    "spent_local_control_all5_cluster_log_RMS_dex": 0.1452287635,
+    "spent_local_control_reliable3_cluster_log_RMS_dex": 0.1647168476,
+    "spent_local_control_gap_fraction_closed": 0.7508866137,
+    "claim_limit": "inherited spent spherical control, not new validation or a real 2D galaxy result"
+  },
+  "fit_score": {
+    "model": "multipole_gated_routing_P0691",
+    "training_RMS_arcsec": null,
+    "training_roots_converged": 13,
+    "heldout_RMS_arcsec": null,
+    "heldout_roots_converged": 5,
+    "optimizer_cost": 217.25471632504755,
+    "nuisance_parameters_near_bound": 1
+  },
+  "comparisons": {
+    "compact_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "candidate_to_compact_halo_heldout_RMS_ratio": null
+  },
+  "topology": {
+    "families": 7,
+    "missing_multiplicity_families": 3,
+    "exact_multiplicity_families": 4,
+    "demagnified_only_surplus_families": 0,
+    "potentially_observable_surplus_families": 0,
+    "exact_or_demagnified_only_families": 4,
+    "parity_diverse_families": 5,
+    "critical_curve_present_families": 7,
+    "total_global_roots": 17,
+    "total_observed_images": 22
+  },
+  "gate_results": {
+    "P0690_parent": true,
+    "P0670_parent": true,
+    "coverage": true,
+    "quadrupole_lower": true,
+    "quadrupole_upper": true,
+    "mixed_source_identity": true,
+    "field_residual": true,
+    "boundary": true,
+    "finite": true,
+    "field_amplitude_lower": true,
+    "field_amplitude_upper": true,
+    "field_curl": true,
+    "training_roots": false,
+    "heldout_roots": false,
+    "training_RMS": false,
+    "heldout_RMS": false,
+    "compact_halo_comparison": false,
+    "no_missing_multiplicity": false,
+    "observable_surplus": true,
+    "acceptable_multiplicity": false,
+    "parity_diversity": false,
+    "critical_curves": true,
+    "nuisance_bounds": false,
+    "no_new_constants": true,
+    "no_fitted_gravity": true,
+    "no_fitted_photon_amplitude": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "RX J2129 and the inherited spherical control are fully spent development evidence.",
+    "A raw-topology pass would still require real 2D galaxy field solves because P0690 rejected the shallow-galaxy shortcut.",
+    "A global quadrupole is geometric but nonlocal; no covariant action or causal evolution law is derived.",
+    "The zero-slip photon closure is diagnostic rather than a relativistic metric theory.",
+    "P0633 and P0640 remain sealed."
+  ]
+}

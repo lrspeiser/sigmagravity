@@ -1,0 +1,5 @@
+model,parameter,value,lower,upper
+multipole_gated_routing_P0691,map_center_x_arcsec,0.9338572352590331,-3.0,3.0
+multipole_gated_routing_P0691,map_center_y_arcsec,1.3539727019696326,-3.0,3.0
+multipole_gated_routing_P0691,external_shear_gamma1_at_reference_source,-0.22080235645827206,-0.25,0.25
+multipole_gated_routing_P0691,external_shear_gamma2_at_reference_source,-0.24999999981864185,-0.25,0.25

@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0690-full-routing-screen`](latest-findings/2026-08-02-p0690-full-routing-screen/README.md).
-It rejects full source relocation and generates the first multipole-controlled
-routing law. The prior P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0691-multipole-gated-routing`](latest-findings/2026-08-02-p0691-multipole-gated-routing/README.md).
+It rejects a single global baryonic quadrupole as a sufficient routing
+controller after a frozen raw-topology test. The prior P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0690-full-routing-screen`](latest-findings/2026-08-02-p0690-full-routing-screen/README.md),
 [`latest-findings/2026-08-02-p0689-source-routing-audit`](latest-findings/2026-08-02-p0689-source-routing-audit/README.md),
 [`latest-findings/2026-08-02-p0688-monotone-envelope`](latest-findings/2026-08-02-p0688-monotone-envelope/README.md),
 [`latest-findings/2026-08-02-p0687-system-path-coordinate`](latest-findings/2026-08-02-p0687-system-path-coordinate/README.md),
@@ -136,6 +137,16 @@ observable. The next generator uses the normalized baryonic quadrupole,
 `q_b=0.11886` on RX J2129, to mix local and routed sources with exact spherical
 and line-like limits rather than a fitted routing fraction. See
 [`docs/P0690_SOURCE_ROUTING_EMPIRICAL_SCREEN_RESULTS.md`](docs/P0690_SOURCE_ROUTING_EMPIRICAL_SCREEN_RESULTS.md).
+
+P0691 calculates the routing fraction from the baryonic quadrupole rather than
+fitting it. RX J2129 gives `q_b=0.118863`; the resulting field passes its
+residual, identity, boundary, amplitude, and curl gates, but raw topology does
+not. Only `13/15` training and `5/7` heldout roots converge, three families are
+missing images, only five recover both parities, and one nuisance reaches its
+bound. A global shape scalar is therefore insufficient. The next step is a
+frozen, non-promotable continuum atlas to decide whether any linear blend has
+the required topology before the whole family is retired. See
+[`docs/P0691_MULTIPOLE_GATED_SOURCE_ROUTING_RESULTS.md`](docs/P0691_MULTIPOLE_GATED_SOURCE_ROUTING_RESULTS.md).
 
 ## Untouched external validation (P0633)
 
