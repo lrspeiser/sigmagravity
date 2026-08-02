@@ -28,8 +28,11 @@ The same contract represents the included Newtonian Poisson, AQUAL, QUMOND,
 Refracted Gravity, and two-potential examples under `examples/models`. The
 local Python research package now contains a theory-neutral Cartesian 2D/3D
 divergence-form worker prototype. It passes manufactured known-answer tests
-and executes the Refracted Gravity example without a theory-name branch. That
-worker is not connected to this Vercel gateway yet.
+and executes the Refracted Gravity and QUMOND examples without theory-name
+branches. QUMOND explicitly declares the zero-vector limit of its singular
+isotropic flux with the general `multiply_zero_vector_limit` operator; this
+prevents an implicit numerical convention from being hidden in the worker.
+That worker is not connected to this Vercel gateway yet.
 
 The hosted preview does **not** claim to execute the repository's full 2D/3D
 Poisson, AQUAL, QUMOND, or raw cluster-lensing workflows. Those require an
@@ -206,6 +209,16 @@ observables for this mapping. The local DDO101 acceptance retains all ten
 published points and reproduces the earlier frozen Newtonian curve within
 `0.496 km/s` RMS on a deliberately coarse grid. Photon lensing and resolved
 velocity-field adapters remain future work.
+
+The full P0723 commissioning run then used the same generic HTTP path for all
+13 registered galaxies and four published-fixed manifests. All 52 child solves
+converged and all 161 circular-speed points per manifest were scored with zero
+per-object gravity parameters. Equal-galaxy RMSE was `23.154 km/s` for
+Newtonian Poisson, `13.131 km/s` for AQUAL, `12.486 km/s` for QUMOND, and
+`14.439 km/s` for the Refracted Gravity fixture. This spent-sample result
+validates the formula-neutral execution and reporting path, not any gravity
+theory; all aggregate reduced chi-square values remain much larger than one.
+See `../docs/P0723_FORMULA_NEUTRAL_RESOLVED_COMPARATOR_RESULTS.md`.
 
 Run the chained 3D HTTP acceptance test while `npm run dev` is active:
 

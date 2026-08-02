@@ -17,6 +17,12 @@ for (const name of ["newtonian-poisson.json", "aqual.json", "qumond.json", "refr
   });
 }
 
+test("QUMOND declares its zero-vector flux limit without a theory-specific route", () => {
+  const result = validateFieldModel(load("qumond.json"));
+  assert.equal(result.valid, true, result.errors.join("; "));
+  assert.ok(result.requiredCapabilities.operators.includes("multiply_zero_vector_limit"));
+});
+
 test("dimensionally invalid field equation is rejected", () => {
   const manifest = load("newtonian-poisson.json");
   manifest.equations[0].rhs = { field: "rho_b" };

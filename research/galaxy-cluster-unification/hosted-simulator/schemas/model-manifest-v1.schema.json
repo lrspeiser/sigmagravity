@@ -165,7 +165,7 @@
           "properties": {
             "op": {
               "enum": [
-                "add", "subtract", "min", "max", "multiply", "divide",
+                "add", "subtract", "min", "max", "multiply", "multiply_zero_vector_limit", "divide",
                 "negate", "norm", "gradient", "divergence", "laplacian", "curl",
                 "dot", "outer", "trace", "pow", "sqrt", "exp", "log", "tanh",
                 "smoothstep", "lt", "lte", "gt", "gte", "line_of_sight_integral",

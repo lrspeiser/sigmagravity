@@ -1,0 +1,512 @@
+{
+  "schemaVersion": "sigma-p0723-formula-neutral-api-comparators/1",
+  "stage": "P0723",
+  "status": "pass",
+  "sampleStatus": "previously_unsealed_and_project_spent",
+  "systems": 13,
+  "models": 4,
+  "commonScoredSystems": [
+    "CVnIdwA",
+    "DDO101",
+    "DDO126",
+    "DDO133",
+    "DDO210",
+    "DDO216",
+    "DDO47",
+    "DDO50",
+    "DDO52",
+    "DDO53",
+    "DDO87",
+    "NGC1569",
+    "UGC8508"
+  ],
+  "modelSummaries": [
+    {
+      "model": "newtonian_poisson",
+      "manifestPath": "hosted-simulator/examples/models/newtonian-poisson.json",
+      "manifestSha256": "34b75c42911410f33322734fb2b149de447682a35f34f4ecaea83472578d493f",
+      "batchId": "batch_411a057bdc2343a208b3a5d8",
+      "batchState": "succeeded",
+      "batchScientificResultSha256": "a6a586dbf2a09481138f1f5546c8b22df2e737b82e99543ebd095903bd346630",
+      "modelSha256": "43738f2c7bb3c4e94193763cf46f39b2a47fa852b25d1c063fef00fa7e1aa661",
+      "systems": 13,
+      "succeededSystems": 13,
+      "convergenceFraction": 1,
+      "maximumEquationResidual": 5.932160608191824e-10,
+      "scoredSystems": 13,
+      "validObservationPoints": 161,
+      "equalGalaxyRmseKmS": 23.153691737040457,
+      "pointWeightedRmseKmS": 23.52145013012294,
+      "reducedChiSquare": 51.467967627833744,
+      "universalGravityParameters": 1,
+      "perObjectGravityParameters": 0,
+      "downloadedArtifactCount": 10,
+      "allDownloadedArtifactHashesValid": true,
+      "frozenCurveConformance": {
+        "frozenCurveModel": "Newtonian_3D",
+        "galaxies": 13,
+        "equalGalaxyRmseKmS": 4.324800666305831,
+        "equalGalaxyNormalizedRmse": 0.14909522615698903,
+        "perGalaxy": [
+          {
+            "galaxy": "CVnIdwA",
+            "points": 9,
+            "rmseKmS": 0.5352697464063819,
+            "normalizedRmse": 0.044679369376810885
+          },
+          {
+            "galaxy": "DDO101",
+            "points": 10,
+            "rmseKmS": 0.6359093688813502,
+            "normalizedRmse": 0.06808288262133494
+          },
+          {
+            "galaxy": "DDO126",
+            "points": 13,
+            "rmseKmS": 0.7113315315748506,
+            "normalizedRmse": 0.05401122267819192
+          },
+          {
+            "galaxy": "DDO133",
+            "points": 14,
+            "rmseKmS": 1.0800709589525817,
+            "normalizedRmse": 0.09365816577960458
+          },
+          {
+            "galaxy": "DDO210",
+            "points": 8,
+            "rmseKmS": 0.03415010708191003,
+            "normalizedRmse": 0.01063724073135832
+          },
+          {
+            "galaxy": "DDO216",
+            "points": 12,
+            "rmseKmS": 0.47076251403629477,
+            "normalizedRmse": 0.0923018272545332
+          },
+          {
+            "galaxy": "DDO47",
+            "points": 13,
+            "rmseKmS": 1.6928930638597917,
+            "normalizedRmse": 0.15539183626742414
+          },
+          {
+            "galaxy": "DDO50",
+            "points": 25,
+            "rmseKmS": 2.168135147830993,
+            "normalizedRmse": 0.0929416637199834
+          },
+          {
+            "galaxy": "DDO52",
+            "points": 11,
+            "rmseKmS": 1.8554406490674111,
+            "normalizedRmse": 0.14885013904075375
+          },
+          {
+            "galaxy": "DDO53",
+            "points": 8,
+            "rmseKmS": 0.44258175107077596,
+            "normalizedRmse": 0.06654352877361133
+          },
+          {
+            "galaxy": "DDO87",
+            "points": 12,
+            "rmseKmS": 1.458082941427452,
+            "normalizedRmse": 0.1383348280965593
+          },
+          {
+            "galaxy": "NGC1569",
+            "points": 8,
+            "rmseKmS": 15.062926827725578,
+            "normalizedRmse": 0.4244530051766659
+          },
+          {
+            "galaxy": "UGC8508",
+            "points": 11,
+            "rmseKmS": 0.5843633990487636,
+            "normalizedRmse": 0.057987909511454064
+          }
+        ]
+      }
+    },
+    {
+      "model": "aqual_simple_mu",
+      "manifestPath": "hosted-simulator/examples/models/aqual.json",
+      "manifestSha256": "0df2a67bef17cfa07b539b8b09d5a2113f746e5a836c7a0f23d12c08d676acab",
+      "batchId": "batch_ed7cae302dd21a2605f9e751",
+      "batchState": "succeeded",
+      "batchScientificResultSha256": "6841df83e2491eb38d1ba0885cfb1f09f80b204a6a8449e646bec5b42eb8494f",
+      "modelSha256": "37fe7ed1b60b8b3d05dbdf7a0b61c1ffdd3dfa22cdcd2e661e9e58e7c8e5a054",
+      "systems": 13,
+      "succeededSystems": 13,
+      "convergenceFraction": 1,
+      "maximumEquationResidual": 9.935903468946796e-09,
+      "scoredSystems": 13,
+      "validObservationPoints": 161,
+      "equalGalaxyRmseKmS": 13.131099120067583,
+      "pointWeightedRmseKmS": 13.060812671664314,
+      "reducedChiSquare": 12.848259887865359,
+      "universalGravityParameters": 2,
+      "perObjectGravityParameters": 0,
+      "downloadedArtifactCount": 10,
+      "allDownloadedArtifactHashesValid": true,
+      "frozenCurveConformance": {
+        "frozenCurveModel": "AQUAL_simple_mu_3D",
+        "galaxies": 13,
+        "equalGalaxyRmseKmS": 3.657532704044625,
+        "equalGalaxyNormalizedRmse": 0.09483471489156925,
+        "perGalaxy": [
+          {
+            "galaxy": "CVnIdwA",
+            "points": 9,
+            "rmseKmS": 1.5131081662632881,
+            "normalizedRmse": 0.05719003892764135
+          },
+          {
+            "galaxy": "DDO101",
+            "points": 10,
+            "rmseKmS": 2.1767271994908586,
+            "normalizedRmse": 0.09378931806058942
+          },
+          {
+            "galaxy": "DDO126",
+            "points": 13,
+            "rmseKmS": 2.328697834801762,
+            "normalizedRmse": 0.0705343151405863
+          },
+          {
+            "galaxy": "DDO133",
+            "points": 14,
+            "rmseKmS": 2.3451636809242236,
+            "normalizedRmse": 0.08548102583574654
+          },
+          {
+            "galaxy": "DDO210",
+            "points": 8,
+            "rmseKmS": 0.40582493003769926,
+            "normalizedRmse": 0.04016746629014882
+          },
+          {
+            "galaxy": "DDO216",
+            "points": 12,
+            "rmseKmS": 1.3452620136716156,
+            "normalizedRmse": 0.08717880527254425
+          },
+          {
+            "galaxy": "DDO47",
+            "points": 13,
+            "rmseKmS": 2.8884951661856233,
+            "normalizedRmse": 0.0908178343437835
+          },
+          {
+            "galaxy": "DDO50",
+            "points": 25,
+            "rmseKmS": 4.271035790961707,
+            "normalizedRmse": 0.08190099632142411
+          },
+          {
+            "galaxy": "DDO52",
+            "points": 11,
+            "rmseKmS": 5.100663103397737,
+            "normalizedRmse": 0.14127859542752066
+          },
+          {
+            "galaxy": "DDO53",
+            "points": 8,
+            "rmseKmS": 1.8224788079250493,
+            "normalizedRmse": 0.10642656496527009
+          },
+          {
+            "galaxy": "DDO87",
+            "points": 12,
+            "rmseKmS": 3.266928608594314,
+            "normalizedRmse": 0.10324810602072254
+          },
+          {
+            "galaxy": "NGC1569",
+            "points": 8,
+            "rmseKmS": 9.30992753626414,
+            "normalizedRmse": 0.1586793068248723
+          },
+          {
+            "galaxy": "UGC8508",
+            "points": 11,
+            "rmseKmS": 0.8440889521926286,
+            "normalizedRmse": 0.035680499834304026
+          }
+        ]
+      }
+    },
+    {
+      "model": "qumond_simple_nu",
+      "manifestPath": "hosted-simulator/examples/models/qumond.json",
+      "manifestSha256": "254b19a02ccf082d49a9f031d04a275514ea7bade182cd616a6ba688936131dc",
+      "batchId": "batch_daf2e7952e37ef5b03317ecf",
+      "batchState": "succeeded",
+      "batchScientificResultSha256": "1f6fdca5b3744733192776ae6e59ff4fc507938c3cdc134d06869ad5e04fb09f",
+      "modelSha256": "68dee7e94c66fea1ee4c8a66e27dbf1636ca0a7fa4bd62d49c19ec2f00971332",
+      "systems": 13,
+      "succeededSystems": 13,
+      "convergenceFraction": 1,
+      "maximumEquationResidual": 5.532482224595364e-10,
+      "scoredSystems": 13,
+      "validObservationPoints": 161,
+      "equalGalaxyRmseKmS": 12.486461391155828,
+      "pointWeightedRmseKmS": 12.624050080985183,
+      "reducedChiSquare": 15.01766506091433,
+      "universalGravityParameters": 2,
+      "perObjectGravityParameters": 0,
+      "downloadedArtifactCount": 10,
+      "allDownloadedArtifactHashesValid": true,
+      "frozenCurveConformance": {
+        "frozenCurveModel": "QUMOND_simple_nu_3D",
+        "galaxies": 13,
+        "equalGalaxyRmseKmS": 7.675053394406388,
+        "equalGalaxyNormalizedRmse": 0.17425205531674978,
+        "perGalaxy": [
+          {
+            "galaxy": "CVnIdwA",
+            "points": 9,
+            "rmseKmS": 3.5164382410979456,
+            "normalizedRmse": 0.13363792132187197
+          },
+          {
+            "galaxy": "DDO101",
+            "points": 10,
+            "rmseKmS": 2.9912957772171342,
+            "normalizedRmse": 0.13035321258675728
+          },
+          {
+            "galaxy": "DDO126",
+            "points": 13,
+            "rmseKmS": 4.587813812919382,
+            "normalizedRmse": 0.14035256796783527
+          },
+          {
+            "galaxy": "DDO133",
+            "points": 14,
+            "rmseKmS": 3.3811021156548784,
+            "normalizedRmse": 0.12629178461995963
+          },
+          {
+            "galaxy": "DDO210",
+            "points": 8,
+            "rmseKmS": 1.180767651971533,
+            "normalizedRmse": 0.11732134838208283
+          },
+          {
+            "galaxy": "DDO216",
+            "points": 12,
+            "rmseKmS": 2.1150940990410008,
+            "normalizedRmse": 0.13774787488763293
+          },
+          {
+            "galaxy": "DDO47",
+            "points": 13,
+            "rmseKmS": 4.670897584225726,
+            "normalizedRmse": 0.1512085983604041
+          },
+          {
+            "galaxy": "DDO50",
+            "points": 25,
+            "rmseKmS": 7.790000929900447,
+            "normalizedRmse": 0.15116818411706812
+          },
+          {
+            "galaxy": "DDO52",
+            "points": 11,
+            "rmseKmS": 6.4945712309939,
+            "normalizedRmse": 0.17999840967520014
+          },
+          {
+            "galaxy": "DDO53",
+            "points": 8,
+            "rmseKmS": 1.6421873732774852,
+            "normalizedRmse": 0.09945903999285541
+          },
+          {
+            "galaxy": "DDO87",
+            "points": 12,
+            "rmseKmS": 5.293934711935973,
+            "normalizedRmse": 0.17000484225947485
+          },
+          {
+            "galaxy": "NGC1569",
+            "points": 8,
+            "rmseKmS": 23.351216081885983,
+            "normalizedRmse": 0.40596436818752785
+          },
+          {
+            "galaxy": "UGC8508",
+            "points": 11,
+            "rmseKmS": 2.332423279683939,
+            "normalizedRmse": 0.09886725060293654
+          }
+        ]
+      }
+    },
+    {
+      "model": "refracted_gravity_published_fixture",
+      "manifestPath": "hosted-simulator/examples/models/refracted-gravity.json",
+      "manifestSha256": "cc760ee32424972a7898bf731d573099f7fe25ebbd48cde97c29fee1714af1af",
+      "batchId": "batch_6045fd76301af8e703d22ead",
+      "batchState": "succeeded",
+      "batchScientificResultSha256": "33171e9f900f54aa8f144ac1d18df7159f16e3355c79d688958f2a308e1763a2",
+      "modelSha256": "4a0c9be0ba6f430d4d073f0ee6bf1e98de437908de81d0ad533261fea5d14bef",
+      "systems": 13,
+      "succeededSystems": 13,
+      "convergenceFraction": 1,
+      "maximumEquationResidual": 5.961321312940549e-10,
+      "scoredSystems": 13,
+      "validObservationPoints": 161,
+      "equalGalaxyRmseKmS": 14.439464721620908,
+      "pointWeightedRmseKmS": 14.864109675169368,
+      "reducedChiSquare": 20.898836281488595,
+      "universalGravityParameters": 4,
+      "perObjectGravityParameters": 0,
+      "downloadedArtifactCount": 10,
+      "allDownloadedArtifactHashesValid": true,
+      "frozenCurveConformance": null
+    }
+  ],
+  "gateResults": {
+    "required_systems": true,
+    "minimum_scored_systems_per_model": true,
+    "minimum_common_scored_systems": true,
+    "all_batches_succeeded": true,
+    "convergence_fraction": true,
+    "equation_residual": true,
+    "frozen_curve_conformance": true,
+    "no_per_object_gravity_parameters": true,
+    "artifact_hashes": true
+  },
+  "failedGates": [],
+  "configSha256": "a81c416e5b2a55d0356679f49f7f3e0ce2a5dfc56d5b68cb22f6c313c88127ac",
+  "kinematicsArchiveSha256": "967110269d59357ee3a94d1d6e46c2402aef38da3f674180d42044ceaf094173",
+  "frozenCurvesSha256": "b9912258ed9cf223987817b153de97c09c49ce6a55ac6bb1e3cfd42ccc0adcbc",
+  "galaxyJobs": [
+    {
+      "galaxy": "CVnIdwA",
+      "mapUploadId": "upload_1cacf6284fa80ae26ea1e420",
+      "extractJobId": "job_3b8bfdc5526d7fb0ee5bc32f",
+      "extractScientificResultSha256": "45dc6bce6a582185bf1c692403a1e029a2b95683a7d89ff600edd751d9d44462",
+      "generateJobId": "job_e355039cfc47130afbd5a2bb",
+      "generateScientificResultSha256": "79cf6aeed5724510283784ca1cf91902886a00b2930a25d6ec92ee78d35f9c2f",
+      "parameterPackageSha256": "668265e7f2822f76fad2566db75d5c299567ad9e107b00547df12a4e591bcee1"
+    },
+    {
+      "galaxy": "DDO47",
+      "mapUploadId": "upload_ca15a5d87df455fa531d6443",
+      "extractJobId": "job_42e8aeadea0deb5c348d50fc",
+      "extractScientificResultSha256": "ad913dddacd4de7e7c2587c2167e76cbe9cd5e34fc9f40a948cb489374f265f7",
+      "generateJobId": "job_7fd1566cce8d4320a47eef3a",
+      "generateScientificResultSha256": "036c16a3b5b9b4c3d4a60662f0ab4c8aa20359e24570f19050686b0dea7b251b",
+      "parameterPackageSha256": "87766186ad38ac96abded69db8581a3cd7203abf7c0e0227a534db09a0096386"
+    },
+    {
+      "galaxy": "DDO50",
+      "mapUploadId": "upload_471946fb4ff96c94e234dbc8",
+      "extractJobId": "job_398361cabf3276b70a4fdcf1",
+      "extractScientificResultSha256": "770420ce5e7336a73ee88b3aa8ecc720cb306e0f281076ce15c2cd42d90a0ed7",
+      "generateJobId": "job_10d6491d04f5df5433f757d5",
+      "generateScientificResultSha256": "4e1741f4061403806ce37a5a22a6ae1781e11315cd906f2abd9d689517c3111d",
+      "parameterPackageSha256": "41ea590650802466cef6916756e2d7030b388cd3aaa92785519bd5753f92a45c"
+    },
+    {
+      "galaxy": "DDO52",
+      "mapUploadId": "upload_07bd2cb4576a22f6c1c29e6d",
+      "extractJobId": "job_3d694b23acb1d9a519e560d5",
+      "extractScientificResultSha256": "70d5362ecc43e616c1ff30cd8349123dd8a12460ce278991e0e4d0bb71baa2b8",
+      "generateJobId": "job_90600b65e329c5b0b283200b",
+      "generateScientificResultSha256": "5e6c1ad7d36897985cb07801845844cba1a3767cdea85a61db7a8d8011def084",
+      "parameterPackageSha256": "b20e3d6d272202727ebdca71e51ad7f29af1970ac3c68ac5f0942a22451e5505"
+    },
+    {
+      "galaxy": "DDO53",
+      "mapUploadId": "upload_e1d55a17d87913d653fd731d",
+      "extractJobId": "job_5750987e9bd272c2ecf64ff5",
+      "extractScientificResultSha256": "b4cc204f3774b31a9b6fbc0961dc31dcb4fe7c671306b0d6f011c0eb451eae2e",
+      "generateJobId": "job_dc1ee30b4be44e31fe4148ce",
+      "generateScientificResultSha256": "bb7a7bc4c0ac3dc0f62dcf8ab47cdd7e58bf50c2b28288912ba8b4cf9ef5ed58",
+      "parameterPackageSha256": "c56d18b8c2e186924eda08452fdd3ef993a872e2ea045136848747251aaae960"
+    },
+    {
+      "galaxy": "DDO87",
+      "mapUploadId": "upload_521e7f2c06be6c0aec4d6a2b",
+      "extractJobId": "job_52d127308f425ebc124d9bbd",
+      "extractScientificResultSha256": "1109dbee6f13afb2c4a3a7a4838f946fc34951df9c767ddbe38f49e3f330ba2b",
+      "generateJobId": "job_d3d2bb12fe97f74f3f3f87cc",
+      "generateScientificResultSha256": "4a1e1bb470e89f7d5cd6497de747a315e6d94228faa4141a161aaa03dc6e68b0",
+      "parameterPackageSha256": "9cce8f4fbd445ef2f4194ce85a3fafd246c7b7341577682da241767337310905"
+    },
+    {
+      "galaxy": "DDO101",
+      "mapUploadId": "upload_e62aaa492c8c36e5d4c9dbdd",
+      "extractJobId": "job_88553899b50a3ee9be5b40f8",
+      "extractScientificResultSha256": "1a54552aa6aa57bae7b58778b9cd8b77c864b0e309c21f1793f10e9d93afd80b",
+      "generateJobId": "job_bafddadbde446963ac11da5b",
+      "generateScientificResultSha256": "8e79c945dfb2337c5472cdd48523b4f1862ab93f03655859bcb1572588fa91d3",
+      "parameterPackageSha256": "715a6edd2efcebdfdf3f8f5d3c7a9f9fe084e8826d126a3a9f80527cb6466061"
+    },
+    {
+      "galaxy": "DDO126",
+      "mapUploadId": "upload_8b0801f99a2ad42f61cf3403",
+      "extractJobId": "job_116c0b89b78532e20bbba11c",
+      "extractScientificResultSha256": "13d0cf2e9db8ea5470201c429e7d755ea007ac89a350f58975d068dbbcc28ed8",
+      "generateJobId": "job_982e97943dcaaaefceb1dd49",
+      "generateScientificResultSha256": "323e9192c967a9c18f4efdc1af229c111dedcbb8deb8abf0f4597eba56bbe69d",
+      "parameterPackageSha256": "352eb88f8a1d6d2e6b6dc7248c9099b57687f89035b6ee2802ee72882a4f808d"
+    },
+    {
+      "galaxy": "DDO133",
+      "mapUploadId": "upload_2a8feec569922c0d3a3ea3c6",
+      "extractJobId": "job_1ed3c14399e144d454c9bb9b",
+      "extractScientificResultSha256": "94aa2dbaf662735da20095a4a9ef84386c9227cc5a6e166db330998aac52ae44",
+      "generateJobId": "job_1f7cb50ac8d001734180b67f",
+      "generateScientificResultSha256": "077f95900b157f124cc6e3ce64c91b809cb8f2c181cf587571630fad29c40afb",
+      "parameterPackageSha256": "041303cfae398f4b4e5c7b58694e425b71340bbb5d5288f2071d8c8bd7bd4073"
+    },
+    {
+      "galaxy": "DDO210",
+      "mapUploadId": "upload_b2f808de8a0032e92528cd93",
+      "extractJobId": "job_2c6efb10e3e916f5f8372399",
+      "extractScientificResultSha256": "da2fe8a33881e358539ca4c7e5cec3048bab70f9aa52353a6686fa391181845c",
+      "generateJobId": "job_99a86aae58cf378ae08f8810",
+      "generateScientificResultSha256": "0b731b7f7de00ed32584f13b30e6ffff56c7913ec83831af836ce658242ef571",
+      "parameterPackageSha256": "a6d978bd074d92b1c6a615830dcbbda35fb7bd063c189558fe9a4165290c2f1b"
+    },
+    {
+      "galaxy": "DDO216",
+      "mapUploadId": "upload_21910262acb01fca1eb0302b",
+      "extractJobId": "job_7826fef12b7bd3615ae7c63b",
+      "extractScientificResultSha256": "bec8834b444c1a6e9044506aa4990ca3684adac445cf74e70f41d6893d4abb40",
+      "generateJobId": "job_cfecb4f74bd6f901b3f0f192",
+      "generateScientificResultSha256": "9a3e41b16967f55978c8b67f6f694e1c24eeebfdbd5a84393bcdc4c3306657c6",
+      "parameterPackageSha256": "8f70eac24a8ae2fae39ec61e576d66b1d52bcca04dfe842d6d0fb4e0d276593e"
+    },
+    {
+      "galaxy": "NGC1569",
+      "mapUploadId": "upload_090e38dd62be739e47937cc4",
+      "extractJobId": "job_f77e74556d8526689b58ae24",
+      "extractScientificResultSha256": "df73ba50e49f24b624ccabd690aa67327f22796f2c13bc4b5453d37c223788f7",
+      "generateJobId": "job_aa63fd1de2ba942bbcf6b160",
+      "generateScientificResultSha256": "c31f885ba3d3c2b775ab1636d32051b19dbf83f3a0a95d2d0ca2d7df87fe09a4",
+      "parameterPackageSha256": "47c3d6c364e81d51632896636f802e8bb3d3f1e99dd3d7272dc2af78be514896"
+    },
+    {
+      "galaxy": "UGC8508",
+      "mapUploadId": "upload_5d74c34b2be46773affab44c",
+      "extractJobId": "job_f22ed350408762ab40f782b6",
+      "extractScientificResultSha256": "01620d37afcb4c0fe05abf6efbd58c69f18a8a8501caccf40632f3dd8425906a",
+      "generateJobId": "job_b8c2813004222959ecdeda3a",
+      "generateScientificResultSha256": "f770f46ad361eb0e77d16932a1321fbab3f369c9b514f9addfcd73663c8a23aa",
+      "parameterPackageSha256": "ec1bce17df6b268ca153d8469317ba806d524e45980f92cffdde44b70b1c2882"
+    }
+  ],
+  "claimBoundary": [
+    "This is engineering conformance on a previously opened sample, not a new blind validation.",
+    "The 33x33x9 grid and zero far-field Dirichlet approximation are commissioning choices.",
+    "The Refracted Gravity fixture is an exploratory published-fixed comparison and has no P0708 frozen-curve conformance target.",
+    "Circular speeds test massive tracers only; photon lensing and resolved line-of-sight velocity fields are not evaluated."
+  ]
+}

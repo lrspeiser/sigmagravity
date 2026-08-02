@@ -410,7 +410,10 @@ def resolved_map_morphology(
 
     r20 = radius_at(0.2)
     r80 = radius_at(0.8)
-    concentration = 5.0 * np.log10(r80 / max(r20, np.finfo(float).tiny))
+    radius_resolution = float(abs(axis[1] - axis[0]))
+    concentration = 5.0 * np.log10(
+        max(r80, radius_resolution) / max(r20, radius_resolution)
+    )
     lopsidedness = float(
         np.sum(np.abs(image - image[::-1, ::-1])) / (2.0 * np.sum(image))
     )
@@ -422,4 +425,5 @@ def resolved_map_morphology(
         "clumpiness_positive_highpass": clumpiness,
         "r20_kpc": r20,
         "r80_kpc": r80,
+        "concentration_radius_floor_kpc": radius_resolution,
     }

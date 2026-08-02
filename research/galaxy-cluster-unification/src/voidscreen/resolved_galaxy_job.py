@@ -247,11 +247,12 @@ def _vertical_products(
 ) -> tuple[dict[str, Array] | None, list[dict[str, Any]], Array | None]:
     if not controls["enabled"]:
         return None, [], None
+    radial_resolution = float(axis[1] - axis[0])
     total_morphology = resolved_map_morphology(
         generated["total"], disk_axis_kpc=axis, smoothing_sigma_pixel=2.0
     )
     total_r80 = float(total_morphology["r80_kpc"])
-    z_limit = max(8.0 * float(axis[1] - axis[0]), 0.8 * total_r80)
+    z_limit = max(8.0 * radial_resolution, 0.8 * total_r80)
     z_axis = np.linspace(-z_limit, z_limit, int(controls["zCells"]))
     first: dict[str, Array] = {}
     metadata: list[dict[str, Any]] = []
@@ -259,7 +260,13 @@ def _vertical_products(
         morphology = resolved_map_morphology(
             generated[component], disk_axis_kpc=axis, smoothing_sigma_pixel=2.0
         )
-        r80 = float(morphology["r80_kpc"])
+        measured_r80 = float(morphology["r80_kpc"])
+        # A compact component can collapse into the central pixel when a
+        # high-resolution parameter package is intentionally replayed on a
+        # coarse commissioning grid. Depth is then unresolved, not zero. Use
+        # one radial cell as an explicit resolution floor for the vertical
+        # prior and preserve both values in the metadata.
+        r80 = max(measured_r80, radial_resolution)
         for realization in range(int(controls["realizations"])):
             sequence = np.random.SeedSequence(
                 [int(controls["seed"]), component_index, realization]
@@ -281,6 +288,9 @@ def _vertical_products(
             metadata.append(
                 {
                     **description,
+                    "measuredR80Kpc": measured_r80,
+                    "r80ResolutionFloorKpc": radial_resolution,
+                    "r80ResolutionFloorApplied": measured_r80 < radial_resolution,
                     "realization": realization,
                     "zCells": len(z_axis),
                     "zLimitKpc": z_limit,

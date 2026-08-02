@@ -6,7 +6,10 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from voidscreen.generic_field_worker import solve_field_manifest
+from voidscreen.generic_field_worker import (
+    evaluate_field_expression,
+    solve_field_manifest,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -146,5 +149,57 @@ def test_published_refracted_gravity_tree_runs_without_a_theory_specific_branch(
     assert solution.converged
     assert solution.iterations == 2
     assert np.all(np.isfinite(solution.fields["Phi"]))
+    assert len(solution.observables["massive_tracer_acceleration"]) == 2
+    assert solution.metadata["engine"] == "generic-divergence-field-worker-v1"
+
+
+def test_explicit_zero_vector_limit_resolves_singular_isotropic_flux() -> None:
+    zeros = np.zeros((9, 9), dtype=float)
+    expression = {
+        "op": "multiply_zero_vector_limit",
+        "args": [
+            {
+                "op": "divide",
+                "args": [
+                    {"const": 1.0},
+                    {
+                        "op": "norm",
+                        "args": [
+                            {"op": "gradient", "args": [{"field": "potential"}]}
+                        ],
+                    },
+                ],
+            },
+            {"op": "gradient", "args": [{"field": "potential"}]},
+        ],
+    }
+    flux = evaluate_field_expression(
+        expression,
+        fields={"potential": zeros},
+        parameters={},
+        spacing=[1.0, 1.0],
+    )
+    assert isinstance(flux, tuple)
+    assert all(np.array_equal(component, zeros) for component in flux)
+
+
+def test_published_qumond_tree_runs_without_a_theory_specific_branch() -> None:
+    path = ROOT / "hosted-simulator" / "examples" / "models" / "qumond.json"
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    manifest["geometry"]["coordinateSystem"] = "cartesian_2d"
+    manifest["geometry"]["dimensions"] = 2
+    manifest["solver"].update({"maxIterations": 8, "damping": 1.0})
+    cells = 17
+    coordinates = np.linspace(-4.0, 4.0, cells)
+    x, y = np.meshgrid(coordinates, coordinates, indexing="ij")
+    density = 1.0e-27 + 2.0e-21 * np.exp(-(x**2 + y**2))
+    solution = solve_field_manifest(
+        manifest,
+        {"baryon_density": density},
+        0.5 * 3.085677581491367e19,
+    )
+    assert solution.converged
+    assert solution.iterations == 2
+    assert all(np.all(np.isfinite(value)) for value in solution.fields.values())
     assert len(solution.observables["massive_tracer_acceleration"]) == 2
     assert solution.metadata["engine"] == "generic-divergence-field-worker-v1"

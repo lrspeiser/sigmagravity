@@ -6,7 +6,10 @@ from pathlib import Path
 import numpy as np
 
 from voidscreen.field_job import file_sha256, load_array_bundle, write_array_bundle
-from voidscreen.resolved_galaxy_job import execute_galaxy_request_file
+from voidscreen.resolved_galaxy_job import (
+    _vertical_products,
+    execute_galaxy_request_file,
+)
 
 
 def input_bundle(root: Path) -> Path:
@@ -114,6 +117,27 @@ def test_extract_job_emits_verified_2d_and_3d_bundles(tmp_path: Path) -> None:
     metrics = json.loads((output / "roundtrip_metrics.json").read_text(encoding="utf-8"))
     assert metrics["total"]["mass_relative_error"] < 1e-12
     assert metrics["total"]["pixel_correlation"] > 0.95
+
+
+def test_vertical_prior_uses_disclosed_resolution_floor_for_central_pixel() -> None:
+    axis = np.linspace(-16.0, 16.0, 33)
+    gas = np.zeros((33, 33), dtype=float)
+    stars = np.zeros_like(gas)
+    gas[16, 16] = 2.0
+    stars[16, 16] = 1.0
+    volume, metadata, z_axis = _vertical_products(
+        {"gas": gas, "stars": stars, "total": gas + stars},
+        axis,
+        {"enabled": True, "realizations": 1, "zCells": 9, "seed": 7},
+    )
+    assert volume is not None
+    assert z_axis is not None
+    assert all(item["measuredR80Kpc"] == 0.0 for item in metadata)
+    assert all(item["r80ResolutionFloorApplied"] is True for item in metadata)
+    assert all(item["r80ResolutionFloorKpc"] == 1.0 for item in metadata)
+    dz = float(z_axis[1] - z_axis[0])
+    np.testing.assert_allclose(np.sum(volume["gas"], axis=2) * dz, gas)
+    np.testing.assert_allclose(np.sum(volume["stars"], axis=2) * dz, stars)
 
 
 def load_array_bundle_from_artifacts(

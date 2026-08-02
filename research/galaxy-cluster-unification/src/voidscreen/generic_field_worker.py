@@ -93,7 +93,34 @@ def _binary(operation: str, left: ExpressionValue, right: ExpressionValue) -> Ex
         "min": np.minimum,
         "max": np.maximum,
     }
-    return functions[operation](left, right)
+    with np.errstate(divide="ignore", invalid="ignore", over="ignore", under="ignore"):
+        return functions[operation](left, right)
+
+
+def _multiply_zero_vector_limit(
+    left: ExpressionValue, right: ExpressionValue
+) -> tuple[Array, ...]:
+    """Scale a vector while explicitly defining a singular zero-vector limit.
+
+    This operator is opt-in because an expression such as ``f(|v|) v`` may
+    contain a coefficient that diverges at ``v=0``. The manifest author uses
+    it only when the complete vector flux is mathematically defined to be zero
+    there. Non-finite coefficients at non-zero vectors remain non-finite and
+    are rejected by the consuming field equation.
+    """
+
+    if isinstance(left, tuple) == isinstance(right, tuple):
+        raise ValueError(
+            "multiply_zero_vector_limit requires exactly one vector and one scalar"
+        )
+    vector = left if isinstance(left, tuple) else right
+    scalar = right if isinstance(left, tuple) else left
+    scalar_values = np.asarray(scalar, dtype=float)
+    magnitude_squared = sum(np.square(component) for component in vector)
+    zero_limit = (magnitude_squared == 0.0) & ~np.isfinite(scalar_values)
+    with np.errstate(invalid="ignore", over="ignore", under="ignore"):
+        products = tuple(np.multiply(component, scalar_values) for component in vector)
+    return tuple(np.where(zero_limit, 0.0, component) for component in products)
 
 
 def evaluate_field_expression(
@@ -131,6 +158,10 @@ def evaluate_field_expression(
         for value in values[1:]:
             result = _binary(operation, result, value)
         return result
+    if operation == "multiply_zero_vector_limit":
+        if len(values) != 2:
+            raise ValueError("multiply_zero_vector_limit requires exactly two arguments")
+        return _multiply_zero_vector_limit(values[0], values[1])
     if operation == "negate":
         return tuple(-value for value in values[0]) if isinstance(values[0], tuple) else -values[0]
     if operation == "norm":
@@ -161,13 +192,16 @@ def evaluate_field_expression(
             raise ValueError("dot requires vectors")
         return sum(a * b for a, b in zip(values[0], values[1], strict=True))
     if operation == "pow":
-        return np.power(values[0], values[1])
+        with np.errstate(divide="ignore", invalid="ignore", over="ignore", under="ignore"):
+            return np.power(values[0], values[1])
     if operation == "sqrt":
-        return np.sqrt(values[0])
+        with np.errstate(invalid="ignore"):
+            return np.sqrt(values[0])
     if operation == "exp":
         return np.exp(values[0])
     if operation == "log":
-        return np.log(values[0])
+        with np.errstate(divide="ignore", invalid="ignore"):
+            return np.log(values[0])
     if operation == "tanh":
         return np.tanh(values[0])
     if operation == "smoothstep":

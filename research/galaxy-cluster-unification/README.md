@@ -1469,3 +1469,29 @@ $env:PYTHONPATH='src'
 python scripts/audit_p0636_little_things_baryons.py
 python -m pytest tests/test_p0636_little_things_baryon_acquisition.py -q
 ```
+
+## Formula-neutral 2D/3D simulator commissioning (P0720-P0723)
+
+The simulator now has a gravity-independent inverse/forward galaxy path and a
+shared asynchronous field API. Registered gas and stellar maps are converted
+into content-hashed structural parameters, replayed as 2D maps and explicitly
+prior-based 3D density ensembles, and passed to confirmed typed field
+manifests. The model and the galaxy generator remain separate.
+
+P0723 ran Newtonian Poisson, AQUAL, QUMOND, and Refracted Gravity through that
+same path on all 13 registered galaxies. All 52 solves converged, all 161
+circular-speed points per model were scored, downloaded artifacts rehashed
+successfully, and no per-galaxy gravity parameter was used. QUMOND had the
+lowest equal-galaxy RMSE (`12.486 km/s`), followed by AQUAL (`13.131 km/s`),
+Refracted Gravity (`14.439 km/s`), and Newtonian baryons (`23.154 km/s`). The
+aggregate reduced chi-square remains poor for every manifest, so this is a
+formula-neutral engineering result rather than evidence that any tested model
+is sufficient. See
+[`docs/P0723_FORMULA_NEUTRAL_RESOLVED_COMPARATOR_RESULTS.md`](docs/P0723_FORMULA_NEUTRAL_RESOLVED_COMPARATOR_RESULTS.md)
+and
+[`docs/PUBLIC_SIMULATOR_2D_3D_GENERATOR_ROADMAP.md`](docs/PUBLIC_SIMULATOR_2D_3D_GENERATOR_ROADMAP.md).
+
+```powershell
+python scripts/run_p0723_formula_neutral_api_comparators.py `
+  --base-url http://127.0.0.1:4173
+```

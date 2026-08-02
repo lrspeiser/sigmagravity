@@ -1,0 +1,63 @@
+{
+  "stage": "P0723",
+  "purpose": "Commission the formula-neutral HTTP API across all 13 resolved LITTLE THINGS galaxies and four frozen field manifests.",
+  "sampleStatus": "previously_unsealed_and_project_spent",
+  "systems": [
+    "CVnIdwA", "DDO47", "DDO50", "DDO52", "DDO53", "DDO87", "DDO101",
+    "DDO126", "DDO133", "DDO210", "DDO216", "NGC1569", "UGC8508"
+  ],
+  "models": [
+    {
+      "id": "newtonian_poisson",
+      "manifest": "hosted-simulator/examples/models/newtonian-poisson.json",
+      "frozenCurveModel": "Newtonian_3D"
+    },
+    {
+      "id": "aqual_simple_mu",
+      "manifest": "hosted-simulator/examples/models/aqual.json",
+      "frozenCurveModel": "AQUAL_simple_mu_3D"
+    },
+    {
+      "id": "qumond_simple_nu",
+      "manifest": "hosted-simulator/examples/models/qumond.json",
+      "frozenCurveModel": "QUMOND_simple_nu_3D"
+    },
+    {
+      "id": "refracted_gravity_published_fixture",
+      "manifest": "hosted-simulator/examples/models/refracted-gravity.json",
+      "frozenCurveModel": null
+    }
+  ],
+  "extraction": {
+    "radialBins": 20,
+    "maximumFourierMode": 4,
+    "residualFeatureCountPerComponent": 24
+  },
+  "generation": {
+    "cellsPerAxis": 33,
+    "zCells": 9,
+    "verticalRealizations": 1,
+    "seed": 20260803
+  },
+  "observation": {
+    "azimuthalSamples": 128,
+    "minimumAzimuthalCoverage": 0.95,
+    "fittedNuisanceParameters": 0
+  },
+  "engineeringGates": {
+    "requiredSystems": 13,
+    "minimumScoredSystemsPerModel": 11,
+    "minimumCommonScoredSystems": 11,
+    "minimumConvergenceFraction": 1.0,
+    "maximumEquationResidual": 1e-7,
+    "maximumFrozenCurveNormalizedRmse": 0.2,
+    "maximumPerObjectGravityParameters": 0,
+    "allDownloadedArtifactHashesMustValidate": true
+  },
+  "claimBoundary": [
+    "This is engineering conformance on a previously opened sample, not a new blind validation.",
+    "The 33x33x9 grid and zero far-field Dirichlet approximation are commissioning choices.",
+    "The Refracted Gravity fixture is an exploratory published-fixed comparison and has no P0708 frozen-curve conformance target.",
+    "Circular speeds test massive tracers only; photon lensing and resolved line-of-sight velocity fields are not evaluated."
+  ]
+}

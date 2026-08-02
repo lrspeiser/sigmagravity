@@ -119,11 +119,17 @@ function inferExpression(node, context, state, depth = 0) {
     if (!sameType(left, right)) throw new Error(`${op} type mismatch: ${describeType(left)} versus ${describeType(right)}`);
     return left;
   }
-  if (op === "multiply") {
-    if (!Array.isArray(node.args) || node.args.length < 2) throw new Error("multiply requires at least 2 arguments");
+  if (op === "multiply" || op === "multiply_zero_vector_limit") {
+    if (!Array.isArray(node.args) || node.args.length < 2) throw new Error(`${op} requires at least 2 arguments`);
+    if (op === "multiply_zero_vector_limit" && node.args.length !== 2) {
+      throw new Error("multiply_zero_vector_limit requires exactly 2 arguments");
+    }
     const factors = node.args.map((argument) => inferExpression(argument, context, state, depth + 1));
     const nonScalars = factors.filter((factor) => factor.rank !== "scalar");
-    if (nonScalars.length > 1) throw new Error("multiply accepts at most one vector or tensor; use dot or outer for vector/tensor products");
+    if (nonScalars.length > 1) throw new Error(`${op} accepts at most one vector or tensor; use dot or outer for vector/tensor products`);
+    if (op === "multiply_zero_vector_limit" && nonScalars[0]?.rank !== "vector") {
+      throw new Error("multiply_zero_vector_limit requires exactly one vector and one scalar");
+    }
     return {
       rank: nonScalars[0]?.rank ?? "scalar",
       dimension: factors.reduce((total, factor) => addDimension(total, factor.dimension), D0),

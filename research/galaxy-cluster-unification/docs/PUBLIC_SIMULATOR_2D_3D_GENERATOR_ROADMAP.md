@@ -39,6 +39,7 @@ trusted solver.
 | Asynchronous galaxy-job API | immutable map upload, extraction, 2D/3D generation, polling, events, cancellation, verified downloads, and parameter-controlled replay pass through real HTTP | local single-user worker; public Vercel route advertises the schema but cannot execute it yet |
 | Asynchronous multi-system batch API | one frozen manifest and policy run across generated/uploaded 2D or 3D bundles, with polling, cancellation, child jobs, restart recovery, deterministic rehashed reports, and circular-speed scoring | local reference service only; resolved velocity fields and photon lensing are not connected |
 | Massive-tracer circular-speed adapter | any compatible Cartesian 2D/3D acceleration observable can be sampled into a curve and scored with diagonal uncertainties or covariance after the solve | one radial observable class; no velocity-field or photon-lensing mapping yet |
+| Full resolved formula-neutral comparator | P0723 ran Newtonian, AQUAL, QUMOND, and Refracted Gravity manifests over all 13 map-derived 3D replicas: 52/52 converged, 161 points/model scored, zero per-object gravity parameters, and all frozen engineering gates passed | spent dwarf-only sample and coarse commissioning grid; no resolved velocity-field, photon-lensing, or blind holdout claim |
 
 The generic worker dispatches from equation structure, not a theory name. It
 supports `laplacian(phi)=source` and
@@ -95,14 +96,15 @@ used to hide a broken reconstruction, solver, or observation adapter.
 ## Current next milestone
 
 The local field API, real-map extraction/generation round trip, asynchronous
-galaxy-job contract, and chained multi-system batch now pass. Galaxy jobs emit
-SI surface- and volume-density bundles that any compatible confirmed manifest
-can consume. One batch freezes its manifest and parameter policy and produces
-content-addressed per-system and aggregate reports. The next product milestone
-is to extend the working circular-speed scorer across the full resolved sample
-and frozen comparators, then add velocity-field and photon-lensing adapters.
-The next scientific milestone is synthetic hidden-truth recovery with noise,
-PSF, inclination, bulge, thickness, and calibrated uncertainties, followed by
-an untouched morphologically varied whole-galaxy holdout. Production hosting
-still requires durable object storage, job metadata, isolated workers, auth,
-quotas, and monitoring.
+galaxy-job contract, chained multi-system batch, and full resolved comparator
+now pass. P0723 used one unchanged path for four manifests across all 13
+registered galaxies; all 52 solves converged and every model retained zero
+per-object gravity parameters. The next product milestone is a beam-aware
+resolved velocity-field adapter, followed by a separately typed photon-lensing
+adapter. Before either is treated scientifically, run declared resolution,
+boundary, and vertical-prior sensitivities. The next scientific milestone is
+synthetic hidden-truth recovery with noise, PSF/beam, inclination, bulge,
+thickness, and calibrated uncertainties, followed by an untouched
+morphologically varied whole-galaxy holdout. Production hosting still requires
+durable object storage, job metadata, isolated workers, auth, quotas, and
+monitoring.

@@ -35,7 +35,7 @@
       "rhs": {
         "op": "divergence",
         "args": [{
-          "op": "multiply",
+          "op": "multiply_zero_vector_limit",
           "args": [
             {
               "op": "add",
