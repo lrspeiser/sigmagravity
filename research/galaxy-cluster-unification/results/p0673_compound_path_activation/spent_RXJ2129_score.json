@@ -1,0 +1,15 @@
+{
+  "case": "RXJ2129",
+  "domain": "spent_cluster_baryons_only",
+  "scenario": "nominal",
+  "mass_weighted_sigma": 0.18039360253438827,
+  "mass_weighted_elementary_probability": 0.005013144393694744,
+  "mass_weighted_coherent_opportunities": 69.83215015544799,
+  "mass_weighted_trace_length_kpc": 78.77094298954297,
+  "multipole_power_gate": 0.016475589595831112,
+  "multipole_amplitude_gate": 0.12835727324865978,
+  "sigma_minimum": 1.1480914856285649e-07,
+  "sigma_maximum": 0.9601385179902467,
+  "minimum_constitutive_eigenvalue_proxy": 0.008030289896988983,
+  "all_coefficients_finite": true
+}

@@ -1,0 +1,56 @@
+{
+  "report_version": "P0673-COMPOUND-PATH-ACTIVATION-RESULTS-1.0.0",
+  "status": "pass",
+  "all_progression_gates_pass": true,
+  "candidate_advanced_to_new_spent_field_solve": true,
+  "protocol_sha256": "aa1de5a579fee78bc55c7a429a47d5fd3decde5ae3d69b23b96b5517cf907ce0",
+  "source_sha256": "964807106c334596b26eb82725e48890535cd0862842f8291a25c5104d076289",
+  "activation_source_sha256": "ef9fcf8f924ab05596aa738c7e4a6802eb29d20130e501f1d233fffd87111c42",
+  "registered_map_manifest_sha256": "1dd7af5a986f14a007eebbd9b8152aa1e876811cc65e8ab64dd5b4121ce30eaa",
+  "spent_map_sha256": "4804b357f9c67bb204b058e98de4d1ddf00340e301b86d001bb0a21132c47a77",
+  "metrics": {
+    "radial_cocentered_synthetic_mass_weighted_sigma": 2.7928514448349736e-21,
+    "registered_galaxy_nominal_median_sigma": 5.3340752417078445e-05,
+    "registered_cluster_nominal_median_sigma": 0.5558286528117674,
+    "registered_cluster_to_galaxy_nominal_median_sigma_ratio": 10420.337689758651,
+    "mass_sensitivity_cluster_to_galaxy_sigma_ratios": {
+      "low": 12984.076946628133,
+      "nominal": 10420.337689758651,
+      "high": 9041.889721982696
+    },
+    "spent_RXJ2129_mass_weighted_sigma": 0.18039360253438827,
+    "spent_RXJ2129_mass_weighted_elementary_probability": 0.005013144393694744,
+    "spent_RXJ2129_mass_weighted_coherent_opportunities": 69.83215015544799,
+    "maximum_sigma": 0.999999,
+    "minimum_constitutive_eigenvalue_proxy": 1.559054857418693e-07
+  },
+  "gate_results": {
+    "P0672_failure_mode": true,
+    "P0669_registered_parent": true,
+    "P0670_spent_parent": true,
+    "galaxy_coverage": true,
+    "cluster_coverage": true,
+    "radial_null": true,
+    "galaxy_channel_small": true,
+    "cluster_channel_nonperturbative": true,
+    "nominal_domain_separation": true,
+    "mass_sensitivity": true,
+    "spent_cluster_channel": true,
+    "bounded_sigma": true,
+    "sigma_cap": true,
+    "positive_eigenvalue": true,
+    "no_new_constants": true,
+    "no_per_object_parameters": true,
+    "no_new_raw_lens_score": true,
+    "sealed_targets_untouched": true
+  },
+  "new_raw_lens_score_computed": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0672's spent failure motivates the compound architecture, but no P0673 numerical constant or threshold is fit to its image residuals.",
+    "The compound rule is a constitutive hypothesis, not yet a consequence of a covariant action or microscopic transport model.",
+    "A coefficient pass does not establish field convergence, critical topology, or raw-lens accuracy.",
+    "P0633 galaxy kinematics and P0640 cluster lens constraints remain sealed."
+  ]
+}
