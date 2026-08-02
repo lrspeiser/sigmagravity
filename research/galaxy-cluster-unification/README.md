@@ -16,11 +16,12 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0677-absolute-field-audit`](latest-findings/2026-08-02-p0677-absolute-field-audit/README.md).
-It reconciles the P0620 empirical route, P0633-P0641 frozen external data,
-P0659-P0671 absolute Poisson/AQUAL/QUMOND and 3D tensor work, and the decisive
-P0672-P0677 raw-topology and confinement failures. The preceding complete
-P0612-P0621 archival bundle remains in
+[`latest-findings/2026-08-02-p0682-spent-deflection-atlas`](latest-findings/2026-08-02-p0682-spent-deflection-atlas/README.md).
+It extends the P0677 absolute-field audit through the derivative-qualified
+RXJ2129 decomposition and the six-cluster spent deflection atlas. The prior
+P0677 snapshot remains in
+[`latest-findings/2026-08-02-p0677-absolute-field-audit`](latest-findings/2026-08-02-p0677-absolute-field-audit/README.md),
+and the complete P0612-P0621 archival bundle remains in
 [`latest-findings/2026-08-01-p0620-gravity-routing`](latest-findings/2026-08-01-p0620-gravity-routing/README.md).
 
 The public simulator/API delivery plan is maintained in
@@ -30,7 +31,7 @@ submission, asynchronous field-solver jobs, frozen comparators, parameter
 accounting, Vercel hosting for the web/gateway layer, and isolated Cloud Run or
 Modal workers for scientific computation.
 
-## Absolute-field update through P0677
+## Absolute-field update through P0682
 
 The newest first-principles-style branch starts from divergence-form AQUAL,
 uses real registered two-dimensional baryon maps lifted into physical 3D, and
@@ -43,10 +44,16 @@ law raises it by 30%. Both miss their frozen advancement gates, and arbitrary
 fitted powers are prohibited.
 
 The supported conclusion is that angular routing is not the current
-bottleneck. The next development target is a baryon-predictable **radial
-monopole/effective-extent law**, informed only by spent inverse maps, before any
-new sealed galaxy or cluster outcome is opened. See the latest review entry
-above for exact metrics and stop/go thresholds.
+bottleneck. P0682 now repeats the required-field decomposition across six
+spent clusters. All five non-boundary systems pass the frozen radial-morphology
+gate; their median radial halo/baryon ratios have geometric mean `8.59` and
+scatter `0.127 dex`. Only three compact-halo targets meet the reliability rule,
+so no baryonic amplitude predictor advances. The next development target is a
+baryon-predictable **radial monopole/effective-extent law**, tested against both
+spherical and registered 3D baryon maps before any new sealed galaxy or cluster
+outcome is opened. See
+[`docs/P0682_SPENT_MULTICLUSTER_DEFLECTION_ATLAS_RESULTS.md`](docs/P0682_SPENT_MULTICLUSTER_DEFLECTION_ATLAS_RESULTS.md)
+for exact metrics and stop/go thresholds.
 
 ## Untouched external validation (P0633)
 
