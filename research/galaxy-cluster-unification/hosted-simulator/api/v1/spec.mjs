@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.4.0-preview",
-    description: "Stateless radial tests plus a dimension-checked, formula-independent 2D/3D contract. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
+    version: "0.6.0-preview",
+    description: "Stateless radial tests plus a dimension-checked, formula-independent 2D/3D contract with circular-speed and resolved line-of-sight velocity-field targets. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
@@ -15,7 +15,7 @@ const specification = {
     "/api/v1/synthetic-galaxies": { post: { summary: "Create a deterministic synthetic radial galaxy" } },
     "/api/v1/formulas/validate": { post: { summary: "Validate and hash a safe formula AST" } },
     "/api/v1/models/validate": { post: { summary: "Validate and hash a scalar/vector/tensor 2D/3D field-model manifest" } },
-    "/api/v1/field-jobs/prepare": { post: { summary: "Preflight a model, content-hashed array manifest, grid, boundary, and observable request" } },
+    "/api/v1/field-jobs/prepare": { post: { summary: "Preflight a model, content-hashed arrays, 2D/3D grid, boundary, and observation-target request" } },
     "/api/v1/data-uploads": { post: { summary: "Create an immutable NPZ array-upload ticket (local reference backend)" } },
     "/api/v1/data-uploads/{id}": { get: { summary: "Inspect an array upload" } },
     "/api/v1/data-uploads/{id}/content": { put: { summary: "Upload hash- and size-bound NPZ bytes" } },
@@ -39,7 +39,7 @@ const specification = {
     "/api/v1/galaxy-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running resolved-galaxy job" } },
     "/api/v1/batches": {
       get: { summary: "List local multi-system field batches" },
-      post: { summary: "Run one confirmed model and explicit parameter policy over arbitrary uploaded or generated systems" },
+      post: { summary: "Run one confirmed model and explicit parameter policy over uploaded or generated systems and declared observation targets" },
     },
     "/api/v1/batches/{id}": { get: { summary: "Read batch state and child progress" } },
     "/api/v1/batches/{id}/events": { get: { summary: "Read ordered batch lifecycle events" } },

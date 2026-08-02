@@ -108,6 +108,133 @@ def test_full_covariance_is_used_for_scoring() -> None:
     assert evaluation["chiSquare"] == pytest.approx(expected)
 
 
+@pytest.mark.parametrize("dimensions,cells", [(2, 65), (3, 33)])
+def test_resolved_velocity_field_recovers_projected_solid_body_map(
+    dimensions: int, cells: int
+) -> None:
+    spacing = 0.25
+    origin = -0.5 * (cells - 1) * spacing
+    axes = [origin + np.arange(cells) * spacing for _ in range(dimensions)]
+    mesh = np.meshgrid(*axes, indexing="ij")
+    omega = 3.0
+    observables = {
+        "acceleration__axis0": -(omega**2) * mesh[0],
+        "acceleration__axis1": -(omega**2) * mesh[1],
+    }
+    if dimensions == 3:
+        observables["acceleration__axis2"] = np.zeros_like(mesh[2])
+    map_axis = np.linspace(-2.0, 2.0, 17)
+    major, minor = np.meshgrid(map_axis, map_axis, indexing="ij")
+    inclination = 60.0
+    systemic = 100.0
+    expected = omega * major * np.sin(np.radians(inclination))
+    arrays = {
+        "major": major,
+        "minor": minor,
+        "observed": expected + systemic,
+        "uncertainty": np.full_like(major, 0.2),
+        "mask": np.ones_like(major),
+    }
+    evaluation, rows = evaluate_observation_targets(
+        model(),
+        observables,
+        {
+            "coordinateSystem": f"cartesian_{dimensions}d",
+            "dimensions": dimensions,
+            "spacing": [spacing] * dimensions,
+            "origin": [origin] * dimensions,
+        },
+        [
+            {
+                "schemaVersion": "sigma-observation-target/1",
+                "id": "solid-body-map",
+                "kind": "line_of_sight_velocity_field",
+                "observable": "acceleration",
+                "centerM": [0.0] * dimensions,
+                "planeAxes": [0, 1],
+                "inclinationDeg": inclination,
+                "handedness": 1,
+                "majorCoordinateArrayKey": "major",
+                "minorCoordinateArrayKey": "minor",
+                "observedVelocityArrayKey": "observed",
+                "uncertaintyArrayKey": "uncertainty",
+                "observedVelocityZeroPointMPerS": systemic,
+                "maskArrayKey": "mask",
+                "minimumValidPixels": 200,
+                "provenance": {"kind": "analytic projected solid-body fixture"},
+                "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+            }
+        ],
+        arrays=arrays,
+    )
+    target = evaluation["targets"][0]
+    assert evaluation["targetKinds"] == ["line_of_sight_velocity_field"]
+    assert target["mapShape"] == [17, 17]
+    assert target["score"]["validPoints"] == 17 * 17 - 1
+    assert target["score"]["rmseMPerS"] < 1e-12
+    assert len(rows) == 17 * 17 - 1
+    assert {"row_index", "column_index", "predicted_velocity_m_s"}.issubset(rows[0])
+
+
+def test_velocity_field_applies_declared_beam_and_intensity_weighting() -> None:
+    cells = 65
+    axis = np.linspace(-8.0, 8.0, cells)
+    x, y = np.meshgrid(axis, axis, indexing="ij")
+    observables = {
+        "acceleration__axis0": -x,
+        "acceleration__axis1": -y,
+    }
+    map_axis = np.linspace(-2.0, 2.0, 17)
+    major, minor = np.meshgrid(map_axis, map_axis, indexing="ij")
+    kernel_axis = np.arange(-3, 4)
+    kernel_x, kernel_y = np.meshgrid(kernel_axis, kernel_axis, indexing="ij")
+    kernel = np.exp(-0.5 * (kernel_x**2 + kernel_y**2))
+    arrays = {
+        "major": major,
+        "minor": minor,
+        "observed": major * np.sin(np.radians(45.0)),
+        "uncertainty": np.ones_like(major),
+        "intensity": np.ones_like(major),
+        "beam": kernel,
+    }
+    evaluation, _rows = evaluate_observation_targets(
+        model(),
+        observables,
+        {
+            "coordinateSystem": "cartesian_2d",
+            "dimensions": 2,
+            "spacing": [0.25, 0.25],
+            "origin": [-8.0, -8.0],
+        },
+        [
+            {
+                "schemaVersion": "sigma-observation-target/1",
+                "id": "beam-map",
+                "kind": "line_of_sight_velocity_field",
+                "observable": "acceleration",
+                "centerM": [0.0, 0.0],
+                "inclinationDeg": 45.0,
+                "handedness": 1,
+                "majorCoordinateArrayKey": "major",
+                "minorCoordinateArrayKey": "minor",
+                "observedVelocityArrayKey": "observed",
+                "uncertaintyArrayKey": "uncertainty",
+                "intensityWeightArrayKey": "intensity",
+                "beamKernelArrayKey": "beam",
+                "weighting": "intensity_inverse_variance",
+                "minimumValidPixels": 100,
+                "provenance": {"kind": "beam fixture"},
+                "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+            }
+        ],
+        arrays=arrays,
+    )
+    target = evaluation["targets"][0]
+    assert target["beamConvolution"]["kernelShape"] == [7, 7]
+    assert target["beamConvolution"]["normalizedKernelSum"] == pytest.approx(1.0)
+    assert target["score"]["weighting"] == "intensity_inverse_variance"
+
+
 def test_circular_speed_rejects_a_photon_observable() -> None:
     zeros = np.zeros((17, 17))
     target = {

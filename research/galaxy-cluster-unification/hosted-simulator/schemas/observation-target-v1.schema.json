@@ -4,11 +4,21 @@
   "title": "Sigma observation target v1",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "id", "kind", "observable", "centerM", "radiiM", "provenance", "license"],
+  "required": ["schemaVersion", "id", "kind", "observable", "centerM", "provenance", "license"],
+  "oneOf": [
+    {
+      "properties": { "kind": { "const": "circular_speed_curve" } },
+      "required": ["radiiM"]
+    },
+    {
+      "properties": { "kind": { "const": "line_of_sight_velocity_field" } },
+      "required": ["inclinationDeg", "handedness", "majorCoordinateArrayKey", "minorCoordinateArrayKey"]
+    }
+  ],
   "properties": {
     "schemaVersion": { "const": "sigma-observation-target/1" },
     "id": { "type": "string", "minLength": 1, "maxLength": 128 },
-    "kind": { "const": "circular_speed_curve" },
+    "kind": { "enum": ["circular_speed_curve", "line_of_sight_velocity_field"] },
     "observable": { "type": "string", "minLength": 1 },
     "gridOriginM": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number" } },
     "centerM": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number" } },
@@ -20,6 +30,18 @@
     "azimuthalSamples": { "type": "integer", "minimum": 16, "maximum": 4096, "default": 128 },
     "minimumAzimuthalCoverage": { "type": "number", "exclusiveMinimum": 0, "maximum": 1, "default": 0.8 },
     "fittedNuisanceParameters": { "type": "integer", "minimum": 0, "default": 0 },
+    "inclinationDeg": { "type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 90 },
+    "handedness": { "enum": [-1, 1] },
+    "majorCoordinateArrayKey": { "type": "string", "minLength": 1 },
+    "minorCoordinateArrayKey": { "type": "string", "minLength": 1 },
+    "observedVelocityArrayKey": { "type": "string", "minLength": 1 },
+    "uncertaintyArrayKey": { "type": "string", "minLength": 1 },
+    "observedVelocityZeroPointMPerS": { "type": "number", "default": 0 },
+    "intensityWeightArrayKey": { "type": "string", "minLength": 1 },
+    "maskArrayKey": { "type": "string", "minLength": 1 },
+    "beamKernelArrayKey": { "type": "string", "minLength": 1 },
+    "weighting": { "enum": ["inverse_variance", "intensity_inverse_variance"], "default": "inverse_variance" },
+    "minimumValidPixels": { "type": "integer", "minimum": 1, "default": 25 },
     "provenance": { "type": "object", "minProperties": 1 },
     "license": {
       "type": "object",

@@ -7,7 +7,7 @@ import { LocalServiceError } from "./local-field-job-service.mjs";
 
 // Report contents participate in batch identity through this version. Bump it
 // whenever deterministic batch artifacts or aggregation semantics change.
-const SERVICE_VERSION = "sigma-local-batch-service/2";
+const SERVICE_VERSION = "sigma-local-batch-service/3";
 const IDENTIFIER = /^batch_[0-9a-f]{24}$/;
 const TERMINAL_CHILD_STATES = new Set([
   "succeeded",
@@ -123,6 +123,7 @@ export class LocalBatchService {
         "manifest.json",
         "model.json",
         "observation_predictions.csv",
+        "observation_velocity_field_predictions.csv",
         "per_galaxy.csv",
         "aggregate_scores.json",
         "failures.csv",
@@ -400,6 +401,8 @@ export class LocalBatchService {
     const failureRows = [];
     const childManifest = [];
     const observationPredictionRows = [];
+    const velocityFieldPredictionRows = [];
+    const observationKinds = new Set();
     for (let index = 0; index < children.length; index += 1) {
       const child = children[index];
       const definition = record.childJobs[index];
@@ -414,17 +417,38 @@ export class LocalBatchService {
       const equationResidual = maximumNumeric(scientific?.equationResiduals);
       const observation = scientific?.observationEvaluation ?? null;
       if ((observation?.targetCount ?? 0) > 0 && child.state === "succeeded") {
-        const predictionArtifact = await this.fieldService.getArtifact(
-          child.id,
-          "observation_predictions.csv",
+        const targetKinds = new Set(
+          observation.targetKinds
+          ?? (definition.observationTargets ?? []).map((target) => target.kind),
         );
-        const lines = predictionArtifact.content.toString("utf8").trimEnd().split("\n");
-        const expectedHeader = "target_id,point_index,radius_m,predicted_speed_m_s,observed_speed_m_s,uncertainty_m_s,residual_m_s,azimuthal_coverage,mean_inward_acceleration_m_s2";
-        if (lines[0] !== expectedHeader) {
-          throw new Error(`field job ${child.id} returned an incompatible observation prediction table`);
+        for (const kind of targetKinds) observationKinds.add(kind);
+        if (targetKinds.has("circular_speed_curve")) {
+          const predictionArtifact = await this.fieldService.getArtifact(
+            child.id,
+            "observation_predictions.csv",
+          );
+          const lines = predictionArtifact.content.toString("utf8").trimEnd().split("\n");
+          const expectedHeader = "target_id,point_index,radius_m,predicted_speed_m_s,observed_speed_m_s,uncertainty_m_s,residual_m_s,azimuthal_coverage,mean_inward_acceleration_m_s2";
+          if (lines[0] !== expectedHeader) {
+            throw new Error(`field job ${child.id} returned an incompatible circular-speed prediction table`);
+          }
+          for (const line of lines.slice(1)) {
+            if (line) observationPredictionRows.push(`${csvCell(definition.systemId)},${line}`);
+          }
         }
-        for (const line of lines.slice(1)) {
-          if (line) observationPredictionRows.push(`${csvCell(definition.systemId)},${line}`);
+        if (targetKinds.has("line_of_sight_velocity_field")) {
+          const predictionArtifact = await this.fieldService.getArtifact(
+            child.id,
+            "observation_velocity_field_predictions.csv",
+          );
+          const lines = predictionArtifact.content.toString("utf8").trimEnd().split("\n");
+          const expectedHeader = "target_id,point_index,row_index,column_index,disk_major_coordinate_m,disk_minor_coordinate_m,circular_radius_m,predicted_circular_speed_m_s,predicted_velocity_m_s,observed_velocity_m_s,uncertainty_m_s,residual_m_s,declared_weight,inward_acceleration_m_s2";
+          if (lines[0] !== expectedHeader) {
+            throw new Error(`field job ${child.id} returned an incompatible velocity-field prediction table`);
+          }
+          for (const line of lines.slice(1)) {
+            if (line) velocityFieldPredictionRows.push(`${csvCell(definition.systemId)},${line}`);
+          }
         }
       }
       const row = {
@@ -566,18 +590,23 @@ export class LocalBatchService {
       `system_id,target_id,point_index,radius_m,predicted_speed_m_s,observed_speed_m_s,uncertainty_m_s,residual_m_s,azimuthal_coverage,mean_inward_acceleration_m_s2\n${observationPredictionRows.length ? `${observationPredictionRows.join("\n")}\n` : ""}`,
       "utf8",
     );
+    await writeFile(
+      resolve(artifacts, "observation_velocity_field_predictions.csv"),
+      `system_id,target_id,point_index,row_index,column_index,disk_major_coordinate_m,disk_minor_coordinate_m,circular_radius_m,predicted_circular_speed_m_s,predicted_velocity_m_s,observed_velocity_m_s,uncertainty_m_s,residual_m_s,declared_weight,inward_acceleration_m_s2\n${velocityFieldPredictionRows.length ? `${velocityFieldPredictionRows.join("\n")}\n` : ""}`,
+      "utf8",
+    );
     const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td><td>${htmlEscape(row.observation_rmse_m_s ?? "")}</td></tr>`).join("");
     const observationScope = aggregate.observationScoresAvailable
-      ? `Circular-speed observations were scored for ${aggregate.scoredObservationTargets} target(s). Photon lensing was not evaluated.`
+      ? `Massive-tracer observations (${[...observationKinds].sort().join(", ")}) were scored for ${aggregate.scoredObservationTargets} target(s). Photon lensing was not evaluated.`
       : "No observation targets were supplied, so this report measures numerical execution and convergence only.";
     await writeFile(
       resolve(artifacts, "report.html"),
-      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:960px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${successfulRows.length} child solves succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><table><thead><tr><th>System</th><th>State</th><th>Iterations</th><th>Maximum equation residual</th><th>Circular-speed RMSE (m/s)</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
+      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:960px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${successfulRows.length} child solves succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><table><thead><tr><th>System</th><th>State</th><th>Iterations</th><th>Maximum equation residual</th><th>Observation RMSE (m/s)</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
       "utf8",
     );
     await writeFile(
       resolve(artifacts, "llm_briefing.md"),
-      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${successfulRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? "yes (circular speed only)" : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Observation RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n\nThis deterministic briefing distinguishes numerical execution, massive-tracer circular-speed scoring, and photon lensing. It must not describe an unscored channel as validated.\n`,
+      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${successfulRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Observation RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n\nThis deterministic briefing distinguishes numerical execution, massive-tracer observables, and photon lensing. It must not describe an unscored channel as validated.\n`,
       "utf8",
     );
     await writeFile(
@@ -593,6 +622,7 @@ export class LocalBatchService {
       "llm_briefing.md",
       "model.json",
       "observation_predictions.csv",
+      "observation_velocity_field_predictions.csv",
       "per_galaxy.csv",
       "report.html",
       "reproduction_command.txt",
@@ -617,7 +647,7 @@ export class LocalBatchService {
       artifactIndexSha256: digest(await readFile(resolve(artifacts, "artifact_index.json"))),
       fieldWorkerSourceSha256: this.fieldService.workerSourceSha256,
       reportScope: aggregate.observationScoresAvailable
-        ? "numerical_execution_and_massive_tracer_circular_speed_scoring"
+        ? "numerical_execution_and_massive_tracer_observation_scoring"
         : "numerical_execution_not_observation_validation",
     };
     const manifest = { ...manifestCore, manifestSha256: sha256(manifestCore) };

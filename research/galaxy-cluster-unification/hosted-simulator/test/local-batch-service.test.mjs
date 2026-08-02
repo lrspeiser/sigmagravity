@@ -46,14 +46,32 @@ function bundle(label) {
   return { ...core, bundleSha256: sha256(core) };
 }
 
+function velocityBundle(label) {
+  const base = bundle(label);
+  const core = Object.fromEntries(Object.entries(base).filter(([key]) => key !== "bundleSha256"));
+  const records = [
+    ["major", "m", "auxiliary"],
+    ["minor", "m", "auxiliary"],
+    ["observed_velocity", "m/s", "auxiliary"],
+    ["velocity_uncertainty", "m/s", "uncertainty"],
+  ].map(([key, unit, role], index) => ({
+    key, npzKey: key, unit, rank: "scalar", role, dtype: "<f8",
+    shape: [17, 17], elementCount: 289, contentSha256: String(index + 2).repeat(64),
+  }));
+  core.arrays.push(...records);
+  return { ...core, bundleSha256: sha256(core) };
+}
+
 async function successfulRunner({ jobDirectory }) {
   const root = resolve(jobDirectory, "artifacts");
   await mkdir(root, { recursive: true });
   const childId = basename(jobDirectory);
   const requestEnvelope = JSON.parse(await readFile(resolve(jobDirectory, "request.json"), "utf8"));
   const observationTargets = requestEnvelope.request.observationTargets ?? [];
+  const targetKinds = [...new Set(observationTargets.map((target) => target.kind))].sort();
   const observationEvaluation = observationTargets.length ? {
     schemaVersion: "sigma-observation-evaluation/1",
+    targetKinds,
     targetCount: 1,
     scoredTargetCount: 1,
     totalPoints: 1,
@@ -84,17 +102,30 @@ async function successfulRunner({ jobDirectory }) {
   const predictionContent = Buffer.from(
     "target_id,point_index,radius_m,predicted_speed_m_s,observed_speed_m_s,uncertainty_m_s,residual_m_s,azimuthal_coverage,mean_inward_acceleration_m_s2\nfixture,0,1,8,10,2,-2,1,64\n",
   );
-  if (observationTargets.length) {
+  const velocityPredictionContent = Buffer.from(
+    "target_id,point_index,row_index,column_index,disk_major_coordinate_m,disk_minor_coordinate_m,circular_radius_m,predicted_circular_speed_m_s,predicted_velocity_m_s,observed_velocity_m_s,uncertainty_m_s,residual_m_s,declared_weight,inward_acceleration_m_s2\nfixture-map,0,0,0,1,0,1,8,8,10,2,-2,0.25,64\n",
+  );
+  if (targetKinds.includes("circular_speed_curve")) {
     await writeFile(resolve(root, "observation_predictions.csv"), predictionContent);
+  }
+  if (targetKinds.includes("line_of_sight_velocity_field")) {
+    await writeFile(resolve(root, "observation_velocity_field_predictions.csv"), velocityPredictionContent);
   }
   const artifactRecords = [
     { path: "scientific_result.json", bytes: scientificContent.length, sha256: digest(scientificContent) },
   ];
-  if (observationTargets.length) {
+  if (targetKinds.includes("circular_speed_curve")) {
     artifactRecords.push({
       path: "observation_predictions.csv",
       bytes: predictionContent.length,
       sha256: digest(predictionContent),
+    });
+  }
+  if (targetKinds.includes("line_of_sight_velocity_field")) {
+    artifactRecords.push({
+      path: "observation_velocity_field_predictions.csv",
+      bytes: velocityPredictionContent.length,
+      sha256: digest(velocityPredictionContent),
     });
   }
   const artifactIndex = {
@@ -131,11 +162,11 @@ async function fixture(t) {
   return { fieldService, batchService };
 }
 
-async function upload(fieldService, label) {
+async function upload(fieldService, label, inputBundle = bundle(label)) {
   const archive = Buffer.from(`npz-${label}`);
   const ticket = await fieldService.createUpload({
     schemaVersion: "sigma-data-upload-request/1",
-    inputBundle: bundle(label),
+    inputBundle,
     archive: { sha256: digest(archive), bytes: archive.length },
   });
   await fieldService.putUploadContent(ticket.id, archive);
@@ -173,7 +204,8 @@ test("one fixed model produces deterministic multi-system batch reports", async 
     response.items.map((item) => item.path).sort(),
     [
       "aggregate_scores.json", "batch.json", "child_jobs.json", "failures.csv",
-      "llm_briefing.md", "model.json", "observation_predictions.csv", "per_galaxy.csv", "report.html",
+      "llm_briefing.md", "model.json", "observation_predictions.csv",
+      "observation_velocity_field_predictions.csv", "per_galaxy.csv", "report.html",
       "reproduction_command.txt",
     ],
   );
@@ -242,6 +274,48 @@ test("batch aggregates post-solve circular-speed scores and predictions", async 
   assert.equal(aggregate.observationRmseMPerS, 2);
   const predictions = (await batchService.getArtifact(submission.id, "observation_predictions.csv")).content.toString("utf8");
   assert.match(predictions, /GALAXY-O,fixture,0,1,8,10,2,-2,1,64/);
+});
+
+test("batch aggregates resolved velocity-field scores and prediction pixels", async (t) => {
+  const { fieldService, batchService } = await fixture(t);
+  const source = await upload(fieldService, "VELOCITY", velocityBundle("VELOCITY"));
+  const observationModel = model();
+  observationModel.observables[0].target = "massive_tracers";
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "GALAXY-V-map",
+    kind: "line_of_sight_velocity_field",
+    observable: "gradient",
+    centerM: [0, 0],
+    inclinationDeg: 45,
+    handedness: 1,
+    majorCoordinateArrayKey: "major",
+    minorCoordinateArrayKey: "minor",
+    observedVelocityArrayKey: "observed_velocity",
+    uncertaintyArrayKey: "velocity_uncertainty",
+    minimumValidPixels: 100,
+    provenance: { kind: "test velocity map" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const submission = await batchService.createBatch({
+    schemaVersion: "sigma-batch-submit/1",
+    model: observationModel,
+    systems: [{ id: "GALAXY-V", dataUploadId: source.id, observationTargets: [target] }],
+    fieldRequest: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["gradient"] },
+    parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
+  });
+  await fieldService.waitForIdle();
+  await batchService.waitForIdle();
+  const aggregate = JSON.parse((await batchService.getArtifact(submission.id, "aggregate_scores.json")).content.toString("utf8"));
+  assert.equal(aggregate.observationScoresAvailable, true);
+  assert.equal(aggregate.scoredObservationTargets, 1);
+  const predictions = (await batchService.getArtifact(
+    submission.id,
+    "observation_velocity_field_predictions.csv",
+  )).content.toString("utf8");
+  assert.match(predictions, /GALAXY-V,fixture-map,0,0,0,1,0,1,8,8,10,2,-2,0.25,64/);
+  const report = (await batchService.getArtifact(submission.id, "report.html")).content.toString("utf8");
+  assert.match(report, /line_of_sight_velocity_field/);
 });
 
 test("batch report artifacts reject traversal and mutation", async (t) => {

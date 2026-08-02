@@ -331,6 +331,110 @@ def test_field_job_scores_massive_tracer_curve_after_solving(tmp_path: Path):
     assert (tmp_path / "observation_run" / "observation_scores.json").is_file()
 
 
+def test_field_job_scores_resolved_velocity_map_after_solving(tmp_path: Path):
+    cells = 33
+    spacing = 0.25
+    axis = np.linspace(-4.0, 4.0, cells)
+    x, y = np.meshgrid(axis, axis, indexing="ij")
+    omega = 3.0
+    expected_potential = 0.5 * omega**2 * (x**2 + y**2)
+    forcing = np.full((cells, cells), 2.0 * omega**2)
+    map_axis = np.linspace(-2.0, 2.0, 17)
+    major, minor = np.meshgrid(map_axis, map_axis, indexing="ij")
+    inclination = 60.0
+    systemic = 100.0
+    observed = omega * major * np.sin(np.radians(inclination)) + systemic
+    bundle_path = tmp_path / "velocity_observation_bundle"
+    metadata = bundle_metadata(spacing)
+    metadata["geometry"]["origin"] = [-4.0, -4.0]
+    for key, npz_key, unit, role in [
+        ("u_boundary", "raw_boundary", "m^2/s^2", "boundary"),
+        ("major", "raw_major", "m", "auxiliary"),
+        ("minor", "raw_minor", "m", "auxiliary"),
+        ("observed_velocity", "raw_observed", "m/s", "auxiliary"),
+        ("velocity_uncertainty", "raw_uncertainty", "m/s", "uncertainty"),
+        ("valid_mask", "raw_mask", "1", "mask"),
+    ]:
+        metadata["arrays"][key] = {
+            "npzKey": npz_key,
+            "unit": unit,
+            "rank": "scalar",
+            "role": role,
+        }
+    write_array_bundle(
+        bundle_path,
+        {
+            "raw_forcing": forcing,
+            "raw_boundary": expected_potential,
+            "raw_major": major,
+            "raw_minor": minor,
+            "raw_observed": observed,
+            "raw_uncertainty": np.full_like(major, 0.2),
+            "raw_mask": np.ones_like(major),
+        },
+        metadata,
+    )
+    model = manufactured_manifest()
+    model["observables"][0].update(
+        {"id": "acceleration", "target": "massive_tracers"}
+    )
+    model["observables"][0]["expression"] = {
+        "op": "negate",
+        "args": [{"op": "gradient", "args": [{"field": "u"}]}],
+    }
+    manifest = execute_field_job(
+        model,
+        bundle_path,
+        {
+            "schemaVersion": "sigma-field-job-request/1",
+            "boundaryFields": {"u": {"arrayKey": "u_boundary"}},
+            "requestedObservables": ["acceleration"],
+            "observationTargets": [
+                {
+                    "schemaVersion": "sigma-observation-target/1",
+                    "id": "solid-body-velocity-map",
+                    "kind": "line_of_sight_velocity_field",
+                    "observable": "acceleration",
+                    "centerM": [0.0, 0.0],
+                    "inclinationDeg": inclination,
+                    "handedness": 1,
+                    "majorCoordinateArrayKey": "major",
+                    "minorCoordinateArrayKey": "minor",
+                    "observedVelocityArrayKey": "observed_velocity",
+                    "uncertaintyArrayKey": "velocity_uncertainty",
+                    "observedVelocityZeroPointMPerS": systemic,
+                    "maskArrayKey": "valid_mask",
+                    "minimumValidPixels": 200,
+                    "provenance": {"kind": "analytic resolved velocity fixture"},
+                    "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+                }
+            ],
+        },
+        tmp_path / "velocity_observation_run",
+    )
+    assert manifest["state"] == "succeeded"
+    result = json.loads(
+        (
+            tmp_path
+            / "velocity_observation_run"
+            / "scientific_result.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert result["observationEvaluation"]["targetKinds"] == [
+        "line_of_sight_velocity_field"
+    ]
+    assert result["observationEvaluation"]["validScoredPoints"] == 17 * 17 - 1
+    assert result["observationEvaluation"]["rmseMPerS"] < 1e-11
+    assert (
+        tmp_path
+        / "velocity_observation_run"
+        / "observation_velocity_field_predictions.csv"
+    ).is_file()
+    assert not (
+        tmp_path / "velocity_observation_run" / "observation_predictions.csv"
+    ).exists()
+
+
 def test_cli_envelope_resolves_relative_paths_and_output_is_immutable(tmp_path: Path):
     _expected, forcing, spacing = manufactured_values(17)
     (tmp_path / "model.json").write_text(

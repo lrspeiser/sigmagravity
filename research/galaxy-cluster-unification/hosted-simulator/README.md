@@ -205,16 +205,31 @@ parameter counts, failures, content hashes, and an optional-LLM briefing. It
 reports `observationScoresAvailable=false` when a batch has no compatible
 targets; it never substitutes numerical convergence for an observational fit.
 
-The first observation adapter is now implemented for massive-tracer circular
-speeds. A system can attach a content-hashed `sigma-observation-target/1` curve
-with uncertainties or a full covariance matrix. After the field converges, the
-adapter azimuthally samples any declared `massive_tracers` vector acceleration,
-computes `v_c(R)=sqrt(R g_R)`, and writes predicted points, residuals, RMSE,
-chi-square, reduced chi-square, and Gaussian log likelihood. It rejects photon
-observables for this mapping. The local DDO101 acceptance retains all ten
-published points and reproduces the earlier frozen Newtonian curve within
-`0.496 km/s` RMS on a deliberately coarse grid. Photon lensing and resolved
-velocity-field adapters remain future work.
+Two massive-tracer observation adapters are now implemented. A system can
+attach a content-hashed `sigma-observation-target/1` circular-speed curve or
+resolved line-of-sight velocity map. After the field converges, the curve
+adapter azimuthally samples any declared `massive_tracers` vector acceleration
+and computes `v_c(R)=sqrt(R g_R)`. The map adapter samples the same declared
+field at content-hashed disk-plane coordinates, projects circular speed through
+an explicit inclination and handedness, and can apply an intensity-weighted
+beam convolution before scoring observed pixels. Both write predictions,
+residuals, RMSE, chi-square, reduced chi-square, and Gaussian log likelihood.
+Neither adapter changes the field equation or accepts a photon observable.
+
+The map target contract is illustrated by
+`examples/observation-targets/line-of-sight-velocity-field.json`. Its named
+coordinate, observation, uncertainty, intensity, mask, and beam arrays must be
+included in the same immutable NPZ upload and declared in the array bundle with
+their units and hashes. One unchanged target form works with either a 2D or 3D
+Cartesian model whose requested observable is a massive-tracer acceleration in
+`m/s^2`.
+
+The local DDO101 curve acceptance retains all ten published points and
+reproduces the earlier frozen Newtonian curve within `0.496 km/s` RMS on a
+deliberately coarse grid. Resolved-map manufactured solutions pass for both 2D
+and 3D fields, including beam convolution and batch aggregation. Real
+LITTLE THINGS map parity, pressure support/non-circular motions, spectral
+cubes, and photon lensing remain future acceptance work.
 
 The full P0723 commissioning run then used the same generic HTTP path for all
 13 registered galaxies and four published-fixed manifests. All 52 child solves

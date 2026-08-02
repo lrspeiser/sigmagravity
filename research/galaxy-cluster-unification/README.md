@@ -1470,7 +1470,7 @@ python scripts/audit_p0636_little_things_baryons.py
 python -m pytest tests/test_p0636_little_things_baryon_acquisition.py -q
 ```
 
-## Formula-neutral 2D/3D simulator commissioning (P0720-P0724)
+## Formula-neutral 2D/3D simulator commissioning (P0720-P0730)
 
 The simulator now has a gravity-independent inverse/forward galaxy path and a
 shared asynchronous field API. Registered gas and stellar maps are converted
@@ -1538,6 +1538,18 @@ Newtonian baryons (`24.420`). The reconstructed fine-grid stability gates pass,
 although NGC1569's `24.09%` prediction change is close to the scenario limit.
 See
 [`docs/P0729_QUALIFIED_80STEP_FINE_GRID_AQUAL_RESULTS.md`](docs/P0729_QUALIFIED_80STEP_FINE_GRID_AQUAL_RESULTS.md).
+
+P0730 adds a formula-neutral resolved line-of-sight velocity-field target to
+the same local field and batch APIs. Any compatible 2D or 3D manifest can now
+project its declared massive-tracer acceleration through explicit disk
+coordinates, inclination, handedness, masks, uncertainties, intensity weights,
+and a beam kernel. Manufactured known-answer, worker-artifact, preflight, and
+batch-aggregation tests pass. This is an engineering milestone, not yet a real
+galaxy result: parity against the frozen thirteen-galaxy LITTLE THINGS pipeline
+and the treatment of pressure support, warps, and non-circular motion remain
+open.
+See
+[`docs/P0730_RESOLVED_VELOCITY_FIELD_API_MILESTONE.md`](docs/P0730_RESOLVED_VELOCITY_FIELD_API_MILESTONE.md).
 
 ```powershell
 python scripts/run_p0723_formula_neutral_api_comparators.py `

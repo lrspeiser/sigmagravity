@@ -123,8 +123,8 @@ export function prepareBatch({ submission, resolvedSystems }) {
     scoredObservationTargets,
     claimBoundary: scoredObservationTargets
       ? [
-        "Circular-speed scores use the declared massive-tracer acceleration only after each field solve.",
-        "Photon lensing, velocity fields, and unsubmitted observables are not evaluated by this batch.",
+        "Circular-speed and resolved velocity-field scores use the declared massive-tracer acceleration only after each field solve.",
+        "Photon lensing and unsubmitted observables are not evaluated by this batch.",
       ]
       : [
         "A converged batch proves execution of one frozen model, not agreement with observations.",

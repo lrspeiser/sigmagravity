@@ -366,6 +366,31 @@ def _write_observation_predictions(path: Path, rows: list[dict[str, Any]]) -> No
         writer.writerows(rows)
 
 
+def _write_velocity_field_predictions(
+    path: Path, rows: list[dict[str, Any]]
+) -> None:
+    columns = [
+        "target_id",
+        "point_index",
+        "row_index",
+        "column_index",
+        "disk_major_coordinate_m",
+        "disk_minor_coordinate_m",
+        "circular_radius_m",
+        "predicted_circular_speed_m_s",
+        "predicted_velocity_m_s",
+        "observed_velocity_m_s",
+        "uncertainty_m_s",
+        "residual_m_s",
+        "declared_weight",
+        "inward_acceleration_m_s2",
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=columns, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def _normalize_observation_targets(values: Any) -> list[dict[str, Any]]:
     if values is None:
         return []
@@ -394,6 +419,9 @@ def _normalize_observation_targets(values: Any) -> list[dict[str, Any]]:
             target["minimumAzimuthalCoverage"] = float(
                 target["minimumAzimuthalCoverage"]
             )
+        for key in ("inclinationDeg", "observedVelocityZeroPointMPerS"):
+            if key in target:
+                target[key] = float(target[key])
         normalized.append(target)
     return normalized
 
@@ -495,6 +523,7 @@ def execute_field_job(
                     observables,
                     {**bundle_geometry, "spacing": spacing_values},
                     observation_targets,
+                    arrays=arrays,
                 )
                 for evaluation, target_specification in zip(
                     observation_evaluation["targets"], observation_targets, strict=True
@@ -504,6 +533,9 @@ def execute_field_job(
                 observation_evaluation = {
                     "schemaVersion": "sigma-observation-evaluation/1",
                     "state": "unavailable_nonconvergence",
+                    "targetKinds": sorted(
+                        {str(target.get("kind")) for target in observation_targets}
+                    ),
                     "targetCount": len(observation_targets),
                     "scoredTargetCount": 0,
                     "totalPoints": 0,
@@ -513,10 +545,27 @@ def execute_field_job(
         _write_npz(temporary / "fields.npz", fields)
         _write_npz(temporary / "observables.npz", observables)
         _write_residual_history(temporary / "residual_history.csv", solution)
+        circular_prediction_rows = [
+            row for row in observation_rows if "predicted_speed_m_s" in row
+        ]
+        velocity_field_prediction_rows = [
+            row for row in observation_rows if "predicted_velocity_m_s" in row
+        ]
+        evaluated_target_kinds = (
+            set(observation_evaluation.get("targetKinds", []))
+            if observation_evaluation is not None and solution.converged
+            else set()
+        )
         if observation_evaluation is not None:
             _write_json(temporary / "observation_scores.json", observation_evaluation)
+        if "circular_speed_curve" in evaluated_target_kinds:
             _write_observation_predictions(
-                temporary / "observation_predictions.csv", observation_rows
+                temporary / "observation_predictions.csv", circular_prediction_rows
+            )
+        if "line_of_sight_velocity_field" in evaluated_target_kinds:
+            _write_velocity_field_predictions(
+                temporary / "observation_velocity_field_predictions.csv",
+                velocity_field_prediction_rows,
             )
         _write_json(temporary / "model.json", model)
         _write_json(temporary / "input_bundle.json", bundle)
@@ -540,6 +589,7 @@ def execute_field_job(
                 "A converged field validates execution of the submitted numerical equation, not agreement with galaxy or lensing observations.",
                 "The current generic worker uses supplied or zero far-field Dirichlet boundaries for isolated manifests.",
                 "Observation targets are evaluated after the field solve and cannot alter the field equations.",
+                "Resolved velocity maps use explicitly declared projection and beam data; no galaxy-specific gravity parameter is introduced by the adapter.",
             ],
         }
         result_sha = canonical_sha256(scientific_core)
@@ -567,9 +617,11 @@ def execute_field_job(
             "resource_log.json",
         ]
         if observation_evaluation is not None:
-            artifact_names.extend(
-                ["observation_predictions.csv", "observation_scores.json"]
-            )
+            artifact_names.append("observation_scores.json")
+        if "circular_speed_curve" in evaluated_target_kinds:
+            artifact_names.append("observation_predictions.csv")
+        if "line_of_sight_velocity_field" in evaluated_target_kinds:
+            artifact_names.append("observation_velocity_field_predictions.csv")
         artifact_index = {
             "schemaVersion": "sigma-field-artifact-index/1",
             "jobId": job["id"],

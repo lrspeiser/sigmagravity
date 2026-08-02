@@ -37,7 +37,7 @@ function inputBundle() {
 
 function payload() {
   return {
-    model,
+    model: structuredClone(model),
     inputBundle: inputBundle(),
     request: {
       schemaVersion: "sigma-field-job-request/1",
@@ -113,4 +113,83 @@ test("a circular-speed target cannot silently use a photon observable", () => {
     license: { id: "CC0-1.0", redistributionAllowed: true },
   }];
   assert.throws(() => prepareFieldJob(request), /massive_tracers vector/);
+});
+
+test("field preflight binds content-hashed resolved velocity maps and beam data", () => {
+  const request = payload();
+  const observationRecords = [
+    ["major", "m", "auxiliary", [17, 17]],
+    ["minor", "m", "auxiliary", [17, 17]],
+    ["observed_velocity", "m/s", "auxiliary", [17, 17]],
+    ["velocity_uncertainty", "m/s", "uncertainty", [17, 17]],
+    ["intensity", "1", "auxiliary", [17, 17]],
+    ["valid_mask", "1", "mask", [17, 17]],
+    ["beam", "1", "auxiliary", [7, 7]],
+  ].map(([key, unit, role, shape], index) => ({
+    key,
+    npzKey: key,
+    unit,
+    rank: "scalar",
+    role,
+    dtype: "<f8",
+    shape,
+    elementCount: shape[0] * shape[1],
+    contentSha256: String(index + 2).repeat(64),
+  }));
+  request.inputBundle.arrays.push(...observationRecords);
+  const core = Object.fromEntries(Object.entries(request.inputBundle).filter(([key]) => key !== "bundleSha256"));
+  request.inputBundle.bundleSha256 = sha256(core);
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "DDO-test-velocity-map",
+    kind: "line_of_sight_velocity_field",
+    observable: "massive_tracer_acceleration",
+    centerM: [0, 0, 0],
+    planeAxes: [0, 1],
+    inclinationDeg: 45,
+    handedness: 1,
+    majorCoordinateArrayKey: "major",
+    minorCoordinateArrayKey: "minor",
+    observedVelocityArrayKey: "observed_velocity",
+    uncertaintyArrayKey: "velocity_uncertainty",
+    intensityWeightArrayKey: "intensity",
+    maskArrayKey: "valid_mask",
+    beamKernelArrayKey: "beam",
+    weighting: "intensity_inverse_variance",
+    minimumValidPixels: 100,
+    provenance: { kind: "resolved velocity fixture" },
+    license: { id: "CC-BY-4.0", redistributionAllowed: true },
+  }];
+  const result = prepareFieldJob(request);
+  assert.equal(result.observationTargets[0].kind, "line_of_sight_velocity_field");
+  assert.equal(result.observationTargets[0].pointCount, 289);
+  assert.equal(result.observationTargets[0].scored, true);
+});
+
+test("resolved velocity preflight rejects a unit-mismatched coordinate map", () => {
+  const request = payload();
+  request.inputBundle.arrays.push({
+    key: "major", npzKey: "major", unit: "km/s", rank: "scalar", role: "auxiliary",
+    dtype: "<f8", shape: [17, 17], elementCount: 289, contentSha256: "2".repeat(64),
+  });
+  request.inputBundle.arrays.push({
+    key: "minor", npzKey: "minor", unit: "m", rank: "scalar", role: "auxiliary",
+    dtype: "<f8", shape: [17, 17], elementCount: 289, contentSha256: "3".repeat(64),
+  });
+  const core = Object.fromEntries(Object.entries(request.inputBundle).filter(([key]) => key !== "bundleSha256"));
+  request.inputBundle.bundleSha256 = sha256(core);
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "bad-map",
+    kind: "line_of_sight_velocity_field",
+    observable: "massive_tracer_acceleration",
+    centerM: [0, 0, 0],
+    inclinationDeg: 45,
+    handedness: 1,
+    majorCoordinateArrayKey: "major",
+    minorCoordinateArrayKey: "minor",
+    provenance: { kind: "negative fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  assert.throws(() => prepareFieldJob(request), /majorCoordinateArrayKey must reference a scalar m array/);
 });
