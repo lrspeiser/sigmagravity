@@ -182,15 +182,22 @@ def _output_axis(package: Mapping[str, Any], value: Any) -> Array:
     if value is None:
         return source
     controls = dict(value)
-    if set(controls) != {"cellsPerAxis"}:
-        raise ValueError("outputGrid currently requires only cellsPerAxis")
+    if "cellsPerAxis" not in controls or not set(controls).issubset(
+        {"cellsPerAxis", "extentScale"}
+    ):
+        raise ValueError("outputGrid supports cellsPerAxis and extentScale")
     raw_cells = controls["cellsPerAxis"]
     if isinstance(raw_cells, bool) or not isinstance(raw_cells, int):
         raise TypeError("outputGrid.cellsPerAxis must be an integer")
     cells = raw_cells
     if not 9 <= cells <= 513 or cells % 2 == 0:
         raise ValueError("outputGrid.cellsPerAxis must be an odd integer between 9 and 513")
-    return np.linspace(float(source[0]), float(source[-1]), cells)
+    extent_scale = float(controls.get("extentScale", 1.0))
+    if not np.isfinite(extent_scale) or not 1.0 <= extent_scale <= 4.0:
+        raise ValueError("outputGrid.extentScale must be finite and between 1 and 4")
+    center = 0.5 * float(source[0] + source[-1])
+    half_width = 0.5 * float(source[-1] - source[0]) * extent_scale
+    return np.linspace(center - half_width, center + half_width, cells)
 
 
 def _array_bundle(

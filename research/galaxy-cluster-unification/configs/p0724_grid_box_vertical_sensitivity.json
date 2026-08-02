@@ -1,0 +1,122 @@
+{
+  "stage": "P0724",
+  "purpose": "Measure whether P0723 formula rankings and predictions are artifacts of grid resolution, boundary proximity, or one vertical-prior draw.",
+  "sampleStatus": "previously_unsealed_and_project_spent_diagnostic_sentinels",
+  "systems": ["DDO53", "DDO101", "DDO50", "NGC1569"],
+  "systemRoles": {
+    "DDO53": "lowest QUMOND RMSE in P0723",
+    "DDO101": "largest observational mismatch for every P0723 manifest",
+    "DDO50": "extended non-monotonic published rotation curve",
+    "NGC1569": "largest coarse-grid frozen-curve conformance outlier"
+  },
+  "models": [
+    {
+      "id": "newtonian_poisson",
+      "manifest": "hosted-simulator/examples/models/newtonian-poisson.json",
+      "frozenCurveModel": null
+    },
+    {
+      "id": "aqual_simple_mu",
+      "manifest": "hosted-simulator/examples/models/aqual.json",
+      "frozenCurveModel": null
+    },
+    {
+      "id": "qumond_simple_nu",
+      "manifest": "hosted-simulator/examples/models/qumond.json",
+      "frozenCurveModel": null
+    },
+    {
+      "id": "refracted_gravity_published_fixture",
+      "manifest": "hosted-simulator/examples/models/refracted-gravity.json",
+      "frozenCurveModel": null
+    }
+  ],
+  "extraction": {
+    "radialBins": 20,
+    "maximumFourierMode": 4,
+    "residualFeatureCountPerComponent": 24
+  },
+  "generationSeed": 20260803,
+  "scenarios": [
+    {
+      "id": "baseline_33x33x9",
+      "cellsPerAxis": 33,
+      "zCells": 9,
+      "extentScale": 1.0,
+      "verticalSeedOffset": 0,
+      "role": "P0723 commissioning geometry"
+    },
+    {
+      "id": "coarse_25x25x9",
+      "cellsPerAxis": 25,
+      "zCells": 9,
+      "extentScale": 1.0,
+      "verticalSeedOffset": 0,
+      "role": "lower transverse resolution"
+    },
+    {
+      "id": "fine_49x49x17",
+      "cellsPerAxis": 49,
+      "zCells": 17,
+      "extentScale": 1.0,
+      "verticalSeedOffset": 0,
+      "role": "higher transverse and vertical resolution"
+    },
+    {
+      "id": "expanded_box_49x49x9",
+      "cellsPerAxis": 49,
+      "zCells": 9,
+      "extentScale": 1.5,
+      "verticalSeedOffset": 0,
+      "role": "1.5x transverse box at baseline transverse cell spacing"
+    },
+    {
+      "id": "vertical_draw_b_33x33x9",
+      "cellsPerAxis": 33,
+      "zCells": 9,
+      "extentScale": 1.0,
+      "verticalSeedOffset": 100000,
+      "role": "independent declared thickness/flaring/profile prior draw"
+    },
+    {
+      "id": "vertical_draw_c_33x33x9",
+      "cellsPerAxis": 33,
+      "zCells": 9,
+      "extentScale": 1.0,
+      "verticalSeedOffset": 200000,
+      "role": "second independent thickness/flaring/profile prior draw"
+    }
+  ],
+  "observation": {
+    "azimuthalSamples": 128,
+    "minimumAzimuthalCoverage": 0.95,
+    "fittedNuisanceParameters": 0
+  },
+  "baselineScenario": "baseline_33x33x9",
+  "engineeringGates": {
+    "requiredSystems": 4,
+    "requiredModels": 4,
+    "requiredScenarios": 6,
+    "minimumConvergenceFraction": 1.0,
+    "maximumEquationResidual": 1e-7,
+    "maximumPerObjectGravityParameters": 0,
+    "allDownloadedArtifactHashesMustValidate": true
+  },
+  "stabilityGates": {
+    "maximumScenarioMedianNormalizedPredictionRmse": 0.10,
+    "maximumScenarioP90NormalizedPredictionRmse": 0.25,
+    "maximumModelAggregateFitRmseRelativeChange": 0.20
+  },
+  "interpretation": {
+    "normalizedPredictionRmse": "RMS(variant speed - baseline speed) divided by RMS(baseline speed), paired at identical observed radii.",
+    "stable": "All predeclared stability gates pass; this does not prove convergence beyond the tested range.",
+    "sensitive": "Any stability gate fails; P0723 model differences must not be interpreted without a refined numerical protocol."
+  },
+  "claimBoundary": [
+    "This is a spent-sample numerical sensitivity diagnostic on four deliberately selected sentinel galaxies, not a blind validation.",
+    "The expanded-box case tests proximity of the current zero-Dirichlet transverse boundary; it is not an independent isolated-boundary algorithm.",
+    "Vertical draws sample declared priors because the available surface maps do not identify unique three-dimensional depth.",
+    "Circular speeds test massive tracers only; photon lensing and resolved velocity fields remain outside this stage.",
+    "Thresholds classify commissioning stability and must not be changed after results are opened."
+  ]
+}

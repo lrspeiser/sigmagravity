@@ -171,6 +171,12 @@ component offsets. The resulting surface or volume bundle can then be supplied
 to any compatible `/api/v1/field-jobs` model; the galaxy job never selects a
 gravity theory itself.
 
+Generation may also declare `outputGrid.cellsPerAxis` and an `extentScale`
+from 1 to 4. The latter expands the physical box about its original center
+without changing the extracted baryonic parameter package. Pairing a 1.5x
+extent with 1.5x as many intervals keeps the transverse cell spacing fixed and
+provides a direct zero-boundary-proximity diagnostic.
+
 The 3D density is not labeled as a uniquely recovered galaxy. Its scale height,
 vertical profile, and flaring are declared priors, and multiple different 3D
 realizations can project to the same 2D map. The public Vercel route currently

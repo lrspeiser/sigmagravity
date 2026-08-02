@@ -82,12 +82,17 @@ function outputLicense(value) {
 function outputGrid(operation, value, defaultCells) {
   if (value === undefined) return null;
   if (operation !== "generate") throw new Error("outputGrid is available only for generate jobs");
-  if (!value || typeof value !== "object" || Array.isArray(value) || Object.keys(value).some((key) => key !== "cellsPerAxis")) {
-    throw new Error("outputGrid currently requires only cellsPerAxis");
+  const allowed = new Set(["cellsPerAxis", "extentScale"]);
+  if (!value || typeof value !== "object" || Array.isArray(value) || Object.keys(value).some((key) => !allowed.has(key))) {
+    throw new Error("outputGrid supports cellsPerAxis and extentScale");
   }
   const cellsPerAxis = integer(value.cellsPerAxis, defaultCells, 9, 513, "outputGrid.cellsPerAxis");
   if (cellsPerAxis % 2 === 0) throw new Error("outputGrid.cellsPerAxis must be odd");
-  return { cellsPerAxis };
+  const extentScale = value.extentScale === undefined ? 1 : Number(value.extentScale);
+  if (!Number.isFinite(extentScale) || extentScale < 1 || extentScale > 4) {
+    throw new Error("outputGrid.extentScale must be finite and between 1 and 4");
+  }
+  return { cellsPerAxis, extentScale };
 }
 
 function verifyPackage(value) {

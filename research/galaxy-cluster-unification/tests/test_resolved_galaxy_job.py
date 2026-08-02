@@ -7,6 +7,7 @@ import numpy as np
 
 from voidscreen.field_job import file_sha256, load_array_bundle, write_array_bundle
 from voidscreen.resolved_galaxy_job import (
+    _output_axis,
     _vertical_products,
     execute_galaxy_request_file,
 )
@@ -182,6 +183,16 @@ def test_generate_job_replays_a_parameter_package_without_source_data(tmp_path: 
     assert (output / "field_surface_density.npz").exists()
     with np.load(output / "surface_density.npz") as generated:
         assert generated["total_baryonic_surface_density"].shape == (25, 25)
+
+
+def test_output_grid_can_expand_box_without_changing_parameter_package(tmp_path: Path) -> None:
+    execute_galaxy_request_file(extraction_request(tmp_path))
+    package = json.loads((tmp_path / "artifacts" / "parameters.json").read_text(encoding="utf-8"))
+    source = _output_axis(package, None)
+    expanded = _output_axis(package, {"cellsPerAxis": 49, "extentScale": 1.5})
+    assert expanded.shape == (49,)
+    assert np.isclose(0.5 * (expanded[0] + expanded[-1]), 0.5 * (source[0] + source[-1]))
+    assert np.isclose(expanded[-1] - expanded[0], 1.5 * (source[-1] - source[0]))
 
 
 def test_generate_job_rejects_fractional_output_grid(tmp_path: Path) -> None:

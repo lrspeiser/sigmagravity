@@ -72,7 +72,7 @@ test("generate preflight accepts content-hashed parameters and normalizes contro
       generationControls: {
         gas: { massScale: 1.5, radialScale: 0.8, centerOffsetKpc: [0.1, -0.2] },
       },
-      outputGrid: { cellsPerAxis: 25 },
+      outputGrid: { cellsPerAxis: 25, extentScale: 1.5 },
       vertical: { enabled: false },
       outputLicense: { id: "CC-BY-4.0", redistributionAllowed: true },
     },
@@ -82,7 +82,7 @@ test("generate preflight accepts content-hashed parameters and normalizes contro
   assert.equal(result.workerRequest.generationControls.gas.radial_scale, 0.8);
   assert.deepEqual(result.workerRequest.generationControls.gas.center_offset_kpc, [0.1, -0.2]);
   assert.deepEqual(result.gridShape, [25, 25]);
-  assert.deepEqual(result.workerRequest.outputGrid, { cellsPerAxis: 25 });
+  assert.deepEqual(result.workerRequest.outputGrid, { cellsPerAxis: 25, extentScale: 1.5 });
 });
 
 test("galaxy preflight rejects hidden gravity state and incompatible data", () => {
@@ -115,5 +115,24 @@ test("galaxy preflight rejects hidden gravity state and incompatible data", () =
       inputBundle: incompatible,
     }),
     /geometry in kpc/,
+  );
+});
+
+test("generate preflight rejects shrinking or unbounded output boxes", () => {
+  const submission = {
+    schemaVersion: "sigma-galaxy-job-submit/1",
+    operation: "generate",
+    parameterPackage: packageFixture(),
+    outputGrid: { cellsPerAxis: 25, extentScale: 0.9 },
+    outputLicense: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  assert.throws(
+    () => prepareGalaxyJob({ submission }),
+    /extentScale must be finite and between 1 and 4/,
+  );
+  submission.outputGrid.extentScale = 4.1;
+  assert.throws(
+    () => prepareGalaxyJob({ submission }),
+    /extentScale must be finite and between 1 and 4/,
   );
 });
