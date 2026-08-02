@@ -179,7 +179,7 @@ npm run smoke:observation-jobs
 
 See `../docs/P0732_DECOUPLED_OBSERVATION_EVALUATION_MILESTONE.md`.
 
-The 0.7 local reference API also supports formula-independent resolved-galaxy
+The 0.8 local reference API also supports formula-independent resolved-galaxy
 jobs:
 
 ```text
@@ -233,6 +233,18 @@ The deterministic report includes per-system convergence, equation residuals,
 parameter counts, failures, content hashes, and an optional-LLM briefing. It
 reports `observationScoresAvailable=false` when a batch has no compatible
 targets; it never substitutes numerical convergence for an observational fit.
+
+P0733 makes each scored system a two-stage composition. `dataUploadId` supplies
+the field-equation arrays, while optional `observationDataUploadId` supplies
+measured velocity, mask, uncertainty, intensity, or beam arrays. The batch
+creates or reuses the field job first, then creates or reuses at most one
+`observation-evaluation-jobs` child after the field succeeds. Omitting
+`observationDataUploadId` reuses the field upload for compatibility. Reports
+retain both child IDs, both scientific and manifest hashes, both lifecycle
+states, and the observation child's artifact hashes. Changing only observation
+data therefore changes the batch and observation identities but preserves the
+field identity. See
+`../docs/P0733_COMPOSED_BATCH_OBSERVATION_JOBS_MILESTONE.md`.
 
 Two massive-tracer observation adapters are now implemented. A system can
 attach a content-hashed `sigma-observation-target/1` circular-speed curve or

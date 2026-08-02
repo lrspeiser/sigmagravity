@@ -116,9 +116,16 @@ test("batch preflight keeps system-specific observation targets out of the share
   systems[0].observationTargets = [target];
   const result = prepareBatch({ submission: request, resolvedSystems: systems });
   assert.equal(result.scoredObservationTargets, 1);
-  assert.equal(result.systems[0].observationTargets[0].scored, true);
+  assert.equal(result.systems[0].observationTargetSummary[0].scored, true);
   assert.equal(result.systems[1].observationTargets.length, 0);
-  assert.match(result.claimBoundary[0], /after each field solve/);
+  assert.match(result.claimBoundary[0], /separately content-addressed observation jobs/);
+  const changedTarget = { ...target, uncertaintiesMPerS: [3_000, 3_500] };
+  request.systems[0].observationTargets = [changedTarget];
+  systems[0].observationTargets = [changedTarget];
+  const changed = prepareBatch({ submission: request, resolvedSystems: systems });
+  assert.equal(changed.systems[0].fieldPreflightSha256, result.systems[0].fieldPreflightSha256);
+  assert.notEqual(changed.systems[0].observationBindingSha256, result.systems[0].observationBindingSha256);
+  assert.notEqual(changed.preflightSha256, result.preflightSha256);
 });
 
 test("fitted and per-galaxy policies are explicit but not silently executed", () => {

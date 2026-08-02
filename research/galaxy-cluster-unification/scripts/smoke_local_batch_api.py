@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import csv
 import hashlib
 import io
@@ -191,14 +192,18 @@ def ddo101_rotation_target() -> dict[str, Any]:
     }
 
 
-def newtonian_fixture_conformance(base: str, field_job_id: str) -> dict[str, float]:
-    artifacts = request_json(f"{base}/api/v1/field-jobs/{field_job_id}/artifacts")
+def newtonian_fixture_conformance(
+    base: str, observation_job_id: str
+) -> dict[str, float]:
+    artifacts = request_json(
+        f"{base}/api/v1/observation-evaluation-jobs/{observation_job_id}/artifacts"
+    )
     record = next(
         item for item in artifacts["items"] if item["path"] == "observation_predictions.csv"
     )
     content = request(f"{base}{record['url']}")
     if hashlib.sha256(content).hexdigest() != record["sha256"]:
-        raise RuntimeError("field observation prediction hash mismatch")
+        raise RuntimeError("decoupled observation prediction hash mismatch")
     predicted_rows = list(csv.DictReader(io.StringIO(content.decode("utf-8"))))
     radius = np.asarray([float(row["radius_m"]) / KPC_M for row in predicted_rows])
     predicted = np.asarray(
@@ -317,10 +322,7 @@ def main() -> None:
                 encoding="utf-8"
             )
         )
-        batch_submission = request_json(
-            f"{base}/api/v1/batches",
-            method="POST",
-            payload={
+        batch_payload = {
                 "schemaVersion": "sigma-batch-submit/1",
                 "model": model,
                 "systems": [
@@ -350,7 +352,11 @@ def main() -> None:
                     "mode": "published_fixed",
                     "perObjectParameters": [],
                 },
-            },
+            }
+        batch_submission = request_json(
+            f"{base}/api/v1/batches",
+            method="POST",
+            payload=batch_payload,
         )
         batch = wait(base, batch_submission)
         response, downloaded = download_artifacts(base, batch_submission)
@@ -359,7 +365,61 @@ def main() -> None:
         replay_child = next(
             item for item in child_jobs["items"] if item["systemId"] == "DDO101-replay"
         )
-        conformance = newtonian_fixture_conformance(base, replay_child["fieldJobId"])
+        observation_job_id = replay_child["observationEvaluationJobId"]
+        if not observation_job_id:
+            raise RuntimeError("batch did not create a decoupled observation child")
+        conformance = newtonian_fixture_conformance(base, observation_job_id)
+        field_child = request_json(
+            f"{base}/api/v1/field-jobs/{replay_child['fieldJobId']}"
+        )
+        observation_child = request_json(
+            f"{base}/api/v1/observation-evaluation-jobs/{observation_job_id}"
+        )
+        if field_child["preflight"]["observationTargets"]:
+            raise RuntimeError("batch field child still embeds observation targets")
+        if observation_child["fieldJobId"] != replay_child["fieldJobId"]:
+            raise RuntimeError("observation child does not reference its immutable field child")
+        if observation_child["evaluationAddedGravityParameters"] != 0:
+            raise RuntimeError("observation child added a gravity parameter")
+        if any(
+            item["observationEvaluationJobId"] is not None
+            for item in child_jobs["items"]
+            if item["systemId"] != "DDO101-replay"
+        ):
+            raise RuntimeError("field-only systems unexpectedly created observation jobs")
+        changed_payload = copy.deepcopy(batch_payload)
+        changed_payload["systems"][0]["observationTargets"][0][
+            "uncertaintiesMPerS"
+        ] = [
+            value * 1.1
+            for value in changed_payload["systems"][0]["observationTargets"][0][
+                "uncertaintiesMPerS"
+            ]
+        ]
+        changed_submission = request_json(
+            f"{base}/api/v1/batches", method="POST", payload=changed_payload
+        )
+        wait(base, changed_submission)
+        _, changed_downloaded = download_artifacts(base, changed_submission)
+        changed_children = json.loads(changed_downloaded["child_jobs.json"])["items"]
+        changed_replay = next(
+            item for item in changed_children if item["systemId"] == "DDO101-replay"
+        )
+        if changed_replay["fieldJobId"] != replay_child["fieldJobId"]:
+            raise RuntimeError("changing observation uncertainty changed the field child")
+        if (
+            changed_replay["observationEvaluationJobId"]
+            == replay_child["observationEvaluationJobId"]
+        ):
+            raise RuntimeError("changing observation uncertainty reused a stale observation child")
+        duplicate_changed = request_json(
+            f"{base}/api/v1/batches", method="POST", payload=changed_payload
+        )
+        if (
+            duplicate_changed["id"] != changed_submission["id"]
+            or duplicate_changed["duplicate"] is not True
+        ):
+            raise RuntimeError("identical composed batch did not reuse its identity")
         if batch["state"] != "succeeded":
             raise RuntimeError(f"batch did not fully succeed: {batch['state']}")
         if aggregate["systemCount"] != 3:
@@ -373,6 +433,8 @@ def main() -> None:
             )
         if aggregate["perObjectGravityParameters"] != 0:
             raise RuntimeError("batch introduced per-object gravity parameters")
+        if aggregate["observationAddedGravityParameters"] != 0:
+            raise RuntimeError("observation evaluation introduced gravity parameters")
         if aggregate["parameterPolicy"]["mode"] != "published_fixed":
             raise RuntimeError("batch parameter policy changed")
         if aggregate["observationScoresAvailable"] is not True:
@@ -396,6 +458,7 @@ def main() -> None:
             "llm_briefing.md",
             "model.json",
             "observation_predictions.csv",
+            "observation_velocity_field_predictions.csv",
             "per_galaxy.csv",
             "report.html",
             "reproduction_command.txt",
@@ -405,7 +468,7 @@ def main() -> None:
         print(
             json.dumps(
                 {
-                    "schemaVersion": "sigma-batch-http-smoke/1",
+                    "schemaVersion": "sigma-batch-http-smoke/2",
                     "state": "pass" if batch["state"] == "succeeded" else batch["state"],
                     "batchId": batch["id"],
                     "model": model["name"],
@@ -416,6 +479,27 @@ def main() -> None:
                     "convergenceFraction": aggregate["convergenceFraction"],
                     "maximumEquationResidual": aggregate["maximumEquationResidual"],
                     "perObjectGravityParameters": aggregate["perObjectGravityParameters"],
+                    "observationAddedGravityParameters": aggregate[
+                        "observationAddedGravityParameters"
+                    ],
+                    "fieldJobId": replay_child["fieldJobId"],
+                    "observationEvaluationJobId": observation_job_id,
+                    "fieldChildObservationTargetCount": len(
+                        field_child["preflight"]["observationTargets"]
+                    ),
+                    "fieldOnlyObservationChildren": sum(
+                        item["observationEvaluationJobId"] is not None
+                        for item in child_jobs["items"]
+                        if item["systemId"] != "DDO101-replay"
+                    ),
+                    "changedObservationPreservedFieldJobId": (
+                        changed_replay["fieldJobId"] == replay_child["fieldJobId"]
+                    ),
+                    "changedObservationChangedEvaluationJobId": (
+                        changed_replay["observationEvaluationJobId"]
+                        != replay_child["observationEvaluationJobId"]
+                    ),
+                    "duplicateComposedBatchReused": duplicate_changed["duplicate"],
                     "observationScoresAvailable": aggregate["observationScoresAvailable"],
                     "scoredObservationTargets": aggregate["scoredObservationTargets"],
                     "validObservationPoints": aggregate["validObservationPoints"],

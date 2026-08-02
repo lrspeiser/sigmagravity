@@ -1,5 +1,6 @@
 import { canonicalize, sha256 } from "./canonical.mjs";
-import { prepareFieldJob } from "./field-job-preflight.mjs";
+import { prepareFieldJob, validateArrayBundle } from "./field-job-preflight.mjs";
+import { validateObservationTargets } from "./observation-target.mjs";
 
 const POLICY_MODES = new Set([
   "published_fixed",
@@ -57,19 +58,36 @@ export function prepareBatch({ submission, resolvedSystems }) {
   const policy = explicitPolicy(submission.parameterPolicy, submission.model, ids);
   const fieldRequest = submission.fieldRequest ?? {};
   const childPreflights = resolvedSystems.map((system) => {
-    const preflight = prepareFieldJob({
+    const fieldPreflight = prepareFieldJob({
       model: submission.model,
       inputBundle: system.inputBundle,
-      request: { ...fieldRequest, observationTargets: system.observationTargets ?? [] },
+      request: fieldRequest,
     });
-    if (!preflight.valid) throw new Error(`system ${system.id} failed model validation: ${preflight.errors.join("; ")}`);
+    if (!fieldPreflight.valid) throw new Error(`system ${system.id} failed field-only validation: ${fieldPreflight.errors.join("; ")}`);
+    const observationBundle = system.observationBundle ?? system.inputBundle;
+    validateArrayBundle(observationBundle);
+    const requestedObservables = [...new Set(
+      fieldRequest.requestedObservables ?? submission.model.observables.map((item) => item.id),
+    )].sort();
+    const observationTargetSummary = validateObservationTargets({
+      targets: system.observationTargets ?? [],
+      model: submission.model,
+      inputBundle: observationBundle,
+      requestedObservables,
+    });
     return {
       systemId: system.id,
       source: system.source,
       inputBundleSha256: system.inputBundle.bundleSha256,
-      preflightSha256: preflight.preflightSha256,
-      resourceEstimate: preflight.resourceEstimate,
-      observationTargets: preflight.observationTargets,
+      observationBundleSha256: observationBundle.bundleSha256,
+      fieldPreflightSha256: fieldPreflight.preflightSha256,
+      observationBindingSha256: sha256({
+        observationBundleSha256: observationBundle.bundleSha256,
+        observationTargets: canonicalize(system.observationTargets ?? []),
+      }),
+      resourceEstimate: fieldPreflight.resourceEstimate,
+      observationTargets: canonicalize(system.observationTargets ?? []),
+      observationTargetSummary,
     };
   });
   const totalEstimatedMemoryBytes = childPreflights.reduce(
@@ -79,28 +97,28 @@ export function prepareBatch({ submission, resolvedSystems }) {
   const modelSha256 = prepareFieldJob({
     model: submission.model,
     inputBundle: resolvedSystems[0].inputBundle,
-    request: {
-      ...fieldRequest,
-      observationTargets: resolvedSystems[0].observationTargets ?? [],
-    },
+    request: fieldRequest,
   }).modelSha256;
   const core = canonicalize({
-    schemaVersion: "sigma-batch-preflight/1",
+    schemaVersion: "sigma-batch-preflight/2",
     modelSha256,
     parameterPolicy: policy,
     fieldRequest,
-    systems: childPreflights.map(({ systemId, source, inputBundleSha256, preflightSha256, observationTargets }) => ({
+    systems: childPreflights.map(({ systemId, source, inputBundleSha256, observationBundleSha256, fieldPreflightSha256, observationBindingSha256, observationTargets, observationTargetSummary }) => ({
       systemId,
       source,
       inputBundleSha256,
-      preflightSha256,
+      observationBundleSha256,
+      fieldPreflightSha256,
+      observationBindingSha256,
       observationTargets,
+      observationTargetSummary,
     })),
   });
   const preflightSha256 = sha256(core);
   const executable = EXECUTABLE_MODES.has(policy.mode);
   const scoredObservationTargets = childPreflights.reduce(
-    (sum, item) => sum + item.observationTargets.filter((target) => target.scored).length,
+    (sum, item) => sum + item.observationTargetSummary.filter((target) => target.scored).length,
     0,
   );
   return {
@@ -123,7 +141,8 @@ export function prepareBatch({ submission, resolvedSystems }) {
     scoredObservationTargets,
     claimBoundary: scoredObservationTargets
       ? [
-        "Circular-speed and resolved velocity-field scores use the declared massive-tracer acceleration only after each field solve.",
+        "Circular-speed and resolved velocity-field scores are produced by separately content-addressed observation jobs after each immutable field solve.",
+        "Changing a measured array, mask, uncertainty, beam, or target declaration does not alter the field-child identity when the model and source field inputs are unchanged.",
         "Photon lensing and unsubmitted observables are not evaluated by this batch.",
       ]
       : [

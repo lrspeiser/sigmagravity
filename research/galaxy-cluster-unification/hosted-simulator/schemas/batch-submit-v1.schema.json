@@ -19,6 +19,7 @@
         "properties": {
           "id": { "type": "string", "minLength": 1, "maxLength": 128 },
           "dataUploadId": { "type": "string", "pattern": "^upload_[0-9a-f]{24}$" },
+          "observationDataUploadId": { "type": "string", "pattern": "^upload_[0-9a-f]{24}$" },
           "galaxyJobId": { "type": "string", "pattern": "^job_[0-9a-f]{24}$" },
           "galaxyArtifact": { "enum": ["field_surface_density", "field_volume_density"] },
           "observationTargets": {

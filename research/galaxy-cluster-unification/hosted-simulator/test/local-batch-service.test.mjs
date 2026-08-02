@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { basename, resolve } from "node:path";
 import test from "node:test";
 import { sha256 } from "../lib/canonical.mjs";
+import { validateFieldModel } from "../lib/field-model.mjs";
 import { LocalBatchService } from "../lib/local-batch-service.mjs";
 import { LocalFieldJobService, LocalServiceError } from "../lib/local-field-job-service.mjs";
 
@@ -62,18 +63,89 @@ function velocityBundle(label) {
   return { ...core, bundleSha256: sha256(core) };
 }
 
-async function successfulRunner({ jobDirectory }) {
+function velocityObservationBundle(label) {
+  const source = velocityBundle(label);
+  const core = {
+    ...Object.fromEntries(Object.entries(source).filter(([key]) => key !== "bundleSha256")),
+    arrays: source.arrays.filter((record) => record.key !== "forcing"),
+    provenance: { kind: "batch_observation_fixture", label },
+  };
+  return { ...core, bundleSha256: sha256(core) };
+}
+
+async function successfulFieldRunner({ jobDirectory }) {
+  const root = resolve(jobDirectory, "artifacts");
+  await mkdir(root, { recursive: true });
+  const childId = basename(jobDirectory);
+  const fieldModel = JSON.parse(await readFile(resolve(jobDirectory, "model.json"), "utf8"));
+  const validation = validateFieldModel(fieldModel);
+  const fieldJobSha256 = sha256({ childId, modelSha256: validation.modelSha256 });
+  const fieldJob = {
+    schemaVersion: "sigma-field-job/1",
+    id: `fieldjob_${fieldJobSha256.slice(0, 24)}`,
+    jobSha256: fieldJobSha256,
+    modelSha256: validation.modelSha256,
+    geometry: {
+      coordinateSystem: "cartesian_2d", dimensions: 2,
+      spacing: [0.1, 0.1], origin: [-0.8, -0.8], lengthUnit: "m",
+    },
+  };
+  const scientificCore = {
+    schemaVersion: "sigma-field-result/1",
+    jobId: fieldJob.id,
+    jobSha256: fieldJob.jobSha256,
+    state: "succeeded",
+    converged: true,
+    iterations: 4,
+    maximumRelativeUpdate: 1e-9,
+    equationResiduals: { manufactured: { relativeL2: 2e-8 } },
+    observables: [
+      { key: "gradient__axis0", dtype: "<f8", shape: [17, 17], contentSha256: "6".repeat(64) },
+      { key: "gradient__axis1", dtype: "<f8", shape: [17, 17], contentSha256: "7".repeat(64) },
+    ],
+    parameterAccounting: { universal: 0, perObject: 0 },
+  };
+  const scientific = { ...scientificCore, resultSha256: sha256(scientificCore) };
+  const contents = new Map([
+    ["model.json", Buffer.from(`${JSON.stringify(fieldModel)}\n`)],
+    ["job.json", Buffer.from(`${JSON.stringify(fieldJob)}\n`)],
+    ["scientific_result.json", Buffer.from(`${JSON.stringify(scientific)}\n`)],
+    ["observables.npz", Buffer.from("fixture-observable-archive")],
+  ]);
+  await Promise.all([...contents].map(([name, content]) => writeFile(resolve(root, name), content)));
+  const artifactIndex = {
+    schemaVersion: "sigma-field-artifact-index/1",
+    jobId: fieldJob.id,
+    artifacts: [...contents].map(([path, content]) => ({ path, bytes: content.length, sha256: digest(content) })),
+  };
+  const indexContent = Buffer.from(`${JSON.stringify(artifactIndex)}\n`);
+  await writeFile(resolve(root, "artifact_index.json"), indexContent);
+  const manifestCore = {
+    schemaVersion: "sigma-field-run-manifest/1",
+    state: "succeeded",
+    jobId: fieldJob.id,
+    scientificResultSha256: scientific.resultSha256,
+    artifactIndexSha256: digest(indexContent),
+  };
+  await writeFile(
+    resolve(root, "manifest.json"),
+    `${JSON.stringify({ ...manifestCore, manifestSha256: sha256(manifestCore) })}\n`,
+  );
+  return { exitCode: 0, exitSignal: null, timedOut: false, stdout: "ok", stderr: "" };
+}
+
+async function successfulObservationRunner({ jobDirectory }) {
   const root = resolve(jobDirectory, "artifacts");
   await mkdir(root, { recursive: true });
   const childId = basename(jobDirectory);
   const requestEnvelope = JSON.parse(await readFile(resolve(jobDirectory, "request.json"), "utf8"));
   const observationTargets = requestEnvelope.request.observationTargets ?? [];
   const targetKinds = [...new Set(observationTargets.map((target) => target.kind))].sort();
-  const observationEvaluation = observationTargets.length ? {
+  const observationEvaluation = {
     schemaVersion: "sigma-observation-evaluation/1",
     targetKinds,
-    targetCount: 1,
-    scoredTargetCount: 1,
+    targetCount: observationTargets.length,
+    scoredTargetCount: observationTargets.length,
     totalPoints: 1,
     validScoredPoints: 1,
     sumSquaredResidualM2PerS2: 4,
@@ -85,20 +157,20 @@ async function successfulRunner({ jobDirectory }) {
     degreesFreedom: 1,
     reducedChiSquare: 1,
     targets: [],
-  } : null;
-  const scientific = {
-    schemaVersion: "sigma-field-result/1",
-    jobId: `fieldjob_${childId.slice(-12)}`,
+  };
+  const scientificCore = {
+    schemaVersion: "sigma-observation-evaluation-result/1",
+    jobId: `observationjob_${childId.slice(-12)}`,
     state: "succeeded",
-    converged: true,
-    iterations: 4,
-    maximumRelativeUpdate: 1e-9,
-    equationResiduals: { manufactured: { relativeL2: 2e-8 } },
     observationEvaluation,
     parameterAccounting: { universal: 0, perObject: 0 },
+    evaluationAddedGravityParameters: 0,
   };
+  const scientific = { ...scientificCore, resultSha256: sha256(scientificCore) };
   const scientificContent = Buffer.from(`${JSON.stringify(scientific)}\n`);
+  const scoreContent = Buffer.from(`${JSON.stringify(observationEvaluation)}\n`);
   await writeFile(resolve(root, "scientific_result.json"), scientificContent);
+  await writeFile(resolve(root, "observation_scores.json"), scoreContent);
   const predictionContent = Buffer.from(
     "target_id,point_index,radius_m,predicted_speed_m_s,observed_speed_m_s,uncertainty_m_s,residual_m_s,azimuthal_coverage,mean_inward_acceleration_m_s2\nfixture,0,1,8,10,2,-2,1,64\n",
   );
@@ -113,6 +185,7 @@ async function successfulRunner({ jobDirectory }) {
   }
   const artifactRecords = [
     { path: "scientific_result.json", bytes: scientificContent.length, sha256: digest(scientificContent) },
+    { path: "observation_scores.json", bytes: scoreContent.length, sha256: digest(scoreContent) },
   ];
   if (targetKinds.includes("circular_speed_curve")) {
     artifactRecords.push({
@@ -129,29 +202,41 @@ async function successfulRunner({ jobDirectory }) {
     });
   }
   const artifactIndex = {
-    schemaVersion: "sigma-field-artifact-index/1",
+    schemaVersion: "sigma-observation-evaluation-artifact-index/1",
     jobId: scientific.jobId,
     artifacts: artifactRecords,
   };
   const indexContent = Buffer.from(`${JSON.stringify(artifactIndex)}\n`);
   await writeFile(resolve(root, "artifact_index.json"), indexContent);
-  const manifest = {
-    schemaVersion: "sigma-field-run-manifest/1",
+  const manifestCore = {
+    schemaVersion: "sigma-observation-evaluation-run-manifest/1",
     state: "succeeded",
     jobId: scientific.jobId,
-    scientificResultSha256: sha256(scientific),
+    scientificResultSha256: scientific.resultSha256,
     artifactIndexSha256: digest(indexContent),
-    manifestSha256: sha256({ childId }),
   };
-  await writeFile(resolve(root, "manifest.json"), `${JSON.stringify(manifest)}\n`);
+  await writeFile(
+    resolve(root, "manifest.json"),
+    `${JSON.stringify({ ...manifestCore, manifestSha256: sha256(manifestCore) })}\n`,
+  );
   return { exitCode: 0, exitSignal: null, timedOut: false, stdout: "ok", stderr: "" };
 }
 
-async function fixture(t) {
+async function successfulRunner(argumentsValue) {
+  return argumentsValue.jobType === "observation_evaluation"
+    ? successfulObservationRunner(argumentsValue)
+    : successfulFieldRunner(argumentsValue);
+}
+
+async function fixture(t, options = {}) {
   const root = await mkdtemp(resolve(tmpdir(), "sigma-batch-service-"));
   t.after(async () => rm(root, { recursive: true, force: true }));
   const projectRoot = resolve(import.meta.dirname, "..", "..");
-  const fieldService = new LocalFieldJobService({ root, projectRoot, runner: successfulRunner });
+  const fieldService = new LocalFieldJobService({
+    root,
+    projectRoot,
+    runner: options.runner ?? successfulRunner,
+  });
   await fieldService.initialize();
   const batchService = new LocalBatchService({ root, fieldService, pollMilliseconds: 5 });
   await batchService.initialize();
@@ -198,6 +283,7 @@ test("one fixed model produces deterministic multi-system batch reports", async 
   await batchService.waitForIdle();
   const completed = await batchService.getBatch(submission.id);
   assert.equal(completed.state, "succeeded");
+  assert.equal(completed.phase, "complete");
   assert.equal(completed.successfulChildren, 2);
   const response = await batchService.getArtifacts(submission.id);
   assert.deepEqual(
@@ -215,6 +301,12 @@ test("one fixed model produces deterministic multi-system batch reports", async 
   assert.equal(aggregate.parameterPolicy.mode, "published_fixed");
   assert.equal(aggregate.perObjectGravityParameters, 0);
   assert.equal(aggregate.observationScoresAvailable, false);
+  const children = JSON.parse((await batchService.getArtifact(
+    submission.id,
+    "child_jobs.json",
+  )).content.toString("utf8")).items;
+  assert.ok(children.every((child) => child.observationEvaluationJobId === null));
+  assert.equal((await fieldService.listObservationEvaluationJobs()).items.length, 0);
   const report = (await batchService.getArtifact(submission.id, "report.html")).content.toString("utf8");
   assert.match(report, /numerical execution and convergence only/);
   const duplicate = await batchService.createBatch(payload);
@@ -268,7 +360,8 @@ test("batch aggregates post-solve circular-speed scores and predictions", async 
   await fieldService.waitForIdle();
   await batchService.waitForIdle();
   const aggregate = JSON.parse((await batchService.getArtifact(submission.id, "aggregate_scores.json")).content.toString("utf8"));
-  assert.equal(aggregate.observationScoresAvailable, true);
+  const failureDetails = (await batchService.getArtifact(submission.id, "failures.csv")).content.toString("utf8");
+  assert.equal(aggregate.observationScoresAvailable, true, failureDetails);
   assert.equal(aggregate.scoredObservationTargets, 1);
   assert.equal(aggregate.validObservationPoints, 1);
   assert.equal(aggregate.observationRmseMPerS, 2);
@@ -307,7 +400,7 @@ test("batch aggregates resolved velocity-field scores and prediction pixels", as
   await fieldService.waitForIdle();
   await batchService.waitForIdle();
   const aggregate = JSON.parse((await batchService.getArtifact(submission.id, "aggregate_scores.json")).content.toString("utf8"));
-  assert.equal(aggregate.observationScoresAvailable, true);
+  assert.equal(aggregate.observationScoresAvailable, true, JSON.stringify(aggregate));
   assert.equal(aggregate.scoredObservationTargets, 1);
   const predictions = (await batchService.getArtifact(
     submission.id,
@@ -316,6 +409,339 @@ test("batch aggregates resolved velocity-field scores and prediction pixels", as
   assert.match(predictions, /GALAXY-V,fixture-map,0,0,0,1,0,1,8,8,10,2,-2,0.25,64/);
   const report = (await batchService.getArtifact(submission.id, "report.html")).content.toString("utf8");
   assert.match(report, /line_of_sight_velocity_field/);
+});
+
+test("changed observation data reuses the field child and changes only the observation child", async (t) => {
+  const calls = { field: 0, observation: 0 };
+  const runner = async (argumentsValue) => {
+    if (argumentsValue.jobType === "observation_evaluation") {
+      calls.observation += 1;
+      return successfulObservationRunner(argumentsValue);
+    }
+    calls.field += 1;
+    return successfulFieldRunner(argumentsValue);
+  };
+  const { fieldService, batchService } = await fixture(t, { runner });
+  const fieldUpload = await upload(fieldService, "SHARED-FIELD");
+  const firstObservationUpload = await upload(
+    fieldService,
+    "OBSERVATION-A",
+    velocityObservationBundle("OBSERVATION-A"),
+  );
+  const secondObservationUpload = await upload(
+    fieldService,
+    "OBSERVATION-B",
+    velocityObservationBundle("OBSERVATION-B"),
+  );
+  const observationModel = model();
+  observationModel.observables[0].target = "massive_tracers";
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "GALAXY-COMPOSED-map",
+    kind: "line_of_sight_velocity_field",
+    observable: "gradient",
+    centerM: [0, 0],
+    inclinationDeg: 45,
+    handedness: 1,
+    majorCoordinateArrayKey: "major",
+    minorCoordinateArrayKey: "minor",
+    observedVelocityArrayKey: "observed_velocity",
+    uncertaintyArrayKey: "velocity_uncertainty",
+    minimumValidPixels: 100,
+    provenance: { kind: "composed batch fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const payload = (observationDataUploadId) => ({
+    schemaVersion: "sigma-batch-submit/1",
+    model: observationModel,
+    systems: [{
+      id: "GALAXY-COMPOSED",
+      dataUploadId: fieldUpload.id,
+      observationDataUploadId,
+      observationTargets: [target],
+    }],
+    fieldRequest: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["gradient"] },
+    parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
+  });
+
+  const first = await batchService.createBatch(payload(firstObservationUpload.id));
+  await batchService.waitForIdle();
+  const firstChildren = JSON.parse((await batchService.getArtifact(
+    first.id,
+    "child_jobs.json",
+  )).content.toString("utf8")).items;
+  const second = await batchService.createBatch(payload(secondObservationUpload.id));
+  await batchService.waitForIdle();
+  const secondChildren = JSON.parse((await batchService.getArtifact(
+    second.id,
+    "child_jobs.json",
+  )).content.toString("utf8")).items;
+
+  assert.notEqual(first.id, second.id);
+  assert.equal(firstChildren[0].fieldJobId, secondChildren[0].fieldJobId);
+  assert.notEqual(
+    firstChildren[0].observationEvaluationJobId,
+    secondChildren[0].observationEvaluationJobId,
+  );
+  assert.equal(calls.field, 1);
+  assert.equal(calls.observation, 2);
+  const fieldEnvelope = JSON.parse(await readFile(resolve(
+    fieldService.root,
+    "jobs",
+    firstChildren[0].fieldJobId,
+    "request.json",
+  ), "utf8"));
+  assert.equal((fieldEnvelope.request.observationTargets ?? []).length, 0);
+  const duplicate = await batchService.createBatch(payload(secondObservationUpload.id));
+  assert.equal(duplicate.id, second.id);
+  assert.equal(duplicate.duplicate, true);
+  assert.equal(calls.field, 1);
+  assert.equal(calls.observation, 2);
+
+  const observationId = secondChildren[0].observationEvaluationJobId;
+  const standalonePrediction = await fieldService.getArtifact(
+    observationId,
+    "observation_velocity_field_predictions.csv",
+  );
+  const recordedPrediction = secondChildren[0].observationArtifacts.find(
+    (artifact) => artifact.path === "observation_velocity_field_predictions.csv",
+  );
+  assert.equal(recordedPrediction.sha256, standalonePrediction.record.sha256);
+  const recordedScores = secondChildren[0].observationArtifacts.find(
+    (artifact) => artifact.path === "observation_scores.json",
+  );
+  const standaloneScores = await fieldService.getArtifact(observationId, "observation_scores.json");
+  assert.equal(recordedScores.sha256, standaloneScores.record.sha256);
+  const standaloneLines = standalonePrediction.content.toString("utf8").trimEnd().split("\n");
+  const expectedAggregatePrediction = `system_id,${standaloneLines[0]}\n${standaloneLines
+    .slice(1)
+    .map((line) => `GALAXY-COMPOSED,${line}`)
+    .join("\n")}\n`;
+  const aggregatePrediction = (await batchService.getArtifact(
+    second.id,
+    "observation_velocity_field_predictions.csv",
+  )).content.toString("utf8");
+  assert.equal(aggregatePrediction, expectedAggregatePrediction);
+  const aggregate = JSON.parse((await batchService.getArtifact(
+    second.id,
+    "aggregate_scores.json",
+  )).content.toString("utf8"));
+  assert.equal(aggregate.observationAddedGravityParameters, 0);
+  assert.equal(aggregate.observationSucceededSystems, 1);
+  const perGalaxy = (await batchService.getArtifact(second.id, "per_galaxy.csv")).content.toString("utf8");
+  assert.match(perGalaxy, new RegExp(firstChildren[0].fieldJobId));
+  assert.match(perGalaxy, new RegExp(observationId));
+});
+
+test("batch cancellation reaches a running observation child without cancelling its completed field", async (t) => {
+  const runner = (argumentsValue) => {
+    if (argumentsValue.jobType !== "observation_evaluation") {
+      return successfulFieldRunner(argumentsValue);
+    }
+    return new Promise((resolvePromise) => {
+      argumentsValue.signal.addEventListener(
+        "abort",
+        () => resolvePromise({
+          exitCode: null, exitSignal: "SIGTERM", timedOut: false, stdout: "", stderr: "",
+        }),
+        { once: true },
+      );
+    });
+  };
+  const { fieldService, batchService } = await fixture(t, { runner });
+  const source = await upload(fieldService, "CANCEL-OBSERVATION");
+  const observationModel = model();
+  observationModel.observables[0].target = "massive_tracers";
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "CANCEL-curve",
+    kind: "circular_speed_curve",
+    observable: "gradient",
+    centerM: [0, 0],
+    radiiM: [1],
+    observedSpeedsMPerS: [10],
+    uncertaintiesMPerS: [2],
+    provenance: { kind: "cancellation fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const submission = await batchService.createBatch({
+    schemaVersion: "sigma-batch-submit/1",
+    model: observationModel,
+    systems: [{ id: "CANCEL", dataUploadId: source.id, observationTargets: [target] }],
+    fieldRequest: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["gradient"] },
+    parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
+  });
+  let record;
+  for (let attempt = 0; attempt < 200; attempt += 1) {
+    record = await batchService.getBatch(submission.id);
+    const observationId = record.childJobs[0].observationEvaluationJobId;
+    if (observationId && (await fieldService.getObservationEvaluationJob(observationId)).state === "running") break;
+    await new Promise((resolvePromise) => setTimeout(resolvePromise, 5));
+  }
+  const observationId = record.childJobs[0].observationEvaluationJobId;
+  assert.ok(observationId);
+  const cancelled = await batchService.cancelBatch(submission.id);
+  assert.equal(cancelled.state, "cancelled");
+  await fieldService.waitForIdle();
+  assert.equal((await fieldService.getFieldJob(record.childJobs[0].fieldJobId)).state, "succeeded");
+  assert.equal((await fieldService.getObservationEvaluationJob(observationId)).state, "cancelled");
+});
+
+test("batch restart rebuilds reporting from completed field and observation children without rerunning", async (t) => {
+  const calls = { field: 0, observation: 0 };
+  const runner = async (argumentsValue) => {
+    if (argumentsValue.jobType === "observation_evaluation") {
+      calls.observation += 1;
+      return successfulObservationRunner(argumentsValue);
+    }
+    calls.field += 1;
+    return successfulFieldRunner(argumentsValue);
+  };
+  const { fieldService, batchService } = await fixture(t, { runner });
+  const source = await upload(fieldService, "RECOVERY");
+  const observationModel = model();
+  observationModel.observables[0].target = "massive_tracers";
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "RECOVERY-curve",
+    kind: "circular_speed_curve",
+    observable: "gradient",
+    centerM: [0, 0],
+    radiiM: [1],
+    observedSpeedsMPerS: [10],
+    uncertaintiesMPerS: [2],
+    provenance: { kind: "recovery fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const submission = await batchService.createBatch({
+    schemaVersion: "sigma-batch-submit/1",
+    model: observationModel,
+    systems: [{ id: "RECOVERY", dataUploadId: source.id, observationTargets: [target] }],
+    fieldRequest: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["gradient"] },
+    parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
+  });
+  await batchService.waitForIdle();
+  assert.deepEqual(calls, { field: 1, observation: 1 });
+  await batchService.close();
+  const batchDirectory = resolve(batchService.root, "batches", submission.id);
+  const recordPath = resolve(batchDirectory, "record.json");
+  const record = JSON.parse(await readFile(recordPath, "utf8"));
+  record.state = "running";
+  record.phase = "observation";
+  record.completedChildren = 0;
+  record.successfulChildren = 0;
+  await writeFile(recordPath, `${JSON.stringify(record, null, 2)}\n`);
+  await rm(resolve(batchDirectory, "artifacts"), { recursive: true, force: true });
+  const recovered = new LocalBatchService({
+    root: batchService.root,
+    fieldService,
+    pollMilliseconds: 5,
+  });
+  await recovered.initialize();
+  t.after(async () => recovered.close());
+  await recovered.waitForIdle();
+  assert.equal((await recovered.getBatch(submission.id)).state, "succeeded");
+  assert.deepEqual(calls, { field: 1, observation: 1 });
+});
+
+test("a rejected field creates no observation child and an observation failure is scored separately", async (t) => {
+  const rejected = async (argumentsValue) => {
+    if (argumentsValue.jobType === "field") {
+      return {
+        exitCode: 2,
+        exitSignal: null,
+        timedOut: false,
+        stdout: "",
+        stderr: JSON.stringify({
+          schemaVersion: "sigma-field-job-cli-error/1",
+          errorType: "ValueError",
+          message: "rejected field fixture",
+        }),
+      };
+    }
+    throw new Error("observation runner must not be called after a rejected field");
+  };
+  const rejectedFixture = await fixture(t, { runner: rejected });
+  const rejectedSource = await upload(rejectedFixture.fieldService, "REJECTED-FIELD");
+  const rejectedModel = model();
+  rejectedModel.observables[0].target = "massive_tracers";
+  const rejectedTarget = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "REJECTED-FIELD-curve",
+    kind: "circular_speed_curve",
+    observable: "gradient",
+    centerM: [0, 0],
+    radiiM: [1],
+    observedSpeedsMPerS: [10],
+    uncertaintiesMPerS: [2],
+    provenance: { kind: "rejected field observation fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const rejectedBatch = await rejectedFixture.batchService.createBatch({
+    schemaVersion: "sigma-batch-submit/1",
+    model: rejectedModel,
+    systems: [{
+      id: "REJECTED",
+      dataUploadId: rejectedSource.id,
+      observationTargets: [rejectedTarget],
+    }],
+    fieldRequest: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["gradient"] },
+    parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
+  });
+  await rejectedFixture.batchService.waitForIdle();
+  assert.equal((await rejectedFixture.batchService.getBatch(rejectedBatch.id)).state, "completed_with_failures");
+  assert.equal((await rejectedFixture.fieldService.listObservationEvaluationJobs()).items.length, 0);
+
+  const observationFailureRunner = async (argumentsValue) => {
+    if (argumentsValue.jobType === "field") return successfulFieldRunner(argumentsValue);
+    return {
+      exitCode: 2,
+      exitSignal: null,
+      timedOut: false,
+      stdout: "",
+      stderr: JSON.stringify({
+        schemaVersion: "sigma-observation-evaluation-job-cli-error/1",
+        errorType: "ValueError",
+        message: "rejected observation fixture",
+      }),
+    };
+  };
+  const failedObservationFixture = await fixture(t, { runner: observationFailureRunner });
+  const source = await upload(failedObservationFixture.fieldService, "REJECTED-OBSERVATION");
+  const observationModel = model();
+  observationModel.observables[0].target = "massive_tracers";
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "REJECTED-OBSERVATION-curve",
+    kind: "circular_speed_curve",
+    observable: "gradient",
+    centerM: [0, 0],
+    radiiM: [1],
+    observedSpeedsMPerS: [10],
+    uncertaintiesMPerS: [2],
+    provenance: { kind: "observation failure fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const failedBatch = await failedObservationFixture.batchService.createBatch({
+    schemaVersion: "sigma-batch-submit/1",
+    model: observationModel,
+    systems: [{ id: "REJECTED-OBSERVATION", dataUploadId: source.id, observationTargets: [target] }],
+    fieldRequest: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["gradient"] },
+    parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
+  });
+  await failedObservationFixture.batchService.waitForIdle();
+  const aggregate = JSON.parse((await failedObservationFixture.batchService.getArtifact(
+    failedBatch.id,
+    "aggregate_scores.json",
+  )).content.toString("utf8"));
+  assert.equal(aggregate.fieldSucceededSystems, 1);
+  assert.equal(aggregate.observationSucceededSystems, 0);
+  assert.equal(aggregate.observationScoresAvailable, false);
+  const failures = (await failedObservationFixture.batchService.getArtifact(
+    failedBatch.id,
+    "failures.csv",
+  )).content.toString("utf8");
+  assert.match(failures, /observation_execution_failure/);
 });
 
 test("batch report artifacts reject traversal and mutation", async (t) => {

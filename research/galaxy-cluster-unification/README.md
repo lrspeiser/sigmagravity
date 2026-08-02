@@ -1572,6 +1572,16 @@ evaluation without changing the source field. Cancellation, restart recovery,
 and downloaded-artifact rehashing pass. See
 [`docs/P0732_DECOUPLED_OBSERVATION_EVALUATION_MILESTONE.md`](docs/P0732_DECOUPLED_OBSERVATION_EVALUATION_MILESTONE.md).
 
+P0733 composes that independent evaluation boundary into the multi-system
+batch service. Each system now creates or reuses an observation-independent
+field child first and, only after a successful field solve, creates or reuses
+one separately hashed observation child. Field and measured-observation arrays
+may use different upload IDs. The frozen real-HTTP run proves that changing an
+uncertainty preserves the field job while changing the observation job; field
+rejection, observation rejection, cancellation, restart recovery, artifact
+hashes, and zero added gravity parameters also pass. See
+[`docs/P0733_COMPOSED_BATCH_OBSERVATION_JOBS_MILESTONE.md`](docs/P0733_COMPOSED_BATCH_OBSERVATION_JOBS_MILESTONE.md).
+
 ```powershell
 python scripts/run_p0723_formula_neutral_api_comparators.py `
   --base-url http://127.0.0.1:4173
@@ -1592,4 +1602,6 @@ python scripts/run_p0729_qualified_80step_fine_grid_aqual.py
 python scripts/run_p0731_real_velocity_field_adapter_parity.py
 
 python scripts/run_p0732_decoupled_observation_evaluation.py
+
+python scripts/run_p0733_composed_batch_observation_jobs.py
 ```

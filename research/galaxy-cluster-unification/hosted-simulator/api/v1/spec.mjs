@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.7.0-preview",
-    description: "Stateless radial tests plus a dimension-checked, formula-independent 2D/3D contract, resolved massive-tracer targets, and separately cached observation evaluation. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
+    version: "0.8.0-preview",
+    description: "Stateless radial tests plus a dimension-checked, formula-independent 2D/3D contract, resolved massive-tracer targets, separately cached observation evaluation, and composed field/observation batches. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
@@ -48,7 +48,7 @@ const specification = {
     "/api/v1/galaxy-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running resolved-galaxy job" } },
     "/api/v1/batches": {
       get: { summary: "List local multi-system field batches" },
-      post: { summary: "Run one confirmed model and explicit parameter policy over uploaded or generated systems and declared observation targets" },
+      post: { summary: "Compose reusable field children and separately cached observation children across uploaded or generated systems" },
     },
     "/api/v1/batches/{id}": { get: { summary: "Read batch state and child progress" } },
     "/api/v1/batches/{id}/events": { get: { summary: "Read ordered batch lifecycle events" } },

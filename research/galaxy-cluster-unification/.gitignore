@@ -182,6 +182,10 @@ results/p0731_real_velocity_field_adapter_parity/*
 results/p0732_decoupled_observation_evaluation/*
 !results/p0732_decoupled_observation_evaluation/SUMMARY.md
 !results/p0732_decoupled_observation_evaluation/report.json
+!results/p0733_composed_batch_observation_jobs/
+results/p0733_composed_batch_observation_jobs/*
+!results/p0733_composed_batch_observation_jobs/SUMMARY.md
+!results/p0733_composed_batch_observation_jobs/report.json
 data/raw/manga_dr17/*.fits
 data/raw/erass1_clusters/*.fits
 data/raw/manga_gema_dr17/*.fits

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "sigma-p0733-composed-batch-observation-jobs-result/1",
+  "stage": "P0733",
+  "status": "pass",
+  "configSha256": "3890b248c05c231905be8ac649c55c99c5a17c4f314217ae8cb17694c5b342ef",
+  "parentCommit": "613170ad35bf4aa0a64ac1275d590eee9e60aea7",
+  "hostedTestCount": 65,
+  "hostedPassCount": 65,
+  "httpAcceptance": {
+    "schemaVersion": "sigma-batch-http-smoke/2",
+    "state": "pass",
+    "batchId": "batch_3480d4133d676048919761ba",
+    "model": "Newtonian Poisson gravity",
+    "modelSha256": "43738f2c7bb3c4e94193763cf46f39b2a47fa852b25d1c063fef00fa7e1aa661",
+    "parameterPolicy": {
+      "mode": "published_fixed",
+      "perObjectParameters": []
+    },
+    "systems": [
+      "DDO101-replay",
+      "DDO101-compact",
+      "DDO101-diffuse"
+    ],
+    "successfulSystems": 3,
+    "convergenceFraction": 1,
+    "maximumEquationResidual": 2.714417441072106e-10,
+    "perObjectGravityParameters": 0,
+    "observationAddedGravityParameters": 0,
+    "fieldJobId": "job_01f55e6b415b91018ca7b355",
+    "observationEvaluationJobId": "job_2893ffbee7e333f54a844a8e",
+    "fieldChildObservationTargetCount": 0,
+    "fieldOnlyObservationChildren": 0,
+    "changedObservationPreservedFieldJobId": true,
+    "changedObservationChangedEvaluationJobId": true,
+    "duplicateComposedBatchReused": true,
+    "observationScoresAvailable": true,
+    "scoredObservationTargets": 1,
+    "validObservationPoints": 10,
+    "observationRmseKmS": 40.04429462263692,
+    "observationWeightedRmseKmS": 42.72278661305013,
+    "observationReducedChiSquare": 198.12827918435852,
+    "frozenNewtonianFixtureConformance": {
+      "rmseKmS": 0.49614868095377607,
+      "normalizedRmse": 0.0531195702738714
+    },
+    "artifactCount": 11,
+    "allDownloadedArtifactHashesValid": true
+  },
+  "gateResults": {
+    "field_children_exclude_observation_targets": true,
+    "maximum_one_observation_child_per_scored_system": true,
+    "changed_observation_preserves_field_identity": true,
+    "changed_observation_changes_evaluation_identity": true,
+    "identical_composed_submission_reuses_identity": true,
+    "scores_and_predictions_come_from_standalone_child": true,
+    "field_only_systems_create_no_observation_children": true,
+    "failed_field_creates_no_observation_child": true,
+    "failed_observation_is_excluded_from_aggregate": true,
+    "cancellation_reaches_both_child_types": true,
+    "restart_recovers_composition_phase_without_rerun": true,
+    "artifact_downloads_rehash": true,
+    "no_per_object_gravity_parameters": true,
+    "observation_adds_no_gravity_parameters": true,
+    "static_build": true
+  },
+  "failedGates": [],
+  "sourceSha256": {
+    "hosted-simulator/lib/batch-preflight.mjs": "1fa4b0f7df9acd845f384921cb890062487ceb411ac19b86db85c65255463ad7",
+    "hosted-simulator/lib/local-batch-service.mjs": "1adcf3ba07fcfceb31eae83a40c64eef36a457ed479cc4f4423e07e3f0b61c3d",
+    "hosted-simulator/lib/local-field-job-service.mjs": "3e1fd6d63b1f05e888064d5262b7bb30ce0a79a8a5912a6f6f84ba9438083a4e",
+    "hosted-simulator/lib/observation-evaluation-preflight.mjs": "15313319682b0e6fcd796c183e654497709eade29bca266cf0255f55e0f85503",
+    "hosted-simulator/schemas/batch-submit-v1.schema.json": "ae4498723df03dcfa3d94188ed49407abd22eaa1ab7e2984f73b8fe807690d82",
+    "scripts/smoke_local_batch_api.py": "1af231a38c652139de096568637fd581e5a4def7dea435d65f79407bf150e06c"
+  },
+  "claimBoundary": [
+    "P0733 changes orchestration and provenance, not a gravity equation or an observation mapping.",
+    "A shared field identity demonstrates reuse only when model, source mass distribution, grid, boundaries, solver controls, and requested field observables are unchanged.",
+    "Massive-tracer and photon mappings remain separately typed; P0733 does not add photon lensing.",
+    "The local reference queue remains single-user and filesystem-backed; durable public execution is a later infrastructure milestone."
+  ]
+}

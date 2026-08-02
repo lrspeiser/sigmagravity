@@ -7,7 +7,7 @@ import { LocalServiceError } from "./local-field-job-service.mjs";
 
 // Report contents participate in batch identity through this version. Bump it
 // whenever deterministic batch artifacts or aggregation semantics change.
-const SERVICE_VERSION = "sigma-local-batch-service/3";
+const SERVICE_VERSION = "sigma-local-batch-service/4";
 const IDENTIFIER = /^batch_[0-9a-f]{24}$/;
 const TERMINAL_CHILD_STATES = new Set([
   "succeeded",
@@ -157,6 +157,7 @@ export class LocalBatchService {
     }
     const resolvedSystems = [];
     const uploadIds = [];
+    const observationUploadIds = [];
     for (const source of payload.systems ?? []) {
       let upload;
       let sourceIdentity;
@@ -178,11 +179,19 @@ export class LocalBatchService {
         throw new LocalServiceError(422, "invalid_batch_source", `system ${source.id ?? "?"} requires one data source`);
       }
       if (upload.state !== "ready") throw new LocalServiceError(409, "upload_not_ready", `system ${source.id} upload is not ready`);
+      const observationUpload = source.observationDataUploadId
+        ? await this.fieldService.getUpload(source.observationDataUploadId)
+        : upload;
+      if (observationUpload.state !== "ready") {
+        throw new LocalServiceError(409, "upload_not_ready", `system ${source.id} observation upload is not ready`);
+      }
       uploadIds.push(upload.id);
+      observationUploadIds.push(observationUpload.id);
       resolvedSystems.push({
         id: source.id,
         source: sourceIdentity,
         inputBundle: upload.inputBundle,
+        observationBundle: observationUpload.inputBundle,
         observationTargets: source.observationTargets ?? [],
       });
     }
@@ -200,10 +209,11 @@ export class LocalBatchService {
       throw error;
     }
     const identity = {
-      schemaVersion: "sigma-batch-submission-identity/1",
+      schemaVersion: "sigma-batch-submission-identity/2",
       serviceVersion: SERVICE_VERSION,
       preflightSha256: preflight.preflightSha256,
       fieldWorkerSourceSha256: this.fieldService.workerSourceSha256,
+      observationWorkerSourceSha256: this.fieldService.observationWorkerSourceSha256,
     };
     const id = `batch_${sha256(identity).slice(0, 24)}`;
     if (await exists(this.#recordPath(id))) {
@@ -219,24 +229,26 @@ export class LocalBatchService {
         schemaVersion: "sigma-field-job-submit/1",
         model: payload.model,
         dataUploadId: uploadIds[index],
-        request: {
-          ...payload.fieldRequest,
-          observationTargets: resolvedSystems[index].observationTargets,
-        },
+        request: payload.fieldRequest ?? {},
       });
       childJobs.push({
         systemId: resolvedSystems[index].id,
         source: resolvedSystems[index].source,
+        dataUploadId: uploadIds[index],
+        observationDataUploadId: observationUploadIds[index],
         inputBundleSha256: resolvedSystems[index].inputBundle.bundleSha256,
+        observationBundleSha256: resolvedSystems[index].observationBundle.bundleSha256,
         observationTargets: preflight.systems[index].observationTargets,
         fieldJobId: submission.id,
+        observationEvaluationJobId: null,
       });
     }
     const record = {
-      schemaVersion: "sigma-batch-record/1",
+      schemaVersion: "sigma-batch-record/2",
       id,
       identity,
       state: "running",
+      phase: "field",
       preflight,
       parameterPolicy: preflight.parameterPolicy,
       systemCount: resolvedSystems.length,
@@ -283,11 +295,17 @@ export class LocalBatchService {
     const id = this.#id(idValue);
     const record = await this.#readBatch(id);
     if (TERMINAL_BATCH_STATES.has(record.state)) return publicBatch(record);
-    await Promise.allSettled(record.childJobs.map((child) => this.fieldService.cancelFieldJob(child.fieldJobId)));
     record.state = "cancelled";
+    record.phase = "cancelled";
     record.updatedAt = now();
     await atomicWrite(this.#recordPath(id), record);
-    await this.#appendEvent(id, "cancelled", { message: "Batch and nonterminal child jobs were cancelled." });
+    await this.#appendEvent(id, "cancelled", { message: "Batch cancellation requested for both child phases." });
+    await Promise.allSettled([
+      ...record.childJobs.map((child) => this.fieldService.cancelFieldJob(child.fieldJobId)),
+      ...record.childJobs
+        .filter((child) => child.observationEvaluationJobId)
+        .map((child) => this.fieldService.cancelObservationEvaluationJob(child.observationEvaluationJobId)),
+    ]);
     return publicBatch(record);
   }
 
@@ -376,19 +394,80 @@ export class LocalBatchService {
     while (!this.shuttingDown) {
       const record = await this.#readBatch(id);
       if (TERMINAL_BATCH_STATES.has(record.state)) return;
-      const children = await Promise.all(
+      const fieldChildren = await Promise.all(
         record.childJobs.map((child) => this.fieldService.getFieldJob(child.fieldJobId)),
       );
-      const completed = children.filter((child) => TERMINAL_CHILD_STATES.has(child.state)).length;
-      const succeeded = children.filter((child) => child.state === "succeeded").length;
-      if (completed !== record.completedChildren || succeeded !== record.successfulChildren) {
+      let recordChanged = false;
+      for (let index = 0; index < fieldChildren.length; index += 1) {
+        const fieldChild = fieldChildren[index];
+        const definition = record.childJobs[index];
+        if (
+          fieldChild.state === "succeeded"
+          && definition.observationTargets.length > 0
+          && !definition.observationEvaluationJobId
+          && !definition.observationCreationFailure
+        ) {
+          try {
+            const submission = await this.fieldService.createObservationEvaluationJob({
+              schemaVersion: "sigma-observation-evaluation-job-submit/1",
+              fieldJobId: definition.fieldJobId,
+              dataUploadId: definition.observationDataUploadId,
+              observationTargets: definition.observationTargets,
+            });
+            definition.observationEvaluationJobId = submission.id;
+            recordChanged = true;
+            await this.#appendEvent(id, "observation_queued", {
+              message: `Observation evaluation queued for ${definition.systemId}.`,
+              systemId: definition.systemId,
+              fieldJobId: definition.fieldJobId,
+              observationEvaluationJobId: submission.id,
+              duplicate: submission.duplicate,
+            });
+          } catch (cause) {
+            definition.observationCreationFailure = {
+              code: cause.code ?? "observation_creation_failed",
+              message: cause.message,
+            };
+            recordChanged = true;
+          }
+        }
+      }
+      const composedChildren = await Promise.all(record.childJobs.map(async (definition, index) => ({
+        field: fieldChildren[index],
+        observation: definition.observationEvaluationJobId
+          ? await this.fieldService.getObservationEvaluationJob(definition.observationEvaluationJobId)
+          : null,
+      })));
+      const systemStates = composedChildren.map(({ field, observation }, index) => {
+        const definition = record.childJobs[index];
+        if (!TERMINAL_CHILD_STATES.has(field.state)) return "running";
+        if (field.state !== "succeeded") return field.state;
+        if (definition.observationTargets.length === 0) return "succeeded";
+        if (definition.observationCreationFailure) return "rejected_input";
+        return observation?.state ?? "running";
+      });
+      const completed = systemStates.filter((state) => TERMINAL_CHILD_STATES.has(state)).length;
+      const succeeded = systemStates.filter((state) => state === "succeeded").length;
+      const phase = fieldChildren.some((child) => !TERMINAL_CHILD_STATES.has(child.state))
+        ? "field"
+        : systemStates.some((state) => !TERMINAL_CHILD_STATES.has(state))
+          ? "observation"
+          : "reporting";
+      if (TERMINAL_BATCH_STATES.has((await this.#readBatch(id)).state)) return;
+      if (
+        recordChanged
+        || completed !== record.completedChildren
+        || succeeded !== record.successfulChildren
+        || phase !== record.phase
+      ) {
         record.completedChildren = completed;
         record.successfulChildren = succeeded;
+        record.phase = phase;
         record.updatedAt = now();
         await atomicWrite(this.#recordPath(id), record);
       }
-      if (completed === children.length) {
-        await this.#finalize(id, record, children);
+      if (completed === composedChildren.length) {
+        await this.#finalize(id, record, composedChildren);
         return;
       }
       await new Promise((resolvePromise) => setTimeout(resolvePromise, this.pollMilliseconds));
@@ -404,19 +483,32 @@ export class LocalBatchService {
     const velocityFieldPredictionRows = [];
     const observationKinds = new Set();
     for (let index = 0; index < children.length; index += 1) {
-      const child = children[index];
+      const { field: fieldChild, observation: observationChild } = children[index];
       const definition = record.childJobs[index];
-      let scientific = null;
-      if (SCIENTIFIC_CHILD_STATES.has(child.state)) {
+      let fieldScientific = null;
+      if (SCIENTIFIC_CHILD_STATES.has(fieldChild.state)) {
         try {
-          scientific = JSON.parse((await this.fieldService.getArtifact(child.id, "scientific_result.json")).content.toString("utf8"));
+          fieldScientific = JSON.parse((await this.fieldService.getArtifact(fieldChild.id, "scientific_result.json")).content.toString("utf8"));
         } catch {
-          scientific = null;
+          fieldScientific = null;
         }
       }
-      const equationResidual = maximumNumeric(scientific?.equationResiduals);
-      const observation = scientific?.observationEvaluation ?? null;
-      if ((observation?.targetCount ?? 0) > 0 && child.state === "succeeded") {
+      let observationScientific = null;
+      let observationArtifactIndex = null;
+      if (observationChild && SCIENTIFIC_CHILD_STATES.has(observationChild.state)) {
+        try {
+          observationArtifactIndex = (await this.fieldService.getArtifacts(observationChild.id)).artifactIndex;
+          observationScientific = JSON.parse((await this.fieldService.getArtifact(
+            observationChild.id,
+            "scientific_result.json",
+          )).content.toString("utf8"));
+        } catch {
+          observationScientific = null;
+        }
+      }
+      const equationResidual = maximumNumeric(fieldScientific?.equationResiduals);
+      const observation = observationScientific?.observationEvaluation ?? null;
+      if ((observation?.targetCount ?? 0) > 0 && observationChild?.state === "succeeded") {
         const targetKinds = new Set(
           observation.targetKinds
           ?? (definition.observationTargets ?? []).map((target) => target.kind),
@@ -424,13 +516,13 @@ export class LocalBatchService {
         for (const kind of targetKinds) observationKinds.add(kind);
         if (targetKinds.has("circular_speed_curve")) {
           const predictionArtifact = await this.fieldService.getArtifact(
-            child.id,
+            observationChild.id,
             "observation_predictions.csv",
           );
           const lines = predictionArtifact.content.toString("utf8").trimEnd().split("\n");
           const expectedHeader = "target_id,point_index,radius_m,predicted_speed_m_s,observed_speed_m_s,uncertainty_m_s,residual_m_s,azimuthal_coverage,mean_inward_acceleration_m_s2";
           if (lines[0] !== expectedHeader) {
-            throw new Error(`field job ${child.id} returned an incompatible circular-speed prediction table`);
+            throw new Error(`observation job ${observationChild.id} returned an incompatible circular-speed prediction table`);
           }
           for (const line of lines.slice(1)) {
             if (line) observationPredictionRows.push(`${csvCell(definition.systemId)},${line}`);
@@ -438,32 +530,46 @@ export class LocalBatchService {
         }
         if (targetKinds.has("line_of_sight_velocity_field")) {
           const predictionArtifact = await this.fieldService.getArtifact(
-            child.id,
+            observationChild.id,
             "observation_velocity_field_predictions.csv",
           );
           const lines = predictionArtifact.content.toString("utf8").trimEnd().split("\n");
           const expectedHeader = "target_id,point_index,row_index,column_index,disk_major_coordinate_m,disk_minor_coordinate_m,circular_radius_m,predicted_circular_speed_m_s,predicted_velocity_m_s,observed_velocity_m_s,uncertainty_m_s,residual_m_s,declared_weight,inward_acceleration_m_s2";
           if (lines[0] !== expectedHeader) {
-            throw new Error(`field job ${child.id} returned an incompatible velocity-field prediction table`);
+            throw new Error(`observation job ${observationChild.id} returned an incompatible velocity-field prediction table`);
           }
           for (const line of lines.slice(1)) {
             if (line) velocityFieldPredictionRows.push(`${csvCell(definition.systemId)},${line}`);
           }
         }
       }
+      const systemState = fieldChild.state !== "succeeded"
+        ? fieldChild.state
+        : definition.observationTargets.length === 0
+          ? "succeeded"
+          : definition.observationCreationFailure
+            ? "rejected_input"
+            : observationChild?.state ?? "failed";
       const row = {
         system_id: definition.systemId,
         source_kind: definition.source.kind,
         source_id: definition.source.id ?? definition.source.galaxyJobId,
-        field_job_id: child.id,
-        scientific_job_id: child.scientificJobId,
-        state: child.state,
-        converged: scientific?.converged ?? false,
-        iterations: scientific?.iterations ?? null,
-        maximum_relative_update: scientific?.maximumRelativeUpdate ?? null,
+        field_job_id: fieldChild.id,
+        observation_evaluation_job_id: observationChild?.id ?? null,
+        field_scientific_job_id: fieldChild.scientificJobId,
+        observation_scientific_job_id: observationChild?.scientificJobId ?? null,
+        state: systemState,
+        field_state: fieldChild.state,
+        observation_state: definition.observationTargets.length
+          ? observationChild?.state ?? (definition.observationCreationFailure ? "creation_failed" : "not_created")
+          : "not_requested",
+        converged: fieldScientific?.converged ?? false,
+        iterations: fieldScientific?.iterations ?? null,
+        maximum_relative_update: fieldScientific?.maximumRelativeUpdate ?? null,
         maximum_equation_residual: equationResidual,
-        universal_gravity_parameters: child.parameterAccounting?.universal ?? 0,
-        per_object_gravity_parameters: child.parameterAccounting?.perObject ?? 0,
+        universal_gravity_parameters: fieldChild.parameterAccounting?.universal ?? 0,
+        per_object_gravity_parameters: fieldChild.parameterAccounting?.perObject ?? 0,
+        observation_added_gravity_parameters: observationChild?.evaluationAddedGravityParameters ?? 0,
         observation_targets: observation?.targetCount ?? 0,
         scored_observation_targets: observation?.scoredTargetCount ?? 0,
         valid_observation_points: observation?.validScoredPoints ?? 0,
@@ -480,23 +586,50 @@ export class LocalBatchService {
         systemId: definition.systemId,
         source: definition.source,
         inputBundleSha256: definition.inputBundleSha256,
-        fieldJobId: child.id,
-        scientificJobId: child.scientificJobId,
-        state: child.state,
-        scientificResultSha256: child.scientificResultSha256,
+        observationBundleSha256: definition.observationBundleSha256,
+        state: systemState,
+        fieldJobId: fieldChild.id,
+        fieldState: fieldChild.state,
+        fieldScientificJobId: fieldChild.scientificJobId,
+        fieldScientificResultSha256: fieldChild.scientificResultSha256,
+        fieldManifestSha256: fieldChild.manifestSha256 ?? null,
+        observationEvaluationJobId: observationChild?.id ?? null,
+        observationState: row.observation_state,
+        observationScientificJobId: observationChild?.scientificJobId ?? null,
+        observationScientificResultSha256: observationChild?.scientificResultSha256 ?? null,
+        observationManifestSha256: observationChild?.manifestSha256 ?? null,
+        observationArtifacts: observationArtifactIndex?.artifacts ?? [],
+        observationCreationFailure: definition.observationCreationFailure ?? null,
         observationTargets: definition.observationTargets,
       });
-      if (child.state !== "succeeded") {
+      if (systemState !== "succeeded") {
+        const fieldFailed = fieldChild.state !== "succeeded";
+        const category = fieldFailed
+          ? fieldChild.state === "failed_nonconvergence"
+            ? "scientific_nonconvergence"
+            : "field_execution_failure"
+          : definition.observationCreationFailure
+            ? "observation_creation_failure"
+            : "observation_execution_failure";
         failureRows.push({
           system_id: definition.systemId,
-          field_job_id: child.id,
-          state: child.state,
-          category: child.state === "failed_nonconvergence" ? "scientific_nonconvergence" : "execution_failure",
-          message: child.inputFailure?.message ?? child.infrastructureFailure?.message ?? "child field job did not succeed",
+          field_job_id: fieldChild.id,
+          observation_evaluation_job_id: observationChild?.id ?? null,
+          state: systemState,
+          category,
+          message: fieldFailed
+            ? fieldChild.inputFailure?.message ?? fieldChild.infrastructureFailure?.message ?? "child field job did not succeed"
+            : definition.observationCreationFailure?.message
+              ?? observationChild?.inputFailure?.message
+              ?? observationChild?.infrastructureFailure?.message
+              ?? "child observation evaluation did not succeed",
         });
       }
     }
     const successfulRows = rows.filter((row) => row.state === "succeeded");
+    const fieldSuccessfulRows = rows.filter((row) => row.field_state === "succeeded");
+    const requestedObservationRows = rows.filter((row) => row.observation_state !== "not_requested");
+    const successfulObservationRows = rows.filter((row) => row.observation_state === "succeeded");
     const scoredObservationTargets = rows.reduce((sum, row) => sum + row.scored_observation_targets, 0);
     const validObservationPoints = rows.reduce((sum, row) => sum + row.valid_observation_points, 0);
     const observationSumSquared = rows.reduce((sum, row) => sum + (row.observation_sum_squared_residual_m2_s2 ?? 0), 0);
@@ -505,19 +638,26 @@ export class LocalBatchService {
     const observationChiSquare = rows.reduce((sum, row) => sum + (row.observation_chi_square ?? 0), 0);
     const observationDegreesFreedom = rows.reduce((sum, row) => sum + (row.observation_degrees_freedom ?? 0), 0);
     const aggregate = {
-      schemaVersion: "sigma-batch-aggregate/1",
+      schemaVersion: "sigma-batch-aggregate/2",
       batchId: id,
       systemCount: rows.length,
       succeededSystems: successfulRows.length,
       failedSystems: rows.length - successfulRows.length,
-      convergenceFraction: successfulRows.length / rows.length,
-      medianIterations: median(successfulRows.map((row) => row.iterations)),
-      medianMaximumRelativeUpdate: median(successfulRows.map((row) => row.maximum_relative_update)),
+      fieldSucceededSystems: fieldSuccessfulRows.length,
+      requestedObservationSystems: requestedObservationRows.length,
+      observationSucceededSystems: successfulObservationRows.length,
+      convergenceFraction: fieldSuccessfulRows.length / rows.length,
+      medianIterations: median(fieldSuccessfulRows.map((row) => row.iterations)),
+      medianMaximumRelativeUpdate: median(fieldSuccessfulRows.map((row) => row.maximum_relative_update)),
       maximumEquationResidual: Math.max(0, ...rows.map((row) => row.maximum_equation_residual)),
       modelSha256: record.preflight.modelSha256,
       parameterPolicy: record.parameterPolicy,
       universalGravityParameters: Math.max(0, ...rows.map((row) => row.universal_gravity_parameters)),
       perObjectGravityParameters: Math.max(0, ...rows.map((row) => row.per_object_gravity_parameters)),
+      observationAddedGravityParameters: Math.max(
+        0,
+        ...rows.map((row) => row.observation_added_gravity_parameters),
+      ),
       observationScoresAvailable: scoredObservationTargets > 0,
       scoredObservationTargets,
       validObservationPoints,
@@ -535,7 +675,7 @@ export class LocalBatchService {
       claimBoundary: record.preflight.claimBoundary,
     };
     const scientificCore = {
-      schemaVersion: "sigma-batch-scientific-result/1",
+      schemaVersion: "sigma-batch-scientific-result/2",
       batchId: id,
       modelSha256: record.preflight.modelSha256,
       parameterPolicy: record.parameterPolicy,
@@ -548,7 +688,7 @@ export class LocalBatchService {
     await atomicWrite(resolve(artifacts, "batch.json"), submission);
     await atomicWrite(resolve(artifacts, "model.json"), submission.model);
     await atomicWrite(resolve(artifacts, "child_jobs.json"), {
-      schemaVersion: "sigma-batch-child-jobs/1",
+      schemaVersion: "sigma-batch-child-jobs/2",
       items: childManifest,
     });
     await atomicWrite(resolve(artifacts, "aggregate_scores.json"), aggregate);
@@ -560,14 +700,19 @@ export class LocalBatchService {
           "source_kind",
           "source_id",
           "field_job_id",
-          "scientific_job_id",
+          "observation_evaluation_job_id",
+          "field_scientific_job_id",
+          "observation_scientific_job_id",
           "state",
+          "field_state",
+          "observation_state",
           "converged",
           "iterations",
           "maximum_relative_update",
           "maximum_equation_residual",
           "universal_gravity_parameters",
           "per_object_gravity_parameters",
+          "observation_added_gravity_parameters",
           "observation_targets",
           "scored_observation_targets",
           "valid_observation_points",
@@ -582,7 +727,14 @@ export class LocalBatchService {
     );
     await writeFile(
       resolve(artifacts, "failures.csv"),
-      csv(["system_id", "field_job_id", "state", "category", "message"], failureRows),
+      csv([
+        "system_id",
+        "field_job_id",
+        "observation_evaluation_job_id",
+        "state",
+        "category",
+        "message",
+      ], failureRows),
       "utf8",
     );
     await writeFile(
@@ -595,18 +747,18 @@ export class LocalBatchService {
       `system_id,target_id,point_index,row_index,column_index,disk_major_coordinate_m,disk_minor_coordinate_m,circular_radius_m,predicted_circular_speed_m_s,predicted_velocity_m_s,observed_velocity_m_s,uncertainty_m_s,residual_m_s,declared_weight,inward_acceleration_m_s2\n${velocityFieldPredictionRows.length ? `${velocityFieldPredictionRows.join("\n")}\n` : ""}`,
       "utf8",
     );
-    const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td><td>${htmlEscape(row.observation_rmse_m_s ?? "")}</td></tr>`).join("");
+    const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.field_state)}</td><td>${htmlEscape(row.observation_state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td><td>${htmlEscape(row.observation_rmse_m_s ?? "")}</td></tr>`).join("");
     const observationScope = aggregate.observationScoresAvailable
       ? `Massive-tracer observations (${[...observationKinds].sort().join(", ")}) were scored for ${aggregate.scoredObservationTargets} target(s). Photon lensing was not evaluated.`
       : "No observation targets were supplied, so this report measures numerical execution and convergence only.";
     await writeFile(
       resolve(artifacts, "report.html"),
-      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:960px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${successfulRows.length} child solves succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><table><thead><tr><th>System</th><th>State</th><th>Iterations</th><th>Maximum equation residual</th><th>Observation RMSE (m/s)</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
+      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:960px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${fieldSuccessfulRows.length} field solve(s) and ${successfulObservationRows.length}/${requestedObservationRows.length} requested observation evaluation(s) succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><table><thead><tr><th>System</th><th>Field state</th><th>Observation state</th><th>Iterations</th><th>Maximum equation residual</th><th>Observation RMSE (m/s)</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
       "utf8",
     );
     await writeFile(
       resolve(artifacts, "llm_briefing.md"),
-      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${successfulRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Observation RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n\nThis deterministic briefing distinguishes numerical execution, massive-tracer observables, and photon lensing. It must not describe an unscored channel as validated.\n`,
+      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${fieldSuccessfulRows.length}\n- Successful requested observation evaluations: ${successfulObservationRows.length}/${requestedObservationRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Gravity parameters added by observation evaluation: ${aggregate.observationAddedGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Observation RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n\nThis deterministic briefing distinguishes immutable field execution, separately cached massive-tracer observation evaluation, and photon lensing. It must not describe an unscored channel as validated.\n`,
       "utf8",
     );
     await writeFile(
@@ -637,7 +789,7 @@ export class LocalBatchService {
     };
     await atomicWrite(resolve(artifacts, "artifact_index.json"), artifactIndex);
     const manifestCore = {
-      schemaVersion: "sigma-batch-manifest/1",
+      schemaVersion: "sigma-batch-manifest/2",
       batchId: id,
       state: failureRows.length ? "completed_with_failures" : "succeeded",
       scientificResultSha256,
@@ -646,13 +798,15 @@ export class LocalBatchService {
       systemCount: rows.length,
       artifactIndexSha256: digest(await readFile(resolve(artifacts, "artifact_index.json"))),
       fieldWorkerSourceSha256: this.fieldService.workerSourceSha256,
+      observationWorkerSourceSha256: this.fieldService.observationWorkerSourceSha256,
       reportScope: aggregate.observationScoresAvailable
-        ? "numerical_execution_and_massive_tracer_observation_scoring"
+        ? "composed_field_execution_and_massive_tracer_observation_scoring"
         : "numerical_execution_not_observation_validation",
     };
     const manifest = { ...manifestCore, manifestSha256: sha256(manifestCore) };
     await atomicWrite(resolve(artifacts, "manifest.json"), manifest);
     record.state = manifest.state;
+    record.phase = "complete";
     record.completedChildren = rows.length;
     record.successfulChildren = successfulRows.length;
     record.scientificResultSha256 = scientificResultSha256;
