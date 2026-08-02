@@ -1,0 +1,98 @@
+{
+  "report_version": "P0695B-RADIAL-PATH-POTENTIAL-MATH-AUDIT-RESULTS-1.0.0",
+  "status": "fail",
+  "all_math_gates_pass": false,
+  "candidate_advanced_to_spent_joint_screen": false,
+  "protocol_sha256": "cc67ad56dc5e889e36b8799a6a978d3b37e5a2cc6410d137f3db0bd5d29ebb4d",
+  "source_sha256": "ab4937cf19982a0f9f91e75b2f657b30c4628a65db0a8109a909b6e9e1c1dd76",
+  "operator_source_sha256": "9df81784a71b9407534f41279ed5b8a6391c8eb5c0ab2835879409943c2b5f96",
+  "routing_source_sha256": "0f61400a79b1d74443ce690dde04a7941dacae45d6f2358f1e0fdeb44b5981ee",
+  "field_sha256": "a1d5a7b10c7e2965a6ba000e052b822f09b2a7add09c25f5bf335d74b5d60c2e",
+  "parent_sha256": "d43ad26a71767d910725e2b5f975445b445faedfb9e77050b68de92d28f3af38",
+  "integrity_gates": {
+    "P0695_status": true,
+    "P0695_not_advanced": true,
+    "P0695_failed_gates_reproduced": true,
+    "only_interpolation_changed": true,
+    "no_observational_outcome_read": true,
+    "no_new_constants": true,
+    "no_fitted_physics": true,
+    "sealed_targets_untouched": true
+  },
+  "sphere": {
+    "radial_acceleration_relative_RMS": 0.006517840638510537,
+    "radial_acceleration_median_absolute_relative_error": 0.003976450187484213,
+    "tangential_to_radial_RMS": 0.06608213671817596,
+    "maximum_radial_angular_scatter_fraction": 0.06010514556760326,
+    "normalized_acceleration_curl_RMS": 7.622471141415972e-17,
+    "quadrature_24_to_48_acceleration_relative_RMS": 4.2653837566841634e-05
+  },
+  "rotation_covariance": {
+    "potential_relative_RMS": 1.137388104473202e-15,
+    "acceleration_relative_RMS": 6.942293914487655e-15
+  },
+  "hybrid": {
+    "projected_routing_fraction": 0.4858066113242192,
+    "projected_covariance": [
+      [
+        3.1989192007267,
+        3.3306690738754695e-18
+      ],
+      [
+        2.220446049250313e-18,
+        1.6448631039216821
+      ]
+    ],
+    "projected_eigenvalues": [
+      1.6448631039216821,
+      3.1989192007267
+    ],
+    "potential_identity_relative_RMS": 0.0,
+    "routing_correction_boundary_relative_mismatch": 0.0,
+    "path_normalized_acceleration_curl_RMS": 6.763440200340114e-17,
+    "rotated_path_normalized_acceleration_curl_RMS": 6.654547721435633e-17,
+    "joint_normalized_acceleration_curl_RMS": 1.1817327129642886e-16
+  },
+  "maximum_normalized_acceleration_curl_RMS": 1.1817327129642886e-16,
+  "all_finite": true,
+  "gate_results": {
+    "P0695_status": true,
+    "P0695_not_advanced": true,
+    "P0695_failed_gates_reproduced": true,
+    "only_interpolation_changed": true,
+    "no_observational_outcome_read": true,
+    "no_new_constants": true,
+    "no_fitted_physics": true,
+    "sealed_targets_untouched": true,
+    "finite": true,
+    "sphere_radial_RMS": true,
+    "sphere_radial_median": true,
+    "sphere_tangential": false,
+    "sphere_angular_scatter": false,
+    "curl": true,
+    "quadrature_convergence": true,
+    "rotation_potential": true,
+    "rotation_acceleration": true,
+    "hybrid_identity": true,
+    "correction_boundary": true,
+    "fraction_lower": true,
+    "fraction_upper": true,
+    "accounting_no_constants": true,
+    "accounting_no_fitted_physics": true,
+    "no_observational_score": true,
+    "sealed_outcomes_untouched": true
+  },
+  "failed_gates": [
+    "sphere_tangential",
+    "sphere_angular_scatter"
+  ],
+  "observational_scores_computed": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0695B is a numerical and mathematical audit, not an observational test.",
+    "Cubic interpolation is a numerical representation choice, not a new physical parameter.",
+    "The baryonic centroid and straight Euclidean rays remain nonlocal and are not derived from a covariant action or causal evolution equation.",
+    "P0633 and P0640 remain sealed."
+  ]
+}

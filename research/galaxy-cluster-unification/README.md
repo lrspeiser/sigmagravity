@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0695-radial-path-math-audit`](latest-findings/2026-08-02-p0695-radial-path-math-audit/README.md).
-It tests the first path-integrated replacement endpoint without reading any
-observational score. The prior P0694, P0693, P0692, P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0695b-cubic-path-audit`](latest-findings/2026-08-02-p0695b-cubic-path-audit/README.md).
+It completes the only preregistered numerical repair of the straight-ray path
+operator without reading observational scores. The prior P0695, P0694, P0693, P0692, P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0695-radial-path-math-audit`](latest-findings/2026-08-02-p0695-radial-path-math-audit/README.md),
 [`latest-findings/2026-08-02-p0694-ddo154-routing-continuum`](latest-findings/2026-08-02-p0694-ddo154-routing-continuum/README.md),
 [`latest-findings/2026-08-02-p0693-projected-spectral-joint-screen`](latest-findings/2026-08-02-p0693-projected-spectral-joint-screen/README.md),
 [`latest-findings/2026-08-02-p0692-routing-continuum`](latest-findings/2026-08-02-p0692-routing-continuum/README.md),
@@ -196,6 +197,16 @@ tangential/radial power and `5.79%` maximum spherical angular scatter. A new
 audit may change only interpolation to cubic; no physical term or threshold is
 retuned. See
 [`docs/P0695_RADIAL_PATH_POTENTIAL_MATH_AUDIT_RESULTS.md`](docs/P0695_RADIAL_PATH_POTENTIAL_MATH_AUDIT_RESULTS.md).
+
+P0695B changes only interpolation from linear to cubic. Radial error improves
+to `0.652%`, quadrature convergence to `0.0043%`, and all rotation, curl,
+identity, and boundary gates pass. Tangential leakage (`6.61%`) and maximum
+angular scatter (`6.01%`) still fail unchanged thresholds, so straight-ray
+Cartesian transport is retired before any observational score. The next
+generator boosts the coherent spherical monopole, retains measured Newtonian
+multipoles, and adds the cluster routing correction as a zero-boundary
+potential difference. See
+[`docs/P0695B_CUBIC_RADIAL_PATH_AUDIT_RESULTS.md`](docs/P0695B_CUBIC_RADIAL_PATH_AUDIT_RESULTS.md).
 
 ## Untouched external validation (P0633)
 
