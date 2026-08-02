@@ -1,0 +1,5 @@
+model,galaxies,equal_galaxy_weighted_rmse_km_s,p0712_original_equal_galaxy_weighted_rmse_km_s,maximum_prediction_parity_rmse_m_s,maximum_prediction_parity_difference_m_s,maximum_weighted_rmse_parity_difference_m_s,minimum_valid_pixels,universal_gravity_parameters,per_object_gravity_parameters
+newtonian_poisson,13,19.340582336002893,24.961853748393732,6.51470447542336e-11,4.13092493545264e-09,7.275957614183426e-12,6115,1,0
+aqual_simple_mu,13,18.368230922215144,32.89205988954253,1.957827445714105e-10,1.314765540882945e-08,3.092281986027956e-11,6115,2,0
+qumond_simple_nu,13,17.763694340813185,32.827182430957826,1.385062052351316e-10,1.183070708066225e-08,3.637978807091713e-11,6115,2,0
+refracted_gravity_published_fixture,13,19.04800087804092,,1.6167002794989546e-10,1.790613168850541e-08,5.820766091346741e-11,6115,4,0

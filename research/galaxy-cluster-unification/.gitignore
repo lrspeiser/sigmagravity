@@ -170,6 +170,14 @@ results/environmental_mog0/*
 !results/p0636_little_things_baryon_acquisition/**
 !results/p0720_resolved_galaxy_parameter_roundtrip/
 !results/p0720_resolved_galaxy_parameter_roundtrip/**
+!results/p0731_real_velocity_field_adapter_parity/
+results/p0731_real_velocity_field_adapter_parity/*
+!results/p0731_real_velocity_field_adapter_parity/SUMMARY.md
+!results/p0731_real_velocity_field_adapter_parity/report.json
+!results/p0731_real_velocity_field_adapter_parity/model_summary.csv
+!results/p0731_real_velocity_field_adapter_parity/per_galaxy_model_scores.csv
+!results/p0731_real_velocity_field_adapter_parity/observation_bundle_manifest.csv
+!results/p0731_real_velocity_field_adapter_parity/score_and_parity_summary.png
 data/raw/manga_dr17/*.fits
 data/raw/erass1_clusters/*.fits
 data/raw/manga_gema_dr17/*.fits

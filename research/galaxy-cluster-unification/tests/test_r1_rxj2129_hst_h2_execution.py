@@ -8,7 +8,6 @@ import numpy as np
 import pandas as pd
 import pytest
 
-
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs/r1_rxj2129_hst_h2_centroid_execution_protocol.json"
 REPORT = ROOT / "results/r1_rxj2129_hst_h2/report.json"
@@ -32,7 +31,7 @@ def test_h2_execution_products_reproduce_every_frozen_acceptance_gate() -> None:
         path = _path(record["path"])
         assert path.is_file()
         assert path.stat().st_size == record["bytes"]
-        assert _sha256(path) == record["sha256"]
+        assert _sha256(path) == record["sha256"].lower()
 
     band = pd.read_csv(_path(config["outputs"]["H2_band_fit_ledger"]), dtype={"image_id": str})
     image = pd.read_csv(_path(config["outputs"]["H2_image_ledger"]), dtype={"image_id": str})

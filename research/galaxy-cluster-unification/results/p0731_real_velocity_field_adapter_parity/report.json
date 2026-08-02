@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "sigma-p0731-real-velocity-field-adapter-parity-result/1",
+  "stage": "P0731",
+  "status": "pass",
+  "sampleStatus": "previously_unsealed_and_project_spent",
+  "systems": 13,
+  "models": 4,
+  "evaluations": 52,
+  "modelSummaries": [
+    {
+      "model": "newtonian_poisson",
+      "galaxies": 13,
+      "equal_galaxy_weighted_rmse_km_s": 19.340582336002893,
+      "p0712_original_equal_galaxy_weighted_rmse_km_s": 24.961853748393732,
+      "maximum_prediction_parity_rmse_m_s": 6.51470447542336e-11,
+      "maximum_prediction_parity_difference_m_s": 4.13092493545264e-09,
+      "maximum_weighted_rmse_parity_difference_m_s": 7.275957614183426e-12,
+      "minimum_valid_pixels": 6115,
+      "universal_gravity_parameters": 1,
+      "per_object_gravity_parameters": 0
+    },
+    {
+      "model": "aqual_simple_mu",
+      "galaxies": 13,
+      "equal_galaxy_weighted_rmse_km_s": 18.368230922215144,
+      "p0712_original_equal_galaxy_weighted_rmse_km_s": 32.89205988954253,
+      "maximum_prediction_parity_rmse_m_s": 1.957827445714105e-10,
+      "maximum_prediction_parity_difference_m_s": 1.314765540882945e-08,
+      "maximum_weighted_rmse_parity_difference_m_s": 3.092281986027956e-11,
+      "minimum_valid_pixels": 6115,
+      "universal_gravity_parameters": 2,
+      "per_object_gravity_parameters": 0
+    },
+    {
+      "model": "qumond_simple_nu",
+      "galaxies": 13,
+      "equal_galaxy_weighted_rmse_km_s": 17.763694340813185,
+      "p0712_original_equal_galaxy_weighted_rmse_km_s": 32.827182430957826,
+      "maximum_prediction_parity_rmse_m_s": 1.385062052351316e-10,
+      "maximum_prediction_parity_difference_m_s": 1.183070708066225e-08,
+      "maximum_weighted_rmse_parity_difference_m_s": 3.637978807091713e-11,
+      "minimum_valid_pixels": 6115,
+      "universal_gravity_parameters": 2,
+      "per_object_gravity_parameters": 0
+    },
+    {
+      "model": "refracted_gravity_published_fixture",
+      "galaxies": 13,
+      "equal_galaxy_weighted_rmse_km_s": 19.04800087804092,
+      "p0712_original_equal_galaxy_weighted_rmse_km_s": null,
+      "maximum_prediction_parity_rmse_m_s": 1.6167002794989546e-10,
+      "maximum_prediction_parity_difference_m_s": 1.790613168850541e-08,
+      "maximum_weighted_rmse_parity_difference_m_s": 5.820766091346741e-11,
+      "minimum_valid_pixels": 6115,
+      "universal_gravity_parameters": 4,
+      "per_object_gravity_parameters": 0
+    }
+  ],
+  "gateResults": {
+    "required_systems": true,
+    "required_models": true,
+    "required_evaluations": true,
+    "minimum_valid_pixels": true,
+    "prediction_parity_rmse": true,
+    "prediction_parity_maximum": true,
+    "score_parity": true,
+    "exact_valid_pixel_support": true,
+    "no_per_object_gravity_parameters": true,
+    "field_artifact_hashes": true,
+    "observation_bundle_hashes": true
+  },
+  "failedGates": [],
+  "configSha256": "1e95bf81af6c8a94358814d0b83fda49b30ddfb6ff611bf2eb3f233af4f0c4a9",
+  "adapterSourceSha256": "b48eb0918fc5342699a3ec61abe77fec9550bc174c4646a9a6cc26c6f3e95c9a",
+  "frozenReferenceSourceSha256": "97fb956620085be2e887492dc851cb3fe3a074c4fcd49a70f879adae099f70ad",
+  "claimBoundary": [
+    "P0731 is an engineering parity and spent-sample real-data run, not a new blind validation.",
+    "The P0723 33x33x9 generated baryonic replicas and their immutable acceleration fields are reused without changing any gravity parameter.",
+    "The zero_speed nonpositive-inward policy is declared solely to reproduce the frozen P0712 circular-speed convention; exclude remains the public default.",
+    "A velocity-field score tests the declared circular-equilibrium massive-tracer mapping and cannot validate pressure support, asymmetric drift, warps, radial flows, or photon lensing.",
+    "No ranking or formula selection is permitted from the adapter-parity gate."
+  ]
+}

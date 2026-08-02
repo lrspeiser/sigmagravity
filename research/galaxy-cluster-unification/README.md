@@ -1544,12 +1544,22 @@ the same local field and batch APIs. Any compatible 2D or 3D manifest can now
 project its declared massive-tracer acceleration through explicit disk
 coordinates, inclination, handedness, masks, uncertainties, intensity weights,
 and a beam kernel. Manufactured known-answer, worker-artifact, preflight, and
-batch-aggregation tests pass. This is an engineering milestone, not yet a real
-galaxy result: parity against the frozen thirteen-galaxy LITTLE THINGS pipeline
-and the treatment of pressure support, warps, and non-circular motion remain
-open.
+batch-aggregation tests pass.
 See
 [`docs/P0730_RESOLVED_VELOCITY_FIELD_API_MILESTONE.md`](docs/P0730_RESOLVED_VELOCITY_FIELD_API_MILESTONE.md).
+
+P0731 then commissioned that same theory-neutral target on real LITTLE THINGS
+moment maps. Four unchanged P0723 field manifests were evaluated on all 13
+galaxies, giving 52 resolved-map scores with zero per-galaxy gravity
+parameters. The production and independent frozen-P0712 implementations agree
+to `1.96e-10 m/s` maximum prediction RMS, `1.79e-8 m/s` maximum absolute pixel
+difference, and `5.82e-11 m/s` maximum score difference. All immutable field
+and observation hashes validate. QUMOND has the lowest spent-sample aggregate
+RMSE (`17.764 km/s`), but it wins only two individual galaxies; Newtonian wins
+five, AQUAL three, and the Refracted Gravity fixture three. This validates the
+adapter, not a gravity theory: the sample is spent and dwarf-only, and circular
+equilibrium omits pressure support, warps, and non-circular motion. See
+[`docs/P0731_REAL_VELOCITY_FIELD_ADAPTER_PARITY_RESULTS.md`](docs/P0731_REAL_VELOCITY_FIELD_ADAPTER_PARITY_RESULTS.md).
 
 ```powershell
 python scripts/run_p0723_formula_neutral_api_comparators.py `
@@ -1567,4 +1577,6 @@ python scripts/run_p0727_hybrid_nonlinear_crosscheck.py
 python scripts/run_p0728_complete_fine_grid_aqual.py
 
 python scripts/run_p0729_qualified_80step_fine_grid_aqual.py
+
+python scripts/run_p0731_real_velocity_field_adapter_parity.py
 ```

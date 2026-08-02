@@ -222,14 +222,26 @@ coordinate, observation, uncertainty, intensity, mask, and beam arrays must be
 included in the same immutable NPZ upload and declared in the array bundle with
 their units and hashes. One unchanged target form works with either a 2D or 3D
 Cartesian model whose requested observable is a massive-tracer acceleration in
-`m/s^2`.
+`m/s^2`. `emissionMaskArrayKey` controls which intrinsic predicted pixels enter
+beam convolution; `scoreMaskArrayKey` controls which convolved pixels are
+compared with data. The legacy `maskArrayKey` remains a score-mask alias. An
+intensity array may retain physical flux units because its overall scale
+cancels in the normalized moment and weighted score. The public default
+`nonPositiveInwardPolicy=exclude` rejects pixels without inward circular
+support; `zero_speed` is available only when a frozen protocol explicitly
+requires that convention.
 
 The local DDO101 curve acceptance retains all ten published points and
 reproduces the earlier frozen Newtonian curve within `0.496 km/s` RMS on a
 deliberately coarse grid. Resolved-map manufactured solutions pass for both 2D
-and 3D fields, including beam convolution and batch aggregation. Real
-LITTLE THINGS map parity, pressure support/non-circular motions, spectral
-cubes, and photon lensing remain future acceptance work.
+and 3D fields, including beam convolution and batch aggregation. P0731 also
+passes real LITTLE THINGS parity for 13 galaxies and four fixed model
+manifests: 52/52 evaluations have exact pixel support, valid hashes, zero
+per-galaxy gravity parameters, and at most `1.96e-10 m/s` prediction parity RMS
+against an independent frozen implementation. This is spent-sample adapter
+commissioning, not theory validation. Pressure support/non-circular motions,
+spectral cubes, and photon lensing remain future acceptance work. See
+`../docs/P0731_REAL_VELOCITY_FIELD_ADAPTER_PARITY_RESULTS.md`.
 
 The full P0723 commissioning run then used the same generic HTTP path for all
 13 registered galaxies and four published-fixed manifests. All 52 child solves

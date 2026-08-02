@@ -418,7 +418,12 @@ def independent_prediction(
         arrays["hi_intensity_weight"] / np.square(uncertainty),
         0.0,
     )
-    weighted_rmse = float(np.sqrt(np.sum(weight * np.square(residual)) / np.sum(weight)))
+    weighted_rmse = float(
+        np.sqrt(
+            np.sum(weight[valid] * np.square(residual[valid]))
+            / np.sum(weight[valid])
+        )
+    )
     return convolved, valid, weighted_rmse
 
 
@@ -554,11 +559,11 @@ def main() -> None:
                         "observation_bundle_sha256": bundle["bundleSha256"],
                         "field_artifact_hashes_valid": cached["artifactsValid"],
                         "universal_gravity_parameters": cached["scientific"]["parameterAccounting"][
-                            "universal"
+                            "universalCount"
                         ],
                         "per_object_gravity_parameters": cached["scientific"][
                             "parameterAccounting"
-                        ]["perObject"],
+                        ]["perObjectCount"],
                         "adapter_valid_pixels": int(adapter_valid.sum()),
                         "independent_valid_pixels": int(reference_valid.sum()),
                         "valid_pixel_support_exact": support_equal,
