@@ -1,0 +1,100 @@
+{
+  "protocol_version": "P0687-SYSTEM-PATH-COORDINATE-QUMOND-1.0.0",
+  "status": "frozen_before_any_P0687_formula_score",
+  "frozen_utc": "2026-08-02T09:00:00Z",
+  "purpose": "Test whether replacing P0685's centrally singular local path ratio with one scale-free baryonic system coordinate preserves the spent galaxy/cluster radial response while enforcing a centrally concentrated channel exponent suitable for a later 3D topology retry.",
+  "failure_parent": "results/p0686_locked_path_qumond_raw_topology/report.json",
+  "failure_anatomy": "P0685 local eta suppresses the inner exponent: median p rises from 1.28 inside 15 kpc to 2.71 at 150-225 kpc; P0686 loses image roots and multiplicity while both shear nuisances hit their bounds",
+  "equation": {
+    "field_form": "laplacian(Phi)=div[nu_0(|grad Phi_N|/a0)^p grad Phi_N]",
+    "base_boost": "nu_0(y)=1/[1-exp(-sqrt(y))]",
+    "potential_depth": "chi_b=|Phi_b|/c^2 with Phi_b(infinity)=0",
+    "system_path_coordinate": "eta_sys=max_r |Phi_b(r)| / max_r [r g_b(r)]",
+    "primary_exponent": "p(r)=1+2 chi_b(r)^4/[chi_b(r)^4+(1e-6)^4] [max(eta_sys,1)]^(-1/2)",
+    "a0_m_s2": 1.2e-10,
+    "chi_t": 1e-6,
+    "transition_power_n": 4.0,
+    "extra_spatial_channels": 2.0,
+    "path_power_q": 0.5,
+    "gravity_parameters_fit_per_object": 0,
+    "new_universal_parameters_relative_to_fixed_RAR": 1
+  },
+  "predeclared_variants": {
+    "global_system_primary": "use eta_sys at every radius; only this variant may advance",
+    "local_P0685_control": "use local eta_b(r), reproducing the failed P0685 radial operator",
+    "capped_local_diagnostic": "use min[eta_b(r),eta_sys], preventing the central divergence while retaining lower local path ratios; cannot advance from P0687"
+  },
+  "spent_galaxy_test": {
+    "input": "results/sparc_density_transfer/primary_predictions.csv",
+    "systems": 131,
+    "points": 968,
+    "potential_closure": "existing outer baryonic profile integration plus point-mass tail",
+    "system_coordinate_limit": "eta_sys is estimated on the available spent scored baryonic profile; this is a development screen, not a full-disk field calculation",
+    "score": "equal-galaxy circular-speed RMSE_km_s",
+    "fixed_RAR_comparator_a0_m_s2": 1.2e-10
+  },
+  "spent_cluster_test": {
+    "baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "target_profiles": "results/p0682_spent_multicluster_deflection_atlas/radial_ratio_profiles.csv",
+    "target_metrics": "results/p0682_spent_multicluster_deflection_atlas/system_deflection_metrics.csv",
+    "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931", "RXJ1347", "RXJ2129"],
+    "primary_systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931", "RXJ2129"],
+    "stress_systems": ["RXJ1347"],
+    "reliable_subset": ["MACS0429", "MACS1931", "RXJ2129"],
+    "target": "mean baryonic reduced deflection plus mean radial compact-halo deflection in each P0682 annular bin",
+    "prediction": "spherical line-of-sight deflection at reference source redshift z=2",
+    "acceleration_grid_points": 1536,
+    "line_of_sight_integration_points": 400,
+    "maximum_radius_kpc": 1000000.0,
+    "score": "equal-system RMS log10(predicted_deflection/target_deflection)"
+  },
+  "solar_proxy": {
+    "source": "point-mass Sun has eta_sys=1",
+    "radii": ["solar_limb", "Mercury", "Earth", "Saturn"],
+    "warning": "force screening is not a covariant PPN or Cassini-gamma derivation"
+  },
+  "predeclared_integrity_gates": {
+    "P0686_status": "fail",
+    "P0686_candidate_advanced_to_resolution_and_baryon_robustness": false,
+    "galaxy_systems": 131,
+    "galaxy_points": 968,
+    "cluster_systems": 6,
+    "primary_cluster_systems": 5,
+    "reliable_cluster_systems": 3,
+    "formula_variants": 3,
+    "system_path_coordinate_uses_only_baryonic_profiles": true,
+    "gravity_parameters_fit_per_object": 0,
+    "new_raw_image_root_score_computed": false,
+    "full_3D_field_solve_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "predeclared_advancement_gates": {
+    "primary_variant": "global_system_primary",
+    "galaxy_RMSE_ratio_to_fixed_RAR_max": 1.05,
+    "all5_cluster_log_RMS_dex_max": 0.20,
+    "reliable3_cluster_log_RMS_dex_max": 0.20,
+    "minimum_all5_gap_fraction_closed_from_fixed_RAR": 0.75,
+    "solar_limb_fractional_force_change_max": 2.3e-5,
+    "Earth_fractional_force_change_max": 1e-10,
+    "Saturn_fractional_force_change_max": 2.3e-5,
+    "primary_cluster_exponent_radial_slope_nonpositive": true,
+    "no_per_object_fitted_gravity_parameters": true
+  },
+  "selection_rule": "The global-system formula advances only if it passes every frozen galaxy, both cluster, gap-closure, Solar, baryon-only, parameter-accounting, and nonpositive-exponent-slope gate. Diagnostic variants map the response only and cannot be promoted post hoc. No constant is selected in P0687.",
+  "outputs": {
+    "directory": "results/p0687_system_path_coordinate_qumond",
+    "scores": "variant_scores.csv",
+    "galaxy_predictions": "primary_spent_galaxy_predictions.csv",
+    "cluster_predictions": "primary_spent_cluster_predictions.csv",
+    "solar": "primary_solar_proxies.csv",
+    "system_coordinates": "baryonic_system_path_coordinates.csv",
+    "figure": "system_path_coordinate_response.png"
+  },
+  "claim_boundary": [
+    "P0687 is generated from a fully spent RX J2129 topology failure and cannot validate the replacement.",
+    "eta_sys is nonlocal but derived only from the baryonic field; its covariant meaning is not established.",
+    "The spent galaxy estimate uses the available scored baryonic profile rather than a new full-disk 3D solve.",
+    "A radial pass is only permission to freeze a new registered 3D topology test, not evidence that topology will pass.",
+    "No sealed P0633 or P0640 outcome may be opened."
+  ]
+}
