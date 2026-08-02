@@ -1,0 +1,55 @@
+{
+  "protocol_version": "P0679-COMPACT-HALO-DERIVATIVE-CONVERGENCE-1.0.0",
+  "status": "frozen_before_any_P0679_derivative_metric",
+  "frozen_utc": "2026-08-02T08:40:00Z",
+  "purpose": "Determine whether P0678's sole failed curl gate is caused by differentiating a potential-derived NIE field on the coarse 33-cell grid, without changing the P0678 threshold or recomputing any image root.",
+  "failure_parent": "results/p0678_spent_rxj2129_required_field_decomposition/report.json",
+  "parameter_table": "results/rxj2129_raw_theory_lensing/fitted_parameters.csv",
+  "raw_lensing_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+  "parameter_selection": {
+    "stage": "training",
+    "model": "GR_plus_cluster_halo"
+  },
+  "domain": {
+    "axis_minimum_kpc": -224.49921423385908,
+    "axis_maximum_kpc": 224.49921423385908,
+    "strong_lens_radius_kpc": [15.8, 76.5]
+  },
+  "nested_grid_cells": [33, 65, 129, 257],
+  "direct_central_difference_steps_arcsec": [0.5, 0.2, 0.1, 0.05, 0.02, 0.01],
+  "direct_evaluation_points": "the P0678 33-cell strong-lens annulus points, evaluating NIE alpha at x+-h and y+-h rather than differentiating a sampled image",
+  "metrics": {
+    "normalized_curl": "RMS(d alpha_y/dx-d alpha_x/dy) / RMS(d alpha_x/dx+d alpha_y/dy)",
+    "derivative_stability": "relative RMS difference in kappa and Jacobian determinant between the two smallest direct steps"
+  },
+  "predeclared_integrity_gates": {
+    "P0678_status": "fail",
+    "P0678_failed_gate_exactly": "halo_curl",
+    "nested_grid_count": 4,
+    "nested_grid_cells_exact": [33, 65, 129, 257],
+    "direct_step_count": 6,
+    "direct_steps_strictly_decreasing": true,
+    "grid_normalized_curl_strictly_decreasing": true,
+    "grid_257_curl_improvement_factor_vs_33_min": 10.0,
+    "direct_smallest_step_normalized_curl_RMS_max": 1e-5,
+    "direct_steps_below_original_P0678_threshold_min": 4,
+    "smallest_two_step_kappa_relative_RMS_difference_max": 1e-5,
+    "smallest_two_step_jacobian_determinant_relative_RMS_difference_max": 1e-5,
+    "all_derivatives_finite": true,
+    "new_candidate_formula_fit": false,
+    "new_raw_image_root_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Promote P0678's decomposition to a numerically qualified spent target specification only if every derivative-convergence gate passes. Otherwise retain the strength observations as provisional and replace the NIE derivative implementation before theory generation.",
+  "outputs": {
+    "directory": "results/p0679_compact_halo_derivative_convergence",
+    "grid_table": "nested_grid_curl.csv",
+    "step_table": "direct_step_derivatives.csv"
+  },
+  "claim_boundary": [
+    "P0679 audits a known analytic comparator and cannot validate any new gravity law.",
+    "Passing direct derivatives would qualify the P0678 decomposition numerically but would not make the compact halo a unique physical target.",
+    "Critical sign cells remain coarse diagnostics and no image roots are recomputed.",
+    "P0633 and P0640 sealed outcomes remain untouched."
+  ]
+}
