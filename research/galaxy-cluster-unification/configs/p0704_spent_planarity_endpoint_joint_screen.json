@@ -1,0 +1,44 @@
+{
+  "protocol_version": "P0704-SPENT-PLANARITY-ENDPOINT-JOINT-SCREEN-1.0.0",
+  "status": "frozen_before_any_P0697_DDO154_rotation_or_RXJ2129_field_fit_or_topology_score",
+  "frozen_utc": "2026-08-02T06:26:00Z",
+  "parent_protocol": "configs/p0697_spent_coherent_monopole_joint_screen.json",
+  "geometry_math_parent": "results/p0702_mass_planarity_math_audit/report.json",
+  "cluster_endpoint_parent": "results/p0693_projected_spectral_routing_joint_screen/report.json",
+  "purpose": "Test whether the parameter-free 3D mass-planarity invariant can join P0697's MOND-competitive coherent disk endpoint to P0693's topology-complete local cluster endpoint.",
+  "evidence_class": "fully_spent_joint_mechanism_screen_after_complementary_endpoint_results",
+  "model_id": "mass_planarity_endpoint_projected_routing_P0704",
+  "equation": {
+    "mass_covariance": "I_ab=integral rho_b (x_a-xbar_a)(x_b-xbar_b)dV / integral rho_b dV",
+    "mass_planarity": "P=(1-lambda_1/lambda_2)(1-lambda_1/lambda_3), lambda_1<=lambda_2<=lambda_3",
+    "base_potential": "Phi_base=P Phi_coh+(1-P)Phi_local",
+    "joint_potential": "Phi_joint=Phi_base+e_2D(Phi_route-Phi_local)",
+    "disk_endpoint": "P=1 gives the exact P0697 coherent-monopole plus routing field",
+    "volumetric_endpoint": "P=0 gives the exact P0693 local plus routing field",
+    "planarity_threshold_scale_or_exponent": "none",
+    "new_universal_constants": 0,
+    "per_object_gravity_parameters": 0,
+    "fitted_routing_parameters": 0,
+    "fitted_photon_parameters": 0
+  },
+  "selection_rule": "Advance only if every inherited numerical, DDO154, RX J2129 root, RMS, compact-halo, multiplicity, parity, critical-curve, nuisance, and accounting gate passes. No result-dependent planarity transform, exponent, threshold, endpoint amplitude, photon response, routing fraction, or gate change is allowed.",
+  "if_pass": "Freeze map-systematic robustness, Solar-System closure, the P0633 prediction manifest, and every universal value before opening sealed outcomes.",
+  "if_fail": "Retire this exact endpoint blend without tuning it on DDO154 or RX J2129; keep P0633/P0640 sealed.",
+  "outputs": {
+    "directory": "results/p0704_spent_planarity_endpoint_joint_screen",
+    "report": "report.json",
+    "galaxy_curves": "ddo154_planarity_endpoint_curves.csv",
+    "galaxy_scores": "ddo154_planarity_endpoint_scores.csv",
+    "cluster_family_topology": "rxj2129_planarity_endpoint_topology.csv",
+    "cluster_nuisance": "rxj2129_planarity_endpoint_nuisance.csv",
+    "galaxy_field": "ddo154_planarity_endpoint_field.npz",
+    "cluster_field": "rxj2129_planarity_endpoint_field.npz",
+    "figure": "planarity_endpoint_joint_screen.png"
+  },
+  "claim_boundary": [
+    "DDO154 and RX J2129 are fully spent; this is mechanism development, not independent validation.",
+    "The formula was proposed after the complementary P0693 and P0697 failures and after inspecting spent planarity values.",
+    "The zero-slip photon rule is a diagnostic weak-field closure, not a covariant relativistic derivation.",
+    "P0633 galaxy kinematics and P0640 raw lensing constraints remain sealed regardless of the result."
+  ]
+}

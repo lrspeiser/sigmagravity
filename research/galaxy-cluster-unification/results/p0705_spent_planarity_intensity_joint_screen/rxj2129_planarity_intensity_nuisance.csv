@@ -1,0 +1,5 @@
+model,parameter,value,lower,upper
+mass_planarity_intensity_projected_routing_P0705,map_center_x_arcsec,1.5725899436159998,-3.0,3.0
+mass_planarity_intensity_projected_routing_P0705,map_center_y_arcsec,1.2164566960851186,-3.0,3.0
+mass_planarity_intensity_projected_routing_P0705,external_shear_gamma1_at_reference_source,-0.11394552747347478,-0.25,0.25
+mass_planarity_intensity_projected_routing_P0705,external_shear_gamma2_at_reference_source,-0.17228021751470105,-0.25,0.25

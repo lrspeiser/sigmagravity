@@ -1,0 +1,8 @@
+system_label,variant_id,source_family,source_redshift,observed_images,global_roots,surplus_roots,missing_roots,unassigned_roots,potentially_observable_surplus_roots,faintest_assigned_abs_magnification,observable_surplus_abs_magnification_threshold,all_observed_images_assigned,assignment_RMS_arcsec,assignment_max_arcsec,multiplicity_classification,parity_diverse,critical_sign_change_cells,critical_curve_present
+RXJ2129,two_potential_rar_metric_P0707,1,0.6786,3,3,0,0,0,0,3.9292211917520556,0.9823052979380139,True,1.0927364510512931,1.4830188755696632,exact_multiplicity,True,142,True
+RXJ2129,two_potential_rar_metric_P0707,2,0.916,3,3,0,0,0,0,3.27386180972176,0.81846545243044,True,0.7344797933302274,1.2570933622598603,exact_multiplicity,True,216,True
+RXJ2129,two_potential_rar_metric_P0707,3,1.5194,4,5,1,0,1,1,2.3942486409948067,0.5985621602487017,True,1.2254706513889422,1.7895381193885458,potentially_observable_surplus,True,278,True
+RXJ2129,two_potential_rar_metric_P0707,4,1.5202,3,5,2,0,2,2,2.7174897954844623,0.6793724488711156,True,0.9358196819500819,1.518527549176734,potentially_observable_surplus,True,278,True
+RXJ2129,two_potential_rar_metric_P0707,5,1.521,3,3,0,0,0,0,5.988475645352351,1.4971189113380878,True,3.104495797000833,5.288729981830615,exact_multiplicity,True,278,True
+RXJ2129,two_potential_rar_metric_P0707,6,3.0815,3,3,0,0,0,0,2.0709128718070566,0.5177282179517642,True,0.5164932132500568,0.6718288594675588,exact_multiplicity,True,320,True
+RXJ2129,two_potential_rar_metric_P0707,7,3.427,3,3,0,0,0,0,2.612327481553689,0.6530818703884222,True,2.0578248775989354,3.538707620697185,exact_multiplicity,True,320,True

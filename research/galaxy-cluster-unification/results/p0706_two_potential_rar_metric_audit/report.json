@@ -1,0 +1,67 @@
+{
+  "report_version": "P0706-TWO-POTENTIAL-RAR-METRIC-AUDIT-RESULTS-1.0.0",
+  "status": "pass",
+  "all_math_and_solar_gates_pass": true,
+  "candidate_advanced_to_spent_joint_screen": true,
+  "protocol_sha256": "6730d0db2eef04faf2389d9059c0b42da8212d3207d46423324285fdaf6efdd8",
+  "source_sha256": "22a08b70b2c791e188ea3bfb4e3324073ae8b9fa53dd07dd8f0215f3fd786f25",
+  "operator_source_sha256": "82c32a721de959fba63554fc78a846ff9c1e5b7ec2123b140ec6c1fe215d7407",
+  "metrics": {
+    "deep_RAR_relative_error": 5.00008333335078e-05,
+    "solar_accelerations_m_s2": {
+      "solar_limb": 274.20011169456336,
+      "cassini_impact": 107.10941863068881,
+      "earth": 0.0059300835189571065,
+      "mercury": 0.03957480224069387
+    },
+    "solar_RAR_relative_corrections": {
+      "solar_limb": 0.0,
+      "cassini_impact": 0.0,
+      "earth": 0.0,
+      "mercury": 0.0
+    },
+    "maximum_high_acceleration_relative_correction": 0.0,
+    "spherical_projected_routing_fraction": 0.0,
+    "spherical_projected_covariance": [
+      [
+        0.9999923804481728,
+        5.889559851514793e-18
+      ],
+      [
+        1.4009408985749341e-18,
+        0.9999923804481728
+      ]
+    ],
+    "spherical_projected_eigenvalues": [
+      0.9999923804481728,
+      0.9999923804481728
+    ],
+    "weyl_identity_relative_rms": 0.0,
+    "spherical_metric_slip_relative_rms": 0.0,
+    "derived_absolute_PPN_gamma_minus_one": 0.0,
+    "derived_extra_Mercury_precession_mas_per_century": 0.0,
+    "earth_fractional_extra_force": 0.0
+  },
+  "gate_results": {
+    "deep_RAR_limit": true,
+    "high_acceleration_screening": true,
+    "spherical_routing_null": true,
+    "weyl_identity": true,
+    "spherical_zero_slip": true,
+    "Cassini_PPN_gamma": true,
+    "Mercury_precession": true,
+    "earth_force": true,
+    "no_new_constants": true,
+    "no_per_object_gravity": true,
+    "no_fitted_metric_slip": true
+  },
+  "failed_gates": [],
+  "spent_outcomes_scored": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "The two-potential weak-field metric is a phenomenological closure, not yet a covariant action.",
+    "Solar compliance follows from the fixed RAR high-acceleration limit and exact spherical equality of the two endpoint fields; it is not an independently fitted screen.",
+    "No DDO154, RX J2129, P0633, or P0640 outcome is scored in this audit."
+  ]
+}

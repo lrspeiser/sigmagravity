@@ -1,0 +1,76 @@
+{
+  "protocol_version": "P0707-SPENT-TWO-POTENTIAL-RAR-METRIC-JOINT-SCREEN-1.0.0",
+  "status": "frozen_before_any_P0697_DDO154_rotation_or_RXJ2129_field_fit_or_topology_score",
+  "frozen_utc": "2026-08-02T06:58:00Z",
+  "parent_protocol": "configs/p0697_spent_coherent_monopole_joint_screen.json",
+  "metric_math_solar_parent": "results/p0706_two_potential_rar_metric_audit/report.json",
+  "cluster_endpoint_parent": "results/p0693_projected_spectral_routing_joint_screen/report.json",
+  "model_id": "two_potential_rar_metric_P0707",
+  "purpose": "Test one universal weak-field metric in which massive tracers use the RAR-coherent time potential and photons use the topology-complete routed Weyl potential.",
+  "evidence_class": "fully_spent_posthoc_two_metric_potential_screen",
+  "equation": {
+    "metric": "ds^2=-(1+2 Psi/c^2)c^2dt^2+(1-2 Phi/c^2)dx^2",
+    "time_potential": "Psi=Phi_RAR_coh+e_2D(Phi_route-Phi_local)",
+    "weyl_potential": "W=(Psi+Phi)/2=Phi_local+e_2D(Phi_route-Phi_local)",
+    "spatial_potential": "Phi=2W-Psi",
+    "massive_tracers": "g=-gradient Psi",
+    "photons": "alpha=(2/c^2) integral gradient_perp W dz",
+    "rar_completion": "g_RAR=g_N/[1-exp(-sqrt(g_N/a0))]",
+    "a0_si_m_s2": 1.2e-10,
+    "a0_galaxy_km2_s2_per_kpc": 3702.813097,
+    "gravitational_constant_si": 6.67430e-11,
+    "gravitational_constant_galaxy_kpc_km2_s2_per_solar_mass": 4.30091e-6,
+    "light_speed_si_m_s": 299792458.0,
+    "light_speed_galaxy_km_s": 299792.458,
+    "chi_t": 1e-6,
+    "transition_power_n": 4.0,
+    "extra_spatial_channels": 2.0,
+    "path_power_q": 0.5,
+    "new_universal_constants": 0,
+    "per_object_gravity_parameters": 0,
+    "fitted_routing_parameters": 0,
+    "fitted_photon_parameters": 0,
+    "fitted_metric_slip_parameters": 0,
+    "fitted_observational_nuisance_parameters": 4
+  },
+  "nuisance_fit": {
+    "parameters": [
+      "map_center_x_arcsec",
+      "map_center_y_arcsec",
+      "external_shear_gamma1_at_reference_source",
+      "external_shear_gamma2_at_reference_source"
+    ],
+    "bounds": {
+      "map_center_x_arcsec": [-3.0, 3.0],
+      "map_center_y_arcsec": [-3.0, 3.0],
+      "external_shear_gamma1_at_reference_source": [-0.25, 0.25],
+      "external_shear_gamma2_at_reference_source": [-0.25, 0.25]
+    },
+    "source_positions": "two coordinates profiled independently for seven spectroscopic families on training images",
+    "multi_starts": 12,
+    "random_seed": 6932129,
+    "map_interpolation": "bicubic; no metric potential amplitude, slip coefficient, gravity amplitude, photon amplitude, routing fraction, mass sheet, ellipticity, rotation, or radial scale is fitted"
+  },
+  "selection_rule": "Advance only if P0706 passes and every inherited numerical, DDO154, RX J2129 root, RMS, compact-halo, topology, nuisance, and accounting gate passes. No photon multiplier, slip parameter, or endpoint amplitude may be introduced after the score.",
+  "if_pass": "Freeze map-systematic robustness and a prediction manifest for every P0633/P0640 target before opening any sealed outcome.",
+  "if_fail": "Retire this exact two-potential metric and keep P0633/P0640 sealed.",
+  "outputs": {
+    "directory": "results/p0707_spent_two_potential_rar_metric_joint_screen",
+    "report": "report.json",
+    "galaxy_curves": "ddo154_time_potential_curves.csv",
+    "galaxy_scores": "ddo154_time_potential_scores.csv",
+    "cluster_family_topology": "rxj2129_weyl_topology.csv",
+    "cluster_nuisance": "rxj2129_weyl_nuisance.csv",
+    "galaxy_field": "ddo154_time_potential_field.npz",
+    "cluster_field": "rxj2129_weyl_deflection_field.npz",
+    "galaxy_metric_field": "ddo154_full_metric.npz",
+    "cluster_metric_field": "rxj2129_full_metric.npz",
+    "figure": "two_potential_rar_metric_joint_screen.png"
+  },
+  "claim_boundary": [
+    "P0707 is post hoc on fully spent DDO154 and RX J2129 evidence and requires external validation.",
+    "Matter and light follow one metric but probe different canonical combinations of its two potentials; no object label selects a law.",
+    "The weak-field metric has no covariant action or stability proof yet.",
+    "P0633 galaxy kinematics and P0640 raw lensing constraints remain sealed regardless of the result."
+  ]
+}

@@ -1,0 +1,2 @@
+points,RMSE_km_s,weighted_RMSE_km_s,mean_bias_km_s,candidate_RMSE_to_algebraic_MOND_ratio,candidate_weighted_RMSE_to_algebraic_MOND_ratio,candidate_RMSE_to_3D_QUMOND_ratio,routing_fraction
+12,1.887589432861858,1.3653896266855603,0.5517198458758706,0.6473034202607815,1.1140748017949385,0.4795646678235947,0.08352413225178856

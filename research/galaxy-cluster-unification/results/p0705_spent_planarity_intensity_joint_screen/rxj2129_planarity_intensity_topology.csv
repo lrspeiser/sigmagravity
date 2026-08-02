@@ -1,0 +1,8 @@
+system_label,variant_id,source_family,source_redshift,observed_images,global_roots,surplus_roots,missing_roots,unassigned_roots,potentially_observable_surplus_roots,faintest_assigned_abs_magnification,observable_surplus_abs_magnification_threshold,all_observed_images_assigned,assignment_RMS_arcsec,assignment_max_arcsec,multiplicity_classification,parity_diverse,critical_sign_change_cells,critical_curve_present
+RXJ2129,mass_planarity_intensity_projected_routing_P0705,1,0.6786,3,3,0,0,0,0,3.9019361445579945,0.9754840361394986,True,1.0840214458539148,1.4562752801913943,exact_multiplicity,True,142,True
+RXJ2129,mass_planarity_intensity_projected_routing_P0705,2,0.916,3,3,0,0,0,0,3.242739633918003,0.8106849084795007,True,0.7393704770209686,1.2669483694570125,exact_multiplicity,True,218,True
+RXJ2129,mass_planarity_intensity_projected_routing_P0705,3,1.5194,4,3,0,1,0,0,2.382730695772131,0.5956826739430328,False,,4.057348866687766,missing_multiplicity,True,276,True
+RXJ2129,mass_planarity_intensity_projected_routing_P0705,4,1.5202,3,5,2,0,2,2,2.7094426398864973,0.6773606599716243,True,0.9261468591759282,1.5064972956989466,potentially_observable_surplus,True,276,True
+RXJ2129,mass_planarity_intensity_projected_routing_P0705,5,1.521,3,3,0,0,0,0,5.966650751748324,1.491662687937081,True,3.098224759953026,5.288464905794682,exact_multiplicity,True,276,True
+RXJ2129,mass_planarity_intensity_projected_routing_P0705,6,3.0815,3,3,0,0,0,0,2.0572778375928586,0.5143194593982147,True,0.5054528394371732,0.651750592960814,exact_multiplicity,True,320,True
+RXJ2129,mass_planarity_intensity_projected_routing_P0705,7,3.427,3,3,0,0,0,0,2.594994299887979,0.6487485749719948,True,2.022858455848148,3.476757308960581,exact_multiplicity,True,320,True

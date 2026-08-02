@@ -1,0 +1,3 @@
+system,region,cells,coherence_minimum,coherence_median,coherence_mean,coherence_maximum
+DDO154,SPARC_score_radius_midplane,772,0.9983034270020683,0.9988194779382519,0.9987976268746706,0.9992797099692563
+RXJ2129,strong_lens_projected_annulus_all_z,3036,0.1926087501771308,0.5183801613879567,0.5290789025099885,0.8267590408666734

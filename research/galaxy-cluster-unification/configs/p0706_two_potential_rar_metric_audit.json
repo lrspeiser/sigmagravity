@@ -1,0 +1,52 @@
+{
+  "protocol_version": "P0706-TWO-POTENTIAL-RAR-METRIC-AUDIT-1.0.0",
+  "status": "frozen_before_any_P0706_spent_or_sealed_outcome_score",
+  "frozen_utc": "2026-08-02T06:51:00Z",
+  "purpose": "Audit the mathematical and Solar-System closure of a universal two-potential metric before using complementary matter and photon fields on spent data.",
+  "evidence_class": "mathematical_solar_and_synthetic_audit",
+  "metric": {
+    "line_element": "ds^2=-(1+2 Psi/c^2)c^2dt^2+(1-2 Phi/c^2)dx^2",
+    "matter": "g_matter=-gradient Psi",
+    "light": "alpha=(2/c^2) integral gradient_perp W dz, W=(Psi+Phi)/2",
+    "time_potential": "Psi=Phi_RAR_coherent+e_2D(Phi_route-Phi_local)",
+    "weyl_potential": "W=Phi_local+e_2D(Phi_route-Phi_local)",
+    "spatial_potential": "Phi=2W-Psi",
+    "rar": "g_RAR=g_N/[1-exp(-sqrt(g_N/a0))]",
+    "a0_m_s2": 1.2e-10,
+    "new_universal_constants": 0,
+    "per_object_gravity_parameters": 0,
+    "fitted_metric_slip_parameters": 0
+  },
+  "solar": {
+    "solar_GM_m3_s2": 1.32712440018e20,
+    "solar_radius_m": 695700000.0,
+    "earth_semimajor_axis_m": 149597870700.0,
+    "mercury_semimajor_axis_m": 57909050000.0,
+    "mercury_eccentricity": 0.205630,
+    "mercury_orbital_period_days": 87.9691,
+    "cassini_impact_solar_radii": 1.6
+  },
+  "predeclared_gates": {
+    "deep_rar_relative_error_max": 0.0001,
+    "high_acceleration_relative_correction_max": 1e-12,
+    "spherical_projected_routing_fraction_max": 1e-12,
+    "weyl_identity_relative_rms_max": 1e-14,
+    "spherical_metric_slip_max": 1e-14,
+    "absolute_PPN_gamma_minus_one_max": 2.3e-5,
+    "absolute_extra_Mercury_precession_mas_per_century_max": 3.1,
+    "earth_fractional_force_max": 1e-12,
+    "new_universal_constants": 0,
+    "per_object_gravity_parameters": 0,
+    "fitted_metric_slip_parameters": 0
+  },
+  "outputs": {
+    "directory": "results/p0706_two_potential_rar_metric_audit",
+    "report": "report.json",
+    "summary": "SUMMARY.md"
+  },
+  "claim_boundary": [
+    "The two-potential weak-field metric is a phenomenological closure, not yet a covariant action.",
+    "Solar compliance follows from the fixed RAR high-acceleration limit and exact spherical equality of the two endpoint fields; it is not an independently fitted screen.",
+    "No DDO154, RX J2129, P0633, or P0640 outcome is scored in this audit."
+  ]
+}

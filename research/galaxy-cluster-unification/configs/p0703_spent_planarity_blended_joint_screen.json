@@ -1,0 +1,44 @@
+{
+  "protocol_version": "P0703-SPENT-PLANARITY-BLENDED-JOINT-SCREEN-1.0.0",
+  "status": "frozen_before_any_P0699_DDO154_rotation_or_RXJ2129_field_fit_or_topology_score",
+  "frozen_utc": "2026-08-02T06:12:00Z",
+  "parent_protocol": "configs/p0699_spent_local_vector_coherence_joint_screen.json",
+  "geometry_math_parent": "results/p0702_mass_planarity_math_audit/report.json",
+  "purpose": "Test the parameter-free 3D mass-planarity blend of the spent P0697 disk-coherent and P0699 multi-center mechanisms before any P0633/P0640 outcome is opened.",
+  "evidence_class": "fully_spent_joint_mechanism_screen_after_geometry_inspection",
+  "equation": {
+    "mass_covariance": "I_ab=integral rho_b (x_a-xbar_a)(x_b-xbar_b)dV / integral rho_b dV",
+    "mass_planarity": "P=(1-lambda_1/lambda_2)(1-lambda_1/lambda_3), lambda_1<=lambda_2<=lambda_3",
+    "effective_coherence": "C_eff=P+(1-P)C_local",
+    "gated_source": "S_base=C_eff S_coh+(1-C_eff)S_local",
+    "joint_potential": "Phi_joint=Phi_base+e_2D(Phi_route-Phi_local)",
+    "planarity_threshold_scale_or_exponent": "none",
+    "new_universal_constants": 0,
+    "per_object_gravity_parameters": 0,
+    "fitted_coherence_parameters": 0,
+    "fitted_routing_parameters": 0,
+    "fitted_photon_parameters": 0
+  },
+  "selection_rule": "Advance only if every inherited numerical, DDO154, RX J2129 raw-root, position, compact-halo, multiplicity, parity, critical-curve, nuisance, and accounting gate passes. No result-dependent planarity transform, exponent, threshold, gravity amplitude, photon response, routing fraction, or gate change is permitted.",
+  "if_pass": "Freeze robustness, Solar-System closure, P0633 prediction manifests, and all universal values before opening any sealed outcome.",
+  "if_fail": "Retire this exact planarity blend and do not tune it on DDO154 or RX J2129. Keep P0633/P0640 sealed.",
+  "outputs": {
+    "directory": "results/p0703_spent_planarity_blended_joint_screen",
+    "report": "report.json",
+    "galaxy_curves": "ddo154_planarity_joint_curves.csv",
+    "galaxy_scores": "ddo154_planarity_joint_scores.csv",
+    "coherence_summary": "spent_effective_coherence_summary.csv",
+    "cluster_family_topology": "rxj2129_planarity_family_topology.csv",
+    "cluster_nuisance": "rxj2129_planarity_nuisance_parameters.csv",
+    "galaxy_field": "ddo154_planarity_joint_field.npz",
+    "cluster_field": "rxj2129_planarity_joint_field.npz",
+    "figure": "planarity_blended_joint_screen.png"
+  },
+  "claim_boundary": [
+    "DDO154 and RX J2129 are fully spent mechanism-development systems.",
+    "The blend was proposed after P0697/P0699 outcomes and after inspecting the two spent planarity values; this is not independent validation.",
+    "The four cluster alignment/shear nuisance parameters are inherited observational nuisances, not gravity settings.",
+    "The zero-slip photon rule remains a diagnostic closure rather than a covariant relativistic derivation.",
+    "P0633 galaxy kinematics and P0640 raw lensing constraints remain sealed regardless of this outcome."
+  ]
+}

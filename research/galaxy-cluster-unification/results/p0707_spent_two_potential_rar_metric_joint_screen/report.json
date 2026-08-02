@@ -1,0 +1,220 @@
+{
+  "report_version": "P0707-SPENT-TWO-POTENTIAL-RAR-METRIC-JOINT-SCREEN-RESULTS-1.0.0",
+  "status": "pass",
+  "evidence_class": "fully_spent_posthoc_two_metric_potential_screen",
+  "all_progression_gates_pass": true,
+  "candidate_advanced_to_robustness_and_solar": true,
+  "candidate_advanced_to_sealed_outcomes": false,
+  "protocol_sha256": "125f73f9e34ac43781209bc2cb014ceb84ec53297578cfd6327efdeb27a09529",
+  "source_sha256": "64299b7106bf14648a9e8c3d43d1135427fa76115f90171ce1623ba4f3d5087d",
+  "operator_source_sha256": "1073c6fd4036883c219859f3076ddbd57a8c0cdf8c171d25e905e9c6e5854fac",
+  "routing_source_sha256": "0f61400a79b1d74443ce690dde04a7941dacae45d6f2358f1e0fdeb44b5981ee",
+  "parent_sha256": {
+    "P0696": "a39a87c32999197776842fd2eb47cc04ffc6850eb6575c381e15f37e64539228",
+    "P0635": "70de638d621e284d2c3065a86e0e1dcdc50befd89118a369c25b72212be4658c",
+    "P0670": "5f4d87855fbab10a071b8b36169fbc86d9679025f2d256a8eb82f360a41326fc",
+    "P0693": "30756b53740ee3f73b32d98702f2b1b49ddeaa73af84a999ed1a0a8c9cc15b9f"
+  },
+  "galaxy_map_sha256": "6f12bd9d6015d75e35389434057ab9532b45aa38063433be37cdc585913e012c",
+  "cluster_map_sha256": "4804b357f9c67bb204b058e98de4d1ddf00340e301b86d001bb0a21132c47a77",
+  "galaxy_field_sha256": "739e0318ad67d4b3f06ec0172fe87454b136d6433864a3985fd103363208a658",
+  "cluster_field_sha256": "2ecd31bb477c89f914e512b9c06e487675608066fd0195a33015adf6f16d364f",
+  "integrity_gates": {
+    "P0696_status": true,
+    "P0696_math_pass": true,
+    "P0696_advanced": true,
+    "P0635_status": true,
+    "P0635_no_velocity_product": true,
+    "P0670_parent": true,
+    "P0693_status": true,
+    "spent_systems_registered": true,
+    "no_new_constants": true,
+    "no_per_object_gravity": true,
+    "no_fitted_routing": true,
+    "no_fitted_photon": true,
+    "nuisance_parameter_count": true,
+    "sealed_targets_untouched": true,
+    "raw_coverage": true
+  },
+  "spent_DDO154": {
+    "routing_fraction": 0.08352413225178856,
+    "covariance_kpc2": [
+      [
+        11.68677973262446,
+        0.10210470303545857
+      ],
+      [
+        0.10210470303545865,
+        12.731190413620029
+      ]
+    ],
+    "eigenvalues_kpc2": [
+      11.676891295648419,
+      12.741078850596072
+    ],
+    "field_audit": {
+      "newtonian_normalized_residual_RMS": 5.532981457653893e-14,
+      "local_routing_component_normalized_residual_RMS": 4.469013637758747e-14,
+      "routed_component_normalized_residual_RMS": 4.382153080162541e-14,
+      "coherent_potential_identity_relative_RMS": 0.0,
+      "hybrid_potential_identity_relative_RMS": 0.0,
+      "routing_correction_boundary_relative_mismatch": 0.0,
+      "weyl_metric_identity_relative_RMS": 1.3149447658790512e-16,
+      "normalized_acceleration_curl_RMS": 3.613918129331547e-16,
+      "normalized_weyl_acceleration_curl_RMS": 2.5240927767219924e-16,
+      "finite": true
+    },
+    "candidate_score": {
+      "points": 12,
+      "RMSE_km_s": 1.8842986689912864,
+      "weighted_RMSE_km_s": 1.3813830920181647,
+      "mean_bias_km_s": 0.5333294361018974
+    },
+    "algebraic_MOND_comparator": {
+      "points": 12,
+      "RMSE_km_s": 2.916081351928278,
+      "weighted_RMSE_km_s": 1.2255816436075178,
+      "mean_bias_km_s": 1.327429851089618
+    },
+    "three_dimensional_QUMOND_comparator": {
+      "points": 12,
+      "RMSE_km_s": 3.936047752283948,
+      "weighted_RMSE_km_s": 3.256147109601539,
+      "mean_bias_km_s": -1.3909434717208093
+    },
+    "comparisons": {
+      "candidate_RMSE_to_algebraic_MOND_ratio": 0.6461749318980012,
+      "candidate_weighted_RMSE_to_algebraic_MOND_ratio": 1.1271244957227353,
+      "candidate_RMSE_to_3D_QUMOND_ratio": 0.4787286099102571
+    }
+  },
+  "spent_RXJ2129": {
+    "routing_fraction": 0.27202347157855733,
+    "covariance_kpc2": [
+      [
+        6653.5502900798865,
+        611.0421496628857
+      ],
+      [
+        611.0421496628858,
+        5235.91666762043
+      ]
+    ],
+    "eigenvalues_kpc2": [
+      5008.894934791131,
+      6880.572022909185
+    ],
+    "field": {
+      "newtonian_normalized_residual_RMS": 8.891081551915351e-14,
+      "local_routing_component_normalized_residual_RMS": 2.9286374690145644e-14,
+      "routed_component_normalized_residual_RMS": 2.4665948068714115e-14,
+      "coherent_potential_identity_relative_RMS": 0.0,
+      "hybrid_potential_identity_relative_RMS": 0.0,
+      "routing_correction_boundary_relative_mismatch": 0.0,
+      "weyl_metric_identity_relative_RMS": 3.2255856909099954e-17,
+      "normalized_acceleration_curl_RMS": 2.1826752378419956e-16,
+      "normalized_weyl_acceleration_curl_RMS": 2.3546091711809613e-16,
+      "finite": true,
+      "strong_lens_median_physical_deflection_arcsec": 12.637206477673402,
+      "strong_lens_RMS_physical_deflection_arcsec": 12.493238656393089,
+      "normalized_deflection_curl_RMS": 4.356209719183769e-16
+    },
+    "fit": {
+      "model": "two_potential_rar_metric_P0707",
+      "training_RMS_arcsec": 0.6014111764067306,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 2.6704066889651097,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 48.038795419051574,
+      "nuisance_parameters_near_bound": 0
+    },
+    "compact_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "candidate_to_compact_halo_heldout_RMS_ratio": 1.0529551043147931,
+    "topology": {
+      "families": 7,
+      "missing_multiplicity_families": 0,
+      "exact_multiplicity_families": 5,
+      "demagnified_only_surplus_families": 0,
+      "potentially_observable_surplus_families": 2,
+      "exact_or_demagnified_only_families": 5,
+      "parity_diverse_families": 7,
+      "critical_curve_present_families": 7,
+      "total_global_roots": 25,
+      "total_observed_images": 22
+    }
+  },
+  "maximum_component_normalized_residual_RMS": 8.891081551915351e-14,
+  "maximum_coherent_potential_identity_relative_RMS": 0.0,
+  "maximum_hybrid_potential_identity_relative_RMS": 0.0,
+  "maximum_routing_correction_boundary_relative_mismatch": 0.0,
+  "maximum_normalized_acceleration_curl_RMS": 3.613918129331547e-16,
+  "gate_results": {
+    "P0696_status": true,
+    "P0696_math_pass": true,
+    "P0696_advanced": true,
+    "P0635_status": true,
+    "P0635_no_velocity_product": true,
+    "P0670_parent": true,
+    "P0693_status": true,
+    "spent_systems_registered": true,
+    "no_new_constants": true,
+    "no_per_object_gravity": true,
+    "no_fitted_routing": true,
+    "no_fitted_photon": true,
+    "nuisance_parameter_count": true,
+    "sealed_targets_untouched": true,
+    "raw_coverage": true,
+    "fraction_lower": true,
+    "fraction_upper": true,
+    "finite": true,
+    "component_residuals": true,
+    "coherent_identity": true,
+    "hybrid_identity": true,
+    "routing_boundary": true,
+    "acceleration_curl": true,
+    "galaxy_points": true,
+    "galaxy_RMSE_vs_MOND": true,
+    "galaxy_weighted_RMSE_vs_MOND": true,
+    "galaxy_RMSE_vs_3D_QUMOND": true,
+    "galaxy_bias": true,
+    "cluster_field_amplitude_lower": true,
+    "cluster_field_amplitude_upper": true,
+    "cluster_field_curl": true,
+    "training_roots": true,
+    "heldout_roots": true,
+    "training_RMS": true,
+    "heldout_RMS": true,
+    "compact_halo_comparison": true,
+    "no_missing_multiplicity": true,
+    "observable_surplus": true,
+    "acceptable_multiplicity": true,
+    "parity_diversity": true,
+    "critical_curves": true,
+    "nuisance_bounds": true,
+    "accounting_no_new_constants": true,
+    "accounting_no_per_object_gravity": true,
+    "accounting_no_fitted_routing": true,
+    "accounting_no_fitted_photon": true,
+    "accounting_nuisance_count": true,
+    "sealed_outcomes_untouched": true
+  },
+  "failed_gates": [],
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0707 is post hoc on fully spent DDO154 and RX J2129 evidence and requires external validation.",
+    "Matter and light follow one metric but probe different canonical combinations of its two potentials; no object label selects a law.",
+    "The weak-field metric has no covariant action or stability proof yet.",
+    "P0633 galaxy kinematics and P0640 raw lensing constraints remain sealed regardless of the result."
+  ],
+  "protocol_overlay_sha256": "9d8d41efecc47aad1e8c072f2b21429b284d29b6b72630ad3f59d730e4f33a3a",
+  "resolved_protocol_sha256": "125f73f9e34ac43781209bc2cb014ceb84ec53297578cfd6327efdeb27a09529",
+  "wrapper_source_sha256": "86684ba40026976f14e75c97e2d678d254fc6c8720bb2add08e5d0d3f9761836",
+  "metric_operator_source_sha256": "82c32a721de959fba63554fc78a846ff9c1e5b7ec2123b140ec6c1fe215d7407",
+  "metric_math_solar_parent_sha256": "7998b48ace6479b6ff1ce88f33f923ba5ee295b4d55eca38a88574b1da6e5742",
+  "cluster_endpoint_parent_sha256": "30756b53740ee3f73b32d98702f2b1b49ddeaa73af84a999ed1a0a8c9cc15b9f",
+  "galaxy_metric_field_sha256": "b601fc82db98e2e5d74e9e6647ad6cd39f27bfa20248ea444e623fd3742e3e88",
+  "cluster_metric_field_sha256": "51f91e4f61bdd0daf42be590b368749550795a344f0c813ea4b9f51a9a04b0d8",
+  "candidate_advanced_to_external_lock_robustness": true,
+  "next_if_pass": "Freeze map-systematic robustness and a prediction manifest for every P0633/P0640 target before opening any sealed outcome."
+}
