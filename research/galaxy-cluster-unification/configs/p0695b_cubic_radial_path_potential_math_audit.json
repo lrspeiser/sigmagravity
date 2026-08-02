@@ -1,0 +1,82 @@
+{
+  "protocol_version": "P0695B-CUBIC-RADIAL-PATH-POTENTIAL-MATH-AUDIT-1.0.0",
+  "status": "frozen_before_any_P0695B_synthetic_path_or_hybrid_metric",
+  "frozen_utc": "2026-08-02T19:00:00Z",
+  "purpose": "Repeat the failed P0695 no-observation audit with cubic instead of linear Cartesian field interpolation, changing no physical equation, grid, quadrature, mask, or threshold.",
+  "failure_parent": "results/p0695_radial_path_potential_math_audit/report.json",
+  "equation": {
+    "center": "x_c=integral rho_b x dV / integral rho_b dV",
+    "ray": "d=x-x_c; x(t)=x_c+t d",
+    "path_potential": "Phi_path(x)=Phi_N(x_c)+integral_0^1 -nu(|g_N(x(t))|/a0) g_N(x(t)).d dt",
+    "path_acceleration": "g_path=-grad Phi_path",
+    "projected_fraction": "e_2D=1-lambda_min(C_xy)/lambda_max(C_xy)",
+    "hybrid_potential": "Phi_joint=Phi_path+e_2D(Phi_route-Phi_local)",
+    "local_potential": "laplacian(Phi_local)=S_local with the shared fixed-RAR boundary",
+    "routed_potential": "laplacian(Phi_route)=S_route with the same boundary",
+    "geometric_limits": "spherical rays recover the algebraic simple-MOND radial derivative; the routing correction is exactly zero on the shared boundary",
+    "new_universal_constants": 0,
+    "fitted_physical_parameters": 0
+  },
+  "numerics": {
+    "grid_cells": 33,
+    "spacing": 0.4,
+    "density": "normalized Plummer-like rho proportional to (1+r^2/b^2)^(-5/2)",
+    "sphere_scale": 1.2,
+    "ellipsoid_scales": [1.7, 1.1, 0.7],
+    "gravitational_constant": 1.0,
+    "a0": 0.03,
+    "light_speed": 1000.0,
+    "transition_depth": 0.0001,
+    "transition_power": 4.0,
+    "extra_spatial_channels": 2.0,
+    "path_power": 0.5,
+    "primary_gauss_legendre_order": 24,
+    "convergence_gauss_legendre_order": 48,
+    "interpolation_order": 3,
+    "comparison_radius_grid_cells": [4.0, 12.0],
+    "rotation_test": "swap x and y axes of the ellipsoid and compare the correspondingly transposed fields"
+  },
+  "predeclared_integrity_gates": {
+    "P0695_status": "fail",
+    "P0695_candidate_advanced_to_spent_joint_screen": false,
+    "P0695_failed_gates": ["sphere_tangential", "sphere_angular_scatter"],
+    "only_declared_change": "interpolation_order: 1 -> 3",
+    "galaxy_or_cluster_outcomes_read": false,
+    "new_universal_constants": 0,
+    "fitted_physical_parameters": 0,
+    "sealed_target_outcomes_opened": false
+  },
+  "predeclared_math_gates": {
+    "all_potentials_accelerations_sources_finite": true,
+    "sphere_radial_acceleration_relative_RMS_max": 0.05,
+    "sphere_radial_acceleration_median_absolute_relative_error_max": 0.03,
+    "sphere_tangential_to_radial_RMS_max": 0.03,
+    "sphere_radial_angular_scatter_fraction_max": 0.05,
+    "normalized_acceleration_curl_RMS_max": 1e-10,
+    "quadrature_24_to_48_acceleration_relative_RMS_max": 0.02,
+    "rotation_covariance_potential_relative_RMS_max": 1e-10,
+    "rotation_covariance_acceleration_relative_RMS_max": 1e-10,
+    "hybrid_potential_identity_relative_RMS_max": 1e-14,
+    "routing_correction_boundary_relative_mismatch_max": 1e-14,
+    "projected_fraction_min": 0.0,
+    "projected_fraction_max": 1.0,
+    "new_universal_constants": 0,
+    "fitted_physical_parameters": 0,
+    "no_observational_score": true,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Advance the exact cubic-interpolation operator to a separately frozen spent DDO154 plus RX J2129 joint screen only if every unchanged synthetic gate passes. No physical term, grid, quadrature order, path definition, center, mask, or threshold may change.",
+  "outputs": {
+    "directory": "results/p0695b_cubic_radial_path_potential_math_audit",
+    "report": "report.json",
+    "radial_table": "spherical_path_radial_audit.csv",
+    "figure": "cubic_radial_path_potential_math_audit.png",
+    "synthetic_fields": "cubic_radial_path_synthetic_fields.npz"
+  },
+  "claim_boundary": [
+    "P0695B is a numerical and mathematical audit, not an observational test.",
+    "Cubic interpolation is a numerical representation choice, not a new physical parameter.",
+    "The baryonic centroid and straight Euclidean rays remain nonlocal and are not derived from a covariant action or causal evolution equation.",
+    "P0633 and P0640 remain sealed."
+  ]
+}
