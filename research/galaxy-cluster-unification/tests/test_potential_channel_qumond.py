@@ -6,6 +6,7 @@ from voidscreen.potential_channel_qumond import (
     potential_channel_acceleration,
     potential_channel_exponent,
     rar_qumond_boost,
+    system_potential_path_coordinate,
 )
 
 
@@ -99,3 +100,23 @@ def test_zero_extra_channels_is_exact_fixed_rar_response():
         path_power=0.5,
     )
     assert np.allclose(response["enhancement"], rar_qumond_boost(gbar, 1.2e-10))
+
+
+def test_system_path_coordinate_is_scale_free_and_uses_separate_extrema():
+    depth = np.array([4.0, 3.0, 2.0]) / 100.0**2
+    radius = np.array([1.0, 2.0, 4.0])
+    gbar = np.array([1.0, 1.5, 0.5])
+    coordinate = system_potential_path_coordinate(
+        depth,
+        radius,
+        gbar,
+        light_speed_m_s=100.0,
+    )
+    assert np.isclose(coordinate, 4.0 / 3.0)
+    rescaled = system_potential_path_coordinate(
+        depth,
+        7.0 * radius,
+        gbar / 7.0,
+        light_speed_m_s=100.0,
+    )
+    assert np.isclose(rescaled, coordinate)

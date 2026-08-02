@@ -140,3 +140,36 @@ def path_diluted_potential_channel_acceleration(
         "enhancement": enhancement,
         "predicted_acceleration_m_s2": predicted,
     }
+
+
+def system_potential_path_coordinate(
+    potential_depth,
+    radius_m,
+    gbar_m_s2,
+    *,
+    light_speed_m_s: float = 299792458.0,
+) -> float:
+    """Return ``max(|Phi|) / max(r gbar)`` for one baryonic system."""
+
+    depth, radius, gbar = np.broadcast_arrays(
+        np.asarray(potential_depth, dtype=float),
+        np.asarray(radius_m, dtype=float),
+        np.asarray(gbar_m_s2, dtype=float),
+    )
+    if (
+        np.any(~np.isfinite(depth))
+        or np.any(depth < 0.0)
+        or np.any(~np.isfinite(radius))
+        or np.any(radius <= 0.0)
+        or np.any(~np.isfinite(gbar))
+        or np.any(gbar <= 0.0)
+        or not np.isfinite(light_speed_m_s)
+        or light_speed_m_s <= 0.0
+    ):
+        raise ValueError("system path-coordinate inputs must be finite and positive")
+    numerator = float(np.max(depth) * float(light_speed_m_s) ** 2)
+    denominator = float(np.max(radius * gbar))
+    coordinate = numerator / denominator
+    if not np.isfinite(coordinate) or coordinate <= 0.0:
+        raise ValueError("system path coordinate must be finite and positive")
+    return coordinate
