@@ -28,6 +28,7 @@ from scipy.sparse.linalg import spsolve
 
 Array = np.ndarray
 ExpressionValue = float | Array | tuple[Array, ...]
+PREVIEW_MAXIMUM_ITERATIONS = 200
 
 
 @dataclass(frozen=True)
@@ -490,15 +491,43 @@ def solve_field_manifest(
     solver = manifest.get("solver", {})
     tolerance = float(solver.get("relativeTolerance", 1e-7))
     residual_tolerance = float(solver.get("residualTolerance", tolerance))
-    maximum_iterations = min(int(solver.get("maxIterations", 80)), 200)
+    requested_maximum_iterations = int(solver.get("maxIterations", 80))
+    maximum_iterations = min(
+        requested_maximum_iterations, PREVIEW_MAXIMUM_ITERATIONS
+    )
     damping = float(solver.get("damping", 0.7))
     coefficient_floor = float(solver.get("coefficientFloor", 1e-8))
+    initialization = str(solver.get("initialization", "zero"))
     if not math.isfinite(tolerance) or tolerance <= 0:
         raise ValueError("solver relativeTolerance must be finite and positive")
     if not math.isfinite(residual_tolerance) or residual_tolerance <= 0:
         raise ValueError("solver residualTolerance must be finite and positive")
     if not 0 < damping <= 1:
         raise ValueError("solver damping must lie in (0,1]")
+    if initialization not in {"zero", "linearized_unit_coefficient"}:
+        raise ValueError(
+            "solver initialization must be zero or linearized_unit_coefficient"
+        )
+
+    if initialization == "linearized_unit_coefficient":
+        for equation in equations:
+            target, _coefficient_expression = _elliptic_lhs(equation["lhs"])
+            source = _scalar_array(
+                evaluate_field_expression(
+                    equation["rhs"], fields=fields, parameters=parameters, spacing=steps
+                ),
+                shape,
+                f"equation {equation['id']} rhs",
+            )
+            definition = manifest["fields"][target]
+            default_boundary = definition.get("boundary", {}).get("value", 0.0)
+            fields[target] = solve_variable_coefficient_dirichlet(
+                source,
+                np.ones(shape, dtype=float),
+                steps,
+                boundaries.get(target, default_boundary),
+                coefficient_floor=coefficient_floor,
+            )
     maximum_update = math.inf
     converged = False
     history: list[dict[str, Any]] = []
@@ -577,6 +606,13 @@ def solve_field_manifest(
             "spacing": steps,
             "boundary_approximation": "isolated manifests use the supplied or zero far-field Dirichlet boundary",
             "coefficient_floor": coefficient_floor,
+            "initialization": initialization,
+            "requested_maximum_iterations": requested_maximum_iterations,
+            "executed_maximum_iterations": maximum_iterations,
+            "maximum_iterations_limited_by_worker": (
+                maximum_iterations != requested_maximum_iterations
+            ),
+            "preview_worker_maximum_iterations": PREVIEW_MAXIMUM_ITERATIONS,
             "relative_update_tolerance": tolerance,
             "equation_residual_tolerance": residual_tolerance,
         },

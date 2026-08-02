@@ -249,9 +249,11 @@
           ]
         },
         "relativeTolerance": { "type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1 },
+        "residualTolerance": { "type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1 },
         "maxIterations": { "type": "integer", "minimum": 1 },
         "damping": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
-        "coefficientFloor": { "type": "number", "exclusiveMinimum": 0 }
+        "coefficientFloor": { "type": "number", "exclusiveMinimum": 0 },
+        "initialization": { "enum": ["zero", "linearized_unit_coefficient"] }
       }
     },
     "parameterPolicy": {

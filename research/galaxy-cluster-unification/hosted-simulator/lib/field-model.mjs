@@ -366,9 +366,12 @@ export function validateFieldModel(manifest) {
   if (actualPerObject.size > 0) warnings.push(`${actualPerObject.size} per-object model parameter(s) must be disclosed separately from universal settings`);
   if (!SOLVER_FAMILIES.has(manifest.solver?.family)) errors.push(`unsupported solver.family: ${manifest.solver?.family}`);
   if (!(manifest.solver?.relativeTolerance > 0 && manifest.solver.relativeTolerance < 1)) errors.push("solver.relativeTolerance must lie between 0 and 1");
+  if (manifest.solver?.residualTolerance !== undefined && !(manifest.solver.residualTolerance > 0 && manifest.solver.residualTolerance < 1)) errors.push("solver.residualTolerance must lie between 0 and 1");
   if (!Number.isInteger(manifest.solver?.maxIterations) || manifest.solver.maxIterations < 1) errors.push("solver.maxIterations must be a positive integer");
   if (manifest.solver?.damping !== undefined && !(manifest.solver.damping > 0 && manifest.solver.damping <= 1)) errors.push("solver.damping must lie in (0,1]");
   if (manifest.solver?.coefficientFloor !== undefined && !(manifest.solver.coefficientFloor > 0)) errors.push("solver.coefficientFloor must be positive");
+  if (manifest.solver?.initialization !== undefined && !["zero", "linearized_unit_coefficient"].includes(manifest.solver.initialization)) errors.push("solver.initialization is unsupported");
+  if (manifest.solver?.maxIterations > 200) warnings.push("the current preview worker executes at most 200 nonlinear iterations and records the requested and effective limits");
 
   for (const [name, field] of fields) {
     if (field.role === "solved" && !state.fields.has(name)) errors.push(`solved field ${name} is not referenced by an equation or observable`);

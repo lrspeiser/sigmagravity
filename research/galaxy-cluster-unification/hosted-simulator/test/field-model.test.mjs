@@ -66,3 +66,16 @@ test("published JSON schema identifies the same manifest version", () => {
   assert.equal(schema.properties.schemaVersion.const, "sigma-field-model/1");
   assert.equal(schema.$schema, "https://json-schema.org/draft/2020-12/schema");
 });
+
+test("generic nonlinear solver controls are validated and disclosed", () => {
+  const manifest = load("aqual.json");
+  manifest.solver.initialization = "linearized_unit_coefficient";
+  manifest.solver.residualTolerance = 1e-8;
+  let result = validateFieldModel(manifest);
+  assert.equal(result.valid, true, result.errors.join("; "));
+  assert.match(result.warnings.join(" "), /at most 200 nonlinear iterations/);
+  manifest.solver.initialization = "formula_specific_magic";
+  result = validateFieldModel(manifest);
+  assert.equal(result.valid, false);
+  assert.match(result.errors.join(" "), /initialization is unsupported/);
+});

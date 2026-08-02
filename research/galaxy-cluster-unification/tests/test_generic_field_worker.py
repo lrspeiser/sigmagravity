@@ -109,6 +109,23 @@ def test_small_update_alone_cannot_claim_convergence():
     assert not solution.converged
 
 
+def test_linearized_initialization_and_iteration_limit_are_disclosed() -> None:
+    manifest = manufactured_manifest(2)
+    manifest["solver"].update(
+        {
+            "initialization": "linearized_unit_coefficient",
+            "maxIterations": 250,
+        }
+    )
+    forcing = np.ones((9, 9), dtype=float)
+    solution = solve_field_manifest(manifest, {"forcing": forcing}, 1.0)
+    assert solution.converged
+    assert solution.metadata["initialization"] == "linearized_unit_coefficient"
+    assert solution.metadata["requested_maximum_iterations"] == 250
+    assert solution.metadata["executed_maximum_iterations"] == 200
+    assert solution.metadata["maximum_iterations_limited_by_worker"]
+
+
 def test_zero_source_harmonic_boundary_has_a_well_scaled_residual():
     cells = 17
     axis = np.linspace(-1.0, 1.0, cells)
