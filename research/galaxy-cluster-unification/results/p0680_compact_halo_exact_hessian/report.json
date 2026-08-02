@@ -1,0 +1,46 @@
+{
+  "report_version": "P0680-COMPACT-HALO-EXACT-HESSIAN-RESULTS-1.0.0",
+  "status": "fail",
+  "all_integrity_gates_pass": false,
+  "P0678_decomposition_numerically_qualified": false,
+  "protocol_sha256": "6fd8f3cb37e7872123bc4eead6b4ce3ea669691b60f96bfa6108d8d56b04d3a2",
+  "source_sha256": "39d4e8ce2190cb5d9e0a46e4bcff5fef666c46b780d2f69d09827aa5a5596c04",
+  "parameter_table_sha256": "f69431208a468fcf04bc086d836eb9d60f8bcf4c2651588a45c6068e103f0625",
+  "point_table_sha256": "e66d9c26e17960541ff75d3d99d71f802a70a9dff3e20b53a97c7b49be36d6ad",
+  "parameter_rows": 8,
+  "metrics": {
+    "evaluation_points": 92,
+    "exact_hessian_normalized_curl_RMS": 0.0,
+    "direct_0p01_normalized_curl_RMS": 1.0425397829125642e-07,
+    "exact_vs_direct_0p01_kappa_relative_RMS_difference": 1.6825169326037867e-05,
+    "exact_vs_direct_0p01_jacobian_determinant_relative_RMS_difference": 2.0641395350200796e-05,
+    "exact_negative_jacobian_points": 6,
+    "direct_negative_jacobian_points": 6,
+    "exact_kappa_RMS": 0.4187811382972385,
+    "exact_jacobian_determinant_RMS": 0.3899792489425512
+  },
+  "gate_results": {
+    "P0679_failed": true,
+    "P0679_exact_failure": true,
+    "P0679_smallest_curl": true,
+    "P0678_failed": true,
+    "P0678_exact_failure": true,
+    "point_count": true,
+    "finite": true,
+    "exact_symmetry": true,
+    "kappa_agreement": false,
+    "determinant_agreement": false,
+    "no_candidate_fit": true,
+    "no_raw_root_score": true,
+    "sealed_targets_untouched": true
+  },
+  "new_candidate_formula_fit": false,
+  "new_raw_image_root_score_computed": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0680 qualifies numerical derivatives only; it does not validate the compact halo or a new gravity law.",
+    "The exact Hessian is evaluated on spent comparator parameters and cannot serve as a predictive input.",
+    "No raw root, candidate score, or sealed target is evaluated."
+  ]
+}
