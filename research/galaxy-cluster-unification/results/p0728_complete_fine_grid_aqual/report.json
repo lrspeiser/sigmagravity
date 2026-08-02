@@ -1,0 +1,304 @@
+{
+  "schemaVersion": "sigma-p0728-complete-fine-grid-aqual/1",
+  "stage": "P0728",
+  "status": "fail",
+  "stabilityStatus": "sensitive",
+  "sampleStatus": "previously_unsealed_and_project_spent_diagnostic_sentinels",
+  "scenario": "fine_49x49x17",
+  "configSha256": "ec257ad79f95520df66e12e1a6ab49f18c9f563fc92663710bd9f2269620dfb1",
+  "workerSourceSha256": "93972fa74e8e562c792b507a93181245961cb56330366df4d405f5f258436b44",
+  "modelDocumentSha256": "02d5a4c8703c7f2c849b2937bb63e6e0f25b99decf3d7f174683ef2219c27b34",
+  "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+  "selectedSolverVariant": "hybrid_picard40_newton",
+  "solver": {
+    "family": "nonlinear_finite_volume",
+    "relativeTolerance": 1e-08,
+    "residualTolerance": 1e-08,
+    "maxIterations": 160,
+    "coefficientFloor": 1e-08,
+    "initialization": "linearized_unit_coefficient",
+    "nonlinearMethod": "newton_krylov",
+    "krylovMethod": "gmres",
+    "krylovInnerIterations": 30,
+    "lineSearch": "armijo",
+    "picardWarmupDamping": 0.2,
+    "picardWarmupIterations": 40
+  },
+  "runs": [
+    {
+      "variant": "hybrid_picard40_newton",
+      "system": "DDO53",
+      "state": "succeeded",
+      "converged": true,
+      "iterations": 49,
+      "maximumRelativeUpdate": 1.053705203943121e-09,
+      "maximumEquationResidual": 2.1980165365234158e-11,
+      "wallSeconds": 232.53560290008318,
+      "cpuSeconds": 230.9375,
+      "peakPythonHeapBytes": 27478940,
+      "requestedMaximumIterations": 160,
+      "executedMaximumIterations": 160,
+      "iterationLimitAdjusted": false,
+      "nonlinearMethod": "newton_krylov",
+      "krylovMethod": "gmres",
+      "lineSearch": "armijo",
+      "modelDocumentSha256": "02d5a4c8703c7f2c849b2937bb63e6e0f25b99decf3d7f174683ef2219c27b34",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "inputBundleSha256": "d7ba34c267abf391cae39650bdf1452a4261723d8a94ad077519ed103fc0d955",
+      "scientificResultSha256": "0b27077879b4ac6f53ac2c4bf0f3539023abc34b8d66f28f9809b982701ae03c",
+      "output": "C:\\Users\\henry\\Documents\\Codex\\2026-07-18\\sigmagravity-frontiers-main\\research\\galaxy-cluster-unification\\tmp\\p0728-worker-cache\\runs\\DDO53",
+      "picardWarmupIterations": 40,
+      "picardWarmupDamping": 0.2
+    },
+    {
+      "variant": "hybrid_picard40_newton",
+      "system": "DDO101",
+      "state": "succeeded",
+      "converged": true,
+      "iterations": 52,
+      "maximumRelativeUpdate": 1.3811907339122568e-10,
+      "maximumEquationResidual": 4.602660921185601e-12,
+      "wallSeconds": 234.07873710000422,
+      "cpuSeconds": 232.359375,
+      "peakPythonHeapBytes": 27479050,
+      "requestedMaximumIterations": 160,
+      "executedMaximumIterations": 160,
+      "iterationLimitAdjusted": false,
+      "nonlinearMethod": "newton_krylov",
+      "krylovMethod": "gmres",
+      "lineSearch": "armijo",
+      "modelDocumentSha256": "02d5a4c8703c7f2c849b2937bb63e6e0f25b99decf3d7f174683ef2219c27b34",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "inputBundleSha256": "7457c0dd034be9bc8f2ba2a9bbf06fceb236921e60b94400b9570e35f69abdb8",
+      "scientificResultSha256": "6d3e6cfe8dca9fa2011342299e0392a624deb0386d28be3926014f59bc0bcab6",
+      "output": "C:\\Users\\henry\\Documents\\Codex\\2026-07-18\\sigmagravity-frontiers-main\\research\\galaxy-cluster-unification\\tmp\\p0728-worker-cache\\runs\\DDO101",
+      "picardWarmupIterations": 40,
+      "picardWarmupDamping": 0.2
+    },
+    {
+      "variant": "hybrid_picard40_newton",
+      "system": "DDO50",
+      "state": "succeeded",
+      "converged": true,
+      "iterations": 45,
+      "maximumRelativeUpdate": 1.1452560464532055e-09,
+      "maximumEquationResidual": 1.3489319397359794e-11,
+      "wallSeconds": 235.08789700001944,
+      "cpuSeconds": 233.921875,
+      "peakPythonHeapBytes": 27479096,
+      "requestedMaximumIterations": 160,
+      "executedMaximumIterations": 160,
+      "iterationLimitAdjusted": false,
+      "nonlinearMethod": "newton_krylov",
+      "krylovMethod": "gmres",
+      "lineSearch": "armijo",
+      "modelDocumentSha256": "02d5a4c8703c7f2c849b2937bb63e6e0f25b99decf3d7f174683ef2219c27b34",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "inputBundleSha256": "142dac0537fc721abc6030bbad4f16f6a534ea6c55db69e3873dbf772a664b5f",
+      "scientificResultSha256": "6c82777791a14f0ed6f1cf7135a21f0127f6eb4dab0842127916e8fd2fd3df2a",
+      "output": "C:\\Users\\henry\\Documents\\Codex\\2026-07-18\\sigmagravity-frontiers-main\\research\\galaxy-cluster-unification\\tmp\\p0728-worker-cache\\runs\\DDO50",
+      "picardWarmupIterations": 40,
+      "picardWarmupDamping": 0.2
+    },
+    {
+      "variant": "hybrid_picard40_newton",
+      "system": "NGC1569",
+      "state": "failed_nonconvergence",
+      "converged": false,
+      "iterations": 46,
+      "maximumRelativeUpdate": 1.7639931781587343e-08,
+      "maximumEquationResidual": 2.4014926609997483e-10,
+      "wallSeconds": 229.31593909999356,
+      "cpuSeconds": 227.796875,
+      "peakPythonHeapBytes": 27479096,
+      "requestedMaximumIterations": 160,
+      "executedMaximumIterations": 160,
+      "iterationLimitAdjusted": false,
+      "nonlinearMethod": "newton_krylov",
+      "krylovMethod": "gmres",
+      "lineSearch": "armijo",
+      "modelDocumentSha256": "02d5a4c8703c7f2c849b2937bb63e6e0f25b99decf3d7f174683ef2219c27b34",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "inputBundleSha256": "5e5f2358d7c93923665c40e39ddf89118f11b88d9f34bb79eb459636b1ea151e",
+      "scientificResultSha256": "a1747110d65e8133f1540c9005aefd543dd6947f7703652d88273cf04908c63e",
+      "output": "C:\\Users\\henry\\Documents\\Codex\\2026-07-18\\sigmagravity-frontiers-main\\research\\galaxy-cluster-unification\\tmp\\p0728-worker-cache\\runs\\NGC1569",
+      "picardWarmupIterations": 40,
+      "picardWarmupDamping": 0.2
+    }
+  ],
+  "referenceComparisons": [
+    {
+      "variant": "hybrid_picard40_newton",
+      "system": "DDO53",
+      "comparable": true,
+      "predictionNormalizedRmse": 4.936213209652239e-09,
+      "potentialNormalizedRmse": 1.0595472339979616e-09,
+      "accelerationNormalizedRmse": 4.123809273634434e-09
+    },
+    {
+      "variant": "hybrid_picard40_newton",
+      "system": "DDO101",
+      "comparable": true,
+      "predictionNormalizedRmse": 3.236476113206605e-08,
+      "potentialNormalizedRmse": 9.18089451820107e-09,
+      "accelerationNormalizedRmse": 5.3953825862803776e-08
+    },
+    {
+      "variant": "hybrid_picard40_newton",
+      "system": "DDO50",
+      "comparable": true,
+      "predictionNormalizedRmse": 6.263281083864047e-10,
+      "potentialNormalizedRmse": 4.46794579332933e-10,
+      "accelerationNormalizedRmse": 1.3862987551216789e-09
+    },
+    {
+      "variant": "hybrid_picard40_newton",
+      "system": "NGC1569",
+      "comparable": false,
+      "predictionNormalizedRmse": null,
+      "potentialNormalizedRmse": null,
+      "accelerationNormalizedRmse": null
+    }
+  ],
+  "perGalaxyScores": [
+    {
+      "system": "DDO53",
+      "validObservationPoints": 9,
+      "rmseMPerS": 2715.697373011621,
+      "inverseVarianceWeightedRmseMPerS": 3880.9307355952837,
+      "chiSquare": 9.510462095137335,
+      "rmseKmS": 2.715697373011621
+    },
+    {
+      "system": "DDO101",
+      "validObservationPoints": 10,
+      "rmseMPerS": 28349.27441019462,
+      "inverseVarianceWeightedRmseMPerS": 30298.18445007462,
+      "chiSquare": 996.4615235098631,
+      "rmseKmS": 28.34927441019462
+    },
+    {
+      "system": "DDO50",
+      "validObservationPoints": 26,
+      "rmseMPerS": 10999.458924837842,
+      "inverseVarianceWeightedRmseMPerS": 9135.2808071189,
+      "chiSquare": 92.05478769469778,
+      "rmseKmS": 10.99945892483784
+    }
+  ],
+  "aqualAggregateScores": {
+    "systems": 3,
+    "validObservationPoints": 45,
+    "equalGalaxyRmseKmS": 17.626159237957395,
+    "pointWeightedRmseKmS": 15.810600676241286,
+    "inverseVarianceWeightedRmseKmS": 19.732493661987622,
+    "chiSquare": 1098.0267732996983,
+    "reducedChiSquare": 24.400594962215518
+  },
+  "completeFineGridModelSummary": [
+    {
+      "model": "qumond_simple_nu",
+      "systems": 4,
+      "scoredSystems": 4,
+      "validObservationPoints": 55,
+      "equalGalaxyRmseKmS": 16.501957732720996,
+      "pointWeightedRmseKmS": 15.26917998117611,
+      "reducedChiSquare": 21.525001476063807,
+      "universalGravityParameters": 2,
+      "perObjectGravityParameters": 0,
+      "source": "locked P0724 complete row",
+      "rank": 1
+    },
+    {
+      "model": "refracted_gravity_published_fixture",
+      "systems": 4,
+      "scoredSystems": 4,
+      "validObservationPoints": 55,
+      "equalGalaxyRmseKmS": 18.98171792451412,
+      "pointWeightedRmseKmS": 17.92173942457273,
+      "reducedChiSquare": 27.46814493119393,
+      "universalGravityParameters": 4,
+      "perObjectGravityParameters": 0,
+      "source": "locked P0724 complete row",
+      "rank": 2
+    },
+    {
+      "model": "newtonian_poisson",
+      "systems": 4,
+      "scoredSystems": 4,
+      "validObservationPoints": 55,
+      "equalGalaxyRmseKmS": 24.419748236292026,
+      "pointWeightedRmseKmS": 23.55769340928677,
+      "reducedChiSquare": 45.07922862857688,
+      "universalGravityParameters": 1,
+      "perObjectGravityParameters": 0,
+      "source": "locked P0724 complete row",
+      "rank": 3
+    }
+  ],
+  "completeFineGridRankOrder": [
+    "qumond_simple_nu",
+    "refracted_gravity_published_fixture",
+    "newtonian_poisson"
+  ],
+  "aqualBaselinePredictionChanges": [
+    {
+      "system": "DDO53",
+      "normalizedPredictionRmse": 0.09055799617561396
+    },
+    {
+      "system": "DDO101",
+      "normalizedPredictionRmse": 0.10706319980433737
+    },
+    {
+      "system": "DDO50",
+      "normalizedPredictionRmse": 0.11527454158153796
+    }
+  ],
+  "reconstructedFineGridSensitivity": {
+    "pairedModelSystems": 15,
+    "expectedPairedModelSystems": 16,
+    "medianNormalizedPredictionRmse": 0.054232606294136634,
+    "p90NormalizedPredictionRmse": 0.1845072090549159,
+    "aqualAggregateFitRmseRelativeChange": null,
+    "maximumModelAggregateFitRmseRelativeChange": null
+  },
+  "engineeringGateResults": {
+    "required_systems": true,
+    "all_fields_converged": false,
+    "equation_residual": true,
+    "relative_update": false,
+    "independent_reference_agreement": false,
+    "complete_observation_scoring": false,
+    "iteration_limit_faithful": true,
+    "selected_solver_locked": true,
+    "physics_manifest_unchanged": true,
+    "no_per_object_gravity_parameters": true,
+    "locked_input_hashes_valid": true
+  },
+  "failedEngineeringGates": [
+    "all_fields_converged",
+    "relative_update",
+    "independent_reference_agreement",
+    "complete_observation_scoring"
+  ],
+  "stabilityGateResults": {
+    "complete_prediction_coverage": false,
+    "median_normalized_prediction_rmse": true,
+    "p90_normalized_prediction_rmse": true,
+    "aggregate_fit_rmse_relative_change": false
+  },
+  "failedStabilityGates": [
+    "complete_prediction_coverage",
+    "aggregate_fit_rmse_relative_change"
+  ],
+  "selectionPolicy": "Use exactly the smallest P0727 universal qualifying hybrid. Do not select or alter a solver using observed speeds or per-galaxy outcomes.",
+  "rethinkPolicy": "If the four-system engineering gate fails, retain the partial results and preregister a broader solver validation. If numerical gates pass but stability gates fail, report AQUAL as resolution-sensitive rather than modifying its physics or solver.",
+  "claimBoundary": [
+    "This repairs a spent-sample numerical comparison; it is not a new holdout or theory fit.",
+    "The selected solver was frozen in P0727 before these four-system aggregate scores were calculated.",
+    "Reference solutions are comparison-only and never initial conditions.",
+    "Observed speeds score the completed fields but never select solver controls.",
+    "The result concerns massive-tracer circular speeds; cluster lensing and photon propagation are not tested here."
+  ]
+}

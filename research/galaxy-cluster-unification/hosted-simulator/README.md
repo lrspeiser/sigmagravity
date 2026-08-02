@@ -256,6 +256,12 @@ speed. Warm-up steps count against the declared total iteration limit, and the
 validator exposes all controls. See
 `../docs/P0727_HYBRID_NONLINEAR_CROSSCHECK_RESULTS.md`.
 
+P0728 applied the selected 40-step hybrid universally to four fine-grid
+sentinels. Three converged and agreed with independent Picard references;
+NGC1569 missed the relative-update gate, so deterministic reporting excludes
+the partial AQUAL row from ranks and leaves sensitivity incomplete. See
+`../docs/P0728_COMPLETE_FINE_GRID_AQUAL_RESULTS.md`.
+
 Run the chained 3D HTTP acceptance test while `npm run dev` is active:
 
 ```text

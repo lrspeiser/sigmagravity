@@ -1523,6 +1523,13 @@ passed, so 40 is the smallest preregistered success. This validates the
 discrete roots, not AQUAL as physical theory. See
 [`docs/P0727_HYBRID_NONLINEAR_CROSSCHECK_RESULTS.md`](docs/P0727_HYBRID_NONLINEAR_CROSSCHECK_RESULTS.md).
 
+P0728 applied that selected solver to all four fine-grid sentinels. DDO53,
+DDO101, and DDO50 converged and independently agreed with prior Picard fields,
+but NGC1569 missed the `1e-8` relative-update tolerance at `1.76e-8` despite a
+`2.40e-10` equation residual. The AQUAL row remains incomplete and is excluded
+from ranking and stability classification. See
+[`docs/P0728_COMPLETE_FINE_GRID_AQUAL_RESULTS.md`](docs/P0728_COMPLETE_FINE_GRID_AQUAL_RESULTS.md).
+
 ```powershell
 python scripts/run_p0723_formula_neutral_api_comparators.py `
   --base-url http://127.0.0.1:4173
@@ -1535,4 +1542,6 @@ python scripts/run_p0725_aqual_solver_robustness.py
 python scripts/run_p0726_independent_nonlinear_crosscheck.py
 
 python scripts/run_p0727_hybrid_nonlinear_crosscheck.py
+
+python scripts/run_p0728_complete_fine_grid_aqual.py
 ```

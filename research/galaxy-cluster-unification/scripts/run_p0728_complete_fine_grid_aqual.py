@@ -120,7 +120,12 @@ def render_model_plot(output: Path, summaries: list[dict[str, Any]]) -> None:
     )
     axis.invert_yaxis()
     axis.set_xlabel("equal-galaxy RMSE (km/s; lower is better)")
-    axis.set_title("P0728 complete four-galaxy fine-grid comparison")
+    title = (
+        "P0728 complete four-galaxy fine-grid comparison"
+        if any(row["model"] == "aqual_simple_mu" for row in summaries)
+        else "P0728 eligible complete rows; incomplete AQUAL excluded"
+    )
+    axis.set_title(title)
     figure.tight_layout()
     figure.savefig(output / "fine_grid_model_comparison.png", dpi=180)
     plt.close(figure)
@@ -129,8 +134,28 @@ def render_model_plot(output: Path, summaries: list[dict[str, Any]]) -> None:
 def render_reference_plot(output: Path, comparisons: list[dict[str, Any]]) -> None:
     figure, axis = plt.subplots(figsize=(8.0, 4.5))
     systems = [str(row["system"]) for row in comparisons]
-    values = [float(row["predictionNormalizedRmse"]) for row in comparisons]
-    axis.bar(systems, values, color="#7c3aed")
+    values = [
+        float(row["predictionNormalizedRmse"])
+        if row["predictionNormalizedRmse"] is not None
+        else np.nan
+        for row in comparisons
+    ]
+    positions = np.arange(len(systems))
+    axis.bar(positions, values, color="#7c3aed")
+    valid_values = [value for value in values if np.isfinite(value)]
+    axis.set_xticks(positions, systems)
+    axis.set_xlim(-0.5, len(systems) - 0.5)
+    axis.set_ylim(min(valid_values) / 2.0, max(valid_values) * 5.0)
+    for index, row in enumerate(comparisons):
+        if not row["comparable"]:
+            axis.text(
+                index,
+                max(valid_values) * 1.5,
+                "not converged",
+                ha="center",
+                va="center",
+                rotation=90,
+            )
     axis.set_yscale("log")
     axis.set_ylabel("circular-speed normalized RMS difference")
     axis.set_title("P0728 agreement with independent field references")
@@ -293,16 +318,21 @@ def main() -> None:
                 "source": "locked P0724 complete row",
             }
         )
-    if aggregate is not None:
+    complete_aggregate = (
+        aggregate
+        if aggregate is not None and aggregate["systems"] == len(config["systems"])
+        else None
+    )
+    if complete_aggregate is not None:
         fine_summaries.append(
             {
                 "model": "aqual_simple_mu",
-                "systems": aggregate["systems"],
-                "scoredSystems": aggregate["systems"],
-                "validObservationPoints": aggregate["validObservationPoints"],
-                "equalGalaxyRmseKmS": aggregate["equalGalaxyRmseKmS"],
-                "pointWeightedRmseKmS": aggregate["pointWeightedRmseKmS"],
-                "reducedChiSquare": aggregate["reducedChiSquare"],
+                "systems": complete_aggregate["systems"],
+                "scoredSystems": complete_aggregate["systems"],
+                "validObservationPoints": complete_aggregate["validObservationPoints"],
+                "equalGalaxyRmseKmS": complete_aggregate["equalGalaxyRmseKmS"],
+                "pointWeightedRmseKmS": complete_aggregate["pointWeightedRmseKmS"],
+                "reducedChiSquare": complete_aggregate["reducedChiSquare"],
                 "universalGravityParameters": 2,
                 "perObjectGravityParameters": 0,
                 "source": "P0728 selected universal hybrid",
@@ -357,10 +387,15 @@ def main() -> None:
         if row["scenario"] == p0724["scenarios"][0]["id"]
         and row["model"] == "aqual_simple_mu"
     )
-    aqual_fit_change = abs(
-        float(aggregate["equalGalaxyRmseKmS"])
-        - float(baseline_aqual["equalGalaxyRmseKmS"])
-    ) / float(baseline_aqual["equalGalaxyRmseKmS"])
+    aqual_fit_change = (
+        abs(
+            float(complete_aggregate["equalGalaxyRmseKmS"])
+            - float(baseline_aqual["equalGalaxyRmseKmS"])
+        )
+        / float(baseline_aqual["equalGalaxyRmseKmS"])
+        if complete_aggregate is not None
+        else None
+    )
     other_fit_changes = []
     for model in ["newtonian_poisson", "qumond_simple_nu", "refracted_gravity_published_fixture"]:
         baseline = next(
@@ -380,8 +415,10 @@ def main() -> None:
         "medianNormalizedPredictionRmse": float(np.median(all_changes)),
         "p90NormalizedPredictionRmse": float(np.percentile(all_changes, 90.0)),
         "aqualAggregateFitRmseRelativeChange": aqual_fit_change,
-        "maximumModelAggregateFitRmseRelativeChange": max(
-            other_fit_changes + [aqual_fit_change]
+        "maximumModelAggregateFitRmseRelativeChange": (
+            max(other_fit_changes + [aqual_fit_change])
+            if aqual_fit_change is not None
+            else None
         ),
     }
     stability_gates = {
@@ -397,6 +434,8 @@ def main() -> None:
         "aggregate_fit_rmse_relative_change": stability_metrics[
             "maximumModelAggregateFitRmseRelativeChange"
         ]
+        is not None
+        and stability_metrics["maximumModelAggregateFitRmseRelativeChange"]
         <= float(stability_limits["maximumModelAggregateFitRmseRelativeChange"]),
     }
 
@@ -425,7 +464,9 @@ def main() -> None:
             for row in comparisons
         ),
         "complete_observation_scoring": aggregate is not None
-        and aggregate["validObservationPoints"] == int(gates["requiredObservationPoints"]),
+        and complete_aggregate is not None
+        and complete_aggregate["validObservationPoints"]
+        == int(gates["requiredObservationPoints"]),
         "iteration_limit_faithful": all(
             not row["iterationLimitAdjusted"]
             and row["requestedMaximumIterations"] == row["executedMaximumIterations"]

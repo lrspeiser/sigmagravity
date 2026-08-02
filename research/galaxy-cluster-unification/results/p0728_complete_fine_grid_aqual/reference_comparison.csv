@@ -1,0 +1,5 @@
+variant,system,comparable,predictionNormalizedRmse,potentialNormalizedRmse,accelerationNormalizedRmse
+hybrid_picard40_newton,DDO53,True,4.936213209652239e-09,1.0595472339979616e-09,4.123809273634434e-09
+hybrid_picard40_newton,DDO101,True,3.236476113206605e-08,9.18089451820107e-09,5.3953825862803776e-08
+hybrid_picard40_newton,DDO50,True,6.263281083864047e-10,4.46794579332933e-10,1.3862987551216789e-09
+hybrid_picard40_newton,NGC1569,False,,,
