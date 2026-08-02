@@ -1,0 +1,57 @@
+{
+  "report_version": "P0702-MASS-PLANARITY-MATH-AUDIT-RESULTS-1.0.0",
+  "status": "pass",
+  "all_math_gates_pass": true,
+  "candidate_advanced_to_spent_joint_screen": true,
+  "protocol_sha256": "ffcc2423dffdbce758aa2759eac734e0a1acd54d3c2099e0f43bc997bfeecf89",
+  "source_sha256": "0a2a82d32ae0fe948580541a7b276afe5a2b6a4895c49318f69f548b3fb17f77",
+  "operator_source_sha256": "9653c0fa96b4ee38691d86bb62e87844833055891facdd28e159f9f51aa6e1af",
+  "metrics": {
+    "synthetic_planarity": {
+      "sheet": 0.9918309811135877,
+      "filament": 0.0,
+      "ball": 4.930380657631324e-32
+    },
+    "axis_permutation_difference": 0.0,
+    "translation_difference": 6.822200993128469e-06,
+    "zero_planarity_endpoint_error": 0.0,
+    "unit_planarity_endpoint_error": 0.0,
+    "spent_DDO154": {
+      "eigenvalues_kpc2": [
+        0.010853048833190512,
+        11.676891295648423,
+        12.741078850596068
+      ],
+      "planarity": 0.9982195294228261
+    },
+    "spent_RXJ2129": {
+      "eigenvalues_kpc2": [
+        5008.894934791131,
+        6880.572022909188,
+        7599.72038086745
+      ],
+      "planarity": 0.09273569246968819
+    }
+  },
+  "gate_results": {
+    "planarity_range": true,
+    "sheet_identified": true,
+    "filament_rejected": true,
+    "ball_rejected": true,
+    "axis_permutation_invariance": true,
+    "translation_invariance": true,
+    "zero_endpoint": true,
+    "unit_endpoint": true,
+    "effective_coherence_bounds": true,
+    "no_new_constants": true,
+    "no_per_object_gravity": true
+  },
+  "failed_gates": [],
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "Planarity is a global geometry invariant, not a covariant relativistic field equation.",
+    "A successful controller audit does not establish empirical performance.",
+    "P0633 galaxy kinematics and P0640 strong-lensing constraints remain sealed."
+  ]
+}

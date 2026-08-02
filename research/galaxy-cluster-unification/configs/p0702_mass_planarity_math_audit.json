@@ -1,0 +1,51 @@
+{
+  "protocol_version": "P0702-MASS-PLANARITY-MATH-AUDIT-1.0.0",
+  "status": "frozen_before_any_P0702_formula_field_or_outcome_score",
+  "frozen_utc": "2026-08-02T06:05:00Z",
+  "purpose": "Audit a parameter-free 3D mass-planarity invariant before it is allowed to blend the spent coherent-monopole and local-vector-coherence mechanisms.",
+  "evidence_class": "mathematical_and_spent_input_geometry_audit",
+  "equation": {
+    "covariance": "I_ab=integral rho_b (x_a-xbar_a)(x_b-xbar_b)dV / integral rho_b dV",
+    "ordered_eigenvalues": "lambda_1 <= lambda_2 <= lambda_3",
+    "planarity": "P=(1-lambda_1/lambda_2)(1-lambda_1/lambda_3)",
+    "effective_coherence": "C_eff=P+(1-P)C_local",
+    "equivalent_source": "S=P S_coh+(1-P)[C_local S_coh+(1-C_local)S_local]",
+    "new_universal_constants": 0,
+    "thresholds_or_fitted_exponents": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "synthetic_cases": {
+    "sheet_widths": [2.0, 1.5, 0.12],
+    "filament_widths": [2.0, 0.2, 0.2],
+    "ball_widths": [1.0, 1.0, 1.0]
+  },
+  "predeclared_gates": {
+    "planarity_min": 0.0,
+    "planarity_max": 1.0,
+    "sheet_planarity_min": 0.95,
+    "filament_planarity_max": 0.05,
+    "ball_planarity_max": 1e-10,
+    "axis_permutation_difference_max": 1e-12,
+    "translation_difference_max": 0.0002,
+    "zero_planarity_endpoint_error_max": 1e-14,
+    "unit_planarity_endpoint_error_max": 1e-14,
+    "effective_coherence_bounds": true,
+    "new_universal_constants": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "spent_geometry_diagnostics": {
+    "galaxy": "DDO154 registered 3D baryonic commissioning map",
+    "cluster": "RX J2129 registered 3D baryonic commissioning map",
+    "disclosure": "The formula was proposed after seeing P0697 and P0699 outcomes, and the two planarity values were inspected before this audit was frozen. They are mechanism diagnostics, never validation. No velocity or lensing outcome was used in this audit."
+  },
+  "outputs": {
+    "directory": "results/p0702_mass_planarity_math_audit",
+    "report": "report.json",
+    "summary": "SUMMARY.md"
+  },
+  "claim_boundary": [
+    "Planarity is a global geometry invariant, not a covariant relativistic field equation.",
+    "A successful controller audit does not establish empirical performance.",
+    "P0633 galaxy kinematics and P0640 strong-lensing constraints remain sealed."
+  ]
+}
