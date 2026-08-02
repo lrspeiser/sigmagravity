@@ -173,3 +173,12 @@ def system_potential_path_coordinate(
     if not np.isfinite(coordinate) or coordinate <= 0.0:
         raise ValueError("system path coordinate must be finite and positive")
     return coordinate
+
+
+def inward_monotone_majorant(values) -> np.ndarray:
+    """Smallest pointwise majorant that is nonincreasing along a 1D profile."""
+
+    profile = np.asarray(values, dtype=float)
+    if profile.ndim != 1 or profile.size == 0 or np.any(~np.isfinite(profile)):
+        raise ValueError("values must be a nonempty finite one-dimensional profile")
+    return np.maximum.accumulate(profile[::-1])[::-1]

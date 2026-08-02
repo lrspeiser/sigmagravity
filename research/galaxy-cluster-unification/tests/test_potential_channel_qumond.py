@@ -1,6 +1,7 @@
 import numpy as np
 
 from voidscreen.potential_channel_qumond import (
+    inward_monotone_majorant,
     path_diluted_channel_exponent,
     path_diluted_potential_channel_acceleration,
     potential_channel_acceleration,
@@ -120,3 +121,11 @@ def test_system_path_coordinate_is_scale_free_and_uses_separate_extrema():
         light_speed_m_s=100.0,
     )
     assert np.isclose(rescaled, coordinate)
+
+
+def test_inward_monotone_majorant_is_minimal_and_nonincreasing():
+    values = np.array([1.0, 2.0, 1.5, 1.8, 1.2])
+    envelope = inward_monotone_majorant(values)
+    assert np.allclose(envelope, [2.0, 2.0, 1.8, 1.8, 1.2])
+    assert np.all(envelope >= values)
+    assert np.all(np.diff(envelope) <= 0.0)
