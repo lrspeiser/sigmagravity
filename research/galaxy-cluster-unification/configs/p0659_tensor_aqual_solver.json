@@ -1,0 +1,68 @@
+{
+  "protocol_version": "P0659-TENSOR-AQUAL-SOLVER-1.0.0",
+  "status": "frozen_before_any_P0659_solver_score",
+  "frozen_utc": "2026-08-02T02:05:00Z",
+  "purpose": "Validate a variational projected tensor-AQUAL solver and the structural limits of a single galaxy-plus-cluster constitutive law before any kinematic or raw-lensing target is opened.",
+  "equation": "div[mu(|grad Phi|/a0) ((1-sigma) I + sigma n_hat n_hat) grad Phi] = 4 pi G rho_b, where n_hat is perpendicular to the baryonic transport direction h_hat",
+  "equivalent_tensor": "mu (I - sigma h_hat h_hat)",
+  "definitions": {
+    "mu": "simple AQUAL mu=x/(1+x)",
+    "sigma": "[a0/(a0+|g_N|)] C_transverse [1-exp(-ell/10 kpc)]",
+    "C_transverse": "[2 sqrt(|g_star||g_gas|)/(|g_star|+|g_gas|)] [1-(g_star dot g_gas)^2/(|g_star|^2 |g_gas|^2)]",
+    "ell": "|g_N|/||grad g_N||_F with the inherited numerical trace bounds",
+    "h_hat": "unit gas-minus-star component-field direction, falling back to the traced Newtonian direction where the difference vanishes",
+    "n_hat": "the in-plane direction perpendicular to h_hat",
+    "coherence_length_kpc": 10.0,
+    "new_universal_constants": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "solver": {
+    "discretization": "symmetric variational graph: Cartesian isotropic links for mu(1-sigma) plus bilinear plus/minus n_hat links for mu sigma",
+    "boundary": "explicit Dirichlet",
+    "picard_damping": 0.65,
+    "mu_floor": 1e-6,
+    "nonlinear_residual_tolerance": 1e-5,
+    "linear_relative_tolerance": 1e-10,
+    "maximum_nonlinear_iterations": 80,
+    "maximum_linear_iterations": 3000
+  },
+  "analytic_tests": {
+    "manufactured_domain_half_width": 1.0,
+    "manufactured_grids": [17, 33, 65],
+    "manufactured_sigma": 0.35,
+    "manufactured_direction": [1.0, 0.0],
+    "rotation_degrees": 90,
+    "nonlinear_grid": 49,
+    "nonlinear_a0": 0.15
+  },
+  "inputs": {
+    "P0634_report": "results/p0634_field_solver_validation/report.json",
+    "P0643_report": "results/p0643_accumulated_component_transport/report.json"
+  },
+  "predeclared_progression_gates": {
+    "P0634_all_solver_gates_pass": true,
+    "minimum_constitutive_eigenvalue_strictly_positive": true,
+    "manufactured_65_grid_relative_RMS_error_max": 0.005,
+    "manufactured_convergence_order_min": 1.8,
+    "rotation_covariance_relative_RMS_error_max": 1e-10,
+    "direction_reversal_relative_RMS_error_max": 1e-10,
+    "aligned_sigma_zero_relative_RMS_difference_from_scalar_AQUAL_max": 1e-10,
+    "nonlinear_normalized_residual_RMS_max": 1e-5,
+    "nonlinear_solver_converged": true,
+    "registered_cluster_to_galaxy_activation_ratio_min": 10.0,
+    "solar_1au_constitutive_anisotropy_max": 2.1e-8,
+    "new_universal_constants": 0,
+    "per_object_gravity_parameters": 0,
+    "sealed_target_outcomes_opened": false
+  },
+  "outputs": {
+    "directory": "results/p0659_tensor_aqual_solver"
+  },
+  "claim_boundary": [
+    "P0659 tests mathematical structure and numerical machinery only; it cannot establish galaxy or lensing accuracy.",
+    "The projected graph is a two-dimensional variational discretization of the tensor equation; a three-dimensional and covariant completion remains required.",
+    "The Solar quantity is a constitutive anisotropy proxy, not a derived PPN gamma or Mercury prediction.",
+    "The 10 kpc coherence length is inherited from P0643 and remains phenomenological even though no new constant is added here.",
+    "No P0633 galaxy velocity, P0640 lens constraint, or spent lens residual may be used in solver development or selection."
+  ]
+}
