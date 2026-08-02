@@ -1,0 +1,133 @@
+{
+  "report_version": "P0687-SYSTEM-PATH-COORDINATE-QUMOND-1.0.0",
+  "status": "pass",
+  "candidate_advanced_to_new_3D_topology_freeze": false,
+  "protocol": {
+    "path": "configs/p0687_system_path_coordinate_qumond.json",
+    "sha256": "f4e95697126ea2022d23e3c3c13f9e13c6c88a76ac349614162ed04ee9b302f8"
+  },
+  "input_hashes": {
+    "failure_parent": "6ec0f1adefac357fea31a2ad8eed6078765100b8f80a46508578dc42b298700d",
+    "radial_comparator_report": "e191a2cb3f08abb43147e1ef362b880851609dea9372ff9e72546f5dff61ff3a",
+    "galaxies": "9c12c6f9cae76c3345f4e3a54a12c86521d13e42eec01dd3c2f05a13ded3a291",
+    "baryonic_profiles": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+    "target_profiles": "6c19f24eac2e97eaaa3eab4d666a2cbbcec8f99e824a7279ec4a8b0883be98f9"
+  },
+  "integrity_audit": {
+    "galaxy_systems": 131,
+    "galaxy_points": 968,
+    "cluster_systems": 6,
+    "primary_cluster_systems": 5,
+    "reliable_cluster_systems": 3,
+    "formula_variants": 3,
+    "system_path_coordinate_uses_only_baryonic_profiles": true,
+    "all_predictions_finite_and_positive": true,
+    "gravity_parameters_fit_per_object": 0,
+    "new_raw_image_root_score_computed": false,
+    "full_3D_field_solve_computed": false,
+    "sealed_target_outcomes_opened": false,
+    "all_gates_pass": true
+  },
+  "fixed_RAR_comparators": {
+    "galaxy_equal_RMSE_km_s": 10.925025796849075,
+    "cluster_all5_log_RMS_dex": 0.5829825756582082
+  },
+  "variant_scores": [
+    {
+      "variant": "global_system_primary",
+      "galaxy_equal_RMSE_km_s": 11.243651223417022,
+      "cluster_all5_log_RMS_dex": 0.23362991974343442,
+      "cluster_reliable3_log_RMS_dex": 0.2013625849141511,
+      "cluster_all6_stress_log_RMS_dex": 0.21609318385340598,
+      "all_cluster_exponent_profiles_nonincreasing": true,
+      "solar_solar_limb_fractional_force_change": 0.0,
+      "solar_Mercury_fractional_force_change": 0.0,
+      "solar_Earth_fractional_force_change": 0.0,
+      "solar_Saturn_fractional_force_change": 0.0,
+      "galaxy_ratio_to_fixed_RAR": 1.0291647299047881,
+      "all5_gap_fraction_closed_from_fixed_RAR": 0.5992505959896695,
+      "galaxy_gate_pass": true,
+      "all5_cluster_gate_pass": false,
+      "reliable3_cluster_gate_pass": false,
+      "gap_closed_gate_pass": false,
+      "solar_gate_pass": true
+    },
+    {
+      "variant": "local_P0685_control",
+      "galaxy_equal_RMSE_km_s": 11.252618773273852,
+      "cluster_all5_log_RMS_dex": 0.14522876354958342,
+      "cluster_reliable3_log_RMS_dex": 0.16471684761988434,
+      "cluster_all6_stress_log_RMS_dex": 0.16648102046002597,
+      "all_cluster_exponent_profiles_nonincreasing": false,
+      "solar_solar_limb_fractional_force_change": 0.0,
+      "solar_Mercury_fractional_force_change": 0.0,
+      "solar_Earth_fractional_force_change": 0.0,
+      "solar_Saturn_fractional_force_change": 0.0,
+      "galaxy_ratio_to_fixed_RAR": 1.0299855563287785,
+      "all5_gap_fraction_closed_from_fixed_RAR": 0.7508866137455052,
+      "galaxy_gate_pass": true,
+      "all5_cluster_gate_pass": true,
+      "reliable3_cluster_gate_pass": true,
+      "gap_closed_gate_pass": true,
+      "solar_gate_pass": true
+    },
+    {
+      "variant": "capped_local_diagnostic",
+      "galaxy_equal_RMSE_km_s": 11.252655681968646,
+      "cluster_all5_log_RMS_dex": 0.15355758791052643,
+      "cluster_reliable3_log_RMS_dex": 0.17706604103936077,
+      "cluster_all6_stress_log_RMS_dex": 0.1730028654542774,
+      "all_cluster_exponent_profiles_nonincreasing": false,
+      "solar_solar_limb_fractional_force_change": 0.0,
+      "solar_Mercury_fractional_force_change": 0.0,
+      "solar_Earth_fractional_force_change": 0.0,
+      "solar_Saturn_fractional_force_change": 0.0,
+      "galaxy_ratio_to_fixed_RAR": 1.0299889346910343,
+      "all5_gap_fraction_closed_from_fixed_RAR": 0.7366000386252464,
+      "galaxy_gate_pass": true,
+      "all5_cluster_gate_pass": true,
+      "reliable3_cluster_gate_pass": true,
+      "gap_closed_gate_pass": false,
+      "solar_gate_pass": true
+    }
+  ],
+  "primary_advancement_gates": {
+    "primary_variant_fixed": true,
+    "galaxy_gate_pass": true,
+    "all5_cluster_gate_pass": false,
+    "reliable3_cluster_gate_pass": false,
+    "gap_closed_gate_pass": false,
+    "solar_gate_pass": true,
+    "cluster_exponent_profiles_nonincreasing": true,
+    "system_coordinate_baryon_only": true,
+    "no_per_object_fitted_gravity_parameters": true,
+    "no_raw_image_root_score": true,
+    "sealed_targets_untouched": true,
+    "all_gates_pass": false
+  },
+  "system_coordinate_summary": {
+    "galaxy_median": 1.170201032988158,
+    "galaxy_min": 0.8801849713411963,
+    "galaxy_max": 1.8536413452382277,
+    "clusters": {
+      "MACS0329": 3.604168317444285,
+      "MACS0429": 4.256216914411909,
+      "MACS1115": 2.353515001587253,
+      "MACS1931": 3.1750202756998864,
+      "RXJ1347": 3.0135459802706195,
+      "RXJ2129": 2.992577336421091
+    }
+  },
+  "selection": {
+    "advance": false,
+    "next_action_if_pass": "Freeze the exact global-system operator in registered 3D QUMOND and repeat the spent RXJ2129 topology audit without retuning.",
+    "next_action_if_fail": "Retain the topology-derived nonhollow constraint, diagnose the frozen variants, and do not promote a diagnostic row or open sealed outcomes."
+  },
+  "claim_boundary": [
+    "P0687 is generated from a fully spent RX J2129 topology failure and cannot validate the replacement.",
+    "eta_sys is nonlocal but derived only from the baryonic field; its covariant meaning is not established.",
+    "The spent galaxy estimate uses the available scored baryonic profile rather than a new full-disk 3D solve.",
+    "A radial pass is only permission to freeze a new registered 3D topology test, not evidence that topology will pass.",
+    "No sealed P0633 or P0640 outcome may be opened."
+  ]
+}

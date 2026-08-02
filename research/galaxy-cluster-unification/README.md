@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0686-locked-path-topology`](latest-findings/2026-08-02-p0686-locked-path-topology/README.md).
-It records the first registered 3D solve and raw-topology verdict for the
-path-diluted QUMOND generator. The prior P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0687-system-path-coordinate`](latest-findings/2026-08-02-p0687-system-path-coordinate/README.md).
+It tests the first topology-driven repair after the registered 3D failure. The
+prior P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0686-locked-path-topology`](latest-findings/2026-08-02-p0686-locked-path-topology/README.md),
 [`latest-findings/2026-08-02-p0684-path-diluted-qumond`](latest-findings/2026-08-02-p0684-path-diluted-qumond/README.md),
 [`latest-findings/2026-08-02-p0683-potential-channel-qumond`](latest-findings/2026-08-02-p0683-potential-channel-qumond/README.md),
 [`latest-findings/2026-08-02-p0682-spent-deflection-atlas`](latest-findings/2026-08-02-p0682-spent-deflection-atlas/README.md)
@@ -90,6 +91,16 @@ rises from `1.28` inside 15 kpc to `2.71` at 150-225 kpc. The next generator
 uses one baryon-derived system path coordinate rather than this singular local
 coordinate. See
 [`docs/P0685_P0686_LOCKED_PATH_QUMOND_RESULTS.md`](docs/P0685_P0686_LOCKED_PATH_QUMOND_RESULTS.md).
+
+P0687 replaces the centrally singular local ratio with one scale-free
+baryonic system coordinate, `eta_sys=max|Phi_b|/max(r g_b)`. This guarantees
+that the fixed primary exponent decreases outward and leaves galaxy accuracy
+at `1.029x` fixed RAR. It does not preserve the full cluster result: the
+all-five/reliable-three scores are `0.234/0.201 dex` and it closes only 59.9%
+of the fixed-RAR gap. A capped-local diagnostic retains `0.154/0.177 dex` but
+also retains the forbidden outward-rising exponent. No form advances. The next
+generator is a parameter-free inward monotone envelope of the local exponent.
+See [`docs/P0687_SYSTEM_PATH_COORDINATE_QUMOND_RESULTS.md`](docs/P0687_SYSTEM_PATH_COORDINATE_QUMOND_RESULTS.md).
 
 ## Untouched external validation (P0633)
 
