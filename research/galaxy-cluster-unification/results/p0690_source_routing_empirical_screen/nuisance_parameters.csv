@@ -1,0 +1,5 @@
+model,parameter,value,lower,upper
+source_routing_P0690,map_center_x_arcsec,-2.9999999999999996,-3.0,3.0
+source_routing_P0690,map_center_y_arcsec,-2.9999999999999996,-3.0,3.0
+source_routing_P0690,external_shear_gamma1_at_reference_source,0.10159861546956618,-0.25,0.25
+source_routing_P0690,external_shear_gamma2_at_reference_source,0.23119801134158288,-0.25,0.25

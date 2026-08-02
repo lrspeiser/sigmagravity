@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0689-source-routing-audit`](latest-findings/2026-08-02-p0689-source-routing-audit/README.md).
-It starts a source-placement branch after the local-path exponent family is
-retired. The prior P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0690-full-routing-screen`](latest-findings/2026-08-02-p0690-full-routing-screen/README.md).
+It rejects full source relocation and generates the first multipole-controlled
+routing law. The prior P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0689-source-routing-audit`](latest-findings/2026-08-02-p0689-source-routing-audit/README.md),
 [`latest-findings/2026-08-02-p0688-monotone-envelope`](latest-findings/2026-08-02-p0688-monotone-envelope/README.md),
 [`latest-findings/2026-08-02-p0687-system-path-coordinate`](latest-findings/2026-08-02-p0687-system-path-coordinate/README.md),
 [`latest-findings/2026-08-02-p0686-locked-path-topology`](latest-findings/2026-08-02-p0686-locked-path-topology/README.md),
@@ -125,6 +126,16 @@ and 78.1% of shell weight inside the boundary. No photon, radial, root, or
 sealed score was computed. The next step is a separately frozen empirical
 screen. See
 [`docs/P0689_SOURCE_CONSERVING_BARYONIC_ROUTING_AUDIT.md`](docs/P0689_SOURCE_CONSERVING_BARYONIC_ROUTING_AUDIT.md).
+
+P0690 rejects routing the entire positive generator: cluster radial error
+becomes `0.871/1.089 dex`, median physical deflection reaches `23.81 arcsec`,
+and only `14/15` training plus `4/7` heldout roots converge. But all seven
+families now recover both parities and critical curves, versus five parity-
+diverse families for P0686. Source placement is affecting the correct
+observable. The next generator uses the normalized baryonic quadrupole,
+`q_b=0.11886` on RX J2129, to mix local and routed sources with exact spherical
+and line-like limits rather than a fitted routing fraction. See
+[`docs/P0690_SOURCE_ROUTING_EMPIRICAL_SCREEN_RESULTS.md`](docs/P0690_SOURCE_ROUTING_EMPIRICAL_SCREEN_RESULTS.md).
 
 ## Untouched external validation (P0633)
 

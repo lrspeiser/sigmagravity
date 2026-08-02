@@ -1,0 +1,105 @@
+{
+  "report_version": "P0690-SOURCE-ROUTING-EMPIRICAL-SCREEN-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_real_2D_and_robustness": false,
+  "protocol_sha256": "33c9516d0456585e256dfb0d02a8ed47ec16ba1ae2d1d1b5c698e4e0daa95120",
+  "source_sha256": "c1a0d0866ad7d49300ffd236bf7d265828c28479830f83b04e409f7ec85cc84b",
+  "spherical_operator_sha256": "6339a7392cfd33b17e9842b689b7e0e6e60a169e39b06ea5159ee83b67950113",
+  "field_sha256": "e01abf69f770f137d095729b92234eb3e0b687d58b158e5e17499505c06df1a2",
+  "deflection_sha256": "6c92faf7c380f50b0493bc7cb07bf131e66d773e7aaf144faf29dd409f4c20f1",
+  "coverage": {
+    "galaxy_systems": 131,
+    "galaxy_points": 968,
+    "cluster_systems": 6,
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "source_families": 7,
+    "gravity_parameters": 0,
+    "photon_amplitudes": 0
+  },
+  "galaxy": {
+    "local_generator_fractional_acceleration_max": 0.12653344278509238,
+    "equal_RMSE_km_s": 10.925025796849075,
+    "fixed_RAR_equal_RMSE_km_s": 10.925025796849075,
+    "RMSE_ratio_to_fixed_RAR": 1.0
+  },
+  "clusters": {
+    "all5_log_RMS_dex": 0.8707881497271752,
+    "reliable3_log_RMS_dex": 1.089201866092908,
+    "all6_stress_log_RMS_dex": 1.0432477585377582,
+    "fixed_RAR_all5_log_RMS_dex": 0.5829825756582082,
+    "all5_gap_fraction_closed": -0.4936778320415909,
+    "maximum_net_added_flux_fraction": 1.3508976685722461e-15
+  },
+  "field": {
+    "strong_lens_median_physical_deflection_arcsec": 23.806094322371564,
+    "normalized_deflection_curl_RMS": 3.8088934270519685e-16
+  },
+  "fit_score": {
+    "model": "source_routing_P0690",
+    "training_RMS_arcsec": null,
+    "training_roots_converged": 14,
+    "heldout_RMS_arcsec": null,
+    "heldout_roots_converged": 4,
+    "optimizer_cost": 2044.736583338026,
+    "nuisance_parameters_near_bound": 2
+  },
+  "comparisons": {
+    "compact_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "candidate_to_compact_halo_heldout_RMS_ratio": null
+  },
+  "topology": {
+    "families": 7,
+    "missing_multiplicity_families": 1,
+    "exact_multiplicity_families": 4,
+    "demagnified_only_surplus_families": 0,
+    "potentially_observable_surplus_families": 2,
+    "exact_or_demagnified_only_families": 4,
+    "parity_diverse_families": 7,
+    "critical_curve_present_families": 7,
+    "total_global_roots": 25,
+    "total_observed_images": 22
+  },
+  "gate_results": {
+    "P0689_parent": true,
+    "galaxy_coverage": true,
+    "cluster_coverage": true,
+    "raw_coverage": true,
+    "galaxy_shallow_bound": false,
+    "galaxy_RAR_competitive": true,
+    "cluster_all5": false,
+    "cluster_reliable3": false,
+    "cluster_gap_closed": false,
+    "solar_limb": true,
+    "solar_Earth": true,
+    "solar_Saturn": true,
+    "field_finite": true,
+    "field_deflection_present": true,
+    "field_curl": true,
+    "training_roots": false,
+    "heldout_roots": false,
+    "training_RMS": false,
+    "heldout_RMS": false,
+    "compact_halo_comparison": false,
+    "no_missing_multiplicity": false,
+    "observable_surplus": true,
+    "acceptable_multiplicity": false,
+    "parity_diversity": true,
+    "critical_curves": true,
+    "nuisance_bounds": false,
+    "no_new_constants": true,
+    "no_fitted_gravity": true,
+    "no_fitted_photon_amplitude": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "All P0690 systems are spent development data; a pass is not external validation.",
+    "The 131-galaxy score uses a quantitatively bounded shallow-potential reduction and must be replaced by real 2D field solves before sealed validation.",
+    "The spherical cluster transfer cannot establish two-dimensional topology; the raw RX J2129 stage is conjunctive for that reason.",
+    "The zero-slip photon closure is diagnostic and not a covariant metric theory.",
+    "P0633 and P0640 remain sealed regardless of a partial stage pass."
+  ]
+}
