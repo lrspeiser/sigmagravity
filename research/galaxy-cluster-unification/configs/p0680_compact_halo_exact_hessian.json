@@ -1,0 +1,53 @@
+{
+  "protocol_version": "P0680-COMPACT-HALO-EXACT-HESSIAN-1.0.0",
+  "status": "frozen_before_any_P0680_hessian_metric",
+  "frozen_utc": "2026-08-02T09:10:00Z",
+  "purpose": "Replace P0678's failed sampled-image derivative with the exact NIE Hessian requested from the comparator implementation and compare it to P0679's converged 0.01-arcsec direct derivative.",
+  "failure_parent": "results/p0679_compact_halo_derivative_convergence/report.json",
+  "decomposition_parent": "results/p0678_spent_rxj2129_required_field_decomposition/report.json",
+  "parameter_table": "results/rxj2129_raw_theory_lensing/fitted_parameters.csv",
+  "raw_lensing_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+  "parameter_selection": {
+    "stage": "training",
+    "model": "GR_plus_cluster_halo"
+  },
+  "evaluation_points": {
+    "grid_cells": 33,
+    "axis_minimum_kpc": -224.49921423385908,
+    "axis_maximum_kpc": 224.49921423385908,
+    "strong_lens_radius_kpc": [15.8, 76.5],
+    "expected_points": 92
+  },
+  "hessian": {
+    "method": "LensModel.hessian with diff=None, requesting exact derivatives when implemented",
+    "comparison_direct_central_difference_step_arcsec": 0.01,
+    "convergence": "0.5(f_xx+f_yy)",
+    "curl": "f_yx-f_xy",
+    "jacobian_determinant": "(1-f_xx)(1-f_yy)-f_xy*f_yx"
+  },
+  "predeclared_integrity_gates": {
+    "P0679_status": "fail",
+    "P0679_failed_gate_exactly": "direct_threshold_count",
+    "P0679_smallest_direct_step_normalized_curl_RMS_max": 2e-7,
+    "P0678_status": "fail",
+    "P0678_failed_gate_exactly": "halo_curl",
+    "evaluation_points": 92,
+    "exact_hessian_all_finite": true,
+    "exact_hessian_normalized_curl_RMS_max": 1e-12,
+    "exact_vs_direct_0p01_kappa_relative_RMS_difference_max": 1e-5,
+    "exact_vs_direct_0p01_jacobian_determinant_relative_RMS_difference_max": 1e-5,
+    "new_candidate_formula_fit": false,
+    "new_raw_image_root_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Qualify the P0678 spent required-field decomposition only if every exact-Hessian symmetry, direct-agreement, provenance, and no-score gate passes. Preserve P0678/P0679 as historical failures rather than rewriting their reports.",
+  "outputs": {
+    "directory": "results/p0680_compact_halo_exact_hessian",
+    "point_table": "exact_hessian_points.csv"
+  },
+  "claim_boundary": [
+    "P0680 qualifies numerical derivatives only; it does not validate the compact halo or a new gravity law.",
+    "The exact Hessian is evaluated on spent comparator parameters and cannot serve as a predictive input.",
+    "No raw root, candidate score, or sealed target is evaluated."
+  ]
+}
