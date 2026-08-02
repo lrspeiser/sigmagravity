@@ -1,0 +1,89 @@
+{
+  "protocol_version": "P0678-SPENT-RXJ2129-REQUIRED-FIELD-DECOMPOSITION-1.0.0",
+  "status": "frozen_before_any_P0678_required_field_metric",
+  "frozen_utc": "2026-08-02T08:00:00Z",
+  "purpose": "Diagnose the missing absolute field after P0675-P0677 by decomposing the already spent training-only compact-halo comparator relative to the P0674 baryonic scalar field on one grid, without fitting a new gravity law or scoring image roots.",
+  "failure_parent": "results/p0677_spent_rxj2129_dual_transverse_survival_field/report.json",
+  "raw_failure_reference": "results/p0675_spent_rxj2129_compound_raw_topology/report.json",
+  "absolute_field_input": "results/p0674_spent_rxj2129_compound_3d_field_solve/rxj2129_absolute_scalar_compound_fields.npz",
+  "baryon_cube_input": "results/p0670_spent_rxj2129_absolute_3d_map_build/rxj2129_absolute_baryons_3d.npz",
+  "compact_halo_parameter_table": "results/rxj2129_raw_theory_lensing/fitted_parameters.csv",
+  "compact_halo_report": "results/rxj2129_raw_theory_lensing/report.json",
+  "raw_lensing_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+  "compact_halo_selection": {
+    "stage": "training",
+    "model": "GR_plus_cluster_halo",
+    "parameters": [
+      "theta_E_ref_arcsec",
+      "axis_ratio_q",
+      "position_angle_phi_radian",
+      "log10_core_arcsec",
+      "center_x_arcsec",
+      "center_y_arcsec",
+      "external_shear_gamma1",
+      "external_shear_gamma2"
+    ],
+    "heldout_images_used_to_select_parameters": false,
+    "interpretation": "the NIE plus external shear is a successful spent comparator field, not a dark-matter truth map"
+  },
+  "common_grid": {
+    "source": "P0674 33x33 physical deflection grid",
+    "angular_scale_source": "raw_lensing_protocol.cosmology_and_coordinates.angular_scale_kpc_per_arcsec",
+    "reference_source_redshift": 2.0,
+    "strong_lens_radius_kpc": [15.8, 76.5]
+  },
+  "decomposition": {
+    "primary_center": "fixed baryonic map center (0,0)",
+    "sensitivity_center": "training-fit compact-halo center",
+    "radial_bins": 8,
+    "monopole": "within-bin mean radial deflection times the local radial unit vector",
+    "angular_residual": "compact-halo deflection minus the reconstructed monopole",
+    "harmonics": [1, 2, 3, 4],
+    "convergence": "kappa=0.5(d alpha_x/dx+d alpha_y/dy) on the reference-source reduced field",
+    "criticality": "sign-changing cells of det[I-d alpha/d theta] for scalar, scalar+halo, and scalar+halo+shear"
+  },
+  "baryonic_predictors": [
+    "stellar_surface_density",
+    "gas_surface_density",
+    "total_surface_density",
+    "gas_fraction",
+    "compound_sigma_LOS_mass_weighted",
+    "Newtonian_acceleration_LOS_mass_weighted",
+    "tidal_trace_length_LOS_mass_weighted",
+    "component_mismatch_LOS_mass_weighted",
+    "absolute_scalar_deflection_magnitude"
+  ],
+  "predeclared_integrity_gates": {
+    "P0677_status": "fail",
+    "P0675_compound_missing_multiplicity_families": 7,
+    "P0675_compound_critical_curve_present_families": 0,
+    "compact_halo_training_parameter_rows": 8,
+    "compact_halo_parameter_stage": "training",
+    "compact_halo_parameter_model": "GR_plus_cluster_halo",
+    "common_grid_cells_per_axis": 33,
+    "all_fields_and_decompositions_finite": true,
+    "halo_monopole_plus_angular_reconstruction_relative_RMS_max": 1e-12,
+    "compact_halo_normalized_curl_RMS_max": 1e-5,
+    "external_shear_normalized_divergence_and_curl_RMS_max": 1e-8,
+    "radial_bins_with_samples": 8,
+    "minimum_baryonic_predictors_reported": 9,
+    "new_candidate_formula_fit": false,
+    "new_raw_image_root_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "P0678 is diagnostic and does not advance a formula. It must preserve every integrity gate and report the required field even if baryonic correlations are weak. A later candidate may use only relationships computed from baryons; target-derived compact-halo quantities cannot appear as its inputs.",
+  "outputs": {
+    "directory": "results/p0678_spent_rxj2129_required_field_decomposition",
+    "common_field": "rxj2129_required_field_decomposition.npz",
+    "radial_profile": "radial_required_field.csv",
+    "predictor_correlations": "baryonic_predictor_correlations.csv",
+    "harmonics": "angular_harmonics.csv"
+  },
+  "claim_boundary": [
+    "RX J2129 and its compact-halo fit are fully spent development data; P0678 cannot validate a new law.",
+    "The compact halo is a low-parameter successful comparator, not a unique reconstruction of dark matter or the true lens potential.",
+    "Combining the P0674 scalar map with a halo fitted beside a different baryonic radial profile is a missing-field diagnostic, not a refitted lens model.",
+    "Finite-difference convergence and criticality on a 33-cell grid are approximate and cannot replace raw topology or resolution convergence.",
+    "P0633 galaxy kinematics and P0640 additional-cluster lens outcomes remain sealed."
+  ]
+}
