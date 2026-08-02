@@ -1,6 +1,6 @@
 # P0691 multipole-gated source-routing topology
 
-Frozen before scores: 2026-08-02  
+Frozen before scores: 2026-08-02
 Verdict: numerical field **passes**; the uniquely calculated global shape gate **fails raw topology**
 
 ## Tested operator
