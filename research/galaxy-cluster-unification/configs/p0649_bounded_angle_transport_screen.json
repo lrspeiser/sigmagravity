@@ -1,0 +1,69 @@
+{
+  "protocol_version": "P0649-BOUNDED-ANGLE-TRANSPORT-SCREEN-1.0.0",
+  "status": "frozen_before_any_P0649_score",
+  "frozen_utc": "2026-08-02T04:45:00Z",
+  "purpose": "Test whether a bounded first-order component-angle invariant supplies the response magnitude that P0647 could obtain only from an unbounded fitted multiplier.",
+  "fixed_field": {
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "survival": "1-exp(-ell/10 kpc)",
+    "screen": "a0/(a0+gbar)",
+    "primary_mode": "linear_chord_mix",
+    "modes": [
+      {
+        "id": "quadratic_cancellation",
+        "role": "legacy_control",
+        "definition": "1-|g_star+g_gas|/(|g_star|+|g_gas|)"
+      },
+      {
+        "id": "linear_chord_mix",
+        "role": "frozen_primary",
+        "definition": "[2 sqrt(gs gg)/(gs+gg)] sin(theta/2)"
+      },
+      {
+        "id": "oriented_cross_mix",
+        "role": "bounded_sensitivity_only",
+        "definition": "[2 gs gg/(gs+gg)^2] |sin(theta)|"
+      }
+    ],
+    "unbounded_amplitude_parameter": false,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "map_inputs": {
+    "galaxies": "results/p0639_registered_baryonic_maps/maps",
+    "clusters": "results/p0641_registered_cluster_baryon_maps/maps",
+    "cluster_downsample_cells": 257,
+    "galaxy_stellar_scale_sensitivity": [0.5, 1.0, 2.0],
+    "cluster_sensitivity_maps": {
+      "low": ["stellar_surface_density_low_msun_kpc2", "gas_surface_density_low_msun_kpc2"],
+      "nominal": ["stellar_surface_density_msun_kpc2", "gas_surface_density_msun_kpc2"],
+      "high": ["stellar_surface_density_high_msun_kpc2", "gas_surface_density_high_msun_kpc2"]
+    },
+    "sealed_target_outcomes_opened": false
+  },
+  "predeclared_primary_gates": {
+    "radial_cocentered_activation_max": 1e-8,
+    "large_offset_over_small_offset_activation_ratio_min": 4.0,
+    "registered_cluster_to_galaxy_median_activation_ratio_min": 4.0,
+    "registered_galaxy_median_activation_max": 0.10,
+    "registered_cluster_median_activation_min": 0.05,
+    "cluster_ratio_above_one_in_all_mass_sensitivities": true,
+    "activation_min": 0.0,
+    "activation_max": 1.0,
+    "solar_one_component_activation_max": 1e-15,
+    "rotation_covariance_relative_error_max": 0.03,
+    "translation_covariance_relative_error_max": 0.03,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Only linear_chord_mix may advance. The other modes diagnose scaling and may not replace a failed primary after scores are seen.",
+  "outputs": {
+    "directory": "results/p0649_bounded_angle_transport_screen"
+  },
+  "claim_boundary": [
+    "Only baryonic maps and synthetic fields are scored; no velocity or image-position outcome is opened.",
+    "The chord invariant removes lambda but retains the previously frozen a0 and 10 kpc coherence length.",
+    "A passing map screen authorizes an amplitude-one spent-lens test, not blind validation.",
+    "The projected equation is not yet a four-dimensional covariant metric theory."
+  ]
+}

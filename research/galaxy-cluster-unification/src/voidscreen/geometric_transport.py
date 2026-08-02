@@ -129,6 +129,60 @@ def component_cancellation(
     return np.clip(result, 0.0, 1.0)
 
 
+def component_angle_mismatch(
+    first: ThinSheetField,
+    second: ThinSheetField,
+    *,
+    mode: str = "quadratic_cancellation",
+    relative_floor: float = 1e-12,
+) -> np.ndarray:
+    """Return a bounded disagreement measure for two component vectors.
+
+    ``linear_chord_mix`` is first order in the angle near alignment and is
+    weighted to vanish when either component disappears. ``oriented_cross_mix``
+    uses the normalized cross-product magnitude. The legacy cancellation is
+    retained as the quadratic control.
+    """
+
+    mode_id = str(mode)
+    if mode_id == "quadratic_cancellation":
+        return component_cancellation(first, second, relative_floor=relative_floor)
+    first_magnitude = np.asarray(first.magnitude_m_s2, dtype=np.float64)
+    second_magnitude = np.asarray(second.magnitude_m_s2, dtype=np.float64)
+    if first_magnitude.shape != second_magnitude.shape:
+        raise ValueError("component fields must have the same shape")
+    denominator = first_magnitude + second_magnitude
+    floor = float(np.max(denominator)) * float(relative_floor)
+    active = (denominator > floor) & (first_magnitude > floor) & (second_magnitude > floor)
+    dot = np.zeros_like(denominator)
+    dot[active] = (
+        first.acceleration_x_m_s2[active] * second.acceleration_x_m_s2[active]
+        + first.acceleration_y_m_s2[active] * second.acceleration_y_m_s2[active]
+    ) / (first_magnitude[active] * second_magnitude[active])
+    dot = np.clip(dot, -1.0, 1.0)
+    result = np.zeros_like(denominator)
+    if mode_id == "linear_chord_mix":
+        mixing = np.zeros_like(denominator)
+        mixing[active] = (
+            2.0
+            * np.sqrt(first_magnitude[active] * second_magnitude[active])
+            / denominator[active]
+        )
+        result[active] = mixing[active] * np.sqrt(0.5 * (1.0 - dot[active]))
+    elif mode_id == "oriented_cross_mix":
+        mixing = np.zeros_like(denominator)
+        mixing[active] = (
+            2.0
+            * first_magnitude[active]
+            * second_magnitude[active]
+            / np.square(denominator[active])
+        )
+        result[active] = mixing[active] * np.sqrt(np.maximum(1.0 - dot[active] ** 2, 0.0))
+    else:
+        raise ValueError(f"unknown component angle mismatch mode: {mode_id}")
+    return np.clip(result, 0.0, 1.0)
+
+
 def _tidal_trace_length_pixels(
     field: ThinSheetField,
     cell_kpc: float,

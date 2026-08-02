@@ -1,0 +1,257 @@
+{
+  "report_version": "P0649-BOUNDED-ANGLE-TRANSPORT-SCREEN-RESULTS-1.0.0",
+  "status": "pass",
+  "all_primary_gates_pass": true,
+  "candidate_advanced": true,
+  "protocol_sha256": "bb8fca5b36c30e1c08959108960a6e648f16083c2b914b8a3a3766d5bf167b29",
+  "source_sha256": "f3f5e757998560e52c3db0aee115f59c3cb65a16f073bd24fb25218c6ee8480e",
+  "primary_mode": "linear_chord_mix",
+  "gate_results": {
+    "radial_null": true,
+    "physical_path_accumulation": true,
+    "registered_domain_separation": true,
+    "galaxy_channel_bounded": true,
+    "cluster_channel_present": true,
+    "mass_sensitivity_sign_stable": true,
+    "activation_bounds": true,
+    "solar_one_component_null": true,
+    "rotation_covariance": true,
+    "translation_covariance": true,
+    "sealed_targets_untouched": true
+  },
+  "primary_metrics": {
+    "radial_activation": 1.7251420891344458e-09,
+    "small_offset_activation": 0.004495782190481657,
+    "large_offset_activation": 0.16110032430356777,
+    "large_over_small_ratio": 35.833658633339674,
+    "registered_galaxy_median_activation": 0.010839019492230147,
+    "registered_cluster_median_activation": 0.08549613946136884,
+    "registered_cluster_to_galaxy_ratio": 7.887811210474894,
+    "mass_sensitivity_cluster_to_galaxy_ratios": {
+      "low": 9.424396729937637,
+      "nominal": 7.887811210474894,
+      "high": 7.301308193829701
+    },
+    "activation_global_minimum": 2.6918399388420036e-09,
+    "activation_global_maximum": 0.9929135034828327,
+    "solar_one_component_activation": 0.0,
+    "rotation_covariance_relative_error": 4.440892098500626e-16,
+    "translation_covariance_relative_error": 4.2167314084906593e-10
+  },
+  "mode_domain_summary": [
+    {
+      "mode": "linear_chord_mix",
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "high",
+      "systems": 4,
+      "median_activation": 0.08488755919658345,
+      "minimum_activation": 0.05142129498866237,
+      "maximum_activation": 0.1621923554420996,
+      "median_mismatch": 0.17453632521764095,
+      "median_trace_length_kpc": 168.02364323119468
+    },
+    {
+      "mode": "linear_chord_mix",
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "low",
+      "systems": 4,
+      "median_activation": 0.08268560328420793,
+      "minimum_activation": 0.04458986006629337,
+      "maximum_activation": 0.15841490163866703,
+      "median_mismatch": 0.14328748515953474,
+      "median_trace_length_kpc": 191.49057053241842
+    },
+    {
+      "mode": "linear_chord_mix",
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "nominal",
+      "systems": 4,
+      "median_activation": 0.08549613946136884,
+      "minimum_activation": 0.04936401539380615,
+      "maximum_activation": 0.16401604472258194,
+      "median_mismatch": 0.1623978762724168,
+      "median_trace_length_kpc": 176.91366515467993
+    },
+    {
+      "mode": "linear_chord_mix",
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "high",
+      "systems": 13,
+      "median_activation": 0.011626349270987012,
+      "minimum_activation": 0.0029901624193595885,
+      "maximum_activation": 0.024895142623818305,
+      "median_mismatch": 0.15317539980609857,
+      "median_trace_length_kpc": 1.0863297631071207
+    },
+    {
+      "mode": "linear_chord_mix",
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "low",
+      "systems": 13,
+      "median_activation": 0.008773569879708903,
+      "minimum_activation": 0.003864384175336022,
+      "maximum_activation": 0.019190759278877534,
+      "median_mismatch": 0.11647087236223147,
+      "median_trace_length_kpc": 1.0834197284028844
+    },
+    {
+      "mode": "linear_chord_mix",
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "nominal",
+      "systems": 13,
+      "median_activation": 0.010839019492230147,
+      "minimum_activation": 0.004202826967124677,
+      "maximum_activation": 0.02293781466220006,
+      "median_mismatch": 0.1441984071531714,
+      "median_trace_length_kpc": 1.0835040251608592
+    },
+    {
+      "mode": "oriented_cross_mix",
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "high",
+      "systems": 4,
+      "median_activation": 0.03619964641475375,
+      "minimum_activation": 0.014797984704138269,
+      "maximum_activation": 0.06972013941104664,
+      "median_mismatch": 0.06901465745488423,
+      "median_trace_length_kpc": 168.02364323119468
+    },
+    {
+      "mode": "oriented_cross_mix",
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "low",
+      "systems": 4,
+      "median_activation": 0.03107068623227098,
+      "minimum_activation": 0.010258813295385333,
+      "maximum_activation": 0.058805166073480346,
+      "median_mismatch": 0.05069121276166276,
+      "median_trace_length_kpc": 191.49057053241842
+    },
+    {
+      "mode": "oriented_cross_mix",
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "nominal",
+      "systems": 4,
+      "median_activation": 0.034889041663610725,
+      "minimum_activation": 0.0130826052204626,
+      "maximum_activation": 0.06682290986098449,
+      "median_mismatch": 0.06187073239905649,
+      "median_trace_length_kpc": 176.91366515467993
+    },
+    {
+      "mode": "oriented_cross_mix",
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "high",
+      "systems": 13,
+      "median_activation": 0.009137507768033761,
+      "minimum_activation": 0.0014502080886579273,
+      "maximum_activation": 0.020554830359711146,
+      "median_mismatch": 0.12354370229751246,
+      "median_trace_length_kpc": 1.0863297631071207
+    },
+    {
+      "mode": "oriented_cross_mix",
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "low",
+      "systems": 13,
+      "median_activation": 0.006357134288087532,
+      "minimum_activation": 0.0018857503026510768,
+      "maximum_activation": 0.012371753016839732,
+      "median_mismatch": 0.0785661785783103,
+      "median_trace_length_kpc": 1.0834197284028844
+    },
+    {
+      "mode": "oriented_cross_mix",
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "nominal",
+      "systems": 13,
+      "median_activation": 0.008693448980533529,
+      "minimum_activation": 0.0026780772745333206,
+      "maximum_activation": 0.01783801459237582,
+      "median_mismatch": 0.0975311324799316,
+      "median_trace_length_kpc": 1.0835040251608592
+    },
+    {
+      "mode": "quadratic_cancellation",
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "high",
+      "systems": 4,
+      "median_activation": 0.021618484493640087,
+      "minimum_activation": 0.009357756375357702,
+      "maximum_activation": 0.047171416852087686,
+      "median_mismatch": 0.03985966889098601,
+      "median_trace_length_kpc": 168.02364323119468
+    },
+    {
+      "mode": "quadratic_cancellation",
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "low",
+      "systems": 4,
+      "median_activation": 0.01902316226110344,
+      "minimum_activation": 0.006517159754694462,
+      "maximum_activation": 0.040350771894505894,
+      "median_mismatch": 0.029914993225505143,
+      "median_trace_length_kpc": 191.49057053241842
+    },
+    {
+      "mode": "quadratic_cancellation",
+      "domain": "sealed_cluster_baryons_only",
+      "scenario": "nominal",
+      "systems": 4,
+      "median_activation": 0.021022386822975084,
+      "minimum_activation": 0.008257139882051491,
+      "maximum_activation": 0.04554622151670161,
+      "median_mismatch": 0.03566566700821727,
+      "median_trace_length_kpc": 176.91366515467993
+    },
+    {
+      "mode": "quadratic_cancellation",
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "high",
+      "systems": 13,
+      "median_activation": 0.0014461000763159588,
+      "minimum_activation": 0.0002804190873652129,
+      "maximum_activation": 0.004112225639172237,
+      "median_mismatch": 0.026396723685183233,
+      "median_trace_length_kpc": 1.0863297631071207
+    },
+    {
+      "mode": "quadratic_cancellation",
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "low",
+      "systems": 13,
+      "median_activation": 0.000999441572992834,
+      "minimum_activation": 0.0003086509497977299,
+      "maximum_activation": 0.0024322482071996747,
+      "median_mismatch": 0.018413021154107315,
+      "median_trace_length_kpc": 1.0834197284028844
+    },
+    {
+      "mode": "quadratic_cancellation",
+      "domain": "sealed_galaxy_baryons_only",
+      "scenario": "nominal",
+      "systems": 13,
+      "median_activation": 0.001126900727002061,
+      "minimum_activation": 0.00037398817618695425,
+      "maximum_activation": 0.003466353300135944,
+      "median_mismatch": 0.024691028383931994,
+      "median_trace_length_kpc": 1.0835040251608592
+    }
+  ],
+  "coverage": {
+    "registered_galaxies": 13,
+    "registered_clusters": 4,
+    "mismatch_modes": 3,
+    "mass_scenarios_per_system": 3,
+    "per_object_gravity_parameters": 0,
+    "unbounded_amplitude_parameters": 0
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "Only baryonic maps and synthetic fields are scored; no velocity or image-position outcome is opened.",
+    "The chord invariant removes lambda but retains the previously frozen a0 and 10 kpc coherence length.",
+    "A passing map screen authorizes an amplitude-one spent-lens test, not blind validation.",
+    "The projected equation is not yet a four-dimensional covariant metric theory."
+  ]
+}

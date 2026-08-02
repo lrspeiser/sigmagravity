@@ -8,6 +8,7 @@ import numpy as np
 from scipy import ndimage
 
 from voidscreen.geometric_transport import (
+    component_angle_mismatch,
     component_cancellation,
     high_acceleration_screen,
     streamline_incoherence,
@@ -64,6 +65,7 @@ def build_accumulated_transport_deflection_field(
     accumulation_power: float = 1.0,
     a0_m_s2: float = 1.2e-10,
     common_smoothing_kpc: float = 0.0,
+    mismatch_mode: str = "quadratic_cancellation",
     closure: str = "path_tensor",
     taper_inner_arcsec: float = 180.0,
     support_radius_arcsec: float = 220.0,
@@ -108,6 +110,7 @@ def build_accumulated_transport_deflection_field(
     total_field = thin_sheet_newtonian_field(stars + gas, cell_kpc)
     path = streamline_incoherence(total_field, cell_kpc)
     cancellation = component_cancellation(star_field, gas_field)
+    mismatch = component_angle_mismatch(star_field, gas_field, mode=mismatch_mode)
     survival = 1.0 - np.exp(
         -np.power(path.trace_length_kpc / float(coherence_length_kpc), accumulation_power)
     )
@@ -117,7 +120,7 @@ def build_accumulated_transport_deflection_field(
     gbar = np.asarray(radial_gbar_m_s2(radius_kpc), dtype=np.float64)
     if gbar.shape != radius_kpc.shape or np.any(gbar <= 0.0) or not np.all(np.isfinite(gbar)):
         raise ValueError("radial_gbar_m_s2 returned invalid values")
-    activation = cancellation * survival * high_acceleration_screen(gbar, a0_m_s2)
+    activation = mismatch * survival * high_acceleration_screen(gbar, a0_m_s2)
     taper = np.ones_like(radius_arcsec)
     transition = (radius_arcsec > taper_inner_arcsec) & (radius_arcsec < support_radius_arcsec)
     taper[transition] = 0.5 * (
@@ -194,6 +197,7 @@ def build_accumulated_transport_deflection_field(
     audit = {
         "operator": "finite_path_accumulated_component_tensor",
         "closure": closure_id,
+        "mismatch_mode": str(mismatch_mode),
         "coherence_length_kpc": float(coherence_length_kpc),
         "accumulation_power": float(accumulation_power),
         "stellar_mass_fraction": float(stellar_mass_fraction),
@@ -204,6 +208,7 @@ def build_accumulated_transport_deflection_field(
         "activation_weighted_mean": float(np.mean(activation[active])),
         "activation_maximum": float(np.max(activation[active])),
         "cancellation_mean": float(np.mean(cancellation[active])),
+        "mismatch_mean": float(np.mean(mismatch[active])),
         "survival_mean": float(np.mean(survival[active])),
         "trace_length_median_kpc": float(np.median(path.trace_length_kpc[active])),
         "source_integral_fraction": float(
