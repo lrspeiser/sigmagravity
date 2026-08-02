@@ -1,0 +1,82 @@
+{
+  "protocol_version": "P0657-FIELD-LINE-DIFFUSION-1.0.0",
+  "status": "frozen_before_any_P0657_score",
+  "frozen_utc": "2026-08-02T01:24:00Z",
+  "purpose": "Test a self-adjoint field-aligned diffusion closure that preserves global vector flux and suppresses the local focusing diagnosed in P0655.",
+  "candidate": {
+    "closure": "streamline_diffused_gas_minus_star_flux",
+    "equation": "(I + L_parallel) F_out = F_local",
+    "graph": "symmetric one-cell bilinear links along plus/minus Newtonian direction, with conductance from the inherited physical taper and squared tidal trace length",
+    "mismatch_mode": "transverse_tensor_mix",
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "common_physical_smoothing_kpc": 25.0,
+    "taper_inner_arcsec": 50.0,
+    "support_radius_arcsec": 58.0,
+    "trace_length_cap_cells": 48,
+    "grid_spacing_arcsec": 1.0,
+    "computational_padding_arcsec": 48.0,
+    "diffusion_identity_coefficient": 1.0,
+    "diffusion_identity_coefficient_fitted": false,
+    "solver_relative_tolerance": 1e-10,
+    "field_amplitude": 1.0,
+    "field_amplitude_fitted": false,
+    "new_physical_length_constants": 0,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "cross_validation": {
+    "fold_definition": "reuse exact P0645 five source-family-stratified folds",
+    "geometry_refit_starts_per_fold": 3,
+    "full_training_refit_starts": 8,
+    "selection": "none; the sole amplitude-one self-adjoint diffusion field is scored",
+    "random_seed": 2129657,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "inputs": {
+    "P0644_protocol": "configs/p0644_spent_rxj2129_accumulated_tensor.json",
+    "P0645_protocol": "configs/p0645_fair_geometry_cv_accumulated_tensor.json",
+    "P0645_report": "results/p0645_fair_geometry_cv_accumulated_tensor/report.json",
+    "P0648_report": "results/p0648_matched_multipole_control/report.json",
+    "P0651_report": "results/p0651_transverse_tensor_transport/report.json",
+    "P0652_report": "results/p0652_nonlocal_streamline_transport/report.json",
+    "P0654_report": "results/p0654_zero_padded_nonlocal_transport/report.json",
+    "P0655_report": "results/p0655_conservative_streamline_deposit/report.json",
+    "P0656_report": "results/p0656_transport_topology_diagnostic/report.json"
+  },
+  "predeclared_progression_gates": {
+    "P0651_map_gates_all_pass": true,
+    "all_CV_roots": 15,
+    "CV_improvement_fraction_vs_lambda0_min": 0.03,
+    "CV_improvement_fraction_vs_best_matched_multipole_min": 0.01,
+    "full_training_roots": 15,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599_max": 0.10,
+    "field_normalized_curl_RMS_max": 1e-10,
+    "field_source_integral_fraction_max": 1e-4,
+    "maximum_flux_edge_fraction_of_RMS_max": 1e-10,
+    "transport_relative_change_RMS_min": 0.05,
+    "transport_flux_sum_relative_error_max": 1e-8,
+    "transport_component_overshoot_fraction_max": 1e-8,
+    "transport_is_source_conservative": true,
+    "transport_is_self_adjoint_diffusion": true,
+    "computational_padding_equals_trace_cap": true,
+    "computational_padding_changes_physical_support": false,
+    "field_amplitude_exactly_one": true,
+    "sealed_target_outcomes_opened": false
+  },
+  "outputs": {
+    "directory": "results/p0657_field_line_diffusion"
+  },
+  "claim_boundary": [
+    "The graph Laplacian is symmetric and positive semidefinite; the identity coefficient is fixed to one and is not fitted.",
+    "The squared tidal trace length and physical taper are inherited; no new distance or support scale is introduced.",
+    "The graph is unchanged by reversing every Newtonian field direction and its row sums enforce vector-flux conservation.",
+    "All lens scores use spent RX J2129 images and cannot validate the law.",
+    "A failed gate rejects this diffusion closure rather than authorizing diffusion-strength, amplitude, support, or path-length retuning.",
+    "A pass authorizes numerical and component-map robustness before any blind P0633/P0640 opening.",
+    "The projected graph closure is a discretized transport hypothesis, not yet a covariant spacetime action."
+  ]
+}

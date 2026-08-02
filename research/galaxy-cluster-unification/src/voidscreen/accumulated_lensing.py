@@ -12,6 +12,7 @@ from voidscreen.geometric_transport import (
     component_cancellation,
     high_acceleration_screen,
     streamline_incoherence,
+    symmetric_field_line_diffusion,
     symmetric_streamline_average,
     symmetric_streamline_deposit,
     thin_sheet_newtonian_field,
@@ -214,26 +215,38 @@ def build_accumulated_transport_deflection_field(
         "streamline_balanced_residual_flux",
         "compact_streamline_averaged_gas_minus_star_flux",
         "streamline_deposited_gas_minus_star_flux",
+        "streamline_diffused_gas_minus_star_flux",
     }:
         total_norm = np.maximum(total_field.magnitude_m_s2, np.finfo(float).tiny)
         direction_x = total_field.acceleration_x_m_s2 / total_norm
         direction_y = total_field.acceleration_y_m_s2 / total_norm
-        transport_function = (
-            symmetric_streamline_deposit
-            if closure_id == "streamline_deposited_gas_minus_star_flux"
-            else symmetric_streamline_average
-        )
-        transported_x, transported_y, transport_audit = transport_function(
-            local_component_flux_x,
-            local_component_flux_y,
-            direction_x,
-            direction_y,
-            path.trace_length_kpc / float(cell_kpc),
-            steps=int(transport_steps),
-        )
+        if closure_id == "streamline_diffused_gas_minus_star_flux":
+            transported_x, transported_y, transport_audit = symmetric_field_line_diffusion(
+                local_component_flux_x,
+                local_component_flux_y,
+                direction_x,
+                direction_y,
+                path.trace_length_kpc / float(cell_kpc),
+                taper,
+            )
+        else:
+            transport_function = (
+                symmetric_streamline_deposit
+                if closure_id == "streamline_deposited_gas_minus_star_flux"
+                else symmetric_streamline_average
+            )
+            transported_x, transported_y, transport_audit = transport_function(
+                local_component_flux_x,
+                local_component_flux_y,
+                direction_x,
+                direction_y,
+                path.trace_length_kpc / float(cell_kpc),
+                steps=int(transport_steps),
+            )
         if closure_id in {
             "streamline_averaged_gas_minus_star_flux",
             "streamline_deposited_gas_minus_star_flux",
+            "streamline_diffused_gas_minus_star_flux",
         }:
             flux_x, flux_y = transported_x, transported_y
         elif closure_id == "compact_streamline_averaged_gas_minus_star_flux":

@@ -15,7 +15,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
-from scipy import fft, ndimage
+from scipy import fft, ndimage, sparse
+from scipy.sparse import linalg as sparse_linalg
 
 G_SI = 6.67430e-11
 KPC_M = 3.085677581491367e19
@@ -508,6 +509,148 @@ def symmetric_streamline_deposit(
         ),
         "transport_flux_sum_relative_error": flux_sum_error,
         "transport_is_source_conservative": True,
+    }
+
+
+def symmetric_field_line_diffusion(
+    flux_x: np.ndarray,
+    flux_y: np.ndarray,
+    direction_x: np.ndarray,
+    direction_y: np.ndarray,
+    trace_length_pixels: np.ndarray,
+    conductance: np.ndarray,
+    *,
+    relative_tolerance: float = 1e-10,
+    maximum_iterations: int = 2000,
+) -> tuple[np.ndarray, np.ndarray, dict[str, float]]:
+    """Implicitly diffuse vector flux on a symmetric field-aligned graph."""
+
+    fx = _square_map(flux_x, "flux_x")
+    fy = _square_map(flux_y, "flux_y")
+    dx = _square_map(direction_x, "direction_x")
+    dy = _square_map(direction_y, "direction_y")
+    length = _square_map(trace_length_pixels, "trace_length_pixels")
+    mobility = _square_map(conductance, "conductance")
+    if not (fx.shape == fy.shape == dx.shape == dy.shape == length.shape == mobility.shape):
+        raise ValueError("field-line diffusion inputs must have matching shapes")
+    if np.any(length < 0.0) or np.any(mobility < 0.0) or np.any(mobility > 1.0):
+        raise ValueError("trace lengths and conductance are outside their allowed ranges")
+    if relative_tolerance <= 0.0 or int(maximum_iterations) < 1:
+        raise ValueError("solver controls must be positive")
+    norm = np.hypot(dx, dy)
+    unit_x = np.zeros_like(dx)
+    unit_y = np.zeros_like(dy)
+    active = norm > 1e-12
+    unit_x[active] = dx[active] / norm[active]
+    unit_y[active] = dy[active] / norm[active]
+    rows, columns = np.indices(fx.shape, dtype=np.float64)
+    origins = np.arange(fx.size, dtype=np.intp).reshape(fx.shape)
+    maximum = fx.shape[0] - 1
+    edge_rows = []
+    edge_columns = []
+    edge_weights = []
+    for sign in (-1.0, 1.0):
+        destination_rows = rows + sign * unit_y
+        destination_columns = columns + sign * unit_x
+        valid_destination = (
+            active
+            & (destination_rows >= 0.0)
+            & (destination_rows <= maximum)
+            & (destination_columns >= 0.0)
+            & (destination_columns <= maximum)
+        )
+        row0 = np.floor(np.clip(destination_rows, 0.0, maximum)).astype(np.intp)
+        column0 = np.floor(np.clip(destination_columns, 0.0, maximum)).astype(np.intp)
+        row1 = np.minimum(row0 + 1, maximum)
+        column1 = np.minimum(column0 + 1, maximum)
+        row_fraction = np.clip(destination_rows, 0.0, maximum) - row0
+        column_fraction = np.clip(destination_columns, 0.0, maximum) - column0
+        neighbors = (
+            (row0, column0, (1.0 - row_fraction) * (1.0 - column_fraction)),
+            (row0, column1, (1.0 - row_fraction) * column_fraction),
+            (row1, column0, row_fraction * (1.0 - column_fraction)),
+            (row1, column1, row_fraction * column_fraction),
+        )
+        for neighbor_rows, neighbor_columns, interpolation_weight in neighbors:
+            destinations = origins[neighbor_rows, neighbor_columns]
+            neighbor_mobility = mobility[neighbor_rows, neighbor_columns]
+            weight = (
+                0.5
+                * np.square(length)
+                * np.sqrt(mobility * neighbor_mobility)
+                * interpolation_weight
+            )
+            selected = (
+                valid_destination
+                & (destinations != origins)
+                & (weight > np.finfo(float).tiny)
+            )
+            edge_rows.append(origins[selected])
+            edge_columns.append(destinations[selected])
+            edge_weights.append(weight[selected])
+    directed = sparse.coo_matrix(
+        (
+            np.concatenate(edge_weights),
+            (np.concatenate(edge_rows), np.concatenate(edge_columns)),
+        ),
+        shape=(fx.size, fx.size),
+    ).tocsr()
+    adjacency = 0.5 * (directed + directed.T)
+    adjacency.setdiag(0.0)
+    adjacency.eliminate_zeros()
+    degree = np.asarray(adjacency.sum(axis=1)).ravel()
+    laplacian = sparse.diags(degree) - adjacency
+    operator = sparse.eye(fx.size, format="csr") + laplacian
+    solved = []
+    solver_information = []
+    for component in (fx, fy):
+        values, information = sparse_linalg.cg(
+            operator,
+            component.ravel(),
+            rtol=float(relative_tolerance),
+            atol=0.0,
+            maxiter=int(maximum_iterations),
+        )
+        solved.append(values.reshape(fx.shape))
+        solver_information.append(int(information))
+    if any(information != 0 for information in solver_information):
+        raise RuntimeError(f"field-line diffusion did not converge: {solver_information}")
+    diffused_x, diffused_y = solved
+    original_rms = float(np.sqrt(np.mean(fx * fx + fy * fy)))
+    difference_rms = float(
+        np.sqrt(np.mean(np.square(diffused_x - fx) + np.square(diffused_y - fy)))
+    )
+    flux_sum_error = float(
+        np.hypot(np.sum(diffused_x) - np.sum(fx), np.sum(diffused_y) - np.sum(fy))
+        / max(np.sum(np.hypot(fx, fy)), np.finfo(float).tiny)
+    )
+    component_scale = max(
+        float(np.max(np.abs(fx))), float(np.max(np.abs(fy))), np.finfo(float).tiny
+    )
+    overshoot = max(
+        float(np.max(diffused_x) - np.max(fx)),
+        float(np.min(fx) - np.min(diffused_x)),
+        float(np.max(diffused_y) - np.max(fy)),
+        float(np.min(fy) - np.min(diffused_y)),
+        0.0,
+    )
+    return diffused_x, diffused_y, {
+        "transport_operator": "symmetric_field_line_graph_diffusion",
+        "transport_graph_edges": int(adjacency.nnz // 2),
+        "transport_solver_relative_tolerance": float(relative_tolerance),
+        "transport_solver_maximum_iterations": int(maximum_iterations),
+        "transport_solver_information_x": solver_information[0],
+        "transport_solver_information_y": solver_information[1],
+        "transport_relative_change_RMS": difference_rms
+        / max(original_rms, np.finfo(float).tiny),
+        "transport_flux_RMS_ratio": float(
+            np.sqrt(np.mean(diffused_x * diffused_x + diffused_y * diffused_y))
+            / max(original_rms, np.finfo(float).tiny)
+        ),
+        "transport_flux_sum_relative_error": flux_sum_error,
+        "transport_component_overshoot_fraction": overshoot / component_scale,
+        "transport_is_source_conservative": True,
+        "transport_is_self_adjoint_diffusion": True,
     }
 
 
