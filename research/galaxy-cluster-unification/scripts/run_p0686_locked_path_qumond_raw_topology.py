@@ -188,9 +188,17 @@ def main():
     )
 
     figure, axes = plt.subplots(1, 3, figsize=(14, 4.4))
-    axes[0].bar(["training", "spent heldout"], [fit_score["training_RMS_arcsec"], heldout_rms])
-    axes[0].axhline(compact_halo, color="black", linestyle="--", label="compact halo heldout")
-    axes[0].set(ylabel="exact root RMS (arcsec)", title="Absolute raw-lens score")
+    axes[0].bar(
+        ["training", "spent heldout"],
+        [fit_score["training_roots_converged"], fit_score["heldout_roots_converged"]],
+    )
+    axes[0].scatter(
+        ["training", "spent heldout"],
+        [len(training), len(heldout)],
+        color="black",
+        label="required",
+    )
+    axes[0].set(ylabel="exact roots recovered", title="Root convergence")
     axes[0].legend()
     class_counts = families.multiplicity_classification.value_counts()
     axes[1].bar(class_counts.index, class_counts.values)

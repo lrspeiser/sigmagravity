@@ -1,0 +1,72 @@
+{
+  "report_version": "P0685-LOCKED-PATH-QUMOND-3D-FIELD-RESULTS-1.0.0",
+  "status": "pass",
+  "all_progression_gates_pass": true,
+  "candidate_advanced_to_frozen_P0686_raw_topology": true,
+  "protocol_sha256": "b76adf2dbf5f269c4e268414f0fae68116cf492a3102c4a072554d8f2bd8356f",
+  "source_sha256": "7257368c7b633d1084b82a400621dfd5cc333add749d15871d2ba2fb5d0197e9",
+  "solver_source_sha256": "a8d3f992746fa0105f07615716548f73050edc236e2fb6850b48f6bb826d1de9",
+  "map_sha256": "4804b357f9c67bb204b058e98de4d1ddf00340e301b86d001bb0a21132c47a77",
+  "scalar_comparator_sha256": "71c39b4c61b7c34da2c354ef5310292e4076f0f66e5ee6c2fe88f2998205dabf",
+  "field_sha256": "4d727b1e219d47dd337afa5b24b737072c2cab2a9da2a97c7eb903cbd6a2131c",
+  "locked_formula": {
+    "a0_m_s2": 1.2e-10,
+    "chi_t": 1e-06,
+    "transition_power_n": 4.0,
+    "extra_spatial_channels": 2.0,
+    "path_power_q": 0.5,
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "photon_amplitudes_fit_to_RXJ2129": 0
+  },
+  "metrics": {
+    "newtonian_normalized_residual_RMS": 8.891081551915351e-14,
+    "candidate_normalized_residual_RMS": 2.656907490550946e-14,
+    "boundary_maximum_relative_mismatch": 0.0,
+    "baryonic_center_of_mass_m": [
+      -5.3948185999985205e+19,
+      -9.709151650201164e+19,
+      -80015.20700625524
+    ],
+    "potential_depth_min": 9.634777288277575e-07,
+    "potential_depth_max": 3.92652191362209e-06,
+    "potential_path_ratio_min": 0.8046576196406842,
+    "potential_path_ratio_median": 1.053397634625586,
+    "potential_path_ratio_max": 1494.7736716042718,
+    "channel_exponent_min": 1.0515132618757288,
+    "channel_exponent_median": 2.631737766970759,
+    "channel_exponent_max": 2.87277748007351,
+    "candidate_strong_lens_median_physical_deflection_arcsec": 10.115684455429538,
+    "candidate_strong_lens_deflection_RMS_arcsec": 9.962544520900911,
+    "scalar_AQUAL_strong_lens_deflection_RMS_arcsec": 2.986230357270577,
+    "candidate_to_scalar_AQUAL_strong_lens_deflection_RMS_ratio": 3.3361607541913494,
+    "candidate_normalized_deflection_curl_RMS": 4.3432055562916753e-16
+  },
+  "gate_results": {
+    "P0670_parent": true,
+    "newtonian_residual": true,
+    "candidate_residual": true,
+    "candidate_convergence": true,
+    "boundary": true,
+    "finite_fields": true,
+    "exponent_lower": true,
+    "exponent_upper": true,
+    "candidate_deflection_present": true,
+    "intended_amplitude_lower": true,
+    "intended_amplitude_upper": true,
+    "candidate_curl": true,
+    "no_fitted_gravity": true,
+    "no_fitted_photon_amplitude": true,
+    "no_raw_lens_score": true,
+    "sealed_targets_untouched": true
+  },
+  "raw_lens_score_computed": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0685 is a test of a post-result mechanism generator on a fully spent cluster, not independent validation.",
+    "The potential-depth and path-ratio coordinates are baryonic and parameter-free per object, but they are not yet derived from a covariant action.",
+    "The zero-slip photon rule is a weak-field diagnostic closure, not a relativistic lensing theory.",
+    "A strong, curl-free field can still fail image positions, multiplicity, parity, or critical curves.",
+    "No P0685 raw-image outcome and no sealed P0633 or P0640 target may be opened in this stage."
+  ]
+}

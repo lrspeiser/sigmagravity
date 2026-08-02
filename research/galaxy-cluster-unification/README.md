@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0684-path-diluted-qumond`](latest-findings/2026-08-02-p0684-path-diluted-qumond/README.md).
-It extends the P0683 potential-channel test through the first baryonic
-path-dilution sweep. The prior P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0686-locked-path-topology`](latest-findings/2026-08-02-p0686-locked-path-topology/README.md).
+It records the first registered 3D solve and raw-topology verdict for the
+path-diluted QUMOND generator. The prior P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0684-path-diluted-qumond`](latest-findings/2026-08-02-p0684-path-diluted-qumond/README.md),
 [`latest-findings/2026-08-02-p0683-potential-channel-qumond`](latest-findings/2026-08-02-p0683-potential-channel-qumond/README.md),
 [`latest-findings/2026-08-02-p0682-spent-deflection-atlas`](latest-findings/2026-08-02-p0682-spent-deflection-atlas/README.md)
 and
@@ -76,6 +77,19 @@ clear every numerical spent gate. The cleaner inverse-square-root row becomes
 a new formula generator—not a promoted result—and is now locked for a 3D
 QUMOND raw-topology test. See
 [`docs/P0684_PATH_DILUTED_QUMOND_RESULTS.md`](docs/P0684_PATH_DILUTED_QUMOND_RESULTS.md).
+
+P0685 implements the clean diagnostic generator as a locked registered 3D
+QUMOND operator. Its numerical field passes every frozen gate and produces
+`9.96 arcsec` strong-lens RMS physical deflection, `3.336x` the scalar-AQUAL
+field, with negligible curl and no fitted amplitude. P0686, whose topology
+gates were frozen before that field was calculated, rejects it: only `14/15`
+training and `6/7` heldout exact roots converge, three source families are
+missing images, only five recover both parities, and both shear nuisances hit
+their bounds. The local path ratio creates a hollow response: median exponent
+rises from `1.28` inside 15 kpc to `2.71` at 150-225 kpc. The next generator
+uses one baryon-derived system path coordinate rather than this singular local
+coordinate. See
+[`docs/P0685_P0686_LOCKED_PATH_QUMOND_RESULTS.md`](docs/P0685_P0686_LOCKED_PATH_QUMOND_RESULTS.md).
 
 ## Untouched external validation (P0633)
 

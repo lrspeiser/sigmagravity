@@ -1,0 +1,5 @@
+model,parameter,value,lower,upper
+locked_path_qumond_P0685,map_center_x_arcsec,1.0885166736423684,-3.0,3.0
+locked_path_qumond_P0685,map_center_y_arcsec,1.746872690497534,-3.0,3.0
+locked_path_qumond_P0685,external_shear_gamma1_at_reference_source,-0.24999999999460598,-0.25,0.25
+locked_path_qumond_P0685,external_shear_gamma2_at_reference_source,-0.24999999999991512,-0.25,0.25

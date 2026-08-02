@@ -1,0 +1,70 @@
+{
+  "report_version": "P0686-LOCKED-PATH-QUMOND-RAW-TOPOLOGY-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_resolution_and_baryon_robustness": false,
+  "protocol_sha256": "19fac53484ccf2acebc82cbaa921ee603290fc33ee1b54cd949e05adfd51283f",
+  "source_sha256": "1eb161e9293733a703e15c1542c8ad9fdf1c1bad189c3105eac61ec834ca5d4b",
+  "field_sha256": "4d727b1e219d47dd337afa5b24b737072c2cab2a9da2a97c7eb903cbd6a2131c",
+  "coverage": {
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "source_families": 7,
+    "ordinary_nuisance_parameters": 4,
+    "profiled_source_coordinates": 14,
+    "gravity_parameters": 0,
+    "photon_amplitudes": 0
+  },
+  "fit_score": {
+    "model": "locked_path_qumond_P0685",
+    "training_RMS_arcsec": null,
+    "training_roots_converged": 14,
+    "heldout_RMS_arcsec": null,
+    "heldout_roots_converged": 6,
+    "optimizer_cost": 489.4149533526167,
+    "nuisance_parameters_near_bound": 2
+  },
+  "comparisons": {
+    "compact_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "candidate_to_compact_halo_heldout_RMS_ratio": null,
+    "published_multi_halo_reference_RMS_arcsec": 0.29
+  },
+  "topology": {
+    "families": 7,
+    "missing_multiplicity_families": 3,
+    "exact_multiplicity_families": 4,
+    "demagnified_only_surplus_families": 0,
+    "potentially_observable_surplus_families": 0,
+    "exact_or_demagnified_only_families": 4,
+    "parity_diverse_families": 5,
+    "critical_curve_present_families": 7,
+    "total_global_roots": 17,
+    "total_observed_images": 22
+  },
+  "gate_results": {
+    "P0685_parent": true,
+    "training_roots": false,
+    "heldout_roots": false,
+    "training_absolute_RMS": false,
+    "heldout_absolute_RMS": false,
+    "compact_halo_comparison": false,
+    "no_missing_multiplicity": false,
+    "observable_surplus": true,
+    "acceptable_multiplicity": false,
+    "parity_diversity": false,
+    "critical_curves": true,
+    "nuisance_bounds": false,
+    "no_fitted_gravity": true,
+    "no_fitted_photon_amplitude": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "Every RX J2129 image is spent; P0686 can reject or diagnose this generator but cannot validate it.",
+    "The finite global seed search can miss roots with very small basins or beyond 48 arcseconds.",
+    "Catalog incompleteness makes demagnified surplus roots less decisive than observable surplus roots.",
+    "The 33-cell field is coarse for critical curves; a pass must be followed by frozen resolution convergence.",
+    "P0633 galaxy kinematics and P0640 cluster lens constraints remain sealed."
+  ]
+}
