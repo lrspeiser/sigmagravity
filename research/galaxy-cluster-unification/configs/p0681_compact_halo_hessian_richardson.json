@@ -1,0 +1,54 @@
+{
+  "protocol_version": "P0681-COMPACT-HALO-HESSIAN-RICHARDSON-1.0.0",
+  "status": "frozen_before_any_P0681_step_metric",
+  "frozen_utc": "2026-08-02T09:40:00Z",
+  "purpose": "Complete the derivative qualification by testing whether smaller direct central-difference steps converge to the fixed exact NIE Hessian after P0680's 0.01-arcsec comparison narrowly failed.",
+  "failure_parent": "results/p0680_compact_halo_exact_hessian/report.json",
+  "parameter_table": "results/rxj2129_raw_theory_lensing/fitted_parameters.csv",
+  "raw_lensing_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+  "parameter_selection": {
+    "stage": "training",
+    "model": "GR_plus_cluster_halo"
+  },
+  "evaluation_points": {
+    "grid_cells": 33,
+    "axis_minimum_kpc": -224.49921423385908,
+    "axis_maximum_kpc": 224.49921423385908,
+    "strong_lens_radius_kpc": [15.8, 76.5],
+    "expected_points": 92
+  },
+  "direct_steps_arcsec": [0.01, 0.005, 0.002, 0.001],
+  "reference": "LensModel.hessian with diff=None on the identical training-fit NIE",
+  "predeclared_integrity_gates": {
+    "P0680_status": "fail",
+    "P0680_failed_gates_exact": [
+      "kappa_agreement",
+      "determinant_agreement"
+    ],
+    "P0680_exact_hessian_normalized_curl_RMS_max": 1e-15,
+    "P0680_exact_negative_jacobian_points": 6,
+    "evaluation_points": 92,
+    "direct_step_count": 4,
+    "direct_steps_strictly_decreasing": true,
+    "kappa_exact_relative_RMS_strictly_decreasing": true,
+    "determinant_exact_relative_RMS_strictly_decreasing": true,
+    "smallest_step_kappa_exact_relative_RMS_max": 1e-6,
+    "smallest_step_determinant_exact_relative_RMS_max": 1e-6,
+    "smallest_step_normalized_curl_RMS_max": 2e-9,
+    "negative_jacobian_point_count_stable_at_all_steps": 6,
+    "all_derivatives_finite": true,
+    "new_candidate_formula_fit": false,
+    "new_raw_image_root_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Qualify P0678's spent required-field decomposition only if all four direct steps converge monotonically to the exact Hessian and the smallest step meets every 1e-6 agreement, curl, sign-count, provenance, and no-score gate. No further derivative threshold refinement is allowed after P0681.",
+  "outputs": {
+    "directory": "results/p0681_compact_halo_hessian_richardson",
+    "step_table": "exact_hessian_step_convergence.csv"
+  },
+  "claim_boundary": [
+    "P0681 is the final numerical derivative audit and cannot validate a physical halo or new gravity law.",
+    "A pass qualifies only the P0678 spent target specification and does not change P0678-P0680 historical verdicts.",
+    "No image root, candidate formula, or sealed target is evaluated."
+  ]
+}
