@@ -17,7 +17,7 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
-The 0.4 preview also accepts a theory-neutral field-model manifest. It declares
+The 0.5 preview also accepts a theory-neutral field-model manifest. It declares
 scalar, vector, or tensor fields; 2D or 3D coordinates; equations; units;
 boundary conditions; observables for matter and/or photons; solver settings;
 and universal versus per-object parameters. The validator checks dimensions,
@@ -94,6 +94,10 @@ POST /api/v1/galaxy-jobs
 GET  /api/v1/galaxy-jobs/{id}
 GET  /api/v1/galaxy-jobs/{id}/events
 GET  /api/v1/galaxy-jobs/{id}/artifacts
+POST /api/v1/batches
+GET  /api/v1/batches/{id}
+GET  /api/v1/batches/{id}/events
+GET  /api/v1/batches/{id}/artifacts
 POST /api/v1/runs
 GET  /api/v1/openapi.json
 ```
@@ -143,7 +147,7 @@ scientific-result hashes, output-array hashes, residual history, resource log,
 artifact index, and reproduction manifest. See `../worker` for the pinned,
 non-root container definition.
 
-The 0.4 local reference API also supports formula-independent resolved-galaxy
+The 0.5 local reference API also supports formula-independent resolved-galaxy
 jobs:
 
 ```text
@@ -170,6 +174,33 @@ realizations can project to the same 2D map. The public Vercel route currently
 returns `production_worker_not_connected`; real execution is available through
 the local reference server until durable workers and object storage are
 deployed.
+
+The same local server now chains generated surface- or volume-density bundles
+into one multi-system field batch without registering a formula-specific route:
+
+```text
+POST /api/v1/batches
+GET  /api/v1/batches/{id}
+GET  /api/v1/batches/{id}/events
+GET  /api/v1/batches/{id}/artifacts
+POST /api/v1/batches/{id}/cancel
+```
+
+A batch freezes one `sigma-field-model/1` manifest and one declared parameter
+policy across as many as 1,000 source bundles. The executable reference modes
+are `published_fixed` and `universal_fixed`. Fitted, hierarchical, and
+per-object policies are represented explicitly but rejected until their
+no-target-access fitting workflows exist; they are never silently approximated.
+The deterministic report includes per-system convergence, equation residuals,
+parameter counts, failures, content hashes, and an optional-LLM briefing. It
+deliberately reports `observationScoresAvailable=false` until rotation and
+lensing observable adapters are implemented.
+
+Run the chained 3D HTTP acceptance test while `npm run dev` is active:
+
+```text
+npm run smoke:batches
+```
 
 ## Production worker connection
 

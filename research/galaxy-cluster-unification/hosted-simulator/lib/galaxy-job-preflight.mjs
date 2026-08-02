@@ -79,6 +79,17 @@ function outputLicense(value) {
   return { id: value.id, redistributionAllowed: value.redistributionAllowed };
 }
 
+function outputGrid(operation, value, defaultCells) {
+  if (value === undefined) return null;
+  if (operation !== "generate") throw new Error("outputGrid is available only for generate jobs");
+  if (!value || typeof value !== "object" || Array.isArray(value) || Object.keys(value).some((key) => key !== "cellsPerAxis")) {
+    throw new Error("outputGrid currently requires only cellsPerAxis");
+  }
+  const cellsPerAxis = integer(value.cellsPerAxis, defaultCells, 9, 513, "outputGrid.cellsPerAxis");
+  if (cellsPerAxis % 2 === 0) throw new Error("outputGrid.cellsPerAxis must be odd");
+  return { cellsPerAxis };
+}
+
 function verifyPackage(value) {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("generate requires parameterPackage");
   if (value.schemaVersion !== "1.0.0" || value.generator !== "radial-fourier-sparse-residual") throw new Error("unsupported parameterPackage schema or generator");
@@ -127,13 +138,23 @@ export function prepareGalaxyJob({ submission, inputBundle = null }) {
   let shape;
   let bundleSha256 = null;
   let parameterPackage = null;
+  let gridControls = null;
   if (submission.operation === "extract_roundtrip") {
     if (!inputBundle) throw new Error("extract_roundtrip requires a ready data upload");
     ({ shape } = extractionInput(inputBundle));
     bundleSha256 = inputBundle.bundleSha256;
   } else {
     parameterPackage = verifyPackage(submission.parameterPackage);
-    shape = [parameterPackage.grid.cellsPerAxis, parameterPackage.grid.cellsPerAxis];
+    gridControls = outputGrid(
+      submission.operation,
+      submission.outputGrid,
+      parameterPackage.grid.cellsPerAxis,
+    );
+    const outputCells = gridControls?.cellsPerAxis ?? parameterPackage.grid.cellsPerAxis;
+    shape = [outputCells, outputCells];
+  }
+  if (submission.operation === "extract_roundtrip") {
+    gridControls = outputGrid(submission.operation, submission.outputGrid, shape[0]);
   }
   const zCells = vertical.enabled ? vertical.zCells : 1;
   const estimatedMemoryBytes = shape[0] * shape[1] * (18 * 8 + zCells * 4 * 8);
@@ -145,6 +166,7 @@ export function prepareGalaxyJob({ submission, inputBundle = null }) {
     generationControls: generation,
     vertical,
     outputLicense: license,
+    outputGrid: gridControls,
     parameterPackage,
   });
   const core = canonicalize({

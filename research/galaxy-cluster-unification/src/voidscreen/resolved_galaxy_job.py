@@ -33,6 +33,8 @@ from voidscreen.resolved_galaxy_generator import (
 Array = np.ndarray
 ENGINE_ID = "resolved-galaxy-extract-generate-worker"
 ENGINE_VERSION = "1.0.0-preview"
+KPC_M = 3.085677581491367e19
+MSUN_KG = 1.98847e30
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -173,6 +175,22 @@ def _parameter_axis(package: Mapping[str, Any]) -> Array:
     if not np.isclose(axis[1] - axis[0], float(grid["spacingKpc"]), rtol=1e-8):
         raise ValueError("parameter package grid spacing is inconsistent")
     return axis
+
+
+def _output_axis(package: Mapping[str, Any], value: Any) -> Array:
+    source = _parameter_axis(package)
+    if value is None:
+        return source
+    controls = dict(value)
+    if set(controls) != {"cellsPerAxis"}:
+        raise ValueError("outputGrid currently requires only cellsPerAxis")
+    raw_cells = controls["cellsPerAxis"]
+    if isinstance(raw_cells, bool) or not isinstance(raw_cells, int):
+        raise TypeError("outputGrid.cellsPerAxis must be an integer")
+    cells = raw_cells
+    if not 9 <= cells <= 513 or cells % 2 == 0:
+        raise ValueError("outputGrid.cellsPerAxis must be an odd integer between 9 and 513")
+    return np.linspace(float(source[0]), float(source[-1]), cells)
 
 
 def _array_bundle(
@@ -316,6 +334,8 @@ def execute_galaxy_request_file(
         reference: dict[str, Array] | None = None
         source_bundle_hash: str | None = None
         if operation == "extract_roundtrip":
+            if envelope.get("outputGrid") is not None:
+                raise ValueError("outputGrid is available only for generate jobs")
             bundle_path = _resolve_relative(base, str(envelope["inputBundlePath"]), "inputBundlePath")
             source_bundle, axis, reference = _axis_and_surfaces(bundle_path)
             source_bundle_hash = str(source_bundle["bundleSha256"])
@@ -335,7 +355,7 @@ def execute_galaxy_request_file(
             package = dict(envelope.get("parameterPackage") or {})
             if package.get("contentSha256") != package_content_hash(package):
                 raise ValueError("parameterPackage content hash mismatch")
-            axis = _parameter_axis(package)
+            axis = _output_axis(package, envelope.get("outputGrid"))
 
         identity = {
             "schemaVersion": "sigma-galaxy-scientific-job-identity/1",
@@ -345,6 +365,7 @@ def execute_galaxy_request_file(
             "extractionControls": extraction_controls,
             "generationControls": generation_controls,
             "vertical": vertical_controls,
+            "outputGrid": envelope.get("outputGrid"),
             "outputLicense": license_value,
             "workerSourceSha256": worker_hash,
         }
@@ -400,7 +421,30 @@ def execute_galaxy_request_file(
             license_value=license_value,
         )
         _save_array_product(temporary, "surface_density", surface_arrays, surface_bundle)
+        field_surface_arrays = {
+            "gas_surface_density": generated["gas"] * MSUN_KG / KPC_M**2,
+            "stellar_surface_density": generated["stars"] * MSUN_KG / KPC_M**2,
+            "baryon_surface_density": generated["total"] * MSUN_KG / KPC_M**2,
+        }
+        field_surface_bundle = _array_bundle(
+            field_surface_arrays,
+            geometry={
+                "coordinateSystem": "cartesian_2d",
+                "dimensions": 2,
+                "spacing": [spacing * KPC_M, spacing * KPC_M],
+                "lengthUnit": "m",
+                "axisOrder": ["x", "y"],
+                "referenceFrame": "intrinsic_face_on_baryonic_map",
+            },
+            unit="kg/m^2",
+            provenance={**provenance, "unitConversion": "M_sun/kpc^2 to kg/m^2"},
+            license_value=license_value,
+        )
+        _save_array_product(
+            temporary, "field_surface_density", field_surface_arrays, field_surface_bundle
+        )
         volume_bundle = None
+        field_volume_bundle = None
         if volume is not None and z_axis is not None:
             volume_arrays = {
                 "gas_volume_density": volume["gas"],
@@ -426,6 +470,37 @@ def execute_galaxy_request_file(
                 license_value=license_value,
             )
             _save_array_product(temporary, "volume_density", volume_arrays, volume_bundle)
+            field_volume_arrays = {
+                "gas_density": volume["gas"] * MSUN_KG / KPC_M**3,
+                "stellar_density": volume["stars"] * MSUN_KG / KPC_M**3,
+                "baryon_density": volume["total"] * MSUN_KG / KPC_M**3,
+            }
+            field_volume_bundle = _array_bundle(
+                field_volume_arrays,
+                geometry={
+                    "coordinateSystem": "cartesian_3d",
+                    "dimensions": 3,
+                    "spacing": [
+                        spacing * KPC_M,
+                        spacing * KPC_M,
+                        float(z_axis[1] - z_axis[0]) * KPC_M,
+                    ],
+                    "lengthUnit": "m",
+                    "axisOrder": ["x", "y", "z"],
+                    "referenceFrame": "intrinsic_baryonic_prior_realization",
+                },
+                unit="kg/m^3",
+                provenance={
+                    **provenance,
+                    "verticalStatus": "assumed_prior_not_measured",
+                    "savedRealization": 0,
+                    "unitConversion": "M_sun/kpc^3 to kg/m^3",
+                },
+                license_value=license_value,
+            )
+            _save_array_product(
+                temporary, "field_volume_density", field_volume_arrays, field_volume_bundle
+            )
 
         elapsed = time.perf_counter() - started
         _, peak_memory = tracemalloc.get_traced_memory()
@@ -438,9 +513,13 @@ def execute_galaxy_request_file(
             "parameterPackageSha256": package["contentSha256"],
             "sourceBundleSha256": source_bundle_hash,
             "surfaceBundleSha256": surface_bundle["bundleSha256"],
+            "fieldSurfaceBundleSha256": field_surface_bundle["bundleSha256"],
             "volumeBundleSha256": None
             if volume_bundle is None
             else volume_bundle["bundleSha256"],
+            "fieldVolumeBundleSha256": None
+            if field_volume_bundle is None
+            else field_volume_bundle["bundleSha256"],
             "roundtripMetrics": metrics,
             "verticalProjectionMaximumRelativeError": max(
                 (item["projectionRelativeError"] for item in vertical_metadata), default=None

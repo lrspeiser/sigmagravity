@@ -37,6 +37,15 @@ const specification = {
     "/api/v1/galaxy-jobs/{id}/artifacts": { get: { summary: "Read verified 2D/3D density and parameter artifacts" } },
     "/api/v1/galaxy-jobs/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed resolved-galaxy artifact" } },
     "/api/v1/galaxy-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running resolved-galaxy job" } },
+    "/api/v1/batches": {
+      get: { summary: "List local multi-system field batches" },
+      post: { summary: "Run one confirmed model and explicit parameter policy over arbitrary uploaded or generated systems" },
+    },
+    "/api/v1/batches/{id}": { get: { summary: "Read batch state and child progress" } },
+    "/api/v1/batches/{id}/events": { get: { summary: "Read ordered batch lifecycle events" } },
+    "/api/v1/batches/{id}/artifacts": { get: { summary: "Read deterministic batch report artifacts" } },
+    "/api/v1/batches/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed batch artifact" } },
+    "/api/v1/batches/{id}/cancel": { post: { summary: "Cancel a batch and its nonterminal child jobs" } },
     "/api/v1/runs": { post: { summary: "Score a formula without fitting object-specific gravity parameters" } },
   },
 };

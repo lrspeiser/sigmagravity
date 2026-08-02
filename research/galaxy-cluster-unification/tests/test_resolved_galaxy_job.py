@@ -87,14 +87,28 @@ def test_extract_job_emits_verified_2d_and_3d_bundles(tmp_path: Path) -> None:
         assert file_sha256(artifact) == record["sha256"]
     surface_bundle, surface_arrays = load_array_bundle_from_artifacts(output, "surface_density")
     volume_bundle, volume_arrays = load_array_bundle_from_artifacts(output, "volume_density")
+    field_volume_bundle, field_volume_arrays = load_array_bundle_from_artifacts(
+        output, "field_volume_density"
+    )
     assert surface_bundle["geometry"]["dimensions"] == 2
     assert volume_bundle["geometry"]["dimensions"] == 3
+    assert field_volume_bundle["geometry"]["lengthUnit"] == "m"
+    assert {
+        record["key"]: record["unit"] for record in field_volume_bundle["arrays"]
+    }["baryon_density"] == "kg/m^3"
     dz = volume_bundle["geometry"]["spacing"][2]
     assert np.allclose(
         volume_arrays["total_baryonic_volume_density"].sum(axis=2) * dz,
         surface_arrays["total_baryonic_surface_density"],
         rtol=1e-12,
         atol=1e-7,
+    )
+    assert np.allclose(
+        field_volume_arrays["baryon_density"],
+        volume_arrays["total_baryonic_volume_density"]
+        * 1.98847e30
+        / 3.085677581491367e19**3,
+        rtol=1e-13,
     )
     metrics = json.loads((output / "roundtrip_metrics.json").read_text(encoding="utf-8"))
     assert metrics["total"]["mass_relative_error"] < 1e-12
@@ -125,6 +139,7 @@ def test_generate_job_replays_a_parameter_package_without_source_data(tmp_path: 
             "gas": {"mass_scale": 1.5, "radial_scale": 0.8},
             "stars": {"fourier_scale": 0.0, "residual_scale": 0.0},
         },
+        "outputGrid": {"cellsPerAxis": 25},
         "vertical": {"enabled": False, "realizations": 1, "zCells": 17, "seed": 7},
         "outputLicense": {"id": "CC0-1.0", "redistributionAllowed": True},
     }
@@ -139,6 +154,34 @@ def test_generate_job_replays_a_parameter_package_without_source_data(tmp_path: 
     assert result["parameterAccounting"]["gravityPerObject"] == 0
     assert not (output / "volume_density.npz").exists()
     assert (output / "surface_density.npz").exists()
+    assert (output / "field_surface_density.npz").exists()
+    with np.load(output / "surface_density.npz") as generated:
+        assert generated["total_baryonic_surface_density"].shape == (25, 25)
+
+
+def test_generate_job_rejects_fractional_output_grid(tmp_path: Path) -> None:
+    execute_galaxy_request_file(extraction_request(tmp_path))
+    package = json.loads((tmp_path / "artifacts" / "parameters.json").read_text(encoding="utf-8"))
+    generation_root = tmp_path / "generation"
+    generation_root.mkdir()
+    request = {
+        "schemaVersion": "sigma-galaxy-job-cli/1",
+        "operation": "generate",
+        "outputDirectory": "artifacts",
+        "parameterPackage": package,
+        "generationControls": {},
+        "outputGrid": {"cellsPerAxis": 25.5},
+        "vertical": {"enabled": False, "realizations": 1, "zCells": 17, "seed": 7},
+        "outputLicense": {"id": "CC0-1.0", "redistributionAllowed": True},
+    }
+    request_path = generation_root / "request.json"
+    request_path.write_text(json.dumps(request), encoding="utf-8")
+    try:
+        execute_galaxy_request_file(request_path)
+    except TypeError as error:
+        assert "must be an integer" in str(error)
+    else:
+        raise AssertionError("fractional output grid was accepted")
 
 
 def test_job_rejects_non_kpc_input_geometry(tmp_path: Path) -> None:

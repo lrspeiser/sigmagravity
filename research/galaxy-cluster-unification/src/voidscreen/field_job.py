@@ -215,6 +215,14 @@ def write_array_bundle(
 def load_array_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Array]]:
     root = Path(directory).resolve()
     bundle = json.loads((root / "bundle.json").read_text(encoding="utf-8"))
+    geometry = bundle.get("geometry")
+    if isinstance(geometry, dict) and "spacing" in geometry:
+        raw_spacing = geometry["spacing"]
+        geometry["spacing"] = (
+            [float(value) for value in raw_spacing]
+            if isinstance(raw_spacing, list)
+            else float(raw_spacing)
+        )
     claimed = bundle.get("bundleSha256")
     core = {key: value for key, value in bundle.items() if key != "bundleSha256"}
     if claimed != canonical_sha256(core):

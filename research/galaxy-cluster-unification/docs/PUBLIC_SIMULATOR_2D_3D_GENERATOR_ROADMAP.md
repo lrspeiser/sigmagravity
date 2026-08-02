@@ -37,6 +37,7 @@ trusted solver.
 | Explicit 3D prior ensembles | 78 varied thickness/flaring realizations project back to their 2D maps at numerical precision | demonstrates non-uniqueness; does not recover true depth |
 | Known-map commissioning round trip | 13/13 total-baryon maps: median normalized error 0.168, worst 0.257, median correlation 0.986 | thresholds saw the same data during prototyping and are not blind validation |
 | Asynchronous galaxy-job API | immutable map upload, extraction, 2D/3D generation, polling, events, cancellation, verified downloads, and parameter-controlled replay pass through real HTTP | local single-user worker; public Vercel route advertises the schema but cannot execute it yet |
+| Asynchronous multi-system batch API | one frozen manifest and policy run across generated/uploaded 2D or 3D bundles, with polling, cancellation, child jobs, restart recovery, and deterministic rehashed reports | numerical execution only; rotation and lensing observation adapters are not connected |
 
 The generic worker dispatches from equation structure, not a theory name. It
 supports `laplacian(phi)=source` and
@@ -63,10 +64,10 @@ below.
 | 11. Theory-to-observable adapters | Convert solved potentials/fields into circular speeds, line-of-sight velocity fields, weak shear, convergence, deflection, critical curves, and raw multiple-image roots. Keep photon and massive-tracer mappings explicit. | Newtonian/MOND published fixtures reproduce within declared numerical and data-processing tolerance; photons are never silently scored with a massive-particle rule. |
 | 12. Fair scoring | Add fixed train/development/holdout splits, no-target-access execution, nuisance-policy declarations, universal/per-object parameter counts, likelihoods with covariance, and same-input comparators. | A batch report separates galaxies, clusters, topology, and Solar-System tests and shows performance versus Newtonian, fixed MOND/RAR, and a declared halo baseline without a single blended score. |
 | 13. Cluster data | Version member light, intracluster gas, geometry, source redshifts, weak-shear catalogs, and raw strong-lens image positions with licensing and sealed/open states. | Multiple clusters can be run with one frozen gravity parameter set; raw image/topology holdouts are scored, not only reconstructed dark-matter maps. |
-| 14. Asynchronous API | Local upload, queue, lifecycle events, cancellation, restart recovery, caching identity, artifact indexes, and stable errors are implemented. Add durable adapters, model registration, retry policy, and unrestricted-size batch orchestration. | Identical model/data/solver/seed/worker hashes return the cached immutable run; a browser never holds a request open for a long solve. |
+| 14. Asynchronous API | Local upload, queue, lifecycle events, cancellation, restart recovery, caching identity, artifact indexes, stable errors, and batches up to 1,000 systems are implemented. Add durable adapters, model registration, retry policy, and production resource classes. | Identical model/data/solver/seed/worker hashes return the cached immutable run; a browser never holds a request open for a long solve. |
 | 15. Storage and reproducibility | Add durable database and object storage for model, dataset, code, solver, container, seed, grid, boundary, logs, predictions, plots, and manifests. Sign citation-ready manifests. | A clean worker can reproduce selected run hashes/tolerances from only the manifest and permitted inputs; failed runs retain useful artifacts. |
 | 16. Hosting and operations | Containerize the Python worker, deploy CPU resource classes, connect it to the Vercel control plane, and add auth, quotas, monitoring, cost controls, backups, abuse handling, and uptime/support policy. | Public users can submit a bounded batch, follow status, download artifacts, and cannot exhaust shared resources or access sealed data. |
-| 17. Reports and SDKs | Generate JSON, CSV/Parquet, FITS/NumPy fields, plots, residual maps, convergence histories, and a deterministic methods report. Add Python and HTTP examples. | Another researcher can reproduce and independently interpret a run without copying output into an LLM. |
+| 17. Reports and SDKs | Deterministic batch JSON, CSV, HTML, failure table, parameter accounting, hashes, and LLM briefing are implemented. Add observation predictions, CSV/Parquet and FITS exports, plots, residual maps, sensitivity analyses, a methods report, and Python/HTTP SDKs. | Another researcher can reproduce and independently interpret a run without copying output into an LLM. |
 | 18. Optional LLM explanation | Generate a compact, redacted briefing artifact and allow an opt-in LLM to summarize it. The model cannot alter scores, manifests, or scientific state. | Deterministic results remain complete without an LLM key; generated prose is labeled and traceable to the briefing hash. |
 | 19. External replication | Ask scientists unaffiliated with SigmaGravity to encode Refracted Gravity and at least two other models, upload a new system, run a batch, and report friction. | External users reproduce expected fixtures without repository assistance; every failure is retained and classified as model, data, numerical, or product error. |
 
@@ -92,12 +93,13 @@ used to hide a broken reconstruction, solver, or observation adapter.
 
 ## Current next milestone
 
-The local field API, real-map extraction/generation round trip, and asynchronous
-galaxy-job contract now pass. Galaxy jobs expose `extract_roundtrip` and
-`generate` without embedding a gravity formula and emit standard array bundles
-for generic field jobs. The next product milestone is one chained batch request
-that selects real/generated systems, runs one confirmed model against all of
-them, and produces a comparator report with a frozen parameter policy.
+The local field API, real-map extraction/generation round trip, asynchronous
+galaxy-job contract, and chained multi-system batch now pass. Galaxy jobs emit
+SI surface- and volume-density bundles that any compatible confirmed manifest
+can consume. One batch freezes its manifest and parameter policy and produces
+content-addressed per-system and aggregate reports. The next product milestone
+is an observation-scoring layer that converts fields into rotation and lensing
+predictions with explicit uncertainty and comparator policies.
 The next scientific milestone is synthetic hidden-truth recovery with noise,
 PSF, inclination, bulge, thickness, and calibrated uncertainties, followed by
 an untouched morphologically varied whole-galaxy holdout. Production hosting

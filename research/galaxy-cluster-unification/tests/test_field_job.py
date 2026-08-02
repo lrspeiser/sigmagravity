@@ -166,6 +166,27 @@ def test_array_bundle_detects_data_changed_after_registration(tmp_path: Path):
         load_array_bundle(bundle_path)
 
 
+def test_large_physical_spacing_survives_javascript_json_roundtrip(tmp_path: Path):
+    spacing = float(4_571_058_612_641_913_300)
+    bundle_path = tmp_path / "large_spacing_bundle"
+    bundle = write_array_bundle(
+        bundle_path,
+        {"raw_forcing": np.ones((9, 9))},
+        bundle_metadata(spacing),
+    )
+    serialized = json.loads((bundle_path / "bundle.json").read_text(encoding="utf-8"))
+    serialized["geometry"]["spacing"] = [
+        4_571_058_612_641_913_300,
+        4_571_058_612_641_913_300,
+    ]
+    (bundle_path / "bundle.json").write_text(
+        json.dumps(serialized), encoding="utf-8"
+    )
+    loaded, _ = load_array_bundle(bundle_path)
+    assert loaded["bundleSha256"] == bundle["bundleSha256"]
+    assert loaded["geometry"]["spacing"] == [spacing, spacing]
+
+
 def test_identical_job_replays_have_identical_scientific_hashes(tmp_path: Path):
     expected, forcing, spacing = manufactured_values()
     bundle_path = tmp_path / "bundle"

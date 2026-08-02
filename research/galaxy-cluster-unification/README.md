@@ -57,8 +57,14 @@ Modal workers for scientific computation. The first deployable control-plane
 preview now lives in [`hosted-simulator`](hosted-simulator/README.md): it
 packages all 175 SPARC galaxies, validates bounded dimension-aware formula
 trees, creates deterministic radial synthetic systems, and scores submitted
-laws against fixed MOND and Newtonian baryons. Its 2D/3D and raw-lensing routes
-remain explicitly unavailable until the separate scientific worker is wired.
+laws against fixed MOND and Newtonian baryons. The local reference backend now
+also executes generic Cartesian 2D/3D field manifests, extracts and generates
+resolved baryonic galaxies, and runs one frozen model across asynchronous
+multi-system batches with deterministic reports. The public 2D/3D and
+raw-lensing routes remain explicitly unavailable until durable storage and the
+separate scientific worker are wired.
+The latest implementation evidence and remaining boundary are recorded in
+[`docs/ASYNC_MULTI_SYSTEM_BATCH_API_MILESTONE.md`](docs/ASYNC_MULTI_SYSTEM_BATCH_API_MILESTONE.md).
 The verified Horizon3 production deployment is
 <https://sigma-gravity-research-simulator-five.vercel.app>.
 

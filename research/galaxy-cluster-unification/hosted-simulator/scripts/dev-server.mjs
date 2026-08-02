@@ -13,6 +13,8 @@ import system from "../api/v1/system.mjs";
 import systems from "../api/v1/systems.mjs";
 import { createLocalFieldJobRouter } from "../lib/local-field-job-http.mjs";
 import { LocalFieldJobService } from "../lib/local-field-job-service.mjs";
+import { createLocalBatchRouter } from "../lib/local-batch-http.mjs";
+import { LocalBatchService } from "../lib/local-batch-service.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const port = Number(process.env.PORT ?? 4173);
@@ -24,6 +26,12 @@ const localService = new LocalFieldJobService({
 });
 await localService.initialize();
 const localFieldJobs = createLocalFieldJobRouter(localService);
+const localBatchService = new LocalBatchService({
+  root: process.env.SIMULATOR_LOCAL_STORE ?? resolve(projectRoot, "tmp", "hosted-field-job-service"),
+  fieldService: localService,
+});
+await localBatchService.initialize();
+const localBatches = createLocalBatchRouter(localBatchService);
 const apiRoutes = new Map([
   ["/api/v1/health", health],
   ["/api/v1/datasets", datasets],
@@ -48,6 +56,7 @@ const staticFiles = new Map([
   ["/schemas/data-upload-request-v1.schema.json", ["schemas/data-upload-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/field-job-submit-v1.schema.json", ["schemas/field-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/galaxy-job-submit-v1.schema.json", ["schemas/galaxy-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/batch-submit-v1.schema.json", ["schemas/batch-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/examples/models/newtonian-poisson.json", ["examples/models/newtonian-poisson.json", "application/json; charset=utf-8"]],
   ["/examples/models/aqual.json", ["examples/models/aqual.json", "application/json; charset=utf-8"]],
   ["/examples/models/qumond.json", ["examples/models/qumond.json", "application/json; charset=utf-8"]],
@@ -82,6 +91,7 @@ const server = createServer(async (request, rawResponse) => {
     const url = new URL(request.url, `http://${request.headers.host ?? `${host}:${port}`}`);
     request.query = Object.fromEntries(url.searchParams.entries());
     request.body = await body(request, url);
+    if (await localBatches(request, response, url)) return;
     if (await localFieldJobs(request, response, url)) return;
     const staticEntry = staticFiles.get(url.pathname);
     if (staticEntry) {
@@ -117,6 +127,7 @@ server.listen(port, host, () => {
 
 for (const signal of ["SIGINT", "SIGTERM"]) {
   process.on(signal, () => server.close(async () => {
+    await localBatchService.close();
     await localService.close();
     process.exit(0);
   }));

@@ -8,6 +8,7 @@ import validateModel from "../api/v1/models/validate.mjs";
 import prepareFieldJob from "../api/v1/field-jobs/prepare.mjs";
 import hostedFieldJobs from "../api/v1/field-jobs.mjs";
 import hostedGalaxyJobs from "../api/v1/galaxy-jobs.mjs";
+import hostedBatches from "../api/v1/batches.mjs";
 import hostedDataUploads from "../api/v1/data-uploads.mjs";
 import runs from "../api/v1/runs.mjs";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
@@ -118,4 +119,8 @@ test("production upload and queue endpoints disclose missing infrastructure", ()
   assert.equal(galaxyJob.statusCode, 503);
   assert.equal(galaxyJob.body.error, "production_worker_not_connected");
   assert.equal(galaxyJob.body.requestSchema, "/schemas/galaxy-job-submit-v1.schema.json");
+  const batch = call(hostedBatches, { method: "POST", body: {} });
+  assert.equal(batch.statusCode, 503);
+  assert.equal(batch.body.error, "production_worker_not_connected");
+  assert.equal(batch.body.requestSchema, "/schemas/batch-submit-v1.schema.json");
 });

@@ -318,22 +318,68 @@ def _relative_update(previous: Array, current: Array) -> float:
     return numerator / max(denominator, np.finfo(float).tiny)
 
 
+def _finite_volume_divergence_gradient(
+    field: Array,
+    coefficient: Array,
+    spacing: Sequence[float],
+    *,
+    coefficient_floor: float,
+) -> tuple[Array, Array]:
+    """Apply the solver stencil and return its local absolute flux scale."""
+
+    values = np.asarray(field, dtype=float)
+    scale = np.maximum(np.asarray(coefficient, dtype=float), coefficient_floor)
+    result = np.zeros_like(values)
+    flux_scale = np.zeros_like(values)
+    interior = tuple(slice(1, -1) for _ in values.shape)
+    center = values[interior]
+    center_scale = scale[interior]
+    for axis, step in enumerate(spacing):
+        plus = list(interior)
+        minus = list(interior)
+        plus[axis] = slice(2, None)
+        minus[axis] = slice(None, -2)
+        plus_index = tuple(plus)
+        minus_index = tuple(minus)
+        plus_scale = scale[plus_index]
+        minus_scale = scale[minus_index]
+        plus_face = 2.0 * center_scale * plus_scale / (center_scale + plus_scale)
+        minus_face = 2.0 * center_scale * minus_scale / (center_scale + minus_scale)
+        plus_flux = plus_face * (values[plus_index] - center) / float(step) ** 2
+        minus_flux = minus_face * (center - values[minus_index]) / float(step) ** 2
+        result[interior] += plus_flux - minus_flux
+        flux_scale[interior] += np.abs(plus_flux) + np.abs(minus_flux)
+    return result, flux_scale
+
+
 def _equation_residuals(
     equations: Sequence[Mapping[str, Any]],
     fields: Mapping[str, Array],
     parameters: Mapping[str, float],
     spacing: Sequence[float],
     shape: tuple[int, ...],
+    *,
+    coefficient_floor: float,
 ) -> dict[str, float]:
     residuals: dict[str, float] = {}
     interior = tuple(slice(1, -1) for _ in shape)
     for equation in equations:
-        left = _scalar_array(
+        target, coefficient_expression = _elliptic_lhs(equation["lhs"])
+        coefficient = _scalar_array(
             evaluate_field_expression(
-                equation["lhs"], fields=fields, parameters=parameters, spacing=spacing
+                coefficient_expression,
+                fields=fields,
+                parameters=parameters,
+                spacing=spacing,
             ),
             shape,
-            f"equation {equation['id']} lhs",
+            f"equation {equation['id']} coefficient",
+        )
+        left, flux_scale = _finite_volume_divergence_gradient(
+            fields[target],
+            coefficient,
+            spacing,
+            coefficient_floor=coefficient_floor,
         )
         right = _scalar_array(
             evaluate_field_expression(
@@ -343,9 +389,10 @@ def _equation_residuals(
             f"equation {equation['id']} rhs",
         )
         numerator = float(np.sqrt(np.mean(np.square((left - right)[interior]))))
-        denominator = float(np.sqrt(np.mean(np.square(right[interior]))))
+        rhs_scale = float(np.sqrt(np.mean(np.square(right[interior]))))
+        operator_scale = float(np.sqrt(np.mean(np.square(flux_scale[interior]))))
         residuals[str(equation["id"])] = numerator / max(
-            denominator, np.finfo(float).tiny
+            rhs_scale, operator_scale, np.finfo(float).tiny
         )
     return residuals
 
@@ -408,9 +455,14 @@ def solve_field_manifest(
 
     solver = manifest.get("solver", {})
     tolerance = float(solver.get("relativeTolerance", 1e-7))
+    residual_tolerance = float(solver.get("residualTolerance", tolerance))
     maximum_iterations = min(int(solver.get("maxIterations", 80)), 200)
     damping = float(solver.get("damping", 0.7))
     coefficient_floor = float(solver.get("coefficientFloor", 1e-8))
+    if not math.isfinite(tolerance) or tolerance <= 0:
+        raise ValueError("solver relativeTolerance must be finite and positive")
+    if not math.isfinite(residual_tolerance) or residual_tolerance <= 0:
+        raise ValueError("solver residualTolerance must be finite and positive")
     if not 0 < damping <= 1:
         raise ValueError("solver damping must lie in (0,1]")
     maximum_update = math.inf
@@ -449,7 +501,12 @@ def solve_field_manifest(
             maximum_update = max(maximum_update, _relative_update(previous, updated))
             fields[target] = updated
         current_residuals = _equation_residuals(
-            equations, fields, parameters, steps, shape
+            equations,
+            fields,
+            parameters,
+            steps,
+            shape,
+            coefficient_floor=coefficient_floor,
         )
         history.append(
             {
@@ -458,7 +515,7 @@ def solve_field_manifest(
                 "equation_residuals": current_residuals,
             }
         )
-        if maximum_update <= tolerance:
+        if maximum_update <= tolerance and max(current_residuals.values()) <= residual_tolerance:
             converged = True
             break
 
@@ -486,5 +543,7 @@ def solve_field_manifest(
             "spacing": steps,
             "boundary_approximation": "isolated manifests use the supplied or zero far-field Dirichlet boundary",
             "coefficient_floor": coefficient_floor,
+            "relative_update_tolerance": tolerance,
+            "equation_residual_tolerance": residual_tolerance,
         },
     )

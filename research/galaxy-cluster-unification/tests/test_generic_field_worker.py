@@ -66,6 +66,7 @@ def test_manufactured_sine_solution_in_two_and_three_dimensions(dimensions: int,
     relative_error = np.linalg.norm(solution.fields["u"] - expected) / np.linalg.norm(expected)
     assert solution.converged
     assert relative_error < (0.004 if dimensions == 2 else 0.015)
+    assert max(solution.equation_residuals.values()) <= 1e-10
     assert solution.metadata["dimensions"] == dimensions
     assert len(solution.observables["gradient"]) == dimensions
 
@@ -85,7 +86,39 @@ def test_variable_coefficient_is_read_from_expression_not_theory_name():
     relative_error = np.linalg.norm(solution.fields["u"] - expected) / np.linalg.norm(expected)
     assert solution.converged
     assert relative_error < 0.005
+    assert max(solution.equation_residuals.values()) <= 1e-10
     assert solution.metadata["engine"] == "generic-divergence-field-worker-v1"
+
+
+def test_small_update_alone_cannot_claim_convergence():
+    manifest = manufactured_manifest(2)
+    manifest["solver"] = {
+        "family": "finite_volume_elliptic",
+        "relativeTolerance": 2.0,
+        "residualTolerance": 1e-12,
+        "maxIterations": 1,
+        "damping": 0.5,
+    }
+    forcing = np.ones((9, 9), dtype=float)
+    solution = solve_field_manifest(manifest, {"forcing": forcing}, 1.0)
+    assert solution.maximum_relative_update <= 2.0
+    assert max(solution.equation_residuals.values()) > 1e-12
+    assert not solution.converged
+
+
+def test_zero_source_harmonic_boundary_has_a_well_scaled_residual():
+    cells = 17
+    axis = np.linspace(-1.0, 1.0, cells)
+    expected = np.broadcast_to(axis[:, None], (cells, cells)).copy()
+    solution = solve_field_manifest(
+        manufactured_manifest(2),
+        {"forcing": np.zeros_like(expected)},
+        float(axis[1] - axis[0]),
+        boundary_values={"u": expected},
+    )
+    assert solution.converged
+    assert max(solution.equation_residuals.values()) <= 1e-10
+    assert np.allclose(solution.fields["u"], expected, rtol=0.0, atol=1e-12)
 
 
 def test_worker_rejects_unsupported_coordinate_system():

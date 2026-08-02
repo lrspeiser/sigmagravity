@@ -1,0 +1,4 @@
+system_id,state,converged,iterations,maximum_relative_update,maximum_equation_residual,universal_gravity_parameters,per_object_gravity_parameters
+DDO101-replay,succeeded,true,17,3.013270475405045e-9,2.361816353328643e-10,1,0
+DDO101-compact,succeeded,true,17,3.013270474102923e-9,2.3829518083821735e-10,1,0
+DDO101-diffuse,succeeded,true,17,3.013270476030544e-9,2.714417441072106e-10,1,0

@@ -12,6 +12,14 @@
     "galaxy": { "type": "string", "minLength": 1, "maxLength": 128 },
     "sourceObservables": { "type": "object" },
     "parameterPackage": { "type": "object" },
+    "outputGrid": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cellsPerAxis"],
+      "properties": {
+        "cellsPerAxis": { "type": "integer", "minimum": 9, "maximum": 513 }
+      }
+    },
     "extractionControls": {
       "type": "object",
       "additionalProperties": false,

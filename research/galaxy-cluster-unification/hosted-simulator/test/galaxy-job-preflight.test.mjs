@@ -72,6 +72,7 @@ test("generate preflight accepts content-hashed parameters and normalizes contro
       generationControls: {
         gas: { massScale: 1.5, radialScale: 0.8, centerOffsetKpc: [0.1, -0.2] },
       },
+      outputGrid: { cellsPerAxis: 25 },
       vertical: { enabled: false },
       outputLicense: { id: "CC-BY-4.0", redistributionAllowed: true },
     },
@@ -80,6 +81,8 @@ test("generate preflight accepts content-hashed parameters and normalizes contro
   assert.equal(result.workerRequest.generationControls.gas.mass_scale, 1.5);
   assert.equal(result.workerRequest.generationControls.gas.radial_scale, 0.8);
   assert.deepEqual(result.workerRequest.generationControls.gas.center_offset_kpc, [0.1, -0.2]);
+  assert.deepEqual(result.gridShape, [25, 25]);
+  assert.deepEqual(result.workerRequest.outputGrid, { cellsPerAxis: 25 });
 });
 
 test("galaxy preflight rejects hidden gravity state and incompatible data", () => {

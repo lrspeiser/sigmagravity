@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "sigma-p0721-batch-acceptance/1",
+  "date": "2026-08-02",
+  "state": "pass",
+  "scope": "numerical_execution_not_observation_validation",
+  "batchId": "batch_38275ba0e1bf7b37e5a7f06b",
+  "model": "Newtonian Poisson gravity",
+  "modelSha256": "43738f2c7bb3c4e94193763cf46f39b2a47fa852b25d1c063fef00fa7e1aa661",
+  "scientificResultSha256": "913ff065a693162355e614534573c107479df44431a7bee93651a0907e5c9388",
+  "parameterPolicy": {
+    "mode": "published_fixed",
+    "perObjectParameters": []
+  },
+  "systems": ["DDO101-replay", "DDO101-compact", "DDO101-diffuse"],
+  "successfulSystems": 3,
+  "convergenceFraction": 1.0,
+  "medianIterations": 17,
+  "maximumEquationResidual": 2.714417441072106e-10,
+  "acceptanceMaximumEquationResidual": 1e-7,
+  "universalGravityParameters": 1,
+  "perObjectGravityParameters": 0,
+  "observationScoresAvailable": false,
+  "downloadedArtifactCount": 9,
+  "allDownloadedArtifactHashesValid": true
+}

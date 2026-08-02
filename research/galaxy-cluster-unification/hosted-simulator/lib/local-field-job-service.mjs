@@ -379,6 +379,32 @@ export class LocalFieldJobService {
     return publicUpload(await this.#readUpload(assertIdentifier(idValue, "upload")));
   }
 
+  async createUploadFromGalaxyArtifact(jobIdValue, artifactStem) {
+    const allowed = new Set(["field_surface_density", "field_volume_density"]);
+    if (!allowed.has(artifactStem)) {
+      throw new LocalServiceError(422, "invalid_galaxy_artifact", "galaxy field artifact is not supported");
+    }
+    const job = await this.getGalaxyJob(jobIdValue);
+    if (job.state !== "succeeded") {
+      throw new LocalServiceError(409, "galaxy_artifact_not_ready", `galaxy job is ${job.state}`);
+    }
+    const [bundleArtifact, archiveArtifact] = await Promise.all([
+      this.getArtifact(job.id, `${artifactStem}_bundle.json`),
+      this.getArtifact(job.id, `${artifactStem}.npz`),
+    ]);
+    const inputBundle = JSON.parse(bundleArtifact.content.toString("utf8"));
+    const ticket = await this.createUpload({
+      schemaVersion: "sigma-data-upload-request/1",
+      inputBundle,
+      archive: {
+        sha256: archiveArtifact.record.sha256,
+        bytes: archiveArtifact.record.bytes,
+      },
+    });
+    await this.putUploadContent(ticket.id, archiveArtifact.content);
+    return this.getUpload(ticket.id);
+  }
+
   async createFieldJob(payload) {
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
       throw new LocalServiceError(422, "invalid_job", "field job request must be an object");
