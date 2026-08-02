@@ -1,0 +1,123 @@
+{
+  "protocol_version": "P0709-EXTERNAL-UNLOCK-MANIFEST-1.0.0",
+  "status": "frozen_before_one_time_external_target_parse",
+  "frozen_utc": "2026-08-02T08:00:00Z",
+  "preregistration": "configs/p0633_external_validation_preregistration.json",
+  "candidate_lock": "configs/p0708_external_prediction_lock.json",
+  "candidate_lock_report": "results/p0708_external_prediction_lock/report.json",
+  "candidate_prediction_manifest": "results/p0708_external_prediction_lock/system_prediction_manifest.csv",
+  "registered_galaxy_audit": "results/p0639_registered_baryonic_maps/map_audit.csv",
+  "required_candidate_commit": "857feeb85af3b94f3c486c72db00c8f486318d6b",
+  "required_universal_parameter_sha256": "bf3f12d6b32ee3f1b0e3bf48a9603c4aafbcd34b2cbdd3de021d689514099a15",
+  "authorization": {
+    "external_evaluations_authorized": 1,
+    "formula_changes_after_unlock_are_validation": false,
+    "per_object_gravity_parameters": 0,
+    "per_object_slip_parameters": 0,
+    "per_object_photon_parameters": 0,
+    "outcomes_opened_when_protocol_frozen": false
+  },
+  "galaxy_target_sources": {
+    "official_release": "https://science.nrao.edu/science/surveys/littlethings/data",
+    "published_circular_speed_source": {
+      "url": "https://export.arxiv.org/e-print/1611.03865",
+      "filename": "iorio2017_arxiv_1611.03865_source.tar.gz",
+      "expected_bytes": 8528077,
+      "role": "published 3DBarolo circular speeds, dispersions, uncertainties, systemic velocities, and ring radii",
+      "handling": "download_and_parse_only_after_unlock_manifest_commit_is_pushed"
+    },
+    "moment_map_directory": "data/raw/p0633_little_things_kinematics",
+    "targets": [
+      {"id": "CVnIdwA", "archive_directory": "cvnidwa", "cube_weight": "R", "moment1_bytes": 1203840, "moment2_bytes": 1203840},
+      {"id": "DDO47", "archive_directory": "ddo47", "cube_weight": "NA", "moment1_bytes": 4285440, "moment2_bytes": 4285440},
+      {"id": "DDO50", "archive_directory": "ddo50", "cube_weight": "NA", "moment1_bytes": 16827840, "moment2_bytes": 16827840},
+      {"id": "DDO52", "archive_directory": "ddo52", "cube_weight": "NA", "moment1_bytes": 4366080, "moment2_bytes": 4366080},
+      {"id": "DDO53", "archive_directory": "ddo53", "cube_weight": "R", "moment1_bytes": 4242240, "moment2_bytes": 4242240},
+      {"id": "DDO87", "archive_directory": "ddo87", "cube_weight": "NA", "moment1_bytes": 4345920, "moment2_bytes": 4345920},
+      {"id": "DDO101", "archive_directory": "ddo101", "cube_weight": "R", "moment1_bytes": 4380480, "moment2_bytes": 4380480},
+      {"id": "DDO126", "archive_directory": "ddo126", "cube_weight": "NA", "moment1_bytes": 4386240, "moment2_bytes": 4386240},
+      {"id": "DDO133", "archive_directory": "ddo133", "cube_weight": "R", "moment1_bytes": 4374720, "moment2_bytes": 4374720},
+      {"id": "DDO210", "archive_directory": "ddo210", "cube_weight": "NA", "moment1_bytes": 4345920, "moment2_bytes": 4345920},
+      {"id": "DDO216", "archive_directory": "ddo216", "cube_weight": "R", "moment1_bytes": 1108800, "moment2_bytes": 1108800},
+      {"id": "NGC1569", "archive_directory": "ngc1569", "cube_weight": "NA", "moment1_bytes": 16824960, "moment2_bytes": 16824960},
+      {"id": "UGC8508", "archive_directory": "ugc8508", "cube_weight": "NA", "moment1_bytes": 4386240, "moment2_bytes": 4386240}
+    ],
+    "url_template": "https://things.cv.nrao.edu/littlethings/{archive_directory}/HI/{id}_{cube_weight}_{product}.FITS",
+    "products": ["XMOM1", "XMOM2"]
+  },
+  "cluster_target_sources": {
+    "constraint_containers": [
+      {
+        "id": "cibirka2018_three_cluster_source",
+        "path": "data/sealed/p0633_relics_lensing/cibirka2018_arxiv_1803.09557_source.tar.gz",
+        "systems": ["AS295", "MACS0025", "MACS0159"],
+        "expected_bytes": 4586420,
+        "expected_sha256": "6fef39aa25e0ae897c292e6051c86f8f6397ed75de8ed4aa979aab175c443caf"
+      },
+      {
+        "id": "daddona2024_plckg287_multiple_images",
+        "path": "data/sealed/p0633_relics_lensing/daddona2024_tablec1_multiple_images.dat",
+        "systems": ["PLCKG287"],
+        "expected_bytes": 13320,
+        "expected_sha256": "661913e6d7c4d6c925cd7c7608ad00727763f93d3297e9d4829174a7e47e6389"
+      }
+    ],
+    "compact_halo_comparator": {
+      "primary_method": "glafic",
+      "primary_version": "v2",
+      "sensitivity_method": "zitrin-ltm-gauss",
+      "sensitivity_versions": {"AS295": "v2", "MACS0025": "v1", "MACS0159": "v1", "PLCKG287": "v1"},
+      "products": ["kappa", "x-arcsec-deflect", "y-arcsec-deflect"],
+      "base_url_template": "https://archive.stsci.edu/hlsps/relics/{slug}/models/{method}/{version_path}",
+      "filename_template": "hlsp_relics_model_model_{slug}_{method}_{version}_{product}.fits",
+      "systems": [
+        {"id": "AS295", "slug": "abells295"},
+        {"id": "MACS0025", "slug": "macs0025m12"},
+        {"id": "MACS0159", "slug": "macs0159m08"},
+        {"id": "PLCKG287", "slug": "plckg287p32"}
+      ],
+      "version_path_rule": "glafic v2 and AS295 zitrin v2 live under v2/; the other zitrin v1 products live directly in their method directory",
+      "selection_rule": "Use glafic v2 as the sole primary compact-halo comparator for every cluster; use the latest already identified zitrin-ltm-gauss release only as a sensitivity analysis. Never choose a method per cluster from its score."
+    }
+  },
+  "frozen_scoring": {
+    "galaxy_circular_speed": {
+      "interpolation": "linear prediction interpolation at every published ring radius inside the frozen prediction support",
+      "per_galaxy": "sqrt(mean((V_prediction - Vc_published)^2))",
+      "sample": "sqrt(mean(per_galaxy_RMSE^2)) with every valid galaxy receiving equal weight",
+      "uncertainty_diagnostic": "also report inverse-variance RMSE, but do not use it for the primary gate",
+      "systemic_velocity": "use the published 3DBarolo systemic velocity as measured redshift metadata; never refit it to a gravity model"
+    },
+    "galaxy_velocity_field": {
+      "projection": "sample each already locked intrinsic P0708 LOS field at sky pixels using the frozen photometric center, PA, and inclination",
+      "beam": "intensity-weighted Gaussian beam convolution using the target FITS BMAJ and BMIN; no beam parameter is fit",
+      "mask": "finite moment-0, moment-1, and moment-2 pixels with positive moment-0 inside the registered HI support",
+      "weight": "moment0 / max(moment2^2 + (channel_width/2.355)^2, tiny), normalized to unit sum per galaxy",
+      "per_galaxy": "sqrt(sum(normalized_weight * residual^2))",
+      "sample": "sqrt(mean(per_galaxy_RMSE^2))",
+      "no_kinematic_refit": true
+    },
+    "morphology": {
+      "coordinates": ["concentration_5log_r80_r20", "lopsidedness_180", "clumpiness_positive_highpass", "inclination_deg"],
+      "bins": "two pre-outcome bins per coordinate, split at the median of the 13 open baryonic-map values; the exact medians are written into the unlock manifest",
+      "score": "equal-galaxy circular-speed RMSE in each bin"
+    },
+    "cluster": {
+      "cosmology": "astropy.cosmology.Planck18",
+      "family_split": "exact P0633 SHA-256 salted whole-family split",
+      "source_nuisance": "one mean source-plane position per family, computed identically for all models; no lens parameter is optimized",
+      "heldout_rule": "all selected families were untouched during candidate development; the deterministic family label marks the preregistered 30 percent reporting subset but source position remains an ordinary same-family nuisance",
+      "image_score": "global image-plane root RMS after one-to-one minimum-cost assignment between observed images and converged roots within the frozen search field",
+      "topology": "exact observed family multiplicity after excluding roots fainter than the compact-halo comparator's faintest matched image for that family; report the threshold dependence",
+      "critical_curve": "derive each model's critical curves from its fixed Jacobian; report distances to observed tangential-image loci and pairwise curve distances. If the catalog lacks arc orientation/parity, label the critical-curve gate not independently observable rather than silently substituting a lens-model map as data.",
+      "compact_halo": "glafic v2 for every cluster, never selected per cluster",
+      "forbidden": ["center refit", "external shear", "ellipticity", "rotation", "mass sheet", "radial rescaling", "per-cluster gravity parameter"]
+    },
+    "comparators": {
+      "galaxy_best_frozen_MOND": "minimum sample score of the already locked AQUAL and QUMOND predictions; no target refit",
+      "cluster_baryon_only": "already locked P0708 baryon-only GR deflection",
+      "cluster_compact_halo": "frozen glafic v2 archive product"
+    }
+  },
+  "output": "results/p0633_external_validation/unlock_manifest.json"
+}
