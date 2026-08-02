@@ -62,6 +62,24 @@ def relative_vector_rms(left, right, mask) -> float:
     return numerator / max(denominator, np.finfo(float).tiny)
 
 
+def vector_rms_ratio(numerator_fields, denominator_fields, mask) -> float:
+    numerator = float(
+        np.sqrt(
+            np.mean(
+                sum(np.asarray(component)[mask] ** 2 for component in numerator_fields)
+            )
+        )
+    )
+    denominator = float(
+        np.sqrt(
+            np.mean(
+                sum(np.asarray(component)[mask] ** 2 for component in denominator_fields)
+            )
+        )
+    )
+    return numerator / max(denominator, np.finfo(float).tiny)
+
+
 def relative_grid_rms(left: np.ndarray, right: np.ndarray, mask: np.ndarray) -> float:
     numerator = float(np.sqrt(np.mean((left[mask] - right[mask]) ** 2)))
     denominator = float(np.sqrt(np.mean(right[mask] ** 2)))
@@ -224,7 +242,7 @@ def main():
     maximum_angular_scatter = float(
         radial_table.correction_angular_scatter_fraction.max()
     )
-    high_acceleration_ratio = relative_vector_rms(
+    high_acceleration_ratio = vector_rms_ratio(
         sphere_high_acceleration.correction_acceleration,
         sphere_newtonian.acceleration,
         comparison,
