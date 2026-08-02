@@ -1,0 +1,64 @@
+{
+  "report_version": "P0681-COMPACT-HALO-HESSIAN-RICHARDSON-RESULTS-1.0.0",
+  "status": "fail",
+  "all_integrity_gates_pass": false,
+  "P0678_decomposition_numerically_qualified": false,
+  "protocol_sha256": "f0c6e6811afcf5a9e610a8038d102cbf1d7b31f18a4c9094effdb08f80cc6ac7",
+  "source_sha256": "98b2b55fb228c9bce6c364ac0839a9a7cfa7fcd5c4b1222a74f58c71e5adb56b",
+  "parameter_table_sha256": "f69431208a468fcf04bc086d836eb9d60f8bcf4c2651588a45c6068e103f0625",
+  "step_table_sha256": "f885323f877b947df3a4fb8ab6629a525a6d4fb3e8df3e69d9039bd724002661",
+  "parameter_rows": 8,
+  "metrics": {
+    "evaluation_points": 92,
+    "exact_hessian_normalized_curl_RMS": 0.0,
+    "direct_step_kappa_exact_relative_RMS": {
+      "0.01": 1.6825183033464357e-05,
+      "0.005": 1.6832525445907664e-05,
+      "0.002": 1.6834736054285818e-05,
+      "0.001": 1.683505728730959e-05
+    },
+    "direct_step_determinant_exact_relative_RMS": {
+      "0.01": 2.0641384977257312e-05,
+      "0.005": 2.0654452996070965e-05,
+      "0.002": 2.0658391847360438e-05,
+      "0.001": 2.0658964434626983e-05
+    },
+    "direct_step_normalized_curl_RMS": {
+      "0.01": 1.0425397829125642e-07,
+      "0.005": 2.6063521558776786e-08,
+      "0.002": 4.1701952616204025e-09,
+      "0.001": 1.042605510566192e-09
+    },
+    "observed_kappa_convergence_order": -0.0002548011565004098,
+    "observed_determinant_convergence_order": -0.0003697141501364776,
+    "exact_negative_jacobian_points": 6
+  },
+  "gate_results": {
+    "P0680_failed": true,
+    "P0680_exact_failures": true,
+    "P0680_exact_symmetry": true,
+    "P0680_negative_points": true,
+    "point_count": true,
+    "step_count": true,
+    "steps_decrease": true,
+    "kappa_error_decreases": false,
+    "determinant_error_decreases": false,
+    "smallest_kappa_agreement": false,
+    "smallest_determinant_agreement": false,
+    "smallest_curl": true,
+    "negative_point_stability": true,
+    "finite": true,
+    "no_candidate_fit": true,
+    "no_raw_root_score": true,
+    "sealed_targets_untouched": true
+  },
+  "new_candidate_formula_fit": false,
+  "new_raw_image_root_score_computed": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0681 is the final numerical derivative audit and cannot validate a physical halo or new gravity law.",
+    "A pass qualifies only the P0678 spent target specification and does not change P0678-P0680 historical verdicts.",
+    "No image root, candidate formula, or sealed target is evaluated."
+  ]
+}
