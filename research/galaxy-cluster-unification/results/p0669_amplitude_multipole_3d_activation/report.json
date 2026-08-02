@@ -1,0 +1,130 @@
+{
+  "report_version": "P0669-AMPLITUDE-MULTIPOLE-3D-ACTIVATION-RESULTS-1.0.0",
+  "status": "pass",
+  "all_progression_gates_pass": true,
+  "candidate_advanced_to_spent_RXJ2129_3D_map_build": true,
+  "protocol_sha256": "d8be9873144ab5ef56d086c5ab79e049636e0cfe2a4b5d29ba010b60bca82041",
+  "source_sha256": "9ae1b3cb2290ad1f5a54a252f3869f94b08848d2f3f6249072c4627bd4f0b636",
+  "activation_source_sha256": "459ad133e36a1706bb656c027bf1cf35020b819f13030870b85ede47e6bc2972",
+  "parent_scores_sha256": "e4bcecb442ae53ebafd8dbed69936ba9753e872d24c4697758500d2aefffaf64",
+  "registered_map_manifest_sha256": "1dd7af5a986f14a007eebbd9b8152aa1e876811cc65e8ab64dd5b4121ce30eaa",
+  "coverage": {
+    "registered_galaxies": 13,
+    "registered_clusters": 4,
+    "mass_scenarios": 3,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "metrics": {
+    "registered_galaxy_nominal_median_sigma": 5.2248004912901634e-05,
+    "registered_cluster_nominal_median_sigma": 0.0030568889120063986,
+    "registered_cluster_to_galaxy_nominal_median_sigma_ratio": 58.50728495953649,
+    "mass_sensitivity_cluster_to_galaxy_sigma_ratios": {
+      "low": 66.80045449998472,
+      "nominal": 58.50728495953649,
+      "high": 53.28964142224946
+    },
+    "registered_galaxy_nominal_median_amplitude_gate": 0.11786341097222411,
+    "registered_cluster_nominal_median_amplitude_gate": 0.18672061883160748,
+    "registered_cluster_to_galaxy_nominal_median_amplitude_gate_ratio": 1.5842119050466847,
+    "maximum_component_mass_relative_error": 1.7178187557734773e-15,
+    "minimum_constitutive_eigenvalue_conservative_bound": 8.77705518011776e-07
+  },
+  "gate_results": {
+    "P0667_synthetic_parent": true,
+    "P0668_failure_mode": true,
+    "galaxy_coverage": true,
+    "cluster_coverage": true,
+    "surface_to_volume_mass": true,
+    "scale_heights": true,
+    "bounded_sigma": true,
+    "positive_eigenvalue": true,
+    "galaxy_channel_small": true,
+    "cluster_channel_present": true,
+    "sigma_domain_separation": true,
+    "mass_sensitivity": true,
+    "amplitude_gate_separation": true,
+    "no_new_constants": true,
+    "no_per_object_parameters": true,
+    "spent_lensing_untouched": true,
+    "sealed_targets_untouched": true
+  },
+  "domain_summary": [
+    {
+      "domain": "registered_cluster_baryons_only",
+      "scenario": "high",
+      "systems": 4,
+      "median_sigma": 0.0033249173977101445,
+      "minimum_sigma": 0.0030599561091451647,
+      "maximum_sigma": 0.024342112197039863,
+      "median_amplitude_gate": 0.1867206186592153,
+      "median_intensity_gate": 0.03517955249941685,
+      "median_trace_length_kpc": 240.5569701991164
+    },
+    {
+      "domain": "registered_cluster_baryons_only",
+      "scenario": "low",
+      "systems": 4,
+      "median_sigma": 0.002622719578191666,
+      "minimum_sigma": 0.0025973189714887522,
+      "maximum_sigma": 0.019820645528371175,
+      "median_amplitude_gate": 0.18672061833439263,
+      "median_intensity_gate": 0.03517955237363335,
+      "median_trace_length_kpc": 240.83053512661766
+    },
+    {
+      "domain": "registered_cluster_baryons_only",
+      "scenario": "nominal",
+      "systems": 4,
+      "median_sigma": 0.0030568889120063986,
+      "minimum_sigma": 0.0029042037753584417,
+      "maximum_sigma": 0.02269225181775499,
+      "median_amplitude_gate": 0.18672061883160748,
+      "median_intensity_gate": 0.035179552567013744,
+      "median_trace_length_kpc": 240.6684050483664
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "scenario": "high",
+      "systems": 13,
+      "median_sigma": 6.239331526674389e-05,
+      "minimum_sigma": 6.938957627424552e-06,
+      "maximum_sigma": 0.0007272634362218956,
+      "median_amplitude_gate": 0.11786341097222411,
+      "median_intensity_gate": 0.0138917836460074,
+      "median_trace_length_kpc": 1.4955571432808934
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "scenario": "low",
+      "systems": 13,
+      "median_sigma": 3.926200200018498e-05,
+      "minimum_sigma": 5.660412444296547e-06,
+      "maximum_sigma": 0.0005079639665769237,
+      "median_amplitude_gate": 0.11786341097222411,
+      "median_intensity_gate": 0.0138917836460074,
+      "median_trace_length_kpc": 1.7219466427214591
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "scenario": "nominal",
+      "systems": 13,
+      "median_sigma": 5.2248004912901634e-05,
+      "minimum_sigma": 7.261789392668502e-06,
+      "maximum_sigma": 0.0006383544032166149,
+      "median_amplitude_gate": 0.11786341097222411,
+      "median_intensity_gate": 0.0138917836460074,
+      "median_trace_length_kpc": 1.5893453253392795
+    }
+  ],
+  "sufficient_statistic_identity": "mean(sqrt(M)*local_sigma)=sqrt(M)*mean(local_sigma) because M is global per registered map",
+  "spent_RXJ2129_lensing_outcomes_opened": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0669 changes the constitutive activation law but does not yet derive it from a covariant action or quantized gravity theory.",
+    "The square root is not a fitted exponent: it is fixed by the declared amplitude-versus-quadratic-power interpretation.",
+    "P0669 tests coefficient transfer and does not solve the nonlinear tensor field or compare a target outcome.",
+    "No spent RX J2129 image and no P0633/P0640 target may be used in P0669 development or selection."
+  ]
+}
