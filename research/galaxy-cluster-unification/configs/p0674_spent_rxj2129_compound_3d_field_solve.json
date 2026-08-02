@@ -1,0 +1,81 @@
+{
+  "protocol_version": "P0674-SPENT-RXJ2129-COMPOUND-3D-FIELD-SOLVE-1.0.0",
+  "status": "frozen_before_any_P0674_field_or_deflection_score",
+  "frozen_utc": "2026-08-02T05:35:00Z",
+  "purpose": "Test whether the parameter-free P0673 compound coefficient produces a converged, nonperturbative absolute tensor-AQUAL field on the identical spent RX J2129 physical source before any new image topology is scored.",
+  "parent_result": "results/p0673_compound_path_activation/report.json",
+  "scalar_reference_result": "results/p0671_spent_rxj2129_absolute_3d_field_solve/report.json",
+  "failed_topology_reference": "results/p0672_spent_rxj2129_absolute_raw_topology/report.json",
+  "map_input": "results/p0670_spent_rxj2129_absolute_3d_map_build/rxj2129_absolute_baryons_3d.npz",
+  "field_equations": {
+    "scalar": "div[mu(|grad Phi_s|/a0) grad Phi_s] = 4 pi G rho_bar",
+    "compound_tensor": "div[mu(|grad Phi_c|/a0) (I-sigma_compound h h) grad Phi_c] = 4 pi G rho_bar",
+    "compound_activation": "sigma_compound = 1-(1-epsilon)^N",
+    "elementary_probability": "epsilon = sqrt(1-exp[-(D^2+Q^2)]) [a0/(a0+|gN|)] C_transverse",
+    "coherent_opportunities": "N=(ell/Lc)^2",
+    "mu": "x/(1+x)",
+    "shared_boundary": "the P0670 simple-MOND monopole",
+    "photon": "alpha_perp=-(2/c^2) integral a_perp dz before multiplication by Dds/Ds",
+    "gravitational_slip": 0.0,
+    "fitted_photon_amplitude": false,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "candidate": {
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "coherence_power": 2.0,
+    "mu_floor": 1e-6
+  },
+  "solver": {
+    "picard_damping": 0.65,
+    "mu_floor": 1e-6,
+    "nonlinear_residual_tolerance": 1e-5,
+    "linear_relative_tolerance": 1e-10,
+    "maximum_nonlinear_iterations": 80,
+    "maximum_linear_iterations": 5000
+  },
+  "audit_region": {
+    "strong_lens_radius_kpc": [15.8, 76.5],
+    "deflections": "physical angular deflection before Dds/Ds, sampled on the unchanged P0670 x-y grid"
+  },
+  "predeclared_progression_gates": {
+    "P0673_all_progression_gates_pass": true,
+    "P0672_missing_multiplicity_families": 7,
+    "P0672_critical_curve_present_families": 0,
+    "recomputed_compound_mass_weighted_sigma_absolute_tolerance": 1e-12,
+    "scalar_normalized_residual_RMS_max": 1e-5,
+    "compound_normalized_residual_RMS_max": 1e-5,
+    "scalar_solver_converged": true,
+    "compound_solver_converged": true,
+    "boundary_maximum_relative_mismatch_max": 1e-14,
+    "all_potentials_accelerations_and_deflections_finite": true,
+    "minimum_compound_constitutive_eigenvalue_strictly_positive": true,
+    "scalar_strong_lens_median_physical_deflection_arcsec_min": 1.0,
+    "compound_strong_lens_median_physical_deflection_arcsec_min": 1.0,
+    "compound_to_scalar_strong_lens_deflection_RMS_ratio_min": 0.2,
+    "compound_to_scalar_strong_lens_deflection_RMS_ratio_max": 10.0,
+    "compound_minus_scalar_strong_lens_relative_RMS_min": 0.05,
+    "compound_minus_scalar_strong_lens_relative_RMS_max": 10.0,
+    "scalar_normalized_deflection_curl_RMS_max": 1e-8,
+    "compound_normalized_deflection_curl_RMS_max": 1e-8,
+    "gravitational_slip_exactly_zero": 0.0,
+    "fitted_photon_amplitude": false,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0,
+    "raw_lens_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Advance the sole compound tensor field to one separately frozen spent raw-topology audit only if every parent, coefficient-reproduction, convergence, boundary, positivity, nonperturbative-response, stability, zero-slip, parameter-accounting, and no-score gate passes.",
+  "outputs": {
+    "directory": "results/p0674_spent_rxj2129_compound_3d_field_solve",
+    "field": "rxj2129_absolute_scalar_compound_fields.npz"
+  },
+  "claim_boundary": [
+    "The 5% nonperturbative-response gate is frozen before this field is solved and is not a raw-lens accuracy threshold.",
+    "The upper response bounds reject numerical explosions but do not assert that every field inside them is physically acceptable.",
+    "A field-solve pass does not establish image multiplicity, parity, critical curves, or positional accuracy.",
+    "The compound rule remains a constitutive hypothesis without a covariant action or microscopic derivation.",
+    "P0633 galaxy kinematics and P0640 cluster lens constraints remain sealed."
+  ]
+}
