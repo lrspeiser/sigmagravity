@@ -183,6 +183,7 @@ def build_accumulated_transport_deflection_field(
     elif closure_id in {
         "streamline_averaged_gas_minus_star_flux",
         "streamline_balanced_residual_flux",
+        "compact_streamline_averaged_gas_minus_star_flux",
     }:
         total_norm = np.maximum(total_field.magnitude_m_s2, np.finfo(float).tiny)
         direction_x = total_field.acceleration_x_m_s2 / total_norm
@@ -197,6 +198,9 @@ def build_accumulated_transport_deflection_field(
         )
         if closure_id == "streamline_averaged_gas_minus_star_flux":
             flux_x, flux_y = transported_x, transported_y
+        elif closure_id == "compact_streamline_averaged_gas_minus_star_flux":
+            flux_x, flux_y = taper * transported_x, taper * transported_y
+            transport_audit["post_transport_compact_taper_applied"] = True
         else:
             flux_x = transported_x - local_component_flux_x
             flux_y = transported_y - local_component_flux_y
@@ -205,6 +209,17 @@ def build_accumulated_transport_deflection_field(
     source = np.gradient(flux_x, spacing, axis=1, edge_order=2) + np.gradient(
         flux_y, spacing, axis=0, edge_order=2
     )
+    flux_edge = np.r_[
+        flux_x[0],
+        flux_x[-1],
+        flux_x[:, 0],
+        flux_x[:, -1],
+        flux_y[0],
+        flux_y[-1],
+        flux_y[:, 0],
+        flux_y[:, -1],
+    ]
+    flux_rms = float(np.sqrt(np.mean(flux_x**2 + flux_y**2)))
     alpha_x, alpha_y, normalized_curl = _spectral_lens_solve(source, spacing)
     circular_radius = np.linspace(spacing, support_radius_arcsec + 20.0, 64)
     circular_zero = np.zeros_like(circular_radius)
@@ -240,6 +255,8 @@ def build_accumulated_transport_deflection_field(
         "source_integral_fraction": float(
             abs(np.sum(source)) / max(np.sum(np.abs(source)), np.finfo(float).tiny)
         ),
+        "maximum_flux_edge_fraction_of_RMS": float(np.max(np.abs(flux_edge)))
+        / max(flux_rms, np.finfo(float).tiny),
         "normalized_curl_RMS": normalized_curl,
         "unit_deflection_RMS_arcsec": float(np.sqrt(np.mean(alpha_x**2 + alpha_y**2))),
         "unit_deflection_maximum_arcsec": float(np.max(np.hypot(alpha_x, alpha_y))),

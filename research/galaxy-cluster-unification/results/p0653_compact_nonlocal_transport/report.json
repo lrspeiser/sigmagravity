@@ -1,0 +1,122 @@
+{
+  "report_version": "P0653-COMPACT-NONLOCAL-TRANSPORT-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_robustness": false,
+  "protocol_sha256": "eea5a984390072023e46a5739a4469dee8f36d229bdc7b8b6efaed924358f07b",
+  "source_sha256": "7115766572c9c770ae29e3cff6ed164a67f7047629e4dae46e7392827efb5c6a",
+  "coverage": {
+    "candidate_fields": 1,
+    "amplitude_rows": 1,
+    "CV_folds": 5,
+    "fitted_field_amplitude_parameters": 0,
+    "new_physical_length_constants": 0,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "field_audit": {
+    "operator": "finite_path_accumulated_component_tensor",
+    "closure": "compact_streamline_averaged_gas_minus_star_flux",
+    "mismatch_mode": "transverse_tensor_mix",
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "proxy_total_mass_msun": 100000000000000.0,
+    "common_smoothing_kpc": 25.0,
+    "transport_steps": 12,
+    "proxy_mass_changes_deflection_normalization": false,
+    "activation_weighted_mean": 0.03081920513858914,
+    "activation_maximum": 0.3372757709700177,
+    "cancellation_mean": 0.003594706024914429,
+    "mismatch_mean": 0.04524326517865508,
+    "survival_mean": 0.993761235780194,
+    "trace_length_median_kpc": 92.99394454051999,
+    "source_integral_fraction": 1.0870711590905243e-17,
+    "maximum_flux_edge_fraction_of_RMS": 0.0,
+    "normalized_curl_RMS": 2.4354980806090328e-17,
+    "unit_deflection_RMS_arcsec": 0.44212615617176054,
+    "unit_deflection_maximum_arcsec": 2.341997070368972,
+    "maximum_edge_correction_arcsec": 0.6480109256649379,
+    "carrier_deflection_median_arcsec": 21.25739757728231,
+    "streamline_steps": 12,
+    "mean_samples_per_cell": 20.131001980739022,
+    "minimum_samples_per_cell": 13.0,
+    "maximum_samples_per_cell": 25.0,
+    "transport_relative_change_RMS": 0.7528457090498826,
+    "transport_flux_RMS_ratio": 0.6902700537847798,
+    "post_transport_compact_taper_applied": true
+  },
+  "map_audits": {
+    "hst": {
+      "system_label": "RXJ2129",
+      "map_kind": "hst_f160w",
+      "input_count": 2,
+      "native_pixel_scale_arcsec": 0.0650000000000009,
+      "background": -0.0033761123195290565,
+      "masked_fraction": 0.01795127705200111,
+      "positive_cells": 12435,
+      "map_sum_before_normalization": 405.6119888731333
+    },
+    "xray": {
+      "system_label": "RXJ2129",
+      "map_kind": "chandra_soft_rate",
+      "input_count": 2,
+      "total_exposure_ks": 39.6040961730402,
+      "soft_events_on_grid": 15401,
+      "point_source_seed_cells": 37,
+      "point_source_masked_fraction": 0.009767092411720512,
+      "unmasked_map_sum": 0.792017083914403,
+      "masked_map_sum": 0.7662815305616146
+    }
+  },
+  "CV_summary": {
+    "stage": "exact_compact_nonlocal",
+    "closure": "compact_streamline_averaged_gas_minus_star_flux",
+    "lambda": 1.0,
+    "pooled_CV_RMS_arcsec": 2.1541748719563207,
+    "CV_roots": 15,
+    "CV_images": 15,
+    "all_CV_roots": true
+  },
+  "comparison": {
+    "lambda0_CV_RMS_arcsec": 2.760255155353674,
+    "candidate_CV_RMS_arcsec": 2.1541748719563207,
+    "CV_improvement_fraction_vs_lambda0": 0.21957400649060488,
+    "best_matched_multipole_CV_RMS_arcsec": 2.599360329775749,
+    "CV_improvement_fraction_vs_best_matched_multipole": 0.17126731246907767,
+    "P0652_open_transport_CV_RMS_arcsec": 2.0751483644294844,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "full_refit": {
+    "training_RMS_arcsec": 0.44206363241829566,
+    "training_roots": 15,
+    "spent_heldout_RMS_arcsec": 2.087516357926138,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599": 0.1530728003376185
+  },
+  "gate_results": {
+    "inherited_map_gates": true,
+    "CV_roots": true,
+    "CV_improvement": true,
+    "beats_matched_multipole": true,
+    "full_training_roots": true,
+    "spent_heldout_roots": true,
+    "spent_heldout_not_worse": false,
+    "field_curl": true,
+    "field_source_integral": true,
+    "edge_flux_closed": true,
+    "transport_nontrivial": true,
+    "compact_taper_applied": true,
+    "amplitude_is_one": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "The compact taper and its radii are inherited unchanged from P0644/P0652; no boundary scale is selected from P0653 scores.",
+    "All lens scores use spent RX J2129 images and cannot validate the law.",
+    "A failure of accuracy after conservation repair rejects this compact operator rather than authorizing amplitude or support retuning.",
+    "A pass authorizes numerical and map robustness before any blind P0633/P0640 opening.",
+    "The projected nonlocal closure is not yet a covariant spacetime theory."
+  ]
+}
