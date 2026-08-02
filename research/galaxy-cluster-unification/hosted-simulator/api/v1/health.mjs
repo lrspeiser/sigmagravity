@@ -5,7 +5,7 @@ export default function handler(request, response) {
   send(response, 200, {
     status: "ok",
     service: "sigma-gravity-research-simulator",
-    version: "0.4.0-preview",
+    version: "0.7.0-preview",
     capabilities: {
       radialRotationCurves: "available",
       syntheticRadialGalaxies: "available",
@@ -15,6 +15,7 @@ export default function handler(request, response) {
       localResolvedGalaxyJobs: "available_in_dev_server",
       localMultiSystemBatches: "available_in_dev_server",
       localCircularSpeedObservationAdapter: "available_in_dev_server",
+      localDecoupledObservationEvaluationJobs: "available_in_dev_server",
       fieldSolvers2d3d: "worker_not_connected",
       rawClusterLensing: "worker_not_connected",
     },

@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import datasets from "../api/v1/datasets.mjs";
+import health from "../api/v1/health.mjs";
 import systems from "../api/v1/systems.mjs";
 import system from "../api/v1/system.mjs";
 import validate from "../api/v1/formulas/validate.mjs";
@@ -33,6 +34,17 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
   handler({ method, query, body }, output);
   return output;
 }
+
+test("health API identifies the deployed contract version and local worker boundary", () => {
+  const output = call(health);
+  assert.equal(output.statusCode, 200);
+  assert.equal(output.body.version, "0.7.0-preview");
+  assert.equal(
+    output.body.capabilities.localDecoupledObservationEvaluationJobs,
+    "available_in_dev_server",
+  );
+  assert.equal(output.body.capabilities.fieldSolvers2d3d, "worker_not_connected");
+});
 
 test("catalog API lists and retrieves systems", () => {
   const datasetResponse = call(datasets);
