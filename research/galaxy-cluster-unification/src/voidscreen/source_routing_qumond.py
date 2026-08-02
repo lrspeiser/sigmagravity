@@ -41,6 +41,54 @@ class SourceRoutingSolution:
     positive_generator_strength: float
 
 
+@dataclass(frozen=True)
+class MultipoleGatedRoutingSolution:
+    field: FieldSolution
+    routing: SourceRoutingSolution
+    quadrupole_fraction: float
+    covariance: np.ndarray
+    mixed_source: np.ndarray
+
+
+def normalized_baryonic_quadrupole(
+    density: np.ndarray,
+    spacing: float | Sequence[float],
+) -> tuple[float, np.ndarray]:
+    """Return the mass-covariance quadrupole with sphere/line limits 0/1."""
+
+    rho = np.asarray(density, dtype=float)
+    if rho.ndim != 3 or min(rho.shape) < 5 or np.any(~np.isfinite(rho)) or np.any(rho < 0.0):
+        raise ValueError("density must be a finite nonnegative 3D grid")
+    steps = _spacing3(spacing)
+    mass_weight = float(np.sum(rho))
+    if mass_weight <= 0.0:
+        raise ValueError("density must have positive mass")
+    axes = [
+        (np.arange(count, dtype=float) - (count - 1.0) / 2.0) * step
+        for count, step in zip(rho.shape, steps, strict=True)
+    ]
+    coordinates = np.meshgrid(*axes, indexing="ij")
+    center = np.asarray(
+        [float(np.sum(rho * coordinate) / mass_weight) for coordinate in coordinates]
+    )
+    covariance = np.empty((3, 3), dtype=float)
+    for left in range(3):
+        for right in range(3):
+            covariance[left, right] = float(
+                np.sum(
+                    rho * (coordinates[left] - center[left]) * (coordinates[right] - center[right])
+                )
+                / mass_weight
+            )
+    trace = float(np.trace(covariance))
+    if not np.isfinite(trace) or trace <= 0.0:
+        raise ValueError("baryonic covariance must have positive trace")
+    deviator = covariance - np.eye(3) * trace / 3.0
+    fraction = float(np.sqrt(3.0 / 2.0) * np.linalg.norm(deviator, ord="fro") / trace)
+    fraction = float(np.clip(fraction, 0.0, 1.0))
+    return fraction, covariance
+
+
 def _spacing3(spacing: float | Sequence[float]) -> tuple[float, float, float]:
     if np.isscalar(spacing):
         values = (float(spacing),) * 3
@@ -160,4 +208,61 @@ def solve_source_conserving_baryonic_routing(
         local_channel_exponent=geometry["channel_exponent"],
         boundary_potential=boundary,
         positive_generator_strength=positive_strength,
+    )
+
+
+def solve_multipole_gated_source_routing(
+    density: np.ndarray,
+    spacing: float | Sequence[float],
+    *,
+    gravitational_constant: float = 6.67430e-11,
+    a0: float = 1.2e-10,
+    transition_depth: float = 1e-6,
+    transition_power: float = 4.0,
+    extra_spatial_channels: float = 2.0,
+    path_power: float = 0.5,
+    light_speed: float = C_M_S,
+) -> MultipoleGatedRoutingSolution:
+    routing = solve_source_conserving_baryonic_routing(
+        density,
+        spacing,
+        gravitational_constant=gravitational_constant,
+        a0=a0,
+        transition_depth=transition_depth,
+        transition_power=transition_power,
+        extra_spatial_channels=extra_spatial_channels,
+        path_power=path_power,
+        light_speed=light_speed,
+    )
+    fraction, covariance = normalized_baryonic_quadrupole(density, spacing)
+    mixed_source = (
+        1.0 - fraction
+    ) * routing.local_generator_source + fraction * routing.routed_source
+    steps = _spacing3(spacing)
+    potential = solve_poisson_dirichlet(mixed_source, steps, routing.boundary_potential)
+    residual = laplacian(potential, steps) - mixed_source
+    residual_rms = normalized_residual_rms(residual, mixed_source)
+    field = FieldSolution(
+        potential=potential,
+        acceleration=acceleration_from_potential(potential, steps),
+        equation_source=mixed_source,
+        normalized_residual_rms=residual_rms,
+        converged=bool(routing.newtonian.converged and np.isfinite(residual_rms)),
+        metadata={
+            "law": "multipole-gated source routing",
+            "quadrupole_fraction": fraction,
+            "spacing": steps,
+            "a0": float(a0),
+            "transition_depth": float(transition_depth),
+            "transition_power": float(transition_power),
+            "extra_spatial_channels": float(extra_spatial_channels),
+            "path_power": float(path_power),
+        },
+    )
+    return MultipoleGatedRoutingSolution(
+        field=field,
+        routing=routing,
+        quadrupole_fraction=fraction,
+        covariance=covariance,
+        mixed_source=mixed_source,
     )
