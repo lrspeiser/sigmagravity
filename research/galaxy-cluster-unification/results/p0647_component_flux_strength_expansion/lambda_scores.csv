@@ -1,0 +1,7 @@
+stage,closure,lambda,pooled_CV_RMS_arcsec,CV_roots,CV_images,all_CV_roots
+exact_grid,gas_minus_star_flux,3.5,inf,14,15,False
+exact_grid,gas_minus_star_flux,5.0,inf,13,15,False
+exact_grid,gas_minus_star_flux,6.5,2.8232130312432147,15,15,True
+exact_grid,gas_minus_star_flux,8.0,2.652327222199459,15,15,True
+exact_grid,gas_minus_star_flux,10.0,2.6572434282341004,15,15,True
+exact_grid,gas_minus_star_flux,12.5,2.3081150575892893,15,15,True

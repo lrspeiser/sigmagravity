@@ -1,0 +1,59 @@
+{
+  "protocol_version": "P0647-COMPONENT-FLUX-STRENGTH-EXPANSION-1.0.0",
+  "status": "frozen_before_any_P0647_score",
+  "frozen_utc": "2026-08-02T00:10:21Z",
+  "purpose": "Determine whether the spent-data gas-minus-star flux preference in P0646 has an identifiable interior universal strength or simply runs to a boundary.",
+  "candidate": {
+    "closure": "gas_minus_star_flux",
+    "equation": "laplacian(delta_psi)=lambda div[A(x) |grad psi_carrier| unit(g_hat-gas-g_hat-star)]",
+    "activation": "A=[a0/(a0+gbar)] C_cancel [1-exp(-ell/10 kpc)]",
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "a0_m_s2": 1.2e-10,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "common_physical_smoothing_kpc": 25.0,
+    "lambda_grid": [3.5, 5.0, 6.5, 8.0, 10.0, 12.5],
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "cross_validation": {
+    "fold_definition": "reuse exact P0645 five source-family-stratified folds",
+    "geometry_refit_starts_per_lambda_fold": 3,
+    "full_training_refit_starts": 8,
+    "selection_metric": "pooled exact CV RMS among rows with complete roots",
+    "tie_break": "lower lambda",
+    "random_seed": 2129647,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "inputs": {
+    "P0643_report": "results/p0643_accumulated_component_transport/report.json",
+    "P0644_protocol": "configs/p0644_spent_rxj2129_accumulated_tensor.json",
+    "P0645_protocol": "configs/p0645_fair_geometry_cv_accumulated_tensor.json",
+    "P0645_report": "results/p0645_fair_geometry_cv_accumulated_tensor/report.json",
+    "P0646_report": "results/p0646_conservative_closure_atlas/report.json"
+  },
+  "predeclared_progression_gates": {
+    "selected_all_CV_roots": true,
+    "CV_improvement_fraction_vs_lambda0_min": 0.03,
+    "CV_improvement_fraction_vs_P0646_isotropic_min": 0.02,
+    "selected_lambda_strictly_inside_grid": true,
+    "strict_local_CV_minimum_with_root_complete_neighbors": true,
+    "full_training_roots": 15,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599_max": 0.10,
+    "selected_field_normalized_curl_RMS_max": 1e-10,
+    "selected_field_source_integral_fraction_max": 1e-4,
+    "solar_1au_coefficient_max": 2e-6,
+    "sealed_target_outcomes_opened": false
+  },
+  "outputs": {
+    "directory": "results/p0647_component_flux_strength_expansion"
+  },
+  "claim_boundary": [
+    "All image-position scores are from spent RX J2129 data and cannot validate the closure.",
+    "Only lambda changes; the activation, component fractions, smoothing, folds, and conventional six-parameter geometry model remain fixed.",
+    "The spent P0601 heldout split is descriptive and is not used to select lambda.",
+    "An endpoint optimum, a missing selected root, or the absence of a strict root-complete local minimum rejects this strength family.",
+    "Even a passing interior optimum must survive map robustness, a generic multipole control, and unchanged multi-cluster transfer before P0640 is opened."
+  ]
+}

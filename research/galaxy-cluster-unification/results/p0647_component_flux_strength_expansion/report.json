@@ -1,0 +1,167 @@
+{
+  "report_version": "P0647-COMPONENT-FLUX-STRENGTH-EXPANSION-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "protocol_sha256": "290931637b6a2b98ec5afe7229e5af9a00921798f9b6c35d1c138d8c11ec6694",
+  "source_sha256": "b482d5e7c89f878eb89abb2f4eda1bd9f41318c46391f7b50801dc74ca5076f2",
+  "coverage": {
+    "lambda_rows": 6,
+    "lambda_fold_refits": 30,
+    "CV_folds": 5,
+    "ordinary_geometry_parameters_refit_per_run": 6,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "field_audit": {
+    "operator": "finite_path_accumulated_component_tensor",
+    "closure": "gas_minus_star_flux",
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "proxy_total_mass_msun": 100000000000000.0,
+    "common_smoothing_kpc": 25.0,
+    "proxy_mass_changes_deflection_normalization": false,
+    "activation_weighted_mean": 0.0024344162129744207,
+    "activation_maximum": 0.03490734623408106,
+    "cancellation_mean": 0.003594706024914429,
+    "survival_mean": 0.993761235780194,
+    "trace_length_median_kpc": 92.99394454051999,
+    "source_integral_fraction": 0.0,
+    "normalized_curl_RMS": 2.388570008168441e-17,
+    "unit_deflection_RMS_arcsec": 0.06828388190416103,
+    "unit_deflection_maximum_arcsec": 0.41825429781421486,
+    "maximum_edge_correction_arcsec": 0.10448564419341737,
+    "carrier_deflection_median_arcsec": 21.25739757728231
+  },
+  "map_audits": {
+    "hst": {
+      "system_label": "RXJ2129",
+      "map_kind": "hst_f160w",
+      "input_count": 2,
+      "native_pixel_scale_arcsec": 0.0650000000000009,
+      "background": -0.0033761123195290565,
+      "masked_fraction": 0.01795127705200111,
+      "positive_cells": 12435,
+      "map_sum_before_normalization": 405.6119888731333
+    },
+    "xray": {
+      "system_label": "RXJ2129",
+      "map_kind": "chandra_soft_rate",
+      "input_count": 2,
+      "total_exposure_ks": 39.6040961730402,
+      "soft_events_on_grid": 15401,
+      "point_source_seed_cells": 37,
+      "point_source_masked_fraction": 0.009767092411720512,
+      "unmasked_map_sum": 0.792017083914403,
+      "masked_map_sum": 0.7662815305616146
+    }
+  },
+  "lambda_scores": [
+    {
+      "stage": "exact_grid",
+      "closure": "gas_minus_star_flux",
+      "lambda": 3.5,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false
+    },
+    {
+      "stage": "exact_grid",
+      "closure": "gas_minus_star_flux",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 13,
+      "CV_images": 15,
+      "all_CV_roots": false
+    },
+    {
+      "stage": "exact_grid",
+      "closure": "gas_minus_star_flux",
+      "lambda": 6.5,
+      "pooled_CV_RMS_arcsec": 2.8232130312432147,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "exact_grid",
+      "closure": "gas_minus_star_flux",
+      "lambda": 8.0,
+      "pooled_CV_RMS_arcsec": 2.652327222199459,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "exact_grid",
+      "closure": "gas_minus_star_flux",
+      "lambda": 10.0,
+      "pooled_CV_RMS_arcsec": 2.6572434282341004,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    },
+    {
+      "stage": "exact_grid",
+      "closure": "gas_minus_star_flux",
+      "lambda": 12.5,
+      "pooled_CV_RMS_arcsec": 2.3081150575892893,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true
+    }
+  ],
+  "local_minimum_audit": {
+    "interior": false,
+    "left_lambda": null,
+    "right_lambda": null,
+    "root_complete_neighbors": false,
+    "strict_local_minimum": false
+  },
+  "selection": {
+    "closure": "gas_minus_star_flux",
+    "selected_lambda": 12.5,
+    "lambda0_CV_RMS_arcsec": 2.760255155353674,
+    "selected_CV_RMS_arcsec": 2.3081150575892893,
+    "CV_improvement_fraction_vs_lambda0": 0.16380373274095072,
+    "P0646_isotropic_CV_RMS_arcsec": 2.744998980060184,
+    "CV_improvement_fraction_vs_P0646_isotropic": 0.1591563150458133,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "full_refit": {
+    "training_RMS_arcsec": 0.4443472129200313,
+    "training_roots": 15,
+    "spent_heldout_RMS_arcsec": 1.9245769764098775,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599": 0.06307064623862702
+  },
+  "solar_proxy": {
+    "selected_lambda_1au_coefficient": 2.529398796135898e-07,
+    "limit": 2e-06,
+    "is_a_full_PPN_or_Cassini_test": false
+  },
+  "gate_results": {
+    "selected_CV_roots": true,
+    "CV_improvement": true,
+    "beats_P0646_isotropic": true,
+    "lambda_interior": false,
+    "strict_local_minimum": false,
+    "full_training_roots": true,
+    "spent_heldout_roots": true,
+    "spent_heldout_not_worse": true,
+    "field_curl": true,
+    "field_source_integral": true,
+    "solar_proxy": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "All image-position scores are from spent RX J2129 data and cannot validate the closure.",
+    "Only lambda changes; the activation, component fractions, smoothing, folds, and conventional six-parameter geometry model remain fixed.",
+    "The spent P0601 heldout split is descriptive and is not used to select lambda.",
+    "An endpoint optimum, a missing selected root, or the absence of a strict root-complete local minimum rejects this strength family.",
+    "Even a passing interior optimum must survive map robustness, a generic multipole control, and unchanged multi-cluster transfer before P0640 is opened."
+  ]
+}
