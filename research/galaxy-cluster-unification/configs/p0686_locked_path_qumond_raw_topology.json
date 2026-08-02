@@ -1,0 +1,80 @@
+{
+  "protocol_version": "P0686-LOCKED-PATH-QUMOND-RAW-TOPOLOGY-1.0.0",
+  "status": "frozen_before_any_P0685_field_or_P0686_raw_lens_score",
+  "frozen_utc": "2026-08-02T08:00:00Z",
+  "purpose": "Test the exact locked P0685 zero-slip field against spent RX J2129 image positions, global roots, multiplicity, parity, and critical curves with no fitted gravity or photon amplitude.",
+  "anticipated_parent": "results/p0685_locked_path_qumond_3d_field/report.json",
+  "field_input": "results/p0685_locked_path_qumond_3d_field/rxj2129_locked_path_qumond_field.npz",
+  "raw_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+  "compact_halo_comparator_report": "results/rxj2129_raw_theory_lensing/report.json",
+  "frozen_before_parent_result": true,
+  "models": {
+    "locked_path_qumond_P0685": "P0685 physical zero-slip deflection field",
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "photon_amplitudes_fit_to_RXJ2129": 0
+  },
+  "nuisance_fit": {
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "parameters": [
+      "map_center_x_arcsec",
+      "map_center_y_arcsec",
+      "external_shear_gamma1_at_reference_source",
+      "external_shear_gamma2_at_reference_source"
+    ],
+    "bounds": {
+      "map_center_x_arcsec": [-3.0, 3.0],
+      "map_center_y_arcsec": [-3.0, 3.0],
+      "external_shear_gamma1_at_reference_source": [-0.25, 0.25],
+      "external_shear_gamma2_at_reference_source": [-0.25, 0.25]
+    },
+    "source_positions": "two coordinates profiled independently for each of seven spectroscopic families on training images",
+    "multi_starts": 12,
+    "random_seed": 6862129,
+    "map_interpolation": "bicubic spline inside the fixed P0685 field; no ellipticity, rotation, radial amplitude, mass sheet, or slip is fitted"
+  },
+  "global_topology": {
+    "global_search_half_width_arcsec": 48.0,
+    "global_root_aperture_arcsec": 48.0,
+    "global_grid_spacing_arcsec": 6.0,
+    "interlaced_grid_offset_arcsec": 3.0,
+    "local_seed_radii_arcsec": [0.0, 0.5, 1.0, 2.0, 4.0, 8.0, 16.0, 32.0],
+    "local_seed_angles": 12,
+    "root_closure_tolerance_arcsec": 1e-6,
+    "root_deduplication_arcsec": 0.05,
+    "jacobian_step_arcsec": 0.002,
+    "potentially_observable_surplus_fraction": 0.25,
+    "critical_grid_half_width_arcsec": 40.0,
+    "critical_grid_spacing_arcsec": 0.5,
+    "critical_curve_present": "at least one horizontal or vertical sign-changing cell in det(d beta/d theta)",
+    "parity_diverse": "the globally recovered roots for a family contain at least one positive and one negative determinant"
+  },
+  "predeclared_progression_gates": {
+    "P0685_all_progression_gates_pass": true,
+    "candidate_training_roots_converged": 15,
+    "candidate_heldout_roots_converged": 7,
+    "candidate_training_RMS_arcsec_max": 3.0,
+    "candidate_heldout_RMS_arcsec_max": 3.0,
+    "candidate_to_compact_halo_heldout_RMS_ratio_max": 1.25,
+    "candidate_missing_multiplicity_families_max": 0,
+    "candidate_potentially_observable_surplus_families_max": 2,
+    "candidate_exact_or_demagnified_only_families_min": 5,
+    "candidate_parity_diverse_families_min": 7,
+    "candidate_critical_curve_present_families_min": 7,
+    "candidate_nuisance_parameters_near_bound_max": 0,
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "photon_amplitudes_fit_to_RXJ2129": 0,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Advance to frozen resolution and baryonic-map robustness only if the unretuned P0685 field passes every exact-root, absolute residual, compact-halo comparison, global multiplicity, parity, critical-curve, nuisance-bound, and parameter-accounting gate. Heldout images select nothing.",
+  "outputs": {
+    "directory": "results/p0686_locked_path_qumond_raw_topology"
+  },
+  "claim_boundary": [
+    "Every RX J2129 image is spent; P0686 can reject or diagnose this generator but cannot validate it.",
+    "The finite global seed search can miss roots with very small basins or beyond 48 arcseconds.",
+    "Catalog incompleteness makes demagnified surplus roots less decisive than observable surplus roots.",
+    "The 33-cell field is coarse for critical curves; a pass must be followed by frozen resolution convergence.",
+    "P0633 galaxy kinematics and P0640 cluster lens constraints remain sealed."
+  ]
+}

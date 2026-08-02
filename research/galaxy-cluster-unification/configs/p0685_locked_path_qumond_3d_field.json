@@ -1,0 +1,76 @@
+{
+  "protocol_version": "P0685-LOCKED-PATH-QUMOND-3D-FIELD-1.0.0",
+  "status": "frozen_before_any_P0685_field_or_deflection_score",
+  "frozen_utc": "2026-08-02T08:00:00Z",
+  "purpose": "Implement the single P0684 post-result formula generator as a registered three-dimensional QUMOND source operator on the spent RX J2129 baryonic map, and audit the field before any new raw-image root or topology score is computed.",
+  "formula_generator": {
+    "source": "results/p0684_path_diluted_potential_channel_qumond/report.json",
+    "status": "post-result development generator, not a P0684 advancement or validation",
+    "selection_reason": "Of the two predeclared diagnostic rows that cleared the numerical radial screens, use q=1/2 because it has the simpler inverse-square-root amplitude interpretation; no parameter may be retuned in P0685 or P0686.",
+    "radial_screen_only": {
+      "galaxy_equal_RMSE_km_s": 11.2526199087,
+      "galaxy_ratio_to_fixed_RAR": 1.029986,
+      "cluster_all5_log_RMS_dex": 0.1452288,
+      "cluster_reliable3_log_RMS_dex": 0.1647168,
+      "all5_gap_fraction_closed": 0.7508866
+    }
+  },
+  "map_input": "results/p0670_spent_rxj2129_absolute_3d_map_build/rxj2129_absolute_baryons_3d.npz",
+  "map_parent": "results/p0670_spent_rxj2129_absolute_3d_map_build/report.json",
+  "scalar_comparator": "results/p0671_spent_rxj2129_absolute_3d_field_solve/rxj2129_absolute_scalar_tensor_fields.npz",
+  "equation": {
+    "newtonian_field": "laplacian(Phi_N)=4 pi G rho_b with Phi_N(infinity)=0",
+    "modified_field": "laplacian(Phi)=div[nu_0(|grad Phi_N|/a0)^p(chi_b,eta_b) grad Phi_N]",
+    "base_boost": "nu_0(y)=1/[1-exp(-sqrt(y))]",
+    "potential_depth": "chi_b=|Phi_N|/c^2",
+    "potential_path_ratio": "eta_b=|Phi_N|/[r |grad Phi_N|] about the baryonic center of mass",
+    "onset": "S_4=chi_b^4/[chi_b^4+chi_t^4]",
+    "channel_exponent": "p=1+2 S_4/[max(eta_b,1)]^(1/2)",
+    "a0_m_s2": 1.2e-10,
+    "chi_t": 1e-6,
+    "transition_power_n": 4.0,
+    "extra_spatial_channels": 2.0,
+    "path_power_q": 0.5,
+    "face_discretization": "finite-volume face flux with the arithmetic mean of adjacent cell exponents",
+    "boundary": "candidate point-mass radial response of the complete finite-grid baryonic mass, with eta=1 and the same locked operator",
+    "photon_closure": "zero slip: alpha_perp=-(2/c^2) integral a_perp dz before multiplication by Dds/Ds",
+    "gravitational_slip": 0.0,
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "photon_amplitudes_fit_to_RXJ2129": 0,
+    "new_universal_parameters_relative_to_fixed_RAR": 1
+  },
+  "audit_region": {
+    "strong_lens_radius_kpc": [15.8, 76.5],
+    "deflections": "physical angular deflection before Dds/Ds on the registered P0670 x-y grid"
+  },
+  "predeclared_progression_gates": {
+    "P0670_all_progression_gates_pass": true,
+    "newtonian_normalized_residual_RMS_max": 1e-10,
+    "candidate_normalized_residual_RMS_max": 1e-10,
+    "candidate_solver_converged": true,
+    "boundary_maximum_relative_mismatch_max": 1e-14,
+    "all_potentials_accelerations_geometry_and_deflections_finite": true,
+    "channel_exponent_min": 1.0,
+    "channel_exponent_max": 3.0,
+    "candidate_strong_lens_median_physical_deflection_arcsec_min": 1.0,
+    "candidate_to_scalar_AQUAL_strong_lens_deflection_RMS_ratio_min": 1.5,
+    "candidate_to_scalar_AQUAL_strong_lens_deflection_RMS_ratio_max": 20.0,
+    "candidate_normalized_deflection_curl_RMS_max": 1e-8,
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "photon_amplitudes_fit_to_RXJ2129": 0,
+    "raw_lens_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Advance this exact field to the already frozen P0686 spent raw-topology audit only if every numerical, boundary, finite-field, exponent-range, intended-amplitude, curl, parameter-accounting, and no-score gate passes. No formula constant may change after this freeze.",
+  "outputs": {
+    "directory": "results/p0685_locked_path_qumond_3d_field",
+    "field": "rxj2129_locked_path_qumond_field.npz"
+  },
+  "claim_boundary": [
+    "P0685 is a test of a post-result mechanism generator on a fully spent cluster, not independent validation.",
+    "The potential-depth and path-ratio coordinates are baryonic and parameter-free per object, but they are not yet derived from a covariant action.",
+    "The zero-slip photon rule is a weak-field diagnostic closure, not a relativistic lensing theory.",
+    "A strong, curl-free field can still fail image positions, multiplicity, parity, or critical curves.",
+    "No P0685 raw-image outcome and no sealed P0633 or P0640 target may be opened in this stage."
+  ]
+}
