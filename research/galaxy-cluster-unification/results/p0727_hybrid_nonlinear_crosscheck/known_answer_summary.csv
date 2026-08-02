@@ -1,0 +1,4 @@
+variant,converged,iterations,maximumRelativeUpdate,maximumEquationResidual,relativeFieldError
+hybrid_picard20_newton,True,23,2.439141600728069e-12,7.684750398467736e-15,1.524043875898195e-15
+hybrid_picard40_newton,True,42,3.269956518999782e-12,2.3768405075581362e-14,4.728317071041008e-15
+hybrid_picard80_newton,True,81,1.706576421366615e-11,6.089316637095165e-16,1.579403725280449e-16

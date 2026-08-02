@@ -1514,6 +1514,15 @@ variant converged DDO101. The universal cross-method gate therefore remains
 open. See
 [`docs/P0726_INDEPENDENT_NONLINEAR_CROSSCHECK_RESULTS.md`](docs/P0726_INDEPENDENT_NONLINEAR_CROSSCHECK_RESULTS.md).
 
+P0727 closed that numerical gate with a frozen hybrid: 40 universal Picard
+warm-up steps at damping `0.20`, followed by Newton--GMRES/Armijo. It converged
+both difficult fine-grid fields and reproduced the independent P0725 Picard
+potential, acceleration, and circular-speed results to better than `5.4e-8`
+normalized RMS. The 20-step hybrid failed DDO101 and the 80-step hybrid also
+passed, so 40 is the smallest preregistered success. This validates the
+discrete roots, not AQUAL as physical theory. See
+[`docs/P0727_HYBRID_NONLINEAR_CROSSCHECK_RESULTS.md`](docs/P0727_HYBRID_NONLINEAR_CROSSCHECK_RESULTS.md).
+
 ```powershell
 python scripts/run_p0723_formula_neutral_api_comparators.py `
   --base-url http://127.0.0.1:4173
@@ -1524,4 +1533,6 @@ python scripts/run_p0724_grid_box_vertical_sensitivity.py `
 python scripts/run_p0725_aqual_solver_robustness.py
 
 python scripts/run_p0726_independent_nonlinear_crosscheck.py
+
+python scripts/run_p0727_hybrid_nonlinear_crosscheck.py
 ```

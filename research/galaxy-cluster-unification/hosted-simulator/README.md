@@ -248,6 +248,14 @@ linearized field. The API therefore retains diagnostics and no universal
 production solver is selected. See
 `../docs/P0726_INDEPENDENT_NONLINEAR_CROSSCHECK_RESULTS.md`.
 
+P0727 added a formula-neutral bounded Picard warm-up before the same generic
+Newton--GMRES residual solve. The frozen 40-step warm-up converged both
+difficult fields and agreed with the independent Picard references to better
+than `5.4e-8` normalized RMS across potential, acceleration, and predicted
+speed. Warm-up steps count against the declared total iteration limit, and the
+validator exposes all controls. See
+`../docs/P0727_HYBRID_NONLINEAR_CROSSCHECK_RESULTS.md`.
+
 Run the chained 3D HTTP acceptance test while `npm run dev` is active:
 
 ```text
