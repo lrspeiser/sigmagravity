@@ -1,0 +1,7 @@
+variant,system,comparable,predictionNormalizedRmse,potentialNormalizedRmse,accelerationNormalizedRmse
+newton_lgmres_armijo_i20,DDO53,False,,,
+newton_lgmres_armijo_i20,DDO101,False,,,
+newton_lgmres_none_i20,DDO53,False,,,
+newton_lgmres_none_i20,DDO101,False,,,
+newton_gmres_armijo_i30,DDO53,True,4.977655617205768e-09,8.221014352303043e-10,3.964881327277841e-09
+newton_gmres_armijo_i30,DDO101,False,,,

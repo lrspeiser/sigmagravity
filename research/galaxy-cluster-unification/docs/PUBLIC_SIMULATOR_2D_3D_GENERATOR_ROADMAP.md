@@ -42,6 +42,7 @@ trusted solver.
 | Full resolved formula-neutral comparator | P0723 ran Newtonian, AQUAL, QUMOND, and Refracted Gravity manifests over all 13 map-derived 3D replicas: 52/52 converged, 161 points/model scored, zero per-object gravity parameters, and all frozen engineering gates passed | spent dwarf-only sample and coarse commissioning grid; no resolved velocity-field, photon-lensing, or blind holdout claim |
 | Frozen numerical-sensitivity runner | P0724 retained all 96 jobs across grid, box, and vertical-prior changes; 94 converged, expanded-box and two vertical-draw cases were stable, and incomplete rows are excluded from ranks | coarse AQUAL was sensitive and two fine-grid AQUAL systems did not converge; a production grid is not frozen |
 | Universal nonlinear-solver controls | P0725 exposed requested/effective iteration limits and found one unchanged-physics warm-start/damping pair that converged both failed fine-grid AQUAL systems | one method is not independent verification; the cross-method agreement gate failed and no production default is selected |
+| Independent nonlinear root path | P0726 added generic Newton--Krylov controls and independently reproduced the DDO53 Picard potential, acceleration, and speeds to better than `5e-9` normalized RMS | DDO101 did not converge from the linearized field, so the universal cross-method gate remains open |
 
 The generic worker dispatches from equation structure, not a theory name. It
 supports `laplacian(phi)=source` and
@@ -106,7 +107,8 @@ and both alternate vertical-prior draws passed. P0725 then found one universal
 candidate (`linearized_d020`) that converges both failed AQUAL systems without
 changing the physics. Its cross-method gate remains open because no second
 variant converged both systems. The immediate milestone is therefore an
-independent generic nonlinear method and prediction-agreement check. Once a
+generic Picard-warm-up/Newton hybrid that independently closes DDO101, while
+retaining the prediction-agreement check. Once a
 complete fine-grid comparison agrees across successful methods, proceed to the
 beam-aware resolved velocity-field adapter and separately typed photon-lensing
 adapter. The next scientific milestone remains synthetic hidden-truth recovery

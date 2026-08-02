@@ -1507,6 +1507,13 @@ independent successful method is required before choosing a production
 default. See
 [`docs/P0725_AQUAL_SOLVER_ROBUSTNESS_RESULTS.md`](docs/P0725_AQUAL_SOLVER_ROBUSTNESS_RESULTS.md).
 
+P0726 added a direct Newton--Krylov residual solver. Newton--GMRES independently
+reproduced the converged DDO53 Picard potential, acceleration, and circular
+speeds to better than `5e-9` normalized RMS, but no direct-from-linearized
+variant converged DDO101. The universal cross-method gate therefore remains
+open. See
+[`docs/P0726_INDEPENDENT_NONLINEAR_CROSSCHECK_RESULTS.md`](docs/P0726_INDEPENDENT_NONLINEAR_CROSSCHECK_RESULTS.md).
+
 ```powershell
 python scripts/run_p0723_formula_neutral_api_comparators.py `
   --base-url http://127.0.0.1:4173
@@ -1515,4 +1522,6 @@ python scripts/run_p0724_grid_box_vertical_sensitivity.py `
   --base-url http://127.0.0.1:4189
 
 python scripts/run_p0725_aqual_solver_robustness.py
+
+python scripts/run_p0726_independent_nonlinear_crosscheck.py
 ```

@@ -1,0 +1,4 @@
+variant,converged,iterations,maximumRelativeUpdate,maximumEquationResidual,relativeFieldError
+newton_lgmres_armijo_i20,True,34,1.3141802775885917e-11,1.004790895724879e-13,1.9938057492802494e-14
+newton_lgmres_none_i20,True,29,6.307210365233319e-10,1.5117836383111573e-11,2.756498881864975e-12
+newton_gmres_armijo_i30,True,7,1.3276683451468593e-10,9.06396427558344e-13,1.797318598456641e-13

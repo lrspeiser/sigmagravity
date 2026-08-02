@@ -241,6 +241,13 @@ setting. It is not yet the production default because no second successful
 method was available for the frozen solution-agreement gate. See
 `../docs/P0725_AQUAL_SOLVER_ROBUSTNESS_RESULTS.md`.
 
+P0726 added generic Anderson and Newton--Krylov residual methods. The frozen
+Newton--GMRES path independently reproduced the DDO53 Picard field and speeds
+to better than `5e-9` normalized RMS, but did not converge DDO101 from the
+linearized field. The API therefore retains diagnostics and no universal
+production solver is selected. See
+`../docs/P0726_INDEPENDENT_NONLINEAR_CROSSCHECK_RESULTS.md`.
+
 Run the chained 3D HTTP acceptance test while `npm run dev` is active:
 
 ```text

@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "sigma-p0726-independent-nonlinear-crosscheck/1",
+  "stage": "P0726",
+  "status": "fail",
+  "sampleStatus": "previously_unsealed_spent_numerical_debugging_systems",
+  "configSha256": "2aef4e250afde8ccaebc27e91d9d6c5b3a50889d255cdeeb92f6b2fc9b733ef0",
+  "basePhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+  "workerSourceSha256": "927c894c317b43875e0dd92cd9e297415b27b373395fd159c584568a3dbb1fa3",
+  "manifests": [
+    {
+      "variant": "newton_lgmres_armijo_i20",
+      "modelDocumentSha256": "a2aa1217daa7413d58967c032d65d3eb2df472b2855f86211b6a710f8f35a3dd",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "solver": {
+        "family": "nonlinear_finite_volume",
+        "relativeTolerance": 1e-08,
+        "residualTolerance": 1e-08,
+        "maxIterations": 80,
+        "coefficientFloor": 1e-08,
+        "initialization": "linearized_unit_coefficient",
+        "nonlinearMethod": "newton_krylov",
+        "krylovMethod": "lgmres",
+        "krylovInnerIterations": 20,
+        "lineSearch": "armijo"
+      }
+    },
+    {
+      "variant": "newton_lgmres_none_i20",
+      "modelDocumentSha256": "9faa92e0020ddb2fd6193b4eb6874d86a8c49c7950e9cdcc643597e23312662e",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "solver": {
+        "family": "nonlinear_finite_volume",
+        "relativeTolerance": 1e-08,
+        "residualTolerance": 1e-08,
+        "maxIterations": 80,
+        "coefficientFloor": 1e-08,
+        "initialization": "linearized_unit_coefficient",
+        "nonlinearMethod": "newton_krylov",
+        "krylovMethod": "lgmres",
+        "krylovInnerIterations": 20,
+        "lineSearch": "none"
+      }
+    },
+    {
+      "variant": "newton_gmres_armijo_i30",
+      "modelDocumentSha256": "5b07ac72494d02adffc3a5dadfd8df2ace864c19cd7b7ea48b4f34bdbbb8d05f",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "solver": {
+        "family": "nonlinear_finite_volume",
+        "relativeTolerance": 1e-08,
+        "residualTolerance": 1e-08,
+        "maxIterations": 80,
+        "coefficientFloor": 1e-08,
+        "initialization": "linearized_unit_coefficient",
+        "nonlinearMethod": "newton_krylov",
+        "krylovMethod": "gmres",
+        "krylovInnerIterations": 30,
+        "lineSearch": "armijo"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "variant": "newton_lgmres_armijo_i20",
+      "system": "DDO53",
+      "state": "failed_nonconvergence",
+      "converged": false,
+      "iterations": 80,
+      "maximumRelativeUpdate": 0.0003099725838581115,
+      "maximumEquationResidual": 0.003454007601898647,
+      "wallSeconds": 14.230174299911596,
+      "cpuSeconds": 15.046875,
+      "peakPythonHeapBytes": 26474902,
+      "requestedMaximumIterations": 80,
+      "executedMaximumIterations": 80,
+      "iterationLimitAdjusted": false,
+      "nonlinearMethod": "newton_krylov",
+      "krylovMethod": "lgmres",
+      "lineSearch": "armijo",
+      "modelDocumentSha256": "a2aa1217daa7413d58967c032d65d3eb2df472b2855f86211b6a710f8f35a3dd",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "inputBundleSha256": "d7ba34c267abf391cae39650bdf1452a4261723d8a94ad077519ed103fc0d955",
+      "scientificResultSha256": "c6c3f4ca4ec5ef74e1efec24219120dc517977b0e1061fc9fe5bab6706818229",
+      "output": "C:\\Users\\henry\\Documents\\Codex\\2026-07-18\\sigmagravity-frontiers-main\\research\\galaxy-cluster-unification\\tmp\\p0726-worker-cache\\runs\\newton_lgmres_armijo_i20\\DDO53"
+    },
+    {
+      "variant": "newton_lgmres_armijo_i20",
+      "system": "DDO101",
+      "state": "failed_nonconvergence",
+      "converged": false,
+      "iterations": 80,
+      "maximumRelativeUpdate": 0.004058147901625855,
+      "maximumEquationResidual": 0.01205270877946823,
+      "wallSeconds": 13.425104600028135,
+      "cpuSeconds": 13.8125,
+      "peakPythonHeapBytes": 26475003,
+      "requestedMaximumIterations": 80,
+      "executedMaximumIterations": 80,
+      "iterationLimitAdjusted": false,
+      "nonlinearMethod": "newton_krylov",
+      "krylovMethod": "lgmres",
+      "lineSearch": "armijo",
+      "modelDocumentSha256": "a2aa1217daa7413d58967c032d65d3eb2df472b2855f86211b6a710f8f35a3dd",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "inputBundleSha256": "7457c0dd034be9bc8f2ba2a9bbf06fceb236921e60b94400b9570e35f69abdb8",
+      "scientificResultSha256": "14eb165810a8c2f7d0908a1dab51865f274b5c0002e3dbf4b53c3680aaf19416",
+      "output": "C:\\Users\\henry\\Documents\\Codex\\2026-07-18\\sigmagravity-frontiers-main\\research\\galaxy-cluster-unification\\tmp\\p0726-worker-cache\\runs\\newton_lgmres_armijo_i20\\DDO101"
+    },
+    {
+      "variant": "newton_lgmres_none_i20",
+      "system": "DDO53",
+      "state": "failed_nonconvergence",
+      "converged": false,
+      "iterations": 80,
+      "maximumRelativeUpdate": 1.1329932666311673,
+      "maximumEquationResidual": 0.2646908038379198,
+      "wallSeconds": 7.9908379999687895,
+      "cpuSeconds": 7.96875,
+      "peakPythonHeapBytes": 26475003,
+      "requestedMaximumIterations": 80,
+      "executedMaximumIterations": 80,
+      "iterationLimitAdjusted": false,
+      "nonlinearMethod": "newton_krylov",
+      "krylovMethod": "lgmres",
+      "lineSearch": "none",
+      "modelDocumentSha256": "9faa92e0020ddb2fd6193b4eb6874d86a8c49c7950e9cdcc643597e23312662e",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "inputBundleSha256": "d7ba34c267abf391cae39650bdf1452a4261723d8a94ad077519ed103fc0d955",
+      "scientificResultSha256": "e41ff49f6e8b8a729e41bd7d7e0e6f8230d110a2d0043b3a504d8c070b4578fc",
+      "output": "C:\\Users\\henry\\Documents\\Codex\\2026-07-18\\sigmagravity-frontiers-main\\research\\galaxy-cluster-unification\\tmp\\p0726-worker-cache\\runs\\newton_lgmres_none_i20\\DDO53"
+    },
+    {
+      "variant": "newton_lgmres_none_i20",
+      "system": "DDO101",
+      "state": "failed_nonconvergence",
+      "converged": false,
+      "iterations": 80,
+      "maximumRelativeUpdate": 0.9916072256068862,
+      "maximumEquationResidual": 0.39438460235125106,
+      "wallSeconds": 7.363069799961522,
+      "cpuSeconds": 7.21875,
+      "peakPythonHeapBytes": 26474911,
+      "requestedMaximumIterations": 80,
+      "executedMaximumIterations": 80,
+      "iterationLimitAdjusted": false,
+      "nonlinearMethod": "newton_krylov",
+      "krylovMethod": "lgmres",
+      "lineSearch": "none",
+      "modelDocumentSha256": "9faa92e0020ddb2fd6193b4eb6874d86a8c49c7950e9cdcc643597e23312662e",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "inputBundleSha256": "7457c0dd034be9bc8f2ba2a9bbf06fceb236921e60b94400b9570e35f69abdb8",
+      "scientificResultSha256": "6881ba65a0b1c33161a400500cf1810805803630d9f76fcda80a39f8cf30f005",
+      "output": "C:\\Users\\henry\\Documents\\Codex\\2026-07-18\\sigmagravity-frontiers-main\\research\\galaxy-cluster-unification\\tmp\\p0726-worker-cache\\runs\\newton_lgmres_none_i20\\DDO101"
+    },
+    {
+      "variant": "newton_gmres_armijo_i30",
+      "system": "DDO53",
+      "state": "succeeded",
+      "converged": true,
+      "iterations": 47,
+      "maximumRelativeUpdate": 4.615553303624291e-10,
+      "maximumEquationResidual": 1.0405780838723814e-11,
+      "wallSeconds": 14.922303900006227,
+      "cpuSeconds": 15.15625,
+      "peakPythonHeapBytes": 26474932,
+      "requestedMaximumIterations": 80,
+      "executedMaximumIterations": 80,
+      "iterationLimitAdjusted": false,
+      "nonlinearMethod": "newton_krylov",
+      "krylovMethod": "gmres",
+      "lineSearch": "armijo",
+      "modelDocumentSha256": "5b07ac72494d02adffc3a5dadfd8df2ace864c19cd7b7ea48b4f34bdbbb8d05f",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "inputBundleSha256": "d7ba34c267abf391cae39650bdf1452a4261723d8a94ad077519ed103fc0d955",
+      "scientificResultSha256": "7f4b8c7c7517c52aa943f8258411b115f23f05ef6d23f5765ae9d43f8bd519a1",
+      "output": "C:\\Users\\henry\\Documents\\Codex\\2026-07-18\\sigmagravity-frontiers-main\\research\\galaxy-cluster-unification\\tmp\\p0726-worker-cache\\runs\\newton_gmres_armijo_i30\\DDO53"
+    },
+    {
+      "variant": "newton_gmres_armijo_i30",
+      "system": "DDO101",
+      "state": "failed_nonconvergence",
+      "converged": false,
+      "iterations": 80,
+      "maximumRelativeUpdate": 0.00874485959443135,
+      "maximumEquationResidual": 0.051486146276514426,
+      "wallSeconds": 19.175860599963926,
+      "cpuSeconds": 19.578125,
+      "peakPythonHeapBytes": 26474987,
+      "requestedMaximumIterations": 80,
+      "executedMaximumIterations": 80,
+      "iterationLimitAdjusted": false,
+      "nonlinearMethod": "newton_krylov",
+      "krylovMethod": "gmres",
+      "lineSearch": "armijo",
+      "modelDocumentSha256": "5b07ac72494d02adffc3a5dadfd8df2ace864c19cd7b7ea48b4f34bdbbb8d05f",
+      "modelPhysicsSha256": "033a1c91c3ad93fb441fe27b05e12753b06a4fa91018238a953712c318bece5a",
+      "inputBundleSha256": "7457c0dd034be9bc8f2ba2a9bbf06fceb236921e60b94400b9570e35f69abdb8",
+      "scientificResultSha256": "1101037019cda73c3e18ecf856e63060b3833ca36cfadf66f02f5cd0f61f4c1e",
+      "output": "C:\\Users\\henry\\Documents\\Codex\\2026-07-18\\sigmagravity-frontiers-main\\research\\galaxy-cluster-unification\\tmp\\p0726-worker-cache\\runs\\newton_gmres_armijo_i30\\DDO101"
+    }
+  ],
+  "knownAnswerRuns": [
+    {
+      "variant": "newton_lgmres_armijo_i20",
+      "converged": true,
+      "iterations": 34,
+      "maximumRelativeUpdate": 1.3141802775885917e-11,
+      "maximumEquationResidual": 1.004790895724879e-13,
+      "relativeFieldError": 1.9938057492802494e-14
+    },
+    {
+      "variant": "newton_lgmres_none_i20",
+      "converged": true,
+      "iterations": 29,
+      "maximumRelativeUpdate": 6.307210365233319e-10,
+      "maximumEquationResidual": 1.5117836383111573e-11,
+      "relativeFieldError": 2.756498881864975e-12
+    },
+    {
+      "variant": "newton_gmres_armijo_i30",
+      "converged": true,
+      "iterations": 7,
+      "maximumRelativeUpdate": 1.3276683451468593e-10,
+      "maximumEquationResidual": 9.06396427558344e-13,
+      "relativeFieldError": 1.797318598456641e-13
+    }
+  ],
+  "referenceComparisons": [
+    {
+      "variant": "newton_lgmres_armijo_i20",
+      "system": "DDO53",
+      "comparable": false,
+      "predictionNormalizedRmse": null,
+      "potentialNormalizedRmse": null,
+      "accelerationNormalizedRmse": null
+    },
+    {
+      "variant": "newton_lgmres_armijo_i20",
+      "system": "DDO101",
+      "comparable": false,
+      "predictionNormalizedRmse": null,
+      "potentialNormalizedRmse": null,
+      "accelerationNormalizedRmse": null
+    },
+    {
+      "variant": "newton_lgmres_none_i20",
+      "system": "DDO53",
+      "comparable": false,
+      "predictionNormalizedRmse": null,
+      "potentialNormalizedRmse": null,
+      "accelerationNormalizedRmse": null
+    },
+    {
+      "variant": "newton_lgmres_none_i20",
+      "system": "DDO101",
+      "comparable": false,
+      "predictionNormalizedRmse": null,
+      "potentialNormalizedRmse": null,
+      "accelerationNormalizedRmse": null
+    },
+    {
+      "variant": "newton_gmres_armijo_i30",
+      "system": "DDO53",
+      "comparable": true,
+      "predictionNormalizedRmse": 4.977655617205768e-09,
+      "potentialNormalizedRmse": 8.221014352303043e-10,
+      "accelerationNormalizedRmse": 3.964881327277841e-09
+    },
+    {
+      "variant": "newton_gmres_armijo_i30",
+      "system": "DDO101",
+      "comparable": false,
+      "predictionNormalizedRmse": null,
+      "potentialNormalizedRmse": null,
+      "accelerationNormalizedRmse": null
+    }
+  ],
+  "qualifyingUniversalVariants": [],
+  "selectedUniversalSolverVariant": null,
+  "selectionMedianWallSeconds": {},
+  "gateResults": {
+    "required_design": true,
+    "known_answer_convergence": true,
+    "known_answer_field_error": true,
+    "independent_real_system_convergence_and_agreement": false,
+    "iteration_limit_faithful": true,
+    "no_per_object_gravity_parameters": true,
+    "physics_manifest_unchanged": true,
+    "reference_hashes_valid": true
+  },
+  "failedGates": [
+    "independent_real_system_convergence_and_agreement"
+  ],
+  "selectionPolicy": "Select the lowest median wall-time Newton-Krylov variant that converges both systems, meets every residual/update gate, and agrees with the locked P0725 Picard reference in potential, acceleration, and predicted circular speeds. Observed speeds do not select the method.",
+  "rethinkPolicy": "If no Newton-Krylov variant converges and agrees, keep the P0725 Picard solution provisional and preregister Anderson or coefficient-continuation methods; do not loosen the field residual or comparison thresholds.",
+  "claimBoundary": [
+    "This is an independent numerical root cross-check on two spent debugging galaxies, not a new gravity-theory test.",
+    "The P0725 converged Picard results are locked references and are not used as Newton-Krylov initial fields.",
+    "All variants begin from the same unit-coefficient linearized field and retain the same AQUAL equation, physical parameters, density, grid, and boundary.",
+    "Agreement is evaluated in full potential and acceleration grids as well as observation-space predictions.",
+    "A pass validates these numerical roots only; it does not establish AQUAL observational adequacy."
+  ]
+}
