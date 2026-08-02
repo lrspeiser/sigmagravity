@@ -1,0 +1,122 @@
+{
+  "report_version": "P0684-PATH-DILUTED-POTENTIAL-CHANNEL-QUMOND-1.0.0",
+  "status": "pass",
+  "candidate_advanced_to_3D_topology": false,
+  "protocol": {
+    "path": "configs/p0684_path_diluted_potential_channel_qumond.json",
+    "sha256": "aeae4bf6dd6e4ad0c19bd92d2bfb9f8f9ddd1bb38e11535ce18914364f1fb317"
+  },
+  "input_hashes": {
+    "failure_parent": "3e19dd58aea3d253b58103a74405eb6d234459b981e49b86fbea45419363e713",
+    "galaxies": "9c12c6f9cae76c3345f4e3a54a12c86521d13e42eec01dd3c2f05a13ded3a291",
+    "baryonic_profiles": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+    "target_profiles": "6c19f24eac2e97eaaa3eab4d666a2cbbcec8f99e824a7279ec4a8b0883be98f9",
+    "target_metrics": "fa9cf07b7749620b6084a3c360f531e064862e09496ed6e759aa314e3b9a4f47"
+  },
+  "integrity_audit": {
+    "galaxy_systems": 131,
+    "galaxy_points": 968,
+    "cluster_systems": 6,
+    "primary_cluster_systems": 5,
+    "reliable_cluster_systems": 3,
+    "grid_rows": 1155,
+    "primary_grid_rows": 11,
+    "path_ratio_uses_only_baryonic_profile": true,
+    "all_predictions_finite_and_positive": true,
+    "gravity_parameters_fit_per_object": 0,
+    "new_raw_image_root_score_computed": false,
+    "full_3D_field_solve_computed": false,
+    "sealed_target_outcomes_opened": false,
+    "all_gates_pass": true
+  },
+  "fixed_RAR_comparators": {
+    "galaxy_equal_RMSE_km_s": 10.925025796849075,
+    "cluster_all5_log_RMS_dex": 0.5829825756582082
+  },
+  "selected_primary": {
+    "extra_spatial_channels": 3.0,
+    "transition_power_n": 2.0,
+    "path_power_q": 0.5,
+    "chi_t": 3e-06,
+    "galaxy_equal_RMSE_km_s": 11.295503901414891,
+    "cluster_all5_log_RMS_dex": 0.24046909279646903,
+    "cluster_reliable3_log_RMS_dex": 0.18722101753012813,
+    "cluster_all6_stress_log_RMS_dex": 0.23211278180170053,
+    "solar_solar_limb_fractional_force_change": 0.0,
+    "solar_Mercury_fractional_force_change": 0.0,
+    "solar_Earth_fractional_force_change": 0.0,
+    "solar_Saturn_fractional_force_change": 0.0,
+    "is_primary_dimension_fixed_formula": true,
+    "galaxy_ratio_to_fixed_RAR": 1.0339109592466744,
+    "all5_gap_fraction_closed_from_fixed_RAR": 0.5875192452793794,
+    "galaxy_gate_pass": true,
+    "solar_gate_pass": true,
+    "all5_cluster_gate_pass": false,
+    "reliable3_cluster_gate_pass": true,
+    "gap_closed_gate_pass": false
+  },
+  "selected_recomputed_metrics": {
+    "extra_spatial_channels": 3.0,
+    "transition_power_n": 2.0,
+    "path_power_q": 0.5,
+    "chi_t": 3e-06,
+    "galaxy_equal_RMSE_km_s": 11.295503901414891,
+    "cluster_all5_log_RMS_dex": 0.24046909279646903,
+    "cluster_reliable3_log_RMS_dex": 0.18722101753012813,
+    "cluster_all6_stress_log_RMS_dex": 0.23211278180170053,
+    "solar_solar_limb_fractional_force_change": 0.0,
+    "solar_Mercury_fractional_force_change": 0.0,
+    "solar_Earth_fractional_force_change": 0.0,
+    "solar_Saturn_fractional_force_change": 0.0
+  },
+  "advancement_gates": {
+    "primary_dimension_fixed_formula": true,
+    "galaxy_gate_pass": true,
+    "solar_force_proxy_gate_pass": true,
+    "all5_cluster_gate_pass": false,
+    "reliable3_cluster_gate_pass": true,
+    "gap_closed_gate_pass": false,
+    "path_ratio_baryon_only": true,
+    "no_per_object_gravity_parameters": true,
+    "one_new_universal_parameter": true,
+    "no_raw_image_root_score": true,
+    "sealed_targets_untouched": true,
+    "all_gates_pass": false
+  },
+  "diagnostic_rows_passing_numeric_gates": 2,
+  "best_unrestricted_diagnostic": {
+    "extra_spatial_channels": 2.0,
+    "transition_power_n": 1.0,
+    "path_power_q": 0.25,
+    "chi_t": 8e-07,
+    "galaxy_equal_RMSE_km_s": 38.73041281575053,
+    "cluster_all5_log_RMS_dex": 0.12981921527682158,
+    "cluster_reliable3_log_RMS_dex": 0.14141393977481562,
+    "cluster_all6_stress_log_RMS_dex": 0.1345918409161638,
+    "solar_solar_limb_fractional_force_change": 0.0,
+    "solar_Mercury_fractional_force_change": 0.0,
+    "solar_Earth_fractional_force_change": 0.0,
+    "solar_Saturn_fractional_force_change": 0.0,
+    "is_primary_dimension_fixed_formula": false,
+    "galaxy_ratio_to_fixed_RAR": 3.545109506919508,
+    "all5_gap_fraction_closed_from_fixed_RAR": 0.7773188759025069,
+    "galaxy_gate_pass": false,
+    "solar_gate_pass": true,
+    "all5_cluster_gate_pass": true,
+    "reliable3_cluster_gate_pass": true,
+    "gap_closed_gate_pass": true,
+    "selected_primary_row": false
+  },
+  "selection": {
+    "advance": false,
+    "next_action_if_pass": "Freeze the exact primary operator in registered 3D QUMOND and run spent RXJ2129 topology plus resolution and baryonic-map robustness.",
+    "next_action_if_fail": "Use only predeclared response diagnostics to identify failure; do not promote a diagnostic row or open sealed outcomes."
+  },
+  "claim_boundary": [
+    "The inverse-square-root path survival is a proposed vector-coherence interpretation, not derived quantum gravity.",
+    "The post-result five-cluster correlation generated this equation and cannot validate it.",
+    "The Newtonian potential and eta closures must be replaced or justified covariantly if the phenomenology survives.",
+    "The photon response remains a zero-slip working assumption without a relativistic action.",
+    "No image multiplicity, parity, critical curve, positional likelihood, or sealed target is evaluated."
+  ]
+}

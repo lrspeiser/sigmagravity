@@ -16,10 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0683-potential-channel-qumond`](latest-findings/2026-08-02-p0683-potential-channel-qumond/README.md).
-It extends the P0682 six-cluster spent deflection atlas through the first
-one-setting potential-channel QUMOND test. The prior P0682 and P0677 snapshots
-remain in
+[`latest-findings/2026-08-02-p0684-path-diluted-qumond`](latest-findings/2026-08-02-p0684-path-diluted-qumond/README.md).
+It extends the P0683 potential-channel test through the first baryonic
+path-dilution sweep. The prior P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0683-potential-channel-qumond`](latest-findings/2026-08-02-p0683-potential-channel-qumond/README.md),
 [`latest-findings/2026-08-02-p0682-spent-deflection-atlas`](latest-findings/2026-08-02-p0682-spent-deflection-atlas/README.md)
 and
 [`latest-findings/2026-08-02-p0677-absolute-field-audit`](latest-findings/2026-08-02-p0677-absolute-field-audit/README.md),
@@ -67,6 +67,15 @@ orders the individual cluster amplitudes in the wrong direction. No formula is
 advanced. The next formula generator is the dimensionless baryonic potential
 path ratio, not another per-cluster amplitude. See
 [`docs/P0683_POTENTIAL_CHANNEL_QUMOND_RESULTS.md`](docs/P0683_POTENTIAL_CHANNEL_QUMOND_RESULTS.md).
+
+P0684 adds the dimensionless baryonic path ratio
+`eta=|Phi_b|/(r g_b)`. The fixed primary improves the cluster score to
+`0.240 dex` and passes the reliable-three gate without degrading galaxies, but
+still fails the all-five and 75%-gap rules. Two predeclared diagnostic rows
+clear every numerical spent gate. The cleaner inverse-square-root row becomes
+a new formula generator—not a promoted result—and is now locked for a 3D
+QUMOND raw-topology test. See
+[`docs/P0684_PATH_DILUTED_QUMOND_RESULTS.md`](docs/P0684_PATH_DILUTED_QUMOND_RESULTS.md).
 
 ## Untouched external validation (P0633)
 

@@ -1,6 +1,8 @@
 import numpy as np
 
 from voidscreen.potential_channel_qumond import (
+    path_diluted_channel_exponent,
+    path_diluted_potential_channel_acceleration,
     potential_channel_acceleration,
     potential_channel_exponent,
     rar_qumond_boost,
@@ -57,3 +59,43 @@ def test_high_acceleration_limit_is_exponentially_newtonian():
         endpoint_exponent=4.0,
     )
     assert response["enhancement"][0] == 1.0
+
+
+def test_path_dilution_has_inverse_square_root_primary_limit():
+    response = path_diluted_channel_exponent(
+        np.array([1.0, 1.0]),
+        np.array([1.0, 9.0]),
+        transition_depth=1.0e-6,
+        transition_power=2.0,
+        extra_spatial_channels=3.0,
+        path_power=0.5,
+    )
+    assert np.allclose(response["channel_exponent"], [4.0, 2.0], rtol=1e-10)
+
+
+def test_path_ratio_below_point_mass_is_clipped_to_one():
+    response = path_diluted_channel_exponent(
+        np.array([1.0]),
+        np.array([0.5]),
+        transition_depth=1.0e-6,
+        transition_power=2.0,
+        extra_spatial_channels=3.0,
+        path_power=0.5,
+    )
+    assert response["clipped_potential_path_ratio"][0] == 1.0
+    assert np.isclose(response["channel_exponent"][0], 4.0, rtol=1e-10)
+
+
+def test_zero_extra_channels_is_exact_fixed_rar_response():
+    gbar = np.geomspace(1.0e-13, 1.0e-8, 12)
+    response = path_diluted_potential_channel_acceleration(
+        gbar,
+        np.full_like(gbar, 1.0e-5),
+        np.full_like(gbar, 10.0),
+        a0_m_s2=1.2e-10,
+        transition_depth=1.0e-6,
+        transition_power=2.0,
+        extra_spatial_channels=0.0,
+        path_power=0.5,
+    )
+    assert np.allclose(response["enhancement"], rar_qumond_boost(gbar, 1.2e-10))

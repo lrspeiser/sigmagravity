@@ -78,6 +78,7 @@ def equal_system_rmse(frame: pd.DataFrame, group: str, residual: str) -> float:
 def prepare_galaxies(path: Path) -> pd.DataFrame:
     frame = pd.read_csv(path).copy()
     frame["potential_depth"] = np.nan
+    frame["potential_path_ratio"] = np.nan
     for _, group in frame.groupby("galaxy", sort=True):
         ordered = group.sort_values("radius_adjusted_kpc")
         invariants = spherical_profile_invariants(
@@ -85,7 +86,10 @@ def prepare_galaxies(path: Path) -> pd.DataFrame:
             ordered.g_bar_m_s2.to_numpy(float),
         )
         frame.loc[ordered.index, "potential_depth"] = invariants["potential_depth"]
-    if frame.potential_depth.isna().any():
+        frame.loc[ordered.index, "potential_path_ratio"] = invariants[
+            "potential_path_ratio"
+        ]
+    if frame[["potential_depth", "potential_path_ratio"]].isna().any().any():
         raise RuntimeError("galaxy potential construction left missing rows")
     return frame
 
@@ -174,9 +178,8 @@ def prepare_clusters(protocol: dict) -> list[dict]:
             np.power(10.0, anchors.log_gbar.to_numpy(float)),
             outer_slope=-2.0,
         )
-        potential = spherical_profile_invariants(radius_grid, gbar_grid)[
-            "potential_depth"
-        ]
+        invariants = spherical_profile_invariants(radius_grid, gbar_grid)
+        potential = invariants["potential_depth"]
         row = metrics.loc[label]
         target["target_total_radial_deflection_arcsec"] = (
             target.mean_baryon_radial_deflection_arcsec
@@ -188,6 +191,7 @@ def prepare_clusters(protocol: dict) -> list[dict]:
                 "radius_grid": radius_grid,
                 "gbar_grid": gbar_grid,
                 "potential_depth_grid": potential,
+                "potential_path_ratio_grid": invariants["potential_path_ratio"],
                 "target": target,
                 "distance_ratio": float(row.reference_distance_ratio),
                 "primary": not bool(row.parameter_at_boundary),
