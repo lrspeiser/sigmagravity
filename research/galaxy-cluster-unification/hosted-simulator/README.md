@@ -83,6 +83,7 @@ GET  /api/v1/systems/DDO154
 POST /api/v1/synthetic-galaxies
 POST /api/v1/formulas/validate
 POST /api/v1/models/validate
+POST /api/v1/field-jobs/prepare
 POST /api/v1/runs
 GET  /api/v1/openapi.json
 ```
@@ -97,6 +98,20 @@ to 128 nodes and depth 24.
 not execute pasted JavaScript or Python. A successful validation currently
 returns `executionReadiness.state=worker_not_connected`; this is deliberate
 until queue, data storage, and the Python worker are deployed.
+
+`POST /api/v1/field-jobs/prepare` binds a valid model to a content-hashed array
+manifest, grid spacing, boundaries, requested observables, seed, and parameter
+policy. It rejects missing or unit-incompatible arrays and returns a stable
+preflight hash plus a resource estimate. It cannot verify or execute array
+bytes until uploads and the worker queue are connected, so it reports both
+blockers explicitly.
+
+The local worker CLI is `../scripts/run_generic_field_job.py`. It packages NPZ
+arrays into a verified `sigma-array-bundle/1` directory and runs a
+`sigma-field-job-request/1`. Every run writes separate deterministic job and
+scientific-result hashes, output-array hashes, residual history, resource log,
+artifact index, and reproduction manifest. See `../worker` for the pinned,
+non-root container definition.
 
 ## Worker connection
 

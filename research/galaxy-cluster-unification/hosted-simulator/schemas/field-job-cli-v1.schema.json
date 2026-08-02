@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigma-gravity-research-simulator-five.vercel.app/schemas/field-job-cli-v1.schema.json",
+  "title": "Sigma local field job CLI envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "modelPath", "inputBundlePath", "outputDirectory", "request"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-field-job-cli/1" },
+    "modelPath": { "type": "string", "minLength": 1 },
+    "inputBundlePath": { "type": "string", "minLength": 1 },
+    "outputDirectory": { "type": "string", "minLength": 1 },
+    "request": { "$ref": "field-job-request-v1.schema.json" }
+  }
+}

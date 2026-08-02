@@ -29,6 +29,8 @@ trusted solver.
 | Cross-theory conformance fixtures | Newtonian, AQUAL, QUMOND, Refracted Gravity, and two-potential manifests pass one validator | validation does not prove a numerical or physical result |
 | Neutral local field worker | one expression-driven engine solves scalar divergence-form equations on Cartesian 2D and 3D grids | no hosted queue, tensors, nonlocal operators, axisymmetric coordinates, or arbitrary-code sandbox yet |
 | Numerical acceptance tests | analytic 2D, analytic 3D, variable-coefficient, and exact Refracted Gravity-tree executions pass | convergence order and production-scale resource classes are not frozen yet |
+| Content-addressed field job | verified array bundle, deterministic job/scientific hashes, residual history, output hashes, resource log, artifact index, and CLI pass end to end | durable upload, queue, storage, and hosted worker are not connected |
+| Worker container definition | pinned Python/NumPy/SciPy/JCS environment, non-root user, read-only/network-disabled run instructions | Docker/Podman is unavailable on this machine, so image build and runtime isolation still need CI or a container host |
 
 The generic worker dispatches from equation structure, not a theory name. It
 supports `laplacian(phi)=source` and
@@ -64,7 +66,7 @@ below.
 
 ## Delivery order and rethink gates
 
-1. Finish the field contract, formal schema, and conformance fixtures.
+1. Finish the field contract, formal schema, and conformance fixtures. **Initial stationary-field contract complete.**
 2. Harden the generic local worker through convergence, nonlinear, boundary,
    coupled-field, and resource tests.
 3. Package the worker and connect an asynchronous job path with immutable
@@ -84,8 +86,8 @@ used to hide a broken reconstruction, solver, or observation adapter.
 
 ## Current next milestone
 
-The immediate milestone is a container-ready field job: one canonical model
-manifest plus one content-hashed array bundle enters the generic worker; a
-known-answer 2D/3D field, residual history, resource log, and immutable result
-manifest come out. Only after that passes locally should the Vercel gateway
-queue the same job format.
+The container-ready local field-job milestone now passes: one canonical model
+manifest plus one content-hashed array bundle enters the generic worker and a
+known-answer field, residual history, resource log, output hashes, and immutable
+result manifest come out. The immediate next milestone is durable array upload
+and an asynchronous queue that sends this unchanged job format to the worker.

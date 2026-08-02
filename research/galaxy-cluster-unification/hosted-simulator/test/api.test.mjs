@@ -5,9 +5,11 @@ import systems from "../api/v1/systems.mjs";
 import system from "../api/v1/system.mjs";
 import validate from "../api/v1/formulas/validate.mjs";
 import validateModel from "../api/v1/models/validate.mjs";
+import prepareFieldJob from "../api/v1/field-jobs/prepare.mjs";
 import runs from "../api/v1/runs.mjs";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
 import { readFileSync } from "node:fs";
+import { sha256 } from "../lib/canonical.mjs";
 
 function response() {
   return {
@@ -58,6 +60,28 @@ test("field-model API accepts one contract for distinct 2D/3D theories", () => {
     assert.equal(output.body.valid, true, output.body.errors.join("; "));
     assert.equal(output.body.executionReadiness.state, "worker_not_connected");
   }
+});
+
+test("field-job API preflights model and array metadata without claiming execution", () => {
+  const model = JSON.parse(readFileSync(new URL("../examples/models/newtonian-poisson.json", import.meta.url), "utf8"));
+  const core = {
+    schemaVersion: "sigma-array-bundle/1",
+    geometry: { coordinateSystem: "cartesian_3d", dimensions: 3, spacing: [1, 1, 1], lengthUnit: "m" },
+    arrays: [{ key: "baryon_density", npzKey: "baryon_density", unit: "kg/m^3", rank: "scalar", role: "source", dtype: "<f8", shape: [17, 17, 17], elementCount: 4913, contentSha256: "2".repeat(64) }],
+    provenance: { kind: "test" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const output = call(prepareFieldJob, {
+    method: "POST",
+    body: {
+      model,
+      inputBundle: { ...core, bundleSha256: sha256(core) },
+      request: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["massive_tracer_acceleration"] },
+    },
+  });
+  assert.equal(output.statusCode, 200);
+  assert.equal(output.body.valid, true);
+  assert.equal(output.body.state, "worker_not_connected");
 });
 
 test("run API produces a content-addressed comparator result", () => {

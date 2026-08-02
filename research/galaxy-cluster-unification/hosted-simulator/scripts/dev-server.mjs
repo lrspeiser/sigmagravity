@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import datasets from "../api/v1/datasets.mjs";
 import formulasValidate from "../api/v1/formulas/validate.mjs";
+import fieldJobsPrepare from "../api/v1/field-jobs/prepare.mjs";
 import health from "../api/v1/health.mjs";
 import modelsValidate from "../api/v1/models/validate.mjs";
 import runs from "../api/v1/runs.mjs";
@@ -19,6 +20,7 @@ const apiRoutes = new Map([
   ["/api/v1/datasets", datasets],
   ["/api/v1/systems", systems],
   ["/api/v1/formulas/validate", formulasValidate],
+  ["/api/v1/field-jobs/prepare", fieldJobsPrepare],
   ["/api/v1/models/validate", modelsValidate],
   ["/api/v1/synthetic-galaxies", syntheticGalaxies],
   ["/api/v1/runs", runs],
@@ -30,6 +32,9 @@ const staticFiles = new Map([
   ["/assets/app.js", ["assets/app.js", "text/javascript; charset=utf-8"]],
   ["/assets/style.css", ["assets/style.css", "text/css; charset=utf-8"]],
   ["/schemas/model-manifest-v1.schema.json", ["schemas/model-manifest-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/array-bundle-request-v1.schema.json", ["schemas/array-bundle-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/field-job-request-v1.schema.json", ["schemas/field-job-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/field-job-cli-v1.schema.json", ["schemas/field-job-cli-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/examples/models/newtonian-poisson.json", ["examples/models/newtonian-poisson.json", "application/json; charset=utf-8"]],
   ["/examples/models/aqual.json", ["examples/models/aqual.json", "application/json; charset=utf-8"]],
   ["/examples/models/qumond.json", ["examples/models/qumond.json", "application/json; charset=utf-8"]],

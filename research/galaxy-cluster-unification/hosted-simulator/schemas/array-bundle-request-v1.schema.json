@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigma-gravity-research-simulator-five.vercel.app/schemas/array-bundle-request-v1.schema.json",
+  "title": "Sigma array bundle request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "geometry", "arrays", "provenance", "license"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-array-bundle-request/1" },
+    "geometry": {
+      "type": "object",
+      "required": ["coordinateSystem", "dimensions", "spacing", "lengthUnit", "axisOrder", "referenceFrame"],
+      "properties": {
+        "coordinateSystem": { "enum": ["cartesian_2d", "cartesian_3d", "axisymmetric_cylindrical"] },
+        "dimensions": { "enum": [2, 3] },
+        "spacing": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number", "exclusiveMinimum": 0 } },
+        "lengthUnit": { "const": "m" },
+        "axisOrder": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "string" } },
+        "referenceFrame": { "type": "string", "minLength": 1 }
+      }
+    },
+    "arrays": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["unit", "rank", "role"],
+        "properties": {
+          "npzKey": { "type": "string", "minLength": 1 },
+          "unit": { "type": "string", "minLength": 1 },
+          "rank": { "enum": ["scalar", "vector", "tensor2"] },
+          "role": { "enum": ["source", "boundary", "mask", "uncertainty", "auxiliary"] }
+        }
+      }
+    },
+    "provenance": { "type": "object", "minProperties": 1 },
+    "license": {
+      "type": "object",
+      "required": ["id", "redistributionAllowed"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "redistributionAllowed": { "type": "boolean" }
+      }
+    }
+  }
+}

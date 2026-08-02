@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigma-gravity-research-simulator-five.vercel.app/schemas/field-job-request-v1.schema.json",
+  "title": "Sigma field job request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-field-job-request/1" },
+    "spacing": {
+      "oneOf": [
+        { "type": "number", "exclusiveMinimum": 0 },
+        { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number", "exclusiveMinimum": 0 } }
+      ]
+    },
+    "boundaryFields": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          { "type": "number" },
+          { "type": "object", "required": ["value"], "properties": { "value": { "type": "number" } } },
+          { "type": "object", "required": ["arrayKey"], "properties": { "arrayKey": { "type": "string", "minLength": 1 } } }
+        ]
+      }
+    },
+    "requestedObservables": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "seed": { "type": "integer" }
+  }
+}

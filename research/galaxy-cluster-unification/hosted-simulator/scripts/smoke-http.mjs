@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
+import { sha256 } from "../lib/canonical.mjs";
 
 const base = process.env.SIMULATOR_URL ?? "http://127.0.0.1:4173";
 
@@ -36,6 +37,20 @@ const fieldModel = await request("/examples/models/refracted-gravity.json");
 const fieldValidation = await request("/api/v1/models/validate", post(fieldModel));
 assert.equal(fieldValidation.valid, true);
 assert.equal(fieldValidation.executionReadiness.state, "worker_not_connected");
+const bundleCore = {
+  schemaVersion: "sigma-array-bundle/1",
+  geometry: { coordinateSystem: "cartesian_3d", dimensions: 3, spacing: [1, 1, 1], lengthUnit: "m" },
+  arrays: [{ key: "baryon_density", npzKey: "baryon_density", unit: "kg/m^3", rank: "scalar", role: "source", dtype: "<f8", shape: [17, 17, 17], elementCount: 4913, contentSha256: "3".repeat(64) }],
+  provenance: { kind: "smoke_fixture" },
+  license: { id: "CC0-1.0", redistributionAllowed: true },
+};
+const preflight = await request("/api/v1/field-jobs/prepare", post({
+  model: fieldModel,
+  inputBundle: { ...bundleCore, bundleSha256: sha256(bundleCore) },
+  request: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["massive_tracer_acceleration"] },
+}));
+assert.equal(preflight.valid, true);
+assert.equal(preflight.state, "worker_not_connected");
 const synthetic = await request("/api/v1/synthetic-galaxies", post({
   seed: 42,
   physical: { baryonicMassMsolar: 2e10, gasFraction: 0.35, bulgeFraction: 0.1, diskScaleKpc: 2.4 },

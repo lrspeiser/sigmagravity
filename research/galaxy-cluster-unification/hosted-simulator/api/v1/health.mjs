@@ -10,6 +10,7 @@ export default function handler(request, response) {
       radialRotationCurves: "available",
       syntheticRadialGalaxies: "available",
       typedFieldModelValidation: "available",
+      fieldJobPreflight: "available",
       fieldSolvers2d3d: "worker_not_connected",
       rawClusterLensing: "worker_not_connected",
     },

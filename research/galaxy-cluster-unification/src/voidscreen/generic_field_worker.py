@@ -38,6 +38,7 @@ class GenericFieldSolution:
     iterations: int
     maximum_relative_update: float
     equation_residuals: dict[str, float]
+    residual_history: tuple[dict[str, Any], ...] = ()
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
@@ -317,6 +318,38 @@ def _relative_update(previous: Array, current: Array) -> float:
     return numerator / max(denominator, np.finfo(float).tiny)
 
 
+def _equation_residuals(
+    equations: Sequence[Mapping[str, Any]],
+    fields: Mapping[str, Array],
+    parameters: Mapping[str, float],
+    spacing: Sequence[float],
+    shape: tuple[int, ...],
+) -> dict[str, float]:
+    residuals: dict[str, float] = {}
+    interior = tuple(slice(1, -1) for _ in shape)
+    for equation in equations:
+        left = _scalar_array(
+            evaluate_field_expression(
+                equation["lhs"], fields=fields, parameters=parameters, spacing=spacing
+            ),
+            shape,
+            f"equation {equation['id']} lhs",
+        )
+        right = _scalar_array(
+            evaluate_field_expression(
+                equation["rhs"], fields=fields, parameters=parameters, spacing=spacing
+            ),
+            shape,
+            f"equation {equation['id']} rhs",
+        )
+        numerator = float(np.sqrt(np.mean(np.square((left - right)[interior]))))
+        denominator = float(np.sqrt(np.mean(np.square(right[interior]))))
+        residuals[str(equation["id"])] = numerator / max(
+            denominator, np.finfo(float).tiny
+        )
+    return residuals
+
+
 def solve_field_manifest(
     manifest: Mapping[str, Any],
     source_fields: Mapping[str, Array],
@@ -382,6 +415,7 @@ def solve_field_manifest(
         raise ValueError("solver damping must lie in (0,1]")
     maximum_update = math.inf
     converged = False
+    history: list[dict[str, Any]] = []
 
     for iteration in range(1, maximum_iterations + 1):
         maximum_update = 0.0
@@ -414,26 +448,21 @@ def solve_field_manifest(
             updated = damping * solved + (1.0 - damping) * previous
             maximum_update = max(maximum_update, _relative_update(previous, updated))
             fields[target] = updated
+        current_residuals = _equation_residuals(
+            equations, fields, parameters, steps, shape
+        )
+        history.append(
+            {
+                "iteration": iteration,
+                "maximum_relative_update": maximum_update,
+                "equation_residuals": current_residuals,
+            }
+        )
         if maximum_update <= tolerance:
             converged = True
             break
 
-    residuals: dict[str, float] = {}
-    interior = tuple(slice(1, -1) for _ in shape)
-    for equation in equations:
-        left = _scalar_array(
-            evaluate_field_expression(equation["lhs"], fields=fields, parameters=parameters, spacing=steps),
-            shape,
-            f"equation {equation['id']} lhs",
-        )
-        right = _scalar_array(
-            evaluate_field_expression(equation["rhs"], fields=fields, parameters=parameters, spacing=steps),
-            shape,
-            f"equation {equation['id']} rhs",
-        )
-        numerator = float(np.sqrt(np.mean(np.square((left - right)[interior]))))
-        denominator = float(np.sqrt(np.mean(np.square(right[interior]))))
-        residuals[str(equation["id"])] = numerator / max(denominator, np.finfo(float).tiny)
+    residuals = history[-1]["equation_residuals"]
 
     observables = {
         str(observable["id"]): evaluate_field_expression(
@@ -448,6 +477,7 @@ def solve_field_manifest(
         iterations=iteration,
         maximum_relative_update=maximum_update,
         equation_residuals=residuals,
+        residual_history=tuple(history),
         metadata={
             "engine": "generic-divergence-field-worker-v1",
             "dimensions": dimensions,
