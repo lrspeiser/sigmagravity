@@ -1,0 +1,60 @@
+{
+  "protocol_version": "P0667-MULTIPOLE-GATED-3D-ACTIVATION-1.0.0",
+  "status": "frozen_before_any_P0667_score",
+  "frozen_utc": "2026-08-02T02:10:05Z",
+  "purpose": "Remove the Cartesian radial false positive with an exact, scale-free baryonic dipole-plus-quadrupole gate while retaining genuine offset activation and the validated zero-slip photon closure.",
+  "parent_result": "results/p0666_zero_slip_3d_photon_deflection/report.json",
+  "candidate": {
+    "local_activation": "P0666 [a0/(a0+|g_N|)] C_transverse,3D [1-exp(-(ell/Lc)^2)]",
+    "component_centroid": "mass-normalized first spatial moment",
+    "component_covariance": "mass-normalized centered second spatial moment",
+    "dipole_squared": "|c_star-c_gas|^2/(tr Q_star+tr Q_gas)",
+    "quadrupole_squared": "||Q_star/tr(Q_star)-Q_gas/tr(Q_gas)||_F^2",
+    "multipole_gate": "1-exp[-(dipole_squared+quadrupole_squared)]",
+    "sigma": "local_activation times multipole_gate",
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "synthetic_fixture": {
+    "grid_cells": 25,
+    "half_width": 8.0,
+    "stellar_mass": 0.3,
+    "gas_mass": 0.7,
+    "dimensionless_a0": 0.1,
+    "dimensionless_coherence_length": 2.0,
+    "stellar_gaussian_sigma": 0.8,
+    "gas_gaussian_sigma": 1.6,
+    "offset": 2.0,
+    "translation_cells": [2, -1, 1],
+    "scale_factor": 3.0
+  },
+  "predeclared_progression_gates": {
+    "P0666_failed_only_radial_activation_null": true,
+    "radial_cocentered_multipole_gate_max": 1e-14,
+    "radial_cocentered_3D_sigma_mass_weighted_mean_max": 1e-12,
+    "offset_multipole_gate_min": 0.05,
+    "offset_3D_sigma_mass_weighted_mean_min": 0.005,
+    "offset_signal_retained_fraction_vs_P0666_min": 0.05,
+    "rotation_covariance_relative_error_max": 1e-12,
+    "component_exchange_relative_error_max": 1e-12,
+    "translation_covariance_relative_error_max": 0.03,
+    "scale_covariance_multipole_gate_relative_error_max": 1e-12,
+    "sigma_finite_and_in_closed_unit_interval": true,
+    "minimum_constitutive_eigenvalue_strictly_positive": true,
+    "direction_reversal_tensor_relative_error_max": 1e-12,
+    "P0666_point_mass_photon_gates_remain_passed": true,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0,
+    "spent_lensing_outcomes_opened": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "The sole dimensionless dipole-plus-quadrupole gate advances only if it creates an exact radial null, retains a material offset signal, preserves all symmetries and ellipticity, and leaves the P0666 point-mass photon result intact.",
+  "outputs": {
+    "directory": "results/p0667_multipole_gated_3d_activation"
+  },
+  "claim_boundary": [
+    "The global multipole gate is a measurable baryonic geometry statistic but not yet derived from a microscopic transport action.",
+    "Global moments may miss locally compensating substructure and therefore require a registered-map and spent-topology test.",
+    "No spent RX J2129 image and no P0633/P0640 target may be used in P0667 development or selection."
+  ]
+}
