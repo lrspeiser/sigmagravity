@@ -1,0 +1,40 @@
+{
+  "report_version": "P0708-EXTERNAL-PREDICTION-LOCK-RESULTS-1.0.0",
+  "status": "pass",
+  "all_prediction_lock_gates_pass": true,
+  "candidate_authorized_for_one_external_unlock": true,
+  "protocol_sha256": "621614c082756df069e2611b68e35f00dd04c95e891dc78145e5356b4327e316",
+  "source_sha256": "90b1ea8f1b8807f421f345d372afbc7a47ccd1da50e3f9c02dde6a5cdedd9767",
+  "universal_parameter_sha256": "bf3f12d6b32ee3f1b0e3bf48a9603c4aafbcd34b2cbdd3de021d689514099a15",
+  "curve_sha256": "b9912258ed9cf223987817b153de97c09c49ce6a55ac6bb1e3cfd42ccc0adcbc",
+  "manifest_sha256": "f9ca26b7df3706049ff403146a9f0ebe6d31468ba900aec97ccc9e9c3bead696",
+  "resolution_sha256": "91eb56c56b392d49d7647dbf18f95305b0a8413ee537e63841a199047895cd98",
+  "systems": 17,
+  "maximum_AQUAL_residual": 9.90246647833079e-06,
+  "maximum_QUMOND_residual": 1.4971834769860067e-13,
+  "maximum_65_to_33_relative_RMS": 0.05912201528209681,
+  "maximum_mass_conservation_relative_error": 4.440892098500626e-16,
+  "gate_results": {
+    "candidate_parent": true,
+    "galaxy_count": true,
+    "cluster_count": true,
+    "finite_candidate_fields": true,
+    "AQUAL_convergence": true,
+    "AQUAL_residual": true,
+    "QUMOND_residual": true,
+    "resolution_convergence": true,
+    "mass_conservation": true,
+    "prediction_hashes": true,
+    "no_per_object_gravity": true,
+    "sealed_outcomes_untouched": true
+  },
+  "failed_gates": [],
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0708 uses open baryonic inputs only and computes no target score.",
+    "AQUAL and QUMOND photon deflections are explicitly nonrelativistic diagnostics.",
+    "The cluster line-of-sight lift is a fixed measurement model, not a gravity parameter.",
+    "Passing P0708 authorizes one external evaluation; it does not establish the theory."
+  ]
+}

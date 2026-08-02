@@ -1,0 +1,73 @@
+{
+  "protocol_version": "P0708-EXTERNAL-PREDICTION-LOCK-1.0.0",
+  "status": "frozen_before_any_P0633_kinematic_or_P0640_lensing_constraint_open",
+  "frozen_utc": "2026-08-02T07:22:00Z",
+  "candidate_parent": "results/p0707_spent_two_potential_rar_metric_joint_screen/report.json",
+  "external_parent": "configs/p0633_external_validation_preregistration.json",
+  "galaxy_map_parent": "results/p0639_registered_baryonic_maps/report.json",
+  "cluster_map_parent": "results/p0641_registered_cluster_baryon_maps/report.json",
+  "universal_parameters": {
+    "a0_si_m_s2": 1.2e-10,
+    "a0_galaxy_km2_s2_per_kpc": 3702.813097,
+    "gravitational_constant_si": 6.67430e-11,
+    "gravitational_constant_galaxy_kpc_km2_s2_per_solar_mass": 4.30091e-6,
+    "light_speed_si_m_s": 299792458.0,
+    "light_speed_galaxy_km_s": 299792.458,
+    "chi_t": 1e-6,
+    "transition_power_n": 4.0,
+    "extra_spatial_channels": 2.0,
+    "path_power_q": 0.5,
+    "galaxy_gas_scale_height_kpc": 0.15,
+    "galaxy_stellar_scale_height_kpc": 0.3,
+    "cluster_half_extent_kpc": 450.0,
+    "nominal_cells_per_axis": 65,
+    "convergence_cells_per_axis": 33,
+    "per_object_gravity_parameters": 0,
+    "fitted_metric_slip_parameters": 0,
+    "fitted_photon_parameters": 0
+  },
+  "galaxy_predictions": {
+    "input_directory": "results/p0639_registered_baryonic_maps/maps",
+    "metadata": "results/p0637_little_things_photometric_metadata/photometric_inputs.csv",
+    "models": ["P0707_time_potential", "Newtonian_3D", "AQUAL_simple_mu_3D", "QUMOND_simple_nu_3D"],
+    "los_rule": "v_los-v_sys=v_c(R) sin(i_phot) cos(theta_disk); no kinematic orientation or inclination refit",
+    "stellar_mass_systematics": [0.5, 1.0, 2.0],
+    "systematic_use": "report sensitivity only; do not choose a value per galaxy"
+  },
+  "cluster_predictions": {
+    "input_directory": "results/p0641_registered_cluster_baryon_maps/maps",
+    "models": ["P0707_Weyl", "baryon_only_GR", "AQUAL_simple_mu_diagnostic", "QUMOND_simple_nu_diagnostic"],
+    "field": "central fixed 900 kpc square, mass-conservative anti-aliased resampling; each component lifted with sech-squared depth equal to its own projected RMS radius",
+    "deflection": "store physical alpha for Dds/Ds=1; multiply by the independently measured source-redshift distance ratio after unsealing",
+    "mass_systematics": "use the already registered common low/high stellar and gas maps; report only and never select per cluster",
+    "ordinary_primary_nuisance": "one source-plane position per family only; no center shift, external shear, ellipticity, rotation, radial amplitude, mass sheet, or gravity parameter"
+  },
+  "predeclared_gates": {
+    "candidate_parent_pass": true,
+    "galaxies": 13,
+    "clusters": 4,
+    "all_nominal_candidate_fields_finite": true,
+    "all_AQUAL_comparators_converged": true,
+    "maximum_AQUAL_residual": 1e-5,
+    "maximum_QUMOND_residual": 1e-5,
+    "maximum_candidate_65_to_33_relative_RMS": 0.35,
+    "maximum_mass_conservation_relative_error": 1e-10,
+    "complete_prediction_hashes": true,
+    "per_object_gravity_parameters": 0,
+    "sealed_outcomes_opened": false
+  },
+  "unlock_rule": "Only if every P0708 gate passes: commit and push this protocol, the resolved parameter hash, every prediction hash, and an unlock manifest before parsing any sealed target payload.",
+  "outputs": {
+    "directory": "results/p0708_external_prediction_lock",
+    "galaxy_curves": "galaxy_prediction_curves.csv",
+    "system_manifest": "system_prediction_manifest.csv",
+    "report": "report.json",
+    "summary": "SUMMARY.md"
+  },
+  "claim_boundary": [
+    "P0708 uses open baryonic inputs only and computes no target score.",
+    "AQUAL and QUMOND photon deflections are explicitly nonrelativistic diagnostics.",
+    "The cluster line-of-sight lift is a fixed measurement model, not a gravity parameter.",
+    "Passing P0708 authorizes one external evaluation; it does not establish the theory."
+  ]
+}
