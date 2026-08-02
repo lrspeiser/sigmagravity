@@ -77,27 +77,55 @@ def main():
     args = parser.parse_args()
     config_path = args.config.resolve()
     protocol = read_json(config_path)
-    if protocol.get("status") != "frozen_before_any_P0695_synthetic_path_or_hybrid_metric":
-        raise RuntimeError("P0695 protocol is not frozen")
+    stage = "P0695B" if str(protocol.get("protocol_version", "")).startswith("P0695B-") else "P0695"
+    accepted_status = {
+        "P0695": "frozen_before_any_P0695_synthetic_path_or_hybrid_metric",
+        "P0695B": "frozen_before_any_P0695B_synthetic_path_or_hybrid_metric",
+    }[stage]
+    if protocol.get("status") != accepted_status:
+        raise RuntimeError(f"{stage} protocol is not frozen")
     failure_path = ROOT / protocol["failure_parent"]
     failure = read_json(failure_path)
     equation = protocol["equation"]
     expected = protocol["predeclared_integrity_gates"]
-    integrity = {
-        "P0694_status": failure.get("status") == expected["P0694_status"],
-        "P0694_endpoint_pair_retired": bool(
-            failure.get("shared_linear_endpoint_pair_retired")
-        )
-        is bool(expected["P0694_shared_linear_endpoint_pair_retired"]),
-        "no_observational_outcome_read": not bool(expected["galaxy_or_cluster_outcomes_read"]),
-        "no_new_constants": int(equation["new_universal_constants"])
-        == int(expected["new_universal_constants"]),
-        "no_fitted_physics": int(equation["fitted_physical_parameters"])
-        == int(expected["fitted_physical_parameters"]),
-        "sealed_targets_untouched": not bool(expected["sealed_target_outcomes_opened"]),
-    }
+    if stage == "P0695B":
+        integrity = {
+            "P0695_status": failure.get("status") == expected["P0695_status"],
+            "P0695_not_advanced": bool(
+                failure.get("candidate_advanced_to_spent_joint_screen")
+            )
+            is bool(expected["P0695_candidate_advanced_to_spent_joint_screen"]),
+            "P0695_failed_gates_reproduced": list(failure.get("failed_gates", []))
+            == list(expected["P0695_failed_gates"]),
+            "only_interpolation_changed": expected["only_declared_change"]
+            == "interpolation_order: 1 -> 3",
+            "no_observational_outcome_read": not bool(
+                expected["galaxy_or_cluster_outcomes_read"]
+            ),
+            "no_new_constants": int(equation["new_universal_constants"])
+            == int(expected["new_universal_constants"]),
+            "no_fitted_physics": int(equation["fitted_physical_parameters"])
+            == int(expected["fitted_physical_parameters"]),
+            "sealed_targets_untouched": not bool(expected["sealed_target_outcomes_opened"]),
+        }
+    else:
+        integrity = {
+            "P0694_status": failure.get("status") == expected["P0694_status"],
+            "P0694_endpoint_pair_retired": bool(
+                failure.get("shared_linear_endpoint_pair_retired")
+            )
+            is bool(expected["P0694_shared_linear_endpoint_pair_retired"]),
+            "no_observational_outcome_read": not bool(
+                expected["galaxy_or_cluster_outcomes_read"]
+            ),
+            "no_new_constants": int(equation["new_universal_constants"])
+            == int(expected["new_universal_constants"]),
+            "no_fitted_physics": int(equation["fitted_physical_parameters"])
+            == int(expected["fitted_physical_parameters"]),
+            "sealed_targets_untouched": not bool(expected["sealed_target_outcomes_opened"]),
+        }
     if not all(integrity.values()):
-        raise RuntimeError(f"P0695 integrity failure before metrics: {integrity}")
+        raise RuntimeError(f"{stage} integrity failure before metrics: {integrity}")
 
     numerics = protocol["numerics"]
     cells = int(numerics["grid_cells"])
@@ -126,7 +154,7 @@ def main():
     convergence_order = int(numerics["convergence_gauss_legendre_order"])
     interpolation_order = int(numerics["interpolation_order"])
 
-    print("P0695: spherical path and quadrature audit", flush=True)
+    print(f"{stage}: spherical path and quadrature audit", flush=True)
     sphere_newtonian = solve_newtonian(
         sphere_density,
         spacing,
@@ -225,7 +253,7 @@ def main():
         comparison,
     )
 
-    print("P0695: ellipsoid rotation covariance and hybrid identity", flush=True)
+    print(f"{stage}: ellipsoid rotation covariance and hybrid identity", flush=True)
     ellipsoid_newtonian = solve_newtonian(
         ellipsoid_density,
         spacing,
@@ -420,13 +448,13 @@ def main():
     figure.colorbar(correction_image, ax=axes[1, 1], shrink=0.75)
     for axis_plot in axes.ravel():
         axis_plot.grid(alpha=0.15)
-    figure.suptitle("P0695 radial path potential mathematical audit")
+    figure.suptitle(f"{stage} radial path potential mathematical audit")
     figure.tight_layout()
     figure.savefig(output / protocol["outputs"]["figure"], dpi=180)
     plt.close(figure)
 
     report = {
-        "report_version": "P0695-RADIAL-PATH-POTENTIAL-MATH-AUDIT-RESULTS-1.0.0",
+        "report_version": f"{stage}-RADIAL-PATH-POTENTIAL-MATH-AUDIT-RESULTS-1.0.0",
         "status": "pass" if all_pass else "fail",
         "all_math_gates_pass": all_pass,
         "candidate_advanced_to_spent_joint_screen": all_pass,
@@ -472,7 +500,7 @@ def main():
         json.dumps(json_safe(report), indent=2),
         encoding="utf-8",
     )
-    summary = f"""# P0695 radial path potential mathematical audit
+    summary = f"""# {stage} radial path potential mathematical audit
 
 - Status: **{'PASS' if all_pass else 'FAIL'}**.
 - Spherical radial relative RMS / median error: **{radial_relative_rms:.4g} / {radial_median_absolute:.4g}**.
