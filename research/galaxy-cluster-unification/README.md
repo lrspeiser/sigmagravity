@@ -16,10 +16,12 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0682-spent-deflection-atlas`](latest-findings/2026-08-02-p0682-spent-deflection-atlas/README.md).
-It extends the P0677 absolute-field audit through the derivative-qualified
-RXJ2129 decomposition and the six-cluster spent deflection atlas. The prior
-P0677 snapshot remains in
+[`latest-findings/2026-08-02-p0683-potential-channel-qumond`](latest-findings/2026-08-02-p0683-potential-channel-qumond/README.md).
+It extends the P0682 six-cluster spent deflection atlas through the first
+one-setting potential-channel QUMOND test. The prior P0682 and P0677 snapshots
+remain in
+[`latest-findings/2026-08-02-p0682-spent-deflection-atlas`](latest-findings/2026-08-02-p0682-spent-deflection-atlas/README.md)
+and
 [`latest-findings/2026-08-02-p0677-absolute-field-audit`](latest-findings/2026-08-02-p0677-absolute-field-audit/README.md),
 and the complete P0612-P0621 archival bundle remains in
 [`latest-findings/2026-08-01-p0620-gravity-routing`](latest-findings/2026-08-01-p0620-gravity-routing/README.md).
@@ -54,6 +56,17 @@ spherical and registered 3D baryon maps before any new sealed galaxy or cluster
 outcome is opened. See
 [`docs/P0682_SPENT_MULTICLUSTER_DEFLECTION_ATLAS_RESULTS.md`](docs/P0682_SPENT_MULTICLUSTER_DEFLECTION_ATLAS_RESULTS.md)
 for exact metrics and stop/go thresholds.
+
+P0683 then tested a single QUMOND-style equation whose exponent moves from the
+fixed RAR galaxy response toward a deeper-potential cluster response. With one
+universal transition setting, the dimension-fixed primary remains within
+`1.035x` fixed RAR on 131 spent galaxies and closes `51.2%` of the spent
+cluster radial gap. It fails the frozen cluster accuracy gates (`0.285 dex` on
+five systems and `0.309 dex` on the reliable three) because potential depth
+orders the individual cluster amplitudes in the wrong direction. No formula is
+advanced. The next formula generator is the dimensionless baryonic potential
+path ratio, not another per-cluster amplitude. See
+[`docs/P0683_POTENTIAL_CHANNEL_QUMOND_RESULTS.md`](docs/P0683_POTENTIAL_CHANNEL_QUMOND_RESULTS.md).
 
 ## Untouched external validation (P0633)
 

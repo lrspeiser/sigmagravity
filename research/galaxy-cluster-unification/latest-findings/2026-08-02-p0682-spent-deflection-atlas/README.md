@@ -18,7 +18,11 @@ therefore advances.
 
 The result supports testing a simple cluster-regime radial amplification
 before adding more angular machinery. It does not establish that `8.59` is a
-constant of nature, and it does not solve image topology.
+constant of nature, and it does not solve image topology. P0683 has now tested
+the first such field coefficient. Its one-setting, dimension-fixed QUMOND
+channel exponent stays within 3.5% of fixed RAR on spent galaxies and closes
+51% of the cluster radial gap, but misses both frozen cluster gates and does
+not advance.
 
 ## Evidence table
 
@@ -30,6 +34,7 @@ constant of nature, and it does not solve image topology.
 | P0682 five-cluster morphology | 5/5 pass | Radial alignment repeats across spent systems. |
 | P0682 constant amplitude | `8.59`, scatter factor `1.34` | A constant branch is provisionally simpler than an object predictor. |
 | P0682 predictor selection | no survivor; 3 reliable targets | Sample and comparator reliability are insufficient. |
+| P0683 potential-channel QUMOND | galaxies `1.035x` RAR; clusters `0.285 dex` | Clean regime onset, but wrong within-cluster ordering; no advancement. |
 
 The P0678 and P0682 amplitudes use different baryonic maps and annuli. The
 registered 3D RXJ2129 scalar RMS is roughly twice the Tian spherical-profile
@@ -37,13 +42,14 @@ value used in P0682. This map sensitivity is now an explicit next-stage test.
 
 ## Next scientific gates
 
-1. Freeze a smooth baryon-only radial amplification whose high-acceleration
-   limit is Newton/GR and whose cluster plateau is informed—but not declared
-   proven—by P0682.
-2. Derive the transition/effective-extent coordinate from dimensionless
-   baryonic acceleration, potential, density, or scale ratios. Do not use
-   observed image radii or per-cluster settings.
-3. Require the same law to agree under the Tian spherical and registered 3D
+1. Keep P0683's successful potential-depth onset and test a frozen,
+   dimensionless path-dilution factor based on
+   `eta=|Phi_b|/(r g_b)`, which is inversely ordered with the spent required
+   cluster ratio. Treat the five-system correlation only as a formula
+   generator.
+2. Do not use observed image radii, target halo amplitudes, or per-cluster
+   settings in the formula.
+3. Require the resulting law to agree under the Tian spherical and registered 3D
    baryon reconstructions.
 4. Run spent RXJ2129 topology. Require all families to recover multiplicity
    and parity, critical structure, heldout RMS below `3 arcsec`, and no fitted
@@ -78,6 +84,6 @@ are in
 ## Canonical evidence
 
 - [`P0682 results`](../../docs/P0682_SPENT_MULTICLUSTER_DEFLECTION_ATLAS_RESULTS.md)
+- [`P0683 results`](../../docs/P0683_POTENTIAL_CHANNEL_QUMOND_RESULTS.md)
 - [`P0677 absolute-field snapshot`](../2026-08-02-p0677-absolute-field-audit/README.md)
 - [`public simulator/API plan`](../../docs/PUBLIC_SIMULATOR_API_PLAN.md)
-
