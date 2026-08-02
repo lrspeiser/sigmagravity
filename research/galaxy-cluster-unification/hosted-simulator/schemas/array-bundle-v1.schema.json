@@ -19,6 +19,7 @@
             { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number", "exclusiveMinimum": 0 } }
           ]
         },
+        "origin": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number" } },
         "lengthUnit": { "type": "string", "minLength": 1 },
         "axisOrder": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "string", "minLength": 1 } },
         "referenceFrame": { "type": "string", "minLength": 1 }

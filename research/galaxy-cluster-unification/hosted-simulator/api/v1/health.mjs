@@ -14,6 +14,7 @@ export default function handler(request, response) {
       localAsyncFieldJobs: "available_in_dev_server",
       localResolvedGalaxyJobs: "available_in_dev_server",
       localMultiSystemBatches: "available_in_dev_server",
+      localCircularSpeedObservationAdapter: "available_in_dev_server",
       fieldSolvers2d3d: "worker_not_connected",
       rawClusterLensing: "worker_not_connected",
     },

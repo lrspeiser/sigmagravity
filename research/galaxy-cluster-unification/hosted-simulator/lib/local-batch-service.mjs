@@ -5,7 +5,9 @@ import { sha256 } from "./canonical.mjs";
 import { prepareBatch } from "./batch-preflight.mjs";
 import { LocalServiceError } from "./local-field-job-service.mjs";
 
-const SERVICE_VERSION = "sigma-local-batch-service/1";
+// Report contents participate in batch identity through this version. Bump it
+// whenever deterministic batch artifacts or aggregation semantics change.
+const SERVICE_VERSION = "sigma-local-batch-service/2";
 const IDENTIFIER = /^batch_[0-9a-f]{24}$/;
 const TERMINAL_CHILD_STATES = new Set([
   "succeeded",
@@ -120,6 +122,7 @@ export class LocalBatchService {
       deterministicArtifacts: [
         "manifest.json",
         "model.json",
+        "observation_predictions.csv",
         "per_galaxy.csv",
         "aggregate_scores.json",
         "failures.csv",
@@ -179,6 +182,7 @@ export class LocalBatchService {
         id: source.id,
         source: sourceIdentity,
         inputBundle: upload.inputBundle,
+        observationTargets: source.observationTargets ?? [],
       });
     }
     let preflight;
@@ -214,12 +218,16 @@ export class LocalBatchService {
         schemaVersion: "sigma-field-job-submit/1",
         model: payload.model,
         dataUploadId: uploadIds[index],
-        request: payload.fieldRequest,
+        request: {
+          ...payload.fieldRequest,
+          observationTargets: resolvedSystems[index].observationTargets,
+        },
       });
       childJobs.push({
         systemId: resolvedSystems[index].id,
         source: resolvedSystems[index].source,
         inputBundleSha256: resolvedSystems[index].inputBundle.bundleSha256,
+        observationTargets: preflight.systems[index].observationTargets,
         fieldJobId: submission.id,
       });
     }
@@ -391,6 +399,7 @@ export class LocalBatchService {
     const rows = [];
     const failureRows = [];
     const childManifest = [];
+    const observationPredictionRows = [];
     for (let index = 0; index < children.length; index += 1) {
       const child = children[index];
       const definition = record.childJobs[index];
@@ -403,6 +412,21 @@ export class LocalBatchService {
         }
       }
       const equationResidual = maximumNumeric(scientific?.equationResiduals);
+      const observation = scientific?.observationEvaluation ?? null;
+      if ((observation?.targetCount ?? 0) > 0 && child.state === "succeeded") {
+        const predictionArtifact = await this.fieldService.getArtifact(
+          child.id,
+          "observation_predictions.csv",
+        );
+        const lines = predictionArtifact.content.toString("utf8").trimEnd().split("\n");
+        const expectedHeader = "target_id,point_index,radius_m,predicted_speed_m_s,observed_speed_m_s,uncertainty_m_s,residual_m_s,azimuthal_coverage,mean_inward_acceleration_m_s2";
+        if (lines[0] !== expectedHeader) {
+          throw new Error(`field job ${child.id} returned an incompatible observation prediction table`);
+        }
+        for (const line of lines.slice(1)) {
+          if (line) observationPredictionRows.push(`${csvCell(definition.systemId)},${line}`);
+        }
+      }
       const row = {
         system_id: definition.systemId,
         source_kind: definition.source.kind,
@@ -416,6 +440,16 @@ export class LocalBatchService {
         maximum_equation_residual: equationResidual,
         universal_gravity_parameters: child.parameterAccounting?.universal ?? 0,
         per_object_gravity_parameters: child.parameterAccounting?.perObject ?? 0,
+        observation_targets: observation?.targetCount ?? 0,
+        scored_observation_targets: observation?.scoredTargetCount ?? 0,
+        valid_observation_points: observation?.validScoredPoints ?? 0,
+        observation_rmse_m_s: observation?.rmseMPerS ?? null,
+        observation_weighted_rmse_m_s: observation?.inverseVarianceWeightedRmseMPerS ?? null,
+        observation_sum_squared_residual_m2_s2: observation?.sumSquaredResidualM2PerS2 ?? null,
+        observation_weighted_squared_residual: observation?.inverseVarianceWeightedSquaredResidual ?? null,
+        observation_weight_sum: observation?.inverseVarianceWeightSum ?? null,
+        observation_chi_square: observation?.chiSquare ?? null,
+        observation_degrees_freedom: observation?.degreesFreedom ?? null,
       };
       rows.push(row);
       childManifest.push({
@@ -426,6 +460,7 @@ export class LocalBatchService {
         scientificJobId: child.scientificJobId,
         state: child.state,
         scientificResultSha256: child.scientificResultSha256,
+        observationTargets: definition.observationTargets,
       });
       if (child.state !== "succeeded") {
         failureRows.push({
@@ -438,6 +473,13 @@ export class LocalBatchService {
       }
     }
     const successfulRows = rows.filter((row) => row.state === "succeeded");
+    const scoredObservationTargets = rows.reduce((sum, row) => sum + row.scored_observation_targets, 0);
+    const validObservationPoints = rows.reduce((sum, row) => sum + row.valid_observation_points, 0);
+    const observationSumSquared = rows.reduce((sum, row) => sum + (row.observation_sum_squared_residual_m2_s2 ?? 0), 0);
+    const observationWeightedSquared = rows.reduce((sum, row) => sum + (row.observation_weighted_squared_residual ?? 0), 0);
+    const observationWeight = rows.reduce((sum, row) => sum + (row.observation_weight_sum ?? 0), 0);
+    const observationChiSquare = rows.reduce((sum, row) => sum + (row.observation_chi_square ?? 0), 0);
+    const observationDegreesFreedom = rows.reduce((sum, row) => sum + (row.observation_degrees_freedom ?? 0), 0);
     const aggregate = {
       schemaVersion: "sigma-batch-aggregate/1",
       batchId: id,
@@ -452,7 +494,20 @@ export class LocalBatchService {
       parameterPolicy: record.parameterPolicy,
       universalGravityParameters: Math.max(0, ...rows.map((row) => row.universal_gravity_parameters)),
       perObjectGravityParameters: Math.max(0, ...rows.map((row) => row.per_object_gravity_parameters)),
-      observationScoresAvailable: false,
+      observationScoresAvailable: scoredObservationTargets > 0,
+      scoredObservationTargets,
+      validObservationPoints,
+      observationRmseMPerS: validObservationPoints
+        ? Math.sqrt(observationSumSquared / validObservationPoints)
+        : null,
+      observationInverseVarianceWeightedRmseMPerS: observationWeight
+        ? Math.sqrt(observationWeightedSquared / observationWeight)
+        : null,
+      observationChiSquare: scoredObservationTargets ? observationChiSquare : null,
+      observationDegreesFreedom: scoredObservationTargets ? observationDegreesFreedom : null,
+      observationReducedChiSquare: observationDegreesFreedom
+        ? observationChiSquare / observationDegreesFreedom
+        : null,
       claimBoundary: record.preflight.claimBoundary,
     };
     const scientificCore = {
@@ -489,6 +544,13 @@ export class LocalBatchService {
           "maximum_equation_residual",
           "universal_gravity_parameters",
           "per_object_gravity_parameters",
+          "observation_targets",
+          "scored_observation_targets",
+          "valid_observation_points",
+          "observation_rmse_m_s",
+          "observation_weighted_rmse_m_s",
+          "observation_chi_square",
+          "observation_degrees_freedom",
         ],
         rows,
       ),
@@ -499,15 +561,23 @@ export class LocalBatchService {
       csv(["system_id", "field_job_id", "state", "category", "message"], failureRows),
       "utf8",
     );
-    const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td></tr>`).join("");
+    await writeFile(
+      resolve(artifacts, "observation_predictions.csv"),
+      `system_id,target_id,point_index,radius_m,predicted_speed_m_s,observed_speed_m_s,uncertainty_m_s,residual_m_s,azimuthal_coverage,mean_inward_acceleration_m_s2\n${observationPredictionRows.length ? `${observationPredictionRows.join("\n")}\n` : ""}`,
+      "utf8",
+    );
+    const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td><td>${htmlEscape(row.observation_rmse_m_s ?? "")}</td></tr>`).join("");
+    const observationScope = aggregate.observationScoresAvailable
+      ? `Circular-speed observations were scored for ${aggregate.scoredObservationTargets} target(s). Photon lensing was not evaluated.`
+      : "No observation targets were supplied, so this report measures numerical execution and convergence only.";
     await writeFile(
       resolve(artifacts, "report.html"),
-      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:960px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${successfulRows.length} child solves succeeded.</p><p><strong>Scientific boundary:</strong> this report measures numerical execution and convergence only. It does not yet compare predicted velocities or lensing with observations.</p><table><thead><tr><th>System</th><th>State</th><th>Iterations</th><th>Maximum equation residual</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
+      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:960px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${successfulRows.length} child solves succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><table><thead><tr><th>System</th><th>State</th><th>Iterations</th><th>Maximum equation residual</th><th>Circular-speed RMSE (m/s)</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
       "utf8",
     );
     await writeFile(
       resolve(artifacts, "llm_briefing.md"),
-      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${successfulRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Observation scores available: no\n\nThis deterministic briefing summarizes numerical field execution. It must not be described as a rotation-curve or lensing validation.\n`,
+      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${successfulRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? "yes (circular speed only)" : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Observation RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n\nThis deterministic briefing distinguishes numerical execution, massive-tracer circular-speed scoring, and photon lensing. It must not describe an unscored channel as validated.\n`,
       "utf8",
     );
     await writeFile(
@@ -522,6 +592,7 @@ export class LocalBatchService {
       "failures.csv",
       "llm_briefing.md",
       "model.json",
+      "observation_predictions.csv",
       "per_galaxy.csv",
       "report.html",
       "reproduction_command.txt",
@@ -545,7 +616,9 @@ export class LocalBatchService {
       systemCount: rows.length,
       artifactIndexSha256: digest(await readFile(resolve(artifacts, "artifact_index.json"))),
       fieldWorkerSourceSha256: this.fieldService.workerSourceSha256,
-      reportScope: "numerical_execution_not_observation_validation",
+      reportScope: aggregate.observationScoresAvailable
+        ? "numerical_execution_and_massive_tracer_circular_speed_scoring"
+        : "numerical_execution_not_observation_validation",
     };
     const manifest = { ...manifestCore, manifestSha256: sha256(manifestCore) };
     await atomicWrite(resolve(artifacts, "manifest.json"), manifest);

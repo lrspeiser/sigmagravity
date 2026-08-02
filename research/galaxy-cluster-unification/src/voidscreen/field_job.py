@@ -27,6 +27,7 @@ import rfc8785
 import scipy
 
 from .generic_field_worker import GenericFieldSolution, solve_field_manifest
+from .observation_adapters import evaluate_observation_targets
 
 Array = np.ndarray
 ENGINE_ID = "generic-divergence-field-worker"
@@ -216,13 +217,16 @@ def load_array_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Array]
     root = Path(directory).resolve()
     bundle = json.loads((root / "bundle.json").read_text(encoding="utf-8"))
     geometry = bundle.get("geometry")
-    if isinstance(geometry, dict) and "spacing" in geometry:
-        raw_spacing = geometry["spacing"]
-        geometry["spacing"] = (
-            [float(value) for value in raw_spacing]
-            if isinstance(raw_spacing, list)
-            else float(raw_spacing)
-        )
+    if isinstance(geometry, dict):
+        if "spacing" in geometry:
+            raw_spacing = geometry["spacing"]
+            geometry["spacing"] = (
+                [float(value) for value in raw_spacing]
+                if isinstance(raw_spacing, list)
+                else float(raw_spacing)
+            )
+        if "origin" in geometry:
+            geometry["origin"] = [float(value) for value in geometry["origin"]]
     claimed = bundle.get("bundleSha256")
     core = {key: value for key, value in bundle.items() if key != "bundleSha256"}
     if claimed != canonical_sha256(core):
@@ -245,7 +249,7 @@ def load_array_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Array]
 def _worker_source_sha256() -> str:
     root = Path(__file__).resolve().parent
     digest = hashlib.sha256()
-    for name in ("field_job.py", "generic_field_worker.py"):
+    for name in ("field_job.py", "generic_field_worker.py", "observation_adapters.py"):
         path = root / name
         digest.update(name.encode("utf-8"))
         digest.update(b"\0")
@@ -344,6 +348,56 @@ def _write_residual_history(path: Path, solution: GenericFieldSolution) -> None:
             )
 
 
+def _write_observation_predictions(path: Path, rows: list[dict[str, Any]]) -> None:
+    columns = [
+        "target_id",
+        "point_index",
+        "radius_m",
+        "predicted_speed_m_s",
+        "observed_speed_m_s",
+        "uncertainty_m_s",
+        "residual_m_s",
+        "azimuthal_coverage",
+        "mean_inward_acceleration_m_s2",
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=columns, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _normalize_observation_targets(values: Any) -> list[dict[str, Any]]:
+    if values is None:
+        return []
+    if not isinstance(values, list):
+        raise TypeError("observationTargets must be an array")
+    normalized: list[dict[str, Any]] = []
+    vector_keys = (
+        "gridOriginM",
+        "centerM",
+        "radiiM",
+        "observedSpeedsMPerS",
+        "uncertaintiesMPerS",
+    )
+    for raw in values:
+        if not isinstance(raw, Mapping):
+            raise TypeError("observation target must be an object")
+        target = dict(raw)
+        for key in vector_keys:
+            if key in target:
+                target[key] = [float(value) for value in target[key]]
+        if "covarianceM2PerS2" in target:
+            target["covarianceM2PerS2"] = [
+                [float(value) for value in row] for row in target["covarianceM2PerS2"]
+            ]
+        if "minimumAzimuthalCoverage" in target:
+            target["minimumAzimuthalCoverage"] = float(
+                target["minimumAzimuthalCoverage"]
+            )
+        normalized.append(target)
+    return normalized
+
+
 def execute_field_job(
     model: Mapping[str, Any],
     input_bundle_directory: Path,
@@ -382,6 +436,9 @@ def execute_field_job(
     if unknown_observables:
         raise ValueError(f"unknown requested observables: {', '.join(unknown_observables)}")
     boundaries = _boundary_values(request.get("boundaryFields", {}), arrays)
+    observation_targets = _normalize_observation_targets(
+        request.get("observationTargets", [])
+    )
     worker_source_sha = _worker_source_sha256()
     job_core = {
         "schemaVersion": "sigma-field-job/1",
@@ -396,6 +453,7 @@ def execute_field_job(
         },
         "boundaryFields": request.get("boundaryFields", {}),
         "requestedObservables": requested_observables,
+        "observationTargets": observation_targets,
         "solver": model.get("solver"),
         "parameterPolicy": model.get("parameterPolicy"),
         "seed": int(request.get("seed", 0)),
@@ -428,9 +486,38 @@ def execute_field_job(
             for key, value in _flatten_observables(solution).items()
             if key.split("__axis", maxsplit=1)[0] in requested_observables
         }
+        observation_rows: list[dict[str, Any]] = []
+        observation_evaluation: dict[str, Any] | None = None
+        if observation_targets:
+            if solution.converged:
+                observation_evaluation, observation_rows = evaluate_observation_targets(
+                    model,
+                    observables,
+                    {**bundle_geometry, "spacing": spacing_values},
+                    observation_targets,
+                )
+                for evaluation, target_specification in zip(
+                    observation_evaluation["targets"], observation_targets, strict=True
+                ):
+                    evaluation["targetSha256"] = canonical_sha256(target_specification)
+            else:
+                observation_evaluation = {
+                    "schemaVersion": "sigma-observation-evaluation/1",
+                    "state": "unavailable_nonconvergence",
+                    "targetCount": len(observation_targets),
+                    "scoredTargetCount": 0,
+                    "totalPoints": 0,
+                    "validScoredPoints": 0,
+                    "targets": [],
+                }
         _write_npz(temporary / "fields.npz", fields)
         _write_npz(temporary / "observables.npz", observables)
         _write_residual_history(temporary / "residual_history.csv", solution)
+        if observation_evaluation is not None:
+            _write_json(temporary / "observation_scores.json", observation_evaluation)
+            _write_observation_predictions(
+                temporary / "observation_predictions.csv", observation_rows
+            )
         _write_json(temporary / "model.json", model)
         _write_json(temporary / "input_bundle.json", bundle)
         _write_json(temporary / "job.json", job)
@@ -446,11 +533,13 @@ def execute_field_job(
             "equationResiduals": solution.equation_residuals,
             "fields": _array_records(fields),
             "observables": _array_records(observables),
+            "observationEvaluation": observation_evaluation,
             "parameterAccounting": _parameter_accounting(model),
             "numericalMetadata": solution.metadata,
             "claimBoundary": [
                 "A converged field validates execution of the submitted numerical equation, not agreement with galaxy or lensing observations.",
                 "The current generic worker uses supplied or zero far-field Dirichlet boundaries for isolated manifests.",
+                "Observation targets are evaluated after the field solve and cannot alter the field equations.",
             ],
         }
         result_sha = canonical_sha256(scientific_core)
@@ -477,6 +566,10 @@ def execute_field_job(
             "residual_history.csv",
             "resource_log.json",
         ]
+        if observation_evaluation is not None:
+            artifact_names.extend(
+                ["observation_predictions.csv", "observation_scores.json"]
+            )
         artifact_index = {
             "schemaVersion": "sigma-field-artifact-index/1",
             "jobId": job["id"],

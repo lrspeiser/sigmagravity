@@ -50,6 +50,24 @@ async function successfulRunner({ jobDirectory }) {
   const root = resolve(jobDirectory, "artifacts");
   await mkdir(root, { recursive: true });
   const childId = basename(jobDirectory);
+  const requestEnvelope = JSON.parse(await readFile(resolve(jobDirectory, "request.json"), "utf8"));
+  const observationTargets = requestEnvelope.request.observationTargets ?? [];
+  const observationEvaluation = observationTargets.length ? {
+    schemaVersion: "sigma-observation-evaluation/1",
+    targetCount: 1,
+    scoredTargetCount: 1,
+    totalPoints: 1,
+    validScoredPoints: 1,
+    sumSquaredResidualM2PerS2: 4,
+    rmseMPerS: 2,
+    inverseVarianceWeightedSquaredResidual: 1,
+    inverseVarianceWeightSum: 0.25,
+    inverseVarianceWeightedRmseMPerS: 2,
+    chiSquare: 1,
+    degreesFreedom: 1,
+    reducedChiSquare: 1,
+    targets: [],
+  } : null;
   const scientific = {
     schemaVersion: "sigma-field-result/1",
     jobId: `fieldjob_${childId.slice(-12)}`,
@@ -58,14 +76,31 @@ async function successfulRunner({ jobDirectory }) {
     iterations: 4,
     maximumRelativeUpdate: 1e-9,
     equationResiduals: { manufactured: { relativeL2: 2e-8 } },
+    observationEvaluation,
     parameterAccounting: { universal: 0, perObject: 0 },
   };
   const scientificContent = Buffer.from(`${JSON.stringify(scientific)}\n`);
   await writeFile(resolve(root, "scientific_result.json"), scientificContent);
+  const predictionContent = Buffer.from(
+    "target_id,point_index,radius_m,predicted_speed_m_s,observed_speed_m_s,uncertainty_m_s,residual_m_s,azimuthal_coverage,mean_inward_acceleration_m_s2\nfixture,0,1,8,10,2,-2,1,64\n",
+  );
+  if (observationTargets.length) {
+    await writeFile(resolve(root, "observation_predictions.csv"), predictionContent);
+  }
+  const artifactRecords = [
+    { path: "scientific_result.json", bytes: scientificContent.length, sha256: digest(scientificContent) },
+  ];
+  if (observationTargets.length) {
+    artifactRecords.push({
+      path: "observation_predictions.csv",
+      bytes: predictionContent.length,
+      sha256: digest(predictionContent),
+    });
+  }
   const artifactIndex = {
     schemaVersion: "sigma-field-artifact-index/1",
     jobId: scientific.jobId,
-    artifacts: [{ path: "scientific_result.json", bytes: scientificContent.length, sha256: digest(scientificContent) }],
+    artifacts: artifactRecords,
   };
   const indexContent = Buffer.from(`${JSON.stringify(artifactIndex)}\n`);
   await writeFile(resolve(root, "artifact_index.json"), indexContent);
@@ -138,7 +173,7 @@ test("one fixed model produces deterministic multi-system batch reports", async 
     response.items.map((item) => item.path).sort(),
     [
       "aggregate_scores.json", "batch.json", "child_jobs.json", "failures.csv",
-      "llm_briefing.md", "model.json", "per_galaxy.csv", "report.html",
+      "llm_briefing.md", "model.json", "observation_predictions.csv", "per_galaxy.csv", "report.html",
       "reproduction_command.txt",
     ],
   );
@@ -171,6 +206,42 @@ test("unsupported fitting policies are rejected before child execution", async (
     (error) => error instanceof LocalServiceError && error.code === "parameter_policy_not_executable",
   );
   assert.equal((await fieldService.listFieldJobs()).items.length, 0);
+});
+
+test("batch aggregates post-solve circular-speed scores and predictions", async (t) => {
+  const { fieldService, batchService } = await fixture(t);
+  const source = await upload(fieldService, "OBSERVATION");
+  const observationModel = model();
+  observationModel.observables[0].target = "massive_tracers";
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "GALAXY-O-rotation",
+    kind: "circular_speed_curve",
+    observable: "gradient",
+    gridOriginM: [0, 0],
+    centerM: [0, 0],
+    radiiM: [1],
+    observedSpeedsMPerS: [10],
+    uncertaintiesMPerS: [2],
+    provenance: { kind: "test fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const submission = await batchService.createBatch({
+    schemaVersion: "sigma-batch-submit/1",
+    model: observationModel,
+    systems: [{ id: "GALAXY-O", dataUploadId: source.id, observationTargets: [target] }],
+    fieldRequest: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["gradient"] },
+    parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
+  });
+  await fieldService.waitForIdle();
+  await batchService.waitForIdle();
+  const aggregate = JSON.parse((await batchService.getArtifact(submission.id, "aggregate_scores.json")).content.toString("utf8"));
+  assert.equal(aggregate.observationScoresAvailable, true);
+  assert.equal(aggregate.scoredObservationTargets, 1);
+  assert.equal(aggregate.validObservationPoints, 1);
+  assert.equal(aggregate.observationRmseMPerS, 2);
+  const predictions = (await batchService.getArtifact(submission.id, "observation_predictions.csv")).content.toString("utf8");
+  assert.match(predictions, /GALAXY-O,fixture,0,1,8,10,2,-2,1,64/);
 });
 
 test("batch report artifacts reject traversal and mutation", async (t) => {

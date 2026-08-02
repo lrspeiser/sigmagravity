@@ -60,7 +60,7 @@ export function prepareBatch({ submission, resolvedSystems }) {
     const preflight = prepareFieldJob({
       model: submission.model,
       inputBundle: system.inputBundle,
-      request: fieldRequest,
+      request: { ...fieldRequest, observationTargets: system.observationTargets ?? [] },
     });
     if (!preflight.valid) throw new Error(`system ${system.id} failed model validation: ${preflight.errors.join("; ")}`);
     return {
@@ -69,6 +69,7 @@ export function prepareBatch({ submission, resolvedSystems }) {
       inputBundleSha256: system.inputBundle.bundleSha256,
       preflightSha256: preflight.preflightSha256,
       resourceEstimate: preflight.resourceEstimate,
+      observationTargets: preflight.observationTargets,
     };
   });
   const totalEstimatedMemoryBytes = childPreflights.reduce(
@@ -78,22 +79,30 @@ export function prepareBatch({ submission, resolvedSystems }) {
   const modelSha256 = prepareFieldJob({
     model: submission.model,
     inputBundle: resolvedSystems[0].inputBundle,
-    request: fieldRequest,
+    request: {
+      ...fieldRequest,
+      observationTargets: resolvedSystems[0].observationTargets ?? [],
+    },
   }).modelSha256;
   const core = canonicalize({
     schemaVersion: "sigma-batch-preflight/1",
     modelSha256,
     parameterPolicy: policy,
     fieldRequest,
-    systems: childPreflights.map(({ systemId, source, inputBundleSha256, preflightSha256 }) => ({
+    systems: childPreflights.map(({ systemId, source, inputBundleSha256, preflightSha256, observationTargets }) => ({
       systemId,
       source,
       inputBundleSha256,
       preflightSha256,
+      observationTargets,
     })),
   });
   const preflightSha256 = sha256(core);
   const executable = EXECUTABLE_MODES.has(policy.mode);
+  const scoredObservationTargets = childPreflights.reduce(
+    (sum, item) => sum + item.observationTargets.filter((target) => target.scored).length,
+    0,
+  );
   return {
     valid: true,
     id: `batchpreflight_${preflightSha256.slice(0, 24)}`,
@@ -111,9 +120,15 @@ export function prepareBatch({ submission, resolvedSystems }) {
       executable,
       blockers: executable ? [] : [`parameter fitting for ${policy.mode} is not implemented`],
     },
-    claimBoundary: [
-      "A converged batch proves execution of one frozen model, not agreement with observations.",
-      "Rotation-curve and lensing scores require explicit theory-to-observable adapters and target uncertainties.",
-    ],
+    scoredObservationTargets,
+    claimBoundary: scoredObservationTargets
+      ? [
+        "Circular-speed scores use the declared massive-tracer acceleration only after each field solve.",
+        "Photon lensing, velocity fields, and unsubmitted observables are not evaluated by this batch.",
+      ]
+      : [
+        "A converged batch proves execution of one frozen model, not agreement with observations.",
+        "Rotation-curve and lensing scores require explicit theory-to-observable adapters and target uncertainties.",
+      ],
   };
 }

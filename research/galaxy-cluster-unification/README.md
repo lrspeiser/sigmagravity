@@ -65,6 +65,11 @@ raw-lensing routes remain explicitly unavailable until durable storage and the
 separate scientific worker are wired.
 The latest implementation evidence and remaining boundary are recorded in
 [`docs/ASYNC_MULTI_SYSTEM_BATCH_API_MILESTONE.md`](docs/ASYNC_MULTI_SYSTEM_BATCH_API_MILESTONE.md).
+The first formula-independent observation-space result is documented in
+[`docs/MASSIVE_TRACER_OBSERVATION_ADAPTER_MILESTONE.md`](docs/MASSIVE_TRACER_OBSERVATION_ADAPTER_MILESTONE.md):
+the local API now converts a solved Cartesian acceleration field into a
+circular-speed curve and scores declared uncertainties without exposing the
+target to the field equation or baryonic extractor.
 The verified Horizon3 production deployment is
 <https://sigma-gravity-research-simulator-five.vercel.app>.
 

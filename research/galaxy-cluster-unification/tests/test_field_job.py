@@ -187,6 +187,28 @@ def test_large_physical_spacing_survives_javascript_json_roundtrip(tmp_path: Pat
     assert loaded["geometry"]["spacing"] == [spacing, spacing]
 
 
+def test_large_physical_origin_survives_javascript_json_roundtrip(tmp_path: Path):
+    spacing = float(4_571_058_612_641_913_300)
+    origin = float(-146_273_875_604_541_230_000)
+    metadata = bundle_metadata(spacing)
+    metadata["geometry"]["origin"] = [origin, origin]
+    bundle_path = tmp_path / "large_origin_bundle"
+    bundle = write_array_bundle(
+        bundle_path,
+        {"raw_forcing": np.ones((9, 9))},
+        metadata,
+    )
+    serialized = json.loads((bundle_path / "bundle.json").read_text(encoding="utf-8"))
+    serialized["geometry"]["origin"] = [
+        -146_273_875_604_541_230_000,
+        -146_273_875_604_541_230_000,
+    ]
+    (bundle_path / "bundle.json").write_text(json.dumps(serialized), encoding="utf-8")
+    loaded, _ = load_array_bundle(bundle_path)
+    assert loaded["bundleSha256"] == bundle["bundleSha256"]
+    assert loaded["geometry"]["origin"] == [origin, origin]
+
+
 def test_identical_job_replays_have_identical_scientific_hashes(tmp_path: Path):
     expected, forcing, spacing = manufactured_values()
     bundle_path = tmp_path / "bundle"
@@ -238,6 +260,75 @@ def test_identical_job_replays_have_identical_scientific_hashes(tmp_path: Path):
         "residual_history.csv",
         "resource_log.json",
     }.issubset(artifact_names)
+
+
+def test_field_job_scores_massive_tracer_curve_after_solving(tmp_path: Path):
+    cells = 33
+    spacing = 0.25
+    axis = np.linspace(-4.0, 4.0, cells)
+    x, y = np.meshgrid(axis, axis, indexing="ij")
+    omega = 3.0
+    expected_potential = 0.5 * omega**2 * (x**2 + y**2)
+    forcing = np.full((cells, cells), 2.0 * omega**2)
+    bundle_path = tmp_path / "observation_bundle"
+    metadata = bundle_metadata(spacing)
+    metadata["geometry"]["origin"] = [-4.0, -4.0]
+    metadata["arrays"]["u_boundary"] = {
+        "npzKey": "raw_boundary",
+        "unit": "m^2/s^2",
+        "rank": "scalar",
+        "role": "boundary",
+    }
+    write_array_bundle(
+        bundle_path,
+        {"raw_forcing": forcing, "raw_boundary": expected_potential},
+        metadata,
+    )
+    model = manufactured_manifest()
+    model["observables"][0].update(
+        {"id": "acceleration", "target": "massive_tracers"}
+    )
+    model["observables"][0]["expression"] = {
+        "op": "negate",
+        "args": [{"op": "gradient", "args": [{"field": "u"}]}],
+    }
+    radii = [0.5, 1.0, 2.0, 3.0]
+    manifest = execute_field_job(
+        model,
+        bundle_path,
+        {
+            "schemaVersion": "sigma-field-job-request/1",
+            "boundaryFields": {"u": {"arrayKey": "u_boundary"}},
+            "requestedObservables": ["acceleration"],
+            "observationTargets": [
+                {
+                    "schemaVersion": "sigma-observation-target/1",
+                    "id": "solid-body-curve",
+                    "kind": "circular_speed_curve",
+                    "observable": "acceleration",
+                    "centerM": [0.0, 0.0],
+                    "planeAxes": [0, 1],
+                    "radiiM": radii,
+                    "observedSpeedsMPerS": [omega * radius for radius in radii],
+                    "uncertaintiesMPerS": [0.1] * len(radii),
+                    "minimumAzimuthalCoverage": 1.0,
+                    "provenance": {"kind": "analytic solid-body fixture"},
+                    "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+                }
+            ],
+        },
+        tmp_path / "observation_run",
+    )
+    assert manifest["state"] == "succeeded"
+    result = json.loads(
+        (tmp_path / "observation_run" / "scientific_result.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert result["observationEvaluation"]["scoredTargetCount"] == 1
+    assert result["observationEvaluation"]["rmseMPerS"] < 1e-11
+    assert (tmp_path / "observation_run" / "observation_predictions.csv").is_file()
+    assert (tmp_path / "observation_run" / "observation_scores.json").is_file()
 
 
 def test_cli_envelope_resolves_relative_paths_and_output_is_immutable(tmp_path: Path):

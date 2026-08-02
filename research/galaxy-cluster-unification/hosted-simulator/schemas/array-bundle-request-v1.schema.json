@@ -14,6 +14,7 @@
         "coordinateSystem": { "enum": ["cartesian_2d", "cartesian_3d", "axisymmetric_cylindrical"] },
         "dimensions": { "enum": [2, 3] },
         "spacing": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number", "exclusiveMinimum": 0 } },
+        "origin": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number" } },
         "lengthUnit": { "const": "m" },
         "axisOrder": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "string" } },
         "referenceFrame": { "type": "string", "minLength": 1 }

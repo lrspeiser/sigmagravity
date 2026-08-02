@@ -1,0 +1,365 @@
+"""Theory-neutral adapters from solved fields to observation-space predictions.
+
+The first adapter converts a declared massive-tracer acceleration field on a
+Cartesian 2D or 3D grid into an azimuthally averaged circular-speed curve.  It
+never changes, fits, or re-solves the submitted gravity model.
+"""
+
+from __future__ import annotations
+
+import math
+from collections.abc import Mapping, Sequence
+from typing import Any
+
+import numpy as np
+from scipy.ndimage import map_coordinates
+
+Array = np.ndarray
+
+
+def _finite_vector(value: Any, length: int, label: str) -> Array:
+    result = np.asarray(value, dtype=float)
+    if result.shape != (length,) or np.any(~np.isfinite(result)):
+        raise ValueError(f"{label} must contain {length} finite values")
+    return result
+
+
+def _finite_series(value: Any, label: str, *, positive: bool = False) -> Array:
+    result = np.asarray(value, dtype=float)
+    if result.ndim != 1 or result.size == 0 or np.any(~np.isfinite(result)):
+        raise ValueError(f"{label} must be a non-empty finite one-dimensional array")
+    if positive and np.any(result <= 0):
+        raise ValueError(f"{label} must be positive")
+    return result
+
+
+def _observable_definition(model: Mapping[str, Any], observable_id: str) -> Mapping[str, Any]:
+    definitions = {
+        str(value.get("id")): value for value in model.get("observables", [])
+    }
+    if observable_id not in definitions:
+        raise ValueError(f"observation target requires unknown observable {observable_id}")
+    definition = definitions[observable_id]
+    if definition.get("target") != "massive_tracers":
+        raise ValueError("circular_speed_curve requires a massive_tracers observable")
+    if definition.get("rank") != "vector" or definition.get("unit") != "m/s^2":
+        raise ValueError("circular_speed_curve requires a vector observable in m/s^2")
+    return definition
+
+
+def _acceleration_components(
+    observables: Mapping[str, Array], observable_id: str, dimensions: int
+) -> tuple[Array, ...]:
+    components = tuple(
+        np.asarray(observables[f"{observable_id}__axis{axis}"], dtype=float)
+        for axis in range(dimensions)
+        if f"{observable_id}__axis{axis}" in observables
+    )
+    if len(components) != dimensions:
+        raise ValueError(
+            f"observable {observable_id} does not provide {dimensions} vector components"
+        )
+    shape = components[0].shape
+    if len(shape) != dimensions or any(value.shape != shape for value in components):
+        raise ValueError(f"observable {observable_id} components do not share the grid shape")
+    return components
+
+
+def _coordinate_origin(
+    target: Mapping[str, Any], geometry: Mapping[str, Any], shape: Sequence[int], spacing: Array
+) -> tuple[Array, str]:
+    if target.get("gridOriginM") is not None:
+        return _finite_vector(target["gridOriginM"], len(shape), "gridOriginM"), "target"
+    if geometry.get("origin") is not None:
+        return _finite_vector(geometry["origin"], len(shape), "bundle geometry origin"), "bundle"
+    centered = -0.5 * (np.asarray(shape, dtype=float) - 1.0) * spacing
+    return centered, "explicit_centered_grid_fallback"
+
+
+def _score_curve(
+    target: Mapping[str, Any], predicted: Array, rows: list[dict[str, Any]]
+) -> dict[str, Any]:
+    observed_value = target.get("observedSpeedsMPerS")
+    if observed_value is None:
+        return {
+            "state": "predicted_not_scored",
+            "totalPoints": int(predicted.size),
+            "validPoints": int(np.isfinite(predicted).sum()),
+            "fittedNuisanceParameters": 0,
+        }
+    observed = _finite_series(observed_value, "observedSpeedsMPerS", positive=True)
+    if observed.shape != predicted.shape:
+        raise ValueError("observedSpeedsMPerS must match radiiM")
+    uncertainty_value = target.get("uncertaintiesMPerS")
+    covariance_value = target.get("covarianceM2PerS2")
+    if (uncertainty_value is None) == (covariance_value is None):
+        raise ValueError("scored targets require exactly one uncertainty or covariance input")
+    fitted = target.get("fittedNuisanceParameters", 0)
+    if isinstance(fitted, bool) or not isinstance(fitted, int) or fitted < 0:
+        raise ValueError("fittedNuisanceParameters must be a non-negative integer")
+    if fitted >= observed.size:
+        raise ValueError(
+            "fittedNuisanceParameters must be smaller than the scored point count"
+        )
+    valid = np.isfinite(predicted) & np.isfinite(observed)
+    residual = predicted - observed
+    for index, row in enumerate(rows):
+        row["observed_speed_m_s"] = float(observed[index])
+        row["residual_m_s"] = float(residual[index]) if valid[index] else None
+    if valid.sum() <= fitted:
+        return {
+            "state": "insufficient_valid_points",
+            "totalPoints": int(predicted.size),
+            "validPoints": int(valid.sum()),
+            "fittedNuisanceParameters": int(fitted),
+        }
+    selected = residual[valid]
+    sum_squared = float(np.sum(np.square(selected)))
+    if uncertainty_value is not None:
+        uncertainty = _finite_series(
+            uncertainty_value, "uncertaintiesMPerS", positive=True
+        )
+        if uncertainty.shape != predicted.shape:
+            raise ValueError("uncertaintiesMPerS must match radiiM")
+        selected_uncertainty = uncertainty[valid]
+        covariance = np.diag(np.square(selected_uncertainty))
+        for index, row in enumerate(rows):
+            row["uncertainty_m_s"] = float(uncertainty[index])
+    else:
+        covariance = np.asarray(covariance_value, dtype=float)
+        expected_shape = (predicted.size, predicted.size)
+        if covariance.shape != expected_shape or np.any(~np.isfinite(covariance)):
+            raise ValueError("covarianceM2PerS2 must be a finite square matrix matching radiiM")
+        if not np.allclose(covariance, covariance.T, rtol=1e-10, atol=0.0):
+            raise ValueError("covarianceM2PerS2 must be symmetric")
+        covariance = covariance[np.ix_(valid, valid)]
+        diagonal = np.sqrt(np.diag(covariance))
+        for row_index, source_index in enumerate(np.flatnonzero(valid)):
+            rows[source_index]["uncertainty_m_s"] = float(diagonal[row_index])
+    try:
+        factor = np.linalg.cholesky(covariance)
+    except np.linalg.LinAlgError as error:
+        raise ValueError("observation covariance must be positive definite") from error
+    whitened = np.linalg.solve(factor, selected)
+    chi_square = float(whitened @ whitened)
+    degrees_freedom = int(valid.sum()) - fitted
+    log_determinant = 2.0 * float(np.log(np.diag(factor)).sum())
+    log_likelihood = -0.5 * (
+        chi_square + log_determinant + int(valid.sum()) * math.log(2.0 * math.pi)
+    )
+    inverse_variance = 1.0 / np.diag(covariance)
+    weighted_sum = float(np.sum(inverse_variance * np.square(selected)))
+    weight_sum = float(np.sum(inverse_variance))
+    return {
+        "state": "scored",
+        "totalPoints": int(predicted.size),
+        "validPoints": int(valid.sum()),
+        "fittedNuisanceParameters": int(fitted),
+        "sumSquaredResidualM2PerS2": sum_squared,
+        "rmseMPerS": math.sqrt(sum_squared / int(valid.sum())),
+        "inverseVarianceWeightedRmseMPerS": math.sqrt(weighted_sum / weight_sum),
+        "chiSquare": chi_square,
+        "degreesFreedom": degrees_freedom,
+        "reducedChiSquare": chi_square / degrees_freedom,
+        "gaussianLogLikelihood": log_likelihood,
+        "inverseVarianceWeightedSquaredResidual": weighted_sum,
+        "inverseVarianceWeightSum": weight_sum,
+    }
+
+
+def evaluate_circular_speed_target(
+    model: Mapping[str, Any],
+    observables: Mapping[str, Array],
+    geometry: Mapping[str, Any],
+    target: Mapping[str, Any],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Predict and optionally score one circular-speed curve."""
+
+    if target.get("schemaVersion") != "sigma-observation-target/1":
+        raise ValueError("observation target must use sigma-observation-target/1")
+    if target.get("kind") != "circular_speed_curve":
+        raise ValueError(f"unsupported observation target kind: {target.get('kind')}")
+    target_id = str(target.get("id", ""))
+    if not target_id:
+        raise ValueError("observation target id is required")
+    provenance = target.get("provenance")
+    if not isinstance(provenance, Mapping) or not provenance:
+        raise ValueError("observation target requires provenance")
+    target_license = target.get("license")
+    if (
+        not isinstance(target_license, Mapping)
+        or not isinstance(target_license.get("id"), str)
+        or not target_license["id"]
+        or not isinstance(target_license.get("redistributionAllowed"), bool)
+    ):
+        raise ValueError("observation target requires an explicit license")
+    observable_id = str(target.get("observable", ""))
+    _observable_definition(model, observable_id)
+    dimensions = int(geometry.get("dimensions", 0))
+    if geometry.get("coordinateSystem") not in {"cartesian_2d", "cartesian_3d"}:
+        raise ValueError("circular_speed_curve supports Cartesian 2D or 3D grids")
+    if dimensions not in {2, 3}:
+        raise ValueError("circular_speed_curve requires two or three dimensions")
+    components = _acceleration_components(observables, observable_id, dimensions)
+    shape = components[0].shape
+    raw_spacing = geometry.get("spacing")
+    spacing = (
+        np.full(dimensions, float(raw_spacing))
+        if isinstance(raw_spacing, (int, float))
+        else _finite_vector(raw_spacing, dimensions, "geometry spacing")
+    )
+    if np.any(spacing <= 0):
+        raise ValueError("geometry spacing must be positive")
+    origin, origin_source = _coordinate_origin(target, geometry, shape, spacing)
+    center = _finite_vector(target.get("centerM"), dimensions, "centerM")
+    plane_axes = target.get("planeAxes", [0, 1])
+    if (
+        not isinstance(plane_axes, list)
+        or len(plane_axes) != 2
+        or any(isinstance(value, bool) or not isinstance(value, int) for value in plane_axes)
+        or len(set(plane_axes)) != 2
+        or any(value < 0 or value >= dimensions for value in plane_axes)
+    ):
+        raise ValueError("planeAxes must identify two distinct grid axes")
+    radii = _finite_series(target.get("radiiM"), "radiiM", positive=True)
+    if np.any(np.diff(radii) <= 0):
+        raise ValueError("radiiM must be strictly increasing")
+    sample_count = target.get("azimuthalSamples", 128)
+    if (
+        isinstance(sample_count, bool)
+        or not isinstance(sample_count, int)
+        or not 16 <= sample_count <= 4096
+    ):
+        raise ValueError("azimuthalSamples must be an integer from 16 through 4096")
+    minimum_coverage = float(target.get("minimumAzimuthalCoverage", 0.8))
+    if not math.isfinite(minimum_coverage) or not 0 < minimum_coverage <= 1:
+        raise ValueError("minimumAzimuthalCoverage must lie in (0,1]")
+    angles = np.linspace(0.0, 2.0 * math.pi, sample_count, endpoint=False)
+    cosines = np.cos(angles)
+    sines = np.sin(angles)
+    predicted = np.full(radii.shape, np.nan, dtype=float)
+    rows: list[dict[str, Any]] = []
+    for index, radius in enumerate(radii):
+        positions = np.broadcast_to(center[:, None], (dimensions, sample_count)).copy()
+        positions[plane_axes[0]] += radius * cosines
+        positions[plane_axes[1]] += radius * sines
+        indices = (positions - origin[:, None]) / spacing[:, None]
+        sampled = np.vstack(
+            [
+                map_coordinates(
+                    component,
+                    indices,
+                    order=1,
+                    mode="constant",
+                    cval=np.nan,
+                    prefilter=False,
+                )
+                for component in components
+            ]
+        )
+        inward = -(
+            sampled[plane_axes[0]] * cosines + sampled[plane_axes[1]] * sines
+        )
+        valid = np.isfinite(inward)
+        coverage = float(valid.mean())
+        mean_inward = float(np.mean(inward[valid])) if valid.any() else math.nan
+        if coverage >= minimum_coverage and mean_inward > 0:
+            predicted[index] = math.sqrt(float(radius) * mean_inward)
+        rows.append(
+            {
+                "target_id": target_id,
+                "point_index": index,
+                "radius_m": float(radius),
+                "predicted_speed_m_s": float(predicted[index])
+                if math.isfinite(predicted[index])
+                else None,
+                "observed_speed_m_s": None,
+                "uncertainty_m_s": None,
+                "residual_m_s": None,
+                "azimuthal_coverage": coverage,
+                "mean_inward_acceleration_m_s2": mean_inward
+                if math.isfinite(mean_inward)
+                else None,
+            }
+        )
+    score = _score_curve(target, predicted, rows)
+    return (
+        {
+            "id": target_id,
+            "kind": "circular_speed_curve",
+            "observable": observable_id,
+            "observableTarget": "massive_tracers",
+            "state": score["state"],
+            "originM": origin.tolist(),
+            "originSource": origin_source,
+            "centerM": center.tolist(),
+            "planeAxes": list(plane_axes),
+            "azimuthalSamples": sample_count,
+            "minimumAzimuthalCoverage": minimum_coverage,
+            "score": score,
+        },
+        rows,
+    )
+
+
+def evaluate_observation_targets(
+    model: Mapping[str, Any],
+    observables: Mapping[str, Array],
+    geometry: Mapping[str, Any],
+    targets: Sequence[Mapping[str, Any]],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Evaluate supported targets and return deterministic aggregate diagnostics."""
+
+    if isinstance(targets, (str, bytes)) or not isinstance(targets, Sequence):
+        raise TypeError("observationTargets must be an array")
+    if len(targets) > 32:
+        raise ValueError("observationTargets must contain at most 32 targets")
+    evaluations: list[dict[str, Any]] = []
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for target in targets:
+        if not isinstance(target, Mapping):
+            raise TypeError("observation target must be an object")
+        target_id = str(target.get("id", ""))
+        if target_id in seen:
+            raise ValueError(f"duplicate observation target id: {target_id}")
+        seen.add(target_id)
+        evaluation, target_rows = evaluate_circular_speed_target(
+            model, observables, geometry, target
+        )
+        evaluations.append(evaluation)
+        rows.extend(target_rows)
+    scored = [value["score"] for value in evaluations if value["state"] == "scored"]
+    valid_points = sum(int(value["validPoints"]) for value in scored)
+    sum_squared = sum(float(value["sumSquaredResidualM2PerS2"]) for value in scored)
+    chi_square = sum(float(value["chiSquare"]) for value in scored)
+    degrees_freedom = sum(int(value["degreesFreedom"]) for value in scored)
+    weighted_sum = sum(
+        float(value["inverseVarianceWeightedSquaredResidual"]) for value in scored
+    )
+    weight_sum = sum(float(value["inverseVarianceWeightSum"]) for value in scored)
+    return (
+        {
+            "schemaVersion": "sigma-observation-evaluation/1",
+            "targetCount": len(evaluations),
+            "scoredTargetCount": len(scored),
+            "totalPoints": sum(int(value["score"]["totalPoints"]) for value in evaluations),
+            "validScoredPoints": valid_points,
+            "sumSquaredResidualM2PerS2": sum_squared if scored else None,
+            "rmseMPerS": math.sqrt(sum_squared / valid_points) if valid_points else None,
+            "inverseVarianceWeightedSquaredResidual": weighted_sum if scored else None,
+            "inverseVarianceWeightSum": weight_sum if scored else None,
+            "inverseVarianceWeightedRmseMPerS": math.sqrt(weighted_sum / weight_sum)
+            if weight_sum
+            else None,
+            "chiSquare": chi_square if scored else None,
+            "degreesFreedom": degrees_freedom if scored else None,
+            "reducedChiSquare": chi_square / degrees_freedom if degrees_freedom else None,
+            "targets": evaluations,
+            "claimBoundary": [
+                "Observation targets are evaluated after the field solve and cannot modify the submitted equations.",
+                "A circular-speed adapter is a massive-tracer mapping and is not a photon-lensing prediction.",
+            ],
+        },
+        rows,
+    )

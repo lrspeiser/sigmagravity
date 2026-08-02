@@ -24,6 +24,11 @@
       }
     },
     "requestedObservables": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "observationTargets": {
+      "type": "array",
+      "maxItems": 32,
+      "items": { "$ref": "observation-target-v1.schema.json" }
+    },
     "seed": { "type": "integer" }
   }
 }

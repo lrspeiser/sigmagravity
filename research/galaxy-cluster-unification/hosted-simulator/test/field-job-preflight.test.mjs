@@ -13,6 +13,7 @@ function inputBundle() {
       coordinateSystem: "cartesian_3d",
       dimensions: 3,
       spacing: [3.085677581491367e19, 3.085677581491367e19, 3.085677581491367e19],
+      origin: [-4.937084130386187e20, -4.937084130386187e20, -4.937084130386187e20],
       lengthUnit: "m",
       axisOrder: ["x", "y", "z"],
       referenceFrame: "barycentric_cartesian",
@@ -73,4 +74,43 @@ test("field preflight rejects modified bundle metadata", () => {
   const request = payload();
   request.inputBundle.arrays[0].shape = [65, 65, 65];
   assert.throws(() => prepareFieldJob(request), /manifest hash mismatch/);
+});
+
+test("field preflight binds an uncertainty-aware circular-speed target after the solve", () => {
+  const request = payload();
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "DDO-test-rotation",
+    kind: "circular_speed_curve",
+    observable: "massive_tracer_acceleration",
+    centerM: [0, 0, 0],
+    planeAxes: [0, 1],
+    radiiM: [3.085677581491367e19, 6.171355162982734e19],
+    observedSpeedsMPerS: [20_000, 25_000],
+    uncertaintiesMPerS: [2_000, 2_500],
+    fittedNuisanceParameters: 0,
+    provenance: { kind: "published rotation curve fixture" },
+    license: { id: "CC-BY-4.0", redistributionAllowed: true },
+  }];
+  const result = prepareFieldJob(request);
+  assert.equal(result.observationTargets.length, 1);
+  assert.equal(result.observationTargets[0].scored, true);
+  assert.equal(result.observationTargets[0].pointCount, 2);
+  assert.match(result.observationTargets[0].targetSha256, /^[0-9a-f]{64}$/);
+});
+
+test("a circular-speed target cannot silently use a photon observable", () => {
+  const request = payload();
+  request.model.observables[0].target = "photons";
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "wrong-channel",
+    kind: "circular_speed_curve",
+    observable: "massive_tracer_acceleration",
+    centerM: [0, 0, 0],
+    radiiM: [3.085677581491367e19],
+    provenance: { kind: "negative fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  assert.throws(() => prepareFieldJob(request), /massive_tracers vector/);
 });

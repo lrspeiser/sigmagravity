@@ -250,7 +250,7 @@ export class LocalFieldJobService {
     this.shuttingDown = false;
     this.workerSourceSha256 = await workerSourceSha256(
       this.projectRoot,
-      ["field_job.py", "generic_field_worker.py"],
+      ["field_job.py", "generic_field_worker.py", "observation_adapters.py"],
     );
     this.galaxyWorkerSourceSha256 = await workerSourceSha256(
       this.projectRoot,

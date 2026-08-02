@@ -13,6 +13,7 @@ for (const path of [
   "schemas/model-manifest-v1.schema.json",
   "schemas/array-bundle-request-v1.schema.json",
   "schemas/field-job-request-v1.schema.json",
+  "schemas/observation-target-v1.schema.json",
   "schemas/field-job-cli-v1.schema.json",
   "schemas/array-bundle-v1.schema.json",
   "schemas/data-upload-request-v1.schema.json",

@@ -52,6 +52,7 @@ const staticFiles = new Map([
   ["/schemas/array-bundle-request-v1.schema.json", ["schemas/array-bundle-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/array-bundle-v1.schema.json", ["schemas/array-bundle-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/field-job-request-v1.schema.json", ["schemas/field-job-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/observation-target-v1.schema.json", ["schemas/observation-target-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/field-job-cli-v1.schema.json", ["schemas/field-job-cli-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/data-upload-request-v1.schema.json", ["schemas/data-upload-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/field-job-submit-v1.schema.json", ["schemas/field-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],

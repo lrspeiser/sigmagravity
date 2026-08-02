@@ -93,6 +93,7 @@ def test_extract_job_emits_verified_2d_and_3d_bundles(tmp_path: Path) -> None:
     assert surface_bundle["geometry"]["dimensions"] == 2
     assert volume_bundle["geometry"]["dimensions"] == 3
     assert field_volume_bundle["geometry"]["lengthUnit"] == "m"
+    assert len(field_volume_bundle["geometry"]["origin"]) == 3
     assert {
         record["key"]: record["unit"] for record in field_volume_bundle["arrays"]
     }["baryon_density"] == "kg/m^3"

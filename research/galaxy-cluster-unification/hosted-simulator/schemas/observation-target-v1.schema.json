@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigmagravity.org/schemas/observation-target-v1.schema.json",
+  "title": "Sigma observation target v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "kind", "observable", "centerM", "radiiM", "provenance", "license"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-observation-target/1" },
+    "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "kind": { "const": "circular_speed_curve" },
+    "observable": { "type": "string", "minLength": 1 },
+    "gridOriginM": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number" } },
+    "centerM": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number" } },
+    "planeAxes": { "type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": { "type": "integer", "minimum": 0, "maximum": 2 } },
+    "radiiM": { "type": "array", "minItems": 1, "items": { "type": "number", "exclusiveMinimum": 0 } },
+    "observedSpeedsMPerS": { "type": "array", "minItems": 1, "items": { "type": "number", "exclusiveMinimum": 0 } },
+    "uncertaintiesMPerS": { "type": "array", "minItems": 1, "items": { "type": "number", "exclusiveMinimum": 0 } },
+    "covarianceM2PerS2": { "type": "array", "minItems": 1, "items": { "type": "array", "minItems": 1, "items": { "type": "number" } } },
+    "azimuthalSamples": { "type": "integer", "minimum": 16, "maximum": 4096, "default": 128 },
+    "minimumAzimuthalCoverage": { "type": "number", "exclusiveMinimum": 0, "maximum": 1, "default": 0.8 },
+    "fittedNuisanceParameters": { "type": "integer", "minimum": 0, "default": 0 },
+    "provenance": { "type": "object", "minProperties": 1 },
+    "license": {
+      "type": "object",
+      "required": ["id", "redistributionAllowed"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "redistributionAllowed": { "type": "boolean" }
+      }
+    }
+  }
+}

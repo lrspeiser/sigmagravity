@@ -17,7 +17,7 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
-The 0.5 preview also accepts a theory-neutral field-model manifest. It declares
+The 0.6 preview also accepts a theory-neutral field-model manifest. It declares
 scalar, vector, or tensor fields; 2D or 3D coordinates; equations; units;
 boundary conditions; observables for matter and/or photons; solver settings;
 and universal versus per-object parameters. The validator checks dimensions,
@@ -147,7 +147,7 @@ scientific-result hashes, output-array hashes, residual history, resource log,
 artifact index, and reproduction manifest. See `../worker` for the pinned,
 non-root container definition.
 
-The 0.5 local reference API also supports formula-independent resolved-galaxy
+The 0.6 local reference API also supports formula-independent resolved-galaxy
 jobs:
 
 ```text
@@ -193,8 +193,19 @@ per-object policies are represented explicitly but rejected until their
 no-target-access fitting workflows exist; they are never silently approximated.
 The deterministic report includes per-system convergence, equation residuals,
 parameter counts, failures, content hashes, and an optional-LLM briefing. It
-deliberately reports `observationScoresAvailable=false` until rotation and
-lensing observable adapters are implemented.
+reports `observationScoresAvailable=false` when a batch has no compatible
+targets; it never substitutes numerical convergence for an observational fit.
+
+The first observation adapter is now implemented for massive-tracer circular
+speeds. A system can attach a content-hashed `sigma-observation-target/1` curve
+with uncertainties or a full covariance matrix. After the field converges, the
+adapter azimuthally samples any declared `massive_tracers` vector acceleration,
+computes `v_c(R)=sqrt(R g_R)`, and writes predicted points, residuals, RMSE,
+chi-square, reduced chi-square, and Gaussian log likelihood. It rejects photon
+observables for this mapping. The local DDO101 acceptance retains all ten
+published points and reproduces the earlier frozen Newtonian curve within
+`0.496 km/s` RMS on a deliberately coarse grid. Photon lensing and resolved
+velocity-field adapters remain future work.
 
 Run the chained 3D HTTP acceptance test while `npm run dev` is active:
 

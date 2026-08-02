@@ -15,6 +15,7 @@ function bundle(label, cells = 17) {
       coordinateSystem: "cartesian_3d",
       dimensions: 3,
       spacing: [1e19, 1e19, 1e19],
+      origin: [-8e19, -8e19, -8e19],
       lengthUnit: "m",
       axisOrder: ["x", "y", "z"],
       referenceFrame: label,
@@ -94,6 +95,30 @@ test("batch preflight supports more than the old 25-system interactive limit", (
   request.systems = systems.map((item) => ({ id: item.id, dataUploadId: item.source.id }));
   const result = prepareBatch({ submission: request, resolvedSystems: systems });
   assert.equal(result.systemCount, 30);
+});
+
+test("batch preflight keeps system-specific observation targets out of the shared model", () => {
+  const request = submission();
+  const systems = resolved();
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "GALAXY-A-rotation",
+    kind: "circular_speed_curve",
+    observable: "massive_tracer_acceleration",
+    centerM: [0, 0, 0],
+    radiiM: [1e19, 2e19],
+    observedSpeedsMPerS: [20_000, 25_000],
+    uncertaintiesMPerS: [2_000, 2_500],
+    provenance: { kind: "published fixture" },
+    license: { id: "CC-BY-4.0", redistributionAllowed: true },
+  };
+  request.systems[0].observationTargets = [target];
+  systems[0].observationTargets = [target];
+  const result = prepareBatch({ submission: request, resolvedSystems: systems });
+  assert.equal(result.scoredObservationTargets, 1);
+  assert.equal(result.systems[0].observationTargets[0].scored, true);
+  assert.equal(result.systems[1].observationTargets.length, 0);
+  assert.match(result.claimBoundary[0], /after each field solve/);
 });
 
 test("fitted and per-galaxy policies are explicit but not silently executed", () => {

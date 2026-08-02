@@ -1,5 +1,6 @@
 import { canonicalize, sha256 } from "./canonical.mjs";
 import { validateFieldModel } from "./field-model.mjs";
+import { validateObservationTargets } from "./observation-target.mjs";
 
 function finitePositive(value, label) {
   const number = Number(value);
@@ -67,6 +68,12 @@ export function prepareFieldJob(payload) {
   const requestedObservables = [...new Set(request.requestedObservables ?? [...observableIds])].sort();
   const unknown = requestedObservables.filter((id) => !observableIds.has(id));
   if (unknown.length) throw new Error(`unknown requested observables: ${unknown.join(", ")}`);
+  const observationTargets = validateObservationTargets({
+    targets: request.observationTargets ?? [],
+    model: payload.model,
+    inputBundle: bundle,
+    requestedObservables,
+  });
   const boundaries = request.boundaryFields ?? {};
   for (const [fieldName, specification] of Object.entries(boundaries)) {
     if (specification && typeof specification === "object" && specification.arrayKey && !records.has(specification.arrayKey)) {
@@ -82,6 +89,7 @@ export function prepareFieldJob(payload) {
     geometry: { ...modelGeometry, spacing, shape: referenceShape },
     boundaryFields: boundaries,
     requestedObservables,
+    observationTargets,
     solver: payload.model.solver,
     parameterPolicy: payload.model.parameterPolicy,
     seed: Number.isInteger(request.seed) ? request.seed : 0,
@@ -95,6 +103,7 @@ export function prepareFieldJob(payload) {
     modelSha256: validation.modelSha256,
     inputBundleSha256: bundle.bundleSha256,
     parameterAccounting: validation.parameterAccounting,
+    observationTargets,
     requiredCapabilities: validation.requiredCapabilities,
     resourceEstimate: estimate,
     executionReadiness: {
