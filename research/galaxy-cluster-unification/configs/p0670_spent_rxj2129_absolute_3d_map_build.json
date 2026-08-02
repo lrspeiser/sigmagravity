@@ -1,0 +1,75 @@
+{
+  "protocol_version": "P0670-SPENT-RXJ2129-ABSOLUTE-3D-MAP-BUILD-1.0.0",
+  "status": "frozen_before_any_P0670_map_or_field_score",
+  "frozen_utc": "2026-08-02T03:40:00Z",
+  "purpose": "Construct an absolute physical 3D stellar-plus-gas source, amplitude-multipole tensor coefficient, transport direction, and MOND boundary for spent RX J2129 without fitting or scoring a lensing outcome.",
+  "parent_result": "results/p0669_amplitude_multipole_3d_activation/report.json",
+  "inputs": {
+    "raw_lensing_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+    "map_protocol": "configs/p0554_all_baryon_route_screen_protocol.json",
+    "map_acquisition": "configs/p0554_all_baryon_route_acquisition_protocol.json",
+    "reused_hst_acquisition": "configs/clash_stellar_morphology_acquisition_protocol.json",
+    "baryonic_radial_profile": "data/raw/clash_tian2020/fig2.dat",
+    "system": "RXJ2129"
+  },
+  "physical_map": {
+    "native_axis_min_arcsec": -60.0,
+    "native_axis_max_arcsec": 60.0,
+    "native_grid_spacing_arcsec": 1.0,
+    "common_cubic_grid_cells": 33,
+    "normalization_radius_kpc": 200.0,
+    "normalization_mass": "Mbar(<R)=gbar(R) R^2/G at the existing exact 200 kpc Tian anchor",
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "stellar_shape": "background-subtracted nonnegative HST F160W with every known image masked and annularly filled",
+    "gas_shape": "sqrt(masked 0.7-2.0 keV Chandra rate times 2 sqrt(Rnorm^2-r^2)), zero outside Rnorm",
+    "support": "both components are zero outside the 200 kpc normalization aperture",
+    "surface_to_volume": "sech-squared with each component scale height equal to its projected RMS radius",
+    "image_position_use": "spent image coordinates are used only for the pre-existing HST contaminant mask; no residual, root, parity, multiplicity, critical curve, or topology score is computed"
+  },
+  "gravity": {
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "coherence_power": 2.0,
+    "activation": "sqrt(1-exp[-(D^2+Q^2)]) times the P0666 physical-length local activation",
+    "field_equation": "div[mu(|grad Phi|/a0) (I-sigma h h) grad Phi] = 4 pi G rho_bar",
+    "boundary": "simple-MOND monopole computed from the complete finite-grid baryonic mass",
+    "photon_closure_next_stage": "zero slip: alpha_perp=-(2/c^2)(Dds/Ds) integral a_perp dz",
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "predeclared_progression_gates": {
+    "P0669_all_progression_gates_pass": true,
+    "hst_input_count": 2,
+    "chandra_input_count": 2,
+    "chandra_total_exposure_ks_min": 39.0,
+    "chandra_soft_events_on_grid_min": 15000,
+    "positive_stellar_surface_cells_min": 20,
+    "positive_gas_surface_cells_min": 20,
+    "surface_component_mass_relative_error_max": 1e-12,
+    "volume_component_mass_relative_error_max": 1e-12,
+    "all_scale_heights_finite_positive": true,
+    "sigma_finite_and_in_closed_unit_interval": true,
+    "minimum_constitutive_eigenvalue_strictly_positive": true,
+    "spent_cluster_mass_weighted_sigma_min": 0.001,
+    "spent_cluster_amplitude_gate_min": 0.01,
+    "strong_lens_maximum_radius_grid_cells_min": 5.0,
+    "boundary_finite_and_nonconstant": true,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0,
+    "raw_lens_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Advance the single P0669 candidate to one frozen spent-cluster nonlinear scalar/tensor solve only if every physical-map, source-mass, activation, resolution, boundary, parameter, and no-lens-score gate passes.",
+  "outputs": {
+    "directory": "results/p0670_spent_rxj2129_absolute_3d_map_build",
+    "map": "rxj2129_absolute_baryons_3d.npz"
+  },
+  "claim_boundary": [
+    "F160W light is not a resolved stellar-population mass likelihood; one shared 10 percent stellar baryon fraction is imposed rather than fit.",
+    "Chandra surface brightness is converted to a gas morphology using the same square-root emissivity/depth approximation used in P0641, not a native spectral deprojection.",
+    "The absolute mass is independent of lens residuals but comes from the same-system published radial baryonic reconstruction.",
+    "P0670 constructs inputs and coefficients only. It cannot establish lensing normalization, topology, or predictive accuracy.",
+    "RX J2129 is fully spent for later mechanism development; P0633 and P0640 remain sealed."
+  ]
+}
