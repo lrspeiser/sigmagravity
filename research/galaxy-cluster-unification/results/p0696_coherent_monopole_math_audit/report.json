@@ -1,0 +1,98 @@
+{
+  "report_version": "P0696-COHERENT-MONOPOLE-MATH-AUDIT-RESULTS-1.0.0",
+  "status": "pass",
+  "all_math_gates_pass": true,
+  "candidate_advanced_to_spent_joint_screen": true,
+  "protocol_sha256": "979f0845bfcaec185094ac2c915ddf8e91d92cff3df77896bde5caea9b0ccd5f",
+  "source_sha256": "d9afe637a56fd49948679ce883a8b325b88d3e6763180ce700c90d66d50cf482",
+  "operator_source_sha256": "1073c6fd4036883c219859f3076ddbd57a8c0cdf8c171d25e905e9c6e5854fac",
+  "routing_source_sha256": "0f61400a79b1d74443ce690dde04a7941dacae45d6f2358f1e0fdeb44b5981ee",
+  "field_sha256": "725e1aa97e69c6fafbfd5470ca7a2d04cd6a147d204a5de57d70b08e650643cc",
+  "parent_sha256": "2ccc44860dc8b873ff1814567cb6316a5d9394a130ce64ac3e1d00fafb02484d",
+  "integrity_gates": {
+    "P0695B_status": true,
+    "P0695B_not_advanced": true,
+    "P0695B_failed_gates_reproduced": true,
+    "no_observational_outcome_read": true,
+    "no_new_constants": true,
+    "no_fitted_physics": true,
+    "sealed_targets_untouched": true
+  },
+  "sphere": {
+    "shell_mean_radial_acceleration_relative_RMS": 0.016588368182318264,
+    "shell_mean_radial_acceleration_median_absolute_relative_error": 0.0014581966701153748,
+    "correction_tangential_to_radial_RMS": 0.002630903788971992,
+    "correction_maximum_angular_scatter_fraction": 0.011507456318107087,
+    "high_acceleration_correction_to_newtonian_RMS": 1.21718956017843e-07
+  },
+  "rotation_covariance": {
+    "potential_relative_RMS": 4.745128636729744e-16,
+    "acceleration_relative_RMS": 1.6620384120049505e-15
+  },
+  "hybrid": {
+    "projected_routing_fraction": 0.4858066113242192,
+    "projected_covariance": [
+      [
+        3.1989192007267,
+        3.3306690738754695e-18
+      ],
+      [
+        2.220446049250313e-18,
+        1.6448631039216821
+      ]
+    ],
+    "projected_eigenvalues": [
+      1.6448631039216821,
+      3.1989192007267
+    ],
+    "coherent_potential_identity_relative_RMS": 0.0,
+    "potential_identity_relative_RMS": 0.0,
+    "routing_correction_boundary_relative_mismatch": 0.0
+  },
+  "normalized_acceleration_curl_RMS": {
+    "sphere_coherent": 1.1164552831455876e-16,
+    "sphere_correction": 6.23208575669917e-17,
+    "ellipsoid_coherent": 9.994159261075759e-17,
+    "rotated_coherent": 1.0492846965073799e-16,
+    "hybrid": 1.221110996593177e-16
+  },
+  "maximum_normalized_acceleration_curl_RMS": 1.221110996593177e-16,
+  "all_finite": true,
+  "gate_results": {
+    "P0695B_status": true,
+    "P0695B_not_advanced": true,
+    "P0695B_failed_gates_reproduced": true,
+    "no_observational_outcome_read": true,
+    "no_new_constants": true,
+    "no_fitted_physics": true,
+    "sealed_targets_untouched": true,
+    "finite": true,
+    "sphere_radial_RMS": true,
+    "sphere_radial_median": true,
+    "correction_tangential": true,
+    "correction_angular_scatter": true,
+    "curl": true,
+    "rotation_potential": true,
+    "rotation_acceleration": true,
+    "coherent_identity": true,
+    "high_acceleration_limit": true,
+    "hybrid_identity": true,
+    "correction_boundary": true,
+    "fraction_lower": true,
+    "fraction_upper": true,
+    "accounting_no_constants": true,
+    "accounting_no_fitted_physics": true,
+    "no_observational_score": true,
+    "sealed_outcomes_untouched": true
+  },
+  "failed_gates": [],
+  "observational_scores_computed": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0696 is a numerical and mathematical audit, not an observational test.",
+    "Shell averaging about one global baryonic centroid is nonlocal and not yet derived from a covariant action or causal evolution equation.",
+    "Retaining Newtonian multipoles while boosting only the monopole is a new phenomenological hypothesis.",
+    "P0633 and P0640 remain sealed."
+  ]
+}
