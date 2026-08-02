@@ -72,7 +72,7 @@ export function validateObservationTargets({
     if (target.schemaVersion !== "sigma-observation-target/1") throw new Error("observation target must use sigma-observation-target/1");
     if (typeof target.id !== "string" || !target.id || seen.has(target.id)) throw new Error(`invalid or duplicate observation target id: ${target.id}`);
     seen.add(target.id);
-    if (!["circular_speed_curve", "line_of_sight_velocity_field", "photon_lensing_map"].includes(target.kind)) {
+    if (!["circular_speed_curve", "line_of_sight_velocity_field", "photon_lensing_map", "multiple_image_systems"].includes(target.kind)) {
       throw new Error(`unsupported observation target kind: ${target.kind}`);
     }
     const definition = definitions.get(target.observable);
@@ -80,7 +80,73 @@ export function validateObservationTargets({
     if (!requested.has(target.observable)) throw new Error(`observation target ${target.id} observable must be requested`);
     let pointCount;
     let scored;
-    if (target.kind === "photon_lensing_map") {
+    let derivedFitted = null;
+    if (target.kind === "multiple_image_systems") {
+      if (!["photons", "both"].includes(definition.target) || definition.rank !== "vector" || definition.unit !== "m/s^2") {
+        throw new Error(`observation target ${target.id} requires a photons or both vector in m/s^2`);
+      }
+      if (model.geometry.coordinateSystem !== "cartesian_3d" || dimensions !== 3) {
+        throw new Error("multiple_image_systems requires a Cartesian 3D model");
+      }
+      const axes = [target.northAxis, target.eastAxis, target.lineOfSightAxis];
+      if (!axes.every(Number.isInteger) || new Set(axes).size !== 3 || axes.some((axis) => axis < 0 || axis > 2)) {
+        throw new Error("northAxis, eastAxis, and lineOfSightAxis must be a permutation of [0,1,2]");
+      }
+      const lensDistance = Number(target.lensAngularDiameterDistanceM);
+      const rootBound = Number(target.rootSearchBoundArcsec);
+      if (!Number.isFinite(lensDistance) || lensDistance <= 0) throw new Error("lensAngularDiameterDistanceM must be finite and positive");
+      if (!Number.isFinite(rootBound) || rootBound <= 0) throw new Error("rootSearchBoundArcsec must be finite and positive");
+      finiteArray(target.skyCenterM, 3, "skyCenterM");
+      if (!Array.isArray(fieldShape) || fieldShape.length !== 3 || !fieldShape.every((value) => Number.isInteger(value) && value >= 3)) {
+        throw new Error("multiple_image_systems preflight requires the solved 3D field shape");
+      }
+      const integerControl = (name, fallback, minimum, maximum) => {
+        const value = target[name] ?? fallback;
+        if (!Number.isInteger(value) || value < minimum || value > maximum) throw new Error(`${name} must be an integer from ${minimum} through ${maximum}`);
+      };
+      integerControl("rootGridPoints", 161, 21, 401);
+      integerControl("maximumResidualMinimumSeeds", 64, 1, 512);
+      integerControl("criticalCurveGridPoints", 161, 21, 401);
+      for (const [name, fallback] of [["closureToleranceArcsec", 0.002], ["deduplicationToleranceArcsec", 0.2], ["jacobianStepArcsec", 0.08]]) {
+        const value = Number(target[name] ?? fallback);
+        if (!Number.isFinite(value) || value <= 0) throw new Error(`${name} must be finite and positive`);
+      }
+      for (const name of ["includeResidualMinima", "includeCriticalCurves"]) {
+        if (target[name] !== undefined && typeof target[name] !== "boolean") throw new Error(`${name} must be boolean`);
+      }
+      const supplemental = target.supplementalGridPoints ?? [81, 161, 241];
+      if (!Array.isArray(supplemental) || supplemental.length > 4
+        || supplemental.some((value) => !Number.isInteger(value) || value < 21 || value > 401)) {
+        throw new Error("supplementalGridPoints must contain at most four integers from 21 through 401");
+      }
+      if (!Array.isArray(target.families) || target.families.length < 1 || target.families.length > 64) {
+        throw new Error("families must contain from 1 through 64 image families");
+      }
+      const familyIds = new Set();
+      let imageCount = 0;
+      for (const family of target.families) {
+        if (!family || typeof family !== "object" || Array.isArray(family)
+          || typeof family.id !== "string" || !family.id || familyIds.has(family.id)) {
+          throw new Error(`invalid or duplicate image family id: ${family?.id}`);
+        }
+        familyIds.add(family.id);
+        const ratio = Number(family.distanceRatio);
+        if (!Number.isFinite(ratio) || ratio <= 0) throw new Error(`family ${family.id} distanceRatio must be finite and positive`);
+        if (!Array.isArray(family.observedImagesArcsec) || family.observedImagesArcsec.length < 2) {
+          throw new Error(`family ${family.id} observedImagesArcsec must contain at least two positions`);
+        }
+        family.observedImagesArcsec.forEach((image) => finiteArray(image, 2, `family ${family.id} observed image`));
+        finiteArray(family.positionUncertaintiesArcsec, family.observedImagesArcsec.length, `family ${family.id} positionUncertaintiesArcsec`, { positive: true });
+        imageCount += family.observedImagesArcsec.length;
+      }
+      if (imageCount > 512) throw new Error("multiple_image_systems supports at most 512 observed images");
+      pointCount = 2 * imageCount;
+      scored = true;
+      derivedFitted = 2 * target.families.length;
+      if (target.fittedNuisanceParameters !== undefined && target.fittedNuisanceParameters !== derivedFitted) {
+        throw new Error("multiple_image_systems fittedNuisanceParameters must equal two source coordinates per family");
+      }
+    } else if (target.kind === "photon_lensing_map") {
       if (!["photons", "both"].includes(definition.target) || definition.rank !== "vector" || definition.unit !== "m/s^2") {
         throw new Error(`observation target ${target.id} requires a photons or both vector in m/s^2`);
       }
@@ -198,7 +264,7 @@ export function validateObservationTargets({
         pointCount = major.elementCount;
       }
     }
-    const fitted = target.fittedNuisanceParameters ?? 0;
+    const fitted = derivedFitted ?? target.fittedNuisanceParameters ?? 0;
     if (!Number.isInteger(fitted) || fitted < 0 || (scored && fitted >= pointCount)) throw new Error("fittedNuisanceParameters must be smaller than the scored point count");
     if (!target.provenance || typeof target.provenance !== "object" || Array.isArray(target.provenance) || Object.keys(target.provenance).length === 0) throw new Error("observation target requires provenance");
     license(target.license);

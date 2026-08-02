@@ -246,7 +246,7 @@ data therefore changes the batch and observation identities but preserves the
 field identity. See
 `../docs/P0733_COMPOSED_BATCH_OBSERVATION_JOBS_MILESTONE.md`.
 
-Two massive-tracer adapters and one separately typed photon adapter are now
+Two massive-tracer adapters and two separately typed photon adapters are now
 implemented. A system can
 attach a content-hashed `sigma-observation-target/1` circular-speed curve or
 resolved line-of-sight velocity map. After the field converges, the curve
@@ -274,6 +274,19 @@ and byte-identical between integrated and separately cached observation jobs.
 See `examples/observation-targets/photon-lensing-map.json` and
 `../docs/P0734_TYPED_PHOTON_LENSING_ADAPTER.md`.
 
+`multiple_image_systems` uses the same explicit 3D photon projection but tests
+raw observed image positions rather than a reconstructed convergence map. For
+each source family it profiles two source coordinates, globally searches the
+declared image plane for every closed lens-equation root, and uses a minimum-
+cost one-to-one assignment. Those source coordinates are counted as
+observational nuisance parameters and add no gravity parameter. If the field
+predicts fewer roots than observed images, the target is marked
+`incomplete_topology`; aggregate RMS, chi-square, and likelihood remain null
+instead of scoring only the matched subset. Extra roots remain disclosed
+because classifying their detectability requires an additional selection
+model. See `examples/observation-targets/multiple-image-systems.json` and
+`../docs/P0735_RAW_MULTIPLE_IMAGE_ADAPTER.md`.
+
 The map target contract is illustrated by
 `examples/observation-targets/line-of-sight-velocity-field.json`. Its named
 coordinate, observation, uncertainty, intensity, mask, and beam arrays must be
@@ -298,8 +311,8 @@ manifests: 52/52 evaluations have exact pixel support, valid hashes, zero
 per-galaxy gravity parameters, and at most `1.96e-10 m/s` prediction parity RMS
 against an independent frozen implementation. This is spent-sample adapter
 commissioning, not theory validation. Pressure support/non-circular motions,
-spectral cubes, raw multiple-image roots, source-position profiling, time
-delays, and critical-curve catalogs remain future acceptance work. See
+spectral cubes, time delays, flux-ratio selection, and independently observed
+critical-curve catalogs remain future acceptance work. See
 `../docs/P0731_REAL_VELOCITY_FIELD_ADAPTER_PARITY_RESULTS.md`.
 
 The full P0723 commissioning run then used the same generic HTTP path for all

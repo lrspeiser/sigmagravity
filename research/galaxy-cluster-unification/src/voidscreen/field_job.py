@@ -256,6 +256,7 @@ def _worker_source_sha256() -> str:
         "generic_field_worker.py",
         "observation_adapters.py",
         "photon_lensing_adapter.py",
+        "multiple_image_adapter.py",
         "sky_lensing.py",
     ):
         path = root / name
@@ -416,6 +417,63 @@ def _write_velocity_field_predictions(
         writer.writerows(rows)
 
 
+def _write_multiple_image_predictions(
+    path: Path, rows: list[dict[str, Any]]
+) -> None:
+    columns = [
+        "target_id",
+        "family_id",
+        "family_index",
+        "image_index",
+        "assignment_state",
+        "observed_east_arcsec",
+        "observed_north_arcsec",
+        "position_uncertainty_arcsec",
+        "predicted_root_index",
+        "predicted_east_arcsec",
+        "predicted_north_arcsec",
+        "residual_east_arcsec",
+        "residual_north_arcsec",
+        "separation_arcsec",
+        "root_closure_arcsec",
+        "root_absolute_magnification",
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=columns, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _write_multiple_image_families(
+    path: Path, rows: list[dict[str, Any]]
+) -> None:
+    columns = [
+        "target_id",
+        "family_id",
+        "family_index",
+        "distance_ratio",
+        "profiled_source_east_arcsec",
+        "profiled_source_north_arcsec",
+        "observed_images",
+        "predicted_roots",
+        "matched_images",
+        "complete_observed_assignment",
+        "excess_predicted_roots",
+        "critical_curve_points",
+        "state",
+        "image_plane_rms_arcsec",
+        "matched_subset_diagnostic_rms_arcsec",
+        "chi_square",
+        "degrees_freedom",
+        "fitted_observation_nuisance_parameters",
+        "gravity_parameters_added",
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=columns, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def _normalize_observation_targets(values: Any) -> list[dict[str, Any]]:
     if values is None:
         return []
@@ -428,6 +486,7 @@ def _normalize_observation_targets(values: Any) -> list[dict[str, Any]]:
         "radiiM",
         "observedSpeedsMPerS",
         "uncertaintiesMPerS",
+        "skyCenterM",
     )
     for raw in values:
         if not isinstance(raw, Mapping):
@@ -450,6 +509,22 @@ def _normalize_observation_targets(values: Any) -> list[dict[str, Any]]:
         for key in ("distanceRatio", "lensAngularDiameterDistanceM"):
             if key in target:
                 target[key] = float(target[key])
+        if "families" in target:
+            target["families"] = [
+                {
+                    **dict(family),
+                    "distanceRatio": float(family["distanceRatio"]),
+                    "observedImagesArcsec": [
+                        [float(value) for value in image]
+                        for image in family["observedImagesArcsec"]
+                    ],
+                    "positionUncertaintiesArcsec": [
+                        float(value)
+                        for value in family["positionUncertaintiesArcsec"]
+                    ],
+                }
+                for family in target["families"]
+            ]
         normalized.append(target)
     return normalized
 
@@ -545,6 +620,8 @@ def execute_field_job(
         }
         observation_rows: list[dict[str, Any]] = []
         observation_maps: dict[str, Array] = {}
+        observation_roots: dict[str, Array] = {}
+        observation_auxiliary_rows: dict[str, list[dict[str, Any]]] = {}
         observation_evaluation: dict[str, Any] | None = None
         if observation_targets:
             if solution.converged:
@@ -555,6 +632,8 @@ def execute_field_job(
                     observation_targets,
                     arrays=arrays,
                     map_outputs=observation_maps,
+                    root_outputs=observation_roots,
+                    auxiliary_rows=observation_auxiliary_rows,
                 )
                 for evaluation, target_specification in zip(
                     observation_evaluation["targets"], observation_targets, strict=True
@@ -564,6 +643,11 @@ def execute_field_job(
                     observation_evaluation["mapArchive"] = {
                         "path": "observation_photon_lensing_maps.npz",
                         "maps": _array_records(observation_maps),
+                    }
+                if observation_roots:
+                    observation_evaluation["rootArchive"] = {
+                        "path": "observation_multiple_image_roots.npz",
+                        "arrays": _array_records(observation_roots),
                     }
             else:
                 observation_evaluation = {
@@ -586,12 +670,23 @@ def execute_field_job(
                 temporary / "observation_photon_lensing_maps.npz",
                 observation_maps,
             )
+        if observation_roots:
+            _write_deterministic_npz(
+                temporary / "observation_multiple_image_roots.npz",
+                observation_roots,
+            )
         circular_prediction_rows = [
             row for row in observation_rows if "predicted_speed_m_s" in row
         ]
         velocity_field_prediction_rows = [
             row for row in observation_rows if "predicted_velocity_m_s" in row
         ]
+        multiple_image_prediction_rows = [
+            row for row in observation_rows if "assignment_state" in row
+        ]
+        multiple_image_family_rows = observation_auxiliary_rows.get(
+            "multiple_image_families", []
+        )
         evaluated_target_kinds = (
             set(observation_evaluation.get("targetKinds", []))
             if observation_evaluation is not None and solution.converged
@@ -607,6 +702,15 @@ def execute_field_job(
             _write_velocity_field_predictions(
                 temporary / "observation_velocity_field_predictions.csv",
                 velocity_field_prediction_rows,
+            )
+        if "multiple_image_systems" in evaluated_target_kinds:
+            _write_multiple_image_predictions(
+                temporary / "observation_multiple_image_predictions.csv",
+                multiple_image_prediction_rows,
+            )
+            _write_multiple_image_families(
+                temporary / "observation_multiple_image_families.csv",
+                multiple_image_family_rows,
             )
         _write_json(temporary / "model.json", model)
         _write_json(temporary / "input_bundle.json", bundle)
@@ -632,6 +736,7 @@ def execute_field_job(
                 "Observation targets are evaluated after the field solve and cannot alter the field equations.",
                 "Resolved velocity maps use explicitly declared projection and beam data; no galaxy-specific gravity parameter is introduced by the adapter.",
                 "Photon-lensing maps use a separately typed photon observable and explicitly declared projection geometry; they are not derived from the massive-tracer adapter.",
+                "Raw multiple-image scoring profiles source locations but adds no gravity parameter; missing predicted multiplicity is reported without a finite aggregate fit score.",
             ],
         }
         result_sha = canonical_sha256(scientific_core)
@@ -664,8 +769,17 @@ def execute_field_job(
             artifact_names.append("observation_predictions.csv")
         if "line_of_sight_velocity_field" in evaluated_target_kinds:
             artifact_names.append("observation_velocity_field_predictions.csv")
+        if "multiple_image_systems" in evaluated_target_kinds:
+            artifact_names.extend(
+                [
+                    "observation_multiple_image_predictions.csv",
+                    "observation_multiple_image_families.csv",
+                ]
+            )
         if observation_maps:
             artifact_names.append("observation_photon_lensing_maps.npz")
+        if observation_roots:
+            artifact_names.append("observation_multiple_image_roots.npz")
         artifact_index = {
             "schemaVersion": "sigma-field-artifact-index/1",
             "jobId": job["id"],

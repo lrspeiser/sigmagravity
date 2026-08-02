@@ -301,3 +301,63 @@ def test_decoupled_photon_maps_byte_match_integrated_field_job(tmp_path: Path) -
     assert scores["targets"][0]["observableTarget"] == "photons"
     assert scores["targets"][0]["state"] == "predicted_not_scored"
     assert scores["mapArchive"]["path"] == "observation_photon_lensing_maps.npz"
+
+
+def test_decoupled_raw_multiple_images_byte_match_integrated_field_job(
+    tmp_path: Path,
+) -> None:
+    target = {
+        "schemaVersion": "sigma-observation-target/1",
+        "id": "p0735-raw-images",
+        "kind": "multiple_image_systems",
+        "observable": "acceleration",
+        "northAxis": 0,
+        "eastAxis": 1,
+        "lineOfSightAxis": 2,
+        "lensAngularDiameterDistanceM": 1.0e6,
+        "skyCenterM": [0.0, 0.0, 0.0],
+        "rootSearchBoundArcsec": 0.5,
+        "rootGridPoints": 21,
+        "supplementalGridPoints": [],
+        "closureToleranceArcsec": 1.0e-4,
+        "deduplicationToleranceArcsec": 0.01,
+        "jacobianStepArcsec": 0.01,
+        "families": [
+            {
+                "id": "source-a",
+                "distanceRatio": 0.7,
+                "observedImagesArcsec": [[-0.1, 0.0], [0.1, 0.0]],
+                "positionUncertaintiesArcsec": [0.01, 0.01],
+            }
+        ],
+        "provenance": {"kind": "P0735 raw-image parity fixture"},
+        "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+    }
+    source, bundle, integrated = solve_fixture(
+        tmp_path,
+        3,
+        [target],
+        {},
+        observable_target="photons",
+    )
+    standalone = tmp_path / "standalone_raw_images"
+    execute_observation_evaluation_job(
+        source,
+        bundle,
+        {
+            "schemaVersion": "sigma-observation-evaluation-job-request/1",
+            "observationTargets": [target],
+        },
+        standalone,
+    )
+    for name in (
+        "observation_scores.json",
+        "observation_multiple_image_predictions.csv",
+        "observation_multiple_image_families.csv",
+        "observation_multiple_image_roots.npz",
+    ):
+        assert (standalone / name).read_bytes() == (integrated / name).read_bytes()
+    scores = json.loads((standalone / "observation_scores.json").read_text())
+    assert scores["targets"][0]["state"] == "incomplete_topology"
+    assert scores["targets"][0]["score"]["channels"]["image_position_arcsec"]["rmse"] is None
+    assert scores["rootArchive"]["path"] == "observation_multiple_image_roots.npz"

@@ -17,6 +17,7 @@ import numpy as np
 from scipy.ndimage import map_coordinates
 from scipy.signal import fftconvolve
 
+from .multiple_image_adapter import evaluate_multiple_image_systems_target
 from .photon_lensing_adapter import evaluate_photon_lensing_map_target
 
 Array = np.ndarray
@@ -757,6 +758,8 @@ def evaluate_observation_targets(
     targets: Sequence[Mapping[str, Any]],
     arrays: Mapping[str, Array] | None = None,
     map_outputs: dict[str, Array] | None = None,
+    root_outputs: dict[str, Array] | None = None,
+    auxiliary_rows: dict[str, list[dict[str, Any]]] | None = None,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Evaluate supported targets and return deterministic aggregate diagnostics."""
 
@@ -794,6 +797,25 @@ def evaluate_observation_targets(
             target_rows = []
             if map_outputs is not None:
                 map_outputs.update(target_maps)
+        elif target.get("kind") == "multiple_image_systems":
+            (
+                evaluation,
+                target_rows,
+                target_family_rows,
+                target_roots,
+            ) = evaluate_multiple_image_systems_target(
+                model,
+                observables,
+                geometry,
+                target,
+                archive_prefix=f"target_{target_index:03d}",
+            )
+            if root_outputs is not None:
+                root_outputs.update(target_roots)
+            if auxiliary_rows is not None:
+                auxiliary_rows.setdefault("multiple_image_families", []).extend(
+                    target_family_rows
+                )
         else:
             raise ValueError(f"unsupported observation target kind: {target.get('kind')}")
         evaluations.append(evaluation)
@@ -901,6 +923,7 @@ def evaluate_observation_targets(
                 "Velocity, deflection, and reduced-shear residuals are aggregated only inside their own named channel and unit.",
                 "Velocity-field projection uses explicitly declared geometry, handedness, emission support, post-convolution score masks, uncertainties, intensity weights, and beam kernels.",
                 "Photon projection uses explicitly declared sky axes, distance ratio, lens distance, score masks, and uncertainties; it does not infer a cosmology.",
+                "Raw multiple-image positions are scored only after global root finding and minimum-cost assignment; missing observed multiplicity has no finite aggregate fit score.",
             ],
         },
         rows,

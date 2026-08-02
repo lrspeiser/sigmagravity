@@ -17,12 +17,16 @@
     {
       "properties": { "kind": { "const": "photon_lensing_map" } },
       "required": ["northAxis", "eastAxis", "lineOfSightAxis", "distanceRatio", "lensAngularDiameterDistanceM"]
+    },
+    {
+      "properties": { "kind": { "const": "multiple_image_systems" } },
+      "required": ["northAxis", "eastAxis", "lineOfSightAxis", "lensAngularDiameterDistanceM", "skyCenterM", "rootSearchBoundArcsec", "families"]
     }
   ],
   "properties": {
     "schemaVersion": { "const": "sigma-observation-target/1" },
     "id": { "type": "string", "minLength": 1, "maxLength": 128 },
-    "kind": { "enum": ["circular_speed_curve", "line_of_sight_velocity_field", "photon_lensing_map"] },
+    "kind": { "enum": ["circular_speed_curve", "line_of_sight_velocity_field", "photon_lensing_map", "multiple_image_systems"] },
     "observable": { "type": "string", "minLength": 1 },
     "gridOriginM": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number" } },
     "centerM": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number" } },
@@ -54,6 +58,46 @@
     "lineOfSightAxis": { "type": "integer", "minimum": 0, "maximum": 2 },
     "distanceRatio": { "type": "number", "exclusiveMinimum": 0 },
     "lensAngularDiameterDistanceM": { "type": "number", "exclusiveMinimum": 0 },
+    "skyCenterM": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } },
+    "rootSearchBoundArcsec": { "type": "number", "exclusiveMinimum": 0 },
+    "rootGridPoints": { "type": "integer", "minimum": 21, "maximum": 401, "default": 161 },
+    "closureToleranceArcsec": { "type": "number", "exclusiveMinimum": 0, "default": 0.002 },
+    "deduplicationToleranceArcsec": { "type": "number", "exclusiveMinimum": 0, "default": 0.2 },
+    "jacobianStepArcsec": { "type": "number", "exclusiveMinimum": 0, "default": 0.08 },
+    "includeResidualMinima": { "type": "boolean", "default": true },
+    "maximumResidualMinimumSeeds": { "type": "integer", "minimum": 1, "maximum": 512, "default": 64 },
+    "supplementalGridPoints": { "type": "array", "maxItems": 4, "items": { "type": "integer", "minimum": 21, "maximum": 401 } },
+    "includeCriticalCurves": { "type": "boolean", "default": false },
+    "criticalCurveGridPoints": { "type": "integer", "minimum": 21, "maximum": 401, "default": 161 },
+    "families": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "distanceRatio", "observedImagesArcsec", "positionUncertaintiesArcsec"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "distanceRatio": { "type": "number", "exclusiveMinimum": 0 },
+          "observedImagesArcsec": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": { "type": "number" }
+            }
+          },
+          "positionUncertaintiesArcsec": {
+            "type": "array",
+            "minItems": 2,
+            "items": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        }
+      }
+    },
     "observedAlphaEastArcsecArrayKey": { "type": "string", "minLength": 1 },
     "observedAlphaNorthArcsecArrayKey": { "type": "string", "minLength": 1 },
     "deflectionUncertaintyArcsecArrayKey": { "type": "string", "minLength": 1 },

@@ -481,6 +481,8 @@ export class LocalBatchService {
     const childManifest = [];
     const observationPredictionRows = [];
     const velocityFieldPredictionRows = [];
+    const multipleImagePredictionRows = [];
+    const multipleImageFamilyRows = [];
     const observationKinds = new Set();
     for (let index = 0; index < children.length; index += 1) {
       const { field: fieldChild, observation: observationChild } = children[index];
@@ -561,6 +563,32 @@ export class LocalBatchService {
             if (line) velocityFieldPredictionRows.push(`${csvCell(definition.systemId)},${line}`);
           }
         }
+        if (targetKinds.has("multiple_image_systems")) {
+          const predictionArtifact = await this.fieldService.getArtifact(
+            observationChild.id,
+            "observation_multiple_image_predictions.csv",
+          );
+          const predictionLines = predictionArtifact.content.toString("utf8").trimEnd().split("\n");
+          const predictionHeader = "target_id,family_id,family_index,image_index,assignment_state,observed_east_arcsec,observed_north_arcsec,position_uncertainty_arcsec,predicted_root_index,predicted_east_arcsec,predicted_north_arcsec,residual_east_arcsec,residual_north_arcsec,separation_arcsec,root_closure_arcsec,root_absolute_magnification";
+          if (predictionLines[0] !== predictionHeader) {
+            throw new Error(`observation job ${observationChild.id} returned an incompatible multiple-image prediction table`);
+          }
+          for (const line of predictionLines.slice(1)) {
+            if (line) multipleImagePredictionRows.push(`${csvCell(definition.systemId)},${line}`);
+          }
+          const familyArtifact = await this.fieldService.getArtifact(
+            observationChild.id,
+            "observation_multiple_image_families.csv",
+          );
+          const familyLines = familyArtifact.content.toString("utf8").trimEnd().split("\n");
+          const familyHeader = "target_id,family_id,family_index,distance_ratio,profiled_source_east_arcsec,profiled_source_north_arcsec,observed_images,predicted_roots,matched_images,complete_observed_assignment,excess_predicted_roots,critical_curve_points,state,image_plane_rms_arcsec,matched_subset_diagnostic_rms_arcsec,chi_square,degrees_freedom,fitted_observation_nuisance_parameters,gravity_parameters_added";
+          if (familyLines[0] !== familyHeader) {
+            throw new Error(`observation job ${observationChild.id} returned an incompatible multiple-image family table`);
+          }
+          for (const line of familyLines.slice(1)) {
+            if (line) multipleImageFamilyRows.push(`${csvCell(definition.systemId)},${line}`);
+          }
+        }
       }
       const systemState = fieldChild.state !== "succeeded"
         ? fieldChild.state
@@ -603,6 +631,9 @@ export class LocalBatchService {
         observation_deflection_weighted_rmse_arcsec: channelAggregates.deflection_arcsec?.inverseVarianceWeightedRmse ?? null,
         observation_reduced_shear_rmse: channelAggregates.reduced_shear_dimensionless?.rmse ?? null,
         observation_reduced_shear_weighted_rmse: channelAggregates.reduced_shear_dimensionless?.inverseVarianceWeightedRmse ?? null,
+        observation_image_position_rmse_arcsec: channelAggregates.image_position_arcsec?.rmse ?? null,
+        observation_image_position_weighted_rmse_arcsec: channelAggregates.image_position_arcsec?.inverseVarianceWeightedRmse ?? null,
+        observation_incomplete_topology_targets: observation?.targets?.filter((target) => target.state === "incomplete_topology").length ?? 0,
         observation_channel_aggregates: channelAggregates,
       };
       rows.push(row);
@@ -772,6 +803,9 @@ export class LocalBatchService {
           "observation_deflection_weighted_rmse_arcsec",
           "observation_reduced_shear_rmse",
           "observation_reduced_shear_weighted_rmse",
+          "observation_image_position_rmse_arcsec",
+          "observation_image_position_weighted_rmse_arcsec",
+          "observation_incomplete_topology_targets",
         ],
         rows,
       ),
@@ -799,18 +833,30 @@ export class LocalBatchService {
       `system_id,target_id,point_index,row_index,column_index,disk_major_coordinate_m,disk_minor_coordinate_m,circular_radius_m,predicted_circular_speed_m_s,predicted_velocity_m_s,observed_velocity_m_s,uncertainty_m_s,residual_m_s,declared_weight,inward_acceleration_m_s2\n${velocityFieldPredictionRows.length ? `${velocityFieldPredictionRows.join("\n")}\n` : ""}`,
       "utf8",
     );
-    const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.field_state)}</td><td>${htmlEscape(row.observation_state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td><td>${htmlEscape(row.observation_rmse_m_s ?? "")}</td><td>${htmlEscape(row.observation_deflection_rmse_arcsec ?? "")}</td><td>${htmlEscape(row.observation_reduced_shear_rmse ?? "")}</td></tr>`).join("");
+    await writeFile(
+      resolve(artifacts, "observation_multiple_image_predictions.csv"),
+      `system_id,target_id,family_id,family_index,image_index,assignment_state,observed_east_arcsec,observed_north_arcsec,position_uncertainty_arcsec,predicted_root_index,predicted_east_arcsec,predicted_north_arcsec,residual_east_arcsec,residual_north_arcsec,separation_arcsec,root_closure_arcsec,root_absolute_magnification\n${multipleImagePredictionRows.length ? `${multipleImagePredictionRows.join("\n")}\n` : ""}`,
+      "utf8",
+    );
+    await writeFile(
+      resolve(artifacts, "observation_multiple_image_families.csv"),
+      `system_id,target_id,family_id,family_index,distance_ratio,profiled_source_east_arcsec,profiled_source_north_arcsec,observed_images,predicted_roots,matched_images,complete_observed_assignment,excess_predicted_roots,critical_curve_points,state,image_plane_rms_arcsec,matched_subset_diagnostic_rms_arcsec,chi_square,degrees_freedom,fitted_observation_nuisance_parameters,gravity_parameters_added\n${multipleImageFamilyRows.length ? `${multipleImageFamilyRows.join("\n")}\n` : ""}`,
+      "utf8",
+    );
+    const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.field_state)}</td><td>${htmlEscape(row.observation_state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td><td>${htmlEscape(row.observation_rmse_m_s ?? "")}</td><td>${htmlEscape(row.observation_deflection_rmse_arcsec ?? "")}</td><td>${htmlEscape(row.observation_reduced_shear_rmse ?? "")}</td><td>${htmlEscape(row.observation_image_position_rmse_arcsec ?? "")}</td><td>${htmlEscape(row.observation_incomplete_topology_targets)}</td></tr>`).join("");
     const observationScope = aggregate.observationScoresAvailable
       ? `Typed observations (${[...observationKinds].sort().join(", ")}) were scored for ${aggregate.scoredObservationTargets} target(s). Velocity, deflection, and reduced-shear scores remain separate.`
-      : "No observation targets were supplied, so this report measures numerical execution and convergence only.";
+      : requestedObservationRows.length
+        ? `Observation targets (${[...observationKinds].sort().join(", ")}) were evaluated but none produced a complete score; incomplete topology remains an explicit non-score.`
+        : "No observation targets were supplied, so this report measures numerical execution and convergence only.";
     await writeFile(
       resolve(artifacts, "report.html"),
-      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:1080px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${fieldSuccessfulRows.length} field solve(s) and ${successfulObservationRows.length}/${requestedObservationRows.length} requested observation evaluation(s) succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><table><thead><tr><th>System</th><th>Field state</th><th>Observation state</th><th>Iterations</th><th>Maximum equation residual</th><th>Velocity RMSE (m/s)</th><th>Deflection RMSE (arcsec)</th><th>Reduced-shear RMSE</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
+      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:1180px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${fieldSuccessfulRows.length} field solve(s) and ${successfulObservationRows.length}/${requestedObservationRows.length} requested observation evaluation(s) succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><table><thead><tr><th>System</th><th>Field state</th><th>Observation state</th><th>Iterations</th><th>Maximum equation residual</th><th>Velocity RMSE (m/s)</th><th>Deflection RMSE (arcsec)</th><th>Reduced-shear RMSE</th><th>Image-position coordinate RMSE (arcsec)</th><th>Incomplete-topology targets</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
       "utf8",
     );
     await writeFile(
       resolve(artifacts, "llm_briefing.md"),
-      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${fieldSuccessfulRows.length}\n- Successful requested observation evaluations: ${successfulObservationRows.length}/${requestedObservationRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Gravity parameters added by observation evaluation: ${aggregate.observationAddedGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Velocity RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n- Deflection RMSE (arcsec): ${aggregate.observationChannelAggregates.deflection_arcsec?.rmse ?? "not available"}\n- Reduced-shear RMSE: ${aggregate.observationChannelAggregates.reduced_shear_dimensionless?.rmse ?? "not available"}\n\nThis deterministic briefing distinguishes immutable field execution, separately cached massive-tracer and photon observation evaluation, and every score channel. It must not describe an unscored channel as validated.\n`,
+      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${fieldSuccessfulRows.length}\n- Successful requested observation evaluations: ${successfulObservationRows.length}/${requestedObservationRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Gravity parameters added by observation evaluation: ${aggregate.observationAddedGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Velocity RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n- Deflection RMSE (arcsec): ${aggregate.observationChannelAggregates.deflection_arcsec?.rmse ?? "not available"}\n- Reduced-shear RMSE: ${aggregate.observationChannelAggregates.reduced_shear_dimensionless?.rmse ?? "not available"}\n- Raw image-position coordinate RMSE (arcsec): ${aggregate.observationChannelAggregates.image_position_arcsec?.rmse ?? "not available"}\n- Incomplete-topology targets: ${rows.reduce((sum, row) => sum + row.observation_incomplete_topology_targets, 0)}\n\nThis deterministic briefing distinguishes immutable field execution, separately cached massive-tracer and photon observation evaluation, and every score channel. It must not describe an unscored channel as validated.\n`,
       "utf8",
     );
     await writeFile(
@@ -827,6 +873,8 @@ export class LocalBatchService {
       "model.json",
       "observation_predictions.csv",
       "observation_velocity_field_predictions.csv",
+      "observation_multiple_image_predictions.csv",
+      "observation_multiple_image_families.csv",
       "per_galaxy.csv",
       "report.html",
       "reproduction_command.txt",

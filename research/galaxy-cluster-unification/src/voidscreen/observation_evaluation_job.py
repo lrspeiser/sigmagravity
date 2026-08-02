@@ -29,6 +29,8 @@ from .field_job import (
     _publish_directory,
     _write_deterministic_npz,
     _write_json,
+    _write_multiple_image_families,
+    _write_multiple_image_predictions,
     _write_observation_predictions,
     _write_velocity_field_predictions,
     array_content_sha256,
@@ -52,6 +54,7 @@ def _worker_source_sha256() -> str:
         "field_job.py",
         "observation_adapters.py",
         "photon_lensing_adapter.py",
+        "multiple_image_adapter.py",
         "sky_lensing.py",
     )
     import hashlib
@@ -215,6 +218,8 @@ def execute_observation_evaluation_job(
     tracemalloc.start()
     try:
         observation_maps: dict[str, Array] = {}
+        observation_roots: dict[str, Array] = {}
+        observation_auxiliary_rows: dict[str, list[dict[str, Any]]] = {}
         evaluation, rows = evaluate_observation_targets(
             model,
             observables,
@@ -222,6 +227,8 @@ def execute_observation_evaluation_job(
             targets,
             arrays=observation_arrays,
             map_outputs=observation_maps,
+            root_outputs=observation_roots,
+            auxiliary_rows=observation_auxiliary_rows,
         )
         for target_result, target_specification in zip(
             evaluation["targets"], targets, strict=True
@@ -232,8 +239,17 @@ def execute_observation_evaluation_job(
                 "path": "observation_photon_lensing_maps.npz",
                 "maps": _array_records(observation_maps),
             }
+        if observation_roots:
+            evaluation["rootArchive"] = {
+                "path": "observation_multiple_image_roots.npz",
+                "arrays": _array_records(observation_roots),
+            }
         circular_rows = [row for row in rows if "predicted_speed_m_s" in row]
         velocity_rows = [row for row in rows if "predicted_velocity_m_s" in row]
+        multiple_image_rows = [row for row in rows if "assignment_state" in row]
+        multiple_image_family_rows = observation_auxiliary_rows.get(
+            "multiple_image_families", []
+        )
         target_kinds = set(evaluation["targetKinds"])
         _write_json(temporary / "observation_scores.json", evaluation)
         if "circular_speed_curve" in target_kinds:
@@ -244,10 +260,24 @@ def execute_observation_evaluation_job(
             _write_velocity_field_predictions(
                 temporary / "observation_velocity_field_predictions.csv", velocity_rows
             )
+        if "multiple_image_systems" in target_kinds:
+            _write_multiple_image_predictions(
+                temporary / "observation_multiple_image_predictions.csv",
+                multiple_image_rows,
+            )
+            _write_multiple_image_families(
+                temporary / "observation_multiple_image_families.csv",
+                multiple_image_family_rows,
+            )
         if observation_maps:
             _write_deterministic_npz(
                 temporary / "observation_photon_lensing_maps.npz",
                 observation_maps,
+            )
+        if observation_roots:
+            _write_deterministic_npz(
+                temporary / "observation_multiple_image_roots.npz",
+                observation_roots,
             )
         _write_json(temporary / "evaluation_job.json", evaluation_job)
         _write_json(temporary / "field_reference.json", field_reference)
@@ -267,6 +297,7 @@ def execute_observation_evaluation_job(
                 "Changing observational data or target declarations changes this evaluation identity, not the source field identity.",
                 "Massive-tracer adapters and photon-lensing adapters use separately typed observables and channel-specific scores.",
                 "Photon distances and sky axes are explicit; this worker does not infer a cosmology.",
+                "Raw multiple-image evaluation profiles two source coordinates per family and returns no finite aggregate score when predicted topology is incomplete.",
             ],
         }
         result_sha = canonical_sha256(scientific_core)
@@ -299,8 +330,17 @@ def execute_observation_evaluation_job(
             artifact_names.append("observation_predictions.csv")
         if "line_of_sight_velocity_field" in target_kinds:
             artifact_names.append("observation_velocity_field_predictions.csv")
+        if "multiple_image_systems" in target_kinds:
+            artifact_names.extend(
+                [
+                    "observation_multiple_image_predictions.csv",
+                    "observation_multiple_image_families.csv",
+                ]
+            )
         if observation_maps:
             artifact_names.append("observation_photon_lensing_maps.npz")
+        if observation_roots:
+            artifact_names.append("observation_multiple_image_roots.npz")
         artifact_index = {
             "schemaVersion": "sigma-observation-evaluation-artifact-index/1",
             "jobId": evaluation_job["id"],

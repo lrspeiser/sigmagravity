@@ -177,7 +177,19 @@ async function successfulObservationRunner({ jobDirectory }) {
   const observationTargets = requestEnvelope.request.observationTargets ?? [];
   const targetKinds = [...new Set(observationTargets.map((target) => target.kind))].sort();
   const photonScored = targetKinds.includes("photon_lensing_map");
-  const channelAggregates = photonScored
+  const rawImageScored = targetKinds.includes("multiple_image_systems");
+  const nonVelocityScored = photonScored || rawImageScored;
+  const channelAggregates = rawImageScored
+    ? {
+      image_position_arcsec: {
+        channel: "image_position_arcsec", unit: "arcsec", scoredTargetCount: 1, validPoints: 4,
+        fittedNuisanceParameters: 2, sumSquaredResidual: 0.04,
+        rmse: 0.1, inverseVarianceWeightedSquaredResidual: 4,
+        inverseVarianceWeightSum: 400, inverseVarianceWeightedRmse: 0.1,
+        chiSquare: 4, degreesFreedom: 2, reducedChiSquare: 2, gaussianLogLikelihood: 4,
+      },
+    }
+    : photonScored
     ? {
       deflection_arcsec: {
         channel: "deflection_arcsec", unit: "arcsec", scoredTargetCount: 1, validPoints: 4,
@@ -208,18 +220,18 @@ async function successfulObservationRunner({ jobDirectory }) {
     targetKinds,
     targetCount: observationTargets.length,
     scoredTargetCount: observationTargets.length,
-    totalPoints: photonScored ? 8 : 1,
-    validScoredPoints: photonScored ? 8 : 1,
+    totalPoints: photonScored ? 8 : rawImageScored ? 4 : 1,
+    validScoredPoints: photonScored ? 8 : rawImageScored ? 4 : 1,
     channelAggregates,
-    sumSquaredResidualM2PerS2: photonScored ? null : 4,
-    rmseMPerS: photonScored ? null : 2,
-    inverseVarianceWeightedSquaredResidual: photonScored ? null : 1,
-    inverseVarianceWeightSum: photonScored ? null : 0.25,
-    inverseVarianceWeightedRmseMPerS: photonScored ? null : 2,
-    chiSquare: photonScored ? null : 1,
-    degreesFreedom: photonScored ? null : 1,
-    reducedChiSquare: photonScored ? null : 1,
-    targets: [],
+    sumSquaredResidualM2PerS2: nonVelocityScored ? null : 4,
+    rmseMPerS: nonVelocityScored ? null : 2,
+    inverseVarianceWeightedSquaredResidual: nonVelocityScored ? null : 1,
+    inverseVarianceWeightSum: nonVelocityScored ? null : 0.25,
+    inverseVarianceWeightedRmseMPerS: nonVelocityScored ? null : 2,
+    chiSquare: nonVelocityScored ? null : 1,
+    degreesFreedom: nonVelocityScored ? null : 1,
+    reducedChiSquare: nonVelocityScored ? null : 1,
+    targets: rawImageScored ? [{ state: "scored" }] : [],
   };
   const scientificCore = {
     schemaVersion: "sigma-observation-evaluation-result/1",
@@ -248,6 +260,18 @@ async function successfulObservationRunner({ jobDirectory }) {
   }
   const photonMapContent = Buffer.from("deterministic-photon-map-fixture");
   if (photonScored) await writeFile(resolve(root, "observation_photon_lensing_maps.npz"), photonMapContent);
+  const rawPredictionContent = Buffer.from(
+    "target_id,family_id,family_index,image_index,assignment_state,observed_east_arcsec,observed_north_arcsec,position_uncertainty_arcsec,predicted_root_index,predicted_east_arcsec,predicted_north_arcsec,residual_east_arcsec,residual_north_arcsec,separation_arcsec,root_closure_arcsec,root_absolute_magnification\nraw,source-a,0,0,matched,-1,0,0.05,0,-0.9,0,0.1,0,0.1,0.00001,2\n",
+  );
+  const rawFamilyContent = Buffer.from(
+    "target_id,family_id,family_index,distance_ratio,profiled_source_east_arcsec,profiled_source_north_arcsec,observed_images,predicted_roots,matched_images,complete_observed_assignment,excess_predicted_roots,critical_curve_points,state,image_plane_rms_arcsec,matched_subset_diagnostic_rms_arcsec,chi_square,degrees_freedom,fitted_observation_nuisance_parameters,gravity_parameters_added\nraw,source-a,0,0.7,0.2,0,2,2,2,True,0,0,scored,0.1,,4,2,2,0\n",
+  );
+  const rawRootContent = Buffer.from("deterministic-raw-root-fixture");
+  if (rawImageScored) {
+    await writeFile(resolve(root, "observation_multiple_image_predictions.csv"), rawPredictionContent);
+    await writeFile(resolve(root, "observation_multiple_image_families.csv"), rawFamilyContent);
+    await writeFile(resolve(root, "observation_multiple_image_roots.npz"), rawRootContent);
+  }
   const artifactRecords = [
     { path: "scientific_result.json", bytes: scientificContent.length, sha256: digest(scientificContent) },
     { path: "observation_scores.json", bytes: scoreContent.length, sha256: digest(scoreContent) },
@@ -272,6 +296,13 @@ async function successfulObservationRunner({ jobDirectory }) {
       bytes: photonMapContent.length,
       sha256: digest(photonMapContent),
     });
+  }
+  if (rawImageScored) {
+    for (const [path, content] of [
+      ["observation_multiple_image_predictions.csv", rawPredictionContent],
+      ["observation_multiple_image_families.csv", rawFamilyContent],
+      ["observation_multiple_image_roots.npz", rawRootContent],
+    ]) artifactRecords.push({ path, bytes: content.length, sha256: digest(content) });
   }
   const artifactIndex = {
     schemaVersion: "sigma-observation-evaluation-artifact-index/1",
@@ -362,7 +393,8 @@ test("one fixed model produces deterministic multi-system batch reports", async 
     response.items.map((item) => item.path).sort(),
     [
       "aggregate_scores.json", "batch.json", "child_jobs.json", "failures.csv",
-      "llm_briefing.md", "model.json", "observation_predictions.csv",
+      "llm_briefing.md", "model.json", "observation_multiple_image_families.csv",
+      "observation_multiple_image_predictions.csv", "observation_predictions.csv",
       "observation_velocity_field_predictions.csv", "per_galaxy.csv", "report.html",
       "reproduction_command.txt",
     ],
@@ -542,6 +574,64 @@ test("batch retains photon deflection and reduced-shear channels without a veloc
   const report = (await batchService.getArtifact(submission.id, "report.html")).content.toString("utf8");
   assert.match(report, /photon_lensing_map/);
   assert.match(report, /Deflection RMSE \(arcsec\)/);
+});
+
+test("batch retains raw image-position scores and family topology artifacts", async (t) => {
+  const { fieldService, batchService } = await fixture(t);
+  const fieldUpload = await upload(fieldService, "RAW-IMAGE-FIELD", photonBundle("RAW-IMAGE-FIELD"));
+  const rawTarget = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "CLUSTER-RAW-IMAGES",
+    kind: "multiple_image_systems",
+    observable: "gradient",
+    northAxis: 0,
+    eastAxis: 1,
+    lineOfSightAxis: 2,
+    lensAngularDiameterDistanceM: 1.0e3,
+    skyCenterM: [0, 0, 0],
+    rootSearchBoundArcsec: 10,
+    families: [{
+      id: "source-a",
+      distanceRatio: 0.7,
+      observedImagesArcsec: [[-1, 0], [1, 0]],
+      positionUncertaintiesArcsec: [0.05, 0.05],
+    }],
+    provenance: { kind: "raw multiple-image batch fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const submission = await batchService.createBatch({
+    schemaVersion: "sigma-batch-submit/1",
+    model: photonModel(),
+    systems: [{
+      id: "CLUSTER-RAW",
+      dataUploadId: fieldUpload.id,
+      observationTargets: [rawTarget],
+    }],
+    fieldRequest: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["gradient"] },
+    parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
+  });
+  await fieldService.waitForIdle();
+  await batchService.waitForIdle();
+  const aggregate = JSON.parse((await batchService.getArtifact(
+    submission.id,
+    "aggregate_scores.json",
+  )).content.toString("utf8"));
+  assert.equal(aggregate.observationRmseMPerS, null);
+  assert.equal(aggregate.observationChannelAggregates.image_position_arcsec.rmse, 0.1);
+  assert.equal(aggregate.observationChannelAggregates.image_position_arcsec.fittedNuisanceParameters, 2);
+  const predictions = (await batchService.getArtifact(
+    submission.id,
+    "observation_multiple_image_predictions.csv",
+  )).content.toString("utf8");
+  assert.match(predictions, /CLUSTER-RAW,raw,source-a,0,0,matched/);
+  const families = (await batchService.getArtifact(
+    submission.id,
+    "observation_multiple_image_families.csv",
+  )).content.toString("utf8");
+  assert.match(families, /CLUSTER-RAW,raw,source-a,0,0.7/);
+  const report = (await batchService.getArtifact(submission.id, "report.html")).content.toString("utf8");
+  assert.match(report, /multiple_image_systems/);
+  assert.match(report, /Image-position coordinate RMSE \(arcsec\)/);
 });
 
 test("changed observation data reuses the field child and changes only the observation child", async (t) => {

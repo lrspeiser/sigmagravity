@@ -321,3 +321,49 @@ test("photon preflight rejects massive-only observables and incomplete map tripl
   request.request.observationTargets[0].observedAlphaEastArcsecArrayKey = "only-east";
   assert.throws(() => prepareFieldJob(request), /both observed component maps/);
 });
+
+test("raw multiple-image preflight counts source nuisances separately", () => {
+  const request = payload();
+  request.model = structuredClone(twoPotentialModel);
+  request.request.requestedObservables = ["photon_lensing_acceleration"];
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "raw-image-families",
+    kind: "multiple_image_systems",
+    observable: "photon_lensing_acceleration",
+    northAxis: 0,
+    eastAxis: 1,
+    lineOfSightAxis: 2,
+    lensAngularDiameterDistanceM: 3.0e25,
+    skyCenterM: [0, 0, 0],
+    rootSearchBoundArcsec: 40,
+    rootGridPoints: 161,
+    families: [
+      {
+        id: "source-a",
+        distanceRatio: 0.72,
+        observedImagesArcsec: [[-8, 2], [11, 3]],
+        positionUncertaintiesArcsec: [0.05, 0.05],
+      },
+      {
+        id: "source-b",
+        distanceRatio: 0.64,
+        observedImagesArcsec: [[-5, -4], [6, -3], [1, 8]],
+        positionUncertaintiesArcsec: [0.08, 0.08, 0.08],
+      },
+    ],
+    provenance: { kind: "synthetic root fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  const result = prepareFieldJob(request);
+  assert.equal(result.observationTargets[0].kind, "multiple_image_systems");
+  assert.equal(result.observationTargets[0].scored, true);
+  assert.equal(result.observationTargets[0].pointCount, 10);
+  assert.equal(result.observationTargets[0].fittedNuisanceParameters, 4);
+
+  request.request.observationTargets[0].fittedNuisanceParameters = 2;
+  assert.throws(() => prepareFieldJob(request), /two source coordinates per family/);
+  delete request.request.observationTargets[0].fittedNuisanceParameters;
+  request.request.observationTargets[0].families[0].positionUncertaintiesArcsec = [0.05];
+  assert.throws(() => prepareFieldJob(request), /must contain 2 values/);
+});

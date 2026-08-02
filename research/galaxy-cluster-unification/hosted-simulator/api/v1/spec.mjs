@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.9.0-preview",
-    description: "Stateless radial tests plus a dimension-checked, formula-independent 2D/3D contract, separately typed massive-tracer and photon-lensing targets, cached observation evaluation, and composed field/observation batches. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
+    version: "0.10.0-preview",
+    description: "Stateless radial tests plus a dimension-checked, formula-independent 2D/3D contract, separately typed massive-tracer, photon-map, and raw multiple-image targets, cached observation evaluation, and composed field/observation batches. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },

@@ -1,0 +1,134 @@
+{
+  "stage": "P0735",
+  "status": "pass",
+  "configSha256": "5b9fa69d9fb872ab483ee1b3f80fdf7d8d66b6c2ddeade2dc0c72a951b66747f",
+  "gateResults": {
+    "sisProfiledSource": true,
+    "sisImagePlaneRms": true,
+    "sisRootClosure": true,
+    "sisMatchedMultiplicity": true,
+    "incompleteTopologyHasNoAggregateScore": true,
+    "noPerObjectGravityParameters": true,
+    "catalogCoordinatesRoundTrip": true,
+    "catalogUncertaintiesNotInvented": true,
+    "pythonAcceptance": true,
+    "hostedAcceptance": true,
+    "staticBuild": true
+  },
+  "failedGates": [],
+  "syntheticAcceptance": {
+    "profiledSourceArcsec": [
+      0.19999999999999996,
+      0.0
+    ],
+    "profiledSourceAbsoluteErrorArcsec": 5.551115123125783e-17,
+    "observedImages": 2,
+    "predictedRoots": 3,
+    "matchedImages": 2,
+    "matchedMultiplicityFraction": 1.0,
+    "imagePlaneRmsArcsec": 0.0,
+    "maximumRootClosureArcsec": 5.551115123125783e-17,
+    "rootCoordinatesArcsec": [
+      [
+        -0.8,
+        0.0
+      ],
+      [
+        -0.01052631578947366,
+        -1.0652777664104543e-25
+      ],
+      [
+        1.2,
+        0.0
+      ]
+    ],
+    "excessRootsDisclosed": 1,
+    "predictionRows": 2,
+    "fittedObservationNuisanceParameters": 2,
+    "gravityParametersAdded": 0,
+    "incompleteFixture": {
+      "state": "incomplete_topology",
+      "aggregateRmseArcsec": null,
+      "chiSquare": null
+    }
+  },
+  "catalogImportAudit": {
+    "clusters": {
+      "AS295": {
+        "secureImages": 18,
+        "secureFamilies": 6,
+        "familyIds": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "coordinateOrder": [
+          "east_arcsec",
+          "north_arcsec"
+        ]
+      },
+      "PLCKG287": {
+        "secureImages": 47,
+        "secureFamilies": 12,
+        "familyIds": [
+          "1",
+          "2",
+          "36",
+          "37",
+          "39",
+          "40",
+          "41",
+          "49",
+          "5",
+          "6",
+          "7",
+          "8"
+        ],
+        "coordinateOrder": [
+          "east_arcsec",
+          "north_arcsec"
+        ]
+      }
+    },
+    "secureImages": 65,
+    "secureFamilies": 18,
+    "coordinateRoundTripMaximumArcsec": 0.0,
+    "publishedPositionUncertaintyColumns": [],
+    "targetSerializationState": "blocked_missing_published_position_uncertainties",
+    "inventedUncertainties": false,
+    "interpretation": "The 65 secure coordinates and 18 family memberships round-trip exactly. The P0713/P0714 catalog does not publish per-image positional uncertainties, so P0735 refuses to invent them and does not label this import score-ready."
+  },
+  "executionAcceptance": {
+    "pythonTestCount": 20,
+    "hostedTestCount": 70,
+    "integratedAndDecoupledArtifactsByteIdentical": true,
+    "axisPermutationCovered": true,
+    "multipleDistanceRatiosCovered": true,
+    "batchImagePositionChannelCovered": true
+  },
+  "sourceSha256": {
+    "src/voidscreen/multiple_image_adapter.py": "3f5aea4e1baa63e6638ba7e396c5eedf6b922b75405c9b1d717954b3995d260b",
+    "src/voidscreen/observation_adapters.py": "b661798636769f1d19c461783a3401499e4ba0ed8c53dff1368ed1a81b29242f",
+    "src/voidscreen/field_job.py": "cb0422cf55fdf5e8d0d2ac4e6d42bc0a48c4b0f2cfdf0ac6c11348f125de02ce",
+    "src/voidscreen/observation_evaluation_job.py": "5a4c3f0e12280a7d9feb91cbb847c7732b84680988de877cfd3a76ab1e4638b1",
+    "src/voidscreen/photon_lensing_adapter.py": "6e9a183fd64686e4bd4d15a30f771734c479d7ecc6c9dc606cac30bebd2a0378",
+    "src/voidscreen/sky_lensing.py": "66d019735e4f028acb42b591e2902da88a659baba53d7ce4b93dab38b500884b",
+    "hosted-simulator/lib/observation-target.mjs": "28cda66c5377ba33f5e434bb07bd156b89891f93c891b90ec6856923b23736d1",
+    "hosted-simulator/lib/local-batch-service.mjs": "f86bcf767c0395b72f38e4528f24a845b0b5a04f7a778c6ca89b556681aab294",
+    "hosted-simulator/schemas/observation-target-v1.schema.json": "c6408ab7d43c971a16fcdee4f6231c9f9de2f330646c0274bf5c6ec39fd10a64",
+    "tests/test_multiple_image_adapter.py": "6486ffe58125d5228c1472ddba53b6eb108901568be2e96dccebd24f414f8a62",
+    "tests/test_observation_evaluation_job.py": "b87b46cacebaf487976b600169cb9ed92e5b10886224e132333f6fa6e3c4956e",
+    "scripts/run_p0735_raw_multiple_image_adapter.py": "2a70771a6d7fea5768adfe17d70158d8bbd7db54329c99a28693848e678cadcb"
+  },
+  "claimBoundary": [
+    "P0735 evaluates raw image-plane positions against a submitted photon field; it does not validate the equation that generated the field.",
+    "Profiling a source position is an explicitly counted observational nuisance operation, not a gravity parameter fit.",
+    "A complete synthetic root recovery validates numerical conformance only; it is not evidence that a baryon-only model explains a real cluster.",
+    "Published image coordinates, family membership, redshift-to-distance ratios, uncertainties, and selection rules require independent provenance.",
+    "Critical curves are diagnostic unless independent parity or arc-orientation data make them observables.",
+    "Time delays, flux ratios, microlensing, line-of-sight structure, and cosmological inference remain outside P0735."
+  ]
+}

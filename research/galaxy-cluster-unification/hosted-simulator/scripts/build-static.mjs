@@ -29,6 +29,7 @@ for (const path of [
   "examples/models/two-potential.json",
   "examples/observation-targets/line-of-sight-velocity-field.json",
   "examples/observation-targets/photon-lensing-map.json",
+  "examples/observation-targets/multiple-image-systems.json",
 ]) {
   await copyFile(resolve(root, path), resolve(dist, path));
 }
