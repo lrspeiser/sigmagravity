@@ -1,0 +1,443 @@
+{
+  "manifest_version": "P0709-EXTERNAL-UNLOCK-MANIFEST-RESULT-1.0.0",
+  "status": "authorized_for_exactly_one_external_parse",
+  "protocol_sha256": "89fb2e65e75bb41be6321524b72576453eb85d7b7a987a39786419938fdc596a",
+  "source_sha256": "cedbe056e9b5f71e652cb51c858fc2723aad5d630d9a9e1dab95cf92a6b8b6f7",
+  "unlock_protocol_commit": "951020dddb6a78a6509ec2f76848f32c86ec89c1",
+  "candidate_lock_commit": "857feeb85af3b94f3c486c72db00c8f486318d6b",
+  "preregistration_sha256": "ea5e1db7d11e8b055c273ec4e1baf002f70e0e51fde12770de9477cdc08f72cc",
+  "candidate_lock_config_sha256": "621614c082756df069e2611b68e35f00dd04c95e891dc78145e5356b4327e316",
+  "candidate_lock_report_sha256": "62f0c6f8668b24af7f34fe7ebbdd58e33df9de027f7894607f52e5ae4ef5ca61",
+  "prediction_manifest_sha256": "f9ca26b7df3706049ff403146a9f0ebe6d31468ba900aec97ccc9e9c3bead696",
+  "universal_parameter_sha256": "bf3f12d6b32ee3f1b0e3bf48a9603c4aafbcd34b2cbdd3de021d689514099a15",
+  "prediction_systems": 17,
+  "prediction_hashes": [
+    {
+      "domain": "galaxy",
+      "system": "CVnIdwA",
+      "sha256": "5b575d21198bb681c3c1a1db040891ac00453cb5d216a61cf714dc873f306620"
+    },
+    {
+      "domain": "galaxy",
+      "system": "DDO47",
+      "sha256": "b68538964e83494d6735b4563ec78eb347019e868acb41632dec97aac8ff106b"
+    },
+    {
+      "domain": "galaxy",
+      "system": "DDO50",
+      "sha256": "7a11144b8cd486c08b1cc5029ea8fde5db430269a790c62be17b98efa9659a67"
+    },
+    {
+      "domain": "galaxy",
+      "system": "DDO52",
+      "sha256": "bc1fa5d34136a730c49b013352e289f78f0bba358d99d2b2cf404d9b3c861ba7"
+    },
+    {
+      "domain": "galaxy",
+      "system": "DDO53",
+      "sha256": "7ace51d5232a7422090544681311a743fe3d250825cbc7a36b30bea44fd5fbc7"
+    },
+    {
+      "domain": "galaxy",
+      "system": "DDO87",
+      "sha256": "ac51e61f8bbb361455f675314a21bf9eedfaf811f754c1ac056f1782fbd534d8"
+    },
+    {
+      "domain": "galaxy",
+      "system": "DDO101",
+      "sha256": "b5e3104b9d47d82d7aa0e1454a7ca700e991901e3747d83f61a9c8336a330963"
+    },
+    {
+      "domain": "galaxy",
+      "system": "DDO126",
+      "sha256": "cc5edbd91e02d0be0098d7ac944bc2c227f4cbe20c89c5a3985e8d528688f254"
+    },
+    {
+      "domain": "galaxy",
+      "system": "DDO133",
+      "sha256": "ea977e3f5f86f13882bf316eafbb615d8b8eba99f816b9760b17b1891316b184"
+    },
+    {
+      "domain": "galaxy",
+      "system": "DDO210",
+      "sha256": "b28da27ca5cd716e23a6e4844491de97eaf4042cae8573eaa1f0fb7b3c3eab0e"
+    },
+    {
+      "domain": "galaxy",
+      "system": "DDO216",
+      "sha256": "2bfb62b034cfb03d62edcf976e4800c9da7b3cc1db79cb703299ffe5000597c1"
+    },
+    {
+      "domain": "galaxy",
+      "system": "NGC1569",
+      "sha256": "5bf1f65e52ec398b244deb98c75c4ecc3254a26b0e72bec4987d2f2604413a06"
+    },
+    {
+      "domain": "galaxy",
+      "system": "UGC8508",
+      "sha256": "02f7893399d24ba364b69e0cb8c6d584e8fd6afe41e46276796c71a0c9899cea"
+    },
+    {
+      "domain": "cluster",
+      "system": "AS295",
+      "sha256": "85353d8090d4d67b7ec01240621040b78ebbb9d04abd9d7fc16dcccf61284ea4"
+    },
+    {
+      "domain": "cluster",
+      "system": "MACS0025",
+      "sha256": "012711c56a10e343f99e4d397ed8867e24e29b3e6fa805fd9b799d75a4f05d07"
+    },
+    {
+      "domain": "cluster",
+      "system": "MACS0159",
+      "sha256": "df2d112b46a5aa40dde9f646130881e1e9965ac1ce9efcd065e58840a844250f"
+    },
+    {
+      "domain": "cluster",
+      "system": "PLCKG287",
+      "sha256": "4a702416dfa88a872b40412e341da0eb60211218cf046189765de003d4329760"
+    }
+  ],
+  "sealed_constraint_containers": [
+    {
+      "id": "cibirka2018_three_cluster_source",
+      "path": "data/sealed/p0633_relics_lensing/cibirka2018_arxiv_1803.09557_source.tar.gz",
+      "bytes": 4586420,
+      "sha256": "6fef39aa25e0ae897c292e6051c86f8f6397ed75de8ed4aa979aab175c443caf"
+    },
+    {
+      "id": "daddona2024_plckg287_multiple_images",
+      "path": "data/sealed/p0633_relics_lensing/daddona2024_tablec1_multiple_images.dat",
+      "bytes": 13320,
+      "sha256": "661913e6d7c4d6c925cd7c7608ad00727763f93d3297e9d4829174a7e47e6389"
+    }
+  ],
+  "galaxy_moment_products": [
+    {
+      "system": "CVnIdwA",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/cvnidwa/HI/CVnIdwA_R_XMOM1.FITS",
+      "filename": "CVnIdwA_R_XMOM1.FITS",
+      "expected_bytes": 1203840
+    },
+    {
+      "system": "CVnIdwA",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/cvnidwa/HI/CVnIdwA_R_XMOM2.FITS",
+      "filename": "CVnIdwA_R_XMOM2.FITS",
+      "expected_bytes": 1203840
+    },
+    {
+      "system": "DDO47",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo47/HI/DDO47_NA_XMOM1.FITS",
+      "filename": "DDO47_NA_XMOM1.FITS",
+      "expected_bytes": 4285440
+    },
+    {
+      "system": "DDO47",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo47/HI/DDO47_NA_XMOM2.FITS",
+      "filename": "DDO47_NA_XMOM2.FITS",
+      "expected_bytes": 4285440
+    },
+    {
+      "system": "DDO50",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo50/HI/DDO50_NA_XMOM1.FITS",
+      "filename": "DDO50_NA_XMOM1.FITS",
+      "expected_bytes": 16827840
+    },
+    {
+      "system": "DDO50",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo50/HI/DDO50_NA_XMOM2.FITS",
+      "filename": "DDO50_NA_XMOM2.FITS",
+      "expected_bytes": 16827840
+    },
+    {
+      "system": "DDO52",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo52/HI/DDO52_NA_XMOM1.FITS",
+      "filename": "DDO52_NA_XMOM1.FITS",
+      "expected_bytes": 4366080
+    },
+    {
+      "system": "DDO52",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo52/HI/DDO52_NA_XMOM2.FITS",
+      "filename": "DDO52_NA_XMOM2.FITS",
+      "expected_bytes": 4366080
+    },
+    {
+      "system": "DDO53",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo53/HI/DDO53_R_XMOM1.FITS",
+      "filename": "DDO53_R_XMOM1.FITS",
+      "expected_bytes": 4242240
+    },
+    {
+      "system": "DDO53",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo53/HI/DDO53_R_XMOM2.FITS",
+      "filename": "DDO53_R_XMOM2.FITS",
+      "expected_bytes": 4242240
+    },
+    {
+      "system": "DDO87",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo87/HI/DDO87_NA_XMOM1.FITS",
+      "filename": "DDO87_NA_XMOM1.FITS",
+      "expected_bytes": 4345920
+    },
+    {
+      "system": "DDO87",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo87/HI/DDO87_NA_XMOM2.FITS",
+      "filename": "DDO87_NA_XMOM2.FITS",
+      "expected_bytes": 4345920
+    },
+    {
+      "system": "DDO101",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo101/HI/DDO101_R_XMOM1.FITS",
+      "filename": "DDO101_R_XMOM1.FITS",
+      "expected_bytes": 4380480
+    },
+    {
+      "system": "DDO101",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo101/HI/DDO101_R_XMOM2.FITS",
+      "filename": "DDO101_R_XMOM2.FITS",
+      "expected_bytes": 4380480
+    },
+    {
+      "system": "DDO126",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo126/HI/DDO126_NA_XMOM1.FITS",
+      "filename": "DDO126_NA_XMOM1.FITS",
+      "expected_bytes": 4386240
+    },
+    {
+      "system": "DDO126",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo126/HI/DDO126_NA_XMOM2.FITS",
+      "filename": "DDO126_NA_XMOM2.FITS",
+      "expected_bytes": 4386240
+    },
+    {
+      "system": "DDO133",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo133/HI/DDO133_R_XMOM1.FITS",
+      "filename": "DDO133_R_XMOM1.FITS",
+      "expected_bytes": 4374720
+    },
+    {
+      "system": "DDO133",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo133/HI/DDO133_R_XMOM2.FITS",
+      "filename": "DDO133_R_XMOM2.FITS",
+      "expected_bytes": 4374720
+    },
+    {
+      "system": "DDO210",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo210/HI/DDO210_NA_XMOM1.FITS",
+      "filename": "DDO210_NA_XMOM1.FITS",
+      "expected_bytes": 4345920
+    },
+    {
+      "system": "DDO210",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo210/HI/DDO210_NA_XMOM2.FITS",
+      "filename": "DDO210_NA_XMOM2.FITS",
+      "expected_bytes": 4345920
+    },
+    {
+      "system": "DDO216",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo216/HI/DDO216_R_XMOM1.FITS",
+      "filename": "DDO216_R_XMOM1.FITS",
+      "expected_bytes": 1108800
+    },
+    {
+      "system": "DDO216",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ddo216/HI/DDO216_R_XMOM2.FITS",
+      "filename": "DDO216_R_XMOM2.FITS",
+      "expected_bytes": 1108800
+    },
+    {
+      "system": "NGC1569",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ngc1569/HI/NGC1569_NA_XMOM1.FITS",
+      "filename": "NGC1569_NA_XMOM1.FITS",
+      "expected_bytes": 16824960
+    },
+    {
+      "system": "NGC1569",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ngc1569/HI/NGC1569_NA_XMOM2.FITS",
+      "filename": "NGC1569_NA_XMOM2.FITS",
+      "expected_bytes": 16824960
+    },
+    {
+      "system": "UGC8508",
+      "product": "XMOM1",
+      "url": "https://things.cv.nrao.edu/littlethings/ugc8508/HI/UGC8508_NA_XMOM1.FITS",
+      "filename": "UGC8508_NA_XMOM1.FITS",
+      "expected_bytes": 4386240
+    },
+    {
+      "system": "UGC8508",
+      "product": "XMOM2",
+      "url": "https://things.cv.nrao.edu/littlethings/ugc8508/HI/UGC8508_NA_XMOM2.FITS",
+      "filename": "UGC8508_NA_XMOM2.FITS",
+      "expected_bytes": 4386240
+    }
+  ],
+  "published_circular_speed_source": {
+    "url": "https://export.arxiv.org/e-print/1611.03865",
+    "filename": "iorio2017_arxiv_1611.03865_source.tar.gz",
+    "expected_bytes": 8528077,
+    "role": "published 3DBarolo circular speeds, dispersions, uncertainties, systemic velocities, and ring radii",
+    "handling": "download_and_parse_only_after_unlock_manifest_commit_is_pushed"
+  },
+  "compact_halo_comparator": {
+    "primary_method": "glafic",
+    "primary_version": "v2",
+    "sensitivity_method": "zitrin-ltm-gauss",
+    "sensitivity_versions": {
+      "AS295": "v2",
+      "MACS0025": "v1",
+      "MACS0159": "v1",
+      "PLCKG287": "v1"
+    },
+    "products": [
+      "kappa",
+      "x-arcsec-deflect",
+      "y-arcsec-deflect"
+    ],
+    "base_url_template": "https://archive.stsci.edu/hlsps/relics/{slug}/models/{method}/{version_path}",
+    "filename_template": "hlsp_relics_model_model_{slug}_{method}_{version}_{product}.fits",
+    "systems": [
+      {
+        "id": "AS295",
+        "slug": "abells295"
+      },
+      {
+        "id": "MACS0025",
+        "slug": "macs0025m12"
+      },
+      {
+        "id": "MACS0159",
+        "slug": "macs0159m08"
+      },
+      {
+        "id": "PLCKG287",
+        "slug": "plckg287p32"
+      }
+    ],
+    "version_path_rule": "glafic v2 and AS295 zitrin v2 live under v2/; the other zitrin v1 products live directly in their method directory",
+    "selection_rule": "Use glafic v2 as the sole primary compact-halo comparator for every cluster; use the latest already identified zitrin-ltm-gauss release only as a sensitivity analysis. Never choose a method per cluster from its score."
+  },
+  "morphology_median_splits": {
+    "concentration_5log_r80_r20": 2.0386889335186393,
+    "lopsidedness_180": 0.24498363836813772,
+    "clumpiness_positive_highpass": 0.07033250630726229,
+    "inclination_deg": 61.10307268065723
+  },
+  "family_split": {
+    "salt": "P0633-RAW-LENS-FAMILY-V1",
+    "method": "Sort secure family IDs by SHA-256(salt|cluster_id|family_id); allocate the first ceiling(0.30*N) families to holdout and all remaining families to source-position fitting.",
+    "minimum_holdout_families": 1,
+    "family_integrity": "Every image from a family stays in the same partition."
+  },
+  "rejection_thresholds": {
+    "prerequisite": "Every field-solver acceptance gate must pass before a candidate can be evaluated on P0633 targets.",
+    "galaxy": {
+      "equal_galaxy_RMSE_ratio_to_best_frozen_MOND_max": 1.05,
+      "velocity_field_RMSE_ratio_to_best_frozen_MOND_max": 1.05,
+      "maximum_morphology_bin_RMSE_ratio_to_best_frozen_MOND": 1.25,
+      "minimum_valid_galaxies": 11,
+      "no_target_refit": true
+    },
+    "cluster": {
+      "minimum_ready_clusters": 4,
+      "heldout_root_convergence_fraction_min": 1.0,
+      "heldout_image_RMS_ratio_to_compact_halo_max": 1.25,
+      "minimum_fraction_of_baryon_to_halo_RMS_gap_closed": 0.75,
+      "critical_curve_distance_ratio_to_compact_halo_max": 1.25,
+      "all_heldout_family_topologies_correct": true,
+      "maximum_per_cluster_degradation_vs_baryon_only_fraction": 0.05
+    },
+    "solar_system": {
+      "absolute_PPN_gamma_minus_one_max": 2.3e-05,
+      "absolute_extra_Mercury_precession_mas_per_century_max": 3.1,
+      "metric_PPN_quantities_must_be_derived_not_assumed": true
+    },
+    "overall": "All prerequisite, galaxy, cluster, topology, universality, and Solar-System gates must pass independently; cross-domain averaging cannot rescue a failed gate."
+  },
+  "frozen_scoring": {
+    "galaxy_circular_speed": {
+      "interpolation": "linear prediction interpolation at every published ring radius inside the frozen prediction support",
+      "per_galaxy": "sqrt(mean((V_prediction - Vc_published)^2))",
+      "sample": "sqrt(mean(per_galaxy_RMSE^2)) with every valid galaxy receiving equal weight",
+      "uncertainty_diagnostic": "also report inverse-variance RMSE, but do not use it for the primary gate",
+      "systemic_velocity": "use the published 3DBarolo systemic velocity as measured redshift metadata; never refit it to a gravity model"
+    },
+    "galaxy_velocity_field": {
+      "projection": "sample each already locked intrinsic P0708 LOS field at sky pixels using the frozen photometric center, PA, and inclination",
+      "beam": "intensity-weighted Gaussian beam convolution using the target FITS BMAJ and BMIN; no beam parameter is fit",
+      "mask": "finite moment-0, moment-1, and moment-2 pixels with positive moment-0 inside the registered HI support",
+      "weight": "moment0 / max(moment2^2 + (channel_width/2.355)^2, tiny), normalized to unit sum per galaxy",
+      "per_galaxy": "sqrt(sum(normalized_weight * residual^2))",
+      "sample": "sqrt(mean(per_galaxy_RMSE^2))",
+      "no_kinematic_refit": true
+    },
+    "morphology": {
+      "coordinates": [
+        "concentration_5log_r80_r20",
+        "lopsidedness_180",
+        "clumpiness_positive_highpass",
+        "inclination_deg"
+      ],
+      "bins": "two pre-outcome bins per coordinate, split at the median of the 13 open baryonic-map values; the exact medians are written into the unlock manifest",
+      "score": "equal-galaxy circular-speed RMSE in each bin"
+    },
+    "cluster": {
+      "cosmology": "astropy.cosmology.Planck18",
+      "family_split": "exact P0633 SHA-256 salted whole-family split",
+      "source_nuisance": "one mean source-plane position per family, computed identically for all models; no lens parameter is optimized",
+      "heldout_rule": "all selected families were untouched during candidate development; the deterministic family label marks the preregistered 30 percent reporting subset but source position remains an ordinary same-family nuisance",
+      "image_score": "global image-plane root RMS after one-to-one minimum-cost assignment between observed images and converged roots within the frozen search field",
+      "topology": "exact observed family multiplicity after excluding roots fainter than the compact-halo comparator's faintest matched image for that family; report the threshold dependence",
+      "critical_curve": "derive each model's critical curves from its fixed Jacobian; report distances to observed tangential-image loci and pairwise curve distances. If the catalog lacks arc orientation/parity, label the critical-curve gate not independently observable rather than silently substituting a lens-model map as data.",
+      "compact_halo": "glafic v2 for every cluster, never selected per cluster",
+      "forbidden": [
+        "center refit",
+        "external shear",
+        "ellipticity",
+        "rotation",
+        "mass sheet",
+        "radial rescaling",
+        "per-cluster gravity parameter"
+      ]
+    },
+    "comparators": {
+      "galaxy_best_frozen_MOND": "minimum sample score of the already locked AQUAL and QUMOND predictions; no target refit",
+      "cluster_baryon_only": "already locked P0708 baryon-only GR deflection",
+      "cluster_compact_halo": "frozen glafic v2 archive product"
+    }
+  },
+  "authorization": {
+    "external_evaluations_authorized": 1,
+    "formula_changes_after_unlock_are_validation": false,
+    "per_object_gravity_parameters": 0,
+    "per_object_slip_parameters": 0,
+    "per_object_photon_parameters": 0,
+    "outcomes_opened_when_protocol_frozen": false
+  },
+  "outcomes_opened_at_manifest_creation": false,
+  "formula_change_after_this_manifest_invalidates_P0633_validation": true
+}
