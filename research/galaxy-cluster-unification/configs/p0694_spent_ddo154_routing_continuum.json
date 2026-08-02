@@ -1,0 +1,93 @@
+{
+  "protocol_version": "P0694-SPENT-DDO154-ROUTING-CONTINUUM-1.0.0",
+  "status": "frozen_before_any_P0694_intermediate_fraction_field_or_rotation_score",
+  "frozen_utc": "2026-08-02T17:00:00Z",
+  "purpose": "Determine, without selecting or promoting a fraction, whether any linear mixture of the current local and routed source endpoints can make the spent real-map DDO154 field competitive with algebraic MOND.",
+  "evidence_class": "fully_spent_mechanism_diagnostic_only",
+  "failure_parent": "results/p0693_projected_spectral_routing_joint_screen/report.json",
+  "galaxy_parent": "results/p0635_ddo154_map_commissioning/report.json",
+  "galaxy_map_input": "results/p0635_ddo154_map_commissioning/baryonic_maps.npz",
+  "equation": {
+    "atlas_source": "S_f=(1-f)S_local+fS_route",
+    "local_source": "S_local=div[nu_0^p_local grad Phi_N]",
+    "fully_routed_source": "S_route=S_0+A_plus rho_b/integral(rho_b)dV-A_plus W_t/integral(W_t)dV",
+    "boundary": "fixed-RAR point-mass boundary shared by both endpoints",
+    "a0_km2_s2_per_kpc": 3702.813097,
+    "gravitational_constant_kpc_km2_s2_per_solar_mass": 4.30091e-6,
+    "light_speed_km_s": 299792.458,
+    "chi_t": 1e-6,
+    "transition_power_n": 4.0,
+    "extra_spatial_channels": 2.0,
+    "path_power_q": 0.5
+  },
+  "routing_fractions": [
+    0.0,
+    0.05,
+    0.08352413225178856,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1.0
+  ],
+  "registered_marker": {
+    "fraction": 0.08352413225178856,
+    "meaning": "P0693 projected spectral fraction; reproduction marker only"
+  },
+  "galaxy": {
+    "id": "DDO154",
+    "map": "registered lumpy gas plus stars",
+    "gas_scale_height_kpc": 0.15,
+    "stellar_scale_height_kpc": 0.30,
+    "rotation_comparator": "existing project-spent SPARC DDO154 curve",
+    "score_points": 12
+  },
+  "predeclared_integrity_gates": {
+    "P0693_status": "fail",
+    "P0693_candidate_advanced_to_robustness": false,
+    "P0635_status": "commissioned",
+    "P0635_velocity_products_downloaded": false,
+    "routing_fraction_min": 0.0,
+    "routing_fraction_max": 1.0,
+    "routing_fractions_unique": true,
+    "routing_fractions_strictly_increasing": true,
+    "gravity_parameters_selected_from_atlas": 0,
+    "sealed_target_outcomes_opened": false
+  },
+  "diagnostic_viability_gates": {
+    "mixed_source_linear_identity_relative_RMS_max": 1e-14,
+    "field_normalized_residual_RMS_max": 1e-10,
+    "boundary_maximum_relative_mismatch_max": 1e-14,
+    "all_sources_potentials_accelerations_finite": true,
+    "rotation_points": 12,
+    "candidate_RMSE_to_algebraic_MOND_ratio_max": 1.2,
+    "candidate_weighted_RMSE_to_algebraic_MOND_ratio_max": 1.2,
+    "candidate_RMSE_to_3D_QUMOND_ratio_max": 1.0,
+    "absolute_mean_bias_km_s_max": 3.0
+  },
+  "decision_rule": {
+    "promotion": "No atlas row may advance, be selected as a routing constant, or be described as validation.",
+    "retire_shared_linear_endpoint_pair": "yes if zero preregistered rows pass every diagnostic viability gate",
+    "if_any_row_is_viable": "report only a response interval that a future baryon-derived spatial law must predict; freeze that law jointly before any new score",
+    "if_no_row_is_viable": "retire linear mixtures of S_local and S_route as a galaxy-cluster unifier and replace the galaxy radial endpoint/operator",
+    "sealed_targets": "P0633 and P0640 remain sealed regardless of the atlas result"
+  },
+  "outputs": {
+    "directory": "results/p0694_spent_ddo154_routing_continuum",
+    "report": "report.json",
+    "atlas_table": "ddo154_routing_continuum.csv",
+    "curve_table": "ddo154_routing_continuum_curves.csv",
+    "figure": "ddo154_routing_continuum.png"
+  },
+  "claim_boundary": [
+    "DDO154 is fully spent development evidence.",
+    "A viable row would be post-hoc diagnostic evidence and cannot become a selected universal setting.",
+    "Finite sampling cannot mathematically exclude an arbitrarily narrow interval between rows.",
+    "No P0633 or P0640 outcome is opened."
+  ]
+}
