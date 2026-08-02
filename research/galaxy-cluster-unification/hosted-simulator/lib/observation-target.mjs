@@ -55,7 +55,13 @@ function observationArray(inputBundle, key, label, { unit, shape = null } = {}) 
   return record;
 }
 
-export function validateObservationTargets({ targets = [], model, inputBundle, requestedObservables }) {
+export function validateObservationTargets({
+  targets = [],
+  model,
+  inputBundle,
+  requestedObservables,
+  fieldShape = null,
+}) {
   if (!Array.isArray(targets) || targets.length > 32) throw new Error("observationTargets must contain at most 32 targets");
   const dimensions = model.geometry.dimensions;
   const definitions = new Map(model.observables.map((item) => [item.id, item]));
@@ -66,29 +72,77 @@ export function validateObservationTargets({ targets = [], model, inputBundle, r
     if (target.schemaVersion !== "sigma-observation-target/1") throw new Error("observation target must use sigma-observation-target/1");
     if (typeof target.id !== "string" || !target.id || seen.has(target.id)) throw new Error(`invalid or duplicate observation target id: ${target.id}`);
     seen.add(target.id);
-    if (!["circular_speed_curve", "line_of_sight_velocity_field"].includes(target.kind)) {
+    if (!["circular_speed_curve", "line_of_sight_velocity_field", "photon_lensing_map"].includes(target.kind)) {
       throw new Error(`unsupported observation target kind: ${target.kind}`);
     }
     const definition = definitions.get(target.observable);
     if (!definition) throw new Error(`observation target ${target.id} requires unknown observable ${target.observable}`);
     if (!requested.has(target.observable)) throw new Error(`observation target ${target.id} observable must be requested`);
-    if (definition.target !== "massive_tracers" || definition.rank !== "vector" || definition.unit !== "m/s^2") {
-      throw new Error(`observation target ${target.id} requires a massive_tracers vector in m/s^2`);
-    }
-    if (!["cartesian_2d", "cartesian_3d"].includes(model.geometry.coordinateSystem)) {
-      throw new Error(`${target.kind} supports Cartesian 2D or 3D models`);
-    }
-    finiteArray(target.centerM, dimensions, `observation target ${target.id} centerM`);
-    if (target.gridOriginM !== undefined) finiteArray(target.gridOriginM, dimensions, `observation target ${target.id} gridOriginM`);
-    else if (inputBundle.geometry?.origin !== undefined) finiteArray(inputBundle.geometry.origin, dimensions, "input bundle origin");
-    const planeAxes = target.planeAxes ?? [0, 1];
-    if (!Array.isArray(planeAxes) || planeAxes.length !== 2 || !planeAxes.every(Number.isInteger)
-      || new Set(planeAxes).size !== 2 || planeAxes.some((axis) => axis < 0 || axis >= dimensions)) {
-      throw new Error(`observation target ${target.id} planeAxes are invalid`);
-    }
     let pointCount;
     let scored;
-    if (target.kind === "circular_speed_curve") {
+    if (target.kind === "photon_lensing_map") {
+      if (!["photons", "both"].includes(definition.target) || definition.rank !== "vector" || definition.unit !== "m/s^2") {
+        throw new Error(`observation target ${target.id} requires a photons or both vector in m/s^2`);
+      }
+      if (model.geometry.coordinateSystem !== "cartesian_3d" || dimensions !== 3) {
+        throw new Error("photon_lensing_map requires a Cartesian 3D model");
+      }
+      const axes = [target.northAxis, target.eastAxis, target.lineOfSightAxis];
+      if (!axes.every(Number.isInteger) || new Set(axes).size !== 3 || axes.some((axis) => axis < 0 || axis > 2)) {
+        throw new Error("northAxis, eastAxis, and lineOfSightAxis must be a permutation of [0,1,2]");
+      }
+      const distanceRatio = Number(target.distanceRatio);
+      const lensDistance = Number(target.lensAngularDiameterDistanceM);
+      if (!Number.isFinite(distanceRatio) || distanceRatio <= 0) throw new Error("distanceRatio must be finite and positive");
+      if (!Number.isFinite(lensDistance) || lensDistance <= 0) throw new Error("lensAngularDiameterDistanceM must be finite and positive");
+      if (!Array.isArray(fieldShape) || fieldShape.length !== 3 || !fieldShape.every((value) => Number.isInteger(value) && value >= 3)) {
+        throw new Error("photon_lensing_map preflight requires the solved 3D field shape");
+      }
+      const projectedShape = [fieldShape[target.northAxis], fieldShape[target.eastAxis]];
+      const elementCount = projectedShape[0] * projectedShape[1];
+      if (target.scoreMaskArrayKey !== undefined) {
+        observationArray(inputBundle, target.scoreMaskArrayKey, "scoreMaskArrayKey", { unit: "1", shape: projectedShape });
+      }
+      const deflectionKeys = [
+        target.observedAlphaEastArcsecArrayKey,
+        target.observedAlphaNorthArcsecArrayKey,
+        target.deflectionUncertaintyArcsecArrayKey,
+      ];
+      const shearKeys = [
+        target.observedReducedShear1ArrayKey,
+        target.observedReducedShear2ArrayKey,
+        target.reducedShearUncertaintyArrayKey,
+      ];
+      const completeTriple = (keys, label, unit) => {
+        const supplied = keys.filter((key) => key !== undefined).length;
+        if (supplied !== 0 && supplied !== 3) throw new Error(`${label} scoring requires both observed component maps and its uncertainty map`);
+        if (supplied === 3) keys.forEach((key, index) => observationArray(inputBundle, key, `${label}[${index}]`, { unit, shape: projectedShape }));
+        return supplied === 3;
+      };
+      const deflectionScored = completeTriple(deflectionKeys, "deflection_arcsec", "arcsec");
+      const shearScored = completeTriple(shearKeys, "reduced_shear_dimensionless", "1");
+      const minimumValid = target.minimumValidPixels ?? 25;
+      if (!Number.isInteger(minimumValid) || minimumValid < 1 || minimumValid > elementCount) {
+        throw new Error("minimumValidPixels must fit within the photon-lensing map");
+      }
+      scored = deflectionScored || shearScored;
+      pointCount = 2 * elementCount;
+    } else {
+      if (definition.target !== "massive_tracers" || definition.rank !== "vector" || definition.unit !== "m/s^2") {
+        throw new Error(`observation target ${target.id} requires a massive_tracers vector in m/s^2`);
+      }
+      if (!["cartesian_2d", "cartesian_3d"].includes(model.geometry.coordinateSystem)) {
+        throw new Error(`${target.kind} supports Cartesian 2D or 3D models`);
+      }
+      finiteArray(target.centerM, dimensions, `observation target ${target.id} centerM`);
+      if (target.gridOriginM !== undefined) finiteArray(target.gridOriginM, dimensions, `observation target ${target.id} gridOriginM`);
+      else if (inputBundle.geometry?.origin !== undefined) finiteArray(inputBundle.geometry.origin, dimensions, "input bundle origin");
+      const planeAxes = target.planeAxes ?? [0, 1];
+      if (!Array.isArray(planeAxes) || planeAxes.length !== 2 || !planeAxes.every(Number.isInteger)
+        || new Set(planeAxes).size !== 2 || planeAxes.some((axis) => axis < 0 || axis >= dimensions)) {
+        throw new Error(`observation target ${target.id} planeAxes are invalid`);
+      }
+      if (target.kind === "circular_speed_curve") {
       const radii = finiteArray(target.radiiM, null, `observation target ${target.id} radiiM`, { positive: true });
       if (radii.some((value, index) => index > 0 && value <= radii[index - 1])) throw new Error(`observation target ${target.id} radiiM must be strictly increasing`);
       const sampleCount = target.azimuthalSamples ?? 128;
@@ -107,7 +161,7 @@ export function validateObservationTargets({ targets = [], model, inputBundle, r
         throw new Error("uncertainty data requires observedSpeedsMPerS");
       }
       pointCount = radii.length;
-    } else {
+      } else {
       const inclination = Number(target.inclinationDeg);
       if (!Number.isFinite(inclination) || inclination <= 0 || inclination >= 90) {
         throw new Error("inclinationDeg must lie strictly between 0 and 90 degrees");
@@ -141,7 +195,8 @@ export function validateObservationTargets({ targets = [], model, inputBundle, r
       const zeroPoint = Number(target.observedVelocityZeroPointMPerS ?? 0);
       if (!Number.isFinite(zeroPoint)) throw new Error("observedVelocityZeroPointMPerS must be finite");
       scored = hasObserved;
-      pointCount = major.elementCount;
+        pointCount = major.elementCount;
+      }
     }
     const fitted = target.fittedNuisanceParameters ?? 0;
     if (!Number.isInteger(fitted) || fitted < 0 || (scored && fitted >= pointCount)) throw new Error("fittedNuisanceParameters must be smaller than the scored point count");

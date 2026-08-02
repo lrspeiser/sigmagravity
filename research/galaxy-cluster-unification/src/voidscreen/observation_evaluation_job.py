@@ -27,6 +27,7 @@ from .field_job import (
     _parameter_accounting,
     _prepare_new_directory,
     _publish_directory,
+    _write_deterministic_npz,
     _write_json,
     _write_observation_predictions,
     _write_velocity_field_predictions,
@@ -50,6 +51,8 @@ def _worker_source_sha256() -> str:
         "observation_evaluation_job.py",
         "field_job.py",
         "observation_adapters.py",
+        "photon_lensing_adapter.py",
+        "sky_lensing.py",
     )
     import hashlib
 
@@ -211,17 +214,24 @@ def execute_observation_evaluation_job(
     cpu_started = time.process_time()
     tracemalloc.start()
     try:
+        observation_maps: dict[str, Array] = {}
         evaluation, rows = evaluate_observation_targets(
             model,
             observables,
             geometry,
             targets,
             arrays=observation_arrays,
+            map_outputs=observation_maps,
         )
         for target_result, target_specification in zip(
             evaluation["targets"], targets, strict=True
         ):
             target_result["targetSha256"] = canonical_sha256(target_specification)
+        if observation_maps:
+            evaluation["mapArchive"] = {
+                "path": "observation_photon_lensing_maps.npz",
+                "maps": _array_records(observation_maps),
+            }
         circular_rows = [row for row in rows if "predicted_speed_m_s" in row]
         velocity_rows = [row for row in rows if "predicted_velocity_m_s" in row]
         target_kinds = set(evaluation["targetKinds"])
@@ -233,6 +243,11 @@ def execute_observation_evaluation_job(
         if "line_of_sight_velocity_field" in target_kinds:
             _write_velocity_field_predictions(
                 temporary / "observation_velocity_field_predictions.csv", velocity_rows
+            )
+        if observation_maps:
+            _write_deterministic_npz(
+                temporary / "observation_photon_lensing_maps.npz",
+                observation_maps,
             )
         _write_json(temporary / "evaluation_job.json", evaluation_job)
         _write_json(temporary / "field_reference.json", field_reference)
@@ -250,7 +265,8 @@ def execute_observation_evaluation_job(
             "claimBoundary": [
                 "This job reuses an immutable solved field and does not execute a field equation.",
                 "Changing observational data or target declarations changes this evaluation identity, not the source field identity.",
-                "Massive-tracer adapters are not photon-lensing predictions.",
+                "Massive-tracer adapters and photon-lensing adapters use separately typed observables and channel-specific scores.",
+                "Photon distances and sky axes are explicit; this worker does not infer a cosmology.",
             ],
         }
         result_sha = canonical_sha256(scientific_core)
@@ -283,6 +299,8 @@ def execute_observation_evaluation_job(
             artifact_names.append("observation_predictions.csv")
         if "line_of_sight_velocity_field" in target_kinds:
             artifact_names.append("observation_velocity_field_predictions.csv")
+        if observation_maps:
+            artifact_names.append("observation_photon_lensing_maps.npz")
         artifact_index = {
             "schemaVersion": "sigma-observation-evaluation-artifact-index/1",
             "jobId": evaluation_job["id"],

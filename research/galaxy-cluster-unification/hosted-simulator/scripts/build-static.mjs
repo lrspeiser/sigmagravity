@@ -6,6 +6,7 @@ const dist = resolve(root, "dist");
 await mkdir(resolve(dist, "assets"), { recursive: true });
 await mkdir(resolve(dist, "schemas"), { recursive: true });
 await mkdir(resolve(dist, "examples", "models"), { recursive: true });
+await mkdir(resolve(dist, "examples", "observation-targets"), { recursive: true });
 for (const path of [
   "index.html",
   "assets/app.js",
@@ -26,6 +27,8 @@ for (const path of [
   "examples/models/qumond.json",
   "examples/models/refracted-gravity.json",
   "examples/models/two-potential.json",
+  "examples/observation-targets/line-of-sight-velocity-field.json",
+  "examples/observation-targets/photon-lensing-map.json",
 ]) {
   await copyFile(resolve(root, path), resolve(dist, path));
 }

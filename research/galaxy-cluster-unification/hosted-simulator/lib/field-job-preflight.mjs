@@ -73,6 +73,7 @@ export function prepareFieldJob(payload) {
     model: payload.model,
     inputBundle: bundle,
     requestedObservables,
+    fieldShape: referenceShape,
   });
   const boundaries = request.boundaryFields ?? {};
   for (const [fieldName, specification] of Object.entries(boundaries)) {
@@ -102,6 +103,7 @@ export function prepareFieldJob(payload) {
     preflightSha256,
     modelSha256: validation.modelSha256,
     inputBundleSha256: bundle.bundleSha256,
+    geometry: preflightCore.geometry,
     parameterAccounting: validation.parameterAccounting,
     observationTargets,
     requiredCapabilities: validation.requiredCapabilities,

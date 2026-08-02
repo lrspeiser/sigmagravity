@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "sigma-observation-target/1",
+  "id": "example-typed-photon-lensing-map",
+  "kind": "photon_lensing_map",
+  "observable": "photon_lensing_acceleration",
+  "northAxis": 0,
+  "eastAxis": 1,
+  "lineOfSightAxis": 2,
+  "distanceRatio": 0.72,
+  "lensAngularDiameterDistanceM": 3.0e25,
+  "observedAlphaEastArcsecArrayKey": "observed_alpha_east_arcsec",
+  "observedAlphaNorthArcsecArrayKey": "observed_alpha_north_arcsec",
+  "deflectionUncertaintyArcsecArrayKey": "deflection_uncertainty_arcsec",
+  "observedReducedShear1ArrayKey": "observed_reduced_shear_1",
+  "observedReducedShear2ArrayKey": "observed_reduced_shear_2",
+  "reducedShearUncertaintyArrayKey": "reduced_shear_uncertainty",
+  "scoreMaskArrayKey": "lensing_score_mask",
+  "minimumValidPixels": 25,
+  "fittedNuisanceParameters": 0,
+  "provenance": {
+    "description": "Replace with the lensing dataset citation, release, source-distance convention, reconstruction assumptions, and processing record"
+  },
+  "license": {
+    "id": "replace-with-dataset-license",
+    "redistributionAllowed": false
+  }
+}

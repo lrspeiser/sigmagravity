@@ -4,21 +4,25 @@
   "title": "Sigma observation target v1",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "id", "kind", "observable", "centerM", "provenance", "license"],
+  "required": ["schemaVersion", "id", "kind", "observable", "provenance", "license"],
   "oneOf": [
     {
       "properties": { "kind": { "const": "circular_speed_curve" } },
-      "required": ["radiiM"]
+      "required": ["centerM", "radiiM"]
     },
     {
       "properties": { "kind": { "const": "line_of_sight_velocity_field" } },
-      "required": ["inclinationDeg", "handedness", "majorCoordinateArrayKey", "minorCoordinateArrayKey"]
+      "required": ["centerM", "inclinationDeg", "handedness", "majorCoordinateArrayKey", "minorCoordinateArrayKey"]
+    },
+    {
+      "properties": { "kind": { "const": "photon_lensing_map" } },
+      "required": ["northAxis", "eastAxis", "lineOfSightAxis", "distanceRatio", "lensAngularDiameterDistanceM"]
     }
   ],
   "properties": {
     "schemaVersion": { "const": "sigma-observation-target/1" },
     "id": { "type": "string", "minLength": 1, "maxLength": 128 },
-    "kind": { "enum": ["circular_speed_curve", "line_of_sight_velocity_field"] },
+    "kind": { "enum": ["circular_speed_curve", "line_of_sight_velocity_field", "photon_lensing_map"] },
     "observable": { "type": "string", "minLength": 1 },
     "gridOriginM": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number" } },
     "centerM": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number" } },
@@ -45,6 +49,17 @@
     "beamKernelArrayKey": { "type": "string", "minLength": 1 },
     "weighting": { "enum": ["inverse_variance", "intensity_inverse_variance"], "default": "inverse_variance" },
     "minimumValidPixels": { "type": "integer", "minimum": 1, "default": 25 },
+    "northAxis": { "type": "integer", "minimum": 0, "maximum": 2 },
+    "eastAxis": { "type": "integer", "minimum": 0, "maximum": 2 },
+    "lineOfSightAxis": { "type": "integer", "minimum": 0, "maximum": 2 },
+    "distanceRatio": { "type": "number", "exclusiveMinimum": 0 },
+    "lensAngularDiameterDistanceM": { "type": "number", "exclusiveMinimum": 0 },
+    "observedAlphaEastArcsecArrayKey": { "type": "string", "minLength": 1 },
+    "observedAlphaNorthArcsecArrayKey": { "type": "string", "minLength": 1 },
+    "deflectionUncertaintyArcsecArrayKey": { "type": "string", "minLength": 1 },
+    "observedReducedShear1ArrayKey": { "type": "string", "minLength": 1 },
+    "observedReducedShear2ArrayKey": { "type": "string", "minLength": 1 },
+    "reducedShearUncertaintyArrayKey": { "type": "string", "minLength": 1 },
     "provenance": { "type": "object", "minProperties": 1 },
     "license": {
       "type": "object",

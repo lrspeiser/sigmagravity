@@ -73,12 +73,48 @@ function velocityObservationBundle(label) {
   return { ...core, bundleSha256: sha256(core) };
 }
 
+function photonModel() {
+  const result = model();
+  result.name = "Batch 3D photon model";
+  result.geometry = {
+    coordinateSystem: "cartesian_3d",
+    dimensions: 3,
+    domain: { lengthUnit: "m", boundaryExtent: "fixture cube" },
+  };
+  result.observables[0].target = "photons";
+  return result;
+}
+
+function photonBundle(label, { observations = false } = {}) {
+  const core = {
+    schemaVersion: "sigma-array-bundle/1",
+    geometry: { coordinateSystem: "cartesian_3d", dimensions: 3, spacing: [0.1, 0.1, 0.1], lengthUnit: "m" },
+    arrays: observations
+      ? [
+        ["alpha_east", "arcsec"], ["alpha_north", "arcsec"], ["alpha_sigma", "arcsec"],
+        ["reduced_g1", "1"], ["reduced_g2", "1"], ["reduced_g_sigma", "1"], ["score_mask", "1"],
+      ].map(([key, unit], index) => ({
+        key, npzKey: key, unit, rank: "scalar", role: "observation", dtype: "<f8",
+        shape: [17, 17], elementCount: 289, contentSha256: String(index + 2).repeat(64),
+      }))
+      : [{
+        key: "forcing", npzKey: "forcing", unit: "1/s^2", rank: "scalar", role: "source",
+        dtype: "<f8", shape: [17, 17, 17], elementCount: 4913, contentSha256: sha256({ label }),
+      }],
+    provenance: { kind: "batch_photon_fixture", label },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  return { ...core, bundleSha256: sha256(core) };
+}
+
 async function successfulFieldRunner({ jobDirectory }) {
   const root = resolve(jobDirectory, "artifacts");
   await mkdir(root, { recursive: true });
   const childId = basename(jobDirectory);
   const fieldModel = JSON.parse(await readFile(resolve(jobDirectory, "model.json"), "utf8"));
   const validation = validateFieldModel(fieldModel);
+  const dimensions = fieldModel.geometry.dimensions;
+  const shape = Array(dimensions).fill(17);
   const fieldJobSha256 = sha256({ childId, modelSha256: validation.modelSha256 });
   const fieldJob = {
     schemaVersion: "sigma-field-job/1",
@@ -86,8 +122,8 @@ async function successfulFieldRunner({ jobDirectory }) {
     jobSha256: fieldJobSha256,
     modelSha256: validation.modelSha256,
     geometry: {
-      coordinateSystem: "cartesian_2d", dimensions: 2,
-      spacing: [0.1, 0.1], origin: [-0.8, -0.8], lengthUnit: "m",
+      coordinateSystem: fieldModel.geometry.coordinateSystem, dimensions,
+      spacing: Array(dimensions).fill(0.1), origin: Array(dimensions).fill(-0.8), lengthUnit: "m",
     },
   };
   const scientificCore = {
@@ -99,10 +135,9 @@ async function successfulFieldRunner({ jobDirectory }) {
     iterations: 4,
     maximumRelativeUpdate: 1e-9,
     equationResiduals: { manufactured: { relativeL2: 2e-8 } },
-    observables: [
-      { key: "gradient__axis0", dtype: "<f8", shape: [17, 17], contentSha256: "6".repeat(64) },
-      { key: "gradient__axis1", dtype: "<f8", shape: [17, 17], contentSha256: "7".repeat(64) },
-    ],
+    observables: Array.from({ length: dimensions }, (_, axis) => ({
+      key: `gradient__axis${axis}`, dtype: "<f8", shape, contentSha256: String(axis + 6).repeat(64),
+    })),
     parameterAccounting: { universal: 0, perObject: 0 },
   };
   const scientific = { ...scientificCore, resultSha256: sha256(scientificCore) };
@@ -141,21 +176,49 @@ async function successfulObservationRunner({ jobDirectory }) {
   const requestEnvelope = JSON.parse(await readFile(resolve(jobDirectory, "request.json"), "utf8"));
   const observationTargets = requestEnvelope.request.observationTargets ?? [];
   const targetKinds = [...new Set(observationTargets.map((target) => target.kind))].sort();
+  const photonScored = targetKinds.includes("photon_lensing_map");
+  const channelAggregates = photonScored
+    ? {
+      deflection_arcsec: {
+        channel: "deflection_arcsec", unit: "arcsec", scoredTargetCount: 1, validPoints: 4,
+        fittedNuisanceParameters: 0, sumSquaredResidual: 16,
+        rmse: 2, inverseVarianceWeightedSquaredResidual: 4,
+        inverseVarianceWeightSum: 1, inverseVarianceWeightedRmse: 2,
+        chiSquare: 4, degreesFreedom: 4, reducedChiSquare: 1, gaussianLogLikelihood: -8,
+      },
+      reduced_shear_dimensionless: {
+        channel: "reduced_shear_dimensionless", unit: "1", scoredTargetCount: 1, validPoints: 4,
+        fittedNuisanceParameters: 0, sumSquaredResidual: 0.04,
+        rmse: 0.1, inverseVarianceWeightedSquaredResidual: 4,
+        inverseVarianceWeightSum: 400, inverseVarianceWeightedRmse: 0.1,
+        chiSquare: 4, degreesFreedom: 4, reducedChiSquare: 1, gaussianLogLikelihood: 4,
+      },
+    }
+    : {
+      velocity_m_s: {
+        channel: "velocity_m_s", unit: "m/s", scoredTargetCount: observationTargets.length,
+        validPoints: 1, fittedNuisanceParameters: 0, sumSquaredResidual: 4, rmse: 2,
+        inverseVarianceWeightedSquaredResidual: 1, inverseVarianceWeightSum: 0.25,
+        inverseVarianceWeightedRmse: 2, chiSquare: 1, degreesFreedom: 1,
+        reducedChiSquare: 1, gaussianLogLikelihood: -2,
+      },
+    };
   const observationEvaluation = {
     schemaVersion: "sigma-observation-evaluation/1",
     targetKinds,
     targetCount: observationTargets.length,
     scoredTargetCount: observationTargets.length,
-    totalPoints: 1,
-    validScoredPoints: 1,
-    sumSquaredResidualM2PerS2: 4,
-    rmseMPerS: 2,
-    inverseVarianceWeightedSquaredResidual: 1,
-    inverseVarianceWeightSum: 0.25,
-    inverseVarianceWeightedRmseMPerS: 2,
-    chiSquare: 1,
-    degreesFreedom: 1,
-    reducedChiSquare: 1,
+    totalPoints: photonScored ? 8 : 1,
+    validScoredPoints: photonScored ? 8 : 1,
+    channelAggregates,
+    sumSquaredResidualM2PerS2: photonScored ? null : 4,
+    rmseMPerS: photonScored ? null : 2,
+    inverseVarianceWeightedSquaredResidual: photonScored ? null : 1,
+    inverseVarianceWeightSum: photonScored ? null : 0.25,
+    inverseVarianceWeightedRmseMPerS: photonScored ? null : 2,
+    chiSquare: photonScored ? null : 1,
+    degreesFreedom: photonScored ? null : 1,
+    reducedChiSquare: photonScored ? null : 1,
     targets: [],
   };
   const scientificCore = {
@@ -183,6 +246,8 @@ async function successfulObservationRunner({ jobDirectory }) {
   if (targetKinds.includes("line_of_sight_velocity_field")) {
     await writeFile(resolve(root, "observation_velocity_field_predictions.csv"), velocityPredictionContent);
   }
+  const photonMapContent = Buffer.from("deterministic-photon-map-fixture");
+  if (photonScored) await writeFile(resolve(root, "observation_photon_lensing_maps.npz"), photonMapContent);
   const artifactRecords = [
     { path: "scientific_result.json", bytes: scientificContent.length, sha256: digest(scientificContent) },
     { path: "observation_scores.json", bytes: scoreContent.length, sha256: digest(scoreContent) },
@@ -199,6 +264,13 @@ async function successfulObservationRunner({ jobDirectory }) {
       path: "observation_velocity_field_predictions.csv",
       bytes: velocityPredictionContent.length,
       sha256: digest(velocityPredictionContent),
+    });
+  }
+  if (photonScored) {
+    artifactRecords.push({
+      path: "observation_photon_lensing_maps.npz",
+      bytes: photonMapContent.length,
+      sha256: digest(photonMapContent),
     });
   }
   const artifactIndex = {
@@ -409,6 +481,67 @@ test("batch aggregates resolved velocity-field scores and prediction pixels", as
   assert.match(predictions, /GALAXY-V,fixture-map,0,0,0,1,0,1,8,8,10,2,-2,0.25,64/);
   const report = (await batchService.getArtifact(submission.id, "report.html")).content.toString("utf8");
   assert.match(report, /line_of_sight_velocity_field/);
+});
+
+test("batch retains photon deflection and reduced-shear channels without a velocity alias", async (t) => {
+  const { fieldService, batchService } = await fixture(t);
+  const fieldUpload = await upload(fieldService, "PHOTON-FIELD", photonBundle("PHOTON-FIELD"));
+  const observationUpload = await upload(
+    fieldService,
+    "PHOTON-OBSERVATION",
+    photonBundle("PHOTON-OBSERVATION", { observations: true }),
+  );
+  const photonTarget = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "CLUSTER-PHOTON-MAP",
+    kind: "photon_lensing_map",
+    observable: "gradient",
+    northAxis: 0,
+    eastAxis: 1,
+    lineOfSightAxis: 2,
+    distanceRatio: 0.72,
+    lensAngularDiameterDistanceM: 3.0e25,
+    observedAlphaEastArcsecArrayKey: "alpha_east",
+    observedAlphaNorthArcsecArrayKey: "alpha_north",
+    deflectionUncertaintyArcsecArrayKey: "alpha_sigma",
+    observedReducedShear1ArrayKey: "reduced_g1",
+    observedReducedShear2ArrayKey: "reduced_g2",
+    reducedShearUncertaintyArrayKey: "reduced_g_sigma",
+    scoreMaskArrayKey: "score_mask",
+    minimumValidPixels: 25,
+    provenance: { kind: "typed photon batch fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const submission = await batchService.createBatch({
+    schemaVersion: "sigma-batch-submit/1",
+    model: photonModel(),
+    systems: [{
+      id: "CLUSTER-P",
+      dataUploadId: fieldUpload.id,
+      observationDataUploadId: observationUpload.id,
+      observationTargets: [photonTarget],
+    }],
+    fieldRequest: { schemaVersion: "sigma-field-job-request/1", requestedObservables: ["gradient"] },
+    parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
+  });
+  await fieldService.waitForIdle();
+  await batchService.waitForIdle();
+  const aggregate = JSON.parse((await batchService.getArtifact(
+    submission.id,
+    "aggregate_scores.json",
+  )).content.toString("utf8"));
+  assert.equal(aggregate.observationRmseMPerS, null);
+  assert.equal(aggregate.observationChannelAggregates.deflection_arcsec.rmse, 2);
+  assert.equal(aggregate.observationChannelAggregates.reduced_shear_dimensionless.rmse, 0.1);
+  assert.equal(aggregate.validObservationPoints, 8);
+  const children = JSON.parse((await batchService.getArtifact(
+    submission.id,
+    "child_jobs.json",
+  )).content.toString("utf8")).items;
+  assert.ok(children[0].observationArtifacts.some((item) => item.path === "observation_photon_lensing_maps.npz"));
+  const report = (await batchService.getArtifact(submission.id, "report.html")).content.toString("utf8");
+  assert.match(report, /photon_lensing_map/);
+  assert.match(report, /Deflection RMSE \(arcsec\)/);
 });
 
 test("changed observation data reuses the field child and changes only the observation child", async (t) => {

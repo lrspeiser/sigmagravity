@@ -5,6 +5,7 @@ import { sha256 } from "../lib/canonical.mjs";
 import { prepareFieldJob } from "../lib/field-job-preflight.mjs";
 
 const model = JSON.parse(readFileSync(new URL("../examples/models/refracted-gravity.json", import.meta.url), "utf8"));
+const twoPotentialModel = JSON.parse(readFileSync(new URL("../examples/models/two-potential.json", import.meta.url), "utf8"));
 
 function inputBundle() {
   const core = {
@@ -237,4 +238,86 @@ test("resolved velocity preflight separates emission and score masks", () => {
   assert.equal(result.valid, true);
   request.request.observationTargets[0].maskArrayKey = "score_mask";
   assert.throws(() => prepareFieldJob(request), /either maskArrayKey or scoreMaskArrayKey/);
+});
+
+test("field preflight binds typed photon maps and two independent score channels", () => {
+  const request = payload();
+  request.model = structuredClone(twoPotentialModel);
+  request.request.requestedObservables = ["photon_lensing_acceleration"];
+  const shape = [33, 33];
+  for (const [index, [key, unit]] of [
+    ["alpha_east", "arcsec"],
+    ["alpha_north", "arcsec"],
+    ["alpha_sigma", "arcsec"],
+    ["reduced_g1", "1"],
+    ["reduced_g2", "1"],
+    ["reduced_g_sigma", "1"],
+    ["score_mask", "1"],
+  ].entries()) {
+    request.inputBundle.arrays.push({
+      key,
+      npzKey: key,
+      unit,
+      rank: "scalar",
+      role: "auxiliary",
+      dtype: "<f8",
+      shape,
+      elementCount: shape[0] * shape[1],
+      contentSha256: String(index + 2).repeat(64),
+    });
+  }
+  const { bundleSha256: _oldHash, ...bundleCore } = request.inputBundle;
+  request.inputBundle = { ...bundleCore, bundleSha256: sha256(bundleCore) };
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "typed-photon-map",
+    kind: "photon_lensing_map",
+    observable: "photon_lensing_acceleration",
+    northAxis: 0,
+    eastAxis: 1,
+    lineOfSightAxis: 2,
+    distanceRatio: 0.72,
+    lensAngularDiameterDistanceM: 3.0e25,
+    observedAlphaEastArcsecArrayKey: "alpha_east",
+    observedAlphaNorthArcsecArrayKey: "alpha_north",
+    deflectionUncertaintyArcsecArrayKey: "alpha_sigma",
+    observedReducedShear1ArrayKey: "reduced_g1",
+    observedReducedShear2ArrayKey: "reduced_g2",
+    reducedShearUncertaintyArrayKey: "reduced_g_sigma",
+    scoreMaskArrayKey: "score_mask",
+    minimumValidPixels: 100,
+    provenance: { kind: "synthetic photon fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  const result = prepareFieldJob(request);
+  assert.equal(result.observationTargets[0].kind, "photon_lensing_map");
+  assert.equal(result.observationTargets[0].scored, true);
+  assert.equal(result.observationTargets[0].pointCount, 2 * 33 * 33);
+
+  request.request.observationTargets[0].eastAxis = 0;
+  assert.throws(() => prepareFieldJob(request), /permutation/);
+});
+
+test("photon preflight rejects massive-only observables and incomplete map triples", () => {
+  const request = payload();
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "wrong-photon-channel",
+    kind: "photon_lensing_map",
+    observable: "massive_tracer_acceleration",
+    northAxis: 0,
+    eastAxis: 1,
+    lineOfSightAxis: 2,
+    distanceRatio: 0.72,
+    lensAngularDiameterDistanceM: 3.0e25,
+    provenance: { kind: "negative fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  assert.throws(() => prepareFieldJob(request), /photons or both vector/);
+
+  request.model = structuredClone(twoPotentialModel);
+  request.request.requestedObservables = ["photon_lensing_acceleration"];
+  request.request.observationTargets[0].observable = "photon_lensing_acceleration";
+  request.request.observationTargets[0].observedAlphaEastArcsecArrayKey = "only-east";
+  assert.throws(() => prepareFieldJob(request), /both observed component maps/);
 });

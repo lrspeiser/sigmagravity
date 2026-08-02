@@ -508,6 +508,25 @@ export class LocalBatchService {
       }
       const equationResidual = maximumNumeric(fieldScientific?.equationResiduals);
       const observation = observationScientific?.observationEvaluation ?? null;
+      const channelAggregates = observation?.channelAggregates
+        ?? (observation?.sumSquaredResidualM2PerS2 !== null
+          && observation?.sumSquaredResidualM2PerS2 !== undefined
+          ? {
+            velocity_m_s: {
+              channel: "velocity_m_s",
+              unit: "m/s",
+              scoredTargetCount: observation.scoredTargetCount ?? 0,
+              validPoints: observation.validScoredPoints ?? 0,
+              fittedNuisanceParameters: 0,
+              sumSquaredResidual: observation.sumSquaredResidualM2PerS2,
+              inverseVarianceWeightedSquaredResidual: observation.inverseVarianceWeightedSquaredResidual ?? 0,
+              inverseVarianceWeightSum: observation.inverseVarianceWeightSum ?? 0,
+              chiSquare: observation.chiSquare ?? 0,
+              degreesFreedom: observation.degreesFreedom ?? 0,
+              gaussianLogLikelihood: 0,
+            },
+          }
+          : {});
       if ((observation?.targetCount ?? 0) > 0 && observationChild?.state === "succeeded") {
         const targetKinds = new Set(
           observation.targetKinds
@@ -580,6 +599,11 @@ export class LocalBatchService {
         observation_weight_sum: observation?.inverseVarianceWeightSum ?? null,
         observation_chi_square: observation?.chiSquare ?? null,
         observation_degrees_freedom: observation?.degreesFreedom ?? null,
+        observation_deflection_rmse_arcsec: channelAggregates.deflection_arcsec?.rmse ?? null,
+        observation_deflection_weighted_rmse_arcsec: channelAggregates.deflection_arcsec?.inverseVarianceWeightedRmse ?? null,
+        observation_reduced_shear_rmse: channelAggregates.reduced_shear_dimensionless?.rmse ?? null,
+        observation_reduced_shear_weighted_rmse: channelAggregates.reduced_shear_dimensionless?.inverseVarianceWeightedRmse ?? null,
+        observation_channel_aggregates: channelAggregates,
       };
       rows.push(row);
       childManifest.push({
@@ -631,12 +655,41 @@ export class LocalBatchService {
     const requestedObservationRows = rows.filter((row) => row.observation_state !== "not_requested");
     const successfulObservationRows = rows.filter((row) => row.observation_state === "succeeded");
     const scoredObservationTargets = rows.reduce((sum, row) => sum + row.scored_observation_targets, 0);
-    const validObservationPoints = rows.reduce((sum, row) => sum + row.valid_observation_points, 0);
-    const observationSumSquared = rows.reduce((sum, row) => sum + (row.observation_sum_squared_residual_m2_s2 ?? 0), 0);
-    const observationWeightedSquared = rows.reduce((sum, row) => sum + (row.observation_weighted_squared_residual ?? 0), 0);
-    const observationWeight = rows.reduce((sum, row) => sum + (row.observation_weight_sum ?? 0), 0);
-    const observationChiSquare = rows.reduce((sum, row) => sum + (row.observation_chi_square ?? 0), 0);
-    const observationDegreesFreedom = rows.reduce((sum, row) => sum + (row.observation_degrees_freedom ?? 0), 0);
+    const channelMembers = new Map();
+    for (const row of rows) {
+      for (const [channel, value] of Object.entries(row.observation_channel_aggregates)) {
+        if (!channelMembers.has(channel)) channelMembers.set(channel, []);
+        channelMembers.get(channel).push(value);
+      }
+    }
+    const observationChannelAggregates = {};
+    for (const [channel, members] of [...channelMembers.entries()].sort(([left], [right]) => left.localeCompare(right))) {
+      const validPoints = members.reduce((sum, value) => sum + value.validPoints, 0);
+      const sumSquaredResidual = members.reduce((sum, value) => sum + value.sumSquaredResidual, 0);
+      const weightedSquared = members.reduce((sum, value) => sum + value.inverseVarianceWeightedSquaredResidual, 0);
+      const weightSum = members.reduce((sum, value) => sum + value.inverseVarianceWeightSum, 0);
+      const chiSquare = members.reduce((sum, value) => sum + value.chiSquare, 0);
+      const degreesFreedom = members.reduce((sum, value) => sum + value.degreesFreedom, 0);
+      observationChannelAggregates[channel] = {
+        channel,
+        unit: members[0].unit,
+        scoredTargetCount: members.reduce((sum, value) => sum + value.scoredTargetCount, 0),
+        validPoints,
+        fittedNuisanceParameters: members.reduce((sum, value) => sum + value.fittedNuisanceParameters, 0),
+        sumSquaredResidual,
+        rmse: validPoints ? Math.sqrt(sumSquaredResidual / validPoints) : null,
+        inverseVarianceWeightedSquaredResidual: weightedSquared,
+        inverseVarianceWeightSum: weightSum,
+        inverseVarianceWeightedRmse: weightSum ? Math.sqrt(weightedSquared / weightSum) : null,
+        chiSquare,
+        degreesFreedom,
+        reducedChiSquare: degreesFreedom ? chiSquare / degreesFreedom : null,
+        gaussianLogLikelihood: members.reduce((sum, value) => sum + value.gaussianLogLikelihood, 0),
+      };
+    }
+    const velocityAggregate = observationChannelAggregates.velocity_m_s ?? null;
+    const validObservationPoints = Object.values(observationChannelAggregates)
+      .reduce((sum, value) => sum + value.validPoints, 0);
     const aggregate = {
       schemaVersion: "sigma-batch-aggregate/2",
       batchId: id,
@@ -661,17 +714,12 @@ export class LocalBatchService {
       observationScoresAvailable: scoredObservationTargets > 0,
       scoredObservationTargets,
       validObservationPoints,
-      observationRmseMPerS: validObservationPoints
-        ? Math.sqrt(observationSumSquared / validObservationPoints)
-        : null,
-      observationInverseVarianceWeightedRmseMPerS: observationWeight
-        ? Math.sqrt(observationWeightedSquared / observationWeight)
-        : null,
-      observationChiSquare: scoredObservationTargets ? observationChiSquare : null,
-      observationDegreesFreedom: scoredObservationTargets ? observationDegreesFreedom : null,
-      observationReducedChiSquare: observationDegreesFreedom
-        ? observationChiSquare / observationDegreesFreedom
-        : null,
+      observationChannelAggregates,
+      observationRmseMPerS: velocityAggregate?.rmse ?? null,
+      observationInverseVarianceWeightedRmseMPerS: velocityAggregate?.inverseVarianceWeightedRmse ?? null,
+      observationChiSquare: velocityAggregate?.chiSquare ?? null,
+      observationDegreesFreedom: velocityAggregate?.degreesFreedom ?? null,
+      observationReducedChiSquare: velocityAggregate?.reducedChiSquare ?? null,
       claimBoundary: record.preflight.claimBoundary,
     };
     const scientificCore = {
@@ -720,6 +768,10 @@ export class LocalBatchService {
           "observation_weighted_rmse_m_s",
           "observation_chi_square",
           "observation_degrees_freedom",
+          "observation_deflection_rmse_arcsec",
+          "observation_deflection_weighted_rmse_arcsec",
+          "observation_reduced_shear_rmse",
+          "observation_reduced_shear_weighted_rmse",
         ],
         rows,
       ),
@@ -747,18 +799,18 @@ export class LocalBatchService {
       `system_id,target_id,point_index,row_index,column_index,disk_major_coordinate_m,disk_minor_coordinate_m,circular_radius_m,predicted_circular_speed_m_s,predicted_velocity_m_s,observed_velocity_m_s,uncertainty_m_s,residual_m_s,declared_weight,inward_acceleration_m_s2\n${velocityFieldPredictionRows.length ? `${velocityFieldPredictionRows.join("\n")}\n` : ""}`,
       "utf8",
     );
-    const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.field_state)}</td><td>${htmlEscape(row.observation_state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td><td>${htmlEscape(row.observation_rmse_m_s ?? "")}</td></tr>`).join("");
+    const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.field_state)}</td><td>${htmlEscape(row.observation_state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td><td>${htmlEscape(row.observation_rmse_m_s ?? "")}</td><td>${htmlEscape(row.observation_deflection_rmse_arcsec ?? "")}</td><td>${htmlEscape(row.observation_reduced_shear_rmse ?? "")}</td></tr>`).join("");
     const observationScope = aggregate.observationScoresAvailable
-      ? `Massive-tracer observations (${[...observationKinds].sort().join(", ")}) were scored for ${aggregate.scoredObservationTargets} target(s). Photon lensing was not evaluated.`
+      ? `Typed observations (${[...observationKinds].sort().join(", ")}) were scored for ${aggregate.scoredObservationTargets} target(s). Velocity, deflection, and reduced-shear scores remain separate.`
       : "No observation targets were supplied, so this report measures numerical execution and convergence only.";
     await writeFile(
       resolve(artifacts, "report.html"),
-      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:960px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${fieldSuccessfulRows.length} field solve(s) and ${successfulObservationRows.length}/${requestedObservationRows.length} requested observation evaluation(s) succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><table><thead><tr><th>System</th><th>Field state</th><th>Observation state</th><th>Iterations</th><th>Maximum equation residual</th><th>Observation RMSE (m/s)</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
+      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:1080px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${fieldSuccessfulRows.length} field solve(s) and ${successfulObservationRows.length}/${requestedObservationRows.length} requested observation evaluation(s) succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><table><thead><tr><th>System</th><th>Field state</th><th>Observation state</th><th>Iterations</th><th>Maximum equation residual</th><th>Velocity RMSE (m/s)</th><th>Deflection RMSE (arcsec)</th><th>Reduced-shear RMSE</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
       "utf8",
     );
     await writeFile(
       resolve(artifacts, "llm_briefing.md"),
-      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${fieldSuccessfulRows.length}\n- Successful requested observation evaluations: ${successfulObservationRows.length}/${requestedObservationRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Gravity parameters added by observation evaluation: ${aggregate.observationAddedGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Observation RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n\nThis deterministic briefing distinguishes immutable field execution, separately cached massive-tracer observation evaluation, and photon lensing. It must not describe an unscored channel as validated.\n`,
+      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${fieldSuccessfulRows.length}\n- Successful requested observation evaluations: ${successfulObservationRows.length}/${requestedObservationRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Gravity parameters added by observation evaluation: ${aggregate.observationAddedGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Velocity RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n- Deflection RMSE (arcsec): ${aggregate.observationChannelAggregates.deflection_arcsec?.rmse ?? "not available"}\n- Reduced-shear RMSE: ${aggregate.observationChannelAggregates.reduced_shear_dimensionless?.rmse ?? "not available"}\n\nThis deterministic briefing distinguishes immutable field execution, separately cached massive-tracer and photon observation evaluation, and every score channel. It must not describe an unscored channel as validated.\n`,
       "utf8",
     );
     await writeFile(

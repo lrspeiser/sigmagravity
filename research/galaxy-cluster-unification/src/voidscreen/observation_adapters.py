@@ -1,9 +1,10 @@
 """Theory-neutral adapters from solved fields to observation-space predictions.
 
-The adapters convert a declared massive-tracer acceleration field on a
-Cartesian 2D or 3D grid into either an azimuthally averaged circular-speed
-curve or a projected, optionally beam-convolved line-of-sight velocity map.
-They never change, fit, or re-solve the submitted gravity model.
+Massive-tracer acceleration fields can become circular-speed curves or
+resolved line-of-sight velocity maps.  A separately typed photon field can
+become a sky-lensing map.  Adapters never change, fit, or re-solve the
+submitted gravity model, and scores having different physical units are never
+combined.
 """
 
 from __future__ import annotations
@@ -15,6 +16,8 @@ from typing import Any
 import numpy as np
 from scipy.ndimage import map_coordinates
 from scipy.signal import fftconvolve
+
+from .photon_lensing_adapter import evaluate_photon_lensing_map_target
 
 Array = np.ndarray
 
@@ -753,6 +756,7 @@ def evaluate_observation_targets(
     geometry: Mapping[str, Any],
     targets: Sequence[Mapping[str, Any]],
     arrays: Mapping[str, Array] | None = None,
+    map_outputs: dict[str, Array] | None = None,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Evaluate supported targets and return deterministic aggregate diagnostics."""
 
@@ -763,7 +767,7 @@ def evaluate_observation_targets(
     evaluations: list[dict[str, Any]] = []
     rows: list[dict[str, Any]] = []
     seen: set[str] = set()
-    for target in targets:
+    for target_index, target in enumerate(targets):
         if not isinstance(target, Mapping):
             raise TypeError("observation target must be an object")
         target_id = str(target.get("id", ""))
@@ -778,42 +782,125 @@ def evaluate_observation_targets(
             evaluation, target_rows = evaluate_line_of_sight_velocity_field_target(
                 model, observables, geometry, target, arrays
             )
+        elif target.get("kind") == "photon_lensing_map":
+            evaluation, target_maps = evaluate_photon_lensing_map_target(
+                model,
+                observables,
+                geometry,
+                target,
+                arrays,
+                archive_prefix=f"target_{target_index:03d}",
+            )
+            target_rows = []
+            if map_outputs is not None:
+                map_outputs.update(target_maps)
         else:
             raise ValueError(f"unsupported observation target kind: {target.get('kind')}")
         evaluations.append(evaluation)
         rows.extend(target_rows)
-    scored = [value["score"] for value in evaluations if value["state"] == "scored"]
-    valid_points = sum(int(value["validPoints"]) for value in scored)
-    sum_squared = sum(float(value["sumSquaredResidualM2PerS2"]) for value in scored)
-    chi_square = sum(float(value["chiSquare"]) for value in scored)
-    degrees_freedom = sum(int(value["degreesFreedom"]) for value in scored)
-    weighted_sum = sum(
-        float(value["inverseVarianceWeightedSquaredResidual"]) for value in scored
+    channel_members: dict[str, list[dict[str, Any]]] = {}
+    for evaluation in evaluations:
+        score = evaluation["score"]
+        if evaluation["kind"] in {
+            "circular_speed_curve",
+            "line_of_sight_velocity_field",
+        }:
+            if score["state"] == "scored":
+                channel_members.setdefault("velocity_m_s", []).append(
+                    {
+                        "unit": "m/s",
+                        "validPoints": score["validPoints"],
+                        "fittedNuisanceParameters": score[
+                            "fittedNuisanceParameters"
+                        ],
+                        "sumSquaredResidual": score["sumSquaredResidualM2PerS2"],
+                        "inverseVarianceWeightedSquaredResidual": score[
+                            "inverseVarianceWeightedSquaredResidual"
+                        ],
+                        "inverseVarianceWeightSum": score[
+                            "inverseVarianceWeightSum"
+                        ],
+                        "chiSquare": score["chiSquare"],
+                        "degreesFreedom": score["degreesFreedom"],
+                        "gaussianLogLikelihood": score["gaussianLogLikelihood"],
+                    }
+                )
+        else:
+            for channel, channel_score in score.get("channels", {}).items():
+                if channel_score["state"] == "scored":
+                    channel_members.setdefault(channel, []).append(channel_score)
+    channel_aggregates: dict[str, dict[str, Any]] = {}
+    for channel, members in sorted(channel_members.items()):
+        valid_points = sum(int(value["validPoints"]) for value in members)
+        sum_squared = sum(float(value["sumSquaredResidual"]) for value in members)
+        weighted_sum = sum(
+            float(value["inverseVarianceWeightedSquaredResidual"])
+            for value in members
+        )
+        weight_sum = sum(float(value["inverseVarianceWeightSum"]) for value in members)
+        chi_square = sum(float(value["chiSquare"]) for value in members)
+        degrees_freedom = sum(int(value["degreesFreedom"]) for value in members)
+        channel_aggregates[channel] = {
+            "channel": channel,
+            "unit": members[0]["unit"],
+            "scoredTargetCount": len(members),
+            "validPoints": valid_points,
+            "fittedNuisanceParameters": sum(
+                int(value["fittedNuisanceParameters"]) for value in members
+            ),
+            "sumSquaredResidual": sum_squared,
+            "rmse": math.sqrt(sum_squared / valid_points),
+            "inverseVarianceWeightedSquaredResidual": weighted_sum,
+            "inverseVarianceWeightSum": weight_sum,
+            "inverseVarianceWeightedRmse": math.sqrt(weighted_sum / weight_sum),
+            "chiSquare": chi_square,
+            "degreesFreedom": degrees_freedom,
+            "reducedChiSquare": chi_square / degrees_freedom,
+            "gaussianLogLikelihood": sum(
+                float(value["gaussianLogLikelihood"]) for value in members
+            ),
+        }
+    velocity = channel_aggregates.get("velocity_m_s")
+    scored_target_count = sum(value["state"] == "scored" for value in evaluations)
+    valid_scored_points = sum(
+        int(value["validPoints"]) for value in channel_aggregates.values()
     )
-    weight_sum = sum(float(value["inverseVarianceWeightSum"]) for value in scored)
     return (
         {
             "schemaVersion": "sigma-observation-evaluation/1",
             "targetKinds": sorted({value["kind"] for value in evaluations}),
             "targetCount": len(evaluations),
-            "scoredTargetCount": len(scored),
+            "scoredTargetCount": scored_target_count,
             "totalPoints": sum(int(value["score"]["totalPoints"]) for value in evaluations),
-            "validScoredPoints": valid_points,
-            "sumSquaredResidualM2PerS2": sum_squared if scored else None,
-            "rmseMPerS": math.sqrt(sum_squared / valid_points) if valid_points else None,
-            "inverseVarianceWeightedSquaredResidual": weighted_sum if scored else None,
-            "inverseVarianceWeightSum": weight_sum if scored else None,
-            "inverseVarianceWeightedRmseMPerS": math.sqrt(weighted_sum / weight_sum)
-            if weight_sum
+            "validScoredPoints": valid_scored_points,
+            "channelAggregates": channel_aggregates,
+            "sumSquaredResidualM2PerS2": velocity["sumSquaredResidual"]
+            if velocity
             else None,
-            "chiSquare": chi_square if scored else None,
-            "degreesFreedom": degrees_freedom if scored else None,
-            "reducedChiSquare": chi_square / degrees_freedom if degrees_freedom else None,
+            "rmseMPerS": velocity["rmse"] if velocity else None,
+            "inverseVarianceWeightedSquaredResidual": velocity[
+                "inverseVarianceWeightedSquaredResidual"
+            ]
+            if velocity
+            else None,
+            "inverseVarianceWeightSum": velocity["inverseVarianceWeightSum"]
+            if velocity
+            else None,
+            "inverseVarianceWeightedRmseMPerS": velocity[
+                "inverseVarianceWeightedRmse"
+            ]
+            if velocity
+            else None,
+            "chiSquare": velocity["chiSquare"] if velocity else None,
+            "degreesFreedom": velocity["degreesFreedom"] if velocity else None,
+            "reducedChiSquare": velocity["reducedChiSquare"] if velocity else None,
             "targets": evaluations,
             "claimBoundary": [
                 "Observation targets are evaluated after the field solve and cannot modify the submitted equations.",
-                "Circular-speed and line-of-sight velocity-field adapters are massive-tracer mappings, not photon-lensing predictions.",
+                "Circular-speed and line-of-sight velocity-field adapters require massive tracers; photon-lensing maps require a separately typed photons or both observable.",
+                "Velocity, deflection, and reduced-shear residuals are aggregated only inside their own named channel and unit.",
                 "Velocity-field projection uses explicitly declared geometry, handedness, emission support, post-convolution score masks, uncertainties, intensity weights, and beam kernels.",
+                "Photon projection uses explicitly declared sky axes, distance ratio, lens distance, score masks, and uncertainties; it does not infer a cosmology.",
             ],
         },
         rows,

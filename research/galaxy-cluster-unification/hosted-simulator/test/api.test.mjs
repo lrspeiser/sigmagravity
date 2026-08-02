@@ -38,7 +38,7 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.8.0-preview");
+  assert.equal(output.body.version, "0.9.0-preview");
   assert.equal(
     output.body.capabilities.localDecoupledObservationEvaluationJobs,
     "available_in_dev_server",

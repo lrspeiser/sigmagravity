@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import io
 import json
 import os
 import platform
@@ -17,6 +18,7 @@ import shutil
 import tempfile
 import time
 import tracemalloc
+import zipfile
 from collections.abc import Mapping
 from datetime import UTC, datetime
 from pathlib import Path
@@ -249,7 +251,13 @@ def load_array_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Array]
 def _worker_source_sha256() -> str:
     root = Path(__file__).resolve().parent
     digest = hashlib.sha256()
-    for name in ("field_job.py", "generic_field_worker.py", "observation_adapters.py"):
+    for name in (
+        "field_job.py",
+        "generic_field_worker.py",
+        "observation_adapters.py",
+        "photon_lensing_adapter.py",
+        "sky_lensing.py",
+    ):
         path = root / name
         digest.update(name.encode("utf-8"))
         digest.update(b"\0")
@@ -320,6 +328,23 @@ def _flatten_observables(solution: GenericFieldSolution) -> dict[str, Array]:
 def _write_npz(path: Path, values: Mapping[str, Array]) -> None:
     with path.open("wb") as handle:
         np.savez_compressed(handle, **values)
+
+
+def _write_deterministic_npz(path: Path, values: Mapping[str, Array]) -> None:
+    """Write a byte-stable compressed NumPy archive with fixed ZIP metadata."""
+
+    with zipfile.ZipFile(
+        path, mode="w", compression=zipfile.ZIP_DEFLATED, compresslevel=9
+    ) as archive:
+        for key, raw in sorted(values.items()):
+            buffer = io.BytesIO()
+            np.lib.format.write_array(
+                buffer, _canonical_array(raw), allow_pickle=False
+            )
+            member = zipfile.ZipInfo(f"{key}.npy", date_time=(1980, 1, 1, 0, 0, 0))
+            member.compress_type = zipfile.ZIP_DEFLATED
+            member.external_attr = 0o600 << 16
+            archive.writestr(member, buffer.getvalue(), compress_type=zipfile.ZIP_DEFLATED)
 
 
 def _write_residual_history(path: Path, solution: GenericFieldSolution) -> None:
@@ -422,6 +447,9 @@ def _normalize_observation_targets(values: Any) -> list[dict[str, Any]]:
         for key in ("inclinationDeg", "observedVelocityZeroPointMPerS"):
             if key in target:
                 target[key] = float(target[key])
+        for key in ("distanceRatio", "lensAngularDiameterDistanceM"):
+            if key in target:
+                target[key] = float(target[key])
         normalized.append(target)
     return normalized
 
@@ -516,6 +544,7 @@ def execute_field_job(
             if key.split("__axis", maxsplit=1)[0] in requested_observables
         }
         observation_rows: list[dict[str, Any]] = []
+        observation_maps: dict[str, Array] = {}
         observation_evaluation: dict[str, Any] | None = None
         if observation_targets:
             if solution.converged:
@@ -525,11 +554,17 @@ def execute_field_job(
                     {**bundle_geometry, "spacing": spacing_values},
                     observation_targets,
                     arrays=arrays,
+                    map_outputs=observation_maps,
                 )
                 for evaluation, target_specification in zip(
                     observation_evaluation["targets"], observation_targets, strict=True
                 ):
                     evaluation["targetSha256"] = canonical_sha256(target_specification)
+                if observation_maps:
+                    observation_evaluation["mapArchive"] = {
+                        "path": "observation_photon_lensing_maps.npz",
+                        "maps": _array_records(observation_maps),
+                    }
             else:
                 observation_evaluation = {
                     "schemaVersion": "sigma-observation-evaluation/1",
@@ -546,6 +581,11 @@ def execute_field_job(
         _write_npz(temporary / "fields.npz", fields)
         _write_npz(temporary / "observables.npz", observables)
         _write_residual_history(temporary / "residual_history.csv", solution)
+        if observation_maps:
+            _write_deterministic_npz(
+                temporary / "observation_photon_lensing_maps.npz",
+                observation_maps,
+            )
         circular_prediction_rows = [
             row for row in observation_rows if "predicted_speed_m_s" in row
         ]
@@ -591,6 +631,7 @@ def execute_field_job(
                 "The current generic worker uses supplied or zero far-field Dirichlet boundaries for isolated manifests.",
                 "Observation targets are evaluated after the field solve and cannot alter the field equations.",
                 "Resolved velocity maps use explicitly declared projection and beam data; no galaxy-specific gravity parameter is introduced by the adapter.",
+                "Photon-lensing maps use a separately typed photon observable and explicitly declared projection geometry; they are not derived from the massive-tracer adapter.",
             ],
         }
         result_sha = canonical_sha256(scientific_core)
@@ -623,6 +664,8 @@ def execute_field_job(
             artifact_names.append("observation_predictions.csv")
         if "line_of_sight_velocity_field" in evaluated_target_kinds:
             artifact_names.append("observation_velocity_field_predictions.csv")
+        if observation_maps:
+            artifact_names.append("observation_photon_lensing_maps.npz")
         artifact_index = {
             "schemaVersion": "sigma-field-artifact-index/1",
             "jobId": job["id"],

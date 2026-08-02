@@ -11,7 +11,7 @@ from voidscreen.observation_evaluation_job import (
 )
 
 
-def field_model(dimensions: int) -> dict:
+def field_model(dimensions: int, observable_target: str = "massive_tracers") -> dict:
     coordinate_system = f"cartesian_{dimensions}d"
     return {
         "schemaVersion": "sigma-field-model/1",
@@ -53,7 +53,7 @@ def field_model(dimensions: int) -> dict:
         "observables": [
             {
                 "id": "acceleration",
-                "target": "massive_tracers",
+                "target": observable_target,
                 "rank": "vector",
                 "unit": "m/s^2",
                 "expression": {
@@ -97,7 +97,12 @@ def array_spec(npz_key: str, unit: str, role: str = "observation") -> dict:
 
 
 def solve_fixture(
-    tmp_path: Path, dimensions: int, targets: list[dict], observation_arrays: dict
+    tmp_path: Path,
+    dimensions: int,
+    targets: list[dict],
+    observation_arrays: dict,
+    *,
+    observable_target: str = "massive_tracers",
 ) -> tuple[Path, Path, Path]:
     cells = 17
     spacing = 0.5
@@ -149,9 +154,11 @@ def solve_fixture(
     }
     source_run = tmp_path / f"source_{dimensions}d"
     integrated_run = tmp_path / f"integrated_{dimensions}d"
-    execute_field_job(field_model(dimensions), field_bundle, request, source_run)
     execute_field_job(
-        field_model(dimensions),
+        field_model(dimensions, observable_target), field_bundle, request, source_run
+    )
+    execute_field_job(
+        field_model(dimensions, observable_target),
         field_bundle,
         {**request, "observationTargets": targets},
         integrated_run,
@@ -250,3 +257,47 @@ def test_decoupled_3d_velocity_map_byte_matches_integrated_field_job(
     result = json.loads((standalone / "scientific_result.json").read_text())
     assert result["evaluationAddedGravityParameters"] == 0
     assert result["parameterAccounting"]["perObjectCount"] == 0
+
+
+def test_decoupled_photon_maps_byte_match_integrated_field_job(tmp_path: Path) -> None:
+    target = {
+        "schemaVersion": "sigma-observation-target/1",
+        "id": "p0734-photon-map",
+        "kind": "photon_lensing_map",
+        "observable": "acceleration",
+        "northAxis": 0,
+        "eastAxis": 1,
+        "lineOfSightAxis": 2,
+        "distanceRatio": 0.7,
+        "lensAngularDiameterDistanceM": 1.0e20,
+        "minimumValidPixels": 25,
+        "provenance": {"kind": "P0734 photon-map parity fixture"},
+        "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+    }
+    source, bundle, integrated = solve_fixture(
+        tmp_path,
+        3,
+        [target],
+        {},
+        observable_target="photons",
+    )
+    standalone = tmp_path / "standalone_photon"
+    execute_observation_evaluation_job(
+        source,
+        bundle,
+        {
+            "schemaVersion": "sigma-observation-evaluation-job-request/1",
+            "observationTargets": [target],
+        },
+        standalone,
+    )
+    assert (standalone / "observation_scores.json").read_bytes() == (
+        integrated / "observation_scores.json"
+    ).read_bytes()
+    assert (standalone / "observation_photon_lensing_maps.npz").read_bytes() == (
+        integrated / "observation_photon_lensing_maps.npz"
+    ).read_bytes()
+    scores = json.loads((standalone / "observation_scores.json").read_text())
+    assert scores["targets"][0]["observableTarget"] == "photons"
+    assert scores["targets"][0]["state"] == "predicted_not_scored"
+    assert scores["mapArchive"]["path"] == "observation_photon_lensing_maps.npz"

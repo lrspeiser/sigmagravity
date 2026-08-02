@@ -75,6 +75,7 @@ export function prepareObservationEvaluationJob(payload) {
     model,
     inputBundle: observationBundle,
     requestedObservables: observableIds,
+    fieldShape: scientificResult.observables[0].shape,
   });
   if (targets.length === 0) throw new Error("observationTargets must contain at least one target");
   const reference = {

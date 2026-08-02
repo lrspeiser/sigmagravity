@@ -74,6 +74,7 @@ export function prepareBatch({ submission, resolvedSystems }) {
       model: submission.model,
       inputBundle: observationBundle,
       requestedObservables,
+      fieldShape: fieldPreflight.geometry.shape,
     });
     return {
       systemId: system.id,
@@ -141,9 +142,9 @@ export function prepareBatch({ submission, resolvedSystems }) {
     scoredObservationTargets,
     claimBoundary: scoredObservationTargets
       ? [
-        "Circular-speed and resolved velocity-field scores are produced by separately content-addressed observation jobs after each immutable field solve.",
+        "Massive-tracer and photon-lensing scores are produced by separately content-addressed observation jobs after each immutable field solve.",
         "Changing a measured array, mask, uncertainty, beam, or target declaration does not alter the field-child identity when the model and source field inputs are unchanged.",
-        "Photon lensing and unsubmitted observables are not evaluated by this batch.",
+        "Velocity, deflection, and reduced-shear residuals remain in separate named channels and units; unsubmitted observables are not evaluated.",
       ]
       : [
         "A converged batch proves execution of one frozen model, not agreement with observations.",

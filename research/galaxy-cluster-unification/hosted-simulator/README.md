@@ -246,7 +246,8 @@ data therefore changes the batch and observation identities but preserves the
 field identity. See
 `../docs/P0733_COMPOSED_BATCH_OBSERVATION_JOBS_MILESTONE.md`.
 
-Two massive-tracer observation adapters are now implemented. A system can
+Two massive-tracer adapters and one separately typed photon adapter are now
+implemented. A system can
 attach a content-hashed `sigma-observation-target/1` circular-speed curve or
 resolved line-of-sight velocity map. After the field converges, the curve
 adapter azimuthally samples any declared `massive_tracers` vector acceleration
@@ -256,6 +257,22 @@ an explicit inclination and handedness, and can apply an intensity-weighted
 beam convolution before scoring observed pixels. Both write predictions,
 residuals, RMSE, chi-square, reduced chi-square, and Gaussian log likelihood.
 Neither adapter changes the field equation or accepts a photon observable.
+
+`photon_lensing_map` instead requires a Cartesian 3D vector observable in
+`m/s^2` whose manifest target is `photons` or `both`. It declares the north,
+east, and line-of-sight storage axes, an explicit `D_ls/D_s` distance ratio,
+and an explicit lens angular-diameter distance. The worker computes
+
+`alpha_perp = -(2 D_ls / (c^2 D_s)) integral(a_photon,perp dl)`
+
+and publishes named east/north deflection maps plus convergence, both shear
+components, reduced shear, rotation, Jacobian determinant/eigenvalues, and
+absolute magnification. Optional paired deflection and reduced-shear maps are
+scored in separate `arcsec` and dimensionless channels; neither can be blended
+with the velocity score. The deterministic NPZ map archive is content-hashed
+and byte-identical between integrated and separately cached observation jobs.
+See `examples/observation-targets/photon-lensing-map.json` and
+`../docs/P0734_TYPED_PHOTON_LENSING_ADAPTER.md`.
 
 The map target contract is illustrated by
 `examples/observation-targets/line-of-sight-velocity-field.json`. Its named
@@ -281,7 +298,8 @@ manifests: 52/52 evaluations have exact pixel support, valid hashes, zero
 per-galaxy gravity parameters, and at most `1.96e-10 m/s` prediction parity RMS
 against an independent frozen implementation. This is spent-sample adapter
 commissioning, not theory validation. Pressure support/non-circular motions,
-spectral cubes, and photon lensing remain future acceptance work. See
+spectral cubes, raw multiple-image roots, source-position profiling, time
+delays, and critical-curve catalogs remain future acceptance work. See
 `../docs/P0731_REAL_VELOCITY_FIELD_ADAPTER_PARITY_RESULTS.md`.
 
 The full P0723 commissioning run then used the same generic HTTP path for all

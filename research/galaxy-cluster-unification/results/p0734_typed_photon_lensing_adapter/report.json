@@ -1,0 +1,92 @@
+{
+  "analyticAcceptance": {
+    "affineField": {
+      "gradientFieldRotationRms": 3.745863382906341e-17,
+      "maximumInvariantAbsoluteError": 4.440892098500626e-16,
+      "perMapAbsoluteErrors": {
+        "convergence": 2.0122792321330962e-16,
+        "jacobian_determinant": 4.440892098500626e-16,
+        "rotation": 1.734723475976807e-16,
+        "shear_1": 2.0643209364124004e-16,
+        "shear_2": 1.8561541192951836e-16
+      }
+    },
+    "pointMass": {
+      "finiteLineOfSightHalfLengthCells": 128,
+      "impactParameterMaximumCells": 32,
+      "impactParameterMinimumCells": 4,
+      "medianRelativeError": 0.009743708488312963,
+      "p95RelativeError": 0.027412575906004006
+    },
+    "syntheticScoring": {
+      "channelNames": [
+        "deflection_arcsec",
+        "reduced_shear_dimensionless"
+      ],
+      "deflectionRmseArcsec": 0.0,
+      "legacyVelocityRmse": null,
+      "reducedShearRmse": 0.0
+    },
+    "uniformField": {
+      "distanceRatioScalingRelativeError": 0.0,
+      "pathLengthScalingRelativeError": 0.0,
+      "signConvention": "positive transverse acceleration produces negative deflection",
+      "uniformFieldRelativeError": 2.220446049250313e-16
+    }
+  },
+  "claimBoundary": [
+    "P0734 validates the mapping from a submitted photon acceleration field to weak-lensing map observables; it does not validate the gravity equation that produced that field.",
+    "The fixed 2/c^2 projection is the declared weak-field zero-slip normalization for an acceleration-like photon observable, not a derivation of a covariant metric theory.",
+    "Convergence and reduced-shear map comparisons may depend on published reconstruction assumptions; provenance must identify those assumptions.",
+    "P0734 does not fit raw multiple-image positions, source positions, time delays, critical curves, or cosmological distances. Those require separately typed follow-on adapters.",
+    "A successful analytic or synthetic gate is numerical conformance, not evidence that a baryon-only theory explains cluster lensing."
+  ],
+  "configSha256": "3624a586aa7c616e7fb2f13ac6406a22a3acc419b053c4533c388c4128cc4a6d",
+  "executionAcceptance": {
+    "deterministicMapArchive": true,
+    "hostedTestCount": 68,
+    "hostedTestReturnCode": 0,
+    "integratedAndDecoupledMapParity": true,
+    "photonPytestReturnCode": 0,
+    "staticBuildReturnCode": 0
+  },
+  "failedGates": [],
+  "gateResults": {
+    "affine_lensing_invariants": true,
+    "channel_separation": true,
+    "deterministic_map_archive": true,
+    "exact_deflection_scoring": true,
+    "exact_reduced_shear_scoring": true,
+    "gradient_field_rotation": true,
+    "hosted_preflight_and_batch_acceptance": true,
+    "integrated_and_decoupled_parity": true,
+    "linear_distance_ratio_scaling": true,
+    "linear_path_length_scaling": true,
+    "no_per_object_gravity_parameters": true,
+    "observation_adds_no_gravity_parameters": true,
+    "point_mass_median_normalization": true,
+    "point_mass_p95_normalization": true,
+    "static_build": true,
+    "uniform_field_normalization": true
+  },
+  "parentCommit": "38bb890ce89e3310f3d21c2907aaee8dd73e115a",
+  "schemaVersion": "sigma-p0734-typed-photon-lensing-adapter-result/1",
+  "sourceSha256": {
+    "hosted-simulator/lib/batch-preflight.mjs": "b8ab05903132c340f2f3e7541f65fc1f9cc0ac46036f1479e5fa6459905eda52",
+    "hosted-simulator/lib/field-job-preflight.mjs": "d0a0a9608090d8f813cdd30d465c009c81f52bd749e3d8b7a2d5a4307bbce577",
+    "hosted-simulator/lib/local-batch-service.mjs": "cc7dc19e2d7381788875abf35be7de56de52670f024112e9e9c4b9c4d7e93790",
+    "hosted-simulator/lib/observation-evaluation-preflight.mjs": "3af515d695a75575a70548e9ac7f0913942118e61bfa2a541c647d8e618ffb1e",
+    "hosted-simulator/lib/observation-target.mjs": "35d2a4544512cb369eb832f4f43d8052f993378839c8c1c40f85dc420b8c9353",
+    "hosted-simulator/schemas/observation-target-v1.schema.json": "cbd0aa52e78c53b1f6523dfc1d7efcdffa113221e10a06db6df32dffdfe86d56",
+    "scripts/run_p0734_typed_photon_lensing_adapter.py": "028940df9959662f0a84fd5a4ba90fdebe324ef559a32f2c7413d5108b8b06ca",
+    "src/voidscreen/field_job.py": "2699d02a817db7379443064a5758b924d2942ef1796be2c8f712b71be4aff306",
+    "src/voidscreen/observation_adapters.py": "bc75df05db348a5e252c5891948dcfa6c46d7e2ddeb8e95aff88d60a35aea44a",
+    "src/voidscreen/observation_evaluation_job.py": "78bcc47f07b9f8e17b818a7cfc1f99b59f05964a18f4c39f9d92a599d981d278",
+    "src/voidscreen/photon_lensing_adapter.py": "6e9a183fd64686e4bd4d15a30f771734c479d7ecc6c9dc606cac30bebd2a0378",
+    "src/voidscreen/sky_lensing.py": "66d019735e4f028acb42b591e2902da88a659baba53d7ce4b93dab38b500884b",
+    "tests/test_observation_evaluation_job.py": "aaa0cffbcf69060f25ad202b6e23f28a8339503dbc715dc9d45512fd5a77f699",
+    "tests/test_photon_lensing_adapter.py": "c6c60128ec9e98fd961494212f87b1f7888ceee4d8d96c3a318b94a84d9da899"
+  },
+  "stage": "P0734",
+  "status": "pass"
+}
