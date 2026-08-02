@@ -168,6 +168,8 @@ results/environmental_mog0/*
 !results/p0635_ddo154_map_geometry_sensitivity/**
 !results/p0636_little_things_baryon_acquisition/
 !results/p0636_little_things_baryon_acquisition/**
+!results/p0720_resolved_galaxy_parameter_roundtrip/
+!results/p0720_resolved_galaxy_parameter_roundtrip/**
 data/raw/manga_dr17/*.fits
 data/raw/erass1_clusters/*.fits
 data/raw/manga_gema_dr17/*.fits

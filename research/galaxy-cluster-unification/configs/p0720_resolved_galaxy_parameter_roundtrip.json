@@ -1,0 +1,25 @@
+{
+  "stage": "P0720",
+  "purpose": "Commission a gravity-independent resolved-galaxy parameter extractor and forward generator on the 13 available LITTLE THINGS baryonic maps.",
+  "parent_map_directory": "results/p0639_registered_baryonic_maps/maps",
+  "parent_audit_csv": "results/p0639_registered_baryonic_maps/map_audit.csv",
+  "radial_bins": 24,
+  "maximum_fourier_mode": 4,
+  "residual_feature_count_per_component": 64,
+  "vertical_realizations_per_component": 3,
+  "vertical_seed": 20260802,
+  "commissioning_note": "These thresholds were frozen after exploratory prototyping on the same maps, so they are engineering commissioning gates, not blind scientific validation.",
+  "gates": {
+    "required_galaxies": 13,
+    "maximum_mass_relative_error": 1e-12,
+    "maximum_3d_projection_relative_error": 1e-12,
+    "total_median_normalized_l2": 0.20,
+    "total_maximum_normalized_l2": 0.35,
+    "total_median_pixel_correlation": 0.97,
+    "total_minimum_pixel_correlation": 0.93,
+    "gas_median_normalized_l2": 0.20,
+    "gas_maximum_normalized_l2": 0.30,
+    "stars_median_normalized_l2": 0.35,
+    "stars_maximum_normalized_l2": 0.60
+  }
+}

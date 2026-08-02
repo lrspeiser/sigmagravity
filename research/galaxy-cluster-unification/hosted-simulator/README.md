@@ -17,7 +17,7 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
-The 0.2 preview also accepts a theory-neutral field-model manifest. It declares
+The 0.4 preview also accepts a theory-neutral field-model manifest. It declares
 scalar, vector, or tensor fields; 2D or 3D coordinates; equations; units;
 boundary conditions; observables for matter and/or photons; solver settings;
 and universal versus per-object parameters. The validator checks dimensions,
@@ -90,6 +90,10 @@ POST /api/v1/field-jobs
 GET  /api/v1/field-jobs/{id}
 GET  /api/v1/field-jobs/{id}/events
 GET  /api/v1/field-jobs/{id}/artifacts
+POST /api/v1/galaxy-jobs
+GET  /api/v1/galaxy-jobs/{id}
+GET  /api/v1/galaxy-jobs/{id}/events
+GET  /api/v1/galaxy-jobs/{id}/artifacts
 POST /api/v1/runs
 GET  /api/v1/openapi.json
 ```
@@ -138,6 +142,34 @@ arrays into a verified `sigma-array-bundle/1` directory and runs a
 scientific-result hashes, output-array hashes, residual history, resource log,
 artifact index, and reproduction manifest. See `../worker` for the pinned,
 non-root container definition.
+
+The 0.4 local reference API also supports formula-independent resolved-galaxy
+jobs:
+
+```text
+POST /api/v1/galaxy-jobs
+GET  /api/v1/galaxy-jobs/{id}
+GET  /api/v1/galaxy-jobs/{id}/events
+GET  /api/v1/galaxy-jobs/{id}/artifacts
+POST /api/v1/galaxy-jobs/{id}/cancel
+```
+
+`extract_roundtrip` consumes an immutable Cartesian 2D NPZ bundle containing
+`gas_surface_density` and `stellar_surface_density` in `M_sun/kpc^2`. It emits
+a content-hashed baryonic parameter package, regenerated 2D density bundle,
+an explicitly prior-based 3D density bundle, and round-trip metrics. `generate`
+accepts one of those parameter packages plus controlled changes to mass,
+radial scale, Fourier/asymmetry strength, local features, rotation, and
+component offsets. The resulting surface or volume bundle can then be supplied
+to any compatible `/api/v1/field-jobs` model; the galaxy job never selects a
+gravity theory itself.
+
+The 3D density is not labeled as a uniquely recovered galaxy. Its scale height,
+vertical profile, and flaring are declared priors, and multiple different 3D
+realizations can project to the same 2D map. The public Vercel route currently
+returns `production_worker_not_connected`; real execution is available through
+the local reference server until durable workers and object storage are
+deployed.
 
 ## Production worker connection
 

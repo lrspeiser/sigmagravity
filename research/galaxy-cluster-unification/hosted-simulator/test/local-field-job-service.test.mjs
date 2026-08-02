@@ -52,6 +52,20 @@ function request() {
   };
 }
 
+function galaxyBundle() {
+  const core = {
+    schemaVersion: "sigma-array-bundle/1",
+    geometry: { coordinateSystem: "cartesian_2d", dimensions: 2, spacing: [0.2, 0.2], lengthUnit: "kpc" },
+    arrays: ["gas_surface_density", "stellar_surface_density"].map((key, index) => ({
+      key, npzKey: key, unit: "M_sun/kpc^2", rank: "scalar", role: "source", dtype: "<f8",
+      shape: [17, 17], elementCount: 289, contentSha256: String(index + 1).repeat(64),
+    })),
+    provenance: { kind: "test_fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  return { ...core, bundleSha256: sha256(core) };
+}
+
 async function successfulRunner({ jobDirectory }) {
   const root = resolve(jobDirectory, "artifacts");
   await mkdir(root, { recursive: true });
@@ -134,6 +148,35 @@ test("queued field jobs expose status, events, immutable artifacts, and duplicat
   const duplicate = await service.createFieldJob({ schemaVersion: "sigma-field-job-submit/1", model: model(), dataUploadId: upload.id, request: request() });
   assert.equal(duplicate.id, submission.id);
   assert.equal(duplicate.duplicate, true);
+});
+
+test("queued galaxy jobs use separate routes and zero gravity parameters", async (t) => {
+  const service = await fixture(t);
+  const archive = Buffer.from("galaxy-npz-test-archive");
+  const ticket = await service.createUpload({
+    schemaVersion: "sigma-data-upload-request/1",
+    inputBundle: galaxyBundle(),
+    archive: { sha256: digest(archive), bytes: archive.length },
+  });
+  await service.putUploadContent(ticket.id, archive);
+  const submission = await service.createGalaxyJob({
+    schemaVersion: "sigma-galaxy-job-submit/1",
+    operation: "extract_roundtrip",
+    dataUploadId: ticket.id,
+    galaxy: "FIXTURE",
+    vertical: { enabled: true, realizations: 2, zCells: 17, seed: 4 },
+    outputLicense: { id: "CC0-1.0", redistributionAllowed: true },
+  });
+  assert.equal(submission.jobType, "galaxy");
+  assert.match(submission.links.self, /^\/api\/v1\/galaxy-jobs\//);
+  assert.equal(submission.parameterAccounting.gravityPerObject, 0);
+  await service.waitForIdle();
+  const completed = await service.getGalaxyJob(submission.id);
+  assert.equal(completed.state, "succeeded");
+  const artifacts = await service.getArtifacts(submission.id);
+  assert.equal(artifacts.schemaVersion, "sigma-galaxy-job-artifact-response/1");
+  assert.match(artifacts.items[0].url, /^\/api\/v1\/galaxy-jobs\//);
+  await assert.rejects(() => service.getFieldJob(submission.id), /unknown field job/);
 });
 
 test("artifact mutation is rejected and completed manifests recover after restart", async (t) => {

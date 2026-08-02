@@ -1,0 +1,69 @@
+{
+  "seedGalaxy": "CVnIdwA",
+  "note": "These are controlled counterfactual morphologies, not newly observed galaxies.",
+  "variants": [
+    {
+      "name": "replay",
+      "componentControls": {}
+    },
+    {
+      "name": "compact",
+      "componentControls": {
+        "gas": {
+          "radial_scale": 0.72
+        },
+        "stars": {
+          "radial_scale": 0.72
+        }
+      }
+    },
+    {
+      "name": "diffuse",
+      "componentControls": {
+        "gas": {
+          "radial_scale": 1.28
+        },
+        "stars": {
+          "radial_scale": 1.28
+        }
+      }
+    },
+    {
+      "name": "smooth",
+      "componentControls": {
+        "gas": {
+          "fourier_scale": 0.0,
+          "residual_scale": 0.0
+        },
+        "stars": {
+          "fourier_scale": 0.0,
+          "residual_scale": 0.0
+        }
+      }
+    },
+    {
+      "name": "asymmetric",
+      "componentControls": {
+        "gas": {
+          "fourier_scale": 1.7,
+          "residual_scale": 1.3
+        },
+        "stars": {
+          "fourier_scale": 1.7,
+          "residual_scale": 1.3
+        }
+      }
+    },
+    {
+      "name": "gas-rich",
+      "componentControls": {
+        "gas": {
+          "mass_scale": 2.0
+        },
+        "stars": {
+          "mass_scale": 0.7
+        }
+      }
+    }
+  ]
+}

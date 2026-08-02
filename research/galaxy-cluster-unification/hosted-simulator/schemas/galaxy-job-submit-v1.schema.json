@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigmagravity.org/schemas/galaxy-job-submit-v1.schema.json",
+  "title": "Sigma resolved-galaxy job submission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "operation", "outputLicense"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-galaxy-job-submit/1" },
+    "operation": { "enum": ["extract_roundtrip", "generate"] },
+    "dataUploadId": { "type": "string", "pattern": "^upload_[0-9a-f]{24}$" },
+    "galaxy": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "sourceObservables": { "type": "object" },
+    "parameterPackage": { "type": "object" },
+    "extractionControls": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "radialBins": { "type": "integer", "minimum": 6, "maximum": 64 },
+        "maximumFourierMode": { "type": "integer", "minimum": 0, "maximum": 8 },
+        "residualFeatureCountPerComponent": { "type": "integer", "minimum": 0, "maximum": 256 }
+      }
+    },
+    "generationControls": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gas": { "$ref": "#/$defs/componentControls" },
+        "stars": { "$ref": "#/$defs/componentControls" }
+      }
+    },
+    "vertical": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "realizations": { "type": "integer", "minimum": 1, "maximum": 8 },
+        "zCells": { "type": "integer", "minimum": 9, "maximum": 129 },
+        "seed": { "type": "integer", "minimum": 0, "maximum": 2147483647 }
+      }
+    },
+    "outputLicense": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "redistributionAllowed"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "redistributionAllowed": { "type": "boolean" }
+      }
+    }
+  },
+  "$defs": {
+    "componentControls": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "massScale": { "type": "number", "exclusiveMinimum": 0 },
+        "radialScale": { "type": "number", "exclusiveMinimum": 0 },
+        "fourierScale": { "type": "number", "minimum": 0 },
+        "residualScale": { "type": "number", "minimum": 0 },
+        "rotationDeg": { "type": "number" },
+        "centerOffsetKpc": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "number" }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "operation": { "const": "extract_roundtrip" } } },
+      "then": { "required": ["dataUploadId"] },
+      "else": { "required": ["parameterPackage"] }
+    }
+  ]
+}

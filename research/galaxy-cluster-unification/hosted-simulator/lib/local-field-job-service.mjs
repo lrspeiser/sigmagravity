@@ -13,6 +13,7 @@ import {
 import { delimiter, dirname, resolve } from "node:path";
 import { sha256 } from "./canonical.mjs";
 import { prepareFieldJob, validateArrayBundle } from "./field-job-preflight.mjs";
+import { prepareGalaxyJob } from "./galaxy-job-preflight.mjs";
 
 const SERVICE_VERSION = "sigma-local-field-job-service/1";
 const IDENTIFIER = /^(?:upload|job)_[0-9a-f]{24}$/;
@@ -73,9 +74,9 @@ async function exists(path) {
   }
 }
 
-async function workerSourceSha256(projectRoot) {
+async function workerSourceSha256(projectRoot, names) {
   const digest = createHash("sha256");
-  for (const name of ["field_job.py", "generic_field_worker.py"]) {
+  for (const name of names) {
     const path = resolve(projectRoot, "src", "voidscreen", name);
     digest.update(name, "utf8");
     digest.update(Buffer.from([0]));
@@ -103,13 +104,14 @@ function publicUpload(record) {
 }
 
 function publicJob(record) {
+  const collection = record.jobType === "galaxy" ? "galaxy-jobs" : "field-jobs";
   return {
     ...record,
     links: {
-      self: `/api/v1/field-jobs/${record.id}`,
-      events: `/api/v1/field-jobs/${record.id}/events`,
-      artifacts: `/api/v1/field-jobs/${record.id}/artifacts`,
-      cancel: `/api/v1/field-jobs/${record.id}/cancel`,
+      self: `/api/v1/${collection}/${record.id}`,
+      events: `/api/v1/${collection}/${record.id}/events`,
+      artifacts: `/api/v1/${collection}/${record.id}/artifacts`,
+      cancel: `/api/v1/${collection}/${record.id}/cancel`,
     },
   };
 }
@@ -129,7 +131,7 @@ function parseWorkerInputFailure(stderr) {
   for (const line of String(stderr ?? "").trim().split("\n").reverse()) {
     try {
       const value = JSON.parse(line);
-      if (value?.schemaVersion === "sigma-field-job-cli-error/1") return value;
+      if (["sigma-field-job-cli-error/1", "sigma-galaxy-job-cli-error/1"].includes(value?.schemaVersion)) return value;
     } catch {
       // Continue past ordinary diagnostic lines.
     }
@@ -137,9 +139,13 @@ function parseWorkerInputFailure(stderr) {
   return { state: "rejected_input", errorType: "InputValidationError", message: "worker rejected the submitted input" };
 }
 
-function defaultRunner({ projectRoot, pythonExecutable, requestPath, timeoutMs, signal }) {
+function defaultRunner({ projectRoot, pythonExecutable, requestPath, timeoutMs, signal, jobType = "field" }) {
   return new Promise((resolvePromise, rejectPromise) => {
-    const script = resolve(projectRoot, "scripts", "run_generic_field_job.py");
+    const script = resolve(
+      projectRoot,
+      "scripts",
+      jobType === "galaxy" ? "run_resolved_galaxy_job.py" : "run_generic_field_job.py",
+    );
     const source = resolve(projectRoot, "src");
     const pythonPath = process.env.PYTHONPATH
       ? `${source}${delimiter}${process.env.PYTHONPATH}`
@@ -222,6 +228,7 @@ export class LocalFieldJobService {
     this.drainPromise = null;
     this.jobLocks = new Map();
     this.workerSourceSha256 = null;
+    this.galaxyWorkerSourceSha256 = null;
     this.shuttingDown = false;
   }
 
@@ -235,12 +242,20 @@ export class LocalFieldJobService {
       maxEstimatedMemoryBytes: this.maxEstimatedMemoryBytes,
       concurrency: 1,
       workerSourceSha256: this.workerSourceSha256,
+      galaxyWorkerSourceSha256: this.galaxyWorkerSourceSha256,
     };
   }
 
   async initialize() {
     this.shuttingDown = false;
-    this.workerSourceSha256 = await workerSourceSha256(this.projectRoot);
+    this.workerSourceSha256 = await workerSourceSha256(
+      this.projectRoot,
+      ["field_job.py", "generic_field_worker.py"],
+    );
+    this.galaxyWorkerSourceSha256 = await workerSourceSha256(
+      this.projectRoot,
+      ["resolved_galaxy_job.py", "resolved_galaxy_generator.py"],
+    );
     await mkdir(this.#uploadsRoot(), { recursive: true });
     await mkdir(this.#jobsRoot(), { recursive: true });
     for (const entry of await readdir(this.#jobsRoot(), { withFileTypes: true })) {
@@ -424,6 +439,7 @@ export class LocalFieldJobService {
     const record = {
       schemaVersion: "sigma-field-job-record/1",
       id,
+      jobType: "field",
       identity,
       state: "queued",
       dataUploadId: upload.id,
@@ -443,19 +459,123 @@ export class LocalFieldJobService {
     return { ...publicJob(record), duplicate: false };
   }
 
+  async createGalaxyJob(payload) {
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+      throw new LocalServiceError(422, "invalid_job", "galaxy job request must be an object");
+    }
+    let upload = null;
+    if (payload.operation === "extract_roundtrip") {
+      upload = await this.#readUpload(assertIdentifier(payload.dataUploadId, "upload"));
+      if (upload.state !== "ready") {
+        throw new LocalServiceError(409, "upload_not_ready", "data upload content is not ready");
+      }
+    }
+    let preflight;
+    try {
+      preflight = prepareGalaxyJob({ submission: payload, inputBundle: upload?.inputBundle ?? null });
+    } catch (cause) {
+      const error = new LocalServiceError(422, "invalid_galaxy_job", cause.message);
+      error.cause = cause;
+      throw error;
+    }
+    if (preflight.resourceEstimate.estimatedMemoryBytes > this.maxEstimatedMemoryBytes) {
+      throw new LocalServiceError(413, "resource_quota_exceeded", "estimated worker memory exceeds the local quota");
+    }
+    const identity = {
+      schemaVersion: "sigma-galaxy-job-submission-identity/1",
+      serviceVersion: SERVICE_VERSION,
+      preflightSha256: preflight.preflightSha256,
+      archiveSha256: upload?.archive.sha256 ?? null,
+      workerSourceSha256: this.galaxyWorkerSourceSha256,
+    };
+    const id = `job_${sha256(identity).slice(0, 24)}`;
+    const recordPath = this.#jobRecordPath(id);
+    if (await exists(recordPath)) return { ...publicJob(await readJson(recordPath)), duplicate: true };
+    const jobCount = (await readdir(this.#jobsRoot(), { withFileTypes: true })).filter((entry) => entry.isDirectory()).length;
+    if (jobCount >= this.maxStoredJobs) {
+      throw new LocalServiceError(429, "job_quota_exceeded", "local stored-job quota has been reached");
+    }
+    const jobDirectory = this.#jobDirectory(id);
+    await mkdir(jobDirectory, { recursive: true });
+    if (upload) {
+      const bundleDirectory = resolve(jobDirectory, "bundle");
+      await mkdir(bundleDirectory, { recursive: true });
+      await atomicWrite(resolve(bundleDirectory, "bundle.json"), upload.inputBundle);
+      try {
+        await link(this.#uploadArchivePath(upload.id), resolve(bundleDirectory, "arrays.npz"));
+      } catch (error) {
+        if (!["EXDEV", "EPERM", "EACCES"].includes(error.code)) throw error;
+        await copyFile(this.#uploadArchivePath(upload.id), resolve(bundleDirectory, "arrays.npz"));
+      }
+    }
+    const envelope = {
+      schemaVersion: "sigma-galaxy-job-cli/1",
+      ...preflight.workerRequest,
+      inputBundlePath: upload ? "bundle" : undefined,
+      outputDirectory: "artifacts",
+    };
+    await atomicWrite(resolve(jobDirectory, "request.json"), envelope);
+    const record = {
+      schemaVersion: "sigma-galaxy-job-record/1",
+      id,
+      jobType: "galaxy",
+      identity,
+      state: "queued",
+      dataUploadId: upload?.id ?? null,
+      preflight,
+      workerSourceSha256: this.galaxyWorkerSourceSha256,
+      parameterAccounting: preflight.parameterAccounting,
+      createdAt: now(),
+      updatedAt: now(),
+      scientificJobId: null,
+      scientificResultSha256: null,
+      failureSha256: null,
+    };
+    await atomicWrite(recordPath, record);
+    await this.#appendEvent(id, "queued", { message: "Galaxy job accepted by the local single-worker queue." });
+    this.queue.push(id);
+    this.#kick();
+    return { ...publicJob(record), duplicate: false };
+  }
+
   async listFieldJobs() {
     const records = [];
     for (const entry of await readdir(this.#jobsRoot(), { withFileTypes: true })) {
       if (!entry.isDirectory() || !entry.name.startsWith("job_")) continue;
       const path = this.#jobRecordPath(entry.name);
-      if (await exists(path)) records.push(publicJob(await readJson(path)));
+      if (await exists(path)) {
+        const record = await readJson(path);
+        if ((record.jobType ?? "field") === "field") records.push(publicJob(record));
+      }
     }
     records.sort((left, right) => right.createdAt.localeCompare(left.createdAt));
     return { schemaVersion: "sigma-field-job-list/1", items: records };
   }
 
   async getFieldJob(idValue) {
-    return publicJob(await this.#readJob(assertIdentifier(idValue, "job")));
+    const record = await this.#readJob(assertIdentifier(idValue, "job"));
+    if (record.jobType === "galaxy") throw new LocalServiceError(404, "not_found", "unknown field job identifier");
+    return publicJob(record);
+  }
+
+  async listGalaxyJobs() {
+    const records = [];
+    for (const entry of await readdir(this.#jobsRoot(), { withFileTypes: true })) {
+      if (!entry.isDirectory() || !entry.name.startsWith("job_")) continue;
+      const path = this.#jobRecordPath(entry.name);
+      if (await exists(path)) {
+        const record = await readJson(path);
+        if (record.jobType === "galaxy") records.push(publicJob(record));
+      }
+    }
+    records.sort((left, right) => right.createdAt.localeCompare(left.createdAt));
+    return { schemaVersion: "sigma-galaxy-job-list/1", items: records };
+  }
+
+  async getGalaxyJob(idValue) {
+    const record = await this.#readJob(assertIdentifier(idValue, "job"));
+    if (record.jobType !== "galaxy") throw new LocalServiceError(404, "not_found", "unknown galaxy job identifier");
+    return publicJob(record);
   }
 
   async getEvents(idValue) {
@@ -480,14 +600,15 @@ export class LocalFieldJobService {
       throw new LocalServiceError(409, "artifact_integrity_failed", "artifact index no longer matches the scientific manifest");
     }
     const index = JSON.parse(indexBytes.toString("utf8"));
+    const collection = record.jobType === "galaxy" ? "galaxy-jobs" : "field-jobs";
     return {
-      schemaVersion: "sigma-field-job-artifact-response/1",
+      schemaVersion: record.jobType === "galaxy" ? "sigma-galaxy-job-artifact-response/1" : "sigma-field-job-artifact-response/1",
       jobId: id,
       manifest,
       artifactIndex: index,
       items: index.artifacts.map((item) => ({
         ...item,
-        url: `/api/v1/field-jobs/${id}/artifacts/${encodeURIComponent(item.path)}`,
+        url: `/api/v1/${collection}/${id}/artifacts/${encodeURIComponent(item.path)}`,
       })),
     };
   }
@@ -523,6 +644,12 @@ export class LocalFieldJobService {
       await this.#appendEvent(id, "cancelled", { message: "Cancellation requested." });
       return publicJob(record);
     });
+  }
+
+  async cancelGalaxyJob(idValue) {
+    const record = await this.#readJob(assertIdentifier(idValue, "job"));
+    if (record.jobType !== "galaxy") throw new LocalServiceError(404, "not_found", "unknown galaxy job identifier");
+    return this.cancelFieldJob(idValue);
   }
 
   async waitForIdle(timeoutMs = 30_000) {
@@ -598,6 +725,7 @@ export class LocalFieldJobService {
         jobDirectory,
         timeoutMs: this.timeoutMs,
         signal: this.abortController.signal,
+        jobType: record.jobType ?? "field",
       });
       await writeFile(resolve(jobDirectory, "worker_stdout.log"), execution.stdout ?? "", "utf8");
       await writeFile(resolve(jobDirectory, "worker_stderr.log"), execution.stderr ?? "", "utf8");

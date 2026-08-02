@@ -24,7 +24,7 @@ trusted solver.
 | Radial hosted benchmark | 175 SPARC systems, 3,391 points, Newtonian and fixed-MOND comparators | radial mass-model components only |
 | Seeded radial generator | deterministic mass, gas fraction, bulge fraction, scale, noise, and seed | not a morphology-matched 2D galaxy |
 | Observation-matched replica layer | P0631 recreates radial photometry and supplied velocity observables for 131 systems | axisymmetric reconstruction; dynamics are inputs in replica mode |
-| Real resolved map path | P0635 ingests DDO154 H I and optical images and lifts them to a 3D density field | one spent commissioning galaxy, not a public multi-galaxy release |
+| Real resolved map path | P0639 provides registered gas, stellar, and total-baryon maps for 13 LITTLE THINGS galaxies; matching velocity fields exist separately | gas-rich dwarf sample; the maps inherit preprocessing and stellar mass-to-light assumptions |
 | Typed field-model contract | `sigma-field-model/1` validates units, ranks, operators, boundaries, data keys, solver family, and parameter policy | execution is not connected to the hosted gateway |
 | Cross-theory conformance fixtures | Newtonian, AQUAL, QUMOND, Refracted Gravity, and two-potential manifests pass one validator | validation does not prove a numerical or physical result |
 | Neutral local field worker | one expression-driven engine solves scalar divergence-form equations on Cartesian 2D and 3D grids | no hosted queue, tensors, nonlocal operators, axisymmetric coordinates, or arbitrary-code sandbox yet |
@@ -32,6 +32,11 @@ trusted solver.
 | Content-addressed field job | verified array bundle, deterministic job/scientific hashes, residual history, output hashes, resource log, artifact index, and CLI pass end to end | durable cloud upload, database, scheduler, and hosted worker are not connected |
 | Worker container definition | pinned Python/NumPy/SciPy/JCS environment, non-root user, read-only/network-disabled run instructions | Docker/Podman is unavailable on this machine, so image build and runtime isolation still need CI or a container host |
 | Asynchronous reference API | immutable NPZ upload, queue, polling, events, cancellation, restart recovery, and rehashed artifact downloads pass through real HTTP and the Python worker | local single-user filesystem queue; no durable cloud store, auth, or deployed container scheduler |
+| Gravity-independent galaxy extraction | P0720 converts each real gas and stellar map into content-hashed radial/Fourier/local-feature parameters without velocity targets or gravity parameters | operates on registered maps, not raw images or uncertainty posteriors |
+| Parameter-controlled 2D generation | P0720 deterministically replays known systems and changes mass, scale, angular structure, clumps, rotation, and offsets | finite basis leaves visible low-level artifacts; not yet a survey observation simulator |
+| Explicit 3D prior ensembles | 78 varied thickness/flaring realizations project back to their 2D maps at numerical precision | demonstrates non-uniqueness; does not recover true depth |
+| Known-map commissioning round trip | 13/13 total-baryon maps: median normalized error 0.168, worst 0.257, median correlation 0.986 | thresholds saw the same data during prototyping and are not blind validation |
+| Asynchronous galaxy-job API | immutable map upload, extraction, 2D/3D generation, polling, events, cancellation, verified downloads, and parameter-controlled replay pass through real HTTP | local single-user worker; public Vercel route advertises the schema but cannot execute it yet |
 
 The generic worker dispatches from equation structure, not a theory name. It
 supports `laplacian(phi)=source` and
@@ -50,11 +55,11 @@ below.
 | 3. Generic numerical engine | Add controlled isolated-boundary approximations, axisymmetric cylindrical grids, tensor coefficients, coupled nonlinear convergence controls, nonlocal kernels, line-of-sight operators, adaptive resource estimates, and checkpoint/restart. | Manufactured solutions demonstrate the expected convergence order in every supported solver family; divergence and nonconvergence return diagnostics rather than a plausible-looking field. |
 | 4. Safe advanced tier | Define a container plug-in ABI for models outside the safe language; run each in a network-blocked, single-use sandbox with read-only inputs and hard CPU, memory, wall-time, and output limits. | A hostile fixture cannot read credentials, reach the network, or affect another run; a valid plug-in reproduces a safe-language fixture within tolerance. |
 | 5. Data ingestion | Immutable local NPZ upload with unit, hash, provenance, and license gates is implemented. Add resumable object-storage uploads for FITS, HDF5, CSV, tables, and catalogs plus frames, masks, PSFs/beams, uncertainty maps, distance, and inclination. | Uploading the same bytes and metadata returns the same data ID; missing units, frame, license, or checksum blocks scientific execution. |
-| 6. Versioned real-galaxy maps | Build an open catalog sharing resolved stellar-light, H I/gas, distance, inclination, PSF/beam, masks, and velocity maps for the same systems. Preserve raw and processed versions. | At least 20 morphologically varied galaxies pass registration, mass conservation, and observation-forward reconstruction gates before any theory score is opened. |
-| 7. 2D-to-3D reconstruction | Support transparent vertical priors, bulge deprojection, gas thickness, inclination, distance, warp/bar flags, and Monte Carlo nuisance draws. Never call a non-unique reconstruction “the galaxy’s true 3D density.” | Synthetic recovery tests cover known thickness/bulge/inclination; real results report the spread across allowed reconstructions. |
-| 8. Inverse parameter extraction | Infer light/gas components, scale lengths, bulge fraction, thickness, inclination, asymmetry, Fourier modes, clumps, and uncertainty distributions from observations. Separate measured, externally supplied, and inferred quantities. | On synthetic images with hidden truth, calibrated intervals contain the generating values at their advertised rate; holdout residuals reveal model misspecification. |
-| 9. Forward galaxy generator | Generate intrinsic stellar/gas density, projected images, spectral/velocity maps, beams/PSFs, noise, masks, and survey selection from a seed and physical/observational parameters. Provide both parametric and nonparametric modes. | Same seed is bitwise reproducible; changing one declared parameter produces the expected controlled change; mass/light are conserved within frozen tolerances. |
-| 10. Known-galaxy round trip | Feed inferred posterior parameters into the generator and compare generated products with the source observations, including radial profiles, pixels, Fourier modes, gas layout, velocity fields, and covariances. | Predeclared photometric, kinematic, morphology, and conservation gates pass on train, validation, and untouched whole-galaxy holdouts. A radial match alone is insufficient. |
+| 6. Versioned real-galaxy maps | Thirteen registered dwarf maps are now packaged internally. Add raw/processed public releases, licenses, masks, PSFs/beams, uncertainties, and at least seven spiral/bulge/LSB systems. | At least 20 morphologically varied galaxies pass registration, mass conservation, and observation-forward reconstruction gates before any theory score is opened. |
+| 7. 2D-to-3D reconstruction | P0720 now preserves vertical-prior ambiguity and exact projection. Add bulge deprojection, inclination/distance/warp uncertainty, PSF-aware inference, and posterior rather than prior-only draws. | Synthetic recovery tests cover known thickness/bulge/inclination; real results report the spread across allowed reconstructions. |
+| 8. Inverse parameter extraction | Deterministic mass, centroid, radial, Fourier, and local-feature extraction now works on registered maps. Add raw-image light/gas separation, uncertainty distributions, bulge/thickness inference, calibration checks, and missing-structure diagnostics. | On synthetic images with hidden truth, calibrated intervals contain the generating values at their advertised rate; holdout residuals reveal model misspecification. |
+| 9. Forward galaxy generator | Component maps can now be replayed and controlled in mass, scale, angular structure, clumps, rotation, and offsets. Add intrinsic bulges/warps, projected sky images, spectral/velocity cubes, beams/PSFs, noise, masks, and survey selection. | Same seed is bitwise reproducible; changing one declared parameter produces the expected controlled change; mass/light are conserved within frozen tolerances. |
+| 10. Known-galaxy round trip | The first 13 registered-map photometric round trips pass commissioning gates. Add raw-image, uncertainty, kinematic, covariance, train/validation, and untouched whole-galaxy holdouts. | Predeclared photometric, kinematic, morphology, and conservation gates pass on train, validation, and untouched whole-galaxy holdouts. A radial match alone is insufficient. |
 | 11. Theory-to-observable adapters | Convert solved potentials/fields into circular speeds, line-of-sight velocity fields, weak shear, convergence, deflection, critical curves, and raw multiple-image roots. Keep photon and massive-tracer mappings explicit. | Newtonian/MOND published fixtures reproduce within declared numerical and data-processing tolerance; photons are never silently scored with a massive-particle rule. |
 | 12. Fair scoring | Add fixed train/development/holdout splits, no-target-access execution, nuisance-policy declarations, universal/per-object parameter counts, likelihoods with covariance, and same-input comparators. | A batch report separates galaxies, clusters, topology, and Solar-System tests and shows performance versus Newtonian, fixed MOND/RAR, and a declared halo baseline without a single blended score. |
 | 13. Cluster data | Version member light, intracluster gas, geometry, source redshifts, weak-shear catalogs, and raw strong-lens image positions with licensing and sealed/open states. | Multiple clusters can be run with one frozen gravity parameter set; raw image/topology holdouts are scored, not only reconstructed dark-matter maps. |
@@ -87,11 +92,14 @@ used to hide a broken reconstruction, solver, or observation adapter.
 
 ## Current next milestone
 
-The asynchronous local reference milestone now passes through real HTTP: one
-canonical model manifest plus uploaded content-hashed NPZ data enters a
-short-request queue, the Python worker produces known-answer 2D and 3D fields,
-and all 16 downloaded artifacts rehash correctly. The immediate infrastructure
-milestone is replacing the local filesystem and process queue with durable
-object storage, job metadata, and isolated container workers. In parallel, the
-next scientific milestone is a licensed resolved-galaxy package and the first
-uncertainty-aware 2D-to-3D reconstruction round trip.
+The local field API, real-map extraction/generation round trip, and asynchronous
+galaxy-job contract now pass. Galaxy jobs expose `extract_roundtrip` and
+`generate` without embedding a gravity formula and emit standard array bundles
+for generic field jobs. The next product milestone is one chained batch request
+that selects real/generated systems, runs one confirmed model against all of
+them, and produces a comparator report with a frozen parameter policy.
+The next scientific milestone is synthetic hidden-truth recovery with noise,
+PSF, inclination, bulge, thickness, and calibrated uncertainties, followed by
+an untouched morphologically varied whole-galaxy holdout. Production hosting
+still requires durable object storage, job metadata, isolated workers, auth,
+quotas, and monitoring.

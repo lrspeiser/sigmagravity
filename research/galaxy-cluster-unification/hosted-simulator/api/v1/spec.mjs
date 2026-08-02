@@ -4,7 +4,7 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.3.0-preview",
+    version: "0.4.0-preview",
     description: "Stateless radial tests plus a dimension-checked, formula-independent 2D/3D contract. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
   },
   paths: {
@@ -28,6 +28,15 @@ const specification = {
     "/api/v1/field-jobs/{id}/artifacts": { get: { summary: "Read the verified artifact index and scientific manifest" } },
     "/api/v1/field-jobs/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed, rehashed artifact" } },
     "/api/v1/field-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running local field job" } },
+    "/api/v1/galaxy-jobs": {
+      get: { summary: "List local resolved-galaxy extraction/generation jobs" },
+      post: { summary: "Queue formula-independent extraction, generation, or 2D/3D round-trip work" },
+    },
+    "/api/v1/galaxy-jobs/{id}": { get: { summary: "Read resolved-galaxy job state" } },
+    "/api/v1/galaxy-jobs/{id}/events": { get: { summary: "Read resolved-galaxy lifecycle events" } },
+    "/api/v1/galaxy-jobs/{id}/artifacts": { get: { summary: "Read verified 2D/3D density and parameter artifacts" } },
+    "/api/v1/galaxy-jobs/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed resolved-galaxy artifact" } },
+    "/api/v1/galaxy-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running resolved-galaxy job" } },
     "/api/v1/runs": { post: { summary: "Score a formula without fitting object-specific gravity parameters" } },
   },
 };

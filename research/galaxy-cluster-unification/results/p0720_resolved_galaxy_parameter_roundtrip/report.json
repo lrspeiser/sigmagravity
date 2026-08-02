@@ -1,0 +1,68 @@
+{
+  "stage": "P0720",
+  "status": "pass",
+  "purpose": "Commission a gravity-independent resolved-galaxy parameter extractor and forward generator on the 13 available LITTLE THINGS baryonic maps.",
+  "galaxies": 13,
+  "components_scored": 39,
+  "aggregate": {
+    "gas": {
+      "median_normalized_l2": 0.14952546942108697,
+      "maximum_normalized_l2": 0.2096080544709449,
+      "median_pixel_correlation": 0.9866238918612763,
+      "minimum_pixel_correlation": 0.9778494734877139,
+      "median_radial_profile_log10_rmse": 0.37533778622967945,
+      "maximum_mass_relative_error": 1.9925888381566114e-16
+    },
+    "stars": {
+      "median_normalized_l2": 0.29458969355627795,
+      "maximum_normalized_l2": 0.5012494817403215,
+      "median_pixel_correlation": 0.955558590671931,
+      "minimum_pixel_correlation": 0.8598289661718105,
+      "median_radial_profile_log10_rmse": 0.10611921150846862,
+      "maximum_mass_relative_error": 2.466437611224396e-16
+    },
+    "total": {
+      "median_normalized_l2": 0.16752895831014997,
+      "maximum_normalized_l2": 0.25655198445386695,
+      "median_pixel_correlation": 0.9858547156054134,
+      "minimum_pixel_correlation": 0.9604437083394207,
+      "median_radial_profile_log10_rmse": 0.2699538587529854,
+      "maximum_mass_relative_error": 3.9782108738343523e-16
+    }
+  },
+  "maximum_3d_projection_relative_error": 4.1547666512153936e-16,
+  "vertical_realizations": 78,
+  "median_cell_to_parameter_ratio": 8.382936507936508,
+  "maximum_cell_to_parameter_ratio": 522.1607142857143,
+  "gravity_parameters": 0,
+  "velocity_targets_used": false,
+  "checks": {
+    "galaxy_count": true,
+    "mass_closure": true,
+    "three_dimensional_projection_closure": true,
+    "total_median_normalized_l2": true,
+    "total_maximum_normalized_l2": true,
+    "total_median_pixel_correlation": true,
+    "total_minimum_pixel_correlation": true,
+    "gas_median_normalized_l2": true,
+    "gas_maximum_normalized_l2": true,
+    "stars_median_normalized_l2": true,
+    "stars_maximum_normalized_l2": true,
+    "no_gravity_parameters": true,
+    "no_velocity_targets": true,
+    "deterministic_hashes": true,
+    "vertical_ambiguity_demonstrated": true
+  },
+  "commissioning_note": "These thresholds were frozen after exploratory prototyping on the same maps, so they are engineering commissioning gates, not blind scientific validation.",
+  "scientific_scope": {
+    "proved": "The compact baryonic representation can replay these registered 2D maps to the reported fidelity and can produce multiple projection-equivalent 3D priors.",
+    "not_proved": [
+      "unique recovery of true three-dimensional matter density",
+      "recovery directly from raw sky images without P0639 preprocessing assumptions",
+      "correct rotation speeds or lensing under any gravity theory",
+      "generalization beyond the 13 gas-rich dwarf galaxies in this commissioning sample"
+    ]
+  },
+  "source_audit_sha256": "43c8ea2db5309376f7873e5acdb99160c758328913b849f7557840545dea4f48",
+  "config_sha256": "e291870f17a8cad7b08686300a937e0b50c09502e8b607d8888e37e8eba453db"
+}

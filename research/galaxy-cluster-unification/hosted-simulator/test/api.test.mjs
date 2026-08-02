@@ -7,6 +7,7 @@ import validate from "../api/v1/formulas/validate.mjs";
 import validateModel from "../api/v1/models/validate.mjs";
 import prepareFieldJob from "../api/v1/field-jobs/prepare.mjs";
 import hostedFieldJobs from "../api/v1/field-jobs.mjs";
+import hostedGalaxyJobs from "../api/v1/galaxy-jobs.mjs";
 import hostedDataUploads from "../api/v1/data-uploads.mjs";
 import runs from "../api/v1/runs.mjs";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
@@ -113,4 +114,8 @@ test("production upload and queue endpoints disclose missing infrastructure", ()
   const job = call(hostedFieldJobs, { method: "POST", body: {} });
   assert.equal(job.statusCode, 503);
   assert.equal(job.body.error, "production_worker_not_connected");
+  const galaxyJob = call(hostedGalaxyJobs, { method: "POST", body: {} });
+  assert.equal(galaxyJob.statusCode, 503);
+  assert.equal(galaxyJob.body.error, "production_worker_not_connected");
+  assert.equal(galaxyJob.body.requestSchema, "/schemas/galaxy-job-submit-v1.schema.json");
 });

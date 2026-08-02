@@ -47,6 +47,7 @@ const staticFiles = new Map([
   ["/schemas/field-job-cli-v1.schema.json", ["schemas/field-job-cli-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/data-upload-request-v1.schema.json", ["schemas/data-upload-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/field-job-submit-v1.schema.json", ["schemas/field-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/galaxy-job-submit-v1.schema.json", ["schemas/galaxy-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/examples/models/newtonian-poisson.json", ["examples/models/newtonian-poisson.json", "application/json; charset=utf-8"]],
   ["/examples/models/aqual.json", ["examples/models/aqual.json", "application/json; charset=utf-8"]],
   ["/examples/models/qumond.json", ["examples/models/qumond.json", "application/json; charset=utf-8"]],
