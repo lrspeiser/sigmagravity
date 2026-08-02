@@ -1,0 +1,78 @@
+{
+  "protocol_version": "P0673-COMPOUND-PATH-ACTIVATION-1.0.0",
+  "status": "frozen_before_any_P0673_coefficient_score",
+  "frozen_utc": "2026-08-02T05:00:00Z",
+  "purpose": "Test a parameter-free nonperturbative path law motivated by P0672: coherent routing compounds over the measured physical tidal path rather than entering as one saturating survival multiplier.",
+  "development_parent": "results/p0672_spent_rxj2129_absolute_raw_topology/report.json",
+  "registered_parent": "results/p0669_amplitude_multipole_3d_activation/report.json",
+  "spent_map_parent": "results/p0670_spent_rxj2129_absolute_3d_map_build/report.json",
+  "candidate": {
+    "elementary_probability": "epsilon = sqrt(1-exp[-(D^2+Q^2)]) [a0/(a0+|gN|)] C_transverse",
+    "coherent_opportunities": "N = (ell/Lc)^q",
+    "compound_activation": "sigma = 1 - (1-epsilon)^N",
+    "interpretation": "each coherence-length opportunity leaves an unrouted fraction (1-epsilon); N consecutive opportunities leave (1-epsilon)^N",
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "coherence_power": 2.0,
+    "numerical_sigma_cap": "1-mu_floor with the already validated mu_floor=1e-6",
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "map_inputs": {
+    "galaxies": "results/p0639_registered_baryonic_maps/maps",
+    "clusters": "results/p0641_registered_cluster_baryon_maps/maps",
+    "spent_RXJ2129_cube": "results/p0670_spent_rxj2129_absolute_3d_map_build/rxj2129_absolute_baryons_3d.npz",
+    "expected_registered_galaxies": 13,
+    "expected_registered_clusters": 4,
+    "common_grid_cells": 33,
+    "galaxy_stellar_scale_sensitivity": {
+      "low": 0.5,
+      "nominal": 1.0,
+      "high": 2.0
+    },
+    "cluster_sensitivity_maps": {
+      "low": [
+        "stellar_surface_density_low_msun_kpc2",
+        "gas_surface_density_low_msun_kpc2"
+      ],
+      "nominal": [
+        "stellar_surface_density_msun_kpc2",
+        "gas_surface_density_msun_kpc2"
+      ],
+      "high": [
+        "stellar_surface_density_high_msun_kpc2",
+        "gas_surface_density_high_msun_kpc2"
+      ]
+    }
+  },
+  "predeclared_progression_gates": {
+    "P0672_failed_single_root_topology": true,
+    "P0669_registered_parent_pass": true,
+    "P0670_spent_map_parent_pass": true,
+    "registered_galaxy_count": 13,
+    "registered_cluster_count": 4,
+    "radial_cocentered_synthetic_mass_weighted_sigma_max": 1e-8,
+    "registered_galaxy_nominal_median_sigma_max": 0.001,
+    "registered_cluster_nominal_median_sigma_min": 0.05,
+    "registered_cluster_to_galaxy_nominal_median_sigma_ratio_min": 50.0,
+    "cluster_to_galaxy_sigma_ratio_min_in_all_mass_sensitivities": 20.0,
+    "spent_RXJ2129_mass_weighted_sigma_min": 0.05,
+    "sigma_finite_and_in_half_open_unit_interval": true,
+    "sigma_global_maximum_max": 0.999999,
+    "minimum_constitutive_eigenvalue_proxy_strictly_positive": true,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0,
+    "new_raw_lens_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Advance the sole compound law to one new spent RX J2129 field solve only if every radial null, registered domain, mass-sensitivity, spent coefficient, boundedness, parameter, and no-new-lens-score gate passes.",
+  "outputs": {
+    "directory": "results/p0673_compound_path_activation"
+  },
+  "claim_boundary": [
+    "P0672's spent failure motivates the compound architecture, but no P0673 numerical constant or threshold is fit to its image residuals.",
+    "The compound rule is a constitutive hypothesis, not yet a consequence of a covariant action or microscopic transport model.",
+    "A coefficient pass does not establish field convergence, critical topology, or raw-lens accuracy.",
+    "P0633 galaxy kinematics and P0640 cluster lens constraints remain sealed."
+  ]
+}
