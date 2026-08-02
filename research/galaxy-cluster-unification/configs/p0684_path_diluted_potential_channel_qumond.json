@@ -46,6 +46,7 @@
     "baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
     "target_profiles": "results/p0682_spent_multicluster_deflection_atlas/radial_ratio_profiles.csv",
     "target_metrics": "results/p0682_spent_multicluster_deflection_atlas/system_deflection_metrics.csv",
+    "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931", "RXJ1347", "RXJ2129"],
     "primary_systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931", "RXJ2129"],
     "stress_systems": ["RXJ1347"],
     "reliable_subset": ["MACS0429", "MACS1931", "RXJ2129"],
