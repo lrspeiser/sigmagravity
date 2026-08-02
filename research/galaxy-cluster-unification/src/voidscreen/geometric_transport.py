@@ -399,6 +399,118 @@ def symmetric_streamline_average(
     }
 
 
+def _bilinear_deposit(
+    output: np.ndarray,
+    values: np.ndarray,
+    rows: np.ndarray,
+    columns: np.ndarray,
+    valid: np.ndarray,
+) -> None:
+    maximum = output.shape[0] - 1
+    safe_rows = np.clip(rows, 0.0, float(maximum))
+    safe_columns = np.clip(columns, 0.0, float(maximum))
+    row0 = np.floor(safe_rows).astype(np.intp)
+    column0 = np.floor(safe_columns).astype(np.intp)
+    row1 = np.minimum(row0 + 1, maximum)
+    column1 = np.minimum(column0 + 1, maximum)
+    row_fraction = safe_rows - row0
+    column_fraction = safe_columns - column0
+    deposited = np.where(valid, values, 0.0)
+    np.add.at(output, (row0, column0), deposited * (1.0 - row_fraction) * (1.0 - column_fraction))
+    np.add.at(output, (row0, column1), deposited * (1.0 - row_fraction) * column_fraction)
+    np.add.at(output, (row1, column0), deposited * row_fraction * (1.0 - column_fraction))
+    np.add.at(output, (row1, column1), deposited * row_fraction * column_fraction)
+
+
+def symmetric_streamline_deposit(
+    flux_x: np.ndarray,
+    flux_y: np.ndarray,
+    direction_x: np.ndarray,
+    direction_y: np.ndarray,
+    trace_length_pixels: np.ndarray,
+    *,
+    steps: int = 12,
+) -> tuple[np.ndarray, np.ndarray, dict[str, float]]:
+    """Conservatively distribute each source flux along both streamline directions."""
+
+    fx = _square_map(flux_x, "flux_x")
+    fy = _square_map(flux_y, "flux_y")
+    dx = _square_map(direction_x, "direction_x")
+    dy = _square_map(direction_y, "direction_y")
+    length = _square_map(trace_length_pixels, "trace_length_pixels")
+    if not (fx.shape == fy.shape == dx.shape == dy.shape == length.shape):
+        raise ValueError("streamline fields must have matching shapes")
+    if int(steps) != steps or int(steps) < 2:
+        raise ValueError("streamline steps must be an integer of at least two")
+    if np.any(length < 0.0):
+        raise ValueError("trace lengths must be nonnegative")
+    norm = np.hypot(dx, dy)
+    unit_x = np.zeros_like(dx)
+    unit_y = np.zeros_like(dy)
+    active = norm > 1e-12
+    unit_x[active] = dx[active] / norm[active]
+    unit_y[active] = dy[active] / norm[active]
+    rows, columns = np.indices(fx.shape, dtype=np.float64)
+    step_length = length / float(steps)
+    maximum = float(fx.shape[0] - 1)
+    destinations = []
+    sample_counts = np.ones_like(fx)
+    for sign in (-1.0, 1.0):
+        current_rows = rows.copy()
+        current_columns = columns.copy()
+        for _ in range(int(steps)):
+            local_x = ndimage.map_coordinates(
+                unit_x, [current_rows, current_columns], order=1, mode="constant", cval=0.0
+            )
+            local_y = ndimage.map_coordinates(
+                unit_y, [current_rows, current_columns], order=1, mode="constant", cval=0.0
+            )
+            local_norm = np.hypot(local_x, local_y)
+            valid_direction = local_norm > 1e-12
+            local_x[valid_direction] /= local_norm[valid_direction]
+            local_y[valid_direction] /= local_norm[valid_direction]
+            current_columns += sign * step_length * local_x
+            current_rows += sign * step_length * local_y
+            valid = (
+                valid_direction
+                & (current_rows >= 0.0)
+                & (current_rows <= maximum)
+                & (current_columns >= 0.0)
+                & (current_columns <= maximum)
+            )
+            destinations.append((current_rows.copy(), current_columns.copy(), valid))
+            sample_counts += valid
+    shared_x = fx / sample_counts
+    shared_y = fy / sample_counts
+    deposited_x = shared_x.copy()
+    deposited_y = shared_y.copy()
+    for destination_rows, destination_columns, valid in destinations:
+        _bilinear_deposit(deposited_x, shared_x, destination_rows, destination_columns, valid)
+        _bilinear_deposit(deposited_y, shared_y, destination_rows, destination_columns, valid)
+    original_rms = float(np.sqrt(np.mean(fx * fx + fy * fy)))
+    difference_rms = float(
+        np.sqrt(np.mean(np.square(deposited_x - fx) + np.square(deposited_y - fy)))
+    )
+    flux_sum_error = float(
+        np.hypot(np.sum(deposited_x) - np.sum(fx), np.sum(deposited_y) - np.sum(fy))
+        / max(np.sum(np.hypot(fx, fy)), np.finfo(float).tiny)
+    )
+    return deposited_x, deposited_y, {
+        "streamline_steps": int(steps),
+        "mean_samples_per_source_cell": float(np.mean(sample_counts)),
+        "minimum_samples_per_source_cell": float(np.min(sample_counts)),
+        "maximum_samples_per_source_cell": float(np.max(sample_counts)),
+        "transport_relative_change_RMS": difference_rms
+        / max(original_rms, np.finfo(float).tiny),
+        "transport_flux_RMS_ratio": float(
+            np.sqrt(np.mean(deposited_x * deposited_x + deposited_y * deposited_y))
+            / max(original_rms, np.finfo(float).tiny)
+        ),
+        "transport_flux_sum_relative_error": flux_sum_error,
+        "transport_is_source_conservative": True,
+    }
+
+
 def hybrid_geometry(path_incoherence: np.ndarray, cancellation: np.ndarray) -> np.ndarray:
     first = np.asarray(path_incoherence, dtype=np.float64)
     second = np.asarray(cancellation, dtype=np.float64)
