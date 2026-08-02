@@ -1,0 +1,6 @@
+stage,closure,lambda,fold,fit_images,validation_images,fit_RMS_arcsec,fit_roots,validation_RMS_arcsec,validation_roots,optimizer_cost
+exact_field_line_diffusion,streamline_diffused_gas_minus_star_flux,1.0,0,12,3,0.3962760085815419,12,3.6748369605714553,3,23.19655594637055
+exact_field_line_diffusion,streamline_diffused_gas_minus_star_flux,1.0,1,11,4,0.15261032711217756,11,inf,2,5.692377432355883
+exact_field_line_diffusion,streamline_diffused_gas_minus_star_flux,1.0,2,12,3,0.39870467648198993,12,1.3240960041734802,3,25.5785495729836
+exact_field_line_diffusion,streamline_diffused_gas_minus_star_flux,1.0,3,13,2,0.3345559696150264,13,1.1050777886192307,2,19.499475388758054
+exact_field_line_diffusion,streamline_diffused_gas_minus_star_flux,1.0,4,12,3,0.22897856611620498,12,2.1401989555897347,3,9.712951472650753
