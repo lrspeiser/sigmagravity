@@ -1,0 +1,57 @@
+{
+  "report_version": "P0664-REGISTERED-TENSOR-FIELD-SOLVE-RESULTS-1.0.0",
+  "status": "pass",
+  "all_progression_gates_pass": true,
+  "candidate_advanced_to_spent_lensing_topology": true,
+  "protocol_sha256": "073881e53d967141f7b140230587720df285a32420601884651f3bc347e51378",
+  "source_sha256": "18b37b5c04f273e81508fb9e17b742ad8b4d2c5cb51304a9ca74739b9709760d",
+  "field_source_sha256": "888f604309b94ed625ce06202c91a874be98d1287a5cd1690f6c50010d47ccac",
+  "registered_map_manifest_sha256": "1dd7af5a986f14a007eebbd9b8152aa1e876811cc65e8ab64dd5b4121ce30eaa",
+  "coverage": {
+    "registered_galaxies": 13,
+    "registered_clusters": 4,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "metrics": {
+    "constant_mu_sigma_zero_newtonian_recovery_relative_RMS": 1.1610361280832517e-11,
+    "rotation_covariance_tensor_effect_relative_error": 2.227773521212839e-12,
+    "maximum_nonlinear_normalized_residual_RMS": 9.653411425494658e-06,
+    "minimum_constitutive_eigenvalue": 8.176071762631672e-05,
+    "maximum_normalized_acceleration_curl_RMS": 2.816024735841681e-16,
+    "registered_galaxy_median_tensor_effect": 0.0004506466949933002,
+    "registered_galaxy_maximum_tensor_effect": 0.003459607627184551,
+    "registered_cluster_median_tensor_effect": 0.03066890652073204,
+    "registered_cluster_minimum_tensor_effect": 0.015444827726994794,
+    "cluster_to_galaxy_median_tensor_effect_ratio": 68.05532329752911,
+    "registered_galaxy_median_scalar_newtonian_enhancement": 7.140573532911663,
+    "registered_cluster_median_scalar_newtonian_enhancement": 2.0716193604604696
+  },
+  "gate_results": {
+    "P0663_parent": true,
+    "galaxy_coverage": true,
+    "cluster_coverage": true,
+    "constant_mu_recovery": true,
+    "rotation_covariance": true,
+    "all_solvers_converged": true,
+    "nonlinear_residual": true,
+    "positive_eigenvalue": true,
+    "conservative_acceleration": true,
+    "galaxy_median_preserved": true,
+    "galaxy_maximum_preserved": true,
+    "cluster_median_response": true,
+    "cluster_minimum_response": true,
+    "domain_effect_ratio": true,
+    "no_new_constants": true,
+    "no_per_object_parameters": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0664 establishes numerical field behavior on projected baryonic maps only; it does not compare with velocities or lensing constraints.",
+    "The projected source construction is dimensionally consistent and recovers the thin-sheet Newtonian potential in its constant-mu scalar limit, but it is not a three-dimensional or covariant derivation.",
+    "A domain-selective field response is necessary but not sufficient for galaxy-plus-cluster unification.",
+    "No P0633 velocity, P0640 lens constraint, or spent lens residual may be used in P0664 development or selection."
+  ]
+}
