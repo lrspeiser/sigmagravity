@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0693-projected-spectral-joint-screen`](latest-findings/2026-08-02-p0693-projected-spectral-joint-screen/README.md).
-It tests one parameter-free projected baryonic controller jointly on a real
-spent galaxy map and spent raw cluster topology. The prior P0692, P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0694-ddo154-routing-continuum`](latest-findings/2026-08-02-p0694-ddo154-routing-continuum/README.md).
+It closes the real-galaxy endpoint loophole and retires the shared linear
+source pair as a unifier. The prior P0693, P0692, P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0693-projected-spectral-joint-screen`](latest-findings/2026-08-02-p0693-projected-spectral-joint-screen/README.md),
 [`latest-findings/2026-08-02-p0692-routing-continuum`](latest-findings/2026-08-02-p0692-routing-continuum/README.md),
 [`latest-findings/2026-08-02-p0691-multipole-gated-routing`](latest-findings/2026-08-02-p0691-multipole-gated-routing/README.md),
 [`latest-findings/2026-08-02-p0690-full-routing-screen`](latest-findings/2026-08-02-p0690-full-routing-screen/README.md),
@@ -172,6 +173,17 @@ MOND and slightly worse than ordinary 3D QUMOND. The global covariance scalar
 does not advance; the next frozen diagnostic asks whether any allowed mixture
 of the current endpoints can close the galaxy gap. See
 [`docs/P0693_PROJECTED_SPECTRAL_ROUTING_JOINT_RESULTS.md`](docs/P0693_PROJECTED_SPECTRAL_ROUTING_JOINT_RESULTS.md).
+
+P0694 freezes the full allowed DDO154 source-mixture interval. Zero of 13 rows
+is competitive with algebraic MOND; the best is `f=0` at `3.943 km/s`,
+`1.352x` the ordinary and `2.671x` the weighted algebraic-MOND errors. The
+response changes only in the eighth decimal place from zero to full routing,
+so a new transform of the global controller cannot repair the galaxy within
+these endpoints. The pair is retired. The next generator constructs a
+curl-free potential by integrating the algebraic force along baryon-centered
+rays, then adds the successful cluster relocation as a zero-boundary potential
+difference. See
+[`docs/P0694_SPENT_DDO154_ROUTING_CONTINUUM_RESULTS.md`](docs/P0694_SPENT_DDO154_ROUTING_CONTINUUM_RESULTS.md).
 
 ## Untouched external validation (P0633)
 
