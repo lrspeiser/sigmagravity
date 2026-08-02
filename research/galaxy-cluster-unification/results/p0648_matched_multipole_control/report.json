@@ -1,0 +1,318 @@
+{
+  "report_version": "P0648-MATCHED-MULTIPOLE-CONTROL-RESULTS-1.0.0",
+  "status": "complete_spent_control",
+  "protocol_sha256": "da03909a39183dc60fae4b4c8426363496aaf835ca9d74fbac3561b7c0aad96c",
+  "source_sha256": "3248d053d4724056a38ecaba5c949cf4e8ec10cfee27074e5f52e734086b0a61",
+  "coverage": {
+    "multipole_orders": 2,
+    "stage1_rows": 20,
+    "stage1_fold_refits": 100,
+    "stage2_rows": 2,
+    "ordinary_geometry_parameters_refit_per_run": 6,
+    "multipole_amplitude_parameters": 1,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "field_audits": {
+    "m3": {
+      "operator": "matched_scalar_potential_multipole",
+      "order": 3,
+      "phase_rad": -0.3761725739893894,
+      "radial_scale_arcsec": 30.0,
+      "taper_inner_arcsec": 50.0,
+      "support_radius_arcsec": 58.0,
+      "normalization": 1.1221098098792597,
+      "unit_deflection_RMS_arcsec": 0.06828388190416103,
+      "unit_deflection_maximum_arcsec": 0.253235902899704,
+      "maximum_circular_mean_deflection_arcsec": 3.7315829438789987e-17,
+      "source_integral_fraction": 1.6051449207616527e-17,
+      "normalized_curl_RMS": 1.297439918098546e-16,
+      "maximum_edge_correction_arcsec": 0.0
+    },
+    "m4": {
+      "operator": "matched_scalar_potential_multipole",
+      "order": 4,
+      "phase_rad": -0.3761725739893894,
+      "radial_scale_arcsec": 30.0,
+      "taper_inner_arcsec": 50.0,
+      "support_radius_arcsec": 58.0,
+      "normalization": 0.6385379885161087,
+      "unit_deflection_RMS_arcsec": 0.06828388190416101,
+      "unit_deflection_maximum_arcsec": 0.2463817981550111,
+      "maximum_circular_mean_deflection_arcsec": 8.520779518084259e-05,
+      "source_integral_fraction": 0.0002662198202364213,
+      "normalized_curl_RMS": 1.3082526927439224e-16,
+      "maximum_edge_correction_arcsec": 0.0
+    }
+  },
+  "field_gate_results": {
+    "m3_curl": true,
+    "m4_curl": true,
+    "m3_source": true,
+    "m4_source": false,
+    "m3_normalization": true,
+    "m4_normalization": true,
+    "sealed_targets_untouched": true
+  },
+  "stage1_scores": [
+    {
+      "stage": "stage1",
+      "closure": "multipole_m3",
+      "lambda": -12.5,
+      "pooled_CV_RMS_arcsec": 2.0242701906631515,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 3
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m3",
+      "lambda": -8.0,
+      "pooled_CV_RMS_arcsec": 2.4139794016954688,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 3
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m3",
+      "lambda": -5.0,
+      "pooled_CV_RMS_arcsec": 2.6558588421065723,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 3
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m3",
+      "lambda": -2.0,
+      "pooled_CV_RMS_arcsec": 2.8356967316079826,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 3
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m3",
+      "lambda": -0.5,
+      "pooled_CV_RMS_arcsec": 2.738329517543527,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 3
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m3",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false,
+      "order": 3
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m3",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false,
+      "order": 3
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m3",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false,
+      "order": 3
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m3",
+      "lambda": 8.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 13,
+      "CV_images": 15,
+      "all_CV_roots": false,
+      "order": 3
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m3",
+      "lambda": 12.5,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 13,
+      "CV_images": 15,
+      "all_CV_roots": false,
+      "order": 3
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m4",
+      "lambda": -12.5,
+      "pooled_CV_RMS_arcsec": 3.135203006776883,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 4
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m4",
+      "lambda": -8.0,
+      "pooled_CV_RMS_arcsec": 3.059783112602934,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 4
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m4",
+      "lambda": -5.0,
+      "pooled_CV_RMS_arcsec": 2.8569681182055877,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 4
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m4",
+      "lambda": -2.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false,
+      "order": 4
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m4",
+      "lambda": -0.5,
+      "pooled_CV_RMS_arcsec": 2.67978081515023,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 4
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m4",
+      "lambda": 0.5,
+      "pooled_CV_RMS_arcsec": 2.7424522947946115,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 4
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m4",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": 2.672988196350912,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 4
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m4",
+      "lambda": 5.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false,
+      "order": 4
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m4",
+      "lambda": 8.0,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false,
+      "order": 4
+    },
+    {
+      "stage": "stage1",
+      "closure": "multipole_m4",
+      "lambda": 12.5,
+      "pooled_CV_RMS_arcsec": Infinity,
+      "CV_roots": 14,
+      "CV_images": 15,
+      "all_CV_roots": false,
+      "order": 4
+    }
+  ],
+  "stage1_shortlist": [
+    {
+      "order": 3,
+      "lambda": -12.5
+    },
+    {
+      "order": 4,
+      "lambda": 2.0
+    }
+  ],
+  "stage2_scores": [
+    {
+      "stage": "stage2",
+      "closure": "multipole_m3",
+      "lambda": -12.5,
+      "pooled_CV_RMS_arcsec": 2.599360329775749,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 3
+    },
+    {
+      "stage": "stage2",
+      "closure": "multipole_m4",
+      "lambda": 2.0,
+      "pooled_CV_RMS_arcsec": 2.695273811460096,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "order": 4
+    }
+  ],
+  "comparison": {
+    "lambda0_CV_RMS_arcsec": 2.760255155353674,
+    "P0647_boundary_candidate_CV_RMS_arcsec": 2.3081150575892893,
+    "best_multipole_CV_RMS_arcsec": 2.599360329775749,
+    "best_multipole_order": 3,
+    "best_multipole_amplitude": -12.5,
+    "candidate_fractional_improvement_vs_best_multipole": 0.11204497847037076,
+    "candidate_specificity_survives": true,
+    "generic_angular_control_explains_gain": false,
+    "multipole_amplitude_identified": false,
+    "P0647_candidate_was_already_rejected": true,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "full_refit": {
+    "training_RMS_arcsec": 0.4396740330296908,
+    "training_roots": 15,
+    "spent_heldout_RMS_arcsec": 1.0441394877004757,
+    "spent_heldout_roots": 7
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "All image-position scores are from spent RX J2129 data.",
+    "The multipoles are conventional scalar-potential controls, not physical baryonic mass models.",
+    "Phase, radial scale, taper, support, and normalization are fixed; only one signed amplitude changes.",
+    "P0647 already rejected the unbounded component-flux family; P0648 tests specificity and does not reopen it.",
+    "No P0633 or P0640 validation outcome may be opened."
+  ]
+}

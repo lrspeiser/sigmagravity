@@ -1,0 +1,59 @@
+{
+  "protocol_version": "P0648-MATCHED-MULTIPOLE-CONTROL-1.0.0",
+  "status": "frozen_before_any_P0648_score",
+  "frozen_utc": "2026-08-02T04:00:00Z",
+  "purpose": "Test whether a conventional one-amplitude angular lens-potential multipole can reproduce the spent-data gain attributed to the rejected gas-minus-star transport flux.",
+  "control_fields": {
+    "orders": [3, 4],
+    "phase_rad": -0.3761725739893894,
+    "phase_provenance": "gas centroid minus stellar centroid axis measured in P0607 before P0648; no image position sets phase",
+    "radial_scale_arcsec": 30.0,
+    "radial_scale_provenance": "fixed broad cluster-core scale, not fit",
+    "taper_inner_arcsec": 50.0,
+    "support_radius_arcsec": 58.0,
+    "target_unit_deflection_RMS_arcsec": 0.06828388190416103,
+    "normalization_provenance": "P0646 gas-minus-star unit field RMS over the identical grid",
+    "signed_amplitude_grid": [-12.5, -8.0, -5.0, -2.0, -0.5, 0.5, 2.0, 5.0, 8.0, 12.5]
+  },
+  "cross_validation": {
+    "fold_definition": "reuse exact P0645 five source-family-stratified folds",
+    "stage1_geometry_refit_starts": 1,
+    "stage2_geometry_refit_starts": 3,
+    "stage2_rows_per_order": 1,
+    "full_training_refit_starts": 8,
+    "selection_metric": "pooled exact CV RMS with complete roots",
+    "tie_break": "lower absolute amplitude, then signed amplitude",
+    "random_seed": 2129648,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "inputs": {
+    "P0644_protocol": "configs/p0644_spent_rxj2129_accumulated_tensor.json",
+    "P0645_protocol": "configs/p0645_fair_geometry_cv_accumulated_tensor.json",
+    "P0645_report": "results/p0645_fair_geometry_cv_accumulated_tensor/report.json",
+    "P0646_report": "results/p0646_conservative_closure_atlas/report.json",
+    "P0647_report": "results/p0647_component_flux_strength_expansion/report.json",
+    "P0607_report": "results/p0607_component_direction_raw_lensing/report.json"
+  },
+  "predeclared_interpretation": {
+    "candidate_specificity_margin_fraction": 0.01,
+    "candidate_specificity_survives_definition": "P0647 boundary candidate CV RMS is at least 1 percent lower than every root-complete exact multipole control",
+    "generic_angular_control_explains_gain_definition": "a root-complete exact multipole control is within 1 percent of or below the P0647 boundary candidate CV RMS",
+    "multipole_amplitude_identified_definition": "the best exact multipole amplitude is not an endpoint of the signed grid"
+  },
+  "field_gates": {
+    "normalized_curl_RMS_max": 1e-10,
+    "source_integral_fraction_max": 1e-8,
+    "unit_RMS_relative_match_error_max": 1e-10,
+    "sealed_target_outcomes_opened": false
+  },
+  "outputs": {
+    "directory": "results/p0648_matched_multipole_control"
+  },
+  "claim_boundary": [
+    "All image-position scores are from spent RX J2129 data.",
+    "The multipoles are conventional scalar-potential controls, not physical baryonic mass models.",
+    "Phase, radial scale, taper, support, and normalization are fixed; only one signed amplitude changes.",
+    "P0647 already rejected the unbounded component-flux family; P0648 tests specificity and does not reopen it.",
+    "No P0633 or P0640 validation outcome may be opened."
+  ]
+}
