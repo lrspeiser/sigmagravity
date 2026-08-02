@@ -1,0 +1,61 @@
+{
+  "protocol_version": "P0650-AMPLITUDE-FREE-SPENT-LENSING-1.0.0",
+  "status": "frozen_before_any_P0650_score",
+  "frozen_utc": "2026-08-02T05:00:00Z",
+  "purpose": "Test whether the P0649 bounded first-order angle invariant predicts useful spent RX J2129 image positions at its formula-defined unit strength, without a lambda search.",
+  "candidate": {
+    "closure": "gas_minus_star_flux",
+    "mismatch_mode": "linear_chord_mix",
+    "equation": "laplacian(delta_psi)=div[A_angle(x) |grad psi_carrier| unit(g_hat_gas-g_hat_star)]",
+    "activation": "A_angle=[a0/(a0+gbar)] [2 sqrt(gs gg)/(gs+gg)] sin(theta/2) [1-exp(-ell/10 kpc)]",
+    "field_amplitude": 1.0,
+    "field_amplitude_fitted": false,
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "a0_m_s2": 1.2e-10,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "common_physical_smoothing_kpc": 25.0,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "cross_validation": {
+    "fold_definition": "reuse exact P0645 five source-family-stratified folds",
+    "geometry_refit_starts_per_fold": 3,
+    "full_training_refit_starts": 8,
+    "selection": "none; the sole amplitude-one candidate is scored",
+    "random_seed": 2129650,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "inputs": {
+    "P0644_protocol": "configs/p0644_spent_rxj2129_accumulated_tensor.json",
+    "P0645_protocol": "configs/p0645_fair_geometry_cv_accumulated_tensor.json",
+    "P0645_report": "results/p0645_fair_geometry_cv_accumulated_tensor/report.json",
+    "P0647_report": "results/p0647_component_flux_strength_expansion/report.json",
+    "P0648_report": "results/p0648_matched_multipole_control/report.json",
+    "P0649_report": "results/p0649_bounded_angle_transport_screen/report.json"
+  },
+  "predeclared_progression_gates": {
+    "all_CV_roots": 15,
+    "CV_improvement_fraction_vs_lambda0_min": 0.03,
+    "CV_improvement_fraction_vs_best_matched_multipole_min": 0.01,
+    "full_training_roots": 15,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599_max": 0.10,
+    "field_normalized_curl_RMS_max": 1e-10,
+    "field_source_integral_fraction_max": 1e-4,
+    "activation_max": 1.0,
+    "field_amplitude_exactly_one": true,
+    "solar_one_component_activation_max": 1e-15,
+    "sealed_target_outcomes_opened": false
+  },
+  "outputs": {
+    "directory": "results/p0650_amplitude_free_spent_lensing"
+  },
+  "claim_boundary": [
+    "RX J2129 image positions are spent development data; a pass cannot validate the law.",
+    "The field amplitude is exactly one and no strength grid or post-score replacement is allowed.",
+    "The 25 kpc smoothing and 10/90 component fractions were fixed before P0650 and still require robustness tests.",
+    "A passing result must survive registered-map perturbations before any P0633/P0640 outcome is opened.",
+    "The formula is a projected conservative closure, not a complete relativistic metric theory."
+  ]
+}

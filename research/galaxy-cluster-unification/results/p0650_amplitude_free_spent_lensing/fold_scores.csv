@@ -1,0 +1,6 @@
+stage,closure,lambda,fold,fit_images,validation_images,fit_RMS_arcsec,fit_roots,validation_RMS_arcsec,validation_roots,optimizer_cost
+exact_amplitude_one,bounded_linear_chord_flux,1.0,0,12,3,0.4046188221151905,12,3.9310057313356377,3,23.098464521521898
+exact_amplitude_one,bounded_linear_chord_flux,1.0,1,11,4,0.40686538108767883,11,3.8233255115113636,4,22.79956556778558
+exact_amplitude_one,bounded_linear_chord_flux,1.0,2,12,3,0.4199828303688979,12,1.4914348277103124,3,28.200028996599
+exact_amplitude_one,bounded_linear_chord_flux,1.0,3,13,2,0.32840754982807563,13,1.1663030023551217,2,18.748552345680558
+exact_amplitude_one,bounded_linear_chord_flux,1.0,4,12,3,0.234787084885376,12,1.4772840886228433,3,9.996659295065225

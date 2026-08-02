@@ -1,0 +1,113 @@
+{
+  "report_version": "P0650-AMPLITUDE-FREE-SPENT-LENSING-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_robustness": false,
+  "protocol_sha256": "0a3358b5f6ccef569428bd43708c81adfd22208c4ad12aeb28698411c9b74a17",
+  "source_sha256": "e56a1706a16018f2ce1362eefad517e0de68793038080a9b36d05f802b04cced",
+  "coverage": {
+    "candidate_fields": 1,
+    "amplitude_rows": 1,
+    "CV_folds": 5,
+    "fold_refits": 5,
+    "ordinary_geometry_parameters_refit_per_run": 6,
+    "fitted_field_amplitude_parameters": 0,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "field_audit": {
+    "operator": "finite_path_accumulated_component_tensor",
+    "closure": "gas_minus_star_flux",
+    "mismatch_mode": "linear_chord_mix",
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "proxy_total_mass_msun": 100000000000000.0,
+    "common_smoothing_kpc": 25.0,
+    "proxy_mass_changes_deflection_normalization": false,
+    "activation_weighted_mean": 0.044118989108014,
+    "activation_maximum": 0.22584549462122275,
+    "cancellation_mean": 0.003594706024914429,
+    "mismatch_mean": 0.06550367835775857,
+    "survival_mean": 0.993761235780194,
+    "trace_length_median_kpc": 92.99394454051999,
+    "source_integral_fraction": 0.0,
+    "normalized_curl_RMS": 2.2618583070135742e-17,
+    "unit_deflection_RMS_arcsec": 0.7825370757072583,
+    "unit_deflection_maximum_arcsec": 3.1575454105113,
+    "maximum_edge_correction_arcsec": 1.2911834770569903,
+    "carrier_deflection_median_arcsec": 21.25739757728231
+  },
+  "map_audits": {
+    "hst": {
+      "system_label": "RXJ2129",
+      "map_kind": "hst_f160w",
+      "input_count": 2,
+      "native_pixel_scale_arcsec": 0.0650000000000009,
+      "background": -0.0033761123195290565,
+      "masked_fraction": 0.01795127705200111,
+      "positive_cells": 12435,
+      "map_sum_before_normalization": 405.6119888731333
+    },
+    "xray": {
+      "system_label": "RXJ2129",
+      "map_kind": "chandra_soft_rate",
+      "input_count": 2,
+      "total_exposure_ks": 39.6040961730402,
+      "soft_events_on_grid": 15401,
+      "point_source_seed_cells": 37,
+      "point_source_masked_fraction": 0.009767092411720512,
+      "unmasked_map_sum": 0.792017083914403,
+      "masked_map_sum": 0.7662815305616146
+    }
+  },
+  "CV_summary": {
+    "stage": "exact_amplitude_one",
+    "closure": "bounded_linear_chord_flux",
+    "lambda": 1.0,
+    "pooled_CV_RMS_arcsec": 2.83749248228428,
+    "CV_roots": 15,
+    "CV_images": 15,
+    "all_CV_roots": true
+  },
+  "comparison": {
+    "lambda0_CV_RMS_arcsec": 2.760255155353674,
+    "candidate_CV_RMS_arcsec": 2.83749248228428,
+    "CV_improvement_fraction_vs_lambda0": -0.027981951878905065,
+    "best_matched_multipole_CV_RMS_arcsec": 2.599360329775749,
+    "CV_improvement_fraction_vs_best_matched_multipole": -0.09161182841052118,
+    "rejected_P0647_boundary_CV_RMS_arcsec": 2.3081150575892893,
+    "candidate_fractional_change_vs_P0647_boundary": 0.22935486814418127,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "full_refit": {
+    "training_RMS_arcsec": 0.44669097828363147,
+    "training_roots": 15,
+    "spent_heldout_RMS_arcsec": 1.6214739823437934,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599": -0.10435310439761236
+  },
+  "gate_results": {
+    "CV_roots": true,
+    "CV_improvement": false,
+    "beats_matched_multipole": false,
+    "full_training_roots": true,
+    "spent_heldout_roots": true,
+    "spent_heldout_not_worse": true,
+    "field_curl": true,
+    "field_source_integral": true,
+    "activation_bounded": true,
+    "amplitude_is_one": true,
+    "solar_one_component_null": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "RX J2129 image positions are spent development data; a pass cannot validate the law.",
+    "The field amplitude is exactly one and no strength grid or post-score replacement is allowed.",
+    "The 25 kpc smoothing and 10/90 component fractions were fixed before P0650 and still require robustness tests.",
+    "A passing result must survive registered-map perturbations before any P0633/P0640 outcome is opened.",
+    "The formula is a projected conservative closure, not a complete relativistic metric theory."
+  ]
+}
