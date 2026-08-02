@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Run reproducible gravity formulas against real SPARC galaxies." />
+    <title>Sigma Gravity Research Simulator</title>
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav wrap">
+        <a class="brand" href="/" aria-label="Sigma Gravity simulator home">
+          <span class="brand-mark">Σ</span>
+          <span>Sigma Gravity Lab</span>
+        </a>
+        <div class="nav-links">
+          <a href="#workbench">Workbench</a>
+          <a href="#api">API</a>
+          <a href="/api/v1/openapi.json">OpenAPI</a>
+        </div>
+      </nav>
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Open research preview · v0.1</p>
+          <h1>Put a gravity formula in front of real galaxies.</h1>
+          <p class="lede">
+            Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
+            predicted rotation curve with observations, Newtonian baryons, and fixed MOND—without
+            silently fitting a gravity parameter to each galaxy.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#workbench">Open the workbench</a>
+            <a class="button secondary" href="#scope">Read the scientific boundary</a>
+          </div>
+        </div>
+        <aside class="status-panel" aria-label="Service capabilities">
+          <div class="status-heading"><span id="service-dot" class="dot"></span>Hosted engine</div>
+          <dl>
+            <div><dt>Real systems</dt><dd id="system-count">—</dd></div>
+            <div><dt>Formula language</dt><dd>Safe AST v1</dd></div>
+            <div><dt>Radial curves</dt><dd class="available">Available</dd></div>
+            <div><dt>2D / 3D fields</dt><dd class="planned">Worker next</dd></div>
+            <div><dt>Raw lensing</dt><dd class="planned">Worker next</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </header>
+
+    <main>
+      <section id="workbench" class="wrap section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Interactive benchmark</p>
+            <h2>Formula workbench</h2>
+          </div>
+          <p id="dataset-line" class="muted">Loading versioned catalog…</p>
+        </div>
+
+        <div class="workbench-grid">
+          <div class="controls card">
+            <div class="step-heading"><span>1</span><div><h3>Choose a system</h3><p>Use an observed galaxy or a seeded radial preview.</p></div></div>
+            <label for="galaxy-select">Published SPARC galaxy</label>
+            <div class="row">
+              <select id="galaxy-select" aria-label="Published galaxy"></select>
+              <button id="load-system" class="button compact secondary" type="button">Inspect</button>
+            </div>
+            <p id="system-summary" class="microcopy"></p>
+
+            <details class="synthetic-box">
+              <summary>Create a synthetic radial galaxy</summary>
+              <div class="field-grid">
+                <label>Seed<input id="syn-seed" type="number" value="42" min="0" /></label>
+                <label>Baryonic mass (M☉)<input id="syn-mass" type="number" value="20000000000" min="1" /></label>
+                <label>Gas fraction<input id="syn-gas" type="number" value="0.35" min="0" max="1" step="0.01" /></label>
+                <label>Bulge fraction<input id="syn-bulge" type="number" value="0.10" min="0" max="1" step="0.01" /></label>
+                <label>Disk scale (kpc)<input id="syn-scale" type="number" value="2.4" min="0.01" step="0.1" /></label>
+                <label>Noise (km/s)<input id="syn-noise" type="number" value="1.5" min="0" step="0.1" /></label>
+              </div>
+              <button id="create-synthetic" class="button compact secondary" type="button">Create deterministic preview</button>
+              <p id="synthetic-summary" class="microcopy"></p>
+            </details>
+
+            <div class="divider"></div>
+            <div class="step-heading"><span>2</span><div><h3>Define the equation</h3><p>Acceleration output must resolve to m/s².</p></div></div>
+            <label for="formula-editor">Dimension-aware formula manifest</label>
+            <textarea id="formula-editor" spellcheck="false" aria-label="Formula JSON"></textarea>
+            <div class="row actions-row">
+              <button id="validate-formula" class="button compact secondary" type="button">Validate formula</button>
+              <button id="run-formula" class="button compact primary" type="button">Run benchmark</button>
+            </div>
+            <div id="action-status" class="notice" role="status">Ready.</div>
+          </div>
+
+          <div class="results card">
+            <div class="results-header">
+              <div>
+                <p class="eyebrow">Result</p>
+                <h3 id="result-title">No run yet</h3>
+              </div>
+              <button id="download-result" class="button compact ghost" type="button" disabled>Download JSON</button>
+            </div>
+            <div id="metrics" class="metrics empty">
+              <p>Run the formula to see comparator scores and the predicted curve.</p>
+            </div>
+            <div class="chart-frame">
+              <svg id="curve-chart" viewBox="0 0 800 440" role="img" aria-label="Rotation curve comparison"></svg>
+            </div>
+            <div class="legend" aria-label="Chart legend">
+              <span><i class="observed"></i>Observed</span>
+              <span><i class="submitted"></i>Submitted</span>
+              <span><i class="mond"></i>Fixed MOND</span>
+              <span><i class="newtonian"></i>Newtonian baryons</span>
+            </div>
+            <details class="run-details"><summary>Reproducibility manifest and caveats</summary><pre id="manifest-output">No run.</pre></details>
+          </div>
+        </div>
+      </section>
+
+      <section id="scope" class="scope-section">
+        <div class="wrap scope-grid">
+          <div>
+            <p class="eyebrow">Scientific boundary</p>
+            <h2>A test bench, not a claim of discovery.</h2>
+          </div>
+          <div class="scope-copy">
+            <p>
+              This hosted fast path evaluates published radial baryonic mass-model components. It
+              does not pretend that algebraic circular-orbit tests are full AQUAL, QUMOND, or
+              relativistic lensing solutions.
+            </p>
+            <p>
+              The next worker tier will reuse the repository’s real 2D/3D field solvers and raw
+              image-plane lensing engine. Those runs will be asynchronous, immutable, and scored
+              separately from this preview.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="api" class="wrap section api-section">
+        <div class="section-heading">
+          <div><p class="eyebrow">For notebooks and pipelines</p><h2>Use the API directly</h2></div>
+          <a class="button secondary compact" href="/api/v1/openapi.json">OpenAPI JSON</a>
+        </div>
+        <div class="api-grid">
+          <article class="endpoint"><span>GET</span><code>/api/v1/systems?q=DDO</code><p>Search real galaxies and inspect supported tests.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/formulas/validate</code><p>Check symbols, dimensions, parameter policy, complexity, and canonical hash.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/runs</code><p>Run a formula and receive scores, curves, comparators, and an immutable manifest hash.</p></article>
+        </div>
+        <pre class="code-sample"><code>const result = await fetch("/api/v1/runs", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    systemIds: ["DDO154"],
+    tests: ["rotation_curve"],
+    formula: manifest
+  })
+}).then(response =&gt; response.json());</code></pre>
+      </section>
+    </main>
+
+    <footer><div class="wrap"><span>Sigma Gravity Research Simulator</span><span>Every result should be reproducible, including failures.</span></div></footer>
+    <script type="module" src="/assets/app.js"></script>
+  </body>
+</html>

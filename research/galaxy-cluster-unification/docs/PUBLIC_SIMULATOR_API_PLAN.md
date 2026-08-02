@@ -12,6 +12,31 @@ It will not present exploratory formulas as established physics, silently fit
 one gravity setting per galaxy, or execute arbitrary user Python in the main
 API process.
 
+## Implemented hosted preview (2026-08-02)
+
+The first Vercel-ready control plane is implemented in
+[`../hosted-simulator`](../hosted-simulator/README.md). This is a functional
+radial benchmark rather than a mock interface:
+
+- the generated, content-hashed catalog contains all 175 SPARC systems and
+  3,391 published rotation-curve points;
+- `GET` calls list or retrieve systems and dataset provenance;
+- a deterministic radial synthetic-galaxy endpoint accepts mass, gas fraction,
+  bulge fraction, disk scale, noise, and seed;
+- a bounded JSON expression tree performs symbol, dimension, complexity, and
+  parameter-policy checks without `eval` or submitted source code;
+- formula runs return the submitted prediction, fixed simple-MOND and
+  Newtonian comparators, universal/per-object parameter counts, full curves,
+  caveats, and content-addressed formula/run hashes; and
+- requests for 2D/3D fields or raw lensing return `worker_not_connected` rather
+  than substituting an algebraic radial proxy.
+
+Ten catalog, formula, API, reproducibility, and simulator tests pass. The web
+application and serverless routes are production-shaped, but there is not yet
+a public deployment URL: the supplied Vercel credential was rejected by
+Vercel's identity and project-listing commands, and no credential was written
+to disk. Deployment resumes once the CLI has a valid authenticated account.
+
 ## Deployment architecture
 
 ```mermaid
@@ -143,13 +168,13 @@ that is passed to Python.
 
 | Layer | Reusable now | Required before hosting |
 |---|---|---|
-| Object catalog | real galaxy maps, observation-matched replicas, raw cluster component maps | one versioned manifest with licenses and sealed/open flags |
+| Object catalog | hosted 175-system SPARC radial release; real galaxy maps, observation-matched replicas, raw cluster component maps | add map/cluster releases with enforceable license and sealed/open flags |
 | Solvers | Newtonian Poisson, AQUAL, QUMOND, lens/root and transport operators | stable serializable request/result wrappers and resource estimates |
-| Comparators | Newtonian, fixed MOND/RAR, declared lens baselines | uniform comparator interface and parameter-accounting schema |
-| Reproducibility | frozen JSON protocols, hashes, CSV/JSON/PNG artifacts, regression tests | content-addressed artifact store and signed run manifest |
-| Formula submission | Python implementations in the repository | safe typed AST, unit checker, canonicalizer, and operator allowlist |
-| Execution | deterministic local CLI runs | queue, worker image, cancellation, quotas, caching, and event stream |
-| Public UI/API | route plan only | FastAPI/OpenAPI service, SDK, Vercel app, auth, and staging deployment |
+| Comparators | hosted Newtonian and fixed simple-MOND radial comparators; declared lens baselines | uniform field/lens comparator worker interface |
+| Reproducibility | hosted formula/run hashes, frozen JSON protocols, CSV/JSON/PNG artifacts, regression tests | durable content-addressed artifact store and signed run manifest |
+| Formula submission | bounded dimension-aware AST, unit checker, canonicalizer, parameter counter, operator allowlist | translate field/PDE operators to immutable worker jobs |
+| Execution | deterministic hosted radial engine and local scientific CLI runs | queue, worker image, cancellation, quotas, caching, and event stream |
+| Public UI/API | Vercel-ready UI and serverless radial API; local tests pass | valid Vercel authentication, staging URL, auth/quotas, SDK, and worker connection |
 
 P0652 through P0677 and P0711 through P0714 are useful API fixtures. They include successful numerical
 invariants, real 2D-to-3D baryonic maps, Poisson/AQUAL/QUMOND solves, coefficient

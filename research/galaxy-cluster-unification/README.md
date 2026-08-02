@@ -53,7 +53,12 @@ The public simulator/API delivery plan is maintained in
 defines real and seeded synthetic galaxy/cluster calls, safe formula
 submission, asynchronous field-solver jobs, frozen comparators, parameter
 accounting, Vercel hosting for the web/gateway layer, and isolated Cloud Run or
-Modal workers for scientific computation.
+Modal workers for scientific computation. The first deployable control-plane
+preview now lives in [`hosted-simulator`](hosted-simulator/README.md): it
+packages all 175 SPARC galaxies, validates bounded dimension-aware formula
+trees, creates deterministic radial synthetic systems, and scores submitted
+laws against fixed MOND and Newtonian baryons. Its 2D/3D and raw-lensing routes
+remain explicitly unavailable until the separate scientific worker is wired.
 
 ## Absolute-field update through P0682
 
