@@ -27,6 +27,7 @@ from voidscreen.coherent_monopole import coherent_monopole_potential
 from voidscreen.field_solvers import (
     boundary_mask,
     cell_coordinates,
+    solve_newtonian,
     solve_poisson_dirichlet,
 )
 from voidscreen.local_vector_coherence import (
@@ -388,21 +389,31 @@ def main():
         single["coherent"].potential,
         interior,
     )
-    high_acceleration = solve_synthetic(
+    high_newtonian = solve_newtonian(
         single_density,
         spacing,
         gravitational_constant=gravitational_constant,
+    )
+    high_coherent = coherent_monopole_potential(
+        single_density,
+        high_newtonian.potential,
+        high_newtonian.acceleration,
+        spacing,
         a0=float(numerics["high_acceleration_a0"]),
-        light_speed=light_speed,
-        numerics=numerics,
+    )
+    high_base = coherence_gated_source_potential(
+        high_coherent,
+        high_newtonian.equation_source,
+        single["vector_coherence"].coherence,
+        spacing,
     )
     high_acceleration_limit = relative_vector_rms(
-        high_acceleration["base"].acceleration,
-        high_acceleration["routing"].newtonian.acceleration,
+        high_base.acceleration,
+        high_newtonian.acceleration,
         single_annulus,
     )
 
-    solutions = [single, dual, rotated, high_acceleration]
+    solutions = [single, dual, rotated]
     raw_triangle_excess = max(
         item["vector_coherence"].maximum_triangle_inequality_excess
         for item in solutions
@@ -473,6 +484,28 @@ def main():
                 *item["hybrid"].acceleration,
             ]
         )
+    high_expected_source = (
+        single["vector_coherence"].coherence * high_coherent.equation_source
+        + (1.0 - single["vector_coherence"].coherence)
+        * high_newtonian.equation_source
+    )
+    source_identity_scores.append(
+        relative_grid_rms(high_base.equation_source, high_expected_source, interior)
+    )
+    base_boundary_scores.append(
+        base_boundary_relative_mismatch(high_base, high_coherent)
+    )
+    residual_scores.append(float(high_base.normalized_residual_rms))
+    curl_scores.append(normalized_acceleration_curl(high_base.acceleration, spacing))
+    finite_arrays.extend(
+        [
+            high_coherent.potential,
+            *high_coherent.acceleration,
+            high_base.potential,
+            *high_base.acceleration,
+            high_base.equation_source,
+        ]
+    )
     maximum_source_identity = max(source_identity_scores)
     maximum_hybrid_identity = max(hybrid_identity_scores)
     maximum_base_boundary = max(base_boundary_scores)
