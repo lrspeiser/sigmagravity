@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "sigma-field-model/1",
+  "name": "Two-potential photon and matter test fixture",
+  "modelClass": "stationary_elliptic",
+  "source": {
+    "format": "latex",
+    "text": "\\nabla^2\\Psi=4\\pi G\\rho_b;\\quad\\nabla^2\\Phi=4\\pi G\\eta\\rho_b;\\quad\\mathbf{a}_m=-\\nabla\\Psi;\\quad\\mathbf{a}_\\gamma=-\\nabla(\\Phi+\\Psi)/2",
+    "confirmedCanonical": true
+  },
+  "geometry": {
+    "coordinateSystem": "cartesian_3d",
+    "dimensions": 3,
+    "domain": { "lengthUnit": "m", "boundaryExtent": "dataset-derived with convergence padding" }
+  },
+  "fields": {
+    "rho_b": { "rank": "scalar", "role": "source", "unit": "kg/m^3", "datasetKey": "baryon_density" },
+    "Psi": { "rank": "scalar", "role": "solved", "unit": "m^2/s^2", "boundary": { "type": "isolated" } },
+    "Phi": { "rank": "scalar", "role": "solved", "unit": "m^2/s^2", "boundary": { "type": "isolated" } }
+  },
+  "parameters": {
+    "G": { "unit": "m^3/(kg*s^2)", "value": 6.6743e-11, "scope": "universal" },
+    "eta": { "unit": "1", "value": 1, "scope": "universal" }
+  },
+  "equations": [
+    {
+      "id": "matter_potential",
+      "kind": "equality",
+      "lhs": { "op": "laplacian", "args": [{ "field": "Psi" }] },
+      "rhs": { "op": "multiply", "args": [{ "const": 12.566370614359172 }, { "parameter": "G" }, { "field": "rho_b" }] }
+    },
+    {
+      "id": "spatial_potential",
+      "kind": "equality",
+      "lhs": { "op": "laplacian", "args": [{ "field": "Phi" }] },
+      "rhs": { "op": "multiply", "args": [{ "const": 12.566370614359172 }, { "parameter": "G" }, { "parameter": "eta" }, { "field": "rho_b" }] }
+    }
+  ],
+  "observables": [
+    { "id": "massive_tracer_acceleration", "target": "massive_tracers", "rank": "vector", "unit": "m/s^2", "expression": { "op": "negate", "args": [{ "op": "gradient", "args": [{ "field": "Psi" }] }] } },
+    { "id": "photon_lensing_acceleration", "target": "photons", "rank": "vector", "unit": "m/s^2", "expression": { "op": "negate", "args": [{ "op": "gradient", "args": [{ "op": "multiply", "args": [{ "const": 0.5 }, { "op": "add", "args": [{ "field": "Psi" }, { "field": "Phi" }] }] }] }] } }
+  ],
+  "dataRequirements": [{ "key": "baryon_density", "rank": "scalar", "unit": "kg/m^3" }],
+  "solver": { "family": "coupled_elliptic", "relativeTolerance": 1e-8, "maxIterations": 20000 },
+  "parameterPolicy": { "mode": "published_fixed", "perObjectParameters": [] }
+}

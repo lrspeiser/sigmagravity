@@ -5,10 +5,11 @@ export default function handler(request, response) {
   send(response, 200, {
     status: "ok",
     service: "sigma-gravity-research-simulator",
-    version: "0.1.0",
+    version: "0.2.0-preview",
     capabilities: {
       radialRotationCurves: "available",
       syntheticRadialGalaxies: "available",
+      typedFieldModelValidation: "available",
       fieldSolvers2d3d: "worker_not_connected",
       rawClusterLensing: "worker_not_connected",
     },

@@ -4,8 +4,10 @@ import datasets from "../api/v1/datasets.mjs";
 import systems from "../api/v1/systems.mjs";
 import system from "../api/v1/system.mjs";
 import validate from "../api/v1/formulas/validate.mjs";
+import validateModel from "../api/v1/models/validate.mjs";
 import runs from "../api/v1/runs.mjs";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
+import { readFileSync } from "node:fs";
 
 function response() {
   return {
@@ -46,6 +48,16 @@ test("formula API returns canonical safety audit", () => {
   assert.equal(output.body.valid, true);
   assert.equal(output.body.safetyAudit.arbitraryCodeExecuted, false);
   assert.equal("evaluate" in output.body, false);
+});
+
+test("field-model API accepts one contract for distinct 2D/3D theories", () => {
+  for (const name of ["newtonian-poisson", "refracted-gravity", "two-potential"]) {
+    const model = JSON.parse(readFileSync(new URL(`../examples/models/${name}.json`, import.meta.url), "utf8"));
+    const output = call(validateModel, { method: "POST", body: model });
+    assert.equal(output.statusCode, 200);
+    assert.equal(output.body.valid, true, output.body.errors.join("; "));
+    assert.equal(output.body.executionReadiness.state, "worker_not_connected");
+  }
 });
 
 test("run API produces a content-addressed comparator result", () => {

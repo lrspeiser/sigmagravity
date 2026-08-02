@@ -14,6 +14,7 @@ async function request(path, options) {
 const page = await request("/");
 assert.match(page, /Put a gravity formula in front of real galaxies/);
 assert.match(page, /Create a synthetic radial galaxy/);
+assert.match(page, /Describe a full 2D or 3D theory/);
 
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
@@ -31,6 +32,10 @@ const post = (body) => ({
 });
 const validation = await request("/api/v1/formulas/validate", post(FIXED_MOND_FORMULA));
 assert.equal(validation.valid, true);
+const fieldModel = await request("/examples/models/refracted-gravity.json");
+const fieldValidation = await request("/api/v1/models/validate", post(fieldModel));
+assert.equal(fieldValidation.valid, true);
+assert.equal(fieldValidation.executionReadiness.state, "worker_not_connected");
 const synthetic = await request("/api/v1/synthetic-galaxies", post({
   seed: 42,
   physical: { baryonicMassMsolar: 2e10, gasFraction: 0.35, bulgeFraction: 0.1, diskScaleKpc: 2.4 },

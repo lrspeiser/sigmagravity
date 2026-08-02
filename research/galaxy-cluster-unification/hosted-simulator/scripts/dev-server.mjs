@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import datasets from "../api/v1/datasets.mjs";
 import formulasValidate from "../api/v1/formulas/validate.mjs";
 import health from "../api/v1/health.mjs";
+import modelsValidate from "../api/v1/models/validate.mjs";
 import runs from "../api/v1/runs.mjs";
 import specification from "../api/v1/spec.mjs";
 import syntheticGalaxies from "../api/v1/synthetic-galaxies.mjs";
@@ -18,6 +19,7 @@ const apiRoutes = new Map([
   ["/api/v1/datasets", datasets],
   ["/api/v1/systems", systems],
   ["/api/v1/formulas/validate", formulasValidate],
+  ["/api/v1/models/validate", modelsValidate],
   ["/api/v1/synthetic-galaxies", syntheticGalaxies],
   ["/api/v1/runs", runs],
   ["/api/v1/openapi.json", specification],
@@ -27,6 +29,12 @@ const staticFiles = new Map([
   ["/index.html", ["index.html", "text/html; charset=utf-8"]],
   ["/assets/app.js", ["assets/app.js", "text/javascript; charset=utf-8"]],
   ["/assets/style.css", ["assets/style.css", "text/css; charset=utf-8"]],
+  ["/schemas/model-manifest-v1.schema.json", ["schemas/model-manifest-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/examples/models/newtonian-poisson.json", ["examples/models/newtonian-poisson.json", "application/json; charset=utf-8"]],
+  ["/examples/models/aqual.json", ["examples/models/aqual.json", "application/json; charset=utf-8"]],
+  ["/examples/models/qumond.json", ["examples/models/qumond.json", "application/json; charset=utf-8"]],
+  ["/examples/models/refracted-gravity.json", ["examples/models/refracted-gravity.json", "application/json; charset=utf-8"]],
+  ["/examples/models/two-potential.json", ["examples/models/two-potential.json", "application/json; charset=utf-8"]],
 ]);
 
 async function body(request) {

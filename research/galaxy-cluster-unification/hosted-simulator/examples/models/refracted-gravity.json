@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "sigma-field-model/1",
+  "name": "Refracted Gravity smooth permittivity",
+  "modelClass": "stationary_elliptic",
+  "source": {
+    "format": "latex",
+    "text": "\\nabla\\cdot[\\epsilon(\\rho_b)\\nabla\\Phi]=4\\pi G\\rho_b;\\quad\\epsilon=\\epsilon_0+\\frac{1-\\epsilon_0}{2}\\{\\tanh[Q\\ln(\\rho_b/\\rho_c)]+1\\}",
+    "confirmedCanonical": true,
+    "citation": "https://arxiv.org/abs/1610.09789"
+  },
+  "geometry": {
+    "coordinateSystem": "cartesian_3d",
+    "dimensions": 3,
+    "domain": { "lengthUnit": "m", "boundaryExtent": "dataset-derived with convergence padding" }
+  },
+  "fields": {
+    "rho_b": { "rank": "scalar", "role": "source", "unit": "kg/m^3", "datasetKey": "baryon_density" },
+    "Phi": { "rank": "scalar", "role": "solved", "unit": "m^2/s^2", "boundary": { "type": "isolated" } }
+  },
+  "parameters": {
+    "G": { "unit": "m^3/(kg*s^2)", "value": 6.6743e-11, "scope": "universal" },
+    "epsilon0": { "unit": "1", "value": 0.089, "scope": "universal" },
+    "rho_c": { "unit": "kg/m^3", "value": 5.6234132519e-22, "scope": "universal" },
+    "Q": { "unit": "1", "value": 0.47, "scope": "universal" }
+  },
+  "equations": [
+    {
+      "id": "refracted_gravity",
+      "kind": "equality",
+      "lhs": {
+        "op": "divergence",
+        "args": [{
+          "op": "multiply",
+          "args": [
+            {
+              "op": "add",
+              "args": [
+                { "parameter": "epsilon0" },
+                {
+                  "op": "multiply",
+                  "args": [
+                    { "op": "divide", "args": [{ "op": "subtract", "args": [{ "const": 1 }, { "parameter": "epsilon0" }] }, { "const": 2 }] },
+                    { "op": "add", "args": [{ "op": "tanh", "args": [{ "op": "multiply", "args": [{ "parameter": "Q" }, { "op": "log", "args": [{ "op": "divide", "args": [{ "field": "rho_b" }, { "parameter": "rho_c" }] }] }] }] }, { "const": 1 }] }
+                  ]
+                }
+              ]
+            },
+            { "op": "gradient", "args": [{ "field": "Phi" }] }
+          ]
+        }]
+      },
+      "rhs": { "op": "multiply", "args": [{ "const": 12.566370614359172 }, { "parameter": "G" }, { "field": "rho_b" }] }
+    }
+  ],
+  "observables": [{ "id": "massive_tracer_acceleration", "target": "massive_tracers", "rank": "vector", "unit": "m/s^2", "expression": { "op": "negate", "args": [{ "op": "gradient", "args": [{ "field": "Phi" }] }] } }],
+  "dataRequirements": [{ "key": "baryon_density", "rank": "scalar", "unit": "kg/m^3" }],
+  "solver": { "family": "nonlinear_finite_volume", "relativeTolerance": 1e-8, "maxIterations": 30000 },
+  "parameterPolicy": { "mode": "published_fixed", "perObjectParameters": [] }
+}

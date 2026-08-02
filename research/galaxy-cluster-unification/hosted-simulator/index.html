@@ -16,13 +16,14 @@
         </a>
         <div class="nav-links">
           <a href="#workbench">Workbench</a>
+          <a href="#field-model">2D/3D models</a>
           <a href="#api">API</a>
           <a href="/api/v1/openapi.json">OpenAPI</a>
         </div>
       </nav>
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Open research preview · v0.1</p>
+          <p class="eyebrow">Open research preview · v0.2</p>
           <h1>Put a gravity formula in front of real galaxies.</h1>
           <p class="lede">
             Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
@@ -39,6 +40,7 @@
           <dl>
             <div><dt>Real systems</dt><dd id="system-count">—</dd></div>
             <div><dt>Formula language</dt><dd>Safe AST v1</dd></div>
+            <div><dt>2D / 3D contract</dt><dd class="available">Available</dd></div>
             <div><dt>Radial curves</dt><dd class="available">Available</dd></div>
             <div><dt>2D / 3D fields</dt><dd class="planned">Worker next</dd></div>
             <div><dt>Raw lensing</dt><dd class="planned">Worker next</dd></div>
@@ -117,6 +119,46 @@
         </div>
       </section>
 
+      <section id="field-model" class="field-section">
+        <div class="wrap section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Formula-independent field contract</p>
+              <h2>Describe a full 2D or 3D theory.</h2>
+            </div>
+            <p class="muted">Validation is live. Numerical jobs remain local until the worker queue is connected.</p>
+          </div>
+          <div class="field-contract-grid">
+            <div class="card">
+              <label for="model-example">Start from a conformance example</label>
+              <div class="row">
+                <select id="model-example">
+                  <option value="refracted-gravity">Refracted Gravity</option>
+                  <option value="newtonian-poisson">Newtonian Poisson</option>
+                  <option value="aqual">AQUAL</option>
+                  <option value="qumond">QUMOND</option>
+                  <option value="two-potential">Two-potential photons / matter</option>
+                </select>
+                <button id="load-model-example" class="button compact secondary" type="button">Load</button>
+              </div>
+              <label for="model-editor" class="editor-label">Typed field-model manifest</label>
+              <textarea id="model-editor" class="model-editor" spellcheck="false" aria-label="2D or 3D field model JSON"></textarea>
+              <div class="row actions-row">
+                <a class="button compact ghost" href="/schemas/model-manifest-v1.schema.json">JSON Schema</a>
+                <button id="validate-model" class="button compact primary" type="button">Validate field model</button>
+              </div>
+              <div id="model-status" class="notice" role="status">Load an example or paste a manifest.</div>
+            </div>
+            <div class="card audit-card">
+              <p class="eyebrow">Canonical audit</p>
+              <h3 id="model-audit-title">No field model validated</h3>
+              <p class="muted">The audit reports what equation the service understood, the required arrays and solver, parameter counts, and why it can or cannot execute.</p>
+              <pre id="model-audit">No audit.</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="scope" class="scope-section">
         <div class="wrap scope-grid">
           <div>
@@ -143,9 +185,10 @@
           <div><p class="eyebrow">For notebooks and pipelines</p><h2>Use the API directly</h2></div>
           <a class="button secondary compact" href="/api/v1/openapi.json">OpenAPI JSON</a>
         </div>
-        <div class="api-grid">
+        <div class="api-grid four">
           <article class="endpoint"><span>GET</span><code>/api/v1/systems?q=DDO</code><p>Search real galaxies and inspect supported tests.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/formulas/validate</code><p>Check symbols, dimensions, parameter policy, complexity, and canonical hash.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/models/validate</code><p>Validate scalar, vector, or tensor field equations in 2D or 3D without theory-specific code.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/runs</code><p>Run a formula and receive scores, curves, comparators, and an immutable manifest hash.</p></article>
         </div>
         <pre class="code-sample"><code>const result = await fetch("/api/v1/runs", {

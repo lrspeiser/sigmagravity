@@ -37,6 +37,8 @@ const elements = Object.fromEntries(
     "result-title", "metrics", "curve-chart", "manifest-output", "download-result",
     "create-synthetic", "synthetic-summary", "syn-seed", "syn-mass", "syn-gas", "syn-bulge",
     "syn-scale", "syn-noise",
+    "model-example", "load-model-example", "model-editor", "validate-model", "model-status",
+    "model-audit-title", "model-audit",
   ].map((id) => [id, document.getElementById(id)]),
 );
 
@@ -65,6 +67,45 @@ function parseFormula() {
   } catch (error) {
     throw new Error(`Formula is not valid JSON: ${error.message}`);
   }
+}
+
+function parseModel() {
+  try {
+    return JSON.parse(elements["model-editor"].value);
+  } catch (error) {
+    throw new Error(`Field model is not valid JSON: ${error.message}`);
+  }
+}
+
+function setModelStatus(message, type = "") {
+  elements["model-status"].textContent = message;
+  elements["model-status"].className = `notice ${type}`.trim();
+}
+
+async function loadModelExample() {
+  const name = elements["model-example"].value;
+  const model = await api(`/examples/models/${encodeURIComponent(name)}.json`);
+  elements["model-editor"].value = JSON.stringify(model, null, 2);
+  setModelStatus(`${model.name} loaded. Validate to confirm the canonical equation tree.`);
+}
+
+async function validateModel() {
+  setModelStatus("Checking field ranks, units, boundaries, data keys, and parameter policy…");
+  const model = parseModel();
+  const result = await api("/api/v1/models/validate", {
+    method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(model),
+  });
+  elements["model-audit-title"].textContent = model.name;
+  elements["model-audit"].textContent = JSON.stringify({
+    modelSha256: result.modelSha256,
+    documentSha256: result.documentSha256,
+    parameterAccounting: result.parameterAccounting,
+    requiredCapabilities: result.requiredCapabilities,
+    typeAudit: result.typeAudit,
+    executionReadiness: result.executionReadiness,
+    warnings: result.warnings,
+  }, null, 2);
+  setModelStatus(`Valid field model · ${result.typeAudit.expressionNodes} expression nodes · ${result.modelSha256.slice(0, 14)}… · worker connection pending`, "success");
 }
 
 async function loadCatalog() {
@@ -213,4 +254,7 @@ elements["validate-formula"].addEventListener("click", handle(validate));
 elements["run-formula"].addEventListener("click", handle(run));
 elements["create-synthetic"].addEventListener("click", handle(createSynthetic));
 elements["download-result"].addEventListener("click", downloadResult);
+elements["load-model-example"].addEventListener("click", handle(loadModelExample));
+elements["validate-model"].addEventListener("click", handle(validateModel));
+handle(loadModelExample)();
 handle(loadCatalog)();
