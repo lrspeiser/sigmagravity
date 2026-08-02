@@ -1,0 +1,68 @@
+{
+  "protocol_version": "P0666-ZERO-SLIP-3D-PHOTON-DEFLECTION-1.0.0",
+  "status": "frozen_before_any_P0666_photon_score",
+  "frozen_utc": "2026-08-02T02:05:16Z",
+  "purpose": "Validate the three-dimensional baryonic tensor construction and zero-slip line-of-sight photon deflection without opening any spent or sealed lensing image.",
+  "parent_result": "results/p0665_tensor_aqual_3d_solver/report.json",
+  "metric_closure": {
+    "weak_field_metric": "ds^2=-(1+2 Phi/c^2)c^2dt^2+(1-2 Phi/c^2)dx^2",
+    "gravitational_slip": 0.0,
+    "deflection": "alpha_perp=-(2/c^2)(D_ds/D_s) integral a_perp dz",
+    "fitted_photon_amplitude": false
+  },
+  "three_dimensional_activation": {
+    "sigma": "[a0/(a0+|g_N|)] C_transverse,3D [1-exp(-(ell/Lc)^2)]",
+    "C_transverse_3D": "[2 sqrt(|g_star||g_gas|)/(|g_star|+|g_gas|)] [1-(g_star dot g_gas)^2/(|g_star|^2 |g_gas|^2)]",
+    "ell": "min(|g_N|/||grad g_N||_F, forward physical distance to the 3D grid boundary along g_N)",
+    "h_hat": "unit gas-minus-star field direction with total-field fallback",
+    "surface_to_volume": "normalized sech-squared line-of-sight layer",
+    "component_scale_height": "projected component RMS radius; a measured-map geometry quantity, not a gravity parameter",
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "coherence_power": 2.0,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "analytic_tests": {
+    "point_mass_grid_cells": 65,
+    "point_mass_half_width": 20.0,
+    "point_mass_gaussian_sigma": 0.6,
+    "point_mass_impact_range": [2.5, 6.0],
+    "point_mass_gravitational_constant": 1.0,
+    "point_mass_light_speed": 1.0,
+    "activation_grid_cells": 25,
+    "activation_half_width": 8.0,
+    "activation_stellar_mass": 0.3,
+    "activation_gas_mass": 0.7
+  },
+  "predeclared_progression_gates": {
+    "P0665_all_progression_gates_pass": true,
+    "point_mass_GR_deflection_median_relative_error_max": 0.12,
+    "point_mass_GR_deflection_p95_relative_error_max": 0.25,
+    "deflection_linear_mass_scaling_relative_error_max": 1e-10,
+    "deflection_rotation_covariance_relative_RMS_error_max": 1e-10,
+    "normalized_deflection_curl_RMS_max": 1e-10,
+    "surface_to_volume_component_mass_relative_error_max": 1e-12,
+    "radial_cocentered_3D_sigma_mass_weighted_mean_max": 1e-8,
+    "offset_3D_sigma_mass_weighted_mean_min": 0.001,
+    "sigma_finite_and_in_closed_unit_interval": true,
+    "minimum_constitutive_eigenvalue_strictly_positive": true,
+    "direction_reversal_tensor_relative_error_max": 1e-12,
+    "gravitational_slip_exactly_zero": 0.0,
+    "fitted_photon_amplitude": false,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0,
+    "spent_lensing_outcomes_opened": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "The fixed zero-slip photon closure and sole 3D activation construction advance to spent RX J2129 map building only if every normalization, symmetry, mass, activation, parameter, and blindness gate passes.",
+  "outputs": {
+    "directory": "results/p0666_zero_slip_3d_photon_deflection"
+  },
+  "claim_boundary": [
+    "The zero-slip metric is a frozen weak-field closure and not yet derived from a covariant action.",
+    "Point-mass recovery validates normalization, not the tensor law's observational accuracy.",
+    "Projected RMS-radius scale heights are deterministic map geometry but remain an approximate deprojection.",
+    "No spent RX J2129 image and no P0633/P0640 target may be used in P0666 development or selection."
+  ]
+}
