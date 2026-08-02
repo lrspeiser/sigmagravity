@@ -1,0 +1,74 @@
+{
+  "report_version": "P0663-COMMON-RESOLUTION-TENSOR-AUDIT-RESULTS-1.0.0",
+  "status": "pass",
+  "all_progression_gates_pass": true,
+  "candidate_advanced_to_outcome_blind_real_map_field_solves": true,
+  "protocol_sha256": "2eb7e55e4341fd6dab2a0f280852490a36013c5e8b69ba05a7ec4c4b6214b0b9",
+  "source_sha256": "3f172128d1854a0a912b261e2eb97f976daf952b7b54fe319520483f54b5aedd",
+  "resampling_source_sha256": "bfe6f38e7f317357ed944e54022e501fb874cb1e328b7c3dc95522c96d11bbc0",
+  "registered_map_manifest_sha256": "1dd7af5a986f14a007eebbd9b8152aa1e876811cc65e8ab64dd5b4121ce30eaa",
+  "coverage": {
+    "registered_galaxies": 13,
+    "registered_clusters": 4,
+    "mass_scenarios": 3,
+    "common_resolutions": 2,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "metrics": {
+    "radial_cocentered_sigma_weighted_mean": 4.600603988409434e-16,
+    "rotation_covariance_relative_error": 4.440892098500626e-16,
+    "direction_reversal_tensor_relative_error": 0.0,
+    "registered_galaxy_nominal_median_sigma": 0.0012113763661499694,
+    "registered_cluster_nominal_median_sigma": 0.07309847944193185,
+    "registered_cluster_to_galaxy_nominal_median_sigma_ratio": 60.34332638852407,
+    "mass_sensitivity_cluster_to_galaxy_ratios": {
+      "low": 59.07783228325512,
+      "nominal": 60.34332638852407,
+      "high": 56.41623375206338
+    },
+    "minimum_constitutive_eigenvalue_proxy": 1.3051612054186592e-05,
+    "maximum_domain_median_resolution_change_fraction": 0.5064052085473261,
+    "solar_1au_constitutive_anisotropy": 2.0235190369087182e-08,
+    "physical_length_scale_covariance_relative_error": 1.7763568394002505e-15,
+    "synthetic_resolution_median_change_fraction": 0.020299501673565867,
+    "minimum_mass_sensitivity_cluster_to_galaxy_ratio": 56.41623375206338,
+    "maximum_common_resolution_mass_relative_error": 4.440892098500626e-16,
+    "maximum_domain_median_common_resolution_change_fraction": 0.3011521034742515
+  },
+  "gate_results": {
+    "P0659_parent": true,
+    "P0662_diagnostic_state": true,
+    "mass_conservation": true,
+    "primary_scores_unchanged": true,
+    "galaxy_coverage": true,
+    "cluster_coverage": true,
+    "registered_domain_separation": true,
+    "galaxy_channel_small": true,
+    "cluster_channel_present": true,
+    "mass_sensitivity": true,
+    "common_resolution_stability": true,
+    "solar_proxy": true,
+    "no_new_constants": true,
+    "no_per_object_parameters": true,
+    "sealed_targets_untouched": true
+  },
+  "resolution_summary": [
+    {
+      "domain": "registered_cluster_baryons_only",
+      "median_absolute_fractional_change": 0.11879989200866525
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "median_absolute_fractional_change": 0.3011521034742515
+    }
+  ],
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0663 corrects a validation measurement operator; it does not modify the gravity law or its primary scores.",
+    "A pass would authorize outcome-blind real-map field solves, not observational claims.",
+    "Actual future predictions must propagate each instrument's measured beam or PSF rather than infer it from a target outcome.",
+    "No P0633 velocity, P0640 lens constraint, or spent lens residual may be used in P0663 development or selection."
+  ]
+}
