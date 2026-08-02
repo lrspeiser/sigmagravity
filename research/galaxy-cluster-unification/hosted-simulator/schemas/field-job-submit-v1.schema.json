@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigmagravity.org/schemas/field-job-submit-v1.schema.json",
+  "title": "Sigma asynchronous field job submission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "model", "dataUploadId", "request"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-field-job-submit/1" },
+    "model": { "$ref": "model-manifest-v1.schema.json" },
+    "dataUploadId": { "type": "string", "pattern": "^upload_[0-9a-f]{24}$" },
+    "request": { "$ref": "field-job-request-v1.schema.json" }
+  }
+}

@@ -66,12 +66,12 @@ environment and reproduction command. A nonconverged solve is retained as
 
 ## API boundary
 
-The hosted gateway can now preflight the same model and array metadata through
-`POST /api/v1/field-jobs/prepare`. It checks geometry, required arrays, units,
-shape, boundaries, observables, parameter counts, bundle hash, and estimated
-resource class. It still reports `array_bytes_not_uploaded` and
-`generic_scientific_worker_not_connected`, because the upload store and queue
-do not yet exist.
+The stateless gateway can preflight the same model and array metadata through
+`POST /api/v1/field-jobs/prepare`. The development server now also implements
+the complete short-request lifecycle: upload registration, byte upload, queue
+submission, polling, events, cancellation, and verified artifact downloads.
+See `ASYNC_FIELD_JOB_API_MILESTONE.md`. Durable cloud storage and isolated
+production workers remain separate deployment work.
 
 ## Container boundary
 

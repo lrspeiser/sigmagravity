@@ -11,10 +11,19 @@ import specification from "../api/v1/spec.mjs";
 import syntheticGalaxies from "../api/v1/synthetic-galaxies.mjs";
 import system from "../api/v1/system.mjs";
 import systems from "../api/v1/systems.mjs";
+import { createLocalFieldJobRouter } from "../lib/local-field-job-http.mjs";
+import { LocalFieldJobService } from "../lib/local-field-job-service.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const port = Number(process.env.PORT ?? 4173);
 const host = process.env.HOST ?? "127.0.0.1";
+const projectRoot = resolve(root, "..");
+const localService = new LocalFieldJobService({
+  root: process.env.SIMULATOR_LOCAL_STORE ?? resolve(projectRoot, "tmp", "hosted-field-job-service"),
+  projectRoot,
+});
+await localService.initialize();
+const localFieldJobs = createLocalFieldJobRouter(localService);
 const apiRoutes = new Map([
   ["/api/v1/health", health],
   ["/api/v1/datasets", datasets],
@@ -33,8 +42,11 @@ const staticFiles = new Map([
   ["/assets/style.css", ["assets/style.css", "text/css; charset=utf-8"]],
   ["/schemas/model-manifest-v1.schema.json", ["schemas/model-manifest-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/array-bundle-request-v1.schema.json", ["schemas/array-bundle-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/array-bundle-v1.schema.json", ["schemas/array-bundle-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/field-job-request-v1.schema.json", ["schemas/field-job-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/field-job-cli-v1.schema.json", ["schemas/field-job-cli-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/data-upload-request-v1.schema.json", ["schemas/data-upload-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/field-job-submit-v1.schema.json", ["schemas/field-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/examples/models/newtonian-poisson.json", ["examples/models/newtonian-poisson.json", "application/json; charset=utf-8"]],
   ["/examples/models/aqual.json", ["examples/models/aqual.json", "application/json; charset=utf-8"]],
   ["/examples/models/qumond.json", ["examples/models/qumond.json", "application/json; charset=utf-8"]],
@@ -42,16 +54,19 @@ const staticFiles = new Map([
   ["/examples/models/two-potential.json", ["examples/models/two-potential.json", "application/json; charset=utf-8"]],
 ]);
 
-async function body(request) {
+async function body(request, url) {
   const chunks = [];
   let bytes = 0;
+  const binaryUpload = /^\/api\/v1\/data-uploads\/upload_[0-9a-f]{24}\/content$/.test(url.pathname);
+  const limit = binaryUpload ? localService.maxUploadBytes : 1_000_000;
   for await (const chunk of request) {
     bytes += chunk.length;
-    if (bytes > 1_000_000) throw new Error("request body exceeds 1 MB local limit");
+    if (bytes > limit) throw new Error(`request body exceeds ${limit} byte local limit`);
     chunks.push(chunk);
   }
   if (!chunks.length) return undefined;
-  return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+  const payload = Buffer.concat(chunks);
+  return binaryUpload ? payload : JSON.parse(payload.toString("utf8"));
 }
 
 function adaptResponse(response) {
@@ -62,31 +77,32 @@ function adaptResponse(response) {
 
 const server = createServer(async (request, rawResponse) => {
   const response = adaptResponse(rawResponse);
-  const url = new URL(request.url, `http://${request.headers.host ?? `${host}:${port}`}`);
-  const staticEntry = staticFiles.get(url.pathname);
-  if (staticEntry) {
-    const [path, contentType] = staticEntry;
-    response.setHeader("Content-Type", contentType);
-    response.setHeader("Cache-Control", "no-store");
-    response.end(await readFile(resolve(root, path)));
-    return;
-  }
-  if (url.pathname === "/favicon.ico") { response.statusCode = 204; response.end(); return; }
-
-  let handler = apiRoutes.get(url.pathname);
-  const detailMatch = url.pathname.match(/^\/api\/v1\/systems\/([^/]+)$/);
-  if (detailMatch) handler = system;
-  if (!handler) {
-    response.statusCode = 404;
-    response.setHeader("Content-Type", "application/json; charset=utf-8");
-    response.end(JSON.stringify({ error: "not_found" }));
-    return;
-  }
   try {
+    const url = new URL(request.url, `http://${request.headers.host ?? `${host}:${port}`}`);
     request.query = Object.fromEntries(url.searchParams.entries());
+    request.body = await body(request, url);
+    if (await localFieldJobs(request, response, url)) return;
+    const staticEntry = staticFiles.get(url.pathname);
+    if (staticEntry) {
+      const [path, contentType] = staticEntry;
+      response.setHeader("Content-Type", contentType);
+      response.setHeader("Cache-Control", "no-store");
+      response.end(await readFile(resolve(root, path)));
+      return;
+    }
+    if (url.pathname === "/favicon.ico") { response.statusCode = 204; response.end(); return; }
+
+    let handler = apiRoutes.get(url.pathname);
+    const detailMatch = url.pathname.match(/^\/api\/v1\/systems\/([^/]+)$/);
+    if (detailMatch) handler = system;
+    if (!handler) {
+      response.statusCode = 404;
+      response.setHeader("Content-Type", "application/json; charset=utf-8");
+      response.end(JSON.stringify({ error: "not_found" }));
+      return;
+    }
     if (detailMatch) request.query.id = decodeURIComponent(detailMatch[1]);
-    request.body = await body(request);
-    handler(request, response);
+    await handler(request, response);
   } catch (error) {
     if (!response.headersSent) response.setHeader("Content-Type", "application/json; charset=utf-8");
     response.statusCode = 400;
@@ -99,5 +115,8 @@ server.listen(port, host, () => {
 });
 
 for (const signal of ["SIGINT", "SIGTERM"]) {
-  process.on(signal, () => server.close(() => process.exit(0)));
+  process.on(signal, () => server.close(async () => {
+    await localService.close();
+    process.exit(0);
+  }));
 }

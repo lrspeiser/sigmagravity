@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -118,6 +120,30 @@ def test_python_model_hash_matches_hosted_javascript_validator():
     refracted = json.loads((root / "refracted-gravity.json").read_text(encoding="utf-8"))
     assert model_sha256(newtonian) == "43738f2c7bb3c4e94193763cf46f39b2a47fa852b25d1c063fef00fa7e1aa661"
     assert model_sha256(refracted) == "4a0c9be0ba6f430d4d073f0ee6bf1e98de437908de81d0ad533261fea5d14bef"
+
+
+def test_cli_returns_structured_input_rejection(tmp_path: Path):
+    request_path = tmp_path / "request.json"
+    request_path.write_text(
+        json.dumps({"schemaVersion": "not-a-field-job"}), encoding="utf-8"
+    )
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "run_generic_field_job.py"),
+            "run",
+            "--request",
+            str(request_path),
+        ],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 2
+    failure = json.loads(completed.stderr.strip().splitlines()[-1])
+    assert failure["state"] == "rejected_input"
+    assert failure["errorType"] == "ValueError"
 
 
 def test_array_bundle_detects_data_changed_after_registration(tmp_path: Path):

@@ -84,6 +84,12 @@ POST /api/v1/synthetic-galaxies
 POST /api/v1/formulas/validate
 POST /api/v1/models/validate
 POST /api/v1/field-jobs/prepare
+POST /api/v1/data-uploads
+PUT  /api/v1/data-uploads/{id}/content
+POST /api/v1/field-jobs
+GET  /api/v1/field-jobs/{id}
+GET  /api/v1/field-jobs/{id}/events
+GET  /api/v1/field-jobs/{id}/artifacts
 POST /api/v1/runs
 GET  /api/v1/openapi.json
 ```
@@ -106,6 +112,26 @@ preflight hash plus a resource estimate. It cannot verify or execute array
 bytes until uploads and the worker queue are connected, so it reports both
 blockers explicitly.
 
+The Node development server now supplies a real asynchronous reference backend
+for the upload and field-job endpoints. `POST /api/v1/data-uploads` registers a
+completed `sigma-array-bundle/1` manifest plus the expected NPZ byte hash and
+size. `PUT` sends those exact bytes. `POST /api/v1/field-jobs` then queues the
+confirmed field model, upload ID, boundaries, observables, solver settings, and
+seed. Status, ordered lifecycle events, cancellation, and artifact downloads
+are separate short requests. Artifact bytes are rehashed before download.
+
+Run the complete HTTP known-answer test while `npm run dev` is active:
+
+```text
+npm run smoke:field-jobs
+```
+
+The local store defaults to `../tmp/hosted-field-job-service` and can be moved
+with `SIMULATOR_LOCAL_STORE`. It is a single-user reference adapter with one
+worker, bounded upload size, bounded estimated memory, bounded job count, and a
+runtime timeout. It accepts only safe manifests and NPZ data; it never executes
+uploaded researcher code.
+
 The local worker CLI is `../scripts/run_generic_field_job.py`. It packages NPZ
 arrays into a verified `sigma-array-bundle/1` directory and runs a
 `sigma-field-job-request/1`. Every run writes separate deterministic job and
@@ -113,12 +139,11 @@ scientific-result hashes, output-array hashes, residual history, resource log,
 artifact index, and reproduction manifest. See `../worker` for the pinned,
 non-root container definition.
 
-## Worker connection
+## Production worker connection
 
-The next deployment milestone is to containerize and connect the existing
-generic Python worker. The
-gateway will submit immutable jobs containing dataset, formula, solver, seed,
-and code hashes. The worker will upload JSON/CSV/PNG artifacts to object
-storage and report state through a durable database. Vercel remains the UI and
-short-request gateway; it does not hold an HTTP connection open during field
-or lensing solves.
+The local queue proves the API contract and the unchanged Python worker process,
+but it is not the production deployment. Production still needs direct object-
+storage uploads, a durable queue/database, container scheduling, authentication,
+project isolation, retries, quotas, and monitoring. Vercel remains the UI and
+short-request gateway; it must not execute Python or hold an HTTP connection
+open during field or lensing solves.

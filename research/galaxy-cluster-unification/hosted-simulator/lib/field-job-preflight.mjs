@@ -11,7 +11,7 @@ function bundleCore(bundle) {
   return Object.fromEntries(Object.entries(bundle).filter(([key]) => key !== "bundleSha256"));
 }
 
-function validateBundle(bundle) {
+export function validateArrayBundle(bundle) {
   if (!bundle || bundle.schemaVersion !== "sigma-array-bundle/1") throw new Error("inputBundle must use sigma-array-bundle/1");
   if (bundle.bundleSha256 !== sha256(bundleCore(bundle))) throw new Error("inputBundle manifest hash mismatch");
   if (!Array.isArray(bundle.arrays) || bundle.arrays.length === 0) throw new Error("inputBundle requires array records");
@@ -40,7 +40,7 @@ export function prepareFieldJob(payload) {
     return { valid: false, state: "invalid_model", errors: validation.errors, warnings: validation.warnings };
   }
   const bundle = payload.inputBundle;
-  const records = validateBundle(bundle);
+  const records = validateArrayBundle(bundle);
   const modelGeometry = payload.model.geometry;
   if (bundle.geometry?.coordinateSystem !== modelGeometry.coordinateSystem || bundle.geometry?.dimensions !== modelGeometry.dimensions) {
     throw new Error("model and inputBundle geometry disagree");

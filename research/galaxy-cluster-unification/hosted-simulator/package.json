@@ -1,6 +1,6 @@
 {
   "name": "sigma-gravity-research-simulator",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "description": "Public, reproducible preview API for galaxy and gravity-formula tests.",
@@ -10,6 +10,7 @@
     "dev": "node scripts/dev-server.mjs",
     "dev:vercel": "vercel dev",
     "smoke": "node scripts/smoke-http.mjs",
+    "smoke:field-jobs": "python ../scripts/smoke_local_field_job_api.py",
     "test": "node --test test/*.test.mjs"
   },
   "engines": {

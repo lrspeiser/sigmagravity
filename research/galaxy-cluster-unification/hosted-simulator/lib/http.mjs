@@ -1,7 +1,7 @@
 export function setCors(response) {
   response.setHeader("Access-Control-Allow-Origin", "*");
-  response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length,X-Content-SHA256");
   response.setHeader("Content-Type", "application/json; charset=utf-8");
 }
 
@@ -32,7 +32,7 @@ export function parseBody(request) {
 
 export function fail(response, error, status = 422) {
   send(response, status, {
-    error: status === 422 ? "invalid_request" : "server_error",
+    error: error.code ?? (status === 422 ? "invalid_request" : "server_error"),
     message: error.message,
     details: error.details ?? [],
   });

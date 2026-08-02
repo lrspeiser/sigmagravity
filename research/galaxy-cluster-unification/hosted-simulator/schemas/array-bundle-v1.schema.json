@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigmagravity.org/schemas/array-bundle-v1.schema.json",
+  "title": "Sigma immutable array bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "geometry", "arrays", "provenance", "license", "bundleSha256"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-array-bundle/1" },
+    "geometry": {
+      "type": "object",
+      "required": ["coordinateSystem", "dimensions", "spacing", "lengthUnit"],
+      "properties": {
+        "coordinateSystem": { "enum": ["cartesian_2d", "cartesian_3d", "axisymmetric_cylindrical"] },
+        "dimensions": { "enum": [2, 3] },
+        "spacing": {
+          "oneOf": [
+            { "type": "number", "exclusiveMinimum": 0 },
+            { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "number", "exclusiveMinimum": 0 } }
+          ]
+        },
+        "lengthUnit": { "type": "string", "minLength": 1 },
+        "axisOrder": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "string", "minLength": 1 } },
+        "referenceFrame": { "type": "string", "minLength": 1 }
+      }
+    },
+    "arrays": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "npzKey", "unit", "rank", "role", "dtype", "shape", "elementCount", "contentSha256"],
+        "properties": {
+          "key": { "type": "string", "minLength": 1 },
+          "npzKey": { "type": "string", "minLength": 1 },
+          "unit": { "type": "string", "minLength": 1 },
+          "rank": { "enum": ["scalar", "vector", "tensor2"] },
+          "role": { "enum": ["source", "boundary", "mask", "uncertainty", "auxiliary"] },
+          "dtype": { "type": "string", "pattern": "^[<>=|][A-Za-z0-9]+$" },
+          "shape": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "integer", "minimum": 5 } },
+          "elementCount": { "type": "integer", "minimum": 25 },
+          "contentSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        }
+      }
+    },
+    "provenance": { "type": "object", "minProperties": 1 },
+    "license": {
+      "type": "object",
+      "required": ["id", "redistributionAllowed"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "redistributionAllowed": { "type": "boolean" }
+      }
+    },
+    "bundleSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

@@ -6,6 +6,8 @@ import system from "../api/v1/system.mjs";
 import validate from "../api/v1/formulas/validate.mjs";
 import validateModel from "../api/v1/models/validate.mjs";
 import prepareFieldJob from "../api/v1/field-jobs/prepare.mjs";
+import hostedFieldJobs from "../api/v1/field-jobs.mjs";
+import hostedDataUploads from "../api/v1/data-uploads.mjs";
 import runs from "../api/v1/runs.mjs";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
 import { readFileSync } from "node:fs";
@@ -102,4 +104,13 @@ test("heavy solver requests are never replaced with radial proxies", () => {
   });
   assert.equal(output.statusCode, 503);
   assert.equal(output.body.error, "worker_not_connected");
+});
+
+test("production upload and queue endpoints disclose missing infrastructure", () => {
+  const upload = call(hostedDataUploads, { method: "POST", body: {} });
+  assert.equal(upload.statusCode, 503);
+  assert.equal(upload.body.error, "production_storage_not_connected");
+  const job = call(hostedFieldJobs, { method: "POST", body: {} });
+  assert.equal(job.statusCode, 503);
+  assert.equal(job.body.error, "production_worker_not_connected");
 });

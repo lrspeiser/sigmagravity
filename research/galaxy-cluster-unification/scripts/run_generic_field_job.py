@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 from voidscreen.field_job import execute_request_file, package_array_file
@@ -54,4 +55,19 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (KeyError, TypeError, ValueError) as error:
+        print(
+            json.dumps(
+                {
+                    "schemaVersion": "sigma-field-job-cli-error/1",
+                    "state": "rejected_input",
+                    "errorType": type(error).__name__,
+                    "message": str(error),
+                },
+                sort_keys=True,
+            ),
+            file=sys.stderr,
+        )
+        raise SystemExit(2) from error

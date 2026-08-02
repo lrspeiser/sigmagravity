@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigmagravity.org/schemas/data-upload-request-v1.schema.json",
+  "title": "Sigma immutable array upload ticket request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "inputBundle", "archive"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-data-upload-request/1" },
+    "inputBundle": { "$ref": "array-bundle-v1.schema.json" },
+    "archive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "bytes"],
+      "properties": {
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "mediaType": { "const": "application/x-npz" }
+      }
+    }
+  }
+}

@@ -190,6 +190,8 @@
           <article class="endpoint"><span>POST</span><code>/api/v1/formulas/validate</code><p>Check symbols, dimensions, parameter policy, complexity, and canonical hash.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/models/validate</code><p>Validate scalar, vector, or tensor field equations in 2D or 3D without theory-specific code.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs/prepare</code><p>Bind a model to content-hashed arrays, grid, boundaries, observables, and a resource estimate before queueing.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/data-uploads</code><p>Register immutable NPZ data; the development backend verifies byte hashes before a job can use it.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs</code><p>Queue a confirmed 2D/3D manifest locally, then poll state, events, and verified artifacts. Production workers are not connected yet.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/runs</code><p>Run a formula and receive scores, curves, comparators, and an immutable manifest hash.</p></article>
         </div>
         <pre class="code-sample"><code>const result = await fetch("/api/v1/runs", {

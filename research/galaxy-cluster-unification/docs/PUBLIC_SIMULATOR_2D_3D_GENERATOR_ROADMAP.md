@@ -29,8 +29,9 @@ trusted solver.
 | Cross-theory conformance fixtures | Newtonian, AQUAL, QUMOND, Refracted Gravity, and two-potential manifests pass one validator | validation does not prove a numerical or physical result |
 | Neutral local field worker | one expression-driven engine solves scalar divergence-form equations on Cartesian 2D and 3D grids | no hosted queue, tensors, nonlocal operators, axisymmetric coordinates, or arbitrary-code sandbox yet |
 | Numerical acceptance tests | analytic 2D, analytic 3D, variable-coefficient, and exact Refracted Gravity-tree executions pass | convergence order and production-scale resource classes are not frozen yet |
-| Content-addressed field job | verified array bundle, deterministic job/scientific hashes, residual history, output hashes, resource log, artifact index, and CLI pass end to end | durable upload, queue, storage, and hosted worker are not connected |
+| Content-addressed field job | verified array bundle, deterministic job/scientific hashes, residual history, output hashes, resource log, artifact index, and CLI pass end to end | durable cloud upload, database, scheduler, and hosted worker are not connected |
 | Worker container definition | pinned Python/NumPy/SciPy/JCS environment, non-root user, read-only/network-disabled run instructions | Docker/Podman is unavailable on this machine, so image build and runtime isolation still need CI or a container host |
+| Asynchronous reference API | immutable NPZ upload, queue, polling, events, cancellation, restart recovery, and rehashed artifact downloads pass through real HTTP and the Python worker | local single-user filesystem queue; no durable cloud store, auth, or deployed container scheduler |
 
 The generic worker dispatches from equation structure, not a theory name. It
 supports `laplacian(phi)=source` and
@@ -48,7 +49,7 @@ below.
 | 2. Contract coverage | Publish a formal JSON Schema; add coordinate frames, field shapes, uncertainty fields, priors, parameter bounds, fit/freeze stages, and observable scoring definitions. | Invalid dimensions, missing data, missing boundaries, and hidden per-object parameters fail before job creation; schema and implementation conformance tests agree. |
 | 3. Generic numerical engine | Add controlled isolated-boundary approximations, axisymmetric cylindrical grids, tensor coefficients, coupled nonlinear convergence controls, nonlocal kernels, line-of-sight operators, adaptive resource estimates, and checkpoint/restart. | Manufactured solutions demonstrate the expected convergence order in every supported solver family; divergence and nonconvergence return diagnostics rather than a plausible-looking field. |
 | 4. Safe advanced tier | Define a container plug-in ABI for models outside the safe language; run each in a network-blocked, single-use sandbox with read-only inputs and hard CPU, memory, wall-time, and output limits. | A hostile fixture cannot read credentials, reach the network, or affect another run; a valid plug-in reproduces a safe-language fixture within tolerance. |
-| 5. Data ingestion | Add resumable uploads for FITS, HDF5, NumPy, CSV, tables, and catalogs; unit/frame metadata; checksums; license/provenance; masks; PSFs/beams; uncertainty maps; distance and inclination uncertainties. | Uploading the same bytes and metadata returns the same data ID; missing units, frame, license, or checksum blocks scientific execution. |
+| 5. Data ingestion | Immutable local NPZ upload with unit, hash, provenance, and license gates is implemented. Add resumable object-storage uploads for FITS, HDF5, CSV, tables, and catalogs plus frames, masks, PSFs/beams, uncertainty maps, distance, and inclination. | Uploading the same bytes and metadata returns the same data ID; missing units, frame, license, or checksum blocks scientific execution. |
 | 6. Versioned real-galaxy maps | Build an open catalog sharing resolved stellar-light, H I/gas, distance, inclination, PSF/beam, masks, and velocity maps for the same systems. Preserve raw and processed versions. | At least 20 morphologically varied galaxies pass registration, mass conservation, and observation-forward reconstruction gates before any theory score is opened. |
 | 7. 2D-to-3D reconstruction | Support transparent vertical priors, bulge deprojection, gas thickness, inclination, distance, warp/bar flags, and Monte Carlo nuisance draws. Never call a non-unique reconstruction “the galaxy’s true 3D density.” | Synthetic recovery tests cover known thickness/bulge/inclination; real results report the spread across allowed reconstructions. |
 | 8. Inverse parameter extraction | Infer light/gas components, scale lengths, bulge fraction, thickness, inclination, asymmetry, Fourier modes, clumps, and uncertainty distributions from observations. Separate measured, externally supplied, and inferred quantities. | On synthetic images with hidden truth, calibrated intervals contain the generating values at their advertised rate; holdout residuals reveal model misspecification. |
@@ -57,7 +58,7 @@ below.
 | 11. Theory-to-observable adapters | Convert solved potentials/fields into circular speeds, line-of-sight velocity fields, weak shear, convergence, deflection, critical curves, and raw multiple-image roots. Keep photon and massive-tracer mappings explicit. | Newtonian/MOND published fixtures reproduce within declared numerical and data-processing tolerance; photons are never silently scored with a massive-particle rule. |
 | 12. Fair scoring | Add fixed train/development/holdout splits, no-target-access execution, nuisance-policy declarations, universal/per-object parameter counts, likelihoods with covariance, and same-input comparators. | A batch report separates galaxies, clusters, topology, and Solar-System tests and shows performance versus Newtonian, fixed MOND/RAR, and a declared halo baseline without a single blended score. |
 | 13. Cluster data | Version member light, intracluster gas, geometry, source redshifts, weak-shear catalogs, and raw strong-lens image positions with licensing and sealed/open states. | Multiple clusters can be run with one frozen gravity parameter set; raw image/topology holdouts are scored, not only reconstructed dark-matter maps. |
-| 14. Asynchronous API | Add model registration, data registration, job queue, lifecycle events, cancellation, retries, caching, batch runs, artifact indexes, and stable error states. | Identical model/data/solver/seed hashes return the cached immutable run; a browser never holds a request open for a long solve. |
+| 14. Asynchronous API | Local upload, queue, lifecycle events, cancellation, restart recovery, caching identity, artifact indexes, and stable errors are implemented. Add durable adapters, model registration, retry policy, and unrestricted-size batch orchestration. | Identical model/data/solver/seed/worker hashes return the cached immutable run; a browser never holds a request open for a long solve. |
 | 15. Storage and reproducibility | Add durable database and object storage for model, dataset, code, solver, container, seed, grid, boundary, logs, predictions, plots, and manifests. Sign citation-ready manifests. | A clean worker can reproduce selected run hashes/tolerances from only the manifest and permitted inputs; failed runs retain useful artifacts. |
 | 16. Hosting and operations | Containerize the Python worker, deploy CPU resource classes, connect it to the Vercel control plane, and add auth, quotas, monitoring, cost controls, backups, abuse handling, and uptime/support policy. | Public users can submit a bounded batch, follow status, download artifacts, and cannot exhaust shared resources or access sealed data. |
 | 17. Reports and SDKs | Generate JSON, CSV/Parquet, FITS/NumPy fields, plots, residual maps, convergence histories, and a deterministic methods report. Add Python and HTTP examples. | Another researcher can reproduce and independently interpret a run without copying output into an LLM. |
@@ -70,7 +71,7 @@ below.
 2. Harden the generic local worker through convergence, nonlinear, boundary,
    coupled-field, and resource tests.
 3. Package the worker and connect an asynchronous job path with immutable
-   artifacts.
+   artifacts. **Local reference path complete; durable hosted adapters remain.**
 4. Publish the first resolved multi-galaxy data release and observation-forward
    adapters.
 5. Implement inverse extraction and a generator round trip on synthetic truth,
@@ -86,8 +87,11 @@ used to hide a broken reconstruction, solver, or observation adapter.
 
 ## Current next milestone
 
-The container-ready local field-job milestone now passes: one canonical model
-manifest plus one content-hashed array bundle enters the generic worker and a
-known-answer field, residual history, resource log, output hashes, and immutable
-result manifest come out. The immediate next milestone is durable array upload
-and an asynchronous queue that sends this unchanged job format to the worker.
+The asynchronous local reference milestone now passes through real HTTP: one
+canonical model manifest plus uploaded content-hashed NPZ data enters a
+short-request queue, the Python worker produces known-answer 2D and 3D fields,
+and all 16 downloaded artifacts rehash correctly. The immediate infrastructure
+milestone is replacing the local filesystem and process queue with durable
+object storage, job metadata, and isolated container workers. In parallel, the
+next scientific milestone is a licensed resolved-galaxy package and the first
+uncertainty-aware 2D-to-3D reconstruction round trip.
