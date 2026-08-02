@@ -1,0 +1,72 @@
+{
+  "protocol_version": "P0689-SOURCE-CONSERVING-BARYONIC-ROUTING-AUDIT-1.0.0",
+  "status": "frozen_before_any_P0689_source_or_field_metric",
+  "frozen_utc": "2026-08-02T10:00:00Z",
+  "purpose": "Audit the units, signs, source conservation, transition-shell support, boundary behavior, and numerical solvability of a parameter-free baryonic source-routing operator before any new radial, photon-deflection, raw-image, or sealed-target score.",
+  "failure_parent": "results/p0688_monotone_envelope_qumond/report.json",
+  "map_parent": "results/p0670_spent_rxj2129_absolute_3d_map_build/report.json",
+  "map_input": "results/p0670_spent_rxj2129_absolute_3d_map_build/rxj2129_absolute_baryons_3d.npz",
+  "equation": {
+    "newtonian": "laplacian(Phi_N)=4 pi G rho_b",
+    "base_source": "S_0=div[nu_0(|grad Phi_N|/a0) grad Phi_N]",
+    "local_generator_source": "S_local=div[nu_0(|grad Phi_N|/a0)^p_local grad Phi_N]",
+    "local_exponent": "p_local=1+2 S_4(chi_b) [max(eta_b,1)]^(-1/2)",
+    "positive_generator_strength": "A_plus=integral max(S_local-S_0,0) dV",
+    "transition_onset": "S_4=chi_b^4/[chi_b^4+(1e-6)^4]",
+    "transition_shell_weight": "W_t=4 S_4(1-S_4) |grad chi_b|",
+    "routed_source": "S_route=S_0+A_plus rho_b/integral(rho_b)dV-A_plus W_t/integral(W_t)dV",
+    "conservation": "integral(S_route-S_0)dV=0",
+    "boundary": "fixed-RAR QUMOND point-mass boundary of the complete finite-grid baryonic mass",
+    "a0_m_s2": 1.2e-10,
+    "chi_t": 1e-6,
+    "transition_power_n": 4.0,
+    "extra_spatial_channels": 2.0,
+    "path_power_q": 0.5,
+    "new_universal_constants": 0,
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "photon_amplitudes_fit_to_RXJ2129": 0
+  },
+  "dimensional_audit": {
+    "S_0_and_S_route": "s^-2",
+    "A_plus": "m^3 s^-2",
+    "rho_b/integral_rho_b": "m^-3",
+    "W_t/integral_W_t": "m^-3",
+    "added_source_integral": "m^3 s^-2 and identically zero"
+  },
+  "predeclared_progression_gates": {
+    "P0688_status": "pass",
+    "P0688_candidate_advanced_to_3D_potential_shell_freeze": false,
+    "P0670_all_progression_gates_pass": true,
+    "newtonian_normalized_residual_RMS_max": 1e-10,
+    "routed_field_normalized_residual_RMS_max": 1e-10,
+    "routed_field_converged": true,
+    "boundary_maximum_relative_mismatch_max": 1e-14,
+    "all_sources_weights_potentials_and_accelerations_finite": true,
+    "positive_generator_strength_strictly_positive": true,
+    "transition_shell_integral_strictly_positive": true,
+    "transition_shell_positive_cells_min": 20,
+    "transition_shell_interior_weight_fraction_min": 0.25,
+    "positive_route_on_positive_baryon_cells_fraction_min": 0.999999999999,
+    "positive_negative_routed_strength_relative_mismatch_max": 1e-12,
+    "net_added_source_relative_to_positive_strength_max": 1e-12,
+    "new_universal_constants": 0,
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "photon_amplitudes_fit_to_RXJ2129": 0,
+    "photon_deflection_computed": false,
+    "radial_or_raw_lens_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Advance the single source-routing definition to a separately frozen spent radial and 3D field screen only if every residual, conservation, sign, support, boundary, finite-value, parameter-accounting, and no-observation-score gate passes. No shell shape, amplitude, or constant is selected in P0689.",
+  "outputs": {
+    "directory": "results/p0689_source_conserving_baryonic_routing_audit",
+    "field": "rxj2129_source_routing_audit.npz",
+    "figure": "source_routing_audit.png"
+  },
+  "claim_boundary": [
+    "P0689 is a mathematical and numerical audit on a spent physical map, not an observational test.",
+    "The routed source is an effective weak-field source and may contain a negative polarization component; no microscopic field or energy condition is derived.",
+    "The nonlocal normalization and transition-shell compensation have not been derived from a covariant action or causal transport equation.",
+    "No photon deflection, image root, radial target, or sealed outcome may be calculated in P0689.",
+    "A numerical pass would only justify freezing the next empirical test."
+  ]
+}
