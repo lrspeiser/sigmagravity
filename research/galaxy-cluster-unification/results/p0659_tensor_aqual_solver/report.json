@@ -1,0 +1,54 @@
+{
+  "report_version": "P0659-TENSOR-AQUAL-SOLVER-RESULTS-1.0.0",
+  "status": "pass",
+  "all_progression_gates_pass": true,
+  "candidate_advanced_to_outcome_blind_map_tests": true,
+  "protocol_sha256": "cd0e71b7152cc1ed06820bb65a02cec10366fea593b8213d05a9a103118e861d",
+  "source_sha256": "594fd9b82e7e227dfd8d8dcb1a9cce9a5f1a1d321b8fc7bf526d5d95ef09cdbe",
+  "solver_source_sha256": "454dfc5dc472071319d421e7e48974d3c50b9ab8c687cc9865376eb8ca7237b9",
+  "coverage": {
+    "manufactured_grids": 3,
+    "nonlinear_cases": 1,
+    "registered_galaxy_baryon_maps": 13,
+    "registered_cluster_baryon_maps": 4,
+    "new_universal_constants": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "metrics": {
+    "manufactured_65_grid_relative_RMS_error": 0.0002008218097579853,
+    "manufactured_convergence_order": 2.0013043880960604,
+    "rotation_covariance_relative_RMS_error": 8.151733066648751e-16,
+    "direction_reversal_relative_RMS_error": 0.0,
+    "aligned_sigma_zero_relative_RMS_difference": 0.0,
+    "nonlinear_normalized_residual_RMS": 4.187518482119151e-06,
+    "nonlinear_iterations": 8,
+    "minimum_constitutive_eigenvalue": 9.84455868994471e-07,
+    "registered_cluster_to_galaxy_activation_ratio": 18.655047706732585,
+    "solar_1au_constitutive_anisotropy": 2.0235190369087182e-08
+  },
+  "gate_results": {
+    "P0634_solvers": true,
+    "positive_eigenvalue": true,
+    "manufactured_accuracy": true,
+    "manufactured_order": true,
+    "rotation_covariance": true,
+    "direction_reversal": true,
+    "aligned_AQUAL_limit": true,
+    "nonlinear_residual": true,
+    "nonlinear_convergence": true,
+    "registered_domain_separation": true,
+    "solar_proxy": true,
+    "no_new_constants": true,
+    "no_per_object_parameters": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0659 tests mathematical structure and numerical machinery only; it cannot establish galaxy or lensing accuracy.",
+    "The projected graph is a two-dimensional variational discretization of the tensor equation; a three-dimensional and covariant completion remains required.",
+    "The Solar quantity is a constitutive anisotropy proxy, not a derived PPN gamma or Mercury prediction.",
+    "The 10 kpc coherence length is inherited from P0643 and remains phenomenological even though no new constant is added here.",
+    "No P0633 galaxy velocity, P0640 lens constraint, or spent lens residual may be used in solver development or selection."
+  ]
+}
