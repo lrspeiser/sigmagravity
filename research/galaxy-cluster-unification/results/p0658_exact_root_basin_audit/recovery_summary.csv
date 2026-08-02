@@ -1,0 +1,5 @@
+image_id,original_converged,original_closure_arcsec,attempts,accepted_attempts,distinct_local_roots,minimum_audited_closure_arcsec,minimum_accepted_displacement_arcsec,recovered_by_audit
+1b,False,0.030664681219083414,100,0,0,1.1102230246251565e-16,inf,False
+2a,True,7.286354867560216e-16,100,100,1,5.418810786618011e-16,1.994387874697607,False
+6b,False,0.972175578325512,100,0,0,0.9721489538700279,inf,False
+7a,True,5.591215865739187e-15,100,100,1,9.43689570931383e-16,2.2942323643494102,False

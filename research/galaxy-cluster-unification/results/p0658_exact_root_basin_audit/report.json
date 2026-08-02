@@ -1,0 +1,146 @@
+{
+  "report_version": "P0658-EXACT-ROOT-BASIN-AUDIT-RESULTS-1.0.0",
+  "status": "local_topology_failure_supported",
+  "protocol_sha256": "4b3a82ff53c4e141bf350d9e045aab9b35c3110447f2b4c960cd42b2fb98a8a0",
+  "source_sha256": "149f22c015bad3c8f25e35c524691927ebfc8b1dce14a7971f98d3b9e13103da",
+  "reproduced_optimizer_cost": 5.692377432355883,
+  "coverage": {
+    "validation_images": 4,
+    "starts_per_image": 25,
+    "algorithms": 4,
+    "attempts_per_image": 100,
+    "total_attempts": 400,
+    "gravity_parameters_changed": 0,
+    "geometry_parameters_changed": 0,
+    "source_positions_changed": 0
+  },
+  "root_acceptance": {
+    "closure_arcsec_max": 1e-06,
+    "local_correspondence_radius_arcsec": 5.0
+  },
+  "recoveries": [
+    {
+      "image_id": "1b",
+      "original_converged": false,
+      "original_closure_arcsec": 0.030664681219083414,
+      "attempts": 100,
+      "accepted_attempts": 0,
+      "distinct_local_roots": 0,
+      "minimum_audited_closure_arcsec": 1.1102230246251565e-16,
+      "minimum_accepted_displacement_arcsec": Infinity,
+      "recovered_by_audit": false
+    },
+    {
+      "image_id": "2a",
+      "original_converged": true,
+      "original_closure_arcsec": 7.286354867560216e-16,
+      "attempts": 100,
+      "accepted_attempts": 100,
+      "distinct_local_roots": 1,
+      "minimum_audited_closure_arcsec": 5.418810786618011e-16,
+      "minimum_accepted_displacement_arcsec": 1.994387874697607,
+      "recovered_by_audit": false
+    },
+    {
+      "image_id": "6b",
+      "original_converged": false,
+      "original_closure_arcsec": 0.972175578325512,
+      "attempts": 100,
+      "accepted_attempts": 0,
+      "distinct_local_roots": 0,
+      "minimum_audited_closure_arcsec": 0.9721489538700279,
+      "minimum_accepted_displacement_arcsec": Infinity,
+      "recovered_by_audit": false
+    },
+    {
+      "image_id": "7a",
+      "original_converged": true,
+      "original_closure_arcsec": 5.591215865739187e-15,
+      "attempts": 100,
+      "accepted_attempts": 100,
+      "distinct_local_roots": 1,
+      "minimum_audited_closure_arcsec": 9.43689570931383e-16,
+      "minimum_accepted_displacement_arcsec": 2.2942323643494102,
+      "recovered_by_audit": false
+    }
+  ],
+  "originally_failed_images_recovered": [],
+  "originally_failed_images_unrecovered": [
+    "1b",
+    "6b"
+  ],
+  "universal_rescore_required_before_any_candidate_change": false,
+  "candidate_selected_or_advanced": false,
+  "field_audit": {
+    "operator": "finite_path_accumulated_component_tensor",
+    "closure": "streamline_diffused_gas_minus_star_flux",
+    "mismatch_mode": "transverse_tensor_mix",
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "proxy_total_mass_msun": 100000000000000.0,
+    "common_smoothing_kpc": 25.0,
+    "transport_steps": 12,
+    "computational_padding_arcsec": 48.0,
+    "computational_padding_changes_physical_support": false,
+    "proxy_mass_changes_deflection_normalization": false,
+    "activation_weighted_mean": 0.030422340639623718,
+    "activation_maximum": 0.33029218389171794,
+    "cancellation_mean": 0.0035215143478638184,
+    "mismatch_mean": 0.04496179988757675,
+    "survival_mean": 0.9937829311505999,
+    "trace_length_median_kpc": 94.64685019874555,
+    "source_integral_fraction": 1.6326729531388222e-17,
+    "maximum_flux_edge_fraction_of_RMS": 0.0,
+    "normalized_curl_RMS": 2.031139005199917e-17,
+    "unit_deflection_RMS_arcsec": 0.24157732922253813,
+    "unit_deflection_maximum_arcsec": 1.6828929899542862,
+    "maximum_edge_correction_arcsec": 0.15550189736106015,
+    "carrier_deflection_median_arcsec": 21.25739757728231,
+    "transport_operator": "symmetric_field_line_graph_diffusion",
+    "transport_graph_edges": 31403,
+    "transport_solver_relative_tolerance": 1e-10,
+    "transport_solver_maximum_iterations": 2000,
+    "transport_solver_information_x": 0,
+    "transport_solver_information_y": 0,
+    "transport_relative_change_RMS": 0.675439699674407,
+    "transport_flux_RMS_ratio": 0.5495913438529667,
+    "transport_flux_sum_relative_error": 7.343903361510012e-13,
+    "transport_component_overshoot_fraction": 0.0,
+    "transport_is_source_conservative": true,
+    "transport_is_self_adjoint_diffusion": true
+  },
+  "map_audits": {
+    "hst": {
+      "system_label": "RXJ2129",
+      "map_kind": "hst_f160w",
+      "input_count": 2,
+      "native_pixel_scale_arcsec": 0.0650000000000009,
+      "background": -0.0033761123195290565,
+      "masked_fraction": 0.01795127705200111,
+      "positive_cells": 12435,
+      "map_sum_before_normalization": 405.6119888731333
+    },
+    "xray": {
+      "system_label": "RXJ2129",
+      "map_kind": "chandra_soft_rate",
+      "input_count": 2,
+      "total_exposure_ks": 39.6040961730402,
+      "soft_events_on_grid": 15401,
+      "point_source_seed_cells": 37,
+      "point_source_masked_fraction": 0.009767092411720512,
+      "unmasked_map_sum": 0.792017083914403,
+      "masked_map_sum": 0.7662815305616146
+    }
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0657 parameters and profiled source positions are recomputed with its exact frozen fold, starts, and seed and must reproduce the stored optimizer cost.",
+    "No gravity parameter, source position, lens geometry, field amplitude, closure threshold, or physical formula is changed during the root search.",
+    "Accepted roots must lie within five arcseconds of the observed image so distant image branches cannot masquerade as recovery.",
+    "P0658 is diagnostic and cannot advance P0657 without a universal comparator rescore.",
+    "No sealed P0633 or P0640 outcome is opened."
+  ]
+}

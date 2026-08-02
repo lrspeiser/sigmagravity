@@ -1,0 +1,3 @@
+image_id,solution_x_arcsec,solution_y_arcsec,closure_arcsec,displacement_from_observed_arcsec,algorithm,start_index
+2a,-5.448981250621606,9.789414503604572,1.9184421965362705e-10,1.994387874697607,scipy_least_squares_dogbox_bounded_with_lens_jacobian,24
+7a,-9.536561014214588,12.500593486596314,1.1588910629841359e-12,2.2942323643494102,scipy_least_squares_trf_bounded_with_lens_jacobian,24
