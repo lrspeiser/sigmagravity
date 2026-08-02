@@ -1,0 +1,65 @@
+{
+  "protocol_version": "P0665-TENSOR-AQUAL-3D-SOLVER-1.0.0",
+  "status": "frozen_before_any_P0665_solver_score",
+  "frozen_utc": "2026-08-02T02:00:52Z",
+  "purpose": "Validate a genuinely three-dimensional variational tensor-AQUAL solver before constructing a photon deflection or reading any spent or sealed lensing outcome.",
+  "parent_result": "results/p0664_registered_tensor_field_solve/report.json",
+  "equation": "div[mu(|grad Phi|/a0) (I-sigma h_hat h_hat) grad Phi] = 4 pi G rho_b",
+  "equivalent_tensor": "mu[(1-sigma)I + sigma(n1 n1 + n2 n2)], with (h,n1,n2) orthonormal",
+  "definitions": {
+    "mu": "simple AQUAL mu=x/(1+x)",
+    "sigma": "bounded baryonic physical-length quadratic coherence coefficient",
+    "h_hat": "three-dimensional gas-minus-star field direction",
+    "n1_n2": "a deterministic orthonormal basis of the plane perpendicular to h_hat",
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "solver": {
+    "discretization": "symmetric variational 3D graph with Cartesian isotropic links and trilinear plus/minus links along both perpendicular directions",
+    "boundary": "explicit Dirichlet",
+    "picard_damping": 0.65,
+    "mu_floor": 1e-6,
+    "nonlinear_residual_tolerance": 1e-5,
+    "linear_relative_tolerance": 1e-10,
+    "maximum_nonlinear_iterations": 80,
+    "maximum_linear_iterations": 5000
+  },
+  "analytic_tests": {
+    "manufactured_domain_half_width": 1.0,
+    "manufactured_grids": [9, 17, 25],
+    "manufactured_sigma": 0.35,
+    "manufactured_direction": [1.0, 0.0, 0.0],
+    "rotation_axis_swap": [0, 1],
+    "nonlinear_grid": 17,
+    "nonlinear_a0": 0.15,
+    "surface_density_lift_grid": 33,
+    "surface_density_lift_z_cells": 33,
+    "surface_density_lift_scale_height": 0.4
+  },
+  "predeclared_progression_gates": {
+    "P0664_all_progression_gates_pass": true,
+    "minimum_constitutive_eigenvalue_strictly_positive": true,
+    "manufactured_25_grid_relative_RMS_error_max": 0.01,
+    "manufactured_convergence_order_min": 1.7,
+    "rotation_covariance_relative_RMS_error_max": 1e-9,
+    "direction_reversal_relative_RMS_error_max": 1e-12,
+    "sigma_zero_relative_RMS_difference_from_scalar_graph_AQUAL_max": 1e-12,
+    "nonlinear_normalized_residual_RMS_max": 1e-5,
+    "nonlinear_solver_converged": true,
+    "surface_density_lift_column_mass_relative_error_max": 1e-12,
+    "operator_symmetry_relative_error_max": 1e-14,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0,
+    "spent_lensing_outcomes_opened": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "The sole 3D tensor discretization advances to photon-deflection construction only if every mathematical, nonlinear, density-lift, parameter, and blindness gate passes.",
+  "outputs": {
+    "directory": "results/p0665_tensor_aqual_3d_solver"
+  },
+  "claim_boundary": [
+    "P0665 validates numerical machinery only; it does not establish a physical three-dimensional sigma construction or a relativistic metric.",
+    "The graph is a positive variational discretization of the stated elliptic equation, not a covariant action.",
+    "No spent RX J2129 image and no P0633/P0640 target may be used in P0665 development or selection."
+  ]
+}
