@@ -1,0 +1,54 @@
+{
+  "protocol_version": "P0656-TRANSPORT-TOPOLOGY-DIAGNOSTIC-1.0.0",
+  "status": "frozen_before_any_P0656_diagnostic",
+  "frozen_utc": "2026-08-02T01:12:00Z",
+  "purpose": "Locate whether the P0652-P0655 topology changes arise primarily from correction amplitude, direction, or local lens-mapping gradients before proposing another transport law.",
+  "fields": [
+    {"id": "P0652_finite_gather", "closure": "streamline_averaged_gas_minus_star_flux", "computational_padding_arcsec": 0.0},
+    {"id": "P0653_compact_gather", "closure": "compact_streamline_averaged_gas_minus_star_flux", "computational_padding_arcsec": 0.0},
+    {"id": "P0654_padded_gather", "closure": "streamline_averaged_gas_minus_star_flux", "computational_padding_arcsec": 48.0},
+    {"id": "P0655_padded_deposit", "closure": "streamline_deposited_gas_minus_star_flux", "computational_padding_arcsec": 48.0}
+  ],
+  "fixed_formula": {
+    "mismatch_mode": "transverse_tensor_mix",
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "common_physical_smoothing_kpc": 25.0,
+    "taper_inner_arcsec": 50.0,
+    "support_radius_arcsec": 58.0,
+    "transport_steps": 12,
+    "field_amplitude": 1.0
+  },
+  "diagnostic": {
+    "shared_grid_min_arcsec": -55.0,
+    "shared_grid_max_arcsec": 55.0,
+    "shared_grid_spacing_arcsec": 1.0,
+    "finite_difference_step_arcsec": 0.05,
+    "geometry": "fixed P0599 geometry shared by every field; no refit",
+    "image_catalog": "all already-spent RX J2129 training and heldout image positions",
+    "metrics": [
+      "correction radial and tangential components",
+      "correction convergence and shear",
+      "full fixed-geometry lens-map determinant",
+      "pairwise vector correlation and relative RMS field difference"
+    ]
+  },
+  "inputs": {
+    "P0644_protocol": "configs/p0644_spent_rxj2129_accumulated_tensor.json",
+    "P0654_protocol": "configs/p0654_zero_padded_nonlocal_transport.json",
+    "P0654_report": "results/p0654_zero_padded_nonlocal_transport/report.json",
+    "P0655_report": "results/p0655_conservative_streamline_deposit/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0656_transport_topology_diagnostic"
+  },
+  "claim_boundary": [
+    "P0656 is descriptive and cannot advance, select, blend, or fit a gravity candidate.",
+    "All positions and outcomes are already-spent RX J2129 data; no sealed target is opened.",
+    "The same fixed radial geometry and unit field amplitude are used for every comparison.",
+    "A later candidate requires its own frozen mechanism and gates; P0656 cannot authorize interpolation weights chosen from these diagnostics."
+  ]
+}
