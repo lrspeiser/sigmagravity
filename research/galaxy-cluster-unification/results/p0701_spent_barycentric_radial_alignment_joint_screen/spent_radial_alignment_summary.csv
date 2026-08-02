@@ -1,0 +1,3 @@
+system,region,cells,alignment_minimum,alignment_median,alignment_mean,alignment_maximum
+DDO154,SPARC_score_radius_midplane,772,0.7612737984497817,0.9839034491242631,0.9735746803302074,0.9999998843189044
+RXJ2129,strong_lens_projected_annulus_all_z,3036,0.9215856419625402,0.9947823144764775,0.9920903742763799,0.9999999036045544

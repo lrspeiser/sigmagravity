@@ -1,0 +1,259 @@
+{
+  "report_version": "P0701-SPENT-BARYCENTRIC-RADIAL-ALIGNMENT-JOINT-SCREEN-RESULTS-1.0.0",
+  "status": "fail",
+  "evidence_class": "fully_spent_joint_mechanism_screen",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_robustness_and_solar": false,
+  "candidate_advanced_to_sealed_outcomes": false,
+  "protocol_sha256": "e95b8a4ff9a324ce81d6962328af21f6ae1375bd23c14f66f83068247f73d40c",
+  "source_sha256": "e69465707d11ea8725d12b2fc14d81edf48f438fa104fb62287c19786f1f7600",
+  "operator_source_sha256": "23b8133e9096cda55bc44f3d22e7668488f838c9418f3a712d470f66db44ecd0",
+  "coherent_source_sha256": "1073c6fd4036883c219859f3076ddbd57a8c0cdf8c171d25e905e9c6e5854fac",
+  "routing_source_sha256": "0f61400a79b1d74443ce690dde04a7941dacae45d6f2358f1e0fdeb44b5981ee",
+  "parent_sha256": {
+    "P0700": "dbb997bce641a29a6c031022bf7e5048cb6257b2e2182b93c368ab11ca7423f6",
+    "P0635": "70de638d621e284d2c3065a86e0e1dcdc50befd89118a369c25b72212be4658c",
+    "P0670": "5f4d87855fbab10a071b8b36169fbc86d9679025f2d256a8eb82f360a41326fc",
+    "P0693": "30756b53740ee3f73b32d98702f2b1b49ddeaa73af84a999ed1a0a8c9cc15b9f"
+  },
+  "galaxy_map_sha256": "6f12bd9d6015d75e35389434057ab9532b45aa38063433be37cdc585913e012c",
+  "cluster_map_sha256": "4804b357f9c67bb204b058e98de4d1ddf00340e301b86d001bb0a21132c47a77",
+  "galaxy_field_sha256": "e4a82b7f8d733cb7b35121ac32af0898b032317881335316454de6a2a15d7e32",
+  "cluster_field_sha256": "5752245e9ff1cb22c66d352da92092acb84ffa10ca58d5095a7a89f14be8efa9",
+  "integrity_gates": {
+    "P0700_status": true,
+    "P0700_math_pass": true,
+    "P0700_advanced": true,
+    "P0635_status": true,
+    "P0635_no_velocity_product": true,
+    "P0670_parent": true,
+    "P0693_status": true,
+    "spent_systems_registered": true,
+    "no_new_constants": true,
+    "no_per_object_gravity": true,
+    "no_fitted_alignment": true,
+    "no_fitted_routing": true,
+    "no_fitted_photon": true,
+    "nuisance_parameter_count": true,
+    "sealed_targets_untouched": true,
+    "raw_coverage": true
+  },
+  "spent_DDO154": {
+    "routing_fraction": 0.08352413225178856,
+    "covariance_kpc2": [
+      [
+        11.68677973262446,
+        0.10210470303545857
+      ],
+      [
+        0.10210470303545865,
+        12.731190413620029
+      ]
+    ],
+    "eigenvalues_kpc2": [
+      11.676891295648419,
+      12.741078850596072
+    ],
+    "field_audit": {
+      "newtonian_normalized_residual_RMS": 5.532981457653893e-14,
+      "local_routing_component_normalized_residual_RMS": 4.469013637758747e-14,
+      "routed_component_normalized_residual_RMS": 4.382153080162541e-14,
+      "gated_component_normalized_residual_RMS": 4.3276218298370186e-13,
+      "gated_source_identity_relative_RMS": 0.0,
+      "hybrid_potential_identity_relative_RMS": 0.0,
+      "base_coherent_boundary_relative_mismatch": 0.0,
+      "routing_correction_boundary_relative_mismatch": 0.0,
+      "alignment_minimum": 0.057285902785655825,
+      "alignment_median": 0.9985717482134914,
+      "alignment_maximum": 0.9999999999938561,
+      "normalized_acceleration_curl_RMS": 3.611082422082858e-16,
+      "finite": true
+    },
+    "score_region_alignment": {
+      "system": "DDO154",
+      "region": "SPARC_score_radius_midplane",
+      "cells": 772,
+      "alignment_minimum": 0.7612737984497817,
+      "alignment_median": 0.9839034491242631,
+      "alignment_mean": 0.9735746803302074,
+      "alignment_maximum": 0.9999998843189044
+    },
+    "candidate_score": {
+      "points": 12,
+      "RMSE_km_s": 2.346651051522539,
+      "weighted_RMSE_km_s": 2.898051979539051,
+      "mean_bias_km_s": -0.6918297546333548
+    },
+    "algebraic_MOND_comparator": {
+      "points": 12,
+      "RMSE_km_s": 2.916081351928278,
+      "weighted_RMSE_km_s": 1.2255816436075178,
+      "mean_bias_km_s": 1.327429851089618
+    },
+    "three_dimensional_QUMOND_comparator": {
+      "points": 12,
+      "RMSE_km_s": 3.936047752283948,
+      "weighted_RMSE_km_s": 3.256147109601539,
+      "mean_bias_km_s": -1.3909434717208093
+    },
+    "comparisons": {
+      "candidate_RMSE_to_algebraic_MOND_ratio": 0.8047275670038494,
+      "candidate_weighted_RMSE_to_algebraic_MOND_ratio": 2.364633963518409,
+      "candidate_RMSE_to_3D_QUMOND_ratio": 0.596194761651675
+    }
+  },
+  "spent_RXJ2129": {
+    "routing_fraction": 0.27202347157855733,
+    "covariance_kpc2": [
+      [
+        6653.5502900798865,
+        611.0421496628857
+      ],
+      [
+        611.0421496628858,
+        5235.91666762043
+      ]
+    ],
+    "eigenvalues_kpc2": [
+      5008.894934791131,
+      6880.572022909185
+    ],
+    "field": {
+      "newtonian_normalized_residual_RMS": 8.891081551915351e-14,
+      "local_routing_component_normalized_residual_RMS": 2.9286374690145644e-14,
+      "routed_component_normalized_residual_RMS": 2.4665948068714115e-14,
+      "gated_component_normalized_residual_RMS": 3.4947164525019236e-14,
+      "gated_source_identity_relative_RMS": 0.0,
+      "hybrid_potential_identity_relative_RMS": 0.0,
+      "base_coherent_boundary_relative_mismatch": 0.0,
+      "routing_correction_boundary_relative_mismatch": 0.0,
+      "alignment_minimum": 0.880434822302527,
+      "alignment_median": 0.9996515038869489,
+      "alignment_maximum": 0.9999999997317279,
+      "normalized_acceleration_curl_RMS": 2.1342088950977742e-16,
+      "finite": true,
+      "strong_lens_median_physical_deflection_arcsec": 7.0371202455825035,
+      "strong_lens_RMS_physical_deflection_arcsec": 6.900339999369418,
+      "normalized_deflection_curl_RMS": 3.1818026101978596e-16
+    },
+    "strong_lens_region_alignment": {
+      "system": "RXJ2129",
+      "region": "strong_lens_projected_annulus_all_z",
+      "cells": 3036,
+      "alignment_minimum": 0.9215856419625402,
+      "alignment_median": 0.9947823144764775,
+      "alignment_mean": 0.9920903742763799,
+      "alignment_maximum": 0.9999999036045544
+    },
+    "fit": {
+      "model": "barycentric_radial_alignment_projected_routing_P0701",
+      "training_RMS_arcsec": null,
+      "training_roots_converged": 14,
+      "heldout_RMS_arcsec": null,
+      "heldout_roots_converged": 6,
+      "optimizer_cost": 1611.4617056089312,
+      "nuisance_parameters_near_bound": 2
+    },
+    "compact_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "candidate_to_compact_halo_heldout_RMS_ratio": null,
+    "topology": {
+      "families": 7,
+      "missing_multiplicity_families": 4,
+      "exact_multiplicity_families": 3,
+      "demagnified_only_surplus_families": 0,
+      "potentially_observable_surplus_families": 0,
+      "exact_or_demagnified_only_families": 3,
+      "parity_diverse_families": 4,
+      "critical_curve_present_families": 6,
+      "total_global_roots": 15,
+      "total_observed_images": 22
+    }
+  },
+  "maximum_component_normalized_residual_RMS": 4.3276218298370186e-13,
+  "maximum_gated_source_identity_relative_RMS": 0.0,
+  "maximum_hybrid_potential_identity_relative_RMS": 0.0,
+  "maximum_base_coherent_boundary_relative_mismatch": 0.0,
+  "maximum_routing_correction_boundary_relative_mismatch": 0.0,
+  "maximum_normalized_acceleration_curl_RMS": 3.611082422082858e-16,
+  "alignment_range": [
+    0.057285902785655825,
+    0.9999999999938561
+  ],
+  "gate_results": {
+    "P0700_status": true,
+    "P0700_math_pass": true,
+    "P0700_advanced": true,
+    "P0635_status": true,
+    "P0635_no_velocity_product": true,
+    "P0670_parent": true,
+    "P0693_status": true,
+    "spent_systems_registered": true,
+    "no_new_constants": true,
+    "no_per_object_gravity": true,
+    "no_fitted_alignment": true,
+    "no_fitted_routing": true,
+    "no_fitted_photon": true,
+    "nuisance_parameter_count": true,
+    "sealed_targets_untouched": true,
+    "raw_coverage": true,
+    "alignment_lower": true,
+    "alignment_upper": true,
+    "fraction_lower": true,
+    "fraction_upper": true,
+    "finite": true,
+    "component_residuals": true,
+    "source_identity": true,
+    "hybrid_identity": true,
+    "base_boundary": true,
+    "routing_boundary": true,
+    "acceleration_curl": true,
+    "galaxy_points": true,
+    "galaxy_RMSE_vs_MOND": true,
+    "galaxy_weighted_RMSE_vs_MOND": false,
+    "galaxy_RMSE_vs_3D_QUMOND": true,
+    "galaxy_bias": true,
+    "cluster_field_amplitude_lower": true,
+    "cluster_field_amplitude_upper": true,
+    "cluster_field_curl": true,
+    "training_roots": false,
+    "heldout_roots": false,
+    "training_RMS": false,
+    "heldout_RMS": false,
+    "compact_halo_comparison": false,
+    "no_missing_multiplicity": false,
+    "observable_surplus": true,
+    "acceptable_multiplicity": false,
+    "parity_diversity": false,
+    "critical_curves": false,
+    "nuisance_bounds": false,
+    "accounting_no_new_constants": true,
+    "accounting_no_per_object_gravity": true,
+    "accounting_no_fitted_alignment": true,
+    "accounting_no_fitted_routing": true,
+    "accounting_no_fitted_photon": true,
+    "accounting_nuisance_count": true,
+    "sealed_outcomes_untouched": true
+  },
+  "failed_gates": [
+    "galaxy_weighted_RMSE_vs_MOND",
+    "training_roots",
+    "heldout_roots",
+    "training_RMS",
+    "heldout_RMS",
+    "compact_halo_comparison",
+    "no_missing_multiplicity",
+    "acceptable_multiplicity",
+    "parity_diversity",
+    "critical_curves",
+    "nuisance_bounds"
+  ],
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "DDO154 and RX J2129 are fully spent mechanism-development systems, so P0701 is not independent validation.",
+    "The alignment summaries are diagnostics of the frozen field and cannot generate a post-hoc transform or threshold.",
+    "The four cluster nuisance parameters align one fixed field and are not gravity parameters; source positions are profiled as in the registered raw analysis.",
+    "The zero-slip photon rule remains a diagnostic closure, not a relativistic metric derivation.",
+    "P0633 and P0640 remain sealed regardless of the P0701 outcome."
+  ]
+}

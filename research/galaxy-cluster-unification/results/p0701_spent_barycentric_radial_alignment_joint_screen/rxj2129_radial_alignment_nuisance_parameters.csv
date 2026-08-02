@@ -1,0 +1,5 @@
+model,parameter,value,lower,upper
+barycentric_radial_alignment_projected_routing_P0701,map_center_x_arcsec,-2.8066174456503754,-3.0,3.0
+barycentric_radial_alignment_projected_routing_P0701,map_center_y_arcsec,2.767247401554717,-3.0,3.0
+barycentric_radial_alignment_projected_routing_P0701,external_shear_gamma1_at_reference_source,-0.24999999996946265,-0.25,0.25
+barycentric_radial_alignment_projected_routing_P0701,external_shear_gamma2_at_reference_source,-0.24999999999262473,-0.25,0.25

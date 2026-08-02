@@ -1,0 +1,8 @@
+system_label,variant_id,source_family,source_redshift,observed_images,global_roots,surplus_roots,missing_roots,unassigned_roots,potentially_observable_surplus_roots,faintest_assigned_abs_magnification,observable_surplus_abs_magnification_threshold,all_observed_images_assigned,assignment_RMS_arcsec,assignment_max_arcsec,multiplicity_classification,parity_diverse,critical_sign_change_cells,critical_curve_present
+RXJ2129,barycentric_radial_alignment_projected_routing_P0701,1,0.6786,3,1,0,2,0,0,26.86346201415226,6.715865503538065,False,,1.9725810436285047,missing_multiplicity,False,0,False
+RXJ2129,barycentric_radial_alignment_projected_routing_P0701,2,0.916,3,1,0,2,0,0,4.585222973630185,1.1463057434075463,False,,3.9615280065998433,missing_multiplicity,False,60,True
+RXJ2129,barycentric_radial_alignment_projected_routing_P0701,3,1.5194,4,3,0,1,0,0,5.418211418212009,1.3545528545530023,False,,3.6743739861941176,missing_multiplicity,True,94,True
+RXJ2129,barycentric_radial_alignment_projected_routing_P0701,4,1.5202,3,3,0,0,0,0,3.885095402874712,0.971273850718678,True,9.213761653070362,15.81860892793655,exact_multiplicity,True,94,True
+RXJ2129,barycentric_radial_alignment_projected_routing_P0701,5,1.521,3,1,0,2,0,0,5.145661632429358,1.2864154081073396,False,,7.219108031818921,missing_multiplicity,False,94,True
+RXJ2129,barycentric_radial_alignment_projected_routing_P0701,6,3.0815,3,3,0,0,0,0,2.4193178627419236,0.6048294656854809,True,5.498613940070457,5.856603963687747,exact_multiplicity,True,130,True
+RXJ2129,barycentric_radial_alignment_projected_routing_P0701,7,3.427,3,3,0,0,0,0,3.4559393647491383,0.8639848411872846,True,9.367056023427176,16.171742238914792,exact_multiplicity,True,134,True
