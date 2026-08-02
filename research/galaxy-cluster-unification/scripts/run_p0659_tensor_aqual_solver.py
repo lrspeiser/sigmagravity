@@ -92,7 +92,7 @@ def main():
         raise RuntimeError("P0659 protocol is not frozen")
     p0634 = read_json(ROOT / protocol["inputs"]["P0634_report"])
     p0643 = read_json(ROOT / protocol["inputs"]["P0643_report"])
-    if not p0634["all_progression_gates_pass"]:
+    if not p0634["all_gates_pass"]:
         raise RuntimeError("P0634 field solvers no longer pass")
     if not p0643["all_primary_gates_pass"]:
         raise RuntimeError("P0643 geometry lever no longer passes")
@@ -202,7 +202,7 @@ def main():
     ) / 20.0
     gates = protocol["predeclared_progression_gates"]
     gate_results = {
-        "P0634_solvers": bool(p0634["all_progression_gates_pass"])
+        "P0634_solvers": bool(p0634["all_gates_pass"])
         is bool(gates["P0634_all_solver_gates_pass"]),
         "positive_eigenvalue": bool(np.min(minimum_eigenvalue) > 0.0)
         is bool(gates["minimum_constitutive_eigenvalue_strictly_positive"]),
