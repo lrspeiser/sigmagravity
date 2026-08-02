@@ -7,6 +7,7 @@ import numpy as np
 import pytest
 
 from voidscreen.generic_field_worker import (
+    _finite_volume_divergence_gradient,
     evaluate_field_expression,
     solve_field_manifest,
 )
@@ -124,6 +125,72 @@ def test_linearized_initialization_and_iteration_limit_are_disclosed() -> None:
     assert solution.metadata["requested_maximum_iterations"] == 250
     assert solution.metadata["executed_maximum_iterations"] == 200
     assert solution.metadata["maximum_iterations_limited_by_worker"]
+
+
+def test_newton_krylov_recovers_a_nonlinear_manufactured_field() -> None:
+    cells = 17
+    axis = np.linspace(0.0, 1.0, cells)
+    spacing = float(axis[1] - axis[0])
+    x, y = np.meshgrid(axis, axis, indexing="ij")
+    expected = np.sin(np.pi * x) * np.sin(np.pi * y)
+    gradient = np.gradient(expected, spacing, spacing, edge_order=2)
+    coefficient = 1.0 + 0.25 * np.sqrt(sum(np.square(value) for value in gradient))
+    forcing, _scale = _finite_volume_divergence_gradient(
+        expected, coefficient, [spacing, spacing], coefficient_floor=1e-8
+    )
+    manifest = manufactured_manifest(2)
+    manifest["parameters"] = {
+        "beta": {"unit": "1", "value": 0.25, "scope": "universal"}
+    }
+    manifest["equations"][0]["lhs"] = {
+        "op": "divergence",
+        "args": [
+            {
+                "op": "multiply",
+                "args": [
+                    {
+                        "op": "add",
+                        "args": [
+                            {"const": 1.0},
+                            {
+                                "op": "multiply",
+                                "args": [
+                                    {"parameter": "beta"},
+                                    {
+                                        "op": "norm",
+                                        "args": [
+                                            {
+                                                "op": "gradient",
+                                                "args": [{"field": "u"}],
+                                            }
+                                        ],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {"op": "gradient", "args": [{"field": "u"}]},
+                ],
+            }
+        ],
+    }
+    manifest["solver"].update(
+        {
+            "initialization": "linearized_unit_coefficient",
+            "nonlinearMethod": "newton_krylov",
+            "maxIterations": 80,
+            "residualTolerance": 1e-8,
+            "lineSearch": "armijo",
+        }
+    )
+    solution = solve_field_manifest(manifest, {"forcing": forcing}, spacing)
+    relative_error = np.linalg.norm(solution.fields["u"] - expected) / np.linalg.norm(
+        expected
+    )
+    assert solution.converged
+    assert relative_error < 1e-8
+    assert solution.metadata["nonlinear_method"] == "newton_krylov"
+    assert solution.metadata["krylov_method"] == "lgmres"
 
 
 def test_zero_source_harmonic_boundary_has_a_well_scaled_residual():

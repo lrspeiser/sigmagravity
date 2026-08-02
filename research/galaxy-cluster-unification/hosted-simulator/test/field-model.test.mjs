@@ -71,6 +71,8 @@ test("generic nonlinear solver controls are validated and disclosed", () => {
   const manifest = load("aqual.json");
   manifest.solver.initialization = "linearized_unit_coefficient";
   manifest.solver.residualTolerance = 1e-8;
+  manifest.solver.nonlinearMethod = "anderson";
+  manifest.solver.andersonHistory = 5;
   let result = validateFieldModel(manifest);
   assert.equal(result.valid, true, result.errors.join("; "));
   assert.match(result.warnings.join(" "), /at most 200 nonlinear iterations/);
@@ -78,4 +80,9 @@ test("generic nonlinear solver controls are validated and disclosed", () => {
   result = validateFieldModel(manifest);
   assert.equal(result.valid, false);
   assert.match(result.errors.join(" "), /initialization is unsupported/);
+  manifest.solver.initialization = "linearized_unit_coefficient";
+  manifest.solver.nonlinearMethod = "formula_specific_magic";
+  result = validateFieldModel(manifest);
+  assert.equal(result.valid, false);
+  assert.match(result.errors.join(" "), /nonlinearMethod is unsupported/);
 });

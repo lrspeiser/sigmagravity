@@ -24,6 +24,7 @@ from typing import Any
 
 import numpy as np
 from scipy import sparse
+from scipy.optimize import NoConvergence, anderson, newton_krylov
 from scipy.sparse.linalg import spsolve
 
 Array = np.ndarray
@@ -432,6 +433,168 @@ def _equation_residuals(
     return residuals
 
 
+def _solve_nonlinear_root_method(
+    *,
+    method: str,
+    equations: Sequence[Mapping[str, Any]],
+    fields: dict[str, Array],
+    parameters: Mapping[str, float],
+    spacing: Sequence[float],
+    shape: tuple[int, ...],
+    coefficient_floor: float,
+    relative_tolerance: float,
+    residual_tolerance: float,
+    maximum_iterations: int,
+    solver: Mapping[str, Any],
+) -> tuple[int, float, bool, list[dict[str, Any]], dict[str, Any]]:
+    """Solve one nonlinear elliptic field through its discrete residual."""
+
+    if len(equations) != 1:
+        raise ValueError(f"{method} worker v1 requires exactly one equation")
+    equation = equations[0]
+    target, coefficient_expression = _elliptic_lhs(equation["lhs"])
+    interior = tuple(slice(1, -1) for _ in shape)
+    interior_shape = tuple(value - 2 for value in shape)
+    template = fields[target].copy()
+    initial = fields[target][interior].copy()
+    field_scale = float(np.sqrt(np.mean(np.square(initial))))
+    if not math.isfinite(field_scale) or field_scale <= np.finfo(float).tiny:
+        field_scale = 1.0
+    initial_scaled = (initial / field_scale).ravel()
+    previous_callback_field = fields[target].copy()
+    history: list[dict[str, Any]] = []
+
+    def physical_field(values: Array) -> Array:
+        current = template.copy()
+        current[interior] = np.asarray(values, dtype=float).reshape(interior_shape) * field_scale
+        return current
+
+    def normalized_residual(values: Array) -> Array:
+        fields[target] = physical_field(values)
+        coefficient = _scalar_array(
+            evaluate_field_expression(
+                coefficient_expression,
+                fields=fields,
+                parameters=parameters,
+                spacing=spacing,
+            ),
+            shape,
+            f"equation {equation['id']} coefficient",
+        )
+        left, flux_scale = _finite_volume_divergence_gradient(
+            fields[target],
+            coefficient,
+            spacing,
+            coefficient_floor=coefficient_floor,
+        )
+        right = _scalar_array(
+            evaluate_field_expression(
+                equation["rhs"], fields=fields, parameters=parameters, spacing=spacing
+            ),
+            shape,
+            f"equation {equation['id']} rhs",
+        )
+        rhs_scale = float(np.sqrt(np.mean(np.square(right[interior]))))
+        operator_scale = float(np.sqrt(np.mean(np.square(flux_scale[interior]))))
+        scale = max(rhs_scale, operator_scale, np.finfo(float).tiny)
+        return ((left - right)[interior] / scale).ravel()
+
+    def callback(values: Array, _residual: Array) -> None:
+        nonlocal previous_callback_field
+        current = physical_field(values)
+        fields[target] = current
+        maximum_update = _relative_update(previous_callback_field, current)
+        current_residuals = _equation_residuals(
+            equations,
+            fields,
+            parameters,
+            spacing,
+            shape,
+            coefficient_floor=coefficient_floor,
+        )
+        history.append(
+            {
+                "iteration": len(history) + 1,
+                "maximum_relative_update": maximum_update,
+                "equation_residuals": current_residuals,
+            }
+        )
+        previous_callback_field = current.copy()
+
+    line_search = solver.get("lineSearch", "armijo")
+    line_search_value = None if line_search == "none" else str(line_search)
+    common = {
+        "maxiter": maximum_iterations,
+        "f_tol": residual_tolerance * 0.25,
+        "x_rtol": relative_tolerance * 0.25,
+        "line_search": line_search_value,
+        "callback": callback,
+    }
+    try:
+        if method == "anderson":
+            final_scaled = anderson(
+                normalized_residual,
+                initial_scaled,
+                alpha=float(solver.get("andersonAlpha", 1.0)),
+                M=int(solver.get("andersonHistory", 5)),
+                w0=float(solver.get("andersonRegularization", 0.01)),
+                **common,
+            )
+        elif method == "newton_krylov":
+            final_scaled = newton_krylov(
+                normalized_residual,
+                initial_scaled,
+                method=str(solver.get("krylovMethod", "lgmres")),
+                inner_maxiter=int(solver.get("krylovInnerIterations", 20)),
+                **common,
+            )
+        else:  # pragma: no cover - caller validates the enum
+            raise ValueError(f"unsupported nonlinear root method: {method}")
+    except NoConvergence as error:
+        final_scaled = np.asarray(error.args[0], dtype=float)
+
+    fields[target] = physical_field(np.asarray(final_scaled, dtype=float))
+    residuals = _equation_residuals(
+        equations,
+        fields,
+        parameters,
+        spacing,
+        shape,
+        coefficient_floor=coefficient_floor,
+    )
+    maximum_update = (
+        float(history[-1]["maximum_relative_update"]) if history else math.inf
+    )
+    converged = (
+        maximum_update <= relative_tolerance
+        and max(residuals.values()) <= residual_tolerance
+    )
+    metadata = {
+        "root_unknown_scale": field_scale,
+        "line_search": line_search,
+    }
+    if method == "anderson":
+        metadata.update(
+            {
+                "anderson_alpha": float(solver.get("andersonAlpha", 1.0)),
+                "anderson_history": int(solver.get("andersonHistory", 5)),
+                "anderson_regularization": float(
+                    solver.get("andersonRegularization", 0.01)
+                ),
+            }
+        )
+    else:
+        metadata.update(
+            {
+                "krylov_method": str(solver.get("krylovMethod", "lgmres")),
+                "krylov_inner_iterations": int(
+                    solver.get("krylovInnerIterations", 20)
+                ),
+            }
+        )
+    return len(history), maximum_update, converged, history, metadata
+
+
 def solve_field_manifest(
     manifest: Mapping[str, Any],
     source_fields: Mapping[str, Array],
@@ -498,6 +661,7 @@ def solve_field_manifest(
     damping = float(solver.get("damping", 0.7))
     coefficient_floor = float(solver.get("coefficientFloor", 1e-8))
     initialization = str(solver.get("initialization", "zero"))
+    nonlinear_method = str(solver.get("nonlinearMethod", "picard"))
     if not math.isfinite(tolerance) or tolerance <= 0:
         raise ValueError("solver relativeTolerance must be finite and positive")
     if not math.isfinite(residual_tolerance) or residual_tolerance <= 0:
@@ -507,6 +671,10 @@ def solve_field_manifest(
     if initialization not in {"zero", "linearized_unit_coefficient"}:
         raise ValueError(
             "solver initialization must be zero or linearized_unit_coefficient"
+        )
+    if nonlinear_method not in {"picard", "anderson", "newton_krylov"}:
+        raise ValueError(
+            "solver nonlinearMethod must be picard, anderson, or newton_krylov"
         )
 
     if initialization == "linearized_unit_coefficient":
@@ -528,61 +696,96 @@ def solve_field_manifest(
                 boundaries.get(target, default_boundary),
                 coefficient_floor=coefficient_floor,
             )
-    maximum_update = math.inf
-    converged = False
-    history: list[dict[str, Any]] = []
-
-    for iteration in range(1, maximum_iterations + 1):
-        maximum_update = 0.0
-        for equation in equations:
-            target, coefficient_expression = _elliptic_lhs(equation["lhs"])
-            source = _scalar_array(
-                evaluate_field_expression(
-                    equation["rhs"], fields=fields, parameters=parameters, spacing=steps
-                ),
-                shape,
-                f"equation {equation['id']} rhs",
-            )
-            coefficient = _scalar_array(
-                evaluate_field_expression(
-                    coefficient_expression, fields=fields, parameters=parameters, spacing=steps
-                ),
-                shape,
-                f"equation {equation['id']} coefficient",
-            )
-            definition = manifest["fields"][target]
-            default_boundary = definition.get("boundary", {}).get("value", 0.0)
-            solved = solve_variable_coefficient_dirichlet(
-                source,
-                coefficient,
+    root_metadata: dict[str, Any] = {}
+    if nonlinear_method == "picard":
+        maximum_update = math.inf
+        converged = False
+        history: list[dict[str, Any]] = []
+        for iteration in range(1, maximum_iterations + 1):
+            maximum_update = 0.0
+            for equation in equations:
+                target, coefficient_expression = _elliptic_lhs(equation["lhs"])
+                source = _scalar_array(
+                    evaluate_field_expression(
+                        equation["rhs"],
+                        fields=fields,
+                        parameters=parameters,
+                        spacing=steps,
+                    ),
+                    shape,
+                    f"equation {equation['id']} rhs",
+                )
+                coefficient = _scalar_array(
+                    evaluate_field_expression(
+                        coefficient_expression,
+                        fields=fields,
+                        parameters=parameters,
+                        spacing=steps,
+                    ),
+                    shape,
+                    f"equation {equation['id']} coefficient",
+                )
+                definition = manifest["fields"][target]
+                default_boundary = definition.get("boundary", {}).get("value", 0.0)
+                solved = solve_variable_coefficient_dirichlet(
+                    source,
+                    coefficient,
+                    steps,
+                    boundaries.get(target, default_boundary),
+                    coefficient_floor=coefficient_floor,
+                )
+                previous = fields[target]
+                updated = damping * solved + (1.0 - damping) * previous
+                maximum_update = max(
+                    maximum_update, _relative_update(previous, updated)
+                )
+                fields[target] = updated
+            current_residuals = _equation_residuals(
+                equations,
+                fields,
+                parameters,
                 steps,
-                boundaries.get(target, default_boundary),
+                shape,
                 coefficient_floor=coefficient_floor,
             )
-            previous = fields[target]
-            updated = damping * solved + (1.0 - damping) * previous
-            maximum_update = max(maximum_update, _relative_update(previous, updated))
-            fields[target] = updated
-        current_residuals = _equation_residuals(
-            equations,
-            fields,
-            parameters,
-            steps,
-            shape,
-            coefficient_floor=coefficient_floor,
+            history.append(
+                {
+                    "iteration": iteration,
+                    "maximum_relative_update": maximum_update,
+                    "equation_residuals": current_residuals,
+                }
+            )
+            if (
+                maximum_update <= tolerance
+                and max(current_residuals.values()) <= residual_tolerance
+            ):
+                converged = True
+                break
+    else:
+        iteration, maximum_update, converged, history, root_metadata = (
+            _solve_nonlinear_root_method(
+                method=nonlinear_method,
+                equations=equations,
+                fields=fields,
+                parameters=parameters,
+                spacing=steps,
+                shape=shape,
+                coefficient_floor=coefficient_floor,
+                relative_tolerance=tolerance,
+                residual_tolerance=residual_tolerance,
+                maximum_iterations=maximum_iterations,
+                solver=solver,
+            )
         )
-        history.append(
-            {
-                "iteration": iteration,
-                "maximum_relative_update": maximum_update,
-                "equation_residuals": current_residuals,
-            }
-        )
-        if maximum_update <= tolerance and max(current_residuals.values()) <= residual_tolerance:
-            converged = True
-            break
 
-    residuals = history[-1]["equation_residuals"]
+    residuals = _equation_residuals(
+        equations,
+        fields,
+        parameters,
+        steps,
+        shape,
+        coefficient_floor=coefficient_floor,
+    )
 
     observables = {
         str(observable["id"]): evaluate_field_expression(
@@ -607,6 +810,7 @@ def solve_field_manifest(
             "boundary_approximation": "isolated manifests use the supplied or zero far-field Dirichlet boundary",
             "coefficient_floor": coefficient_floor,
             "initialization": initialization,
+            "nonlinear_method": nonlinear_method,
             "requested_maximum_iterations": requested_maximum_iterations,
             "executed_maximum_iterations": maximum_iterations,
             "maximum_iterations_limited_by_worker": (
@@ -615,5 +819,6 @@ def solve_field_manifest(
             "preview_worker_maximum_iterations": PREVIEW_MAXIMUM_ITERATIONS,
             "relative_update_tolerance": tolerance,
             "equation_residual_tolerance": residual_tolerance,
+            **root_metadata,
         },
     )

@@ -253,7 +253,14 @@
         "maxIterations": { "type": "integer", "minimum": 1 },
         "damping": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
         "coefficientFloor": { "type": "number", "exclusiveMinimum": 0 },
-        "initialization": { "enum": ["zero", "linearized_unit_coefficient"] }
+        "initialization": { "enum": ["zero", "linearized_unit_coefficient"] },
+        "nonlinearMethod": { "enum": ["picard", "anderson", "newton_krylov"] },
+        "lineSearch": { "enum": ["armijo", "wolfe", "none"] },
+        "andersonAlpha": { "type": "number", "exclusiveMinimum": 0 },
+        "andersonHistory": { "type": "integer", "minimum": 1, "maximum": 20 },
+        "andersonRegularization": { "type": "number", "exclusiveMinimum": 0 },
+        "krylovMethod": { "enum": ["lgmres", "gmres", "bicgstab", "cgs", "minres", "tfqmr"] },
+        "krylovInnerIterations": { "type": "integer", "minimum": 1, "maximum": 200 }
       }
     },
     "parameterPolicy": {

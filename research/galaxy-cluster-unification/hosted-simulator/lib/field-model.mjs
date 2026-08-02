@@ -371,6 +371,13 @@ export function validateFieldModel(manifest) {
   if (manifest.solver?.damping !== undefined && !(manifest.solver.damping > 0 && manifest.solver.damping <= 1)) errors.push("solver.damping must lie in (0,1]");
   if (manifest.solver?.coefficientFloor !== undefined && !(manifest.solver.coefficientFloor > 0)) errors.push("solver.coefficientFloor must be positive");
   if (manifest.solver?.initialization !== undefined && !["zero", "linearized_unit_coefficient"].includes(manifest.solver.initialization)) errors.push("solver.initialization is unsupported");
+  if (manifest.solver?.nonlinearMethod !== undefined && !["picard", "anderson", "newton_krylov"].includes(manifest.solver.nonlinearMethod)) errors.push("solver.nonlinearMethod is unsupported");
+  if (manifest.solver?.lineSearch !== undefined && !["armijo", "wolfe", "none"].includes(manifest.solver.lineSearch)) errors.push("solver.lineSearch is unsupported");
+  if (manifest.solver?.andersonAlpha !== undefined && !(manifest.solver.andersonAlpha > 0)) errors.push("solver.andersonAlpha must be positive");
+  if (manifest.solver?.andersonHistory !== undefined && (!Number.isInteger(manifest.solver.andersonHistory) || manifest.solver.andersonHistory < 1 || manifest.solver.andersonHistory > 20)) errors.push("solver.andersonHistory must be an integer from 1 to 20");
+  if (manifest.solver?.andersonRegularization !== undefined && !(manifest.solver.andersonRegularization > 0)) errors.push("solver.andersonRegularization must be positive");
+  if (manifest.solver?.krylovMethod !== undefined && !["lgmres", "gmres", "bicgstab", "cgs", "minres", "tfqmr"].includes(manifest.solver.krylovMethod)) errors.push("solver.krylovMethod is unsupported");
+  if (manifest.solver?.krylovInnerIterations !== undefined && (!Number.isInteger(manifest.solver.krylovInnerIterations) || manifest.solver.krylovInnerIterations < 1 || manifest.solver.krylovInnerIterations > 200)) errors.push("solver.krylovInnerIterations must be an integer from 1 to 200");
   if (manifest.solver?.maxIterations > 200) warnings.push("the current preview worker executes at most 200 nonlinear iterations and records the requested and effective limits");
 
   for (const [name, field] of fields) {
