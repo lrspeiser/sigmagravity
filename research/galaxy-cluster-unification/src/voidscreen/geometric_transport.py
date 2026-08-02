@@ -290,6 +290,115 @@ def high_acceleration_screen(magnitude_m_s2: np.ndarray, a0_m_s2: float) -> np.n
     return float(a0_m_s2) / (float(a0_m_s2) + values)
 
 
+def symmetric_streamline_average(
+    flux_x: np.ndarray,
+    flux_y: np.ndarray,
+    direction_x: np.ndarray,
+    direction_y: np.ndarray,
+    trace_length_pixels: np.ndarray,
+    *,
+    steps: int = 12,
+) -> tuple[np.ndarray, np.ndarray, dict[str, float]]:
+    """Average a vector flux forward and backward along curved streamlines.
+
+    The integration length is supplied pointwise by field geometry. Forward
+    and backward traces receive identical weight, so reversing the direction
+    field leaves the result unchanged. Samples outside the map are omitted and
+    the remaining weights are normalized locally.
+    """
+
+    fx = _square_map(flux_x, "flux_x")
+    fy = _square_map(flux_y, "flux_y")
+    dx = _square_map(direction_x, "direction_x")
+    dy = _square_map(direction_y, "direction_y")
+    length = _square_map(trace_length_pixels, "trace_length_pixels")
+    if not (fx.shape == fy.shape == dx.shape == dy.shape == length.shape):
+        raise ValueError("streamline fields must have matching shapes")
+    if int(steps) != steps or int(steps) < 2:
+        raise ValueError("streamline steps must be an integer of at least two")
+    if np.any(length < 0.0):
+        raise ValueError("trace lengths must be nonnegative")
+    norm = np.hypot(dx, dy)
+    unit_x = np.zeros_like(dx)
+    unit_y = np.zeros_like(dy)
+    active = norm > 1e-12
+    unit_x[active] = dx[active] / norm[active]
+    unit_y[active] = dy[active] / norm[active]
+    rows, columns = np.indices(fx.shape, dtype=np.float64)
+    summed_x = fx.copy()
+    summed_y = fy.copy()
+    weights = np.ones_like(fx)
+    step_length = length / float(steps)
+    maximum_row = float(fx.shape[0] - 1)
+    maximum_column = float(fx.shape[1] - 1)
+    for sign in (-1.0, 1.0):
+        current_rows = rows.copy()
+        current_columns = columns.copy()
+        for _ in range(int(steps)):
+            local_x = ndimage.map_coordinates(
+                unit_x,
+                [current_rows, current_columns],
+                order=1,
+                mode="constant",
+                cval=0.0,
+            )
+            local_y = ndimage.map_coordinates(
+                unit_y,
+                [current_rows, current_columns],
+                order=1,
+                mode="constant",
+                cval=0.0,
+            )
+            local_norm = np.hypot(local_x, local_y)
+            valid_direction = local_norm > 1e-12
+            local_x[valid_direction] /= local_norm[valid_direction]
+            local_y[valid_direction] /= local_norm[valid_direction]
+            current_columns += sign * step_length * local_x
+            current_rows += sign * step_length * local_y
+            valid = (
+                valid_direction
+                & (current_rows >= 0.0)
+                & (current_rows <= maximum_row)
+                & (current_columns >= 0.0)
+                & (current_columns <= maximum_column)
+            )
+            sampled_x = ndimage.map_coordinates(
+                fx,
+                [current_rows, current_columns],
+                order=1,
+                mode="constant",
+                cval=0.0,
+            )
+            sampled_y = ndimage.map_coordinates(
+                fy,
+                [current_rows, current_columns],
+                order=1,
+                mode="constant",
+                cval=0.0,
+            )
+            summed_x += valid * sampled_x
+            summed_y += valid * sampled_y
+            weights += valid
+    averaged_x = summed_x / weights
+    averaged_y = summed_y / weights
+    original_rms = float(np.sqrt(np.mean(fx * fx + fy * fy)))
+    difference_rms = float(
+        np.sqrt(np.mean(np.square(averaged_x - fx) + np.square(averaged_y - fy)))
+    )
+    return averaged_x, averaged_y, {
+        "streamline_steps": int(steps),
+        "mean_samples_per_cell": float(np.mean(weights)),
+        "minimum_samples_per_cell": float(np.min(weights)),
+        "maximum_samples_per_cell": float(np.max(weights)),
+        "transport_relative_change_RMS": difference_rms
+        / max(original_rms, np.finfo(float).tiny),
+        "transport_flux_RMS_ratio": float(
+            np.sqrt(np.mean(averaged_x * averaged_x + averaged_y * averaged_y))
+            / max(original_rms, np.finfo(float).tiny)
+        ),
+    }
+
+
 def hybrid_geometry(path_incoherence: np.ndarray, cancellation: np.ndarray) -> np.ndarray:
     first = np.asarray(path_incoherence, dtype=np.float64)
     second = np.asarray(cancellation, dtype=np.float64)

@@ -12,6 +12,7 @@ from voidscreen.geometric_transport import (
     component_cancellation,
     high_acceleration_screen,
     streamline_incoherence,
+    symmetric_streamline_average,
     thin_sheet_newtonian_field,
 )
 from voidscreen.stellar_morphology_lensing import StellarMorphologyDeflectionField
@@ -67,6 +68,7 @@ def build_accumulated_transport_deflection_field(
     common_smoothing_kpc: float = 0.0,
     mismatch_mode: str = "quadratic_cancellation",
     closure: str = "path_tensor",
+    transport_steps: int = 12,
     taper_inner_arcsec: float = 180.0,
     support_radius_arcsec: float = 220.0,
 ) -> StellarMorphologyDeflectionField:
@@ -153,6 +155,9 @@ def build_accumulated_transport_deflection_field(
     )
     perpendicular_x = -difference_y
     perpendicular_y = difference_x
+    local_component_flux_x = activation * carrier * difference_x
+    local_component_flux_y = activation * carrier * difference_y
+    transport_audit = {}
 
     def rank_one(direction_x, direction_y):
         projection = direction_x * grad_x + direction_y * grad_y
@@ -168,13 +173,33 @@ def build_accumulated_transport_deflection_field(
     elif closure_id == "isotropic_control":
         flux_x, flux_y = activation * grad_x, activation * grad_y
     elif closure_id == "gas_minus_star_flux":
-        flux_x, flux_y = activation * carrier * difference_x, activation * carrier * difference_y
+        flux_x, flux_y = local_component_flux_x, local_component_flux_y
     elif closure_id == "star_minus_gas_flux":
         flux_x, flux_y = -activation * carrier * difference_x, -activation * carrier * difference_y
     elif closure_id == "perpendicular_cw_flux":
         flux_x, flux_y = activation * carrier * perpendicular_x, activation * carrier * perpendicular_y
     elif closure_id == "perpendicular_ccw_flux":
         flux_x, flux_y = -activation * carrier * perpendicular_x, -activation * carrier * perpendicular_y
+    elif closure_id in {
+        "streamline_averaged_gas_minus_star_flux",
+        "streamline_balanced_residual_flux",
+    }:
+        total_norm = np.maximum(total_field.magnitude_m_s2, np.finfo(float).tiny)
+        direction_x = total_field.acceleration_x_m_s2 / total_norm
+        direction_y = total_field.acceleration_y_m_s2 / total_norm
+        transported_x, transported_y, transport_audit = symmetric_streamline_average(
+            local_component_flux_x,
+            local_component_flux_y,
+            direction_x,
+            direction_y,
+            path.trace_length_kpc / float(cell_kpc),
+            steps=int(transport_steps),
+        )
+        if closure_id == "streamline_averaged_gas_minus_star_flux":
+            flux_x, flux_y = transported_x, transported_y
+        else:
+            flux_x = transported_x - local_component_flux_x
+            flux_y = transported_y - local_component_flux_y
     else:
         raise ValueError(f"unknown accumulated lens closure: {closure_id}")
     source = np.gradient(flux_x, spacing, axis=1, edge_order=2) + np.gradient(
@@ -204,6 +229,7 @@ def build_accumulated_transport_deflection_field(
         "gas_mass_fraction": float(gas_mass_fraction),
         "proxy_total_mass_msun": float(proxy_total_mass_msun),
         "common_smoothing_kpc": float(common_smoothing_kpc),
+        "transport_steps": int(transport_steps),
         "proxy_mass_changes_deflection_normalization": False,
         "activation_weighted_mean": float(np.mean(activation[active])),
         "activation_maximum": float(np.max(activation[active])),
@@ -219,6 +245,7 @@ def build_accumulated_transport_deflection_field(
         "unit_deflection_maximum_arcsec": float(np.max(np.hypot(alpha_x, alpha_y))),
         "maximum_edge_correction_arcsec": float(np.max(np.abs(edge))),
         "carrier_deflection_median_arcsec": float(np.median(carrier[active])),
+        **transport_audit,
     }
     return StellarMorphologyDeflectionField(
         axis,

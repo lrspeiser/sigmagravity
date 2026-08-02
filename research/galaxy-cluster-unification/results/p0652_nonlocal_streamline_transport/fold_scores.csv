@@ -1,0 +1,11 @@
+stage,closure,lambda,fold,fit_images,validation_images,fit_RMS_arcsec,fit_roots,validation_RMS_arcsec,validation_roots,optimizer_cost
+exact_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,0,12,3,0.3995822139782951,12,2.8332939043591234,3,24.04637072552103
+exact_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,1,11,4,0.40558256539632814,11,2.4648644633516636,4,23.08473417669265
+exact_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,2,12,3,0.40537663077845865,12,1.04459876727945,3,25.62430683451224
+exact_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,3,13,2,0.3308696314558825,13,1.1219319394804481,2,18.89271530660496
+exact_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,4,12,3,0.2382355573141645,12,1.863482257517386,3,10.193787297716465
+exact_nonlocal,streamline_balanced_residual_flux,1.0,0,12,3,0.4023460349922888,12,4.473820536951458,3,24.402717655898012
+exact_nonlocal,streamline_balanced_residual_flux,1.0,1,11,4,0.4075889934265746,11,2.4838032358297695,4,23.043545867343962
+exact_nonlocal,streamline_balanced_residual_flux,1.0,2,12,3,0.4048841522466654,12,1.176756940969038,3,25.85365652244443
+exact_nonlocal,streamline_balanced_residual_flux,1.0,3,13,2,0.40284005322112826,13,1.1240481572050234,2,27.404651447383074
+exact_nonlocal,streamline_balanced_residual_flux,1.0,4,12,3,0.2564986423257934,12,2.8656848146922607,3,11.661851789018156

@@ -1,0 +1,3 @@
+stage,closure,lambda,pooled_CV_RMS_arcsec,CV_roots,CV_images,all_CV_roots,role
+exact_nonlocal,streamline_averaged_gas_minus_star_flux,1.0,2.0751483644294844,15,15,True,sole_advancing_candidate
+exact_nonlocal,streamline_balanced_residual_flux,1.0,2.781366717198358,15,15,True,diagnostic_only

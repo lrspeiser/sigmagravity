@@ -110,6 +110,7 @@ def make_field(protocol, raw_protocol, anchors, parent, baryons, images):
         common_smoothing_kpc=float(candidate.get("common_smoothing_kpc", 0.0)),
         mismatch_mode=str(candidate.get("mismatch_mode", "quadratic_cancellation")),
         closure=str(candidate.get("closure", "path_tensor")),
+        transport_steps=int(candidate.get("transport_steps", 12)),
         taper_inner_arcsec=float(candidate["taper_inner_arcsec"]),
         support_radius_arcsec=float(candidate["support_radius_arcsec"]),
     )

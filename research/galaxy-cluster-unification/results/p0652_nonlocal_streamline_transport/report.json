@@ -1,0 +1,191 @@
+{
+  "report_version": "P0652-NONLOCAL-STREAMLINE-TRANSPORT-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_robustness": false,
+  "protocol_sha256": "e35be0d3656017eaac871b806b5ca431c79e7c9939370ed5cfd08cb506207b54",
+  "source_sha256": "5f800989def488d2c282c5a5a7a9c7464aa1c9aa0f4019c5804e07967aaf457b",
+  "coverage": {
+    "nonlocal_closures": 2,
+    "advancing_candidates": 1,
+    "amplitude_rows_per_closure": 1,
+    "CV_folds": 5,
+    "fitted_field_amplitude_parameters": 0,
+    "new_physical_length_constants": 0,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "field_audits": {
+    "streamline_averaged_gas_minus_star_flux": {
+      "operator": "finite_path_accumulated_component_tensor",
+      "closure": "streamline_averaged_gas_minus_star_flux",
+      "mismatch_mode": "transverse_tensor_mix",
+      "coherence_length_kpc": 10.0,
+      "accumulation_power": 1.0,
+      "stellar_mass_fraction": 0.1,
+      "gas_mass_fraction": 0.9,
+      "proxy_total_mass_msun": 100000000000000.0,
+      "common_smoothing_kpc": 25.0,
+      "transport_steps": 12,
+      "proxy_mass_changes_deflection_normalization": false,
+      "activation_weighted_mean": 0.03081920513858914,
+      "activation_maximum": 0.3372757709700177,
+      "cancellation_mean": 0.003594706024914429,
+      "mismatch_mean": 0.04524326517865508,
+      "survival_mean": 0.993761235780194,
+      "trace_length_median_kpc": 92.99394454051999,
+      "source_integral_fraction": 0.04951196057483399,
+      "normalized_curl_RMS": 1.798517714772598e-17,
+      "unit_deflection_RMS_arcsec": 0.6384106966775249,
+      "unit_deflection_maximum_arcsec": 2.569008885089383,
+      "maximum_edge_correction_arcsec": 2.1338292439431203,
+      "carrier_deflection_median_arcsec": 21.25739757728231,
+      "streamline_steps": 12,
+      "mean_samples_per_cell": 20.131001980739022,
+      "minimum_samples_per_cell": 13.0,
+      "maximum_samples_per_cell": 25.0,
+      "transport_relative_change_RMS": 0.7528457090498826,
+      "transport_flux_RMS_ratio": 0.6902700537847798
+    },
+    "streamline_balanced_residual_flux": {
+      "operator": "finite_path_accumulated_component_tensor",
+      "closure": "streamline_balanced_residual_flux",
+      "mismatch_mode": "transverse_tensor_mix",
+      "coherence_length_kpc": 10.0,
+      "accumulation_power": 1.0,
+      "stellar_mass_fraction": 0.1,
+      "gas_mass_fraction": 0.9,
+      "proxy_total_mass_msun": 100000000000000.0,
+      "common_smoothing_kpc": 25.0,
+      "transport_steps": 12,
+      "proxy_mass_changes_deflection_normalization": false,
+      "activation_weighted_mean": 0.03081920513858914,
+      "activation_maximum": 0.3372757709700177,
+      "cancellation_mean": 0.003594706024914429,
+      "mismatch_mean": 0.04524326517865508,
+      "survival_mean": 0.993761235780194,
+      "trace_length_median_kpc": 92.99394454051999,
+      "source_integral_fraction": 0.041380084259826845,
+      "normalized_curl_RMS": 1.8164892387059363e-17,
+      "unit_deflection_RMS_arcsec": 0.5660515465842685,
+      "unit_deflection_maximum_arcsec": 2.7676452348017695,
+      "maximum_edge_correction_arcsec": 1.526391067739405,
+      "carrier_deflection_median_arcsec": 21.25739757728231,
+      "streamline_steps": 12,
+      "mean_samples_per_cell": 20.131001980739022,
+      "minimum_samples_per_cell": 13.0,
+      "maximum_samples_per_cell": 25.0,
+      "transport_relative_change_RMS": 0.7528457090498826,
+      "transport_flux_RMS_ratio": 0.6902700537847798
+    }
+  },
+  "map_audits": {
+    "streamline_averaged_gas_minus_star_flux": {
+      "hst": {
+        "system_label": "RXJ2129",
+        "map_kind": "hst_f160w",
+        "input_count": 2,
+        "native_pixel_scale_arcsec": 0.0650000000000009,
+        "background": -0.0033761123195290565,
+        "masked_fraction": 0.01795127705200111,
+        "positive_cells": 12435,
+        "map_sum_before_normalization": 405.6119888731333
+      },
+      "xray": {
+        "system_label": "RXJ2129",
+        "map_kind": "chandra_soft_rate",
+        "input_count": 2,
+        "total_exposure_ks": 39.6040961730402,
+        "soft_events_on_grid": 15401,
+        "point_source_seed_cells": 37,
+        "point_source_masked_fraction": 0.009767092411720512,
+        "unmasked_map_sum": 0.792017083914403,
+        "masked_map_sum": 0.7662815305616146
+      }
+    },
+    "streamline_balanced_residual_flux": {
+      "hst": {
+        "system_label": "RXJ2129",
+        "map_kind": "hst_f160w",
+        "input_count": 2,
+        "native_pixel_scale_arcsec": 0.0650000000000009,
+        "background": -0.0033761123195290565,
+        "masked_fraction": 0.01795127705200111,
+        "positive_cells": 12435,
+        "map_sum_before_normalization": 405.6119888731333
+      },
+      "xray": {
+        "system_label": "RXJ2129",
+        "map_kind": "chandra_soft_rate",
+        "input_count": 2,
+        "total_exposure_ks": 39.6040961730402,
+        "soft_events_on_grid": 15401,
+        "point_source_seed_cells": 37,
+        "point_source_masked_fraction": 0.009767092411720512,
+        "unmasked_map_sum": 0.792017083914403,
+        "masked_map_sum": 0.7662815305616146
+      }
+    }
+  },
+  "closure_scores": [
+    {
+      "stage": "exact_nonlocal",
+      "closure": "streamline_averaged_gas_minus_star_flux",
+      "lambda": 1.0,
+      "pooled_CV_RMS_arcsec": 2.0751483644294844,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "role": "sole_advancing_candidate"
+    },
+    {
+      "stage": "exact_nonlocal",
+      "closure": "streamline_balanced_residual_flux",
+      "lambda": 1.0,
+      "pooled_CV_RMS_arcsec": 2.781366717198358,
+      "CV_roots": 15,
+      "CV_images": 15,
+      "all_CV_roots": true,
+      "role": "diagnostic_only"
+    }
+  ],
+  "comparison": {
+    "lambda0_CV_RMS_arcsec": 2.760255155353674,
+    "primary_CV_RMS_arcsec": 2.0751483644294844,
+    "CV_improvement_fraction_vs_lambda0": 0.24820415228475723,
+    "best_matched_multipole_CV_RMS_arcsec": 2.599360329775749,
+    "CV_improvement_fraction_vs_best_matched_multipole": 0.2016696028408994,
+    "P0651_local_tensor_CV_RMS_arcsec": 3.1884146587540028,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "full_refit": {
+    "training_RMS_arcsec": 0.44028245861435594,
+    "training_roots": 15,
+    "spent_heldout_RMS_arcsec": 2.0407605491266625,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599": 0.12724648708275055
+  },
+  "gate_results": {
+    "inherited_map_gates": true,
+    "primary_CV_roots": true,
+    "primary_CV_improvement": true,
+    "beats_matched_multipole": true,
+    "full_training_roots": true,
+    "spent_heldout_roots": true,
+    "spent_heldout_not_worse": false,
+    "field_curl": true,
+    "field_source_integral": false,
+    "transport_nontrivial": true,
+    "amplitude_is_one": true,
+    "sealed_targets_untouched": true
+  },
+  "diagnostic_closure_cannot_advance": true,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "All lens scores use spent RX J2129 images; no blind P0633/P0640 outcome is opened.",
+    "The diagnostic residual closure cannot replace a failed primary after scores are seen.",
+    "The integration step count is numerical and needs convergence testing if the primary passes.",
+    "A pass authorizes resolution and component-map robustness, not blind validation.",
+    "The closure is nonlocal in projected space but is not yet a four-dimensional covariant propagation law."
+  ]
+}
