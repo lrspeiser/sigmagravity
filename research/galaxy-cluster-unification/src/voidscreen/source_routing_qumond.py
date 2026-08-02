@@ -97,6 +97,57 @@ def normalized_baryonic_quadrupole(
     return fraction, covariance
 
 
+def projected_baryonic_spectral_anisotropy(
+    surface_density: np.ndarray,
+    spacing: float | Sequence[float],
+) -> tuple[float, np.ndarray, np.ndarray]:
+    """Return ``1-lambda_min/lambda_max`` for a centered 2D baryonic map."""
+
+    surface = np.asarray(surface_density, dtype=float)
+    if (
+        surface.ndim != 2
+        or min(surface.shape) < 5
+        or np.any(~np.isfinite(surface))
+        or np.any(surface < 0.0)
+    ):
+        raise ValueError("surface_density must be a finite nonnegative 2D grid")
+    if np.isscalar(spacing):
+        steps = (float(spacing),) * 2
+    else:
+        steps = tuple(float(value) for value in spacing)
+    if len(steps) != 2 or any(value <= 0.0 for value in steps):
+        raise ValueError("spacing must contain two positive values")
+    mass_weight = float(np.sum(surface))
+    if mass_weight <= 0.0:
+        raise ValueError("surface_density must have positive mass")
+    axes = [
+        (np.arange(count, dtype=float) - (count - 1.0) / 2.0) * step
+        for count, step in zip(surface.shape, steps, strict=True)
+    ]
+    coordinates = np.meshgrid(*axes, indexing="ij")
+    center = np.asarray(
+        [float(np.sum(surface * coordinate) / mass_weight) for coordinate in coordinates]
+    )
+    covariance = np.empty((2, 2), dtype=float)
+    for left in range(2):
+        for right in range(2):
+            covariance[left, right] = float(
+                np.sum(
+                    surface
+                    * (coordinates[left] - center[left])
+                    * (coordinates[right] - center[right])
+                )
+                / mass_weight
+            )
+    eigenvalues = np.linalg.eigvalsh(covariance)
+    largest = float(eigenvalues[-1])
+    smallest = float(max(eigenvalues[0], 0.0))
+    if not np.isfinite(largest) or largest <= 0.0:
+        raise ValueError("projected baryonic covariance must have positive extent")
+    fraction = float(np.clip(1.0 - smallest / largest, 0.0, 1.0))
+    return fraction, covariance, eigenvalues
+
+
 def _spacing3(spacing: float | Sequence[float]) -> tuple[float, float, float]:
     if np.isscalar(spacing):
         values = (float(spacing),) * 3

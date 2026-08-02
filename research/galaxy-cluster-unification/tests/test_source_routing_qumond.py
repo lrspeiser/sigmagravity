@@ -5,6 +5,7 @@ import numpy as np
 from voidscreen.field_solvers import boundary_mask, cell_coordinates
 from voidscreen.source_routing_qumond import (
     normalized_baryonic_quadrupole,
+    projected_baryonic_spectral_anisotropy,
     solve_linear_routing_mixture,
     solve_multipole_gated_source_routing,
     solve_source_conserving_baryonic_routing,
@@ -53,6 +54,34 @@ def test_normalized_quadrupole_has_sphere_and_line_limits():
     line_q, _ = normalized_baryonic_quadrupole(line, spacing)
     assert sphere_q < 1e-12
     assert line_q > 0.98
+
+
+def test_projected_spectral_anisotropy_has_circle_line_and_scale_limits():
+    cells = 81
+    spacing = 0.2
+    axis = (np.arange(cells, dtype=float) - (cells - 1.0) / 2.0) * spacing
+    x, y = np.meshgrid(axis, axis, indexing="ij")
+    circle = np.exp(-(x * x + y * y))
+    line = np.exp(-(x * x / 16.0 + y * y / 0.01))
+    circle_fraction, circle_covariance, circle_eigenvalues = (
+        projected_baryonic_spectral_anisotropy(circle, spacing)
+    )
+    line_fraction, _, _ = projected_baryonic_spectral_anisotropy(line, spacing)
+    rescaled_fraction, rescaled_covariance, rescaled_eigenvalues = (
+        projected_baryonic_spectral_anisotropy(7.0 * circle, spacing)
+    )
+    assert circle_fraction < 1e-12
+    assert line_fraction > 0.99
+    assert rescaled_fraction == circle_fraction
+    assert np.allclose(rescaled_covariance, circle_covariance, rtol=1e-15, atol=2e-18)
+    assert np.allclose(rescaled_eigenvalues, circle_eigenvalues, rtol=1e-15, atol=2e-18)
+
+
+def test_projected_spectral_anisotropy_rejects_invalid_maps():
+    with np.testing.assert_raises(ValueError):
+        projected_baryonic_spectral_anisotropy(np.zeros((9, 9)), 1.0)
+    with np.testing.assert_raises(ValueError):
+        projected_baryonic_spectral_anisotropy(np.ones((9, 9)), (1.0, -1.0))
 
 
 def test_multipole_gated_source_is_exact_declared_linear_mixture():

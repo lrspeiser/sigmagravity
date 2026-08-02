@@ -1,5 +1,5 @@
 {
-  "protocol_version": "P0693-PROJECTED-SPECTRAL-ROUTING-JOINT-SCREEN-1.0.0",
+  "protocol_version": "P0693-PROJECTED-SPECTRAL-ROUTING-JOINT-SCREEN-1.0.1",
   "status": "frozen_before_any_P0693_candidate_galaxy_field_rotation_or_cluster_photon_topology_score",
   "frozen_utc": "2026-08-02T16:00:00Z",
   "purpose": "Test whether a parameter-free projected baryonic spectral anisotropy predicts useful source routing jointly for a spent real-2D galaxy and spent RX J2129 raw topology, without adopting the P0692 post-hoc fraction.",
@@ -170,6 +170,8 @@
     "sealed_geometry": "sealed_baryon_spectral_geometry.csv",
     "cluster_family_topology": "rxj2129_spectral_family_topology.csv",
     "cluster_nuisance": "rxj2129_spectral_nuisance_parameters.csv",
+    "galaxy_fields": "ddo154_projected_spectral_fields.npz",
+    "cluster_field": "rxj2129_projected_spectral_field.npz",
     "figure": "projected_spectral_joint_screen.png"
   },
   "claim_boundary": [
