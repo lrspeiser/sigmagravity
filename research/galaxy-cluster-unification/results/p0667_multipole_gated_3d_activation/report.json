@@ -1,0 +1,52 @@
+{
+  "report_version": "P0667-MULTIPOLE-GATED-3D-ACTIVATION-RESULTS-1.0.0",
+  "status": "pass",
+  "all_progression_gates_pass": true,
+  "candidate_advanced_to_registered_map_audit": true,
+  "protocol_sha256": "4c9047d5a4069ac44e34f866698a103eea651fb316defaaac75ebf3f2766d14e",
+  "source_sha256": "3b9c7012080b6ad334f05a901fcf5a4e725f9e945c80e2da61c489e344be3968",
+  "activation_source_sha256": "6296e8c992613f0288d84f41e5bfc856d9462a4fe836f933067fd502bd006864",
+  "metrics": {
+    "radial_multipole_gate": 1.684156874435307e-32,
+    "radial_sigma_mass_weighted_mean": 3.651824040672197e-37,
+    "offset_multipole_gate": 0.3407393812710082,
+    "offset_dipole_squared": 0.41663632286337565,
+    "offset_quadrupole_squared": 2.372803010630887e-08,
+    "offset_sigma_mass_weighted_mean": 0.023340846854042804,
+    "offset_signal_retained_fraction_vs_P0666": 0.34073938127100817,
+    "rotation_covariance_relative_error": 2.220446049250313e-16,
+    "component_exchange_relative_error": 0.0,
+    "translation_covariance_relative_error": 0.0013302118720215361,
+    "scale_covariance_multipole_gate_relative_error": 2.220446049250313e-16,
+    "minimum_constitutive_eigenvalue_proxy": 0.04414840999546032,
+    "direction_reversal_tensor_relative_error": 0.0
+  },
+  "gate_results": {
+    "P0666_diagnostic_state": true,
+    "radial_multipole_null": true,
+    "radial_activation_null": true,
+    "offset_multipole_present": true,
+    "offset_activation_present": true,
+    "offset_signal_retained": true,
+    "rotation_covariance": true,
+    "component_exchange": true,
+    "translation_covariance": true,
+    "scale_covariance": true,
+    "bounded_sigma": true,
+    "positive_eigenvalue": true,
+    "direction_reversal": true,
+    "P0666_photon_gates": true,
+    "no_new_constants": true,
+    "no_per_object_parameters": true,
+    "spent_lensing_untouched": true,
+    "sealed_targets_untouched": true
+  },
+  "spent_RXJ2129_lensing_outcomes_opened": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "The global multipole gate is a measurable baryonic geometry statistic but not yet derived from a microscopic transport action.",
+    "Global moments may miss locally compensating substructure and therefore require a registered-map and spent-topology test.",
+    "No spent RX J2129 image and no P0633/P0640 target may be used in P0667 development or selection."
+  ]
+}
