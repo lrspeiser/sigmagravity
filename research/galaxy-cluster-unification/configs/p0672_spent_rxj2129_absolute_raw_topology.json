@@ -1,0 +1,81 @@
+{
+  "protocol_version": "P0672-SPENT-RXJ2129-ABSOLUTE-RAW-TOPOLOGY-1.0.0",
+  "status": "frozen_before_any_P0672_raw_lens_or_topology_score",
+  "frozen_utc": "2026-08-02T04:30:00Z",
+  "purpose": "Test whether the absolute P0671 scalar and tensor fields reproduce spent RX J2129 image positions, roots, multiplicity, parity, and critical topology with no fitted gravity or photon amplitude.",
+  "parent_result": "results/p0671_spent_rxj2129_absolute_3d_field_solve/report.json",
+  "field_input": "results/p0671_spent_rxj2129_absolute_3d_field_solve/rxj2129_absolute_scalar_tensor_fields.npz",
+  "raw_protocol": "configs/rxj2129_raw_theory_lensing_protocol.json",
+  "comparator_report": "results/rxj2129_raw_theory_lensing/report.json",
+  "models": {
+    "scalar_absolute_AQUAL": "P0671 scalar zero-slip field",
+    "tensor_absolute_P0669": "P0671 amplitude-multipole tensor zero-slip field",
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "photon_amplitudes_fit_to_RXJ2129": 0
+  },
+  "nuisance_fit": {
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "parameters": [
+      "map_center_x_arcsec",
+      "map_center_y_arcsec",
+      "external_shear_gamma1_at_reference_source",
+      "external_shear_gamma2_at_reference_source"
+    ],
+    "bounds": {
+      "map_center_x_arcsec": [-3.0, 3.0],
+      "map_center_y_arcsec": [-3.0, 3.0],
+      "external_shear_gamma1_at_reference_source": [-0.25, 0.25],
+      "external_shear_gamma2_at_reference_source": [-0.25, 0.25]
+    },
+    "source_positions": "two coordinates profiled independently for each of seven spectroscopic families on training images",
+    "multi_starts": 12,
+    "random_seed": 6722129,
+    "map_interpolation": "bicubic spline inside the fixed P0671 field; no ellipticity, rotation, radial amplitude, mass sheet, or slip is fitted"
+  },
+  "global_topology": {
+    "global_search_half_width_arcsec": 48.0,
+    "global_root_aperture_arcsec": 48.0,
+    "global_grid_spacing_arcsec": 6.0,
+    "interlaced_grid_offset_arcsec": 3.0,
+    "local_seed_radii_arcsec": [0.0, 0.5, 1.0, 2.0, 4.0, 8.0, 16.0, 32.0],
+    "local_seed_angles": 12,
+    "root_closure_tolerance_arcsec": 1e-6,
+    "root_deduplication_arcsec": 0.05,
+    "jacobian_step_arcsec": 0.002,
+    "potentially_observable_surplus_fraction": 0.25,
+    "critical_grid_half_width_arcsec": 40.0,
+    "critical_grid_spacing_arcsec": 0.5,
+    "critical_curve_present": "at least one horizontal or vertical sign-changing cell in det(d beta/d theta)",
+    "parity_diverse": "the globally recovered roots for a family contain at least one positive and one negative determinant"
+  },
+  "predeclared_progression_gates": {
+    "P0671_all_progression_gates_pass": true,
+    "tensor_training_roots_converged": 15,
+    "tensor_heldout_roots_converged": 7,
+    "tensor_training_RMS_improvement_fraction_vs_scalar_min": 0.005,
+    "tensor_heldout_RMS_worsening_fraction_vs_scalar_max": 0.10,
+    "tensor_heldout_RMS_arcsec_max": 3.0,
+    "tensor_to_compact_halo_heldout_RMS_ratio_max": 1.25,
+    "tensor_missing_multiplicity_families_max": 0,
+    "tensor_potentially_observable_surplus_families_max": 2,
+    "tensor_exact_or_demagnified_only_families_min": 5,
+    "tensor_parity_diverse_families_min": 7,
+    "tensor_critical_curve_present_families_min": 7,
+    "tensor_nuisance_parameters_near_bound_max": 0,
+    "gravity_parameters_fit_to_RXJ2129": 0,
+    "photon_amplitudes_fit_to_RXJ2129": 0,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "The P0669 tensor candidate advances to spent robustness only if it passes every exact-root, predictive residual, compact-halo comparison, global multiplicity, parity, critical-curve, nuisance-bound, and parameter-accounting gate. The heldout images select nothing.",
+  "outputs": {
+    "directory": "results/p0672_spent_rxj2129_absolute_raw_topology"
+  },
+  "claim_boundary": [
+    "Every RX J2129 image is spent; P0672 can reject or diagnose the mechanism but cannot validate it.",
+    "The global finite seed search can miss roots with very small basins or beyond 48 arcseconds.",
+    "Published multiple-image catalogs can omit demagnified, obscured, or unidentified images, so surplus roots are graded by relative magnification rather than all treated as failures.",
+    "The 33-cell physical field and bicubic interpolation are coarse for cluster critical curves; a successful topology audit would still require frozen resolution convergence.",
+    "P0633 galaxy kinematics and P0640 cluster lens constraints remain sealed."
+  ]
+}
