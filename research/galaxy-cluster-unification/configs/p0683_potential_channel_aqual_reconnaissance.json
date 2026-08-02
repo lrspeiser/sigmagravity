@@ -46,6 +46,9 @@
     "reliable_subset": ["MACS0429", "MACS1931", "RXJ2129"],
     "target": "mean baryonic reduced deflection plus mean radial compact-halo deflection in each P0682 annular bin",
     "prediction": "spherical line-of-sight deflection of the algebraic acceleration at reference source redshift z=2",
+    "acceleration_grid_points": 1536,
+    "line_of_sight_integration_points": 400,
+    "maximum_radius_kpc": 1000000.0,
     "score": "equal-system RMS log10(predicted_deflection/target_deflection)",
     "comparators": ["baryons_Newton", "fixed_RAR_a0", "simple_AQUAL_algebraic_a0"],
     "claim_limit": "the target is a spent low-parameter comparator, not a unique halo truth map"
