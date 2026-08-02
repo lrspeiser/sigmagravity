@@ -1,0 +1,121 @@
+{
+  "report_version": "P0668-REGISTERED-MULTIPOLE-3D-ACTIVATION-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_spent_RXJ2129_3D_map_build": false,
+  "protocol_sha256": "86d9e3ab867189028d400a3ef6e996818e1c4ddaaac5e58e3f44538496352c33",
+  "source_sha256": "8279776861921ff04a50451de73e0f799dec2cefc8490a59db43054983d8513c",
+  "activation_source_sha256": "6296e8c992613f0288d84f41e5bfc856d9462a4fe836f933067fd502bd006864",
+  "registered_map_manifest_sha256": "1dd7af5a986f14a007eebbd9b8152aa1e876811cc65e8ab64dd5b4121ce30eaa",
+  "coverage": {
+    "registered_galaxies": 13,
+    "registered_clusters": 4,
+    "mass_scenarios": 3,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "metrics": {
+    "registered_galaxy_nominal_median_sigma": 3.7045320966606855e-06,
+    "registered_cluster_nominal_median_sigma": 0.0005576863473755237,
+    "registered_cluster_to_galaxy_nominal_median_sigma_ratio": 150.5416427295176,
+    "mass_sensitivity_cluster_to_galaxy_sigma_ratios": {
+      "low": 162.70243472641604,
+      "nominal": 150.5416427295176,
+      "high": 129.3212769754666
+    },
+    "registered_galaxy_nominal_median_multipole_gate": 0.01389178364600745,
+    "registered_cluster_nominal_median_multipole_gate": 0.035179552567013786,
+    "registered_cluster_to_galaxy_nominal_median_multipole_gate_ratio": 2.5323999756593185,
+    "maximum_component_mass_relative_error": 1.7178187557734773e-15,
+    "minimum_constitutive_eigenvalue_proxy": 0.0002945599661684928
+  },
+  "gate_results": {
+    "P0667_parent": true,
+    "galaxy_coverage": true,
+    "cluster_coverage": true,
+    "surface_to_volume_mass": true,
+    "scale_heights": true,
+    "bounded_sigma": true,
+    "positive_eigenvalue": true,
+    "galaxy_channel_small": true,
+    "cluster_channel_present": false,
+    "sigma_domain_separation": true,
+    "mass_sensitivity": true,
+    "multipole_domain_separation": true,
+    "no_new_constants": true,
+    "no_per_object_parameters": true,
+    "spent_lensing_untouched": true,
+    "sealed_targets_untouched": true
+  },
+  "domain_summary": [
+    {
+      "domain": "registered_cluster_baryons_only",
+      "scenario": "high",
+      "systems": 4,
+      "median_sigma": 0.0006029045849769417,
+      "minimum_sigma": 0.0005170512482356632,
+      "maximum_sigma": 0.005514898127505023,
+      "median_multipole_gate": 0.0351795524994169,
+      "median_trace_length_kpc": 240.5569701991164
+    },
+    {
+      "domain": "registered_cluster_baryons_only",
+      "scenario": "low",
+      "systems": 4,
+      "median_sigma": 0.00048618437594163196,
+      "minimum_sigma": 0.0004167676855047986,
+      "maximum_sigma": 0.004490524077033068,
+      "median_multipole_gate": 0.03517955237363337,
+      "median_trace_length_kpc": 240.83053512661763
+    },
+    {
+      "domain": "registered_cluster_baryons_only",
+      "scenario": "nominal",
+      "systems": 4,
+      "median_sigma": 0.0005576863473755237,
+      "minimum_sigma": 0.0004835692183084907,
+      "maximum_sigma": 0.005141109207377582,
+      "median_multipole_gate": 0.035179552567013786,
+      "median_trace_length_kpc": 240.6684050483664
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "scenario": "high",
+      "systems": 13,
+      "median_sigma": 4.662067983533121e-06,
+      "minimum_sigma": 5.605465994278759e-07,
+      "maximum_sigma": 0.00011358280333215699,
+      "median_multipole_gate": 0.01389178364600745,
+      "median_trace_length_kpc": 1.4955571432808934
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "scenario": "low",
+      "systems": 13,
+      "median_sigma": 2.9881813186087256e-06,
+      "minimum_sigma": 5.433690774042878e-07,
+      "maximum_sigma": 7.933297405305824e-05,
+      "median_multipole_gate": 0.01389178364600745,
+      "median_trace_length_kpc": 1.7219466427214591
+    },
+    {
+      "domain": "registered_galaxy_baryons_only",
+      "scenario": "nominal",
+      "systems": 13,
+      "median_sigma": 3.7045320966606855e-06,
+      "minimum_sigma": 5.866257683623547e-07,
+      "maximum_sigma": 9.96971372759183e-05,
+      "median_multipole_gate": 0.01389178364600745,
+      "median_trace_length_kpc": 1.5893453253392797
+    }
+  ],
+  "spent_RXJ2129_lensing_outcomes_opened": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0668 tests coefficient transfer and does not solve the nonlinear tensor field or compare a target outcome.",
+    "RMS-radius sech-squared deprojection is deterministic but not a substitute for a native three-dimensional baryonic likelihood.",
+    "A pass authorizes one spent-cluster map build, not an untouched holdout opening.",
+    "No spent RX J2129 image and no P0633/P0640 target may be used in P0668 development or selection."
+  ]
+}
