@@ -1,0 +1,94 @@
+{
+  "report_version": "P0695-RADIAL-PATH-POTENTIAL-MATH-AUDIT-RESULTS-1.0.0",
+  "status": "fail",
+  "all_math_gates_pass": false,
+  "candidate_advanced_to_spent_joint_screen": false,
+  "protocol_sha256": "bec2e4ad3d4280b2c68efd22feeb605da7accb31e6dcc60e5f0c7f38d080a1e4",
+  "source_sha256": "3078212684f1eaee93587261ce7b950ba849c6ed495d291151c572fd3e087d94",
+  "operator_source_sha256": "9df81784a71b9407534f41279ed5b8a6391c8eb5c0ab2835879409943c2b5f96",
+  "routing_source_sha256": "0f61400a79b1d74443ce690dde04a7941dacae45d6f2358f1e0fdeb44b5981ee",
+  "field_sha256": "84c5b8d4c9bf4b71f6cac4db65f3a1ff7fc370ca060fa24a97236fba23ace981",
+  "parent_sha256": "aede3d976130632079e817f1a8ddb0622593ac90b468a45f125de27f9e176685",
+  "integrity_gates": {
+    "P0694_status": true,
+    "P0694_endpoint_pair_retired": true,
+    "no_observational_outcome_read": true,
+    "no_new_constants": true,
+    "no_fitted_physics": true,
+    "sealed_targets_untouched": true
+  },
+  "sphere": {
+    "radial_acceleration_relative_RMS": 0.011645653367341096,
+    "radial_acceleration_median_absolute_relative_error": 0.008414887118751426,
+    "tangential_to_radial_RMS": 0.0914840340254843,
+    "maximum_radial_angular_scatter_fraction": 0.0579355399879015,
+    "normalized_acceleration_curl_RMS": 7.212552830670953e-17,
+    "quadrature_24_to_48_acceleration_relative_RMS": 0.004405792860963573
+  },
+  "rotation_covariance": {
+    "potential_relative_RMS": 1.03311149305731e-15,
+    "acceleration_relative_RMS": 6.112242589116043e-15
+  },
+  "hybrid": {
+    "projected_routing_fraction": 0.4858066113242192,
+    "projected_covariance": [
+      [
+        3.1989192007267,
+        3.3306690738754695e-18
+      ],
+      [
+        2.220446049250313e-18,
+        1.6448631039216821
+      ]
+    ],
+    "projected_eigenvalues": [
+      1.6448631039216821,
+      3.1989192007267
+    ],
+    "potential_identity_relative_RMS": 0.0,
+    "routing_correction_boundary_relative_mismatch": 0.0,
+    "path_normalized_acceleration_curl_RMS": 6.173547555589218e-17,
+    "rotated_path_normalized_acceleration_curl_RMS": 5.594792520972061e-17,
+    "joint_normalized_acceleration_curl_RMS": 1.0613626046593516e-16
+  },
+  "maximum_normalized_acceleration_curl_RMS": 1.0613626046593516e-16,
+  "all_finite": true,
+  "gate_results": {
+    "P0694_status": true,
+    "P0694_endpoint_pair_retired": true,
+    "no_observational_outcome_read": true,
+    "no_new_constants": true,
+    "no_fitted_physics": true,
+    "sealed_targets_untouched": true,
+    "finite": true,
+    "sphere_radial_RMS": true,
+    "sphere_radial_median": true,
+    "sphere_tangential": false,
+    "sphere_angular_scatter": false,
+    "curl": true,
+    "quadrature_convergence": true,
+    "rotation_potential": true,
+    "rotation_acceleration": true,
+    "hybrid_identity": true,
+    "correction_boundary": true,
+    "fraction_lower": true,
+    "fraction_upper": true,
+    "accounting_no_constants": true,
+    "accounting_no_fitted_physics": true,
+    "no_observational_score": true,
+    "sealed_outcomes_untouched": true
+  },
+  "failed_gates": [
+    "sphere_tangential",
+    "sphere_angular_scatter"
+  ],
+  "observational_scores_computed": false,
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "P0695 is a numerical and mathematical audit, not an observational test.",
+    "The baryonic centroid and straight Euclidean rays are nonlocal and not yet derived from a covariant action or causal evolution equation.",
+    "A scalar potential gives a curl-free weak-field acceleration but does not by itself define a relativistic photon metric.",
+    "P0633 and P0640 remain sealed."
+  ]
+}

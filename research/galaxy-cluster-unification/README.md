@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0694-ddo154-routing-continuum`](latest-findings/2026-08-02-p0694-ddo154-routing-continuum/README.md).
-It closes the real-galaxy endpoint loophole and retires the shared linear
-source pair as a unifier. The prior P0693, P0692, P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0695-radial-path-math-audit`](latest-findings/2026-08-02-p0695-radial-path-math-audit/README.md).
+It tests the first path-integrated replacement endpoint without reading any
+observational score. The prior P0694, P0693, P0692, P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0694-ddo154-routing-continuum`](latest-findings/2026-08-02-p0694-ddo154-routing-continuum/README.md),
 [`latest-findings/2026-08-02-p0693-projected-spectral-joint-screen`](latest-findings/2026-08-02-p0693-projected-spectral-joint-screen/README.md),
 [`latest-findings/2026-08-02-p0692-routing-continuum`](latest-findings/2026-08-02-p0692-routing-continuum/README.md),
 [`latest-findings/2026-08-02-p0691-multipole-gated-routing`](latest-findings/2026-08-02-p0691-multipole-gated-routing/README.md),
@@ -184,6 +185,17 @@ curl-free potential by integrating the algebraic force along baryon-centered
 rays, then adds the successful cluster relocation as a zero-boundary potential
 difference. See
 [`docs/P0694_SPENT_DDO154_ROUTING_CONTINUUM_RESULTS.md`](docs/P0694_SPENT_DDO154_ROUTING_CONTINUUM_RESULTS.md).
+
+P0695 implements a scalar potential obtained by integrating the algebraic
+simple-MOND force along rays from the baryonic centroid, then adds the cluster
+routing correction as a zero-boundary potential difference. The no-observation
+audit passes its radial limit (`1.17%` RMS), 24/48 quadrature convergence,
+90-degree rotation covariance, curl, hybrid identity, and boundary gates. It
+does not advance because first-order interpolation produces `9.15%`
+tangential/radial power and `5.79%` maximum spherical angular scatter. A new
+audit may change only interpolation to cubic; no physical term or threshold is
+retuned. See
+[`docs/P0695_RADIAL_PATH_POTENTIAL_MATH_AUDIT_RESULTS.md`](docs/P0695_RADIAL_PATH_POTENTIAL_MATH_AUDIT_RESULTS.md).
 
 ## Untouched external validation (P0633)
 
