@@ -4,6 +4,7 @@
   "frozen_utc": "2026-08-02T09:00:00Z",
   "purpose": "Test whether replacing P0685's centrally singular local path ratio with one scale-free baryonic system coordinate preserves the spent galaxy/cluster radial response while enforcing a centrally concentrated channel exponent suitable for a later 3D topology retry.",
   "failure_parent": "results/p0686_locked_path_qumond_raw_topology/report.json",
+  "radial_comparator_report": "results/p0684_path_diluted_potential_channel_qumond/report.json",
   "failure_anatomy": "P0685 local eta suppresses the inner exponent: median p rises from 1.28 inside 15 kpc to 2.71 at 150-225 kpc; P0686 loses image roots and multiplicity while both shear nuisances hit their bounds",
   "equation": {
     "field_form": "laplacian(Phi)=div[nu_0(|grad Phi_N|/a0)^p grad Phi_N]",
