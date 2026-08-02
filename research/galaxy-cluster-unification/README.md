@@ -15,11 +15,38 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
-The latest complete review bundle is
+The latest review entry is
+[`latest-findings/2026-08-02-p0677-absolute-field-audit`](latest-findings/2026-08-02-p0677-absolute-field-audit/README.md).
+It reconciles the P0620 empirical route, P0633-P0641 frozen external data,
+P0659-P0671 absolute Poisson/AQUAL/QUMOND and 3D tensor work, and the decisive
+P0672-P0677 raw-topology and confinement failures. The preceding complete
+P0612-P0621 archival bundle remains in
 [`latest-findings/2026-08-01-p0620-gravity-routing`](latest-findings/2026-08-01-p0620-gravity-routing/README.md).
-It packages the P0612-P0621 findings, protocols, analysis code, implementation
-modules, tests, derived tables, reports, and figures; the parent repository also
-contains the scientific source data through Git LFS.
+
+The public simulator/API delivery plan is maintained in
+[`docs/PUBLIC_SIMULATOR_API_PLAN.md`](docs/PUBLIC_SIMULATOR_API_PLAN.md). It
+defines real and seeded synthetic galaxy/cluster calls, safe formula
+submission, asynchronous field-solver jobs, frozen comparators, parameter
+accounting, Vercel hosting for the web/gateway layer, and isolated Cloud Run or
+Modal workers for scientific computation.
+
+## Absolute-field update through P0677
+
+The newest first-principles-style branch starts from divergence-form AQUAL,
+uses real registered two-dimensional baryon maps lifted into physical 3D, and
+integrates zero-slip photon deflections from the solved potential. Its compound
+path activation cleanly separates galaxies from clusters, but the absolute
+RX J2129 raw-lensing verdict is negative: the field retains one image root per
+family and no critical curves. Reorienting the tensor to suppress transverse
+leakage raises the field by 15%; the unique two-transverse-dimension survival
+law raises it by 30%. Both miss their frozen advancement gates, and arbitrary
+fitted powers are prohibited.
+
+The supported conclusion is that angular routing is not the current
+bottleneck. The next development target is a baryon-predictable **radial
+monopole/effective-extent law**, informed only by spent inverse maps, before any
+new sealed galaxy or cluster outcome is opened. See the latest review entry
+above for exact metrics and stop/go thresholds.
 
 ## Untouched external validation (P0633)
 

@@ -147,17 +147,19 @@ that is passed to Python.
 | Execution | deterministic local CLI runs | queue, worker image, cancellation, quotas, caching, and event stream |
 | Public UI/API | route plan only | FastAPI/OpenAPI service, SDK, Vercel app, auth, and staging deployment |
 
-P0652 through P0658 are useful API fixtures. They include successful numerical
-invariants, failed predictive gates, root-topology failures, and a 400-attempt
-solver audit. The hosted conformance suite should reproduce these negative
-results exactly; retaining failed runs is a product requirement, not clutter.
+P0652 through P0677 are useful API fixtures. They include successful numerical
+invariants, real 2D-to-3D baryonic maps, Poisson/AQUAL/QUMOND solves, coefficient
+passes, failed predictive gates, exact root-topology failures, tensor-orientation
+comparisons, and a 400-attempt solver audit. The hosted conformance suite should
+reproduce these negative results exactly; retaining failed runs is a product
+requirement, not clutter.
 
 ## Delivery stages
 
 1. Stabilize serializable `GalaxyMap`, `ClusterMap`, `Formula`, `RunSpec`, and
    `RunResult` schemas in the Python package. Include observed/synthetic,
    open/sealed, license, hash, units, coordinate frame, and uncertainty fields.
-2. Put every current object and P0630-P0658 fixture into a versioned catalog.
+2. Put every current object and P0630-P0677 fixture into a versioned catalog.
    A catalog validation command must fail on missing license, hash, units, or
    provenance.
 3. Wrap the existing deterministic simulator in a local FastAPI service and
