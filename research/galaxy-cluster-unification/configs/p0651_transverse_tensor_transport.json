@@ -1,0 +1,98 @@
+{
+  "protocol_version": "P0651-TRANSVERSE-TENSOR-TRANSPORT-1.0.0",
+  "status": "frozen_before_any_P0651_score",
+  "frozen_utc": "2026-08-02T05:30:00Z",
+  "purpose": "Preserve quadratic angular localization while deriving a bounded, amplitude-free response magnitude from the transverse component-vector tensor.",
+  "fixed_field": {
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "survival": "1-exp(-ell/10 kpc)",
+    "screen": "a0/(a0+gbar)",
+    "primary_mode": "transverse_tensor_mix",
+    "modes": [
+      {
+        "id": "transverse_tensor_mix",
+        "role": "sole_frozen_candidate",
+        "definition": "[2 sqrt(gs gg)/(gs+gg)] sin(theta)^2"
+      }
+    ],
+    "closure": "gas_minus_star_flux",
+    "field_amplitude": 1.0,
+    "field_amplitude_fitted": false,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "common_physical_smoothing_kpc": 25.0,
+    "unbounded_amplitude_parameter": false,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "small_angle_derivation": {
+    "legacy_cancellation": "approximately 0.5 w(1-w) theta^2",
+    "transverse_tensor": "approximately 2 sqrt[w(1-w)] theta^2",
+    "ratio": "4/sqrt[w(1-w)]",
+    "ratio_at_10_90_mix": 13.333333333333334
+  },
+  "map_inputs": {
+    "galaxies": "results/p0639_registered_baryonic_maps/maps",
+    "clusters": "results/p0641_registered_cluster_baryon_maps/maps",
+    "cluster_downsample_cells": 257,
+    "galaxy_stellar_scale_sensitivity": [0.5, 1.0, 2.0],
+    "cluster_sensitivity_maps": {
+      "low": ["stellar_surface_density_low_msun_kpc2", "gas_surface_density_low_msun_kpc2"],
+      "nominal": ["stellar_surface_density_msun_kpc2", "gas_surface_density_msun_kpc2"],
+      "high": ["stellar_surface_density_high_msun_kpc2", "gas_surface_density_high_msun_kpc2"]
+    },
+    "sealed_target_outcomes_opened": false
+  },
+  "cross_validation": {
+    "fold_definition": "reuse exact P0645 five source-family-stratified folds",
+    "geometry_refit_starts_per_fold": 3,
+    "full_training_refit_starts": 8,
+    "selection": "none; maps gate the sole amplitude-one spent-lens score",
+    "random_seed": 2129651,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "predeclared_primary_gates": {
+    "radial_cocentered_activation_max": 1e-8,
+    "large_offset_over_small_offset_activation_ratio_min": 4.0,
+    "registered_cluster_to_galaxy_median_activation_ratio_min": 4.0,
+    "registered_galaxy_median_activation_max": 0.10,
+    "registered_cluster_median_activation_min": 0.05,
+    "cluster_ratio_above_one_in_all_mass_sensitivities": true,
+    "activation_min": 0.0,
+    "activation_max": 1.0,
+    "solar_one_component_activation_max": 1e-15,
+    "rotation_covariance_relative_error_max": 0.03,
+    "translation_covariance_relative_error_max": 0.03,
+    "sealed_target_outcomes_opened": false
+  },
+  "predeclared_spent_lens_gates": {
+    "all_CV_roots": 15,
+    "CV_improvement_fraction_vs_lambda0_min": 0.03,
+    "CV_improvement_fraction_vs_best_matched_multipole_min": 0.01,
+    "full_training_roots": 15,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599_max": 0.10,
+    "field_normalized_curl_RMS_max": 1e-10,
+    "field_source_integral_fraction_max": 1e-4,
+    "field_amplitude_exactly_one": true,
+    "sealed_target_outcomes_opened": false
+  },
+  "inputs": {
+    "P0644_protocol": "configs/p0644_spent_rxj2129_accumulated_tensor.json",
+    "P0645_protocol": "configs/p0645_fair_geometry_cv_accumulated_tensor.json",
+    "P0645_report": "results/p0645_fair_geometry_cv_accumulated_tensor/report.json",
+    "P0648_report": "results/p0648_matched_multipole_control/report.json",
+    "P0650_report": "results/p0650_amplitude_free_spent_lensing/report.json"
+  },
+  "outputs": {
+    "directory": "results/p0651_transverse_tensor_transport"
+  },
+  "claim_boundary": [
+    "The map stage opens no target outcome; the lens stage uses only spent RX J2129 images and runs only if every map gate passes.",
+    "There is one formula-defined amplitude-one field and no post-score candidate replacement.",
+    "The transverse invariant measures squared angular area and is zero for aligned, anti-aligned, or one-component fields.",
+    "A pass requires later resolution/component robustness before any P0633/P0640 outcome is opened.",
+    "This remains a projected closure rather than a covariant metric action."
+  ]
+}

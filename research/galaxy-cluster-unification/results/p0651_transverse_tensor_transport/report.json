@@ -1,0 +1,143 @@
+{
+  "report_version": "P0651-TRANSVERSE-TENSOR-TRANSPORT-RESULTS-1.0.0",
+  "status": "fail_spent_lens_stage",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_robustness": false,
+  "protocol_sha256": "1ad8f4dc506a2244d98179626a7bb3a3abbea7e395352f812166955b0d3c8fc5",
+  "source_sha256": "6b58e52f2b302d258da67afd960187a98259ce5c2918f36dbaa80987fa9055a4",
+  "coverage": {
+    "registered_galaxies": 13,
+    "registered_clusters": 4,
+    "candidate_fields": 1,
+    "amplitude_rows": 1,
+    "CV_folds": 5,
+    "fitted_field_amplitude_parameters": 0,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "map_gate_results": {
+    "radial_null": true,
+    "physical_path_accumulation": true,
+    "registered_domain_separation": true,
+    "galaxy_channel_bounded": true,
+    "cluster_channel_present": true,
+    "mass_sensitivity_sign_stable": true,
+    "activation_bounds": true,
+    "solar_one_component_null": true,
+    "rotation_covariance": true,
+    "translation_covariance": true,
+    "sealed_targets_untouched": true
+  },
+  "map_metrics": {
+    "radial_activation": 2.493559526383869e-15,
+    "small_offset_activation": 0.005801122025171145,
+    "large_offset_activation": 0.19217513285349705,
+    "large_over_small_ratio": 33.127235045159644,
+    "registered_galaxy_median_activation": 0.008475084056290057,
+    "registered_cluster_median_activation": 0.07324173736465371,
+    "registered_cluster_to_galaxy_ratio": 8.642007191692098,
+    "mass_sensitivity_cluster_to_galaxy_ratios": {
+      "low": 9.357490620129179,
+      "nominal": 8.642007191692098,
+      "high": 7.396956059349706
+    },
+    "activation_global_minimum": 1.1345257011794817e-16,
+    "activation_global_maximum": 0.7528666403991127,
+    "solar_one_component_activation": 0.0,
+    "rotation_covariance_relative_error": 2.220446049250313e-16,
+    "translation_covariance_relative_error": 2.4243607121832156e-11
+  },
+  "spent_lens_stage_run": true,
+  "lens_gate_results": {
+    "CV_roots": true,
+    "CV_improvement": false,
+    "beats_matched_multipole": false,
+    "full_training_roots": true,
+    "spent_heldout_roots": true,
+    "spent_heldout_not_worse": true,
+    "field_curl": true,
+    "field_source_integral": true,
+    "amplitude_is_one": true,
+    "sealed_targets_untouched": true
+  },
+  "field_audit": {
+    "operator": "finite_path_accumulated_component_tensor",
+    "closure": "gas_minus_star_flux",
+    "mismatch_mode": "transverse_tensor_mix",
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "proxy_total_mass_msun": 100000000000000.0,
+    "common_smoothing_kpc": 25.0,
+    "proxy_mass_changes_deflection_normalization": false,
+    "activation_weighted_mean": 0.03081920513858914,
+    "activation_maximum": 0.3372757709700177,
+    "cancellation_mean": 0.003594706024914429,
+    "mismatch_mean": 0.04524326517865508,
+    "survival_mean": 0.993761235780194,
+    "trace_length_median_kpc": 92.99394454051999,
+    "source_integral_fraction": 0.0,
+    "normalized_curl_RMS": 1.8657591990746957e-17,
+    "unit_deflection_RMS_arcsec": 0.8040951637075379,
+    "unit_deflection_maximum_arcsec": 4.392954785411065,
+    "maximum_edge_correction_arcsec": 1.1732576104067827,
+    "carrier_deflection_median_arcsec": 21.25739757728231
+  },
+  "map_audits": {
+    "hst": {
+      "system_label": "RXJ2129",
+      "map_kind": "hst_f160w",
+      "input_count": 2,
+      "native_pixel_scale_arcsec": 0.0650000000000009,
+      "background": -0.0033761123195290565,
+      "masked_fraction": 0.01795127705200111,
+      "positive_cells": 12435,
+      "map_sum_before_normalization": 405.6119888731333
+    },
+    "xray": {
+      "system_label": "RXJ2129",
+      "map_kind": "chandra_soft_rate",
+      "input_count": 2,
+      "total_exposure_ks": 39.6040961730402,
+      "soft_events_on_grid": 15401,
+      "point_source_seed_cells": 37,
+      "point_source_masked_fraction": 0.009767092411720512,
+      "unmasked_map_sum": 0.792017083914403,
+      "masked_map_sum": 0.7662815305616146
+    }
+  },
+  "CV_summary": {
+    "stage": "exact_amplitude_one",
+    "closure": "bounded_transverse_tensor_flux",
+    "lambda": 1.0,
+    "pooled_CV_RMS_arcsec": 3.1884146587540028,
+    "CV_roots": 15,
+    "CV_images": 15,
+    "all_CV_roots": true
+  },
+  "comparison": {
+    "lambda0_CV_RMS_arcsec": 2.760255155353674,
+    "candidate_CV_RMS_arcsec": 3.1884146587540028,
+    "CV_improvement_fraction_vs_lambda0": -0.15511591476240483,
+    "best_matched_multipole_CV_RMS_arcsec": 2.599360329775749,
+    "CV_improvement_fraction_vs_best_matched_multipole": -0.22661511073729157,
+    "P0650_linear_chord_CV_RMS_arcsec": 2.83749248228428,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "full_refit": {
+    "training_RMS_arcsec": 0.44537508715580326,
+    "training_roots": 15,
+    "spent_heldout_RMS_arcsec": 1.956634483082804,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599": 0.08077811897331544
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "The map stage opens no target outcome; the lens stage uses only spent RX J2129 images and runs only if every map gate passes.",
+    "There is one formula-defined amplitude-one field and no post-score candidate replacement.",
+    "The transverse invariant measures squared angular area and is zero for aligned, anti-aligned, or one-component fields.",
+    "A pass requires later resolution/component robustness before any P0633/P0640 outcome is opened.",
+    "This remains a projected closure rather than a covariant metric action."
+  ]
+}

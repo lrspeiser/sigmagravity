@@ -46,6 +46,25 @@ def test_cross_mix_matches_equal_weight_right_angle_limit():
     assert np.allclose(mismatch, 0.5)
 
 
+def test_transverse_tensor_is_quadratic_bounded_and_component_gated():
+    angle = 1e-3
+    mismatch = component_angle_mismatch(
+        field(1.0, 0.0),
+        field(np.cos(angle), np.sin(angle)),
+        mode="transverse_tensor_mix",
+    )
+    assert np.allclose(mismatch, angle**2, rtol=1e-6)
+    right_angle = component_angle_mismatch(
+        field(1.0, 0.0), field(0.0, 1.0), mode="transverse_tensor_mix"
+    )
+    assert np.allclose(right_angle, 1.0)
+    assert np.max(
+        component_angle_mismatch(
+            field(1.0, 0.0), field(0.0, 0.0), mode="transverse_tensor_mix"
+        )
+    ) == 0.0
+
+
 def test_unknown_mode_is_rejected():
     with pytest.raises(ValueError):
         component_angle_mismatch(field(1.0, 0.0), field(0.0, 1.0), mode="unknown")

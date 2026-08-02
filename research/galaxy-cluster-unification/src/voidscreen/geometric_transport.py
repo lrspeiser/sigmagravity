@@ -178,6 +178,14 @@ def component_angle_mismatch(
             / np.square(denominator[active])
         )
         result[active] = mixing[active] * np.sqrt(np.maximum(1.0 - dot[active] ** 2, 0.0))
+    elif mode_id == "transverse_tensor_mix":
+        mixing = np.zeros_like(denominator)
+        mixing[active] = (
+            2.0
+            * np.sqrt(first_magnitude[active] * second_magnitude[active])
+            / denominator[active]
+        )
+        result[active] = mixing[active] * np.maximum(1.0 - dot[active] ** 2, 0.0)
     else:
         raise ValueError(f"unknown component angle mismatch mode: {mode_id}")
     return np.clip(result, 0.0, 1.0)

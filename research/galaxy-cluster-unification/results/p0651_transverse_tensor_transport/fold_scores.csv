@@ -1,0 +1,6 @@
+stage,closure,lambda,fold,fit_images,validation_images,fit_RMS_arcsec,fit_roots,validation_RMS_arcsec,validation_roots,optimizer_cost
+exact_amplitude_one,bounded_transverse_tensor_flux,1.0,0,12,3,0.5137640208027305,12,5.59614084874001,3,21.578765500046423
+exact_amplitude_one,bounded_transverse_tensor_flux,1.0,1,11,4,0.40816837689768387,11,3.1796554043563003,4,23.342993959761486
+exact_amplitude_one,bounded_transverse_tensor_flux,1.0,2,12,3,0.40329777937469086,12,1.255514471083194,3,25.745126048909558
+exact_amplitude_one,bounded_transverse_tensor_flux,1.0,3,13,2,0.33858403726277647,13,1.1202761456394736,2,19.98051209699978
+exact_amplitude_one,bounded_transverse_tensor_flux,1.0,4,12,3,0.24778369201474731,12,1.9025966762529938,3,11.09164923279387
