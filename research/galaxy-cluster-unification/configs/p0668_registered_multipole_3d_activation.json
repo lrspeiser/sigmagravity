@@ -1,0 +1,71 @@
+{
+  "protocol_version": "P0668-REGISTERED-MULTIPOLE-3D-ACTIVATION-1.0.0",
+  "status": "frozen_before_any_P0668_map_score",
+  "frozen_utc": "2026-08-02T02:13:16Z",
+  "purpose": "Test whether the scale-free multipole-gated 3D tensor activation transfers to every registered galaxy and cluster baryonic map under mass uncertainties before any lensing outcome is opened.",
+  "parent_result": "results/p0667_multipole_gated_3d_activation/report.json",
+  "candidate": {
+    "sigma": "P0667 multipole gate times P0666 physical-length local 3D activation",
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "coherence_power": 2.0,
+    "surface_to_volume": "sech-squared with component scale height equal to its projected RMS radius",
+    "map_resolution": "each component is conservatively anti-aliased to the common 33-cell cubic grid before lifting",
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "map_inputs": {
+    "galaxies": "results/p0639_registered_baryonic_maps/maps",
+    "clusters": "results/p0641_registered_cluster_baryon_maps/maps",
+    "expected_registered_galaxies": 13,
+    "expected_registered_clusters": 4,
+    "common_grid_cells": 33,
+    "galaxy_stellar_scale_sensitivity": {
+      "low": 0.5,
+      "nominal": 1.0,
+      "high": 2.0
+    },
+    "cluster_sensitivity_maps": {
+      "low": [
+        "stellar_surface_density_low_msun_kpc2",
+        "gas_surface_density_low_msun_kpc2"
+      ],
+      "nominal": [
+        "stellar_surface_density_msun_kpc2",
+        "gas_surface_density_msun_kpc2"
+      ],
+      "high": [
+        "stellar_surface_density_high_msun_kpc2",
+        "gas_surface_density_high_msun_kpc2"
+      ]
+    }
+  },
+  "predeclared_progression_gates": {
+    "P0667_all_progression_gates_pass": true,
+    "registered_galaxy_count": 13,
+    "registered_cluster_count": 4,
+    "surface_to_volume_maximum_component_mass_relative_error_max": 1e-12,
+    "all_scale_heights_finite_positive": true,
+    "sigma_finite_and_in_closed_unit_interval": true,
+    "minimum_constitutive_eigenvalue_strictly_positive": true,
+    "registered_galaxy_nominal_median_sigma_max": 0.001,
+    "registered_cluster_nominal_median_sigma_min": 0.001,
+    "registered_cluster_to_galaxy_nominal_median_sigma_ratio_min": 10.0,
+    "cluster_to_galaxy_sigma_ratio_min_in_all_mass_sensitivities": 5.0,
+    "registered_cluster_to_galaxy_nominal_median_multipole_gate_ratio_min": 1.0,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0,
+    "spent_lensing_outcomes_opened": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "The sole P0667 formula advances to a spent RX J2129 3D map build only if every registered coverage, mass, scale-height, ellipticity, domain-separation, sensitivity, parameter, and blindness gate passes.",
+  "outputs": {
+    "directory": "results/p0668_registered_multipole_3d_activation"
+  },
+  "claim_boundary": [
+    "P0668 tests coefficient transfer and does not solve the nonlinear tensor field or compare a target outcome.",
+    "RMS-radius sech-squared deprojection is deterministic but not a substitute for a native three-dimensional baryonic likelihood.",
+    "A pass authorizes one spent-cluster map build, not an untouched holdout opening.",
+    "No spent RX J2129 image and no P0633/P0640 target may be used in P0668 development or selection."
+  ]
+}
