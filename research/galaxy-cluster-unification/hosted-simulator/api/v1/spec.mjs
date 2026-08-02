@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.6.0-preview",
-    description: "Stateless radial tests plus a dimension-checked, formula-independent 2D/3D contract with circular-speed and resolved line-of-sight velocity-field targets. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
+    version: "0.7.0-preview",
+    description: "Stateless radial tests plus a dimension-checked, formula-independent 2D/3D contract, resolved massive-tracer targets, and separately cached observation evaluation. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
@@ -28,6 +28,15 @@ const specification = {
     "/api/v1/field-jobs/{id}/artifacts": { get: { summary: "Read the verified artifact index and scientific manifest" } },
     "/api/v1/field-jobs/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed, rehashed artifact" } },
     "/api/v1/field-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running local field job" } },
+    "/api/v1/observation-evaluation-jobs": {
+      get: { summary: "List local jobs that score immutable solved fields without re-solving gravity" },
+      post: { summary: "Queue observation projection and scoring against a completed field job" },
+    },
+    "/api/v1/observation-evaluation-jobs/{id}": { get: { summary: "Read observation-evaluation job state" } },
+    "/api/v1/observation-evaluation-jobs/{id}/events": { get: { summary: "Read ordered observation-evaluation lifecycle events" } },
+    "/api/v1/observation-evaluation-jobs/{id}/artifacts": { get: { summary: "Read verified scores, predictions, and source-field references" } },
+    "/api/v1/observation-evaluation-jobs/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed, rehashed observation artifact" } },
+    "/api/v1/observation-evaluation-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running observation-evaluation job" } },
     "/api/v1/galaxy-jobs": {
       get: { summary: "List local resolved-galaxy extraction/generation jobs" },
       post: { summary: "Queue formula-independent extraction, generation, or 2D/3D round-trip work" },

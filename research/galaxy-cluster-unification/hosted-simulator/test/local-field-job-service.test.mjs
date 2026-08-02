@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
 import { sha256 } from "../lib/canonical.mjs";
+import { validateFieldModel } from "../lib/field-model.mjs";
 import { LocalFieldJobService, LocalServiceError } from "../lib/local-field-job-service.mjs";
 
 function digest(value) {
@@ -88,6 +89,110 @@ async function successfulRunner({ jobDirectory }) {
   };
   await writeFile(resolve(root, "manifest.json"), `${JSON.stringify(manifest)}\n`);
   return { exitCode: 0, exitSignal: null, timedOut: false, stdout: "ok", stderr: "" };
+}
+
+function observationFieldModel() {
+  const value = model();
+  value.observables[0] = {
+    ...value.observables[0],
+    id: "acceleration",
+    target: "massive_tracers",
+  };
+  return value;
+}
+
+function observationFieldRequest() {
+  const value = request();
+  value.requestedObservables = ["acceleration"];
+  return value;
+}
+
+function circularTarget(radius = 1) {
+  return {
+    schemaVersion: "sigma-observation-target/1",
+    id: "decoupled-curve",
+    kind: "circular_speed_curve",
+    observable: "acceleration",
+    centerM: [0, 0],
+    planeAxes: [0, 1],
+    radiiM: [radius],
+    provenance: { kind: "P0732 service fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+}
+
+async function successfulSourceFieldRunner({ jobDirectory }) {
+  const root = resolve(jobDirectory, "artifacts");
+  await mkdir(root, { recursive: true });
+  const fieldModel = JSON.parse(await readFile(resolve(jobDirectory, "model.json"), "utf8"));
+  const validation = validateFieldModel(fieldModel);
+  const fieldJobSha256 = "4".repeat(64);
+  const fieldJob = {
+    schemaVersion: "sigma-field-job/1",
+    id: `fieldjob_${fieldJobSha256.slice(0, 24)}`,
+    jobSha256: fieldJobSha256,
+    modelSha256: validation.modelSha256,
+    geometry: { coordinateSystem: "cartesian_2d", dimensions: 2, spacing: [0.0625, 0.0625], origin: [-0.5, -0.5], lengthUnit: "m" },
+  };
+  const observable = Buffer.from("fixture-observable-archive");
+  const resultSha256 = "5".repeat(64);
+  const scientificResult = {
+    schemaVersion: "sigma-field-result/1",
+    state: "succeeded",
+    converged: true,
+    jobId: fieldJob.id,
+    jobSha256: fieldJobSha256,
+    resultSha256,
+    observables: [
+      { key: "acceleration__axis0", dtype: "<f8", shape: [17, 17], contentSha256: "6".repeat(64) },
+      { key: "acceleration__axis1", dtype: "<f8", shape: [17, 17], contentSha256: "7".repeat(64) },
+    ],
+  };
+  const contents = new Map([
+    ["model.json", Buffer.from(`${JSON.stringify(fieldModel)}\n`)],
+    ["job.json", Buffer.from(`${JSON.stringify(fieldJob)}\n`)],
+    ["scientific_result.json", Buffer.from(`${JSON.stringify(scientificResult)}\n`)],
+    ["observables.npz", observable],
+  ]);
+  await Promise.all([...contents].map(([name, content]) => writeFile(resolve(root, name), content)));
+  const artifactIndex = {
+    schemaVersion: "sigma-field-artifact-index/1",
+    jobId: fieldJob.id,
+    artifacts: [...contents].map(([path, content]) => ({ path, bytes: content.length, sha256: digest(content) })),
+  };
+  const indexContent = Buffer.from(`${JSON.stringify(artifactIndex)}\n`);
+  await writeFile(resolve(root, "artifact_index.json"), indexContent);
+  const manifestCore = {
+    schemaVersion: "sigma-field-run-manifest/1",
+    state: "succeeded",
+    jobId: fieldJob.id,
+    scientificResultSha256: resultSha256,
+    artifactIndexSha256: digest(indexContent),
+  };
+  const manifest = { ...manifestCore, manifestSha256: sha256(manifestCore) };
+  await writeFile(resolve(root, "manifest.json"), `${JSON.stringify(manifest)}\n`);
+  return { exitCode: 0, exitSignal: null, timedOut: false, stdout: "ok", stderr: "" };
+}
+
+async function prepareObservationSubmission(service) {
+  const fieldUpload = await readyUpload(service, Buffer.from("p0732-field-source"));
+  const source = await service.createFieldJob({
+    schemaVersion: "sigma-field-job-submit/1",
+    model: observationFieldModel(),
+    dataUploadId: fieldUpload.id,
+    request: observationFieldRequest(),
+  });
+  await service.waitForIdle();
+  const observationUpload = await readyUpload(service, Buffer.from("p0732-observation-data"));
+  return {
+    source,
+    submission: {
+      schemaVersion: "sigma-observation-evaluation-job-submit/1",
+      fieldJobId: source.id,
+      dataUploadId: observationUpload.id,
+      observationTargets: [circularTarget()],
+    },
+  };
 }
 
 async function fixture(t, options = {}) {
@@ -177,6 +282,102 @@ test("queued galaxy jobs use separate routes and zero gravity parameters", async
   assert.equal(artifacts.schemaVersion, "sigma-galaxy-job-artifact-response/1");
   assert.match(artifacts.items[0].url, /^\/api\/v1\/galaxy-jobs\//);
   await assert.rejects(() => service.getFieldJob(submission.id), /unknown field job/);
+});
+
+test("decoupled observation jobs reuse one immutable field and have independent identity", async (t) => {
+  const calls = { field: 0, observation: 0 };
+  const runner = async (argumentsValue) => {
+    if (argumentsValue.jobType === "observation_evaluation") {
+      calls.observation += 1;
+      return successfulRunner(argumentsValue);
+    }
+    calls.field += 1;
+    return successfulSourceFieldRunner(argumentsValue);
+  };
+  const service = await fixture(t, { runner });
+  const { source, submission } = await prepareObservationSubmission(service);
+  assert.equal((await service.getFieldJob(source.id)).state, "succeeded");
+  assert.equal(calls.field, 1);
+  const queued = await service.createObservationEvaluationJob(submission);
+  assert.equal(queued.jobType, "observation_evaluation");
+  assert.equal(queued.fieldJobId, source.id);
+  assert.equal(queued.evaluationAddedGravityParameters, 0);
+  assert.match(queued.links.self, /^\/api\/v1\/observation-evaluation-jobs\//);
+  await service.waitForIdle();
+  assert.equal(calls.field, 1);
+  assert.equal(calls.observation, 1);
+  const completed = await service.getObservationEvaluationJob(queued.id);
+  assert.equal(completed.state, "succeeded");
+  const duplicate = await service.createObservationEvaluationJob(submission);
+  assert.equal(duplicate.id, queued.id);
+  assert.equal(duplicate.duplicate, true);
+  assert.equal(calls.observation, 1);
+  const changed = await service.createObservationEvaluationJob({
+    ...submission,
+    observationTargets: [circularTarget(2)],
+  });
+  assert.notEqual(changed.id, queued.id);
+  await service.waitForIdle();
+  assert.equal(calls.field, 1);
+  assert.equal(calls.observation, 2);
+  const listed = await service.listObservationEvaluationJobs();
+  assert.equal(listed.items.length, 2);
+  const events = await service.getEvents(queued.id);
+  assert.equal(events.schemaVersion, "sigma-observation-evaluation-job-events/1");
+  const artifacts = await service.getArtifacts(queued.id);
+  assert.equal(artifacts.schemaVersion, "sigma-observation-evaluation-job-artifact-response/1");
+  assert.match(artifacts.items[0].url, /^\/api\/v1\/observation-evaluation-jobs\//);
+  await assert.rejects(() => service.getFieldJob(queued.id), /unknown field job/);
+});
+
+test("running observation evaluation can be cancelled without publishing artifacts", async (t) => {
+  const runner = (argumentsValue) => {
+    if (argumentsValue.jobType !== "observation_evaluation") return successfulSourceFieldRunner(argumentsValue);
+    return new Promise((resolvePromise) => {
+      argumentsValue.signal.addEventListener(
+        "abort",
+        () => resolvePromise({ exitCode: null, exitSignal: "SIGTERM", timedOut: false, stdout: "", stderr: "" }),
+        { once: true },
+      );
+    });
+  };
+  const service = await fixture(t, { runner });
+  const { submission } = await prepareObservationSubmission(service);
+  const queued = await service.createObservationEvaluationJob(submission);
+  for (let attempt = 0; attempt < 100 && (await service.getObservationEvaluationJob(queued.id)).state !== "running"; attempt++) {
+    await new Promise((resolvePromise) => setTimeout(resolvePromise, 5));
+  }
+  const cancelled = await service.cancelObservationEvaluationJob(queued.id);
+  assert.equal(cancelled.state, "cancelled");
+  await service.waitForIdle();
+  await assert.rejects(
+    () => service.getArtifacts(queued.id),
+    (error) => error instanceof LocalServiceError && error.code === "artifacts_not_ready",
+  );
+});
+
+test("completed observation evaluation recovers without reevaluating after restart", async (t) => {
+  const runner = (argumentsValue) => argumentsValue.jobType === "observation_evaluation"
+    ? successfulRunner(argumentsValue)
+    : successfulSourceFieldRunner(argumentsValue);
+  const service = await fixture(t, { runner });
+  const { submission } = await prepareObservationSubmission(service);
+  const queued = await service.createObservationEvaluationJob(submission);
+  await service.waitForIdle();
+  const recordPath = resolve(service.root, "jobs", queued.id, "record.json");
+  const record = JSON.parse(await readFile(recordPath, "utf8"));
+  record.state = "running";
+  await writeFile(recordPath, `${JSON.stringify(record, null, 2)}\n`);
+  const recovered = new LocalFieldJobService({
+    root: service.root,
+    projectRoot: service.projectRoot,
+    runner: async () => { throw new Error("completed observation job must not reevaluate"); },
+  });
+  await recovered.initialize();
+  t.after(async () => recovered.close());
+  const recoveredRecord = await recovered.getObservationEvaluationJob(queued.id);
+  assert.equal(recoveredRecord.state, "succeeded");
+  assert.equal(recoveredRecord.recoveredAfterRestart, true);
 });
 
 test("artifact mutation is rejected and completed manifests recover after restart", async (t) => {

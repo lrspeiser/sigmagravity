@@ -178,6 +178,10 @@ results/p0731_real_velocity_field_adapter_parity/*
 !results/p0731_real_velocity_field_adapter_parity/per_galaxy_model_scores.csv
 !results/p0731_real_velocity_field_adapter_parity/observation_bundle_manifest.csv
 !results/p0731_real_velocity_field_adapter_parity/score_and_parity_summary.png
+!results/p0732_decoupled_observation_evaluation/
+results/p0732_decoupled_observation_evaluation/*
+!results/p0732_decoupled_observation_evaluation/SUMMARY.md
+!results/p0732_decoupled_observation_evaluation/report.json
 data/raw/manga_dr17/*.fits
 data/raw/erass1_clusters/*.fits
 data/raw/manga_gema_dr17/*.fits

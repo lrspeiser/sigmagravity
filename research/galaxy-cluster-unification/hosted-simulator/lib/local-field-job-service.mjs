@@ -14,6 +14,7 @@ import { delimiter, dirname, resolve } from "node:path";
 import { sha256 } from "./canonical.mjs";
 import { prepareFieldJob, validateArrayBundle } from "./field-job-preflight.mjs";
 import { prepareGalaxyJob } from "./galaxy-job-preflight.mjs";
+import { prepareObservationEvaluationJob } from "./observation-evaluation-preflight.mjs";
 
 const SERVICE_VERSION = "sigma-local-field-job-service/1";
 const IDENTIFIER = /^(?:upload|job)_[0-9a-f]{24}$/;
@@ -104,7 +105,11 @@ function publicUpload(record) {
 }
 
 function publicJob(record) {
-  const collection = record.jobType === "galaxy" ? "galaxy-jobs" : "field-jobs";
+  const collection = record.jobType === "galaxy"
+    ? "galaxy-jobs"
+    : record.jobType === "observation_evaluation"
+      ? "observation-evaluation-jobs"
+      : "field-jobs";
   return {
     ...record,
     links: {
@@ -131,7 +136,7 @@ function parseWorkerInputFailure(stderr) {
   for (const line of String(stderr ?? "").trim().split("\n").reverse()) {
     try {
       const value = JSON.parse(line);
-      if (["sigma-field-job-cli-error/1", "sigma-galaxy-job-cli-error/1"].includes(value?.schemaVersion)) return value;
+      if (["sigma-field-job-cli-error/1", "sigma-galaxy-job-cli-error/1", "sigma-observation-evaluation-job-cli-error/1"].includes(value?.schemaVersion)) return value;
     } catch {
       // Continue past ordinary diagnostic lines.
     }
@@ -144,7 +149,11 @@ function defaultRunner({ projectRoot, pythonExecutable, requestPath, timeoutMs, 
     const script = resolve(
       projectRoot,
       "scripts",
-      jobType === "galaxy" ? "run_resolved_galaxy_job.py" : "run_generic_field_job.py",
+      jobType === "galaxy"
+        ? "run_resolved_galaxy_job.py"
+        : jobType === "observation_evaluation"
+          ? "run_observation_evaluation_job.py"
+          : "run_generic_field_job.py",
     );
     const source = resolve(projectRoot, "src");
     const pythonPath = process.env.PYTHONPATH
@@ -229,6 +238,7 @@ export class LocalFieldJobService {
     this.jobLocks = new Map();
     this.workerSourceSha256 = null;
     this.galaxyWorkerSourceSha256 = null;
+    this.observationWorkerSourceSha256 = null;
     this.shuttingDown = false;
   }
 
@@ -243,6 +253,7 @@ export class LocalFieldJobService {
       concurrency: 1,
       workerSourceSha256: this.workerSourceSha256,
       galaxyWorkerSourceSha256: this.galaxyWorkerSourceSha256,
+      observationWorkerSourceSha256: this.observationWorkerSourceSha256,
     };
   }
 
@@ -255,6 +266,10 @@ export class LocalFieldJobService {
     this.galaxyWorkerSourceSha256 = await workerSourceSha256(
       this.projectRoot,
       ["resolved_galaxy_job.py", "resolved_galaxy_generator.py"],
+    );
+    this.observationWorkerSourceSha256 = await workerSourceSha256(
+      this.projectRoot,
+      ["observation_evaluation_job.py", "field_job.py", "observation_adapters.py"],
     );
     await mkdir(this.#uploadsRoot(), { recursive: true });
     await mkdir(this.#jobsRoot(), { recursive: true });
@@ -485,6 +500,130 @@ export class LocalFieldJobService {
     return { ...publicJob(record), duplicate: false };
   }
 
+  async createObservationEvaluationJob(payload) {
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+      throw new LocalServiceError(422, "invalid_job", "observation evaluation request must be an object");
+    }
+    if (payload.schemaVersion !== "sigma-observation-evaluation-job-submit/1") {
+      throw new LocalServiceError(422, "invalid_job", "observation evaluation request must use sigma-observation-evaluation-job-submit/1");
+    }
+    const sourceId = assertIdentifier(payload.fieldJobId, "job");
+    const sourceRecord = await this.#readJob(sourceId);
+    if (sourceRecord.jobType !== "field") {
+      throw new LocalServiceError(422, "invalid_source_field", "fieldJobId must identify a field job");
+    }
+    if (sourceRecord.state !== "succeeded") {
+      throw new LocalServiceError(409, "source_field_not_ready", `source field job is ${sourceRecord.state}`);
+    }
+    const upload = await this.#readUpload(assertIdentifier(payload.dataUploadId, "upload"));
+    if (upload.state !== "ready") {
+      throw new LocalServiceError(409, "upload_not_ready", "observation upload content is not ready");
+    }
+    const sourceArtifacts = await this.getArtifacts(sourceId);
+    const [modelArtifact, jobArtifact, resultArtifact, observablesArtifact] = await Promise.all([
+      this.getArtifact(sourceId, "model.json"),
+      this.getArtifact(sourceId, "job.json"),
+      this.getArtifact(sourceId, "scientific_result.json"),
+      this.getArtifact(sourceId, "observables.npz"),
+    ]);
+    let preflight;
+    try {
+      preflight = prepareObservationEvaluationJob({
+        gatewayFieldJob: sourceRecord,
+        fieldManifest: sourceArtifacts.manifest,
+        fieldJob: JSON.parse(jobArtifact.content.toString("utf8")),
+        model: JSON.parse(modelArtifact.content.toString("utf8")),
+        scientificResult: JSON.parse(resultArtifact.content.toString("utf8")),
+        observationBundle: upload.inputBundle,
+        observationTargets: payload.observationTargets,
+        fieldArtifactHashes: {
+          model: modelArtifact.record.sha256,
+          job: jobArtifact.record.sha256,
+          scientificResult: resultArtifact.record.sha256,
+          observables: observablesArtifact.record.sha256,
+        },
+      });
+    } catch (cause) {
+      const error = new LocalServiceError(422, "invalid_observation_evaluation", cause.message);
+      error.cause = cause;
+      throw error;
+    }
+    if (preflight.resourceEstimate.estimatedMemoryBytes > this.maxEstimatedMemoryBytes) {
+      throw new LocalServiceError(413, "resource_quota_exceeded", "estimated observation worker memory exceeds the local quota");
+    }
+    const identity = {
+      schemaVersion: "sigma-observation-evaluation-job-submission-identity/1",
+      serviceVersion: SERVICE_VERSION,
+      preflightSha256: preflight.preflightSha256,
+      observationArchiveSha256: upload.archive.sha256,
+      workerSourceSha256: this.observationWorkerSourceSha256,
+    };
+    const id = `job_${sha256(identity).slice(0, 24)}`;
+    const recordPath = this.#jobRecordPath(id);
+    if (await exists(recordPath)) return { ...publicJob(await readJson(recordPath)), duplicate: true };
+    const jobCount = (await readdir(this.#jobsRoot(), { withFileTypes: true })).filter((entry) => entry.isDirectory()).length;
+    if (jobCount >= this.maxStoredJobs) {
+      throw new LocalServiceError(429, "job_quota_exceeded", "local stored-job quota has been reached");
+    }
+    const jobDirectory = this.#jobDirectory(id);
+    const fieldDirectory = resolve(jobDirectory, "field_artifact");
+    const bundleDirectory = resolve(jobDirectory, "observation_bundle");
+    await mkdir(fieldDirectory, { recursive: true });
+    await mkdir(bundleDirectory, { recursive: true });
+    await Promise.all([
+      writeFile(resolve(fieldDirectory, "model.json"), modelArtifact.content),
+      writeFile(resolve(fieldDirectory, "job.json"), jobArtifact.content),
+      writeFile(resolve(fieldDirectory, "scientific_result.json"), resultArtifact.content),
+      writeFile(resolve(fieldDirectory, "observables.npz"), observablesArtifact.content),
+      atomicWrite(resolve(bundleDirectory, "bundle.json"), upload.inputBundle),
+    ]);
+    try {
+      await link(this.#uploadArchivePath(upload.id), resolve(bundleDirectory, "arrays.npz"));
+    } catch (error) {
+      if (!["EXDEV", "EPERM", "EACCES"].includes(error.code)) throw error;
+      await copyFile(this.#uploadArchivePath(upload.id), resolve(bundleDirectory, "arrays.npz"));
+    }
+    const envelope = {
+      schemaVersion: "sigma-observation-evaluation-job-cli/1",
+      fieldArtifactPath: "field_artifact",
+      observationBundlePath: "observation_bundle",
+      outputDirectory: "artifacts",
+      fieldReference: {
+        gatewayJobId: preflight.field.gatewayJobId,
+        manifestSha256: preflight.field.manifestSha256,
+        modelArtifactSha256: preflight.field.modelArtifactSha256,
+        jobArtifactSha256: preflight.field.jobArtifactSha256,
+        scientificResultArtifactSha256: preflight.field.scientificResultArtifactSha256,
+        observableArchiveSha256: preflight.field.observableArchiveSha256,
+      },
+      request: preflight.workerRequest,
+    };
+    await atomicWrite(resolve(jobDirectory, "request.json"), envelope);
+    const record = {
+      schemaVersion: "sigma-observation-evaluation-job-record/1",
+      id,
+      jobType: "observation_evaluation",
+      identity,
+      state: "queued",
+      fieldJobId: sourceId,
+      dataUploadId: upload.id,
+      preflight,
+      workerSourceSha256: this.observationWorkerSourceSha256,
+      parameterAccounting: preflight.parameterAccounting,
+      evaluationAddedGravityParameters: 0,
+      createdAt: now(),
+      updatedAt: now(),
+      scientificJobId: null,
+      scientificResultSha256: null,
+      failureSha256: null,
+    };
+    await atomicWrite(recordPath, record);
+    await this.#appendEvent(id, "queued", { message: "Observation evaluation accepted without queuing a field solve." });
+    this.queue.push(id);
+    this.#kick();
+    return { ...publicJob(record), duplicate: false };
+  }
+
   async createGalaxyJob(payload) {
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
       throw new LocalServiceError(422, "invalid_job", "galaxy job request must be an object");
@@ -580,7 +719,29 @@ export class LocalFieldJobService {
 
   async getFieldJob(idValue) {
     const record = await this.#readJob(assertIdentifier(idValue, "job"));
-    if (record.jobType === "galaxy") throw new LocalServiceError(404, "not_found", "unknown field job identifier");
+    if (record.jobType !== "field") throw new LocalServiceError(404, "not_found", "unknown field job identifier");
+    return publicJob(record);
+  }
+
+  async listObservationEvaluationJobs() {
+    const records = [];
+    for (const entry of await readdir(this.#jobsRoot(), { withFileTypes: true })) {
+      if (!entry.isDirectory() || !entry.name.startsWith("job_")) continue;
+      const path = this.#jobRecordPath(entry.name);
+      if (await exists(path)) {
+        const record = await readJson(path);
+        if (record.jobType === "observation_evaluation") records.push(publicJob(record));
+      }
+    }
+    records.sort((left, right) => right.createdAt.localeCompare(left.createdAt));
+    return { schemaVersion: "sigma-observation-evaluation-job-list/1", items: records };
+  }
+
+  async getObservationEvaluationJob(idValue) {
+    const record = await this.#readJob(assertIdentifier(idValue, "job"));
+    if (record.jobType !== "observation_evaluation") {
+      throw new LocalServiceError(404, "not_found", "unknown observation evaluation job identifier");
+    }
     return publicJob(record);
   }
 
@@ -606,11 +767,16 @@ export class LocalFieldJobService {
 
   async getEvents(idValue) {
     const id = assertIdentifier(idValue, "job");
-    await this.#readJob(id);
+    const record = await this.#readJob(id);
+    const schemaVersion = record.jobType === "galaxy"
+      ? "sigma-galaxy-job-events/1"
+      : record.jobType === "observation_evaluation"
+        ? "sigma-observation-evaluation-job-events/1"
+        : "sigma-field-job-events/1";
     const path = this.#eventsPath(id);
-    if (!(await exists(path))) return { schemaVersion: "sigma-field-job-events/1", jobId: id, items: [] };
+    if (!(await exists(path))) return { schemaVersion, jobId: id, items: [] };
     const lines = (await readFile(path, "utf8")).split("\n").filter(Boolean);
-    return { schemaVersion: "sigma-field-job-events/1", jobId: id, items: lines.map((line) => JSON.parse(line)) };
+    return { schemaVersion, jobId: id, items: lines.map((line) => JSON.parse(line)) };
   }
 
   async getArtifacts(idValue) {
@@ -626,9 +792,18 @@ export class LocalFieldJobService {
       throw new LocalServiceError(409, "artifact_integrity_failed", "artifact index no longer matches the scientific manifest");
     }
     const index = JSON.parse(indexBytes.toString("utf8"));
-    const collection = record.jobType === "galaxy" ? "galaxy-jobs" : "field-jobs";
+    const collection = record.jobType === "galaxy"
+      ? "galaxy-jobs"
+      : record.jobType === "observation_evaluation"
+        ? "observation-evaluation-jobs"
+        : "field-jobs";
+    const schemaVersion = record.jobType === "galaxy"
+      ? "sigma-galaxy-job-artifact-response/1"
+      : record.jobType === "observation_evaluation"
+        ? "sigma-observation-evaluation-job-artifact-response/1"
+        : "sigma-field-job-artifact-response/1";
     return {
-      schemaVersion: record.jobType === "galaxy" ? "sigma-galaxy-job-artifact-response/1" : "sigma-field-job-artifact-response/1",
+      schemaVersion,
       jobId: id,
       manifest,
       artifactIndex: index,
@@ -658,7 +833,12 @@ export class LocalFieldJobService {
   }
 
   async cancelFieldJob(idValue) {
-    const id = assertIdentifier(idValue, "job");
+    const record = await this.#readJob(assertIdentifier(idValue, "job"));
+    if (record.jobType !== "field") throw new LocalServiceError(404, "not_found", "unknown field job identifier");
+    return this.#cancelJob(record.id);
+  }
+
+  async #cancelJob(id) {
     return this.#withJobLock(id, async () => {
       const record = await this.#readJob(id);
       if (TERMINAL_STATES.has(record.state)) return publicJob(record);
@@ -675,7 +855,15 @@ export class LocalFieldJobService {
   async cancelGalaxyJob(idValue) {
     const record = await this.#readJob(assertIdentifier(idValue, "job"));
     if (record.jobType !== "galaxy") throw new LocalServiceError(404, "not_found", "unknown galaxy job identifier");
-    return this.cancelFieldJob(idValue);
+    return this.#cancelJob(record.id);
+  }
+
+  async cancelObservationEvaluationJob(idValue) {
+    const record = await this.#readJob(assertIdentifier(idValue, "job"));
+    if (record.jobType !== "observation_evaluation") {
+      throw new LocalServiceError(404, "not_found", "unknown observation evaluation job identifier");
+    }
+    return this.#cancelJob(record.id);
   }
 
   async waitForIdle(timeoutMs = 30_000) {

@@ -477,6 +477,7 @@ def execute_field_job(
             "coordinateSystem": model_geometry.get("coordinateSystem"),
             "dimensions": dimensions,
             "spacing": spacing_values,
+            "origin": bundle_geometry.get("origin"),
             "lengthUnit": model_geometry.get("domain", {}).get("lengthUnit"),
         },
         "boundaryFields": request.get("boundaryFields", {}),

@@ -1561,6 +1561,17 @@ adapter, not a gravity theory: the sample is spent and dwarf-only, and circular
 equilibrium omits pressure support, warps, and non-circular motion. See
 [`docs/P0731_REAL_VELOCITY_FIELD_ADAPTER_PARITY_RESULTS.md`](docs/P0731_REAL_VELOCITY_FIELD_ADAPTER_PARITY_RESULTS.md).
 
+P0732 separates observation evaluation from the expensive field solve. A new
+content-addressed asynchronous job consumes a successful immutable 2D/3D field
+artifact plus a separate observation upload and full target declaration. Its
+2D circular-curve and 3D velocity-map score and prediction artifacts are byte
+identical to integrated field-job evaluation, while the real HTTP acceptance
+records zero field-solver calls and zero added gravity parameters. Duplicate
+submissions reuse one job identity; changed data or targets create a new
+evaluation without changing the source field. Cancellation, restart recovery,
+and downloaded-artifact rehashing pass. See
+[`docs/P0732_DECOUPLED_OBSERVATION_EVALUATION_MILESTONE.md`](docs/P0732_DECOUPLED_OBSERVATION_EVALUATION_MILESTONE.md).
+
 ```powershell
 python scripts/run_p0723_formula_neutral_api_comparators.py `
   --base-url http://127.0.0.1:4173
@@ -1579,4 +1590,6 @@ python scripts/run_p0728_complete_fine_grid_aqual.py
 python scripts/run_p0729_qualified_80step_fine_grid_aqual.py
 
 python scripts/run_p0731_real_velocity_field_adapter_parity.py
+
+python scripts/run_p0732_decoupled_observation_evaluation.py
 ```

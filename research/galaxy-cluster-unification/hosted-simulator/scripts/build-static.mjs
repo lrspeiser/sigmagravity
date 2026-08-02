@@ -18,6 +18,7 @@ for (const path of [
   "schemas/array-bundle-v1.schema.json",
   "schemas/data-upload-request-v1.schema.json",
   "schemas/field-job-submit-v1.schema.json",
+  "schemas/observation-evaluation-job-submit-v1.schema.json",
   "schemas/galaxy-job-submit-v1.schema.json",
   "schemas/batch-submit-v1.schema.json",
   "examples/models/newtonian-poisson.json",

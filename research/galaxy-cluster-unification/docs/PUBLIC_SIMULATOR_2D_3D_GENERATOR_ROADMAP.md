@@ -46,6 +46,7 @@ trusted solver.
 | Hybrid nonlinear cross-check | P0727's preregistered 40-step Picard/Newton--GMRES hybrid converged DDO53 and DDO101 and agreed with independent Picard references to better than `5.4e-8` normalized RMS | P0728 showed that the 40-step choice was not universal: NGC1569 missed the relative-update gate |
 | Complete fine-grid AQUAL comparison | P0729's already-preregistered 80-step hybrid converged all four fine-grid sentinels, independently agreed with reference fields, and passed inherited resolution gates | about twice the 40-step wall time; NGC1569 remains close to the sensitivity limit and the four-galaxy sample is spent |
 | Resolved velocity-field API adapter | manufactured 2D/3D tests and P0731 real-map commissioning pass; 52/52 LITTLE THINGS/model evaluations reproduce an independent frozen pipeline with `1.96e-10 m/s` maximum parity RMS and zero per-object gravity parameters | spent gas-rich-dwarf sample, coarse P0723 fields, circular-equilibrium mapping, and no blind or morphology-diverse claim |
+| Decoupled observation-evaluation API | P0732 reuses one immutable solved field for separately hashed observations; 2D curve and 3D map artifacts byte-match integrated scoring, real HTTP uses zero field-solver calls, and caching/cancellation/recovery/hash gates pass | local single-user endpoint; existing batch composition still embeds targets in field children, and public durable workers are not connected |
 
 The generic worker dispatches from equation structure, not a theory name. It
 supports `laplacian(phi)=source` and
@@ -69,7 +70,7 @@ below.
 | 8. Inverse parameter extraction | Deterministic mass, centroid, radial, Fourier, and local-feature extraction now works on registered maps. Add raw-image light/gas separation, uncertainty distributions, bulge/thickness inference, calibration checks, and missing-structure diagnostics. | On synthetic images with hidden truth, calibrated intervals contain the generating values at their advertised rate; holdout residuals reveal model misspecification. |
 | 9. Forward galaxy generator | Component maps can now be replayed and controlled in mass, scale, angular structure, clumps, rotation, and offsets. Add intrinsic bulges/warps, projected sky images, spectral/velocity cubes, beams/PSFs, noise, masks, and survey selection. | Same seed is bitwise reproducible; changing one declared parameter produces the expected controlled change; mass/light are conserved within frozen tolerances. |
 | 10. Known-galaxy round trip | The first 13 registered-map photometric round trips pass commissioning gates. Add raw-image, uncertainty, kinematic, covariance, train/validation, and untouched whole-galaxy holdouts. | Predeclared photometric, kinematic, morphology, and conservation gates pass on train, validation, and untouched whole-galaxy holdouts. A radial match alone is insufficient. |
-| 11. Theory-to-observable adapters | Cartesian 2D/3D circular-speed prediction and resolved line-of-sight velocity maps are implemented for declared massive-tracer acceleration fields, and the real-map scorer reproduces an independent frozen pipeline. Separate observation evaluation into a cached job; add pressure support, asymmetric drift, warps/non-circular motion, spectral cubes, weak shear, convergence, deflection, critical curves, and raw multiple-image roots. Keep photon and massive-tracer mappings explicit. | Observation arrays can change without re-solving gravity; nuisance terms remain declared; Newtonian/MOND published fixtures reproduce within tolerance; photons are never silently scored with a massive-particle rule. |
+| 11. Theory-to-observable adapters | Cartesian 2D/3D circular-speed and resolved velocity maps are implemented, real-map scoring reproduces an independent pipeline, and P0732 separates observation evaluation into a cached job. Rewire batches to compose that job; add pressure support, asymmetric drift, warps/non-circular motion, spectral cubes, weak shear, convergence, deflection, critical curves, and raw multiple-image roots. Keep photon and massive-tracer mappings explicit. | Observation arrays can change without re-solving gravity; nuisance terms remain declared; Newtonian/MOND published fixtures reproduce within tolerance; photons are never silently scored with a massive-particle rule. |
 | 12. Fair scoring | Add fixed train/development/holdout splits, no-target-access execution, nuisance-policy declarations, universal/per-object parameter counts, likelihoods with covariance, and same-input comparators. | A batch report separates galaxies, clusters, topology, and Solar-System tests and shows performance versus Newtonian, fixed MOND/RAR, and a declared halo baseline without a single blended score. |
 | 13. Cluster data | Version member light, intracluster gas, geometry, source redshifts, weak-shear catalogs, and raw strong-lens image positions with licensing and sealed/open states. | Multiple clusters can be run with one frozen gravity parameter set; raw image/topology holdouts are scored, not only reconstructed dark-matter maps. |
 | 14. Asynchronous API | Local upload, queue, lifecycle events, cancellation, restart recovery, caching identity, artifact indexes, stable errors, and batches up to 1,000 systems are implemented. Add durable adapters, model registration, retry policy, and production resource classes. | Identical model/data/solver/seed/worker hashes return the cached immutable run; a browser never holds a request open for a long solve. |
@@ -110,14 +111,18 @@ line-of-sight velocity-field adapter against all thirteen real LITTLE THINGS
 maps and an independent frozen implementation. All 52 fixed-model evaluations
 pass parity and artifact gates without a per-galaxy gravity parameter.
 
-The immediate API milestone is to split observation evaluation from the costly
-field solve. A content-addressed observation-evaluation job should accept an
-immutable solved-field artifact plus an immutable observation target/bundle,
-reuse the field without re-solving it, expose its own lifecycle and hashes, and
-produce the same deterministic scores and pixel artifacts as P0731. That
-separation lets researchers revise masks, beams, or observational data without
-silently changing the theory result. In parallel, freeze a separately typed
-photon-lensing adapter so light is never evaluated by the massive-tracer rule.
+P0732 completed the immediate API split: a content-addressed
+observation-evaluation job accepts an immutable solved-field artifact plus an
+immutable target/bundle, reuses the field with zero solver calls, exposes its
+own lifecycle and hashes, and byte-matches integrated 2D/3D score and prediction
+artifacts. Researchers can now revise masks, beams, or observational data
+without silently changing the theory result.
+
+The immediate composition milestone is to make multi-system batches create or
+reuse field children first and cached observation children second, then retain
+both identities in one deterministic report. In parallel, freeze a separately
+typed photon-lensing adapter so light is never evaluated by the massive-tracer
+rule.
 
 The next scientific velocity milestone is a preregistered, morphology-diverse
 holdout with explicit pressure-support and non-circular-motion nuisance terms.

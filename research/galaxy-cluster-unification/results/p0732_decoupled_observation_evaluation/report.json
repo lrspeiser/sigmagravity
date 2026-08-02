@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "sigma-p0732-decoupled-observation-evaluation-result/1",
+  "stage": "P0732",
+  "status": "pass",
+  "configSha256": "d6bf26151406a07511e5dca3fef1628914dee9f249272ab8c2d8c3851f943185",
+  "parentCommit": "b951c723dc825712bedf8b82b2b3979d38b20c3b",
+  "fixtures": {
+    "dimensions": [
+      2,
+      3
+    ],
+    "targetKinds": [
+      "circular_speed_curve",
+      "line_of_sight_velocity_field"
+    ],
+    "scoreArtifactsByteExact": true,
+    "predictionArtifactsByteExact": true
+  },
+  "httpAcceptance": {
+    "allArtifactHashesValid": true,
+    "artifactCount": 7,
+    "duplicateIdentityReused": true,
+    "evaluationAddedGravityParameters": 0,
+    "fieldJobCount": 1,
+    "fieldSolverInvocationsDuringEvaluation": 0,
+    "observationJobId": "job_fb0b091fa285a9566a3bec3d",
+    "sourceFieldJobId": "job_1078392e1cbda551016f4ef8",
+    "state": "succeeded",
+    "validScoredPoints": 4
+  },
+  "gateResults": {
+    "required_dimensions": true,
+    "required_target_kinds": true,
+    "standalone_score_byte_parity": true,
+    "standalone_prediction_byte_parity": true,
+    "zero_field_solver_invocations": true,
+    "duplicate_identity_reused": true,
+    "changed_observation_changes_identity": true,
+    "artifact_downloads_rehash": true,
+    "restart_recovery": true,
+    "cancellation": true,
+    "no_added_per_object_gravity_parameters": true,
+    "static_build": true
+  },
+  "failedGates": [],
+  "sourceSha256": {
+    "src/voidscreen/observation_evaluation_job.py": "2866fb7705fb82f2467bbbe5d57215a00cbb445c91e5ccd7a8eea5ba0dbed8ce",
+    "src/voidscreen/field_job.py": "d0cd3b354b1efbfe14544a0747787cc4d266fed0416a2379d5e57678bbbf4173",
+    "src/voidscreen/observation_adapters.py": "b48eb0918fc5342699a3ec61abe77fec9550bc174c4646a9a6cc26c6f3e95c9a",
+    "hosted-simulator/lib/observation-evaluation-preflight.mjs": "15313319682b0e6fcd796c183e654497709eade29bca266cf0255f55e0f85503",
+    "hosted-simulator/lib/local-field-job-service.mjs": "3e1fd6d63b1f05e888064d5262b7bb30ce0a79a8a5912a6f6f84ba9438083a4e"
+  },
+  "claimBoundary": [
+    "An observation-evaluation job tests only the declared mapping from an already solved field into an observation; it cannot validate the field equation by itself.",
+    "Changing a mask, beam, uncertainty, or target creates a new evaluation identity but leaves the source field identity unchanged.",
+    "Massive-tracer and photon mappings remain separately typed; P0732 does not add photon lensing.",
+    "The local reference queue is not the public durable worker infrastructure."
+  ]
+}

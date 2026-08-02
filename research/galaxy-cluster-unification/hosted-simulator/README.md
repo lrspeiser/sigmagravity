@@ -93,6 +93,10 @@ POST /api/v1/field-jobs
 GET  /api/v1/field-jobs/{id}
 GET  /api/v1/field-jobs/{id}/events
 GET  /api/v1/field-jobs/{id}/artifacts
+POST /api/v1/observation-evaluation-jobs
+GET  /api/v1/observation-evaluation-jobs/{id}
+GET  /api/v1/observation-evaluation-jobs/{id}/events
+GET  /api/v1/observation-evaluation-jobs/{id}/artifacts
 POST /api/v1/galaxy-jobs
 GET  /api/v1/galaxy-jobs/{id}
 GET  /api/v1/galaxy-jobs/{id}/events
@@ -150,7 +154,32 @@ scientific-result hashes, output-array hashes, residual history, resource log,
 artifact index, and reproduction manifest. See `../worker` for the pinned,
 non-root container definition.
 
-The 0.6 local reference API also supports formula-independent resolved-galaxy
+A completed field can now be scored against new data without solving it again:
+
+```text
+POST /api/v1/observation-evaluation-jobs
+GET  /api/v1/observation-evaluation-jobs/{id}
+GET  /api/v1/observation-evaluation-jobs/{id}/events
+GET  /api/v1/observation-evaluation-jobs/{id}/artifacts
+POST /api/v1/observation-evaluation-jobs/{id}/cancel
+```
+
+The submission names a successful `fieldJobId`, a separately uploaded
+observation bundle, and one or more full `sigma-observation-target/1` objects.
+The service verifies the source field manifest, model, job, scientific result,
+and observable archive before queuing. Field identity and observation identity
+remain separate: changing a mask, beam, uncertainty, or dataset creates a new
+observation job and zero field-solver calls. P0732 byte-matches both 2D curve
+and 3D resolved-map artifacts against integrated evaluation. Run the real HTTP
+acceptance while `npm run dev` is active with:
+
+```text
+npm run smoke:observation-jobs
+```
+
+See `../docs/P0732_DECOUPLED_OBSERVATION_EVALUATION_MILESTONE.md`.
+
+The 0.7 local reference API also supports formula-independent resolved-galaxy
 jobs:
 
 ```text

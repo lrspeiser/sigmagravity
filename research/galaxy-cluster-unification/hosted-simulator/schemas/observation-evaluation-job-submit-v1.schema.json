@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigmagravity.org/schemas/observation-evaluation-job-submit-v1.schema.json",
+  "title": "Sigma asynchronous observation-evaluation job submission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "fieldJobId", "dataUploadId", "observationTargets"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-observation-evaluation-job-submit/1" },
+    "fieldJobId": { "type": "string", "pattern": "^job_[0-9a-f]{24}$" },
+    "dataUploadId": { "type": "string", "pattern": "^upload_[0-9a-f]{24}$" },
+    "observationTargets": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": { "$ref": "observation-target-v1.schema.json" }
+    }
+  }
+}
