@@ -1,0 +1,29 @@
+{
+  "report_version": "P0711-EXTERNAL-GALAXY-ROTATION-VALIDATION-1.0.0",
+  "status": "pass",
+  "P0633_sample_spent": true,
+  "universal_parameter_sha256": "bf3f12d6b32ee3f1b0e3bf48a9603c4aafbcd34b2cbdd3de021d689514099a15",
+  "supplement_sha256": "967110269d59357ee3a94d1d6e46c2402aef38da3f674180d42044ceaf094173",
+  "frozen_curve_sha256": "b9912258ed9cf223987817b153de97c09c49ce6a55ac6bb1e3cfd42ccc0adcbc",
+  "valid_galaxies": 13,
+  "sample_RMSE_km_s": {
+    "P0707_time_potential": 10.735205237100065,
+    "Newtonian_3D": 22.07044341745758,
+    "AQUAL_simple_mu_3D": 12.422246240404235,
+    "QUMOND_simple_nu_3D": 12.402825154124628
+  },
+  "best_frozen_MOND_model": "QUMOND_simple_nu_3D",
+  "candidate_to_best_MOND_RMSE_ratio": 0.8655451563412561,
+  "maximum_morphology_bin_ratio": 0.9347165595129111,
+  "gate_results": {
+    "minimum_valid_galaxies": true,
+    "equal_galaxy_RMSE": true,
+    "morphology_bins": true,
+    "no_target_refit": true
+  },
+  "failed_gates": [],
+  "primary_radius_rule": "published kpc radius exactly as frozen in P0709",
+  "distance_consistency_is_diagnostic_only": true,
+  "per_object_gravity_parameters": 0,
+  "target_refits": 0
+}

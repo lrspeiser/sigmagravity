@@ -56,6 +56,10 @@ Current platform references:
 
 ## Version 1 API
 
+The draft machine-readable contract is
+[`../api/openapi.yaml`](../api/openapi.yaml). It is intentionally asynchronous:
+large numerical calls return `202 Accepted` and a job identifier.
+
 | Method and path | Purpose |
 |---|---|
 | `GET /v1/datasets` | list frozen datasets, licenses, evidence class, and hashes |
@@ -147,12 +151,18 @@ that is passed to Python.
 | Execution | deterministic local CLI runs | queue, worker image, cancellation, quotas, caching, and event stream |
 | Public UI/API | route plan only | FastAPI/OpenAPI service, SDK, Vercel app, auth, and staging deployment |
 
-P0652 through P0677 are useful API fixtures. They include successful numerical
+P0652 through P0677 and P0711 through P0714 are useful API fixtures. They include successful numerical
 invariants, real 2D-to-3D baryonic maps, Poisson/AQUAL/QUMOND solves, coefficient
 passes, failed predictive gates, exact root-topology failures, tensor-orientation
 comparisons, and a 400-attempt solver audit. The hosted conformance suite should
 reproduce these negative results exactly; retaining failed runs is a product
 requirement, not clutter.
+
+P0711-P0714 add especially important public states: a galaxy gate that passes,
+a pixel diagnostic whose comparator ordering needs interpretation, a cluster
+sample that is `not_ready`, a critical-curve gate that is `not_observable`, and
+a ready-subset field that loses multiple-image topology. The API must represent
+each state directly rather than coercing it into one aggregate score.
 
 ## Delivery stages
 

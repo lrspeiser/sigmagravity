@@ -1,0 +1,29 @@
+{
+  "report_version": "P0712-EXTERNAL-GALAXY-VELOCITY-FIELD-VALIDATION-1.0.0",
+  "status": "pass",
+  "P0633_sample_spent": true,
+  "universal_parameter_sha256": "bf3f12d6b32ee3f1b0e3bf48a9603c4aafbcd34b2cbdd3de021d689514099a15",
+  "valid_galaxies": 13,
+  "sample_weighted_RMSE_km_s": {
+    "P0707_time_potential": 32.27023278820347,
+    "Newtonian_3D": 24.961853748393732,
+    "AQUAL_simple_mu_3D": 32.89205988954253,
+    "QUMOND_simple_nu_3D": 32.827182430957826
+  },
+  "best_frozen_MOND_model": "QUMOND_simple_nu_3D",
+  "candidate_to_best_MOND_RMSE_ratio": 0.9830338883355058,
+  "gate_results": {
+    "minimum_valid_galaxies": true,
+    "velocity_field_RMSE": true,
+    "no_target_refit": true
+  },
+  "failed_gates": [],
+  "photometric_distance_inclination_PA_refits": 0,
+  "per_object_gravity_parameters": 0,
+  "ordinary_observational_coordinates": {
+    "published_systemic_velocity": true,
+    "measured_receding_side_handedness": true,
+    "handedness_selected_by_model_RMSE": false
+  },
+  "beam_model": "measured elliptical AIPS CLEAN beam, intensity-weighted convolution"
+}

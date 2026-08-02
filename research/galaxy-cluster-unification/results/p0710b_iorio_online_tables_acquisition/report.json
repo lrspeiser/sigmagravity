@@ -1,0 +1,20 @@
+{
+  "report_version": "P0710B-IORIO-ONLINE-TABLES-ACQUISITION-RESULT-1.0.0",
+  "status": "pass",
+  "selection_changed_after_unlock": false,
+  "source_resolution_changed_after_unlock": true,
+  "article_url": "https://academic.oup.com/mnras/article/466/4/4159/2712521",
+  "canonical_cdn_path": "https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/mnras/466/4/10.1093_mnras_stw3285/7/stw3285_Supplementary_Data.zip",
+  "destination": "data/raw/p0633_little_things_kinematics/stw3285_Supplementary_Data.zip",
+  "bytes": 18512,
+  "sha256": "967110269d59357ee3a94d1d6e46c2402aef38da3f674180d42044ceaf094173",
+  "members": [
+    "BTFR_data.txt",
+    "results.zip"
+  ],
+  "member_sha256": {
+    "BTFR_data.txt": "6eaba84e89670abe1ca103cfcac15880b5efa2d45dfff48a77ef047af43a6628",
+    "results.zip": "6b66ff565632b1128e6462e7497e04902838b72e124f4032750c6f857d21ba22"
+  },
+  "P0633_sample_spent": true
+}

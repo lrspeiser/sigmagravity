@@ -1,0 +1,14 @@
+{
+  "report_version": "P0710-EXTERNAL-TARGET-ACQUISITION-1.0.0",
+  "status": "pass",
+  "unlock_manifest_sha256": "a2c073d43a176900b416834aecafd7ac455659ea35c638d7adaae27d73454c1c",
+  "requested_products": 51,
+  "received_products": 51,
+  "failed_products": [],
+  "total_bytes": 1004204557,
+  "primary_only": false,
+  "target_outcomes_now_open": true,
+  "P0633_sample_now_spent": true,
+  "formula_changes_after_this_run_are_validation": false,
+  "provenance_sha256": "29bd481bed905d194cb833582cdcc15413214b0cd25721f983aabf714ffa1a4f"
+}

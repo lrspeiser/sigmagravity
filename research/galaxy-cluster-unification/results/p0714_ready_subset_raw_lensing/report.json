@@ -1,0 +1,34 @@
+{
+  "stage": "P0714",
+  "status": "completed_exploratory_ready_subset",
+  "validation_status": "not_a_P0633_validation_score_due_to_P0713_data_readiness_failure",
+  "ready_clusters": [
+    "AS295",
+    "PLCKG287"
+  ],
+  "selected_clusters_not_replaced": true,
+  "models": [
+    "P0707_Weyl_frozen_axis_contract",
+    "P0707_Weyl_axis_repaired_exploratory",
+    "baryon_only_GR",
+    "AQUAL_simple_mu_diagnostic",
+    "QUMOND_simple_nu_diagnostic",
+    "glafic_v2_compact_halo"
+  ],
+  "frozen_candidate_all_heldout_roots_converged": false,
+  "frozen_candidate_all_heldout_topologies_correct": false,
+  "frozen_candidate_RMS_ratios_to_glafic": [],
+  "critical_curve_gate": "not_independently_observable_missing_arc_orientation_or_parity",
+  "coordinate_audit": {
+    "frozen_contract": "P0708 treated array axis 0/component 0 as east/x and axis 1/component 1 as north/y.",
+    "registered_map_storage": "P0641 arrays are image-row north then image-column east.",
+    "axis_repair_status": "post-unseal exploratory diagnostic only; not validation"
+  },
+  "claim_boundary": [
+    "Only AS295 and PLCKG287 passed the frozen raw-constraint readiness gate.",
+    "The compact-halo comparator is the same predeclared glafic v2 method for both clusters.",
+    "AQUAL and QUMOND photon maps remain phenomenological non-relativistic diagnostics.",
+    "The critical-curve comparison is model-to-model because the catalogs do not publish arc parity/orientation.",
+    "No lens center, shear, ellipticity, mass sheet, radial amplitude, or gravity parameter was fitted."
+  ]
+}

@@ -1,0 +1,13 @@
+cluster,model,heldout_families,heldout_images,matched_images,root_convergence_fraction,heldout_image_RMS_arcsec,all_heldout_topologies_correct,RMS_ratio_to_glafic
+AS295,P0707_Weyl_frozen_axis_contract,2,6,2,0.3333333333333333,inf,False,
+AS295,P0707_Weyl_axis_repaired_exploratory,2,6,2,0.3333333333333333,inf,False,
+AS295,baryon_only_GR,2,6,2,0.3333333333333333,inf,False,
+AS295,AQUAL_simple_mu_diagnostic,2,6,2,0.3333333333333333,inf,False,
+AS295,QUMOND_simple_nu_diagnostic,2,6,2,0.3333333333333333,inf,False,
+AS295,glafic_v2_compact_halo,2,6,6,1.0,0.7179786668946627,True,1.0
+PLCKG287,P0707_Weyl_frozen_axis_contract,4,12,4,0.3333333333333333,inf,False,
+PLCKG287,P0707_Weyl_axis_repaired_exploratory,4,12,4,0.3333333333333333,inf,False,
+PLCKG287,baryon_only_GR,4,12,4,0.3333333333333333,inf,False,
+PLCKG287,AQUAL_simple_mu_diagnostic,4,12,4,0.3333333333333333,inf,False,
+PLCKG287,QUMOND_simple_nu_diagnostic,4,12,4,0.3333333333333333,inf,False,
+PLCKG287,glafic_v2_compact_halo,4,12,12,1.0,27.892603802580243,False,1.0

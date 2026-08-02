@@ -1,0 +1,71 @@
+{
+  "stage": "P0713",
+  "status": "fail_data_readiness",
+  "evaluation_kind": "frozen_external_validation_data_readiness",
+  "formula_scored": false,
+  "sample_is_spent": true,
+  "source_hashes": {
+    "cibirka2018_arxiv_1803.09557_source.tar.gz": "6fef39aa25e0ae897c292e6051c86f8f6397ed75de8ed4aa979aab175c443caf",
+    "daddona2024_tablec1_multiple_images.dat": "661913e6d7c4d6c925cd7c7608ad00727763f93d3297e9d4829174a7e47e6389"
+  },
+  "readiness_thresholds": {
+    "minimum_secure_families_per_cluster": 3,
+    "minimum_spectroscopic_families_per_cluster": 1,
+    "minimum_images_per_cluster": 8,
+    "failure_rule": "A selected cluster that lacks these constraints is a recorded data-readiness failure and may not be silently replaced after any selected target is scored."
+  },
+  "required_ready_clusters": 4,
+  "ready_clusters": 2,
+  "cluster_rows": [
+    {
+      "cluster": "AS295",
+      "secure_families": 6,
+      "spectroscopic_families": 4,
+      "secure_images": 18,
+      "family_gate_passed": true,
+      "spectroscopic_gate_passed": true,
+      "image_gate_passed": true,
+      "ready": true
+    },
+    {
+      "cluster": "MACS0025",
+      "secure_families": 2,
+      "spectroscopic_families": 1,
+      "secure_images": 7,
+      "family_gate_passed": false,
+      "spectroscopic_gate_passed": true,
+      "image_gate_passed": false,
+      "ready": false
+    },
+    {
+      "cluster": "MACS0159",
+      "secure_families": 4,
+      "spectroscopic_families": 0,
+      "secure_images": 10,
+      "family_gate_passed": true,
+      "spectroscopic_gate_passed": false,
+      "image_gate_passed": true,
+      "ready": false
+    },
+    {
+      "cluster": "PLCKG287",
+      "secure_families": 12,
+      "spectroscopic_families": 12,
+      "secure_images": 47,
+      "family_gate_passed": true,
+      "spectroscopic_gate_passed": true,
+      "image_gate_passed": true,
+      "ready": true
+    }
+  ],
+  "gate_results": {
+    "minimum_ready_clusters": false
+  },
+  "consequence": "The preregistered four-cluster raw lens score is not validly evaluable; selected clusters may not be replaced after unsealing.",
+  "interpretation_boundary": [
+    "This failure is a public-catalog readiness failure, not a failure of the candidate gravity formula.",
+    "Any raw score on the ready subset is descriptive/exploratory and cannot satisfy the P0633 cluster validation gate.",
+    "Model-derived redshifts are retained in the parsed Cibirka table for provenance but do not create a spectroscopic family.",
+    "PLCK secure images are exactly the authors' published GOLD=y sample; spectroscopic readiness requires QF 3 or 9."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "protocol_version": "P0710B-IORIO-ONLINE-TABLES-ACQUISITION-1.0.0",
+  "status": "official_companion_product_resolved_after_P0633_unlock",
+  "selection_was_frozen_by": "P0709 named the Iorio et al. 2017 published circular-speed product and DOI before unlock; the arXiv source package proved not to contain the online tables, so this is source resolution rather than target replacement",
+  "article_url": "https://academic.oup.com/mnras/article/466/4/4159/2712521",
+  "doi": "10.1093/mnras/stw3285",
+  "link_text": "stw3285_Supplementary_Data",
+  "canonical_cdn_path": "https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/mnras/466/4/10.1093_mnras_stw3285/7/stw3285_Supplementary_Data.zip",
+  "resolved_url": "https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/mnras/466/4/10.1093_mnras_stw3285/7/stw3285_Supplementary_Data.zip?Expires=1788675787&Signature=i3chgyA0WC2NWZKSwfvBOZr90xcQpuRG9OPFCC1F3wAa-UG5UKB~kMsb23MsoicKUaUwFW6DClU3hKvwlDWNRchLMjjcUmRfOLCNpmWzKhlIiELMvZeMlWhu9a9V7cQ7NQFxQ6GbRDUrQQtoWFKotpX2fqy1JHuI57TqdX-9vfBFmcaxlCFvAI0Er7-J2ZnIZkRqQacJ3d6Ksok~FvE~59I2yxyUUgMB~PSFFHF6if~GgK4ycez0Y~vAqovXwevz7FqFXIGxBME5jnR4hWSmiytvh3qGPzo6gHecdSEwqvcKxl2ASqPbAf10myHb-8Jb5hpasOI~U72-4z58YYYPaQ__&Key-Pair-Id=APKAIE5G5CRDK6RD3PGA",
+  "expected_bytes": 18512,
+  "last_modified": "Mon, 17 Jul 2017 10:24:58 GMT",
+  "destination": "data/raw/p0633_little_things_kinematics/stw3285_Supplementary_Data.zip",
+  "expected_members": ["BTFR_data.txt", "results.zip"],
+  "forbidden_change": "No galaxy, formula, parameter, orientation, or score rule may be changed because this link was resolved after unlock"
+}

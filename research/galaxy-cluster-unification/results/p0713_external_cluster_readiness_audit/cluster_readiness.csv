@@ -1,0 +1,5 @@
+cluster,secure_families,spectroscopic_families,secure_images,family_gate_passed,spectroscopic_gate_passed,image_gate_passed,ready
+AS295,6,4,18,True,True,True,True
+MACS0025,2,1,7,False,True,False,False
+MACS0159,4,0,10,True,False,True,False
+PLCKG287,12,12,47,True,True,True,True

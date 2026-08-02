@@ -1,0 +1,303 @@
+openapi: 3.1.0
+info:
+  title: Sigma Gravity Research Simulator API
+  version: 0.1.0-draft
+  description: >-
+    Versioned, asynchronous galaxy/cluster simulation and formula testing.
+    Numerical jobs are immutable and return provenance and artifact hashes.
+servers:
+  - url: https://research.sigmagravity.example/v1
+paths:
+  /datasets:
+    get:
+      operationId: listDatasets
+      responses:
+        "200":
+          description: Immutable dataset releases
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Dataset"
+  /systems:
+    get:
+      operationId: listSystems
+      parameters:
+        - name: type
+          in: query
+          schema:
+            enum: [galaxy, cluster, solar]
+        - name: dataset_release
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Available real and synthetic-template systems
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/System"
+  /systems/{system_id}:
+    get:
+      operationId: getSystem
+      parameters:
+        - $ref: "#/components/parameters/SystemId"
+      responses:
+        "200":
+          description: System metadata, provenance, and supported tests
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/System"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /synthetic-galaxies:
+    post:
+      operationId: createSyntheticGalaxy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticGalaxyRequest"
+      responses:
+        "202":
+          description: Synthetic rendering job accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "422":
+          $ref: "#/components/responses/InvalidRequest"
+  /formulas/validate:
+    post:
+      operationId: validateFormula
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FormulaManifest"
+      responses:
+        "200":
+          description: Canonical formula, dimension audit, and content hash
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FormulaValidation"
+        "422":
+          $ref: "#/components/responses/InvalidRequest"
+  /runs:
+    post:
+      operationId: createRun
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunRequest"
+      responses:
+        "202":
+          description: Immutable simulation job accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "422":
+          $ref: "#/components/responses/InvalidRequest"
+  /runs/{run_id}:
+    get:
+      operationId: getRun
+      parameters:
+        - $ref: "#/components/parameters/RunId"
+      responses:
+        "200":
+          description: Run state, progress, scores, and hashes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Run"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /runs/{run_id}/artifacts:
+    get:
+      operationId: listRunArtifacts
+      parameters:
+        - $ref: "#/components/parameters/RunId"
+      responses:
+        "200":
+          description: Checksummed artifacts and expiring download links
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Artifact"
+components:
+  parameters:
+    SystemId:
+      name: system_id
+      in: path
+      required: true
+      schema:
+        type: string
+    RunId:
+      name: run_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    NotFound:
+      description: Resource not found
+    InvalidRequest:
+      description: Unit, symbol, parameter-policy, safety, or manifest validation failed
+  schemas:
+    Dataset:
+      type: object
+      required: [id, sha256, released_at, license]
+      properties:
+        id: {type: string}
+        sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        released_at: {type: string, format: date-time}
+        license: {type: string}
+        bytes: {type: integer, minimum: 0}
+    System:
+      type: object
+      required: [id, type, dataset_release, sample_state, supported_tests]
+      properties:
+        id: {type: string}
+        type: {enum: [galaxy, cluster, solar]}
+        dataset_release: {type: string}
+        sample_state: {enum: [commissioning, development, holdout, spent, synthetic]}
+        supported_tests:
+          type: array
+          items:
+            $ref: "#/components/schemas/TestName"
+        morphology: {type: object, additionalProperties: true}
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/Artifact"
+    SyntheticGalaxyRequest:
+      type: object
+      required: [seed, physical, observation]
+      properties:
+        seed: {type: integer, minimum: 0}
+        template_system_id: {type: string}
+        physical:
+          type: object
+          required: [baryonic_mass_msun, gas_fraction, bulge_fraction, disk_scale_kpc]
+          properties:
+            baryonic_mass_msun: {type: number, exclusiveMinimum: 0}
+            gas_fraction: {type: number, minimum: 0, maximum: 1}
+            bulge_fraction: {type: number, minimum: 0, maximum: 1}
+            disk_scale_kpc: {type: number, exclusiveMinimum: 0}
+            thickness_kpc: {type: number, minimum: 0}
+            lopsidedness: {type: number, minimum: 0}
+            clumpiness: {type: number, minimum: 0}
+        observation:
+          type: object
+          required: [distance_mpc, inclination_deg, beam_arcsec, noise_seed]
+          properties:
+            distance_mpc: {type: number, exclusiveMinimum: 0}
+            inclination_deg: {type: number, minimum: 0, maximum: 90}
+            position_angle_deg: {type: number}
+            beam_arcsec: {type: number, exclusiveMinimum: 0}
+            channel_width_km_s: {type: number, exclusiveMinimum: 0}
+            noise_seed: {type: integer, minimum: 0}
+    FormulaManifest:
+      type: object
+      required: [name, family, expression, output_unit, parameters, parameter_policy]
+      properties:
+        name: {type: string, minLength: 1, maxLength: 120}
+        family:
+          enum: [algebraic_acceleration, nonlinear_poisson, two_potential_metric, deflection_diagnostic]
+        expression:
+          type: object
+          description: Safe expression AST; arbitrary source code is not accepted.
+          additionalProperties: true
+        output_unit: {type: string}
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+            required: [value, unit]
+            properties:
+              value: {type: number}
+              unit: {type: string}
+              lower: {type: number}
+              upper: {type: number}
+        parameter_policy:
+          type: object
+          required: [universal, per_object_parameters]
+          properties:
+            universal: {type: boolean}
+            per_object_parameters: {type: integer, minimum: 0}
+    FormulaValidation:
+      type: object
+      required: [valid, formula_sha256, dimension_audit, safety_audit]
+      properties:
+        valid: {type: boolean}
+        formula_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        canonical_manifest: {$ref: "#/components/schemas/FormulaManifest"}
+        dimension_audit: {type: object, additionalProperties: true}
+        safety_audit: {type: object, additionalProperties: true}
+        errors: {type: array, items: {type: string}}
+    TestName:
+      enum: [rotation_curve, velocity_field, raw_lensing_roots, critical_curves, solar_ppn, full_benchmark]
+    RunRequest:
+      type: object
+      required: [dataset_release, system_ids, formula_sha256, tests]
+      properties:
+        dataset_release: {type: string}
+        system_ids: {type: array, minItems: 1, items: {type: string}}
+        formula_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        tests: {type: array, minItems: 1, items: {$ref: "#/components/schemas/TestName"}}
+        seed: {type: integer, minimum: 0}
+        webhook_url: {type: string, format: uri}
+    JobAccepted:
+      type: object
+      required: [id, state, submitted_at]
+      properties:
+        id: {type: string, format: uuid}
+        state: {const: queued}
+        submitted_at: {type: string, format: date-time}
+    Run:
+      type: object
+      required: [id, state, progress, manifest_sha256]
+      properties:
+        id: {type: string, format: uuid}
+        state: {enum: [queued, running, succeeded, failed, cancelled]}
+        progress: {type: number, minimum: 0, maximum: 1}
+        manifest_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        validation_status: {enum: [preregistered, exploratory, not_ready, not_observable]}
+        scores: {type: object, additionalProperties: true}
+        diagnostics: {type: object, additionalProperties: true}
+    Artifact:
+      type: object
+      required: [name, media_type, bytes, sha256]
+      properties:
+        name: {type: string}
+        media_type: {type: string}
+        bytes: {type: integer, minimum: 0}
+        sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+        download_url: {type: string, format: uri}
+        expires_at: {type: string, format: date-time}
