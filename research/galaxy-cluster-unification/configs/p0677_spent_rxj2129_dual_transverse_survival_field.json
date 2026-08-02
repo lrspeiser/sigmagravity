@@ -1,0 +1,79 @@
+{
+  "protocol_version": "P0677-SPENT-RXJ2129-DUAL-TRANSVERSE-SURVIVAL-FIELD-1.0.0",
+  "status": "frozen_before_any_P0677_field_or_deflection_score",
+  "frozen_utc": "2026-08-02T06:50:00Z",
+  "purpose": "Test the sole dimensionally motivated strengthening of P0676: the unrouted fraction must survive both independent transverse leakage directions, giving transverse permeability (1-sigma)^2 without a fitted exponent.",
+  "failure_parent": "results/p0676_spent_rxj2129_transverse_confinement_field/report.json",
+  "activation_parent": "results/p0673_compound_path_activation/report.json",
+  "scalar_reference_result": "results/p0674_spent_rxj2129_compound_3d_field_solve/report.json",
+  "scalar_field_input": "results/p0674_spent_rxj2129_compound_3d_field_solve/rxj2129_absolute_scalar_compound_fields.npz",
+  "map_input": "results/p0670_spent_rxj2129_absolute_3d_map_build/rxj2129_absolute_baryons_3d.npz",
+  "field_equations": {
+    "dual_transverse_survival": "div[mu(|grad Phi_d|/a0) ((1-sigma)^2 I + (1-(1-sigma)^2) h h) grad Phi_d] = 4 pi G rho_bar",
+    "eigenvalues": "mu along h and mu(1-sigma)^2 in both directions perpendicular to h",
+    "dimensional_derivation": "each of the two independent transverse leakage channels must retain the unrouted survival fraction (1-sigma)",
+    "effective_confinement": "sigma_dual = 1-(1-sigma)^2",
+    "compound_activation": "sigma = 1-(1-epsilon)^N",
+    "mu": "x/(1+x)",
+    "shared_boundary": "the P0670 simple-MOND monopole",
+    "photon": "alpha_perp=-(2/c^2) integral a_perp dz before multiplication by Dds/Ds",
+    "gravitational_slip": 0.0,
+    "fitted_photon_amplitude": false,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "candidate": {
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "coherence_power": 2.0,
+    "transverse_dimensions": 2,
+    "transverse_dimensions_fitted": false,
+    "mu_floor": 1e-6
+  },
+  "solver": {
+    "picard_damping": 0.65,
+    "mu_floor": 1e-6,
+    "nonlinear_residual_tolerance": 1e-5,
+    "linear_relative_tolerance": 1e-10,
+    "maximum_nonlinear_iterations": 80,
+    "maximum_linear_iterations": 5000
+  },
+  "audit_region": {
+    "strong_lens_radius_kpc": [15.8, 76.5]
+  },
+  "predeclared_progression_gates": {
+    "P0676_status": "fail",
+    "P0676_confinement_to_scalar_RMS_ratio_max": 1.2,
+    "P0673_all_progression_gates_pass": true,
+    "recomputed_compound_mass_weighted_sigma_absolute_tolerance": 1e-12,
+    "dual_normalized_residual_RMS_max": 1e-5,
+    "dual_solver_converged": true,
+    "boundary_maximum_relative_mismatch_max": 1e-14,
+    "all_potentials_accelerations_and_deflections_finite": true,
+    "minimum_dual_constitutive_eigenvalue_strictly_positive": true,
+    "dual_to_scalar_strong_lens_deflection_RMS_ratio_min": 2.0,
+    "dual_to_scalar_strong_lens_deflection_RMS_ratio_max": 20.0,
+    "dual_minus_scalar_strong_lens_relative_RMS_min": 1.0,
+    "dual_minus_scalar_strong_lens_relative_RMS_max": 20.0,
+    "dual_normalized_deflection_curl_RMS_max": 1e-8,
+    "transverse_dimensions": 2,
+    "transverse_dimensions_fitted": false,
+    "gravitational_slip_exactly_zero": 0.0,
+    "fitted_photon_amplitude": false,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0,
+    "raw_lens_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "Advance the dual-transverse law to one unchanged spent raw-topology audit only if every numerical gate passes and it at least doubles scalar RMS with a 100% vector-field change. If it fails, retire this confinement family rather than trying fitted powers.",
+  "outputs": {
+    "directory": "results/p0677_spent_rxj2129_dual_transverse_survival_field",
+    "field": "rxj2129_absolute_scalar_dual_transverse_fields.npz"
+  },
+  "claim_boundary": [
+    "The fixed square comes from two transverse dimensions and is not inferred from RX J2129 outcomes.",
+    "The 2x/100% gates are frozen before solving and deliberately prevent a sequence of marginal confinement variants.",
+    "A field pass would not establish image topology or accuracy.",
+    "P0633 galaxy kinematics and P0640 cluster lens constraints remain sealed."
+  ]
+}
