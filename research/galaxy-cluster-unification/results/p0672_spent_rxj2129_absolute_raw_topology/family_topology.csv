@@ -1,0 +1,15 @@
+system_label,variant_id,source_family,source_redshift,observed_images,global_roots,surplus_roots,missing_roots,unassigned_roots,potentially_observable_surplus_roots,faintest_assigned_abs_magnification,observable_surplus_abs_magnification_threshold,all_observed_images_assigned,assignment_RMS_arcsec,assignment_max_arcsec,multiplicity_classification,parity_diverse,critical_sign_change_cells,critical_curve_present
+RXJ2129,scalar_absolute_AQUAL,1,0.6786,3,1,0,2,0,0,2.4013656947970334,0.6003414236992584,False,,2.5385616866878635,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,2,0.916,3,1,0,2,0,0,2.9099117264934113,0.7274779316233528,False,,7.562025675001613,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,3,1.5194,4,1,0,3,0,0,2.9995439276263056,0.7498859819065764,False,,1.5391665875936635,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,4,1.5202,3,1,0,2,0,0,2.941361249756848,0.735340312439212,False,,4.730395873108769,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,5,1.521,3,1,0,2,0,0,1.7282537973014467,0.43206344932536167,False,,7.35114725265011,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,6,3.0815,3,1,0,2,0,0,2.1540328835512117,0.5385082208878029,False,,11.254204590516078,missing_multiplicity,False,0,False
+RXJ2129,scalar_absolute_AQUAL,7,3.427,3,1,0,2,0,0,2.920648250911927,0.7301620627279818,False,,5.214395205116393,missing_multiplicity,False,0,False
+RXJ2129,tensor_absolute_P0669,1,0.6786,3,1,0,2,0,0,2.394941294551553,0.5987353236378883,False,,2.5412172251642935,missing_multiplicity,False,0,False
+RXJ2129,tensor_absolute_P0669,2,0.916,3,1,0,2,0,0,2.8952145622627037,0.7238036405656759,False,,7.556623078501698,missing_multiplicity,False,0,False
+RXJ2129,tensor_absolute_P0669,3,1.5194,4,1,0,3,0,0,2.979696082946985,0.7449240207367462,False,,1.542305536144549,missing_multiplicity,False,0,False
+RXJ2129,tensor_absolute_P0669,4,1.5202,3,1,0,2,0,0,2.9228381880664744,0.7307095470166186,False,,4.734435320684013,missing_multiplicity,False,0,False
+RXJ2129,tensor_absolute_P0669,5,1.521,3,1,0,2,0,0,1.7276137243805267,0.4319034310951317,False,,7.35089222849996,missing_multiplicity,False,0,False
+RXJ2129,tensor_absolute_P0669,6,3.0815,3,1,0,2,0,0,2.156982227046318,0.5392455567615795,False,,11.281354245076843,missing_multiplicity,False,0,False
+RXJ2129,tensor_absolute_P0669,7,3.427,3,1,0,2,0,0,2.9041571403084063,0.7260392850771016,False,,5.209029639509482,missing_multiplicity,False,0,False

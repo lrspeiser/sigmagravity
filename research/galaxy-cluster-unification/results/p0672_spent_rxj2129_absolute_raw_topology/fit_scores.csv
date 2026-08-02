@@ -1,0 +1,3 @@
+model,training_RMS_arcsec,training_roots_converged,heldout_RMS_arcsec,heldout_roots_converged,optimizer_cost,nuisance_parameters_near_bound
+scalar_absolute_AQUAL,7.0869075004738,15,17.83733584047062,7,6201.196216239036,4
+tensor_absolute_P0669,7.086162857180997,15,17.83462113719115,7,6218.76813221689,4

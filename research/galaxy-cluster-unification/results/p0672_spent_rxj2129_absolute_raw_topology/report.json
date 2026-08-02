@@ -1,0 +1,98 @@
+{
+  "report_version": "P0672-SPENT-RXJ2129-ABSOLUTE-RAW-TOPOLOGY-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_spent_robustness": false,
+  "protocol_sha256": "22e3d1e32306b8cad7811e2075c324bdc05287d18164c2e12a8e094f1629801a",
+  "source_sha256": "9b9e7974fd845319bc566683b330855fd4a1d493541e7ef1ab98591192e4174e",
+  "field_sha256": "71c39b4c61b7c34da2c354ef5310292e4076f0f66e5ee6c2fe88f2998205dabf",
+  "coverage": {
+    "training_images": 15,
+    "spent_heldout_images": 7,
+    "source_families": 7,
+    "ordinary_nuisance_parameters": 4,
+    "profiled_source_coordinates": 14,
+    "gravity_parameters": 0,
+    "photon_amplitudes": 0
+  },
+  "fit_scores": [
+    {
+      "model": "scalar_absolute_AQUAL",
+      "training_RMS_arcsec": 7.0869075004738,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 17.83733584047062,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 6201.196216239036,
+      "nuisance_parameters_near_bound": 4
+    },
+    {
+      "model": "tensor_absolute_P0669",
+      "training_RMS_arcsec": 7.086162857180997,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 17.83462113719115,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 6218.76813221689,
+      "nuisance_parameters_near_bound": 4
+    }
+  ],
+  "comparisons": {
+    "tensor_training_improvement_fraction_vs_scalar": 0.0001050730932714572,
+    "tensor_heldout_worsening_fraction_vs_scalar": -0.00015219219415663066,
+    "compact_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "tensor_to_compact_halo_heldout_RMS_ratio": 7.032282924367435,
+    "published_multi_halo_reference_RMS_arcsec": 0.29
+  },
+  "topology": {
+    "scalar_absolute_AQUAL": {
+      "families": 7,
+      "missing_multiplicity_families": 7,
+      "exact_multiplicity_families": 0,
+      "demagnified_only_surplus_families": 0,
+      "potentially_observable_surplus_families": 0,
+      "exact_or_demagnified_only_families": 0,
+      "parity_diverse_families": 0,
+      "critical_curve_present_families": 0,
+      "total_global_roots": 7,
+      "total_observed_images": 22
+    },
+    "tensor_absolute_P0669": {
+      "families": 7,
+      "missing_multiplicity_families": 7,
+      "exact_multiplicity_families": 0,
+      "demagnified_only_surplus_families": 0,
+      "potentially_observable_surplus_families": 0,
+      "exact_or_demagnified_only_families": 0,
+      "parity_diverse_families": 0,
+      "critical_curve_present_families": 0,
+      "total_global_roots": 7,
+      "total_observed_images": 22
+    }
+  },
+  "gate_results": {
+    "P0671_parent": true,
+    "training_roots": true,
+    "heldout_roots": true,
+    "training_improvement": false,
+    "heldout_stability": true,
+    "heldout_absolute_RMS": false,
+    "compact_halo_comparison": false,
+    "no_missing_multiplicity": false,
+    "observable_surplus": true,
+    "acceptable_multiplicity": false,
+    "parity_diversity": false,
+    "critical_curves": false,
+    "nuisance_bounds": false,
+    "no_fitted_gravity": true,
+    "no_fitted_photon_amplitude": true,
+    "sealed_targets_untouched": true
+  },
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "Every RX J2129 image is spent; P0672 can reject or diagnose the mechanism but cannot validate it.",
+    "The global finite seed search can miss roots with very small basins or beyond 48 arcseconds.",
+    "Published multiple-image catalogs can omit demagnified, obscured, or unidentified images, so surplus roots are graded by relative magnification rather than all treated as failures.",
+    "The 33-cell physical field and bicubic interpolation are coarse for cluster critical curves; a successful topology audit would still require frozen resolution convergence.",
+    "P0633 galaxy kinematics and P0640 cluster lens constraints remain sealed."
+  ]
+}
