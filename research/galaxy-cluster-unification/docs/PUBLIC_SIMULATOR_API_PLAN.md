@@ -27,20 +27,32 @@ flowchart LR
 ```
 
 Vercel is well suited to the documentation, interactive front end, request
-validation, authentication, and short catalog calls. The 3D AQUAL runs already
-take tens of seconds on a 65-cubed grid and larger experiments can take much
-longer, so production solves should be asynchronous workers rather than a web
-function held open. The worker can initially run on Modal or as a Cloud Run
-job. Cloud Run jobs support independently parallel tasks and long task
-timeouts; Modal exposes FastAPI-compatible web functions and also documents
-restricted/single-use execution for untrusted code.
+validation, authentication, and short catalog calls. It should not own the
+scientific process. The 3D AQUAL runs already take tens of seconds on a
+65-cubed grid; the current P0657 full lens score takes about 39 seconds, and the
+217-by-217 P0654 exact-fold run took 244 to 286 seconds on the development
+machine. Batches, larger grids, and uploaded formulas can run much longer.
+
+As verified on 2026-08-02, Vercel Fluid Compute documents maximum function
+durations of 300 seconds on Hobby and 800 seconds on Pro/Enterprise. Those
+limits can technically contain some current runs, but tying billing,
+reliability, and HTTP lifetime to a scientific optimizer remains the wrong
+architecture. The gateway should enqueue immediately and return `202 Accepted`.
+
+The worker can initially run on Modal or as a Cloud Run job. Cloud Run jobs
+default to a ten-minute task timeout and document configurable task timeouts up
+to seven days. Modal Sandboxes can block all outbound networking and mount a
+restricted dataset/result volume, which is appropriate only for a later
+arbitrary-code tier. The safe formula language does not need an untrusted-code
+sandbox.
 
 Current platform references:
 
-- Vercel function limits: <https://vercel.com/docs/functions/limitations>
+- Vercel function duration: <https://vercel.com/docs/functions/configuring-functions/duration>
 - Cloud Run jobs: <https://cloud.google.com/run/docs/create-jobs>
+- Cloud Run task timeout: <https://cloud.google.com/run/docs/configuring/task-timeout>
 - Modal web functions: <https://modal.com/docs/guide/webhooks>
-- Modal restricted functions: <https://modal.com/docs/guide/restricted-access>
+- Modal Sandbox networking: <https://modal.com/docs/guide/sandbox-networking>
 
 ## Version 1 API
 
@@ -50,11 +62,32 @@ Current platform references:
 | `GET /v1/galaxies` | filter real galaxies by morphology, mass, gas fraction, or survey |
 | `GET /v1/galaxies/{id}` | return metadata and links to permitted mass-map products |
 | `GET /v1/clusters` | list cluster maps and available raw-constraint score packs |
+| `GET /v1/clusters/{id}` | return one cluster's map versions, observable packs, and sealed/open status |
 | `POST /v1/galaxies/synthetic` | create a seeded observation-matched galaxy from declared parameters |
+| `POST /v1/clusters/synthetic` | create a controlled multi-component cluster without claiming observational identity |
 | `POST /v1/models/validate` | parse and dimension-check a submitted equation without running it |
+| `POST /v1/models` | register a validated canonical formula and return its immutable model ID |
+| `GET /v1/models/{id}` | return canonical equation, units, parameter count, provenance, and prior runs |
 | `POST /v1/runs` | submit one formula/object/method request and return a run ID |
 | `GET /v1/runs/{id}` | return state, logs, parameter accounting, scores, and artifact links |
+| `GET /v1/runs/{id}/events` | stream queued/running/scoring/final lifecycle events |
 | `POST /v1/batches` | evaluate one frozen formula on a declared sample/holdout |
+
+A minimal run request is explicit and content-addressable:
+
+```json
+{
+  "model_id": "mdl_sha256_...",
+  "object": {"kind": "galaxy", "id": "DDO154", "version": "map_sha256_..."},
+  "solver": {"id": "qumond_2d", "version": "solver_sha256_...", "grid": "native"},
+  "observables": ["velocity_field", "rotation_curve"],
+  "comparators": ["newtonian", "mond_rar_fixed", "declared_halo_fit"],
+  "seed": 154
+}
+```
+
+The immediate response contains a run ID, an existing cached run ID when every
+hash matches, and URLs for status/events. It never waits for the field solve.
 
 ## Formula interface
 
@@ -80,6 +113,13 @@ isolated, network-disabled, single-use sandbox with strict CPU, memory, time,
 and output limits. Those runs must be labeled separately from equation-language
 runs because arbitrary implementations are harder to audit.
 
+The first formula language should cover the mechanisms actually exercised in
+this repository: algebraic acceleration laws, divergence-form constitutive
+laws, Poisson/AQUAL/QUMOND solves, local tensor closures, path averages,
+conservative deposition, and self-adjoint graph diffusion. A researcher should
+compose these from supported typed operators; they should not submit a string
+that is passed to Python.
+
 ## Every run must return
 
 - formula canonical form and SHA-256;
@@ -95,22 +135,62 @@ runs because arbitrary implementations are harder to audit.
 - machine-readable JSON/CSV and human-readable plots;
 - a permanent run ID and citation-ready manifest.
 
+## Current implementation readiness
+
+| Layer | Reusable now | Required before hosting |
+|---|---|---|
+| Object catalog | real galaxy maps, observation-matched replicas, raw cluster component maps | one versioned manifest with licenses and sealed/open flags |
+| Solvers | Newtonian Poisson, AQUAL, QUMOND, lens/root and transport operators | stable serializable request/result wrappers and resource estimates |
+| Comparators | Newtonian, fixed MOND/RAR, declared lens baselines | uniform comparator interface and parameter-accounting schema |
+| Reproducibility | frozen JSON protocols, hashes, CSV/JSON/PNG artifacts, regression tests | content-addressed artifact store and signed run manifest |
+| Formula submission | Python implementations in the repository | safe typed AST, unit checker, canonicalizer, and operator allowlist |
+| Execution | deterministic local CLI runs | queue, worker image, cancellation, quotas, caching, and event stream |
+| Public UI/API | route plan only | FastAPI/OpenAPI service, SDK, Vercel app, auth, and staging deployment |
+
+P0652 through P0658 are useful API fixtures. They include successful numerical
+invariants, failed predictive gates, root-topology failures, and a 400-attempt
+solver audit. The hosted conformance suite should reproduce these negative
+results exactly; retaining failed runs is a product requirement, not clutter.
+
 ## Delivery stages
 
 1. Stabilize serializable `GalaxyMap`, `ClusterMap`, `Formula`, `RunSpec`, and
-   `RunResult` schemas in the Python package.
-2. Wrap the existing deterministic simulator in a local FastAPI service and
-   generate an OpenAPI contract plus Python client.
-3. Add the safe equation parser, unit checker, parameter counter, and a small
-   conformance suite of Newtonian/MOND formulas.
-4. Add asynchronous jobs, immutable artifacts, content-addressed caching, rate
-   limits, and authenticated preregistered holdouts.
-5. Deploy the front end/gateway to Vercel and the solver container to the chosen
-   compute backend; publish a public staging URL.
-6. Invite a small external replication group, retain every failed run, and fix
+   `RunResult` schemas in the Python package. Include observed/synthetic,
+   open/sealed, license, hash, units, coordinate frame, and uncertainty fields.
+2. Put every current object and P0630-P0658 fixture into a versioned catalog.
+   A catalog validation command must fail on missing license, hash, units, or
+   provenance.
+3. Wrap the existing deterministic simulator in a local FastAPI service and
+   generate an OpenAPI contract plus Python client. First acceptance test:
+   create a seeded replica, fetch a real galaxy by ID, submit fixed MOND, and
+   reproduce the local P0632 result hashes.
+4. Add the safe equation parser, unit checker, parameter counter, canonical
+   hasher, and conformance formulas for Newtonian, fixed MOND/RAR, QUMOND,
+   P0655 deposition, and P0657 diffusion. Invalid dimensions and per-object
+   hidden parameters must be rejected before queueing.
+5. Add asynchronous jobs with `queued`, `running`, `scoring`, `succeeded`,
+   `failed`, and `cancelled` states; immutable artifacts; content-addressed
+   caching; quotas; and authenticated preregistered holdouts. Identical run
+   hashes must return the cached result without recomputation.
+6. Containerize one CPU worker and benchmark small/medium/large resource
+   classes. Deploy it first to Cloud Run Jobs or Modal; verify cancellation,
+   retry idempotence, numerical determinism, and artifact survival.
+7. Deploy the documentation/front end and thin gateway to Vercel. The browser
+   must be able to search/call a specific galaxy, create a synthetic galaxy,
+   validate/register a formula, submit a batch, follow events, and download a
+   citation-ready result without holding an HTTP request open.
+8. Add the optional arbitrary-code tier only after threat modeling. Run each
+   submission in a network-blocked, single-use sandbox with read-only datasets,
+   a per-run writable output path, and hard CPU/memory/time/output limits.
+9. Invite a small external replication group, retain every failed run, and fix
    usability issues without changing frozen scientific scores.
-7. Version and publish the production API, SDK, examples, data licenses, model
-   cards, and citation instructions.
+10. Version and publish the production API, SDK, notebook examples, data
+    licenses, model cards, uptime/support policy, and citation instructions.
+
+Public-launch acceptance is stricter than “the endpoint works”: a clean worker
+must reproduce selected local fixture hashes/tolerances, disclose every fitted
+parameter, keep sealed outcomes inaccessible until protocol authorization,
+and return a useful failure artifact when a formula diverges or loses roots.
 
 The deployment follows the final scientific rejection audit, but schema and
 serialization decisions begin during map ingestion so the hosted simulator is
