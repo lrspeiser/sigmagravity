@@ -1,0 +1,5 @@
+model,parameter,value,lower,upper
+projected_spectral_routing_P0693,map_center_x_arcsec,1.6031165956270417,-3.0,3.0
+projected_spectral_routing_P0693,map_center_y_arcsec,1.251694402059237,-3.0,3.0
+projected_spectral_routing_P0693,external_shear_gamma1_at_reference_source,-0.11159754380064904,-0.25,0.25
+projected_spectral_routing_P0693,external_shear_gamma2_at_reference_source,-0.16923765765020987,-0.25,0.25

@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0692-routing-continuum`](latest-findings/2026-08-02-p0692-routing-continuum/README.md).
-It maps the frozen source-routing continuum and isolates one viable but
-non-promotable topology transition. The prior P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0693-projected-spectral-joint-screen`](latest-findings/2026-08-02-p0693-projected-spectral-joint-screen/README.md).
+It tests one parameter-free projected baryonic controller jointly on a real
+spent galaxy map and spent raw cluster topology. The prior P0692, P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0692-routing-continuum`](latest-findings/2026-08-02-p0692-routing-continuum/README.md),
 [`latest-findings/2026-08-02-p0691-multipole-gated-routing`](latest-findings/2026-08-02-p0691-multipole-gated-routing/README.md),
 [`latest-findings/2026-08-02-p0690-full-routing-screen`](latest-findings/2026-08-02-p0690-full-routing-screen/README.md),
 [`latest-findings/2026-08-02-p0689-source-routing-audit`](latest-findings/2026-08-02-p0689-source-routing-audit/README.md),
@@ -159,6 +160,18 @@ a parameter-free projected spectral-anisotropy hypothesis,
 `e_2D=1-lambda_min/lambda_max=0.272023`, which must face a separately frozen
 real-2D galaxy and RX J2129 test. See
 [`docs/P0692_SPENT_LINEAR_ROUTING_CONTINUUM_RESULTS.md`](docs/P0692_SPENT_LINEAR_ROUTING_CONTINUUM_RESULTS.md).
+
+P0693 replaces the spent `f=0.30` clue with a parameter-free projected
+spectral anisotropy, `e_2D=1-lambda_min/lambda_max`. It produces the strongest
+source-routing cluster result: RX J2129 calculates `0.272023`, recovers all
+training and heldout roots, scores `0.601/2.670 arcsec`, has no missing family,
+all parities and critical curves, two allowed surplus-image families, and a
+heldout error only `1.053x` the object-specific compact halo. The joint verdict
+is nevertheless fail. Real-map DDO154 scores `3.943 km/s`, `1.352x` algebraic
+MOND and slightly worse than ordinary 3D QUMOND. The global covariance scalar
+does not advance; the next frozen diagnostic asks whether any allowed mixture
+of the current endpoints can close the galaxy gap. See
+[`docs/P0693_PROJECTED_SPECTRAL_ROUTING_JOINT_RESULTS.md`](docs/P0693_PROJECTED_SPECTRAL_ROUTING_JOINT_RESULTS.md).
 
 ## Untouched external validation (P0633)
 

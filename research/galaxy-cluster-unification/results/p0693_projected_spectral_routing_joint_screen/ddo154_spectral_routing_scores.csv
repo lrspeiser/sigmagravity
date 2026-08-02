@@ -1,0 +1,3 @@
+variant,routing_fraction,points,RMSE_km_s,weighted_RMSE_km_s,mean_bias_km_s
+lumpy_nominal_total,0.08352413225178856,12,3.943087282136909,3.2740066951971047,-1.4095195888614722
+axisymmetric_nominal_total,0.0,12,4.022580518098925,3.319274789635158,-1.349549073600227

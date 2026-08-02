@@ -1,0 +1,292 @@
+{
+  "report_version": "P0693-PROJECTED-SPECTRAL-ROUTING-JOINT-SCREEN-RESULTS-1.0.0",
+  "status": "fail",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_robustness": false,
+  "candidate_advanced_to_sealed_outcomes": false,
+  "protocol_sha256": "2a489bc8ae1b9095a1bbb6f02ac34c51596e263b07e75f05d6d21ca358c2f9c4",
+  "source_sha256": "3670d6deeb84466d2192ded0409a0d5f1dcae130cdf7d7263692d35d3688f76c",
+  "operator_source_sha256": "0f61400a79b1d74443ce690dde04a7941dacae45d6f2358f1e0fdeb44b5981ee",
+  "parent_sha256": {
+    "P0692": "47655d5160691b01b20d51a3e06ef62ffda63997bb2a76555df1d4d05eb9b78a",
+    "P0635": "70de638d621e284d2c3065a86e0e1dcdc50befd89118a369c25b72212be4658c",
+    "P0635_geometry": "fd0c425679329453c93c974fa5dcc1207e0df8334bec1e194bc53bc924c1e426",
+    "P0639": "58843e5f02a71182bea6da7f0a88cea836e9939fe1f474a6353592b9ae4ab1d8",
+    "P0670": "5f4d87855fbab10a071b8b36169fbc86d9679025f2d256a8eb82f360a41326fc"
+  },
+  "galaxy_map_sha256": "6f12bd9d6015d75e35389434057ab9532b45aa38063433be37cdc585913e012c",
+  "cluster_map_sha256": "4804b357f9c67bb204b058e98de4d1ddf00340e301b86d001bb0a21132c47a77",
+  "galaxy_field_sha256": "845aa224c460c0f0f54d2d2a85704af18b5d4dd5b4b7b69621a645567ac5bc95",
+  "cluster_field_sha256": "e2027bb44b35ef5d581bada109c9161d0ea8d0fb709437b1ee2340666fc1b953",
+  "integrity_gates": {
+    "P0692_status": true,
+    "P0692_not_advanced": true,
+    "P0635_status": true,
+    "P0635_no_velocity_product": true,
+    "P0639_status": true,
+    "P0639_outcomes_sealed": true,
+    "P0670_parent": true,
+    "no_new_constants": true,
+    "no_per_object_gravity": true,
+    "no_fitted_routing": true,
+    "no_fitted_photon": true,
+    "sealed_targets_untouched": true,
+    "raw_coverage": true
+  },
+  "spectral_fraction_range_all_permitted_baryon_maps": [
+    0.0,
+    0.7980563514642984
+  ],
+  "spent_DDO154": {
+    "component_geometry": {
+      "gas": {
+        "fraction": 0.059478476173810635,
+        "covariance_kpc2": [
+          [
+            12.256079816148642,
+            0.10263507978685364
+          ],
+          [
+            0.10263507978685368,
+            13.002568345896284
+          ]
+        ],
+        "eigenvalues_kpc2": [
+          12.242225591146754,
+          13.016422570898172
+        ]
+      },
+      "stars": {
+        "fraction": 0.7497560702016492,
+        "covariance_kpc2": [
+          [
+            2.0214397941863407,
+            0.08199784703440187
+          ],
+          [
+            0.0819978470344019,
+            8.072326870033056
+          ]
+        ],
+        "eigenvalues_kpc2": [
+          2.0203288144972236,
+          8.073437849722172
+        ]
+      },
+      "total": {
+        "fraction": 0.08352413225178856,
+        "covariance_kpc2": [
+          [
+            11.68677973262446,
+            0.10210470303545857
+          ],
+          [
+            0.10210470303545865,
+            12.731190413620029
+          ]
+        ],
+        "eigenvalues_kpc2": [
+          11.676891295648419,
+          12.741078850596072
+        ]
+      }
+    },
+    "candidate_fraction": 0.08352413225178856,
+    "candidate_covariance_kpc2": [
+      [
+        11.68677973262446,
+        0.10210470303545857
+      ],
+      [
+        0.10210470303545865,
+        12.731190413620029
+      ]
+    ],
+    "candidate_eigenvalues_kpc2": [
+      11.676891295648419,
+      12.741078850596072
+    ],
+    "axisymmetric_fraction": 0.0,
+    "axisymmetric_covariance_kpc2": [
+      [
+        12.230723397772909,
+        -2.4634114889064227e-17
+      ],
+      [
+        -2.2170703400157803e-17,
+        12.230723397772909
+      ]
+    ],
+    "axisymmetric_eigenvalues_kpc2": [
+      12.230723397772909,
+      12.230723397772909
+    ],
+    "candidate_audit": {
+      "mixed_source_identity_relative_RMS": 0.0,
+      "field_normalized_residual_RMS": 4.5421189478976044e-14,
+      "boundary_maximum_relative_mismatch": 0.0,
+      "finite": true
+    },
+    "axisymmetric_audit": {
+      "mixed_source_identity_relative_RMS": 0.0,
+      "field_normalized_residual_RMS": 4.273468475728822e-14,
+      "boundary_maximum_relative_mismatch": 0.0,
+      "finite": true
+    },
+    "candidate_score": {
+      "variant": "lumpy_nominal_total",
+      "routing_fraction": 0.08352413225178856,
+      "points": 12,
+      "RMSE_km_s": 3.943087282136909,
+      "weighted_RMSE_km_s": 3.2740066951971047,
+      "mean_bias_km_s": -1.4095195888614722
+    },
+    "axisymmetric_score": {
+      "variant": "axisymmetric_nominal_total",
+      "routing_fraction": 0.0,
+      "points": 12,
+      "RMSE_km_s": 4.022580518098925,
+      "weighted_RMSE_km_s": 3.319274789635158,
+      "mean_bias_km_s": -1.349549073600227
+    },
+    "algebraic_MOND_comparator": {
+      "points": 12,
+      "RMSE_km_s": 2.916081351928278,
+      "weighted_RMSE_km_s": 1.2255816436075178,
+      "mean_bias_km_s": 1.327429851089618
+    },
+    "three_dimensional_QUMOND_comparator": {
+      "points": 12,
+      "RMSE_km_s": 3.936047752283948,
+      "weighted_RMSE_km_s": 3.256147109601539,
+      "mean_bias_km_s": -1.3909434717208093
+    },
+    "comparisons": {
+      "candidate_RMSE_to_algebraic_MOND_ratio": 1.3521869955821075,
+      "candidate_weighted_RMSE_to_algebraic_MOND_ratio": 2.671390120987793,
+      "candidate_RMSE_to_3D_QUMOND_ratio": 1.00178847674012
+    }
+  },
+  "sealed_baryon_geometry_only": {
+    "targets": 13,
+    "total_fraction_min": 0.01599225632408352,
+    "total_fraction_median": 0.5172891433959621,
+    "total_fraction_max": 0.7760802937847604,
+    "kinematics_opened": false,
+    "candidate_scores_computed": false
+  },
+  "spent_RXJ2129": {
+    "candidate_fraction": 0.27202347157855733,
+    "candidate_covariance_kpc2": [
+      [
+        6653.5502900798865,
+        611.0421496628857
+      ],
+      [
+        611.0421496628858,
+        5235.91666762043
+      ]
+    ],
+    "candidate_eigenvalues_kpc2": [
+      5008.894934791131,
+      6880.572022909185
+    ],
+    "field": {
+      "mixed_source_identity_relative_RMS": 0.0,
+      "field_normalized_residual_RMS": 3.153358161864435e-14,
+      "boundary_maximum_relative_mismatch": 0.0,
+      "finite": true,
+      "strong_lens_median_physical_deflection_arcsec": 12.637206477673411,
+      "strong_lens_RMS_physical_deflection_arcsec": 12.493238656393089,
+      "normalized_deflection_curl_RMS": 4.314654805716946e-16
+    },
+    "fit": {
+      "model": "projected_spectral_routing_P0693",
+      "training_RMS_arcsec": 0.601411110655891,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 2.670406808479609,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 48.03879541910166,
+      "nuisance_parameters_near_bound": 0
+    },
+    "compact_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "candidate_to_compact_halo_heldout_RMS_ratio": 1.0529551514399753,
+    "topology": {
+      "families": 7,
+      "missing_multiplicity_families": 0,
+      "exact_multiplicity_families": 5,
+      "demagnified_only_surplus_families": 0,
+      "potentially_observable_surplus_families": 2,
+      "exact_or_demagnified_only_families": 5,
+      "parity_diverse_families": 7,
+      "critical_curve_present_families": 7,
+      "total_global_roots": 25,
+      "total_observed_images": 22
+    }
+  },
+  "maximum_joint_mixed_source_identity_relative_RMS": 0.0,
+  "maximum_joint_field_normalized_residual_RMS": 4.5421189478976044e-14,
+  "maximum_joint_boundary_relative_mismatch": 0.0,
+  "gate_results": {
+    "P0692_status": true,
+    "P0692_not_advanced": true,
+    "P0635_status": true,
+    "P0635_no_velocity_product": true,
+    "P0639_status": true,
+    "P0639_outcomes_sealed": true,
+    "P0670_parent": true,
+    "no_new_constants": true,
+    "no_per_object_gravity": true,
+    "no_fitted_routing": true,
+    "no_fitted_photon": true,
+    "sealed_targets_untouched": true,
+    "raw_coverage": true,
+    "spectral_fractions_finite": true,
+    "spectral_fraction_lower": true,
+    "spectral_fraction_upper": true,
+    "axisymmetric_galaxy_fraction": true,
+    "sealed_geometry_coverage": true,
+    "mixed_source_identity": true,
+    "field_residual": true,
+    "boundary": true,
+    "finite": true,
+    "galaxy_points": true,
+    "galaxy_RMSE_vs_MOND": false,
+    "galaxy_weighted_RMSE_vs_MOND": false,
+    "galaxy_RMSE_vs_3D_QUMOND": false,
+    "galaxy_bias": true,
+    "cluster_field_amplitude_lower": true,
+    "cluster_field_amplitude_upper": true,
+    "cluster_field_curl": true,
+    "training_roots": true,
+    "heldout_roots": true,
+    "training_RMS": true,
+    "heldout_RMS": true,
+    "compact_halo_comparison": true,
+    "no_missing_multiplicity": true,
+    "observable_surplus": true,
+    "acceptable_multiplicity": true,
+    "parity_diversity": true,
+    "critical_curves": true,
+    "nuisance_bounds": true,
+    "accounting_no_new_constants": true,
+    "accounting_no_per_object_gravity": true,
+    "accounting_no_fitted_routing": true,
+    "accounting_no_fitted_photon": true,
+    "sealed_outcomes_untouched": true
+  },
+  "failed_gates": [
+    "galaxy_RMSE_vs_MOND",
+    "galaxy_weighted_RMSE_vs_MOND",
+    "galaxy_RMSE_vs_3D_QUMOND"
+  ],
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "DDO154 and RX J2129 are fully spent mechanism-development systems.",
+    "P0692 generated the spectral-anisotropy hypothesis after exposing a viable routing interval; P0693 is not independent validation.",
+    "P0639 target baryonic maps may be audited, but their kinematics and candidate outcomes remain sealed.",
+    "The zero-slip photon closure is diagnostic rather than a relativistic metric theory.",
+    "P0633 and P0640 outcomes remain sealed unless every P0693 advancement gate passes."
+  ]
+}
