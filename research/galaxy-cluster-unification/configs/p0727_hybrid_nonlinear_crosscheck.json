@@ -1,0 +1,69 @@
+{
+  "stage": "P0727",
+  "purpose": "Test whether a bounded universal Picard warm-up followed by Newton-GMRES independently closes the remaining DDO101 root while preserving agreement with P0725.",
+  "sampleStatus": "previously_unsealed_spent_numerical_debugging_systems",
+  "baseManifest": "hosted-simulator/examples/models/aqual.json",
+  "p0725Report": "results/p0725_aqual_solver_robustness/report.json",
+  "systems": [
+    {
+      "id": "DDO53",
+      "p0724FieldJobId": "job_dc716dfc51cca7a3358e3dc1",
+      "dataUploadId": "upload_69e240568960a3bfecba5fe5",
+      "inputBundleSha256": "d7ba34c267abf391cae39650bdf1452a4261723d8a94ad077519ed103fc0d955",
+      "archiveSha256": "bd4599893898a7bfda8fd7c80553c0b7fc74ae32a0dd2b4a0c2289eb978fb947",
+      "referenceDirectory": "tmp/p0725-worker-cache/runs/linearized_d020/DDO53",
+      "referenceScientificResultSha256": "52021c6dd821d07714326b38cc29d9c256bab96e7e02de04b7be459d57760e6b"
+    },
+    {
+      "id": "DDO101",
+      "p0724FieldJobId": "job_60d432ed8af85b5474ec9553",
+      "dataUploadId": "upload_bf064dab972a544ed62df3bc",
+      "inputBundleSha256": "7457c0dd034be9bc8f2ba2a9bbf06fceb236921e60b94400b9570e35f69abdb8",
+      "archiveSha256": "dff60cb853e0e116c671764b6263d0aafb61b1b6e25d775056c4e369ccdcdb75",
+      "referenceDirectory": "tmp/p0725-worker-cache/runs/linearized_d020/DDO101",
+      "referenceScientificResultSha256": "bf7c4d34655edaf0b42550b32e1d4cd43bae4e0308c63e7900c2a4c7d2d885bc"
+    }
+  ],
+  "solverConstants": {
+    "family": "nonlinear_finite_volume",
+    "relativeTolerance": 1e-8,
+    "residualTolerance": 1e-8,
+    "maxIterations": 160,
+    "coefficientFloor": 1e-8,
+    "initialization": "linearized_unit_coefficient",
+    "nonlinearMethod": "newton_krylov",
+    "krylovMethod": "gmres",
+    "krylovInnerIterations": 30,
+    "lineSearch": "armijo",
+    "picardWarmupDamping": 0.20
+  },
+  "solverVariants": [
+    { "id": "hybrid_picard20_newton", "picardWarmupIterations": 20, "role": "short basin approach" },
+    { "id": "hybrid_picard40_newton", "picardWarmupIterations": 40, "role": "moderate basin approach" },
+    { "id": "hybrid_picard80_newton", "picardWarmupIterations": 80, "role": "near-root basin approach" }
+  ],
+  "parallelWorkers": 6,
+  "gates": {
+    "requiredSystems": 2,
+    "requiredVariants": 3,
+    "minimumIndependentVariantsConvergingBothSystems": 1,
+    "maximumEquationResidual": 1e-7,
+    "maximumRelativeUpdate": 1e-8,
+    "maximumReferencePredictionNormalizedRmse": 0.01,
+    "maximumReferencePotentialNormalizedRmse": 0.01,
+    "maximumReferenceAccelerationNormalizedRmse": 0.01,
+    "minimumKnownAnswerConvergedVariants": 3,
+    "maximumKnownAnswerRelativeFieldError": 1e-6,
+    "requireRequestedIterationLimitExecuted": true,
+    "maximumPerObjectGravityParameters": 0
+  },
+  "selectionPolicy": "Select the smallest warm-up count that converges both systems and agrees with the locked P0725 Picard reference in potential, acceleration, and circular speeds. Observed speeds do not select the method.",
+  "rethinkPolicy": "If no hybrid converges and agrees, keep the DDO101 root provisional and preregister coefficient homotopy or a nonlinear preconditioner; do not initialize from the P0725 answer or loosen tolerances.",
+  "claimBoundary": [
+    "This is a numerical basin and root cross-check on two spent galaxies, not a theory fit or holdout.",
+    "Warm-up iterations use one universal damping and count against the total declared iteration budget.",
+    "P0725 fields are comparison-only and never initialize the hybrid solver.",
+    "The AQUAL equation, physical parameters, arrays, grid, boundary, and observations remain locked.",
+    "A pass verifies these discrete roots and does not establish observational adequacy."
+  ]
+}

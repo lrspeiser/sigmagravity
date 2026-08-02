@@ -73,6 +73,8 @@ test("generic nonlinear solver controls are validated and disclosed", () => {
   manifest.solver.residualTolerance = 1e-8;
   manifest.solver.nonlinearMethod = "anderson";
   manifest.solver.andersonHistory = 5;
+  manifest.solver.picardWarmupIterations = 20;
+  manifest.solver.picardWarmupDamping = 0.2;
   let result = validateFieldModel(manifest);
   assert.equal(result.valid, true, result.errors.join("; "));
   assert.match(result.warnings.join(" "), /at most 200 nonlinear iterations/);

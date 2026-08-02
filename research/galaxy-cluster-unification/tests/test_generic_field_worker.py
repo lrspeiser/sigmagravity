@@ -181,6 +181,8 @@ def test_newton_krylov_recovers_a_nonlinear_manufactured_field() -> None:
             "maxIterations": 80,
             "residualTolerance": 1e-8,
             "lineSearch": "armijo",
+            "picardWarmupIterations": 5,
+            "picardWarmupDamping": 0.2,
         }
     )
     solution = solve_field_manifest(manifest, {"forcing": forcing}, spacing)
@@ -191,6 +193,9 @@ def test_newton_krylov_recovers_a_nonlinear_manufactured_field() -> None:
     assert relative_error < 1e-8
     assert solution.metadata["nonlinear_method"] == "newton_krylov"
     assert solution.metadata["krylov_method"] == "lgmres"
+    assert solution.metadata["picard_warmup_iterations"] == 5
+    assert solution.metadata["picard_warmup_damping"] == 0.2
+    assert solution.iterations > 5
 
 
 def test_zero_source_harmonic_boundary_has_a_well_scaled_residual():

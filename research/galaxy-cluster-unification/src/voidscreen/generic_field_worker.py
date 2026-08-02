@@ -446,6 +446,7 @@ def _solve_nonlinear_root_method(
     residual_tolerance: float,
     maximum_iterations: int,
     solver: Mapping[str, Any],
+    iteration_offset: int = 0,
 ) -> tuple[int, float, bool, list[dict[str, Any]], dict[str, Any]]:
     """Solve one nonlinear elliptic field through its discrete residual."""
 
@@ -592,7 +593,90 @@ def _solve_nonlinear_root_method(
                 ),
             }
         )
+    for record in history:
+        record["iteration"] = int(record["iteration"]) + int(iteration_offset)
     return len(history), maximum_update, converged, history, metadata
+
+
+def _run_picard_steps(
+    *,
+    equations: Sequence[Mapping[str, Any]],
+    fields: dict[str, Array],
+    parameters: Mapping[str, float],
+    spacing: Sequence[float],
+    shape: tuple[int, ...],
+    manifest: Mapping[str, Any],
+    boundaries: Mapping[str, float | Array],
+    coefficient_floor: float,
+    damping: float,
+    maximum_iterations: int,
+    relative_tolerance: float,
+    residual_tolerance: float,
+    stop_when_converged: bool,
+    iteration_offset: int = 0,
+) -> tuple[int, float, bool, list[dict[str, Any]]]:
+    history: list[dict[str, Any]] = []
+    maximum_update = math.inf
+    converged = False
+    for local_iteration in range(1, maximum_iterations + 1):
+        maximum_update = 0.0
+        for equation in equations:
+            target, coefficient_expression = _elliptic_lhs(equation["lhs"])
+            source = _scalar_array(
+                evaluate_field_expression(
+                    equation["rhs"],
+                    fields=fields,
+                    parameters=parameters,
+                    spacing=spacing,
+                ),
+                shape,
+                f"equation {equation['id']} rhs",
+            )
+            coefficient = _scalar_array(
+                evaluate_field_expression(
+                    coefficient_expression,
+                    fields=fields,
+                    parameters=parameters,
+                    spacing=spacing,
+                ),
+                shape,
+                f"equation {equation['id']} coefficient",
+            )
+            definition = manifest["fields"][target]
+            default_boundary = definition.get("boundary", {}).get("value", 0.0)
+            solved = solve_variable_coefficient_dirichlet(
+                source,
+                coefficient,
+                spacing,
+                boundaries.get(target, default_boundary),
+                coefficient_floor=coefficient_floor,
+            )
+            previous = fields[target]
+            updated = damping * solved + (1.0 - damping) * previous
+            maximum_update = max(maximum_update, _relative_update(previous, updated))
+            fields[target] = updated
+        current_residuals = _equation_residuals(
+            equations,
+            fields,
+            parameters,
+            spacing,
+            shape,
+            coefficient_floor=coefficient_floor,
+        )
+        history.append(
+            {
+                "iteration": int(iteration_offset) + local_iteration,
+                "maximum_relative_update": maximum_update,
+                "equation_residuals": current_residuals,
+            }
+        )
+        converged = (
+            maximum_update <= relative_tolerance
+            and max(current_residuals.values()) <= residual_tolerance
+        )
+        if stop_when_converged and converged:
+            break
+    return len(history), maximum_update, converged, history
 
 
 def solve_field_manifest(
@@ -662,6 +746,8 @@ def solve_field_manifest(
     coefficient_floor = float(solver.get("coefficientFloor", 1e-8))
     initialization = str(solver.get("initialization", "zero"))
     nonlinear_method = str(solver.get("nonlinearMethod", "picard"))
+    picard_warmup_iterations = int(solver.get("picardWarmupIterations", 0))
+    picard_warmup_damping = float(solver.get("picardWarmupDamping", damping))
     if not math.isfinite(tolerance) or tolerance <= 0:
         raise ValueError("solver relativeTolerance must be finite and positive")
     if not math.isfinite(residual_tolerance) or residual_tolerance <= 0:
@@ -676,6 +762,12 @@ def solve_field_manifest(
         raise ValueError(
             "solver nonlinearMethod must be picard, anderson, or newton_krylov"
         )
+    if picard_warmup_iterations < 0 or picard_warmup_iterations >= maximum_iterations:
+        raise ValueError(
+            "solver picardWarmupIterations must be non-negative and below maxIterations"
+        )
+    if not 0 < picard_warmup_damping <= 1:
+        raise ValueError("solver picardWarmupDamping must lie in (0,1]")
 
     if initialization == "linearized_unit_coefficient":
         for equation in equations:
@@ -698,71 +790,42 @@ def solve_field_manifest(
             )
     root_metadata: dict[str, Any] = {}
     if nonlinear_method == "picard":
-        maximum_update = math.inf
-        converged = False
-        history: list[dict[str, Any]] = []
-        for iteration in range(1, maximum_iterations + 1):
-            maximum_update = 0.0
-            for equation in equations:
-                target, coefficient_expression = _elliptic_lhs(equation["lhs"])
-                source = _scalar_array(
-                    evaluate_field_expression(
-                        equation["rhs"],
-                        fields=fields,
-                        parameters=parameters,
-                        spacing=steps,
-                    ),
-                    shape,
-                    f"equation {equation['id']} rhs",
-                )
-                coefficient = _scalar_array(
-                    evaluate_field_expression(
-                        coefficient_expression,
-                        fields=fields,
-                        parameters=parameters,
-                        spacing=steps,
-                    ),
-                    shape,
-                    f"equation {equation['id']} coefficient",
-                )
-                definition = manifest["fields"][target]
-                default_boundary = definition.get("boundary", {}).get("value", 0.0)
-                solved = solve_variable_coefficient_dirichlet(
-                    source,
-                    coefficient,
-                    steps,
-                    boundaries.get(target, default_boundary),
-                    coefficient_floor=coefficient_floor,
-                )
-                previous = fields[target]
-                updated = damping * solved + (1.0 - damping) * previous
-                maximum_update = max(
-                    maximum_update, _relative_update(previous, updated)
-                )
-                fields[target] = updated
-            current_residuals = _equation_residuals(
-                equations,
-                fields,
-                parameters,
-                steps,
-                shape,
-                coefficient_floor=coefficient_floor,
-            )
-            history.append(
-                {
-                    "iteration": iteration,
-                    "maximum_relative_update": maximum_update,
-                    "equation_residuals": current_residuals,
-                }
-            )
-            if (
-                maximum_update <= tolerance
-                and max(current_residuals.values()) <= residual_tolerance
-            ):
-                converged = True
-                break
+        iteration, maximum_update, converged, history = _run_picard_steps(
+            equations=equations,
+            fields=fields,
+            parameters=parameters,
+            spacing=steps,
+            shape=shape,
+            manifest=manifest,
+            boundaries=boundaries,
+            coefficient_floor=coefficient_floor,
+            damping=damping,
+            maximum_iterations=maximum_iterations,
+            relative_tolerance=tolerance,
+            residual_tolerance=residual_tolerance,
+            stop_when_converged=True,
+        )
     else:
-        iteration, maximum_update, converged, history, root_metadata = (
+        warmup_history: list[dict[str, Any]] = []
+        if picard_warmup_iterations:
+            _warmup_count, _warmup_update, _warmup_converged, warmup_history = (
+                _run_picard_steps(
+                    equations=equations,
+                    fields=fields,
+                    parameters=parameters,
+                    spacing=steps,
+                    shape=shape,
+                    manifest=manifest,
+                    boundaries=boundaries,
+                    coefficient_floor=coefficient_floor,
+                    damping=picard_warmup_damping,
+                    maximum_iterations=picard_warmup_iterations,
+                    relative_tolerance=tolerance,
+                    residual_tolerance=residual_tolerance,
+                    stop_when_converged=False,
+                )
+            )
+        root_iterations, maximum_update, converged, root_history, root_metadata = (
             _solve_nonlinear_root_method(
                 method=nonlinear_method,
                 equations=equations,
@@ -773,10 +836,13 @@ def solve_field_manifest(
                 coefficient_floor=coefficient_floor,
                 relative_tolerance=tolerance,
                 residual_tolerance=residual_tolerance,
-                maximum_iterations=maximum_iterations,
+                maximum_iterations=maximum_iterations - picard_warmup_iterations,
                 solver=solver,
+                iteration_offset=picard_warmup_iterations,
             )
         )
+        history = warmup_history + root_history
+        iteration = picard_warmup_iterations + root_iterations
 
     residuals = _equation_residuals(
         equations,
@@ -811,6 +877,8 @@ def solve_field_manifest(
             "coefficient_floor": coefficient_floor,
             "initialization": initialization,
             "nonlinear_method": nonlinear_method,
+            "picard_warmup_iterations": picard_warmup_iterations,
+            "picard_warmup_damping": picard_warmup_damping,
             "requested_maximum_iterations": requested_maximum_iterations,
             "executed_maximum_iterations": maximum_iterations,
             "maximum_iterations_limited_by_worker": (

@@ -378,6 +378,8 @@ export function validateFieldModel(manifest) {
   if (manifest.solver?.andersonRegularization !== undefined && !(manifest.solver.andersonRegularization > 0)) errors.push("solver.andersonRegularization must be positive");
   if (manifest.solver?.krylovMethod !== undefined && !["lgmres", "gmres", "bicgstab", "cgs", "minres", "tfqmr"].includes(manifest.solver.krylovMethod)) errors.push("solver.krylovMethod is unsupported");
   if (manifest.solver?.krylovInnerIterations !== undefined && (!Number.isInteger(manifest.solver.krylovInnerIterations) || manifest.solver.krylovInnerIterations < 1 || manifest.solver.krylovInnerIterations > 200)) errors.push("solver.krylovInnerIterations must be an integer from 1 to 200");
+  if (manifest.solver?.picardWarmupIterations !== undefined && (!Number.isInteger(manifest.solver.picardWarmupIterations) || manifest.solver.picardWarmupIterations < 0 || manifest.solver.picardWarmupIterations >= manifest.solver.maxIterations)) errors.push("solver.picardWarmupIterations must be a non-negative integer below maxIterations");
+  if (manifest.solver?.picardWarmupDamping !== undefined && !(manifest.solver.picardWarmupDamping > 0 && manifest.solver.picardWarmupDamping <= 1)) errors.push("solver.picardWarmupDamping must lie in (0,1]");
   if (manifest.solver?.maxIterations > 200) warnings.push("the current preview worker executes at most 200 nonlinear iterations and records the requested and effective limits");
 
   for (const [name, field] of fields) {

@@ -260,7 +260,9 @@
         "andersonHistory": { "type": "integer", "minimum": 1, "maximum": 20 },
         "andersonRegularization": { "type": "number", "exclusiveMinimum": 0 },
         "krylovMethod": { "enum": ["lgmres", "gmres", "bicgstab", "cgs", "minres", "tfqmr"] },
-        "krylovInnerIterations": { "type": "integer", "minimum": 1, "maximum": 200 }
+        "krylovInnerIterations": { "type": "integer", "minimum": 1, "maximum": 200 },
+        "picardWarmupIterations": { "type": "integer", "minimum": 0 },
+        "picardWarmupDamping": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
       }
     },
     "parameterPolicy": {
