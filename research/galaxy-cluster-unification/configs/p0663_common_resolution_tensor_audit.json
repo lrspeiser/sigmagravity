@@ -1,0 +1,79 @@
+{
+  "protocol_version": "P0663-COMMON-RESOLUTION-TENSOR-AUDIT-1.0.0",
+  "status": "frozen_before_any_P0663_resolution_score",
+  "frozen_utc": "2026-08-02T01:52:00Z",
+  "purpose": "Determine whether the P0662 registered dwarf instability is physical or caused by aliasing in point-sampled downscaling, using a conservative common-resolution comparison while leaving primary candidate scores unchanged.",
+  "parent_result": "results/p0659_tensor_aqual_solver/report.json",
+  "diagnostic_predecessor": "results/p0662_physical_tidal_length_tensor_audit/report.json",
+  "constitutive_equation": "unchanged from P0662: div[mu ((1-sigma) I + sigma n_hat n_hat) grad Phi] = 4 pi G rho_b",
+  "definitions": {
+    "sigma": "unchanged P0662 physical-length quadratic tensor coefficient",
+    "common_resolution_rule": "before grid comparison only, convolve the native surface-density maps by the Gaussian required to reach an effective sigma of one-half target pixel, then evaluate both the filtered native grid and its conservatively sampled coarse grid",
+    "added_native_gaussian_sigma_pixels": "0.5 sqrt(r^2-1), where r=(N_native-1)/(N_coarse-1)",
+    "mass_conservation": "renormalize the sampled surface density so its physical integral equals the filtered native-map integral",
+    "primary_candidate_scores_changed": false,
+    "instrument_resolution_is_gravity_parameter": false,
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "coherence_power": 2.0,
+    "mu_floor": 1e-6,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "map_inputs": {
+    "galaxies": "results/p0639_registered_baryonic_maps/maps",
+    "clusters": "results/p0641_registered_cluster_baryon_maps/maps",
+    "expected_registered_galaxies": 13,
+    "expected_registered_clusters": 4,
+    "galaxy_native_cells": 65,
+    "galaxy_resolution_check_cells": 33,
+    "cluster_primary_cells": 257,
+    "cluster_resolution_check_cells": 129,
+    "galaxy_stellar_scale_sensitivity": {
+      "low": 0.5,
+      "nominal": 1.0,
+      "high": 2.0
+    },
+    "cluster_sensitivity_maps": {
+      "low": [
+        "stellar_surface_density_low_msun_kpc2",
+        "gas_surface_density_low_msun_kpc2"
+      ],
+      "nominal": [
+        "stellar_surface_density_msun_kpc2",
+        "gas_surface_density_msun_kpc2"
+      ],
+      "high": [
+        "stellar_surface_density_high_msun_kpc2",
+        "gas_surface_density_high_msun_kpc2"
+      ]
+    }
+  },
+  "predeclared_progression_gates": {
+    "P0659_all_progression_gates_pass": true,
+    "P0662_failed_only_resolution_stability": true,
+    "common_resolution_mass_conservation_relative_error_max": 1e-12,
+    "primary_candidate_scores_bitwise_unchanged_from_P0662": true,
+    "registered_galaxy_count": 13,
+    "registered_cluster_count": 4,
+    "registered_cluster_to_galaxy_nominal_median_sigma_ratio_min": 10.0,
+    "registered_galaxy_nominal_median_sigma_max": 0.01,
+    "registered_cluster_nominal_median_sigma_min": 0.005,
+    "cluster_to_galaxy_sigma_ratio_min_in_all_mass_sensitivities": 10.0,
+    "common_resolution_median_change_fraction_max": 0.35,
+    "solar_1au_constitutive_anisotropy_max": 2.1e-8,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "The P0662 candidate advances only if the conservative common-resolution audit passes every gate. The native activation scores must reproduce P0662 exactly; smoothing may not be used to improve the primary domain score.",
+  "outputs": {
+    "directory": "results/p0663_common_resolution_tensor_audit"
+  },
+  "claim_boundary": [
+    "P0663 corrects a validation measurement operator; it does not modify the gravity law or its primary scores.",
+    "A pass would authorize outcome-blind real-map field solves, not observational claims.",
+    "Actual future predictions must propagate each instrument's measured beam or PSF rather than infer it from a target outcome.",
+    "No P0633 velocity, P0640 lens constraint, or spent lens residual may be used in P0663 development or selection."
+  ]
+}
