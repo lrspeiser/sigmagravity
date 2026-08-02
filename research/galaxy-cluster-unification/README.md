@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0691-multipole-gated-routing`](latest-findings/2026-08-02-p0691-multipole-gated-routing/README.md).
-It rejects a single global baryonic quadrupole as a sufficient routing
-controller after a frozen raw-topology test. The prior P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0692-routing-continuum`](latest-findings/2026-08-02-p0692-routing-continuum/README.md).
+It maps the frozen source-routing continuum and isolates one viable but
+non-promotable topology transition. The prior P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0691-multipole-gated-routing`](latest-findings/2026-08-02-p0691-multipole-gated-routing/README.md),
 [`latest-findings/2026-08-02-p0690-full-routing-screen`](latest-findings/2026-08-02-p0690-full-routing-screen/README.md),
 [`latest-findings/2026-08-02-p0689-source-routing-audit`](latest-findings/2026-08-02-p0689-source-routing-audit/README.md),
 [`latest-findings/2026-08-02-p0688-monotone-envelope`](latest-findings/2026-08-02-p0688-monotone-envelope/README.md),
@@ -147,6 +148,17 @@ bound. A global shape scalar is therefore insufficient. The next step is a
 frozen, non-promotable continuum atlas to decide whether any linear blend has
 the required topology before the whole family is retired. See
 [`docs/P0691_MULTIPOLE_GATED_SOURCE_ROUTING_RESULTS.md`](docs/P0691_MULTIPOLE_GATED_SOURCE_ROUTING_RESULTS.md).
+
+P0692 freezes 17 routing fractions and treats every row as spent diagnostic
+evidence. One row, `f=0.30`, passes every viability gate: `15/15` training and
+`7/7` heldout roots, `0.495/2.692 arcsec` RMS, no missing family, all seven
+parity-diverse and critical, two allowed surplus-image families, and no
+near-bound nuisance. Its heldout error is `1.0615x` the object-specific compact
+halo. The fraction is not selected or advanced. Instead, the result generates
+a parameter-free projected spectral-anisotropy hypothesis,
+`e_2D=1-lambda_min/lambda_max=0.272023`, which must face a separately frozen
+real-2D galaxy and RX J2129 test. See
+[`docs/P0692_SPENT_LINEAR_ROUTING_CONTINUUM_RESULTS.md`](docs/P0692_SPENT_LINEAR_ROUTING_CONTINUUM_RESULTS.md).
 
 ## Untouched external validation (P0633)
 
