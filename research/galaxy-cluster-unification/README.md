@@ -16,9 +16,10 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest review entry is
-[`latest-findings/2026-08-02-p0688-monotone-envelope`](latest-findings/2026-08-02-p0688-monotone-envelope/README.md).
-It completes the topology-driven repair audit and retires the local-path
-exponent family. The prior P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0689-source-routing-audit`](latest-findings/2026-08-02-p0689-source-routing-audit/README.md).
+It starts a source-placement branch after the local-path exponent family is
+retired. The prior P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
+[`latest-findings/2026-08-02-p0688-monotone-envelope`](latest-findings/2026-08-02-p0688-monotone-envelope/README.md),
 [`latest-findings/2026-08-02-p0687-system-path-coordinate`](latest-findings/2026-08-02-p0687-system-path-coordinate/README.md),
 [`latest-findings/2026-08-02-p0686-locked-path-topology`](latest-findings/2026-08-02-p0686-locked-path-topology/README.md),
 [`latest-findings/2026-08-02-p0684-path-diluted-qumond`](latest-findings/2026-08-02-p0684-path-diluted-qumond/README.md),
@@ -113,6 +114,17 @@ by `0.29-0.35 dex`. The scalar local-path family is retired. The next branch
 will redistribute the effective source while conserving its far-field
 monopole and preserving baryonic multipoles. See
 [`docs/P0688_MONOTONE_ENVELOPE_QUMOND_RESULTS.md`](docs/P0688_MONOTONE_ENVELOPE_QUMOND_RESULTS.md).
+
+P0689 changes source placement instead of reshaping another scalar exponent.
+It routes the positive extra QUMOND source onto the observed baryonic
+morphology and places an equal negative polarization source on the existing
+potential-transition shell, conserving the far-field monopole without a new
+constant. The no-observation audit passes: routed residual `2.47e-14`,
+positive/negative mismatch `1.57e-16`, net added source fraction `9.29e-17`,
+and 78.1% of shell weight inside the boundary. No photon, radial, root, or
+sealed score was computed. The next step is a separately frozen empirical
+screen. See
+[`docs/P0689_SOURCE_CONSERVING_BARYONIC_ROUTING_AUDIT.md`](docs/P0689_SOURCE_CONSERVING_BARYONIC_ROUTING_AUDIT.md).
 
 ## Untouched external validation (P0633)
 
