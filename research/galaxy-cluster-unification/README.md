@@ -1470,7 +1470,7 @@ python scripts/audit_p0636_little_things_baryons.py
 python -m pytest tests/test_p0636_little_things_baryon_acquisition.py -q
 ```
 
-## Formula-neutral 2D/3D simulator commissioning (P0720-P0723)
+## Formula-neutral 2D/3D simulator commissioning (P0720-P0724)
 
 The simulator now has a gravity-independent inverse/forward galaxy path and a
 shared asynchronous field API. Registered gas and stellar maps are converted
@@ -1491,7 +1491,18 @@ is sufficient. See
 and
 [`docs/PUBLIC_SIMULATOR_2D_3D_GENERATOR_ROADMAP.md`](docs/PUBLIC_SIMULATOR_2D_3D_GENERATOR_ROADMAP.md).
 
+P0724 then ran 96 frozen grid, box, and vertical-prior sensitivity jobs on four
+spent sentinel galaxies. Ninety-four converged. Expanded boundaries and two
+independent vertical draws passed; the coarse AQUAL fit changed by 77.5%, and
+fine-grid AQUAL retained nonconvergence diagnostics for DDO53 and DDO101.
+Incomplete rows are excluded from ranks. This makes nonlinear solver
+hardening--without changing the physics--the next gate. See
+[`docs/P0724_GRID_BOX_VERTICAL_SENSITIVITY_RESULTS.md`](docs/P0724_GRID_BOX_VERTICAL_SENSITIVITY_RESULTS.md).
+
 ```powershell
 python scripts/run_p0723_formula_neutral_api_comparators.py `
   --base-url http://127.0.0.1:4173
+
+python scripts/run_p0724_grid_box_vertical_sensitivity.py `
+  --base-url http://127.0.0.1:4189
 ```

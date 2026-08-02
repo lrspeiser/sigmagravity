@@ -201,9 +201,19 @@ def sensitivity_summaries(
     model_summaries: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
     baseline_id = str(config["baselineScenario"])
+    expected_systems = len(config["systems"])
+    expected_pairs = len(config["models"]) * expected_systems
+
+    def complete(item: dict[str, Any]) -> bool:
+        return (
+            item.get("batchState", "succeeded") == "succeeded"
+            and int(item.get("scoredSystems", expected_systems)) == expected_systems
+        )
+
     fit_by_key = {
         (str(item["scenario"]), str(item["model"])): float(item["equalGalaxyRmseKmS"])
         for item in model_summaries
+        if complete(item)
     }
     limits = config["stabilityGates"]
     results: list[dict[str, Any]] = []
@@ -223,19 +233,28 @@ def sensitivity_summaries(
         fit_changes = []
         for model in config["models"]:
             model_id = str(model["id"])
-            baseline_fit = fit_by_key[(baseline_id, model_id)]
-            variant_fit = fit_by_key[(scenario_id, model_id)]
+            baseline_fit = fit_by_key.get((baseline_id, model_id))
+            variant_fit = fit_by_key.get((scenario_id, model_id))
+            if baseline_fit is None or variant_fit is None:
+                continue
             fit_changes.append(abs(variant_fit - baseline_fit) / baseline_fit)
+        prediction_coverage_complete = values.size == expected_pairs
+        fit_coverage_complete = len(fit_changes) == len(config["models"])
         median = float(np.median(values)) if values.size else None
         p90 = float(np.percentile(values, 90.0)) if values.size else None
         maximum_fit_change = max(fit_changes) if fit_changes else None
         gates = {
-            "median_normalized_prediction_rmse": median is not None
+            "complete_prediction_coverage": prediction_coverage_complete,
+            "complete_fit_coverage": fit_coverage_complete,
+            "median_normalized_prediction_rmse": prediction_coverage_complete
+            and median is not None
             and median
             <= float(limits["maximumScenarioMedianNormalizedPredictionRmse"]),
-            "p90_normalized_prediction_rmse": p90 is not None
+            "p90_normalized_prediction_rmse": prediction_coverage_complete
+            and p90 is not None
             and p90 <= float(limits["maximumScenarioP90NormalizedPredictionRmse"]),
-            "aggregate_fit_rmse_relative_change": maximum_fit_change is not None
+            "aggregate_fit_rmse_relative_change": fit_coverage_complete
+            and maximum_fit_change is not None
             and maximum_fit_change
             <= float(limits["maximumModelAggregateFitRmseRelativeChange"]),
         }
@@ -244,11 +263,20 @@ def sensitivity_summaries(
                 "scenario": scenario_id,
                 "role": scenario["role"],
                 "pairedModelSystems": int(values.size),
+                "expectedPairedModelSystems": expected_pairs,
+                "completeFitModels": len(fit_changes),
+                "expectedFitModels": len(config["models"]),
                 "medianNormalizedPredictionRmse": median,
                 "p90NormalizedPredictionRmse": p90,
                 "maximumModelAggregateFitRmseRelativeChange": maximum_fit_change,
                 "gateResults": gates,
-                "status": "stable" if all(gates.values()) else "sensitive",
+                "status": (
+                    "incomplete"
+                    if not prediction_coverage_complete or not fit_coverage_complete
+                    else "stable"
+                    if all(gates.values())
+                    else "sensitive"
+                ),
             }
         )
     return results
@@ -257,6 +285,7 @@ def sensitivity_summaries(
 def rank_orders(
     config: dict[str, Any], model_summaries: list[dict[str, Any]]
 ) -> dict[str, list[str]]:
+    expected_systems = len(config["systems"])
     return {
         str(scenario["id"]): [
             str(item["model"])
@@ -265,11 +294,29 @@ def rank_orders(
                     row
                     for row in model_summaries
                     if row["scenario"] == str(scenario["id"])
+                    and row.get("batchState", "succeeded") == "succeeded"
+                    and int(row.get("scoredSystems", expected_systems))
+                    == expected_systems
                 ],
                 key=lambda row: float(row["equalGalaxyRmseKmS"]),
             )
         ]
         for scenario in config["scenarios"]
+    }
+
+
+def rank_order_coverage(
+    config: dict[str, Any], model_summaries: list[dict[str, Any]]
+) -> dict[str, dict[str, Any]]:
+    orders = rank_orders(config, model_summaries)
+    expected_models = len(config["models"])
+    return {
+        scenario_id: {
+            "completeModels": len(order),
+            "expectedModels": expected_models,
+            "comparable": len(order) == expected_models,
+        }
+        for scenario_id, order in orders.items()
     }
 
 
@@ -286,14 +333,19 @@ def render_plots(
     width = 0.19
     figure, axis = plt.subplots(figsize=(12.5, 6.2))
     for model_index, (model, color) in enumerate(zip(model_ids, colors, strict=True)):
-        values = [
-            next(
-                float(row["equalGalaxyRmseKmS"])
+        values = []
+        for scenario in scenario_ids:
+            row = next(
+                row
                 for row in model_summaries
                 if row["scenario"] == scenario and row["model"] == model
             )
-            for scenario in scenario_ids
-        ]
+            complete = (
+                row.get("batchState", "succeeded") == "succeeded"
+                and int(row.get("scoredSystems", len(config["systems"])))
+                == len(config["systems"])
+            )
+            values.append(float(row["equalGalaxyRmseKmS"]) if complete else np.nan)
         axis.bar(
             x + (model_index - 1.5) * width,
             values,
@@ -304,6 +356,14 @@ def render_plots(
     axis.set_xticks(x, scenario_ids, rotation=18, ha="right")
     axis.set_ylabel("Equal-galaxy circular-speed RMSE (km/s)")
     axis.set_title("P0724 fit sensitivity across frozen numerical scenarios")
+    axis.text(
+        0.01,
+        0.98,
+        "Blank bars indicate incomplete galaxy coverage and are excluded from ranks.",
+        transform=axis.transAxes,
+        va="top",
+        fontsize=8,
+    )
     axis.grid(axis="y", alpha=0.25)
     axis.legend(fontsize=8)
     figure.tight_layout()
@@ -444,6 +504,11 @@ def main() -> None:
         ),
     }
     stability_gates = {
+        "complete_comparison_coverage": all(
+            item["gateResults"]["complete_prediction_coverage"]
+            and item["gateResults"]["complete_fit_coverage"]
+            for item in scenario_summaries
+        ),
         "scenario_median_prediction_change": all(
             item["gateResults"]["median_normalized_prediction_rmse"]
             for item in scenario_summaries
@@ -479,6 +544,7 @@ def main() -> None:
         "modelSummaries": model_summaries,
         "scenarioSensitivity": scenario_summaries,
         "modelRankOrderByScenario": rank_orders(config, model_summaries),
+        "rankOrderCoverageByScenario": rank_order_coverage(config, model_summaries),
         "engineeringGateResults": engineering_gates,
         "stabilityGateResults": stability_gates,
         "failedEngineeringGates": [

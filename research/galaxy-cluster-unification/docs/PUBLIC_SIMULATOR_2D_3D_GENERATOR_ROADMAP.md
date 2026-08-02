@@ -40,6 +40,7 @@ trusted solver.
 | Asynchronous multi-system batch API | one frozen manifest and policy run across generated/uploaded 2D or 3D bundles, with polling, cancellation, child jobs, restart recovery, deterministic rehashed reports, and circular-speed scoring | local reference service only; resolved velocity fields and photon lensing are not connected |
 | Massive-tracer circular-speed adapter | any compatible Cartesian 2D/3D acceleration observable can be sampled into a curve and scored with diagonal uncertainties or covariance after the solve | one radial observable class; no velocity-field or photon-lensing mapping yet |
 | Full resolved formula-neutral comparator | P0723 ran Newtonian, AQUAL, QUMOND, and Refracted Gravity manifests over all 13 map-derived 3D replicas: 52/52 converged, 161 points/model scored, zero per-object gravity parameters, and all frozen engineering gates passed | spent dwarf-only sample and coarse commissioning grid; no resolved velocity-field, photon-lensing, or blind holdout claim |
+| Frozen numerical-sensitivity runner | P0724 retained all 96 jobs across grid, box, and vertical-prior changes; 94 converged, expanded-box and two vertical-draw cases were stable, and incomplete rows are excluded from ranks | coarse AQUAL was sensitive and two fine-grid AQUAL systems did not converge; a production grid is not frozen |
 
 The generic worker dispatches from equation structure, not a theory name. It
 supports `laplacian(phi)=source` and
@@ -97,14 +98,16 @@ used to hide a broken reconstruction, solver, or observation adapter.
 
 The local field API, real-map extraction/generation round trip, asynchronous
 galaxy-job contract, chained multi-system batch, and full resolved comparator
-now pass. P0723 used one unchanged path for four manifests across all 13
-registered galaxies; all 52 solves converged and every model retained zero
-per-object gravity parameters. The next product milestone is a beam-aware
-resolved velocity-field adapter, followed by a separately typed photon-lensing
-adapter. Before either is treated scientifically, run declared resolution,
-boundary, and vertical-prior sensitivities. The next scientific milestone is
-synthetic hidden-truth recovery with noise, PSF/beam, inclination, bulge,
-thickness, and calibrated uncertainties, followed by an untouched
-morphologically varied whole-galaxy holdout. Production hosting still requires
-durable object storage, job metadata, isolated workers, auth, quotas, and
-monitoring.
+now pass. P0724 then exposed a genuine numerical boundary: 94/96 frozen
+sensitivity jobs converged, but AQUAL failed on DDO53 and DDO101 at
+`49 x 49 x 17`, and the coarse AQUAL fit changed by 77.5%. Expanded boundaries
+and both alternate vertical-prior draws passed. The immediate milestone is
+therefore a preregistered nonlinear-solver robustness study that changes
+numerics without changing the equation or parameters. Once a complete
+fine-grid comparison agrees across successful methods, proceed to the
+beam-aware resolved velocity-field adapter and separately typed photon-lensing
+adapter. The next scientific milestone remains synthetic hidden-truth recovery
+with noise, PSF/beam, inclination, bulge, thickness, and calibrated
+uncertainties, followed by an untouched morphologically varied whole-galaxy
+holdout. Production hosting still requires durable object storage, job
+metadata, isolated workers, auth, quotas, and monitoring.

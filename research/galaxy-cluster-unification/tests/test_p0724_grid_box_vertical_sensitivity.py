@@ -75,3 +75,30 @@ def test_sensitivity_summary_applies_frozen_gates_and_ranks() -> None:
     assert result[0]["status"] == "stable"
     assert np.isclose(result[0]["maximumModelAggregateFitRmseRelativeChange"], 0.1)
     assert rank_orders(config, summaries) == {"baseline": ["M1"], "variant": ["M1"]}
+
+
+def test_incomplete_scenario_is_not_ranked_or_declared_stable() -> None:
+    config = fixture_config()
+    paired: list[dict] = []
+    summaries = [
+        {
+            "scenario": "baseline",
+            "model": "M1",
+            "equalGalaxyRmseKmS": 10.0,
+            "batchState": "succeeded",
+            "scoredSystems": 1,
+        },
+        {
+            "scenario": "variant",
+            "model": "M1",
+            "equalGalaxyRmseKmS": 1.0,
+            "batchState": "completed_with_failures",
+            "scoredSystems": 0,
+        },
+    ]
+    result = sensitivity_summaries(config, paired, summaries)
+    assert result[0]["status"] == "incomplete"
+    assert result[0]["completeFitModels"] == 0
+    assert not result[0]["gateResults"]["complete_prediction_coverage"]
+    assert not result[0]["gateResults"]["complete_fit_coverage"]
+    assert rank_orders(config, summaries) == {"baseline": ["M1"], "variant": []}

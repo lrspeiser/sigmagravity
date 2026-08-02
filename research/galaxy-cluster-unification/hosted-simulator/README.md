@@ -226,6 +226,14 @@ validates the formula-neutral execution and reporting path, not any gravity
 theory; all aggregate reduced chi-square values remain much larger than one.
 See `../docs/P0723_FORMULA_NEUTRAL_RESOLVED_COMPARATOR_RESULTS.md`.
 
+P0724 exercised the same route under six frozen geometry/reconstruction
+scenarios on four sentinel galaxies. It retained 94 converged jobs and two
+fine-grid AQUAL nonconvergences. Expanded boundaries and two vertical-prior
+draws passed their stability gates; the coarse AQUAL aggregate fit was
+resolution-sensitive. Partial rows are now excluded from model ranks and
+plotted as missing. See
+`../docs/P0724_GRID_BOX_VERTICAL_SENSITIVITY_RESULTS.md`.
+
 Run the chained 3D HTTP acceptance test while `npm run dev` is active:
 
 ```text
