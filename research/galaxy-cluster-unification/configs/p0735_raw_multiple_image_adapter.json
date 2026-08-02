@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "sigma-p0735-raw-multiple-image-adapter/1",
+  "stage": "P0735",
+  "status": "frozen_before_P0735_implementation_acceptance",
+  "purpose": "Add a formula-neutral raw strong-lensing adapter that projects a separately typed 3D photon field, profiles one source position per observed image family, globally finds image-plane roots, assigns predicted roots to observed images, and treats missing multiplicity as a topology failure rather than a finite subset RMS.",
+  "parent": {
+    "commit": "072a8e37",
+    "photonProjectionContract": "sigma-observation-target/1 photon_lensing_map",
+    "photonProjectionEvidence": "results/p0734_typed_photon_lensing_adapter/report.json",
+    "existingCoordinateSafeEngine": "src/voidscreen/sky_lensing.py"
+  },
+  "targetContract": {
+    "kind": "multiple_image_systems",
+    "requiredObservable": {
+      "target": ["photons", "both"],
+      "rank": "vector",
+      "unit": "m/s^2"
+    },
+    "geometry": "cartesian_3d",
+    "axisConvention": {
+      "required": ["northAxis", "eastAxis", "lineOfSightAxis"],
+      "constraint": "the three axes are a permutation of [0,1,2]",
+      "observedCoordinateOrder": ["east_arcsec", "north_arcsec"]
+    },
+    "requiredGeometry": [
+      "lensAngularDiameterDistanceM",
+      "skyCenterM",
+      "rootSearchBoundArcsec"
+    ],
+    "familyContract": {
+      "required": [
+        "id",
+        "distanceRatio",
+        "observedImagesArcsec",
+        "positionUncertaintiesArcsec"
+      ],
+      "minimumObservedImages": 2,
+      "maximumFamilies": 64,
+      "maximumTotalImages": 512,
+      "sourcePositionPolicy": "profiled_mean_source_plane",
+      "fittedObservationNuisanceParametersPerFamily": 2,
+      "addedGravityParametersPerFamily": 0
+    }
+  },
+  "numericalContract": {
+    "projection": "reuse the P0734 alpha_perp_rad=-(2*distanceRatio/c^2)*integral(a_photon_perp dl) mapping",
+    "sourceProfiling": "beta_family is the mean ray-shot source position of the observed images",
+    "rootSearch": "global sign-change and residual-minimum seeding followed by bounded nonlinear closure",
+    "assignment": "minimum-cost one-to-one assignment in the east/north image plane",
+    "completeScore": "uncertainty-aware two-coordinate image residual likelihood after subtracting two profiled source-position degrees of freedom per family",
+    "incompleteScore": "aggregate image-position RMSE, chi-square, and likelihood are null when any family has fewer assigned roots than observed images",
+    "criticalCurves": "optional per-family determinant sign-change points are diagnostic unless an independent parity or arc-orientation observable is supplied"
+  },
+  "artifactContract": [
+    "observation_multiple_image_predictions.csv retains every observed image including unmatched images",
+    "observation_multiple_image_families.csv retains source, root-count, multiplicity, RMS, chi-square, and nuisance accounting per family",
+    "observation_multiple_image_roots.npz retains predicted roots, closure errors, magnifications, and optional critical-curve points",
+    "all artifacts are content-hashed and byte-stable between integrated and decoupled observation jobs"
+  ],
+  "acceptanceFixtures": [
+    {
+      "id": "singular_isothermal_sphere_two_image",
+      "purpose": "recover a profiled source, two global roots, exact multiplicity, and sub-milliarcsecond image RMS"
+    },
+    {
+      "id": "insufficient_topology",
+      "purpose": "prove that one predicted root for two observed images yields null aggregate RMS and an explicit incomplete_topology state"
+    },
+    {
+      "id": "multiple_distance_ratios",
+      "purpose": "prove that family distance ratios change photon roots without changing the source field identity"
+    },
+    {
+      "id": "axis_permutation",
+      "purpose": "preserve named east/north roots and assignments after permuting storage axes and vector components"
+    },
+    {
+      "id": "decoupled_job_parity",
+      "purpose": "integrated and standalone evaluation jobs emit byte-identical score, family, prediction, and root artifacts"
+    },
+    {
+      "id": "p0714_catalog_import",
+      "purpose": "serialize existing secure AS295 and PLCKG287 image families without coordinate swaps, family loss, or invented uncertainties"
+    }
+  ],
+  "numericalGates": {
+    "sisProfiledSourceAbsoluteErrorArcsecMaximum": 0.001,
+    "sisImagePlaneRmsArcsecMaximum": 0.001,
+    "sisMaximumRootClosureArcsec": 0.0001,
+    "sisMatchedMultiplicityFraction": 1.0,
+    "incompleteTopologyAggregateRmsMustBeNull": true,
+    "axisPermutationRootRmsArcsecMaximum": 0.001,
+    "catalogCoordinateRoundTripArcsecMaximum": 1e-12,
+    "maximumPerObjectGravityParameters": 0,
+    "maximumGravityParametersAddedByEvaluation": 0
+  },
+  "engineeringGates": {
+    "hostedPreflightRepeatsObservableGeometryFamilyAndResourceChecks": true,
+    "rootSearchBoundMustFitPublishedPhotonMap": true,
+    "allObservedImagesRemainInPredictionArtifact": true,
+    "missingMultiplicityCannotReceiveFiniteAggregateScore": true,
+    "sourceNuisanceAndGravityParameterCountsRemainSeparate": true,
+    "changedImageCatalogMustPreserveFieldIdentity": true,
+    "batchMustRetainImagePositionChannelSeparately": true,
+    "standaloneAndIntegratedArtifactsMustMatch": true,
+    "legacyPhotonMapAndMassiveTracerTestsRemainGreen": true,
+    "fullPythonAndHostedSuitesMustPass": true
+  },
+  "claimBoundary": [
+    "P0735 evaluates raw image-plane positions against a submitted photon field; it does not validate the equation that generated the field.",
+    "Profiling a source position is an explicitly counted observational nuisance operation, not a gravity parameter fit.",
+    "A complete synthetic root recovery validates numerical conformance only; it is not evidence that a baryon-only model explains a real cluster.",
+    "Published image coordinates, family membership, redshift-to-distance ratios, uncertainties, and selection rules require independent provenance.",
+    "Critical curves are diagnostic unless independent parity or arc-orientation data make them observables.",
+    "Time delays, flux ratios, microlensing, line-of-sight structure, and cosmological inference remain outside P0735."
+  ]
+}
