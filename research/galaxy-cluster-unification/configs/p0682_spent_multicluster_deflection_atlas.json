@@ -1,0 +1,97 @@
+{
+  "protocol_version": "P0682-SPENT-MULTICLUSTER-DEFLECTION-ATLAS-1.0.0",
+  "status": "frozen_before_any_P0682_atlas_metric",
+  "frozen_utc": "2026-08-02T03:13:20Z",
+  "purpose": "Test whether P0678's broad radial missing-deflection pattern repeats across six already-spent CLASH clusters by comparing training-only compact-halo deflection vectors with independently reconstructed baryonic radial deflections, without numerical derivatives, a new gravity-law fit, or a raw image-root score.",
+  "failure_parent": "results/p0681_compact_halo_hessian_richardson/report.json",
+  "raw_protocol": "configs/unbounded_running_multicluster_raw_protocol.json",
+  "raw_report": "results/unbounded_running_multicluster_raw/report.json",
+  "parameter_table": "results/unbounded_running_multicluster_raw/fitted_geometry.csv",
+  "baryonic_profiles": "results/unbounded_running_multicluster_raw/radial_profiles.csv",
+  "image_predictions": "results/unbounded_running_multicluster_raw/predictions.csv",
+  "parameter_selection": {
+    "model": "GR_plus_cluster_halo",
+    "cutoff_kpc": 1000000.0,
+    "fit_scope": "training images only when a within-family holdout exists; all images for descriptive RXJ1347",
+    "primary_missing_field": "NIE compact-halo deflection only",
+    "external_shear_role": "reported separately and never included in the primary halo-to-baryon amplitude ratio",
+    "heldout_images_used_to_select_parameters": false
+  },
+  "sampling": {
+    "source_redshift": 2.0,
+    "annulus_per_system": "minimum through maximum observed multiple-image radius about the frozen baryonic center",
+    "radial_points": 48,
+    "angular_points": 144,
+    "radial_spacing": "geometric",
+    "angular_spacing": "uniform",
+    "radial_bins": 12,
+    "baryonic_center_arcsec": [0.0, 0.0]
+  },
+  "reported_system_metrics": [
+    "halo_to_baryon_vector_RMS_ratio",
+    "baryon_plus_halo_to_baryon_vector_RMS_ratio",
+    "shear_to_baryon_vector_RMS_ratio",
+    "halo_baryon_vector_alignment_cosine",
+    "halo_monopole_fraction_of_vector_power",
+    "halo_angular_residual_RMS_fraction",
+    "median_and_interquartile_halo_to_baryon_radial_ratio",
+    "NIE_core_radius_kpc_and_normalizations",
+    "baryonic_acceleration_mass_proxy_slope_and_deflection_at_annulus_pivot",
+    "training_root_and_heldout_RMS_reliability_flags"
+  ],
+  "predictor_analysis": {
+    "target": "log10 median halo-to-baryon radial ratio",
+    "baryonic_predictors_only": [
+      "log10 baryonic acceleration at annulus pivot",
+      "log10 baryonic enclosed-mass proxy at annulus pivot",
+      "local logarithmic baryonic-acceleration slope",
+      "log10 baryonic reduced deflection at annulus pivot",
+      "log10 annulus pivot radius kpc",
+      "log10 annulus width ratio"
+    ],
+    "descriptive_primary_systems": "all systems whose compact-halo parameters are not at an optimization boundary",
+    "reliable_subset": "non-boundary systems with all training roots converged and compact-halo heldout radial RMS <= 5 arcsec",
+    "regression": "one-predictor log-linear least squares with leave-one-system-out prediction",
+    "small_sample_warning": "fewer than four reliable systems forbids selection of a predictor law"
+  },
+  "predeclared_integrity_gates": {
+    "P0681_status": "fail",
+    "systems_expected": 6,
+    "non_boundary_systems_expected_min": 5,
+    "samples_per_system": 6912,
+    "all_sampled_fields_finite": true,
+    "halo_monopole_plus_angular_reconstruction_relative_RMS_max": 1e-12,
+    "reference_source_redshift_matches_raw_protocol": true,
+    "parameter_model_and_cutoff_match": true,
+    "baryonic_profile_model": "baryons_GR",
+    "no_numerical_field_derivatives": true,
+    "new_candidate_formula_fit": false,
+    "new_raw_image_root_score_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "predeclared_pattern_gates": {
+    "radial_morphology_minimum_non_boundary_systems": 4,
+    "radial_morphology_alignment_cosine_min": 0.90,
+    "radial_morphology_angular_RMS_fraction_max": 0.35,
+    "constant_amplitude_log10_scatter_max_dex": 0.20,
+    "predictor_absolute_spearman_rho_min": 0.80,
+    "predictor_LOO_RMSE_to_constant_LOO_RMSE_ratio_max": 0.80,
+    "predictor_minimum_reliable_systems": 4
+  },
+  "selection_rule": "P0682 may advance only a qualitative radial morphology or a provisional baryonic predictor class. It cannot advance a numerical gravity law. A constant amplitude is provisionally interesting only if its frozen scatter gate passes. A predictor is provisionally interesting only if its correlation, leave-one-out improvement, and minimum reliable-system gates all pass. Compact-halo target quantities can be outputs but never candidate inputs.",
+  "outputs": {
+    "directory": "results/p0682_spent_multicluster_deflection_atlas",
+    "system_metrics": "system_deflection_metrics.csv",
+    "radial_profiles": "radial_ratio_profiles.csv",
+    "predictor_scores": "baryonic_predictor_scores.csv",
+    "figure": "spent_multicluster_deflection_atlas.png"
+  },
+  "claim_boundary": [
+    "All six clusters and their compact-halo fits are spent development data; this atlas cannot validate a new law.",
+    "The fitted NIE halo is a low-parameter comparator field, not a unique dark-matter map or a measured physical field.",
+    "RXJ1347 is a descriptive stress case because multiple halo parameters are at optimization bounds and it has no within-family holdout.",
+    "MACS0329 and MACS1115 have weak compact-halo predictive diagnostics and must not dominate a predictor claim.",
+    "With at most six systems, all correlations and regressions are hypothesis-generating.",
+    "P0633 galaxy kinematics and P0640 additional-cluster outcomes remain sealed."
+  ]
+}
