@@ -1,0 +1,5 @@
+model,parameter,value,lower,upper
+local_vector_coherence_projected_routing_P0699,map_center_x_arcsec,0.9908660234095391,-3.0,3.0
+local_vector_coherence_projected_routing_P0699,map_center_y_arcsec,0.8957608531834169,-3.0,3.0
+local_vector_coherence_projected_routing_P0699,external_shear_gamma1_at_reference_source,-0.18912789504179034,-0.25,0.25
+local_vector_coherence_projected_routing_P0699,external_shear_gamma2_at_reference_source,-0.24999999999999997,-0.25,0.25

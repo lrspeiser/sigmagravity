@@ -1,0 +1,258 @@
+{
+  "report_version": "P0699-SPENT-LOCAL-VECTOR-COHERENCE-JOINT-SCREEN-RESULTS-1.0.0",
+  "status": "fail",
+  "evidence_class": "fully_spent_joint_mechanism_screen",
+  "all_progression_gates_pass": false,
+  "candidate_advanced_to_robustness_and_solar": false,
+  "candidate_advanced_to_sealed_outcomes": false,
+  "protocol_sha256": "85b1ad30ca9f787efa5c1a2364c69f9db470ad581a0ae25141dfe59e6a245665",
+  "source_sha256": "c80d89a47514288edc842bae2b48448ea95dcf363c833e3e7fde6edcdd0bc0b0",
+  "operator_source_sha256": "b258b82f2d6bd2e6701dcdfeadbe09452553955cb60cef8dd595dca18d25a156",
+  "coherent_source_sha256": "1073c6fd4036883c219859f3076ddbd57a8c0cdf8c171d25e905e9c6e5854fac",
+  "routing_source_sha256": "0f61400a79b1d74443ce690dde04a7941dacae45d6f2358f1e0fdeb44b5981ee",
+  "parent_sha256": {
+    "P0698": "100a2e666d3e60f79cd6cd0582748816274cfe05e4082a2fc35952260e755401",
+    "P0635": "70de638d621e284d2c3065a86e0e1dcdc50befd89118a369c25b72212be4658c",
+    "P0670": "5f4d87855fbab10a071b8b36169fbc86d9679025f2d256a8eb82f360a41326fc",
+    "P0693": "30756b53740ee3f73b32d98702f2b1b49ddeaa73af84a999ed1a0a8c9cc15b9f"
+  },
+  "galaxy_map_sha256": "6f12bd9d6015d75e35389434057ab9532b45aa38063433be37cdc585913e012c",
+  "cluster_map_sha256": "4804b357f9c67bb204b058e98de4d1ddf00340e301b86d001bb0a21132c47a77",
+  "galaxy_field_sha256": "8b4e79cb490ddc5031f38055753224f7a83ce73b99502bf5463942707d077e8f",
+  "cluster_field_sha256": "faf4f840f77cc5ab87cdefa9e35566704ede5dc0f5b45359b80ace3519bfb668",
+  "integrity_gates": {
+    "P0698_status": true,
+    "P0698_math_pass": true,
+    "P0698_advanced": true,
+    "P0635_status": true,
+    "P0635_no_velocity_product": true,
+    "P0670_parent": true,
+    "P0693_status": true,
+    "spent_systems_registered": true,
+    "no_new_constants": true,
+    "no_per_object_gravity": true,
+    "no_fitted_coherence": true,
+    "no_fitted_routing": true,
+    "no_fitted_photon": true,
+    "nuisance_parameter_count": true,
+    "sealed_targets_untouched": true,
+    "raw_coverage": true
+  },
+  "spent_DDO154": {
+    "routing_fraction": 0.08352413225178856,
+    "covariance_kpc2": [
+      [
+        11.68677973262446,
+        0.10210470303545857
+      ],
+      [
+        0.10210470303545865,
+        12.731190413620029
+      ]
+    ],
+    "eigenvalues_kpc2": [
+      11.676891295648419,
+      12.741078850596072
+    ],
+    "field_audit": {
+      "newtonian_normalized_residual_RMS": 5.532981457653893e-14,
+      "local_routing_component_normalized_residual_RMS": 4.469013637758747e-14,
+      "routed_component_normalized_residual_RMS": 4.382153080162541e-14,
+      "gated_component_normalized_residual_RMS": 2.336261042990277e-13,
+      "gated_source_identity_relative_RMS": 0.0,
+      "hybrid_potential_identity_relative_RMS": 0.0,
+      "base_coherent_boundary_relative_mismatch": 0.0,
+      "routing_correction_boundary_relative_mismatch": 0.0,
+      "coherence_minimum": 0.03484946576127825,
+      "coherence_median": 0.9342320742458772,
+      "coherence_maximum": 0.9819791548596365,
+      "raw_triangle_inequality_excess_maximum": 0.0,
+      "normalized_acceleration_curl_RMS": 3.005391161981677e-16,
+      "finite": true
+    },
+    "score_region_coherence": {
+      "system": "DDO154",
+      "region": "SPARC_score_radius_midplane",
+      "cells": 772,
+      "coherence_minimum": 0.04712101413962375,
+      "coherence_median": 0.3369606457513496,
+      "coherence_mean": 0.32468801184125345,
+      "coherence_maximum": 0.5954496300146714
+    },
+    "candidate_score": {
+      "points": 12,
+      "RMSE_km_s": 4.550979981378526,
+      "weighted_RMSE_km_s": 2.8996589789206317,
+      "mean_bias_km_s": 3.2095600183428163
+    },
+    "algebraic_MOND_comparator": {
+      "points": 12,
+      "RMSE_km_s": 2.916081351928278,
+      "weighted_RMSE_km_s": 1.2255816436075178,
+      "mean_bias_km_s": 1.327429851089618
+    },
+    "three_dimensional_QUMOND_comparator": {
+      "points": 12,
+      "RMSE_km_s": 3.936047752283948,
+      "weighted_RMSE_km_s": 3.256147109601539,
+      "mean_bias_km_s": -1.3909434717208093
+    },
+    "comparisons": {
+      "candidate_RMSE_to_algebraic_MOND_ratio": 1.5606491836618892,
+      "candidate_weighted_RMSE_to_algebraic_MOND_ratio": 2.3659451771694644,
+      "candidate_RMSE_to_3D_QUMOND_ratio": 1.1562308863599926
+    }
+  },
+  "spent_RXJ2129": {
+    "routing_fraction": 0.27202347157855733,
+    "covariance_kpc2": [
+      [
+        6653.5502900798865,
+        611.0421496628857
+      ],
+      [
+        611.0421496628858,
+        5235.91666762043
+      ]
+    ],
+    "eigenvalues_kpc2": [
+      5008.894934791131,
+      6880.572022909185
+    ],
+    "field": {
+      "newtonian_normalized_residual_RMS": 8.891081551915351e-14,
+      "local_routing_component_normalized_residual_RMS": 2.9286374690145644e-14,
+      "routed_component_normalized_residual_RMS": 2.4665948068714115e-14,
+      "gated_component_normalized_residual_RMS": 2.4193106916006005e-14,
+      "gated_source_identity_relative_RMS": 0.0,
+      "hybrid_potential_identity_relative_RMS": 0.0,
+      "base_coherent_boundary_relative_mismatch": 0.0,
+      "routing_correction_boundary_relative_mismatch": 0.0,
+      "coherence_minimum": 0.012269253005347971,
+      "coherence_median": 0.8050541053396341,
+      "coherence_maximum": 0.9547629100849707,
+      "raw_triangle_inequality_excess_maximum": 0.0,
+      "normalized_acceleration_curl_RMS": 2.5290001462482236e-16,
+      "finite": true,
+      "strong_lens_median_physical_deflection_arcsec": 10.895145282478378,
+      "strong_lens_RMS_physical_deflection_arcsec": 10.71178805982974,
+      "normalized_deflection_curl_RMS": 4.1516502771764496e-16
+    },
+    "strong_lens_region_coherence": {
+      "system": "RXJ2129",
+      "region": "strong_lens_projected_annulus_all_z",
+      "cells": 3036,
+      "coherence_minimum": 0.11008154611450538,
+      "coherence_median": 0.46915156408712555,
+      "coherence_mean": 0.48094387315652465,
+      "coherence_maximum": 0.8090512789983876
+    },
+    "fit": {
+      "model": "local_vector_coherence_projected_routing_P0699",
+      "training_RMS_arcsec": 0.6736454751781709,
+      "training_roots_converged": 15,
+      "heldout_RMS_arcsec": 2.481448866461533,
+      "heldout_roots_converged": 7,
+      "optimizer_cost": 78.72323878383266,
+      "nuisance_parameters_near_bound": 1
+    },
+    "compact_halo_heldout_RMS_arcsec": 2.5361068843508456,
+    "candidate_to_compact_halo_heldout_RMS_ratio": 0.9784480621749099,
+    "topology": {
+      "families": 7,
+      "missing_multiplicity_families": 1,
+      "exact_multiplicity_families": 6,
+      "demagnified_only_surplus_families": 0,
+      "potentially_observable_surplus_families": 0,
+      "exact_or_demagnified_only_families": 6,
+      "parity_diverse_families": 7,
+      "critical_curve_present_families": 7,
+      "total_global_roots": 21,
+      "total_observed_images": 22
+    }
+  },
+  "maximum_component_normalized_residual_RMS": 2.336261042990277e-13,
+  "maximum_gated_source_identity_relative_RMS": 0.0,
+  "maximum_hybrid_potential_identity_relative_RMS": 0.0,
+  "maximum_base_coherent_boundary_relative_mismatch": 0.0,
+  "maximum_routing_correction_boundary_relative_mismatch": 0.0,
+  "maximum_normalized_acceleration_curl_RMS": 3.005391161981677e-16,
+  "coherence_range": [
+    0.012269253005347971,
+    0.9819791548596365
+  ],
+  "raw_triangle_inequality_excess_maximum": 0.0,
+  "gate_results": {
+    "P0698_status": true,
+    "P0698_math_pass": true,
+    "P0698_advanced": true,
+    "P0635_status": true,
+    "P0635_no_velocity_product": true,
+    "P0670_parent": true,
+    "P0693_status": true,
+    "spent_systems_registered": true,
+    "no_new_constants": true,
+    "no_per_object_gravity": true,
+    "no_fitted_coherence": true,
+    "no_fitted_routing": true,
+    "no_fitted_photon": true,
+    "nuisance_parameter_count": true,
+    "sealed_targets_untouched": true,
+    "raw_coverage": true,
+    "coherence_lower": true,
+    "coherence_upper": true,
+    "triangle_inequality": true,
+    "fraction_lower": true,
+    "fraction_upper": true,
+    "finite": true,
+    "component_residuals": true,
+    "source_identity": true,
+    "hybrid_identity": true,
+    "base_boundary": true,
+    "routing_boundary": true,
+    "acceleration_curl": true,
+    "galaxy_points": true,
+    "galaxy_RMSE_vs_MOND": false,
+    "galaxy_weighted_RMSE_vs_MOND": false,
+    "galaxy_RMSE_vs_3D_QUMOND": false,
+    "galaxy_bias": false,
+    "cluster_field_amplitude_lower": true,
+    "cluster_field_amplitude_upper": true,
+    "cluster_field_curl": true,
+    "training_roots": true,
+    "heldout_roots": true,
+    "training_RMS": true,
+    "heldout_RMS": true,
+    "compact_halo_comparison": true,
+    "no_missing_multiplicity": false,
+    "observable_surplus": true,
+    "acceptable_multiplicity": true,
+    "parity_diversity": true,
+    "critical_curves": true,
+    "nuisance_bounds": false,
+    "accounting_no_new_constants": true,
+    "accounting_no_per_object_gravity": true,
+    "accounting_no_fitted_coherence": true,
+    "accounting_no_fitted_routing": true,
+    "accounting_no_fitted_photon": true,
+    "accounting_nuisance_count": true,
+    "sealed_outcomes_untouched": true
+  },
+  "failed_gates": [
+    "galaxy_RMSE_vs_MOND",
+    "galaxy_weighted_RMSE_vs_MOND",
+    "galaxy_RMSE_vs_3D_QUMOND",
+    "galaxy_bias",
+    "no_missing_multiplicity",
+    "nuisance_bounds"
+  ],
+  "sealed_P0633_kinematics_opened": false,
+  "sealed_P0640_lensing_constraints_opened": false,
+  "claim_boundary": [
+    "DDO154 and RX J2129 are fully spent mechanism-development systems, so P0699 is not independent validation.",
+    "The coherence summaries are diagnostics of the frozen field and cannot generate a post-hoc transform or threshold.",
+    "The four cluster nuisance parameters align one fixed field and are not gravity parameters; source positions are profiled as in the registered raw analysis.",
+    "The zero-slip photon rule remains a diagnostic closure, not a relativistic metric derivation.",
+    "P0633 and P0640 remain sealed regardless of the P0699 outcome."
+  ]
+}
