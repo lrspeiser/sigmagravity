@@ -1,0 +1,6 @@
+stage,closure,lambda,fold,fit_images,validation_images,fit_RMS_arcsec,fit_roots,validation_RMS_arcsec,validation_roots,optimizer_cost
+exact_conservative_deposit,streamline_deposited_gas_minus_star_flux,1.0,0,12,3,0.4023532074180245,12,3.0101083812691622,3,25.264681960731274
+exact_conservative_deposit,streamline_deposited_gas_minus_star_flux,1.0,1,11,4,0.4062321483031063,11,5.00154387329661,4,23.774161117705262
+exact_conservative_deposit,streamline_deposited_gas_minus_star_flux,1.0,2,12,3,0.45231985888123927,12,1.659355613777627,3,34.479160319013324
+exact_conservative_deposit,streamline_deposited_gas_minus_star_flux,1.0,3,13,2,inf,12,inf,1,24.04806785528926
+exact_conservative_deposit,streamline_deposited_gas_minus_star_flux,1.0,4,12,3,0.22548210406403627,12,1.868937532216718,3,8.830396277068337
