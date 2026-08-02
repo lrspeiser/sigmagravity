@@ -46,6 +46,7 @@ from run_rxj2129_raw_theory_lensing import (
 
 from voidscreen.accumulated_lensing import (
     build_accumulated_transport_deflection_field,
+    zero_pad_square_component_maps,
 )
 from voidscreen.raw_lensing import loglog_interpolate_with_tails
 
@@ -80,6 +81,17 @@ def make_field(protocol, raw_protocol, anchors, parent, baryons, images):
         screen_protocol, acquisition, reused, context, images, axis
     )
     _, gas, gas_audit = prepare_xray_maps(screen_protocol, acquisition, context, axis)
+    candidate = protocol["candidate"]
+    computational_padding_arcsec = float(
+        candidate.get("computational_padding_arcsec", 0.0)
+    )
+    spacing_arcsec = float(settings["grid_spacing_arcsec"])
+    padding_cells = round(computational_padding_arcsec / spacing_arcsec)
+    if not np.isclose(padding_cells * spacing_arcsec, computational_padding_arcsec):
+        raise ValueError("computational padding must be an integer number of map cells")
+    axis, (stars, gas) = zero_pad_square_component_maps(
+        axis, stars, gas, padding_cells=padding_cells
+    )
     scale = float(raw_protocol["cosmology_and_coordinates"]["angular_scale_kpc_per_arcsec"])
     anchor_radius = anchors.radius_kpc.to_numpy(float)
     anchor_gbar = np.power(10.0, anchors.log_gbar.to_numpy(float))
@@ -94,7 +106,6 @@ def make_field(protocol, raw_protocol, anchors, parent, baryons, images):
             query_radius_arcsec, 1.0
         )
 
-    candidate = protocol["candidate"]
     field = build_accumulated_transport_deflection_field(
         axis,
         stars,
@@ -113,6 +124,7 @@ def make_field(protocol, raw_protocol, anchors, parent, baryons, images):
         transport_steps=int(candidate.get("transport_steps", 12)),
         taper_inner_arcsec=float(candidate["taper_inner_arcsec"]),
         support_radius_arcsec=float(candidate["support_radius_arcsec"]),
+        computational_padding_arcsec=computational_padding_arcsec,
     )
     return field, {"hst": star_audit, "xray": gas_audit}
 

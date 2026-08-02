@@ -1,0 +1,71 @@
+{
+  "protocol_version": "P0654-ZERO-PADDED-NONLOCAL-TRANSPORT-1.0.0",
+  "status": "frozen_before_any_P0654_score",
+  "frozen_utc": "2026-08-02T00:48:00Z",
+  "purpose": "Determine whether P0652 source leakage is solely a finite computational-domain artifact by adding an exactly trace-cap-sized zero buffer while leaving its physical field law unchanged.",
+  "candidate": {
+    "closure": "streamline_averaged_gas_minus_star_flux",
+    "mismatch_mode": "transverse_tensor_mix",
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "accumulation_power": 1.0,
+    "stellar_mass_fraction": 0.1,
+    "gas_mass_fraction": 0.9,
+    "common_physical_smoothing_kpc": 25.0,
+    "taper_inner_arcsec": 50.0,
+    "support_radius_arcsec": 58.0,
+    "transport_steps": 12,
+    "trace_length_cap_cells": 48,
+    "grid_spacing_arcsec": 1.0,
+    "computational_padding_arcsec": 48.0,
+    "field_amplitude": 1.0,
+    "field_amplitude_fitted": false,
+    "new_physical_length_constants": 0,
+    "per_object_spatial_gravity_parameters": 0
+  },
+  "cross_validation": {
+    "fold_definition": "reuse exact P0645 five source-family-stratified folds",
+    "geometry_refit_starts_per_fold": 3,
+    "full_training_refit_starts": 8,
+    "selection": "none; the sole original P0652 amplitude-one field is scored on a numerically sufficient domain",
+    "random_seed": 2129654,
+    "P0601_spent_heldout_used_for_selection": false
+  },
+  "inputs": {
+    "P0644_protocol": "configs/p0644_spent_rxj2129_accumulated_tensor.json",
+    "P0645_protocol": "configs/p0645_fair_geometry_cv_accumulated_tensor.json",
+    "P0645_report": "results/p0645_fair_geometry_cv_accumulated_tensor/report.json",
+    "P0648_report": "results/p0648_matched_multipole_control/report.json",
+    "P0651_report": "results/p0651_transverse_tensor_transport/report.json",
+    "P0652_report": "results/p0652_nonlocal_streamline_transport/report.json",
+    "P0653_report": "results/p0653_compact_nonlocal_transport/report.json"
+  },
+  "predeclared_progression_gates": {
+    "P0651_map_gates_all_pass": true,
+    "all_CV_roots": 15,
+    "CV_improvement_fraction_vs_lambda0_min": 0.03,
+    "CV_improvement_fraction_vs_best_matched_multipole_min": 0.01,
+    "full_training_roots": 15,
+    "spent_heldout_roots": 7,
+    "spent_heldout_worsening_fraction_vs_P0599_max": 0.10,
+    "field_normalized_curl_RMS_max": 1e-10,
+    "field_source_integral_fraction_max": 1e-4,
+    "maximum_flux_edge_fraction_of_RMS_max": 1e-10,
+    "transport_relative_change_RMS_min": 0.05,
+    "computational_padding_equals_trace_cap": true,
+    "computational_padding_changes_physical_support": false,
+    "field_amplitude_exactly_one": true,
+    "sealed_target_outcomes_opened": false
+  },
+  "outputs": {
+    "directory": "results/p0654_zero_padded_nonlocal_transport"
+  },
+  "claim_boundary": [
+    "The 48-arcsecond buffer is fixed by the existing 48-cell streamline cap and 1-arcsecond grid; it is numerical domain size, not a physical scale or fitted parameter.",
+    "The zero buffer contains no added stars or gas and leaves the 50-to-58-arcsecond physical taper unchanged.",
+    "All lens scores use spent RX J2129 images and cannot validate the law.",
+    "A failed heldout or conservation gate rejects this repair rather than authorizing padding, amplitude, support, or coherence retuning.",
+    "A pass authorizes numerical convergence and component-map robustness before any blind P0633/P0640 opening.",
+    "The projected nonlocal closure is not yet a covariant spacetime theory."
+  ]
+}

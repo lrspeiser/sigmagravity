@@ -51,6 +51,31 @@ def _spectral_lens_solve(source: np.ndarray, spacing_arcsec: float):
     return alpha_x, alpha_y, normalized_curl
 
 
+def zero_pad_square_component_maps(axis_arcsec, *component_maps, padding_cells: int):
+    """Add a zero-valued numerical buffer without changing physical map content."""
+
+    axis = np.asarray(axis_arcsec, dtype=np.float64)
+    if axis.ndim != 1 or len(axis) < 2 or not np.all(np.diff(axis) > 0.0):
+        raise ValueError("axis must be a strictly increasing vector")
+    spacing = float(np.median(np.diff(axis)))
+    if not np.allclose(np.diff(axis), spacing):
+        raise ValueError("axis must be uniformly spaced")
+    cells = int(padding_cells)
+    if cells != padding_cells or cells < 0:
+        raise ValueError("padding_cells must be a non-negative integer")
+    expected_shape = (len(axis), len(axis))
+    maps = tuple(np.asarray(values, dtype=np.float64) for values in component_maps)
+    if any(values.shape != expected_shape for values in maps):
+        raise ValueError("every component map must match the square axis")
+    if cells == 0:
+        return axis.copy(), tuple(values.copy() for values in maps)
+    padded_axis = axis[0] + spacing * np.arange(len(axis) + 2 * cells) - cells * spacing
+    padded_maps = tuple(
+        np.pad(values, cells, mode="constant", constant_values=0.0) for values in maps
+    )
+    return padded_axis, padded_maps
+
+
 def build_accumulated_transport_deflection_field(
     axis_arcsec,
     stellar_proxy,
@@ -71,6 +96,7 @@ def build_accumulated_transport_deflection_field(
     transport_steps: int = 12,
     taper_inner_arcsec: float = 180.0,
     support_radius_arcsec: float = 220.0,
+    computational_padding_arcsec: float = 0.0,
 ) -> StellarMorphologyDeflectionField:
     """Apply the accumulated tensor to a fixed radial carrier lens potential.
 
@@ -88,6 +114,8 @@ def build_accumulated_transport_deflection_field(
     scale = float(angular_scale_kpc_per_arcsec)
     if scale <= 0.0 or coherence_length_kpc <= 0.0 or accumulation_power <= 0.0:
         raise ValueError("physical scales must be positive")
+    if computational_padding_arcsec < 0.0:
+        raise ValueError("computational_padding_arcsec must be non-negative")
     if not np.isclose(stellar_mass_fraction + gas_mass_fraction, 1.0):
         raise ValueError("component fractions must sum to one")
     cell_kpc = spacing * scale
@@ -245,6 +273,8 @@ def build_accumulated_transport_deflection_field(
         "proxy_total_mass_msun": float(proxy_total_mass_msun),
         "common_smoothing_kpc": float(common_smoothing_kpc),
         "transport_steps": int(transport_steps),
+        "computational_padding_arcsec": float(computational_padding_arcsec),
+        "computational_padding_changes_physical_support": False,
         "proxy_mass_changes_deflection_normalization": False,
         "activation_weighted_mean": float(np.mean(activation[active])),
         "activation_maximum": float(np.max(activation[active])),
