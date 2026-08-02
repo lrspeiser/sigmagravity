@@ -1,0 +1,85 @@
+{
+  "stage": "P0737",
+  "title": "Held-out observed-galaxy radial twin validation",
+  "status": "frozen_before_implementation_or_score_inspection",
+  "purpose": "Show separately whether a gravity formula predicts an observed rotation curve and whether the same prediction survives a formula-independent generated radial twin of the galaxy.",
+  "dataset": {
+    "id": "sparc-2016-v1",
+    "requiredGalaxies": 175,
+    "requiredRadialPoints": 3391,
+    "evidenceClass": "public_spent_validation"
+  },
+  "twinContract": {
+    "kind": "compressed_radial_baryonic_surrogate",
+    "controlPointsPerChannel": 6,
+    "sourceChannels": [
+      "radiusKpc",
+      "vGasKmS",
+      "vDiskKmS",
+      "vBulgeKmS",
+      "sbDisk",
+      "sbBulge"
+    ],
+    "withheldUntilScoring": [
+      "vObsKmS",
+      "eVObsKmS",
+      "vFlatKmS",
+      "vFlatErrorKmS"
+    ],
+    "metadataCopiedWithoutFitting": [
+      "morphology",
+      "distanceMpc",
+      "inclinationDeg",
+      "quality"
+    ],
+    "gravityParametersInExtraction": 0,
+    "interpolation": "piecewise_linear_in_log1p_radius",
+    "signedVelocityEncoding": "sign(v_component)*v_component^2",
+    "nonnegativeSurfaceBrightnessEncoding": "log1p(surface_brightness)"
+  },
+  "requiredComparisons": [
+    "observed_velocity_with_uncertainty",
+    "submitted_formula_on_measured_baryons",
+    "submitted_formula_on_generated_twin",
+    "fixed_mond_on_generated_twin",
+    "newtonian_baryons_on_generated_twin",
+    "submitted_formula_twin_residual"
+  ],
+  "requiredScoreSeparation": {
+    "sourceReconstruction": [
+      "gBarNormalizedRmse",
+      "gBarMedianAbsolutePercentError"
+    ],
+    "formulaOnMeasuredBaryons": [
+      "rmseKmS",
+      "maeKmS",
+      "reducedChi2",
+      "withinOneSigmaFraction"
+    ],
+    "formulaOnGeneratedTwin": [
+      "rmseKmS",
+      "maeKmS",
+      "reducedChi2",
+      "withinOneSigmaFraction"
+    ],
+    "transport": [
+      "predictionRmseKmS"
+    ]
+  },
+  "acceptanceGates": {
+    "allGalaxiesProduceFiniteTwins": true,
+    "twinPackageInvariantToObservedVelocityPerturbation": true,
+    "gravityParametersInExtraction": 0,
+    "maximumMedianGBarNormalizedRmse": 0.08,
+    "maximumWorstGalaxyGBarNormalizedRmse": 0.25,
+    "maximumMedianFixedMondTransportRmseKmS": 1.5,
+    "maximumWorstGalaxyFixedMondTransportRmseKmS": 5.0
+  },
+  "claimBoundaries": [
+    "A radial twin is a compressed surrogate of published one-dimensional baryonic mass-model channels, not a photorealistic or uniquely reconstructed three-dimensional galaxy.",
+    "Agreement of generated-twin speeds with observations is joint evidence about source reconstruction and the tested gravity formula; the two errors must be reported separately.",
+    "SPARC has been repeatedly examined, so this is public spent validation rather than a blind holdout.",
+    "The held-out speed comparison tests circular-speed observations, not individual stellar trajectories or a resolved velocity field.",
+    "No success on radial twins establishes cluster lensing, Solar-System, cosmological, or relativistic validity."
+  ]
+}
