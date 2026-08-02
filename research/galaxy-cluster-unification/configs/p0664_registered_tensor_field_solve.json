@@ -1,0 +1,70 @@
+{
+  "protocol_version": "P0664-REGISTERED-TENSOR-FIELD-SOLVE-1.0.0",
+  "status": "frozen_before_any_P0664_field_score",
+  "frozen_utc": "2026-08-02T01:49:23Z",
+  "purpose": "Solve scalar and physical-length tensor AQUAL on all nominal registered baryonic maps, testing convergence and domain-selective field response without opening a velocity or lensing target.",
+  "parent_result": "results/p0663_common_resolution_tensor_audit/report.json",
+  "field_equation": "-L[mu((1-sigma)I+sigma n n)] Phi = -L[I] Phi_N",
+  "source_construction": "Phi_N is the zero-padded baryonic thin-sheet Newtonian potential; applying the same variational isotropic graph operator to Phi_N supplies a dimensionally consistent projected source, and the observed Phi_N boundary is held fixed.",
+  "definitions": {
+    "mu": "simple AQUAL mu=x/(1+x)",
+    "sigma": "P0662 physical tidal-length quadratic tensor coefficient",
+    "scalar_control": "the identical nonlinear solve with sigma=0",
+    "tensor_effect": "RMS vector acceleration difference between tensor and scalar solves divided by scalar RMS acceleration in the central 80-percent-width square",
+    "a0_m_s2": 1.2e-10,
+    "coherence_length_kpc": 10.0,
+    "coherence_power": 2.0,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0
+  },
+  "map_inputs": {
+    "galaxies": "results/p0639_registered_baryonic_maps/maps",
+    "clusters": "results/p0641_registered_cluster_baryon_maps/maps",
+    "expected_registered_galaxies": 13,
+    "expected_registered_clusters": 4,
+    "galaxy_cells": 65,
+    "cluster_cells": 129,
+    "galaxy_stellar_scale": 1.0,
+    "cluster_stellar_map": "stellar_surface_density_msun_kpc2",
+    "cluster_gas_map": "gas_surface_density_msun_kpc2"
+  },
+  "solver": {
+    "boundary": "baryonic thin-sheet Newtonian potential on the outermost cells",
+    "picard_damping": 0.65,
+    "mu_floor": 1e-6,
+    "nonlinear_residual_tolerance": 1e-5,
+    "linear_relative_tolerance": 1e-10,
+    "maximum_nonlinear_iterations": 80,
+    "maximum_linear_iterations": 5000,
+    "analysis_border_fraction": 0.1
+  },
+  "predeclared_progression_gates": {
+    "P0663_all_progression_gates_pass": true,
+    "registered_galaxy_count": 13,
+    "registered_cluster_count": 4,
+    "constant_mu_sigma_zero_newtonian_recovery_relative_RMS_max": 1e-8,
+    "rotation_covariance_tensor_effect_relative_error_max": 1e-8,
+    "all_scalar_and_tensor_solvers_converged": true,
+    "maximum_nonlinear_normalized_residual_RMS": 1e-5,
+    "minimum_constitutive_eigenvalue_strictly_positive": true,
+    "maximum_normalized_acceleration_curl_RMS": 1e-8,
+    "registered_galaxy_median_tensor_effect_max": 0.02,
+    "registered_galaxy_maximum_tensor_effect_max": 0.05,
+    "registered_cluster_median_tensor_effect_min": 0.02,
+    "registered_cluster_minimum_tensor_effect_min": 0.005,
+    "cluster_to_galaxy_median_tensor_effect_ratio_min": 5.0,
+    "new_universal_constants_after_P0659": 0,
+    "per_object_gravity_parameters": 0,
+    "sealed_target_outcomes_opened": false
+  },
+  "selection_rule": "The tensor field law advances to spent-outcome topology only if every solver, conservation, galaxy-preservation, cluster-response, domain-ratio, parameter, and blindness gate passes. No failed threshold may be relaxed.",
+  "outputs": {
+    "directory": "results/p0664_registered_tensor_field_solve"
+  },
+  "claim_boundary": [
+    "P0664 establishes numerical field behavior on projected baryonic maps only; it does not compare with velocities or lensing constraints.",
+    "The projected source construction is dimensionally consistent and recovers the thin-sheet Newtonian potential in its constant-mu scalar limit, but it is not a three-dimensional or covariant derivation.",
+    "A domain-selective field response is necessary but not sufficient for galaxy-plus-cluster unification.",
+    "No P0633 velocity, P0640 lens constraint, or spent lens residual may be used in P0664 development or selection."
+  ]
+}
