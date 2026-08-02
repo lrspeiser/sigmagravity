@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "sigma-p0736-provenance-complete-multiple-image-targets/1",
+  "stage": "P0736",
+  "status": "frozen_before_P0736_implementation_acceptance",
+  "purpose": "Make real multiple-image catalogs usable without inventing likelihood errors, correct PLCKG287 source-plane family identity, and preserve topology tests when a catalog does not map every image to its published positional-error class.",
+  "parent": {
+    "commit": "750ce5cc",
+    "rawImageContract": "sigma-observation-target/1 multiple_image_systems",
+    "rawImageEvidence": "results/p0735_raw_multiple_image_adapter/report.json"
+  },
+  "sourceAudit": {
+    "AS295": {
+      "paper": "Cibirka et al. 2018, ApJ 863:145, arXiv:1803.09557",
+      "sourceArchiveSha256": "6fef39aa25e0ae897c292e6051c86f8f6397ed75de8ed4aa979aab175c443caf",
+      "publishedPositionLikelihood": "one isotropic 0.5 arcsec positional uncertainty for every modeled multiple image",
+      "sourcePlaneFamilyRule": "the published non-candidate system identifier is the family identifier",
+      "eligibleImages": 18,
+      "eligibleFamilies": 6,
+      "scorePolicy": "position_likelihood"
+    },
+    "PLCKG287": {
+      "paper": "D'Addona et al. 2024, A&A 686:A4, arXiv:2401.16473",
+      "catalogSha256": "661913e6d7c4d6c925cd7c7608ad00727763f93d3297e9d4829174a7e47e6389",
+      "auditedArxivV2SourceSha256": "cd5284387895212481173860d59748157a5c6850dd5d2cd200a248149964ca25",
+      "publishedPositionLikelihood": "0.25 arcsec for images identified in HST and 1 arcsec for images visible only in MUSE",
+      "catalogLimitation": "CDS Table C.1 publishes positions, GOLD membership, source, clump, counter-image, and redshift metadata but no per-image HST-versus-MUSE-only flag or positional-error column",
+      "sourcePlaneFamilyRule": "X.Y is one source-plane clump family; X alone is only the background-source identifier",
+      "eligibleImages": 47,
+      "eligibleFamilies": 17,
+      "scorePolicy": "topology_only"
+    }
+  },
+  "contract": {
+    "scorePolicyValues": [
+      "position_likelihood",
+      "topology_only"
+    ],
+    "defaultScorePolicy": "position_likelihood",
+    "positionLikelihood": {
+      "positionUncertaintiesArcsecRequired": true,
+      "finiteRmsChiSquareAndLikelihoodAllowedOnlyForCompleteTopology": true
+    },
+    "topologyOnly": {
+      "positionUncertaintiesArcsecAllowed": false,
+      "finiteRmsChiSquareAndLikelihoodAllowed": false,
+      "completeState": "topology_complete",
+      "incompleteState": "incomplete_topology",
+      "matchedSeparationsAreDiagnosticOnly": true
+    },
+    "sourcePositionNuisanceParametersPerFamily": 2,
+    "gravityParametersAdded": 0
+  },
+  "acceptanceFixtures": [
+    "legacy targets without scorePolicy remain position_likelihood and byte-compatible",
+    "topology_only accepts families without positional uncertainties and never emits a finite statistical score",
+    "topology_only distinguishes topology_complete from incomplete_topology",
+    "position_likelihood still rejects missing or malformed uncertainty arrays",
+    "AS295 serializes 18 images in 6 families with published 0.5 arcsec uncertainties",
+    "PLCKG287 serializes 47 GOLD images in 17 X.Y clump families with no invented uncertainties",
+    "PLCKG287 family identity differs from the superseded 12-source grouping and reports 60 source-profiled observables",
+    "hosted JSON schema, preflight, example, OpenAPI, and local worker agree"
+  ],
+  "numericalGates": {
+    "as295Images": 18,
+    "as295Families": 6,
+    "as295PositionUncertaintyArcsec": 0.5,
+    "plckg287Images": 47,
+    "plckg287Families": 17,
+    "plckg287SourceProfiledObservableCount": 60,
+    "maximumCoordinateRoundTripArcsec": 1e-12,
+    "maximumGravityParametersAdded": 0
+  },
+  "claimBoundary": [
+    "A published modeling uncertainty is a likelihood convention and is not necessarily the astrometric centroid error.",
+    "Topology-only evaluation can reject a field that predicts too few images, but cannot rank complete fields by chi-square or likelihood.",
+    "PLCKG287 may move to position_likelihood only after every GOLD image is mapped to the paper's HST-visible or MUSE-only class by a frozen, independently auditable protocol.",
+    "Correcting source-plane clump identity invalidates the earlier descriptive 12-family PLCKG287 import; spent P0713/P0714 artifacts remain preserved as historical evidence.",
+    "Neither catalog target validates the submitted gravity equation; each evaluates only the resulting typed photon field."
+  ]
+}
