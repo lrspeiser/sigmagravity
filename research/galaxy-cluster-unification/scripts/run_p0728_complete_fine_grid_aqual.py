@@ -41,7 +41,9 @@ DEFAULT_WORK = ROOT / "tmp" / "p0728-worker-cache"
 
 def selected_manifest(base: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
     manifest = copy.deepcopy(base)
-    manifest["name"] = "AQUAL P0728 selected universal hybrid"
+    manifest["name"] = config.get(
+        "manifestName", "AQUAL P0728 selected universal hybrid"
+    )
     manifest["solver"] = copy.deepcopy(config["solver"])
     return manifest
 
@@ -110,7 +112,9 @@ def normalized_prediction_change(
     )
 
 
-def render_model_plot(output: Path, summaries: list[dict[str, Any]]) -> None:
+def render_model_plot(
+    output: Path, summaries: list[dict[str, Any]], stage: str
+) -> None:
     ordered = sorted(summaries, key=lambda row: float(row["equalGalaxyRmseKmS"]))
     figure, axis = plt.subplots(figsize=(8.0, 4.8))
     axis.barh(
@@ -121,9 +125,9 @@ def render_model_plot(output: Path, summaries: list[dict[str, Any]]) -> None:
     axis.invert_yaxis()
     axis.set_xlabel("equal-galaxy RMSE (km/s; lower is better)")
     title = (
-        "P0728 complete four-galaxy fine-grid comparison"
+        f"{stage} complete four-galaxy fine-grid comparison"
         if any(row["model"] == "aqual_simple_mu" for row in summaries)
-        else "P0728 eligible complete rows; incomplete AQUAL excluded"
+        else f"{stage} eligible complete rows; incomplete AQUAL excluded"
     )
     axis.set_title(title)
     figure.tight_layout()
@@ -131,7 +135,9 @@ def render_model_plot(output: Path, summaries: list[dict[str, Any]]) -> None:
     plt.close(figure)
 
 
-def render_reference_plot(output: Path, comparisons: list[dict[str, Any]]) -> None:
+def render_reference_plot(
+    output: Path, comparisons: list[dict[str, Any]], stage: str
+) -> None:
     figure, axis = plt.subplots(figsize=(8.0, 4.5))
     systems = [str(row["system"]) for row in comparisons]
     values = [
@@ -158,18 +164,22 @@ def render_reference_plot(output: Path, comparisons: list[dict[str, Any]]) -> No
             )
     axis.set_yscale("log")
     axis.set_ylabel("circular-speed normalized RMS difference")
-    axis.set_title("P0728 agreement with independent field references")
+    axis.set_title(f"{stage} agreement with independent field references")
     figure.tight_layout()
     figure.savefig(output / "aqual_reference_agreement.png", dpi=180)
     plt.close(figure)
 
 
-def main() -> None:
+def main(
+    default_config: Path = DEFAULT_CONFIG,
+    default_output: Path = DEFAULT_OUTPUT,
+    default_work: Path = DEFAULT_WORK,
+) -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--config", type=Path, default=default_config)
+    parser.add_argument("--output", type=Path, default=default_output)
     parser.add_argument("--store", type=Path, default=DEFAULT_STORE)
-    parser.add_argument("--work", type=Path, default=DEFAULT_WORK)
+    parser.add_argument("--work", type=Path, default=default_work)
     arguments = parser.parse_args()
 
     config_path = arguments.config.resolve()
@@ -201,16 +211,28 @@ def main() -> None:
     for label, (path, expected) in locked_files.items():
         if file_sha256(path) != expected:
             raise RuntimeError(f"{label} hash changed")
+    for item in config.get("additionalLockedFiles", []):
+        path = (ROOT / item["path"]).resolve()
+        if file_sha256(path) != item["sha256"]:
+            raise RuntimeError(f"{item['id']} hash changed")
 
     p0727 = read_json(p0727_path)
-    if p0727["status"] != "pass" or p0727["selectedUniversalSolverVariant"] != config[
-        "selectedSolverVariant"
-    ]:
-        raise RuntimeError("P0727 selection changed")
+    qualification = config.get("p0727VariantRequirement", "selected")
+    candidate_variant = config["selectedSolverVariant"]
+    if p0727["status"] != "pass":
+        raise RuntimeError("P0727 no longer passes")
+    if qualification == "selected":
+        if p0727["selectedUniversalSolverVariant"] != candidate_variant:
+            raise RuntimeError("P0727 selection changed")
+    elif qualification == "qualifying":
+        if candidate_variant not in p0727["qualifyingUniversalVariants"]:
+            raise RuntimeError("P0727 candidate is not a qualified universal variant")
+    else:
+        raise RuntimeError(f"unsupported P0727 variant requirement: {qualification}")
     selected_record = next(
         item
         for item in p0727["manifests"]
-        if item["variant"] == config["selectedSolverVariant"]
+        if item["variant"] == candidate_variant
     )
     if selected_record["solver"] != config["solver"]:
         raise RuntimeError("selected P0727 solver controls changed")
@@ -236,7 +258,7 @@ def main() -> None:
         system_id = str(system["id"])
         payloads.append(
             {
-                "variant": config["selectedSolverVariant"],
+                "variant": candidate_variant,
                 "system": system_id,
                 "model": manifest,
                 "bundleRoot": str(bundles[system_id]),
@@ -482,7 +504,7 @@ def main() -> None:
         "locked_input_hashes_valid": True,
     }
     report = {
-        "schemaVersion": "sigma-p0728-complete-fine-grid-aqual/1",
+        "schemaVersion": f"sigma-{config['stage'].lower()}-complete-fine-grid-aqual/1",
         "stage": config["stage"],
         "status": "pass" if all(engineering_gates.values()) else "fail",
         "stabilityStatus": "stable" if all(stability_gates.values()) else "sensitive",
@@ -492,7 +514,7 @@ def main() -> None:
         "workerSourceSha256": _worker_source_sha256(),
         "modelDocumentSha256": canonical_sha256(manifest),
         "modelPhysicsSha256": canonical_sha256(physics_core(manifest)),
-        "selectedSolverVariant": config["selectedSolverVariant"],
+        "selectedSolverVariant": candidate_variant,
         "solver": config["solver"],
         "runs": runs,
         "referenceComparisons": comparisons,
@@ -523,8 +545,8 @@ def main() -> None:
     write_csv(output / "point_predictions.csv", prediction_rows)
     write_csv(output / "complete_fine_grid_model_summary.csv", fine_summaries)
     write_csv(output / "aqual_baseline_prediction_changes.csv", aqual_changes)
-    render_model_plot(output, fine_summaries)
-    render_reference_plot(output, comparisons)
+    render_model_plot(output, fine_summaries, config["stage"])
+    render_reference_plot(output, comparisons, config["stage"])
     print(json.dumps(report, indent=2))
     if report["status"] != "pass":
         raise SystemExit(1)

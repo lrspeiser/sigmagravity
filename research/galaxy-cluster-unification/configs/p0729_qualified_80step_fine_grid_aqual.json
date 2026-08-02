@@ -1,0 +1,110 @@
+{
+  "stage": "P0729",
+  "purpose": "Test the previously preregistered and P0727-qualified 80-step universal hybrid on all four P0724 fine-grid AQUAL systems after the selected 40-step method failed NGC1569.",
+  "sampleStatus": "previously_unsealed_and_project_spent_diagnostic_sentinels",
+  "scenario": "fine_49x49x17",
+  "manifestName": "AQUAL P0729 preregistered 80-step universal hybrid",
+  "baseManifest": "hosted-simulator/examples/models/aqual.json",
+  "p0727Report": "results/p0727_hybrid_nonlinear_crosscheck/report.json",
+  "p0727ReportSha256": "61f28af3b286abf0a108da1687dd4c5423f5a1068cd92c93a93f6d3ae1330664",
+  "p0727VariantRequirement": "qualifying",
+  "additionalLockedFiles": [
+    {
+      "id": "p0728_failed_four_system_report",
+      "path": "results/p0728_complete_fine_grid_aqual/report.json",
+      "sha256": "06bafd0dfa16b02d20cd479f0e1e392bee4a6ce957473074530125cf7ac0fd39"
+    }
+  ],
+  "p0724Report": "results/p0724_grid_box_vertical_sensitivity/report.json",
+  "p0724ReportSha256": "79f3638e53e0f39b813ec7b6025e928300c9825c01f6c8ca40e70cb7a6a93153",
+  "p0724PointPredictions": "results/p0724_grid_box_vertical_sensitivity/point_predictions.csv",
+  "p0724PointPredictionsSha256": "ae0646bcd13a208e703627fb5b7fed58b7a4451ba8d53e6cd306b2ef17e610d3",
+  "p0724PairedSensitivity": "results/p0724_grid_box_vertical_sensitivity/paired_prediction_sensitivity.csv",
+  "p0724PairedSensitivitySha256": "332a1105bf78aef85096b09227534b421020af300aed167a8f125c3ddd33db0f",
+  "p0724ModelSummary": "results/p0724_grid_box_vertical_sensitivity/scenario_model_summary.csv",
+  "p0724ModelSummarySha256": "adaf5705fe5930e203c5a74c571d6f9ed8bf11fd0e7b6b25c80a551d0638501f",
+  "selectedSolverVariant": "hybrid_picard80_newton",
+  "solver": {
+    "family": "nonlinear_finite_volume",
+    "relativeTolerance": 1e-8,
+    "residualTolerance": 1e-8,
+    "maxIterations": 160,
+    "coefficientFloor": 1e-8,
+    "initialization": "linearized_unit_coefficient",
+    "nonlinearMethod": "newton_krylov",
+    "krylovMethod": "gmres",
+    "krylovInnerIterations": 30,
+    "lineSearch": "armijo",
+    "picardWarmupDamping": 0.20,
+    "picardWarmupIterations": 80
+  },
+  "systems": [
+    {
+      "id": "DDO53",
+      "p0724FieldJobId": "job_dc716dfc51cca7a3358e3dc1",
+      "dataUploadId": "upload_69e240568960a3bfecba5fe5",
+      "inputBundleSha256": "d7ba34c267abf391cae39650bdf1452a4261723d8a94ad077519ed103fc0d955",
+      "archiveSha256": "bd4599893898a7bfda8fd7c80553c0b7fc74ae32a0dd2b4a0c2289eb978fb947",
+      "referenceDirectory": "tmp/p0725-worker-cache/runs/linearized_d020/DDO53",
+      "referenceScientificResultSha256": "52021c6dd821d07714326b38cc29d9c256bab96e7e02de04b7be459d57760e6b",
+      "referenceMethod": "P0725 converged Picard"
+    },
+    {
+      "id": "DDO101",
+      "p0724FieldJobId": "job_60d432ed8af85b5474ec9553",
+      "dataUploadId": "upload_bf064dab972a544ed62df3bc",
+      "inputBundleSha256": "7457c0dd034be9bc8f2ba2a9bbf06fceb236921e60b94400b9570e35f69abdb8",
+      "archiveSha256": "dff60cb853e0e116c671764b6263d0aafb61b1b6e25d775056c4e369ccdcdb75",
+      "referenceDirectory": "tmp/p0725-worker-cache/runs/linearized_d020/DDO101",
+      "referenceScientificResultSha256": "bf7c4d34655edaf0b42550b32e1d4cd43bae4e0308c63e7900c2a4c7d2d885bc",
+      "referenceMethod": "P0725 converged Picard"
+    },
+    {
+      "id": "DDO50",
+      "p0724FieldJobId": "job_5bf64afc5970efd12f834845",
+      "dataUploadId": "upload_2a7a932d1122db8c432f51bf",
+      "inputBundleSha256": "142dac0537fc721abc6030bbad4f16f6a534ea6c55db69e3873dbf772a664b5f",
+      "archiveSha256": "46bfbd1791637655f9dd2f11a05eeb1d5a769d61ee618bac82f3ad4c9c43b8aa",
+      "referenceDirectory": "tmp/p0724-http/jobs/job_5bf64afc5970efd12f834845/artifacts",
+      "referenceScientificResultSha256": "236de75a1fcf711c65cc72730bc23e1e1d9af4bb5b654bdd93a9407efd5783fc",
+      "referenceMethod": "P0724 zero-initialized Picard"
+    },
+    {
+      "id": "NGC1569",
+      "p0724FieldJobId": "job_24da741d446985b0c8aacd24",
+      "dataUploadId": "upload_1aca426b429677cfe3f4c6c3",
+      "inputBundleSha256": "5e5f2358d7c93923665c40e39ddf89118f11b88d9f34bb79eb459636b1ea151e",
+      "archiveSha256": "ec3608628cc4b8d82d9ac2a143a9e5bea1a23a684513f97e1412842b816e006d",
+      "referenceDirectory": "tmp/p0724-http/jobs/job_24da741d446985b0c8aacd24/artifacts",
+      "referenceScientificResultSha256": "9d7b2464f201a960f965e72d649730fc55a5e2f77028652221f8b0587b37b00b",
+      "referenceMethod": "P0724 zero-initialized Picard"
+    }
+  ],
+  "parallelWorkers": 4,
+  "engineeringGates": {
+    "requiredSystems": 4,
+    "minimumConvergenceFraction": 1.0,
+    "maximumEquationResidual": 1e-7,
+    "maximumRelativeUpdate": 1e-8,
+    "maximumReferencePredictionNormalizedRmse": 0.01,
+    "maximumReferencePotentialNormalizedRmse": 0.01,
+    "maximumReferenceAccelerationNormalizedRmse": 0.01,
+    "requiredObservationPoints": 55,
+    "requireRequestedIterationLimitExecuted": true,
+    "maximumPerObjectGravityParameters": 0
+  },
+  "inheritedStabilityGates": {
+    "maximumScenarioMedianNormalizedPredictionRmse": 0.10,
+    "maximumScenarioP90NormalizedPredictionRmse": 0.25,
+    "maximumModelAggregateFitRmseRelativeChange": 0.20
+  },
+  "selectionPolicy": "Use exactly the 80-step variant that was preregistered and qualified in P0727 before P0728 exposed NGC1569. Apply it universally to all four systems and never select it using observed speeds.",
+  "rethinkPolicy": "If this previously qualified universal alternative fails any field, do not continue extending warm-up counts one by one; retain no production default and preregister a broader nonlinear solver validation matrix.",
+  "claimBoundary": [
+    "This is a transparent follow-up on spent numerical sentinels, not a holdout or theory fit.",
+    "The 80-step candidate existed and passed P0727 before the P0728 NGC1569 result was known.",
+    "Reference solutions are comparison-only and never initial conditions.",
+    "Observed speeds score the completed fields but never select solver controls.",
+    "Passing numerical and stability gates would validate this discrete comparison, not AQUAL as physical theory."
+  ]
+}
