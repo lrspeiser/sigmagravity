@@ -1,0 +1,99 @@
+{
+  "protocol_version": "P0688-MONOTONE-ENVELOPE-QUMOND-1.0.0",
+  "status": "frozen_before_any_P0688_formula_score",
+  "frozen_utc": "2026-08-02T09:30:00Z",
+  "purpose": "Apply the minimal parameter-free inward monotone majorant to P0685's local channel exponent and test whether the topology-derived nonhollow constraint can coexist with the spent galaxy, cluster-radial, and Solar screens.",
+  "failure_parent": "results/p0687_system_path_coordinate_qumond/report.json",
+  "radial_comparator_report": "results/p0684_path_diluted_potential_channel_qumond/report.json",
+  "equation": {
+    "local_parent": "p_local(r)=1+2 chi_b(r)^4/[chi_b(r)^4+(1e-6)^4] [max(eta_b(r),1)]^(-1/2)",
+    "primary_envelope": "p_env(r)=max_{s>=r} p_local(s) on ordered baryonic radial profiles",
+    "minimality": "p_env is the smallest pointwise majorant of p_local that is nonincreasing with radius",
+    "field_form": "laplacian(Phi)=div[nu_0(|grad Phi_N|/a0)^p_env grad Phi_N]",
+    "base_boost": "nu_0(y)=1/[1-exp(-sqrt(y))]",
+    "a0_m_s2": 1.2e-10,
+    "chi_t": 1e-6,
+    "transition_power_n": 4.0,
+    "extra_spatial_channels": 2.0,
+    "path_power_q": 0.5,
+    "new_constants": 0,
+    "gravity_parameters_fit_per_object": 0
+  },
+  "predeclared_variants": {
+    "inward_monotone_majorant_primary": "use p_env; only this variant may advance",
+    "local_P0685_control": "use p_local and reproduce the successful radial but failed-topology control"
+  },
+  "spent_galaxy_test": {
+    "input": "results/sparc_density_transfer/primary_predictions.csv",
+    "systems": 131,
+    "points": 968,
+    "profile_order": "increasing adjusted radius within each galaxy",
+    "score": "equal-galaxy circular-speed RMSE_km_s",
+    "claim_limit": "the envelope is estimated on the available scored outer baryonic profile, not a new full-disk 3D solve"
+  },
+  "spent_cluster_test": {
+    "baryonic_profiles": "data/raw/clash_tian2020/fig2.dat",
+    "target_profiles": "results/p0682_spent_multicluster_deflection_atlas/radial_ratio_profiles.csv",
+    "target_metrics": "results/p0682_spent_multicluster_deflection_atlas/system_deflection_metrics.csv",
+    "systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931", "RXJ1347", "RXJ2129"],
+    "primary_systems": ["MACS0329", "MACS0429", "MACS1115", "MACS1931", "RXJ2129"],
+    "stress_systems": ["RXJ1347"],
+    "reliable_subset": ["MACS0429", "MACS1931", "RXJ2129"],
+    "target": "mean baryonic reduced deflection plus mean radial compact-halo deflection in each P0682 annular bin",
+    "prediction": "spherical line-of-sight deflection at reference source redshift z=2",
+    "acceleration_grid_points": 1536,
+    "line_of_sight_integration_points": 400,
+    "maximum_radius_kpc": 1000000.0,
+    "score": "equal-system RMS log10(predicted_deflection/target_deflection)"
+  },
+  "solar_proxy": {
+    "source": "point-mass Sun evaluated as one ordered radial profile",
+    "radii": ["solar_limb", "Mercury", "Earth", "Saturn"],
+    "warning": "force screening is not a covariant PPN or Cassini-gamma derivation"
+  },
+  "predeclared_integrity_gates": {
+    "P0687_status": "pass",
+    "P0687_candidate_advanced_to_new_3D_topology_freeze": false,
+    "galaxy_systems": 131,
+    "galaxy_points": 968,
+    "cluster_systems": 6,
+    "primary_cluster_systems": 5,
+    "reliable_cluster_systems": 3,
+    "formula_variants": 2,
+    "all_profiles_sorted_before_envelope": true,
+    "gravity_parameters_fit_per_object": 0,
+    "new_raw_image_root_score_computed": false,
+    "full_3D_field_solve_computed": false,
+    "sealed_target_outcomes_opened": false
+  },
+  "predeclared_advancement_gates": {
+    "primary_variant": "inward_monotone_majorant_primary",
+    "galaxy_RMSE_ratio_to_fixed_RAR_max": 1.05,
+    "all5_cluster_log_RMS_dex_max": 0.20,
+    "reliable3_cluster_log_RMS_dex_max": 0.20,
+    "minimum_all5_gap_fraction_closed_from_fixed_RAR": 0.75,
+    "solar_limb_fractional_force_change_max": 2.3e-5,
+    "Earth_fractional_force_change_max": 1e-10,
+    "Saturn_fractional_force_change_max": 2.3e-5,
+    "all_primary_exponent_profiles_nonincreasing": true,
+    "primary_envelope_pointwise_majorizes_local": true,
+    "no_new_constants": true,
+    "no_per_object_fitted_gravity_parameters": true
+  },
+  "selection_rule": "The monotone-majorant primary advances only if it passes every frozen galaxy, both cluster, gap-closure, Solar, monotonicity, pointwise-majorant, no-new-constant, parameter-accounting, and no-score gate. No value is selected or fitted in P0688. Failure retires this local-path formula family from further topology patches.",
+  "outputs": {
+    "directory": "results/p0688_monotone_envelope_qumond",
+    "scores": "variant_scores.csv",
+    "galaxy_predictions": "primary_spent_galaxy_predictions.csv",
+    "cluster_predictions": "primary_spent_cluster_predictions.csv",
+    "solar": "primary_solar_proxies.csv",
+    "figure": "monotone_envelope_response.png"
+  },
+  "claim_boundary": [
+    "P0688 is generated from spent radial and raw-topology failures and cannot validate the envelope.",
+    "The radial envelope is nonlocal and has not been derived from a covariant action or causal field dynamics.",
+    "A spherical radial pass would still require a separately frozen potential-shell definition in registered 3D.",
+    "The zero-slip photon closure remains diagnostic only.",
+    "No sealed P0633 or P0640 outcome may be opened."
+  ]
+}
