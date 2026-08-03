@@ -1,0 +1,234 @@
+{
+  "schemaVersion": "sigma-p0742-spiral-twin-roundtrip-development-result/1",
+  "stage": "P0742",
+  "status": "fail",
+  "configSha256": "127bc1371f115f3c21f5c9c40a1a9b8275e633d570c12591740bc11e34a1dc45",
+  "parentResultSha256": "64776bed1374276bcae8737270febee15a90b1818e0e9dbfc217b13541b1731a",
+  "selectionRule": "Evaluate every frozen tier on all four development maps and choose the lowest-complexity tier that passes every morphology, mass, compression, 3D projection, and formula-transport gate. If none passes, report failure rather than selecting the least-bad tier.",
+  "selectedTier": null,
+  "tiers": [
+    {
+      "id": "transported_p0720",
+      "controls": {
+        "id": "transported_p0720",
+        "radialBins": 24,
+        "maximumFourierMode": 4,
+        "residualFeaturesPerComponent": 64
+      },
+      "status": "fail",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": false,
+        "totalMaximumNormalizedL2": false,
+        "totalMinimumPixelCorrelation": false,
+        "gasMaximumNormalizedL2": true,
+        "starsMaximumNormalizedL2": false,
+        "minimumCellToNumericParameterRatio": true,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": false,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": false,
+        "requiredObservedVelocityArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.22341993623889034,
+          "maximumNormalizedL2": 0.29043188769605893,
+          "medianPixelCorrelation": 0.9624982657774559,
+          "minimumPixelCorrelation": 0.9245739860833477,
+          "medianRadialProfileLog10Rmse": 0.5277267387829258,
+          "maximumMassRelativeError": 2.0360949913025424e-16,
+          "maximumConcentrationAbsoluteError": 0.038710780920053534,
+          "maximumLopsidednessAbsoluteError": 0.09401157082571368,
+          "maximumClumpinessAbsoluteError": 0.09611444839445604
+        },
+        "stars": {
+          "medianNormalizedL2": 0.3192713056232219,
+          "maximumNormalizedL2": 0.6046244825753272,
+          "medianPixelCorrelation": 0.9487779995903589,
+          "minimumPixelCorrelation": 0.8287398841131557,
+          "medianRadialProfileLog10Rmse": 0.5493058060194237,
+          "maximumMassRelativeError": 1.9956303295143926e-16,
+          "maximumConcentrationAbsoluteError": 0.296131820240884,
+          "maximumLopsidednessAbsoluteError": 0.07404070848405087,
+          "maximumClumpinessAbsoluteError": 0.15108764998718227
+        },
+        "total": {
+          "medianNormalizedL2": 0.30475931193604666,
+          "maximumNormalizedL2": 0.5959692240785446,
+          "medianPixelCorrelation": 0.9527018773859111,
+          "minimumPixelCorrelation": 0.8308477522357609,
+          "medianRadialProfileLog10Rmse": 0.5449914201581462,
+          "maximumMassRelativeError": 4.061679896788943e-16,
+          "maximumConcentrationAbsoluteError": 0.19328987228254224,
+          "maximumLopsidednessAbsoluteError": 0.06351827147586889,
+          "maximumClumpinessAbsoluteError": 0.09981318016014772
+        }
+      },
+      "minimumCellToNumericParameterRatio": 48.90674603174603,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 2.5720991375088817,
+        "worstRadialSpeedRmseKmS": 4.633277374323211,
+        "medianLosSpeedRmseKmS": 8.843748144370906,
+        "worstLosSpeedRmseKmS": 16.55905077761785
+      }
+    },
+    {
+      "id": "spiral_medium",
+      "controls": {
+        "id": "spiral_medium",
+        "radialBins": 32,
+        "maximumFourierMode": 6,
+        "residualFeaturesPerComponent": 128
+      },
+      "status": "fail",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": false,
+        "totalMaximumNormalizedL2": false,
+        "totalMinimumPixelCorrelation": false,
+        "gasMaximumNormalizedL2": true,
+        "starsMaximumNormalizedL2": false,
+        "minimumCellToNumericParameterRatio": true,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": false,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": false,
+        "requiredObservedVelocityArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.19098172245443018,
+          "maximumNormalizedL2": 0.2559391174040383,
+          "medianPixelCorrelation": 0.9722930089253852,
+          "minimumPixelCorrelation": 0.9419470889460639,
+          "medianRadialProfileLog10Rmse": 0.6120206352813459,
+          "maximumMassRelativeError": 2.1920322444657562e-16,
+          "maximumConcentrationAbsoluteError": 0.023697263513160927,
+          "maximumLopsidednessAbsoluteError": 0.07654445422159945,
+          "maximumClumpinessAbsoluteError": 0.08716086767758885
+        },
+        "stars": {
+          "medianNormalizedL2": 0.2939741940463726,
+          "maximumNormalizedL2": 0.5745336979903289,
+          "medianPixelCorrelation": 0.956839733080973,
+          "minimumPixelCorrelation": 0.8499698849219424,
+          "medianRadialProfileLog10Rmse": 0.46428962262341755,
+          "maximumMassRelativeError": 2.7054590536347523e-16,
+          "maximumConcentrationAbsoluteError": 0.3383951283367317,
+          "maximumLopsidednessAbsoluteError": 0.052585517201157894,
+          "maximumClumpinessAbsoluteError": 0.13463916034296425
+        },
+        "total": {
+          "medianNormalizedL2": 0.28011590935781777,
+          "maximumNormalizedL2": 0.5662030334459216,
+          "medianPixelCorrelation": 0.9601629867334843,
+          "minimumPixelCorrelation": 0.8518718100378567,
+          "medianRadialProfileLog10Rmse": 0.4648296242278574,
+          "maximumMassRelativeError": 3.302663825450538e-16,
+          "maximumConcentrationAbsoluteError": 0.15757117862802916,
+          "maximumLopsidednessAbsoluteError": 0.04386434025908978,
+          "maximumClumpinessAbsoluteError": 0.08896624970708795
+        }
+      },
+      "minimumCellToNumericParameterRatio": 25.411340206185567,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 1.9581617884967688,
+        "worstRadialSpeedRmseKmS": 3.6969502744115426,
+        "medianLosSpeedRmseKmS": 8.108823576870643,
+        "worstLosSpeedRmseKmS": 14.756845869980793
+      }
+    },
+    {
+      "id": "spiral_high",
+      "controls": {
+        "id": "spiral_high",
+        "radialBins": 40,
+        "maximumFourierMode": 8,
+        "residualFeaturesPerComponent": 256
+      },
+      "status": "fail",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": false,
+        "totalMaximumNormalizedL2": false,
+        "totalMinimumPixelCorrelation": false,
+        "gasMaximumNormalizedL2": true,
+        "starsMaximumNormalizedL2": false,
+        "minimumCellToNumericParameterRatio": false,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": false,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": false,
+        "requiredObservedVelocityArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.16614222758029362,
+          "maximumNormalizedL2": 0.2228163487473538,
+          "medianPixelCorrelation": 0.9801177687828861,
+          "minimumPixelCorrelation": 0.9562374390877978,
+          "medianRadialProfileLog10Rmse": 0.5388931693217747,
+          "maximumMassRelativeError": 1.2903323488905984e-16,
+          "maximumConcentrationAbsoluteError": 0.03275867004909783,
+          "maximumLopsidednessAbsoluteError": 0.05668164526217567,
+          "maximumClumpinessAbsoluteError": 0.07684797519779173
+        },
+        "stars": {
+          "medianNormalizedL2": 0.2734078204435264,
+          "maximumNormalizedL2": 0.5459296794328091,
+          "medianPixelCorrelation": 0.962030492837459,
+          "minimumPixelCorrelation": 0.8707254753173751,
+          "medianRadialProfileLog10Rmse": 0.4618619635413921,
+          "maximumMassRelativeError": 3.9912606590287853e-16,
+          "maximumConcentrationAbsoluteError": 0.29427427281644203,
+          "maximumLopsidednessAbsoluteError": 0.032216702575860845,
+          "maximumClumpinessAbsoluteError": 0.12400251710543478
+        },
+        "total": {
+          "medianNormalizedL2": 0.2597233435377531,
+          "maximumNormalizedL2": 0.5378936719280281,
+          "medianPixelCorrelation": 0.9652566919904824,
+          "minimumPixelCorrelation": 0.8720889214931796,
+          "medianRadialProfileLog10Rmse": 0.46108658250786655,
+          "maximumMassRelativeError": 3.302663825450538e-16,
+          "maximumConcentrationAbsoluteError": 0.17736382836558118,
+          "maximumLopsidednessAbsoluteError": 0.028081890509568996,
+          "maximumClumpinessAbsoluteError": 0.08094088434215604
+        }
+      },
+      "minimumCellToNumericParameterRatio": 14.037015945330296,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 1.9214802658105046,
+        "worstRadialSpeedRmseKmS": 2.7922023326998793,
+        "medianLosSpeedRmseKmS": 7.41614044973476,
+        "worstLosSpeedRmseKmS": 14.259606805379311
+      }
+    }
+  ],
+  "systems": 4,
+  "validationArraysOpened": 0,
+  "holdoutArraysOpened": 0,
+  "observedVelocityArraysOpened": 0,
+  "fittedGravityParameters": 0,
+  "formulaFixtureParametersFitted": 0,
+  "claimBoundary": [
+    "P0742 can show that a fake twin retains the observed baryonic structure closely enough for a formula to make nearly the same prediction on both maps.",
+    "P0742 cannot show that either prediction matches real stellar or gas speeds because every observed velocity target remains sealed.",
+    "The formula fixtures are fixed diagnostic rulers and do not enter extraction or tier selection except through a preregistered transport-fidelity gate.",
+    "Development selection must be frozen before validation and holdout maps are opened."
+  ],
+  "reportSha256": "9c976f5d6068ff00e51865aa90ac3dcb2b1fcb3189da53f794ad676ad9d90ab6"
+}

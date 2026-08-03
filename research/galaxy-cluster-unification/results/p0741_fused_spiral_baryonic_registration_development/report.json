@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "sigma-p0741-fused-spiral-baryonic-registration-result/1",
+  "stage": "P0741",
+  "status": "pass",
+  "configSha256": "484b4db588a979570675077ed8cde7b5d6e3ce6446e214833c09de22f775bd86",
+  "p0739ResultSha256": "6ce380c815de9d06bc26e0b0c12b5291d5d50fa4a4cdb4c9246b12a509b11fff",
+  "p0740ResultSha256": "beac0315c81a34736784025d67bbe316ac1c4b22c28caf74ee0d2b01f26b2d1e",
+  "systems": 4,
+  "splitsOpened": [
+    "development"
+  ],
+  "wiseImageArraysOpened": 18,
+  "validationArraysOpened": 0,
+  "holdoutArraysOpened": 0,
+  "velocityOrDispersionArraysOpened": 0,
+  "gravityParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredWiseCoadds": true,
+    "requiredValidationArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "requiredVelocityOrDispersionArraysOpened": true,
+    "maximumGravityParameters": true,
+    "minimumFiniteStellarFootprintFractionInsideHiR995": true,
+    "minimumCrossCalibrationPixels": true,
+    "minimumPositiveSingsWiseSpearmanCorrelation": true,
+    "maximumQuadrantScaleRobustFractionalSpread": true,
+    "maximumGasMassRelativeError": true,
+    "maximumStellarMassRelativeError": true,
+    "maximumOuterCellMassFraction": true,
+    "allOutputBundlesContentHashed": true
+  },
+  "aggregate": {
+    "minimumSingsFootprintFractionInsideHiR995": 0.8024423159211349,
+    "minimumFusedFootprintFractionInsideHiR995": 1.0,
+    "minimumSingsWiseSpearman": 0.8771060259111207,
+    "maximumQuadrantScaleRobustFractionalSpread": 0.018032119684797152
+  },
+  "mapFiles": [
+    {
+      "galaxy": "NGC2403",
+      "path": "maps/NGC2403.npz",
+      "sha256": "453a77abd29403d28dfdb89a3a8a36aa9e45a75ff1a2eeb33dee304ff0ddef2b"
+    },
+    {
+      "galaxy": "NGC3198",
+      "path": "maps/NGC3198.npz",
+      "sha256": "4e2f6efd0b1a5901750d06c4a48e26b2f3186c6b58986f43e2d89e2b30ec05bb"
+    },
+    {
+      "galaxy": "NGC5055",
+      "path": "maps/NGC5055.npz",
+      "sha256": "286eb920e908c2c54174844251e1f815e539fa0a28c9351819337794ab611ac9"
+    },
+    {
+      "galaxy": "NGC7793",
+      "path": "maps/NGC7793.npz",
+      "sha256": "996a4fb762f9b955cb803fa89efda9d372ce0ac4b992e55bbd47400df7240909"
+    }
+  ],
+  "claimBoundary": [
+    "P0741 is a development-only observational registration test and cannot validate or rank gravity formulas.",
+    "The per-galaxy WISE/SINGS scale is disclosed as instrument cross-calibration; the completed stellar map still receives only one published-luminosity mass normalization.",
+    "Passing P0741 says that later formula failures are less likely to be caused by a rectangular stellar-image footprint; it does not prove the unobserved outskirts are uniquely reconstructed.",
+    "Validation and holdout pixel arrays and every kinematic target remain sealed."
+  ],
+  "reportSha256": "64776bed1374276bcae8737270febee15a90b1818e0e9dbfc217b13541b1731a"
+}

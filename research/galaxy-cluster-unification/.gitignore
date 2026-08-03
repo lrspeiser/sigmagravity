@@ -178,6 +178,14 @@ results/environmental_mog0/*
 !results/p0739_spiral_baryonic_registration_development/**
 !results/p0740_allwise_w1_coverage_supplement/
 !results/p0740_allwise_w1_coverage_supplement/**
+!results/p0741_fused_spiral_baryonic_registration_development/
+!results/p0741_fused_spiral_baryonic_registration_development/**
+!results/p0742_spiral_twin_roundtrip_development/
+!results/p0742_spiral_twin_roundtrip_development/**
+!results/p0743_multiscale_spiral_twin_development/
+!results/p0743_multiscale_spiral_twin_development/**
+!results/p0744_development_velocity_field_reveal/
+!results/p0744_development_velocity_field_reveal/**
 !results/p0731_real_velocity_field_adapter_parity/
 results/p0731_real_velocity_field_adapter_parity/*
 !results/p0731_real_velocity_field_adapter_parity/SUMMARY.md

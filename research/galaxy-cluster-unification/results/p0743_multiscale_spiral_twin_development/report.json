@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "sigma-p0743-multiscale-spiral-twin-development-result/1",
+  "stage": "P0743",
+  "status": "pass",
+  "configSha256": "062f2ab55fa4a4fd8224f37e8c7be78ec6c25f9450e1e500f071440f17093465",
+  "p0741ResultSha256": "64776bed1374276bcae8737270febee15a90b1818e0e9dbfc217b13541b1731a",
+  "p0742FailureSha256": "9c976f5d6068ff00e51865aa90ac3dcb2b1fcb3189da53f794ad676ad9d90ab6",
+  "developmentDisclosure": "The choice of a local multiscale basis and the three coefficient budgets was informed by P0742 development residuals and exploratory calculations on these same four maps. P0743 is engineering development, not blind validation. The selected budget must be frozen before any validation or holdout array is opened.",
+  "selectionRule": "Choose the smallest coefficient budget that passes all frozen P0742 morphology, mass, compression, 3D projection, and formula-transport gates.",
+  "selectedTier": "haar_256",
+  "tiers": [
+    {
+      "id": "haar_128",
+      "coefficientsPerComponent": 128,
+      "status": "fail",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": true,
+        "totalMaximumNormalizedL2": true,
+        "totalMinimumPixelCorrelation": true,
+        "gasMaximumNormalizedL2": false,
+        "starsMaximumNormalizedL2": true,
+        "minimumCellToNumericParameterRatio": true,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": false,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": false,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": true,
+        "requiredObservedVelocityArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.29218382662270737,
+          "maximumNormalizedL2": 0.35032889024077973,
+          "medianPixelCorrelation": 0.9305852362825946,
+          "minimumPixelCorrelation": 0.8945121744942979,
+          "medianRadialProfileLog10Rmse": 1.2945617179552595,
+          "maximumMassRelativeError": 2.1920322444657562e-16,
+          "maximumConcentrationAbsoluteError": 0.0392073722727142,
+          "maximumLopsidednessAbsoluteError": 0.10720313511224835,
+          "maximumClumpinessAbsoluteError": 0.07025029721038524
+        },
+        "stars": {
+          "medianNormalizedL2": 0.16883884191407644,
+          "maximumNormalizedL2": 0.21796899924074162,
+          "medianPixelCorrelation": 0.9874343884539543,
+          "minimumPixelCorrelation": 0.9753386039502279,
+          "medianRadialProfileLog10Rmse": 0.2518356806115965,
+          "maximumMassRelativeError": 1.9931018394550541e-16,
+          "maximumConcentrationAbsoluteError": 0.5023530870924704,
+          "maximumLopsidednessAbsoluteError": 0.09031607364184632,
+          "maximumClumpinessAbsoluteError": 0.12908457143826924
+        },
+        "total": {
+          "medianNormalizedL2": 0.16827880961036315,
+          "maximumNormalizedL2": 0.205829328991145,
+          "medianPixelCorrelation": 0.9870007728722877,
+          "minimumPixelCorrelation": 0.9775938100323128,
+          "medianRadialProfileLog10Rmse": 0.2269219153392957,
+          "maximumMassRelativeError": 3.302663825450538e-16,
+          "maximumConcentrationAbsoluteError": 0.2070175747603935,
+          "maximumLopsidednessAbsoluteError": 0.08339333804795312,
+          "maximumClumpinessAbsoluteError": 0.08040088452000523
+        }
+      },
+      "minimumCellToNumericParameterRatio": 94.80384615384615,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 3.4343766667747415,
+        "worstRadialSpeedRmseKmS": 5.2053570913852125,
+        "medianLosSpeedRmseKmS": 5.7481926993092465,
+        "worstLosSpeedRmseKmS": 10.62616432083953
+      }
+    },
+    {
+      "id": "haar_256",
+      "coefficientsPerComponent": 256,
+      "status": "pass",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": true,
+        "totalMaximumNormalizedL2": true,
+        "totalMinimumPixelCorrelation": true,
+        "gasMaximumNormalizedL2": true,
+        "starsMaximumNormalizedL2": true,
+        "minimumCellToNumericParameterRatio": true,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": true,
+        "requiredObservedVelocityArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.2461251753220829,
+          "maximumNormalizedL2": 0.301764355167833,
+          "medianPixelCorrelation": 0.9512880023853671,
+          "minimumPixelCorrelation": 0.9180142323498113,
+          "medianRadialProfileLog10Rmse": 1.2017392167205814,
+          "maximumMassRelativeError": 3.589307874106444e-16,
+          "maximumConcentrationAbsoluteError": 0.027204806371843304,
+          "maximumLopsidednessAbsoluteError": 0.07942347571331032,
+          "maximumClumpinessAbsoluteError": 0.06064274232739342
+        },
+        "stars": {
+          "medianNormalizedL2": 0.11247029099071071,
+          "maximumNormalizedL2": 0.16591809592040396,
+          "medianPixelCorrelation": 0.9941473470894584,
+          "minimumPixelCorrelation": 0.9860224643486059,
+          "medianRadialProfileLog10Rmse": 0.16922110717273486,
+          "maximumMassRelativeError": 2.7054590536347523e-16,
+          "maximumConcentrationAbsoluteError": 0.18969279455682564,
+          "maximumLopsidednessAbsoluteError": 0.11413806648938091,
+          "maximumClumpinessAbsoluteError": 0.10657062234129047
+        },
+        "total": {
+          "medianNormalizedL2": 0.11417614857255556,
+          "maximumNormalizedL2": 0.15699179966509003,
+          "medianPixelCorrelation": 0.993698040854657,
+          "minimumPixelCorrelation": 0.987228899073794,
+          "medianRadialProfileLog10Rmse": 0.16477974913264767,
+          "maximumMassRelativeError": 4.061679896788943e-16,
+          "maximumConcentrationAbsoluteError": 0.08475901200352887,
+          "maximumLopsidednessAbsoluteError": 0.08428840175326469,
+          "maximumClumpinessAbsoluteError": 0.06545198250108818
+        }
+      },
+      "minimumCellToNumericParameterRatio": 47.76937984496124,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 1.218729521948306,
+        "worstRadialSpeedRmseKmS": 2.091397614955919,
+        "medianLosSpeedRmseKmS": 4.382249341387787,
+        "worstLosSpeedRmseKmS": 6.697943578389924
+      }
+    },
+    {
+      "id": "haar_512",
+      "coefficientsPerComponent": 512,
+      "status": "pass",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": true,
+        "totalMaximumNormalizedL2": true,
+        "totalMinimumPixelCorrelation": true,
+        "gasMaximumNormalizedL2": true,
+        "starsMaximumNormalizedL2": true,
+        "minimumCellToNumericParameterRatio": true,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": true,
+        "requiredObservedVelocityArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.20246384639967477,
+          "maximumNormalizedL2": 0.26459311117754325,
+          "medianPixelCorrelation": 0.9668500172550063,
+          "minimumPixelCorrelation": 0.937606673907006,
+          "medianRadialProfileLog10Rmse": 1.0958064429348677,
+          "maximumMassRelativeError": 2.0360949913025424e-16,
+          "maximumConcentrationAbsoluteError": 0.017755689322897172,
+          "maximumLopsidednessAbsoluteError": 0.06747817613940654,
+          "maximumClumpinessAbsoluteError": 0.05317727457368106
+        },
+        "stars": {
+          "medianNormalizedL2": 0.07556882123352922,
+          "maximumNormalizedL2": 0.12180811723224402,
+          "medianPixelCorrelation": 0.9972384556463072,
+          "minimumPixelCorrelation": 0.9922634554590469,
+          "medianRadialProfileLog10Rmse": 0.16986129803567587,
+          "maximumMassRelativeError": 1.9956303295143926e-16,
+          "maximumConcentrationAbsoluteError": 0.04994583787855422,
+          "maximumLopsidednessAbsoluteError": 0.08889334194932103,
+          "maximumClumpinessAbsoluteError": 0.09108299646903675
+        },
+        "total": {
+          "medianNormalizedL2": 0.07851423917707626,
+          "maximumNormalizedL2": 0.11476772447590211,
+          "medianPixelCorrelation": 0.9968939595396691,
+          "minimumPixelCorrelation": 0.9930112609865995,
+          "medianRadialProfileLog10Rmse": 0.16877989724597953,
+          "maximumMassRelativeError": 2.035343226984657e-16,
+          "maximumConcentrationAbsoluteError": 0.03306525176851327,
+          "maximumLopsidednessAbsoluteError": 0.06695558070880764,
+          "maximumClumpinessAbsoluteError": 0.05501572368555516
+        }
+      },
+      "minimumCellToNumericParameterRatio": 23.97762645914397,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 0.7867562355206597,
+        "worstRadialSpeedRmseKmS": 1.1703273711673219,
+        "medianLosSpeedRmseKmS": 3.4491418621626435,
+        "worstLosSpeedRmseKmS": 5.08643143818377
+      }
+    }
+  ],
+  "systems": 4,
+  "validationArraysOpened": 0,
+  "holdoutArraysOpened": 0,
+  "observedVelocityArraysOpened": 0,
+  "fittedGravityParameters": 0,
+  "claimBoundary": [
+    "Haar coefficients are a compressed description of observed baryonic morphology, not new gravitational physics.",
+    "A passing twin must preserve fixed-formula predictions but is not required to reproduce detector noise pixel-for-pixel.",
+    "No observed velocity can enter extraction, coefficient selection, reconstruction, or model scoring in P0743.",
+    "Only a later sealed-target stage can answer whether the real and fake-galaxy speed predictions match actual observations."
+  ],
+  "reportSha256": "d1a1ec762c5c06eb246d702185625014774dfdc3082069f8006b89c6dee1979f"
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "sigma-p0744-development-velocity-field-reveal-result/1",
+  "stage": "P0744",
+  "status": "pass",
+  "configSha256": "d5285ca5ab99810c3950ed7830311246ebac08b0684f88e836929a605381d45a",
+  "parents": {
+    "p0738": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+    "p0741": "64776bed1374276bcae8737270febee15a90b1818e0e9dbfc217b13541b1731a",
+    "p0743": "d1a1ec762c5c06eb246d702185625014774dfdc3082069f8006b89c6dee1979f"
+  },
+  "systems": 4,
+  "targetArraysOpened": 8,
+  "validationArraysOpened": 0,
+  "holdoutArraysOpened": 0,
+  "gravityParametersFitted": 0,
+  "darkMatterParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredTargetArraysOpened": true,
+    "requiredValidationArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "minimumScoredPixelsPerGalaxy": true,
+    "maximumTwinSourcePredictionTransportRmseKmS": true,
+    "maximumGravityParametersFitted": true,
+    "maximumDarkMatterParameters": true,
+    "allTargetHashesMatchAcquisitionManifest": true,
+    "allScoresFinite": true
+  },
+  "modelSummary": [
+    {
+      "model": "fixed_simple_mond",
+      "median_field_error_ratio": 1.9919791896138856,
+      "maximum_field_error_ratio": 2.7805530656012336,
+      "median_gas_weighted_rmse_km_s": 26.160885416353146,
+      "maximum_gas_weighted_rmse_km_s": 33.995433691235654,
+      "galaxies": 4,
+      "aggregate_error_band": "close"
+    },
+    {
+      "model": "newtonian_thin_sheet",
+      "median_field_error_ratio": 3.135475315161367,
+      "maximum_field_error_ratio": 4.095383862194706,
+      "median_gas_weighted_rmse_km_s": 41.06672993947146,
+      "maximum_gas_weighted_rmse_km_s": 49.69538921094442,
+      "galaxies": 4,
+      "aggregate_error_band": "miss"
+    }
+  ],
+  "maximumTwinSourcePredictionTransportRmseKmS": 5.75183600832045,
+  "claimBoundary": [
+    "P0744 is the first direct real 2D velocity-field comparison for these spiral twins, but it uses the development sample and is not a holdout result.",
+    "Systemic velocity and handedness are observation-coordinate nuisances, not gravity parameters; both are disclosed per galaxy.",
+    "No pressure-support, warp, bar, streaming, inclination, distance, M/L, MOND, or halo parameter is fitted to a residual in this raw comparison.",
+    "A model can fail because its circular-equilibrium prediction is wrong or because unmodeled gas dynamics dominate; P0744 alone cannot uniquely separate those causes.",
+    "Validation and holdout velocity arrays remain sealed."
+  ],
+  "reportSha256": "d3feb859f9d50e7a9ecefd80c16f0ed6cee1d0f0ccb6ded307b09c21e84ee9d0"
+}
