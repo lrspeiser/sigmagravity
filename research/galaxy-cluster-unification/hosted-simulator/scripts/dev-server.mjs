@@ -78,6 +78,7 @@ const staticFiles = new Map([
   ["/examples/models/aqual.json", ["examples/models/aqual.json", "application/json; charset=utf-8"]],
   ["/examples/models/qumond.json", ["examples/models/qumond.json", "application/json; charset=utf-8"]],
   ["/examples/models/refracted-gravity.json", ["examples/models/refracted-gravity.json", "application/json; charset=utf-8"]],
+  ["/examples/models/nonlocal-response.json", ["examples/models/nonlocal-response.json", "application/json; charset=utf-8"]],
   ["/examples/models/two-potential.json", ["examples/models/two-potential.json", "application/json; charset=utf-8"]],
 ]);
 

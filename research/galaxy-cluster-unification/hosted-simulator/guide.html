@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.16</p>
+          <p class="eyebrow">Researcher guide &middot; v0.17</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -58,6 +58,7 @@
               <tr><td>Observed-galaxy radial twin</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Whether compressed baryonic inputs preserve a formula's prediction when velocities are withheld.</td></tr>
               <tr><td>Frozen resolved velocity evidence</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Separate generator fidelity, formula transport, and observed-velocity accuracy on eight systems.</td></tr>
               <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
+              <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
               <tr><td>2D/3D fields, generated galaxies, composed batches, and photon maps</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Numerical and API conformance locally; no public durable execution yet.</td></tr>
               <tr><td>New raw cluster-lensing campaign with complete baryons</td><td><span class="state-tag missing">Not built</span></td><td><span class="state-tag partial">Research prototypes</span></td><td>Prior inverse and forward pilots exist, but not a production-ready blind campaign.</td></tr>
             </tbody>
@@ -119,7 +120,7 @@
           </article>
 
           <article class="example-card card">
-            <div class="example-intro"><span class="example-number">02</span><div><h3>Describe a 3D field theory exactly</h3><p>Start with the published <a href="/examples/models/refracted-gravity.json">Refracted Gravity example</a>, edit it, validate it, inspect the canonical model, then confirm that exact hash.</p></div></div>
+            <div class="example-intro"><span class="example-number">02</span><div><h3>Describe a 3D field theory exactly</h3><p>Start with the published <a href="/examples/models/refracted-gravity.json">Refracted Gravity</a> or <a href="/examples/models/nonlocal-response.json">nonlocal baryonic-response</a> example, edit it, validate it, inspect the canonical model, then confirm that exact hash.</p></div></div>
             <div class="code-pair">
               <div><p class="code-label">POST /api/v1/models/validate, conceptual input</p><pre><code>{
   "schemaVersion": "sigma-field-model/1",
@@ -149,6 +150,7 @@
 }</code></pre></div>
             </div>
             <div class="meaning-strip"><strong>What this proves:</strong> the service can represent, unit-check, hash, and audit the model. On Vercel it has not solved the equation. The local worker must be used for that today.</div>
+            <div class="meaning-strip"><strong>Nonlocal example:</strong> the source term adds <code>q integral K(y-x) rho_b(x) dV</code>. The local worker uses a centered, same-size, linear convolution, treats values beyond the submitted domain as zero, multiplies by cell volume, and never normalizes <code>K</code> automatically. The output is a potential field, a massive-tracer acceleration field, residual history, and an exact record of those numerical conventions.</div>
           </article>
 
           <article class="example-card card">

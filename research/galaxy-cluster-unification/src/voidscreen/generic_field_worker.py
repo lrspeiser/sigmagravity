@@ -25,6 +25,7 @@ from typing import Any
 import numpy as np
 from scipy import sparse
 from scipy.optimize import NoConvergence, anderson, newton_krylov
+from scipy.signal import fftconvolve
 from scipy.sparse.linalg import spsolve
 
 Array = np.ndarray
@@ -125,6 +126,53 @@ def _multiply_zero_vector_limit(
     return tuple(np.where(zero_limit, 0.0, component) for component in products)
 
 
+def _linear_same_convolution(
+    field: ExpressionValue,
+    kernel: ExpressionValue,
+    spacing: Sequence[float],
+) -> ExpressionValue:
+    """Evaluate a centered nonlocal integral without periodic wraparound.
+
+    The kernel is sampled on the same odd Cartesian grid as the field, with its
+    origin at the central sample. ``fftconvolve(..., mode="same")`` computes the
+    linear convolution by zero-padding outside the submitted domain. Multiplying
+    by the physical cell volume turns the discrete sum into the manifest's
+    declared spatial integral.
+    """
+
+    if isinstance(kernel, tuple):
+        raise TypeError("convolution kernel must be scalar")
+    kernel_values = np.asarray(kernel, dtype=float)
+    dimensions = len(spacing)
+    if kernel_values.ndim != dimensions:
+        raise ValueError(
+            f"convolution kernel must have {dimensions} spatial dimensions"
+        )
+    if any(size < 3 or size % 2 == 0 for size in kernel_values.shape):
+        raise ValueError(
+            "convolution kernel requires at least three odd samples per dimension "
+            "so its centered origin is unambiguous"
+        )
+    if np.any(~np.isfinite(kernel_values)):
+        raise ValueError("convolution kernel must be finite")
+    cell_volume = float(np.prod(np.asarray(spacing, dtype=float)))
+
+    def apply(values: float | Array) -> Array:
+        array = np.asarray(values, dtype=float)
+        if array.shape != kernel_values.shape or np.any(~np.isfinite(array)):
+            raise ValueError(
+                "convolution field and kernel must be finite arrays with matching shapes"
+            )
+        result = fftconvolve(array, kernel_values, mode="same") * cell_volume
+        if result.shape != array.shape or np.any(~np.isfinite(result)):
+            raise RuntimeError("convolution returned a non-finite or mis-shaped field")
+        return np.asarray(result, dtype=float)
+
+    if isinstance(field, tuple):
+        return tuple(apply(component) for component in field)
+    return apply(field)
+
+
 def evaluate_field_expression(
     node: Mapping[str, Any],
     *,
@@ -212,6 +260,10 @@ def evaluate_field_expression(
     if operation in {"lt", "lte", "gt", "gte"}:
         functions = {"lt": np.less, "lte": np.less_equal, "gt": np.greater, "gte": np.greater_equal}
         return functions[operation](values[0], values[1]).astype(float)
+    if operation == "convolution":
+        if len(values) != 2:
+            raise ValueError("convolution requires exactly two arguments")
+        return _linear_same_convolution(values[0], values[1], spacing)
     if operation == "piecewise":
         result = evaluate_field_expression(
             node["otherwise"], fields=fields, parameters=parameters, spacing=spacing
@@ -679,6 +731,16 @@ def _run_picard_steps(
     return len(history), maximum_update, converged, history
 
 
+def _contains_operator(value: Any, operator: str) -> bool:
+    if isinstance(value, Mapping):
+        return value.get("op") == operator or any(
+            _contains_operator(child, operator) for child in value.values()
+        )
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+        return any(_contains_operator(child, operator) for child in value)
+    return False
+
+
 def solve_field_manifest(
     manifest: Mapping[str, Any],
     source_fields: Mapping[str, Array],
@@ -736,6 +798,40 @@ def solve_field_manifest(
         raise ValueError("worker v1 requires exactly one elliptic equation per solved field")
 
     solver = manifest.get("solver", {})
+    uses_convolution = _contains_operator(
+        {
+            "equations": manifest.get("equations", []),
+            "observables": manifest.get("observables", []),
+        },
+        "convolution",
+    )
+    nonlocal_metadata: dict[str, Any] = {}
+    if uses_convolution:
+        required_semantics = {
+            "family": "nonlocal_elliptic",
+            "nonlocalBoundary": "zero_padded",
+            "convolutionMode": "linear_same",
+            "kernelOrigin": "centered_sample",
+            "convolutionMeasure": "physical_volume",
+        }
+        for key, expected in required_semantics.items():
+            if solver.get(key) != expected:
+                raise ValueError(
+                    f"convolution requires solver.{key}={expected!r}"
+                )
+        if any(size % 2 == 0 for size in shape):
+            raise ValueError(
+                "convolution requires an odd grid size in every dimension"
+            )
+        nonlocal_metadata["nonlocal_convolution"] = {
+            "boundary": "zero_padded",
+            "mode": "linear_same",
+            "kernel_origin": "centered_sample",
+            "measure": "physical_volume",
+            "cell_volume": float(np.prod(np.asarray(steps, dtype=float))),
+            "periodic_wraparound": False,
+            "automatic_kernel_normalization": False,
+        }
     tolerance = float(solver.get("relativeTolerance", 1e-7))
     residual_tolerance = float(solver.get("residualTolerance", tolerance))
     requested_maximum_iterations = int(solver.get("maxIterations", 80))
@@ -887,6 +983,7 @@ def solve_field_manifest(
             "preview_worker_maximum_iterations": PREVIEW_MAXIMUM_ITERATIONS,
             "relative_update_tolerance": tolerance,
             "equation_residual_tolerance": residual_tolerance,
+            **nonlocal_metadata,
             **root_metadata,
         },
     )

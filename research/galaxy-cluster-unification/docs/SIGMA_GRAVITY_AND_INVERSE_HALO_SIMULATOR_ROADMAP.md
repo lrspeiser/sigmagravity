@@ -1,7 +1,7 @@
 # Roadmap: a simulator for Sigma Gravity and inverse halo-response discovery
 
-Status: implementation plan recorded 2026-08-02 after the hosted v0.16
-researcher-guide release.
+Status: active implementation plan, updated 2026-08-02 for the hosted v0.17
+nonlocal-response milestone.
 
 ## Outcome
 
@@ -214,8 +214,9 @@ The manifest must state:
 - requested observables and numerical tolerances; and
 - the domain where the approximation is claimed to apply.
 
-The safe field language still needs robust support for nonlocal kernels,
-convolutions, coupled potentials, path projections, smoothly gated
+The safe field language now executes one fixed-semantics nonlocal convolution
+fixture in the local 2D/3D worker. It still needs robust support for flexible
+nonlocal kernels, coupled potentials, path projections, smoothly gated
 constitutive laws, and vector/tensor contractions. A signed plug-in route is
 needed only when a model cannot be represented declaratively.
 

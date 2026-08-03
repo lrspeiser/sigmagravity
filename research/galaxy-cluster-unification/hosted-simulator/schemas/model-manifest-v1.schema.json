@@ -93,6 +93,8 @@
         "m",
         "s",
         "1/m",
+        "1/m^2",
+        "1/m^3",
         "1/s^2",
         "m/s",
         "m/s^2",
@@ -267,7 +269,11 @@
         "krylovMethod": { "enum": ["lgmres", "gmres", "bicgstab", "cgs", "minres", "tfqmr"] },
         "krylovInnerIterations": { "type": "integer", "minimum": 1, "maximum": 200 },
         "picardWarmupIterations": { "type": "integer", "minimum": 0 },
-        "picardWarmupDamping": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+        "picardWarmupDamping": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "nonlocalBoundary": { "enum": ["zero_padded"] },
+        "convolutionMode": { "enum": ["linear_same"] },
+        "kernelOrigin": { "enum": ["centered_sample"] },
+        "convolutionMeasure": { "enum": ["physical_volume"] }
       }
     },
     "parameterPolicy": {

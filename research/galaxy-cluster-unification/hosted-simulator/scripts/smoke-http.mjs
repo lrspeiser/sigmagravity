@@ -27,8 +27,9 @@ assert.match(guide, /A genuinely useful result is a prediction, not a reconstruc
 
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
-assert.equal(health.version, "0.16.0-preview");
+assert.equal(health.version, "0.17.0-preview");
 assert.equal(health.capabilities.researcherGuide, "available");
+assert.equal(health.capabilities.localNonlocalConvolution, "available_in_dev_server");
 const datasets = await request("/api/v1/datasets");
 assert.equal(datasets.items[0].systemCount, 175);
 const systems = await request("/api/v1/systems?q=DDO&limit=3");
@@ -47,6 +48,10 @@ const fieldModel = await request("/examples/models/refracted-gravity.json");
 const fieldValidation = await request("/api/v1/models/validate", post(fieldModel));
 assert.equal(fieldValidation.valid, true);
 assert.equal(fieldValidation.executionReadiness.state, "worker_not_connected");
+const nonlocalModel = await request("/examples/models/nonlocal-response.json");
+const nonlocalValidation = await request("/api/v1/models/validate", post(nonlocalModel));
+assert.equal(nonlocalValidation.valid, true);
+assert.ok(nonlocalValidation.requiredCapabilities.operators.includes("convolution"));
 const bundleCore = {
   schemaVersion: "sigma-array-bundle/1",
   geometry: { coordinateSystem: "cartesian_3d", dimensions: 3, spacing: [1, 1, 1], lengthUnit: "m" },

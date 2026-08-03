@@ -41,7 +41,7 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.16.0-preview");
+  assert.equal(output.body.version, "0.17.0-preview");
   assert.equal(output.body.capabilities.researcherGuide, "available");
   assert.equal(output.body.capabilities.exactModelHashConfirmation, "required_for_execution");
   assert.equal(output.body.capabilities.heldoutObservedGalaxyTwins, "available");
@@ -58,6 +58,10 @@ test("health API identifies the deployed contract version and local worker bound
   );
   assert.equal(
     output.body.capabilities.localRawMultipleImageLensing,
+    "available_in_dev_server",
+  );
+  assert.equal(
+    output.body.capabilities.localNonlocalConvolution,
     "available_in_dev_server",
   );
 });
@@ -133,7 +137,7 @@ test("formula API returns canonical safety audit", () => {
 });
 
 test("field-model API accepts one contract for distinct 2D/3D theories", () => {
-  for (const name of ["newtonian-poisson", "refracted-gravity", "two-potential"]) {
+  for (const name of ["newtonian-poisson", "refracted-gravity", "nonlocal-response", "two-potential"]) {
     const model = JSON.parse(readFileSync(new URL(`../examples/models/${name}.json`, import.meta.url), "utf8"));
     const output = call(validateModel, { method: "POST", body: model });
     assert.equal(output.statusCode, 200);

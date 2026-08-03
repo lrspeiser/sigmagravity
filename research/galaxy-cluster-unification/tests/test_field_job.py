@@ -522,8 +522,8 @@ def test_runtime_exception_keeps_a_hashed_failure_artifact(tmp_path: Path):
     )
     model = manufactured_manifest()
     model["equations"][0]["rhs"] = {
-        "op": "convolution",
-        "args": [{"field": "forcing"}, {"field": "forcing"}],
+        "op": "line_of_sight_integral",
+        "args": [{"field": "forcing"}],
     }
     confirm_manifest(model)
     manifest = execute_field_job(

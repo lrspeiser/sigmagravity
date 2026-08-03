@@ -37,6 +37,7 @@ const requiredPaths = [
   "dist/schemas/galaxy-job-submit-v1.schema.json",
   "dist/schemas/batch-submit-v1.schema.json",
   "dist/examples/models/refracted-gravity.json",
+  "dist/examples/models/nonlocal-response.json",
   "dist/examples/observation-targets/photon-lensing-map.json",
   "api/v1/runs.mjs",
   "api/v1/twin-runs.mjs",
@@ -64,6 +65,7 @@ for (const phrase of [
   "Inputs, outputs, and meaning",
   "What it cannot tell you yet",
   "Use halo maps only for discovery",
+  "Nonlocal baryon-to-response convolution",
   "A genuinely useful result is a prediction, not a reconstruction",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);

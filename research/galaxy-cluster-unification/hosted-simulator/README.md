@@ -19,7 +19,17 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
-Version 0.16 adds a public [researcher guide](guide.html) that distinguishes
+Version 0.17 closes the first nonlocal execution gap. The published
+[`nonlocal-response.json`](examples/models/nonlocal-response.json) manifest
+defines a generic baryon-to-response source term, and the local Cartesian
+2D/3D worker executes it without a theory-name branch. The integral semantics
+are mandatory and audited: centered kernel, linear same-size convolution,
+zero padding rather than periodic wraparound, physical cell-volume measure,
+and no automatic kernel normalization. Manufactured impulse tests verify the
+integral scale and boundary behavior. This is an execution capability, not
+evidence that a particular response kernel describes nature.
+
+Version 0.16 added a public [researcher guide](guide.html) that distinguishes
 live Vercel execution, local-only reference-worker capabilities, and work that
 has not been built. It includes concrete radial and field-model request/response
 examples, explicit interpretation limits, and the shortest build path from the
@@ -61,7 +71,7 @@ published source to the generated twin. The parameter package lists all
 withheld columns, contains no gravity parameters, and is invariant when the
 observed velocities are perturbed.
 
-The 0.6 preview also accepts a theory-neutral field-model manifest. It declares
+The field-model preview also accepts a theory-neutral manifest. It declares
 scalar, vector, or tensor fields; 2D or 3D coordinates; equations; units;
 boundary conditions; observables for matter and/or photons; solver settings;
 and universal versus per-object parameters. The validator checks dimensions,
@@ -69,10 +79,11 @@ operator types, complexity, data requirements, and parameter disclosure, then
 returns content hashes and the exact worker capabilities the model needs.
 
 The same contract represents the included Newtonian Poisson, AQUAL, QUMOND,
-Refracted Gravity, and two-potential examples under `examples/models`. The
+Refracted Gravity, nonlocal response, and two-potential examples under
+`examples/models`. The
 local Python research package now contains a theory-neutral Cartesian 2D/3D
 divergence-form worker prototype. It passes manufactured known-answer tests
-and executes the Refracted Gravity and QUMOND examples without theory-name
+and executes the Refracted Gravity, QUMOND, and nonlocal-response examples without theory-name
 branches. QUMOND explicitly declares the zero-vector limit of its singular
 isotropic flux with the general `multiply_zero_vector_limit` operator; this
 prevents an implicit numerical convention from being hidden in the worker.

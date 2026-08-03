@@ -10,7 +10,7 @@ import {
 const examples = new URL("../examples/models/", import.meta.url);
 const load = (name) => JSON.parse(readFileSync(new URL(name, examples), "utf8"));
 
-for (const name of ["newtonian-poisson.json", "aqual.json", "qumond.json", "refracted-gravity.json", "two-potential.json"]) {
+for (const name of ["newtonian-poisson.json", "aqual.json", "qumond.json", "refracted-gravity.json", "nonlocal-response.json", "two-potential.json"]) {
   test(`${name} is represented by the same generic manifest`, () => {
     const first = validateFieldModel(load(name));
     const second = validateFieldModel(load(name));
@@ -50,6 +50,19 @@ test("QUMOND declares its zero-vector flux limit without a theory-specific route
   const result = validateFieldModel(load("qumond.json"));
   assert.equal(result.valid, true, result.errors.join("; "));
   assert.ok(result.requiredCapabilities.operators.includes("multiply_zero_vector_limit"));
+});
+
+test("nonlocal convolution requires an explicit, non-periodic physical integral convention", () => {
+  const manifest = load("nonlocal-response.json");
+  let result = validateFieldModel(manifest);
+  assert.equal(result.valid, true, result.errors.join("; "));
+  assert.ok(result.requiredCapabilities.operators.includes("convolution"));
+  assert.match(result.warnings.join(" "), /never normalized automatically/);
+
+  delete manifest.solver.nonlocalBoundary;
+  result = validateFieldModel(manifest);
+  assert.equal(result.valid, false);
+  assert.match(result.errors.join(" "), /nonlocalBoundary=zero_padded/);
 });
 
 test("dimensionally invalid field equation is rejected", () => {
@@ -94,6 +107,8 @@ test("published JSON schema identifies the same manifest version", () => {
   const schema = JSON.parse(readFileSync(new URL("../schemas/model-manifest-v1.schema.json", import.meta.url), "utf8"));
   assert.equal(schema.properties.schemaVersion.const, "sigma-field-model/1");
   assert.equal(schema.$schema, "https://json-schema.org/draft/2020-12/schema");
+  assert.deepEqual(schema.$defs.solver.properties.nonlocalBoundary.enum, ["zero_padded"]);
+  assert.deepEqual(schema.$defs.solver.properties.convolutionMeasure.enum, ["physical_volume"]);
 });
 
 test("generic nonlinear solver controls are validated and disclosed", () => {

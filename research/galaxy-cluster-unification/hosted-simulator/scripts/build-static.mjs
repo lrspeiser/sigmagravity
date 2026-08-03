@@ -35,6 +35,7 @@ for (const path of [
   "examples/models/aqual.json",
   "examples/models/qumond.json",
   "examples/models/refracted-gravity.json",
+  "examples/models/nonlocal-response.json",
   "examples/models/two-potential.json",
   "examples/observation-targets/line-of-sight-velocity-field.json",
   "examples/observation-targets/photon-lensing-map.json",

@@ -43,6 +43,8 @@ const UNIT_DIMENSIONS = Object.freeze({
   m: { M: 0, L: 1, T: 0 },
   s: { M: 0, L: 0, T: 1 },
   "1/m": { M: 0, L: -1, T: 0 },
+  "1/m^2": { M: 0, L: -2, T: 0 },
+  "1/m^3": { M: 0, L: -3, T: 0 },
   "1/s^2": { M: 0, L: 0, T: -2 },
   "m/s": { M: 0, L: 1, T: -1 },
   "m/s^2": { M: 0, L: 1, T: -2 },
@@ -388,6 +390,14 @@ export function validateFieldModel(manifest) {
   if (manifest.solver?.krylovInnerIterations !== undefined && (!Number.isInteger(manifest.solver.krylovInnerIterations) || manifest.solver.krylovInnerIterations < 1 || manifest.solver.krylovInnerIterations > 200)) errors.push("solver.krylovInnerIterations must be an integer from 1 to 200");
   if (manifest.solver?.picardWarmupIterations !== undefined && (!Number.isInteger(manifest.solver.picardWarmupIterations) || manifest.solver.picardWarmupIterations < 0 || manifest.solver.picardWarmupIterations >= manifest.solver.maxIterations)) errors.push("solver.picardWarmupIterations must be a non-negative integer below maxIterations");
   if (manifest.solver?.picardWarmupDamping !== undefined && !(manifest.solver.picardWarmupDamping > 0 && manifest.solver.picardWarmupDamping <= 1)) errors.push("solver.picardWarmupDamping must lie in (0,1]");
+  if (state.operators.has("convolution")) {
+    if (manifest.solver?.family !== "nonlocal_elliptic") errors.push("convolution requires solver.family=nonlocal_elliptic");
+    if (manifest.solver?.nonlocalBoundary !== "zero_padded") errors.push("convolution requires solver.nonlocalBoundary=zero_padded");
+    if (manifest.solver?.convolutionMode !== "linear_same") errors.push("convolution requires solver.convolutionMode=linear_same");
+    if (manifest.solver?.kernelOrigin !== "centered_sample") errors.push("convolution requires solver.kernelOrigin=centered_sample");
+    if (manifest.solver?.convolutionMeasure !== "physical_volume") errors.push("convolution requires solver.convolutionMeasure=physical_volume");
+    warnings.push("convolution uses a centered, zero-padded linear integral with physical cell volume; kernels are never normalized automatically");
+  }
   if (manifest.solver?.maxIterations > 200) warnings.push("the current preview worker executes at most 200 nonlinear iterations and records the requested and effective limits");
 
   for (const [name, field] of fields) {

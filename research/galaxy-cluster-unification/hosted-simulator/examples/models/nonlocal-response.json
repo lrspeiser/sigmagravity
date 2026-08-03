@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "sigma-field-model/1",
+  "name": "Nonlocal baryonic response fixture",
+  "modelClass": "nonlocal_stationary",
+  "source": {
+    "format": "latex",
+    "text": "\\nabla^2\\Phi(\\mathbf y)=4\\pi G[\\rho_b(\\mathbf y)+q\\int K(\\mathbf y-\\mathbf x)\\rho_b(\\mathbf x)d^3x]",
+    "confirmedCanonical": true,
+    "confirmedModelSha256": "3a2d7dd1b296d5c7a8e9b99b58f739547896c8dee7e4ba692174440286eaaeca"
+  },
+  "geometry": {
+    "coordinateSystem": "cartesian_3d",
+    "dimensions": 3,
+    "domain": {
+      "lengthUnit": "m",
+      "boundaryExtent": "dataset-derived with convergence padding"
+    }
+  },
+  "fields": {
+    "rho_b": {
+      "rank": "scalar",
+      "role": "source",
+      "unit": "kg/m^3",
+      "datasetKey": "baryon_density"
+    },
+    "K": {
+      "rank": "scalar",
+      "role": "source",
+      "unit": "1/m^3",
+      "datasetKey": "response_kernel"
+    },
+    "Phi": {
+      "rank": "scalar",
+      "role": "solved",
+      "unit": "m^2/s^2",
+      "boundary": { "type": "isolated" }
+    }
+  },
+  "parameters": {
+    "G": {
+      "unit": "m^3/(kg*s^2)",
+      "value": 6.6743e-11,
+      "scope": "universal"
+    },
+    "q": {
+      "unit": "1",
+      "value": 1,
+      "scope": "universal"
+    }
+  },
+  "equations": [
+    {
+      "id": "nonlocal_poisson",
+      "kind": "equality",
+      "lhs": {
+        "op": "laplacian",
+        "args": [{ "field": "Phi" }]
+      },
+      "rhs": {
+        "op": "multiply",
+        "args": [
+          { "const": 12.566370614359172 },
+          { "parameter": "G" },
+          {
+            "op": "add",
+            "args": [
+              { "field": "rho_b" },
+              {
+                "op": "multiply",
+                "args": [
+                  { "parameter": "q" },
+                  {
+                    "op": "convolution",
+                    "args": [{ "field": "rho_b" }, { "field": "K" }]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "observables": [
+    {
+      "id": "massive_tracer_acceleration",
+      "target": "massive_tracers",
+      "rank": "vector",
+      "unit": "m/s^2",
+      "expression": {
+        "op": "negate",
+        "args": [{ "op": "gradient", "args": [{ "field": "Phi" }] }]
+      }
+    }
+  ],
+  "dataRequirements": [
+    { "key": "baryon_density", "rank": "scalar", "unit": "kg/m^3" },
+    { "key": "response_kernel", "rank": "scalar", "unit": "1/m^3" }
+  ],
+  "solver": {
+    "family": "nonlocal_elliptic",
+    "relativeTolerance": 1e-8,
+    "maxIterations": 10000,
+    "initialization": "linearized_unit_coefficient",
+    "nonlocalBoundary": "zero_padded",
+    "convolutionMode": "linear_same",
+    "kernelOrigin": "centered_sample",
+    "convolutionMeasure": "physical_volume"
+  },
+  "parameterPolicy": {
+    "mode": "published_fixed",
+    "perObjectParameters": []
+  }
+}

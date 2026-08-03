@@ -292,3 +292,94 @@ def test_published_qumond_tree_runs_without_a_theory_specific_branch() -> None:
     assert all(np.all(np.isfinite(value)) for value in solution.fields.values())
     assert len(solution.observables["massive_tracer_acceleration"]) == 2
     assert solution.metadata["engine"] == "generic-divergence-field-worker-v1"
+
+
+def test_nonlocal_convolution_is_a_physical_linear_integral_without_wraparound() -> None:
+    cells = 9
+    spacing = [2.0, 3.0]
+    cell_area = spacing[0] * spacing[1]
+    center = cells // 2
+    kernel = np.zeros((cells, cells), dtype=float)
+    kernel[center, center] = 2.0
+    kernel[center + 1, center] = 0.5
+    kernel[center, center - 1] = 0.25
+
+    centered_delta = np.zeros_like(kernel)
+    centered_delta[center, center] = 1.0 / cell_area
+    centered = evaluate_field_expression(
+        {
+            "op": "convolution",
+            "args": [{"field": "source"}, {"field": "kernel"}],
+        },
+        fields={"source": centered_delta, "kernel": kernel},
+        parameters={},
+        spacing=spacing,
+    )
+    assert np.allclose(centered, kernel, rtol=0.0, atol=1e-12)
+
+    corner_delta = np.zeros_like(kernel)
+    corner_delta[0, 0] = 1.0 / cell_area
+    corner = evaluate_field_expression(
+        {
+            "op": "convolution",
+            "args": [{"field": "source"}, {"field": "kernel"}],
+        },
+        fields={"source": corner_delta, "kernel": kernel},
+        parameters={},
+        spacing=spacing,
+    )
+    assert abs(float(corner[-1, -1])) < 1e-12
+    assert np.isclose(corner[0, 0], kernel[center, center], rtol=0.0, atol=1e-12)
+
+
+def test_nonlocal_worker_requires_declared_convolution_semantics() -> None:
+    path = ROOT / "hosted-simulator" / "examples" / "models" / "nonlocal-response.json"
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    del manifest["solver"]["nonlocalBoundary"]
+    source = np.zeros((5, 5, 5), dtype=float)
+    kernel = np.zeros_like(source)
+    kernel[2, 2, 2] = 1.0
+    with pytest.raises(
+        ValueError,
+        match="convolution requires solver.nonlocalBoundary='zero_padded'",
+    ):
+        solve_field_manifest(
+            manifest,
+            {"baryon_density": source, "response_kernel": kernel},
+            1.0,
+        )
+
+
+def test_published_nonlocal_response_runs_without_a_theory_specific_branch() -> None:
+    path = ROOT / "hosted-simulator" / "examples" / "models" / "nonlocal-response.json"
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    manifest["solver"].update({"maxIterations": 4, "damping": 1.0})
+    cells = 9
+    spacing = 0.5 * 3.085677581491367e19
+    coordinates = (np.arange(cells) - cells // 2) * spacing
+    x, y, z = np.meshgrid(coordinates, coordinates, coordinates, indexing="ij")
+    radius_squared = x**2 + y**2 + z**2
+    density = 2.0e-21 * np.exp(-radius_squared / (2.0 * spacing**2))
+    kernel = np.exp(-radius_squared / (2.0 * (1.5 * spacing) ** 2))
+    kernel /= float(np.sum(kernel) * spacing**3)
+
+    solution = solve_field_manifest(
+        manifest,
+        {"baryon_density": density, "response_kernel": kernel},
+        spacing,
+    )
+    assert solution.converged
+    assert np.all(np.isfinite(solution.fields["Phi"]))
+    assert np.linalg.norm(solution.fields["Phi"]) > 0.0
+    assert len(solution.observables["massive_tracer_acceleration"]) == 3
+    metadata = solution.metadata["nonlocal_convolution"]
+    assert metadata == {
+        "boundary": "zero_padded",
+        "mode": "linear_same",
+        "kernel_origin": "centered_sample",
+        "measure": "physical_volume",
+        "cell_volume": metadata["cell_volume"],
+        "periodic_wraparound": False,
+        "automatic_kernel_normalization": False,
+    }
+    assert np.isclose(metadata["cell_volume"], spacing**3, rtol=1e-15)
