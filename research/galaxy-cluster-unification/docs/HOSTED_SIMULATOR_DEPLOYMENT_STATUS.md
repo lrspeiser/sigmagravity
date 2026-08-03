@@ -11,11 +11,13 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/2rknEk8gHGTUgGN7deNSQbJpaXPx>
-- deployment ID: `dpl_2rknEk8gHGTUgGN7deNSQbJpaXPx`
-- public contract version: `0.16.0-preview`
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/FbtW3xnqp6yhhkPjMkE2pxeyYHxH>
+- immutable deployment URL:
+  <https://sigma-gravity-research-simulator-2r1ls6mpt-horizon3.vercel.app>
+- deployment ID: `dpl_FbtW3xnqp6yhhkPjMkE2pxeyYHxH`
+- public contract version: `0.17.0-preview`
 
-The service passes its local production build, 77 automated hosted tests, and live
+The service passes its local production build, 79 automated hosted tests, and live
 HTTP smoke suite. The deployment credential was supplied only to the CLI
 process and was not stored in a file, repository setting, or generated
 artifact.
@@ -63,6 +65,10 @@ Implemented public capabilities:
     and unbuilt capabilities; gives concrete input/output examples; explains
     what each result can and cannot establish; and gives a bounded roadmap for
     Sigma Gravity and inverse halo-response research.
+15. Publish and validate a generic nonlocal baryon-to-response manifest. The
+    local worker executes its convolution with a centered kernel, linear
+    zero-padded boundaries, physical cell-volume integration, and no hidden
+    normalization; public heavy execution remains disconnected.
 
 ## Verification evidence
 
@@ -72,7 +78,8 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 77 passing tests and a build check confirming 175
+The current result is 79 passing hosted tests, the complete Python scientific
+regression suite, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
 `a5df1cb7c7a52da415a167d145a831fe0e0625243b46dd38047ca43ba0299681`.
@@ -112,9 +119,9 @@ and point arrays. The accepted production smoke values are:
 
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
-- run ID: `run_a6816fb085bcd6f65c81f0a5`
+- run ID: `run_ecba32b72a9efb423c378c73`
 - manifest SHA-256:
-  `a6816fb085bcd6f65c81f0a586597fec5cf2dcbe1a7bc41472d7d92bd03a01d2`
+  `ecba32b72a9efb423c378c73081f9e74e00559a3bb18ef675e5d0acd8f66b215`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -153,7 +160,7 @@ The v0.11 held-out-twin checks additionally require health to report
 formula on the generated twin, the same formula on measured baryons, fixed
 MOND on the twin, Newtonian baryons on the twin, and an uncertainty-aware
 residual panel. The accepted DDO154 smoke result has twin run ID
-`twinrun_adf762673c65c3ffdcf99b43`, source-gravity normalized RMSE
+`twinrun_6dfa3853e83853712deac8e5`, source-gravity normalized RMSE
 `0.000008625358785734849`, and submitted-formula twin RMSE
 `4.459265029781337 km/s`. Across all 175 systems, the P0737 audit confirmed
 that twin packages are invariant to mutations of all held-out velocity data,
@@ -187,6 +194,16 @@ errors. The live HTTP smoke reproduced all radial scores, twin metrics, and the
 resolved-evidence hash above; `POST /api/v1/field-jobs` still returns HTTP 503
 with `production_worker_not_connected` until the durable worker is connected.
 
+The v0.17 nonlocal checks require the public health document to report
+`localNonlocalConvolution=available_in_dev_server`, the workbench and guide to
+link `/examples/models/nonlocal-response.json`, and model validation to report
+the `convolution` capability for the exact confirmed model hash
+`3a2d7dd1b296d5c7a8e9b99b58f739547896c8dee7e4ba692174440286eaaeca`.
+Local manufactured tests require physical-volume impulse normalization and no
+opposite-edge periodic wraparound. The published example solves in 3D through
+the generic worker, while the production gateway continues to report
+`worker_not_connected` for heavy field execution.
+
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
 production target and should be removed separately if account cleanup is
@@ -197,6 +214,7 @@ desired.
 The next deployable component is durable job and artifact storage plus a
 containerized Python worker running the already-tested local field, galaxy,
 batch, and decoupled observation-evaluation services. It must invoke the
-repository's existing Poisson, AQUAL, QUMOND, coordinate-safe root, and
+repository's existing Poisson, AQUAL, QUMOND, nonlocal convolution,
+coordinate-safe root, and
 raw-lensing engines. Vercel will enqueue those jobs and return immediately; it
 will not run the long scientific solve inside the web request.
