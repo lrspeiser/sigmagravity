@@ -12,14 +12,14 @@ team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/H6E8D6C3rgytzNV6YqBK2AC2puS1>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/H31k9KURECH5j3mDyHhZwS7HSWig>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-uxlcl8hmt-horizon3.vercel.app>
-- deployment ID: `dpl_H6E8D6C3rgytzNV6YqBK2AC2puS1`
-- deployed implementation commit: `63a260c0d510152750e895ed5591214131ea727b`
-- public contract version: `0.29.0-preview`
+  <https://sigma-gravity-research-simulator-jflwrga1z-horizon3.vercel.app>
+- deployment ID: `dpl_H31k9KURECH5j3mDyHhZwS7HSWig`
+- deployed implementation commit: `3085fc3c1208e9ae2b36338b1d5353785e19e921`
+- public contract version: `0.30.0-preview`
 
-The service passes its local production build, 119 automated hosted tests, all
+The service passes its local production build, 121 automated hosted tests, all
 1,609 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
@@ -145,6 +145,15 @@ Implemented public capabilities:
     and recovers or invalidates jobs safely after restart. Vercel has no worker
     token or worker URL configured yet, so production continues to fail closed
     with an explicit 503 rather than implying durable heavy execution.
+27. Expose the gravity-independent resolved-galaxy extraction and generation
+    lifecycle through the same authenticated worker and allow-listed Vercel
+    connector. The extraction job accepts registered gas and stellar maps,
+    emits content-hashed 2D/3D baryonic ensembles and a compact parameter
+    package, and cannot inspect velocity, lensing, dark-matter, or gravity-model
+    targets. A second job generates declared structural variants from that
+    package. The Linux container acceptance downloads and rehashes every
+    artifact and reports zero gravity parameters; public Vercel still returns
+    an explicit 503 because no persistent external worker is connected.
 
 ## Verification evidence
 
@@ -154,7 +163,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 119 passing hosted tests, 1,609 passing Python scientific
+The current result is 121 passing hosted tests, 1,609 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -568,6 +577,41 @@ cluster registry hash
 No external worker, persistent volume, database, or object store is connected
 to production yet; heavy science remains local/CI verified, not hosted.
 
+The v0.30 authenticated-galaxy-worker release extends the allow-listed worker
+surface to `data-uploads` plus the galaxy-job collection, status, events,
+artifacts, artifact download, and cancellation routes. It does not expose a
+generic filesystem route, arbitrary code, inverse-response jobs, observation
+jobs, or batches. The gravity-independent extractor cannot inspect a velocity
+target, lensing target, dark-matter map, or submitted gravity model.
+
+GitHub Actions built the updated non-root Linux image and completed both the
+four-case field suite and a two-job galaxy extraction/generation suite at
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30795427239>. The
+synthetic 65-by-65 baryonic-map fixture achieved total-map normalized L2 error
+`0.05478050421226611` and pixel correlation `0.9972455569454114`. It retained
+a `3 x 65 x 65` surface ensemble and `3 x 2 x 65 x 65 x 25` volume ensemble,
+projected 3D density back to 2D with maximum relative error
+`2.466495895856214e-16`, reproduced a requested gas-mass scale of `1.25` as
+`1.2500000000000002`, downloaded and rehashed 23 extraction plus 22 generation
+artifacts, used zero gravity parameters, and did not use velocity targets.
+The image pins Astropy `7.1.1`, the missing runtime dependency identified by
+the first failed container attempt, and CI now prints bounded subprocess stderr
+on future failures.
+
+Deployment `dpl_H31k9KURECH5j3mDyHhZwS7HSWig` is production-ready at the
+stable alias and serves `0.30.0-preview`; its immutable URL is
+<https://sigma-gravity-research-simulator-jflwrga1z-horizon3.vercel.app>.
+The stable alias passed the complete deterministic HTTP smoke with run
+`run_d541618c4fd3b2a1dca0e963`, manifest
+`d541618c4fd3b2a1dca0e963514841741086c912634dd13ade4c434194409e8f`, twin run
+`twinrun_eb785c4006fe30dd70a2db9b`, resolved evidence hash
+`8fed5429efecb7a0b5055a15928b8edf48e5713454ba18b42c9503305778d1b7`, and
+cluster registry hash
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+Valid public field and galaxy heavy routes return HTTP 503 while malformed job
+identifiers return 404; this confirms fail-closed routing rather than hosted
+scientific execution.
+
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
 production target and should be removed separately if account cleanup is
@@ -589,5 +633,5 @@ Production also needs researcher authentication, project isolation, quotas,
 leases and retry ownership, cancellation, cache policy, audit logs, signed
 result manifests, dataset-license enforcement, monitoring, backups, and an
 image publication/promotion policy. Only after those controls are verified
-should the same boundary admit galaxy, inverse-response, composed-batch, and
-signed advanced plug-in workloads.
+should the same boundary admit inverse-response, observation, composed-batch,
+and signed advanced plug-in workloads.

@@ -64,6 +64,33 @@ When Git LFS data are unavailable in a clean CI checkout, the same smoke client
 uses a deterministic analytic baryonic map. It labels that source explicitly;
 it never describes the analytic fixture as a real galaxy.
 
+## Real Linux-container acceptance
+
+GitHub Actions built the non-root production image from the pinned worker
+requirements and ran both authenticated HTTP suites successfully:
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30795427239>.
+
+| Container check | Result |
+|---|---:|
+| Cartesian 2D relative field error | `0.0014291183165795315` |
+| Cartesian 3D relative field error | `0.0032189644400797907` |
+| axisymmetric relative field error | `3.344067911339841e-15` |
+| circular-speed RMSE | `3.903582677488951e-15 m/s` |
+| photon-deflection RMSE | `5.369872558614447e-26 arcsec` |
+| raw image-position RMS | `0.0016920532250985097 arcsec` |
+| galaxy total-map normalized L2 error | `0.05478050421226611` |
+| galaxy total-map pixel correlation | `0.9972455569454114` |
+| extraction / generation artifacts | `23 / 22` |
+| maximum ensemble projection error | `2.466495895856214e-16` |
+| requested / measured gas-mass scale | `1.25 / 1.2500000000000002` |
+| gravity parameters / velocity targets | `0 / none` |
+
+The first container attempt exposed a genuine packaging gap: the field paths
+did not import the Astropy-dependent map module, but the galaxy path did. The
+image now pins Astropy `7.1.1`; a clean minimal-runtime extraction and the full
+Linux container lifecycle both pass. Future CI failures also print only the
+bounded worker stderr logs, not uploaded scientific arrays or credentials.
+
 ## What this enables
 
 The returned density products use the standard array-bundle contract. They can
