@@ -11,14 +11,14 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/G6rLRJxp5iow3zUV8D6fCeooqt8d>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/3ud9MYUaKhYGVFg4U4sGZpfettkX>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-4sypog74q-horizon3.vercel.app>
-- deployment ID: `dpl_G6rLRJxp5iow3zUV8D6fCeooqt8d`
-- public contract version: `0.21.0-preview`
+  <https://sigma-gravity-research-simulator-dvvbj5j4v-horizon3.vercel.app>
+- deployment ID: `dpl_3ud9MYUaKhYGVFg4U4sGZpfettkX`
+- public contract version: `0.22.0-preview`
 
-The service passes its local production build, 86 automated hosted tests, all
-1,571 Python scientific tests, and the live HTTP smoke suite. No deployment
+The service passes its local production build, 88 automated hosted tests, all
+1,576 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
@@ -92,6 +92,12 @@ Implemented public capabilities:
     exposes readiness, uncertainty limits, hashes, and blockers without
     claiming that the spent P0633 sample is a blind holdout or that any current
     raw target is likelihood-ready.
+20. Publish the bounded local baryonic uncertainty-ensemble contract and guide.
+    The gravity-independent worker retains every seeded 2D surface draw and
+    every corresponding 3D vertical draw, emits percentile maps and draw
+    tables, verifies exact projection, and rejects more than 256 MiB of raw
+    ensemble arrays. The public gateway advertises and validates the contract;
+    production execution remains disconnected.
 
 ## Verification evidence
 
@@ -101,7 +107,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 86 passing hosted tests, 1,571 passing Python scientific
+The current result is 88 passing hosted tests, 1,576 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -145,9 +151,9 @@ and point arrays. The accepted production smoke values are:
 
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
-- run ID: `run_92c54e52f6fd68ae591f61d2`
+- run ID: `run_6ae2980fde9ea35e58d1f17c`
 - manifest SHA-256:
-  `92c54e52f6fd68ae591f61d21dd58259b57f309eac8d7c5812fd13bcaea7b885`
+  `6ae2980fde9ea35e58d1f17c3d02ab983e9419d28aeab035625b87a6a1c52cf8`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -285,6 +291,23 @@ mobile browser checks found no page-level horizontal overflow or console
 warnings/errors; the wide capability table scrolls inside its own container on
 mobile. Public heavy execution remains explicitly
 `production_worker_not_connected`.
+
+The v0.22 baryonic-ensemble checks require health to report
+`localBaryonicUncertaintyEnsembles=available_in_dev_server`, the public galaxy
+schema to expose 1 to 16 surface realizations and all bounded prior fields, and
+the guide to label the result
+`observation_conditioned_prior_not_posterior`. The local DDO101 HTTP smoke
+retained a `3 x 65 x 65` surface ensemble and a
+`3 x 2 x 65 x 65 x 25` volume ensemble, rehashed all 21 extraction artifacts,
+and projected every 3D draw to its matching 2D map with maximum relative error
+`3.64e-16`. The stable public alias passed the complete v0.22 HTTP smoke with
+run `run_6ae2980fde9ea35e58d1f17c`, twin run
+`twinrun_54a7b74eefc70c0383650a73`, and unchanged cluster registry hash
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+Desktop and 390-pixel mobile browser checks found no page-level overflow or
+console warnings/errors; the capability table remains internally scrollable
+on mobile. This verifies the public contract and local artifact path, not an
+observation-derived baryonic posterior.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
