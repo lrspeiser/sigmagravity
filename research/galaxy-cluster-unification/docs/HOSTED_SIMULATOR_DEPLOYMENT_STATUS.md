@@ -4,22 +4,23 @@ Date: 2026-08-02
 
 ## Outcome
 
-The radial research service is live in the Horizon3 Vercel team:
+The research simulator and public API gateway are live in the Horizon3 Vercel
+team:
 
 - production URL:
   <https://sigma-gravity-research-simulator-five.vercel.app>
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/2DEdgRigbtRLY8B5XdWbpmo7hyRg>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/HMGHfumGfJwju8dYw31PBST5HJxK>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-mtzf55aiy-horizon3.vercel.app>
-- deployment ID: `dpl_2DEdgRigbtRLY8B5XdWbpmo7hyRg`
-- deployed implementation commit: `e0b2aa825a10749f5ad105af185d20905e3a3f79`
-- public contract version: `0.26.0-preview`
+  <https://sigma-gravity-research-simulator-8b6qft21h-horizon3.vercel.app>
+- deployment ID: `dpl_HMGHfumGfJwju8dYw31PBST5HJxK`
+- deployed implementation commit: `f38f047d18a6d7ea988bdcd28c4dd92adc8e4f07`
+- public contract version: `0.27.0-preview`
 
-The service passes its local production build, 98 automated hosted tests, all
-1,599 Python scientific tests, and the live HTTP smoke suite. No deployment
+The service passes its local production build, 101 automated hosted tests, all
+1,605 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
@@ -120,6 +121,15 @@ Implemented public capabilities:
     zero per-object gravity parameters. This is an observation adapter, not a
     claim that circular equilibrium is complete or that the formula fits a
     real galaxy.
+24. Publish and locally execute projection of one solved axisymmetric
+    photon-acceleration field directly into
+    inclination-aware deflection, convergence, shear, rotation, Jacobian, and
+    magnification maps. Each ray is clipped to the finite solved cylinder and
+    reconstructs its local Cartesian vector without a 3D proxy. Photon and
+    massive-tracer targets can be scored in one immutable job with separate
+    channels and zero per-object gravity parameters. Raw multiple-image,
+    source-plane, time-delay, and non-axisymmetric cluster likelihoods remain
+    future work.
 
 ## Verification evidence
 
@@ -129,7 +139,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 98 passing hosted tests, 1,599 passing Python scientific
+The current result is 101 passing hosted tests, 1,605 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -174,8 +184,8 @@ and point arrays. The accepted production smoke values are:
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
 - manifest SHA-256:
-  `f0748afc66904deb7bb6054565a9d02be08a34f44fab68e21b17e462096fee42`
-- run ID: `run_f0748afc66904deb7bb60545`
+  `dfd14b92341185b2c1a2a2757b6c9d9b012755f73325d841139b0cbca586105f`
+- run ID: `run_dfd14b92341185b2c1a2a275`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -428,6 +438,38 @@ The immutable hostname is protected by Vercel's deployment challenge and was
 verified through authenticated `vercel curl`; the public stable alias remains
 directly accessible. Public heavy submissions still return HTTP 503 with
 `production_worker_not_connected`.
+
+The v0.27 axisymmetric-photon checks require health to report
+`localAxisymmetricPhotonLensing=available_in_dev_server`; preflight and worker
+validation bind the cylindrical field to `axisOrder=["r","z"]`, a zero radial
+origin, an explicit sky shape, inclination, line-of-sight sample count, and the
+same solved-field origin. The guide's Example 13 gives a complete target and
+known-answer result. Independent gates recover the exact face-on affine map,
+the edge-on finite-cylinder chord, and the point-mass
+`4GM/(c^2 R)` normalization with improving line-of-sight resolution. The
+Cartesian photon path is unchanged.
+
+The real local asynchronous HTTP release run solved Cartesian 2D, Cartesian
+3D, and axisymmetric jobs and rehashed every downloaded artifact. One
+axisymmetric job used the same confirmed field for massive tracers and photons:
+field relative L2 error was `3.4364145737847694e-15`, circular-speed RMSE was
+`4.220673123283083e-15 m/s`, photon-deflection RMSE was
+`5.490987717737826e-26 arcsec`, 11 artifacts rehashed successfully, and the
+per-object gravity-parameter count was zero. These are analytic software and
+normalization fixtures, not fits to released galaxy or cluster observations.
+
+Deployment `dpl_HMGHfumGfJwju8dYw31PBST5HJxK` is production-ready at the
+stable alias and serves `0.27.0-preview`. The live HTTP smoke reproduces run
+`run_dfd14b92341185b2c1a2a275`, manifest
+`dfd14b92341185b2c1a2a2757b6c9d9b012755f73325d841139b0cbca586105f`, twin run
+`twinrun_6f40fa73cbb05da72369687f`, resolved evidence hash
+`8fed5429efecb7a0b5055a15928b8edf48e5713454ba18b42c9503305778d1b7`, and
+cluster registry hash
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+The public guide follows its canonical redirect and contains the new input,
+output, and limitations. The immutable hostname passed authenticated
+`vercel curl`. Public heavy submissions deliberately remain HTTP 503 until a
+durable isolated worker is connected.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
