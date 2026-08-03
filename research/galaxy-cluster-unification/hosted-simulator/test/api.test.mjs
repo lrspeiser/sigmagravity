@@ -14,6 +14,8 @@ import hostedInverseResponseJobs from "../api/v1/inverse-response-jobs.mjs";
 import hostedObservationEvaluationJobs from "../api/v1/observation-evaluation-jobs.mjs";
 import hostedBatches from "../api/v1/batches.mjs";
 import hostedDataUploads from "../api/v1/data-uploads.mjs";
+import hostedDataUpload from "../api/v1/data-upload.mjs";
+import hostedFieldJob from "../api/v1/field-job.mjs";
 import runs from "../api/v1/runs.mjs";
 import twinRuns from "../api/v1/twin-runs.mjs";
 import resolvedTwinEvidence from "../api/v1/resolved-twin-evidence.mjs";
@@ -43,7 +45,11 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.28.0-preview");
+  assert.equal(output.body.version, "0.29.0-preview");
+  assert.equal(
+    output.body.capabilities.authenticatedFieldWorkerConnector,
+    "available_requires_external_worker_configuration",
+  );
   assert.equal(output.body.capabilities.localBaryonicImageConditioning, "available_in_dev_server");
   assert.equal(output.body.capabilities.localBaryonicEnsemblePropagation, "available_in_dev_server");
   assert.equal(output.body.capabilities.localInverseResponseMultiNullSuite, "available_in_dev_server");
@@ -331,6 +337,20 @@ test("production upload and queue endpoints disclose missing infrastructure", ()
   const job = call(hostedFieldJobs, { method: "POST", body: {} });
   assert.equal(job.statusCode, 503);
   assert.equal(job.body.error, "production_worker_not_connected");
+  const uploadDetail = call(hostedDataUpload, {
+    query: { id: "upload_0123456789abcdef01234567" },
+  });
+  assert.equal(uploadDetail.statusCode, 503);
+  assert.equal(uploadDetail.body.error, "production_storage_not_connected");
+  const jobDetail = call(hostedFieldJob, {
+    query: { id: "job_0123456789abcdef01234567", resource: "events" },
+  });
+  assert.equal(jobDetail.statusCode, 503);
+  assert.equal(jobDetail.body.error, "production_worker_not_connected");
+  const unsafeArtifact = call(hostedFieldJob, {
+    query: { id: "job_0123456789abcdef01234567", resource: "artifact", name: "../secret" },
+  });
+  assert.equal(unsafeArtifact.statusCode, 404);
   const galaxyJob = call(hostedGalaxyJobs, { method: "POST", body: {} });
   assert.equal(galaxyJob.statusCode, 503);
   assert.equal(galaxyJob.body.error, "production_worker_not_connected");
@@ -348,4 +368,19 @@ test("production upload and queue endpoints disclose missing infrastructure", ()
   assert.equal(batch.statusCode, 503);
   assert.equal(batch.body.error, "production_worker_not_connected");
   assert.equal(batch.body.requestSchema, "/schemas/batch-submit-v1.schema.json");
+});
+
+test("Vercel rewrites expose the authenticated field-worker lifecycle without a catch-all proxy", () => {
+  const configuration = JSON.parse(readFileSync(new URL("../vercel.json", import.meta.url), "utf8"));
+  const sources = new Set(configuration.rewrites.map((value) => value.source));
+  for (const source of [
+    "/api/v1/data-uploads/:id/content",
+    "/api/v1/data-uploads/:id",
+    "/api/v1/field-jobs/:id/events",
+    "/api/v1/field-jobs/:id/artifacts/:name",
+    "/api/v1/field-jobs/:id/cancel",
+  ]) {
+    assert.equal(sources.has(source), true, `missing Vercel rewrite ${source}`);
+  }
+  assert.equal(configuration.rewrites.some((value) => value.source.includes("(.*)")), false);
 });

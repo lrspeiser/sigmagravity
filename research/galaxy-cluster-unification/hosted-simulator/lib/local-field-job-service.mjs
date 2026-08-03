@@ -76,6 +76,66 @@ async function exists(path) {
   }
 }
 
+async function verifyArtifactPublication({ root, manifest, maxArtifactBytes, maxArtifactCount }) {
+  if (!manifest || typeof manifest !== "object" || Array.isArray(manifest)) {
+    throw new LocalServiceError(409, "artifact_integrity_failed", "scientific manifest is not an object");
+  }
+  if (typeof manifest.jobId !== "string" || !manifest.jobId) {
+    throw new LocalServiceError(409, "artifact_integrity_failed", "scientific manifest has no job identity");
+  }
+  const manifestCore = Object.fromEntries(
+    Object.entries(manifest).filter(([key]) => key !== "manifestSha256" && key !== "createdAt"),
+  );
+  if (!SHA256.test(manifest.manifestSha256 ?? "") || sha256(manifestCore) !== manifest.manifestSha256) {
+    throw new LocalServiceError(409, "artifact_integrity_failed", "scientific manifest hash is invalid");
+  }
+  const manifestBytes = await readFile(resolve(root, "manifest.json"));
+  const indexBytes = await readFile(resolve(root, "artifact_index.json"));
+  if (sha256Bytes(indexBytes) !== manifest.artifactIndexSha256) {
+    throw new LocalServiceError(409, "artifact_integrity_failed", "artifact index no longer matches the scientific manifest");
+  }
+  const index = JSON.parse(indexBytes.toString("utf8"));
+  if (index?.jobId !== manifest.jobId || !Array.isArray(index?.artifacts)) {
+    throw new LocalServiceError(409, "artifact_integrity_failed", "artifact index identity does not match the scientific manifest");
+  }
+  if (index.artifacts.length + 2 > maxArtifactCount) {
+    throw new LocalServiceError(413, "artifact_quota_exceeded", `worker published more than ${maxArtifactCount} files`);
+  }
+  const names = new Set(["artifact_index.json", "manifest.json"]);
+  let totalBytes = manifestBytes.length + indexBytes.length;
+  for (const artifact of index.artifacts) {
+    const name = artifact?.path;
+    if (
+      typeof name !== "string"
+      || !name
+      || name.includes("/")
+      || name.includes("\\")
+      || name === "."
+      || name === ".."
+      || names.has(name)
+    ) {
+      throw new LocalServiceError(409, "artifact_integrity_failed", "artifact index contains an unsafe or duplicate path");
+    }
+    if (!Number.isSafeInteger(artifact.bytes) || artifact.bytes < 0 || !SHA256.test(artifact.sha256 ?? "")) {
+      throw new LocalServiceError(409, "artifact_integrity_failed", `artifact ${name} has invalid size or hash metadata`);
+    }
+    names.add(name);
+    const content = await readFile(resolve(root, name));
+    if (content.length !== artifact.bytes || sha256Bytes(content) !== artifact.sha256) {
+      throw new LocalServiceError(409, "artifact_integrity_failed", `artifact ${name} failed its recorded hash`);
+    }
+    totalBytes += content.length;
+    if (totalBytes > maxArtifactBytes) {
+      throw new LocalServiceError(413, "artifact_quota_exceeded", `worker artifacts exceed the ${maxArtifactBytes} byte quota`);
+    }
+  }
+  const entries = await readdir(root, { withFileTypes: true });
+  if (entries.some((entry) => !entry.isFile() || !names.has(entry.name)) || entries.length !== names.size) {
+    throw new LocalServiceError(409, "artifact_integrity_failed", "worker output contains an unindexed file or directory");
+  }
+  return index;
+}
+
 async function workerSourceSha256(projectRoot, names) {
   const digest = createHash("sha256");
   for (const name of names) {
@@ -293,6 +353,8 @@ export class LocalFieldJobService {
     maxUploadBytes = Number(process.env.SIMULATOR_MAX_UPLOAD_BYTES ?? 128 * 1024 * 1024),
     maxStoredJobs = Number(process.env.SIMULATOR_MAX_STORED_JOBS ?? 100),
     maxEstimatedMemoryBytes = Number(process.env.SIMULATOR_MAX_ESTIMATED_MEMORY_BYTES ?? 4 * 1024 ** 3),
+    maxArtifactBytes = Number(process.env.SIMULATOR_MAX_ARTIFACT_BYTES ?? 512 * 1024 * 1024),
+    maxArtifactCount = Number(process.env.SIMULATOR_MAX_ARTIFACT_COUNT ?? 256),
     timeoutMs = Number(process.env.SIMULATOR_JOB_TIMEOUT_MS ?? 10 * 60 * 1000),
     runner = defaultRunner,
     ensembleMaterializer = defaultEnsembleMaterializer,
@@ -304,6 +366,8 @@ export class LocalFieldJobService {
     this.maxUploadBytes = maxUploadBytes;
     this.maxStoredJobs = maxStoredJobs;
     this.maxEstimatedMemoryBytes = maxEstimatedMemoryBytes;
+    this.maxArtifactBytes = maxArtifactBytes;
+    this.maxArtifactCount = maxArtifactCount;
     this.timeoutMs = timeoutMs;
     this.runner = runner;
     this.ensembleMaterializer = ensembleMaterializer;
@@ -328,6 +392,8 @@ export class LocalFieldJobService {
       maxUploadBytes: this.maxUploadBytes,
       maxStoredJobs: this.maxStoredJobs,
       maxEstimatedMemoryBytes: this.maxEstimatedMemoryBytes,
+      maxArtifactBytes: this.maxArtifactBytes,
+      maxArtifactCount: this.maxArtifactCount,
       concurrency: 1,
       workerSourceSha256: this.workerSourceSha256,
       galaxyWorkerSourceSha256: this.galaxyWorkerSourceSha256,
@@ -384,13 +450,33 @@ export class LocalFieldJobService {
       if (record.state === "queued" || record.state === "running") {
         const manifestPath = resolve(this.#jobDirectory(record.id), "artifacts", "manifest.json");
         if (await exists(manifestPath)) {
-          applyScientificManifest(record, await readJson(manifestPath));
-          record.recoveredAfterRestart = true;
-          await atomicWrite(recordPath, record);
-          await this.#appendEvent(record.id, record.state, {
-            message: "Recovered a completed scientific manifest after gateway restart.",
-            recoveredAfterRestart: true,
-          });
+          try {
+            const manifest = await readJson(manifestPath);
+            await verifyArtifactPublication({
+              root: resolve(this.#jobDirectory(record.id), "artifacts"),
+              manifest,
+              maxArtifactBytes: this.maxArtifactBytes,
+              maxArtifactCount: this.maxArtifactCount,
+            });
+            applyScientificManifest(record, manifest);
+            record.recoveredAfterRestart = true;
+            await atomicWrite(recordPath, record);
+            await this.#appendEvent(record.id, record.state, {
+              message: "Recovered a completed and reverified scientific manifest after gateway restart.",
+              recoveredAfterRestart: true,
+            });
+          } catch (error) {
+            record.state = "infrastructure_failed";
+            record.updatedAt = now();
+            record.finishedAt = record.updatedAt;
+            record.recoveredAfterRestart = true;
+            record.infrastructureFailure = {
+              code: error.code ?? "artifact_integrity_failed",
+              message: "Worker publication failed integrity verification during restart recovery.",
+            };
+            await atomicWrite(recordPath, record);
+            await this.#appendEvent(record.id, "infrastructure_failed", record.infrastructureFailure);
+          }
           continue;
         }
         record.state = "queued";
@@ -1219,11 +1305,12 @@ export class LocalFieldJobService {
     }
     const root = resolve(this.#jobDirectory(id), "artifacts");
     const manifest = await readJson(resolve(root, "manifest.json"));
-    const indexBytes = await readFile(resolve(root, "artifact_index.json"));
-    if (sha256Bytes(indexBytes) !== manifest.artifactIndexSha256) {
-      throw new LocalServiceError(409, "artifact_integrity_failed", "artifact index no longer matches the scientific manifest");
-    }
-    const index = JSON.parse(indexBytes.toString("utf8"));
+    const index = await verifyArtifactPublication({
+      root,
+      manifest,
+      maxArtifactBytes: this.maxArtifactBytes,
+      maxArtifactCount: this.maxArtifactCount,
+    });
     const collection = jobCollection(record.jobType);
     const schemaVersion = jobSchemaName(record.jobType, "artifact-response");
     return {
@@ -1394,6 +1481,12 @@ export class LocalFieldJobService {
         throw new LocalServiceError(500, "worker_process_failed", `worker exited with code ${execution.exitCode}`);
       }
       const manifest = await readJson(resolve(jobDirectory, "artifacts", "manifest.json"));
+      await verifyArtifactPublication({
+        root: resolve(jobDirectory, "artifacts"),
+        manifest,
+        maxArtifactBytes: this.maxArtifactBytes,
+        maxArtifactCount: this.maxArtifactCount,
+      });
       await this.#withJobLock(id, async () => {
         const latest = await this.#readJob(id);
         if (latest.state === "cancelled") return;

@@ -1,0 +1,91 @@
+name: Sigma field worker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/sigma-field-worker.yml"
+      - "research/galaxy-cluster-unification/Dockerfile.worker"
+      - "research/galaxy-cluster-unification/worker-requirements.txt"
+      - "research/galaxy-cluster-unification/src/**"
+      - "research/galaxy-cluster-unification/scripts/run_generic_field_job.py"
+      - "research/galaxy-cluster-unification/scripts/smoke_local_field_job_api.py"
+      - "research/galaxy-cluster-unification/hosted-simulator/**"
+  pull_request:
+    paths:
+      - ".github/workflows/sigma-field-worker.yml"
+      - "research/galaxy-cluster-unification/Dockerfile.worker"
+      - "research/galaxy-cluster-unification/worker-requirements.txt"
+      - "research/galaxy-cluster-unification/src/**"
+      - "research/galaxy-cluster-unification/scripts/run_generic_field_job.py"
+      - "research/galaxy-cluster-unification/scripts/smoke_local_field_job_api.py"
+      - "research/galaxy-cluster-unification/hosted-simulator/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sigma-field-worker-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  container-acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: research/galaxy-cluster-unification
+    env:
+      CI_WORKER_TOKEN: ci-only-field-worker-token-0123456789abcdef
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+          cache-dependency-path: research/galaxy-cluster-unification/hosted-simulator/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: research/galaxy-cluster-unification/worker-requirements.txt
+      - name: Test the gateway and worker boundary
+        run: |
+          cd hosted-simulator
+          npm ci
+          npm test
+          npm run build
+      - name: Install smoke-client dependencies
+        run: python -m pip install --requirement worker-requirements.txt
+      - name: Build the non-root worker image
+        run: docker build --file Dockerfile.worker --tag sigma-field-worker:ci .
+      - name: Run the real container acceptance
+        run: |
+          docker volume create sigma-worker-ci-store
+          docker run --detach --name sigma-worker-ci \
+            --publish 127.0.0.1:8787:8787 \
+            --env SIMULATOR_WORKER_TOKEN="$CI_WORKER_TOKEN" \
+            --mount source=sigma-worker-ci-store,target=/var/lib/sigma \
+            sigma-field-worker:ci
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8787/healthz >/dev/null; then
+              break
+            fi
+            if [ "$attempt" -eq 30 ]; then
+              docker logs sigma-worker-ci
+              exit 1
+            fi
+            sleep 1
+          done
+          SIMULATOR_URL=http://127.0.0.1:8787 \
+          SIMULATOR_WORKER_TOKEN="$CI_WORKER_TOKEN" \
+          python scripts/smoke_local_field_job_api.py
+      - name: Show worker logs on failure
+        if: failure()
+        run: docker logs sigma-worker-ci || true
+      - name: Remove test worker
+        if: always()
+        run: |
+          docker rm --force sigma-worker-ci || true
+          docker volume rm sigma-worker-ci-store || true

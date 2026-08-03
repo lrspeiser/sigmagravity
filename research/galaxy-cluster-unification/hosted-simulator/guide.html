@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.28</p>
+          <p class="eyebrow">Researcher guide &middot; v0.29</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -59,6 +59,7 @@
               <tr><td>Frozen resolved velocity evidence</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Separate generator fidelity, formula transport, and observed-velocity accuracy on eight systems.</td></tr>
               <tr><td>Resolved cluster evidence registry</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Four calibrated baryonic maps, two lens-model methods per cluster, raw-catalog readiness, provenance hashes, and explicit blockers without mixing scientific roles.</td></tr>
               <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
+              <tr><td>Authenticated field-worker deployment slice</td><td><span class="state-tag partial">Connector not configured</span></td><td><span class="state-tag live">Container acceptance passed</span></td><td>A bounded gateway connector, non-root worker container, persistent job spool contract, recovery, cancellation, quotas, and immutable artifact verification exist. No external worker or durable volume is connected to the public site yet.</td></tr>
               <tr><td>Axisymmetric fields, galaxy motion, and lensing</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Finite-volume elliptic equations run on a declared <code>(r,z)</code> grid; one typed field can produce circular speeds, resolved velocities, deflection/shear maps, and raw multiple-image roots without a Cartesian proxy.</td></tr>
               <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
               <tr><td>Coupled photon and matter potentials</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Multiple solved fields can interact, while separately typed observables expose different predictions for light and massive tracers without a theory-name branch.</td></tr>
@@ -275,7 +276,7 @@
           </article>
 
           <article class="example-card card">
-            <div class="example-intro"><span class="example-number">05</span><div><h3>Ask for heavy production execution</h3><p>The hosted API fails honestly until durable storage, a queue, and isolated workers exist.</p></div></div>
+            <div class="example-intro"><span class="example-number">05</span><div><h3>Ask for heavy production execution</h3><p>The authenticated connector and field-worker container now exist, but the hosted API still fails honestly until an external worker and verified durable storage are configured.</p></div></div>
             <div class="code-pair compact-code-pair">
               <div><p class="code-label">POST /api/v1/field-jobs</p><pre><code>{
   "model": {"...": "confirmed model"},
@@ -284,11 +285,12 @@
 }</code></pre></div>
               <div><p class="code-label">503 response today</p><pre><code>{
   "error": "production_worker_not_connected",
-  "message": "The asynchronous field-job contract is implemented by the local reference backend; the durable queue and isolated worker pool are not connected to this gateway deployment.",
+  "message": "The authenticated field-worker connector exists, but no durable worker endpoint is configured for this deployment.",
   "requestSchema": "/schemas/field-job-submit-v1.schema.json"
 }</code></pre></div>
             </div>
-            <div class="meaning-strip"><strong>What this proves:</strong> the public contract is usable for integration work, but a 503 is not a scientific result.</div>
+            <div class="meaning-strip"><strong>What is built:</strong> the separate bearer-authenticated worker passed real Cartesian 2D/3D, axisymmetric motion, photon-map, and raw-image HTTP jobs. Upload hashes, job identity, restart recovery, cancellation, artifact quotas, manifest/index hashes, every artifact hash, and unindexed-file rejection are enforced.</div>
+            <div class="meaning-strip"><strong>What the 503 still means:</strong> no external worker URL, verified persistent volume, Postgres metadata store, or S3/R2 artifact store is connected to this public deployment. The connector is deployable infrastructure, not proof of production durability or a scientific result.</div>
           </article>
 
           <article class="example-card card">
@@ -708,7 +710,7 @@ credible_interval_ready</code></pre></div>
             <p class="muted">The detailed repository roadmap defines data products, evidence gates, and failure conditions.</p>
           </div>
           <div class="roadmap-flow">
-            <article><span>1</span><div><h3>Connect production compute</h3><p>Queue, isolated Python workers, durable metadata, object storage, authentication, quotas, cancellation, and signed artifacts.</p></div></article>
+            <article><span>1</span><div><h3>Connect production compute</h3><p>The bounded authenticated gateway connector, non-root field-worker image, recovery, cancellation, and artifact quotas are built. Next deploy the image with a verified persistent volume, repeat acceptance through Vercel, then replace the single-volume spool with Postgres metadata, S3/R2 objects, project authentication, signed results, retries, and audit logs.</p></div></article>
             <article><span>2</span><div><h3>Complete the resolved evidence registry</h3><p>The first four-cluster slice is live with baryon maps, lens-model comparators, raw-catalog readiness, hashes, and blockers. Add untouched clusters, multiband stellar mass, intracluster light, calibrated gas posteriors, raw positional errors, weak lensing, PSF/WCS, licenses, and redistribution rules.</p></div></article>
             <article><span>3</span><div><h3>Complete galaxy posterior reconstruction</h3><p>The first gravity-independent gas/stellar surface-density likelihood, hashed weights, effective-sample diagnostics, and weighted prediction bands are built. Next replace commissioning fractional errors with released uncertainty/covariance products, add PSF/beam, cube, dust, bulge, distance, and vertical likelihoods, then use adaptive sampling when weights collapse.</p></div></article>
             <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>The axisymmetric scalar-field, galaxy-motion, photon-map, and raw image-position paths are now verified. Next derive a small covariant or Newtonian-limit law with scalar, vector, tensor, cylindrical-nonlocal, screening, photon, and matter terms, explicit units and boundaries, a Solar-System limit, and frozen universal constants.</p></div></article>

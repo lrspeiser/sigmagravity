@@ -49,7 +49,9 @@ const requiredPaths = [
   "api/v1/cluster-evidence.mjs",
   "api/v1/models/confirm.mjs",
   "api/v1/data-uploads.mjs",
+  "api/v1/data-upload.mjs",
   "api/v1/field-jobs.mjs",
+  "api/v1/field-job.mjs",
   "api/v1/observation-evaluation-jobs.mjs",
   "api/v1/galaxy-jobs.mjs",
   "api/v1/inverse-response-jobs.mjs",
@@ -57,6 +59,9 @@ const requiredPaths = [
   "lib/resolved-twin-evidence.mjs",
   "lib/resolved-cluster-evidence.mjs",
   "lib/local-field-job-service.mjs",
+  "lib/remote-worker-proxy.mjs",
+  "lib/worker-http-server.mjs",
+  "scripts/worker-server.mjs",
   "lib/observation-evaluation-preflight.mjs",
   "lib/galaxy-job-preflight.mjs",
   "lib/inverse-response-preflight.mjs",
@@ -70,6 +75,7 @@ for (const path of requiredPaths) await access(resolve(root, path));
 const guide = await readFile(resolve(root, "dist", "guide.html"), "utf8");
 for (const phrase of [
   "What works where",
+  "Authenticated field-worker deployment slice",
   "Inputs, outputs, and meaning",
   "What it cannot tell you yet",
   "Use halo maps only for discovery",
@@ -94,6 +100,7 @@ for (const phrase of [
   "Score raw image positions from a cylindrical field",
   "zero_only_outside_verified_root_support",
   "A genuinely useful result is a prediction, not a reconstruction",
+  "What the 503 still means",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);
 }

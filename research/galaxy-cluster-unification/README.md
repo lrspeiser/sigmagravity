@@ -61,8 +61,9 @@ laws against fixed MOND and Newtonian baryons. The local reference backend now
 also executes generic Cartesian 2D/3D field manifests, extracts and generates
 resolved baryonic galaxies, and runs one frozen model across asynchronous
 multi-system batches with deterministic reports. The public 2D/3D and
-raw-lensing routes remain explicitly unavailable until durable storage and the
-separate scientific worker are wired.
+raw-lensing routes remain explicitly unavailable on the public deployment
+until the new authenticated worker connector is configured against verified
+durable storage.
 The latest implementation evidence and remaining boundary are recorded in
 [`docs/ASYNC_MULTI_SYSTEM_BATCH_API_MILESTONE.md`](docs/ASYNC_MULTI_SYSTEM_BATCH_API_MILESTONE.md).
 The first formula-independent observation-space result is documented in
@@ -72,6 +73,17 @@ circular-speed curve and scores declared uncertainties without exposing the
 target to the field equation or baryonic extractor.
 The verified Horizon3 production deployment is
 <https://sigma-gravity-research-simulator-five.vercel.app>.
+
+The v0.29 milestone separates the field worker from the development server.
+A pinned, non-root container now exposes only authenticated immutable uploads
+and confirmed field jobs; the Vercel gateway has a bounded server-side
+connector that remains disabled without an external HTTPS origin and secret.
+Publication rejects invalid manifest/index hashes, unsafe or unindexed files,
+and artifact byte/count overruns. The real four-case HTTP acceptance passed
+through this boundary, including the axisymmetric raw-lensing case. No external
+worker or durable volume has been deployed yet, so the public heavy routes
+correctly remain HTTP 503. See
+[`docs/AUTHENTICATED_FIELD_WORKER_MILESTONE.md`](docs/AUTHENTICATED_FIELD_WORKER_MILESTONE.md).
 
 The v0.28 local worker now feeds a cylindrical photon field into the raw
 strong-lensing pipeline. It archives one distance-ratio-one projection,

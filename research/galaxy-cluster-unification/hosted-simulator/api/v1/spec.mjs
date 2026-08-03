@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.28.0-preview",
-    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions, genuinely coupled field equations, separately typed photon and matter observables, seeded baryonic prior ensembles, optional gravity-independent gas/stellar surface-likelihood conditioning, and deterministic fan-out of one confirmed field model across selected realizations with weighted score and per-radius prediction bands. It also provides an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. Degenerate weights are not credible intervals, and inverse results are hypothesis generators rather than forward theory tests. Public heavy execution still requires durable storage and isolated workers.",
+    version: "0.29.0-preview",
+    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions, genuinely coupled field equations, separately typed photon and matter observables, seeded baryonic prior ensembles, optional gravity-independent gas/stellar surface-likelihood conditioning, and deterministic fan-out of one confirmed field model across selected realizations with weighted score and per-radius prediction bands. It also provides an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. A bounded authenticated connector and non-root safe-manifest field-worker image are implemented but not configured on the public deployment. Degenerate weights are not credible intervals, inverse results are hypothesis generators rather than forward theory tests, and public heavy execution still requires a deployed worker with verified durable storage.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
@@ -20,18 +20,18 @@ const specification = {
     "/api/v1/models/validate": { post: { summary: "Validate and hash a scalar/vector/tensor 2D/3D field-model manifest" } },
     "/api/v1/models/confirm": { post: { summary: "Bind explicit researcher acknowledgement to the exact validated computational model hash" } },
     "/api/v1/field-jobs/prepare": { post: { summary: "Preflight a model, content-hashed arrays, 2D/3D grid, boundary, and observation-target request" } },
-    "/api/v1/data-uploads": { post: { summary: "Create an immutable NPZ array-upload ticket (local reference backend)" } },
+    "/api/v1/data-uploads": { post: { summary: "Create an immutable NPZ upload ticket through the local service or configured authenticated field worker" } },
     "/api/v1/data-uploads/{id}": { get: { summary: "Inspect an array upload" } },
     "/api/v1/data-uploads/{id}/content": { put: { summary: "Upload hash- and size-bound NPZ bytes" } },
     "/api/v1/field-jobs": {
-      get: { summary: "List local field jobs" },
+      get: { summary: "List field jobs through the local service or configured authenticated field worker" },
       post: { summary: "Queue a confirmed field manifest against a ready data upload" },
     },
     "/api/v1/field-jobs/{id}": { get: { summary: "Read field-job state" } },
     "/api/v1/field-jobs/{id}/events": { get: { summary: "Read ordered field-job lifecycle events" } },
     "/api/v1/field-jobs/{id}/artifacts": { get: { summary: "Read the verified artifact index and scientific manifest" } },
     "/api/v1/field-jobs/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed, rehashed artifact" } },
-    "/api/v1/field-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running local field job" } },
+    "/api/v1/field-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running field job" } },
     "/api/v1/observation-evaluation-jobs": {
       get: { summary: "List local jobs that score immutable solved fields without re-solving gravity" },
       post: { summary: "Queue observation projection and scoring against a completed field job" },

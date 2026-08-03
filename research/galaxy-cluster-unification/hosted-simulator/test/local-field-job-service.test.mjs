@@ -136,16 +136,43 @@ async function successfulRunner({ jobDirectory }) {
   };
   const indexContent = Buffer.from(`${JSON.stringify(artifactIndex)}\n`);
   await writeFile(resolve(root, "artifact_index.json"), indexContent);
-  const manifest = {
+  const manifestCore = {
     schemaVersion: "sigma-field-run-manifest/1",
     state: "succeeded",
     jobId: "fieldjob_test",
     scientificResultSha256: "2".repeat(64),
     artifactIndexSha256: digest(indexContent),
-    manifestSha256: "3".repeat(64),
   };
+  const manifest = { ...manifestCore, manifestSha256: sha256(manifestCore) };
   await writeFile(resolve(root, "manifest.json"), `${JSON.stringify(manifest)}\n`);
   return { exitCode: 0, exitSignal: null, timedOut: false, stdout: "ok", stderr: "" };
+}
+
+function publicationRunner({ payloadBytes = 64, addUnindexedFile = false } = {}) {
+  return async ({ jobDirectory }) => {
+    const root = resolve(jobDirectory, "artifacts");
+    await mkdir(root, { recursive: true });
+    const scientific = Buffer.alloc(payloadBytes, 7);
+    await writeFile(resolve(root, "scientific_result.json"), scientific);
+    const artifactIndex = {
+      schemaVersion: "sigma-field-artifact-index/1",
+      jobId: "fieldjob_quota_test",
+      artifacts: [{ path: "scientific_result.json", bytes: scientific.length, sha256: digest(scientific) }],
+    };
+    const indexContent = Buffer.from(`${JSON.stringify(artifactIndex)}\n`);
+    await writeFile(resolve(root, "artifact_index.json"), indexContent);
+    const manifestCore = {
+      schemaVersion: "sigma-field-run-manifest/1",
+      state: "succeeded",
+      jobId: "fieldjob_quota_test",
+      scientificResultSha256: digest(scientific),
+      artifactIndexSha256: digest(indexContent),
+    };
+    const manifest = { ...manifestCore, manifestSha256: sha256(manifestCore) };
+    await writeFile(resolve(root, "manifest.json"), `${JSON.stringify(manifest)}\n`);
+    if (addUnindexedFile) await writeFile(resolve(root, "unindexed.bin"), Buffer.from("not declared"));
+    return { exitCode: 0, exitSignal: null, timedOut: false, stdout: "ok", stderr: "" };
+  };
 }
 
 function observationFieldModel() {
@@ -488,6 +515,74 @@ test("artifact mutation is rejected and completed manifests recover after restar
   const recoveredRecord = await recovered.getFieldJob(submission.id);
   assert.equal(recoveredRecord.state, "succeeded");
   assert.equal(recoveredRecord.recoveredAfterRestart, true);
+});
+
+test("worker publication rejects artifact bytes beyond the configured quota", async (t) => {
+  const service = await fixture(t, {
+    runner: publicationRunner({ payloadBytes: 4096 }),
+    maxArtifactBytes: 1024,
+  });
+  const upload = await readyUpload(service, Buffer.from("artifact-quota-test"));
+  const submission = await service.createFieldJob({
+    schemaVersion: "sigma-field-job-submit/1",
+    model: model(),
+    dataUploadId: upload.id,
+    request: request(),
+  });
+  await service.waitForIdle();
+  const failed = await service.getFieldJob(submission.id);
+  assert.equal(failed.state, "infrastructure_failed");
+  assert.equal(failed.infrastructureFailure.code, "artifact_quota_exceeded");
+  await assert.rejects(
+    () => service.getArtifacts(submission.id),
+    (error) => error instanceof LocalServiceError && error.code === "artifacts_not_ready",
+  );
+});
+
+test("worker publication rejects files omitted from the immutable artifact index", async (t) => {
+  const service = await fixture(t, {
+    runner: publicationRunner({ addUnindexedFile: true }),
+  });
+  const upload = await readyUpload(service, Buffer.from("unindexed-artifact-test"));
+  const submission = await service.createFieldJob({
+    schemaVersion: "sigma-field-job-submit/1",
+    model: model(),
+    dataUploadId: upload.id,
+    request: request(),
+  });
+  await service.waitForIdle();
+  const failed = await service.getFieldJob(submission.id);
+  assert.equal(failed.state, "infrastructure_failed");
+  assert.equal(failed.infrastructureFailure.code, "artifact_integrity_failed");
+});
+
+test("restart recovery refuses a completed manifest whose artifacts were mutated", async (t) => {
+  const service = await fixture(t);
+  const upload = await readyUpload(service, Buffer.from("restart-integrity-test"));
+  const submission = await service.createFieldJob({
+    schemaVersion: "sigma-field-job-submit/1",
+    model: model(),
+    dataUploadId: upload.id,
+    request: request(),
+  });
+  await service.waitForIdle();
+  const jobDirectory = resolve(service.root, "jobs", submission.id);
+  await writeFile(resolve(jobDirectory, "artifacts", "scientific_result.json"), "mutated");
+  const recordPath = resolve(jobDirectory, "record.json");
+  const record = JSON.parse(await readFile(recordPath, "utf8"));
+  record.state = "running";
+  await writeFile(recordPath, `${JSON.stringify(record, null, 2)}\n`);
+  const recovered = new LocalFieldJobService({
+    root: service.root,
+    projectRoot: service.projectRoot,
+    runner: async () => { throw new Error("corrupt completed output must not rerun or publish"); },
+  });
+  await recovered.initialize();
+  t.after(async () => recovered.close());
+  const failed = await recovered.getFieldJob(submission.id);
+  assert.equal(failed.state, "infrastructure_failed");
+  assert.equal(failed.recoveredAfterRestart, true);
+  assert.equal(failed.infrastructureFailure.code, "artifact_integrity_failed");
 });
 
 test("running jobs can be cancelled without publishing scientific artifacts", async (t) => {

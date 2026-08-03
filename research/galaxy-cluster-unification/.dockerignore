@@ -1,0 +1,16 @@
+.git
+.github
+.venv
+**/__pycache__
+**/*.pyc
+data
+docs
+outputs
+results
+tests
+tmp
+hosted-simulator/.vercel
+hosted-simulator/dist
+hosted-simulator/node_modules
+hosted-simulator/test
+hosted-simulator/tmp

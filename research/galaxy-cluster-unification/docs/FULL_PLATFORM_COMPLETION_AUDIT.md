@@ -1,6 +1,6 @@
 # Full simulator completion audit
 
-Date: 2026-08-02
+Date: 2026-08-03
 
 This audit compares the current repository with the full research-platform
 specification. “Built” means exercised by deterministic tests. “Partial” means
@@ -22,11 +22,11 @@ gap. A public schema alone is not counted as hosted execution.
 | Gravity-independent inverse baryon extractor | Partial | Content-addressed baryonic parameter extraction and strict separation from gravity/velocity/lensing targets | Validated inference from raw multiband images and cubes with posterior calibration and withheld-data checks |
 | Full forward galaxy generator | Partial | Seeded 2D/3D density ensembles, projection, structural perturbations, observation metadata | Physical equilibrium, intrinsic velocity/dispersions, spectral cubes, radiative/beam pipeline, bars/arms/clumps/thickness calibrated to observations |
 | Round-trip validation | Partial | Baryonic map comparisons, frozen development/validation/holdout evidence, formula-transport diagnostics | Large morphology-diverse validation set, uncertainty-calibrated acceptance, Fourier/pixel/cube statistics, withheld modalities |
-| Asynchronous batch API | Built locally / contract on Vercel | Upload, jobs/events/artifacts, batches, composed observation jobs, cancellation/recovery tests | Durable production queue, workers, database, object storage, auth, project isolation and no 25-system production limit |
+| Asynchronous batch API | Built locally / authenticated field connector on Vercel | Upload, jobs/events/artifacts, batches, composed observation jobs, cancellation/recovery tests; bounded authenticated proxy for field jobs | Deploy and verify the external worker; durable database/object storage, project auth/isolation and no 25-system production limit |
 | Parameter policies and accounting | Built | Published fixed, universal, train/validation/holdout, hierarchical/per-object disclosure; gravity and nuisance counts separated | Comparator-wide effective-complexity and posterior-volume reporting |
 | Deterministic reporting | Partial | Hashed JSON/CSV/NPZ/HTML artifacts, residual histories, reproduction metadata, LLM briefing paths | Uniform PDF bundle, sensitivity plots for every job class, signed manifests from production storage |
 | Optional LLM explanation | Correctly non-authoritative | Deterministic engine owns scores, exclusions, manifests and pass/fail | Optional explanation service only after reports are complete; no LLM key is needed for scientific execution |
-| Production computation infrastructure | Missing | Vercel control plane publishes honest `production_worker_not_connected` errors | Queue/scheduler, isolated Python workers, Postgres, S3/R2, auth, quotas, cancellation, retries, cache, licensing enforcement, audit logs |
+| Production computation infrastructure | Partial, not deployed | Non-root pinned field-worker container, bearer-authenticated bounded Vercel connector, content-addressed restartable single-worker spool, artifact quotas and integrity gates; public deployment still returns honest `production_worker_not_connected` errors | Deploy with a verified persistent volume, then add Postgres, S3/R2 direct transfers, project auth/isolation, retries, cache, licensing enforcement, audit logs and result signing |
 | Formula-independence acceptance suite | Partial | Newtonian, AQUAL-like, QUMOND, Refracted Gravity, nonlocal, two-potential, nonlinear and axisymmetric fixtures | A real isolated plug-in fixture plus broader vector/tensor and external-researcher manifests |
 
 ## The bounded path to a useful Sigma Gravity test
@@ -87,7 +87,10 @@ the discovery stage:
 
 The repository is already useful for developing and falsifying well-specified
 stationary field equations locally. It is not yet a self-service hosted
-research platform. The next product milestone should therefore be a narrow
-end-to-end production slice—authenticated upload, one isolated worker, durable
-artifacts, and one confirmed axisymmetric Poisson job—before adding more UI or
-formula variations.
+research platform. The narrow worker slice is now implemented and passes real
+2D, 3D and axisymmetric HTTP jobs, but it has not been deployed with verified
+durable storage. The next product milestone is operational: deploy that image
+with a persistent volume, connect the Vercel secret and origin, and repeat the
+immutable axisymmetric acceptance through the public alias. After that,
+replace the single-volume spool with Postgres and S3/R2 rather than adding more
+UI or formula variations.

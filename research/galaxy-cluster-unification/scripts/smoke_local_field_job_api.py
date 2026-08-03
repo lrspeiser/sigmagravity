@@ -169,7 +169,11 @@ def request(url: str, *, method: str = "GET", payload: Any = None, content_type:
     data = None
     if payload is not None:
         data = payload if isinstance(payload, bytes) else json.dumps(payload).encode("utf-8")
-    call = urllib.request.Request(url, data=data, method=method, headers={"Content-Type": content_type})
+    headers = {"Content-Type": content_type}
+    worker_token = os.environ.get("SIMULATOR_WORKER_TOKEN")
+    if worker_token:
+        headers["Authorization"] = f"Bearer {worker_token}"
+    call = urllib.request.Request(url, data=data, method=method, headers=headers)
     try:
         with urllib.request.urlopen(call, timeout=30) as response:
             return response.read()

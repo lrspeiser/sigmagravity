@@ -19,6 +19,17 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.29 separates the safe-manifest field worker from the local gateway.
+`Dockerfile.worker` builds a pinned, non-root service that exposes only
+authenticated immutable uploads and confirmed field jobs. The Vercel gateway
+has a bounded opt-in connector, while artifact publication now verifies the
+manifest, index, job identity, every byte/hash, safe unique paths, total bytes,
+file count, and absence of unindexed output. The four-case real HTTP acceptance
+passed through the separated service. This is deployable code, not deployed
+production compute: the stable public site has no external worker URL or
+durable volume configured and therefore still returns HTTP 503. See
+[`../docs/AUTHENTICATED_FIELD_WORKER_MILESTONE.md`](../docs/AUTHENTICATED_FIELD_WORKER_MILESTONE.md).
+
 Version 0.28 composes the axisymmetric photon projection with raw strong-
 lensing image positions. It projects and archives one distance-ratio-one map,
 scales it by each source family's declared distance ratio, profiles two source
@@ -246,6 +257,14 @@ The dependency-free development server listens on `http://127.0.0.1:4173` by
 default and exercises the same route handlers used by Vercel. Use
 `npm run dev:vercel` when the directory has been linked to an authenticated
 Vercel project.
+
+`npm run worker` starts the separated field-only service on port 8787. It
+refuses to start unless `SIMULATOR_WORKER_TOKEN` contains at least 32 bytes.
+Set `SIMULATOR_WORKER_STORE` to a dedicated writable directory; merely setting
+that path does not prove it is backed by a durable volume. The worker health
+response preserves that distinction. Build the non-root image from the parent
+directory with `Dockerfile.worker`; the complete deployment and threat boundary
+are in the v0.29 milestone linked above.
 
 The catalog build reads `../data/raw/sparc/table1.dat` and all 175 files under
 `../data/raw/sparc/rotmod`. The generated `data/sparc-v1.json` is committed so

@@ -25,7 +25,7 @@
       </nav>
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Open research preview · v0.28</p>
+          <p class="eyebrow">Open research preview · v0.29</p>
           <h1>Put a gravity formula in front of real galaxies.</h1>
           <p class="lede">
             Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
@@ -48,6 +48,7 @@
             <div><dt>Radial curves</dt><dd class="available">Available</dd></div>
             <div><dt>Resolved velocity proof</dt><dd class="available">Available</dd></div>
             <div><dt>Cluster evidence registry</dt><dd class="available">Available</dd></div>
+            <div><dt>Field worker connector</dt><dd>Built, not configured</dd></div>
             <div><dt>Local 2D / 3D fields</dt><dd class="available">Available</dd></div>
             <div><dt>Local axisymmetric (r,z)</dt><dd class="available">Available</dd></div>
             <div><dt>Local cylindrical motion + lensing</dt><dd class="available">Available</dd></div>
@@ -294,8 +295,10 @@
               axisymmetric cylindrical fields. It also infers one shared
               stationary response kernel from explicitly labeled baryonic maps and model-derived
               targets, with uncertainty, null controls, and non-identifiability diagnostics. That
-              inverse is a hypothesis generator, not a forward theory test. Public durable workers
-              remain a deployment milestone, so hosted heavy routes disclose that limitation.
+              inverse is a hypothesis generator, not a forward theory test. A bounded authenticated
+              worker connector and non-root field-worker image now pass the real local HTTP suite,
+              but no external worker or verified durable store is configured on the public deployment;
+              hosted heavy routes continue to disclose that limitation.
             </p>
           </div>
         </div>
@@ -313,7 +316,7 @@
           <article class="endpoint"><span>POST</span><code>/api/v1/models/confirm</code><p>Bind a researcher acknowledgement to the exact validated equation hash before execution.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs/prepare</code><p>Bind a model to content-hashed arrays, grid, boundaries, observables, and a resource estimate before queueing.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/data-uploads</code><p>Register immutable NPZ data; the development backend verifies byte hashes before a job can use it.</p></article>
-          <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs</code><p>Queue a confirmed 2D/3D manifest locally, then poll state, events, and verified artifacts. Production workers are not connected yet.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs</code><p>Queue a confirmed 2D/3D manifest locally, then poll state, events, and verified artifacts. The authenticated production connector is built but has no external worker configured yet.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/observation-evaluation-jobs</code><p>Reuse one immutable solved field with new observation data, masks, beams, or uncertainties without rerunning gravity.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/galaxy-jobs</code><p>Locally extract content-hashed baryonic parameters, generate seeded 2D/3D ensembles, or weight surface draws with declared gas/stellar uncertainty maps without choosing a gravity formula.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/inverse-response-jobs</code><p>Infer a shared candidate baryon-to-response kernel locally from model-derived discovery targets, with uncertainty, nulls, identifiability, and explicit parameter counts.</p></article>
