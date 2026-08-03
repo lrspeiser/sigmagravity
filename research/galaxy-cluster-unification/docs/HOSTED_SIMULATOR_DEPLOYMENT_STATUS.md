@@ -11,16 +11,15 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/FbtW3xnqp6yhhkPjMkE2pxeyYHxH>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/J1raTvnWXmjRizVW8ezGZ3X9drRP>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-2r1ls6mpt-horizon3.vercel.app>
-- deployment ID: `dpl_FbtW3xnqp6yhhkPjMkE2pxeyYHxH`
-- public contract version: `0.17.0-preview`
+  <https://sigma-gravity-research-simulator-a3fpj0ijr-horizon3.vercel.app>
+- deployment ID: `dpl_J1raTvnWXmjRizVW8ezGZ3X9drRP`
+- public contract version: `0.18.0-preview`
 
-The service passes its local production build, 79 automated hosted tests, and live
-HTTP smoke suite. The deployment credential was supplied only to the CLI
-process and was not stored in a file, repository setting, or generated
-artifact.
+The service passes its local production build, 83 automated hosted tests, all
+1,559 Python scientific tests, and the live HTTP smoke suite. No deployment
+credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
 
@@ -69,6 +68,13 @@ Implemented public capabilities:
     local worker executes its convolution with a centered kernel, linear
     zero-padded boundaries, physical cell-volume integration, and no hidden
     normalization; public heavy execution remains disconnected.
+16. Publish the inverse baryon-to-response discovery contract and researcher
+    explanation. The local worker fits one shared compact 2D/3D kernel and one
+    amplitude across systems, propagates target uncertainty, evaluates a
+    radial-angle null, exposes rank/nullity and compatible-kernel diagnostics,
+    supports non-negative or signed zero-net responses, counts every discovery
+    coefficient, and emits 14 verified deterministic artifacts. Production
+    returns an explicit 503 until durable isolated workers are connected.
 
 ## Verification evidence
 
@@ -78,8 +84,8 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 79 passing hosted tests, the complete Python scientific
-regression suite, and a build check confirming 175
+The current result is 83 passing hosted tests, 1,559 passing Python scientific
+tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
 `a5df1cb7c7a52da415a167d145a831fe0e0625243b46dd38047ca43ba0299681`.
@@ -104,12 +110,14 @@ GET  https://<deployment>/api/v1/datasets
 GET  https://<deployment>/api/v1/systems/DDO154
 GET  https://<deployment>/api/v1/openapi.json
 GET  https://<deployment>/schemas/observation-evaluation-job-submit-v1.schema.json
+GET  https://<deployment>/schemas/inverse-response-job-submit-v1.schema.json
 POST https://<deployment>/api/v1/formulas/validate
 POST https://<deployment>/api/v1/models/validate
 POST https://<deployment>/api/v1/models/confirm
 POST https://<deployment>/api/v1/runs
 POST https://<deployment>/api/v1/twin-runs
 POST https://<deployment>/api/v1/observation-evaluation-jobs
+POST https://<deployment>/api/v1/inverse-response-jobs
 GET  https://<deployment>/schemas/model-confirmation-request-v1.schema.json
 ```
 
@@ -119,9 +127,9 @@ and point arrays. The accepted production smoke values are:
 
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
-- run ID: `run_ecba32b72a9efb423c378c73`
+- run ID: `run_fa29db81dda5c381a2224a2e`
 - manifest SHA-256:
-  `ecba32b72a9efb423c378c73081f9e74e00559a3bb18ef675e5d0acd8f66b215`
+  `fa29db81dda5c381a2224a2eb8ddb3e5b069ac232511d2800649fcf292ff190f`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -160,7 +168,7 @@ The v0.11 held-out-twin checks additionally require health to report
 formula on the generated twin, the same formula on measured baryons, fixed
 MOND on the twin, Newtonian baryons on the twin, and an uncertainty-aware
 residual panel. The accepted DDO154 smoke result has twin run ID
-`twinrun_6dfa3853e83853712deac8e5`, source-gravity normalized RMSE
+`twinrun_3434ac719bac97d02589863b`, source-gravity normalized RMSE
 `0.000008625358785734849`, and submitted-formula twin RMSE
 `4.459265029781337 km/s`. Across all 175 systems, the P0737 audit confirmed
 that twin packages are invariant to mutations of all held-out velocity data,
@@ -203,6 +211,20 @@ Local manufactured tests require physical-volume impulse normalization and no
 opposite-edge periodic wraparound. The published example solves in 3D through
 the generic worker, while the production gateway continues to report
 `worker_not_connected` for heavy field execution.
+
+The v0.18 inverse-discovery checks require health to report
+`localInverseHaloResponseDiscovery=available_in_dev_server`, OpenAPI to expose
+`/api/v1/inverse-response-jobs`, the public inverse submission schema to return
+HTTP 200, and the guide to show a concrete request, shortened result, artifact
+list, parameter count, and forward-test boundary. Production submission must
+return HTTP 503 with `production_worker_not_connected` and classification
+`hypothesis_generator_not_forward_theory_test`. The local real-HTTP
+known-answer test recovered the injected asymmetric kernel with cosine
+`0.99999999999937`, amplitude `1.5999999988039162`, and aggregate R-squared
+`0.9999999999999991`; all 14 downloaded artifact hashes and the independent
+gateway/worker source hashes agreed. The worker used zero per-system gravity
+parameters, recorded its target as `model_derived_discovery_target`, and
+recorded that no held-out raw observation entered the inverse.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
