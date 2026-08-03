@@ -1,7 +1,7 @@
 # Roadmap: a simulator for Sigma Gravity and inverse halo-response discovery
 
-Status: active implementation plan, updated 2026-08-02 for the hosted v0.19
-generic coupled-field and photon/matter milestone.
+Status: active implementation plan, updated 2026-08-02 for the hosted v0.21
+role-safe resolved cluster evidence milestone.
 
 ## Outcome
 
@@ -34,6 +34,11 @@ generator; a frozen forward prediction on unseen raw data is the test.**
   solves, content-addressed arrays, generated galaxy jobs, decoupled
   observation evaluation, typed photon maps, raw multiple-image roots, and
   composed batches.
+- The public P0753 registry now separates four registered RELICS baryonic maps,
+  two model-derived lens-map methods per cluster, and raw multiple-image
+  evidence. All four are usable for inverse development, only two pass the old
+  raw-catalog readiness gate, zero are currently likelihood-ready, and zero
+  remain prospective holdouts.
 - The exact published two-potential manifest now runs through that same generic
   local HTTP path. Its non-degenerate known-answer fixture produced two solved
   potentials and distinct photon/matter accelerations with zero per-object

@@ -19,6 +19,15 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.21 publishes a role-safe four-cluster RELICS evidence registry at
+`GET /api/v1/cluster-evidence`. It inventories registered projected baryonic
+mass maps, two published model-derived lens-map methods per cluster, raw image
+family readiness, content hashes, and blockers. Four systems are ready for
+inverse hypothesis generation, only two pass the old raw-catalog readiness
+gate, zero have a registered score-ready positional-error model, and zero are
+prospective holdouts because P0633 is spent. The registry does not host the
+large FITS/NPZ payloads and never labels inferred halo maps as raw observations.
+
 Version 0.20 strengthens inverse baryon-to-response discovery with a
 backward-compatible suite of five deterministic null families: source
 radial-angle shuffling, source Fourier-phase scrambling, target-system
@@ -209,6 +218,7 @@ GET  /api/v1/batches/{id}/artifacts
 POST /api/v1/runs
 POST /api/v1/twin-runs
 GET  /api/v1/resolved-twin-evidence?galaxy=NGC3198
+GET  /api/v1/cluster-evidence?system=AS295
 GET  /api/v1/openapi.json
 ```
 

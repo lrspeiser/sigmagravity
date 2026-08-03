@@ -31,11 +31,12 @@ assert.match(guide, /A genuinely useful result is a prediction, not a reconstruc
 
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
-assert.equal(health.version, "0.20.0-preview");
+assert.equal(health.version, "0.21.0-preview");
 assert.equal(health.capabilities.researcherGuide, "available");
 assert.equal(health.capabilities.localNonlocalConvolution, "available_in_dev_server");
 assert.equal(health.capabilities.localInverseHaloResponseDiscovery, "available_in_dev_server");
 assert.equal(health.capabilities.localCoupledTwoPotentialPhotonMatter, "available_in_dev_server");
+assert.equal(health.capabilities.resolvedClusterEvidenceRegistry, "available");
 const inverseSchema = await request("/schemas/inverse-response-job-submit-v1.schema.json");
 assert.equal(inverseSchema.properties.schemaVersion.const, "sigma-inverse-response-job-submit/1");
 const datasets = await request("/api/v1/datasets");
@@ -96,6 +97,11 @@ const resolvedEvidence = await request("/api/v1/resolved-twin-evidence?galaxy=NG
 assert.equal(resolvedEvidence.evidenceClass, "precomputed_development_validation_and_final_holdout_result");
 assert.equal(resolvedEvidence.systems.length, 1);
 assert.equal(resolvedEvidence.systems[0].models.fixed_simple_mond.twinVersusObserved.classification, "consistent");
+const clusterEvidence = await request("/api/v1/cluster-evidence?system=AS295");
+assert.equal(clusterEvidence.schemaVersion, "sigma-resolved-cluster-evidence/1");
+assert.equal(clusterEvidence.systems.length, 1);
+assert.equal(clusterEvidence.sample.rawForwardScoreReadySystems, 0);
+assert.equal(clusterEvidence.systems[0].modelDerivedLensingEvidence.models.length, 2);
 
 console.log(JSON.stringify({
   base,
@@ -110,4 +116,5 @@ console.log(JSON.stringify({
   twinSourceGBarNormalizedRmse: twinRun.metrics.sourceReconstruction.gBarNormalizedRmse,
   twinFormulaRmseKmS: twinRun.metrics.formulaOnGeneratedTwin.rmseKmS,
   resolvedEvidenceSha256: resolvedEvidence.evidenceSha256,
+  clusterEvidenceSha256: clusterEvidence.registrySha256,
 }, null, 2));

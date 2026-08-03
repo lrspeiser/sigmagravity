@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.20</p>
+          <p class="eyebrow">Researcher guide &middot; v0.21</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -37,7 +37,7 @@
         </div>
         <aside class="guide-callout">
           <p class="eyebrow">The shortest honest description</p>
-          <p><strong>Hosted now:</strong> test bounded radial acceleration formulas against 175 SPARC galaxies, inspect frozen resolved evidence, and validate an exact 2D/3D model manifest.</p>
+          <p><strong>Hosted now:</strong> test bounded radial acceleration formulas against 175 SPARC galaxies, inspect frozen galaxy evidence and a role-safe four-cluster registry, and validate an exact 2D/3D model manifest.</p>
           <p><strong>Not hosted yet:</strong> execute arbitrary 2D/3D equations or run new raw cluster-lensing solves. Those jobs work only through the repository's local reference backend.</p>
         </aside>
       </div>
@@ -57,6 +57,7 @@
               <tr><td>Seeded radial galaxy preview</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Deterministic API mechanics and controlled radial scenarios; not a real 3D twin.</td></tr>
               <tr><td>Observed-galaxy radial twin</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Whether compressed baryonic inputs preserve a formula's prediction when velocities are withheld.</td></tr>
               <tr><td>Frozen resolved velocity evidence</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Separate generator fidelity, formula transport, and observed-velocity accuracy on eight systems.</td></tr>
+              <tr><td>Resolved cluster evidence registry</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Four calibrated baryonic maps, two lens-model methods per cluster, raw-catalog readiness, provenance hashes, and explicit blockers without mixing scientific roles.</td></tr>
               <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
               <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
               <tr><td>Coupled photon and matter potentials</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Multiple solved fields can interact, while separately typed observables expose different predictions for light and massive tracers without a theory-name branch.</td></tr>
@@ -298,6 +299,43 @@
             </ol>
             <div class="meaning-strip"><strong>Current evidence:</strong> the eight-system protocol worked; fixed simple MOND was competitive but incomplete, while Newtonian baryons failed the declared holdout criterion. A faithful simulator can preserve a wrong formula, so these scores must remain separate.</div>
           </article>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">07</span><div><h3>Audit cluster evidence before running a theory</h3><p>Use <code>GET /api/v1/cluster-evidence?system=AS295</code> to see which inputs can source a field solve, which targets are only model-derived, and why the raw observation is not yet score-ready.</p></div></div>
+            <div class="code-pair">
+              <div><p class="code-label">GET /api/v1/cluster-evidence?system=AS295</p><pre><code>{
+  "schemaVersion": "sigma-resolved-cluster-evidence/1",
+  "systems": [{
+    "id": "AS295",
+    "sampleState": "spent_development",
+    "baryonicEvidence": {
+      "scientificRole": "baryonic_input",
+      "ready": true,
+      "grid": {"dimensions": 2, "shape": [1025, 1025]}
+    },
+    "modelDerivedLensingEvidence": {
+      "scientificRole": "model_derived_discovery_target",
+      "independentPublishedMethods": 2
+    },
+    "rawLensingEvidence": {
+      "scientificRole": "raw_observation",
+      "secureFamilies": 6,
+      "secureImages": 18,
+      "scoreReadyNow": false
+    }
+  }]
+}</code></pre></div>
+              <div><p class="code-label">Registry-wide readiness</p><pre><code>{
+  "registeredBaryonMaps": 4,
+  "inverseDiscoverySystems": 4,
+  "rawCatalogReadinessGateSystems": 2,
+  "rawForwardScoreReadySystems": 0,
+  "prospectiveHoldoutSystems": 0
+}</code></pre></div>
+            </div>
+            <div class="meaning-strip"><strong>Four cluster maps are ready for discovery, zero are ready for a new blind verdict.</strong> The published GLAFIC and Zitrin maps can help infer a candidate response pattern, but they contain lens-model assumptions. The old RELICS sample is spent, and no registered raw catalog has the positional-error model needed for a defensible likelihood.</div>
+            <div class="meaning-strip"><strong>Example workflow:</strong> learn one shared compact kernel from the four baryonic maps and model-derived lens maps; require it to beat all five null families; compress it into a small frozen law; then test that law on a newly selected cluster using only baryons and raw image positions. Never feed the target halo map into the final prediction.</div>
+          </article>
         </div>
       </section>
 
@@ -321,7 +359,7 @@
           </div>
           <div class="roadmap-flow">
             <article><span>1</span><div><h3>Connect production compute</h3><p>Queue, isolated Python workers, durable metadata, object storage, authentication, quotas, cancellation, and signed artifacts.</p></div></article>
-            <article><span>2</span><div><h3>Build the resolved evidence registry</h3><p>Registered stellar, gas, intracluster-light, X-ray/SZ, velocity, strong-lensing, weak-lensing, PSF, WCS, uncertainty, license, and provenance products.</p></div></article>
+            <article><span>2</span><div><h3>Complete the resolved evidence registry</h3><p>The first four-cluster slice is live with baryon maps, lens-model comparators, raw-catalog readiness, hashes, and blockers. Add untouched clusters, multiband stellar mass, intracluster light, calibrated gas posteriors, raw positional errors, weak lensing, PSF/WCS, licenses, and redistribution rules.</p></div></article>
             <article><span>3</span><div><h3>Finish uncertainty-aware galaxy twins</h3><p>Infer posterior baryonic/observation parameters without velocity targets or gravity parameters, generate 3D ensembles, and recover withheld observations.</p></div></article>
             <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>Derive a small covariant or Newtonian-limit law with scalar, vector, tensor, nonlocal, screening, photon, and matter terms, explicit units and boundaries, and a Solar-System limit.</p></div></article>
             <article><span>5</span><div><h3>Use halo maps only for discovery</h3><p>The five-family synthetic control suite is built. Next, register multiple teams' halo posteriors and complete baryonic ensembles, then measure which inferred features survive lens method, baryon uncertainty, central-halo, local-light, and conservation controls.</p></div></article>

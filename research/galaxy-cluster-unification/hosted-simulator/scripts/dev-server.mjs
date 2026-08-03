@@ -12,6 +12,7 @@ import specification from "../api/v1/spec.mjs";
 import syntheticGalaxies from "../api/v1/synthetic-galaxies.mjs";
 import twinRuns from "../api/v1/twin-runs.mjs";
 import resolvedTwinEvidence from "../api/v1/resolved-twin-evidence.mjs";
+import clusterEvidence from "../api/v1/cluster-evidence.mjs";
 import system from "../api/v1/system.mjs";
 import systems from "../api/v1/systems.mjs";
 import { createLocalFieldJobRouter } from "../lib/local-field-job-http.mjs";
@@ -46,6 +47,7 @@ const apiRoutes = new Map([
   ["/api/v1/synthetic-galaxies", syntheticGalaxies],
   ["/api/v1/twin-runs", twinRuns],
   ["/api/v1/resolved-twin-evidence", resolvedTwinEvidence],
+  ["/api/v1/cluster-evidence", clusterEvidence],
   ["/api/v1/runs", runs],
   ["/api/v1/openapi.json", specification],
 ]);
@@ -62,6 +64,7 @@ const staticFiles = new Map([
   ["/assets/resolved-twin-holdout-atlas.png", ["assets/resolved-twin-holdout-atlas.png", "image/png"]],
   ["/assets/resolved-twin-holdout-curves.png", ["assets/resolved-twin-holdout-curves.png", "image/png"]],
   ["/data/resolved-twin-development-v1.json", ["data/resolved-twin-development-v1.json", "application/json; charset=utf-8"]],
+  ["/data/resolved-cluster-evidence-v1.json", ["data/resolved-cluster-evidence-v1.json", "application/json; charset=utf-8"]],
   ["/schemas/model-manifest-v1.schema.json", ["schemas/model-manifest-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/model-confirmation-request-v1.schema.json", ["schemas/model-confirmation-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/array-bundle-request-v1.schema.json", ["schemas/array-bundle-request-v1.schema.json", "application/schema+json; charset=utf-8"]],

@@ -1,0 +1,802 @@
+{
+  "schemaVersion": "sigma-resolved-cluster-evidence/1",
+  "registryVersion": "P0753-1.0.0",
+  "evidenceClass": "spent_cluster_development_registry",
+  "purpose": "Expose exactly which resolved cluster products can support baryonic field solves, inverse halo-response hypothesis generation, and raw forward lensing tests without confusing their scientific roles.",
+  "sample": {
+    "survey": "RELICS",
+    "systemCount": 4,
+    "sampleState": "spent",
+    "prospectiveHoldoutSystems": 0,
+    "registeredBaryonMaps": 4,
+    "inverseDiscoverySystems": 4,
+    "rawCatalogReadinessGateSystems": 2,
+    "rawForwardScoreReadySystems": 0
+  },
+  "roleContract": {
+    "baryonic_input": "May source a forward gravity solve; must remain independent of the gravity formula and lensing target.",
+    "model_derived_discovery_target": "May reveal candidate response geometry in an inverse analysis; cannot validate a theory or substitute for raw lensing observations.",
+    "raw_observation": "May score a frozen forward prediction only when provenance, uncertainty, selection, coordinates, and nuisance policy are complete."
+  },
+  "systems": [
+    {
+      "id": "AS295",
+      "label": "Abell S295",
+      "archiveSlug": "abells295",
+      "redshift": 0.3,
+      "sampleState": "spent_development",
+      "baryonicEvidence": {
+        "scientificRole": "baryonic_input",
+        "state": "registered_projected_mass_map_with_uncertainty_brackets",
+        "ready": true,
+        "grid": {
+          "dimensions": 2,
+          "shape": [
+            1025,
+            1025
+          ],
+          "cellKpc": 3.515625
+        },
+        "selectedStellarMembers": 125,
+        "stellarMassMsolar": 1911513807772.893,
+        "gasMassMsolar": 59158999999999.97,
+        "gasMassSigmaMsolar": 9600000000000.0,
+        "totalBaryonMassMsolar": 61070513807772.86,
+        "gasStellarCentroidOffsetKpc": 50.09506661698721,
+        "mapSha256": "40db1a950ece8a641a5380eb5705bd6158ed1d98e1d9a01d1c99b5e67a0d3a2c",
+        "sourceProducts": [
+          {
+            "role": "chandra_center_image",
+            "scientificMeaning": "xray_gas_morphology_proxy_not_gas_mass",
+            "count": 6,
+            "bytes": 300970
+          },
+          {
+            "role": "f160w_image",
+            "scientificMeaning": "stellar_light_morphology_proxy",
+            "count": 1,
+            "bytes": 100128960
+          },
+          {
+            "role": "member_catalog",
+            "scientificMeaning": "photometric_membership_and_flux_input",
+            "count": 1,
+            "bytes": 2637868
+          },
+          {
+            "role": "segmentation",
+            "scientificMeaning": "member_pixel_assignment",
+            "count": 1,
+            "bytes": 100074240
+          }
+        ],
+        "sharedUncertaintyPolicy": {
+          "stellarMassToLightSolar": [
+            0.5,
+            0.8,
+            1.1
+          ],
+          "xrayBrightnessToDensityExponent": [
+            0.4,
+            0.5,
+            0.6
+          ],
+          "perClusterGravityParameters": 0
+        },
+        "limitations": [
+          "projected_2d_mass_map_not_unique_3d_reconstruction",
+          "single_band_stellar_population_calibration",
+          "xray_gas_depth_and_emissivity_approximation",
+          "no_independently_calibrated_intracluster_light_product"
+        ]
+      },
+      "modelDerivedLensingEvidence": {
+        "scientificRole": "model_derived_discovery_target",
+        "readyForInverseHypothesisGeneration": true,
+        "independentPublishedMethods": 2,
+        "models": [
+          {
+            "method": "glafic",
+            "version": "v2",
+            "scientificRole": "model_derived_discovery_target",
+            "components": [
+              {
+                "component": "kappa",
+                "bytes": 23042880,
+                "sha256": "380d0a4d3a6efb52f059a46c1f83c77ff8071accb6d69451b99204c7117cf41b",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/abells295/models/glafic/v2/hlsp_relics_model_model_abells295_glafic_v2_kappa.fits"
+              },
+              {
+                "component": "x-arcsec-deflect",
+                "bytes": 23042880,
+                "sha256": "0a6bf4567cc1a077440bf7a1b24e488f31b618160e99dec9ceda017f80901b0a",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/abells295/models/glafic/v2/hlsp_relics_model_model_abells295_glafic_v2_x-arcsec-deflect.fits"
+              },
+              {
+                "component": "y-arcsec-deflect",
+                "bytes": 23042880,
+                "sha256": "2ae7ac7b22344f5235006b0f54c04af3be6fe4212d517fe0bdbcb36ef514d236",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/abells295/models/glafic/v2/hlsp_relics_model_model_abells295_glafic_v2_y-arcsec-deflect.fits"
+              }
+            ],
+            "bundleSha256": "90772be6c52a4392fdae40956f07d6b2726b50bd097a66e2d1d998361f5cffda",
+            "mayBeUsedFor": [
+              "inverse_hypothesis_generation",
+              "published_model_comparator"
+            ],
+            "mayNotBeUsedAs": [
+              "baryonic_input",
+              "raw_observation",
+              "prospective_holdout"
+            ]
+          },
+          {
+            "method": "zitrin-ltm-gauss",
+            "version": "v2",
+            "scientificRole": "model_derived_discovery_target",
+            "components": [
+              {
+                "component": "kappa",
+                "bytes": 46247040,
+                "sha256": "66f4b8b55080a5dbaef25e6015887c9e66e759c95a0991cf7e24fe3ebaac2016",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/abells295/models/zitrin-ltm-gauss/v2/hlsp_relics_model_model_abells295_zitrin-ltm-gauss_v2_kappa.fits"
+              },
+              {
+                "component": "x-arcsec-deflect",
+                "bytes": 46247040,
+                "sha256": "bcaec4c8bc099e1d3d93b74a315e1f6214ffc18ebbd8d5e4c95a8014b45f8760",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/abells295/models/zitrin-ltm-gauss/v2/hlsp_relics_model_model_abells295_zitrin-ltm-gauss_v2_x-arcsec-deflect.fits"
+              },
+              {
+                "component": "y-arcsec-deflect",
+                "bytes": 46247040,
+                "sha256": "e001ed3cd35c5f9130c27bac2f4bc039577432b55e1910316c29f9972a4b8998",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/abells295/models/zitrin-ltm-gauss/v2/hlsp_relics_model_model_abells295_zitrin-ltm-gauss_v2_y-arcsec-deflect.fits"
+              }
+            ],
+            "bundleSha256": "867b4ce15b2be15d8a3248881e0886b0890ebebdd1136c0eefe1dffd4d06944c",
+            "mayBeUsedFor": [
+              "inverse_hypothesis_generation",
+              "published_model_comparator"
+            ],
+            "mayNotBeUsedAs": [
+              "baryonic_input",
+              "raw_observation",
+              "prospective_holdout"
+            ]
+          }
+        ],
+        "warning": "These maps include lens-model assumptions and dark-matter-like components. They are discovery targets and comparators, not raw observations."
+      },
+      "rawLensingEvidence": {
+        "scientificRole": "raw_observation",
+        "sourceContainer": {
+          "role": "raw_observation_source_container",
+          "bytes": 4586420,
+          "sha256": "6fef39aa25e0ae897c292e6051c86f8f6397ed75de8ed4aa979aab175c443caf",
+          "sourceUrl": "https://export.arxiv.org/e-print/1803.09557",
+          "originalAcquisitionState": "sealed_and_hash_only",
+          "currentSampleState": "opened_and_spent_by_P0710_to_P0714"
+        },
+        "secureFamilies": 6,
+        "spectroscopicFamilies": 4,
+        "secureImages": 18,
+        "frozenReadinessGatePassed": true,
+        "coordinateSerializationValidated": true,
+        "scoreReadyNow": false,
+        "prospectiveHoldoutEligible": false,
+        "blockers": [
+          "spent_sample_not_prospective_holdout",
+          "published_per_image_position_uncertainties_not_registered"
+        ]
+      },
+      "readiness": {
+        "baryonicFieldInput": true,
+        "inverseHaloShapeDiscovery": true,
+        "rawForwardLensingScore": false,
+        "blindTheoryValidation": false
+      }
+    },
+    {
+      "id": "MACS0025",
+      "label": "MACS J0025.4-1222",
+      "archiveSlug": "macs0025m12",
+      "redshift": 0.586,
+      "sampleState": "spent_development",
+      "baryonicEvidence": {
+        "scientificRole": "baryonic_input",
+        "state": "registered_projected_mass_map_with_uncertainty_brackets",
+        "ready": true,
+        "grid": {
+          "dimensions": 2,
+          "shape": [
+            1025,
+            1025
+          ],
+          "cellKpc": 3.515625
+        },
+        "selectedStellarMembers": 193,
+        "stellarMassMsolar": 3308058378961.416,
+        "gasMassMsolar": 54999999999999.98,
+        "gasMassSigmaMsolar": 6000000000000.0,
+        "totalBaryonMassMsolar": 58308058378961.41,
+        "gasStellarCentroidOffsetKpc": 125.48352117843733,
+        "mapSha256": "88822eeb042f42327f099728404b03d964396e619d6dde75120be78de56527ec",
+        "sourceProducts": [
+          {
+            "role": "chandra_center_image",
+            "scientificMeaning": "xray_gas_morphology_proxy_not_gas_mass",
+            "count": 5,
+            "bytes": 207024
+          },
+          {
+            "role": "f160w_image",
+            "scientificMeaning": "stellar_light_morphology_proxy",
+            "count": 1,
+            "bytes": 100128960
+          },
+          {
+            "role": "member_catalog",
+            "scientificMeaning": "photometric_membership_and_flux_input",
+            "count": 1,
+            "bytes": 2332641
+          },
+          {
+            "role": "segmentation",
+            "scientificMeaning": "member_pixel_assignment",
+            "count": 1,
+            "bytes": 100074240
+          }
+        ],
+        "sharedUncertaintyPolicy": {
+          "stellarMassToLightSolar": [
+            0.5,
+            0.8,
+            1.1
+          ],
+          "xrayBrightnessToDensityExponent": [
+            0.4,
+            0.5,
+            0.6
+          ],
+          "perClusterGravityParameters": 0
+        },
+        "limitations": [
+          "projected_2d_mass_map_not_unique_3d_reconstruction",
+          "single_band_stellar_population_calibration",
+          "xray_gas_depth_and_emissivity_approximation",
+          "no_independently_calibrated_intracluster_light_product"
+        ]
+      },
+      "modelDerivedLensingEvidence": {
+        "scientificRole": "model_derived_discovery_target",
+        "readyForInverseHypothesisGeneration": true,
+        "independentPublishedMethods": 2,
+        "models": [
+          {
+            "method": "glafic",
+            "version": "v2",
+            "scientificRole": "model_derived_discovery_target",
+            "components": [
+              {
+                "component": "kappa",
+                "bytes": 23042880,
+                "sha256": "7538bc2dcb0c7cff90bedc865f40ec323d163f3ba846563c53526b0c2a80bc1c",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0025m12/models/glafic/v2/hlsp_relics_model_model_macs0025m12_glafic_v2_kappa.fits"
+              },
+              {
+                "component": "x-arcsec-deflect",
+                "bytes": 23042880,
+                "sha256": "a83d6366c702d3424db74b4e2af1db8bfeaf86b1a4d02bdbbf63779a5f8b8559",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0025m12/models/glafic/v2/hlsp_relics_model_model_macs0025m12_glafic_v2_x-arcsec-deflect.fits"
+              },
+              {
+                "component": "y-arcsec-deflect",
+                "bytes": 23042880,
+                "sha256": "1bb07c0dc3124a83888eedef7cfbac50e45a00799b6e6f32568f196526884382",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0025m12/models/glafic/v2/hlsp_relics_model_model_macs0025m12_glafic_v2_y-arcsec-deflect.fits"
+              }
+            ],
+            "bundleSha256": "f138aa2d7f9978622d10e5630dea209f773d5eeb3c8fb36a6b6b073d88fdce44",
+            "mayBeUsedFor": [
+              "inverse_hypothesis_generation",
+              "published_model_comparator"
+            ],
+            "mayNotBeUsedAs": [
+              "baryonic_input",
+              "raw_observation",
+              "prospective_holdout"
+            ]
+          },
+          {
+            "method": "zitrin-ltm-gauss",
+            "version": "v1",
+            "scientificRole": "model_derived_discovery_target",
+            "components": [
+              {
+                "component": "kappa",
+                "bytes": 40968000,
+                "sha256": "ffbf95f80d1088f75c88e9d5c4e96f81285d7939ef83aab095f49f40db866d41",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0025m12/models/zitrin-ltm-gauss/hlsp_relics_model_model_macs0025m12_zitrin-ltm-gauss_v1_kappa.fits"
+              },
+              {
+                "component": "x-arcsec-deflect",
+                "bytes": 40968000,
+                "sha256": "74976285d961c754cefd11754470ad8ec4d7ea38ab116bd83e31d84bdb4f6140",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0025m12/models/zitrin-ltm-gauss/hlsp_relics_model_model_macs0025m12_zitrin-ltm-gauss_v1_x-arcsec-deflect.fits"
+              },
+              {
+                "component": "y-arcsec-deflect",
+                "bytes": 40968000,
+                "sha256": "b767e0f8ccb01a6b2d0837fd89f27b2ba30a1f1ee485007e85a93a472824ebea",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0025m12/models/zitrin-ltm-gauss/hlsp_relics_model_model_macs0025m12_zitrin-ltm-gauss_v1_y-arcsec-deflect.fits"
+              }
+            ],
+            "bundleSha256": "30d75f23576238719f23b8ed32a4c4338e8831a040fa47c7613f72bafd61ed28",
+            "mayBeUsedFor": [
+              "inverse_hypothesis_generation",
+              "published_model_comparator"
+            ],
+            "mayNotBeUsedAs": [
+              "baryonic_input",
+              "raw_observation",
+              "prospective_holdout"
+            ]
+          }
+        ],
+        "warning": "These maps include lens-model assumptions and dark-matter-like components. They are discovery targets and comparators, not raw observations."
+      },
+      "rawLensingEvidence": {
+        "scientificRole": "raw_observation",
+        "sourceContainer": {
+          "role": "raw_observation_source_container",
+          "bytes": 4586420,
+          "sha256": "6fef39aa25e0ae897c292e6051c86f8f6397ed75de8ed4aa979aab175c443caf",
+          "sourceUrl": "https://export.arxiv.org/e-print/1803.09557",
+          "originalAcquisitionState": "sealed_and_hash_only",
+          "currentSampleState": "opened_and_spent_by_P0710_to_P0714"
+        },
+        "secureFamilies": 2,
+        "spectroscopicFamilies": 1,
+        "secureImages": 7,
+        "frozenReadinessGatePassed": false,
+        "coordinateSerializationValidated": false,
+        "scoreReadyNow": false,
+        "prospectiveHoldoutEligible": false,
+        "blockers": [
+          "spent_sample_not_prospective_holdout",
+          "fewer_than_three_secure_source_families",
+          "fewer_than_eight_secure_images",
+          "published_per_image_position_uncertainties_not_registered"
+        ]
+      },
+      "readiness": {
+        "baryonicFieldInput": true,
+        "inverseHaloShapeDiscovery": true,
+        "rawForwardLensingScore": false,
+        "blindTheoryValidation": false
+      }
+    },
+    {
+      "id": "MACS0159",
+      "label": "MACS J0159.8-0849",
+      "archiveSlug": "macs0159m08",
+      "redshift": 0.405,
+      "sampleState": "spent_development",
+      "baryonicEvidence": {
+        "scientificRole": "baryonic_input",
+        "state": "registered_projected_mass_map_with_uncertainty_brackets",
+        "ready": true,
+        "grid": {
+          "dimensions": 2,
+          "shape": [
+            1025,
+            1025
+          ],
+          "cellKpc": 3.515625
+        },
+        "selectedStellarMembers": 93,
+        "stellarMassMsolar": 1467327386217.8296,
+        "gasMassMsolar": 119999999999999.98,
+        "gasMassSigmaMsolar": 10000000000000.0,
+        "totalBaryonMassMsolar": 121467327386217.81,
+        "gasStellarCentroidOffsetKpc": 58.160357777868434,
+        "mapSha256": "81452dfc52113450830b065724607b4725a95eeb235b4c86935980ad677856b1",
+        "sourceProducts": [
+          {
+            "role": "chandra_center_image",
+            "scientificMeaning": "xray_gas_morphology_proxy_not_gas_mass",
+            "count": 3,
+            "bytes": 137348
+          },
+          {
+            "role": "f160w_image",
+            "scientificMeaning": "stellar_light_morphology_proxy",
+            "count": 1,
+            "bytes": 121127040
+          },
+          {
+            "role": "member_catalog",
+            "scientificMeaning": "photometric_membership_and_flux_input",
+            "count": 1,
+            "bytes": 2578441
+          },
+          {
+            "role": "segmentation",
+            "scientificMeaning": "member_pixel_assignment",
+            "count": 1,
+            "bytes": 121072320
+          }
+        ],
+        "sharedUncertaintyPolicy": {
+          "stellarMassToLightSolar": [
+            0.5,
+            0.8,
+            1.1
+          ],
+          "xrayBrightnessToDensityExponent": [
+            0.4,
+            0.5,
+            0.6
+          ],
+          "perClusterGravityParameters": 0
+        },
+        "limitations": [
+          "projected_2d_mass_map_not_unique_3d_reconstruction",
+          "single_band_stellar_population_calibration",
+          "xray_gas_depth_and_emissivity_approximation",
+          "no_independently_calibrated_intracluster_light_product"
+        ]
+      },
+      "modelDerivedLensingEvidence": {
+        "scientificRole": "model_derived_discovery_target",
+        "readyForInverseHypothesisGeneration": true,
+        "independentPublishedMethods": 2,
+        "models": [
+          {
+            "method": "glafic",
+            "version": "v2",
+            "scientificRole": "model_derived_discovery_target",
+            "components": [
+              {
+                "component": "kappa",
+                "bytes": 23042880,
+                "sha256": "b8e471061b6ffbef7ae09290c6eaad051223c82e2901a2bacf0ef8fc04259eba",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0159m08/models/glafic/v2/hlsp_relics_model_model_macs0159m08_glafic_v2_kappa.fits"
+              },
+              {
+                "component": "x-arcsec-deflect",
+                "bytes": 23042880,
+                "sha256": "5fb173c331897b9032bfbd5d7eb02f892c32965bfd9150801ef3ef8ae0944296",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0159m08/models/glafic/v2/hlsp_relics_model_model_macs0159m08_glafic_v2_x-arcsec-deflect.fits"
+              },
+              {
+                "component": "y-arcsec-deflect",
+                "bytes": 23042880,
+                "sha256": "57d3f8b2172f25a5fd2ef5bd376cf2c7cf405d3d06943836f4a6d7f088aa7e34",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0159m08/models/glafic/v2/hlsp_relics_model_model_macs0159m08_glafic_v2_y-arcsec-deflect.fits"
+              }
+            ],
+            "bundleSha256": "ca098b6ac9d6bcde66e7deda5de4a9b966c70722f37eceb31fb44a6a6d2735c0",
+            "mayBeUsedFor": [
+              "inverse_hypothesis_generation",
+              "published_model_comparator"
+            ],
+            "mayNotBeUsedAs": [
+              "baryonic_input",
+              "raw_observation",
+              "prospective_holdout"
+            ]
+          },
+          {
+            "method": "zitrin-ltm-gauss",
+            "version": "v1",
+            "scientificRole": "model_derived_discovery_target",
+            "components": [
+              {
+                "component": "kappa",
+                "bytes": 25007040,
+                "sha256": "53d94e1c199e4e11c42c89e58692128f886b703c8d5f261d9df135e755f929d3",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0159m08/models/zitrin-ltm-gauss/hlsp_relics_model_model_macs0159m08_zitrin-ltm-gauss_v1_kappa.fits"
+              },
+              {
+                "component": "x-arcsec-deflect",
+                "bytes": 25007040,
+                "sha256": "ed0a99bcaff882c02c50c420378b25d6e92b8b067e5a7e4c2f0457e829b07005",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0159m08/models/zitrin-ltm-gauss/hlsp_relics_model_model_macs0159m08_zitrin-ltm-gauss_v1_x-arcsec-deflect.fits"
+              },
+              {
+                "component": "y-arcsec-deflect",
+                "bytes": 25007040,
+                "sha256": "65446a0aa893274f87450bf8a4842c58fd1c5ac72ddcb7eb9c90d232ba0148b5",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/macs0159m08/models/zitrin-ltm-gauss/hlsp_relics_model_model_macs0159m08_zitrin-ltm-gauss_v1_y-arcsec-deflect.fits"
+              }
+            ],
+            "bundleSha256": "f0bf6bfd363c15dbb57ae51b3a767cc93ce6ba14e62f9a3d08a3712053c5518e",
+            "mayBeUsedFor": [
+              "inverse_hypothesis_generation",
+              "published_model_comparator"
+            ],
+            "mayNotBeUsedAs": [
+              "baryonic_input",
+              "raw_observation",
+              "prospective_holdout"
+            ]
+          }
+        ],
+        "warning": "These maps include lens-model assumptions and dark-matter-like components. They are discovery targets and comparators, not raw observations."
+      },
+      "rawLensingEvidence": {
+        "scientificRole": "raw_observation",
+        "sourceContainer": {
+          "role": "raw_observation_source_container",
+          "bytes": 4586420,
+          "sha256": "6fef39aa25e0ae897c292e6051c86f8f6397ed75de8ed4aa979aab175c443caf",
+          "sourceUrl": "https://export.arxiv.org/e-print/1803.09557",
+          "originalAcquisitionState": "sealed_and_hash_only",
+          "currentSampleState": "opened_and_spent_by_P0710_to_P0714"
+        },
+        "secureFamilies": 4,
+        "spectroscopicFamilies": 0,
+        "secureImages": 10,
+        "frozenReadinessGatePassed": false,
+        "coordinateSerializationValidated": false,
+        "scoreReadyNow": false,
+        "prospectiveHoldoutEligible": false,
+        "blockers": [
+          "spent_sample_not_prospective_holdout",
+          "no_secure_spectroscopic_source_family",
+          "published_per_image_position_uncertainties_not_registered"
+        ]
+      },
+      "readiness": {
+        "baryonicFieldInput": true,
+        "inverseHaloShapeDiscovery": true,
+        "rawForwardLensingScore": false,
+        "blindTheoryValidation": false
+      }
+    },
+    {
+      "id": "PLCKG287",
+      "label": "PLCK G287.0+32.9",
+      "archiveSlug": "plckg287p32",
+      "redshift": 0.39,
+      "sampleState": "spent_development",
+      "baryonicEvidence": {
+        "scientificRole": "baryonic_input",
+        "state": "registered_projected_mass_map_with_uncertainty_brackets",
+        "ready": true,
+        "grid": {
+          "dimensions": 2,
+          "shape": [
+            1025,
+            1025
+          ],
+          "cellKpc": 3.515625
+        },
+        "selectedStellarMembers": 138,
+        "stellarMassMsolar": 2619244406987.9023,
+        "gasMassMsolar": 157299999999999.97,
+        "gasMassSigmaMsolar": 16000000000000.0,
+        "totalBaryonMassMsolar": 159919244406987.88,
+        "gasStellarCentroidOffsetKpc": 77.91281285033432,
+        "mapSha256": "ae1ae809f1a8951b9c930dc713b005bfcb114bdebe8d578d349ae7c722c6d0a7",
+        "sourceProducts": [
+          {
+            "role": "chandra_center_image",
+            "scientificMeaning": "xray_gas_morphology_proxy_not_gas_mass",
+            "count": 5,
+            "bytes": 322360
+          },
+          {
+            "role": "f160w_image",
+            "scientificMeaning": "stellar_light_morphology_proxy",
+            "count": 1,
+            "bytes": 108288000
+          },
+          {
+            "role": "member_catalog",
+            "scientificMeaning": "photometric_membership_and_flux_input",
+            "count": 1,
+            "bytes": 3980733
+          },
+          {
+            "role": "segmentation",
+            "scientificMeaning": "member_pixel_assignment",
+            "count": 1,
+            "bytes": 108233280
+          }
+        ],
+        "sharedUncertaintyPolicy": {
+          "stellarMassToLightSolar": [
+            0.5,
+            0.8,
+            1.1
+          ],
+          "xrayBrightnessToDensityExponent": [
+            0.4,
+            0.5,
+            0.6
+          ],
+          "perClusterGravityParameters": 0
+        },
+        "limitations": [
+          "projected_2d_mass_map_not_unique_3d_reconstruction",
+          "single_band_stellar_population_calibration",
+          "xray_gas_depth_and_emissivity_approximation",
+          "no_independently_calibrated_intracluster_light_product"
+        ]
+      },
+      "modelDerivedLensingEvidence": {
+        "scientificRole": "model_derived_discovery_target",
+        "readyForInverseHypothesisGeneration": true,
+        "independentPublishedMethods": 2,
+        "models": [
+          {
+            "method": "glafic",
+            "version": "v2",
+            "scientificRole": "model_derived_discovery_target",
+            "components": [
+              {
+                "component": "kappa",
+                "bytes": 23042880,
+                "sha256": "27fdf1d5816232889b2983116a50bd4260901253b59f0cba9f8711b321c0f100",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/plckg287p32/models/glafic/v2/hlsp_relics_model_model_plckg287p32_glafic_v2_kappa.fits"
+              },
+              {
+                "component": "x-arcsec-deflect",
+                "bytes": 23042880,
+                "sha256": "b3d46676e28c7657767dcb96aa7a14859ad83561214233a3f2e173f711f2eb09",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/plckg287p32/models/glafic/v2/hlsp_relics_model_model_plckg287p32_glafic_v2_x-arcsec-deflect.fits"
+              },
+              {
+                "component": "y-arcsec-deflect",
+                "bytes": 23042880,
+                "sha256": "6029d3c15958317599a90a0b19c2292cb588eea1ea6e377a47c5ad82eaca0092",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/plckg287p32/models/glafic/v2/hlsp_relics_model_model_plckg287p32_glafic_v2_y-arcsec-deflect.fits"
+              }
+            ],
+            "bundleSha256": "e227d854d182c96a24de41a34c74e8c437ab90bdaf6a0c9978a5a114199f5baf",
+            "mayBeUsedFor": [
+              "inverse_hypothesis_generation",
+              "published_model_comparator"
+            ],
+            "mayNotBeUsedAs": [
+              "baryonic_input",
+              "raw_observation",
+              "prospective_holdout"
+            ]
+          },
+          {
+            "method": "zitrin-ltm-gauss",
+            "version": "v1",
+            "scientificRole": "model_derived_discovery_target",
+            "components": [
+              {
+                "component": "kappa",
+                "bytes": 77446080,
+                "sha256": "29d1997e34831b459a1bd87304b02ece0bec67220188cf1a17e5ff9210dab088",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/plckg287p32/models/zitrin-ltm-gauss/hlsp_relics_model_model_plckg287p32_zitrin-ltm-gauss_v1_kappa.fits"
+              },
+              {
+                "component": "x-arcsec-deflect",
+                "bytes": 77446080,
+                "sha256": "bc1c8ba6d0e1b34e2bdb0a3c35c744909e663cc3755c8d01b543280594df87cf",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/plckg287p32/models/zitrin-ltm-gauss/hlsp_relics_model_model_plckg287p32_zitrin-ltm-gauss_v1_x-arcsec-deflect.fits"
+              },
+              {
+                "component": "y-arcsec-deflect",
+                "bytes": 77446080,
+                "sha256": "da869753341d7f6ae8d554b90308236c5484db8cacb6d755169699d7382b5d46",
+                "sourceUrl": "https://archive.stsci.edu/hlsps/relics/plckg287p32/models/zitrin-ltm-gauss/hlsp_relics_model_model_plckg287p32_zitrin-ltm-gauss_v1_y-arcsec-deflect.fits"
+              }
+            ],
+            "bundleSha256": "7451ddf91da425af09e70341fb51ff5f50aae0392867b4ac570e96ad3c1237e4",
+            "mayBeUsedFor": [
+              "inverse_hypothesis_generation",
+              "published_model_comparator"
+            ],
+            "mayNotBeUsedAs": [
+              "baryonic_input",
+              "raw_observation",
+              "prospective_holdout"
+            ]
+          }
+        ],
+        "warning": "These maps include lens-model assumptions and dark-matter-like components. They are discovery targets and comparators, not raw observations."
+      },
+      "rawLensingEvidence": {
+        "scientificRole": "raw_observation",
+        "sourceContainer": {
+          "role": "raw_observation_source_container",
+          "bytes": 13320,
+          "sha256": "661913e6d7c4d6c925cd7c7608ad00727763f93d3297e9d4829174a7e47e6389",
+          "sourceUrl": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/686/A4/tablec1.dat",
+          "originalAcquisitionState": "sealed_and_hash_only",
+          "currentSampleState": "opened_and_spent_by_P0710_to_P0714"
+        },
+        "secureFamilies": 12,
+        "spectroscopicFamilies": 12,
+        "secureImages": 47,
+        "frozenReadinessGatePassed": true,
+        "coordinateSerializationValidated": true,
+        "scoreReadyNow": false,
+        "prospectiveHoldoutEligible": false,
+        "blockers": [
+          "spent_sample_not_prospective_holdout",
+          "published_per_image_position_uncertainties_not_registered"
+        ]
+      },
+      "readiness": {
+        "baryonicFieldInput": true,
+        "inverseHaloShapeDiscovery": true,
+        "rawForwardLensingScore": false,
+        "blindTheoryValidation": false
+      }
+    }
+  ],
+  "platformUse": {
+    "availableNow": [
+      "Select any of four content-addressed baryonic mass maps for a local 2D field solve.",
+      "Use two published lens-model methods per cluster as explicitly model-derived inverse targets.",
+      "Run five deterministic null families before interpreting a learned baryon-to-response kernel.",
+      "Serialize 65 secure raw image coordinates in 18 families for AS295 and PLCKG287 through the local adapter."
+    ],
+    "notEstablished": [
+      "No system in this registry is a new blind holdout.",
+      "No raw cluster target is score-ready with registered per-image positional uncertainties.",
+      "A reconstructed halo-like map is not evidence that gravity physically flowed along the inferred kernel.",
+      "The projected baryon maps do not uniquely determine line-of-sight three-dimensional structure.",
+      "The Vercel deployment does not execute heavy field or lensing jobs."
+    ]
+  },
+  "requirementsForUsefulSigmaOrInverseHaloResearch": [
+    {
+      "priority": 1,
+      "deliverable": "prospective_cluster_release",
+      "acceptance": "At least four untouched clusters selected before outcomes are opened, each with at least three secure source families, one spectroscopic family, eight images, registered astrometric uncertainties, and a fixed detectability policy."
+    },
+    {
+      "priority": 2,
+      "deliverable": "uncertainty_aware_complete_baryons",
+      "acceptance": "Per-cluster ensembles include multiband stellar mass, calibrated hot-gas mass and deprojection, intracluster light or an explicit bound, line-of-sight structure, WCS, PSF, masks, covariance, provenance, and license metadata."
+    },
+    {
+      "priority": 3,
+      "deliverable": "inverse_to_forward_freeze",
+      "acceptance": "Learn only on spent model-derived targets, beat every declared null, freeze one compact universal response law and all parameters, then remove halo targets before predicting raw held-out images."
+    },
+    {
+      "priority": 4,
+      "deliverable": "joint_cross_domain_report",
+      "acceptance": "One deterministic report compares galaxies, cluster image positions and topology, Solar-System limits, dark-matter comparators, MOND/RAR, uncertainty, numerical convergence, and parameter counts without cross-domain averaging rescuing a failed gate."
+    },
+    {
+      "priority": 5,
+      "deliverable": "production_scientific_execution",
+      "acceptance": "Durable queue, isolated workers, metadata database, object storage, auth, quotas, cancellation, retries, license enforcement, audit logs, and signed manifests reproduce local artifact hashes."
+    }
+  ],
+  "provenance": {
+    "relicsArchive": "https://archive.stsci.edu/hlsp/relics",
+    "relicsArchiveDoi": "10.17909/T9SP45",
+    "redistribution": "Hosted registry contains metadata and hashes only; source archive terms apply to the underlying products.",
+    "sourceFileSha256": {
+      "p0633Preregistration": "ea5e1db7d11e8b055c273ec4e1baf002f70e0e51fde12770de9477cdc08f72cc",
+      "p0640Acquisition": "83dcff79c9831b2ac77b67a8dadd6f530d20e1c412ffcf7eb19b0be7b6d54da6",
+      "p0641BaryonMaps": "7c262ce473ec4f925172b1f5dae767617dbcf2531bc097e09e12ecead23bbcd6",
+      "p0710Acquisition": "29bd481bed905d194cb833582cdcc15413214b0cd25721f983aabf714ffa1a4f",
+      "p0710Report": "c661f697f1537959b16fb271cbddea715858a095e696d1de3e877d3f29dac55d",
+      "p0713Readiness": "91fb59ab94fb41f38f486c74e433269ca4885671eb3b7dc2a3f9c6b78cd5665f",
+      "p0735RawAdapter": "fddec29c0f977ab88b2f9e5397b57bf4f84eaf7d8ade3d12d2895d25d3e8fb0c"
+    },
+    "p0710SampleSpent": true
+  },
+  "claimBoundary": [
+    "This registry is an evidence inventory, not a successful cluster-lensing result.",
+    "Inverse recovery against published lens maps generates candidate field laws; only forward prediction of unused raw observations can test those laws.",
+    "All four P0633 clusters are spent and cannot be promoted back into holdouts.",
+    "No per-cluster gravity parameter appears in the registered baryonic maps or readiness accounting."
+  ],
+  "registrySha256": "875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79"
+}

@@ -210,6 +210,8 @@ results/environmental_mog0/*
 !results/p0751c_holdout_adaptive_haar_twins/**
 !results/p0752_final_holdout_velocity_field_test/
 !results/p0752_final_holdout_velocity_field_test/**
+!results/p0753_cluster_evidence_registry/
+!results/p0753_cluster_evidence_registry/**
 !results/p0731_real_velocity_field_adapter_parity/
 results/p0731_real_velocity_field_adapter_parity/*
 !results/p0731_real_velocity_field_adapter_parity/SUMMARY.md

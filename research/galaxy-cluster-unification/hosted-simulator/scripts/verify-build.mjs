@@ -13,6 +13,7 @@ const requiredPaths = [
   "assets/resolved-twin-holdout-atlas.png",
   "assets/resolved-twin-holdout-curves.png",
   "data/resolved-twin-development-v1.json",
+  "data/resolved-cluster-evidence-v1.json",
   "data/sparc-v1.json",
   "dist/index.html",
   "dist/guide.html",
@@ -24,6 +25,7 @@ const requiredPaths = [
   "dist/assets/resolved-twin-holdout-atlas.png",
   "dist/assets/resolved-twin-holdout-curves.png",
   "dist/data/resolved-twin-development-v1.json",
+  "dist/data/resolved-cluster-evidence-v1.json",
   "dist/schemas/model-manifest-v1.schema.json",
   "dist/schemas/model-confirmation-request-v1.schema.json",
   "dist/schemas/array-bundle-request-v1.schema.json",
@@ -43,6 +45,7 @@ const requiredPaths = [
   "api/v1/runs.mjs",
   "api/v1/twin-runs.mjs",
   "api/v1/resolved-twin-evidence.mjs",
+  "api/v1/cluster-evidence.mjs",
   "api/v1/models/confirm.mjs",
   "api/v1/data-uploads.mjs",
   "api/v1/field-jobs.mjs",
@@ -51,6 +54,7 @@ const requiredPaths = [
   "api/v1/inverse-response-jobs.mjs",
   "api/v1/batches.mjs",
   "lib/resolved-twin-evidence.mjs",
+  "lib/resolved-cluster-evidence.mjs",
   "lib/local-field-job-service.mjs",
   "lib/observation-evaluation-preflight.mjs",
   "lib/galaxy-job-preflight.mjs",
@@ -72,6 +76,7 @@ for (const phrase of [
   "Inverse baryon-to-response discovery",
   "all_declared_families",
   "Why five controls",
+  "Four cluster maps are ready for discovery, zero are ready for a new blind verdict",
   "A genuinely useful result is a prediction, not a reconstruction",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);
@@ -83,9 +88,17 @@ const resolvedEvidence = JSON.parse(await readFile(resolve(root, "data", "resolv
 if (resolvedEvidence.systems.length !== 8 || resolvedEvidence.sample.scoredVelocityPixels !== 146532) {
   throw new Error("resolved twin evidence must contain eight systems and 146,532 scored pixels");
 }
+const clusterEvidence = JSON.parse(await readFile(resolve(root, "data", "resolved-cluster-evidence-v1.json"), "utf8"));
+if (
+  clusterEvidence.systems.length !== 4
+  || clusterEvidence.sample.inverseDiscoverySystems !== 4
+  || clusterEvidence.sample.rawForwardScoreReadySystems !== 0
+) {
+  throw new Error("cluster evidence must expose four inverse-development systems and zero score-ready holdouts");
+}
 const arrayBundleSchema = JSON.parse(await readFile(resolve(root, "dist", "schemas", "array-bundle-v1.schema.json"), "utf8"));
 const scientificRoles = arrayBundleSchema.properties.arrays.items.properties.scientificRole.enum;
 for (const role of ["baryonic_input", "model_derived_discovery_target", "raw_observation"]) {
   if (!scientificRoles.includes(role)) throw new Error(`array bundle schema is missing scientific role: ${role}`);
 }
-console.log(`verified static application, researcher guide, ${catalog.systems.length}-galaxy radial catalog, and ${resolvedEvidence.systems.length}-galaxy resolved evidence`);
+console.log(`verified static application, researcher guide, ${catalog.systems.length}-galaxy radial catalog, ${resolvedEvidence.systems.length}-galaxy resolved evidence, and ${clusterEvidence.systems.length}-cluster evidence registry`);

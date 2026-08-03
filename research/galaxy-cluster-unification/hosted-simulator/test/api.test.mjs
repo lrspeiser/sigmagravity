@@ -17,6 +17,7 @@ import hostedDataUploads from "../api/v1/data-uploads.mjs";
 import runs from "../api/v1/runs.mjs";
 import twinRuns from "../api/v1/twin-runs.mjs";
 import resolvedTwinEvidence from "../api/v1/resolved-twin-evidence.mjs";
+import clusterEvidence from "../api/v1/cluster-evidence.mjs";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
 import { readFileSync } from "node:fs";
 import { sha256 } from "../lib/canonical.mjs";
@@ -42,13 +43,14 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.20.0-preview");
+  assert.equal(output.body.version, "0.21.0-preview");
   assert.equal(output.body.capabilities.localInverseResponseMultiNullSuite, "available_in_dev_server");
   assert.equal(output.body.capabilities.researcherGuide, "available");
   assert.equal(output.body.capabilities.exactModelHashConfirmation, "required_for_execution");
   assert.equal(output.body.capabilities.heldoutObservedGalaxyTwins, "available");
   assert.equal(output.body.capabilities.resolvedTwinDevelopmentEvidence, "available");
   assert.equal(output.body.capabilities.resolvedTwinFinalHoldoutEvidence, "available");
+  assert.equal(output.body.capabilities.resolvedClusterEvidenceRegistry, "available");
   assert.equal(
     output.body.capabilities.localDecoupledObservationEvaluationJobs,
     "available_in_dev_server",
@@ -74,6 +76,36 @@ test("health API identifies the deployed contract version and local worker bound
     output.body.capabilities.localCoupledTwoPotentialPhotonMatter,
     "available_in_dev_server",
   );
+});
+
+test("cluster evidence keeps baryons, inferred halo maps, and raw lensing distinct", () => {
+  const all = call(clusterEvidence);
+  assert.equal(all.statusCode, 200);
+  assert.equal(all.body.schemaVersion, "sigma-resolved-cluster-evidence/1");
+  assert.equal(all.body.systems.length, 4);
+  assert.equal(all.body.sample.inverseDiscoverySystems, 4);
+  assert.equal(all.body.sample.rawCatalogReadinessGateSystems, 2);
+  assert.equal(all.body.sample.rawForwardScoreReadySystems, 0);
+  assert.equal(all.body.sample.prospectiveHoldoutSystems, 0);
+  const { registrySha256, ...registryCore } = all.body;
+  assert.equal(sha256(registryCore), registrySha256);
+  for (const system of all.body.systems) {
+    assert.equal(system.sampleState, "spent_development");
+    assert.equal(system.baryonicEvidence.scientificRole, "baryonic_input");
+    assert.equal(
+      system.modelDerivedLensingEvidence.scientificRole,
+      "model_derived_discovery_target",
+    );
+    assert.equal(system.rawLensingEvidence.scientificRole, "raw_observation");
+    assert.equal(system.rawLensingEvidence.scoreReadyNow, false);
+  }
+  const selected = call(clusterEvidence, { query: { system: "AS295" } });
+  assert.equal(selected.statusCode, 200);
+  assert.equal(selected.body.systems.length, 1);
+  assert.equal(selected.body.systems[0].rawLensingEvidence.secureImages, 18);
+  const missing = call(clusterEvidence, { query: { system: "NOT-A-CLUSTER" } });
+  assert.equal(missing.statusCode, 404);
+  assert.equal(missing.body.error, "unknown_system");
 });
 
 test("catalog API lists and retrieves systems", () => {

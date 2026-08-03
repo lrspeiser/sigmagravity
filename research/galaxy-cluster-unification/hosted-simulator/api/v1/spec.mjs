@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.20.0-preview",
-    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence with distinct morphology/transport/observation/geometry scores, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions, genuinely coupled field equations, separately typed photon and matter observables, and an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. Inverse results are hypothesis generators, not forward theory tests. Public heavy execution still requires durable storage and isolated workers.",
+    version: "0.21.0-preview",
+    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions, genuinely coupled field equations, separately typed photon and matter observables, and an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. Inverse results are hypothesis generators, not forward theory tests. Public heavy execution still requires durable storage and isolated workers.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
@@ -15,6 +15,7 @@ const specification = {
     "/api/v1/synthetic-galaxies": { post: { summary: "Create a deterministic synthetic radial galaxy" } },
     "/api/v1/twin-runs": { post: { summary: "Regenerate a compressed baryonic twin without observed speeds, then score a formula against the held-out rotation curve" } },
     "/api/v1/resolved-twin-evidence": { get: { summary: "Retrieve frozen four-development, two-validation, and two one-shot final-holdout 2D results with separate twin-fidelity, formula-transport, observed-velocity, and geometry scores" } },
+    "/api/v1/cluster-evidence": { get: { summary: "Retrieve the role-safe four-system RELICS registry of baryonic inputs, model-derived lensing discovery targets, raw observations, readiness, hashes, and blockers" } },
     "/api/v1/formulas/validate": { post: { summary: "Validate and hash a safe formula AST" } },
     "/api/v1/models/validate": { post: { summary: "Validate and hash a scalar/vector/tensor 2D/3D field-model manifest" } },
     "/api/v1/models/confirm": { post: { summary: "Bind explicit researcher acknowledgement to the exact validated computational model hash" } },
