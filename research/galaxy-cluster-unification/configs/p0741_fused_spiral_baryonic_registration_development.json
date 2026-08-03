@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "sigma-p0741-fused-spiral-baryonic-registration-development/1",
+  "stage": "P0741",
+  "status": "frozen_before_development_wise_array_opening",
+  "purpose": "Repair the P0739 stellar-footprint failure with a velocity-blind SINGS-plus-AllWISE fusion and produce complete development baryonic maps suitable for later morphology round trips and held-out velocity-field tests.",
+  "parents": {
+    "p0739Config": "configs/p0739_spiral_baryonic_registration_development.json",
+    "p0739ResultSha256": "6ce380c815de9d06bc26e0b0c12b5291d5d50fa4a4cdb4c9246b12a509b11fff",
+    "p0740Config": "configs/p0740_allwise_w1_coverage_supplement.json",
+    "p0740ResultSha256": "beac0315c81a34736784025d67bbe316ac1c4b22c28caf74ee0d2b01f26b2d1e"
+  },
+  "eligibleSplits": ["development"],
+  "systems": ["NGC2403", "NGC3198", "NGC5055", "NGC7793"],
+  "sealedUntilLater": {
+    "validationSystems": ["NGC3521", "NGC6946"],
+    "holdoutSystems": ["NGC2841", "NGC7331"],
+    "targetProductsForEverySystem": ["THINGS moment 1", "THINGS moment 2", "SPARC resolved observed rotation curve"]
+  },
+  "permittedInputs": [
+    "Every P0739-permitted development baryonic input",
+    "P0740 development AllWISE W1 intensity and uncertainty arrays",
+    "Frozen P0740 hashes, WCS headers, coadd IDs, and cutout geometry"
+  ],
+  "forbiddenInputs": [
+    "Any validation or holdout SINGS or WISE pixel array",
+    "THINGS moment 1 or moment 2 array from any split",
+    "SPARC observed rotation speeds or errors",
+    "Any gravity-formula prediction, score, or parameter",
+    "Dark-matter halo parameters"
+  ],
+  "processing": {
+    "baseGeometry": "Reuse P0739 sky center, image-only position angle, published inclination, extent, grid, gas registration, foreground rule, beam estimate, and mass normalization.",
+    "wiseTileBackground": "Subtract a robust median measured in the outer 15 percent border of each frozen cutout; retain the robust MAD noise estimate.",
+    "wiseMosaic": "Sample every frozen coadd on the P0739 face-on grid and combine positive, finite samples with inverse-variance weights. Tile membership was frozen before image inspection.",
+    "wiseForegroundSuppression": "Apply the same universal 12-MAD positive compact-residual replacement used by P0739 after mosaicking; protect the central 0.2 effective radii.",
+    "crossCalibration": "After independently subtracting backgrounds and matching both maps to the THINGS beam, estimate one positive per-galaxy multiplicative WISE-to-SINGS scale as the median SINGS/WISE ratio over finite overlap pixels between 0.2 and 5 effective radii where both maps exceed three robust noise levels and remain below their 99.5-percent positive caps.",
+    "crossCalibrationInterpretation": "The scale converts AllWISE DN morphology into the SINGS intensity system. It is an observational calibration caused by different instruments and units, not a gravity parameter or free mass normalization.",
+    "fusion": "Use beam-matched SINGS wherever its registered positive-weight footprint is valid and scaled beam-matched WISE elsewhere; use no kinematic information to choose the boundary.",
+    "stellarMassCalibration": "Normalize the completed fused morphology once to published SPARC 3.6 micron luminosity times the unchanged universal M/L=0.5.",
+    "gasMassCalibration": "Retain P0739 normalization to 1.36 times published H I mass.",
+    "uncertaintySensitivity": "Report cross-calibration scales from four fixed sky quadrants and the full overlap; do not tune the fusion from a gravity residual.",
+    "velocityArraysOpened": false,
+    "validationArraysOpened": false,
+    "holdoutArraysOpened": false,
+    "gravityParameters": 0
+  },
+  "engineeringGates": {
+    "requiredSystems": 4,
+    "requiredWiseCoadds": 9,
+    "requiredValidationArraysOpened": 0,
+    "requiredHoldoutArraysOpened": 0,
+    "requiredVelocityOrDispersionArraysOpened": 0,
+    "maximumGravityParameters": 0,
+    "minimumFiniteStellarFootprintFractionInsideHiR995": 0.98,
+    "minimumCrossCalibrationPixels": 500,
+    "minimumPositiveSingsWiseSpearmanCorrelation": 0.70,
+    "maximumQuadrantScaleRobustFractionalSpread": 0.35,
+    "maximumGasMassRelativeError": 1e-10,
+    "maximumStellarMassRelativeError": 1e-10,
+    "maximumOuterCellMassFraction": 0.005,
+    "allOutputBundlesContentHashed": true
+  },
+  "claimBoundary": [
+    "P0741 is a development-only observational registration test and cannot validate or rank gravity formulas.",
+    "The per-galaxy WISE/SINGS scale is disclosed as instrument cross-calibration; the completed stellar map still receives only one published-luminosity mass normalization.",
+    "Passing P0741 says that later formula failures are less likely to be caused by a rectangular stellar-image footprint; it does not prove the unobserved outskirts are uniquely reconstructed.",
+    "Validation and holdout pixel arrays and every kinematic target remain sealed."
+  ]
+}
