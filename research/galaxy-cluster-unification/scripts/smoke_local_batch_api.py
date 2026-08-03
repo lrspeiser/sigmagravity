@@ -95,9 +95,18 @@ def upload_ddo101(base: str, temporary: Path) -> dict[str, Any]:
         axis = np.asarray(source["axis_kpc"], dtype=float)
         gas = np.asarray(source["gas"], dtype=float)
         stars = np.asarray(source["stars"], dtype=float)
+    gas_sigma = np.maximum(0.15 * np.abs(gas), 1.0e3)
+    stars_sigma = np.maximum(0.20 * np.abs(stars), 1.0e3)
+    conditioning_mask = np.asarray((gas + stars) > 0.0, dtype=float)
     bundle = write_array_bundle(
         temporary / "bundle",
-        {"gas": gas, "stars": stars},
+        {
+            "gas": gas,
+            "stars": stars,
+            "gas_sigma": gas_sigma,
+            "stars_sigma": stars_sigma,
+            "conditioning_mask": conditioning_mask,
+        },
         {
             "schemaVersion": "sigma-array-bundle-request/1",
             "geometry": {
@@ -121,8 +130,32 @@ def upload_ddo101(base: str, temporary: Path) -> dict[str, Any]:
                     "rank": "scalar",
                     "role": "source",
                 },
+                "gas_surface_density_uncertainty": {
+                    "npzKey": "gas_sigma",
+                    "unit": "M_sun/kpc^2",
+                    "rank": "scalar",
+                    "role": "uncertainty",
+                },
+                "stellar_surface_density_uncertainty": {
+                    "npzKey": "stars_sigma",
+                    "unit": "M_sun/kpc^2",
+                    "rank": "scalar",
+                    "role": "uncertainty",
+                },
+                "baryonic_conditioning_mask": {
+                    "npzKey": "conditioning_mask",
+                    "unit": "1",
+                    "rank": "scalar",
+                    "role": "mask",
+                },
             },
-            "provenance": {"kind": "P0639 registered baryonic map", "galaxy": "DDO101"},
+            "provenance": {
+                "kind": "P0639 registered baryonic map",
+                "galaxy": "DDO101",
+                "conditioningUncertaintyStatus": (
+                    "commissioning fractional uncertainty fixture, not a published error map"
+                ),
+            },
             "license": {"id": "research-source-license", "redistributionAllowed": False},
         },
     )
@@ -238,6 +271,7 @@ def galaxy_job(
     parameters: dict[str, Any] | None = None,
     controls: dict[str, Any] | None = None,
     uncertainty_ensemble: dict[str, Any] | None = None,
+    vertical_enabled: bool | None = None,
     output_cells: int | None = None,
     seed: int,
 ) -> tuple[dict[str, Any], dict[str, bytes]]:
@@ -246,7 +280,9 @@ def galaxy_job(
         "operation": operation,
         "galaxy": "DDO101",
         "vertical": {
-            "enabled": operation == "generate",
+            "enabled": operation == "generate"
+            if vertical_enabled is None
+            else vertical_enabled,
             "realizations": 1,
             "zCells": 9,
             "seed": seed,
@@ -271,8 +307,8 @@ def galaxy_job(
         payload["parameterPackage"] = parameters
         payload["generationControls"] = controls or {}
         payload["outputGrid"] = {"cellsPerAxis": int(output_cells or 25)}
-        if uncertainty_ensemble is not None:
-            payload["uncertaintyEnsemble"] = uncertainty_ensemble
+    if uncertainty_ensemble is not None:
+        payload["uncertaintyEnsemble"] = uncertainty_ensemble
     submission = request_json(f"{base}/api/v1/galaxy-jobs", method="POST", payload=payload)
     completed = wait(base, submission)
     _, downloaded = download_artifacts(base, submission)
@@ -298,11 +334,10 @@ def main() -> None:
             output_cells=25,
             seed=302,
         )
-        ensemble_replay, _ = galaxy_job(
+        ensemble_replay, ensemble_artifacts = galaxy_job(
             base,
-            operation="generate",
-            parameters=parameters,
-            controls={},
+            operation="extract_roundtrip",
+            upload_id=upload["id"],
             uncertainty_ensemble={
                 "enabled": True,
                 "realizations": 2,
@@ -313,10 +348,18 @@ def main() -> None:
                     "gasRadialScaleLnSigma": 0.04,
                     "stellarRadialScaleLnSigma": 0.04,
                 },
+                "conditioning": {
+                    "enabled": True,
+                    "likelihood": "diagonal_gaussian_surface_density",
+                    "useMask": True,
+                    "minimumValidPixelsPerComponent": 25,
+                    "correlationAreaPixels": 9.0,
+                },
             },
-            output_cells=25,
+            vertical_enabled=True,
             seed=302,
         )
+        conditioning = json.loads(ensemble_artifacts["baryonic_conditioning.json"])
         compact, _ = galaxy_job(
             base,
             operation="generate",
@@ -478,19 +521,40 @@ def main() -> None:
             raise RuntimeError("batch lost published DDO101 rotation points")
         uncertainty = aggregate["withinSystemUncertainty"]
         if (
-            uncertainty["status"] != "prior_prediction_spread_not_measurement_posterior"
+            uncertainty["status"]
+            != "baryonic_surface_likelihood_conditioned_partial_posterior"
             or uncertainty["ensembleParentCount"] != 1
             or uncertainty["ensembleRealizationCount"] != 2
+            or uncertainty["surfaceLikelihoodConditionedParentCount"] != 1
+            or uncertainty["degenerateConditionedParentCount"] != 1
+            or uncertainty["credibleIntervalReady"] is not False
+            or uncertainty["predictionQuantilePoints"] != 10
         ):
             raise RuntimeError("batch did not publish honest ensemble propagation metadata")
+        if (
+            conditioning["surfaceLikelihoodConditioned"] is not True
+            or conditioning["verticalStructureConditioned"] is not False
+            or not np.isclose(sum(conditioning["weights"]), 1.0)
+            or len(set(np.round(conditioning["weights"], 14))) < 2
+        ):
+            raise RuntimeError("baryonic image conditioning did not produce valid weights")
         ensemble_summary = json.loads(downloaded["ensemble_summary.json"])
         if (
             len(ensemble_summary["systems"]) != 1
             or ensemble_summary["systems"][0]["realizationCount"] != 2
             or ensemble_summary["systems"][0]["metrics"]["observationRmseMPerS"]["count"]
             != 2
+            or ensemble_summary["systems"][0]["weighting"][
+                "surfaceLikelihoodConditioned"
+            ]
+            is not True
         ):
             raise RuntimeError("ensemble prediction summary is incomplete")
+        prediction_quantiles = downloaded["ensemble_prediction_quantiles.csv"].decode(
+            "utf-8"
+        )
+        if len(prediction_quantiles.strip().splitlines()) != 11:
+            raise RuntimeError("weighted per-radius prediction quantiles are incomplete")
         per_realization = downloaded["per_realization.csv"].decode("utf-8")
         if "DDO101-ensemble::s000::v000" not in per_realization or "DDO101-ensemble::s001::v000" not in per_realization:
             raise RuntimeError("per-realization report lost deterministic child identities")
@@ -505,6 +569,7 @@ def main() -> None:
             "aggregate_scores.json",
             "batch.json",
             "child_jobs.json",
+            "ensemble_prediction_quantiles.csv",
             "ensemble_summary.csv",
             "ensemble_summary.json",
             "failures.csv",
@@ -534,6 +599,18 @@ def main() -> None:
                     "successfulSystems": aggregate["succeededSystems"],
                     "parentSystems": aggregate["parentSystemCount"],
                     "ensembleRealizations": uncertainty["ensembleRealizationCount"],
+                    "baryonicConditioningStatus": conditioning["status"],
+                    "baryonicConditioningWeights": conditioning["weights"],
+                    "baryonicConditioningEffectiveSampleSize": conditioning[
+                        "effectiveSampleSize"
+                    ],
+                    "degenerateConditionedParentCount": uncertainty[
+                        "degenerateConditionedParentCount"
+                    ],
+                    "credibleIntervalReady": uncertainty["credibleIntervalReady"],
+                    "weightedPredictionQuantilePoints": uncertainty[
+                        "predictionQuantilePoints"
+                    ],
                     "convergenceFraction": aggregate["convergenceFraction"],
                     "maximumEquationResidual": aggregate["maximumEquationResidual"],
                     "perObjectGravityParameters": aggregate["perObjectGravityParameters"],

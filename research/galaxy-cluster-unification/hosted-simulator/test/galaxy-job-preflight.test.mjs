@@ -30,6 +30,48 @@ function bundle() {
   return { ...core, bundleSha256: sha256(core) };
 }
 
+function conditionedBundle() {
+  const value = bundle();
+  value.arrays.push(
+    {
+      key: "gas_surface_density_uncertainty",
+      npzKey: "gas_sigma",
+      unit: "M_sun/kpc^2",
+      rank: "scalar",
+      role: "uncertainty",
+      dtype: "<f8",
+      shape: [65, 65],
+      elementCount: 4225,
+      contentSha256: "3".repeat(64),
+    },
+    {
+      key: "stellar_surface_density_uncertainty",
+      npzKey: "stars_sigma",
+      unit: "M_sun/kpc^2",
+      rank: "scalar",
+      role: "uncertainty",
+      dtype: "<f8",
+      shape: [65, 65],
+      elementCount: 4225,
+      contentSha256: "4".repeat(64),
+    },
+    {
+      key: "baryonic_conditioning_mask",
+      npzKey: "conditioning_mask",
+      unit: "1",
+      rank: "scalar",
+      role: "mask",
+      dtype: "<f8",
+      shape: [65, 65],
+      elementCount: 4225,
+      contentSha256: "5".repeat(64),
+    },
+  );
+  const core = Object.fromEntries(Object.entries(value).filter(([key]) => key !== "bundleSha256"));
+  value.bundleSha256 = sha256(core);
+  return value;
+}
+
 function packageFixture() {
   const core = {
     schemaVersion: "1.0.0",
@@ -150,6 +192,60 @@ test("uncertainty preflight requires an inclination reference and enforces resou
       inputBundle: oversizedBundle,
     }),
     /256 MiB raw-array limit/,
+  );
+});
+
+test("preflight binds a gravity-independent baryonic image likelihood", () => {
+  const result = prepareGalaxyJob({
+    submission: {
+      schemaVersion: "sigma-galaxy-job-submit/1",
+      operation: "extract_roundtrip",
+      dataUploadId: `upload_${"6".repeat(24)}`,
+      uncertaintyEnsemble: {
+        enabled: true,
+        realizations: 6,
+        seed: 99,
+        conditioning: {
+          enabled: true,
+          likelihood: "diagonal_gaussian_surface_density",
+          useMask: true,
+          minimumValidPixelsPerComponent: 100,
+          correlationAreaPixels: 6.5,
+        },
+      },
+      outputLicense: { id: "CC0-1.0", redistributionAllowed: true },
+    },
+    inputBundle: conditionedBundle(),
+  });
+  assert.equal(result.workerRequest.uncertaintyEnsemble.conditioning.enabled, true);
+  assert.equal(result.workerRequest.uncertaintyEnsemble.conditioning.use_mask, true);
+  assert.equal(result.workerRequest.uncertaintyEnsemble.conditioning.correlation_area_pixels, 6.5);
+  assert.equal(result.parameterAccounting.gravityPerObject, 0);
+  assert.match(result.warnings.join(" "), /Velocity, lensing, and gravity-field targets are forbidden/);
+});
+
+test("conditioning refuses missing uncertainty data and generated-only packages", () => {
+  const extraction = {
+    schemaVersion: "sigma-galaxy-job-submit/1",
+    operation: "extract_roundtrip",
+    uncertaintyEnsemble: { enabled: true, conditioning: { enabled: true } },
+    outputLicense: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  assert.throws(
+    () => prepareGalaxyJob({ submission: extraction, inputBundle: bundle() }),
+    /requires gas_surface_density_uncertainty/,
+  );
+  assert.throws(
+    () => prepareGalaxyJob({
+      submission: {
+        schemaVersion: "sigma-galaxy-job-submit/1",
+        operation: "generate",
+        parameterPackage: packageFixture(),
+        uncertaintyEnsemble: { enabled: true, conditioning: { enabled: true } },
+        outputLicense: { id: "CC0-1.0", redistributionAllowed: true },
+      },
+    }),
+    /available only for extract_roundtrip/,
   );
 });
 

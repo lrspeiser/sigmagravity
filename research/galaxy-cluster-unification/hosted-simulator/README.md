@@ -19,6 +19,17 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.24 adds gravity-independent baryonic image conditioning. Declared
+gas and stellar surface-density uncertainty maps can assign importance weights
+to generated surface draws without reading velocity, lensing, dark-matter, or
+solved-gravity targets. Verified weights propagate into 2D/3D field children,
+weighted score summaries, and per-radius prediction bands. The real two-draw
+DDO101 acceptance collapsed to one effective draw, so reports label the result
+`degenerate_importance_weights` and `credibleIntervalReady: false`. Vertical
+structure, full covariance, PSF/beam forward likelihoods, and adaptive
+sampling remain unfinished. See
+[`../docs/BARYONIC_IMAGE_CONDITIONING_MILESTONE.md`](../docs/BARYONIC_IMAGE_CONDITIONING_MILESTONE.md).
+
 Version 0.23 connects the baryonic prior ensembles to the generic batch
 solver. A batch system can select all or named surface and vertical
 realizations from a completed galaxy job. The gateway verifies and slices the

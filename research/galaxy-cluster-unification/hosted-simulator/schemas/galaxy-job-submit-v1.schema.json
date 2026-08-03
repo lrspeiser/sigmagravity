@@ -55,6 +55,25 @@
         "enabled": { "type": "boolean" },
         "realizations": { "type": "integer", "minimum": 1, "maximum": 16 },
         "seed": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+        "conditioning": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "likelihood": { "const": "diagonal_gaussian_surface_density" },
+            "useMask": { "type": "boolean" },
+            "minimumValidPixelsPerComponent": {
+              "type": "integer",
+              "minimum": 5,
+              "maximum": 1000000
+            },
+            "correlationAreaPixels": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 4096
+            }
+          }
+        },
         "priors": {
           "type": "object",
           "additionalProperties": false,

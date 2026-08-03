@@ -103,7 +103,7 @@ export function prepareBatch({ submission, resolvedSystems }) {
     request: fieldRequest,
   }).modelSha256;
   const core = canonicalize({
-    schemaVersion: "sigma-batch-preflight/2",
+    schemaVersion: "sigma-batch-preflight/3",
     modelSha256,
     parameterPolicy: policy,
     fieldRequest,
@@ -125,6 +125,9 @@ export function prepareBatch({ submission, resolvedSystems }) {
   const scoredObservationTargets = childPreflights.reduce(
     (sum, item) => sum + item.observationTargetSummary.filter((target) => target.scored).length,
     0,
+  );
+  const surfaceConditionedEnsemble = resolvedSystems.some(
+    (system) => system.source?.baryonicConditioning?.surfaceLikelihoodConditioned,
   );
   return {
     valid: true,
@@ -149,7 +152,9 @@ export function prepareBatch({ submission, resolvedSystems }) {
         "Massive-tracer and photon-lensing scores are produced by separately content-addressed observation jobs after each immutable field solve.",
         "Changing a measured array, mask, uncertainty, beam, or target declaration does not alter the field-child identity when the model and source field inputs are unchanged.",
         "Velocity, deflection, and reduced-shear residuals remain in separate named channels and units; unsubmitted observables are not evaluated.",
-        "Ensemble summaries, when present, measure prediction spread under declared baryonic priors; they are not likelihood-derived posterior intervals.",
+        surfaceConditionedEnsemble
+          ? "Conditioned ensemble weights use only declared baryonic surface-density maps, uncertainty maps, and masks; vertical draws remain prior-weighted and velocity or lensing targets never set a baryonic weight."
+          : "Ensemble summaries, when present, measure prediction spread under declared baryonic priors; they are not likelihood-derived posterior intervals.",
       ]
       : [
         "A converged batch proves execution of one frozen model, not agreement with observations.",

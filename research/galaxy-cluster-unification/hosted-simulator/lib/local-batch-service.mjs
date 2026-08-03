@@ -7,7 +7,7 @@ import { LocalServiceError } from "./local-field-job-service.mjs";
 
 // Report contents participate in batch identity through this version. Bump it
 // whenever deterministic batch artifacts or aggregation semantics change.
-const SERVICE_VERSION = "sigma-local-batch-service/5";
+const SERVICE_VERSION = "sigma-local-batch-service/6";
 const IDENTIFIER = /^batch_[0-9a-f]{24}$/;
 const TERMINAL_CHILD_STATES = new Set([
   "succeeded",
@@ -108,6 +108,68 @@ function distributionSummary(values) {
   };
 }
 
+function weightedDistributionSummary(values, weights) {
+  const pairs = values
+    .map((value, index) => ({ value, weight: weights[index] }))
+    .filter(({ value, weight }) => Number.isFinite(value) && Number.isFinite(weight) && weight > 0)
+    .sort((left, right) => left.value - right.value);
+  if (!pairs.length) {
+    return {
+      count: 0,
+      selectedWeight: 0,
+      effectiveSampleSize: 0,
+      p16: null,
+      p50: null,
+      p84: null,
+      minimum: null,
+      maximum: null,
+    };
+  }
+  const selectedWeight = pairs.reduce((sum, pair) => sum + pair.weight, 0);
+  const normalized = pairs.map((pair) => ({ ...pair, weight: pair.weight / selectedWeight }));
+  const at = (probability) => {
+    let cumulative = 0;
+    for (const pair of normalized) {
+      cumulative += pair.weight;
+      if (cumulative >= probability) return pair.value;
+    }
+    return normalized.at(-1).value;
+  };
+  return {
+    count: normalized.length,
+    selectedWeight,
+    effectiveSampleSize: 1 / normalized.reduce((sum, pair) => sum + pair.weight ** 2, 0),
+    p16: at(0.16),
+    p50: at(0.50),
+    p84: at(0.84),
+    minimum: normalized[0].value,
+    maximum: normalized.at(-1).value,
+  };
+}
+
+function parseCsvLine(line) {
+  const values = [];
+  let value = "";
+  let quoted = false;
+  for (let index = 0; index < line.length; index += 1) {
+    const character = line[index];
+    if (quoted && character === '"' && line[index + 1] === '"') {
+      value += '"';
+      index += 1;
+    } else if (character === '"') {
+      quoted = !quoted;
+    } else if (character === "," && !quoted) {
+      values.push(value);
+      value = "";
+    } else {
+      value += character;
+    }
+  }
+  if (quoted) throw new Error("unterminated quoted CSV field");
+  values.push(value);
+  return values;
+}
+
 function realizationSystemId(parentSystemId, realization) {
   const surface = String(realization.surfaceRealization).padStart(3, "0");
   const vertical = realization.verticalRealization === undefined
@@ -162,6 +224,7 @@ export class LocalBatchService {
         "per_realization.csv",
         "ensemble_summary.csv",
         "ensemble_summary.json",
+        "ensemble_prediction_quantiles.csv",
         "aggregate_scores.json",
         "failures.csv",
         "report.html",
@@ -245,6 +308,7 @@ export class LocalBatchService {
               artifact: source.galaxyArtifact,
               parentEnsembleBundleSha256: description.bundleSha256,
               uncertaintyStatus: description.uncertaintyStatus,
+              baryonicConditioning: realization.baryonicConditioning,
               realization,
               materializedUploadId: upload.id,
             },
@@ -585,6 +649,7 @@ export class LocalBatchService {
     const failureRows = [];
     const childManifest = [];
     const observationPredictionRows = [];
+    const ensembleCircularPredictionRecords = [];
     const velocityFieldPredictionRows = [];
     const multipleImagePredictionRows = [];
     const multipleImageFamilyRows = [];
@@ -651,7 +716,28 @@ export class LocalBatchService {
             throw new Error(`observation job ${observationChild.id} returned an incompatible circular-speed prediction table`);
           }
           for (const line of lines.slice(1)) {
-            if (line) observationPredictionRows.push(`${csvCell(definition.systemId)},${line}`);
+            if (line) {
+              observationPredictionRows.push(`${csvCell(definition.systemId)},${line}`);
+              if (definition.realization) {
+                const columns = parseCsvLine(line);
+                if (columns.length !== 9) {
+                  throw new Error(`observation job ${observationChild.id} returned a malformed circular-speed row`);
+                }
+                ensembleCircularPredictionRecords.push({
+                  parentSystemId: definition.parentSystemId ?? definition.systemId,
+                  systemId: definition.systemId,
+                  targetId: columns[0],
+                  pointIndex: Number(columns[1]),
+                  radiusM: Number(columns[2]),
+                  predictedSpeedMPerS: Number(columns[3]),
+                  observedSpeedMPerS: Number(columns[4]),
+                  uncertaintyMPerS: Number(columns[5]),
+                  residualMPerS: Number(columns[6]),
+                  realizationWeight: definition.source.baryonicConditioning?.jointRealizationWeight ?? null,
+                  weightStatus: definition.source.baryonicConditioning?.status ?? "unspecified",
+                });
+              }
+            }
           }
         }
         if (targetKinds.has("line_of_sight_velocity_field")) {
@@ -707,6 +793,8 @@ export class LocalBatchService {
         parent_system_id: definition.parentSystemId ?? definition.systemId,
         surface_realization: definition.realization?.surfaceRealization ?? null,
         vertical_realization: definition.realization?.verticalRealization ?? null,
+        baryonic_realization_weight: definition.source.baryonicConditioning?.jointRealizationWeight ?? null,
+        baryonic_weight_status: definition.source.baryonicConditioning?.status ?? null,
         source_kind: definition.source.kind,
         source_id: definition.source.id ?? definition.source.galaxyJobId,
         field_job_id: fieldChild.id,
@@ -749,6 +837,7 @@ export class LocalBatchService {
         systemId: definition.systemId,
         parentSystemId: definition.parentSystemId ?? definition.systemId,
         realization: definition.realization ?? null,
+        baryonicConditioning: definition.source.baryonicConditioning ?? null,
         source: definition.source,
         inputBundleSha256: definition.inputBundleSha256,
         observationBundleSha256: definition.observationBundleSha256,
@@ -853,22 +942,76 @@ export class LocalBatchService {
     }
     const ensembleSummaries = [...ensembleGroups.entries()]
       .sort(([left], [right]) => left.localeCompare(right))
-      .map(([parentSystemId, members]) => ({
-        schemaVersion: "sigma-batch-ensemble-system-summary/1",
-        parentSystemId,
-        galaxyJobId: members[0].definition.source.galaxyJobId,
-        artifact: members[0].definition.source.artifact,
-        parentEnsembleBundleSha256: members[0].definition.source.parentEnsembleBundleSha256,
-        uncertaintyStatus: members[0].definition.source.uncertaintyStatus,
-        realizationCount: members.length,
-        succeededRealizations: members.filter(({ row }) => row.state === "succeeded").length,
-        fieldSucceededRealizations: members.filter(({ row }) => row.field_state === "succeeded").length,
-        observationSucceededRealizations: members.filter(({ row }) => row.observation_state === "succeeded").length,
-        metrics: Object.fromEntries(ensembleMetricDefinitions.map(([rowKey, outputKey]) => [
-          outputKey,
-          distributionSummary(members.map(({ row }) => row[rowKey])),
-        ])),
-      }));
+      .map(([parentSystemId, members]) => {
+        const weights = members.map(({ definition }) => (
+          definition.source.baryonicConditioning?.jointRealizationWeight ?? null
+        ));
+        const conditioning = members[0].definition.source.baryonicConditioning ?? {
+          status: "unspecified",
+          surfaceLikelihoodConditioned: false,
+          verticalStructureConditioned: false,
+          weightsSha256: null,
+        };
+        const diagnostic = weightedDistributionSummary(
+          members.map((_, index) => index),
+          weights,
+        );
+        const selectedEffectiveFraction = members.length
+          ? diagnostic.effectiveSampleSize / members.length
+          : 0;
+        const selectedWeightQualityStatus = conditioning.surfaceLikelihoodConditioned
+          ? selectedEffectiveFraction <= 0.5
+            ? "degenerate_importance_weights"
+            : selectedEffectiveFraction < 0.7
+              ? "low_effective_sample_size"
+              : "adequate_for_commissioning_only"
+          : "not_conditioned";
+        return {
+          schemaVersion: "sigma-batch-ensemble-system-summary/2",
+          parentSystemId,
+          galaxyJobId: members[0].definition.source.galaxyJobId,
+          artifact: members[0].definition.source.artifact,
+          parentEnsembleBundleSha256: members[0].definition.source.parentEnsembleBundleSha256,
+          uncertaintyStatus: members[0].definition.source.uncertaintyStatus,
+          realizationCount: members.length,
+          succeededRealizations: members.filter(({ row }) => row.state === "succeeded").length,
+          fieldSucceededRealizations: members.filter(({ row }) => row.field_state === "succeeded").length,
+          observationSucceededRealizations: members.filter(({ row }) => row.observation_state === "succeeded").length,
+          weighting: {
+            status: conditioning.status,
+            weightsSha256: conditioning.weightsSha256,
+            surfaceLikelihoodConditioned: Boolean(conditioning.surfaceLikelihoodConditioned),
+            verticalStructureConditioned: Boolean(conditioning.verticalStructureConditioned),
+            selectedWeight: diagnostic.selectedWeight,
+            selectedEffectiveSampleSize: diagnostic.effectiveSampleSize,
+            selectedNormalizedEffectiveSampleSize: selectedEffectiveFraction,
+            selectedWeightQualityStatus,
+            fullEnsembleEffectiveSampleSize: conditioning.effectiveSampleSize ?? null,
+            fullEnsembleNormalizedEffectiveSampleSize: conditioning.normalizedEffectiveSampleSize ?? null,
+            fullEnsembleWeightQualityStatus: conditioning.weightQualityStatus ?? null,
+            credibleIntervalReady: false,
+            renormalizedAcrossSelectedRealizations: true,
+          },
+          metrics: Object.fromEntries(ensembleMetricDefinitions.map(([rowKey, outputKey]) => [
+            outputKey,
+            distributionSummary(members.map(({ row }) => row[rowKey])),
+          ])),
+          weightedMetrics: Object.fromEntries(ensembleMetricDefinitions.map(([rowKey, outputKey]) => [
+            outputKey,
+            weightedDistributionSummary(members.map(({ row }) => row[rowKey]), weights),
+          ])),
+        };
+      });
+    const ensembleConditioningStatuses = new Set(
+      ensembleSummaries.map((summary) => summary.weighting.status),
+    );
+    const conditionedEnsembleCount = ensembleSummaries.filter(
+      (summary) => summary.weighting.surfaceLikelihoodConditioned,
+    ).length;
+    const degenerateConditionedParentCount = ensembleSummaries.filter(
+      (summary) => summary.weighting.surfaceLikelihoodConditioned
+        && summary.weighting.selectedWeightQualityStatus === "degenerate_importance_weights",
+    ).length;
     const parentSystemCount = new Set(
       record.childJobs.map((definition) => definition.parentSystemId ?? definition.systemId),
     ).size;
@@ -898,14 +1041,27 @@ export class LocalBatchService {
       validObservationPoints,
       parentSystemCount,
       withinSystemUncertainty: {
-        status: ensembleSummaries.length
-          ? "prior_prediction_spread_not_measurement_posterior"
-          : "not_requested",
+        status: !ensembleSummaries.length
+          ? "not_requested"
+          : conditionedEnsembleCount === ensembleSummaries.length
+            ? "baryonic_surface_likelihood_conditioned_partial_posterior"
+            : conditionedEnsembleCount === 0
+              ? "prior_prediction_spread_not_measurement_posterior"
+              : "mixed_prior_and_conditioned_ensembles",
         ensembleParentCount: ensembleSummaries.length,
         ensembleRealizationCount: [...ensembleGroups.values()].reduce((sum, members) => sum + members.length, 0),
+        surfaceLikelihoodConditionedParentCount: conditionedEnsembleCount,
+        degenerateConditionedParentCount,
+        credibleIntervalReady: false,
+        conditioningStatuses: [...ensembleConditioningStatuses].sort(),
         summaryArtifact: ensembleSummaries.length ? "ensemble_summary.json" : null,
+        predictionQuantileArtifact: ensembleCircularPredictionRecords.length
+          ? "ensemble_prediction_quantiles.csv"
+          : null,
         interpretation: ensembleSummaries.length
-          ? "Percentiles summarize predictions across declared baryonic prior realizations; they are not parameter-fit or likelihood-derived credible intervals."
+          ? conditionedEnsembleCount
+            ? `${degenerateConditionedParentCount} conditioned parent(s) have degenerate selected importance weights. Weighted percentiles use declared baryonic maps and uncertainties only; unmeasured vertical structure retains its prior, no gravity target sets a weight, and these bands are not yet credible intervals.`
+            : "Percentiles summarize predictions across declared baryonic prior realizations; they are not parameter-fit or likelihood-derived credible intervals."
           : "No galaxy density ensemble was propagated in this batch.",
       },
       observationChannelAggregates,
@@ -916,6 +1072,94 @@ export class LocalBatchService {
       observationReducedChiSquare: velocityAggregate?.reducedChiSquare ?? null,
       claimBoundary: record.preflight.claimBoundary,
     };
+    const ensemblePredictionGroups = new Map();
+    for (const prediction of ensembleCircularPredictionRecords) {
+      if (
+        !Number.isSafeInteger(prediction.pointIndex)
+        || ![
+          prediction.radiusM,
+          prediction.predictedSpeedMPerS,
+          prediction.observedSpeedMPerS,
+          prediction.uncertaintyMPerS,
+          prediction.residualMPerS,
+          prediction.realizationWeight,
+        ].every(Number.isFinite)
+        || prediction.realizationWeight < 0
+      ) {
+        throw new Error(`ensemble circular-speed prediction for ${prediction.systemId} is not finite`);
+      }
+      const key = JSON.stringify([
+        prediction.parentSystemId,
+        prediction.targetId,
+        prediction.pointIndex,
+      ]);
+      if (!ensemblePredictionGroups.has(key)) ensemblePredictionGroups.set(key, []);
+      ensemblePredictionGroups.get(key).push(prediction);
+    }
+    const ensemblePredictionQuantiles = [...ensemblePredictionGroups.values()]
+      .map((members) => {
+        const first = members[0];
+        for (const member of members.slice(1)) {
+          if (
+            member.radiusM !== first.radiusM
+            || member.observedSpeedMPerS !== first.observedSpeedMPerS
+            || member.uncertaintyMPerS !== first.uncertaintyMPerS
+          ) {
+            throw new Error(`ensemble observation target ${first.targetId} changes across realizations`);
+          }
+        }
+        const weights = members.map((member) => member.realizationWeight);
+        const predictionSummary = weightedDistributionSummary(
+          members.map((member) => member.predictedSpeedMPerS),
+          weights,
+        );
+        const residualSummary = weightedDistributionSummary(
+          members.map((member) => member.residualMPerS),
+          weights,
+        );
+        const normalizedEffectiveSampleSize = predictionSummary.effectiveSampleSize / members.length;
+        const surfaceConditioned = members.some((member) => (
+          member.weightStatus === "baryonic_surface_likelihood_conditioned_partial_posterior"
+        ));
+        const weightQualityStatus = surfaceConditioned
+          ? normalizedEffectiveSampleSize <= 0.5
+            ? "degenerate_importance_weights"
+            : normalizedEffectiveSampleSize < 0.7
+              ? "low_effective_sample_size"
+              : "adequate_for_commissioning_only"
+          : "not_conditioned";
+        return {
+          parent_system_id: first.parentSystemId,
+          target_id: first.targetId,
+          point_index: first.pointIndex,
+          radius_m: first.radiusM,
+          observed_speed_m_s: first.observedSpeedMPerS,
+          uncertainty_m_s: first.uncertaintyMPerS,
+          realization_count: members.length,
+          weight_status: [...new Set(members.map((member) => member.weightStatus))].sort().join("|"),
+          selected_weight: predictionSummary.selectedWeight,
+          selected_effective_sample_size: predictionSummary.effectiveSampleSize,
+          selected_normalized_effective_sample_size: normalizedEffectiveSampleSize,
+          weight_quality_status: weightQualityStatus,
+          credible_interval_ready: false,
+          predicted_speed_p16_m_s: predictionSummary.p16,
+          predicted_speed_p50_m_s: predictionSummary.p50,
+          predicted_speed_p84_m_s: predictionSummary.p84,
+          predicted_speed_minimum_m_s: predictionSummary.minimum,
+          predicted_speed_maximum_m_s: predictionSummary.maximum,
+          residual_p16_m_s: residualSummary.p16,
+          residual_p50_m_s: residualSummary.p50,
+          residual_p84_m_s: residualSummary.p84,
+        };
+      })
+      .sort((left, right) => (
+        left.parent_system_id.localeCompare(right.parent_system_id)
+        || left.target_id.localeCompare(right.target_id)
+        || left.point_index - right.point_index
+      ));
+    aggregate.withinSystemUncertainty.predictionQuantilePoints = (
+      ensemblePredictionQuantiles.length
+    );
     const scientificCore = {
       schemaVersion: "sigma-batch-scientific-result/2",
       batchId: id,
@@ -935,7 +1179,7 @@ export class LocalBatchService {
     });
     await atomicWrite(resolve(artifacts, "aggregate_scores.json"), aggregate);
     await atomicWrite(resolve(artifacts, "ensemble_summary.json"), {
-      schemaVersion: "sigma-batch-ensemble-summary/1",
+      schemaVersion: "sigma-batch-ensemble-summary/2",
       batchId: id,
       status: aggregate.withinSystemUncertainty.status,
       interpretation: aggregate.withinSystemUncertainty.interpretation,
@@ -946,6 +1190,8 @@ export class LocalBatchService {
       "parent_system_id",
       "surface_realization",
       "vertical_realization",
+      "baryonic_realization_weight",
+      "baryonic_weight_status",
       "source_kind",
       "source_id",
       "field_job_id",
@@ -998,8 +1244,19 @@ export class LocalBatchService {
       "succeeded_realizations",
       "field_succeeded_realizations",
       "observation_succeeded_realizations",
+      "weight_status",
+      "weights_sha256",
+      "surface_likelihood_conditioned",
+      "vertical_structure_conditioned",
+      "selected_weight",
+      "selected_effective_sample_size",
+      "selected_normalized_effective_sample_size",
+      "selected_weight_quality_status",
+      "credible_interval_ready",
       ...ensembleMetricKeys.flatMap((key) => ["count", "p16", "p50", "p84", "minimum", "maximum"]
         .map((statistic) => `${key}_${statistic}`)),
+      ...ensembleMetricKeys.flatMap((key) => ["count", "selectedWeight", "effectiveSampleSize", "p16", "p50", "p84", "minimum", "maximum"]
+        .map((statistic) => `weighted_${key}_${statistic}`)),
     ];
     const ensembleSummaryRows = ensembleSummaries.map((summary) => ({
       parent_system_id: summary.parentSystemId,
@@ -1011,8 +1268,19 @@ export class LocalBatchService {
       succeeded_realizations: summary.succeededRealizations,
       field_succeeded_realizations: summary.fieldSucceededRealizations,
       observation_succeeded_realizations: summary.observationSucceededRealizations,
+      weight_status: summary.weighting.status,
+      weights_sha256: summary.weighting.weightsSha256,
+      surface_likelihood_conditioned: summary.weighting.surfaceLikelihoodConditioned,
+      vertical_structure_conditioned: summary.weighting.verticalStructureConditioned,
+      selected_weight: summary.weighting.selectedWeight,
+      selected_effective_sample_size: summary.weighting.selectedEffectiveSampleSize,
+      selected_normalized_effective_sample_size: summary.weighting.selectedNormalizedEffectiveSampleSize,
+      selected_weight_quality_status: summary.weighting.selectedWeightQualityStatus,
+      credible_interval_ready: summary.weighting.credibleIntervalReady,
       ...Object.fromEntries(ensembleMetricKeys.flatMap((key) => Object.entries(summary.metrics[key])
         .map(([statistic, value]) => [`${key}_${statistic}`, value]))),
+      ...Object.fromEntries(ensembleMetricKeys.flatMap((key) => Object.entries(summary.weightedMetrics[key])
+        .map(([statistic, value]) => [`weighted_${key}_${statistic}`, value]))),
     }));
     await writeFile(
       resolve(artifacts, "ensemble_summary.csv"),
@@ -1030,6 +1298,33 @@ export class LocalBatchService {
         "category",
         "message",
       ], failureRows),
+      "utf8",
+    );
+    await writeFile(
+      resolve(artifacts, "ensemble_prediction_quantiles.csv"),
+      csv([
+        "parent_system_id",
+        "target_id",
+        "point_index",
+        "radius_m",
+        "observed_speed_m_s",
+        "uncertainty_m_s",
+        "realization_count",
+        "weight_status",
+        "selected_weight",
+        "selected_effective_sample_size",
+        "selected_normalized_effective_sample_size",
+        "weight_quality_status",
+        "credible_interval_ready",
+        "predicted_speed_p16_m_s",
+        "predicted_speed_p50_m_s",
+        "predicted_speed_p84_m_s",
+        "predicted_speed_minimum_m_s",
+        "predicted_speed_maximum_m_s",
+        "residual_p16_m_s",
+        "residual_p50_m_s",
+        "residual_p84_m_s",
+      ], ensemblePredictionQuantiles),
       "utf8",
     );
     await writeFile(
@@ -1059,7 +1354,9 @@ export class LocalBatchService {
         ? `Observation targets (${[...observationKinds].sort().join(", ")}) were evaluated but none produced a complete score; incomplete topology remains an explicit non-score.`
         : "No observation targets were supplied, so this report measures numerical execution and convergence only.";
     const ensembleScope = ensembleSummaries.length
-      ? `${aggregate.withinSystemUncertainty.ensembleRealizationCount} baryonic prior realization(s) from ${ensembleSummaries.length} parent system(s) were propagated. See <code>ensemble_summary.json</code> for p16/p50/p84 prediction spread; these are not likelihood-derived credible intervals.`
+      ? conditionedEnsembleCount
+        ? `${aggregate.withinSystemUncertainty.ensembleRealizationCount} baryonic realization(s) from ${ensembleSummaries.length} parent system(s) were propagated. Surface draws for ${conditionedEnsembleCount} parent(s) use baryonic-image likelihood weights; ${degenerateConditionedParentCount} conditioned parent(s) have degenerate selected weights. Vertical draws retain their declared prior. See <code>ensemble_summary.json</code> and <code>ensemble_prediction_quantiles.csv</code>. No velocity or lensing target set a baryonic weight, and these bands are not yet credible intervals.`
+        : `${aggregate.withinSystemUncertainty.ensembleRealizationCount} baryonic prior realization(s) from ${ensembleSummaries.length} parent system(s) were propagated. See <code>ensemble_summary.json</code> for p16/p50/p84 prediction spread; these are not likelihood-derived credible intervals.`
       : "No baryonic density ensemble was requested in this batch.";
     await writeFile(
       resolve(artifacts, "report.html"),
@@ -1068,7 +1365,7 @@ export class LocalBatchService {
     );
     await writeFile(
       resolve(artifacts, "llm_briefing.md"),
-      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Parent systems: ${parentSystemCount}\n- Resolved system realizations: ${rows.length}\n- Baryonic ensemble realizations: ${aggregate.withinSystemUncertainty.ensembleRealizationCount}\n- Baryonic uncertainty status: \`${aggregate.withinSystemUncertainty.status}\`\n- Successful numerical solves: ${fieldSuccessfulRows.length}\n- Successful requested observation evaluations: ${successfulObservationRows.length}/${requestedObservationRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Gravity parameters added by observation evaluation: ${aggregate.observationAddedGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Velocity RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n- Deflection RMSE (arcsec): ${aggregate.observationChannelAggregates.deflection_arcsec?.rmse ?? "not available"}\n- Reduced-shear RMSE: ${aggregate.observationChannelAggregates.reduced_shear_dimensionless?.rmse ?? "not available"}\n- Raw image-position coordinate RMSE (arcsec): ${aggregate.observationChannelAggregates.image_position_arcsec?.rmse ?? "not available"}\n- Incomplete-topology targets: ${rows.reduce((sum, row) => sum + row.observation_incomplete_topology_targets, 0)}\n\nThis deterministic briefing distinguishes immutable field execution, separately cached massive-tracer and photon observation evaluation, and every score channel. Ensemble percentiles are prediction spread under declared baryonic priors, not likelihood-derived posterior intervals. It must not describe an unscored channel as validated.\n`,
+      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Parent systems: ${parentSystemCount}\n- Resolved system realizations: ${rows.length}\n- Baryonic ensemble realizations: ${aggregate.withinSystemUncertainty.ensembleRealizationCount}\n- Baryonic uncertainty status: \`${aggregate.withinSystemUncertainty.status}\`\n- Surface-likelihood-conditioned parents: ${conditionedEnsembleCount}/${ensembleSummaries.length}\n- Weighted circular-speed prediction points: ${ensemblePredictionQuantiles.length}\n- Successful numerical solves: ${fieldSuccessfulRows.length}\n- Successful requested observation evaluations: ${successfulObservationRows.length}/${requestedObservationRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Gravity parameters added by observation evaluation: ${aggregate.observationAddedGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Velocity RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n- Deflection RMSE (arcsec): ${aggregate.observationChannelAggregates.deflection_arcsec?.rmse ?? "not available"}\n- Reduced-shear RMSE: ${aggregate.observationChannelAggregates.reduced_shear_dimensionless?.rmse ?? "not available"}\n- Raw image-position coordinate RMSE (arcsec): ${aggregate.observationChannelAggregates.image_position_arcsec?.rmse ?? "not available"}\n- Incomplete-topology targets: ${rows.reduce((sum, row) => sum + row.observation_incomplete_topology_targets, 0)}\n\nThis deterministic briefing distinguishes immutable field execution, separately cached massive-tracer and photon observation evaluation, and every score channel. When conditioning is enabled, only baryonic surface-density maps, their uncertainty maps, and an optional declared mask set realization weights; vertical structure remains prior-weighted. Velocity and lensing targets never set baryonic weights. It must not describe an unscored channel as validated.\n`,
       "utf8",
     );
     await writeFile(
@@ -1082,6 +1379,7 @@ export class LocalBatchService {
       "child_jobs.json",
       "ensemble_summary.csv",
       "ensemble_summary.json",
+      "ensemble_prediction_quantiles.csv",
       "failures.csv",
       "llm_briefing.md",
       "model.json",

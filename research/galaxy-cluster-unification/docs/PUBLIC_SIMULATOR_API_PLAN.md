@@ -28,10 +28,13 @@ radial benchmark rather than a mock interface:
 - formula runs return the submitted prediction, fixed simple-MOND and
   Newtonian comparators, universal/per-object parameter counts, full curves,
   caveats, and content-addressed formula/run hashes; and
+- the public contract and guide describe local gravity-independent baryonic
+  image conditioning, verified ensemble weights, and weighted prediction
+  artifacts while clearly marking heavy execution as local-only; and
 - requests for 2D/3D fields or raw lensing return `worker_not_connected` rather
   than substituting an algebraic radial proxy.
 
-Ten catalog, formula, API, reproducibility, and simulator tests pass. The web
+The catalog, formula, API, reproducibility, and simulator suites pass. The web
 application and serverless routes are deployed in the Horizon3 Vercel team at
 <https://sigma-gravity-research-simulator-five.vercel.app>. A production smoke
 run reproduced the local formula hash, run ID, manifest hash, full DDO154 point

@@ -32,21 +32,33 @@ assert.match(guide, /Generate many plausible baryonic galaxies, not one invented
 assert.match(guide, /observation_conditioned_prior_not_posterior/);
 assert.match(guide, /Propagate one formula across baryonic uncertainty/);
 assert.match(guide, /prior_prediction_spread_not_measurement_posterior/);
+assert.match(guide, /Condition baryonic draws without looking at gravity/);
+assert.match(guide, /degenerate_importance_weights/);
+assert.match(guide, /ensemble_prediction_quantiles\.csv/);
 
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
-assert.equal(health.version, "0.23.0-preview");
+assert.equal(health.version, "0.24.0-preview");
 assert.equal(health.capabilities.researcherGuide, "available");
 assert.equal(health.capabilities.localNonlocalConvolution, "available_in_dev_server");
 assert.equal(health.capabilities.localInverseHaloResponseDiscovery, "available_in_dev_server");
 assert.equal(health.capabilities.localCoupledTwoPotentialPhotonMatter, "available_in_dev_server");
 assert.equal(health.capabilities.localBaryonicUncertaintyEnsembles, "available_in_dev_server");
 assert.equal(health.capabilities.localBaryonicEnsemblePropagation, "available_in_dev_server");
+assert.equal(health.capabilities.localBaryonicImageConditioning, "available_in_dev_server");
 assert.equal(health.capabilities.resolvedClusterEvidenceRegistry, "available");
 const inverseSchema = await request("/schemas/inverse-response-job-submit-v1.schema.json");
 assert.equal(inverseSchema.properties.schemaVersion.const, "sigma-inverse-response-job-submit/1");
 const galaxySchema = await request("/schemas/galaxy-job-submit-v1.schema.json");
 assert.equal(galaxySchema.properties.uncertaintyEnsemble.properties.realizations.maximum, 16);
+assert.equal(
+  galaxySchema.properties.uncertaintyEnsemble.properties.conditioning.properties.likelihood.const,
+  "diagonal_gaussian_surface_density",
+);
+assert.equal(
+  galaxySchema.properties.uncertaintyEnsemble.properties.conditioning.properties.correlationAreaPixels.minimum,
+  1,
+);
 const datasets = await request("/api/v1/datasets");
 assert.equal(datasets.items[0].systemCount, 175);
 const systems = await request("/api/v1/systems?q=DDO&limit=3");

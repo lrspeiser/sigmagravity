@@ -402,7 +402,7 @@ test("one fixed model produces deterministic multi-system batch reports", async 
     response.items.map((item) => item.path).sort(),
     [
       "aggregate_scores.json", "batch.json", "child_jobs.json",
-      "ensemble_summary.csv", "ensemble_summary.json", "failures.csv",
+      "ensemble_prediction_quantiles.csv", "ensemble_summary.csv", "ensemble_summary.json", "failures.csv",
       "llm_briefing.md", "model.json", "observation_multiple_image_families.csv",
       "observation_multiple_image_predictions.csv", "observation_predictions.csv",
       "observation_velocity_field_predictions.csv", "per_galaxy.csv", "per_realization.csv", "report.html",
@@ -448,22 +448,64 @@ test("one confirmed model fans out a galaxy ensemble and reports parent predicti
       artifact,
       bundleSha256: "b".repeat(64),
       archiveSha256: "c".repeat(64),
-      uncertaintyStatus: "observation_conditioned_prior_not_posterior",
+      uncertaintyStatus: "baryonic_surface_likelihood_conditioned_partial_posterior",
       axes: [{ name: "surfaceRealization", count: 2, anchorIndex: 0 }],
-      realizations: [{ surfaceRealization: 0 }, { surfaceRealization: 1 }],
+      realizations: [
+        {
+          surfaceRealization: 0,
+          baryonicConditioning: {
+            status: "baryonic_surface_likelihood_conditioned_partial_posterior",
+            weightsSha256: "d".repeat(64),
+            surfaceLikelihoodConditioned: true,
+            verticalStructureConditioned: false,
+            surfaceWeight: 0.8,
+            verticalConditionalWeight: 1,
+            jointRealizationWeight: 0.8,
+          },
+        },
+        {
+          surfaceRealization: 1,
+          baryonicConditioning: {
+            status: "baryonic_surface_likelihood_conditioned_partial_posterior",
+            weightsSha256: "d".repeat(64),
+            surfaceLikelihoodConditioned: true,
+            verticalStructureConditioned: false,
+            surfaceWeight: 0.2,
+            verticalConditionalWeight: 1,
+            jointRealizationWeight: 0.2,
+          },
+        },
+      ],
     };
   };
   fieldService.createUploadFromGalaxyEnsembleArtifact = async (_jobId, _artifact, realization) => (
     realization.surfaceRealization === 0 ? first : second
   );
+  const ensembleModel = model();
+  ensembleModel.observables[0].target = "massive_tracers";
+  bindConfirmation(ensembleModel);
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "GALAXY-ENSEMBLE-rotation",
+    kind: "circular_speed_curve",
+    observable: "gradient",
+    gridOriginM: [0, 0],
+    centerM: [0, 0],
+    radiiM: [1],
+    observedSpeedsMPerS: [10],
+    uncertaintiesMPerS: [2],
+    provenance: { kind: "test fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
   const submission = await batchService.createBatch({
     schemaVersion: "sigma-batch-submit/1",
-    model: model(),
+    model: ensembleModel,
     systems: [{
       id: "GALAXY-ENSEMBLE",
       galaxyJobId: `job_${"a".repeat(24)}`,
       galaxyArtifact: "surface_density_ensemble",
       ensembleSelection: { surfaceRealizations: [0, 1], maximumChildren: 2 },
+      observationTargets: [target],
     }],
     fieldRequest: {
       schemaVersion: "sigma-field-job-request/1",
@@ -487,7 +529,7 @@ test("one confirmed model fans out a galaxy ensemble and reports parent predicti
   assert.equal(aggregate.withinSystemUncertainty.ensembleRealizationCount, 2);
   assert.equal(
     aggregate.withinSystemUncertainty.status,
-    "prior_prediction_spread_not_measurement_posterior",
+    "baryonic_surface_likelihood_conditioned_partial_posterior",
   );
   const summary = JSON.parse((await batchService.getArtifact(
     submission.id,
@@ -496,6 +538,16 @@ test("one confirmed model fans out a galaxy ensemble and reports parent predicti
   assert.equal(summary.systems[0].parentSystemId, "GALAXY-ENSEMBLE");
   assert.equal(summary.systems[0].realizationCount, 2);
   assert.equal(summary.systems[0].metrics.iterations.p50, 4);
+  assert.equal(summary.systems[0].weighting.selectedWeight, 1);
+  assert.ok(Math.abs(summary.systems[0].weighting.selectedEffectiveSampleSize - (1 / 0.68)) < 1e-12);
+  assert.equal(summary.systems[0].weighting.surfaceLikelihoodConditioned, true);
+  const predictionQuantiles = (await batchService.getArtifact(
+    submission.id,
+    "ensemble_prediction_quantiles.csv",
+  )).content.toString("utf8");
+  assert.match(predictionQuantiles, /GALAXY-ENSEMBLE,fixture,0,1,10,2,2/);
+  assert.match(predictionQuantiles, /,8,8,8,8,8,-2,-2,-2/);
+  assert.equal(aggregate.withinSystemUncertainty.predictionQuantilePoints, 1);
   const perRealization = (await batchService.getArtifact(
     submission.id,
     "per_realization.csv",
@@ -503,7 +555,7 @@ test("one confirmed model fans out a galaxy ensemble and reports parent predicti
   assert.match(perRealization, /GALAXY-ENSEMBLE::s000/);
   assert.match(perRealization, /GALAXY-ENSEMBLE::s001/);
   const report = (await batchService.getArtifact(submission.id, "report.html")).content.toString("utf8");
-  assert.match(report, /not likelihood-derived credible intervals/);
+  assert.match(report, /No velocity or lensing target set a baryonic weight/);
 });
 
 test("unsupported fitting policies are rejected before child execution", async (t) => {

@@ -43,7 +43,8 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.23.0-preview");
+  assert.equal(output.body.version, "0.24.0-preview");
+  assert.equal(output.body.capabilities.localBaryonicImageConditioning, "available_in_dev_server");
   assert.equal(output.body.capabilities.localBaryonicEnsemblePropagation, "available_in_dev_server");
   assert.equal(output.body.capabilities.localInverseResponseMultiNullSuite, "available_in_dev_server");
   assert.equal(output.body.capabilities.researcherGuide, "available");
@@ -96,6 +97,21 @@ test("published batch schema exposes bounded galaxy ensemble fan-out", () => {
     system.ensembleSelection.properties.verticalRealizations.oneOf[1].maxItems,
     8,
   );
+});
+
+test("published galaxy schema exposes gravity-independent image conditioning", () => {
+  const schema = JSON.parse(readFileSync(
+    new URL("../schemas/galaxy-job-submit-v1.schema.json", import.meta.url),
+    "utf8",
+  ));
+  const conditioning = schema.properties.uncertaintyEnsemble.properties.conditioning;
+  assert.equal(conditioning.additionalProperties, false);
+  assert.equal(
+    conditioning.properties.likelihood.const,
+    "diagonal_gaussian_surface_density",
+  );
+  assert.equal(conditioning.properties.correlationAreaPixels.minimum, 1);
+  assert.equal(conditioning.properties.correlationAreaPixels.maximum, 4096);
 });
 
 test("cluster evidence keeps baryons, inferred halo maps, and raw lensing distinct", () => {

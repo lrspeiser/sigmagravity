@@ -87,11 +87,15 @@ DDO101 observations.
 
 ## What remains
 
-Version 0.23 now provides deterministic unweighted propagation: a batch can
-select named surface and vertical realizations, run one confirmed field model
-and the same declared observation targets over every draw, and publish
-per-realization plus p16/p50/p84 parent summaries. See
-`BARYONIC_ENSEMBLE_PROPAGATION_MILESTONE.md`.
+Version 0.23 provides deterministic unweighted propagation: a batch can select
+named surface and vertical realizations, run one confirmed field model and the
+same declared observation targets over every draw, and publish per-realization
+plus p16/p50/p84 parent summaries. Version 0.24 adds an optional first
+surface-density likelihood and weighted observable aggregation. It forbids
+gravity targets, keeps vertical structure prior-only, and reports collapsed
+weights rather than presenting them as calibrated intervals. See
+`BARYONIC_ENSEMBLE_PROPAGATION_MILESTONE.md` and
+`BARYONIC_IMAGE_CONDITIONING_MILESTONE.md`.
 
 This is not the finished inverse
 observing model. A likelihood-derived posterior still needs:
@@ -103,8 +107,8 @@ observing model. A likelihood-derived posterior still needs:
 5. bulge/disk/bar/arm/clump decomposition and dust attenuation;
 6. spectral cubes or 2D velocity fields used only for observation recovery,
    never to infer the baryonic map with the gravity formula under test;
-7. posterior sampling and weights, followed by weighted observable
-   aggregation rather than the current unweighted prior quantiles; and
+7. adaptive posterior sampling, realistic covariance, and a minimum effective
+   sample-size gate beyond v0.24's commissioning importance weights; and
 8. held-out raw-observation round trips across a morphologically broad sample.
 
 Public Vercel exposes the schema and guide but still does not execute these

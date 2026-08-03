@@ -561,6 +561,71 @@ export class LocalFieldJobService {
       }
       return [axis.name, axis.count];
     }));
+    const conditioning = bundle.provenance?.conditioning ?? null;
+    let surfaceWeights = Array(counts.surfaceRealization).fill(1 / counts.surfaceRealization);
+    let conditioningSummary = {
+      status: "legacy_equal_declared_prior",
+      weightsSha256: null,
+      surfaceLikelihoodConditioned: false,
+      verticalStructureConditioned: false,
+      effectiveSampleSize: counts.surfaceRealization,
+      normalizedEffectiveSampleSize: 1,
+      weightQualityStatus: "legacy_not_conditioned",
+      credibleIntervalReady: false,
+    };
+    if (conditioning !== null) {
+      if (!conditioning || typeof conditioning !== "object" || Array.isArray(conditioning)) {
+        throw new LocalServiceError(409, "invalid_galaxy_ensemble", "ensemble conditioning metadata must be an object");
+      }
+      if (
+        !Array.isArray(conditioning.surfaceWeights)
+        || conditioning.surfaceWeights.length !== counts.surfaceRealization
+        || conditioning.surfaceWeights.some((value) => !Number.isFinite(value) || value < 0)
+      ) {
+        throw new LocalServiceError(409, "invalid_galaxy_ensemble", "ensemble surface weights are invalid");
+      }
+      surfaceWeights = conditioning.surfaceWeights.map(Number);
+      const sum = surfaceWeights.reduce((total, value) => total + value, 0);
+      if (Math.abs(sum - 1) > 1e-12) {
+        throw new LocalServiceError(409, "invalid_galaxy_ensemble", "ensemble surface weights must sum to one");
+      }
+      const weightCore = {
+        schemaVersion: "sigma-baryonic-surface-weights/1",
+        status: conditioning.status,
+        weights: surfaceWeights,
+      };
+      if (conditioning.weightsSha256 !== sha256(weightCore)) {
+        throw new LocalServiceError(409, "invalid_galaxy_ensemble", "ensemble conditioning weight hash is invalid");
+      }
+      const effectiveSampleSize = 1 / surfaceWeights.reduce((total, value) => total + value ** 2, 0);
+      const normalizedEffectiveSampleSize = effectiveSampleSize / counts.surfaceRealization;
+      const maximumWeight = Math.max(...surfaceWeights);
+      const weightQualityStatus = normalizedEffectiveSampleSize <= 0.5 || maximumWeight >= 0.95
+        ? "degenerate_importance_weights"
+        : normalizedEffectiveSampleSize < 0.7
+          ? "low_effective_sample_size"
+          : "adequate_for_commissioning_only";
+      if (
+        !Number.isFinite(conditioning.effectiveSampleSize)
+        || Math.abs(conditioning.effectiveSampleSize - effectiveSampleSize) > 1e-12
+        || !Number.isFinite(conditioning.normalizedEffectiveSampleSize)
+        || Math.abs(conditioning.normalizedEffectiveSampleSize - normalizedEffectiveSampleSize) > 1e-12
+        || conditioning.weightQualityStatus !== weightQualityStatus
+        || conditioning.credibleIntervalReady !== false
+      ) {
+        throw new LocalServiceError(409, "invalid_galaxy_ensemble", "ensemble conditioning quality diagnostics are invalid");
+      }
+      conditioningSummary = {
+        status: String(conditioning.status),
+        weightsSha256: conditioning.weightsSha256,
+        surfaceLikelihoodConditioned: Boolean(conditioning.surfaceLikelihoodConditioned),
+        verticalStructureConditioned: Boolean(conditioning.verticalStructureConditioned),
+        effectiveSampleSize,
+        normalizedEffectiveSampleSize,
+        weightQualityStatus,
+        credibleIntervalReady: false,
+      };
+    }
     if (!selectionContract || typeof selectionContract !== "object" || Array.isArray(selectionContract)) {
       throw new LocalServiceError(422, "invalid_ensemble_selection", "ensembleSelection must be an object");
     }
@@ -588,9 +653,16 @@ export class LocalFieldJobService {
     if (!Number.isSafeInteger(maximumChildren) || maximumChildren < 1 || maximumChildren > 128) {
       throw new LocalServiceError(422, "invalid_ensemble_selection", "maximumChildren must be an integer from 1 through 128");
     }
+    const verticalCount = artifactStem === "volume_density_ensemble" ? counts.verticalRealization : 1;
     const realizations = surfaces.flatMap((surfaceRealization) => verticals.map((verticalRealization) => ({
       surfaceRealization,
       ...(verticalRealization === null ? {} : { verticalRealization }),
+      baryonicConditioning: {
+        ...conditioningSummary,
+        surfaceWeight: surfaceWeights[surfaceRealization],
+        verticalConditionalWeight: 1 / verticalCount,
+        jointRealizationWeight: surfaceWeights[surfaceRealization] / verticalCount,
+      },
     })));
     if (realizations.length > maximumChildren) {
       throw new LocalServiceError(
@@ -607,6 +679,7 @@ export class LocalFieldJobService {
       archiveSha256: archiveArtifact.record.sha256,
       archiveBytes: archiveArtifact.record.bytes,
       uncertaintyStatus: bundle.provenance?.uncertaintyStatus ?? "unspecified",
+      conditioning: conditioningSummary,
       axes: bundle.ensembleAxes,
       realizations,
     };
@@ -631,6 +704,7 @@ export class LocalFieldJobService {
         ? {}
         : { verticalRealization: description.realizations[0].verticalRealization }),
     };
+    const expectedConditioning = description.realizations[0].baryonicConditioning;
     const identity = {
       schemaVersion: "sigma-galaxy-ensemble-materialization-identity/1",
       parentBundleSha256: description.bundleSha256,
@@ -673,7 +747,8 @@ export class LocalFieldJobService {
     validateArrayBundle(inputBundle);
     if (
       inputBundle.provenance?.parentEnsembleBundleSha256 !== description.bundleSha256
-      || JSON.stringify(inputBundle.provenance?.realizationSelection) !== JSON.stringify(selection)
+      || sha256(inputBundle.provenance?.realizationSelection) !== sha256(selection)
+      || sha256(inputBundle.provenance?.baryonicConditioning) !== sha256(expectedConditioning)
     ) {
       throw new LocalServiceError(409, "ensemble_materialization_integrity_failed", "materialized bundle provenance does not match its parent selection");
     }

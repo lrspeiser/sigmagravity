@@ -13,7 +13,7 @@ from voidscreen.resolved_galaxy_job import (
 )
 
 
-def input_bundle(root: Path) -> Path:
+def input_bundle(root: Path, *, conditioning: bool = False) -> Path:
     axis = np.linspace(-4.0, 4.0, 33)
     xx, yy = np.meshgrid(axis, axis, indexing="ij")
     radius = np.hypot(xx - 0.2, yy + 0.1)
@@ -22,9 +22,54 @@ def input_bundle(root: Path) -> Path:
     )
     stars = 6.0e6 * np.exp(-radius / 1.1)
     destination = root / "bundle"
+    arrays = {"raw_gas": gas, "raw_stars": stars}
+    array_metadata = {
+        "gas_surface_density": {
+            "npzKey": "raw_gas",
+            "unit": "M_sun/kpc^2",
+            "rank": "scalar",
+            "role": "source",
+        },
+        "stellar_surface_density": {
+            "npzKey": "raw_stars",
+            "unit": "M_sun/kpc^2",
+            "rank": "scalar",
+            "role": "source",
+        },
+    }
+    if conditioning:
+        arrays.update(
+            {
+                "gas_sigma": np.maximum(0.15 * gas, 2.0e4),
+                "stars_sigma": np.maximum(0.12 * stars, 2.0e4),
+                "conditioning_mask": (radius < 3.8).astype(float),
+            }
+        )
+        array_metadata.update(
+            {
+                "gas_surface_density_uncertainty": {
+                    "npzKey": "gas_sigma",
+                    "unit": "M_sun/kpc^2",
+                    "rank": "scalar",
+                    "role": "uncertainty",
+                },
+                "stellar_surface_density_uncertainty": {
+                    "npzKey": "stars_sigma",
+                    "unit": "M_sun/kpc^2",
+                    "rank": "scalar",
+                    "role": "uncertainty",
+                },
+                "baryonic_conditioning_mask": {
+                    "npzKey": "conditioning_mask",
+                    "unit": "1",
+                    "rank": "scalar",
+                    "role": "mask",
+                },
+            }
+        )
     write_array_bundle(
         destination,
-        {"raw_gas": gas, "raw_stars": stars},
+        arrays,
         {
             "schemaVersion": "sigma-array-bundle-request/1",
             "geometry": {
@@ -35,20 +80,7 @@ def input_bundle(root: Path) -> Path:
                 "axisOrder": ["x", "y"],
                 "referenceFrame": "synthetic_face_on",
             },
-            "arrays": {
-                "gas_surface_density": {
-                    "npzKey": "raw_gas",
-                    "unit": "M_sun/kpc^2",
-                    "rank": "scalar",
-                    "role": "source",
-                },
-                "stellar_surface_density": {
-                    "npzKey": "raw_stars",
-                    "unit": "M_sun/kpc^2",
-                    "rank": "scalar",
-                    "role": "source",
-                },
-            },
+            "arrays": array_metadata,
             "provenance": {"kind": "synthetic_test_fixture"},
             "license": {"id": "CC0-1.0", "redistributionAllowed": True},
         },
@@ -56,8 +88,8 @@ def input_bundle(root: Path) -> Path:
     return destination
 
 
-def extraction_request(root: Path) -> Path:
-    input_bundle(root)
+def extraction_request(root: Path, *, conditioning: bool = False) -> Path:
+    input_bundle(root, conditioning=conditioning)
     request = {
         "schemaVersion": "sigma-galaxy-job-cli/1",
         "operation": "extract_roundtrip",
@@ -357,3 +389,126 @@ def test_uncertainty_ensemble_seed_replays_without_velocity_targets(tmp_path: Pa
         assert package["gravityParameters"] == {}
     assert scientific_ids[0] != scientific_ids[1]
     np.testing.assert_array_equal(arrays[0], arrays[1])
+
+
+def test_baryonic_image_likelihood_conditions_surface_draws_without_gravity_targets(
+    tmp_path: Path,
+) -> None:
+    request_path = extraction_request(tmp_path, conditioning=True)
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    request["uncertaintyEnsemble"] = {
+        "enabled": True,
+        "realizations": 5,
+        "seed": 314,
+        "priors": {
+            "gas_mass_ln_sigma": 0.22,
+            "stellar_mass_ln_sigma": 0.22,
+            "gas_radial_scale_ln_sigma": 0.1,
+            "stellar_radial_scale_ln_sigma": 0.1,
+        },
+        "conditioning": {
+            "enabled": True,
+            "likelihood": "diagonal_gaussian_surface_density",
+            "use_mask": True,
+            "minimum_valid_pixels_per_component": 25,
+            "correlation_area_pixels": 4.0,
+        },
+    }
+    request_path.write_text(json.dumps(request), encoding="utf-8")
+    manifest = execute_galaxy_request_file(request_path)
+    output = tmp_path / "artifacts"
+    conditioning = json.loads(
+        (output / "baryonic_conditioning.json").read_text(encoding="utf-8")
+    )
+    weights = np.asarray(conditioning["weights"], dtype=float)
+    assert conditioning["status"] == (
+        "baryonic_surface_likelihood_conditioned_partial_posterior"
+    )
+    assert conditioning["surfaceLikelihoodConditioned"] is True
+    assert conditioning["verticalStructureConditioned"] is False
+    assert conditioning["velocityTargetsUsed"] is False
+    assert conditioning["lensingTargetsUsed"] is False
+    assert conditioning["forbiddenTargetsUsed"] == []
+    assert len(weights) == 5
+    assert np.isclose(weights.sum(), 1.0)
+    assert np.all(weights >= 0.0)
+    assert conditioning["effectiveSampleSize"] <= 5.0
+    assert len(set(np.round(weights, 14))) > 1
+    surface_bundle = json.loads(
+        (output / "surface_density_ensemble_bundle.json").read_text(encoding="utf-8")
+    )
+    assert surface_bundle["provenance"]["conditioning"]["surfaceWeights"] == (
+        conditioning["weights"]
+    )
+    assert surface_bundle["provenance"]["conditioning"]["weightsSha256"] == (
+        conditioning["weightsSha256"]
+    )
+    assert (output / "surface_density_conditioned_quantiles.npz").exists()
+    assert (output / "baryonic_conditioning_weights.csv").exists()
+    with np.load(output / "surface_density_conditioned_quantiles.npz") as quantiles:
+        for prefix in (
+            "gas_surface_density",
+            "stellar_surface_density",
+            "total_baryonic_surface_density",
+        ):
+            assert np.all(quantiles[f"{prefix}_p16"] <= quantiles[f"{prefix}_p50"])
+            assert np.all(quantiles[f"{prefix}_p50"] <= quantiles[f"{prefix}_p84"])
+    assert manifest["formulaIndependence"]["gravityParameters"] == 0
+    assert manifest["formulaIndependence"]["velocityTargetsUsedForExtraction"] is False
+
+
+def test_baryonic_conditioning_rejects_missing_uncertainty_maps(tmp_path: Path) -> None:
+    request_path = extraction_request(tmp_path)
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    request["uncertaintyEnsemble"] = {
+        "enabled": True,
+        "realizations": 3,
+        "conditioning": {"enabled": True},
+    }
+    request_path.write_text(json.dumps(request), encoding="utf-8")
+    try:
+        execute_galaxy_request_file(request_path)
+    except ValueError as error:
+        assert "requires gas and stellar" in str(error)
+    else:
+        raise AssertionError("conditioning accepted a bundle without uncertainty maps")
+
+
+def test_conditioning_weights_are_invariant_to_withheld_velocity_metadata(
+    tmp_path: Path,
+) -> None:
+    results = []
+    for index in range(2):
+        root = tmp_path / f"conditioning-{index}"
+        root.mkdir()
+        request_path = extraction_request(root, conditioning=True)
+        request = json.loads(request_path.read_text(encoding="utf-8"))
+        request["sourceObservables"] = {
+            "withheldVelocityTargetChecksum": f"must-not-enter-{index}",
+            "withheldLensingTargetChecksum": f"must-not-enter-{1 - index}",
+        }
+        request["uncertaintyEnsemble"] = {
+            "enabled": True,
+            "realizations": 4,
+            "seed": 991,
+            "priors": {
+                "gas_mass_ln_sigma": 0.15,
+                "stellar_mass_ln_sigma": 0.15,
+            },
+            "conditioning": {
+                "enabled": True,
+                "use_mask": True,
+                "correlation_area_pixels": 4.0,
+            },
+        }
+        request_path.write_text(json.dumps(request), encoding="utf-8")
+        manifest = execute_galaxy_request_file(request_path)
+        conditioning = json.loads(
+            (root / "artifacts" / "baryonic_conditioning.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        results.append((conditioning["weights"], conditioning["weightsSha256"]))
+        assert manifest["formulaIndependence"]["velocityTargetsUsedForConditioning"] is False
+        assert manifest["formulaIndependence"]["lensingTargetsUsedForConditioning"] is False
+    assert results[0] == results[1]

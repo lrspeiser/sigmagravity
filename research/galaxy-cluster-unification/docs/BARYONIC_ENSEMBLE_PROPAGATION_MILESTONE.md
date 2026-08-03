@@ -74,6 +74,15 @@ The summary status is
 unweighted across declared prior draws. They are not likelihood-derived
 credible intervals.
 
+Version 0.24 extends this contract without removing the prior summaries. When
+the parent galaxy job includes gravity-independent baryonic-image likelihood
+weights, the batch also publishes weighted score distributions and
+`ensemble_prediction_quantiles.csv`, with p16/p50/p84 predicted circular speed
+at each observed radius. It carries ESS and weight-quality diagnostics and
+keeps `credibleIntervalReady` false. The full conditioning boundary and real
+collapsed-weight result are documented in
+`BARYONIC_IMAGE_CONDITIONING_MILESTONE.md`.
+
 ## Real DDO101 HTTP acceptance
 
 The acceptance path generated a central DDO101 reconstruction plus two 3D
@@ -108,10 +117,11 @@ predictions moved, and whether any per-object gravity flexibility entered.
 
 It cannot establish that the prior widths are observationally correct, that a
 good score identifies a unique causal theory, or that a galaxy result transfers
-to cluster lensing. The next scientific step is to condition the baryonic
-draws with raw images/cubes, WCS, PSF/beam, noise, masks, distance,
-inclination, stellar-population, gas-conversion, dust, and morphology
-likelihoods. The next infrastructure step is durable production storage,
+to cluster lensing. Version 0.24's first surface likelihood remains incomplete:
+the next scientific step is released uncertainty/covariance maps, raw
+images/cubes, WCS, PSF/beam forward modeling, distance, inclination,
+stellar-population, gas-conversion, dust, morphology, and adaptive sampling.
+The next infrastructure step is durable production storage,
 queueing, isolated workers, authentication, quotas, cancellation, and audit
 logs; Vercel still publishes only the contract and lightweight APIs.
 

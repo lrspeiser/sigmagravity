@@ -33,7 +33,7 @@ from voidscreen.resolved_galaxy_generator import (
 
 Array = np.ndarray
 ENGINE_ID = "resolved-galaxy-extract-generate-worker"
-ENGINE_VERSION = "1.1.0-preview"
+ENGINE_VERSION = "1.2.0-preview"
 KPC_M = 3.085677581491367e19
 MSUN_KG = 1.98847e30
 MAX_ENSEMBLE_ARRAY_BYTES = 256 * 1024**2
@@ -148,7 +148,7 @@ def _integer_bounded(value: Any, default: int, minimum: int, maximum: int, label
 
 def _uncertainty_ensemble(value: Any, package: Mapping[str, Any]) -> dict[str, Any]:
     raw = dict(value or {})
-    allowed = {"enabled", "realizations", "seed", "priors"}
+    allowed = {"enabled", "realizations", "seed", "priors", "conditioning"}
     unknown = sorted(set(raw) - allowed)
     if unknown:
         raise ValueError(f"unknown uncertainty ensemble controls: {', '.join(unknown)}")
@@ -186,6 +186,45 @@ def _uncertainty_ensemble(value: Any, package: Mapping[str, Any]) -> dict[str, A
             "inclination_sigma_deg requires reference_inclination_deg or sourceObservables.inclinationDeg"
         )
     priors["reference_inclination_deg"] = reference_inclination
+    conditioning_raw = dict(raw.get("conditioning") or {})
+    conditioning_allowed = {
+        "enabled",
+        "likelihood",
+        "use_mask",
+        "minimum_valid_pixels_per_component",
+        "correlation_area_pixels",
+    }
+    unknown_conditioning = sorted(set(conditioning_raw) - conditioning_allowed)
+    if unknown_conditioning:
+        raise ValueError(
+            f"unknown baryonic conditioning controls: {', '.join(unknown_conditioning)}"
+        )
+    likelihood = str(
+        conditioning_raw.get("likelihood", "diagonal_gaussian_surface_density")
+    )
+    if likelihood != "diagonal_gaussian_surface_density":
+        raise ValueError(
+            "conditioning likelihood must be diagonal_gaussian_surface_density"
+        )
+    conditioning = {
+        "enabled": bool(conditioning_raw.get("enabled", False)),
+        "likelihood": likelihood,
+        "use_mask": bool(conditioning_raw.get("use_mask", False)),
+        "minimum_valid_pixels_per_component": _integer_bounded(
+            conditioning_raw.get("minimum_valid_pixels_per_component"),
+            25,
+            5,
+            1_000_000,
+            "conditioning minimum valid pixels per component",
+        ),
+        "correlation_area_pixels": _finite_bounded(
+            conditioning_raw.get("correlation_area_pixels"),
+            1.0,
+            1.0,
+            4096.0,
+            "conditioning correlation area pixels",
+        ),
+    }
     result = {
         "enabled": bool(raw.get("enabled", False)),
         "realizations": _integer_bounded(
@@ -195,9 +234,14 @@ def _uncertainty_ensemble(value: Any, package: Mapping[str, Any]) -> dict[str, A
             raw.get("seed"), 0, 0, 2**31 - 1, "uncertainty ensemble seed"
         ),
         "priors": priors,
+        "conditioning": conditioning,
     }
     if not result["enabled"]:
         result["realizations"] = 1
+        if conditioning["enabled"]:
+            raise ValueError(
+                "baryonic conditioning requires uncertainty ensemble enabled"
+            )
     return result
 
 
@@ -237,7 +281,40 @@ def _axis_and_surfaces(bundle_path: Path) -> tuple[dict[str, Any], Array, dict[s
     if spacing <= 0.0:
         raise ValueError("grid spacing must be positive")
     axis = (np.arange(gas.shape[0], dtype=float) - 0.5 * (gas.shape[0] - 1)) * spacing
-    return bundle, axis, {"gas": gas, "stars": stars, "total": gas + stars}
+    result = {"gas": gas, "stars": stars, "total": gas + stars}
+    uncertainty_keys = {
+        "gas_surface_density_uncertainty": "gas_uncertainty",
+        "stellar_surface_density_uncertainty": "stars_uncertainty",
+    }
+    for public_key, result_key in uncertainty_keys.items():
+        if public_key not in arrays:
+            continue
+        record = records[public_key]
+        values = np.asarray(arrays[public_key], dtype=float)
+        if (
+            record.get("rank") != "scalar"
+            or record.get("unit") != "M_sun/kpc^2"
+            or record.get("role") != "uncertainty"
+            or values.shape != gas.shape
+        ):
+            raise ValueError(
+                f"{public_key} must be a scalar M_sun/kpc^2 uncertainty map on the source grid"
+            )
+        result[result_key] = values
+    if "baryonic_conditioning_mask" in arrays:
+        record = records["baryonic_conditioning_mask"]
+        values = np.asarray(arrays["baryonic_conditioning_mask"], dtype=float)
+        if (
+            record.get("rank") != "scalar"
+            or record.get("unit") != "1"
+            or record.get("role") != "mask"
+            or values.shape != gas.shape
+        ):
+            raise ValueError(
+                "baryonic_conditioning_mask must be a scalar dimensionless mask on the source grid"
+            )
+        result["conditioning_mask"] = values
+    return bundle, axis, result
 
 
 def _parameter_axis(package: Mapping[str, Any]) -> Array:
@@ -476,6 +553,205 @@ def _surface_uncertainty_products(
     }, metadata
 
 
+def _condition_surface_ensemble(
+    surface_ensemble: Mapping[str, Array],
+    reference: Mapping[str, Array] | None,
+    controls: Mapping[str, Any],
+    source_bundle: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    count = int(surface_ensemble["total"].shape[0])
+    equal_weights = np.full(count, 1.0 / count, dtype=float)
+    weights_core = {
+        "schemaVersion": "sigma-baryonic-surface-weights/1",
+        "status": "equal_declared_prior",
+        "weights": equal_weights.tolist(),
+    }
+    if not controls["enabled"]:
+        return {
+            **weights_core,
+            "weightsSha256": canonical_sha256(weights_core),
+            "likelihood": None,
+            "effectiveSampleSize": float(count),
+            "normalizedEntropy": 1.0,
+            "maximumWeight": float(equal_weights[0]),
+            "weightQuality": {
+                "status": "not_conditioned",
+                "normalizedEffectiveSampleSize": 1.0,
+                "credibleIntervalReady": False,
+            },
+            "surfaceLikelihoodConditioned": False,
+            "verticalStructureConditioned": False,
+            "draws": [
+                {
+                    "surfaceRealization": index,
+                    "priorWeight": float(equal_weights[index]),
+                    "posteriorWeight": float(equal_weights[index]),
+                    "logLikelihoodRelative": None,
+                    "effectiveChiSquare": None,
+                    "validPixels": None,
+                }
+                for index in range(count)
+            ],
+            "sourceArrays": {},
+            "forbiddenTargetsUsed": [],
+        }
+    if reference is None or source_bundle is None:
+        raise ValueError(
+            "baryonic conditioning requires an extract_roundtrip source bundle"
+        )
+    for key in ("gas_uncertainty", "stars_uncertainty"):
+        if key not in reference:
+            raise ValueError(
+                "baryonic conditioning requires gas and stellar surface-density uncertainty maps"
+            )
+    mask = np.ones_like(reference["gas"], dtype=bool)
+    if controls["use_mask"]:
+        if "conditioning_mask" not in reference:
+            raise ValueError(
+                "conditioning use_mask requires baryonic_conditioning_mask"
+            )
+        raw_mask = np.asarray(reference["conditioning_mask"], dtype=float)
+        mask = np.isfinite(raw_mask) & (raw_mask > 0.5)
+    records = _bundle_records(source_bundle)
+    required_source_keys = [
+        "gas_surface_density",
+        "stellar_surface_density",
+        "gas_surface_density_uncertainty",
+        "stellar_surface_density_uncertainty",
+    ]
+    if controls["use_mask"]:
+        required_source_keys.append("baryonic_conditioning_mask")
+    source_arrays = {
+        key: records[key]["contentSha256"] for key in required_source_keys
+    }
+    minimum_pixels = int(controls["minimum_valid_pixels_per_component"])
+    correlation_area = float(controls["correlation_area_pixels"])
+    draw_records: list[dict[str, Any]] = []
+    log_likelihoods = np.empty(count, dtype=float)
+    for realization in range(count):
+        component_chi_square: dict[str, float] = {}
+        component_valid_pixels: dict[str, int] = {}
+        total_effective_chi_square = 0.0
+        for component in ("gas", "stars"):
+            observed = np.asarray(reference[component], dtype=float)
+            uncertainty = np.asarray(reference[f"{component}_uncertainty"], dtype=float)
+            predicted = np.asarray(surface_ensemble[component][realization], dtype=float)
+            valid = (
+                mask
+                & np.isfinite(observed)
+                & np.isfinite(predicted)
+                & np.isfinite(uncertainty)
+                & (uncertainty > 0.0)
+            )
+            valid_count = int(np.count_nonzero(valid))
+            if valid_count < minimum_pixels:
+                raise ValueError(
+                    f"baryonic conditioning has {valid_count} valid {component} pixels; "
+                    f"at least {minimum_pixels} are required"
+                )
+            standardized = (predicted[valid] - observed[valid]) / uncertainty[valid]
+            raw_chi_square = float(np.dot(standardized, standardized))
+            effective_chi_square = raw_chi_square / correlation_area
+            component_chi_square[component] = effective_chi_square
+            component_valid_pixels[component] = valid_count
+            total_effective_chi_square += effective_chi_square
+        log_likelihoods[realization] = -0.5 * total_effective_chi_square
+        draw_records.append(
+            {
+                "surfaceRealization": realization,
+                "priorWeight": float(equal_weights[realization]),
+                "logLikelihoodRelative": 0.0,
+                "effectiveChiSquare": total_effective_chi_square,
+                "componentEffectiveChiSquare": component_chi_square,
+                "validPixels": component_valid_pixels,
+            }
+        )
+    maximum_log_likelihood = float(np.max(log_likelihoods))
+    relative = log_likelihoods - maximum_log_likelihood
+    unnormalized = equal_weights * np.exp(relative)
+    normalization = float(np.sum(unnormalized))
+    if not np.isfinite(normalization) or normalization <= 0.0:
+        raise RuntimeError("baryonic conditioning weights could not be normalized")
+    posterior_weights = unnormalized / normalization
+    for index, draw in enumerate(draw_records):
+        draw["logLikelihoodRelative"] = float(relative[index])
+        draw["posteriorWeight"] = float(posterior_weights[index])
+    positive = posterior_weights[posterior_weights > 0.0]
+    entropy = float(-np.sum(positive * np.log(positive)))
+    normalized_entropy = 1.0 if count == 1 else entropy / float(np.log(count))
+    effective_sample_size = float(1.0 / np.sum(posterior_weights**2))
+    normalized_effective_sample_size = effective_sample_size / count
+    maximum_weight = float(np.max(posterior_weights))
+    if normalized_effective_sample_size <= 0.5 or maximum_weight >= 0.95:
+        weight_quality_status = "degenerate_importance_weights"
+    elif normalized_effective_sample_size < 0.7:
+        weight_quality_status = "low_effective_sample_size"
+    else:
+        weight_quality_status = "adequate_for_commissioning_only"
+    weights_core = {
+        "schemaVersion": "sigma-baryonic-surface-weights/1",
+        "status": "baryonic_surface_likelihood_conditioned_partial_posterior",
+        "weights": posterior_weights.tolist(),
+    }
+    return {
+        **weights_core,
+        "weightsSha256": canonical_sha256(weights_core),
+        "likelihood": {
+            "family": controls["likelihood"],
+            "correlationAreaPixels": correlation_area,
+            "minimumValidPixelsPerComponent": minimum_pixels,
+            "maskApplied": bool(controls["use_mask"]),
+            "normalization": "relative log likelihood; draw-independent Gaussian constants cancel",
+        },
+        "effectiveSampleSize": effective_sample_size,
+        "normalizedEntropy": normalized_entropy,
+        "maximumWeight": maximum_weight,
+        "weightQuality": {
+            "status": weight_quality_status,
+            "normalizedEffectiveSampleSize": normalized_effective_sample_size,
+            "credibleIntervalReady": False,
+        },
+        "surfaceLikelihoodConditioned": True,
+        "verticalStructureConditioned": False,
+        "draws": draw_records,
+        "sourceArrays": source_arrays,
+        "forbiddenTargetsUsed": [],
+    }
+
+
+def _weighted_quantiles(
+    values: Array, weights: Array, probabilities: tuple[float, ...]
+) -> list[Array]:
+    data = np.asarray(values, dtype=float)
+    normalized_weights = np.asarray(weights, dtype=float)
+    if data.ndim < 2 or data.shape[0] != normalized_weights.size:
+        raise ValueError("weighted quantiles require one weight per realization")
+    if (
+        not np.all(np.isfinite(normalized_weights))
+        or np.any(normalized_weights < 0.0)
+        or float(np.sum(normalized_weights)) <= 0.0
+    ):
+        raise ValueError("weighted quantile weights must be finite and non-negative")
+    normalized_weights = normalized_weights / float(np.sum(normalized_weights))
+    order = np.argsort(data, axis=0, kind="stable")
+    sorted_values = np.take_along_axis(data, order, axis=0)
+    broadcast_weights = np.broadcast_to(
+        normalized_weights.reshape((-1,) + (1,) * (data.ndim - 1)), data.shape
+    )
+    sorted_weights = np.take_along_axis(broadcast_weights, order, axis=0)
+    cumulative = np.cumsum(sorted_weights, axis=0)
+    outputs = []
+    for probability in probabilities:
+        indices = np.argmax(cumulative >= probability, axis=0)
+        outputs.append(
+            np.ascontiguousarray(
+                np.take_along_axis(sorted_values, indices[None, ...], axis=0)[0],
+                dtype="<f8",
+            )
+        )
+    return outputs
+
+
 def _vertical_ensemble_products(
     surface_ensemble: Mapping[str, Array],
     axis: Array,
@@ -643,6 +919,7 @@ def execute_galaxy_request_file(
     started = time.perf_counter()
     try:
         reference: dict[str, Array] | None = None
+        source_bundle: dict[str, Any] | None = None
         source_bundle_hash: str | None = None
         if operation == "extract_roundtrip":
             if envelope.get("outputGrid") is not None:
@@ -670,6 +947,10 @@ def execute_galaxy_request_file(
         uncertainty_controls = _uncertainty_ensemble(
             envelope.get("uncertaintyEnsemble"), package
         )
+        if uncertainty_controls["conditioning"]["enabled"] and operation != "extract_roundtrip":
+            raise ValueError(
+                "baryonic conditioning is available only for extract_roundtrip jobs"
+            )
 
         identity = {
             "schemaVersion": "sigma-galaxy-scientific-job-identity/1",
@@ -688,6 +969,17 @@ def execute_galaxy_request_file(
         generated = render_galaxy(package, axis, component_controls=generation_controls)
         surface_ensemble, uncertainty_metadata = _surface_uncertainty_products(
             package, axis, generation_controls, uncertainty_controls
+        )
+        conditioning = _condition_surface_ensemble(
+            surface_ensemble,
+            reference,
+            uncertainty_controls["conditioning"],
+            source_bundle,
+        )
+        uncertainty_status = (
+            conditioning["status"]
+            if conditioning["surfaceLikelihoodConditioned"]
+            else "observation_conditioned_prior_not_posterior"
         )
         for component in ("gas", "stars", "total"):
             if not np.array_equal(surface_ensemble[component][0], generated[component]):
@@ -730,6 +1022,25 @@ def execute_galaxy_request_file(
             "scientificJobId": job_id,
             "parameterPackageSha256": package["contentSha256"],
             "operation": operation,
+        }
+        conditioning_provenance = {
+            "status": conditioning["status"],
+            "weightsSha256": conditioning["weightsSha256"],
+            "surfaceWeights": conditioning["weights"],
+            "surfaceLikelihoodConditioned": conditioning[
+                "surfaceLikelihoodConditioned"
+            ],
+            "verticalStructureConditioned": conditioning[
+                "verticalStructureConditioned"
+            ],
+            "effectiveSampleSize": conditioning["effectiveSampleSize"],
+            "normalizedEffectiveSampleSize": conditioning["weightQuality"][
+                "normalizedEffectiveSampleSize"
+            ],
+            "weightQualityStatus": conditioning["weightQuality"]["status"],
+            "credibleIntervalReady": conditioning["weightQuality"][
+                "credibleIntervalReady"
+            ],
         }
         surface_arrays = {
             "gas_surface_density": generated["gas"],
@@ -778,7 +1089,8 @@ def execute_galaxy_request_file(
             unit="M_sun/kpc^2",
             provenance={
                 **provenance,
-                "uncertaintyStatus": "observation_conditioned_prior_not_posterior",
+                "uncertaintyStatus": uncertainty_status,
+                "conditioning": conditioning_provenance,
             },
             license_value=license_value,
         )
@@ -815,6 +1127,42 @@ def execute_galaxy_request_file(
             surface_quantile_arrays,
             surface_quantile_bundle,
         )
+        conditioned_surface_quantile_bundle = None
+        if conditioning["surfaceLikelihoodConditioned"]:
+            conditioned_surface_quantile_arrays: dict[str, Array] = {}
+            weights = np.asarray(conditioning["weights"], dtype=float)
+            for component, key in (
+                ("gas", "gas_surface_density"),
+                ("stars", "stellar_surface_density"),
+                ("total", "total_baryonic_surface_density"),
+            ):
+                values = _weighted_quantiles(
+                    surface_ensemble[component], weights, (0.16, 0.50, 0.84)
+                )
+                for percentile, value in zip((16, 50, 84), values, strict=True):
+                    conditioned_surface_quantile_arrays[
+                        f"{key}_p{percentile}"
+                    ] = value
+            conditioned_surface_quantile_bundle = _array_bundle(
+                conditioned_surface_quantile_arrays,
+                geometry=spatial_geometry_2d,
+                unit="M_sun/kpc^2",
+                provenance={
+                    **provenance,
+                    "summaryOf": surface_ensemble_bundle["bundleSha256"],
+                    "percentiles": [16, 50, 84],
+                    "weightStatus": conditioning["status"],
+                    "weightsSha256": conditioning["weightsSha256"],
+                    "weightedQuantileDefinition": "left-continuous empirical CDF",
+                },
+                license_value=license_value,
+            )
+            _save_array_product(
+                temporary,
+                "surface_density_conditioned_quantiles",
+                conditioned_surface_quantile_arrays,
+                conditioned_surface_quantile_bundle,
+            )
         field_surface_arrays = {
             "gas_surface_density": generated["gas"] * MSUN_KG / KPC_M**2,
             "stellar_surface_density": generated["stars"] * MSUN_KG / KPC_M**2,
@@ -933,7 +1281,8 @@ def execute_galaxy_request_file(
                 unit="M_sun/kpc^3",
                 provenance={
                     **provenance,
-                    "uncertaintyStatus": "observation_conditioned_prior_not_posterior",
+                    "uncertaintyStatus": uncertainty_status,
+                    "conditioning": conditioning_provenance,
                     "projectionTarget": surface_ensemble_bundle["bundleSha256"],
                 },
                 license_value=license_value,
@@ -946,20 +1295,70 @@ def execute_galaxy_request_file(
             )
 
         _write_json(
+            temporary / "baryonic_conditioning.json",
+            {
+                "schemaVersion": "sigma-galaxy-baryonic-conditioning/1",
+                **conditioning,
+                "gravityParameters": {},
+                "velocityTargetsUsed": False,
+                "lensingTargetsUsed": False,
+                "interpretation": (
+                    "Weights condition surface-density draws on baryonic maps and their declared uncertainties only; vertical draws retain their declared prior weights."
+                    if conditioning["surfaceLikelihoodConditioned"]
+                    else "No baryonic image likelihood was requested; every surface draw has equal prior weight."
+                ),
+                "limitations": [
+                    "The likelihood treats retained pixels as diagonal after division by the declared correlation area.",
+                    "Gas and stellar calibration covariance, PSF, beam, dust, distance covariance, and selection effects are not jointly modeled.",
+                    "The surface likelihood does not identify vertical thickness, flaring, or line-of-sight structure.",
+                    "No velocity, lensing, dark-matter, or gravity-field target is permitted to set these weights.",
+                ],
+            },
+        )
+        with (temporary / "baryonic_conditioning_weights.csv").open(
+            "w", newline="", encoding="utf-8"
+        ) as handle:
+            fieldnames = [
+                "surface_realization",
+                "prior_weight",
+                "posterior_weight",
+                "log_likelihood_relative",
+                "effective_chi_square",
+                "gas_valid_pixels",
+                "stellar_valid_pixels",
+            ]
+            writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+            writer.writeheader()
+            for draw in conditioning["draws"]:
+                valid_pixels = draw["validPixels"] or {}
+                writer.writerow(
+                    {
+                        "surface_realization": draw["surfaceRealization"],
+                        "prior_weight": draw["priorWeight"],
+                        "posterior_weight": draw["posteriorWeight"],
+                        "log_likelihood_relative": draw["logLikelihoodRelative"],
+                        "effective_chi_square": draw["effectiveChiSquare"],
+                        "gas_valid_pixels": valid_pixels.get("gas"),
+                        "stellar_valid_pixels": valid_pixels.get("stars"),
+                    }
+                )
+
+        _write_json(
             temporary / "baryonic_uncertainty_ensemble.json",
             {
                 "schemaVersion": "sigma-galaxy-baryonic-uncertainty-ensemble/1",
-                "status": "observation_conditioned_prior_not_posterior",
+                "status": uncertainty_status,
                 "gravityParameters": {},
                 "velocityTargetsUsed": False,
                 "controls": uncertainty_controls,
+                "conditioningSha256": conditioning["weightsSha256"],
                 "surfaceBundleSha256": surface_ensemble_bundle["bundleSha256"],
                 "volumeBundleSha256": None
                 if volume_ensemble_bundle is None
                 else volume_ensemble_bundle["bundleSha256"],
                 "draws": uncertainty_metadata,
                 "limitations": [
-                    "Prior widths are researcher-declared and are not inferred from a likelihood.",
+                    "Prior widths remain researcher-declared; the optional likelihood reweights sampled draws but does not infer or expand their support.",
                     "Inclination uncertainty is represented as a thin-map minor-axis deprojection scale.",
                     "Unseen baryons, when enabled, are assumed to follow traced baryons proportionally.",
                     "Bulge deprojection, dust, beam, PSF, noise, masks, turbulence, and spectral cubes are not inferred here.",
@@ -1027,6 +1426,9 @@ def execute_galaxy_request_file(
             "fieldSurfaceBundleSha256": field_surface_bundle["bundleSha256"],
             "surfaceEnsembleBundleSha256": surface_ensemble_bundle["bundleSha256"],
             "surfaceQuantileBundleSha256": surface_quantile_bundle["bundleSha256"],
+            "conditionedSurfaceQuantileBundleSha256": None
+            if conditioned_surface_quantile_bundle is None
+            else conditioned_surface_quantile_bundle["bundleSha256"],
             "volumeBundleSha256": None
             if volume_bundle is None
             else volume_bundle["bundleSha256"],
@@ -1038,12 +1440,26 @@ def execute_galaxy_request_file(
             else volume_ensemble_bundle["bundleSha256"],
             "roundtripMetrics": metrics,
             "uncertaintyEnsemble": {
-                "status": "observation_conditioned_prior_not_posterior",
+                "status": uncertainty_status,
                 "surfaceRealizations": int(surface_ensemble["total"].shape[0]),
                 "verticalRealizationsPerSurface": 0
                 if volume_ensemble is None
                 else int(volume_ensemble["total"].shape[1]),
                 "anchorRealization": 0,
+                "conditioning": {
+                    "status": conditioning["status"],
+                    "weightsSha256": conditioning["weightsSha256"],
+                    "surfaceLikelihoodConditioned": conditioning[
+                        "surfaceLikelihoodConditioned"
+                    ],
+                    "verticalStructureConditioned": conditioning[
+                        "verticalStructureConditioned"
+                    ],
+                    "effectiveSampleSize": conditioning["effectiveSampleSize"],
+                    "normalizedEntropy": conditioning["normalizedEntropy"],
+                    "maximumWeight": conditioning["maximumWeight"],
+                    "weightQuality": conditioning["weightQuality"],
+                },
                 "totalMassSolarP16P50P84": np.quantile(
                     [item["massSolar"]["total"] for item in uncertainty_metadata],
                     [0.16, 0.50, 0.84],
@@ -1126,6 +1542,9 @@ def execute_galaxy_request_file(
             "formulaIndependence": {
                 "gravityParameters": 0,
                 "velocityTargetsUsedForExtraction": False,
+                "velocityTargetsUsedForConditioning": False,
+                "lensingTargetsUsedForConditioning": False,
+                "conditioningSourceArrays": sorted(conditioning["sourceArrays"]),
                 "theoryNameDispatch": False,
             },
         }

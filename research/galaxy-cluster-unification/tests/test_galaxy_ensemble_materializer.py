@@ -56,6 +56,11 @@ def _write_ensemble(root: Path, *, volume: bool) -> tuple[Path, Path, str]:
         }
         for name, values in sorted(arrays.items())
     ]
+    weights_core = {
+        "schemaVersion": "sigma-baryonic-surface-weights/1",
+        "status": "baryonic_surface_likelihood_conditioned_partial_posterior",
+        "weights": [0.8, 0.2],
+    }
     core = {
         "schemaVersion": "sigma-galaxy-density-ensemble/1",
         "spatialGeometry": geometry,
@@ -63,7 +68,20 @@ def _write_ensemble(root: Path, *, volume: bool) -> tuple[Path, Path, str]:
         "arrays": records,
         "provenance": {
             "kind": "unit_test",
-            "uncertaintyStatus": "observation_conditioned_prior_not_posterior",
+            "uncertaintyStatus": (
+                "baryonic_surface_likelihood_conditioned_partial_posterior"
+            ),
+            "conditioning": {
+                "status": weights_core["status"],
+                "weightsSha256": canonical_sha256(weights_core),
+                "surfaceWeights": weights_core["weights"],
+                "surfaceLikelihoodConditioned": True,
+                "verticalStructureConditioned": False,
+                "effectiveSampleSize": 1.0 / 0.68,
+                "normalizedEffectiveSampleSize": 1.0 / 1.36,
+                "weightQualityStatus": "adequate_for_commissioning_only",
+                "credibleIntervalReady": False,
+            },
         },
         "license": {"id": "CC0-1.0", "redistributionAllowed": True},
     }
@@ -103,6 +121,12 @@ def test_materializes_verified_si_realization_deterministically(tmp_path: Path, 
     loaded_bundle, loaded = load_array_bundle(first)
     assert loaded_bundle["bundleSha256"] == first_bundle["bundleSha256"]
     assert loaded_bundle["provenance"]["realizationSelection"] == selection
+    conditioning = loaded_bundle["provenance"]["baryonicConditioning"]
+    assert conditioning["surfaceWeight"] == 0.2
+    assert conditioning["verticalConditionalWeight"] == (0.5 if volume else 1.0)
+    assert conditioning["jointRealizationWeight"] == (0.1 if volume else 0.2)
+    assert conditioning["surfaceLikelihoodConditioned"] is True
+    assert conditioning["verticalStructureConditioned"] is False
     assert loaded_bundle["geometry"]["lengthUnit"] == "m"
     assert loaded_bundle["geometry"]["spacing"] == [0.5 * KPC_M] * (3 if volume else 2)
     factor = MSUN_KG / KPC_M ** (3 if volume else 2)
@@ -136,4 +160,21 @@ def test_rejects_out_of_range_and_tampered_ensemble(tmp_path: Path) -> None:
             artifact=artifact,
             selection={"surfaceRealization": 0},
             output_directory=tmp_path / "tampered",
+        )
+
+
+def test_rejects_tampered_conditioning_weights(tmp_path: Path) -> None:
+    bundle_path, archive_path, artifact = _write_ensemble(tmp_path, volume=False)
+    bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+    bundle["provenance"]["conditioning"]["surfaceWeights"] = [0.7, 0.3]
+    core = {key: value for key, value in bundle.items() if key != "bundleSha256"}
+    bundle["bundleSha256"] = canonical_sha256(core)
+    bundle_path.write_text(json.dumps(bundle), encoding="utf-8")
+    with pytest.raises(ValueError, match="weight hash mismatch"):
+        materialize_galaxy_ensemble_realization(
+            bundle_path=bundle_path,
+            archive_path=archive_path,
+            artifact=artifact,
+            selection={"surfaceRealization": 0},
+            output_directory=tmp_path / "tampered-weights",
         )

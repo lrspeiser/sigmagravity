@@ -81,6 +81,9 @@ for (const phrase of [
   "observation_conditioned_prior_not_posterior",
   "Propagate one formula across baryonic uncertainty",
   "prior_prediction_spread_not_measurement_posterior",
+  "Condition baryonic draws without looking at gravity",
+  "degenerate_importance_weights",
+  "ensemble_prediction_quantiles.csv",
   "A genuinely useful result is a prediction, not a reconstruction",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);

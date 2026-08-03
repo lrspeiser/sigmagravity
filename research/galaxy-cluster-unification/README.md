@@ -1488,6 +1488,15 @@ velocity target. These are explicit prior ensembles, not likelihood-derived
 posteriors. See
 [`docs/BARYONIC_UNCERTAINTY_ENSEMBLE_MILESTONE.md`](docs/BARYONIC_UNCERTAINTY_ENSEMBLE_MILESTONE.md).
 
+Version 0.24 adds the first gravity-independent baryonic image likelihood.
+Gas and stellar surface-density uncertainties can weight the generated surface
+draws before any gravity model or velocity/lensing target is used. Those
+immutable weights propagate into 2D/3D batches, weighted score summaries, and
+per-radius prediction bands. The real two-draw DDO101 commissioning run
+collapsed to ESS 1.0 and is explicitly not a credible interval; this exposes
+the need for real covariance/PSF products and adaptive sampling. See
+[`docs/BARYONIC_IMAGE_CONDITIONING_MILESTONE.md`](docs/BARYONIC_IMAGE_CONDITIONING_MILESTONE.md).
+
 P0723 ran Newtonian Poisson, AQUAL, QUMOND, and Refracted Gravity through that
 same path on all 13 registered galaxies. All 52 solves converged, all 161
 circular-speed points per model were scored, downloaded artifacts rehashed

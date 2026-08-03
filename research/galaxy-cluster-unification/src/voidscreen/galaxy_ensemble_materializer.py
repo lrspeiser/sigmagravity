@@ -151,6 +151,107 @@ def _selection_indices(bundle: Mapping[str, Any], selection: Mapping[str, Any]) 
     return tuple(indices)
 
 
+def _realization_weight(
+    bundle: Mapping[str, Any], indices: tuple[int, ...]
+) -> dict[str, Any]:
+    surface_count = int(bundle["ensembleAxes"][0]["count"])
+    conditioning = dict(bundle.get("provenance", {}).get("conditioning") or {})
+    if conditioning:
+        weights = conditioning.get("surfaceWeights")
+        if (
+            not isinstance(weights, list)
+            or len(weights) != surface_count
+            or any(
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not np.isfinite(value)
+                or float(value) < 0.0
+                for value in weights
+            )
+        ):
+            raise ValueError("ensemble conditioning surface weights are invalid")
+        numeric_weights = [float(value) for value in weights]
+        if not np.isclose(sum(numeric_weights), 1.0, rtol=1e-12, atol=1e-15):
+            raise ValueError("ensemble conditioning surface weights must sum to one")
+        weight_core = {
+            "schemaVersion": "sigma-baryonic-surface-weights/1",
+            "status": conditioning.get("status"),
+            "weights": numeric_weights,
+        }
+        if conditioning.get("weightsSha256") != canonical_sha256(weight_core):
+            raise ValueError("ensemble conditioning weight hash mismatch")
+        computed_effective_sample_size = 1.0 / sum(
+            weight * weight for weight in numeric_weights
+        )
+        computed_normalized_effective_sample_size = (
+            computed_effective_sample_size / surface_count
+        )
+        computed_maximum_weight = max(numeric_weights)
+        computed_quality_status = (
+            "degenerate_importance_weights"
+            if computed_normalized_effective_sample_size <= 0.5
+            or computed_maximum_weight >= 0.95
+            else "low_effective_sample_size"
+            if computed_normalized_effective_sample_size < 0.7
+            else "adequate_for_commissioning_only"
+        )
+        if (
+            not np.isclose(
+                conditioning.get("effectiveSampleSize"),
+                computed_effective_sample_size,
+                rtol=1e-12,
+                atol=1e-15,
+            )
+            or not np.isclose(
+                conditioning.get("normalizedEffectiveSampleSize"),
+                computed_normalized_effective_sample_size,
+                rtol=1e-12,
+                atol=1e-15,
+            )
+            or conditioning.get("weightQualityStatus") != computed_quality_status
+            or conditioning.get("credibleIntervalReady") is not False
+        ):
+            raise ValueError("ensemble conditioning quality diagnostics are invalid")
+        surface_weight = numeric_weights[indices[0]]
+        status = str(conditioning.get("status"))
+        weights_sha256 = str(conditioning["weightsSha256"])
+        surface_conditioned = bool(conditioning.get("surfaceLikelihoodConditioned"))
+        vertical_conditioned = bool(conditioning.get("verticalStructureConditioned"))
+        effective_sample_size = computed_effective_sample_size
+        normalized_effective_sample_size = computed_normalized_effective_sample_size
+        weight_quality_status = computed_quality_status
+        credible_interval_ready = False
+    else:
+        surface_weight = 1.0 / surface_count
+        status = "legacy_equal_declared_prior"
+        weights_sha256 = None
+        surface_conditioned = False
+        vertical_conditioned = False
+        effective_sample_size = float(surface_count)
+        normalized_effective_sample_size = 1.0
+        weight_quality_status = "legacy_not_conditioned"
+        credible_interval_ready = False
+    vertical_count = (
+        int(bundle["ensembleAxes"][1]["count"])
+        if len(bundle["ensembleAxes"]) == 2
+        else 1
+    )
+    vertical_conditional_weight = 1.0 / vertical_count
+    return {
+        "status": status,
+        "surfaceWeight": surface_weight,
+        "verticalConditionalWeight": vertical_conditional_weight,
+        "jointRealizationWeight": surface_weight * vertical_conditional_weight,
+        "weightsSha256": weights_sha256,
+        "surfaceLikelihoodConditioned": surface_conditioned,
+        "verticalStructureConditioned": vertical_conditioned,
+        "effectiveSampleSize": effective_sample_size,
+        "normalizedEffectiveSampleSize": normalized_effective_sample_size,
+        "weightQualityStatus": weight_quality_status,
+        "credibleIntervalReady": credible_interval_ready,
+    }
+
+
 def materialize_galaxy_ensemble_realization(
     *,
     bundle_path: Path,
@@ -195,6 +296,7 @@ def materialize_galaxy_ensemble_realization(
         str(axis["name"]): indices[position]
         for position, axis in enumerate(bundle["ensembleAxes"])
     }
+    realization_weight = _realization_weight(bundle, indices)
     core = {
         "schemaVersion": "sigma-array-bundle/1",
         "geometry": geometry,
@@ -206,6 +308,7 @@ def materialize_galaxy_ensemble_realization(
             "parentEnsembleBundleSha256": bundle["bundleSha256"],
             "ensembleArtifact": artifact,
             "realizationSelection": normalized_selection,
+            "baryonicConditioning": realization_weight,
             "unitConversion": f"{specification['unit']} to {output_unit}",
             "materializerVersion": MATERIALIZER_VERSION,
         },

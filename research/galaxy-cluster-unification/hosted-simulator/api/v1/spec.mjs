@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.23.0-preview",
-    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions, genuinely coupled field equations, separately typed photon and matter observables, seeded observation-conditioned baryonic prior ensembles, and deterministic fan-out of one confirmed field model across selected ensemble realizations with per-parent prediction quantiles. It also provides an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. Ensemble ranges are prior-induced prediction spread, and inverse results are hypothesis generators rather than forward theory tests. Public heavy execution still requires durable storage and isolated workers.",
+    version: "0.24.0-preview",
+    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions, genuinely coupled field equations, separately typed photon and matter observables, seeded baryonic prior ensembles, optional gravity-independent gas/stellar surface-likelihood conditioning, and deterministic fan-out of one confirmed field model across selected realizations with weighted score and per-radius prediction bands. It also provides an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. Degenerate weights are not credible intervals, and inverse results are hypothesis generators rather than forward theory tests. Public heavy execution still requires durable storage and isolated workers.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },

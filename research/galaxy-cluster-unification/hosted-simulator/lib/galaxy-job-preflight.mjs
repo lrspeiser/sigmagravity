@@ -64,7 +64,7 @@ function verticalControls(value = {}) {
 
 function uncertaintyControls(value = {}, sourceObservables = {}) {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("uncertaintyEnsemble must be an object");
-  const allowed = new Set(["enabled", "realizations", "seed", "priors"]);
+  const allowed = new Set(["enabled", "realizations", "seed", "priors", "conditioning"]);
   const unknown = Object.keys(value).filter((key) => !allowed.has(key));
   if (unknown.length) throw new Error(`unknown uncertainty ensemble controls: ${unknown.join(", ")}`);
   const priorsInput = value.priors ?? {};
@@ -91,12 +91,54 @@ function uncertaintyControls(value = {}, sourceObservables = {}) {
   if (priors.inclination_sigma_deg > 0 && priors.reference_inclination_deg === null) {
     throw new Error("inclinationSigmaDeg requires referenceInclinationDeg or sourceObservables.inclinationDeg");
   }
+  const conditioningInput = value.conditioning ?? {};
+  if (!conditioningInput || typeof conditioningInput !== "object" || Array.isArray(conditioningInput)) {
+    throw new Error("uncertaintyEnsemble.conditioning must be an object");
+  }
+  const conditioningAllowed = new Set([
+    "enabled",
+    "likelihood",
+    "useMask",
+    "minimumValidPixelsPerComponent",
+    "correlationAreaPixels",
+  ]);
+  const unknownConditioning = Object.keys(conditioningInput).filter((key) => !conditioningAllowed.has(key));
+  if (unknownConditioning.length) {
+    throw new Error(`unknown baryonic conditioning controls: ${unknownConditioning.join(", ")}`);
+  }
+  const likelihood = conditioningInput.likelihood ?? "diagonal_gaussian_surface_density";
+  if (likelihood !== "diagonal_gaussian_surface_density") {
+    throw new Error("conditioning.likelihood must be diagonal_gaussian_surface_density");
+  }
+  const correlationAreaPixels = conditioningInput.correlationAreaPixels === undefined
+    ? 1
+    : Number(conditioningInput.correlationAreaPixels);
+  if (!Number.isFinite(correlationAreaPixels) || correlationAreaPixels < 1 || correlationAreaPixels > 4096) {
+    throw new Error("conditioning.correlationAreaPixels must be finite and between 1 and 4096");
+  }
+  const conditioning = {
+    enabled: conditioningInput.enabled === undefined ? false : Boolean(conditioningInput.enabled),
+    likelihood,
+    use_mask: conditioningInput.useMask === undefined ? false : Boolean(conditioningInput.useMask),
+    minimum_valid_pixels_per_component: integer(
+      conditioningInput.minimumValidPixelsPerComponent,
+      25,
+      5,
+      1000000,
+      "conditioning.minimumValidPixelsPerComponent",
+    ),
+    correlation_area_pixels: correlationAreaPixels,
+  };
   const enabled = value.enabled === undefined ? false : Boolean(value.enabled);
+  if (conditioning.enabled && !enabled) {
+    throw new Error("baryonic conditioning requires uncertaintyEnsemble.enabled=true");
+  }
   return {
     enabled,
     realizations: enabled ? integer(value.realizations, 5, 1, 16, "uncertaintyEnsemble.realizations") : 1,
     seed: integer(value.seed, 0, 0, 2 ** 31 - 1, "uncertaintyEnsemble.seed"),
     priors,
+    conditioning,
   };
 }
 
@@ -163,7 +205,7 @@ function verifyPackage(value) {
   return value;
 }
 
-function extractionInput(bundle) {
+function extractionInput(bundle, conditioning) {
   const records = validateArrayBundle(bundle);
   if (bundle.geometry?.coordinateSystem !== "cartesian_2d" || bundle.geometry?.dimensions !== 2 || bundle.geometry?.lengthUnit !== "kpc") {
     throw new Error("extract_roundtrip requires cartesian_2d geometry in kpc");
@@ -178,6 +220,35 @@ function extractionInput(bundle) {
     throw new Error("gas and stellar surface maps must share one square grid");
   }
   if (gas.shape[0] > 513) throw new Error("local galaxy jobs are limited to 513 cells per axis");
+  if (conditioning.enabled) {
+    for (const [key, label] of [
+      ["gas_surface_density_uncertainty", "gas"],
+      ["stellar_surface_density_uncertainty", "stellar"],
+    ]) {
+      const record = records.get(key);
+      if (!record) throw new Error(`baryonic conditioning requires ${key}`);
+      if (
+        record.rank !== "scalar"
+        || record.unit !== "M_sun/kpc^2"
+        || record.role !== "uncertainty"
+        || JSON.stringify(record.shape) !== JSON.stringify(gas.shape)
+      ) {
+        throw new Error(`${label} conditioning uncertainty must be a scalar M_sun/kpc^2 uncertainty map on the source grid`);
+      }
+    }
+    if (conditioning.use_mask) {
+      const mask = records.get("baryonic_conditioning_mask");
+      if (
+        !mask
+        || mask.rank !== "scalar"
+        || mask.unit !== "1"
+        || mask.role !== "mask"
+        || JSON.stringify(mask.shape) !== JSON.stringify(gas.shape)
+      ) {
+        throw new Error("conditioning.useMask requires baryonic_conditioning_mask as a scalar dimensionless mask on the source grid");
+      }
+    }
+  }
   const rawSpacing = bundle.geometry.spacing;
   const spacing = Array.isArray(rawSpacing) ? rawSpacing.map(Number) : [Number(rawSpacing), Number(rawSpacing)];
   if (spacing.length !== 2 || !spacing.every((item) => Number.isFinite(item) && item > 0) || spacing[0] !== spacing[1]) {
@@ -204,9 +275,12 @@ export function prepareGalaxyJob({ submission, inputBundle = null }) {
   let gridControls = null;
   if (submission.operation === "extract_roundtrip") {
     if (!inputBundle) throw new Error("extract_roundtrip requires a ready data upload");
-    ({ shape } = extractionInput(inputBundle));
+    ({ shape } = extractionInput(inputBundle, uncertainty.conditioning));
     bundleSha256 = inputBundle.bundleSha256;
   } else {
+    if (uncertainty.conditioning.enabled) {
+      throw new Error("baryonic conditioning is available only for extract_roundtrip jobs with observed surface-density maps");
+    }
     parameterPackage = verifyPackage(submission.parameterPackage);
     gridControls = outputGrid(
       submission.operation,
@@ -272,7 +346,10 @@ export function prepareGalaxyJob({ submission, inputBundle = null }) {
     workerRequest,
     warnings: [
       "Vertical structure is an assumed prior ensemble, not a unique 3D recovery.",
-      "Baryonic uncertainty draws are declared priors, not a likelihood-derived posterior.",
+      uncertainty.conditioning.enabled
+        ? "Surface weights use only declared baryonic density maps, uncertainty maps, and an optional mask; vertical structure remains an unconditioned prior."
+        : "Baryonic uncertainty draws are declared priors, not a likelihood-derived posterior.",
+      "Velocity, lensing, and gravity-field targets are forbidden from baryonic conditioning.",
       "extract_roundtrip scores representation fidelity, not a law of gravity.",
     ],
   };
