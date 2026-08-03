@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "sigma-p0739-spiral-baryonic-registration-result/1",
+  "stage": "P0739",
+  "status": "fail",
+  "configSha256": "78c332f3314acb57eb5166541f1426c9269b55294d0ffa5412d4049bce44d518",
+  "parentManifestSha256": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+  "systems": 4,
+  "splitsOpened": [
+    "development"
+  ],
+  "validationArraysOpened": 0,
+  "holdoutArraysOpened": 0,
+  "velocityOrDispersionArraysOpened": 0,
+  "gravityParameters": 0,
+  "universalBaryonicSettings": {
+    "stellarMassToLightSolar": 0.5,
+    "heliumFactor": 1.36
+  },
+  "checks": {
+    "requiredSystems": true,
+    "requiredValidationArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "requiredVelocityOrDispersionArraysOpened": true,
+    "maximumGravityParameters": true,
+    "allMapsFiniteAndNonnegative": true,
+    "maximumGasMassRelativeError": true,
+    "maximumStellarMassRelativeError": true,
+    "maximumTotalMassClosureRelativeError": true,
+    "minimumFiniteFootprintFractionInsideHiR995": false,
+    "maximumOuterCellMassFraction": true,
+    "minimumCellsPerAxis": true,
+    "maximumCellsPerAxis": true,
+    "allCellsPerAxisOdd": true,
+    "maximumSourceCoordinateRoundtripArcsec": true,
+    "allOutputBundlesContentHashed": true
+  },
+  "aggregate": {
+    "minimumFootprintFractionInsideHiR995": 0.8024423159211349,
+    "maximumGasMassRelativeError": 2.1920322444657567e-16,
+    "maximumStellarMassRelativeError": 4.0581885804521275e-16,
+    "maximumOuterCellMassFraction": 0.0013115777410531444,
+    "positionAngleRangeDeg": [
+      34.39948613321605,
+      154.93832278328426
+    ],
+    "gasStarCentroidOffsetKpc": {
+      "median": 1.2277332441086595,
+      "maximum": 1.5569917293974778
+    }
+  },
+  "mapFiles": [
+    {
+      "galaxy": "NGC2403",
+      "path": "maps/NGC2403.npz",
+      "sha256": "f2c0d2a2e2c4393616e31e554e7bbaa6b0b348f08aee2dc21ae407692e8e51c5"
+    },
+    {
+      "galaxy": "NGC3198",
+      "path": "maps/NGC3198.npz",
+      "sha256": "d1ff1a55a22563e5f535680769669e6260837049ed3ee9bbd3072bad4a57eaad"
+    },
+    {
+      "galaxy": "NGC5055",
+      "path": "maps/NGC5055.npz",
+      "sha256": "9794abcb69e33b69971e1aefb1619b2b8a9c413fd9eed9665fdbb51209f1041f"
+    },
+    {
+      "galaxy": "NGC7793",
+      "path": "maps/NGC7793.npz",
+      "sha256": "1f257980e831830c6dfb502171ce9c20f9f276a3a301e442d2927bd7078cbe33"
+    }
+  ],
+  "claimBoundary": [
+    "P0739 is development-only registration and may not score or rank gravity formulas.",
+    "Published per-galaxy gas mass, luminosity, distance, inclination, and sky position are baryonic or observational inputs, not gravity parameters.",
+    "The stellar mass-to-light ratio and helium factor are one universal setting shared by every galaxy.",
+    "An image-derived face-on map is not a unique three-dimensional reconstruction.",
+    "Passing registration gates cannot validate a gravity theory; it only makes the later velocity holdout interpretable."
+  ],
+  "reportSha256": "6ce380c815de9d06bc26e0b0c12b5291d5d50fa4a4cdb4c9246b12a509b11fff"
+}

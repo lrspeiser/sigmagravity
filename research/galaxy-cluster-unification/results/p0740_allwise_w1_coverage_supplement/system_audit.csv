@@ -1,0 +1,9 @@
+galaxy,split,coadds,cutout_diameter_deg,center_inside_at_least_one_wcs,union_wcs_footprint_fraction,intensity_uncertainty_shapes_match,arrays_opened
+NGC2403,development,3,0.65752346,True,0.991887506760411,True,0
+NGC3198,development,1,0.35533348,True,1.0,True,0
+NGC5055,development,2,0.4869794,True,0.9972357430442882,True,0
+NGC7793,development,3,0.50052069,True,1.0,True,0
+NGC3521,validation,1,0.33663131,True,1.0,True,0
+NGC6946,validation,2,0.62776245,True,1.0,True,0
+NGC2841,holdout,1,0.44003159,True,1.0,True,0
+NGC7331,holdout,1,0.25266269,True,1.0,True,0

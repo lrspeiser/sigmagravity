@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "sigma-p0740-allwise-w1-coverage-supplement-result/1",
+  "stage": "P0740",
+  "status": "pass",
+  "configSha256": "bc412b322d2dc2cf7af4ab97c0791f0a4305f39c226465a9618891c71576dc11",
+  "systems": 8,
+  "coadds": 14,
+  "files": 28,
+  "bytes": 108662400,
+  "arraysOpened": {
+    "development": 0,
+    "validation": 0,
+    "holdout": 0
+  },
+  "velocityOrDispersionArraysOpened": 0,
+  "gravityParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredDevelopmentSystems": true,
+    "requiredValidationSystems": true,
+    "requiredHoldoutSystems": true,
+    "requiredCoadds": true,
+    "requiredFiles": true,
+    "allHttpStatus200": true,
+    "allSha256Recorded": true,
+    "allFitsPrimaryHdusReadable": true,
+    "allFitsHaveTwoCelestialAxes": true,
+    "everySystemCenterInsideAtLeastOneImageWcsBounds": true,
+    "minimumUnionWcsFootprintFractionOfRequestedSquare": true,
+    "allIntensityAndUncertaintyShapesMatch": true,
+    "requiredValidationArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "requiredVelocityOrDispersionArraysOpened": true,
+    "maximumGravityParameters": true
+  },
+  "aggregate": {
+    "minimumUnionWcsFootprintFraction": 0.991887506760411,
+    "maximumUnionWcsFootprintFraction": 1.0
+  },
+  "claimBoundary": [
+    "P0740 repairs observational coverage; it cannot validate or improve a gravity formula.",
+    "AllWISE W1 and SINGS IRAC1 have different filters, PSFs, backgrounds, and foreground contamination; their cross-calibration uncertainty must be propagated later.",
+    "Downloading validation and holdout bytes does not unseal their image arrays.",
+    "No velocity, dispersion, dark-matter, MOND, or candidate-theory value may select, scale, mask, or mosaic these images."
+  ],
+  "reportSha256": "beac0315c81a34736784025d67bbe316ac1c4b22c28caf74ee0d2b01f26b2d1e"
+}
