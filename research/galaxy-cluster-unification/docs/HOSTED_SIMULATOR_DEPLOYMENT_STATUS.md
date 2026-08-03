@@ -725,9 +725,45 @@ through queue, database lease, worker, verified artifact finalization, and
 restart recovery.
 
 That remains a bounded infrastructure milestone, not final scientific-platform
-readiness. Production still needs researcher authentication, project isolation,
-quotas, cancellation authorization, cache policy, audit logs, signed result
-manifests, dataset-license enforcement, monitoring, backups, cost controls, and
-an image publication/promotion policy. Only after those controls are verified
-should the same boundary admit inverse-response, observation, composed-batch,
-and signed advanced plug-in workloads.
+readiness. The v0.33 release below builds and tests researcher authentication,
+project isolation, transactional cancellation authorization, quotas, and audit
+logs. Production still needs their hosted database activation plus cache and
+license policy, signed result manifests, monitoring, backups, cost controls,
+and an image publication/promotion policy. Only after those controls are
+verified should the same boundary admit inverse-response, observation,
+composed-batch, and signed advanced plug-in workloads.
+
+## v0.33 project-scoped research API release
+
+The v0.33 release publishes a formula-neutral durable lifecycle for confirmed
+models, immutable uploads, jobs, events, artifacts, and cancellation. Project
+bearer tokens are stored only as SHA-256 hashes. The second PostgreSQL migration
+adds credentials, immutable audit events, and project quotas; state changes and
+their audit entries commit in the same transaction. The public API deliberately
+separates model/data registration from worker execution and keeps submission
+disabled until the recurring dispatcher and stateless worker are verified.
+
+The 152-test hosted suite passes, including repeatable eleven-table migrations,
+credential isolation, exact model-receipt verification, immutable byte rehashes,
+idempotency conflicts, active-job/upload/attempt quotas, transactional rollback,
+cancellation, events, and project-scoped artifact download. GitHub Actions run
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30801012875> passed the
+real non-root Linux worker and field/galaxy container acceptance for commit
+`a8c4ef2b72d1ce2f72c541b1033b22e95c74c475`.
+
+Production deployment `dpl_B2jrYAiTfZxGdyWzYXnB4dtQCG5f` serves
+`0.33.0-preview` at the stable alias. Its immutable URL is
+<https://sigma-gravity-research-simulator-n8vt853cb-horizon3.vercel.app>.
+The live guide contains the production job input, current fail-closed output,
+expected connected output, capability boundaries, and scientific limitations.
+The OpenAPI document publishes project bearer authentication and the generic
+job route.
+
+Two independent live queue smokes verified deployment identity hash
+`b55efdabcc436d6aee6981688284f075166bb3efa82af69f80763e4204cd28d6`
+and private acknowledgement hash
+`9b7e503b64a9328217a2da2eaf47a515f2f8c036d600a7cff26f009c1f408d48`.
+Storage readiness reports `durable_storage_and_queue_connected`; PostgreSQL,
+the recurring outbox scheduler, and the stateless scientific container remain
+`not_configured`, so `productionExecution` remains `not_ready` and a job POST
+returns HTTP 503 `production_control_plane_not_connected`.

@@ -100,3 +100,27 @@ Before enabling researcher jobs:
 Until then the public handlers return
 `production_control_plane_not_connected` rather than creating temporary or
 in-memory research state.
+
+## Live v0.33 verification
+
+Implementation commit `a8c4ef2b72d1ce2f72c541b1033b22e95c74c475`
+passes all 152 hosted tests. GitHub Actions run
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30801012875> also built
+the non-root Linux worker image and passed real field and galaxy container
+acceptance.
+
+Production deployment `dpl_B2jrYAiTfZxGdyWzYXnB4dtQCG5f` is ready at
+<https://sigma-gravity-research-simulator-n8vt853cb-horizon3.vercel.app> and
+aliased to the stable site. Health and OpenAPI report `0.33.0-preview`; the
+guide contains the exact job input, current 503, expected connected lifecycle,
+and scientific limits. The public deterministic smoke still reproduces the
+175-system catalog and the same content-addressed reference results.
+
+Two queue smokes independently verified deployment identity hash
+`b55efdabcc436d6aee6981688284f075166bb3efa82af69f80763e4204cd28d6`
+and private acknowledgement hash
+`9b7e503b64a9328217a2da2eaf47a515f2f8c036d600a7cff26f009c1f408d48`.
+Readiness reports private Blob and Queue connected and consumed, while the
+database, recurring outbox scheduler, and stateless worker remain
+`not_configured`. A real job submission therefore returns the documented HTTP
+503 boundary rather than storing research state outside PostgreSQL.
