@@ -11,14 +11,14 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/69F46H1818YVZhukGzJYDrSFBzL9>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/G6rLRJxp5iow3zUV8D6fCeooqt8d>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-7r9j4n26t-horizon3.vercel.app>
-- deployment ID: `dpl_69F46H1818YVZhukGzJYDrSFBzL9`
-- public contract version: `0.20.0-preview`
+  <https://sigma-gravity-research-simulator-4sypog74q-horizon3.vercel.app>
+- deployment ID: `dpl_G6rLRJxp5iow3zUV8D6fCeooqt8d`
+- public contract version: `0.21.0-preview`
 
-The service passes its local production build, 85 automated hosted tests, all
-1,568 Python scientific tests, and the live HTTP smoke suite. No deployment
+The service passes its local production build, 86 automated hosted tests, all
+1,571 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
@@ -86,6 +86,12 @@ Implemented public capabilities:
     shuffle, and total-preserving synthetic missing-baryon dropout. It reports
     each family and passes globally only when the observed pairing beats every
     declared family.
+19. Publish a deterministic four-cluster RELICS evidence registry that keeps
+    registered projected baryonic maps, model-derived GLAFIC/Zitrin lens maps,
+    and raw multiple-image observations in separate scientific roles. It
+    exposes readiness, uncertainty limits, hashes, and blockers without
+    claiming that the spent P0633 sample is a blind holdout or that any current
+    raw target is likelihood-ready.
 
 ## Verification evidence
 
@@ -95,7 +101,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 85 passing hosted tests, 1,568 passing Python scientific
+The current result is 86 passing hosted tests, 1,571 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -119,6 +125,7 @@ Then verify:
 GET  https://<deployment>/api/v1/health
 GET  https://<deployment>/api/v1/datasets
 GET  https://<deployment>/api/v1/systems/DDO154
+GET  https://<deployment>/api/v1/cluster-evidence?system=AS295
 GET  https://<deployment>/api/v1/openapi.json
 GET  https://<deployment>/schemas/observation-evaluation-job-submit-v1.schema.json
 GET  https://<deployment>/schemas/inverse-response-job-submit-v1.schema.json
@@ -138,9 +145,9 @@ and point arrays. The accepted production smoke values are:
 
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
-- run ID: `run_4a8ce420ff4fb9387e8b45a2`
+- run ID: `run_92c54e52f6fd68ae591f61d2`
 - manifest SHA-256:
-  `4a8ce420ff4fb9387e8b45a21b7cb5ad0ee0e59f3e741bf2ace0453a994a3955`
+  `92c54e52f6fd68ae591f61d21dd58259b57f309eac8d7c5812fd13bcaea7b885`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -263,6 +270,20 @@ held-out raw observation or per-system gravity parameter entered the inverse.
 The production alias passed the complete radial HTTP smoke at v0.20. Desktop
 and 390-pixel browser checks found no page-level horizontal overflow or console
 errors. Public heavy execution remains explicitly
+`production_worker_not_connected`.
+
+The v0.21 cluster-evidence checks require health to report
+`resolvedClusterEvidenceRegistry=available`, OpenAPI to advertise
+`/api/v1/cluster-evidence`, and the registry to reproduce SHA-256
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+The public response must contain exactly four registered baryonic field inputs,
+four systems with two model-derived lens-map methods each, two systems that
+passed the old raw-catalog readiness gate, zero score-ready raw forward targets,
+and zero prospective holdouts. The stable public alias passed the complete HTTP
+smoke with twin run `twinrun_9b5466d74274760f88f497ca`. Desktop and 390-pixel
+mobile browser checks found no page-level horizontal overflow or console
+warnings/errors; the wide capability table scrolls inside its own container on
+mobile. Public heavy execution remains explicitly
 `production_worker_not_connected`.
 
 The first attempted project was accidentally created in the personal
