@@ -5,8 +5,9 @@ export default function handler(request, response) {
   send(response, 200, {
     status: "ok",
     service: "sigma-gravity-research-simulator",
-    version: "0.15.0-preview",
+    version: "0.16.0-preview",
     capabilities: {
+      researcherGuide: "available",
       radialRotationCurves: "available",
       syntheticRadialGalaxies: "available",
       heldoutObservedGalaxyTwins: "available",

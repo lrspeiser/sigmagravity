@@ -19,6 +19,14 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.16 adds a public [researcher guide](guide.html) that distinguishes
+live Vercel execution, local-only reference-worker capabilities, and work that
+has not been built. It includes concrete radial and field-model request/response
+examples, explicit interpretation limits, and the shortest build path from the
+current test bench to a useful Sigma Gravity and inverse halo-response research
+platform. The detailed engineering and scientific plan is in
+[`../docs/SIGMA_GRAVITY_AND_INVERSE_HALO_SIMULATOR_ROADMAP.md`](../docs/SIGMA_GRAVITY_AND_INVERSE_HALO_SIMULATOR_ROADMAP.md).
+
 Version 0.15 adds an explicit, hash-bound researcher confirmation gate for
 field models. `POST /api/v1/models/validate` may accept a structurally valid
 draft, but such a draft reports `awaiting_researcher_confirmation` and cannot

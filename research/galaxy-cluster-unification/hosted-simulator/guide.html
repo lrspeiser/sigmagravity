@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="What the Sigma Gravity Research Simulator can test today, what it cannot yet test, and what its results mean." />
+    <title>Researcher guide | Sigma Gravity Research Simulator</title>
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <header class="hero guide-hero">
+      <nav class="nav wrap">
+        <a class="brand" href="/" aria-label="Sigma Gravity simulator home">
+          <span class="brand-mark">&Sigma;</span><span>Sigma Gravity Lab</span>
+        </a>
+        <div class="nav-links">
+          <a href="#capabilities">Capabilities</a>
+          <a href="#examples">Examples</a>
+          <a href="#limits">Limits</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="/api/v1/openapi.json">OpenAPI</a>
+        </div>
+      </nav>
+      <div class="wrap guide-hero-grid">
+        <div>
+          <p class="eyebrow">Researcher guide &middot; v0.16</p>
+          <h1>Know what the simulator tested&mdash;and what it did not.</h1>
+          <p class="lede">
+            The live site is a useful radial formula benchmark and an auditable front door for
+            richer field models. The repository also has a tested local 2D/3D worker. Those are
+            different capabilities, and this page keeps the boundary visible.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#examples">See real requests and responses</a>
+            <a class="button secondary" href="/">Open the workbench</a>
+          </div>
+        </div>
+        <aside class="guide-callout">
+          <p class="eyebrow">The shortest honest description</p>
+          <p><strong>Hosted now:</strong> test bounded radial acceleration formulas against 175 SPARC galaxies, inspect frozen resolved evidence, and validate an exact 2D/3D model manifest.</p>
+          <p><strong>Not hosted yet:</strong> execute arbitrary 2D/3D equations or run new raw cluster-lensing solves. Those jobs work only through the repository's local reference backend.</p>
+        </aside>
+      </div>
+    </header>
+
+    <main>
+      <section id="capabilities" class="wrap section guide-section">
+        <div class="section-heading">
+          <div><p class="eyebrow">Capability map</p><h2>What works where</h2></div>
+          <p class="muted">"Available" means executable, not scientifically validated.</p>
+        </div>
+        <div class="capability-table-wrap card">
+          <table class="capability-table">
+            <thead><tr><th>Task</th><th>Live Vercel site</th><th>Local repository</th><th>What it establishes</th></tr></thead>
+            <tbody>
+              <tr><td>Radial rotation-curve formula</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>How one safe algebraic acceleration law scores on published SPARC mass models.</td></tr>
+              <tr><td>Seeded radial galaxy preview</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Deterministic API mechanics and controlled radial scenarios; not a real 3D twin.</td></tr>
+              <tr><td>Observed-galaxy radial twin</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Whether compressed baryonic inputs preserve a formula's prediction when velocities are withheld.</td></tr>
+              <tr><td>Frozen resolved velocity evidence</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Separate generator fidelity, formula transport, and observed-velocity accuracy on eight systems.</td></tr>
+              <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
+              <tr><td>2D/3D fields, generated galaxies, composed batches, and photon maps</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Numerical and API conformance locally; no public durable execution yet.</td></tr>
+              <tr><td>New raw cluster-lensing campaign with complete baryons</td><td><span class="state-tag missing">Not built</span></td><td><span class="state-tag partial">Research prototypes</span></td><td>Prior inverse and forward pilots exist, but not a production-ready blind campaign.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="examples" class="guide-band">
+        <div class="wrap section guide-section">
+          <div class="section-heading">
+            <div><p class="eyebrow">Concrete examples</p><h2>Inputs, outputs, and meaning</h2></div>
+            <p class="muted">Responses are shortened, but their values and states come from the working API.</p>
+          </div>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">01</span><div><h3>Run one universal radial law on DDO154</h3><p>Input a dimension-checked expression tree. No JavaScript or Python is evaluated.</p></div></div>
+            <div class="code-pair">
+              <div><p class="code-label">POST /api/v1/runs</p><pre><code>{
+  "systemIds": ["DDO154"],
+  "tests": ["rotation_curve"],
+  "formula": {
+    "name": "Fixed simple-MOND comparator",
+    "family": "algebraic_acceleration",
+    "outputUnit": "m/s^2",
+    "parameters": {"a0": {"value": 1.2e-10, "unit": "m/s^2"}},
+    "parameterPolicy": {"universal": true, "perObjectParameters": 0},
+    "expression": {
+      "op": "mul",
+      "args": [
+        {"const": 0.5},
+        {"op": "add", "args": [
+          {"input": "g_bar"},
+          {"op": "sqrt", "args": [{"op": "add", "args": [
+            {"op": "pow", "args": [{"input": "g_bar"}, {"const": 2}]},
+            {"op": "mul", "args": [{"const": 4}, {"op": "mul", "args": [
+              {"input": "g_bar"}, {"parameter": "a0"}
+            ]}]}
+          ]}]}
+        ]}
+      ]
+    }
+  }
+}</code></pre></div>
+              <div><p class="code-label">200 response, shortened</p><pre><code>{
+  "id": "run_a6816fb085bcd6f65c81f0a5",
+  "state": "succeeded",
+  "manifestSha256": "a6816fb0...bd03a01d2",
+  "scores": {
+    "submitted": {"meanSystemRmseKmS": 4.4517729963},
+    "fixedMond": {"meanSystemRmseKmS": 4.4517729963},
+    "newtonian": {"meanSystemRmseKmS": 23.7121769269}
+  },
+  "manifest": {
+    "parameterAccounting": {"universal": 1, "perObject": 0}
+  }
+}</code></pre></div>
+            </div>
+            <div class="meaning-strip"><strong>What this proves:</strong> this exact radial formula fits DDO154 better than the packaged Newtonian-baryon comparator. It does not prove a relativistic theory, a 3D solution, or cluster lensing.</div>
+          </article>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">02</span><div><h3>Describe a 3D field theory exactly</h3><p>Start with the published <a href="/examples/models/refracted-gravity.json">Refracted Gravity example</a>, edit it, validate it, inspect the canonical model, then confirm that exact hash.</p></div></div>
+            <div class="code-pair">
+              <div><p class="code-label">POST /api/v1/models/validate, conceptual input</p><pre><code>{
+  "schemaVersion": "sigma-field-model/1",
+  "name": "Researcher's 3D field law",
+  "modelClass": "stationary_elliptic",
+  "geometry": {"coordinateSystem": "cartesian_3d", "dimensions": 3},
+  "fields": ["typed scalar/vector/tensor declarations"],
+  "equations": ["typed operators, sources, and couplings"],
+  "parameters": ["values, units, bounds, and policy"],
+  "boundaryConditions": ["declared conditions"],
+  "observables": ["matter, photons, or both"],
+  "solver": {"family": "nonlinear_finite_volume"}
+}</code></pre></div>
+              <div><p class="code-label">200 response for the included example</p><pre><code>{
+  "valid": true,
+  "modelSha256": "4a0c9be0...fea5d14bef",
+  "confirmation": {"confirmed": true},
+  "requiredCapabilities": {
+    "coordinateSystem": "cartesian_3d",
+    "solverFamily": "nonlinear_finite_volume",
+    "dataKeys": ["baryon_density"]
+  },
+  "executionReadiness": {
+    "state": "worker_not_connected",
+    "blockers": ["generic_scientific_worker_not_connected"]
+  }
+}</code></pre></div>
+            </div>
+            <div class="meaning-strip"><strong>What this proves:</strong> the service can represent, unit-check, hash, and audit the model. On Vercel it has not solved the equation. The local worker must be used for that today.</div>
+          </article>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">03</span><div><h3>Ask for heavy production execution</h3><p>The hosted API fails honestly until durable storage, a queue, and isolated workers exist.</p></div></div>
+            <div class="code-pair compact-code-pair">
+              <div><p class="code-label">POST /api/v1/field-jobs</p><pre><code>{
+  "model": {"...": "confirmed model"},
+  "dataUploadId": "upload_content_addressed_id",
+  "request": {"requestedObservables": ["photon_lensing_map"]}
+}</code></pre></div>
+              <div><p class="code-label">503 response today</p><pre><code>{
+  "error": "production_worker_not_connected",
+  "message": "The asynchronous field-job contract is implemented by the local reference backend; the durable queue and isolated worker pool are not connected to this gateway deployment.",
+  "requestSchema": "/schemas/field-job-submit-v1.schema.json"
+}</code></pre></div>
+            </div>
+            <div class="meaning-strip"><strong>What this proves:</strong> the public contract is usable for integration work, but a 503 is not a scientific result.</div>
+          </article>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">04</span><div><h3>Inspect frozen resolved evidence</h3><p>Use <code>GET /api/v1/resolved-twin-evidence?galaxy=NGC7331</code> to separate three questions.</p></div></div>
+            <ol class="question-list">
+              <li><strong>Generator fidelity:</strong> did the fake baryonic galaxy preserve the measured source map?</li>
+              <li><strong>Formula transport:</strong> did the same fixed equation return the same answer on the real and generated baryons?</li>
+              <li><strong>Observed accuracy:</strong> did either prediction match the real velocity field?</li>
+            </ol>
+            <div class="meaning-strip"><strong>Current evidence:</strong> the eight-system protocol worked; fixed simple MOND was competitive but incomplete, while Newtonian baryons failed the declared holdout criterion. A faithful simulator can preserve a wrong formula, so these scores must remain separate.</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="limits" class="wrap section guide-section">
+        <div class="section-heading"><div><p class="eyebrow">Scientific boundary</p><h2>What it cannot tell you yet</h2></div></div>
+        <div class="limits-grid">
+          <article class="card limit-card"><span>01</span><h3>No causal discovery from a fit</h3><p>A map that resembles a dark-matter reconstruction does not show that gravity flowed along the inferred paths. Multiple physical models can produce similar projected lensing.</p></article>
+          <article class="card limit-card"><span>02</span><h3>No direct dark-matter image</h3><p>A "dark-matter cloud" in a lens model is an inferred effective mass component, conditional on the lens equation, priors, baryonic model, geometry, and data. Raw image positions, shapes, time delays, shear, and magnification are the observations.</p></article>
+          <article class="card limit-card"><span>03</span><h3>No unique 2D-to-3D galaxy</h3><p>An image does not uniquely determine scale height, inclination, line-of-sight structure, gas flaring, or mass-to-light ratio. A serious generator must return posterior ensembles, not one invented truth.</p></article>
+          <article class="card limit-card"><span>04</span><h3>No universal-theory verdict from one domain</h3><p>Rotation curves alone do not establish lensing, Solar-System, stability, gravitational-wave, or cosmological behavior. The same frozen constants must survive all declared gates.</p></article>
+          <article class="card limit-card"><span>05</span><h3>No fair win without parameter accounting</h3><p>A one-parameter universal law and a flexible per-object halo fit answer different questions. Reports must show global, hierarchical, nuisance, and per-object parameter counts.</p></article>
+          <article class="card limit-card"><span>06</span><h3>No theory result from numerical convergence</h3><p>Convergence says the solver found a stable answer to the specified equations. It does not say the equations describe nature or that the inputs were complete.</p></article>
+        </div>
+      </section>
+
+      <section id="roadmap" class="roadmap-section">
+        <div class="wrap section guide-section">
+          <div class="section-heading">
+            <div><p class="eyebrow">Build next</p><h2>From test bench to discovery instrument</h2></div>
+            <p class="muted">The detailed repository roadmap defines data products, evidence gates, and failure conditions.</p>
+          </div>
+          <div class="roadmap-flow">
+            <article><span>1</span><div><h3>Connect production compute</h3><p>Queue, isolated Python workers, durable metadata, object storage, authentication, quotas, cancellation, and signed artifacts.</p></div></article>
+            <article><span>2</span><div><h3>Build the resolved evidence registry</h3><p>Registered stellar, gas, intracluster-light, X-ray/SZ, velocity, strong-lensing, weak-lensing, PSF, WCS, uncertainty, license, and provenance products.</p></div></article>
+            <article><span>3</span><div><h3>Finish uncertainty-aware galaxy twins</h3><p>Infer posterior baryonic/observation parameters without velocity targets or gravity parameters, generate 3D ensembles, and recover withheld observations.</p></div></article>
+            <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>Represent scalar, vector, tensor, nonlocal, screening, photon, and matter terms with units, boundaries, universal parameters, and Solar-System limits.</p></div></article>
+            <article><span>5</span><div><h3>Use halo maps only for discovery</h3><p>Infer candidate baryon-to-effective-response kernels with null controls and uncertainty. Treat the answer as non-unique and never as proof of a path.</p></div></article>
+            <article><span>6</span><div><h3>Freeze a forward law</h3><p>Predict held-out raw lensing and galaxy velocities from baryons alone. The test system's inferred halo map cannot choose destinations or parameters.</p></div></article>
+            <article><span>7</span><div><h3>Run one joint scorecard</h3><p>Galaxies, clusters, Solar System, numerical stability, parameter counts, sensitivity, and blind holdouts in one deterministic report.</p></div></article>
+          </div>
+          <div class="finish-line card">
+            <p class="eyebrow">The finish line</p>
+            <h3>A genuinely useful result is a prediction, not a reconstruction.</h3>
+            <p>On a held-out cluster, the simulator must receive baryonic observations and a frozen universal formula, then predict raw multiple-image positions, shear or magnification, and dynamics without receiving the cluster's target halo map. On held-out galaxies, the same constants must predict velocity fields. The report must compare baryons-only GR, fixed MOND/RAR, and dark-matter models while disclosing parameter counts and uncertainty.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer><div class="wrap"><span>Sigma Gravity Research Simulator</span><span>Every result should be reproducible, including failures.</span></div></footer>
+  </body>
+</html>

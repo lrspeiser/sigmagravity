@@ -52,6 +52,8 @@ const apiRoutes = new Map([
 const staticFiles = new Map([
   ["/", ["index.html", "text/html; charset=utf-8"]],
   ["/index.html", ["index.html", "text/html; charset=utf-8"]],
+  ["/guide", ["guide.html", "text/html; charset=utf-8"]],
+  ["/guide.html", ["guide.html", "text/html; charset=utf-8"]],
   ["/assets/app.js", ["assets/app.js", "text/javascript; charset=utf-8"]],
   ["/assets/style.css", ["assets/style.css", "text/css; charset=utf-8"]],
   ["/assets/resolved-twin-development-atlas.png", ["assets/resolved-twin-development-atlas.png", "image/png"]],

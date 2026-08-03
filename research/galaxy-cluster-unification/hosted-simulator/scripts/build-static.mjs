@@ -10,6 +10,7 @@ await mkdir(resolve(dist, "examples", "models"), { recursive: true });
 await mkdir(resolve(dist, "examples", "observation-targets"), { recursive: true });
 for (const path of [
   "index.html",
+  "guide.html",
   "assets/app.js",
   "assets/style.css",
   "assets/resolved-twin-development-atlas.png",

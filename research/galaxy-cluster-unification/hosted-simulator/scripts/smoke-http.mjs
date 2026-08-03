@@ -19,8 +19,16 @@ assert.match(page, /held-out twin/i);
 assert.match(page, /Resolved fake-galaxy evidence/i);
 assert.match(page, /Describe a full 2D or 3D theory/);
 
+const guide = await request("/guide.html");
+assert.match(guide, /Know what the simulator tested/);
+assert.match(guide, /Inputs, outputs, and meaning/);
+assert.match(guide, /Use halo maps only for discovery/);
+assert.match(guide, /A genuinely useful result is a prediction, not a reconstruction/);
+
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
+assert.equal(health.version, "0.16.0-preview");
+assert.equal(health.capabilities.researcherGuide, "available");
 const datasets = await request("/api/v1/datasets");
 assert.equal(datasets.items[0].systemCount, 175);
 const systems = await request("/api/v1/systems?q=DDO&limit=3");
