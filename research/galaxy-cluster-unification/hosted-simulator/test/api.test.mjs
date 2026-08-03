@@ -43,7 +43,8 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.22.0-preview");
+  assert.equal(output.body.version, "0.23.0-preview");
+  assert.equal(output.body.capabilities.localBaryonicEnsemblePropagation, "available_in_dev_server");
   assert.equal(output.body.capabilities.localInverseResponseMultiNullSuite, "available_in_dev_server");
   assert.equal(output.body.capabilities.researcherGuide, "available");
   assert.equal(output.body.capabilities.exactModelHashConfirmation, "required_for_execution");
@@ -75,6 +76,25 @@ test("health API identifies the deployed contract version and local worker bound
   assert.equal(
     output.body.capabilities.localCoupledTwoPotentialPhotonMatter,
     "available_in_dev_server",
+  );
+});
+
+test("published batch schema exposes bounded galaxy ensemble fan-out", () => {
+  const schema = JSON.parse(readFileSync(
+    new URL("../schemas/batch-submit-v1.schema.json", import.meta.url),
+    "utf8",
+  ));
+  const system = schema.properties.systems.items.properties;
+  assert.ok(system.galaxyArtifact.enum.includes("surface_density_ensemble"));
+  assert.ok(system.galaxyArtifact.enum.includes("volume_density_ensemble"));
+  assert.equal(system.ensembleSelection.properties.maximumChildren.maximum, 128);
+  assert.equal(
+    system.ensembleSelection.properties.surfaceRealizations.oneOf[1].maxItems,
+    16,
+  );
+  assert.equal(
+    system.ensembleSelection.properties.verticalRealizations.oneOf[1].maxItems,
+    8,
   );
 });
 

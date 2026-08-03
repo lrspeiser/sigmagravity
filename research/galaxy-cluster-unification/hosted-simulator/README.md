@@ -19,6 +19,21 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.23 connects the baryonic prior ensembles to the generic batch
+solver. A batch system can select all or named surface and vertical
+realizations from a completed galaxy job. The gateway verifies and slices the
+parent ensemble, converts the selected density fields to SI, assigns each
+realization a content-addressed upload and child-job identity, and runs the
+same confirmed model and observation targets over every child. Reports add
+`per_realization.csv` plus JSON/CSV parent summaries with p16/p50/p84 solver
+and observable metrics. These intervals are labeled
+`prior_prediction_spread_not_measurement_posterior`: they propagate declared
+baryonic priors but do not turn those priors into an observation-conditioned
+posterior. The local DDO101 HTTP acceptance runs two 3D realizations through
+Newtonian field solves and published rotation-curve scoring with zero
+per-object gravity parameters. Production heavy execution is still not
+connected on Vercel.
+
 Version 0.22 adds a real gravity-independent baryonic uncertainty-ensemble
 artifact path to local galaxy jobs. Researchers can declare bounded seeded
 priors for mass, radial scale, angular and local structure, center, rotation,

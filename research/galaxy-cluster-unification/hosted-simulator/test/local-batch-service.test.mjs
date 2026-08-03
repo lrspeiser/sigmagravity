@@ -401,10 +401,11 @@ test("one fixed model produces deterministic multi-system batch reports", async 
   assert.deepEqual(
     response.items.map((item) => item.path).sort(),
     [
-      "aggregate_scores.json", "batch.json", "child_jobs.json", "failures.csv",
+      "aggregate_scores.json", "batch.json", "child_jobs.json",
+      "ensemble_summary.csv", "ensemble_summary.json", "failures.csv",
       "llm_briefing.md", "model.json", "observation_multiple_image_families.csv",
       "observation_multiple_image_predictions.csv", "observation_predictions.csv",
-      "observation_velocity_field_predictions.csv", "per_galaxy.csv", "report.html",
+      "observation_velocity_field_predictions.csv", "per_galaxy.csv", "per_realization.csv", "report.html",
       "reproduction_command.txt",
     ],
   );
@@ -425,6 +426,84 @@ test("one fixed model produces deterministic multi-system batch reports", async 
   const duplicate = await batchService.createBatch(payload);
   assert.equal(duplicate.id, submission.id);
   assert.equal(duplicate.duplicate, true);
+});
+
+test("one confirmed model fans out a galaxy ensemble and reports parent prediction spread", async (t) => {
+  const { fieldService, batchService } = await fixture(t);
+  const [firstTicket, secondTicket] = await Promise.all([
+    upload(fieldService, "ENSEMBLE-0"),
+    upload(fieldService, "ENSEMBLE-1"),
+  ]);
+  const [first, second] = await Promise.all([
+    fieldService.getUpload(firstTicket.id),
+    fieldService.getUpload(secondTicket.id),
+  ]);
+  fieldService.describeGalaxyEnsembleArtifact = async (jobId, artifact, selection) => {
+    assert.equal(jobId, `job_${"a".repeat(24)}`);
+    assert.equal(artifact, "surface_density_ensemble");
+    assert.deepEqual(selection.surfaceRealizations, [0, 1]);
+    return {
+      schemaVersion: "sigma-galaxy-ensemble-description/1",
+      galaxyJobId: jobId,
+      artifact,
+      bundleSha256: "b".repeat(64),
+      archiveSha256: "c".repeat(64),
+      uncertaintyStatus: "observation_conditioned_prior_not_posterior",
+      axes: [{ name: "surfaceRealization", count: 2, anchorIndex: 0 }],
+      realizations: [{ surfaceRealization: 0 }, { surfaceRealization: 1 }],
+    };
+  };
+  fieldService.createUploadFromGalaxyEnsembleArtifact = async (_jobId, _artifact, realization) => (
+    realization.surfaceRealization === 0 ? first : second
+  );
+  const submission = await batchService.createBatch({
+    schemaVersion: "sigma-batch-submit/1",
+    model: model(),
+    systems: [{
+      id: "GALAXY-ENSEMBLE",
+      galaxyJobId: `job_${"a".repeat(24)}`,
+      galaxyArtifact: "surface_density_ensemble",
+      ensembleSelection: { surfaceRealizations: [0, 1], maximumChildren: 2 },
+    }],
+    fieldRequest: {
+      schemaVersion: "sigma-field-job-request/1",
+      boundaryFields: { u: { value: 0 } },
+      requestedObservables: ["gradient"],
+      seed: 9,
+    },
+    parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
+  });
+  assert.equal(submission.submittedSystemCount, 1);
+  assert.equal(submission.systemCount, 2);
+  assert.equal(submission.ensembleRealizationCount, 2);
+  await fieldService.waitForIdle();
+  await batchService.waitForIdle();
+  const aggregate = JSON.parse((await batchService.getArtifact(
+    submission.id,
+    "aggregate_scores.json",
+  )).content.toString("utf8"));
+  assert.equal(aggregate.parentSystemCount, 1);
+  assert.equal(aggregate.withinSystemUncertainty.ensembleParentCount, 1);
+  assert.equal(aggregate.withinSystemUncertainty.ensembleRealizationCount, 2);
+  assert.equal(
+    aggregate.withinSystemUncertainty.status,
+    "prior_prediction_spread_not_measurement_posterior",
+  );
+  const summary = JSON.parse((await batchService.getArtifact(
+    submission.id,
+    "ensemble_summary.json",
+  )).content.toString("utf8"));
+  assert.equal(summary.systems[0].parentSystemId, "GALAXY-ENSEMBLE");
+  assert.equal(summary.systems[0].realizationCount, 2);
+  assert.equal(summary.systems[0].metrics.iterations.p50, 4);
+  const perRealization = (await batchService.getArtifact(
+    submission.id,
+    "per_realization.csv",
+  )).content.toString("utf8");
+  assert.match(perRealization, /GALAXY-ENSEMBLE::s000/);
+  assert.match(perRealization, /GALAXY-ENSEMBLE::s001/);
+  const report = (await batchService.getArtifact(submission.id, "report.html")).content.toString("utf8");
+  assert.match(report, /not likelihood-derived credible intervals/);
 });
 
 test("unsupported fitting policies are rejected before child execution", async (t) => {

@@ -237,6 +237,7 @@ def galaxy_job(
     upload_id: str | None = None,
     parameters: dict[str, Any] | None = None,
     controls: dict[str, Any] | None = None,
+    uncertainty_ensemble: dict[str, Any] | None = None,
     output_cells: int | None = None,
     seed: int,
 ) -> tuple[dict[str, Any], dict[str, bytes]]:
@@ -270,6 +271,8 @@ def galaxy_job(
         payload["parameterPackage"] = parameters
         payload["generationControls"] = controls or {}
         payload["outputGrid"] = {"cellsPerAxis": int(output_cells or 25)}
+        if uncertainty_ensemble is not None:
+            payload["uncertaintyEnsemble"] = uncertainty_ensemble
     submission = request_json(f"{base}/api/v1/galaxy-jobs", method="POST", payload=payload)
     completed = wait(base, submission)
     _, downloaded = download_artifacts(base, submission)
@@ -292,6 +295,25 @@ def main() -> None:
             operation="generate",
             parameters=parameters,
             controls={},
+            output_cells=25,
+            seed=302,
+        )
+        ensemble_replay, _ = galaxy_job(
+            base,
+            operation="generate",
+            parameters=parameters,
+            controls={},
+            uncertainty_ensemble={
+                "enabled": True,
+                "realizations": 2,
+                "seed": 902,
+                "priors": {
+                    "gasMassLnSigma": 0.05,
+                    "stellarMassLnSigma": 0.05,
+                    "gasRadialScaleLnSigma": 0.04,
+                    "stellarRadialScaleLnSigma": 0.04,
+                },
+            },
             output_cells=25,
             seed=302,
         )
@@ -342,6 +364,17 @@ def main() -> None:
                         "galaxyJobId": diffuse["id"],
                         "galaxyArtifact": "field_volume_density",
                     },
+                    {
+                        "id": "DDO101-ensemble",
+                        "galaxyJobId": ensemble_replay["id"],
+                        "galaxyArtifact": "volume_density_ensemble",
+                        "ensembleSelection": {
+                            "surfaceRealizations": [0, 1],
+                            "verticalRealizations": [0],
+                            "maximumChildren": 2,
+                        },
+                        "observationTargets": [ddo101_rotation_target()],
+                    },
                 ],
                 "fieldRequest": {
                     "schemaVersion": "sigma-field-job-request/1",
@@ -384,7 +417,7 @@ def main() -> None:
         if any(
             item["observationEvaluationJobId"] is not None
             for item in child_jobs["items"]
-            if item["systemId"] != "DDO101-replay"
+            if item["parentSystemId"] not in {"DDO101-replay", "DDO101-ensemble"}
         ):
             raise RuntimeError("field-only systems unexpectedly created observation jobs")
         changed_payload = copy.deepcopy(batch_payload)
@@ -422,9 +455,9 @@ def main() -> None:
             raise RuntimeError("identical composed batch did not reuse its identity")
         if batch["state"] != "succeeded":
             raise RuntimeError(f"batch did not fully succeed: {batch['state']}")
-        if aggregate["systemCount"] != 3:
-            raise RuntimeError("batch did not retain all three systems")
-        if aggregate["succeededSystems"] != 3 or aggregate["convergenceFraction"] != 1.0:
+        if aggregate["systemCount"] != 5 or aggregate["parentSystemCount"] != 4:
+            raise RuntimeError("batch did not retain all parent systems and ensemble children")
+        if aggregate["succeededSystems"] != 5 or aggregate["convergenceFraction"] != 1.0:
             raise RuntimeError("not every system converged")
         if aggregate["maximumEquationResidual"] > 1e-7:
             raise RuntimeError(
@@ -439,10 +472,28 @@ def main() -> None:
             raise RuntimeError("batch parameter policy changed")
         if aggregate["observationScoresAvailable"] is not True:
             raise RuntimeError("batch did not publish the requested rotation score")
-        if aggregate["scoredObservationTargets"] != 1:
-            raise RuntimeError("batch did not score exactly one declared target")
-        if aggregate["validObservationPoints"] != 10:
+        if aggregate["scoredObservationTargets"] != 3:
+            raise RuntimeError("batch did not score the anchor and two ensemble targets")
+        if aggregate["validObservationPoints"] != 30:
             raise RuntimeError("batch lost published DDO101 rotation points")
+        uncertainty = aggregate["withinSystemUncertainty"]
+        if (
+            uncertainty["status"] != "prior_prediction_spread_not_measurement_posterior"
+            or uncertainty["ensembleParentCount"] != 1
+            or uncertainty["ensembleRealizationCount"] != 2
+        ):
+            raise RuntimeError("batch did not publish honest ensemble propagation metadata")
+        ensemble_summary = json.loads(downloaded["ensemble_summary.json"])
+        if (
+            len(ensemble_summary["systems"]) != 1
+            or ensemble_summary["systems"][0]["realizationCount"] != 2
+            or ensemble_summary["systems"][0]["metrics"]["observationRmseMPerS"]["count"]
+            != 2
+        ):
+            raise RuntimeError("ensemble prediction summary is incomplete")
+        per_realization = downloaded["per_realization.csv"].decode("utf-8")
+        if "DDO101-ensemble::s000::v000" not in per_realization or "DDO101-ensemble::s001::v000" not in per_realization:
+            raise RuntimeError("per-realization report lost deterministic child identities")
         if not np.isfinite(aggregate["observationRmseMPerS"]):
             raise RuntimeError("batch observation RMSE is not finite")
         if conformance["normalizedRmse"] > 0.1:
@@ -454,6 +505,8 @@ def main() -> None:
             "aggregate_scores.json",
             "batch.json",
             "child_jobs.json",
+            "ensemble_summary.csv",
+            "ensemble_summary.json",
             "failures.csv",
             "llm_briefing.md",
             "model.json",
@@ -462,6 +515,7 @@ def main() -> None:
             "observation_multiple_image_predictions.csv",
             "observation_multiple_image_families.csv",
             "per_galaxy.csv",
+            "per_realization.csv",
             "report.html",
             "reproduction_command.txt",
         }
@@ -470,7 +524,7 @@ def main() -> None:
         print(
             json.dumps(
                 {
-                    "schemaVersion": "sigma-batch-http-smoke/2",
+                    "schemaVersion": "sigma-batch-http-smoke/3",
                     "state": "pass" if batch["state"] == "succeeded" else batch["state"],
                     "batchId": batch["id"],
                     "model": model["name"],
@@ -478,6 +532,8 @@ def main() -> None:
                     "parameterPolicy": aggregate["parameterPolicy"],
                     "systems": [item["systemId"] for item in child_jobs["items"]],
                     "successfulSystems": aggregate["succeededSystems"],
+                    "parentSystems": aggregate["parentSystemCount"],
+                    "ensembleRealizations": uncertainty["ensembleRealizationCount"],
                     "convergenceFraction": aggregate["convergenceFraction"],
                     "maximumEquationResidual": aggregate["maximumEquationResidual"],
                     "perObjectGravityParameters": aggregate["perObjectGravityParameters"],
@@ -489,10 +545,10 @@ def main() -> None:
                     "fieldChildObservationTargetCount": len(
                         field_child["preflight"]["observationTargets"]
                     ),
-                    "fieldOnlyObservationChildren": sum(
+                    "ensembleObservationChildren": sum(
                         item["observationEvaluationJobId"] is not None
                         for item in child_jobs["items"]
-                        if item["systemId"] != "DDO101-replay"
+                        if item["parentSystemId"] == "DDO101-ensemble"
                     ),
                     "changedObservationPreservedFieldJobId": (
                         changed_replay["fieldJobId"] == replay_child["fieldJobId"]

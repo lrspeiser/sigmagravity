@@ -78,6 +78,8 @@ export function prepareBatch({ submission, resolvedSystems }) {
     });
     return {
       systemId: system.id,
+      parentSystemId: system.parentSystemId ?? system.id,
+      realization: system.realization ?? null,
       source: system.source,
       inputBundleSha256: system.inputBundle.bundleSha256,
       observationBundleSha256: observationBundle.bundleSha256,
@@ -105,8 +107,10 @@ export function prepareBatch({ submission, resolvedSystems }) {
     modelSha256,
     parameterPolicy: policy,
     fieldRequest,
-    systems: childPreflights.map(({ systemId, source, inputBundleSha256, observationBundleSha256, fieldPreflightSha256, observationBindingSha256, observationTargets, observationTargetSummary }) => ({
+    systems: childPreflights.map(({ systemId, parentSystemId, realization, source, inputBundleSha256, observationBundleSha256, fieldPreflightSha256, observationBindingSha256, observationTargets, observationTargetSummary }) => ({
       systemId,
+      parentSystemId,
+      realization,
       source,
       inputBundleSha256,
       observationBundleSha256,
@@ -145,6 +149,7 @@ export function prepareBatch({ submission, resolvedSystems }) {
         "Massive-tracer and photon-lensing scores are produced by separately content-addressed observation jobs after each immutable field solve.",
         "Changing a measured array, mask, uncertainty, beam, or target declaration does not alter the field-child identity when the model and source field inputs are unchanged.",
         "Velocity, deflection, and reduced-shear residuals remain in separate named channels and units; unsubmitted observables are not evaluated.",
+        "Ensemble summaries, when present, measure prediction spread under declared baryonic priors; they are not likelihood-derived posterior intervals.",
       ]
       : [
         "A converged batch proves execution of one frozen model, not agreement with observations.",

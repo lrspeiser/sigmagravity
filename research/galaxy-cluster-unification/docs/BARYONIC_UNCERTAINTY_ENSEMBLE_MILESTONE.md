@@ -87,7 +87,13 @@ DDO101 observations.
 
 ## What remains
 
-This is the ensemble artifact and propagation layer, not the finished inverse
+Version 0.23 now provides deterministic unweighted propagation: a batch can
+select named surface and vertical realizations, run one confirmed field model
+and the same declared observation targets over every draw, and publish
+per-realization plus p16/p50/p84 parent summaries. See
+`BARYONIC_ENSEMBLE_PROPAGATION_MILESTONE.md`.
+
+This is not the finished inverse
 observing model. A likelihood-derived posterior still needs:
 
 1. raw stellar images and H I / molecular-gas maps with WCS;
@@ -97,10 +103,9 @@ observing model. A likelihood-derived posterior still needs:
 5. bulge/disk/bar/arm/clump decomposition and dust attenuation;
 6. spectral cubes or 2D velocity fields used only for observation recovery,
    never to infer the baryonic map with the gravity formula under test;
-7. posterior sampling and weights; and
-8. automatic fan-out of one confirmed field model across every ensemble draw,
-   followed by uncertainty-weighted observable aggregation; and
-9. held-out raw-observation round trips across a morphologically broad sample.
+7. posterior sampling and weights, followed by weighted observable
+   aggregation rather than the current unweighted prior quantiles; and
+8. held-out raw-observation round trips across a morphologically broad sample.
 
 Public Vercel exposes the schema and guide but still does not execute these
 jobs. Durable storage, a queue, isolated workers, authentication, and audit
@@ -117,4 +122,5 @@ The local HTTP end-to-end path is exercised by:
 
 ```powershell
 npm --prefix hosted-simulator run smoke:galaxy-jobs
+npm --prefix hosted-simulator run smoke:batches
 ```

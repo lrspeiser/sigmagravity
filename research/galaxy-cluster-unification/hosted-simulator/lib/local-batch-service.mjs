@@ -7,7 +7,7 @@ import { LocalServiceError } from "./local-field-job-service.mjs";
 
 // Report contents participate in batch identity through this version. Bump it
 // whenever deterministic batch artifacts or aggregation semantics change.
-const SERVICE_VERSION = "sigma-local-batch-service/4";
+const SERVICE_VERSION = "sigma-local-batch-service/5";
 const IDENTIFIER = /^batch_[0-9a-f]{24}$/;
 const TERMINAL_CHILD_STATES = new Set([
   "succeeded",
@@ -85,6 +85,37 @@ function median(values) {
   return sorted.length % 2 ? sorted[middle] : 0.5 * (sorted[middle - 1] + sorted[middle]);
 }
 
+function quantile(values, probability) {
+  const sorted = values.filter(Number.isFinite).sort((left, right) => left - right);
+  if (!sorted.length) return null;
+  if (sorted.length === 1) return sorted[0];
+  const position = (sorted.length - 1) * probability;
+  const lower = Math.floor(position);
+  const upper = Math.ceil(position);
+  const fraction = position - lower;
+  return sorted[lower] * (1 - fraction) + sorted[upper] * fraction;
+}
+
+function distributionSummary(values) {
+  const finite = values.filter(Number.isFinite);
+  return {
+    count: finite.length,
+    p16: quantile(finite, 0.16),
+    p50: quantile(finite, 0.50),
+    p84: quantile(finite, 0.84),
+    minimum: finite.length ? Math.min(...finite) : null,
+    maximum: finite.length ? Math.max(...finite) : null,
+  };
+}
+
+function realizationSystemId(parentSystemId, realization) {
+  const surface = String(realization.surfaceRealization).padStart(3, "0");
+  const vertical = realization.verticalRealization === undefined
+    ? ""
+    : `::v${String(realization.verticalRealization).padStart(3, "0")}`;
+  return `${parentSystemId}::s${surface}${vertical}`;
+}
+
 function htmlEscape(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -128,6 +159,9 @@ export class LocalBatchService {
         "observation_predictions.csv",
         "observation_velocity_field_predictions.csv",
         "per_galaxy.csv",
+        "per_realization.csv",
+        "ensemble_summary.csv",
+        "ensemble_summary.json",
         "aggregate_scores.json",
         "failures.csv",
         "report.html",
@@ -162,6 +196,68 @@ export class LocalBatchService {
     const uploadIds = [];
     const observationUploadIds = [];
     for (const source of payload.systems ?? []) {
+      const ensembleArtifact = new Set([
+        "surface_density_ensemble",
+        "volume_density_ensemble",
+      ]).has(source.galaxyArtifact);
+      if (ensembleArtifact) {
+        if (!source.galaxyJobId || !source.ensembleSelection || source.dataUploadId) {
+          throw new LocalServiceError(
+            422,
+            "invalid_batch_source",
+            `system ${source.id ?? "?"} requires a galaxy ensemble job, artifact, and selection only`,
+          );
+        }
+        const description = await this.fieldService.describeGalaxyEnsembleArtifact(
+          source.galaxyJobId,
+          source.galaxyArtifact,
+          source.ensembleSelection,
+        );
+        if (resolvedSystems.length + description.realizations.length > 1000) {
+          throw new LocalServiceError(
+            413,
+            "batch_child_quota_exceeded",
+            "expanded ensemble selections exceed the 1000-child batch contract",
+          );
+        }
+        const fixedObservationUpload = source.observationDataUploadId
+          ? await this.fieldService.getUpload(source.observationDataUploadId)
+          : null;
+        if (fixedObservationUpload && fixedObservationUpload.state !== "ready") {
+          throw new LocalServiceError(409, "upload_not_ready", `system ${source.id} observation upload is not ready`);
+        }
+        for (const realization of description.realizations) {
+          const upload = await this.fieldService.createUploadFromGalaxyEnsembleArtifact(
+            source.galaxyJobId,
+            source.galaxyArtifact,
+            realization,
+          );
+          const observationUpload = fixedObservationUpload ?? upload;
+          uploadIds.push(upload.id);
+          observationUploadIds.push(observationUpload.id);
+          resolvedSystems.push({
+            id: realizationSystemId(source.id, realization),
+            parentSystemId: source.id,
+            realization,
+            source: {
+              kind: "galaxy_job_ensemble_realization",
+              galaxyJobId: source.galaxyJobId,
+              artifact: source.galaxyArtifact,
+              parentEnsembleBundleSha256: description.bundleSha256,
+              uncertaintyStatus: description.uncertaintyStatus,
+              realization,
+              materializedUploadId: upload.id,
+            },
+            inputBundle: upload.inputBundle,
+            observationBundle: observationUpload.inputBundle,
+            observationTargets: source.observationTargets ?? [],
+          });
+        }
+        continue;
+      }
+      if (source.ensembleSelection) {
+        throw new LocalServiceError(422, "invalid_batch_source", `system ${source.id ?? "?"} uses ensembleSelection with a non-ensemble source`);
+      }
       let upload;
       let sourceIdentity;
       if (source.dataUploadId) {
@@ -192,6 +288,8 @@ export class LocalBatchService {
       observationUploadIds.push(observationUpload.id);
       resolvedSystems.push({
         id: source.id,
+        parentSystemId: source.id,
+        realization: null,
         source: sourceIdentity,
         inputBundle: upload.inputBundle,
         observationBundle: observationUpload.inputBundle,
@@ -212,7 +310,7 @@ export class LocalBatchService {
       throw error;
     }
     const identity = {
-      schemaVersion: "sigma-batch-submission-identity/2",
+      schemaVersion: "sigma-batch-submission-identity/3",
       serviceVersion: SERVICE_VERSION,
       preflightSha256: preflight.preflightSha256,
       fieldWorkerSourceSha256: this.fieldService.workerSourceSha256,
@@ -236,6 +334,8 @@ export class LocalBatchService {
       });
       childJobs.push({
         systemId: resolvedSystems[index].id,
+        parentSystemId: resolvedSystems[index].parentSystemId,
+        realization: resolvedSystems[index].realization,
         source: resolvedSystems[index].source,
         dataUploadId: uploadIds[index],
         observationDataUploadId: observationUploadIds[index],
@@ -255,6 +355,8 @@ export class LocalBatchService {
       preflight,
       parameterPolicy: preflight.parameterPolicy,
       systemCount: resolvedSystems.length,
+      submittedSystemCount: (payload.systems ?? []).length,
+      ensembleRealizationCount: resolvedSystems.filter((system) => system.realization).length,
       childJobs,
       completedChildren: 0,
       successfulChildren: 0,
@@ -265,7 +367,7 @@ export class LocalBatchService {
     };
     await atomicWrite(this.#recordPath(id), record);
     await this.#appendEvent(id, "running", {
-      message: `One frozen model queued across ${record.systemCount} systems.`,
+      message: `One frozen model queued across ${record.systemCount} resolved system realization(s).`,
     });
     this.#monitor(id);
     return { ...publicBatch(record), duplicate: false };
@@ -602,6 +704,9 @@ export class LocalBatchService {
             : observationChild?.state ?? "failed";
       const row = {
         system_id: definition.systemId,
+        parent_system_id: definition.parentSystemId ?? definition.systemId,
+        surface_realization: definition.realization?.surfaceRealization ?? null,
+        vertical_realization: definition.realization?.verticalRealization ?? null,
         source_kind: definition.source.kind,
         source_id: definition.source.id ?? definition.source.galaxyJobId,
         field_job_id: fieldChild.id,
@@ -642,6 +747,8 @@ export class LocalBatchService {
       rows.push(row);
       childManifest.push({
         systemId: definition.systemId,
+        parentSystemId: definition.parentSystemId ?? definition.systemId,
+        realization: definition.realization ?? null,
         source: definition.source,
         inputBundleSha256: definition.inputBundleSha256,
         observationBundleSha256: definition.observationBundleSha256,
@@ -671,6 +778,7 @@ export class LocalBatchService {
             : "observation_execution_failure";
         failureRows.push({
           system_id: definition.systemId,
+          parent_system_id: definition.parentSystemId ?? definition.systemId,
           field_job_id: fieldChild.id,
           observation_evaluation_job_id: observationChild?.id ?? null,
           state: systemState,
@@ -724,6 +832,46 @@ export class LocalBatchService {
     const velocityAggregate = observationChannelAggregates.velocity_m_s ?? null;
     const validObservationPoints = Object.values(observationChannelAggregates)
       .reduce((sum, value) => sum + value.validPoints, 0);
+    const ensembleMetricDefinitions = [
+      ["iterations", "iterations"],
+      ["maximum_relative_update", "maximumRelativeUpdate"],
+      ["maximum_equation_residual", "maximumEquationResidual"],
+      ["observation_rmse_m_s", "observationRmseMPerS"],
+      ["observation_weighted_rmse_m_s", "observationWeightedRmseMPerS"],
+      ["observation_chi_square", "observationChiSquare"],
+      ["observation_deflection_rmse_arcsec", "observationDeflectionRmseArcsec"],
+      ["observation_reduced_shear_rmse", "observationReducedShearRmse"],
+      ["observation_image_position_rmse_arcsec", "observationImagePositionRmseArcsec"],
+    ];
+    const ensembleGroups = new Map();
+    for (let index = 0; index < rows.length; index += 1) {
+      const definition = record.childJobs[index];
+      if (!definition.realization) continue;
+      const parentSystemId = definition.parentSystemId ?? definition.systemId;
+      if (!ensembleGroups.has(parentSystemId)) ensembleGroups.set(parentSystemId, []);
+      ensembleGroups.get(parentSystemId).push({ row: rows[index], definition });
+    }
+    const ensembleSummaries = [...ensembleGroups.entries()]
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([parentSystemId, members]) => ({
+        schemaVersion: "sigma-batch-ensemble-system-summary/1",
+        parentSystemId,
+        galaxyJobId: members[0].definition.source.galaxyJobId,
+        artifact: members[0].definition.source.artifact,
+        parentEnsembleBundleSha256: members[0].definition.source.parentEnsembleBundleSha256,
+        uncertaintyStatus: members[0].definition.source.uncertaintyStatus,
+        realizationCount: members.length,
+        succeededRealizations: members.filter(({ row }) => row.state === "succeeded").length,
+        fieldSucceededRealizations: members.filter(({ row }) => row.field_state === "succeeded").length,
+        observationSucceededRealizations: members.filter(({ row }) => row.observation_state === "succeeded").length,
+        metrics: Object.fromEntries(ensembleMetricDefinitions.map(([rowKey, outputKey]) => [
+          outputKey,
+          distributionSummary(members.map(({ row }) => row[rowKey])),
+        ])),
+      }));
+    const parentSystemCount = new Set(
+      record.childJobs.map((definition) => definition.parentSystemId ?? definition.systemId),
+    ).size;
     const aggregate = {
       schemaVersion: "sigma-batch-aggregate/2",
       batchId: id,
@@ -748,6 +896,18 @@ export class LocalBatchService {
       observationScoresAvailable: scoredObservationTargets > 0,
       scoredObservationTargets,
       validObservationPoints,
+      parentSystemCount,
+      withinSystemUncertainty: {
+        status: ensembleSummaries.length
+          ? "prior_prediction_spread_not_measurement_posterior"
+          : "not_requested",
+        ensembleParentCount: ensembleSummaries.length,
+        ensembleRealizationCount: [...ensembleGroups.values()].reduce((sum, members) => sum + members.length, 0),
+        summaryArtifact: ensembleSummaries.length ? "ensemble_summary.json" : null,
+        interpretation: ensembleSummaries.length
+          ? "Percentiles summarize predictions across declared baryonic prior realizations; they are not parameter-fit or likelihood-derived credible intervals."
+          : "No galaxy density ensemble was propagated in this batch.",
+      },
       observationChannelAggregates,
       observationRmseMPerS: velocityAggregate?.rmse ?? null,
       observationInverseVarianceWeightedRmseMPerS: velocityAggregate?.inverseVarianceWeightedRmse ?? null,
@@ -774,50 +934,96 @@ export class LocalBatchService {
       items: childManifest,
     });
     await atomicWrite(resolve(artifacts, "aggregate_scores.json"), aggregate);
+    await atomicWrite(resolve(artifacts, "ensemble_summary.json"), {
+      schemaVersion: "sigma-batch-ensemble-summary/1",
+      batchId: id,
+      status: aggregate.withinSystemUncertainty.status,
+      interpretation: aggregate.withinSystemUncertainty.interpretation,
+      systems: ensembleSummaries,
+    });
+    const perGalaxyColumns = [
+      "system_id",
+      "parent_system_id",
+      "surface_realization",
+      "vertical_realization",
+      "source_kind",
+      "source_id",
+      "field_job_id",
+      "observation_evaluation_job_id",
+      "field_scientific_job_id",
+      "observation_scientific_job_id",
+      "state",
+      "field_state",
+      "observation_state",
+      "converged",
+      "iterations",
+      "maximum_relative_update",
+      "maximum_equation_residual",
+      "universal_gravity_parameters",
+      "per_object_gravity_parameters",
+      "observation_added_gravity_parameters",
+      "observation_targets",
+      "scored_observation_targets",
+      "valid_observation_points",
+      "observation_rmse_m_s",
+      "observation_weighted_rmse_m_s",
+      "observation_chi_square",
+      "observation_degrees_freedom",
+      "observation_deflection_rmse_arcsec",
+      "observation_deflection_weighted_rmse_arcsec",
+      "observation_reduced_shear_rmse",
+      "observation_reduced_shear_weighted_rmse",
+      "observation_image_position_rmse_arcsec",
+      "observation_image_position_weighted_rmse_arcsec",
+      "observation_incomplete_topology_targets",
+    ];
     await writeFile(
       resolve(artifacts, "per_galaxy.csv"),
-      csv(
-        [
-          "system_id",
-          "source_kind",
-          "source_id",
-          "field_job_id",
-          "observation_evaluation_job_id",
-          "field_scientific_job_id",
-          "observation_scientific_job_id",
-          "state",
-          "field_state",
-          "observation_state",
-          "converged",
-          "iterations",
-          "maximum_relative_update",
-          "maximum_equation_residual",
-          "universal_gravity_parameters",
-          "per_object_gravity_parameters",
-          "observation_added_gravity_parameters",
-          "observation_targets",
-          "scored_observation_targets",
-          "valid_observation_points",
-          "observation_rmse_m_s",
-          "observation_weighted_rmse_m_s",
-          "observation_chi_square",
-          "observation_degrees_freedom",
-          "observation_deflection_rmse_arcsec",
-          "observation_deflection_weighted_rmse_arcsec",
-          "observation_reduced_shear_rmse",
-          "observation_reduced_shear_weighted_rmse",
-          "observation_image_position_rmse_arcsec",
-          "observation_image_position_weighted_rmse_arcsec",
-          "observation_incomplete_topology_targets",
-        ],
-        rows,
-      ),
+      csv(perGalaxyColumns, rows),
+      "utf8",
+    );
+    await writeFile(
+      resolve(artifacts, "per_realization.csv"),
+      csv(perGalaxyColumns, rows.filter((row) => row.surface_realization !== null)),
+      "utf8",
+    );
+    const ensembleMetricKeys = ensembleMetricDefinitions.map(([, outputKey]) => outputKey);
+    const ensembleSummaryColumns = [
+      "parent_system_id",
+      "galaxy_job_id",
+      "artifact",
+      "parent_ensemble_bundle_sha256",
+      "uncertainty_status",
+      "realization_count",
+      "succeeded_realizations",
+      "field_succeeded_realizations",
+      "observation_succeeded_realizations",
+      ...ensembleMetricKeys.flatMap((key) => ["count", "p16", "p50", "p84", "minimum", "maximum"]
+        .map((statistic) => `${key}_${statistic}`)),
+    ];
+    const ensembleSummaryRows = ensembleSummaries.map((summary) => ({
+      parent_system_id: summary.parentSystemId,
+      galaxy_job_id: summary.galaxyJobId,
+      artifact: summary.artifact,
+      parent_ensemble_bundle_sha256: summary.parentEnsembleBundleSha256,
+      uncertainty_status: summary.uncertaintyStatus,
+      realization_count: summary.realizationCount,
+      succeeded_realizations: summary.succeededRealizations,
+      field_succeeded_realizations: summary.fieldSucceededRealizations,
+      observation_succeeded_realizations: summary.observationSucceededRealizations,
+      ...Object.fromEntries(ensembleMetricKeys.flatMap((key) => Object.entries(summary.metrics[key])
+        .map(([statistic, value]) => [`${key}_${statistic}`, value]))),
+    }));
+    await writeFile(
+      resolve(artifacts, "ensemble_summary.csv"),
+      csv(ensembleSummaryColumns, ensembleSummaryRows),
       "utf8",
     );
     await writeFile(
       resolve(artifacts, "failures.csv"),
       csv([
         "system_id",
+        "parent_system_id",
         "field_job_id",
         "observation_evaluation_job_id",
         "state",
@@ -846,20 +1052,23 @@ export class LocalBatchService {
       `system_id,target_id,family_id,family_index,distance_ratio,profiled_source_east_arcsec,profiled_source_north_arcsec,observed_images,predicted_roots,matched_images,complete_observed_assignment,excess_predicted_roots,critical_curve_points,state,image_plane_rms_arcsec,matched_subset_diagnostic_rms_arcsec,chi_square,degrees_freedom,fitted_observation_nuisance_parameters,gravity_parameters_added\n${multipleImageFamilyRows.length ? `${multipleImageFamilyRows.join("\n")}\n` : ""}`,
       "utf8",
     );
-    const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.field_state)}</td><td>${htmlEscape(row.observation_state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td><td>${htmlEscape(row.observation_rmse_m_s ?? "")}</td><td>${htmlEscape(row.observation_deflection_rmse_arcsec ?? "")}</td><td>${htmlEscape(row.observation_reduced_shear_rmse ?? "")}</td><td>${htmlEscape(row.observation_image_position_rmse_arcsec ?? "")}</td><td>${htmlEscape(row.observation_incomplete_topology_targets)}</td></tr>`).join("");
+    const tableRows = rows.map((row) => `<tr><td>${htmlEscape(row.system_id)}</td><td>${htmlEscape(row.parent_system_id)}</td><td>${htmlEscape(row.field_state)}</td><td>${htmlEscape(row.observation_state)}</td><td>${htmlEscape(row.iterations ?? "")}</td><td>${htmlEscape(row.maximum_equation_residual)}</td><td>${htmlEscape(row.observation_rmse_m_s ?? "")}</td><td>${htmlEscape(row.observation_deflection_rmse_arcsec ?? "")}</td><td>${htmlEscape(row.observation_reduced_shear_rmse ?? "")}</td><td>${htmlEscape(row.observation_image_position_rmse_arcsec ?? "")}</td><td>${htmlEscape(row.observation_incomplete_topology_targets)}</td></tr>`).join("");
     const observationScope = aggregate.observationScoresAvailable
       ? `Typed observations (${[...observationKinds].sort().join(", ")}) were scored for ${aggregate.scoredObservationTargets} target(s). Velocity, deflection, and reduced-shear scores remain separate.`
       : requestedObservationRows.length
         ? `Observation targets (${[...observationKinds].sort().join(", ")}) were evaluated but none produced a complete score; incomplete topology remains an explicit non-score.`
         : "No observation targets were supplied, so this report measures numerical execution and convergence only.";
+    const ensembleScope = ensembleSummaries.length
+      ? `${aggregate.withinSystemUncertainty.ensembleRealizationCount} baryonic prior realization(s) from ${ensembleSummaries.length} parent system(s) were propagated. See <code>ensemble_summary.json</code> for p16/p50/p84 prediction spread; these are not likelihood-derived credible intervals.`
+      : "No baryonic density ensemble was requested in this batch.";
     await writeFile(
       resolve(artifacts, "report.html"),
-      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:1180px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} systems with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${fieldSuccessfulRows.length} field solve(s) and ${successfulObservationRows.length}/${requestedObservationRows.length} requested observation evaluation(s) succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><table><thead><tr><th>System</th><th>Field state</th><th>Observation state</th><th>Iterations</th><th>Maximum equation residual</th><th>Velocity RMSE (m/s)</th><th>Deflection RMSE (arcsec)</th><th>Reduced-shear RMSE</th><th>Image-position coordinate RMSE (arcsec)</th><th>Incomplete-topology targets</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
+      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Batch ${htmlEscape(id)}</title><style>body{font:16px system-ui;max-width:1180px;margin:3rem auto;padding:0 1rem;color:#182026}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4da;padding:.5rem;text-align:left}code{background:#eef1f3;padding:.1rem .3rem}</style><h1>Formula-independent field batch</h1><p><code>${htmlEscape(id)}</code></p><p>One confirmed model was run over ${rows.length} resolved system realization(s) from ${parentSystemCount} submitted parent system(s) with <strong>${htmlEscape(record.parameterPolicy.mode)}</strong> parameters. ${fieldSuccessfulRows.length} field solve(s) and ${successfulObservationRows.length}/${requestedObservationRows.length} requested observation evaluation(s) succeeded.</p><p><strong>Scientific boundary:</strong> ${htmlEscape(observationScope)}</p><p><strong>Baryonic uncertainty:</strong> ${ensembleScope}</p><table><thead><tr><th>System realization</th><th>Parent system</th><th>Field state</th><th>Observation state</th><th>Iterations</th><th>Maximum equation residual</th><th>Velocity RMSE (m/s)</th><th>Deflection RMSE (arcsec)</th><th>Reduced-shear RMSE</th><th>Image-position coordinate RMSE (arcsec)</th><th>Incomplete-topology targets</th></tr></thead><tbody>${tableRows}</tbody></table></html>`,
       "utf8",
     );
     await writeFile(
       resolve(artifacts, "llm_briefing.md"),
-      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Systems: ${rows.length}\n- Successful numerical solves: ${fieldSuccessfulRows.length}\n- Successful requested observation evaluations: ${successfulObservationRows.length}/${requestedObservationRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Gravity parameters added by observation evaluation: ${aggregate.observationAddedGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Velocity RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n- Deflection RMSE (arcsec): ${aggregate.observationChannelAggregates.deflection_arcsec?.rmse ?? "not available"}\n- Reduced-shear RMSE: ${aggregate.observationChannelAggregates.reduced_shear_dimensionless?.rmse ?? "not available"}\n- Raw image-position coordinate RMSE (arcsec): ${aggregate.observationChannelAggregates.image_position_arcsec?.rmse ?? "not available"}\n- Incomplete-topology targets: ${rows.reduce((sum, row) => sum + row.observation_incomplete_topology_targets, 0)}\n\nThis deterministic briefing distinguishes immutable field execution, separately cached massive-tracer and photon observation evaluation, and every score channel. It must not describe an unscored channel as validated.\n`,
+      `# Batch briefing\n\n- Batch: \`${id}\`\n- Model SHA-256: \`${record.preflight.modelSha256}\`\n- Parameter policy: \`${record.parameterPolicy.mode}\`\n- Parent systems: ${parentSystemCount}\n- Resolved system realizations: ${rows.length}\n- Baryonic ensemble realizations: ${aggregate.withinSystemUncertainty.ensembleRealizationCount}\n- Baryonic uncertainty status: \`${aggregate.withinSystemUncertainty.status}\`\n- Successful numerical solves: ${fieldSuccessfulRows.length}\n- Successful requested observation evaluations: ${successfulObservationRows.length}/${requestedObservationRows.length}\n- Per-object gravity parameters: ${aggregate.perObjectGravityParameters}\n- Gravity parameters added by observation evaluation: ${aggregate.observationAddedGravityParameters}\n- Observation scores available: ${aggregate.observationScoresAvailable ? `yes (${[...observationKinds].sort().join(", ")})` : "no"}\n- Scored observation targets: ${aggregate.scoredObservationTargets}\n- Velocity RMSE (m/s): ${aggregate.observationRmseMPerS ?? "not available"}\n- Deflection RMSE (arcsec): ${aggregate.observationChannelAggregates.deflection_arcsec?.rmse ?? "not available"}\n- Reduced-shear RMSE: ${aggregate.observationChannelAggregates.reduced_shear_dimensionless?.rmse ?? "not available"}\n- Raw image-position coordinate RMSE (arcsec): ${aggregate.observationChannelAggregates.image_position_arcsec?.rmse ?? "not available"}\n- Incomplete-topology targets: ${rows.reduce((sum, row) => sum + row.observation_incomplete_topology_targets, 0)}\n\nThis deterministic briefing distinguishes immutable field execution, separately cached massive-tracer and photon observation evaluation, and every score channel. Ensemble percentiles are prediction spread under declared baryonic priors, not likelihood-derived posterior intervals. It must not describe an unscored channel as validated.\n`,
       "utf8",
     );
     await writeFile(
@@ -871,6 +1080,8 @@ export class LocalBatchService {
       "aggregate_scores.json",
       "batch.json",
       "child_jobs.json",
+      "ensemble_summary.csv",
+      "ensemble_summary.json",
       "failures.csv",
       "llm_briefing.md",
       "model.json",
@@ -879,6 +1090,7 @@ export class LocalBatchService {
       "observation_multiple_image_predictions.csv",
       "observation_multiple_image_families.csv",
       "per_galaxy.csv",
+      "per_realization.csv",
       "report.html",
       "reproduction_command.txt",
     ];
@@ -902,6 +1114,9 @@ export class LocalBatchService {
       artifactIndexSha256: digest(await readFile(resolve(artifacts, "artifact_index.json"))),
       fieldWorkerSourceSha256: this.fieldService.workerSourceSha256,
       observationWorkerSourceSha256: this.fieldService.observationWorkerSourceSha256,
+      galaxyEnsembleMaterializerSourceSha256: this.fieldService.galaxyEnsembleMaterializerSourceSha256,
+      parentSystemCount,
+      ensembleRealizationCount: aggregate.withinSystemUncertainty.ensembleRealizationCount,
       reportScope: aggregate.observationScoresAvailable
         ? "composed_field_execution_and_massive_tracer_observation_scoring"
         : "numerical_execution_not_observation_validation",

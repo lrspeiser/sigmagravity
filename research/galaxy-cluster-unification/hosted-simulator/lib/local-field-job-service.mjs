@@ -224,6 +224,67 @@ function defaultRunner({ projectRoot, pythonExecutable, requestPath, timeoutMs, 
   });
 }
 
+function defaultEnsembleMaterializer({ projectRoot, pythonExecutable, requestPath, timeoutMs }) {
+  return new Promise((resolvePromise, rejectPromise) => {
+    const source = resolve(projectRoot, "src");
+    const pythonPath = process.env.PYTHONPATH
+      ? `${source}${delimiter}${process.env.PYTHONPATH}`
+      : source;
+    const child = spawn(
+      pythonExecutable,
+      ["-m", "voidscreen.galaxy_ensemble_materializer", "--request", requestPath],
+      {
+        cwd: projectRoot,
+        env: { ...process.env, PYTHONPATH: pythonPath, PYTHONUNBUFFERED: "1" },
+        windowsHide: true,
+      },
+    );
+    const stdout = [];
+    const stderr = [];
+    let settled = false;
+    let timedOut = false;
+    const timer = setTimeout(() => {
+      timedOut = true;
+      if (!child.killed) child.kill();
+    }, timeoutMs);
+    child.stdout.on("data", (chunk) => stdout.push(chunk));
+    child.stderr.on("data", (chunk) => stderr.push(chunk));
+    child.on("error", (error) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      rejectPromise(error);
+    });
+    child.on("close", (exitCode, exitSignal) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      resolvePromise({
+        exitCode,
+        exitSignal,
+        timedOut,
+        stdout: Buffer.concat(stdout).toString("utf8"),
+        stderr: Buffer.concat(stderr).toString("utf8"),
+      });
+    });
+  });
+}
+
+function ensembleSelectionValues(value, count, label) {
+  if (value === "all") return Array.from({ length: count }, (_, index) => index);
+  if (!Array.isArray(value) || value.length === 0) {
+    throw new LocalServiceError(422, "invalid_ensemble_selection", `${label} must be \"all\" or a non-empty array`);
+  }
+  if (value.some((index) => !Number.isSafeInteger(index) || index < 0 || index >= count)) {
+    throw new LocalServiceError(422, "invalid_ensemble_selection", `${label} contains an out-of-range index`);
+  }
+  const unique = [...new Set(value)].sort((left, right) => left - right);
+  if (unique.length !== value.length) {
+    throw new LocalServiceError(422, "invalid_ensemble_selection", `${label} cannot repeat an index`);
+  }
+  return unique;
+}
+
 export class LocalFieldJobService {
   constructor({
     root,
@@ -234,6 +295,7 @@ export class LocalFieldJobService {
     maxEstimatedMemoryBytes = Number(process.env.SIMULATOR_MAX_ESTIMATED_MEMORY_BYTES ?? 4 * 1024 ** 3),
     timeoutMs = Number(process.env.SIMULATOR_JOB_TIMEOUT_MS ?? 10 * 60 * 1000),
     runner = defaultRunner,
+    ensembleMaterializer = defaultEnsembleMaterializer,
   }) {
     if (!root || !projectRoot) throw new Error("local service requires root and projectRoot");
     this.root = resolve(root);
@@ -244,6 +306,7 @@ export class LocalFieldJobService {
     this.maxEstimatedMemoryBytes = maxEstimatedMemoryBytes;
     this.timeoutMs = timeoutMs;
     this.runner = runner;
+    this.ensembleMaterializer = ensembleMaterializer;
     this.queue = [];
     this.running = null;
     this.abortController = null;
@@ -253,6 +316,7 @@ export class LocalFieldJobService {
     this.galaxyWorkerSourceSha256 = null;
     this.observationWorkerSourceSha256 = null;
     this.inverseResponseWorkerSourceSha256 = null;
+    this.galaxyEnsembleMaterializerSourceSha256 = null;
     this.shuttingDown = false;
   }
 
@@ -269,6 +333,7 @@ export class LocalFieldJobService {
       galaxyWorkerSourceSha256: this.galaxyWorkerSourceSha256,
       observationWorkerSourceSha256: this.observationWorkerSourceSha256,
       inverseResponseWorkerSourceSha256: this.inverseResponseWorkerSourceSha256,
+      galaxyEnsembleMaterializerSourceSha256: this.galaxyEnsembleMaterializerSourceSha256,
     };
   }
 
@@ -304,8 +369,13 @@ export class LocalFieldJobService {
       this.projectRoot,
       ["inverse_response.py", "inverse_response_job.py", "field_job.py"],
     );
+    this.galaxyEnsembleMaterializerSourceSha256 = await workerSourceSha256(
+      this.projectRoot,
+      ["galaxy_ensemble_materializer.py", "field_job.py"],
+    );
     await mkdir(this.#uploadsRoot(), { recursive: true });
     await mkdir(this.#jobsRoot(), { recursive: true });
+    await mkdir(this.#materializationsRoot(), { recursive: true });
     for (const entry of await readdir(this.#jobsRoot(), { withFileTypes: true })) {
       if (!entry.isDirectory() || !IDENTIFIER.test(entry.name) || !entry.name.startsWith("job_")) continue;
       const recordPath = this.#jobRecordPath(entry.name);
@@ -450,6 +520,169 @@ export class LocalFieldJobService {
       },
     });
     await this.putUploadContent(ticket.id, archiveArtifact.content);
+    return this.getUpload(ticket.id);
+  }
+
+  async describeGalaxyEnsembleArtifact(jobIdValue, artifactStem, selectionContract) {
+    const expectedAxes = artifactStem === "surface_density_ensemble"
+      ? ["surfaceRealization"]
+      : artifactStem === "volume_density_ensemble"
+        ? ["surfaceRealization", "verticalRealization"]
+        : null;
+    if (!expectedAxes) {
+      throw new LocalServiceError(422, "invalid_galaxy_artifact", "galaxy ensemble artifact is not supported");
+    }
+    const job = await this.getGalaxyJob(jobIdValue);
+    if (job.state !== "succeeded") {
+      throw new LocalServiceError(409, "galaxy_artifact_not_ready", `galaxy job is ${job.state}`);
+    }
+    const [bundleArtifact, archiveArtifact] = await Promise.all([
+      this.getArtifact(job.id, `${artifactStem}_bundle.json`),
+      this.getArtifact(job.id, `${artifactStem}.npz`),
+    ]);
+    let bundle;
+    try {
+      bundle = JSON.parse(bundleArtifact.content.toString("utf8"));
+    } catch (cause) {
+      throw new LocalServiceError(409, "invalid_galaxy_ensemble", `ensemble bundle is not JSON: ${cause.message}`);
+    }
+    const core = Object.fromEntries(Object.entries(bundle).filter(([key]) => key !== "bundleSha256"));
+    if (
+      bundle.schemaVersion !== "sigma-galaxy-density-ensemble/1"
+      || bundle.bundleSha256 !== sha256(core)
+      || !Array.isArray(bundle.ensembleAxes)
+      || JSON.stringify(bundle.ensembleAxes.map((axis) => axis.name)) !== JSON.stringify(expectedAxes)
+    ) {
+      throw new LocalServiceError(409, "invalid_galaxy_ensemble", "ensemble bundle contract or manifest hash is invalid");
+    }
+    const counts = Object.fromEntries(bundle.ensembleAxes.map((axis) => {
+      if (!Number.isSafeInteger(axis.count) || axis.count < 1) {
+        throw new LocalServiceError(409, "invalid_galaxy_ensemble", `ensemble axis ${axis.name} has an invalid count`);
+      }
+      return [axis.name, axis.count];
+    }));
+    if (!selectionContract || typeof selectionContract !== "object" || Array.isArray(selectionContract)) {
+      throw new LocalServiceError(422, "invalid_ensemble_selection", "ensembleSelection must be an object");
+    }
+    const allowed = new Set(["surfaceRealizations", "verticalRealizations", "maximumChildren"]);
+    const unknown = Object.keys(selectionContract).filter((key) => !allowed.has(key));
+    if (unknown.length) {
+      throw new LocalServiceError(422, "invalid_ensemble_selection", `unknown ensemble selection controls: ${unknown.join(", ")}`);
+    }
+    const surfaces = ensembleSelectionValues(
+      selectionContract.surfaceRealizations,
+      counts.surfaceRealization,
+      "surfaceRealizations",
+    );
+    let verticals = [null];
+    if (artifactStem === "volume_density_ensemble") {
+      verticals = ensembleSelectionValues(
+        selectionContract.verticalRealizations,
+        counts.verticalRealization,
+        "verticalRealizations",
+      );
+    } else if (selectionContract.verticalRealizations !== undefined) {
+      throw new LocalServiceError(422, "invalid_ensemble_selection", "surface ensembles do not accept verticalRealizations");
+    }
+    const maximumChildren = selectionContract.maximumChildren ?? 128;
+    if (!Number.isSafeInteger(maximumChildren) || maximumChildren < 1 || maximumChildren > 128) {
+      throw new LocalServiceError(422, "invalid_ensemble_selection", "maximumChildren must be an integer from 1 through 128");
+    }
+    const realizations = surfaces.flatMap((surfaceRealization) => verticals.map((verticalRealization) => ({
+      surfaceRealization,
+      ...(verticalRealization === null ? {} : { verticalRealization }),
+    })));
+    if (realizations.length > maximumChildren) {
+      throw new LocalServiceError(
+        413,
+        "ensemble_child_quota_exceeded",
+        `ensemble selection expands to ${realizations.length} children, above declared maximumChildren ${maximumChildren}`,
+      );
+    }
+    return {
+      schemaVersion: "sigma-galaxy-ensemble-description/1",
+      galaxyJobId: job.id,
+      artifact: artifactStem,
+      bundleSha256: bundle.bundleSha256,
+      archiveSha256: archiveArtifact.record.sha256,
+      archiveBytes: archiveArtifact.record.bytes,
+      uncertaintyStatus: bundle.provenance?.uncertaintyStatus ?? "unspecified",
+      axes: bundle.ensembleAxes,
+      realizations,
+    };
+  }
+
+  async createUploadFromGalaxyEnsembleArtifact(jobIdValue, artifactStem, realization) {
+    const selectionContract = {
+      surfaceRealizations: [realization?.surfaceRealization],
+      ...(artifactStem === "volume_density_ensemble"
+        ? { verticalRealizations: [realization?.verticalRealization] }
+        : {}),
+      maximumChildren: 1,
+    };
+    const description = await this.describeGalaxyEnsembleArtifact(
+      jobIdValue,
+      artifactStem,
+      selectionContract,
+    );
+    const selection = {
+      surfaceRealization: description.realizations[0].surfaceRealization,
+      ...(description.realizations[0].verticalRealization === undefined
+        ? {}
+        : { verticalRealization: description.realizations[0].verticalRealization }),
+    };
+    const identity = {
+      schemaVersion: "sigma-galaxy-ensemble-materialization-identity/1",
+      parentBundleSha256: description.bundleSha256,
+      parentArchiveSha256: description.archiveSha256,
+      artifact: artifactStem,
+      selection,
+      materializerSourceSha256: this.galaxyEnsembleMaterializerSourceSha256,
+    };
+    const materializationId = `materialization_${sha256(identity).slice(0, 24)}`;
+    const outputDirectory = resolve(this.#materializationsRoot(), materializationId);
+    const requestPath = resolve(this.#materializationsRoot(), `${materializationId}.request.json`);
+    if (!(await exists(outputDirectory))) {
+      await atomicWrite(requestPath, {
+        schemaVersion: "sigma-galaxy-ensemble-materialization/1",
+        bundlePath: resolve(this.#jobDirectory(description.galaxyJobId), "artifacts", `${artifactStem}_bundle.json`),
+        archivePath: resolve(this.#jobDirectory(description.galaxyJobId), "artifacts", `${artifactStem}.npz`),
+        artifact: artifactStem,
+        selection,
+        outputDirectory,
+      });
+      const execution = await this.ensembleMaterializer({
+        projectRoot: this.projectRoot,
+        pythonExecutable: this.pythonExecutable,
+        requestPath,
+        timeoutMs: this.timeoutMs,
+      });
+      if (execution.timedOut) {
+        throw new LocalServiceError(504, "ensemble_materialization_timeout", "ensemble materialization exceeded its runtime limit");
+      }
+      if (execution.exitCode !== 0) {
+        const message = String(execution.stderr ?? "").trim().split("\n").at(-1) || "ensemble materialization failed";
+        throw new LocalServiceError(422, "ensemble_materialization_failed", message);
+      }
+    }
+    const [bundleBytes, archiveBytes] = await Promise.all([
+      readFile(resolve(outputDirectory, "bundle.json")),
+      readFile(resolve(outputDirectory, "arrays.npz")),
+    ]);
+    const inputBundle = JSON.parse(bundleBytes.toString("utf8"));
+    validateArrayBundle(inputBundle);
+    if (
+      inputBundle.provenance?.parentEnsembleBundleSha256 !== description.bundleSha256
+      || JSON.stringify(inputBundle.provenance?.realizationSelection) !== JSON.stringify(selection)
+    ) {
+      throw new LocalServiceError(409, "ensemble_materialization_integrity_failed", "materialized bundle provenance does not match its parent selection");
+    }
+    const ticket = await this.createUpload({
+      schemaVersion: "sigma-data-upload-request/1",
+      inputBundle,
+      archive: { sha256: sha256Bytes(archiveBytes), bytes: archiveBytes.length },
+    });
+    await this.putUploadContent(ticket.id, archiveBytes);
     return this.getUpload(ticket.id);
   }
 
@@ -1000,6 +1233,7 @@ export class LocalFieldJobService {
 
   #uploadsRoot() { return resolve(this.root, "uploads"); }
   #jobsRoot() { return resolve(this.root, "jobs"); }
+  #materializationsRoot() { return resolve(this.root, "galaxy-ensemble-materializations"); }
   #uploadDirectory(id) { return resolve(this.#uploadsRoot(), id); }
   #uploadRecordPath(id) { return resolve(this.#uploadDirectory(id), "upload.json"); }
   #uploadArchivePath(id) { return resolve(this.#uploadDirectory(id), "arrays.npz"); }
