@@ -12,15 +12,15 @@ team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/HMGHfumGfJwju8dYw31PBST5HJxK>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/4oCqdTRhzf6Tv9Z48CQR7kfS24A5>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-8b6qft21h-horizon3.vercel.app>
-- deployment ID: `dpl_HMGHfumGfJwju8dYw31PBST5HJxK`
-- deployed implementation commit: `f38f047d18a6d7ea988bdcd28c4dd92adc8e4f07`
-- public contract version: `0.27.0-preview`
+  <https://sigma-gravity-research-simulator-kq7vdlok0-horizon3.vercel.app>
+- deployment ID: `dpl_4oCqdTRhzf6Tv9Z48CQR7kfS24A5`
+- deployed implementation commit: `60a8ebe5adb2fa34bec0dec4bd5e39560f48cbdc`
+- public contract version: `0.28.0-preview`
 
-The service passes its local production build, 101 automated hosted tests, all
-1,605 Python scientific tests, and the live HTTP smoke suite. No deployment
+The service passes its local production build, 104 automated hosted tests, all
+1,609 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
@@ -127,9 +127,16 @@ Implemented public capabilities:
     magnification maps. Each ray is clipped to the finite solved cylinder and
     reconstructs its local Cartesian vector without a 3D proxy. Photon and
     massive-tracer targets can be scored in one immutable job with separate
-    channels and zero per-object gravity parameters. Raw multiple-image,
-    source-plane, time-delay, and non-axisymmetric cluster likelihoods remain
-    future work.
+    channels and zero per-object gravity parameters. Time-delay, weak-lensing,
+    and non-axisymmetric cluster likelihoods remain future work.
+25. Convert the same axisymmetric photon field into one archived
+    distance-ratio-one deflection map, scale it for each declared source
+    family, profile two source coordinates per family, find global
+    lens-equation roots, assign raw observed images one-to-one, and score the
+    image positions. The finite-support gate covers the full root square and
+    Jacobian stencil; unsupported topology cannot be converted into a finite
+    fit score. This path remains local-only and is an analytic software
+    acceptance, not a real cluster result.
 
 ## Verification evidence
 
@@ -139,7 +146,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 101 passing hosted tests, 1,605 passing Python scientific
+The current result is 104 passing hosted tests, 1,609 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -184,8 +191,8 @@ and point arrays. The accepted production smoke values are:
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
 - manifest SHA-256:
-  `dfd14b92341185b2c1a2a2757b6c9d9b012755f73325d841139b0cbca586105f`
-- run ID: `run_dfd14b92341185b2c1a2a275`
+  `96ee4fa523cac6cf9790ff18a5581747cde7422125114fb25c1b1ba9ae3f6b3b`
+- run ID: `run_96ee4fa523cac6cf9790ff18`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -470,6 +477,37 @@ The public guide follows its canonical redirect and contains the new input,
 output, and limitations. The immutable hostname passed authenticated
 `vercel curl`. Public heavy submissions deliberately remain HTTP 503 until a
 durable isolated worker is connected.
+
+The v0.28 axisymmetric raw-image checks require health to report
+`localAxisymmetricRawMultipleImageLensing=available_in_dev_server`; preflight
+and worker validation bind `axisOrder=["r","z"]`, the zero radial origin,
+inclination, sky shape, line-of-sight sampling, root bounds, source-family
+distance ratios, and the exact solved-field origin. The worker archives one
+distance-ratio-one projection rather than integrating the same rays again for
+every source family. It refuses a root domain whose bilinear/Jacobian support
+touches a truncated ray, and keeps topology failure separate from fit score.
+
+The real local asynchronous HTTP release run used a smooth cored-isothermal
+axisymmetric known answer. Field relative L2 error was
+`0.0014789730022103532`; the two recovered outer images scored
+`0.001692053225097455 arcsec` RMS; all 13 artifacts rehashed successfully; and
+the per-object gravity-parameter count was zero. This validates coordinate
+composition, distance-ratio scaling, root recovery, artifact identity, and
+nuisance accounting. It is not a fit to released cluster observations.
+
+Deployment `dpl_4oCqdTRhzf6Tv9Z48CQR7kfS24A5` is production-ready at the
+stable alias and serves `0.28.0-preview`. The live HTTP smoke reproduces run
+`run_96ee4fa523cac6cf9790ff18`, manifest
+`96ee4fa523cac6cf9790ff18a5581747cde7422125114fb25c1b1ba9ae3f6b3b`, twin
+run `twinrun_c80a954c24843d444f12d119`, resolved evidence hash
+`8fed5429efecb7a0b5055a15928b8edf48e5713454ba18b42c9503305778d1b7`, and
+cluster registry hash
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+The public guide contains the complete input/output example, limitations, and
+nine-step Sigma Gravity/inverse-halo roadmap. The immutable hostname passed
+authenticated `vercel curl`; public heavy submissions return HTTP 503 with
+`production_storage_not_connected` until durable storage and isolated workers
+are connected.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
