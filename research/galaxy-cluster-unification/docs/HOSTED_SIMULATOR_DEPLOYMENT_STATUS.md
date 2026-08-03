@@ -11,15 +11,15 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/7biUPj86kfyryd1TVqTjVJAfAe3Q>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/2DEdgRigbtRLY8B5XdWbpmo7hyRg>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-bzzsv225l-horizon3.vercel.app>
-- deployment ID: `dpl_7biUPj86kfyryd1TVqTjVJAfAe3Q`
-- deployed implementation commit: `57ba66d86695dcd87a098c6331894687d551af77`
-- public contract version: `0.25.0-preview`
+  <https://sigma-gravity-research-simulator-mtzf55aiy-horizon3.vercel.app>
+- deployment ID: `dpl_2DEdgRigbtRLY8B5XdWbpmo7hyRg`
+- deployed implementation commit: `e0b2aa825a10749f5ad105af185d20905e3a3f79`
+- public contract version: `0.26.0-preview`
 
-The service passes its local production build, 95 automated hosted tests, all
-1,591 Python scientific tests, and the live HTTP smoke suite. No deployment
+The service passes its local production build, 98 automated hosted tests, all
+1,599 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
@@ -112,6 +112,14 @@ Implemented public capabilities:
     zero-radial-flux limit. Bessel manufactured solutions show second-order
     convergence. Public production advertises this local capability but still
     does not execute the heavy worker.
+23. Convert a solved axisymmetric radial acceleration into circular-speed
+    curves or inclined resolved line-of-sight velocity maps. The local worker
+    samples the declared `(r,z)` midplane directly, retains uncertainty, masks,
+    beam convolution, covariance and nuisance accounting, and rejects
+    Cartesian axis conventions. The exact known-answer acceptance introduces
+    zero per-object gravity parameters. This is an observation adapter, not a
+    claim that circular equilibrium is complete or that the formula fits a
+    real galaxy.
 
 ## Verification evidence
 
@@ -121,7 +129,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 95 passing hosted tests, 1,591 passing Python scientific
+The current result is 98 passing hosted tests, 1,599 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -166,8 +174,8 @@ and point arrays. The accepted production smoke values are:
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
 - manifest SHA-256:
-  `c98323738095e3ab59484d0c398a89509c457979ed2ce608f52ce08843c11956`
-- run ID: `run_c98323738095e3ab59484d0c`
+  `f0748afc66904deb7bb6054565a9d02be08a34f44fab68e21b17e462096fee42`
+- run ID: `run_f0748afc66904deb7bb60545`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -392,6 +400,34 @@ The radial submitted, fixed-MOND, and Newtonian RMSE values remain unchanged,
 showing that the new geometry path did not alter the hosted radial benchmark.
 Axisymmetric field execution remains local-only; Vercel heavy routes continue
 to return `production_worker_not_connected`.
+
+The v0.26 axisymmetric-observation checks require health to report
+`localAxisymmetricGalaxyObservations=available_in_dev_server`, preflight and
+worker validation to bind `axisOrder=["r","z"]`, `origin=[0,z0]`, and
+`centerM=[0,z_midplane]`, and the guide to show Example 12 with concrete
+inputs, outputs, coordinate rules, and scientific limits. Cartesian
+`planeAxes` and azimuthal sampling are rejected for this path. The real local
+asynchronous HTTP acceptance solved Cartesian 2D, Cartesian 3D, and
+axisymmetric jobs, downloaded and rehashed every artifact, and used zero
+per-object gravity parameters. Its axisymmetric solid-body known answer had
+field relative L2 error `3.4364145737847694e-15` and circular-speed RMSE
+`4.220673123283083e-15 m/s` using
+`axisymmetric_midplane_direct`. This establishes software normalization and
+coordinate consistency, not a fit to a real galaxy or a completed dynamical
+model.
+
+Deployment `dpl_2DEdgRigbtRLY8B5XdWbpmo7hyRg` is production-ready at the
+stable alias and serves `0.26.0-preview`. The stable alias passed the complete
+live HTTP smoke with run `run_f0748afc66904deb7bb60545`, manifest
+`f0748afc66904deb7bb6054565a9d02be08a34f44fab68e21b17e462096fee42`, twin run
+`twinrun_32ff131ec6beb66181526ead`, resolved evidence hash
+`8fed5429efecb7a0b5055a15928b8edf48e5713454ba18b42c9503305778d1b7`, and
+cluster registry hash
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+The immutable hostname is protected by Vercel's deployment challenge and was
+verified through authenticated `vercel curl`; the public stable alias remains
+directly accessible. Public heavy submissions still return HTTP 503 with
+`production_worker_not_connected`.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
