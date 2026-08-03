@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "sigma-p0747-post-reveal-kinematic-axis-diagnostic/1",
+  "resultSchemaVersion": "sigma-p0747-post-reveal-kinematic-axis-diagnostic-result/1",
+  "stage": "P0747",
+  "status": "frozen_after_p0746_validation_reveal_before_diagnostic_execution",
+  "purpose": "Test whether the large NGC6946 residual is primarily a sky-projection orientation error by replacing the image-only position angle with one formula-independent first-harmonic kinematic phase, without fitting speed amplitude or any gravity parameter.",
+  "parents": {
+    "validationReveal": "results/p0746_validation_velocity_field_reveal/report.json",
+    "validationRevealResultSha256": "3eda055f18c948f43b55de1ae8393edcf6564d62f646190aeee5f26adccf1952",
+    "registeredBaryonsResultPath": "results/p0745b_validation_fused_baryonic_registration",
+    "registeredBaryonsResultSha256": "9902f1fd0c5057d2b3784e07781514d854493e8970a90757ed8d398e3344f699",
+    "fakeTwinsResultPath": "results/p0745c_validation_multiscale_spiral_twins",
+    "fakeTwinsResultSha256": "0a514338cf460ed72decf23b483e4dfd8831faf93490f2bb2ac686e8dfba7579",
+    "selectedTwinTier": "haar_256"
+  },
+  "systems": ["NGC3521", "NGC6946"],
+  "diagnostic": {
+    "status": "post_reveal_observation_model_diagnostic_not_blind_validation",
+    "phaseEstimator": "gas-and-inverse-variance-weighted least squares of systemic-subtracted observed velocity on cos(theta) and sin(theta) over the unchanged P0746 score mask",
+    "fittedObservationNuisancesPerGalaxy": 1,
+    "fittedSpeedAmplitudeUsed": false,
+    "fittedGravityParameters": 0,
+    "inclination": "unchanged published SPARC value",
+    "systemicVelocity": "unchanged P0746 value",
+    "scoreMask": "unchanged P0746 mask",
+    "formulaPredictions": "unchanged fixed Newtonian and simple-MOND circular-speed maps",
+    "comparison": "rescore registered-baryon and fake-twin predictions using the unit kinematic phase only"
+  },
+  "models": [
+    {"id": "newtonian_thin_sheet", "gravitationalConstantM3KgS2": 6.67430e-11},
+    {"id": "fixed_simple_mond", "a0MPerS2": 1.2e-10, "gravitationalConstantM3KgS2": 6.67430e-11}
+  ],
+  "fieldSettings": {"paddingFactor": 2.0},
+  "gates": {
+    "requiredSystems": 2,
+    "requiredTargetArraysOpened": 4,
+    "requiredHoldoutArraysOpened": 0,
+    "minimumScoredPixelsPerGalaxy": 500,
+    "maximumAbsoluteAxisOffsetDeg": 90.0,
+    "requiredFiniteScores": true,
+    "maximumGravityParametersFitted": 0
+  },
+  "claimBoundary": [
+    "P0747 is explicitly post-reveal and cannot replace the frozen P0746 validation score.",
+    "The kinematic axis is a shared observation-geometry nuisance used identically for every gravity formula; it is not a per-formula fit.",
+    "No velocity amplitude, inclination, mass-to-light ratio, gravity constant, MOND scale, or dark halo is fitted.",
+    "If both formulas improve similarly, the original residual contained projection error; their remaining difference still tests their predicted speed amplitudes.",
+    "Both holdout galaxies remain sealed."
+  ]
+}
