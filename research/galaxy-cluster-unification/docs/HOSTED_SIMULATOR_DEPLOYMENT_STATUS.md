@@ -767,3 +767,38 @@ Storage readiness reports `durable_storage_and_queue_connected`; PostgreSQL,
 the recurring outbox scheduler, and the stateless scientific container remain
 `not_configured`, so `productionExecution` remains `not_ready` and a job POST
 returns HTTP 503 `production_control_plane_not_connected`.
+
+## v0.34 signed advanced plug-in sandbox release
+
+The v0.34 release adds a cryptographically identified advanced-code package
+and a second, deliberately separate execution boundary. Public Vercel preflight
+validates a domain-separated Ed25519 signature but neither trusts the publisher
+nor reads package bytes nor executes code. The host launcher requires an active
+operator trust record, rehashes the entire package, rejects undeclared files and
+links, and requires a digest-pinned production image. Advanced production jobs
+remain fail-closed until a package registry and dedicated sandbox host exist.
+
+The 157-test hosted suite passes. GitHub Actions run
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30802568501> built the
+new Python 3.13.7 sandbox and passed its real Linux isolation acceptance for
+commit `7e3bdd8e65a7b8bdbdede9a78cbc4bbe1838184c`. The external fixed-MOND
+fixture matched the safe AST on two runs and reported non-root identity, zero
+capabilities, no new privileges, blocked network and writes, no credentials or
+Docker socket, fresh temporary state, and pre-container rejection of a changed
+signed source byte. Its package hash was
+`642021f60f929c7e6fda5a2c9ee593a7a4ada42923b0c53b8b668519cde3a301`.
+
+Production deployment `dpl_ACjmcy4E9dQQTh6JoJTHkkcbKvDi` is ready at
+<https://sigma-gravity-research-simulator-6dvfme76k-horizon3.vercel.app> and
+aliased to the stable site. Health and OpenAPI report `0.34.0-preview`; the live
+guide publishes the input/output distinction and threat boundary. A fresh-key
+HTTP smoke verified that signature validity returns without publisher trust,
+package-byte verification, or Vercel execution.
+
+Two queue smokes verified deployment identity hash
+`ba7c8d5d3229af944925fc288ff33b949a40844494d9c375b2409eb5a63966f4`
+and private acknowledgement hash
+`85a5b7b031412c1712ed176767d3d0d538c686fd5ff38b33992a19f8b2de269e`.
+The database, outbox scheduler, safe scientific worker, trusted plug-in
+registry, and sandbox host remain unconnected; no hosted heavy or uploaded-code
+execution is claimed.

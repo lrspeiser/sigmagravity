@@ -116,3 +116,37 @@ Production still requires:
 Container isolation reduces risk; it is not proof that arbitrary hostile code
 is safe. Broad public access must wait for the dedicated-host and abuse-control
 work above.
+
+## Live v0.34 verification
+
+Implementation commit `7e3bdd8e65a7b8bdbdede9a78cbc4bbe1838184c`
+passes all 157 hosted tests. GitHub Actions run
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30802568501> built both
+the trusted scientific worker and the separate plug-in sandbox, passed the
+existing field/galaxy container acceptance, and then passed the signed plug-in
+isolation acceptance.
+
+The external fixture produced package hash
+`642021f60f929c7e6fda5a2c9ee593a7a4ada42923b0c53b8b668519cde3a301`
+and matched safe formula hash
+`7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
+on both runs. The archived acceptance output records UID/GID 65532, zero
+effective capabilities, `NoNewPrivs=1`, blocked network and filesystem writes,
+no Docker socket or credential environment, fresh temporary state, and
+pre-execution rejection after source tampering.
+
+Production deployment `dpl_ACjmcy4E9dQQTh6JoJTHkkcbKvDi` serves
+`0.34.0-preview`; its immutable URL is
+<https://sigma-gravity-research-simulator-6dvfme76k-horizon3.vercel.app> and
+the stable alias is
+<https://sigma-gravity-research-simulator-five.vercel.app>. A live HTTP smoke
+generated a fresh key and package manifest and verified the public preflight
+response: the signature was valid, publisher trust remained false, package
+bytes remained unverified, and Vercel execution remained false.
+
+Two live queue repetitions also verified deployment identity hash
+`ba7c8d5d3229af944925fc288ff33b949a40844494d9c375b2409eb5a63966f4`
+and private acknowledgement hash
+`85a5b7b031412c1712ed176767d3d0d538c686fd5ff38b33992a19f8b2de269e`.
+This proves the new public contract did not regress the existing durable queue;
+it does not connect plug-in execution to that queue.
