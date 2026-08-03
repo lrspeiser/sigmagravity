@@ -1478,6 +1478,16 @@ into content-hashed structural parameters, replayed as 2D maps and explicitly
 prior-based 3D density ensembles, and passed to confirmed typed field
 manifests. The model and the galaxy generator remain separate.
 
+The v0.22 ensemble milestone now retains every requested 2D and 3D realization
+instead of saving only the first vertical draw. Bounded seeded priors can vary
+mass, radial and angular structure, local features, distance, thin-map
+inclination deprojection, warp, thickness, and a disclosed co-spatial unseen
+baryon fraction. Jobs emit percentile maps, draw tables, hashes, and exact
+projection diagnostics while continuing to use zero gravity parameters and no
+velocity target. These are explicit prior ensembles, not likelihood-derived
+posteriors. See
+[`docs/BARYONIC_UNCERTAINTY_ENSEMBLE_MILESTONE.md`](docs/BARYONIC_UNCERTAINTY_ENSEMBLE_MILESTONE.md).
+
 P0723 ran Newtonian Poisson, AQUAL, QUMOND, and Refracted Gravity through that
 same path on all 13 registered galaxies. All 52 solves converged, all 161
 circular-speed points per model were scored, downloaded artifacts rehashed

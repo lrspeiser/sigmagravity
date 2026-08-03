@@ -77,6 +77,8 @@ for (const phrase of [
   "all_declared_families",
   "Why five controls",
   "Four cluster maps are ready for discovery, zero are ready for a new blind verdict",
+  "Generate many plausible baryonic galaxies, not one invented 3D truth",
+  "observation_conditioned_prior_not_posterior",
   "A genuinely useful result is a prediction, not a reconstruction",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);

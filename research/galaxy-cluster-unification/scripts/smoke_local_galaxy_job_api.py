@@ -144,13 +144,25 @@ def main() -> None:
                 "operation": "extract_roundtrip",
                 "dataUploadId": ticket["id"],
                 "galaxy": "DDO101",
-                "sourceObservables": {"stage": "HTTP smoke"},
+                "sourceObservables": {"stage": "HTTP smoke", "inclinationDeg": 51.0},
                 "extractionControls": {
                     "radialBins": 24,
                     "maximumFourierMode": 4,
                     "residualFeatureCountPerComponent": 32,
                 },
                 "vertical": {"enabled": True, "realizations": 2, "zCells": 25, "seed": 101},
+                "uncertaintyEnsemble": {
+                    "enabled": True,
+                    "realizations": 3,
+                    "seed": 303,
+                    "priors": {
+                        "gasMassLnSigma": 0.08,
+                        "stellarMassLnSigma": 0.12,
+                        "distanceScaleLnSigma": 0.03,
+                        "inclinationSigmaDeg": 2.0,
+                        "warpSigmaDeg": 1.5,
+                    },
+                },
                 "outputLicense": {
                     "id": "research-source-license",
                     "redistributionAllowed": False,
@@ -165,6 +177,23 @@ def main() -> None:
         parameters = json.loads(extract_downloads["parameters.json"])
         with np.load(io.BytesIO(extract_downloads["surface_density.npz"])) as surface:
             extracted_gas_mass_proxy = float(np.sum(surface["gas_surface_density"]))
+        with np.load(io.BytesIO(extract_downloads["surface_density_ensemble.npz"])) as saved:
+            surface_ensemble = saved["total_baryonic_surface_density"].copy()
+        with np.load(io.BytesIO(extract_downloads["volume_density_ensemble.npz"])) as saved:
+            volume_ensemble = saved["total_baryonic_volume_density"].copy()
+        volume_bundle = json.loads(extract_downloads["volume_density_ensemble_bundle.json"])
+        dz = float(volume_bundle["spatialGeometry"]["spacing"][2])
+        projection_error = float(
+            np.max(
+                np.abs(
+                    volume_ensemble.sum(axis=4) * dz
+                    - np.broadcast_to(surface_ensemble[:, None], volume_ensemble.shape[:4])
+                )
+            )
+            / np.max(surface_ensemble)
+        )
+        if projection_error > 1e-12:
+            raise RuntimeError(f"ensemble projection mismatch: {projection_error}")
         generation = request_json(
             f"{base}/api/v1/galaxy-jobs",
             method="POST",
@@ -204,6 +233,9 @@ def main() -> None:
             "workerSourceHashAgrees": True,
             "roundtripTotalNormalizedL2": metrics["total"]["normalized_l2"],
             "roundtripTotalPixelCorrelation": metrics["total"]["pixel_correlation"],
+            "surfaceEnsembleShape": list(surface_ensemble.shape),
+            "volumeEnsembleShape": list(volume_ensemble.shape),
+            "ensembleProjectionMaximumRelativeError": projection_error,
             "requestedGasMassScale": 1.25,
             "measuredGeneratedGasMassRatio": mass_ratio,
             "gravityParameters": 0,

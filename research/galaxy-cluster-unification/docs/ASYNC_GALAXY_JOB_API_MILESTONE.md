@@ -57,8 +57,10 @@ gas-mass multiplier and other structural controls.
 
 - The API proves deterministic extraction/generation behavior and artifact
   integrity, not that the reconstructed 3D density is unique or true.
-- The first saved volume is one draw from a declared thickness/flaring prior;
-  all ensemble metadata and projection errors are retained.
+- The original milestone saved one volume draw and retained only metadata for
+  the alternatives. Version 0.22 supersedes that limitation: every requested
+  surface-by-vertical realization is now retained in an ensemble artifact,
+  while the first draw remains the compatibility bundle.
 - Round-trip metrics assess how much structure the representation retained.
   They do not score a law of gravity.
 - The current contract consumes already registered face-on mass maps. Raw FITS

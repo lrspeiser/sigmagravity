@@ -25,7 +25,7 @@
       </nav>
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Open research preview · v0.21</p>
+          <p class="eyebrow">Open research preview · v0.22</p>
           <h1>Put a gravity formula in front of real galaxies.</h1>
           <p class="lede">
             Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
@@ -310,7 +310,7 @@
           <article class="endpoint"><span>POST</span><code>/api/v1/data-uploads</code><p>Register immutable NPZ data; the development backend verifies byte hashes before a job can use it.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs</code><p>Queue a confirmed 2D/3D manifest locally, then poll state, events, and verified artifacts. Production workers are not connected yet.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/observation-evaluation-jobs</code><p>Reuse one immutable solved field with new observation data, masks, beams, or uncertainties without rerunning gravity.</p></article>
-          <article class="endpoint"><span>POST</span><code>/api/v1/galaxy-jobs</code><p>Extract content-hashed baryonic parameters or generate verified 2D/3D density bundles without choosing a gravity formula.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/galaxy-jobs</code><p>Locally extract content-hashed baryonic parameters or generate seeded 2D/3D prior ensembles, percentile maps, and exact projection checks without choosing a gravity formula.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/inverse-response-jobs</code><p>Infer a shared candidate baryon-to-response kernel locally from model-derived discovery targets, with uncertainty, nulls, identifiability, and explicit parameter counts.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/batches</code><p>Compose reusable field solves with separately hashed observation data and targets across uploaded or generated systems, then download one deterministic report.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/runs</code><p>Run a formula and receive scores, curves, comparators, and an immutable manifest hash.</p></article>

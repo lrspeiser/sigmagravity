@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.21</p>
+          <p class="eyebrow">Researcher guide &middot; v0.22</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -62,7 +62,7 @@
               <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
               <tr><td>Coupled photon and matter potentials</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Multiple solved fields can interact, while separately typed observables expose different predictions for light and massive tracers without a theory-name branch.</td></tr>
               <tr><td>Inverse baryon-to-response discovery</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Which one shared compact response kernel is compatible with labeled baryonic maps and model-derived target maps, including uncertainty, five selectable null families, and non-identifiability.</td></tr>
-              <tr><td>2D/3D fields, generated galaxies, composed batches, and photon maps</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Numerical and API conformance locally; no public durable execution yet.</td></tr>
+              <tr><td>2D/3D fields, baryonic uncertainty ensembles, generated galaxies, composed batches, and photon maps</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Seeded mass, scale, structure, deprojection, warp, and thickness prior ensembles with exact projection checks; no public durable execution or likelihood-derived posterior yet.</td></tr>
               <tr><td>New raw cluster-lensing campaign with complete baryons</td><td><span class="state-tag missing">Not built</span></td><td><span class="state-tag partial">Research prototypes</span></td><td>Prior inverse and forward pilots exist, but not a production-ready blind campaign.</td></tr>
             </tbody>
           </table>
@@ -336,6 +336,62 @@
             <div class="meaning-strip"><strong>Four cluster maps are ready for discovery, zero are ready for a new blind verdict.</strong> The published GLAFIC and Zitrin maps can help infer a candidate response pattern, but they contain lens-model assumptions. The old RELICS sample is spent, and no registered raw catalog has the positional-error model needed for a defensible likelihood.</div>
             <div class="meaning-strip"><strong>Example workflow:</strong> learn one shared compact kernel from the four baryonic maps and model-derived lens maps; require it to beat all five null families; compress it into a small frozen law; then test that law on a newly selected cluster using only baryons and raw image positions. Never feed the target halo map into the final prediction.</div>
           </article>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">08</span><div><h3>Generate many plausible baryonic galaxies, not one invented 3D truth</h3><p>The local galaxy API keeps the gravity law out of the reconstruction and saves every requested 2D and 3D realization. Realization 0 is the exact central reconstruction; later draws apply only the priors written in the request.</p></div></div>
+            <div class="code-pair">
+              <div><p class="code-label">POST /api/v1/galaxy-jobs (local reference API)</p><pre><code>{
+  "schemaVersion": "sigma-galaxy-job-submit/1",
+  "operation": "extract_roundtrip",
+  "dataUploadId": "upload_content_addressed_id",
+  "sourceObservables": {"inclinationDeg": 48},
+  "uncertaintyEnsemble": {
+    "enabled": true,
+    "realizations": 4,
+    "seed": 91,
+    "priors": {
+      "gasMassLnSigma": 0.12,
+      "stellarMassLnSigma": 0.18,
+      "gasRadialScaleLnSigma": 0.08,
+      "stellarRadialScaleLnSigma": 0.10,
+      "distanceScaleLnSigma": 0.04,
+      "inclinationSigmaDeg": 3,
+      "warpSigmaDeg": 2,
+      "coSpatialUnseenBaryonFractionMax": 0.10
+    }
+  },
+  "vertical": {
+    "enabled": true,
+    "realizations": 2,
+    "zCells": 17,
+    "seed": 42
+  },
+  "outputLicense": {
+    "id": "CC-BY-4.0",
+    "redistributionAllowed": true
+  }
+}</code></pre></div>
+              <div><p class="code-label">Deterministic output, shortened</p><pre><code>{
+  "state": "succeeded",
+  "parameterAccounting": {
+    "gravityUniversal": 0,
+    "gravityPerObject": 0
+  },
+  "uncertaintyEnsemble": {
+    "status": "observation_conditioned_prior_not_posterior",
+    "surfaceRealizations": 4,
+    "verticalRealizationsPerSurface": 2,
+    "anchorRealization": 0,
+    "totalMassSolarP16P50P84": ["...", "...", "..."]
+  },
+  "surfaceEnsembleBundleSha256": "...",
+  "surfaceQuantileBundleSha256": "...",
+  "volumeEnsembleBundleSha256": "..."
+}</code></pre></div>
+            </div>
+            <div class="meaning-strip"><strong>What the input means:</strong> logarithmic widths vary positive mass and scale factors; inclination changes the thin-map minor-axis deprojection; warp changes the 3D midplane; the optional unseen component follows the traced baryons proportionally. Every assumption is recorded, bounded, seeded, and subject to a 256 MiB raw-array limit.</div>
+            <div class="meaning-strip"><strong>What the output means:</strong> every saved 3D density projects back to its matching 2D map, and p16/p50/p84 surface maps expose the spread. This is useful for asking whether a gravity formula survives plausible baryonic reconstructions. It is not a posterior: no image likelihood, PSF, beam, noise, dust, mask, bulge decomposition, or spectral cube has constrained the prior widths yet.</div>
+          </article>
         </div>
       </section>
 
@@ -344,7 +400,7 @@
         <div class="limits-grid">
           <article class="card limit-card"><span>01</span><h3>No causal discovery from a fit</h3><p>A map that resembles a dark-matter reconstruction does not show that gravity flowed along the inferred paths. Multiple physical models can produce similar projected lensing.</p></article>
           <article class="card limit-card"><span>02</span><h3>No direct dark-matter image</h3><p>A "dark-matter cloud" in a lens model is an inferred effective mass component, conditional on the lens equation, priors, baryonic model, geometry, and data. Raw image positions, shapes, time delays, shear, and magnification are the observations.</p></article>
-          <article class="card limit-card"><span>03</span><h3>No unique 2D-to-3D galaxy</h3><p>An image does not uniquely determine scale height, inclination, line-of-sight structure, gas flaring, or mass-to-light ratio. A serious generator must return posterior ensembles, not one invented truth.</p></article>
+          <article class="card limit-card"><span>03</span><h3>No unique 2D-to-3D galaxy</h3><p>An image does not uniquely determine scale height, inclination, line-of-sight structure, gas flaring, or mass-to-light ratio. The local worker now returns explicit prior ensembles instead of one invented truth, but a real observation likelihood is still required before calling them posteriors.</p></article>
           <article class="card limit-card"><span>04</span><h3>No universal-theory verdict from one domain</h3><p>Rotation curves alone do not establish lensing, Solar-System, stability, gravitational-wave, or cosmological behavior. The same frozen constants must survive all declared gates.</p></article>
           <article class="card limit-card"><span>05</span><h3>No fair win without parameter accounting</h3><p>A one-parameter universal law and a flexible per-object halo fit answer different questions. Reports must show global, hierarchical, nuisance, and per-object parameter counts.</p></article>
           <article class="card limit-card"><span>06</span><h3>No theory result from numerical convergence</h3><p>Convergence says the solver found a stable answer to the specified equations. It does not say the equations describe nature or that the inputs were complete.</p></article>
@@ -360,7 +416,7 @@
           <div class="roadmap-flow">
             <article><span>1</span><div><h3>Connect production compute</h3><p>Queue, isolated Python workers, durable metadata, object storage, authentication, quotas, cancellation, and signed artifacts.</p></div></article>
             <article><span>2</span><div><h3>Complete the resolved evidence registry</h3><p>The first four-cluster slice is live with baryon maps, lens-model comparators, raw-catalog readiness, hashes, and blockers. Add untouched clusters, multiband stellar mass, intracluster light, calibrated gas posteriors, raw positional errors, weak lensing, PSF/WCS, licenses, and redistribution rules.</p></div></article>
-            <article><span>3</span><div><h3>Finish uncertainty-aware galaxy twins</h3><p>Infer posterior baryonic/observation parameters without velocity targets or gravity parameters, generate 3D ensembles, and recover withheld observations.</p></div></article>
+            <article><span>3</span><div><h3>Condition and propagate galaxy ensembles</h3><p>The seeded 2D/3D prior-ensemble artifact path is built. Add image, cube, PSF/beam, noise, mask, dust, bulge, and distance likelihoods so the weights become data-conditioned posteriors, then fan one confirmed gravity manifest across every draw and aggregate prediction uncertainty without velocity targets or hidden gravity parameters.</p></div></article>
             <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>Derive a small covariant or Newtonian-limit law with scalar, vector, tensor, nonlocal, screening, photon, and matter terms, explicit units and boundaries, and a Solar-System limit.</p></div></article>
             <article><span>5</span><div><h3>Use halo maps only for discovery</h3><p>The five-family synthetic control suite is built. Next, register multiple teams' halo posteriors and complete baryonic ensembles, then measure which inferred features survive lens method, baryon uncertainty, central-halo, local-light, and conservation controls.</p></div></article>
             <article><span>6</span><div><h3>Compress the inverse pattern</h3><p>Replace a many-cell discovered kernel with a small analytic response law tied to baryonic density, gradients, curvature, topology, or scale. Reject laws whose apparent success comes from per-system flexibility.</p></div></article>

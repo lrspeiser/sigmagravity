@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.21.0-preview",
-    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions, genuinely coupled field equations, separately typed photon and matter observables, and an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. Inverse results are hypothesis generators, not forward theory tests. Public heavy execution still requires durable storage and isolated workers.",
+    version: "0.22.0-preview",
+    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions, genuinely coupled field equations, separately typed photon and matter observables, seeded observation-conditioned baryonic prior ensembles, and an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. Inverse results are hypothesis generators, not forward theory tests. Public heavy execution still requires durable storage and isolated workers.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
@@ -43,7 +43,7 @@ const specification = {
     "/api/v1/observation-evaluation-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running observation-evaluation job" } },
     "/api/v1/galaxy-jobs": {
       get: { summary: "List local resolved-galaxy extraction/generation jobs" },
-      post: { summary: "Queue formula-independent extraction, generation, or 2D/3D round-trip work" },
+      post: { summary: "Queue formula-independent extraction, generation, 2D/3D prior ensembles, or round-trip work" },
     },
     "/api/v1/galaxy-jobs/{id}": { get: { summary: "Read resolved-galaxy job state" } },
     "/api/v1/galaxy-jobs/{id}/events": { get: { summary: "Read resolved-galaxy lifecycle events" } },

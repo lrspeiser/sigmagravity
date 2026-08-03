@@ -85,6 +85,74 @@ test("generate preflight accepts content-hashed parameters and normalizes contro
   assert.deepEqual(result.workerRequest.outputGrid, { cellsPerAxis: 25, extentScale: 1.5 });
 });
 
+test("preflight normalizes a bounded gravity-independent baryonic uncertainty ensemble", () => {
+  const result = prepareGalaxyJob({
+    submission: {
+      schemaVersion: "sigma-galaxy-job-submit/1",
+      operation: "extract_roundtrip",
+      dataUploadId: `upload_${"2".repeat(24)}`,
+      sourceObservables: { inclinationDeg: 47 },
+      uncertaintyEnsemble: {
+        enabled: true,
+        realizations: 4,
+        seed: 19,
+        priors: {
+          gasMassLnSigma: 0.1,
+          stellarMassLnSigma: 0.2,
+          distanceScaleLnSigma: 0.04,
+          inclinationSigmaDeg: 3,
+          warpSigmaDeg: 2,
+          coSpatialUnseenBaryonFractionMax: 0.08,
+        },
+      },
+      vertical: { enabled: true, realizations: 2, zCells: 17, seed: 20 },
+      outputLicense: { id: "CC0-1.0", redistributionAllowed: true },
+    },
+    inputBundle: bundle(),
+  });
+  assert.equal(result.workerRequest.uncertaintyEnsemble.realizations, 4);
+  assert.equal(result.workerRequest.uncertaintyEnsemble.priors.gas_mass_ln_sigma, 0.1);
+  assert.equal(result.workerRequest.uncertaintyEnsemble.priors.reference_inclination_deg, 47);
+  assert.equal(result.resourceEstimate.surfaceRealizations, 4);
+  assert.equal(result.resourceEstimate.verticalRealizationsPerSurface, 2);
+  assert.ok(result.resourceEstimate.ensembleRawArrayBytes > 0);
+  assert.equal(result.parameterAccounting.gravityPerObject, 0);
+  assert.match(result.warnings.join(" "), /not a likelihood-derived posterior/);
+});
+
+test("uncertainty preflight requires an inclination reference and enforces resource limits", () => {
+  const missingReference = {
+    schemaVersion: "sigma-galaxy-job-submit/1",
+    operation: "extract_roundtrip",
+    uncertaintyEnsemble: { enabled: true, priors: { inclinationSigmaDeg: 2 } },
+    outputLicense: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  assert.throws(
+    () => prepareGalaxyJob({ submission: missingReference, inputBundle: bundle() }),
+    /requires referenceInclinationDeg/,
+  );
+  const oversizedBundle = bundle();
+  for (const record of oversizedBundle.arrays) {
+    record.shape = [513, 513];
+    record.elementCount = 513 * 513;
+  }
+  const core = Object.fromEntries(Object.entries(oversizedBundle).filter(([key]) => key !== "bundleSha256"));
+  oversizedBundle.bundleSha256 = sha256(core);
+  assert.throws(
+    () => prepareGalaxyJob({
+      submission: {
+        schemaVersion: "sigma-galaxy-job-submit/1",
+        operation: "extract_roundtrip",
+        uncertaintyEnsemble: { enabled: true, realizations: 16 },
+        vertical: { enabled: true, realizations: 8, zCells: 129 },
+        outputLicense: { id: "CC0-1.0", redistributionAllowed: true },
+      },
+      inputBundle: oversizedBundle,
+    }),
+    /256 MiB raw-array limit/,
+  );
+});
+
 test("galaxy preflight rejects hidden gravity state and incompatible data", () => {
   const parameters = packageFixture();
   parameters.gravityParameters = { fitted: 1 };

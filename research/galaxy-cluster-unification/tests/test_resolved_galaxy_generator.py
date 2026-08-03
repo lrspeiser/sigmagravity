@@ -87,6 +87,29 @@ def test_generation_controls_change_shape_without_hidden_per_object_fit() -> Non
     assert np.allclose(changed["stars"], ordinary["stars"])
 
 
+def test_inclination_axis_ratio_control_changes_shape_but_preserves_mass() -> None:
+    axis, gas, stars = synthetic_components()
+    package = extract_galaxy_parameters(
+        "SYNTHETIC", axis, gas, stars, residual_feature_count=8
+    )
+    ordinary = render_galaxy(package, axis)
+    stretched = render_galaxy(
+        package,
+        axis,
+        component_controls={
+            "gas": {"axis_ratio_scale": 1.3},
+            "stars": {"axis_ratio_scale": 1.3},
+        },
+    )
+    spacing = axis[1] - axis[0]
+    for component in ("gas", "stars", "total"):
+        assert np.isclose(
+            np.sum(stretched[component]) * spacing**2,
+            np.sum(ordinary[component]) * spacing**2,
+        )
+        assert not np.allclose(stretched[component], ordinary[component])
+
+
 def test_distinct_3d_priors_project_to_the_identical_2d_map() -> None:
     axis, gas, _ = synthetic_components()
     z_axis = np.linspace(-3.0, 3.0, 41)
@@ -124,3 +147,22 @@ def test_seeded_vertical_realizations_are_replayable_and_declared_as_priors() ->
     assert np.array_equal(first, second)
     assert first_metadata == second_metadata
     assert first_metadata["status"] == "assumed_prior_not_measured"
+
+
+def test_warped_vertical_prior_still_projects_to_the_source_map() -> None:
+    axis, gas, _ = synthetic_components()
+    z_axis = np.linspace(-4.0, 4.0, 41)
+    warped, metadata = sample_vertical_realization(
+        gas,
+        axis,
+        z_axis,
+        r80_kpc=3.5,
+        component="gas",
+        rng=np.random.default_rng(23),
+        warp_amplitude_deg=4.0,
+        warp_phase_deg=35.0,
+    )
+    dz = z_axis[1] - z_axis[0]
+    np.testing.assert_allclose(np.sum(warped, axis=2) * dz, gas, rtol=1e-12, atol=1e-8)
+    assert metadata["warpAmplitudeDeg"] == 4.0
+    assert metadata["warpPhaseDeg"] == 35.0

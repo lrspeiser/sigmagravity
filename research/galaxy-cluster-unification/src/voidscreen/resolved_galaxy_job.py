@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 import hashlib
 import json
 import platform
@@ -32,9 +33,10 @@ from voidscreen.resolved_galaxy_generator import (
 
 Array = np.ndarray
 ENGINE_ID = "resolved-galaxy-extract-generate-worker"
-ENGINE_VERSION = "1.0.0-preview"
+ENGINE_VERSION = "1.1.0-preview"
 KPC_M = 3.085677581491367e19
 MSUN_KG = 1.98847e30
+MAX_ENSEMBLE_ARRAY_BYTES = 256 * 1024**2
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -116,6 +118,7 @@ def _generation_controls(value: Any) -> dict[str, dict[str, Any]]:
         "residual_scale",
         "rotation_deg",
         "center_offset_kpc",
+        "axis_ratio_scale",
     }
     result: dict[str, dict[str, Any]] = {}
     for component, values in raw.items():
@@ -124,6 +127,77 @@ def _generation_controls(value: Any) -> dict[str, dict[str, Any]]:
         if unknown:
             raise ValueError(f"unknown {component} generation controls: {', '.join(unknown)}")
         result[component] = controls
+    return result
+
+
+def _finite_bounded(
+    value: Any, default: float, minimum: float, maximum: float, label: str
+) -> float:
+    result = float(default if value is None else value)
+    if not np.isfinite(result) or not minimum <= result <= maximum:
+        raise ValueError(f"{label} must be finite and between {minimum} and {maximum}")
+    return result
+
+
+def _integer_bounded(value: Any, default: int, minimum: int, maximum: int, label: str) -> int:
+    raw = default if value is None else value
+    if isinstance(raw, bool) or not isinstance(raw, int) or not minimum <= raw <= maximum:
+        raise TypeError(f"{label} must be an integer between {minimum} and {maximum}")
+    return raw
+
+
+def _uncertainty_ensemble(value: Any, package: Mapping[str, Any]) -> dict[str, Any]:
+    raw = dict(value or {})
+    allowed = {"enabled", "realizations", "seed", "priors"}
+    unknown = sorted(set(raw) - allowed)
+    if unknown:
+        raise ValueError(f"unknown uncertainty ensemble controls: {', '.join(unknown)}")
+    priors_raw = dict(raw.get("priors") or {})
+    prior_limits = {
+        "gas_mass_ln_sigma": (0.0, 1.0),
+        "stellar_mass_ln_sigma": (0.0, 1.0),
+        "gas_radial_scale_ln_sigma": (0.0, 0.5),
+        "stellar_radial_scale_ln_sigma": (0.0, 0.5),
+        "angular_structure_ln_sigma": (0.0, 1.0),
+        "local_structure_ln_sigma": (0.0, 1.0),
+        "center_sigma_kpc": (0.0, 10.0),
+        "rotation_sigma_deg": (0.0, 180.0),
+        "distance_scale_ln_sigma": (0.0, 0.5),
+        "inclination_sigma_deg": (0.0, 20.0),
+        "warp_sigma_deg": (0.0, 20.0),
+        "co_spatial_unseen_baryon_fraction_max": (0.0, 0.5),
+    }
+    unknown_priors = sorted(set(priors_raw) - set(prior_limits) - {"reference_inclination_deg"})
+    if unknown_priors:
+        raise ValueError(f"unknown baryonic uncertainty priors: {', '.join(unknown_priors)}")
+    priors = {
+        key: _finite_bounded(priors_raw.get(key), 0.0, limits[0], limits[1], key)
+        for key, limits in prior_limits.items()
+    }
+    source_inclination = package.get("sourceObservables", {}).get("inclinationDeg")
+    reference_raw = priors_raw.get("reference_inclination_deg", source_inclination)
+    reference_inclination = None
+    if reference_raw is not None:
+        reference_inclination = _finite_bounded(
+            reference_raw, 0.0, 0.0, 85.0, "reference_inclination_deg"
+        )
+    if priors["inclination_sigma_deg"] > 0.0 and reference_inclination is None:
+        raise ValueError(
+            "inclination_sigma_deg requires reference_inclination_deg or sourceObservables.inclinationDeg"
+        )
+    priors["reference_inclination_deg"] = reference_inclination
+    result = {
+        "enabled": bool(raw.get("enabled", False)),
+        "realizations": _integer_bounded(
+            raw.get("realizations"), 5, 1, 16, "uncertainty ensemble realizations"
+        ),
+        "seed": _integer_bounded(
+            raw.get("seed"), 0, 0, 2**31 - 1, "uncertainty ensemble seed"
+        ),
+        "priors": priors,
+    }
+    if not result["enabled"]:
+        result["realizations"] = 1
     return result
 
 
@@ -247,69 +321,289 @@ def _save_array_product(
     _write_json(output / f"{stem}_bundle.json", bundle)
 
 
+def _ensemble_bundle(
+    arrays: Mapping[str, Array],
+    *,
+    spatial_geometry: Mapping[str, Any],
+    ensemble_axes: list[dict[str, Any]],
+    unit: str,
+    provenance: Mapping[str, Any],
+    license_value: Mapping[str, Any],
+) -> dict[str, Any]:
+    records = []
+    for key in sorted(arrays):
+        array = np.ascontiguousarray(np.asarray(arrays[key], dtype="<f8"))
+        records.append(
+            {
+                "key": key,
+                "npzKey": key,
+                "unit": unit,
+                "rank": "scalar_ensemble",
+                "shape": list(array.shape),
+                "elementCount": int(array.size),
+                "contentSha256": array_content_sha256(array),
+            }
+        )
+    core = {
+        "schemaVersion": "sigma-galaxy-density-ensemble/1",
+        "spatialGeometry": dict(spatial_geometry),
+        "ensembleAxes": ensemble_axes,
+        "arrays": records,
+        "provenance": dict(provenance),
+        "license": dict(license_value),
+    }
+    return {**core, "bundleSha256": canonical_sha256(core)}
+
+
+def _surface_uncertainty_products(
+    package: Mapping[str, Any],
+    axis: Array,
+    generation_controls: Mapping[str, Mapping[str, Any]],
+    controls: Mapping[str, Any],
+) -> tuple[dict[str, Array], list[dict[str, Any]]]:
+    count = int(controls["realizations"])
+    priors = controls["priors"]
+    surfaces: dict[str, list[Array]] = {"gas": [], "stars": [], "total": []}
+    metadata: list[dict[str, Any]] = []
+    reference_inclination = priors["reference_inclination_deg"]
+    spacing = float(axis[1] - axis[0])
+    for realization in range(count):
+        anchor = realization == 0
+        rng = np.random.default_rng(
+            np.random.SeedSequence([int(controls["seed"]), realization, 811])
+        )
+        distance_scale = 1.0 if anchor else float(
+            np.exp(rng.normal(0.0, priors["distance_scale_ln_sigma"]))
+        )
+        unseen_fraction = 0.0 if anchor else float(
+            rng.uniform(0.0, priors["co_spatial_unseen_baryon_fraction_max"])
+        )
+        unseen_scale = 1.0 / (1.0 - unseen_fraction)
+        if reference_inclination is None:
+            inclination = None
+            inclination_axis_scale = 1.0
+        else:
+            inclination = float(reference_inclination) if anchor else float(
+                np.clip(
+                    rng.normal(reference_inclination, priors["inclination_sigma_deg"]),
+                    0.0,
+                    85.0,
+                )
+            )
+            inclination_axis_scale = float(
+                np.cos(np.radians(reference_inclination))
+                / np.cos(np.radians(inclination))
+            )
+        draw_controls: dict[str, dict[str, Any]] = {}
+        component_metadata: dict[str, Any] = {}
+        for component in ("gas", "stars"):
+            base = dict(generation_controls.get(component, {}))
+            mass_sigma = priors[f"{component if component == 'gas' else 'stellar'}_mass_ln_sigma"]
+            radial_sigma = priors[
+                f"{component if component == 'gas' else 'stellar'}_radial_scale_ln_sigma"
+            ]
+            mass_draw = 1.0 if anchor else float(np.exp(rng.normal(0.0, mass_sigma)))
+            radial_draw = 1.0 if anchor else float(np.exp(rng.normal(0.0, radial_sigma)))
+            fourier_draw = 1.0 if anchor else float(
+                np.exp(rng.normal(0.0, priors["angular_structure_ln_sigma"]))
+            )
+            residual_draw = 1.0 if anchor else float(
+                np.exp(rng.normal(0.0, priors["local_structure_ln_sigma"]))
+            )
+            rotation_draw = 0.0 if anchor else float(
+                rng.normal(0.0, priors["rotation_sigma_deg"])
+            )
+            center_draw = (
+                np.zeros(2, dtype=float)
+                if anchor
+                else rng.normal(0.0, priors["center_sigma_kpc"], size=2)
+            )
+            base_center = np.asarray(base.get("center_offset_kpc", (0.0, 0.0)), dtype=float)
+            draw_controls[component] = {
+                "mass_scale": float(base.get("mass_scale", 1.0))
+                * mass_draw
+                * distance_scale**2
+                * unseen_scale,
+                "radial_scale": float(base.get("radial_scale", 1.0))
+                * radial_draw
+                * distance_scale,
+                "fourier_scale": float(base.get("fourier_scale", 1.0)) * fourier_draw,
+                "residual_scale": float(base.get("residual_scale", 1.0)) * residual_draw,
+                "rotation_deg": float(base.get("rotation_deg", 0.0)) + rotation_draw,
+                "center_offset_kpc": (base_center + center_draw).tolist(),
+                "axis_ratio_scale": float(base.get("axis_ratio_scale", 1.0))
+                * inclination_axis_scale,
+            }
+            component_metadata[component] = {
+                "massScale": draw_controls[component]["mass_scale"],
+                "radialScale": draw_controls[component]["radial_scale"],
+                "fourierScale": draw_controls[component]["fourier_scale"],
+                "residualScale": draw_controls[component]["residual_scale"],
+                "rotationDeg": draw_controls[component]["rotation_deg"],
+                "centerOffsetKpc": draw_controls[component]["center_offset_kpc"],
+                "axisRatioScale": draw_controls[component]["axis_ratio_scale"],
+            }
+        rendered = render_galaxy(package, axis, component_controls=draw_controls)
+        surface_hashes: dict[str, str] = {}
+        masses: dict[str, float] = {}
+        morphology: dict[str, dict[str, float]] = {}
+        for component in ("gas", "stars", "total"):
+            surfaces[component].append(rendered[component])
+            surface_hashes[component] = array_content_sha256(rendered[component])
+            masses[component] = float(np.sum(rendered[component]) * spacing**2)
+            morphology[component] = resolved_map_morphology(
+                rendered[component], disk_axis_kpc=axis, smoothing_sigma_pixel=2.0
+            )
+        metadata.append(
+            {
+                "realization": realization,
+                "anchor": anchor,
+                "distanceScale": distance_scale,
+                "referenceInclinationDeg": reference_inclination,
+                "inclinationDeg": inclination,
+                "inclinationDeprojectionAxisRatioScale": inclination_axis_scale,
+                "coSpatialUnseenBaryonFraction": unseen_fraction,
+                "coSpatialUnseenBaryonAssumption": "unseen mass follows traced baryons proportionally",
+                "components": component_metadata,
+                "massSolar": masses,
+                "morphology": morphology,
+                "surfaceContentSha256": surface_hashes,
+            }
+        )
+    return {
+        component: np.ascontiguousarray(np.stack(values), dtype="<f8")
+        for component, values in surfaces.items()
+    }, metadata
+
+
+def _vertical_ensemble_products(
+    surface_ensemble: Mapping[str, Array],
+    axis: Array,
+    controls: Mapping[str, Any],
+    uncertainty_controls: Mapping[str, Any],
+) -> tuple[dict[str, Array] | None, list[dict[str, Any]], Array | None]:
+    if not controls["enabled"]:
+        return None, [], None
+    surface_count, cells, _ = surface_ensemble["total"].shape
+    vertical_count = int(controls["realizations"])
+    z_cells = int(controls["zCells"])
+    raw_bytes = surface_count * vertical_count * cells * cells * z_cells * 3 * 8
+    if raw_bytes > MAX_ENSEMBLE_ARRAY_BYTES:
+        raise ValueError(
+            "requested 3D uncertainty ensemble exceeds the 256 MiB raw-array limit"
+        )
+    radial_resolution = float(axis[1] - axis[0])
+    total_r80 = max(
+        float(
+            resolved_map_morphology(
+                surface_ensemble["total"][index],
+                disk_axis_kpc=axis,
+                smoothing_sigma_pixel=2.0,
+            )["r80_kpc"]
+        )
+        for index in range(surface_count)
+    )
+    z_limit = max(8.0 * radial_resolution, 0.8 * total_r80)
+    z_axis = np.linspace(-z_limit, z_limit, z_cells)
+    volumes = {
+        component: np.empty(
+            (surface_count, vertical_count, cells, cells, z_cells), dtype="<f8"
+        )
+        for component in ("gas", "stars")
+    }
+    metadata: list[dict[str, Any]] = []
+    warp_sigma = float(uncertainty_controls["priors"]["warp_sigma_deg"])
+    for surface_realization in range(surface_count):
+        for vertical_realization in range(vertical_count):
+            anchor = surface_realization == 0 and vertical_realization == 0
+            common_rng = np.random.default_rng(
+                np.random.SeedSequence(
+                    [
+                        int(controls["seed"]),
+                        int(uncertainty_controls["seed"]),
+                        surface_realization,
+                        vertical_realization,
+                        977,
+                    ]
+                )
+            )
+            warp_amplitude = 0.0 if anchor else float(common_rng.normal(0.0, warp_sigma))
+            warp_phase = 0.0 if anchor else float(common_rng.uniform(-180.0, 180.0))
+            for component_index, component in enumerate(("gas", "stars")):
+                surface = surface_ensemble[component][surface_realization]
+                morphology = resolved_map_morphology(
+                    surface, disk_axis_kpc=axis, smoothing_sigma_pixel=2.0
+                )
+                measured_r80 = float(morphology["r80_kpc"])
+                r80 = max(measured_r80, radial_resolution)
+                sequence = np.random.SeedSequence(
+                    [
+                        int(controls["seed"]),
+                        int(uncertainty_controls["seed"]),
+                        surface_realization,
+                        vertical_realization,
+                        component_index,
+                    ]
+                )
+                density, description = sample_vertical_realization(
+                    surface,
+                    axis,
+                    z_axis,
+                    r80_kpc=r80,
+                    component=component,
+                    rng=np.random.default_rng(sequence),
+                    warp_amplitude_deg=warp_amplitude,
+                    warp_phase_deg=warp_phase,
+                )
+                volumes[component][surface_realization, vertical_realization] = density
+                dz = float(z_axis[1] - z_axis[0])
+                projected = np.sum(density, axis=2) * dz
+                error = float(
+                    np.max(np.abs(projected - surface))
+                    / max(float(np.max(surface)), np.finfo(float).tiny)
+                )
+                metadata.append(
+                    {
+                        **description,
+                        "surfaceRealization": surface_realization,
+                        "verticalRealization": vertical_realization,
+                        "anchor": anchor,
+                        "measuredR80Kpc": measured_r80,
+                        "r80ResolutionFloorKpc": radial_resolution,
+                        "r80ResolutionFloorApplied": measured_r80 < radial_resolution,
+                        "zCells": len(z_axis),
+                        "zLimitKpc": z_limit,
+                        "projectionRelativeError": error,
+                        "massWeightedZ2Kpc2": float(
+                            np.sum(density * z_axis[None, None, :] ** 2)
+                            / np.sum(density)
+                        ),
+                        "volumeContentSha256": array_content_sha256(density),
+                    }
+                )
+    volumes["total"] = volumes["gas"] + volumes["stars"]
+    return volumes, metadata, z_axis
+
+
 def _vertical_products(
     generated: Mapping[str, Array],
     axis: Array,
     controls: Mapping[str, Any],
 ) -> tuple[dict[str, Array] | None, list[dict[str, Any]], Array | None]:
-    if not controls["enabled"]:
-        return None, [], None
-    radial_resolution = float(axis[1] - axis[0])
-    total_morphology = resolved_map_morphology(
-        generated["total"], disk_axis_kpc=axis, smoothing_sigma_pixel=2.0
+    stacked = {
+        component: np.asarray(generated[component], dtype=float)[None, :, :]
+        for component in ("gas", "stars", "total")
+    }
+    no_uncertainty = {
+        "seed": 0,
+        "priors": {"warp_sigma_deg": 0.0},
+    }
+    ensemble, metadata, z_axis = _vertical_ensemble_products(
+        stacked, axis, controls, no_uncertainty
     )
-    total_r80 = float(total_morphology["r80_kpc"])
-    z_limit = max(8.0 * radial_resolution, 0.8 * total_r80)
-    z_axis = np.linspace(-z_limit, z_limit, int(controls["zCells"]))
-    first: dict[str, Array] = {}
-    metadata: list[dict[str, Any]] = []
-    for component_index, component in enumerate(("gas", "stars")):
-        morphology = resolved_map_morphology(
-            generated[component], disk_axis_kpc=axis, smoothing_sigma_pixel=2.0
-        )
-        measured_r80 = float(morphology["r80_kpc"])
-        # A compact component can collapse into the central pixel when a
-        # high-resolution parameter package is intentionally replayed on a
-        # coarse commissioning grid. Depth is then unresolved, not zero. Use
-        # one radial cell as an explicit resolution floor for the vertical
-        # prior and preserve both values in the metadata.
-        r80 = max(measured_r80, radial_resolution)
-        for realization in range(int(controls["realizations"])):
-            sequence = np.random.SeedSequence(
-                [int(controls["seed"]), component_index, realization]
-            )
-            density, description = sample_vertical_realization(
-                generated[component],
-                axis,
-                z_axis,
-                r80_kpc=r80,
-                component=component,
-                rng=np.random.default_rng(sequence),
-            )
-            dz = float(z_axis[1] - z_axis[0])
-            projected = np.sum(density, axis=2) * dz
-            error = float(
-                np.max(np.abs(projected - generated[component]))
-                / max(float(np.max(generated[component])), np.finfo(float).tiny)
-            )
-            metadata.append(
-                {
-                    **description,
-                    "measuredR80Kpc": measured_r80,
-                    "r80ResolutionFloorKpc": radial_resolution,
-                    "r80ResolutionFloorApplied": measured_r80 < radial_resolution,
-                    "realization": realization,
-                    "zCells": len(z_axis),
-                    "zLimitKpc": z_limit,
-                    "projectionRelativeError": error,
-                    "massWeightedZ2Kpc2": float(
-                        np.sum(density * z_axis[None, None, :] ** 2) / np.sum(density)
-                    ),
-                }
-            )
-            if realization == 0:
-                first[component] = density
-    first["total"] = first["gas"] + first["stars"]
+    if ensemble is None:
+        return None, metadata, z_axis
+    first = {component: ensemble[component][0, 0] for component in ensemble}
     return first, metadata, z_axis
 
 
@@ -373,6 +667,9 @@ def execute_galaxy_request_file(
             if package.get("contentSha256") != package_content_hash(package):
                 raise ValueError("parameterPackage content hash mismatch")
             axis = _output_axis(package, envelope.get("outputGrid"))
+        uncertainty_controls = _uncertainty_ensemble(
+            envelope.get("uncertaintyEnsemble"), package
+        )
 
         identity = {
             "schemaVersion": "sigma-galaxy-scientific-job-identity/1",
@@ -382,12 +679,19 @@ def execute_galaxy_request_file(
             "extractionControls": extraction_controls,
             "generationControls": generation_controls,
             "vertical": vertical_controls,
+            "uncertaintyEnsemble": uncertainty_controls,
             "outputGrid": envelope.get("outputGrid"),
             "outputLicense": license_value,
             "workerSourceSha256": worker_hash,
         }
         job_id = f"galaxyjob_{canonical_sha256(identity)[:24]}"
         generated = render_galaxy(package, axis, component_controls=generation_controls)
+        surface_ensemble, uncertainty_metadata = _surface_uncertainty_products(
+            package, axis, generation_controls, uncertainty_controls
+        )
+        for component in ("gas", "stars", "total"):
+            if not np.array_equal(surface_ensemble[component][0], generated[component]):
+                raise RuntimeError("uncertainty ensemble anchor does not match central generation")
         metrics = (
             {
                 component: roundtrip_metrics(reference[component], generated[component], axis)
@@ -396,8 +700,13 @@ def execute_galaxy_request_file(
             if reference is not None
             else None
         )
-        volume, vertical_metadata, z_axis = _vertical_products(
-            generated, axis, vertical_controls
+        volume_ensemble, vertical_metadata, z_axis = _vertical_ensemble_products(
+            surface_ensemble, axis, vertical_controls, uncertainty_controls
+        )
+        volume = (
+            None
+            if volume_ensemble is None
+            else {component: volume_ensemble[component][0, 0] for component in volume_ensemble}
         )
 
         _write_json(temporary / "parameters.json", package)
@@ -406,8 +715,12 @@ def execute_galaxy_request_file(
         _write_json(
             temporary / "vertical_priors.json",
             {
-                "schemaVersion": "sigma-galaxy-vertical-prior-ensemble/1",
+                "schemaVersion": "sigma-galaxy-vertical-prior-ensemble/2",
                 "status": "assumed_prior_not_measured",
+                "surfaceRealizations": int(surface_ensemble["total"].shape[0]),
+                "verticalRealizationsPerSurface": int(vertical_controls["realizations"])
+                if vertical_controls["enabled"]
+                else 0,
                 "items": vertical_metadata,
             },
         )
@@ -438,6 +751,70 @@ def execute_galaxy_request_file(
             license_value=license_value,
         )
         _save_array_product(temporary, "surface_density", surface_arrays, surface_bundle)
+        surface_ensemble_arrays = {
+            "gas_surface_density": surface_ensemble["gas"],
+            "stellar_surface_density": surface_ensemble["stars"],
+            "total_baryonic_surface_density": surface_ensemble["total"],
+        }
+        spatial_geometry_2d = {
+            "coordinateSystem": "cartesian_2d",
+            "dimensions": 2,
+            "spacing": [spacing, spacing],
+            "origin": [float(axis[0]), float(axis[0])],
+            "lengthUnit": "kpc",
+            "axisOrder": ["x", "y"],
+            "referenceFrame": "intrinsic_face_on_baryonic_map",
+        }
+        surface_ensemble_bundle = _ensemble_bundle(
+            surface_ensemble_arrays,
+            spatial_geometry=spatial_geometry_2d,
+            ensemble_axes=[
+                {
+                    "name": "surfaceRealization",
+                    "count": int(surface_ensemble["total"].shape[0]),
+                    "anchorIndex": 0,
+                }
+            ],
+            unit="M_sun/kpc^2",
+            provenance={
+                **provenance,
+                "uncertaintyStatus": "observation_conditioned_prior_not_posterior",
+            },
+            license_value=license_value,
+        )
+        _save_array_product(
+            temporary,
+            "surface_density_ensemble",
+            surface_ensemble_arrays,
+            surface_ensemble_bundle,
+        )
+        surface_quantile_arrays: dict[str, Array] = {}
+        for component, key in (
+            ("gas", "gas_surface_density"),
+            ("stars", "stellar_surface_density"),
+            ("total", "total_baryonic_surface_density"),
+        ):
+            for percentile, quantile in ((16, 0.16), (50, 0.50), (84, 0.84)):
+                surface_quantile_arrays[f"{key}_p{percentile}"] = np.quantile(
+                    surface_ensemble[component], quantile, axis=0
+                )
+        surface_quantile_bundle = _array_bundle(
+            surface_quantile_arrays,
+            geometry=spatial_geometry_2d,
+            unit="M_sun/kpc^2",
+            provenance={
+                **provenance,
+                "summaryOf": surface_ensemble_bundle["bundleSha256"],
+                "percentiles": [16, 50, 84],
+            },
+            license_value=license_value,
+        )
+        _save_array_product(
+            temporary,
+            "surface_density_quantiles",
+            surface_quantile_arrays,
+            surface_quantile_bundle,
+        )
         field_surface_arrays = {
             "gas_surface_density": generated["gas"] * MSUN_KG / KPC_M**2,
             "stellar_surface_density": generated["stars"] * MSUN_KG / KPC_M**2,
@@ -463,6 +840,7 @@ def execute_galaxy_request_file(
         )
         volume_bundle = None
         field_volume_bundle = None
+        volume_ensemble_bundle = None
         if volume is not None and z_axis is not None:
             volume_arrays = {
                 "gas_volume_density": volume["gas"],
@@ -524,6 +902,116 @@ def execute_galaxy_request_file(
             _save_array_product(
                 temporary, "field_volume_density", field_volume_arrays, field_volume_bundle
             )
+            volume_ensemble_arrays = {
+                "gas_volume_density": volume_ensemble["gas"],
+                "stellar_volume_density": volume_ensemble["stars"],
+                "total_baryonic_volume_density": volume_ensemble["total"],
+            }
+            volume_ensemble_bundle = _ensemble_bundle(
+                volume_ensemble_arrays,
+                spatial_geometry={
+                    "coordinateSystem": "cartesian_3d",
+                    "dimensions": 3,
+                    "spacing": [spacing, spacing, float(z_axis[1] - z_axis[0])],
+                    "origin": [float(axis[0]), float(axis[0]), float(z_axis[0])],
+                    "lengthUnit": "kpc",
+                    "axisOrder": ["x", "y", "z"],
+                    "referenceFrame": "intrinsic_baryonic_prior_realization",
+                },
+                ensemble_axes=[
+                    {
+                        "name": "surfaceRealization",
+                        "count": int(volume_ensemble["total"].shape[0]),
+                        "anchorIndex": 0,
+                    },
+                    {
+                        "name": "verticalRealization",
+                        "count": int(volume_ensemble["total"].shape[1]),
+                        "anchorIndex": 0,
+                    },
+                ],
+                unit="M_sun/kpc^3",
+                provenance={
+                    **provenance,
+                    "uncertaintyStatus": "observation_conditioned_prior_not_posterior",
+                    "projectionTarget": surface_ensemble_bundle["bundleSha256"],
+                },
+                license_value=license_value,
+            )
+            _save_array_product(
+                temporary,
+                "volume_density_ensemble",
+                volume_ensemble_arrays,
+                volume_ensemble_bundle,
+            )
+
+        _write_json(
+            temporary / "baryonic_uncertainty_ensemble.json",
+            {
+                "schemaVersion": "sigma-galaxy-baryonic-uncertainty-ensemble/1",
+                "status": "observation_conditioned_prior_not_posterior",
+                "gravityParameters": {},
+                "velocityTargetsUsed": False,
+                "controls": uncertainty_controls,
+                "surfaceBundleSha256": surface_ensemble_bundle["bundleSha256"],
+                "volumeBundleSha256": None
+                if volume_ensemble_bundle is None
+                else volume_ensemble_bundle["bundleSha256"],
+                "draws": uncertainty_metadata,
+                "limitations": [
+                    "Prior widths are researcher-declared and are not inferred from a likelihood.",
+                    "Inclination uncertainty is represented as a thin-map minor-axis deprojection scale.",
+                    "Unseen baryons, when enabled, are assumed to follow traced baryons proportionally.",
+                    "Bulge deprojection, dust, beam, PSF, noise, masks, turbulence, and spectral cubes are not inferred here.",
+                ],
+            },
+        )
+        with (temporary / "baryonic_uncertainty_draws.csv").open(
+            "w", newline="", encoding="utf-8"
+        ) as handle:
+            fieldnames = [
+                "realization",
+                "anchor",
+                "distance_scale",
+                "inclination_deg",
+                "inclination_axis_ratio_scale",
+                "co_spatial_unseen_baryon_fraction",
+                "gas_mass_solar",
+                "stellar_mass_solar",
+                "total_mass_solar",
+                "total_concentration",
+                "total_lopsidedness",
+                "total_clumpiness",
+            ]
+            writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+            writer.writeheader()
+            for draw in uncertainty_metadata:
+                writer.writerow(
+                    {
+                        "realization": draw["realization"],
+                        "anchor": str(draw["anchor"]).lower(),
+                        "distance_scale": draw["distanceScale"],
+                        "inclination_deg": draw["inclinationDeg"],
+                        "inclination_axis_ratio_scale": draw[
+                            "inclinationDeprojectionAxisRatioScale"
+                        ],
+                        "co_spatial_unseen_baryon_fraction": draw[
+                            "coSpatialUnseenBaryonFraction"
+                        ],
+                        "gas_mass_solar": draw["massSolar"]["gas"],
+                        "stellar_mass_solar": draw["massSolar"]["stars"],
+                        "total_mass_solar": draw["massSolar"]["total"],
+                        "total_concentration": draw["morphology"]["total"][
+                            "concentration_5log_r80_r20"
+                        ],
+                        "total_lopsidedness": draw["morphology"]["total"][
+                            "lopsidedness_180"
+                        ],
+                        "total_clumpiness": draw["morphology"]["total"][
+                            "clumpiness_positive_highpass"
+                        ],
+                    }
+                )
 
         elapsed = time.perf_counter() - started
         _, peak_memory = tracemalloc.get_traced_memory()
@@ -537,13 +1025,39 @@ def execute_galaxy_request_file(
             "sourceBundleSha256": source_bundle_hash,
             "surfaceBundleSha256": surface_bundle["bundleSha256"],
             "fieldSurfaceBundleSha256": field_surface_bundle["bundleSha256"],
+            "surfaceEnsembleBundleSha256": surface_ensemble_bundle["bundleSha256"],
+            "surfaceQuantileBundleSha256": surface_quantile_bundle["bundleSha256"],
             "volumeBundleSha256": None
             if volume_bundle is None
             else volume_bundle["bundleSha256"],
             "fieldVolumeBundleSha256": None
             if field_volume_bundle is None
             else field_volume_bundle["bundleSha256"],
+            "volumeEnsembleBundleSha256": None
+            if volume_ensemble_bundle is None
+            else volume_ensemble_bundle["bundleSha256"],
             "roundtripMetrics": metrics,
+            "uncertaintyEnsemble": {
+                "status": "observation_conditioned_prior_not_posterior",
+                "surfaceRealizations": int(surface_ensemble["total"].shape[0]),
+                "verticalRealizationsPerSurface": 0
+                if volume_ensemble is None
+                else int(volume_ensemble["total"].shape[1]),
+                "anchorRealization": 0,
+                "totalMassSolarP16P50P84": np.quantile(
+                    [item["massSolar"]["total"] for item in uncertainty_metadata],
+                    [0.16, 0.50, 0.84],
+                ).tolist(),
+                "totalConcentrationP16P50P84": np.quantile(
+                    [
+                        item["morphology"]["total"][
+                            "concentration_5log_r80_r20"
+                        ]
+                        for item in uncertainty_metadata
+                    ],
+                    [0.16, 0.50, 0.84],
+                ).tolist(),
+            },
             "verticalProjectionMaximumRelativeError": max(
                 (item["projectionRelativeError"] for item in vertical_metadata), default=None
             ),
@@ -567,6 +1081,18 @@ def execute_galaxy_request_file(
             "python": platform.python_version(),
             "gridShape2d": list(generated["total"].shape),
             "gridShape3d": None if volume is None else list(volume["total"].shape),
+            "surfaceEnsembleShape": list(surface_ensemble["total"].shape),
+            "volumeEnsembleShape": None
+            if volume_ensemble is None
+            else list(volume_ensemble["total"].shape),
+            "ensembleRawArrayBytes": int(
+                sum(array.nbytes for array in surface_ensemble.values())
+                + (
+                    0
+                    if volume_ensemble is None
+                    else sum(array.nbytes for array in volume_ensemble.values())
+                )
+            ),
         }
         _write_json(temporary / "resource_log.json", resource_log)
 

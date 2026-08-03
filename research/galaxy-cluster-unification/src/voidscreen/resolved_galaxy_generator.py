@@ -83,10 +83,11 @@ def _base_component(
     residual_scale: float,
     rotation_deg: float,
     center_offset_kpc: Sequence[float],
+    axis_ratio_scale: float,
 ) -> Array:
     axis, spacing = _regular_axis(axis_kpc)
-    if mass_scale <= 0.0 or radial_scale <= 0.0:
-        raise ValueError("mass_scale and radial_scale must be positive")
+    if mass_scale <= 0.0 or radial_scale <= 0.0 or axis_ratio_scale <= 0.0:
+        raise ValueError("mass_scale, radial_scale, and axis_ratio_scale must be positive")
     if fourier_scale < 0.0 or residual_scale < 0.0:
         raise ValueError("fourier_scale and residual_scale must be non-negative")
     if len(center_offset_kpc) != 2:
@@ -101,7 +102,7 @@ def _base_component(
     dx = xx - center[0]
     dy = yy - center[1]
     source_x = (cosine * dx + sine * dy) / radial_scale
-    source_y = (-sine * dx + cosine * dy) / radial_scale
+    source_y = (-sine * dx + cosine * dy) / (radial_scale * axis_ratio_scale)
     radius = np.hypot(source_x, source_y)
     phi = np.arctan2(source_y, source_x)
 
@@ -133,11 +134,19 @@ def _base_component(
     for feature in parameters["residual_features"]:
         feature_x = float(feature["x_kpc"]) - float(parameters["centroid_kpc"][0])
         feature_y = float(feature["y_kpc"]) - float(parameters["centroid_kpc"][1])
-        transformed_x = center[0] + radial_scale * (cosine * feature_x - sine * feature_y)
-        transformed_y = center[1] + radial_scale * (sine * feature_x + cosine * feature_y)
+        transformed_x = center[0] + radial_scale * (
+            cosine * feature_x - sine * axis_ratio_scale * feature_y
+        )
+        transformed_y = center[1] + radial_scale * axis_ratio_scale * (
+            sine * feature_x + cosine * feature_y
+        )
         sigma = radial_scale * float(feature["sigma_kpc"])
+        feature_dx = xx - transformed_x
+        feature_dy = yy - transformed_y
+        feature_source_x = cosine * feature_dx + sine * feature_dy
+        feature_source_y = (-sine * feature_dx + cosine * feature_dy) / axis_ratio_scale
         gaussian = np.exp(
-            -0.5 * ((xx - transformed_x) ** 2 + (yy - transformed_y) ** 2) / sigma**2
+            -0.5 * (feature_source_x**2 + feature_source_y**2) / sigma**2
         )
         model += residual_scale * float(feature["amplitude_surface_density"]) * gaussian
 
@@ -233,6 +242,7 @@ def extract_component_parameters(
         residual_scale=0.0,
         rotation_deg=0.0,
         center_offset_kpc=(0.0, 0.0),
+        axis_ratio_scale=1.0,
     )
     residual = surface - base
 
@@ -286,6 +296,7 @@ def render_component(
     residual_scale: float = 1.0,
     rotation_deg: float = 0.0,
     center_offset_kpc: Sequence[float] = (0.0, 0.0),
+    axis_ratio_scale: float = 1.0,
 ) -> Array:
     """Render one extracted component, optionally changing generative controls."""
 
@@ -298,6 +309,7 @@ def render_component(
         residual_scale=residual_scale,
         rotation_deg=rotation_deg,
         center_offset_kpc=center_offset_kpc,
+        axis_ratio_scale=axis_ratio_scale,
     )
 
 
@@ -402,6 +414,7 @@ def lift_surface_density_to_volume(
     *,
     scale_height_kpc: float | Array,
     profile: str = "sech_squared",
+    midplane_offset_kpc: float | Array = 0.0,
 ) -> Array:
     """Lift a 2D map to 3D while preserving every projected mass column."""
 
@@ -417,7 +430,12 @@ def lift_surface_density_to_volume(
         height = np.full(surface.shape, float(height))
     if height.shape != surface.shape or not np.all(np.isfinite(height)) or np.any(height <= 0.0):
         raise ValueError("scale_height_kpc must be positive and scalar or match the surface map")
-    scaled_z = np.abs(z_axis[None, None, :]) / height[:, :, None]
+    midplane = np.asarray(midplane_offset_kpc, dtype=float)
+    if midplane.ndim == 0:
+        midplane = np.full(surface.shape, float(midplane))
+    if midplane.shape != surface.shape or not np.all(np.isfinite(midplane)):
+        raise ValueError("midplane_offset_kpc must be finite and scalar or match the surface map")
+    scaled_z = np.abs(z_axis[None, None, :] - midplane[:, :, None]) / height[:, :, None]
     if profile == "exponential":
         weights = np.exp(-scaled_z)
     elif profile == "sech_squared":
@@ -438,20 +456,36 @@ def sample_vertical_realization(
     component: str,
     rng: np.random.Generator,
     profile: str | None = None,
+    scale_height_log_sigma: float = 0.35,
+    flaring_max: float = 1.0,
+    warp_amplitude_deg: float = 0.0,
+    warp_phase_deg: float = 0.0,
 ) -> tuple[Array, dict[str, Any]]:
     """Draw one declared disk-thickness prior and return its 3D density."""
 
     axis, spacing = _regular_axis(axis_kpc)
     if component not in {"gas", "stars"} or r80_kpc <= 0.0:
         raise ValueError("component or r80_kpc is invalid")
+    if scale_height_log_sigma < 0.0 or flaring_max < 0.0:
+        raise ValueError("vertical prior widths must be non-negative")
+    if not np.isfinite(warp_amplitude_deg) or abs(warp_amplitude_deg) > 45.0:
+        raise ValueError("warp_amplitude_deg must be finite and within +/-45 degrees")
     median_fraction = 0.12 if component == "gas" else 0.08
     base_height = max(spacing, median_fraction * float(r80_kpc)) * float(
-        np.exp(rng.normal(0.0, 0.35))
+        np.exp(rng.normal(0.0, scale_height_log_sigma))
     )
-    flaring = float(rng.uniform(0.0, 1.0))
+    flaring = float(rng.uniform(0.0, flaring_max))
     xx, yy = np.meshgrid(axis, axis, indexing="ij")
     radius = np.hypot(xx, yy)
     scale_height = base_height * (1.0 + flaring * radius / float(r80_kpc))
+    phi = np.arctan2(yy, xx)
+    warp_start = 0.5 * float(r80_kpc)
+    warp_slope = np.tan(np.radians(float(warp_amplitude_deg)))
+    midplane_offset = (
+        warp_slope
+        * np.clip(radius - warp_start, 0.0, None)
+        * np.cos(phi - np.radians(float(warp_phase_deg)))
+    )
     chosen_profile = profile or ("sech_squared" if rng.random() < 0.5 else "exponential")
     density = lift_surface_density_to_volume(
         surface_density,
@@ -459,6 +493,7 @@ def sample_vertical_realization(
         z_axis_kpc,
         scale_height_kpc=scale_height,
         profile=chosen_profile,
+        midplane_offset_kpc=midplane_offset,
     )
     return density, {
         "status": "assumed_prior_not_measured",
@@ -467,6 +502,9 @@ def sample_vertical_realization(
         "baseScaleHeightKpc": float(base_height),
         "flaringPerR80": flaring,
         "r80Kpc": float(r80_kpc),
+        "warpAmplitudeDeg": float(warp_amplitude_deg),
+        "warpPhaseDeg": float(warp_phase_deg),
+        "warpStartR80": 0.5,
     }
 
 

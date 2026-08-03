@@ -19,6 +19,16 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.22 adds a real gravity-independent baryonic uncertainty-ensemble
+artifact path to local galaxy jobs. Researchers can declare bounded seeded
+priors for mass, radial scale, angular and local structure, center, rotation,
+distance, inclination deprojection, warp, and a narrowly defined co-spatial
+unseen-baryon fraction. The worker saves every 2D draw, every corresponding 3D
+vertical draw, p16/p50/p84 maps, CSV/JSON draw records, hashes, and exact
+projection diagnostics. Realization 0 remains the unchanged central map. The
+result is explicitly a prior ensemble, not a likelihood-derived posterior;
+raw images, cubes, PSF/beam, noise, masks, bulges, and dust are still missing.
+
 Version 0.21 publishes a role-safe four-cluster RELICS evidence registry at
 `GET /api/v1/cluster-evidence`. It inventories registered projected baryonic
 mass maps, two published model-derived lens-map methods per cluster, raw image
@@ -327,9 +337,14 @@ POST /api/v1/galaxy-jobs/{id}/cancel
 a content-hashed baryonic parameter package, regenerated 2D density bundle,
 an explicitly prior-based 3D density bundle, and round-trip metrics. `generate`
 accepts one of those parameter packages plus controlled changes to mass,
-radial scale, Fourier/asymmetry strength, local features, rotation, and
-component offsets. The resulting surface or volume bundle can then be supplied
-to any compatible `/api/v1/field-jobs` model; the galaxy job never selects a
+radial scale, Fourier/asymmetry strength, local features, rotation, component
+offsets, and a minor-axis shape scale. An optional
+`uncertaintyEnsemble` declares up to 16 seeded 2D baryonic realizations; each
+can receive up to eight vertical realizations. The outputs include full surface
+and volume ensemble NPZ files, p16/p50/p84 maps, and per-draw metadata. A
+256 MiB raw-array gate rejects oversized ensembles during preflight and again
+inside the worker. The resulting anchor surface or volume bundle can then be
+supplied to any compatible `/api/v1/field-jobs` model; the galaxy job never selects a
 gravity theory itself.
 
 Generation may also declare `outputGrid.cellsPerAxis` and an `extentScale`

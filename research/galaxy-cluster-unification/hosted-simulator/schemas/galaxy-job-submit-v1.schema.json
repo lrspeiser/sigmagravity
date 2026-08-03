@@ -48,6 +48,34 @@
         "seed": { "type": "integer", "minimum": 0, "maximum": 2147483647 }
       }
     },
+    "uncertaintyEnsemble": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "realizations": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "seed": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+        "priors": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "gasMassLnSigma": { "type": "number", "minimum": 0, "maximum": 1 },
+            "stellarMassLnSigma": { "type": "number", "minimum": 0, "maximum": 1 },
+            "gasRadialScaleLnSigma": { "type": "number", "minimum": 0, "maximum": 0.5 },
+            "stellarRadialScaleLnSigma": { "type": "number", "minimum": 0, "maximum": 0.5 },
+            "angularStructureLnSigma": { "type": "number", "minimum": 0, "maximum": 1 },
+            "localStructureLnSigma": { "type": "number", "minimum": 0, "maximum": 1 },
+            "centerSigmaKpc": { "type": "number", "minimum": 0, "maximum": 10 },
+            "rotationSigmaDeg": { "type": "number", "minimum": 0, "maximum": 180 },
+            "distanceScaleLnSigma": { "type": "number", "minimum": 0, "maximum": 0.5 },
+            "referenceInclinationDeg": { "type": "number", "minimum": 0, "maximum": 85 },
+            "inclinationSigmaDeg": { "type": "number", "minimum": 0, "maximum": 20 },
+            "warpSigmaDeg": { "type": "number", "minimum": 0, "maximum": 20 },
+            "coSpatialUnseenBaryonFractionMax": { "type": "number", "minimum": 0, "maximum": 0.5 }
+          }
+        }
+      }
+    },
     "outputLicense": {
       "type": "object",
       "additionalProperties": false,
@@ -68,6 +96,7 @@
         "fourierScale": { "type": "number", "minimum": 0 },
         "residualScale": { "type": "number", "minimum": 0 },
         "rotationDeg": { "type": "number" },
+        "axisRatioScale": { "type": "number", "exclusiveMinimum": 0 },
         "centerOffsetKpc": {
           "type": "array",
           "minItems": 2,

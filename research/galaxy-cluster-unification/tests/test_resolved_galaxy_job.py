@@ -118,6 +118,18 @@ def test_extract_job_emits_verified_2d_and_3d_bundles(tmp_path: Path) -> None:
     metrics = json.loads((output / "roundtrip_metrics.json").read_text(encoding="utf-8"))
     assert metrics["total"]["mass_relative_error"] < 1e-12
     assert metrics["total"]["pixel_correlation"] > 0.95
+    with np.load(output / "surface_density_ensemble.npz") as ensemble:
+        assert ensemble["total_baryonic_surface_density"].shape == (1, 33, 33)
+        np.testing.assert_array_equal(
+            ensemble["total_baryonic_surface_density"][0],
+            surface_arrays["total_baryonic_surface_density"],
+        )
+    with np.load(output / "volume_density_ensemble.npz") as ensemble:
+        assert ensemble["total_baryonic_volume_density"].shape == (1, 2, 33, 33, 17)
+        np.testing.assert_array_equal(
+            ensemble["total_baryonic_volume_density"][0, 0],
+            volume_arrays["total_baryonic_volume_density"],
+        )
 
 
 def test_vertical_prior_uses_disclosed_resolution_floor_for_central_pixel() -> None:
@@ -220,6 +232,19 @@ def test_generate_job_rejects_fractional_output_grid(tmp_path: Path) -> None:
         raise AssertionError("fractional output grid was accepted")
 
 
+def test_job_rejects_fractional_uncertainty_realization_count(tmp_path: Path) -> None:
+    request_path = extraction_request(tmp_path)
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    request["uncertaintyEnsemble"] = {"enabled": True, "realizations": 2.5}
+    request_path.write_text(json.dumps(request), encoding="utf-8")
+    try:
+        execute_galaxy_request_file(request_path)
+    except TypeError as error:
+        assert "must be an integer" in str(error)
+    else:
+        raise AssertionError("fractional uncertainty ensemble size was accepted")
+
+
 def test_job_rejects_non_kpc_input_geometry(tmp_path: Path) -> None:
     request_path = extraction_request(tmp_path)
     bundle_path = tmp_path / "bundle" / "bundle.json"
@@ -236,3 +261,99 @@ def test_job_rejects_non_kpc_input_geometry(tmp_path: Path) -> None:
         assert "lengthUnit kpc" in str(error)
     else:
         raise AssertionError("non-kpc geometry was accepted")
+
+
+def test_uncertainty_ensemble_is_seeded_bounded_and_projects_exactly(tmp_path: Path) -> None:
+    request_path = extraction_request(tmp_path)
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    request["sourceObservables"] = {"inclinationDeg": 48.0}
+    request["uncertaintyEnsemble"] = {
+        "enabled": True,
+        "realizations": 4,
+        "seed": 91,
+        "priors": {
+            "gas_mass_ln_sigma": 0.12,
+            "stellar_mass_ln_sigma": 0.18,
+            "gas_radial_scale_ln_sigma": 0.08,
+            "stellar_radial_scale_ln_sigma": 0.1,
+            "angular_structure_ln_sigma": 0.15,
+            "local_structure_ln_sigma": 0.2,
+            "center_sigma_kpc": 0.08,
+            "rotation_sigma_deg": 4.0,
+            "distance_scale_ln_sigma": 0.04,
+            "inclination_sigma_deg": 3.0,
+            "warp_sigma_deg": 2.0,
+            "co_spatial_unseen_baryon_fraction_max": 0.1,
+        },
+    }
+    request["vertical"] = {"enabled": True, "realizations": 2, "zCells": 17, "seed": 42}
+    request_path.write_text(json.dumps(request), encoding="utf-8")
+    execute_galaxy_request_file(request_path)
+    output = tmp_path / "artifacts"
+    with np.load(output / "surface_density_ensemble.npz") as saved:
+        surfaces = {key: saved[key].copy() for key in saved.files}
+    with np.load(output / "volume_density_ensemble.npz") as saved:
+        volumes = {key: saved[key].copy() for key in saved.files}
+    assert surfaces["total_baryonic_surface_density"].shape == (4, 33, 33)
+    assert volumes["total_baryonic_volume_density"].shape == (4, 2, 33, 33, 17)
+    assert not np.array_equal(
+        surfaces["total_baryonic_surface_density"][0],
+        surfaces["total_baryonic_surface_density"][1],
+    )
+    dz = 2.0 * max(8.0 * 0.25, 0.8 * max(
+        resolved["morphology"]["total"]["r80_kpc"]
+        for resolved in json.loads(
+            (output / "baryonic_uncertainty_ensemble.json").read_text(encoding="utf-8")
+        )["draws"]
+    )) / 16.0
+    np.testing.assert_allclose(
+        volumes["total_baryonic_volume_density"].sum(axis=4) * dz,
+        np.broadcast_to(
+            surfaces["total_baryonic_surface_density"][:, None, :, :],
+            volumes["total_baryonic_volume_density"].shape[:4],
+        ),
+        rtol=1e-12,
+        atol=1e-7,
+    )
+    with np.load(output / "surface_density_quantiles.npz") as quantiles:
+        for prefix in (
+            "gas_surface_density",
+            "stellar_surface_density",
+            "total_baryonic_surface_density",
+        ):
+            assert np.all(quantiles[f"{prefix}_p16"] <= quantiles[f"{prefix}_p50"])
+            assert np.all(quantiles[f"{prefix}_p50"] <= quantiles[f"{prefix}_p84"])
+    scientific = json.loads((output / "scientific_result.json").read_text(encoding="utf-8"))
+    assert scientific["uncertaintyEnsemble"]["surfaceRealizations"] == 4
+    assert scientific["uncertaintyEnsemble"]["verticalRealizationsPerSurface"] == 2
+    assert scientific["parameterAccounting"]["gravityUniversal"] == 0
+
+
+def test_uncertainty_ensemble_seed_replays_without_velocity_targets(tmp_path: Path) -> None:
+    arrays = []
+    scientific_ids = []
+    for index in range(2):
+        root = tmp_path / f"run-{index}"
+        root.mkdir()
+        request_path = extraction_request(root)
+        request = json.loads(request_path.read_text(encoding="utf-8"))
+        request["sourceObservables"] = {
+            "kind": "known-answer fixture",
+            "withheldVelocityTargetChecksum": f"not-consumed-{index}",
+        }
+        request["uncertaintyEnsemble"] = {
+            "enabled": True,
+            "realizations": 3,
+            "seed": 712,
+            "priors": {"gas_mass_ln_sigma": 0.2, "stellar_mass_ln_sigma": 0.2},
+        }
+        request_path.write_text(json.dumps(request), encoding="utf-8")
+        manifest = execute_galaxy_request_file(request_path)
+        scientific_ids.append(manifest["jobId"])
+        with np.load(root / "artifacts" / "surface_density_ensemble.npz") as saved:
+            arrays.append(saved["total_baryonic_surface_density"].copy())
+        package = json.loads((root / "artifacts" / "parameters.json").read_text(encoding="utf-8"))
+        assert package["velocityTargetsUsed"] is False
+        assert package["gravityParameters"] == {}
+    assert scientific_ids[0] != scientific_ids[1]
+    np.testing.assert_array_equal(arrays[0], arrays[1])

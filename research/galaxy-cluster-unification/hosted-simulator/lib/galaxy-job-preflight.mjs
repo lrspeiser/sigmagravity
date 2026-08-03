@@ -9,6 +9,22 @@ const GENERATION_KEYS = new Map([
   ["residualScale", "residual_scale"],
   ["rotationDeg", "rotation_deg"],
   ["centerOffsetKpc", "center_offset_kpc"],
+  ["axisRatioScale", "axis_ratio_scale"],
+]);
+
+const UNCERTAINTY_PRIORS = new Map([
+  ["gasMassLnSigma", ["gas_mass_ln_sigma", 0, 1]],
+  ["stellarMassLnSigma", ["stellar_mass_ln_sigma", 0, 1]],
+  ["gasRadialScaleLnSigma", ["gas_radial_scale_ln_sigma", 0, 0.5]],
+  ["stellarRadialScaleLnSigma", ["stellar_radial_scale_ln_sigma", 0, 0.5]],
+  ["angularStructureLnSigma", ["angular_structure_ln_sigma", 0, 1]],
+  ["localStructureLnSigma", ["local_structure_ln_sigma", 0, 1]],
+  ["centerSigmaKpc", ["center_sigma_kpc", 0, 10]],
+  ["rotationSigmaDeg", ["rotation_sigma_deg", 0, 180]],
+  ["distanceScaleLnSigma", ["distance_scale_ln_sigma", 0, 0.5]],
+  ["inclinationSigmaDeg", ["inclination_sigma_deg", 0, 20]],
+  ["warpSigmaDeg", ["warp_sigma_deg", 0, 20]],
+  ["coSpatialUnseenBaryonFractionMax", ["co_spatial_unseen_baryon_fraction_max", 0, 0.5]],
 ]);
 
 function integer(value, fallback, minimum, maximum, label) {
@@ -46,6 +62,44 @@ function verticalControls(value = {}) {
   };
 }
 
+function uncertaintyControls(value = {}, sourceObservables = {}) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("uncertaintyEnsemble must be an object");
+  const allowed = new Set(["enabled", "realizations", "seed", "priors"]);
+  const unknown = Object.keys(value).filter((key) => !allowed.has(key));
+  if (unknown.length) throw new Error(`unknown uncertainty ensemble controls: ${unknown.join(", ")}`);
+  const priorsInput = value.priors ?? {};
+  if (!priorsInput || typeof priorsInput !== "object" || Array.isArray(priorsInput)) throw new Error("uncertaintyEnsemble.priors must be an object");
+  const priorAllowed = new Set([...UNCERTAINTY_PRIORS.keys(), "referenceInclinationDeg"]);
+  const unknownPriors = Object.keys(priorsInput).filter((key) => !priorAllowed.has(key));
+  if (unknownPriors.length) throw new Error(`unknown baryonic uncertainty priors: ${unknownPriors.join(", ")}`);
+  const priors = {};
+  for (const [inputKey, [workerKey, minimum, maximum]] of UNCERTAINTY_PRIORS) {
+    const number = priorsInput[inputKey] === undefined ? 0 : Number(priorsInput[inputKey]);
+    if (!Number.isFinite(number) || number < minimum || number > maximum) {
+      throw new Error(`${inputKey} must be finite and between ${minimum} and ${maximum}`);
+    }
+    priors[workerKey] = number;
+  }
+  const rawReference = priorsInput.referenceInclinationDeg ?? sourceObservables.inclinationDeg;
+  if (rawReference === undefined || rawReference === null) {
+    priors.reference_inclination_deg = null;
+  } else {
+    const reference = Number(rawReference);
+    if (!Number.isFinite(reference) || reference < 0 || reference > 85) throw new Error("referenceInclinationDeg must be finite and between 0 and 85");
+    priors.reference_inclination_deg = reference;
+  }
+  if (priors.inclination_sigma_deg > 0 && priors.reference_inclination_deg === null) {
+    throw new Error("inclinationSigmaDeg requires referenceInclinationDeg or sourceObservables.inclinationDeg");
+  }
+  const enabled = value.enabled === undefined ? false : Boolean(value.enabled);
+  return {
+    enabled,
+    realizations: enabled ? integer(value.realizations, 5, 1, 16, "uncertaintyEnsemble.realizations") : 1,
+    seed: integer(value.seed, 0, 0, 2 ** 31 - 1, "uncertaintyEnsemble.seed"),
+    priors,
+  };
+}
+
 function generationControls(value = {}) {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("generationControls must be an object");
   const result = {};
@@ -63,7 +117,7 @@ function generationControls(value = {}) {
       } else {
         const number = Number(raw);
         if (!Number.isFinite(number)) throw new Error(`${component}.${key} must be finite`);
-        if (["massScale", "radialScale"].includes(key) && number <= 0) throw new Error(`${component}.${key} must be positive`);
+        if (["massScale", "radialScale", "axisRatioScale"].includes(key) && number <= 0) throw new Error(`${component}.${key} must be positive`);
         if (["fourierScale", "residualScale"].includes(key) && number < 0) throw new Error(`${component}.${key} must be non-negative`);
         result[component][workerKey] = number;
       }
@@ -139,6 +193,10 @@ export function prepareGalaxyJob({ submission, inputBundle = null }) {
   const extraction = extractionControls(submission.extractionControls);
   const generation = generationControls(submission.generationControls);
   const vertical = verticalControls(submission.vertical);
+  const uncertainty = uncertaintyControls(
+    submission.uncertaintyEnsemble,
+    submission.sourceObservables ?? submission.parameterPackage?.sourceObservables ?? {},
+  );
   const license = outputLicense(submission.outputLicense);
   let shape;
   let bundleSha256 = null;
@@ -162,7 +220,15 @@ export function prepareGalaxyJob({ submission, inputBundle = null }) {
     gridControls = outputGrid(submission.operation, submission.outputGrid, shape[0]);
   }
   const zCells = vertical.enabled ? vertical.zCells : 1;
-  const estimatedMemoryBytes = shape[0] * shape[1] * (18 * 8 + zCells * 4 * 8);
+  const surfaceRealizations = uncertainty.realizations;
+  const verticalRealizations = vertical.enabled ? vertical.realizations : 0;
+  const ensembleRawArrayBytes = shape[0] * shape[1] * 3 * 8 * (
+    surfaceRealizations + surfaceRealizations * verticalRealizations * zCells
+  );
+  if (ensembleRawArrayBytes > 256 * 1024 ** 2) {
+    throw new Error("requested 2D/3D uncertainty ensemble exceeds the 256 MiB raw-array limit");
+  }
+  const estimatedMemoryBytes = shape[0] * shape[1] * (18 * 8 + zCells * 4 * 8) + 2 * ensembleRawArrayBytes;
   const workerRequest = canonicalize({
     operation: submission.operation,
     galaxy: String(submission.galaxy ?? parameterPackage?.galaxy ?? "uploaded-galaxy"),
@@ -170,6 +236,7 @@ export function prepareGalaxyJob({ submission, inputBundle = null }) {
     extractionControls: extraction,
     generationControls: generation,
     vertical,
+    uncertaintyEnsemble: uncertainty,
     outputLicense: license,
     outputGrid: gridControls,
     parameterPackage,
@@ -191,6 +258,9 @@ export function prepareGalaxyJob({ submission, inputBundle = null }) {
     gridShape: shape,
     resourceEstimate: {
       estimatedMemoryBytes,
+      ensembleRawArrayBytes,
+      surfaceRealizations,
+      verticalRealizationsPerSurface: verticalRealizations,
       resourceClass: estimatedMemoryBytes <= 512 * 1024 ** 2 ? "cpu_small" : "cpu_medium",
       estimateOnly: true,
     },
@@ -202,6 +272,7 @@ export function prepareGalaxyJob({ submission, inputBundle = null }) {
     workerRequest,
     warnings: [
       "Vertical structure is an assumed prior ensemble, not a unique 3D recovery.",
+      "Baryonic uncertainty draws are declared priors, not a likelihood-derived posterior.",
       "extract_roundtrip scores representation fidelity, not a law of gravity.",
     ],
   };
