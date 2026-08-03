@@ -90,7 +90,12 @@ jobs:
           python scripts/smoke_local_galaxy_job_api.py
       - name: Show worker logs on failure
         if: failure()
-        run: docker logs sigma-worker-ci || true
+        run: |
+          docker logs sigma-worker-ci || true
+          docker exec sigma-worker-ci sh -c '
+            find /var/lib/sigma/jobs -type f -name worker_stderr.log -size +0c \
+              -print -exec tail -n 120 {} \;
+          ' || true
       - name: Remove test worker
         if: always()
         run: |
