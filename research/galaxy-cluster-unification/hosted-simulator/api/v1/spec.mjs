@@ -4,11 +4,12 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.30.0-preview",
-    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The reference worker executes confirmed field models and gravity-independent baryonic extraction, controlled generation, 2D/3D uncertainty ensembles, and image-only conditioning. It also supports local nonlocal, coupled photon/matter, observation, batch, and inverse-discovery workflows. A bounded authenticated connector and non-root worker image now expose upload, field-job, and galaxy-job lifecycles, but no external worker or durable volume is configured on the public deployment. Degenerate weights are not credible intervals, inverse results are hypothesis generators rather than forward theory tests, and public heavy execution still requires durable isolated compute.",
+    version: "0.31.0-preview",
+    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The reference worker executes confirmed field models and gravity-independent baryonic extraction, controlled generation, 2D/3D uncertainty ensembles, and image-only conditioning. It also supports local nonlocal, coupled photon/matter, observation, batch, and inverse-discovery workflows. The public deployment now has a private content-addressed object store whose objects are rehashed after write and on read. A bounded authenticated connector and non-root worker image expose upload, field-job, and galaxy-job lifecycles, but no durable queue, job database, or stateless scientific worker is connected yet. Degenerate weights are not credible intervals, inverse results are hypothesis generators rather than forward theory tests, and public heavy execution still requires durable isolated compute.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
+    "/api/v1/storage-readiness": { get: { summary: "Durable scientific object-storage and production execution readiness" } },
     "/api/v1/datasets": { get: { summary: "List versioned datasets" } },
     "/api/v1/systems": { get: { summary: "List and filter real systems" } },
     "/api/v1/systems/{id}": { get: { summary: "Retrieve a galaxy and its radial measurements" } },

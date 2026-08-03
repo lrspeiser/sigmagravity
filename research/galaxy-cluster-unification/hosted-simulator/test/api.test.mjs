@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import datasets from "../api/v1/datasets.mjs";
 import health from "../api/v1/health.mjs";
+import storageReadiness from "../api/v1/storage-readiness.mjs";
 import systems from "../api/v1/systems.mjs";
 import system from "../api/v1/system.mjs";
 import validate from "../api/v1/formulas/validate.mjs";
@@ -46,7 +47,8 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.30.0-preview");
+  assert.equal(output.body.version, "0.31.0-preview");
+  assert.equal(output.body.capabilities.durablePrivateObjectStorage, "not_configured");
   assert.equal(
     output.body.capabilities.authenticatedFieldWorkerConnector,
     "available_requires_external_worker_configuration",
@@ -109,6 +111,17 @@ test("health API identifies the deployed contract version and local worker bound
     output.body.capabilities.localAxisymmetricRawMultipleImageLensing,
     "available_in_dev_server",
   );
+});
+
+test("storage readiness separates durable objects from an incomplete job lifecycle", () => {
+  const output = call(storageReadiness);
+  assert.equal(output.statusCode, 200);
+  assert.equal(output.body.schemaVersion, "sigma-production-storage-readiness/1");
+  assert.equal(output.body.objectStorage.state, "not_configured");
+  assert.equal(output.body.queue.state, "not_connected");
+  assert.equal(output.body.jobMetadataDatabase.state, "not_connected");
+  assert.equal(output.body.statelessScientificContainer.state, "not_connected");
+  assert.equal(output.body.productionExecution, "not_ready");
 });
 
 test("published batch schema exposes bounded galaxy ensemble fan-out", () => {

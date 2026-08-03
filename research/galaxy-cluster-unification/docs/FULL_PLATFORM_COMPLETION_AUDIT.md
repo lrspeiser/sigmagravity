@@ -26,7 +26,7 @@ gap. A public schema alone is not counted as hosted execution.
 | Parameter policies and accounting | Built | Published fixed, universal, train/validation/holdout, hierarchical/per-object disclosure; gravity and nuisance counts separated | Comparator-wide effective-complexity and posterior-volume reporting |
 | Deterministic reporting | Partial | Hashed JSON/CSV/NPZ/HTML artifacts, residual histories, reproduction metadata, LLM briefing paths | Uniform PDF bundle, sensitivity plots for every job class, signed manifests from production storage |
 | Optional LLM explanation | Correctly non-authoritative | Deterministic engine owns scores, exclusions, manifests and pass/fail | Optional explanation service only after reports are complete; no LLM key is needed for scientific execution |
-| Production computation infrastructure | Partial, not deployed | Non-root pinned field-and-galaxy worker container, bearer-authenticated bounded Vercel connector, content-addressed restartable single-worker spool, artifact quotas and integrity gates; public deployment still returns honest `production_worker_not_connected` errors | Deploy with a verified persistent volume, then add Postgres, S3/R2 direct transfers, project auth/isolation, retries, cache, licensing enforcement, audit logs and result signing |
+| Production computation infrastructure | Partial: durable objects connected, execution not deployed | Non-root pinned field-and-galaxy worker container, bounded Vercel connector, and a private Vercel Blob adapter with content-addressed immutable paths, quotas, idempotent writes, and SHA-256 verification after write and on read; public heavy routes still return honest `production_worker_not_connected` errors | Add durable queue delivery and Postgres job/model metadata, make the worker stateless over private objects, deploy it, then add project auth/isolation, retries, cache, licensing enforcement, audit logs and result signing |
 | Formula-independence acceptance suite | Partial | Newtonian, AQUAL-like, QUMOND, Refracted Gravity, nonlocal, two-potential, nonlinear and axisymmetric fixtures | A real isolated plug-in fixture plus broader vector/tensor and external-researcher manifests |
 
 ## The bounded path to a useful Sigma Gravity test
@@ -87,10 +87,10 @@ the discovery stage:
 
 The repository is already useful for developing and falsifying well-specified
 stationary field equations locally. It is not yet a self-service hosted
-research platform. The narrow worker slice is now implemented and passes real
-2D, 3D and axisymmetric HTTP jobs, but it has not been deployed with verified
-durable storage. The next product milestone is operational: deploy that image
-with a persistent volume, connect the Vercel secret and origin, and repeat the
-immutable axisymmetric acceptance through the public alias. After that,
-replace the single-volume spool with Postgres and S3/R2 rather than adding more
-UI or formula variations.
+research platform. The narrow worker slice passes real 2D, 3D and axisymmetric
+HTTP jobs, and the public project now has verified private content-addressed
+object storage. Those are still separate layers. The next product milestone is
+operational: add durable queue delivery and Postgres job/model metadata, adapt
+the worker to consume and publish immutable private objects without relying on
+its filesystem spool, then repeat the complete lifecycle through the public
+alias. More UI or formula variations are not the critical path.

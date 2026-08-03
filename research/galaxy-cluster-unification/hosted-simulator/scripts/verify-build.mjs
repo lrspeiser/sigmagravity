@@ -44,6 +44,7 @@ const requiredPaths = [
   "dist/examples/observation-targets/photon-lensing-map.json",
   "dist/examples/observation-targets/axisymmetric-multiple-image-systems.json",
   "api/v1/runs.mjs",
+  "api/v1/storage-readiness.mjs",
   "api/v1/twin-runs.mjs",
   "api/v1/resolved-twin-evidence.mjs",
   "api/v1/cluster-evidence.mjs",
@@ -61,6 +62,7 @@ const requiredPaths = [
   "lib/resolved-cluster-evidence.mjs",
   "lib/local-field-job-service.mjs",
   "lib/remote-worker-proxy.mjs",
+  "lib/private-blob-store.mjs",
   "lib/worker-http-server.mjs",
   "scripts/worker-server.mjs",
   "lib/observation-evaluation-preflight.mjs",
@@ -102,6 +104,7 @@ for (const phrase of [
   "zero_only_outside_verified_root_support",
   "A genuinely useful result is a prediction, not a reconstruction",
   "What the 503 still means",
+  "Private content-addressed artifact storage",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);
 }

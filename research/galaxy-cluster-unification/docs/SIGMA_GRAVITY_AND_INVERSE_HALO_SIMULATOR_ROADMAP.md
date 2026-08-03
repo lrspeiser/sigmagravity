@@ -115,10 +115,13 @@ useful to another researcher.**
 
 Build:
 
+- **Connected:** private content-addressed Vercel Blob storage with bounded
+  immutable writes and verified SHA-256 reads;
 - a queue and scheduler outside Vercel request execution;
 - network-disabled, single-use Python worker containers;
 - Postgres metadata for projects, models, jobs, events, and permissions;
-- S3/R2-compatible immutable array and report storage;
+- production wiring that uses the connected private object store for immutable
+  arrays and reports rather than the local filesystem spool;
 - content hashing at upload, worker input, artifact creation, and download;
 - authentication, project isolation, quotas, cancellation, retry, timeout,
   caching, and audit logs;

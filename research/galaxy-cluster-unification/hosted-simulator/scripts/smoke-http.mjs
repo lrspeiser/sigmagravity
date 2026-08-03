@@ -46,7 +46,7 @@ assert.match(guide, /zero_only_outside_verified_root_support/);
 
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
-assert.equal(health.version, "0.30.0-preview");
+assert.equal(health.version, "0.31.0-preview");
 assert.equal(health.capabilities.researcherGuide, "available");
 assert.equal(health.capabilities.localNonlocalConvolution, "available_in_dev_server");
 assert.equal(health.capabilities.localInverseHaloResponseDiscovery, "available_in_dev_server");
@@ -59,6 +59,13 @@ assert.equal(health.capabilities.localAxisymmetricCylindricalFields, "available_
 assert.equal(health.capabilities.localAxisymmetricGalaxyObservations, "available_in_dev_server");
 assert.equal(health.capabilities.localAxisymmetricPhotonLensing, "available_in_dev_server");
 assert.equal(health.capabilities.localAxisymmetricRawMultipleImageLensing, "available_in_dev_server");
+const storageReadiness = await request("/api/v1/storage-readiness");
+assert.equal(storageReadiness.schemaVersion, "sigma-production-storage-readiness/1");
+assert.ok(["configured", "not_configured"].includes(storageReadiness.objectStorage.state));
+assert.equal(storageReadiness.queue.state, "not_connected");
+assert.equal(storageReadiness.jobMetadataDatabase.state, "not_connected");
+assert.equal(storageReadiness.statelessScientificContainer.state, "not_connected");
+assert.equal(storageReadiness.productionExecution, "not_ready");
 const inverseSchema = await request("/schemas/inverse-response-job-submit-v1.schema.json");
 assert.equal(inverseSchema.properties.schemaVersion.const, "sigma-inverse-response-job-submit/1");
 const galaxySchema = await request("/schemas/galaxy-job-submit-v1.schema.json");

@@ -1,11 +1,12 @@
 import { options, requireMethod, send } from "../../lib/http.mjs";
+import { privateBlobStorageState } from "../../lib/private-blob-store.mjs";
 
 export default function handler(request, response) {
   if (options(request, response) || !requireMethod(request, response, "GET")) return;
   send(response, 200, {
     status: "ok",
     service: "sigma-gravity-research-simulator",
-    version: "0.30.0-preview",
+    version: "0.31.0-preview",
     capabilities: {
       researcherGuide: "available",
       radialRotationCurves: "available",
@@ -39,6 +40,11 @@ export default function handler(request, response) {
       localAxisymmetricRawMultipleImageLensing: "available_in_dev_server",
       authenticatedFieldWorkerConnector: "available_requires_external_worker_configuration",
       authenticatedGalaxyWorkerConnector: "available_requires_external_worker_configuration",
+      durablePrivateObjectStorage: {
+        configured: "connected_private_content_addressed",
+        misconfigured: "misconfigured",
+        not_configured: "not_configured",
+      }[privateBlobStorageState()],
       resolvedGalaxyExtractionAndGeneration: "production_worker_not_connected",
       fieldSolvers2d3d: "worker_not_connected",
       rawMultipleImageLensing: "production_worker_not_connected",
