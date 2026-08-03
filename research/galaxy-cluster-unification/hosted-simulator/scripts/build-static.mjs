@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 const root = resolve(import.meta.dirname, "..");
 const dist = resolve(root, "dist");
 await mkdir(resolve(dist, "assets"), { recursive: true });
+await mkdir(resolve(dist, "data"), { recursive: true });
 await mkdir(resolve(dist, "schemas"), { recursive: true });
 await mkdir(resolve(dist, "examples", "models"), { recursive: true });
 await mkdir(resolve(dist, "examples", "observation-targets"), { recursive: true });
@@ -11,6 +12,8 @@ for (const path of [
   "index.html",
   "assets/app.js",
   "assets/style.css",
+  "assets/resolved-twin-development-atlas.png",
+  "data/resolved-twin-development-v1.json",
   "schemas/model-manifest-v1.schema.json",
   "schemas/array-bundle-request-v1.schema.json",
   "schemas/field-job-request-v1.schema.json",

@@ -19,7 +19,17 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
-Version 0.11 adds `POST /api/v1/twin-runs`. It applies the same submitted
+Version 0.12 adds a resolved-twin evidence view and
+`GET /api/v1/resolved-twin-evidence`. It exposes the frozen P0743/P0744
+four-galaxy development result as three separate measurements: baryonic-map
+fidelity, source-to-twin formula transport, and formula-to-observation
+velocity error. The evidence covers 76,182 THINGS H I velocity pixels and
+discloses that no gravity parameter or velocity target entered twin extraction.
+It is precomputed fixed-comparator evidence, not a claim that the hosted Vercel
+process can execute arbitrary 2D formulas or that development results are blind
+validation.
+
+Version 0.11 added `POST /api/v1/twin-runs`. It applies the same submitted
 formula to both the published baryonic channels and a six-control-point radial
 twin, then reveals the measured rotation curve for scoring. The response keeps
 three errors separate: baryonic source reconstruction, formula-versus-observed
@@ -118,6 +128,7 @@ GET  /api/v1/batches/{id}/events
 GET  /api/v1/batches/{id}/artifacts
 POST /api/v1/runs
 POST /api/v1/twin-runs
+GET  /api/v1/resolved-twin-evidence?galaxy=NGC3198
 GET  /api/v1/openapi.json
 ```
 

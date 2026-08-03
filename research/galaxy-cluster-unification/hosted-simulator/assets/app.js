@@ -40,11 +40,17 @@ const elements = Object.fromEntries(
     "syn-scale", "syn-noise",
     "model-example", "load-model-example", "model-editor", "validate-model", "model-status",
     "model-audit-title", "model-audit",
+    "resolved-evidence-status", "resolved-galaxy-select", "resolved-model-select",
+    "resolved-system-summary", "resolved-fidelity-value", "resolved-fidelity-detail",
+    "resolved-transport-value", "resolved-transport-detail", "resolved-accuracy-card",
+    "resolved-accuracy-value", "resolved-accuracy-detail", "resolved-chart-title",
+    "resolved-curve-chart", "resolved-verdict", "resolved-manifest",
   ].map((id) => [id, document.getElementById(id)]),
 );
 
 let currentResult = null;
 let currentSynthetic = null;
+let resolvedEvidence = null;
 
 function setStatus(message, type = "") {
   elements["action-status"].textContent = message;
@@ -121,6 +127,125 @@ async function loadCatalog() {
     .map((item) => `<option value="${item.id}" ${item.id === "DDO154" ? "selected" : ""}>${item.id} · ${item.morphology.label} · Q${item.quality}</option>`)
     .join("");
   await inspectSelectedSystem();
+}
+
+async function loadResolvedEvidence() {
+  const result = await api("/api/v1/resolved-twin-evidence");
+  if (result.schemaVersion !== "sigma-hosted-resolved-twin-evidence/1" || !result.systems?.length) {
+    throw new Error("resolved evidence document has an unsupported schema");
+  }
+  resolvedEvidence = result;
+  elements["resolved-galaxy-select"].innerHTML = result.systems
+    .map((system) => `<option value="${system.id}">${system.id}</option>`)
+    .join("");
+  elements["resolved-evidence-status"].textContent = `${result.stage} · ${result.sample.systems} development galaxies · ${result.sample.scoredVelocityPixels.toLocaleString("en-US")} scored velocity pixels`;
+  renderResolvedEvidence();
+}
+
+function selectedResolvedSystem() {
+  if (!resolvedEvidence) return null;
+  return resolvedEvidence.systems.find(
+    (system) => system.id === elements["resolved-galaxy-select"].value,
+  ) ?? resolvedEvidence.systems[0];
+}
+
+function renderResolvedEvidence() {
+  const system = selectedResolvedSystem();
+  if (!system) return;
+  const modelId = elements["resolved-model-select"].value;
+  const model = system.models[modelId];
+  const definition = resolvedEvidence.models[modelId];
+  const fidelity = system.twinFidelity;
+  const transport = model.sourceToTwinTransport.lineOfSightRmseKmS;
+  const accuracy = model.twinVersusObserved;
+  const massError = fidelity.massRelativeError === 0
+    ? "numerically zero"
+    : `${(100 * fidelity.massRelativeError).toExponential(1)}%`;
+
+  elements["resolved-system-summary"].textContent = `${system.id}: ${system.observation.scoredPixels.toLocaleString("en-US")} H I velocity pixels; inclination ${system.observation.inclinationDeg.toFixed(1)}°; median gas dispersion ${system.observation.medianDispersionKmS.toFixed(1)} km/s. The displayed comparator has ${definition.perGalaxyGravityParameters} per-galaxy gravity parameters.`;
+  elements["resolved-fidelity-value"].textContent = `${(100 * fidelity.totalMapNormalizedL2).toFixed(1)}% map error`;
+  elements["resolved-fidelity-detail"].textContent = `Pixel correlation ${fidelity.totalMapPixelCorrelation.toFixed(3)}; mass error ${massError}.`;
+  elements["resolved-transport-value"].textContent = `${transport.toFixed(2)} km/s`;
+  elements["resolved-transport-detail"].textContent = "2D line-of-sight RMSE between the same formula on registered baryons and the fake twin.";
+  elements["resolved-accuracy-value"].textContent = `${accuracy.rmseKmS.toFixed(2)} km/s`;
+  elements["resolved-accuracy-detail"].textContent = `${accuracy.errorRatio.toFixed(2)}× the declared uncertainty RMS · ${accuracy.classification}.`;
+  elements["resolved-accuracy-card"].className = `score-card ${accuracy.classification}`;
+  elements["resolved-chart-title"].textContent = `${system.id} · ${definition.label}`;
+
+  const twinFaithful = fidelity.totalMapPixelCorrelation >= 0.95 && transport <= 8;
+  const formulaVerdict = accuracy.classification === "consistent"
+    ? "matches this raw velocity field within its declared uncertainty"
+    : accuracy.classification === "close"
+      ? "is close, but remains outside the declared uncertainty"
+      : "misses the raw velocity field by more than twice the declared uncertainty";
+  elements["resolved-verdict"].innerHTML = `<strong>${twinFaithful ? "The twin is faithful enough for this test." : "The twin itself is not faithful enough."}</strong> ${definition.label} ${formulaVerdict}. A good transport score therefore cannot be read as evidence that the formula is correct.`;
+  elements["resolved-manifest"].textContent = JSON.stringify({
+    evidenceSha256: resolvedEvidence.evidenceSha256,
+    parents: resolvedEvidence.parents,
+    evidenceClass: resolvedEvidence.evidenceClass,
+    selectedSystem: system.id,
+    selectedModel: { id: modelId, ...definition },
+    generator: resolvedEvidence.generator,
+    twinFidelity: fidelity,
+    modelScores: {
+      sourceVersusObserved: model.sourceVersusObserved,
+      twinVersusObserved: model.twinVersusObserved,
+      sourceToTwinTransport: model.sourceToTwinTransport,
+    },
+    executionBoundary: resolvedEvidence.executionBoundary,
+    claimBoundary: resolvedEvidence.claimBoundary,
+  }, null, 2);
+  drawResolvedCurve(model.radialCurve);
+}
+
+function drawResolvedCurve(points) {
+  const width = 840, height = 520, left = 66, right = 24;
+  const top = 25, curveBottom = 330, residualTop = 386, residualBottom = 480;
+  const maxX = Math.max(...points.map((point) => point.radiusKpc));
+  const maxY = Math.max(...points.flatMap((point) => [
+    point.observedKmS,
+    point.sourcePredictionKmS,
+    point.twinPredictionKmS,
+  ])) * 1.12;
+  const residualLimit = Math.max(5, ...points.map(
+    (point) => Math.abs(point.twinPredictionKmS - point.observedKmS),
+  )) * 1.12;
+  const x = (value) => left + (value / maxX) * (width - left - right);
+  const y = (value) => curveBottom - (value / maxY) * (curveBottom - top);
+  const yr = (value) => residualTop + ((residualLimit - value) / (2 * residualLimit)) * (residualBottom - residualTop);
+  const line = (field, vertical = y) => points.map(
+    (point, index) => `${index ? "L" : "M"}${x(point.radiusKpc).toFixed(1)},${vertical(point[field]).toFixed(1)}`,
+  ).join(" ");
+  const residualPath = points.map((point, index) => {
+    const value = point.twinPredictionKmS - point.observedKmS;
+    return `${index ? "L" : "M"}${x(point.radiusKpc).toFixed(1)},${yr(value).toFixed(1)}`;
+  }).join(" ");
+  const grids = [];
+  for (let index = 0; index <= 4; index += 1) {
+    const gy = top + ((curveBottom - top) * index) / 4;
+    const value = maxY * (1 - index / 4);
+    grids.push(`<line x1="${left}" y1="${gy}" x2="${width-right}" y2="${gy}" stroke="#20272f"/><text x="${left-10}" y="${gy+4}" fill="#79818a" text-anchor="end" font-size="11">${value.toFixed(0)}</text>`);
+  }
+  const observations = points.map((point) => `<circle cx="${x(point.radiusKpc).toFixed(1)}" cy="${y(point.observedKmS).toFixed(1)}" r="3.2" fill="#f4f2ec"/>`).join("");
+  elements["resolved-curve-chart"].innerHTML = `
+    <rect width="${width}" height="${height}" fill="#0b0f13"/>
+    ${grids.join("")}
+    <line x1="${left}" y1="${curveBottom}" x2="${width-right}" y2="${curveBottom}" stroke="#4b5560"/>
+    <line x1="${left}" y1="${top}" x2="${left}" y2="${curveBottom}" stroke="#4b5560"/>
+    <path d="${line("sourcePredictionKmS")}" fill="none" stroke="#a7ffe0" stroke-width="2.5" stroke-dasharray="4 4"/>
+    <path d="${line("twinPredictionKmS")}" fill="none" stroke="#ffba70" stroke-width="3"/>
+    ${observations}
+    <text transform="translate(17 ${(top+curveBottom)/2}) rotate(-90)" fill="#9299a1" text-anchor="middle" font-size="12">Circular speed (km/s)</text>
+    <line x1="${left}" y1="${yr(0)}" x2="${width-right}" y2="${yr(0)}" stroke="#6d747d"/>
+    <path d="${residualPath}" fill="none" stroke="#ffba70" stroke-width="2.5"/>
+    <line x1="${left}" y1="${residualTop}" x2="${left}" y2="${residualBottom}" stroke="#4b5560"/>
+    <text x="${left-10}" y="${residualTop+4}" fill="#79818a" text-anchor="end" font-size="10">+${residualLimit.toFixed(0)}</text>
+    <text x="${left-10}" y="${yr(0)+4}" fill="#79818a" text-anchor="end" font-size="10">0</text>
+    <text x="${left-10}" y="${residualBottom+4}" fill="#79818a" text-anchor="end" font-size="10">-${residualLimit.toFixed(0)}</text>
+    <text transform="translate(17 ${(residualTop+residualBottom)/2}) rotate(-90)" fill="#9299a1" text-anchor="middle" font-size="11">Twin - observed</text>
+    <text x="${(left+width-right)/2}" y="${height-10}" fill="#9299a1" text-anchor="middle" font-size="12">Radius (kpc)</text>
+    <text x="${left}" y="${height-27}" fill="#79818a" text-anchor="middle" font-size="11">0</text>
+    <text x="${width-right}" y="${height-27}" fill="#79818a" text-anchor="middle" font-size="11">${maxX.toFixed(1)}</text>`;
 }
 
 async function inspectSelectedSystem() {
@@ -379,5 +504,11 @@ elements["create-synthetic"].addEventListener("click", handle(createSynthetic));
 elements["download-result"].addEventListener("click", downloadResult);
 elements["load-model-example"].addEventListener("click", handle(loadModelExample));
 elements["validate-model"].addEventListener("click", handle(validateModel));
+elements["resolved-galaxy-select"].addEventListener("change", renderResolvedEvidence);
+elements["resolved-model-select"].addEventListener("change", renderResolvedEvidence);
 handle(loadModelExample)();
 handle(loadCatalog)();
+loadResolvedEvidence().catch((error) => {
+  elements["resolved-evidence-status"].textContent = `Resolved evidence unavailable: ${error.message}`;
+  elements["resolved-evidence-status"].classList.add("error-text");
+});

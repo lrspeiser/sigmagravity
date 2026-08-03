@@ -16,6 +16,7 @@ const page = await request("/");
 assert.match(page, /Put a gravity formula in front of real galaxies/);
 assert.match(page, /Create a synthetic radial galaxy/);
 assert.match(page, /held-out twin/i);
+assert.match(page, /Resolved fake-galaxy evidence/i);
 assert.match(page, /Describe a full 2D or 3D theory/);
 
 const health = await request("/api/v1/health");
@@ -70,6 +71,10 @@ const twinRun = await request("/api/v1/twin-runs", post({
 assert.equal(twinRun.state, "succeeded");
 assert.equal(twinRun.manifest.twinProtocol.velocityTargetsUsedInExtraction, false);
 assert.equal(twinRun.predictions.length, 12);
+const resolvedEvidence = await request("/api/v1/resolved-twin-evidence?galaxy=NGC3198");
+assert.equal(resolvedEvidence.evidenceClass, "precomputed_development_result");
+assert.equal(resolvedEvidence.systems.length, 1);
+assert.equal(resolvedEvidence.systems[0].models.fixed_simple_mond.twinVersusObserved.classification, "consistent");
 
 console.log(JSON.stringify({
   base,
@@ -83,4 +88,5 @@ console.log(JSON.stringify({
   twinRunId: twinRun.id,
   twinSourceGBarNormalizedRmse: twinRun.metrics.sourceReconstruction.gBarNormalizedRmse,
   twinFormulaRmseKmS: twinRun.metrics.formulaOnGeneratedTwin.rmseKmS,
+  resolvedEvidenceSha256: resolvedEvidence.evidenceSha256,
 }, null, 2));

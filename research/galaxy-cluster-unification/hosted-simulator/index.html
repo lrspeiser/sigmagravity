@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Run reproducible gravity formulas against real SPARC galaxies." />
+    <meta name="description" content="Run reproducible radial gravity formulas and inspect resolved fake-galaxy velocity evidence." />
     <title>Sigma Gravity Research Simulator</title>
     <link rel="stylesheet" href="/assets/style.css" />
   </head>
@@ -16,6 +16,7 @@
         </a>
         <div class="nav-links">
           <a href="#workbench">Workbench</a>
+          <a href="#resolved-twins">Resolved twins</a>
           <a href="#field-model">2D/3D models</a>
           <a href="#api">API</a>
           <a href="/api/v1/openapi.json">OpenAPI</a>
@@ -23,12 +24,13 @@
       </nav>
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Open research preview · v0.11</p>
+          <p class="eyebrow">Open research preview · v0.12</p>
           <h1>Put a gravity formula in front of real galaxies.</h1>
           <p class="lede">
             Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
             predicted rotation curve with observations, Newtonian baryons, and fixed MOND—without
-            silently fitting a gravity parameter to each galaxy.
+            silently fitting a gravity parameter to each galaxy. Inspect a separate resolved
+            development test showing when a fake galaxy preserves a formula's right or wrong answer.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#workbench">Open the workbench</a>
@@ -42,6 +44,7 @@
             <div><dt>Formula language</dt><dd>Safe AST v1</dd></div>
             <div><dt>2D / 3D contract</dt><dd class="available">Available</dd></div>
             <div><dt>Radial curves</dt><dd class="available">Available</dd></div>
+            <div><dt>Resolved velocity proof</dt><dd class="available">Available</dd></div>
             <div><dt>Local 2D / 3D fields</dt><dd class="available">Available</dd></div>
             <div><dt>Local composed batches</dt><dd class="available">Available</dd></div>
             <div><dt>Local photon maps</dt><dd class="available">Available</dd></div>
@@ -127,6 +130,88 @@
         </div>
       </section>
 
+      <section id="resolved-twins" class="resolved-section">
+        <div class="wrap section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Resolved fake-galaxy evidence</p>
+              <h2>See whether the twin and the formula tell the truth.</h2>
+            </div>
+            <p id="resolved-evidence-status" class="muted">Loading frozen development evidence…</p>
+          </div>
+
+          <div class="resolved-toolbar card">
+            <div>
+              <label for="resolved-galaxy-select">Resolved THINGS galaxy</label>
+              <select id="resolved-galaxy-select" aria-label="Resolved development galaxy"></select>
+            </div>
+            <div>
+              <label for="resolved-model-select">Fixed comparator</label>
+              <select id="resolved-model-select" aria-label="Resolved gravity comparator">
+                <option value="fixed_simple_mond">Fixed simple MOND</option>
+                <option value="newtonian_thin_sheet">Newtonian baryons</option>
+              </select>
+            </div>
+            <div class="resolved-boundary">
+              <strong>Development evidence</strong>
+              <span>No model parameter was fitted per galaxy. Validation and holdout velocities remain sealed.</span>
+            </div>
+          </div>
+
+          <p id="resolved-system-summary" class="resolved-system-summary"></p>
+
+          <div class="resolved-score-grid">
+            <article class="score-card">
+              <div class="score-number">1</div>
+              <div><p>Galaxy fidelity</p><strong id="resolved-fidelity-value">—</strong><span id="resolved-fidelity-detail">Did the generated baryonic map match?</span></div>
+            </article>
+            <article class="score-card">
+              <div class="score-number">2</div>
+              <div><p>Formula transport</p><strong id="resolved-transport-value">—</strong><span id="resolved-transport-detail">Did the same equation give the same answer?</span></div>
+            </article>
+            <article class="score-card" id="resolved-accuracy-card">
+              <div class="score-number">3</div>
+              <div><p>Observed accuracy</p><strong id="resolved-accuracy-value">—</strong><span id="resolved-accuracy-detail">Did that answer match the real motion?</span></div>
+            </article>
+          </div>
+
+          <div class="resolved-evidence-grid">
+            <div class="card">
+              <div class="results-header">
+                <div><p class="eyebrow">Radial cross-check</p><h3 id="resolved-chart-title">Observed versus predicted speed</h3></div>
+                <a class="button compact ghost" href="/data/resolved-twin-development-v1.json" download>Download evidence JSON</a>
+              </div>
+              <div class="chart-frame resolved-chart-frame">
+                <svg id="resolved-curve-chart" viewBox="0 0 840 520" role="img" aria-label="Resolved galaxy observed and predicted circular speeds"></svg>
+              </div>
+              <div class="legend" aria-label="Resolved curve legend">
+                <span><i class="observed"></i>Observed H I rotation</span>
+                <span><i class="measured-source"></i>Formula on registered baryons</span>
+                <span><i class="twin-line"></i>Formula on fake twin</span>
+              </div>
+            </div>
+            <div class="card resolved-explanation">
+              <p class="eyebrow">How to read this</p>
+              <h3>A faithful twin can preserve a wrong prediction.</h3>
+              <p>The first score tests the galaxy generator. The second isolates numerical change caused by replacing the real baryonic map with its twin. Only the third score tests the gravity formula against observed motion.</p>
+              <div id="resolved-verdict" class="resolved-verdict"></div>
+              <details class="run-details"><summary>Frozen protocol, hashes, and caveats</summary><pre id="resolved-manifest">Loading…</pre></details>
+            </div>
+          </div>
+
+          <div class="card resolved-atlas">
+            <div>
+              <p class="eyebrow">Two-dimensional field atlas</p>
+              <h3>Observed H I, prediction from registered baryons, prediction from the fake twin, and residual</h3>
+              <p class="muted">These are precomputed fixed-MOND development results. The hosted worker does not yet execute an arbitrary submitted 2D theory.</p>
+            </div>
+            <a href="/assets/resolved-twin-development-atlas.png" target="_blank" rel="noreferrer">
+              <img src="/assets/resolved-twin-development-atlas.png" loading="lazy" alt="Four resolved galaxy velocity fields compared with fixed MOND predictions on registered baryons and generated twins" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section id="field-model" class="field-section">
         <div class="wrap section">
           <div class="section-heading">
@@ -207,6 +292,7 @@
           <article class="endpoint"><span>POST</span><code>/api/v1/batches</code><p>Compose reusable field solves with separately hashed observation data and targets across uploaded or generated systems, then download one deterministic report.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/runs</code><p>Run a formula and receive scores, curves, comparators, and an immutable manifest hash.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/twin-runs</code><p>Regenerate a galaxy's baryonic radial twin without its measured speeds, then reveal and score the held-out rotation curve.</p></article>
+          <article class="endpoint"><span>GET</span><code>/api/v1/resolved-twin-evidence</code><p>Retrieve the frozen four-galaxy 2D development result with separate morphology, transport, and observed-velocity scores.</p></article>
         </div>
         <pre class="code-sample"><code>const result = await fetch("/api/v1/runs", {
   method: "POST",

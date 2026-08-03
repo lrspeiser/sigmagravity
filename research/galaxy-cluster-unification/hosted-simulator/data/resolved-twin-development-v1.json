@@ -1,0 +1,1438 @@
+{
+  "schemaVersion": "sigma-hosted-resolved-twin-evidence/1",
+  "stage": "P0744",
+  "evidenceClass": "precomputed_development_result",
+  "title": "Resolved spiral twins versus observed velocity fields",
+  "parents": {
+    "p0743ReportSha256": "d1a1ec762c5c06eb246d702185625014774dfdc3082069f8006b89c6dee1979f",
+    "p0744ReportSha256": "d3feb859f9d50e7a9ecefd80c16f0ed6cee1d0f0ccb6ded307b09c21e84ee9d0"
+  },
+  "sample": {
+    "systems": 4,
+    "scoredVelocityPixels": 76182,
+    "developmentSystems": [
+      "NGC2403",
+      "NGC3198",
+      "NGC5055",
+      "NGC7793"
+    ],
+    "sealedValidationSystems": [
+      "NGC3521",
+      "NGC6946"
+    ],
+    "sealedHoldoutSystems": [
+      "NGC2841",
+      "NGC7331"
+    ]
+  },
+  "generator": {
+    "id": "sparse-orthonormal-haar-2d",
+    "selectedDevelopmentTier": "haar_256",
+    "coefficientsPerBaryonicComponent": 256,
+    "gravityParameters": 0,
+    "velocityTargetsUsed": false
+  },
+  "models": {
+    "fixed_simple_mond": {
+      "label": "Fixed simple MOND",
+      "family": "algebraic acceleration comparator",
+      "parameters": {
+        "a0MPerS2": 1.2e-10
+      },
+      "parameterPolicy": "published_fixed",
+      "perGalaxyGravityParameters": 0
+    },
+    "newtonian_thin_sheet": {
+      "label": "Newtonian baryons",
+      "family": "thin-sheet Poisson comparator",
+      "parameters": {
+        "gravitationalConstantM3KgS2": 6.6743e-11
+      },
+      "parameterPolicy": "published_fixed",
+      "perGalaxyGravityParameters": 0
+    }
+  },
+  "systems": [
+    {
+      "id": "NGC2403",
+      "split": "development",
+      "observation": {
+        "tracer": "THINGS H I moment-1 velocity field",
+        "scoredPixels": 34727,
+        "inclinationDeg": 63.0,
+        "positionAngleDeg": 112.38697377523488,
+        "medianDispersionKmS": 8.76071965641032
+      },
+      "twinFidelity": {
+        "totalMapNormalizedL2": 0.11202899588283163,
+        "totalMapPixelCorrelation": 0.9945831499105683,
+        "massRelativeError": 0.0,
+        "velocityTargetsUsedInExtraction": false,
+        "gravityParametersUsedInExtraction": 0
+      },
+      "models": {
+        "fixed_simple_mond": {
+          "sourceVersusObserved": {
+            "rmseKmS": 25.930130645416465,
+            "uncertaintyRmsKmS": 10.85212089827732,
+            "errorRatio": 2.3894067241300867,
+            "classification": "miss"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 25.368308225780016,
+            "uncertaintyRmsKmS": 10.85212089827732,
+            "errorRatio": 2.3376359758217413,
+            "classification": "miss"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 5.75183600832045
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 0.6201415643835749,
+              "observedKmS": 57.81198665685609,
+              "sourcePredictionKmS": 46.030242035687515,
+              "twinPredictionKmS": 43.181385507819215,
+              "pixels": 80
+            },
+            {
+              "radiusKpc": 1.3264573423490726,
+              "observedKmS": 75.66750186065589,
+              "sourcePredictionKmS": 61.69650426141574,
+              "twinPredictionKmS": 61.07073007704461,
+              "pixels": 198
+            },
+            {
+              "radiusKpc": 2.026041678997544,
+              "observedKmS": 84.17493447376802,
+              "sourcePredictionKmS": 75.84988981280097,
+              "twinPredictionKmS": 74.7193890206395,
+              "pixels": 306
+            },
+            {
+              "radiusKpc": 2.769703957761522,
+              "observedKmS": 93.60237887857711,
+              "sourcePredictionKmS": 86.03703421695235,
+              "twinPredictionKmS": 85.03342762567874,
+              "pixels": 440
+            },
+            {
+              "radiusKpc": 3.5286641928492326,
+              "observedKmS": 107.18855540482507,
+              "sourcePredictionKmS": 91.29265212986297,
+              "twinPredictionKmS": 88.20898933648886,
+              "pixels": 546
+            },
+            {
+              "radiusKpc": 4.251142883855008,
+              "observedKmS": 114.3549979190555,
+              "sourcePredictionKmS": 96.42761447851284,
+              "twinPredictionKmS": 93.31374635309349,
+              "pixels": 654
+            },
+            {
+              "radiusKpc": 4.996489779694148,
+              "observedKmS": 124.545685020048,
+              "sourcePredictionKmS": 98.8227602189423,
+              "twinPredictionKmS": 97.1949816682441,
+              "pixels": 778
+            },
+            {
+              "radiusKpc": 5.757645114375461,
+              "observedKmS": 127.54038367561937,
+              "sourcePredictionKmS": 97.45379171584,
+              "twinPredictionKmS": 96.46199161697965,
+              "pixels": 912
+            },
+            {
+              "radiusKpc": 6.500044297398099,
+              "observedKmS": 125.55581995320081,
+              "sourcePredictionKmS": 98.125522751061,
+              "twinPredictionKmS": 95.71301297644003,
+              "pixels": 1010
+            },
+            {
+              "radiusKpc": 7.258602470040981,
+              "observedKmS": 119.12427358080346,
+              "sourcePredictionKmS": 96.36710428830919,
+              "twinPredictionKmS": 96.21274173659963,
+              "pixels": 1130
+            },
+            {
+              "radiusKpc": 8.004709751914483,
+              "observedKmS": 116.78444024148807,
+              "sourcePredictionKmS": 94.32908892505596,
+              "twinPredictionKmS": 94.22357063353547,
+              "pixels": 1252
+            },
+            {
+              "radiusKpc": 8.753786195064329,
+              "observedKmS": 118.3705993958504,
+              "sourcePredictionKmS": 97.40176396185895,
+              "twinPredictionKmS": 98.16764725945714,
+              "pixels": 1366
+            },
+            {
+              "radiusKpc": 9.474778866283604,
+              "observedKmS": 122.7288837168729,
+              "sourcePredictionKmS": 106.14372566328966,
+              "twinPredictionKmS": 105.50918227651135,
+              "pixels": 1498
+            },
+            {
+              "radiusKpc": 10.242230916373684,
+              "observedKmS": 127.98033360689259,
+              "sourcePredictionKmS": 113.79895365393683,
+              "twinPredictionKmS": 114.2098866444029,
+              "pixels": 1562
+            },
+            {
+              "radiusKpc": 10.9911238535068,
+              "observedKmS": 133.96760804424645,
+              "sourcePredictionKmS": 119.6329194537416,
+              "twinPredictionKmS": 120.65235338305877,
+              "pixels": 1750
+            },
+            {
+              "radiusKpc": 11.740380971217347,
+              "observedKmS": 135.28315172507533,
+              "sourcePredictionKmS": 121.64511978053663,
+              "twinPredictionKmS": 121.3394525904459,
+              "pixels": 1829
+            },
+            {
+              "radiusKpc": 12.483308987857985,
+              "observedKmS": 141.28421453638353,
+              "sourcePredictionKmS": 118.54928223878808,
+              "twinPredictionKmS": 119.49583800939286,
+              "pixels": 1881
+            },
+            {
+              "radiusKpc": 13.238802932212407,
+              "observedKmS": 144.00379801254127,
+              "sourcePredictionKmS": 117.7739476312627,
+              "twinPredictionKmS": 119.5297188059099,
+              "pixels": 1905
+            },
+            {
+              "radiusKpc": 13.976399279481491,
+              "observedKmS": 138.91700403082618,
+              "sourcePredictionKmS": 121.75883887483135,
+              "twinPredictionKmS": 120.59136293614459,
+              "pixels": 1889
+            },
+            {
+              "radiusKpc": 14.72325560764793,
+              "observedKmS": 141.68339515027748,
+              "sourcePredictionKmS": 119.70978810533198,
+              "twinPredictionKmS": 119.23026989992218,
+              "pixels": 1829
+            }
+          ]
+        },
+        "newtonian_thin_sheet": {
+          "sourceVersusObserved": {
+            "rmseKmS": 44.44360079739086,
+            "uncertaintyRmsKmS": 10.85212089827732,
+            "errorRatio": 4.095383862194706,
+            "classification": "miss"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 44.69599808529102,
+            "uncertaintyRmsKmS": 10.85212089827732,
+            "errorRatio": 4.118641738720965,
+            "classification": "miss"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 4.033033736752231
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 0.6201415643835749,
+              "observedKmS": 57.81198665685609,
+              "sourcePredictionKmS": 32.9202487118872,
+              "twinPredictionKmS": 30.139771491075564,
+              "pixels": 80
+            },
+            {
+              "radiusKpc": 1.3264573423490726,
+              "observedKmS": 75.66750186065589,
+              "sourcePredictionKmS": 42.00787742671634,
+              "twinPredictionKmS": 41.29466886856211,
+              "pixels": 198
+            },
+            {
+              "radiusKpc": 2.026041678997544,
+              "observedKmS": 84.17493447376802,
+              "sourcePredictionKmS": 52.39245219564702,
+              "twinPredictionKmS": 51.09175075193447,
+              "pixels": 306
+            },
+            {
+              "radiusKpc": 2.769703957761522,
+              "observedKmS": 93.60237887857711,
+              "sourcePredictionKmS": 56.95131513663912,
+              "twinPredictionKmS": 55.804231776193994,
+              "pixels": 440
+            },
+            {
+              "radiusKpc": 3.5286641928492326,
+              "observedKmS": 107.18855540482507,
+              "sourcePredictionKmS": 58.112953964526994,
+              "twinPredictionKmS": 55.28472141921401,
+              "pixels": 546
+            },
+            {
+              "radiusKpc": 4.251142883855008,
+              "observedKmS": 114.3549979190555,
+              "sourcePredictionKmS": 59.59684782072464,
+              "twinPredictionKmS": 56.150969184078114,
+              "pixels": 654
+            },
+            {
+              "radiusKpc": 4.996489779694148,
+              "observedKmS": 124.545685020048,
+              "sourcePredictionKmS": 58.38544745227468,
+              "twinPredictionKmS": 56.77673762270076,
+              "pixels": 778
+            },
+            {
+              "radiusKpc": 5.757645114375461,
+              "observedKmS": 127.54038367561937,
+              "sourcePredictionKmS": 55.129502690932625,
+              "twinPredictionKmS": 54.03203973739827,
+              "pixels": 912
+            },
+            {
+              "radiusKpc": 6.500044297398099,
+              "observedKmS": 125.55581995320081,
+              "sourcePredictionKmS": 54.00105091590507,
+              "twinPredictionKmS": 51.70710258670914,
+              "pixels": 1010
+            },
+            {
+              "radiusKpc": 7.258602470040981,
+              "observedKmS": 119.12427358080346,
+              "sourcePredictionKmS": 50.88640309172738,
+              "twinPredictionKmS": 50.217471794798065,
+              "pixels": 1130
+            },
+            {
+              "radiusKpc": 8.004709751914483,
+              "observedKmS": 116.78444024148807,
+              "sourcePredictionKmS": 49.52033760675968,
+              "twinPredictionKmS": 48.65137834219634,
+              "pixels": 1252
+            },
+            {
+              "radiusKpc": 8.753786195064329,
+              "observedKmS": 118.3705993958504,
+              "sourcePredictionKmS": 50.86512367820367,
+              "twinPredictionKmS": 50.981152827574796,
+              "pixels": 1366
+            },
+            {
+              "radiusKpc": 9.474778866283604,
+              "observedKmS": 122.7288837168729,
+              "sourcePredictionKmS": 56.34291620359271,
+              "twinPredictionKmS": 55.548404906443004,
+              "pixels": 1498
+            },
+            {
+              "radiusKpc": 10.242230916373684,
+              "observedKmS": 127.98033360689259,
+              "sourcePredictionKmS": 60.776271270538956,
+              "twinPredictionKmS": 60.826709379074266,
+              "pixels": 1562
+            },
+            {
+              "radiusKpc": 10.9911238535068,
+              "observedKmS": 133.96760804424645,
+              "sourcePredictionKmS": 63.37109616816678,
+              "twinPredictionKmS": 63.778214746905576,
+              "pixels": 1750
+            },
+            {
+              "radiusKpc": 11.740380971217347,
+              "observedKmS": 135.28315172507533,
+              "sourcePredictionKmS": 62.32050760900435,
+              "twinPredictionKmS": 62.00555153379211,
+              "pixels": 1829
+            },
+            {
+              "radiusKpc": 12.483308987857985,
+              "observedKmS": 141.28421453638353,
+              "sourcePredictionKmS": 58.797728019715564,
+              "twinPredictionKmS": 58.84864797813807,
+              "pixels": 1881
+            },
+            {
+              "radiusKpc": 13.238802932212407,
+              "observedKmS": 144.00379801254127,
+              "sourcePredictionKmS": 56.77625798253656,
+              "twinPredictionKmS": 57.606912635567554,
+              "pixels": 1905
+            },
+            {
+              "radiusKpc": 13.976399279481491,
+              "observedKmS": 138.91700403082618,
+              "sourcePredictionKmS": 58.41454133286178,
+              "twinPredictionKmS": 57.0241670653379,
+              "pixels": 1889
+            },
+            {
+              "radiusKpc": 14.72325560764793,
+              "observedKmS": 141.68339515027748,
+              "sourcePredictionKmS": 55.269942297591236,
+              "twinPredictionKmS": 54.74919988401622,
+              "pixels": 1829
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NGC3198",
+      "split": "development",
+      "observation": {
+        "tracer": "THINGS H I moment-1 velocity field",
+        "scoredPixels": 13134,
+        "inclinationDeg": 73.0,
+        "positionAngleDeg": 34.39948613321605,
+        "medianDispersionKmS": 13.518347850064911
+      },
+      "twinFidelity": {
+        "totalMapNormalizedL2": 0.11632330126227948,
+        "totalMapPixelCorrelation": 0.9928129317987455,
+        "massRelativeError": 1.1245715132789568e-16,
+        "velocityTargetsUsedInExtraction": false,
+        "gravityParametersUsedInExtraction": 0
+      },
+      "models": {
+        "fixed_simple_mond": {
+          "sourceVersusObserved": {
+            "rmseKmS": 10.740433239530761,
+            "uncertaintyRmsKmS": 15.587173431646741,
+            "errorRatio": 0.6890558629266541,
+            "classification": "consistent"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 10.51798253737925,
+            "uncertaintyRmsKmS": 15.587173431646741,
+            "errorRatio": 0.6747844683645157,
+            "classification": "consistent"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 3.4115347748209968
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 1.8113294300729996,
+              "observedKmS": 64.34070009967601,
+              "sourcePredictionKmS": 89.13585402950069,
+              "twinPredictionKmS": 89.07975307421253,
+              "pixels": 38
+            },
+            {
+              "radiusKpc": 3.4932179997643007,
+              "observedKmS": 99.93063267646254,
+              "sourcePredictionKmS": 97.94584274796216,
+              "twinPredictionKmS": 99.91224727792262,
+              "pixels": 82
+            },
+            {
+              "radiusKpc": 5.173777689941951,
+              "observedKmS": 127.01704575847899,
+              "sourcePredictionKmS": 122.40789977372634,
+              "twinPredictionKmS": 122.76690553735881,
+              "pixels": 126
+            },
+            {
+              "radiusKpc": 6.902671725584317,
+              "observedKmS": 139.88086913298562,
+              "sourcePredictionKmS": 137.3478029835813,
+              "twinPredictionKmS": 137.5426996763509,
+              "pixels": 160
+            },
+            {
+              "radiusKpc": 8.609425002105093,
+              "observedKmS": 144.2650627282758,
+              "sourcePredictionKmS": 138.2554543391229,
+              "twinPredictionKmS": 139.3406955100785,
+              "pixels": 210
+            },
+            {
+              "radiusKpc": 10.329318441511761,
+              "observedKmS": 146.68387077581545,
+              "sourcePredictionKmS": 140.88307156533136,
+              "twinPredictionKmS": 141.0910710082362,
+              "pixels": 250
+            },
+            {
+              "radiusKpc": 12.098110858190525,
+              "observedKmS": 152.58550245856574,
+              "sourcePredictionKmS": 146.36194505510824,
+              "twinPredictionKmS": 146.19953629865884,
+              "pixels": 298
+            },
+            {
+              "radiusKpc": 13.758934817192076,
+              "observedKmS": 154.67525315323005,
+              "sourcePredictionKmS": 149.24475974030972,
+              "twinPredictionKmS": 148.3316796025425,
+              "pixels": 326
+            },
+            {
+              "radiusKpc": 15.54962677112026,
+              "observedKmS": 154.83872610277132,
+              "sourcePredictionKmS": 148.06775499151004,
+              "twinPredictionKmS": 148.10323541700131,
+              "pixels": 378
+            },
+            {
+              "radiusKpc": 17.41096461627833,
+              "observedKmS": 153.8219480269844,
+              "sourcePredictionKmS": 141.3781166931098,
+              "twinPredictionKmS": 144.11102157687458,
+              "pixels": 424
+            },
+            {
+              "radiusKpc": 19.018820365132356,
+              "observedKmS": 153.47394326137487,
+              "sourcePredictionKmS": 144.15369082131465,
+              "twinPredictionKmS": 144.26576223206382,
+              "pixels": 470
+            },
+            {
+              "radiusKpc": 20.750256514851785,
+              "observedKmS": 153.69540859177064,
+              "sourcePredictionKmS": 147.64152319516145,
+              "twinPredictionKmS": 147.43628918894797,
+              "pixels": 502
+            },
+            {
+              "radiusKpc": 22.551398863143877,
+              "observedKmS": 155.7223923228748,
+              "sourcePredictionKmS": 153.38464446702415,
+              "twinPredictionKmS": 153.5001254582208,
+              "pixels": 546
+            },
+            {
+              "radiusKpc": 24.300176316860547,
+              "observedKmS": 150.31238876055986,
+              "sourcePredictionKmS": 153.1272086734361,
+              "twinPredictionKmS": 154.3821617951314,
+              "pixels": 582
+            },
+            {
+              "radiusKpc": 25.995056492245308,
+              "observedKmS": 151.22045989377028,
+              "sourcePredictionKmS": 157.0233020022652,
+              "twinPredictionKmS": 158.32036945947604,
+              "pixels": 652
+            },
+            {
+              "radiusKpc": 27.766634369452138,
+              "observedKmS": 149.70365268736535,
+              "sourcePredictionKmS": 161.06920454359698,
+              "twinPredictionKmS": 161.31666178430774,
+              "pixels": 674
+            },
+            {
+              "radiusKpc": 29.476100809551973,
+              "observedKmS": 150.2628563016667,
+              "sourcePredictionKmS": 158.94331729979524,
+              "twinPredictionKmS": 161.99034165106832,
+              "pixels": 710
+            },
+            {
+              "radiusKpc": 31.293129314807114,
+              "observedKmS": 147.7624511964594,
+              "sourcePredictionKmS": 160.59732901781928,
+              "twinPredictionKmS": 161.34638553677573,
+              "pixels": 766
+            },
+            {
+              "radiusKpc": 33.036917597855975,
+              "observedKmS": 149.81531139492122,
+              "sourcePredictionKmS": 162.37607452471553,
+              "twinPredictionKmS": 164.52557604433187,
+              "pixels": 773
+            },
+            {
+              "radiusKpc": 34.77875575385164,
+              "observedKmS": 150.8025318170092,
+              "sourcePredictionKmS": 165.72423404261824,
+              "twinPredictionKmS": 165.51467423167176,
+              "pixels": 733
+            }
+          ]
+        },
+        "newtonian_thin_sheet": {
+          "sourceVersusObserved": {
+            "rmseKmS": 49.69538921094442,
+            "uncertaintyRmsKmS": 15.587173431646741,
+            "errorRatio": 3.188223280434382,
+            "classification": "miss"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 49.42965706634537,
+            "uncertaintyRmsKmS": 15.587173431646741,
+            "errorRatio": 3.171175151357976,
+            "classification": "miss"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 2.54434227861886
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 1.8113294300729996,
+              "observedKmS": 64.34070009967601,
+              "sourcePredictionKmS": 66.3286974908702,
+              "twinPredictionKmS": 66.38378748240618,
+              "pixels": 38
+            },
+            {
+              "radiusKpc": 3.4932179997643007,
+              "observedKmS": 99.93063267646254,
+              "sourcePredictionKmS": 64.65250844354732,
+              "twinPredictionKmS": 66.35541031377521,
+              "pixels": 82
+            },
+            {
+              "radiusKpc": 5.173777689941951,
+              "observedKmS": 127.01704575847899,
+              "sourcePredictionKmS": 81.2122383402662,
+              "twinPredictionKmS": 81.5953207716582,
+              "pixels": 126
+            },
+            {
+              "radiusKpc": 6.902671725584317,
+              "observedKmS": 139.88086913298562,
+              "sourcePredictionKmS": 89.60016279571552,
+              "twinPredictionKmS": 89.8034032585656,
+              "pixels": 160
+            },
+            {
+              "radiusKpc": 8.609425002105093,
+              "observedKmS": 144.2650627282758,
+              "sourcePredictionKmS": 84.75630895383085,
+              "twinPredictionKmS": 85.82464194521962,
+              "pixels": 210
+            },
+            {
+              "radiusKpc": 10.329318441511761,
+              "observedKmS": 146.68387077581545,
+              "sourcePredictionKmS": 82.47092810418933,
+              "twinPredictionKmS": 82.6481741130813,
+              "pixels": 250
+            },
+            {
+              "radiusKpc": 12.098110858190525,
+              "observedKmS": 152.58550245856574,
+              "sourcePredictionKmS": 83.33022973811515,
+              "twinPredictionKmS": 83.16919069029306,
+              "pixels": 298
+            },
+            {
+              "radiusKpc": 13.758934817192076,
+              "observedKmS": 154.67525315323005,
+              "sourcePredictionKmS": 82.41901659906381,
+              "twinPredictionKmS": 81.54031494507832,
+              "pixels": 326
+            },
+            {
+              "radiusKpc": 15.54962677112026,
+              "observedKmS": 154.83872610277132,
+              "sourcePredictionKmS": 77.86830008920954,
+              "twinPredictionKmS": 77.87668605470093,
+              "pixels": 378
+            },
+            {
+              "radiusKpc": 17.41096461627833,
+              "observedKmS": 153.8219480269844,
+              "sourcePredictionKmS": 68.93442375292089,
+              "twinPredictionKmS": 71.26885514596945,
+              "pixels": 424
+            },
+            {
+              "radiusKpc": 19.018820365132356,
+              "observedKmS": 153.47394326137487,
+              "sourcePredictionKmS": 69.40916328606556,
+              "twinPredictionKmS": 69.57474211013603,
+              "pixels": 470
+            },
+            {
+              "radiusKpc": 20.750256514851785,
+              "observedKmS": 153.69540859177064,
+              "sourcePredictionKmS": 70.70302967613922,
+              "twinPredictionKmS": 70.71171209481571,
+              "pixels": 502
+            },
+            {
+              "radiusKpc": 22.551398863143877,
+              "observedKmS": 155.7223923228748,
+              "sourcePredictionKmS": 72.63964182817877,
+              "twinPredictionKmS": 72.69529203628635,
+              "pixels": 546
+            },
+            {
+              "radiusKpc": 24.300176316860547,
+              "observedKmS": 150.31238876055986,
+              "sourcePredictionKmS": 70.18333579229115,
+              "twinPredictionKmS": 71.04667628916451,
+              "pixels": 582
+            },
+            {
+              "radiusKpc": 25.995056492245308,
+              "observedKmS": 151.22045989377028,
+              "sourcePredictionKmS": 71.13109406881524,
+              "twinPredictionKmS": 72.08733017218891,
+              "pixels": 652
+            },
+            {
+              "radiusKpc": 27.766634369452138,
+              "observedKmS": 149.70365268736535,
+              "sourcePredictionKmS": 72.46659022668602,
+              "twinPredictionKmS": 72.59761508034377,
+              "pixels": 674
+            },
+            {
+              "radiusKpc": 29.476100809551973,
+              "observedKmS": 150.2628563016667,
+              "sourcePredictionKmS": 69.96619839176478,
+              "twinPredictionKmS": 71.39987685073872,
+              "pixels": 710
+            },
+            {
+              "radiusKpc": 31.293129314807114,
+              "observedKmS": 147.7624511964594,
+              "sourcePredictionKmS": 68.97298044652656,
+              "twinPredictionKmS": 69.36671296683622,
+              "pixels": 766
+            },
+            {
+              "radiusKpc": 33.036917597855975,
+              "observedKmS": 149.81531139492122,
+              "sourcePredictionKmS": 68.59408729981911,
+              "twinPredictionKmS": 70.14813254208397,
+              "pixels": 773
+            },
+            {
+              "radiusKpc": 34.77875575385164,
+              "observedKmS": 150.8025318170092,
+              "sourcePredictionKmS": 69.72443845815407,
+              "twinPredictionKmS": 69.43305765569838,
+              "pixels": 733
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NGC5055",
+      "split": "development",
+      "observation": {
+        "tracer": "THINGS H I moment-1 velocity field",
+        "scoredPixels": 23153,
+        "inclinationDeg": 55.0,
+        "positionAngleDeg": 100.60532313717738,
+        "medianDispersionKmS": 11.380316654683568
+      },
+      "twinFidelity": {
+        "totalMapNormalizedL2": 0.07760984747024752,
+        "totalMapPixelCorrelation": 0.9969465491748302,
+        "massRelativeError": 3.302663825450538e-16,
+        "velocityTargetsUsedInExtraction": false,
+        "gravityParametersUsedInExtraction": 0
+      },
+      "models": {
+        "fixed_simple_mond": {
+          "sourceVersusObserved": {
+            "rmseKmS": 26.391640187289827,
+            "uncertaintyRmsKmS": 16.551135300582683,
+            "errorRatio": 1.5945516550976844,
+            "classification": "close"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 26.070323434805108,
+            "uncertaintyRmsKmS": 16.551135300582683,
+            "errorRatio": 1.5751380773189196,
+            "classification": "close"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 5.095804458840478
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 1.6756686928741522,
+              "observedKmS": 175.30489617210918,
+              "sourcePredictionKmS": 201.97972335045662,
+              "twinPredictionKmS": 202.55735969456384,
+              "pixels": 78
+            },
+            {
+              "radiusKpc": 3.1983546088053156,
+              "observedKmS": 195.75970061550774,
+              "sourcePredictionKmS": 212.24094635093402,
+              "twinPredictionKmS": 212.05945712777987,
+              "pixels": 168
+            },
+            {
+              "radiusKpc": 4.94505467368722,
+              "observedKmS": 200.6391557633425,
+              "sourcePredictionKmS": 213.77425988833923,
+              "twinPredictionKmS": 214.36608157136536,
+              "pixels": 282
+            },
+            {
+              "radiusKpc": 6.584137928611632,
+              "observedKmS": 204.72703422591348,
+              "sourcePredictionKmS": 221.0013380870837,
+              "twinPredictionKmS": 220.6803703417345,
+              "pixels": 370
+            },
+            {
+              "radiusKpc": 8.273214013882496,
+              "observedKmS": 213.9506009587064,
+              "sourcePredictionKmS": 224.10710327724905,
+              "twinPredictionKmS": 222.90380637815727,
+              "pixels": 466
+            },
+            {
+              "radiusKpc": 9.97832143821813,
+              "observedKmS": 216.61658011199017,
+              "sourcePredictionKmS": 221.77024006875706,
+              "twinPredictionKmS": 221.68364573800875,
+              "pixels": 558
+            },
+            {
+              "radiusKpc": 11.717809308534951,
+              "observedKmS": 211.75806087738803,
+              "sourcePredictionKmS": 228.81674813850748,
+              "twinPredictionKmS": 227.89902354934733,
+              "pixels": 678
+            },
+            {
+              "radiusKpc": 13.388074094692021,
+              "observedKmS": 206.399668556628,
+              "sourcePredictionKmS": 225.86654367931493,
+              "twinPredictionKmS": 224.52257986873494,
+              "pixels": 762
+            },
+            {
+              "radiusKpc": 15.17684466341893,
+              "observedKmS": 207.7321118872745,
+              "sourcePredictionKmS": 223.89330610243675,
+              "twinPredictionKmS": 220.72951902679816,
+              "pixels": 853
+            },
+            {
+              "radiusKpc": 16.92358704714286,
+              "observedKmS": 207.96740213733963,
+              "sourcePredictionKmS": 219.53823706334293,
+              "twinPredictionKmS": 216.61382543034148,
+              "pixels": 937
+            },
+            {
+              "radiusKpc": 18.55663212587482,
+              "observedKmS": 209.34710401704365,
+              "sourcePredictionKmS": 212.5708521700778,
+              "twinPredictionKmS": 210.05333772771368,
+              "pixels": 937
+            },
+            {
+              "radiusKpc": 20.335683965341047,
+              "observedKmS": 212.63090258422753,
+              "sourcePredictionKmS": 211.26635716237698,
+              "twinPredictionKmS": 212.54518765817042,
+              "pixels": 802
+            },
+            {
+              "radiusKpc": 22.05159241921588,
+              "observedKmS": 212.81963550206268,
+              "sourcePredictionKmS": 195.32059360133314,
+              "twinPredictionKmS": 197.8640065093388,
+              "pixels": 760
+            },
+            {
+              "radiusKpc": 23.760994969580086,
+              "observedKmS": 207.36322509557917,
+              "sourcePredictionKmS": 224.4954828184358,
+              "twinPredictionKmS": 227.84503936008434,
+              "pixels": 778
+            },
+            {
+              "radiusKpc": 25.561465761856493,
+              "observedKmS": 198.33488264586762,
+              "sourcePredictionKmS": 219.68943313820458,
+              "twinPredictionKmS": 222.6964447996243,
+              "pixels": 867
+            },
+            {
+              "radiusKpc": 27.263730957011525,
+              "observedKmS": 179.99317145224273,
+              "sourcePredictionKmS": 217.50715442364728,
+              "twinPredictionKmS": 217.85790687886447,
+              "pixels": 946
+            },
+            {
+              "radiusKpc": 29.069090950188045,
+              "observedKmS": 177.39874402976903,
+              "sourcePredictionKmS": 213.53118747921718,
+              "twinPredictionKmS": 213.8525602542014,
+              "pixels": 1084
+            },
+            {
+              "radiusKpc": 30.73550670675174,
+              "observedKmS": 171.7473765175762,
+              "sourcePredictionKmS": 212.23388845288838,
+              "twinPredictionKmS": 213.66458241148933,
+              "pixels": 1115
+            },
+            {
+              "radiusKpc": 32.49063171069687,
+              "observedKmS": 165.71430501579584,
+              "sourcePredictionKmS": 213.5082155837756,
+              "twinPredictionKmS": 214.98460060488316,
+              "pixels": 1128
+            },
+            {
+              "radiusKpc": 34.201472640407964,
+              "observedKmS": 163.52529769818193,
+              "sourcePredictionKmS": 211.74959712538717,
+              "twinPredictionKmS": 212.81764655318253,
+              "pixels": 1044
+            }
+          ]
+        },
+        "newtonian_thin_sheet": {
+          "sourceVersusObserved": {
+            "rmseKmS": 37.57137363839685,
+            "uncertaintyRmsKmS": 16.551135300582683,
+            "errorRatio": 2.2700179145459676,
+            "classification": "miss"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 37.605398061342186,
+            "uncertaintyRmsKmS": 16.551135300582683,
+            "errorRatio": 2.272073629898868,
+            "classification": "miss"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 4.63214860784083
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 1.6756686928741522,
+              "observedKmS": 175.30489617210918,
+              "sourcePredictionKmS": 188.1618989853516,
+              "twinPredictionKmS": 188.77426093977283,
+              "pixels": 78
+            },
+            {
+              "radiusKpc": 3.1983546088053156,
+              "observedKmS": 195.75970061550774,
+              "sourcePredictionKmS": 188.89071044419026,
+              "twinPredictionKmS": 188.69619592449556,
+              "pixels": 168
+            },
+            {
+              "radiusKpc": 4.94505467368722,
+              "observedKmS": 200.6391557633425,
+              "sourcePredictionKmS": 180.686313226618,
+              "twinPredictionKmS": 181.3240328173753,
+              "pixels": 282
+            },
+            {
+              "radiusKpc": 6.584137928611632,
+              "observedKmS": 204.72703422591348,
+              "sourcePredictionKmS": 180.56437380239797,
+              "twinPredictionKmS": 180.21652021035823,
+              "pixels": 370
+            },
+            {
+              "radiusKpc": 8.273214013882496,
+              "observedKmS": 213.9506009587064,
+              "sourcePredictionKmS": 176.70224500818074,
+              "twinPredictionKmS": 175.39703556013788,
+              "pixels": 466
+            },
+            {
+              "radiusKpc": 9.97832143821813,
+              "observedKmS": 216.61658011199017,
+              "sourcePredictionKmS": 168.12674832698156,
+              "twinPredictionKmS": 168.07154885233362,
+              "pixels": 558
+            },
+            {
+              "radiusKpc": 11.717809308534951,
+              "observedKmS": 211.75806087738803,
+              "sourcePredictionKmS": 169.8650622517463,
+              "twinPredictionKmS": 168.88990892121885,
+              "pixels": 678
+            },
+            {
+              "radiusKpc": 13.388074094692021,
+              "observedKmS": 206.399668556628,
+              "sourcePredictionKmS": 161.27064119898907,
+              "twinPredictionKmS": 159.73965230225508,
+              "pixels": 762
+            },
+            {
+              "radiusKpc": 15.17684466341893,
+              "observedKmS": 207.7321118872745,
+              "sourcePredictionKmS": 154.02891794737795,
+              "twinPredictionKmS": 150.96031753911643,
+              "pixels": 853
+            },
+            {
+              "radiusKpc": 16.92358704714286,
+              "observedKmS": 207.96740213733963,
+              "sourcePredictionKmS": 145.20483096157156,
+              "twinPredictionKmS": 142.35828538851635,
+              "pixels": 937
+            },
+            {
+              "radiusKpc": 18.55663212587482,
+              "observedKmS": 209.34710401704365,
+              "sourcePredictionKmS": 135.64027655113816,
+              "twinPredictionKmS": 133.40775677027202,
+              "pixels": 937
+            },
+            {
+              "radiusKpc": 20.335683965341047,
+              "observedKmS": 212.63090258422753,
+              "sourcePredictionKmS": 130.91839987635066,
+              "twinPredictionKmS": 132.03658422954527,
+              "pixels": 802
+            },
+            {
+              "radiusKpc": 22.05159241921588,
+              "observedKmS": 212.81963550206268,
+              "sourcePredictionKmS": 117.7627404774482,
+              "twinPredictionKmS": 119.86383010094721,
+              "pixels": 760
+            },
+            {
+              "radiusKpc": 23.760994969580086,
+              "observedKmS": 207.36322509557917,
+              "sourcePredictionKmS": 137.38449978587593,
+              "twinPredictionKmS": 140.45990783000198,
+              "pixels": 778
+            },
+            {
+              "radiusKpc": 25.561465761856493,
+              "observedKmS": 198.33488264586762,
+              "sourcePredictionKmS": 129.50171180012936,
+              "twinPredictionKmS": 132.13007431773272,
+              "pixels": 867
+            },
+            {
+              "radiusKpc": 27.263730957011525,
+              "observedKmS": 179.99317145224273,
+              "sourcePredictionKmS": 124.19875680245612,
+              "twinPredictionKmS": 124.23526123096977,
+              "pixels": 946
+            },
+            {
+              "radiusKpc": 29.069090950188045,
+              "observedKmS": 177.39874402976903,
+              "sourcePredictionKmS": 118.07759263618009,
+              "twinPredictionKmS": 118.32078871639895,
+              "pixels": 1084
+            },
+            {
+              "radiusKpc": 30.73550670675174,
+              "observedKmS": 171.7473765175762,
+              "sourcePredictionKmS": 114.25839087583861,
+              "twinPredictionKmS": 115.53538757170998,
+              "pixels": 1115
+            },
+            {
+              "radiusKpc": 32.49063171069687,
+              "observedKmS": 165.71430501579584,
+              "sourcePredictionKmS": 113.10845600136854,
+              "twinPredictionKmS": 114.4316597771567,
+              "pixels": 1128
+            },
+            {
+              "radiusKpc": 34.201472640407964,
+              "observedKmS": 163.52529769818193,
+              "sourcePredictionKmS": 109.28003706655461,
+              "twinPredictionKmS": 110.12251829123625,
+              "pixels": 1044
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NGC7793",
+      "split": "development",
+      "observation": {
+        "tracer": "THINGS H I moment-1 velocity field",
+        "scoredPixels": 5168,
+        "inclinationDeg": 47.0,
+        "positionAngleDeg": 154.93832278328426,
+        "medianDispersionKmS": 10.586254889395708
+      },
+      "twinFidelity": {
+        "totalMapNormalizedL2": 0.15699179966509003,
+        "totalMapPixelCorrelation": 0.987228899073794,
+        "massRelativeError": 4.061679896788943e-16,
+        "velocityTargetsUsedInExtraction": false,
+        "gravityParametersUsedInExtraction": 0
+      },
+      "models": {
+        "fixed_simple_mond": {
+          "sourceVersusObserved": {
+            "rmseKmS": 33.995433691235654,
+            "uncertaintyRmsKmS": 12.226140947209323,
+            "errorRatio": 2.7805530656012336,
+            "classification": "miss"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 34.03417819224954,
+            "uncertaintyRmsKmS": 12.226140947209323,
+            "errorRatio": 2.783722054179165,
+            "classification": "miss"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 1.2464832858755963
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 0.4492640738332469,
+              "observedKmS": 21.393030407278612,
+              "sourcePredictionKmS": 56.84877576733767,
+              "twinPredictionKmS": 57.69047024224432,
+              "pixels": 20
+            },
+            {
+              "radiusKpc": 0.8087718600791911,
+              "observedKmS": 25.900438592806648,
+              "sourcePredictionKmS": 63.03797851794822,
+              "twinPredictionKmS": 63.54944962821257,
+              "pixels": 36
+            },
+            {
+              "radiusKpc": 1.1446298821901695,
+              "observedKmS": 37.2949416023425,
+              "sourcePredictionKmS": 69.24135498663739,
+              "twinPredictionKmS": 69.67083298140831,
+              "pixels": 48
+            },
+            {
+              "radiusKpc": 1.4654389621563872,
+              "observedKmS": 46.920117730971675,
+              "sourcePredictionKmS": 74.83356158996759,
+              "twinPredictionKmS": 75.64109693420461,
+              "pixels": 64
+            },
+            {
+              "radiusKpc": 1.827108093671106,
+              "observedKmS": 50.16773462427665,
+              "sourcePredictionKmS": 80.98730094646075,
+              "twinPredictionKmS": 81.72074170217228,
+              "pixels": 84
+            },
+            {
+              "radiusKpc": 2.2085073180932153,
+              "observedKmS": 55.913694996629914,
+              "sourcePredictionKmS": 86.49686410438656,
+              "twinPredictionKmS": 87.37523930303959,
+              "pixels": 108
+            },
+            {
+              "radiusKpc": 2.561962710158593,
+              "observedKmS": 64.9652389228487,
+              "sourcePredictionKmS": 90.9295645038084,
+              "twinPredictionKmS": 91.16424711617266,
+              "pixels": 112
+            },
+            {
+              "radiusKpc": 2.8911368185801676,
+              "observedKmS": 68.96636319711695,
+              "sourcePredictionKmS": 93.35748262482416,
+              "twinPredictionKmS": 93.20922823038299,
+              "pixels": 118
+            },
+            {
+              "radiusKpc": 3.2362358619454574,
+              "observedKmS": 80.40718550899362,
+              "sourcePredictionKmS": 94.78645979999739,
+              "twinPredictionKmS": 95.21622091138873,
+              "pixels": 152
+            },
+            {
+              "radiusKpc": 3.6064608819490416,
+              "observedKmS": 83.71984510581727,
+              "sourcePredictionKmS": 96.21598667082696,
+              "twinPredictionKmS": 96.9617028355347,
+              "pixels": 168
+            },
+            {
+              "radiusKpc": 3.9688998555553843,
+              "observedKmS": 78.66504263865373,
+              "sourcePredictionKmS": 96.72391113082772,
+              "twinPredictionKmS": 96.96348723688673,
+              "pixels": 188
+            },
+            {
+              "radiusKpc": 4.325377512190089,
+              "observedKmS": 85.73575720828916,
+              "sourcePredictionKmS": 98.00773338319146,
+              "twinPredictionKmS": 97.99247536537824,
+              "pixels": 188
+            },
+            {
+              "radiusKpc": 4.667367197133209,
+              "observedKmS": 92.54825239204462,
+              "sourcePredictionKmS": 97.80774013278437,
+              "twinPredictionKmS": 98.39105403419691,
+              "pixels": 204
+            },
+            {
+              "radiusKpc": 5.023469713941198,
+              "observedKmS": 79.19560540200129,
+              "sourcePredictionKmS": 96.450482909652,
+              "twinPredictionKmS": 97.46253558888569,
+              "pixels": 236
+            },
+            {
+              "radiusKpc": 5.3895753903597035,
+              "observedKmS": 90.44926693089896,
+              "sourcePredictionKmS": 96.80990989775583,
+              "twinPredictionKmS": 96.76668620842597,
+              "pixels": 248
+            },
+            {
+              "radiusKpc": 5.7480472534842715,
+              "observedKmS": 96.26283245178566,
+              "sourcePredictionKmS": 96.42943914657835,
+              "twinPredictionKmS": 96.62143137745002,
+              "pixels": 260
+            },
+            {
+              "radiusKpc": 6.097193288881786,
+              "observedKmS": 103.78775748895625,
+              "sourcePredictionKmS": 98.46510015049233,
+              "twinPredictionKmS": 97.2239382171954,
+              "pixels": 272
+            },
+            {
+              "radiusKpc": 6.455656347164158,
+              "observedKmS": 95.4759926991536,
+              "sourcePredictionKmS": 98.05685674744903,
+              "twinPredictionKmS": 98.30217588848129,
+              "pixels": 296
+            },
+            {
+              "radiusKpc": 6.809979478471852,
+              "observedKmS": 88.38428615030014,
+              "sourcePredictionKmS": 98.44077926093317,
+              "twinPredictionKmS": 99.07482399283326,
+              "pixels": 312
+            },
+            {
+              "radiusKpc": 7.1755981594167615,
+              "observedKmS": 84.62832067149742,
+              "sourcePredictionKmS": 97.80464388802265,
+              "twinPredictionKmS": 98.8821265073194,
+              "pixels": 329
+            }
+          ]
+        },
+        "newtonian_thin_sheet": {
+          "sourceVersusObserved": {
+            "rmseKmS": 37.68985908155206,
+            "uncertaintyRmsKmS": 12.226140947209323,
+            "errorRatio": 3.0827273498883514,
+            "classification": "miss"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 37.67401176895863,
+            "uncertaintyRmsKmS": 12.226140947209323,
+            "errorRatio": 3.081431167171184,
+            "classification": "miss"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 1.1535411049399948
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 0.4492640738332469,
+              "observedKmS": 21.393030407278612,
+              "sourcePredictionKmS": 46.31851058076309,
+              "twinPredictionKmS": 47.23262283121283,
+              "pixels": 20
+            },
+            {
+              "radiusKpc": 0.8087718600791911,
+              "observedKmS": 25.900438592806648,
+              "sourcePredictionKmS": 47.66355300824448,
+              "twinPredictionKmS": 48.21302959022411,
+              "pixels": 36
+            },
+            {
+              "radiusKpc": 1.1446298821901695,
+              "observedKmS": 37.2949416023425,
+              "sourcePredictionKmS": 50.50925426537285,
+              "twinPredictionKmS": 50.95133494646699,
+              "pixels": 48
+            },
+            {
+              "radiusKpc": 1.4654389621563872,
+              "observedKmS": 46.920117730971675,
+              "sourcePredictionKmS": 53.36115187825637,
+              "twinPredictionKmS": 54.21975431880302,
+              "pixels": 64
+            },
+            {
+              "radiusKpc": 1.827108093671106,
+              "observedKmS": 50.16773462427665,
+              "sourcePredictionKmS": 56.8531363930817,
+              "twinPredictionKmS": 57.62842390350471,
+              "pixels": 84
+            },
+            {
+              "radiusKpc": 2.2085073180932153,
+              "observedKmS": 55.913694996629914,
+              "sourcePredictionKmS": 59.827825416400415,
+              "twinPredictionKmS": 60.74664757220663,
+              "pixels": 108
+            },
+            {
+              "radiusKpc": 2.561962710158593,
+              "observedKmS": 64.9652389228487,
+              "sourcePredictionKmS": 62.07342948574943,
+              "twinPredictionKmS": 62.322625942079824,
+              "pixels": 112
+            },
+            {
+              "radiusKpc": 2.8911368185801676,
+              "observedKmS": 68.96636319711695,
+              "sourcePredictionKmS": 62.563769655473415,
+              "twinPredictionKmS": 62.405692227090924,
+              "pixels": 118
+            },
+            {
+              "radiusKpc": 3.2362358619454574,
+              "observedKmS": 80.40718550899362,
+              "sourcePredictionKmS": 62.09780782876758,
+              "twinPredictionKmS": 62.52903309279693,
+              "pixels": 152
+            },
+            {
+              "radiusKpc": 3.6064608819490416,
+              "observedKmS": 83.71984510581727,
+              "sourcePredictionKmS": 61.6370782045934,
+              "twinPredictionKmS": 62.39306378676154,
+              "pixels": 168
+            },
+            {
+              "radiusKpc": 3.9688998555553843,
+              "observedKmS": 78.66504263865373,
+              "sourcePredictionKmS": 60.35541364175031,
+              "twinPredictionKmS": 60.59656066456079,
+              "pixels": 188
+            },
+            {
+              "radiusKpc": 4.325377512190089,
+              "observedKmS": 85.73575720828916,
+              "sourcePredictionKmS": 60.04240309833017,
+              "twinPredictionKmS": 60.02416353693219,
+              "pixels": 188
+            },
+            {
+              "radiusKpc": 4.667367197133209,
+              "observedKmS": 92.54825239204462,
+              "sourcePredictionKmS": 58.44537538872551,
+              "twinPredictionKmS": 59.007879727033604,
+              "pixels": 204
+            },
+            {
+              "radiusKpc": 5.023469713941198,
+              "observedKmS": 79.19560540200129,
+              "sourcePredictionKmS": 55.749993826852894,
+              "twinPredictionKmS": 56.728417061741915,
+              "pixels": 236
+            },
+            {
+              "radiusKpc": 5.3895753903597035,
+              "observedKmS": 90.44926693089896,
+              "sourcePredictionKmS": 54.78559331624234,
+              "twinPredictionKmS": 54.75264524504108,
+              "pixels": 248
+            },
+            {
+              "radiusKpc": 5.7480472534842715,
+              "observedKmS": 96.26283245178566,
+              "sourcePredictionKmS": 53.67233162485071,
+              "twinPredictionKmS": 53.39608795605226,
+              "pixels": 260
+            },
+            {
+              "radiusKpc": 6.097193288881786,
+              "observedKmS": 103.78775748895625,
+              "sourcePredictionKmS": 54.03782693908181,
+              "twinPredictionKmS": 52.8697277886626,
+              "pixels": 272
+            },
+            {
+              "radiusKpc": 6.455656347164158,
+              "observedKmS": 95.4759926991536,
+              "sourcePredictionKmS": 52.60744478034565,
+              "twinPredictionKmS": 52.810310623569805,
+              "pixels": 296
+            },
+            {
+              "radiusKpc": 6.809979478471852,
+              "observedKmS": 88.38428615030014,
+              "sourcePredictionKmS": 51.97934202543781,
+              "twinPredictionKmS": 52.53471155059397,
+              "pixels": 312
+            },
+            {
+              "radiusKpc": 7.1755981594167615,
+              "observedKmS": 84.62832067149742,
+              "sourcePredictionKmS": 50.65645930850167,
+              "twinPredictionKmS": 51.52264588289895,
+              "pixels": 329
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "artifact": {
+    "atlasPath": "/assets/resolved-twin-development-atlas.png",
+    "atlasSha256": "eef7f221fd38fa06d7786273481f37bab0a2c09beddcd92fd560e7441494e23a"
+  },
+  "scoreSemantics": {
+    "twinFidelity": "How closely the generated baryonic map matches the registered real baryonic map.",
+    "formulaTransport": "How much a fixed formula prediction changes when the registered map is replaced by its fake twin.",
+    "observationalAccuracy": "How far the formula prediction on the fake twin is from the observed H I velocity field.",
+    "classification": {
+      "consistent": "field RMSE divided by declared uncertainty RMS is at most 1",
+      "close": "ratio is greater than 1 and at most 2",
+      "miss": "ratio is greater than 2"
+    }
+  },
+  "executionBoundary": {
+    "formulaExecution": "precomputed fixed comparators only",
+    "arbitraryHosted2dFormulaExecution": false,
+    "individualStarDynamics": false,
+    "validationStatus": "development; not blind validation",
+    "protocolStatusMeaning": "The frozen comparison executed with finite leakage-audited scores; it does not mean either formula passed every galaxy."
+  },
+  "claimBoundary": [
+    "P0744 is the first direct real 2D velocity-field comparison for these spiral twins, but it uses the development sample and is not a holdout result.",
+    "Systemic velocity and handedness are observation-coordinate nuisances, not gravity parameters; both are disclosed per galaxy.",
+    "No pressure-support, warp, bar, streaming, inclination, distance, M/L, MOND, or halo parameter is fitted to a residual in this raw comparison.",
+    "A model can fail because its circular-equilibrium prediction is wrong or because unmodeled gas dynamics dominate; P0744 alone cannot uniquely separate those causes.",
+    "Validation and holdout velocity arrays remain sealed."
+  ],
+  "evidenceSha256": "b02a9b8c0e9d09519e739e63d52305153dc8eba188794029e3a5b62006aeef30"
+}

@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.11.0-preview",
-    description: "Stateless radial and held-out observed-galaxy twin tests plus a dimension-checked, formula-independent 2D/3D contract, separately typed massive-tracer, photon-map, and raw multiple-image targets, cached observation evaluation, and composed field/observation batches. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
+    version: "0.12.0-preview",
+    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development evidence with distinct morphology/transport/observation scores, plus a dimension-checked formula-independent 2D/3D contract. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
@@ -14,6 +14,7 @@ const specification = {
     "/api/v1/systems/{id}": { get: { summary: "Retrieve a galaxy and its radial measurements" } },
     "/api/v1/synthetic-galaxies": { post: { summary: "Create a deterministic synthetic radial galaxy" } },
     "/api/v1/twin-runs": { post: { summary: "Regenerate a compressed baryonic twin without observed speeds, then score a formula against the held-out rotation curve" } },
+    "/api/v1/resolved-twin-evidence": { get: { summary: "Retrieve frozen four-galaxy 2D development evidence with separate twin-fidelity, formula-transport, and observed-velocity scores" } },
     "/api/v1/formulas/validate": { post: { summary: "Validate and hash a safe formula AST" } },
     "/api/v1/models/validate": { post: { summary: "Validate and hash a scalar/vector/tensor 2D/3D field-model manifest" } },
     "/api/v1/field-jobs/prepare": { post: { summary: "Preflight a model, content-hashed arrays, 2D/3D grid, boundary, and observation-target request" } },

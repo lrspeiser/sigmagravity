@@ -14,6 +14,7 @@ import hostedBatches from "../api/v1/batches.mjs";
 import hostedDataUploads from "../api/v1/data-uploads.mjs";
 import runs from "../api/v1/runs.mjs";
 import twinRuns from "../api/v1/twin-runs.mjs";
+import resolvedTwinEvidence from "../api/v1/resolved-twin-evidence.mjs";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
 import { readFileSync } from "node:fs";
 import { sha256 } from "../lib/canonical.mjs";
@@ -39,8 +40,9 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.11.0-preview");
+  assert.equal(output.body.version, "0.12.0-preview");
   assert.equal(output.body.capabilities.heldoutObservedGalaxyTwins, "available");
+  assert.equal(output.body.capabilities.resolvedTwinDevelopmentEvidence, "available");
   assert.equal(
     output.body.capabilities.localDecoupledObservationEvaluationJobs,
     "available_in_dev_server",
@@ -81,6 +83,29 @@ test("twin API withholds velocity targets until scoring", () => {
   assert.equal(output.body.manifest.twinProtocol.velocityTargetsUsedInExtraction, false);
   assert.equal(output.body.twin.parameterPackage.gravityParameters.length, 0);
   assert.equal(output.body.predictions.length, 12);
+});
+
+test("resolved twin evidence keeps generator, transport, and observation scores separate", () => {
+  const all = call(resolvedTwinEvidence);
+  assert.equal(all.statusCode, 200);
+  assert.equal(all.body.evidenceClass, "precomputed_development_result");
+  assert.equal(all.body.sample.scoredVelocityPixels, 76182);
+  assert.equal(all.body.systems.length, 4);
+  assert.equal(all.body.generator.velocityTargetsUsed, false);
+  assert.equal(all.body.generator.gravityParameters, 0);
+  assert.equal(all.body.executionBoundary.arbitraryHosted2dFormulaExecution, false);
+  const { evidenceSha256, ...evidenceCore } = all.body;
+  assert.equal(sha256(evidenceCore), evidenceSha256);
+  const selected = call(resolvedTwinEvidence, { query: { galaxy: "NGC3198" } });
+  assert.equal(selected.statusCode, 200);
+  assert.equal(selected.body.systems.length, 1);
+  const system = selected.body.systems[0];
+  assert.ok(system.twinFidelity.totalMapPixelCorrelation > 0.98);
+  assert.ok(system.models.fixed_simple_mond.sourceToTwinTransport.lineOfSightRmseKmS < 8);
+  assert.equal(system.models.fixed_simple_mond.twinVersusObserved.classification, "consistent");
+  const missing = call(resolvedTwinEvidence, { query: { galaxy: "NOT-A-GALAXY" } });
+  assert.equal(missing.statusCode, 404);
+  assert.equal(missing.body.error, "unknown_system");
 });
 
 test("formula API returns canonical safety audit", () => {
