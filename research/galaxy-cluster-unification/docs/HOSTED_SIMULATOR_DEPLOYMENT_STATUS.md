@@ -11,14 +11,14 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/8rjTdPVZ6ebWLeFQfpbQPMQXHAd8>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/69F46H1818YVZhukGzJYDrSFBzL9>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-rjprlxobh-horizon3.vercel.app>
-- deployment ID: `dpl_8rjTdPVZ6ebWLeFQfpbQPMQXHAd8`
-- public contract version: `0.19.0-preview`
+  <https://sigma-gravity-research-simulator-7r9j4n26t-horizon3.vercel.app>
+- deployment ID: `dpl_69F46H1818YVZhukGzJYDrSFBzL9`
+- public contract version: `0.20.0-preview`
 
-The service passes its local production build, 83 automated hosted tests, all
-1,562 Python scientific tests, and the live HTTP smoke suite. No deployment
+The service passes its local production build, 85 automated hosted tests, all
+1,568 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
@@ -80,6 +80,12 @@ Implemented public capabilities:
     returns separately typed matter and photon accelerations, discloses its
     sequential Gauss-Seidel update scheme, uses zero per-object gravity
     parameters, and has a separate manufactured bidirectional-coupling test.
+18. Publish a backward-compatible multi-null inverse-response contract. The
+    local 2D/3D worker now supports source radial-angle shuffle, source
+    Fourier-phase scramble, target-system permutation, target radial-angle
+    shuffle, and total-preserving synthetic missing-baryon dropout. It reports
+    each family and passes globally only when the observed pairing beats every
+    declared family.
 
 ## Verification evidence
 
@@ -89,7 +95,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 83 passing hosted tests, 1,562 passing Python scientific
+The current result is 85 passing hosted tests, 1,568 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -132,9 +138,9 @@ and point arrays. The accepted production smoke values are:
 
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
-- run ID: `run_6d08f6b42e750e58f545258f`
+- run ID: `run_4a8ce420ff4fb9387e8b45a2`
 - manifest SHA-256:
-  `6d08f6b42e750e58f545258f76cbbcb726a07dccf391295236c2867b3a3c00b0`
+  `4a8ce420ff4fb9387e8b45a21b7cb5ad0ee0e59f3e741bf2ace0453a994a3955`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -173,7 +179,7 @@ The v0.11 held-out-twin checks additionally require health to report
 formula on the generated twin, the same formula on measured baryons, fixed
 MOND on the twin, Newtonian baryons on the twin, and an uncertainty-aware
 residual panel. The accepted DDO154 smoke result has twin run ID
-`twinrun_3434ac719bac97d02589863b`, source-gravity normalized RMSE
+`twinrun_eaed32ca1924b4a31050bb30`, source-gravity normalized RMSE
 `0.000008625358785734849`, and submitted-formula twin RMSE
 `4.459265029781337 km/s`. Across all 175 systems, the P0737 audit confirmed
 that twin packages are invariant to mutations of all held-out velocity data,
@@ -244,6 +250,20 @@ equal to `1.25` times matter acceleration with maximum relative error
 other, so this acceptance cannot pass by solving two independent equations.
 The public alias passes the complete v0.19 HTTP smoke and model validation,
 while heavy execution remains explicitly `worker_not_connected`.
+
+The v0.20 inverse-control checks require health to report
+`localInverseResponseMultiNullSuite=available_in_dev_server`, the published
+schema to expose the `all_declared_families` suite, and the guide to explain
+all five controls and their limits. The local real-HTTP known-answer run used
+95 null fits, recovered the injected kernel with cosine
+`0.99999999999937`, recovered amplitude `1.5999999988039162`, and obtained
+maximum family Monte Carlo p-value `0.05` with every family passing. All 14
+downloaded artifact hashes and the gateway/worker source hashes agreed; no
+held-out raw observation or per-system gravity parameter entered the inverse.
+The production alias passed the complete radial HTTP smoke at v0.20. Desktop
+and 390-pixel browser checks found no page-level horizontal overflow or console
+errors. Public heavy execution remains explicitly
+`production_worker_not_connected`.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
