@@ -617,6 +617,49 @@ The first attempted project was accidentally created in the personal
 production target and should be removed separately if account cleanup is
 desired.
 
+## v0.31 durable private object-storage release
+
+The v0.31 release connects the first durable production layer without claiming
+that heavy scientific jobs are hosted. The Horizon3 project has a private
+Vercel Blob store, and the provider adapter creates bounded immutable objects
+at SHA-256-derived paths, disables overwrite/random suffixes, treats repeated
+writes as idempotent, and downloads and rehashes the complete object after
+write and on every read. Unit acceptance covers partial credentials, malformed
+namespaces, traversal, quotas, reference mutation, stored-byte mutation, and
+idempotency.
+
+The real store canary ran in two separate processes. Both returned the same
+private 160-byte object at
+`sigma/v1/objects/deployment-canary/sha256/3b3aa125f6eb843feec8c90f35b70223a00375108a63150d5ad7b1761127017b.json`
+and verified the same SHA-256 after download. Credentials remain in ignored
+local/Vercel environment state and were absent from the tracked diff.
+
+The hosted suite now has 126 passing Node tests, the static build verifies 175
+SPARC galaxies, eight resolved-galaxy evidence packages, and four cluster
+packages, and the isolated local HTTP smoke passed. GitHub Actions independently
+built the non-root Linux image and passed the gateway plus real field-and-galaxy
+container acceptance at
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30797087474> for
+implementation commit `7dfffd9f33bcabb50fa0b225f070b51326725968`.
+
+Production deployment `dpl_GiCv8TD7vFwJr8emRz6ENgFDKR5W` is ready at the
+stable alias and serves `0.31.0-preview`; its immutable URL is
+<https://sigma-gravity-research-simulator-apcli8huh-horizon3.vercel.app>.
+The live deterministic HTTP smoke reproduces run
+`run_d541618c4fd3b2a1dca0e963`, manifest
+`d541618c4fd3b2a1dca0e963514841741086c912634dd13ade4c434194409e8f`, twin run
+`twinrun_eb785c4006fe30dd70a2db9b`, resolved evidence hash
+`8fed5429efecb7a0b5055a15928b8edf48e5713454ba18b42c9503305778d1b7`, and
+cluster registry hash
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+
+The public health and storage-readiness documents report the private object
+store as configured while reporting the queue, job metadata database, and
+stateless scientific container as not connected and production execution as
+not ready. A real public field-job submission remains HTTP 503. The canonical
+guide redirect was followed and verified to contain the v0.31 capability,
+limitations, Sigma Gravity path, and inverse-halo discovery path.
+
 ## Worker milestone after Vercel
 
 The container and authenticated gateway connector now exist and pass a real
