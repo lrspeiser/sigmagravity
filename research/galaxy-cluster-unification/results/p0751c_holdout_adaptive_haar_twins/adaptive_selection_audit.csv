@@ -1,0 +1,3 @@
+galaxy,split,tier,coefficients_per_component,status,selected,compression_ratio,maximum_projection_relative_error,check_maximumMassRelativeError,check_maximum3dProjectionRelativeError,check_gasMaximumNormalizedL2,check_starsMaximumNormalizedL2,check_totalMaximumNormalizedL2,check_totalMinimumPixelCorrelation,check_minimumCellToNumericParameterRatio
+NGC2841,holdout,haar_256,256,pass,True,75.21124031007751,5.239695293256099e-16,True,True,True,True,True,True,True
+NGC7331,holdout,haar_256,256,pass,True,73.69186046511628,3.688232714962934e-16,True,True,True,True,True,True,True

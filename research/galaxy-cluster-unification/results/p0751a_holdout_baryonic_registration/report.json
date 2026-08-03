@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "sigma-p0751a-holdout-baryonic-registration-result/1",
+  "stage": "P0751A",
+  "status": "fail",
+  "configSha256": "e05bd30b39018e8664dc5639a4d7d44a3ca44d282954d3524968cee46440c73e",
+  "parentManifestSha256": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+  "systems": 2,
+  "splitsOpened": [
+    "holdout"
+  ],
+  "validationArraysOpened": 0,
+  "holdoutArraysOpened": 6,
+  "velocityOrDispersionArraysOpened": 0,
+  "gravityParameters": 0,
+  "universalBaryonicSettings": {
+    "stellarMassToLightSolar": 0.5,
+    "heliumFactor": 1.36
+  },
+  "checks": {
+    "requiredSystems": true,
+    "requiredValidationArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "requiredVelocityOrDispersionArraysOpened": true,
+    "maximumGravityParameters": true,
+    "allMapsFiniteAndNonnegative": true,
+    "maximumGasMassRelativeError": true,
+    "maximumStellarMassRelativeError": true,
+    "maximumTotalMassClosureRelativeError": true,
+    "minimumFiniteFootprintFractionInsideHiR995": false,
+    "maximumOuterCellMassFraction": true,
+    "minimumCellsPerAxis": true,
+    "maximumCellsPerAxis": true,
+    "allCellsPerAxisOdd": true,
+    "maximumSourceCoordinateRoundtripArcsec": true,
+    "allOutputBundlesContentHashed": true
+  },
+  "aggregate": {
+    "minimumFootprintFractionInsideHiR995": 0.7560230905014074,
+    "maximumGasMassRelativeError": 2.869487938637731e-16,
+    "maximumStellarMassRelativeError": 1.622231336480244e-16,
+    "maximumOuterCellMassFraction": 0.0009742444054409253,
+    "positionAngleRangeDeg": [
+      148.93666348071662,
+      172.14510449556042
+    ],
+    "gasStarCentroidOffsetKpc": {
+      "median": 2.0358659305198223,
+      "maximum": 2.2973023164744584
+    }
+  },
+  "mapFiles": [
+    {
+      "galaxy": "NGC2841",
+      "path": "maps/NGC2841.npz",
+      "sha256": "efb4492bf8c69397401cf8ee25243e00851cd58154d2599d215068c7c7d1d1e5"
+    },
+    {
+      "galaxy": "NGC7331",
+      "path": "maps/NGC7331.npz",
+      "sha256": "087c0af7d7b430aa75658564a788f258c66d5dd7c439a9a769997aac7b680e61"
+    }
+  ],
+  "claimBoundary": [
+    "P0751A is a final-holdout observational registration test, not a gravity score.",
+    "Its implementation, inputs, and gates are committed before either holdout image or velocity array is opened.",
+    "A SINGS-footprint failure remains visible because the separately preregistered WISE fusion is the only permitted repair.",
+    "No velocity or dispersion target may be opened in this stage."
+  ],
+  "reportSha256": "56863344fe2adfd94d3c7a377574644ee8277f6d21709859736db3b1a33f7ad9"
+}

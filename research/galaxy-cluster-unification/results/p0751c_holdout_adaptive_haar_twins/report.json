@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "sigma-p0751c-holdout-adaptive-haar-twins-result/1",
+  "stage": "P0751C",
+  "status": "pass",
+  "configSha256": "4f135abdcca296d0611296d511995cd9edc874ae547c2a1be7b74431f3289183",
+  "parentResultSha256": {
+    "holdout": "ee00c6233e510190737f5cb64c927a273ecf4cb57cd43b51a3428509b662c1f4"
+  },
+  "developmentDisclosure": "The candidate budgets and numeric gates were selected in P0749 using six already-open galaxies. This final-holdout config freezes them before any NGC2841 or NGC7331 image or velocity array is opened.",
+  "selectionRule": "For each galaxy, start at 256 coefficients per baryonic component and choose the first candidate whose reconstructed gas, stars, total map, mass, 3D projection, and compression pass the fixed numeric gates. Never use a formula or velocity score in selection.",
+  "systems": 2,
+  "selectedRepresentations": [
+    {
+      "galaxy": "NGC2841",
+      "split": "holdout",
+      "selected_tier": "haar_256",
+      "coefficients_per_component": 256,
+      "cell_to_parameter_ratio": 75.21124031007751,
+      "generated_map_sha256": "4ed0c111a350a8f12d878c299ff17fef2df88ae35765fda644f371b915fdfcdd"
+    },
+    {
+      "galaxy": "NGC7331",
+      "split": "holdout",
+      "selected_tier": "haar_256",
+      "coefficients_per_component": 256,
+      "cell_to_parameter_ratio": 73.69186046511628,
+      "generated_map_sha256": "0ca1d13d30ff6f5728f028a6a6faf7075b94bbf585ff73d1424fce4fa0832875"
+    }
+  ],
+  "observedVelocityArraysOpened": 0,
+  "holdoutMapBundlesOpened": 2,
+  "fittedGravityParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredUniqueDevelopmentMapBundlesOpened": true,
+    "requiredUniqueValidationMapBundlesOpened": true,
+    "requiredUniqueHoldoutMapBundlesOpened": true,
+    "requiredObservedVelocityArraysOpened": true,
+    "maximumFittedGravityParameters": true,
+    "allSelectedByBaryonicGates": true,
+    "formulaTransportNonbinding": true
+  },
+  "claimBoundary": [
+    "Haar detail is a compressed description of holdout baryons, not a gravitational effect.",
+    "A holdout galaxy receives more detail only if the same predeclared baryonic-map gates require it.",
+    "Formula transport is reported after selection and cannot change the selected representation.",
+    "No holdout velocity or dispersion target may be opened in this stage."
+  ],
+  "reportSha256": "2d16bd5f48d5c1585ad5ef4de6cc8fb938ee28d735c0f2b85fd4c030439030f3"
+}

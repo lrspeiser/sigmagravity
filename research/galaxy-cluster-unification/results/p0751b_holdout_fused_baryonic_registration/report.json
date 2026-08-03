@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "sigma-p0751b-holdout-fused-baryonic-registration-result/1",
+  "stage": "P0751B",
+  "status": "pass",
+  "configSha256": "5c9811b9da7a1693befed4c3afeb3752aca96d926878705173212631631c768e",
+  "p0739ResultSha256": "56863344fe2adfd94d3c7a377574644ee8277f6d21709859736db3b1a33f7ad9",
+  "p0740ResultSha256": "beac0315c81a34736784025d67bbe316ac1c4b22c28caf74ee0d2b01f26b2d1e",
+  "systems": 2,
+  "splitsOpened": [
+    "holdout"
+  ],
+  "wiseImageArraysOpened": 4,
+  "validationArraysOpened": 0,
+  "holdoutArraysOpened": 8,
+  "velocityOrDispersionArraysOpened": 0,
+  "gravityParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredWiseCoadds": true,
+    "requiredValidationArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "requiredVelocityOrDispersionArraysOpened": true,
+    "maximumGravityParameters": true,
+    "minimumFiniteStellarFootprintFractionInsideHiR995": true,
+    "minimumCrossCalibrationPixels": true,
+    "minimumPositiveSingsWiseSpearmanCorrelation": true,
+    "maximumQuadrantScaleRobustFractionalSpread": true,
+    "maximumGasMassRelativeError": true,
+    "maximumStellarMassRelativeError": true,
+    "maximumOuterCellMassFraction": true,
+    "allOutputBundlesContentHashed": true
+  },
+  "aggregate": {
+    "minimumSingsFootprintFractionInsideHiR995": 0.7560230905014074,
+    "minimumFusedFootprintFractionInsideHiR995": 1.0,
+    "minimumSingsWiseSpearman": 0.9881594297305304,
+    "maximumQuadrantScaleRobustFractionalSpread": 0.005585724038129925
+  },
+  "mapFiles": [
+    {
+      "galaxy": "NGC2841",
+      "path": "maps/NGC2841.npz",
+      "sha256": "41cf0ab6e8472ad0d205d66a6d94e87eb847a38c63b6ce7a024e1a7fab96bc1a"
+    },
+    {
+      "galaxy": "NGC7331",
+      "path": "maps/NGC7331.npz",
+      "sha256": "3f6e722d9b96a81175989875732fa0f48c0a1ebe53458c0719ea9c843b2267a4"
+    }
+  ],
+  "claimBoundary": [
+    "P0751B is a final-holdout observational fusion test, not a gravity score.",
+    "The per-galaxy WISE/SINGS factor is instrument cross-calibration and cannot be chosen from a velocity residual.",
+    "The algorithm, parent-config hash, and gates are committed before any holdout image array is opened.",
+    "No velocity or dispersion target may be opened in this stage."
+  ],
+  "reportSha256": "ee00c6233e510190737f5cb64c927a273ecf4cb57cd43b51a3428509b662c1f4"
+}
