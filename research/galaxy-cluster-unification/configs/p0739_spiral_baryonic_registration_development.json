@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "sigma-p0739-spiral-baryonic-registration-development/1",
+  "stage": "P0739",
+  "status": "frozen_before_development_image_array_opening",
+  "purpose": "Develop a velocity-blind, formula-independent registration from raw THINGS H I intensity and SINGS 3.6 micron light into common face-on gas, stellar, and total-baryon maps.",
+  "parent": {
+    "config": "configs/p0738_morphology_diverse_resolved_acquisition.json",
+    "manifest": "results/p0738_morphology_diverse_resolved_acquisition/manifest.json",
+    "manifestSha256": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2"
+  },
+  "eligibleSplits": ["development"],
+  "systems": ["NGC2403", "NGC3198", "NGC5055", "NGC7793"],
+  "sealedUntilLater": {
+    "validationSystems": ["NGC3521", "NGC6946"],
+    "holdoutSystems": ["NGC2841", "NGC7331"],
+    "targetProductsForEverySystem": ["THINGS moment 1", "THINGS moment 2", "SPARC resolved observed rotation curve"]
+  },
+  "permittedInputs": [
+    "THINGS natural-weighted moment 0 image and FITS header",
+    "SINGS IRAC channel-1 image, weight image, and FITS headers",
+    "SPARC sky coordinate, distance, inclination, H I mass, 3.6 micron luminosity, effective radius, and Hubble type"
+  ],
+  "forbiddenInputs": [
+    "THINGS moment 1 array",
+    "THINGS moment 2 array",
+    "SPARC observed rotation speeds or errors",
+    "dark-matter halo parameters",
+    "any gravity-formula prediction, score, or parameter"
+  ],
+  "processing": {
+    "skyCenter": "fixed SPARC catalog coordinate; record photometric centroid offset but do not recenter per target velocity",
+    "positionAngle": "infer from robust second moments of background-subtracted SINGS 3.6 micron light inside five SPARC effective radii; never use moment 1",
+    "inclination": "fixed SPARC published inclination with later declared sensitivity perturbations",
+    "iracBackground": "weighted robust median in the outer source image, beyond max(1.2 HI radii, 6 effective radii) when covered; otherwise use the outer 15 percent image border",
+    "foregroundSuppression": "universal positive compact-residual replacement at 12 robust MAD above a Gaussian-smoothed image; protect the central 0.2 effective radii",
+    "negativeIntensityPolicy": "set negative background-subtracted light and H I intensity to zero after retaining the masks",
+    "gasMassCalibration": "normalize the registered H I morphology to 1.36 times the published SPARC H I mass; 1.36 is a universal helium correction",
+    "stellarMassCalibration": "normalize the registered 3.6 micron morphology to the published SPARC luminosity times one universal stellar mass-to-light ratio of 0.5 solar units",
+    "stellarMassToLightSolar": 0.5,
+    "heliumFactor": 1.36,
+    "commonResolution": "Gaussian-match the stellar map to the THINGS geometric-mean beam after face-on resampling; record the approximation",
+    "faceOnTransform": "tangent-plane sky offsets are rotated by the image-only position angle and the minor axis is expanded by 1/cos(inclination)",
+    "extent": "1.20 times the larger of the registered 99.5-percent H I radius and six SPARC effective radii",
+    "grid": {
+      "targetCellsPerThingsBeam": 1.25,
+      "minimumOddCells": 65,
+      "maximumOddCells": 257
+    },
+    "interpolation": "bilinear with an explicit finite-footprint map",
+    "massNormalizationAfterInterpolation": true,
+    "velocityArraysOpened": false,
+    "gravityParameters": 0
+  },
+  "engineeringGates": {
+    "requiredSystems": 4,
+    "requiredValidationArraysOpened": 0,
+    "requiredHoldoutArraysOpened": 0,
+    "requiredVelocityOrDispersionArraysOpened": 0,
+    "maximumGravityParameters": 0,
+    "allMapsFiniteAndNonnegative": true,
+    "maximumGasMassRelativeError": 1e-10,
+    "maximumStellarMassRelativeError": 1e-10,
+    "maximumTotalMassClosureRelativeError": 1e-12,
+    "minimumFiniteFootprintFractionInsideHiR995": 0.90,
+    "maximumOuterCellMassFraction": 0.005,
+    "minimumCellsPerAxis": 65,
+    "maximumCellsPerAxis": 257,
+    "allCellsPerAxisOdd": true,
+    "maximumSourceCoordinateRoundtripArcsec": 0.01,
+    "allOutputBundlesContentHashed": true
+  },
+  "claimBoundary": [
+    "P0739 is development-only registration and may not score or rank gravity formulas.",
+    "Published per-galaxy gas mass, luminosity, distance, inclination, and sky position are baryonic or observational inputs, not gravity parameters.",
+    "The stellar mass-to-light ratio and helium factor are one universal setting shared by every galaxy.",
+    "An image-derived face-on map is not a unique three-dimensional reconstruction.",
+    "Passing registration gates cannot validate a gravity theory; it only makes the later velocity holdout interpretable."
+  ]
+}
