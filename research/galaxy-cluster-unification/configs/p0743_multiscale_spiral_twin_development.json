@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "sigma-p0743-multiscale-spiral-twin-development/1",
+  "stage": "P0743",
+  "status": "frozen_after_p0742_diagnosis_before_formal_multiscale_run",
+  "purpose": "Replace P0742's dwarf-oriented radial/Fourier rings with a position-and-scale-local 2D Haar representation, then repeat the same gravity-independent twin and fixed-formula transport tests.",
+  "parents": {
+    "baryonicMaps": "results/p0741_fused_spiral_baryonic_registration_development/report.json",
+    "baryonicMapsResultSha256": "64776bed1374276bcae8737270febee15a90b1818e0e9dbfc217b13541b1731a",
+    "failedRadialTwin": "results/p0742_spiral_twin_roundtrip_development/report.json",
+    "failedRadialTwinResultSha256": "9c976f5d6068ff00e51865aa90ac3dcb2b1fcb3189da53f794ad676ad9d90ab6"
+  },
+  "developmentDisclosure": "The choice of a local multiscale basis and the three coefficient budgets was informed by P0742 development residuals and exploratory calculations on these same four maps. P0743 is engineering development, not blind validation. The selected budget must be frozen before any validation or holdout array is opened.",
+  "systems": ["NGC2403", "NGC3198", "NGC5055", "NGC7793"],
+  "representation": {
+    "basis": "orthonormal 2D Haar",
+    "inputTransform": "linear surface density",
+    "padding": "zero pad upper index edges to the next power-of-two square",
+    "coefficientSelection": "largest absolute coefficients with deterministic flat-index serialization",
+    "reconstruction": "inverse Haar, crop to source grid, clip negative ringing to zero, restore each component's integrated mass",
+    "tiers": [
+      {"id": "haar_128", "coefficientsPerComponent": 128},
+      {"id": "haar_256", "coefficientsPerComponent": 256},
+      {"id": "haar_512", "coefficientsPerComponent": 512}
+    ],
+    "selectionRule": "Choose the smallest coefficient budget that passes all frozen P0742 morphology, mass, compression, 3D projection, and formula-transport gates."
+  },
+  "formulaTransportFixtures": {
+    "models": [
+      {"id": "newtonian_thin_sheet", "gravityParameters": 0, "gravitationalConstantM3KgS2": 6.67430e-11},
+      {"id": "fixed_simple_mond", "gravityParameters": 0, "a0MPerS2": 1.2e-10, "gravitationalConstantM3KgS2": 6.67430e-11}
+    ],
+    "fieldPaddingFactor": 2.0,
+    "radialScoreBins": 24,
+    "innerRadiusThingsBeams": 1.0,
+    "outerRadius": "published SPARC H I R995",
+    "beamConvolution": false,
+    "observedSpeedComparison": false
+  },
+  "verticalPriors": {"realizationsPerComponent": 3, "seed": 20260802},
+  "gates": {
+    "requiredSystems": 4,
+    "requiredComponentsPerTier": 12,
+    "maximumMassRelativeError": 1e-12,
+    "maximum3dProjectionRelativeError": 1e-12,
+    "totalMedianNormalizedL2": 0.20,
+    "totalMaximumNormalizedL2": 0.30,
+    "totalMinimumPixelCorrelation": 0.95,
+    "gasMaximumNormalizedL2": 0.35,
+    "starsMaximumNormalizedL2": 0.40,
+    "minimumCellToNumericParameterRatio": 20.0,
+    "maximumMedianFormulaRadialSpeedTransportRmseKmS": 3.0,
+    "maximumWorstFormulaRadialSpeedTransportRmseKmS": 8.0,
+    "maximumMedianFormulaLosSpeedTransportRmseKmS": 5.0,
+    "maximumWorstFormulaLosSpeedTransportRmseKmS": 12.0,
+    "requiredValidationArraysOpened": 0,
+    "requiredHoldoutArraysOpened": 0,
+    "requiredObservedVelocityArraysOpened": 0,
+    "maximumFittedGravityParameters": 0
+  },
+  "claimBoundary": [
+    "Haar coefficients are a compressed description of observed baryonic morphology, not new gravitational physics.",
+    "A passing twin must preserve fixed-formula predictions but is not required to reproduce detector noise pixel-for-pixel.",
+    "No observed velocity can enter extraction, coefficient selection, reconstruction, or model scoring in P0743.",
+    "Only a later sealed-target stage can answer whether the real and fake-galaxy speed predictions match actual observations."
+  ]
+}
