@@ -1,4 +1,4 @@
-"""Formula-independent finite-volume execution for typed field-model manifests.
+"""Formula-independent field execution for typed field-model manifests.
 
 This module is the local scientific-worker prototype behind the hosted model
 contract.  It intentionally executes a small, auditable equation language
@@ -14,6 +14,11 @@ evaluated from the submitted expression tree, so the same path can represent
 Poisson gravity, density-dependent Refracted Gravity, AQUAL-like nonlinear
 equations, and coupled QUMOND-like equations. The cylindrical axis is a
 regularity boundary with zero radial flux, never a fabricated Dirichlet wall.
+
+The same manifest path also provides a direct periodic FFT Poisson solver on
+uniform Cartesian 2-D and 3-D grids.  Its torus zero mode and potential gauge
+are explicit model controls; a non-solvable mean source is never silently
+discarded unless the confirmed manifest requests mean subtraction.
 """
 
 from __future__ import annotations
@@ -258,6 +263,78 @@ def _linear_same_convolution(
     return apply(field)
 
 
+def _periodic_wavenumber_components(
+    shape: Sequence[int], spacing: Sequence[float]
+) -> tuple[tuple[Array, ...], Array]:
+    """Return broadcast wave-number components and ``|k|^2`` for a periodic grid."""
+
+    if len(shape) != len(spacing):
+        raise ValueError("periodic wave numbers require one spacing per dimension")
+    components: list[Array] = []
+    k_squared = np.zeros(tuple(int(value) for value in shape), dtype=float)
+    for axis, (count, step) in enumerate(zip(shape, spacing, strict=True)):
+        frequency = 2.0 * np.pi * np.fft.fftfreq(int(count), d=float(step))
+        broadcast_shape = [1] * len(shape)
+        broadcast_shape[axis] = int(count)
+        component = frequency.reshape(broadcast_shape)
+        components.append(component)
+        k_squared += np.square(component)
+    return tuple(components), k_squared
+
+
+def _periodic_first_derivative_components(
+    shape: Sequence[int], spacing: Sequence[float]
+) -> tuple[Array, ...]:
+    """Return real-field derivative wave numbers with even-grid Nyquist modes zeroed."""
+
+    components: list[Array] = []
+    for axis, (count, step) in enumerate(zip(shape, spacing, strict=True)):
+        frequency = 2.0 * np.pi * np.fft.fftfreq(int(count), d=float(step))
+        if int(count) % 2 == 0:
+            frequency[int(count) // 2] = 0.0
+        broadcast_shape = [1] * len(shape)
+        broadcast_shape[axis] = int(count)
+        components.append(frequency.reshape(broadcast_shape))
+    return tuple(components)
+
+
+def _periodic_spectral_gradient(
+    field: Array, spacing: Sequence[float]
+) -> tuple[Array, ...]:
+    values = np.asarray(field, dtype=float)
+    components = _periodic_first_derivative_components(values.shape, spacing)
+    transformed = np.fft.fftn(values)
+    return tuple(
+        np.asarray(np.fft.ifftn(1j * component * transformed).real, dtype=float)
+        for component in components
+    )
+
+
+def _periodic_spectral_divergence(
+    vector: tuple[Array, ...], spacing: Sequence[float]
+) -> Array:
+    if len(vector) != len(spacing):
+        raise ValueError("periodic divergence requires one component per dimension")
+    shape = np.asarray(vector[0]).shape
+    if any(np.asarray(component).shape != shape for component in vector):
+        raise ValueError("periodic vector components must share one grid shape")
+    components = _periodic_first_derivative_components(shape, spacing)
+    transformed = sum(
+        1j * wave_number * np.fft.fftn(np.asarray(component, dtype=float))
+        for wave_number, component in zip(components, vector, strict=True)
+    )
+    return np.asarray(np.fft.ifftn(transformed).real, dtype=float)
+
+
+def _periodic_spectral_laplacian(field: Array, spacing: Sequence[float]) -> Array:
+    values = np.asarray(field, dtype=float)
+    _components, k_squared = _periodic_wavenumber_components(values.shape, spacing)
+    return np.asarray(
+        np.fft.ifftn(-k_squared * np.fft.fftn(values)).real,
+        dtype=float,
+    )
+
+
 def evaluate_field_expression(
     node: Mapping[str, Any],
     *,
@@ -265,6 +342,7 @@ def evaluate_field_expression(
     parameters: Mapping[str, float],
     spacing: Sequence[float],
     coordinate_system: str | None = None,
+    differential_scheme: str = "finite_difference",
 ) -> ExpressionValue:
     """Evaluate a validated field-expression tree using NumPy operations."""
 
@@ -290,6 +368,7 @@ def evaluate_field_expression(
             parameters=parameters,
             spacing=spacing,
             coordinate_system=coordinate_system,
+            differential_scheme=differential_scheme,
         )
         for argument in arguments
     ]
@@ -315,12 +394,16 @@ def evaluate_field_expression(
             raise ValueError("generic worker v1 does not take the gradient of a vector")
         if coordinate_system == "axisymmetric_cylindrical":
             return _axisymmetric_gradient(np.asarray(values[0], dtype=float), spacing)
+        if differential_scheme == "periodic_spectral":
+            return _periodic_spectral_gradient(np.asarray(values[0], dtype=float), spacing)
         return tuple(np.gradient(values[0], *spacing, edge_order=2))
     if operation == "divergence":
         if not isinstance(values[0], tuple) or len(values[0]) != len(spacing):
             raise ValueError("divergence requires one vector component per grid dimension")
         if coordinate_system == "axisymmetric_cylindrical":
             return _axisymmetric_divergence(values[0], spacing)
+        if differential_scheme == "periodic_spectral":
+            return _periodic_spectral_divergence(values[0], spacing)
         return sum(
             np.gradient(component, spacing[axis], axis=axis, edge_order=2)
             for axis, component in enumerate(values[0])
@@ -337,6 +420,10 @@ def evaluate_field_expression(
                 coordinate_system=coordinate_system,
             )
             return result
+        if differential_scheme == "periodic_spectral":
+            return _periodic_spectral_laplacian(
+                np.asarray(values[0], dtype=float), spacing
+            )
         result = np.zeros_like(values[0], dtype=float)
         for axis, step in enumerate(spacing):
             first = np.gradient(values[0], step, axis=axis, edge_order=2)
@@ -376,6 +463,7 @@ def evaluate_field_expression(
             parameters=parameters,
             spacing=spacing,
             coordinate_system=coordinate_system,
+            differential_scheme=differential_scheme,
         )
         if isinstance(result, tuple):
             raise ValueError("vector piecewise expressions are not supported in worker v1")
@@ -386,6 +474,7 @@ def evaluate_field_expression(
                 parameters=parameters,
                 spacing=spacing,
                 coordinate_system=coordinate_system,
+                differential_scheme=differential_scheme,
             )
             value = evaluate_field_expression(
                 branch["value"],
@@ -393,6 +482,7 @@ def evaluate_field_expression(
                 parameters=parameters,
                 spacing=spacing,
                 coordinate_system=coordinate_system,
+                differential_scheme=differential_scheme,
             )
             result = np.where(condition, value, result)
         return result
@@ -432,6 +522,241 @@ def _elliptic_lhs(node: Mapping[str, Any]) -> tuple[str, Mapping[str, Any]]:
     else:
         coefficient = {"op": "multiply", "args": coefficient_factors}
     return target, coefficient
+
+
+def _direct_laplacian_target(node: Mapping[str, Any]) -> str | None:
+    """Return the scalar field in an exact ``laplacian(field)`` expression."""
+
+    if node.get("op") != "laplacian" or len(node.get("args", [])) != 1:
+        return None
+    child = node["args"][0]
+    if not isinstance(child, Mapping) or set(child) != {"field"}:
+        return None
+    return str(child["field"])
+
+
+def _referenced_field_names(value: Any) -> set[str]:
+    if isinstance(value, Mapping):
+        names = {str(value["field"])} if "field" in value else set()
+        for child in value.values():
+            names.update(_referenced_field_names(child))
+        return names
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+        names: set[str] = set()
+        for child in value:
+            names.update(_referenced_field_names(child))
+        return names
+    return set()
+
+
+def _solve_periodic_fft_poisson_equations(
+    *,
+    equations: Sequence[Mapping[str, Any]],
+    fields: dict[str, Array],
+    solved_names: Sequence[str],
+    parameters: Mapping[str, float],
+    spacing: Sequence[float],
+    shape: tuple[int, ...],
+    solver: Mapping[str, Any],
+    residual_tolerance: float,
+) -> tuple[dict[str, float], list[dict[str, Any]], dict[str, Any]]:
+    """Directly solve independent periodic scalar Poisson equations by FFT."""
+
+    ignored_controls = sorted(
+        key
+        for key in {
+            "damping",
+            "coefficientFloor",
+            "initialization",
+            "nonlinearMethod",
+            "lineSearch",
+            "andersonAlpha",
+            "andersonHistory",
+            "andersonRegularization",
+            "krylovMethod",
+            "krylovInnerIterations",
+            "picardWarmupIterations",
+            "picardWarmupDamping",
+            "nonlocalBoundary",
+            "convolutionMode",
+            "kernelOrigin",
+            "convolutionMeasure",
+        }
+        if key in solver
+    )
+    if ignored_controls:
+        raise ValueError(
+            "fft_poisson cannot declare iterative or nonlocal controls that it "
+            f"would ignore: {', '.join(ignored_controls)}"
+        )
+    zero_mode_policy = str(solver.get("periodicZeroMode", ""))
+    if zero_mode_policy not in {"require_zero_mean", "subtract_mean"}:
+        raise ValueError(
+            "fft_poisson requires solver.periodicZeroMode=require_zero_mean or subtract_mean"
+        )
+    if solver.get("potentialGauge") != "zero_mean":
+        raise ValueError("fft_poisson requires solver.potentialGauge='zero_mean'")
+    zero_mode_tolerance = float(solver.get("zeroModeTolerance", math.nan))
+    if not math.isfinite(zero_mode_tolerance) or not 0 < zero_mode_tolerance < 1:
+        raise ValueError("fft_poisson zeroModeTolerance must lie in (0,1)")
+    if int(solver.get("maxIterations", 0)) != 1:
+        raise ValueError("fft_poisson is a direct solve and requires maxIterations=1")
+
+    solved_set = set(str(name) for name in solved_names)
+    _components, k_squared = _periodic_wavenumber_components(shape, spacing)
+    nonzero = k_squared > 0.0
+    nonzero_wavenumbers = np.sqrt(k_squared[nonzero])
+    cell_volume = float(np.prod(np.asarray(spacing, dtype=float)))
+    domain_volume = cell_volume * float(np.prod(shape))
+    residuals: dict[str, float] = {}
+    equation_diagnostics: list[dict[str, Any]] = []
+
+    for equation in equations:
+        equation_id = str(equation["id"])
+        target = _direct_laplacian_target(equation["lhs"])
+        if target is None:
+            raise ValueError(
+                f"fft_poisson equation {equation_id} lhs must be exactly laplacian(solved_field)"
+            )
+        solved_dependencies = sorted(
+            _referenced_field_names(equation["rhs"]) & solved_set
+        )
+        if solved_dependencies:
+            raise ValueError(
+                "fft_poisson v1 requires independent right-hand sides; "
+                f"equation {equation_id} references solved fields: {', '.join(solved_dependencies)}"
+            )
+        source = _scalar_array(
+            evaluate_field_expression(
+                equation["rhs"],
+                fields=fields,
+                parameters=parameters,
+                spacing=spacing,
+                coordinate_system=(
+                    "cartesian_2d" if len(shape) == 2 else "cartesian_3d"
+                ),
+                differential_scheme="periodic_spectral",
+            ),
+            shape,
+            f"equation {equation_id} rhs",
+        )
+        source_mean = float(np.mean(source))
+        source_rms = float(np.sqrt(np.mean(np.square(source))))
+        source_mean_to_rms = abs(source_mean) / max(
+            source_rms, np.finfo(float).tiny
+        )
+        if (
+            zero_mode_policy == "require_zero_mean"
+            and source_mean_to_rms > zero_mode_tolerance
+        ):
+            raise ValueError(
+                f"fft_poisson equation {equation_id} is not solvable on a periodic domain: "
+                f"abs(mean(source))/rms(source)={source_mean_to_rms:.6g} exceeds "
+                f"zeroModeTolerance={zero_mode_tolerance:.6g}"
+            )
+
+        effective_source = source - source_mean
+        source_hat = np.fft.fftn(effective_source)
+        potential_hat = np.zeros(shape, dtype=complex)
+        potential_hat[nonzero] = -source_hat[nonzero] / k_squared[nonzero]
+        potential_complex = np.fft.ifftn(potential_hat)
+        maximum_imaginary = float(np.max(np.abs(potential_complex.imag)))
+        potential = np.asarray(potential_complex.real, dtype=float)
+        potential -= float(np.mean(potential))
+        fields[target] = potential
+
+        reconstructed = np.asarray(
+            np.fft.ifftn(-k_squared * np.fft.fftn(potential)).real,
+            dtype=float,
+        )
+        residual_field = reconstructed - effective_source
+        residual_rms = float(np.sqrt(np.mean(np.square(residual_field))))
+        effective_source_rms = float(
+            np.sqrt(np.mean(np.square(effective_source)))
+        )
+        reconstructed_rms = float(
+            np.sqrt(np.mean(np.square(reconstructed)))
+        )
+        relative_residual = residual_rms / max(
+            effective_source_rms,
+            reconstructed_rms,
+            np.finfo(float).tiny,
+        )
+        residuals[equation_id] = relative_residual
+
+        sample_count = float(np.prod(shape))
+        gradient_energy_integral = float(
+            np.sum(k_squared * np.square(np.abs(potential_hat)))
+            * cell_volume
+            / sample_count
+        )
+        minus_potential_source_integral = float(
+            -np.sum(potential * effective_source) * cell_volume
+        )
+        energy_balance_relative_error = abs(
+            gradient_energy_integral - minus_potential_source_integral
+        ) / max(
+            abs(gradient_energy_integral),
+            abs(minus_potential_source_integral),
+            np.finfo(float).tiny,
+        )
+        potential_scale = max(
+            float(np.max(np.abs(potential))), np.finfo(float).tiny
+        )
+        equation_diagnostics.append(
+            {
+                "equation_id": equation_id,
+                "target_field": target,
+                "raw_source_mean": source_mean,
+                "raw_source_rms": source_rms,
+                "raw_source_mean_to_rms": source_mean_to_rms,
+                "removed_source_mean": source_mean,
+                "raw_source_integral": float(np.sum(source) * cell_volume),
+                "effective_source_integral": float(
+                    np.sum(effective_source) * cell_volume
+                ),
+                "potential_mean": float(np.mean(potential)),
+                "maximum_imaginary_leakage": maximum_imaginary,
+                "relative_imaginary_leakage": maximum_imaginary
+                / potential_scale,
+                "relative_spectral_residual": relative_residual,
+                "gradient_energy_integral": gradient_energy_integral,
+                "minus_potential_source_integral": minus_potential_source_integral,
+                "energy_balance_relative_error": energy_balance_relative_error,
+            }
+        )
+
+    metadata = {
+        "method": "direct_periodic_spectral_poisson",
+        "operator_convention": "continuum_fourier_laplacian",
+        "boundary": "periodic_all_axes",
+        "zero_mode_policy": zero_mode_policy,
+        "zero_mode_tolerance": zero_mode_tolerance,
+        "potential_gauge": "zero_mean",
+        "differential_observables": "periodic_spectral",
+        "first_derivative_nyquist_policy": "zero_for_real_nodal_derivative",
+        "cell_volume": cell_volume,
+        "domain_volume": domain_volume,
+        "domain_lengths": [
+            float(count) * float(step)
+            for count, step in zip(shape, spacing, strict=True)
+        ],
+        "nonzero_mode_count": int(np.count_nonzero(nonzero)),
+        "minimum_nonzero_wavenumber": float(np.min(nonzero_wavenumbers)),
+        "maximum_wavenumber": float(np.max(nonzero_wavenumbers)),
+        "equations": equation_diagnostics,
+    }
+    history = [
+        {
+            "iteration": 1,
+            "maximum_relative_update": 0.0,
+            "equation_residuals": dict(residuals),
+            "method": "direct_solve",
+        }
+    ]
+    if max(residuals.values(), default=0.0) > residual_tolerance:
+        metadata["failure"] = "spectral_residual_exceeds_tolerance"
+    return residuals, history, metadata
 
 
 def _boundary_array(
@@ -1157,6 +1482,8 @@ def solve_field_manifest(
         name: float(definition.get("value", definition.get("initial")))
         for name, definition in manifest.get("parameters", {}).items()
     }
+    solver = manifest.get("solver", {})
+    solver_family = str(solver.get("family", ""))
     boundaries = dict(boundary_values or {})
     solved_names = [
         name for name, definition in manifest.get("fields", {}).items() if definition.get("role") == "solved"
@@ -1164,21 +1491,35 @@ def solve_field_manifest(
     for name in solved_names:
         definition = manifest["fields"][name]
         boundary_type = definition.get("boundary", {}).get("type")
-        if boundary_type not in {"dirichlet", "isolated"}:
-            raise ValueError(f"worker v1 cannot execute boundary type {boundary_type!r} for {name}")
-        default = definition.get("boundary", {}).get("value", 0.0)
-        fields[name] = _boundary_array(
-            boundaries.get(name, default),
-            shape,
-            coordinate_system=coordinate_system,
-        )
+        if solver_family == "fft_poisson":
+            if coordinate_system not in {"cartesian_2d", "cartesian_3d"}:
+                raise ValueError("fft_poisson requires Cartesian 2D or 3D geometry")
+            if boundary_type != "periodic":
+                raise ValueError(
+                    f"fft_poisson requires a periodic boundary for solved field {name}"
+                )
+            if name in boundaries:
+                raise ValueError(
+                    f"fft_poisson field {name} cannot accept a boundary-value override"
+                )
+            fields[name] = np.zeros(shape, dtype=float)
+        else:
+            if boundary_type not in {"dirichlet", "isolated"}:
+                raise ValueError(
+                    f"worker v1 cannot execute boundary type {boundary_type!r} for {name}"
+                )
+            default = definition.get("boundary", {}).get("value", 0.0)
+            fields[name] = _boundary_array(
+                boundaries.get(name, default),
+                shape,
+                coordinate_system=coordinate_system,
+            )
 
     equations = list(manifest.get("equations", []))
     targets = [_elliptic_lhs(equation["lhs"])[0] for equation in equations]
     if sorted(targets) != sorted(solved_names):
         raise ValueError("worker v1 requires exactly one elliptic equation per solved field")
 
-    solver = manifest.get("solver", {})
     uses_convolution = _contains_operator(
         {
             "equations": manifest.get("equations", []),
@@ -1249,6 +1590,57 @@ def solve_field_manifest(
         )
     if not 0 < picard_warmup_damping <= 1:
         raise ValueError("solver picardWarmupDamping must lie in (0,1]")
+
+    if solver_family == "fft_poisson":
+        residuals, history, fft_metadata = _solve_periodic_fft_poisson_equations(
+            equations=equations,
+            fields=fields,
+            solved_names=solved_names,
+            parameters=parameters,
+            spacing=steps,
+            shape=shape,
+            solver=solver,
+            residual_tolerance=residual_tolerance,
+        )
+        converged = max(residuals.values(), default=0.0) <= residual_tolerance
+        observables = {
+            str(observable["id"]): evaluate_field_expression(
+                observable["expression"],
+                fields=fields,
+                parameters=parameters,
+                spacing=steps,
+                coordinate_system=coordinate_system,
+                differential_scheme="periodic_spectral",
+            )
+            for observable in manifest.get("observables", [])
+        }
+        return GenericFieldSolution(
+            fields={name: fields[name] for name in solved_names},
+            observables=observables,
+            converged=converged,
+            iterations=1,
+            maximum_relative_update=0.0,
+            equation_residuals=residuals,
+            residual_history=tuple(history),
+            metadata={
+                "engine": "generic-divergence-field-worker-v1",
+                "solver_family": solver_family,
+                "equation_count": len(equations),
+                "solved_field_count": len(solved_names),
+                "multi_field_update_scheme": None,
+                "dimensions": dimensions,
+                "coordinate_system": coordinate_system,
+                "shape": shape,
+                "spacing": steps,
+                "boundary_approximation": None,
+                "requested_maximum_iterations": requested_maximum_iterations,
+                "executed_maximum_iterations": 1,
+                "maximum_iterations_limited_by_worker": False,
+                "relative_update_tolerance": tolerance,
+                "equation_residual_tolerance": residual_tolerance,
+                "fft_poisson": fft_metadata,
+            },
+        )
 
     if initialization == "linearized_unit_coefficient":
         for equation in equations:

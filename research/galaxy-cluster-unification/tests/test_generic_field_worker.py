@@ -57,6 +57,203 @@ def manufactured_manifest(dimensions: int, *, variable_coefficient: bool = False
     }
 
 
+def periodic_fft_manifest(
+    dimensions: int, *, zero_mode_policy: str = "require_zero_mean"
+) -> dict:
+    manifest = manufactured_manifest(dimensions)
+    manifest["name"] = "Manufactured periodic FFT field"
+    manifest["fields"]["u"]["boundary"] = {"type": "periodic"}
+    manifest["solver"] = {
+        "family": "fft_poisson",
+        "relativeTolerance": 1e-12,
+        "residualTolerance": 1e-12,
+        "maxIterations": 1,
+        "periodicZeroMode": zero_mode_policy,
+        "potentialGauge": "zero_mean",
+        "zeroModeTolerance": 1e-12,
+    }
+    return manifest
+
+
+@pytest.mark.parametrize(
+    "shape,spacing,modes",
+    [
+        ((24, 20), (0.3, 0.7), (2, 3)),
+        ((12, 10, 8), (0.25, 0.4, 0.8), (1, 2, 3)),
+    ],
+)
+def test_periodic_fft_poisson_recovers_anisotropic_fourier_modes(
+    shape: tuple[int, ...],
+    spacing: tuple[float, ...],
+    modes: tuple[int, ...],
+) -> None:
+    axes = [
+        np.arange(count, dtype=float) * step
+        for count, step in zip(shape, spacing, strict=True)
+    ]
+    mesh = np.meshgrid(*axes, indexing="ij")
+    lengths = [count * step for count, step in zip(shape, spacing, strict=True)]
+    factors = [
+        np.sin(2.0 * np.pi * mode * coordinate / length)
+        for mode, coordinate, length in zip(modes, mesh, lengths, strict=True)
+    ]
+    expected = np.prod(factors, axis=0)
+    k_squared = sum(
+        (2.0 * np.pi * mode / length) ** 2
+        for mode, length in zip(modes, lengths, strict=True)
+    )
+    forcing = -k_squared * expected
+
+    solution = solve_field_manifest(
+        periodic_fft_manifest(len(shape)),
+        {"forcing": forcing},
+        spacing,
+    )
+
+    relative_error = np.linalg.norm(solution.fields["u"] - expected) / np.linalg.norm(expected)
+    assert solution.converged
+    assert solution.iterations == 1
+    assert solution.maximum_relative_update == 0.0
+    assert relative_error < 2e-12
+    assert max(solution.equation_residuals.values()) < 2e-13
+    metadata = solution.metadata["fft_poisson"]
+    assert metadata["operator_convention"] == "continuum_fourier_laplacian"
+    assert metadata["domain_lengths"] == pytest.approx(lengths)
+    assert metadata["zero_mode_policy"] == "require_zero_mean"
+    diagnostic = metadata["equations"][0]
+    assert abs(diagnostic["potential_mean"]) < 1e-14
+    assert diagnostic["energy_balance_relative_error"] < 2e-13
+    assert diagnostic["relative_imaginary_leakage"] < 2e-13
+
+    expected_first_gradient = (
+        (2.0 * np.pi * modes[0] / lengths[0])
+        * np.cos(2.0 * np.pi * modes[0] * mesh[0] / lengths[0])
+        * np.prod(factors[1:], axis=0)
+    )
+    gradient_error = np.linalg.norm(
+        solution.observables["gradient"][0] - expected_first_gradient
+    ) / np.linalg.norm(expected_first_gradient)
+    assert gradient_error < 2e-12
+
+
+def test_periodic_fft_zero_mode_subtraction_is_explicit_and_reported() -> None:
+    shape = (18, 14)
+    spacing = (0.4, 0.7)
+    x, y = np.meshgrid(
+        np.arange(shape[0]) * spacing[0],
+        np.arange(shape[1]) * spacing[1],
+        indexing="ij",
+    )
+    expected = np.sin(2.0 * np.pi * x / (shape[0] * spacing[0])) * np.cos(
+        4.0 * np.pi * y / (shape[1] * spacing[1])
+    )
+    k_squared = (2.0 * np.pi / (shape[0] * spacing[0])) ** 2 + (
+        4.0 * np.pi / (shape[1] * spacing[1])
+    ) ** 2
+    offset = 7.5
+    forcing = -k_squared * expected + offset
+
+    solution = solve_field_manifest(
+        periodic_fft_manifest(2, zero_mode_policy="subtract_mean"),
+        {"forcing": forcing},
+        spacing,
+    )
+
+    assert solution.converged
+    assert np.linalg.norm(solution.fields["u"] - expected) / np.linalg.norm(expected) < 2e-12
+    diagnostic = solution.metadata["fft_poisson"]["equations"][0]
+    assert diagnostic["removed_source_mean"] == pytest.approx(offset)
+    assert abs(diagnostic["effective_source_integral"]) < 1e-10
+    assert abs(diagnostic["raw_source_integral"]) > 1.0
+
+
+def test_periodic_fft_resolution_sensitivity_is_spectral_for_resolved_mode() -> None:
+    errors = []
+    amplitudes = []
+    for cells in (12, 24, 48):
+        spacing = 2.0 / cells
+        axis = np.arange(cells, dtype=float) * spacing
+        x, y = np.meshgrid(axis, axis, indexing="ij")
+        expected = np.sin(2.0 * np.pi * x / 2.0) * np.cos(
+            4.0 * np.pi * y / 2.0
+        )
+        k_squared = (2.0 * np.pi / 2.0) ** 2 + (4.0 * np.pi / 2.0) ** 2
+        solution = solve_field_manifest(
+            periodic_fft_manifest(2),
+            {"forcing": -k_squared * expected},
+            spacing,
+        )
+        errors.append(
+            np.linalg.norm(solution.fields["u"] - expected)
+            / np.linalg.norm(expected)
+        )
+        amplitudes.append(float(np.max(solution.fields["u"])))
+    assert max(errors) < 2e-12
+    assert max(amplitudes) - min(amplitudes) < 2e-12
+
+
+def test_periodic_fft_even_grid_nyquist_policy_is_real_and_audited() -> None:
+    shape = (16, 14)
+    spacing = (0.3, 0.5)
+    i = np.arange(shape[0], dtype=float)[:, None]
+    y = np.arange(shape[1], dtype=float)[None, :] * spacing[1]
+    expected = np.power(-1.0, i) * np.cos(
+        2.0 * np.pi * y / (shape[1] * spacing[1])
+    )
+    k_squared = (np.pi / spacing[0]) ** 2 + (
+        2.0 * np.pi / (shape[1] * spacing[1])
+    ) ** 2
+    solution = solve_field_manifest(
+        periodic_fft_manifest(2),
+        {"forcing": -k_squared * expected},
+        spacing,
+    )
+    assert np.linalg.norm(solution.fields["u"] - expected) / np.linalg.norm(
+        expected
+    ) < 2e-12
+    assert np.max(np.abs(solution.observables["gradient"][0])) < 1e-12
+    metadata = solution.metadata["fft_poisson"]
+    assert metadata["first_derivative_nyquist_policy"] == (
+        "zero_for_real_nodal_derivative"
+    )
+    assert metadata["equations"][0]["energy_balance_relative_error"] < 2e-13
+
+
+def test_periodic_fft_rejects_a_nonzero_mean_without_subtraction_policy() -> None:
+    with pytest.raises(ValueError, match="not solvable on a periodic domain"):
+        solve_field_manifest(
+            periodic_fft_manifest(2),
+            {"forcing": np.ones((9, 11), dtype=float)},
+            (0.5, 0.8),
+        )
+
+
+def test_periodic_fft_rejects_nonperiodic_or_coupled_contracts() -> None:
+    forcing = np.zeros((9, 9), dtype=float)
+    manifest = periodic_fft_manifest(2)
+    manifest["fields"]["u"]["boundary"] = {"type": "dirichlet", "value": 0.0}
+    with pytest.raises(ValueError, match="requires a periodic boundary"):
+        solve_field_manifest(manifest, {"forcing": forcing}, 1.0)
+
+    manifest = periodic_fft_manifest(2)
+    manifest["equations"][0]["rhs"] = {
+        "op": "add",
+        "args": [{"field": "forcing"}, {"field": "u"}],
+    }
+    with pytest.raises(ValueError, match="requires independent right-hand sides"):
+        solve_field_manifest(manifest, {"forcing": forcing}, 1.0)
+
+
+def test_periodic_fft_rejects_boundary_value_overrides() -> None:
+    with pytest.raises(ValueError, match="cannot accept a boundary-value override"):
+        solve_field_manifest(
+            periodic_fft_manifest(2),
+            {"forcing": np.zeros((9, 9), dtype=float)},
+            1.0,
+            boundary_values={"u": 0.0},
+        )
+
+
 @pytest.mark.parametrize("dimensions,cells", [(2, 33), (3, 17)])
 def test_manufactured_sine_solution_in_two_and_three_dimensions(dimensions: int, cells: int):
     axes = [np.linspace(0.0, 1.0, cells) for _ in range(dimensions)]

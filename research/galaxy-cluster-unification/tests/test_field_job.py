@@ -135,8 +135,10 @@ def manufactured_values(cells: int = 25) -> tuple[np.ndarray, np.ndarray, float]
 def test_python_model_hash_matches_hosted_javascript_validator():
     root = ROOT / "hosted-simulator" / "examples" / "models"
     newtonian = json.loads((root / "newtonian-poisson.json").read_text(encoding="utf-8"))
+    periodic = json.loads((root / "periodic-poisson.json").read_text(encoding="utf-8"))
     refracted = json.loads((root / "refracted-gravity.json").read_text(encoding="utf-8"))
     assert model_sha256(newtonian) == "43738f2c7bb3c4e94193763cf46f39b2a47fa852b25d1c063fef00fa7e1aa661"
+    assert model_sha256(periodic) == "cc3bc73ccb40db010cce358c84babe9f3455cfb48d5c441dd94e8c928a9b9cbe"
     assert model_sha256(refracted) == "4a0c9be0ba6f430d4d073f0ee6bf1e98de437908de81d0ad533261fea5d14bef"
 
 
@@ -280,6 +282,73 @@ def test_identical_job_replays_have_identical_scientific_hashes(tmp_path: Path):
     }.issubset(artifact_names)
 
 
+def test_periodic_fft_job_runs_end_to_end_with_hash_identical_replay(
+    tmp_path: Path,
+) -> None:
+    shape = (18, 14)
+    spacing = (0.4, 0.7)
+    x, y = np.meshgrid(
+        np.arange(shape[0]) * spacing[0],
+        np.arange(shape[1]) * spacing[1],
+        indexing="ij",
+    )
+    expected = np.sin(4.0 * np.pi * x / (shape[0] * spacing[0])) * np.cos(
+        2.0 * np.pi * y / (shape[1] * spacing[1])
+    )
+    k_squared = (4.0 * np.pi / (shape[0] * spacing[0])) ** 2 + (
+        2.0 * np.pi / (shape[1] * spacing[1])
+    ) ** 2
+    forcing = -k_squared * expected
+    model = manufactured_manifest()
+    model["name"] = "Content-addressed periodic FFT field"
+    model["fields"]["u"]["boundary"] = {"type": "periodic"}
+    model["solver"] = {
+        "family": "fft_poisson",
+        "relativeTolerance": 1e-12,
+        "residualTolerance": 1e-12,
+        "maxIterations": 1,
+        "periodicZeroMode": "require_zero_mean",
+        "potentialGauge": "zero_mean",
+        "zeroModeTolerance": 1e-12,
+    }
+    confirm_manifest(model)
+    metadata = bundle_metadata(spacing[0])
+    metadata["geometry"]["spacing"] = list(spacing)
+    metadata["geometry"]["referenceFrame"] = "manufactured_periodic_rectangle"
+    bundle_path = tmp_path / "periodic_bundle"
+    write_array_bundle(bundle_path, {"raw_forcing": forcing}, metadata)
+    request = {
+        "schemaVersion": "sigma-field-job-request/1",
+        "requestedObservables": ["gradient"],
+        "seed": 29,
+    }
+    first = execute_field_job(model, bundle_path, request, tmp_path / "periodic_one")
+    second = execute_field_job(model, bundle_path, request, tmp_path / "periodic_two")
+
+    assert first["state"] == "succeeded"
+    assert first["jobSha256"] == second["jobSha256"]
+    assert first["scientificResultSha256"] == second["scientificResultSha256"]
+    result = json.loads(
+        (tmp_path / "periodic_one" / "scientific_result.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert result["numericalMetadata"]["solver_family"] == "fft_poisson"
+    assert result["numericalMetadata"]["fft_poisson"]["potential_gauge"] == (
+        "zero_mean"
+    )
+    assert "do not represent an isolated far field" in " ".join(
+        result["claimBoundary"]
+    )
+    with np.load(
+        tmp_path / "periodic_one" / "fields.npz", allow_pickle=False
+    ) as archive:
+        relative_error = np.linalg.norm(archive["u"] - expected) / np.linalg.norm(
+            expected
+        )
+    assert relative_error < 2e-12
+
+
 def test_axisymmetric_job_binds_coordinates_and_executes_end_to_end(tmp_path: Path):
     cells = 33
     axis = np.linspace(0.0, 1.0, cells)
@@ -327,7 +396,7 @@ def test_axisymmetric_job_binds_coordinates_and_executes_end_to_end(tmp_path: Pa
     assert relative_error < 0.003
     assert job["geometry"]["axisOrder"] == ["r", "z"]
     assert job["geometry"]["origin"] == [0.0, 0.0]
-    assert job["worker"]["version"] == "1.5.0-preview"
+    assert job["worker"]["version"] == "1.6.0-preview"
     assert result["numericalMetadata"]["coordinate_system"] == (
         "axisymmetric_cylindrical"
     )

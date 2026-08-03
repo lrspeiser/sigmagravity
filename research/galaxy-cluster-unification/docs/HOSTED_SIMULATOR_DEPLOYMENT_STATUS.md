@@ -802,3 +802,31 @@ and private acknowledgement hash
 The database, outbox scheduler, safe scientific worker, trusted plug-in
 registry, and sandbox host remain unconnected; no hosted heavy or uploaded-code
 execution is claimed.
+
+## v0.35 periodic FFT Poisson worker release
+
+The v0.35 release closes the mismatch in which `fft_poisson` and periodic
+boundaries were valid manifest vocabulary but were not executable by the
+generic worker. The worker now performs a direct continuum-Fourier Poisson
+solve on uniform periodic Cartesian 2-D and 3-D grids without a theory-name
+branch. The confirmed model must select a zero-mode source policy and a
+zero-mean potential gauge. Non-solvable means, nonperiodic fields,
+boundary-value overrides, coupled/variable-coefficient equations and controls
+the direct solver would ignore fail before execution.
+
+The result publishes spectral residual, source conservation, gauge,
+imaginary-leakage, wavenumber and integration-by-parts energy diagnostics.
+Field observables use the same periodic spectral derivative convention. The
+test suite includes anisotropic 2-D/3-D manufactured modes, explicit source-
+mean subtraction, forbidden-mean and contract rejections, a 12/24/48-cell
+resolution check, deterministic artifact replay, and the real asynchronous
+HTTP path.
+
+The six-case local HTTP acceptance added periodic `24 x 24` and
+`12 x 12 x 12` jobs with relative field errors
+`3.464425937954617e-16` and `4.1083258285824224e-16`. Both passed
+queued/running/succeeded events, source-hash agreement, artifact rehashing and
+zero per-object gravity parameters. The public guide includes the confirmed
+[`periodic-poisson.json`](../hosted-simulator/examples/models/periodic-poisson.json)
+input, measured output and the warning that a periodic torus is not an
+isolated galaxy or cluster.

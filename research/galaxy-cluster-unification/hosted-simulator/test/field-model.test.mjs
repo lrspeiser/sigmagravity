@@ -10,7 +10,7 @@ import {
 const examples = new URL("../examples/models/", import.meta.url);
 const load = (name) => JSON.parse(readFileSync(new URL(name, examples), "utf8"));
 
-for (const name of ["newtonian-poisson.json", "aqual.json", "qumond.json", "refracted-gravity.json", "nonlocal-response.json", "two-potential.json"]) {
+for (const name of ["newtonian-poisson.json", "periodic-poisson.json", "aqual.json", "qumond.json", "refracted-gravity.json", "nonlocal-response.json", "two-potential.json"]) {
   test(`${name} is represented by the same generic manifest`, () => {
     const first = validateFieldModel(load(name));
     const second = validateFieldModel(load(name));
@@ -65,6 +65,50 @@ test("nonlocal convolution requires an explicit, non-periodic physical integral 
   assert.match(result.errors.join(" "), /nonlocalBoundary=zero_padded/);
 });
 
+test("periodic FFT Poisson requires an explicit solvable zero mode and gauge", () => {
+  const manifest = load("periodic-poisson.json");
+  let result = validateFieldModel(manifest);
+  assert.equal(result.valid, true, result.errors.join("; "));
+  assert.equal(result.requiredCapabilities.solverFamily, "fft_poisson");
+
+  delete manifest.solver.periodicZeroMode;
+  result = validateFieldModel(manifest);
+  assert.equal(result.valid, false);
+  assert.match(result.errors.join(" "), /periodicZeroMode/);
+  manifest.solver.periodicZeroMode = "require_zero_mean";
+
+  manifest.fields.Phi.boundary = { type: "isolated" };
+  result = validateFieldModel(manifest);
+  assert.equal(result.valid, false);
+  assert.match(result.errors.join(" "), /boundary.type=periodic/);
+});
+
+test("periodic FFT Poisson rejects variable-coefficient and coupled equations", () => {
+  const variable = load("periodic-poisson.json");
+  variable.equations[0].lhs = {
+    op: "divergence",
+    args: [{ op: "gradient", args: [{ field: "Phi" }] }],
+  };
+  let result = validateFieldModel(variable);
+  assert.equal(result.valid, false);
+  assert.match(result.errors.join(" "), /lhs must be exactly laplacian/);
+
+  const coupled = load("periodic-poisson.json");
+  coupled.equations[0].rhs = {
+    op: "add",
+    args: [coupled.equations[0].rhs, { field: "Phi" }],
+  };
+  result = validateFieldModel(coupled);
+  assert.equal(result.valid, false);
+  assert.match(result.errors.join(" "), /rhs cannot reference solved fields/);
+
+  const ignored = load("periodic-poisson.json");
+  ignored.solver.damping = 0.5;
+  result = validateFieldModel(ignored);
+  assert.equal(result.valid, false);
+  assert.match(result.errors.join(" "), /controls it would ignore/);
+});
+
 test("dimensionally invalid field equation is rejected", () => {
   const manifest = load("newtonian-poisson.json");
   manifest.equations[0].rhs = { field: "rho_b" };
@@ -109,6 +153,8 @@ test("published JSON schema identifies the same manifest version", () => {
   assert.equal(schema.$schema, "https://json-schema.org/draft/2020-12/schema");
   assert.deepEqual(schema.$defs.solver.properties.nonlocalBoundary.enum, ["zero_padded"]);
   assert.deepEqual(schema.$defs.solver.properties.convolutionMeasure.enum, ["physical_volume"]);
+  assert.deepEqual(schema.$defs.solver.properties.periodicZeroMode.enum, ["require_zero_mean", "subtract_mean"]);
+  assert.deepEqual(schema.$defs.solver.properties.potentialGauge.enum, ["zero_mean"]);
 });
 
 test("generic nonlinear solver controls are validated and disclosed", () => {

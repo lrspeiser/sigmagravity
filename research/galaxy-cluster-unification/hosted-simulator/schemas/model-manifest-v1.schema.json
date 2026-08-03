@@ -270,11 +270,26 @@
         "krylovInnerIterations": { "type": "integer", "minimum": 1, "maximum": 200 },
         "picardWarmupIterations": { "type": "integer", "minimum": 0 },
         "picardWarmupDamping": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "periodicZeroMode": { "enum": ["require_zero_mean", "subtract_mean"] },
+        "potentialGauge": { "enum": ["zero_mean"] },
+        "zeroModeTolerance": { "type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1 },
         "nonlocalBoundary": { "enum": ["zero_padded"] },
         "convolutionMode": { "enum": ["linear_same"] },
         "kernelOrigin": { "enum": ["centered_sample"] },
         "convolutionMeasure": { "enum": ["physical_volume"] }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "family": { "const": "fft_poisson" } },
+            "required": ["family"]
+          },
+          "then": {
+            "required": ["periodicZeroMode", "potentialGauge", "zeroModeTolerance"],
+            "properties": { "maxIterations": { "const": 1 } }
+          }
+        }
+      ]
     },
     "parameterPolicy": {
       "type": "object",

@@ -19,6 +19,20 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.35 closes the declared-but-unexecutable periodic FFT Poisson gap in
+the generic worker. A confirmed manifest can now solve independent scalar
+Poisson equations on uniform periodic Cartesian 2-D or 3-D grids. The contract
+requires a zero-mean potential gauge and either rejects a non-solvable mean
+source or subtracts it only when the model explicitly requests that policy.
+The worker reports the removed mean, source integrals, spectral residual,
+imaginary leakage, Fourier-mode support, and the integration-by-parts energy
+balance. Gradients, divergence, and Laplacians used by observables follow the
+same periodic spectral convention. Anisotropic manufactured modes, explicit
+failure cases, three-resolution sensitivity, deterministic artifact replay,
+and real HTTP/container cases cover the implementation. The included
+[`periodic-poisson.json`](examples/models/periodic-poisson.json) example is a
+periodic simulation-cell contract, not an isolated-galaxy approximation.
+
 Version 0.34 adds the first real advanced-code tier without weakening the safe
 formula boundary. An Ed25519-signed manifest binds every source path, byte
 count, SHA-256, resource request, fixed Python 3.13.7/NumPy/SciPy ABI, and the

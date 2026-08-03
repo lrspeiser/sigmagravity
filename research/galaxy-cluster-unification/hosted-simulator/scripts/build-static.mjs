@@ -38,6 +38,7 @@ for (const path of [
   "schemas/production-job-submit-v1.schema.json",
   "schemas/advanced-plugin-v1.schema.json",
   "examples/models/newtonian-poisson.json",
+  "examples/models/periodic-poisson.json",
   "examples/models/aqual.json",
   "examples/models/qumond.json",
   "examples/models/refracted-gravity.json",

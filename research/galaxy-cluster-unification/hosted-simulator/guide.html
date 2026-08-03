@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.34</p>
+          <p class="eyebrow">Researcher guide &middot; v0.35</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -59,6 +59,7 @@
               <tr><td>Frozen resolved velocity evidence</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Separate generator fidelity, formula transport, and observed-velocity accuracy on eight systems.</td></tr>
               <tr><td>Resolved cluster evidence registry</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Four calibrated baryonic maps, two lens-model methods per cluster, raw-catalog readiness, provenance hashes, and explicit blockers without mixing scientific roles.</td></tr>
               <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
+              <tr><td>Periodic FFT Poisson fields</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A direct formula-neutral spectral solve now executes scalar Poisson equations in periodic Cartesian 2D/3D cells, with an explicit source zero-mode policy, zero-mean potential gauge, spectral derivatives, conservation/energy diagnostics, and resolution tests.</td></tr>
               <tr><td>Private content-addressed artifact storage</td><td><span class="state-tag live">Connected</span></td><td><span class="state-tag live">Tested adapter</span></td><td>Private immutable objects use a SHA-256-derived path, bounded size, idempotent writes, and byte-for-byte rehashing after write and on every read. This is storage acceptance, not job execution.</td></tr>
               <tr><td>Durable at-least-once queue</td><td><span class="state-tag live">Deployment canary</span></td><td><span class="state-tag live">Failure suite</span></td><td>A private queue consumer writes a deployment-bound acknowledgement to the private object store. Publishing is seven-day deduplicated; the job contract separately handles duplicate delivery, leases, retries, and stale workers.</td></tr>
               <tr><td>Transactional Postgres job control</td><td><span class="state-tag partial">Awaiting database</span></td><td><span class="state-tag live">Postgres acceptance</span></td><td>Eleven tables cover the transactional outbox, models, uploads, jobs/events/attempts/artifacts, hashed project credentials, audit events, and quotas. Idempotency conflicts, isolation, leases, cancellation races, terminal finalization, and repeatable migrations pass against an embedded PostgreSQL engine. Horizon3 must accept Neon's Marketplace terms before the free database can be provisioned.</td></tr>
@@ -773,6 +774,49 @@ credible_interval_ready</code></pre></div>
             </div>
             <div class="meaning-strip"><strong>What the signature proves:</strong> the manifest was signed by the private key corresponding to the supplied public key and has not changed. <strong>What it does not prove:</strong> that the author is trusted, the listed files match their hashes, or the science is correct. The isolated host must separately rehash every byte and require an active operator trust record.</div>
             <div class="meaning-strip"><strong>Real container acceptance:</strong> an external fixed-MOND implementation reproduces the safe AST result while reporting UID/GID 65532, zero effective capabilities, <code>NoNewPrivs=1</code>, blocked network and writes, no Docker socket or credential environment, and a fresh temporary filesystem on two runs. Tampering is rejected before container creation. Production requires a digest-pinned sandbox image; CI's mutable tag is allowed only by an explicit test flag.</div>
+          </article>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">16</span><div><h3>Solve a periodic 2D or 3D Poisson field by FFT</h3><p>The published <a href="/examples/models/periodic-poisson.json">periodic Poisson manifest</a> makes the torus assumptions part of the confirmed model. A periodic Poisson equation is solvable only after its source has zero mean, and the potential is defined only up to a constant.</p></div></div>
+            <div class="code-pair">
+              <div><p class="code-label">Confirmed solver contract, shortened</p><pre><code>{
+  "geometry": {
+    "coordinateSystem": "cartesian_3d",
+    "dimensions": 3
+  },
+  "fields": {
+    "delta_rho": {"role": "source"},
+    "Phi": {
+      "role": "solved",
+      "boundary": {"type": "periodic"}
+    }
+  },
+  "equations": [{
+    "lhs": {"op": "laplacian", "args": [{"field": "Phi"}]},
+    "rhs": "4 pi G delta_rho"
+  }],
+  "solver": {
+    "family": "fft_poisson",
+    "periodicZeroMode": "require_zero_mean",
+    "potentialGauge": "zero_mean",
+    "zeroModeTolerance": 1e-12,
+    "maxIterations": 1
+  }
+}</code></pre></div>
+              <div><p class="code-label">Measured anisotropic 3D known-answer result</p><pre><code>{
+  "state": "succeeded",
+  "shape": [12, 10, 8],
+  "spacing": [0.25, 0.4, 0.8],
+  "relativeL2FieldError": 4.52e-16,
+  "relativeSpectralResidual": 8.78e-16,
+  "energyBalanceRelativeError": 1.29e-16,
+  "relativeImaginaryLeakage": 8.55e-17,
+  "potentialMean": -9.30e-20,
+  "perObjectGravityParameters": 0
+}</code></pre></div>
+            </div>
+            <div class="meaning-strip"><strong>Zero-mode gate:</strong> <code>require_zero_mean</code> rejects a non-solvable mean source. <code>subtract_mean</code> is also available, but only when explicitly confirmed; the raw mean, removed mean, raw/effective source integrals, and policy are recorded. Boundary-value overrides and iterative controls that the direct solver would ignore are rejected.</div>
+            <div class="meaning-strip"><strong>What this establishes:</strong> one generic manifest can execute periodic Poisson fields and consistent spectral acceleration observables in both 2D and 3D without a theory-name branch. <strong>What it does not establish:</strong> periodic copies are not an isolated galaxy or cluster. An isolated mass solve should continue to use an isolated/Dirichlet convergence study, and numerical exactness for a Fourier mode is not observational support for a gravity theory.</div>
           </article>
         </div>
       </section>

@@ -93,6 +93,25 @@ function assertArgs(node, count) {
   }
 }
 
+function directLaplacianTarget(node) {
+  if (node?.op !== "laplacian" || !Array.isArray(node.args) || node.args.length !== 1) return null;
+  const child = node.args[0];
+  return child && typeof child === "object" && !Array.isArray(child)
+    && Object.keys(child).length === 1 && typeof child.field === "string"
+    ? child.field
+    : null;
+}
+
+function referencedFieldNames(value, result = new Set()) {
+  if (Array.isArray(value)) {
+    for (const child of value) referencedFieldNames(child, result);
+  } else if (value && typeof value === "object") {
+    if (typeof value.field === "string") result.add(value.field);
+    for (const child of Object.values(value)) referencedFieldNames(child, result);
+  }
+  return result;
+}
+
 function inferExpression(node, context, state, depth = 0) {
   state.nodeCount += 1;
   if (state.nodeCount > MAX_NODES) throw new Error(`model exceeds ${MAX_NODES} expression nodes`);
@@ -390,6 +409,58 @@ export function validateFieldModel(manifest) {
   if (manifest.solver?.krylovInnerIterations !== undefined && (!Number.isInteger(manifest.solver.krylovInnerIterations) || manifest.solver.krylovInnerIterations < 1 || manifest.solver.krylovInnerIterations > 200)) errors.push("solver.krylovInnerIterations must be an integer from 1 to 200");
   if (manifest.solver?.picardWarmupIterations !== undefined && (!Number.isInteger(manifest.solver.picardWarmupIterations) || manifest.solver.picardWarmupIterations < 0 || manifest.solver.picardWarmupIterations >= manifest.solver.maxIterations)) errors.push("solver.picardWarmupIterations must be a non-negative integer below maxIterations");
   if (manifest.solver?.picardWarmupDamping !== undefined && !(manifest.solver.picardWarmupDamping > 0 && manifest.solver.picardWarmupDamping <= 1)) errors.push("solver.picardWarmupDamping must lie in (0,1]");
+  if (manifest.solver?.family === "fft_poisson") {
+    if (!["cartesian_2d", "cartesian_3d"].includes(coordinateSystem)) {
+      errors.push("fft_poisson requires cartesian_2d or cartesian_3d geometry");
+    }
+    if (!["require_zero_mean", "subtract_mean"].includes(manifest.solver?.periodicZeroMode)) {
+      errors.push("fft_poisson requires solver.periodicZeroMode=require_zero_mean or subtract_mean");
+    }
+    if (manifest.solver?.potentialGauge !== "zero_mean") {
+      errors.push("fft_poisson requires solver.potentialGauge=zero_mean");
+    }
+    if (!(manifest.solver?.zeroModeTolerance > 0 && manifest.solver.zeroModeTolerance < 1)) {
+      errors.push("fft_poisson requires solver.zeroModeTolerance in (0,1)");
+    }
+    if (manifest.solver?.maxIterations !== 1) {
+      errors.push("fft_poisson is a direct solve and requires solver.maxIterations=1");
+    }
+    const ignoredControls = [
+      "damping", "coefficientFloor", "initialization", "nonlinearMethod", "lineSearch",
+      "andersonAlpha", "andersonHistory", "andersonRegularization", "krylovMethod",
+      "krylovInnerIterations", "picardWarmupIterations", "picardWarmupDamping",
+      "nonlocalBoundary", "convolutionMode", "kernelOrigin", "convolutionMeasure",
+    ].filter((key) => manifest.solver?.[key] !== undefined);
+    if (ignoredControls.length) {
+      errors.push(`fft_poisson cannot declare iterative or nonlocal controls it would ignore: ${ignoredControls.join(", ")}`);
+    }
+    const solvedNames = new Set([...fields].filter(([, value]) => value.role === "solved").map(([name]) => name));
+    for (const [name, field] of fields) {
+      if (field.role === "solved" && field.rank !== "scalar") errors.push(`fft_poisson solved field ${name} must be scalar`);
+      if (field.role === "solved" && field.boundary?.type !== "periodic") errors.push(`fft_poisson solved field ${name} requires boundary.type=periodic`);
+      if (field.role === "solved" && field.boundary && Object.hasOwn(field.boundary, "value")) errors.push(`fft_poisson solved field ${name} cannot declare a boundary value`);
+    }
+    const targets = [];
+    for (const equation of Array.isArray(manifest.equations) ? manifest.equations : []) {
+      const target = directLaplacianTarget(equation.lhs);
+      if (!target) {
+        errors.push(`fft_poisson equation ${equation.id ?? "unknown"} lhs must be exactly laplacian(solved_field)`);
+        continue;
+      }
+      targets.push(target);
+      const dependencies = [...referencedFieldNames(equation.rhs)].filter((name) => solvedNames.has(name));
+      if (dependencies.length) errors.push(`fft_poisson equation ${equation.id} rhs cannot reference solved fields: ${dependencies.sort().join(", ")}`);
+    }
+    if (targets.length !== solvedNames.size || new Set(targets).size !== solvedNames.size || targets.some((name) => !solvedNames.has(name))) {
+      errors.push("fft_poisson requires exactly one direct Laplacian equation per solved field");
+    }
+  } else if (
+    manifest.solver?.periodicZeroMode !== undefined
+    || manifest.solver?.potentialGauge !== undefined
+    || manifest.solver?.zeroModeTolerance !== undefined
+  ) {
+    errors.push("periodic FFT zero-mode controls require solver.family=fft_poisson");
+  }
   if (state.operators.has("convolution")) {
     if (manifest.solver?.family !== "nonlocal_elliptic") errors.push("convolution requires solver.family=nonlocal_elliptic");
     if (manifest.solver?.nonlocalBoundary !== "zero_padded") errors.push("convolution requires solver.nonlocalBoundary=zero_padded");

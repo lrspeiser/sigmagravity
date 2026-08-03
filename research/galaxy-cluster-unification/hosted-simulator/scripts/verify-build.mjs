@@ -44,6 +44,7 @@ const requiredPaths = [
   "dist/schemas/production-job-submit-v1.schema.json",
   "dist/schemas/advanced-plugin-v1.schema.json",
   "dist/examples/models/refracted-gravity.json",
+  "dist/examples/models/periodic-poisson.json",
   "dist/examples/models/nonlocal-response.json",
   "dist/examples/observation-targets/photon-lensing-map.json",
   "dist/examples/observation-targets/axisymmetric-multiple-image-systems.json",
@@ -137,6 +138,9 @@ for (const phrase of [
   "Signed advanced-code plug-ins",
   "Preflight a signed formula plug-in without running it in Vercel",
   "self_signature_valid_not_operator_trusted",
+  "Solve a periodic 2D or 3D Poisson field by FFT",
+  "periodicZeroMode",
+  "relativeSpectralResidual",
   "Neon's Marketplace terms",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);

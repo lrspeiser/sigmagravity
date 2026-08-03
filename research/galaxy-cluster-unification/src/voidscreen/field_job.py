@@ -33,7 +33,7 @@ from .observation_adapters import evaluate_observation_targets
 
 Array = np.ndarray
 ENGINE_ID = "generic-divergence-field-worker"
-ENGINE_VERSION = "1.5.0-preview"
+ENGINE_VERSION = "1.6.0-preview"
 MODEL_HASH_KEYS = (
     "schemaVersion",
     "modelClass",
@@ -749,7 +749,11 @@ def execute_field_job(
             "numericalMetadata": solution.metadata,
             "claimBoundary": [
                 "A converged field validates execution of the submitted numerical equation, not agreement with galaxy or lensing observations.",
-                "The current generic worker uses supplied or zero far-field Dirichlet boundaries for isolated manifests.",
+                (
+                    "Periodic FFT Poisson jobs solve one explicitly periodic cell, require a declared zero-mode policy, fix the potential to zero mean, and do not represent an isolated far field."
+                    if solution.metadata.get("solver_family") == "fft_poisson"
+                    else "The current generic worker uses supplied or zero far-field Dirichlet boundaries for isolated manifests."
+                ),
                 "Observation targets are evaluated after the field solve and cannot alter the field equations.",
                 "Resolved velocity maps use explicitly declared projection and beam data; no galaxy-specific gravity parameter is introduced by the adapter.",
                 "Photon-lensing maps use a separately typed photon observable and explicitly declared projection geometry; they are not derived from the massive-tracer adapter.",

@@ -24,7 +24,14 @@ from voidscreen.field_job import model_sha256, write_array_bundle
 from voidscreen.sky_lensing import C_M_S, RAD_TO_ARCSEC
 
 
-def model(dimensions: int, *, axisymmetric_rotation: bool = False) -> dict[str, Any]:
+def model(
+    dimensions: int,
+    *,
+    axisymmetric_rotation: bool = False,
+    periodic_fft: bool = False,
+) -> dict[str, Any]:
+    if axisymmetric_rotation and periodic_fft:
+        raise ValueError("axisymmetric and periodic FFT modes are mutually exclusive")
     coordinate_system = (
         "axisymmetric_cylindrical"
         if axisymmetric_rotation
@@ -35,7 +42,11 @@ def model(dimensions: int, *, axisymmetric_rotation: bool = False) -> dict[str, 
         "name": (
             "Asynchronous API axisymmetric motion and photon field"
             if axisymmetric_rotation
-            else f"Asynchronous API manufactured {dimensions}D field"
+            else (
+                f"Asynchronous API periodic FFT {dimensions}D field"
+                if periodic_fft
+                else f"Asynchronous API manufactured {dimensions}D field"
+            )
         ),
         "modelClass": "stationary_elliptic",
         "source": {
@@ -43,7 +54,11 @@ def model(dimensions: int, *, axisymmetric_rotation: bool = False) -> dict[str, 
             "text": (
                 "laplacian(u) = forcing; acceleration = -gradient(u)"
                 if axisymmetric_rotation
-                else "laplacian(u) = forcing"
+                else (
+                    "laplacian(u) = forcing; periodic; mean(forcing)=mean(u)=0"
+                    if periodic_fft
+                    else "laplacian(u) = forcing"
+                )
             ),
             "confirmedCanonical": False,
         },
@@ -63,7 +78,11 @@ def model(dimensions: int, *, axisymmetric_rotation: bool = False) -> dict[str, 
                 "rank": "scalar",
                 "role": "solved",
                 "unit": "m^2/s^2",
-                "boundary": {"type": "dirichlet", "value": 0.0},
+                "boundary": (
+                    {"type": "periodic"}
+                    if periodic_fft
+                    else {"type": "dirichlet", "value": 0.0}
+                ),
             },
         },
         "parameters": {},
@@ -94,12 +113,24 @@ def model(dimensions: int, *, axisymmetric_rotation: bool = False) -> dict[str, 
             }
         ],
         "dataRequirements": [{"key": "forcing", "rank": "scalar", "unit": "1/s^2"}],
-        "solver": {
-            "family": "finite_volume_elliptic",
-            "relativeTolerance": 1e-10,
-            "maxIterations": 8,
-            "damping": 1.0,
-        },
+        "solver": (
+            {
+                "family": "fft_poisson",
+                "relativeTolerance": 1e-12,
+                "residualTolerance": 1e-12,
+                "maxIterations": 1,
+                "periodicZeroMode": "require_zero_mean",
+                "potentialGauge": "zero_mean",
+                "zeroModeTolerance": 1e-12,
+            }
+            if periodic_fft
+            else {
+                "family": "finite_volume_elliptic",
+                "relativeTolerance": 1e-10,
+                "maxIterations": 8,
+                "damping": 1.0,
+            }
+        ),
         "parameterPolicy": {"mode": "universal_fixed", "perObjectParameters": []},
     }
     manifest["source"]["confirmedCanonical"] = True
@@ -194,12 +225,17 @@ def run_case(
     *,
     axisymmetric_rotation: bool = False,
     axisymmetric_raw_lensing: bool = False,
+    periodic_fft: bool = False,
 ) -> dict[str, Any]:
-    if axisymmetric_rotation and axisymmetric_raw_lensing:
-        raise ValueError("axisymmetric smoke modes are mutually exclusive")
+    if sum((axisymmetric_rotation, axisymmetric_raw_lensing, periodic_fft)) > 1:
+        raise ValueError("axisymmetric and periodic FFT smoke modes are mutually exclusive")
     axisymmetric = axisymmetric_rotation or axisymmetric_raw_lensing
-    axis = np.linspace(0.0, 1.0, cells)
-    spacing = 1.0 / (cells - 1)
+    axis = (
+        np.arange(cells, dtype=float) / cells
+        if periodic_fft
+        else np.linspace(0.0, 1.0, cells)
+    )
+    spacing = 1.0 / cells if periodic_fft else 1.0 / (cells - 1)
     raw_lensing_images: list[list[float]] | None = None
     if axisymmetric_raw_lensing:
         lens_distance = 1.0e20
@@ -254,10 +290,16 @@ def run_case(
         coordinates = np.meshgrid(*([axis] * dimensions), indexing="ij")
         expected = np.ones([cells] * dimensions)
         for coordinate in coordinates:
-            expected *= np.sin(np.pi * coordinate)
-        forcing = -float(dimensions) * np.pi**2 * expected
+            expected *= np.sin((2.0 if periodic_fft else 1.0) * np.pi * coordinate)
+        forcing = -float(dimensions) * (
+            (2.0 * np.pi) ** 2 if periodic_fft else np.pi**2
+        ) * expected
         arrays = {"raw_forcing": forcing}
-        bundle_name = f"bundle_{dimensions}d"
+        bundle_name = (
+            f"bundle_periodic_fft_{dimensions}d"
+            if periodic_fft
+            else f"bundle_{dimensions}d"
+        )
     bundle_directory = root / bundle_name
     bundle_metadata = metadata(
         spacing,
@@ -302,19 +344,25 @@ def run_case(
         payload={
             "schemaVersion": "sigma-field-job-submit/1",
             "model": model(
-                dimensions, axisymmetric_rotation=axisymmetric
+                dimensions,
+                axisymmetric_rotation=axisymmetric,
+                periodic_fft=periodic_fft,
             ),
             "dataUploadId": ticket["id"],
             "request": {
                 "schemaVersion": "sigma-field-job-request/1",
                 "spacing": [spacing] * dimensions,
-                "boundaryFields": {
-                    "u": (
-                        {"arrayKey": "u_boundary"}
-                        if axisymmetric
-                        else {"value": 0.0}
-                    )
-                },
+                "boundaryFields": (
+                    {}
+                    if periodic_fft
+                    else {
+                        "u": (
+                            {"arrayKey": "u_boundary"}
+                            if axisymmetric
+                            else {"value": 0.0}
+                        )
+                    }
+                ),
                 "requestedObservables": ["gradient"],
                 "observationTargets": (
                     [
@@ -437,6 +485,18 @@ def run_case(
         )
     if relative_error >= 0.01:
         raise RuntimeError(f"{dimensions}D field relative error exceeded acceptance: {relative_error}")
+    scientific_result = json.loads(downloaded["scientific_result.json"])
+    solver_family = scientific_result["numericalMetadata"]["solver_family"]
+    periodic_diagnostics = scientific_result["numericalMetadata"].get("fft_poisson")
+    if periodic_fft:
+        if relative_error >= 2e-12:
+            raise RuntimeError(
+                f"{dimensions}D periodic FFT error exceeded spectral acceptance: {relative_error}"
+            )
+        if solver_family != "fft_poisson" or periodic_diagnostics is None:
+            raise RuntimeError("periodic FFT job did not publish spectral diagnostics")
+        if periodic_diagnostics["potential_gauge"] != "zero_mean":
+            raise RuntimeError("periodic FFT job did not preserve the declared gauge")
     observation_rmse = None
     observation_sampling_mode = None
     photon_rmse_arcsec = None
@@ -503,6 +563,8 @@ def run_case(
         "allDownloadedArtifactHashesValid": True,
         "workerSourceHashAgrees": True,
         "relativeL2FieldError": relative_error,
+        "solverFamily": solver_family,
+        "periodicFftDiagnosticsPresent": periodic_diagnostics is not None,
         "observationRmseMPerS": observation_rmse,
         "observationSamplingMode": observation_sampling_mode,
         "photonDeflectionRmseArcsec": photon_rmse_arcsec,
@@ -520,6 +582,8 @@ def main() -> None:
         cases = [
             run_case(base, root, 2, 25),
             run_case(base, root, 3, 17),
+            run_case(base, root, 2, 24, periodic_fft=True),
+            run_case(base, root, 3, 12, periodic_fft=True),
             run_case(base, root, 2, 25, axisymmetric_rotation=True),
             run_case(base, root, 2, 65, axisymmetric_raw_lensing=True),
         ]

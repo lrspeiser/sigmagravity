@@ -59,12 +59,14 @@ test credential and temporary store:
 |---|---:|
 | Cartesian 2D field relative L2 error | `0.0014291183165795044` |
 | Cartesian 3D field relative L2 error | `0.003218964440079798` |
+| Periodic FFT Cartesian 2D field relative L2 error | `3.464425937954617e-16` |
+| Periodic FFT Cartesian 3D field relative L2 error | `4.1083258285824224e-16` |
 | Axisymmetric field relative L2 error | `3.4364145737847694e-15` |
 | Axisymmetric circular-speed RMSE | `4.220673123283083e-15 m/s` |
 | Axisymmetric photon-deflection RMSE | `5.490987717737826e-26 arcsec` |
 | Axisymmetric raw image-position RMS | `0.001692053225097455 arcsec` |
 
-All four jobs passed queued/running/succeeded lifecycle checks, worker/gateway
+All six jobs passed queued/running/succeeded lifecycle checks, worker/gateway
 source-hash agreement, full artifact downloads and rehashing, and zero
 per-object gravity parameters. The raw-image case retained 13 verified
 artifacts.

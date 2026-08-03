@@ -4,7 +4,7 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.34.0-preview",
+    version: "0.35.0-preview",
     description: "Formula-independent radial benchmarks and confirmed 2D/3D research contracts. A signed advanced-code manifest and separate single-use sandbox contract are now published and accepted in real container CI; uploaded code never executes in Vercel or the trusted safe-language worker. The production API has project-scoped hashed bearer credentials, immutable confirmed-model and data registration, PostgreSQL quotas and audit events, idempotent jobs, a transactional outbox, and verified artifacts. Public heavy execution remains fail-closed until PostgreSQL, a scheduler, and the appropriate scientific worker are connected.",
   },
   components: {

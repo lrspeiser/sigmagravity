@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "sigma-field-model/1",
+  "name": "Periodic Poisson density-contrast field",
+  "modelClass": "stationary_elliptic",
+  "source": {
+    "format": "latex",
+    "text": "\\nabla^2\\Phi = 4\\pi G\\,\\delta\\rho, \\quad \\langle\\delta\\rho\\rangle=0, \\quad \\langle\\Phi\\rangle=0",
+    "confirmedCanonical": true,
+    "confirmedModelSha256": "cc3bc73ccb40db010cce358c84babe9f3455cfb48d5c441dd94e8c928a9b9cbe"
+  },
+  "geometry": {
+    "coordinateSystem": "cartesian_3d",
+    "dimensions": 3,
+    "domain": { "lengthUnit": "m", "boundaryExtent": "one explicitly periodic simulation cell" }
+  },
+  "fields": {
+    "delta_rho": { "rank": "scalar", "role": "source", "unit": "kg/m^3", "datasetKey": "density_contrast" },
+    "Phi": { "rank": "scalar", "role": "solved", "unit": "m^2/s^2", "boundary": { "type": "periodic" } }
+  },
+  "parameters": {
+    "G": { "unit": "m^3/(kg*s^2)", "value": 6.6743e-11, "scope": "universal" }
+  },
+  "equations": [
+    {
+      "id": "periodic_poisson",
+      "kind": "equality",
+      "lhs": { "op": "laplacian", "args": [{ "field": "Phi" }] },
+      "rhs": { "op": "multiply", "args": [{ "const": 12.566370614359172 }, { "parameter": "G" }, { "field": "delta_rho" }] }
+    }
+  ],
+  "observables": [
+    {
+      "id": "massive_tracer_acceleration",
+      "target": "massive_tracers",
+      "rank": "vector",
+      "unit": "m/s^2",
+      "expression": { "op": "negate", "args": [{ "op": "gradient", "args": [{ "field": "Phi" }] }] }
+    }
+  ],
+  "dataRequirements": [
+    { "key": "density_contrast", "rank": "scalar", "unit": "kg/m^3" }
+  ],
+  "solver": {
+    "family": "fft_poisson",
+    "relativeTolerance": 1e-12,
+    "residualTolerance": 1e-12,
+    "maxIterations": 1,
+    "periodicZeroMode": "require_zero_mean",
+    "potentialGauge": "zero_mean",
+    "zeroModeTolerance": 1e-12
+  },
+  "parameterPolicy": { "mode": "published_fixed", "perObjectParameters": [] }
+}
