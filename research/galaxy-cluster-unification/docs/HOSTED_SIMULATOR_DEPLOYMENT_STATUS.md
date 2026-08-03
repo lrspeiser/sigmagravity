@@ -1,6 +1,6 @@
 # Hosted simulator deployment status
 
-Date: 2026-08-02
+Date: 2026-08-03
 
 ## Outcome
 
@@ -12,14 +12,14 @@ team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/4oCqdTRhzf6Tv9Z48CQR7kfS24A5>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/H6E8D6C3rgytzNV6YqBK2AC2puS1>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-kq7vdlok0-horizon3.vercel.app>
-- deployment ID: `dpl_4oCqdTRhzf6Tv9Z48CQR7kfS24A5`
-- deployed implementation commit: `60a8ebe5adb2fa34bec0dec4bd5e39560f48cbdc`
-- public contract version: `0.28.0-preview`
+  <https://sigma-gravity-research-simulator-uxlcl8hmt-horizon3.vercel.app>
+- deployment ID: `dpl_H6E8D6C3rgytzNV6YqBK2AC2puS1`
+- deployed implementation commit: `63a260c0d510152750e895ed5591214131ea727b`
+- public contract version: `0.29.0-preview`
 
-The service passes its local production build, 104 automated hosted tests, all
+The service passes its local production build, 119 automated hosted tests, all
 1,609 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
@@ -137,6 +137,14 @@ Implemented public capabilities:
     Jacobian stencil; unsupported topology cannot be converted into a finite
     fit score. This path remains local-only and is an analytic software
     acceptance, not a real cluster result.
+26. Provide an authenticated, separately deployable field-worker HTTP boundary
+    and a server-side Vercel connector for the exact upload and field-job
+    lifecycle routes. The non-root container runs the existing 2D, 3D,
+    axisymmetric, massive-tracer, photon-map, and raw-image fixtures, rehashes
+    every published artifact, rejects unindexed output and quota violations,
+    and recovers or invalidates jobs safely after restart. Vercel has no worker
+    token or worker URL configured yet, so production continues to fail closed
+    with an explicit 503 rather than implying durable heavy execution.
 
 ## Verification evidence
 
@@ -146,7 +154,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 104 passing hosted tests, 1,609 passing Python scientific
+The current result is 119 passing hosted tests, 1,609 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -191,8 +199,8 @@ and point arrays. The accepted production smoke values are:
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
 - manifest SHA-256:
-  `96ee4fa523cac6cf9790ff18a5581747cde7422125114fb25c1b1ba9ae3f6b3b`
-- run ID: `run_96ee4fa523cac6cf9790ff18`
+  `d541618c4fd3b2a1dca0e963514841741086c912634dd13ade4c434194409e8f`
+- run ID: `run_d541618c4fd3b2a1dca0e963`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -509,6 +517,57 @@ authenticated `vercel curl`; public heavy submissions return HTTP 503 with
 `production_storage_not_connected` until durable storage and isolated workers
 are connected.
 
+The v0.29 authenticated-worker checks add a real deployment boundary without
+claiming that Vercel runs the scientific solver. A separate server accepts only
+the bounded upload and field-job lifecycle, requires a constant-time-checked
+bearer token, applies body and response quotas, and exposes no galaxy, inverse,
+batch, arbitrary-code, filesystem-path, or secret surface. The gateway requires
+HTTPS outside localhost, refuses redirects and path traversal, never returns the
+worker credential, and keeps every unconfigured production route explicitly
+unavailable. Artifact publication verifies the scientific manifest, artifact
+index, job identity, file names, count, aggregate size, individual size, and
+every SHA-256 before a result can become visible. Restart recovery repeats
+those checks and converts mutated completed output into an infrastructure
+failure rather than serving it as science.
+
+The real local HTTP acceptance ran the worker in a process separate from the
+gateway and completed Cartesian 2D, Cartesian 3D, axisymmetric galaxy/photon,
+and raw multiple-image jobs. The manufactured relative field errors were
+`0.0014291183165795044` in 2D, `0.003218964440079798` in 3D, and
+`3.4364145737847694e-15` for the solid-body axisymmetric fixture. Its
+circular-speed RMSE was `4.220673123283083e-15 m/s`, photon-deflection RMSE was
+`5.490987717737826e-26 arcsec`, raw-lensing field relative error was
+`0.0014789730022103532`, and raw image-position RMS was
+`0.001692053225097455 arcsec`. All 13 raw-lensing artifacts and the other job
+artifacts rehashed correctly; every fixture used zero per-object gravity
+parameters.
+
+GitHub Actions independently built the actual non-root Docker image and ran the
+same four-case scientific HTTP acceptance successfully at
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30794032742>. The run
+used implementation commit `63a260c0d510152750e895ed5591214131ea727b` and did
+not publish an image or receive a production worker secret. This closes the
+container-build gap but does not prove persistence on a future container host.
+
+Deployment `dpl_H6E8D6C3rgytzNV6YqBK2AC2puS1` is production-ready at the
+stable alias and serves `0.29.0-preview`; its immutable URL is
+<https://sigma-gravity-research-simulator-uxlcl8hmt-horizon3.vercel.app>. The
+live health document advertises the authenticated connector as available only
+when an external worker is configured. Collection, detail, content, event,
+artifact-download, and cancellation routes were all exercised on the stable
+alias and return `production_storage_not_connected` or
+`production_worker_not_connected` with HTTP 503. The ordinary public smoke
+reproduces run `run_d541618c4fd3b2a1dca0e963`, manifest
+`d541618c4fd3b2a1dca0e963514841741086c912634dd13ade4c434194409e8f`, twin run
+`twinrun_eb785c4006fe30dd70a2db9b`, twin source error
+`0.000008625358785734849`, twin submitted-formula RMSE
+`4.459265029781337 km/s`, resolved evidence hash
+`8fed5429efecb7a0b5055a15928b8edf48e5713454ba18b42c9503305778d1b7`, and
+cluster registry hash
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+No external worker, persistent volume, database, or object store is connected
+to production yet; heavy science remains local/CI verified, not hosted.
+
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
 production target and should be removed separately if account cleanup is
@@ -516,10 +575,19 @@ desired.
 
 ## Worker milestone after Vercel
 
-The next deployable component is durable job and artifact storage plus a
-containerized Python worker running the already-tested local field, galaxy,
-batch, and decoupled observation-evaluation services. It must invoke the
-repository's existing Poisson, AQUAL, QUMOND, nonlocal convolution,
-coordinate-safe root, and
-raw-lensing engines. Vercel will enqueue those jobs and return immediately; it
-will not run the long scientific solve inside the web request.
+The container and authenticated gateway connector now exist and pass a real
+Docker acceptance. The next deployable component is to run that exact image on
+a container host with a verified persistent volume, health monitoring, and a
+rotated worker token, then configure the two server-side Vercel environment
+variables and repeat the complete lifecycle test across a worker restart.
+
+That deployment is still a bounded milestone, not the final production
+architecture. The filesystem spool must subsequently be replaced by Postgres
+job/model metadata and S3/R2-compatible immutable artifact storage, preferably
+using direct signed uploads/downloads so large arrays do not traverse Vercel.
+Production also needs researcher authentication, project isolation, quotas,
+leases and retry ownership, cancellation, cache policy, audit logs, signed
+result manifests, dataset-license enforcement, monitoring, backups, and an
+image publication/promotion policy. Only after those controls are verified
+should the same boundary admit galaxy, inverse-response, composed-batch, and
+signed advanced plug-in workloads.
