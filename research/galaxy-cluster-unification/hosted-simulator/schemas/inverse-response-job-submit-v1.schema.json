@@ -45,13 +45,58 @@
       }
     },
     "nullControls": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "kind": { "const": "source_radial_angle_shuffle" },
-        "count": { "type": "integer", "minimum": 19, "maximum": 999 },
-        "seed": { "type": "integer", "minimum": 0, "maximum": 2147483647 }
-      }
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "source_radial_angle_shuffle" },
+            "count": { "type": "integer", "minimum": 19, "maximum": 999 },
+            "seed": { "type": "integer", "minimum": 0, "maximum": 2147483647 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["families"],
+          "properties": {
+            "combinationRule": { "const": "all_declared_families" },
+            "families": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 8,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind"],
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "source_radial_angle_shuffle",
+                      "source_phase_scramble",
+                      "target_system_permutation",
+                      "target_radial_angle_shuffle",
+                      "source_missing_baryon_dropout"
+                    ]
+                  },
+                  "count": { "type": "integer", "minimum": 19, "maximum": 999 },
+                  "seed": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+                  "dropoutFraction": { "type": "number", "exclusiveMinimum": 0, "maximum": 0.5 }
+                },
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": { "kind": { "const": "source_missing_baryon_dropout" } },
+                      "required": ["kind"]
+                    },
+                    "else": { "not": { "required": ["dropoutFraction"] } }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
     },
     "outputLicense": {
       "type": "object",

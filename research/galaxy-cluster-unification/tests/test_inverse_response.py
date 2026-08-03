@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 
 from voidscreen.inverse_response import (
     analyze_stationary_response,
     convolve_stationary_response,
     fit_stationary_response_kernel,
+    missing_baryon_dropout,
+    phase_scramble,
     radial_angle_shuffle,
 )
 
@@ -211,3 +214,128 @@ def test_radial_shuffle_preserves_each_shell_but_changes_angles() -> None:
             np.sort(shuffled[radius == shell]), np.sort(values[radius == shell])
         )
     assert not np.array_equal(shuffled, values)
+
+
+def test_phase_scramble_preserves_fourier_power_and_mean_in_2d_and_3d() -> None:
+    rng = np.random.default_rng(44)
+    for shape in ((7, 9), (5, 6, 7)):
+        values = rng.normal(size=shape)
+        scrambled = phase_scramble(values, np.random.default_rng(45))
+        np.testing.assert_allclose(
+            np.abs(np.fft.fftn(scrambled)),
+            np.abs(np.fft.fftn(values)),
+            rtol=1e-11,
+            atol=1e-11,
+        )
+        assert np.isclose(np.mean(scrambled), np.mean(values), atol=1e-12)
+        assert not np.allclose(scrambled, values)
+
+
+def test_missing_baryon_dropout_preserves_total_but_changes_layout() -> None:
+    values = np.arange(1.0, 82.0).reshape(9, 9)
+    dropped = missing_baryon_dropout(values, np.random.default_rng(51), 0.2)
+    assert np.isclose(np.sum(dropped), np.sum(values), rtol=1e-12)
+    assert np.count_nonzero(dropped == 0.0) > 0
+    assert not np.array_equal(dropped, values)
+
+
+def test_declared_multi_null_suite_is_deterministic_and_requires_every_family() -> None:
+    sources = [anisotropic_source(11, 0.15), anisotropic_source(11, 1.6)]
+    truth = injected_kernel()[1:4, 1:4]
+    truth /= np.sum(truth)
+    targets = [
+        1.5 * convolve_stationary_response(source, truth, 1.0)
+        for source in sources
+    ]
+    families = [
+        {"kind": "source_radial_angle_shuffle", "count": 19, "seed": 101},
+        {"kind": "source_phase_scramble", "count": 19, "seed": 102},
+        {"kind": "target_system_permutation", "count": 19, "seed": 103},
+        {"kind": "target_radial_angle_shuffle", "count": 19, "seed": 104},
+        {
+            "kind": "source_missing_baryon_dropout",
+            "count": 19,
+            "seed": 105,
+            "dropoutFraction": 0.2,
+        },
+    ]
+    options = {
+        "uncertainties": [np.full_like(target, 0.01) for target in targets],
+        "ridge": 1.0e-10,
+        "smoothness": 1.0e-8,
+        "ensemble_size": 0,
+        "null_families": families,
+        "regularization_multipliers": (1.0,),
+    }
+    first = analyze_stationary_response(sources, targets, 1.0, truth.shape, **options)
+    second = analyze_stationary_response(sources, targets, 1.0, truth.shape, **options)
+    assert first.null_controls == second.null_controls
+    assert first.null_summary == second.null_summary
+    assert first.null_summary["combination_rule"] == "all_declared_families"
+    assert first.null_summary["family_count"] == 5
+    assert first.null_summary["total_count"] == 95
+    assert {row["kind"] for row in first.null_summary["families"]} == {
+        family["kind"] for family in families
+    }
+    assert first.null_summary["signal_against_null"] is True
+    assert all(
+        row["permutation_p_value"] == 0.05
+        for row in first.null_summary["families"]
+    )
+
+
+def test_every_null_family_executes_on_three_dimensional_maps() -> None:
+    first_source = np.zeros((7, 7, 7), dtype=float)
+    second_source = np.zeros_like(first_source)
+    first_source[2, 3, 4] = 1.0
+    first_source[4, 2, 3] = 0.4
+    second_source[4, 3, 2] = 0.8
+    second_source[2, 4, 3] = 0.6
+    kernel = np.arange(1.0, 28.0).reshape(3, 3, 3)
+    kernel /= np.sum(kernel)
+    sources = [first_source, second_source]
+    targets = [convolve_stationary_response(source, kernel, 1.0) for source in sources]
+    analysis = analyze_stationary_response(
+        sources,
+        targets,
+        1.0,
+        kernel.shape,
+        uncertainties=[np.full_like(target, 0.01) for target in targets],
+        ridge=1.0e-10,
+        smoothness=1.0e-8,
+        ensemble_size=0,
+        null_families=[
+            {"kind": "source_radial_angle_shuffle", "count": 1, "seed": 201},
+            {"kind": "source_phase_scramble", "count": 1, "seed": 202},
+            {"kind": "target_system_permutation", "count": 1, "seed": 203},
+            {"kind": "target_radial_angle_shuffle", "count": 1, "seed": 204},
+            {
+                "kind": "source_missing_baryon_dropout",
+                "count": 1,
+                "seed": 205,
+                "dropoutFraction": 0.25,
+            },
+        ],
+        regularization_multipliers=(1.0,),
+    )
+    assert analysis.null_summary["family_count"] == 5
+    assert analysis.null_summary["total_count"] == 5
+    assert all(row["count"] == 1 for row in analysis.null_summary["families"])
+
+
+def test_duplicate_null_families_are_rejected() -> None:
+    source = anisotropic_source(9, 0.4)
+    target = convolve_stationary_response(source, injected_kernel(), 1.0)
+    with pytest.raises(ValueError, match="duplicate null family"):
+        analyze_stationary_response(
+            [source],
+            [target],
+            1.0,
+            (5, 5),
+            ensemble_size=0,
+            null_families=[
+                {"kind": "source_phase_scramble", "count": 1, "seed": 1},
+                {"kind": "source_phase_scramble", "count": 1, "seed": 2},
+            ],
+            regularization_multipliers=(1.0,),
+        )

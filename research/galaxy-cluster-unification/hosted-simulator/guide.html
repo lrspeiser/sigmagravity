@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.19</p>
+          <p class="eyebrow">Researcher guide &middot; v0.20</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -60,7 +60,7 @@
               <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
               <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
               <tr><td>Coupled photon and matter potentials</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Multiple solved fields can interact, while separately typed observables expose different predictions for light and massive tracers without a theory-name branch.</td></tr>
-              <tr><td>Inverse baryon-to-response discovery</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Which one shared compact response kernel is compatible with labeled baryonic maps and model-derived target maps, including uncertainty, radial-angle nulls, and non-identifiability.</td></tr>
+              <tr><td>Inverse baryon-to-response discovery</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Which one shared compact response kernel is compatible with labeled baryonic maps and model-derived target maps, including uncertainty, five selectable null families, and non-identifiability.</td></tr>
               <tr><td>2D/3D fields, generated galaxies, composed batches, and photon maps</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Numerical and API conformance locally; no public durable execution yet.</td></tr>
               <tr><td>New raw cluster-lensing campaign with complete baryons</td><td><span class="state-tag missing">Not built</span></td><td><span class="state-tag partial">Research prototypes</span></td><td>Prior inverse and forward pilots exist, but not a production-ready blind campaign.</td></tr>
             </tbody>
@@ -225,9 +225,19 @@
   },
   "uncertainty": {"ensembleSize": 80, "seed": 17},
   "nullControls": {
-    "kind": "source_radial_angle_shuffle",
-    "count": 19,
-    "seed": 23
+    "combinationRule": "all_declared_families",
+    "families": [
+      {"kind": "source_radial_angle_shuffle", "count": 19, "seed": 23},
+      {"kind": "source_phase_scramble", "count": 19, "seed": 24},
+      {"kind": "target_system_permutation", "count": 19, "seed": 25},
+      {"kind": "target_radial_angle_shuffle", "count": 19, "seed": 26},
+      {
+        "kind": "source_missing_baryon_dropout",
+        "count": 19,
+        "seed": 27,
+        "dropoutFraction": 0.2
+      }
+    ]
   },
   "outputLicense": {
     "id": "CC-BY-4.0",
@@ -243,7 +253,10 @@
   },
   "amplitude": 1.5999999988,
   "nullSummary": {
-    "permutation_p_value": 0.05,
+    "combination_rule": "all_declared_families",
+    "family_count": 5,
+    "total_count": 95,
+    "maximum_family_p_value": 0.05,
     "signal_against_null": true
   },
   "parameterAccounting": {
@@ -254,7 +267,8 @@
   }
 }</code></pre></div>
             </div>
-            <div class="meaning-strip"><strong>What it outputs:</strong> a normalized 2D or 3D kernel with 95% intervals, one shared amplitude, per-system predictions and residuals, rank/nullity and compatible-kernel diagnostics, regularization sensitivity, radial-angle null scores, an HTML report, CSV/NPZ artifacts, hashes, and a reproduction command.</div>
+            <div class="meaning-strip"><strong>What it outputs:</strong> a normalized 2D or 3D kernel with 95% intervals, one shared amplitude, per-system predictions and residuals, rank/nullity and compatible-kernel diagnostics, regularization sensitivity, per-family null scores, an HTML report, CSV/NPZ artifacts, hashes, and a reproduction command. The global signal flag is true only when the observed pairing beats every declared null family.</div>
+            <div class="meaning-strip"><strong>Why five controls:</strong> radial shuffling tests angular structure; Fourier-phase scrambling tests whether spatial phase matters beyond the power spectrum; system permutation tests whether the correct baryon map is paired with the correct target; target radial shuffling tests target morphology; and rescaled baryon dropout tests sensitivity to incomplete source maps. These are diagnostics, not physical alternatives.</div>
             <div class="meaning-strip"><strong>What this proves:</strong> the synthetic acceptance recovers a kernel deliberately injected into two systems. On real clusters it can show response families compatible with the chosen baryons and derived lens-model targets. It cannot show that gravity followed those routes, turn 25 fitted cells into a one-parameter theory, or validate itself. The next scientific step is to compress a development-set pattern into a small forward law, freeze it, and predict raw lensing on clusters whose target maps were never supplied.</div>
           </article>
 
@@ -310,7 +324,7 @@
             <article><span>2</span><div><h3>Build the resolved evidence registry</h3><p>Registered stellar, gas, intracluster-light, X-ray/SZ, velocity, strong-lensing, weak-lensing, PSF, WCS, uncertainty, license, and provenance products.</p></div></article>
             <article><span>3</span><div><h3>Finish uncertainty-aware galaxy twins</h3><p>Infer posterior baryonic/observation parameters without velocity targets or gravity parameters, generate 3D ensembles, and recover withheld observations.</p></div></article>
             <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>Derive a small covariant or Newtonian-limit law with scalar, vector, tensor, nonlocal, screening, photon, and matter terms, explicit units and boundaries, and a Solar-System limit.</p></div></article>
-            <article><span>5</span><div><h3>Use halo maps only for discovery</h3><p>Register multiple teams' halo posteriors, infer candidate baryon-to-effective-response kernels with null controls and uncertainty, and measure which features survive changes in lens model.</p></div></article>
+            <article><span>5</span><div><h3>Use halo maps only for discovery</h3><p>The five-family synthetic control suite is built. Next, register multiple teams' halo posteriors and complete baryonic ensembles, then measure which inferred features survive lens method, baryon uncertainty, central-halo, local-light, and conservation controls.</p></div></article>
             <article><span>6</span><div><h3>Compress the inverse pattern</h3><p>Replace a many-cell discovered kernel with a small analytic response law tied to baryonic density, gradients, curvature, topology, or scale. Reject laws whose apparent success comes from per-system flexibility.</p></div></article>
             <article><span>7</span><div><h3>Freeze a forward law</h3><p>Lock constants on a development set, remove every target halo map, and predict held-out raw lensing and galaxy velocities from baryons alone.</p></div></article>
             <article><span>8</span><div><h3>Compare fairly</h3><p>Score against baryons-only GR, fixed MOND/RAR, and published dark-matter models with uncertainty, nuisance parameters, and effective degrees of freedom displayed together.</p></div></article>

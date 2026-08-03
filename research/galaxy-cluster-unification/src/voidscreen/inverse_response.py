@@ -17,7 +17,7 @@ padded outside the submitted domain.
 from __future__ import annotations
 
 import math
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from itertools import product
 from typing import Any
@@ -49,7 +49,7 @@ class InverseResponseAnalysis:
     kernel_median: Array
     kernel_upper: Array
     amplitude_interval: dict[str, float]
-    null_controls: tuple[dict[str, float | int | str], ...]
+    null_controls: tuple[dict[str, float | int | str | None], ...]
     null_summary: dict[str, Any]
     regularization_sensitivity: tuple[dict[str, Any], ...]
     non_identifiability: dict[str, Any]
@@ -395,6 +395,157 @@ def radial_angle_shuffle(values: Array, rng: np.random.Generator) -> Array:
     return result
 
 
+def phase_scramble(values: Array, rng: np.random.Generator) -> Array:
+    """Randomize Fourier phase while preserving power and the map mean."""
+
+    array = np.asarray(values, dtype=float)
+    if array.ndim not in {2, 3} or np.any(~np.isfinite(array)):
+        raise ValueError("phase scrambling requires a finite 2D or 3D map")
+    spectrum = np.fft.fftn(array)
+    random_spectrum = np.fft.fftn(rng.normal(size=array.shape))
+    phase = np.ones_like(random_spectrum, dtype=complex)
+    nonzero = np.abs(random_spectrum) > np.finfo(float).tiny
+    phase[nonzero] = random_spectrum[nonzero] / np.abs(random_spectrum[nonzero])
+    scrambled_spectrum = np.abs(spectrum) * phase
+    origin = (0,) * array.ndim
+    scrambled_spectrum[origin] = spectrum[origin]
+    return np.asarray(np.fft.ifftn(scrambled_spectrum).real, dtype=float)
+
+
+def missing_baryon_dropout(
+    values: Array,
+    rng: np.random.Generator,
+    dropout_fraction: float,
+) -> Array:
+    """Remove random source cells and rescale to preserve total baryonic input."""
+
+    array = np.asarray(values, dtype=float)
+    fraction = float(dropout_fraction)
+    if array.ndim not in {2, 3} or np.any(~np.isfinite(array)):
+        raise ValueError("missing-baryon dropout requires a finite 2D or 3D map")
+    if np.any(array < 0.0) or float(np.sum(array)) <= 0.0:
+        raise ValueError("missing-baryon dropout requires a non-negative source")
+    if not math.isfinite(fraction) or not 0.0 < fraction <= 0.5:
+        raise ValueError("dropout_fraction must be greater than zero and at most 0.5")
+    kept = rng.random(array.shape) >= fraction
+    if not np.any(kept & (array > 0.0)):
+        kept.flat[int(np.argmax(array))] = True
+    result = np.where(kept, array, 0.0)
+    result *= float(np.sum(array)) / float(np.sum(result))
+    return np.asarray(result, dtype=float)
+
+
+NULL_PRESERVED_QUANTITIES = {
+    "source_radial_angle_shuffle": "source radial shell values",
+    "source_phase_scramble": "source Fourier power spectrum and mean",
+    "target_system_permutation": "target, uncertainty, and mask maps as a system-level multiset",
+    "target_radial_angle_shuffle": "target radial shell values",
+    "source_missing_baryon_dropout": "source total integral after random-cell dropout and rescaling",
+}
+
+
+def _normalized_null_families(
+    null_families: Sequence[Mapping[str, Any]] | None,
+    null_count: int,
+    null_seed: int,
+) -> tuple[dict[str, Any], ...]:
+    raw_families: Sequence[Mapping[str, Any]] = (
+        (
+            {
+                "kind": "source_radial_angle_shuffle",
+                "count": null_count,
+                "seed": null_seed,
+            },
+        )
+        if null_families is None
+        else null_families
+    )
+    normalized: list[dict[str, Any]] = []
+    seen_kinds: set[str] = set()
+    for family_index, family in enumerate(raw_families):
+        if not isinstance(family, Mapping):
+            raise TypeError("each null family must be an object")
+        unknown = set(family) - {"kind", "count", "seed", "dropoutFraction"}
+        if unknown:
+            raise ValueError(f"unsupported null family properties: {sorted(unknown)}")
+        kind = str(family.get("kind", ""))
+        if kind not in NULL_PRESERVED_QUANTITIES:
+            raise ValueError(f"unsupported null family: {kind}")
+        if kind in seen_kinds:
+            raise ValueError(f"duplicate null family: {kind}")
+        seen_kinds.add(kind)
+        count = family.get("count", 19)
+        seed = family.get("seed", family_index + 1)
+        if isinstance(count, bool) or not isinstance(count, int) or not 0 <= count <= 999:
+            raise ValueError("null family count must be an integer from 0 to 999")
+        if isinstance(seed, bool) or not isinstance(seed, int) or not 0 <= seed <= 2**31 - 1:
+            raise ValueError("null family seed must be an integer from 0 to 2147483647")
+        record: dict[str, Any] = {"kind": kind, "count": count, "seed": seed}
+        if kind == "source_missing_baryon_dropout":
+            fraction = float(family.get("dropoutFraction", 0.15))
+            if not math.isfinite(fraction) or not 0.0 < fraction <= 0.5:
+                raise ValueError(
+                    "source_missing_baryon_dropout dropoutFraction must be greater than zero and at most 0.5"
+                )
+            record["dropoutFraction"] = fraction
+        elif "dropoutFraction" in family:
+            raise ValueError("dropoutFraction is only valid for source_missing_baryon_dropout")
+        normalized.append(record)
+    return tuple(normalized)
+
+
+def _null_inputs(
+    family: Mapping[str, Any],
+    sources: tuple[Array, ...],
+    targets: tuple[Array, ...],
+    uncertainties: tuple[Array, ...],
+    masks: tuple[Array, ...],
+    rng: np.random.Generator,
+) -> tuple[tuple[Array, ...], tuple[Array, ...], tuple[Array, ...], tuple[Array, ...]]:
+    kind = str(family["kind"])
+    if kind == "source_radial_angle_shuffle":
+        return (
+            tuple(radial_angle_shuffle(source, rng) for source in sources),
+            targets,
+            uncertainties,
+            masks,
+        )
+    if kind == "source_phase_scramble":
+        return (
+            tuple(phase_scramble(source, rng) for source in sources),
+            targets,
+            uncertainties,
+            masks,
+        )
+    if kind == "target_radial_angle_shuffle":
+        return (
+            sources,
+            tuple(radial_angle_shuffle(target, rng) for target in targets),
+            uncertainties,
+            masks,
+        )
+    if kind == "target_system_permutation":
+        if len(targets) < 2:
+            raise ValueError("target_system_permutation requires at least two systems")
+        shift = int(rng.integers(1, len(targets)))
+        indices = np.roll(np.arange(len(targets)), shift)
+        return (
+            sources,
+            tuple(targets[int(index)] for index in indices),
+            tuple(uncertainties[int(index)] for index in indices),
+            tuple(masks[int(index)] for index in indices),
+        )
+    if kind == "source_missing_baryon_dropout":
+        fraction = float(family["dropoutFraction"])
+        return (
+            tuple(missing_baryon_dropout(source, rng, fraction) for source in sources),
+            targets,
+            uncertainties,
+            masks,
+        )
+    raise ValueError(f"unsupported null family: {kind}")
+
+
 def _kernel_distance(left: Array, right: Array, cell_volume: float) -> dict[str, float]:
     left_flat = np.asarray(left, dtype=float).ravel()
     right_flat = np.asarray(right, dtype=float).ravel()
@@ -421,9 +572,10 @@ def analyze_stationary_response(
     ensemble_seed: int = 0,
     null_count: int = 19,
     null_seed: int = 1,
+    null_families: Sequence[Mapping[str, Any]] | None = None,
     regularization_multipliers: Sequence[float] = (0.1, 1.0, 10.0),
 ) -> InverseResponseAnalysis:
-    """Fit a kernel, uncertainty ensemble, radial nulls, and sensitivity grid."""
+    """Fit a kernel, uncertainty ensemble, declared nulls, and sensitivity grid."""
 
     source_values, target_values, uncertainty_values, mask_values = _validate_systems(
         sources, targets, uncertainties, masks
@@ -433,6 +585,12 @@ def analyze_stationary_response(
         raise ValueError("ensemble_size must be an integer from 0 to 512")
     if not isinstance(null_count, int) or not 0 <= null_count <= 999:
         raise ValueError("null_count must be an integer from 0 to 999")
+    families = _normalized_null_families(null_families, null_count, null_seed)
+    if any(
+        family["kind"] == "target_system_permutation" and family["count"] > 0
+        for family in families
+    ) and len(source_values) < 2:
+        raise ValueError("target_system_permutation requires at least two systems")
     fit = fit_stationary_response_kernel(
         source_values,
         target_values,
@@ -472,54 +630,105 @@ def analyze_stationary_response(
     kernel_samples = np.stack(ensemble_kernels)
     amplitude_samples = np.asarray(ensemble_amplitudes, dtype=float)
 
-    null_rows: list[dict[str, float | int | str]] = []
-    if null_count:
-        rng = np.random.default_rng(int(null_seed))
-        for index in range(null_count):
-            shuffled_sources = tuple(
-                radial_angle_shuffle(source, rng) for source in source_values
+    null_rows: list[dict[str, float | int | str | None]] = []
+    family_summaries: list[dict[str, Any]] = []
+    observed_error = float(fit.aggregate_metrics["weighted_rmse"])
+    observed_r_squared = float(fit.aggregate_metrics["r_squared"])
+    for family_index, family in enumerate(families):
+        family_rows: list[dict[str, float | int | str | None]] = []
+        rng = np.random.default_rng(int(family["seed"]))
+        for replicate_index in range(int(family["count"])):
+            (
+                null_sources,
+                null_targets,
+                null_uncertainties,
+                null_masks,
+            ) = _null_inputs(
+                family,
+                source_values,
+                target_values,
+                uncertainty_values,
+                mask_values,
+                rng,
             )
             null_fit = fit_stationary_response_kernel(
-                shuffled_sources,
-                target_values,
+                null_sources,
+                null_targets,
                 steps,
                 kernel_shape,
-                uncertainties=uncertainty_values,
-                masks=mask_values,
+                uncertainties=null_uncertainties,
+                masks=null_masks,
                 ridge=ridge,
                 smoothness=smoothness,
                 nonnegative=nonnegative,
             )
-            null_rows.append(
-                {
-                    "index": index,
-                    "kind": "source_radial_angle_shuffle",
-                    "weighted_rmse": null_fit.aggregate_metrics["weighted_rmse"],
-                    "rmse": null_fit.aggregate_metrics["rmse"],
-                    "r_squared": null_fit.aggregate_metrics["r_squared"],
-                    "amplitude": null_fit.amplitude,
-                }
-            )
-    observed_error = float(fit.aggregate_metrics["weighted_rmse"])
-    observed_r_squared = float(fit.aggregate_metrics["r_squared"])
-    as_good = sum(float(row["weighted_rmse"]) <= observed_error for row in null_rows)
-    p_value = (1.0 + as_good) / (1.0 + len(null_rows))
+            row: dict[str, float | int | str | None] = {
+                "family_index": family_index,
+                "replicate_index": replicate_index,
+                "kind": str(family["kind"]),
+                "seed": int(family["seed"]),
+                "dropout_fraction": family.get("dropoutFraction"),
+                "weighted_rmse": null_fit.aggregate_metrics["weighted_rmse"],
+                "rmse": null_fit.aggregate_metrics["rmse"],
+                "r_squared": null_fit.aggregate_metrics["r_squared"],
+                "amplitude": null_fit.amplitude,
+            }
+            family_rows.append(row)
+            null_rows.append(row)
+        as_good = sum(
+            float(row["weighted_rmse"]) <= observed_error for row in family_rows
+        )
+        p_value = (1.0 + as_good) / (1.0 + len(family_rows))
+        family_summaries.append(
+            {
+                "kind": family["kind"],
+                "count": len(family_rows),
+                "seed": family["seed"],
+                **(
+                    {"dropout_fraction": family["dropoutFraction"]}
+                    if "dropoutFraction" in family
+                    else {}
+                ),
+                "observed_weighted_rmse": observed_error,
+                "median_null_weighted_rmse": (
+                    float(
+                        np.median(
+                            [row["weighted_rmse"] for row in family_rows]
+                        )
+                    )
+                    if family_rows
+                    else None
+                ),
+                "monte_carlo_p_value": float(p_value),
+                "permutation_p_value": float(p_value),
+                "minimum_r_squared_gate": 0.25,
+                "signal_against_null": bool(
+                    family_rows
+                    and p_value <= 0.05
+                    and observed_r_squared >= 0.25
+                ),
+                "preserved_quantity": NULL_PRESERVED_QUANTITIES[str(family["kind"])],
+            }
+        )
+    maximum_p_value = max(
+        (float(summary["monte_carlo_p_value"]) for summary in family_summaries),
+        default=1.0,
+    )
     null_summary = {
-        "kind": "source_radial_angle_shuffle",
-        "count": len(null_rows),
+        "combination_rule": "all_declared_families",
+        "family_count": len(family_summaries),
+        "total_count": len(null_rows),
         "observed_weighted_rmse": observed_error,
-        "median_null_weighted_rmse": (
-            float(np.median([row["weighted_rmse"] for row in null_rows]))
-            if null_rows
-            else None
-        ),
-        "permutation_p_value": float(p_value),
+        "maximum_family_p_value": maximum_p_value,
         "minimum_r_squared_gate": 0.25,
         "signal_against_null": bool(
-            null_rows and p_value <= 0.05 and observed_r_squared >= 0.25
+            family_summaries
+            and all(summary["signal_against_null"] for summary in family_summaries)
         ),
-        "preserved_quantity": "source radial shell values",
+        "families": family_summaries,
     }
+    if len(family_summaries) == 1:
+        null_summary.update(family_summaries[0])
 
     cell_volume = float(np.prod(steps))
     sensitivity_rows: list[dict[str, Any]] = []

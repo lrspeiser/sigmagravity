@@ -181,9 +181,35 @@ def main() -> None:
                 },
                 "uncertainty": {"ensembleSize": 20, "seed": 17},
                 "nullControls": {
-                    "kind": "source_radial_angle_shuffle",
-                    "count": 19,
-                    "seed": 23,
+                    "combinationRule": "all_declared_families",
+                    "families": [
+                        {
+                            "kind": "source_radial_angle_shuffle",
+                            "count": 19,
+                            "seed": 23,
+                        },
+                        {
+                            "kind": "source_phase_scramble",
+                            "count": 19,
+                            "seed": 24,
+                        },
+                        {
+                            "kind": "target_system_permutation",
+                            "count": 19,
+                            "seed": 25,
+                        },
+                        {
+                            "kind": "target_radial_angle_shuffle",
+                            "count": 19,
+                            "seed": 26,
+                        },
+                        {
+                            "kind": "source_missing_baryon_dropout",
+                            "count": 19,
+                            "seed": 27,
+                            "dropoutFraction": 0.2,
+                        },
+                    ],
                 },
                 "outputLicense": {
                     "id": "CC-BY-4.0",
@@ -225,8 +251,9 @@ def main() -> None:
                     "recoveredKernelCosine": cosine,
                     "recoveredAmplitude": result["amplitude"],
                     "rSquared": result["aggregateMetrics"]["r_squared"],
-                    "nullPValue": result["nullSummary"]["permutation_p_value"],
-                    "signalAgainstNull": result["nullSummary"]["signal_against_null"],
+                    "nullFamilyCount": result["nullSummary"]["family_count"],
+                    "maximumNullPValue": result["nullSummary"]["maximum_family_p_value"],
+                    "signalAgainstEveryNull": result["nullSummary"]["signal_against_null"],
                     "fittedPerSystemGravityParameters": result[
                         "parameterAccounting"
                     ]["fittedPerSystemGravityParameters"],

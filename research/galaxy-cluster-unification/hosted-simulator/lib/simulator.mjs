@@ -82,7 +82,7 @@ export function runRotationCurveBenchmark({ systems, formula }) {
     medianSystemRmseKmS: [...items].map((item) => item.metrics.rmseKmS).sort((a, b) => a - b)[Math.floor(items.length / 2)],
   });
   const manifest = {
-    serviceVersion: "0.19.0",
+    serviceVersion: "0.20.0",
     formulaSha256: compiled.formulaSha256,
     formula: compiled.canonicalManifest,
     systemIds: systems.map((system) => system.id),
@@ -334,7 +334,7 @@ export function runHeldoutTwinBenchmark({ system, formula, twinOptions = {} }) {
     submittedTwinResidualKmS: point.predictedKmS - point.observedKmS,
   }));
   const manifest = {
-    serviceVersion: "0.19.0",
+    serviceVersion: "0.20.0",
     test: "heldout_radial_twin_rotation_curve",
     datasetRelease: "sparc-2016-v1",
     systemId: system.id,

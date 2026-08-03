@@ -19,6 +19,19 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.20 strengthens inverse baryon-to-response discovery with a
+backward-compatible suite of five deterministic null families: source
+radial-angle shuffling, source Fourier-phase scrambling, target-system
+permutation, target radial-angle shuffling, and total-preserving synthetic
+missing-baryon dropout. Each family has its own count and seed, and the global
+signal flag passes only when the observed pairing beats every declared family
+while clearing the fixed R-squared gate. The worker, preflight estimate,
+schema, CSV, JSON, HTML, LLM briefing, and real local HTTP smoke path all carry
+the declared suite. Known-answer 2D and 3D tests cover every transformer. This
+makes a recovered halo-like response harder to mistake for generic symmetry or
+mis-pairing; it still does not turn a target-derived kernel into a physical
+gravity law or a held-out prediction.
+
 Version 0.19 closes the generic two-potential execution gap. The published
 [`two-potential.json`](examples/models/two-potential.json) fixture now has a
 non-degenerate universal `eta=1.5`, so its analytic acceptance requires
@@ -36,7 +49,7 @@ that the fixture fits a galaxy or cluster. Public heavy execution still returns
 Version 0.18 adds a theory-neutral inverse baryon-to-response discovery
 workbench to the local asynchronous API. It fits one stationary compact 2D or
 3D convolution kernel and one shared amplitude across multiple systems,
-propagates supplied target uncertainties, runs radial-angle source nulls,
+propagates supplied target uncertainties, runs declared null controls,
 reports rank/nullity and regularization sensitivity, and emits deterministic
 CSV, NPZ, JSON, HTML, hash, and reproduction artifacts. The input contract
 requires baryonic sources and explicitly labels its targets as model-derived

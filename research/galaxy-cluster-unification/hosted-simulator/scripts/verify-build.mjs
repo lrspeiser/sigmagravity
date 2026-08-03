@@ -70,6 +70,8 @@ for (const phrase of [
   "Use halo maps only for discovery",
   "Nonlocal baryon-to-response convolution",
   "Inverse baryon-to-response discovery",
+  "all_declared_families",
+  "Why five controls",
   "A genuinely useful result is a prediction, not a reconstruction",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);

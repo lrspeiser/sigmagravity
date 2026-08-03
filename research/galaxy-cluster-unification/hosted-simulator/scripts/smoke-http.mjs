@@ -31,7 +31,7 @@ assert.match(guide, /A genuinely useful result is a prediction, not a reconstruc
 
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
-assert.equal(health.version, "0.19.0-preview");
+assert.equal(health.version, "0.20.0-preview");
 assert.equal(health.capabilities.researcherGuide, "available");
 assert.equal(health.capabilities.localNonlocalConvolution, "available_in_dev_server");
 assert.equal(health.capabilities.localInverseHaloResponseDiscovery, "available_in_dev_server");

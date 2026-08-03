@@ -168,6 +168,42 @@ def test_inverse_job_scientific_result_is_deterministic(tmp_path: Path) -> None:
     ).read_bytes()
 
 
+def test_inverse_job_reports_every_declared_null_family(tmp_path: Path) -> None:
+    build_bundle(tmp_path)
+    request_path = write_request(tmp_path)
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    request["nullControls"] = {
+        "combinationRule": "all_declared_families",
+        "families": [
+            {"kind": "source_phase_scramble", "count": 19, "seed": 41},
+            {"kind": "target_system_permutation", "count": 19, "seed": 42},
+            {
+                "kind": "source_missing_baryon_dropout",
+                "count": 19,
+                "seed": 43,
+                "dropoutFraction": 0.2,
+            },
+        ],
+    }
+    request_path.write_text(json.dumps(request), encoding="utf-8")
+    execute_inverse_response_request_file(request_path)
+    output = tmp_path / "artifacts"
+    result = json.loads((output / "scientific_result.json").read_text(encoding="utf-8"))
+    assert result["nullSummary"]["combination_rule"] == "all_declared_families"
+    assert result["nullSummary"]["family_count"] == 3
+    assert result["nullSummary"]["total_count"] == 57
+    assert result["nullSummary"]["signal_against_null"] is True
+    assert all(
+        row["signal_against_null"] for row in result["nullSummary"]["families"]
+    )
+    csv_text = (output / "null_controls.csv").read_text(encoding="utf-8")
+    report = (output / "report.html").read_text(encoding="utf-8")
+    briefing = (output / "llm_briefing.md").read_text(encoding="utf-8")
+    assert "dropout_fraction" in csv_text
+    assert "source_phase_scramble" in report
+    assert "target_system_permutation" in briefing
+
+
 def test_inverse_job_rejects_raw_observation_as_discovery_target(tmp_path: Path) -> None:
     build_bundle(tmp_path, target_role="raw_observation")
     request_path = write_request(tmp_path)

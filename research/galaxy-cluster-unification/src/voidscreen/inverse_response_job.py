@@ -36,8 +36,15 @@ from .inverse_response import InverseResponseAnalysis, analyze_stationary_respon
 
 Array = np.ndarray
 ENGINE_ID = "inverse-stationary-response-worker"
-ENGINE_VERSION = "1.0.0-preview"
+ENGINE_VERSION = "1.1.0-preview"
 SYSTEM_ID = re.compile(r"^[A-Za-z0-9_.-]{1,64}$")
+NULL_KINDS = {
+    "source_radial_angle_shuffle",
+    "source_phase_scramble",
+    "target_system_permutation",
+    "target_radial_angle_shuffle",
+    "source_missing_baryon_dropout",
+}
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -108,20 +115,87 @@ def _normalized_controls(request: Mapping[str, Any], dimensions: int) -> dict[st
     smoothness = float(kernel.get("smoothness", 1.0e-4))
     uncertainty = request.get("uncertainty", {})
     nulls = request.get("nullControls", {})
+    if not isinstance(nulls, Mapping):
+        raise TypeError("nullControls must be an object")
+    allowed_null_keys = {"families", "combinationRule", "kind", "count", "seed"}
+    unknown_null_keys = set(nulls) - allowed_null_keys
+    if unknown_null_keys:
+        raise ValueError(
+            f"unsupported nullControls properties: {sorted(unknown_null_keys)}"
+        )
     ensemble_size = uncertainty.get("ensembleSize", 32)
-    null_count = nulls.get("count", 19)
     if isinstance(ensemble_size, bool) or not isinstance(ensemble_size, int):
         raise TypeError("uncertainty.ensembleSize must be an integer")
     if not 20 <= ensemble_size <= 512:
         raise ValueError("uncertainty.ensembleSize must lie from 20 to 512")
-    if isinstance(null_count, bool) or not isinstance(null_count, int):
-        raise TypeError("nullControls.count must be an integer")
-    if not 19 <= null_count <= 999:
-        raise ValueError("nullControls.count must lie from 19 to 999")
-    if nulls.get("kind", "source_radial_angle_shuffle") != "source_radial_angle_shuffle":
-        raise ValueError(
-            "nullControls.kind must be source_radial_angle_shuffle in v1"
-        )
+    if "families" in nulls:
+        if any(key in nulls for key in ("kind", "count", "seed")):
+            raise ValueError(
+                "nullControls must use either legacy kind/count/seed or families, not both"
+            )
+        raw_families = nulls["families"]
+        if not isinstance(raw_families, list) or not 1 <= len(raw_families) <= 8:
+            raise ValueError("nullControls.families must contain from 1 to 8 families")
+        combination_rule = nulls.get("combinationRule", "all_declared_families")
+    else:
+        if nulls.get("kind", "source_radial_angle_shuffle") != "source_radial_angle_shuffle":
+            raise ValueError(
+                "legacy nullControls.kind must be source_radial_angle_shuffle; use families for other controls"
+            )
+        if "combinationRule" in nulls:
+            raise ValueError("nullControls.combinationRule requires a families suite")
+        raw_families = [nulls]
+        combination_rule = "all_declared_families"
+    if combination_rule != "all_declared_families":
+        raise ValueError("nullControls.combinationRule must be all_declared_families")
+    null_families: list[dict[str, Any]] = []
+    seen_null_kinds: set[str] = set()
+    for index, family in enumerate(raw_families):
+        if not isinstance(family, Mapping):
+            raise TypeError("each nullControls family must be an object")
+        unknown_family_keys = set(family) - {
+            "kind",
+            "count",
+            "seed",
+            "dropoutFraction",
+        }
+        if unknown_family_keys:
+            raise ValueError(
+                f"unsupported nullControls family properties: {sorted(unknown_family_keys)}"
+            )
+        kind = family.get("kind", "source_radial_angle_shuffle")
+        if kind not in NULL_KINDS:
+            raise ValueError(f"unsupported nullControls family kind: {kind}")
+        if kind in seen_null_kinds:
+            raise ValueError(f"duplicate nullControls family kind: {kind}")
+        seen_null_kinds.add(str(kind))
+        count = family.get("count", 19)
+        seed = family.get("seed", index + 1)
+        if isinstance(count, bool) or not isinstance(count, int):
+            raise TypeError("nullControls family count must be an integer")
+        if not 19 <= count <= 999:
+            raise ValueError("nullControls family count must lie from 19 to 999")
+        if isinstance(seed, bool) or not isinstance(seed, int):
+            raise TypeError("nullControls family seed must be an integer")
+        if not 0 <= seed <= 2**31 - 1:
+            raise ValueError("nullControls family seed must lie from 0 to 2147483647")
+        normalized_family: dict[str, Any] = {
+            "kind": str(kind),
+            "count": count,
+            "seed": seed,
+        }
+        if kind == "source_missing_baryon_dropout":
+            fraction = float(family.get("dropoutFraction", 0.15))
+            if not np.isfinite(fraction) or not 0.0 < fraction <= 0.5:
+                raise ValueError(
+                    "source_missing_baryon_dropout dropoutFraction must be greater than zero and at most 0.5"
+                )
+            normalized_family["dropoutFraction"] = fraction
+        elif "dropoutFraction" in family:
+            raise ValueError(
+                "dropoutFraction is only valid for source_missing_baryon_dropout"
+            )
+        null_families.append(normalized_family)
     multipliers = kernel.get("regularizationMultipliers", [0.1, 1.0, 10.0])
     if not isinstance(multipliers, list) or not multipliers:
         raise TypeError("kernel.regularizationMultipliers must be a non-empty array")
@@ -136,9 +210,8 @@ def _normalized_controls(request: Mapping[str, Any], dimensions: int) -> dict[st
         "regularizationMultipliers": [float(value) for value in multipliers],
         "ensembleSize": ensemble_size,
         "ensembleSeed": int(uncertainty.get("seed", 0)),
-        "nullCount": null_count,
-        "nullSeed": int(nulls.get("seed", 1)),
-        "nullKind": "source_radial_angle_shuffle",
+        "nullFamilies": null_families,
+        "nullCombinationRule": combination_rule,
     }
 
 
@@ -300,7 +373,7 @@ def _analysis_summary(
             "The target maps are model-derived discovery products, not direct dark-matter observations.",
             "The recovered kernel is a response family compatible with submitted assumptions, not a measured path taken by gravity.",
             "A target-derived kernel cannot validate itself; it must be frozen before predicting withheld raw observations.",
-            "Rank, regularization sensitivity, and radial-angle null results must remain attached to any candidate formula.",
+            "Rank, regularization sensitivity, and every declared null-family result must remain attached to any candidate formula.",
             "The absolute response amplitude is fitted jointly across systems and is not derived from first principles here.",
         ],
     }
@@ -393,6 +466,16 @@ def _write_html_report(path: Path, result: Mapping[str, Any], analysis: InverseR
     limitations = "".join(
         f"<li>{html.escape(str(value))}</li>" for value in result["claimBoundary"]
     )
+    null_families = "".join(
+        "<tr>"
+        f"<td>{html.escape(str(row['kind']))}</td>"
+        f"<td>{row['count']}</td>"
+        f"<td>{row['median_null_weighted_rmse']:.4f}</td>"
+        f"<td>{row['monte_carlo_p_value']:.4f}</td>"
+        f"<td>{str(row['signal_against_null']).lower()}</td>"
+        "</tr>"
+        for row in result["nullSummary"]["families"]
+    )
     document = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Inverse response report</title>
 <style>body{{font:16px system-ui;max-width:960px;margin:40px auto;padding:0 20px;color:#18202a}}
@@ -402,16 +485,24 @@ table{{border-collapse:collapse;width:100%}}th,td{{padding:8px;border-bottom:1px
 <p><strong>Classification:</strong> hypothesis generator, not a forward theory test.</p>
 <div class="metric">Amplitude: {result['amplitude']:.6g}</div>
 <div class="metric">Weighted RMSE: {result['aggregateMetrics']['weighted_rmse']:.4f}</div>
-<div class="metric">Null p: {result['nullSummary']['permutation_p_value']:.4f}</div>
+<div class="metric">Worst family p: {result['nullSummary']['maximum_family_p_value']:.4f}</div>
+<div class="metric">Passes every null: {str(result['nullSummary']['signal_against_null']).lower()}</div>
 <div class="metric">Non-identifiable: {str(result['nonIdentifiability']['non_identifiable']).lower()}</div>
 <h2>Normalized kernel</h2>{_kernel_svg(analysis.fit.normalized_kernel)}
 <h2>Per-system reconstruction</h2><table><thead><tr><th>System</th><th>RMSE</th><th>Weighted RMSE</th><th>R²</th></tr></thead><tbody>{systems}</tbody></table>
+<h2>Declared null controls</h2><p>The observed relationship passes only if it beats every family below and clears the R² gate.</p>
+<table><thead><tr><th>Family</th><th>Trials</th><th>Median null RMSE</th><th>Monte Carlo p</th><th>Pass</th></tr></thead><tbody>{null_families}</tbody></table>
 <h2>What this result cannot establish</h2><ul>{limitations}</ul>
 </body></html>"""
     path.write_text(document, encoding="utf-8")
 
 
 def _write_llm_briefing(path: Path, result: Mapping[str, Any]) -> None:
+    null_lines = "".join(
+        f"  - {row['kind']}: Monte Carlo p={row['monte_carlo_p_value']:.12g}; "
+        f"pass={row['signal_against_null']}; preserves {row['preserved_quantity']}\n"
+        for row in result["nullSummary"]["families"]
+    )
     path.write_text(
         "# Deterministic inverse-response briefing\n\n"
         "This file summarizes an already-computed result. An LLM must not change scores, "
@@ -419,8 +510,9 @@ def _write_llm_briefing(path: Path, result: Mapping[str, Any]) -> None:
         f"- Systems: {result['aggregateMetrics']['systems']}\n"
         f"- Fitted universal amplitude: {result['amplitude']:.12g}\n"
         f"- Weighted RMSE: {result['aggregateMetrics']['weighted_rmse']:.12g}\n"
-        f"- Radial-angle null p-value: {result['nullSummary']['permutation_p_value']:.12g}\n"
-        f"- Signal against declared null: {result['nullSummary']['signal_against_null']}\n"
+        f"- Maximum declared-family p-value: {result['nullSummary']['maximum_family_p_value']:.12g}\n"
+        f"- Signal against every declared null: {result['nullSummary']['signal_against_null']}\n"
+        f"- Null families:\n{null_lines}"
         f"- Non-identifiable: {result['nonIdentifiability']['non_identifiable']}\n\n"
         "The target maps were model-derived discovery products. The scientific next step is "
         "to freeze a candidate law and predict raw held-out observations without these targets.\n",
@@ -517,8 +609,7 @@ def execute_inverse_response_request_file(
             nonnegative=controls["nonnegative"],
             ensemble_size=controls["ensembleSize"],
             ensemble_seed=controls["ensembleSeed"],
-            null_count=controls["nullCount"],
-            null_seed=controls["nullSeed"],
+            null_families=controls["nullFamilies"],
             regularization_multipliers=controls["regularizationMultipliers"],
         )
         result_core = {

@@ -4,7 +4,7 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.19.0-preview",
+    version: "0.20.0-preview",
     description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence with distinct morphology/transport/observation/geometry scores, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions, genuinely coupled field equations, separately typed photon and matter observables, and an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. Inverse results are hypothesis generators, not forward theory tests. Public heavy execution still requires durable storage and isolated workers.",
   },
   paths: {

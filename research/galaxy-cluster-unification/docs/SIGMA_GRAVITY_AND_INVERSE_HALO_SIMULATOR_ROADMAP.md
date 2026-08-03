@@ -242,18 +242,21 @@ Acceptance evidence:
 
 Priority: **P1 discovery tool, not the final test.**
 
-Implementation status: **local v1 complete; real-data scientific acceptance
+Implementation status: **local v2 complete; real-data scientific acceptance
 incomplete.** The reference service now accepts content-hashed Cartesian 2D or
 3D baryonic, model-derived target, uncertainty, and mask arrays; fits one
 stationary compact kernel and one amplitude across all submitted systems; and
-emits uncertainty ensembles, a radial-angle null, rank/nullity,
+emits uncertainty ensembles, five selectable deterministic null families,
+rank/nullity,
 regularization-sensitivity, compatible-kernel, deterministic report, hash, and
 reproduction artifacts. It rejects raw observations as an inverse target and
 counts every kernel cell as a fitted discovery coefficient. Synthetic
-injection, null, 3D, degeneracy, determinism, artifact-integrity, and empirical
-interval-coverage gates pass. Remaining acceptance work requires complete real
-baryons, multiple independent lens-model posterior ensembles, the additional
-null families below, and a frozen raw-observation holdout.
+injection, multi-null, 3D, degeneracy, determinism, artifact-integrity, and
+empirical interval-coverage gates pass. The strict suite decision requires the
+observed pairing to beat every declared family. Remaining acceptance work
+requires complete real baryons, multiple independent lens-model posterior
+ensembles, physically motivated central-halo/local-light controls, a
+conservation ledger, and a frozen raw-observation holdout.
 
 For a cluster development set, allow a researcher to supply:
 
@@ -287,12 +290,15 @@ Acceptance evidence:
 - results remain stable across at least two independent lens-model methods; and
 - the workbench can reveal non-identifiability rather than force one answer.
 
-The local v1 satisfies the synthetic recovery, simple-null, calibrated-noise,
-and explicit non-identifiability portions. It does not yet satisfy stability
-across independent real lens models. Target permutation, phase scrambling,
-central-halo, local-light, missing-baryon, conservation, and multi-method
-posterior controls remain open rather than being inferred from the one
-radial-angle control.
+The local v2 satisfies synthetic recovery, calibrated-noise, explicit
+non-identifiability, source radial-angle shuffle, source Fourier-phase
+scramble, target-system permutation, target radial-angle shuffle, and
+total-preserving synthetic missing-baryon dropout in both 2D and 3D. Fourier
+phase scrambling is deliberately a structural diagnostic and need not produce
+a physically valid non-negative baryon map. The workbench does not yet satisfy
+stability across independent real lens models. Physically motivated
+central-halo, local-light, conservation, baryon-catalog posterior, and
+multi-method lens-posterior controls remain open.
 
 ## Build 6: freeze a baryon-only forward law and remove the halo target
 

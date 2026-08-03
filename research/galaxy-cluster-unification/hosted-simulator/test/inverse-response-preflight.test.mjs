@@ -65,7 +65,27 @@ test("inverse response preflight binds roles, uncertainty, nulls, and parameter 
   assert.equal(first.parameterAccounting.fittedPerSystemGravityParameters, 0);
   assert.ok(first.resourceEstimate.estimatedMemoryBytes > 0);
   assert.ok(first.dataRoleAudit.every((row) => row.heldOutRawObservationsUsed === false));
-  assert.equal(first.workerRequest.nullControls.count, 19);
+  assert.equal(first.workerRequest.nullControls.families.length, 1);
+  assert.equal(first.workerRequest.nullControls.families[0].count, 19);
+  assert.equal(first.workerRequest.nullControls.combinationRule, "all_declared_families");
+});
+
+test("inverse response preflight normalizes a deterministic multi-null suite", () => {
+  const value = submission();
+  value.nullControls = {
+    combinationRule: "all_declared_families",
+    families: [
+      { kind: "source_radial_angle_shuffle", count: 19, seed: 31 },
+      { kind: "source_phase_scramble", count: 23, seed: 32 },
+      { kind: "target_system_permutation", count: 29, seed: 33 },
+      { kind: "target_radial_angle_shuffle", count: 31, seed: 34 },
+      { kind: "source_missing_baryon_dropout", count: 37, seed: 35, dropoutFraction: 0.2 },
+    ],
+  };
+  const result = prepareInverseResponseJob({ submission: value, inputBundle: bundle() });
+  assert.equal(result.workerRequest.nullControls.families.length, 5);
+  assert.equal(result.workerRequest.nullControls.families[4].dropoutFraction, 0.2);
+  assert.equal(result.resourceEstimate.estimatedFits, 1 + 20 + 139 + 3);
 });
 
 test("inverse preflight rejects a raw observation as an inverse target", () => {
@@ -93,5 +113,38 @@ test("inverse preflight rejects an even kernel and weak null ensemble", () => {
   assert.throws(
     () => prepareInverseResponseJob({ submission: value, inputBundle: bundle() }),
     /must be a boolean/,
+  );
+});
+
+test("inverse preflight rejects malformed null suites", () => {
+  const mixed = submission();
+  mixed.nullControls = {
+    kind: "source_radial_angle_shuffle",
+    count: 19,
+    seed: 1,
+    families: [{ kind: "source_phase_scramble", count: 19, seed: 2 }],
+  };
+  assert.throws(
+    () => prepareInverseResponseJob({ submission: mixed, inputBundle: bundle() }),
+    /either legacy.*or families/,
+  );
+  const badDropout = submission();
+  badDropout.nullControls = {
+    families: [{ kind: "source_phase_scramble", count: 19, seed: 2, dropoutFraction: 0.2 }],
+  };
+  assert.throws(
+    () => prepareInverseResponseJob({ submission: badDropout, inputBundle: bundle() }),
+    /dropoutFraction is only valid/,
+  );
+  const duplicate = submission();
+  duplicate.nullControls = {
+    families: [
+      { kind: "source_phase_scramble", count: 19, seed: 2 },
+      { kind: "source_phase_scramble", count: 19, seed: 3 },
+    ],
+  };
+  assert.throws(
+    () => prepareInverseResponseJob({ submission: duplicate, inputBundle: bundle() }),
+    /family kinds must be unique/,
   );
 });

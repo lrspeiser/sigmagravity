@@ -51,8 +51,11 @@ async function atomicWrite(path, value) {
       await rename(temporary, path);
       break;
     } catch (error) {
-      if (attempt >= 4 || !["EACCES", "EPERM"].includes(error.code)) throw error;
-      await new Promise((resolvePromise) => setTimeout(resolvePromise, 10 * (attempt + 1)));
+      // Windows can briefly lock the destination while the background batch
+      // poller and a cancellation request publish adjacent state changes.
+      if (attempt >= 12 || !["EACCES", "EBUSY", "EPERM"].includes(error.code)) throw error;
+      const delayMs = Math.min(100, 10 * (2 ** attempt));
+      await new Promise((resolvePromise) => setTimeout(resolvePromise, delayMs));
     }
   }
 }

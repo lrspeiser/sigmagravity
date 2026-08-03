@@ -2,6 +2,13 @@ import { canonicalize, sha256 } from "./canonical.mjs";
 import { validateArrayBundle } from "./field-job-preflight.mjs";
 
 const SYSTEM_ID = /^[A-Za-z0-9_.-]{1,64}$/;
+const NULL_KINDS = new Set([
+  "source_radial_angle_shuffle",
+  "source_phase_scramble",
+  "target_system_permutation",
+  "target_radial_angle_shuffle",
+  "source_missing_baryon_dropout",
+]);
 
 function integer(value, fallback, minimum, maximum, label) {
   const result = value === undefined ? fallback : value;
@@ -39,6 +46,31 @@ function requireRecord(records, key, scientificRole, operationalRole) {
     throw new Error(`array ${key} must declare role=${operationalRole}`);
   }
   return record;
+}
+
+function normalizeNullFamily(raw, index) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
+    throw new Error("each nullControls family must be an object");
+  }
+  const unknown = Object.keys(raw).filter((key) => !["kind", "count", "seed", "dropoutFraction"].includes(key));
+  if (unknown.length) throw new Error(`unsupported nullControls family properties: ${unknown.sort().join(", ")}`);
+  const kind = raw.kind ?? "source_radial_angle_shuffle";
+  if (!NULL_KINDS.has(kind)) throw new Error(`unsupported nullControls family kind: ${kind}`);
+  const family = {
+    kind,
+    count: integer(raw.count, 19, 19, 999, "nullControls family count"),
+    seed: integer(raw.seed, index + 1, 0, 2 ** 31 - 1, "nullControls family seed"),
+  };
+  if (kind === "source_missing_baryon_dropout") {
+    const dropoutFraction = raw.dropoutFraction === undefined ? 0.15 : Number(raw.dropoutFraction);
+    if (!Number.isFinite(dropoutFraction) || dropoutFraction <= 0 || dropoutFraction > 0.5) {
+      throw new Error("source_missing_baryon_dropout dropoutFraction must be greater than zero and at most 0.5");
+    }
+    family.dropoutFraction = dropoutFraction;
+  } else if (raw.dropoutFraction !== undefined) {
+    throw new Error("dropoutFraction is only valid for source_missing_baryon_dropout");
+  }
+  return family;
 }
 
 export function prepareInverseResponseJob({ submission, inputBundle }) {
@@ -136,18 +168,53 @@ export function prepareInverseResponseJob({ submission, inputBundle }) {
     ensembleSize: integer(submission.uncertainty?.ensembleSize, 32, 20, 512, "uncertainty.ensembleSize"),
     seed: integer(submission.uncertainty?.seed, 0, 0, 2 ** 31 - 1, "uncertainty.seed"),
   };
+  const rawNulls = submission.nullControls ?? {};
+  if (!rawNulls || typeof rawNulls !== "object" || Array.isArray(rawNulls)) {
+    throw new Error("nullControls must be an object");
+  }
+  const allowedNullKeys = ["families", "combinationRule", "kind", "count", "seed"];
+  const unknownNullKeys = Object.keys(rawNulls).filter((key) => !allowedNullKeys.includes(key));
+  if (unknownNullKeys.length) {
+    throw new Error(`unsupported nullControls properties: ${unknownNullKeys.sort().join(", ")}`);
+  }
+  let rawFamilies;
+  if (rawNulls.families !== undefined) {
+    if (rawNulls.kind !== undefined || rawNulls.count !== undefined || rawNulls.seed !== undefined) {
+      throw new Error("nullControls must use either legacy kind/count/seed or families, not both");
+    }
+    if (!Array.isArray(rawNulls.families) || rawNulls.families.length < 1 || rawNulls.families.length > 8) {
+      throw new Error("nullControls.families must contain from 1 to 8 families");
+    }
+    rawFamilies = rawNulls.families;
+  } else {
+    if ((rawNulls.kind ?? "source_radial_angle_shuffle") !== "source_radial_angle_shuffle") {
+      throw new Error("legacy nullControls.kind must be source_radial_angle_shuffle; use families for other controls");
+    }
+    if (rawNulls.combinationRule !== undefined) {
+      throw new Error("nullControls.combinationRule requires a families suite");
+    }
+    rawFamilies = [rawNulls];
+  }
+  const combinationRule = rawNulls.combinationRule ?? "all_declared_families";
+  if (combinationRule !== "all_declared_families") {
+    throw new Error("nullControls.combinationRule must be all_declared_families");
+  }
   const nullControls = {
-    kind: submission.nullControls?.kind ?? "source_radial_angle_shuffle",
-    count: integer(submission.nullControls?.count, 19, 19, 999, "nullControls.count"),
-    seed: integer(submission.nullControls?.seed, 1, 0, 2 ** 31 - 1, "nullControls.seed"),
+    families: rawFamilies.map(normalizeNullFamily),
+    combinationRule,
   };
-  if (nullControls.kind !== "source_radial_angle_shuffle") {
-    throw new Error("nullControls.kind must be source_radial_angle_shuffle in v1");
+  const nullKinds = nullControls.families.map((family) => family.kind);
+  if (new Set(nullKinds).size !== nullKinds.length) {
+    throw new Error("nullControls family kinds must be unique");
+  }
+  if (systems.length < 2 && nullControls.families.some((family) => family.kind === "target_system_permutation")) {
+    throw new Error("target_system_permutation requires at least two systems");
   }
   const license = outputLicense(submission.outputLicense);
   const kernelCells = kernelShape.reduce((productValue, value) => productValue * value, 1);
   const mapCells = referenceShape.reduce((productValue, value) => productValue * value, 1);
-  const fits = 1 + uncertainty.ensembleSize + nullControls.count + multipliers.length;
+  const nullFitCount = nullControls.families.reduce((sum, family) => sum + family.count, 0);
+  const fits = 1 + uncertainty.ensembleSize + nullFitCount + multipliers.length;
   const designBytes = submission.systems.length * mapCells * kernelCells * 8;
   const estimatedMemoryBytes = designBytes + fits * kernelCells * 8 + submission.systems.length * mapCells * 8 * 8;
   const workerRequest = canonicalize({
@@ -196,7 +263,7 @@ export function prepareInverseResponseJob({ submission, inputBundle }) {
     warnings: [
       "The target is model-derived and may generate hypotheses; it cannot validate the recovered kernel.",
       "The kernel must be frozen before predicting withheld raw observations.",
-      "Rank, regularization sensitivity, uncertainty intervals, and radial-angle nulls remain part of the result.",
+      "Rank, regularization sensitivity, uncertainty intervals, and every declared null family remain part of the result.",
     ],
   };
 }
