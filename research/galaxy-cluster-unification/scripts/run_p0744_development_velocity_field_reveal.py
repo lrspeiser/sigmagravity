@@ -190,20 +190,31 @@ def main() -> None:
     config_bytes = args.config.read_bytes()
     config = json.loads(config_bytes)
     acquisition = read_json(P0738_RESULT)
-    p0741 = read_json(P0741_RESULT / "report.json")
-    p0743 = read_json(P0743_RESULT / "report.json")
+    registered_result = ROOT / config["parents"].get(
+        "registeredBaryonsResultPath", "results/p0741_fused_spiral_baryonic_registration_development"
+    )
+    twin_result = ROOT / config["parents"].get(
+        "fakeTwinsResultPath", "results/p0743_multiscale_spiral_twin_development"
+    )
+    p0741 = read_json(registered_result / "report.json")
+    p0743 = read_json(twin_result / "report.json")
     if acquisition["manifestSha256"] != config["parents"]["resolvedAcquisitionManifestSha256"]:
         raise ValueError("P0738 parent hash mismatch")
     if p0741["reportSha256"] != config["parents"]["registeredBaryonsResultSha256"]:
         raise ValueError("P0741 parent hash mismatch")
     if p0743["reportSha256"] != config["parents"]["fakeTwinsResultSha256"]:
         raise ValueError("P0743 parent hash mismatch")
-    if p0743["selectedTier"] != config["parents"]["selectedTwinTier"]:
+    selected_twin_tier = config["parents"]["selectedTwinTier"]
+    tier_is_present = any(item["id"] == selected_twin_tier for item in p0743["tiers"])
+    if p0743["selectedTier"] != selected_twin_tier and not (
+        config["parents"].get("allowFailedTwinProtocol", False) and tier_is_present
+    ):
         raise ValueError("selected twin tier mismatch")
     expected_hashes = {
         (row["galaxy"], row["kind"]): row["sha256"] for row in acquisition["files"]
     }
-    audit = pd.read_csv(P0741_RESULT / "map_audit.csv").set_index("galaxy")
+    audit = pd.read_csv(registered_result / "map_audit.csv").set_index("galaxy")
+    eligible_splits = set(config.get("eligibleSplits", ["development"]))
     metadata = parse_sparc_metadata(SPARC_TABLE).set_index("galaxy")
     coordinates = registration.load_coordinates()
     args.output.mkdir(parents=True, exist_ok=True)
@@ -213,18 +224,23 @@ def main() -> None:
     nuisance_rows: list[dict[str, Any]] = []
     atlas_rows: list[dict[str, Any]] = []
     target_arrays_opened = 0
+    validation_arrays_opened = 0
+    holdout_arrays_opened = 0
     hashes_match = True
     for galaxy in config["systems"]:
-        source_path = P0741_RESULT / "maps" / f"{galaxy}.npz"
+        split = str(audit.loc[galaxy].split)
+        if split not in eligible_splits:
+            raise ValueError(f"target split is outside this frozen config: {galaxy} ({split})")
+        source_path = registered_result / "maps" / f"{galaxy}.npz"
         source_hash = next(row["sha256"] for row in p0741["mapFiles"] if row["galaxy"] == galaxy)
         twin_path = (
-            P0743_RESULT
+            twin_result
             / "tiers"
             / config["parents"]["selectedTwinTier"]
             / "generated_maps"
             / f"{galaxy}.npz"
         )
-        selected_catalog = pd.read_csv(P0743_RESULT / "parameter_catalog.csv")
+        selected_catalog = pd.read_csv(twin_result / "parameter_catalog.csv")
         expected_twin_hash = selected_catalog[
             (selected_catalog.tier == config["parents"]["selectedTwinTier"])
             & (selected_catalog.galaxy == galaxy)
@@ -251,6 +267,8 @@ def main() -> None:
             moment2 = np.asarray(hdus[0].data, dtype=float).squeeze()
             moment2_header = hdus[0].header.copy()
         target_arrays_opened += 2
+        validation_arrays_opened += 2 if split == "validation" else 0
+        holdout_arrays_opened += 2 if split == "holdout" else 0
         moment1 *= velocity_unit_scale(moment1_header)
         moment2 *= velocity_unit_scale(moment2_header)
         wcs1 = registration.celestial_wcs(moment1_header)
@@ -421,7 +439,7 @@ def main() -> None:
             axes[row_index, column].set_yticks([])
             figure.colorbar(image, ax=axes[row_index, column], fraction=0.046, label="km/s")
         axes[row_index, 0].set_ylabel(item["galaxy"])
-    figure.suptitle("P0744 real velocity fields versus fixed MOND predictions")
+    figure.suptitle(f"{config.get('stage', 'P0744')} real velocity fields versus fixed MOND predictions")
     figure.savefig(args.output / "velocity_field_comparison_atlas.png", dpi=170)
     plt.close(figure)
 
@@ -443,8 +461,10 @@ def main() -> None:
     checks = {
         "requiredSystems": nuisance.galaxy.nunique() == int(gates["requiredSystems"]),
         "requiredTargetArraysOpened": target_arrays_opened == int(gates["requiredTargetArraysOpened"]),
-        "requiredValidationArraysOpened": 0 == int(gates["requiredValidationArraysOpened"]),
-        "requiredHoldoutArraysOpened": 0 == int(gates["requiredHoldoutArraysOpened"]),
+        "requiredValidationArraysOpened": validation_arrays_opened
+        == int(gates["requiredValidationArraysOpened"]),
+        "requiredHoldoutArraysOpened": holdout_arrays_opened
+        == int(gates["requiredHoldoutArraysOpened"]),
         "minimumScoredPixelsPerGalaxy": int(nuisance.scored_pixels.min())
         >= int(gates["minimumScoredPixelsPerGalaxy"]),
         "maximumTwinSourcePredictionTransportRmseKmS": float(
@@ -471,8 +491,10 @@ def main() -> None:
     }
     status = "pass" if all(checks.values()) else "fail"
     report_core = {
-        "schemaVersion": "sigma-p0744-development-velocity-field-reveal-result/1",
-        "stage": "P0744",
+        "schemaVersion": config.get(
+            "resultSchemaVersion", "sigma-p0744-development-velocity-field-reveal-result/1"
+        ),
+        "stage": config.get("stage", "P0744"),
         "status": status,
         "configSha256": hashlib.sha256(config_bytes).hexdigest(),
         "parents": {
@@ -482,8 +504,8 @@ def main() -> None:
         },
         "systems": len(config["systems"]),
         "targetArraysOpened": target_arrays_opened,
-        "validationArraysOpened": 0,
-        "holdoutArraysOpened": 0,
+        "validationArraysOpened": validation_arrays_opened,
+        "holdoutArraysOpened": holdout_arrays_opened,
         "gravityParametersFitted": 0,
         "darkMatterParameters": 0,
         "checks": checks,
@@ -502,7 +524,8 @@ def main() -> None:
             f"{row.maximum_gas_weighted_rmse_km_s:.2f} km/s; median error ratio "
             f"{row.median_field_error_ratio:.2f} ({row.aggregate_error_band})"
         )
-    summary = f"""# P0744 real development velocity-field reveal
+    split_label = ", ".join(sorted(audit.loc[config["systems"]].split.unique().tolist()))
+    summary = f"""# {config.get('stage', 'P0744')} real velocity-field reveal
 
 Protocol/execution status: **{status.upper()}**
 
@@ -511,16 +534,16 @@ it is not a claim that either gravity formula passed every galaxy.
 
 {chr(10).join(lines)}
 
-- Real galaxies: {len(config['systems'])}
+- Real galaxies: {len(config['systems'])} ({split_label})
 - Scored velocity pixels: {int(nuisance.scored_pixels.sum()):,}
 - Maximum fake-twin/source prediction transport RMSE: {scores.twin_source_transport_rmse_km_s.max():.2f} km/s
-- Validation arrays opened: 0
-- Holdout arrays opened: 0
+- Validation arrays opened: {validation_arrays_opened}
+- Holdout arrays opened: {holdout_arrays_opened}
 - Gravity parameters fitted: 0
 - Dark-matter parameters: 0
 - Report SHA-256: `{report['reportSha256']}`
 
-This is a raw circular-equilibrium development comparison. It does not fit pressure support, bars, warps, streaming motions, M/L, distance, inclination, MOND parameters, or dark halos.
+This is a raw circular-equilibrium comparison. It does not fit pressure support, bars, warps, streaming motions, M/L, distance, inclination, MOND parameters, or dark halos.
 """
     (args.output / "SUMMARY.md").write_text(summary, encoding="utf-8")
     print(json.dumps({"status": status, "checks": checks, "reportSha256": report["reportSha256"]}))

@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "sigma-p0746-validation-velocity-field-reveal/1",
+  "resultSchemaVersion": "sigma-p0746-validation-velocity-field-reveal-result/1",
+  "stage": "P0746",
+  "status": "frozen_before_any_validation_things_moment1_or_moment2_array_opening",
+  "purpose": "Reveal the two predeclared validation velocity and dispersion fields and compare them with fixed Newtonian and MOND predictions from both real registered baryons and velocity-blind Haar-256 synthetic twins.",
+  "parents": {
+    "resolvedAcquisition": "results/p0738_morphology_diverse_resolved_acquisition/manifest.json",
+    "resolvedAcquisitionManifestSha256": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+    "registeredBaryons": "results/p0745b_validation_fused_baryonic_registration/report.json",
+    "registeredBaryonsResultPath": "results/p0745b_validation_fused_baryonic_registration",
+    "registeredBaryonsResultSha256": "9902f1fd0c5057d2b3784e07781514d854493e8970a90757ed8d398e3344f699",
+    "fakeTwins": "results/p0745c_validation_multiscale_spiral_twins/report.json",
+    "fakeTwinsResultPath": "results/p0745c_validation_multiscale_spiral_twins",
+    "fakeTwinsResultSha256": "0a514338cf460ed72decf23b483e4dfd8831faf93490f2bb2ac686e8dfba7579",
+    "selectedTwinTier": "haar_256",
+    "allowFailedTwinProtocol": true,
+    "failedTwinDisclosure": "The frozen Haar-256 validation twin failed the NGC6946 gas-map and median line-of-sight transport gates. P0746 scores it unchanged so the source-map formula result and the twin degradation remain separately visible."
+  },
+  "eligibleSplits": ["validation"],
+  "systems": ["NGC3521", "NGC6946"],
+  "targetProducts": [
+    "THINGS natural-weighted moment 1 velocity field",
+    "THINGS natural-weighted moment 2 dispersion field"
+  ],
+  "sealed": {
+    "holdoutSystems": ["NGC2841", "NGC7331"],
+    "holdoutArraysMayOpen": false
+  },
+  "observationProcessing": {
+    "method": "Unchanged P0744 observation and scoring implementation generalized only to the validation split and frozen parent paths.",
+    "skyCenter": "fixed SPARC/NED coordinate already used for baryonic registration",
+    "positionAngle": "frozen image-only position angle",
+    "inclination": "published SPARC inclination",
+    "systemicVelocity": "one disclosed H I-intensity-weighted central median observation nuisance per galaxy",
+    "handedness": "one disclosed binary observation-coordinate convention per galaxy",
+    "velocityUnit": "read from FITS metadata",
+    "scoreMask": "finite moment 0, moment 1, and moment 2 samples with positive gas weight from one beam to H I R995",
+    "uncertaintyKmS": "quadrature sum of moment-2 dispersion and universal 5.2 km/s channel FWHM divided by 2.355",
+    "predictionBeam": "THINGS geometric-mean circular Gaussian with gas-intensity weighting",
+    "pressureSupportCorrection": false,
+    "nonCircularNuisanceFit": false,
+    "formulaOrHaloFit": false
+  },
+  "models": [
+    {"id": "newtonian_thin_sheet", "gravityParametersFitted": 0, "gravitationalConstantM3KgS2": 6.67430e-11},
+    {"id": "fixed_simple_mond", "gravityParametersFitted": 0, "a0MPerS2": 1.2e-10, "gravitationalConstantM3KgS2": 6.67430e-11}
+  ],
+  "fieldSettings": {"paddingFactor": 2.0},
+  "interpretation": {
+    "fieldErrorRatio": "gas-weighted prediction RMSE divided by gas-weighted RMS measurement-plus-dispersion uncertainty",
+    "consistentBand": "ratio <= 1",
+    "closeBand": "1 < ratio <= 2",
+    "missBand": "ratio > 2",
+    "warning": "Bands are descriptive. A validation result is not a holdout result, and the raw circular model omits known non-circular gas dynamics."
+  },
+  "gates": {
+    "requiredSystems": 2,
+    "requiredTargetArraysOpened": 4,
+    "requiredValidationArraysOpened": 4,
+    "requiredHoldoutArraysOpened": 0,
+    "minimumScoredPixelsPerGalaxy": 500,
+    "maximumTwinSourcePredictionTransportRmseKmS": 8.0,
+    "maximumGravityParametersFitted": 0,
+    "maximumDarkMatterParameters": 0,
+    "allTargetHashesMatchAcquisitionManifest": true,
+    "allScoresFinite": true
+  },
+  "claimBoundary": [
+    "P0746 is the first unchanged-method validation-split 2D velocity-field comparison for the spiral twins; it is not the final holdout.",
+    "The formula scores on registered baryons answer whether the fixed law predicts the real field; twin scores additionally test the simulator reconstruction.",
+    "The frozen Haar-256 twin is retained despite its disclosed NGC6946 validation morphology failure, preventing validation-driven retuning before target reveal.",
+    "No pressure support, warp, bar, streaming, inclination, distance, M/L, MOND, or halo parameter is fitted to the revealed residuals.",
+    "A miss can mix gravity-law error with omitted gas dynamics, so source-versus-twin transport and spatial residual structure must be reported separately.",
+    "Both holdout galaxies and all their pixel arrays remain sealed."
+  ]
+}
