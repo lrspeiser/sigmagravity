@@ -5,7 +5,7 @@ export default function handler(request, response) {
   send(response, 200, {
     status: "ok",
     service: "sigma-gravity-research-simulator",
-    version: "0.18.0-preview",
+    version: "0.19.0-preview",
     capabilities: {
       researcherGuide: "available",
       radialRotationCurves: "available",
@@ -27,6 +27,7 @@ export default function handler(request, response) {
       localRawMultipleImageLensing: "available_in_dev_server",
       localNonlocalConvolution: "available_in_dev_server",
       localInverseHaloResponseDiscovery: "available_in_dev_server",
+      localCoupledTwoPotentialPhotonMatter: "available_in_dev_server",
       fieldSolvers2d3d: "worker_not_connected",
       rawMultipleImageLensing: "production_worker_not_connected",
     },

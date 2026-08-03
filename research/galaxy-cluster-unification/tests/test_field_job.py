@@ -278,6 +278,86 @@ def test_identical_job_replays_have_identical_scientific_hashes(tmp_path: Path):
     }.issubset(artifact_names)
 
 
+def test_published_two_potential_model_survives_the_immutable_job_path(tmp_path: Path):
+    model_path = (
+        ROOT / "hosted-simulator" / "examples" / "models" / "two-potential.json"
+    )
+    model = json.loads(model_path.read_text(encoding="utf-8"))
+    assert model_sha256(model) == (
+        "bcc7c218ec4d11ee77c85837530daa342e98748c3eb04e460b35f93a7e17accc"
+    )
+    cells = 9
+    spacing = 0.5 * 3.085677581491367e19
+    coordinates = (np.arange(cells) - cells // 2) * spacing
+    x, y, z = np.meshgrid(coordinates, coordinates, coordinates, indexing="ij")
+    density = 2.0e-21 * np.exp(
+        -(x**2 + y**2 + z**2) / (2.0 * spacing**2)
+    )
+    bundle_path = tmp_path / "two_potential_bundle"
+    write_array_bundle(
+        bundle_path,
+        {"raw_baryon_density": density},
+        {
+            "schemaVersion": "sigma-array-bundle-request/1",
+            "geometry": {
+                "coordinateSystem": "cartesian_3d",
+                "dimensions": 3,
+                "spacing": [spacing, spacing, spacing],
+                "lengthUnit": "m",
+                "axisOrder": ["x", "y", "z"],
+                "referenceFrame": "synthetic_baryon_test",
+            },
+            "arrays": {
+                "baryon_density": {
+                    "npzKey": "raw_baryon_density",
+                    "unit": "kg/m^3",
+                    "rank": "scalar",
+                    "role": "source",
+                }
+            },
+            "provenance": {
+                "kind": "analytic_manufactured_source",
+                "citation": "repository test fixture",
+            },
+            "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+        },
+    )
+    output_path = tmp_path / "two_potential_run"
+    manifest = execute_field_job(
+        model,
+        bundle_path,
+        {
+            "schemaVersion": "sigma-field-job-request/1",
+            "spacing": [spacing, spacing, spacing],
+            "requestedObservables": [
+                "massive_tracer_acceleration",
+                "photon_lensing_acceleration",
+            ],
+            "seed": 20260802,
+        },
+        output_path,
+    )
+
+    assert manifest["state"] == "succeeded"
+    with np.load(output_path / "fields.npz", allow_pickle=False) as fields:
+        assert np.linalg.norm(fields["Phi"] - 1.5 * fields["Psi"]) / np.linalg.norm(
+            fields["Phi"]
+        ) < 1e-12
+    with np.load(output_path / "observables.npz", allow_pickle=False) as observables:
+        for axis_index in range(3):
+            matter = observables[f"massive_tracer_acceleration__axis{axis_index}"]
+            photons = observables[f"photon_lensing_acceleration__axis{axis_index}"]
+            denominator = max(float(np.linalg.norm(photons)), np.finfo(float).tiny)
+            assert np.linalg.norm(photons - 1.25 * matter) / denominator < 1e-12
+    result = json.loads(
+        (output_path / "scientific_result.json").read_text(encoding="utf-8")
+    )
+    assert result["parameterAccounting"]["perObjectCount"] == 0
+    assert result["numericalMetadata"]["solver_family"] == "coupled_elliptic"
+    assert result["numericalMetadata"]["equation_count"] == 2
+    assert result["numericalMetadata"]["solved_field_count"] == 2
+
+
 def test_field_job_scores_massive_tracer_curve_after_solving(tmp_path: Path):
     cells = 33
     spacing = 0.25

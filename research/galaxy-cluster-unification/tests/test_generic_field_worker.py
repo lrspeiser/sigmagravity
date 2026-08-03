@@ -294,6 +294,113 @@ def test_published_qumond_tree_runs_without_a_theory_specific_branch() -> None:
     assert solution.metadata["engine"] == "generic-divergence-field-worker-v1"
 
 
+def test_published_two_potential_tree_separates_photons_and_matter() -> None:
+    path = ROOT / "hosted-simulator" / "examples" / "models" / "two-potential.json"
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    cells = 9
+    spacing = 0.5 * 3.085677581491367e19
+    coordinates = (np.arange(cells) - cells // 2) * spacing
+    x, y, z = np.meshgrid(coordinates, coordinates, coordinates, indexing="ij")
+    radius_squared = x**2 + y**2 + z**2
+    density = 2.0e-21 * np.exp(-radius_squared / (2.0 * spacing**2))
+
+    solution = solve_field_manifest(
+        manifest,
+        {"baryon_density": density},
+        spacing,
+    )
+
+    psi = solution.fields["Psi"]
+    phi = solution.fields["Phi"]
+    matter = solution.observables["massive_tracer_acceleration"]
+    photons = solution.observables["photon_lensing_acceleration"]
+    assert solution.converged
+    assert np.linalg.norm(psi) > 0.0
+    assert np.linalg.norm(phi - 1.5 * psi) / np.linalg.norm(phi) < 1e-12
+    for photon_component, matter_component in zip(photons, matter, strict=True):
+        denominator = max(float(np.linalg.norm(photon_component)), np.finfo(float).tiny)
+        assert np.linalg.norm(photon_component - 1.25 * matter_component) / denominator < 1e-12
+    assert solution.metadata["solver_family"] == "coupled_elliptic"
+    assert solution.metadata["equation_count"] == 2
+    assert solution.metadata["solved_field_count"] == 2
+    assert solution.metadata["multi_field_update_scheme"] == "sequential_gauss_seidel"
+    assert solution.metadata["engine"] == "generic-divergence-field-worker-v1"
+
+
+def test_two_fields_can_feed_back_into_each_other_without_theory_specific_code() -> None:
+    cells = 33
+    axis = np.linspace(0.0, 1.0, cells)
+    spacing = float(axis[1] - axis[0])
+    x, y = np.meshgrid(axis, axis, indexing="ij")
+    expected_u = np.sin(np.pi * x) * np.sin(np.pi * y)
+    expected_v = 0.5 * np.sin(2.0 * np.pi * x) * np.sin(np.pi * y)
+    coupling = 0.25
+    forcing_u = -2.0 * np.pi**2 * expected_u - coupling * expected_v
+    forcing_v = -5.0 * np.pi**2 * expected_v - coupling * expected_u
+    manifest = {
+        "schemaVersion": "sigma-field-model/1",
+        "name": "Coupled manufactured fields",
+        "modelClass": "stationary_elliptic",
+        "geometry": {
+            "coordinateSystem": "cartesian_2d",
+            "dimensions": 2,
+            "domain": {"lengthUnit": "m"},
+        },
+        "fields": {
+            "forcing_u": {"rank": "scalar", "role": "source", "unit": "1/s^2", "datasetKey": "forcing_u"},
+            "forcing_v": {"rank": "scalar", "role": "source", "unit": "1/s^2", "datasetKey": "forcing_v"},
+            "u": {"rank": "scalar", "role": "solved", "unit": "m^2/s^2", "boundary": {"type": "dirichlet", "value": 0.0}},
+            "v": {"rank": "scalar", "role": "solved", "unit": "m^2/s^2", "boundary": {"type": "dirichlet", "value": 0.0}},
+        },
+        "parameters": {
+            "lambda": {"unit": "1/m^2", "value": coupling, "scope": "universal"}
+        },
+        "equations": [
+            {
+                "id": "u_from_v",
+                "kind": "equality",
+                "lhs": {"op": "laplacian", "args": [{"field": "u"}]},
+                "rhs": {"op": "add", "args": [{"field": "forcing_u"}, {"op": "multiply", "args": [{"parameter": "lambda"}, {"field": "v"}]}]},
+            },
+            {
+                "id": "v_from_u",
+                "kind": "equality",
+                "lhs": {"op": "laplacian", "args": [{"field": "v"}]},
+                "rhs": {"op": "add", "args": [{"field": "forcing_v"}, {"op": "multiply", "args": [{"parameter": "lambda"}, {"field": "u"}]}]},
+            },
+        ],
+        "observables": [],
+        "dataRequirements": [
+            {"key": "forcing_u", "rank": "scalar", "unit": "1/s^2"},
+            {"key": "forcing_v", "rank": "scalar", "unit": "1/s^2"},
+        ],
+        "solver": {
+            "family": "coupled_elliptic",
+            "relativeTolerance": 1e-10,
+            "residualTolerance": 1e-10,
+            "maxIterations": 80,
+            "damping": 1.0,
+        },
+        "parameterPolicy": {"mode": "universal_fixed", "perObjectParameters": []},
+    }
+
+    solution = solve_field_manifest(
+        manifest,
+        {"forcing_u": forcing_u, "forcing_v": forcing_v},
+        spacing,
+    )
+
+    relative_u = np.linalg.norm(solution.fields["u"] - expected_u) / np.linalg.norm(expected_u)
+    relative_v = np.linalg.norm(solution.fields["v"] - expected_v) / np.linalg.norm(expected_v)
+    assert solution.converged
+    assert relative_u < 0.004
+    assert relative_v < 0.005
+    assert solution.iterations > 2
+    assert solution.metadata["equation_count"] == 2
+    assert solution.metadata["solved_field_count"] == 2
+    assert solution.metadata["multi_field_update_scheme"] == "sequential_gauss_seidel"
+
+
 def test_nonlocal_convolution_is_a_physical_linear_integral_without_wraparound() -> None:
     cells = 9
     spacing = [2.0, 3.0]

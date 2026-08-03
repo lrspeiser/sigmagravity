@@ -19,6 +19,20 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.19 closes the generic two-potential execution gap. The published
+[`two-potential.json`](examples/models/two-potential.json) fixture now has a
+non-degenerate universal `eta=1.5`, so its analytic acceptance requires
+`Phi=1.5 Psi` and photon acceleration equal to `1.25` times massive-tracer
+acceleration. The exact confirmed manifest passed the local immutable HTTP
+upload/job/artifact path with eight rehashed artifacts, zero per-object gravity
+parameters, and relative ratio errors below `4.2e-16`. A second manufactured
+case makes each solved field depend on the other and converges through the same
+sequential multi-field solver without a theory-name branch. This proves the
+platform can execute the submitted coupled equations and preserve distinct
+photon/matter observables; it does not show that `eta=1.5` describes nature or
+that the fixture fits a galaxy or cluster. Public heavy execution still returns
+`production_worker_not_connected`.
+
 Version 0.18 adds a theory-neutral inverse baryon-to-response discovery
 workbench to the local asynchronous API. It fits one stationary compact 2D or
 3D convolution kernel and one shared amplitude across multiple systems,

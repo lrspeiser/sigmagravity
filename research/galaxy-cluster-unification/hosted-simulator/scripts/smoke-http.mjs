@@ -25,14 +25,17 @@ assert.match(guide, /Inputs, outputs, and meaning/);
 assert.match(guide, /Use halo maps only for discovery/);
 assert.match(guide, /Inverse baryon-to-response discovery/);
 assert.match(guide, /hypothesis_generator_not_forward_theory_fit/);
+assert.match(guide, /Couple distinct photon and matter potentials/);
+assert.match(guide, /bcc7c218/);
 assert.match(guide, /A genuinely useful result is a prediction, not a reconstruction/);
 
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
-assert.equal(health.version, "0.18.0-preview");
+assert.equal(health.version, "0.19.0-preview");
 assert.equal(health.capabilities.researcherGuide, "available");
 assert.equal(health.capabilities.localNonlocalConvolution, "available_in_dev_server");
 assert.equal(health.capabilities.localInverseHaloResponseDiscovery, "available_in_dev_server");
+assert.equal(health.capabilities.localCoupledTwoPotentialPhotonMatter, "available_in_dev_server");
 const inverseSchema = await request("/schemas/inverse-response-job-submit-v1.schema.json");
 assert.equal(inverseSchema.properties.schemaVersion.const, "sigma-inverse-response-job-submit/1");
 const datasets = await request("/api/v1/datasets");

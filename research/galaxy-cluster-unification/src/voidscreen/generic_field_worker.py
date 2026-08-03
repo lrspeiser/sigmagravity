@@ -965,6 +965,12 @@ def solve_field_manifest(
         residual_history=tuple(history),
         metadata={
             "engine": "generic-divergence-field-worker-v1",
+            "solver_family": str(solver.get("family", "")),
+            "equation_count": len(equations),
+            "solved_field_count": len(solved_names),
+            "multi_field_update_scheme": (
+                "sequential_gauss_seidel" if len(equations) > 1 else None
+            ),
             "dimensions": dimensions,
             "coordinate_system": coordinate_system,
             "shape": shape,

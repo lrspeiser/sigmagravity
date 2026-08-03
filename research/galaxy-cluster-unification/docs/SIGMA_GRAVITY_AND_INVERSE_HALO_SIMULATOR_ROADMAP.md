@@ -1,7 +1,7 @@
 # Roadmap: a simulator for Sigma Gravity and inverse halo-response discovery
 
-Status: active implementation plan, updated 2026-08-02 for the hosted v0.18
-inverse-response workbench milestone.
+Status: active implementation plan, updated 2026-08-02 for the hosted v0.19
+generic coupled-field and photon/matter milestone.
 
 ## Outcome
 
@@ -34,6 +34,11 @@ generator; a frozen forward prediction on unseen raw data is the test.**
   solves, content-addressed arrays, generated galaxy jobs, decoupled
   observation evaluation, typed photon maps, raw multiple-image roots, and
   composed batches.
+- The exact published two-potential manifest now runs through that same generic
+  local HTTP path. Its non-degenerate known-answer fixture produced two solved
+  potentials and distinct photon/matter accelerations with zero per-object
+  parameters; a second manufactured case verified actual bidirectional field
+  coupling. This is solver acceptance, not observational validation.
 - Eight resolved THINGS systems and 146,532 velocity pixels demonstrate that
   generator fidelity, formula transport, and formula accuracy can be measured
   independently. That protocol passed; fixed simple MOND was competitive but
