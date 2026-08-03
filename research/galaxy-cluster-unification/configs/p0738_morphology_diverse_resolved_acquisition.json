@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "sigma-p0738-morphology-diverse-resolved-acquisition/1",
+  "stage": "P0738",
+  "status": "frozen_before_download_or_fits_content_inspection",
+  "purpose": "Acquire a new resolved spiral-galaxy sample with co-spatial H I intensity, velocity, dispersion, and 3.6 micron stellar-light maps for a gravity-independent 2D/3D round-trip and held-out velocity-field test.",
+  "sampleStatus": "The SPARC radial records are project-spent, but these THINGS and SINGS resolved images have not previously been opened or scored in this project.",
+  "sources": {
+    "things": {
+      "name": "The H I Nearby Galaxy Survey",
+      "dataPage": "https://things.www3.mpia.de/Data.html",
+      "paper": "https://arxiv.org/abs/0810.2125",
+      "citation": "Walter et al. 2008, AJ, 136, 2563",
+      "acknowledgement": "The National Radio Astronomy Observatory is a facility of the U.S. National Science Foundation operated under cooperative agreement by Associated Universities, Inc.",
+      "baseUrl": "https://things.www3.mpia.de/Data_files",
+      "fileTemplate": "NGC_{catalogNumber}_NA_MOM{moment}_THINGS.FITS"
+    },
+    "sings": {
+      "name": "Spitzer Infrared Nearby Galaxies Survey",
+      "overview": "https://irsa.ipac.caltech.edu/data/SPITZER/SINGS/overview.html",
+      "doi": "10.26131/IRSA424",
+      "citation": "Kennicutt et al. 2003, PASP, 115, 928",
+      "baseUrl": "https://irsa.ipac.caltech.edu/data/SPITZER/SINGS/galaxies",
+      "imageTemplate": "{slug}/IRAC/{slug}_v7.phot.1.fits",
+      "weightTemplate": "{slug}/IRAC/{slug}_v7.phot.1_wt.fits"
+    },
+    "sparc": {
+      "catalog": "data/raw/sparc/table1.dat",
+      "use": "Previously published distance, inclination, morphology, 3.6 micron luminosity, H I mass, and radial comparator metadata only. No resolved speed enters baryonic extraction."
+    }
+  },
+  "splitPolicy": {
+    "development": "Pipeline and nuisance-model development may inspect these four systems.",
+    "validation": "May be opened only after the first processing implementation and gates are frozen; no retuning after scores.",
+    "holdout": "Raw bytes may be downloaded and hashed, but image arrays remain unopened until processing, nuisance, and scoring gates are frozen and an unlock manifest is written."
+  },
+  "systems": [
+    {
+      "id": "NGC2403",
+      "catalogNumber": "2403",
+      "slug": "ngc2403",
+      "split": "development",
+      "sparc": {"hubbleType": 6, "distanceMpc": 3.16, "inclinationDeg": 63.0, "luminosity3p6BillionSolar": 10.041, "hiMassBillionSolar": 3.199},
+      "expectedBytes": {"thingsMoment0": 16822080, "thingsMoment1": 16822080, "thingsMoment2": 16822080, "singsIrac1": 24909120, "singsIrac1Weight": 24909120}
+    },
+    {
+      "id": "NGC3198",
+      "catalogNumber": "3198",
+      "slug": "ngc3198",
+      "split": "development",
+      "sparc": {"hubbleType": 5, "distanceMpc": 13.8, "inclinationDeg": 73.0, "luminosity3p6BillionSolar": 38.279, "hiMassBillionSolar": 10.869},
+      "expectedBytes": {"thingsMoment0": 4282560, "thingsMoment1": 4279680, "thingsMoment2": 4279680, "singsIrac1": 8167680, "singsIrac1Weight": 8167680}
+    },
+    {
+      "id": "NGC5055",
+      "catalogNumber": "5055",
+      "slug": "ngc5055",
+      "split": "development",
+      "sparc": {"hubbleType": 4, "distanceMpc": 9.9, "inclinationDeg": 55.0, "luminosity3p6BillionSolar": 152.922, "hiMassBillionSolar": 11.722},
+      "expectedBytes": {"thingsMoment0": 4248000, "thingsMoment1": 4245120, "thingsMoment2": 4245120, "singsIrac1": 22357440, "singsIrac1Weight": 22357440}
+    },
+    {
+      "id": "NGC7793",
+      "catalogNumber": "7793",
+      "slug": "ngc7793",
+      "split": "development",
+      "sparc": {"hubbleType": 7, "distanceMpc": 3.61, "inclinationDeg": 47.0, "luminosity3p6BillionSolar": 7.05, "hiMassBillionSolar": 0.861},
+      "expectedBytes": {"thingsMoment0": 4242240, "thingsMoment1": 4239360, "thingsMoment2": 4239360, "singsIrac1": 12502080, "singsIrac1Weight": 12502080}
+    },
+    {
+      "id": "NGC3521",
+      "catalogNumber": "3521",
+      "slug": "ngc3521",
+      "split": "validation",
+      "sparc": {"hubbleType": 4, "distanceMpc": 7.7, "inclinationDeg": 75.0, "luminosity3p6BillionSolar": 84.836, "hiMassBillionSolar": 4.154},
+      "expectedBytes": {"thingsMoment0": 4296960, "thingsMoment1": 4294080, "thingsMoment2": 4294080, "singsIrac1": 10232640, "singsIrac1Weight": 10232640}
+    },
+    {
+      "id": "NGC6946",
+      "catalogNumber": "6946",
+      "slug": "ngc6946",
+      "split": "validation",
+      "sparc": {"hubbleType": 6, "distanceMpc": 5.52, "inclinationDeg": 38.0, "luminosity3p6BillionSolar": 66.173, "hiMassBillionSolar": 5.67},
+      "expectedBytes": {"thingsMoment0": 4256640, "thingsMoment1": 4253760, "thingsMoment2": 4253760, "singsIrac1": 23135040, "singsIrac1Weight": 23135040}
+    },
+    {
+      "id": "NGC2841",
+      "catalogNumber": "2841",
+      "slug": "ngc2841",
+      "split": "holdout",
+      "sparc": {"hubbleType": 3, "distanceMpc": 14.1, "inclinationDeg": 76.0, "luminosity3p6BillionSolar": 188.121, "hiMassBillionSolar": 9.775},
+      "expectedBytes": {"thingsMoment0": 4273920, "thingsMoment1": 4271040, "thingsMoment2": 4271040, "singsIrac1": 7764480, "singsIrac1Weight": 7764480}
+    },
+    {
+      "id": "NGC7331",
+      "catalogNumber": "7331",
+      "slug": "ngc7331",
+      "split": "holdout",
+      "sparc": {"hubbleType": 3, "distanceMpc": 14.7, "inclinationDeg": 75.0, "luminosity3p6BillionSolar": 250.631, "hiMassBillionSolar": 11.067},
+      "expectedBytes": {"thingsMoment0": 4265280, "thingsMoment1": 4262400, "thingsMoment2": 4262400, "singsIrac1": 10995840, "singsIrac1Weight": 10995840}
+    }
+  ],
+  "acquisitionRules": {
+    "thingsWeighting": "natural",
+    "requiredMoments": [0, 1, 2],
+    "singsBand": "IRAC channel 1, 3.6 micron",
+    "downloadHoldoutBytesWithoutOpeningArrays": true,
+    "holdoutHeaderInspectionAllowed": true,
+    "holdoutArrayInspectionAllowedBeforeUnlock": false,
+    "requiredHash": "sha256",
+    "rawFilesImmutable": true,
+    "gravityParametersDuringAcquisition": 0,
+    "velocityTargetsUsedForBaryonicExtraction": false
+  },
+  "acquisitionGates": {
+    "requiredSystems": 8,
+    "requiredDevelopmentSystems": 4,
+    "requiredValidationSystems": 2,
+    "requiredHoldoutSystems": 2,
+    "requiredFiles": 40,
+    "expectedTotalBytes": 380151360,
+    "allHttpStatus200": true,
+    "allByteCountsExact": true,
+    "allSha256Recorded": true,
+    "allFitsPrimaryHdusReadable": true,
+    "allFitsHaveTwoCelestialAxes": true,
+    "minimumHubbleType": 3,
+    "maximumHubbleType": 7,
+    "minimumInclinationDeg": 38.0,
+    "maximumInclinationDeg": 76.0,
+    "maximumGravityParameters": 0
+  },
+  "downstreamNonCircularProtocol": {
+    "baryonicInputs": ["THINGS moment 0", "SINGS IRAC1 image", "SINGS IRAC1 weight", "SPARC catalog metadata"],
+    "withheldTargets": ["THINGS moment 1 velocity field", "THINGS moment 2 dispersion field", "SPARC resolved observed rotation curve"],
+    "requiredComparisons": [
+      "registered observed baryonic map versus generated baryonic twin",
+      "radial profiles and integrated gas and stellar masses",
+      "2D concentration, asymmetry, clumpiness, centroid, and Fourier statistics",
+      "formula prediction on observed baryons versus formula prediction on generated twin",
+      "both formula predictions versus the held-out velocity field",
+      "pressure-support and non-circular nuisance sensitivity reported separately from gravity"
+    ],
+    "orientationRule": "Centroid and position angle must be inferred from baryonic imaging or fixed published metadata; moment 1 may not orient or tune the baryonic twin.",
+    "parameterRule": "Baryonic and observation nuisance parameters remain distinct from universal and per-object gravity parameters."
+  }
+}
