@@ -12,16 +12,17 @@ team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/H31k9KURECH5j3mDyHhZwS7HSWig>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/FL6AriDMSpit9bxZCd33VSgpYxuZ>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-jflwrga1z-horizon3.vercel.app>
-- deployment ID: `dpl_H31k9KURECH5j3mDyHhZwS7HSWig`
-- deployed implementation commit: `3085fc3c1208e9ae2b36338b1d5353785e19e921`
-- public contract version: `0.30.0-preview`
+  <https://sigma-gravity-research-simulator-hfdl9zo71-horizon3.vercel.app>
+- deployment ID: `dpl_FL6AriDMSpit9bxZCd33VSgpYxuZ`
+- deployed implementation commit: `4e6a2d4028b12e83f730aff00b421f1ca7eca55c`
+- public contract version: `0.32.0-preview`
 
-The service passes its local production build, 121 automated hosted tests, all
-1,609 Python scientific tests, and the live HTTP smoke suite. No deployment
-credential is stored in a file, repository setting, or generated artifact.
+The service passes its local production build, 147 automated hosted tests, the
+live deterministic HTTP smoke suite, a real private-queue canary, and the
+GitHub Linux container acceptance for the field and galaxy workers. No
+deployment credential is stored in a tracked file or generated artifact.
 
 ## Deployable artifact
 
@@ -660,21 +661,73 @@ not ready. A real public field-job submission remains HTTP 503. The canonical
 guide redirect was followed and verified to contain the v0.31 capability,
 limitations, Sigma Gravity path, and inverse-halo discovery path.
 
+## v0.32 durable control-plane and queue release
+
+The v0.32 release adds a formula-neutral, transactional production job-control
+implementation. Its nine-table PostgreSQL schema keeps projects, confirmed
+models, uploads, jobs, ordered events, attempts and leases, artifacts, and a
+transactional queue outbox separate. The job repository rejects idempotency-key
+reuse with different scientific inputs, handles duplicate queue delivery,
+recovers expired leases, gives cancellation precedence over late results, and
+prevents a stale worker from publishing. Result finalization downloads and
+rehashes the manifest and every artifact before making a job terminal.
+
+The 147-test hosted suite executes the real SQL migration twice in embedded
+PostgreSQL and covers transient publication failure, deterministic retry,
+duplicate delivery, lease recovery, cancellation races, retryable worker
+failure, stale-worker rejection, and manifest/index/path/hash/byte-count
+agreement. GitHub Actions independently built the non-root Linux worker and
+passed its real field-and-galaxy container acceptance at
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30798650630> for commit
+`4e6a2d4028b12e83f730aff00b421f1ca7eca55c`.
+
+Production deployment `dpl_FL6AriDMSpit9bxZCd33VSgpYxuZ` is ready at the
+stable alias and serves `0.32.0-preview`; its immutable URL is
+<https://sigma-gravity-research-simulator-hfdl9zo71-horizon3.vercel.app>. A
+real public canary was published to `sigma-control-plane-canary-v1`, invoked a
+private queue-trigger consumer, and wrote a private content-addressed
+acknowledgement. A second independent smoke returned the same deployment hash
+`c086d4e4d4868fc1d27e939ad7ae8c638daff1737faa7e8248968bd692f82aa4` and
+acknowledgement hash
+`ab7746edc88e31a6dd358ea2dbe340bc3f8290ba66beaa05eb077fe84c308c2e`.
+`GET /api/v1/storage-readiness` consequently reports
+`durable_storage_and_queue_connected` and `verified_consumed`.
+
+The deterministic public smoke still reproduces run
+`run_d541618c4fd3b2a1dca0e963`, manifest
+`d541618c4fd3b2a1dca0e963514841741086c912634dd13ade4c434194409e8f`, twin run
+`twinrun_eb785c4006fe30dd70a2db9b`, resolved evidence hash
+`8fed5429efecb7a0b5055a15928b8edf48e5713454ba18b42c9503305778d1b7`, and
+cluster registry hash
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+The canonical guide follows its redirect and includes v0.32 inputs, outputs,
+limits, Sigma Gravity, inverse-response discovery, and the remaining database
+approval. A real field-job POST still returns HTTP 503 with
+`production_worker_not_connected`.
+
+Production research jobs are not enabled yet. An authorized Horizon3 user must
+first accept Neon's Marketplace terms at
+<https://vercel.com/horizon3/~/integrations/accept-terms/neon?source=cli>, after
+which the free `iad1` database can be provisioned and migrated. A stateless
+scientific container must then be deployed and connected through the server-only
+worker URL/token pair. The system deliberately fails closed until both are
+verified.
+
 ## Worker milestone after Vercel
 
-The container and authenticated gateway connector now exist and pass a real
-Docker acceptance. The next deployable component is to run that exact image on
-a container host with a verified persistent volume, health monitoring, and a
-rotated worker token, then configure the two server-side Vercel environment
-variables and repeat the complete lifecycle test across a worker restart.
+The container and authenticated gateway connector pass a real Docker
+acceptance, and the durable private object store, queue delivery, PostgreSQL
+schema/outbox, and stateless handoff/finalization contracts now exist. The next
+deployable milestone is to provision and migrate Neon, run that image on a
+container host without relying on its local filesystem for durable state,
+configure the server-only worker URL/token pair, and complete a production job
+through queue, database lease, worker, verified artifact finalization, and
+restart recovery.
 
-That deployment is still a bounded milestone, not the final production
-architecture. The filesystem spool must subsequently be replaced by Postgres
-job/model metadata and S3/R2-compatible immutable artifact storage, preferably
-using direct signed uploads/downloads so large arrays do not traverse Vercel.
-Production also needs researcher authentication, project isolation, quotas,
-leases and retry ownership, cancellation, cache policy, audit logs, signed
-result manifests, dataset-license enforcement, monitoring, backups, and an
-image publication/promotion policy. Only after those controls are verified
+That remains a bounded infrastructure milestone, not final scientific-platform
+readiness. Production still needs researcher authentication, project isolation,
+quotas, cancellation authorization, cache policy, audit logs, signed result
+manifests, dataset-license enforcement, monitoring, backups, cost controls, and
+an image publication/promotion policy. Only after those controls are verified
 should the same boundary admit inverse-response, observation, composed-batch,
 and signed advanced plug-in workloads.

@@ -82,3 +82,20 @@ Until Postgres is connected and migrated and the stateless container is
 deployed, all public heavy scientific routes must continue to return HTTP 503.
 The live queue canary is infrastructure evidence, not permission to enqueue
 researcher jobs and not a scientific result.
+
+## Live v0.32 verification
+
+Production deployment `dpl_FL6AriDMSpit9bxZCd33VSgpYxuZ` serves
+`0.32.0-preview` at
+<https://sigma-gravity-research-simulator-five.vercel.app>. GitHub Actions run
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30798650630> passed the
+real non-root field-and-galaxy container acceptance for implementation commit
+`4e6a2d4028b12e83f730aff00b421f1ca7eca55c`.
+
+The production queue canary and an independent repeat both verified deployment
+hash `c086d4e4d4868fc1d27e939ad7ae8c638daff1737faa7e8248968bd692f82aa4` and
+private acknowledgement hash
+`ab7746edc88e31a6dd358ea2dbe340bc3f8290ba66beaa05eb077fe84c308c2e`.
+Storage readiness reports `durable_storage_and_queue_connected`; database and
+stateless-worker states remain `not_configured`, `productionExecution` remains
+`not_ready`, and a real field-job submission returns HTTP 503.
