@@ -75,6 +75,7 @@ export function prepareBatch({ submission, resolvedSystems }) {
       inputBundle: observationBundle,
       requestedObservables,
       fieldShape: fieldPreflight.geometry.shape,
+      fieldGeometry: fieldPreflight.geometry,
     });
     return {
       systemId: system.id,

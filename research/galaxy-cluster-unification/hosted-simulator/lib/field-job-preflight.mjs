@@ -93,6 +93,7 @@ export function prepareFieldJob(payload) {
     inputBundle: bundle,
     requestedObservables,
     fieldShape: referenceShape,
+    fieldGeometry: bundle.geometry,
   });
   const boundaries = request.boundaryFields ?? {};
   for (const [fieldName, specification] of Object.entries(boundaries)) {

@@ -16,6 +16,7 @@ from voidscreen.field_job import (
     require_model_confirmation,
     write_array_bundle,
 )
+from voidscreen.sky_lensing import C_M_S, RAD_TO_ARCSEC
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -325,7 +326,7 @@ def test_axisymmetric_job_binds_coordinates_and_executes_end_to_end(tmp_path: Pa
     assert relative_error < 0.003
     assert job["geometry"]["axisOrder"] == ["r", "z"]
     assert job["geometry"]["origin"] == [0.0, 0.0]
-    assert job["worker"]["version"] == "1.3.0-preview"
+    assert job["worker"]["version"] == "1.4.0-preview"
     assert result["numericalMetadata"]["coordinate_system"] == (
         "axisymmetric_cylindrical"
     )
@@ -421,6 +422,136 @@ def test_axisymmetric_job_scores_a_rotation_curve_without_cartesian_proxy(
     assert target["score"]["fittedNuisanceParameters"] == 0
     assert "axisymmetric-rotation" in predictions
     assert len(predictions.splitlines()) == len(radii) + 1
+
+
+def test_axisymmetric_job_scores_a_photon_map_without_cartesian_proxy(
+    tmp_path: Path,
+) -> None:
+    cells = 33
+    spacing = 0.25
+    omega = 3.0
+    distance_ratio = 0.7
+    lens_distance = 2.0e20
+    radius = np.arange(cells, dtype=float) * spacing
+    vertical = -0.5 * (cells - 1) * spacing + np.arange(cells) * spacing
+    radial_grid, _vertical_grid = np.meshgrid(radius, vertical, indexing="ij")
+    expected_potential = 0.5 * omega**2 * radial_grid**2
+    forcing = np.full_like(expected_potential, 2.0 * omega**2)
+    model = manufactured_manifest()
+    model["geometry"]["coordinateSystem"] = "axisymmetric_cylindrical"
+    model["observables"][0]["target"] = "photons"
+    model["observables"][0]["expression"] = {
+        "op": "negate",
+        "args": [{"op": "gradient", "args": [{"field": "u"}]}],
+    }
+    confirm_manifest(model)
+    metadata = bundle_metadata(spacing)
+    metadata["geometry"].update(
+        {
+            "coordinateSystem": "axisymmetric_cylindrical",
+            "origin": [0.0, float(vertical[0])],
+            "axisOrder": ["r", "z"],
+            "referenceFrame": "analytic_axisymmetric_photon_fixture",
+        }
+    )
+    metadata["arrays"]["potential_boundary"] = {
+        "npzKey": "raw_boundary",
+        "unit": "m^2/s^2",
+        "rank": "scalar",
+        "role": "boundary",
+    }
+    path_length = float(vertical[-1] - vertical[0])
+    sky_axis = np.linspace(-radius[-1], radius[-1], cells)
+    north, east = np.meshgrid(sky_axis, sky_axis, indexing="ij")
+    deflection_scale = 2.0 * distance_ratio * omega**2 * path_length / C_M_S**2
+    expected_alpha_east_radian = deflection_scale * east
+    expected_alpha_north_radian = deflection_scale * north
+    metadata["arrays"]["alpha_east"] = {
+        "npzKey": "raw_alpha_east",
+        "unit": "arcsec",
+        "rank": "scalar",
+        "role": "auxiliary",
+    }
+    metadata["arrays"]["alpha_north"] = {
+        "npzKey": "raw_alpha_north",
+        "unit": "arcsec",
+        "rank": "scalar",
+        "role": "auxiliary",
+    }
+    metadata["arrays"]["alpha_uncertainty"] = {
+        "npzKey": "raw_alpha_uncertainty",
+        "unit": "arcsec",
+        "rank": "scalar",
+        "role": "uncertainty",
+    }
+    bundle_path = tmp_path / "axisymmetric_photon_bundle"
+    write_array_bundle(
+        bundle_path,
+        {
+            "raw_forcing": forcing,
+            "raw_boundary": expected_potential,
+            "raw_alpha_east": expected_alpha_east_radian * RAD_TO_ARCSEC,
+            "raw_alpha_north": expected_alpha_north_radian * RAD_TO_ARCSEC,
+            "raw_alpha_uncertainty": np.full((cells, cells), 0.01),
+        },
+        metadata,
+    )
+    output_path = tmp_path / "axisymmetric_photon_run"
+    run = execute_field_job(
+        model,
+        bundle_path,
+        {
+            "schemaVersion": "sigma-field-job-request/1",
+            "boundaryFields": {"u": {"arrayKey": "potential_boundary"}},
+            "requestedObservables": ["gradient"],
+            "observationTargets": [
+                {
+                    "schemaVersion": "sigma-observation-target/1",
+                    "id": "axisymmetric-photon-map",
+                    "kind": "photon_lensing_map",
+                    "observable": "gradient",
+                    "axisymmetricInclinationDeg": 0.0,
+                    "skyShape": [cells, cells],
+                    "lineOfSightSamples": cells,
+                    "distanceRatio": distance_ratio,
+                    "lensAngularDiameterDistanceM": lens_distance,
+                    "observedAlphaEastArcsecArrayKey": "alpha_east",
+                    "observedAlphaNorthArcsecArrayKey": "alpha_north",
+                    "deflectionUncertaintyArcsecArrayKey": "alpha_uncertainty",
+                    "minimumValidPixels": 100,
+                    "provenance": {"kind": "analytic axisymmetric photon fixture"},
+                    "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+                }
+            ],
+            "seed": 12,
+        },
+        output_path,
+    )
+    scores = json.loads(
+        (output_path / "observation_scores.json").read_text(encoding="utf-8")
+    )
+    with np.load(
+        output_path / "observation_photon_lensing_maps.npz", allow_pickle=False
+    ) as maps:
+        interior = np.hypot(north, east) <= radius[-1] - spacing
+        np.testing.assert_allclose(
+            maps["target_000__alpha_east_radian"][interior],
+            expected_alpha_east_radian[interior],
+            rtol=2.0e-12,
+            atol=1.0e-30,
+        )
+        np.testing.assert_allclose(
+            maps["target_000__alpha_north_radian"][interior],
+            expected_alpha_north_radian[interior],
+            rtol=2.0e-12,
+            atol=1.0e-30,
+        )
+    target_score = scores["targets"][0]
+    assert run["state"] == "succeeded"
+    assert target_score["coordinateSystem"] == "axisymmetric_cylindrical"
+    assert target_score["samplingMode"] == "axisymmetric_cylindrical_ray_integral"
+    assert target_score["score"]["channels"]["deflection_arcsec"]["rmse"] < 1e-12
+    assert target_score["score"]["fittedNuisanceParameters"] == 0
 
 
 def test_published_two_potential_model_survives_the_immutable_job_path(tmp_path: Path):

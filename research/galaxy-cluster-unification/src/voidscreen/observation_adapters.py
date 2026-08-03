@@ -48,8 +48,8 @@ def _observable_definition(
     if observable_id not in definitions:
         raise ValueError(f"observation target requires unknown observable {observable_id}")
     definition = definitions[observable_id]
-    if definition.get("target") != "massive_tracers":
-        raise ValueError(f"{target_kind} requires a massive_tracers observable")
+    if definition.get("target") not in {"massive_tracers", "both"}:
+        raise ValueError(f"{target_kind} requires a massive_tracers or both observable")
     if definition.get("rank") != "vector" or definition.get("unit") != "m/s^2":
         raise ValueError(f"{target_kind} requires a vector observable in m/s^2")
     return definition

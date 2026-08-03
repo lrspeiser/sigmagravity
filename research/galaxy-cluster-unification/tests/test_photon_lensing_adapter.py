@@ -49,6 +49,42 @@ def geometry(shape=(9, 11, 13), spacing=(2.0, 3.0, 5.0)) -> dict:
     }
 
 
+def axisymmetric_geometry(
+    shape: tuple[int, int] = (33, 65),
+    spacing: tuple[float, float] = (1.0, 1.0),
+) -> dict:
+    return {
+        "coordinateSystem": "axisymmetric_cylindrical",
+        "dimensions": 2,
+        "spacing": list(spacing),
+        "origin": [0.0, -0.5 * (shape[1] - 1) * spacing[1]],
+        "axisOrder": ["r", "z"],
+    }
+
+
+def axisymmetric_target(**changes) -> dict:
+    specification = {
+        "axisymmetricInclinationDeg": 0.0,
+        "skyShape": [33, 33],
+        "lineOfSightSamples": 65,
+    }
+    specification.update(changes)
+    result = target(**specification)
+    for key in ("northAxis", "eastAxis", "lineOfSightAxis"):
+        if key not in changes:
+            result.pop(key, None)
+    return result
+
+
+def axisymmetric_observables(
+    radial: np.ndarray, vertical: np.ndarray
+) -> dict[str, np.ndarray]:
+    return {
+        "photon_acceleration__axis0": radial,
+        "photon_acceleration__axis1": vertical,
+    }
+
+
 def uniform_observables(shape, north=0.0, east=0.0, los=0.0) -> dict:
     return {
         "photon_acceleration__axis0": np.full(shape, north),
@@ -274,6 +310,227 @@ def test_point_mass_projection_recovers_gr_deflection() -> None:
     relative = np.abs(predicted / expected - 1.0)
     assert float(np.median(relative)) < 0.02
     assert float(np.quantile(relative, 0.95)) < 0.04
+
+
+def test_axisymmetric_face_on_harmonic_field_recovers_affine_convergence() -> None:
+    shape = (33, 65)
+    geometry_spec = axisymmetric_geometry(shape)
+    radial_axis = np.arange(shape[0], dtype=float)
+    path_length = float(shape[1] - 1)
+    distance_ratio = 0.7
+    lens_distance = 2.0e20
+    expected_convergence = 0.03
+    omega_squared = (
+        expected_convergence
+        * C_M_S**2
+        / (2.0 * distance_ratio * path_length * lens_distance)
+    )
+    radial = np.broadcast_to(
+        (-omega_squared * radial_axis)[:, None], shape
+    ).copy()
+    vertical = np.zeros(shape)
+    maps: dict[str, np.ndarray] = {}
+    evaluation, _rows = evaluate_observation_targets(
+        photon_model(),
+        axisymmetric_observables(radial, vertical),
+        geometry_spec,
+        [
+            axisymmetric_target(
+                distanceRatio=distance_ratio,
+                lensAngularDiameterDistanceM=lens_distance,
+            )
+        ],
+        map_outputs=maps,
+    )
+    sky_axis = np.linspace(-32.0, 32.0, 33)
+    north, east = np.meshgrid(sky_axis, sky_axis, indexing="ij")
+    interior = np.hypot(north, east) <= 24.0
+    scale = expected_convergence / lens_distance
+    np.testing.assert_allclose(
+        maps["target_000__alpha_east_radian"][interior],
+        scale * east[interior],
+        rtol=2.0e-13,
+        atol=1.0e-30,
+    )
+    np.testing.assert_allclose(
+        maps["target_000__alpha_north_radian"][interior],
+        scale * north[interior],
+        rtol=2.0e-13,
+        atol=1.0e-30,
+    )
+    invariant_interior = np.hypot(north, east) <= 20.0
+    np.testing.assert_allclose(
+        maps["target_000__convergence"][invariant_interior],
+        expected_convergence,
+        rtol=2.0e-13,
+    )
+    np.testing.assert_allclose(
+        maps["target_000__shear_magnitude"][invariant_interior],
+        0.0,
+        atol=2.0e-15,
+    )
+    metadata = evaluation["targets"][0]
+    assert metadata["coordinateSystem"] == "axisymmetric_cylindrical"
+    assert metadata["samplingMode"] == "axisymmetric_cylindrical_ray_integral"
+    assert metadata["projection"]["diagnostics"]["supportedPixels"] > 700
+
+
+def test_axisymmetric_edge_on_uniform_vertical_field_has_exact_chord_length() -> None:
+    shape = (33, 33)
+    acceleration = 4.0
+    observables = axisymmetric_observables(
+        np.zeros(shape), np.full(shape, acceleration)
+    )
+    maps: dict[str, np.ndarray] = {}
+    evaluate_observation_targets(
+        photon_model(),
+        observables,
+        axisymmetric_geometry(shape),
+        [
+            axisymmetric_target(
+                axisymmetricInclinationDeg=90.0,
+                skyShape=[33, 33],
+                lineOfSightSamples=65,
+                distanceRatio=1.0,
+            )
+        ],
+        map_outputs=maps,
+    )
+    east_axis = np.linspace(-32.0, 32.0, 33)
+    expected_path = 2.0 * np.sqrt(np.maximum(32.0**2 - east_axis**2, 0.0))
+    expected_north = -2.0 * acceleration * expected_path / C_M_S**2
+    center_row = shape[0] // 2
+    np.testing.assert_allclose(
+        maps["target_000__alpha_north_radian"][center_row, 1:-1],
+        expected_north[1:-1],
+        rtol=2.0e-14,
+        atol=1.0e-30,
+    )
+    np.testing.assert_allclose(
+        maps["target_000__alpha_east_radian"][center_row, 1:-1],
+        0.0,
+        atol=1.0e-30,
+    )
+
+
+def test_axisymmetric_point_mass_recovers_gr_deflection() -> None:
+    shape = (65, 257)
+    geometry_spec = axisymmetric_geometry(shape)
+    radial_axis = np.arange(shape[0], dtype=float)
+    vertical_axis = geometry_spec["origin"][1] + np.arange(shape[1], dtype=float)
+    radial_grid, vertical_grid = np.meshgrid(
+        radial_axis, vertical_axis, indexing="ij"
+    )
+    radius_squared = radial_grid**2 + vertical_grid**2
+    safe_radius = np.sqrt(np.maximum(radius_squared, 0.25))
+    gravity_mass = 2.0e24
+    radial = -gravity_mass * radial_grid / safe_radius**3
+    vertical = -gravity_mass * vertical_grid / safe_radius**3
+    center = 32
+    offsets = np.arange(2, 17)
+    physical_radius = 2.0 * offsets
+    expected = 4.0 * gravity_mass / (C_M_S**2 * physical_radius)
+    errors: dict[int, tuple[float, float]] = {}
+    for line_samples in (17, 33, 65, 129, 257):
+        maps: dict[str, np.ndarray] = {}
+        evaluate_observation_targets(
+            photon_model(),
+            axisymmetric_observables(radial, vertical),
+            geometry_spec,
+            [
+                axisymmetric_target(
+                    skyShape=[65, 65],
+                    lineOfSightSamples=line_samples,
+                    distanceRatio=1.0,
+                    lensAngularDiameterDistanceM=1.0e9,
+                )
+            ],
+            map_outputs=maps,
+        )
+        predicted = np.abs(
+            maps["target_000__alpha_east_radian"][center, center + offsets]
+        )
+        relative = np.abs(predicted / expected - 1.0)
+        errors[line_samples] = (
+            float(np.median(relative)),
+            float(np.quantile(relative, 0.95)),
+        )
+    assert errors[17][0] > errors[33][0] > errors[65][0] > errors[129][0]
+    assert abs(errors[129][0] - errors[257][0]) < 1.0e-5
+    relative = errors[257]
+    assert relative[0] < 0.02
+    assert relative[1] < 0.04
+
+
+def test_axisymmetric_exact_maps_score_in_separate_channels() -> None:
+    shape = (33, 65)
+    radial_axis = np.arange(shape[0], dtype=float)
+    radial = np.broadcast_to((-1.0e-12 * radial_axis)[:, None], shape).copy()
+    observables = axisymmetric_observables(radial, np.zeros(shape))
+    predicted: dict[str, np.ndarray] = {}
+    projection_target = axisymmetric_target()
+    evaluate_observation_targets(
+        photon_model(),
+        observables,
+        axisymmetric_geometry(shape),
+        [projection_target],
+        map_outputs=predicted,
+    )
+    finite = np.isfinite(predicted["target_000__reduced_shear_1"])
+    arrays = {
+        "alpha_e": predicted["target_000__alpha_east_arcsec"],
+        "alpha_n": predicted["target_000__alpha_north_arcsec"],
+        "alpha_sigma": np.full((33, 33), 0.05),
+        "g1": predicted["target_000__reduced_shear_1"],
+        "g2": predicted["target_000__reduced_shear_2"],
+        "g_sigma": np.full((33, 33), 0.01),
+        "mask": finite.astype(float),
+    }
+    evaluation, _rows = evaluate_observation_targets(
+        photon_model(),
+        observables,
+        axisymmetric_geometry(shape),
+        [
+            {
+                **projection_target,
+                "observedAlphaEastArcsecArrayKey": "alpha_e",
+                "observedAlphaNorthArcsecArrayKey": "alpha_n",
+                "deflectionUncertaintyArcsecArrayKey": "alpha_sigma",
+                "observedReducedShear1ArrayKey": "g1",
+                "observedReducedShear2ArrayKey": "g2",
+                "reducedShearUncertaintyArrayKey": "g_sigma",
+                "scoreMaskArrayKey": "mask",
+            }
+        ],
+        arrays=arrays,
+    )
+    assert evaluation["scoredTargetCount"] == 1
+    for channel in evaluation["channelAggregates"].values():
+        assert channel["rmse"] < 1.0e-15
+
+
+def test_axisymmetric_photon_projection_rejects_ambiguous_geometry() -> None:
+    shape = (9, 9)
+    observables = axisymmetric_observables(np.zeros(shape), np.zeros(shape))
+    bad_axis_order = axisymmetric_geometry(shape)
+    bad_axis_order["axisOrder"] = ["z", "r"]
+    with pytest.raises(ValueError, match="axisOrder"):
+        evaluate_observation_targets(
+            photon_model(), observables, bad_axis_order, [axisymmetric_target()]
+        )
+    bad_origin = axisymmetric_geometry(shape)
+    bad_origin["origin"][0] = 1.0
+    with pytest.raises(ValueError, match="radial origin"):
+        evaluate_observation_targets(
+            photon_model(), observables, bad_origin, [axisymmetric_target()]
+        )
+    with pytest.raises(ValueError, match="Cartesian sky-axis"):
+        evaluate_observation_targets(
+            photon_model(),
+            observables,
+            axisymmetric_geometry(shape),
+            [axisymmetric_target(northAxis=0)],
+        )
 
 
 def test_photon_target_rejects_massive_only_observable_and_bad_axes() -> None:

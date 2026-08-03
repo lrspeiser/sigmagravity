@@ -83,9 +83,9 @@ convolution semantics are rejected.
   require Cartesian 3D.
 - Cylindrical nonlocal kernels need a real Hankel/azimuth-integrated operator;
   Cartesian `linear_same` convolution is deliberately rejected.
-- Circular-speed and resolved velocity-field adapters now consume `(r,z)`
-  fields through the separately documented v0.26 milestone. Axisymmetric
-  photon lensing remains unbuilt.
+- Circular-speed, resolved velocity-field, and photon-map adapters now consume
+  `(r,z)` fields through the separately documented v0.26 and v0.27 milestones.
+  Cylindrical raw multiple-image and weak-lensing likelihoods remain unbuilt.
 - Vector/tensor field solves, mixed boundaries, refinement, and production
   workers remain unfinished.
 - Numerical agreement with manufactured solutions validates the solver, not a

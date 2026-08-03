@@ -73,6 +73,15 @@ target to the field equation or baryonic extractor.
 The verified Horizon3 production deployment is
 <https://sigma-gravity-research-simulator-five.vercel.app>.
 
+The v0.27 local worker now turns the same confirmed axisymmetric field into
+both galaxy-motion and photon-lensing predictions. It reconstructs and
+integrates a cylindrical `(a_r,a_z)` field at a declared inclination, returns
+deflection/shear/invariant maps, and preserves separate photon and velocity
+score channels with zero added gravity parameters. Independent affine,
+chord-length and point-mass fixtures freeze the normalization; the finite
+solved-domain and raw-likelihood limits are documented in
+[`docs/AXISYMMETRIC_PHOTON_LENSING_MILESTONE.md`](docs/AXISYMMETRIC_PHOTON_LENSING_MILESTONE.md).
+
 ## Absolute-field update through P0682
 
 The newest first-principles-style branch starts from divergence-form AQUAL,

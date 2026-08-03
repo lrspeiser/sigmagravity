@@ -308,7 +308,7 @@ test("a circular-speed target cannot silently use a photon observable", () => {
     provenance: { kind: "negative fixture" },
     license: { id: "CC0-1.0", redistributionAllowed: true },
   }];
-  assert.throws(() => prepareFieldJob(request), /massive_tracers vector/);
+  assert.throws(() => prepareFieldJob(request), /massive_tracers or both vector/);
 });
 
 test("field preflight binds content-hashed resolved velocity maps and beam data", () => {
@@ -516,6 +516,113 @@ test("photon preflight rejects massive-only observables and incomplete map tripl
   request.request.observationTargets[0].observable = "photon_lensing_acceleration";
   request.request.observationTargets[0].observedAlphaEastArcsecArrayKey = "only-east";
   assert.throws(() => prepareFieldJob(request), /both observed component maps/);
+});
+
+test("axisymmetric photon preflight binds an explicit sky and path grid", () => {
+  const request = axisymmetricPayload();
+  request.model.observables[0].target = "both";
+  bindConfirmation(request.model);
+  const shape = [31, 29];
+  for (const [index, [key, unit, role]] of [
+    ["alpha_east", "arcsec", "auxiliary"],
+    ["alpha_north", "arcsec", "auxiliary"],
+    ["alpha_uncertainty", "arcsec", "uncertainty"],
+  ].entries()) {
+    request.inputBundle.arrays.push({
+      key,
+      npzKey: key,
+      unit,
+      rank: "scalar",
+      role,
+      dtype: "<f8",
+      shape,
+      elementCount: shape[0] * shape[1],
+      contentSha256: String(index + 4).repeat(64),
+    });
+  }
+  const { bundleSha256: _oldHash, ...core } = request.inputBundle;
+  request.inputBundle = { ...core, bundleSha256: sha256(core) };
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "axisymmetric-photon-map",
+    kind: "photon_lensing_map",
+    observable: "massive_tracer_acceleration",
+    axisymmetricInclinationDeg: 63,
+    skyShape: shape,
+    lineOfSightSamples: 129,
+    distanceRatio: 0.7,
+    lensAngularDiameterDistanceM: 1e22,
+    observedAlphaEastArcsecArrayKey: "alpha_east",
+    observedAlphaNorthArcsecArrayKey: "alpha_north",
+    deflectionUncertaintyArcsecArrayKey: "alpha_uncertainty",
+    provenance: { kind: "axisymmetric photon fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  const result = prepareFieldJob(request);
+  assert.equal(result.valid, true);
+  assert.equal(result.observationTargets[0].scored, true);
+  assert.equal(result.observationTargets[0].pointCount, 2 * shape[0] * shape[1]);
+});
+
+test("axisymmetric photon preflight rejects ambiguous axes, origin, and path cost", () => {
+  const request = axisymmetricPayload();
+  request.model.observables[0].target = "both";
+  bindConfirmation(request.model);
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "axisymmetric-photon-map",
+    kind: "photon_lensing_map",
+    observable: "massive_tracer_acceleration",
+    axisymmetricInclinationDeg: 45,
+    skyShape: [33, 33],
+    lineOfSightSamples: 129,
+    distanceRatio: 0.7,
+    lensAngularDiameterDistanceM: 1e22,
+    provenance: { kind: "axisymmetric photon fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  request.request.observationTargets[0].northAxis = 0;
+  assert.throws(() => prepareFieldJob(request), /does not accept Cartesian sky-axis/);
+  delete request.request.observationTargets[0].northAxis;
+  request.request.observationTargets[0].gridOriginM = [0, -15];
+  assert.throws(() => prepareFieldJob(request), /origin must match/);
+  delete request.request.observationTargets[0].gridOriginM;
+  request.request.observationTargets[0].skyShape = [513, 513];
+  request.request.observationTargets[0].lineOfSightSamples = 2049;
+  assert.throws(() => prepareFieldJob(request), /path samples/);
+});
+
+test("decoupled axisymmetric photon targets bind the solved field geometry", () => {
+  const request = axisymmetricPayload();
+  request.model.observables[0].target = "both";
+  bindConfirmation(request.model);
+  const observationBundle = inputBundle();
+  observationBundle.geometry.coordinateSystem = "observation_table";
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "decoupled-axisymmetric-photon",
+    kind: "photon_lensing_map",
+    observable: "massive_tracer_acceleration",
+    axisymmetricInclinationDeg: 63,
+    skyShape: [31, 29],
+    lineOfSightSamples: 129,
+    distanceRatio: 0.7,
+    lensAngularDiameterDistanceM: 1e22,
+    provenance: { kind: "axisymmetric photon fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const validate = () => validateObservationTargets({
+    targets: [target],
+    model: request.model,
+    inputBundle: observationBundle,
+    requestedObservables: ["massive_tracer_acceleration"],
+    fieldShape: [33, 33],
+    fieldGeometry: request.inputBundle.geometry,
+  });
+  assert.throws(validate, /requires gridOriginM/);
+  target.gridOriginM = [0, -16];
+  const result = validate();
+  assert.equal(result[0].pointCount, 2 * 31 * 29);
 });
 
 test("raw multiple-image preflight counts source nuisances separately", () => {

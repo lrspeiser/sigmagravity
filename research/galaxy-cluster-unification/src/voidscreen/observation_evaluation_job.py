@@ -44,7 +44,7 @@ from .observation_adapters import evaluate_observation_targets
 
 Array = np.ndarray
 ENGINE_ID = "generic-observation-evaluation-worker"
-ENGINE_VERSION = "1.1.0-preview"
+ENGINE_VERSION = "1.2.0-preview"
 
 
 def _worker_source_sha256() -> str:

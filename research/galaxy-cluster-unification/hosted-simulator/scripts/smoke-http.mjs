@@ -39,10 +39,12 @@ assert.match(guide, /Solve a disk-and-bulge field in cylindrical geometry/);
 assert.match(guide, /zero_radial_flux_regularity/);
 assert.match(guide, /Score a cylindrical field against galaxy motion/);
 assert.match(guide, /axisymmetric_midplane_direct/);
+assert.match(guide, /Project a cylindrical field into a lensing map/);
+assert.match(guide, /axisymmetric_cylindrical_ray_integral/);
 
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
-assert.equal(health.version, "0.26.0-preview");
+assert.equal(health.version, "0.27.0-preview");
 assert.equal(health.capabilities.researcherGuide, "available");
 assert.equal(health.capabilities.localNonlocalConvolution, "available_in_dev_server");
 assert.equal(health.capabilities.localInverseHaloResponseDiscovery, "available_in_dev_server");
@@ -53,6 +55,7 @@ assert.equal(health.capabilities.localBaryonicImageConditioning, "available_in_d
 assert.equal(health.capabilities.resolvedClusterEvidenceRegistry, "available");
 assert.equal(health.capabilities.localAxisymmetricCylindricalFields, "available_in_dev_server");
 assert.equal(health.capabilities.localAxisymmetricGalaxyObservations, "available_in_dev_server");
+assert.equal(health.capabilities.localAxisymmetricPhotonLensing, "available_in_dev_server");
 const inverseSchema = await request("/schemas/inverse-response-job-submit-v1.schema.json");
 assert.equal(inverseSchema.properties.schemaVersion.const, "sigma-inverse-response-job-submit/1");
 const galaxySchema = await request("/schemas/galaxy-job-submit-v1.schema.json");

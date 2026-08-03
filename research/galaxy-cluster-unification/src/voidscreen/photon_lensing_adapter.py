@@ -13,8 +13,14 @@ from collections.abc import Mapping
 from typing import Any
 
 import numpy as np
+from scipy.ndimage import map_coordinates
 
-from .sky_lensing import C_M_S, RAD_TO_ARCSEC, photon_deflection_sky
+from .sky_lensing import (
+    C_M_S,
+    RAD_TO_ARCSEC,
+    SkyPhotonDeflection2D,
+    photon_deflection_sky,
+)
 
 Array = np.ndarray
 
@@ -224,6 +230,187 @@ def _lensing_invariants(
     }
 
 
+def _axisymmetric_photon_deflection(
+    components: tuple[Array, Array],
+    geometry: Mapping[str, Any],
+    target: Mapping[str, Any],
+    *,
+    distance_ratio: float,
+) -> tuple[Any, dict[str, Any]]:
+    """Project an ``(a_r,a_z)`` field through its finite cylindrical domain."""
+
+    if list(geometry.get("axisOrder", [])) != ["r", "z"]:
+        raise ValueError(
+            "axisymmetric photon lensing requires geometry axisOrder=['r','z']"
+        )
+    radial, vertical = components
+    if radial.ndim != 2 or vertical.ndim != 2 or radial.shape != vertical.shape:
+        raise ValueError("axisymmetric photon observable must provide matching 2D (r,z) components")
+    if min(radial.shape) < 3:
+        raise ValueError("axisymmetric photon field must contain at least three cells per axis")
+    raw_spacing = geometry.get("spacing")
+    spacing = (
+        np.full(2, float(raw_spacing))
+        if isinstance(raw_spacing, (int, float))
+        else np.asarray(raw_spacing, dtype=float)
+    )
+    if spacing.shape != (2,) or np.any(~np.isfinite(spacing)) or np.any(spacing <= 0):
+        raise ValueError("axisymmetric geometry spacing must contain two positive finite values")
+    raw_origin = target.get("gridOriginM", geometry.get("origin"))
+    origin = np.asarray(raw_origin, dtype=float)
+    if origin.shape != (2,) or np.any(~np.isfinite(origin)):
+        raise ValueError("axisymmetric photon lensing requires an explicit origin=[0,z0]")
+    if origin[0] != 0.0:
+        raise ValueError("axisymmetric photon-lensing radial origin must be exactly r=0")
+
+    raw_shape = target.get("skyShape")
+    if (
+        not isinstance(raw_shape, list)
+        or len(raw_shape) != 2
+        or any(isinstance(value, bool) or not isinstance(value, int) for value in raw_shape)
+        or any(value < 3 or value > 513 for value in raw_shape)
+    ):
+        raise ValueError("skyShape must contain two integers from 3 through 513")
+    sky_shape = (int(raw_shape[0]), int(raw_shape[1]))
+    line_samples = target.get("lineOfSightSamples")
+    if (
+        isinstance(line_samples, bool)
+        or not isinstance(line_samples, int)
+        or line_samples < 3
+        or line_samples > 2049
+    ):
+        raise ValueError("lineOfSightSamples must be an integer from 3 through 2049")
+    if sky_shape[0] * sky_shape[1] * line_samples > 16_777_216:
+        raise ValueError("axisymmetric photon projection exceeds 16,777,216 path samples")
+    inclination_deg = float(target.get("axisymmetricInclinationDeg"))
+    if not math.isfinite(inclination_deg) or not 0.0 <= inclination_deg <= 90.0:
+        raise ValueError("axisymmetricInclinationDeg must lie in [0,90]")
+
+    radial_max = float((radial.shape[0] - 1) * spacing[0])
+    vertical_min = float(origin[1])
+    vertical_max = float(origin[1] + (radial.shape[1] - 1) * spacing[1])
+    inclination = math.radians(inclination_deg)
+    sin_i = math.sin(inclination)
+    cos_i = math.cos(inclination)
+    north_bounds = (
+        -radial_max * cos_i + vertical_min * sin_i,
+        radial_max * cos_i + vertical_max * sin_i,
+    )
+    east_bounds = (-radial_max, radial_max)
+    north_axis = np.linspace(*north_bounds, sky_shape[0])
+    east_axis = np.linspace(*east_bounds, sky_shape[1])
+    east_grid = np.broadcast_to(east_axis[None, :], sky_shape)
+    north_grid = np.broadcast_to(north_axis[:, None], sky_shape)
+
+    lower = np.full(sky_shape, -np.inf, dtype=float)
+    upper = np.full(sky_shape, np.inf, dtype=float)
+    valid = np.ones(sky_shape, dtype=bool)
+    radial_available = np.square(radial_max) - np.square(east_grid)
+    valid &= radial_available >= -1.0e-12 * max(radial_max**2, 1.0)
+    radial_root = np.sqrt(np.maximum(radial_available, 0.0))
+    tolerance = 32.0 * np.finfo(float).eps
+    if sin_i > tolerance:
+        lower = np.maximum(lower, (north_grid * cos_i - radial_root) / sin_i)
+        upper = np.minimum(upper, (north_grid * cos_i + radial_root) / sin_i)
+    else:
+        valid &= np.hypot(north_grid, east_grid) <= radial_max * (1.0 + 1.0e-12)
+    if cos_i > tolerance:
+        lower = np.maximum(lower, (vertical_min - north_grid * sin_i) / cos_i)
+        upper = np.minimum(upper, (vertical_max - north_grid * sin_i) / cos_i)
+    else:
+        intrinsic_z = north_grid * sin_i
+        valid &= (intrinsic_z >= vertical_min) & (intrinsic_z <= vertical_max)
+    valid &= np.isfinite(lower) & np.isfinite(upper) & (upper > lower)
+
+    alpha_east = np.full(sky_shape, np.nan, dtype=float)
+    alpha_north = np.full(sky_shape, np.nan, dtype=float)
+    path_lengths = np.where(valid, upper - lower, np.nan)
+    path_fraction = np.linspace(0.0, 1.0, line_samples)
+    multiplier = -2.0 * distance_ratio / C_M_S**2
+    for row in range(sky_shape[0]):
+        columns = np.flatnonzero(valid[row])
+        if not len(columns):
+            continue
+        row_lower = lower[row, columns]
+        row_upper = upper[row, columns]
+        line_of_sight = row_lower[:, None] + (
+            row_upper - row_lower
+        )[:, None] * path_fraction[None, :]
+        north = north_axis[row]
+        east = east_axis[columns, None]
+        intrinsic_x = -north * cos_i + line_of_sight * sin_i
+        intrinsic_y = np.broadcast_to(east, intrinsic_x.shape)
+        intrinsic_z = north * sin_i + line_of_sight * cos_i
+        cylindrical_r = np.hypot(intrinsic_x, intrinsic_y)
+        radial_index = np.clip(cylindrical_r / spacing[0], 0.0, radial.shape[0] - 1)
+        vertical_index = np.clip(
+            (intrinsic_z - vertical_min) / spacing[1], 0.0, radial.shape[1] - 1
+        )
+        sample_indices = np.vstack([radial_index.ravel(), vertical_index.ravel()])
+        sampled_radial = map_coordinates(
+            radial,
+            sample_indices,
+            order=1,
+            mode="nearest",
+            prefilter=False,
+        ).reshape(radial_index.shape)
+        sampled_vertical = map_coordinates(
+            vertical,
+            sample_indices,
+            order=1,
+            mode="nearest",
+            prefilter=False,
+        ).reshape(radial_index.shape)
+        radial_direction_x = np.divide(
+            intrinsic_x,
+            cylindrical_r,
+            out=np.zeros_like(intrinsic_x),
+            where=cylindrical_r > 0.0,
+        )
+        radial_direction_y = np.divide(
+            intrinsic_y,
+            cylindrical_r,
+            out=np.zeros_like(intrinsic_y),
+            where=cylindrical_r > 0.0,
+        )
+        acceleration_x = sampled_radial * radial_direction_x
+        acceleration_east = sampled_radial * radial_direction_y
+        acceleration_north = -cos_i * acceleration_x + sin_i * sampled_vertical
+        alpha_east[row, columns] = multiplier * np.trapezoid(
+            acceleration_east, x=line_of_sight, axis=1
+        )
+        alpha_north[row, columns] = multiplier * np.trapezoid(
+            acceleration_north, x=line_of_sight, axis=1
+        )
+
+    deflection = SkyPhotonDeflection2D(
+        alpha_east_radian=alpha_east,
+        alpha_north_radian=alpha_north,
+        alpha_east_arcsec=alpha_east * RAD_TO_ARCSEC,
+        alpha_north_arcsec=alpha_north * RAD_TO_ARCSEC,
+        distance_ratio=distance_ratio,
+        zero_slip_multiplier=-multiplier,
+    )
+    finite_paths = path_lengths[np.isfinite(path_lengths)]
+    diagnostics = {
+        "coordinateSystem": "axisymmetric_cylindrical",
+        "samplingMode": "axisymmetric_cylindrical_ray_integral",
+        "axisOrder": ["r", "z"],
+        "originM": origin.tolist(),
+        "inclinationDeg": inclination_deg,
+        "skyShape": list(sky_shape),
+        "northPhysicalBoundsM": list(north_bounds),
+        "eastPhysicalBoundsM": list(east_bounds),
+        "lineOfSightSamples": line_samples,
+        "supportedPixels": int(valid.sum()),
+        "minimumPathLengthM": float(np.min(finite_paths)),
+        "maximumPathLengthM": float(np.max(finite_paths)),
+        "maximumLineOfSightStepM": float(np.max(finite_paths) / (line_samples - 1)),
+        "finiteDomainOutsidePolicy": "zero_outside_solved_cylinder",
+    }
+    return deflection, diagnostics
+
+
 def evaluate_photon_lensing_map_target(
     model: Mapping[str, Any],
     observables: Mapping[str, Array],
@@ -264,57 +451,120 @@ def evaluate_photon_lensing_map_target(
         raise ValueError("photon_lensing_map requires a photons or both observable")
     if definition.get("rank") != "vector" or definition.get("unit") != "m/s^2":
         raise ValueError("photon_lensing_map requires a vector observable in m/s^2")
-    if geometry.get("coordinateSystem") != "cartesian_3d" or int(
-        geometry.get("dimensions", 0)
-    ) != 3:
-        raise ValueError("photon_lensing_map requires a Cartesian 3D grid")
+    coordinate_system = str(geometry.get("coordinateSystem", ""))
+    dimensions = int(geometry.get("dimensions", 0))
+    distance_ratio = _finite_positive(target.get("distanceRatio"), "distanceRatio")
+    lens_distance = _finite_positive(
+        target.get("lensAngularDiameterDistanceM"), "lensAngularDiameterDistanceM"
+    )
     axes = (
         target.get("northAxis"),
         target.get("eastAxis"),
         target.get("lineOfSightAxis"),
     )
-    if (
-        any(isinstance(value, bool) or not isinstance(value, int) for value in axes)
-        or set(axes) != {0, 1, 2}
-    ):
-        raise ValueError(
-            "northAxis, eastAxis, and lineOfSightAxis must be a permutation of [0,1,2]"
+    if coordinate_system == "cartesian_3d" and dimensions == 3:
+        if (
+            any(isinstance(value, bool) or not isinstance(value, int) for value in axes)
+            or set(axes) != {0, 1, 2}
+        ):
+            raise ValueError(
+                "northAxis, eastAxis, and lineOfSightAxis must be a permutation of [0,1,2]"
+            )
+        components = tuple(
+            np.asarray(observables[f"{observable_id}__axis{axis}"], dtype=float)
+            for axis in range(3)
+            if f"{observable_id}__axis{axis}" in observables
         )
-    components = tuple(
-        np.asarray(observables[f"{observable_id}__axis{axis}"], dtype=float)
-        for axis in range(3)
-        if f"{observable_id}__axis{axis}" in observables
-    )
-    if len(components) != 3 or any(component.ndim != 3 for component in components):
-        raise ValueError(f"observable {observable_id} must provide three 3D components")
-    if any(component.shape != components[0].shape for component in components):
-        raise ValueError(f"observable {observable_id} components do not share the grid shape")
-    raw_spacing = geometry.get("spacing")
-    spacing = (
-        np.full(3, float(raw_spacing))
-        if isinstance(raw_spacing, (int, float))
-        else np.asarray(raw_spacing, dtype=float)
-    )
-    if spacing.shape != (3,) or np.any(~np.isfinite(spacing)) or np.any(spacing <= 0):
-        raise ValueError("geometry spacing must contain three positive finite values")
-    north_axis, east_axis, line_of_sight_axis = axes
-    permutation = (north_axis, east_axis, line_of_sight_axis)
-    ordered = tuple(
-        np.transpose(components[component_axis], axes=permutation)
-        for component_axis in (north_axis, east_axis, line_of_sight_axis)
-    )
-    distance_ratio = _finite_positive(target.get("distanceRatio"), "distanceRatio")
-    lens_distance = _finite_positive(
-        target.get("lensAngularDiameterDistanceM"), "lensAngularDiameterDistanceM"
-    )
-    deflection = photon_deflection_sky(
-        ordered,
-        float(spacing[line_of_sight_axis]),
-        distance_ratio=distance_ratio,
-        light_speed=C_M_S,
-    )
-    north_spacing_radian = float(spacing[north_axis]) / lens_distance
-    east_spacing_radian = float(spacing[east_axis]) / lens_distance
+        if len(components) != 3 or any(component.ndim != 3 for component in components):
+            raise ValueError(f"observable {observable_id} must provide three 3D components")
+        if any(component.shape != components[0].shape for component in components):
+            raise ValueError(
+                f"observable {observable_id} components do not share the grid shape"
+            )
+        raw_spacing = geometry.get("spacing")
+        spacing = (
+            np.full(3, float(raw_spacing))
+            if isinstance(raw_spacing, (int, float))
+            else np.asarray(raw_spacing, dtype=float)
+        )
+        if (
+            spacing.shape != (3,)
+            or np.any(~np.isfinite(spacing))
+            or np.any(spacing <= 0)
+        ):
+            raise ValueError("geometry spacing must contain three positive finite values")
+        north_axis, east_axis, line_of_sight_axis = axes
+        permutation = (north_axis, east_axis, line_of_sight_axis)
+        ordered = tuple(
+            np.transpose(components[component_axis], axes=permutation)
+            for component_axis in (north_axis, east_axis, line_of_sight_axis)
+        )
+        deflection = photon_deflection_sky(
+            ordered,
+            float(spacing[line_of_sight_axis]),
+            distance_ratio=distance_ratio,
+            light_speed=C_M_S,
+        )
+        north_physical_spacing = float(spacing[north_axis])
+        east_physical_spacing = float(spacing[east_axis])
+        line_of_sight_spacing: float | None = float(spacing[line_of_sight_axis])
+        axis_convention = {
+            "arrayRows": "north",
+            "arrayColumns": "east",
+            "northAxis": north_axis,
+            "eastAxis": east_axis,
+            "lineOfSightAxis": line_of_sight_axis,
+        }
+        projection_diagnostics = {
+            "coordinateSystem": coordinate_system,
+            "samplingMode": "cartesian_grid_trapezoid",
+        }
+    elif coordinate_system == "axisymmetric_cylindrical" and dimensions == 2:
+        if any(value is not None for value in axes):
+            raise ValueError(
+                "axisymmetric photon lensing does not accept Cartesian sky-axis indices"
+            )
+        components = tuple(
+            np.asarray(observables[f"{observable_id}__axis{axis}"], dtype=float)
+            for axis in range(2)
+            if f"{observable_id}__axis{axis}" in observables
+        )
+        if len(components) != 2:
+            raise ValueError(
+                f"observable {observable_id} must provide radial and vertical components"
+            )
+        deflection, projection_diagnostics = _axisymmetric_photon_deflection(
+            components,
+            geometry,
+            target,
+            distance_ratio=distance_ratio,
+        )
+        north_bounds = projection_diagnostics["northPhysicalBoundsM"]
+        east_bounds = projection_diagnostics["eastPhysicalBoundsM"]
+        north_physical_spacing = (north_bounds[1] - north_bounds[0]) / (
+            deflection.alpha_east_radian.shape[0] - 1
+        )
+        east_physical_spacing = (east_bounds[1] - east_bounds[0]) / (
+            deflection.alpha_east_radian.shape[1] - 1
+        )
+        line_of_sight_spacing = None
+        axis_convention = {
+            "arrayRows": "north",
+            "arrayColumns": "east",
+            "intrinsicAxes": ["r", "z"],
+            "eastBasisIntrinsicXYZ": [0.0, 1.0, 0.0],
+            "northBasisIntrinsicXYZ": [
+                -math.cos(math.radians(projection_diagnostics["inclinationDeg"])),
+                0.0,
+                math.sin(math.radians(projection_diagnostics["inclinationDeg"])),
+            ],
+        }
+    else:
+        raise ValueError(
+            "photon_lensing_map requires Cartesian 3D or axisymmetric cylindrical geometry"
+        )
+    north_spacing_radian = north_physical_spacing / lens_distance
+    east_spacing_radian = east_physical_spacing / lens_distance
     derived = _lensing_invariants(
         deflection.alpha_east_radian,
         deflection.alpha_north_radian,
@@ -382,16 +632,12 @@ def evaluate_photon_lensing_map_target(
             "observableTarget": definition.get("target"),
             "state": state,
             "mapShape": list(shape),
-            "axisConvention": {
-                "arrayRows": "north",
-                "arrayColumns": "east",
-                "northAxis": north_axis,
-                "eastAxis": east_axis,
-                "lineOfSightAxis": line_of_sight_axis,
-            },
+            "coordinateSystem": coordinate_system,
+            "samplingMode": projection_diagnostics["samplingMode"],
+            "axisConvention": axis_convention,
             "distanceRatio": distance_ratio,
             "lensAngularDiameterDistanceM": lens_distance,
-            "lineOfSightSpacingM": float(spacing[line_of_sight_axis]),
+            "lineOfSightSpacingM": line_of_sight_spacing,
             "northAngularSpacingRadian": north_spacing_radian,
             "eastAngularSpacingRadian": east_spacing_radian,
             "projection": {
@@ -399,6 +645,7 @@ def evaluate_photon_lensing_map_target(
                 "lightSpeedMPerS": C_M_S,
                 "relativisticMultiplier": 2.0,
                 "radiansToArcseconds": RAD_TO_ARCSEC,
+                "diagnostics": projection_diagnostics,
             },
             "mapArchivePrefix": archive_prefix,
             "mapKeys": {
@@ -429,6 +676,7 @@ def evaluate_photon_lensing_map_target(
                 "This adapter evaluates the submitted photon field and does not validate or alter its field equation.",
                 "Distances are explicit inputs; no redshift or cosmology was inferred.",
                 "Map scoring is not a raw multiple-image, source-position, or time-delay likelihood.",
+                "Axisymmetric projection integrates only through the finite solved cylinder and treats the field outside it as zero; resolution and domain sensitivity must be reported.",
             ],
         },
         maps,

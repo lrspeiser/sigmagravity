@@ -19,6 +19,20 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.27 projects a photon- or `both`-typed axisymmetric `(a_r,a_z)` field
+into inclination-aware deflection, convergence, shear, rotation, Jacobian and
+magnification maps. The target binds its sky shape, path samples, distance
+geometry and solved-field origin; Cartesian axis indices, mismatched origins
+and excessive path cost are rejected. Face-on affine, edge-on chord-length and
+point-mass fixtures independently freeze the geometry and `4GM/(c^2R)`
+normalization. The real asynchronous HTTP acceptance scored the same solved
+field against motion and photons, rehashed all 11 artifacts, introduced zero
+per-object gravity parameters, and obtained `5.49e-26 arcsec` deflection RMSE.
+This validates the adapter, not a real cluster fit. The field is truncated at
+the solved cylinder, raw multiple-image likelihoods remain Cartesian-only,
+and production compute remains disconnected. See
+[`../docs/AXISYMMETRIC_PHOTON_LENSING_MILESTONE.md`](../docs/AXISYMMETRIC_PHOTON_LENSING_MILESTONE.md).
+
 Version 0.26 connects the verified axisymmetric field worker to real galaxy
 observation types. A circular-speed target now samples radial acceleration
 directly at a declared `(r,z)` midplane and evaluates `v_c^2=r(-a_r)`; a
@@ -28,8 +42,7 @@ samples are rejected for cylindrical targets. The real asynchronous HTTP
 acceptance rehashed ten artifacts, added zero per-object gravity parameters,
 and recovered its analytic circular speeds to `4.22e-15 m/s` RMSE. This is a
 software normalization result, not a real-galaxy fit; pressure support,
-non-circular motion, axisymmetric lensing and production compute remain
-unfinished. See
+non-circular motion and production compute remain unfinished. See
 [`../docs/AXISYMMETRIC_GALAXY_OBSERVATION_ADAPTER_MILESTONE.md`](../docs/AXISYMMETRIC_GALAXY_OBSERVATION_ADAPTER_MILESTONE.md).
 
 Version 0.25 adds a real axisymmetric cylindrical scalar-field worker. A

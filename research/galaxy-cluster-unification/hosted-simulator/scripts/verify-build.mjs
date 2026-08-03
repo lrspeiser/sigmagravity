@@ -88,6 +88,8 @@ for (const phrase of [
   "zero_radial_flux_regularity",
   "Score a cylindrical field against galaxy motion",
   "axisymmetric_midplane_direct",
+  "Project a cylindrical field into a lensing map",
+  "axisymmetric_cylindrical_ray_integral",
   "A genuinely useful result is a prediction, not a reconstruction",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);

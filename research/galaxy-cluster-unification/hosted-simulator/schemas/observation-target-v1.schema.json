@@ -16,7 +16,11 @@
     },
     {
       "properties": { "kind": { "const": "photon_lensing_map" } },
-      "required": ["northAxis", "eastAxis", "lineOfSightAxis", "distanceRatio", "lensAngularDiameterDistanceM"]
+      "required": ["distanceRatio", "lensAngularDiameterDistanceM"],
+      "oneOf": [
+        { "required": ["northAxis", "eastAxis", "lineOfSightAxis"] },
+        { "required": ["axisymmetricInclinationDeg", "skyShape", "lineOfSightSamples"] }
+      ]
     },
     {
       "properties": { "kind": { "const": "multiple_image_systems" } },
@@ -56,6 +60,14 @@
     "northAxis": { "type": "integer", "minimum": 0, "maximum": 2 },
     "eastAxis": { "type": "integer", "minimum": 0, "maximum": 2 },
     "lineOfSightAxis": { "type": "integer", "minimum": 0, "maximum": 2 },
+    "axisymmetricInclinationDeg": { "type": "number", "minimum": 0, "maximum": 90 },
+    "skyShape": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "type": "integer", "minimum": 3, "maximum": 513 }
+    },
+    "lineOfSightSamples": { "type": "integer", "minimum": 3, "maximum": 2049 },
     "distanceRatio": { "type": "number", "exclusiveMinimum": 0 },
     "lensAngularDiameterDistanceM": { "type": "number", "exclusiveMinimum": 0 },
     "skyCenterM": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } },

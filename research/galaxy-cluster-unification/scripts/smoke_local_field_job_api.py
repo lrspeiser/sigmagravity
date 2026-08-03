@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from voidscreen.field_job import model_sha256, write_array_bundle
+from voidscreen.sky_lensing import C_M_S, RAD_TO_ARCSEC
 
 
 def model(dimensions: int, *, axisymmetric_rotation: bool = False) -> dict[str, Any]:
@@ -31,7 +32,7 @@ def model(dimensions: int, *, axisymmetric_rotation: bool = False) -> dict[str, 
     manifest = {
         "schemaVersion": "sigma-field-model/1",
         "name": (
-            "Asynchronous API axisymmetric rotation field"
+            "Asynchronous API axisymmetric motion and photon field"
             if axisymmetric_rotation
             else f"Asynchronous API manufactured {dimensions}D field"
         ),
@@ -76,7 +77,7 @@ def model(dimensions: int, *, axisymmetric_rotation: bool = False) -> dict[str, 
         "observables": [
             {
                 "id": "gradient",
-                "target": "massive_tracers" if axisymmetric_rotation else "diagnostic",
+                "target": "both" if axisymmetric_rotation else "diagnostic",
                 "rank": "vector",
                 "unit": "m/s^2",
                 "expression": (
@@ -149,6 +150,17 @@ def metadata(
             "rank": "scalar",
             "role": "boundary",
         }
+        for key, unit, role in (
+            ("alpha_east", "arcsec", "auxiliary"),
+            ("alpha_north", "arcsec", "auxiliary"),
+            ("alpha_uncertainty", "arcsec", "uncertainty"),
+        ):
+            value["arrays"][key] = {
+                "npzKey": f"raw_{key}",
+                "unit": unit,
+                "rank": "scalar",
+                "role": role,
+            }
     return value
 
 
@@ -184,7 +196,17 @@ def run_case(
         omega = 3.0
         expected = 0.5 * omega**2 * radius**2
         forcing = np.full_like(expected, 2.0 * omega**2)
-        arrays = {"raw_forcing": forcing, "raw_boundary": expected}
+        distance_ratio = 0.7
+        sky_axis = np.linspace(-1.0, 1.0, cells)
+        north, east = np.meshgrid(sky_axis, sky_axis, indexing="ij")
+        deflection_scale = 2.0 * distance_ratio * omega**2 / C_M_S**2
+        arrays = {
+            "raw_forcing": forcing,
+            "raw_boundary": expected,
+            "raw_alpha_east": deflection_scale * east * RAD_TO_ARCSEC,
+            "raw_alpha_north": deflection_scale * north * RAD_TO_ARCSEC,
+            "raw_alpha_uncertainty": np.full((cells, cells), 1.0e-12),
+        }
         bundle_name = "bundle_axisymmetric_rotation"
     else:
         coordinates = np.meshgrid(*([axis] * dimensions), indexing="ij")
@@ -260,7 +282,29 @@ def run_case(
                                 "id": "CC0-1.0",
                                 "redistributionAllowed": True,
                             },
-                        }
+                        },
+                        {
+                            "schemaVersion": "sigma-observation-target/1",
+                            "id": "axisymmetric-photon-map",
+                            "kind": "photon_lensing_map",
+                            "observable": "gradient",
+                            "axisymmetricInclinationDeg": 0.0,
+                            "skyShape": [cells, cells],
+                            "lineOfSightSamples": cells,
+                            "distanceRatio": 0.7,
+                            "lensAngularDiameterDistanceM": 1.0e20,
+                            "observedAlphaEastArcsecArrayKey": "alpha_east",
+                            "observedAlphaNorthArcsecArrayKey": "alpha_north",
+                            "deflectionUncertaintyArcsecArrayKey": "alpha_uncertainty",
+                            "minimumValidPixels": 100,
+                            "provenance": {
+                                "kind": "analytic axisymmetric photon fixture"
+                            },
+                            "license": {
+                                "id": "CC0-1.0",
+                                "redistributionAllowed": True,
+                            },
+                        },
                     ]
                     if axisymmetric_rotation
                     else []
@@ -305,16 +349,28 @@ def run_case(
         raise RuntimeError(f"{dimensions}D field relative error exceeded acceptance: {relative_error}")
     observation_rmse = None
     observation_sampling_mode = None
+    photon_rmse_arcsec = None
+    photon_sampling_mode = None
     if axisymmetric_rotation:
         scores = json.loads(downloaded["observation_scores.json"])
         observation_rmse = float(scores["targets"][0]["score"]["rmseMPerS"])
         observation_sampling_mode = scores["targets"][0]["samplingMode"]
+        photon_rmse_arcsec = float(
+            scores["targets"][1]["score"]["channels"]["deflection_arcsec"]["rmse"]
+        )
+        photon_sampling_mode = scores["targets"][1]["samplingMode"]
         if observation_rmse >= 1e-10:
             raise RuntimeError(
                 f"axisymmetric rotation RMSE exceeded acceptance: {observation_rmse}"
             )
         if observation_sampling_mode != "axisymmetric_midplane_direct":
             raise RuntimeError("axisymmetric job used the wrong observation sampler")
+        if photon_rmse_arcsec >= 1.0e-12:
+            raise RuntimeError(
+                f"axisymmetric photon RMSE exceeded acceptance: {photon_rmse_arcsec}"
+            )
+        if photon_sampling_mode != "axisymmetric_cylindrical_ray_integral":
+            raise RuntimeError("axisymmetric job used the wrong photon sampler")
     return {
         "coordinateSystem": (
             "axisymmetric_cylindrical"
@@ -334,6 +390,8 @@ def run_case(
         "relativeL2FieldError": relative_error,
         "observationRmseMPerS": observation_rmse,
         "observationSamplingMode": observation_sampling_mode,
+        "photonDeflectionRmseArcsec": photon_rmse_arcsec,
+        "photonSamplingMode": photon_sampling_mode,
         "perObjectGravityParameters": job["parameterAccounting"]["perObject"],
     }
 
