@@ -6,6 +6,7 @@
     "format": "latex",
     "text": "\\nabla\\cdot[\\epsilon(\\rho_b)\\nabla\\Phi]=4\\pi G\\rho_b;\\quad\\epsilon=\\epsilon_0+\\frac{1-\\epsilon_0}{2}\\{\\tanh[Q\\ln(\\rho_b/\\rho_c)]+1\\}",
     "confirmedCanonical": true,
+    "confirmedModelSha256": "4a0c9be0ba6f430d4d073f0ee6bf1e98de437908de81d0ad533261fea5d14bef",
     "citation": "https://arxiv.org/abs/1610.09789"
   },
   "geometry": {

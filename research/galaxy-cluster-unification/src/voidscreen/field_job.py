@@ -78,6 +78,20 @@ def model_sha256(model: Mapping[str, Any]) -> str:
     return canonical_sha256({key: model[key] for key in MODEL_HASH_KEYS})
 
 
+def require_model_confirmation(model: Mapping[str, Any]) -> str:
+    """Require an explicit confirmation bound to the exact model hash."""
+
+    expected = model_sha256(model)
+    source = model.get("source", {})
+    if source.get("confirmedCanonical") is not True:
+        raise ValueError("model canonical form has not been confirmed by the researcher")
+    if source.get("confirmedModelSha256") != expected:
+        raise ValueError(
+            "model confirmation does not match the exact computational model hash"
+        )
+    return expected
+
+
 def document_sha256(model: Mapping[str, Any]) -> str:
     return canonical_sha256(model)
 
@@ -539,6 +553,7 @@ def execute_field_job(
 
     if request.get("schemaVersion") != "sigma-field-job-request/1":
         raise ValueError("request schemaVersion must be sigma-field-job-request/1")
+    require_model_confirmation(model)
     bundle, arrays = load_array_bundle(input_bundle_directory)
     model_geometry = model.get("geometry", {})
     bundle_geometry = bundle.get("geometry", {})

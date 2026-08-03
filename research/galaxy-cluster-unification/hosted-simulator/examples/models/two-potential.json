@@ -5,7 +5,8 @@
   "source": {
     "format": "latex",
     "text": "\\nabla^2\\Psi=4\\pi G\\rho_b;\\quad\\nabla^2\\Phi=4\\pi G\\eta\\rho_b;\\quad\\mathbf{a}_m=-\\nabla\\Psi;\\quad\\mathbf{a}_\\gamma=-\\nabla(\\Phi+\\Psi)/2",
-    "confirmedCanonical": true
+    "confirmedCanonical": true,
+    "confirmedModelSha256": "198c5c571246dbd89efbd2599184b43cfdc41dccfbd91b0536f93fb84b1d7e8d"
   },
   "geometry": {
     "coordinateSystem": "cartesian_3d",

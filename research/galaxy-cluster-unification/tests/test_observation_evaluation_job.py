@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
-from voidscreen.field_job import execute_field_job, write_array_bundle
+from voidscreen.field_job import execute_field_job, model_sha256, write_array_bundle
 from voidscreen.observation_evaluation_job import (
     execute_observation_evaluation_job,
 )
@@ -13,14 +13,14 @@ from voidscreen.observation_evaluation_job import (
 
 def field_model(dimensions: int, observable_target: str = "massive_tracers") -> dict:
     coordinate_system = f"cartesian_{dimensions}d"
-    return {
+    manifest = {
         "schemaVersion": "sigma-field-model/1",
         "name": f"P0732 {dimensions}D solid-body fixture",
         "modelClass": "stationary_elliptic",
         "source": {
             "format": "plain_text",
             "text": "laplacian(u) = forcing; acceleration = -gradient(u)",
-            "confirmedCanonical": True,
+            "confirmedCanonical": False,
         },
         "geometry": {
             "coordinateSystem": coordinate_system,
@@ -73,6 +73,9 @@ def field_model(dimensions: int, observable_target: str = "massive_tracers") -> 
         },
         "parameterPolicy": {"mode": "universal_fixed", "perObjectParameters": []},
     }
+    manifest["source"]["confirmedCanonical"] = True
+    manifest["source"]["confirmedModelSha256"] = model_sha256(manifest)
+    return manifest
 
 
 def bundle_metadata(dimensions: int, spacing: float, arrays: dict) -> dict:

@@ -5,7 +5,8 @@
   "source": {
     "format": "latex",
     "text": "\\nabla^2\\Phi_N=4\\pi G\\rho_b;\\quad\\nabla^2\\Phi=\\nabla\\cdot[\\nu(|\\nabla\\Phi_N|/a_0)\\nabla\\Phi_N]",
-    "confirmedCanonical": true
+    "confirmedCanonical": true,
+    "confirmedModelSha256": "68dee7e94c66fea1ee4c8a66e27dbf1636ca0a7fa4bd62d49c19ec2f00971332"
   },
   "geometry": {
     "coordinateSystem": "cartesian_3d",

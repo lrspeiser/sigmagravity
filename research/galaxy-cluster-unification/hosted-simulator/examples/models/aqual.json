@@ -5,7 +5,8 @@
   "source": {
     "format": "latex",
     "text": "\\nabla\\cdot[\\mu(|\\nabla\\Phi|/a_0)\\nabla\\Phi]=4\\pi G\\rho_b,\\quad\\mu(x)=x/(1+x)",
-    "confirmedCanonical": true
+    "confirmedCanonical": true,
+    "confirmedModelSha256": "37fe7ed1b60b8b3d05dbdf7a0b61c1ffdd3dfa22cdcd2e661e9e58e7c8e5a054"
   },
   "geometry": {
     "coordinateSystem": "cartesian_3d",

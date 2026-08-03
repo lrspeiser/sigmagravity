@@ -19,6 +19,17 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.15 adds an explicit, hash-bound researcher confirmation gate for
+field models. `POST /api/v1/models/validate` may accept a structurally valid
+draft, but such a draft reports `awaiting_researcher_confirmation` and cannot
+enter field-job or batch preflight. After inspecting the returned canonical
+manifest, the researcher must send the exact model hash and published
+acknowledgement to `POST /api/v1/models/confirm`. The returned confirmed model
+is executable only while its computational hash remains unchanged. The Python
+worker independently repeats this check, so bypassing the web preflight does
+not bypass confirmation. An LLM may prepare a draft, but it must not perform
+this confirmation on the researcher's behalf.
+
 Version 0.14 extends the resolved-twin evidence view and
 `GET /api/v1/resolved-twin-evidence` through the preregistered P0752 final
 holdout. It exposes four development, two validation, and two one-shot holdout
@@ -111,6 +122,7 @@ GET  /api/v1/systems/DDO154
 POST /api/v1/synthetic-galaxies
 POST /api/v1/formulas/validate
 POST /api/v1/models/validate
+POST /api/v1/models/confirm
 POST /api/v1/field-jobs/prepare
 POST /api/v1/data-uploads
 PUT  /api/v1/data-uploads/{id}/content
@@ -146,6 +158,25 @@ to 128 nodes and depth 24.
 not execute pasted JavaScript or Python. A successful validation currently
 returns `executionReadiness.state=worker_not_connected`; this is deliberate
 until queue, data storage, and the Python worker are deployed.
+
+For an unconfirmed draft, validation instead returns
+`executionReadiness.state=awaiting_researcher_confirmation`, the exact
+`confirmation.requiredModelSha256`, and the acknowledgement text. After the
+researcher has inspected `canonicalManifest`, confirmation is a separate call:
+
+```json
+{
+  "schemaVersion": "sigma-model-confirmation-request/1",
+  "model": { "...": "the validated draft" },
+  "expectedModelSha256": "the hash returned by validation",
+  "acknowledgement": "I confirm that this canonical model is the equation I intend to execute."
+}
+```
+
+The response includes a deterministic confirmation receipt and a
+`confirmedModel`. Changing an equation, parameter, solver, geometry,
+observable, or parameter policy changes the computational hash and invalidates
+the prior confirmation.
 
 `POST /api/v1/field-jobs/prepare` binds a valid model to a content-hashed array
 manifest, grid spacing, boundaries, requested observables, seed, and parameter

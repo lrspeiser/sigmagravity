@@ -38,7 +38,7 @@ const elements = Object.fromEntries(
     "run-twin", "twin-proof", "result-legend",
     "create-synthetic", "synthetic-summary", "syn-seed", "syn-mass", "syn-gas", "syn-bulge",
     "syn-scale", "syn-noise",
-    "model-example", "load-model-example", "model-editor", "validate-model", "model-status",
+    "model-example", "load-model-example", "model-editor", "validate-model", "confirm-model", "model-status",
     "model-audit-title", "model-audit",
     "resolved-evidence-status", "resolved-galaxy-select", "resolved-model-select",
     "resolved-system-summary", "resolved-fidelity-value", "resolved-fidelity-detail",
@@ -51,6 +51,7 @@ const elements = Object.fromEntries(
 let currentResult = null;
 let currentSynthetic = null;
 let resolvedEvidence = null;
+let pendingModelValidation = null;
 
 function setStatus(message, type = "") {
   elements["action-status"].textContent = message;
@@ -93,6 +94,8 @@ async function loadModelExample() {
   const name = elements["model-example"].value;
   const model = await api(`/examples/models/${encodeURIComponent(name)}.json`);
   elements["model-editor"].value = JSON.stringify(model, null, 2);
+  pendingModelValidation = null;
+  elements["confirm-model"].disabled = true;
   setModelStatus(`${model.name} loaded. Validate to confirm the canonical equation tree.`);
 }
 
@@ -102,6 +105,8 @@ async function validateModel() {
   const result = await api("/api/v1/models/validate", {
     method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(model),
   });
+  pendingModelValidation = result;
+  elements["confirm-model"].disabled = result.confirmation.confirmed;
   elements["model-audit-title"].textContent = model.name;
   elements["model-audit"].textContent = JSON.stringify({
     modelSha256: result.modelSha256,
@@ -110,9 +115,34 @@ async function validateModel() {
     requiredCapabilities: result.requiredCapabilities,
     typeAudit: result.typeAudit,
     executionReadiness: result.executionReadiness,
+    confirmation: result.confirmation,
     warnings: result.warnings,
   }, null, 2);
-  setModelStatus(`Valid field model · ${result.typeAudit.expressionNodes} expression nodes · ${result.modelSha256.slice(0, 14)}… · worker connection pending`, "success");
+  setModelStatus(
+    result.confirmation.confirmed
+      ? `Valid field model · exact hash confirmed · ${result.modelSha256.slice(0, 14)}… · worker connection pending`
+      : `Valid draft · ${result.typeAudit.expressionNodes} expression nodes · inspect the audit, then confirm the exact hash`,
+    result.confirmation.confirmed ? "success" : "",
+  );
+}
+
+async function confirmModel() {
+  if (!pendingModelValidation || pendingModelValidation.confirmation.confirmed) {
+    throw new Error("Validate an unconfirmed field model first.");
+  }
+  const receipt = await api("/api/v1/models/confirm", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      schemaVersion: "sigma-model-confirmation-request/1",
+      model: parseModel(),
+      expectedModelSha256: pendingModelValidation.modelSha256,
+      acknowledgement: pendingModelValidation.confirmation.acknowledgement,
+    }),
+  });
+  elements["model-editor"].value = JSON.stringify(receipt.confirmedModel, null, 2);
+  await validateModel();
+  setModelStatus(`Exact model hash confirmed · receipt ${receipt.confirmationSha256.slice(0, 14)}…`, "success");
 }
 
 async function loadCatalog() {
@@ -511,6 +541,13 @@ function handle(action) {
   };
 }
 
+function modelHandle(action) {
+  return async () => {
+    try { await action(); }
+    catch (error) { setModelStatus(error.message, "error"); }
+  };
+}
+
 elements["formula-editor"].value = JSON.stringify(fixedMondFormula, null, 2);
 elements["load-system"].addEventListener("click", handle(inspectSelectedSystem));
 elements["galaxy-select"].addEventListener("change", handle(inspectSelectedSystem));
@@ -519,11 +556,17 @@ elements["run-formula"].addEventListener("click", handle(run));
 elements["run-twin"].addEventListener("click", handle(runTwin));
 elements["create-synthetic"].addEventListener("click", handle(createSynthetic));
 elements["download-result"].addEventListener("click", downloadResult);
-elements["load-model-example"].addEventListener("click", handle(loadModelExample));
-elements["validate-model"].addEventListener("click", handle(validateModel));
+elements["load-model-example"].addEventListener("click", modelHandle(loadModelExample));
+elements["validate-model"].addEventListener("click", modelHandle(validateModel));
+elements["confirm-model"].addEventListener("click", modelHandle(confirmModel));
+elements["model-editor"].addEventListener("input", () => {
+  pendingModelValidation = null;
+  elements["confirm-model"].disabled = true;
+  setModelStatus("Manifest changed. Validate the new equation tree before confirmation.");
+});
 elements["resolved-galaxy-select"].addEventListener("change", renderResolvedEvidence);
 elements["resolved-model-select"].addEventListener("change", renderResolvedEvidence);
-handle(loadModelExample)();
+modelHandle(loadModelExample)();
 handle(loadCatalog)();
 loadResolvedEvidence().catch((error) => {
   elements["resolved-evidence-status"].textContent = `Resolved evidence unavailable: ${error.message}`;

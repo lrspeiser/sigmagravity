@@ -19,18 +19,18 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from voidscreen.field_job import write_array_bundle
+from voidscreen.field_job import model_sha256, write_array_bundle
 
 
 def model(dimensions: int) -> dict[str, Any]:
-    return {
+    manifest = {
         "schemaVersion": "sigma-field-model/1",
         "name": f"Asynchronous API manufactured {dimensions}D field",
         "modelClass": "stationary_elliptic",
         "source": {
             "format": "plain_text",
             "text": "laplacian(u) = forcing",
-            "confirmedCanonical": True,
+            "confirmedCanonical": False,
         },
         "geometry": {
             "coordinateSystem": f"cartesian_{dimensions}d",
@@ -78,6 +78,9 @@ def model(dimensions: int) -> dict[str, Any]:
         },
         "parameterPolicy": {"mode": "universal_fixed", "perObjectParameters": []},
     }
+    manifest["source"]["confirmedCanonical"] = True
+    manifest["source"]["confirmedModelSha256"] = model_sha256(manifest)
+    return manifest
 
 
 def metadata(spacing: float, dimensions: int) -> dict[str, Any]:

@@ -40,6 +40,15 @@ export function prepareFieldJob(payload) {
   if (!validation.valid) {
     return { valid: false, state: "invalid_model", errors: validation.errors, warnings: validation.warnings };
   }
+  if (!validation.confirmation.confirmed) {
+    return {
+      valid: false,
+      state: "unconfirmed_model",
+      errors: ["the exact canonical model hash must be confirmed before job preparation"],
+      warnings: validation.warnings,
+      confirmation: validation.confirmation,
+    };
+  }
   const bundle = payload.inputBundle;
   const records = validateArrayBundle(bundle);
   const modelGeometry = payload.model.geometry;
@@ -102,6 +111,7 @@ export function prepareFieldJob(payload) {
     state: "worker_not_connected",
     preflightSha256,
     modelSha256: validation.modelSha256,
+    confirmation: validation.confirmation,
     inputBundleSha256: bundle.bundleSha256,
     geometry: preflightCore.geometry,
     parameterAccounting: validation.parameterAccounting,

@@ -24,7 +24,7 @@
       </nav>
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Open research preview · v0.14</p>
+          <p class="eyebrow">Open research preview · v0.15</p>
           <h1>Put a gravity formula in front of real galaxies.</h1>
           <p class="lede">
             Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
@@ -253,6 +253,7 @@
               <div class="row actions-row">
                 <a class="button compact ghost" href="/schemas/model-manifest-v1.schema.json">JSON Schema</a>
                 <button id="validate-model" class="button compact primary" type="button">Validate field model</button>
+                <button id="confirm-model" class="button compact secondary" type="button" disabled>Confirm exact hash</button>
               </div>
               <div id="model-status" class="notice" role="status">Load an example or paste a manifest.</div>
             </div>
@@ -298,6 +299,7 @@
           <article class="endpoint"><span>GET</span><code>/api/v1/systems?q=DDO</code><p>Search real galaxies and inspect supported tests.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/formulas/validate</code><p>Check symbols, dimensions, parameter policy, complexity, and canonical hash.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/models/validate</code><p>Validate scalar, vector, or tensor field equations in 2D or 3D without theory-specific code.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/models/confirm</code><p>Bind a researcher acknowledgement to the exact validated equation hash before execution.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs/prepare</code><p>Bind a model to content-hashed arrays, grid, boundaries, observables, and a resource estimate before queueing.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/data-uploads</code><p>Register immutable NPZ data; the development backend verifies byte hashes before a job can use it.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs</code><p>Queue a confirmed 2D/3D manifest locally, then poll state, events, and verified artifacts. Production workers are not connected yet.</p></article>

@@ -1,7 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { validateFieldModel } from "../lib/field-model.mjs";
+import {
+  confirmFieldModel,
+  MODEL_CONFIRMATION_ACKNOWLEDGEMENT,
+  validateFieldModel,
+} from "../lib/field-model.mjs";
 
 const examples = new URL("../examples/models/", import.meta.url);
 const load = (name) => JSON.parse(readFileSync(new URL(name, examples), "utf8"));
@@ -13,9 +17,34 @@ for (const name of ["newtonian-poisson.json", "aqual.json", "qumond.json", "refr
     assert.equal(first.valid, true, first.errors.join("; "));
     assert.equal(first.modelSha256, second.modelSha256);
     assert.equal(first.executionReadiness.state, "worker_not_connected");
+    assert.equal(first.confirmation.confirmed, true);
     assert.equal(first.parameterAccounting.perObject, 0);
   });
 }
+
+test("a structurally valid draft cannot execute until its exact hash is confirmed", () => {
+  const draft = load("newtonian-poisson.json");
+  draft.source.confirmedCanonical = false;
+  delete draft.source.confirmedModelSha256;
+  const validation = validateFieldModel(draft);
+  assert.equal(validation.valid, true);
+  assert.equal(validation.confirmation.confirmed, false);
+  assert.equal(validation.executionReadiness.state, "awaiting_researcher_confirmation");
+  assert.throws(
+    () => confirmFieldModel(draft, {
+      expectedModelSha256: "f".repeat(64),
+      acknowledgement: MODEL_CONFIRMATION_ACKNOWLEDGEMENT,
+    }),
+    /does not match/,
+  );
+  const receipt = confirmFieldModel(draft, {
+    expectedModelSha256: validation.modelSha256,
+    acknowledgement: MODEL_CONFIRMATION_ACKNOWLEDGEMENT,
+  });
+  assert.equal(receipt.modelSha256, validation.modelSha256);
+  assert.equal(receipt.confirmedModel.source.confirmedCanonical, true);
+  assert.equal(validateFieldModel(receipt.confirmedModel).confirmation.confirmed, true);
+});
 
 test("QUMOND declares its zero-vector flux limit without a theory-specific route", () => {
   const result = validateFieldModel(load("qumond.json"));

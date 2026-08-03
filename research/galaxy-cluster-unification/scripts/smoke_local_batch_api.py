@@ -459,6 +459,8 @@ def main() -> None:
             "model.json",
             "observation_predictions.csv",
             "observation_velocity_field_predictions.csv",
+            "observation_multiple_image_predictions.csv",
+            "observation_multiple_image_families.csv",
             "per_galaxy.csv",
             "report.html",
             "reproduction_command.txt",

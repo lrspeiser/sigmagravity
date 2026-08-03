@@ -4,7 +4,7 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.14.0-preview",
+    version: "0.15.0-preview",
     description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence with distinct morphology/transport/observation/geometry scores, plus a dimension-checked formula-independent 2D/3D contract. The local development server includes an asynchronous reference queue; the public deployment still requires durable storage and isolated workers.",
   },
   paths: {
@@ -17,6 +17,7 @@ const specification = {
     "/api/v1/resolved-twin-evidence": { get: { summary: "Retrieve frozen four-development, two-validation, and two one-shot final-holdout 2D results with separate twin-fidelity, formula-transport, observed-velocity, and geometry scores" } },
     "/api/v1/formulas/validate": { post: { summary: "Validate and hash a safe formula AST" } },
     "/api/v1/models/validate": { post: { summary: "Validate and hash a scalar/vector/tensor 2D/3D field-model manifest" } },
+    "/api/v1/models/confirm": { post: { summary: "Bind explicit researcher acknowledgement to the exact validated computational model hash" } },
     "/api/v1/field-jobs/prepare": { post: { summary: "Preflight a model, content-hashed arrays, 2D/3D grid, boundary, and observation-target request" } },
     "/api/v1/data-uploads": { post: { summary: "Create an immutable NPZ array-upload ticket (local reference backend)" } },
     "/api/v1/data-uploads/{id}": { get: { summary: "Inspect an array upload" } },

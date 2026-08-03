@@ -30,6 +30,11 @@
         "format": { "enum": ["latex", "plain_text", "json_ast"] },
         "text": { "type": "string", "minLength": 1 },
         "confirmedCanonical": { "type": "boolean" },
+        "confirmedModelSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "Exact computational model hash returned by validation and explicitly accepted by the researcher. Required for execution when confirmedCanonical is true."
+        },
         "citation": { "type": "string", "format": "uri" }
       }
     },

@@ -13,11 +13,11 @@ function digest(value) {
 }
 
 function model() {
-  return {
+  const manifest = {
     schemaVersion: "sigma-field-model/1",
     name: "Local service manufactured model",
     modelClass: "stationary_elliptic",
-    source: { format: "plain_text", text: "laplacian(u) = forcing", confirmedCanonical: true },
+    source: { format: "plain_text", text: "laplacian(u) = forcing", confirmedCanonical: false },
     geometry: { coordinateSystem: "cartesian_2d", dimensions: 2, domain: { lengthUnit: "m", boundaryExtent: "unit square" } },
     fields: {
       forcing: { rank: "scalar", role: "source", unit: "1/s^2", datasetKey: "forcing" },
@@ -30,6 +30,15 @@ function model() {
     solver: { family: "finite_volume_elliptic", relativeTolerance: 1e-8, maxIterations: 8, damping: 1 },
     parameterPolicy: { mode: "universal_fixed", perObjectParameters: [] },
   };
+  return bindConfirmation(manifest);
+}
+
+function bindConfirmation(manifest) {
+  manifest.source.confirmedCanonical = false;
+  delete manifest.source.confirmedModelSha256;
+  manifest.source.confirmedCanonical = true;
+  manifest.source.confirmedModelSha256 = validateFieldModel(manifest).modelSha256;
+  return manifest;
 }
 
 function bundle() {
@@ -98,7 +107,7 @@ function observationFieldModel() {
     id: "acceleration",
     target: "massive_tracers",
   };
-  return value;
+  return bindConfirmation(value);
 }
 
 function observationFieldRequest() {

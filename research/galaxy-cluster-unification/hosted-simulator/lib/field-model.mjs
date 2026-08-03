@@ -30,6 +30,10 @@ const SOLVER_FAMILIES = new Set([
   "nonlocal_elliptic",
 ]);
 const SOURCE_FORMATS = new Set(["latex", "plain_text", "json_ast"]);
+const SHA256_PATTERN = /^[0-9a-f]{64}$/;
+
+export const MODEL_CONFIRMATION_ACKNOWLEDGEMENT =
+  "I confirm that this canonical model is the equation I intend to execute.";
 
 const D0 = Object.freeze({ M: 0, L: 0, T: 0 });
 const UNIT_DIMENSIONS = Object.freeze({
@@ -272,6 +276,10 @@ export function validateFieldModel(manifest) {
   if (!MODEL_CLASSES.has(manifest.modelClass)) errors.push(`unsupported modelClass: ${manifest.modelClass}`);
   if (!SOURCE_FORMATS.has(manifest.source?.format) || typeof manifest.source?.text !== "string" || !manifest.source.text.trim()) errors.push("source requires a supported format and non-empty text");
   if (typeof manifest.source?.confirmedCanonical !== "boolean") errors.push("source.confirmedCanonical must be boolean");
+  if (
+    manifest.source?.confirmedModelSha256 !== undefined
+    && !SHA256_PATTERN.test(manifest.source.confirmedModelSha256)
+  ) errors.push("source.confirmedModelSha256 must be a lowercase SHA-256 when supplied");
   const coordinateSystem = manifest.geometry?.coordinateSystem;
   const dimensions = COORDINATES.get(coordinateSystem);
   if (!dimensions) errors.push(`unsupported coordinate system: ${coordinateSystem}`);
@@ -388,14 +396,29 @@ export function validateFieldModel(manifest) {
   for (const name of parameters.keys()) {
     if (!state.parameters.has(name)) warnings.push(`declared parameter ${name} is unused`);
   }
-  if (manifest.source?.format === "latex" && !manifest.source?.confirmedCanonical) warnings.push("LaTeX source is informational until the researcher confirms the canonical manifest");
-
   const computational = computationalManifest(manifest);
+  const modelSha256 = sha256(computational);
+  const confirmation = {
+    confirmed: manifest.source?.confirmedCanonical === true
+      && manifest.source?.confirmedModelSha256 === modelSha256,
+    declaredConfirmed: manifest.source?.confirmedCanonical === true,
+    requiredModelSha256: modelSha256,
+    suppliedModelSha256: manifest.source?.confirmedModelSha256 ?? null,
+    acknowledgement: MODEL_CONFIRMATION_ACKNOWLEDGEMENT,
+  };
+  if (!confirmation.confirmed && errors.length === 0) {
+    warnings.push(
+      confirmation.declaredConfirmed
+        ? "canonical confirmation does not bind the exact computational model hash"
+        : "canonical model awaits explicit researcher confirmation of the exact computational model hash",
+    );
+  }
   return {
     valid: errors.length === 0,
-    modelSha256: sha256(computational),
+    modelSha256,
     documentSha256: sha256(canonicalize(manifest)),
     canonicalManifest: canonicalize(manifest),
+    confirmation,
     typeAudit: {
       expressionNodes: state.nodeCount,
       maximumNodes: MAX_NODES,
@@ -418,11 +441,68 @@ export function validateFieldModel(manifest) {
       dataKeys: requirements.map((item) => item.key).sort(),
     },
     executionReadiness: {
-      state: errors.length ? "invalid" : "worker_not_connected",
-      blockers: errors.length ? ["manifest_validation_failed"] : ["generic_scientific_worker_not_connected"],
+      state: errors.length
+        ? "invalid"
+        : confirmation.confirmed
+          ? "worker_not_connected"
+          : "awaiting_researcher_confirmation",
+      blockers: errors.length
+        ? ["manifest_validation_failed"]
+        : confirmation.confirmed
+          ? ["generic_scientific_worker_not_connected"]
+          : ["exact_model_hash_not_confirmed"],
     },
     errors,
     warnings,
+  };
+}
+
+export function confirmFieldModel(manifest, request = {}) {
+  const validation = validateFieldModel(manifest);
+  if (!validation.valid) {
+    const error = new Error(`cannot confirm an invalid model: ${validation.errors.join("; ")}`);
+    error.statusCode = 422;
+    error.code = "invalid_model";
+    throw error;
+  }
+  if (request.expectedModelSha256 !== validation.modelSha256) {
+    const error = new Error("expectedModelSha256 does not match the canonical computational model");
+    error.statusCode = 409;
+    error.code = "model_hash_changed";
+    throw error;
+  }
+  if (request.acknowledgement !== MODEL_CONFIRMATION_ACKNOWLEDGEMENT) {
+    const error = new Error("the exact model-confirmation acknowledgement is required");
+    error.statusCode = 422;
+    error.code = "confirmation_required";
+    throw error;
+  }
+  const confirmedModel = canonicalize({
+    ...manifest,
+    source: {
+      ...manifest.source,
+      confirmedCanonical: true,
+      confirmedModelSha256: validation.modelSha256,
+    },
+  });
+  const confirmedValidation = validateFieldModel(confirmedModel);
+  if (!confirmedValidation.confirmation.confirmed) {
+    throw new Error("internal model-confirmation hash mismatch");
+  }
+  const receiptCore = canonicalize({
+    schemaVersion: "sigma-model-confirmation/1",
+    modelSha256: confirmedValidation.modelSha256,
+    confirmedDocumentSha256: confirmedValidation.documentSha256,
+    sourceFormat: confirmedModel.source.format,
+    sourceTextSha256: sha256(confirmedModel.source.text),
+    acknowledgement: MODEL_CONFIRMATION_ACKNOWLEDGEMENT,
+  });
+  const confirmationSha256 = sha256(receiptCore);
+  return {
+    ...receiptCore,
+    id: `model_confirmation_${confirmationSha256.slice(0, 24)}`,
+    confirmationSha256,
+    confirmedModel,
   };
 }
 

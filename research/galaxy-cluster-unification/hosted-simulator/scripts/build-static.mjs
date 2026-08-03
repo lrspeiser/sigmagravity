@@ -19,6 +19,7 @@ for (const path of [
   "assets/resolved-twin-holdout-curves.png",
   "data/resolved-twin-development-v1.json",
   "schemas/model-manifest-v1.schema.json",
+  "schemas/model-confirmation-request-v1.schema.json",
   "schemas/array-bundle-request-v1.schema.json",
   "schemas/field-job-request-v1.schema.json",
   "schemas/observation-target-v1.schema.json",

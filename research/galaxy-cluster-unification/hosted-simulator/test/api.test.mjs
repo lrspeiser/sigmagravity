@@ -6,6 +6,7 @@ import systems from "../api/v1/systems.mjs";
 import system from "../api/v1/system.mjs";
 import validate from "../api/v1/formulas/validate.mjs";
 import validateModel from "../api/v1/models/validate.mjs";
+import confirmModel from "../api/v1/models/confirm.mjs";
 import prepareFieldJob from "../api/v1/field-jobs/prepare.mjs";
 import hostedFieldJobs from "../api/v1/field-jobs.mjs";
 import hostedGalaxyJobs from "../api/v1/galaxy-jobs.mjs";
@@ -40,7 +41,8 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.14.0-preview");
+  assert.equal(output.body.version, "0.15.0-preview");
+  assert.equal(output.body.capabilities.exactModelHashConfirmation, "required_for_execution");
   assert.equal(output.body.capabilities.heldoutObservedGalaxyTwins, "available");
   assert.equal(output.body.capabilities.resolvedTwinDevelopmentEvidence, "available");
   assert.equal(output.body.capabilities.resolvedTwinFinalHoldoutEvidence, "available");
@@ -137,6 +139,48 @@ test("field-model API accepts one contract for distinct 2D/3D theories", () => {
     assert.equal(output.body.valid, true, output.body.errors.join("; "));
     assert.equal(output.body.executionReadiness.state, "worker_not_connected");
   }
+});
+
+test("field-model confirmation is an explicit hash-bound handshake", () => {
+  const draft = JSON.parse(readFileSync(new URL("../examples/models/newtonian-poisson.json", import.meta.url), "utf8"));
+  draft.source.confirmedCanonical = false;
+  delete draft.source.confirmedModelSha256;
+  const validation = call(validateModel, { method: "POST", body: draft });
+  assert.equal(validation.statusCode, 200);
+  assert.equal(validation.body.valid, true);
+  assert.equal(validation.body.confirmation.confirmed, false);
+  assert.equal(validation.body.executionReadiness.state, "awaiting_researcher_confirmation");
+
+  const wrong = call(confirmModel, {
+    method: "POST",
+    body: {
+      schemaVersion: "sigma-model-confirmation-request/1",
+      model: draft,
+      expectedModelSha256: "0".repeat(64),
+      acknowledgement: validation.body.confirmation.acknowledgement,
+    },
+  });
+  assert.equal(wrong.statusCode, 409);
+  assert.equal(wrong.body.error, "model_hash_changed");
+
+  const confirmed = call(confirmModel, {
+    method: "POST",
+    body: {
+      schemaVersion: "sigma-model-confirmation-request/1",
+      model: draft,
+      expectedModelSha256: validation.body.modelSha256,
+      acknowledgement: validation.body.confirmation.acknowledgement,
+    },
+  });
+  assert.equal(confirmed.statusCode, 200);
+  assert.equal(confirmed.body.modelSha256, validation.body.modelSha256);
+  assert.equal(
+    confirmed.body.confirmedModel.source.confirmedModelSha256,
+    validation.body.modelSha256,
+  );
+  const finalValidation = call(validateModel, { method: "POST", body: confirmed.body.confirmedModel });
+  assert.equal(finalValidation.body.confirmation.confirmed, true);
+  assert.equal(finalValidation.body.executionReadiness.state, "worker_not_connected");
 });
 
 test("field-job API preflights model and array metadata without claiming execution", () => {

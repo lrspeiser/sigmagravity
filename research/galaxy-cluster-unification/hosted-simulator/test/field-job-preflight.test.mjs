@@ -3,9 +3,17 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { sha256 } from "../lib/canonical.mjs";
 import { prepareFieldJob } from "../lib/field-job-preflight.mjs";
+import { validateFieldModel } from "../lib/field-model.mjs";
 
 const model = JSON.parse(readFileSync(new URL("../examples/models/refracted-gravity.json", import.meta.url), "utf8"));
 const twoPotentialModel = JSON.parse(readFileSync(new URL("../examples/models/two-potential.json", import.meta.url), "utf8"));
+
+function bindConfirmation(manifest) {
+  manifest.source.confirmedCanonical = false;
+  delete manifest.source.confirmedModelSha256;
+  manifest.source.confirmedCanonical = true;
+  manifest.source.confirmedModelSha256 = validateFieldModel(manifest).modelSha256;
+}
 
 function inputBundle() {
   const core = {
@@ -56,11 +64,23 @@ test("field preflight binds a generic model to content-hashed 3D data", () => {
   assert.equal(first.state, "worker_not_connected");
   assert.equal(first.preflightSha256, second.preflightSha256);
   assert.equal(first.parameterAccounting.perObject, 0);
+  assert.equal(first.confirmation.confirmed, true);
   assert.equal(first.resourceEstimate.cellCount, 33 ** 3);
   assert.deepEqual(first.executionReadiness.blockers, [
     "array_bytes_not_uploaded",
     "generic_scientific_worker_not_connected",
   ]);
+});
+
+test("field preflight refuses a structurally valid but unconfirmed model", () => {
+  const request = payload();
+  request.model.source.confirmedCanonical = false;
+  delete request.model.source.confirmedModelSha256;
+  const result = prepareFieldJob(request);
+  assert.equal(result.valid, false);
+  assert.equal(result.state, "unconfirmed_model");
+  assert.equal(result.confirmation.confirmed, false);
+  assert.match(result.errors.join(" "), /exact canonical model hash/);
 });
 
 test("field preflight rejects data whose units differ from the model", () => {
@@ -103,6 +123,7 @@ test("field preflight binds an uncertainty-aware circular-speed target after the
 test("a circular-speed target cannot silently use a photon observable", () => {
   const request = payload();
   request.model.observables[0].target = "photons";
+  bindConfirmation(request.model);
   request.request.observationTargets = [{
     schemaVersion: "sigma-observation-target/1",
     id: "wrong-channel",
@@ -218,6 +239,7 @@ test("resolved velocity preflight separates emission and score masks", () => {
   request.model.observables[0].target = "massive_tracers";
   request.model.observables[0].unit = "m/s^2";
   request.model.observables[0].rank = "vector";
+  bindConfirmation(request.model);
   request.request.observationTargets = [{
     schemaVersion: "sigma-observation-target/1",
     id: "separate-masks",

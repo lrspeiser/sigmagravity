@@ -14,11 +14,11 @@ function digest(value) {
 }
 
 function model() {
-  return {
+  const manifest = {
     schemaVersion: "sigma-field-model/1",
     name: "Batch manufactured model",
     modelClass: "stationary_elliptic",
-    source: { format: "plain_text", text: "laplacian(u) = forcing", confirmedCanonical: true },
+    source: { format: "plain_text", text: "laplacian(u) = forcing", confirmedCanonical: false },
     geometry: { coordinateSystem: "cartesian_2d", dimensions: 2, domain: { lengthUnit: "m", boundaryExtent: "unit square" } },
     fields: {
       forcing: { rank: "scalar", role: "source", unit: "1/s^2", datasetKey: "forcing" },
@@ -31,6 +31,15 @@ function model() {
     solver: { family: "finite_volume_elliptic", relativeTolerance: 1e-8, maxIterations: 8, damping: 1 },
     parameterPolicy: { mode: "published_fixed", perObjectParameters: [] },
   };
+  return bindConfirmation(manifest);
+}
+
+function bindConfirmation(manifest) {
+  manifest.source.confirmedCanonical = false;
+  delete manifest.source.confirmedModelSha256;
+  manifest.source.confirmedCanonical = true;
+  manifest.source.confirmedModelSha256 = validateFieldModel(manifest).modelSha256;
+  return manifest;
 }
 
 function bundle(label) {
@@ -82,7 +91,7 @@ function photonModel() {
     domain: { lengthUnit: "m", boundaryExtent: "fixture cube" },
   };
   result.observables[0].target = "photons";
-  return result;
+  return bindConfirmation(result);
 }
 
 function photonBundle(label, { observations = false } = {}) {
@@ -423,6 +432,7 @@ test("unsupported fitting policies are rejected before child execution", async (
   const source = await upload(fieldService, "FIT");
   const fittedModel = model();
   fittedModel.parameterPolicy.mode = "universal_fit";
+  bindConfirmation(fittedModel);
   await assert.rejects(
     () => batchService.createBatch({
       schemaVersion: "sigma-batch-submit/1",
@@ -441,6 +451,7 @@ test("batch aggregates post-solve circular-speed scores and predictions", async 
   const source = await upload(fieldService, "OBSERVATION");
   const observationModel = model();
   observationModel.observables[0].target = "massive_tracers";
+  bindConfirmation(observationModel);
   const target = {
     schemaVersion: "sigma-observation-target/1",
     id: "GALAXY-O-rotation",
@@ -478,6 +489,7 @@ test("batch aggregates resolved velocity-field scores and prediction pixels", as
   const source = await upload(fieldService, "VELOCITY", velocityBundle("VELOCITY"));
   const observationModel = model();
   observationModel.observables[0].target = "massive_tracers";
+  bindConfirmation(observationModel);
   const target = {
     schemaVersion: "sigma-observation-target/1",
     id: "GALAXY-V-map",
@@ -658,6 +670,7 @@ test("changed observation data reuses the field child and changes only the obser
   );
   const observationModel = model();
   observationModel.observables[0].target = "massive_tracers";
+  bindConfirmation(observationModel);
   const target = {
     schemaVersion: "sigma-observation-target/1",
     id: "GALAXY-COMPOSED-map",
@@ -775,6 +788,7 @@ test("batch cancellation reaches a running observation child without cancelling 
   const source = await upload(fieldService, "CANCEL-OBSERVATION");
   const observationModel = model();
   observationModel.observables[0].target = "massive_tracers";
+  bindConfirmation(observationModel);
   const target = {
     schemaVersion: "sigma-observation-target/1",
     id: "CANCEL-curve",
@@ -824,6 +838,7 @@ test("batch restart rebuilds reporting from completed field and observation chil
   const source = await upload(fieldService, "RECOVERY");
   const observationModel = model();
   observationModel.observables[0].target = "massive_tracers";
+  bindConfirmation(observationModel);
   const target = {
     schemaVersion: "sigma-observation-target/1",
     id: "RECOVERY-curve",
@@ -888,6 +903,7 @@ test("a rejected field creates no observation child and an observation failure i
   const rejectedSource = await upload(rejectedFixture.fieldService, "REJECTED-FIELD");
   const rejectedModel = model();
   rejectedModel.observables[0].target = "massive_tracers";
+  bindConfirmation(rejectedModel);
   const rejectedTarget = {
     schemaVersion: "sigma-observation-target/1",
     id: "REJECTED-FIELD-curve",
@@ -933,6 +949,7 @@ test("a rejected field creates no observation child and an observation failure i
   const source = await upload(failedObservationFixture.fieldService, "REJECTED-OBSERVATION");
   const observationModel = model();
   observationModel.observables[0].target = "massive_tracers";
+  bindConfirmation(observationModel);
   const target = {
     schemaVersion: "sigma-observation-target/1",
     id: "REJECTED-OBSERVATION-curve",

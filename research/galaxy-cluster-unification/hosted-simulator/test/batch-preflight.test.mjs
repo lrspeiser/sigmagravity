@@ -3,10 +3,19 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { prepareBatch } from "../lib/batch-preflight.mjs";
 import { sha256 } from "../lib/canonical.mjs";
+import { validateFieldModel } from "../lib/field-model.mjs";
 
 const model = JSON.parse(
   readFileSync(new URL("../examples/models/newtonian-poisson.json", import.meta.url), "utf8"),
 );
+
+function bindConfirmation(manifest) {
+  manifest.source.confirmedCanonical = false;
+  delete manifest.source.confirmedModelSha256;
+  manifest.source.confirmedCanonical = true;
+  manifest.source.confirmedModelSha256 = validateFieldModel(manifest).modelSha256;
+  return manifest;
+}
 
 function bundle(label, cells = 17) {
   const core = {
@@ -131,6 +140,7 @@ test("batch preflight keeps system-specific observation targets out of the share
 test("fitted and per-galaxy policies are explicit but not silently executed", () => {
   const fittedModel = structuredClone(model);
   fittedModel.parameterPolicy.mode = "universal_fit";
+  bindConfirmation(fittedModel);
   const request = submission({ mode: "universal_fit", perObjectParameters: [] });
   request.model = fittedModel;
   const result = prepareBatch({ submission: request, resolvedSystems: resolved() });
@@ -149,6 +159,7 @@ test("fitted and per-galaxy policies are explicit but not silently executed", ()
 test("train-validation-holdout policy requires complete non-overlapping splits", () => {
   const splitModel = structuredClone(model);
   splitModel.parameterPolicy.mode = "train_validation_holdout";
+  bindConfirmation(splitModel);
   const systems = [...resolved(), {
     id: "GALAXY-C",
     source: { kind: "data_upload", id: `upload_${"c".repeat(24)}` },

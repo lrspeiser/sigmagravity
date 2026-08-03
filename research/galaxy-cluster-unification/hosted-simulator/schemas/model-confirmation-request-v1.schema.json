@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigma-gravity-research-simulator-five.vercel.app/schemas/model-confirmation-request-v1.schema.json",
+  "title": "Sigma exact model confirmation request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "model", "expectedModelSha256", "acknowledgement"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-model-confirmation-request/1" },
+    "model": { "$ref": "model-manifest-v1.schema.json" },
+    "expectedModelSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "acknowledgement": {
+      "const": "I confirm that this canonical model is the equation I intend to execute."
+    }
+  }
+}

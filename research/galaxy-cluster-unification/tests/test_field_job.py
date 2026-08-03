@@ -13,21 +13,28 @@ from voidscreen.field_job import (
     execute_request_file,
     load_array_bundle,
     model_sha256,
+    require_model_confirmation,
     write_array_bundle,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def confirm_manifest(manifest: dict) -> dict:
+    manifest["source"]["confirmedCanonical"] = True
+    manifest["source"]["confirmedModelSha256"] = model_sha256(manifest)
+    return manifest
+
+
 def manufactured_manifest() -> dict:
-    return {
+    manifest = {
         "schemaVersion": "sigma-field-model/1",
         "name": "Content-addressed manufactured field",
         "modelClass": "stationary_elliptic",
         "source": {
             "format": "plain_text",
             "text": "laplacian(u) = forcing",
-            "confirmedCanonical": True,
+            "confirmedCanonical": False,
         },
         "geometry": {
             "coordinateSystem": "cartesian_2d",
@@ -77,6 +84,15 @@ def manufactured_manifest() -> dict:
         },
         "parameterPolicy": {"mode": "universal_fixed", "perObjectParameters": []},
     }
+    return confirm_manifest(manifest)
+
+
+def test_model_confirmation_is_bound_to_exact_computational_hash():
+    manifest = manufactured_manifest()
+    assert require_model_confirmation(manifest) == model_sha256(manifest)
+    manifest["solver"]["maxIterations"] += 1
+    with pytest.raises(ValueError, match="exact computational model hash"):
+        require_model_confirmation(manifest)
 
 
 def bundle_metadata(spacing: float) -> dict:
@@ -292,6 +308,7 @@ def test_field_job_scores_massive_tracer_curve_after_solving(tmp_path: Path):
         "op": "negate",
         "args": [{"op": "gradient", "args": [{"field": "u"}]}],
     }
+    confirm_manifest(model)
     radii = [0.5, 1.0, 2.0, 3.0]
     manifest = execute_field_job(
         model,
@@ -382,6 +399,7 @@ def test_field_job_scores_resolved_velocity_map_after_solving(tmp_path: Path):
         "op": "negate",
         "args": [{"op": "gradient", "args": [{"field": "u"}]}],
     }
+    confirm_manifest(model)
     manifest = execute_field_job(
         model,
         bundle_path,
@@ -475,6 +493,7 @@ def test_nonconvergence_is_retained_as_a_failed_scientific_result(tmp_path: Path
     )
     model = manufactured_manifest()
     model["solver"]["maxIterations"] = 1
+    confirm_manifest(model)
     execute_field_job(
         model,
         bundle_path,
@@ -506,6 +525,7 @@ def test_runtime_exception_keeps_a_hashed_failure_artifact(tmp_path: Path):
         "op": "convolution",
         "args": [{"field": "forcing"}, {"field": "forcing"}],
     }
+    confirm_manifest(model)
     manifest = execute_field_job(
         model,
         bundle_path,

@@ -18,7 +18,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from voidscreen.field_job import write_array_bundle
+from voidscreen.field_job import model_sha256, write_array_bundle
 
 
 def request(
@@ -86,14 +86,14 @@ def wait_for_job(base: str, submission: dict) -> dict:
 
 
 def model() -> dict:
-    return {
+    manifest = {
         "schemaVersion": "sigma-field-model/1",
         "name": "P0732 HTTP solid-body field",
         "modelClass": "stationary_elliptic",
         "source": {
             "format": "plain_text",
             "text": "laplacian(u)=forcing; acceleration=-gradient(u)",
-            "confirmedCanonical": True,
+            "confirmedCanonical": False,
         },
         "geometry": {
             "coordinateSystem": "cartesian_2d",
@@ -146,6 +146,9 @@ def model() -> dict:
         },
         "parameterPolicy": {"mode": "universal_fixed", "perObjectParameters": []},
     }
+    manifest["source"]["confirmedCanonical"] = True
+    manifest["source"]["confirmedModelSha256"] = model_sha256(manifest)
+    return manifest
 
 
 def main() -> None:

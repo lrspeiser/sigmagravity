@@ -5,7 +5,7 @@ export default function handler(request, response) {
   send(response, 200, {
     status: "ok",
     service: "sigma-gravity-research-simulator",
-    version: "0.14.0-preview",
+    version: "0.15.0-preview",
     capabilities: {
       radialRotationCurves: "available",
       syntheticRadialGalaxies: "available",
@@ -14,6 +14,7 @@ export default function handler(request, response) {
       resolvedTwinValidationEvidence: "available",
       resolvedTwinFinalHoldoutEvidence: "available",
       typedFieldModelValidation: "available",
+      exactModelHashConfirmation: "required_for_execution",
       fieldJobPreflight: "available",
       localAsyncFieldJobs: "available_in_dev_server",
       localResolvedGalaxyJobs: "available_in_dev_server",

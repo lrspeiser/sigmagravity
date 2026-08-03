@@ -6,6 +6,7 @@ import formulasValidate from "../api/v1/formulas/validate.mjs";
 import fieldJobsPrepare from "../api/v1/field-jobs/prepare.mjs";
 import health from "../api/v1/health.mjs";
 import modelsValidate from "../api/v1/models/validate.mjs";
+import modelsConfirm from "../api/v1/models/confirm.mjs";
 import runs from "../api/v1/runs.mjs";
 import specification from "../api/v1/spec.mjs";
 import syntheticGalaxies from "../api/v1/synthetic-galaxies.mjs";
@@ -41,6 +42,7 @@ const apiRoutes = new Map([
   ["/api/v1/formulas/validate", formulasValidate],
   ["/api/v1/field-jobs/prepare", fieldJobsPrepare],
   ["/api/v1/models/validate", modelsValidate],
+  ["/api/v1/models/confirm", modelsConfirm],
   ["/api/v1/synthetic-galaxies", syntheticGalaxies],
   ["/api/v1/twin-runs", twinRuns],
   ["/api/v1/resolved-twin-evidence", resolvedTwinEvidence],
@@ -59,6 +61,7 @@ const staticFiles = new Map([
   ["/assets/resolved-twin-holdout-curves.png", ["assets/resolved-twin-holdout-curves.png", "image/png"]],
   ["/data/resolved-twin-development-v1.json", ["data/resolved-twin-development-v1.json", "application/json; charset=utf-8"]],
   ["/schemas/model-manifest-v1.schema.json", ["schemas/model-manifest-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/model-confirmation-request-v1.schema.json", ["schemas/model-confirmation-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/array-bundle-request-v1.schema.json", ["schemas/array-bundle-request-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/array-bundle-v1.schema.json", ["schemas/array-bundle-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/field-job-request-v1.schema.json", ["schemas/field-job-request-v1.schema.json", "application/schema+json; charset=utf-8"]],

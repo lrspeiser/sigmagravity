@@ -261,7 +261,14 @@ export class LocalFieldJobService {
     this.shuttingDown = false;
     this.workerSourceSha256 = await workerSourceSha256(
       this.projectRoot,
-      ["field_job.py", "generic_field_worker.py", "observation_adapters.py"],
+      [
+        "field_job.py",
+        "generic_field_worker.py",
+        "observation_adapters.py",
+        "photon_lensing_adapter.py",
+        "multiple_image_adapter.py",
+        "sky_lensing.py",
+      ],
     );
     this.galaxyWorkerSourceSha256 = await workerSourceSha256(
       this.projectRoot,
@@ -269,7 +276,14 @@ export class LocalFieldJobService {
     );
     this.observationWorkerSourceSha256 = await workerSourceSha256(
       this.projectRoot,
-      ["observation_evaluation_job.py", "field_job.py", "observation_adapters.py"],
+      [
+        "observation_evaluation_job.py",
+        "field_job.py",
+        "observation_adapters.py",
+        "photon_lensing_adapter.py",
+        "multiple_image_adapter.py",
+        "sky_lensing.py",
+      ],
     );
     await mkdir(this.#uploadsRoot(), { recursive: true });
     await mkdir(this.#jobsRoot(), { recursive: true });

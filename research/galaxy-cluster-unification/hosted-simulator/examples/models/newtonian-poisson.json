@@ -5,7 +5,8 @@
   "source": {
     "format": "latex",
     "text": "\\nabla^2\\Phi = 4\\pi G\\rho_b",
-    "confirmedCanonical": true
+    "confirmedCanonical": true,
+    "confirmedModelSha256": "43738f2c7bb3c4e94193763cf46f39b2a47fa852b25d1c063fef00fa7e1aa661"
   },
   "geometry": {
     "coordinateSystem": "cartesian_3d",
