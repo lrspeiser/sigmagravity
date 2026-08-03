@@ -119,6 +119,23 @@ download/rehash and zero per-object gravity parameters:
 
 The Linux container runs this same six-case script in GitHub Actions.
 
+GitHub Actions run
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30803981203> passed for
+implementation commit `3d564c2d0fece41985b72332608d645ebafc5cc4`. It
+built the non-root scientific-worker and advanced plug-in sandbox images,
+passed all 160 hosted/control-plane tests, ran all six real container jobs and
+re-ran the plug-in isolation acceptance. The Linux periodic 2-D and 3-D field
+errors were `3.6301665671303565e-16` and `6.064489774045424e-16`.
+
+Production deployment `dpl_84y1NAYwFEgdsEcmfF2GUyeFRcr4` is ready at
+<https://sigma-gravity-research-simulator-gnpwerllt-horizon3.vercel.app> and
+aliased to the stable site. The live HTTP smoke validated version
+`0.35.0-preview`, guide example 16, the published periodic manifest and its
+confirmed hash. The deployment queue canary recorded identity hash
+`e8566836011c69b34a294bedcea8d93d7016f82af966b5d21f2bd4daaa974b6f`
+and private acknowledgement hash
+`55cf62199cb07ffe42a264be3785e37fbf9264f463dc88344ea2962622f2b5e4`.
+
 ## Scientific boundary
 
 A periodic FFT solve represents a torus: mass, density contrast and field are

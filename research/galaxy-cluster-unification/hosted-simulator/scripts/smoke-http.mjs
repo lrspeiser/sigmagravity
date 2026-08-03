@@ -28,6 +28,7 @@ assert.match(guide, /Know what the simulator tested/);
 assert.match(guide, /Inputs, outputs, and meaning/);
 assert.match(guide, /Durable at-least-once queue/);
 assert.match(guide, /Transactional Postgres job control/);
+assert.match(guide, /Solve a periodic 2D or 3D Poisson field by FFT/);
 assert.match(guide, /Project-scoped durable research API/);
 assert.match(guide, /Signed advanced-code plug-ins/);
 assert.match(guide, /Preflight a signed formula plug-in without running it in Vercel/);
@@ -129,6 +130,11 @@ const nonlocalModel = await request("/examples/models/nonlocal-response.json");
 const nonlocalValidation = await request("/api/v1/models/validate", post(nonlocalModel));
 assert.equal(nonlocalValidation.valid, true);
 assert.ok(nonlocalValidation.requiredCapabilities.operators.includes("convolution"));
+const periodicModel = await request("/examples/models/periodic-poisson.json");
+const periodicValidation = await request("/api/v1/models/validate", post(periodicModel));
+assert.equal(periodicValidation.valid, true);
+assert.equal(periodicValidation.confirmation.confirmed, true);
+assert.equal(periodicValidation.requiredCapabilities.solverFamily, "fft_poisson");
 const bundleCore = {
   schemaVersion: "sigma-array-bundle/1",
   geometry: { coordinateSystem: "cartesian_3d", dimensions: 3, spacing: [1, 1, 1], lengthUnit: "m" },
@@ -184,5 +190,6 @@ console.log(JSON.stringify({
   twinSourceGBarNormalizedRmse: twinRun.metrics.sourceReconstruction.gBarNormalizedRmse,
   twinFormulaRmseKmS: twinRun.metrics.formulaOnGeneratedTwin.rmseKmS,
   resolvedEvidenceSha256: resolvedEvidence.evidenceSha256,
+  periodicModelSha256: periodicValidation.modelSha256,
   clusterEvidenceSha256: clusterEvidence.registrySha256,
 }, null, 2));

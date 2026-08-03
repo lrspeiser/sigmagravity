@@ -830,3 +830,23 @@ zero per-object gravity parameters. The public guide includes the confirmed
 [`periodic-poisson.json`](../hosted-simulator/examples/models/periodic-poisson.json)
 input, measured output and the warning that a periodic torus is not an
 isolated galaxy or cluster.
+
+The 160-test hosted suite and real Linux container acceptance passed in
+GitHub Actions run
+<https://github.com/lrspeiser/sigmagravity/actions/runs/30803981203> for
+implementation commit `3d564c2d0fece41985b72332608d645ebafc5cc4`. The
+Linux periodic 2-D and 3-D errors were `3.6301665671303565e-16` and
+`6.064489774045424e-16`; the signed plug-in isolation fixture also remained
+green.
+
+Production deployment `dpl_84y1NAYwFEgdsEcmfF2GUyeFRcr4` is ready at
+<https://sigma-gravity-research-simulator-gnpwerllt-horizon3.vercel.app> and
+aliased to the stable site. Live health reports `0.35.0-preview`; the guide,
+periodic example, model validation, catalog, evidence and comparator smoke all
+passed. The deployment queue smoke verified identity hash
+`e8566836011c69b34a294bedcea8d93d7016f82af966b5d21f2bd4daaa974b6f`
+and private acknowledgement hash
+`55cf62199cb07ffe42a264be3785e37fbf9264f463dc88344ea2962622f2b5e4`.
+The safe worker is still not connected to the production control plane, so
+Vercel publishes the contract and evidence but does not claim hosted FFT
+execution.
