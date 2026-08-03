@@ -11,15 +11,15 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/DkNa41DMSz1xvf8ShdioxfRp4HnF>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/7biUPj86kfyryd1TVqTjVJAfAe3Q>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-nl8ccibca-horizon3.vercel.app>
-- deployment ID: `dpl_DkNa41DMSz1xvf8ShdioxfRp4HnF`
-- deployed implementation commit: `ae6a113afbca903fa1ce89535d90658b79760996`
-- public contract version: `0.24.0-preview`
+  <https://sigma-gravity-research-simulator-bzzsv225l-horizon3.vercel.app>
+- deployment ID: `dpl_7biUPj86kfyryd1TVqTjVJAfAe3Q`
+- deployed implementation commit: `57ba66d86695dcd87a098c6331894687d551af77`
+- public contract version: `0.25.0-preview`
 
-The service passes its local production build, 93 automated hosted tests, all
-1,583 Python scientific tests, and the live HTTP smoke suite. No deployment
+The service passes its local production build, 95 automated hosted tests, all
+1,591 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
@@ -106,6 +106,12 @@ Implemented public capabilities:
     exact realization indices, units, and source-array content hashes are bound
     into every child identity. These are prior-prediction spreads, not
     likelihood-weighted posterior credible intervals.
+22. Execute stationary scalar elliptic manifests on a verified axisymmetric
+    cylindrical `(r,z)` grid in the local worker. The immutable job binds
+    `axisOrder=["r","z"]` and `origin=[0,z0]`; the symmetry axis uses a regular
+    zero-radial-flux limit. Bessel manufactured solutions show second-order
+    convergence. Public production advertises this local capability but still
+    does not execute the heavy worker.
 
 ## Verification evidence
 
@@ -115,7 +121,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 90 passing hosted tests, 1,579 passing Python scientific
+The current result is 95 passing hosted tests, 1,591 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -160,8 +166,8 @@ and point arrays. The accepted production smoke values are:
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
 - manifest SHA-256:
-  `0197e79c5c42ddbeb7ace796747b3e533e3e0832e1ebc30eaafa6a845d6e8699`
-- run ID: `run_0197e79c5c42ddbeb7ace796`
+  `c98323738095e3ab59484d0c398a89509c457979ed2ce608f52ce08843c11956`
+- run ID: `run_c98323738095e3ab59484d0c`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -365,6 +371,27 @@ normal viewport, and no site console warning or error in a fresh tab. Public
 `POST /api/v1/batches` continues to return HTTP 503 with
 `production_worker_not_connected`, so the page does not imply that the Vercel
 function executes the local 3D worker.
+
+The v0.25 axisymmetric checks require health to report
+`localAxisymmetricCylindricalFields=available_in_dev_server`, both array-bundle
+schemas to require `axisOrder=["r","z"]` and `origin=[0,z0]`, and the guide to
+show Example 11 with concrete input, output, verified error scaling, and explicit
+limits. The local manufactured Bessel field has relative errors
+`1.2597932529074785e-3`, `3.1487840159771037e-4`, and
+`7.871635258224039e-5` at 25, 49, and 97 cells, respectively. The full
+immutable-job test also verifies the regular axis, spatially varying
+coefficients, worker version `1.2.0-preview`, artifacts, origin and axis order.
+
+Deployment `dpl_7biUPj86kfyryd1TVqTjVJAfAe3Q` is production-ready at the stable
+alias and serves `0.25.0-preview`. The complete live HTTP smoke reproduces run
+`run_c98323738095e3ab59484d0c`, manifest
+`c98323738095e3ab59484d0c398a89509c457979ed2ce608f52ce08843c11956`, twin run
+`twinrun_67c06c459e0f89232b3d931f`, and unchanged cluster registry hash
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+The radial submitted, fixed-MOND, and Newtonian RMSE values remain unchanged,
+showing that the new geometry path did not alter the hosted radial benchmark.
+Axisymmetric field execution remains local-only; Vercel heavy routes continue
+to return `production_worker_not_connected`.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
