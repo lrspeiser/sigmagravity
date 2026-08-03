@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { sha256 } from "../lib/canonical.mjs";
 import { prepareFieldJob } from "../lib/field-job-preflight.mjs";
 import { validateFieldModel } from "../lib/field-model.mjs";
+import { validateObservationTargets } from "../lib/observation-target.mjs";
 
 const model = JSON.parse(readFileSync(new URL("../examples/models/refracted-gravity.json", import.meta.url), "utf8"));
 const twoPotentialModel = JSON.parse(readFileSync(new URL("../examples/models/two-potential.json", import.meta.url), "utf8"));
@@ -55,6 +56,23 @@ function payload() {
       seed: 0,
     },
   };
+}
+
+function axisymmetricPayload() {
+  const request = payload();
+  request.model.geometry.coordinateSystem = "axisymmetric_cylindrical";
+  request.model.geometry.dimensions = 2;
+  bindConfirmation(request.model);
+  request.inputBundle.geometry.coordinateSystem = "axisymmetric_cylindrical";
+  request.inputBundle.geometry.dimensions = 2;
+  request.inputBundle.geometry.spacing = [1, 1];
+  request.inputBundle.geometry.origin = [0, -16];
+  request.inputBundle.geometry.axisOrder = ["r", "z"];
+  request.inputBundle.arrays[0].shape = [33, 33];
+  request.inputBundle.arrays[0].elementCount = 33 ** 2;
+  const { bundleSha256: _oldHash, ...core } = request.inputBundle;
+  request.inputBundle = { ...core, bundleSha256: sha256(core) };
+  return request;
 }
 
 test("field preflight binds a generic model to content-hashed 3D data", () => {
@@ -113,6 +131,119 @@ test("axisymmetric preflight rejects a fabricated wall or swapped axes", () => {
   ({ bundleSha256: _oldHash, ...core } = request.inputBundle);
   request.inputBundle = { ...core, bundleSha256: sha256(core) };
   assert.throws(() => prepareFieldJob(request), /origin/);
+});
+
+test("axisymmetric preflight binds a direct circular-speed observation", () => {
+  const request = axisymmetricPayload();
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "axisymmetric-rotation",
+    kind: "circular_speed_curve",
+    observable: "massive_tracer_acceleration",
+    centerM: [0, 0],
+    radiiM: [1, 2, 4],
+    observedSpeedsMPerS: [10, 20, 40],
+    uncertaintiesMPerS: [1, 1, 2],
+    provenance: { kind: "analytic axisymmetric fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  const result = prepareFieldJob(request);
+  assert.equal(result.valid, true);
+  assert.equal(result.observationTargets[0].pointCount, 3);
+  assert.equal(result.observationTargets[0].scored, true);
+
+  request.request.observationTargets[0].planeAxes = [0, 1];
+  assert.throws(() => prepareFieldJob(request), /do not accept Cartesian planeAxes/);
+  delete request.request.observationTargets[0].planeAxes;
+  request.request.observationTargets[0].centerM = [1, 0];
+  assert.throws(() => prepareFieldJob(request), /centerM/);
+});
+
+test("axisymmetric preflight binds a resolved velocity-field observation", () => {
+  const request = axisymmetricPayload();
+  const shape = [17, 17];
+  for (const [index, [key, unit, role]] of [
+    ["major", "m", "auxiliary"],
+    ["minor", "m", "auxiliary"],
+    ["observed_velocity", "m/s", "auxiliary"],
+    ["velocity_uncertainty", "m/s", "uncertainty"],
+  ].entries()) {
+    request.inputBundle.arrays.push({
+      key,
+      npzKey: key,
+      unit,
+      rank: "scalar",
+      role,
+      dtype: "<f8",
+      shape,
+      elementCount: shape[0] * shape[1],
+      contentSha256: String(index + 2).repeat(64),
+    });
+  }
+  const { bundleSha256: _oldHash, ...core } = request.inputBundle;
+  request.inputBundle = { ...core, bundleSha256: sha256(core) };
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "axisymmetric-velocity-map",
+    kind: "line_of_sight_velocity_field",
+    observable: "massive_tracer_acceleration",
+    centerM: [0, 0],
+    inclinationDeg: 60,
+    handedness: 1,
+    majorCoordinateArrayKey: "major",
+    minorCoordinateArrayKey: "minor",
+    observedVelocityArrayKey: "observed_velocity",
+    uncertaintyArrayKey: "velocity_uncertainty",
+    minimumValidPixels: 100,
+    provenance: { kind: "analytic axisymmetric fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  const result = prepareFieldJob(request);
+  assert.equal(result.valid, true);
+  assert.equal(result.observationTargets[0].pointCount, 17 * 17);
+  assert.equal(result.observationTargets[0].scored, true);
+});
+
+test("decoupled axisymmetric observations bind the solved-field origin explicitly", () => {
+  const request = axisymmetricPayload();
+  const observationBundle = inputBundle();
+  observationBundle.geometry = {
+    coordinateSystem: "observation_table",
+    dimensions: 2,
+    spacing: [1, 1],
+    lengthUnit: "1",
+  };
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "decoupled-axisymmetric-rotation",
+    kind: "circular_speed_curve",
+    observable: "massive_tracer_acceleration",
+    gridOriginM: [0, -16],
+    centerM: [0, 0],
+    radiiM: [1, 2, 4],
+    provenance: { kind: "decoupled analytic fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const result = validateObservationTargets({
+    targets: [target],
+    model: request.model,
+    inputBundle: observationBundle,
+    requestedObservables: ["massive_tracer_acceleration"],
+    fieldShape: [33, 33],
+  });
+  assert.equal(result[0].pointCount, 3);
+  const withoutOrigin = structuredClone(target);
+  delete withoutOrigin.gridOriginM;
+  assert.throws(
+    () => validateObservationTargets({
+      targets: [withoutOrigin],
+      model: request.model,
+      inputBundle: observationBundle,
+      requestedObservables: ["massive_tracer_acceleration"],
+      fieldShape: [33, 33],
+    }),
+    /requires gridOriginM/,
+  );
 });
 
 test("field preflight refuses a structurally valid but unconfirmed model", () => {

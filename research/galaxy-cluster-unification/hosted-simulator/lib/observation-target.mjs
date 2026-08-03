@@ -197,22 +197,38 @@ export function validateObservationTargets({
       if (definition.target !== "massive_tracers" || definition.rank !== "vector" || definition.unit !== "m/s^2") {
         throw new Error(`observation target ${target.id} requires a massive_tracers vector in m/s^2`);
       }
-      if (!["cartesian_2d", "cartesian_3d"].includes(model.geometry.coordinateSystem)) {
-        throw new Error(`${target.kind} supports Cartesian 2D or 3D models`);
+      const coordinateSystem = model.geometry.coordinateSystem;
+      if (!["cartesian_2d", "cartesian_3d", "axisymmetric_cylindrical"].includes(coordinateSystem)) {
+        throw new Error(`${target.kind} supports Cartesian 2D/3D or axisymmetric cylindrical models`);
       }
-      finiteArray(target.centerM, dimensions, `observation target ${target.id} centerM`);
-      if (target.gridOriginM !== undefined) finiteArray(target.gridOriginM, dimensions, `observation target ${target.id} gridOriginM`);
-      else if (inputBundle.geometry?.origin !== undefined) finiteArray(inputBundle.geometry.origin, dimensions, "input bundle origin");
-      const planeAxes = target.planeAxes ?? [0, 1];
-      if (!Array.isArray(planeAxes) || planeAxes.length !== 2 || !planeAxes.every(Number.isInteger)
-        || new Set(planeAxes).size !== 2 || planeAxes.some((axis) => axis < 0 || axis >= dimensions)) {
-        throw new Error(`observation target ${target.id} planeAxes are invalid`);
+      const center = finiteArray(target.centerM, dimensions, `observation target ${target.id} centerM`);
+      const axisymmetric = coordinateSystem === "axisymmetric_cylindrical";
+      let declaredOrigin = null;
+      if (target.gridOriginM !== undefined) {
+        declaredOrigin = finiteArray(target.gridOriginM, dimensions, `observation target ${target.id} gridOriginM`);
+      } else if (inputBundle.geometry?.origin !== undefined
+        && (!axisymmetric || inputBundle.geometry?.coordinateSystem === "axisymmetric_cylindrical")) {
+        declaredOrigin = finiteArray(inputBundle.geometry.origin, dimensions, "input bundle origin");
+      }
+      if (axisymmetric) {
+        if (dimensions !== 2) throw new Error("axisymmetric_cylindrical requires dimensions=2");
+        if (center[0] !== 0) throw new Error("axisymmetric observation centerM must be [0,z_midplane]");
+        if (!declaredOrigin) throw new Error("axisymmetric observation requires gridOriginM=[0,z0] when evaluated against a separate observation bundle");
+        if (declaredOrigin[0] !== 0) throw new Error("axisymmetric observation radial origin must be exactly r=0");
+        if (target.planeAxes !== undefined) throw new Error("axisymmetric observations do not accept Cartesian planeAxes");
+      } else {
+        const planeAxes = target.planeAxes ?? [0, 1];
+        if (!Array.isArray(planeAxes) || planeAxes.length !== 2 || !planeAxes.every(Number.isInteger)
+          || new Set(planeAxes).size !== 2 || planeAxes.some((axis) => axis < 0 || axis >= dimensions)) {
+          throw new Error(`observation target ${target.id} planeAxes are invalid`);
+        }
       }
       if (target.kind === "circular_speed_curve") {
       const radii = finiteArray(target.radiiM, null, `observation target ${target.id} radiiM`, { positive: true });
       if (radii.some((value, index) => index > 0 && value <= radii[index - 1])) throw new Error(`observation target ${target.id} radiiM must be strictly increasing`);
-      const sampleCount = target.azimuthalSamples ?? 128;
-      if (!Number.isInteger(sampleCount) || sampleCount < 16 || sampleCount > 4096) throw new Error("azimuthalSamples must be an integer from 16 through 4096");
+      if (axisymmetric && target.azimuthalSamples !== undefined) throw new Error("axisymmetric circular_speed_curve does not accept azimuthalSamples");
+      const sampleCount = axisymmetric ? null : (target.azimuthalSamples ?? 128);
+      if (!axisymmetric && (!Number.isInteger(sampleCount) || sampleCount < 16 || sampleCount > 4096)) throw new Error("azimuthalSamples must be an integer from 16 through 4096");
       const coverage = target.minimumAzimuthalCoverage ?? 0.8;
       if (!Number.isFinite(coverage) || coverage <= 0 || coverage > 1) throw new Error("minimumAzimuthalCoverage must lie in (0,1]");
       scored = target.observedSpeedsMPerS !== undefined;

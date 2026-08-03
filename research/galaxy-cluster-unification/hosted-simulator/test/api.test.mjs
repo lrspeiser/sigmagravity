@@ -43,7 +43,7 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.25.0-preview");
+  assert.equal(output.body.version, "0.26.0-preview");
   assert.equal(output.body.capabilities.localBaryonicImageConditioning, "available_in_dev_server");
   assert.equal(output.body.capabilities.localBaryonicEnsemblePropagation, "available_in_dev_server");
   assert.equal(output.body.capabilities.localInverseResponseMultiNullSuite, "available_in_dev_server");
@@ -80,6 +80,10 @@ test("health API identifies the deployed contract version and local worker bound
   );
   assert.equal(
     output.body.capabilities.localAxisymmetricCylindricalFields,
+    "available_in_dev_server",
+  );
+  assert.equal(
+    output.body.capabilities.localAxisymmetricGalaxyObservations,
     "available_in_dev_server",
   );
 });

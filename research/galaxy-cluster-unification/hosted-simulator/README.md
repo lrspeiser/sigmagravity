@@ -19,6 +19,19 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.26 connects the verified axisymmetric field worker to real galaxy
+observation types. A circular-speed target now samples radial acceleration
+directly at a declared `(r,z)` midplane and evaluates `v_c^2=r(-a_r)`; a
+resolved velocity target projects the same field with declared inclination,
+handedness, masks, beam and uncertainties. Cartesian plane axes and azimuthal
+samples are rejected for cylindrical targets. The real asynchronous HTTP
+acceptance rehashed ten artifacts, added zero per-object gravity parameters,
+and recovered its analytic circular speeds to `4.22e-15 m/s` RMSE. This is a
+software normalization result, not a real-galaxy fit; pressure support,
+non-circular motion, axisymmetric lensing and production compute remain
+unfinished. See
+[`../docs/AXISYMMETRIC_GALAXY_OBSERVATION_ADAPTER_MILESTONE.md`](../docs/AXISYMMETRIC_GALAXY_OBSERVATION_ADAPTER_MILESTONE.md).
+
 Version 0.25 adds a real axisymmetric cylindrical scalar-field worker. A
 submitted stationary elliptic manifest can now run on an immutable `(r,z)`
 array bundle whose first axis begins at `r=0`. The symmetry axis uses the

@@ -84,6 +84,29 @@ def _coordinate_origin(
     return centered, "explicit_centered_grid_fallback"
 
 
+def _axisymmetric_sampling_frame(
+    target: Mapping[str, Any],
+    geometry: Mapping[str, Any],
+    shape: Sequence[int],
+    spacing: Array,
+) -> tuple[Array, str, Array]:
+    """Validate the immutable ``(r,z)`` convention for observation sampling."""
+
+    if list(geometry.get("axisOrder", [])) != ["r", "z"]:
+        raise ValueError("axisymmetric observations require geometry axisOrder=['r','z']")
+    if target.get("planeAxes") is not None:
+        raise ValueError("axisymmetric observations do not accept Cartesian planeAxes")
+    if target.get("gridOriginM") is None and geometry.get("origin") is None:
+        raise ValueError("axisymmetric observations require an explicit origin=[0,z0]")
+    origin, origin_source = _coordinate_origin(target, geometry, shape, spacing)
+    if origin[0] != 0.0:
+        raise ValueError("axisymmetric observation radial origin must be exactly r=0")
+    center = _finite_vector(target.get("centerM"), 2, "centerM")
+    if center[0] != 0.0:
+        raise ValueError("axisymmetric observation centerM must be [0,z_midplane]")
+    return origin, origin_source, center
+
+
 def _score_curve(
     target: Mapping[str, Any], predicted: Array, rows: list[dict[str, Any]]
 ) -> dict[str, Any]:
@@ -204,10 +227,19 @@ def evaluate_circular_speed_target(
     observable_id = str(target.get("observable", ""))
     _observable_definition(model, observable_id, "circular_speed_curve")
     dimensions = int(geometry.get("dimensions", 0))
-    if geometry.get("coordinateSystem") not in {"cartesian_2d", "cartesian_3d"}:
-        raise ValueError("circular_speed_curve supports Cartesian 2D or 3D grids")
+    coordinate_system = str(geometry.get("coordinateSystem", ""))
+    if coordinate_system not in {
+        "cartesian_2d",
+        "cartesian_3d",
+        "axisymmetric_cylindrical",
+    }:
+        raise ValueError(
+            "circular_speed_curve supports Cartesian 2D/3D or axisymmetric cylindrical grids"
+        )
     if dimensions not in {2, 3}:
         raise ValueError("circular_speed_curve requires two or three dimensions")
+    if coordinate_system == "axisymmetric_cylindrical" and dimensions != 2:
+        raise ValueError("axisymmetric_cylindrical requires dimensions=2")
     components = _acceleration_components(observables, observable_id, dimensions)
     shape = components[0].shape
     raw_spacing = geometry.get("spacing")
@@ -218,22 +250,36 @@ def evaluate_circular_speed_target(
     )
     if np.any(spacing <= 0):
         raise ValueError("geometry spacing must be positive")
-    origin, origin_source = _coordinate_origin(target, geometry, shape, spacing)
-    center = _finite_vector(target.get("centerM"), dimensions, "centerM")
-    plane_axes = target.get("planeAxes", [0, 1])
-    if (
-        not isinstance(plane_axes, list)
-        or len(plane_axes) != 2
-        or any(isinstance(value, bool) or not isinstance(value, int) for value in plane_axes)
-        or len(set(plane_axes)) != 2
-        or any(value < 0 or value >= dimensions for value in plane_axes)
-    ):
-        raise ValueError("planeAxes must identify two distinct grid axes")
+    axisymmetric = coordinate_system == "axisymmetric_cylindrical"
+    if axisymmetric:
+        origin, origin_source, center = _axisymmetric_sampling_frame(
+            target, geometry, shape, spacing
+        )
+        plane_axes: list[int] | None = None
+    else:
+        origin, origin_source = _coordinate_origin(target, geometry, shape, spacing)
+        center = _finite_vector(target.get("centerM"), dimensions, "centerM")
+        plane_axes = target.get("planeAxes", [0, 1])
+        if (
+            not isinstance(plane_axes, list)
+            or len(plane_axes) != 2
+            or any(
+                isinstance(value, bool) or not isinstance(value, int)
+                for value in plane_axes
+            )
+            or len(set(plane_axes)) != 2
+            or any(value < 0 or value >= dimensions for value in plane_axes)
+        ):
+            raise ValueError("planeAxes must identify two distinct grid axes")
     radii = _finite_series(target.get("radiiM"), "radiiM", positive=True)
     if np.any(np.diff(radii) <= 0):
         raise ValueError("radiiM must be strictly increasing")
-    sample_count = target.get("azimuthalSamples", 128)
-    if (
+    if axisymmetric and target.get("azimuthalSamples") is not None:
+        raise ValueError(
+            "axisymmetric circular_speed_curve does not accept azimuthalSamples"
+        )
+    sample_count = 1 if axisymmetric else target.get("azimuthalSamples", 128)
+    if not axisymmetric and (
         isinstance(sample_count, bool)
         or not isinstance(sample_count, int)
         or not 16 <= sample_count <= 4096
@@ -242,36 +288,68 @@ def evaluate_circular_speed_target(
     minimum_coverage = float(target.get("minimumAzimuthalCoverage", 0.8))
     if not math.isfinite(minimum_coverage) or not 0 < minimum_coverage <= 1:
         raise ValueError("minimumAzimuthalCoverage must lie in (0,1]")
-    angles = np.linspace(0.0, 2.0 * math.pi, sample_count, endpoint=False)
-    cosines = np.cos(angles)
-    sines = np.sin(angles)
     predicted = np.full(radii.shape, np.nan, dtype=float)
     rows: list[dict[str, Any]] = []
-    for index, radius in enumerate(radii):
-        positions = np.broadcast_to(center[:, None], (dimensions, sample_count)).copy()
-        positions[plane_axes[0]] += radius * cosines
-        positions[plane_axes[1]] += radius * sines
-        indices = (positions - origin[:, None]) / spacing[:, None]
-        sampled = np.vstack(
+    if axisymmetric:
+        indices = np.vstack(
             [
-                map_coordinates(
-                    component,
-                    indices,
-                    order=1,
-                    mode="constant",
-                    cval=np.nan,
-                    prefilter=False,
-                )
-                for component in components
+                radii / spacing[0],
+                np.full_like(radii, (center[1] - origin[1]) / spacing[1]),
             ]
         )
-        inward = -(
-            sampled[plane_axes[0]] * cosines + sampled[plane_axes[1]] * sines
+        radial_acceleration = map_coordinates(
+            components[0],
+            indices,
+            order=1,
+            mode="constant",
+            cval=np.nan,
+            prefilter=False,
+        )
+        inward_values = -radial_acceleration
+        sampling_mode = "axisymmetric_midplane_direct"
+    else:
+        angles = np.linspace(0.0, 2.0 * math.pi, sample_count, endpoint=False)
+        cosines = np.cos(angles)
+        sines = np.sin(angles)
+        inward_samples: list[Array] = []
+        for radius in radii:
+            positions = np.broadcast_to(
+                center[:, None], (dimensions, sample_count)
+            ).copy()
+            positions[plane_axes[0]] += radius * cosines
+            positions[plane_axes[1]] += radius * sines
+            indices = (positions - origin[:, None]) / spacing[:, None]
+            sampled = np.vstack(
+                [
+                    map_coordinates(
+                        component,
+                        indices,
+                        order=1,
+                        mode="constant",
+                        cval=np.nan,
+                        prefilter=False,
+                    )
+                    for component in components
+                ]
+            )
+            inward_samples.append(
+                -(
+                    sampled[plane_axes[0]] * cosines
+                    + sampled[plane_axes[1]] * sines
+                )
+            )
+        inward_values = inward_samples
+        sampling_mode = "cartesian_azimuthal_mean"
+    for index, radius in enumerate(radii):
+        inward = (
+            np.asarray([inward_values[index]], dtype=float)
+            if axisymmetric
+            else inward_values[index]
         )
         valid = np.isfinite(inward)
         coverage = float(valid.mean())
         mean_inward = float(np.mean(inward[valid])) if valid.any() else math.nan
-        if coverage >= minimum_coverage and mean_inward > 0:
+        if coverage >= minimum_coverage and mean_inward > 0.0:
             predicted[index] = math.sqrt(float(radius) * mean_inward)
         rows.append(
             {
@@ -297,12 +375,16 @@ def evaluate_circular_speed_target(
             "kind": "circular_speed_curve",
             "observable": observable_id,
             "observableTarget": "massive_tracers",
+            "coordinateSystem": coordinate_system,
+            "samplingMode": sampling_mode,
             "state": score["state"],
             "originM": origin.tolist(),
             "originSource": origin_source,
             "centerM": center.tolist(),
-            "planeAxes": list(plane_axes),
-            "azimuthalSamples": sample_count,
+            "planeAxes": list(plane_axes) if plane_axes is not None else None,
+            "axisOrder": ["r", "z"] if axisymmetric else None,
+            "samplingPlaneZM": float(center[1]) if axisymmetric else None,
+            "azimuthalSamples": sample_count if not axisymmetric else None,
             "minimumAzimuthalCoverage": minimum_coverage,
             "score": score,
         },
@@ -524,12 +606,19 @@ def evaluate_line_of_sight_velocity_field_target(
     observable_id = str(target.get("observable", ""))
     _observable_definition(model, observable_id, "line_of_sight_velocity_field")
     dimensions = int(geometry.get("dimensions", 0))
-    if geometry.get("coordinateSystem") not in {"cartesian_2d", "cartesian_3d"}:
+    coordinate_system = str(geometry.get("coordinateSystem", ""))
+    if coordinate_system not in {
+        "cartesian_2d",
+        "cartesian_3d",
+        "axisymmetric_cylindrical",
+    }:
         raise ValueError(
-            "line_of_sight_velocity_field supports Cartesian 2D or 3D grids"
+            "line_of_sight_velocity_field supports Cartesian 2D/3D or axisymmetric cylindrical grids"
         )
     if dimensions not in {2, 3}:
         raise ValueError("line_of_sight_velocity_field requires two or three dimensions")
+    if coordinate_system == "axisymmetric_cylindrical" and dimensions != 2:
+        raise ValueError("axisymmetric_cylindrical requires dimensions=2")
     components = _acceleration_components(observables, observable_id, dimensions)
     shape = components[0].shape
     raw_spacing = geometry.get("spacing")
@@ -540,17 +629,27 @@ def evaluate_line_of_sight_velocity_field_target(
     )
     if np.any(spacing <= 0):
         raise ValueError("geometry spacing must be positive")
-    origin, origin_source = _coordinate_origin(target, geometry, shape, spacing)
-    center = _finite_vector(target.get("centerM"), dimensions, "centerM")
-    plane_axes = target.get("planeAxes", [0, 1])
-    if (
-        not isinstance(plane_axes, list)
-        or len(plane_axes) != 2
-        or any(isinstance(value, bool) or not isinstance(value, int) for value in plane_axes)
-        or len(set(plane_axes)) != 2
-        or any(value < 0 or value >= dimensions for value in plane_axes)
-    ):
-        raise ValueError("planeAxes must identify two distinct grid axes")
+    axisymmetric = coordinate_system == "axisymmetric_cylindrical"
+    if axisymmetric:
+        origin, origin_source, center = _axisymmetric_sampling_frame(
+            target, geometry, shape, spacing
+        )
+        plane_axes: list[int] | None = None
+    else:
+        origin, origin_source = _coordinate_origin(target, geometry, shape, spacing)
+        center = _finite_vector(target.get("centerM"), dimensions, "centerM")
+        plane_axes = target.get("planeAxes", [0, 1])
+        if (
+            not isinstance(plane_axes, list)
+            or len(plane_axes) != 2
+            or any(
+                isinstance(value, bool) or not isinstance(value, int)
+                for value in plane_axes
+            )
+            or len(set(plane_axes)) != 2
+            or any(value < 0 or value >= dimensions for value in plane_axes)
+        ):
+            raise ValueError("planeAxes must identify two distinct grid axes")
     major = _target_array(
         arrays, target.get("majorCoordinateArrayKey"), "majorCoordinateArrayKey"
     )
@@ -566,32 +665,54 @@ def evaluate_line_of_sight_velocity_field_target(
     handedness = target.get("handedness")
     if handedness not in {-1, 1}:
         raise ValueError("handedness must be -1 or 1")
-    positions = np.broadcast_to(
-        center[:, None], (dimensions, major.size)
-    ).copy()
-    positions[plane_axes[0]] += major.ravel()
-    positions[plane_axes[1]] += minor.ravel()
-    indices = (positions - origin[:, None]) / spacing[:, None]
-    sampled = np.vstack(
-        [
-            map_coordinates(
-                component,
-                indices,
-                order=1,
-                mode="constant",
-                cval=np.nan,
-                prefilter=False,
-            )
-            for component in components
-        ]
-    )
     radius = np.hypot(major, minor)
     radial_x = np.divide(major, radius, out=np.zeros_like(major), where=radius > 0.0)
     radial_y = np.divide(minor, radius, out=np.zeros_like(minor), where=radius > 0.0)
-    inward = -(
-        sampled[plane_axes[0]].reshape(major.shape) * radial_x
-        + sampled[plane_axes[1]].reshape(major.shape) * radial_y
-    )
+    if axisymmetric:
+        indices = np.vstack(
+            [
+                radius.ravel() / spacing[0],
+                np.full(
+                    radius.size,
+                    (center[1] - origin[1]) / spacing[1],
+                    dtype=float,
+                ),
+            ]
+        )
+        inward = -map_coordinates(
+            components[0],
+            indices,
+            order=1,
+            mode="constant",
+            cval=np.nan,
+            prefilter=False,
+        ).reshape(major.shape)
+        sampling_mode = "axisymmetric_midplane_direct"
+    else:
+        positions = np.broadcast_to(
+            center[:, None], (dimensions, major.size)
+        ).copy()
+        positions[plane_axes[0]] += major.ravel()
+        positions[plane_axes[1]] += minor.ravel()
+        indices = (positions - origin[:, None]) / spacing[:, None]
+        sampled = np.vstack(
+            [
+                map_coordinates(
+                    component,
+                    indices,
+                    order=1,
+                    mode="constant",
+                    cval=np.nan,
+                    prefilter=False,
+                )
+                for component in components
+            ]
+        )
+        inward = -(
+            sampled[plane_axes[0]].reshape(major.shape) * radial_x
+            + sampled[plane_axes[1]].reshape(major.shape) * radial_y
+        )
+        sampling_mode = "cartesian_disk_plane"
     nonpositive_policy = str(target.get("nonPositiveInwardPolicy", "exclude"))
     if nonpositive_policy not in {"exclude", "zero_speed"}:
         raise ValueError(
@@ -719,11 +840,15 @@ def evaluate_line_of_sight_velocity_field_target(
             "kind": "line_of_sight_velocity_field",
             "observable": observable_id,
             "observableTarget": "massive_tracers",
+            "coordinateSystem": coordinate_system,
+            "samplingMode": sampling_mode,
             "state": score["state"],
             "originM": origin.tolist(),
             "originSource": origin_source,
             "centerM": center.tolist(),
-            "planeAxes": list(plane_axes),
+            "planeAxes": list(plane_axes) if plane_axes is not None else None,
+            "axisOrder": ["r", "z"] if axisymmetric else None,
+            "samplingPlaneZM": float(center[1]) if axisymmetric else None,
             "inclinationDeg": inclination_deg,
             "handedness": int(handedness),
             "nonPositiveInwardPolicy": nonpositive_policy,

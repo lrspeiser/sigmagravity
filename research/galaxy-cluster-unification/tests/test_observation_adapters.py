@@ -70,6 +70,63 @@ def test_solid_body_acceleration_recovers_exact_circular_speed(
     assert evaluation["chiSquare"] < 1e-20
 
 
+def _axisymmetric_solid_body_fixture(
+    *, cells_r: int = 65, cells_z: int = 33, spacing: float = 0.25
+) -> tuple[dict, dict]:
+    radius = np.arange(cells_r, dtype=float) * spacing
+    vertical = -0.5 * (cells_z - 1) * spacing + np.arange(cells_z) * spacing
+    radial_grid, vertical_grid = np.meshgrid(radius, vertical, indexing="ij")
+    omega = 3.0
+    observables = {
+        "acceleration__axis0": -(omega**2) * radial_grid,
+        "acceleration__axis1": np.zeros_like(vertical_grid),
+    }
+    geometry = {
+        "coordinateSystem": "axisymmetric_cylindrical",
+        "dimensions": 2,
+        "spacing": [spacing, spacing],
+        "origin": [0.0, float(vertical[0])],
+        "axisOrder": ["r", "z"],
+    }
+    return observables, geometry
+
+
+def test_axisymmetric_solid_body_field_recovers_exact_circular_speed() -> None:
+    observables, geometry = _axisymmetric_solid_body_fixture()
+    radii = np.asarray([0.375, 0.875, 1.625, 2.375])
+    expected = 3.0 * radii
+    evaluation, rows = evaluate_observation_targets(
+        model(),
+        observables,
+        geometry,
+        [
+            {
+                "schemaVersion": "sigma-observation-target/1",
+                "id": "axisymmetric-solid-body",
+                "kind": "circular_speed_curve",
+                "observable": "acceleration",
+                "centerM": [0.0, 0.125],
+                "radiiM": radii.tolist(),
+                "observedSpeedsMPerS": expected.tolist(),
+                "uncertaintiesMPerS": [0.2] * len(radii),
+                "minimumAzimuthalCoverage": 1.0,
+                "provenance": {"kind": "analytic axisymmetric fixture"},
+                "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+            }
+        ],
+    )
+    predicted = np.asarray([row["predicted_speed_m_s"] for row in rows])
+    np.testing.assert_allclose(predicted, expected, rtol=1e-14, atol=1e-14)
+    target = evaluation["targets"][0]
+    assert target["samplingMode"] == "axisymmetric_midplane_direct"
+    assert target["coordinateSystem"] == "axisymmetric_cylindrical"
+    assert target["axisOrder"] == ["r", "z"]
+    assert target["samplingPlaneZM"] == 0.125
+    assert target["planeAxes"] is None
+    assert target["azimuthalSamples"] is None
+    assert target["score"]["rmseMPerS"] < 1e-12
+
+
 def test_full_covariance_is_used_for_scoring() -> None:
     cells = 33
     axis = np.linspace(-4.0, 4.0, cells)
@@ -174,6 +231,85 @@ def test_resolved_velocity_field_recovers_projected_solid_body_map(
     assert target["score"]["rmseMPerS"] < 1e-12
     assert len(rows) == 17 * 17 - 1
     assert {"row_index", "column_index", "predicted_velocity_m_s"}.issubset(rows[0])
+
+
+def test_axisymmetric_field_recovers_resolved_projected_velocity_map() -> None:
+    observables, geometry = _axisymmetric_solid_body_fixture()
+    map_axis = np.linspace(-2.0, 2.0, 17)
+    major, minor = np.meshgrid(map_axis, map_axis, indexing="ij")
+    inclination = 60.0
+    systemic = 100.0
+    expected = 3.0 * major * np.sin(np.radians(inclination))
+    arrays = {
+        "major": major,
+        "minor": minor,
+        "observed": expected + systemic,
+        "uncertainty": np.full_like(major, 0.2),
+        "mask": np.ones_like(major),
+    }
+    evaluation, rows = evaluate_observation_targets(
+        model(),
+        observables,
+        geometry,
+        [
+            {
+                "schemaVersion": "sigma-observation-target/1",
+                "id": "axisymmetric-solid-body-map",
+                "kind": "line_of_sight_velocity_field",
+                "observable": "acceleration",
+                "centerM": [0.0, 0.125],
+                "inclinationDeg": inclination,
+                "handedness": 1,
+                "majorCoordinateArrayKey": "major",
+                "minorCoordinateArrayKey": "minor",
+                "observedVelocityArrayKey": "observed",
+                "uncertaintyArrayKey": "uncertainty",
+                "observedVelocityZeroPointMPerS": systemic,
+                "maskArrayKey": "mask",
+                "minimumValidPixels": 200,
+                "provenance": {"kind": "axisymmetric projected solid-body fixture"},
+                "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+            }
+        ],
+        arrays=arrays,
+    )
+    target = evaluation["targets"][0]
+    assert target["samplingMode"] == "axisymmetric_midplane_direct"
+    assert target["axisOrder"] == ["r", "z"]
+    assert target["planeAxes"] is None
+    assert target["score"]["validPoints"] == 17 * 17 - 1
+    assert target["score"]["rmseMPerS"] < 1e-12
+    assert len(rows) == 17 * 17 - 1
+
+
+@pytest.mark.parametrize(
+    ("geometry_change", "target_change", "message"),
+    [
+        ({"axisOrder": ["z", "r"]}, {}, "axisOrder"),
+        ({"origin": [1.0, -4.0]}, {}, "radial origin"),
+        ({}, {"centerM": [1.0, 0.0]}, "centerM"),
+        ({}, {"planeAxes": [0, 1]}, "do not accept Cartesian planeAxes"),
+        ({}, {"azimuthalSamples": 128}, "does not accept azimuthalSamples"),
+    ],
+)
+def test_axisymmetric_curve_rejects_ambiguous_coordinate_semantics(
+    geometry_change: dict, target_change: dict, message: str
+) -> None:
+    observables, geometry = _axisymmetric_solid_body_fixture()
+    geometry.update(geometry_change)
+    target = {
+        "schemaVersion": "sigma-observation-target/1",
+        "id": "axisymmetric-coordinate-gate",
+        "kind": "circular_speed_curve",
+        "observable": "acceleration",
+        "centerM": [0.0, 0.0],
+        "radiiM": [1.0],
+        "provenance": {"kind": "negative axisymmetric fixture"},
+        "license": {"id": "CC0-1.0", "redistributionAllowed": True},
+        **target_change,
+    }
+    with pytest.raises(ValueError, match=message):
+        evaluate_observation_targets(model(), observables, geometry, [target])
 
 
 def test_velocity_field_applies_declared_beam_and_intensity_weighting() -> None:

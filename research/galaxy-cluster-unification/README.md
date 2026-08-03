@@ -1488,6 +1488,15 @@ velocity target. These are explicit prior ensembles, not likelihood-derived
 posteriors. See
 [`docs/BARYONIC_UNCERTAINTY_ENSEMBLE_MILESTONE.md`](docs/BARYONIC_UNCERTAINTY_ENSEMBLE_MILESTONE.md).
 
+Version 0.26 connects axisymmetric fields to circular-speed curves and
+resolved line-of-sight velocity maps without a Cartesian proxy. The adapter
+uses `v_c^2=r(-a_r)` at a declared midplane, retains inclination, handedness,
+masks, beam, uncertainty and nuisance accounting, and rejects coordinate
+controls that have no cylindrical meaning. The local asynchronous known-answer
+case rehashes ten artifacts with zero per-object gravity parameters and
+`4.22e-15 m/s` rotation RMSE. See
+[`docs/AXISYMMETRIC_GALAXY_OBSERVATION_ADAPTER_MILESTONE.md`](docs/AXISYMMETRIC_GALAXY_OBSERVATION_ADAPTER_MILESTONE.md).
+
 Version 0.25 adds a formula-independent axisymmetric cylindrical `(r,z)`
 finite-volume worker for stationary scalar elliptic laws. The symmetry axis is
 handled by its regular zero-radial-flux limit, manufactured Bessel fields show

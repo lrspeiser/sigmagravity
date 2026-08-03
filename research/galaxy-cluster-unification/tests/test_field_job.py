@@ -325,13 +325,102 @@ def test_axisymmetric_job_binds_coordinates_and_executes_end_to_end(tmp_path: Pa
     assert relative_error < 0.003
     assert job["geometry"]["axisOrder"] == ["r", "z"]
     assert job["geometry"]["origin"] == [0.0, 0.0]
-    assert job["worker"]["version"] == "1.2.0-preview"
+    assert job["worker"]["version"] == "1.3.0-preview"
     assert result["numericalMetadata"]["coordinate_system"] == (
         "axisymmetric_cylindrical"
     )
     assert result["numericalMetadata"]["axisymmetric_cylindrical"][
         "axis_boundary"
     ] == "zero_radial_flux_regularity"
+
+
+def test_axisymmetric_job_scores_a_rotation_curve_without_cartesian_proxy(
+    tmp_path: Path,
+) -> None:
+    cells = 33
+    spacing = 0.25
+    omega = 3.0
+    radius = np.arange(cells, dtype=float) * spacing
+    vertical = -0.5 * (cells - 1) * spacing + np.arange(cells) * spacing
+    radial_grid, _vertical_grid = np.meshgrid(radius, vertical, indexing="ij")
+    expected_potential = 0.5 * omega**2 * radial_grid**2
+    forcing = np.full_like(expected_potential, 2.0 * omega**2)
+    model = manufactured_manifest()
+    model["geometry"]["coordinateSystem"] = "axisymmetric_cylindrical"
+    model["observables"][0]["target"] = "massive_tracers"
+    model["observables"][0]["expression"] = {
+        "op": "negate",
+        "args": [{"op": "gradient", "args": [{"field": "u"}]}],
+    }
+    confirm_manifest(model)
+    metadata = bundle_metadata(spacing)
+    metadata["geometry"].update(
+        {
+            "coordinateSystem": "axisymmetric_cylindrical",
+            "origin": [0.0, float(vertical[0])],
+            "axisOrder": ["r", "z"],
+            "referenceFrame": "analytic_axisymmetric_rotation_fixture",
+        }
+    )
+    metadata["arrays"]["potential_boundary"] = {
+        "npzKey": "raw_boundary",
+        "unit": "m^2/s^2",
+        "rank": "scalar",
+        "role": "boundary",
+    }
+    bundle_path = tmp_path / "axisymmetric_rotation_bundle"
+    write_array_bundle(
+        bundle_path,
+        {"raw_forcing": forcing, "raw_boundary": expected_potential},
+        metadata,
+    )
+    radii = [0.375, 0.875, 1.625, 2.375]
+    expected_speeds = [omega * value for value in radii]
+    output_path = tmp_path / "axisymmetric_rotation_run"
+    run = execute_field_job(
+        model,
+        bundle_path,
+        {
+            "schemaVersion": "sigma-field-job-request/1",
+            "boundaryFields": {"u": {"arrayKey": "potential_boundary"}},
+            "requestedObservables": ["gradient"],
+            "observationTargets": [
+                {
+                    "schemaVersion": "sigma-observation-target/1",
+                    "id": "axisymmetric-rotation",
+                    "kind": "circular_speed_curve",
+                    "observable": "gradient",
+                    "centerM": [0.0, 0.125],
+                    "radiiM": radii,
+                    "observedSpeedsMPerS": expected_speeds,
+                    "uncertaintiesMPerS": [0.2] * len(radii),
+                    "minimumAzimuthalCoverage": 1.0,
+                    "provenance": {"kind": "analytic axisymmetric fixture"},
+                    "license": {
+                        "id": "CC0-1.0",
+                        "redistributionAllowed": True,
+                    },
+                }
+            ],
+            "seed": 0,
+        },
+        output_path,
+    )
+
+    scores = json.loads(
+        (output_path / "observation_scores.json").read_text(encoding="utf-8")
+    )
+    predictions = (output_path / "observation_predictions.csv").read_text(
+        encoding="utf-8"
+    )
+    target = scores["targets"][0]
+    assert run["state"] == "succeeded"
+    assert target["coordinateSystem"] == "axisymmetric_cylindrical"
+    assert target["samplingMode"] == "axisymmetric_midplane_direct"
+    assert target["score"]["rmseMPerS"] < 1e-11
+    assert target["score"]["fittedNuisanceParameters"] == 0
+    assert "axisymmetric-rotation" in predictions
+    assert len(predictions.splitlines()) == len(radii) + 1
 
 
 def test_published_two_potential_model_survives_the_immutable_job_path(tmp_path: Path):
