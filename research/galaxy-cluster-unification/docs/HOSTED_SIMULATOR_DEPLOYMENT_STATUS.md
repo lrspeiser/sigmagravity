@@ -11,14 +11,14 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/J1raTvnWXmjRizVW8ezGZ3X9drRP>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/8rjTdPVZ6ebWLeFQfpbQPMQXHAd8>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-a3fpj0ijr-horizon3.vercel.app>
-- deployment ID: `dpl_J1raTvnWXmjRizVW8ezGZ3X9drRP`
-- public contract version: `0.18.0-preview`
+  <https://sigma-gravity-research-simulator-rjprlxobh-horizon3.vercel.app>
+- deployment ID: `dpl_8rjTdPVZ6ebWLeFQfpbQPMQXHAd8`
+- public contract version: `0.19.0-preview`
 
 The service passes its local production build, 83 automated hosted tests, all
-1,559 Python scientific tests, and the live HTTP smoke suite. No deployment
+1,562 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
@@ -75,6 +75,11 @@ Implemented public capabilities:
     supports non-negative or signed zero-net responses, counts every discovery
     coefficient, and emits 14 verified deterministic artifacts. Production
     returns an explicit 503 until durable isolated workers are connected.
+17. Publish and locally execute a non-degenerate two-potential photon/matter
+    fixture through the generic multi-field worker. The exact confirmed model
+    returns separately typed matter and photon accelerations, discloses its
+    sequential Gauss-Seidel update scheme, uses zero per-object gravity
+    parameters, and has a separate manufactured bidirectional-coupling test.
 
 ## Verification evidence
 
@@ -84,7 +89,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 83 passing hosted tests, 1,559 passing Python scientific
+The current result is 83 passing hosted tests, 1,562 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -127,9 +132,9 @@ and point arrays. The accepted production smoke values are:
 
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
-- run ID: `run_fa29db81dda5c381a2224a2e`
+- run ID: `run_6d08f6b42e750e58f545258f`
 - manifest SHA-256:
-  `fa29db81dda5c381a2224a2eb8ddb3e5b069ac232511d2800649fcf292ff190f`
+  `6d08f6b42e750e58f545258f76cbbcb726a07dccf391295236c2867b3a3c00b0`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -225,6 +230,20 @@ known-answer test recovered the injected asymmetric kernel with cosine
 gateway/worker source hashes agreed. The worker used zero per-system gravity
 parameters, recorded its target as `model_derived_discovery_target`, and
 recorded that no held-out raw observation entered the inverse.
+
+The v0.19 coupled-field checks require health to report
+`localCoupledTwoPotentialPhotonMatter=available_in_dev_server`, the guide to
+show both the numerical acceptance and its scientific limitations, and the
+published two-potential model to validate at exact hash
+`bcc7c218ec4d11ee77c85837530daa342e98748c3eb04e460b35f93a7e17accc`.
+The local real-HTTP job solved two 3D potentials, verified all eight downloaded
+artifact hashes, used zero per-object gravity parameters, recovered
+`Phi=1.5 Psi` with relative error `4.16e-16`, and recovered photon acceleration
+equal to `1.25` times matter acceleration with maximum relative error
+`4.19e-16`. A separate known-answer system makes each field depend on the
+other, so this acceptance cannot pass by solving two independent equations.
+The public alias passes the complete v0.19 HTTP smoke and model validation,
+while heavy execution remains explicitly `worker_not_connected`.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
