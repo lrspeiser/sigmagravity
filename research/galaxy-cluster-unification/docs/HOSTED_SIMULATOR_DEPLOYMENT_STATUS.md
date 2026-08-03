@@ -11,14 +11,15 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/4m5Yya3YuweXMHjxiX2C5xGtN8DP>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/DkNa41DMSz1xvf8ShdioxfRp4HnF>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-9u4cm6sh2-horizon3.vercel.app>
-- deployment ID: `dpl_4m5Yya3YuweXMHjxiX2C5xGtN8DP`
-- public contract version: `0.23.0-preview`
+  <https://sigma-gravity-research-simulator-nl8ccibca-horizon3.vercel.app>
+- deployment ID: `dpl_DkNa41DMSz1xvf8ShdioxfRp4HnF`
+- deployed implementation commit: `ae6a113afbca903fa1ce89535d90658b79760996`
+- public contract version: `0.24.0-preview`
 
-The service passes its local production build, 90 automated hosted tests, all
-1,579 Python scientific tests, and the live HTTP smoke suite. No deployment
+The service passes its local production build, 93 automated hosted tests, all
+1,583 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
@@ -337,6 +338,33 @@ hash `875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
 Production `POST /api/v1/batches` still returns HTTP 503 with
 `production_worker_not_connected`; the Vercel deployment publishes and
 validates the contract but does not claim to run the local scientific worker.
+
+The v0.24 baryonic-conditioning checks require health to report
+`localBaryonicImageConditioning=available_in_dev_server`, the public galaxy-job
+schema to expose the fixed `diagonal_gaussian_surface_density` likelihood, and
+the guide to show Example 10 with its request, artifacts, data boundary, and
+collapsed-weight interpretation. The real local DDO101 HTTP batch used
+gravity-independent gas and stellar surface-density uncertainties, selected
+two 3D draws, and produced weights `[1.0, 0.0]`, ESS `1.0`, ten weighted
+prediction rows, and the explicit status `degenerate_importance_weights` with
+`credibleIntervalReady=false`. All five field children converged, maximum
+equation residual was `2.6226280458858716e-10`, all 17 artifacts rehashed, and
+no per-object or observation-derived gravity parameter was introduced. The
+aggregate and conditioned-weight rotation RMSE values were respectively
+`40.17397086769832 km/s` and `42.88650710545306 km/s`; the poor Newtonian fit
+is retained rather than repaired with the measured velocity target.
+
+Deployment `dpl_DkNa41DMSz1xvf8ShdioxfRp4HnF` is production-ready at the stable
+alias and serves `0.24.0-preview`. The complete live HTTP smoke reproduces run
+`run_55745def401569f80dd362a6`, manifest
+`55745def401569f80dd362a6aade0cb212d326e4793a7fa26a20c107f2858539`, twin run
+`twinrun_208ecd0b698c0ec8107e05c1`, and unchanged cluster registry hash
+`875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+The fresh guide has ten examples, no page-level horizontal overflow at the
+normal viewport, and no site console warning or error in a fresh tab. Public
+`POST /api/v1/batches` continues to return HTTP 503 with
+`production_worker_not_connected`, so the page does not imply that the Vercel
+function executes the local 3D worker.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
