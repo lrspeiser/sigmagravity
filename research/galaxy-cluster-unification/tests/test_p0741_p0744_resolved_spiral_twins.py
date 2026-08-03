@@ -114,3 +114,80 @@ def test_real_and_fake_predictions_are_scored_separately() -> None:
         source.sort_values(["galaxy", "model"]).twin_source_transport_rmse_km_s,
         twin.sort_values(["galaxy", "model"]).twin_source_transport_rmse_km_s,
     )
+
+
+def test_validation_reveal_preserves_generator_failure_and_holdout_seal() -> None:
+    p0745a = _report("p0745a_validation_baryonic_registration")
+    p0745b = _report("p0745b_validation_fused_baryonic_registration")
+    p0745c = _report("p0745c_validation_multiscale_spiral_twins")
+    p0746 = _report("p0746_validation_velocity_field_reveal")
+    p0747 = _report("p0747_post_reveal_kinematic_axis_diagnostic")
+
+    assert p0745a["status"] == "fail"
+    assert p0745a["validationArraysOpened"] == 6
+    assert p0745a["velocityOrDispersionArraysOpened"] == 0
+    assert p0745b["status"] == "pass"
+    assert p0745b["validationArraysOpened"] == 10
+    assert p0745b["velocityOrDispersionArraysOpened"] == 0
+    assert p0745c["status"] == "fail"
+    assert p0745c["selectedTier"] is None
+    assert p0745c["tiers"][0]["checks"]["gasMaximumNormalizedL2"] is False
+    assert p0745c["observedVelocityArraysOpened"] == 0
+    assert p0745c["holdoutArraysOpened"] == 0
+    assert p0746["status"] == "fail"
+    assert p0746["targetArraysOpened"] == 4
+    assert p0746["validationArraysOpened"] == 4
+    assert p0746["holdoutArraysOpened"] == 0
+    assert p0746["gravityParametersFitted"] == 0
+    assert p0746["checks"]["maximumTwinSourcePredictionTransportRmseKmS"] is False
+    assert p0747["status"] == "pass"
+    assert p0747["holdoutArraysOpened"] == 0
+    assert p0747["fittedObservationNuisances"] == 2
+    assert p0747["fittedGravityParameters"] == 0
+
+
+def test_validation_scores_separate_formula_twin_and_geometry_errors() -> None:
+    raw = pd.read_csv(
+        RESULTS / "p0746_validation_velocity_field_reveal" / "velocity_field_scores.csv"
+    )
+    diagnostic = pd.read_csv(
+        RESULTS
+        / "p0747_post_reveal_kinematic_axis_diagnostic"
+        / "diagnostic_velocity_field_scores.csv"
+    )
+    geometry = pd.read_csv(
+        RESULTS / "p0747_post_reveal_kinematic_axis_diagnostic" / "kinematic_axis_audit.csv"
+    ).set_index("galaxy")
+
+    assert set(raw.galaxy) == {"NGC3521", "NGC6946"}
+    assert len(raw) == 8
+    assert geometry.loc["NGC3521", "kinematic_phase_offset_deg_in_registered_plane"] < 1.0
+    assert geometry.loc["NGC6946", "kinematic_phase_offset_deg_in_registered_plane"] > 50.0
+    for galaxy in ("NGC3521", "NGC6946"):
+        for model in ("newtonian_thin_sheet", "fixed_simple_mond"):
+            source = raw[
+                (raw.galaxy == galaxy)
+                & (raw.model == model)
+                & (raw.map_kind == "registered_baryons")
+            ].iloc[0]
+            twin = raw[
+                (raw.galaxy == galaxy)
+                & (raw.model == model)
+                & (raw.map_kind == "fake_twin")
+            ].iloc[0]
+            assert np.isclose(
+                source.twin_source_transport_rmse_km_s,
+                twin.twin_source_transport_rmse_km_s,
+            )
+    ngc6946_mond_raw = raw[
+        (raw.galaxy == "NGC6946")
+        & (raw.model == "fixed_simple_mond")
+        & (raw.map_kind == "registered_baryons")
+    ].iloc[0]
+    ngc6946_mond_axis = diagnostic[
+        (diagnostic.galaxy == "NGC6946")
+        & (diagnostic.model == "fixed_simple_mond")
+        & (diagnostic.prediction_kind == "registered_baryons_kinematic_axis")
+    ].iloc[0]
+    assert ngc6946_mond_axis.gas_weighted_rmse_km_s < 0.5 * ngc6946_mond_raw.gas_weighted_rmse_km_s
+    assert ngc6946_mond_axis.error_band == "miss"

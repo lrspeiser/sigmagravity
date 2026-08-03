@@ -44,7 +44,7 @@ const elements = Object.fromEntries(
     "resolved-system-summary", "resolved-fidelity-value", "resolved-fidelity-detail",
     "resolved-transport-value", "resolved-transport-detail", "resolved-accuracy-card",
     "resolved-accuracy-value", "resolved-accuracy-detail", "resolved-chart-title",
-    "resolved-curve-chart", "resolved-verdict", "resolved-manifest",
+    "resolved-curve-chart", "resolved-verdict", "resolved-geometry-note", "resolved-manifest",
   ].map((id) => [id, document.getElementById(id)]),
 );
 
@@ -136,9 +136,9 @@ async function loadResolvedEvidence() {
   }
   resolvedEvidence = result;
   elements["resolved-galaxy-select"].innerHTML = result.systems
-    .map((system) => `<option value="${system.id}">${system.id}</option>`)
+    .map((system) => `<option value="${system.id}">${system.id} · ${system.split}</option>`)
     .join("");
-  elements["resolved-evidence-status"].textContent = `${result.stage} · ${result.sample.systems} development galaxies · ${result.sample.scoredVelocityPixels.toLocaleString("en-US")} scored velocity pixels`;
+  elements["resolved-evidence-status"].textContent = `${result.stage} · ${result.sample.developmentSystems.length} development + ${result.sample.validationSystems.length} validation galaxies · ${result.sample.scoredVelocityPixels.toLocaleString("en-US")} scored velocity pixels`;
   renderResolvedEvidence();
 }
 
@@ -162,7 +162,7 @@ function renderResolvedEvidence() {
     ? "numerically zero"
     : `${(100 * fidelity.massRelativeError).toExponential(1)}%`;
 
-  elements["resolved-system-summary"].textContent = `${system.id}: ${system.observation.scoredPixels.toLocaleString("en-US")} H I velocity pixels; inclination ${system.observation.inclinationDeg.toFixed(1)}°; median gas dispersion ${system.observation.medianDispersionKmS.toFixed(1)} km/s. The displayed comparator has ${definition.perGalaxyGravityParameters} per-galaxy gravity parameters.`;
+  elements["resolved-system-summary"].textContent = `${system.id} (${system.split}): ${system.observation.scoredPixels.toLocaleString("en-US")} H I velocity pixels; inclination ${system.observation.inclinationDeg.toFixed(1)}°; median gas dispersion ${system.observation.medianDispersionKmS.toFixed(1)} km/s. The displayed comparator has ${definition.perGalaxyGravityParameters} per-galaxy gravity parameters.`;
   elements["resolved-fidelity-value"].textContent = `${(100 * fidelity.totalMapNormalizedL2).toFixed(1)}% map error`;
   elements["resolved-fidelity-detail"].textContent = `Pixel correlation ${fidelity.totalMapPixelCorrelation.toFixed(3)}; mass error ${massError}.`;
   elements["resolved-transport-value"].textContent = `${transport.toFixed(2)} km/s`;
@@ -179,6 +179,15 @@ function renderResolvedEvidence() {
       ? "is close, but remains outside the declared uncertainty"
       : "misses the raw velocity field by more than twice the declared uncertainty";
   elements["resolved-verdict"].innerHTML = `<strong>${twinFaithful ? "The twin is faithful enough for this test." : "The twin itself is not faithful enough."}</strong> ${definition.label} ${formulaVerdict}. A good transport score therefore cannot be read as evidence that the formula is correct.`;
+  const diagnostic = system.geometryDiagnostic;
+  if (diagnostic) {
+    const adjusted = diagnostic.models[modelId].sourceVersusObserved;
+    elements["resolved-geometry-note"].innerHTML = `<strong>Post-reveal viewing-angle check:</strong> the image-only axis differed from the H I kinematic axis by ${diagnostic.axisOffsetDeg.toFixed(1)}°. Using that one shared observation nuisance changes the registered-baryon RMSE from ${model.sourceVersusObserved.rmseKmS.toFixed(1)} to ${adjusted.rmseKmS.toFixed(1)} km/s (${adjusted.classification}). No speed amplitude or gravity parameter was fitted; this diagnostic does not replace the frozen validation score.`;
+    elements["resolved-geometry-note"].hidden = false;
+  } else {
+    elements["resolved-geometry-note"].textContent = "No post-reveal viewing-angle adjustment is included for this development system.";
+    elements["resolved-geometry-note"].hidden = false;
+  }
   elements["resolved-manifest"].textContent = JSON.stringify({
     evidenceSha256: resolvedEvidence.evidenceSha256,
     parents: resolvedEvidence.parents,
@@ -192,6 +201,7 @@ function renderResolvedEvidence() {
       twinVersusObserved: model.twinVersusObserved,
       sourceToTwinTransport: model.sourceToTwinTransport,
     },
+    geometryDiagnostic: system.geometryDiagnostic ?? null,
     executionBoundary: resolvedEvidence.executionBoundary,
     claimBoundary: resolvedEvidence.claimBoundary,
   }, null, 2);

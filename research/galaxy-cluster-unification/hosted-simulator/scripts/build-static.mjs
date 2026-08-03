@@ -13,6 +13,8 @@ for (const path of [
   "assets/app.js",
   "assets/style.css",
   "assets/resolved-twin-development-atlas.png",
+  "assets/resolved-twin-validation-atlas.png",
+  "assets/resolved-twin-geometry-diagnostic-atlas.png",
   "data/resolved-twin-development-v1.json",
   "schemas/model-manifest-v1.schema.json",
   "schemas/array-bundle-request-v1.schema.json",

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "sigma-p0745b-validation-fused-baryonic-registration-result/1",
+  "stage": "P0745B",
+  "status": "pass",
+  "configSha256": "0b6859e6e66cee5f21a258ba41d05bf3b996edb8025e14536c3102bb166d6770",
+  "p0739ResultSha256": "f0e00a018ea3ea8d3f77d7d808059d4053e411dbcfd5bab22b191097a0353955",
+  "p0740ResultSha256": "beac0315c81a34736784025d67bbe316ac1c4b22c28caf74ee0d2b01f26b2d1e",
+  "systems": 2,
+  "splitsOpened": [
+    "validation"
+  ],
+  "wiseImageArraysOpened": 6,
+  "validationArraysOpened": 10,
+  "holdoutArraysOpened": 0,
+  "velocityOrDispersionArraysOpened": 0,
+  "gravityParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredWiseCoadds": true,
+    "requiredValidationArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "requiredVelocityOrDispersionArraysOpened": true,
+    "maximumGravityParameters": true,
+    "minimumFiniteStellarFootprintFractionInsideHiR995": true,
+    "minimumCrossCalibrationPixels": true,
+    "minimumPositiveSingsWiseSpearmanCorrelation": true,
+    "maximumQuadrantScaleRobustFractionalSpread": true,
+    "maximumGasMassRelativeError": true,
+    "maximumStellarMassRelativeError": true,
+    "maximumOuterCellMassFraction": true,
+    "allOutputBundlesContentHashed": true
+  },
+  "aggregate": {
+    "minimumSingsFootprintFractionInsideHiR995": 0.8319628595034819,
+    "minimumFusedFootprintFractionInsideHiR995": 1.0,
+    "minimumSingsWiseSpearman": 0.8116748657137429,
+    "maximumQuadrantScaleRobustFractionalSpread": 0.014666881352029568
+  },
+  "mapFiles": [
+    {
+      "galaxy": "NGC3521",
+      "path": "maps/NGC3521.npz",
+      "sha256": "b2962ac94a908eff7b710f2064829d0f6d66461adbeeaa54bb8668521d4ef892"
+    },
+    {
+      "galaxy": "NGC6946",
+      "path": "maps/NGC6946.npz",
+      "sha256": "57ba0e957b726fd0db2cccb135618202620fd7da11eb72e7dd633e8bfe60701a"
+    }
+  ],
+  "claimBoundary": [
+    "P0745B is a frozen validation-split observational fusion test, not a gravity-formula score.",
+    "The per-galaxy WISE/SINGS factor is an instrument cross-calibration and cannot be chosen from any velocity residual.",
+    "The algorithm and gates were frozen before validation SINGS or WISE arrays were opened by this stage.",
+    "No velocity target is opened, and both holdout galaxies remain sealed."
+  ],
+  "reportSha256": "9902f1fd0c5057d2b3784e07781514d854493e8970a90757ed8d398e3344f699"
+}

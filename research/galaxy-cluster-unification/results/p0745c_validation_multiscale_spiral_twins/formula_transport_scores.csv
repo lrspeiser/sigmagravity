@@ -1,0 +1,5 @@
+tier,galaxy,model,radial_speed_transport_rmse_km_s,los_speed_transport_rmse_km_s,los_speed_transport_normalized_rmse,radial_bins_scored,map_pixels_scored
+haar_256,NGC3521,newtonian_thin_sheet,0.7980253188770592,3.222457671772888,0.03533129454824964,24,7962
+haar_256,NGC3521,fixed_simple_mond,0.8613633452103803,3.776300912570689,0.029787481813261834,24,7962
+haar_256,NGC6946,newtonian_thin_sheet,5.183918135382162,8.774345937157122,0.2083619214088601,24,23406
+haar_256,NGC6946,fixed_simple_mond,5.081463295950412,11.707068422715452,0.18922479680592297,24,23406

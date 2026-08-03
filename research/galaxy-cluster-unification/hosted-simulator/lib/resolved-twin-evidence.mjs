@@ -11,7 +11,7 @@ export function getResolvedTwinEvidence(galaxy) {
   const key = String(galaxy).trim().toUpperCase();
   const system = evidence.systems.find((item) => item.id.toUpperCase() === key);
   if (!system) {
-    const error = new Error(`unknown resolved development system: ${galaxy}`);
+    const error = new Error(`unknown resolved evidence system: ${galaxy}`);
     error.code = "unknown_system";
     throw error;
   }
@@ -21,4 +21,3 @@ export function getResolvedTwinEvidence(galaxy) {
     systems: [system],
   };
 }
-

@@ -40,7 +40,7 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.12.0-preview");
+  assert.equal(output.body.version, "0.13.0-preview");
   assert.equal(output.body.capabilities.heldoutObservedGalaxyTwins, "available");
   assert.equal(output.body.capabilities.resolvedTwinDevelopmentEvidence, "available");
   assert.equal(
@@ -88,9 +88,9 @@ test("twin API withholds velocity targets until scoring", () => {
 test("resolved twin evidence keeps generator, transport, and observation scores separate", () => {
   const all = call(resolvedTwinEvidence);
   assert.equal(all.statusCode, 200);
-  assert.equal(all.body.evidenceClass, "precomputed_development_result");
-  assert.equal(all.body.sample.scoredVelocityPixels, 76182);
-  assert.equal(all.body.systems.length, 4);
+  assert.equal(all.body.evidenceClass, "precomputed_development_and_validation_result");
+  assert.equal(all.body.sample.scoredVelocityPixels, 107211);
+  assert.equal(all.body.systems.length, 6);
   assert.equal(all.body.generator.velocityTargetsUsed, false);
   assert.equal(all.body.generator.gravityParameters, 0);
   assert.equal(all.body.executionBoundary.arbitraryHosted2dFormulaExecution, false);
@@ -103,6 +103,11 @@ test("resolved twin evidence keeps generator, transport, and observation scores 
   assert.ok(system.twinFidelity.totalMapPixelCorrelation > 0.98);
   assert.ok(system.models.fixed_simple_mond.sourceToTwinTransport.lineOfSightRmseKmS < 8);
   assert.equal(system.models.fixed_simple_mond.twinVersusObserved.classification, "consistent");
+  const validation = call(resolvedTwinEvidence, { query: { galaxy: "NGC6946" } });
+  assert.equal(validation.statusCode, 200);
+  assert.equal(validation.body.systems[0].split, "validation");
+  assert.ok(validation.body.systems[0].geometryDiagnostic.axisOffsetDeg > 50);
+  assert.ok(validation.body.systems[0].geometryDiagnostic.models.fixed_simple_mond.sourceVersusObserved.rmseKmS < 30);
   const missing = call(resolvedTwinEvidence, { query: { galaxy: "NOT-A-GALAXY" } });
   assert.equal(missing.statusCode, 404);
   assert.equal(missing.body.error, "unknown_system");

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "sigma-p0745c-validation-multiscale-spiral-twins-result/1",
+  "stage": "P0745C",
+  "status": "fail",
+  "configSha256": "41ea597b9d04d3b12a656a3dd050e7a158b7b5896ea7500f67ab84dcb2f9cf41",
+  "p0741ResultSha256": "9902f1fd0c5057d2b3784e07781514d854493e8970a90757ed8d398e3344f699",
+  "p0742FailureSha256": null,
+  "developmentDisclosure": "The local Haar basis, coefficient budget, gates, field padding, radial binning, and fixed comparison formulas were selected on P0743 development galaxies and frozen unchanged here before any validation baryonic array or velocity target was opened.",
+  "selectionRule": "No validation selection: haar_256 is the smallest passing P0743 development tier and must be reported pass or fail unchanged.",
+  "selectedTier": null,
+  "tiers": [
+    {
+      "id": "haar_256",
+      "coefficientsPerComponent": 256,
+      "status": "fail",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": true,
+        "totalMaximumNormalizedL2": true,
+        "totalMinimumPixelCorrelation": true,
+        "gasMaximumNormalizedL2": false,
+        "starsMaximumNormalizedL2": true,
+        "minimumCellToNumericParameterRatio": true,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": false,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": true,
+        "requiredObservedVelocityArraysOpened": true,
+        "requiredValidationArraysOpened": true,
+        "requiredHoldoutArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.26951539236410493,
+          "maximumNormalizedL2": 0.3971051139839395,
+          "medianPixelCorrelation": 0.9395160828713732,
+          "minimumPixelCorrelation": 0.8961804036347975,
+          "medianRadialProfileLog10Rmse": 1.5629854452097318,
+          "maximumMassRelativeError": 1.6880864588459208e-16,
+          "maximumConcentrationAbsoluteError": 0.008359358130690442,
+          "maximumLopsidednessAbsoluteError": 0.10963587419327947,
+          "maximumClumpinessAbsoluteError": 0.10124786503160883
+        },
+        "stars": {
+          "medianNormalizedL2": 0.09678845844342718,
+          "maximumNormalizedL2": 0.14518527128004727,
+          "medianPixelCorrelation": 0.9953007501303075,
+          "minimumPixelCorrelation": 0.991800034388939,
+          "medianRadialProfileLog10Rmse": 0.707376284442812,
+          "maximumMassRelativeError": 0.0,
+          "maximumConcentrationAbsoluteError": 0.250943483492291,
+          "maximumLopsidednessAbsoluteError": 0.13829481995287818,
+          "maximumClumpinessAbsoluteError": 0.16805166065125632
+        },
+        "total": {
+          "medianNormalizedL2": 0.09719069987489462,
+          "maximumNormalizedL2": 0.14577351413166986,
+          "medianPixelCorrelation": 0.9952316664968055,
+          "minimumPixelCorrelation": 0.9916804473940978,
+          "medianRadialProfileLog10Rmse": 0.7083769550121177,
+          "maximumMassRelativeError": 1.8700550597827822e-16,
+          "maximumConcentrationAbsoluteError": 0.20294762082356455,
+          "maximumLopsidednessAbsoluteError": 0.143317351178403,
+          "maximumClumpinessAbsoluteError": 0.14183782016487295
+        }
+      },
+      "minimumCellToNumericParameterRatio": 29.319767441860463,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 2.971413320580396,
+        "worstRadialSpeedRmseKmS": 5.183918135382162,
+        "medianLosSpeedRmseKmS": 6.275323424863905,
+        "worstLosSpeedRmseKmS": 11.707068422715452
+      }
+    }
+  ],
+  "systems": 2,
+  "validationArraysOpened": 6,
+  "holdoutArraysOpened": 0,
+  "observedVelocityArraysOpened": 0,
+  "fittedGravityParameters": 0,
+  "claimBoundary": [
+    "Haar coefficients describe validation baryonic morphology and are not gravitational parameters.",
+    "P0745C tests whether a velocity-blind synthetic twin preserves its real galaxy morphology and fixed-formula predictions.",
+    "It cannot yet say whether either formula matches actual star speeds because moment-1 and SPARC velocities remain sealed.",
+    "No validation-driven representation choice or tuning is allowed; both holdout galaxies remain sealed."
+  ],
+  "reportSha256": "0a514338cf460ed72decf23b483e4dfd8831faf93490f2bb2ac686e8dfba7579"
+}

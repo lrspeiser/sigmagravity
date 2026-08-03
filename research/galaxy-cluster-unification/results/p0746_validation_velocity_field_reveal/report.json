@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "sigma-p0746-validation-velocity-field-reveal-result/1",
+  "stage": "P0746",
+  "status": "fail",
+  "configSha256": "c608c0c859870d74ac9067c3e67045ae29f8068fcaef6f18074ff34af1a9979d",
+  "parents": {
+    "p0738": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+    "p0741": "9902f1fd0c5057d2b3784e07781514d854493e8970a90757ed8d398e3344f699",
+    "p0743": "0a514338cf460ed72decf23b483e4dfd8831faf93490f2bb2ac686e8dfba7579"
+  },
+  "systems": 2,
+  "targetArraysOpened": 4,
+  "validationArraysOpened": 4,
+  "holdoutArraysOpened": 0,
+  "gravityParametersFitted": 0,
+  "darkMatterParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredTargetArraysOpened": true,
+    "requiredValidationArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "minimumScoredPixelsPerGalaxy": true,
+    "maximumTwinSourcePredictionTransportRmseKmS": false,
+    "maximumGravityParametersFitted": true,
+    "maximumDarkMatterParameters": true,
+    "allTargetHashesMatchAcquisitionManifest": true,
+    "allScoresFinite": true
+  },
+  "modelSummary": [
+    {
+      "model": "fixed_simple_mond",
+      "median_field_error_ratio": 3.2528641124328246,
+      "maximum_field_error_ratio": 5.802226960975037,
+      "median_gas_weighted_rmse_km_s": 47.690762047260904,
+      "maximum_gas_weighted_rmse_km_s": 71.15309095214117,
+      "galaxies": 2,
+      "aggregate_error_band": "miss"
+    },
+    {
+      "model": "newtonian_thin_sheet",
+      "median_field_error_ratio": 3.479897991391743,
+      "maximum_field_error_ratio": 5.382909982760334,
+      "median_gas_weighted_rmse_km_s": 60.159298007239215,
+      "maximum_gas_weighted_rmse_km_s": 66.01097926134409,
+      "galaxies": 2,
+      "aggregate_error_band": "miss"
+    }
+  ],
+  "maximumTwinSourcePredictionTransportRmseKmS": 11.645900687506092,
+  "claimBoundary": [
+    "P0746 is the first unchanged-method validation-split 2D velocity-field comparison for the spiral twins; it is not the final holdout.",
+    "The formula scores on registered baryons answer whether the fixed law predicts the real field; twin scores additionally test the simulator reconstruction.",
+    "The frozen Haar-256 twin is retained despite its disclosed NGC6946 validation morphology failure, preventing validation-driven retuning before target reveal.",
+    "No pressure support, warp, bar, streaming, inclination, distance, M/L, MOND, or halo parameter is fitted to the revealed residuals.",
+    "A miss can mix gravity-law error with omitted gas dynamics, so source-versus-twin transport and spatial residual structure must be reported separately.",
+    "Both holdout galaxies and all their pixel arrays remain sealed."
+  ],
+  "reportSha256": "3eda055f18c948f43b55de1ae8393edcf6564d62f646190aeee5f26adccf1952"
+}

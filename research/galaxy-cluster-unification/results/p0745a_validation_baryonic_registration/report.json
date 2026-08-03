@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "sigma-p0745a-validation-baryonic-registration-result/1",
+  "stage": "P0745A",
+  "status": "fail",
+  "configSha256": "1435214477a4b22a16ba3d4421f91f69b49e26d0b5defc966be48f267637009a",
+  "parentManifestSha256": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+  "systems": 2,
+  "splitsOpened": [
+    "validation"
+  ],
+  "validationArraysOpened": 6,
+  "holdoutArraysOpened": 0,
+  "velocityOrDispersionArraysOpened": 0,
+  "gravityParameters": 0,
+  "universalBaryonicSettings": {
+    "stellarMassToLightSolar": 0.5,
+    "heliumFactor": 1.36
+  },
+  "checks": {
+    "requiredSystems": true,
+    "requiredValidationArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "requiredVelocityOrDispersionArraysOpened": true,
+    "maximumGravityParameters": true,
+    "allMapsFiniteAndNonnegative": true,
+    "maximumGasMassRelativeError": true,
+    "maximumStellarMassRelativeError": true,
+    "maximumTotalMassClosureRelativeError": true,
+    "minimumFiniteFootprintFractionInsideHiR995": false,
+    "maximumOuterCellMassFraction": true,
+    "minimumCellsPerAxis": true,
+    "maximumCellsPerAxis": true,
+    "allCellsPerAxisOdd": true,
+    "maximumSourceCoordinateRoundtripArcsec": true,
+    "allOutputBundlesContentHashed": true
+  },
+  "aggregate": {
+    "minimumFootprintFractionInsideHiR995": 0.8319628595034819,
+    "maximumGasMassRelativeError": 2.47347835980457e-16,
+    "maximumStellarMassRelativeError": 0.0,
+    "maximumOuterCellMassFraction": 0.0015315035027705212,
+    "positionAngleRangeDeg": [
+      123.63968594598566,
+      161.8262045869058
+    ],
+    "gasStarCentroidOffsetKpc": {
+      "median": 2.3738842292464755,
+      "maximum": 4.101217099723223
+    }
+  },
+  "mapFiles": [
+    {
+      "galaxy": "NGC3521",
+      "path": "maps/NGC3521.npz",
+      "sha256": "b4306f5ad7cc3c31d9935ac196f289f00dcd6cffaa8ac9a333c4369aa315f174"
+    },
+    {
+      "galaxy": "NGC6946",
+      "path": "maps/NGC6946.npz",
+      "sha256": "385ade019034885ffb634dcc26add67c3e9da56413895b3f03d61447c59a1f75"
+    }
+  ],
+  "claimBoundary": [
+    "P0745A is a validation-split observational registration test, not a gravity-formula score.",
+    "Its algorithm and gates were copied from P0739 before validation image arrays were opened.",
+    "Failure of the SINGS footprint gate is allowed to remain visible because the frozen P0745B WISE fusion is the predeclared repair.",
+    "No velocity or dispersion target may be opened in this stage, and both holdout galaxies remain sealed."
+  ],
+  "reportSha256": "f0e00a018ea3ea8d3f77d7d808059d4053e411dbcfd5bab22b191097a0353955"
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "sigma-p0747-post-reveal-kinematic-axis-diagnostic-result/1",
+  "stage": "P0747",
+  "status": "pass",
+  "diagnosticStatus": "post_reveal_observation_model_diagnostic_not_blind_validation",
+  "configSha256": "6c0f9addcbc404268429cfd2b6517bbe660316ac803594dc0f344ce0f506a320",
+  "p0746ResultSha256": "3eda055f18c948f43b55de1ae8393edcf6564d62f646190aeee5f26adccf1952",
+  "systems": 2,
+  "targetArraysOpened": 4,
+  "holdoutArraysOpened": 0,
+  "fittedObservationNuisances": 2,
+  "fittedGravityParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredTargetArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "minimumScoredPixelsPerGalaxy": true,
+    "maximumAbsoluteAxisOffsetDeg": true,
+    "requiredFiniteScores": true,
+    "maximumGravityParametersFitted": true
+  },
+  "geometry": [
+    {
+      "galaxy": "NGC3521",
+      "scored_pixels": 7962,
+      "image_position_angle_deg": 161.8262045869058,
+      "kinematic_phase_offset_deg_in_registered_plane": 0.21330703245121974,
+      "kinematic_unit_x": -0.9999930699784438,
+      "kinematic_unit_y": 0.0037229014339723154,
+      "fitted_first_harmonic_amplitude_km_s": 198.38560114508846,
+      "first_harmonic_explained_variance_fraction": 0.97123479524174,
+      "fitted_observation_nuisances": 1,
+      "fitted_gravity_parameters": 0
+    },
+    {
+      "galaxy": "NGC6946",
+      "scored_pixels": 23067,
+      "image_position_angle_deg": 123.63968594598566,
+      "kinematic_phase_offset_deg_in_registered_plane": 60.03351651347665,
+      "kinematic_unit_x": -0.4994933125567646,
+      "kinematic_unit_y": 0.8663177423503863,
+      "fitted_first_harmonic_amplitude_km_s": 92.47461319690592,
+      "first_harmonic_explained_variance_fraction": 0.9250960768689571,
+      "fitted_observation_nuisances": 1,
+      "fitted_gravity_parameters": 0
+    }
+  ],
+  "claimBoundary": [
+    "P0747 is explicitly post-reveal and cannot replace the frozen P0746 validation score.",
+    "The kinematic axis is a shared observation-geometry nuisance used identically for every gravity formula; it is not a per-formula fit.",
+    "No velocity amplitude, inclination, mass-to-light ratio, gravity constant, MOND scale, or dark halo is fitted.",
+    "If both formulas improve similarly, the original residual contained projection error; their remaining difference still tests their predicted speed amplitudes.",
+    "Both holdout galaxies remain sealed."
+  ],
+  "reportSha256": "aeea4965b5750fae938dfa7ccd3927e6a423933c50a386b28f92b186576656b0"
+}

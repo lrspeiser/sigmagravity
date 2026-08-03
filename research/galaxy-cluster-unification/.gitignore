@@ -186,6 +186,16 @@ results/environmental_mog0/*
 !results/p0743_multiscale_spiral_twin_development/**
 !results/p0744_development_velocity_field_reveal/
 !results/p0744_development_velocity_field_reveal/**
+!results/p0745a_validation_baryonic_registration/
+!results/p0745a_validation_baryonic_registration/**
+!results/p0745b_validation_fused_baryonic_registration/
+!results/p0745b_validation_fused_baryonic_registration/**
+!results/p0745c_validation_multiscale_spiral_twins/
+!results/p0745c_validation_multiscale_spiral_twins/**
+!results/p0746_validation_velocity_field_reveal/
+!results/p0746_validation_velocity_field_reveal/**
+!results/p0747_post_reveal_kinematic_axis_diagnostic/
+!results/p0747_post_reveal_kinematic_axis_diagnostic/**
 !results/p0731_real_velocity_field_adapter_parity/
 results/p0731_real_velocity_field_adapter_parity/*
 !results/p0731_real_velocity_field_adapter_parity/SUMMARY.md

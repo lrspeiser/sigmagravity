@@ -1,6 +1,6 @@
 {
   "name": "sigma-gravity-research-simulator",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "private": true,
   "type": "module",
   "description": "Public, reproducible preview API for galaxy and gravity-formula tests.",
