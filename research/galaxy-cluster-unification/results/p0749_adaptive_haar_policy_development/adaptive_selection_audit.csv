@@ -1,0 +1,10 @@
+galaxy,split,tier,coefficients_per_component,status,selected,compression_ratio,maximum_projection_relative_error,check_maximumMassRelativeError,check_maximum3dProjectionRelativeError,check_gasMaximumNormalizedL2,check_starsMaximumNormalizedL2,check_totalMaximumNormalizedL2,check_totalMinimumPixelCorrelation,check_minimumCellToNumericParameterRatio
+NGC2403,development,haar_256,256,pass,True,128.00193798449612,3.054575157944405e-16,True,True,True,True,True,True,True
+NGC3198,development,haar_256,256,pass,True,47.76937984496124,4.0560959413826957e-16,True,True,True,True,True,True,True
+NGC5055,development,haar_256,256,pass,True,108.8546511627907,4.38128932840414e-16,True,True,True,True,True,True,True
+NGC7793,development,haar_256,256,pass,True,59.35077519379845,2.9330768944849654e-16,True,True,True,True,True,True,True
+NGC3521,validation,haar_256,256,pass,True,29.319767441860463,4.087638709933768e-16,True,True,True,True,True,True,True
+NGC6946,validation,haar_256,256,fail,False,128.00193798449612,3.5839137336465943e-16,True,True,False,True,True,True,True
+NGC6946,validation,haar_384,384,fail,False,85.55569948186529,3.5859436332856854e-16,True,True,False,True,True,True,True
+NGC6946,validation,haar_512,512,fail,False,64.25,3.590496978006565e-16,True,True,False,True,True,True,True
+NGC6946,validation,haar_768,768,pass,True,42.88896103896104,3.4664468209758804e-16,True,True,True,True,True,True,True

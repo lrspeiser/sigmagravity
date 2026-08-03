@@ -1,0 +1,359 @@
+{
+  "schemaVersion": "sigma-p0748-adaptive-haar-budget-development-scan-result/1",
+  "stage": "P0748",
+  "status": "fail",
+  "configSha256": "00bde4f234a3a0b39254ec83c4e0a98fbc8c27010042b99f1788397b668b2d23",
+  "p0741ResultSha256": "9902f1fd0c5057d2b3784e07781514d854493e8970a90757ed8d398e3344f699",
+  "p0742FailureSha256": null,
+  "developmentDisclosure": "P0748 is method development after the P0745-P0747 validation reveal. It may inform the final holdout protocol but is not a validation result. Selection uses only source-versus-generated baryonic-map scores and compression.",
+  "selectionRule": "Choose the smallest budget passing only the frozen baryonic morphology, mass, projection, and compression gates. Formula transport is reported downstream and is deliberately nonbinding in this scan.",
+  "selectedTier": null,
+  "tiers": [
+    {
+      "id": "haar_256",
+      "coefficientsPerComponent": 256,
+      "status": "fail",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": true,
+        "totalMaximumNormalizedL2": true,
+        "totalMinimumPixelCorrelation": true,
+        "gasMaximumNormalizedL2": false,
+        "starsMaximumNormalizedL2": true,
+        "minimumCellToNumericParameterRatio": true,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": true,
+        "requiredObservedVelocityArraysOpened": true,
+        "requiredValidationArraysOpened": true,
+        "requiredHoldoutArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.26951539236410493,
+          "maximumNormalizedL2": 0.3971051139839395,
+          "medianPixelCorrelation": 0.9395160828713732,
+          "minimumPixelCorrelation": 0.8961804036347975,
+          "medianRadialProfileLog10Rmse": 1.5629854452097318,
+          "maximumMassRelativeError": 1.6880864588459208e-16,
+          "maximumConcentrationAbsoluteError": 0.008359358130690442,
+          "maximumLopsidednessAbsoluteError": 0.10963587419327947,
+          "maximumClumpinessAbsoluteError": 0.10124786503160883
+        },
+        "stars": {
+          "medianNormalizedL2": 0.09678845844342718,
+          "maximumNormalizedL2": 0.14518527128004727,
+          "medianPixelCorrelation": 0.9953007501303075,
+          "minimumPixelCorrelation": 0.991800034388939,
+          "medianRadialProfileLog10Rmse": 0.707376284442812,
+          "maximumMassRelativeError": 0.0,
+          "maximumConcentrationAbsoluteError": 0.250943483492291,
+          "maximumLopsidednessAbsoluteError": 0.13829481995287818,
+          "maximumClumpinessAbsoluteError": 0.16805166065125632
+        },
+        "total": {
+          "medianNormalizedL2": 0.09719069987489462,
+          "maximumNormalizedL2": 0.14577351413166986,
+          "medianPixelCorrelation": 0.9952316664968055,
+          "minimumPixelCorrelation": 0.9916804473940978,
+          "medianRadialProfileLog10Rmse": 0.7083769550121177,
+          "maximumMassRelativeError": 1.8700550597827822e-16,
+          "maximumConcentrationAbsoluteError": 0.20294762082356455,
+          "maximumLopsidednessAbsoluteError": 0.143317351178403,
+          "maximumClumpinessAbsoluteError": 0.14183782016487295
+        }
+      },
+      "minimumCellToNumericParameterRatio": 29.319767441860463,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 2.971413320580396,
+        "worstRadialSpeedRmseKmS": 5.183918135382162,
+        "medianLosSpeedRmseKmS": 6.275323424863905,
+        "worstLosSpeedRmseKmS": 11.707068422715452
+      }
+    },
+    {
+      "id": "haar_384",
+      "coefficientsPerComponent": 384,
+      "status": "fail",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": true,
+        "totalMaximumNormalizedL2": true,
+        "totalMinimumPixelCorrelation": true,
+        "gasMaximumNormalizedL2": false,
+        "starsMaximumNormalizedL2": true,
+        "minimumCellToNumericParameterRatio": true,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": true,
+        "requiredObservedVelocityArraysOpened": true,
+        "requiredValidationArraysOpened": true,
+        "requiredHoldoutArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.24589107620149842,
+          "maximumNormalizedL2": 0.3722491732919398,
+          "medianPixelCorrelation": 0.9486335163886865,
+          "minimumPixelCorrelation": 0.9094035433550502,
+          "medianRadialProfileLog10Rmse": 1.4126961821670663,
+          "maximumMassRelativeError": 3.3761729176918417e-16,
+          "maximumConcentrationAbsoluteError": 0.011073345368182164,
+          "maximumLopsidednessAbsoluteError": 0.10165562247140902,
+          "maximumClumpinessAbsoluteError": 0.09213681741710812
+        },
+        "stars": {
+          "medianNormalizedL2": 0.07333131075060012,
+          "maximumNormalizedL2": 0.11222550003459854,
+          "medianPixelCorrelation": 0.9972146619999478,
+          "minimumPixelCorrelation": 0.9950326991007267,
+          "medianRadialProfileLog10Rmse": 0.7196441592561883,
+          "maximumMassRelativeError": 3.5972438734735256e-16,
+          "maximumConcentrationAbsoluteError": 0.1388623595836984,
+          "maximumLopsidednessAbsoluteError": 0.18251313062866287,
+          "maximumClumpinessAbsoluteError": 0.15444575955525122
+        },
+        "total": {
+          "medianNormalizedL2": 0.07393337986744566,
+          "maximumNormalizedL2": 0.11307032645910632,
+          "medianPixelCorrelation": 0.9971496993836724,
+          "minimumPixelCorrelation": 0.9949194027726395,
+          "medianRadialProfileLog10Rmse": 0.7185258680432168,
+          "maximumMassRelativeError": 1.5872271398788867e-16,
+          "maximumConcentrationAbsoluteError": 0.13502992433952254,
+          "maximumLopsidednessAbsoluteError": 0.16308752594478032,
+          "maximumClumpinessAbsoluteError": 0.1301340159499455
+        }
+      },
+      "minimumCellToNumericParameterRatio": 19.59715025906736,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 1.7877235468276795,
+        "worstRadialSpeedRmseKmS": 3.144475464783361,
+        "medianLosSpeedRmseKmS": 5.3116579285631245,
+        "worstLosSpeedRmseKmS": 10.367961313946308
+      }
+    },
+    {
+      "id": "haar_512",
+      "coefficientsPerComponent": 512,
+      "status": "fail",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": true,
+        "totalMaximumNormalizedL2": true,
+        "totalMinimumPixelCorrelation": true,
+        "gasMaximumNormalizedL2": false,
+        "starsMaximumNormalizedL2": true,
+        "minimumCellToNumericParameterRatio": true,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": true,
+        "requiredObservedVelocityArraysOpened": true,
+        "requiredValidationArraysOpened": true,
+        "requiredHoldoutArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.229257094695072,
+          "maximumNormalizedL2": 0.35381603739368167,
+          "medianPixelCorrelation": 0.95462548746661,
+          "minimumPixelCorrelation": 0.9185487808817562,
+          "medianRadialProfileLog10Rmse": 1.4123980639288871,
+          "maximumMassRelativeError": 3.3761729176918417e-16,
+          "maximumConcentrationAbsoluteError": 0.013582664323641414,
+          "maximumLopsidednessAbsoluteError": 0.09266454238712868,
+          "maximumClumpinessAbsoluteError": 0.08599059168243231
+        },
+        "stars": {
+          "medianNormalizedL2": 0.060443079247875356,
+          "maximumNormalizedL2": 0.09424958388765352,
+          "medianPixelCorrelation": 0.9980140788720193,
+          "minimumPixelCorrelation": 0.9963884694050915,
+          "medianRadialProfileLog10Rmse": 0.7052945556772565,
+          "maximumMassRelativeError": 2.3058935007480397e-16,
+          "maximumConcentrationAbsoluteError": 0.11350856217499627,
+          "maximumLopsidednessAbsoluteError": 0.18487131572588084,
+          "maximumClumpinessAbsoluteError": 0.1471808605539215
+        },
+        "total": {
+          "medianNormalizedL2": 0.061110905070508106,
+          "maximumNormalizedL2": 0.09520931804204256,
+          "medianPixelCorrelation": 0.9979559586957198,
+          "minimumPixelCorrelation": 0.9962848693098604,
+          "medianRadialProfileLog10Rmse": 0.7044119823419138,
+          "maximumMassRelativeError": 0.0,
+          "maximumConcentrationAbsoluteError": 0.12319295598936142,
+          "maximumLopsidednessAbsoluteError": 0.16327266716723543,
+          "maximumClumpinessAbsoluteError": 0.1235450507664824
+        }
+      },
+      "minimumCellToNumericParameterRatio": 14.71692607003891,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 1.4086401564091795,
+        "worstRadialSpeedRmseKmS": 2.549389512651879,
+        "medianLosSpeedRmseKmS": 4.522466295645046,
+        "worstLosSpeedRmseKmS": 9.540033911256973
+      }
+    },
+    {
+      "id": "haar_768",
+      "coefficientsPerComponent": 768,
+      "status": "fail",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": true,
+        "totalMaximumNormalizedL2": true,
+        "totalMinimumPixelCorrelation": true,
+        "gasMaximumNormalizedL2": false,
+        "starsMaximumNormalizedL2": true,
+        "minimumCellToNumericParameterRatio": false,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": true,
+        "requiredObservedVelocityArraysOpened": true,
+        "requiredValidationArraysOpened": true,
+        "requiredHoldoutArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.2051419680806915,
+          "maximumNormalizedL2": 0.32559560299870455,
+          "medianPixelCorrelation": 0.9627055226901201,
+          "minimumPixelCorrelation": 0.9314860209434941,
+          "medianRadialProfileLog10Rmse": 1.3937071014260938,
+          "maximumMassRelativeError": 0.0,
+          "maximumConcentrationAbsoluteError": 0.011073345368182164,
+          "maximumLopsidednessAbsoluteError": 0.07799474093085818,
+          "maximumClumpinessAbsoluteError": 0.07756577355281162
+        },
+        "stars": {
+          "medianNormalizedL2": 0.04708508763474404,
+          "maximumNormalizedL2": 0.07659055177727433,
+          "medianPixelCorrelation": 0.9987655750070821,
+          "minimumPixelCorrelation": 0.9976877070090585,
+          "medianRadialProfileLog10Rmse": 0.6946281073140201,
+          "maximumMassRelativeError": 1.1529467503740198e-16,
+          "maximumConcentrationAbsoluteError": 0.035956268184978324,
+          "maximumLopsidednessAbsoluteError": 0.1382926293486264,
+          "maximumClumpinessAbsoluteError": 0.13119653967743428
+        },
+        "total": {
+          "medianNormalizedL2": 0.04772806421321419,
+          "maximumNormalizedL2": 0.07752933363786985,
+          "medianPixelCorrelation": 0.9987212762493249,
+          "minimumPixelCorrelation": 0.9976064045174878,
+          "medianRadialProfileLog10Rmse": 0.6933160074415707,
+          "maximumMassRelativeError": 1.8700550597827822e-16,
+          "maximumConcentrationAbsoluteError": 0.056208184670287764,
+          "maximumLopsidednessAbsoluteError": 0.12703389563636036,
+          "maximumClumpinessAbsoluteError": 0.11019560350369856
+        }
+      },
+      "minimumCellToNumericParameterRatio": 9.824025974025973,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 1.0297133839155184,
+        "worstRadialSpeedRmseKmS": 1.9549933970006144,
+        "medianLosSpeedRmseKmS": 3.5825556320547696,
+        "worstLosSpeedRmseKmS": 7.980187086304984
+      }
+    },
+    {
+      "id": "haar_1024",
+      "coefficientsPerComponent": 1024,
+      "status": "fail",
+      "checks": {
+        "requiredSystems": true,
+        "requiredComponentsPerTier": true,
+        "maximumMassRelativeError": true,
+        "maximum3dProjectionRelativeError": true,
+        "totalMedianNormalizedL2": true,
+        "totalMaximumNormalizedL2": true,
+        "totalMinimumPixelCorrelation": true,
+        "gasMaximumNormalizedL2": false,
+        "starsMaximumNormalizedL2": true,
+        "minimumCellToNumericParameterRatio": false,
+        "maximumMedianFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaRadialSpeedTransportRmseKmS": true,
+        "maximumMedianFormulaLosSpeedTransportRmseKmS": true,
+        "maximumWorstFormulaLosSpeedTransportRmseKmS": true,
+        "requiredObservedVelocityArraysOpened": true,
+        "requiredValidationArraysOpened": true,
+        "requiredHoldoutArraysOpened": true,
+        "maximumFittedGravityParameters": true
+      },
+      "aggregate": {
+        "gas": {
+          "medianNormalizedL2": 0.18804468027203172,
+          "maximumNormalizedL2": 0.3042977843875882,
+          "medianPixelCorrelation": 0.9680335886410258,
+          "minimumPixelCorrelation": 0.9404287466726695,
+          "medianRadialProfileLog10Rmse": 1.3878398644975334,
+          "maximumMassRelativeError": 2.473478359804569e-16,
+          "maximumConcentrationAbsoluteError": 0.0053486869263448256,
+          "maximumLopsidednessAbsoluteError": 0.06923347259088275,
+          "maximumClumpinessAbsoluteError": 0.0725470181789009
+        },
+        "stars": {
+          "medianNormalizedL2": 0.04003753127603555,
+          "maximumNormalizedL2": 0.06720492989273641,
+          "medianPixelCorrelation": 0.9990969406736154,
+          "minimumPixelCorrelation": 0.9982775250286984,
+          "medianRadialProfileLog10Rmse": 0.6609752750989253,
+          "maximumMassRelativeError": 3.4588402511220597e-16,
+          "maximumConcentrationAbsoluteError": 0.024461369785082177,
+          "maximumLopsidednessAbsoluteError": 0.12368393540655509,
+          "maximumClumpinessAbsoluteError": 0.11899648058484852
+        },
+        "total": {
+          "medianNormalizedL2": 0.0406573432202891,
+          "maximumNormalizedL2": 0.06811615392003799,
+          "medianPixelCorrelation": 0.9990610423022237,
+          "minimumPixelCorrelation": 0.998210617797737,
+          "medianRadialProfileLog10Rmse": 0.6596806670619245,
+          "maximumMassRelativeError": 1.5872271398788867e-16,
+          "maximumConcentrationAbsoluteError": 0.054056459708565985,
+          "maximumLopsidednessAbsoluteError": 0.11423303340262175,
+          "maximumClumpinessAbsoluteError": 0.10001144450940272
+        }
+      },
+      "minimumCellToNumericParameterRatio": 7.37280701754386,
+      "formulaTransport": {
+        "medianRadialSpeedRmseKmS": 0.9630077444670797,
+        "worstRadialSpeedRmseKmS": 1.8224100818021087,
+        "medianLosSpeedRmseKmS": 3.2644155002217485,
+        "worstLosSpeedRmseKmS": 7.1048012151209265
+      }
+    }
+  ],
+  "systems": 2,
+  "validationArraysOpened": 30,
+  "holdoutArraysOpened": 0,
+  "observedVelocityArraysOpened": 0,
+  "fittedGravityParameters": 0,
+  "claimBoundary": [
+    "P0748 can develop a holdout rule but cannot be called validation because NGC3521 and NGC6946 targets were already revealed in P0746.",
+    "Velocity fields, formula residuals, and gravity parameters do not enter coefficient-budget selection.",
+    "The same rule must be frozen before any NGC2841 or NGC7331 pixel array is opened."
+  ],
+  "reportSha256": "e0d5c4140ea7cd5f5622088e57482cca4d69a233f9029dd8b97a5915aaa15c08"
+}

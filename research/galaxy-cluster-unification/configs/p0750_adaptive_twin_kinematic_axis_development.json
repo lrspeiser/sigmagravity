@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "sigma-p0750-adaptive-twin-kinematic-axis-development/1",
+  "resultSchemaVersion": "sigma-p0750-adaptive-twin-kinematic-axis-development-result/1",
+  "stage": "P0750",
+  "status": "post_reveal_observation_policy_development_holdout_arrays_still_sealed",
+  "purpose": "Exercise one formula-independent kinematic-axis observation rule on all six open galaxies and rescore the fixed formulas on P0749 adaptive twins before freezing the final holdout protocol.",
+  "parents": {
+    "resolvedAcquisition": "results/p0738_morphology_diverse_resolved_acquisition/manifest.json",
+    "resolvedAcquisitionManifestSha256": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+    "adaptiveTwinsResultPath": "results/p0749_adaptive_haar_policy_development",
+    "adaptiveTwinsResultSha256": "33c95f50957b2bbb51f04e973299903462ea7f32f0e51169038651ee4057faf3",
+    "groups": [
+      {
+        "id": "development",
+        "registeredBaryonsResultPath": "results/p0741_fused_spiral_baryonic_registration_development",
+        "registeredBaryonsResultSha256": "64776bed1374276bcae8737270febee15a90b1818e0e9dbfc217b13541b1731a",
+        "velocityRevealResultPath": "results/p0744_development_velocity_field_reveal",
+        "velocityRevealResultSha256": "d3feb859f9d50e7a9ecefd80c16f0ed6cee1d0f0ccb6ded307b09c21e84ee9d0",
+        "systems": ["NGC2403", "NGC3198", "NGC5055", "NGC7793"]
+      },
+      {
+        "id": "validation",
+        "registeredBaryonsResultPath": "results/p0745b_validation_fused_baryonic_registration",
+        "registeredBaryonsResultSha256": "9902f1fd0c5057d2b3784e07781514d854493e8970a90757ed8d398e3344f699",
+        "velocityRevealResultPath": "results/p0746_validation_velocity_field_reveal",
+        "velocityRevealResultSha256": "3eda055f18c948f43b55de1ae8393edcf6564d62f646190aeee5f26adccf1952",
+        "systems": ["NGC3521", "NGC6946"]
+      }
+    ]
+  },
+  "systems": ["NGC2403", "NGC3198", "NGC5055", "NGC7793", "NGC3521", "NGC6946"],
+  "developmentDisclosure": "Every velocity field in P0750 was already revealed by P0744 or P0746. P0750 develops an observation policy; it is neither validation nor holdout evidence.",
+  "observationPolicy": {
+    "phaseEstimator": "gas-and-inverse-variance-weighted least squares of systemic-subtracted observed velocity on cos(theta) and sin(theta) over the unchanged reveal-stage score mask",
+    "fittedObservationNuisancesPerGalaxy": 1,
+    "fittedSpeedAmplitudeUsedInPrediction": false,
+    "fittedGravityParameters": 0,
+    "inclination": "unchanged published SPARC value",
+    "systemicVelocity": "unchanged corresponding P0744 or P0746 reveal value",
+    "scoreMask": "unchanged reveal-stage construction",
+    "prediction": "discard fitted harmonic amplitude and use only its unit phase identically for every gravity formula"
+  },
+  "models": [
+    {"id": "newtonian_thin_sheet", "gravitationalConstantM3KgS2": 6.67430e-11},
+    {"id": "fixed_simple_mond", "a0MPerS2": 1.2e-10, "gravitationalConstantM3KgS2": 6.67430e-11}
+  ],
+  "fieldSettings": {"paddingFactor": 2.0},
+  "gates": {
+    "requiredSystems": 6,
+    "requiredTargetArraysOpened": 12,
+    "requiredHoldoutArraysOpened": 0,
+    "minimumScoredPixelsPerGalaxy": 500,
+    "maximumAbsoluteAxisOffsetDeg": 90.0,
+    "requiredFiniteScores": true,
+    "maximumGravityParametersFitted": 0
+  },
+  "claimBoundary": [
+    "The kinematic axis is one formula-independent observation-coordinate nuisance, not a gravity-law fit.",
+    "The least-squares amplitude is reported as a diagnostic but discarded before every prediction.",
+    "P0750 may justify a predeclared holdout observation policy but cannot be called validation because all six targets are open.",
+    "Neither NGC2841 nor NGC7331 has any pixel array opened in this stage."
+  ]
+}

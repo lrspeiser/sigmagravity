@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "sigma-p0751b-holdout-fused-baryonic-registration/1",
+  "resultSchemaVersion": "sigma-p0751b-holdout-fused-baryonic-registration-result/1",
+  "stage": "P0751B",
+  "status": "preregistered_before_any_holdout_pixel_array_opening",
+  "purpose": "Apply the unchanged SINGS-plus-AllWISE fusion to the two final holdout galaxies and produce complete baryonic maps without opening any velocity target.",
+  "parents": {
+    "p0739Config": "configs/p0751a_holdout_baryonic_registration.json",
+    "p0739ResultPath": "results/p0751a_holdout_baryonic_registration",
+    "p0739ConfigSha256": "e05bd30b39018e8664dc5639a4d7d44a3ca44d282954d3524968cee46440c73e",
+    "p0740Config": "configs/p0740_allwise_w1_coverage_supplement.json",
+    "p0740ResultPath": "results/p0740_allwise_w1_coverage_supplement",
+    "p0740ResultSha256": "beac0315c81a34736784025d67bbe316ac1c4b22c28caf74ee0d2b01f26b2d1e"
+  },
+  "eligibleSplits": ["holdout"],
+  "systems": ["NGC2841", "NGC7331"],
+  "sealedUntilLater": {
+    "targetProducts": ["THINGS moment 1", "THINGS moment 2", "SPARC resolved observed rotation curve"],
+    "targetArraysMayOpen": false
+  },
+  "permittedInputs": [
+    "P0751A derived holdout baryonic maps, hashes, geometry, and audit",
+    "frozen P0740 holdout AllWISE W1 intensity and uncertainty arrays, WCS headers, and coadd IDs",
+    "holdout SINGS IRAC channel-1 image and weight arrays for the predeclared cross-calibration"
+  ],
+  "forbiddenInputs": [
+    "THINGS moment 1 or moment 2 array",
+    "SPARC observed rotation speeds or errors",
+    "any gravity-formula residual, score, or fitted parameter",
+    "dark-matter halo parameters"
+  ],
+  "processing": {
+    "method": "Bit-for-bit P0741 fusion implementation generalized only to the holdout split and frozen parent path named here.",
+    "wiseTileBackground": "robust median in the outer 15 percent border",
+    "wiseMosaic": "inverse-variance combination of every frozen coadd",
+    "wiseForegroundSuppression": "same 12-MAD compact-residual rule used by P0741",
+    "crossCalibration": "median positive SINGS/WISE ratio over the unchanged overlap mask, with fixed quadrant sensitivity audit",
+    "fusion": "beam-matched SINGS inside its valid footprint and scaled beam-matched WISE outside it",
+    "stellarMassCalibration": "one normalization to published 3.6 micron luminosity times universal M/L=0.5",
+    "gasMassCalibration": "retain P0751A normalization to 1.36 times published H I mass",
+    "velocityArraysOpened": false,
+    "gravityParameters": 0
+  },
+  "atlasFileName": "fused_holdout_baryonic_map_atlas.png",
+  "engineeringGates": {
+    "requiredSystems": 2,
+    "requiredWiseCoadds": 2,
+    "requiredValidationArraysOpened": 0,
+    "requiredHoldoutArraysOpened": 8,
+    "requiredVelocityOrDispersionArraysOpened": 0,
+    "maximumGravityParameters": 0,
+    "minimumFiniteStellarFootprintFractionInsideHiR995": 0.98,
+    "minimumCrossCalibrationPixels": 500,
+    "minimumPositiveSingsWiseSpearmanCorrelation": 0.70,
+    "maximumQuadrantScaleRobustFractionalSpread": 0.35,
+    "maximumGasMassRelativeError": 1e-10,
+    "maximumStellarMassRelativeError": 1e-10,
+    "maximumOuterCellMassFraction": 0.005,
+    "allOutputBundlesContentHashed": true
+  },
+  "claimBoundary": [
+    "P0751B is a final-holdout observational fusion test, not a gravity score.",
+    "The per-galaxy WISE/SINGS factor is instrument cross-calibration and cannot be chosen from a velocity residual.",
+    "The algorithm, parent-config hash, and gates are committed before any holdout image array is opened.",
+    "No velocity or dispersion target may be opened in this stage."
+  ]
+}

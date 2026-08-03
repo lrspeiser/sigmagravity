@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -191,3 +192,50 @@ def test_validation_scores_separate_formula_twin_and_geometry_errors() -> None:
     ].iloc[0]
     assert ngc6946_mond_axis.gas_weighted_rmse_km_s < 0.5 * ngc6946_mond_raw.gas_weighted_rmse_km_s
     assert ngc6946_mond_axis.error_band == "miss"
+
+
+def test_adaptive_policy_uses_baryonic_gates_and_preserves_holdout_seal() -> None:
+    p0749 = _report("p0749_adaptive_haar_policy_development")
+    p0750 = _report("p0750_adaptive_twin_kinematic_axis_development")
+    selected = {
+        item["galaxy"]: item["coefficients_per_component"]
+        for item in p0749["selectedRepresentations"]
+    }
+
+    assert p0749["status"] == "pass"
+    assert selected == {
+        "NGC2403": 256,
+        "NGC3198": 256,
+        "NGC5055": 256,
+        "NGC7793": 256,
+        "NGC3521": 256,
+        "NGC6946": 768,
+    }
+    assert p0749["checks"]["formulaTransportNonbinding"] is True
+    assert p0749["observedVelocityArraysOpened"] == 0
+    assert p0749["holdoutMapBundlesOpened"] == 0
+    assert p0750["status"] == "pass"
+    assert p0750["targetArraysOpened"] == 12
+    assert p0750["holdoutArraysOpened"] == 0
+    assert p0750["fittedGravityParameters"] == 0
+
+
+def test_final_holdout_config_hash_chain_is_frozen() -> None:
+    configs = ROOT / "configs"
+
+    def file_hash(name: str) -> str:
+        return hashlib.sha256((configs / name).read_bytes()).hexdigest()
+
+    a_hash = file_hash("p0751a_holdout_baryonic_registration.json")
+    b_hash = file_hash("p0751b_holdout_fused_baryonic_registration.json")
+    c_hash = file_hash("p0751c_holdout_adaptive_haar_twins.json")
+    b = json.loads((configs / "p0751b_holdout_fused_baryonic_registration.json").read_text())
+    c = json.loads((configs / "p0751c_holdout_adaptive_haar_twins.json").read_text())
+    reveal = json.loads((configs / "p0752_final_holdout_velocity_field_test.json").read_text())
+
+    assert b["parents"]["p0739ConfigSha256"] == a_hash
+    assert c["parents"][0]["configSha256"] == b_hash
+    assert reveal["parents"]["registeredBaryonsConfigSha256"] == b_hash
+    assert reveal["parents"]["adaptiveTwinsConfigSha256"] == c_hash
+    assert reveal["systems"] == ["NGC2841", "NGC7331"]
+    assert reveal["gates"]["requiredHoldoutArraysOpened"] == 4

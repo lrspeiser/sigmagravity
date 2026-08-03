@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "sigma-p0751a-holdout-baryonic-registration/1",
+  "resultSchemaVersion": "sigma-p0751a-holdout-baryonic-registration-result/1",
+  "stage": "P0751A",
+  "status": "preregistered_before_any_holdout_pixel_array_opening",
+  "purpose": "Apply the unchanged velocity-blind THINGS moment-0 and SINGS registration to the two final holdout galaxies without opening moment-1, moment-2, or SPARC velocity targets.",
+  "parent": {
+    "config": "configs/p0738_morphology_diverse_resolved_acquisition.json",
+    "manifest": "results/p0738_morphology_diverse_resolved_acquisition/manifest.json",
+    "manifestSha256": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2"
+  },
+  "eligibleSplits": ["holdout"],
+  "systems": ["NGC2841", "NGC7331"],
+  "sealedUntilLater": {
+    "targetProducts": ["THINGS moment 1", "THINGS moment 2", "SPARC resolved observed rotation curve"],
+    "targetArraysMayOpen": false
+  },
+  "permittedInputs": [
+    "THINGS natural-weighted moment 0 image and FITS header for the two holdout systems",
+    "SINGS IRAC channel-1 image, weight image, and FITS headers for the two holdout systems",
+    "SPARC sky coordinate, distance, inclination, H I mass, 3.6 micron luminosity, effective radius, and Hubble type"
+  ],
+  "forbiddenInputs": [
+    "THINGS moment 1 array",
+    "THINGS moment 2 array",
+    "SPARC observed rotation speeds or errors",
+    "any gravity-formula prediction, score, or parameter",
+    "dark-matter halo parameters"
+  ],
+  "processing": {
+    "method": "Bit-for-bit P0739 registration implementation generalized only to the holdout split named here.",
+    "skyCenter": "fixed SPARC catalog coordinate",
+    "positionAngle": "robust SINGS second moments inside five effective radii",
+    "inclination": "fixed SPARC published inclination",
+    "foregroundSuppression": "12 robust-MAD compact residual rule with central 0.2-effective-radius protection",
+    "stellarMassToLightSolar": 0.5,
+    "heliumFactor": 1.36,
+    "extent": "1.20 times max(H I R995, six effective radii)",
+    "grid": {"targetCellsPerThingsBeam": 1.25, "minimumOddCells": 65, "maximumOddCells": 257},
+    "velocityArraysOpened": false,
+    "gravityParameters": 0
+  },
+  "atlasFileName": "holdout_baryonic_map_atlas.png",
+  "engineeringGates": {
+    "requiredSystems": 2,
+    "requiredValidationArraysOpened": 0,
+    "requiredHoldoutArraysOpened": 6,
+    "requiredVelocityOrDispersionArraysOpened": 0,
+    "maximumGravityParameters": 0,
+    "allMapsFiniteAndNonnegative": true,
+    "maximumGasMassRelativeError": 1e-10,
+    "maximumStellarMassRelativeError": 1e-10,
+    "maximumTotalMassClosureRelativeError": 1e-12,
+    "minimumFiniteFootprintFractionInsideHiR995": 0.90,
+    "maximumOuterCellMassFraction": 0.005,
+    "minimumCellsPerAxis": 65,
+    "maximumCellsPerAxis": 257,
+    "allCellsPerAxisOdd": true,
+    "maximumSourceCoordinateRoundtripArcsec": 0.01,
+    "allOutputBundlesContentHashed": true
+  },
+  "claimBoundary": [
+    "P0751A is a final-holdout observational registration test, not a gravity score.",
+    "Its implementation, inputs, and gates are committed before either holdout image or velocity array is opened.",
+    "A SINGS-footprint failure remains visible because the separately preregistered WISE fusion is the only permitted repair.",
+    "No velocity or dispersion target may be opened in this stage."
+  ]
+}

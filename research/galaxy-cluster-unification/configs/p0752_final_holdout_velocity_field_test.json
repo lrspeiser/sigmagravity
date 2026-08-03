@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "sigma-p0752-final-holdout-velocity-field-test/1",
+  "resultSchemaVersion": "sigma-p0752-final-holdout-velocity-field-test-result/1",
+  "stage": "P0752",
+  "status": "preregistered_before_any_holdout_pixel_array_opening",
+  "purpose": "Reveal the two final holdout velocity and dispersion fields exactly once and compare them with fixed Newtonian and simple-MOND predictions from both registered baryons and formula-independent adaptive fake twins.",
+  "parents": {
+    "resolvedAcquisition": "results/p0738_morphology_diverse_resolved_acquisition/manifest.json",
+    "resolvedAcquisitionManifestSha256": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+    "registeredBaryonsResultPath": "results/p0751b_holdout_fused_baryonic_registration",
+    "registeredBaryonsConfigSha256": "5c9811b9da7a1693befed4c3afeb3752aca96d926878705173212631631c768e",
+    "adaptiveTwinsResultPath": "results/p0751c_holdout_adaptive_haar_twins",
+    "adaptiveTwinsConfigSha256": "4f135abdcca296d0611296d511995cd9edc874ae547c2a1be7b74431f3289183",
+    "observationPolicyDevelopment": "results/p0750_adaptive_twin_kinematic_axis_development/report.json",
+    "observationPolicyDevelopmentResultSha256": "6bb5372103ad5dd2f6dfd2c1bbe808e9343c52421561fca9be9f07e61c5d824e"
+  },
+  "eligibleSplits": ["holdout"],
+  "systems": ["NGC2841", "NGC7331"],
+  "targetProducts": [
+    "THINGS natural-weighted moment 1 velocity field",
+    "THINGS natural-weighted moment 2 dispersion field"
+  ],
+  "observationProcessing": {
+    "skyCenter": "fixed SPARC/NED coordinate already used for baryonic registration",
+    "imagePositionAngle": "frozen velocity-blind P0751A position angle",
+    "inclination": "published SPARC inclination",
+    "systemicVelocity": "one formula-independent H I-intensity-weighted central median nuisance per galaxy",
+    "handedness": "one formula-independent binary observation-coordinate convention per galaxy",
+    "kinematicAxis": "one gas-and-inverse-variance-weighted first-harmonic unit phase per galaxy, using the P0750 estimator",
+    "fittedFirstHarmonicAmplitudeUsedInPrediction": false,
+    "velocityUnit": "read from FITS metadata",
+    "scoreMask": "finite moment 0, moment 1, and moment 2 samples with positive gas weight from one beam to H I R995",
+    "uncertaintyKmS": "quadrature sum of moment-2 dispersion and universal 5.2 km/s channel FWHM divided by 2.355",
+    "predictionBeam": "THINGS geometric-mean circular Gaussian with gas-intensity weighting",
+    "pressureSupportCorrection": false,
+    "warpOrNonCircularFit": false,
+    "formulaOrHaloFit": false
+  },
+  "models": [
+    {"id": "newtonian_thin_sheet", "gravityParametersFitted": 0, "gravitationalConstantM3KgS2": 6.67430e-11},
+    {"id": "fixed_simple_mond", "gravityParametersFitted": 0, "a0MPerS2": 1.2e-10, "gravitationalConstantM3KgS2": 6.67430e-11}
+  ],
+  "fieldSettings": {"paddingFactor": 2.0},
+  "interpretation": {
+    "fieldErrorRatio": "gas-weighted prediction RMSE divided by gas-weighted RMS measurement-plus-dispersion uncertainty",
+    "consistentBand": "ratio <= 1",
+    "closeBand": "1 < ratio <= 2",
+    "missBand": "ratio > 2",
+    "strictFormulaHoldoutSuccess": "both registered-baryon kinematic-axis galaxy ratios <= 1",
+    "competitiveButIncomplete": "median registered-baryon kinematic-axis ratio <= 2 and no galaxy ratio > 2",
+    "formulaHoldoutFailure": "at least one registered-baryon kinematic-axis galaxy ratio > 2",
+    "simulatorFidelitySuccess": "every adaptive-twin versus registered-baryon prediction transport RMSE <= 12 km/s"
+  },
+  "gates": {
+    "requiredSystems": 2,
+    "requiredTargetArraysOpened": 4,
+    "requiredValidationArraysOpened": 0,
+    "requiredHoldoutArraysOpened": 4,
+    "minimumScoredPixelsPerGalaxy": 500,
+    "maximumAbsoluteAxisOffsetDeg": 90.0,
+    "maximumTwinSourcePredictionTransportRmseKmS": 12.0,
+    "maximumGravityParametersFitted": 0,
+    "maximumDarkMatterParameters": 0,
+    "allTargetHashesMatchAcquisitionManifest": true,
+    "allScoresFinite": true
+  },
+  "claimBoundary": [
+    "P0752 is the one-shot final holdout for the current resolved-galaxy simulator and observation policy.",
+    "One kinematic phase is an observation-coordinate nuisance shared by all formulas; its fitted speed amplitude is discarded.",
+    "The formula score on registered baryons tests the gravity law; adaptive-twin transport separately tests simulator fidelity.",
+    "No inclination, distance, M/L, Newton constant, MOND scale, pressure support, warp, dark halo, or formula-specific parameter is fitted.",
+    "A holdout miss must remain visible and cannot be repaired and relabeled as holdout evidence."
+  ]
+}

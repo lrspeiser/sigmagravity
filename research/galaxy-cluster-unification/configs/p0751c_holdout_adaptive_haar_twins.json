@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "sigma-p0751c-holdout-adaptive-haar-twins/1",
+  "resultSchemaVersion": "sigma-p0751c-holdout-adaptive-haar-twins-result/1",
+  "stage": "P0751C",
+  "status": "preregistered_before_any_holdout_pixel_array_opening",
+  "purpose": "Apply the P0749 formula-independent adaptive Haar rule unchanged to the two final holdout baryonic maps without opening any velocity target.",
+  "parents": [
+    {
+      "id": "holdout",
+      "resultPath": "results/p0751b_holdout_fused_baryonic_registration",
+      "configSha256": "5c9811b9da7a1693befed4c3afeb3752aca96d926878705173212631631c768e",
+      "eligibleSplit": "holdout",
+      "systems": ["NGC2841", "NGC7331"]
+    }
+  ],
+  "developmentDisclosure": "The candidate budgets and numeric gates were selected in P0749 using six already-open galaxies. This final-holdout config freezes them before any NGC2841 or NGC7331 image or velocity array is opened.",
+  "representation": {
+    "basis": "orthonormal 2D Haar",
+    "inputTransform": "linear surface density",
+    "padding": "zero pad upper index edges to the next power-of-two square",
+    "coefficientSelection": "largest absolute coefficients with deterministic flat-index serialization",
+    "reconstruction": "inverse Haar, crop, clip negative ringing, and restore each component mass",
+    "candidateCoefficientsPerComponent": [256, 384, 512, 768, 1024],
+    "selectionRule": "For each galaxy, start at 256 coefficients per baryonic component and choose the first candidate whose reconstructed gas, stars, total map, mass, 3D projection, and compression pass the fixed numeric gates. Never use a formula or velocity score in selection."
+  },
+  "formulaTransportFixtures": {
+    "bindingForSelection": false,
+    "models": [
+      {"id": "newtonian_thin_sheet", "gravityParameters": 0, "gravitationalConstantM3KgS2": 6.67430e-11},
+      {"id": "fixed_simple_mond", "gravityParameters": 0, "a0MPerS2": 1.2e-10, "gravitationalConstantM3KgS2": 6.67430e-11}
+    ],
+    "fieldPaddingFactor": 2.0,
+    "radialScoreBins": 24,
+    "observedSpeedComparison": false
+  },
+  "verticalPriors": {"realizationsPerComponent": 3, "seed": 20260802},
+  "gates": {
+    "requiredSystems": 2,
+    "maximumMassRelativeError": 1e-12,
+    "maximum3dProjectionRelativeError": 1e-12,
+    "gasMaximumNormalizedL2": 0.35,
+    "starsMaximumNormalizedL2": 0.40,
+    "totalMaximumNormalizedL2": 0.20,
+    "totalMinimumPixelCorrelation": 0.95,
+    "minimumCellToNumericParameterRatio": 20.0,
+    "requiredUniqueDevelopmentMapBundlesOpened": 0,
+    "requiredUniqueValidationMapBundlesOpened": 0,
+    "requiredUniqueHoldoutMapBundlesOpened": 2,
+    "requiredObservedVelocityArraysOpened": 0,
+    "maximumFittedGravityParameters": 0
+  },
+  "claimBoundary": [
+    "Haar detail is a compressed description of holdout baryons, not a gravitational effect.",
+    "A holdout galaxy receives more detail only if the same predeclared baryonic-map gates require it.",
+    "Formula transport is reported after selection and cannot change the selected representation.",
+    "No holdout velocity or dispersion target may be opened in this stage."
+  ]
+}

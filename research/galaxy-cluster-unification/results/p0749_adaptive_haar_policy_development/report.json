@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "sigma-p0749-adaptive-haar-policy-development-result/1",
+  "stage": "P0749",
+  "status": "pass",
+  "configSha256": "283659c8967224fdc59eeaf824f8121f8b59d2e4c504536181a0aded1cec9829",
+  "parentResultSha256": {
+    "development": "64776bed1374276bcae8737270febee15a90b1818e0e9dbfc217b13541b1731a",
+    "validation": "9902f1fd0c5057d2b3784e07781514d854493e8970a90757ed8d398e3344f699"
+  },
+  "developmentDisclosure": "P0749 is post-validation method development. It may define the final holdout algorithm, but it is not a validation result. Its selection rule cannot inspect a velocity field, observed speed, formula residual, or gravity parameter.",
+  "selectionRule": "For each galaxy, start at 256 coefficients per baryonic component and choose the first candidate whose reconstructed gas, stars, total map, mass, 3D projection, and compression pass the same fixed numeric gates. Never use any formula or velocity score in selection.",
+  "systems": 6,
+  "selectedRepresentations": [
+    {
+      "galaxy": "NGC2403",
+      "split": "development",
+      "selected_tier": "haar_256",
+      "coefficients_per_component": 256,
+      "cell_to_parameter_ratio": 128.00193798449612,
+      "generated_map_sha256": "22bceb6a7edd4e2275d7f1b6605c36192eaf0de03dd0ecdd5d3b86da3f469d20"
+    },
+    {
+      "galaxy": "NGC3198",
+      "split": "development",
+      "selected_tier": "haar_256",
+      "coefficients_per_component": 256,
+      "cell_to_parameter_ratio": 47.76937984496124,
+      "generated_map_sha256": "1137ad344f368581095cfcb924c13e532fa43df255152d112adfa7384f145629"
+    },
+    {
+      "galaxy": "NGC5055",
+      "split": "development",
+      "selected_tier": "haar_256",
+      "coefficients_per_component": 256,
+      "cell_to_parameter_ratio": 108.8546511627907,
+      "generated_map_sha256": "0c6d36fede0e6b49885d727805e49a159e9a4941f1be15aa005324994016e888"
+    },
+    {
+      "galaxy": "NGC7793",
+      "split": "development",
+      "selected_tier": "haar_256",
+      "coefficients_per_component": 256,
+      "cell_to_parameter_ratio": 59.35077519379845,
+      "generated_map_sha256": "7e77d8f385c75b817994d1c8b34a02ee5842247d7957d2b182c66559619b9895"
+    },
+    {
+      "galaxy": "NGC3521",
+      "split": "validation",
+      "selected_tier": "haar_256",
+      "coefficients_per_component": 256,
+      "cell_to_parameter_ratio": 29.319767441860463,
+      "generated_map_sha256": "ebdacace92cb5675d2e528829cfbc8b24e8730c2f4304d25b0b468106140f8a7"
+    },
+    {
+      "galaxy": "NGC6946",
+      "split": "validation",
+      "selected_tier": "haar_768",
+      "coefficients_per_component": 768,
+      "cell_to_parameter_ratio": 42.88896103896104,
+      "generated_map_sha256": "8a48bf8098ee7b53e05536cec5f60d3a89822ebde42cc574c7b9f0ce5959125a"
+    }
+  ],
+  "observedVelocityArraysOpened": 0,
+  "holdoutMapBundlesOpened": 0,
+  "fittedGravityParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredUniqueDevelopmentMapBundlesOpened": true,
+    "requiredUniqueValidationMapBundlesOpened": true,
+    "requiredUniqueHoldoutMapBundlesOpened": true,
+    "requiredObservedVelocityArraysOpened": true,
+    "maximumFittedGravityParameters": true,
+    "allSelectedByBaryonicGates": true,
+    "formulaTransportNonbinding": true
+  },
+  "claimBoundary": [
+    "Haar detail is a compressed description of observed baryons, not a gravitational effect.",
+    "Different galaxies may receive different representation sizes only through the same predeclared baryonic-map error rule; no galaxy gets a fitted gravity setting.",
+    "Formula transport is reported after selection and cannot change the selected representation.",
+    "The final holdout implementation and gates must be committed before opening any NGC2841 or NGC7331 pixel array."
+  ],
+  "reportSha256": "33c95f50957b2bbb51f04e973299903462ea7f32f0e51169038651ee4057faf3"
+}

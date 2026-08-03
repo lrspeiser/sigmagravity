@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "sigma-p0750-adaptive-twin-kinematic-axis-development-result/1",
+  "stage": "P0750",
+  "status": "pass",
+  "developmentDisclosure": "Every velocity field in P0750 was already revealed by P0744 or P0746. P0750 develops an observation policy; it is neither validation nor holdout evidence.",
+  "configSha256": "41fa629373242473fc4afbf47ed206a483f6814e4b6580f15087565e99e5a519",
+  "adaptiveTwinsResultSha256": "33c95f50957b2bbb51f04e973299903462ea7f32f0e51169038651ee4057faf3",
+  "systems": 6,
+  "targetArraysOpened": 12,
+  "holdoutArraysOpened": 0,
+  "fittedObservationNuisances": 6,
+  "fittedGravityParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredTargetArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "minimumScoredPixelsPerGalaxy": true,
+    "maximumAbsoluteAxisOffsetDeg": true,
+    "requiredFiniteScores": true,
+    "maximumGravityParametersFitted": true
+  },
+  "modelSummary": [
+    {
+      "model": "fixed_simple_mond",
+      "median_rmse_km_s": 22.46308055789742,
+      "maximum_rmse_km_s": 29.63930269629225,
+      "median_field_error_ratio": 1.1530657954364427,
+      "maximum_field_error_ratio": 2.416956999445038
+    },
+    {
+      "model": "newtonian_thin_sheet",
+      "median_rmse_km_s": 40.739015610714716,
+      "maximum_rmse_km_s": 54.31058594758745,
+      "median_field_error_ratio": 2.71834793706024,
+      "maximum_field_error_ratio": 3.9015062796204405
+    }
+  ],
+  "geometry": [
+    {
+      "galaxy": "NGC2403",
+      "split": "development",
+      "scored_pixels": 34727,
+      "image_position_angle_deg": 112.38697377523488,
+      "kinematic_phase_offset_deg_in_registered_plane": 11.136007381914267,
+      "kinematic_unit_x": 0.9811714802979421,
+      "kinematic_unit_y": 0.1931386192607397,
+      "fitted_first_harmonic_amplitude_km_s": 110.99312481139162,
+      "first_harmonic_explained_variance_fraction": 0.9852385361501391,
+      "selected_twin_coefficients_per_component": 256,
+      "fitted_observation_nuisances": 1,
+      "fitted_gravity_parameters": 0
+    },
+    {
+      "galaxy": "NGC3198",
+      "split": "development",
+      "scored_pixels": 13134,
+      "image_position_angle_deg": 34.39948613321605,
+      "kinematic_phase_offset_deg_in_registered_plane": 0.7744177558405088,
+      "kinematic_unit_x": -0.999908658375397,
+      "kinematic_unit_y": -0.013515728094103648,
+      "fitted_first_harmonic_amplitude_km_s": 145.2050940553102,
+      "first_harmonic_explained_variance_fraction": 0.9936734497166645,
+      "selected_twin_coefficients_per_component": 256,
+      "fitted_observation_nuisances": 1,
+      "fitted_gravity_parameters": 0
+    },
+    {
+      "galaxy": "NGC5055",
+      "split": "development",
+      "scored_pixels": 23153,
+      "image_position_angle_deg": 100.60532313717738,
+      "kinematic_phase_offset_deg_in_registered_plane": 1.3132188938982396,
+      "kinematic_unit_x": 0.9997373484474726,
+      "kinematic_unit_y": -0.022917986805498464,
+      "fitted_first_harmonic_amplitude_km_s": 159.46347359604084,
+      "first_harmonic_explained_variance_fraction": 0.9669672366584063,
+      "selected_twin_coefficients_per_component": 256,
+      "fitted_observation_nuisances": 1,
+      "fitted_gravity_parameters": 0
+    },
+    {
+      "galaxy": "NGC7793",
+      "split": "development",
+      "scored_pixels": 5168,
+      "image_position_angle_deg": 154.93832278328426,
+      "kinematic_phase_offset_deg_in_registered_plane": 37.19252633954372,
+      "kinematic_unit_x": -0.7966087751454015,
+      "kinematic_unit_y": 0.604495210370887,
+      "fitted_first_harmonic_amplitude_km_s": 71.75360710189476,
+      "first_harmonic_explained_variance_fraction": 0.9536375686872758,
+      "selected_twin_coefficients_per_component": 256,
+      "fitted_observation_nuisances": 1,
+      "fitted_gravity_parameters": 0
+    },
+    {
+      "galaxy": "NGC3521",
+      "split": "validation",
+      "scored_pixels": 7962,
+      "image_position_angle_deg": 161.8262045869058,
+      "kinematic_phase_offset_deg_in_registered_plane": 0.21330703245121974,
+      "kinematic_unit_x": -0.9999930699784438,
+      "kinematic_unit_y": 0.0037229014339723154,
+      "fitted_first_harmonic_amplitude_km_s": 198.38560114508846,
+      "first_harmonic_explained_variance_fraction": 0.97123479524174,
+      "selected_twin_coefficients_per_component": 256,
+      "fitted_observation_nuisances": 1,
+      "fitted_gravity_parameters": 0
+    },
+    {
+      "galaxy": "NGC6946",
+      "split": "validation",
+      "scored_pixels": 23067,
+      "image_position_angle_deg": 123.63968594598566,
+      "kinematic_phase_offset_deg_in_registered_plane": 60.03351651347665,
+      "kinematic_unit_x": -0.4994933125567646,
+      "kinematic_unit_y": 0.8663177423503863,
+      "fitted_first_harmonic_amplitude_km_s": 92.47461319690592,
+      "first_harmonic_explained_variance_fraction": 0.9250960768689571,
+      "selected_twin_coefficients_per_component": 768,
+      "fitted_observation_nuisances": 1,
+      "fitted_gravity_parameters": 0
+    }
+  ],
+  "claimBoundary": [
+    "The kinematic axis is one formula-independent observation-coordinate nuisance, not a gravity-law fit.",
+    "The least-squares amplitude is reported as a diagnostic but discarded before every prediction.",
+    "P0750 may justify a predeclared holdout observation policy but cannot be called validation because all six targets are open.",
+    "Neither NGC2841 nor NGC7331 has any pixel array opened in this stage."
+  ],
+  "reportSha256": "6bb5372103ad5dd2f6dfd2c1bbe808e9343c52421561fca9be9f07e61c5d824e"
+}

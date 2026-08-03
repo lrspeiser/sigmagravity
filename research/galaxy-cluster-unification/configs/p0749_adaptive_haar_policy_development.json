@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "sigma-p0749-adaptive-haar-policy-development/1",
+  "resultSchemaVersion": "sigma-p0749-adaptive-haar-policy-development-result/1",
+  "stage": "P0749",
+  "status": "post_validation_method_development_holdout_arrays_still_sealed",
+  "purpose": "Turn the disclosed NGC6946 fixed-detail failure into one deterministic, formula-independent adaptive-detail rule and exercise it across all six open galaxies before freezing the final holdout protocol.",
+  "parents": [
+    {
+      "id": "development",
+      "resultPath": "results/p0741_fused_spiral_baryonic_registration_development",
+      "resultSha256": "64776bed1374276bcae8737270febee15a90b1818e0e9dbfc217b13541b1731a",
+      "configSha256": "484b4db588a979570675077ed8cde7b5d6e3ce6446e214833c09de22f775bd86",
+      "eligibleSplit": "development",
+      "systems": ["NGC2403", "NGC3198", "NGC5055", "NGC7793"]
+    },
+    {
+      "id": "validation",
+      "resultPath": "results/p0745b_validation_fused_baryonic_registration",
+      "resultSha256": "9902f1fd0c5057d2b3784e07781514d854493e8970a90757ed8d398e3344f699",
+      "configSha256": "0b6859e6e66cee5f21a258ba41d05bf3b996edb8025e14536c3102bb166d6770",
+      "eligibleSplit": "validation",
+      "systems": ["NGC3521", "NGC6946"]
+    }
+  ],
+  "developmentDisclosure": "P0749 is post-validation method development. It may define the final holdout algorithm, but it is not a validation result. Its selection rule cannot inspect a velocity field, observed speed, formula residual, or gravity parameter.",
+  "representation": {
+    "basis": "orthonormal 2D Haar",
+    "inputTransform": "linear surface density",
+    "padding": "zero pad upper index edges to the next power-of-two square",
+    "coefficientSelection": "largest absolute coefficients with deterministic flat-index serialization",
+    "reconstruction": "inverse Haar, crop, clip negative ringing, and restore each component mass",
+    "candidateCoefficientsPerComponent": [256, 384, 512, 768, 1024],
+    "selectionRule": "For each galaxy, start at 256 coefficients per baryonic component and choose the first candidate whose reconstructed gas, stars, total map, mass, 3D projection, and compression pass the same fixed numeric gates. Never use any formula or velocity score in selection."
+  },
+  "formulaTransportFixtures": {
+    "bindingForSelection": false,
+    "models": [
+      {"id": "newtonian_thin_sheet", "gravityParameters": 0, "gravitationalConstantM3KgS2": 6.67430e-11},
+      {"id": "fixed_simple_mond", "gravityParameters": 0, "a0MPerS2": 1.2e-10, "gravitationalConstantM3KgS2": 6.67430e-11}
+    ],
+    "fieldPaddingFactor": 2.0,
+    "radialScoreBins": 24,
+    "observedSpeedComparison": false
+  },
+  "verticalPriors": {"realizationsPerComponent": 3, "seed": 20260802},
+  "gates": {
+    "requiredSystems": 6,
+    "maximumMassRelativeError": 1e-12,
+    "maximum3dProjectionRelativeError": 1e-12,
+    "gasMaximumNormalizedL2": 0.35,
+    "starsMaximumNormalizedL2": 0.40,
+    "totalMaximumNormalizedL2": 0.20,
+    "totalMinimumPixelCorrelation": 0.95,
+    "minimumCellToNumericParameterRatio": 20.0,
+    "requiredUniqueDevelopmentMapBundlesOpened": 4,
+    "requiredUniqueValidationMapBundlesOpened": 2,
+    "requiredUniqueHoldoutMapBundlesOpened": 0,
+    "requiredObservedVelocityArraysOpened": 0,
+    "maximumFittedGravityParameters": 0
+  },
+  "claimBoundary": [
+    "Haar detail is a compressed description of observed baryons, not a gravitational effect.",
+    "Different galaxies may receive different representation sizes only through the same predeclared baryonic-map error rule; no galaxy gets a fitted gravity setting.",
+    "Formula transport is reported after selection and cannot change the selected representation.",
+    "The final holdout implementation and gates must be committed before opening any NGC2841 or NGC7331 pixel array."
+  ]
+}
