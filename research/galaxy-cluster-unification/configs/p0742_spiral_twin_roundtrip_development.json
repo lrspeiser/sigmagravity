@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "sigma-p0742-spiral-twin-roundtrip-development/1",
+  "stage": "P0742",
+  "status": "frozen_before_spiral_parameter_extraction",
+  "purpose": "Test whether gravity-independent parameter packages can regenerate morphology-diverse spiral baryonic maps and preserve formula-predicted speed fields before any observed velocity target is unsealed.",
+  "parent": {
+    "config": "configs/p0741_fused_spiral_baryonic_registration_development.json",
+    "result": "results/p0741_fused_spiral_baryonic_registration_development/report.json",
+    "resultSha256": "64776bed1374276bcae8737270febee15a90b1818e0e9dbfc217b13541b1731a"
+  },
+  "systems": ["NGC2403", "NGC3198", "NGC5055", "NGC7793"],
+  "representationTiers": [
+    {"id": "transported_p0720", "radialBins": 24, "maximumFourierMode": 4, "residualFeaturesPerComponent": 64},
+    {"id": "spiral_medium", "radialBins": 32, "maximumFourierMode": 6, "residualFeaturesPerComponent": 128},
+    {"id": "spiral_high", "radialBins": 40, "maximumFourierMode": 8, "residualFeaturesPerComponent": 256}
+  ],
+  "selectionRule": "Evaluate every frozen tier on all four development maps and choose the lowest-complexity tier that passes every morphology, mass, compression, 3D projection, and formula-transport gate. If none passes, report failure rather than selecting the least-bad tier.",
+  "verticalPriors": {
+    "realizationsPerComponent": 3,
+    "seed": 20260802,
+    "profiles": ["exponential", "sech_squared"],
+    "interpretation": "Declared projection-equivalent priors, not a unique recovery of true depth."
+  },
+  "formulaTransportFixtures": {
+    "purpose": "Measure whether the same fixed formula gives the same prediction on the observed baryonic map and its generated twin. This is not comparison with an observed speed.",
+    "models": [
+      {"id": "newtonian_thin_sheet", "gravityParameters": 0, "gravitationalConstantM3KgS2": 6.67430e-11},
+      {"id": "fixed_simple_mond", "gravityParameters": 0, "a0MPerS2": 1.2e-10, "gravitationalConstantM3KgS2": 6.67430e-11}
+    ],
+    "fieldPaddingFactor": 2.0,
+    "radialScoreBins": 24,
+    "innerRadiusThingsBeams": 1.0,
+    "outerRadius": "published SPARC H I R995",
+    "inclination": "published SPARC inclination",
+    "beamConvolution": false
+  },
+  "gates": {
+    "requiredSystems": 4,
+    "requiredComponentsPerTier": 12,
+    "maximumMassRelativeError": 1e-12,
+    "maximum3dProjectionRelativeError": 1e-12,
+    "totalMedianNormalizedL2": 0.20,
+    "totalMaximumNormalizedL2": 0.30,
+    "totalMinimumPixelCorrelation": 0.95,
+    "gasMaximumNormalizedL2": 0.35,
+    "starsMaximumNormalizedL2": 0.40,
+    "minimumCellToNumericParameterRatio": 20.0,
+    "maximumMedianFormulaRadialSpeedTransportRmseKmS": 3.0,
+    "maximumWorstFormulaRadialSpeedTransportRmseKmS": 8.0,
+    "maximumMedianFormulaLosSpeedTransportRmseKmS": 5.0,
+    "maximumWorstFormulaLosSpeedTransportRmseKmS": 12.0,
+    "requiredValidationArraysOpened": 0,
+    "requiredHoldoutArraysOpened": 0,
+    "requiredObservedVelocityArraysOpened": 0,
+    "maximumFittedGravityParameters": 0
+  },
+  "claimBoundary": [
+    "P0742 can show that a fake twin retains the observed baryonic structure closely enough for a formula to make nearly the same prediction on both maps.",
+    "P0742 cannot show that either prediction matches real stellar or gas speeds because every observed velocity target remains sealed.",
+    "The formula fixtures are fixed diagnostic rulers and do not enter extraction or tier selection except through a preregistered transport-fidelity gate.",
+    "Development selection must be frozen before validation and holdout maps are opened."
+  ]
+}
