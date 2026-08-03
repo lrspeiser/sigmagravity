@@ -11,14 +11,14 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/3ud9MYUaKhYGVFg4U4sGZpfettkX>
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/4m5Yya3YuweXMHjxiX2C5xGtN8DP>
 - immutable deployment URL:
-  <https://sigma-gravity-research-simulator-dvvbj5j4v-horizon3.vercel.app>
-- deployment ID: `dpl_3ud9MYUaKhYGVFg4U4sGZpfettkX`
-- public contract version: `0.22.0-preview`
+  <https://sigma-gravity-research-simulator-9u4cm6sh2-horizon3.vercel.app>
+- deployment ID: `dpl_4m5Yya3YuweXMHjxiX2C5xGtN8DP`
+- public contract version: `0.23.0-preview`
 
-The service passes its local production build, 88 automated hosted tests, all
-1,576 Python scientific tests, and the live HTTP smoke suite. No deployment
+The service passes its local production build, 90 automated hosted tests, all
+1,579 Python scientific tests, and the live HTTP smoke suite. No deployment
 credential is stored in a file, repository setting, or generated artifact.
 
 ## Deployable artifact
@@ -98,6 +98,13 @@ Implemented public capabilities:
     tables, verifies exact projection, and rejects more than 256 MiB of raw
     ensemble arrays. The public gateway advertises and validates the contract;
     production execution remains disconnected.
+21. Materialize selected 2D surface-density and 3D volume-density ensemble
+    draws into verified SI field bundles, fan one unchanged confirmed model
+    across them, and report per-realization results plus within-system
+    p16/p50/p84 prediction-score spread. The selection, parent artifact hash,
+    exact realization indices, units, and source-array content hashes are bound
+    into every child identity. These are prior-prediction spreads, not
+    likelihood-weighted posterior credible intervals.
 
 ## Verification evidence
 
@@ -107,7 +114,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 88 passing hosted tests, 1,576 passing Python scientific
+The current result is 90 passing hosted tests, 1,579 passing Python scientific
 tests, and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
@@ -122,7 +129,7 @@ token or place it in `.env` tracked by Git.
 ```powershell
 cd research/galaxy-cluster-unification/hosted-simulator
 npx.cmd vercel --yes
-npx.cmd vercel --prod --yes --scope horizon3 --project sigma-gravity-research-simulator
+npx.cmd vercel --prod --yes --scope horizon3
 ```
 
 Then verify:
@@ -151,9 +158,9 @@ and point arrays. The accepted production smoke values are:
 
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
-- run ID: `run_6ae2980fde9ea35e58d1f17c`
 - manifest SHA-256:
-  `6ae2980fde9ea35e58d1f17c3d02ab983e9419d28aeab035625b87a6a1c52cf8`
+  `0197e79c5c42ddbeb7ace796747b3e533e3e0832e1ebc30eaafa6a845d6e8699`
+- run ID: `run_0197e79c5c42ddbeb7ace796`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -308,6 +315,28 @@ Desktop and 390-pixel mobile browser checks found no page-level overflow or
 console warnings/errors; the capability table remains internally scrollable
 on mobile. This verifies the public contract and local artifact path, not an
 observation-derived baryonic posterior.
+
+The v0.23 ensemble-propagation checks require health to report
+`localBaryonicEnsemblePropagation=available_in_dev_server`, the public batch
+schema to accept `surface_density_ensemble` and `volume_density_ensemble`, and
+the guide to show example 09 with exact inputs, shortened outputs, and a clear
+prior-versus-posterior boundary. The real local DDO101 HTTP batch used one
+confirmed Newtonian-Poisson model on four parent systems and five solver
+children, including two selected 3D realizations. All five solves converged,
+the maximum equation residual was `2.6226280458858716e-10`, all 16 artifacts
+rehash correctly, and the run introduced zero per-object or
+observation-derived gravity parameters. The three scored parents contain 30
+published rotation-curve points; aggregate RMSE is
+`40.37055168881182 km/s`, weighted RMSE is `43.07208501177664 km/s`, and
+reduced chi-square is `201.38128805090903`. Those poor Newtonian scores are a
+useful falsification result, not a platform failure. The public alias passed
+the complete v0.23 smoke with run `run_0197e79c5c42ddbeb7ace796`, manifest
+`0197e79c5c42ddbeb7ace796747b3e533e3e0832e1ebc30eaafa6a845d6e8699`,
+twin run `twinrun_6a8f3a18fd0e124e9b345472`, and unchanged cluster registry
+hash `875b04d5ee32465545262a30ab2cee300eb2c34407f1bcccf6f4012128ad6a79`.
+Production `POST /api/v1/batches` still returns HTTP 503 with
+`production_worker_not_connected`; the Vercel deployment publishes and
+validates the contract but does not claim to run the local scientific worker.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
