@@ -8,10 +8,12 @@ equations of the forms::
     laplacian(phi) = source
     divergence(coefficient * gradient(phi)) = source
 
-on uniform two- or three-dimensional Cartesian grids.  Coefficients and
-sources are evaluated from the submitted expression tree, so the same path can
-represent Poisson gravity, density-dependent Refracted Gravity, AQUAL-like
-nonlinear equations, and coupled QUMOND-like equations.
+on uniform two- or three-dimensional Cartesian grids and uniform
+axisymmetric cylindrical ``(r,z)`` grids. Coefficients and sources are
+evaluated from the submitted expression tree, so the same path can represent
+Poisson gravity, density-dependent Refracted Gravity, AQUAL-like nonlinear
+equations, and coupled QUMOND-like equations. The cylindrical axis is a
+regularity boundary with zero radial flux, never a fabricated Dirichlet wall.
 """
 
 from __future__ import annotations
@@ -53,6 +55,89 @@ def _spacing(values: float | Sequence[float], dimensions: int) -> tuple[float, .
     if len(result) != dimensions or any(not math.isfinite(value) or value <= 0 for value in result):
         raise ValueError(f"spacing must contain {dimensions} finite positive values")
     return result
+
+
+def _solution_region(
+    coordinate_system: str, shape: tuple[int, ...]
+) -> tuple[slice, ...]:
+    if coordinate_system == "axisymmetric_cylindrical":
+        if len(shape) != 2:
+            raise ValueError("axisymmetric_cylindrical requires a 2D (r,z) grid")
+        return (slice(0, -1), slice(1, -1))
+    return tuple(slice(1, -1) for _ in shape)
+
+
+def _axisymmetric_grid_metadata(
+    grid_geometry: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    if not isinstance(grid_geometry, Mapping):
+        raise ValueError(
+            "axisymmetric_cylindrical execution requires grid geometry with axisOrder=['r','z'] and origin=[0,z0]"
+        )
+    axis_order = list(grid_geometry.get("axisOrder", []))
+    if axis_order != ["r", "z"]:
+        raise ValueError("axisymmetric_cylindrical requires axisOrder=['r','z']")
+    raw_origin = grid_geometry.get("origin")
+    if (
+        not isinstance(raw_origin, Sequence)
+        or isinstance(raw_origin, (str, bytes))
+        or len(raw_origin) != 2
+    ):
+        raise ValueError("axisymmetric_cylindrical requires origin=[0,z0]")
+    origin = [float(value) for value in raw_origin]
+    if any(not math.isfinite(value) for value in origin) or origin[0] != 0.0:
+        raise ValueError("axisymmetric_cylindrical radial origin must be exactly r=0")
+    return {
+        "axis_order": axis_order,
+        "origin": origin,
+        "radial_axis_index": 0,
+        "vertical_axis_index": 1,
+        "axis_boundary": "zero_radial_flux_regularity",
+        "outer_boundaries": "declared_dirichlet_or_isolated_approximation",
+    }
+
+
+def _axisymmetric_gradient(
+    field: Array, spacing: Sequence[float]
+) -> tuple[Array, Array]:
+    values = np.asarray(field, dtype=float)
+    if values.ndim != 2:
+        raise ValueError("axisymmetric gradient requires a 2D (r,z) scalar field")
+    radial, vertical = np.gradient(values, *spacing, edge_order=2)
+    radial = np.asarray(radial, dtype=float)
+    radial[0, :] = 0.0
+    return radial, np.asarray(vertical, dtype=float)
+
+
+def _axisymmetric_divergence(
+    vector: tuple[Array, ...], spacing: Sequence[float]
+) -> Array:
+    if len(vector) != 2:
+        raise ValueError("axisymmetric divergence requires radial and vertical components")
+    radial_component = np.asarray(vector[0], dtype=float)
+    vertical_component = np.asarray(vector[1], dtype=float)
+    if radial_component.shape != vertical_component.shape or radial_component.ndim != 2:
+        raise ValueError("axisymmetric vector components must share one 2D (r,z) grid")
+    radial_scale = max(
+        float(np.max(np.abs(radial_component))), np.finfo(float).tiny
+    )
+    if float(np.max(np.abs(radial_component[0, :]))) > 1e-10 * radial_scale:
+        raise ValueError(
+            "axisymmetric radial vector component must vanish at r=0"
+        )
+    dr, dz = (float(value) for value in spacing)
+    radii = np.arange(radial_component.shape[0], dtype=float) * dr
+    weighted_radial = radii[:, None] * radial_component
+    radial_divergence = np.zeros_like(radial_component)
+    radial_derivative = np.gradient(weighted_radial, dr, axis=0, edge_order=2)
+    radial_divergence[1:, :] = radial_derivative[1:, :] / radii[1:, None]
+    radial_divergence[0, :] = 2.0 * (
+        radial_component[1, :] - radial_component[0, :]
+    ) / dr
+    vertical_divergence = np.gradient(
+        vertical_component, dz, axis=1, edge_order=2
+    )
+    return radial_divergence + vertical_divergence
 
 
 def _scalar_array(value: ExpressionValue, shape: tuple[int, ...], name: str) -> Array:
@@ -179,6 +264,7 @@ def evaluate_field_expression(
     fields: Mapping[str, Array],
     parameters: Mapping[str, float],
     spacing: Sequence[float],
+    coordinate_system: str | None = None,
 ) -> ExpressionValue:
     """Evaluate a validated field-expression tree using NumPy operations."""
 
@@ -198,7 +284,13 @@ def evaluate_field_expression(
     operation = str(node.get("op", ""))
     arguments = node.get("args", [])
     values = [
-        evaluate_field_expression(argument, fields=fields, parameters=parameters, spacing=spacing)
+        evaluate_field_expression(
+            argument,
+            fields=fields,
+            parameters=parameters,
+            spacing=spacing,
+            coordinate_system=coordinate_system,
+        )
         for argument in arguments
     ]
     if operation in {"add", "subtract", "min", "max", "divide"}:
@@ -221,10 +313,14 @@ def evaluate_field_expression(
     if operation == "gradient":
         if isinstance(values[0], tuple):
             raise ValueError("generic worker v1 does not take the gradient of a vector")
+        if coordinate_system == "axisymmetric_cylindrical":
+            return _axisymmetric_gradient(np.asarray(values[0], dtype=float), spacing)
         return tuple(np.gradient(values[0], *spacing, edge_order=2))
     if operation == "divergence":
         if not isinstance(values[0], tuple) or len(values[0]) != len(spacing):
             raise ValueError("divergence requires one vector component per grid dimension")
+        if coordinate_system == "axisymmetric_cylindrical":
+            return _axisymmetric_divergence(values[0], spacing)
         return sum(
             np.gradient(component, spacing[axis], axis=axis, edge_order=2)
             for axis, component in enumerate(values[0])
@@ -232,6 +328,15 @@ def evaluate_field_expression(
     if operation == "laplacian":
         if isinstance(values[0], tuple):
             raise ValueError("generic worker v1 expects a scalar Laplacian")
+        if coordinate_system == "axisymmetric_cylindrical":
+            result, _flux_scale = _finite_volume_divergence_gradient(
+                np.asarray(values[0], dtype=float),
+                np.ones_like(values[0], dtype=float),
+                spacing,
+                coefficient_floor=np.finfo(float).tiny,
+                coordinate_system=coordinate_system,
+            )
+            return result
         result = np.zeros_like(values[0], dtype=float)
         for axis, step in enumerate(spacing):
             first = np.gradient(values[0], step, axis=axis, edge_order=2)
@@ -266,16 +371,28 @@ def evaluate_field_expression(
         return _linear_same_convolution(values[0], values[1], spacing)
     if operation == "piecewise":
         result = evaluate_field_expression(
-            node["otherwise"], fields=fields, parameters=parameters, spacing=spacing
+            node["otherwise"],
+            fields=fields,
+            parameters=parameters,
+            spacing=spacing,
+            coordinate_system=coordinate_system,
         )
         if isinstance(result, tuple):
             raise ValueError("vector piecewise expressions are not supported in worker v1")
         for branch in reversed(node["branches"]):
             condition = evaluate_field_expression(
-                branch["when"], fields=fields, parameters=parameters, spacing=spacing
+                branch["when"],
+                fields=fields,
+                parameters=parameters,
+                spacing=spacing,
+                coordinate_system=coordinate_system,
             )
             value = evaluate_field_expression(
-                branch["value"], fields=fields, parameters=parameters, spacing=spacing
+                branch["value"],
+                fields=fields,
+                parameters=parameters,
+                spacing=spacing,
+                coordinate_system=coordinate_system,
             )
             result = np.where(condition, value, result)
         return result
@@ -317,7 +434,12 @@ def _elliptic_lhs(node: Mapping[str, Any]) -> tuple[str, Mapping[str, Any]]:
     return target, coefficient
 
 
-def _boundary_array(value: float | Array, shape: tuple[int, ...]) -> Array:
+def _boundary_array(
+    value: float | Array,
+    shape: tuple[int, ...],
+    *,
+    coordinate_system: str | None = None,
+) -> Array:
     supplied = np.asarray(value, dtype=float)
     if supplied.ndim == 0:
         supplied = np.full(shape, float(supplied), dtype=float)
@@ -329,8 +451,133 @@ def _boundary_array(value: float | Array, shape: tuple[int, ...]) -> Array:
         trailing = [slice(None)] * len(shape)
         leading[axis] = 0
         trailing[axis] = -1
-        result[tuple(leading)] = supplied[tuple(leading)]
+        if not (coordinate_system == "axisymmetric_cylindrical" and axis == 0):
+            result[tuple(leading)] = supplied[tuple(leading)]
         result[tuple(trailing)] = supplied[tuple(trailing)]
+    return result
+
+
+def _harmonic_face(left: float, right: float) -> float:
+    return 2.0 * left * right / (left + right)
+
+
+def _solve_axisymmetric_variable_coefficient_dirichlet(
+    source: Array,
+    coefficient: Array,
+    spacing: Sequence[float],
+    boundary: float | Array,
+    *,
+    coefficient_floor: float,
+) -> Array:
+    """Solve ``1/r d_r(r a d_r u) + d_z(a d_z u) = source``.
+
+    Samples are nodal with ``r_i=i*dr``. The unknown region includes ``r=0``
+    and excludes the outer radial and both vertical boundaries. Integrating
+    the radial flux over the half control volume at the axis gives the regular
+    coefficient ``4*a_(1/2)/dr^2``.
+    """
+
+    rhs_field = np.asarray(source, dtype=float)
+    scale = np.maximum(np.asarray(coefficient, dtype=float), coefficient_floor)
+    if rhs_field.ndim != 2 or min(rhs_field.shape) < 5:
+        raise ValueError(
+            "axisymmetric source must be a 2D (r,z) grid with at least five cells per axis"
+        )
+    if scale.shape != rhs_field.shape or np.any(~np.isfinite(rhs_field)) or np.any(~np.isfinite(scale)):
+        raise ValueError("source and coefficient must be finite arrays with matching shapes")
+    dr, dz = _spacing(spacing, 2)
+    boundary_field = _boundary_array(
+        boundary,
+        rhs_field.shape,
+        coordinate_system="axisymmetric_cylindrical",
+    )
+    radial_count, vertical_count = rhs_field.shape
+    unknown_shape = (radial_count - 1, vertical_count - 2)
+    unknown_count = int(np.prod(unknown_shape))
+    rows: list[int] = []
+    columns: list[int] = []
+    entries: list[float] = []
+    right_hand_side = np.empty(unknown_count, dtype=float)
+
+    def unknown_index(radial_index: int, vertical_index: int) -> int:
+        return int(
+            np.ravel_multi_index(
+                (radial_index, vertical_index - 1), unknown_shape
+            )
+        )
+
+    for radial_index in range(radial_count - 1):
+        radius = radial_index * dr
+        for vertical_index in range(1, vertical_count - 1):
+            row = unknown_index(radial_index, vertical_index)
+            right_hand_side[row] = -rhs_field[radial_index, vertical_index]
+            diagonal = 0.0
+            center_scale = float(scale[radial_index, vertical_index])
+
+            plus_face = _harmonic_face(
+                center_scale, float(scale[radial_index + 1, vertical_index])
+            )
+            if radial_index == 0:
+                plus_conductance = 4.0 * plus_face / dr**2
+            else:
+                plus_conductance = (
+                    (radius + 0.5 * dr) / radius * plus_face / dr**2
+                )
+            diagonal += plus_conductance
+            if radial_index + 1 < radial_count - 1:
+                rows.append(row)
+                columns.append(unknown_index(radial_index + 1, vertical_index))
+                entries.append(-plus_conductance)
+            else:
+                right_hand_side[row] += (
+                    plus_conductance
+                    * boundary_field[radial_index + 1, vertical_index]
+                )
+
+            if radial_index > 0:
+                minus_face = _harmonic_face(
+                    center_scale, float(scale[radial_index - 1, vertical_index])
+                )
+                minus_conductance = (
+                    (radius - 0.5 * dr) / radius * minus_face / dr**2
+                )
+                diagonal += minus_conductance
+                rows.append(row)
+                columns.append(unknown_index(radial_index - 1, vertical_index))
+                entries.append(-minus_conductance)
+
+            for direction in (-1, 1):
+                neighbor_vertical = vertical_index + direction
+                face_scale = _harmonic_face(
+                    center_scale,
+                    float(scale[radial_index, neighbor_vertical]),
+                )
+                conductance = face_scale / dz**2
+                diagonal += conductance
+                if 0 < neighbor_vertical < vertical_count - 1:
+                    rows.append(row)
+                    columns.append(
+                        unknown_index(radial_index, neighbor_vertical)
+                    )
+                    entries.append(-conductance)
+                else:
+                    right_hand_side[row] += (
+                        conductance
+                        * boundary_field[radial_index, neighbor_vertical]
+                    )
+
+            rows.append(row)
+            columns.append(row)
+            entries.append(diagonal)
+
+    matrix = sparse.csr_matrix(
+        (entries, (rows, columns)), shape=(unknown_count, unknown_count)
+    )
+    interior = spsolve(matrix, right_hand_side)
+    if np.any(~np.isfinite(interior)):
+        raise RuntimeError("axisymmetric elliptic solve returned non-finite values")
+    result = boundary_field.copy()
+    result[0:-1, 1:-1] = interior.reshape(unknown_shape)
     return result
 
 
@@ -341,8 +588,9 @@ def solve_variable_coefficient_dirichlet(
     boundary: float | Array = 0.0,
     *,
     coefficient_floor: float = 1e-8,
+    coordinate_system: str | None = None,
 ) -> Array:
-    """Solve ``div(coefficient grad(phi)) = source`` in two or three dimensions."""
+    """Solve ``div(coefficient grad(phi)) = source`` on a supported grid."""
 
     rhs_field = np.asarray(source, dtype=float)
     scale = np.asarray(coefficient, dtype=float)
@@ -352,6 +600,16 @@ def solve_variable_coefficient_dirichlet(
         raise ValueError("source and coefficient must be finite arrays with matching shapes")
     if not math.isfinite(coefficient_floor) or coefficient_floor <= 0:
         raise ValueError("coefficient_floor must be finite and positive")
+    if coordinate_system == "axisymmetric_cylindrical":
+        return _solve_axisymmetric_variable_coefficient_dirichlet(
+            rhs_field,
+            scale,
+            spacing,
+            boundary,
+            coefficient_floor=coefficient_floor,
+        )
+    if coordinate_system not in {None, "cartesian_2d", "cartesian_3d"}:
+        raise ValueError(f"unsupported coordinate system: {coordinate_system}")
     steps = _spacing(spacing, rhs_field.ndim)
     scale = np.maximum(scale, coefficient_floor)
     boundary_field = _boundary_array(boundary, rhs_field.shape)
@@ -412,11 +670,88 @@ def _finite_volume_divergence_gradient(
     spacing: Sequence[float],
     *,
     coefficient_floor: float,
+    coordinate_system: str | None = None,
 ) -> tuple[Array, Array]:
     """Apply the solver stencil and return its local absolute flux scale."""
 
     values = np.asarray(field, dtype=float)
     scale = np.maximum(np.asarray(coefficient, dtype=float), coefficient_floor)
+    if coordinate_system == "axisymmetric_cylindrical":
+        if values.ndim != 2 or scale.shape != values.shape:
+            raise ValueError(
+                "axisymmetric operator requires matching 2D (r,z) fields"
+            )
+        dr, dz = _spacing(spacing, 2)
+        result = np.zeros_like(values)
+        flux_scale = np.zeros_like(values)
+        radial_count, vertical_count = values.shape
+        for radial_index in range(radial_count - 1):
+            radius = radial_index * dr
+            for vertical_index in range(1, vertical_count - 1):
+                center = float(values[radial_index, vertical_index])
+                center_scale = float(scale[radial_index, vertical_index])
+                plus_face = _harmonic_face(
+                    center_scale, float(scale[radial_index + 1, vertical_index])
+                )
+                if radial_index == 0:
+                    plus_flux = (
+                        4.0
+                        * plus_face
+                        * (values[1, vertical_index] - center)
+                        / dr**2
+                    )
+                    radial_value = plus_flux
+                    radial_flux_scale = abs(float(plus_flux))
+                else:
+                    plus_flux = (
+                        (radius + 0.5 * dr)
+                        / radius
+                        * plus_face
+                        * (values[radial_index + 1, vertical_index] - center)
+                        / dr**2
+                    )
+                    minus_face = _harmonic_face(
+                        center_scale,
+                        float(scale[radial_index - 1, vertical_index]),
+                    )
+                    minus_flux = (
+                        (radius - 0.5 * dr)
+                        / radius
+                        * minus_face
+                        * (center - values[radial_index - 1, vertical_index])
+                        / dr**2
+                    )
+                    radial_value = plus_flux - minus_flux
+                    radial_flux_scale = abs(float(plus_flux)) + abs(
+                        float(minus_flux)
+                    )
+                vertical_plus_face = _harmonic_face(
+                    center_scale, float(scale[radial_index, vertical_index + 1])
+                )
+                vertical_minus_face = _harmonic_face(
+                    center_scale, float(scale[radial_index, vertical_index - 1])
+                )
+                vertical_plus_flux = (
+                    vertical_plus_face
+                    * (values[radial_index, vertical_index + 1] - center)
+                    / dz**2
+                )
+                vertical_minus_flux = (
+                    vertical_minus_face
+                    * (center - values[radial_index, vertical_index - 1])
+                    / dz**2
+                )
+                result[radial_index, vertical_index] = (
+                    radial_value + vertical_plus_flux - vertical_minus_flux
+                )
+                flux_scale[radial_index, vertical_index] = (
+                    radial_flux_scale
+                    + abs(float(vertical_plus_flux))
+                    + abs(float(vertical_minus_flux))
+                )
+        return result, flux_scale
+    if coordinate_system not in {None, "cartesian_2d", "cartesian_3d"}:
+        raise ValueError(f"unsupported coordinate system: {coordinate_system}")
     result = np.zeros_like(values)
     flux_scale = np.zeros_like(values)
     interior = tuple(slice(1, -1) for _ in values.shape)
@@ -448,9 +783,10 @@ def _equation_residuals(
     shape: tuple[int, ...],
     *,
     coefficient_floor: float,
+    coordinate_system: str,
 ) -> dict[str, float]:
     residuals: dict[str, float] = {}
-    interior = tuple(slice(1, -1) for _ in shape)
+    interior = _solution_region(coordinate_system, shape)
     for equation in equations:
         target, coefficient_expression = _elliptic_lhs(equation["lhs"])
         coefficient = _scalar_array(
@@ -459,6 +795,7 @@ def _equation_residuals(
                 fields=fields,
                 parameters=parameters,
                 spacing=spacing,
+                coordinate_system=coordinate_system,
             ),
             shape,
             f"equation {equation['id']} coefficient",
@@ -468,10 +805,15 @@ def _equation_residuals(
             coefficient,
             spacing,
             coefficient_floor=coefficient_floor,
+            coordinate_system=coordinate_system,
         )
         right = _scalar_array(
             evaluate_field_expression(
-                equation["rhs"], fields=fields, parameters=parameters, spacing=spacing
+                equation["rhs"],
+                fields=fields,
+                parameters=parameters,
+                spacing=spacing,
+                coordinate_system=coordinate_system,
             ),
             shape,
             f"equation {equation['id']} rhs",
@@ -498,6 +840,7 @@ def _solve_nonlinear_root_method(
     residual_tolerance: float,
     maximum_iterations: int,
     solver: Mapping[str, Any],
+    coordinate_system: str,
     iteration_offset: int = 0,
 ) -> tuple[int, float, bool, list[dict[str, Any]], dict[str, Any]]:
     """Solve one nonlinear elliptic field through its discrete residual."""
@@ -506,8 +849,15 @@ def _solve_nonlinear_root_method(
         raise ValueError(f"{method} worker v1 requires exactly one equation")
     equation = equations[0]
     target, coefficient_expression = _elliptic_lhs(equation["lhs"])
-    interior = tuple(slice(1, -1) for _ in shape)
-    interior_shape = tuple(value - 2 for value in shape)
+    interior = _solution_region(coordinate_system, shape)
+    interior_shape = tuple(
+        (
+            shape[axis] - 1
+            if coordinate_system == "axisymmetric_cylindrical" and axis == 0
+            else shape[axis] - 2
+        )
+        for axis in range(len(shape))
+    )
     template = fields[target].copy()
     initial = fields[target][interior].copy()
     field_scale = float(np.sqrt(np.mean(np.square(initial))))
@@ -530,6 +880,7 @@ def _solve_nonlinear_root_method(
                 fields=fields,
                 parameters=parameters,
                 spacing=spacing,
+                coordinate_system=coordinate_system,
             ),
             shape,
             f"equation {equation['id']} coefficient",
@@ -539,10 +890,15 @@ def _solve_nonlinear_root_method(
             coefficient,
             spacing,
             coefficient_floor=coefficient_floor,
+            coordinate_system=coordinate_system,
         )
         right = _scalar_array(
             evaluate_field_expression(
-                equation["rhs"], fields=fields, parameters=parameters, spacing=spacing
+                equation["rhs"],
+                fields=fields,
+                parameters=parameters,
+                spacing=spacing,
+                coordinate_system=coordinate_system,
             ),
             shape,
             f"equation {equation['id']} rhs",
@@ -564,6 +920,7 @@ def _solve_nonlinear_root_method(
             spacing,
             shape,
             coefficient_floor=coefficient_floor,
+            coordinate_system=coordinate_system,
         )
         history.append(
             {
@@ -614,6 +971,7 @@ def _solve_nonlinear_root_method(
         spacing,
         shape,
         coefficient_floor=coefficient_floor,
+        coordinate_system=coordinate_system,
     )
     maximum_update = (
         float(history[-1]["maximum_relative_update"]) if history else math.inf
@@ -665,6 +1023,7 @@ def _run_picard_steps(
     relative_tolerance: float,
     residual_tolerance: float,
     stop_when_converged: bool,
+    coordinate_system: str,
     iteration_offset: int = 0,
 ) -> tuple[int, float, bool, list[dict[str, Any]]]:
     history: list[dict[str, Any]] = []
@@ -680,6 +1039,7 @@ def _run_picard_steps(
                     fields=fields,
                     parameters=parameters,
                     spacing=spacing,
+                    coordinate_system=coordinate_system,
                 ),
                 shape,
                 f"equation {equation['id']} rhs",
@@ -690,6 +1050,7 @@ def _run_picard_steps(
                     fields=fields,
                     parameters=parameters,
                     spacing=spacing,
+                    coordinate_system=coordinate_system,
                 ),
                 shape,
                 f"equation {equation['id']} coefficient",
@@ -702,6 +1063,7 @@ def _run_picard_steps(
                 spacing,
                 boundaries.get(target, default_boundary),
                 coefficient_floor=coefficient_floor,
+                coordinate_system=coordinate_system,
             )
             previous = fields[target]
             updated = damping * solved + (1.0 - damping) * previous
@@ -714,6 +1076,7 @@ def _run_picard_steps(
             spacing,
             shape,
             coefficient_floor=coefficient_floor,
+            coordinate_system=coordinate_system,
         )
         history.append(
             {
@@ -747,15 +1110,29 @@ def solve_field_manifest(
     spacing: float | Sequence[float],
     *,
     boundary_values: Mapping[str, float | Array] | None = None,
+    grid_geometry: Mapping[str, Any] | None = None,
 ) -> GenericFieldSolution:
     """Execute a validated ``sigma-field-model/1`` manifest on supplied fields."""
 
     dimensions = int(manifest.get("geometry", {}).get("dimensions", 0))
     if dimensions not in {2, 3}:
-        raise ValueError("generic worker supports Cartesian dimensions=2 or dimensions=3")
+        raise ValueError("generic worker supports dimensions=2 or dimensions=3")
     coordinate_system = manifest.get("geometry", {}).get("coordinateSystem")
-    if coordinate_system not in {"cartesian_2d", "cartesian_3d"}:
-        raise ValueError("generic worker v1 supports cartesian_2d and cartesian_3d")
+    if coordinate_system not in {
+        "cartesian_2d",
+        "cartesian_3d",
+        "axisymmetric_cylindrical",
+    }:
+        raise ValueError(
+            "generic worker supports cartesian_2d, cartesian_3d, and axisymmetric_cylindrical"
+        )
+    if coordinate_system == "axisymmetric_cylindrical" and dimensions != 2:
+        raise ValueError("axisymmetric_cylindrical requires dimensions=2")
+    axisymmetric_metadata = (
+        _axisymmetric_grid_metadata(grid_geometry)
+        if coordinate_system == "axisymmetric_cylindrical"
+        else {}
+    )
     steps = _spacing(spacing, dimensions)
     fields: dict[str, Array] = {}
     shape: tuple[int, ...] | None = None
@@ -790,7 +1167,11 @@ def solve_field_manifest(
         if boundary_type not in {"dirichlet", "isolated"}:
             raise ValueError(f"worker v1 cannot execute boundary type {boundary_type!r} for {name}")
         default = definition.get("boundary", {}).get("value", 0.0)
-        fields[name] = _boundary_array(boundaries.get(name, default), shape)
+        fields[name] = _boundary_array(
+            boundaries.get(name, default),
+            shape,
+            coordinate_system=coordinate_system,
+        )
 
     equations = list(manifest.get("equations", []))
     targets = [_elliptic_lhs(equation["lhs"])[0] for equation in equations]
@@ -807,6 +1188,10 @@ def solve_field_manifest(
     )
     nonlocal_metadata: dict[str, Any] = {}
     if uses_convolution:
+        if coordinate_system == "axisymmetric_cylindrical":
+            raise ValueError(
+                "axisymmetric convolution requires an explicit cylindrical kernel operator; Cartesian linear_same semantics are not valid"
+            )
         required_semantics = {
             "family": "nonlocal_elliptic",
             "nonlocalBoundary": "zero_padded",
@@ -870,7 +1255,11 @@ def solve_field_manifest(
             target, _coefficient_expression = _elliptic_lhs(equation["lhs"])
             source = _scalar_array(
                 evaluate_field_expression(
-                    equation["rhs"], fields=fields, parameters=parameters, spacing=steps
+                    equation["rhs"],
+                    fields=fields,
+                    parameters=parameters,
+                    spacing=steps,
+                    coordinate_system=coordinate_system,
                 ),
                 shape,
                 f"equation {equation['id']} rhs",
@@ -883,6 +1272,7 @@ def solve_field_manifest(
                 steps,
                 boundaries.get(target, default_boundary),
                 coefficient_floor=coefficient_floor,
+                coordinate_system=coordinate_system,
             )
     root_metadata: dict[str, Any] = {}
     if nonlinear_method == "picard":
@@ -900,6 +1290,7 @@ def solve_field_manifest(
             relative_tolerance=tolerance,
             residual_tolerance=residual_tolerance,
             stop_when_converged=True,
+            coordinate_system=coordinate_system,
         )
     else:
         warmup_history: list[dict[str, Any]] = []
@@ -919,6 +1310,7 @@ def solve_field_manifest(
                     relative_tolerance=tolerance,
                     residual_tolerance=residual_tolerance,
                     stop_when_converged=False,
+                    coordinate_system=coordinate_system,
                 )
             )
         root_iterations, maximum_update, converged, root_history, root_metadata = (
@@ -934,6 +1326,7 @@ def solve_field_manifest(
                 residual_tolerance=residual_tolerance,
                 maximum_iterations=maximum_iterations - picard_warmup_iterations,
                 solver=solver,
+                coordinate_system=coordinate_system,
                 iteration_offset=picard_warmup_iterations,
             )
         )
@@ -947,11 +1340,16 @@ def solve_field_manifest(
         steps,
         shape,
         coefficient_floor=coefficient_floor,
+        coordinate_system=coordinate_system,
     )
 
     observables = {
         str(observable["id"]): evaluate_field_expression(
-            observable["expression"], fields=fields, parameters=parameters, spacing=steps
+            observable["expression"],
+            fields=fields,
+            parameters=parameters,
+            spacing=steps,
+            coordinate_system=coordinate_system,
         )
         for observable in manifest.get("observables", [])
     }
@@ -973,6 +1371,11 @@ def solve_field_manifest(
             ),
             "dimensions": dimensions,
             "coordinate_system": coordinate_system,
+            **(
+                {"axisymmetric_cylindrical": axisymmetric_metadata}
+                if axisymmetric_metadata
+                else {}
+            ),
             "shape": shape,
             "spacing": steps,
             "boundary_approximation": "isolated manifests use the supplied or zero far-field Dirichlet boundary",

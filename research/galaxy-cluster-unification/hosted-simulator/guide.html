@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.24</p>
+          <p class="eyebrow">Researcher guide &middot; v0.25</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -59,6 +59,7 @@
               <tr><td>Frozen resolved velocity evidence</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Separate generator fidelity, formula transport, and observed-velocity accuracy on eight systems.</td></tr>
               <tr><td>Resolved cluster evidence registry</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Four calibrated baryonic maps, two lens-model methods per cluster, raw-catalog readiness, provenance hashes, and explicit blockers without mixing scientific roles.</td></tr>
               <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
+              <tr><td>Axisymmetric cylindrical scalar fields</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Finite-volume elliptic equations run on a declared <code>(r,z)</code> grid with a zero-radial-flux symmetry axis; manufactured Bessel solutions verify second-order convergence.</td></tr>
               <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
               <tr><td>Coupled photon and matter potentials</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Multiple solved fields can interact, while separately typed observables expose different predictions for light and massive tracers without a theory-name branch.</td></tr>
               <tr><td>Inverse baryon-to-response discovery</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Which one shared compact response kernel is compatible with labeled baryonic maps and model-derived target maps, including uncertainty, five selectable null families, and non-identifiability.</td></tr>
@@ -531,6 +532,57 @@ credible_interval_ready</code></pre></div>
             <div class="meaning-strip"><strong>What this can establish:</strong> one immutable, gravity-independent set of baryonic image weights can follow the same selected 2D/3D realizations into Newtonian, MOND-like, Refracted Gravity, Sigma Gravity, photon, or coupled-field batches. Changing a velocity target changes only the later observation job, not these weights.</div>
             <div class="meaning-strip"><strong>What the real result teaches:</strong> the two-draw DDO101 commissioning example collapses to one effective draw. The software correctly reports the failure, but the band is not scientifically usable. More prior draws, released uncertainty and covariance maps, PSF/beam modeling, and adaptive posterior sampling are needed. Even then, surface images alone cannot identify vertical structure.</div>
           </article>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">11</span><div><h3>Solve a disk-and-bulge field in cylindrical geometry</h3><p>The local reference worker now executes stationary scalar elliptic equations directly on an axisymmetric <code>(r,z)</code> grid. The first array axis starts at <code>r=0</code>; it is a symmetry axis with zero radial flux, not a zero-potential wall.</p></div></div>
+            <div class="code-pair">
+              <div><p class="code-label">Confirmed model and immutable array-bundle fragments</p><pre><code>{
+  "model": {
+    "geometry": {
+      "coordinateSystem": "axisymmetric_cylindrical",
+      "dimensions": 2,
+      "domain": {"lengthUnit": "m"}
+    },
+    "equations": [{
+      "lhs": {"op": "laplacian", "args": [{"field": "Phi"}]},
+      "rhs": {"op": "multiply", "args": [
+        {"const": 12.566370614359172},
+        {"parameter": "G"},
+        {"field": "rho_b"}
+      ]}
+    }]
+  },
+  "inputBundle": {
+    "geometry": {
+      "coordinateSystem": "axisymmetric_cylindrical",
+      "dimensions": 2,
+      "axisOrder": ["r", "z"],
+      "origin": [0, -1.5428e21],
+      "spacing": [3.0857e19, 3.0857e19]
+    },
+    "arrays": [{"key": "baryon_density", "shape": [65, 129]}]
+  }
+}</code></pre></div>
+              <div><p class="code-label">scientific_result.json, shortened</p><pre><code>{
+  "state": "succeeded",
+  "converged": true,
+  "equationResiduals": {"poisson": 3.78e-15},
+  "numericalMetadata": {
+    "coordinate_system": "axisymmetric_cylindrical",
+    "axisymmetric_cylindrical": {
+      "axis_order": ["r", "z"],
+      "radial_axis_index": 0,
+      "vertical_axis_index": 1,
+      "axis_boundary": "zero_radial_flux_regularity"
+    }
+  },
+  "fields": [{"name": "Phi", "artifact": "fields.npz"}],
+  "observables": [{"name": "acceleration", "artifact": "observables.npz"}]
+}</code></pre></div>
+            </div>
+            <div class="meaning-strip"><strong>Verified numerical behavior:</strong> a known cylindrical Bessel solution has relative errors <code>1.260e-3</code>, <code>3.149e-4</code>, and <code>7.872e-5</code> on 25, 49, and 97 cells&mdash;approximately a fourfold error reduction whenever the spacing halves. A separate spatially varying coefficient test recovers its discrete answer without a theory-specific branch.</div>
+            <div class="meaning-strip"><strong>What this can do:</strong> efficiently compare how a flattened disk, a thicker disk, and an axisymmetric bulge change a submitted scalar field law. <strong>What it cannot do yet:</strong> represent bars, spiral arms, lopsided clusters, or other non-axisymmetric structure; apply a Cartesian convolution as if it were cylindrical; score an <code>(r,z)</code> result with the current rotation/lensing adapters; or execute heavy jobs on public Vercel. Production submissions still return <code>production_worker_not_connected</code>.</div>
+          </article>
         </div>
       </section>
 
@@ -556,7 +608,7 @@ credible_interval_ready</code></pre></div>
             <article><span>1</span><div><h3>Connect production compute</h3><p>Queue, isolated Python workers, durable metadata, object storage, authentication, quotas, cancellation, and signed artifacts.</p></div></article>
             <article><span>2</span><div><h3>Complete the resolved evidence registry</h3><p>The first four-cluster slice is live with baryon maps, lens-model comparators, raw-catalog readiness, hashes, and blockers. Add untouched clusters, multiband stellar mass, intracluster light, calibrated gas posteriors, raw positional errors, weak lensing, PSF/WCS, licenses, and redistribution rules.</p></div></article>
             <article><span>3</span><div><h3>Complete galaxy posterior reconstruction</h3><p>The first gravity-independent gas/stellar surface-density likelihood, hashed weights, effective-sample diagnostics, and weighted prediction bands are built. Next replace commissioning fractional errors with released uncertainty/covariance products, add PSF/beam, cube, dust, bulge, distance, and vertical likelihoods, then use adaptive sampling when weights collapse.</p></div></article>
-            <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>Derive a small covariant or Newtonian-limit law with scalar, vector, tensor, nonlocal, screening, photon, and matter terms, explicit units and boundaries, and a Solar-System limit.</p></div></article>
+            <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>The axisymmetric scalar-field base is now verified. Next derive a small covariant or Newtonian-limit law with scalar, vector, tensor, cylindrical-nonlocal, screening, photon, and matter terms, explicit units and boundaries, a Solar-System limit, and observation adapters that turn solved fields into rotation and lensing predictions.</p></div></article>
             <article><span>5</span><div><h3>Use halo maps only for discovery</h3><p>The five-family synthetic control suite is built. Next, register multiple teams' halo posteriors and complete baryonic ensembles, then measure which inferred features survive lens method, baryon uncertainty, central-halo, local-light, and conservation controls.</p></div></article>
             <article><span>6</span><div><h3>Compress the inverse pattern</h3><p>Replace a many-cell discovered kernel with a small analytic response law tied to baryonic density, gradients, curvature, topology, or scale. Reject laws whose apparent success comes from per-system flexibility.</p></div></article>
             <article><span>7</span><div><h3>Freeze a forward law</h3><p>Lock constants on a development set, remove every target halo map, and predict held-out raw lensing and galaxy velocities from baryons alone.</p></div></article>

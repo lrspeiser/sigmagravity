@@ -1488,6 +1488,17 @@ velocity target. These are explicit prior ensembles, not likelihood-derived
 posteriors. See
 [`docs/BARYONIC_UNCERTAINTY_ENSEMBLE_MILESTONE.md`](docs/BARYONIC_UNCERTAINTY_ENSEMBLE_MILESTONE.md).
 
+Version 0.25 adds a formula-independent axisymmetric cylindrical `(r,z)`
+finite-volume worker for stationary scalar elliptic laws. The symmetry axis is
+handled by its regular zero-radial-flux limit, manufactured Bessel fields show
+second-order convergence, variable coefficients execute through the same
+expression path, and the immutable job identity binds axis order and origin.
+This makes disk-versus-bulge field tests materially more faithful, but does not
+yet provide cylindrical nonlocal kernels or axisymmetric rotation/lensing
+observation adapters. See
+[`docs/AXISYMMETRIC_FIELD_WORKER_MILESTONE.md`](docs/AXISYMMETRIC_FIELD_WORKER_MILESTONE.md)
+and [`docs/FULL_PLATFORM_COMPLETION_AUDIT.md`](docs/FULL_PLATFORM_COMPLETION_AUDIT.md).
+
 Version 0.24 adds the first gravity-independent baryonic image likelihood.
 Gas and stellar surface-density uncertainties can weight the generated surface
 draws before any gravity model or velocity/lensing target is used. Those

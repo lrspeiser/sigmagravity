@@ -35,10 +35,12 @@ assert.match(guide, /prior_prediction_spread_not_measurement_posterior/);
 assert.match(guide, /Condition baryonic draws without looking at gravity/);
 assert.match(guide, /degenerate_importance_weights/);
 assert.match(guide, /ensemble_prediction_quantiles\.csv/);
+assert.match(guide, /Solve a disk-and-bulge field in cylindrical geometry/);
+assert.match(guide, /zero_radial_flux_regularity/);
 
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
-assert.equal(health.version, "0.24.0-preview");
+assert.equal(health.version, "0.25.0-preview");
 assert.equal(health.capabilities.researcherGuide, "available");
 assert.equal(health.capabilities.localNonlocalConvolution, "available_in_dev_server");
 assert.equal(health.capabilities.localInverseHaloResponseDiscovery, "available_in_dev_server");
@@ -47,6 +49,7 @@ assert.equal(health.capabilities.localBaryonicUncertaintyEnsembles, "available_i
 assert.equal(health.capabilities.localBaryonicEnsemblePropagation, "available_in_dev_server");
 assert.equal(health.capabilities.localBaryonicImageConditioning, "available_in_dev_server");
 assert.equal(health.capabilities.resolvedClusterEvidenceRegistry, "available");
+assert.equal(health.capabilities.localAxisymmetricCylindricalFields, "available_in_dev_server");
 const inverseSchema = await request("/schemas/inverse-response-job-submit-v1.schema.json");
 assert.equal(inverseSchema.properties.schemaVersion.const, "sigma-inverse-response-job-submit/1");
 const galaxySchema = await request("/schemas/galaxy-job-submit-v1.schema.json");

@@ -33,7 +33,7 @@ from .observation_adapters import evaluate_observation_targets
 
 Array = np.ndarray
 ENGINE_ID = "generic-divergence-field-worker"
-ENGINE_VERSION = "1.1.0-preview"
+ENGINE_VERSION = "1.2.0-preview"
 MODEL_HASH_KEYS = (
     "schemaVersion",
     "modelClass",
@@ -596,6 +596,7 @@ def execute_field_job(
             "dimensions": dimensions,
             "spacing": spacing_values,
             "origin": bundle_geometry.get("origin"),
+            "axisOrder": bundle_geometry.get("axisOrder"),
             "lengthUnit": model_geometry.get("domain", {}).get("lengthUnit"),
         },
         "boundaryFields": request.get("boundaryFields", {}),
@@ -623,6 +624,7 @@ def execute_field_job(
             source_fields,
             spacing_values,
             boundary_values=boundaries,
+            grid_geometry=bundle_geometry,
         )
         _current_memory, peak_memory = tracemalloc.get_traced_memory()
         wall_seconds = time.perf_counter() - wall_started

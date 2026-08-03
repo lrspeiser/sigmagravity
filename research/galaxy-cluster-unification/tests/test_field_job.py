@@ -278,6 +278,62 @@ def test_identical_job_replays_have_identical_scientific_hashes(tmp_path: Path):
     }.issubset(artifact_names)
 
 
+def test_axisymmetric_job_binds_coordinates_and_executes_end_to_end(tmp_path: Path):
+    cells = 33
+    axis = np.linspace(0.0, 1.0, cells)
+    spacing = float(axis[1] - axis[0])
+    radius, vertical = np.meshgrid(axis, axis, indexing="ij")
+    expected = (1.0 - radius**2) * np.sin(np.pi * vertical)
+    forcing = -4.0 * np.sin(np.pi * vertical) - np.pi**2 * expected
+    model = manufactured_manifest()
+    model["geometry"]["coordinateSystem"] = "axisymmetric_cylindrical"
+    confirm_manifest(model)
+    metadata = bundle_metadata(spacing)
+    metadata["geometry"].update(
+        {
+            "coordinateSystem": "axisymmetric_cylindrical",
+            "origin": [0.0, 0.0],
+            "axisOrder": ["r", "z"],
+            "referenceFrame": "manufactured_axisymmetric_cylinder",
+        }
+    )
+    bundle_path = tmp_path / "axisymmetric_bundle"
+    write_array_bundle(bundle_path, {"raw_forcing": forcing}, metadata)
+    output_path = tmp_path / "axisymmetric_run"
+    run = execute_field_job(
+        model,
+        bundle_path,
+        {
+            "schemaVersion": "sigma-field-job-request/1",
+            "requestedObservables": ["gradient"],
+            "seed": 0,
+        },
+        output_path,
+    )
+
+    job = json.loads((output_path / "job.json").read_text(encoding="utf-8"))
+    result = json.loads(
+        (output_path / "scientific_result.json").read_text(encoding="utf-8")
+    )
+    with np.load(output_path / "fields.npz", allow_pickle=False) as archive:
+        relative_error = np.linalg.norm(archive["u"] - expected) / np.linalg.norm(
+            expected
+        )
+    with np.load(output_path / "observables.npz", allow_pickle=False) as archive:
+        assert np.array_equal(archive["gradient__axis0"][0, :], np.zeros(cells))
+    assert run["state"] == "succeeded"
+    assert relative_error < 0.003
+    assert job["geometry"]["axisOrder"] == ["r", "z"]
+    assert job["geometry"]["origin"] == [0.0, 0.0]
+    assert job["worker"]["version"] == "1.2.0-preview"
+    assert result["numericalMetadata"]["coordinate_system"] == (
+        "axisymmetric_cylindrical"
+    )
+    assert result["numericalMetadata"]["axisymmetric_cylindrical"][
+        "axis_boundary"
+    ] == "zero_radial_flux_regularity"
+
+
 def test_published_two_potential_model_survives_the_immutable_job_path(tmp_path: Path):
     model_path = (
         ROOT / "hosted-simulator" / "examples" / "models" / "two-potential.json"

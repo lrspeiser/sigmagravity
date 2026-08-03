@@ -72,6 +72,49 @@ test("field preflight binds a generic model to content-hashed 3D data", () => {
   ]);
 });
 
+test("field preflight binds the exact axisymmetric radial convention", () => {
+  const request = payload();
+  request.model.geometry.coordinateSystem = "axisymmetric_cylindrical";
+  request.model.geometry.dimensions = 2;
+  bindConfirmation(request.model);
+  request.inputBundle.geometry.coordinateSystem = "axisymmetric_cylindrical";
+  request.inputBundle.geometry.dimensions = 2;
+  request.inputBundle.geometry.spacing = [1, 1];
+  request.inputBundle.geometry.origin = [0, -16];
+  request.inputBundle.geometry.axisOrder = ["r", "z"];
+  request.inputBundle.arrays[0].shape = [33, 33];
+  request.inputBundle.arrays[0].elementCount = 33 ** 2;
+  const { bundleSha256: _oldHash, ...core } = request.inputBundle;
+  request.inputBundle = { ...core, bundleSha256: sha256(core) };
+
+  const result = prepareFieldJob(request);
+  assert.equal(result.valid, true);
+  assert.deepEqual(result.geometry.axisOrder, ["r", "z"]);
+  assert.deepEqual(result.geometry.origin, [0, -16]);
+});
+
+test("axisymmetric preflight rejects a fabricated wall or swapped axes", () => {
+  const request = payload();
+  request.model.geometry.coordinateSystem = "axisymmetric_cylindrical";
+  request.model.geometry.dimensions = 2;
+  bindConfirmation(request.model);
+  request.inputBundle.geometry.coordinateSystem = "axisymmetric_cylindrical";
+  request.inputBundle.geometry.dimensions = 2;
+  request.inputBundle.geometry.axisOrder = ["z", "r"];
+  request.inputBundle.geometry.origin = [0, -16];
+  request.inputBundle.arrays[0].shape = [33, 33];
+  request.inputBundle.arrays[0].elementCount = 33 ** 2;
+  let { bundleSha256: _oldHash, ...core } = request.inputBundle;
+  request.inputBundle = { ...core, bundleSha256: sha256(core) };
+  assert.throws(() => prepareFieldJob(request), /axisOrder/);
+
+  request.inputBundle.geometry.axisOrder = ["r", "z"];
+  request.inputBundle.geometry.origin = [1, -16];
+  ({ bundleSha256: _oldHash, ...core } = request.inputBundle);
+  request.inputBundle = { ...core, bundleSha256: sha256(core) };
+  assert.throws(() => prepareFieldJob(request), /origin/);
+});
+
 test("field preflight refuses a structurally valid but unconfirmed model", () => {
   const request = payload();
   request.model.source.confirmedCanonical = false;

@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+from scipy.special import j0, jn_zeros
 
 from voidscreen.generic_field_worker import (
     _finite_volume_divergence_gradient,
@@ -213,10 +214,157 @@ def test_zero_source_harmonic_boundary_has_a_well_scaled_residual():
     assert np.allclose(solution.fields["u"], expected, rtol=0.0, atol=1e-12)
 
 
-def test_worker_rejects_unsupported_coordinate_system():
+def _axisymmetric_bessel_case(cells: int):
     manifest = manufactured_manifest(2)
     manifest["geometry"]["coordinateSystem"] = "axisymmetric_cylindrical"
-    with pytest.raises(ValueError, match="cartesian_2d"):
+    axis = np.linspace(0.0, 1.0, cells)
+    spacing = float(axis[1] - axis[0])
+    radius, vertical = np.meshgrid(axis, axis, indexing="ij")
+    radial_mode = float(jn_zeros(0, 1)[0])
+    expected = j0(radial_mode * radius) * np.sin(np.pi * vertical)
+    forcing = -(radial_mode**2 + np.pi**2) * expected
+    solution = solve_field_manifest(
+        manifest,
+        {"forcing": forcing},
+        spacing,
+        grid_geometry={"axisOrder": ["r", "z"], "origin": [0.0, 0.0]},
+    )
+    error = np.linalg.norm(solution.fields["u"] - expected) / np.linalg.norm(expected)
+    return solution, error
+
+
+def test_axisymmetric_bessel_solution_has_a_regular_axis() -> None:
+    solution, relative_error = _axisymmetric_bessel_case(49)
+    radial_acceleration, _vertical_acceleration = solution.observables["gradient"]
+    assert solution.converged
+    assert relative_error < 0.002
+    assert max(solution.equation_residuals.values()) <= 1e-10
+    assert np.array_equal(radial_acceleration[0, :], np.zeros(49))
+    assert solution.metadata["axisymmetric_cylindrical"] == {
+        "axis_order": ["r", "z"],
+        "origin": [0.0, 0.0],
+        "radial_axis_index": 0,
+        "vertical_axis_index": 1,
+        "axis_boundary": "zero_radial_flux_regularity",
+        "outer_boundaries": "declared_dirichlet_or_isolated_approximation",
+    }
+
+
+def test_axisymmetric_bessel_solution_is_second_order_under_refinement() -> None:
+    _coarse_solution, coarse_error = _axisymmetric_bessel_case(25)
+    _fine_solution, fine_error = _axisymmetric_bessel_case(49)
+    assert coarse_error / fine_error > 3.5
+
+
+def test_axisymmetric_spatially_variable_coefficient_recovers_discrete_solution() -> None:
+    cells = 33
+    axis = np.linspace(0.0, 1.0, cells)
+    spacing = float(axis[1] - axis[0])
+    radius, vertical = np.meshgrid(axis, axis, indexing="ij")
+    radial_mode = float(jn_zeros(0, 1)[0])
+    expected = j0(radial_mode * radius) * np.sin(np.pi * vertical)
+    coefficient = 1.0 + 0.5 * radius**2 + 0.2 * np.cos(np.pi * vertical)
+    forcing, _flux_scale = _finite_volume_divergence_gradient(
+        expected,
+        coefficient,
+        [spacing, spacing],
+        coefficient_floor=1e-8,
+        coordinate_system="axisymmetric_cylindrical",
+    )
+    manifest = manufactured_manifest(2)
+    manifest["geometry"]["coordinateSystem"] = "axisymmetric_cylindrical"
+    manifest["fields"]["permittivity"] = {
+        "rank": "scalar",
+        "role": "source",
+        "unit": "1",
+        "datasetKey": "permittivity",
+    }
+    manifest["dataRequirements"].append(
+        {"key": "permittivity", "rank": "scalar", "unit": "1"}
+    )
+    manifest["equations"][0]["lhs"] = {
+        "op": "divergence",
+        "args": [
+            {
+                "op": "multiply",
+                "args": [
+                    {"field": "permittivity"},
+                    {"op": "gradient", "args": [{"field": "u"}]},
+                ],
+            }
+        ],
+    }
+    solution = solve_field_manifest(
+        manifest,
+        {"forcing": forcing, "permittivity": coefficient},
+        spacing,
+        grid_geometry={"axisOrder": ["r", "z"], "origin": [0.0, 0.0]},
+    )
+    relative_error = np.linalg.norm(solution.fields["u"] - expected) / np.linalg.norm(
+        expected
+    )
+    assert solution.converged
+    assert relative_error < 1e-11
+    assert max(solution.equation_residuals.values()) <= 1e-10
+
+
+@pytest.mark.parametrize(
+    "grid_geometry,match",
+    [
+        (None, "requires grid geometry"),
+        ({"axisOrder": ["z", "r"], "origin": [0.0, 0.0]}, "axisOrder"),
+        ({"axisOrder": ["r", "z"], "origin": [1.0, 0.0]}, "radial origin"),
+    ],
+)
+def test_axisymmetric_worker_rejects_ambiguous_grid_geometry(grid_geometry, match):
+    manifest = manufactured_manifest(2)
+    manifest["geometry"]["coordinateSystem"] = "axisymmetric_cylindrical"
+    with pytest.raises(ValueError, match=match):
+        solve_field_manifest(
+            manifest,
+            {"forcing": np.zeros((9, 9))},
+            1.0,
+            grid_geometry=grid_geometry,
+        )
+
+
+def test_axisymmetric_worker_rejects_cartesian_convolution_semantics() -> None:
+    manifest = manufactured_manifest(2)
+    manifest["geometry"]["coordinateSystem"] = "axisymmetric_cylindrical"
+    manifest["observables"].append(
+        {
+            "id": "invalid_cartesian_convolution",
+            "target": "diagnostic",
+            "rank": "scalar",
+            "unit": "1",
+            "expression": {
+                "op": "convolution",
+                "args": [{"field": "forcing"}, {"field": "forcing"}],
+            },
+        }
+    )
+    manifest["solver"].update(
+        {
+            "family": "nonlocal_elliptic",
+            "nonlocalBoundary": "zero_padded",
+            "convolutionMode": "linear_same",
+            "kernelOrigin": "centered_sample",
+            "convolutionMeasure": "physical_volume",
+        }
+    )
+    with pytest.raises(ValueError, match="explicit cylindrical kernel"):
+        solve_field_manifest(
+            manifest,
+            {"forcing": np.zeros((9, 9))},
+            1.0,
+            grid_geometry={"axisOrder": ["r", "z"], "origin": [0.0, 0.0]},
+        )
+
+
+def test_worker_rejects_unsupported_coordinate_system():
+    manifest = manufactured_manifest(2)
+    manifest["geometry"]["coordinateSystem"] = "spherical_4d"
+    with pytest.raises(ValueError, match="supports cartesian_2d"):
         solve_field_manifest(manifest, {"forcing": np.zeros((9, 9))}, 1.0)
 
 

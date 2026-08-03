@@ -44,5 +44,38 @@
         "redistributionAllowed": { "type": "boolean" }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "geometry": {
+            "properties": {
+              "coordinateSystem": { "const": "axisymmetric_cylindrical" }
+            },
+            "required": ["coordinateSystem"]
+          }
+        },
+        "required": ["geometry"]
+      },
+      "then": {
+        "properties": {
+          "geometry": {
+            "required": ["origin", "axisOrder"],
+            "properties": {
+              "dimensions": { "const": 2 },
+              "origin": {
+                "type": "array",
+                "prefixItems": [{ "const": 0 }, { "type": "number" }],
+                "items": false,
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "axisOrder": { "const": ["r", "z"] }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

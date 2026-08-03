@@ -84,6 +84,8 @@ for (const phrase of [
   "Condition baryonic draws without looking at gravity",
   "degenerate_importance_weights",
   "ensemble_prediction_quantiles.csv",
+  "Solve a disk-and-bulge field in cylindrical geometry",
+  "zero_radial_flux_regularity",
   "A genuinely useful result is a prediction, not a reconstruction",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);

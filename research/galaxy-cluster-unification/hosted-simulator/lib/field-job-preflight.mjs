@@ -55,6 +55,16 @@ export function prepareFieldJob(payload) {
   if (bundle.geometry?.coordinateSystem !== modelGeometry.coordinateSystem || bundle.geometry?.dimensions !== modelGeometry.dimensions) {
     throw new Error("model and inputBundle geometry disagree");
   }
+  if (modelGeometry.coordinateSystem === "axisymmetric_cylindrical") {
+    if (modelGeometry.dimensions !== 2) throw new Error("axisymmetric_cylindrical requires dimensions=2");
+    if (JSON.stringify(bundle.geometry?.axisOrder) !== JSON.stringify(["r", "z"])) {
+      throw new Error("axisymmetric_cylindrical requires inputBundle.geometry.axisOrder=['r','z']");
+    }
+    const origin = bundle.geometry?.origin;
+    if (!Array.isArray(origin) || origin.length !== 2 || !origin.every(Number.isFinite) || origin[0] !== 0) {
+      throw new Error("axisymmetric_cylindrical requires inputBundle.geometry.origin=[0,z0]");
+    }
+  }
   const requirements = new Map(payload.model.dataRequirements.map((item) => [item.key, item]));
   for (const [key, requirement] of requirements) {
     const record = records.get(key);
@@ -96,7 +106,13 @@ export function prepareFieldJob(payload) {
     schemaVersion: "sigma-field-job-preflight/1",
     modelSha256: validation.modelSha256,
     inputBundleSha256: bundle.bundleSha256,
-    geometry: { ...modelGeometry, spacing, shape: referenceShape },
+    geometry: {
+      ...modelGeometry,
+      spacing,
+      shape: referenceShape,
+      origin: bundle.geometry?.origin ?? null,
+      axisOrder: bundle.geometry?.axisOrder ?? null,
+    },
     boundaryFields: boundaries,
     requestedObservables,
     observationTargets,

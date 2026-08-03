@@ -19,6 +19,19 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.25 adds a real axisymmetric cylindrical scalar-field worker. A
+submitted stationary elliptic manifest can now run on an immutable `(r,z)`
+array bundle whose first axis begins at `r=0`. The symmetry axis uses the
+regular zero-radial-flux limit rather than a fabricated zero-potential wall.
+Manufactured Bessel solutions show second-order convergence, a spatially
+varying coefficient fixture uses the same theory-neutral path, and the full
+field-job acceptance binds axis order, origin, worker version, hashes and
+artifacts. Cylindrical convolution and axisymmetric rotation/lensing adapters
+remain unbuilt, and production heavy execution remains disconnected. See
+[`../docs/AXISYMMETRIC_FIELD_WORKER_MILESTONE.md`](../docs/AXISYMMETRIC_FIELD_WORKER_MILESTONE.md)
+and the requirement audit in
+[`../docs/FULL_PLATFORM_COMPLETION_AUDIT.md`](../docs/FULL_PLATFORM_COMPLETION_AUDIT.md).
+
 Version 0.24 adds gravity-independent baryonic image conditioning. Declared
 gas and stellar surface-density uncertainty maps can assign importance weights
 to generated surface draws without reading velocity, lensing, dark-matter, or
