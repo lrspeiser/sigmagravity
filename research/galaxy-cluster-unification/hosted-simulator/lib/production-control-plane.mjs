@@ -8,6 +8,7 @@ const IDENTIFIERS = {
   job: /^job_[0-9a-f]{24}$/,
   upload: /^upload_[0-9a-f]{24}$/,
   outbox: /^outbox_[0-9a-f]{24}$/,
+  credential: /^key_[0-9a-f]{24}$/,
 };
 const HASH = /^[0-9a-f]{64}$/;
 const TERMINAL = new Set(["succeeded", "failed", "cancelled"]);
@@ -116,11 +117,77 @@ function publicJob(row) {
     finishedAt: row.finished_at ? new Date(row.finished_at).toISOString() : null,
     error: parseJson(row.error),
     links: {
-      self: `/api/v1/${row.job_type === "field" ? "field-jobs" : `${row.job_type}-jobs`}/${row.job_id}`,
-      events: `/api/v1/${row.job_type === "field" ? "field-jobs" : `${row.job_type}-jobs`}/${row.job_id}/events`,
-      artifacts: `/api/v1/${row.job_type === "field" ? "field-jobs" : `${row.job_type}-jobs`}/${row.job_id}/artifacts`,
+      self: `/api/v1/jobs/${row.job_id}`,
+      events: `/api/v1/jobs/${row.job_id}/events`,
+      artifacts: `/api/v1/jobs/${row.job_id}/artifacts`,
+      cancel: `/api/v1/jobs/${row.job_id}/cancel`,
     },
   };
+}
+
+function publicModel(row) {
+  if (!row) return null;
+  return {
+    modelSha256: row.model_sha256,
+    projectId: row.project_id,
+    confirmedBy: row.confirmed_by,
+    confirmedAt: new Date(row.confirmed_at).toISOString(),
+    createdAt: new Date(row.created_at).toISOString(),
+    links: { self: `/api/v1/models/${row.model_sha256}` },
+  };
+}
+
+function publicUpload(row) {
+  if (!row) return null;
+  return {
+    id: row.upload_id,
+    projectId: row.project_id,
+    state: row.state,
+    bundleSha256: row.bundle_sha256,
+    archiveSha256: row.archive_sha256,
+    archiveBytes: Number(row.archive_bytes),
+    scientificRoles: parseJson(row.scientific_roles),
+    license: parseJson(row.license),
+    createdAt: new Date(row.created_at).toISOString(),
+    readyAt: row.ready_at ? new Date(row.ready_at).toISOString() : null,
+    links: {
+      self: `/api/v1/data-uploads/${row.upload_id}`,
+      content: `/api/v1/data-uploads/${row.upload_id}/content`,
+    },
+  };
+}
+
+async function appendAuditRecord(database, {
+  projectId,
+  credentialId = null,
+  action,
+  resourceType,
+  resourceId = null,
+  metadata = {},
+}) {
+  identifier(projectId, "project");
+  if (credentialId !== null) identifier(credentialId, "credential");
+  if (typeof action !== "string" || !/^[a-z][a-z0-9_.-]{0,79}$/.test(action)) {
+    throw new ControlPlaneError("invalid_audit", "audit action is invalid");
+  }
+  if (typeof resourceType !== "string" || !/^[a-z][a-z0-9_-]{0,39}$/.test(resourceType)) {
+    throw new ControlPlaneError("invalid_audit", "audit resource type is invalid");
+  }
+  if (resourceId !== null) boundedString(resourceId, "audit resource identifier", 1, 180);
+  jsonValue(metadata, "audit metadata");
+  const inserted = one(await database.query(
+    `INSERT INTO sigma_audit_events(
+       project_id, credential_id, action, resource_type, resource_id, metadata
+     )
+     SELECT $1, $2, $3, $4, $5, $6::jsonb
+      WHERE $2::text IS NULL OR EXISTS (
+        SELECT 1 FROM sigma_project_api_keys
+         WHERE project_id = $1 AND credential_id = $2
+      )
+     RETURNING audit_id`,
+    [projectId, credentialId, action, resourceType, resourceId, jsonParameter(metadata)],
+  ));
+  if (!inserted) throw new ControlPlaneError("invalid_audit_actor", "audit credential does not belong to the project");
 }
 
 async function appendEvent(transaction, jobId, eventType, state, payload = {}) {
@@ -182,10 +249,249 @@ export class ProductionControlPlane {
        VALUES ($1, $2, $3)
        ON CONFLICT (project_id) DO UPDATE
          SET display_name = EXCLUDED.display_name, updated_at = transaction_timestamp()
-       RETURNING project_id, slug, display_name, state`,
+       RETURNING project_id, slug, display_name, state,
+                 max_active_jobs, max_upload_bytes, max_attempts_per_job`,
       [projectId, slug, displayName],
     );
-    return one(result);
+    const row = one(result);
+    return {
+      id: row.project_id,
+      slug: row.slug,
+      displayName: row.display_name,
+      state: row.state,
+      limits: {
+        maxActiveJobs: Number(row.max_active_jobs),
+        maxUploadBytes: Number(row.max_upload_bytes),
+        maxAttemptsPerJob: Number(row.max_attempts_per_job),
+      },
+    };
+  }
+
+  async appendAudit({ projectId, credentialId = null, action, resourceType, resourceId = null, metadata = {} }) {
+    await appendAuditRecord(this.database, { projectId, credentialId, action, resourceType, resourceId, metadata });
+  }
+
+  async registerModel({
+    projectId,
+    modelSha256,
+    canonicalObjectReference,
+    confirmationObjectReference,
+    confirmedBy,
+    confirmedAt,
+    auditCredentialId = null,
+  }) {
+    identifier(projectId, "project");
+    hash(modelSha256, "modelSha256");
+    const canonicalReference = privateReference(canonicalObjectReference, "canonical model object reference");
+    const confirmationReference = privateReference(confirmationObjectReference, "confirmation object reference");
+    boundedString(confirmedBy, "confirmedBy", 1, 160);
+    const confirmedDate = new Date(confirmedAt);
+    if (Number.isNaN(confirmedDate.valueOf())) {
+      throw new ControlPlaneError("invalid_value", "confirmedAt must be a valid timestamp");
+    }
+    return this.database.transaction(async (transaction) => {
+      const inserted = one(await transaction.query(
+        `INSERT INTO sigma_models(
+           project_id, model_sha256, canonical_object_ref, confirmation_object_ref,
+           confirmed_by, confirmed_at
+         ) VALUES ($1, $2, $3::jsonb, $4::jsonb, $5, $6)
+         ON CONFLICT (project_id, model_sha256) DO NOTHING
+         RETURNING *`,
+        [
+          projectId, modelSha256, jsonParameter(canonicalReference),
+          jsonParameter(confirmationReference), confirmedBy, confirmedDate.toISOString(),
+        ],
+      ));
+      if (inserted) {
+        await appendAuditRecord(transaction, {
+          projectId,
+          credentialId: auditCredentialId,
+          action: "model.registered",
+          resourceType: "model",
+          resourceId: modelSha256,
+          metadata: {
+            canonicalObjectSha256: canonicalReference.sha256,
+            confirmationObjectSha256: confirmationReference.sha256,
+          },
+        });
+        return { created: true, model: publicModel(inserted) };
+      }
+      const existing = one(await transaction.query(
+        "SELECT * FROM sigma_models WHERE project_id = $1 AND model_sha256 = $2 FOR UPDATE",
+        [projectId, modelSha256],
+      ));
+      if (!existing) throw new ControlPlaneError("model_registration_race", "registered model could not be recovered");
+      if (
+        canonicalJson(parseJson(existing.canonical_object_ref)) !== canonicalJson(canonicalReference)
+        || canonicalJson(parseJson(existing.confirmation_object_ref)) !== canonicalJson(confirmationReference)
+      ) {
+        throw new ControlPlaneError(
+          "model_registration_conflict",
+          "model hash is already bound to different immutable documents",
+        );
+      }
+      return { created: false, model: publicModel(existing) };
+    });
+  }
+
+  async getModel(projectId, modelSha256) {
+    identifier(projectId, "project");
+    hash(modelSha256, "modelSha256");
+    const row = one(await this.database.query(
+      "SELECT * FROM sigma_models WHERE project_id = $1 AND model_sha256 = $2",
+      [projectId, modelSha256],
+    ));
+    if (!row) throw new ControlPlaneError("unknown_model", "model does not exist");
+    return publicModel(row);
+  }
+
+  async listModels(projectId, { limit = 100 } = {}) {
+    identifier(projectId, "project");
+    limit = positiveInteger(limit, 100, 1000, "limit");
+    return rows(await this.database.query(
+      `SELECT * FROM sigma_models
+        WHERE project_id = $1 ORDER BY created_at DESC, model_sha256 LIMIT $2`,
+      [projectId, limit],
+    )).map(publicModel);
+  }
+
+  async registerUpload({
+    projectId,
+    bundleSha256,
+    archiveSha256,
+    archiveBytes,
+    manifestObjectReference,
+    scientificRoles,
+    license,
+    auditCredentialId = null,
+  }) {
+    identifier(projectId, "project");
+    hash(bundleSha256, "bundleSha256");
+    hash(archiveSha256, "archiveSha256");
+    archiveBytes = positiveInteger(archiveBytes, undefined, 10 * 1024 * 1024 * 1024, "archiveBytes");
+    const manifestReference = privateReference(manifestObjectReference, "upload manifest object reference");
+    if (!Array.isArray(scientificRoles) || scientificRoles.length > 32 || scientificRoles.some((value) => typeof value !== "string" || value.length < 1 || value.length > 80)) {
+      throw new ControlPlaneError("invalid_value", "scientificRoles must contain at most 32 bounded strings");
+    }
+    jsonValue(license, "license");
+    const uploadId = `upload_${sha256({ projectId, bundleSha256, archiveSha256 }).slice(0, 24)}`;
+    return this.database.transaction(async (transaction) => {
+      const project = one(await transaction.query(
+        "SELECT max_upload_bytes FROM sigma_projects WHERE project_id = $1 AND state = 'active' FOR UPDATE",
+        [projectId],
+      ));
+      if (!project) throw new ControlPlaneError("unknown_project", "project does not exist or is inactive");
+      if (archiveBytes > Number(project.max_upload_bytes)) {
+        throw new ControlPlaneError("upload_quota_exceeded", "archive exceeds the project's upload byte limit", {
+          maximumBytes: Number(project.max_upload_bytes),
+        });
+      }
+      const inserted = one(await transaction.query(
+        `INSERT INTO sigma_uploads(
+           upload_id, project_id, state, bundle_sha256, archive_sha256, archive_bytes,
+           manifest_object_ref, scientific_roles, license
+         ) VALUES ($1, $2, 'pending', $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb)
+         ON CONFLICT (project_id, bundle_sha256, archive_sha256) DO NOTHING
+         RETURNING *`,
+        [
+          uploadId, projectId, bundleSha256, archiveSha256, archiveBytes,
+          jsonParameter(manifestReference), jsonParameter([...new Set(scientificRoles)].sort()),
+          jsonParameter(license),
+        ],
+      ));
+      if (inserted) {
+        await appendAuditRecord(transaction, {
+          projectId,
+          credentialId: auditCredentialId,
+          action: "upload.registered",
+          resourceType: "upload",
+          resourceId: uploadId,
+          metadata: { bundleSha256, archiveSha256, archiveBytes, scientificRoles: [...new Set(scientificRoles)].sort() },
+        });
+        return { created: true, upload: publicUpload(inserted) };
+      }
+      const existing = one(await transaction.query(
+        `SELECT * FROM sigma_uploads
+          WHERE project_id = $1 AND bundle_sha256 = $2 AND archive_sha256 = $3 FOR UPDATE`,
+        [projectId, bundleSha256, archiveSha256],
+      ));
+      if (!existing) throw new ControlPlaneError("upload_registration_race", "registered upload could not be recovered");
+      if (
+        Number(existing.archive_bytes) !== archiveBytes
+        || canonicalJson(parseJson(existing.manifest_object_ref)) !== canonicalJson(manifestReference)
+        || canonicalJson(parseJson(existing.license)) !== canonicalJson(license)
+      ) {
+        throw new ControlPlaneError(
+          "upload_registration_conflict",
+          "upload hashes are already bound to different immutable metadata",
+        );
+      }
+      return { created: false, upload: publicUpload(existing) };
+    });
+  }
+
+  async finalizeUpload({ projectId, uploadId, archiveObjectReference, auditCredentialId = null }) {
+    identifier(projectId, "project");
+    identifier(uploadId, "upload");
+    const reference = privateReference(archiveObjectReference, "upload archive object reference");
+    return this.database.transaction(async (transaction) => {
+      let row = one(await transaction.query(
+        "SELECT * FROM sigma_uploads WHERE project_id = $1 AND upload_id = $2 FOR UPDATE",
+        [projectId, uploadId],
+      ));
+      if (!row) throw new ControlPlaneError("unknown_upload", "upload does not exist");
+      if (reference.sha256 !== row.archive_sha256 || reference.bytes !== Number(row.archive_bytes)) {
+        throw new ControlPlaneError("upload_identity_mismatch", "archive object does not match the registered hash and byte count");
+      }
+      if (row.state === "ready") {
+        if (canonicalJson(parseJson(row.archive_object_ref)) !== canonicalJson(reference)) {
+          throw new ControlPlaneError("upload_registration_conflict", "ready upload is bound to a different archive object");
+        }
+        return { finalized: false, upload: publicUpload(row) };
+      }
+      if (row.state !== "pending") throw new ControlPlaneError("upload_not_pending", "upload cannot accept content in its current state");
+      row = one(await transaction.query(
+        `UPDATE sigma_uploads
+            SET state = 'ready', archive_object_ref = $3::jsonb, ready_at = transaction_timestamp()
+          WHERE project_id = $1 AND upload_id = $2 RETURNING *`,
+        [projectId, uploadId, jsonParameter(reference)],
+      ));
+      await appendAuditRecord(transaction, {
+        projectId,
+        credentialId: auditCredentialId,
+        action: "upload.finalized",
+        resourceType: "upload",
+        resourceId: uploadId,
+        metadata: { archiveSha256: reference.sha256, archiveBytes: reference.bytes },
+      });
+      return { finalized: true, upload: publicUpload(row) };
+    });
+  }
+
+  async getUpload(projectId, uploadId, { includeReferences = false } = {}) {
+    identifier(projectId, "project");
+    identifier(uploadId, "upload");
+    const row = one(await this.database.query(
+      "SELECT * FROM sigma_uploads WHERE project_id = $1 AND upload_id = $2",
+      [projectId, uploadId],
+    ));
+    if (!row) throw new ControlPlaneError("unknown_upload", "upload does not exist");
+    const result = publicUpload(row);
+    if (includeReferences) {
+      result.manifestObjectReference = parseJson(row.manifest_object_ref);
+      result.archiveObjectReference = parseJson(row.archive_object_ref);
+    }
+    return result;
+  }
+
+  async listUploads(projectId, { limit = 100 } = {}) {
+    identifier(projectId, "project");
+    limit = positiveInteger(limit, 100, 1000, "limit");
+    return rows(await this.database.query(
+      `SELECT * FROM sigma_uploads
+        WHERE project_id = $1 ORDER BY created_at DESC, upload_id LIMIT $2`,
+      [projectId, limit],
+    )).map(publicUpload);
   }
 
   async createJob({
@@ -198,6 +504,7 @@ export class ProductionControlPlane {
     dataUploadId = null,
     parameterPolicy,
     maxAttempts = 4,
+    auditCredentialId = null,
   }) {
     identifier(projectId, "project");
     if (!JOB_TYPES.has(jobType)) throw new ControlPlaneError("invalid_job_type", "job type is invalid");
@@ -222,6 +529,63 @@ export class ProductionControlPlane {
       requestSha256,
     };
     return this.database.transaction(async (transaction) => {
+      const project = one(await transaction.query(
+        `SELECT max_active_jobs, max_attempts_per_job
+           FROM sigma_projects WHERE project_id = $1 AND state = 'active' FOR UPDATE`,
+        [projectId],
+      ));
+      if (!project) throw new ControlPlaneError("unknown_project", "project does not exist or is inactive");
+      if (maxAttempts > Number(project.max_attempts_per_job)) {
+        throw new ControlPlaneError("attempt_quota_exceeded", "maxAttempts exceeds the project limit", {
+          maximum: Number(project.max_attempts_per_job),
+        });
+      }
+      if (modelSha256 !== null) {
+        const model = one(await transaction.query(
+          "SELECT 1 AS present FROM sigma_models WHERE project_id = $1 AND model_sha256 = $2",
+          [projectId, modelSha256],
+        ));
+        if (!model) throw new ControlPlaneError("unknown_model", "model is not registered in this project");
+      }
+      if (dataUploadId !== null) {
+        const upload = one(await transaction.query(
+          "SELECT state FROM sigma_uploads WHERE project_id = $1 AND upload_id = $2",
+          [projectId, dataUploadId],
+        ));
+        if (!upload) throw new ControlPlaneError("unknown_upload", "upload is not registered in this project");
+        if (upload.state !== "ready") throw new ControlPlaneError("upload_not_ready", "upload content is not ready");
+      }
+      const existing = one(await transaction.query(
+        `SELECT * FROM sigma_jobs
+          WHERE project_id = $1 AND job_type = $2 AND idempotency_key = $3
+          FOR UPDATE`,
+        [projectId, jobType, idempotencyKey],
+      ));
+      if (existing) {
+        if (
+          existing.request_sha256 !== requestSha256
+          || existing.model_sha256 !== modelSha256
+          || existing.input_upload_id !== dataUploadId
+        ) {
+          throw new ControlPlaneError(
+            "idempotency_conflict",
+            "idempotency key is already bound to different scientific inputs",
+            { existingJobId: existing.job_id },
+          );
+        }
+        return { created: false, job: publicJob(existing) };
+      }
+      const active = one(await transaction.query(
+        `SELECT count(*)::int AS count FROM sigma_jobs
+          WHERE project_id = $1
+            AND state IN ('dispatch_pending', 'queued', 'running', 'cancel_requested')`,
+        [projectId],
+      ));
+      if (Number(active.count) >= Number(project.max_active_jobs)) {
+        throw new ControlPlaneError("active_job_quota_exceeded", "project has reached its active-job limit", {
+          maximum: Number(project.max_active_jobs),
+        });
+      }
       const inserted = one(await transaction.query(
         `INSERT INTO sigma_jobs(
            job_id, project_id, job_type, state, idempotency_key, request_sha256,
@@ -236,25 +600,25 @@ export class ProductionControlPlane {
         ],
       ));
       if (!inserted) {
-        const existing = one(await transaction.query(
+        const raced = one(await transaction.query(
           `SELECT * FROM sigma_jobs
            WHERE project_id = $1 AND job_type = $2 AND idempotency_key = $3
            FOR UPDATE`,
           [projectId, jobType, idempotencyKey],
         ));
-        if (!existing) throw new ControlPlaneError("idempotency_race", "idempotent job could not be recovered");
+        if (!raced) throw new ControlPlaneError("idempotency_race", "idempotent job could not be recovered");
         if (
-          existing.request_sha256 !== requestSha256
-          || existing.model_sha256 !== modelSha256
-          || existing.input_upload_id !== dataUploadId
+          raced.request_sha256 !== requestSha256
+          || raced.model_sha256 !== modelSha256
+          || raced.input_upload_id !== dataUploadId
         ) {
           throw new ControlPlaneError(
             "idempotency_conflict",
             "idempotency key is already bound to different scientific inputs",
-            { existingJobId: existing.job_id },
+            { existingJobId: raced.job_id },
           );
         }
-        return { created: false, job: publicJob(existing) };
+        return { created: false, job: publicJob(raced) };
       }
       await transaction.query(
         `INSERT INTO sigma_job_events(job_id, sequence, event_type, state, payload)
@@ -267,6 +631,14 @@ export class ProductionControlPlane {
          ) VALUES ($1, $2, $3, $4, $5, $6::jsonb)`,
         [outboxId, projectId, jobId, CONTROL_PLANE_TOPIC, `job-dispatch-${jobId}`, jsonParameter(payload)],
       );
+      await appendAuditRecord(transaction, {
+        projectId,
+        credentialId: auditCredentialId,
+        action: "job.submitted",
+        resourceType: "job",
+        resourceId: jobId,
+        metadata: { jobType, requestSha256, modelSha256, dataUploadId, parameterPolicy },
+      });
       return { created: true, job: publicJob(inserted) };
     });
   }
@@ -282,12 +654,34 @@ export class ProductionControlPlane {
     return publicJob(row);
   }
 
-  async listJobs(projectId, { limit = 100 } = {}) {
+  async findJobByIdempotency(projectId, jobType, idempotencyKey) {
+    identifier(projectId, "project");
+    if (!JOB_TYPES.has(jobType)) throw new ControlPlaneError("invalid_job_type", "job type is invalid");
+    boundedString(idempotencyKey, "idempotency key", 8, 160);
+    const row = one(await this.database.query(
+      `SELECT * FROM sigma_jobs
+        WHERE project_id = $1 AND job_type = $2 AND idempotency_key = $3`,
+      [projectId, jobType, idempotencyKey],
+    ));
+    return row ? {
+      job: publicJob(row),
+      requestObjectReference: parseJson(row.request_object_ref),
+      inputUploadId: row.input_upload_id,
+      modelSha256: row.model_sha256,
+    } : null;
+  }
+
+  async listJobs(projectId, { limit = 100, jobType = null } = {}) {
     identifier(projectId, "project");
     limit = positiveInteger(limit, 100, 1000, "limit");
+    if (jobType !== null && !JOB_TYPES.has(jobType)) {
+      throw new ControlPlaneError("invalid_job_type", "job type is invalid");
+    }
     return rows(await this.database.query(
-      "SELECT * FROM sigma_jobs WHERE project_id = $1 ORDER BY created_at DESC, job_id LIMIT $2",
-      [projectId, limit],
+      `SELECT * FROM sigma_jobs
+        WHERE project_id = $1 AND ($2::text IS NULL OR job_type = $2)
+        ORDER BY created_at DESC, job_id LIMIT $3`,
+      [projectId, jobType, limit],
     )).map(publicJob);
   }
 
@@ -320,6 +714,29 @@ export class ProductionControlPlane {
       mediaType: row.media_type,
       createdAt: new Date(row.created_at).toISOString(),
     }));
+  }
+
+  async getArtifact(projectId, jobId, name) {
+    identifier(projectId, "project");
+    identifier(jobId, "job");
+    if (typeof name !== "string" || !ARTIFACT_NAME.test(name)) {
+      throw new ControlPlaneError("invalid_artifact", "artifact name is invalid");
+    }
+    await this.getJob(projectId, jobId);
+    const row = one(await this.database.query(
+      `SELECT name, object_ref, sha256, bytes, media_type, created_at
+         FROM sigma_job_artifacts WHERE job_id = $1 AND name = $2`,
+      [jobId, name],
+    ));
+    if (!row) throw new ControlPlaneError("unknown_artifact", "artifact does not exist");
+    return {
+      name: row.name,
+      objectReference: parseJson(row.object_ref),
+      sha256: row.sha256,
+      bytes: Number(row.bytes),
+      mediaType: row.media_type,
+      createdAt: new Date(row.created_at).toISOString(),
+    };
   }
 
   async claimOutbox({ leaseSeconds = 60 } = {}) {
@@ -524,7 +941,7 @@ export class ProductionControlPlane {
     });
   }
 
-  async requestCancellation(projectId, jobId) {
+  async requestCancellation(projectId, jobId, { auditCredentialId = null } = {}) {
     identifier(projectId, "project");
     identifier(jobId, "job");
     return this.database.transaction(async (transaction) => {
@@ -533,7 +950,17 @@ export class ProductionControlPlane {
         [projectId, jobId],
       ));
       if (!row) throw new ControlPlaneError("unknown_job", "job does not exist");
-      if (TERMINAL.has(row.state)) return publicJob(row);
+      if (TERMINAL.has(row.state)) {
+        await appendAuditRecord(transaction, {
+          projectId,
+          credentialId: auditCredentialId,
+          action: "job.cancellation_requested",
+          resourceType: "job",
+          resourceId: jobId,
+          metadata: { resultingState: row.state, alreadyTerminal: true },
+        });
+        return publicJob(row);
+      }
       if (row.state === "running") {
         row = one(await transaction.query(
           `UPDATE sigma_jobs
@@ -543,6 +970,14 @@ export class ProductionControlPlane {
           [jobId],
         ));
         await appendEvent(transaction, jobId, "cancellation_requested", "cancel_requested", {});
+        await appendAuditRecord(transaction, {
+          projectId,
+          credentialId: auditCredentialId,
+          action: "job.cancellation_requested",
+          resourceType: "job",
+          resourceId: jobId,
+          metadata: { resultingState: "cancel_requested", alreadyTerminal: false },
+        });
         return publicJob(row);
       }
       await transaction.query(
@@ -553,6 +988,14 @@ export class ProductionControlPlane {
       );
       await cancelledInTransaction(transaction, { ...row, cancellation_requested_at: this.clock() }, "cancelled_before_start");
       row = one(await transaction.query("SELECT * FROM sigma_jobs WHERE job_id = $1", [jobId]));
+      await appendAuditRecord(transaction, {
+        projectId,
+        credentialId: auditCredentialId,
+        action: "job.cancellation_requested",
+        resourceType: "job",
+        resourceId: jobId,
+        metadata: { resultingState: row.state, alreadyTerminal: false },
+      });
       return publicJob(row);
     });
   }

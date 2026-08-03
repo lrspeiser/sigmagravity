@@ -1,7 +1,8 @@
 import { options, requireMethod, send } from "../../lib/http.mjs";
 import { privateBlobStorageState } from "../../lib/private-blob-store.mjs";
-import { productionDatabaseState } from "../../lib/production-database.mjs";
+import { readProductionDatabaseReadiness } from "../../lib/production-database.mjs";
 import { productionQueueState, readQueueCanary } from "../../lib/production-queue.mjs";
+import { productionOutboxSchedulerState } from "../../lib/production-runtime.mjs";
 import { statelessWorkerState } from "../../lib/stateless-worker-client.mjs";
 
 export default async function handler(request, response) {
@@ -9,8 +10,9 @@ export default async function handler(request, response) {
   response.setHeader("Cache-Control", "no-store");
   const objectStorage = privateBlobStorageState();
   const queueConfiguration = productionQueueState();
-  const database = productionDatabaseState();
+  const database = await readProductionDatabaseReadiness();
   const worker = statelessWorkerState();
+  const scheduler = productionOutboxSchedulerState();
   let queueCanary = "not_run";
   if (objectStorage === "configured" && queueConfiguration === "configured") {
     try {
@@ -22,7 +24,8 @@ export default async function handler(request, response) {
   const queue = queueCanary === "verified_consumed" ? "verified_consumed" : queueConfiguration;
   const productionReady = objectStorage === "configured"
     && queue === "verified_consumed"
-    && database === "configured"
+    && database.state === "verified_migrated"
+    && scheduler === "verified"
     && worker === "configured";
   send(response, 200, {
     schemaVersion: "sigma-production-storage-readiness/1",
@@ -53,13 +56,21 @@ export default async function handler(request, response) {
     },
     jobMetadataDatabase: {
       provider: "postgresql",
-      state: database,
-      migration: "production-control-plane-v1",
+      state: database.state,
+      migrations: ["production-control-plane-v1", "production-research-api-v2"],
+      verifiedMigrations: database.migrations,
+      projectIsolation: "hashed_bearer_credentials_and_database_scope_checks_built",
+      quotas: ["active_jobs", "upload_bytes", "attempts_per_job"],
+      auditEvents: "built",
+    },
+    outboxScheduler: {
+      endpoint: "/api/v1/outbox-dispatch",
+      state: scheduler,
     },
     statelessScientificContainer: { state: worker },
     productionExecution: productionReady ? "ready" : "not_ready",
     boundary: productionReady
       ? "All control-plane layers are configured; scientific validity still depends on the confirmed model, data, solver diagnostics, and report."
-      : "Production execution remains fail-closed until private objects, a verified queue, Postgres metadata, and a stateless scientific worker are all connected.",
+      : "Production execution remains fail-closed until private objects, a verified queue, migrated Postgres metadata, a verified outbox scheduler, and a stateless scientific worker are all connected.",
   });
 }

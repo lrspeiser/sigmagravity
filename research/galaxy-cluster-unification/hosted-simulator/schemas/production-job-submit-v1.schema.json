@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigmagravity.org/schemas/production-job-submit-v1.schema.json",
+  "title": "Sigma durable production job submission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "jobType", "parameterPolicy", "request"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-production-job-submit/1" },
+    "jobType": { "enum": ["field", "galaxy", "observation", "inverse_response", "batch", "advanced_plugin"] },
+    "modelSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "dataUploadId": { "type": "string", "pattern": "^upload_[0-9a-f]{24}$" },
+    "parameterPolicy": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": { "enum": ["published_fixed", "universal_fixed", "universal_fit", "train_validation_holdout", "hierarchical", "per_object"] },
+        "disclosed": { "type": "boolean" }
+      }
+    },
+    "request": { "type": "object", "minProperties": 1 },
+    "maxAttempts": { "type": "integer", "minimum": 1, "maximum": 12 }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "jobType": { "const": "field" } }, "required": ["jobType"] },
+      "then": { "required": ["modelSha256", "dataUploadId"] }
+    },
+    {
+      "if": { "properties": { "parameterPolicy": { "properties": { "mode": { "const": "per_object" } }, "required": ["mode"] } } },
+      "then": { "properties": { "parameterPolicy": { "required": ["disclosed"], "properties": { "disclosed": { "const": true } } } } }
+    }
+  ]
+}

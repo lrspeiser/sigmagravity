@@ -44,8 +44,14 @@
     }
   ],
   "rewrites": [
+    {"source": "/api/v1/models/:sha256", "destination": "/api/v1/model?sha256=:sha256"},
     {"source": "/api/v1/data-uploads/:id/content", "destination": "/api/v1/data-upload?id=:id&resource=content"},
     {"source": "/api/v1/data-uploads/:id", "destination": "/api/v1/data-upload?id=:id"},
+    {"source": "/api/v1/jobs/:id/artifacts/:name", "destination": "/api/v1/job?id=:id&resource=artifact&name=:name"},
+    {"source": "/api/v1/jobs/:id/artifacts", "destination": "/api/v1/job?id=:id&resource=artifacts"},
+    {"source": "/api/v1/jobs/:id/events", "destination": "/api/v1/job?id=:id&resource=events"},
+    {"source": "/api/v1/jobs/:id/cancel", "destination": "/api/v1/job?id=:id&resource=cancel"},
+    {"source": "/api/v1/jobs/:id", "destination": "/api/v1/job?id=:id"},
     {"source": "/api/v1/field-jobs/:id/artifacts/:name", "destination": "/api/v1/field-job?id=:id&resource=artifact&name=:name"},
     {"source": "/api/v1/field-jobs/:id/artifacts", "destination": "/api/v1/field-job?id=:id&resource=artifacts"},
     {"source": "/api/v1/field-jobs/:id/events", "destination": "/api/v1/field-job?id=:id&resource=events"},

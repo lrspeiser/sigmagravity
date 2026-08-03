@@ -22,6 +22,8 @@ async function fixture(t) {
   t.after(() => database.close());
   const migration = await readFile(new URL("../sql/production-control-plane-v1.sql", import.meta.url), "utf8");
   await database.exec(migration);
+  const apiMigration = await readFile(new URL("../sql/production-research-api-v2.sql", import.meta.url), "utf8");
+  await database.exec(apiMigration);
   const adapter = {
     query: (text, parameters = []) => database.query(text, parameters),
     transaction: (callback) => database.transaction(
@@ -59,22 +61,29 @@ test("migration is repeatable and creates the transactional control-plane tables
   const { database } = await fixture(t);
   const migration = await readFile(new URL("../sql/production-control-plane-v1.sql", import.meta.url), "utf8");
   await database.exec(migration);
+  const apiMigration = await readFile(new URL("../sql/production-research-api-v2.sql", import.meta.url), "utf8");
+  await database.exec(apiMigration);
   const tables = await database.query(
     "SELECT tablename FROM pg_tables WHERE schemaname = 'public' AND tablename LIKE 'sigma_%' ORDER BY tablename",
   );
   assert.deepEqual(tables.rows.map((row) => row.tablename), [
+    "sigma_audit_events",
     "sigma_job_artifacts",
     "sigma_job_attempts",
     "sigma_job_events",
     "sigma_jobs",
     "sigma_models",
     "sigma_outbox",
+    "sigma_project_api_keys",
     "sigma_projects",
     "sigma_schema_migrations",
     "sigma_uploads",
   ]);
-  const migrationRows = await database.query("SELECT migration_id FROM sigma_schema_migrations");
-  assert.deepEqual(migrationRows.rows, [{ migration_id: "production-control-plane-v1" }]);
+  const migrationRows = await database.query("SELECT migration_id FROM sigma_schema_migrations ORDER BY migration_id");
+  assert.deepEqual(migrationRows.rows, [
+    { migration_id: "production-control-plane-v1" },
+    { migration_id: "production-research-api-v2" },
+  ]);
 });
 
 test("job and outbox creation are atomic and idempotency cannot change science", async (t) => {
@@ -95,6 +104,23 @@ test("job and outbox creation are atomic and idempotency cannot change science",
   );
   assert.deepEqual(counts.rows, [{ jobs: 1, outbox: 1 }]);
   assert.deepEqual((await control.getEvents(PROJECT_ID, first.job.id)).map((event) => event.type), ["accepted"]);
+});
+
+test("job mutation rolls back when its project audit actor is invalid", async (t) => {
+  const { database, control } = await fixture(t);
+  await assert.rejects(
+    control.createJob(jobInput("invalid-audit", {
+      auditCredentialId: "key_ffffffffffffffffffffffff",
+    })),
+    (error) => error instanceof ControlPlaneError && error.code === "invalid_audit_actor",
+  );
+  const counts = await database.query(
+    `SELECT
+       (SELECT count(*)::int FROM sigma_jobs) AS jobs,
+       (SELECT count(*)::int FROM sigma_outbox) AS outbox,
+       (SELECT count(*)::int FROM sigma_audit_events) AS audits`,
+  );
+  assert.deepEqual(counts.rows, [{ jobs: 0, outbox: 0, audits: 0 }]);
 });
 
 test("transactional outbox retries safely and marks the job queued only after publish", async (t) => {

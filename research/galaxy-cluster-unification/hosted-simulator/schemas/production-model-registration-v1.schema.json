@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigmagravity.org/schemas/production-model-registration-v1.schema.json",
+  "title": "Sigma durable confirmed-model registration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "confirmationReceipt"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-production-model-registration/1" },
+    "confirmationReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion", "modelSha256", "confirmedDocumentSha256", "sourceFormat",
+        "sourceTextSha256", "acknowledgement", "id", "confirmationSha256", "confirmedModel"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "sigma-model-confirmation/1" },
+        "modelSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "confirmedDocumentSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "sourceFormat": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "sourceTextSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "acknowledgement": { "type": "string", "minLength": 20, "maxLength": 500 },
+        "id": { "type": "string", "pattern": "^model_confirmation_[0-9a-f]{24}$" },
+        "confirmationSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "confirmedModel": { "$ref": "model-manifest-v1.schema.json" }
+      }
+    }
+  }
+}

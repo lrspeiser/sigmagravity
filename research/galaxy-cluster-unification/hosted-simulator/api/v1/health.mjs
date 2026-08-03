@@ -9,7 +9,7 @@ export default function handler(request, response) {
   send(response, 200, {
     status: "ok",
     service: "sigma-gravity-research-simulator",
-    version: "0.32.0-preview",
+    version: "0.33.0-preview",
     capabilities: {
       researcherGuide: "available",
       radialRotationCurves: "available",
@@ -54,6 +54,11 @@ export default function handler(request, response) {
         not_configured: "not_configured",
       }[productionQueueState()],
       transactionalJobDatabase: productionDatabaseState(),
+      projectScopedResearchApi: productionDatabaseState() === "configured"
+        ? "configured_migration_verification_required"
+        : "not_configured",
+      productionModelUploadJobRegistry: "available_requires_database_migration",
+      productionProjectQuotasAndAudit: "available_requires_database_migration",
       statelessScientificWorker: statelessWorkerState(),
       resolvedGalaxyExtractionAndGeneration: "production_worker_not_connected",
       fieldSolvers2d3d: "worker_not_connected",

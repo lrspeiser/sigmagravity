@@ -99,3 +99,15 @@ private acknowledgement hash
 Storage readiness reports `durable_storage_and_queue_connected`; database and
 stateless-worker states remain `not_configured`, `productionExecution` remains
 `not_ready`, and a real field-job submission returns HTTP 503.
+
+## v0.33 researcher API continuation
+
+The next milestone connects these control-plane primitives to a formula-neutral,
+project-scoped researcher API. A second migration extends the schema from nine
+to eleven tables with SHA-only project credentials and immutable audit events;
+model registration, upload finalization, job/outbox creation, and cancellation
+write their audit record inside the same PostgreSQL transaction as the state
+change. The API remains fail-closed until the database, recurring dispatcher,
+and scientific worker are verified. See
+`PRODUCTION_RESEARCH_API_MILESTONE.md` for the endpoints, input/output contract,
+acceptance evidence, and remaining hosted boundary.

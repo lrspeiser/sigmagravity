@@ -19,6 +19,32 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.33 connects the durable control-plane semantics to a project-scoped
+research API. A one-time `sgp_...` bearer secret is stored only as SHA-256;
+database queries enforce project ownership for registered confirmed models,
+immutable uploads, jobs, events, artifacts, and cancellations. The second
+repeatable migration adds credential and audit tables plus active-job,
+upload-byte, and attempt limits. A complete PostgreSQL acceptance registers an
+exact model-confirmation receipt, uploads and rehashes bounded content, queues
+an idempotent job through the transactional outbox, reads events, completes and
+rehashes a private artifact, rejects cross-project reads, and preserves
+cancellation precedence. The public site still fails closed because Horizon3
+has not provisioned the database or stateless worker. Large archives also need
+a private direct-upload path instead of traversing the Vercel gateway.
+
+The durable production sequence is:
+
+```text
+POST /api/v1/models
+POST /api/v1/data-uploads
+PUT  /api/v1/data-uploads/{id}/content
+POST /api/v1/jobs              (Authorization + Idempotency-Key)
+GET  /api/v1/jobs/{id}
+GET  /api/v1/jobs/{id}/events
+GET  /api/v1/jobs/{id}/artifacts
+POST /api/v1/jobs/{id}/cancel
+```
+
 Version 0.30 extends the authenticated worker boundary to the
 gravity-independent resolved-galaxy extractor and generator. The same bounded
 upload lifecycle can now extract a content-hashed baryonic parameter package,
@@ -654,9 +680,18 @@ npm run smoke:batches
 
 ## Production worker connection
 
-The local queue proves the API contract and the unchanged Python worker process,
-but it is not the production deployment. Production still needs direct object-
-storage uploads, a durable queue/database, container scheduling, authentication,
-project isolation, retries, quotas, and monitoring. Vercel remains the UI and
+Private content-addressed object storage and deployment-bound durable queue
+delivery are connected. The database migrations, hashed project credentials,
+project isolation, active-job/upload/attempt quotas, audit events,
+transactional outbox, retries, leases, cancellation, and stateless worker
+handoff are implemented and PostgreSQL-tested. They are not yet a hosted
+scientific service.
+
+Production still needs Horizon3 approval and provisioning of Neon, both
+migrations, a first project credential, a verified recurring trigger for
+`/api/v1/outbox-dispatch`, a deployed stateless scientific container, private
+direct uploads for large arrays, and a complete hosted lifecycle across a
+worker restart. Result signing, cache policy, dataset-license enforcement,
+monitoring, backups, and cost controls also remain. Vercel stays the UI and
 short-request gateway; it must not execute Python or hold an HTTP connection
 open during field or lensing solves.

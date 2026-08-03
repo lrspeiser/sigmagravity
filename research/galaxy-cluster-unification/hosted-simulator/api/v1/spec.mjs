@@ -4,8 +4,13 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.32.0-preview",
-    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The reference worker executes confirmed field models and gravity-independent baryonic extraction, controlled generation, 2D/3D uncertainty ensembles, and image-only conditioning. It also supports local nonlocal, coupled photon/matter, observation, batch, and inverse-discovery workflows. The public deployment now has a private content-addressed object store whose objects are rehashed after write and on read. A bounded authenticated connector and non-root worker image expose upload, field-job, and galaxy-job lifecycles, but no durable queue, job database, or stateless scientific worker is connected yet. Degenerate weights are not credible intervals, inverse results are hypothesis generators rather than forward theory tests, and public heavy execution still requires durable isolated compute.",
+    version: "0.33.0-preview",
+    description: "Formula-independent radial benchmarks and confirmed 2D/3D research contracts. The production API now has project-scoped hashed bearer credentials, immutable confirmed-model and data registration, PostgreSQL quotas and audit events, idempotent job submission, transactional outbox dispatch, job/event/artifact/cancellation reads, and complete private artifact rehashing. The public deployment remains fail-closed until PostgreSQL is provisioned and migrated and a stateless scientific worker is connected. Inverse results remain hypothesis generators rather than forward theory tests.",
+  },
+  components: {
+    securitySchemes: {
+      projectBearer: { type: "http", scheme: "bearer", bearerFormat: "sgp project credential" },
+    },
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
@@ -24,13 +29,21 @@ const specification = {
     "/api/v1/formulas/validate": { post: { summary: "Validate and hash a safe formula AST" } },
     "/api/v1/models/validate": { post: { summary: "Validate and hash a scalar/vector/tensor 2D/3D field-model manifest" } },
     "/api/v1/models/confirm": { post: { summary: "Bind explicit researcher acknowledgement to the exact validated computational model hash" } },
+    "/api/v1/models": {
+      get: { summary: "List project-scoped immutable confirmed models", security: [{ projectBearer: [] }] },
+      post: { summary: "Persist an exact-hash confirmation receipt and canonical model", security: [{ projectBearer: [] }] },
+    },
+    "/api/v1/models/{sha256}": { get: { summary: "Read one project-scoped confirmed model record", security: [{ projectBearer: [] }] } },
     "/api/v1/field-jobs/prepare": { post: { summary: "Preflight a model, content-hashed arrays, 2D/3D grid, boundary, and observation-target request" } },
-    "/api/v1/data-uploads": { post: { summary: "Create an immutable NPZ upload ticket through the local service or configured authenticated scientific worker" } },
+    "/api/v1/data-uploads": {
+      get: { summary: "List project-scoped immutable array uploads", security: [{ projectBearer: [] }] },
+      post: { summary: "Register an exact manifest, archive hash, byte count, roles, and license", security: [{ projectBearer: [] }] },
+    },
     "/api/v1/data-uploads/{id}": { get: { summary: "Inspect an array upload" } },
     "/api/v1/data-uploads/{id}/content": { put: { summary: "Upload hash- and size-bound NPZ bytes" } },
     "/api/v1/field-jobs": {
-      get: { summary: "List field jobs through the local service or configured authenticated field worker" },
-      post: { summary: "Queue a confirmed field manifest against a ready data upload" },
+      get: { summary: "List project-scoped durable jobs", security: [{ projectBearer: [] }] },
+      post: { summary: "Queue a registered confirmed model against a ready immutable upload", security: [{ projectBearer: [] }] },
     },
     "/api/v1/field-jobs/{id}": { get: { summary: "Read field-job state" } },
     "/api/v1/field-jobs/{id}/events": { get: { summary: "Read ordered field-job lifecycle events" } },
@@ -73,6 +86,17 @@ const specification = {
     "/api/v1/batches/{id}/artifacts": { get: { summary: "Read deterministic batch report artifacts" } },
     "/api/v1/batches/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed batch artifact" } },
     "/api/v1/batches/{id}/cancel": { post: { summary: "Cancel a batch and its nonterminal child jobs" } },
+    "/api/v1/jobs": {
+      get: { summary: "List every durable job class in the authenticated project", security: [{ projectBearer: [] }] },
+      post: { summary: "Submit a formula-neutral durable job with an Idempotency-Key", security: [{ projectBearer: [] }] },
+    },
+    "/api/v1/jobs/{id}": { get: { summary: "Read one project-scoped durable job", security: [{ projectBearer: [] }] } },
+    "/api/v1/jobs/{id}/events": { get: { summary: "Read ordered durable lifecycle events", security: [{ projectBearer: [] }] } },
+    "/api/v1/jobs/{id}/artifacts": { get: { summary: "List SHA-verified immutable artifacts", security: [{ projectBearer: [] }] } },
+    "/api/v1/jobs/{id}/artifacts/{name}": { get: { summary: "Download and rehash one allow-listed private artifact", security: [{ projectBearer: [] }] } },
+    "/api/v1/jobs/{id}/cancel": { post: { summary: "Request cancellation with terminal-state precedence", security: [{ projectBearer: [] }] } },
+    "/api/v1/inference-jobs": { post: { summary: "Alias for a durable gravity-independent galaxy inference job", security: [{ projectBearer: [] }] } },
+    "/api/v1/generation-jobs": { post: { summary: "Alias for a durable forward galaxy generation job", security: [{ projectBearer: [] }] } },
     "/api/v1/runs": { post: { summary: "Score a formula without fitting object-specific gravity parameters" } },
   },
 };

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sigmagravity.org/schemas/production-upload-registration-v1.schema.json",
+  "title": "Sigma durable array-upload registration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "manifest", "archiveSha256", "archiveBytes"],
+  "properties": {
+    "schemaVersion": { "const": "sigma-production-upload-registration/1" },
+    "manifest": { "$ref": "array-bundle-v1.schema.json" },
+    "archiveSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "archiveBytes": { "type": "integer", "minimum": 1, "maximum": 10737418240 }
+  }
+}

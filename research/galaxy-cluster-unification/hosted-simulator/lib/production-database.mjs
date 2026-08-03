@@ -25,6 +25,29 @@ export function productionDatabaseState(environment = process.env) {
   }
 }
 
+export async function readProductionDatabaseReadiness({ environment = process.env, database = null } = {}) {
+  const configured = productionDatabaseState(environment);
+  if (configured !== "configured" && !database) return { state: configured, migrations: [] };
+  const owned = database === null;
+  const connection = database ?? new NeonProductionDatabase({ environment });
+  try {
+    const result = await connection.query(
+      `SELECT migration_id FROM sigma_schema_migrations
+        WHERE migration_id = ANY($1::text[]) ORDER BY migration_id`,
+      [["production-control-plane-v1", "production-research-api-v2"]],
+    );
+    const migrations = (result.rows ?? result).map((row) => row.migration_id);
+    return {
+      state: migrations.length === 2 ? "verified_migrated" : "migration_required",
+      migrations,
+    };
+  } catch {
+    return { state: "verification_failed", migrations: [] };
+  } finally {
+    if (owned) await connection.close();
+  }
+}
+
 export class NeonProductionDatabase {
   constructor({ environment = process.env, pool } = {}) {
     const configuration = resolveProductionDatabaseConfiguration(environment);

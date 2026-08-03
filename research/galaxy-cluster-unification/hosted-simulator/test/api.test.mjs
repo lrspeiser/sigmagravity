@@ -54,7 +54,7 @@ async function asyncCall(handler, { method = "GET", query = {}, body = undefined
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.32.0-preview");
+  assert.equal(output.body.version, "0.33.0-preview");
   assert.equal(output.body.capabilities.durablePrivateObjectStorage, "not_configured");
   assert.equal(output.body.capabilities.durableQueue, "not_configured");
   assert.equal(output.body.capabilities.transactionalJobDatabase, "not_configured");
@@ -130,6 +130,7 @@ test("storage readiness separates durable objects from an incomplete job lifecyc
   assert.equal(output.body.objectStorage.state, "not_configured");
   assert.equal(output.body.queue.state, "not_configured");
   assert.equal(output.body.jobMetadataDatabase.state, "not_configured");
+  assert.equal(output.body.outboxScheduler.state, "not_configured");
   assert.equal(output.body.statelessScientificContainer.state, "not_configured");
   assert.equal(output.body.productionExecution, "not_ready");
 });
@@ -368,59 +369,55 @@ test("heavy solver requests are never replaced with radial proxies", () => {
   assert.equal(output.body.error, "worker_not_connected");
 });
 
-test("production upload and queue endpoints disclose missing infrastructure", () => {
-  const upload = call(hostedDataUploads, { method: "POST", body: {} });
+test("production upload and queue endpoints disclose missing infrastructure", async () => {
+  const upload = await asyncCall(hostedDataUploads, { method: "POST", body: {} });
   assert.equal(upload.statusCode, 503);
-  assert.equal(upload.body.error, "production_storage_not_connected");
-  const job = call(hostedFieldJobs, { method: "POST", body: {} });
+  assert.equal(upload.body.error, "production_control_plane_not_connected");
+  const job = await asyncCall(hostedFieldJobs, { method: "POST", body: {} });
   assert.equal(job.statusCode, 503);
-  assert.equal(job.body.error, "production_worker_not_connected");
-  const uploadDetail = call(hostedDataUpload, {
+  assert.equal(job.body.error, "production_control_plane_not_connected");
+  const uploadDetail = await asyncCall(hostedDataUpload, {
     query: { id: "upload_0123456789abcdef01234567" },
   });
   assert.equal(uploadDetail.statusCode, 503);
-  assert.equal(uploadDetail.body.error, "production_storage_not_connected");
-  const jobDetail = call(hostedFieldJob, {
+  assert.equal(uploadDetail.body.error, "production_control_plane_not_connected");
+  const jobDetail = await asyncCall(hostedFieldJob, {
     query: { id: "job_0123456789abcdef01234567", resource: "events" },
   });
   assert.equal(jobDetail.statusCode, 503);
-  assert.equal(jobDetail.body.error, "production_worker_not_connected");
-  const unsafeArtifact = call(hostedFieldJob, {
+  assert.equal(jobDetail.body.error, "production_control_plane_not_connected");
+  const unsafeArtifact = await asyncCall(hostedFieldJob, {
     query: { id: "job_0123456789abcdef01234567", resource: "artifact", name: "../secret" },
   });
   assert.equal(unsafeArtifact.statusCode, 404);
-  const galaxyJob = call(hostedGalaxyJobs, { method: "POST", body: {} });
+  const galaxyJob = await asyncCall(hostedGalaxyJobs, { method: "POST", body: {} });
   assert.equal(galaxyJob.statusCode, 503);
-  assert.equal(galaxyJob.body.error, "production_worker_not_connected");
-  assert.equal(galaxyJob.body.requestSchema, "/schemas/galaxy-job-submit-v1.schema.json");
-  const galaxyJobDetail = call(hostedGalaxyJob, {
+  assert.equal(galaxyJob.body.error, "production_control_plane_not_connected");
+  const galaxyJobDetail = await asyncCall(hostedGalaxyJob, {
     query: { id: "job_0123456789abcdef01234567", resource: "artifacts" },
   });
   assert.equal(galaxyJobDetail.statusCode, 503);
-  assert.equal(galaxyJobDetail.body.error, "production_worker_not_connected");
-  const unsafeGalaxyArtifact = call(hostedGalaxyJob, {
+  assert.equal(galaxyJobDetail.body.error, "production_control_plane_not_connected");
+  const unsafeGalaxyArtifact = await asyncCall(hostedGalaxyJob, {
     query: { id: "job_0123456789abcdef01234567", resource: "artifact", name: "../secret" },
   });
   assert.equal(unsafeGalaxyArtifact.statusCode, 404);
-  const observationJob = call(hostedObservationEvaluationJobs, { method: "POST", body: {} });
+  const observationJob = await asyncCall(hostedObservationEvaluationJobs, { method: "POST", body: {} });
   assert.equal(observationJob.statusCode, 503);
-  assert.equal(observationJob.body.error, "production_worker_not_connected");
-  assert.equal(observationJob.body.requestSchema, "/schemas/observation-evaluation-job-submit-v1.schema.json");
-  const inverseJob = call(hostedInverseResponseJobs, { method: "POST", body: {} });
+  assert.equal(observationJob.body.error, "production_control_plane_not_connected");
+  const inverseJob = await asyncCall(hostedInverseResponseJobs, { method: "POST", body: {} });
   assert.equal(inverseJob.statusCode, 503);
-  assert.equal(inverseJob.body.error, "production_worker_not_connected");
-  assert.equal(inverseJob.body.classification, "hypothesis_generator_not_forward_theory_test");
-  assert.equal(inverseJob.body.requestSchema, "/schemas/inverse-response-job-submit-v1.schema.json");
-  const batch = call(hostedBatches, { method: "POST", body: {} });
+  assert.equal(inverseJob.body.error, "production_control_plane_not_connected");
+  const batch = await asyncCall(hostedBatches, { method: "POST", body: {} });
   assert.equal(batch.statusCode, 503);
-  assert.equal(batch.body.error, "production_worker_not_connected");
-  assert.equal(batch.body.requestSchema, "/schemas/batch-submit-v1.schema.json");
+  assert.equal(batch.body.error, "production_control_plane_not_connected");
 });
 
 test("Vercel rewrites expose authenticated field and galaxy lifecycles without a catch-all proxy", () => {
   const configuration = JSON.parse(readFileSync(new URL("../vercel.json", import.meta.url), "utf8"));
   const sources = new Set(configuration.rewrites.map((value) => value.source));
   for (const source of [
+    "/api/v1/models/:sha256",
     "/api/v1/data-uploads/:id/content",
     "/api/v1/data-uploads/:id",
     "/api/v1/field-jobs/:id/events",
@@ -429,6 +426,9 @@ test("Vercel rewrites expose authenticated field and galaxy lifecycles without a
     "/api/v1/galaxy-jobs/:id/events",
     "/api/v1/galaxy-jobs/:id/artifacts/:name",
     "/api/v1/galaxy-jobs/:id/cancel",
+    "/api/v1/jobs/:id/events",
+    "/api/v1/jobs/:id/artifacts/:name",
+    "/api/v1/jobs/:id/cancel",
   ]) {
     assert.equal(sources.has(source), true, `missing Vercel rewrite ${source}`);
   }

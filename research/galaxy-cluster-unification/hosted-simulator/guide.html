@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.32</p>
+          <p class="eyebrow">Researcher guide &middot; v0.33</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -37,7 +37,7 @@
         </div>
         <aside class="guide-callout">
           <p class="eyebrow">The shortest honest description</p>
-          <p><strong>Hosted now:</strong> test bounded radial acceleration formulas against 175 SPARC galaxies, inspect frozen galaxy evidence and a role-safe four-cluster registry, validate an exact 2D/3D model manifest, inspect private content-addressed artifacts, and verify deployment-bound durable queue delivery.</p>
+          <p><strong>Hosted now:</strong> test bounded radial acceleration formulas against 175 SPARC galaxies, inspect frozen galaxy evidence and a role-safe four-cluster registry, validate and confirm an exact 2D/3D model manifest, inspect private content-addressed artifacts, and verify deployment-bound durable queue delivery. The project-scoped durable research API is published and PostgreSQL-tested but remains fail-closed until its database is provisioned.</p>
           <p><strong>Not hosted yet:</strong> execute arbitrary 2D/3D equations or run new raw cluster-lensing solves. Those jobs work only through the repository's local reference backend.</p>
         </aside>
       </div>
@@ -61,7 +61,8 @@
               <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
               <tr><td>Private content-addressed artifact storage</td><td><span class="state-tag live">Connected</span></td><td><span class="state-tag live">Tested adapter</span></td><td>Private immutable objects use a SHA-256-derived path, bounded size, idempotent writes, and byte-for-byte rehashing after write and on every read. This is storage acceptance, not job execution.</td></tr>
               <tr><td>Durable at-least-once queue</td><td><span class="state-tag live">Deployment canary</span></td><td><span class="state-tag live">Failure suite</span></td><td>A private queue consumer writes a deployment-bound acknowledgement to the private object store. Publishing is seven-day deduplicated; the job contract separately handles duplicate delivery, leases, retries, and stale workers.</td></tr>
-              <tr><td>Transactional Postgres job control</td><td><span class="state-tag partial">Awaiting database</span></td><td><span class="state-tag live">Postgres acceptance</span></td><td>Nine-table schema, transactional outbox, project scoping, job/events/attempts/artifacts, idempotency conflicts, leases, cancellation races, and terminal finalization pass against an embedded PostgreSQL engine. Horizon3 must accept Neon's Marketplace terms before the free database can be provisioned.</td></tr>
+              <tr><td>Transactional Postgres job control</td><td><span class="state-tag partial">Awaiting database</span></td><td><span class="state-tag live">Postgres acceptance</span></td><td>Eleven tables cover the transactional outbox, models, uploads, jobs/events/attempts/artifacts, hashed project credentials, audit events, and quotas. Idempotency conflicts, isolation, leases, cancellation races, terminal finalization, and repeatable migrations pass against an embedded PostgreSQL engine. Horizon3 must accept Neon's Marketplace terms before the free database can be provisioned.</td></tr>
+              <tr><td>Project-scoped durable research API</td><td><span class="state-tag partial">Published, fail-closed</span></td><td><span class="state-tag live">Lifecycle acceptance</span></td><td>Bearer-authenticated model and upload registration, binary hash verification, job submission, events, private artifact downloads, cancellation, audit, and active-job/upload/attempt limits pass end to end. Large direct uploads, the recurring outbox trigger, the production database, and the stateless worker remain unconnected.</td></tr>
               <tr><td>Authenticated field + galaxy worker deployment slice</td><td><span class="state-tag partial">Compute not configured</span></td><td><span class="state-tag live">Process acceptance passed</span></td><td>The bounded connector and stateless handoff contract expose immutable inputs and results. The public site has durable objects and queue delivery, but no connected Postgres database or stateless scientific container, so heavy routes remain fail-closed.</td></tr>
               <tr><td>Axisymmetric fields, galaxy motion, and lensing</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Finite-volume elliptic equations run on a declared <code>(r,z)</code> grid; one typed field can produce circular speeds, resolved velocities, deflection/shear maps, and raw multiple-image roots without a Cartesian proxy.</td></tr>
               <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
@@ -279,21 +280,32 @@
           </article>
 
           <article class="example-card card">
-            <div class="example-intro"><span class="example-number">05</span><div><h3>Ask for heavy production execution</h3><p>The authenticated connector, container, private artifact store, and deployment-bound queue now exist. The hosted API still fails honestly until the Postgres control plane and stateless scientific worker are connected.</p></div></div>
+            <div class="example-intro"><span class="example-number">05</span><div><h3>Register one immutable production job</h3><p>The client first confirms and registers a model, registers exact array metadata and archive bytes, then submits only immutable identifiers. Every project request uses <code>Authorization: Bearer &lt;project-key&gt;</code>; a job submission also requires an <code>Idempotency-Key</code>.</p></div></div>
             <div class="code-pair compact-code-pair">
-              <div><p class="code-label">POST /api/v1/field-jobs</p><pre><code>{
-  "model": {"...": "confirmed model"},
-  "dataUploadId": "upload_content_addressed_id",
-  "request": {"requestedObservables": ["photon_lensing_map"]}
+              <div><p class="code-label">POST /api/v1/jobs</p><pre><code>{
+  "schemaVersion": "sigma-production-job-submit/1",
+  "jobType": "field",
+  "modelSha256": "&lt;registered-confirmed-model-sha256&gt;",
+  "dataUploadId": "upload_0123456789abcdef01234567",
+  "parameterPolicy": {"mode": "published_fixed"},
+  "request": {
+    "schemaVersion": "sigma-field-job-request/1",
+    "requestedObservables": ["photon_lensing_map"]
+  }
 }</code></pre></div>
               <div><p class="code-label">503 response today</p><pre><code>{
-  "error": "production_worker_not_connected",
-  "message": "The authenticated field-worker connector exists, but no durable worker endpoint is configured for this deployment.",
-  "requestSchema": "/schemas/field-job-submit-v1.schema.json"
+  "error": "production_control_plane_not_connected",
+  "message": "The durable production research API is not fully configured",
+  "details": {
+    "database": "not_configured",
+    "objectStorage": "configured",
+    "queue": "configured"
+  }
 }</code></pre></div>
             </div>
-            <div class="meaning-strip"><strong>What is built:</strong> the separate worker passed real Cartesian 2D/3D, axisymmetric motion, photon-map, and raw-image HTTP jobs. The production control-plane code adds a transactional outbox, at-least-once delivery, database leases, stale-worker rejection, cancellation precedence, stateless hash references, manifest agreement, and complete artifact rehashing. The live queue canary proves that Vercel invoked the private consumer for this deployment.</div>
-            <div class="meaning-strip"><strong>What the 503 still means:</strong> durable objects and queue delivery are connected, but no Postgres job/model store or stateless scientific container consumes researcher jobs. The database code is verified but not provisioned; Neon's Marketplace terms require Horizon3 approval. Inspect <code>GET /api/v1/storage-readiness</code> for the machine-readable boundary.</div>
+            <div class="meaning-strip"><strong>Expected output after connection:</strong> HTTP 202 with a stable <code>job_...</code> identifier, <code>queued</code> or <code>dispatch_pending</code> state, request/model/upload hashes, the declared parameter policy, attempt limit, and links to <code>/jobs/{id}</code>, <code>/events</code>, <code>/artifacts</code>, and <code>/cancel</code>. Repeating the same idempotency key and science returns the same job; changing the science returns a conflict.</div>
+            <div class="meaning-strip"><strong>What is built:</strong> exact confirmation-receipt verification, immutable model and upload registries, bounded binary upload rehashing, hashed project credentials, database-enforced project isolation and quotas, audit events, transactional outbox dispatch, at-least-once leases, stale-worker rejection, cancellation precedence, stateless hash references, manifest agreement, and complete artifact rehashing. The separate worker passes Cartesian 2D/3D, axisymmetric motion, photon-map, raw-image, and galaxy-generation HTTP jobs.</div>
+            <div class="meaning-strip"><strong>What the 503 still means:</strong> the API refuses to invent in-memory state when Postgres is absent. Neon must be approved, provisioned, and migrated; a recurring outbox trigger and stateless scientific container must then pass a complete hosted lifecycle. Archives above the bounded gateway limit also need private direct-upload tokens. Inspect <code>GET /api/v1/storage-readiness</code> for the machine-readable boundary.</div>
           </article>
 
           <article class="example-card card">
@@ -486,7 +498,7 @@
 }</code></pre></div>
             </div>
             <div class="meaning-strip"><strong>What this proves when it runs:</strong> it shows how sensitive one frozen formula's numerical and observable predictions are to the declared baryonic reconstructions. Every draw has a parent hash, explicit indices, an immutable field child, and—when observations are supplied—a separate immutable scoring child. The report retains failures rather than dropping inconvenient draws.</div>
-            <div class="meaning-strip"><strong>What this does not prove:</strong> narrow p16/p50/p84 bands do not show that the priors are realistic, and good scores do not establish a unique gravity law. Example 10 can weight surface draws, but incomplete covariance, unconditioned vertical structure, or a low effective sample size still prevents a credible-interval claim. The public Vercel deployment publishes this contract and explanation but still returns <code>production_worker_not_connected</code> for heavy jobs.</div>
+            <div class="meaning-strip"><strong>What this does not prove:</strong> narrow p16/p50/p84 bands do not show that the priors are realistic, and good scores do not establish a unique gravity law. Example 10 can weight surface draws, but incomplete covariance, unconditioned vertical structure, or a low effective sample size still prevents a credible-interval claim. The public Vercel deployment publishes this contract and explanation but still returns <code>production_control_plane_not_connected</code> for heavy jobs.</div>
           </article>
 
           <article class="example-card card">
@@ -612,7 +624,7 @@ credible_interval_ready</code></pre></div>
 }</code></pre></div>
             </div>
             <div class="meaning-strip"><strong>Verified numerical behavior:</strong> a known cylindrical Bessel solution has relative errors <code>1.260e-3</code>, <code>3.149e-4</code>, and <code>7.872e-5</code> on 25, 49, and 97 cells&mdash;approximately a fourfold error reduction whenever the spacing halves. A separate spatially varying coefficient test recovers its discrete answer without a theory-specific branch.</div>
-            <div class="meaning-strip"><strong>What this can do:</strong> efficiently compare how a flattened disk, a thicker disk, and an axisymmetric bulge change a submitted scalar field law. Examples 12&ndash;14 turn that field into galaxy-motion, photon-map, and raw image-position predictions. <strong>What it cannot do yet:</strong> represent bars, spiral arms, lopsided clusters, or other non-axisymmetric structure; apply a Cartesian convolution as if it were cylindrical; evaluate weak-lensing catalogs or time delays; or execute heavy jobs on public Vercel. Production submissions still return <code>production_worker_not_connected</code>.</div>
+            <div class="meaning-strip"><strong>What this can do:</strong> efficiently compare how a flattened disk, a thicker disk, and an axisymmetric bulge change a submitted scalar field law. Examples 12&ndash;14 turn that field into galaxy-motion, photon-map, and raw image-position predictions. <strong>What it cannot do yet:</strong> represent bars, spiral arms, lopsided clusters, or other non-axisymmetric structure; apply a Cartesian convolution as if it were cylindrical; evaluate weak-lensing catalogs or time delays; or execute heavy jobs on public Vercel. Production submissions still return <code>production_control_plane_not_connected</code>.</div>
           </article>
 
           <article class="example-card card">
@@ -739,7 +751,7 @@ credible_interval_ready</code></pre></div>
             <p class="muted">The detailed repository roadmap defines data products, evidence gates, and failure conditions.</p>
           </div>
           <div class="roadmap-flow">
-            <article><span>1</span><div><h3>Connect production compute</h3><p>Private content-addressed objects, deployment-bound queue delivery, the Postgres schema/outbox, and stateless handoff/finalization contracts are built and tested. Next accept Neon's Marketplace terms, provision and migrate the database, deploy the stateless container, then add project authentication, signed results, quotas, caching, audit logs, monitoring, backups, and cost controls.</p></div></article>
+            <article><span>1</span><div><h3>Connect production compute</h3><p>Private objects, queue delivery, the two-migration Postgres schema, hashed project credentials, isolation, quotas, audit events, transactional outbox, and stateless handoff/finalization contracts are built and tested. Next accept Neon's Marketplace terms, provision and migrate the database, create the first project key, connect a recurring outbox trigger, deploy the stateless container, add large private direct uploads, and then verify signed results, caching, monitoring, backups, and cost controls.</p></div></article>
             <article><span>2</span><div><h3>Complete the resolved evidence registry</h3><p>The first four-cluster slice is live with baryon maps, lens-model comparators, raw-catalog readiness, hashes, and blockers. Add untouched clusters, multiband stellar mass, intracluster light, calibrated gas posteriors, raw positional errors, weak lensing, PSF/WCS, licenses, and redistribution rules.</p></div></article>
             <article><span>3</span><div><h3>Complete galaxy posterior reconstruction</h3><p>The first gravity-independent gas/stellar surface-density likelihood, hashed weights, effective-sample diagnostics, and weighted prediction bands are built. Next replace commissioning fractional errors with released uncertainty/covariance products, add PSF/beam, cube, dust, bulge, distance, and vertical likelihoods, then use adaptive sampling when weights collapse.</p></div></article>
             <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>The axisymmetric scalar-field, galaxy-motion, photon-map, and raw image-position paths are now verified. Next derive a small covariant or Newtonian-limit law with scalar, vector, tensor, cylindrical-nonlocal, screening, photon, and matter terms, explicit units and boundaries, a Solar-System limit, and frozen universal constants.</p></div></article>

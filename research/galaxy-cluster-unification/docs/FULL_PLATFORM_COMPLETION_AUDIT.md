@@ -22,11 +22,11 @@ gap. A public schema alone is not counted as hosted execution.
 | Gravity-independent inverse baryon extractor | Partial | Content-addressed baryonic parameter extraction and strict separation from gravity/velocity/lensing targets | Validated inference from raw multiband images and cubes with posterior calibration and withheld-data checks |
 | Full forward galaxy generator | Partial | Seeded 2D/3D density ensembles, projection, structural perturbations, observation metadata | Physical equilibrium, intrinsic velocity/dispersions, spectral cubes, radiative/beam pipeline, bars/arms/clumps/thickness calibrated to observations |
 | Round-trip validation | Partial | Baryonic map comparisons, frozen development/validation/holdout evidence, formula-transport diagnostics | Large morphology-diverse validation set, uncertainty-calibrated acceptance, Fourier/pixel/cube statistics, withheld modalities |
-| Asynchronous batch API | Built locally / authenticated field-and-galaxy connector on Vercel | Upload, jobs/events/artifacts, batches, composed observation jobs, cancellation/recovery tests; bounded authenticated proxy for field and gravity-independent galaxy jobs | Deploy and verify the external worker; expose observation/batch lifecycles only after durable database/object storage, project auth/isolation and no 25-system production limit |
+| Asynchronous batch API | Built locally / durable project API published fail-closed | Upload, model, jobs/events/artifacts, typed and generic job collections, batches, composed observation jobs, cancellation/recovery tests; exact confirmation registration, idempotency keys, project isolation and rehashed artifact downloads pass against PostgreSQL | Provision/migrate the production database, connect the recurring outbox trigger and stateless worker, add large direct uploads, then prove the complete public lifecycle with no 25-system production limit |
 | Parameter policies and accounting | Built | Published fixed, universal, train/validation/holdout, hierarchical/per-object disclosure; gravity and nuisance counts separated | Comparator-wide effective-complexity and posterior-volume reporting |
 | Deterministic reporting | Partial | Hashed JSON/CSV/NPZ/HTML artifacts, residual histories, reproduction metadata, LLM briefing paths | Uniform PDF bundle, sensitivity plots for every job class, signed manifests from production storage |
 | Optional LLM explanation | Correctly non-authoritative | Deterministic engine owns scores, exclusions, manifests and pass/fail | Optional explanation service only after reports are complete; no LLM key is needed for scientific execution |
-| Production computation infrastructure | Partial: durable objects connected; queue/control-plane slice built | Private content-addressed Vercel objects; deployment-bound Vercel Queue consumers; nine-table Postgres schema; transactional outbox; idempotency, attempts, leases, retries, cancellation and artifact-finalization state machine; bounded stateless-worker handoff; public heavy routes remain fail-closed | Accept Horizon3's Neon Marketplace terms, provision/migrate Postgres, deploy a stateless scientific container, connect public upload/job routes, then add project auth/isolation, quota/cache/license enforcement, audit logs, monitoring, backups and result signing |
+| Production computation infrastructure | Partial: durable objects and queue connected; project API built | Private content-addressed Vercel objects; deployment-bound Vercel Queue consumers; eleven-table Postgres schema; hashed project credentials, isolation, quotas and audit; immutable model/upload registry; transactional outbox; idempotency, attempts, leases, retries, cancellation and artifact finalization; bounded stateless-worker handoff; public heavy routes remain fail-closed | Accept Horizon3's Neon Marketplace terms, provision/migrate Postgres, bootstrap the first key, connect a recurring outbox trigger and stateless container, add large private direct uploads, then verify signing, cache/license policy, monitoring, backups and cost controls |
 | Formula-independence acceptance suite | Partial | Newtonian, AQUAL-like, QUMOND, Refracted Gravity, nonlocal, two-potential, nonlinear and axisymmetric fixtures | A real isolated plug-in fixture plus broader vector/tensor and external-researcher manifests |
 
 ## The bounded path to a useful Sigma Gravity test
@@ -89,10 +89,13 @@ The repository is already useful for developing and falsifying well-specified
 stationary field equations locally. It is not yet a self-service hosted
 research platform. The narrow worker slice passes real 2D, 3D and axisymmetric
 HTTP jobs, and the public project has verified private content-addressed
-objects. The repository now also has deployment-bound queue consumers, a
-transactional Postgres schema/outbox, durable job/attempt/lease/cancellation
-semantics, and a stateless hash-reference handoff. The remaining operational
-critical path is to accept Horizon3's Neon Marketplace terms, provision and
-migrate the database, deploy the stateless scientific container, and repeat a
-complete real job through the public alias. More UI or formula variations are
-not the critical path.
+objects. The repository now also has deployment-bound queue consumers, two
+repeatable Postgres migrations, hashed project credentials,
+database-enforced isolation and quotas, audit events, immutable model/upload
+registration, durable job/attempt/lease/cancellation semantics, a
+transactional outbox, and a stateless hash-reference handoff. The remaining
+operational critical path is to accept Horizon3's Neon Marketplace terms,
+provision and migrate the database, bootstrap the first project, connect a
+recurring outbox trigger, deploy the stateless scientific container, add large
+private direct uploads, and repeat a complete real job through the public
+alias. More UI or formula variations are not the critical path.

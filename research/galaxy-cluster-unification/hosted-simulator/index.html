@@ -25,7 +25,7 @@
       </nav>
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Open research preview · v0.32</p>
+          <p class="eyebrow">Open research preview · v0.33</p>
           <h1>Put a gravity formula in front of real galaxies.</h1>
           <p class="lede">
             Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
@@ -50,7 +50,7 @@
             <div><dt>Cluster evidence registry</dt><dd class="available">Available</dd></div>
             <div><dt>Private artifact store</dt><dd class="available">Connected</dd></div>
             <div><dt>Durable queue</dt><dd class="available">Deployment canary</dd></div>
-            <div><dt>Postgres job control</dt><dd>Built, database pending</dd></div>
+            <div><dt>Project research API</dt><dd>Built, database pending</dd></div>
             <div><dt>Field + galaxy worker connector</dt><dd>Built, not configured</dd></div>
             <div><dt>Local 2D / 3D fields</dt><dd class="available">Available</dd></div>
             <div><dt>Local axisymmetric (r,z)</dt><dd class="available">Available</dd></div>
@@ -303,8 +303,9 @@
               gravity-independent galaxy extraction/generation HTTP suites,
               a private content-addressed object store is connected and rehash-verified, and a
               deployment-bound private queue canary verifies durable delivery. The transactional
-              Postgres schema/outbox and stateless handoff are tested, but no database or stateless
-              worker is configured on the public deployment;
+              Postgres schema/outbox, hashed project credentials, isolation, quotas, audit events,
+              immutable model/upload registration, and stateless handoff are tested, but no database,
+              recurring outbox trigger, or stateless worker is configured on the public deployment;
               hosted heavy routes continue to disclose that limitation.
             </p>
           </div>
@@ -324,8 +325,9 @@
           <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs/prepare</code><p>Bind a model to content-hashed arrays, grid, boundaries, observables, and a resource estimate before queueing.</p></article>
           <article class="endpoint"><span>GET</span><code>/api/v1/storage-readiness</code><p>See which production layers are connected: private objects, queue, job database, stateless worker, and overall execution readiness.</p></article>
           <article class="endpoint"><span>GET / POST</span><code>/api/v1/queue-canary</code><p>Publish one deployment-scoped deduplicated canary, then verify its private content-addressed acknowledgement.</p></article>
-          <article class="endpoint"><span>POST</span><code>/api/v1/data-uploads</code><p>Register immutable NPZ data; the development backend verifies byte hashes before a job can use it.</p></article>
-          <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs</code><p>Queue a confirmed 2D/3D manifest locally, then poll state, events, and verified artifacts. The authenticated production connector is built but has no external worker configured yet.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/models</code><p>Persist an exact confirmation receipt and canonical model under one authenticated project.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/data-uploads</code><p>Register an immutable array manifest, archive hash, byte count, scientific roles, and license before sending bounded bytes.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/jobs</code><p>Submit a registered model and upload with an explicit parameter policy and idempotency key, then poll events and verified private artifacts. The API remains fail-closed until Postgres and the worker are connected.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/observation-evaluation-jobs</code><p>Reuse one immutable solved field with new observation data, masks, beams, or uncertainties without rerunning gravity.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/galaxy-jobs</code><p>Extract content-hashed baryonic parameters, generate controlled seeded 2D/3D ensembles, or weight surface draws without choosing a gravity formula. The authenticated connector is built; public execution awaits the external worker.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/inverse-response-jobs</code><p>Infer a shared candidate baryon-to-response kernel locally from model-derived discovery targets, with uncertainty, nulls, identifiability, and explicit parameter counts.</p></article>
