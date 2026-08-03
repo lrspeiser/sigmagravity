@@ -43,12 +43,15 @@ for heavy jobs. This is an intentional fail-closed boundary.
 
 ## Remaining production build, in order
 
-1. Add Postgres tables and transactions for projects, models, confirmations,
-   uploads, jobs, leases, events, attempts, artifacts, permissions, and
-   idempotency keys.
-2. Add durable at-least-once queue delivery. A job must tolerate duplicate
-   messages and recover an expired worker lease without publishing two results.
-3. Refactor the Python worker into a stateless executor: download only
+1. **Implemented and locally accepted:** Postgres tables and transactions for
+   projects, models, uploads, jobs, leases, events, attempts, artifacts, and a
+   transactional queue outbox. Provisioning awaits Horizon3 acceptance of the
+   Neon Marketplace terms.
+2. **Implemented for deployment acceptance:** durable at-least-once Vercel
+   Queue delivery with a deployment-bound private canary. Job logic tolerates
+   duplicate messages and recovers expired leases without accepting stale
+   results.
+3. Refactor and deploy the Python worker as a stateless executor: download only
    allow-listed hash-bound inputs, use a disposable local scratch directory,
    upload rehashed artifacts, then atomically finalize metadata.
 4. Deploy fixed CPU/memory/time resource classes. Keep advanced plug-ins in

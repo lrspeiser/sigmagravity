@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.31</p>
+          <p class="eyebrow">Researcher guide &middot; v0.32</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -37,7 +37,7 @@
         </div>
         <aside class="guide-callout">
           <p class="eyebrow">The shortest honest description</p>
-          <p><strong>Hosted now:</strong> test bounded radial acceleration formulas against 175 SPARC galaxies, inspect frozen galaxy evidence and a role-safe four-cluster registry, validate an exact 2D/3D model manifest, and inspect a connected private content-addressed artifact store.</p>
+          <p><strong>Hosted now:</strong> test bounded radial acceleration formulas against 175 SPARC galaxies, inspect frozen galaxy evidence and a role-safe four-cluster registry, validate an exact 2D/3D model manifest, inspect private content-addressed artifacts, and verify deployment-bound durable queue delivery.</p>
           <p><strong>Not hosted yet:</strong> execute arbitrary 2D/3D equations or run new raw cluster-lensing solves. Those jobs work only through the repository's local reference backend.</p>
         </aside>
       </div>
@@ -60,7 +60,9 @@
               <tr><td>Resolved cluster evidence registry</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Four calibrated baryonic maps, two lens-model methods per cluster, raw-catalog readiness, provenance hashes, and explicit blockers without mixing scientific roles.</td></tr>
               <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
               <tr><td>Private content-addressed artifact storage</td><td><span class="state-tag live">Connected</span></td><td><span class="state-tag live">Tested adapter</span></td><td>Private immutable objects use a SHA-256-derived path, bounded size, idempotent writes, and byte-for-byte rehashing after write and on every read. This is storage acceptance, not job execution.</td></tr>
-              <tr><td>Authenticated field + galaxy worker deployment slice</td><td><span class="state-tag partial">Compute not configured</span></td><td><span class="state-tag live">Process acceptance passed</span></td><td>The bounded connector exposes immutable uploads, confirmed field jobs, and gravity-independent galaxy extraction/generation. Recovery, cancellation, quotas, parameter separation, and artifact rehashing are enforced. The public site has durable object storage, but no queue, job database, or stateless scientific worker yet.</td></tr>
+              <tr><td>Durable at-least-once queue</td><td><span class="state-tag live">Deployment canary</span></td><td><span class="state-tag live">Failure suite</span></td><td>A private queue consumer writes a deployment-bound acknowledgement to the private object store. Publishing is seven-day deduplicated; the job contract separately handles duplicate delivery, leases, retries, and stale workers.</td></tr>
+              <tr><td>Transactional Postgres job control</td><td><span class="state-tag partial">Awaiting database</span></td><td><span class="state-tag live">Postgres acceptance</span></td><td>Nine-table schema, transactional outbox, project scoping, job/events/attempts/artifacts, idempotency conflicts, leases, cancellation races, and terminal finalization pass against an embedded PostgreSQL engine. Horizon3 must accept Neon's Marketplace terms before the free database can be provisioned.</td></tr>
+              <tr><td>Authenticated field + galaxy worker deployment slice</td><td><span class="state-tag partial">Compute not configured</span></td><td><span class="state-tag live">Process acceptance passed</span></td><td>The bounded connector and stateless handoff contract expose immutable inputs and results. The public site has durable objects and queue delivery, but no connected Postgres database or stateless scientific container, so heavy routes remain fail-closed.</td></tr>
               <tr><td>Axisymmetric fields, galaxy motion, and lensing</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Finite-volume elliptic equations run on a declared <code>(r,z)</code> grid; one typed field can produce circular speeds, resolved velocities, deflection/shear maps, and raw multiple-image roots without a Cartesian proxy.</td></tr>
               <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
               <tr><td>Coupled photon and matter potentials</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Multiple solved fields can interact, while separately typed observables expose different predictions for light and massive tracers without a theory-name branch.</td></tr>
@@ -277,7 +279,7 @@
           </article>
 
           <article class="example-card card">
-            <div class="example-intro"><span class="example-number">05</span><div><h3>Ask for heavy production execution</h3><p>The authenticated connector, field-worker container, and private artifact store now exist. The hosted API still fails honestly until a durable queue, job database, and stateless scientific worker are connected.</p></div></div>
+            <div class="example-intro"><span class="example-number">05</span><div><h3>Ask for heavy production execution</h3><p>The authenticated connector, container, private artifact store, and deployment-bound queue now exist. The hosted API still fails honestly until the Postgres control plane and stateless scientific worker are connected.</p></div></div>
             <div class="code-pair compact-code-pair">
               <div><p class="code-label">POST /api/v1/field-jobs</p><pre><code>{
   "model": {"...": "confirmed model"},
@@ -290,8 +292,8 @@
   "requestSchema": "/schemas/field-job-submit-v1.schema.json"
 }</code></pre></div>
             </div>
-            <div class="meaning-strip"><strong>What is built:</strong> the separate bearer-authenticated worker passed real Cartesian 2D/3D, axisymmetric motion, photon-map, and raw-image HTTP jobs. Upload hashes, job identity, restart recovery, cancellation, artifact quotas, manifest/index hashes, every artifact hash, and unindexed-file rejection are enforced. The live Vercel project also has a private object store verified with the same content-addressed canary from independent processes.</div>
-            <div class="meaning-strip"><strong>What the 503 still means:</strong> the object-storage layer is connected, but no queue, Postgres job/model metadata store, or stateless scientific container consumes jobs from it. A stored input is not a durable job lifecycle, and neither is proof of a scientific result. Inspect <code>GET /api/v1/storage-readiness</code> for the machine-readable boundary.</div>
+            <div class="meaning-strip"><strong>What is built:</strong> the separate worker passed real Cartesian 2D/3D, axisymmetric motion, photon-map, and raw-image HTTP jobs. The production control-plane code adds a transactional outbox, at-least-once delivery, database leases, stale-worker rejection, cancellation precedence, stateless hash references, manifest agreement, and complete artifact rehashing. The live queue canary proves that Vercel invoked the private consumer for this deployment.</div>
+            <div class="meaning-strip"><strong>What the 503 still means:</strong> durable objects and queue delivery are connected, but no Postgres job/model store or stateless scientific container consumes researcher jobs. The database code is verified but not provisioned; Neon's Marketplace terms require Horizon3 approval. Inspect <code>GET /api/v1/storage-readiness</code> for the machine-readable boundary.</div>
           </article>
 
           <article class="example-card card">
@@ -737,7 +739,7 @@ credible_interval_ready</code></pre></div>
             <p class="muted">The detailed repository roadmap defines data products, evidence gates, and failure conditions.</p>
           </div>
           <div class="roadmap-flow">
-            <article><span>1</span><div><h3>Connect production compute</h3><p>The bounded authenticated gateway, non-root worker image, and verified private content-addressed object store are built. Next add durable queue delivery and Postgres job/model metadata, adapt the worker to be stateless, repeat acceptance through Vercel, then add project authentication, signed results, retries, cancellation, quotas, caching, and audit logs.</p></div></article>
+            <article><span>1</span><div><h3>Connect production compute</h3><p>Private content-addressed objects, deployment-bound queue delivery, the Postgres schema/outbox, and stateless handoff/finalization contracts are built and tested. Next accept Neon's Marketplace terms, provision and migrate the database, deploy the stateless container, then add project authentication, signed results, quotas, caching, audit logs, monitoring, backups, and cost controls.</p></div></article>
             <article><span>2</span><div><h3>Complete the resolved evidence registry</h3><p>The first four-cluster slice is live with baryon maps, lens-model comparators, raw-catalog readiness, hashes, and blockers. Add untouched clusters, multiband stellar mass, intracluster light, calibrated gas posteriors, raw positional errors, weak lensing, PSF/WCS, licenses, and redistribution rules.</p></div></article>
             <article><span>3</span><div><h3>Complete galaxy posterior reconstruction</h3><p>The first gravity-independent gas/stellar surface-density likelihood, hashed weights, effective-sample diagnostics, and weighted prediction bands are built. Next replace commissioning fractional errors with released uncertainty/covariance products, add PSF/beam, cube, dust, bulge, distance, and vertical likelihoods, then use adaptive sampling when weights collapse.</p></div></article>
             <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>The axisymmetric scalar-field, galaxy-motion, photon-map, and raw image-position paths are now verified. Next derive a small covariant or Newtonian-limit law with scalar, vector, tensor, cylindrical-nonlocal, screening, photon, and matter terms, explicit units and boundaries, a Solar-System limit, and frozen universal constants.</p></div></article>

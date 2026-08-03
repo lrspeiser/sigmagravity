@@ -45,6 +45,9 @@ const requiredPaths = [
   "dist/examples/observation-targets/axisymmetric-multiple-image-systems.json",
   "api/v1/runs.mjs",
   "api/v1/storage-readiness.mjs",
+  "api/v1/queue-canary.mjs",
+  "api/v1/queue-canary-consumer.mjs",
+  "api/v1/queue-job-consumer.mjs",
   "api/v1/twin-runs.mjs",
   "api/v1/resolved-twin-evidence.mjs",
   "api/v1/cluster-evidence.mjs",
@@ -63,6 +66,12 @@ const requiredPaths = [
   "lib/local-field-job-service.mjs",
   "lib/remote-worker-proxy.mjs",
   "lib/private-blob-store.mjs",
+  "lib/production-control-plane.mjs",
+  "lib/production-database.mjs",
+  "lib/production-job-consumer.mjs",
+  "lib/production-queue.mjs",
+  "lib/stateless-worker-client.mjs",
+  "sql/production-control-plane-v1.sql",
   "lib/worker-http-server.mjs",
   "scripts/worker-server.mjs",
   "lib/observation-evaluation-preflight.mjs",
@@ -105,6 +114,9 @@ for (const phrase of [
   "A genuinely useful result is a prediction, not a reconstruction",
   "What the 503 still means",
   "Private content-addressed artifact storage",
+  "Durable at-least-once queue",
+  "Transactional Postgres job control",
+  "Neon's Marketplace terms",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);
 }

@@ -25,7 +25,7 @@
       </nav>
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Open research preview · v0.31</p>
+          <p class="eyebrow">Open research preview · v0.32</p>
           <h1>Put a gravity formula in front of real galaxies.</h1>
           <p class="lede">
             Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
@@ -49,6 +49,8 @@
             <div><dt>Resolved velocity proof</dt><dd class="available">Available</dd></div>
             <div><dt>Cluster evidence registry</dt><dd class="available">Available</dd></div>
             <div><dt>Private artifact store</dt><dd class="available">Connected</dd></div>
+            <div><dt>Durable queue</dt><dd class="available">Deployment canary</dd></div>
+            <div><dt>Postgres job control</dt><dd>Built, database pending</dd></div>
             <div><dt>Field + galaxy worker connector</dt><dd>Built, not configured</dd></div>
             <div><dt>Local 2D / 3D fields</dt><dd class="available">Available</dd></div>
             <div><dt>Local axisymmetric (r,z)</dt><dd class="available">Available</dd></div>
@@ -299,8 +301,10 @@
               inverse is a hypothesis generator, not a forward theory test. A bounded authenticated
               worker connector and non-root scientific-worker image now pass real field and
               gravity-independent galaxy extraction/generation HTTP suites,
-              and a private content-addressed object store is now connected and rehash-verified,
-              but no durable queue, job database, or stateless worker is configured on the public deployment;
+              a private content-addressed object store is connected and rehash-verified, and a
+              deployment-bound private queue canary verifies durable delivery. The transactional
+              Postgres schema/outbox and stateless handoff are tested, but no database or stateless
+              worker is configured on the public deployment;
               hosted heavy routes continue to disclose that limitation.
             </p>
           </div>
@@ -319,6 +323,7 @@
           <article class="endpoint"><span>POST</span><code>/api/v1/models/confirm</code><p>Bind a researcher acknowledgement to the exact validated equation hash before execution.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs/prepare</code><p>Bind a model to content-hashed arrays, grid, boundaries, observables, and a resource estimate before queueing.</p></article>
           <article class="endpoint"><span>GET</span><code>/api/v1/storage-readiness</code><p>See which production layers are connected: private objects, queue, job database, stateless worker, and overall execution readiness.</p></article>
+          <article class="endpoint"><span>GET / POST</span><code>/api/v1/queue-canary</code><p>Publish one deployment-scoped deduplicated canary, then verify its private content-addressed acknowledgement.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/data-uploads</code><p>Register immutable NPZ data; the development backend verifies byte hashes before a job can use it.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs</code><p>Queue a confirmed 2D/3D manifest locally, then poll state, events, and verified artifacts. The authenticated production connector is built but has no external worker configured yet.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/observation-evaluation-jobs</code><p>Reuse one immutable solved field with new observation data, masks, beams, or uncertainties without rerunning gravity.</p></article>

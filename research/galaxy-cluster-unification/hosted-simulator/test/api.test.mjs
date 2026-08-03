@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import datasets from "../api/v1/datasets.mjs";
 import health from "../api/v1/health.mjs";
 import storageReadiness from "../api/v1/storage-readiness.mjs";
+import queueCanary from "../api/v1/queue-canary.mjs";
 import systems from "../api/v1/systems.mjs";
 import system from "../api/v1/system.mjs";
 import validate from "../api/v1/formulas/validate.mjs";
@@ -44,11 +45,20 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
   return output;
 }
 
+async function asyncCall(handler, { method = "GET", query = {}, body = undefined } = {}) {
+  const output = response();
+  await handler({ method, query, body }, output);
+  return output;
+}
+
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.31.0-preview");
+  assert.equal(output.body.version, "0.32.0-preview");
   assert.equal(output.body.capabilities.durablePrivateObjectStorage, "not_configured");
+  assert.equal(output.body.capabilities.durableQueue, "not_configured");
+  assert.equal(output.body.capabilities.transactionalJobDatabase, "not_configured");
+  assert.equal(output.body.capabilities.statelessScientificWorker, "not_configured");
   assert.equal(
     output.body.capabilities.authenticatedFieldWorkerConnector,
     "available_requires_external_worker_configuration",
@@ -113,15 +123,21 @@ test("health API identifies the deployed contract version and local worker bound
   );
 });
 
-test("storage readiness separates durable objects from an incomplete job lifecycle", () => {
-  const output = call(storageReadiness);
+test("storage readiness separates durable objects from an incomplete job lifecycle", async () => {
+  const output = await asyncCall(storageReadiness);
   assert.equal(output.statusCode, 200);
   assert.equal(output.body.schemaVersion, "sigma-production-storage-readiness/1");
   assert.equal(output.body.objectStorage.state, "not_configured");
-  assert.equal(output.body.queue.state, "not_connected");
-  assert.equal(output.body.jobMetadataDatabase.state, "not_connected");
-  assert.equal(output.body.statelessScientificContainer.state, "not_connected");
+  assert.equal(output.body.queue.state, "not_configured");
+  assert.equal(output.body.jobMetadataDatabase.state, "not_configured");
+  assert.equal(output.body.statelessScientificContainer.state, "not_configured");
   assert.equal(output.body.productionExecution, "not_ready");
+});
+
+test("queue canary is unavailable without a deployment identity", async () => {
+  const output = await asyncCall(queueCanary, { method: "POST" });
+  assert.equal(output.statusCode, 503);
+  assert.equal(output.body.error, "production_queue_not_configured");
 });
 
 test("published batch schema exposes bounded galaxy ensemble fan-out", () => {
@@ -417,4 +433,12 @@ test("Vercel rewrites expose authenticated field and galaxy lifecycles without a
     assert.equal(sources.has(source), true, `missing Vercel rewrite ${source}`);
   }
   assert.equal(configuration.rewrites.some((value) => value.source.includes("(.*)")), false);
+  assert.equal(
+    configuration.functions["api/v1/queue-canary-consumer.mjs"].experimentalTriggers[0].topic,
+    "sigma-control-plane-canary-v1",
+  );
+  assert.equal(
+    configuration.functions["api/v1/queue-job-consumer.mjs"].experimentalTriggers[0].topic,
+    "sigma-control-plane-jobs-v1",
+  );
 });

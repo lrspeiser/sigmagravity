@@ -6,6 +6,7 @@ import formulasValidate from "../api/v1/formulas/validate.mjs";
 import fieldJobsPrepare from "../api/v1/field-jobs/prepare.mjs";
 import health from "../api/v1/health.mjs";
 import storageReadiness from "../api/v1/storage-readiness.mjs";
+import queueCanary from "../api/v1/queue-canary.mjs";
 import modelsValidate from "../api/v1/models/validate.mjs";
 import modelsConfirm from "../api/v1/models/confirm.mjs";
 import runs from "../api/v1/runs.mjs";
@@ -40,6 +41,7 @@ const localBatches = createLocalBatchRouter(localBatchService);
 const apiRoutes = new Map([
   ["/api/v1/health", health],
   ["/api/v1/storage-readiness", storageReadiness],
+  ["/api/v1/queue-canary", queueCanary],
   ["/api/v1/datasets", datasets],
   ["/api/v1/systems", systems],
   ["/api/v1/formulas/validate", formulasValidate],

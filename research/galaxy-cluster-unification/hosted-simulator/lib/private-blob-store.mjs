@@ -74,6 +74,57 @@ function objectPath(namespace, sha256, extension) {
   return `sigma/v1/objects/${namespace}/sha256/${sha256}.${extension}`;
 }
 
+export function privateBlobReferenceFor({
+  namespace,
+  bytes,
+  mediaType = "application/octet-stream",
+  extension = "bin",
+}) {
+  validatedSegment(namespace, "namespace");
+  validatedExtension(extension);
+  const content = Buffer.isBuffer(bytes) ? bytes : Buffer.from(bytes);
+  if (typeof mediaType !== "string" || !/^[A-Za-z0-9.+-]+\/[A-Za-z0-9.+-]+$/.test(mediaType)) {
+    throw new Error("mediaType must be a simple MIME type");
+  }
+  const sha256 = contentSha256(content);
+  return {
+    schemaVersion: "sigma-private-blob-object/1",
+    provider: "vercel_blob",
+    access: "private",
+    namespace,
+    extension,
+    pathname: objectPath(namespace, sha256, extension),
+    sha256,
+    bytes: content.length,
+    mediaType,
+  };
+}
+
+export function validatePrivateBlobReference(reference, { maximumBytes = Number.MAX_SAFE_INTEGER } = {}) {
+  if (!reference || reference.schemaVersion !== "sigma-private-blob-object/1") {
+    throw new Error("private blob reference schema is invalid");
+  }
+  const namespace = validatedSegment(reference.namespace, "namespace");
+  const extension = validatedExtension(reference.extension);
+  if (reference.provider !== "vercel_blob" || reference.access !== "private") {
+    throw new Error("private blob reference provider or access is invalid");
+  }
+  if (typeof reference.sha256 !== "string" || !SHA256.test(reference.sha256)) {
+    throw new Error("private blob reference SHA-256 is invalid");
+  }
+  if (!Number.isSafeInteger(reference.bytes) || reference.bytes < 0 || reference.bytes > maximumBytes) {
+    throw new Error("private blob reference byte count is invalid");
+  }
+  if (typeof reference.mediaType !== "string" || !/^[A-Za-z0-9.+-]+\/[A-Za-z0-9.+-]+$/.test(reference.mediaType)) {
+    throw new Error("private blob reference media type is invalid");
+  }
+  const expectedPath = objectPath(namespace, reference.sha256, extension);
+  if (reference.pathname !== expectedPath) {
+    throw new Error("private blob reference pathname is not content-addressed correctly");
+  }
+  return { ...reference, namespace, extension, pathname: expectedPath };
+}
+
 function isNotFound(error) {
   return error instanceof BlobNotFoundError || error?.name === "BlobNotFoundError";
 }
@@ -131,8 +182,8 @@ export class PrivateBlobStore {
     if (typeof mediaType !== "string" || !/^[A-Za-z0-9.+-]+\/[A-Za-z0-9.+-]+$/.test(mediaType)) {
       throw new Error("mediaType must be a simple MIME type");
     }
-    const sha256 = contentSha256(content);
-    const pathname = objectPath(namespace, sha256, extension);
+    const reference = privateBlobReferenceFor({ namespace, bytes: content, mediaType, extension });
+    const { sha256, pathname } = reference;
     let metadata = await this.#head(pathname);
     if (!metadata) {
       try {
@@ -150,17 +201,6 @@ export class PrivateBlobStore {
         if (!metadata) throw error;
       }
     }
-    const reference = {
-      schemaVersion: "sigma-private-blob-object/1",
-      provider: "vercel_blob",
-      access: "private",
-      namespace,
-      extension,
-      pathname,
-      sha256,
-      bytes: content.length,
-      mediaType,
-    };
     const downloaded = await this.getVerified(reference);
     if (!downloaded.equals(content)) {
       throw new Error("content-addressed object bytes do not match the submitted bytes");
@@ -170,21 +210,7 @@ export class PrivateBlobStore {
   }
 
   async getVerified(reference) {
-    if (!reference || reference.schemaVersion !== "sigma-private-blob-object/1") {
-      throw new Error("private blob reference schema is invalid");
-    }
-    const namespace = validatedSegment(reference.namespace, "namespace");
-    const extension = validatedExtension(reference.extension);
-    if (typeof reference.sha256 !== "string" || !SHA256.test(reference.sha256)) {
-      throw new Error("private blob reference SHA-256 is invalid");
-    }
-    if (!Number.isSafeInteger(reference.bytes) || reference.bytes < 0 || reference.bytes > this.maximumBytes) {
-      throw new Error("private blob reference byte count is invalid");
-    }
-    const expectedPath = objectPath(namespace, reference.sha256, extension);
-    if (reference.pathname !== expectedPath) {
-      throw new Error("private blob reference pathname is not content-addressed correctly");
-    }
+    reference = validatePrivateBlobReference(reference, { maximumBytes: this.maximumBytes });
     const result = await this.client.get(reference.pathname, {
       ...this.authentication,
       access: "private",
@@ -201,6 +227,13 @@ export class PrivateBlobStore {
       throw new Error("private blob object failed content verification");
     }
     return content;
+  }
+
+  async hasVerified(reference) {
+    reference = validatePrivateBlobReference(reference, { maximumBytes: this.maximumBytes });
+    if (!(await this.#head(reference.pathname))) return false;
+    await this.getVerified(reference);
+    return true;
   }
 
   async deleteForTest(reference) {

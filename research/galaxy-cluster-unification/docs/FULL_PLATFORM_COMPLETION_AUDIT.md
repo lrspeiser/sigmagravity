@@ -26,7 +26,7 @@ gap. A public schema alone is not counted as hosted execution.
 | Parameter policies and accounting | Built | Published fixed, universal, train/validation/holdout, hierarchical/per-object disclosure; gravity and nuisance counts separated | Comparator-wide effective-complexity and posterior-volume reporting |
 | Deterministic reporting | Partial | Hashed JSON/CSV/NPZ/HTML artifacts, residual histories, reproduction metadata, LLM briefing paths | Uniform PDF bundle, sensitivity plots for every job class, signed manifests from production storage |
 | Optional LLM explanation | Correctly non-authoritative | Deterministic engine owns scores, exclusions, manifests and pass/fail | Optional explanation service only after reports are complete; no LLM key is needed for scientific execution |
-| Production computation infrastructure | Partial: durable objects connected, execution not deployed | Non-root pinned field-and-galaxy worker container, bounded Vercel connector, and a private Vercel Blob adapter with content-addressed immutable paths, quotas, idempotent writes, and SHA-256 verification after write and on read; public heavy routes still return honest `production_worker_not_connected` errors | Add durable queue delivery and Postgres job/model metadata, make the worker stateless over private objects, deploy it, then add project auth/isolation, retries, cache, licensing enforcement, audit logs and result signing |
+| Production computation infrastructure | Partial: durable objects connected; queue/control-plane slice built | Private content-addressed Vercel objects; deployment-bound Vercel Queue consumers; nine-table Postgres schema; transactional outbox; idempotency, attempts, leases, retries, cancellation and artifact-finalization state machine; bounded stateless-worker handoff; public heavy routes remain fail-closed | Accept Horizon3's Neon Marketplace terms, provision/migrate Postgres, deploy a stateless scientific container, connect public upload/job routes, then add project auth/isolation, quota/cache/license enforcement, audit logs, monitoring, backups and result signing |
 | Formula-independence acceptance suite | Partial | Newtonian, AQUAL-like, QUMOND, Refracted Gravity, nonlocal, two-potential, nonlinear and axisymmetric fixtures | A real isolated plug-in fixture plus broader vector/tensor and external-researcher manifests |
 
 ## The bounded path to a useful Sigma Gravity test
@@ -88,9 +88,11 @@ the discovery stage:
 The repository is already useful for developing and falsifying well-specified
 stationary field equations locally. It is not yet a self-service hosted
 research platform. The narrow worker slice passes real 2D, 3D and axisymmetric
-HTTP jobs, and the public project now has verified private content-addressed
-object storage. Those are still separate layers. The next product milestone is
-operational: add durable queue delivery and Postgres job/model metadata, adapt
-the worker to consume and publish immutable private objects without relying on
-its filesystem spool, then repeat the complete lifecycle through the public
-alias. More UI or formula variations are not the critical path.
+HTTP jobs, and the public project has verified private content-addressed
+objects. The repository now also has deployment-bound queue consumers, a
+transactional Postgres schema/outbox, durable job/attempt/lease/cancellation
+semantics, and a stateless hash-reference handoff. The remaining operational
+critical path is to accept Horizon3's Neon Marketplace terms, provision and
+migrate the database, deploy the stateless scientific container, and repeat a
+complete real job through the public alias. More UI or formula variations are
+not the critical path.

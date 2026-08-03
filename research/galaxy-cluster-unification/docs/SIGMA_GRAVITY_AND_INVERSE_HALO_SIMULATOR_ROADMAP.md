@@ -117,9 +117,12 @@ Build:
 
 - **Connected:** private content-addressed Vercel Blob storage with bounded
   immutable writes and verified SHA-256 reads;
-- a queue and scheduler outside Vercel request execution;
+- **Built:** deployment-bound private Vercel Queue consumers, a live canary,
+  at-least-once idempotency, retries, and a transactional outbox;
 - network-disabled, single-use Python worker containers;
-- Postgres metadata for projects, models, jobs, events, and permissions;
+- **Built and PostgreSQL-tested; provisioning pending Neon terms:** Postgres
+  metadata for projects, models, uploads, jobs, events, attempts, leases,
+  artifacts, and outbox delivery;
 - production wiring that uses the connected private object store for immutable
   arrays and reports rather than the local filesystem spool;
 - content hashing at upload, worker input, artifact creation, and download;

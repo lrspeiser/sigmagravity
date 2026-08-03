@@ -3,6 +3,30 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "functions": {
+    "api/v1/queue-canary-consumer.mjs": {
+      "maxDuration": 60,
+      "experimentalTriggers": [
+        {
+          "type": "queue/v2beta",
+          "topic": "sigma-control-plane-canary-v1",
+          "retryAfterSeconds": 10,
+          "initialDelaySeconds": 0
+        }
+      ]
+    },
+    "api/v1/queue-job-consumer.mjs": {
+      "maxDuration": 300,
+      "experimentalTriggers": [
+        {
+          "type": "queue/v2beta",
+          "topic": "sigma-control-plane-jobs-v1",
+          "retryAfterSeconds": 60,
+          "initialDelaySeconds": 0
+        }
+      ]
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",

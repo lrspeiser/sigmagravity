@@ -1,6 +1,6 @@
 {
   "name": "sigma-gravity-research-simulator",
-  "version": "0.31.0",
+  "version": "0.32.0",
   "private": true,
   "type": "module",
   "description": "Public, reproducible preview API for galaxy and gravity-formula tests.",
@@ -14,6 +14,8 @@
     "dev:vercel": "vercel dev",
     "smoke": "node scripts/smoke-http.mjs",
     "smoke:blob": "node --env-file-if-exists=.env.local scripts/smoke-private-blob.mjs",
+    "smoke:queue": "node scripts/smoke-queue-canary.mjs",
+    "migrate:production-db": "node --env-file-if-exists=.env.local scripts/migrate-production-database.mjs",
     "smoke:field-jobs": "python ../scripts/smoke_local_field_job_api.py",
     "smoke:two-potential": "python ../scripts/smoke_local_two_potential_api.py",
     "smoke:observation-jobs": "python ../scripts/smoke_local_observation_evaluation_api.py",
@@ -26,6 +28,11 @@
     "node": "22.x"
   },
   "dependencies": {
-    "@vercel/blob": "^2.6.1"
+    "@neondatabase/serverless": "^1.1.0",
+    "@vercel/blob": "^2.6.1",
+    "@vercel/queue": "^0.4.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.4"
   }
 }

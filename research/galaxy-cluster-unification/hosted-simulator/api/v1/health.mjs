@@ -1,12 +1,15 @@
 import { options, requireMethod, send } from "../../lib/http.mjs";
 import { privateBlobStorageState } from "../../lib/private-blob-store.mjs";
+import { productionDatabaseState } from "../../lib/production-database.mjs";
+import { productionQueueState } from "../../lib/production-queue.mjs";
+import { statelessWorkerState } from "../../lib/stateless-worker-client.mjs";
 
 export default function handler(request, response) {
   if (options(request, response) || !requireMethod(request, response, "GET")) return;
   send(response, 200, {
     status: "ok",
     service: "sigma-gravity-research-simulator",
-    version: "0.31.0-preview",
+    version: "0.32.0-preview",
     capabilities: {
       researcherGuide: "available",
       radialRotationCurves: "available",
@@ -45,6 +48,13 @@ export default function handler(request, response) {
         misconfigured: "misconfigured",
         not_configured: "not_configured",
       }[privateBlobStorageState()],
+      durableQueue: {
+        configured: "configured_canary_required",
+        misconfigured: "misconfigured",
+        not_configured: "not_configured",
+      }[productionQueueState()],
+      transactionalJobDatabase: productionDatabaseState(),
+      statelessScientificWorker: statelessWorkerState(),
       resolvedGalaxyExtractionAndGeneration: "production_worker_not_connected",
       fieldSolvers2d3d: "worker_not_connected",
       rawMultipleImageLensing: "production_worker_not_connected",
