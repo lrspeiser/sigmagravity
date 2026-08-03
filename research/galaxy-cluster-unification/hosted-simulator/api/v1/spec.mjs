@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.29.0-preview",
-    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions, genuinely coupled field equations, separately typed photon and matter observables, seeded baryonic prior ensembles, optional gravity-independent gas/stellar surface-likelihood conditioning, and deterministic fan-out of one confirmed field model across selected realizations with weighted score and per-radius prediction bands. It also provides an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. A bounded authenticated connector and non-root safe-manifest field-worker image are implemented but not configured on the public deployment. Degenerate weights are not credible intervals, inverse results are hypothesis generators rather than forward theory tests, and public heavy execution still requires a deployed worker with verified durable storage.",
+    version: "0.30.0-preview",
+    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence, a role-safe four-cluster evidence registry, plus a dimension-checked formula-independent 2D/3D contract. The reference worker executes confirmed field models and gravity-independent baryonic extraction, controlled generation, 2D/3D uncertainty ensembles, and image-only conditioning. It also supports local nonlocal, coupled photon/matter, observation, batch, and inverse-discovery workflows. A bounded authenticated connector and non-root worker image now expose upload, field-job, and galaxy-job lifecycles, but no external worker or durable volume is configured on the public deployment. Degenerate weights are not credible intervals, inverse results are hypothesis generators rather than forward theory tests, and public heavy execution still requires durable isolated compute.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
@@ -20,7 +20,7 @@ const specification = {
     "/api/v1/models/validate": { post: { summary: "Validate and hash a scalar/vector/tensor 2D/3D field-model manifest" } },
     "/api/v1/models/confirm": { post: { summary: "Bind explicit researcher acknowledgement to the exact validated computational model hash" } },
     "/api/v1/field-jobs/prepare": { post: { summary: "Preflight a model, content-hashed arrays, 2D/3D grid, boundary, and observation-target request" } },
-    "/api/v1/data-uploads": { post: { summary: "Create an immutable NPZ upload ticket through the local service or configured authenticated field worker" } },
+    "/api/v1/data-uploads": { post: { summary: "Create an immutable NPZ upload ticket through the local service or configured authenticated scientific worker" } },
     "/api/v1/data-uploads/{id}": { get: { summary: "Inspect an array upload" } },
     "/api/v1/data-uploads/{id}/content": { put: { summary: "Upload hash- and size-bound NPZ bytes" } },
     "/api/v1/field-jobs": {
@@ -42,8 +42,8 @@ const specification = {
     "/api/v1/observation-evaluation-jobs/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed, rehashed observation artifact" } },
     "/api/v1/observation-evaluation-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running observation-evaluation job" } },
     "/api/v1/galaxy-jobs": {
-      get: { summary: "List local resolved-galaxy extraction/generation jobs" },
-      post: { summary: "Queue formula-independent extraction, generation, 2D/3D prior ensembles, or round-trip work" },
+      get: { summary: "List resolved-galaxy jobs through the local service or configured authenticated worker" },
+      post: { summary: "Queue gravity-independent extraction, controlled generation, 2D/3D ensembles, or round-trip work" },
     },
     "/api/v1/galaxy-jobs/{id}": { get: { summary: "Read resolved-galaxy job state" } },
     "/api/v1/galaxy-jobs/{id}/events": { get: { summary: "Read resolved-galaxy lifecycle events" } },

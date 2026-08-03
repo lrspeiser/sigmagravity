@@ -2,10 +2,11 @@ import { createServer } from "node:http";
 import { timingSafeEqual } from "node:crypto";
 import { createLocalFieldJobRouter } from "./local-field-job-http.mjs";
 
-const WORKER_HTTP_VERSION = "sigma-authenticated-field-worker-http/1";
+const WORKER_HTTP_VERSION = "sigma-authenticated-simulator-worker-http/2";
 const UPLOAD_CONTENT = /^\/api\/v1\/data-uploads\/upload_[0-9a-f]{24}\/content$/;
 const UPLOAD_ROUTE = /^\/api\/v1\/data-uploads(?:\/upload_[0-9a-f]{24}(?:\/content)?)?$/;
 const FIELD_JOB_ROUTE = /^\/api\/v1\/field-jobs(?:\/job_[0-9a-f]{24}(?:\/(?:events|cancel|artifacts)(?:\/[^/\\]+)?)?)?$/;
+const GALAXY_JOB_ROUTE = /^\/api\/v1\/galaxy-jobs(?:\/job_[0-9a-f]{24}(?:\/(?:events|cancel|artifacts)(?:\/[^/\\]+)?)?)?$/;
 
 class WorkerHttpError extends Error {
   constructor(statusCode, code, message) {
@@ -50,7 +51,7 @@ function authorized(header, token) {
 }
 
 function allowedPath(pathname) {
-  return UPLOAD_ROUTE.test(pathname) || FIELD_JOB_ROUTE.test(pathname);
+  return UPLOAD_ROUTE.test(pathname) || FIELD_JOB_ROUTE.test(pathname) || GALAXY_JOB_ROUTE.test(pathname);
 }
 
 async function requestBody(request, pathname, service, maxJsonBytes) {
@@ -103,7 +104,14 @@ export function createWorkerHttpServer({
         json(response, 200, {
           schemaVersion: WORKER_HTTP_VERSION,
           status: "ok",
-          execution: "safe_confirmed_field_manifests_only",
+          execution: "safe_confirmed_fields_and_gravity_independent_galaxy_generation",
+          jobClasses: {
+            field: "available",
+            galaxyExtractionAndGeneration: "available",
+            observationEvaluation: "not_exposed",
+            inverseResponse: "not_exposed",
+            arbitraryPlugin: "not_exposed",
+          },
           arbitraryCodeExecution: false,
           authentication: "bearer_token_required_for_scientific_routes",
           store: {
@@ -129,7 +137,7 @@ export function createWorkerHttpServer({
         return;
       }
       if (!authorized(request.headers.authorization, token)) {
-        response.setHeader("WWW-Authenticate", 'Bearer realm="sigma-field-worker"');
+        response.setHeader("WWW-Authenticate", 'Bearer realm="sigma-simulator-worker"');
         json(response, 401, { error: "unauthorized", message: "valid worker authorization is required" });
         return;
       }

@@ -54,6 +54,7 @@ const requiredPaths = [
   "api/v1/field-job.mjs",
   "api/v1/observation-evaluation-jobs.mjs",
   "api/v1/galaxy-jobs.mjs",
+  "api/v1/galaxy-job.mjs",
   "api/v1/inverse-response-jobs.mjs",
   "api/v1/batches.mjs",
   "lib/resolved-twin-evidence.mjs",
@@ -75,7 +76,7 @@ for (const path of requiredPaths) await access(resolve(root, path));
 const guide = await readFile(resolve(root, "dist", "guide.html"), "utf8");
 for (const phrase of [
   "What works where",
-  "Authenticated field-worker deployment slice",
+  "Authenticated field + galaxy worker deployment slice",
   "Inputs, outputs, and meaning",
   "What it cannot tell you yet",
   "Use halo maps only for discovery",

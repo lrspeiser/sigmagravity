@@ -32,9 +32,11 @@ def request(
     data = None
     if payload is not None:
         data = payload if isinstance(payload, bytes) else json.dumps(payload).encode("utf-8")
-    call = urllib.request.Request(
-        url, data=data, method=method, headers={"Content-Type": content_type}
-    )
+    headers = {"Content-Type": content_type}
+    worker_token = os.environ.get("SIMULATOR_WORKER_TOKEN")
+    if worker_token:
+        headers["Authorization"] = f"Bearer {worker_token}"
+    call = urllib.request.Request(url, data=data, method=method, headers=headers)
     try:
         with urllib.request.urlopen(call, timeout=60) as response:
             return response.read()
@@ -79,13 +81,32 @@ def artifacts(base: str, submission: dict[str, Any]) -> tuple[dict[str, Any], di
     return response, downloaded
 
 
-def main() -> None:
-    base = os.environ.get("SIMULATOR_BASE_URL", "http://127.0.0.1:4173")
+def baryonic_fixture() -> tuple[np.ndarray, np.ndarray, np.ndarray, str, str]:
     source_path = ROOT / "results" / "p0639_registered_baryonic_maps" / "maps" / "DDO101.npz"
-    with np.load(source_path) as source:
-        axis = np.asarray(source["axis_kpc"], dtype=float)
-        gas = np.asarray(source["gas"], dtype=float)
-        stars = np.asarray(source["stars"], dtype=float)
+    if source_path.exists() and source_path.read_bytes()[:4] == b"PK\x03\x04":
+        with np.load(source_path) as source:
+            return (
+                np.asarray(source["axis_kpc"], dtype=float),
+                np.asarray(source["gas"], dtype=float),
+                np.asarray(source["stars"], dtype=float),
+                "DDO101",
+                "registered_real_baryonic_map",
+            )
+    axis = np.linspace(-12.0, 12.0, 65)
+    x_grid, y_grid = np.meshgrid(axis, axis, indexing="xy")
+    radius = np.sqrt((x_grid / 1.15) ** 2 + (y_grid / 0.82) ** 2)
+    angle = np.arctan2(y_grid, x_grid)
+    gas = 2.4e7 * np.exp(-radius / 5.4) * (1.0 + 0.16 * np.cos(2.0 * angle))
+    stars = 5.1e7 * np.exp(-radius / 3.1) * (1.0 + 0.11 * np.cos(angle - 0.4))
+    return axis, gas, stars, "synthetic-worker-fixture", "deterministic_analytic_baryonic_map"
+
+
+def main() -> None:
+    base = os.environ.get(
+        "SIMULATOR_BASE_URL",
+        os.environ.get("SIMULATOR_URL", "http://127.0.0.1:4173"),
+    )
+    axis, gas, stars, source_system, source_kind = baryonic_fixture()
     with tempfile.TemporaryDirectory(prefix="sigma-galaxy-http-") as temporary_value:
         temporary = Path(temporary_value)
         bundle = write_array_bundle(
@@ -117,7 +138,7 @@ def main() -> None:
                 },
                 "provenance": {
                     "kind": "P0639 registered baryonic map",
-                    "galaxy": "DDO101",
+                    "galaxy": source_system,
                 },
                 "license": {"id": "research-source-license", "redistributionAllowed": False},
             },
@@ -143,7 +164,7 @@ def main() -> None:
                 "schemaVersion": "sigma-galaxy-job-submit/1",
                 "operation": "extract_roundtrip",
                 "dataUploadId": ticket["id"],
-                "galaxy": "DDO101",
+                "galaxy": source_system,
                 "sourceObservables": {"stage": "HTTP smoke", "inclinationDeg": 51.0},
                 "extractionControls": {
                     "radialBins": 24,
@@ -222,7 +243,8 @@ def main() -> None:
         result = {
             "schemaVersion": "sigma-galaxy-job-http-smoke/1",
             "state": "pass",
-            "realGalaxy": "DDO101",
+            "sourceSystem": source_system,
+            "sourceKind": source_kind,
             "extractOperationalJobId": extraction["id"],
             "extractScientificJobId": extracted["scientificJobId"],
             "generateOperationalJobId": generation["id"],

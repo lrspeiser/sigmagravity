@@ -70,6 +70,7 @@ async function requestContent(request, maximumBytes) {
 function safeWorkerPath(path) {
   const upload = /^api\/v1\/data-uploads(?:\/upload_[0-9a-f]{24}(?:\/content)?)?$/;
   const fieldJob = /^api\/v1\/field-jobs(?:\/job_[0-9a-f]{24}(?:\/(?:events|cancel|artifacts)(?:\/[A-Za-z0-9_.%-]+)?)?)?$/;
+  const galaxyJob = /^api\/v1\/galaxy-jobs(?:\/job_[0-9a-f]{24}(?:\/(?:events|cancel|artifacts)(?:\/[A-Za-z0-9_.%-]+)?)?)?$/;
   let decodedSegments = [];
   try {
     decodedSegments = typeof path === "string" ? path.split("/").map((value) => decodeURIComponent(value)) : [];
@@ -78,7 +79,7 @@ function safeWorkerPath(path) {
   }
   if (
     typeof path !== "string"
-    || (!upload.test(path) && !fieldJob.test(path))
+    || (!upload.test(path) && !fieldJob.test(path) && !galaxyJob.test(path))
     || decodedSegments.some((value) => value === "." || value === ".." || value.includes("/") || value.includes("\\"))
   ) {
     throw new Error("worker proxy path is not allow-listed");

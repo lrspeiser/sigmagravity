@@ -74,15 +74,18 @@ target to the field equation or baryonic extractor.
 The verified Horizon3 production deployment is
 <https://sigma-gravity-research-simulator-five.vercel.app>.
 
-The v0.29 milestone separates the field worker from the development server.
-A pinned, non-root container now exposes only authenticated immutable uploads
-and confirmed field jobs; the Vercel gateway has a bounded server-side
-connector that remains disabled without an external HTTPS origin and secret.
-Publication rejects invalid manifest/index hashes, unsafe or unindexed files,
-and artifact byte/count overruns. The real four-case HTTP acceptance passed
-through this boundary, including the axisymmetric raw-lensing case. No external
-worker or durable volume has been deployed yet, so the public heavy routes
-correctly remain HTTP 503. See
+The v0.30 milestone exposes the gravity-independent resolved-galaxy extractor
+and generator through the same authenticated worker boundary as confirmed
+field jobs. A real separated process extracted DDO101 without velocity targets,
+retained its 2D/3D ensemble, regenerated a controlled variant, exactly
+transferred a 1.25 gas-mass change, and rehashed all 45 artifacts with zero
+gravity parameters. No external worker or durable volume has been deployed
+yet, so public heavy routes correctly remain HTTP 503. See
+[`docs/AUTHENTICATED_GALAXY_WORKER_MILESTONE.md`](docs/AUTHENTICATED_GALAXY_WORKER_MILESTONE.md).
+
+The v0.29 milestone first separated the confirmed-manifest field worker from
+the development server, including the non-root container, bounded gateway,
+restart recovery, and immutable artifact verification. See
 [`docs/AUTHENTICATED_FIELD_WORKER_MILESTONE.md`](docs/AUTHENTICATED_FIELD_WORKER_MILESTONE.md).
 
 The v0.28 local worker now feeds a cylindrical photon field into the raw

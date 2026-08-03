@@ -1,4 +1,4 @@
-name: Sigma field worker
+name: Sigma scientific worker
 
 on:
   push:
@@ -10,6 +10,8 @@ on:
       - "research/galaxy-cluster-unification/src/**"
       - "research/galaxy-cluster-unification/scripts/run_generic_field_job.py"
       - "research/galaxy-cluster-unification/scripts/smoke_local_field_job_api.py"
+      - "research/galaxy-cluster-unification/scripts/run_resolved_galaxy_job.py"
+      - "research/galaxy-cluster-unification/scripts/smoke_local_galaxy_job_api.py"
       - "research/galaxy-cluster-unification/hosted-simulator/**"
   pull_request:
     paths:
@@ -19,6 +21,8 @@ on:
       - "research/galaxy-cluster-unification/src/**"
       - "research/galaxy-cluster-unification/scripts/run_generic_field_job.py"
       - "research/galaxy-cluster-unification/scripts/smoke_local_field_job_api.py"
+      - "research/galaxy-cluster-unification/scripts/run_resolved_galaxy_job.py"
+      - "research/galaxy-cluster-unification/scripts/smoke_local_galaxy_job_api.py"
       - "research/galaxy-cluster-unification/hosted-simulator/**"
   workflow_dispatch:
 
@@ -81,6 +85,9 @@ jobs:
           SIMULATOR_URL=http://127.0.0.1:8787 \
           SIMULATOR_WORKER_TOKEN="$CI_WORKER_TOKEN" \
           python scripts/smoke_local_field_job_api.py
+          SIMULATOR_BASE_URL=http://127.0.0.1:8787 \
+          SIMULATOR_WORKER_TOKEN="$CI_WORKER_TOKEN" \
+          python scripts/smoke_local_galaxy_job_api.py
       - name: Show worker logs on failure
         if: failure()
         run: docker logs sigma-worker-ci || true

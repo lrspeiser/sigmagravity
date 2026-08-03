@@ -14,6 +14,7 @@ RUN cd hosted-simulator && npm ci --omit=dev
 
 COPY src ./src
 COPY scripts/run_generic_field_job.py ./scripts/run_generic_field_job.py
+COPY scripts/run_resolved_galaxy_job.py ./scripts/run_resolved_galaxy_job.py
 COPY hosted-simulator ./hosted-simulator
 
 RUN useradd --create-home --uid 10001 sigmaworker \

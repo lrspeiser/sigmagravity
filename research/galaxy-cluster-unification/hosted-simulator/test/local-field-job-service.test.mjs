@@ -621,7 +621,9 @@ test("worker input rejection is not misreported as infrastructure failure", asyn
 
 test("graceful shutdown leaves interrupted work resumable", async (t) => {
   const blockingRunner = ({ signal }) => new Promise((resolvePromise) => {
-    signal.addEventListener("abort", () => resolvePromise({ exitCode: null, exitSignal: "SIGTERM", timedOut: false, stdout: "", stderr: "" }), { once: true });
+    const interrupted = () => resolvePromise({ exitCode: null, exitSignal: "SIGTERM", timedOut: false, stdout: "", stderr: "" });
+    if (signal.aborted) interrupted();
+    else signal.addEventListener("abort", interrupted, { once: true });
   });
   const service = await fixture(t, { runner: blockingRunner });
   const upload = await readyUpload(service, Buffer.from("restartable-job"));

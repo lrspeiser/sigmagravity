@@ -1,6 +1,7 @@
 import { options, send } from "../../lib/http.mjs";
+import { proxyWorkerRequest } from "../../lib/remote-worker-proxy.mjs";
 
-export default function handler(request, response) {
+export default async function handler(request, response) {
   if (options(request, response)) return;
   if (!["GET", "POST"].includes(request.method)) {
     response.setHeader("Allow", "OPTIONS, GET, POST");
@@ -8,10 +9,15 @@ export default function handler(request, response) {
     return;
   }
   response.setHeader("Cache-Control", "no-store");
-  send(response, 503, {
-    error: "production_worker_not_connected",
-    message: "The asynchronous resolved-galaxy extraction/generation contract is implemented by the local reference backend; durable storage and the isolated worker pool are not connected to this deployment.",
-    localReference: "npm run dev",
-    requestSchema: "/schemas/galaxy-job-submit-v1.schema.json",
+  await proxyWorkerRequest({
+    request,
+    response,
+    path: "api/v1/galaxy-jobs",
+    unavailable: {
+      error: "production_worker_not_connected",
+      message: "The authenticated galaxy-worker connector exists, but no durable worker endpoint is configured for this deployment.",
+      localReference: "npm run dev",
+      requestSchema: "/schemas/galaxy-job-submit-v1.schema.json",
+    },
   });
 }

@@ -21,6 +21,10 @@ function serviceFixture() {
       calls.push({ method: "putUploadContent", id, body });
       return { id, state: "ready" };
     },
+    async createGalaxyJob(body) {
+      calls.push({ method: "createGalaxyJob", body });
+      return { id: "job_0123456789abcdef01234567", state: "queued" };
+    },
   };
 }
 
@@ -45,7 +49,10 @@ test("worker health discloses quotas and durability without requiring or echoing
   const response = await fetch(`${base}/healthz`);
   assert.equal(response.status, 200);
   const body = await response.json();
-  assert.equal(body.schemaVersion, "sigma-authenticated-field-worker-http/1");
+  assert.equal(body.schemaVersion, "sigma-authenticated-simulator-worker-http/2");
+  assert.equal(body.jobClasses.field, "available");
+  assert.equal(body.jobClasses.galaxyExtractionAndGeneration, "available");
+  assert.equal(body.jobClasses.inverseResponse, "not_exposed");
   assert.equal(body.store.backend, "filesystem");
   assert.equal(body.store.storePathConfigured, true);
   assert.equal(body.store.durability, "requires_deployment_volume_verification");
@@ -92,10 +99,23 @@ test("authorized JSON and binary upload requests reach the allow-listed field se
   assert.deepEqual(service.calls[1].body, content);
 });
 
+test("authorized gravity-independent galaxy submissions reach the allow-listed service", async (t) => {
+  const { base, service } = await listeningServer(t);
+  const response = await fetch(`${base}/api/v1/galaxy-jobs`, {
+    method: "POST",
+    headers: { authorization: `Bearer ${TOKEN}`, "content-type": "application/json" },
+    body: JSON.stringify({ schemaVersion: "sigma-galaxy-job-submit/1", operation: "generate" }),
+  });
+  assert.equal(response.status, 202);
+  assert.equal((await response.json()).state, "queued");
+  assert.equal(service.calls[0].method, "createGalaxyJob");
+  assert.equal(service.calls[0].body.operation, "generate");
+});
+
 test("worker boundary rejects unsupported job classes and oversized request bodies", async (t) => {
   const { base } = await listeningServer(t, { maxJsonBytes: 1024 });
   const authorization = { authorization: `Bearer ${TOKEN}`, "content-type": "application/json" };
-  const unsupported = await fetch(`${base}/api/v1/galaxy-jobs`, {
+  const unsupported = await fetch(`${base}/api/v1/inverse-response-jobs`, {
     method: "POST",
     headers: authorization,
     body: "{}",

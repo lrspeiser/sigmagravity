@@ -74,6 +74,27 @@ test("configured gateway forwards bounded requests with server-side authorizatio
   assert.equal(response.body.includes(TOKEN), false);
 });
 
+test("configured gateway allow-lists the galaxy extraction and generation lifecycle", async () => {
+  const response = responseFixture();
+  let capturedUrl;
+  await proxyWorkerRequest({
+    request: { method: "GET", headers: {} },
+    response,
+    path: "api/v1/galaxy-jobs/job_0123456789abcdef01234567/artifacts/parameters.json",
+    environment: { SIMULATOR_WORKER_URL: "https://worker.example", SIMULATOR_WORKER_TOKEN: TOKEN },
+    fetchImpl: async (url) => {
+      capturedUrl = url;
+      return new Response("parameter-bytes", { status: 200, headers: { "content-type": "application/octet-stream" } });
+    },
+  });
+  assert.equal(
+    capturedUrl,
+    "https://worker.example/api/v1/galaxy-jobs/job_0123456789abcdef01234567/artifacts/parameters.json",
+  );
+  assert.equal(response.statusCode, 200);
+  assert.equal(response.body.toString("utf8"), "parameter-bytes");
+});
+
 test("gateway forwards an unparsed binary request stream without JSON reinterpretation", async () => {
   const response = responseFixture();
   const chunks = [Buffer.from([0, 1, 2]), Buffer.from([253, 254, 255])];

@@ -27,6 +27,11 @@
     {"source": "/api/v1/field-jobs/:id/events", "destination": "/api/v1/field-job?id=:id&resource=events"},
     {"source": "/api/v1/field-jobs/:id/cancel", "destination": "/api/v1/field-job?id=:id&resource=cancel"},
     {"source": "/api/v1/field-jobs/:id", "destination": "/api/v1/field-job?id=:id"},
+    {"source": "/api/v1/galaxy-jobs/:id/artifacts/:name", "destination": "/api/v1/galaxy-job?id=:id&resource=artifact&name=:name"},
+    {"source": "/api/v1/galaxy-jobs/:id/artifacts", "destination": "/api/v1/galaxy-job?id=:id&resource=artifacts"},
+    {"source": "/api/v1/galaxy-jobs/:id/events", "destination": "/api/v1/galaxy-job?id=:id&resource=events"},
+    {"source": "/api/v1/galaxy-jobs/:id/cancel", "destination": "/api/v1/galaxy-job?id=:id&resource=cancel"},
+    {"source": "/api/v1/galaxy-jobs/:id", "destination": "/api/v1/galaxy-job?id=:id"},
     {"source": "/api/v1/systems/:id", "destination": "/api/v1/system?id=:id"},
     {"source": "/api/v1/openapi.json", "destination": "/api/v1/spec"}
   ]

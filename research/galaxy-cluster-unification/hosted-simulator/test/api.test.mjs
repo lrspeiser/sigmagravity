@@ -16,6 +16,7 @@ import hostedBatches from "../api/v1/batches.mjs";
 import hostedDataUploads from "../api/v1/data-uploads.mjs";
 import hostedDataUpload from "../api/v1/data-upload.mjs";
 import hostedFieldJob from "../api/v1/field-job.mjs";
+import hostedGalaxyJob from "../api/v1/galaxy-job.mjs";
 import runs from "../api/v1/runs.mjs";
 import twinRuns from "../api/v1/twin-runs.mjs";
 import resolvedTwinEvidence from "../api/v1/resolved-twin-evidence.mjs";
@@ -45,10 +46,18 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.29.0-preview");
+  assert.equal(output.body.version, "0.30.0-preview");
   assert.equal(
     output.body.capabilities.authenticatedFieldWorkerConnector,
     "available_requires_external_worker_configuration",
+  );
+  assert.equal(
+    output.body.capabilities.authenticatedGalaxyWorkerConnector,
+    "available_requires_external_worker_configuration",
+  );
+  assert.equal(
+    output.body.capabilities.resolvedGalaxyExtractionAndGeneration,
+    "production_worker_not_connected",
   );
   assert.equal(output.body.capabilities.localBaryonicImageConditioning, "available_in_dev_server");
   assert.equal(output.body.capabilities.localBaryonicEnsemblePropagation, "available_in_dev_server");
@@ -355,6 +364,15 @@ test("production upload and queue endpoints disclose missing infrastructure", ()
   assert.equal(galaxyJob.statusCode, 503);
   assert.equal(galaxyJob.body.error, "production_worker_not_connected");
   assert.equal(galaxyJob.body.requestSchema, "/schemas/galaxy-job-submit-v1.schema.json");
+  const galaxyJobDetail = call(hostedGalaxyJob, {
+    query: { id: "job_0123456789abcdef01234567", resource: "artifacts" },
+  });
+  assert.equal(galaxyJobDetail.statusCode, 503);
+  assert.equal(galaxyJobDetail.body.error, "production_worker_not_connected");
+  const unsafeGalaxyArtifact = call(hostedGalaxyJob, {
+    query: { id: "job_0123456789abcdef01234567", resource: "artifact", name: "../secret" },
+  });
+  assert.equal(unsafeGalaxyArtifact.statusCode, 404);
   const observationJob = call(hostedObservationEvaluationJobs, { method: "POST", body: {} });
   assert.equal(observationJob.statusCode, 503);
   assert.equal(observationJob.body.error, "production_worker_not_connected");
@@ -370,7 +388,7 @@ test("production upload and queue endpoints disclose missing infrastructure", ()
   assert.equal(batch.body.requestSchema, "/schemas/batch-submit-v1.schema.json");
 });
 
-test("Vercel rewrites expose the authenticated field-worker lifecycle without a catch-all proxy", () => {
+test("Vercel rewrites expose authenticated field and galaxy lifecycles without a catch-all proxy", () => {
   const configuration = JSON.parse(readFileSync(new URL("../vercel.json", import.meta.url), "utf8"));
   const sources = new Set(configuration.rewrites.map((value) => value.source));
   for (const source of [
@@ -379,6 +397,9 @@ test("Vercel rewrites expose the authenticated field-worker lifecycle without a 
     "/api/v1/field-jobs/:id/events",
     "/api/v1/field-jobs/:id/artifacts/:name",
     "/api/v1/field-jobs/:id/cancel",
+    "/api/v1/galaxy-jobs/:id/events",
+    "/api/v1/galaxy-jobs/:id/artifacts/:name",
+    "/api/v1/galaxy-jobs/:id/cancel",
   ]) {
     assert.equal(sources.has(source), true, `missing Vercel rewrite ${source}`);
   }
