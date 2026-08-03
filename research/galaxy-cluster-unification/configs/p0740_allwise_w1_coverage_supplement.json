@@ -64,7 +64,7 @@
     "allSha256Recorded": true,
     "allFitsPrimaryHdusReadable": true,
     "allFitsHaveTwoCelestialAxes": true,
-    "allCutoutCentersInsideFiniteW1Coverage": true,
+    "allCutoutCentersInsideImageWcsBounds": true,
     "allIntensityAndUncertaintyShapesMatch": true,
     "requiredValidationArraysOpened": 0,
     "requiredHoldoutArraysOpened": 0,
