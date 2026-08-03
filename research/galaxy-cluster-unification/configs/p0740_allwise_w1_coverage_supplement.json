@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "sigma-p0740-allwise-w1-coverage-supplement/1",
+  "stage": "P0740",
+  "status": "frozen_before_wise_image_download_or_array_inspection",
+  "purpose": "Acquire wider WISE W1 stellar-light coverage after P0739 honestly failed its frozen SINGS-footprint gate for NGC2403 and NGC5055. The supplement is applied uniformly to all development, validation, and holdout systems before any validation, holdout, velocity, or dispersion array is opened.",
+  "parents": {
+    "resolvedAcquisitionConfig": "configs/p0738_morphology_diverse_resolved_acquisition.json",
+    "resolvedAcquisitionManifestSha256": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+    "failedRegistrationConfig": "configs/p0739_spiral_baryonic_registration_development.json",
+    "failedRegistrationFinding": "The only failed P0739 engineering gate was minimum joint stellar/H I footprint inside the published H I R995: NGC2403=0.8715 and NGC5055=0.8024 versus the frozen 0.90 minimum."
+  },
+  "source": {
+    "name": "WISE AllWISE Atlas Level 3a images",
+    "archive": "NASA/IPAC Infrared Science Archive",
+    "documentation": "https://irsa.ipac.caltech.edu/ibe/docs/wise/allwise/p3am_cdd/",
+    "imageApiDocumentation": "https://irsa.ipac.caltech.edu/docs/program_interface/api_images.html",
+    "metadataBaseUrl": "https://irsa.ipac.caltech.edu/ibe/search/wise/allwise/p3am_cdd",
+    "dataBaseUrl": "https://irsa.ipac.caltech.edu/ibe/data/wise/allwise/p3am_cdd",
+    "band": 1,
+    "bandLabel": "W1 3.4 micron",
+    "products": ["intensity", "uncertainty"]
+  },
+  "selectionPolicy": {
+    "metadataInspectionBeforeFreeze": true,
+    "imageArrayInspectionBeforeFreeze": false,
+    "searchIntersection": "OVERLAPS",
+    "coaddRule": "Freeze every W1 coadd returned by the official IBE metadata query that overlaps the centered requested square; mosaic the frozen set without choosing tiles from image appearance.",
+    "cutoutCenter": "Previously frozen SPARC/NED sky coordinate.",
+    "cutoutDiameter": "Twice the P0739 face-on half-extent, converted from physical size using the published SPARC distance. This bounds the projected footprint because projection compresses the minor axis.",
+    "splitRule": "Acquire bytes for all eight systems now, but do not open validation or holdout image arrays until their later unlock manifests.",
+    "calibrationRule": "Use SINGS IRAC1 wherever its valid weight map exists. In development only, estimate one per-galaxy WISE-to-SINGS photometric scale from robust overlapping, background-subtracted pixels; use scaled WISE only outside the SINGS footprint. This is an observational cross-calibration and must never use kinematics or gravity predictions.",
+    "resolutionRule": "Convolve the fused stellar morphology to the same THINGS beam used for gas before mass normalization.",
+    "massRule": "Retain the P0739 universal stellar M/L=0.5 and normalize the completed stellar morphology to the published 3.6 micron luminosity. WISE does not introduce a gravity parameter or a second stellar mass normalization."
+  },
+  "systems": [
+    {"id": "NGC2403", "split": "development", "raDeg": 114.21374, "decDeg": 65.60268, "distanceMpc": 3.16, "halfExtentKpc": 18.132, "cutoutDiameterDeg": 0.65752346, "coaddIds": ["1150p666_ac51", "1153p651_ac51", "1118p651_ac51"]},
+    {"id": "NGC3198", "split": "development", "raDeg": 154.97918, "decDeg": 45.54982, "distanceMpc": 13.8, "halfExtentKpc": 42.792, "cutoutDiameterDeg": 0.35533348, "coaddIds": ["1555p454_ac51"]},
+    {"id": "NGC5055", "split": "development", "raDeg": 198.95537, "decDeg": 42.02932, "distanceMpc": 9.9, "halfExtentKpc": 42.072, "cutoutDiameterDeg": 0.48697940, "coaddIds": ["1982p424_ac51", "2002p424_ac51"]},
+    {"id": "NGC7793", "split": "development", "raDeg": 359.45721, "decDeg": -32.59099, "distanceMpc": 3.61, "halfExtentKpc": 15.768, "cutoutDiameterDeg": 0.50052069, "coaddIds": ["3582m319_ac51", "0000m319_ac51", "0000m334_ac51"]},
+    {"id": "NGC3521", "split": "validation", "raDeg": 166.45242, "decDeg": -0.03586, "distanceMpc": 7.7, "halfExtentKpc": 22.62, "cutoutDiameterDeg": 0.33663131, "coaddIds": ["1663p000_ac51"]},
+    {"id": "NGC6946", "split": "validation", "raDeg": 308.71801, "decDeg": 60.15391, "distanceMpc": 5.52, "halfExtentKpc": 30.24, "cutoutDiameterDeg": 0.62776245, "coaddIds": ["3081p590_ac51", "3090p605_ac51"]},
+    {"id": "NGC2841", "split": "holdout", "raDeg": 140.51111, "decDeg": 50.97661, "distanceMpc": 14.1, "halfExtentKpc": 54.144, "cutoutDiameterDeg": 0.44003159, "coaddIds": ["1406p514_ac51"]},
+    {"id": "NGC7331", "split": "holdout", "raDeg": 339.26693, "decDeg": 34.41576, "distanceMpc": 14.7, "halfExtentKpc": 32.412, "cutoutDiameterDeg": 0.25266269, "coaddIds": ["3398p348_ac51"]}
+  ],
+  "acquisitionRules": {
+    "requiredSystems": 8,
+    "requiredDevelopmentSystems": 4,
+    "requiredValidationSystems": 2,
+    "requiredHoldoutSystems": 2,
+    "requiredCoadds": 14,
+    "requiredProductsPerCoadd": 2,
+    "requiredFiles": 28,
+    "requiredHash": "sha256",
+    "rawFilesImmutable": true,
+    "fitsHeadersMayBeOpenedForAllSplits": true,
+    "developmentArraysMayBeOpenedAfterAcquisition": true,
+    "validationArraysMayBeOpenedAfterAcquisition": false,
+    "holdoutArraysMayBeOpenedAfterAcquisition": false,
+    "velocityOrDispersionArraysOpened": 0,
+    "gravityParameters": 0
+  },
+  "acquisitionGates": {
+    "allHttpStatus200": true,
+    "allSha256Recorded": true,
+    "allFitsPrimaryHdusReadable": true,
+    "allFitsHaveTwoCelestialAxes": true,
+    "allCutoutCentersInsideFiniteW1Coverage": true,
+    "allIntensityAndUncertaintyShapesMatch": true,
+    "requiredValidationArraysOpened": 0,
+    "requiredHoldoutArraysOpened": 0,
+    "requiredVelocityOrDispersionArraysOpened": 0,
+    "maximumGravityParameters": 0
+  },
+  "claimBoundary": [
+    "P0740 repairs observational coverage; it cannot validate or improve a gravity formula.",
+    "AllWISE W1 and SINGS IRAC1 have different filters, PSFs, backgrounds, and foreground contamination; their cross-calibration uncertainty must be propagated later.",
+    "Downloading validation and holdout bytes does not unseal their image arrays.",
+    "No velocity, dispersion, dark-matter, MOND, or candidate-theory value may select, scale, mask, or mosaic these images."
+  ]
+}
