@@ -928,6 +928,7 @@ def evaluate_observation_targets(
                 target_rows,
                 target_family_rows,
                 target_roots,
+                target_maps,
             ) = evaluate_multiple_image_systems_target(
                 model,
                 observables,
@@ -937,6 +938,8 @@ def evaluate_observation_targets(
             )
             if root_outputs is not None:
                 root_outputs.update(target_roots)
+            if map_outputs is not None:
+                map_outputs.update(target_maps)
             if auxiliary_rows is not None:
                 auxiliary_rows.setdefault("multiple_image_families", []).extend(
                     target_family_rows

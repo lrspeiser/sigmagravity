@@ -42,6 +42,7 @@ const requiredPaths = [
   "dist/examples/models/refracted-gravity.json",
   "dist/examples/models/nonlocal-response.json",
   "dist/examples/observation-targets/photon-lensing-map.json",
+  "dist/examples/observation-targets/axisymmetric-multiple-image-systems.json",
   "api/v1/runs.mjs",
   "api/v1/twin-runs.mjs",
   "api/v1/resolved-twin-evidence.mjs",
@@ -90,6 +91,8 @@ for (const phrase of [
   "axisymmetric_midplane_direct",
   "Project a cylindrical field into a lensing map",
   "axisymmetric_cylindrical_ray_integral",
+  "Score raw image positions from a cylindrical field",
+  "zero_only_outside_verified_root_support",
   "A genuinely useful result is a prediction, not a reconstruction",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);

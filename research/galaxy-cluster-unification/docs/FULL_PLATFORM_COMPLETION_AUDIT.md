@@ -15,8 +15,8 @@ gap. A public schema alone is not counted as hosted execution.
 | Safe formula operators | Partial | Grad/div/curl/Laplacian, products, gates, coupled scalar elliptic fields, LOS/path operations, Cartesian convolution, multiple potentials | General tensor algebra, cylindrical nonlocal kernels, broader nonlinear constitutive forms |
 | Isolated advanced-code plug-ins | Missing | Contract direction only | Signed upload, single-use network-disabled containers, read-only data, quotas, pinned runtime, malware/policy controls; never execute plug-ins in Vercel |
 | Generic Cartesian 2D/3D worker | Partial | Finite-volume scalar elliptic, nonlinear Picard/Anderson/Newton–Krylov, coupled fields, diagnostics, nonlocal Cartesian fixture | FFT path integration, vector/tensor solves, mixed/Neumann/periodic library, refinement, production scaling |
-| Axisymmetric `(r,z)` worker and observables | Built for scalar elliptic fields, massive tracers and photon maps | Regular-axis finite volume, variable coefficients, second-order Bessel acceptance, direct circular-speed curves, inclined resolved velocity maps, inclination-aware deflection/shear maps, immutable async job path | Cylindrical convolution and raw multiple-image/weak-lensing likelihoods from cylindrical maps |
-| Coordinate-safe lensing/ray tracing | Partial | Typed Cartesian and axisymmetric photon acceleration, deflection/shear maps, raw Cartesian multiple-image roots and scores | Validated physical cosmological normalization, weak-lensing catalogs, time delays, magnification likelihood, cylindrical raw-image path |
+| Axisymmetric `(r,z)` worker and observables | Built for scalar elliptic fields, massive tracers, photon maps and raw image positions | Regular-axis finite volume, variable coefficients, second-order Bessel acceptance, direct circular-speed curves, inclined resolved velocity maps, inclination-aware deflection/shear maps, finite-support raw roots and immutable async job path | Cylindrical convolution, weak-lensing catalogs, time delays and non-axisymmetric structure |
+| Coordinate-safe lensing/ray tracing | Partial | Typed Cartesian and axisymmetric photon acceleration, deflection/shear maps, raw Cartesian and cylindrical multiple-image roots and scores | Validated physical cosmological normalization, weak-lensing catalogs, time delays and magnification-selection likelihoods |
 | Resolved observational catalog | Partial | SPARC radial catalog, eight frozen resolved-twin systems, four-cluster evidence registry, selected local maps | Licensed homogeneous light/gas/cube/PSF/WCS/noise/mask packages across a morphology-diverse sample and untouched clusters |
 | Uncertainty-aware 2D-to-3D reconstruction | Partial | Seeded prior ensembles, exact projection checks, first gravity-independent surface likelihood and weight diagnostics | Full covariance, PSF/beam/dust, bulge depth, scale-height and warp likelihoods, adaptive posterior sampler, adequate effective sample size |
 | Gravity-independent inverse baryon extractor | Partial | Content-addressed baryonic parameter extraction and strict separation from gravity/velocity/lensing targets | Validated inference from raw multiband images and cubes with posterior calibration and withheld-data checks |
@@ -37,11 +37,11 @@ polish, not the critical path.
 1. **Write one exact law.** Express Sigma Gravity as a confirmed manifest with
    a small set of universal constants, units, boundaries, photon/matter
    coupling, and an explicit Newtonian/GR Solar-System limit.
-2. **Complete axisymmetric raw lensing.** Direct circular-speed, resolved
-   velocity-field and projected photon-map adapters now pass independent
-   analytic and asynchronous acceptance. Feed the cylindrical deflection map
-   into raw multiple-image and weak-lensing likelihoods with domain and
-   resolution sensitivity retained.
+2. **Validate cylindrical raw lensing on registered observations.** Direct
+   circular-speed, resolved velocity-field, photon-map and raw multiple-image
+   adapters now pass independent analytic and asynchronous acceptance. Register
+   complete real image catalogs, propagate baryonic/domain uncertainty, add
+   weak-lensing likelihoods, and retain resolution sensitivity.
 3. **Register morphology-diverse baryons.** Assemble licensed gas, stellar,
    bulge, distance, inclination, PSF/beam, mask and uncertainty packages that
    were not created using the candidate gravity law.

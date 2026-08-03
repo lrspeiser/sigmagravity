@@ -73,6 +73,17 @@ target to the field equation or baryonic extractor.
 The verified Horizon3 production deployment is
 <https://sigma-gravity-research-simulator-five.vercel.app>.
 
+The v0.28 local worker now feeds a cylindrical photon field into the raw
+strong-lensing pipeline. It archives one distance-ratio-one projection,
+profiles and counts two source coordinates per family, finds and assigns global
+lens-equation roots, and scores image positions only when predicted topology is
+complete. A finite-support gate prevents zero-filled cells outside the solved
+cylinder from entering the root or Jacobian region. The real asynchronous HTTP
+fixture scored its analytic images at `0.001692 arcsec` RMS, rehashed all 13
+artifacts, and added zero per-object gravity parameters. The contract and its
+real-cluster limitations are documented in
+[`docs/AXISYMMETRIC_RAW_MULTIPLE_IMAGE_LENSING_MILESTONE.md`](docs/AXISYMMETRIC_RAW_MULTIPLE_IMAGE_LENSING_MILESTONE.md).
+
 The v0.27 local worker now turns the same confirmed axisymmetric field into
 both galaxy-motion and photon-lensing predictions. It reconstructs and
 integrates a cylindrical `(a_r,a_z)` field at a declared inclination, returns

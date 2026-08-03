@@ -5,7 +5,7 @@ export default function handler(request, response) {
   send(response, 200, {
     status: "ok",
     service: "sigma-gravity-research-simulator",
-    version: "0.27.0-preview",
+    version: "0.28.0-preview",
     capabilities: {
       researcherGuide: "available",
       radialRotationCurves: "available",
@@ -36,6 +36,7 @@ export default function handler(request, response) {
       localAxisymmetricCylindricalFields: "available_in_dev_server",
       localAxisymmetricGalaxyObservations: "available_in_dev_server",
       localAxisymmetricPhotonLensing: "available_in_dev_server",
+      localAxisymmetricRawMultipleImageLensing: "available_in_dev_server",
       fieldSolvers2d3d: "worker_not_connected",
       rawMultipleImageLensing: "production_worker_not_connected",
     },

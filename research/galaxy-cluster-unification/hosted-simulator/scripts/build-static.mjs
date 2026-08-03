@@ -42,6 +42,7 @@ for (const path of [
   "examples/observation-targets/line-of-sight-velocity-field.json",
   "examples/observation-targets/photon-lensing-map.json",
   "examples/observation-targets/multiple-image-systems.json",
+  "examples/observation-targets/axisymmetric-multiple-image-systems.json",
 ]) {
   await copyFile(resolve(root, path), resolve(dist, path));
 }

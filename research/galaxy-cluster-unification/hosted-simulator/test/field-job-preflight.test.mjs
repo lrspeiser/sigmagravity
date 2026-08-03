@@ -670,3 +670,112 @@ test("raw multiple-image preflight counts source nuisances separately", () => {
   request.request.observationTargets[0].families[0].positionUncertaintiesArcsec = [0.05];
   assert.throws(() => prepareFieldJob(request), /must contain 2 values/);
 });
+
+test("axisymmetric raw-image preflight binds projection and source nuisances", () => {
+  const request = axisymmetricPayload();
+  request.model.observables[0].target = "both";
+  bindConfirmation(request.model);
+  request.request.observationTargets = [{
+    schemaVersion: "sigma-observation-target/1",
+    id: "axisymmetric-raw-images",
+    kind: "multiple_image_systems",
+    observable: "massive_tracer_acceleration",
+    axisymmetricInclinationDeg: 37,
+    skyShape: [101, 99],
+    lineOfSightSamples: 129,
+    lensAngularDiameterDistanceM: 1e22,
+    skyCenterM: [0, 0, 0],
+    rootSearchBoundArcsec: 20,
+    rootGridPoints: 81,
+    families: [{
+      id: "source-a",
+      distanceRatio: 0.7,
+      observedImagesArcsec: [[-8, 0], [11, 0]],
+      positionUncertaintiesArcsec: [0.05, 0.05],
+    }],
+    provenance: { kind: "axisymmetric raw-image fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  }];
+  const result = prepareFieldJob(request);
+  assert.equal(result.valid, true);
+  assert.equal(result.observationTargets[0].scored, true);
+  assert.equal(result.observationTargets[0].pointCount, 4);
+  assert.equal(result.observationTargets[0].fittedNuisanceParameters, 2);
+});
+
+test("axisymmetric raw-image preflight rejects axes, origin drift, and path cost", () => {
+  const request = axisymmetricPayload();
+  request.model.observables[0].target = "both";
+  bindConfirmation(request.model);
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "axisymmetric-raw-images",
+    kind: "multiple_image_systems",
+    observable: "massive_tracer_acceleration",
+    axisymmetricInclinationDeg: 0,
+    skyShape: [101, 101],
+    lineOfSightSamples: 65,
+    lensAngularDiameterDistanceM: 1e22,
+    skyCenterM: [0, 0, 0],
+    rootSearchBoundArcsec: 20,
+    families: [{
+      id: "source-a",
+      distanceRatio: 0.7,
+      observedImagesArcsec: [[-8, 0], [11, 0]],
+      positionUncertaintiesArcsec: [0.05, 0.05],
+    }],
+    provenance: { kind: "axisymmetric raw-image fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  request.request.observationTargets = [target];
+  target.northAxis = 0;
+  assert.throws(() => prepareFieldJob(request), /does not accept Cartesian sky-axis/);
+  delete target.northAxis;
+  target.gridOriginM = [0, -15];
+  assert.throws(() => prepareFieldJob(request), /origin must match/);
+  delete target.gridOriginM;
+  target.skyShape = [513, 513];
+  target.lineOfSightSamples = 2049;
+  assert.throws(() => prepareFieldJob(request), /path samples/);
+});
+
+test("decoupled axisymmetric raw images bind the solved field origin", () => {
+  const request = axisymmetricPayload();
+  request.model.observables[0].target = "both";
+  bindConfirmation(request.model);
+  const observationBundle = inputBundle();
+  observationBundle.geometry.coordinateSystem = "observation_table";
+  const target = {
+    schemaVersion: "sigma-observation-target/1",
+    id: "decoupled-axisymmetric-raw-images",
+    kind: "multiple_image_systems",
+    observable: "massive_tracer_acceleration",
+    axisymmetricInclinationDeg: 20,
+    skyShape: [101, 101],
+    lineOfSightSamples: 129,
+    lensAngularDiameterDistanceM: 1e22,
+    skyCenterM: [0, 0, 0],
+    rootSearchBoundArcsec: 20,
+    families: [{
+      id: "source-a",
+      distanceRatio: 0.7,
+      observedImagesArcsec: [[-8, 0], [11, 0]],
+      positionUncertaintiesArcsec: [0.05, 0.05],
+    }],
+    provenance: { kind: "axisymmetric raw-image fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  const validate = () => validateObservationTargets({
+    targets: [target],
+    model: request.model,
+    inputBundle: observationBundle,
+    requestedObservables: ["massive_tracer_acceleration"],
+    fieldShape: [33, 33],
+    fieldGeometry: request.inputBundle.geometry,
+  });
+  assert.throws(validate, /requires gridOriginM/);
+  target.gridOriginM = [0, -16];
+  const result = validate();
+  assert.equal(result[0].pointCount, 4);
+  assert.equal(result[0].fittedNuisanceParameters, 2);
+});

@@ -19,6 +19,18 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.28 composes the axisymmetric photon projection with raw strong-
+lensing image positions. It projects and archives one distance-ratio-one map,
+scales it by each source family's declared distance ratio, profiles two source
+coordinates per family, finds global roots, assigns observed images, and keeps
+topology failure separate from a finite fit score. The root square plus its
+Jacobian margin must lie inside finite projected support; unsupported cells are
+zero-filled only outside that verified region. The real asynchronous HTTP
+fixture recovered its analytic outer images at `0.001692 arcsec` RMS, rehashed
+13 artifacts, and added zero per-object gravity parameters. This is not a real
+cluster fit, and public heavy execution remains disconnected. See
+[`../docs/AXISYMMETRIC_RAW_MULTIPLE_IMAGE_LENSING_MILESTONE.md`](../docs/AXISYMMETRIC_RAW_MULTIPLE_IMAGE_LENSING_MILESTONE.md).
+
 Version 0.27 projects a photon- or `both`-typed axisymmetric `(a_r,a_z)` field
 into inclination-aware deflection, convergence, shear, rotation, Jacobian and
 magnification maps. The target binds its sky shape, path samples, distance
@@ -28,9 +40,9 @@ point-mass fixtures independently freeze the geometry and `4GM/(c^2R)`
 normalization. The real asynchronous HTTP acceptance scored the same solved
 field against motion and photons, rehashed all 11 artifacts, introduced zero
 per-object gravity parameters, and obtained `5.49e-26 arcsec` deflection RMSE.
-This validates the adapter, not a real cluster fit. The field is truncated at
-the solved cylinder, raw multiple-image likelihoods remain Cartesian-only,
-and production compute remains disconnected. See
+This validates the map adapter, not a real cluster fit. The field is truncated
+at the solved cylinder, and production compute remains disconnected. The v0.28
+milestone adds bounded raw image-position scoring. See
 [`../docs/AXISYMMETRIC_PHOTON_LENSING_MILESTONE.md`](../docs/AXISYMMETRIC_PHOTON_LENSING_MILESTONE.md).
 
 Version 0.26 connects the verified axisymmetric field worker to real galaxy
@@ -513,7 +525,8 @@ and byte-identical between integrated and separately cached observation jobs.
 See `examples/observation-targets/photon-lensing-map.json` and
 `../docs/P0734_TYPED_PHOTON_LENSING_ADAPTER.md`.
 
-`multiple_image_systems` uses the same explicit 3D photon projection but tests
+`multiple_image_systems` uses the same explicit Cartesian 3D or axisymmetric
+cylindrical photon projection but tests
 raw observed image positions rather than a reconstructed convergence map. For
 each source family it profiles two source coordinates, globally searches the
 declared image plane for every closed lens-equation root, and uses a minimum-
@@ -523,7 +536,8 @@ predicts fewer roots than observed images, the target is marked
 `incomplete_topology`; aggregate RMS, chi-square, and likelihood remain null
 instead of scoring only the matched subset. Extra roots remain disclosed
 because classifying their detectability requires an additional selection
-model. See `examples/observation-targets/multiple-image-systems.json` and
+model. See `examples/observation-targets/multiple-image-systems.json`,
+`examples/observation-targets/axisymmetric-multiple-image-systems.json`, and
 `../docs/P0735_RAW_MULTIPLE_IMAGE_ADAPTER.md`.
 
 The map target contract is illustrated by

@@ -7,6 +7,7 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+from scipy.optimize import brentq
 
 from voidscreen.field_job import (
     execute_field_job,
@@ -326,7 +327,7 @@ def test_axisymmetric_job_binds_coordinates_and_executes_end_to_end(tmp_path: Pa
     assert relative_error < 0.003
     assert job["geometry"]["axisOrder"] == ["r", "z"]
     assert job["geometry"]["origin"] == [0.0, 0.0]
-    assert job["worker"]["version"] == "1.4.0-preview"
+    assert job["worker"]["version"] == "1.5.0-preview"
     assert result["numericalMetadata"]["coordinate_system"] == (
         "axisymmetric_cylindrical"
     )
@@ -552,6 +553,151 @@ def test_axisymmetric_job_scores_a_photon_map_without_cartesian_proxy(
     assert target_score["samplingMode"] == "axisymmetric_cylindrical_ray_integral"
     assert target_score["score"]["channels"]["deflection_arcsec"]["rmse"] < 1e-12
     assert target_score["score"]["fittedNuisanceParameters"] == 0
+
+
+def test_axisymmetric_job_scores_raw_images_and_archives_the_projection(
+    tmp_path: Path,
+) -> None:
+    lens_distance = 1.0e20
+    distance_ratio = 0.7
+    angular_spacing_arcsec = 0.05
+    spacing = lens_distance * angular_spacing_arcsec / RAD_TO_ARCSEC
+    shape = (61, 65)
+    radius = np.arange(shape[0], dtype=float) * spacing
+    vertical = -0.5 * (shape[1] - 1) * spacing + np.arange(shape[1]) * spacing
+    radial_grid, _vertical_grid = np.meshgrid(radius, vertical, indexing="ij")
+    core_radius = spacing
+    path_length = float(vertical[-1] - vertical[0])
+    einstein_radius_arcsec = 1.0
+    acceleration_scale = (
+        (einstein_radius_arcsec / RAD_TO_ARCSEC)
+        * C_M_S**2
+        / (2.0 * distance_ratio * path_length)
+    )
+    expected_potential = acceleration_scale * np.sqrt(
+        radial_grid**2 + core_radius**2
+    )
+    forcing = acceleration_scale * (
+        radial_grid**2 + 2.0 * core_radius**2
+    ) / np.power(radial_grid**2 + core_radius**2, 1.5)
+
+    model = manufactured_manifest()
+    model["geometry"]["coordinateSystem"] = "axisymmetric_cylindrical"
+    model["observables"][0]["target"] = "photons"
+    model["observables"][0]["expression"] = {
+        "op": "negate",
+        "args": [{"op": "gradient", "args": [{"field": "u"}]}],
+    }
+    confirm_manifest(model)
+    metadata = bundle_metadata(spacing)
+    metadata["geometry"].update(
+        {
+            "coordinateSystem": "axisymmetric_cylindrical",
+            "origin": [0.0, float(vertical[0])],
+            "axisOrder": ["r", "z"],
+            "referenceFrame": "analytic_axisymmetric_cored_isothermal_fixture",
+        }
+    )
+    metadata["arrays"]["potential_boundary"] = {
+        "npzKey": "raw_boundary",
+        "unit": "m^2/s^2",
+        "rank": "scalar",
+        "role": "boundary",
+    }
+    bundle_path = tmp_path / "axisymmetric_raw_lensing_bundle"
+    write_array_bundle(
+        bundle_path,
+        {"raw_forcing": forcing, "raw_boundary": expected_potential},
+        metadata,
+    )
+
+    core_arcsec = angular_spacing_arcsec
+    source_arcsec = 0.2
+
+    def lens_equation(theta: float) -> float:
+        return (
+            theta
+            - einstein_radius_arcsec
+            * theta
+            / np.sqrt(theta**2 + core_arcsec**2)
+            - source_arcsec
+        )
+
+    observed_images = [
+        [brentq(lens_equation, -2.0, -core_arcsec), 0.0],
+        [brentq(lens_equation, core_arcsec, 2.0), 0.0],
+    ]
+    output_path = tmp_path / "axisymmetric_raw_lensing_run"
+    run = execute_field_job(
+        model,
+        bundle_path,
+        {
+            "schemaVersion": "sigma-field-job-request/1",
+            "boundaryFields": {"u": {"arrayKey": "potential_boundary"}},
+            "requestedObservables": ["gradient"],
+            "observationTargets": [
+                {
+                    "schemaVersion": "sigma-observation-target/1",
+                    "id": "axisymmetric-raw-images",
+                    "kind": "multiple_image_systems",
+                    "observable": "gradient",
+                    "axisymmetricInclinationDeg": 0.0,
+                    "skyShape": [121, 121],
+                    "lineOfSightSamples": 65,
+                    "lensAngularDiameterDistanceM": lens_distance,
+                    "skyCenterM": [0.0, 0.0, 0.0],
+                    "rootSearchBoundArcsec": 1.5,
+                    "rootGridPoints": 81,
+                    "supplementalGridPoints": [81],
+                    "closureToleranceArcsec": 1.0e-4,
+                    "deduplicationToleranceArcsec": 0.05,
+                    "jacobianStepArcsec": 0.02,
+                    "families": [
+                        {
+                            "id": "source-a",
+                            "distanceRatio": distance_ratio,
+                            "observedImagesArcsec": observed_images,
+                            "positionUncertaintiesArcsec": [0.05, 0.05],
+                        }
+                    ],
+                    "provenance": {
+                        "kind": "analytic axisymmetric cored-isothermal fixture"
+                    },
+                    "license": {
+                        "id": "CC0-1.0",
+                        "redistributionAllowed": True,
+                    },
+                }
+            ],
+            "seed": 13,
+        },
+        output_path,
+    )
+    scores = json.loads(
+        (output_path / "observation_scores.json").read_text(encoding="utf-8")
+    )
+    target_score = scores["targets"][0]
+    assert run["state"] == "succeeded"
+    assert target_score["state"] == "scored"
+    assert target_score["coordinateSystem"] == "axisymmetric_cylindrical"
+    assert target_score["samplingMode"] == "axisymmetric_cylindrical_ray_integral"
+    assert target_score["gravityParametersAdded"] == 0
+    assert target_score["fittedObservationNuisanceParameters"] == 2
+    assert target_score["families"][0]["score"]["imagePlaneRmsArcsec"] < 0.02
+    assert target_score["ratioOneProjection"]["finiteRootSupport"][
+        "verifiedFiniteNodes"
+    ] > 3_000
+    for artifact in (
+        "observation_photon_lensing_maps.npz",
+        "observation_multiple_image_roots.npz",
+        "observation_multiple_image_predictions.csv",
+        "observation_multiple_image_families.csv",
+    ):
+        assert (output_path / artifact).is_file()
+    with np.load(
+        output_path / "observation_photon_lensing_maps.npz", allow_pickle=False
+    ) as maps:
+        assert "target_000__ratio_one_projection__alpha_east_arcsec" in maps
 
 
 def test_published_two_potential_model_survives_the_immutable_job_path(tmp_path: Path):

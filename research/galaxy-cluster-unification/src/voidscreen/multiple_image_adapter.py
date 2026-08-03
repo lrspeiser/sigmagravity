@@ -1,4 +1,4 @@
-"""Raw image-plane strong-lensing adapter for typed 3D photon fields."""
+"""Raw image-plane strong-lensing adapter for typed photon fields."""
 
 from __future__ import annotations
 
@@ -64,36 +64,54 @@ def _observable_definition(
     return definition
 
 
-def _grid_shape(observables: Mapping[str, Array], observable_id: str) -> tuple[int, ...]:
+def _grid_shape(
+    observables: Mapping[str, Array], observable_id: str, dimensions: int
+) -> tuple[int, ...]:
     components = [
         np.asarray(observables[f"{observable_id}__axis{axis}"])
-        for axis in range(3)
+        for axis in range(dimensions)
         if f"{observable_id}__axis{axis}" in observables
     ]
-    if len(components) != 3 or any(value.ndim != 3 for value in components):
-        raise ValueError(f"observable {observable_id} must provide three 3D components")
+    if len(components) != dimensions or any(
+        value.ndim != dimensions for value in components
+    ):
+        raise ValueError(
+            f"observable {observable_id} must provide {dimensions} matching components"
+        )
     if any(value.shape != components[0].shape for value in components):
         raise ValueError(f"observable {observable_id} components do not share the grid shape")
     return components[0].shape
 
 
-def _spacing(geometry: Mapping[str, Any]) -> Array:
+def _spacing(geometry: Mapping[str, Any], dimensions: int) -> Array:
     raw = geometry.get("spacing")
     result = (
-        np.full(3, float(raw))
+        np.full(dimensions, float(raw))
         if isinstance(raw, (int, float))
         else np.asarray(raw, dtype=float)
     )
-    if result.shape != (3,) or np.any(~np.isfinite(result)) or np.any(result <= 0.0):
-        raise ValueError("geometry spacing must contain three positive finite values")
+    if (
+        result.shape != (dimensions,)
+        or np.any(~np.isfinite(result))
+        or np.any(result <= 0.0)
+    ):
+        raise ValueError(
+            f"geometry spacing must contain {dimensions} positive finite values"
+        )
     return result
 
 
 def _origin(
-    geometry: Mapping[str, Any], shape: Sequence[int], spacing: Array
+    geometry: Mapping[str, Any],
+    shape: Sequence[int],
+    spacing: Array,
+    dimensions: int,
 ) -> tuple[Array, str]:
     if geometry.get("origin") is not None:
-        return _finite_vector(geometry["origin"], 3, "geometry origin"), "bundle"
+        return (
+            _finite_vector(geometry["origin"], dimensions, "geometry origin"),
+            "bundle",
+        )
     return (
         -0.5 * (np.asarray(shape, dtype=float) - 1.0) * spacing,
         "explicit_centered_grid_fallback",
@@ -152,27 +170,82 @@ def _families(target: Mapping[str, Any]) -> list[dict[str, Any]]:
     return result
 
 
-def _projection_target(
-    target: Mapping[str, Any], family: Mapping[str, Any], family_index: int
-) -> dict[str, Any]:
-    return {
+def _projection_target(target: Mapping[str, Any]) -> dict[str, Any]:
+    result = {
         "schemaVersion": "sigma-observation-target/1",
-        "id": f"{target['id']}__{family['id']}",
+        "id": f"{target['id']}__ratio_one_projection",
         "kind": "photon_lensing_map",
         "observable": target["observable"],
-        "northAxis": target["northAxis"],
-        "eastAxis": target["eastAxis"],
-        "lineOfSightAxis": target["lineOfSightAxis"],
-        "distanceRatio": family["distanceRatio"],
+        "distanceRatio": 1.0,
         "lensAngularDiameterDistanceM": target["lensAngularDiameterDistanceM"],
         "minimumValidPixels": 1,
         "provenance": {
             "kind": "P0735 internal projection",
             "parentTargetId": target["id"],
-            "familyId": family["id"],
-            "familyIndex": family_index,
+            "normalization": "distance_ratio_one",
         },
         "license": target["license"],
+    }
+    if target.get("axisymmetricInclinationDeg") is not None:
+        result.update(
+            {
+                "axisymmetricInclinationDeg": target["axisymmetricInclinationDeg"],
+                "skyShape": target.get("skyShape"),
+                "lineOfSightSamples": target.get("lineOfSightSamples"),
+            }
+        )
+        if target.get("gridOriginM") is not None:
+            result["gridOriginM"] = target["gridOriginM"]
+    else:
+        result.update(
+            {
+                "northAxis": target.get("northAxis"),
+                "eastAxis": target.get("eastAxis"),
+                "lineOfSightAxis": target.get("lineOfSightAxis"),
+            }
+        )
+    return result
+
+
+def _finite_root_support(
+    north_axis_arcsec: Array,
+    east_axis_arcsec: Array,
+    alpha_east_arcsec: Array,
+    alpha_north_arcsec: Array,
+    required_bound_arcsec: float,
+) -> dict[str, Any]:
+    """Prove every interpolation node needed by the root square is supported."""
+
+    def bracketing_window(axis: Array) -> tuple[int, int]:
+        lower = int(np.searchsorted(axis, -required_bound_arcsec, side="right") - 1)
+        upper = int(np.searchsorted(axis, required_bound_arcsec, side="left"))
+        if lower < 0 or upper >= len(axis):
+            raise ValueError(
+                "root search and Jacobian margin must fit inside the photon map"
+            )
+        return lower, upper
+
+    north_lower, north_upper = bracketing_window(north_axis_arcsec)
+    east_lower, east_upper = bracketing_window(east_axis_arcsec)
+    support = np.isfinite(
+        alpha_east_arcsec[
+            north_lower : north_upper + 1, east_lower : east_upper + 1
+        ]
+    ) & np.isfinite(
+        alpha_north_arcsec[
+            north_lower : north_upper + 1, east_lower : east_upper + 1
+        ]
+    )
+    if not np.all(support):
+        raise ValueError(
+            "root search and Jacobian margin must remain inside finite photon support"
+        )
+    return {
+        "requiredBoundArcsec": required_bound_arcsec,
+        "northNodeRange": [north_lower, north_upper],
+        "eastNodeRange": [east_lower, east_upper],
+        "verifiedFiniteNodes": int(support.size),
+        "outsideSupportInterpolationFill": "zero_only_outside_verified_root_support",
     }
 
 
@@ -257,6 +330,7 @@ def evaluate_multiple_image_systems_target(
     list[dict[str, Any]],
     list[dict[str, Any]],
     dict[str, Array],
+    dict[str, Array],
 ]:
     """Profile sources, find roots, and score observed multiple-image families."""
 
@@ -280,25 +354,57 @@ def evaluate_multiple_image_systems_target(
         raise ValueError("observation target requires an explicit license")
     observable_id = str(target.get("observable", ""))
     definition = _observable_definition(model, observable_id)
-    if geometry.get("coordinateSystem") != "cartesian_3d" or int(
-        geometry.get("dimensions", 0)
-    ) != 3:
-        raise ValueError("multiple_image_systems requires a Cartesian 3D grid")
+    coordinate_system = str(geometry.get("coordinateSystem", ""))
+    dimensions = int(geometry.get("dimensions", 0))
     axes = (
         target.get("northAxis"),
         target.get("eastAxis"),
         target.get("lineOfSightAxis"),
     )
-    if (
-        any(isinstance(value, bool) or not isinstance(value, int) for value in axes)
-        or set(axes) != {0, 1, 2}
-    ):
+    if coordinate_system == "cartesian_3d" and dimensions == 3:
+        if (
+            any(
+                isinstance(value, bool) or not isinstance(value, int)
+                for value in axes
+            )
+            or set(axes) != {0, 1, 2}
+        ):
+            raise ValueError(
+                "northAxis, eastAxis, and lineOfSightAxis must be a permutation of [0,1,2]"
+            )
+        shape = _grid_shape(observables, observable_id, dimensions)
+        spacing = _spacing(geometry, dimensions)
+        origin, origin_source = _origin(geometry, shape, spacing, dimensions)
+    elif coordinate_system == "axisymmetric_cylindrical" and dimensions == 2:
+        if any(value is not None for value in axes):
+            raise ValueError(
+                "axisymmetric multiple-image lensing does not accept Cartesian sky-axis indices"
+            )
+        if list(geometry.get("axisOrder", [])) != ["r", "z"]:
+            raise ValueError(
+                "axisymmetric multiple-image lensing requires geometry axisOrder=['r','z']"
+            )
+        shape = _grid_shape(observables, observable_id, dimensions)
+        spacing = _spacing(geometry, dimensions)
+        if geometry.get("origin") is None:
+            raise ValueError(
+                "axisymmetric multiple-image lensing requires an explicit origin=[0,z0]"
+            )
+        origin, origin_source = _origin(geometry, shape, spacing, dimensions)
+        if origin[0] != 0.0:
+            raise ValueError(
+                "axisymmetric multiple-image lensing radial origin must be exactly r=0"
+            )
+        if target.get("gridOriginM") is not None:
+            target_origin = _finite_vector(target["gridOriginM"], 2, "gridOriginM")
+            if not np.array_equal(target_origin, origin):
+                raise ValueError(
+                    "axisymmetric multiple-image target origin must match the solved field"
+                )
+    else:
         raise ValueError(
-            "northAxis, eastAxis, and lineOfSightAxis must be a permutation of [0,1,2]"
+            "multiple_image_systems requires Cartesian 3D or axisymmetric cylindrical geometry"
         )
-    shape = _grid_shape(observables, observable_id)
-    spacing = _spacing(geometry)
-    origin, origin_source = _origin(geometry, shape, spacing)
     sky_center = _finite_vector(target.get("skyCenterM"), 3, "skyCenterM")
     lens_distance = _finite_positive(
         target.get("lensAngularDiameterDistanceM"), "lensAngularDiameterDistanceM"
@@ -357,46 +463,92 @@ def evaluate_multiple_image_systems_target(
         maximum=401,
     )
     families = _families(target)
-    north_axis, east_axis, _line_of_sight_axis = axes
-    north_coordinates = (
-        origin[north_axis]
-        + np.arange(shape[north_axis]) * spacing[north_axis]
-        - sky_center[north_axis]
-    ) / lens_distance * RAD_TO_ARCSEC
-    east_coordinates = (
-        origin[east_axis]
-        + np.arange(shape[east_axis]) * spacing[east_axis]
-        - sky_center[east_axis]
-    ) / lens_distance * RAD_TO_ARCSEC
-    if not (
-        north_coordinates[0] <= -root_bound <= root_bound <= north_coordinates[-1]
-        and east_coordinates[0] <= -root_bound <= root_bound <= east_coordinates[-1]
-    ):
-        raise ValueError("rootSearchBoundArcsec must fit inside the published photon map")
+    projection_prefix = f"{archive_prefix}__ratio_one_projection"
+    projection, projection_maps = evaluate_photon_lensing_map_target(
+        model,
+        observables,
+        geometry,
+        _projection_target(target),
+        None,
+        archive_prefix=projection_prefix,
+    )
+    projection_alpha_east = projection_maps[
+        f"{projection_prefix}__alpha_east_arcsec"
+    ]
+    projection_alpha_north = projection_maps[
+        f"{projection_prefix}__alpha_north_arcsec"
+    ]
+    if coordinate_system == "cartesian_3d":
+        north_axis, east_axis, _line_of_sight_axis = axes
+        north_coordinates = (
+            origin[north_axis]
+            + np.arange(shape[north_axis]) * spacing[north_axis]
+            - sky_center[north_axis]
+        ) / lens_distance * RAD_TO_ARCSEC
+        east_coordinates = (
+            origin[east_axis]
+            + np.arange(shape[east_axis]) * spacing[east_axis]
+            - sky_center[east_axis]
+        ) / lens_distance * RAD_TO_ARCSEC
+        axis_convention = {
+            "observedCoordinateOrder": ["east_arcsec", "north_arcsec"],
+            "northAxis": north_axis,
+            "eastAxis": east_axis,
+            "lineOfSightAxis": axes[2],
+        }
+    else:
+        diagnostics = projection["projection"]["diagnostics"]
+        inclination = math.radians(float(diagnostics["inclinationDeg"]))
+        north_center = (
+            -math.cos(inclination) * sky_center[0]
+            + math.sin(inclination) * sky_center[2]
+        )
+        east_center = sky_center[1]
+        north_bounds = diagnostics["northPhysicalBoundsM"]
+        east_bounds = diagnostics["eastPhysicalBoundsM"]
+        north_coordinates = (
+            np.linspace(*north_bounds, projection_alpha_east.shape[0]) - north_center
+        ) / lens_distance * RAD_TO_ARCSEC
+        east_coordinates = (
+            np.linspace(*east_bounds, projection_alpha_east.shape[1]) - east_center
+        ) / lens_distance * RAD_TO_ARCSEC
+        axis_convention = {
+            "observedCoordinateOrder": ["east_arcsec", "north_arcsec"],
+            "intrinsicAxes": ["r", "z"],
+            "axisymmetricInclinationDeg": diagnostics["inclinationDeg"],
+            "eastBasisIntrinsicXYZ": [0.0, 1.0, 0.0],
+            "northBasisIntrinsicXYZ": [
+                -math.cos(inclination),
+                0.0,
+                math.sin(inclination),
+            ],
+            "projectedSkyCenterM": [east_center, north_center],
+        }
+    finite_support = _finite_root_support(
+        north_coordinates,
+        east_coordinates,
+        projection_alpha_east,
+        projection_alpha_north,
+        root_bound + jacobian_step,
+    )
+    finite_alpha_east = np.where(
+        np.isfinite(projection_alpha_east), projection_alpha_east, 0.0
+    )
+    finite_alpha_north = np.where(
+        np.isfinite(projection_alpha_north), projection_alpha_north, 0.0
+    )
 
     prediction_rows: list[dict[str, Any]] = []
     family_rows: list[dict[str, Any]] = []
     family_evaluations: list[dict[str, Any]] = []
     root_arrays: dict[str, Array] = {}
     for family_index, family in enumerate(families):
-        _projection, projected_maps = evaluate_photon_lensing_map_target(
-            model,
-            observables,
-            geometry,
-            _projection_target(target, family, family_index),
-            None,
-            archive_prefix="projection",
-        )
         field = GridSkyDeflectionField(
             north_axis_arcsec=north_coordinates,
             east_axis_arcsec=east_coordinates,
-            alpha_east_ratio_one_arcsec=projected_maps[
-                "projection__alpha_east_arcsec"
-            ],
-            alpha_north_ratio_one_arcsec=projected_maps[
-                "projection__alpha_north_arcsec"
-            ],
-            distance_ratio=lambda _unused: 1.0,
+            alpha_east_ratio_one_arcsec=finite_alpha_east,
+            alpha_north_ratio_one_arcsec=finite_alpha_north,
+            distance_ratio=lambda _unused, ratio=family["distanceRatio"]: ratio,
         )
         images = family["images"]
         if (
@@ -629,16 +781,20 @@ def evaluate_multiple_image_systems_target(
             "observable": observable_id,
             "observableTarget": definition.get("target"),
             "state": state,
+            "coordinateSystem": coordinate_system,
+            "samplingMode": projection["samplingMode"],
             "originM": origin.tolist(),
             "originSource": origin_source,
             "skyCenterM": sky_center.tolist(),
-            "axisConvention": {
-                "observedCoordinateOrder": ["east_arcsec", "north_arcsec"],
-                "northAxis": north_axis,
-                "eastAxis": east_axis,
-                "lineOfSightAxis": axes[2],
-            },
+            "axisConvention": axis_convention,
             "lensAngularDiameterDistanceM": lens_distance,
+            "ratioOneProjection": {
+                "archivePrefix": projection_prefix,
+                "mapShape": projection["mapShape"],
+                "samplingMode": projection["samplingMode"],
+                "projection": projection["projection"],
+                "finiteRootSupport": finite_support,
+            },
             "rootSearch": {
                 "boundArcsec": root_bound,
                 "gridPoints": root_grid_points,
@@ -664,9 +820,12 @@ def evaluate_multiple_image_systems_target(
                 "Missing observed multiplicity produces incomplete_topology and no finite aggregate RMS, chi-square, or likelihood.",
                 "Extra predicted roots are disclosed but not classified without an explicit detectability model.",
                 "Critical curves are diagnostic unless independent parity or arc-orientation data are supplied.",
+                "The ratio-one deflection map is archived once and scaled only by each family's declared distance ratio.",
+                "Axisymmetric roots are searched only where every required interpolation node is inside finite projected support; unsupported map cells are zero-filled solely outside that verified root region.",
             ],
         },
         prediction_rows,
         family_rows,
         root_arrays,
+        projection_maps,
     )

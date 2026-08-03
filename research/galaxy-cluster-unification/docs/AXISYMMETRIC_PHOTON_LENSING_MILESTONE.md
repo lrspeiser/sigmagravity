@@ -96,9 +96,12 @@ These are software normalization tests, not fits to real galaxies or clusters.
   sensitivity are mandatory for a scientific result.
 - Distances and inclination are inputs; the adapter does not infer a cosmology
   or fit them.
-- A deflection/shear map is not a raw multiple-image, source-position,
-  magnification, weak-shear-catalog or time-delay likelihood.
+- A deflection/shear map alone is not a raw multiple-image, source-position,
+  magnification, weak-shear-catalog or time-delay likelihood. The separately
+  documented v0.28 milestone now consumes this map for bounded raw
+  image-position scoring.
 - Axisymmetry cannot represent bars, spiral arms, mergers, lopsided clusters,
   substructure or general line-of-sight structure.
-- The next lensing step is to feed cylindrical deflection maps into the raw
-  multiple-image and weak-lensing likelihoods, then test untouched systems.
+- The next lensing step is to register complete real image-position catalogs
+  and weak-lensing likelihoods, propagate baryonic/domain uncertainty, and
+  test untouched systems.

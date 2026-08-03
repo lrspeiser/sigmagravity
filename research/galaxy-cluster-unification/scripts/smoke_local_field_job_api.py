@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+from scipy.optimize import brentq
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -188,10 +189,47 @@ def run_case(
     cells: int,
     *,
     axisymmetric_rotation: bool = False,
+    axisymmetric_raw_lensing: bool = False,
 ) -> dict[str, Any]:
+    if axisymmetric_rotation and axisymmetric_raw_lensing:
+        raise ValueError("axisymmetric smoke modes are mutually exclusive")
+    axisymmetric = axisymmetric_rotation or axisymmetric_raw_lensing
     axis = np.linspace(0.0, 1.0, cells)
     spacing = 1.0 / (cells - 1)
-    if axisymmetric_rotation:
+    raw_lensing_images: list[list[float]] | None = None
+    if axisymmetric_raw_lensing:
+        lens_distance = 1.0e20
+        distance_ratio = 0.7
+        angular_spacing_arcsec = 0.05
+        spacing = lens_distance * angular_spacing_arcsec / RAD_TO_ARCSEC
+        radius = np.arange(cells, dtype=float) * spacing
+        vertical = -0.5 * (cells - 1) * spacing + np.arange(cells) * spacing
+        radial_grid, _vertical_grid = np.meshgrid(radius, vertical, indexing="ij")
+        core_radius = spacing
+        path_length = float(vertical[-1] - vertical[0])
+        acceleration_scale = (
+            (1.0 / RAD_TO_ARCSEC)
+            * C_M_S**2
+            / (2.0 * distance_ratio * path_length)
+        )
+        expected = acceleration_scale * np.sqrt(radial_grid**2 + core_radius**2)
+        forcing = acceleration_scale * (
+            radial_grid**2 + 2.0 * core_radius**2
+        ) / np.power(radial_grid**2 + core_radius**2, 1.5)
+        source_arcsec = 0.2
+
+        def lens_equation(theta: float) -> float:
+            return theta - theta / np.sqrt(
+                theta**2 + angular_spacing_arcsec**2
+            ) - source_arcsec
+
+        raw_lensing_images = [
+            [brentq(lens_equation, -2.0, -angular_spacing_arcsec), 0.0],
+            [brentq(lens_equation, angular_spacing_arcsec, 2.0), 0.0],
+        ]
+        arrays = {"raw_forcing": forcing, "raw_boundary": expected}
+        bundle_name = "bundle_axisymmetric_raw_lensing"
+    elif axisymmetric_rotation:
         radius, _vertical = np.meshgrid(axis, axis, indexing="ij")
         omega = 3.0
         expected = 0.5 * omega**2 * radius**2
@@ -217,14 +255,25 @@ def run_case(
         arrays = {"raw_forcing": forcing}
         bundle_name = f"bundle_{dimensions}d"
     bundle_directory = root / bundle_name
+    bundle_metadata = metadata(
+        spacing,
+        dimensions,
+        axisymmetric_rotation=axisymmetric,
+    )
+    if axisymmetric_raw_lensing:
+        bundle_metadata["geometry"]["origin"] = [
+            0.0,
+            -0.5 * (cells - 1) * spacing,
+        ]
+        bundle_metadata["geometry"]["referenceFrame"] = (
+            "analytic_axisymmetric_cored_isothermal_lens"
+        )
+        for key in ("alpha_east", "alpha_north", "alpha_uncertainty"):
+            bundle_metadata["arrays"].pop(key)
     bundle = write_array_bundle(
         bundle_directory,
         arrays,
-        metadata(
-            spacing,
-            dimensions,
-            axisymmetric_rotation=axisymmetric_rotation,
-        ),
+        bundle_metadata,
     )
     archive = (bundle_directory / "arrays.npz").read_bytes()
     ticket = request_json(
@@ -249,7 +298,7 @@ def run_case(
         payload={
             "schemaVersion": "sigma-field-job-submit/1",
             "model": model(
-                dimensions, axisymmetric_rotation=axisymmetric_rotation
+                dimensions, axisymmetric_rotation=axisymmetric
             ),
             "dataUploadId": ticket["id"],
             "request": {
@@ -258,7 +307,7 @@ def run_case(
                 "boundaryFields": {
                     "u": (
                         {"arrayKey": "u_boundary"}
-                        if axisymmetric_rotation
+                        if axisymmetric
                         else {"value": 0.0}
                     )
                 },
@@ -307,7 +356,44 @@ def run_case(
                         },
                     ]
                     if axisymmetric_rotation
-                    else []
+                    else (
+                        [
+                            {
+                                "schemaVersion": "sigma-observation-target/1",
+                                "id": "axisymmetric-raw-images",
+                                "kind": "multiple_image_systems",
+                                "observable": "gradient",
+                                "axisymmetricInclinationDeg": 0.0,
+                                "skyShape": [129, 129],
+                                "lineOfSightSamples": cells,
+                                "lensAngularDiameterDistanceM": 1.0e20,
+                                "skyCenterM": [0.0, 0.0, 0.0],
+                                "rootSearchBoundArcsec": 1.5,
+                                "rootGridPoints": 81,
+                                "supplementalGridPoints": [81],
+                                "closureToleranceArcsec": 1.0e-4,
+                                "deduplicationToleranceArcsec": 0.05,
+                                "jacobianStepArcsec": 0.02,
+                                "families": [
+                                    {
+                                        "id": "source-a",
+                                        "distanceRatio": 0.7,
+                                        "observedImagesArcsec": raw_lensing_images,
+                                        "positionUncertaintiesArcsec": [0.05, 0.05],
+                                    }
+                                ],
+                                "provenance": {
+                                    "kind": "analytic axisymmetric cored-isothermal fixture"
+                                },
+                                "license": {
+                                    "id": "CC0-1.0",
+                                    "redistributionAllowed": True,
+                                },
+                            }
+                        ]
+                        if axisymmetric_raw_lensing
+                        else []
+                    )
                 ),
                 "seed": 1729 + dimensions,
             },
@@ -351,6 +437,8 @@ def run_case(
     observation_sampling_mode = None
     photon_rmse_arcsec = None
     photon_sampling_mode = None
+    raw_image_rms_arcsec = None
+    raw_image_sampling_mode = None
     if axisymmetric_rotation:
         scores = json.loads(downloaded["observation_scores.json"])
         observation_rmse = float(scores["targets"][0]["score"]["rmseMPerS"])
@@ -371,10 +459,33 @@ def run_case(
             )
         if photon_sampling_mode != "axisymmetric_cylindrical_ray_integral":
             raise RuntimeError("axisymmetric job used the wrong photon sampler")
+    if axisymmetric_raw_lensing:
+        scores = json.loads(downloaded["observation_scores.json"])
+        raw_target = scores["targets"][0]
+        raw_image_rms_arcsec = float(
+            raw_target["score"]["channels"]["image_position_arcsec"][
+                "imagePlaneRmsArcsec"
+            ]
+        )
+        raw_image_sampling_mode = raw_target["samplingMode"]
+        if raw_target["state"] != "scored" or raw_image_rms_arcsec >= 0.02:
+            raise RuntimeError(
+                f"axisymmetric raw-image RMS exceeded acceptance: {raw_image_rms_arcsec}"
+            )
+        if raw_image_sampling_mode != "axisymmetric_cylindrical_ray_integral":
+            raise RuntimeError("axisymmetric raw-image job used the wrong photon sampler")
+        for artifact in (
+            "observation_photon_lensing_maps.npz",
+            "observation_multiple_image_roots.npz",
+            "observation_multiple_image_predictions.csv",
+            "observation_multiple_image_families.csv",
+        ):
+            if artifact not in downloaded:
+                raise RuntimeError(f"axisymmetric raw-image artifact missing: {artifact}")
     return {
         "coordinateSystem": (
             "axisymmetric_cylindrical"
-            if axisymmetric_rotation
+            if axisymmetric
             else f"cartesian_{dimensions}d"
         ),
         "dimensions": dimensions,
@@ -392,6 +503,8 @@ def run_case(
         "observationSamplingMode": observation_sampling_mode,
         "photonDeflectionRmseArcsec": photon_rmse_arcsec,
         "photonSamplingMode": photon_sampling_mode,
+        "rawImagePlaneRmsArcsec": raw_image_rms_arcsec,
+        "rawImageSamplingMode": raw_image_sampling_mode,
         "perObjectGravityParameters": job["parameterAccounting"]["perObject"],
     }
 
@@ -404,6 +517,7 @@ def main() -> None:
             run_case(base, root, 2, 25),
             run_case(base, root, 3, 17),
             run_case(base, root, 2, 25, axisymmetric_rotation=True),
+            run_case(base, root, 2, 65, axisymmetric_raw_lensing=True),
         ]
     print(
         json.dumps(

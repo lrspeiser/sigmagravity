@@ -33,7 +33,7 @@ from .observation_adapters import evaluate_observation_targets
 
 Array = np.ndarray
 ENGINE_ID = "generic-divergence-field-worker"
-ENGINE_VERSION = "1.4.0-preview"
+ENGINE_VERSION = "1.5.0-preview"
 MODEL_HASH_KEYS = (
     "schemaVersion",
     "modelClass",

@@ -24,7 +24,11 @@
     },
     {
       "properties": { "kind": { "const": "multiple_image_systems" } },
-      "required": ["northAxis", "eastAxis", "lineOfSightAxis", "lensAngularDiameterDistanceM", "skyCenterM", "rootSearchBoundArcsec", "families"]
+      "required": ["lensAngularDiameterDistanceM", "skyCenterM", "rootSearchBoundArcsec", "families"],
+      "oneOf": [
+        { "required": ["northAxis", "eastAxis", "lineOfSightAxis"] },
+        { "required": ["axisymmetricInclinationDeg", "skyShape", "lineOfSightSamples"] }
+      ]
     }
   ],
   "properties": {

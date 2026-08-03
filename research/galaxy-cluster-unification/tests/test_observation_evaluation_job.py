@@ -355,6 +355,7 @@ def test_decoupled_raw_multiple_images_byte_match_integrated_field_job(
     )
     for name in (
         "observation_scores.json",
+        "observation_photon_lensing_maps.npz",
         "observation_multiple_image_predictions.csv",
         "observation_multiple_image_families.csv",
         "observation_multiple_image_roots.npz",
@@ -363,4 +364,5 @@ def test_decoupled_raw_multiple_images_byte_match_integrated_field_job(
     scores = json.loads((standalone / "observation_scores.json").read_text())
     assert scores["targets"][0]["state"] == "incomplete_topology"
     assert scores["targets"][0]["score"]["channels"]["image_position_arcsec"]["rmse"] is None
+    assert scores["mapArchive"]["path"] == "observation_photon_lensing_maps.npz"
     assert scores["rootArchive"]["path"] == "observation_multiple_image_roots.npz"

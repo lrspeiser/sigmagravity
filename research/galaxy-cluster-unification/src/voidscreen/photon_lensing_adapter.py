@@ -256,7 +256,21 @@ def _axisymmetric_photon_deflection(
     )
     if spacing.shape != (2,) or np.any(~np.isfinite(spacing)) or np.any(spacing <= 0):
         raise ValueError("axisymmetric geometry spacing must contain two positive finite values")
-    raw_origin = target.get("gridOriginM", geometry.get("origin"))
+    geometry_origin = geometry.get("origin")
+    if geometry_origin is not None and target.get("gridOriginM") is not None:
+        solved_origin = np.asarray(geometry_origin, dtype=float)
+        target_origin = np.asarray(target["gridOriginM"], dtype=float)
+        if (
+            solved_origin.shape != (2,)
+            or target_origin.shape != (2,)
+            or np.any(~np.isfinite(solved_origin))
+            or np.any(~np.isfinite(target_origin))
+            or not np.array_equal(solved_origin, target_origin)
+        ):
+            raise ValueError(
+                "axisymmetric photon-lensing target origin must match the solved field"
+            )
+    raw_origin = target.get("gridOriginM", geometry_origin)
     origin = np.asarray(raw_origin, dtype=float)
     if origin.shape != (2,) or np.any(~np.isfinite(origin)):
         raise ValueError("axisymmetric photon lensing requires an explicit origin=[0,z0]")

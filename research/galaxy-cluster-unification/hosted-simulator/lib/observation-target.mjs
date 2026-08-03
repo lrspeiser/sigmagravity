@@ -86,21 +86,64 @@ export function validateObservationTargets({
       if (!["photons", "both"].includes(definition.target) || definition.rank !== "vector" || definition.unit !== "m/s^2") {
         throw new Error(`observation target ${target.id} requires a photons or both vector in m/s^2`);
       }
-      if (model.geometry.coordinateSystem !== "cartesian_3d" || dimensions !== 3) {
-        throw new Error("multiple_image_systems requires a Cartesian 3D model");
-      }
+      const coordinateSystem = model.geometry.coordinateSystem;
       const axes = [target.northAxis, target.eastAxis, target.lineOfSightAxis];
-      if (!axes.every(Number.isInteger) || new Set(axes).size !== 3 || axes.some((axis) => axis < 0 || axis > 2)) {
-        throw new Error("northAxis, eastAxis, and lineOfSightAxis must be a permutation of [0,1,2]");
+      if (coordinateSystem === "cartesian_3d" && dimensions === 3) {
+        if (!axes.every(Number.isInteger) || new Set(axes).size !== 3 || axes.some((axis) => axis < 0 || axis > 2)) {
+          throw new Error("northAxis, eastAxis, and lineOfSightAxis must be a permutation of [0,1,2]");
+        }
+        if (!Array.isArray(fieldShape) || fieldShape.length !== 3 || !fieldShape.every((value) => Number.isInteger(value) && value >= 3)) {
+          throw new Error("multiple_image_systems preflight requires the solved 3D field shape");
+        }
+        if (target.axisymmetricInclinationDeg !== undefined || target.skyShape !== undefined || target.lineOfSightSamples !== undefined) {
+          throw new Error("Cartesian multiple-image lensing does not accept axisymmetric projection controls");
+        }
+      } else if (coordinateSystem === "axisymmetric_cylindrical" && dimensions === 2) {
+        if (axes.some((axis) => axis !== undefined)) {
+          throw new Error("axisymmetric multiple-image lensing does not accept Cartesian sky-axis indices");
+        }
+        if (!Array.isArray(fieldShape) || fieldShape.length !== 2 || !fieldShape.every((value) => Number.isInteger(value) && value >= 3)) {
+          throw new Error("axisymmetric multiple_image_systems requires the solved 2D field shape");
+        }
+        if (JSON.stringify(fieldGeometry?.axisOrder) !== JSON.stringify(["r", "z"])) {
+          throw new Error("axisymmetric multiple-image lensing requires field axisOrder=['r','z']");
+        }
+        const solvedOrigin = finiteArray(fieldGeometry?.origin, 2, "axisymmetric solved-field origin");
+        if (solvedOrigin[0] !== 0) throw new Error("axisymmetric multiple-image radial origin must be exactly r=0");
+        let declaredOrigin = null;
+        if (target.gridOriginM !== undefined) {
+          declaredOrigin = finiteArray(target.gridOriginM, 2, `observation target ${target.id} gridOriginM`);
+        } else if (inputBundle.geometry?.coordinateSystem === "axisymmetric_cylindrical") {
+          declaredOrigin = finiteArray(inputBundle.geometry.origin, 2, "input bundle origin");
+        }
+        if (!declaredOrigin) {
+          throw new Error("axisymmetric multiple-image lensing requires gridOriginM=[0,z0] when evaluated against a separate observation bundle");
+        }
+        if (JSON.stringify(declaredOrigin) !== JSON.stringify(solvedOrigin)) {
+          throw new Error("axisymmetric multiple-image target origin must match the solved field");
+        }
+        const inclination = Number(target.axisymmetricInclinationDeg);
+        if (!Number.isFinite(inclination) || inclination < 0 || inclination > 90) {
+          throw new Error("axisymmetricInclinationDeg must lie in [0,90]");
+        }
+        if (!Array.isArray(target.skyShape) || target.skyShape.length !== 2
+          || target.skyShape.some((value) => !Number.isInteger(value) || value < 3 || value > 513)) {
+          throw new Error("skyShape must contain two integers from 3 through 513");
+        }
+        if (!Number.isInteger(target.lineOfSightSamples) || target.lineOfSightSamples < 3 || target.lineOfSightSamples > 2049) {
+          throw new Error("lineOfSightSamples must be an integer from 3 through 2049");
+        }
+        if (target.skyShape[0] * target.skyShape[1] * target.lineOfSightSamples > 16_777_216) {
+          throw new Error("axisymmetric photon projection exceeds 16,777,216 path samples");
+        }
+      } else {
+        throw new Error("multiple_image_systems requires Cartesian 3D or axisymmetric cylindrical geometry");
       }
       const lensDistance = Number(target.lensAngularDiameterDistanceM);
       const rootBound = Number(target.rootSearchBoundArcsec);
       if (!Number.isFinite(lensDistance) || lensDistance <= 0) throw new Error("lensAngularDiameterDistanceM must be finite and positive");
       if (!Number.isFinite(rootBound) || rootBound <= 0) throw new Error("rootSearchBoundArcsec must be finite and positive");
       finiteArray(target.skyCenterM, 3, "skyCenterM");
-      if (!Array.isArray(fieldShape) || fieldShape.length !== 3 || !fieldShape.every((value) => Number.isInteger(value) && value >= 3)) {
-        throw new Error("multiple_image_systems preflight requires the solved 3D field shape");
-      }
       const integerControl = (name, fallback, minimum, maximum) => {
         const value = target[name] ?? fallback;
         if (!Number.isInteger(value) || value < minimum || value > maximum) throw new Error(`${name} must be an integer from ${minimum} through ${maximum}`);

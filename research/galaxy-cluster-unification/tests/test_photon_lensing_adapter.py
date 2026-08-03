@@ -531,6 +531,13 @@ def test_axisymmetric_photon_projection_rejects_ambiguous_geometry() -> None:
             axisymmetric_geometry(shape),
             [axisymmetric_target(northAxis=0)],
         )
+    with pytest.raises(ValueError, match="origin must match"):
+        evaluate_observation_targets(
+            photon_model(),
+            observables,
+            axisymmetric_geometry(shape),
+            [axisymmetric_target(gridOriginM=[0.0, -3.0])],
+        )
 
 
 def test_photon_target_rejects_massive_only_observable_and_bad_axes() -> None:

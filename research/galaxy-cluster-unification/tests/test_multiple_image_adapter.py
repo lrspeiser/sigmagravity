@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 
 from voidscreen.observation_adapters import evaluate_observation_targets
 from voidscreen.sky_lensing import C_M_S, RAD_TO_ARCSEC
@@ -105,6 +106,47 @@ def _target(*, families: list[dict] | None = None, **changes) -> dict:
     }
 
 
+def _axisymmetric_sis_fixture() -> tuple[dict, dict[str, np.ndarray], dict]:
+    lens_distance = 1.0e20
+    reference_ratio = 0.7
+    angular_spacing_arcsec = 0.05
+    physical_spacing = (
+        lens_distance * angular_spacing_arcsec / RAD_TO_ARCSEC
+    )
+    shape = (51, 65)
+    path_length = (shape[1] - 1) * physical_spacing
+    acceleration_scale = (
+        (1.0 / RAD_TO_ARCSEC)
+        * C_M_S**2
+        / (2.0 * reference_ratio * path_length)
+    )
+    radial = np.full(shape, -acceleration_scale)
+    radial[0, :] = 0.0
+    origin = [0.0, -0.5 * (shape[1] - 1) * physical_spacing]
+    geometry = {
+        "coordinateSystem": "axisymmetric_cylindrical",
+        "dimensions": 2,
+        "spacing": [physical_spacing, physical_spacing],
+        "origin": origin,
+        "axisOrder": ["r", "z"],
+    }
+    observables = {
+        "photon_acceleration__axis0": radial,
+        "photon_acceleration__axis1": np.zeros(shape),
+    }
+    target = _target(
+        rootSearchBoundArcsec=1.4,
+        skyCenterM=[0.0, 0.0, 0.0],
+        axisymmetricInclinationDeg=0.0,
+        skyShape=[101, 101],
+        lineOfSightSamples=65,
+        gridOriginM=origin,
+    )
+    for key in ("northAxis", "eastAxis", "lineOfSightAxis"):
+        target.pop(key)
+    return geometry, observables, target
+
+
 def test_sis_raw_images_profile_source_find_roots_and_score() -> None:
     geometry, observables = _sis_fixture()
     roots: dict[str, np.ndarray] = {}
@@ -136,6 +178,57 @@ def test_sis_raw_images_profile_source_find_roots_and_score() -> None:
         "target_000__family_000__closures_arcsec",
         "target_000__family_000__roots_arcsec",
     ]
+
+
+def test_axisymmetric_sis_raw_images_use_one_archived_ratio_one_projection() -> None:
+    geometry, observables, target = _axisymmetric_sis_fixture()
+    roots: dict[str, np.ndarray] = {}
+    maps: dict[str, np.ndarray] = {}
+    evaluation, rows = evaluate_observation_targets(
+        _model(),
+        observables,
+        geometry,
+        [target],
+        map_outputs=maps,
+        root_outputs=roots,
+    )
+    result = evaluation["targets"][0]
+    family = result["families"][0]
+    projection = result["ratioOneProjection"]
+    assert result["state"] == "scored"
+    assert result["coordinateSystem"] == "axisymmetric_cylindrical"
+    assert result["samplingMode"] == "axisymmetric_cylindrical_ray_integral"
+    assert result["gravityParametersAdded"] == 0
+    np.testing.assert_allclose(family["profiledSourceArcsec"], [0.2, 0.0], atol=1e-12)
+    assert family["matchedImages"] == 2
+    assert family["score"]["imagePlaneRmsArcsec"] < 1.0e-3
+    assert all(row["assignment_state"] == "matched" for row in rows)
+    assert projection["finiteRootSupport"]["verifiedFiniteNodes"] > 3_000
+    assert projection["finiteRootSupport"]["outsideSupportInterpolationFill"] == (
+        "zero_only_outside_verified_root_support"
+    )
+    alpha_key = "target_000__ratio_one_projection__alpha_east_arcsec"
+    assert alpha_key in maps
+    assert np.any(~np.isfinite(maps[alpha_key]))
+    assert len(roots) == 3
+
+
+def test_axisymmetric_raw_images_reject_search_crossing_unsupported_rays() -> None:
+    geometry, observables, target = _axisymmetric_sis_fixture()
+    target["rootSearchBoundArcsec"] = 2.0
+    with pytest.raises(ValueError, match="finite photon support"):
+        evaluate_observation_targets(_model(), observables, geometry, [target])
+
+
+def test_axisymmetric_raw_images_reject_ambiguous_axes_and_origin() -> None:
+    geometry, observables, target = _axisymmetric_sis_fixture()
+    target["northAxis"] = 0
+    with pytest.raises(ValueError, match="does not accept Cartesian"):
+        evaluate_observation_targets(_model(), observables, geometry, [target])
+    target.pop("northAxis")
+    target["gridOriginM"] = [0.0, geometry["origin"][1] + 1.0]
+    with pytest.raises(ValueError, match="origin must match"):
+        evaluate_observation_targets(_model(), observables, geometry, [target])
 
 
 def test_missing_multiplicity_has_no_finite_aggregate_score() -> None:

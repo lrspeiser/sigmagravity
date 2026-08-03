@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.27</p>
+          <p class="eyebrow">Researcher guide &middot; v0.28</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -59,7 +59,7 @@
               <tr><td>Frozen resolved velocity evidence</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Separate generator fidelity, formula transport, and observed-velocity accuracy on eight systems.</td></tr>
               <tr><td>Resolved cluster evidence registry</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Four calibrated baryonic maps, two lens-model methods per cluster, raw-catalog readiness, provenance hashes, and explicit blockers without mixing scientific roles.</td></tr>
               <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
-              <tr><td>Axisymmetric fields, galaxy motion, and photon maps</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Finite-volume elliptic equations run on a declared <code>(r,z)</code> grid; one typed field can produce circular speeds, resolved velocities, and inclination-aware deflection/shear maps without a Cartesian proxy.</td></tr>
+              <tr><td>Axisymmetric fields, galaxy motion, and lensing</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Finite-volume elliptic equations run on a declared <code>(r,z)</code> grid; one typed field can produce circular speeds, resolved velocities, deflection/shear maps, and raw multiple-image roots without a Cartesian proxy.</td></tr>
               <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
               <tr><td>Coupled photon and matter potentials</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Multiple solved fields can interact, while separately typed observables expose different predictions for light and massive tracers without a theory-name branch.</td></tr>
               <tr><td>Inverse baryon-to-response discovery</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Which one shared compact response kernel is compatible with labeled baryonic maps and model-derived target maps, including uncertainty, five selectable null families, and non-identifiability.</td></tr>
@@ -581,7 +581,7 @@ credible_interval_ready</code></pre></div>
 }</code></pre></div>
             </div>
             <div class="meaning-strip"><strong>Verified numerical behavior:</strong> a known cylindrical Bessel solution has relative errors <code>1.260e-3</code>, <code>3.149e-4</code>, and <code>7.872e-5</code> on 25, 49, and 97 cells&mdash;approximately a fourfold error reduction whenever the spacing halves. A separate spatially varying coefficient test recovers its discrete answer without a theory-specific branch.</div>
-            <div class="meaning-strip"><strong>What this can do:</strong> efficiently compare how a flattened disk, a thicker disk, and an axisymmetric bulge change a submitted scalar field law. Examples 12 and 13 turn that field into galaxy-motion and photon-lensing predictions. <strong>What it cannot do yet:</strong> represent bars, spiral arms, lopsided clusters, or other non-axisymmetric structure; apply a Cartesian convolution as if it were cylindrical; run raw multiple-image roots directly from the cylindrical target; or execute heavy jobs on public Vercel. Production submissions still return <code>production_worker_not_connected</code>.</div>
+            <div class="meaning-strip"><strong>What this can do:</strong> efficiently compare how a flattened disk, a thicker disk, and an axisymmetric bulge change a submitted scalar field law. Examples 12&ndash;14 turn that field into galaxy-motion, photon-map, and raw image-position predictions. <strong>What it cannot do yet:</strong> represent bars, spiral arms, lopsided clusters, or other non-axisymmetric structure; apply a Cartesian convolution as if it were cylindrical; evaluate weak-lensing catalogs or time delays; or execute heavy jobs on public Vercel. Production submissions still return <code>production_worker_not_connected</code>.</div>
           </article>
 
           <article class="example-card card">
@@ -644,7 +644,47 @@ credible_interval_ready</code></pre></div>
 }</code></pre></div>
             </div>
             <div class="meaning-strip"><strong>Independent normalization gates:</strong> a face-on harmonic field recovers its exact affine convergence and zero shear; an edge-on uniform vertical field recovers the analytic cylindrical chord length; and an axisymmetric point mass recovers <code>4GM/(c^2R)</code> to the same finite-domain tolerance as the Cartesian fixture. The older Cartesian path is unchanged.</div>
-            <div class="meaning-strip"><strong>What this can establish:</strong> the same confirmed law can produce matter and photon observables with separate score channels, explicit distances, inclination, output resolution, path sampling, origin, and parameter counts. <strong>What it does not establish:</strong> the solved cylinder is truncated and the field outside it is set to zero; domain and resolution sensitivity are therefore mandatory. This is not yet a raw image-position, source-plane, time-delay, or cosmology likelihood, and axisymmetry cannot describe mergers or lopsided cluster mass.</div>
+            <div class="meaning-strip"><strong>What this can establish:</strong> the same confirmed law can produce matter and photon observables with separate score channels, explicit distances, inclination, output resolution, path sampling, origin, and parameter counts. <strong>What it does not establish:</strong> the solved cylinder is truncated and the field outside it is set to zero; domain and resolution sensitivity are therefore mandatory. A map alone is not a raw image-position, time-delay, or cosmology likelihood; Example 14 adds image-position scoring, while axisymmetry still cannot describe mergers or lopsided cluster mass.</div>
+          </article>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">14</span><div><h3>Score raw image positions from a cylindrical field</h3><p>The local worker now projects one distance-ratio-one deflection map, profiles two source-plane coordinates per family, searches globally for lens-equation roots, assigns observed images one-to-one, and scores image positions. Every source nuisance is counted; no gravity parameter is added.</p></div></div>
+            <div class="code-pair">
+              <div><p class="code-label">multiple_image_systems target</p><pre><code>{
+  "schemaVersion": "sigma-observation-target/1",
+  "id": "axisymmetric-raw-images",
+  "kind": "multiple_image_systems",
+  "observable": "photon_acceleration",
+  "axisymmetricInclinationDeg": 0,
+  "skyShape": [129, 129],
+  "lineOfSightSamples": 257,
+  "gridOriginM": [0, -1.0e21],
+  "lensAngularDiameterDistanceM": 3.09e25,
+  "skyCenterM": [0, 0, 0],
+  "rootSearchBoundArcsec": 4,
+  "families": [{
+    "id": "source-a",
+    "distanceRatio": 0.70,
+    "observedImagesArcsec": [[-0.8, 0], [1.2, 0]],
+    "positionUncertaintiesArcsec": [0.05, 0.05]
+  }],
+  "provenance": {"kind": "registered raw observations"},
+  "license": {"id": "dataset-license", "redistributionAllowed": false}
+}</code></pre></div>
+              <div><p class="code-label">local asynchronous analytic result</p><pre><code>{
+  "state": "succeeded",
+  "coordinateSystem": "axisymmetric_cylindrical",
+  "samplingMode": "axisymmetric_cylindrical_ray_integral",
+  "imagePlaneRmsArcsec": 0.0016920532,
+  "fieldRelativeL2Error": 0.0014789730,
+  "fittedObservationNuisanceParameters": 2,
+  "perObjectGravityParameters": 0,
+  "artifactCount": 13,
+  "allDownloadedArtifactHashesValid": true
+}</code></pre></div>
+            </div>
+            <div class="meaning-strip"><strong>Finite-support gate:</strong> the archived cylindrical map retains unsupported rays. The root solver may zero-fill them only after proving that the complete root-search square plus its Jacobian finite-difference margin uses finite projected nodes. The recorded policy is <code>zero_only_outside_verified_root_support</code>; a search crossing the cylinder silhouette is rejected.</div>
+            <div class="meaning-strip"><strong>What this can establish:</strong> one confirmed field law can reach raw image-plane positions with disclosed source profiling, global roots, topology completeness, assignments, uncertainties, critical-curve diagnostics, and separate parameter counts. <strong>What it does not establish:</strong> the displayed result is an analytic cored-isothermal software fixture, not a real cluster fit. Extra roots require a detectability model, and axisymmetry, source redshifts/cosmology, weak shear, magnification selection, time delays, line-of-sight structure, and real baryonic uncertainty still limit scientific conclusions.</div>
           </article>
         </div>
       </section>
@@ -671,7 +711,7 @@ credible_interval_ready</code></pre></div>
             <article><span>1</span><div><h3>Connect production compute</h3><p>Queue, isolated Python workers, durable metadata, object storage, authentication, quotas, cancellation, and signed artifacts.</p></div></article>
             <article><span>2</span><div><h3>Complete the resolved evidence registry</h3><p>The first four-cluster slice is live with baryon maps, lens-model comparators, raw-catalog readiness, hashes, and blockers. Add untouched clusters, multiband stellar mass, intracluster light, calibrated gas posteriors, raw positional errors, weak lensing, PSF/WCS, licenses, and redistribution rules.</p></div></article>
             <article><span>3</span><div><h3>Complete galaxy posterior reconstruction</h3><p>The first gravity-independent gas/stellar surface-density likelihood, hashed weights, effective-sample diagnostics, and weighted prediction bands are built. Next replace commissioning fractional errors with released uncertainty/covariance products, add PSF/beam, cube, dust, bulge, distance, and vertical likelihoods, then use adaptive sampling when weights collapse.</p></div></article>
-            <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>The axisymmetric scalar-field, galaxy-motion, and photon-map paths are now verified. Next derive a small covariant or Newtonian-limit law with scalar, vector, tensor, cylindrical-nonlocal, screening, photon, and matter terms, explicit units and boundaries, a Solar-System limit, and a cylindrical raw multiple-image adapter.</p></div></article>
+            <article><span>4</span><div><h3>Make Sigma Gravity a first-class manifest</h3><p>The axisymmetric scalar-field, galaxy-motion, photon-map, and raw image-position paths are now verified. Next derive a small covariant or Newtonian-limit law with scalar, vector, tensor, cylindrical-nonlocal, screening, photon, and matter terms, explicit units and boundaries, a Solar-System limit, and frozen universal constants.</p></div></article>
             <article><span>5</span><div><h3>Use halo maps only for discovery</h3><p>The five-family synthetic control suite is built. Next, register multiple teams' halo posteriors and complete baryonic ensembles, then measure which inferred features survive lens method, baryon uncertainty, central-halo, local-light, and conservation controls.</p></div></article>
             <article><span>6</span><div><h3>Compress the inverse pattern</h3><p>Replace a many-cell discovered kernel with a small analytic response law tied to baryonic density, gradients, curvature, topology, or scale. Reject laws whose apparent success comes from per-system flexibility.</p></div></article>
             <article><span>7</span><div><h3>Freeze a forward law</h3><p>Lock constants on a development set, remove every target halo map, and predict held-out raw lensing and galaxy velocities from baryons alone.</p></div></article>
