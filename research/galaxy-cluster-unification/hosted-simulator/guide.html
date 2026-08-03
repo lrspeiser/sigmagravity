@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.17</p>
+          <p class="eyebrow">Researcher guide &middot; v0.18</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -59,6 +59,7 @@
               <tr><td>Frozen resolved velocity evidence</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>Separate generator fidelity, formula transport, and observed-velocity accuracy on eight systems.</td></tr>
               <tr><td>2D/3D field validation and exact-hash confirmation</td><td><span class="state-tag live">Available</span></td><td><span class="state-tag live">Available</span></td><td>What equation, fields, units, data, boundaries, solver, and parameter policy the system understood.</td></tr>
               <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
+              <tr><td>Inverse baryon-to-response discovery</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Which one shared compact response kernel is compatible with labeled baryonic maps and model-derived target maps, including uncertainty, radial-angle nulls, and non-identifiability.</td></tr>
               <tr><td>2D/3D fields, generated galaxies, composed batches, and photon maps</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Numerical and API conformance locally; no public durable execution yet.</td></tr>
               <tr><td>New raw cluster-lensing campaign with complete baryons</td><td><span class="state-tag missing">Not built</span></td><td><span class="state-tag partial">Research prototypes</span></td><td>Prior inverse and forward pilots exist, but not a production-ready blind campaign.</td></tr>
             </tbody>
@@ -154,7 +155,69 @@
           </article>
 
           <article class="example-card card">
-            <div class="example-intro"><span class="example-number">03</span><div><h3>Ask for heavy production execution</h3><p>The hosted API fails honestly until durable storage, a queue, and isolated workers exist.</p></div></div>
+            <div class="example-intro"><span class="example-number">03</span><div><h3>Discover a candidate response kernel across systems</h3><p>Upload same-grid baryonic source, model-derived target, uncertainty, and optional mask arrays. Their scientific roles are mandatory so a fitted halo-like target cannot be mistaken for a raw observation.</p></div></div>
+            <div class="code-pair">
+              <div><p class="code-label">POST /api/v1/inverse-response-jobs (local reference API)</p><pre><code>{
+  "schemaVersion": "sigma-inverse-response-job-submit/1",
+  "dataUploadId": "upload_2b7f...9c31",
+  "systems": [
+    {
+      "id": "cluster_a",
+      "sourceKey": "a_baryons",
+      "targetKey": "a_derived_response",
+      "uncertaintyKey": "a_sigma",
+      "maskKey": "a_mask"
+    },
+    {
+      "id": "cluster_b",
+      "sourceKey": "b_baryons",
+      "targetKey": "b_derived_response",
+      "uncertaintyKey": "b_sigma"
+    }
+  ],
+  "kernel": {
+    "shape": [5, 5],
+    "ridge": 1e-8,
+    "smoothness": 1e-4,
+    "nonnegative": true
+  },
+  "uncertainty": {"ensembleSize": 80, "seed": 17},
+  "nullControls": {
+    "kind": "source_radial_angle_shuffle",
+    "count": 19,
+    "seed": 23
+  },
+  "outputLicense": {
+    "id": "CC-BY-4.0",
+    "redistributionAllowed": true
+  }
+}</code></pre></div>
+              <div><p class="code-label">Completed synthetic known-answer output, shortened</p><pre><code>{
+  "state": "succeeded",
+  "method": "stationary_nonnegative_compact_convolution",
+  "aggregateMetrics": {
+    "systems": 2,
+    "r_squared": 0.9999999999999991
+  },
+  "amplitude": 1.5999999988,
+  "nullSummary": {
+    "permutation_p_value": 0.05,
+    "signal_against_null": true
+  },
+  "parameterAccounting": {
+    "fittedDiscoveryKernelCells": 25,
+    "fittedUniversalResponseAmplitudes": 1,
+    "fittedPerSystemGravityParameters": 0,
+    "classification": "hypothesis_generator_not_forward_theory_fit"
+  }
+}</code></pre></div>
+            </div>
+            <div class="meaning-strip"><strong>What it outputs:</strong> a normalized 2D or 3D kernel with 95% intervals, one shared amplitude, per-system predictions and residuals, rank/nullity and compatible-kernel diagnostics, regularization sensitivity, radial-angle null scores, an HTML report, CSV/NPZ artifacts, hashes, and a reproduction command.</div>
+            <div class="meaning-strip"><strong>What this proves:</strong> the synthetic acceptance recovers a kernel deliberately injected into two systems. On real clusters it can show response families compatible with the chosen baryons and derived lens-model targets. It cannot show that gravity followed those routes, turn 25 fitted cells into a one-parameter theory, or validate itself. The next scientific step is to compress a development-set pattern into a small forward law, freeze it, and predict raw lensing on clusters whose target maps were never supplied.</div>
+          </article>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">04</span><div><h3>Ask for heavy production execution</h3><p>The hosted API fails honestly until durable storage, a queue, and isolated workers exist.</p></div></div>
             <div class="code-pair compact-code-pair">
               <div><p class="code-label">POST /api/v1/field-jobs</p><pre><code>{
   "model": {"...": "confirmed model"},
@@ -171,7 +234,7 @@
           </article>
 
           <article class="example-card card">
-            <div class="example-intro"><span class="example-number">04</span><div><h3>Inspect frozen resolved evidence</h3><p>Use <code>GET /api/v1/resolved-twin-evidence?galaxy=NGC7331</code> to separate three questions.</p></div></div>
+            <div class="example-intro"><span class="example-number">05</span><div><h3>Inspect frozen resolved evidence</h3><p>Use <code>GET /api/v1/resolved-twin-evidence?galaxy=NGC7331</code> to separate three questions.</p></div></div>
             <ol class="question-list">
               <li><strong>Generator fidelity:</strong> did the fake baryonic galaxy preserve the measured source map?</li>
               <li><strong>Formula transport:</strong> did the same fixed equation return the same answer on the real and generated baryons?</li>

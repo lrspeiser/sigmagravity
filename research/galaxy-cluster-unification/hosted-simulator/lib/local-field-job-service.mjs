@@ -14,6 +14,7 @@ import { delimiter, dirname, resolve } from "node:path";
 import { sha256 } from "./canonical.mjs";
 import { prepareFieldJob, validateArrayBundle } from "./field-job-preflight.mjs";
 import { prepareGalaxyJob } from "./galaxy-job-preflight.mjs";
+import { prepareInverseResponseJob } from "./inverse-response-preflight.mjs";
 import { prepareObservationEvaluationJob } from "./observation-evaluation-preflight.mjs";
 
 const SERVICE_VERSION = "sigma-local-field-job-service/1";
@@ -59,8 +60,8 @@ async function atomicWrite(path, value) {
       await rename(temporary, path);
       break;
     } catch (error) {
-      if (attempt >= 4 || !["EACCES", "EPERM"].includes(error.code)) throw error;
-      await new Promise((resolvePromise) => setTimeout(resolvePromise, 10 * (attempt + 1)));
+      if (attempt >= 9 || !["EACCES", "EPERM"].includes(error.code)) throw error;
+      await new Promise((resolvePromise) => setTimeout(resolvePromise, 20 * (attempt + 1)));
     }
   }
 }
@@ -104,12 +105,22 @@ function publicUpload(record) {
   };
 }
 
+function jobCollection(jobType) {
+  if (jobType === "galaxy") return "galaxy-jobs";
+  if (jobType === "observation_evaluation") return "observation-evaluation-jobs";
+  if (jobType === "inverse_response") return "inverse-response-jobs";
+  return "field-jobs";
+}
+
+function jobSchemaName(jobType, suffix) {
+  if (jobType === "galaxy") return `sigma-galaxy-job-${suffix}/1`;
+  if (jobType === "observation_evaluation") return `sigma-observation-evaluation-job-${suffix}/1`;
+  if (jobType === "inverse_response") return `sigma-inverse-response-job-${suffix}/1`;
+  return `sigma-field-job-${suffix}/1`;
+}
+
 function publicJob(record) {
-  const collection = record.jobType === "galaxy"
-    ? "galaxy-jobs"
-    : record.jobType === "observation_evaluation"
-      ? "observation-evaluation-jobs"
-      : "field-jobs";
+  const collection = jobCollection(record.jobType);
   return {
     ...record,
     links: {
@@ -136,7 +147,7 @@ function parseWorkerInputFailure(stderr) {
   for (const line of String(stderr ?? "").trim().split("\n").reverse()) {
     try {
       const value = JSON.parse(line);
-      if (["sigma-field-job-cli-error/1", "sigma-galaxy-job-cli-error/1", "sigma-observation-evaluation-job-cli-error/1"].includes(value?.schemaVersion)) return value;
+      if (["sigma-field-job-cli-error/1", "sigma-galaxy-job-cli-error/1", "sigma-observation-evaluation-job-cli-error/1", "sigma-inverse-response-job-cli-error/1"].includes(value?.schemaVersion)) return value;
     } catch {
       // Continue past ordinary diagnostic lines.
     }
@@ -151,9 +162,11 @@ function defaultRunner({ projectRoot, pythonExecutable, requestPath, timeoutMs, 
       "scripts",
       jobType === "galaxy"
         ? "run_resolved_galaxy_job.py"
-        : jobType === "observation_evaluation"
-          ? "run_observation_evaluation_job.py"
-          : "run_generic_field_job.py",
+        : jobType === "inverse_response"
+          ? "run_inverse_response_job.py"
+          : jobType === "observation_evaluation"
+            ? "run_observation_evaluation_job.py"
+            : "run_generic_field_job.py",
     );
     const source = resolve(projectRoot, "src");
     const pythonPath = process.env.PYTHONPATH
@@ -239,6 +252,7 @@ export class LocalFieldJobService {
     this.workerSourceSha256 = null;
     this.galaxyWorkerSourceSha256 = null;
     this.observationWorkerSourceSha256 = null;
+    this.inverseResponseWorkerSourceSha256 = null;
     this.shuttingDown = false;
   }
 
@@ -254,6 +268,7 @@ export class LocalFieldJobService {
       workerSourceSha256: this.workerSourceSha256,
       galaxyWorkerSourceSha256: this.galaxyWorkerSourceSha256,
       observationWorkerSourceSha256: this.observationWorkerSourceSha256,
+      inverseResponseWorkerSourceSha256: this.inverseResponseWorkerSourceSha256,
     };
   }
 
@@ -284,6 +299,10 @@ export class LocalFieldJobService {
         "multiple_image_adapter.py",
         "sky_lensing.py",
       ],
+    );
+    this.inverseResponseWorkerSourceSha256 = await workerSourceSha256(
+      this.projectRoot,
+      ["inverse_response.py", "inverse_response_job.py", "field_job.py"],
     );
     await mkdir(this.#uploadsRoot(), { recursive: true });
     await mkdir(this.#jobsRoot(), { recursive: true });
@@ -717,6 +736,79 @@ export class LocalFieldJobService {
     return { ...publicJob(record), duplicate: false };
   }
 
+  async createInverseResponseJob(payload) {
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+      throw new LocalServiceError(422, "invalid_job", "inverse response request must be an object");
+    }
+    const upload = await this.#readUpload(assertIdentifier(payload.dataUploadId, "upload"));
+    if (upload.state !== "ready") {
+      throw new LocalServiceError(409, "upload_not_ready", "data upload content is not ready");
+    }
+    let preflight;
+    try {
+      preflight = prepareInverseResponseJob({ submission: payload, inputBundle: upload.inputBundle });
+    } catch (cause) {
+      const error = new LocalServiceError(422, "invalid_inverse_response_job", cause.message);
+      error.cause = cause;
+      throw error;
+    }
+    if (preflight.resourceEstimate.estimatedMemoryBytes > this.maxEstimatedMemoryBytes) {
+      throw new LocalServiceError(413, "resource_quota_exceeded", "estimated inverse worker memory exceeds the local quota");
+    }
+    const identity = {
+      schemaVersion: "sigma-inverse-response-job-submission-identity/1",
+      serviceVersion: SERVICE_VERSION,
+      preflightSha256: preflight.preflightSha256,
+      archiveSha256: upload.archive.sha256,
+      workerSourceSha256: this.inverseResponseWorkerSourceSha256,
+    };
+    const id = `job_${sha256(identity).slice(0, 24)}`;
+    const recordPath = this.#jobRecordPath(id);
+    if (await exists(recordPath)) return { ...publicJob(await readJson(recordPath)), duplicate: true };
+    const jobCount = (await readdir(this.#jobsRoot(), { withFileTypes: true })).filter((entry) => entry.isDirectory()).length;
+    if (jobCount >= this.maxStoredJobs) {
+      throw new LocalServiceError(429, "job_quota_exceeded", "local stored-job quota has been reached");
+    }
+    const jobDirectory = this.#jobDirectory(id);
+    const bundleDirectory = resolve(jobDirectory, "bundle");
+    await mkdir(bundleDirectory, { recursive: true });
+    await atomicWrite(resolve(bundleDirectory, "bundle.json"), upload.inputBundle);
+    try {
+      await link(this.#uploadArchivePath(upload.id), resolve(bundleDirectory, "arrays.npz"));
+    } catch (error) {
+      if (!["EXDEV", "EPERM", "EACCES"].includes(error.code)) throw error;
+      await copyFile(this.#uploadArchivePath(upload.id), resolve(bundleDirectory, "arrays.npz"));
+    }
+    const envelope = {
+      schemaVersion: "sigma-inverse-response-job-cli/1",
+      ...preflight.workerRequest,
+      inputBundlePath: "bundle",
+      outputDirectory: "artifacts",
+    };
+    await atomicWrite(resolve(jobDirectory, "request.json"), envelope);
+    const record = {
+      schemaVersion: "sigma-inverse-response-job-record/1",
+      id,
+      jobType: "inverse_response",
+      identity,
+      state: "queued",
+      dataUploadId: upload.id,
+      preflight,
+      workerSourceSha256: this.inverseResponseWorkerSourceSha256,
+      parameterAccounting: preflight.parameterAccounting,
+      createdAt: now(),
+      updatedAt: now(),
+      scientificJobId: null,
+      scientificResultSha256: null,
+      failureSha256: null,
+    };
+    await atomicWrite(recordPath, record);
+    await this.#appendEvent(id, "queued", { message: "Inverse response discovery job accepted by the local single-worker queue." });
+    this.queue.push(id);
+    this.#kick();
+    return { ...publicJob(record), duplicate: false };
+  }
+
   async listFieldJobs() {
     const records = [];
     for (const entry of await readdir(this.#jobsRoot(), { withFileTypes: true })) {
@@ -779,14 +871,32 @@ export class LocalFieldJobService {
     return publicJob(record);
   }
 
+  async listInverseResponseJobs() {
+    const records = [];
+    for (const entry of await readdir(this.#jobsRoot(), { withFileTypes: true })) {
+      if (!entry.isDirectory() || !entry.name.startsWith("job_")) continue;
+      const path = this.#jobRecordPath(entry.name);
+      if (await exists(path)) {
+        const record = await readJson(path);
+        if (record.jobType === "inverse_response") records.push(publicJob(record));
+      }
+    }
+    records.sort((left, right) => right.createdAt.localeCompare(left.createdAt));
+    return { schemaVersion: "sigma-inverse-response-job-list/1", items: records };
+  }
+
+  async getInverseResponseJob(idValue) {
+    const record = await this.#readJob(assertIdentifier(idValue, "job"));
+    if (record.jobType !== "inverse_response") {
+      throw new LocalServiceError(404, "not_found", "unknown inverse response job identifier");
+    }
+    return publicJob(record);
+  }
+
   async getEvents(idValue) {
     const id = assertIdentifier(idValue, "job");
     const record = await this.#readJob(id);
-    const schemaVersion = record.jobType === "galaxy"
-      ? "sigma-galaxy-job-events/1"
-      : record.jobType === "observation_evaluation"
-        ? "sigma-observation-evaluation-job-events/1"
-        : "sigma-field-job-events/1";
+    const schemaVersion = jobSchemaName(record.jobType, "events");
     const path = this.#eventsPath(id);
     if (!(await exists(path))) return { schemaVersion, jobId: id, items: [] };
     const lines = (await readFile(path, "utf8")).split("\n").filter(Boolean);
@@ -806,16 +916,8 @@ export class LocalFieldJobService {
       throw new LocalServiceError(409, "artifact_integrity_failed", "artifact index no longer matches the scientific manifest");
     }
     const index = JSON.parse(indexBytes.toString("utf8"));
-    const collection = record.jobType === "galaxy"
-      ? "galaxy-jobs"
-      : record.jobType === "observation_evaluation"
-        ? "observation-evaluation-jobs"
-        : "field-jobs";
-    const schemaVersion = record.jobType === "galaxy"
-      ? "sigma-galaxy-job-artifact-response/1"
-      : record.jobType === "observation_evaluation"
-        ? "sigma-observation-evaluation-job-artifact-response/1"
-        : "sigma-field-job-artifact-response/1";
+    const collection = jobCollection(record.jobType);
+    const schemaVersion = jobSchemaName(record.jobType, "artifact-response");
     return {
       schemaVersion,
       jobId: id,
@@ -869,6 +971,14 @@ export class LocalFieldJobService {
   async cancelGalaxyJob(idValue) {
     const record = await this.#readJob(assertIdentifier(idValue, "job"));
     if (record.jobType !== "galaxy") throw new LocalServiceError(404, "not_found", "unknown galaxy job identifier");
+    return this.#cancelJob(record.id);
+  }
+
+  async cancelInverseResponseJob(idValue) {
+    const record = await this.#readJob(assertIdentifier(idValue, "job"));
+    if (record.jobType !== "inverse_response") {
+      throw new LocalServiceError(404, "not_found", "unknown inverse response job identifier");
+    }
     return this.#cancelJob(record.id);
   }
 

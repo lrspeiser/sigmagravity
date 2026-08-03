@@ -19,6 +19,20 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.18 adds a theory-neutral inverse baryon-to-response discovery
+workbench to the local asynchronous API. It fits one stationary compact 2D or
+3D convolution kernel and one shared amplitude across multiple systems,
+propagates supplied target uncertainties, runs radial-angle source nulls,
+reports rank/nullity and regularization sensitivity, and emits deterministic
+CSV, NPZ, JSON, HTML, hash, and reproduction artifacts. The input contract
+requires baryonic sources and explicitly labels its targets as model-derived
+discovery products; raw observations are rejected as inverse targets. Its 25
+kernel cells in the included synthetic test are 25 discovery coefficients, not
+a one-parameter theory. A candidate must be compressed into a forward law,
+frozen, and tested against withheld raw observations before it can support a
+gravity claim. The public Vercel route and schema are available, but production
+execution still returns `production_worker_not_connected`.
+
 Version 0.17 closes the first nonlocal execution gap. The published
 [`nonlocal-response.json`](examples/models/nonlocal-response.json) manifest
 defines a generic baryon-to-response source term, and the local Cartesian
@@ -157,6 +171,10 @@ POST /api/v1/galaxy-jobs
 GET  /api/v1/galaxy-jobs/{id}
 GET  /api/v1/galaxy-jobs/{id}/events
 GET  /api/v1/galaxy-jobs/{id}/artifacts
+POST /api/v1/inverse-response-jobs
+GET  /api/v1/inverse-response-jobs/{id}
+GET  /api/v1/inverse-response-jobs/{id}/events
+GET  /api/v1/inverse-response-jobs/{id}/artifacts
 POST /api/v1/batches
 GET  /api/v1/batches/{id}
 GET  /api/v1/batches/{id}/events
@@ -289,6 +307,33 @@ realizations can project to the same 2D map. The public Vercel route currently
 returns `production_worker_not_connected`; real execution is available through
 the local reference server until durable workers and object storage are
 deployed.
+
+The inverse discovery route uses the same content-hashed upload and local job
+machinery:
+
+```text
+POST /api/v1/inverse-response-jobs
+GET  /api/v1/inverse-response-jobs/{id}
+GET  /api/v1/inverse-response-jobs/{id}/events
+GET  /api/v1/inverse-response-jobs/{id}/artifacts
+POST /api/v1/inverse-response-jobs/{id}/cancel
+```
+
+Each system names a baryonic source array, a model-derived response target, an
+uncertainty array, and an optional mask on one common Cartesian grid. The v1
+worker solves the exact zero-padded linear convolution problem
+`target(y) = amplitude * sum_x source(x) kernel(y-x) dV`. It fits one shared
+kernel and amplitude, not one kernel per system. The report keeps discovery
+parameter counts, uncertainty intervals, null-control significance,
+identifiability, and claim boundaries attached to the result. Run its real
+HTTP known-answer test while the local server is active with:
+
+```text
+npm run smoke:inverse-response
+```
+
+See
+[`../docs/INVERSE_RESPONSE_WORKBENCH_MILESTONE.md`](../docs/INVERSE_RESPONSE_WORKBENCH_MILESTONE.md).
 
 The same local server now chains generated surface- or volume-density bundles
 into one multi-system field batch without registering a formula-specific route:

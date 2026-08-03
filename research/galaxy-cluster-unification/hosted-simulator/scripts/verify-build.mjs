@@ -35,6 +35,7 @@ const requiredPaths = [
   "dist/schemas/field-job-submit-v1.schema.json",
   "dist/schemas/observation-evaluation-job-submit-v1.schema.json",
   "dist/schemas/galaxy-job-submit-v1.schema.json",
+  "dist/schemas/inverse-response-job-submit-v1.schema.json",
   "dist/schemas/batch-submit-v1.schema.json",
   "dist/examples/models/refracted-gravity.json",
   "dist/examples/models/nonlocal-response.json",
@@ -47,11 +48,13 @@ const requiredPaths = [
   "api/v1/field-jobs.mjs",
   "api/v1/observation-evaluation-jobs.mjs",
   "api/v1/galaxy-jobs.mjs",
+  "api/v1/inverse-response-jobs.mjs",
   "api/v1/batches.mjs",
   "lib/resolved-twin-evidence.mjs",
   "lib/local-field-job-service.mjs",
   "lib/observation-evaluation-preflight.mjs",
   "lib/galaxy-job-preflight.mjs",
+  "lib/inverse-response-preflight.mjs",
   "lib/observation-target.mjs",
   "lib/batch-preflight.mjs",
   "lib/local-batch-service.mjs",
@@ -66,6 +69,7 @@ for (const phrase of [
   "What it cannot tell you yet",
   "Use halo maps only for discovery",
   "Nonlocal baryon-to-response convolution",
+  "Inverse baryon-to-response discovery",
   "A genuinely useful result is a prediction, not a reconstruction",
 ]) {
   if (!guide.includes(phrase)) throw new Error(`researcher guide is missing: ${phrase}`);
@@ -76,5 +80,10 @@ if (catalog.systems.length !== 175) throw new Error("catalog must contain all 17
 const resolvedEvidence = JSON.parse(await readFile(resolve(root, "data", "resolved-twin-development-v1.json"), "utf8"));
 if (resolvedEvidence.systems.length !== 8 || resolvedEvidence.sample.scoredVelocityPixels !== 146532) {
   throw new Error("resolved twin evidence must contain eight systems and 146,532 scored pixels");
+}
+const arrayBundleSchema = JSON.parse(await readFile(resolve(root, "dist", "schemas", "array-bundle-v1.schema.json"), "utf8"));
+const scientificRoles = arrayBundleSchema.properties.arrays.items.properties.scientificRole.enum;
+for (const role of ["baryonic_input", "model_derived_discovery_target", "raw_observation"]) {
+  if (!scientificRoles.includes(role)) throw new Error(`array bundle schema is missing scientific role: ${role}`);
 }
 console.log(`verified static application, researcher guide, ${catalog.systems.length}-galaxy radial catalog, and ${resolvedEvidence.systems.length}-galaxy resolved evidence`);

@@ -73,6 +73,7 @@ const staticFiles = new Map([
   ["/schemas/field-job-submit-v1.schema.json", ["schemas/field-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/observation-evaluation-job-submit-v1.schema.json", ["schemas/observation-evaluation-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/galaxy-job-submit-v1.schema.json", ["schemas/galaxy-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/inverse-response-job-submit-v1.schema.json", ["schemas/inverse-response-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/batch-submit-v1.schema.json", ["schemas/batch-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/examples/models/newtonian-poisson.json", ["examples/models/newtonian-poisson.json", "application/json; charset=utf-8"]],
   ["/examples/models/aqual.json", ["examples/models/aqual.json", "application/json; charset=utf-8"]],

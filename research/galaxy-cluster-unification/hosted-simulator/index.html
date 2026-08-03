@@ -25,7 +25,7 @@
       </nav>
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Open research preview · v0.17</p>
+          <p class="eyebrow">Open research preview · v0.18</p>
           <h1>Put a gravity formula in front of real galaxies.</h1>
           <p class="lede">
             Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
@@ -285,7 +285,10 @@
               The local reference API now composes immutable 2D/3D field jobs with separately
               cached observation jobs across multi-system batches, including typed photon
               deflection maps and raw multiple-image source profiling, global root finding,
-              assignment, and uncertainty-aware image-position scores. Public durable workers
+              assignment, and uncertainty-aware image-position scores. It also infers one shared
+              stationary response kernel from explicitly labeled baryonic maps and model-derived
+              targets, with uncertainty, null controls, and non-identifiability diagnostics. That
+              inverse is a hypothesis generator, not a forward theory test. Public durable workers
               remain a deployment milestone, so hosted heavy routes disclose that limitation.
             </p>
           </div>
@@ -307,6 +310,7 @@
           <article class="endpoint"><span>POST</span><code>/api/v1/field-jobs</code><p>Queue a confirmed 2D/3D manifest locally, then poll state, events, and verified artifacts. Production workers are not connected yet.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/observation-evaluation-jobs</code><p>Reuse one immutable solved field with new observation data, masks, beams, or uncertainties without rerunning gravity.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/galaxy-jobs</code><p>Extract content-hashed baryonic parameters or generate verified 2D/3D density bundles without choosing a gravity formula.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/inverse-response-jobs</code><p>Infer a shared candidate baryon-to-response kernel locally from model-derived discovery targets, with uncertainty, nulls, identifiability, and explicit parameter counts.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/batches</code><p>Compose reusable field solves with separately hashed observation data and targets across uploaded or generated systems, then download one deterministic report.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/runs</code><p>Run a formula and receive scores, curves, comparators, and an immutable manifest hash.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/twin-runs</code><p>Regenerate a galaxy's baryonic radial twin without its measured speeds, then reveal and score the held-out rotation curve.</p></article>

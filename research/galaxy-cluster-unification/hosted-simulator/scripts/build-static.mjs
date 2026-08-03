@@ -30,6 +30,7 @@ for (const path of [
   "schemas/field-job-submit-v1.schema.json",
   "schemas/observation-evaluation-job-submit-v1.schema.json",
   "schemas/galaxy-job-submit-v1.schema.json",
+  "schemas/inverse-response-job-submit-v1.schema.json",
   "schemas/batch-submit-v1.schema.json",
   "examples/models/newtonian-poisson.json",
   "examples/models/aqual.json",

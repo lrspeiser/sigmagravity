@@ -38,6 +38,7 @@
           "unit": { "type": "string", "minLength": 1 },
           "rank": { "enum": ["scalar", "vector", "tensor2"] },
           "role": { "enum": ["source", "boundary", "mask", "uncertainty", "auxiliary"] },
+          "scientificRole": { "enum": ["raw_observation", "baryonic_input", "nuisance_or_calibration", "model_derived_discovery_target", "withheld_score_target"] },
           "dtype": { "type": "string", "pattern": "^[<>=|][A-Za-z0-9]+$" },
           "shape": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "integer", "minimum": 5 } },
           "elementCount": { "type": "integer", "minimum": 25 },

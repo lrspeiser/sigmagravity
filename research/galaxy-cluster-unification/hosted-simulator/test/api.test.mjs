@@ -10,6 +10,7 @@ import confirmModel from "../api/v1/models/confirm.mjs";
 import prepareFieldJob from "../api/v1/field-jobs/prepare.mjs";
 import hostedFieldJobs from "../api/v1/field-jobs.mjs";
 import hostedGalaxyJobs from "../api/v1/galaxy-jobs.mjs";
+import hostedInverseResponseJobs from "../api/v1/inverse-response-jobs.mjs";
 import hostedObservationEvaluationJobs from "../api/v1/observation-evaluation-jobs.mjs";
 import hostedBatches from "../api/v1/batches.mjs";
 import hostedDataUploads from "../api/v1/data-uploads.mjs";
@@ -41,7 +42,7 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.17.0-preview");
+  assert.equal(output.body.version, "0.18.0-preview");
   assert.equal(output.body.capabilities.researcherGuide, "available");
   assert.equal(output.body.capabilities.exactModelHashConfirmation, "required_for_execution");
   assert.equal(output.body.capabilities.heldoutObservedGalaxyTwins, "available");
@@ -62,6 +63,10 @@ test("health API identifies the deployed contract version and local worker bound
   );
   assert.equal(
     output.body.capabilities.localNonlocalConvolution,
+    "available_in_dev_server",
+  );
+  assert.equal(
+    output.body.capabilities.localInverseHaloResponseDiscovery,
     "available_in_dev_server",
   );
 });
@@ -245,6 +250,11 @@ test("production upload and queue endpoints disclose missing infrastructure", ()
   assert.equal(observationJob.statusCode, 503);
   assert.equal(observationJob.body.error, "production_worker_not_connected");
   assert.equal(observationJob.body.requestSchema, "/schemas/observation-evaluation-job-submit-v1.schema.json");
+  const inverseJob = call(hostedInverseResponseJobs, { method: "POST", body: {} });
+  assert.equal(inverseJob.statusCode, 503);
+  assert.equal(inverseJob.body.error, "production_worker_not_connected");
+  assert.equal(inverseJob.body.classification, "hypothesis_generator_not_forward_theory_test");
+  assert.equal(inverseJob.body.requestSchema, "/schemas/inverse-response-job-submit-v1.schema.json");
   const batch = call(hostedBatches, { method: "POST", body: {} });
   assert.equal(batch.statusCode, 503);
   assert.equal(batch.body.error, "production_worker_not_connected");

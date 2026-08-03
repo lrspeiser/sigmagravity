@@ -1,6 +1,6 @@
 {
   "name": "sigma-gravity-research-simulator",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "private": true,
   "type": "module",
   "description": "Public, reproducible preview API for galaxy and gravity-formula tests.",
@@ -15,6 +15,7 @@
     "smoke:field-jobs": "python ../scripts/smoke_local_field_job_api.py",
     "smoke:observation-jobs": "python ../scripts/smoke_local_observation_evaluation_api.py",
     "smoke:galaxy-jobs": "python ../scripts/smoke_local_galaxy_job_api.py",
+    "smoke:inverse-response": "python ../scripts/smoke_local_inverse_response_api.py",
     "smoke:batches": "python ../scripts/smoke_local_batch_api.py",
     "test": "node --test test/*.test.mjs"
   },

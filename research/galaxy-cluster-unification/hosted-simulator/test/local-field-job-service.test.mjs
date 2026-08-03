@@ -76,6 +76,54 @@ function galaxyBundle() {
   return { ...core, bundleSha256: sha256(core) };
 }
 
+function inverseBundle() {
+  const arrays = [];
+  for (const index of [1, 2]) {
+    arrays.push(
+      {
+        key: `baryons_${index}`, npzKey: `baryons_${index}`, unit: "kg/m^2",
+        rank: "scalar", role: "source", scientificRole: "baryonic_input",
+        dtype: "<f8", shape: [17, 17], elementCount: 289, contentSha256: String(index).repeat(64),
+      },
+      {
+        key: `response_${index}`, npzKey: `response_${index}`, unit: "kg/m^2",
+        rank: "scalar", role: "auxiliary", scientificRole: "model_derived_discovery_target",
+        dtype: "<f8", shape: [17, 17], elementCount: 289, contentSha256: String(index + 2).repeat(64),
+      },
+      {
+        key: `uncertainty_${index}`, npzKey: `uncertainty_${index}`, unit: "kg/m^2",
+        rank: "scalar", role: "uncertainty", scientificRole: "nuisance_or_calibration",
+        dtype: "<f8", shape: [17, 17], elementCount: 289, contentSha256: String(index + 4).repeat(64),
+      },
+    );
+  }
+  const core = {
+    schemaVersion: "sigma-array-bundle/1",
+    geometry: { coordinateSystem: "cartesian_2d", dimensions: 2, spacing: [1, 1], lengthUnit: "kpc" },
+    arrays,
+    provenance: { kind: "synthetic_inverse_fixture" },
+    license: { id: "CC0-1.0", redistributionAllowed: true },
+  };
+  return { ...core, bundleSha256: sha256(core) };
+}
+
+function inverseSubmission(dataUploadId) {
+  return {
+    schemaVersion: "sigma-inverse-response-job-submit/1",
+    dataUploadId,
+    systems: [1, 2].map((index) => ({
+      id: `SYNTH-${index}`,
+      sourceKey: `baryons_${index}`,
+      targetKey: `response_${index}`,
+      uncertaintyKey: `uncertainty_${index}`,
+    })),
+    kernel: { shape: [5, 5], ridge: 1e-10, smoothness: 1e-8, nonnegative: true },
+    uncertainty: { ensembleSize: 20, seed: 17 },
+    nullControls: { kind: "source_radial_angle_shuffle", count: 19, seed: 23 },
+    outputLicense: { id: "CC-BY-4.0", redistributionAllowed: true },
+  };
+}
+
 async function successfulRunner({ jobDirectory }) {
   const root = resolve(jobDirectory, "artifacts");
   await mkdir(root, { recursive: true });
@@ -290,6 +338,31 @@ test("queued galaxy jobs use separate routes and zero gravity parameters", async
   const artifacts = await service.getArtifacts(submission.id);
   assert.equal(artifacts.schemaVersion, "sigma-galaxy-job-artifact-response/1");
   assert.match(artifacts.items[0].url, /^\/api\/v1\/galaxy-jobs\//);
+  await assert.rejects(() => service.getFieldJob(submission.id), /unknown field job/);
+});
+
+test("queued inverse response jobs retain discovery roles and separate routes", async (t) => {
+  const service = await fixture(t);
+  const archive = Buffer.from("inverse-response-npz-test-archive");
+  const ticket = await service.createUpload({
+    schemaVersion: "sigma-data-upload-request/1",
+    inputBundle: inverseBundle(),
+    archive: { sha256: digest(archive), bytes: archive.length },
+  });
+  await service.putUploadContent(ticket.id, archive);
+  const submission = await service.createInverseResponseJob(inverseSubmission(ticket.id));
+  assert.equal(submission.jobType, "inverse_response");
+  assert.match(submission.links.self, /^\/api\/v1\/inverse-response-jobs\//);
+  assert.equal(submission.parameterAccounting.fittedPerSystemGravityParameters, 0);
+  assert.equal(submission.preflight.dataRoleAudit[0].targetRole, "model_derived_discovery_target");
+  await service.waitForIdle();
+  const completed = await service.getInverseResponseJob(submission.id);
+  assert.equal(completed.state, "succeeded");
+  const artifacts = await service.getArtifacts(submission.id);
+  assert.equal(artifacts.schemaVersion, "sigma-inverse-response-job-artifact-response/1");
+  assert.match(artifacts.items[0].url, /^\/api\/v1\/inverse-response-jobs\//);
+  const listed = await service.listInverseResponseJobs();
+  assert.equal(listed.items.length, 1);
   await assert.rejects(() => service.getFieldJob(submission.id), /unknown field job/);
 });
 

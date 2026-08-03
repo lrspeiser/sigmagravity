@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.17.0-preview",
-    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence with distinct morphology/transport/observation/geometry scores, plus a dimension-checked formula-independent 2D/3D contract. The local worker now executes explicitly defined zero-padded nonlocal convolution integrals; the public deployment still requires durable storage and isolated workers.",
+    version: "0.18.0-preview",
+    description: "Stateless radial and held-out observed-galaxy twin tests, frozen resolved development, validation, and one-shot final-holdout evidence with distinct morphology/transport/observation/geometry scores, plus a dimension-checked formula-independent 2D/3D contract. The local worker executes explicit nonlocal convolutions and an inverse baryon-to-response discovery workbench whose targets must be labeled model-derived. Inverse results are hypothesis generators, not forward theory tests. Public heavy execution still requires durable storage and isolated workers.",
   },
   paths: {
     "/api/v1/health": { get: { summary: "Service status" } },
@@ -49,6 +49,15 @@ const specification = {
     "/api/v1/galaxy-jobs/{id}/artifacts": { get: { summary: "Read verified 2D/3D density and parameter artifacts" } },
     "/api/v1/galaxy-jobs/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed resolved-galaxy artifact" } },
     "/api/v1/galaxy-jobs/{id}/cancel": { post: { summary: "Cancel a queued or running resolved-galaxy job" } },
+    "/api/v1/inverse-response-jobs": {
+      get: { summary: "List local inverse baryon-to-response discovery jobs" },
+      post: { summary: "Infer candidate stationary kernels from baryonic inputs and explicitly model-derived discovery targets" },
+    },
+    "/api/v1/inverse-response-jobs/{id}": { get: { summary: "Read inverse-response job state" } },
+    "/api/v1/inverse-response-jobs/{id}/events": { get: { summary: "Read inverse-response lifecycle events" } },
+    "/api/v1/inverse-response-jobs/{id}/artifacts": { get: { summary: "Read kernels, uncertainty, nulls, predictions, and deterministic reports" } },
+    "/api/v1/inverse-response-jobs/{id}/artifacts/{name}": { get: { summary: "Download one allow-listed inverse-response artifact" } },
+    "/api/v1/inverse-response-jobs/{id}/cancel": { post: { summary: "Cancel an inverse-response discovery job" } },
     "/api/v1/batches": {
       get: { summary: "List local multi-system field batches" },
       post: { summary: "Compose reusable field children and separately cached observation children across uploaded or generated systems" },

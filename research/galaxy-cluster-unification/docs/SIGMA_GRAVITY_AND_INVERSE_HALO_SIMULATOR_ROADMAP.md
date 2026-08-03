@@ -1,7 +1,7 @@
 # Roadmap: a simulator for Sigma Gravity and inverse halo-response discovery
 
-Status: active implementation plan, updated 2026-08-02 for the hosted v0.17
-nonlocal-response milestone.
+Status: active implementation plan, updated 2026-08-02 for the hosted v0.18
+inverse-response workbench milestone.
 
 ## Outcome
 
@@ -237,6 +237,19 @@ Acceptance evidence:
 
 Priority: **P1 discovery tool, not the final test.**
 
+Implementation status: **local v1 complete; real-data scientific acceptance
+incomplete.** The reference service now accepts content-hashed Cartesian 2D or
+3D baryonic, model-derived target, uncertainty, and mask arrays; fits one
+stationary compact kernel and one amplitude across all submitted systems; and
+emits uncertainty ensembles, a radial-angle null, rank/nullity,
+regularization-sensitivity, compatible-kernel, deterministic report, hash, and
+reproduction artifacts. It rejects raw observations as an inverse target and
+counts every kernel cell as a fitted discovery coefficient. Synthetic
+injection, null, 3D, degeneracy, determinism, artifact-integrity, and empirical
+interval-coverage gates pass. Remaining acceptance work requires complete real
+baryons, multiple independent lens-model posterior ensembles, the additional
+null families below, and a frozen raw-observation holdout.
+
 For a cluster development set, allow a researcher to supply:
 
 - a baryonic 2D/3D ensemble;
@@ -268,6 +281,13 @@ Acceptance evidence:
 - posterior coverage is measured across baryonic and lens-map realizations;
 - results remain stable across at least two independent lens-model methods; and
 - the workbench can reveal non-identifiability rather than force one answer.
+
+The local v1 satisfies the synthetic recovery, simple-null, calibrated-noise,
+and explicit non-identifiability portions. It does not yet satisfy stability
+across independent real lens models. Target permutation, phase scrambling,
+central-halo, local-light, missing-baryon, conservation, and multi-method
+posterior controls remain open rather than being inferred from the one
+radial-angle control.
 
 ## Build 6: freeze a baryon-only forward law and remove the halo target
 
