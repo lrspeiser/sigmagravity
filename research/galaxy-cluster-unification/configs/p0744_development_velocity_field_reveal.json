@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "sigma-p0744-development-velocity-field-reveal/1",
+  "stage": "P0744",
+  "status": "frozen_before_any_things_moment1_or_moment2_array_opening",
+  "purpose": "Reveal real THINGS velocity and dispersion fields for the four development galaxies and compare them with fixed Newtonian and MOND predictions made from both the registered baryonic maps and their frozen Haar-256 fake twins.",
+  "parents": {
+    "resolvedAcquisition": "results/p0738_morphology_diverse_resolved_acquisition/manifest.json",
+    "resolvedAcquisitionManifestSha256": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+    "registeredBaryons": "results/p0741_fused_spiral_baryonic_registration_development/report.json",
+    "registeredBaryonsResultSha256": "64776bed1374276bcae8737270febee15a90b1818e0e9dbfc217b13541b1731a",
+    "fakeTwins": "results/p0743_multiscale_spiral_twin_development/report.json",
+    "fakeTwinsResultSha256": "d1a1ec762c5c06eb246d702185625014774dfdc3082069f8006b89c6dee1979f",
+    "selectedTwinTier": "haar_256"
+  },
+  "systems": ["NGC2403", "NGC3198", "NGC5055", "NGC7793"],
+  "targetProducts": ["THINGS natural-weighted moment 1 velocity field", "THINGS natural-weighted moment 2 dispersion field"],
+  "sealed": {
+    "validationSystems": ["NGC3521", "NGC6946"],
+    "holdoutSystems": ["NGC2841", "NGC7331"],
+    "validationArraysMayOpen": false,
+    "holdoutArraysMayOpen": false
+  },
+  "observationProcessing": {
+    "skyCenter": "fixed SPARC/NED coordinate already used for baryonic registration",
+    "positionAngle": "frozen P0739 image-only position angle",
+    "inclination": "published SPARC inclination",
+    "systemicVelocity": "one disclosed observation nuisance per galaxy: H I-intensity-weighted median moment-1 velocity within 0.5 SPARC effective radii",
+    "handedness": "one disclosed binary observation convention per galaxy: sign of the H I-weighted covariance between systemic-subtracted velocity and major-axis x/r",
+    "velocityUnit": "read BUNIT and apply 0.001 only when the FITS unit is m/s; otherwise require km/s-compatible metadata",
+    "scoreMask": "finite moment 0, moment 1, and moment 2 samples; positive registered gas weight; radius between one THINGS beam and published H I R995",
+    "uncertaintyKmS": "quadrature sum of sampled moment-2 dispersion and one universal 5.2 km/s channel FWHM divided by 2.355",
+    "predictionBeam": "circular Gaussian approximation using the THINGS geometric-mean beam; intensity-weight predicted line-of-sight velocities with the registered gas map",
+    "weighting": "registered gas surface density divided by squared velocity uncertainty",
+    "pressureSupportCorrection": false,
+    "nonCircularNuisanceFit": false,
+    "formulaOrHaloFit": false
+  },
+  "models": [
+    {"id": "newtonian_thin_sheet", "gravityParametersFitted": 0, "gravitationalConstantM3KgS2": 6.67430e-11},
+    {"id": "fixed_simple_mond", "gravityParametersFitted": 0, "a0MPerS2": 1.2e-10, "gravitationalConstantM3KgS2": 6.67430e-11}
+  ],
+  "fieldSettings": {"paddingFactor": 2.0},
+  "interpretation": {
+    "fieldErrorRatio": "weighted prediction RMSE divided by the weighted RMS declared measurement-plus-dispersion uncertainty",
+    "consistentBand": "ratio <= 1",
+    "closeBand": "1 < ratio <= 2",
+    "missBand": "ratio > 2",
+    "warning": "These descriptive bands do not convert a development score into blind validation."
+  },
+  "gates": {
+    "requiredSystems": 4,
+    "requiredTargetArraysOpened": 8,
+    "requiredValidationArraysOpened": 0,
+    "requiredHoldoutArraysOpened": 0,
+    "minimumScoredPixelsPerGalaxy": 500,
+    "maximumTwinSourcePredictionTransportRmseKmS": 8.0,
+    "maximumGravityParametersFitted": 0,
+    "maximumDarkMatterParameters": 0,
+    "allTargetHashesMatchAcquisitionManifest": true,
+    "allScoresFinite": true
+  },
+  "claimBoundary": [
+    "P0744 is the first direct real 2D velocity-field comparison for these spiral twins, but it uses the development sample and is not a holdout result.",
+    "Systemic velocity and handedness are observation-coordinate nuisances, not gravity parameters; both are disclosed per galaxy.",
+    "No pressure-support, warp, bar, streaming, inclination, distance, M/L, MOND, or halo parameter is fitted to a residual in this raw comparison.",
+    "A model can fail because its circular-equilibrium prediction is wrong or because unmodeled gas dynamics dominate; P0744 alone cannot uniquely separate those causes.",
+    "Validation and holdout velocity arrays remain sealed."
+  ]
+}
