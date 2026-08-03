@@ -19,18 +19,19 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
-Version 0.13 extends the resolved-twin evidence view and
-`GET /api/v1/resolved-twin-evidence`. It exposes the frozen P0743/P0744
-four-galaxy development result plus the frozen-method P0745-P0747 two-galaxy
-validation result as separate measurements: baryonic-map
-fidelity, source-to-twin formula transport, and formula-to-observation
-velocity error. The evidence covers 107,211 THINGS H I velocity pixels and
-discloses that no gravity parameter or velocity target entered twin extraction.
-The validation systems also expose a post-reveal, formula-independent
-viewing-axis diagnostic without hiding the original frozen score. It is
+Version 0.14 extends the resolved-twin evidence view and
+`GET /api/v1/resolved-twin-evidence` through the preregistered P0752 final
+holdout. It exposes four development, two validation, and two one-shot holdout
+systems as separate measurements: baryonic-map fidelity, source-to-twin
+formula transport, and formula-to-observation velocity error. The evidence
+covers 146,532 THINGS H I velocity pixels and discloses that no gravity
+parameter or velocity target entered twin extraction. The holdout protocol
+executed successfully: fixed simple MOND was competitive but incomplete, while
+Newtonian baryons failed the declared holdout criterion. Earlier post-reveal
+viewing-axis work remains labeled method development; the final holdout uses
+the resulting formula-independent observation policy as preregistered. This is
 precomputed fixed-comparator evidence, not a claim that the hosted Vercel
-process can execute arbitrary 2D formulas or that the diagnostic is a blind
-holdout.
+process can execute arbitrary 2D formulas or that a new gravity theory passed.
 
 Version 0.11 added `POST /api/v1/twin-runs`. It applies the same submitted
 formula to both the published baryonic channels and a six-control-point radial

@@ -138,7 +138,7 @@ async function loadResolvedEvidence() {
   elements["resolved-galaxy-select"].innerHTML = result.systems
     .map((system) => `<option value="${system.id}">${system.id} · ${system.split}</option>`)
     .join("");
-  elements["resolved-evidence-status"].textContent = `${result.stage} · ${result.sample.developmentSystems.length} development + ${result.sample.validationSystems.length} validation galaxies · ${result.sample.scoredVelocityPixels.toLocaleString("en-US")} scored velocity pixels`;
+  elements["resolved-evidence-status"].textContent = `${result.stage} · ${result.sample.developmentSystems.length} development + ${result.sample.validationSystems.length} validation + ${result.sample.holdoutSystems.length} final holdout galaxies · ${result.sample.scoredVelocityPixels.toLocaleString("en-US")} scored velocity pixels`;
   renderResolvedEvidence();
 }
 
@@ -172,7 +172,7 @@ function renderResolvedEvidence() {
   elements["resolved-accuracy-card"].className = `score-card ${accuracy.classification}`;
   elements["resolved-chart-title"].textContent = `${system.id} · ${definition.label}`;
 
-  const twinFaithful = fidelity.totalMapPixelCorrelation >= 0.95 && transport <= 8;
+  const twinFaithful = fidelity.totalMapPixelCorrelation >= 0.95 && transport <= system.simulatorFidelityLimitKmS;
   const formulaVerdict = accuracy.classification === "consistent"
     ? "matches this raw velocity field within its declared uncertainty"
     : accuracy.classification === "close"
@@ -181,8 +181,15 @@ function renderResolvedEvidence() {
   elements["resolved-verdict"].innerHTML = `<strong>${twinFaithful ? "The twin is faithful enough for this test." : "The twin itself is not faithful enough."}</strong> ${definition.label} ${formulaVerdict}. A good transport score therefore cannot be read as evidence that the formula is correct.`;
   const diagnostic = system.geometryDiagnostic;
   if (diagnostic) {
-    const adjusted = diagnostic.models[modelId].sourceVersusObserved;
-    elements["resolved-geometry-note"].innerHTML = `<strong>Post-reveal viewing-angle check:</strong> the image-only axis differed from the H I kinematic axis by ${diagnostic.axisOffsetDeg.toFixed(1)}°. Using that one shared observation nuisance changes the registered-baryon RMSE from ${model.sourceVersusObserved.rmseKmS.toFixed(1)} to ${adjusted.rmseKmS.toFixed(1)} km/s (${adjusted.classification}). No speed amplitude or gravity parameter was fitted; this diagnostic does not replace the frozen validation score.`;
+    const diagnosticModel = diagnostic.models[modelId];
+    if (diagnostic.status === "preregistered_final_holdout_observation_policy") {
+      const raw = diagnosticModel.imageAxisSourceVersusObserved;
+      const adjusted = diagnosticModel.sourceVersusObserved;
+      elements["resolved-geometry-note"].innerHTML = `<strong>Preregistered holdout viewing policy:</strong> the image-only axis differed from the H I kinematic axis by ${diagnostic.axisOffsetDeg.toFixed(1)}°. The policy set one shared kinematic phase before scoring, changing the registered-baryon RMSE from ${raw.rmseKmS.toFixed(1)} to ${adjusted.rmseKmS.toFixed(1)} km/s (${adjusted.classification}). Its fitted speed amplitude was discarded, and no gravity parameter was fitted.`;
+    } else {
+      const adjusted = diagnosticModel.sourceVersusObserved;
+      elements["resolved-geometry-note"].innerHTML = `<strong>Post-reveal viewing-angle method development:</strong> the image-only axis differed from the H I kinematic axis by ${diagnostic.axisOffsetDeg.toFixed(1)}°. Using that one shared observation nuisance changes the registered-baryon RMSE from ${model.sourceVersusObserved.rmseKmS.toFixed(1)} to ${adjusted.rmseKmS.toFixed(1)} km/s (${adjusted.classification}). No speed amplitude or gravity parameter was fitted; this is not blind validation evidence.`;
+    }
     elements["resolved-geometry-note"].hidden = false;
   } else {
     elements["resolved-geometry-note"].textContent = "No post-reveal viewing-angle adjustment is included for this development system.";

@@ -1,18 +1,22 @@
 {
   "schemaVersion": "sigma-hosted-resolved-twin-evidence/1",
-  "stage": "P0747",
-  "evidenceClass": "precomputed_development_and_validation_result",
-  "title": "Resolved spiral twins versus observed development and validation velocity fields",
+  "stage": "P0752",
+  "evidenceClass": "precomputed_development_validation_and_final_holdout_result",
+  "title": "Resolved spiral twins versus observed velocity fields, including final holdout",
   "parents": {
     "p0743ReportSha256": "d1a1ec762c5c06eb246d702185625014774dfdc3082069f8006b89c6dee1979f",
     "p0744ReportSha256": "d3feb859f9d50e7a9ecefd80c16f0ed6cee1d0f0ccb6ded307b09c21e84ee9d0",
     "p0745cReportSha256": "0a514338cf460ed72decf23b483e4dfd8831faf93490f2bb2ac686e8dfba7579",
     "p0746ReportSha256": "3eda055f18c948f43b55de1ae8393edcf6564d62f646190aeee5f26adccf1952",
-    "p0747ReportSha256": "aeea4965b5750fae938dfa7ccd3927e6a423933c50a386b28f92b186576656b0"
+    "p0747ReportSha256": "aeea4965b5750fae938dfa7ccd3927e6a423933c50a386b28f92b186576656b0",
+    "p0749ReportSha256": "33c95f50957b2bbb51f04e973299903462ea7f32f0e51169038651ee4057faf3",
+    "p0750ReportSha256": "6bb5372103ad5dd2f6dfd2c1bbe808e9343c52421561fca9be9f07e61c5d824e",
+    "p0751cReportSha256": "2d16bd5f48d5c1585ad5ef4de6cc8fb938ee28d735c0f2b85fd4c030439030f3",
+    "p0752ReportSha256": "48963dee2ad9da14a0ca1053d17c4bcafb8a817dbe3ab1edf7d9449c67abe008"
   },
   "sample": {
-    "systems": 6,
-    "scoredVelocityPixels": 107211,
+    "systems": 8,
+    "scoredVelocityPixels": 146532,
     "developmentSystems": [
       "NGC2403",
       "NGC3198",
@@ -23,15 +27,22 @@
       "NGC3521",
       "NGC6946"
     ],
-    "sealedHoldoutSystems": [
+    "holdoutSystems": [
       "NGC2841",
       "NGC7331"
-    ]
+    ],
+    "sealedHoldoutSystems": []
   },
   "generator": {
-    "id": "sparse-orthonormal-haar-2d",
-    "selectedDevelopmentTier": "haar_256",
-    "coefficientsPerBaryonicComponent": 256,
+    "id": "adaptive-sparse-orthonormal-haar-2d",
+    "candidateCoefficientsPerBaryonicComponent": [
+      256,
+      384,
+      512,
+      768,
+      1024
+    ],
+    "selectionInputs": "baryonic morphology, mass, 3D projection replay, and compression only",
     "gravityParameters": 0,
     "velocityTargetsUsed": false
   },
@@ -59,6 +70,7 @@
     {
       "id": "NGC2403",
       "split": "development",
+      "scoreProtocol": "frozen_image_axis_development_or_validation",
       "observation": {
         "tracer": "THINGS H I moment-1 velocity field",
         "scoredPixels": 34727,
@@ -70,9 +82,11 @@
         "totalMapNormalizedL2": 0.11202899588283163,
         "totalMapPixelCorrelation": 0.9945831499105683,
         "massRelativeError": 0.0,
+        "coefficientsPerBaryonicComponent": 256,
         "velocityTargetsUsedInExtraction": false,
         "gravityParametersUsedInExtraction": 0
       },
+      "simulatorFidelityLimitKmS": 8.0,
       "models": {
         "fixed_simple_mond": {
           "sourceVersusObserved": {
@@ -392,11 +406,441 @@
             }
           ]
         }
+      },
+      "geometryDiagnostic": {
+        "status": "post_reveal_method_development_not_blind_evidence",
+        "axisOffsetDeg": 11.136007381914267,
+        "firstHarmonicExplainedVarianceFraction": 0.9852385361501391,
+        "fittedObservationNuisances": 1,
+        "fittedVelocityAmplitudes": 0,
+        "fittedGravityParameters": 0,
+        "models": {
+          "fixed_simple_mond": {
+            "sourceVersusObserved": {
+              "rmseKmS": 20.712274442711355,
+              "uncertaintyRmsKmS": 10.85212089827732,
+              "errorRatio": 1.9085923053068132,
+              "classification": "close"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 19.9948900863385,
+              "uncertaintyRmsKmS": 10.85212089827732,
+              "errorRatio": 1.8424868533774366,
+              "classification": "close"
+            }
+          },
+          "newtonian_thin_sheet": {
+            "sourceVersusObserved": {
+              "rmseKmS": 42.33961783182918,
+              "uncertaintyRmsKmS": 10.85212089827732,
+              "errorRatio": 3.9015062796204405,
+              "classification": "miss"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 42.626831678680134,
+              "uncertaintyRmsKmS": 10.85212089827732,
+              "errorRatio": 3.927972428453757,
+              "classification": "miss"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "NGC2841",
+      "split": "holdout",
+      "scoreProtocol": "preregistered_kinematic_axis_final_holdout",
+      "observation": {
+        "tracer": "THINGS H I moment-1 velocity field",
+        "scoredPixels": 19912,
+        "inclinationDeg": 76.0,
+        "positionAngleDeg": 148.93666348071662,
+        "medianDispersionKmS": 28.440196247026414
+      },
+      "twinFidelity": {
+        "totalMapNormalizedL2": 0.052983370002868846,
+        "totalMapPixelCorrelation": 0.9986399673798864,
+        "massRelativeError": 2.842692027348644e-16,
+        "coefficientsPerBaryonicComponent": 256,
+        "velocityTargetsUsedInExtraction": false,
+        "gravityParametersUsedInExtraction": 0
+      },
+      "simulatorFidelityLimitKmS": 12.0,
+      "models": {
+        "fixed_simple_mond": {
+          "sourceVersusObserved": {
+            "rmseKmS": 54.98017051976453,
+            "uncertaintyRmsKmS": 33.51114167716669,
+            "errorRatio": 1.6406534593605349,
+            "classification": "close"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 54.842720813664194,
+            "uncertaintyRmsKmS": 33.51114167716669,
+            "errorRatio": 1.6365518472034657,
+            "classification": "close"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 2.7239129426597137
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 2.2920925549480855,
+              "observedKmS": 177.2898458261406,
+              "sourcePredictionKmS": 208.4339691079115,
+              "twinPredictionKmS": 208.6395729083061,
+              "pixels": 55
+            },
+            {
+              "radiusKpc": 4.457783435573549,
+              "observedKmS": 279.98597114931,
+              "sourcePredictionKmS": 202.27134137282988,
+              "twinPredictionKmS": 202.89513679163488,
+              "pixels": 124
+            },
+            {
+              "radiusKpc": 6.441303741135976,
+              "observedKmS": 309.09143117227296,
+              "sourcePredictionKmS": 206.0233996141258,
+              "twinPredictionKmS": 206.3514930895967,
+              "pixels": 182
+            },
+            {
+              "radiusKpc": 8.733174798153913,
+              "observedKmS": 317.72438674398967,
+              "sourcePredictionKmS": 220.05932257965472,
+              "twinPredictionKmS": 219.40542057202717,
+              "pixels": 266
+            },
+            {
+              "radiusKpc": 10.78550242521348,
+              "observedKmS": 323.4789628767704,
+              "sourcePredictionKmS": 224.69321092306168,
+              "twinPredictionKmS": 226.04478165319614,
+              "pixels": 322
+            },
+            {
+              "radiusKpc": 12.838835639650718,
+              "observedKmS": 325.9727545407142,
+              "sourcePredictionKmS": 222.90906475512259,
+              "twinPredictionKmS": 218.95016803632777,
+              "pixels": 394
+            },
+            {
+              "radiusKpc": 15.122224541710967,
+              "observedKmS": 314.9985975206429,
+              "sourcePredictionKmS": 234.5022614122205,
+              "twinPredictionKmS": 235.4371838828969,
+              "pixels": 456
+            },
+            {
+              "radiusKpc": 17.260125814462924,
+              "observedKmS": 301.5429436542349,
+              "sourcePredictionKmS": 229.6419312057726,
+              "twinPredictionKmS": 230.1669405293596,
+              "pixels": 544
+            },
+            {
+              "radiusKpc": 19.720891463526204,
+              "observedKmS": 296.8174742610802,
+              "sourcePredictionKmS": 222.73720692707224,
+              "twinPredictionKmS": 224.18598974413536,
+              "pixels": 576
+            },
+            {
+              "radiusKpc": 21.865278163175148,
+              "observedKmS": 295.9696686425717,
+              "sourcePredictionKmS": 219.93020723695363,
+              "twinPredictionKmS": 219.65983277381238,
+              "pixels": 678
+            },
+            {
+              "radiusKpc": 24.075851264591993,
+              "observedKmS": 294.96920755926647,
+              "sourcePredictionKmS": 219.77810423326537,
+              "twinPredictionKmS": 219.67066399560147,
+              "pixels": 730
+            },
+            {
+              "radiusKpc": 26.123584897221452,
+              "observedKmS": 300.36641768579176,
+              "sourcePredictionKmS": 219.55734415608057,
+              "twinPredictionKmS": 219.3489015978277,
+              "pixels": 798
+            },
+            {
+              "radiusKpc": 28.388859056379637,
+              "observedKmS": 294.6058704508908,
+              "sourcePredictionKmS": 220.47748538958044,
+              "twinPredictionKmS": 220.43408845432134,
+              "pixels": 866
+            },
+            {
+              "radiusKpc": 30.651184115645922,
+              "observedKmS": 292.2858018243589,
+              "sourcePredictionKmS": 216.57959066556705,
+              "twinPredictionKmS": 218.1703250389525,
+              "pixels": 942
+            },
+            {
+              "radiusKpc": 32.94616609864893,
+              "observedKmS": 286.1335474112951,
+              "sourcePredictionKmS": 214.22366334161387,
+              "twinPredictionKmS": 215.02425747619003,
+              "pixels": 996
+            },
+            {
+              "radiusKpc": 35.05588152348048,
+              "observedKmS": 287.1587694804091,
+              "sourcePredictionKmS": 213.84356677393285,
+              "twinPredictionKmS": 214.64090939075825,
+              "pixels": 1070
+            },
+            {
+              "radiusKpc": 37.46632811463599,
+              "observedKmS": 261.88427107152205,
+              "sourcePredictionKmS": 214.55066614783578,
+              "twinPredictionKmS": 215.22522830553163,
+              "pixels": 1059
+            },
+            {
+              "radiusKpc": 39.638280447930455,
+              "observedKmS": 280.5856825697113,
+              "sourcePredictionKmS": 213.36218078897187,
+              "twinPredictionKmS": 214.0330360147115,
+              "pixels": 1024
+            },
+            {
+              "radiusKpc": 41.81193500012748,
+              "observedKmS": 279.70895830607856,
+              "sourcePredictionKmS": 212.0797878851744,
+              "twinPredictionKmS": 212.3071273398285,
+              "pixels": 963
+            },
+            {
+              "radiusKpc": 44.04266392376473,
+              "observedKmS": 297.04288385931375,
+              "sourcePredictionKmS": 213.39730853965764,
+              "twinPredictionKmS": 213.49006698318635,
+              "pixels": 948
+            }
+          ]
+        },
+        "newtonian_thin_sheet": {
+          "sourceVersusObserved": {
+            "rmseKmS": 106.53451853526332,
+            "uncertaintyRmsKmS": 33.51114167716669,
+            "errorRatio": 3.1790775605789694,
+            "classification": "miss"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 106.368611471928,
+            "uncertaintyRmsKmS": 33.51114167716669,
+            "errorRatio": 3.174126757501784,
+            "classification": "miss"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 2.4829009201037313
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 2.2920925549480855,
+              "observedKmS": 177.2898458261406,
+              "sourcePredictionKmS": 190.71632761578573,
+              "twinPredictionKmS": 190.92673381735582,
+              "pixels": 55
+            },
+            {
+              "radiusKpc": 4.457783435573549,
+              "observedKmS": 279.98597114931,
+              "sourcePredictionKmS": 170.81602076065863,
+              "twinPredictionKmS": 171.49291650514593,
+              "pixels": 124
+            },
+            {
+              "radiusKpc": 6.441303741135976,
+              "observedKmS": 309.09143117227296,
+              "sourcePredictionKmS": 164.9428362506091,
+              "twinPredictionKmS": 165.3009756806342,
+              "pixels": 182
+            },
+            {
+              "radiusKpc": 8.733174798153913,
+              "observedKmS": 317.72438674398967,
+              "sourcePredictionKmS": 170.48987165343996,
+              "twinPredictionKmS": 169.79442549021473,
+              "pixels": 266
+            },
+            {
+              "radiusKpc": 10.78550242521348,
+              "observedKmS": 323.4789628767704,
+              "sourcePredictionKmS": 168.00683730816107,
+              "twinPredictionKmS": 169.47662583841964,
+              "pixels": 322
+            },
+            {
+              "radiusKpc": 12.838835639650718,
+              "observedKmS": 325.9727545407142,
+              "sourcePredictionKmS": 160.90679162228253,
+              "twinPredictionKmS": 156.7281305528916,
+              "pixels": 394
+            },
+            {
+              "radiusKpc": 15.122224541710967,
+              "observedKmS": 314.9985975206429,
+              "sourcePredictionKmS": 165.89406350128672,
+              "twinPredictionKmS": 166.89315841011873,
+              "pixels": 456
+            },
+            {
+              "radiusKpc": 17.260125814462924,
+              "observedKmS": 301.5429436542349,
+              "sourcePredictionKmS": 154.73690909577095,
+              "twinPredictionKmS": 155.30383573875716,
+              "pixels": 544
+            },
+            {
+              "radiusKpc": 19.720891463526204,
+              "observedKmS": 296.8174742610802,
+              "sourcePredictionKmS": 141.95449128512743,
+              "twinPredictionKmS": 143.47118794767232,
+              "pixels": 576
+            },
+            {
+              "radiusKpc": 21.865278163175148,
+              "observedKmS": 295.9696686425717,
+              "sourcePredictionKmS": 134.75076757459394,
+              "twinPredictionKmS": 134.55483441511072,
+              "pixels": 678
+            },
+            {
+              "radiusKpc": 24.075851264591993,
+              "observedKmS": 294.96920755926647,
+              "sourcePredictionKmS": 130.4796100534832,
+              "twinPredictionKmS": 130.51117473270196,
+              "pixels": 730
+            },
+            {
+              "radiusKpc": 26.123584897221452,
+              "observedKmS": 300.36641768579176,
+              "sourcePredictionKmS": 126.97489358172389,
+              "twinPredictionKmS": 126.89402279420639,
+              "pixels": 798
+            },
+            {
+              "radiusKpc": 28.388859056379637,
+              "observedKmS": 294.6058704508908,
+              "sourcePredictionKmS": 124.24792575831307,
+              "twinPredictionKmS": 124.1979801529667,
+              "pixels": 866
+            },
+            {
+              "radiusKpc": 30.651184115645922,
+              "observedKmS": 292.2858018243589,
+              "sourcePredictionKmS": 117.47724426237596,
+              "twinPredictionKmS": 118.94930135649624,
+              "pixels": 942
+            },
+            {
+              "radiusKpc": 32.94616609864893,
+              "observedKmS": 286.1335474112951,
+              "sourcePredictionKmS": 112.46828745951734,
+              "twinPredictionKmS": 113.1818878198605,
+              "pixels": 996
+            },
+            {
+              "radiusKpc": 35.05588152348048,
+              "observedKmS": 287.1587694804091,
+              "sourcePredictionKmS": 109.53318678894551,
+              "twinPredictionKmS": 110.21929790849443,
+              "pixels": 1070
+            },
+            {
+              "radiusKpc": 37.46632811463599,
+              "observedKmS": 261.88427107152205,
+              "sourcePredictionKmS": 107.67513221318846,
+              "twinPredictionKmS": 108.1556731795204,
+              "pixels": 1059
+            },
+            {
+              "radiusKpc": 39.638280447930455,
+              "observedKmS": 280.5856825697113,
+              "sourcePredictionKmS": 104.26646578041522,
+              "twinPredictionKmS": 104.77129891399979,
+              "pixels": 1024
+            },
+            {
+              "radiusKpc": 41.81193500012748,
+              "observedKmS": 279.70895830607856,
+              "sourcePredictionKmS": 100.89310634588146,
+              "twinPredictionKmS": 101.05194213092184,
+              "pixels": 963
+            },
+            {
+              "radiusKpc": 44.04266392376473,
+              "observedKmS": 297.04288385931375,
+              "sourcePredictionKmS": 99.89767135846526,
+              "twinPredictionKmS": 99.94900776385865,
+              "pixels": 948
+            }
+          ]
+        }
+      },
+      "geometryDiagnostic": {
+        "status": "preregistered_final_holdout_observation_policy",
+        "axisOffsetDeg": 2.491529834189272,
+        "firstHarmonicExplainedVarianceFraction": 0.972933263637729,
+        "fittedObservationNuisances": 1,
+        "fittedVelocityAmplitudes": 0,
+        "fittedGravityParameters": 0,
+        "models": {
+          "fixed_simple_mond": {
+            "imageAxisSourceVersusObserved": {
+              "rmseKmS": 55.634141583116104,
+              "uncertaintyRmsKmS": 33.51114167716669,
+              "errorRatio": 1.6601684931857528,
+              "classification": "close"
+            },
+            "sourceVersusObserved": {
+              "rmseKmS": 54.98017051976453,
+              "uncertaintyRmsKmS": 33.51114167716669,
+              "errorRatio": 1.6406534593605349,
+              "classification": "close"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 54.842720813664194,
+              "uncertaintyRmsKmS": 33.51114167716669,
+              "errorRatio": 1.6365518472034657,
+              "classification": "close"
+            }
+          },
+          "newtonian_thin_sheet": {
+            "imageAxisSourceVersusObserved": {
+              "rmseKmS": 106.71335201687819,
+              "uncertaintyRmsKmS": 33.51114167716669,
+              "errorRatio": 3.1844140985978076,
+              "classification": "miss"
+            },
+            "sourceVersusObserved": {
+              "rmseKmS": 106.53451853526332,
+              "uncertaintyRmsKmS": 33.51114167716669,
+              "errorRatio": 3.1790775605789694,
+              "classification": "miss"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 106.368611471928,
+              "uncertaintyRmsKmS": 33.51114167716669,
+              "errorRatio": 3.174126757501784,
+              "classification": "miss"
+            }
+          }
+        }
       }
     },
     {
       "id": "NGC3198",
       "split": "development",
+      "scoreProtocol": "frozen_image_axis_development_or_validation",
       "observation": {
         "tracer": "THINGS H I moment-1 velocity field",
         "scoredPixels": 13134,
@@ -408,9 +852,11 @@
         "totalMapNormalizedL2": 0.11632330126227948,
         "totalMapPixelCorrelation": 0.9928129317987455,
         "massRelativeError": 1.1245715132789568e-16,
+        "coefficientsPerBaryonicComponent": 256,
         "velocityTargetsUsedInExtraction": false,
         "gravityParametersUsedInExtraction": 0
       },
+      "simulatorFidelityLimitKmS": 8.0,
       "models": {
         "fixed_simple_mond": {
           "sourceVersusObserved": {
@@ -730,11 +1176,50 @@
             }
           ]
         }
+      },
+      "geometryDiagnostic": {
+        "status": "post_reveal_method_development_not_blind_evidence",
+        "axisOffsetDeg": 0.7744177558405088,
+        "firstHarmonicExplainedVarianceFraction": 0.9936734497166645,
+        "fittedObservationNuisances": 1,
+        "fittedVelocityAmplitudes": 0,
+        "fittedGravityParameters": 0,
+        "models": {
+          "fixed_simple_mond": {
+            "sourceVersusObserved": {
+              "rmseKmS": 10.613423044990773,
+              "uncertaintyRmsKmS": 15.587173431646741,
+              "errorRatio": 0.6809074840626506,
+              "classification": "consistent"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 10.385482190548958,
+              "uncertaintyRmsKmS": 15.587173431646741,
+              "errorRatio": 0.6662838670584909,
+              "classification": "consistent"
+            }
+          },
+          "newtonian_thin_sheet": {
+            "sourceVersusObserved": {
+              "rmseKmS": 49.60628329161091,
+              "uncertaintyRmsKmS": 15.587173431646741,
+              "errorRatio": 3.1825066622338944,
+              "classification": "miss"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 49.34003600551148,
+              "uncertaintyRmsKmS": 15.587173431646741,
+              "errorRatio": 3.165425484092971,
+              "classification": "miss"
+            }
+          }
+        }
       }
     },
     {
       "id": "NGC3521",
       "split": "validation",
+      "scoreProtocol": "frozen_image_axis_development_or_validation",
       "observation": {
         "tracer": "THINGS H I moment-1 velocity field",
         "scoredPixels": 7962,
@@ -746,9 +1231,11 @@
         "totalMapNormalizedL2": 0.048607885618119365,
         "totalMapPixelCorrelation": 0.9987828855995132,
         "massRelativeError": 0.0,
+        "coefficientsPerBaryonicComponent": 256,
         "velocityTargetsUsedInExtraction": false,
         "gravityParametersUsedInExtraction": 0
       },
+      "simulatorFidelityLimitKmS": 8.0,
       "models": {
         "fixed_simple_mond": {
           "sourceVersusObserved": {
@@ -1070,7 +1557,7 @@
         }
       },
       "geometryDiagnostic": {
-        "status": "post_reveal_not_blind_validation",
+        "status": "post_reveal_method_development_not_blind_evidence",
         "axisOffsetDeg": 0.21330703245121974,
         "firstHarmonicExplainedVarianceFraction": 0.97123479524174,
         "fittedObservationNuisances": 1,
@@ -1111,6 +1598,7 @@
     {
       "id": "NGC5055",
       "split": "development",
+      "scoreProtocol": "frozen_image_axis_development_or_validation",
       "observation": {
         "tracer": "THINGS H I moment-1 velocity field",
         "scoredPixels": 23153,
@@ -1122,9 +1610,11 @@
         "totalMapNormalizedL2": 0.07760984747024752,
         "totalMapPixelCorrelation": 0.9969465491748302,
         "massRelativeError": 3.302663825450538e-16,
+        "coefficientsPerBaryonicComponent": 256,
         "velocityTargetsUsedInExtraction": false,
         "gravityParametersUsedInExtraction": 0
       },
+      "simulatorFidelityLimitKmS": 8.0,
       "models": {
         "fixed_simple_mond": {
           "sourceVersusObserved": {
@@ -1444,11 +1934,50 @@
             }
           ]
         }
+      },
+      "geometryDiagnostic": {
+        "status": "post_reveal_method_development_not_blind_evidence",
+        "axisOffsetDeg": 1.3132188938982396,
+        "firstHarmonicExplainedVarianceFraction": 0.9669672366584063,
+        "fittedObservationNuisances": 1,
+        "fittedVelocityAmplitudes": 0,
+        "fittedGravityParameters": 0,
+        "models": {
+          "fixed_simple_mond": {
+            "sourceVersusObserved": {
+              "rmseKmS": 26.5323421474546,
+              "uncertaintyRmsKmS": 16.551135300582683,
+              "errorRatio": 1.6030527009540263,
+              "classification": "close"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 26.214198149930677,
+              "uncertaintyRmsKmS": 16.551135300582683,
+              "errorRatio": 1.5838308172737738,
+              "classification": "close"
+            }
+          },
+          "newtonian_thin_sheet": {
+            "sourceVersusObserved": {
+              "rmseKmS": 37.30939063904873,
+              "uncertaintyRmsKmS": 16.551135300582683,
+              "errorRatio": 2.254189211886586,
+              "classification": "miss"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 37.34060559512674,
+              "uncertaintyRmsKmS": 16.551135300582683,
+              "errorRatio": 2.256075182577485,
+              "classification": "miss"
+            }
+          }
+        }
       }
     },
     {
       "id": "NGC6946",
       "split": "validation",
+      "scoreProtocol": "frozen_image_axis_development_or_validation",
       "observation": {
         "tracer": "THINGS H I moment-1 velocity field",
         "scoredPixels": 23067,
@@ -1460,9 +1989,11 @@
         "totalMapNormalizedL2": 0.14577351413166986,
         "totalMapPixelCorrelation": 0.9916804473940978,
         "massRelativeError": 1.8700550597827822e-16,
+        "coefficientsPerBaryonicComponent": 256,
         "velocityTargetsUsedInExtraction": false,
         "gravityParametersUsedInExtraction": 0
       },
+      "simulatorFidelityLimitKmS": 8.0,
       "models": {
         "fixed_simple_mond": {
           "sourceVersusObserved": {
@@ -1784,7 +2315,7 @@
         }
       },
       "geometryDiagnostic": {
-        "status": "post_reveal_not_blind_validation",
+        "status": "post_reveal_method_development_not_blind_evidence",
         "axisOffsetDeg": 60.03351651347665,
         "firstHarmonicExplainedVarianceFraction": 0.9250960768689571,
         "fittedObservationNuisances": 1,
@@ -1799,9 +2330,9 @@
               "classification": "miss"
             },
             "twinVersusObserved": {
-              "rmseKmS": 27.584382758697497,
+              "rmseKmS": 28.35962902358375,
               "uncertaintyRmsKmS": 12.263065790205529,
-              "errorRatio": 2.249387162281153,
+              "errorRatio": 2.3126051436692525,
               "classification": "miss"
             }
           },
@@ -1813,10 +2344,401 @@
               "classification": "miss"
             },
             "twinVersusObserved": {
-              "rmseKmS": 39.0013361450102,
+              "rmseKmS": 38.91971480809555,
               "uncertaintyRmsKmS": 12.263065790205529,
-              "errorRatio": 3.1803903536227,
+              "errorRatio": 3.1737344864593813,
               "classification": "miss"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "NGC7331",
+      "split": "holdout",
+      "scoreProtocol": "preregistered_kinematic_axis_final_holdout",
+      "observation": {
+        "tracer": "THINGS H I moment-1 velocity field",
+        "scoredPixels": 19409,
+        "inclinationDeg": 75.0,
+        "positionAngleDeg": 172.14510449556042,
+        "medianDispersionKmS": 19.450378273986097
+      },
+      "twinFidelity": {
+        "totalMapNormalizedL2": 0.07986925820560017,
+        "totalMapPixelCorrelation": 0.9967048956192823,
+        "massRelativeError": 0.0,
+        "coefficientsPerBaryonicComponent": 256,
+        "velocityTargetsUsedInExtraction": false,
+        "gravityParametersUsedInExtraction": 0
+      },
+      "simulatorFidelityLimitKmS": 12.0,
+      "models": {
+        "fixed_simple_mond": {
+          "sourceVersusObserved": {
+            "rmseKmS": 22.99330075088854,
+            "uncertaintyRmsKmS": 27.48439956575525,
+            "errorRatio": 0.8365946178259435,
+            "classification": "consistent"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 22.640163880717026,
+            "uncertaintyRmsKmS": 27.48439956575525,
+            "errorRatio": 0.8237459882123822,
+            "classification": "consistent"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 5.471119304644362
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 1.122382286999082,
+              "observedKmS": 51.447760605046604,
+              "sourcePredictionKmS": 231.7973127772061,
+              "twinPredictionKmS": 233.72831601664245,
+              "pixels": 56
+            },
+            {
+              "radiusKpc": 2.212191718673239,
+              "observedKmS": 147.2259893729969,
+              "sourcePredictionKmS": 245.01771399262051,
+              "twinPredictionKmS": 247.35378496072806,
+              "pixels": 112
+            },
+            {
+              "radiusKpc": 3.6929244172132454,
+              "observedKmS": 211.93465078624146,
+              "sourcePredictionKmS": 267.83765436417013,
+              "twinPredictionKmS": 266.6022303042425,
+              "pixels": 196
+            },
+            {
+              "radiusKpc": 4.901824623214189,
+              "observedKmS": 262.0290223768168,
+              "sourcePredictionKmS": 272.36875866872253,
+              "twinPredictionKmS": 279.0605304437418,
+              "pixels": 251
+            },
+            {
+              "radiusKpc": 6.29951853830561,
+              "observedKmS": 310.8693226872829,
+              "sourcePredictionKmS": 285.27929967343425,
+              "twinPredictionKmS": 281.2564992070083,
+              "pixels": 309
+            },
+            {
+              "radiusKpc": 7.703975084675461,
+              "observedKmS": 258.09793410640475,
+              "sourcePredictionKmS": 271.85546784350976,
+              "twinPredictionKmS": 265.2910803025169,
+              "pixels": 392
+            },
+            {
+              "radiusKpc": 9.122237164508961,
+              "observedKmS": 262.555586492994,
+              "sourcePredictionKmS": 263.8013092304455,
+              "twinPredictionKmS": 267.885105783619,
+              "pixels": 445
+            },
+            {
+              "radiusKpc": 10.272142820010465,
+              "observedKmS": 243.06796915263328,
+              "sourcePredictionKmS": 255.96208711617643,
+              "twinPredictionKmS": 256.89874124131325,
+              "pixels": 512
+            },
+            {
+              "radiusKpc": 11.74894240920978,
+              "observedKmS": 250.39309634931084,
+              "sourcePredictionKmS": 258.2085602645745,
+              "twinPredictionKmS": 260.53364671295583,
+              "pixels": 594
+            },
+            {
+              "radiusKpc": 12.9890016483777,
+              "observedKmS": 256.2518494743884,
+              "sourcePredictionKmS": 253.57238114082458,
+              "twinPredictionKmS": 253.0018817137456,
+              "pixels": 642
+            },
+            {
+              "radiusKpc": 14.365030518778562,
+              "observedKmS": 238.02502029005984,
+              "sourcePredictionKmS": 248.92385327742238,
+              "twinPredictionKmS": 250.20187758121008,
+              "pixels": 726
+            },
+            {
+              "radiusKpc": 15.752620939150322,
+              "observedKmS": 232.36287282437172,
+              "sourcePredictionKmS": 252.82235551330072,
+              "twinPredictionKmS": 257.40831867401954,
+              "pixels": 772
+            },
+            {
+              "radiusKpc": 17.066292709250536,
+              "observedKmS": 220.56387372007538,
+              "sourcePredictionKmS": 256.49467166045605,
+              "twinPredictionKmS": 255.82390294173186,
+              "pixels": 840
+            },
+            {
+              "radiusKpc": 18.324884433073528,
+              "observedKmS": 231.62007524840817,
+              "sourcePredictionKmS": 258.5907304130875,
+              "twinPredictionKmS": 254.81489484100356,
+              "pixels": 930
+            },
+            {
+              "radiusKpc": 19.7280148931853,
+              "observedKmS": 233.15862072627272,
+              "sourcePredictionKmS": 249.28476250437433,
+              "twinPredictionKmS": 247.38500839774773,
+              "pixels": 981
+            },
+            {
+              "radiusKpc": 20.98875266974421,
+              "observedKmS": 236.69022136703373,
+              "sourcePredictionKmS": 263.84948057687546,
+              "twinPredictionKmS": 260.77776287191324,
+              "pixels": 1025
+            },
+            {
+              "radiusKpc": 22.361302693061244,
+              "observedKmS": 241.45560467757252,
+              "sourcePredictionKmS": 261.8754085714277,
+              "twinPredictionKmS": 257.93714843782857,
+              "pixels": 1068
+            },
+            {
+              "radiusKpc": 23.72585583358415,
+              "observedKmS": 229.36747951854218,
+              "sourcePredictionKmS": 256.6184859774483,
+              "twinPredictionKmS": 253.37161650848836,
+              "pixels": 1044
+            },
+            {
+              "radiusKpc": 25.012541996007116,
+              "observedKmS": 240.8994780422364,
+              "sourcePredictionKmS": 255.40662815840983,
+              "twinPredictionKmS": 249.65435241392012,
+              "pixels": 988
+            },
+            {
+              "radiusKpc": 26.306071370468196,
+              "observedKmS": 249.5735348552872,
+              "sourcePredictionKmS": 256.073523016585,
+              "twinPredictionKmS": 248.59439777803365,
+              "pixels": 947
+            }
+          ]
+        },
+        "newtonian_thin_sheet": {
+          "sourceVersusObserved": {
+            "rmseKmS": 36.036885895660966,
+            "uncertaintyRmsKmS": 27.48439956575525,
+            "errorRatio": 1.3111760294942685,
+            "classification": "close"
+          },
+          "twinVersusObserved": {
+            "rmseKmS": 37.303282864453735,
+            "uncertaintyRmsKmS": 27.48439956575525,
+            "errorRatio": 1.3572529672772085,
+            "classification": "close"
+          },
+          "sourceToTwinTransport": {
+            "lineOfSightRmseKmS": 5.601542465081888
+          },
+          "radialCurve": [
+            {
+              "radiusKpc": 1.122382286999082,
+              "observedKmS": 51.447760605046604,
+              "sourcePredictionKmS": 223.45581328788515,
+              "twinPredictionKmS": 225.4351601251626,
+              "pixels": 56
+            },
+            {
+              "radiusKpc": 2.212191718673239,
+              "observedKmS": 147.2259893729969,
+              "sourcePredictionKmS": 229.8677347375518,
+              "twinPredictionKmS": 232.320739967205,
+              "pixels": 112
+            },
+            {
+              "radiusKpc": 3.6929244172132454,
+              "observedKmS": 211.93465078624146,
+              "sourcePredictionKmS": 245.48720529354716,
+              "twinPredictionKmS": 244.17271740691245,
+              "pixels": 196
+            },
+            {
+              "radiusKpc": 4.901824623214189,
+              "observedKmS": 262.0290223768168,
+              "sourcePredictionKmS": 244.13161423364076,
+              "twinPredictionKmS": 251.30071469665612,
+              "pixels": 251
+            },
+            {
+              "radiusKpc": 6.29951853830561,
+              "observedKmS": 310.8693226872829,
+              "sourcePredictionKmS": 251.49951828492007,
+              "twinPredictionKmS": 247.16332370820297,
+              "pixels": 309
+            },
+            {
+              "radiusKpc": 7.703975084675461,
+              "observedKmS": 258.09793410640475,
+              "sourcePredictionKmS": 230.91993484094823,
+              "twinPredictionKmS": 223.78926210214314,
+              "pixels": 392
+            },
+            {
+              "radiusKpc": 9.122237164508961,
+              "observedKmS": 262.555586492994,
+              "sourcePredictionKmS": 216.467214341761,
+              "twinPredictionKmS": 220.91139287784483,
+              "pixels": 445
+            },
+            {
+              "radiusKpc": 10.272142820010465,
+              "observedKmS": 243.06796915263328,
+              "sourcePredictionKmS": 203.61848846438022,
+              "twinPredictionKmS": 204.635191908082,
+              "pixels": 512
+            },
+            {
+              "radiusKpc": 11.74894240920978,
+              "observedKmS": 250.39309634931084,
+              "sourcePredictionKmS": 200.87921992122952,
+              "twinPredictionKmS": 203.40350220810114,
+              "pixels": 594
+            },
+            {
+              "radiusKpc": 12.9890016483777,
+              "observedKmS": 256.2518494743884,
+              "sourcePredictionKmS": 191.81415927221803,
+              "twinPredictionKmS": 191.1957523385084,
+              "pixels": 642
+            },
+            {
+              "radiusKpc": 14.365030518778562,
+              "observedKmS": 238.02502029005984,
+              "sourcePredictionKmS": 182.67811720125906,
+              "twinPredictionKmS": 184.03187791481787,
+              "pixels": 726
+            },
+            {
+              "radiusKpc": 15.752620939150322,
+              "observedKmS": 232.36287282437172,
+              "sourcePredictionKmS": 182.86633366268612,
+              "twinPredictionKmS": 187.7622125605226,
+              "pixels": 772
+            },
+            {
+              "radiusKpc": 17.066292709250536,
+              "observedKmS": 220.56387372007538,
+              "sourcePredictionKmS": 183.22576919475543,
+              "twinPredictionKmS": 182.52856141478998,
+              "pixels": 840
+            },
+            {
+              "radiusKpc": 18.324884433073528,
+              "observedKmS": 231.62007524840817,
+              "sourcePredictionKmS": 182.21588410185853,
+              "twinPredictionKmS": 178.2360678293521,
+              "pixels": 930
+            },
+            {
+              "radiusKpc": 19.7280148931853,
+              "observedKmS": 233.15862072627272,
+              "sourcePredictionKmS": 170.6318716921559,
+              "twinPredictionKmS": 168.59343554082156,
+              "pixels": 981
+            },
+            {
+              "radiusKpc": 20.98875266974421,
+              "observedKmS": 236.69022136703373,
+              "sourcePredictionKmS": 181.63152517224987,
+              "twinPredictionKmS": 178.40600936012808,
+              "pixels": 1025
+            },
+            {
+              "radiusKpc": 22.361302693061244,
+              "observedKmS": 241.45560467757252,
+              "sourcePredictionKmS": 176.35397625186366,
+              "twinPredictionKmS": 172.204662759934,
+              "pixels": 1068
+            },
+            {
+              "radiusKpc": 23.72585583358415,
+              "observedKmS": 229.36747951854218,
+              "sourcePredictionKmS": 168.07182462312838,
+              "twinPredictionKmS": 164.69132883533234,
+              "pixels": 1044
+            },
+            {
+              "radiusKpc": 25.012541996007116,
+              "observedKmS": 240.8994780422364,
+              "sourcePredictionKmS": 164.27149156064976,
+              "twinPredictionKmS": 158.39182335017395,
+              "pixels": 988
+            },
+            {
+              "radiusKpc": 26.306071370468196,
+              "observedKmS": 249.5735348552872,
+              "sourcePredictionKmS": 162.97409607579095,
+              "twinPredictionKmS": 155.3703572102375,
+              "pixels": 947
+            }
+          ]
+        }
+      },
+      "geometryDiagnostic": {
+        "status": "preregistered_final_holdout_observation_policy",
+        "axisOffsetDeg": 2.282880516888646,
+        "firstHarmonicExplainedVarianceFraction": 0.9803696828760531,
+        "fittedObservationNuisances": 1,
+        "fittedVelocityAmplitudes": 0,
+        "fittedGravityParameters": 0,
+        "models": {
+          "fixed_simple_mond": {
+            "imageAxisSourceVersusObserved": {
+              "rmseKmS": 23.744903822434516,
+              "uncertaintyRmsKmS": 27.48439956575525,
+              "errorRatio": 0.8639411519842684,
+              "classification": "consistent"
+            },
+            "sourceVersusObserved": {
+              "rmseKmS": 22.99330075088854,
+              "uncertaintyRmsKmS": 27.48439956575525,
+              "errorRatio": 0.8365946178259435,
+              "classification": "consistent"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 22.640163880717026,
+              "uncertaintyRmsKmS": 27.48439956575525,
+              "errorRatio": 0.8237459882123822,
+              "classification": "consistent"
+            }
+          },
+          "newtonian_thin_sheet": {
+            "imageAxisSourceVersusObserved": {
+              "rmseKmS": 37.05635339856128,
+              "uncertaintyRmsKmS": 27.48439956575525,
+              "errorRatio": 1.3482686172534182,
+              "classification": "close"
+            },
+            "sourceVersusObserved": {
+              "rmseKmS": 36.036885895660966,
+              "uncertaintyRmsKmS": 27.48439956575525,
+              "errorRatio": 1.3111760294942685,
+              "classification": "close"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 37.303282864453735,
+              "uncertaintyRmsKmS": 27.48439956575525,
+              "errorRatio": 1.3572529672772085,
+              "classification": "close"
             }
           }
         }
@@ -1825,6 +2747,7 @@
     {
       "id": "NGC7793",
       "split": "development",
+      "scoreProtocol": "frozen_image_axis_development_or_validation",
       "observation": {
         "tracer": "THINGS H I moment-1 velocity field",
         "scoredPixels": 5168,
@@ -1836,9 +2759,11 @@
         "totalMapNormalizedL2": 0.15699179966509003,
         "totalMapPixelCorrelation": 0.987228899073794,
         "massRelativeError": 4.061679896788943e-16,
+        "coefficientsPerBaryonicComponent": 256,
         "velocityTargetsUsedInExtraction": false,
         "gravityParametersUsedInExtraction": 0
       },
+      "simulatorFidelityLimitKmS": 8.0,
       "models": {
         "fixed_simple_mond": {
           "sourceVersusObserved": {
@@ -2158,18 +3083,58 @@
             }
           ]
         }
+      },
+      "geometryDiagnostic": {
+        "status": "post_reveal_method_development_not_blind_evidence",
+        "axisOffsetDeg": 37.19252633954372,
+        "firstHarmonicExplainedVarianceFraction": 0.9536375686872758,
+        "fittedObservationNuisances": 1,
+        "fittedVelocityAmplitudes": 0,
+        "fittedGravityParameters": 0,
+        "models": {
+          "fixed_simple_mond": {
+            "sourceVersusObserved": {
+              "rmseKmS": 8.23300672950178,
+              "uncertaintyRmsKmS": 12.226140947209323,
+              "errorRatio": 0.6733937360161878,
+              "classification": "consistent"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 8.251933512807401,
+              "uncertaintyRmsKmS": 12.226140947209323,
+              "errorRatio": 0.6749417946707825,
+              "classification": "consistent"
+            }
+          },
+          "newtonian_thin_sheet": {
+            "sourceVersusObserved": {
+              "rmseKmS": 22.82858759150963,
+              "uncertaintyRmsKmS": 12.226140947209323,
+              "errorRatio": 1.8671948646821683,
+              "classification": "close"
+            },
+            "twinVersusObserved": {
+              "rmseKmS": 22.742385684839615,
+              "uncertaintyRmsKmS": 12.226140947209323,
+              "errorRatio": 1.860144242000635,
+              "classification": "close"
+            }
+          }
+        }
       }
     }
   ],
-  "artifact": {
-    "atlasPath": "/assets/resolved-twin-development-atlas.png",
-    "atlasSha256": "eef7f221fd38fa06d7786273481f37bab0a2c09beddcd92fd560e7441494e23a"
-  },
-  "validationArtifacts": {
+  "artifacts": {
+    "developmentAtlasPath": "/assets/resolved-twin-development-atlas.png",
+    "developmentAtlasSha256": "eef7f221fd38fa06d7786273481f37bab0a2c09beddcd92fd560e7441494e23a",
     "rawValidationAtlasPath": "/assets/resolved-twin-validation-atlas.png",
     "rawValidationAtlasSha256": "c44f93049d93eaf2150e66ab253695d9ea3e23d448524e4bfcdd4bcf1c145cbc",
-    "geometryDiagnosticAtlasPath": "/assets/resolved-twin-geometry-diagnostic-atlas.png",
-    "geometryDiagnosticAtlasSha256": "ae830d2fcd60ef3945a4c5c48ec6e33b597a333199942146185c6513f0c658f7"
+    "geometryDevelopmentAtlasPath": "/assets/resolved-twin-geometry-diagnostic-atlas.png",
+    "geometryDevelopmentAtlasSha256": "77031725d0a0d6e77737d5d4cf9d681c8ff28780ab3660ea65a175ac68ce6473",
+    "finalHoldoutAtlasPath": "/assets/resolved-twin-holdout-atlas.png",
+    "finalHoldoutAtlasSha256": "5b392761936d02b1414ed1b39e397288634358723bd1183cf7b331e8073fac2f",
+    "finalHoldoutCurvesPath": "/assets/resolved-twin-holdout-curves.png",
+    "finalHoldoutCurvesSha256": "0efab28940f86e01dc2eb8f14bee9e9b918830c2ff2ad47869d6fc61451daff4"
   },
   "scoreSemantics": {
     "twinFidelity": "How closely the generated baryonic map matches the registered real baryonic map.",
@@ -2181,25 +3146,37 @@
       "miss": "ratio is greater than 2"
     }
   },
+  "finalHoldoutVerdicts": [
+    {
+      "model": "fixed_simple_mond",
+      "strictFormulaHoldoutSuccess": false,
+      "competitiveButIncomplete": true,
+      "formulaHoldoutFailure": false
+    },
+    {
+      "model": "newtonian_thin_sheet",
+      "strictFormulaHoldoutSuccess": false,
+      "competitiveButIncomplete": false,
+      "formulaHoldoutFailure": true
+    }
+  ],
   "executionBoundary": {
     "formulaExecution": "precomputed fixed comparators only",
     "arbitraryHosted2dFormulaExecution": false,
     "individualStarDynamics": false,
-    "validationStatus": "four development systems plus two frozen-method validation systems; holdout remains sealed",
-    "protocolStatusMeaning": "The frozen comparison executed with finite leakage-audited scores; it does not mean either formula passed every galaxy."
+    "validationStatus": "four development, two validation, and two one-shot final holdout systems are complete",
+    "protocolStatusMeaning": "Execution integrity passed; fixed MOND was competitive but incomplete and Newtonian baryons failed the final holdout criteria."
   },
   "claimBoundary": [
-    "P0746 is the first unchanged-method validation-split 2D velocity-field comparison for the spiral twins; it is not the final holdout.",
-    "The formula scores on registered baryons answer whether the fixed law predicts the real field; twin scores additionally test the simulator reconstruction.",
-    "The frozen Haar-256 twin is retained despite its disclosed NGC6946 validation morphology failure, preventing validation-driven retuning before target reveal.",
-    "No pressure support, warp, bar, streaming, inclination, distance, M/L, MOND, or halo parameter is fitted to the revealed residuals.",
-    "A miss can mix gravity-law error with omitted gas dynamics, so source-versus-twin transport and spatial residual structure must be reported separately.",
-    "Both holdout galaxies and all their pixel arrays remain sealed.",
-    "P0747 is explicitly post-reveal and cannot replace the frozen P0746 validation score.",
-    "The kinematic axis is a shared observation-geometry nuisance used identically for every gravity formula; it is not a per-formula fit.",
-    "No velocity amplitude, inclination, mass-to-light ratio, gravity constant, MOND scale, or dark halo is fitted.",
-    "If both formulas improve similarly, the original residual contained projection error; their remaining difference still tests their predicted speed amplitudes.",
-    "Both holdout galaxies remain sealed."
+    "The kinematic axis is one formula-independent observation-coordinate nuisance, not a gravity-law fit.",
+    "The least-squares amplitude is reported as a diagnostic but discarded before every prediction.",
+    "P0750 may justify a predeclared holdout observation policy but cannot be called validation because all six targets are open.",
+    "Neither NGC2841 nor NGC7331 has any pixel array opened in this stage.",
+    "P0752 is the one-shot final holdout for the current resolved-galaxy simulator and observation policy.",
+    "One kinematic phase is an observation-coordinate nuisance shared by all formulas; its fitted speed amplitude is discarded.",
+    "The formula score on registered baryons tests the gravity law; adaptive-twin transport separately tests simulator fidelity.",
+    "No inclination, distance, M/L, Newton constant, MOND scale, pressure support, warp, dark halo, or formula-specific parameter is fitted.",
+    "A holdout miss must remain visible and cannot be repaired and relabeled as holdout evidence."
   ],
-  "evidenceSha256": "6357834c75d356ac1a3a03e269795158c67129c0b8feb1b1a73c26f9fb486bd0"
+  "evidenceSha256": "8fed5429efecb7a0b5055a15928b8edf48e5713454ba18b42c9503305778d1b7"
 }

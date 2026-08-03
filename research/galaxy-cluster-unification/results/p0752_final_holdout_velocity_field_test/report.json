@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "sigma-p0752-final-holdout-velocity-field-test-result/1",
+  "stage": "P0752",
+  "status": "pass",
+  "configSha256": "fd307aea775ebc4cfe2132093c3655393fc25b4e368d6984414298a2d5da58a0",
+  "parents": {
+    "resolvedAcquisition": "b74a4b513dfd7e7fad0fac08a1b6b8a85c9a08437a9a95b8134f1d75803de0b2",
+    "registeredBaryons": "ee00c6233e510190737f5cb64c927a273ecf4cb57cd43b51a3428509b662c1f4",
+    "adaptiveTwins": "2d16bd5f48d5c1585ad5ef4de6cc8fb938ee28d735c0f2b85fd4c030439030f3",
+    "observationPolicyDevelopment": "6bb5372103ad5dd2f6dfd2c1bbe808e9343c52421561fca9be9f07e61c5d824e"
+  },
+  "systems": 2,
+  "targetArraysOpened": 4,
+  "validationArraysOpened": 0,
+  "holdoutArraysOpened": 4,
+  "fittedObservationNuisances": 4,
+  "fittedSpeedAmplitudesUsed": 0,
+  "gravityParametersFitted": 0,
+  "darkMatterParameters": 0,
+  "checks": {
+    "requiredSystems": true,
+    "requiredTargetArraysOpened": true,
+    "requiredValidationArraysOpened": true,
+    "requiredHoldoutArraysOpened": true,
+    "minimumScoredPixelsPerGalaxy": true,
+    "maximumAbsoluteAxisOffsetDeg": true,
+    "maximumTwinSourcePredictionTransportRmseKmS": true,
+    "maximumGravityParametersFitted": true,
+    "maximumDarkMatterParameters": true,
+    "allTargetHashesMatchAcquisitionManifest": true,
+    "allScoresFinite": true
+  },
+  "modelSummary": [
+    {
+      "model": "fixed_simple_mond",
+      "median_field_error_ratio": 1.2386240385932392,
+      "maximum_field_error_ratio": 1.6406534593605349,
+      "median_gas_weighted_rmse_km_s": 38.98673563532653,
+      "maximum_gas_weighted_rmse_km_s": 54.98017051976453,
+      "galaxies": 2,
+      "aggregate_error_band": "close"
+    },
+    {
+      "model": "newtonian_thin_sheet",
+      "median_field_error_ratio": 2.2451267950366187,
+      "maximum_field_error_ratio": 3.1790775605789694,
+      "median_gas_weighted_rmse_km_s": 71.28570221546214,
+      "maximum_gas_weighted_rmse_km_s": 106.53451853526332,
+      "galaxies": 2,
+      "aggregate_error_band": "miss"
+    }
+  ],
+  "formulaVerdicts": [
+    {
+      "model": "fixed_simple_mond",
+      "strictFormulaHoldoutSuccess": false,
+      "competitiveButIncomplete": true,
+      "formulaHoldoutFailure": false
+    },
+    {
+      "model": "newtonian_thin_sheet",
+      "strictFormulaHoldoutSuccess": false,
+      "competitiveButIncomplete": false,
+      "formulaHoldoutFailure": true
+    }
+  ],
+  "geometry": [
+    {
+      "galaxy": "NGC2841",
+      "systemic_velocity_km_s": 643.6901850203606,
+      "handedness": 1,
+      "inclination_deg": 76.0,
+      "image_position_angle_deg": 148.93666348071662,
+      "kinematic_phase_offset_deg_in_registered_plane": 2.491529834189272,
+      "kinematic_unit_x": 0.9990546590185985,
+      "kinematic_unit_y": 0.04347169531122605,
+      "fitted_first_harmonic_amplitude_km_s": 282.8388504815069,
+      "first_harmonic_explained_variance_fraction": 0.972933263637729,
+      "fitted_amplitude_used_in_prediction": false,
+      "scored_pixels": 19912,
+      "median_dispersion_km_s": 28.440196247026414,
+      "selected_twin_coefficients_per_component": 256,
+      "moment1_sha256": "dcd022486ff3ac591c1c2804c30003a9f01b7605d260d02cc666998e2b13f1b8",
+      "moment2_sha256": "1075f5901755b9d3cabe8337713c620199293aa82a910e3f60672bd697baf5c8",
+      "fitted_observation_nuisances": 2,
+      "gravity_parameters_fitted": 0
+    },
+    {
+      "galaxy": "NGC7331",
+      "systemic_velocity_km_s": 816.1686128121077,
+      "handedness": 1,
+      "inclination_deg": 75.0,
+      "image_position_angle_deg": 172.14510449556042,
+      "kinematic_phase_offset_deg_in_registered_plane": 2.282880516888646,
+      "kinematic_unit_x": 0.9992063415444238,
+      "kinematic_unit_y": -0.03983324010682823,
+      "fitted_first_harmonic_amplitude_km_s": 230.59499203496793,
+      "first_harmonic_explained_variance_fraction": 0.9803696828760531,
+      "fitted_amplitude_used_in_prediction": false,
+      "scored_pixels": 19409,
+      "median_dispersion_km_s": 19.450378273986097,
+      "selected_twin_coefficients_per_component": 256,
+      "moment1_sha256": "49aade673411f53e6c84d169a1304e7277eac97dd8f9f1a0666538582c089116",
+      "moment2_sha256": "bbe1fe945a67c8811bdcfb719c90f23b7b34c3fe1e991facd7dd42dc63e4ccf9",
+      "fitted_observation_nuisances": 2,
+      "gravity_parameters_fitted": 0
+    }
+  ],
+  "claimBoundary": [
+    "P0752 is the one-shot final holdout for the current resolved-galaxy simulator and observation policy.",
+    "One kinematic phase is an observation-coordinate nuisance shared by all formulas; its fitted speed amplitude is discarded.",
+    "The formula score on registered baryons tests the gravity law; adaptive-twin transport separately tests simulator fidelity.",
+    "No inclination, distance, M/L, Newton constant, MOND scale, pressure support, warp, dark halo, or formula-specific parameter is fitted.",
+    "A holdout miss must remain visible and cannot be repaired and relabeled as holdout evidence."
+  ],
+  "reportSha256": "48963dee2ad9da14a0ca1053d17c4bcafb8a817dbe3ab1edf7d9449c67abe008"
+}

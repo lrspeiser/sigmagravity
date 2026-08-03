@@ -24,14 +24,14 @@
       </nav>
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Open research preview · v0.13</p>
+          <p class="eyebrow">Open research preview · v0.14</p>
           <h1>Put a gravity formula in front of real galaxies.</h1>
           <p class="lede">
             Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
             predicted rotation curve with observations, Newtonian baryons, and fixed MOND—without
-            silently fitting a gravity parameter to each galaxy. Inspect separate resolved development
-            and frozen-method validation tests showing whether a fake galaxy preserves a formula's
-            right or wrong answer—and when viewing geometry changes the conclusion.
+            silently fitting a gravity parameter to each galaxy. Inspect separate resolved development,
+            validation, and one-shot final-holdout tests showing whether a fake galaxy preserves a
+            formula's right or wrong answer—and when viewing geometry changes the conclusion.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#workbench">Open the workbench</a>
@@ -138,7 +138,7 @@
               <p class="eyebrow">Resolved fake-galaxy evidence</p>
               <h2>See whether the twin and the formula tell the truth.</h2>
             </div>
-            <p id="resolved-evidence-status" class="muted">Loading frozen development and validation evidence…</p>
+            <p id="resolved-evidence-status" class="muted">Loading frozen development, validation, and final-holdout evidence…</p>
           </div>
 
           <div class="resolved-toolbar card">
@@ -154,8 +154,8 @@
               </select>
             </div>
             <div class="resolved-boundary">
-              <strong>Frozen development + validation evidence</strong>
-              <span>No gravity parameter was fitted per galaxy. The two-galaxy validation reveal is complete; holdout velocities remain sealed.</span>
+              <strong>Frozen development + validation + final holdout</strong>
+              <span>No gravity parameter was fitted per galaxy. The two final galaxies were revealed once under the preregistered P0752 policy; their misses remain visible.</span>
             </div>
           </div>
 
@@ -205,7 +205,7 @@
             <div>
               <p class="eyebrow">Two-dimensional field atlas</p>
               <h3>Observed H I, prediction from registered baryons, prediction from the fake twin, and residual</h3>
-              <p class="muted">These are precomputed fixed-MOND development and validation results. The hosted worker does not yet execute an arbitrary submitted 2D theory.</p>
+              <p class="muted">These are precomputed fixed-comparator development, validation, and one-shot holdout results. The protocol passed, fixed MOND was competitive but incomplete, and Newtonian baryons failed. The hosted worker does not yet execute an arbitrary submitted 2D theory.</p>
             </div>
             <a href="/assets/resolved-twin-development-atlas.png" target="_blank" rel="noreferrer">
               <img src="/assets/resolved-twin-development-atlas.png" loading="lazy" alt="Four resolved galaxy velocity fields compared with fixed MOND predictions on registered baryons and generated twins" />
@@ -214,7 +214,13 @@
               <img src="/assets/resolved-twin-validation-atlas.png" loading="lazy" alt="Two validation galaxy velocity fields compared with fixed MOND predictions on registered baryons and generated twins" />
             </a>
             <a href="/assets/resolved-twin-geometry-diagnostic-atlas.png" target="_blank" rel="noreferrer">
-              <img src="/assets/resolved-twin-geometry-diagnostic-atlas.png" loading="lazy" alt="Post-reveal shared kinematic-axis diagnostic for the two validation galaxies" />
+              <img src="/assets/resolved-twin-geometry-diagnostic-atlas.png" loading="lazy" alt="Post-reveal shared kinematic-axis method-development atlas for the six open galaxies" />
+            </a>
+            <a href="/assets/resolved-twin-holdout-atlas.png" target="_blank" rel="noreferrer">
+              <img src="/assets/resolved-twin-holdout-atlas.png" loading="lazy" alt="One-shot final holdout velocity-field results for NGC2841 and NGC7331" />
+            </a>
+            <a href="/assets/resolved-twin-holdout-curves.png" target="_blank" rel="noreferrer">
+              <img src="/assets/resolved-twin-holdout-curves.png" loading="lazy" alt="Observed, registered-baryon, and generated-twin radial speed curves for the final holdout galaxies" />
             </a>
           </div>
         </div>
@@ -300,7 +306,7 @@
           <article class="endpoint"><span>POST</span><code>/api/v1/batches</code><p>Compose reusable field solves with separately hashed observation data and targets across uploaded or generated systems, then download one deterministic report.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/runs</code><p>Run a formula and receive scores, curves, comparators, and an immutable manifest hash.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/twin-runs</code><p>Regenerate a galaxy's baryonic radial twin without its measured speeds, then reveal and score the held-out rotation curve.</p></article>
-          <article class="endpoint"><span>GET</span><code>/api/v1/resolved-twin-evidence</code><p>Retrieve four development and two frozen-method validation results with separate morphology, transport, observed-velocity, and viewing-geometry scores.</p></article>
+          <article class="endpoint"><span>GET</span><code>/api/v1/resolved-twin-evidence</code><p>Retrieve four development, two validation, and two one-shot final-holdout results with separate morphology, transport, observed-velocity, and viewing-geometry scores.</p></article>
         </div>
         <pre class="code-sample"><code>const result = await fetch("/api/v1/runs", {
   method: "POST",

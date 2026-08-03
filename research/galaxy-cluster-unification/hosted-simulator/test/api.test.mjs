@@ -40,9 +40,10 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.13.0-preview");
+  assert.equal(output.body.version, "0.14.0-preview");
   assert.equal(output.body.capabilities.heldoutObservedGalaxyTwins, "available");
   assert.equal(output.body.capabilities.resolvedTwinDevelopmentEvidence, "available");
+  assert.equal(output.body.capabilities.resolvedTwinFinalHoldoutEvidence, "available");
   assert.equal(
     output.body.capabilities.localDecoupledObservationEvaluationJobs,
     "available_in_dev_server",
@@ -88,9 +89,9 @@ test("twin API withholds velocity targets until scoring", () => {
 test("resolved twin evidence keeps generator, transport, and observation scores separate", () => {
   const all = call(resolvedTwinEvidence);
   assert.equal(all.statusCode, 200);
-  assert.equal(all.body.evidenceClass, "precomputed_development_and_validation_result");
-  assert.equal(all.body.sample.scoredVelocityPixels, 107211);
-  assert.equal(all.body.systems.length, 6);
+  assert.equal(all.body.evidenceClass, "precomputed_development_validation_and_final_holdout_result");
+  assert.equal(all.body.sample.scoredVelocityPixels, 146532);
+  assert.equal(all.body.systems.length, 8);
   assert.equal(all.body.generator.velocityTargetsUsed, false);
   assert.equal(all.body.generator.gravityParameters, 0);
   assert.equal(all.body.executionBoundary.arbitraryHosted2dFormulaExecution, false);
@@ -108,6 +109,13 @@ test("resolved twin evidence keeps generator, transport, and observation scores 
   assert.equal(validation.body.systems[0].split, "validation");
   assert.ok(validation.body.systems[0].geometryDiagnostic.axisOffsetDeg > 50);
   assert.ok(validation.body.systems[0].geometryDiagnostic.models.fixed_simple_mond.sourceVersusObserved.rmseKmS < 30);
+  const holdout = call(resolvedTwinEvidence, { query: { galaxy: "NGC7331" } });
+  assert.equal(holdout.statusCode, 200);
+  assert.equal(holdout.body.systems[0].split, "holdout");
+  assert.equal(holdout.body.systems[0].scoreProtocol, "preregistered_kinematic_axis_final_holdout");
+  assert.equal(holdout.body.systems[0].simulatorFidelityLimitKmS, 12);
+  assert.equal(holdout.body.systems[0].models.fixed_simple_mond.sourceVersusObserved.classification, "consistent");
+  assert.equal(holdout.body.finalHoldoutVerdicts[0].competitiveButIncomplete, true);
   const missing = call(resolvedTwinEvidence, { query: { galaxy: "NOT-A-GALAXY" } });
   assert.equal(missing.statusCode, 404);
   assert.equal(missing.body.error, "unknown_system");

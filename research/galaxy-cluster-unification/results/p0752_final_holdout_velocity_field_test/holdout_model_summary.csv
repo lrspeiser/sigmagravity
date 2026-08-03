@@ -1,0 +1,3 @@
+model,median_field_error_ratio,maximum_field_error_ratio,median_gas_weighted_rmse_km_s,maximum_gas_weighted_rmse_km_s,galaxies,aggregate_error_band
+fixed_simple_mond,1.2386240385932392,1.6406534593605349,38.98673563532653,54.98017051976453,2,close
+newtonian_thin_sheet,2.2451267950366187,3.1790775605789694,71.28570221546214,106.53451853526332,2,miss

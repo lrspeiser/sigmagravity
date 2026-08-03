@@ -15,6 +15,8 @@ for (const path of [
   "assets/resolved-twin-development-atlas.png",
   "assets/resolved-twin-validation-atlas.png",
   "assets/resolved-twin-geometry-diagnostic-atlas.png",
+  "assets/resolved-twin-holdout-atlas.png",
+  "assets/resolved-twin-holdout-curves.png",
   "data/resolved-twin-development-v1.json",
   "schemas/model-manifest-v1.schema.json",
   "schemas/array-bundle-request-v1.schema.json",

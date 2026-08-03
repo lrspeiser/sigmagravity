@@ -72,7 +72,7 @@ assert.equal(twinRun.state, "succeeded");
 assert.equal(twinRun.manifest.twinProtocol.velocityTargetsUsedInExtraction, false);
 assert.equal(twinRun.predictions.length, 12);
 const resolvedEvidence = await request("/api/v1/resolved-twin-evidence?galaxy=NGC3198");
-assert.equal(resolvedEvidence.evidenceClass, "precomputed_development_result");
+assert.equal(resolvedEvidence.evidenceClass, "precomputed_development_validation_and_final_holdout_result");
 assert.equal(resolvedEvidence.systems.length, 1);
 assert.equal(resolvedEvidence.systems[0].models.fixed_simple_mond.twinVersusObserved.classification, "consistent");
 
