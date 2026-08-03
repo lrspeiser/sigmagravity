@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "sigma-p0745c-validation-multiscale-spiral-twins/1",
+  "resultSchemaVersion": "sigma-p0745c-validation-multiscale-spiral-twins-result/1",
+  "stage": "P0745C",
+  "status": "frozen_before_validation_baryonic_array_opening",
+  "purpose": "Apply the development-selected 256-coefficient-per-component Haar twin unchanged to two validation baryonic maps, then test morphology and fixed-formula transport without opening observed velocities.",
+  "parents": {
+    "baryonicMaps": "results/p0745b_validation_fused_baryonic_registration/report.json",
+    "baryonicMapsResultPath": "results/p0745b_validation_fused_baryonic_registration",
+    "baryonicMapsConfigSha256": "0b6859e6e66cee5f21a258ba41d05bf3b996edb8025e14536c3102bb166d6770",
+    "developmentSelection": "results/p0743_multiscale_spiral_twin_development/report.json",
+    "developmentSelectionResultSha256": "d1a1ec762c5c06eb246d702185625014774dfdc3082069f8006b89c6dee1979f"
+  },
+  "developmentDisclosure": "The local Haar basis, coefficient budget, gates, field padding, radial binning, and fixed comparison formulas were selected on P0743 development galaxies and frozen unchanged here before any validation baryonic array or velocity target was opened.",
+  "eligibleSplits": ["validation"],
+  "systems": ["NGC3521", "NGC6946"],
+  "sealedUntilLater": {
+    "holdoutSystems": ["NGC2841", "NGC7331"],
+    "validationTargetProducts": ["THINGS moment 1", "THINGS moment 2", "SPARC resolved observed rotation curve"]
+  },
+  "representation": {
+    "basis": "orthonormal 2D Haar",
+    "inputTransform": "linear surface density",
+    "padding": "zero pad upper index edges to the next power-of-two square",
+    "coefficientSelection": "largest absolute coefficients with deterministic flat-index serialization",
+    "reconstruction": "inverse Haar, crop to source grid, clip negative ringing to zero, restore each component integrated mass",
+    "tiers": [
+      {"id": "haar_256", "coefficientsPerComponent": 256}
+    ],
+    "selectionRule": "No validation selection: haar_256 is the smallest passing P0743 development tier and must be reported pass or fail unchanged."
+  },
+  "formulaTransportFixtures": {
+    "models": [
+      {"id": "newtonian_thin_sheet", "gravityParameters": 0, "gravitationalConstantM3KgS2": 6.67430e-11},
+      {"id": "fixed_simple_mond", "gravityParameters": 0, "a0MPerS2": 1.2e-10, "gravitationalConstantM3KgS2": 6.67430e-11}
+    ],
+    "fieldPaddingFactor": 2.0,
+    "radialScoreBins": 24,
+    "innerRadiusThingsBeams": 1.0,
+    "outerRadius": "published SPARC H I R995",
+    "beamConvolution": false,
+    "observedSpeedComparison": false
+  },
+  "verticalPriors": {"realizationsPerComponent": 3, "seed": 20260802},
+  "gates": {
+    "requiredSystems": 2,
+    "requiredComponentsPerTier": 6,
+    "maximumMassRelativeError": 1e-12,
+    "maximum3dProjectionRelativeError": 1e-12,
+    "totalMedianNormalizedL2": 0.20,
+    "totalMaximumNormalizedL2": 0.30,
+    "totalMinimumPixelCorrelation": 0.95,
+    "gasMaximumNormalizedL2": 0.35,
+    "starsMaximumNormalizedL2": 0.40,
+    "minimumCellToNumericParameterRatio": 20.0,
+    "maximumMedianFormulaRadialSpeedTransportRmseKmS": 3.0,
+    "maximumWorstFormulaRadialSpeedTransportRmseKmS": 8.0,
+    "maximumMedianFormulaLosSpeedTransportRmseKmS": 5.0,
+    "maximumWorstFormulaLosSpeedTransportRmseKmS": 12.0,
+    "requiredValidationArraysOpened": 6,
+    "requiredHoldoutArraysOpened": 0,
+    "requiredObservedVelocityArraysOpened": 0,
+    "maximumFittedGravityParameters": 0
+  },
+  "claimBoundary": [
+    "Haar coefficients describe validation baryonic morphology and are not gravitational parameters.",
+    "P0745C tests whether a velocity-blind synthetic twin preserves its real galaxy morphology and fixed-formula predictions.",
+    "It cannot yet say whether either formula matches actual star speeds because moment-1 and SPARC velocities remain sealed.",
+    "No validation-driven representation choice or tuning is allowed; both holdout galaxies remain sealed."
+  ]
+}

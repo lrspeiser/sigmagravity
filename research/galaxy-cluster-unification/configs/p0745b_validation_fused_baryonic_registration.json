@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "sigma-p0745b-validation-fused-baryonic-registration/1",
+  "resultSchemaVersion": "sigma-p0745b-validation-fused-baryonic-registration-result/1",
+  "stage": "P0745B",
+  "status": "frozen_before_validation_sings_or_wise_array_opening",
+  "purpose": "Apply the unchanged P0741 SINGS-plus-AllWISE fusion to the two validation galaxies and produce complete baryonic maps without opening any velocity target.",
+  "parents": {
+    "p0739Config": "configs/p0745a_validation_baryonic_registration.json",
+    "p0739ResultPath": "results/p0745a_validation_baryonic_registration",
+    "p0739ConfigSha256": "1435214477a4b22a16ba3d4421f91f69b49e26d0b5defc966be48f267637009a",
+    "p0740Config": "configs/p0740_allwise_w1_coverage_supplement.json",
+    "p0740ResultPath": "results/p0740_allwise_w1_coverage_supplement",
+    "p0740ResultSha256": "beac0315c81a34736784025d67bbe316ac1c4b22c28caf74ee0d2b01f26b2d1e"
+  },
+  "eligibleSplits": ["validation"],
+  "systems": ["NGC3521", "NGC6946"],
+  "sealedUntilLater": {
+    "holdoutSystems": ["NGC2841", "NGC7331"],
+    "validationTargetProducts": ["THINGS moment 1", "THINGS moment 2", "SPARC resolved observed rotation curve"]
+  },
+  "permittedInputs": [
+    "P0745A derived validation baryonic maps, hashes, geometry, and audit",
+    "Frozen P0740 validation AllWISE W1 intensity and uncertainty arrays, WCS headers, coadd IDs, and cutout geometry",
+    "Validation SINGS IRAC channel-1 image and weight arrays needed by the predeclared cross-calibration"
+  ],
+  "forbiddenInputs": [
+    "THINGS moment 1 or moment 2 array",
+    "SPARC observed rotation speeds or errors",
+    "Any gravity-formula residual, score, or fitted parameter",
+    "Dark-matter halo parameters",
+    "Any holdout pixel array"
+  ],
+  "processing": {
+    "method": "Bit-for-bit P0741 fusion implementation generalized only to honor the split and parent path named by this config.",
+    "wiseTileBackground": "robust median in the outer 15 percent border",
+    "wiseMosaic": "inverse-variance combination of every frozen coadd",
+    "wiseForegroundSuppression": "same 12-MAD compact-residual rule used by P0741",
+    "crossCalibration": "median positive SINGS/WISE ratio over the unchanged overlap mask, with fixed quadrant sensitivity audit",
+    "fusion": "beam-matched SINGS inside its valid footprint and scaled beam-matched WISE outside it",
+    "stellarMassCalibration": "one normalization to published 3.6 micron luminosity times universal M/L=0.5",
+    "gasMassCalibration": "retain P0745A normalization to 1.36 times published H I mass",
+    "velocityArraysOpened": false,
+    "gravityParameters": 0
+  },
+  "atlasFileName": "fused_validation_baryonic_map_atlas.png",
+  "engineeringGates": {
+    "requiredSystems": 2,
+    "requiredWiseCoadds": 3,
+    "requiredValidationArraysOpened": 10,
+    "requiredHoldoutArraysOpened": 0,
+    "requiredVelocityOrDispersionArraysOpened": 0,
+    "maximumGravityParameters": 0,
+    "minimumFiniteStellarFootprintFractionInsideHiR995": 0.98,
+    "minimumCrossCalibrationPixels": 500,
+    "minimumPositiveSingsWiseSpearmanCorrelation": 0.70,
+    "maximumQuadrantScaleRobustFractionalSpread": 0.35,
+    "maximumGasMassRelativeError": 1e-10,
+    "maximumStellarMassRelativeError": 1e-10,
+    "maximumOuterCellMassFraction": 0.005,
+    "allOutputBundlesContentHashed": true
+  },
+  "claimBoundary": [
+    "P0745B is a frozen validation-split observational fusion test, not a gravity-formula score.",
+    "The per-galaxy WISE/SINGS factor is an instrument cross-calibration and cannot be chosen from any velocity residual.",
+    "The algorithm and gates were frozen before validation SINGS or WISE arrays were opened by this stage.",
+    "No velocity target is opened, and both holdout galaxies remain sealed."
+  ]
+}

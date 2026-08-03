@@ -54,13 +54,32 @@ def main() -> None:
     args = parser.parse_args()
     config_bytes = args.config.read_bytes()
     config = json.loads(config_bytes)
-    p0741 = read_json(P0741_RESULT / "report.json")
-    p0742 = read_json(P0742_RESULT / "report.json")
-    if p0741["reportSha256"] != config["parents"]["baryonicMapsResultSha256"]:
-        raise ValueError("P0741 parent hash mismatch")
-    if p0742["reportSha256"] != config["parents"]["failedRadialTwinResultSha256"]:
-        raise ValueError("P0742 parent hash mismatch")
-    audit = pd.read_csv(P0741_RESULT / "map_audit.csv").set_index("galaxy")
+    baryonic_result = ROOT / config["parents"].get(
+        "baryonicMapsResultPath", "results/p0741_fused_spiral_baryonic_registration_development"
+    )
+    p0741 = read_json(baryonic_result / "report.json")
+    expected_baryonic_result = config["parents"].get("baryonicMapsResultSha256")
+    expected_baryonic_config = config["parents"].get("baryonicMapsConfigSha256")
+    if expected_baryonic_result and p0741["reportSha256"] != expected_baryonic_result:
+        raise ValueError("baryonic-map parent result hash mismatch")
+    if expected_baryonic_config and p0741["configSha256"] != expected_baryonic_config:
+        raise ValueError("baryonic-map parent config hash mismatch")
+    if config["parents"].get("developmentSelection"):
+        selection_report = read_json(ROOT / config["parents"]["developmentSelection"])
+        if selection_report["reportSha256"] != config["parents"]["developmentSelectionResultSha256"]:
+            raise ValueError("development-selection result hash mismatch")
+    p0742 = None
+    if config["parents"].get("failedRadialTwin"):
+        failed_result = ROOT / config["parents"]["failedRadialTwin"]
+        failed_report_path = failed_result if failed_result.suffix == ".json" else failed_result / "report.json"
+        p0742 = read_json(failed_report_path)
+        if p0742["reportSha256"] != config["parents"]["failedRadialTwinResultSha256"]:
+            raise ValueError("P0742 parent hash mismatch")
+    audit = pd.read_csv(baryonic_result / "map_audit.csv").set_index("galaxy")
+    allowed_splits = set(config.get("eligibleSplits", ["development"]))
+    for galaxy in config["systems"]:
+        if str(audit.loc[galaxy].split) not in allowed_splits:
+            raise ValueError(f"array split is outside this frozen config: {galaxy}")
     metadata = parse_sparc_metadata(SPARC_TABLE).set_index("galaxy")
     args.output.mkdir(parents=True, exist_ok=True)
 
@@ -79,7 +98,7 @@ def main() -> None:
         generated_directory.mkdir(parents=True, exist_ok=True)
         atlas_by_tier[tier_id] = []
         for galaxy in config["systems"]:
-            source_path = P0741_RESULT / "maps" / f"{galaxy}.npz"
+            source_path = baryonic_result / "maps" / f"{galaxy}.npz"
             expected_hash = next(
                 row["sha256"] for row in p0741["mapFiles"] if row["galaxy"] == galaxy
             )
@@ -154,6 +173,8 @@ def main() -> None:
                     "generated_map_sha256": sha256(generated_path),
                     "gravity_parameter_count": 0,
                     "observed_velocity_arrays_opened": 0,
+                    "validation_source_arrays_opened": 3 if str(row.split) == "validation" else 0,
+                    "holdout_source_arrays_opened": 3 if str(row.split) == "holdout" else 0,
                 }
             )
 
@@ -295,6 +316,12 @@ def main() -> None:
                 tier_catalog.observed_velocity_arrays_opened.sum()
             )
             == int(gates["requiredObservedVelocityArraysOpened"]),
+            "requiredValidationArraysOpened": int(
+                tier_catalog.validation_source_arrays_opened.sum()
+            )
+            == int(gates.get("requiredValidationArraysOpened", 0)),
+            "requiredHoldoutArraysOpened": int(tier_catalog.holdout_source_arrays_opened.sum())
+            == int(gates.get("requiredHoldoutArraysOpened", 0)),
             "maximumFittedGravityParameters": int(tier_catalog.gravity_parameter_count.sum())
             <= int(gates["maximumFittedGravityParameters"]),
         }
@@ -330,19 +357,21 @@ def main() -> None:
             selected_tier,
         )
     report_core = {
-        "schemaVersion": "sigma-p0743-multiscale-spiral-twin-development-result/1",
-        "stage": "P0743",
+        "schemaVersion": config.get(
+            "resultSchemaVersion", "sigma-p0743-multiscale-spiral-twin-development-result/1"
+        ),
+        "stage": config.get("stage", "P0743"),
         "status": status,
         "configSha256": hashlib.sha256(config_bytes).hexdigest(),
         "p0741ResultSha256": p0741["reportSha256"],
-        "p0742FailureSha256": p0742["reportSha256"],
-        "developmentDisclosure": config["developmentDisclosure"],
+        "p0742FailureSha256": p0742["reportSha256"] if p0742 is not None else None,
+        "developmentDisclosure": config.get("developmentDisclosure"),
         "selectionRule": config["representation"]["selectionRule"],
         "selectedTier": selected_tier,
         "tiers": tier_reports,
         "systems": len(config["systems"]),
-        "validationArraysOpened": 0,
-        "holdoutArraysOpened": 0,
+        "validationArraysOpened": int(catalog.validation_source_arrays_opened.sum()),
+        "holdoutArraysOpened": int(catalog.holdout_source_arrays_opened.sum()),
         "observedVelocityArraysOpened": 0,
         "fittedGravityParameters": 0,
         "claimBoundary": config["claimBoundary"],
@@ -360,21 +389,23 @@ def main() -> None:
             f"transport median/worst RMSE is {selected['formulaTransport']['medianRadialSpeedRmseKmS']:.2f}/"
             f"{selected['formulaTransport']['worstRadialSpeedRmseKmS']:.2f} km/s."
         )
-    summary = f"""# P0743 multiscale spiral fake twins
+    split_label = ", ".join(sorted(audit.loc[config["systems"]].split.unique().tolist()))
+    tier_labels = ", ".join(str(item["coefficientsPerComponent"]) for item in config["representation"]["tiers"])
+    summary = f"""# {config.get('stage', 'P0743')} multiscale spiral fake twins
 
 Status: **{status.upper()}**
 
 {selection}
 
-- Development galaxies: 4
-- Multiscale coefficient budgets tested: 128, 256, 512 per baryonic component
+- Galaxies: {len(config['systems'])} ({split_label})
+- Multiscale coefficient budgets tested: {tier_labels} per baryonic component
 - Observed velocity arrays opened: 0
-- Validation arrays opened: 0
-- Holdout arrays opened: 0
+- Validation source arrays opened: {int(catalog.validation_source_arrays_opened.sum())}
+- Holdout source arrays opened: {int(catalog.holdout_source_arrays_opened.sum())}
 - Fitted gravity parameters: 0
 - Report SHA-256: `{report['reportSha256']}`
 
-The selected budget is a development result. It must now be frozen unchanged before a validation or holdout speed target is opened.
+No observed speed target entered extraction, rendering, selection, or formula-transport scoring.
 """
     (args.output / "SUMMARY.md").write_text(summary, encoding="utf-8")
     print(json.dumps({"status": status, "selectedTier": selected_tier, "reportSha256": report["reportSha256"]}))

@@ -88,15 +88,25 @@ def main() -> None:
 
     config_bytes = args.config.read_bytes()
     config = json.loads(config_bytes)
-    p0739_report = read_json(P0739_RESULT / "report.json")
-    p0740_report = read_json(P0740_RESULT / "manifest.json")
-    if p0739_report["reportSha256"] != config["parents"]["p0739ResultSha256"]:
-        raise ValueError("P0739 parent hash mismatch")
+    p0739_result = ROOT / config["parents"].get(
+        "p0739ResultPath", "results/p0739_spiral_baryonic_registration_development"
+    )
+    p0740_result = ROOT / config["parents"].get(
+        "p0740ResultPath", "results/p0740_allwise_w1_coverage_supplement"
+    )
+    p0739_report = read_json(p0739_result / "report.json")
+    p0740_report = read_json(p0740_result / "manifest.json")
+    expected_p0739_result = config["parents"].get("p0739ResultSha256")
+    expected_p0739_config = config["parents"].get("p0739ConfigSha256")
+    if expected_p0739_result and p0739_report["reportSha256"] != expected_p0739_result:
+        raise ValueError("P0739 parent result hash mismatch")
+    if expected_p0739_config and p0739_report["configSha256"] != expected_p0739_config:
+        raise ValueError("P0739 parent config hash mismatch")
     if p0740_report["reportSha256"] != config["parents"]["p0740ResultSha256"]:
         raise ValueError("P0740 parent hash mismatch")
 
-    wise_manifest = pd.read_csv(P0740_RESULT / "file_manifest.csv")
-    p0739_audit = pd.read_csv(P0739_RESULT / "map_audit.csv").set_index("galaxy")
+    wise_manifest = pd.read_csv(p0740_result / "file_manifest.csv")
+    p0739_audit = pd.read_csv(p0739_result / "map_audit.csv").set_index("galaxy")
     metadata = parse_sparc_metadata(base.SPARC_TABLE).set_index("galaxy")
     coordinates = base.load_coordinates()
     args.output.mkdir(parents=True, exist_ok=True)
@@ -108,6 +118,9 @@ def main() -> None:
     wise_arrays_opened = 0
     for galaxy in config["systems"]:
         audit = p0739_audit.loc[galaxy]
+        split = str(audit.split)
+        if split not in set(config.get("eligibleSplits", ["development"])):
+            raise ValueError(f"array split is outside this frozen config: {galaxy} ({split})")
         meta = metadata.loc[galaxy]
         center: SkyCoord = coordinates[galaxy]
         distance_mpc = float(audit.distance_mpc)
@@ -117,7 +130,7 @@ def main() -> None:
         hi_radius_kpc = float(meta.HI_radius_kpc)
         stellar_mass = float(audit.target_stellar_mass_solar)
 
-        p0739_map_path = P0739_RESULT / "maps" / f"{galaxy}.npz"
+        p0739_map_path = p0739_result / "maps" / f"{galaxy}.npz"
         expected_map_hash = next(
             row["sha256"] for row in p0739_report["mapFiles"] if row["galaxy"] == galaxy
         )
@@ -298,7 +311,7 @@ def main() -> None:
             )
         record = {
             "galaxy": galaxy,
-            "split": "development",
+            "split": split,
             "hubble_type": int(meta.hubble_type),
             "distance_mpc": distance_mpc,
             "inclination_deg": inclination_deg,
@@ -332,8 +345,8 @@ def main() -> None:
             "stellar_mass_relative_error": abs(stellar_mass_actual - stellar_mass) / stellar_mass,
             "outer_cell_mass_fraction": base.edge_mass_fraction(total),
             "map_sha256": file_sha256(output_path),
-            "validation_arrays_opened": 0,
-            "holdout_arrays_opened": 0,
+            "validation_arrays_opened": (2 + 2 * len(galaxy_files)) if split == "validation" else 0,
+            "holdout_arrays_opened": (2 + 2 * len(galaxy_files)) if split == "holdout" else 0,
             "velocity_or_dispersion_arrays_opened": 0,
             "gravity_parameters": 0,
         }
@@ -412,18 +425,21 @@ def main() -> None:
             ax.set_xlabel("x (kpc)")
             ax.set_ylabel("y (kpc)")
             fig.colorbar(image, ax=ax, fraction=0.046)
-    fig.savefig(args.output / "fused_development_baryonic_map_atlas.png", dpi=180)
+    atlas_name = config.get("atlasFileName", "fused_development_baryonic_map_atlas.png")
+    fig.savefig(args.output / atlas_name, dpi=180)
     plt.close(fig)
 
     report_core = {
-        "schemaVersion": "sigma-p0741-fused-spiral-baryonic-registration-result/1",
-        "stage": "P0741",
+        "schemaVersion": config.get(
+            "resultSchemaVersion", "sigma-p0741-fused-spiral-baryonic-registration-result/1"
+        ),
+        "stage": config.get("stage", "P0741"),
         "status": status,
         "configSha256": hashlib.sha256(config_bytes).hexdigest(),
         "p0739ResultSha256": p0739_report["reportSha256"],
         "p0740ResultSha256": p0740_report["reportSha256"],
         "systems": len(frame),
-        "splitsOpened": ["development"],
+        "splitsOpened": sorted(frame.split.unique().tolist()),
         "wiseImageArraysOpened": wise_arrays_opened,
         "validationArraysOpened": int(frame.validation_arrays_opened.sum()),
         "holdoutArraysOpened": int(frame.holdout_arrays_opened.sum()),
@@ -450,14 +466,15 @@ def main() -> None:
     }
     report = {**report_core, "reportSha256": canonical_sha256(report_core)}
     (args.output / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    summary = f"""# P0741 fused development baryonic registration
+    split_label = ", ".join(sorted(frame.split.unique().tolist()))
+    summary = f"""# {config.get('stage', 'P0741')} fused baryonic registration
 
 Status: **{status.upper()}**
 
-- Development systems: {len(frame)}
-- Development WISE arrays opened: {wise_arrays_opened}
-- Validation image arrays opened: 0
-- Holdout image arrays opened: 0
+- Systems: {len(frame)} ({split_label})
+- WISE arrays opened: {wise_arrays_opened}
+- Validation image arrays opened: {int(frame.validation_arrays_opened.sum())}
+- Holdout image arrays opened: {int(frame.holdout_arrays_opened.sum())}
 - Velocity or dispersion arrays opened: 0
 - Gravity parameters: 0
 - Minimum SINGS-only footprint inside H I R995: {100*frame.sings_footprint_fraction_inside_hi_r995.min():.2f}%

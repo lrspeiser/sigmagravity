@@ -273,6 +273,7 @@ def main() -> None:
     if acquisition["manifestSha256"] != config["parent"]["manifestSha256"]:
         raise ValueError("P0738 parent manifest hash does not match the frozen P0739 config")
     systems = {item["id"]: item for item in acquisition_config["systems"]}
+    eligible_splits = set(config.get("eligibleSplits", ["development"]))
     metadata = parse_sparc_metadata(SPARC_TABLE).set_index("galaxy")
     coordinates = load_coordinates()
     hashes = opened_input_hashes(acquisition)
@@ -283,8 +284,9 @@ def main() -> None:
     records: list[dict[str, Any]] = []
     atlas: list[dict[str, Any]] = []
     for galaxy in config["systems"]:
-        if systems[galaxy]["split"] != "development":
-            raise ValueError(f"P0739 may open only development arrays: {galaxy}")
+        split = systems[galaxy]["split"]
+        if split not in eligible_splits:
+            raise ValueError(f"array split is outside this frozen config: {galaxy} ({split})")
         directory = RAW / galaxy
         moment0_path = next(directory.glob("*MOM0_THINGS.FITS"))
         irac_path = next(directory.glob("*v7.phot.1.fits"))
@@ -421,7 +423,7 @@ def main() -> None:
         map_sha = file_sha256(output_path)
         record = {
             "galaxy": galaxy,
-            "split": "development",
+            "split": split,
             "hubble_type": int(row.hubble_type),
             "distance_mpc": distance_mpc,
             "inclination_deg": inclination_deg,
@@ -466,6 +468,8 @@ def main() -> None:
             "hi_coordinate_roundtrip_arcsec": source_coordinate_roundtrip_arcsec(hi_wcs, center),
             "irac_coordinate_roundtrip_arcsec": source_coordinate_roundtrip_arcsec(irac_wcs, center),
             "map_sha256": map_sha,
+            "validation_arrays_opened": 3 if split == "validation" else 0,
+            "holdout_arrays_opened": 3 if split == "holdout" else 0,
             "velocity_arrays_opened": 0,
             "gravity_parameters": 0,
         }
@@ -481,8 +485,10 @@ def main() -> None:
     gates = config["engineeringGates"]
     checks = {
         "requiredSystems": len(frame) == int(gates["requiredSystems"]),
-        "requiredValidationArraysOpened": 0 == int(gates["requiredValidationArraysOpened"]),
-        "requiredHoldoutArraysOpened": 0 == int(gates["requiredHoldoutArraysOpened"]),
+        "requiredValidationArraysOpened": int(frame.validation_arrays_opened.sum())
+        == int(gates["requiredValidationArraysOpened"]),
+        "requiredHoldoutArraysOpened": int(frame.holdout_arrays_opened.sum())
+        == int(gates["requiredHoldoutArraysOpened"]),
         "requiredVelocityOrDispersionArraysOpened": int(frame.velocity_arrays_opened.sum())
         == int(gates["requiredVelocityOrDispersionArraysOpened"]),
         "maximumGravityParameters": int(frame.gravity_parameters.max())
@@ -533,19 +539,22 @@ def main() -> None:
             ax.set_xlabel("x (kpc)")
             ax.set_ylabel("y (kpc)")
             fig.colorbar(image, ax=ax, fraction=0.046, label="log10 M_sun kpc^-2")
-    fig.savefig(args.output / "development_baryonic_map_atlas.png", dpi=180)
+    atlas_name = config.get("atlasFileName", "development_baryonic_map_atlas.png")
+    fig.savefig(args.output / atlas_name, dpi=180)
     plt.close(fig)
 
     report_core = {
-        "schemaVersion": "sigma-p0739-spiral-baryonic-registration-result/1",
-        "stage": "P0739",
+        "schemaVersion": config.get(
+            "resultSchemaVersion", "sigma-p0739-spiral-baryonic-registration-result/1"
+        ),
+        "stage": config.get("stage", "P0739"),
         "status": status,
         "configSha256": hashlib.sha256(config_bytes).hexdigest(),
         "parentManifestSha256": acquisition["manifestSha256"],
         "systems": len(frame),
-        "splitsOpened": ["development"],
-        "validationArraysOpened": 0,
-        "holdoutArraysOpened": 0,
+        "splitsOpened": sorted(frame.split.unique().tolist()),
+        "validationArraysOpened": int(frame.validation_arrays_opened.sum()),
+        "holdoutArraysOpened": int(frame.holdout_arrays_opened.sum()),
         "velocityOrDispersionArraysOpened": int(frame.velocity_arrays_opened.sum()),
         "gravityParameters": int(frame.gravity_parameters.sum()),
         "universalBaryonicSettings": {
@@ -577,13 +586,14 @@ def main() -> None:
     }
     report = {**report_core, "reportSha256": canonical_sha256(report_core)}
     (args.output / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    summary = f"""# P0739 velocity-blind spiral baryonic registration
+    split_label = ", ".join(sorted(frame.split.unique().tolist()))
+    summary = f"""# {config.get('stage', 'P0739')} velocity-blind spiral baryonic registration
 
 Status: **{status.upper()}**
 
-- Development systems opened: {len(frame)}
-- Validation image arrays opened: 0
-- Holdout image arrays opened: 0
+- Systems opened: {len(frame)} ({split_label})
+- Validation image arrays opened: {int(frame.validation_arrays_opened.sum())}
+- Holdout image arrays opened: {int(frame.holdout_arrays_opened.sum())}
 - Velocity or dispersion arrays opened: {int(frame.velocity_arrays_opened.sum())}
 - Gravity parameters: {int(frame.gravity_parameters.sum())}
 - Minimum joint footprint inside the published H I radius: {100.0 * frame.finite_footprint_fraction_inside_hi_r995.min():.2f}%
@@ -593,7 +603,7 @@ Status: **{status.upper()}**
 - Report SHA-256: `{report['reportSha256']}`
 
 This is a registration and mass-closure result, not a gravity-formula score.
-The validation and holdout images and every kinematic target remain sealed.
+Every kinematic target remains sealed. Any split not named above remains sealed.
 """
     (args.output / "SUMMARY.md").write_text(summary, encoding="utf-8")
     print(json.dumps({"status": status, "checks": checks, "reportSha256": report["reportSha256"]}))
