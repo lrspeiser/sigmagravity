@@ -11,9 +11,9 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/2ayyVAz5pcLzgvEmfJxqodFU13cF>
-- deployment ID: `dpl_2ayyVAz5pcLzgvEmfJxqodFU13cF`
-- public contract version: `0.15.0-preview`
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/2rknEk8gHGTUgGN7deNSQbJpaXPx>
+- deployment ID: `dpl_2rknEk8gHGTUgGN7deNSQbJpaXPx`
+- public contract version: `0.16.0-preview`
 
 The service passes its local production build, 77 automated hosted tests, and live
 HTTP smoke suite. The deployment credential was supplied only to the CLI
@@ -59,6 +59,10 @@ Implemented public capabilities:
     computational model hash before any 2D/3D field or batch preflight. The
     Python worker repeats the check before solving, so a changed equation cannot
     reuse an earlier confirmation.
+14. Publish a researcher guide that distinguishes live production, local-only,
+    and unbuilt capabilities; gives concrete input/output examples; explains
+    what each result can and cannot establish; and gives a bounded roadmap for
+    Sigma Gravity and inverse halo-response research.
 
 ## Verification evidence
 
@@ -108,9 +112,9 @@ and point arrays. The accepted production smoke values are:
 
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
-- run ID: `run_9f1ff3fc58f409ad0cf7a84f`
+- run ID: `run_a6816fb085bcd6f65c81f0a5`
 - manifest SHA-256:
-  `9f1ff3fc58f409ad0cf7a84f534813c073cfd02035cd64c346e84356c175cd7a`
+  `a6816fb085bcd6f65c81f0a586597fec5cf2dcbe1a7bc41472d7d92bd03a01d2`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -149,7 +153,7 @@ The v0.11 held-out-twin checks additionally require health to report
 formula on the generated twin, the same formula on measured baryons, fixed
 MOND on the twin, Newtonian baryons on the twin, and an uncertainty-aware
 residual panel. The accepted DDO154 smoke result has twin run ID
-`twinrun_fa86a140bcf112e8b386d85f`, source-gravity normalized RMSE
+`twinrun_adf762673c65c3ffdcf99b43`, source-gravity normalized RMSE
 `0.000008625358785734849`, and submitted-formula twin RMSE
 `4.459265029781337 km/s`. Across all 175 systems, the P0737 audit confirmed
 that twin packages are invariant to mutations of all held-out velocity data,
@@ -173,6 +177,15 @@ Changing a solver control in the browser invalidated the prior confirmation,
 enabled the separate confirmation action, and produced a different bound hash
 without browser errors. The real local HTTP field, observation, and composed
 batch smoke suites also passed with gateway/worker source-hash agreement.
+
+The v0.16 documentation checks require `/guide.html` to resolve on the public
+alias, health and OpenAPI to report `0.16.0-preview`, and the guide to retain its
+capability matrix, concrete radial/field/worker-boundary examples, scientific
+limitations, and seven-step discovery roadmap. Desktop and 390-pixel mobile
+browser checks found no settled page-level horizontal overflow or console
+errors. The live HTTP smoke reproduced all radial scores, twin metrics, and the
+resolved-evidence hash above; `POST /api/v1/field-jobs` still returns HTTP 503
+with `production_worker_not_connected` until the durable worker is connected.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
