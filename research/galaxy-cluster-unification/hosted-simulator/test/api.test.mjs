@@ -54,7 +54,7 @@ async function asyncCall(handler, { method = "GET", query = {}, body = undefined
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.33.0-preview");
+  assert.equal(output.body.version, "0.34.0-preview");
   assert.equal(output.body.capabilities.durablePrivateObjectStorage, "not_configured");
   assert.equal(output.body.capabilities.durableQueue, "not_configured");
   assert.equal(output.body.capabilities.transactionalJobDatabase, "not_configured");

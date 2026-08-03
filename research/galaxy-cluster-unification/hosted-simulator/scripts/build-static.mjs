@@ -36,6 +36,7 @@ for (const path of [
   "schemas/production-model-registration-v1.schema.json",
   "schemas/production-upload-registration-v1.schema.json",
   "schemas/production-job-submit-v1.schema.json",
+  "schemas/advanced-plugin-v1.schema.json",
   "examples/models/newtonian-poisson.json",
   "examples/models/aqual.json",
   "examples/models/qumond.json",

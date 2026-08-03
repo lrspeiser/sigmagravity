@@ -299,6 +299,19 @@ test("active-job and upload quotas are enforced inside PostgreSQL transactions",
   );
 });
 
+test("advanced plug-in jobs fail closed until the trusted package registry and isolated worker exist", async (t) => {
+  const { service, authA } = await fixture(t);
+  await assert.rejects(
+    service.submitJob(authA, {
+      schemaVersion: "sigma-production-job-submit/1",
+      jobType: "advanced_plugin",
+      parameterPolicy: { mode: "published_fixed" },
+      request: { schemaVersion: "sigma-advanced-plugin-job/1" },
+    }, { idempotencyKey: "plugin-registry-guard-001" }),
+    (error) => error instanceof ControlPlaneError && error.code === "advanced_plugin_registry_not_configured",
+  );
+});
+
 test("HTTP handlers require bearer auth and preserve immutable artifact bytes", async (t) => {
   const { runtime, requestFor, keyA, authA, service, controlPlane, store } = await fixture(t);
   const runtimeFactory = () => runtime;

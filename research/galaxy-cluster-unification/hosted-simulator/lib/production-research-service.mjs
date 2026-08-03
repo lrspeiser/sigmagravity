@@ -224,6 +224,12 @@ export class ProductionResearchService {
     if (!JOB_TYPES.has(payload.jobType) || (expectedJobType && payload.jobType !== expectedJobType)) {
       throw new ControlPlaneError("invalid_job_type", "jobType does not match this endpoint");
     }
+    if (payload.jobType === "advanced_plugin") {
+      throw new ControlPlaneError(
+        "advanced_plugin_registry_not_configured",
+        "advanced plug-ins require a separately trusted package registry and isolated container worker; they cannot execute in Vercel or the safe-language worker",
+      );
+    }
     if (typeof idempotencyKey !== "string" || idempotencyKey.length < 8 || idempotencyKey.length > 160) {
       throw new ControlPlaneError("idempotency_key_required", "Idempotency-Key must contain 8-160 characters");
     }

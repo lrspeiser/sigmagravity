@@ -4,8 +4,8 @@ const specification = {
   openapi: "3.1.0",
   info: {
     title: "Sigma Gravity Research Simulator API",
-    version: "0.33.0-preview",
-    description: "Formula-independent radial benchmarks and confirmed 2D/3D research contracts. The production API now has project-scoped hashed bearer credentials, immutable confirmed-model and data registration, PostgreSQL quotas and audit events, idempotent job submission, transactional outbox dispatch, job/event/artifact/cancellation reads, and complete private artifact rehashing. The public deployment remains fail-closed until PostgreSQL is provisioned and migrated and a stateless scientific worker is connected. Inverse results remain hypothesis generators rather than forward theory tests.",
+    version: "0.34.0-preview",
+    description: "Formula-independent radial benchmarks and confirmed 2D/3D research contracts. A signed advanced-code manifest and separate single-use sandbox contract are now published and accepted in real container CI; uploaded code never executes in Vercel or the trusted safe-language worker. The production API has project-scoped hashed bearer credentials, immutable confirmed-model and data registration, PostgreSQL quotas and audit events, idempotent jobs, a transactional outbox, and verified artifacts. Public heavy execution remains fail-closed until PostgreSQL, a scheduler, and the appropriate scientific worker are connected.",
   },
   components: {
     securitySchemes: {
@@ -29,6 +29,7 @@ const specification = {
     "/api/v1/formulas/validate": { post: { summary: "Validate and hash a safe formula AST" } },
     "/api/v1/models/validate": { post: { summary: "Validate and hash a scalar/vector/tensor 2D/3D field-model manifest" } },
     "/api/v1/models/confirm": { post: { summary: "Bind explicit researcher acknowledgement to the exact validated computational model hash" } },
+    "/api/v1/plugins/preflight": { post: { summary: "Verify a signed advanced plug-in manifest without executing code or conferring publisher trust" } },
     "/api/v1/models": {
       get: { summary: "List project-scoped immutable confirmed models", security: [{ projectBearer: [] }] },
       post: { summary: "Persist an exact-hash confirmation receipt and canonical model", security: [{ projectBearer: [] }] },

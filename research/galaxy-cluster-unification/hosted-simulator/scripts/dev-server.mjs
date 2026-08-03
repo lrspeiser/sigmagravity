@@ -9,6 +9,7 @@ import storageReadiness from "../api/v1/storage-readiness.mjs";
 import queueCanary from "../api/v1/queue-canary.mjs";
 import modelsValidate from "../api/v1/models/validate.mjs";
 import modelsConfirm from "../api/v1/models/confirm.mjs";
+import pluginsPreflight from "../api/v1/plugins/preflight.mjs";
 import runs from "../api/v1/runs.mjs";
 import specification from "../api/v1/spec.mjs";
 import syntheticGalaxies from "../api/v1/synthetic-galaxies.mjs";
@@ -48,6 +49,7 @@ const apiRoutes = new Map([
   ["/api/v1/field-jobs/prepare", fieldJobsPrepare],
   ["/api/v1/models/validate", modelsValidate],
   ["/api/v1/models/confirm", modelsConfirm],
+  ["/api/v1/plugins/preflight", pluginsPreflight],
   ["/api/v1/synthetic-galaxies", syntheticGalaxies],
   ["/api/v1/twin-runs", twinRuns],
   ["/api/v1/resolved-twin-evidence", resolvedTwinEvidence],
@@ -85,6 +87,7 @@ const staticFiles = new Map([
   ["/schemas/production-model-registration-v1.schema.json", ["schemas/production-model-registration-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/production-upload-registration-v1.schema.json", ["schemas/production-upload-registration-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/schemas/production-job-submit-v1.schema.json", ["schemas/production-job-submit-v1.schema.json", "application/schema+json; charset=utf-8"]],
+  ["/schemas/advanced-plugin-v1.schema.json", ["schemas/advanced-plugin-v1.schema.json", "application/schema+json; charset=utf-8"]],
   ["/examples/models/newtonian-poisson.json", ["examples/models/newtonian-poisson.json", "application/json; charset=utf-8"]],
   ["/examples/models/aqual.json", ["examples/models/aqual.json", "application/json; charset=utf-8"]],
   ["/examples/models/qumond.json", ["examples/models/qumond.json", "application/json; charset=utf-8"]],

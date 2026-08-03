@@ -19,6 +19,21 @@ research repository. The radial version is narrow but functional:
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
 
+Version 0.34 adds the first real advanced-code tier without weakening the safe
+formula boundary. An Ed25519-signed manifest binds every source path, byte
+count, SHA-256, resource request, fixed Python 3.13.7/NumPy/SciPy ABI, and the
+required isolation policy. Public preflight verifies cryptographic authorship
+but deliberately does not confer publisher trust or execute code. The separate
+host launcher requires an operator trust-store entry, rehashes the complete
+package, rejects links and undeclared files, requires a digest-pinned image in
+production, and creates a fresh non-root container with no network or
+credentials, read-only root/package/data, dropped capabilities, no-new-
+privileges, and hard PID/CPU/memory/wall/stdout/stderr/tmp limits. A Linux CI
+fixture executes an external fixed-MOND implementation twice, reproduces the
+safe AST output, proves the isolation observations, and rejects tampering before
+container creation. This sandbox is not connected to Vercel; advanced job
+submission fails closed until a trusted package registry and sandbox host exist.
+
 Version 0.33 connects the durable control-plane semantics to a project-scoped
 research API. A one-time `sgp_...` bearer secret is stored only as SHA-256;
 database queries enforce project ownership for registered confirmed models,

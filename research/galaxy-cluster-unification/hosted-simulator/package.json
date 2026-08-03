@@ -1,6 +1,6 @@
 {
   "name": "sigma-gravity-research-simulator",
-  "version": "0.33.0",
+  "version": "0.34.0",
   "private": true,
   "type": "module",
   "description": "Public, reproducible preview API for galaxy and gravity-formula tests.",
@@ -15,6 +15,7 @@
     "smoke": "node scripts/smoke-http.mjs",
     "smoke:blob": "node --env-file-if-exists=.env.local scripts/smoke-private-blob.mjs",
     "smoke:queue": "node scripts/smoke-queue-canary.mjs",
+    "smoke:advanced-plugin": "node ../scripts/smoke_advanced_plugin_sandbox.mjs",
     "migrate:production-db": "node --env-file-if-exists=.env.local scripts/migrate-production-database.mjs",
     "bootstrap:production-project": "node --env-file-if-exists=.env.local scripts/bootstrap-production-project.mjs",
     "smoke:field-jobs": "python ../scripts/smoke_local_field_job_api.py",

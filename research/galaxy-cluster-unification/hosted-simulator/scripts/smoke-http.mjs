@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
+import { mkdtemp, rm } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
 import { sha256 } from "../lib/canonical.mjs";
+import { buildAdvancedPluginFixture } from "../../scripts/build_advanced_plugin_fixture.mjs";
 
 const base = process.env.SIMULATOR_URL ?? "http://127.0.0.1:4173";
 
@@ -25,6 +29,8 @@ assert.match(guide, /Inputs, outputs, and meaning/);
 assert.match(guide, /Durable at-least-once queue/);
 assert.match(guide, /Transactional Postgres job control/);
 assert.match(guide, /Project-scoped durable research API/);
+assert.match(guide, /Signed advanced-code plug-ins/);
+assert.match(guide, /Preflight a signed formula plug-in without running it in Vercel/);
 assert.match(guide, /Use halo maps only for discovery/);
 assert.match(guide, /Inverse baryon-to-response discovery/);
 assert.match(guide, /hypothesis_generator_not_forward_theory_fit/);
@@ -50,7 +56,7 @@ assert.match(guide, /Neon's Marketplace terms/);
 
 const health = await request("/api/v1/health");
 assert.equal(health.status, "ok");
-assert.equal(health.version, "0.33.0-preview");
+assert.equal(health.version, "0.34.0-preview");
 assert.equal(health.capabilities.researcherGuide, "available");
 assert.equal(health.capabilities.localNonlocalConvolution, "available_in_dev_server");
 assert.equal(health.capabilities.localInverseHaloResponseDiscovery, "available_in_dev_server");
@@ -63,6 +69,8 @@ assert.equal(health.capabilities.localAxisymmetricCylindricalFields, "available_
 assert.equal(health.capabilities.localAxisymmetricGalaxyObservations, "available_in_dev_server");
 assert.equal(health.capabilities.localAxisymmetricPhotonLensing, "available_in_dev_server");
 assert.equal(health.capabilities.localAxisymmetricRawMultipleImageLensing, "available_in_dev_server");
+assert.equal(health.capabilities.signedAdvancedPluginPreflight, "available_without_code_execution");
+assert.equal(health.capabilities.advancedPluginExecution, "separate_trusted_registry_and_sandbox_not_connected");
 const storageReadiness = await request("/api/v1/storage-readiness");
 assert.equal(storageReadiness.schemaVersion, "sigma-production-storage-readiness/1");
 assert.ok(["configured", "not_configured"].includes(storageReadiness.objectStorage.state));
@@ -75,6 +83,8 @@ const inverseSchema = await request("/schemas/inverse-response-job-submit-v1.sch
 assert.equal(inverseSchema.properties.schemaVersion.const, "sigma-inverse-response-job-submit/1");
 const productionJobSchema = await request("/schemas/production-job-submit-v1.schema.json");
 assert.equal(productionJobSchema.properties.schemaVersion.const, "sigma-production-job-submit/1");
+const pluginSchema = await request("/schemas/advanced-plugin-v1.schema.json");
+assert.equal(pluginSchema.properties.schemaVersion.const, "sigma-advanced-plugin/1");
 const galaxySchema = await request("/schemas/galaxy-job-submit-v1.schema.json");
 assert.equal(galaxySchema.properties.uncertaintyEnsemble.properties.realizations.maximum, 16);
 assert.equal(
@@ -99,6 +109,18 @@ const post = (body) => ({
 });
 const validation = await request("/api/v1/formulas/validate", post(FIXED_MOND_FORMULA));
 assert.equal(validation.valid, true);
+const pluginFixtureRoot = await mkdtemp(path.join(os.tmpdir(), "sigma-plugin-http-smoke-"));
+const pluginFixture = await buildAdvancedPluginFixture({ destination: pluginFixtureRoot });
+const pluginPreflight = await request("/api/v1/plugins/preflight", post({
+  schemaVersion: "sigma-advanced-plugin-preflight-request/1",
+  manifest: pluginFixture.manifest,
+  publicKeyPem: pluginFixture.trustStore.publishers[0].publicKeyPem,
+}));
+assert.equal(pluginPreflight.signatureValid, true);
+assert.equal(pluginPreflight.publisherTrusted, false);
+assert.equal(pluginPreflight.packageBytesVerified, false);
+assert.equal(pluginPreflight.executableInVercel, false);
+await rm(pluginFixtureRoot, { recursive: true, force: true });
 const fieldModel = await request("/examples/models/refracted-gravity.json");
 const fieldValidation = await request("/api/v1/models/validate", post(fieldModel));
 assert.equal(fieldValidation.valid, true);

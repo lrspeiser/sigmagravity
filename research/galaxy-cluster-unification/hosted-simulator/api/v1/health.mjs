@@ -9,7 +9,7 @@ export default function handler(request, response) {
   send(response, 200, {
     status: "ok",
     service: "sigma-gravity-research-simulator",
-    version: "0.33.0-preview",
+    version: "0.34.0-preview",
     capabilities: {
       researcherGuide: "available",
       radialRotationCurves: "available",
@@ -21,6 +21,8 @@ export default function handler(request, response) {
       resolvedClusterEvidenceRegistry: "available",
       typedFieldModelValidation: "available",
       exactModelHashConfirmation: "required_for_execution",
+      signedAdvancedPluginPreflight: "available_without_code_execution",
+      isolatedAdvancedPluginSandbox: "real_container_acceptance_not_deployed",
       fieldJobPreflight: "available",
       localAsyncFieldJobs: "available_in_dev_server",
       localResolvedGalaxyJobs: "available_in_dev_server",
@@ -63,6 +65,7 @@ export default function handler(request, response) {
       resolvedGalaxyExtractionAndGeneration: "production_worker_not_connected",
       fieldSolvers2d3d: "worker_not_connected",
       rawMultipleImageLensing: "production_worker_not_connected",
+      advancedPluginExecution: "separate_trusted_registry_and_sandbox_not_connected",
     },
   });
 }

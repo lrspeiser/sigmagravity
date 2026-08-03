@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap guide-hero-grid">
         <div>
-          <p class="eyebrow">Researcher guide &middot; v0.33</p>
+          <p class="eyebrow">Researcher guide &middot; v0.34</p>
           <h1>Know what the simulator tested&mdash;and what it did not.</h1>
           <p class="lede">
             The live site is a useful radial formula benchmark and an auditable front door for
@@ -63,6 +63,7 @@
               <tr><td>Durable at-least-once queue</td><td><span class="state-tag live">Deployment canary</span></td><td><span class="state-tag live">Failure suite</span></td><td>A private queue consumer writes a deployment-bound acknowledgement to the private object store. Publishing is seven-day deduplicated; the job contract separately handles duplicate delivery, leases, retries, and stale workers.</td></tr>
               <tr><td>Transactional Postgres job control</td><td><span class="state-tag partial">Awaiting database</span></td><td><span class="state-tag live">Postgres acceptance</span></td><td>Eleven tables cover the transactional outbox, models, uploads, jobs/events/attempts/artifacts, hashed project credentials, audit events, and quotas. Idempotency conflicts, isolation, leases, cancellation races, terminal finalization, and repeatable migrations pass against an embedded PostgreSQL engine. Horizon3 must accept Neon's Marketplace terms before the free database can be provisioned.</td></tr>
               <tr><td>Project-scoped durable research API</td><td><span class="state-tag partial">Published, fail-closed</span></td><td><span class="state-tag live">Lifecycle acceptance</span></td><td>Bearer-authenticated model and upload registration, binary hash verification, job submission, events, private artifact downloads, cancellation, audit, and active-job/upload/attempt limits pass end to end. Large direct uploads, the recurring outbox trigger, the production database, and the stateless worker remain unconnected.</td></tr>
+              <tr><td>Signed advanced-code plug-ins</td><td><span class="state-tag partial">Preflight only</span></td><td><span class="state-tag live">Isolated container acceptance</span></td><td>Ed25519 package identity, exact file rehashing, trusted-publisher separation, a pinned Python ABI, and a single-use no-network/read-only/quota container pass locally and in Linux CI. No plug-in registry or sandbox host is connected to Vercel; uploaded code never executes there or in the safe-language worker.</td></tr>
               <tr><td>Authenticated field + galaxy worker deployment slice</td><td><span class="state-tag partial">Compute not configured</span></td><td><span class="state-tag live">Process acceptance passed</span></td><td>The bounded connector and stateless handoff contract expose immutable inputs and results. The public site has durable objects and queue delivery, but no connected Postgres database or stateless scientific container, so heavy routes remain fail-closed.</td></tr>
               <tr><td>Axisymmetric fields, galaxy motion, and lensing</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>Finite-volume elliptic equations run on a declared <code>(r,z)</code> grid; one typed field can produce circular speeds, resolved velocities, deflection/shear maps, and raw multiple-image roots without a Cartesian proxy.</td></tr>
               <tr><td>Nonlocal baryon-to-response convolution</td><td><span class="state-tag local">Contract only</span></td><td><span class="state-tag live">Reference worker</span></td><td>A supplied kernel is integrated against a baryonic field with explicit zero-padding, origin, measure, and no hidden normalization.</td></tr>
@@ -728,6 +729,50 @@ credible_interval_ready</code></pre></div>
             </div>
             <div class="meaning-strip"><strong>Finite-support gate:</strong> the archived cylindrical map retains unsupported rays. The root solver may zero-fill them only after proving that the complete root-search square plus its Jacobian finite-difference margin uses finite projected nodes. The recorded policy is <code>zero_only_outside_verified_root_support</code>; a search crossing the cylinder silhouette is rejected.</div>
             <div class="meaning-strip"><strong>What this can establish:</strong> one confirmed field law can reach raw image-plane positions with disclosed source profiling, global roots, topology completeness, assignments, uncertainties, critical-curve diagnostics, and separate parameter counts. <strong>What it does not establish:</strong> the displayed result is an analytic cored-isothermal software fixture, not a real cluster fit. Extra roots require a detectability model, and axisymmetry, source redshifts/cosmology, weak shear, magnification selection, time delays, line-of-sight structure, and real baryonic uncertainty still limit scientific conclusions.</div>
+          </article>
+
+          <article class="example-card card">
+            <div class="example-intro"><span class="example-number">15</span><div><h3>Preflight a signed formula plug-in without running it in Vercel</h3><p>Use the advanced tier only when a theory cannot be expressed in the safe manifest. The package lists every source file and byte hash, fixes its Python/NumPy/SciPy ABI, declares bounded resources, and signs the canonical package identity with Ed25519.</p></div></div>
+            <div class="code-pair compact-code-pair">
+              <div><p class="code-label">POST /api/v1/plugins/preflight</p><pre><code>{
+  "schemaVersion": "sigma-advanced-plugin-preflight-request/1",
+  "manifest": {
+    "schemaVersion": "sigma-advanced-plugin/1",
+    "publisher": {
+      "algorithm": "ed25519",
+      "keyId": "ed25519_&lt;24 hex&gt;"
+    },
+    "runtime": {
+      "id": "sigma-python-plugin/1",
+      "pythonVersion": "3.13.7",
+      "packages": {"numpy": "2.2.6", "scipy": "1.16.1"}
+    },
+    "isolation": {
+      "execution": "single_use_container",
+      "network": "none",
+      "rootFilesystem": "read_only",
+      "pluginMount": "read_only",
+      "datasetMount": "read_only",
+      "credentials": "none"
+    },
+    "files": [{"path": "plugin.py", "bytes": 1234, "sha256": "&lt;64 hex&gt;"}],
+    "packageSha256": "&lt;64 hex&gt;",
+    "signature": {"algorithm": "ed25519", "keyId": "ed25519_&lt;24 hex&gt;", "valueBase64": "..."}
+  },
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----..."
+}</code></pre></div>
+              <div><p class="code-label">Preflight output</p><pre><code>{
+  "schemaVersion": "sigma-advanced-plugin-preflight/1",
+  "signatureValid": true,
+  "publisherTrusted": false,
+  "publisherTrust": "self_signature_valid_not_operator_trusted",
+  "packageBytesVerified": false,
+  "executableInVercel": false,
+  "nextGate": "isolated worker rehash + operator trust"
+}</code></pre></div>
+            </div>
+            <div class="meaning-strip"><strong>What the signature proves:</strong> the manifest was signed by the private key corresponding to the supplied public key and has not changed. <strong>What it does not prove:</strong> that the author is trusted, the listed files match their hashes, or the science is correct. The isolated host must separately rehash every byte and require an active operator trust record.</div>
+            <div class="meaning-strip"><strong>Real container acceptance:</strong> an external fixed-MOND implementation reproduces the safe AST result while reporting UID/GID 65532, zero effective capabilities, <code>NoNewPrivs=1</code>, blocked network and writes, no Docker socket or credential environment, and a fresh temporary filesystem on two runs. Tampering is rejected before container creation. Production requires a digest-pinned sandbox image; CI's mutable tag is allowed only by an explicit test flag.</div>
           </article>
         </div>
       </section>
