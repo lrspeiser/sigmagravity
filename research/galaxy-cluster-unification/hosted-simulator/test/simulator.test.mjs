@@ -2,7 +2,12 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { catalog, getSystem } from "../lib/catalog.mjs";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
-import { createSyntheticGalaxy, runRotationCurveBenchmark } from "../lib/simulator.mjs";
+import {
+  createObservedGalaxyRadialTwin,
+  createSyntheticGalaxy,
+  runHeldoutTwinBenchmark,
+  runRotationCurveBenchmark,
+} from "../lib/simulator.mjs";
 
 test("catalog packages all published SPARC galaxies", () => {
   assert.equal(catalog.systems.length, 175);
@@ -31,4 +36,37 @@ test("synthetic galaxy generation is seeded and scoreable", () => {
   assert.equal(first.points.length, 24);
   const result = runRotationCurveBenchmark({ systems: [first], formula: FIXED_MOND_FORMULA });
   assert.equal(result.state, "succeeded");
+});
+
+test("observed-galaxy twin extraction is deterministic and blind to measured speeds", () => {
+  const system = getSystem("DDO154");
+  const first = createObservedGalaxyRadialTwin(system);
+  const altered = {
+    ...system,
+    vFlatKmS: 999,
+    points: system.points.map((point, index) => ({
+      ...point,
+      vObsKmS: 900 + index,
+      eVObsKmS: 100 + index,
+    })),
+  };
+  const second = createObservedGalaxyRadialTwin(altered);
+  assert.equal(first.parameterPackage.contentSha256, second.parameterPackage.contentSha256);
+  assert.deepEqual(first.sourcePoints, second.sourcePoints);
+  assert.equal(first.parameterPackage.velocityTargetsUsed, false);
+  assert.deepEqual(first.parameterPackage.gravityParameters, []);
+  assert.ok(first.reconstruction.gBarNormalizedRmse < 0.25);
+  assert.equal("vObsKmS" in first.sourcePoints[0], false);
+});
+
+test("held-out twin run separates source, formula, and transport errors", () => {
+  const result = runHeldoutTwinBenchmark({ system: getSystem("DDO154"), formula: FIXED_MOND_FORMULA });
+  assert.equal(result.state, "succeeded");
+  assert.equal(result.manifest.twinProtocol.velocityTargetsUsedInExtraction, false);
+  assert.equal(result.manifest.parameterAccounting.perObject, 0);
+  assert.equal(result.predictions.length, 12);
+  assert.ok(Number.isFinite(result.metrics.sourceReconstruction.gBarNormalizedRmse));
+  assert.ok(Number.isFinite(result.metrics.formulaOnGeneratedTwin.rmseKmS));
+  assert.ok(Number.isFinite(result.metrics.transport.predictionRmseKmS));
+  assert.equal(result.metrics.formulaOnGeneratedTwin.pointCount, 12);
 });

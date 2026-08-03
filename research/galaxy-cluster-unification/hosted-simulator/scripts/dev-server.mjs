@@ -9,6 +9,7 @@ import modelsValidate from "../api/v1/models/validate.mjs";
 import runs from "../api/v1/runs.mjs";
 import specification from "../api/v1/spec.mjs";
 import syntheticGalaxies from "../api/v1/synthetic-galaxies.mjs";
+import twinRuns from "../api/v1/twin-runs.mjs";
 import system from "../api/v1/system.mjs";
 import systems from "../api/v1/systems.mjs";
 import { createLocalFieldJobRouter } from "../lib/local-field-job-http.mjs";
@@ -40,6 +41,7 @@ const apiRoutes = new Map([
   ["/api/v1/field-jobs/prepare", fieldJobsPrepare],
   ["/api/v1/models/validate", modelsValidate],
   ["/api/v1/synthetic-galaxies", syntheticGalaxies],
+  ["/api/v1/twin-runs", twinRuns],
   ["/api/v1/runs", runs],
   ["/api/v1/openapi.json", specification],
 ]);

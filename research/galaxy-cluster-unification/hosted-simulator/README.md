@@ -11,11 +11,22 @@ research repository. The radial version is narrow but functional:
 - all 175 published SPARC radial mass models are packaged with provenance;
 - researchers can retrieve real systems or generate a seeded synthetic radial
   system;
+- any real catalog system can be regenerated as a compressed baryonic radial
+  twin while its observed speed and uncertainty columns are withheld;
 - formulas use a bounded, dimension-aware JSON AST rather than `eval`;
 - universal and per-object parameter counts are explicit;
 - interactive runs compare the submitted equation with Newtonian baryons and
   a fixed simple-MOND law; and
 - every result includes a canonical formula hash and run-manifest hash.
+
+Version 0.11 adds `POST /api/v1/twin-runs`. It applies the same submitted
+formula to both the published baryonic channels and a six-control-point radial
+twin, then reveals the measured rotation curve for scoring. The response keeps
+three errors separate: baryonic source reconstruction, formula-versus-observed
+speed, and the prediction change caused by transporting the formula from the
+published source to the generated twin. The parameter package lists all
+withheld columns, contains no gravity parameters, and is invariant when the
+observed velocities are perturbed.
 
 The 0.6 preview also accepts a theory-neutral field-model manifest. It declares
 scalar, vector, or tensor fields; 2D or 3D coordinates; equations; units;
@@ -106,6 +117,7 @@ GET  /api/v1/batches/{id}
 GET  /api/v1/batches/{id}/events
 GET  /api/v1/batches/{id}/artifacts
 POST /api/v1/runs
+POST /api/v1/twin-runs
 GET  /api/v1/openapi.json
 ```
 

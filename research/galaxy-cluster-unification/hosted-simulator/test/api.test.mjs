@@ -13,6 +13,7 @@ import hostedObservationEvaluationJobs from "../api/v1/observation-evaluation-jo
 import hostedBatches from "../api/v1/batches.mjs";
 import hostedDataUploads from "../api/v1/data-uploads.mjs";
 import runs from "../api/v1/runs.mjs";
+import twinRuns from "../api/v1/twin-runs.mjs";
 import { FIXED_MOND_FORMULA } from "../lib/formula.mjs";
 import { readFileSync } from "node:fs";
 import { sha256 } from "../lib/canonical.mjs";
@@ -38,7 +39,8 @@ function call(handler, { method = "GET", query = {}, body = undefined } = {}) {
 test("health API identifies the deployed contract version and local worker boundary", () => {
   const output = call(health);
   assert.equal(output.statusCode, 200);
-  assert.equal(output.body.version, "0.10.0-preview");
+  assert.equal(output.body.version, "0.11.0-preview");
+  assert.equal(output.body.capabilities.heldoutObservedGalaxyTwins, "available");
   assert.equal(
     output.body.capabilities.localDecoupledObservationEvaluationJobs,
     "available_in_dev_server",
@@ -67,6 +69,18 @@ test("catalog API lists and retrieves systems", () => {
   const detailResponse = call(system, { query: { id: "DDO154" } });
   assert.equal(detailResponse.statusCode, 200);
   assert.equal(detailResponse.body.points.length, 12);
+});
+
+test("twin API withholds velocity targets until scoring", () => {
+  const output = call(twinRuns, {
+    method: "POST",
+    body: { systemId: "DDO154", formula: FIXED_MOND_FORMULA },
+  });
+  assert.equal(output.statusCode, 200);
+  assert.equal(output.body.type, "heldout_radial_twin_validation");
+  assert.equal(output.body.manifest.twinProtocol.velocityTargetsUsedInExtraction, false);
+  assert.equal(output.body.twin.parameterPackage.gravityParameters.length, 0);
+  assert.equal(output.body.predictions.length, 12);
 });
 
 test("formula API returns canonical safety audit", () => {

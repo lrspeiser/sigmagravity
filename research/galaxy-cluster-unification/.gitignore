@@ -170,6 +170,8 @@ results/environmental_mog0/*
 !results/p0636_little_things_baryon_acquisition/**
 !results/p0720_resolved_galaxy_parameter_roundtrip/
 !results/p0720_resolved_galaxy_parameter_roundtrip/**
+!results/p0737_heldout_radial_twin_validation/
+!results/p0737_heldout_radial_twin_validation/**
 !results/p0731_real_velocity_field_adapter_parity/
 results/p0731_real_velocity_field_adapter_parity/*
 !results/p0731_real_velocity_field_adapter_parity/SUMMARY.md

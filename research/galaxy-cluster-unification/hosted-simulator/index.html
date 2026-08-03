@@ -23,7 +23,7 @@
       </nav>
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Open research preview · v0.10</p>
+          <p class="eyebrow">Open research preview · v0.11</p>
           <h1>Put a gravity formula in front of real galaxies.</h1>
           <p class="lede">
             Select any of 175 SPARC systems, submit a unit-checked equation, and compare its
@@ -63,13 +63,18 @@
 
         <div class="workbench-grid">
           <div class="controls card">
-            <div class="step-heading"><span>1</span><div><h3>Choose a system</h3><p>Use an observed galaxy or a seeded radial preview.</p></div></div>
+            <div class="step-heading"><span>1</span><div><h3>Choose a system</h3><p>Use an observed galaxy, its held-out twin, or a seeded radial preview.</p></div></div>
             <label for="galaxy-select">Published SPARC galaxy</label>
             <div class="row">
               <select id="galaxy-select" aria-label="Published galaxy"></select>
               <button id="load-system" class="button compact secondary" type="button">Inspect</button>
             </div>
             <p id="system-summary" class="microcopy"></p>
+
+            <div class="twin-box">
+              <div><strong>Observed-galaxy twin</strong><p>Compress and regenerate only the baryonic source profile. Measured speeds stay hidden until the final score.</p></div>
+              <button id="run-twin" class="button compact secondary" type="button">Run held-out twin test</button>
+            </div>
 
             <details class="synthetic-box">
               <summary>Create a synthetic radial galaxy</summary>
@@ -107,10 +112,11 @@
             <div id="metrics" class="metrics empty">
               <p>Run the formula to see comparator scores and the predicted curve.</p>
             </div>
+            <div id="twin-proof" class="twin-proof" hidden></div>
             <div class="chart-frame">
               <svg id="curve-chart" viewBox="0 0 800 440" role="img" aria-label="Rotation curve comparison"></svg>
             </div>
-            <div class="legend" aria-label="Chart legend">
+            <div id="result-legend" class="legend" aria-label="Chart legend">
               <span><i class="observed"></i>Observed</span>
               <span><i class="submitted"></i>Submitted</span>
               <span><i class="mond"></i>Fixed MOND</span>
@@ -200,6 +206,7 @@
           <article class="endpoint"><span>POST</span><code>/api/v1/galaxy-jobs</code><p>Extract content-hashed baryonic parameters or generate verified 2D/3D density bundles without choosing a gravity formula.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/batches</code><p>Compose reusable field solves with separately hashed observation data and targets across uploaded or generated systems, then download one deterministic report.</p></article>
           <article class="endpoint"><span>POST</span><code>/api/v1/runs</code><p>Run a formula and receive scores, curves, comparators, and an immutable manifest hash.</p></article>
+          <article class="endpoint"><span>POST</span><code>/api/v1/twin-runs</code><p>Regenerate a galaxy's baryonic radial twin without its measured speeds, then reveal and score the held-out rotation curve.</p></article>
         </div>
         <pre class="code-sample"><code>const result = await fetch("/api/v1/runs", {
   method: "POST",

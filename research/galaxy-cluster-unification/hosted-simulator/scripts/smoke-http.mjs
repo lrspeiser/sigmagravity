@@ -15,6 +15,7 @@ async function request(path, options) {
 const page = await request("/");
 assert.match(page, /Put a gravity formula in front of real galaxies/);
 assert.match(page, /Create a synthetic radial galaxy/);
+assert.match(page, /held-out twin/i);
 assert.match(page, /Describe a full 2D or 3D theory/);
 
 const health = await request("/api/v1/health");
@@ -63,6 +64,12 @@ const run = await request("/api/v1/runs", post({
 assert.equal(run.state, "succeeded");
 assert.equal(run.results[0].predictions.length, 12);
 assert.equal(run.manifest.parameterAccounting.perObject, 0);
+const twinRun = await request("/api/v1/twin-runs", post({
+  systemId: "DDO154", formula: FIXED_MOND_FORMULA,
+}));
+assert.equal(twinRun.state, "succeeded");
+assert.equal(twinRun.manifest.twinProtocol.velocityTargetsUsedInExtraction, false);
+assert.equal(twinRun.predictions.length, 12);
 
 console.log(JSON.stringify({
   base,
@@ -73,4 +80,7 @@ console.log(JSON.stringify({
   submittedRmseKmS: run.scores.submitted.meanSystemRmseKmS,
   fixedMondRmseKmS: run.scores.fixedMond.meanSystemRmseKmS,
   newtonianRmseKmS: run.scores.newtonian.meanSystemRmseKmS,
+  twinRunId: twinRun.id,
+  twinSourceGBarNormalizedRmse: twinRun.metrics.sourceReconstruction.gBarNormalizedRmse,
+  twinFormulaRmseKmS: twinRun.metrics.formulaOnGeneratedTwin.rmseKmS,
 }, null, 2));
