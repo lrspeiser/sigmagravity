@@ -11,11 +11,11 @@ The radial research service is live in the Horizon3 Vercel team:
 - team and scope: `Horizon3` / `horizon3`
 - project: `sigma-gravity-research-simulator`
 - production deployment inspected at:
-  <https://vercel.com/horizon3/sigma-gravity-research-simulator/8fLETt76898JWCp5cndS8gLWyq1u>
-- deployment ID: `dpl_8fLETt76898JWCp5cndS8gLWyq1u`
-- public contract version: `0.11.0-preview`
+  <https://vercel.com/horizon3/sigma-gravity-research-simulator/2ayyVAz5pcLzgvEmfJxqodFU13cF>
+- deployment ID: `dpl_2ayyVAz5pcLzgvEmfJxqodFU13cF`
+- public contract version: `0.15.0-preview`
 
-The service passes its local production build, 73 automated hosted tests, and a live
+The service passes its local production build, 77 automated hosted tests, and live
 HTTP smoke suite. The deployment credential was supplied only to the CLI
 process and was not stored in a file, repository setting, or generated
 artifact.
@@ -55,6 +55,10 @@ Implemented public capabilities:
     withholding its measured rotation speeds and uncertainties, evaluate the
     same submitted formula on the generated twin and measured baryons, and
     display both predictions against the held-out observations with residuals.
+13. Require a separate researcher acknowledgement bound to the exact validated
+    computational model hash before any 2D/3D field or batch preflight. The
+    Python worker repeats the check before solving, so a changed equation cannot
+    reuse an earlier confirmation.
 
 ## Verification evidence
 
@@ -64,7 +68,7 @@ npm.cmd test
 npm.cmd run build
 ```
 
-The current result is 73 passing tests and a build check confirming 175
+The current result is 77 passing tests and a build check confirming 175
 galaxies. The catalog generator separately confirms 3,391 radial points and
 the release hash
 `a5df1cb7c7a52da415a167d145a831fe0e0625243b46dd38047ca43ba0299681`.
@@ -90,9 +94,12 @@ GET  https://<deployment>/api/v1/systems/DDO154
 GET  https://<deployment>/api/v1/openapi.json
 GET  https://<deployment>/schemas/observation-evaluation-job-submit-v1.schema.json
 POST https://<deployment>/api/v1/formulas/validate
+POST https://<deployment>/api/v1/models/validate
+POST https://<deployment>/api/v1/models/confirm
 POST https://<deployment>/api/v1/runs
 POST https://<deployment>/api/v1/twin-runs
 POST https://<deployment>/api/v1/observation-evaluation-jobs
+GET  https://<deployment>/schemas/model-confirmation-request-v1.schema.json
 ```
 
 The deployment is not accepted merely because the homepage loads. The hosted
@@ -101,9 +108,9 @@ and point arrays. The accepted production smoke values are:
 
 - formula SHA-256:
   `7461db9401d4396e4e7ad7f675007bc28adeace523a174b0211c73c2a5a27ce2`
-- run ID: `run_0d98893de5cb053135b0e7d5`
+- run ID: `run_9f1ff3fc58f409ad0cf7a84f`
 - manifest SHA-256:
-  `0d98893de5cb053135b0e7d5f022b592688264f889a2f1218259d59bcc305edf`
+  `9f1ff3fc58f409ad0cf7a84f534813c073cfd02035cd64c346e84356c175cd7a`
 - fixed-MOND DDO154 RMSE: `4.451772996259156 km/s`
 - Newtonian-baryon DDO154 RMSE: `23.71217692693497 km/s`
 
@@ -142,7 +149,7 @@ The v0.11 held-out-twin checks additionally require health to report
 formula on the generated twin, the same formula on measured baryons, fixed
 MOND on the twin, Newtonian baryons on the twin, and an uncertainty-aware
 residual panel. The accepted DDO154 smoke result has twin run ID
-`twinrun_d77e248c88bf22c6146540e1`, source-gravity normalized RMSE
+`twinrun_fa86a140bcf112e8b386d85f`, source-gravity normalized RMSE
 `0.000008625358785734849`, and submitted-formula twin RMSE
 `4.459265029781337 km/s`. Across all 175 systems, the P0737 audit confirmed
 that twin packages are invariant to mutations of all held-out velocity data,
@@ -150,6 +157,22 @@ uses zero gravity parameters, and obtained a median fixed-MOND transport RMSE
 of `0.7518162551 km/s`. Its frozen worst-transport gate remains honestly failed:
 NGC2903 reaches `6.9564143643 km/s` against a `5 km/s` limit, so this radial
 twin is a useful diagnostic rather than a completed 2D/3D galaxy generator.
+
+The v0.14 resolved checks require eight systems, 146,532 scored H I velocity
+pixels, the P0752 evidence hash
+`8fed5429efecb7a0b5055a15928b8edf48e5713454ba18b42c9503305778d1b7`,
+and separate protocol and formula verdicts. A protocol pass must not be
+rendered as a theory pass.
+
+The v0.15 confirmation checks require a draft model to report
+`awaiting_researcher_confirmation`, the published schema to resolve, and the
+homepage to expose a separate **Confirm exact hash** action. The live
+Newtonian-Poisson confirmation receipt is
+`bc59e0053cf7a37f5dc0ef2d98be7b835f9927e69554337cfddaf7258364d795`.
+Changing a solver control in the browser invalidated the prior confirmation,
+enabled the separate confirmation action, and produced a different bound hash
+without browser errors. The real local HTTP field, observation, and composed
+batch smoke suites also passed with gateway/worker source-hash agreement.
 
 The first attempted project was accidentally created in the personal
 `lrspeisers-projects` scope and contains only a failed build. It is not the
