@@ -1,0 +1,17 @@
+{
+  "protocol_version": "Sigma-v10D-0.3-aether-rest-ADM-rank",
+  "status": "frozen theory-only ADM rank subgate",
+  "candidate": "Sigma v10D exponential kinetic completion",
+  "fixed_values": {
+    "K_B": 1.0,
+    "beta": 0.4264014327112209,
+    "scalar_clock_coefficient_nu": 4.0,
+    "random_samples": 1000
+  },
+  "failure_rule": "Retire exact v10D before data if the carrier velocity redefinition loses rank, the rest-frame Legendre Hessian develops a zero beyond the inherited constraints, or the physical degree count changes across finite carrier backgrounds.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "aether-rest ADM Legendre rank and generic constraint count only"
+  }
+}

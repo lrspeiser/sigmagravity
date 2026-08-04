@@ -16,6 +16,15 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only follow-up is
+[`docs/SIGMA_V10D_ADM_RANK.md`](docs/SIGMA_V10D_ADM_RANK.md).
+In an aether-rest ADM frame the carrier derivative is the perfect square
+`W=dot(P)-K.P-P.K`. The triangular velocity map `(dot(h),dot(P))` to
+`(dot(h),W)` has determinant one for every `P`, so the combined Legendre
+inertia remains one inherited DeWitt negative direction and fifteen positive
+directions, with no zero. The generic count is the published six AeST modes
+plus six carrier modes. Arbitrary-foliation constraints and the full nonzero-P
+metric cones remain unresolved.
+The preceding source-block result is
 [`docs/SIGMA_V10D_ANISOTROPIC_CHARACTERISTICS.md`](docs/SIGMA_V10D_ANISOTROPIC_CHARACTERISTICS.md).
 For arbitrary carrier orientation, the completed aether kinetic matrix obeys
 `F>=I`, while a wave direction enters through

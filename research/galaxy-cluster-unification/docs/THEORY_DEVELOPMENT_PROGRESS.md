@@ -1,5 +1,24 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v10D aether-rest ADM rank
+
+The nonlinear local Legendre-rank subgate passes. In an aether-rest ADM frame,
+the carrier velocity is the perfect square
+`W_ij=dot(P)_ij-K_i^kP_kj-K_j^kP_ik`. The transformation from
+`(dot(h),dot(P))` to `(dot(h),W)` is triangular with determinant one for every
+carrier background. The metric--carrier Hessian is therefore congruent to the
+Einstein-Hilbert DeWitt block plus six positive squares and has constant
+inertia `(1,0,11)`.
+
+Adding the globally positive completed aether block and selected positive AeST
+clock gives full rest-frame inertia `(1,0,15)`. One thousand mixed-sign
+carrier tensors confirm the analytic result. The generic constraint count
+retains the published AeST four first-class/four second-class structure and
+adds six regular carrier modes, for twelve physical degrees of freedom. The
+arbitrary-foliation constraint rank and full anisotropic metric cones remain
+the next kill gate. No observation was opened. See
+[`SIGMA_V10D_ADM_RANK.md`](SIGMA_V10D_ADM_RANK.md).
+
 ## 2026-08-04 Sigma v10D anisotropic source-block characteristics
 
 The arbitrary-orientation fixed-metric aether--carrier block passes. For every

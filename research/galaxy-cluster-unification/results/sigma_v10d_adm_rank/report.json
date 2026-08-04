@@ -1,0 +1,62 @@
+{
+  "all_aether_rest_ADM_rank_gates_pass": true,
+  "analytic_congruence": "H_(h,P)=T^T diag(H_DeWitt,I_6) T with T=[[I,0],[-L(P),I]] and det(T)=1",
+  "candidate": "Sigma v10D exponential kinetic completion",
+  "constraint_count": {
+    "base_configuration_variables_including_auxiliaries": 12,
+    "carrier_configuration_variables": 6,
+    "first_class_constraints": 4,
+    "interpretation": "AeST 6 plus hyperbolic spatial carrier 6",
+    "phase_space_dimension": 36,
+    "physical_degrees_of_freedom": 12,
+    "second_class_constraints": 4
+  },
+  "data_policy": {
+    "authorization": "aether-rest ADM Legendre rank and generic constraint count only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v10d_to_full_metric_characteristic_gate",
+  "gates": {
+    "AeST_auxiliary_second_class_count_inherited": true,
+    "carrier_velocity_redefinition_triangular_unit_determinant": true,
+    "completed_aether_block_positive": true,
+    "diffeomorphism_first_class_count_inherited": true,
+    "full_rest_frame_inertia_constant_one_negative_fifteen_positive": true,
+    "metric_carrier_inertia_constant_one_negative_eleven_positive": true,
+    "no_new_primary_constraint_from_regular_carrier_velocities": true,
+    "physical_degree_count_is_base_six_plus_carrier_six": true,
+    "selected_scalar_clock_block_positive": true
+  },
+  "observational_data_accessed": false,
+  "perfect_square": "W_ij=dot(P)_ij-K_i^k P_kj-K_j^k P_ik; L_P,kin=W:W/2",
+  "raw_holdout_opened": false,
+  "reason": "The carrier/metric velocities are related to the Einstein-Hilbert plus six-square basis by a triangular unit-determinant transformation for every carrier background. The combined rest-frame Legendre inertia is constant, the completed aether and scalar clock blocks are positive, and the generic constraint count is AeST's six physical modes plus six carrier modes.",
+  "scan": {
+    "full_inertias": [
+      [
+        1,
+        0,
+        15
+      ]
+    ],
+    "maximum_transform_determinant_error": 3.1086244689504383e-15,
+    "metric_carrier_inertias": [
+      [
+        1,
+        0,
+        11
+      ]
+    ],
+    "minimum_completed_aether_eigenvalue": 1.000000000000041,
+    "samples": 1000
+  },
+  "scope": "This proves generic local rank in the aether-rest foliation. It does not yet prove the arbitrary-foliation constraint algebra or the full anisotropic metric characteristic cones.",
+  "status": "completed Sigma v10D aether-rest ADM rank subgate",
+  "unresolved": {
+    "PPN_and_Solar": false,
+    "arbitrary_foliation_global_constraint_rank": false,
+    "full_metric_characteristic_cones_on_anisotropic_P": false,
+    "inhomogeneous_and_FLRW_backgrounds": false
+  }
+}
