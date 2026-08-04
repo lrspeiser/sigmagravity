@@ -1,5 +1,27 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v10C covariant variation subgate
+
+The v10C carrier has now been written with exact projected time and spatial
+derivatives. Its derivative momentum is
+`Pi^{r|mn}=A^r dot(P)^mn-(3/11)D^rP^mn`; a numerical directional derivative on
+a tilted unit-aether background matches below `1e-9`. The four independent
+conditions `A^mP_mn=0` reduce a symmetric four-tensor from ten to six spatial
+components exactly.
+
+Integration by parts changes `beta P^mn nabla_m J_n` into
+`-beta(nabla_mP^mn)J_n`, so the action contains only first derivatives. The
+carrier, aether, metric, scalar and multiplier Euler equations are at most
+second order. The complete all-field diffeomorphism identity has been derived,
+so the metric source is conserved on the nonmetric field equations while
+ordinary matter remains conserved through its one minimal metric coupling.
+
+This passes only the variation/order gate. The component-expanded metric
+stress, nonlinear ADM Hessian and constraint chain, arbitrary-background
+characteristics, PPN/Solar solution and numerics remain unresolved. No
+observation was opened. See
+[`SIGMA_V10C_COVARIANT_VARIATION.md`](SIGMA_V10C_COVARIANT_VARIATION.md).
+
 ## 2026-08-04 Sigma v10C covariant/PPN applicability precheck
 
 The selected spatial-aether counterterm has now been reduced exactly on the

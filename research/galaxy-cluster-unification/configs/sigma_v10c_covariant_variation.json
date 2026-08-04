@@ -1,0 +1,13 @@
+{
+  "protocol_version": "Sigma-v10C-0.3-covariant-variation",
+  "status": "frozen theory-only variation subgate",
+  "candidate": "Sigma v10C one-metric AeST plus hyperbolic aether-tidal polarization",
+  "fixed_values": {
+    "carrier_speed_squared": 0.2727272727272727
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "covariant variation, constraint rank and Noether identity only"
+  }
+}

@@ -16,6 +16,15 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only follow-up is
+[`docs/SIGMA_V10C_COVARIANT_VARIATION.md`](docs/SIGMA_V10C_COVARIANT_VARIATION.md).
+The exact projected carrier momentum passes a tilted-aether finite-difference
+check, the spatiality constraint has rank four and leaves six carrier
+components, the source has a first-derivative boundary form, and the all-field
+Noether identity closes on-shell conservation. Every Euler equation is at most
+second order. This advances v10C only to its nonlinear ADM constraint gate; it
+does not establish the physical degree count, arbitrary-background cones, or
+Solar viability.
+The preceding applicability result is
 [`docs/SIGMA_V10C_COVARIANT_PPN_PRECHECK.md`](docs/SIGMA_V10C_COVARIANT_PPN_PRECHECK.md).
 The spatial-aether counterterm has the exact unit-aether map
 `(c1,c2,c3,c4)=(K_B u,0,-K_B u,K_B(1-u))`, preserving `c13=0` and

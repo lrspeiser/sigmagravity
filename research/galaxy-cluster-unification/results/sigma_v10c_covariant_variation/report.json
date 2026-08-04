@@ -1,0 +1,60 @@
+{
+  "all_covariant_variation_subgates_pass": true,
+  "arbitrary_background_characteristics_complete": false,
+  "candidate": "Sigma v10C one-metric AeST plus hyperbolic aether-tidal polarization",
+  "carrier_euler_equation": "-nabla_r Pi^{r|mn}-L_P^-2(1+P:P)P^mn+beta H^mn+A^(m zeta^n)=0; Pi^{r|mn}=A^r dotP^mn-c_P^2 D^r P^mn",
+  "carrier_momentum_directional_relative_error": 3.9096442372703534e-10,
+  "data_policy": {
+    "authorization": "covariant variation, constraint rank and Noether identity only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v10c_to_nonlinear_ADM_constraint_gate",
+  "euler_derivative_order": {
+    "A": 2,
+    "P": 2,
+    "metric": 2,
+    "multipliers": 0,
+    "scalar_explicit_addition": 0
+  },
+  "fixed_values": {
+    "carrier_speed_squared": 0.2727272727272727
+  },
+  "full_metric_stress_expanded_componentwise": false,
+  "gates": {
+    "DP_is_spatial_in_carrier_indices": true,
+    "DP_is_spatial_in_derivative_index": true,
+    "dotP_is_spatial_in_both_carrier_indices": true,
+    "first_order_action_has_at_most_second_order_euler_equations": true,
+    "momentum_time_projection_recovers_dotP": true,
+    "off_shell_diffeomorphism_identity_includes_all_fields": true,
+    "single_minimally_coupled_matter_metric_retained": true,
+    "spatiality_constraint_leaves_six_components": true,
+    "tilted_projected_momentum_matches_finite_difference": true
+  },
+  "interaction_aether_euler_term": "beta nabla_r(A^r C^s)-beta C^n nabla^s A_n, C^n=nabla_m P^mn",
+  "interaction_first_order_form": "beta P^mn nabla_m J_n = -beta (nabla_m P^mn)J_n + boundary",
+  "metric_stress_definition": "T_10C_mn=-2/sqrt(-g) delta[sqrt(-g) DeltaL_10C]/delta g^mn",
+  "nonlinear_ADM_constraint_count_complete": false,
+  "observational_data_accessed": false,
+  "off_shell_noether_identity": "-2 nabla_m E_g^m_n + E_A_m nabla_n A^m + nabla_m(E_A_n A^m)+E_P^ab nabla_n P_ab-2 nabla_a(E_P^ab P_nb)+E_phi nabla_n phi+E_lambda nabla_n lambda+E_zeta_m nabla_n zeta^m+nabla_m(E_zeta_n zeta^m)=0",
+  "raw_holdout_opened": false,
+  "reason": "The exact projected carrier momentum passes a tilted-background finite-difference check, four spatiality constraints leave six carrier components, the interaction has a first-derivative boundary form, every Euler equation is at most second order, and the all-field Noether identity closes conservation on shell.",
+  "scope": "This is not a degree-of-freedom or hyperbolicity proof. The nonlinear velocity Hessian, primary/secondary constraints, arbitrary-background cones, component-expanded metric stress tensor and PPN solution remain mandatory.",
+  "spatiality_constraint": {
+    "constraint_rank": 4,
+    "spatial_carrier_components": 6,
+    "symmetric_tensor_components": 10
+  },
+  "status": "completed Sigma v10C covariant-variation subgate",
+  "tilted_background": {
+    "aether": [
+      1.076389472867711,
+      0.3982641049610531,
+      0.0,
+      0.0
+    ],
+    "unit_norm": -1.0,
+    "velocity": 0.37
+  }
+}
