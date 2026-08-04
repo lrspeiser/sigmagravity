@@ -224,6 +224,8 @@ def fit_cluster(cluster: dict, config: dict) -> dict[str, Any]:
 
     return {
         "cluster": cluster_name,
+        "fit_completed": True,
+        "fit_exception": "",
         "source_spectrum": str(source_pha),
         "source_spectrum_sha256": sha256(source_pha),
         "background_spectrum": str(background_pha),
@@ -278,7 +280,46 @@ def fit_cluster(cluster: dict, config: dict) -> dict[str, Any]:
     }
 
 
+def failed_cluster_result(cluster: dict, exc: Exception) -> dict[str, Any]:
+    """Retain an attempted integrated fit as an explicit failed gate row."""
+
+    return {
+        "cluster": cluster["cluster"],
+        "fit_completed": False,
+        "fit_exception": f"{type(exc).__name__}: {exc}",
+        "parameters": {
+            "nH_1e22_cm2_fixed": None,
+            "redshift_fixed": None,
+            "temperature_keV": None,
+            "abundance_solar": None,
+            "normalization": None,
+        },
+        "temperature_confidence_68_percent": {
+            "lower_delta_keV": None,
+            "upper_delta_keV": None,
+            "lower_keV": None,
+            "upper_keV": None,
+            "error": f"fit execution failed: {type(exc).__name__}: {exc}",
+            "raw": None,
+        },
+        "fit": {
+            "statval": None,
+            "dof": None,
+            "reduced_statistic": None,
+            "raw": None,
+        },
+        "gates": {
+            "finite_temperature_abundance_and_interval": False,
+            "reduced_statistic_at_most_1_5": False,
+            "published_temperature_difference_at_most_20_percent": False,
+            "all_passed": False,
+        },
+    }
+
+
 def main() -> None:
+    from sherpa.utils.err import SherpaErr
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     parser.add_argument("--spectra", type=Path, default=DEFAULT_SPECTRA)
@@ -296,8 +337,15 @@ def main() -> None:
     if spectra["config_sha256"] != sha256(config_path):
         raise RuntimeError("frozen spectral config changed after extraction")
 
-    fits = [fit_cluster(cluster, config) for cluster in spectra["clusters"]]
-    all_passed = all(row["gates"]["all_passed"] for row in fits)
+    fits = []
+    for cluster in spectra["clusters"]:
+        try:
+            fits.append(fit_cluster(cluster, config))
+        except (SherpaErr, RuntimeError, TypeError, ValueError, OSError) as exc:
+            fits.append(failed_cluster_result(cluster, exc))
+    all_passed = all(
+        row["fit_completed"] and row["gates"]["all_passed"] for row in fits
+    )
     report = {
         "status": "both_integrated_temperature_gates_passed"
         if all_passed
@@ -318,6 +366,13 @@ def main() -> None:
     report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(report_path)
     for row in fits:
+        if not row["fit_completed"]:
+            print(
+                f"{row['cluster']}: fit execution failed; pass=False; "
+                f"{row['fit_exception']}",
+                flush=True,
+            )
+            continue
         parameters = row["parameters"]
         print(
             f"{row['cluster']}: kT={parameters['temperature_keV']:.4f} keV, "

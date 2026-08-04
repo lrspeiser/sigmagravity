@@ -92,3 +92,22 @@ def test_regional_gate_calculation_is_frozen_before_data_exist() -> None:
     assert '"thermal_stress_construction_authorized": all_passed' in source
     assert '"thermal_stress_constructed": False' in source
     assert '"lensing_target_opened": False' in source
+
+
+def test_regional_fit_exception_is_retained_and_cannot_authorize_a_map() -> None:
+    module = _load_module()
+    row = module.failed_region_result(
+        "PLCKG287",
+        {
+            "region_id": 7,
+            "source_region": "region_007.reg",
+            "source_region_sha256": "abc",
+        },
+        RuntimeError("optimizer failed"),
+    )
+
+    assert row["region_id"] == 7
+    assert row["fit_completed"] is False
+    assert row["parameters"]["temperature_keV"] is None
+    assert row["gates"]["all_passed"] is False
+    assert "RuntimeError: optimizer failed" in row["fit_exception"]

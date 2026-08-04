@@ -149,3 +149,14 @@ def test_integrated_fitter_implements_the_frozen_model_and_failure_gate() -> Non
     assert "raise SystemExit(2)" in source
     assert fitter.finite_number(1.0) is True
     assert fitter.finite_number(float("nan")) is False
+
+
+def test_integrated_fit_exception_is_retained_as_a_failed_cluster() -> None:
+    fitter = _load_fitter()
+    row = fitter.failed_cluster_result({"cluster": "AS295"}, RuntimeError("boom"))
+
+    assert row["cluster"] == "AS295"
+    assert row["fit_completed"] is False
+    assert row["parameters"]["temperature_keV"] is None
+    assert row["gates"]["all_passed"] is False
+    assert "RuntimeError: boom" in row["fit_exception"]

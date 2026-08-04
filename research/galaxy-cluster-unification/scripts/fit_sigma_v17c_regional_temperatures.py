@@ -163,6 +163,8 @@ def fit_region(
     return {
         "cluster": cluster_name,
         "region_id": rid,
+        "fit_completed": True,
+        "fit_exception": "",
         "source_region": region["source_region"],
         "source_region_sha256": region["source_region_sha256"],
         "source_spectrum": str(source_pha),
@@ -246,6 +248,52 @@ def fit_region(
     }
 
 
+def failed_region_result(
+    cluster_name: str,
+    region: dict,
+    exc: Exception,
+) -> dict[str, Any]:
+    """Retain an attempted region as an explicit failed row without refitting it."""
+
+    return {
+        "cluster": cluster_name,
+        "region_id": int(region["region_id"]),
+        "fit_completed": False,
+        "fit_exception": f"{type(exc).__name__}: {exc}",
+        "source_region": region.get("source_region"),
+        "source_region_sha256": region.get("source_region_sha256"),
+        "parameters": {
+            "nH_1e22_cm2_fixed": None,
+            "redshift_fixed": None,
+            "temperature_keV": None,
+            "abundance_solar_fixed_to_integrated": None,
+            "normalization": None,
+        },
+        "temperature_confidence_68_percent": {
+            "lower_delta_keV": None,
+            "upper_delta_keV": None,
+            "lower_keV": None,
+            "upper_keV": None,
+            "fractional_half_width_definition": "(upper-lower)/(2*best_fit_temperature)",
+            "fractional_half_width": None,
+            "error": f"fit execution failed: {type(exc).__name__}: {exc}",
+            "raw": None,
+        },
+        "fit": {
+            "statval": None,
+            "dof": None,
+            "reduced_statistic": None,
+            "raw": None,
+        },
+        "gates": {
+            "finite_temperature_and_interval": False,
+            "fractional_68_percent_half_width_at_most_0_5": False,
+            "reduced_statistic_at_most_1_5": False,
+            "all_passed": False,
+        },
+    }
+
+
 def validate_inputs(
     config_path: Path,
     config: dict,
@@ -276,6 +324,8 @@ def validate_inputs(
 
 
 def main() -> None:
+    from sherpa.utils.err import SherpaErr
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     parser.add_argument("--spectra", type=Path, default=DEFAULT_SPECTRA)
@@ -303,24 +353,40 @@ def main() -> None:
     minimum_passing = int(config["gates"]["regional"]["minimum_passing_regions_per_cluster"])
     for cluster in spectra["clusters"]:
         cluster_name = cluster["cluster"]
-        fits = [
-            fit_region(
-                cluster_name,
-                region,
-                config,
-                integrated_by_cluster[cluster_name],
-            )
-            for region in cluster["regions"]
-        ]
+        fits = []
+        for region in cluster["regions"]:
+            try:
+                fits.append(
+                    fit_region(
+                        cluster_name,
+                        region,
+                        config,
+                        integrated_by_cluster[cluster_name],
+                    )
+                )
+            except (SherpaErr, RuntimeError, TypeError, ValueError, OSError) as exc:
+                fits.append(failed_region_result(cluster_name, region, exc))
         passing = sum(int(row["gates"]["all_passed"]) for row in fits)
-        cluster_passed = passing >= minimum_passing
+        minimum_passed = passing >= minimum_passing
+        all_regions_fit_completed = all(row["fit_completed"] for row in fits)
+        all_regions_have_finite_best_fit = all(
+            finite_number(row["parameters"]["temperature_keV"]) for row in fits
+        )
+        cluster_passed = bool(
+            minimum_passed
+            and all_regions_fit_completed
+            and all_regions_have_finite_best_fit
+        )
         cluster_results.append(
             {
                 "cluster": cluster_name,
                 "regions_fitted": len(fits),
                 "regions_passing_all_individual_gates": passing,
                 "minimum_passing_regions_required": minimum_passing,
-                "minimum_passing_regions_gate": cluster_passed,
+                "minimum_passing_regions_gate": minimum_passed,
+                "all_regions_fit_completed": all_regions_fit_completed,
+                "all_regions_have_finite_best_fit": all_regions_have_finite_best_fit,
+                "regional_temperature_gate": cluster_passed,
                 "regions": fits,
             }
         )
@@ -329,7 +395,7 @@ def main() -> None:
             f"minimum required={minimum_passing}",
             flush=True,
         )
-    all_passed = all(row["minimum_passing_regions_gate"] for row in cluster_results)
+    all_passed = all(row["regional_temperature_gate"] for row in cluster_results)
     report = {
         "status": "both_regional_temperature_gates_passed"
         if all_passed
