@@ -117,7 +117,7 @@ def closest_published_families(text: str) -> list[str]:
             ),
             ("EINSTEIN-AETHER", "AEST-MOND"),
         ),
-        (("scalar metric slip", "two-potential", "metric lens"), ("TEVES",)),
+        (("scalar metric slip", "two-potential", "metric lens", "teves"), ("TEVES",)),
         (("coherence length",), ("AEST-MOND", "EMOND")),
         (("covariant weak-field metric",), ("BRANS-DICKE", "TEVES")),
         (("member vector", "member tidal", "tidal metric"), ("GR-EINSTEIN", "TEVES")),

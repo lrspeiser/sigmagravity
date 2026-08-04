@@ -1,0 +1,97 @@
+{
+  "decision": {
+    "novelty": "The coefficient family is prior art. Only a successful universal pressure/susceptibility-to-halo prediction could be project-specific.",
+    "outcome": "advance_to_localized_tilted_constraint_gate_only",
+    "scope": "A pass selects a known healthy flat-vacuum aether skeleton for the Sigma pressure metric. It does not validate the derivative-dependent matter coupling, Solar solution, strong-field behavior, or halo data."
+  },
+  "empirical_fit_performed": false,
+  "family_identity_scan": {
+    "epsilon_maximum": 0.0001,
+    "epsilon_minimum": 1e-12,
+    "maximum_alpha_1_plus_4epsilon_error": 5.421010862427522e-20,
+    "maximum_alpha_2_absolute_error": 5.421010862427522e-20,
+    "maximum_mode_identity_errors": {
+      "spin_0_squared": 6.661338147750939e-16,
+      "spin_1_squared": 0.0,
+      "spin_2_squared": 0.0
+    },
+    "sample_count": 801,
+    "selection_pass_count": 618,
+    "symbolic_relations_verified_numerically": true
+  },
+  "fixed_carrier": {
+    "coefficients": {
+      "c_1": 1e-07,
+      "c_123": 1.0000002000000399e-07,
+      "c_13": 0.0,
+      "c_14": 1e-07,
+      "c_2": 1.00000020000004e-07,
+      "c_3": -1e-07,
+      "c_4": 0.0
+    },
+    "energy_sign_proxies": {
+      "spin_0": 1.9999998999999998e-07,
+      "spin_1": 2e-07
+    },
+    "epsilon": 1e-07,
+    "gates": {
+      "all_modes_luminal_pass": true,
+      "all_selection_gates_pass": true,
+      "alpha_1_pass": true,
+      "alpha_2_pass": true,
+      "c_13_pass": true,
+      "c_14_pass": true,
+      "newtonian_shift_pass": true,
+      "spin_0_energy_pass": true,
+      "spin_1_energy_pass": true
+    },
+    "maximum_mode_speed_squared_deviation_from_one": 0.0,
+    "mode_speeds": {
+      "spin_0_squared": 1.0,
+      "spin_1_squared": 1.0,
+      "spin_2_squared": 1.0
+    },
+    "newtonian_coupling": {
+      "G_N_over_G": 1.0000000500000026,
+      "denominator_1_minus_c14_over_2": 0.99999995,
+      "fractional_shift": 5.0000002582706315e-08
+    },
+    "standard_aether_ppn_at_X_zero": {
+      "alpha_1": -3.9999999999999993e-07,
+      "alpha_2": 2.6469779601696886e-23,
+      "beta": 1.0,
+      "gamma": 1.0
+    }
+  },
+  "gates": {
+    "all_modes_luminal_pass": true,
+    "all_selection_gates_pass": true,
+    "alpha_1_pass": true,
+    "alpha_2_pass": true,
+    "c_13_pass": true,
+    "c_14_pass": true,
+    "carrier_selection_pass": true,
+    "constant_budget_pass": true,
+    "family_identities_pass": true,
+    "holdout_authorized": false,
+    "newtonian_shift_pass": true,
+    "no_observational_data_used": true,
+    "one_physical_metric": true,
+    "spin_0_energy_pass": true,
+    "spin_1_energy_pass": true
+  },
+  "generated_utc": "2026-08-04T22:35:08.325757+00:00",
+  "limitations": {
+    "full_Sigma_PPN_solution_computed": false,
+    "full_derivative_metric_constraint_matrix_computed": false,
+    "halo_radius_or_lensing_prediction_made": false,
+    "strong_field_sensitivities_computed": false,
+    "target_blind_aether_acceleration_map_computed": false,
+    "tilted_or_matter_background_characteristics_computed": false
+  },
+  "observational_data_opened": false,
+  "protocol": "configs/sigma_v17k_luminal_aether_pressure_carrier.json",
+  "protocol_sha256": "26ae41826eaae00e8d91e1a63eb76f90f406f71507b062204abf3677e8139a61",
+  "report_version": "SIGMA-V17K-LUMINAL-AETHER-PRESSURE-CARRIER-1.0.0",
+  "status": "passed_carrier_selection"
+}

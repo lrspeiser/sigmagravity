@@ -221,3 +221,20 @@ def test_v17j_flat_kinetic_falsification_is_registered_as_aether_prior_art() -> 
         "EINSTEIN-AETHER" in fragment["published_overlap_ids"]
         for fragment in characteristic_fragments
     )
+
+
+def test_v17k_luminal_carrier_is_registered_as_published_aether_completion() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17k = protocols["sigma_v17k_luminal_aether_pressure_carrier.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17k["formula_fragments"]
+    )
+
+    assert "c_1=epsilon, c_3=-epsilon, c_4=0" in fragment_text
+    assert "s_2^2=1, s_1^2=1, s_0^2=1" in fragment_text
+    assert {"EINSTEIN-AETHER", "TEVES", "DISFORMAL-METRIC"}.issubset(
+        set(v17k["published_overlap_ids"])
+    )

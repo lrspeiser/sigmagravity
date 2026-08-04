@@ -1,0 +1,101 @@
+{
+  "protocol_version": "SIGMA-V17K-LUMINAL-AETHER-PRESSURE-CARRIER-1.0.0",
+  "status": "frozen before executing the v17K selection audit and without opening any observational target",
+  "purpose": "Replace the falsified v17H Born-Infeld acceleration carrier with a materially distinct, published luminal Einstein-aether kinetic skeleton while retaining the project-specific pressure-sourced susceptibility in the single physical matter metric. Test only flat-vacuum modes, the standard weak-field PPN skeleton, complexity, and the prior-art boundary.",
+  "parent": {
+    "protocol": "configs/sigma_v17j_flat_kinetic_gate.json",
+    "sha256": "4d1994867d7c1284bbb4c9bdad66515148f5cc770752a5729d53f3a1190cc489",
+    "report": "results/sigma_v17j_flat_kinetic_gate/report.json",
+    "report_sha256": "556c43704801d94f90c0ed38726c10351365b7c42a78e103f149dc204afed082"
+  },
+  "authorization": {
+    "observational_data_opened": false,
+    "empirical_fit_authorized": false,
+    "holdout_authorized": false,
+    "allowed_outcome": "advance only to localization and tilted-background constraints if every carrier-selection gate passes"
+  },
+  "candidate_action": {
+    "action_class": "Published luminal Einstein-aether kinetic family carrying a TeVeS-like pressure-sourced derivative-disformal physical metric",
+    "action_under_test": "S=integral sqrt(-g){M_Pl^2 R/2-M_Pl^2[(grad X)^2+L_sigma^-2 X^2]/2-(M_Pl^2/2)[c_1 nabla_m U_n nabla^m U^n+c_2(nabla.U)^2+c_3 nabla_m U_n nabla^n U^m-c_4 A_m A^m]+lambda(U^2+1)}+S_m[g_tilde,psi]",
+    "aether_acceleration": "A_m=U^n nabla_n U_m and Z=c^4 A_m A^m/a_sigma^2",
+    "susceptibility": "chi(Z)=(1+Z)^(-1/4)",
+    "matter_action": "All matter and photons use g_tilde_mn=exp(2 alpha chi(Z) X)[g_mn+2 alpha chi(Z) X U_m U_n]",
+    "euler_lagrange_source": "At X=0, variation of the one physical metric gives M_Pl^2(Box-L_sigma^-2)X+alpha chi J=0 with J=T+E=3p for a comoving isotropic fluid and J=0 for cold dust.",
+    "one_metric_response": "Psi=U_N, Phi=U_N-c^2 alpha chi X, and W=(Phi+Psi)/2=U_N-c^2 alpha chi X/2 at leading weak-field order.",
+    "projected_halo_diagnostic": "Conditionally, (1-L_sigma^2 nabla_perp^2)s_sigma is proportional to chi(Z)J_T and delta W is proportional to alpha chi(Z)s_sigma; measured stress extent and the target-blind aether acceleration map must determine the apparent halo radius.",
+    "physical_postulate": "The aether supplies a healthy local timelike frame and its acceleration invariant labels how efficiently baryonic random stress couples to metric slip. The screen is in the universal matter metric, not in a negative kinetic energy density.",
+    "born_infeld_acceleration_density_present": false,
+    "claim_boundary": "The luminal aether coefficient family, its mode speeds, and its PPN parameters are published prior art. Only the pressure-source/susceptibility coupling and successful universal halo predictions, if any, could be project-specific."
+  },
+  "fixed_coefficients": {
+    "epsilon_aether": 1e-7,
+    "epsilon_was_fit_to_data": false,
+    "equations": "c_1=epsilon, c_3=-epsilon, c_4=0, c_2=epsilon/(1-2epsilon)",
+    "selection_rationale": "This exact published family makes every flat aether/gravity mode luminal and alpha_2=0. epsilon=1e-7 gives |alpha_1|=4e-7, fifteen times below the declared weak-field |alpha_1| limit, without using galaxy or cluster data.",
+    "susceptibility_exponent": -0.25,
+    "susceptibility_exponent_is_fitted": false,
+    "a_sigma_m_s2": 1.2e-10,
+    "conditional_propagation_length": "Use no L_sigma if v17F selects zero; otherwise use its one common frozen value without object refitting."
+  },
+  "analytic_relations": {
+    "equations": "c_13=0, c_14=epsilon, c_123=c_2; s_2^2=1, s_1^2=1, s_0^2=1; alpha_1=-4epsilon, alpha_2=0; gamma=beta=1 for the minimally coupled standard aether skeleton",
+    "mode_speed_formulas": "s_2^2=1/(1-c_13); s_1^2=(2c_1-c_1^2+c_3^2)/[2c_14(1-c_13)]; s_0^2=c_123(2-c_14)/[c_14(1-c_13)(2+c_13+3c_2)]",
+    "ppn_formulas": "alpha_1=-8(c_3^2+c_1 c_4)/(2c_1-c_1^2+c_3^2); alpha_2=alpha_1/2-(c_1+2c_3-c_4)(2c_1+3c_2+c_3+c_4)/[c_123(2-c_14)]",
+    "energy_signs": "spin-1 energy has sign (2c_1-c_1^2+c_3^2)/(1-c_13)=2epsilon; spin-0 energy has sign c_14(2-c_14)=epsilon(2-epsilon), both positive for 0<epsilon<1/2.",
+    "newtonian_coupling": "G_N=G/(1-c_14/2)=G/(1-epsilon/2)",
+    "physical_metric_qualification": "gamma=beta=1 and the alpha values are properties of the standard aether skeleton at X=0. They are not a full PPN result for the derivative-dependent physical metric on a sourced Solar background."
+  },
+  "selection_bounds": {
+    "maximum_abs_c_13": 1e-15,
+    "maximum_abs_alpha_1": 6e-6,
+    "maximum_abs_alpha_2": 1e-7,
+    "maximum_c_14": 2.5e-5,
+    "maximum_mode_speed_squared_deviation_from_one": 1e-12,
+    "minimum_spin_1_energy_sign_proxy": 0.0,
+    "minimum_spin_0_energy_sign_proxy": 0.0,
+    "maximum_newtonian_coupling_fractional_shift": 1e-6,
+    "bounds_scope": "Theory-selection controls from the cited weak-field/GW Einstein-aether literature; strong-field sensitivities and the full Sigma matter metric remain mandatory."
+  },
+  "executable_audit": {
+    "epsilon_log_minimum": 1e-12,
+    "epsilon_log_maximum": 1e-4,
+    "epsilon_samples": 801,
+    "identity_tolerance": 1e-12,
+    "symbolic_family_interval": "0<epsilon<1/2"
+  },
+  "mandatory_next_gates": [
+    "Localize A_m in the derivative-dependent matter metric and derive the full reciprocal Euler system without the v17H Born-Infeld density.",
+    "Compute the full kinetic/constraint matrix on tilted, time-dependent backgrounds with nonzero X and representative matter stress; the flat vacuum pass is insufficient.",
+    "Derive gamma, beta, alpha_1, alpha_2, Mercury, and Shapiro delay from the complete screened Solar solution, not the bare aether skeleton.",
+    "Compute strong-field sensitivities and radiation losses before claiming binary-pulsar consistency.",
+    "Construct A_m and Z from a target-blind three-dimensional baryonic/aether solution; an inferred halo or lensing map may not define the screen.",
+    "Only after the mathematical and Solar gates may alpha and any common L_sigma be frozen on development systems and applied to untouched raw lensing clusters."
+  ],
+  "decision_rule": [
+    "Advance only if all three flat mode speeds are finite, positive, and luminal; both aether energy-sign proxies are positive; c_13, alpha_1, alpha_2, c_14, and the Newtonian shift satisfy the frozen bounds; and no observational data were used.",
+    "A selection pass establishes only a viable carrier skeleton. It does not establish health of the derivative-dependent matter metric, a full PPN pass, or a halo prediction.",
+    "If localization or the tilted principal symbol loses rank, develops an unbounded mode, or changes the physical characteristic cone, retire this coupling rather than retuning epsilon after data.",
+    "Do not claim novelty for the coefficient family. The project must be distinguished by a new falsifiable pressure-to-halo relationship using one physical metric and universal constants."
+  ],
+  "prior_art_primary_sources": [
+    "https://arxiv.org/abs/gr-qc/0402005",
+    "https://arxiv.org/abs/gr-qc/0507059",
+    "https://arxiv.org/abs/0801.1547",
+    "https://arxiv.org/abs/1802.04303",
+    "https://arxiv.org/abs/astro-ph/0403694",
+    "https://arxiv.org/abs/1308.4685",
+    "https://arxiv.org/abs/1210.3026"
+  ],
+  "complexity": {
+    "candidate_constants": [
+      "a_sigma shared with the galaxy sector",
+      "alpha",
+      "epsilon_aether",
+      "L_sigma only if independently selected by v17F"
+    ],
+    "maximum_candidate_constants": 4,
+    "one_physical_metric": true,
+    "per_object_gravity_constants": 0,
+    "lensing_only_constants": 0
+  }
+}

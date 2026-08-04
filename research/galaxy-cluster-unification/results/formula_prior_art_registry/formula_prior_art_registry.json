@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 93,
+    "sigma_protocols": 94,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 84,
+    "sigma_formula_fragments": 91,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -6017,6 +6017,80 @@
         "TEVES"
       ],
       "sha256": "4d1994867d7c1284bbb4c9bdad66515148f5cc770752a5729d53f3a1190cc489"
+    },
+    {
+      "config": "configs/sigma_v17k_luminal_aether_pressure_carrier.json",
+      "protocol_version": "SIGMA-V17K-LUMINAL-AETHER-PRESSURE-CARRIER-1.0.0",
+      "status": "frozen before executing the v17K selection audit and without opening any observational target",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "candidate_action.action_class",
+          "formula": "Published luminal Einstein-aether kinetic family carrying a TeVeS-like pressure-sourced derivative-disformal physical metric",
+          "published_overlap_ids": [
+            "DISFORMAL-METRIC",
+            "EINSTEIN-AETHER",
+            "AEST-MOND",
+            "TEVES"
+          ]
+        },
+        {
+          "json_path": "candidate_action.action_under_test",
+          "formula": "S=integral sqrt(-g){M_Pl^2 R/2-M_Pl^2[(grad X)^2+L_sigma^-2 X^2]/2-(M_Pl^2/2)[c_1 nabla_m U_n nabla^m U^n+c_2(nabla.U)^2+c_3 nabla_m U_n nabla^n U^m-c_4 A_m A^m]+lambda(U^2+1)}+S_m[g_tilde,psi]",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        },
+        {
+          "json_path": "candidate_action.matter_action",
+          "formula": "All matter and photons use g_tilde_mn=exp(2 alpha chi(Z) X)[g_mn+2 alpha chi(Z) X U_m U_n]",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        },
+        {
+          "json_path": "candidate_action.euler_lagrange_source",
+          "formula": "At X=0, variation of the one physical metric gives M_Pl^2(Box-L_sigma^-2)X+alpha chi J=0 with J=T+E=3p for a comoving isotropic fluid and J=0 for cold dust.",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        },
+        {
+          "json_path": "candidate_action.one_metric_response",
+          "formula": "Psi=U_N, Phi=U_N-c^2 alpha chi X, and W=(Phi+Psi)/2=U_N-c^2 alpha chi X/2 at leading weak-field order.",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        },
+        {
+          "json_path": "fixed_coefficients.equations",
+          "formula": "c_1=epsilon, c_3=-epsilon, c_4=0, c_2=epsilon/(1-2epsilon)",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        },
+        {
+          "json_path": "analytic_relations.equations",
+          "formula": "c_13=0, c_14=epsilon, c_123=c_2; s_2^2=1, s_1^2=1, s_0^2=1; alpha_1=-4epsilon, alpha_2=0; gamma=beta=1 for the minimally coupled standard aether skeleton",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        }
+      ],
+      "formula_fragment_count": 7,
+      "published_overlap_ids": [
+        "DISFORMAL-METRIC",
+        "EINSTEIN-AETHER",
+        "AEST-MOND",
+        "TEVES"
+      ],
+      "sha256": "26ae41826eaae00e8d91e1a63eb76f90f406f71507b062204abf3677e8139a61"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",
