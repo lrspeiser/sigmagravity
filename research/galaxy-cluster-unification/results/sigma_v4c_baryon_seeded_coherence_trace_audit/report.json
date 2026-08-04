@@ -1,0 +1,306 @@
+{
+  "all_preregistered_gates_pass": false,
+  "broad_power": [
+    {
+      "cluster": "AS295",
+      "correction_power_fraction_wavelength_ge_50kpc": 0.9999938668453813
+    },
+    {
+      "cluster": "PLCKG287",
+      "correction_power_fraction_wavelength_ge_50kpc": 0.9999924872778588
+    }
+  ],
+  "claim_boundary": [
+    "This is a projected source-level discriminator on two already-spent maps; it is not a covariant theory, empirical validation, or evidence against dark matter.",
+    "The compact-halo target is a fitted decomposition containing external shear, not direct pixel truth.",
+    "The lens-plane vector scale and use of convergence must be derived from physical four-dimensional quantities if the gate passes.",
+    "The static two-dimensional Helmholtz branch is not yet a causal four-dimensional propagation law.",
+    "A passing morphology test would justify an action derivation, not an untouched holdout.",
+    "No untouched galaxy or cluster evidence may be opened."
+  ],
+  "config_sha256": "0976e90217b3c1c162594aa7cf1326b08a6c385e652aa5cea46e62f83905f559",
+  "cross_transfer": [
+    {
+      "normalized_RMSE": 0.8260976721608682,
+      "tested_on": "PLCKG287",
+      "trained_on": "AS295"
+    },
+    {
+      "normalized_RMSE": 1.0173772711726716,
+      "tested_on": "AS295",
+      "trained_on": "PLCKG287"
+    }
+  ],
+  "decision": "retire_exact_v4c_baryon_seeded_coherence_trace",
+  "gates": {
+    "broad_correction_power": true,
+    "cross_cluster_transfer": false,
+    "each_cluster_twenty_percent_improvement": false,
+    "every_cluster_channel_improves": false,
+    "helmholtz_equation": true,
+    "high_field_suppression": true,
+    "joint_map_accuracy": false,
+    "nonnegative_trace": true,
+    "padding_stability": true,
+    "parameters_interior": false,
+    "positive_physical_sign": true,
+    "rotation_covariance": true,
+    "trace_integral": true,
+    "uniform_vector_null": true
+  },
+  "independent_training_fits": {
+    "AS295": {
+      "L_sigma_kpc": 133.09776085338095,
+      "ell_sigma_kpc": 299.99999999999994,
+      "eta_sigma": 8.806748657244059,
+      "function_evaluations": 666,
+      "normalized_RMSE": 0.8596371769302996,
+      "optimizer_message": "Optimization terminated successfully.",
+      "optimizer_success": true,
+      "per_channel": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8994374970022173,
+          "channel": "convergence",
+          "cluster": "AS295",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.851396065775024
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.953889540426961,
+          "channel": "shear_1",
+          "cluster": "AS295",
+          "improved": false,
+          "prediction_normalized_RMSE": 0.9698292731716459
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8415130697001787,
+          "channel": "shear_2",
+          "cluster": "AS295",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.7426197869463579
+        }
+      ],
+      "per_cluster": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8994511868959854,
+          "cluster": "AS295",
+          "fraction_of_AQUAL_baseline": 0.9557352188248434,
+          "prediction_normalized_RMSE": 0.8596371769302996
+        }
+      ],
+      "unconstrained_eta_sigma": 8.806748657244059
+    },
+    "PLCKG287": {
+      "L_sigma_kpc": 36.124242446712,
+      "ell_sigma_kpc": 299.99707496835265,
+      "eta_sigma": 16.59345085953383,
+      "function_evaluations": 646,
+      "normalized_RMSE": 0.6737592598478565,
+      "optimizer_message": "Optimization terminated successfully.",
+      "optimizer_success": true,
+      "per_channel": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.9180688488874194,
+          "channel": "convergence",
+          "cluster": "PLCKG287",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.682257930666143
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.9444782715588886,
+          "channel": "shear_1",
+          "cluster": "PLCKG287",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.7269194717071032
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8833488218015043,
+          "channel": "shear_2",
+          "cluster": "PLCKG287",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.60660268577415
+        }
+      ],
+      "per_cluster": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.9156408971721106,
+          "cluster": "PLCKG287",
+          "fraction_of_AQUAL_baseline": 0.7358335150043125,
+          "prediction_normalized_RMSE": 0.6737592598478565
+        }
+      ],
+      "unconstrained_eta_sigma": 16.59345085953383
+    }
+  },
+  "manufactured_checks": {
+    "helmholtz_equation_relative_residual": 2.3753758473117566e-14,
+    "high_field_seed_fraction_after_1000x_vector_scaling": 1.000099740102881e-06,
+    "minimum_trace_state_over_trace_RMS": 0.924266975189035,
+    "rotation_covariance_relative_error": 2.0855539164865731e-16,
+    "trace_integral_mismatch_fraction": 2.6711473584136724e-16,
+    "uniform_vector_maximum_directional_variance": 0.0
+  },
+  "padding_sensitivity_fractional_change_in_joint_RMSE": 0.0005517273738143996,
+  "padding_sensitivity_shared_fit": {
+    "L_sigma_kpc": 52.066569280569446,
+    "ell_sigma_kpc": 299.99999999999994,
+    "eta_sigma": 9.940899629961383,
+    "function_evaluations": 786,
+    "normalized_RMSE": 0.8142879605074628,
+    "optimizer_message": "Optimization terminated successfully.",
+    "optimizer_success": true,
+    "per_channel": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994374970022173,
+        "channel": "convergence",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8705801612928181
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.953889540426961,
+        "channel": "shear_1",
+        "cluster": "AS295",
+        "improved": false,
+        "prediction_normalized_RMSE": 1.04605352349876
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8415130697001787,
+        "channel": "shear_2",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.7383608208461658
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9180688488874194,
+        "channel": "convergence",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.7344265371330773
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9444782715588886,
+        "channel": "shear_1",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.7906776064561153
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8833488218015043,
+        "channel": "shear_2",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.6453846813696007
+      }
+    ],
+    "per_cluster": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994511868959854,
+        "cluster": "AS295",
+        "fraction_of_AQUAL_baseline": 0.9938578649726257,
+        "prediction_normalized_RMSE": 0.8939266362555381
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9156408971721106,
+        "cluster": "PLCKG287",
+        "fraction_of_AQUAL_baseline": 0.7928488473366416,
+        "prediction_normalized_RMSE": 0.7259648298971964
+      }
+    ],
+    "unconstrained_eta_sigma": 9.940899629961383
+  },
+  "parent_config_sha256": "77762bf4096decf1c88a2c7131166fde48bf72840eb74b21ec6551cb82c608c5",
+  "primary_shared_fit": {
+    "L_sigma_kpc": 52.303853228011704,
+    "ell_sigma_kpc": 299.9992540352784,
+    "eta_sigma": 9.988947194338918,
+    "function_evaluations": 843,
+    "normalized_RMSE": 0.8147374734740508,
+    "optimizer_message": "Optimization terminated successfully.",
+    "optimizer_success": true,
+    "per_channel": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994374970022173,
+        "channel": "convergence",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8706198775257871
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.953889540426961,
+        "channel": "shear_1",
+        "cluster": "AS295",
+        "improved": false,
+        "prediction_normalized_RMSE": 1.0474565984484558
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8415130697001787,
+        "channel": "shear_2",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.7378679290102893
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9180688488874194,
+        "channel": "convergence",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.7341740312800445
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9444782715588886,
+        "channel": "shear_1",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.7906303802360162
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8833488218015043,
+        "channel": "shear_2",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.6473651367667088
+      }
+    ],
+    "per_cluster": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994511868959854,
+        "cluster": "AS295",
+        "fraction_of_AQUAL_baseline": 0.994330132840152,
+        "prediction_normalized_RMSE": 0.8943514181495176
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9156408971721106,
+        "cluster": "PLCKG287",
+        "fraction_of_AQUAL_baseline": 0.7933788969425858,
+        "prediction_normalized_RMSE": 0.7264501649939288
+      }
+    ],
+    "unconstrained_eta_sigma": 9.988947194338918
+  },
+  "raw_holdout_opened": false,
+  "sample_is_spent": true,
+  "source_statistics": [
+    {
+      "baryon_weighted_directional_disorder": 0.2945668034734116,
+      "baryon_weighted_high_field_activation": 0.9930833945422763,
+      "baryonic_seed_fraction_of_cropped_baryon_sum": 0.29284014886028137,
+      "cluster": "AS295",
+      "cropped_trace_RMS": 0.011747260405376575,
+      "minimum_full_trace_over_RMS": 1.2953848340612617e-05,
+      "minimum_raw_directional_variance": 79.44551404509377,
+      "trace_integral_mismatch_fraction": 6.817928065996335e-16
+    },
+    {
+      "baryon_weighted_directional_disorder": 0.2935004788754866,
+      "baryon_weighted_high_field_activation": 0.9878381046927566,
+      "baryonic_seed_fraction_of_cropped_baryon_sum": 0.2904019409746468,
+      "cluster": "PLCKG287",
+      "cropped_trace_RMS": 0.01709178103921005,
+      "minimum_full_trace_over_RMS": 4.328530490282136e-05,
+      "minimum_raw_directional_variance": 152.56634041459438,
+      "trace_integral_mismatch_fraction": 5.97715939676643e-16
+    }
+  ],
+  "status": "completed Sigma v4C baryon-seeded coherence-trace audit"
+}

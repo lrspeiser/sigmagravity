@@ -37,15 +37,17 @@ metric slip and is exactly AQUAL.  It passes the external dwarf-galaxy gate and
 fails the inherited raw cluster topology gate, so it is retired without
 fitting.  The next action must contain a baryon-predictable anisotropic-stress
 state rather than another scalar interpolation.
-The latest action-mechanism result is
-[`docs/SIGMA_V4B_VECTOR_STRESS_MEMORY_RESULTS.md`](docs/SIGMA_V4B_VECTOR_STRESS_MEMORY_RESULTS.md).
-The lower-derivative vector-stress source is mathematically healthy and puts
-more than 80% of its correction power on wavelengths of at least 50 kpc. It
-improves the spent joint cluster-map error by `2.72%`, but fails the shared
-accuracy, all-channel, and cross-cluster transfer gates. The exact mechanism
-is retired before any new holdout is opened. The preceding v4A result remains
-in
-[`docs/SIGMA_V4A_PROJECTED_VARIATIONAL_SOURCE_RESULTS.md`](docs/SIGMA_V4A_PROJECTED_VARIATIONAL_SOURCE_RESULTS.md).
+The latest mechanism result is
+[`docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md`](docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md).
+Its positive baryon-seeded trace is broad, stable, and the strongest v4 source,
+reducing the spent joint cluster-map error by `10.23%`. It improves PLCKG287
+by `20.66%` but AS295 by only `0.57%`, worsens one shear channel, fails
+cross-cluster transfer, and drives its high-field scale to the bound. Together
+with v4A and v4B, it activates the scoped stop decision in
+[`docs/SIGMA_V4_SCALAR_MEMORY_MECHANISM_FALSIFICATION.md`](docs/SIGMA_V4_SCALAR_MEMORY_MECHANISM_FALSIFICATION.md):
+do not tune another one-scale isotropic scalar-memory closure. The next lane
+must derive a sourced trace plus orientation-preserving tensor transport from
+an action before another map fit.
 It completes the only preregistered numerical repair of the straight-ray path
 operator without reading observational scores. The prior P0695, P0694, P0693, P0692, P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
 [`latest-findings/2026-08-02-p0695-radial-path-math-audit`](latest-findings/2026-08-02-p0695-radial-path-math-audit/README.md),

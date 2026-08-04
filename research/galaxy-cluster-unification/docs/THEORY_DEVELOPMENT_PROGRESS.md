@@ -1,5 +1,21 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 Sigma v4C and scalar-memory stop decision
+
+The positive baryon-seeded coherence trace passes its uniqueness, positivity,
+broadness, high-field, covariance, integral, and padding checks. It is the
+strongest v4 projected source, reducing joint spent-map RMSE from `0.907582`
+to `0.814737`. It improves PLCKG287 by `20.66%`, but AS295 by only `0.57%`,
+worsens one AS295 shear channel, fails both transfer directions, and drives
+the high-field scale to its upper bound. See
+[`SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md`](SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md).
+
+Together, v4A, v4B, and v4C activate the three-failure stop rule for one-scale
+isotropic scalar-memory closures. The next lane must derive a baryon-sourced
+trace plus orientation-preserving tensor transport from an action before
+another map fit. See
+[`SIGMA_V4_SCALAR_MEMORY_MECHANISM_FALSIFICATION.md`](SIGMA_V4_SCALAR_MEMORY_MECHANISM_FALSIFICATION.md).
+
 ## 2026-08-03 Sigma v4B vector-stress memory result
 
 The lower-derivative projected action built a bounded interaction from the
