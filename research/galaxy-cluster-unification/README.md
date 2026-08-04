@@ -16,6 +16,20 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V13B_CONVEX_CARRIER_SELECTION.md`](docs/SIGMA_V13B_CONVEX_CARRIER_SELECTION.md).
+v13B selects a Hamiltonian-first reduced carrier with
+`H=(a_sigma^2/2) F_epsilon((Pi^2+|grad sigma|^2)/a_sigma^2)`. Its complete
+phase-space Hessian has only two eigenvalues, both in `[epsilon,1)`, so the
+Hamiltonian is globally positive and strictly convex, its Legendre map is
+unique, and arbitrary-background scalar characteristics remain inside the
+preferred-frame unit cone. On the static slice it gives exactly
+`mu(t)=epsilon+(1-epsilon)t/(1+t)`, retaining an AQUAL-like response without a
+linear dust charge. Every frozen reduced-carrier gate passes. This is not yet
+a covariant gravity theory: the foliation source, joint metric constraints,
+one-metric lensing equations, tensor cone, and PPN limits remain open. No
+observation or holdout was opened.
+
+The preceding theory-only result is
 [`docs/SIGMA_V13A_CLOCK_CONSTRAINT_FALSIFICATION.md`](docs/SIGMA_V13A_CLOCK_CONSTRAINT_FALSIFICATION.md).
 Exact v13A is retired before data. Its covariant multiplier enforces the AeST
 clock exactly, but shift symmetry leaves a freely specifiable conserved charge

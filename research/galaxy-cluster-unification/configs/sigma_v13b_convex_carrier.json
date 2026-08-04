@@ -1,0 +1,33 @@
+{
+  "protocol_status": "Theory-only Hamiltonian-first carrier selection. Grids, floor, and tolerances were fixed before the recorded run. No observational data or holdouts are opened.",
+  "candidate": {
+    "name": "Sigma v13B convex radial phase-space carrier",
+    "hamiltonian": "H=(a_sigma^2/2) F_epsilon((Pi^2+|grad sigma|^2)/a_sigma^2)",
+    "static_flux": "mu(t)=epsilon+(1-epsilon)t/(1+t)",
+    "purpose": "Retain the static AQUAL response while replacing the AeST zero/Jeans clock sector with a strictly convex positive Hamiltonian."
+  },
+  "fixed_values": {
+    "acceleration_scale": 1.0,
+    "selected_epsilon": 1e-6,
+    "epsilon_theory_scan": [1e-8, 1e-6, 0.001, 0.1, 0.5],
+    "radius_ratio_minimum": 1e-10,
+    "radius_ratio_maximum": 10000000000.0,
+    "radius_ratio_samples": 801,
+    "momentum_fraction_samples": 81,
+    "direction_cosine_samples": 81,
+    "legendre_time_derivatives": [-10.0, -1.0, -0.1, 0.0, 0.1, 1.0, 10.0],
+    "legendre_gradient_magnitudes": [0.0, 0.01, 1.0, 100.0],
+    "finite_difference_seed": 13013,
+    "finite_difference_samples": 128,
+    "finite_difference_ratio_minimum": 0.001,
+    "finite_difference_ratio_maximum": 1000.0,
+    "convexity_tolerance": 1e-12,
+    "causality_tolerance": 1e-10,
+    "finite_difference_tolerance": 2e-7,
+    "legendre_residual_tolerance": 1e-10,
+    "maximum_physical_constants": 5,
+    "current_reduced_carrier_constants": 2
+  },
+  "data_policy": "Do not access galaxy, cluster, Solar-System, or holdout observations during this reduced-carrier selection.",
+  "scope_limit": "This selects a local preferred-frame Hamiltonian and its implicit first-derivative Lagrangian. It is not yet a covariant gravity action: the source of the foliation, the metric equations, matter conservation, lensing projection, PPN behavior, and joint constraint count remain open."
+}

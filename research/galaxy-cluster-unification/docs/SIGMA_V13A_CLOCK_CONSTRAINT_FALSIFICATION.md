@@ -244,3 +244,11 @@ python -m pytest -q tests/test_sigma_v13a_clock_constraint.py
 
 Machine-readable evidence is in
 `results/sigma_v13a_clock_constraint/report.json`.
+
+## Subsequent result
+
+The required convex lane was implemented as the v13B radial phase-space
+Hamiltonian. It passes the frozen reduced convexity, Legendre, static-response,
+and arbitrary-background scalar-cone gates and is selected for covariantization.
+It does not yet supply a covariant gravity action. See
+[`SIGMA_V13B_CONVEX_CARRIER_SELECTION.md`](SIGMA_V13B_CONVEX_CARRIER_SELECTION.md).

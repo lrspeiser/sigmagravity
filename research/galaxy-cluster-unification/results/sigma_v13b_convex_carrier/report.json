@@ -1,0 +1,493 @@
+{
+  "all_covariant_gates_pass": false,
+  "all_reduced_carrier_advancement_gates_pass": true,
+  "all_verification_gates_pass": true,
+  "bounded_hamiltonian_same_gate_failure_count": 2,
+  "candidate": {
+    "hamiltonian": "H=(a_sigma^2/2) F_epsilon((Pi^2+|grad sigma|^2)/a_sigma^2)",
+    "name": "Sigma v13B convex radial phase-space carrier",
+    "purpose": "Retain the static AQUAL response while replacing the AeST zero/Jeans clock sector with a strictly convex positive Hamiltonian.",
+    "static_flux": "mu(t)=epsilon+(1-epsilon)t/(1+t)"
+  },
+  "characteristic_identity": {
+    "causal_bound": "max |c| <= lambda_max([[A,b],[b,C]]) <= 1",
+    "equation": "(c+b)^2=A C",
+    "maximum_scanned_absolute_speed": 0.9999999999999899,
+    "minimum_scanned_discriminant": 1e-12,
+    "worst_speed_row": {
+      "causal_in_preferred_unit_cone": true,
+      "direction_cosine": -1.0,
+      "directional_spatial_hessian": 0.9999999999510001,
+      "discriminant": 0.9999999999000001,
+      "hyperbolic": true,
+      "largest_relevant_hessian_eigenvalue": 1.0,
+      "maximum_absolute_characteristic_speed": 0.9999999999999899,
+      "momentum_fraction": -0.7,
+      "momentum_gradient_mixing": 4.998994763594311e-11,
+      "negative_characteristic_speed": -0.9999999999999899,
+      "positive_characteristic_speed": 0.9999999999000101,
+      "radius_ratio": 10000000000.0,
+      "temporal_hessian": 0.999999999949
+    }
+  },
+  "data_policy": "Do not access galaxy, cluster, Solar-System, or holdout observations during this reduced-carrier selection.",
+  "decision": "Select the v13B reduced Hamiltonian carrier for covariantization. It is globally strictly convex for epsilon>0, has no linear dust-charge energy, retains the static AQUAL flux, possesses a unique Legendre map, and keeps arbitrary-background scalar characteristics inside the unit preferred-frame cone. This is not yet a gravity theory because the covariant origin of that preferred frame and the joint metric equations remain unsolved.",
+  "eigenvalue_rows": [
+    {
+      "all_hessian_eigenvalues_at_most_one": true,
+      "all_hessian_eigenvalues_strictly_positive": true,
+      "epsilon": 1e-08,
+      "hamiltonian_nonnegative": true,
+      "maximum_radial_hessian": 1.0,
+      "maximum_transverse_hessian": 0.9999999999000001,
+      "minimum_hamiltonian_shape": 0.0,
+      "minimum_radial_hessian": 1e-08,
+      "minimum_transverse_hessian": 1e-08
+    },
+    {
+      "all_hessian_eigenvalues_at_most_one": true,
+      "all_hessian_eigenvalues_strictly_positive": true,
+      "epsilon": 1e-06,
+      "hamiltonian_nonnegative": true,
+      "maximum_radial_hessian": 1.0,
+      "maximum_transverse_hessian": 0.9999999999000001,
+      "minimum_hamiltonian_shape": 0.0,
+      "minimum_radial_hessian": 1e-06,
+      "minimum_transverse_hessian": 1e-06
+    },
+    {
+      "all_hessian_eigenvalues_at_most_one": true,
+      "all_hessian_eigenvalues_strictly_positive": true,
+      "epsilon": 0.001,
+      "hamiltonian_nonnegative": true,
+      "maximum_radial_hessian": 1.0,
+      "maximum_transverse_hessian": 0.9999999999001,
+      "minimum_hamiltonian_shape": 0.0,
+      "minimum_radial_hessian": 0.001,
+      "minimum_transverse_hessian": 0.001
+    },
+    {
+      "all_hessian_eigenvalues_at_most_one": true,
+      "all_hessian_eigenvalues_strictly_positive": true,
+      "epsilon": 0.1,
+      "hamiltonian_nonnegative": true,
+      "maximum_radial_hessian": 1.0,
+      "maximum_transverse_hessian": 0.99999999991,
+      "minimum_hamiltonian_shape": 0.0,
+      "minimum_radial_hessian": 0.1,
+      "minimum_transverse_hessian": 0.1
+    },
+    {
+      "all_hessian_eigenvalues_at_most_one": true,
+      "all_hessian_eigenvalues_strictly_positive": true,
+      "epsilon": 0.5,
+      "hamiltonian_nonnegative": true,
+      "maximum_radial_hessian": 1.0,
+      "maximum_transverse_hessian": 0.99999999995,
+      "minimum_hamiltonian_shape": 0.0,
+      "minimum_radial_hessian": 0.5,
+      "minimum_transverse_hessian": 0.5
+    }
+  ],
+  "independent_verification": {
+    "maximum_flux_jacobian_residual": 4.673302014465697e-10,
+    "maximum_random_hessian_eigenvalue": 0.9999987850991832,
+    "minimum_random_hessian_eigenvalue": 0.0010644889947047168
+  },
+  "legendre_rows": [
+    {
+      "hamiltonian_density": 51.142207075106356,
+      "hamiltonian_momentum_curvature": 0.9929574031474793,
+      "lagrangian_density": 58.018581530118595,
+      "lagrangian_time_kinetic_curvature": 1.007092546800293,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -10.916078860522495,
+      "momentum_map_residual": -1.7763568394002505e-15,
+      "spatial_gradient_magnitude": 0.0,
+      "time_derivative": -10.0
+    },
+    {
+      "hamiltonian_density": 51.14224933282862,
+      "hamiltonian_momentum_curvature": 0.9929573436267355,
+      "lagrangian_density": 58.01853572612482,
+      "lagrangian_time_kinetic_curvature": 1.0070926071683417,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -10.916078505895344,
+      "momentum_map_residual": 0.0,
+      "spatial_gradient_magnitude": 0.01,
+      "time_derivative": -10.0
+    },
+    {
+      "hamiltonian_density": 51.5650469175946,
+      "hamiltonian_momentum_curvature": 0.992368869574172,
+      "lagrangian_density": 57.5604674468497,
+      "lagrangian_time_kinetic_curvature": 1.007689812387104,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -10.91255143644443,
+      "momentum_map_residual": 0.0,
+      "spatial_gradient_magnitude": 1.0,
+      "time_derivative": -10.0
+    },
+    {
+      "hamiltonian_density": 4955.111422675985,
+      "hamiltonian_momentum_curvature": 0.990247127168959,
+      "lagrangian_density": -4854.116484983407,
+      "lagrangian_time_kinetic_curvature": 1.0098489281750544,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -10.099493769257746,
+      "momentum_map_residual": 0.0,
+      "spatial_gradient_magnitude": 100.0,
+      "time_derivative": -10.0
+    },
+    {
+      "hamiltonian_density": 0.6534065877476665,
+      "hamiltonian_momentum_curvature": 0.854102031497326,
+      "lagrangian_density": 0.9646266773955203,
+      "lagrangian_time_kinetic_curvature": 1.1708203038071463,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -1.6180332651431868,
+      "momentum_map_residual": -2.220446049250313e-16,
+      "spatial_gradient_magnitude": 0.0,
+      "time_derivative": -1.0
+    },
+    {
+      "hamiltonian_density": 0.653428948649176,
+      "hamiltonian_momentum_curvature": 0.854095506986096,
+      "lagrangian_density": 0.9645957756007042,
+      "lagrangian_time_kinetic_curvature": 1.1708292478071531,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -1.6180247242498802,
+      "momentum_map_residual": -2.220446049250313e-16,
+      "spatial_gradient_magnitude": 0.01,
+      "time_derivative": -1.0
+    },
+    {
+      "hamiltonian_density": 0.8957541301178631,
+      "hamiltonian_momentum_curvature": 0.8085122107136506,
+      "lagrangian_density": 0.6479342101181009,
+      "lagrangian_time_kinetic_curvature": 1.236839699820153,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -1.543688340235964,
+      "momentum_map_residual": -1.9984014443252818e-15,
+      "spatial_gradient_magnitude": 1.0,
+      "time_derivative": -1.0
+    },
+    {
+      "hamiltonian_density": 4905.120215514166,
+      "hamiltonian_momentum_curvature": 0.9901005196089522,
+      "lagrangian_density": -4904.110216034276,
+      "lagrangian_time_kinetic_curvature": 1.0099984599492562,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -1.0099994798900647,
+      "momentum_map_residual": 1.1102230246251565e-16,
+      "spatial_gradient_magnitude": 100.0,
+      "time_derivative": -1.0
+    },
+    {
+      "hamiltonian_density": 0.013276352748510804,
+      "hamiltonian_momentum_curvature": 0.46732812812026236,
+      "lagrangian_density": 0.02373921062999947,
+      "lagrangian_time_kinetic_curvature": 2.1398241189168474,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -0.37015563378510274,
+      "momentum_map_residual": 1.8540724511240114e-14,
+      "spatial_gradient_magnitude": 0.0,
+      "time_derivative": -0.1
+    },
+    {
+      "hamiltonian_density": 0.013284163356932253,
+      "hamiltonian_momentum_curvature": 0.467244983963641,
+      "lagrangian_density": 0.023725701758437637,
+      "lagrangian_time_kinetic_curvature": 2.140204891055215,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -0.3700986511536989,
+      "momentum_map_residual": 1.865174681370263e-14,
+      "spatial_gradient_magnitude": 0.01,
+      "time_derivative": -0.1
+    },
+    {
+      "hamiltonian_density": 0.2030052753245436,
+      "hamiltonian_momentum_curvature": 0.5142506509221998,
+      "lagrangian_density": -0.1831959083445388,
+      "lagrangian_time_kinetic_curvature": 1.9445770232992636,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -0.19809366980004792,
+      "momentum_map_residual": 2.7755575615628914e-17,
+      "spatial_gradient_magnitude": 1.0,
+      "time_derivative": -0.1
+    },
+    {
+      "hamiltonian_density": 4904.6202659016335,
+      "hamiltonian_momentum_curvature": 0.9900990348019458,
+      "lagrangian_density": -4904.610165901786,
+      "lagrangian_time_kinetic_curvature": 1.0099999745985357,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": -0.10099999847995143,
+      "momentum_map_residual": -4.996003610813204e-16,
+      "spatial_gradient_magnitude": 100.0,
+      "time_derivative": -0.1
+    },
+    {
+      "hamiltonian_density": 0.0,
+      "hamiltonian_momentum_curvature": 1e-06,
+      "lagrangian_density": 0.0,
+      "lagrangian_time_kinetic_curvature": 1000000.0,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 0.0,
+      "momentum_map_residual": 0.0,
+      "spatial_gradient_magnitude": 0.0,
+      "time_derivative": 0.0
+    },
+    {
+      "hamiltonian_density": 3.309028372296633e-07,
+      "hamiltonian_momentum_curvature": 0.009901980198019801,
+      "lagrangian_density": -3.309028372296633e-07,
+      "lagrangian_time_kinetic_curvature": 100.98990100989901,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 0.0,
+      "momentum_map_residual": 0.0,
+      "spatial_gradient_magnitude": 0.01,
+      "time_derivative": 0.0
+    },
+    {
+      "hamiltonian_density": 0.19314748741276472,
+      "hamiltonian_momentum_curvature": 0.5000005,
+      "lagrangian_density": -0.19314748741276472,
+      "lagrangian_time_kinetic_curvature": 1.9999980000020001,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 0.0,
+      "momentum_map_residual": 0.0,
+      "spatial_gradient_magnitude": 1.0,
+      "time_derivative": 0.0
+    },
+    {
+      "hamiltonian_density": 4904.615215901721,
+      "hamiltonian_momentum_curvature": 0.9900990198019802,
+      "lagrangian_density": -4904.615215901721,
+      "lagrangian_time_kinetic_curvature": 1.0099999899,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 0.0,
+      "momentum_map_residual": 0.0,
+      "spatial_gradient_magnitude": 100.0,
+      "time_derivative": 0.0
+    },
+    {
+      "hamiltonian_density": 0.013276352748510804,
+      "hamiltonian_momentum_curvature": 0.46732812812026236,
+      "lagrangian_density": 0.02373921062999947,
+      "lagrangian_time_kinetic_curvature": 2.1398241189168474,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 0.37015563378510274,
+      "momentum_map_residual": -1.8540724511240114e-14,
+      "spatial_gradient_magnitude": 0.0,
+      "time_derivative": 0.1
+    },
+    {
+      "hamiltonian_density": 0.013284163356932253,
+      "hamiltonian_momentum_curvature": 0.467244983963641,
+      "lagrangian_density": 0.023725701758437637,
+      "lagrangian_time_kinetic_curvature": 2.140204891055215,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 0.3700986511536989,
+      "momentum_map_residual": -1.865174681370263e-14,
+      "spatial_gradient_magnitude": 0.01,
+      "time_derivative": 0.1
+    },
+    {
+      "hamiltonian_density": 0.2030052753245436,
+      "hamiltonian_momentum_curvature": 0.5142506509221998,
+      "lagrangian_density": -0.1831959083445388,
+      "lagrangian_time_kinetic_curvature": 1.9445770232992636,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 0.19809366980004792,
+      "momentum_map_residual": -2.7755575615628914e-17,
+      "spatial_gradient_magnitude": 1.0,
+      "time_derivative": 0.1
+    },
+    {
+      "hamiltonian_density": 4904.6202659016335,
+      "hamiltonian_momentum_curvature": 0.9900990348019458,
+      "lagrangian_density": -4904.610165901786,
+      "lagrangian_time_kinetic_curvature": 1.0099999745985357,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 0.10099999847995143,
+      "momentum_map_residual": 4.996003610813204e-16,
+      "spatial_gradient_magnitude": 100.0,
+      "time_derivative": 0.1
+    },
+    {
+      "hamiltonian_density": 0.6534065877476665,
+      "hamiltonian_momentum_curvature": 0.854102031497326,
+      "lagrangian_density": 0.9646266773955203,
+      "lagrangian_time_kinetic_curvature": 1.1708203038071463,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 1.6180332651431868,
+      "momentum_map_residual": 2.220446049250313e-16,
+      "spatial_gradient_magnitude": 0.0,
+      "time_derivative": 1.0
+    },
+    {
+      "hamiltonian_density": 0.653428948649176,
+      "hamiltonian_momentum_curvature": 0.854095506986096,
+      "lagrangian_density": 0.9645957756007042,
+      "lagrangian_time_kinetic_curvature": 1.1708292478071531,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 1.6180247242498802,
+      "momentum_map_residual": 2.220446049250313e-16,
+      "spatial_gradient_magnitude": 0.01,
+      "time_derivative": 1.0
+    },
+    {
+      "hamiltonian_density": 0.8957541301178631,
+      "hamiltonian_momentum_curvature": 0.8085122107136506,
+      "lagrangian_density": 0.6479342101181009,
+      "lagrangian_time_kinetic_curvature": 1.236839699820153,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 1.543688340235964,
+      "momentum_map_residual": 1.9984014443252818e-15,
+      "spatial_gradient_magnitude": 1.0,
+      "time_derivative": 1.0
+    },
+    {
+      "hamiltonian_density": 4905.120215514166,
+      "hamiltonian_momentum_curvature": 0.9901005196089522,
+      "lagrangian_density": -4904.110216034276,
+      "lagrangian_time_kinetic_curvature": 1.0099984599492562,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 1.0099994798900647,
+      "momentum_map_residual": -1.1102230246251565e-16,
+      "spatial_gradient_magnitude": 100.0,
+      "time_derivative": 1.0
+    },
+    {
+      "hamiltonian_density": 51.142207075106356,
+      "hamiltonian_momentum_curvature": 0.9929574031474793,
+      "lagrangian_density": 58.018581530118595,
+      "lagrangian_time_kinetic_curvature": 1.007092546800293,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 10.916078860522495,
+      "momentum_map_residual": 1.7763568394002505e-15,
+      "spatial_gradient_magnitude": 0.0,
+      "time_derivative": 10.0
+    },
+    {
+      "hamiltonian_density": 51.14224933282862,
+      "hamiltonian_momentum_curvature": 0.9929573436267355,
+      "lagrangian_density": 58.01853572612482,
+      "lagrangian_time_kinetic_curvature": 1.0070926071683417,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 10.916078505895344,
+      "momentum_map_residual": 0.0,
+      "spatial_gradient_magnitude": 0.01,
+      "time_derivative": 10.0
+    },
+    {
+      "hamiltonian_density": 51.5650469175946,
+      "hamiltonian_momentum_curvature": 0.992368869574172,
+      "lagrangian_density": 57.5604674468497,
+      "lagrangian_time_kinetic_curvature": 1.007689812387104,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 10.91255143644443,
+      "momentum_map_residual": 0.0,
+      "spatial_gradient_magnitude": 1.0,
+      "time_derivative": 10.0
+    },
+    {
+      "hamiltonian_density": 4955.111422675985,
+      "hamiltonian_momentum_curvature": 0.990247127168959,
+      "lagrangian_density": -4854.116484983407,
+      "lagrangian_time_kinetic_curvature": 1.0098489281750544,
+      "legendre_reconstruction_residual": 0.0,
+      "momentum": 10.099493769257746,
+      "momentum_map_residual": 0.0,
+      "spatial_gradient_magnitude": 100.0,
+      "time_derivative": 10.0
+    }
+  ],
+  "next_gate": "Construct a covariant foliation/metric completion that introduces no free clock charge or hidden matter state. Repeat the joint constraint, reduced-energy, tensor-cone, PPN, and one-metric lensing derivations before opening observations.",
+  "observational_data_accessed": false,
+  "open_covariant_gates": {
+    "joint_metric_carrier_constraint_count": false,
+    "luminal_tensor_cone_after_covariantization": false,
+    "manifestly_covariant_action": false,
+    "preferred_foliation_uniquely_sourced_without_extra_charge": false,
+    "single_physical_metric_lensing_equations": false,
+    "solar_ppn_gate": false
+  },
+  "phase_space_hessian_identity": {
+    "analytic_range": "epsilon <= lambda(Hessian) < 1",
+    "radial": "epsilon+(1-epsilon)t(t+2)/(1+t)^2",
+    "transverse": "mu=epsilon+(1-epsilon)t/(1+t)"
+  },
+  "post_v12_reset_total_material_formulation_failure_count": 2,
+  "protocol_status": "Theory-only Hamiltonian-first carrier selection. Grids, floor, and tolerances were fixed before the recorded run. No observational data or holdouts are opened.",
+  "raw_holdout_opened": false,
+  "reduced_carrier_advancement_gates": {
+    "bounded_reduced_hamiltonian": true,
+    "causal_reduced_scalar_characteristics": true,
+    "no_linear_dust_charge_energy": true,
+    "regular_global_legendre_map": true,
+    "static_aqual_response_retained": true
+  },
+  "scope_limit": "This selects a local preferred-frame Hamiltonian and its implicit first-derivative Lagrangian. It is not yet a covariant gravity action: the source of the foliation, the metric equations, matter conservation, lensing projection, PPN behavior, and joint constraint count remain open.",
+  "selected_parameters": {
+    "acceleration_scale": 1.0,
+    "epsilon": 1e-06,
+    "reduced_carrier_physical_constant_count": 2
+  },
+  "static_aqual_rows": [
+    {
+      "gradient_over_a_sigma": 0.0,
+      "hamiltonian_density": 0.0,
+      "lagrangian_plus_hamiltonian_residual": 0.0,
+      "mu": 1e-06
+    },
+    {
+      "gradient_over_a_sigma": 1e-08,
+      "hamiltonian_density": 5.0333332997500005e-23,
+      "lagrangian_plus_hamiltonian_residual": 0.0,
+      "mu": 1.0099999899e-06
+    },
+    {
+      "gradient_over_a_sigma": 1e-06,
+      "hamiltonian_density": 8.333327500004499e-19,
+      "lagrangian_plus_hamiltonian_residual": 0.0,
+      "mu": 1.9999980000019997e-06
+    },
+    {
+      "gradient_over_a_sigma": 0.001,
+      "hamiltonian_density": 3.3358320011064796e-10,
+      "lagrangian_plus_hamiltonian_residual": 0.0,
+      "mu": 0.001
+    },
+    {
+      "gradient_over_a_sigma": 1.0,
+      "hamiltonian_density": 0.19314748741276472,
+      "lagrangian_plus_hamiltonian_residual": 0.0,
+      "mu": 0.5000005
+    },
+    {
+      "gradient_over_a_sigma": 1000.0,
+      "hamiltonian_density": 499006.9097478705,
+      "lagrangian_plus_hamiltonian_residual": 0.0,
+      "mu": 0.999001
+    }
+  ],
+  "status": "Sigma v13B convex reduced-carrier selection",
+  "theory_viable": false,
+  "three_failure_mechanism_reset_triggered": false,
+  "v13b_formulation_rejected": false,
+  "v13b_selected_for_covariantization": true,
+  "verification_gates": {
+    "analytic_hessian_bounds_hold_on_all_epsilon_rows": true,
+    "arbitrary_background_characteristics_causal": true,
+    "arbitrary_background_characteristics_hyperbolic": true,
+    "hamiltonian_nonnegative_on_all_epsilon_rows": true,
+    "independent_flux_jacobian_matches_hessian": true,
+    "legendre_map_is_unique_and_nonsingular": true,
+    "random_hessian_operator_norm_at_most_one": true,
+    "random_hessian_remains_strictly_convex": true,
+    "reduced_carrier_parameter_count_within_budget": true,
+    "static_slice_is_exact_aqual_energy": true
+  }
+}

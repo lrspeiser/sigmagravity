@@ -1,5 +1,37 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v13B convex reduced-carrier selection
+
+v13B replaces the failed AeST clock/Jeans repair with the Hamiltonian-first
+reduced carrier
+
+$$
+\mathcal H={a_\Sigma^2\over2}F_\epsilon
+\left({\Pi^2+|\boldsymbol\nabla\sigma|^2\over a_\Sigma^2}\right),
+$$
+
+whose static flux is
+`mu(t)=epsilon+(1-epsilon)t/(1+t)`. The exact phase-space Hessian has transverse
+eigenvalue `mu` and radial eigenvalue
+`epsilon+(1-epsilon)[1-1/(1+t)^2]`. Both remain in `[epsilon,1)`, proving a
+positive strictly convex Hamiltonian and a globally unique Legendre map. The
+reduced system has no energy linear in a signed dust charge.
+
+For arbitrary momentum/gradient backgrounds and propagation directions, the
+principal speeds obey `(c+b)^2=A C`. The relevant matrix `[[A,b],[b,C]]` is a
+compression of the full Hessian, so both speeds are real and bounded by its
+largest eigenvalue, which is below the preferred-frame unit cone. The frozen
+scan reaches maximum `|c|=0.9999999999999899`; the independent numerical
+flux-Jacobian residual is `4.6734e-10`. All reduced-carrier advancement gates
+pass with two of five allowed physical constants.
+
+This selects v13B for covariantization, not observational testing. The source
+of the preferred foliation, joint metric constraint count, baryonic source,
+single-metric photon equations, luminal tensor cone, PPN limits, and cosmology
+remain open. `theory_viable=false`, no observations were opened, and the
+post-v12 failure count remains `2`. See
+[`SIGMA_V13B_CONVEX_CARRIER_SELECTION.md`](SIGMA_V13B_CONVEX_CARRIER_SELECTION.md).
+
 ## 2026-08-04 Sigma v12A constraint-solved modal-energy falsification
 
 Exact v12A is retired before data under the project's strict bounded-energy
