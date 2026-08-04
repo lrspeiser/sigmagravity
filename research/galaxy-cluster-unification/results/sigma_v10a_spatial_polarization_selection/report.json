@@ -1,0 +1,391 @@
+{
+  "action": "S=S_AeST+(16 pi G)^-1 int sqrt(-g)[(1/2) dot(P)_mn dot(P)^mn-(c_P^2/2) D_l P_mn D^l P^mn-L_P^-2(P_mn P^mn/2+(P_mn P^mn)^2/4)+beta P^mn D_(m S_n)+zeta^n A^m P_mn]",
+  "all_mandatory_theory_gates_pass": false,
+  "all_selection_gates_pass": true,
+  "base_spectrum": {
+    "causal_propagating_modes": true,
+    "complete_flat_hamiltonian_positive_all_momenta": false,
+    "ir_jeans_like_sector_present": true,
+    "positive_propagating_modes": true,
+    "scalar_speed_squared": 0.75,
+    "tensor_speed_squared": 1.0,
+    "vector_speed_squared": 1.0,
+    "zero_frequency_constant_mode_hamiltonian": 0.0,
+    "zero_frequency_linearly_growing_mode_present": true,
+    "zero_frequency_sector_positive_all_momenta": false
+  },
+  "candidate": "one-metric AeST plus a symmetric aether-spatial polarization tensor",
+  "carrier_potential_convexity": {
+    "0.0": {
+      "analytic_radial_eigenvalue": 1.0,
+      "analytic_transverse_eigenvalue": 1.0,
+      "eigenvalues": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "norm_squared": 0.0,
+      "strictly_convex": true
+    },
+    "0.1": {
+      "analytic_radial_eigenvalue": 1.03,
+      "analytic_transverse_eigenvalue": 1.01,
+      "eigenvalues": [
+        1.01,
+        1.01,
+        1.01,
+        1.01,
+        1.01,
+        1.03
+      ],
+      "norm_squared": 0.010000000000000002,
+      "strictly_convex": true
+    },
+    "1.0": {
+      "analytic_radial_eigenvalue": 4.0,
+      "analytic_transverse_eigenvalue": 2.0,
+      "eigenvalues": [
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        4.0
+      ],
+      "norm_squared": 1.0,
+      "strictly_convex": true
+    },
+    "10.0": {
+      "analytic_radial_eigenvalue": 301.0,
+      "analytic_transverse_eigenvalue": 101.0,
+      "eigenvalues": [
+        101.0,
+        101.0,
+        101.0,
+        101.0,
+        101.0,
+        301.0
+      ],
+      "norm_squared": 100.0,
+      "strictly_convex": true
+    }
+  },
+  "data_policy": {
+    "authorization_after_selection": "full theory variation and health audits only; no astronomical fitting",
+    "new_observational_product_accessed": false,
+    "raw_holdout_opened": false,
+    "spent_scalar_summary_allowed": "only the already-documented factor-3.14465 cluster amplitude target"
+  },
+  "decision": "advance_to_full_coupled_constraint_and_quasistatic_ellipticity_audit_only",
+  "deep_AQUAL_decoupled_proxy_warning": [
+    {
+      "AQUAL_longitudinal_stiffness": 0.019703950593079108,
+      "acceleration_ratio": 0.01,
+      "constant_mixing_schur_complement": -0.5427960494069209,
+      "proxy_elliptic": false
+    },
+    {
+      "AQUAL_longitudinal_stiffness": 0.17355371900826444,
+      "acceleration_ratio": 0.1,
+      "constant_mixing_schur_complement": -0.38894628099173556,
+      "proxy_elliptic": false
+    },
+    {
+      "AQUAL_longitudinal_stiffness": 0.408284023668639,
+      "acceleration_ratio": 0.3,
+      "constant_mixing_schur_complement": -0.15421597633136103,
+      "proxy_elliptic": false
+    },
+    {
+      "AQUAL_longitudinal_stiffness": 0.75,
+      "acceleration_ratio": 1.0,
+      "constant_mixing_schur_complement": 0.1875,
+      "proxy_elliptic": true
+    },
+    {
+      "AQUAL_longitudinal_stiffness": 0.9917355371900827,
+      "acceleration_ratio": 10.0,
+      "constant_mixing_schur_complement": 0.42923553719008267,
+      "proxy_elliptic": true
+    }
+  ],
+  "deep_AQUAL_proxy_has_negative_region": true,
+  "definitions": {
+    "aether_projector": "q_mn=g_mn+A_m A_n",
+    "aether_time_derivative": "dot(P)_mn=q_m^a q_n^b A^l nabla_l P_ab",
+    "carrier": "P_mn=P_nm and A^m P_mn=0; six spatial components including trace",
+    "carrier_potential": "V(P)=P:P/2+(P:P)^2/4",
+    "fixed_coefficients": "c_P^2=1-c_s^2 and beta=c_s^2/2; at c_s^2=3/4 these are 1/4 and 3/8",
+    "physical_metric": "g_mn; all matter and photons remain minimally coupled to one metric",
+    "scalar_spatial_gradient": "S_m=q_m^n nabla_n phi",
+    "source_tensor": "H_mn=D_(m S_n)",
+    "spatial_derivative": "D_l P_mn=q_l^a q_m^b q_n^c nabla_a P_bc"
+  },
+  "derived_coefficients": {
+    "carrier_speed_squared": 0.25,
+    "mixing_beta": 0.375
+  },
+  "fixed_selection_values": {
+    "K_2": 2.0,
+    "K_B": 1.0,
+    "existing_spent_cluster_amplification_target": 3.14465,
+    "lambda_s": 1.0
+  },
+  "geometry": {
+    "equal_acceleration_pair": {
+      "first_hessian": [
+        [
+          2.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "mass_ratio": 100.0,
+      "radius_ratio": 10.0,
+      "second_hessian": [
+        [
+          0.2,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.1,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.1
+        ]
+      ],
+      "surface_acceleration_ratio": 1.0,
+      "tidal_hessian_norm_ratio": 0.10000000000000002
+    },
+    "isotropic_decomposition": {
+      "frobenius_norm": 0.9293581267838513,
+      "stf": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "stf_norm": 0.0,
+      "trace": 1.6096954940166688
+    },
+    "isotropic_response": [
+      [
+        0.5365651646722229,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.5365651646722229,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.5365651646722229
+      ]
+    ],
+    "nonlinear_additivity_relative_error": 0.3408454516546544,
+    "rank_one_decomposition": {
+      "frobenius_norm": 1.2134116627622296,
+      "stf": [
+        [
+          0.808941108508153,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.4044705542540765,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.4044705542540765
+        ]
+      ],
+      "stf_norm": 0.9907464739031874,
+      "trace": 1.2134116627622296
+    },
+    "rank_one_response": [
+      [
+        1.2134116627622296,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "rotation_covariance_relative_error": 1.5847570493974826e-16,
+    "tidal_decomposition": {
+      "frobenius_norm": 1.1039821489959276,
+      "stf": [
+        [
+          0.9013976500604182,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.4506988250302091,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.4506988250302091
+        ]
+      ],
+      "stf_norm": 1.1039821489959276,
+      "trace": 0.0
+    },
+    "tidal_response": [
+      [
+        0.9013976500604182,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        -0.4506988250302091,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        -0.4506988250302091
+      ]
+    ]
+  },
+  "integration_by_parts_identity": "int sqrt(-g) P^mn D_m S_n = -int sqrt(-g) S_n D_m P^mn plus boundary and projector/aether-derivative terms; full covariant variation remains mandatory",
+  "linear_capacity": {
+    "asymptotic_amplification": 4.0,
+    "existing_cluster_target": 3.14465,
+    "kL_for_existing_target": 6.333828135556161,
+    "kL_for_seventy_five_percent_gap": 4.300562666519263,
+    "seventy_five_percent_gap_target": 2.6084875
+  },
+  "mixed_spectrum": {
+    "causal": true,
+    "determinant": 0.046875000000000014,
+    "gradient_matrix": [
+      [
+        0.75,
+        0.375
+      ],
+      [
+        0.375,
+        0.25
+      ]
+    ],
+    "positive": true,
+    "speed_squared": [
+      0.04930609056700133,
+      0.9506939094329987
+    ]
+  },
+  "new_observational_product_accessed": false,
+  "next_gate": "Derive and reduce the complete quadratic AeST-metric-aether-scalar-P action on the flat clock background and the complete quasistatic constitutive Hessian on arbitrary constant spatial-gradient backgrounds. Retire exact v10A if the negative deep-AQUAL proxy survives the constraint reduction, if any vector or scalar kinetic eigenvalue is negative, if c_T differs from one, or if an independent homogeneous P profile is allowed.",
+  "novelty_claim": false,
+  "physical_parameters": {
+    "count": 5,
+    "lensing_only_parameters": 0,
+    "maximum_allowed": 5,
+    "names": [
+      "a_sigma",
+      "mu_sigma",
+      "K_B",
+      "K_2",
+      "L_P"
+    ],
+    "object_specific_gravity_parameters": 0
+  },
+  "prior_art_primary_anchors": [
+    "https://arxiv.org/abs/2007.00082",
+    "https://arxiv.org/abs/2109.13287",
+    "https://arxiv.org/abs/1910.13995",
+    "https://arxiv.org/abs/1806.02811"
+  ],
+  "prior_art_scope": {
+    "established": [
+      "AeST one-metric scalar-vector-tensor base",
+      "preferred-frame and spatially covariant gravity",
+      "massive and auxiliary tensor fields",
+      "convex nonlinear polarization potentials"
+    ],
+    "novelty_claim": false,
+    "project_specific_hypothesis": "the fixed six-component spatial carrier sourced by the projected AeST scalar Hessian as a baryon-forced galaxy/cluster geometry discriminator"
+  },
+  "raw_holdout_opened": false,
+  "reason": "The six-component spatial carrier passes every declared necessary selection identity: its selected flat scalar block has squared speeds 0.0493 and 0.9507, the other five carrier modes have squared speed 0.25, its fixed-source potential is strictly convex, it retains trace and shear orientation, distinguishes an equal-g_bar scale pair through M/r^3, and has a normalized asymptotic response capacity of four. This is not a theory-health pass. A deliberately computed decoupled AQUAL proxy becomes non-elliptic in the low-acceleration region, so the next full AeST constraint reduction is capable of immediately falsifying the exact constant-mixing action.",
+  "scope": "No new observation, cluster map, galaxy table, or raw holdout was opened. The factor-3.14465 target is an already-published scalar summary. The flat 2x2 block is necessary only; vector/aether mixing, nonlinear static ellipticity, physical metric potentials, PPN, cosmology, and retarded source uniqueness remain unproved.",
+  "selection_gates": {
+    "base_finite_frequency_modes_causal": true,
+    "base_finite_frequency_modes_positive": true,
+    "carrier_potential_strictly_convex": true,
+    "equal_acceleration_geometry_discriminated": true,
+    "five_unmixed_carrier_polarizations_positive_causal": true,
+    "fixed_source_carrier_state_unique": true,
+    "linear_capacity_reaches_existing_target": true,
+    "mixed_scalar_carrier_subblock_causal": true,
+    "mixed_scalar_carrier_subblock_positive": true,
+    "no_lensing_only_parameters": true,
+    "no_object_labels": true,
+    "no_object_specific_gravity_parameters": true,
+    "nonlinear_before_summation": true,
+    "nonzero_isotropic_trace_response": true,
+    "nonzero_spherical_exterior_tidal_response": true,
+    "one_minimally_coupled_matter_metric": true,
+    "parameter_count": true,
+    "rotation_covariant": true,
+    "trace_and_stf_channels_present": true
+  },
+  "status": "completed Sigma v10A theory-only action selection",
+  "unresolved_mandatory_gates": {
+    "PPN_and_Solar_screening": false,
+    "cosmological_background_and_stability": false,
+    "full_AeST_metric_aether_carrier_constraint_count": false,
+    "full_scalar_vector_tensor_principal_symbol": false,
+    "global_nonlinear_quasistatic_ellipticity": false,
+    "one_metric_weak_field_Psi_Phi_Weyl_derivation": false,
+    "retarded_no_incoming_source_uniqueness": false
+  }
+}

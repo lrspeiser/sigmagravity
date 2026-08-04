@@ -16,6 +16,18 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only checkpoint is
+[`docs/SIGMA_V10A_SPATIAL_POLARIZATION_FALSIFICATION.md`](docs/SIGMA_V10A_SPATIAL_POLARIZATION_FALSIFICATION.md).
+V10A is the first post-v9B carrier to retain both trace and shear orientation.
+Its necessary flat block is positive and causal, its convex fixed-source state
+is unique, it distinguishes equal-acceleration systems through `M/r^3`, and its
+normalized response capacity is `4`. The exact constant derivative coupling is
+nevertheless retired before data: the simple-mu quasistatic scalar stiffness
+vanishes in deep fields, so every nonzero constant mixing produces a negative
+high-k gradient eigenvalue. At the selected row, transverse fields require
+`x>1.285714` and longitudinal fields require `x>0.511858`; the zero-field
+eigenvalue is `-0.270285`. A successor must preserve the tensor geometry in a
+manifestly positive or degenerate complete principal form.
+The preceding mechanism closure is
 [`docs/SIGMA_V9B_LOCAL_FIRST_GRADIENT_CLOSURE.md`](docs/SIGMA_V9B_LOCAL_FIRST_GRADIENT_CLOSURE.md).
 It proves that every regular, unique, static local completion `F(Y,Z,U)` reduces
 to one universal acceleration relation in spherical symmetry. In the spent

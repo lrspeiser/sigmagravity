@@ -1,0 +1,108 @@
+{
+  "analytic_thresholds": {
+    "carrier_decoupled": false,
+    "globally_elliptic_for_all_nonnegative_accelerations": false,
+    "longitudinal_acceleration_ratio_threshold": 0.5118578920369088,
+    "required_AQUAL_stiffness": 0.5625,
+    "transverse_acceleration_ratio_threshold": 1.2857142857142858
+  },
+  "angle_summaries": {
+    "0.0": {
+      "first_scanned_elliptic_acceleration_ratio": 1.2941958414499863,
+      "minimum_gradient_eigenvalue": -0.2702847075210474,
+      "negative_points": 1015
+    },
+    "0.25": {
+      "first_scanned_elliptic_acceleration_ratio": 1.2246161992650515,
+      "minimum_gradient_eigenvalue": -0.2702847075210474,
+      "negative_points": 1012
+    },
+    "0.5": {
+      "first_scanned_elliptic_acceleration_ratio": 1.018591388054119,
+      "minimum_gradient_eigenvalue": -0.2702847075210474,
+      "negative_points": 1002
+    },
+    "0.75": {
+      "first_scanned_elliptic_acceleration_ratio": 0.7447319739059889,
+      "minimum_gradient_eigenvalue": -0.2702847075210474,
+      "negative_points": 985
+    },
+    "1.0": {
+      "first_scanned_elliptic_acceleration_ratio": 0.5152286445817562,
+      "minimum_gradient_eigenvalue": -0.2702847075210474,
+      "negative_points": 965
+    }
+  },
+  "data_policy": {
+    "astronomical_fitting_authorized": false,
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_exact_v10A_constant_derivative_mixing",
+  "exact_constant_mixing_no_go": true,
+  "fixed_values": {
+    "base_scalar_speed_squared": 0.75,
+    "carrier_speed_squared": 0.25,
+    "mixing_beta": 0.375
+  },
+  "gate_passed": false,
+  "mass_or_quartic_can_repair_high_k_sign": false,
+  "minimum_scan_row": {
+    "AQUAL_longitudinal_stiffness": 0.0,
+    "AQUAL_transverse_stiffness": 0.0,
+    "acceleration_ratio": 0.0,
+    "determinant": -0.140625,
+    "directional_scalar_stiffness": 0.0,
+    "elliptic": false,
+    "gradient_eigenvalues": [
+      -0.2702847075210474,
+      0.5202847075210475
+    ],
+    "gradient_matrix": [
+      [
+        0.0,
+        0.375
+      ],
+      [
+        0.375,
+        0.25
+      ]
+    ],
+    "propagation_cosine": 0.0,
+    "scalar_schur_complement": -0.5625
+  },
+  "negative_or_zero_ellipticity_points": 4979,
+  "new_observational_product_accessed": false,
+  "next_mechanism_requirement": "Use a manifestly positive/degenerate coupling or source the tensor from a sector with nonvanishing principal stiffness, while retaining trace, STF orientation, one metric, five constants, and unique baryon-forced boundary data.",
+  "observational_data_accessed": false,
+  "parent_protocol": "configs/sigma_v10a_spatial_polarization_selection.json",
+  "raw_holdout_opened": false,
+  "reason": "On the frozen simple-mu quasistatic branch, K_T and K_L both vanish with acceleration. The nonzero constant beta leaves the high-k 2x2 determinant K(theta)c_P^2-beta^2 negative in a finite low-field interval. At the selected row beta^2/c_P^2=0.5625: transverse perturbations require x>1.285714 and longitudinal perturbations require x>0.511858. The zero-field block has a negative eigenvalue. Carrier mass and quartic convexity are k^0 terms and cannot change this k^2 result.",
+  "scan_points": 10010,
+  "scope": "This falsifies the exact v10A constant derivative coupling on its intended AeST simple-mu quasistatic branch. It does not falsify every spatial tensor carrier. A successor must derive a positive global principal matrix rather than multiply beta by a fitted galaxy/cluster or acceleration gate.",
+  "status": "completed Sigma v10A quasistatic ellipticity falsification",
+  "zero_field_block": {
+    "AQUAL_longitudinal_stiffness": 0.0,
+    "AQUAL_transverse_stiffness": 0.0,
+    "acceleration_ratio": 0.0,
+    "determinant": -0.140625,
+    "directional_scalar_stiffness": 0.0,
+    "elliptic": false,
+    "gradient_eigenvalues": [
+      -0.2702847075210474,
+      0.5202847075210475
+    ],
+    "gradient_matrix": [
+      [
+        0.0,
+        0.375
+      ],
+      [
+        0.375,
+        0.25
+      ]
+    ],
+    "propagation_cosine": 0.0,
+    "scalar_schur_complement": -0.5625
+  }
+}

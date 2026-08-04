@@ -1,0 +1,33 @@
+{
+  "protocol_version": "Sigma-v10A-0.2-quasistatic-ellipticity-gate",
+  "status": "frozen theory-only follow-up to the completed v10A selection",
+  "question": "Does the exact nonzero constant coupling beta P^mn D_(m S_n) retain ellipticity on the simple-mu AeST quasistatic branch at every field strength and propagation angle?",
+  "parent_protocol": "configs/sigma_v10a_spatial_polarization_selection.json",
+  "fixed_values": {
+    "base_scalar_speed_squared": 0.75,
+    "carrier_speed_squared": 0.25,
+    "mixing_beta": 0.375
+  },
+  "derivation": {
+    "AQUAL_interpolation": "mu(x)=x/(1+x)",
+    "transverse_stiffness": "K_T=mu=x/(1+x)",
+    "longitudinal_stiffness": "K_L=mu+x dmu/dx=x(x+2)/(1+x)^2",
+    "directional_stiffness": "K(theta)=K_T+(K_L-K_T) cos(theta)^2",
+    "mixed_high_k_block": "[[K(theta), beta], [beta, c_P^2]]",
+    "ellipticity_condition": "K(theta)>beta^2/c_P^2",
+    "mass_irrelevance": "L_P^-2 V'' contributes at k^0 and cannot repair a negative k^2 eigenvalue as k tends to infinity"
+  },
+  "scan": {
+    "acceleration_ratio_min_positive": 1e-8,
+    "acceleration_ratio_max": 100000000.0,
+    "acceleration_ratio_points": 2001,
+    "propagation_cosines": [0.0, 0.25, 0.5, 0.75, 1.0]
+  },
+  "advance_rule": "Advance exact v10A only if the minimum gradient eigenvalue is strictly positive for the complete scan and the analytic x->0 limit is nonnegative without setting beta to zero.",
+  "retire_rule": "Retire exact v10A if any nonzero beta produces a negative high-k eigenvalue on the MOND branch; do not repair it with a sixth constant or a data-selected field gate.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "astronomical_fitting_authorized": false
+  }
+}

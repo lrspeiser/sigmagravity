@@ -1,0 +1,69 @@
+{
+  "protocol_version": "Sigma-v10A-0.1-spatial-polarization-selection",
+  "status": "frozen before any new observational access",
+  "question": "Can a uniquely baryon-forced symmetric spatial carrier escape the v9B local-force theorem by retaining both spherical curvature and shear orientation while passing necessary no-data health and capacity gates?",
+  "candidate": "one-metric AeST plus a symmetric aether-spatial polarization tensor",
+  "action": "S=S_AeST+(16 pi G)^-1 int sqrt(-g)[(1/2) dot(P)_mn dot(P)^mn-(c_P^2/2) D_l P_mn D^l P^mn-L_P^-2(P_mn P^mn/2+(P_mn P^mn)^2/4)+beta P^mn D_(m S_n)+zeta^n A^m P_mn]",
+  "definitions": {
+    "aether_projector": "q_mn=g_mn+A_m A_n",
+    "scalar_spatial_gradient": "S_m=q_m^n nabla_n phi",
+    "carrier": "P_mn=P_nm and A^m P_mn=0; six spatial components including trace",
+    "spatial_derivative": "D_l P_mn=q_l^a q_m^b q_n^c nabla_a P_bc",
+    "aether_time_derivative": "dot(P)_mn=q_m^a q_n^b A^l nabla_l P_ab",
+    "source_tensor": "H_mn=D_(m S_n)",
+    "carrier_potential": "V(P)=P:P/2+(P:P)^2/4",
+    "fixed_coefficients": "c_P^2=1-c_s^2 and beta=c_s^2/2; at c_s^2=3/4 these are 1/4 and 3/8",
+    "physical_metric": "g_mn; all matter and photons remain minimally coupled to one metric"
+  },
+  "integration_by_parts_identity": "int sqrt(-g) P^mn D_m S_n = -int sqrt(-g) S_n D_m P^mn plus boundary and projector/aether-derivative terms; full covariant variation remains mandatory",
+  "fixed_selection_values": {
+    "K_B": 1.0,
+    "K_2": 2.0,
+    "lambda_s": 1.0,
+    "existing_spent_cluster_amplification_target": 3.14465
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "mu_sigma", "K_B", "K_2", "L_P"],
+    "count": 5,
+    "maximum_allowed": 5,
+    "object_specific_gravity_parameters": 0,
+    "lensing_only_parameters": 0
+  },
+  "selection_gates": {
+    "necessary_flat_scalar_carrier_speeds": "all squared speeds strictly positive and no greater than one",
+    "unmixed_carrier_speeds": "all five orthogonal polarizations have 0<c_P^2<=1",
+    "carrier_potential": "strictly convex for every finite P",
+    "geometry": "nonzero isotropic trace, nonzero spherical exterior tidal response, nonzero STF response, rotation covariance error below 1e-12, and nonlinear nonadditivity above 1e-3",
+    "local_force_theorem_escape": "equal-g_bar scale pair has unequal Hessian source",
+    "capacity": "necessary flat linear capacity at least 3.14465",
+    "complexity": "at most five universal physical constants, no labels, no object-specific force state"
+  },
+  "mandatory_next_gates": {
+    "constraint_and_modes": "derive the full metric-aether-scalar-carrier quadratic action and nonlinear constraint count",
+    "static_ellipticity": "reduce the complete quasistatic AeST constitutive Hessian with P present; reject if the deep-AQUAL Schur complement is nonpositive",
+    "metric_projection": "derive Psi, Phi, and Weyl from the same metric rather than assuming the v8A scalar projection survives",
+    "source_uniqueness": "prove universal retarded/no-incoming boundary data and no independent homogeneous carrier profile",
+    "local_tests": "derive PPN, Solar screening, cosmology, and c_T on nontrivial backgrounds"
+  },
+  "failure_rules": {
+    "selection": "retire immediately if a declared necessary selection gate fails",
+    "next_stage": "retire before data for an extra mode, negative kinetic or gradient eigenvalue, nonhyperbolic branch, nonunique carrier state, nonluminal tensor mode, or loss of a one-metric matter/photon law",
+    "no_patch": "do not add a sixth constant, object branch, lens-only multiplier, or galaxy/cluster gate to repair a failure"
+  },
+  "prior_art_scope": {
+    "established": [
+      "AeST one-metric scalar-vector-tensor base",
+      "preferred-frame and spatially covariant gravity",
+      "massive and auxiliary tensor fields",
+      "convex nonlinear polarization potentials"
+    ],
+    "project_specific_hypothesis": "the fixed six-component spatial carrier sourced by the projected AeST scalar Hessian as a baryon-forced galaxy/cluster geometry discriminator",
+    "novelty_claim": false
+  },
+  "data_policy": {
+    "new_observational_product_accessed": false,
+    "raw_holdout_opened": false,
+    "spent_scalar_summary_allowed": "only the already-documented factor-3.14465 cluster amplitude target",
+    "authorization_after_selection": "full theory variation and health audits only; no astronomical fitting"
+  }
+}

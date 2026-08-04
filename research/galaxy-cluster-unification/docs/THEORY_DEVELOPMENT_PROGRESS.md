@@ -1,5 +1,33 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v10A spatial-polarization sequence
+
+V10A is a six-component symmetric tensor constrained to the AeST aether's
+spatial slice and sourced by the projected symmetric derivative of the AeST
+scalar spatial gradient. Its trace supplies an isotropic response and its STF
+components preserve tidal/shear orientation. The selected fixed coefficients
+are `c_P^2=1-c_s^2=1/4` and `beta=c_s^2/2=3/8`, leaving the provisional physical
+budget at five constants.
+
+The theory-only selection identities pass. The normalized scalar--longitudinal
+carrier block has squared speeds `0.0493061` and `0.950694`; the other five
+carrier components have squared speed `0.25`. The carrier potential is strictly
+convex, the local response is rotation covariant to `1.58e-16`, the frozen
+two-source probe is `34.08%` nonadditive, and equal-`g_bar` systems are
+distinguished because their Hessian source scales as `M/r^3`. The flat response
+capacity is `4`, above the spent factor-`3.14465` target. No observation was
+opened.
+
+The exact next gate retires the action. On the simple-mu quasistatic branch,
+`K_T=x/(1+x)` and `K_L=x(x+2)/(1+x)^2` both vanish as `x` tends to zero. The
+constant mixing requires `K>beta^2/c_P^2=0.5625`. Transverse perturbations are
+therefore non-elliptic below `x=9/7`, longitudinal perturbations below
+`x=4/sqrt(7)-1`, and the zero-field principal matrix has eigenvalue
+`-0.270285`. The mass and convex quartic are order-`k^0` and cannot repair an
+order-`k^2` sign. Every nonzero constant beta fails; beta zero removes the
+mechanism. Exact v10A is retired before data. See
+[`SIGMA_V10A_SPATIAL_POLARIZATION_FALSIFICATION.md`](SIGMA_V10A_SPATIAL_POLARIZATION_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v9B local first-gradient mechanism closure
 
 The v9A spherical null generalizes. For every regular, shift-symmetric local
