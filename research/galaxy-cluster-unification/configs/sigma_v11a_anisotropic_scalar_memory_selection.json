@@ -1,0 +1,24 @@
+{
+  "protocol_version": "Sigma-v11A-0.1-anisotropic-scalar-memory-selection",
+  "status": "frozen theory-only mechanism selection",
+  "candidate": "Sigma v11A bounded anisotropic scalar memory",
+  "fixed_values": {
+    "K_B": 1.0,
+    "aether_speed_squared_u": 0.75,
+    "maximum_memory_speed_squared_s": 0.2727272727272727,
+    "normalized_mixing_squared_q": 0.18181818181818182,
+    "anisotropy_fraction": 0.25,
+    "physical_parameter_count": 5,
+    "maximum_physical_parameters": 5,
+    "ratio_scan_maximum": 100000000.0,
+    "ratio_scan_samples": 401,
+    "angle_scan_samples": 201
+  },
+  "coefficient_rule": "With u=3/4, require zero-field static response capacity 3 and saturate the metric upper cone: q/s=2/3 and q=(1-u)(1-s), giving s=3/11 and q=2/11. Set bounded anisotropy fraction to the already-derived 1-u=1/4.",
+  "failure_rule": "Retire v11A before data if the fixed-background spatial tensor or static Schur block is nonpositive, any mixed root is nonreal, negative, or superluminal, the aether-rest TT metric principal symbol changes, the fifth physical constant is exceeded, or the static/retarded boundary rule leaves an object-specific homogeneous state.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "mechanism selection and fixed-background principal inequalities only"
+  }
+}

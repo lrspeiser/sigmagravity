@@ -1,5 +1,28 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v11A anisotropic scalar-memory selection
+
+The first post-reset candidate passes its fixed-background selection gate.
+V11A uses one massive scalar memory with bounded spatial kinetic tensor
+`C^mn=s[q^mn-(1-u)S^mS^n/(a_Sigma^2+S:S)]` and source
+`beta D_m chi J^m`. The coefficients remain derived: `u=3/4`, `s=3/11`,
+`beta^2/K_B=2/11`, and anisotropy fraction `1-u=1/4`. Only the memory length
+`L_chi` is new, leaving five physical constants total.
+
+For every field magnitude and wave direction,
+`9/44<=s_eff<=3/11`. The worst static Schur margin is `1/44`. All 80,601
+fixed-background magnitude/angle cases have real positive mixed roots no
+greater than one; the endpoints are `(9/44,1)` and
+`(0.156573,0.979790)`. A scalar derivative contains no metric connection, so
+the aether-rest TT metric principal symbol avoids the exact v10D failure.
+
+This differs from v4's retired isotropic scalar memory because the propagation
+operator is directionally aligned by the baryon-forced AeST field. It still
+needs complete variation, nonlinear global rank, tilted/nonzero-gradient
+cones, weak `Psi/Phi` and lensing equations, PPN/Solar limits, and numerics.
+No observation was opened. See
+[`SIGMA_V11A_ANISOTROPIC_SCALAR_MEMORY_SELECTION.md`](SIGMA_V11A_ANISOTROPIC_SCALAR_MEMORY_SELECTION.md).
+
 ## 2026-08-04 Sigma v10D tensor-cone falsification and mechanism reset
 
 Exact v10D fails the decisive nonzero-background metric characteristic gate.

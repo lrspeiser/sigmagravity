@@ -1,0 +1,95 @@
+{
+  "action_structure": {
+    "alignment": "z=(S:S)/(a_Sigma^2+S:S)",
+    "carrier_kinetic": "+(A.nabla chi)^2/2-C^mn nabla_m chi nabla_n chi/2",
+    "mass": "-chi^2/(2 L_chi^2)",
+    "source": "+beta D_m chi J^m = -beta chi D_m J^m + boundary",
+    "spatial_tensor": "C^mn=s[q^mn-(1-u) S^m S^n/(a_Sigma^2+S:S)]",
+    "static_equation": "D_m(C^mn D_n chi)-L_chi^-2 chi=-beta D_m J^m"
+  },
+  "all_selection_gates_pass": true,
+  "analytic_bounds": {
+    "minimum_memory_speed_squared": 0.20454545454545453,
+    "minimum_static_schur_margin": 0.022727272727272707,
+    "minimum_upper_cone_margin": 0.0,
+    "saturated_aligned_roots": [
+      0.15657340281193555,
+      0.9797902335517009
+    ],
+    "zero_field_roots": [
+      0.20454545454545453,
+      1.0
+    ]
+  },
+  "candidate": "Sigma v11A bounded anisotropic scalar memory",
+  "coefficients": {
+    "K_B": 1.0,
+    "aether_speed_squared_u": 0.75,
+    "anisotropy_fraction": 0.25,
+    "beta": 0.4264014327112209,
+    "maximum_memory_speed_squared_s": 0.2727272727272727,
+    "minimum_memory_speed_squared": 0.20454545454545453,
+    "normalized_mixing_squared_q": 0.18181818181818182
+  },
+  "data_policy": {
+    "authorization": "mechanism selection and fixed-background principal inequalities only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v11a_only_to_covariant_variation_and_global_rank_gates",
+  "observational_data_accessed": false,
+  "parameter_count": {
+    "derived_not_fitted": [
+      "s=3/11",
+      "q=2/11",
+      "anisotropy=1-u=1/4"
+    ],
+    "list": [
+      "a_Sigma",
+      "mu_Sigma",
+      "K_B",
+      "K_2",
+      "L_chi"
+    ],
+    "maximum": 5,
+    "physical": 5
+  },
+  "raw_holdout_opened": false,
+  "reason": "The bounded scalar transport tensor stays positive, the aether-memory static margin is at least 1/44, all fixed-background mixed roots are positive and no greater than one, the aether-rest TT metric symbol remains Einstein-Hilbert, and the massive retarded scalar has a universal source-selected state. Full nonlinear and weak-metric gates remain unresolved.",
+  "scan": {
+    "acceleration_ratio_maximum": 100000000.0,
+    "angle_samples": 201,
+    "maximum_memory_speed_squared": 0.2727272727272727,
+    "maximum_root": 1.0,
+    "minimum_memory_speed_squared": 0.20454545454545453,
+    "minimum_root": 0.15657340281193555,
+    "minimum_static_margin": 0.022727272727272707,
+    "minimum_upper_cone_margin": 0.0,
+    "ratio_samples": 401
+  },
+  "scope": "This selects a materially different post-reset field architecture. It is not an observational result and does not establish the nonlinear action.",
+  "selection_gates": {
+    "aether_rest_TT_metric_principal_symbol_unchanged": true,
+    "bounded_alignment_regular_at_zero": true,
+    "memory_spatial_tensor_globally_positive": true,
+    "mixed_cones_analytic_upper_margin_nonnegative": true,
+    "physical_parameter_cap_respected": true,
+    "retarded_no_incoming_rule_removes_object_specific_homogeneous_state": true,
+    "scan_roots_inside_metric_cone": true,
+    "scan_roots_positive": true,
+    "scan_roots_real": true,
+    "scan_static_margin_positive": true,
+    "scan_upper_cone_margin_nonnegative": true,
+    "static_massive_operator_has_unique_zero_boundary_solution": true,
+    "static_mixed_block_globally_positive": true
+  },
+  "status": "completed Sigma v11A theory-only mechanism selection",
+  "unresolved": {
+    "PPN_Solar_and_cosmology": false,
+    "complete_covariant_variation_and_Hilbert_stress": false,
+    "nonlinear_ADM_constraint_and_global_rank": false,
+    "numerical_PDE_and_observational_tests": false,
+    "tilted_nonzero_chi_gradient_characteristics": false,
+    "weak_metric_Psi_Phi_and_lensing_projection": false
+  }
+}

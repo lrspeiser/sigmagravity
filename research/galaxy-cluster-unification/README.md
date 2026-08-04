@@ -15,7 +15,17 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
-The current theory-only result is
+The current theory-only selection is
+[`docs/SIGMA_V11A_ANISOTROPIC_SCALAR_MEMORY_SELECTION.md`](docs/SIGMA_V11A_ANISOTROPIC_SCALAR_MEMORY_SELECTION.md).
+After the required v10 mechanism reset, v11A replaces the rank-two carrier
+with one bounded anisotropic scalar memory. Its fixed-background spatial
+stiffness stays between `9/44` and `3/11`, the static Schur margin is at least
+`1/44`, and all mixed roots remain positive and no greater than one. Because a
+scalar derivative has no metric connection, the aether-rest TT metric symbol
+does not inherit v10D's automatic cone widening. This is selection only:
+nonlinear rank, tilted cones, weak metric/lensing equations, PPN/Solar limits,
+and data remain unresolved.
+The preceding theory-only result is
 [`docs/SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md`](docs/SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md).
 Exact v10D is retired before data. On the exact axisymmetric spin-two sector,
 its nonzero carrier background gives
