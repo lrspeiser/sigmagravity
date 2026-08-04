@@ -80,6 +80,8 @@ results/sigma_v1_nonmetricity_cycle/*
 !results/sigma_v3a_dhost_edge_audit/**
 !results/sigma_v3b_linear_nonlocal_spectral_audit/
 !results/sigma_v3b_linear_nonlocal_spectral_audit/**
+!results/sigma_v3c_spent_operator_inference/
+!results/sigma_v3c_spent_operator_inference/**
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/

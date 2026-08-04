@@ -1,0 +1,55 @@
+{
+  "protocol_version": "SIGMA-V3C-SPENT-OPERATOR-INFERENCE-1.0.0",
+  "status": "frozen before full-map Fourier transfer and cross-cluster metrics",
+  "purpose": "Infer from already-spent cluster maps which scale, phase, and tensor information a baryon-to-Weyl operator must carry before fixing a nonlinear Sigma v3 action.",
+  "sample": {
+    "clusters": [
+      "AS295",
+      "PLCKG287"
+    ],
+    "sample_is_spent": true,
+    "source_redshift": 2.0,
+    "source_model": "AQUAL_simple_mu_diagnostic",
+    "null_source_model": "baryon_only_GR",
+    "target_model": "glafic_v2_compact_halo",
+    "target_interpretation": "same-catalog conventional halo reconstruction, not direct pixel truth"
+  },
+  "map_measurement": {
+    "half_width_kpc": 350.0,
+    "grid_points": 193,
+    "jacobian_step_arcsec": 0.12,
+    "tukey_alpha": 0.3,
+    "channels": [
+      "convergence",
+      "shear_1",
+      "shear_2"
+    ]
+  },
+  "spectral_band": {
+    "minimum_wavelength_kpc": 18.0,
+    "maximum_wavelength_kpc": 500.0,
+    "radial_bins": 22
+  },
+  "entire_filter_fit": {
+    "formula": "T(k)=exp[A exp(-(k L_sigma)^2)]",
+    "A_min": 0.0,
+    "A_max": 4.0,
+    "L_sigma_kpc_min": 10.0,
+    "L_sigma_kpc_max": 1000.0,
+    "fit_use": "spent operator-shape diagnostic only; not a frozen gravity constant"
+  },
+  "diagnostic_gates": {
+    "maximum_joint_entire_normalized_RMSE_for_linear_plausibility": 0.5,
+    "maximum_cross_cluster_binned_oracle_normalized_RMSE": 0.5,
+    "minimum_median_radial_coherence_for_isotropic_plausibility": 0.8,
+    "maximum_negative_best_real_transfer_bin_fraction": 0.0
+  },
+  "decision_rule": "If a joint two-parameter entire filter or a nonparametric real isotropic transfer cannot reproduce convergence and both shear channels across the other spent cluster, the nonlinear Sigma v3 interaction must depend on local tensor invariants or component overlap, not only on wavelength. Do not expose a new holdout in this stage.",
+  "claim_boundary": [
+    "Both clusters and the compact-halo targets were previously unsealed; this is mechanism discovery, not validation.",
+    "The halo map was constrained by the same image catalogs and is not direct ground truth at every pixel.",
+    "Finite-window Fourier modes mix scales and omit baryons outside the 350 kpc half-width.",
+    "External shear in the halo comparator can encode environment outside the registered baryon map.",
+    "A failed isotropic transfer rejects only translation-invariant real linear filtering of the measured source maps, not every nonlinear or covariant nonlocal theory."
+  ]
+}

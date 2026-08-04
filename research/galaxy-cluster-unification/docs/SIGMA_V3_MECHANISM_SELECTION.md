@@ -31,6 +31,22 @@ The selected next mechanism is narrower: a nonlinear retarded tidal
 interaction whose quadratic expansion remains Sigma-v1/GR.  This is not a
 third raw-topology failure.
 
+## Sigma v3C spent operator inference
+
+The full spent convergence and two-shear maps now constrain the nonlinear
+interaction more sharply.  A jointly fitted entire wavelength filter scores
+`0.800` normalized Fourier RMSE versus the frozen `0.500` plausibility gate.
+Even a same-cluster arbitrary radial transfer leaves `0.708--0.773` error; when
+transferred to the other cluster it leaves `0.800--0.956`.  Median radial
+coherence is only `0.276--0.291`, and both clusters require negative real
+transfer bins.  See
+[`SIGMA_V3C_SPENT_OPERATOR_INFERENCE.md`](SIGMA_V3C_SPENT_OPERATOR_INFERENCE.md).
+
+The data-facing target is no longer merely "nonlocal."  The interaction must
+condition on baryonic component overlap or local tidal eigenstructure and
+carry a symmetric trace-free retarded memory.  A wavelength-only convolution
+is insufficient even before its spectral-health problem is considered.
+
 ## Decision
 
 No Sigma v3 equation is frozen yet.  Two action-derived local scalar geometries

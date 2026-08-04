@@ -1,5 +1,24 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 Sigma v3C spent operator inference
+
+The already-opened AS295 and PLCKG287 maps were used to infer the complete
+AQUAL-to-halo transfer across convergence and both shear components.  A single
+real isotropic transfer was fitted in 22 wavelength bins from 18 to 500 kpc and
+then moved to the other cluster.  Same-cluster oracle errors remain
+`0.708--0.773`; cross-cluster errors are `0.800--0.956`; and median radial phase
+coherence is only `0.276--0.291`.  The two-parameter entire filter scores
+`0.800`, and a post-failure lower-length sensitivity only improves this to
+`0.787`.
+
+This rejects wavelength-only real linear filtering of the registered source
+maps as the missing Hessian mechanism.  The next action must respond to local
+tidal eigenstructure, component overlap, or a larger baryonic environment and
+carry that information through a uniquely baryon-forced retarded tensor
+memory.  No new raw holdout was exposed, so the count of action-level raw
+topology failures remains two.  See
+[`SIGMA_V3C_SPENT_OPERATOR_INFERENCE.md`](SIGMA_V3C_SPENT_OPERATOR_INFERENCE.md).
+
 ## 2026-08-03 Sigma v3B linear nonlocal spectral audit
 
 A scale-dependent one-metric transfer can implement the proposed separation

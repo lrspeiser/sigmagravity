@@ -1,0 +1,78 @@
+{
+  "claim_boundary": [
+    "Both clusters and the compact-halo targets were previously unsealed; this is mechanism discovery, not validation.",
+    "The halo map was constrained by the same image catalogs and is not direct ground truth at every pixel.",
+    "Finite-window Fourier modes mix scales and omit baryons outside the 350 kpc half-width.",
+    "External shear in the halo comparator can encode environment outside the registered baryon map.",
+    "A failed isotropic transfer rejects only translation-invariant real linear filtering of the measured source maps, not every nonlinear or covariant nonlocal theory."
+  ],
+  "gate_results": {
+    "all_isotropic_linear_diagnostics": false,
+    "cross_cluster_binned_isotropic_transfer": false,
+    "joint_entire_linear_plausibility": false,
+    "nonnegative_real_transfer": false,
+    "radial_phase_coherence": false
+  },
+  "inferred_action_requirement": "the next nonlinear action must respond to local tensor orientation, component overlap, or baryonic environment in addition to wavelength; a universal real isotropic convolution is insufficient",
+  "input_hashes": {
+    "AS295_baryon_map": "40db1a950ece8a641a5380eb5705bd6158ed1d98e1d9a01d1c99b5e67a0d3a2c",
+    "PLCKG287_baryon_map": "ae1ae809f1a8951b9c930dc713b005bfcb114bdebe8d578d349ae7c722c6d0a7",
+    "config": "77762bf4096decf1c88a2c7131166fde48bf72840eb74b21ec6551cb82c608c5"
+  },
+  "joint_entire_fit": {
+    "A": 1.3753440351768997,
+    "L_sigma_kpc": 10.000000006580658,
+    "normalized_RMSE": 0.8002773895169298,
+    "success": true
+  },
+  "per_cluster_entire_fits": {
+    "AS295": {
+      "A": 1.1550403783559333,
+      "L_sigma_kpc": 10.000000020412905,
+      "normalized_RMSE": 0.8196168358026799,
+      "success": true
+    },
+    "PLCKG287": {
+      "A": 1.7351951514980197,
+      "L_sigma_kpc": 10.000000003292488,
+      "normalized_RMSE": 0.7454825243168716,
+      "success": true
+    }
+  },
+  "post_failure_lower_length_sensitivity": {
+    "interpretation": "not used by the frozen gate",
+    "primary_fit_at_lower_bound": true,
+    "result": {
+      "A": 1.3236551523935456,
+      "L_sigma_kpc": 0.9513278862601976,
+      "normalized_RMSE": 0.7866656844144194,
+      "success": true
+    }
+  },
+  "sample_is_spent": true,
+  "scores": [
+    {
+      "cluster": "AS295",
+      "cross_cluster_binned_oracle_normalized_RMSE": 0.9560911976191859,
+      "identity_AQUAL_normalized_RMSE": 0.8994511868959854,
+      "identity_Newtonian_normalized_RMSE": 0.9516606315236518,
+      "joint_entire_normalized_RMSE": 0.8298426943969386,
+      "median_radial_coherence": 0.27572653457026064,
+      "negative_best_real_transfer_bin_fraction": 0.09523809523809523,
+      "self_binned_nonnegative_oracle_normalized_RMSE": 0.772976377376215,
+      "self_binned_real_oracle_normalized_RMSE": 0.7728222057461132
+    },
+    {
+      "cluster": "PLCKG287",
+      "cross_cluster_binned_oracle_normalized_RMSE": 0.8004866489160943,
+      "identity_AQUAL_normalized_RMSE": 0.9156408971721106,
+      "identity_Newtonian_normalized_RMSE": 0.9687134824846012,
+      "joint_entire_normalized_RMSE": 0.7695770935391028,
+      "median_radial_coherence": 0.2913136269279288,
+      "negative_best_real_transfer_bin_fraction": 0.09523809523809523,
+      "self_binned_nonnegative_oracle_normalized_RMSE": 0.7077067980666987,
+      "self_binned_real_oracle_normalized_RMSE": 0.7076609588343914
+    }
+  ],
+  "status": "completed Sigma v3C spent operator inference"
+}
