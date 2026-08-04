@@ -16,14 +16,16 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only checkpoint is
+[`docs/SIGMA_V9A_BOUNDED_ALIGNMENT_FALSIFICATION.md`](docs/SIGMA_V9A_BOUNDED_ALIGNMENT_FALSIFICATION.md).
+The direct first-derivative aether--scalar Gram interaction has a finite static
+principal-rank surface for every tested nonzero coupling. A bounded-in-both-
+gradients repair preserves the AeST static inertia across 2,212 points, but its
+action and first variation vanish exactly for aligned fields. It therefore
+leaves every spherical cluster at the already-insufficient fixed AeST/MOND
+monopole for every parameter value. Exact v9A is retired before new data; the
+successor must provide both a baryon-forced monopole and orientation transport.
+The preceding higher-derivative v8B failure remains in
 [`docs/SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md`](docs/SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md).
-It supersedes the healthy bounded patch in the preceding tilted-ADM audit. The
-v8B completion has a finite global Legendre-rank surface for every nonzero
-coupling: the frozen row fails at large clock velocity, and changing `K_B`
-cannot rescue it because the determinant is exactly affine in isotropic
-extrinsic curvature. Each representative crossing has finite energy and gains
-a second raw negative direction. Exact v8B is retired before data; the next
-completion must be degenerate by construction on arbitrary tilted backgrounds.
 
 The latest formula-development status is
 [`docs/P0715_P0718_LENSING_STRUCTURE_AND_TRANSFER_RESULTS.md`](docs/P0715_P0718_LENSING_STRUCTURE_AND_TRANSFER_RESULTS.md).

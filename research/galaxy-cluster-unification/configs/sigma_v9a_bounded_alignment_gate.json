@@ -1,0 +1,63 @@
+{
+  "protocol_version": "Sigma-v9A-0.1-bounded-first-derivative-alignment-gate",
+  "status": "frozen before new observational data",
+  "candidate": "one-metric AeST plus bounded aether-scalar gradient misalignment",
+  "covariant_definitions": {
+    "q_mn": "g_mn + A_m A_n",
+    "S_m": "q_m^n nabla_n phi",
+    "J_m": "A^n nabla_n A_m",
+    "Y": "S_m S^m",
+    "Z": "J_m J^m",
+    "U": "S_m J^m",
+    "N": "Y Z - U^2"
+  },
+  "variants": {
+    "one_sided": "Delta L = -4 eta_sigma a_sigma^2 N/(a_sigma^2+Y)^2",
+    "saturated": "Delta L = -4 eta_sigma a_sigma^4 N/[(a_sigma^2+Y)^2(a_sigma^2+Z)]"
+  },
+  "physical_parameters": {
+    "list": ["a_sigma", "mu_sigma", "K_B", "K_2", "eta_sigma"],
+    "count": 5,
+    "maximum_allowed": 5,
+    "object_specific_gravity_parameters": 0,
+    "lensing_only_parameters": 0
+  },
+  "selected_values": {
+    "K_B": 1.0,
+    "K_2": 2.0,
+    "lambda_s": 1.0,
+    "eta_sigma": 0.6666666666666666,
+    "fixed_MOND_mean_predicted_fraction_from_existing_development_report": 0.318
+  },
+  "robustness_values": {
+    "rank_surface_eta_values": [0.25, 0.5, 0.6666666666666666, 0.8, 0.95],
+    "Y_over_a_squared": [0.0001, 0.001, 0.01, 0.1, 0.3, 1.0, 3.0, 10.0, 100.0, 1000.0, 10000.0],
+    "Z_over_a_squared": [0.0, 0.0001, 0.001, 0.01, 0.1, 0.3, 1.0, 3.0, 10.0, 100.0, 1000.0, 10000.0],
+    "cosine": [-1.0, -0.75, -0.5, -0.25, 0.0, 0.25, 0.5, 0.75, 1.0],
+    "random_samples": 1024,
+    "random_seed": 20260804
+  },
+  "requirements": {
+    "derive_exact_covariant_invariants_and_static_fluxes": true,
+    "verify_rotation_invariance_and_Cauchy_Schwarz_nonnegativity": true,
+    "derive_exact_aether_rest_vector_kinetic_bound": true,
+    "locate_any_finite_one_sided_principal_rank_surface": true,
+    "test_the_minimal_double_saturation_repair": true,
+    "prove_the_exact_aligned_spherical_limit": true,
+    "quantify_the_best_case_amplitude_and_required_misalignment": true,
+    "run_single_and_separated_source_geometry_controls": true,
+    "do_not_open_a_new_observational_holdout": true
+  },
+  "decision_rule": {
+    "one_sided_retire": "Retire the one-sided interaction if any nonzero eta has a finite static principal-rank surface with a changed inertia.",
+    "saturated_advance": "Advance the saturated repair only if it preserves the base static inertia throughout the declared scan and can change the spherical/aligned monopole needed by the existing cluster-amplitude gate.",
+    "saturated_retire": "Retire it as the standalone cluster completion if its action and first variation vanish identically for every aligned spherical field, because the fixed AeST/MOND base already misses the existing cluster monopole amplitude.",
+    "no_parameter_rescue": "Do not tune eta after a mechanism-null result. A term proportional to YZ-U^2 is exactly zero for aligned fields for every eta."
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "new_holdout_opened": false,
+    "existing_development_summary_used": "Only the already-published fixed-MOND mean cluster fraction 0.318 is used to state the required amplitude; no array, image catalog, or holdout is loaded.",
+    "authorization_after_this_stage": "If retired, select a structurally different baryon-forced geometry carrier before any observational score."
+  }
+}

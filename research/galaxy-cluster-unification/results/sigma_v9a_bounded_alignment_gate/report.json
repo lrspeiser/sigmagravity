@@ -1,0 +1,219 @@
+{
+  "aligned_spherical_checks": {
+    "one_sided": {
+      "density": -0.0,
+      "maximum_absolute_flux": 0.0
+    },
+    "saturated": {
+      "density": -0.0,
+      "maximum_absolute_flux": 0.0
+    }
+  },
+  "angle_for_full_target": {
+    "minimum_angle_degrees": null,
+    "minimum_sine_squared": 1.023,
+    "reachable": false,
+    "target_amplification": 3.144654088050314
+  },
+  "angle_for_seventy_five_percent_gap": {
+    "minimum_angle_degrees": 74.10091830639658,
+    "minimum_sine_squared": 0.9249547920433995,
+    "reachable": true,
+    "target_amplification": 2.6084905660377355
+  },
+  "candidate": "one-metric AeST plus bounded aether-scalar gradient misalignment",
+  "covariant_definitions": {
+    "J_m": "A^n nabla_n A_m",
+    "N": "Y Z - U^2",
+    "S_m": "q_m^n nabla_n phi",
+    "U": "S_m J^m",
+    "Y": "S_m S^m",
+    "Z": "J_m J^m",
+    "q_mn": "g_mn + A_m A_n"
+  },
+  "data_policy": {
+    "authorization_after_this_stage": "If retired, select a structurally different baryon-forced geometry carrier before any observational score.",
+    "existing_development_summary_used": "Only the already-published fixed-MOND mean cluster fraction 0.318 is used to state the required amplitude; no array, image catalog, or holdout is loaded.",
+    "new_holdout_opened": false,
+    "observational_data_accessed": false
+  },
+  "decision": "retire_exact_v9A_as_the_standalone_unification_completion",
+  "decision_rule": {
+    "no_parameter_rescue": "Do not tune eta after a mechanism-null result. A term proportional to YZ-U^2 is exactly zero for aligned fields for every eta.",
+    "one_sided_retire": "Retire the one-sided interaction if any nonzero eta has a finite static principal-rank surface with a changed inertia.",
+    "saturated_advance": "Advance the saturated repair only if it preserves the base static inertia throughout the declared scan and can change the spherical/aligned monopole needed by the existing cluster-amplitude gate.",
+    "saturated_retire": "Retire it as the standalone cluster completion if its action and first variation vanish identically for every aligned spherical field, because the fixed AeST/MOND base already misses the existing cluster monopole amplitude."
+  },
+  "exact_spherical_background_correction": 0.0,
+  "first_derivatives_only": true,
+  "flat_quadratic_spectrum_unchanged": true,
+  "known_development_amplitude_target": 3.144654088050314,
+  "maximum_perpendicular_amplification": 2.9999999999999996,
+  "new_holdout_opened": false,
+  "next_gate": "Do not add another angular gate to AeST. Select a baryon-forced carrier that has a nonzero spherical monopole and independently transports orientation/shear, with bounded first-order dynamics or an exact degeneracy identity, before opening any observational holdout.",
+  "observational_data_accessed": false,
+  "one_sided_decision": "retire_on_finite_static_principal_rank_surface",
+  "one_sided_globally_regular": false,
+  "one_sided_rank_surfaces": [
+    {
+      "J_over_a": 3.003928815013808,
+      "Y_over_a_squared": 1.0,
+      "Z_over_a_squared": 9.02358832567026,
+      "eta": 0.25,
+      "inertia_above": [
+        2,
+        0,
+        4
+      ],
+      "inertia_below": [
+        3,
+        0,
+        3
+      ],
+      "minimum_absolute_eigenvalue": 3.941291737419306e-15,
+      "null_mode_aether_power": 0.41714576136179893,
+      "null_mode_scalar_power": 0.5828542386382005
+    },
+    {
+      "J_over_a": 2.130757805526684,
+      "Y_over_a_squared": 1.0,
+      "Z_over_a_squared": 4.540128825812889,
+      "eta": 0.5,
+      "inertia_above": [
+        2,
+        0,
+        4
+      ],
+      "inertia_below": [
+        3,
+        0,
+        3
+      ],
+      "minimum_absolute_eigenvalue": 1.249000902703301e-16,
+      "null_mode_aether_power": 0.4735843907134789,
+      "null_mode_scalar_power": 0.5264156092865209
+    },
+    {
+      "J_over_a": 1.870418769448396,
+      "Y_over_a_squared": 1.0,
+      "Z_over_a_squared": 3.498466373104852,
+      "eta": 0.6666666666666666,
+      "inertia_above": [
+        2,
+        0,
+        4
+      ],
+      "inertia_below": [
+        3,
+        0,
+        3
+      ],
+      "minimum_absolute_eigenvalue": 3.301385749386876e-15,
+      "null_mode_aether_power": 0.5480924098218912,
+      "null_mode_scalar_power": 0.4519075901781083
+    },
+    {
+      "J_over_a": 1.741824546222221,
+      "Y_over_a_squared": 1.0,
+      "Z_over_a_squared": 3.0339527498222463,
+      "eta": 0.8,
+      "inertia_above": [
+        2,
+        0,
+        4
+      ],
+      "inertia_below": [
+        3,
+        0,
+        3
+      ],
+      "minimum_absolute_eigenvalue": 1.734723475976807e-16,
+      "null_mode_aether_power": 0.6308233471270378,
+      "null_mode_scalar_power": 0.36917665287296236
+    },
+    {
+      "J_over_a": 1.6647882338335627,
+      "Y_over_a_squared": 1.0,
+      "Z_over_a_squared": 2.771519863510673,
+      "eta": 0.95,
+      "inertia_above": [
+        2,
+        0,
+        4
+      ],
+      "inertia_below": [
+        3,
+        0,
+        3
+      ],
+      "minimum_absolute_eigenvalue": 5.137495440117114e-13,
+      "null_mode_aether_power": 0.747130562080664,
+      "null_mode_scalar_power": 0.25286943791933525
+    }
+  ],
+  "physical_parameters": {
+    "count": 5,
+    "lensing_only_parameters": 0,
+    "list": [
+      "a_sigma",
+      "mu_sigma",
+      "K_B",
+      "K_2",
+      "eta_sigma"
+    ],
+    "maximum_allowed": 5,
+    "object_specific_gravity_parameters": 0
+  },
+  "prior_art_boundary": "AeST, scalar-vector-tensor actions, aether-acceleration invariants, and scalar/aether derivative cross-couplings are prior-art categories. The targeted search did not establish that this exact rational Gram function was published, but algebraic novelty would not rescue its mechanism-null result and no novelty claim is made.",
+  "protocol_version": "Sigma-v9A-0.1-bounded-first-derivative-alignment-gate",
+  "reason": "The direct one-sided term changes the six-variable static principal inertia at a finite aether acceleration for every tested nonzero eta. Adding the minimal Z saturation removes that failure throughout the declared necessary scan, but cannot solve the target mechanism: the Gram determinant and both first-variation fluxes vanish exactly whenever the scalar and aether gradients are aligned. Every spherical baryonic configuration therefore remains exactly the fixed AeST/MOND solution, which already supplies only 0.318 of the existing cluster target on average. Eta cannot repair an identically zero source.",
+  "requirements": {
+    "derive_exact_aether_rest_vector_kinetic_bound": true,
+    "derive_exact_covariant_invariants_and_static_fluxes": true,
+    "do_not_open_a_new_observational_holdout": true,
+    "locate_any_finite_one_sided_principal_rank_surface": true,
+    "prove_the_exact_aligned_spherical_limit": true,
+    "quantify_the_best_case_amplitude_and_required_misalignment": true,
+    "run_single_and_separated_source_geometry_controls": true,
+    "test_the_minimal_double_saturation_repair": true,
+    "verify_rotation_invariance_and_Cauchy_Schwarz_nonnegativity": true
+  },
+  "saturated_decision": "retire_as_standalone_unification_completion_on_exact_spherical_null",
+  "saturated_static_scan": {
+    "inertia_changes": 0,
+    "minimum_combined_to_base_determinant_ratio": 0.2573365568656143,
+    "minimum_location": {
+      "Y_over_a_squared": 1.0,
+      "Z_over_a_squared": 0.1,
+      "cosine": -1.0
+    },
+    "minimum_singular_value": 1.3698557923249481,
+    "necessary_static_gate_passed": true,
+    "points_scanned": 2212
+  },
+  "scope": "This retires the exact Gram-only v9A interaction as the standalone galaxy-cluster completion. The saturated term remains a mathematically interesting topology perturbation, but it has not passed a full Dirac, characteristic, PPN, or source-uniqueness audit and is not authorized as an extra fitted term. No new observational array or holdout was opened.",
+  "selected_values": {
+    "K_B": 1.0,
+    "eta_sigma": 0.6666666666666666
+  },
+  "seventy_five_percent_gap_target": 2.6084905660377355,
+  "status": "completed Sigma v9A bounded alignment theory-only gate",
+  "synthetic_geometry": {
+    "single_source_maximum_sine_squared": 5.182263116412731e-16,
+    "two_source_field_weighted_fraction_above_half": 0.006197888740172136,
+    "two_source_field_weighted_mean_sine_squared": 0.024308752811169485,
+    "two_source_field_weighted_median_sine_squared": 0.0070111263914994625,
+    "two_source_field_weighted_p90_sine_squared": 0.04767139719133582,
+    "two_source_maximum_sine_squared": 0.9568044335887788
+  },
+  "transition_vector_kinetic": {
+    "activation": 1.0,
+    "parallel": 1.0,
+    "perpendicular": 0.33333333333333337
+  },
+  "variants": {
+    "one_sided": "Delta L = -4 eta_sigma a_sigma^2 N/(a_sigma^2+Y)^2",
+    "saturated": "Delta L = -4 eta_sigma a_sigma^4 N/[(a_sigma^2+Y)^2(a_sigma^2+Z)]"
+  },
+  "vector_kinetic_positive_all_Y": true
+}

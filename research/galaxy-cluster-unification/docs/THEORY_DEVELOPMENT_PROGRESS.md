@@ -1,5 +1,33 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v9A bounded first-derivative alignment sequence
+
+V9A replaced v8B's higher-derivative clock completion with a first-derivative
+Gram interaction between the projected scalar gradient and aether acceleration.
+The direct term is quartic around flat space, keeps the published AeST quadratic
+spectrum, uses five constants, and has an exact small-vector kinetic bound
+`K_perp=K_B-4 eta y/(1+y)^2`.  Nevertheless, its full six-variable static
+principal matrix changes inertia at finite aether acceleration for every tested
+nonzero coupling. At the selected `K_B=1`, `eta=2/3`, the first surface is
+`Y/a_sigma^2=1`, `Z/a_sigma^2=3.498466`, with a mixed `54.81%` aether and
+`45.19%` scalar null direction.
+
+The minimal double saturation bounds the complete interaction by
+`eta a_sigma^2`. It preserves the AeST static inertia across 2,212 deterministic
+and random points, with minimum singular value `1.369856`. It still fails the
+mechanism gate exactly: for aligned gradients, `YZ-U^2=0` and both variation
+fluxes vanish. Every spherical system is therefore unchanged from fixed
+AeST/MOND for every eta. The existing mean cluster amplitude target is `3.14465`,
+whereas the selected best-case perpendicular response is `3`; closing even 75%
+of the gap requires at least `74.10 degrees` of misalignment, while spherical
+fields have zero. No new observational data were opened.
+
+Exact v9A is retired as the standalone unification completion. Another angular
+gate is not authorized. The successor must generate a baryon-forced nonzero
+spherical monopole and orientation/shear transport in the same healthy action.
+See
+[`SIGMA_V9A_BOUNDED_ALIGNMENT_FALSIFICATION.md`](SIGMA_V9A_BOUNDED_ALIGNMENT_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v7 positive-carrier sequence
 
 The v7 sequence replaced v6D's multiplier-localized retarded response with a
