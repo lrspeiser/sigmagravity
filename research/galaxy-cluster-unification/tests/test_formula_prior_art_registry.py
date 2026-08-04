@@ -290,3 +290,21 @@ def test_v17n_no_go_preserves_aether_and_disformal_ancestry() -> None:
     assert {"EINSTEIN-AETHER", "TEVES", "DISFORMAL-METRIC"}.issubset(
         set(v17n["published_overlap_ids"])
     )
+
+
+def test_v17o_scale_audit_registers_published_halo_and_modified_gravity_ancestry() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17o = protocols["sigma_v17o_halo_scale_driver_audit.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17o["formula_fragments"]
+    )
+
+    assert "MOND r_M=sqrt(GM_b/a_0)" in fragment_text
+    assert "AeST r_C" in fragment_text
+    assert "NFW r_s=r_200/c_200" in fragment_text
+    assert {"NFW-HALO", "AEST-MOND", "COVARIANT-RG"}.issubset(
+        set(v17o["published_overlap_ids"])
+    )

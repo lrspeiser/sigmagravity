@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 97,
+    "sigma_protocols": 98,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 107,
+    "sigma_formula_fragments": 115,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -6261,6 +6261,87 @@
         "TEVES"
       ],
       "sha256": "234ab64d4d635fa8633454f0f7cf01cbdc2c7fd0da21671149420225078d4da2"
+    },
+    {
+      "config": "configs/sigma_v17o_halo_scale_driver_audit.json",
+      "protocol_version": "SIGMA-V17O-HALO-SCALE-DRIVER-AUDIT-1.0.0",
+      "status": "frozen before fitting any halo-scale relation",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "preregistered_relations[0].mechanism",
+          "formula": "Acceleration threshold; fixed mass exponent 1/2",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "preregistered_relations[1].mechanism",
+          "formula": "Covariant refracted-gravity-like density threshold; fixed mass exponent 1/3",
+          "published_overlap_ids": [
+            "REFRACTED-GRAVITY",
+            "COVARIANT-RG"
+          ]
+        },
+        {
+          "json_path": "preregistered_relations[2].mechanism",
+          "formula": "Published AeST cutoff; fixed mass exponent 1/6",
+          "published_overlap_ids": [
+            "AEST-MOND",
+            "EINSTEIN-AETHER"
+          ]
+        },
+        {
+          "json_path": "preregistered_relations[3].mechanism",
+          "formula": "Halo scale tracks the measured baryonic extent",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "preregistered_relations[4].mechanism",
+          "formula": "Equal acceleration-threshold and geometry contribution",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "preregistered_relations[5].mechanism",
+          "formula": "Diagnostic exponent; not a selected theory",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "preregistered_relations[6].mechanism",
+          "formula": "Continuous dimensionally consistent mass-geometry diagnostic",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "formula_inventory.equations",
+          "formula": "NFW r_s=r_200/c_200; MOND r_M=sqrt(GM_b/a_0); covariant refracted-gravity density scale r_rho proportional M_b^(1/3); AeST r_C=(r_M mu^-2)^(1/3); Sigma diagnostic r_s=A r_M^a R_b,50^(1-a)",
+          "published_overlap_ids": [
+            "NFW-HALO",
+            "MOND-ALGEBRAIC",
+            "REFRACTED-GRAVITY",
+            "COVARIANT-RG",
+            "AEST-MOND",
+            "EINSTEIN-AETHER"
+          ]
+        }
+      ],
+      "formula_fragment_count": 8,
+      "published_overlap_ids": [
+        "NFW-HALO",
+        "MOND-ALGEBRAIC",
+        "REFRACTED-GRAVITY",
+        "COVARIANT-RG",
+        "AEST-MOND",
+        "EINSTEIN-AETHER"
+      ],
+      "sha256": "9321cb0fd24d069700cfc3bd585dd9e2d8787d422df5aae9a563b1f059521289"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

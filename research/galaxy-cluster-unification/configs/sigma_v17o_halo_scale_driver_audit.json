@@ -1,0 +1,129 @@
+{
+  "protocol_version": "SIGMA-V17O-HALO-SCALE-DRIVER-AUDIT-1.0.0",
+  "status": "frozen before fitting any halo-scale relation",
+  "purpose": "Determine which baryonic dimensions, if any, can predict the scale radius of conventional halo reconstructions across galaxies and clusters with one law. Use the answer only to select a first-principle field mechanism; NFW-derived radii are diagnostic targets, not final evidence for Sigma Gravity.",
+  "parent": {
+    "protocol": "configs/sigma_v17n_decreasing_metric_screen_no_go.json",
+    "sha256": "234ab64d4d635fa8633454f0f7cf01cbdc2c7fd0da21671149420225078d4da2",
+    "report": "results/sigma_v17n_decreasing_metric_screen_no_go/report.json",
+    "report_sha256": "d66344f4506c168b871e8eccbb0e759b972c26d55156aafcb92cf3234e52ceb9"
+  },
+  "inputs": {
+    "galaxy_nfw_fits": {
+      "path": "results/sparc_independent_nuisance_refit/galaxy_fits.csv",
+      "sha256": "07b87ea1929956a06984358463546d8d5518cf4ca0ef2e7fbc078e24db8d1bb8",
+      "provenance": "NFW V200 and concentration fitted per galaxy on inner SPARC radii with weak priors; comparator only"
+    },
+    "galaxy_baryonic_features": {
+      "path": "results/solar_screened_improver_forensics/galaxy_features.csv",
+      "sha256": "138bd8971d3a4c5b8974b2dde75785ce43ce551ff1dc4c76f303417894fb7805",
+      "provenance": "pre-outcome SPARC photometric, gas, and structural features"
+    },
+    "cluster_profiles": {
+      "path": "data/raw/clash_tian2020/fig2.dat",
+      "sha256": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+      "provenance": "Tian et al. baryonic and GR/NFW-deprojected total acceleration profiles"
+    },
+    "cluster_metadata": {
+      "path": "data/raw/clash_tian2020/table1.dat",
+      "sha256": "b5f5f86feed2cdeeee125bedb0e002917ca8b6bd936a4ac6a49fef201c95c0a4",
+      "provenance": "Tian et al. cluster redshifts and identifiers"
+    }
+  },
+  "authorization": {
+    "spent_development_or_comparator_data_opened": true,
+    "untouched_holdout_opened": false,
+    "empirical_theory_fit_authorized": false,
+    "allowed_outcome": "select a mechanism class or conclude that halo scale is not identifiable from these diagnostic products"
+  },
+  "target_construction": {
+    "galaxy": "r_200=V_200/[10 H_0] and r_s=r_200/c_200 using each existing per-galaxy NFW comparator fit",
+    "cluster": "Refit the published GR/NFW-derived g_tot(r) with a spherical NFW M_200,c_200 profile using the cluster redshift and Planck-like H(z); set r_s=r_200/c_200",
+    "baryonic_mass": "Galaxies use catalog stellar+gas mass. Clusters use M_b(<r_max)=g_bar(r_max)r_max^2/G after a monotonic enclosed-mass projection.",
+    "baryonic_half_mass_radius": "Galaxies solve the catalog disk+gas exponential and Hernquist-bulge cumulative proxy for 50 percent mass. Clusters interpolate the monotonic M_b(<r) profile at 50 percent of M_b(<r_max).",
+    "claim_boundary": "Neither target is theory-neutral. Galaxy r_s is prior-sensitive and cluster r_s is reconstructed from an NFW-derived profile. The audit diagnoses scaling structure only."
+  },
+  "preregistered_relations": [
+    {
+      "id": "MOND_acceleration_radius",
+      "parameters": 1,
+      "equation": "r_s=A r_M, r_M=sqrt(G M_b/a_0)",
+      "mechanism": "Acceleration threshold; fixed mass exponent 1/2"
+    },
+    {
+      "id": "CRG_density_radius",
+      "parameters": 1,
+      "equation": "r_s=A M_b^(1/3), equivalently one universal mean-density threshold",
+      "mechanism": "Covariant refracted-gravity-like density threshold; fixed mass exponent 1/3"
+    },
+    {
+      "id": "AeST_cutoff_radius",
+      "parameters": 1,
+      "equation": "r_s=A r_M^(1/3), equivalent to r_C=(r_M mu^-2)^(1/3)",
+      "mechanism": "Published AeST cutoff; fixed mass exponent 1/6"
+    },
+    {
+      "id": "baryonic_extent",
+      "parameters": 1,
+      "equation": "r_s=A R_b,50",
+      "mechanism": "Halo scale tracks the measured baryonic extent"
+    },
+    {
+      "id": "fixed_geometric_bridge",
+      "parameters": 1,
+      "equation": "r_s=A sqrt(r_M R_b,50)",
+      "mechanism": "Equal acceleration-threshold and geometry contribution"
+    },
+    {
+      "id": "free_mass_exponent_diagnostic",
+      "parameters": 2,
+      "equation": "r_s=A (M_b/10^10 M_sun)^a",
+      "mechanism": "Diagnostic exponent; not a selected theory"
+    },
+    {
+      "id": "mass_extent_bridge_diagnostic",
+      "parameters": 2,
+      "equation": "r_s=A r_M^a R_b,50^(1-a)",
+      "mechanism": "Continuous dimensionally consistent mass-geometry diagnostic"
+    }
+  ],
+  "evaluation": {
+    "folds": 5,
+    "fold_assignment": "sha256(domain:system) modulo five",
+    "fit_weighting": "each domain receives total weight one half so 131 galaxies cannot overwhelm 20 clusters",
+    "primary_metric": "equal-domain out-of-fold RMSE in log10(r_s/kpc)",
+    "secondary_metrics": [
+      "per-domain RMSE and median bias",
+      "galaxy-to-cluster and cluster-to-galaxy transfer",
+      "free mass-exponent bootstrap interval",
+      "sensitivity to non-boundary galaxy NFW fits"
+    ],
+    "bootstrap_draws": 5000,
+    "seed": 17015
+  },
+  "gates": {
+    "maximum_one_parameter_equal_domain_cv_rmse_dex": 0.25,
+    "maximum_absolute_domain_median_bias_dex": 0.15,
+    "minimum_geometry_improvement_over_best_mass_only_dex": 0.05,
+    "minimum_galaxies": 100,
+    "minimum_clusters": 15,
+    "maximum_cluster_nfw_fit_rmse_dex": 0.05,
+    "object_type_label_allowed_in_final_relation": false,
+    "per_object_scale_parameter_allowed": false
+  },
+  "decision_rule": [
+    "If a one-parameter fixed-exponent relation passes both RMSE and domain-bias gates, use its physical threshold as the starting scale mechanism for the next covariant action.",
+    "If the two-parameter mass-extent bridge improves equal-domain RMSE by at least 0.05 dex and removes domain bias while all mass-only laws fail, the next action must contain a continuous geometry-sensitive field invariant; it may not contain a galaxy/cluster switch.",
+    "If no relation passes, do not fit a more complicated halo-radius formula to these same NFW products. Return to raw rotation/lensing fields and treat halo radius as insufficiently identifiable.",
+    "No result from this audit authorizes holdout scoring or establishes that an NFW halo is physically real."
+  ],
+  "formula_inventory": {
+    "equations": "NFW r_s=r_200/c_200; MOND r_M=sqrt(GM_b/a_0); covariant refracted-gravity density scale r_rho proportional M_b^(1/3); AeST r_C=(r_M mu^-2)^(1/3); Sigma diagnostic r_s=A r_M^a R_b,50^(1-a)"
+  },
+  "prior_art_primary_sources": [
+    "https://arxiv.org/abs/2007.00082",
+    "https://arxiv.org/abs/2109.11217",
+    "https://arxiv.org/abs/astro-ph/0403694",
+    "https://arxiv.org/abs/astro-ph/9508025"
+  ]
+}

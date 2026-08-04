@@ -1,0 +1,901 @@
+{
+  "claim_boundary": [
+    "The targets are NFW fit products, not raw observations or evidence that halos are physical.",
+    "Galaxy NFW radii inherit inner-radius prior sensitivity; cluster radii inherit the published NFW deprojection.",
+    "Domain-transfer failures are evidence against a universal scale law; domain-specific corrections are not authorized.",
+    "This result selects at most a mechanism for a covariant action and does not authorize holdout tests."
+  ],
+  "coverage": {
+    "cluster_nfw_fit_max_rmse_dex": 0.0054191477036231684,
+    "cluster_nfw_fit_median_rmse_dex": 0.0012719392419674941,
+    "clusters": 20,
+    "galaxies": 129
+  },
+  "free_mass_exponent_bootstrap": {
+    "median": 0.3736797964831383,
+    "p2_5": 0.346538851287812,
+    "p97_5": 0.40276070872887365
+  },
+  "generated_utc": "2026-08-04T23:11:52.998519+00:00",
+  "holdout_opened": false,
+  "input_hashes_verified": true,
+  "models": {
+    "AeST_cutoff_radius": {
+      "domain_transfer": {
+        "cluster_to_galaxy": {
+          "domains": {
+            "galaxy": {
+              "median_bias_dex": 0.9577498548060777,
+              "rmse_dex": 0.9491079118934389,
+              "systems": 129
+            }
+          },
+          "equal_domain_rmse_dex": 0.9491079118934389,
+          "equal_system_rmse_dex": 0.9491079118934389,
+          "source_parameters": {
+            "fixed": 1.0,
+            "intercept": 1.9800179304046588
+          },
+          "systems": 129
+        },
+        "galaxy_to_cluster": {
+          "domains": {
+            "cluster": {
+              "median_bias_dex": -0.853270745158335,
+              "rmse_dex": 0.8932568716171633,
+              "systems": 20
+            }
+          },
+          "equal_domain_rmse_dex": 0.8932568716171633,
+          "equal_system_rmse_dex": 0.8932568716171633,
+          "source_parameters": {
+            "fixed": 1.0,
+            "intercept": 1.1051401475686045
+          },
+          "systems": 20
+        }
+      },
+      "in_sample": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": -0.4158318537403083,
+            "rmse_dex": 0.4731273480958204,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": 0.52031096338805,
+            "rmse_dex": 0.5716182968062041,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.5246889386864417,
+        "equal_system_rmse_dex": 0.5594065306572276,
+        "systems": 149
+      },
+      "out_of_fold": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": -0.41778142226654813,
+            "rmse_dex": 0.4813114026474324,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": 0.5165348801469503,
+            "rmse_dex": 0.5732544919555682,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.5292831845362534,
+        "equal_system_rmse_dex": 0.561788164027472,
+        "fold_coefficients": [
+          {
+            "fixed": 1.0,
+            "intercept": 1.5262345387732712
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 1.5599877448061341
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 1.5248391172123656
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 1.5658866050791418
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 1.5341110975760563
+          }
+        ],
+        "systems": 149
+      },
+      "parameters": {
+        "fixed": 1.0,
+        "intercept": 1.5425790389866312
+      },
+      "within_domain_parameters": {
+        "cluster": {
+          "fixed": 1.0,
+          "intercept": 1.9800179304046588
+        },
+        "galaxy": {
+          "fixed": 1.0,
+          "intercept": 1.1051401475686045
+        }
+      }
+    },
+    "CRG_density_radius": {
+      "domain_transfer": {
+        "cluster_to_galaxy": {
+          "domains": {
+            "galaxy": {
+              "median_bias_dex": 0.36807771082509144,
+              "rmse_dex": 0.5187060690567321,
+              "systems": 129
+            }
+          },
+          "equal_domain_rmse_dex": 0.5187060690567321,
+          "equal_system_rmse_dex": 0.5187060690567321,
+          "source_parameters": {
+            "fixed": 1.0,
+            "intercept": 1.582328053230624
+          },
+          "systems": 129
+        },
+        "galaxy_to_cluster": {
+          "domains": {
+            "cluster": {
+              "median_bias_dex": -0.2899250250659444,
+              "rmse_dex": 0.3487778907332539,
+              "systems": 20
+            }
+          },
+          "equal_domain_rmse_dex": 0.3487778907332539,
+          "equal_system_rmse_dex": 0.3487778907332539,
+          "source_parameters": {
+            "fixed": 1.0,
+            "intercept": 1.2878246299066145
+          },
+          "systems": 20
+        }
+      },
+      "in_sample": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": -0.14267331340393996,
+            "rmse_dex": 0.2379008560349605,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": 0.22082599916308632,
+            "rmse_dex": 0.45167110413897044,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.36097340872721057,
+        "equal_system_rmse_dex": 0.42920882247733266,
+        "systems": 149
+      },
+      "out_of_fold": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": -0.14725331493708316,
+            "rmse_dex": 0.2457034760706558,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": 0.22528985660203804,
+            "rmse_dex": 0.45517778561065303,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.3657574433054104,
+        "equal_system_rmse_dex": 0.43298947778723523,
+        "fold_coefficients": [
+          {
+            "fixed": 1.0,
+            "intercept": 1.4118909158257424
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 1.4509208615969684
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 1.427031017606351
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 1.4618856763689698
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 1.4237254208436563
+          }
+        ],
+        "systems": 149
+      },
+      "parameters": {
+        "fixed": 1.0,
+        "intercept": 1.435076341568619
+      },
+      "within_domain_parameters": {
+        "cluster": {
+          "fixed": 1.0,
+          "intercept": 1.582328053230624
+        },
+        "galaxy": {
+          "fixed": 1.0,
+          "intercept": 1.2878246299066145
+        }
+      }
+    },
+    "MOND_acceleration_radius": {
+      "domain_transfer": {
+        "cluster_to_galaxy": {
+          "domains": {
+            "galaxy": {
+              "median_bias_dex": -0.2537640999844295,
+              "rmse_dex": 0.5996662953912814,
+              "systems": 129
+            }
+          },
+          "equal_domain_rmse_dex": 0.5996662953912814,
+          "equal_system_rmse_dex": 0.5996662953912814,
+          "source_parameters": {
+            "fixed": 1.0,
+            "intercept": 0.4746098891588059
+          },
+          "systems": 129
+        },
+        "galaxy_to_cluster": {
+          "domains": {
+            "cluster": {
+              "median_bias_dex": 0.30806873292757,
+              "rmse_dex": 0.35371330573143367,
+              "systems": 20
+            }
+          },
+          "equal_domain_rmse_dex": 0.35371330573143367,
+          "equal_system_rmse_dex": 0.35371330573143367,
+          "source_parameters": {
+            "fixed": 1.0,
+            "intercept": 0.7604808253468405
+          },
+          "systems": 20
+        }
+      },
+      "in_sample": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.16513326483355262,
+            "rmse_dex": 0.2526290928093817,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.11082863189041237,
+            "rmse_dex": 0.5461758157503278,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.42551702682984804,
+        "equal_system_rmse_dex": 0.5165591110839547,
+        "systems": 149
+      },
+      "out_of_fold": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.18111345351251273,
+            "rmse_dex": 0.25966033136379085,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.1133263112827343,
+            "rmse_dex": 0.5500946115947123,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.4301322874357905,
+        "equal_system_rmse_dex": 0.5206113874438373,
+        "fold_coefficients": [
+          {
+            "fixed": 1.0,
+            "intercept": 0.58751900598043
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.6318256914900191
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.6191946311025524
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.6478564607610141
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.6033114572134719
+          }
+        ],
+        "systems": 149
+      },
+      "parameters": {
+        "fixed": 1.0,
+        "intercept": 0.6175453572528231
+      },
+      "within_domain_parameters": {
+        "cluster": {
+          "fixed": 1.0,
+          "intercept": 0.4746098891588059
+        },
+        "galaxy": {
+          "fixed": 1.0,
+          "intercept": 0.7604808253468405
+        }
+      }
+    },
+    "baryonic_extent": {
+      "domain_transfer": {
+        "cluster_to_galaxy": {
+          "domains": {
+            "galaxy": {
+              "median_bias_dex": -0.2243288379743109,
+              "rmse_dex": 0.46704098856856907,
+              "systems": 129
+            }
+          },
+          "equal_domain_rmse_dex": 0.46704098856856907,
+          "equal_system_rmse_dex": 0.46704098856856907,
+          "source_parameters": {
+            "fixed": 1.0,
+            "intercept": 0.32724158943186255
+          },
+          "systems": 129
+        },
+        "galaxy_to_cluster": {
+          "domains": {
+            "cluster": {
+              "median_bias_dex": 0.2659155099194599,
+              "rmse_dex": 0.35195581995865743,
+              "systems": 20
+            }
+          },
+          "equal_domain_rmse_dex": 0.35195581995865743,
+          "equal_system_rmse_dex": 0.35195581995865743,
+          "source_parameters": {
+            "fixed": 1.0,
+            "intercept": 0.5809009506678484
+          },
+          "systems": 20
+        }
+      },
+      "in_sample": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.1390858293014665,
+            "rmse_dex": 0.2749829004607097,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.0974991573563182,
+            "rmse_dex": 0.4121528616255381,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.3503466689522712,
+        "equal_system_rmse_dex": 0.39650773754957036,
+        "systems": 149
+      },
+      "out_of_fold": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.15413416843654515,
+            "rmse_dex": 0.28275000442330167,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.09231893582064088,
+            "rmse_dex": 0.4134858015381605,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.3542019713913463,
+        "equal_system_rmse_dex": 0.39843777853758644,
+        "fold_coefficients": [
+          {
+            "fixed": 1.0,
+            "intercept": 0.4353649461279951
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.4682006559996204
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.46435391328574316
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.4738853050841245
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.43247760145594405
+          }
+        ],
+        "systems": 149
+      },
+      "parameters": {
+        "fixed": 1.0,
+        "intercept": 0.45407127004985537
+      },
+      "within_domain_parameters": {
+        "cluster": {
+          "fixed": 1.0,
+          "intercept": 0.32724158943186255
+        },
+        "galaxy": {
+          "fixed": 1.0,
+          "intercept": 0.5809009506678484
+        }
+      }
+    },
+    "fixed_geometric_bridge": {
+      "domain_transfer": {
+        "cluster_to_galaxy": {
+          "domains": {
+            "galaxy": {
+              "median_bias_dex": -0.21215017914300094,
+              "rmse_dex": 0.5157048830580028,
+              "systems": 129
+            }
+          },
+          "equal_domain_rmse_dex": 0.5157048830580028,
+          "equal_system_rmse_dex": 0.5157048830580028,
+          "source_parameters": {
+            "fixed": 1.0,
+            "intercept": 0.4009257392953342
+          },
+          "systems": 129
+        },
+        "galaxy_to_cluster": {
+          "domains": {
+            "cluster": {
+              "median_bias_dex": 0.29420304324992874,
+              "rmse_dex": 0.3502980337265621,
+              "systems": 20
+            }
+          },
+          "equal_domain_rmse_dex": 0.3502980337265621,
+          "equal_system_rmse_dex": 0.3502980337265621,
+          "source_parameters": {
+            "fixed": 1.0,
+            "intercept": 0.6706908880073443
+          },
+          "systems": 20
+        }
+      },
+      "in_sample": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.1593204688939236,
+            "rmse_dex": 0.2610149149722788,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.07726760478699579,
+            "rmse_dex": 0.45975167190034083,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.3738317707560077,
+        "equal_system_rmse_dex": 0.4383427613894383,
+        "systems": 149
+      },
+      "out_of_fold": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.1629401418022467,
+            "rmse_dex": 0.26844280817758004,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.0641095511295584,
+            "rmse_dex": 0.4623740940304885,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.3780551177360122,
+        "equal_system_rmse_dex": 0.4413228694541369,
+        "fold_coefficients": [
+          {
+            "fixed": 1.0,
+            "intercept": 0.5114419760542126
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.5500131737448197
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.5417742721941478
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.5608708829225695
+          },
+          {
+            "fixed": 1.0,
+            "intercept": 0.5178945293347079
+          }
+        ],
+        "systems": 149
+      },
+      "parameters": {
+        "fixed": 1.0,
+        "intercept": 0.5358083136513393
+      },
+      "within_domain_parameters": {
+        "cluster": {
+          "fixed": 1.0,
+          "intercept": 0.4009257392953342
+        },
+        "galaxy": {
+          "fixed": 1.0,
+          "intercept": 0.6706908880073443
+        }
+      }
+    },
+    "free_mass_exponent_diagnostic": {
+      "domain_transfer": {
+        "cluster_to_galaxy": {
+          "domains": {
+            "galaxy": {
+              "median_bias_dex": 0.9002269031915202,
+              "rmse_dex": 0.8966966770823863,
+              "systems": 129
+            }
+          },
+          "equal_domain_rmse_dex": 0.8966966770823863,
+          "equal_system_rmse_dex": 0.8966966770823863,
+          "source_parameters": {
+            "intercept": 2.0993410697589296,
+            "mass_exponent": 0.183525800012674
+          },
+          "systems": 129
+        },
+        "galaxy_to_cluster": {
+          "domains": {
+            "cluster": {
+              "median_bias_dex": -1.1354822697410594,
+              "rmse_dex": 1.1593371514660251,
+              "systems": 20
+            }
+          },
+          "equal_domain_rmse_dex": 1.1593371514660251,
+          "equal_system_rmse_dex": 1.1593371514660251,
+          "source_parameters": {
+            "intercept": 1.2802390670402108,
+            "mass_exponent": 0.08914553906769283
+          },
+          "systems": 20
+        }
+      },
+      "in_sample": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": -0.0731183163940301,
+            "rmse_dex": 0.20589372270535963,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": 0.1399409474738169,
+            "rmse_dex": 0.45483067396141563,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.3530319865293137,
+        "equal_system_rmse_dex": 0.4298758679570221,
+        "systems": 149
+      },
+      "out_of_fold": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": -0.04820459637141283,
+            "rmse_dex": 0.2129923969708393,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": 0.16449798055933385,
+            "rmse_dex": 0.4611586765559249,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.35918872903405236,
+        "equal_system_rmse_dex": 0.4361315618233326,
+        "fold_coefficients": [
+          {
+            "intercept": 1.3436199280043912,
+            "mass_exponent": 0.3723207271547326
+          },
+          {
+            "intercept": 1.3981749702048387,
+            "mass_exponent": 0.36400947032116565
+          },
+          {
+            "intercept": 1.3430946463663163,
+            "mass_exponent": 0.38414562652832385
+          },
+          {
+            "intercept": 1.3887971177437382,
+            "mass_exponent": 0.37660537682315204
+          },
+          {
+            "intercept": 1.3578000815198197,
+            "mass_exponent": 0.3714987842273478
+          }
+        ],
+        "systems": 149
+      },
+      "parameters": {
+        "intercept": 1.3664780849945708,
+        "mass_exponent": 0.373447897815601
+      },
+      "within_domain_parameters": {
+        "cluster": {
+          "intercept": 2.0993410697589296,
+          "mass_exponent": 0.183525800012674
+        },
+        "galaxy": {
+          "intercept": 1.2802390670402108,
+          "mass_exponent": 0.08914553906769283
+        }
+      }
+    },
+    "mass_extent_bridge_diagnostic": {
+      "domain_transfer": {
+        "cluster_to_galaxy": {
+          "domains": {
+            "galaxy": {
+              "median_bias_dex": -0.441220978942139,
+              "rmse_dex": 0.7832727862328254,
+              "systems": 129
+            }
+          },
+          "equal_domain_rmse_dex": 0.7832727862328254,
+          "equal_system_rmse_dex": 0.7832727862328254,
+          "source_parameters": {
+            "intercept": 0.5958874660624564,
+            "mass_weight": 1.822955663656049
+          },
+          "systems": 129
+        },
+        "galaxy_to_cluster": {
+          "domains": {
+            "cluster": {
+              "median_bias_dex": 0.2729826989956867,
+              "rmse_dex": 0.3538447279885583,
+              "systems": 20
+            }
+          },
+          "equal_domain_rmse_dex": 0.3538447279885583,
+          "equal_system_rmse_dex": 0.3538447279885583,
+          "source_parameters": {
+            "intercept": 0.5477210151672358,
+            "mass_weight": -0.18476422015508892
+          },
+          "systems": 20
+        }
+      },
+      "in_sample": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.14451289243525012,
+            "rmse_dex": 0.27837288036011465,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.10965127434787103,
+            "rmse_dex": 0.4086867584663198,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.34965434865427797,
+        "equal_system_rmse_dex": 0.3937092324249178,
+        "systems": 149
+      },
+      "out_of_fold": {
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.15721386679800164,
+            "rmse_dex": 0.28536124310147953,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.12663203961115155,
+            "rmse_dex": 0.41386514402740543,
+            "systems": 129
+          }
+        },
+        "equal_domain_rmse_dex": 0.35546828023414884,
+        "equal_system_rmse_dex": 0.3990282061917551,
+        "fold_coefficients": [
+          {
+            "intercept": 0.43081133995941756,
+            "mass_weight": -0.029927602148729266
+          },
+          {
+            "intercept": 0.43544023129983767,
+            "mass_weight": -0.20021645588400822
+          },
+          {
+            "intercept": 0.4549658051682502,
+            "mass_weight": -0.0606307452578457
+          },
+          {
+            "intercept": 0.45050102744606924,
+            "mass_weight": -0.1344146824056625
+          },
+          {
+            "intercept": 0.41874773220617456,
+            "mass_weight": -0.08036972056204676
+          }
+        ],
+        "systems": 149
+      },
+      "parameters": {
+        "intercept": 0.43774940307177274,
+        "mass_weight": -0.09984375663047779
+      },
+      "within_domain_parameters": {
+        "cluster": {
+          "intercept": 0.5958874660624564,
+          "mass_weight": 1.822955663656049
+        },
+        "galaxy": {
+          "intercept": 0.5477210151672358,
+          "mass_weight": -0.18476422015508892
+        }
+      }
+    }
+  },
+  "parent_hashes_verified": true,
+  "protocol": "configs/sigma_v17o_halo_scale_driver_audit.json",
+  "protocol_sha256": "9321cb0fd24d069700cfc3bd585dd9e2d8787d422df5aae9a563b1f059521289",
+  "report_version": "SIGMA-V17O-HALO-SCALE-DRIVER-AUDIT-1.0.0",
+  "selection": {
+    "best_mass_only_relation": "CRG_density_radius",
+    "best_one_parameter_relation": "baryonic_extent",
+    "cluster_target_reconstruction_gate_pass": true,
+    "free_mass_exponent_interpretation": "The pooled exponent is not a within-domain law: compare the separately fitted galaxy and cluster exponents and their transfer failures.",
+    "geometry_improvement_over_best_mass_only_dex": 0.010289163071261542,
+    "geometry_required_gate_pass": false,
+    "one_parameter_gate_pass": false,
+    "outcome": "halo_scale_not_identifiable_from_current_diagnostic_products"
+  },
+  "status": "completed_halo_scale_driver_audit",
+  "target_cut_sensitivity": {
+    "best_one_parameter_relation": "baryonic_extent",
+    "description": "Repeat the cross-validation while retaining finite galaxy NFW fits whose parameters landed on a prior boundary.",
+    "models": {
+      "AeST_cutoff_radius": {
+        "change_from_strict_rmse_dex": 0.01061070583571544,
+        "domains": {
+          "cluster": {
+            "median_bias_dex": -0.4259052944544055,
+            "rmse_dex": 0.488428491370475,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": 0.5160945994172099,
+            "rmse_dex": 0.5868632162092977,
+            "systems": 131
+          }
+        },
+        "equal_domain_rmse_dex": 0.5398938903719689
+      },
+      "CRG_density_radius": {
+        "change_from_strict_rmse_dex": 0.012157808708890716,
+        "domains": {
+          "cluster": {
+            "median_bias_dex": -0.1564762942700979,
+            "rmse_dex": 0.2514783391240793,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": 0.2267713345777398,
+            "rmse_dex": 0.4715914761331676,
+            "systems": 131
+          }
+        },
+        "equal_domain_rmse_dex": 0.3779152520143011
+      },
+      "MOND_acceleration_radius": {
+        "change_from_strict_rmse_dex": 0.006120846181771444,
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.17019796441624213,
+            "rmse_dex": 0.2545413580414409,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.10478830963144237,
+            "rmse_dex": 0.5619984788491013,
+            "systems": 131
+          }
+        },
+        "equal_domain_rmse_dex": 0.43625313361756196
+      },
+      "baryonic_extent": {
+        "change_from_strict_rmse_dex": 0.0019067330154284856,
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.14743285428902286,
+            "rmse_dex": 0.280152759938161,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.08442002844061602,
+            "rmse_dex": 0.41849880502526476,
+            "systems": 131
+          }
+        },
+        "equal_domain_rmse_dex": 0.3561087044067748
+      },
+      "fixed_geometric_bridge": {
+        "change_from_strict_rmse_dex": 0.0041758519440798225,
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.1542569399085303,
+            "rmse_dex": 0.26464775812007335,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.07158522355832642,
+            "rmse_dex": 0.4713412696626363,
+            "systems": 131
+          }
+        },
+        "equal_domain_rmse_dex": 0.382230969680092
+      },
+      "free_mass_exponent_diagnostic": {
+        "change_from_strict_rmse_dex": 0.011727657107924006,
+        "domains": {
+          "cluster": {
+            "median_bias_dex": -0.05169835844266912,
+            "rmse_dex": 0.2147484955948553,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": 0.15540161299458943,
+            "rmse_dex": 0.47858229663976687,
+            "systems": 131
+          }
+        },
+        "equal_domain_rmse_dex": 0.37091638614197636
+      },
+      "mass_extent_bridge_diagnostic": {
+        "change_from_strict_rmse_dex": 0.0006419122213336959,
+        "domains": {
+          "cluster": {
+            "median_bias_dex": 0.15342532721259383,
+            "rmse_dex": 0.28452242003228506,
+            "systems": 20
+          },
+          "galaxy": {
+            "median_bias_dex": -0.11528070199894236,
+            "rmse_dex": 0.4155429350143419,
+            "systems": 131
+          }
+        },
+        "equal_domain_rmse_dex": 0.35611019245548253
+      }
+    },
+    "relaxed_systems": 151,
+    "strict_systems": 149
+  }
+}
