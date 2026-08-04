@@ -1,0 +1,155 @@
+{
+  "claim_boundary": "This closes only the stated regular static F(Y,Z,U) mechanism lane. The cluster accelerations are NFW-deprojected development targets, not a raw lensing likelihood, and the point match ignores covariance. The result does not rule out curvature, density, potential, matter-kinematic, nonlocal-memory, or additional uniquely baryon-forced carrier theories.",
+  "closure_gate_passed": true,
+  "data_policy": {
+    "existing_spent_observational_products_accessed": true,
+    "new_holdout_opened": false,
+    "new_observational_product_accessed": false,
+    "spent_products_only": true
+  },
+  "decision": "close_regular_local_first_gradient_F_Y_Z_U_lane",
+  "decision_rule": {
+    "close_lane": "Close the regular local F(Y,Z,U) lane if at least 95% of cluster points lie within the spent SPARC gbar range, median nearest separation is at most 0.01 dex, median 10-neighbor required-enhancement gap is at least 0.3 dex, and at least 90% of nearest gaps exceed 0.2 dex.",
+    "interpretation": "The numerical score is retrospective and uses NFW-deprojected cluster accelerations. The structural theorem is exact under its stated assumptions; the score shows that the current development target violates the theorem's universal-RAR consequence.",
+    "no_branch_escape": "A different branch or integration charge for each object is a forbidden hidden halo state unless a universal baryon-forced boundary law uniquely predicts it.",
+    "successor": "Require an explicit nonlocal/tidal/source-state variable that distinguishes equal-gbar systems and can transport two-dimensional shear."
+  },
+  "development_overlap": {
+    "SPARC_log_enhancement": {
+      "maximum": 1.3355862628491626,
+      "median": 0.583534821988749,
+      "minimum": 0.08747125988352128,
+      "p05": 0.23384634179170968,
+      "p25": 0.4437757587248376,
+      "p75": 0.7056222244165286,
+      "p95": 0.9382818441029283
+    },
+    "SPARC_log_gbar": {
+      "maximum": -9.5133283128898,
+      "median": -11.032026391969914,
+      "minimum": -12.068422884980995,
+      "p05": -11.624183686563244,
+      "p25": -11.315433832968134,
+      "p75": -10.67506714462777,
+      "p95": -10.116420351104185
+    },
+    "SPARC_points": 968,
+    "cluster_fraction_inside_SPARC_range": 1.0,
+    "cluster_log_enhancement": {
+      "maximum": 1.2140000000000004,
+      "median": 0.8954999999999993,
+      "minimum": 0.3539999999999992,
+      "p05": 0.4328499999999993,
+      "p25": 0.7407500000000007,
+      "p75": 1.0024999999999995,
+      "p95": 1.0956999999999997
+    },
+    "cluster_log_gbar": {
+      "maximum": -9.668,
+      "median": -10.4375,
+      "minimum": -10.876,
+      "p05": -10.753,
+      "p25": -10.59225,
+      "p75": -10.181,
+      "p95": -9.8864
+    },
+    "cluster_points": 72,
+    "fraction_cluster_gap_above_0p2_dex": 0.9722222222222222,
+    "fraction_cluster_gap_positive": 1.0,
+    "local_first_gradient_conflict_gate": true,
+    "nearest_log_gbar_distance_dex": {
+      "maximum": 0.0248230494719639,
+      "median": 0.0014478700097315667,
+      "minimum": 1.0604986584894505e-05,
+      "p05": 6.879980694627364e-05,
+      "p25": 0.0004988479964822545,
+      "p75": 0.002827195528686044,
+      "p95": 0.014295985613039096
+    },
+    "nearest_required_enhancement_gap_dex": {
+      "maximum": 0.8584287697864985,
+      "median": 0.5093396610207264,
+      "minimum": 0.110685257955013,
+      "p05": 0.25934549201022267,
+      "p25": 0.44101965313638486,
+      "p75": 0.5890127570365196,
+      "p95": 0.6765827719032375
+    },
+    "nearest_required_enhancement_gap_factor_at_median": 3.2310201094660442,
+    "neighbor_count": 10,
+    "neighbor_mean_log_gbar_distance_dex": {
+      "maximum": 0.05954886429359636,
+      "median": 0.007507770810401482,
+      "minimum": 0.0026840574777608596,
+      "p05": 0.0031199479211021864,
+      "p25": 0.005272828630758309,
+      "p75": 0.010992891437499975,
+      "p95": 0.05301931581339207
+    },
+    "neighbor_median_gap_factor_at_median": 3.209986792487492,
+    "neighbor_median_required_enhancement_gap_dex": {
+      "maximum": 0.8005160258614545,
+      "median": 0.5065032455009462,
+      "minimum": 0.13691786240858672,
+      "p05": 0.26110710227528766,
+      "p25": 0.4249427531934946,
+      "p75": 0.5933981853499983,
+      "p95": 0.667304655808508
+    },
+    "overlap_interval_log_gbar": [
+      -10.876,
+      -9.668
+    ]
+  },
+  "existing_spent_observational_products_accessed": true,
+  "input_hashes": {
+    "SPARC_point_predictions_sha256": "84fe4ee64818137171d7445db3d4533af405199f3b77e91abc6e1bcd545540cd",
+    "cluster_sample_sha256": "b60cd3352d6924fb52a23c18fc3eeb640344a3cbdafbcb553f75557993a590d0"
+  },
+  "new_holdout_opened": false,
+  "new_observational_product_accessed": false,
+  "next_gate": "Select a carrier whose unique baryon-forced state depends on a tidal or finite-environment invariant, so equal-g_bar spheres need not be equal, and whose traceless response predicts shear orientation. Prove its constraint/characteristic health before observational use.",
+  "protocol_version": "Sigma-v9B-0.1-local-first-gradient-state-closure",
+  "question": "Can any regular, unique, static local first-gradient completion F(Y,Z,U) distinguish spherical galaxy and cluster points that have the same baryonic surface acceleration?",
+  "reason": "In spherical symmetry, every regular shift-symmetric local first-gradient equation integrates to a constitutive flux fixed by G M_b(<r)/r^2. With a unique inverse and universal boundary condition, the physical enhancement is therefore one function of g_bar. In the spent development products, all 72 cluster points lie inside the SPARC outer g_bar range; their median nearest acceleration separation is about 0.00145 dex, but their median required enhancement is about 0.509 dex larger. The declared local-state conflict gate passes.",
+  "requirements": {
+    "construct_equal_surface_field_spheres_with_different_potential_and_tidal_scale": true,
+    "derive_the_spherical_integrated_flux_identity": true,
+    "do_not_claim_a_raw_lensing_falsification": true,
+    "do_not_open_any_new_observational_product": true,
+    "match_cluster_points_to_spent_SPARC_points_by_gbar": true,
+    "quantify_cross_domain_gbar_overlap": true,
+    "report_required_enhancement_differences_and_input_hashes": true,
+    "state_every_assumption_needed_for_local_state_equivalence": true
+  },
+  "scale_equivalent_pair": {
+    "first_mass": 1.0,
+    "first_radius": 1.0,
+    "potential_depth_ratio_second_to_first": 10.0,
+    "second_mass": 100.0,
+    "second_radius": 10.0,
+    "surface_field_ratio_second_to_first": 1.0,
+    "tidal_or_mean_density_ratio_second_to_first": 0.1
+  },
+  "scope": {
+    "excluded": [
+      "explicit potential or field-value dependence",
+      "curvature, Hessian, density, pressure, or matter-kinematic invariants",
+      "finite-memory or nonlocal kernels",
+      "additional baryon-forced carrier fields",
+      "object-dependent integration constants or branch choices",
+      "time-dependent and nonspherical solutions"
+    ],
+    "included": "shift-symmetric local quasistatic actions built only from Y=S.S, Z=J.J, and U=S.J, with one physical metric and universal boundary conditions"
+  },
+  "spherical_flux_identity": "r^2 P_a(J,S)=c_a G M_b(<r), so P_a(J,S)=c_a g_bar",
+  "status": "completed Sigma v9B local first-gradient state closure",
+  "theorem_conclusion": "A regular unique constitutive inverse maps (J,S) and the physical force enhancement to a universal function of local g_bar alone.",
+  "theorem_conditions": {
+    "local_shift_symmetric_first_gradient_density_F_of_Y_Z_U": true,
+    "one_physical_metric": true,
+    "regular_single_valued_constitutive_inverse": true,
+    "static_spherical_symmetry": true,
+    "universal_boundary_condition_no_object_charge": true
+  }
+}

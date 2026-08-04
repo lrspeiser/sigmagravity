@@ -1,5 +1,30 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v9B local first-gradient mechanism closure
+
+The v9A spherical null generalizes. For every regular, shift-symmetric local
+quasistatic completion `F(Y,Z,U)`, spherical integration fixes each constitutive
+flux by `G M_b(<r)/r^2=g_bar`. A single-valued inverse and universal boundary
+condition therefore make the physical enhancement one universal function of
+`g_bar`; changing the angular function changes that RAR but cannot produce two
+answers at the same local acceleration.
+
+The retrospective spent-data audit makes the conflict quantitative. All 72
+cluster development points lie inside the 968-point SPARC outer acceleration
+range. Their median nearest cross-domain separation is `0.001448 dex`, but the
+median required enhancement gap is `0.50934 dex`, a factor `3.231`; all gaps are
+positive and 70/72 exceed `0.2 dex`. A ten-neighbor comparison gives the same
+`0.50650 dex` median. The declared local-state conflict gate passes. The CLASH
+values are NFW-deprojected and this is not a raw-lensing likelihood, so the
+closure is limited to the exact theorem assumptions and the current development
+target.
+
+The regular local first-gradient lane is closed. Object-specific branches or
+integration charges are forbidden hidden halo states. The successor must add a
+uniquely baryon-forced finite-environment/tidal variable with both a nonzero
+spherical monopole and a traceless shear response. See
+[`SIGMA_V9B_LOCAL_FIRST_GRADIENT_CLOSURE.md`](SIGMA_V9B_LOCAL_FIRST_GRADIENT_CLOSURE.md).
+
 ## 2026-08-04 Sigma v9A bounded first-derivative alignment sequence
 
 V9A replaced v8B's higher-derivative clock completion with a first-derivative

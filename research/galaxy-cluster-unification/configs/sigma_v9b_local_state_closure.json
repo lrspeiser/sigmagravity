@@ -1,0 +1,45 @@
+{
+  "protocol_version": "Sigma-v9B-0.1-local-first-gradient-state-closure",
+  "status": "retrospective mechanism audit on spent development products; no holdout claim",
+  "question": "Can any regular, unique, static local first-gradient completion F(Y,Z,U) distinguish spherical galaxy and cluster points that have the same baryonic surface acceleration?",
+  "scope": {
+    "included": "shift-symmetric local quasistatic actions built only from Y=S.S, Z=J.J, and U=S.J, with one physical metric and universal boundary conditions",
+    "excluded": [
+      "explicit potential or field-value dependence",
+      "curvature, Hessian, density, pressure, or matter-kinematic invariants",
+      "finite-memory or nonlocal kernels",
+      "additional baryon-forced carrier fields",
+      "object-dependent integration constants or branch choices",
+      "time-dependent and nonspherical solutions"
+    ]
+  },
+  "inputs": {
+    "SPARC_point_predictions": "results/sparc_independent_nuisance_refit/point_predictions.csv",
+    "SPARC_filter": "model=fixed_RAR, scenario=invariant, split=outer_holdout",
+    "cluster_sample": "results/phenomenology_formula_sweep/sample.csv",
+    "cluster_filter": "domain=cluster",
+    "nearest_neighbors": 10
+  },
+  "requirements": {
+    "derive_the_spherical_integrated_flux_identity": true,
+    "state_every_assumption_needed_for_local_state_equivalence": true,
+    "construct_equal_surface_field_spheres_with_different_potential_and_tidal_scale": true,
+    "quantify_cross_domain_gbar_overlap": true,
+    "match_cluster_points_to_spent_SPARC_points_by_gbar": true,
+    "report_required_enhancement_differences_and_input_hashes": true,
+    "do_not_open_any_new_observational_product": true,
+    "do_not_claim_a_raw_lensing_falsification": true
+  },
+  "decision_rule": {
+    "close_lane": "Close the regular local F(Y,Z,U) lane if at least 95% of cluster points lie within the spent SPARC gbar range, median nearest separation is at most 0.01 dex, median 10-neighbor required-enhancement gap is at least 0.3 dex, and at least 90% of nearest gaps exceed 0.2 dex.",
+    "interpretation": "The numerical score is retrospective and uses NFW-deprojected cluster accelerations. The structural theorem is exact under its stated assumptions; the score shows that the current development target violates the theorem's universal-RAR consequence.",
+    "no_branch_escape": "A different branch or integration charge for each object is a forbidden hidden halo state unless a universal baryon-forced boundary law uniquely predicts it.",
+    "successor": "Require an explicit nonlocal/tidal/source-state variable that distinguishes equal-gbar systems and can transport two-dimensional shear."
+  },
+  "data_policy": {
+    "existing_spent_observational_products_accessed": true,
+    "new_observational_product_accessed": false,
+    "new_holdout_opened": false,
+    "spent_products_only": true
+  }
+}

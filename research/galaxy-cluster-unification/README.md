@@ -16,14 +16,17 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only checkpoint is
+[`docs/SIGMA_V9B_LOCAL_FIRST_GRADIENT_CLOSURE.md`](docs/SIGMA_V9B_LOCAL_FIRST_GRADIENT_CLOSURE.md).
+It proves that every regular, unique, static local completion `F(Y,Z,U)` reduces
+to one universal acceleration relation in spherical symmetry. In the spent
+development products, all 72 cluster points lie inside the SPARC outer
+acceleration range and match a galaxy point within `0.00145 dex` at the median,
+yet require `0.509 dex` (factor `3.23`) more enhancement. The local first-
+gradient lane is closed; another angle or saturation function cannot supply the
+missing state. The successor must use a uniquely baryon-forced finite-
+environment/tidal variable with both monopole and shear response.
+The exact v9A interaction failure is retained in
 [`docs/SIGMA_V9A_BOUNDED_ALIGNMENT_FALSIFICATION.md`](docs/SIGMA_V9A_BOUNDED_ALIGNMENT_FALSIFICATION.md).
-The direct first-derivative aether--scalar Gram interaction has a finite static
-principal-rank surface for every tested nonzero coupling. A bounded-in-both-
-gradients repair preserves the AeST static inertia across 2,212 points, but its
-action and first variation vanish exactly for aligned fields. It therefore
-leaves every spherical cluster at the already-insufficient fixed AeST/MOND
-monopole for every parameter value. Exact v9A is retired before new data; the
-successor must provide both a baryon-forced monopole and orientation transport.
 The preceding higher-derivative v8B failure remains in
 [`docs/SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md`](docs/SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md).
 
