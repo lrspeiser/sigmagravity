@@ -1,0 +1,83 @@
+{
+  "protocol_version": "Sigma-v10C-0.1-hyperbolic-aether-tidal-selection",
+  "status": "frozen before any observational access",
+  "question": "Can a hyperbolic time-kinetic completion preserve v10B's positive aether-tidal static response while eliminating its equal-time tail and keeping every sourced flat characteristic inside the physical metric cone?",
+  "candidate": "one-metric AeST plus a hyperbolic symmetric aether-spatial polarization sourced by D_(m J_n)",
+  "action": "S=S_AeST+(16 pi G)^-1 int sqrt(-g)[dot(P):dot(P)/2-(c_P^2/2) D P:D P-L_P^-2(P:P/2+(P:P)^2/4)+beta P^mn D_(m J_n)+(K_B(1-u)/2) B_mn B^mn+zeta^n A^m P_mn]",
+  "definitions": {
+    "aether_acceleration": "J_m=A^n nabla_n A_m",
+    "aether_magnetic_tensor": "B_mn=q_m^a q_n^b F_ab",
+    "carrier": "P_mn=P_nm and A^m P_mn=0; six hyperbolic spatial components",
+    "source": "D_(m J_n)",
+    "physical_metric": "g_mn; all matter and photons minimally couple to one metric",
+    "boundary_condition": "universal retarded/no-incoming P radiation plus zero static field at spatial infinity"
+  },
+  "derived_coefficients": {
+    "sourced_base_speed_squared_u": "3/4 from the frozen AeST scalar speed; the spatial aether counterterm lowers the bare vector speed to the same value",
+    "static_mixing_fraction_f": "2/3, giving longitudinal static capacity 3",
+    "equations": "q/s=f and q=(1-u)(1-s)",
+    "carrier_speed_squared": "s=3/11",
+    "normalized_mixing": "q=beta^2/K_B=2/11",
+    "mixing": "beta=sqrt(2 K_B/11)",
+    "aether_magnetic_counterterm": "K_B(1-u) B:B/2=K_B B:B/8"
+  },
+  "fixed_selection_values": {
+    "K_B": 1.0,
+    "K_2": 2.0,
+    "lambda_s": 1.0,
+    "maximum_sourced_base_speed_squared": 0.75,
+    "static_mixing_fraction": 0.6666666666666666,
+    "existing_spent_cluster_amplification_target": 3.14465
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "mu_sigma", "K_B", "K_2", "L_P"],
+    "count": 5,
+    "maximum_allowed": 5,
+    "object_specific_gravity_parameters": 0,
+    "lensing_only_parameters": 0
+  },
+  "selection_gates": {
+    "static": "positive longitudinal and transverse aether-acceleration/carrier blocks",
+    "cone": "positive sourced scalar/vector and carrier squared speeds, maximum no greater than one",
+    "TT": "pure flat TT source zero and c_T^2=1",
+    "causal_front": "time-kinetic P has a retarded hyperbolic Green function rather than an equal-time elliptic tail",
+    "source_uniqueness": "strictly convex static energy plus universal retarded/no-incoming dynamic boundary condition",
+    "geometry": "nonzero trace, STF, and spherical tidal response",
+    "capacity": "longitudinal static response closes at least 75% of the spent amplitude gap",
+    "complexity": "five universal constants, one metric, no labels or object-specific gravity state"
+  },
+  "mandatory_next_gates": {
+    "variation": "derive all metric, aether, scalar, P, multiplier equations and stress-energy",
+    "ADM": "prove the full nonlinear constraint count with P time kinetic and tilted aether",
+    "characteristics": "scan arbitrary static, tilted, inhomogeneous, and cosmological backgrounds for cone loss",
+    "weak_metric": "derive complete Psi, Phi, Weyl, conservation, and compact-source equations",
+    "local_cosmology": "pass PPN, Solar screening, c_T, FLRW, and all-mode stability",
+    "numerics": "construct a convergent PDE solver before any astronomical score"
+  },
+  "failure_rules": {
+    "retire": "retire exact v10C before data for an extra negative mode, nonclosing constraint, cone above one, loss of hyperbolicity, nonunique object state, c_T change, or loss of one-metric Weyl activity",
+    "no_patch": "do not add a sixth constant, object label, lens-only term, or data-selected cone coefficient"
+  },
+  "prior_art_scope": {
+    "established": [
+      "AeST and Einstein-aether dynamics",
+      "higher-derivative aether interactions",
+      "hyperbolic coupled-field cone engineering",
+      "convex tensor self-interactions"
+    ],
+    "project_specific_hypothesis": "the fixed s=3/11, beta^2/K_B=2/11 cone-closed hyperbolic tensor sourced by the aether-acceleration Hessian",
+    "novelty_claim": false,
+    "primary_anchors": [
+      "https://arxiv.org/abs/2007.00082",
+      "https://arxiv.org/abs/2109.13287",
+      "https://arxiv.org/abs/1407.6014",
+      "https://arxiv.org/abs/1910.13995"
+    ]
+  },
+  "data_policy": {
+    "new_observational_product_accessed": false,
+    "raw_holdout_opened": false,
+    "spent_summary_allowed": "only the already-documented 3.14465 amplitude target",
+    "authorization_after_selection": "full theory and numerical health work only; no astronomical fitting"
+  }
+}

@@ -16,6 +16,17 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only checkpoint is
+[`docs/SIGMA_V10C_HYPERBOLIC_AETHER_TIDAL_SELECTION.md`](docs/SIGMA_V10C_HYPERBOLIC_AETHER_TIDAL_SELECTION.md).
+V10C gives the surviving aether-tidal trace/STF tensor a hyperbolic time
+kinetic term. Requiring both the v10B threefold static capacity and a luminal
+upper cone at the frozen AeST scalar speed derives `c_P^2=3/11` and
+`beta^2/K_B=2/11`; no sixth constant is added. The worst static determinant is
+`1/11`. Longitudinal squared speeds are `9/44` and `1`, transverse speeds are
+`0.232009/0.881627`, unmixed carrier modes have `3/11`, and flat TT remains
+luminal. This is a selection pass only: full covariant variation, nonlinear
+ADM constraints, arbitrary-background cones, PPN, Solar screening, cosmology,
+and numerics precede data.
+The preceding auxiliary implementation is
 [`docs/SIGMA_V10B_AUXILIARY_AETHER_TIDAL_FALSIFICATION.md`](docs/SIGMA_V10B_AUXILIARY_AETHER_TIDAL_FALSIFICATION.md).
 V10B moves the trace/STF tensor source from the vanishing-stiffness MOND scalar
 to the constant-stiffness aether acceleration and removes the tensor's time

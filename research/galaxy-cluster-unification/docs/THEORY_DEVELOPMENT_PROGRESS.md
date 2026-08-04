@@ -1,5 +1,30 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v10C hyperbolic aether-tidal selection
+
+V10C restores a positive time kinetic term to the v10B aether-acceleration
+Hessian carrier. The coefficients are derived rather than independently
+fitted. Requiring static mixing fraction `q/s=2/3` (capacity three) and an
+upper mixed cone exactly equal to one at sourced base speed `u=3/4` gives
+`c_P^2=s=3/11` and `beta^2/K_B=q=2/11`. A fixed spatial-aether magnetic
+counterterm lowers the bare transverse vector speed from one to `3/4`, equal
+to the frozen AeST scalar speed, without changing the physical TT cone.
+
+The necessary theory-only gates pass. The longitudinal static determinant is
+`1/11`, minimum eigenvalue `0.0759624`, and Schur complement `1/3`. Its mixed
+squared speeds are `9/44` and `1`. Canonical transverse modes have squared
+speeds `0.232009/0.881627`; unmixed P modes have `3/11`. A flat TT wave remains
+unsourced with `c_T^2=1`. The time-kinetic carrier has a retarded finite front
+rather than v10B's equal-time tail; strict static convexity plus zero boundary
+data select one stationary profile. The same linear metric correction changes
+dynamics and Weyl lensing, and trace/STF geometry remains nonzero.
+
+This is selection only. The upper longitudinal cone has zero safety margin, so
+complete covariant variation, nonlinear ADM constraints, and tilted,
+inhomogeneous, nonzero-P, and FLRW characteristics are the immediate kill
+gates. No observation was opened. See
+[`SIGMA_V10C_HYPERBOLIC_AETHER_TIDAL_SELECTION.md`](SIGMA_V10C_HYPERBOLIC_AETHER_TIDAL_SELECTION.md).
+
 ## 2026-08-04 Sigma v10B auxiliary aether-tidal sequence
 
 V10B keeps the six-component trace/STF geometry but sources it with

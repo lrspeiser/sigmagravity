@@ -1,0 +1,398 @@
+{
+  "action": "S=S_AeST+(16 pi G)^-1 int sqrt(-g)[dot(P):dot(P)/2-(c_P^2/2) D P:D P-L_P^-2(P:P/2+(P:P)^2/4)+beta P^mn D_(m J_n)+(K_B(1-u)/2) B_mn B^mn+zeta^n A^m P_mn]",
+  "all_mandatory_theory_gates_pass": false,
+  "all_selection_gates_pass": true,
+  "candidate": "one-metric AeST plus a hyperbolic symmetric aether-spatial polarization sourced by D_(m J_n)",
+  "coefficients": {
+    "aether_magnetic_counterterm_fraction": 0.25,
+    "aether_vector_speed_squared_after_counterterm": 0.75,
+    "carrier_speed_squared": 0.27272727272727276,
+    "longitudinal_static_capacity": 2.9999999999999996,
+    "mixing_beta": 0.4264014327112209,
+    "normalized_mixing_beta_squared_over_KB": 0.18181818181818182,
+    "sourced_base_speed_squared": 0.75,
+    "static_mixing_fraction": 0.6666666666666666
+  },
+  "cone_margins": {
+    "longitudinal": {
+      "causal": true,
+      "luminal_upper_cone_margin": 0.0,
+      "positive": true,
+      "positive_gradient_margin": 0.022727272727272763
+    },
+    "transverse": {
+      "causal": true,
+      "luminal_upper_cone_margin": 0.09090909090909091,
+      "positive": true,
+      "positive_gradient_margin": 0.11363636363636367
+    }
+  },
+  "convexity": {
+    "0.0": {
+      "analytic_radial_eigenvalue": 1.0,
+      "analytic_transverse_eigenvalue": 1.0,
+      "eigenvalues": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "norm_squared": 0.0,
+      "strictly_convex": true
+    },
+    "0.1": {
+      "analytic_radial_eigenvalue": 1.03,
+      "analytic_transverse_eigenvalue": 1.01,
+      "eigenvalues": [
+        1.01,
+        1.01,
+        1.01,
+        1.01,
+        1.01,
+        1.03
+      ],
+      "norm_squared": 0.010000000000000002,
+      "strictly_convex": true
+    },
+    "1.0": {
+      "analytic_radial_eigenvalue": 4.0,
+      "analytic_transverse_eigenvalue": 2.0,
+      "eigenvalues": [
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        4.0
+      ],
+      "norm_squared": 1.0,
+      "strictly_convex": true
+    },
+    "10.0": {
+      "analytic_radial_eigenvalue": 301.0,
+      "analytic_transverse_eigenvalue": 101.0,
+      "eigenvalues": [
+        101.0,
+        101.0,
+        101.0,
+        101.0,
+        101.0,
+        301.0
+      ],
+      "norm_squared": 100.0,
+      "strictly_convex": true
+    }
+  },
+  "data_policy": {
+    "authorization_after_selection": "full theory and numerical health work only; no astronomical fitting",
+    "new_observational_product_accessed": false,
+    "raw_holdout_opened": false,
+    "spent_summary_allowed": "only the already-documented 3.14465 amplitude target"
+  },
+  "decision": "advance_to_full_covariant_variation_ADM_and_background_cones_only",
+  "definitions": {
+    "aether_acceleration": "J_m=A^n nabla_n A_m",
+    "aether_magnetic_tensor": "B_mn=q_m^a q_n^b F_ab",
+    "boundary_condition": "universal retarded/no-incoming P radiation plus zero static field at spatial infinity",
+    "carrier": "P_mn=P_nm and A^m P_mn=0; six hyperbolic spatial components",
+    "physical_metric": "g_mn; all matter and photons minimally couple to one metric",
+    "source": "D_(m J_n)"
+  },
+  "derived_coefficient_protocol": {
+    "aether_magnetic_counterterm": "K_B(1-u) B:B/2=K_B B:B/8",
+    "carrier_speed_squared": "s=3/11",
+    "equations": "q/s=f and q=(1-u)(1-s)",
+    "mixing": "beta=sqrt(2 K_B/11)",
+    "normalized_mixing": "q=beta^2/K_B=2/11",
+    "sourced_base_speed_squared_u": "3/4 from the frozen AeST scalar speed; the spatial aether counterterm lowers the bare vector speed to the same value",
+    "static_mixing_fraction_f": "2/3, giving longitudinal static capacity 3"
+  },
+  "fixed_selection_values": {
+    "K_2": 2.0,
+    "K_B": 1.0,
+    "existing_spent_cluster_amplification_target": 3.14465,
+    "lambda_s": 1.0,
+    "maximum_sourced_base_speed_squared": 0.75,
+    "static_mixing_fraction": 0.6666666666666666
+  },
+  "geometry": {
+    "isotropic_decomposition": {
+      "frobenius_norm": 0.5615092311264768,
+      "stf": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "stf_norm": 0.0,
+      "trace": 0.9725625172299933
+    },
+    "isotropic_response": [
+      [
+        0.3241875057433311,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.3241875057433311,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.3241875057433311
+      ]
+    ],
+    "rank_one_decomposition": {
+      "frobenius_norm": 0.7886634637471918,
+      "stf": [
+        [
+          0.5257756424981279,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.2628878212490639,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.2628878212490639
+        ]
+      ],
+      "stf_norm": 0.6439410216521997,
+      "trace": 0.7886634637471918
+    },
+    "rank_one_response": [
+      [
+        0.7886634637471918,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "spherical_tidal_decomposition": {
+      "frobenius_norm": 0.700593196992648,
+      "stf": [
+        [
+          0.5720319499657219,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.28601597498286097,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.28601597498286097
+        ]
+      ],
+      "stf_norm": 0.700593196992648,
+      "trace": 0.0
+    },
+    "spherical_tidal_response": [
+      [
+        0.5720319499657219,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        -0.28601597498286097,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        -0.28601597498286097
+      ]
+    ]
+  },
+  "hyperbolic_channels": {
+    "longitudinal": {
+      "causal": true,
+      "positive": true,
+      "speed_squared": [
+        0.20454545454545459,
+        1.0
+      ]
+    },
+    "transverse": {
+      "causal": true,
+      "positive": true,
+      "speed_squared": [
+        0.23200895618280803,
+        0.8816274074535555
+      ]
+    },
+    "unmixed_carrier_speed_squared": 0.27272727272727276,
+    "unmixed_tensor_speed_squared": 1.0
+  },
+  "linear_metric_structure": {
+    "base_no_slip_relation_retained_at_linear_static_order": true,
+    "delta_Psi_equals_delta_Phi_equals_delta_Weyl": true,
+    "flat_TT_source": 0.0,
+    "flat_tensor_speed_squared": 1.0,
+    "linear_lapse_equation_correction": "beta partial_i partial_j P_ij",
+    "linear_spatial_traceless_equation_correction": 0.0,
+    "nonlinear_metric_variation_complete": false,
+    "static_aether_acceleration": "J_i=partial_i Psi+O(2)"
+  },
+  "new_observational_product_accessed": false,
+  "next_gate": "Vary the complete action and construct the nonlinear ADM kinetic/constraint system. Evaluate the full reduced principal symbol on tilted aether, static Hessian, separated-source, and FLRW backgrounds. Reject exact v10C for any rank change, negative mode, superluminal cone, c_T shift, or nonunique no-incoming branch before data.",
+  "novelty_claim": false,
+  "physical_parameters": {
+    "count": 5,
+    "lensing_only_parameters": 0,
+    "maximum_allowed": 5,
+    "names": [
+      "a_sigma",
+      "mu_sigma",
+      "K_B",
+      "K_2",
+      "L_P"
+    ],
+    "object_specific_gravity_parameters": 0
+  },
+  "prior_art_scope": {
+    "established": [
+      "AeST and Einstein-aether dynamics",
+      "higher-derivative aether interactions",
+      "hyperbolic coupled-field cone engineering",
+      "convex tensor self-interactions"
+    ],
+    "novelty_claim": false,
+    "primary_anchors": [
+      "https://arxiv.org/abs/2007.00082",
+      "https://arxiv.org/abs/2109.13287",
+      "https://arxiv.org/abs/1407.6014",
+      "https://arxiv.org/abs/1910.13995"
+    ],
+    "project_specific_hypothesis": "the fixed s=3/11, beta^2/K_B=2/11 cone-closed hyperbolic tensor sourced by the aether-acceleration Hessian"
+  },
+  "raw_holdout_opened": false,
+  "reason": "The derived coefficients c_P^2=3/11 and beta^2/K_B=2/11 preserve the v10B threefold static capacity while closing the worst sourced flat cone exactly at c^2=1. The second longitudinal root is 9/44, transverse roots are below one, unmixed carrier modes have c^2=3/11, and the physical TT mode remains unsourced and luminal. The hyperbolic time kinetic term replaces v10B's equal-time elliptic tail with a retarded finite-front equation. Static convexity and zero-boundary data uniquely fix an object's stationary carrier state.",
+  "response": {
+    "existing_target": 3.14465,
+    "gap_closure_fraction": 0.932553097241974,
+    "longitudinal_capacity": 2.9999999999999996
+  },
+  "retarded_source_structure": {
+    "carrier_equation_type": "massive quasilinear hyperbolic",
+    "carrier_has_time_kinetic_term": true,
+    "equal_preferred_time_yukawa_constraint_tail": false,
+    "finite_front_set_by_principal_cone": true,
+    "free_carrier_waves_exist": true,
+    "free_waves_are_universal_initial_data_not_object_fit": true,
+    "nonlinear_global_well_posedness_proved": false,
+    "object_specific_homogeneous_static_profile_allowed": false,
+    "static_zero_boundary_solution_unique_from_strict_convexity": true,
+    "universal_dynamic_boundary_condition": "retarded/no incoming carrier radiation"
+  },
+  "scope": "This is a theory-only selection pass, not a viable field theory or observational result. Full covariant equations, nonlinear ADM constraints, tilted/inhomogeneous characteristics, stress-energy, PPN, Solar screening, FLRW stability, and numerical convergence remain mandatory. No observational array, map, object catalog, or holdout was opened.",
+  "selection_gates": {
+    "aether_vector_bare_cone_positive_causal": true,
+    "carrier_potential_strictly_convex": true,
+    "flat_TT_luminal_and_unsourced": true,
+    "linear_same_metric_dynamics_and_Weyl": true,
+    "longitudinal_capacity_closes_75_percent_gap": true,
+    "longitudinal_mixed_cone_positive_causal": true,
+    "longitudinal_static_principal_positive": true,
+    "no_lensing_only_parameters": true,
+    "no_object_labels": true,
+    "no_object_specific_gravity_parameters": true,
+    "nonzero_spherical_tidal_response": true,
+    "nonzero_trace_and_STF_response": true,
+    "one_minimally_coupled_matter_metric": true,
+    "parameter_count": true,
+    "retarded_finite_front_replaces_instantaneous_tail": true,
+    "static_source_state_unique": true,
+    "transverse_mixed_cone_positive_causal": true,
+    "transverse_static_principal_positive": true,
+    "unmixed_carrier_cone_positive_causal": true,
+    "upper_longitudinal_cone_exactly_luminal": true
+  },
+  "static_channels": {
+    "longitudinal": {
+      "aether_schur_complement": 0.33333333333333337,
+      "canonical_mixing": 0.4264014327112209,
+      "determinant": 0.09090909090909094,
+      "eigenvalues": [
+        0.0759623633664567,
+        1.196764909360816
+      ],
+      "matrix": [
+        [
+          1.0,
+          -0.4264014327112209
+        ],
+        [
+          -0.4264014327112209,
+          0.27272727272727276
+        ]
+      ],
+      "positive": true,
+      "static_response_capacity": 2.9999999999999996
+    },
+    "transverse": {
+      "aether_schur_complement": 0.6666666666666667,
+      "canonical_mixing": 0.30151134457776363,
+      "determinant": 0.18181818181818185,
+      "eigenvalues": [
+        0.1639861433903062,
+        1.1087411293369667
+      ],
+      "matrix": [
+        [
+          1.0,
+          -0.30151134457776363
+        ],
+        [
+          -0.30151134457776363,
+          0.27272727272727276
+        ]
+      ],
+      "positive": true,
+      "static_response_capacity": 1.4999999999999998
+    }
+  },
+  "status": "completed Sigma v10C hyperbolic action selection",
+  "unresolved_mandatory_gates": {
+    "FLRW_background_and_all_mode_stability": false,
+    "Solar_PPN_and_compact_source_screening": false,
+    "complete_weak_metric_and_stress_energy_derivation": false,
+    "full_covariant_Euler_Lagrange_equations": false,
+    "full_nonlinear_ADM_constraint_count": false,
+    "nonlinear_global_hyperbolicity": false,
+    "numerical_PDE_convergence": false,
+    "tilted_and_inhomogeneous_characteristic_cones": false
+  }
+}
