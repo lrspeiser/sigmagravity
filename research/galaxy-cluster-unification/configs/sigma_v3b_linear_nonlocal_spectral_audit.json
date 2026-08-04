@@ -1,0 +1,65 @@
+{
+  "protocol_version": "SIGMA-V3B-LINEAR-NONLOCAL-SPECTRAL-AUDIT-1.0.0",
+  "status": "frozen before structural spectral and manufactured-shear audit",
+  "model_id": "sigma_v3b_linear_nonlocal_tidal_filter",
+  "purpose": "Determine whether a universal linear nonlocal metric form factor can make gravity weak locally and stronger on cluster scales while retaining a positive spectrum, a luminal massless graviton, no free halo state, and a baryon-derived shear pattern.",
+  "premises": [
+    "Solar and laboratory measurements calibrate the high-momentum gravitational coupling.",
+    "The desired cluster response is a larger low-momentum coupling.",
+    "Matter and light couple to one physical metric.",
+    "Every nonlocal state is fixed by the baryonic source and one universal prescription.",
+    "No object-specific amplitude, scale, center, shear, or orientation is allowed."
+  ],
+  "linear_action_envelope": {
+    "covariant_class": "quadratic-curvature nonlocal metric actions whose flat-background kinetic operator is P_GR k^2 a(-k^2)",
+    "entire_inverse_transfer": "a(-k^2)=exp[-A exp(-k^2 L_sigma^2)]",
+    "static_transfer": "T(k^2)=1/a=exp[A exp(-k^2 L_sigma^2)]",
+    "infrared_to_ultraviolet_ratio": "T(0)/T(infinity)=exp(A)",
+    "rational_control": "T_rat(k^2)=1+A_rat/(1+k^2 L_sigma^2)",
+    "positive_spectral_control": "D_E(s)=Z0/s+integral rho(m^2)/(s+m^2), rho>=0",
+    "claim_boundary": "The audit is at the gauge-invariant quadratic/propagator level. It does not assert a complete nonlinear covariant completion for the nested-exponential form factor."
+  },
+  "parameters": {
+    "existing_a_sigma_m_s2": 1.2e-10,
+    "new_universal_parameters": [
+      "A",
+      "L_sigma"
+    ],
+    "total_provisional_physical_parameter_count": 3,
+    "per_object_gravity_parameters": 0,
+    "lensing_only_parameters": 0
+  },
+  "spent_diagnostic_input": {
+    "structure_summary": "results/p0716_spent_arc_structure_deficit/structure_deficit_summary.csv",
+    "base_model": "AQUAL_simple_mu_axis_repaired",
+    "newtonian_model": "baryon_only_GR_axis_repaired",
+    "use": "post-unseal amplitude anchors only; no parameter fitting or validation claim"
+  },
+  "illustrative_scales": {
+    "response_length_kpc": 100.0,
+    "galaxy_radius_kpc": 10.0,
+    "cluster_radius_kpc": 500.0,
+    "solar_radius_au": 1.0
+  },
+  "manufactured_map": {
+    "grid_size": 192,
+    "extent_in_response_lengths": 12.0,
+    "minimum_relative_shear_l2_change": 0.001
+  },
+  "gates": {
+    "maximum_total_universal_constants": 5,
+    "positive_standard_spectral_density_required": true,
+    "no_negative_propagator_residue_required": true,
+    "no_extra_propagator_pole_required": true,
+    "luminal_massless_tensor_pole_required": true,
+    "causal_lorentzian_prescription_proved_required": true,
+    "nonzero_baryon_registered_shear_response_required": true
+  },
+  "decision_rule": "A linear nonlocal Sigma v3 may be frozen only if one and the same IR-enhancing transfer passes every spectral, pole, causality, tensor-speed, and shear gate. If positive spectral exchange cannot enhance the infrared, a rational filter needs negative residue, and the entire escape lacks a proved causal positive-spectral completion, retire the linear lane and require a nonlinear tidal interaction whose quadratic propagator remains GR-like.",
+  "claim_boundary": [
+    "The standard Kallen-Lehmann monotonicity result applies to ordinary local positive-spectrum exchange. Generalized nonlocal spectral representations require a separate proof.",
+    "An entire no-zero transfer avoids extra finite propagator poles but that fact alone does not prove reflection positivity, causal Lorentzian evolution, or nonlinear stability.",
+    "The manufactured map proves only that the filter can carry trace-free spatial information; it is not an astronomical fit.",
+    "This pre-fit audit does not count as a third raw cluster-topology failure."
+  ]
+}

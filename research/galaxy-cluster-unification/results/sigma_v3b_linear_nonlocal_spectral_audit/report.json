@@ -1,0 +1,83 @@
+{
+  "advances_to_frozen_linear_sigma_v3": false,
+  "claim_boundary": [
+    "The standard Kallen-Lehmann monotonicity result applies to ordinary local positive-spectrum exchange. Generalized nonlocal spectral representations require a separate proof.",
+    "An entire no-zero transfer avoids extra finite propagator poles but that fact alone does not prove reflection positivity, causal Lorentzian evolution, or nonlinear stability.",
+    "The manufactured map proves only that the filter can carry trace-free spatial information; it is not an astronomical fit.",
+    "This pre-fit audit does not count as a third raw cluster-topology failure."
+  ],
+  "decision": "retire ordinary positive-spectrum and rational linear IR enhancement; do not freeze the entire escape until a causal generalized-positive completion is proved",
+  "entire_no_pole_escape": {
+    "causal_Lorentzian_prescription_proved": false,
+    "claim_boundary": "failure of the standard spectral test is not a theorem against every generalized nonlocal spectral representation",
+    "massless_tensor_pole_remains_luminal": true,
+    "no_finite_zero_or_added_propagator_pole": true,
+    "standard_positive_spectral_monotonicity": false,
+    "transfer": "T(s)=exp[A exp(-s L_sigma^2)]"
+  },
+  "gate_results": {
+    "entire_filter_has_no_extra_finite_pole": true,
+    "entire_filter_has_proved_causal_Lorentzian_prescription": false,
+    "entire_filter_passes_standard_positive_spectral_test": false,
+    "luminal_massless_tensor_pole": true,
+    "nonzero_baryon_registered_shear_response": true,
+    "parameter_count": true,
+    "positive_spectral_linear_exchange_can_enhance_IR": false,
+    "rational_IR_filter_has_no_negative_residue": false
+  },
+  "illustrative_scale_response": {
+    "asymptotic_force_ratio": 6.726790214118548,
+    "cluster_entire_force_ratio": 5.895650425381576,
+    "cluster_radius_over_length": 5.0,
+    "galaxy_entire_force_ratio": 1.0002689546829042,
+    "galaxy_radius_over_length": 0.1,
+    "response_length_kpc": 100.0,
+    "solar_entire_fractional_force_correction": 3.0685420002598624e-32,
+    "solar_radius_over_length": 4.84813681109536e-11
+  },
+  "input_hashes": {
+    "config": "2d702129f276c7c8a338d6d8901a529cd83de05acc3606e678a2e400648a34a3",
+    "structure_summary": "f3362b3f76bd3f62f271829112756a9b7efd8c5920ce4542aef1b71320075b82"
+  },
+  "manufactured_tidal_response": {
+    "interpretation": "the common metric filter carries trace-free orientation; this is not an astronomical score",
+    "nonzero_baryon_registered_shear_response": true,
+    "relative_shear_L2_change": 1.0542734877306206
+  },
+  "model_id": "sigma_v3b_linear_nonlocal_tidal_filter",
+  "next_mechanism": "derive a nonlinear retarded tidal interaction whose quadratic propagator remains the Sigma-v1/GR propagator, so cluster-scale activation does not require a negative linear spectral residue",
+  "parameter_economy": {
+    "existing_a_sigma_m_s2": 1.2e-10,
+    "lensing_only_parameters": 0,
+    "new_universal_parameters": [
+      "A",
+      "L_sigma"
+    ],
+    "passes": true,
+    "per_object_gravity_parameters": 0,
+    "total_provisional_physical_parameter_count": 3
+  },
+  "rational_retarded_control": {
+    "all_residues_nonnegative": false,
+    "massive_residue": -5.726790214118548,
+    "massless_residue": 6.726790214118548,
+    "negative_residue_fraction_of_massless": 0.8513406887729089
+  },
+  "spent_amplitude_anchors": {
+    "entire_log_boost_A_from_AQUAL": 1.9060980929051197,
+    "median_halo_convergence": 0.6886846826322559,
+    "median_newtonian_baryon_convergence": 0.0472957166296463,
+    "median_sigma_v1_AQUAL_convergence": 0.102379390572759,
+    "rational_amplitude_from_AQUAL": 5.726790214118548,
+    "required_low_k_boost_from_AQUAL": 6.726790214118548,
+    "required_low_k_boost_from_Newtonian": 14.561248495821896
+  },
+  "standard_positive_spectral_exchange": {
+    "analytic_reason": "d[s D_E(s)]/ds=sum rho_i m_i^2/(s+m_i^2)^2 >= 0",
+    "can_supply_required_IR_enhancement": false,
+    "formula": "D_E(s)=Z0/s+sum rho_i/(s+m_i^2), Z0>0, rho_i>=0",
+    "infrared_transfer_no_greater_than_UV": true,
+    "uv_normalized_transfer_is_monotone_increasing": true
+  },
+  "status": "completed Sigma v3B linear nonlocal spectral audit"
+}

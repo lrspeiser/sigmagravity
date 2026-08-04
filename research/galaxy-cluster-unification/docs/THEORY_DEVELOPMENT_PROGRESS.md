@@ -1,5 +1,30 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 Sigma v3B linear nonlocal spectral audit
+
+A scale-dependent one-metric transfer can implement the proposed separation
+between locally measured and large-scale gravity.  The no-zero form
+
+$$
+T(k^2)=\exp[A\exp(-k^2L_\Sigma^2)]
+$$
+
+uses two provisional universal constants, changes the complete manufactured
+shear map, retains the luminal massless pole, and with an illustrative
+`L_sigma=100 kpc` gives only `3.07e-32` fractional force addition at 1 AU,
+`1.000269` force ratio at 10 kpc, and `5.89565` at 500 kpc.
+
+The action-health gate remains decisive.  A standard positive spectral
+propagator normalized at high momentum cannot be stronger in the infrared.  A
+rational filter achieving the spent `6.7268` cluster/AQUAL amplitude ratio has
+a `-5.7268` massive residue.  The entire escape has no extra finite pole but
+reverses standard spectral monotonicity and lacks a proved causal Lorentzian
+completion.  It is retained as a mathematical clue but not frozen as Sigma v3.
+The next lane is a nonlinear retarded tidal interaction whose quadratic
+propagator remains Sigma-v1/GR.  This pre-fit result does not increment the two
+raw-topology failures.  See
+[`SIGMA_V3B_LINEAR_NONLOCAL_SPECTRAL_AUDIT.md`](SIGMA_V3B_LINEAR_NONLOCAL_SPECTRAL_AUDIT.md).
+
 ## 2026-08-03 Sigma v3A local DHOST edge audit
 
 The first trace-free local framework after Sigma v2 was screened without

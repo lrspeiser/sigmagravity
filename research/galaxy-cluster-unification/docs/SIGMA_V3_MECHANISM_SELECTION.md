@@ -15,6 +15,22 @@ This does not increment the two completed action-level raw-topology failures.
 It selects the already declared fallback: derive a causal, baryon-forced
 nonlocal tidal response with no freely specifiable homogeneous halo state.
 
+## Sigma v3B linear nonlocal follow-up
+
+The first nonlocal fallback audit is complete.  A universal entire transfer
+`T(k^2)=exp[A exp(-k^2 L_sigma^2)]` can separate Solar, galaxy, and cluster
+scales and produces a genuine manufactured shear pattern with no per-object
+geometry.  It retains only the luminal massless pole.  However, ordinary
+positive spectral exchange cannot enhance the infrared after local `G` is
+normalized; the rational escape has a negative massive residue; and the entire
+escape lacks the required causal generalized-positive completion.  No linear
+Sigma v3 is frozen.  See
+[`SIGMA_V3B_LINEAR_NONLOCAL_SPECTRAL_AUDIT.md`](SIGMA_V3B_LINEAR_NONLOCAL_SPECTRAL_AUDIT.md).
+
+The selected next mechanism is narrower: a nonlinear retarded tidal
+interaction whose quadratic expansion remains Sigma-v1/GR.  This is not a
+third raw-topology failure.
+
 ## Decision
 
 No Sigma v3 equation is frozen yet.  Two action-derived local scalar geometries
