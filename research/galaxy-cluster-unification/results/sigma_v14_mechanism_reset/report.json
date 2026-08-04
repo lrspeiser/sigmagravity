@@ -1,0 +1,236 @@
+{
+  "action_written": false,
+  "all_verification_gates_pass": true,
+  "candidate": "Sigma v14A gauge-reduced tidal response",
+  "constraint_and_hamiltonian_gate_passed": false,
+  "data_policy": "Do not open development, validation, or holdout observations until every v14A action kill gate passes.",
+  "decision": "Advance the gauge-reduced, zero-monopole tidal carrier only to a covariant source/action derivation. Do not treat a higher-rank gauge mass charge as gravity, do not reuse an ordinary spacetime tensor kinetic term, material triad, retarded multiplier pair, or clock/ADM trace, and do not open observational data.",
+  "evidence_rows": [
+    {
+      "all_evidence_files_exist": true,
+      "evidence_file_count": 2,
+      "mechanism_id": "local_nonmetricity_scalar_geometry",
+      "missing_evidence": []
+    },
+    {
+      "all_evidence_files_exist": true,
+      "evidence_file_count": 3,
+      "mechanism_id": "local_dhost_and_nonmetricity_orientation",
+      "missing_evidence": []
+    },
+    {
+      "all_evidence_files_exist": true,
+      "evidence_file_count": 3,
+      "mechanism_id": "retarded_nonlocal_memory",
+      "missing_evidence": []
+    },
+    {
+      "all_evidence_files_exist": true,
+      "evidence_file_count": 1,
+      "mechanism_id": "positive_spin2_or_bimetric_carrier",
+      "missing_evidence": []
+    },
+    {
+      "all_evidence_files_exist": true,
+      "evidence_file_count": 2,
+      "mechanism_id": "higher_derivative_scalar_clock",
+      "missing_evidence": []
+    },
+    {
+      "all_evidence_files_exist": true,
+      "evidence_file_count": 1,
+      "mechanism_id": "regular_local_first_gradient_response",
+      "missing_evidence": []
+    },
+    {
+      "all_evidence_files_exist": true,
+      "evidence_file_count": 2,
+      "mechanism_id": "ordinary_spacetime_spatial_tensor",
+      "missing_evidence": []
+    },
+    {
+      "all_evidence_files_exist": true,
+      "evidence_file_count": 3,
+      "mechanism_id": "material_or_internal_orientation_memory",
+      "missing_evidence": []
+    },
+    {
+      "all_evidence_files_exist": true,
+      "evidence_file_count": 3,
+      "mechanism_id": "preferred_clock_or_adm_trace_carrier",
+      "missing_evidence": []
+    }
+  ],
+  "mechanism_reset_rows": [
+    {
+      "member_count": 3,
+      "members_are_distinct": true,
+      "reset_id": "v7_positive_spin2_reset",
+      "three_failure_rule_satisfied": true
+    },
+    {
+      "member_count": 3,
+      "members_are_distinct": true,
+      "reset_id": "v10_aether_tidal_reset",
+      "three_failure_rule_satisfied": true
+    },
+    {
+      "member_count": 3,
+      "members_are_distinct": true,
+      "reset_id": "v11_material_memory_reset",
+      "three_failure_rule_satisfied": true
+    },
+    {
+      "member_count": 3,
+      "members_are_distinct": true,
+      "reset_id": "v13_clock_trace_reset",
+      "three_failure_rule_satisfied": true
+    }
+  ],
+  "missing_evidence": [],
+  "observational_data_accessed": false,
+  "p_form_representation_screen": [
+    {
+      "form_rank": 0,
+      "four_dimensional_dual_class": "scalar",
+      "local_degrees_of_freedom": 1,
+      "mass_class": "massless"
+    },
+    {
+      "form_rank": 1,
+      "four_dimensional_dual_class": "vector",
+      "local_degrees_of_freedom": 2,
+      "mass_class": "massless"
+    },
+    {
+      "form_rank": 2,
+      "four_dimensional_dual_class": "scalar",
+      "local_degrees_of_freedom": 1,
+      "mass_class": "massless"
+    },
+    {
+      "form_rank": 3,
+      "four_dimensional_dual_class": "no local polarization",
+      "local_degrees_of_freedom": 0,
+      "mass_class": "massless"
+    },
+    {
+      "form_rank": 0,
+      "four_dimensional_dual_class": "scalar",
+      "local_degrees_of_freedom": 1,
+      "mass_class": "massive"
+    },
+    {
+      "form_rank": 1,
+      "four_dimensional_dual_class": "vector",
+      "local_degrees_of_freedom": 3,
+      "mass_class": "massive"
+    },
+    {
+      "form_rank": 2,
+      "four_dimensional_dual_class": "vector",
+      "local_degrees_of_freedom": 3,
+      "mass_class": "massive"
+    },
+    {
+      "form_rank": 3,
+      "four_dimensional_dual_class": "scalar",
+      "local_degrees_of_freedom": 1,
+      "mass_class": "massive"
+    }
+  ],
+  "point_source_scaling_screen": {
+    "direct_scalar_charge_rank2": {
+      "force_power": 0,
+      "operator_order": 4,
+      "potential_power": 1,
+      "spatial_dimension": 3
+    },
+    "newtonian_scalar": {
+      "force_power": -2,
+      "operator_order": 2,
+      "potential_power": -1,
+      "spatial_dimension": 3
+    }
+  },
+  "retired_mechanism_count": 9,
+  "retired_mechanism_ids": [
+    "local_nonmetricity_scalar_geometry",
+    "local_dhost_and_nonmetricity_orientation",
+    "retarded_nonlocal_memory",
+    "positive_spin2_or_bimetric_carrier",
+    "higher_derivative_scalar_clock",
+    "regular_local_first_gradient_response",
+    "ordinary_spacetime_spatial_tensor",
+    "material_or_internal_orientation_memory",
+    "preferred_clock_or_adm_trace_carrier"
+  ],
+  "scope_limit": "This protocol selects a genuinely untested action question, not a viable theory. Higher-rank gauge symmetry is established prior art, while its use as a zero-monopole baryonic tidal partner for a convex gravity carrier is only a project hypothesis. No novelty or phenomenological success is claimed.",
+  "screened_new_languages": [
+    {
+      "decision": "reject_as_new_orientation_mechanism",
+      "id": "ordinary_p_forms_in_four_dimensions",
+      "reason": "Massless two-forms are dual to scalars, massive two-forms are dual to vectors, and three-forms add no independent massless local polarization. These return to already screened scalar or vector mechanisms."
+    },
+    {
+      "decision": "reject_as_extended_vacuum_response",
+      "id": "algebraic_metric_affine_connection",
+      "reason": "When the independent connection is algebraic it reduces to local matter interactions and returns to GR outside its material source; making it propagating creates an additional carrier that must pass the same source, spectrum, and energy gates."
+    },
+    {
+      "decision": "reject_as_mass_monopole",
+      "id": "direct_scalar_charge_rank2_gauge_field",
+      "reason": "Its electrostatic equation is fourth spatial order in three dimensions, giving a point-source potential proportional to r and a constant force instead of the Newtonian 1/r potential and 1/r^2 force. Its dipole conservation also cannot be imposed on ordinary mobile baryons."
+    }
+  ],
+  "status": "Sigma v14A mechanism reset and postulate audit",
+  "theory_viable": false,
+  "v14a_action_kill_gates": [
+    "Write a four-dimensional covariant gauge symmetry and a complete action; a preferred 3+1 formula alone fails.",
+    "Derive a covariantly conserved zero-monopole tidal source from action variation; a hand-written source fails.",
+    "Count constraints and prove that no free halo-like homogeneous state remains.",
+    "Reduce the full Hamiltonian and prove every physical kinetic and gradient eigenvalue positive on arbitrary finite backgrounds.",
+    "Prove all physical characteristics lie on or inside the one-metric cone and c_T equals c structurally.",
+    "Derive both weak metric potentials and a nonzero baryon-registered shear response from the same action.",
+    "Recover the v13B static monopole window and the GR high-field limit without an object label or lensing multiplier."
+  ],
+  "v14a_postulates": {
+    "constants_reserved": [
+      "a_sigma",
+      "epsilon",
+      "tidal coupling beta_sigma",
+      "tidal propagation or crossover scale L_sigma"
+    ],
+    "energy_rule": "The complete constrained Hamiltonian in gauge-invariant variables must be positive before any weak-field or observational solve.",
+    "forbidden_placements": [
+      "khronon expansion or ADM trace",
+      "ordinary covariant component kinetic term for a spacetime tensor",
+      "material-coordinate or elastic-triad strain",
+      "localized retarded multiplier pair",
+      "direct rank-two gauge charge equal to baryonic mass"
+    ],
+    "high_field_rule": "The new channel vanishes in the GR high-field limit and must leave the physical tensor cone exactly luminal.",
+    "metric_rule": "The same derived metric potentials govern slow matter and photons. The tidal channel must be Weyl-active without a lensing-only coefficient.",
+    "monopole_channel": "Use the v13B convex AQUAL-like reduced response only as a galaxy-scaling target; its MOND-like static law is acknowledged prior art and must receive a new non-clock covariant source before it is a theory.",
+    "one_physical_metric": true,
+    "orientation_channel": "A gauge-reduced symmetric trace-free tidal response whose physical variables are gauge-invariant field strengths, not six unconstrained spacetime-tensor components and not a material triad.",
+    "physical_constant_budget": 4,
+    "source_rule": "The orientation channel may carry only a baryon-determined, zero-monopole tidal source. Direct baryonic mass charge is forbidden. A covariant conserved source must be derived from the action rather than prescribed.",
+    "state_rule": "Fixed baryons plus one universal retarded/no-incoming boundary rule must determine the state uniquely; no homogeneous per-object profile is allowed."
+  },
+  "verification_gates": {
+    "all_retired_evidence_files_exist": true,
+    "all_retired_mechanisms_have_unique_ids": true,
+    "clock_or_adm_trace_reuse_forbidden": true,
+    "constant_budget_is_respected": true,
+    "direct_rank2_mass_charge_does_not_recover_newton": true,
+    "direct_rank2_mass_charge_forbidden": true,
+    "every_recorded_reset_has_three_distinct_formulations": true,
+    "localized_retarded_multiplier_reuse_forbidden": true,
+    "material_triad_reuse_forbidden": true,
+    "observational_data_remains_closed": true,
+    "one_physical_metric_frozen": true,
+    "ordinary_spacetime_tensor_kinetic_reuse_forbidden": true
+  },
+  "weak_metric_gate_passed": false
+}

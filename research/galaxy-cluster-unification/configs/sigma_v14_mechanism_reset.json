@@ -1,0 +1,174 @@
+{
+  "protocol_status": "frozen theory-only mechanism reset; no observational fitting authorized",
+  "candidate": "Sigma v14A gauge-reduced tidal response",
+  "maximum_physical_constants": 5,
+  "observational_data_authorized": false,
+  "retired_mechanisms": [
+    {
+      "id": "local_nonmetricity_scalar_geometry",
+      "versions": ["v1", "v2"],
+      "failed_gate": "raw_cluster_topology",
+      "result": "AQUAL and QUMOND reductions passed galaxies but recovered only one third of required raw image roots",
+      "evidence": [
+        "docs/SIGMA_V1_NONMETRICITY_ACTION_RESULTS.md",
+        "docs/SIGMA_V2_TRACE_NONMETRICITY_ACTION_RESULTS.md"
+      ]
+    },
+    {
+      "id": "local_dhost_and_nonmetricity_orientation",
+      "versions": ["v3A", "v5B", "v5C"],
+      "failed_gate": "capacity_or_global_degeneracy_or_exterior_law",
+      "result": "The local edge response was too small, nonlinear nonmetricity lost its constraint degeneracy, and the healthy screened exterior returned to GR",
+      "evidence": [
+        "docs/SIGMA_V3_MECHANISM_SELECTION.md",
+        "docs/SIGMA_V5B_NONLINEAR_DEGENERACY_RESULTS.md",
+        "docs/SIGMA_V5C_EXTERIOR_LAW_RESULTS.md"
+      ]
+    },
+    {
+      "id": "retarded_nonlocal_memory",
+      "versions": ["v3B", "v4", "v6D"],
+      "failed_gate": "positive_fundamental_hamiltonian",
+      "result": "Positive linear spectra had the wrong infrared response and the minimal causal localization contained six negative kinetic directions",
+      "evidence": [
+        "docs/SIGMA_V3B_LINEAR_NONLOCAL_SPECTRAL_AUDIT.md",
+        "docs/SIGMA_V4_SCALAR_MEMORY_MECHANISM_FALSIFICATION.md",
+        "docs/SIGMA_V6D_CTP_ACTION_GATE.md"
+      ]
+    },
+    {
+      "id": "positive_spin2_or_bimetric_carrier",
+      "versions": ["v7A", "v7B", "v7C"],
+      "failed_gate": "useful_one_metric_lensing",
+      "result": "Solar-safe positive exchange decreased with radius, the screened lensing ceiling was too small, and the scalar completion cancelled from the Weyl potential",
+      "evidence": [
+        "docs/SIGMA_V7_POSITIVE_SPIN2_FALSIFICATION.md"
+      ]
+    },
+    {
+      "id": "higher_derivative_scalar_clock",
+      "versions": ["v8A", "v8B"],
+      "failed_gate": "causal_characteristics_or_global_legendre_rank",
+      "result": "The cubic response became superluminal and its preferred-time completion crossed a finite kinetic-rank surface",
+      "evidence": [
+        "docs/SIGMA_V8A_CUBIC_CHARACTERISTIC_GATE.md",
+        "docs/SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md"
+      ]
+    },
+    {
+      "id": "regular_local_first_gradient_response",
+      "versions": ["v9A", "v9B"],
+      "failed_gate": "galaxy_cluster_state_identifiability",
+      "result": "Every regular spherical branch reduced to one E(g_bar), while spent galaxies and clusters required enhancements differing by a median factor 3.231 at the same g_bar",
+      "evidence": [
+        "docs/SIGMA_V9B_LOCAL_FIRST_GRADIENT_CLOSURE.md"
+      ]
+    },
+    {
+      "id": "ordinary_spacetime_spatial_tensor",
+      "versions": ["v10B", "v10C", "v10D"],
+      "failed_gate": "causality_or_stability",
+      "result": "The auxiliary version had a physical equal-time tail, the hyperbolic version developed a vector ghost, and the repaired tensor widened the physical metric tensor cone",
+      "evidence": [
+        "docs/SIGMA_V10B_AUXILIARY_AETHER_TIDAL_FALSIFICATION.md",
+        "docs/SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md"
+      ]
+    },
+    {
+      "id": "material_or_internal_orientation_memory",
+      "versions": ["v11A", "v11B", "v11C"],
+      "failed_gate": "global_nonlinear_kinetic_rank",
+      "result": "Three different scalar-memory or material-strain constructions acquired a negative velocity Hessian on finite tilted configurations",
+      "evidence": [
+        "docs/SIGMA_V11A_TILTED_RANK_FALSIFICATION.md",
+        "docs/SIGMA_V11B_TILTED_RANK_FALSIFICATION.md",
+        "docs/SIGMA_V11C_BIOT_STRETCH_FALSIFICATION.md"
+      ]
+    },
+    {
+      "id": "preferred_clock_or_adm_trace_carrier",
+      "versions": ["v12A", "v13A", "v13C"],
+      "failed_gate": "bounded_physical_hamiltonian",
+      "result": "The constraint-solved AeST branch had negative modal energy, the exact clock constraint created signed dust charge, and the convex trace completion created a high-field scalar ghost",
+      "evidence": [
+        "docs/SIGMA_V12A_REDUCED_ENERGY_FALSIFICATION.md",
+        "docs/SIGMA_V13A_CLOCK_CONSTRAINT_FALSIFICATION.md",
+        "docs/SIGMA_V13C_KHRONON_COMPLETION_FALSIFICATION.md"
+      ]
+    }
+  ],
+  "mechanism_resets": [
+    {
+      "id": "v7_positive_spin2_reset",
+      "member_versions": ["v7A", "v7B", "v7C"],
+      "common_gate": "useful_one_metric_lensing"
+    },
+    {
+      "id": "v10_aether_tidal_reset",
+      "member_versions": ["v10B", "v10C", "v10D"],
+      "common_gate": "causality_or_stability"
+    },
+    {
+      "id": "v11_material_memory_reset",
+      "member_versions": ["v11A", "v11B", "v11C"],
+      "common_gate": "global_nonlinear_kinetic_rank"
+    },
+    {
+      "id": "v13_clock_trace_reset",
+      "member_versions": ["v12A", "v13A", "v13C"],
+      "common_gate": "bounded_physical_hamiltonian"
+    }
+  ],
+  "screened_new_languages": [
+    {
+      "id": "ordinary_p_forms_in_four_dimensions",
+      "decision": "reject_as_new_orientation_mechanism",
+      "reason": "Massless two-forms are dual to scalars, massive two-forms are dual to vectors, and three-forms add no independent massless local polarization. These return to already screened scalar or vector mechanisms."
+    },
+    {
+      "id": "algebraic_metric_affine_connection",
+      "decision": "reject_as_extended_vacuum_response",
+      "reason": "When the independent connection is algebraic it reduces to local matter interactions and returns to GR outside its material source; making it propagating creates an additional carrier that must pass the same source, spectrum, and energy gates."
+    },
+    {
+      "id": "direct_scalar_charge_rank2_gauge_field",
+      "decision": "reject_as_mass_monopole",
+      "reason": "Its electrostatic equation is fourth spatial order in three dimensions, giving a point-source potential proportional to r and a constant force instead of the Newtonian 1/r potential and 1/r^2 force. Its dipole conservation also cannot be imposed on ordinary mobile baryons."
+    }
+  ],
+  "v14a_postulates": {
+    "one_physical_metric": true,
+    "monopole_channel": "Use the v13B convex AQUAL-like reduced response only as a galaxy-scaling target; its MOND-like static law is acknowledged prior art and must receive a new non-clock covariant source before it is a theory.",
+    "orientation_channel": "A gauge-reduced symmetric trace-free tidal response whose physical variables are gauge-invariant field strengths, not six unconstrained spacetime-tensor components and not a material triad.",
+    "source_rule": "The orientation channel may carry only a baryon-determined, zero-monopole tidal source. Direct baryonic mass charge is forbidden. A covariant conserved source must be derived from the action rather than prescribed.",
+    "state_rule": "Fixed baryons plus one universal retarded/no-incoming boundary rule must determine the state uniquely; no homogeneous per-object profile is allowed.",
+    "energy_rule": "The complete constrained Hamiltonian in gauge-invariant variables must be positive before any weak-field or observational solve.",
+    "metric_rule": "The same derived metric potentials govern slow matter and photons. The tidal channel must be Weyl-active without a lensing-only coefficient.",
+    "high_field_rule": "The new channel vanishes in the GR high-field limit and must leave the physical tensor cone exactly luminal.",
+    "forbidden_placements": [
+      "khronon expansion or ADM trace",
+      "ordinary covariant component kinetic term for a spacetime tensor",
+      "material-coordinate or elastic-triad strain",
+      "localized retarded multiplier pair",
+      "direct rank-two gauge charge equal to baryonic mass"
+    ],
+    "physical_constant_budget": 4,
+    "constants_reserved": [
+      "a_sigma",
+      "epsilon",
+      "tidal coupling beta_sigma",
+      "tidal propagation or crossover scale L_sigma"
+    ]
+  },
+  "v14a_action_kill_gates": [
+    "Write a four-dimensional covariant gauge symmetry and a complete action; a preferred 3+1 formula alone fails.",
+    "Derive a covariantly conserved zero-monopole tidal source from action variation; a hand-written source fails.",
+    "Count constraints and prove that no free halo-like homogeneous state remains.",
+    "Reduce the full Hamiltonian and prove every physical kinetic and gradient eigenvalue positive on arbitrary finite backgrounds.",
+    "Prove all physical characteristics lie on or inside the one-metric cone and c_T equals c structurally.",
+    "Derive both weak metric potentials and a nonzero baryon-registered shear response from the same action.",
+    "Recover the v13B static monopole window and the GR high-field limit without an object label or lensing multiplier."
+  ],
+  "scope_limit": "This protocol selects a genuinely untested action question, not a viable theory. Higher-rank gauge symmetry is established prior art, while its use as a zero-monopole baryonic tidal partner for a convex gravity carrier is only a project hypothesis. No novelty or phenomenological success is claimed.",
+  "data_policy": "Do not open development, validation, or holdout observations until every v14A action kill gate passes."
+}

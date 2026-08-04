@@ -1,5 +1,26 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v14 mechanism reset and gauge-tidal postulates
+
+The post-v13C mechanism reset is now evidence-complete. Nine carrier classes
+cover the local nonmetricity, DHOST, retarded-memory, positive-spin-2,
+higher-derivative clock, local first-gradient, ordinary spacetime-tensor,
+material-memory, and preferred-clock/ADM-trace sequences. Four explicit
+three-formulation resets are recorded. Ordinary four-dimensional p-forms add
+only scalar/vector dual classes, and a direct scalar-charge rank-two gauge
+field has a fourth-order static point-source equation, giving a constant force
+rather than Newton's inverse-square force.
+
+V14A therefore advances only a new action question: pair the v13B convex
+AQUAL-like monopole target with a gauge-reduced, zero-monopole tidal response.
+Direct baryonic mass charge, an ordinary spacetime-tensor component kinetic
+term, a material triad, a localized retarded multiplier pair, and any
+khronon/ADM-trace placement are forbidden. A four-constant budget is frozen.
+The first kill gate is to derive a covariantly conserved neutral tidal source
+and complete gauge-invariant action; no such action or viable theory is yet
+claimed, and observations remain closed. See
+[`SIGMA_V14_MECHANISM_RESET_AND_POSTULATES.md`](SIGMA_V14_MECHANISM_RESET_AND_POSTULATES.md).
+
 ## 2026-08-04 Sigma v13C khronon trace-completion falsification
 
 The minimal one-metric covariant placement defines a khronon normal, uses its
