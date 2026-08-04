@@ -1,0 +1,74 @@
+{
+  "action_density_map": {
+    "mapped_density": 0.16499999999999998,
+    "residual": 0.0,
+    "selected_density": 0.16499999999999998
+  },
+  "all_exact_precheck_gates_pass": true,
+  "base_maxwell_coefficients": {
+    "c1": 1.0,
+    "c123": 0.0,
+    "c13": 0.0,
+    "c14": 1.0,
+    "c2": 0.0,
+    "c3": -1.0,
+    "c4": 0.0,
+    "pure_aether_vector_speed_squared": 1.0
+  },
+  "candidate": "Sigma v10C one-metric AeST plus hyperbolic aether-tidal polarization",
+  "counterterm_independently_retired": false,
+  "data_policy": {
+    "authorization": "coefficient algebra and PPN applicability only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retain_v10c_for_full_AeST_plus_P_PPN_derivation",
+  "exact_gates": {
+    "c13_remains_zero": true,
+    "c14_remains_KB": true,
+    "mapped_vector_speed_is_u": true,
+    "pure_aether_alpha1_proxy_unchanged_from_base": true,
+    "pure_aether_alpha2_formula_is_inapplicable": true,
+    "selected_and_mapped_action_densities_equal": true,
+    "unit_aether_electric_magnetic_identity": true
+  },
+  "first_order_interaction": {
+    "aether_euler_term_modulo_spatial_constraint": "beta nabla_r(A^r C^s)-beta C^n nabla^s A_n, C^n=nabla_m P^mn",
+    "boundary_equivalent_form": "-beta (nabla_m P^mn) J_n",
+    "derivative_order": "first derivatives in the action; at most second derivatives in Euler equations",
+    "second_derivative_form": "beta P^mn nabla_m J_n"
+  },
+  "fixed_values": {
+    "K_B": 1.0,
+    "u": 0.75
+  },
+  "full_AeST_plus_P_PPN_derived": false,
+  "invariants": {
+    "B_squared": 1.4,
+    "F_squared": 0.020000000000000018,
+    "J_squared": 0.69,
+    "identity_residual": 0.0
+  },
+  "mapped_coefficients": {
+    "c1": 0.75,
+    "c123": 0.0,
+    "c13": 0.0,
+    "c14": 1.0,
+    "c2": 0.0,
+    "c3": -0.75,
+    "c4": 0.25,
+    "pure_aether_vector_speed_squared": 0.75
+  },
+  "observational_data_accessed": false,
+  "pure_einstein_aether_proxy": {
+    "alpha1_closed_form": "-4 K_B",
+    "alpha2_applicable": false,
+    "base_alpha1": -4.0,
+    "reason": "c123=0 removes the pure-aether longitudinal gradient; AeST scalar and P dynamics are absent from that theory",
+    "v10c_alpha1": -4.0
+  },
+  "raw_holdout_opened": false,
+  "reason": "The counterterm has an exact covariant coefficient map and does not change the pure-aether alpha1 proxy relative to the Maxwell base. The pure-aether alpha2 formula is singular at c123=0 and omits both fields that make v10C different, so it cannot honestly pass or retire the theory.",
+  "scope": "This is an applicability result, not a Solar-System pass. The full moving-source AeST-plus-P field equations, alpha1, alpha2, gamma, beta, Mercury and compact-source limits remain mandatory.",
+  "status": "completed Sigma v10C covariant/PPN applicability precheck"
+}

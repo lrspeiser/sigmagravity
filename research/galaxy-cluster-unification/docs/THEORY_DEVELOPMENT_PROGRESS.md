@@ -1,5 +1,25 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v10C covariant/PPN applicability precheck
+
+The selected spatial-aether counterterm has now been reduced exactly on the
+unit constraint. The identity `F^2=B^2-2J^2` maps the aether sector to
+`-K_B u F^2/2+K_B(1-u)J^2`, or standard pure-aether coefficients
+`(c1,c2,c3,c4)=(K_Bu,0,-K_Bu,K_B(1-u))`. Hence `c13=0`, `c14=K_B`, and the
+pure-aether vector-speed proxy is `u=3/4` exactly.
+
+The Foster--Jacobson pure Einstein-aether formula gives `alpha1=-4K_B` both
+before and after the counterterm, so the counterterm does not create a new
+proxy failure. The same substitution has `c123=0`, where the pure-aether
+`alpha2` formula is singular. Because v10C contains the AeST scalar and the
+new hyperbolic `P` carrier absent from that theory, importing the pure-aether
+number as v10C's prediction would be invalid. The full moving-source
+AeST-plus-`P` PPN parameters remain unresolved and the Solar/PPN gate remains
+false. The interaction is boundary-equivalent to a first-derivative action,
+so a complete second-order covariant variation remains viable. No observation
+was opened. See
+[`SIGMA_V10C_COVARIANT_PPN_PRECHECK.md`](SIGMA_V10C_COVARIANT_PPN_PRECHECK.md).
+
 ## 2026-08-04 Sigma v10C hyperbolic aether-tidal selection
 
 V10C restores a positive time kinetic term to the v10B aether-acceleration

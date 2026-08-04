@@ -15,7 +15,16 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
-The current theory-only checkpoint is
+The current theory-only follow-up is
+[`docs/SIGMA_V10C_COVARIANT_PPN_PRECHECK.md`](docs/SIGMA_V10C_COVARIANT_PPN_PRECHECK.md).
+The spatial-aether counterterm has the exact unit-aether map
+`(c1,c2,c3,c4)=(K_B u,0,-K_B u,K_B(1-u))`, preserving `c13=0` and
+`c14=K_B`. A pure Einstein-aether proxy leaves `alpha1=-4 K_B` unchanged
+from the original Maxwell base, while its `alpha2` formula is inapplicable at
+`c123=0` because it omits the AeST scalar and the new `P` carrier. V10C is
+therefore not independently retired, but this is explicitly not a PPN pass:
+the complete moving-source AeST-plus-`P` derivation remains a mandatory gate.
+The preceding selection is
 [`docs/SIGMA_V10C_HYPERBOLIC_AETHER_TIDAL_SELECTION.md`](docs/SIGMA_V10C_HYPERBOLIC_AETHER_TIDAL_SELECTION.md).
 V10C gives the surviving aether-tidal trace/STF tensor a hyperbolic time
 kinetic term. Requiring both the v10B threefold static capacity and a luminal

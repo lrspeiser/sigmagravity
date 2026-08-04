@@ -1,0 +1,15 @@
+{
+  "protocol_version": "Sigma-v10C-0.2-covariant-PPN-precheck",
+  "status": "frozen theory-only precheck",
+  "candidate": "Sigma v10C one-metric AeST plus hyperbolic aether-tidal polarization",
+  "question": "Does the v10C spatial-aether counterterm have an exact covariant coefficient map, and can pure Einstein-aether PPN formulas decide it without the AeST scalar and P carrier?",
+  "fixed_values": {
+    "K_B": 1.0,
+    "u": 0.75
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "coefficient algebra and PPN applicability only"
+  }
+}
