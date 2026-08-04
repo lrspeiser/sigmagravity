@@ -1,0 +1,21 @@
+{
+  "protocol_id": "sigma-v3d-post-failure-forensics-v1",
+  "status": "diagnostic-only-after-frozen-failure",
+  "parent_protocol": "configs/sigma_v3d_triaxial_memory_action_audit.json",
+  "parent_config_sha256": "d919da5457f55dec49c0dad71d236465cfd831ef22615793ffa36af7ae3701f0",
+  "purpose": "identify whether the failed morphology separation is controlled by screen sharpness, memory length, screen ordering, or scored volume",
+  "grid_points": 49,
+  "mass_normalizations": [0.3, 1.0, 3.0],
+  "screen_powers": [2.0, 4.0, 8.0],
+  "memory_lengths_L_sigma_fixture": [0.5, 1.0, 2.0],
+  "screen_orders": ["before_memory", "after_memory"],
+  "analysis_half_widths_L_sigma_fixture": [0.5, 1.0, 1.5, 2.0],
+  "interpretation_rules": {
+    "not_a_rescue": "no result changes the frozen v3D decision or qualifies for empirical fitting",
+    "screen_sensitive": "the distributed-to-compact ratio changes by at least a factor of three across screen powers at fixed remaining settings",
+    "memory_sensitive": "the ratio changes by at least a factor of three across memory lengths at fixed remaining settings",
+    "ordering_sensitive": "moving the same screen after memory changes the ratio by at least a factor of three",
+    "volume_sensitive": "the ratio changes by at least a factor of three across analysis volumes",
+    "fragile_large_separation": "any ratio at least ten occurs but fewer than half of neighboring grid settings also reach ten"
+  }
+}
