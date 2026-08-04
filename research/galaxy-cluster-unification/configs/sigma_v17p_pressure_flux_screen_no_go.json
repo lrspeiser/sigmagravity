@@ -1,0 +1,104 @@
+{
+  "protocol_version": "SIGMA-V17P-PRESSURE-FLUX-SCREEN-NO-GO-1.0.0",
+  "status": "frozen after analytic derivation and before executable verification; no holdout or new astronomical target is opened",
+  "purpose": "Determine whether moving the v17G pressure-channel screen out of the physical metric and into any local monotone shift-symmetric kinetic flux can simultaneously provide an order-unity cluster Weyl field and satisfy the Solar metric-potential bound. Test the conserved exterior charge, not only the locally screened force.",
+  "parent": {
+    "protocol": "configs/sigma_v17o_halo_scale_driver_audit.json",
+    "sha256": "9321cb0fd24d069700cfc3bd585dd9e2d8787d422df5aae9a563b1f059521289",
+    "report": "results/sigma_v17o_halo_scale_driver_audit/report.json",
+    "report_sha256": "2206d9f1f3905698e3f7b0da4e833e212b4d787adf1998f30b43c8392af0934e"
+  },
+  "pressure_archetype": {
+    "protocol": "configs/sigma_v17g_pressure_metric_gate.json",
+    "sha256": "10dd4d85891e286bdd09f820456014b308e0d6ef5fe094b7cec225a6902b0955",
+    "report": "results/sigma_v17g_pressure_metric_gate/report.json",
+    "report_sha256": "ab3d0745a69e8cba9a0cd9e62d3adb377e9f6839a159b100dfb02fee9cc82d17"
+  },
+  "retired_derivative_metric_class": {
+    "protocol": "configs/sigma_v17n_decreasing_metric_screen_no_go.json",
+    "sha256": "234ab64d4d635fa8633454f0f7cf01cbdc2c7fd0da21671149420225078d4da2",
+    "report": "results/sigma_v17n_decreasing_metric_screen_no_go/report.json",
+    "report_sha256": "d66344f4506c168b871e8eccbb0e759b972c26d55156aafcb92cf3234e52ceb9"
+  },
+  "spent_diagnostic_input": {
+    "path": "data/raw/clash_tian2020/fig2.dat",
+    "sha256": "1286f24d91a37e6c28903166d9493b3a84c9de9f82d36700ab13e9e2b2a0f85b",
+    "use": "Verify only that every existing CLASH development point requiring at least an order-unity extra field has g_bar/a_sigma at least 0.1. These are NFW-deprojected diagnostics, not raw lensing evidence."
+  },
+  "authorization": {
+    "spent_diagnostic_opened": true,
+    "new_observational_target_opened": false,
+    "untouched_holdout_opened": false,
+    "empirical_fit_authorized": false,
+    "allowed_outcome": "retain or retire the local monotone shift-symmetric flux-screen class as a Solar-safe completion of the v17G pressure metric"
+  },
+  "action_class": {
+    "description": "TeVeS-like non-derivative reciprocal pressure metric plus a local AQUAL/K-mouflage-like scalar kinetic flux",
+    "physical_metric": "g_tilde_mn=exp(2 alpha X)[g_mn+2 alpha X U_m U_n]",
+    "matter_source": "At X=0, J_X=alpha(T+E)=3 alpha p for an isotropic fluid and zero for cold dust",
+    "one_metric_weak_response": "Psi=U_N; Phi=U_N-c^2 alpha X; W=U_N-c^2 alpha X/2",
+    "static_field_equation": "div[mu(t) g_sigma]=4 pi G alpha^2 rho_p, where rho_p=3p/c^2, t=|g_sigma|/a_sigma, mu(0)=1, mu(t)>0, and mu is monotone nondecreasing",
+    "screen_location": "The susceptibility is in the scalar gravitational flux, not in a derivative-dependent matter metric. The v17N transverse matter-Hessian theorem therefore does not apply.",
+    "halo_scale_candidate": "For a compact pressure source, the nonlinear radius is r_K=alpha sqrt[G integral(3p/c^2)dV/a_sigma]. It is derived from baryonic pressure compactness and mass rather than fitted per object."
+  },
+  "spherical_no_go_theorem": {
+    "definitions": "Pi_p=integral(3p dV)/(M c^2); x=G M/(a_sigma r^2); t=g_sigma/a_sigma; y=r/sqrt(GM/a_sigma)",
+    "exterior_flux": "mu(t)t=alpha^2 Pi_p x=alpha^2 Pi_p/y^2",
+    "cluster_requirement": "At a development point x_c>=0.1, require g_sigma/g_bar>=1, hence t_c>=x_c",
+    "pressure_ratio": "R=Pi_sun/Pi_cluster",
+    "solar_crossing": "At the Solar radius y_c where t=x_c, monotonicity and the cluster requirement imply y_c^2>=R/x_c",
+    "outer_tail": "For y>=y_c, t<=x_c and monotonicity gives t(y)>=R/y^2",
+    "potential_lower_bound": "U_sigma/U_N=y_obs integral_yobs^infinity t(y)dy >= y_obs sqrt(R x_c)",
+    "metric_slip_lower_bound": "abs(gamma-1)_proxy>=2 y_obs sqrt(R x_c)",
+    "scope": "The theorem assumes a conserved local shift-symmetric exterior flux, a monotone kinetic screen, the v17G reciprocal weak metric, and a range long enough to affect clusters. It does not cover a potential that changes the integrated scalar charge, a nonlocal boundary prescription, or cancellation by a new field."
+  },
+  "numerical_controls": {
+    "a_sigma_m_s2": 1.2e-10,
+    "solar_observer_radius_au": 10.0,
+    "cluster_x_floor": 0.1,
+    "minimum_cluster_extra_fraction": 1.0,
+    "representative_cluster_x": [0.1, 0.3, 1.0],
+    "representative_flux_powers": [2, 4, 6, 8],
+    "representative_curve": "mu_n(t)=1+t^n",
+    "potential_integral_log_upper_margin": 20.0,
+    "root_tolerance": 1e-13,
+    "quadrature_relative_tolerance": 1e-9
+  },
+  "physical_constants": {
+    "gravitational_constant_m3_kg_s2": 6.6743e-11,
+    "solar_mass_kg": 1.98847e30,
+    "metres_per_au": 149597870700.0,
+    "metres_per_kpc": 3.085677581491367e19
+  },
+  "gates": {
+    "maximum_cassini_absolute_gamma_minus_one": 2.3e-5,
+    "require_clash_development_x_floor": true,
+    "require_analytic_potential_lower_bound_to_pass_cassini": true,
+    "require_every_representative_curve_to_pass_cassini": true,
+    "maximum_flux_residual": 1e-10,
+    "one_physical_metric": true,
+    "object_specific_parameters": 0,
+    "lensing_only_multiplier": false
+  },
+  "decision_rule": [
+    "Retain the class only if the analytic potential lower bound and every representative monotone flux curve satisfy Cassini while supplying an order-unity field at x_c>=0.1.",
+    "If the lower bound exceeds Cassini, retire the entire local monotone shift-symmetric kinetic-flux screen for the reciprocal pressure metric; changing the polynomial power is not a new mechanism.",
+    "Do not interpret local-force suppression as Solar safety if the conserved outer potential tail fails.",
+    "A finite universal range cannot rescue the class if it is long enough to supply the previously declared 12.5 kpc cluster response. A successor must change the integrated Solar scalar charge or reset the pressure-channel mechanism."
+  ],
+  "formula_inventory": {
+    "equations": "TeVeS-like disformal metric g_tilde_mn=exp(2alphaX)(g_mn+2alphaX U_m U_n); AQUAL/K-mouflage flux div[mu(t) g_sigma]=4piG alpha^2 rho_p; mu(t)t=alpha^2 Pi_p/y^2; r_K=alpha sqrt[G integral(3p/c^2)dV/a_sigma]; abs(gamma-1)>=2 y_obs sqrt[(Pi_sun/Pi_cluster)x_c]"
+  },
+  "prior_art_primary_sources": [
+    "https://arxiv.org/abs/0905.2943",
+    "https://adsabs.harvard.edu/pdf/1984ApJ...286....7B",
+    "https://arxiv.org/abs/astro-ph/0403694",
+    "https://arxiv.org/abs/gr-qc/9211017"
+  ],
+  "complexity": {
+    "new_curve_parameters_fit": 0,
+    "representative_powers_are_theorem_witnesses_not_separate_theories": true,
+    "per_object_gravity_constants": 0,
+    "holdout_parameters_used": 0
+  }
+}

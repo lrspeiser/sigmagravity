@@ -52,6 +52,7 @@ def closest_published_families(text: str) -> list[str]:
         (("rar",), ("RAR-EMPIRICAL", "MOND-ALGEBRAIC")),
         (("mond", "low-acceleration", "a0"), ("MOND-ALGEBRAIC",)),
         (("aqual", "p-laplacian"), ("AQUAL",)),
+        (("k-mouflage",), ("K-MOUFLAGE",)),
         (("qumond", "source routing"), ("QUMOND",)),
         (("emond", "potential-dependent", "potential-moving"), ("EMOND",)),
         (

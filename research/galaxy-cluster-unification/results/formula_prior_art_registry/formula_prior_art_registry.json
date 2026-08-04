@@ -5,10 +5,10 @@
   "one_law_rule": "A final Sigma candidate must be one equation or one action with the same universal constants and matter coupling in every system. A regime transition is acceptable only when it is derived from a field invariant evaluated identically everywhere; object labels, per-object gravity parameters, a lens-only multiplier, or choosing a different published law after seeing the target are not acceptable.",
   "counts": {
     "tested_scored_formulas": 128,
-    "published_families": 35,
-    "sigma_protocols": 98,
+    "published_families": 36,
+    "sigma_protocols": 99,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 115,
+    "sigma_formula_fragments": 116,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -22,7 +22,7 @@
   },
   "source_hashes": {
     "formula_scorecard_sha256": "8bbe6e783224fe940f5ba454e19eee3bea5ae332d2d172da5513c14c5820800b",
-    "published_registry_sha256": "42564ad2f3147b59163947ec95624b05f5c33948f1ab9b5c49ceee3d3849f949",
+    "published_registry_sha256": "980c61239929f2ed8b885485d72ea0f78c2783b321e364b041e6e3b241494a12",
     "project_formula_addenda_sha256": "d93fc6c484259faeb32ddbed1fdb35b0d85c31594e053befd57bc7dc18fb5fc5"
   },
   "published_families": [
@@ -103,6 +103,19 @@
       "source_title": "Does the missing mass problem signal the breakdown of Newtonian gravity?",
       "source_url": "https://adsabs.harvard.edu/pdf/1984ApJ...286....7B",
       "overlap_note": "Direct parent of Sigma refracted/gated AQUAL, tensor AQUAL, nonlinear p-Laplacian, and several potential-screened laws."
+    },
+    {
+      "id": "K-MOUFLAGE",
+      "name": "K-mouflage kinetic screening",
+      "year": 2009,
+      "kind": "nonlinear scalar-tensor screening",
+      "canonical_formula": "div[K_Y(Y) grad phi] proportional to rho, with large K_Y suppressing the local scalar force",
+      "mechanism": "Derivative self-interactions make a matter-coupled scalar nonlinear and locally screen its fifth force while preserving an exterior scalar flux.",
+      "regime_logic": "universal scalar kinetic invariant",
+      "dark_component": false,
+      "source_title": "k-Mouflage gravity",
+      "source_url": "https://arxiv.org/abs/0905.2943",
+      "overlap_note": "Direct prior art for any Sigma proposal that moves Solar screening into a nonlinear scalar kinetic flux."
     },
     {
       "id": "QUMOND",
@@ -6342,6 +6355,32 @@
         "EINSTEIN-AETHER"
       ],
       "sha256": "9321cb0fd24d069700cfc3bd585dd9e2d8787d422df5aae9a563b1f059521289"
+    },
+    {
+      "config": "configs/sigma_v17p_pressure_flux_screen_no_go.json",
+      "protocol_version": "SIGMA-V17P-PRESSURE-FLUX-SCREEN-NO-GO-1.0.0",
+      "status": "frozen after analytic derivation and before executable verification; no holdout or new astronomical target is opened",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "formula_inventory.equations",
+          "formula": "TeVeS-like disformal metric g_tilde_mn=exp(2alphaX)(g_mn+2alphaX U_m U_n); AQUAL/K-mouflage flux div[mu(t) g_sigma]=4piG alpha^2 rho_p; mu(t)t=alpha^2 Pi_p/y^2; r_K=alpha sqrt[G integral(3p/c^2)dV/a_sigma]; abs(gamma-1)>=2 y_obs sqrt[(Pi_sun/Pi_cluster)x_c]",
+          "published_overlap_ids": [
+            "AQUAL",
+            "K-MOUFLAGE",
+            "DISFORMAL-METRIC",
+            "TEVES"
+          ]
+        }
+      ],
+      "formula_fragment_count": 1,
+      "published_overlap_ids": [
+        "AQUAL",
+        "K-MOUFLAGE",
+        "DISFORMAL-METRIC",
+        "TEVES"
+      ],
+      "sha256": "a1c1b067b2a478774ddd55ff4b9660ab3d3827450ad695f13d3647a85e91aade"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

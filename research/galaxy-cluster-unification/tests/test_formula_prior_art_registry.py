@@ -308,3 +308,20 @@ def test_v17o_scale_audit_registers_published_halo_and_modified_gravity_ancestry
     assert {"NFW-HALO", "AEST-MOND", "COVARIANT-RG"}.issubset(
         set(v17o["published_overlap_ids"])
     )
+
+
+def test_v17p_flux_no_go_registers_kinetic_and_metric_ancestry() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17p = protocols["sigma_v17p_pressure_flux_screen_no_go.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17p["formula_fragments"]
+    )
+
+    assert "K-mouflage" in fragment_text
+    assert "abs(gamma-1)" in fragment_text
+    assert {"K-MOUFLAGE", "AQUAL", "TEVES", "DISFORMAL-METRIC"}.issubset(
+        set(v17p["published_overlap_ids"])
+    )

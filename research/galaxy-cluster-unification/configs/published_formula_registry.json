@@ -83,6 +83,19 @@
       "overlap_note": "Direct parent of Sigma refracted/gated AQUAL, tensor AQUAL, nonlinear p-Laplacian, and several potential-screened laws."
     },
     {
+      "id": "K-MOUFLAGE",
+      "name": "K-mouflage kinetic screening",
+      "year": 2009,
+      "kind": "nonlinear scalar-tensor screening",
+      "canonical_formula": "div[K_Y(Y) grad phi] proportional to rho, with large K_Y suppressing the local scalar force",
+      "mechanism": "Derivative self-interactions make a matter-coupled scalar nonlinear and locally screen its fifth force while preserving an exterior scalar flux.",
+      "regime_logic": "universal scalar kinetic invariant",
+      "dark_component": false,
+      "source_title": "k-Mouflage gravity",
+      "source_url": "https://arxiv.org/abs/0905.2943",
+      "overlap_note": "Direct prior art for any Sigma proposal that moves Solar screening into a nonlinear scalar kinetic flux."
+    },
+    {
       "id": "QUMOND",
       "name": "QUMOND",
       "year": 2010,

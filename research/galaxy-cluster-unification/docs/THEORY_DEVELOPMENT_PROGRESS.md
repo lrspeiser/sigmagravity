@@ -1,5 +1,27 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v17P pressure flux-screen no-go
+
+Moving the v17 pressure susceptibility out of the derivative-dependent matter
+metric and into a local AQUAL/K-mouflage-like kinetic flux avoids the v17N
+matter-Hessian theorem, but it fails a different necessary Solar gate. A
+monotone kinetic screen suppresses the local force without changing the
+integrated pressure scalar charge. Its exterior field therefore becomes linear
+again and leaves an unavoidable outer potential.
+
+For every positive monotone flux with `mu(0)=1`, supplying an order-unity
+cluster Weyl field at the conservative spent-data floor `g_bar/a_sigma=0.1`
+implies `abs(gamma-1)>=9.8185e-5` at 10 AU, or 4.269 Cassini limits. Twelve
+polynomial witnesses verify the bound; their best full-potential proxy is
+`6.7274e-4`, 29.25 Cassini limits, even though steep examples can make the
+local-force proxy pass. No holdout or new target was opened.
+
+The complete local monotone shift-symmetric pressure flux-screen class is
+retired. A successor must change the source-integrated Solar scalar charge with
+a healthy potential-dependent mechanism, or reset the direct pressure channel;
+another kinetic curve is not authorized. See
+[`SIGMA_V17P_PRESSURE_FLUX_SCREEN_NO_GO.md`](SIGMA_V17P_PRESSURE_FLUX_SCREEN_NO_GO.md).
+
 ## 2026-08-04 Sigma v17F root-scale propagator freeze
 
 Before any regional temperature, thermal source map, v17E target score, or
