@@ -1,0 +1,57 @@
+{
+  "protocol_version": "SIGMA-V2-TRACE-NONMETRICITY-CYCLE-1.0.0",
+  "status": "frozen_before_executable_weak_field_and_raw_lensing_audit",
+  "model_id": "sigma_v2_trace_nonmetricity",
+  "purpose": "Test the smallest second nonmetricity invariant that gives the two physical metric potentials different baryon-predicted responses while leaving the transverse-traceless wave cone unchanged at linear order.",
+  "physical_postulates": [
+    "Baryonic stress-energy is the only material source.",
+    "Matter and light couple minimally to one physical metric g_ab.",
+    "The independent connection is flat and torsion-free and has no freely initialized halo profile.",
+    "Sigma is a nonlinear self-interaction of the second nonmetricity trace, not an invisible material component.",
+    "The same action, acceleration scale, boundary condition, and physical metric apply to every object.",
+    "No object label, per-object gravity constant, or lensing-only multiplier is permitted."
+  ],
+  "action": {
+    "stegr_scalar": "Q=Q1/4-Q2/2-Q3/4+Q5/2",
+    "trace_scalar": "V=tilde(Q)_a tilde(Q)^a",
+    "dimensionless_trace": "Y=V c^4/(4 a_sigma^2)",
+    "trace_primitive": "H(0)=0 and H_Y(Y)=1-nu_simple(sqrt(Y))",
+    "simple_nu": "nu_simple(y)=1/2+sqrt(1/4+1/y)",
+    "action_density": "L_g=-(c^4/16 pi G)[Q+2(a_sigma/c^2)^2 H(Y)]",
+    "matter_action": "S_b[g_ab,psi_b]",
+    "weak_metric": "ds^2=-(1+2 Psi/c^2)c^2dt^2+(1-2 Phi/c^2)dx^2"
+  },
+  "parameters": {
+    "a_sigma_m_s2": 1.2e-10,
+    "global_physical_parameter_count": 1,
+    "per_object_gravity_parameters": 0,
+    "lensing_only_parameters": 0
+  },
+  "gates": {
+    "trace_identity_max_absolute_error": 1e-12,
+    "action_derivative_max_relative_error": 2e-5,
+    "deep_gbar_over_a_sigma": 1e-3,
+    "deep_matter_relative_error_max": 0.05,
+    "high_gbar_over_a_sigma": 100000.0,
+    "high_matter_fractional_correction_max": 1e-5,
+    "galaxy_RMSE_ratio_to_best_fixed_MOND_max": 1.05,
+    "raw_cluster_root_convergence_fraction_min": 1.0,
+    "raw_cluster_all_topologies_correct_required": true
+  },
+  "spent_empirical_inputs": {
+    "galaxy_report": "results/p0711_external_galaxy_rotation_validation/report.json",
+    "galaxy_comparator": "QUMOND_simple_nu_3D",
+    "readiness_report": "results/p0713_external_cluster_readiness_audit/report.json",
+    "image_catalog": "results/p0713_external_cluster_readiness_audit/parsed_image_catalog.csv",
+    "baryon_maps": "results/p0641_registered_cluster_baryon_maps/maps",
+    "deflection_maps": "results/p0708_external_prediction_lock/clusters",
+    "raw_cluster_reference": "results/p0714_ready_subset_raw_lensing/cluster_model_scores.csv",
+    "halo_comparator": "glafic_v2_compact_halo"
+  },
+  "decision_rule": "Advance only if the weak equations are distinct from a known nonrelativistic comparator and pass both galaxy and raw cluster gates. If they reduce exactly to QUMOND dynamics with a half-Newtonian, half-QUMOND Weyl potential, run that fixed Weyl map and retire on a raw topology failure without fitting parameters.",
+  "claim_boundary": [
+    "QUMOND and general quadratic nonmetricity gravity are prior art.",
+    "This cycle tests a specific one-metric geometric completion and does not claim QUMOND as a Sigma invention.",
+    "Failure rejects this single trace-invariant action, not every multi-invariant nonmetricity theory."
+  ]
+}

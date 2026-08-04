@@ -1,0 +1,79 @@
+{
+  "baryon_current_scaling_audit": {
+    "generous_cluster_speed_over_c": 0.005003461427972281,
+    "interpretation": "a current-only vector is a low-priority null control unless a covariant nonlinear mechanism removes velocity suppression while passing preferred-frame bounds",
+    "minimum_linear_coupling_for_order_unity_response": 199.86163866666666,
+    "minimum_quadratic_coupling_for_order_unity_response": 39944.67461052523
+  },
+  "completed_action_level_raw_topology_failures": [
+    {
+      "model": "sigma_v1_pure_nonmetricity",
+      "raw_cluster_pass": false,
+      "raw_cluster_root_fraction": 0.3333333333333333,
+      "weak_reduction": "standard-mu AQUAL"
+    },
+    {
+      "model": "sigma_v2_trace_nonmetricity",
+      "raw_cluster_pass": false,
+      "raw_cluster_root_fraction": 0.3333333333333333,
+      "weak_reduction": "simple QUMOND matter dynamics with a half-QUMOND, half-Newtonian Weyl potential"
+    }
+  ],
+  "completed_same_gate_failure_count": 2,
+  "decision": "do not freeze a Sigma v3 equation yet; derive a degenerate baryon-forced tidal action first, with the causal pure-metric nonlocal tidal route as fallback",
+  "hard_requirements": [
+    "one_physical_metric",
+    "baryons_plus_universal_boundary_uniquely_fix_state",
+    "no_freely_initialized_halo_profile",
+    "orientation_carrying_tracefree_response",
+    "covariant_variational_or_causal_effective_definition",
+    "positive_constraint_and_kinetic_structure",
+    "luminal_tensor_cone_structural",
+    "solar_screening_structural",
+    "at_most_five_universal_constants",
+    "materially_distinct_from_sigma_v1_and_v2"
+  ],
+  "input_hashes": {
+    "config": "589ee20d60eb52017ac087e2dce7d2655dab9b6416a7eab9ff70a5993222339e",
+    "results/sigma_v1_nonmetricity_cycle/report.json": "73200ecd2a0ec74218afa9899156b08123bfd6615c0570db4b478877e8c4be62",
+    "results/sigma_v2_trace_nonmetricity_cycle/report.json": "7c3e6e3e672fce5a1ad45b83334af580940d5d33a6907b2cb04dc99fb06c0564"
+  },
+  "naive_localization_audit": {
+    "cross_kinetic_matrix": [
+      [
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0
+      ]
+    ],
+    "eigenvalues": [
+      -1.0,
+      1.0
+    ],
+    "positive_definite": false
+  },
+  "ready_to_freeze_mechanisms": [],
+  "remaining_failures_before_mandatory_rethink": 1,
+  "selection": {
+    "action_frozen": false,
+    "fallback_derivation_target": "causal_pure_metric_nonlocal_tidal_response",
+    "fallback_unresolved_requirements": [
+      "covariant_variational_or_causal_effective_definition",
+      "positive_constraint_and_kinetic_structure",
+      "luminal_tensor_cone_structural"
+    ],
+    "preferred_derivation_target": "degenerate_baryon_forced_tidal_geometry",
+    "preferred_unresolved_requirements": [
+      "covariant_variational_or_causal_effective_definition",
+      "positive_constraint_and_kinetic_structure",
+      "luminal_tensor_cone_structural",
+      "solar_screening_structural"
+    ],
+    "reason": "no candidate yet proves every source, orientation, variational, health, wave, and Solar gate"
+  },
+  "selection_rule": "No action is frozen unless every hard requirement passes. The preferred derivation target is degenerate baryon-forced tidal geometry; causal pure-metric nonlocal tidal response is the fallback. A third raw-topology failure triggers the goal's mechanism-level falsification report.",
+  "status": "completed Sigma v3 pre-action mechanism selection"
+}

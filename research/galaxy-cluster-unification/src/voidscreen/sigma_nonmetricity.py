@@ -98,6 +98,88 @@ def slip_nonmetricity(grad_psi, grad_phi) -> np.ndarray:
     )
 
 
+def trace_nonmetricity(grad_psi, grad_phi) -> np.ndarray:
+    """Return the squared second nonmetricity trace in the static weak field.
+
+    ``V = tilde(Q)_alpha tilde(Q)^alpha`` is one of the five independent
+    quadratic nonmetricity scalars.  For the scalar weak metric it reduces to
+    ``4 |grad(Phi)|^2`` and is independent of the time potential ``Psi``.
+    Transverse-traceless metric perturbations have vanishing nonmetricity
+    traces at linear order, which makes this invariant a useful c_T-preserving
+    action-screening direction (but does not establish the health of every
+    nonlinear scalar/vector mode).
+    """
+    return weak_field_contractions(grad_psi, grad_phi)["q4"]
+
+
+def simple_nu(y) -> np.ndarray:
+    """Return the simple-QUMOND boost ``1/2 + sqrt(1/4 + 1/y)``."""
+    value = np.asarray(y, dtype=float)
+    if np.any(value <= 0.0):
+        raise ValueError("the Newtonian acceleration ratio must be positive")
+    return 0.5 + np.sqrt(0.25 + 1.0 / value)
+
+
+def trace_action_derivative(y_squared) -> np.ndarray:
+    """Return ``dH/dY`` for the Sigma-v2 trace action.
+
+    The primitive is defined by ``H_Y = 1 - nu(sqrt(Y))``.  This is enough to
+    define the covariant action uniquely after fixing ``H(0)=0`` and makes the
+    weak time-potential equation exactly the simple-QUMOND equation.
+    """
+    value = np.asarray(y_squared, dtype=float)
+    if np.any(value <= 0.0):
+        raise ValueError("the trace invariant must be positive")
+    return 1.0 - simple_nu(np.sqrt(value))
+
+
+def trace_action_primitive(y_squared) -> np.ndarray:
+    """Primitive ``H(Y)`` with ``H(0)=0`` for the Sigma-v2 trace action."""
+    value = np.asarray(y_squared, dtype=float)
+    if np.any(value < 0.0):
+        raise ValueError("the trace invariant must be non-negative")
+    output = np.empty_like(value)
+    zero = value == 0.0
+    small = (value > 0.0) & (value < 1e-6)
+    regular = ~(zero | small)
+    output[zero] = 0.0
+    small_value = value[small]
+    output[small] = (
+        -(4.0 / 3.0) * np.power(small_value, 0.75)
+        + 0.5 * small_value
+        - 0.1 * np.power(small_value, 1.25)
+        + (1.0 / 224.0) * np.power(small_value, 1.75)
+        - (1.0 / 2304.0) * np.power(small_value, 2.25)
+    )
+    fourth_root = np.power(value[regular], 0.25)
+    radical = np.sqrt(np.square(fourth_root) + 4.0)
+    output[regular] = (
+        0.5 * value[regular]
+        - 0.5 * fourth_root * radical * (np.square(fourth_root) + 2.0)
+        + 4.0 * np.log((fourth_root + radical) / 2.0)
+    )
+    return output
+
+
+def trace_split_spherical_accelerations(gbar, acceleration_scale: float) -> dict[str, np.ndarray]:
+    """Return the static spherical Sigma-v2 gradients.
+
+    ``Phi`` is the spatial metric potential and is Newtonian. ``Psi`` is the
+    time potential and obeys the simple-QUMOND algebraic relation in spherical
+    symmetry.  Photons see the Weyl average of the two.
+    """
+    baryonic = np.asarray(gbar, dtype=float)
+    if np.any(baryonic <= 0.0) or acceleration_scale <= 0.0:
+        raise ValueError("gbar and acceleration_scale must be positive")
+    spatial = baryonic
+    matter = simple_nu(baryonic / acceleration_scale) * baryonic
+    return {
+        "spatial_phi": spatial,
+        "matter_psi": matter,
+        "photon_weyl": 0.5 * (matter + spatial),
+    }
+
+
 def dimensionless_action_invariant(
     grad_psi, grad_phi, acceleration_scale: float
 ) -> np.ndarray:

@@ -1,5 +1,29 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 Sigma v2 trace-geometry cycle
+
+The second renewed action cycle added the independent squared second
+nonmetricity trace.  This is the smallest geometry-only term that makes the
+static time and spatial metric potentials obey different equations while
+introducing no material or freely initialized halo state.  Its weak equations
+reduce exactly to simple QUMOND matter dynamics with the physical photon
+potential fixed to the half-QUMOND, half-Newtonian Weyl average.
+
+The action passes the declared contraction, primitive, deep-limit, high-field,
+parameter-count, and external dwarf-galaxy checks.  It scores `12.403 km/s` on
+the 13 external dwarfs, exactly the best frozen MOND result.  The fresh raw
+lensing calculation uses the repaired registered-map coordinate contract and
+recovers only `0.333` of held-out roots in both AS295 and PLCKG287; all held-out
+topologies are wrong.  No cluster parameter was fitted.  The action is retired.
+See
+[`SIGMA_V2_TRACE_NONMETRICITY_ACTION_RESULTS.md`](SIGMA_V2_TRACE_NONMETRICITY_ACTION_RESULTS.md).
+
+Sigma v1 and v2 now independently show that the two minimal local scalar
+nonmetricity routes collapse to AQUAL and QUMOND, respectively.  Sigma v3 must
+carry a baryon-forced trace-free/tidal state capable of predicting shear
+orientation.  A free vector/tensor concentration is disallowed because it
+would function as a hidden halo.
+
 ## 2026-08-03 Sigma v1 pure-geometry cycle
 
 The renewed action-first goal has now tested the smallest one-metric,

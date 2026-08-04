@@ -1,0 +1,57 @@
+{
+  "advances": false,
+  "decision": "retire as a galaxy-cluster unifier: the action derives QUMOND matter dynamics but its fixed Weyl average does not recover the observed raw cluster topology",
+  "gate_results": {
+    "galaxy": true,
+    "mathematical_and_limit_checks": true,
+    "novel_weak_field_response": false,
+    "raw_cluster_lensing": false
+  },
+  "input_hashes": {
+    "config": "c15d1757861852e0b5fb208ce33380beb66e80e781167f089a4fb834bdd7380a",
+    "galaxy_report": "446ecb6540f0c05c926c4a1ef4e69303612868ecf4179ddaca545557a6dce82a",
+    "image_catalog": "08e55f71f81b83b642bea8064b753cb393b11622735e7c5430302390b384bcf4",
+    "readiness_report": "91fb59ab94fb41f38f486c74e433269ca4885671eb3b7dc2a3f9c6b78cd5665f"
+  },
+  "limits": {
+    "deep_matter_relative_error": 0.015936380489318003,
+    "deep_photon_to_matter_acceleration_ratio": 0.5155633646008685,
+    "high_matter_fractional_correction": 9.99990000205564e-06
+  },
+  "model_id": "sigma_v2_trace_nonmetricity",
+  "next_mechanism_requirement": "A third action must contain a baryon-forced trace-free/tidal state, not another local scalar of first metric derivatives. It must generate shear orientation and extra critical structure without a freely initialized halo profile.",
+  "postulate_audit": {
+    "freely_initialized_halo_state": false,
+    "global_physical_parameters": 1,
+    "lensing_only_parameters": 0,
+    "material_sources": [
+      "baryonic stress-energy"
+    ],
+    "per_object_gravity_parameters": 0,
+    "physical_matter_metrics": 1
+  },
+  "spent_observation_mapping": {
+    "best_fixed_MOND_RMSE_km_s": 12.402825154124628,
+    "external_dwarf_galaxy_RMSE_km_s": 12.402825154124628,
+    "galaxy_RMSE_ratio": 1.0,
+    "galaxy_gate_pass": true,
+    "raw_cluster_all_topologies_correct": false,
+    "raw_cluster_coordinate_contract": "registered array rows north and columns east",
+    "raw_cluster_count": 2,
+    "raw_cluster_gate_pass": false,
+    "raw_cluster_minimum_root_convergence_fraction": 0.3333333333333333
+  },
+  "status": "completed Sigma v2 trace-nonmetricity action audit",
+  "weak_field_derivation": {
+    "TT_trace_invariant_at_linear_order": 0.0,
+    "TT_wave_speed": "c at linear order because the added trace invariant vanishes for a transverse-traceless perturbation",
+    "action_derivative_max_relative_error": 2.025149832184316e-06,
+    "health_boundary": "scalar/vector Hamiltonian health remains unproved; the raw empirical failure retires the action before that stage",
+    "known_reduction": "simple QUMOND matter dynamics with a half-QUMOND, half-Newtonian Weyl potential",
+    "massive_potential": "Psi",
+    "photon_Weyl_potential": "W=(Psi+Phi)/2",
+    "spatial_equation": "Laplacian(Phi)=4 pi G rho_b",
+    "time_equation": "Laplacian(Psi)=div[nu_simple(|grad Phi|/a_sigma) grad Phi]",
+    "trace_identity_max_abs_error": 0.0
+  }
+}
