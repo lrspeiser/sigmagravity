@@ -1,0 +1,19 @@
+{
+  "protocol_version": "Sigma-v10D-0.2-anisotropic-characteristics",
+  "status": "frozen theory-only source-block characteristic gate",
+  "candidate": "Sigma v10D exponential kinetic completion",
+  "fixed_values": {
+    "K_B": 1.0,
+    "beta": 0.4264014327112209,
+    "u": 0.75,
+    "carrier_speed_squared": 0.2727272727272727,
+    "normalized_mixing_squared": 0.18181818181818182,
+    "random_samples": 2000
+  },
+  "failure_rule": "Retire exact v10D before data if any arbitrary-orientation fixed-metric source-block root is complex, nonpositive or outside the physical metric cone, or if the static Schur complement loses positivity.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "anisotropic fixed-metric principal and boost audit only"
+  }
+}

@@ -33,7 +33,8 @@ def symmetric_matrix_exponential(matrix: Array) -> Array:
     if np.any(~np.isfinite(value)):
         raise ValueError("matrix must be finite")
     eigenvalues, eigenvectors = np.linalg.eigh(value)
-    return (eigenvectors * np.exp(eigenvalues)) @ eigenvectors.T
+    result = (eigenvectors * np.exp(eigenvalues)) @ eigenvectors.T
+    return 0.5 * (result + result.T)
 
 
 def completed_aether_kinetic_matrix(

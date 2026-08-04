@@ -1,5 +1,22 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v10D anisotropic source-block characteristics
+
+The arbitrary-orientation fixed-metric aether--carrier block passes. For every
+carrier background, `F=exp(X)-X>=I`; for every wave direction,
+`R=(I+n n^T)/2` lies between `I/2` and `I`. The static Schur complement is
+therefore at least `I-(q/s)I=I/3`. The six sourced squared speeds solve
+`M(y)=F y^2-(sF+uI+qR)y+suI`; their projected polynomial is positive at the
+metric cone because `(1-s)(1-u)-q=0`, the original cone-saturation identity.
+
+Two thousand random noncommuting carrier/direction cases give real, positive
+roots no greater than one, and subluminal rest-frame speeds remain subluminal
+under boosts through `|v|=0.999`. A nonzero background aether acceleration
+does not change this derivative Hessian. The proof still excludes the
+dynamical metric and complete AeST scalar/constraint sector, which is now the
+decisive gate. No observation was opened. See
+[`SIGMA_V10D_ANISOTROPIC_CHARACTERISTICS.md`](SIGMA_V10D_ANISOTROPIC_CHARACTERISTICS.md).
+
 ## 2026-08-04 Sigma v10D exponential kinetic selection
 
 V10D is a parameter-free nonlinear successor to the retired v10C action. It

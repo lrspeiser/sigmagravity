@@ -16,6 +16,15 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only follow-up is
+[`docs/SIGMA_V10D_ANISOTROPIC_CHARACTERISTICS.md`](docs/SIGMA_V10D_ANISOTROPIC_CHARACTERISTICS.md).
+For arbitrary carrier orientation, the completed aether kinetic matrix obeys
+`F>=I`, while a wave direction enters through
+`R=(I+n n^T)/2` with `I/2<=R<=I`. These bounds keep the full fixed-metric
+source-block static Schur complement at least `I/3` and all mixed roots inside
+the metric cone, even when `F` and `R` do not commute. Nonzero background
+`J` changes only lower-order terms in this block. The dynamical metric, AeST
+scalar and full ADM constraints remain the next gate.
+The preceding selection is
 [`docs/SIGMA_V10D_EXPONENTIAL_KINETIC_SELECTION.md`](docs/SIGMA_V10D_EXPONENTIAL_KINETIC_SELECTION.md).
 V10D replaces v10C's unsafe vector kinetic factor with the fixed covariant
 matrix `K_B[exp(X)-X]`, `X=(beta/K_B)P`. Since `exp(x)-x` has global minimum

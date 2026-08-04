@@ -1,0 +1,60 @@
+{
+  "all_anisotropic_source_block_gates_pass": true,
+  "analytic_bounds": {
+    "divergence_gram": "R=(I+n n^T)/2, so I/2 <= R <= I",
+    "kinetic_matrix": "F=exp(X)-X >= I",
+    "luminal_polynomial_margin": "x^T M(1)x >= (1-s)(1-u)-q=0",
+    "nonzero_J_statement": "J enters quadratically; its background value changes lower-order terms but not the derivative Hessian",
+    "quadratic_polynomial": "M(y)=F y^2-(sF+uI+qR)y+suI",
+    "static_schur": "F-(q/s)R >= (1-q/s)I=I/3"
+  },
+  "candidate": "Sigma v10D exponential kinetic completion",
+  "data_policy": {
+    "authorization": "anisotropic fixed-metric principal and boost audit only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v10d_to_full_metric_ADM_principal_gate",
+  "gates": {
+    "boosted_one_dimensional_speeds_inside_metric_cone": true,
+    "completed_kinetic_matrix_analytic_lower_bound_positive": true,
+    "identity_background_reproduces_selected_roots": true,
+    "luminal_analytic_margin_nonnegative": true,
+    "noncommuting_anisotropic_cases_actually_tested": true,
+    "nonzero_J_does_not_change_fixed_metric_principal_Hessian": true,
+    "random_characteristic_roots_inside_metric_cone": true,
+    "random_characteristic_roots_positive": true,
+    "random_characteristic_roots_real": true,
+    "random_static_schur_positive": true,
+    "static_schur_analytic_margin_one_third": true
+  },
+  "identity_background_roots": [
+    0.20454545454545459,
+    0.23200895618280792,
+    0.23200895618280792,
+    0.8816274074535556,
+    0.8816274074535556,
+    1.0
+  ],
+  "observational_data_accessed": false,
+  "random_scan": {
+    "maximum_boosted_absolute_speed": 0.9999999999659909,
+    "maximum_root_imaginary_part": 0.0,
+    "maximum_speed_squared": 0.999999989908362,
+    "minimum_kinetic_eigenvalue": 1.000000000000374,
+    "minimum_speed_squared": 6.126564141299329e-07,
+    "minimum_static_schur_eigenvalue": 0.3333333443710637,
+    "noncommuting_examples": 1998,
+    "samples": 2000
+  },
+  "raw_holdout_opened": false,
+  "reason": "The completed kinetic matrix obeys F>=I and the arbitrary-direction divergence Gram matrix obeys I/2<=R<=I. These bounds keep the full anisotropic source-block static Schur complement at least I/3 and its characteristic roots positive and inside the metric cone; noncommuting random instances and Lorentz boosts confirm the analytic result.",
+  "scope": "This gate excludes the dynamical metric and full AeST scalar constraint sector. It is not yet a complete ADM, PPN, cosmology or global well-posedness proof.",
+  "status": "completed Sigma v10D anisotropic source-block characteristic gate",
+  "unresolved": {
+    "FLRW_and_inhomogeneous_metric_backgrounds": false,
+    "PPN_and_Solar": false,
+    "full_metric_aether_scalar_carrier_principal_symbol": false,
+    "nonlinear_ADM_constraint_chain": false
+  }
+}
