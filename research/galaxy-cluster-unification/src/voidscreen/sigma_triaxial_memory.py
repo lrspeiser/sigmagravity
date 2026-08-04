@@ -16,6 +16,7 @@ class TidalMemoryField:
     tidal: np.ndarray
     screen: np.ndarray
     source: np.ndarray
+    propagated_memory: np.ndarray
     memory: np.ndarray
     invariant_i2: np.ndarray
     invariant_i3: np.ndarray
@@ -228,12 +229,14 @@ def spectral_tidal_memory(
         source = screen[..., None, None] * tidal / curvature_scale
     else:
         source = tidal / curvature_scale
-    memory = np.empty_like(source)
+    propagated_memory = np.empty_like(source)
     for row in range(3):
         for column in range(3):
-            memory[..., row, column] = np.fft.ifftn(
+            propagated_memory[..., row, column] = np.fft.ifftn(
                 np.fft.fftn(source[..., row, column]) / helmholtz
             ).real
+    propagated_memory = symmetric_trace_free(propagated_memory)
+    memory = propagated_memory.copy()
     if screen_order == "after_memory":
         memory *= screen[..., None, None]
     memory = symmetric_trace_free(memory)
@@ -245,6 +248,7 @@ def spectral_tidal_memory(
         tidal=tidal,
         screen=screen,
         source=source,
+        propagated_memory=propagated_memory,
         memory=memory,
         invariant_i2=i2,
         invariant_i3=i3,

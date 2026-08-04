@@ -1,0 +1,43 @@
+{
+  "algebra": {
+    "commuting_absolute_potential": 3.3361146040415613e-34,
+    "fixed_noncommuting_potential": 0.002168257420578558,
+    "maximum_directional_gradient_relative_error": 1.850977876082362e-08,
+    "maximum_random_potential": 0.6980563233408082,
+    "maximum_rotation_invariance_relative_error": 3.845793388563163e-15,
+    "maximum_trace_residual": 2.6645352591003757e-15,
+    "minimum_random_potential": 0.00010939284606237115,
+    "quartic_onset_relative_error": 2.7799938318029405e-06,
+    "screen_at_g_over_a_sigma_1e5": 9.999999999999992e-21
+  },
+  "all_preregistered_gates_pass": false,
+  "config_sha256": "faf6c599dbb3b5a383c1c42b73e2758894916ba65be50c1fd0bc0b34ddd0b676",
+  "decision": "retire_v3e_misalignment_as_frozen_structural_mechanism",
+  "evidence_status": "spent-theory-and-synthetic-only",
+  "gates": {
+    "analytic_gradient": true,
+    "bounded_random_potential": true,
+    "commuting_null": true,
+    "each_mass_morphology_separation": true,
+    "noncommuting_activation": true,
+    "primary_morphology_separation": false,
+    "quartic_onset": true,
+    "resolution_stability": true,
+    "rotation_invariance": true,
+    "solar_screen": true,
+    "trace_free": true
+  },
+  "maximum_field_trace_residual": 1.4210854715202004e-14,
+  "maximum_primary_mass_ratio": 26.455784579536633,
+  "minimum_primary_mass_ratio": 3.131810414068882,
+  "preregistered_git_revision": "6e5dc1a5237f7edb6fc9d85adc800ec81286ef9c",
+  "primary_grid_points": 65,
+  "primary_median_cluster_to_galaxy_response_ratio": 8.978878124616749,
+  "protocol_id": "sigma-v3e-tidal-misalignment-action-audit-v1",
+  "raw_holdout_failure_count": 0,
+  "raw_holdout_opened": false,
+  "resolution_fractional_change_in_primary_ratio": 0.018491973649409577,
+  "resolution_grid_points": 81,
+  "resolution_median_cluster_to_galaxy_response_ratio": 9.144915302298422,
+  "source_fixture_sha256": "d919da5457f55dec49c0dad71d236465cfd831ef22615793ffa36af7ae3701f0"
+}
