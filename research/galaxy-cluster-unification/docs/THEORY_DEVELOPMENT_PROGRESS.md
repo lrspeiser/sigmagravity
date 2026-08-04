@@ -1,5 +1,29 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 v5C degeneracy-first action selection
+
+The successor lane is a fixed four-constant member of the published luminal
+Class-Ia quadratic DHOST family. Its `A1=A2=0` tensor condition gives `c_T=c`,
+while `A4` and `A5` are fixed algebraically by `F`, `F_X`, and `A3`; they are
+not new fit functions. The provisional row uses a curvature-sourced canonical
+massive scalar and one even Hessian activation
+`X_hat^2/(1+X_hat^2)^(3/2)`. It is globally signed-safe and makes every
+dependent coefficient bounded through the frozen high-field scan.
+
+Ten thousand random coefficient tuples and the complete signed trial scan
+give a maximum normalized degeneracy residual of `2.10e-16`. The row has four
+universal constants and one physical metric. No data were opened. The action
+class is prior art; only the fixed activation and proposed baryon-locked
+lensing use are possible novelties. Full equations, FLRW/scalar health,
+hyperbolicity, PPN, branch uniqueness, and a term-level prior-art audit remain
+mandatory. See
+[`SIGMA_V5C_DEGENERACY_FIRST_ACTION_SELECTION.md`](SIGMA_V5C_DEGENERACY_FIRST_ACTION_SELECTION.md).
+
+The selection also closes a tempting shortcut. Any pure `P(X)` derivative
+screen that grows with a static spacelike gradient has
+`c_parallel^2=1+2X P_XX/P_X>1`; the executable representative reaches almost
+three. It is rejected under the project's strict causal-characteristic gate.
+
 ## 2026-08-03 v5B nonlinear-degeneracy failure
 
 The exact v5B action is retired before data. Its `sigma=0` FLRW branch remains

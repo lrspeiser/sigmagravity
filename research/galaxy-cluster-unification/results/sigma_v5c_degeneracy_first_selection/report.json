@@ -1,0 +1,121 @@
+{
+  "activation_scan": {
+    "evenness_error": 0.0,
+    "value_at_absolute_X_1e6": 9.999999999985e-07,
+    "value_at_absolute_X_1e_minus_6": 9.999999999985e-13,
+    "value_at_zero": 0.0
+  },
+  "data_policy": "Do not fit or score any galaxy, cluster, Solar, or other observational target during action selection.",
+  "decision": "select_sigma_v5c_luminal_class_ia_dhost_for_full_derivation_no_fit",
+  "gates": {
+    "activation_has_frozen_limits": true,
+    "class_ia_degeneracy_identities": true,
+    "luminal_tensor_identity": true,
+    "parameter_economy": true,
+    "pure_k_mouflage_strict_causality": false,
+    "signed_activation_is_real_even_smooth": true,
+    "trial_coefficients_finite_and_bounded": true
+  },
+  "k_mouflage_control": {
+    "analytic_reason": "For X<0, screening requires P_XX<0; therefore 1+2 X P_XX/P_X is greater than one.",
+    "maximum_parallel_speed_squared": 2.99999998,
+    "minimum_parallel_speed_squared": 1.0000000199999999,
+    "strict_causality_pass": false
+  },
+  "lane_decisions": [
+    {
+      "decision": "reject",
+      "id": "individual_nonmetricity_trace",
+      "reason": "v5B executable Hessian is generically nondegenerate"
+    },
+    {
+      "decision": "reject_under_strict_causality_gate",
+      "id": "pure_k_mouflage_P_of_X",
+      "reason": "static derivative screening implies a superluminal parallel scalar cone"
+    },
+    {
+      "decision": "reject_as_complete_lensing_mechanism",
+      "id": "conformal_scalar_tensor_only",
+      "reason": "the linear scalar shift cancels from the Weyl potential and canonical scalar stress is not an orientation-rich cluster closure"
+    },
+    {
+      "decision": "reserve_not_select",
+      "id": "aether_or_generalized_proca",
+      "reason": "previous PPN/response failures and coherent free vector states conflict with the baryon-unique-state goal"
+    },
+    {
+      "decision": "reserve_not_select",
+      "id": "retarded_nonlocal_curvature",
+      "reason": "a causal variational definition and auxiliary-state count must be solved before use"
+    },
+    {
+      "decision": "select_for_v5c_derivation",
+      "id": "luminal_class_ia_dhost",
+      "reason": "one metric, one scalar, algebraic degeneracy, c_T=c, and Hessian operators capable of orientation-dependent anisotropic stress"
+    }
+  ],
+  "maximum_absolute_trial_coefficient_shape": 13.15493670830692,
+  "maximum_normalized_degeneracy_residual": 2.1023134956697225e-16,
+  "novelty_status": "The action class is established prior art. Only the fixed activation and its proposed baryon-locked lensing use are candidate novelties and remain unaudited.",
+  "observational_data_accessed": false,
+  "raw_holdout_opened": false,
+  "selected_envelope_gates_pass": true,
+  "status": "completed Sigma v5C degeneracy-first action-envelope selection",
+  "trial_coefficient_records": [
+    {
+      "all_coefficients_finite": true,
+      "maximum_absolute_A3_shape": 3.8488403862831033,
+      "maximum_absolute_A4_shape": 12.499989999962501,
+      "maximum_absolute_A5_shape": 12.939140305789417,
+      "maximum_absolute_dependent_coefficient_shape": 12.939140305789417,
+      "maximum_normalized_identity_residual": 0.0,
+      "orientation_strength": -10.0
+    },
+    {
+      "all_coefficients_finite": true,
+      "maximum_absolute_A3_shape": 0.38488403862831033,
+      "maximum_absolute_A4_shape": 0.3525607129581663,
+      "maximum_absolute_A5_shape": 0.12939140305789415,
+      "maximum_absolute_dependent_coefficient_shape": 0.38488403862831033,
+      "maximum_normalized_identity_residual": 0.0,
+      "orientation_strength": -1.0
+    },
+    {
+      "all_coefficients_finite": true,
+      "maximum_absolute_A3_shape": 0.0,
+      "maximum_absolute_A4_shape": 0.0,
+      "maximum_absolute_A5_shape": 0.0,
+      "maximum_absolute_dependent_coefficient_shape": 0.0,
+      "maximum_normalized_identity_residual": 0.0,
+      "orientation_strength": 0.0
+    },
+    {
+      "all_coefficients_finite": true,
+      "maximum_absolute_A3_shape": 0.38488403862831033,
+      "maximum_absolute_A4_shape": 0.42798363682713925,
+      "maximum_absolute_A5_shape": 0.12939140305789415,
+      "maximum_absolute_dependent_coefficient_shape": 0.42798363682713925,
+      "maximum_normalized_identity_residual": 0.0,
+      "orientation_strength": 1.0
+    },
+    {
+      "all_coefficients_finite": true,
+      "maximum_absolute_A3_shape": 3.8488403862831033,
+      "maximum_absolute_A4_shape": 13.15493670830692,
+      "maximum_absolute_A5_shape": 12.939140305789417,
+      "maximum_absolute_dependent_coefficient_shape": 13.15493670830692,
+      "maximum_normalized_identity_residual": 0.0,
+      "orientation_strength": 10.0
+    }
+  ],
+  "universal_constant_count": 4,
+  "unresolved_before_empirical_fit": [
+    "derive the complete v5C scalar and metric equations for the fixed functions",
+    "solve the FLRW branch and scalar/tensor perturbation kinetic matrices",
+    "prove F>0 and scalar hyperbolicity over the full branch",
+    "derive the static spherical and nonspherical weak limits",
+    "prove high-field Solar screening and calculate PPN parameters",
+    "prove uniqueness of the retarded baryon-forced state and absence of source-free lumps",
+    "complete a term-by-term prior-art and invertible-disformal audit"
+  ]
+}

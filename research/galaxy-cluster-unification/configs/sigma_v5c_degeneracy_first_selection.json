@@ -1,0 +1,109 @@
+{
+  "protocol_id": "sigma-v5c-degeneracy-first-action-selection-v1",
+  "status": "theory-only action-envelope selection; no observational target accessed",
+  "primary_sources": [
+    {
+      "title": "Scalar-tensor theories and modified gravity in the wake of GW170817",
+      "url": "https://arxiv.org/abs/1711.07403",
+      "use": "luminal Class-Ia DHOST conditions and c_T=c restriction"
+    },
+    {
+      "title": "Degenerate higher order scalar-tensor theories beyond Horndeski and disformal transformations",
+      "url": "https://arxiv.org/abs/1602.08398",
+      "use": "quadratic DHOST classification and field-redefinition context"
+    },
+    {
+      "title": "Effective Description of Higher-Order Scalar-Tensor Theories",
+      "url": "https://arxiv.org/abs/1703.03797",
+      "use": "lapse-velocity degeneracy and perturbative stability requirements"
+    },
+    {
+      "title": "Hamiltonian Analysis of f(Q) Gravity and the Failure of the Dirac-Bergmann Algorithm for Teleparallel Theories of Gravity",
+      "url": "https://arxiv.org/abs/2308.02250",
+      "use": "nonlinear nonmetricity degree-of-freedom warning and limits of coincident-gauge counting"
+    }
+  ],
+  "lanes": [
+    {
+      "id": "individual_nonmetricity_trace",
+      "decision": "reject",
+      "reason": "v5B executable Hessian is generically nondegenerate"
+    },
+    {
+      "id": "pure_k_mouflage_P_of_X",
+      "decision": "reject_under_strict_causality_gate",
+      "reason": "static derivative screening implies a superluminal parallel scalar cone"
+    },
+    {
+      "id": "conformal_scalar_tensor_only",
+      "decision": "reject_as_complete_lensing_mechanism",
+      "reason": "the linear scalar shift cancels from the Weyl potential and canonical scalar stress is not an orientation-rich cluster closure"
+    },
+    {
+      "id": "aether_or_generalized_proca",
+      "decision": "reserve_not_select",
+      "reason": "previous PPN/response failures and coherent free vector states conflict with the baryon-unique-state goal"
+    },
+    {
+      "id": "retarded_nonlocal_curvature",
+      "decision": "reserve_not_select",
+      "reason": "a causal variational definition and auxiliary-state count must be solved before use"
+    },
+    {
+      "id": "luminal_class_ia_dhost",
+      "decision": "select_for_v5c_derivation",
+      "reason": "one metric, one scalar, algebraic degeneracy, c_T=c, and Hessian operators capable of orientation-dependent anisotropic stress"
+    }
+  ],
+  "v5c_trial": {
+    "action_class": "quadratic luminal Class-Ia DHOST",
+    "X_convention": "X=g^ab grad_a(phi) grad_b(phi)",
+    "F": "F0(1+2 beta phi)",
+    "P": "-F0 X-F0 phi^2/L_sigma^2",
+    "Q": "0",
+    "activation": "A(X_hat)=X_hat^2/(1+X_hat^2)^(3/2), X_hat=X/q_sigma^2",
+    "A3": "lambda F0 q_sigma^-4 A(X_hat)",
+    "A1": "0",
+    "A2": "0",
+    "A4": "[48 F_X^2-8(F-XF_X)A3-X^2 A3^2]/(8F)",
+    "A5": "(4F_X+X A3)A3/(2F)",
+    "matter_coupling": "minimal to the one physical metric",
+    "boundary": "one universal cosmological retarded state; no per-object scalar profile",
+    "provisional_constants": ["a_sigma", "L_sigma", "beta", "lambda"]
+  },
+  "coefficient_scan": {
+    "signed_X_hat_minimum_magnitude": 1e-12,
+    "signed_X_hat_maximum_magnitude": 1000000.0,
+    "points_per_sign": 2000,
+    "orientation_strengths": [-10.0, -1.0, 0.0, 1.0, 10.0],
+    "random_seed": 20260803,
+    "random_identities": 10000
+  },
+  "k_mouflage_control": {
+    "static_gradient_minimum": 1e-8,
+    "static_gradient_maximum": 100000000.0,
+    "points": 2000,
+    "screening_power": 1.0
+  },
+  "gates": {
+    "maximum_normalized_degeneracy_residual": 1e-12,
+    "maximum_activation_evenness_error": 1e-14,
+    "required_activation_at_zero": 0.0,
+    "maximum_activation_at_absolute_X_1e_minus_6": 1.0001e-12,
+    "maximum_activation_at_absolute_X_1e6": 1.0001e-6,
+    "maximum_absolute_trial_coefficient_shape": 20.0,
+    "maximum_universal_constants": 5,
+    "required_tensor_speed": 1.0,
+    "maximum_strictly_causal_speed_squared": 1.0
+  },
+  "unresolved_before_empirical_fit": [
+    "derive the complete v5C scalar and metric equations for the fixed functions",
+    "solve the FLRW branch and scalar/tensor perturbation kinetic matrices",
+    "prove F>0 and scalar hyperbolicity over the full branch",
+    "derive the static spherical and nonspherical weak limits",
+    "prove high-field Solar screening and calculate PPN parameters",
+    "prove uniqueness of the retarded baryon-forced state and absence of source-free lumps",
+    "complete a term-by-term prior-art and invertible-disformal audit"
+  ],
+  "data_policy": "Do not fit or score any galaxy, cluster, Solar, or other observational target during action selection."
+}

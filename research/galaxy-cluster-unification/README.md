@@ -76,6 +76,14 @@ source and orientation transport each make the lapse/flat-connection kinetic
 matrix full rank on generic polarized static backgrounds. The lost STEGR
 degeneracy exposes an additional sign-changing kinetic direction. No data were
 opened; a successor must prove degeneracy before source phenomenology.
+That successor action envelope is selected in
+[`docs/SIGMA_V5C_DEGENERACY_FIRST_ACTION_SELECTION.md`](docs/SIGMA_V5C_DEGENERACY_FIRST_ACTION_SELECTION.md).
+It is a four-constant, one-metric member of the established luminal Class-Ia
+DHOST family. Its tensor speed and constraint degeneracy are algebraic
+identities, and one fixed signed-safe scalar-Hessian coefficient can carry
+baryon-derived orientation. The class is prior art and the row is not yet a
+theory: full equations, cosmological/scalar health, PPN, branch uniqueness, and
+prior-art comparison still prohibit observational fitting.
 The latest mechanism result is
 [`docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md`](docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md).
 Its positive baryon-seeded trace is broad, stable, and the strongest v4 source,

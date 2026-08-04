@@ -96,6 +96,8 @@ results/sigma_v1_nonmetricity_cycle/*
 !results/sigma_v5a_cosmological_branch_audit/**
 !results/sigma_v5b_nonlinear_degeneracy_audit/
 !results/sigma_v5b_nonlinear_degeneracy_audit/**
+!results/sigma_v5c_degeneracy_first_selection/
+!results/sigma_v5c_degeneracy_first_selection/**
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/
