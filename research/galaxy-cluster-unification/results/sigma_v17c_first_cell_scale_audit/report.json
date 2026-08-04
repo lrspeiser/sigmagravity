@@ -1,0 +1,81 @@
+{
+  "ccd_id": 3,
+  "checks": {
+    "background_AREASCAL_matches_reconstruction": true,
+    "correction_completed": true,
+    "effective_scale_matches_frozen_BKGSCALn": true,
+    "sherpa_scale_matches_frozen_BKGSCALn": true,
+    "source_product_pointers_match": true
+  },
+  "files": {
+    "acisf16282_ccd3_integrated.arf": {
+      "bytes": 37440,
+      "path": "/home/henry/sigma-v17a-chandra/spectral_v17c_v107/integrated/AS295/individual/acisf16282_ccd3_integrated.arf",
+      "sha256": "6187328b901aeaee8f2db46d74a428d1f0a847e0d2ced575a52a833480cff805"
+    },
+    "acisf16282_ccd3_integrated.pi": {
+      "bytes": 3885120,
+      "path": "/home/henry/sigma-v17a-chandra/spectral_v17c_v107/integrated/AS295/individual/acisf16282_ccd3_integrated.pi",
+      "sha256": "9d1e551b0443d7944d29044b32980a57f741f213543e176663a4c7c443c89418"
+    },
+    "acisf16282_ccd3_integrated.rmf": {
+      "bytes": 2217600,
+      "path": "/home/henry/sigma-v17a-chandra/spectral_v17c_v107/integrated/AS295/individual/acisf16282_ccd3_integrated.rmf",
+      "sha256": "788feb7833039c287728c10932dcba228e4a70ec62f76aafe2719989ab631a56"
+    },
+    "acisf16282_ccd3_integrated_bkg.areascal.log": {
+      "bytes": 0,
+      "path": "/home/henry/sigma-v17a-chandra/spectral_v17c_v107/integrated/AS295/individual/acisf16282_ccd3_integrated_bkg.areascal.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "acisf16282_ccd3_integrated_bkg.pi": {
+      "bytes": 3876480,
+      "path": "/home/henry/sigma-v17a-chandra/spectral_v17c_v107/integrated/AS295/individual/acisf16282_ccd3_integrated_bkg.pi",
+      "sha256": "e6c17ec488795e0198bc937940fa8e465ad2012a436da9ff2821789dff606d72"
+    }
+  },
+  "frozen_scaling_source": {
+    "BKGSCALn": 0.01464518,
+    "cleaning_report": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v17a_chandra_cleaning/report.json",
+    "cleaning_report_sha256": "8aaffd9ffde281655a8f3f824e06aee506fc4bed6fa50d330c81d8a3c63cf334",
+    "keyword": "BKGSCAL3"
+  },
+  "generated_utc": "2026-08-04T21:38:02.172142+00:00",
+  "headers": {
+    "background_AREASCAL": 1.0273109944004,
+    "background_BACKSCAL": 0.001120884925127,
+    "background_EXPOSURE": 600000.0,
+    "source_AREASCAL": 1.0,
+    "source_BACKSCAL": 0.001120884925127,
+    "source_EXPOSURE": 9027.0926573834
+  },
+  "obsid": 16282,
+  "pointers": {
+    "ANCRFILE": {
+      "basename_matches": true,
+      "expected": "acisf16282_ccd3_integrated.arf",
+      "observed": "acisf16282_ccd3_integrated.arf"
+    },
+    "BACKFILE": {
+      "basename_matches": true,
+      "expected": "acisf16282_ccd3_integrated_bkg.pi",
+      "observed": "acisf16282_ccd3_integrated_bkg.pi"
+    },
+    "RESPFILE": {
+      "basename_matches": true,
+      "expected": "acisf16282_ccd3_integrated.rmf",
+      "observed": "acisf16282_ccd3_integrated.rmf"
+    }
+  },
+  "protocol_version": "SIGMA-V17C-SPECTRUM-SCALING-AUDIT-1.0.0",
+  "reconstructed": {
+    "background_AREASCAL_relative_error": 3.419486915845482e-14,
+    "effective_background_scale": 0.0146451799999995,
+    "effective_scale_relative_error_from_BKGSCALn": 3.419486915845482e-14,
+    "expected_background_AREASCAL": 1.0273109944003649,
+    "sherpa_get_bkg_scale": 0.014645179999999501,
+    "sherpa_scale_relative_error_from_BKGSCALn": 3.4083846855992306e-14
+  },
+  "relative_tolerance": 1e-06,
+  "status": "passed"
+}

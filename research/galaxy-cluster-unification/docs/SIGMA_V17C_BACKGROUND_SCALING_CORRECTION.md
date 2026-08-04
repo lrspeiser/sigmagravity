@@ -37,7 +37,7 @@ The correction is derived rather than fitted:
 
 \[
 \boxed{
-{	t AREASCAL}_b=
+{\tt AREASCAL}_b=
 \frac{t_s}{t_b}
 \frac{{\tt BACKSCAL}_s}{{\tt BACKSCAL}_b}
 \frac{{\tt AREASCAL}_s}{{\tt BKGSCALn}}
@@ -70,6 +70,30 @@ For a copied real `16524 CCD0` PHA pair, the corrected header gave
 `get_bkg_scale=0.07117321300000123` for measured
 `BKGSCALn=0.071173213`, a relative discrepancy of
 `1.71e-14`. The source PHA's response and background pointers remained valid.
+
+## First production-cell audit
+
+The first completed v1.0.7 production cell, AS295 ObsID 16282 CCD3, was audited
+with the separate read-only
+`scripts/audit_sigma_v17c_spectrum_scaling.py` program. The audit obtains the
+required `BKGSCAL3` from the frozen v17A cleaning report rather than accepting a
+value reported by the v17C extraction runner. It then parses the completed PHA
+headers independently, reconstructs the effective scale, validates the
+background/ARF/RMF pointers, hashes every product, and asks Sherpa for the scale
+it will actually use.
+
+| Quantity | Value |
+|---|---:|
+| Frozen `BKGSCAL3` | 0.0146451800000000 |
+| Corrected background `AREASCAL` | 1.0273109944004 |
+| Independently reconstructed effective scale | 0.0146451799999995 |
+| Sherpa `get_bkg_scale` | 0.0146451799999995 |
+| Relative discrepancy from frozen `BKGSCAL3` | 3.4e-14 |
+
+All five audit checks passed at the frozen `1e-6` tolerance. The machine-readable
+evidence is in `results/sigma_v17c_first_cell_scale_audit/report.json`. This
+validates the bookkeeping of one real production cell; the extraction runner
+still applies and verifies the invariant separately for every later cell.
 
 ## Execution and claim boundary
 

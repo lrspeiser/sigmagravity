@@ -1,12 +1,14 @@
 import hashlib
 import importlib.util
 import json
+from argparse import Namespace
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v17c_spectral_temperature.json"
 RUNNER = ROOT / "scripts" / "run_sigma_v17c_integrated_spectra.py"
 FITTER = ROOT / "scripts" / "fit_sigma_v17c_integrated_temperatures.py"
+AUDITOR = ROOT / "scripts" / "audit_sigma_v17c_spectrum_scaling.py"
 
 
 def _sha256(path: Path) -> str:
@@ -23,6 +25,14 @@ def _load_runner():
 
 def _load_fitter():
     spec = importlib.util.spec_from_file_location("sigma_v17c_fit", FITTER)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _load_auditor():
+    spec = importlib.util.spec_from_file_location("sigma_v17c_scaling_audit", AUDITOR)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -202,6 +212,91 @@ def test_single_pass_fits_header_reader_finds_spectrum_values(tmp_path: Path) ->
         "BACKSCAL": 0.0011035720258951,
         "AREASCAL": 1.0,
     }
+
+
+def test_independent_scaling_auditor_reconstructs_scale_and_pointers(
+    tmp_path: Path,
+) -> None:
+    auditor = _load_auditor()
+    source = tmp_path / "cell.pi"
+    background = tmp_path / "cell_bkg.pi"
+    arf = tmp_path / "cell.arf"
+    rmf = tmp_path / "cell.rmf"
+    correction_log = background.with_suffix(".areascal.log")
+    primary = _fits_header(
+        ["SIMPLE  =                    T", "BITPIX  =                    8", "NAXIS   =                    0"]
+    )
+
+    def spectrum(extra: list[str]) -> bytes:
+        return _fits_header(
+            [
+                "XTENSION= 'BINTABLE'",
+                "BITPIX  =                    8",
+                "NAXIS   =                    2",
+                "NAXIS1  =                    1",
+                "NAXIS2  =                    1",
+                "PCOUNT  =                    0",
+                "GCOUNT  =                    1",
+                "EXTNAME = 'SPECTRUM'",
+                *extra,
+            ]
+        ) + b"\0" + b"\0" * 2879
+
+    source.write_bytes(
+        primary
+        + spectrum(
+            [
+                "EXPOSURE=                 10.0",
+                "BACKSCAL=                  1.0",
+                "AREASCAL=                  1.0",
+                "BACKFILE= 'cell_bkg.pi'",
+                "ANCRFILE= 'cell.arf'",
+                "RESPFILE= 'cell.rmf'",
+            ]
+        )
+    )
+    background.write_bytes(
+        primary
+        + spectrum(
+            [
+                "EXPOSURE=                100.0",
+                "BACKSCAL=                  1.0",
+                "AREASCAL=                  2.0",
+            ]
+        )
+    )
+    arf.write_bytes(b"arf")
+    rmf.write_bytes(b"rmf")
+    correction_log.write_text("", encoding="utf-8")
+    cleaning_report = tmp_path / "cleaning.json"
+    cleaning_report.write_text(
+        json.dumps(
+            {
+                "observations": [
+                    {"obsid": 123, "blanksky_scaling": {"BKGSCAL3": "0.05"}}
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    report = auditor.audit(
+        Namespace(
+            source_pha=source,
+            background_pha=background,
+            arf=None,
+            rmf=None,
+            cleaning_report=cleaning_report,
+            obsid=123,
+            ccd_id=3,
+            relative_tolerance=1e-6,
+            check_sherpa=False,
+        )
+    )
+
+    assert report["status"] == "passed"
+    assert report["reconstructed"]["effective_background_scale"] == 0.05
+    assert report["checks"]["source_product_pointers_match"] is True
+    assert report["checks"]["sherpa_scale_matches_frozen_BKGSCALn"] is None
 
 
 def test_integrated_fitter_implements_the_frozen_model_and_failure_gate() -> None:
