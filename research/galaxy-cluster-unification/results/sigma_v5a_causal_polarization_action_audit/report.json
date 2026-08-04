@@ -1,0 +1,89 @@
+{
+  "all_current_theory_screen_gates_pass": true,
+  "data_policy": "Do not score any galaxy or cluster until every unresolved action item is closed and preregistered.",
+  "decision": "continue_covariant_derivation_no_empirical_fit",
+  "gates": {
+    "causal_local_scalar_cone": true,
+    "conditioned_local_kinetic_matrix": true,
+    "high_field_solar_limit": true,
+    "low_field_flat_limit": true,
+    "parameter_economy": true,
+    "plain_nonminimal_scalar_lensing_null": true,
+    "transition_peak": true,
+    "weyl_trace_identity": true
+  },
+  "manufactured_checks": {
+    "maximum_scanned_characteristic_speed_over_c": 1.0,
+    "minimum_scanned_kinetic_eigenvalue": 0.09090909090909083,
+    "plain_nonminimal_scalar_weyl_maximum_absolute_error": 2.220446049250313e-16,
+    "singular_control_minimum_spatial_eigenvalue": 9.99998999939855e-07,
+    "transition_bandpass": {
+      "1.0": 0.25,
+      "100000.0": 1e-20,
+      "1e-05": 1.0000000000000004e-20
+    },
+    "universal_constant_count": 4,
+    "weyl_trace_identity_maximum_absolute_error": 2.682298827494378e-13
+  },
+  "observational_data_accessed": false,
+  "status": "completed theory-only Sigma v5A causal-polarization screen",
+  "transport_scan": [
+    {
+      "alpha_sigma": 0.0,
+      "maximum_characteristic_speed_over_c": 1.0,
+      "minimum_kinetic_eigenvalue": 1.0,
+      "orientation": "spacelike"
+    },
+    {
+      "alpha_sigma": 0.0,
+      "maximum_characteristic_speed_over_c": 1.0,
+      "minimum_kinetic_eigenvalue": 1.0,
+      "orientation": "timelike"
+    },
+    {
+      "alpha_sigma": 0.1,
+      "maximum_characteristic_speed_over_c": 1.0,
+      "minimum_kinetic_eigenvalue": 0.9090909090909091,
+      "orientation": "spacelike"
+    },
+    {
+      "alpha_sigma": 0.1,
+      "maximum_characteristic_speed_over_c": 0.9999999999999546,
+      "minimum_kinetic_eigenvalue": 1.0,
+      "orientation": "timelike"
+    },
+    {
+      "alpha_sigma": 1.0,
+      "maximum_characteristic_speed_over_c": 1.0,
+      "minimum_kinetic_eigenvalue": 0.5,
+      "orientation": "spacelike"
+    },
+    {
+      "alpha_sigma": 1.0,
+      "maximum_characteristic_speed_over_c": 0.99999999999975,
+      "minimum_kinetic_eigenvalue": 1.0,
+      "orientation": "timelike"
+    },
+    {
+      "alpha_sigma": 10.0,
+      "maximum_characteristic_speed_over_c": 1.0,
+      "minimum_kinetic_eigenvalue": 0.09090909090909083,
+      "orientation": "spacelike"
+    },
+    {
+      "alpha_sigma": 10.0,
+      "maximum_characteristic_speed_over_c": 0.9999999999995455,
+      "minimum_kinetic_eigenvalue": 1.0,
+      "orientation": "timelike"
+    }
+  ],
+  "unresolved_before_empirical_fit": [
+    "derive the complete metric and connection equations including every Q-dependence of G_sigma and J",
+    "derive the complete weak equations for Psi, Phi, and W rather than treating sigma as fixed",
+    "prove the full nonlinear constraint count of the combined nonmetricity-scalar theory",
+    "prove c_T=c on cosmological and quasistatic backgrounds, not only the vacuum TT screen",
+    "define a globally real cosmological branch for the Sigma-v2 primitive",
+    "derive PPN parameters and Solar-System bounds including cosmological polarization initial data",
+    "conduct prior-art and field-redefinition audits"
+  ]
+}

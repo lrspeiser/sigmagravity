@@ -1,5 +1,22 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 Sigma v5A causal-polarization action screen
+
+The first local causal completion now has a concrete covariant action
+candidate. A dimensionless polarization scalar is sourced by the fixed
+transition band-pass `x^4/(1+x^4)^2` and propagates with a bounded disformal
+inverse metric built from `W_a=Q_a-4 tilde(Q)_a`. The source is `1e-20` at
+both `g/a_sigma=1e-5` and `1e5`, peaks at `1/4`, and the scanned local scalar
+cone is healthy and no faster than light. Restricting `0<=alpha_sigma<=10`
+keeps the minimum kinetic eigenvalue at least `1/11`; the theory uses four
+universal constants and has a unique regular static decaying profile.
+
+No observational data were accessed, and no fit is authorized. Complete
+metric/connection and weak equations, nonlinear mode count, background
+`c_T`, cosmological branch, PPN/Solar response, and prior-art audits remain
+hard gates. See
+[`SIGMA_V5A_CAUSAL_POLARIZATION_ACTION_AUDIT.md`](SIGMA_V5A_CAUSAL_POLARIZATION_ACTION_AUDIT.md).
+
 ## 2026-08-03 Sigma v5 postulates and action selection
 
 The post-v4 rethink now has explicit physical postulates and an action-level

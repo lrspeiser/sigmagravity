@@ -45,6 +45,14 @@ a plain nonminimal scalar-curvature factor cancels from linear lensing. The
 candidate anisotropic trace coupling remains an envelope, not a theory: its
 causal no-free-state action, complete variation, constraint count, and health
 proof must pass before another map score.
+The first local completion is documented in
+[`docs/SIGMA_V5A_CAUSAL_POLARIZATION_ACTION_AUDIT.md`](docs/SIGMA_V5A_CAUSAL_POLARIZATION_ACTION_AUDIT.md).
+It introduces one massive gravitational polarization mode with a transition-
+band source and a bounded orientation-dependent kinetic cone. All current
+theory-only algebraic, local-mode, causality, Solar-source, and parameter gates
+pass, but the full nonmetricity mode count, cosmological tensor speed, weak
+metric equations, and PPN limits remain unresolved; observational fitting is
+still prohibited.
 The latest mechanism result is
 [`docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md`](docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md).
 Its positive baryon-seeded trace is broad, stable, and the strongest v4 source,

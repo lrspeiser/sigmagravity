@@ -1,0 +1,59 @@
+{
+  "protocol_id": "sigma-v5a-causal-polarization-action-audit-v1",
+  "status": "theory-only audit specification; no observational target accessed",
+  "physical_constants": [
+    "a_sigma",
+    "L_sigma",
+    "alpha_sigma",
+    "eta_sigma"
+  ],
+  "action": {
+    "geometry": "flat torsion-free symmetric teleparallel connection plus one physical metric",
+    "base": "Sigma-v2 trace-nonmetricity galaxy sector",
+    "polarization_field": "one real dimensionless gravitational scalar sigma",
+    "source_invariant": "Z=[tilde(Q)_a tilde(Q)^a/(4 q_sigma^2)]^2",
+    "source": "J(Z)=Z/(1+Z)^2",
+    "weyl_vector": "W_a=Q_a-4 tilde(Q)_a",
+    "effective_inverse_metric": "G_sigma^ab=g^ab-[alpha/(1+alpha)] W^a W^b/sqrt[(W_c W^c)^2+(4q_sigma)^4]",
+    "polarization_lagrangian_inside_gravity_bracket": "eta/L_sigma^2 [L_sigma^2 G_sigma^ab grad_a sigma grad_b sigma + sigma^2 - 2 sigma J]",
+    "boundary": "one universal early-time retarded state; no object-specific homogeneous profile"
+  },
+  "analytic_scan": {
+    "nonmetricity_ratio_min": 1e-12,
+    "nonmetricity_ratio_max": 1000000000000.0,
+    "points": 2000,
+    "anisotropy_values": [
+      0.0,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "singular_control_anisotropy": 1000000.0,
+    "acceleration_limit_values": [
+      1e-5,
+      1.0,
+      100000.0
+    ],
+    "random_seed": 20260803
+  },
+  "gates": {
+    "maximum_weyl_trace_identity_error": 1e-12,
+    "maximum_plain_nonminimal_scalar_weyl_error": 1e-14,
+    "required_transition_source_at_x_1": 0.25,
+    "maximum_transition_source_at_x_1e_minus_5": 1.0001e-20,
+    "maximum_transition_source_at_x_1e5": 1.0001e-20,
+    "minimum_kinetic_eigenvalue": 0.0909090909,
+    "maximum_characteristic_speed": 1.0,
+    "maximum_universal_constant_count": 5
+  },
+  "unresolved_before_empirical_fit": [
+    "derive the complete metric and connection equations including every Q-dependence of G_sigma and J",
+    "derive the complete weak equations for Psi, Phi, and W rather than treating sigma as fixed",
+    "prove the full nonlinear constraint count of the combined nonmetricity-scalar theory",
+    "prove c_T=c on cosmological and quasistatic backgrounds, not only the vacuum TT screen",
+    "define a globally real cosmological branch for the Sigma-v2 primitive",
+    "derive PPN parameters and Solar-System bounds including cosmological polarization initial data",
+    "conduct prior-art and field-redefinition audits"
+  ],
+  "data_policy": "Do not score any galaxy or cluster until every unresolved action item is closed and preregistered."
+}

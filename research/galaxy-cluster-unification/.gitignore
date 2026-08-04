@@ -88,6 +88,8 @@ results/sigma_v1_nonmetricity_cycle/*
 !results/sigma_v4b_vector_stress_memory_audit/**
 !results/sigma_v4c_baryon_seeded_coherence_trace_audit/
 !results/sigma_v4c_baryon_seeded_coherence_trace_audit/**
+!results/sigma_v5a_causal_polarization_action_audit/
+!results/sigma_v5a_causal_polarization_action_audit/**
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/
