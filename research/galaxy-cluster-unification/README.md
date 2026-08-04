@@ -16,6 +16,18 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V12A_REDUCED_ENERGY_FALSIFICATION.md`](docs/SIGMA_V12A_REDUCED_ENERGY_FALSIFICATION.md).
+Exact v12A is retired before data under the strict bounded-energy gate. Its
+finite descriptor modes solve the quadratic constraints, and canonical modal
+energy agrees with the independent Krein derivative to `4.27e-9`. Nevertheless,
+no common-time boost makes every on-shell tilt-`0.5` mode positive; the best
+maximin normalized energy is `-0.783010` and the raw negative branch persists
+from `k=100` through `2000`. It remains at `lambda_D=0`, and neither the signed
+DHOST sweep nor 43 healthy-flat AeST parameter rows supplies a rescue. This is
+material formulation failure `1/3` after the v12 reset, not a three-failure
+mechanism reset. No observation or holdout was opened.
+
+The preceding theory-only result is
 [`docs/SIGMA_V12A_ON_SHELL_CONES.md`](docs/SIGMA_V12A_ON_SHELL_CONES.md).
 After imposing the constant-background aether equation, the original
 `KB=1,K2=2` row retains an invariant `0.2576%` principal cone excess and is

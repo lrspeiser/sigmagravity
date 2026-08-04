@@ -1,5 +1,36 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v12A constraint-solved modal-energy falsification
+
+Exact v12A is retired before data under the project's strict bounded-energy
+gate. For every finite oscillatory generalized eigenvector, the canonical
+energy `u^dagger(omega^2 K-B)u/4` now agrees with the independent Krein
+derivative `omega u^dagger(2 omega K-iC)u/4`; the worst normalized identity
+residual is `4.27e-9`. The positive flat finite-frequency control passes and
+the descriptor system retains `24` finite plus `16` constraint roots.
+
+On the on-shell tilt-`0.5` sentinel, none of 19 common-time boosts and 13 wave
+directions has positive energy for every physical mode. The best maximin time
+still has normalized minimum `-0.783010`. At a resolved near-rest time, the
+negative branch persists from `k=100` through `2000`; its raw canonical energy
+moves from `-0.1617` to `-0.3175`, with four signed/real-phase negative roots
+at every wave number.
+
+The failure is inherited rather than caused by the v12A DHOST term. Signed
+`lambda_D` values from `-8` through `+4` all retain a negative branch;
+`lambda_D=0` has best sampled normalized energy `-0.829917`, while `+8` loses
+the scanned hyperbolic time. A 43-row healthy-flat AeST `KB,K2` rest-frame
+screen also has no positive-energy row. Approaching `KB=2` only drives the
+mode toward the zero-speed strong-coupling endpoint.
+
+Published AeST work describes the aligned low-momentum ancestor as possibly
+Jeans-like. The project applies its stricter bounded-Hamiltonian rule on every
+claimed background, so this is a falsification. It is failure `1/3` after the
+v12 mechanism reset; no reset is triggered. The next formulation must remove
+or positively constrain the inherited zero sector at action level rather than
+tune v12A. See
+[`SIGMA_V12A_REDUCED_ENERGY_FALSIFICATION.md`](SIGMA_V12A_REDUCED_ENERGY_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v12A on-shell constant-background common cone
 
 The arbitrary-covector action now reproduces the established unitary ADM

@@ -1,5 +1,12 @@
 # Sigma v12A on-shell constant-background common-cone gate
 
+> **Subsequent result:** the constraint-solved modal-energy audit confirms that
+> the finite modes satisfy the quadratic constraints but finds a negative
+> canonical/Krein-energy oscillator for every sampled common time. Exact v12A
+> is therefore retired before data. See
+> [`SIGMA_V12A_REDUCED_ENERGY_FALSIFICATION.md`](SIGMA_V12A_REDUCED_ENERGY_FALSIFICATION.md).
+> The cone pass below remains correct but is not sufficient for viability.
+
 ## Decision
 
 The original frozen `K_B=1,K2=2` v12A row is rejected by an invariant

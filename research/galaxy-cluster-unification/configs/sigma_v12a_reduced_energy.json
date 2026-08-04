@@ -1,0 +1,28 @@
+{
+  "protocol_status": "Adaptive theory-only constrained-modal-energy screen; grids and thresholds were fixed before the recorded audit. No observational data are opened.",
+  "fixed_values": {
+    "selected_k_b": 1.0,
+    "selected_k_2": 4.0,
+    "selected_orientation_strength": -1.0,
+    "sentinel_tilt_magnitude": 0.5,
+    "wave_number_ratio": 300.0,
+    "common_time_boost_velocities": [-0.875, -0.75, -0.5, -0.25, 0.0, 0.25, 0.4, 0.425, 0.44, 0.445, 0.446, 0.4465, 0.447, 0.45, 0.475, 0.5, 0.6, 0.7, 0.8],
+    "common_time_wave_angles_degrees": [0.0, 15.0, 30.0, 45.0, 60.0, 75.0, 90.0, 105.0, 120.0, 135.0, 150.0, 165.0, 180.0],
+    "convergence_boost_velocity": 0.446,
+    "convergence_wave_angles_degrees": [0.0, 180.0],
+    "convergence_wave_numbers": [100.0, 300.0, 600.0, 1000.0, 2000.0],
+    "orientation_strength_scan": [-8.0, -4.0, -2.0, -1.0, 0.0, 1.0, 2.0, 4.0, 8.0],
+    "orientation_scan_boost_velocities": [0.425, 0.44, 0.445, 0.446, 0.45, 0.475],
+    "orientation_scan_wave_angles_degrees": [0.0, 30.0, 60.0, 90.0, 120.0, 150.0, 180.0],
+    "aest_k_b_values": [0.5, 0.75, 1.0, 1.25, 1.5, 1.7, 1.8, 1.9, 1.95, 1.98, 1.99],
+    "aest_k_2_values": [2.0, 4.0, 8.0, 32.0],
+    "aest_rest_frame_wave_angles_degrees": [0.0, 30.0, 60.0, 90.0, 120.0, 150.0, 180.0],
+    "principal_growth_threshold": 0.01,
+    "minimum_frequency_fraction": 1e-8,
+    "relative_energy_tolerance": 1e-8,
+    "canonical_krein_identity_tolerance": 1e-8,
+    "polynomial_residual_tolerance": 1e-7
+  },
+  "scope_limit": "The audit solves the finite descriptor modes of the constant local quadratic action after spatial gauge fixing and scans timelike boosts parallel to the aether. It does not construct a global curved solution or resolve whether the inherited AeST Jeans interpretation is phenomenologically acceptable; the project applies its stricter bounded-Hamiltonian gate.",
+  "data_policy": "No galaxy, cluster, Solar-System, or holdout observation may be opened during this theory-side energy audit."
+}
