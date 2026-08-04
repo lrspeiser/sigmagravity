@@ -87,6 +87,48 @@ This table is a causal hypothesis inventory, not a license to insert every
 quantity into a regression. A final equation must select its invariants through
 one action.
 
+## Existing inverse-halo constraints that must not be forgotten
+
+The project has already used conventional halo reconstructions as spent
+inverse targets. Those results constrain the next equation, although none is a
+forward prediction.
+
+- In five clusters, six of seven fitted cluster-scale halo centers lay within
+  24 kpc of a luminous galaxy or subcluster. Most modeled halo locations
+  therefore do not require a long redirected-gravity path. The exceptional
+  southern MACS1931 component remained hundreds of kiloparsecs from its
+  dominant luminous origin and lacked a robust luminous counterpart.
+- Capacity-relaxed baryon-to-halo backtracking produced a median descriptive
+  route of roughly 53 kpc. Because the halo destinations were supplied to the
+  inverse optimizer, this does not establish a propagation length.
+- A member-neighbor direction screen was more sensitive to a 100--250 kpc
+  coherence/softening scale than to whether neighbor influence fell as
+  $1/R$, $1/R^2$, or $1/R^3$. The aggregate optimum was 200 kpc, but the
+  cluster preferences differed and no universal scale advanced.
+- A 50--60 kpc baryonic destination scale predicted normalized cluster-map
+  morphology, but its ordinary-Poisson field failed raw image positions. The
+  apparent rescue from long-wavelength fractional propagation was later shown
+  to be a source-plane/mass-sheet degeneracy and failed a second cluster.
+- Across the spent six-cluster deflection atlas, the compact halo comparator
+  was primarily a broad radial amplification of the baryonic field. Five
+  reliable/non-boundary systems had radial alignment above 0.96 and an angular
+  RMS fraction of roughly 0.15--0.26. Their median radial amplification had a
+  geometric mean 8.59 and scatter 0.127 dex, but no admissible baryonic
+  predictor of that amplitude or scale advanced.
+
+These numbers describe different objects and must not be conflated: 50--60 kpc
+was a destination-map smoothing width, 100--250 kpc a directional coherence
+length, approximately 53 kpc an inverse transport path, and the new
+$R_{50}/R_{80}$ values are output-field extents. A valid action may relate
+them, but it cannot choose whichever scale gives the best score.
+
+The detailed evidence is in
+[`P0554_BARYONIC_GRAVITY_BACKTRACK_RESULTS.md`](P0554_BARYONIC_GRAVITY_BACKTRACK_RESULTS.md),
+[`P0554_LOCAL_NEIGHBOR_PARAMETER_RESULTS.md`](P0554_LOCAL_NEIGHBOR_PARAMETER_RESULTS.md),
+[`P0575_P0576_RAW_POSITION_AND_PROPAGATOR_RESULTS.md`](P0575_P0576_RAW_POSITION_AND_PROPAGATOR_RESULTS.md),
+and
+[`P0682_SPENT_MULTICLUSTER_DEFLECTION_ATLAS_RESULTS.md`](P0682_SPENT_MULTICLUSTER_DEFLECTION_ATLAS_RESULTS.md).
+
 ## The v17 amplitude-independent halo-scale test
 
 After the unchanged static response is trained on one cluster and transferred
