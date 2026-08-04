@@ -1,0 +1,49 @@
+{
+  "activation_audit": {
+    "deep_field_chi": 1e-12,
+    "deep_field_relative_quadratic_coefficient_error": 9.999994999843054e-07,
+    "f_chi": "chi exp(-sqrt(chi))",
+    "high_field_acceleration_ratio": 100000.0,
+    "high_field_fractional_correction": 0.0
+  },
+  "all_construction_gates_pass": true,
+  "candidate": "baryon-forced causal scalar-Hessian metric memory",
+  "causality_audit": {
+    "interpretation": "A traditional symmetric nonlocal variation is advanced as well as retarded; v6A must use a closed-time-path/in-in effective action or an equivalent derived causal prescription.",
+    "maximum_retarded_pre_impulse_response": 0.0,
+    "maximum_time_symmetric_pre_impulse_response": 0.925961078642316,
+    "maximum_zero_source_response": 0.0
+  },
+  "data_policy": {
+    "authorization_after_this_stage": "full closed-time-path variation and spectrum gates only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v6A_to_full_CTP_variation_and_spectrum_only",
+  "gates": {
+    "deep_field_quadratic_cancellation_envelope": true,
+    "high_field_suppression_envelope": true,
+    "nonlinear_component_order_is_material": true,
+    "parameter_count": true,
+    "retarded_support": true,
+    "rotational_covariance": true,
+    "traditional_symmetric_variation_exposes_advanced_support": true,
+    "zero_source_zero_fixed_state": true
+  },
+  "not_yet_demonstrated": [
+    "a complete closed-time-path metric variation",
+    "covariant conservation of the resulting physical equation",
+    "positive scalar/vector/tensor spectrum on Minkowski and FLRW backgrounds",
+    "luminal tensor propagation on inhomogeneous backgrounds",
+    "the MOND/BTFR coefficient from the full spherical equation",
+    "cluster lensing amplitude, topology, or held-out performance"
+  ],
+  "orientation_audit": {
+    "interpretation": "The trace-free Hessian response is coordinate-rotation covariant and responds differently when separated components are transformed before versus after summation.",
+    "maximum_rotation_covariance_residual_1000_trials": 8.718946952137972e-16,
+    "median_nonlinear_superposition_residual_1000_trials": 0.3220781287557518
+  },
+  "physical_parameter_count": 2,
+  "prior_art_boundary": "The scalar nonlocal MOND+lensing activation is published prior art. Only a healthy baryon-forced trace-free-Hessian orientation closure could become project-specific, and no novelty is claimed at this stage.",
+  "status": "completed Sigma v6A pre-data action-envelope selection"
+}
