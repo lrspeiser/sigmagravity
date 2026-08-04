@@ -1,5 +1,23 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v10D exponential kinetic selection
+
+V10D is a parameter-free nonlinear successor to the retired v10C action. It
+adds `K_B J.[exp(X)-I].J`, with `X=(beta/K_B)P`, so the constraint-reduced
+physical vector kinetic matrix becomes `K_B[exp(X)-X]`. For every real carrier
+eigenvalue, `exp(x)-x` has its unique global minimum one at zero. The v10C
+finite-amplitude singularity and ghost region are therefore absent without a
+carrier cutoff or sixth constant.
+
+The completion begins at cubic perturbative order, so the v10C zero-background
+static response and cone equations are unchanged. A scan of kinetic factors
+from one through `1e8` keeps longitudinal and transverse mixed squared speeds
+positive and no greater than one, and keeps the static block positive. This is
+only a successor selection: projector/metric velocity mixing, nonzero-`J`
+characteristics, full ADM constraints, PPN/Solar limits and numerics remain
+unresolved. No observation was opened. See
+[`SIGMA_V10D_EXPONENTIAL_KINETIC_SELECTION.md`](SIGMA_V10D_EXPONENTIAL_KINETIC_SELECTION.md).
+
 ## 2026-08-04 Sigma v10C nonlinear kinetic falsification
 
 Exact v10C is retired before data. On a locally inertial aether-rest event,

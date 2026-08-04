@@ -1,0 +1,25 @@
+{
+  "protocol_version": "Sigma-v10D-0.1-exponential-kinetic-selection",
+  "status": "frozen before any observational access",
+  "candidate": "v10C carrier with a fixed covariant matrix-exponential aether kinetic completion",
+  "question": "Can a parameter-free nonlinear completion remove v10C's finite-amplitude vector ghost while preserving its zero-background static response and causal cones?",
+  "action_addition": "Delta L_10D=Delta L_10C+K_B J_m[exp((beta/K_B)P)^m_n-q^m_n]J^n",
+  "fixed_values": {
+    "K_B": 1.0,
+    "u": 0.75,
+    "carrier_speed_squared": 0.2727272727272727,
+    "normalized_mixing_squared": 0.18181818181818182
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "mu_sigma", "K_B", "K_2", "L_P"],
+    "count": 5,
+    "maximum_allowed": 5,
+    "new_exponential_shape_parameter": false
+  },
+  "failure_rule": "Retire v10D before data if exp(x)-x falls to zero, any completed kinetic eigenvalue is negative, or the inherited local cone becomes superluminal for any kinetic factor at least one.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "theory selection and health work only"
+  }
+}

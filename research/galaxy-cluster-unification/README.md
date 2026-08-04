@@ -16,6 +16,15 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only follow-up is
+[`docs/SIGMA_V10D_EXPONENTIAL_KINETIC_SELECTION.md`](docs/SIGMA_V10D_EXPONENTIAL_KINETIC_SELECTION.md).
+V10D replaces v10C's unsafe vector kinetic factor with the fixed covariant
+matrix `K_B[exp(X)-X]`, `X=(beta/K_B)P`. Since `exp(x)-x` has global minimum
+one for every real eigenvalue, the finite-amplitude ghost is removed without a
+new constant or state cutoff. Zero-background response and cones are unchanged;
+amplitude scans keep the local static and hyperbolic blocks positive and causal.
+This is selection only: full tilted ADM constraints, nonzero-`J`
+characteristics, PPN/Solar limits and numerics remain mandatory.
+The preceding falsification is
 [`docs/SIGMA_V10C_NONLINEAR_KINETIC_FALSIFICATION.md`](docs/SIGMA_V10C_NONLINEAR_KINETIC_FALSIFICATION.md).
 Exact v10C is retired before data. Enforcing that `P` stays spatial relative to
 the moving aether changes the physical vector kinetic matrix to

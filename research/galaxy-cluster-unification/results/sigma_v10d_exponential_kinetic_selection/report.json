@@ -1,0 +1,78 @@
+{
+  "all_mandatory_theory_gates_pass": false,
+  "all_selection_gates_pass": true,
+  "candidate": "v10C carrier with a fixed covariant matrix-exponential aether kinetic completion",
+  "coefficients": {
+    "K_B": 1.0,
+    "beta": 0.4264014327112209,
+    "beta_squared_over_K_B": 0.18181818181818182,
+    "c_P_squared": 0.2727272727272727,
+    "u": 0.75
+  },
+  "completion": {
+    "X": "(beta/K_B) P",
+    "added_term": "K_B J_m [exp(X)^m_n-q^m_n] J^n",
+    "analytic_global_minimum": 1.0,
+    "eigenvalue_function": "K_B[exp(x)-x]",
+    "minimum_location": 0.0,
+    "reduced_kinetic_matrix": "K_B[exp(X)-X]"
+  },
+  "cone_scan": {
+    "kinetic_factor_max": 100000000.0,
+    "kinetic_factor_min": 1.0,
+    "maximum_longitudinal_speed_squared": 1.0,
+    "maximum_transverse_speed_squared": 0.8816274074535556,
+    "minimum_longitudinal_speed_squared": 7.499999962747097e-09,
+    "minimum_static_eigenvalue": 0.07596236336645668,
+    "minimum_transverse_speed_squared": 7.499999981373548e-09,
+    "samples": 4000
+  },
+  "data_policy": {
+    "authorization": "theory selection and health work only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v10d_to_full_nonlinear_ADM_and_characteristic_gate",
+  "observational_data_accessed": false,
+  "random_matrix_minimum_kinetic_eigenvalues": [
+    1.0,
+    1.0006095999977997,
+    1.000667472938489,
+    2.3185337490983935,
+    152.749916001664
+  ],
+  "raw_holdout_opened": false,
+  "reason": "The fixed function exp(x)-x has global minimum one, so the completed physical aether kinetic matrix is at least K_B for every real carrier eigenvalue. Zero-background response and cones are unchanged, and amplitude scans keep the local static and mixed hyperbolic blocks positive and causal without a new constant.",
+  "scalar_amplitude_scan": {
+    "minimum_factor": 1.0,
+    "minimum_x": 0.0,
+    "samples": 200001,
+    "x_max": 20.0,
+    "x_min": -20.0
+  },
+  "scope": "This is a narrow necessary selection pass. Tilted metric/aether/carrier velocity mixing, nonzero-J characteristics, the complete constraint chain, PPN/Solar limits and numerical well-posedness remain mandatory before data.",
+  "selection_gates": {
+    "amplitude_scan_longitudinal_cones_positive_causal": true,
+    "amplitude_scan_static_block_positive": true,
+    "amplitude_scan_transverse_cones_positive_causal": true,
+    "analytic_scalar_minimum_is_one_at_zero": true,
+    "no_new_physical_constant": true,
+    "random_matrix_kinetic_eigenvalues_at_least_KB": true,
+    "sampled_minimum_occurs_at_zero": true,
+    "sampled_scalar_factor_never_below_one": true,
+    "zero_background_longitudinal_cones_unchanged": true
+  },
+  "status": "completed Sigma v10D exponential kinetic selection",
+  "unresolved": {
+    "complete_metric_stress_and_PPN": false,
+    "full_nonlinear_ADM_constraint_count": false,
+    "global_hyperbolicity": false,
+    "nonzero_J_and_nonzero_P_characteristics": false,
+    "numerical_PDE_convergence": false,
+    "tilted_metric_carrier_velocity_Hessian": false
+  },
+  "zero_background_longitudinal_speed_squared": [
+    0.20454545454545453,
+    1.0
+  ]
+}
