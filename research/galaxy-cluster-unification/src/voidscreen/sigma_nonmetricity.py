@@ -112,6 +112,50 @@ def trace_nonmetricity(grad_psi, grad_phi) -> np.ndarray:
     return weak_field_contractions(grad_psi, grad_phi)["q4"]
 
 
+def weyl_trace_nonmetricity(grad_psi, grad_phi) -> np.ndarray:
+    """Return ``(Q_a-4 tilde(Q)_a)^2`` in three static dimensions.
+
+    In the scalar weak metric, ``Q_i-4 tilde(Q)_i`` is exactly
+    ``2 partial_i(Psi+Phi)``.  The invariant therefore reduces to
+    ``4 |grad(Psi+Phi)|^2 = 16 |grad(W)|^2`` for the photon Weyl potential
+    ``W=(Psi+Phi)/2``.  Both nonmetricity traces vanish for a linear
+    transverse-traceless perturbation, so this direction does not change the
+    quadratic TT cone by itself.
+    """
+    contractions = weak_field_contractions(grad_psi, grad_phi)
+    if np.asarray(grad_psi).shape[-1] != 3:
+        raise ValueError("the fixed coefficient four assumes three spatial dimensions")
+    return (
+        contractions["q3"]
+        - 8.0 * contractions["q5"]
+        + 16.0 * contractions["q4"]
+    )
+
+
+def nonminimal_scalar_weak_laplacians(
+    baryonic_laplacian, scalar_coupling_laplacian
+) -> dict[str, np.ndarray]:
+    """Linear weak response of ``F(sigma) R`` with negligible scalar stress.
+
+    ``baryonic_laplacian`` denotes the GR value ``4 pi G rho`` and
+    ``scalar_coupling_laplacian`` denotes ``Laplacian(delta F/F_0)``.  The
+    scalar shifts the two metric potentials oppositely, so its contribution
+    cancels from their Weyl average.  This is a compact action-selection null,
+    not a nonlinear scalar-tensor solver.
+    """
+    baryonic = np.asarray(baryonic_laplacian, dtype=float)
+    scalar = np.asarray(scalar_coupling_laplacian, dtype=float)
+    if baryonic.shape != scalar.shape or np.any(~np.isfinite(baryonic + scalar)):
+        raise ValueError("the two Laplacian arrays must be matching and finite")
+    spatial_phi = baryonic + 0.5 * scalar
+    time_psi = baryonic - 0.5 * scalar
+    return {
+        "spatial_phi": spatial_phi,
+        "matter_psi": time_psi,
+        "photon_weyl": 0.5 * (spatial_phi + time_psi),
+    }
+
+
 def simple_nu(y) -> np.ndarray:
     """Return the simple-QUMOND boost ``1/2 + sqrt(1/4 + 1/y)``."""
     value = np.asarray(y, dtype=float)

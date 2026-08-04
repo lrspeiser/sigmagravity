@@ -1,5 +1,22 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 Sigma v5 postulates and action selection
+
+The post-v4 rethink now has explicit physical postulates and an action-level
+selection result. A plain `F(Sigma) R` coupling changes the two weak potentials
+with opposite signs and cancels from their Weyl average, while an unconstrained
+tensor--Weyl coupling risks both a hidden homogeneous state and a changed
+tensor principal cone. The selected geometric direction instead uses the
+nonmetricity trace `W_a=Q_a-4 tilde(Q)_a`, whose static weak square is exactly
+`16 |grad((Psi+Phi)/2)|^2/c^4` and which vanishes for linear TT modes.
+
+The resulting Sigma v5 envelope couples a uniquely baryon-forced anisotropic
+trace state to that invariant with four provisional universal constants. It is
+not yet a complete theory: a causal in-in or degenerate no-free-state action,
+its complete functional variation, constraint count, and health proof are
+mandatory before another map fit. See
+[`SIGMA_V5_ORIENTATION_TRANSPORT_POSTULATES_AND_ACTION_SELECTION.md`](SIGMA_V5_ORIENTATION_TRANSPORT_POSTULATES_AND_ACTION_SELECTION.md).
+
 ## 2026-08-03 Sigma v4C and scalar-memory stop decision
 
 The positive baryon-seeded coherence trace passes its uniqueness, positivity,

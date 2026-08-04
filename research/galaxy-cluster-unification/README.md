@@ -37,6 +37,14 @@ metric slip and is exactly AQUAL.  It passes the external dwarf-galaxy gate and
 fails the inherited raw cluster topology gate, so it is retired without
 fitting.  The next action must contain a baryon-predictable anisotropic-stress
 state rather than another scalar interpolation.
+The post-v4 action selection is in
+[`docs/SIGMA_V5_ORIENTATION_TRANSPORT_POSTULATES_AND_ACTION_SELECTION.md`](docs/SIGMA_V5_ORIENTATION_TRANSPORT_POSTULATES_AND_ACTION_SELECTION.md).
+It derives a nonmetricity invariant that acts directly on the photon Weyl
+potential and leaves the vacuum linear TT trace null, while also proving that
+a plain nonminimal scalar-curvature factor cancels from linear lensing. The
+candidate anisotropic trace coupling remains an envelope, not a theory: its
+causal no-free-state action, complete variation, constraint count, and health
+proof must pass before another map score.
 The latest mechanism result is
 [`docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md`](docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md).
 Its positive baryon-seeded trace is broad, stable, and the strongest v4 source,

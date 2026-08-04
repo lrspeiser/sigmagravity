@@ -4,12 +4,14 @@ import numpy as np
 
 from voidscreen.sigma_nonmetricity import (
     dimensionless_action_invariant,
+    nonminimal_scalar_weak_laplacians,
     regular_isolated_branch_has_zero_slip,
     slip_nonmetricity,
     standard_action_primitive,
     standard_mu,
     standard_mu_spherical_acceleration,
     stegr_nonmetricity,
+    weyl_trace_nonmetricity,
 )
 
 
@@ -63,3 +65,21 @@ def test_spherical_solution_round_trips_and_has_required_limits() -> None:
 def test_positive_elliptic_branch_has_zero_slip() -> None:
     assert regular_isolated_branch_has_zero_slip(1e-12)
     assert not regular_isolated_branch_has_zero_slip(0.0)
+
+
+def test_weyl_trace_invariant_selects_sum_of_metric_potentials() -> None:
+    rng = np.random.default_rng(7103)
+    grad_psi = rng.normal(size=(1000, 3))
+    grad_phi = rng.normal(size=(1000, 3))
+    expected = 4.0 * np.sum(np.square(grad_psi + grad_phi), axis=1)
+    assert np.allclose(
+        weyl_trace_nonmetricity(grad_psi, grad_phi), expected, atol=8e-14
+    )
+
+
+def test_plain_nonminimal_scalar_cancels_from_linear_weyl_laplacian() -> None:
+    baryonic = np.array([0.5, 2.0, 7.0])
+    scalar = np.array([-3.0, 1.5, 9.0])
+    response = nonminimal_scalar_weak_laplacians(baryonic, scalar)
+    assert np.array_equal(response["photon_weyl"], baryonic)
+    assert np.array_equal(response["spatial_phi"] - response["matter_psi"], scalar)
