@@ -1,0 +1,57 @@
+{
+  "all_nonlinear_rank_gates_pass": false,
+  "analytic_identity": {
+    "hessian": "H=gamma^2-s(2/3+b)[2a^2+6a^3w+3a^4w^2], a=gamma v",
+    "lagrangian": "L=gamma^2 w^2/2-s(2/3+b)E_11^2/4",
+    "large_velocity": "H -> -3s(2/3+b)a^4 w^2",
+    "strain": "E_11=2 gamma v w+(gamma v)^2 w^2"
+  },
+  "background": {
+    "aether": "A^mu=gamma(1,v,0,0)",
+    "metric": "Minkowski",
+    "perturbation": "X^1 -> X^1+w t",
+    "reference_map": "X^1=gamma(x-vt), X^2=y, X^3=z"
+  },
+  "candidate": "Sigma v11B aether-elastic spacetime triad",
+  "critical_configuration": {
+    "lagrangian": 1.1072639929042156,
+    "material_coordinate_velocity": -0.9580398915498076,
+    "velocity_perturbation": 1.6835994477509886
+  },
+  "crossing": [
+    {
+      "hessian": 0.014341035870161667,
+      "material_velocity": -0.9434594926343096,
+      "velocity_over_critical": 0.99
+    },
+    {
+      "hessian": 0.0,
+      "material_velocity": -0.9580398915498076,
+      "velocity_over_critical": 1.0
+    },
+    {
+      "hessian": -0.014411898547673552,
+      "material_velocity": -0.9726202904653056,
+      "velocity_over_critical": 1.01
+    }
+  ],
+  "data_policy": {
+    "authorization": "local tilted material-flow Legendre rank only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_exact_v11b_before_observational_data",
+  "gates": {
+    "above_surface_negative": true,
+    "below_surface_positive": true,
+    "critical_configuration_finite": true,
+    "critical_surface_zero": true,
+    "crossing_occurs_with_timelike_material_flow": true,
+    "globally_positive_material_velocity_hessian": false
+  },
+  "observational_data_accessed": false,
+  "raw_holdout_opened": false,
+  "reason": "The strain square becomes quartic in a material-coordinate velocity on a tilted slice. Its negative large-velocity curvature drives the physical phonon Legendre Hessian through zero while the material flow is still timelike.",
+  "scope": "The failed direction is a physical material-coordinate velocity at fixed metric and aether. A negative Rayleigh quotient cannot be repaired by omitted off-diagonal mixing.",
+  "status": "completed Sigma v11B tilted-flow kinetic falsification"
+}

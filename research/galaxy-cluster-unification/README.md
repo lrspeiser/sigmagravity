@@ -15,7 +15,13 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
-The current theory-only selection is
+The current theory-only result is
+[`docs/SIGMA_V11B_TILTED_RANK_FALSIFICATION.md`](docs/SIGMA_V11B_TILTED_RANK_FALSIFICATION.md).
+Exact v11B is retired before data. On a finite tilted slice its strain square
+becomes quartic in a physical material velocity; the Legendre Hessian crosses
+zero and negative while material flow remains timelike. V11A and v11B are now
+two distinct post-reset failures at the nonlinear kinetic-rank gate.
+The preceding theory-only selection is
 [`docs/SIGMA_V11B_ELASTIC_TRIAD_SELECTION.md`](docs/SIGMA_V11B_ELASTIC_TRIAD_SELECTION.md).
 V11B treats the Sigma sector as a stress-free elastic spacetime triad. Three
 connection-free scalar material coordinates have zero action and stress in the

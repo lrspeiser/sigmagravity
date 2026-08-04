@@ -1,0 +1,16 @@
+{
+  "protocol_version": "Sigma-v11B-0.2-tilted-flow-rank",
+  "status": "frozen theory-only nonlinear rank gate",
+  "candidate": "Sigma v11B aether-elastic spacetime triad",
+  "fixed_values": {
+    "aether_tilt": 0.5,
+    "shear_speed_squared": 0.2727272727272727,
+    "bulk_weight": 0.7083333333333334
+  },
+  "failure_rule": "Retire exact v11B before data if the material-coordinate velocity Hessian reaches zero or becomes negative at finite strain while the material flow remains timelike.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "local tilted material-flow Legendre rank only"
+  }
+}

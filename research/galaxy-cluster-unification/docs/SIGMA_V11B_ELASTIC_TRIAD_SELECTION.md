@@ -1,5 +1,10 @@
 # Sigma v11B stress-free elastic-spacetime triad selection
 
+> **Superseded gate result (2026-08-04):** on a tilted slice the strain square
+> becomes quartic in a physical material velocity. Its Legendre Hessian crosses
+> zero while material flow remains timelike. Exact v11B is retired before data.
+> See [`SIGMA_V11B_TILTED_RANK_FALSIFICATION.md`](SIGMA_V11B_TILTED_RANK_FALSIFICATION.md).
+
 ## Decision
 
 Sigma v11B passes a narrow theory-only architecture-selection gate. It models

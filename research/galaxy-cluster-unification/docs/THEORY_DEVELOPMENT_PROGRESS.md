@@ -1,5 +1,22 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v11B tilted-flow kinetic falsification
+
+Exact v11B is retired before data. On a tilted Minkowski slice, perturbing one
+material coordinate gives `E_11=2aw+a^2w^2`. Its positive spatial strain energy
+enters the Lorentzian Lagrangian with a minus sign, producing a negative
+quartic in the coordinate velocity. The exact Hessian is
+`H=gamma^2-s(2/3+b)(2a^2+6a^3w+3a^4w^2)`.
+
+At `v=1/2`, `s=3/11`, and `b=17/24`, the finite zero is
+`w=1.68359945`, where material flow remains timelike at `-0.958040` and the
+Lagrangian is finite. The Hessian crosses `0.0143410`, `0`, `-0.0144119` at
+`0.99`, `1`, `1.01` times that velocity; all three material velocities remain
+subluminal. A negative physical-coordinate Rayleigh direction cannot be fixed
+by omitted mixing. This is the second distinct post-reset failure at nonlinear
+kinetic rank. No observation was opened. See
+[`SIGMA_V11B_TILTED_RANK_FALSIFICATION.md`](SIGMA_V11B_TILTED_RANK_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v11B stress-free elastic-triad selection
 
 The second post-reset architecture passes its flat selection gate. V11B adds
