@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 89,
+    "sigma_protocols": 90,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 59,
+    "sigma_formula_fragments": 65,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -5752,6 +5752,80 @@
         "BRANS-DICKE"
       ],
       "sha256": "fb734bbb7af35ec657538ec321def83cb34a5ea5171c80b3d230c17456b735fa"
+    },
+    {
+      "config": "configs/sigma_v17g_pressure_metric_gate.json",
+      "protocol_version": "SIGMA-V17G-PRESSURE-METRIC-GATE-1.0.0",
+      "status": "frozen before any v17 integrated temperature, regional temperature, thermal source map, v17E transfer result, or v17F root-scale result existed",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "candidate_action.action_class",
+          "formula": "TeVeS-like scalar metric slip with one universal conformal-disformal matter metric and a dynamical aether direction",
+          "published_overlap_ids": [
+            "CONFORMAL-GRAVITY",
+            "BRANS-DICKE",
+            "DISFORMAL-METRIC",
+            "EINSTEIN-AETHER",
+            "AEST-MOND",
+            "TEVES"
+          ]
+        },
+        {
+          "json_path": "candidate_action.action_under_test",
+          "formula": "S=integral sqrt(-g)[M_Pl^2 R/2-M_Pl^2((grad X)^2+L_X^-2 X^2)/2-M_Pl^2 c_U F_U^2/4+lambda(U^2+1)]+S_m[g_tilde,psi]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "candidate_action.matter_action",
+          "formula": "One universal physical metric: g_tilde_mn=exp(2 alpha X)(g_mn+2 alpha X U_m U_n), the alpha=beta reciprocal conformal-disformal limit",
+          "published_overlap_ids": [
+            "STVG-MOG",
+            "CONFORMAL-GRAVITY",
+            "BRANS-DICKE",
+            "DISFORMAL-METRIC"
+          ]
+        },
+        {
+          "json_path": "candidate_action.covariant_diagnostic",
+          "formula": "Baryonic stress-energy supplies the scalar through its isotropic spatial pressure rather than an inferred dark component or an object label.",
+          "published_overlap_ids": [
+            "GR-EINSTEIN",
+            "FRT-GRAVITY",
+            "EMSG"
+          ]
+        },
+        {
+          "json_path": "candidate_action.euler_lagrange_source",
+          "formula": "(Box-L_X^-2)X=-J_X/M_Pl^2, where J_X=alpha T+alpha E=3 alpha p for an isotropic perfect fluid but cancels for cold dust",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "candidate_action.one_metric_response",
+          "formula": "Psi=U_N; Phi=U_N-c^2 alpha X; W=(Phi+Psi)/2=U_N-c^2 alpha X/2",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 6,
+      "published_overlap_ids": [
+        "STVG-MOG",
+        "CONFORMAL-GRAVITY",
+        "BRANS-DICKE",
+        "DISFORMAL-METRIC",
+        "EINSTEIN-AETHER",
+        "AEST-MOND",
+        "TEVES",
+        "GR-EINSTEIN",
+        "FRT-GRAVITY",
+        "EMSG"
+      ],
+      "sha256": "10dd4d85891e286bdd09f820456014b308e0d6ef5fe094b7cec225a6902b0955"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

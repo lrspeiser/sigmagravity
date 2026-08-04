@@ -1,0 +1,83 @@
+{
+  "protocol_version": "SIGMA-V17G-PRESSURE-METRIC-GATE-1.0.0",
+  "status": "frozen before any v17 integrated temperature, regional temperature, thermal source map, v17E transfer result, or v17F root-scale result existed",
+  "purpose": "Pre-fit one-metric obstruction test: determine whether the dust-cancelling alpha=beta limit of the reciprocal conformal-disformal scalar can turn measured baryonic pressure into an order-unity cluster Weyl field while satisfying the Cassini Solar-System metric-slip bound.",
+  "parents": {
+    "root_scale_protocol": "configs/sigma_v17f_root_scale_propagator.json",
+    "root_scale_protocol_sha256": "fb734bbb7af35ec657538ec321def83cb34a5ea5171c80b3d230c17456b735fa",
+    "reciprocal_metric_protocol": "configs/nbm0_reciprocal_action_protocol.json",
+    "reciprocal_metric_protocol_sha256": "3f8c15590e1cc8f7d6f7006f0db1ff32039b83856ee1b35a0c86b8b6e3b82c5c"
+  },
+  "authorization": {
+    "astronomical_target_opened": false,
+    "empirical_coupling_fit_authorized": false,
+    "uses_only_declared_physical_bounds": true,
+    "sample_is_spent": false
+  },
+  "candidate_action": {
+    "action_class": "TeVeS-like scalar metric slip with one universal conformal-disformal matter metric and a dynamical aether direction",
+    "action_under_test": "S=integral sqrt(-g)[M_Pl^2 R/2-M_Pl^2((grad X)^2+L_X^-2 X^2)/2-M_Pl^2 c_U F_U^2/4+lambda(U^2+1)]+S_m[g_tilde,psi]",
+    "matter_action": "One universal physical metric: g_tilde_mn=exp(2 alpha X)(g_mn+2 alpha X U_m U_n), the alpha=beta reciprocal conformal-disformal limit",
+    "covariant_diagnostic": "Baryonic stress-energy supplies the scalar through its isotropic spatial pressure rather than an inferred dark component or an object label.",
+    "euler_lagrange_source": "(Box-L_X^-2)X=-J_X/M_Pl^2, where J_X=alpha T+alpha E=3 alpha p for an isotropic perfect fluid but cancels for cold dust",
+    "one_metric_response": "Psi=U_N; Phi=U_N-c^2 alpha X; W=(Phi+Psi)/2=U_N-c^2 alpha X/2",
+    "pressure_compactness": "Pi_p=integral(3p dV)/(M c^2); in the unsuppressed exterior limit the extra Weyl fraction is f_W=alpha^2 Pi_p and gamma-1=2 alpha^2 Pi_p",
+    "physical_role": "The baryonic pressure distribution supplies object-dependent amplitude, size, centroid, and geometry; a common nonzero L_X can only propagate or broaden that source and is not an object-specific halo radius.",
+    "claim_boundary": "Conformal-disformal scalar-vector-tensor metrics and pressure in stress-energy are established prior art. The only project-specific question is whether this exact dust-cancelling hot-stress limit provides a transferable baryonic halo-scale channel."
+  },
+  "favorable_cluster_bound": {
+    "temperature_keV_range": [
+      6.0,
+      17.0
+    ],
+    "mean_molecular_weight": 0.61,
+    "pressure_compactness_equation": "Pi_cluster=3 k_B T/(mu m_p c^2)",
+    "gas_mass_fraction_of_baryonic_source_assumed": 1.0,
+    "finite_range_attenuation_assumed": 1.0,
+    "minimum_required_extra_Weyl_fraction": 1.0,
+    "conservatism": "The upper temperature, unit gas fraction, no Yukawa attenuation, and only order-unity missing field all maximize the candidate response relative to a realistic cluster."
+  },
+  "solar_bound": {
+    "mass_kg": 1.98847e30,
+    "radius_m": 695700000.0,
+    "conservative_virial_coefficient": 0.5,
+    "pressure_compactness_equation": "Pi_sun=c_vir G M_sun/(R_sun c^2)",
+    "cassini_absolute_gamma_minus_one_max": 2.3e-5,
+    "minimum_nonzero_propagation_length_kpc": 12.5,
+    "maximum_solar_control_radius_au": 10.0,
+    "range_rule": "Every nonzero v17F length is effectively unsuppressed over the Solar System; finite-range Yukawa attenuation may not be credited as Solar screening."
+  },
+  "physical_constants": {
+    "speed_of_light_m_s": 299792458.0,
+    "gravitational_constant_m3_kg_s2": 6.6743e-11,
+    "proton_mass_kg": 1.67262192369e-27,
+    "joule_per_keV": 1.602176634e-16,
+    "metres_per_kpc": 3.085677581491367e19,
+    "metres_per_au": 149597870700.0
+  },
+  "gates": {
+    "maximum_cassini_absolute_gamma_minus_one": 2.3e-5,
+    "minimum_cluster_extra_Weyl_fraction": 1.0,
+    "require_one_universal_alpha": true,
+    "per_object_gravity_parameters_allowed": 0,
+    "lensing_only_multiplier_allowed": false
+  },
+  "decision_rule": [
+    "Compute the smallest alpha that reaches the cluster gate under the most favorable declared cluster assumptions, then apply that same alpha to the conservative Solar pressure compactness.",
+    "Independently compute the largest cluster Weyl fraction permitted by the Cassini-safe alpha.",
+    "Reject the unscreened nonzero-L pressure-only reciprocal metric completion if either reciprocal bound fails; do not tune alpha by object.",
+    "This audit does not reject pressure/random stress as a baryonic source. Failure requires a derived nonlinear screening mechanism or a separately normalized algebraic source-local completion.",
+    "The v17F L_X=0 source-only diagnostic is not the L_X to zero limit of the canonical NBM0 normalization and remains undecided by this audit.",
+    "If v17F later selects a nonzero propagation length, any action completion must pass this audit or supply a frozen, healthy Solar-screening term before a holdout is opened."
+  ],
+  "integrity": {
+    "v17_result_existed_at_freeze": false,
+    "new_universal_constants_in_candidate": [
+      "alpha",
+      "L_X if a nonzero range is empirically required"
+    ],
+    "galaxy_cluster_switch": false,
+    "object_specific_halo_radius": false,
+    "one_physical_metric": true
+  }
+}

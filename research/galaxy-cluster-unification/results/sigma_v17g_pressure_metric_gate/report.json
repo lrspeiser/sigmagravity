@@ -1,0 +1,53 @@
+{
+  "astronomical_target_opened": false,
+  "decision": {
+    "canonical_nonzero_length_pressure_metric_completion": "reject_without_additional_screening",
+    "failure_class": "Solar_System_metric_slip",
+    "next_action_if_v17f_nonzero_length_passes": "Derive a healthy nonlinear kinetic screen before any holdout; the screen should share an existing universal acceleration scale if possible rather than add an object-dependent constant.",
+    "scope": "This rejects only the unscreened propagating alpha=beta reciprocal pressure channel. It does not reject measured random stress as the halo-scale source, a separately normalized algebraic source-local completion, or a derived nonlinear high-field screen."
+  },
+  "empirical_fit_performed": false,
+  "gates": {
+    "Cassini_at_cluster_strength_alpha_pass": false,
+    "advance": false,
+    "cluster_strength_at_Cassini_alpha_pass": false,
+    "same_alpha_passes_both": false
+  },
+  "generated_utc": "2026-08-04T21:59:28.884023+00:00",
+  "pressure_compactness": {
+    "cluster_by_temperature": {
+      "17_keV": 8.910694289218625e-05,
+      "6_keV": 3.144950925606574e-05
+    },
+    "cluster_most_favorable": 8.910694289218625e-05,
+    "solar_conservative_virial": 1.061283377198102e-06
+  },
+  "protocol": "configs/sigma_v17g_pressure_metric_gate.json",
+  "protocol_sha256": "10dd4d85891e286bdd09f820456014b308e0d6ef5fe094b7cec225a6902b0955",
+  "range_control": {
+    "finite_range_can_supply_solar_screening": false,
+    "maximum_fractional_range_suppression_over_solar_control": 3.87850940253287e-09,
+    "maximum_solar_control_radius_au": 10.0,
+    "minimum_Yukawa_transmission_over_solar_control": 0.9999999961214906,
+    "minimum_nonzero_length_kpc": 12.5
+  },
+  "reciprocal_bounds": {
+    "cluster_fraction_shortfall_factor": 1035.6713861496082,
+    "maximum_Cassini_safe_alpha": 3.2917984711735526,
+    "maximum_cluster_extra_Weyl_fraction_at_Cassini_alpha": 0.0009655572350200517,
+    "minimum_alpha_for_cluster_gate": 105.93616037065179,
+    "ratio_is_independent_of_alpha": true,
+    "solar_gamma_deviation_at_cluster_alpha": 0.023820441881440987,
+    "solar_gamma_excess_factor_over_Cassini": 1035.6713861496082
+  },
+  "report_version": "SIGMA-V17G-PRESSURE-METRIC-GATE-1.0.0",
+  "source_limit": {
+    "PPN_gamma_deviation": "abs(gamma-1)=2 alpha^2 Pi_p",
+    "dust_source_at_alpha_equals_beta": 0.0,
+    "extra_Weyl_fraction": "f_W=alpha^2 Pi_p",
+    "isotropic_pressure_source": "J_X=3 alpha p",
+    "massive_particle_potential": "Psi=U_N",
+    "weyl_potential": "W=U_N-c^2 alpha X/2"
+  },
+  "status": "failed_pre_fit"
+}

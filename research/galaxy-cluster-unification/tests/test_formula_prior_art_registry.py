@@ -141,3 +141,20 @@ def test_v17d_thermal_proxy_retains_its_stress_energy_ancestry() -> None:
     assert {"GR-EINSTEIN", "FRT-GRAVITY", "EMSG"}.issubset(
         set(v17d["published_overlap_ids"])
     )
+
+
+def test_v17g_pressure_metric_is_registered_as_prior_art_completion() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17g = protocols["sigma_v17g_pressure_metric_gate.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17g["formula_fragments"]
+    )
+
+    assert "J_X=alpha T+alpha E=3 alpha p" in fragment_text
+    assert "g_tilde_mn=exp(2 alpha X)" in fragment_text
+    assert {"TEVES", "DISFORMAL-METRIC", "GR-EINSTEIN"}.issubset(
+        set(v17g["published_overlap_ids"])
+    )
