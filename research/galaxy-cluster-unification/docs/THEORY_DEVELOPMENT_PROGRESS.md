@@ -1,20 +1,22 @@
 # Theory-development progress against the stage gates
 
-## 2026-08-04 Sigma v12A aligned finite-wave-vector sign gate
+## 2026-08-04 Sigma v12A corrected aligned finite-wave-vector gate
 
-The frozen `lambda_D=+1` row is retired before data. On the constant
-aether-aligned auxiliary branch before lapse gauge fixing, restoring `u_i=D_iq` gives
-`L4=-q^2 V_*^2+q^2|Dq|^2` and the normalized primary-secondary symbol
-`Delta/F0=-(4K2+2 r^2 A4_bar k_bar^2)`. At `q/q_sigma=2`, the positive row has
-`A4_bar=-0.0785563` and an exact rank zero at `k/q_sigma=3.56787`.
+The earlier positive-sign falsification is withdrawn. It projected only the
+`A4 q^2|Dq|^2` clock block and omitted the conformal metric component of the
+Class-Ia primary null direction. With
+`delta zeta=-(r^3 A3_bar/4)delta r`, the direct DHOST, Einstein cross, and
+Einstein metric coefficients obey
+`r^2 A4_bar-4 eta/r+2 eta^2=0` exactly. The complete aligned symbol is therefore
+`Delta/F0=-[4K2+2 K_B(k_bar/r)^2]`, which is nonzero for `K2,K_B>0` and does
+not constrain the sign of `lambda_D`.
 
-The action mechanism survives only on a negative-sign branch at this subgate.
-The analytic activation bound `x^2 A<=sqrt(1+x0^2)` proves `A4>=0` whenever
-`-8/sqrt(1+x0^2)<=lambda_D<=0`. With `x0=-1`, the nonzero theory sentinel
-`lambda_D=-1` lies safely inside the interval and passes 50,000 signed clock
-and wave-number trials. No data were opened. The full tilted, nonzero-gradient,
-anisotropic principal matrix is the next kill gate; the theory remains marked
-not viable. See [`SIGMA_V12A_ALIGNED_FINITE_K.md`](SIGMA_V12A_ALIGNED_FINITE_K.md).
+The corrected 50,000-row scan reproduces the old incomplete zero as a
+regression fixture, verifies the Class-Ia cancellation, and keeps the complete
+positive- and negative-sign symbols above zero. No data were opened. The full
+tilted, nonzero-gradient, anisotropic principal matrix remains the next kill
+gate; the theory is still not viable. See
+[`SIGMA_V12A_ALIGNED_FINITE_K.md`](SIGMA_V12A_ALIGNED_FINITE_K.md).
 
 ## 2026-08-04 Sigma v12A tilted reduced-AeST clock susceptibility
 

@@ -31,6 +31,7 @@ def main() -> None:
     config = json.loads(args.config.read_text(encoding="utf-8"))
     fixed = config["fixed_values"]
     audit = audit_v12a_aligned_finite_k(
+        k_b=float(fixed["k_b"]),
         k_2=float(fixed["k_2"]),
         background_clock_ratio=float(fixed["background_clock_ratio"]),
         selected_positive_strength=float(fixed["selected_positive_strength"]),
@@ -42,12 +43,12 @@ def main() -> None:
         random_seed=int(fixed["random_seed"]),
     )
     report = {
-        "status": "completed Sigma v12A aligned finite-k sign subgate",
+        "status": "corrected Sigma v12A aligned finite-k null-projection subgate",
         **audit,
-        "decision": "retire_positive_lambda_D_and_advance_negative_branch_to_tilted_anisotropic_symbol",
-        "reason": "The frozen lambda_D=+1 row has A4<0 and an exact finite-wave-vector zero in the primary-secondary bracket. The same covariant action has an analytically safe aligned branch for -8/sqrt(1+x0^2)<=lambda_D<0; lambda_D=-1 is retained as a theory-only sentinel, not an observational refit.",
+        "decision": "withdraw_positive_sign_falsification_and_advance_both_signs_to_full_tilted_anisotropic_symbol",
+        "reason": "The earlier clock-only block omitted the conformal metric component of the Class-Ia null direction. Einstein clock-metric and metric-gradient terms cancel the A4 clock-gradient term exactly, leaving the positive AeST Maxwell coefficient K_B/r^2. The prior lambda_D=+1 finite-k zero is therefore absent from the complete aligned operator.",
         "scope_limit": config["scope_limit"],
-        "next_kill_gate": "Derive the full negative-branch Delta_eff principal matrix with nonzero scalar spatial gradient, finite aether tilt, arbitrary wave-vector orientation, and anisotropic metric/aether perturbations.",
+        "next_kill_gate": "Derive the full Delta_eff principal matrix for both orientation signs with nonzero scalar spatial gradient, finite aether tilt, arbitrary wave-vector orientation, and anisotropic metric/aether perturbations.",
         "data_policy": config["data_policy"],
     }
     args.output.mkdir(parents=True, exist_ok=True)

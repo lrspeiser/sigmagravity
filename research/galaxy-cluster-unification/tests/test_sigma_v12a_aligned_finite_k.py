@@ -10,6 +10,7 @@ from voidscreen.sigma_v12a_aligned_finite_k import (
     critical_wave_number_ratio,
     negative_strength_sufficient_condition,
     normalized_aligned_coefficients,
+    normalized_full_aligned_symbol,
     normalized_primary_secondary_symbol,
 )
 
@@ -66,7 +67,7 @@ def test_aligned_reduction_matches_direct_four_tensor_contractions() -> None:
         assert reduced[invariant] == pytest.approx(direct[invariant])
 
 
-def test_positive_selected_sign_has_exact_finite_k_counterexample() -> None:
+def test_positive_selected_sign_clock_only_block_has_superseded_zero() -> None:
     coefficients = normalized_aligned_coefficients(
         2.0,
         background_clock_ratio=1.0,
@@ -89,9 +90,29 @@ def test_positive_selected_sign_has_exact_finite_k_counterexample() -> None:
         k_2=2.0,
     )
     assert row["positive_core"] == pytest.approx(0.0, abs=1.0e-12)
+    assert not row["projection_complete"]
 
 
-def test_negative_strength_interval_is_analytic_and_nontrivial() -> None:
+def test_full_null_projection_cancels_dhost_gradient_exactly() -> None:
+    row = normalized_full_aligned_symbol(
+        2.0,
+        3.567874736625391,
+        background_clock_ratio=1.0,
+        orientation_strength=1.0,
+        k_b=1.0,
+        k_2=2.0,
+    )
+    terms = row["gradient_terms"]
+    assert terms["dhost_clock"] == pytest.approx(-0.3142250430438769)
+    assert terms["class_ia_sum"] == pytest.approx(0.0, abs=1.0e-15)
+    assert terms["aest_maxwell"] == pytest.approx(0.25)
+    assert terms["full_null_projected"] == pytest.approx(0.25)
+    assert row["positive_core"] > 8.0
+    assert row["symbol_nonzero"]
+    assert row["projection_complete_on_aligned_branch"]
+
+
+def test_negative_strength_interval_controls_only_unprojected_A4() -> None:
     condition = negative_strength_sufficient_condition(
         orientation_strength=-1.0,
         background_kinetic_ratio=-1.0,
@@ -111,7 +132,7 @@ def test_activation_weight_obeys_global_bound() -> None:
         assert row["weighted_activation"] <= np.sqrt(2.0) + 1.0e-12
 
 
-def test_negative_sentinel_has_nonnegative_A4_and_no_aligned_root() -> None:
+def test_negative_sentinel_has_nonnegative_unprojected_A4_block() -> None:
     for clock in np.linspace(-20.0, 20.0, 4001):
         coefficients = normalized_aligned_coefficients(
             float(clock),
@@ -130,8 +151,9 @@ def test_negative_sentinel_has_nonnegative_A4_and_no_aligned_root() -> None:
         )
 
 
-def test_aligned_finite_k_audit_falsifies_only_positive_row() -> None:
+def test_aligned_finite_k_audit_corrects_positive_falsification() -> None:
     report = audit_v12a_aligned_finite_k(
+        k_b=1.0,
         k_2=2.0,
         background_clock_ratio=1.0,
         selected_positive_strength=1.0,
@@ -143,8 +165,10 @@ def test_aligned_finite_k_audit_falsifies_only_positive_row() -> None:
         random_seed=12007,
     )
     assert all(report["gates"].values())
-    assert not report["selected_positive_row_survives"]
-    assert report["negative_branch_aligned_finite_k_regular"]
+    assert not report["prior_positive_sign_falsification_valid"]
+    assert report["selected_positive_row_survives_aligned_gate"]
+    assert report["negative_row_survives_aligned_gate"]
+    assert not report["orientation_sign_constrained_by_aligned_gate"]
     assert not report["full_tilted_anisotropic_symbol_derived"]
     assert not report["complete_delta_eff_proven_invertible"]
     assert not report["physical_degree_count_proven_unchanged"]
@@ -164,6 +188,7 @@ def test_invalid_wave_and_sign_protocol_are_rejected() -> None:
         )
     with pytest.raises(ValueError):
         audit_v12a_aligned_finite_k(
+            k_b=1.0,
             k_2=2.0,
             background_clock_ratio=1.0,
             selected_positive_strength=-1.0,

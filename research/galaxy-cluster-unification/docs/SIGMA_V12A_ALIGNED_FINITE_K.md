@@ -1,173 +1,191 @@
-# Sigma v12A aligned finite-wave-vector Dirac subgate
+# Sigma v12A corrected aligned finite-wave-vector Dirac subgate
 
-## Decision
+## Correction and decision
 
-The frozen positive-orientation row `lambda_D=+1` is falsified before data.
-On an aether-aligned, zero-spatial-scalar-gradient auxiliary background with
-`q/q_sigma=2`, its
-primary-secondary bracket vanishes at the finite wave number
-`k/q_sigma=3.5678747366`. This is a constraint-rank surface, not a poor data
-fit.
+The earlier project conclusion that `lambda_D=+1` has an aligned finite-wave-
+vector constraint zero is withdrawn. That calculation retained the
+`A4 q^2|Dq|^2` clock-gradient term but omitted the spatial-metric component of
+the Class-Ia primary null direction. It was a zero of one unprojected matrix
+block, not a zero of the Dirac operator.
 
-The covariant mechanism is not yet retired. The same calculation derives an
-analytic sign condition under which the aligned symbol cannot vanish:
+Including the conformal metric displacement, its Einstein curvature terms,
+and the AeST Maxwell term gives the complete aligned symbol
 
 $$
-{-8\over\sqrt{1+x_0^2}}\le\lambda_D\le0.
+\boxed{
+{\Delta(\bar k)\over F_0}
+=-\left[4K_2+{2K_B\over r^2}\bar k^2\right],
+\qquad r={q\over q_\Sigma}.
+}
 $$
 
-For the frozen `x0=-1` normalization this is
-`-4 sqrt(2)<=lambda_D<=0`. The nonzero sentinel `lambda_D=-1` passes this
-aligned subgate and advances to the fully tilted and anisotropic principal
-matrix. This is a theory-health restriction made without opening data, not a
-refit.
+It is strictly nonzero for every finite nonzero aligned clock and wave number
+when `K2>0` and `K_B>0`, independently of the sign or magnitude of `lambda_D`.
+The positive and negative sign sentinels therefore both survive this aligned
+subgate. Neither has yet passed the tilted, nonzero-gradient, anisotropic
+principal matrix.
 
-## Exact aligned reduction
+## Clock and metric must be projected together
 
-Take a constant background with the scalar first gradient and AeST aether
-aligned with the ADM normal, and use the standard DHOST auxiliary covector
-before lapse gauge fixing. Write
+On the aether-aligned, zero-spatial-scalar-gradient auxiliary branch, write
 
 $$
 q=\nabla_n\phi,\qquad
 V_*=\phi_{nn},\qquad
-u_i=D_iq,
+u_i=D_iq.
 $$
 
-and let `K` be the trace of the extrinsic curvature. Restoring the spatial
-normal-clock gradient in the covariant Hessian invariants gives
+The covariant Hessian invariants are
 
 $$
 L_3=-q^2V_*^2-q^3KV_*,
 $$
 
 $$
-\boxed{L_4=-q^2V_*^2+q^2|Dq|^2},
+L_4=-q^2V_*^2+q^2|Dq|^2,
 $$
 
 $$
 L_5=q^4V_*^2.
 $$
 
-The velocity terms retain the exact Class-Ia degenerate square derived in the
-homogeneous audit. After removing that null velocity, the new spatial term is
+The velocity terms form the Class-Ia degenerate square
 
 $$
-L_{\rm spatial}=A_4q^2|Dq|^2.
+\kappa K^2+2bKV_*+{b^2\over\kappa}V_*^2,
 $$
 
-The AeST Maxwell term contains a spatial derivative of the aether/lapse, not
-of the independent auxiliary coordinate `q`, and therefore does not alter
-this principal coefficient in the ungauge-fixed primary-secondary bracket.
-Only after imposing unitary gauge is `q` identified with the inverse lapse;
-making that identification before constructing the Dirac matrix would mix the
-second-class pair with the lapse gauge condition and give the wrong bracket.
-The reduced AeST scalar function supplies the positive zeroth-order clock
-susceptibility `4K2` derived in the preceding audit.
-
-## Fourier symbol
-
-Use
+with
 
 $$
-r={q\over q_\Sigma},\qquad
-\bar k={k\over q_\Sigma},\qquad
-x=-r^2,
-$$
-
-and remove the common coefficient factors through
-
-$$
-\bar A_3={q_\Sigma^4A_3\over F_0}
-=\lambda_D\mathcal A(x,x_0),
-$$
-
-$$
-\bar A_4=-\bar A_3-{x^2\bar A_3^2\over8},
+\kappa=-{2F_0\over3},
 \qquad
-\bar C=r^2\bar A_4.
+b=-{q^3A_3\over2}.
 $$
 
-Linearizing around a constant zero-momentum background gives
+The null velocity therefore does not change `q` alone. For a conformal
+spatial-metric perturbation `zeta`, it obeys
+
+$$
+\delta\zeta
+=-{q^3A_3\over4F_0}\delta q.
+$$
+
+Any spatial principal calculation that varies `q` while holding this metric
+direction fixed is not the primary-secondary bracket.
+
+For a nonzero timelike clock, unitary gauge may then be imposed regularly.
+The scalar definition gives `delta N/N=-delta q/q`. The published DHOST
+Hamiltonian analysis shows that the gauge-fixed Dirac determinant contains
+the same primary-secondary factor (multiplied only by nonzero lapse powers),
+so this is a convenient way to compute the complete aligned operator. The
+clock-lapse relation is what generates the Einstein clock-metric cross term
+and lets the AeST electric/Maxwell lapse gradient enter the final Schur
+complement. Imposing the relation while omitting the metric null displacement,
+as the superseded audit effectively did, is inconsistent.
+
+## Complete aligned spatial quadratic form
+
+Use the normalized variables
+
+$$
+r={q\over q_\Sigma},
+\qquad
+\bar A_3={q_\Sigma^4A_3\over F_0},
+\qquad
+\eta=-{r^3\bar A_3\over4},
+$$
+
+so that `delta zeta=eta delta r`. There are four spatial-gradient
+contributions along the null direction:
+
+| source | normalized coefficient |
+|---|---:|
+| direct DHOST clock term | `r^2 A4_bar` |
+| Einstein clock-metric cross term | `-4 eta/r` |
+| Einstein metric term | `2 eta^2` |
+| AeST Maxwell term | `K_B/r^2` |
+
+The first three sum to
+
+$$
+r^2\bar A_4-{4\eta\over r}+2\eta^2.
+$$
+
+Substituting
+
+$$
+\bar A_4=-\bar A_3-{r^4\bar A_3^2\over8}
+$$
+
+and `eta=-r^3 A3_bar/4` gives the exact Class-Ia cancellation
 
 $$
 \boxed{
-{\Delta(\bar k)\over F_0}
-=-\left(4K_2+2\bar C\bar k^2\right).
+r^2\bar A_4-{4\eta\over r}+2\eta^2=0.
 }
 $$
 
-If `A4<0`, this necessarily vanishes at
+The entire `lambda_D`-dependent aligned gradient coefficient disappears. The
+only remaining spatial term is
 
 $$
-\bar k_*^2=-{2K_2\over\bar C}.
+\boxed{C_{\rm aligned}={K_B\over r^2}>0.}
 $$
 
-For the selected positive row, `r=2`, `x0=-1`, and `K2=2`, the exact numbers
-are
+Combining this with the AeST clock susceptibility `4K2` yields the complete
+aligned symbol quoted above.
 
-| quantity | value |
-|---|---:|
-| activation | `0.0690268489963` |
-| `A4_bar` | `-0.0785562607610` |
-| `C_bar` | `-0.314225043044` |
-| `k_*/q_sigma` | `3.56787473663` |
-| normalized symbol residual | below `1e-15` |
+## Reassessment of the old counterexample
 
-Thus the positive row cannot retain one regular primary-secondary pair over
-its admitted phase space.
-
-## Why the negative sign survives this branch
-
-Define the non-negative activation weight
+The old clock-only block at `r=2`, `lambda_D=+1`, and `K2=2` has
 
 $$
-B(x)=x^2\mathcal A(x,x_0)
-={x^2(x-x_0)^2\over
-[1+(x-x_0)^2]^{3/2}\sqrt{1+x^2}}.
+\bar A_4=-0.0785562607610
 $$
 
-It obeys the analytic bound
+and vanishes at `k_bar=3.56787473663`. The corrected calculation deliberately
+reproduces that incomplete zero and then adds the missing terms. At the same
+background and wave number:
 
-$$
-B(x)
-\le {|x|\over\sqrt{1+(x-x_0)^2}}
-\le\sqrt{1+x_0^2}.
-$$
+- the Class-Ia DHOST-plus-Einstein sum is zero to numerical precision;
+- the AeST Maxwell coefficient is `K_B/r^2=0.25`;
+- the full positive core is greater than 8, not zero.
 
-Writing `z=lambda_D B`, the dependent coefficient is
+Thus the old point is a regression fixture demonstrating why the correction
+matters, not a physical counterexample.
 
-$$
-\bar A_4=-\bar A_3\left(1+{z\over8}\right).
-$$
+## Executable audit
 
-Consequently `A4_bar>=0` for all finite `x` whenever
+The corrected audit evaluates 50,000 signed clock and wave-number backgrounds
+over `10^-6` through `10^6` for both `lambda_D=+1` and `lambda_D=-1`. It checks:
 
-$$
--{8\over\sqrt{1+x_0^2}}\le\lambda_D\le0.
-$$
+1. exact reproduction of the superseded clock-block zero;
+2. explicit incomplete-projection labeling of that block;
+3. Class-Ia cancellation after adding the metric null direction;
+4. removal of the old counterexample in the complete symbol;
+5. positive complete symbols for both sign sentinels; and
+6. a positive AeST Maxwell coefficient.
 
-Together with `K2>0`, this makes the aligned symbol strictly nonzero for every
-finite wave number. Fifty thousand signed clock and wave-number trials over
-`10^-6` through `10^6` test the analytic inequalities with `lambda_D=-1`.
+The full test suite passes. No astronomical data or holdout was opened.
 
-## Scope and next kill gate
+## Remaining kill gate
 
-This result is exact only on the constant, zero-momentum, aether-aligned
-branch. It is enough to falsify `lambda_D=+1`, because one admissible rank-zero
-background is sufficient. Passing with `lambda_D=-1` is narrower: aether tilt,
-nonzero scalar spatial first gradient, anisotropic metric/aether perturbations,
-and arbitrary wave-vector orientation could still create a zero eigenvalue.
+This correction is exact only on the constant, zero-momentum, aligned branch.
+It does not establish the sign of the full principal matrix when the scalar
+has a spatial first gradient, the aether is tilted, the wave vector has an
+arbitrary orientation, or tensor/vector metric and aether directions mix.
+Those components must be projected onto the complete Class-Ia/AeST constraint
+surface before any sign conclusion is valid.
 
-The next gate is the full negative-branch principal matrix in those variables.
-No astronomical data or holdout was opened, and the project still marks the
-theory as not viable.
+The next gate therefore scans both orientation signs; the aligned calculation
+does not select one. The theory remains explicitly marked not viable.
 
-The covariant degeneracy relations and primary-secondary construction follow
-the published [DHOST Hamiltonian analysis](https://arxiv.org/abs/1512.06820).
-The aether/lapse derivative distinction follows the published
-[AeST ADM action](https://arxiv.org/abs/2307.15126). The aligned sign bound and
-counterexample above are project calculations; no novelty claim is made.
+The covariant degeneracy and primary-null construction follow the published
+[DHOST Hamiltonian analysis](https://arxiv.org/abs/1512.06820). The remaining
+positive lapse/aether gradient follows the published
+[AeST ADM action](https://arxiv.org/abs/2307.15126). The explicit correction
+and cancellation audit are project calculations; no novelty claim is made.
 
 ## Reproduction
 

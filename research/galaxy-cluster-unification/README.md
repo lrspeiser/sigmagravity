@@ -17,11 +17,12 @@ placement and origin record.
 
 The current theory-only result is
 [`docs/SIGMA_V12A_ALIGNED_FINITE_K.md`](docs/SIGMA_V12A_ALIGNED_FINITE_K.md).
-Restoring the aligned normal-clock gradient exposes an exact finite-wave-vector
-zero for the frozen `lambda_D=+1` row, which is retired before data. The same
-calculation gives the theory-only safe interval
-`-8/sqrt(1+x0^2)<=lambda_D<=0`; the nonzero `lambda_D=-1` sentinel advances
-only to the fully tilted and anisotropic principal-matrix gate.
+It corrects the preceding clock-only projection: the Class-Ia primary null
+direction moves the conformal metric with the clock. Einstein curvature terms
+then cancel the entire `A4` gradient contribution, leaving the strictly
+positive aligned symbol `4K2+2 K_B (k_bar/r)^2`. The prior `lambda_D=+1`
+falsification is withdrawn; both signs advance only to the fully tilted and
+anisotropic principal-matrix gate.
 
 The preceding theory-only result is
 [`docs/SIGMA_V12A_TILTED_CLOCK.md`](docs/SIGMA_V12A_TILTED_CLOCK.md).
