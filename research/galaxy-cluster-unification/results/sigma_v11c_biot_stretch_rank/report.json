@@ -1,0 +1,91 @@
+{
+  "action_identity": {
+    "biot_strain": "S=U-I",
+    "lagrangian": "L=Q_I Q^I/2-s[S_TF:S_TF+b(tr S)^2]",
+    "linear_spectrum": "c_shear^2=s=3/11; c_longitudinal^2=2s(2/3+b)=3/4",
+    "stretch": "U=sqrt(D^T D)"
+  },
+  "all_nonlinear_rank_gates_pass": false,
+  "analytic_identity": {
+    "coordinate_hessian": "H=gamma^2[1-v^2 K]",
+    "rank_one_stiffness": "K=s[2+{-2+2(b-1/3)(M+2e-3)}/(2e)]",
+    "rank_surface": "M*=3-2e+[1+e(1/(s v^2)-2)]/(b-1/3)",
+    "trace_stretch": "tr U=M+sqrt(4e^2+(gamma v w)^2)"
+  },
+  "background": {
+    "aether": "A^mu=gamma(1,v,0,0)",
+    "aether_rest_velocity": "Q(w)=gamma w e_2; Q(0)=0",
+    "aether_spatial_gradient": "D(w)=[[e,gamma v w,0],[0,e,0],[0,0,M]]",
+    "material_map": "X^1=e gamma(x-vt), X^2=e y, X^3=M z",
+    "metric": "Minkowski",
+    "perturbation": "X^2 -> X^2+w t"
+  },
+  "candidate": "Sigma v11C aether-spatial Biot-stretch triad",
+  "counterexample": {
+    "analytic_hessian": -0.39393939393939387,
+    "axial_stretch": 10.0,
+    "determinant_D": 0.10000000000000002,
+    "finite_difference_hessian": -0.39393910356011475,
+    "lagrangian_at_zero_velocity": -27.834545454545452,
+    "material_speed_relative_to_aether": 0.0,
+    "maximum_stiffness_allowed_at_tilt": 4.0,
+    "rank_one_biot_stiffness": 5.181818181818182,
+    "transverse_stretch": 0.1
+  },
+  "critical_configuration": {
+    "axial_stretch": 8.844444444444443,
+    "determinant_D": 0.08844444444444445,
+    "lagrangian_at_zero_velocity": -20.96074074074073,
+    "material_speed_relative_to_aether": 0.0,
+    "transverse_stretch": 0.1
+  },
+  "crossing": [
+    {
+      "axial_stretch": 8.755999999999998,
+      "axial_stretch_over_critical": 0.99,
+      "hessian": 0.030151515151515852,
+      "material_speed_relative_to_aether": 0.0
+    },
+    {
+      "axial_stretch": 8.844444444444443,
+      "axial_stretch_over_critical": 1.0,
+      "hessian": 5.921189464667501e-16,
+      "material_speed_relative_to_aether": 0.0
+    },
+    {
+      "axial_stretch": 8.932888888888888,
+      "axial_stretch_over_critical": 1.01,
+      "hessian": -0.03015151515151467,
+      "material_speed_relative_to_aether": 0.0
+    }
+  ],
+  "data_policy": {
+    "authorization": "local exact tilted material-flow Legendre rank and prior-art audit only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_exact_v11c_and_reset_material_memory_mechanism",
+  "gates": {
+    "above_surface_negative": true,
+    "analytic_finite_difference_agree": true,
+    "below_surface_positive": true,
+    "critical_configuration_finite": true,
+    "critical_map_orientation_preserving": true,
+    "critical_material_flow_timelike": true,
+    "critical_surface_zero": true,
+    "globally_positive_material_velocity_hessian": false,
+    "simple_longitudinal_repair_positive": true
+  },
+  "mechanism_reset_required": true,
+  "observational_data_accessed": false,
+  "raw_holdout_opened": false,
+  "reason": "The Biot strain removes v11B's one-dimensional negative quartic, but its finite anisotropic bulk/shear curvature is too large on an exact rank-one material-shear direction. A tilted foliation converts that spatial curvature into a negative physical coordinate-velocity Hessian while Q=0 material flow remains timelike.",
+  "scope": "The counterexample lies in GL+(3), has finite action, and is a physical material-coordinate Rayleigh direction at fixed metric and aether. Omitted mixing cannot make a quadratic form positive when it is already negative on this direction.",
+  "simple_channel": {
+    "interpretation": "Biot stretch repairs the v11B one-dimensional quartic, but not mixed shear on anisotropic finite backgrounds.",
+    "vacuum_longitudinal_hessian": 1.0833333333333333
+  },
+  "status": "completed Sigma v11C Biot-stretch kinetic falsification",
+  "stopping_rule": "V11A, v11B, and v11C are three materially distinct post-v10-reset closures. If v11C fails nonlinear kinetic rank, reset the current material-memory mechanism rather than adding a v11D cutoff or fitting parameter.",
+  "third_post_reset_same_gate_failure": true
+}

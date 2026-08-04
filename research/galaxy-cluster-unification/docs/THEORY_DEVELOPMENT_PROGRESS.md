@@ -1,5 +1,26 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v11C Biot-stretch falsification and mechanism reset
+
+Exact v11C is retired before data. It replaces v11B's Green strain by the Biot
+strain `S=sqrt(D^T D)-I`. This repairs the exact one-dimensional quartic: the
+vacuum longitudinal tilted Hessian is `gamma^2(1-3v^2/4)>0`. The global rank
+gate nevertheless fails on an orientation-preserving anisotropic stretch.
+
+For `D=diag(e,e,M)`, the rank-one `e1 tensor e2` Biot curvature is
+`K=s[2+{-2+2(b-1/3)(M+2e-3)}/(2e)]`, and a slice tilted by `v` has physical
+coordinate-velocity Hessian `H=gamma^2(1-v^2 K)`. With `v=1/2`, `e=1/10`,
+`s=3/11`, and `b=17/24`, the finite rank surface is `M*=398/45`. Material flow
+is exactly comoving with the timelike aether and `det D=e^2 M>0`. At `M=10`,
+`K=57/11` and `H=-13/33`; an independent finite difference agrees.
+
+V11A's bounded scalar alignment, v11B's Green-strain triad, and v11C's
+Biot-stretch completion are three materially distinct post-v10-reset closures
+failing the same nonlinear kinetic-rank gate. The stopping rule triggers:
+reset the material-memory mechanism and do not add v11D. No observation was
+opened. See
+[`SIGMA_V11C_BIOT_STRETCH_FALSIFICATION.md`](SIGMA_V11C_BIOT_STRETCH_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v11B tilted-flow kinetic falsification
 
 Exact v11B is retired before data. On a tilted Minkowski slice, perturbing one

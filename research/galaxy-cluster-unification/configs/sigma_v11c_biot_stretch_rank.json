@@ -1,0 +1,20 @@
+{
+  "protocol_version": "Sigma-v11C-0.1-Biot-stretch-tilted-rank",
+  "status": "frozen theory-only nonlinear rank gate",
+  "candidate": "Sigma v11C aether-spatial Biot-stretch triad",
+  "fixed_values": {
+    "aether_tilt": 0.5,
+    "shear_speed_squared": 0.2727272727272727,
+    "bulk_weight": 0.7083333333333334,
+    "transverse_stretch": 0.1,
+    "counterexample_axial_stretch": 10.0,
+    "finite_difference_step": 0.0001
+  },
+  "failure_rule": "Retire exact v11C before data if a finite orientation-preserving Biot-stretch background with timelike material flow makes any physical material-coordinate velocity Hessian zero or negative.",
+  "stopping_rule": "V11A, v11B, and v11C are three materially distinct post-v10-reset closures. If v11C fails nonlinear kinetic rank, reset the current material-memory mechanism rather than adding a v11D cutoff or fitting parameter.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "local exact tilted material-flow Legendre rank and prior-art audit only"
+  }
+}

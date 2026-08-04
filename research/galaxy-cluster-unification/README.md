@@ -16,6 +16,16 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V11C_BIOT_STRETCH_FALSIFICATION.md`](docs/SIGMA_V11C_BIOT_STRETCH_FALSIFICATION.md).
+Exact v11C is retired before data. Replacing Green strain by Biot stretch
+repairs v11B's one-dimensional negative quartic, but a finite
+orientation-preserving anisotropic stretch makes a mixed-shear stiffness
+larger than the tilted time-kinetic budget. The physical material Hessian
+crosses zero while `Q=0` material flow remains timelike. V11A, v11B, and v11C
+are three distinct post-reset failures at nonlinear kinetic rank, so the
+material-memory mechanism is reset rather than patched with v11D.
+
+The preceding theory-only result is
 [`docs/SIGMA_V11B_TILTED_RANK_FALSIFICATION.md`](docs/SIGMA_V11B_TILTED_RANK_FALSIFICATION.md).
 Exact v11B is retired before data. On a finite tilted slice its strain square
 becomes quartic in a physical material velocity; the Legendre Hessian crosses
