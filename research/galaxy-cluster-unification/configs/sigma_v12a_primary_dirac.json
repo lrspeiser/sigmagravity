@@ -1,0 +1,16 @@
+{
+  "protocol_version": "Sigma-v12A-0.4-primary-Dirac",
+  "status": "frozen theory-only canonical-primary subgate",
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "fixed_values": {
+    "random_trials": 2000,
+    "random_seed": 12004
+  },
+  "pass_rule": "The Class-Ia momentum combination must vanish identically for arbitrary velocities; it must commute with the published AeST auxiliary primaries so preservation generates a secondary with unit p_phi coefficient; and the complete conditional Dirac determinant must reduce to det(C)^2 Delta_eff^2.",
+  "scope_limit": "This gate derives the canonical primary and proves existence of its secondary. It does not compute the explicit v12A secondary density or the model-specific Delta_eff on arbitrary backgrounds, so it does not yet prove a regular complete constraint chain or unchanged physical degree count.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "canonical identities, published AeST/DHOST structure, and random algebra verification only"
+  }
+}

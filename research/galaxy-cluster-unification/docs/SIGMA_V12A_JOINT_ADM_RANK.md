@@ -9,8 +9,9 @@ remaining AeST terms only shift canonical momenta.
 
 This is not yet a constraint-count or theory-health pass. The existence of a
 kinematic primary constraint does not prove that preserving it in time produces
-the required regular secondary constraint after it is coupled to the AeST unit-
-vector constraints.
+the required regular secondary constraint after it is coupled to the AeST
+auxiliary-field constraints (or treated in an equivalent unreduced unit-vector
+representation).
 
 ## Extended ADM variables
 
@@ -153,7 +154,7 @@ Established:
 Not established:
 
 - the explicit primary constraint in canonical variables;
-- its Poisson brackets with the AeST unit-vector primary and secondary
+- its Poisson brackets with the AeST auxiliary-field primary and secondary
   constraints;
 - the regular DHOST secondary constraint;
 - the final first-/second-class constraint count or six-mode AeST count;

@@ -16,6 +16,14 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V12A_PRIMARY_DIRAC.md`](docs/SIGMA_V12A_PRIMARY_DIRAC.md).
+The exact Class-Ia primary constraint survives unchanged in the published
+reduced AeST canonical variables, and its preservation necessarily produces a
+secondary. The complete chain is regular only if the model-specific effective
+bracket `Delta_eff=Delta-E C^-1 D` is invertible; deriving that differential
+operator is the next gate and no physical degree-count pass is claimed yet.
+
+The preceding theory-only result is
 [`docs/SIGMA_V12A_JOINT_ADM_RANK.md`](docs/SIGMA_V12A_JOINT_ADM_RANK.md).
 The v12A unreduced joint kinetic-rank subgate passes. In auxiliary-gradient ADM
 variables, AeST adds a separate positive Maxwell-aether block and only affine

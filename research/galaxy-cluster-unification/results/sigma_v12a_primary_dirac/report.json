@@ -1,0 +1,63 @@
+{
+  "all_identity_gates_pass": true,
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "canonical_primary": {
+    "aest_metric_momentum_shift_in_published_reduced_variables": 0.0,
+    "commutes_with_aest_auxiliary_primaries": [
+      "Pi_mu",
+      "Pi_nu"
+    ],
+    "formula": "Psi=p_*-2(K^-1 B)^A pi_A+2 sqrt(h)[(K^-1 B)^A C_A-C_0] approximately 0",
+    "maximum_velocity_identity_residual": 3.907985046680551e-14
+  },
+  "complete_dirac_chain_derived": false,
+  "conditional_dirac_structure": {
+    "base_aest_physical_dof": 6.0,
+    "combined_physical_dof_if_regular": 6.0,
+    "effective_bracket": "Delta_eff=Delta-E C^-1 D",
+    "full_determinant": "det(D_Dirac)=det(C)^2 Delta_eff^2",
+    "maximum_determinant_relative_residual": 4.440892098500626e-15,
+    "minimum_random_singular_value": 0.0013661834918163103,
+    "mixed_block": "M=[[C,D],[E,Delta]]",
+    "primary_order": [
+      "Pi_mu",
+      "Pi_nu",
+      "Psi_Sigma"
+    ],
+    "secondary_order": [
+      "S_mu",
+      "S_nu",
+      "Omega_Sigma"
+    ]
+  },
+  "data_policy": {
+    "authorization": "canonical identities, published AeST/DHOST structure, and random algebra verification only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_to_explicit_secondary_density_and_effective_bracket",
+  "explicit_secondary_density_derived": false,
+  "identity_gates": {
+    "canonical_primary_velocity_identity": true,
+    "conditional_dirac_determinant_identity": true,
+    "conditional_physical_dof_unchanged": true,
+    "conditional_random_dirac_matrices_regular": true
+  },
+  "model_specific_effective_bracket_computed": false,
+  "next_kill_gate": "Derive Omega_Sigma locally for the fixed A3(X), compute Delta_eff=Delta-E C^-1 D including spatial derivative operators, and prove it remains a regular invertible operator on all admitted timelike-gradient and aether-tilt backgrounds.",
+  "observational_data_accessed": false,
+  "physical_degree_count_proven_unchanged": false,
+  "primary_constraint_derived": true,
+  "raw_holdout_opened": false,
+  "reason": "The published AeST reduced metric momentum is exactly the GR momentum, so adding AeST does not alter the Class-Ia canonical primary. The primary is independent of the AeST auxiliary momenta, forcing one secondary. Regularity is controlled by the Schur-complement bracket Delta_eff after eliminating the mu/nu auxiliary pairs.",
+  "scope_limit": "This gate derives the canonical primary and proves existence of its secondary. It does not compute the explicit v12A secondary density or the model-specific Delta_eff on arbitrary backgrounds, so it does not yet prove a regular complete constraint chain or unchanged physical degree count.",
+  "secondary_constraint_existence_proven": true,
+  "secondary_existence": {
+    "explicit_local_density_derived": false,
+    "formula": "Omega_Sigma={Psi_Sigma,H_0} approximately 0",
+    "p_phi_coefficient": 1.0,
+    "reason": "Psi commutes with the AeST auxiliary primaries, so its preservation cannot fix their multipliers; the shift-symmetric AeST lower-derivative terms modify Omega_rest but not the unit p_phi coefficient."
+  },
+  "status": "completed Sigma v12A canonical-primary Dirac subgate",
+  "theory_viable": false
+}

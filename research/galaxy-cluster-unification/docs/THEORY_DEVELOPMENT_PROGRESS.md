@@ -1,5 +1,26 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v12A canonical primary and conditional Dirac chain
+
+The published reduced AeST metric momentum is exactly the GR momentum, so the
+AeST base does not shift the standard Class-Ia primary constraint. Its explicit
+canonical form is
+`Psi=p_*-2(K^-1 B).pi+2 sqrt(h)[(K^-1 B).C-C0]`. Two thousand arbitrary
+velocity/coefficient trials satisfy the identity to the frozen tolerance.
+
+`Psi` commutes with the AeST `mu,nu` auxiliary primaries, so its preservation
+necessarily generates `Omega={Psi,H0}=p_phi+Omega_rest`. After including the
+AeST auxiliary secondary pairs, the exact remaining regularity condition is
+the Schur bracket `Delta_eff=Delta-E C^-1 D`; the full Dirac determinant is
+`det(C)^2 Delta_eff^2`. Random matrices verify the identity, and an exact
+`Delta_eff=0` fixture makes the chain singular.
+
+This does not yet prove the v12A chain regular. The explicit secondary density
+and model-specific differential operator `Delta_eff` must be derived and shown
+invertible on arbitrary scalar-gradient/aether backgrounds, including the flat
+clock where the new activation vanishes. No observation was opened. See
+[`SIGMA_V12A_PRIMARY_DIRAC.md`](SIGMA_V12A_PRIMARY_DIRAC.md).
+
 ## 2026-08-04 Sigma v12A unreduced joint ADM kinetic-rank subgate
 
 The exact highest-velocity AeST--DHOST block preserves the Class-Ia primary
@@ -17,8 +38,9 @@ confirms arbitrary linear AeST momentum shifts leave the Hessian unchanged.
 
 This is an unreduced kinetic statement, not a full Dirac or arbitrary-tilt
 health pass. The primary constraint must be expressed in canonical variables
-and preserved in time against the AeST unit-vector constraint chain to prove a
-regular secondary and unchanged physical degree count. No observation was opened. See
+and preserved in time against the AeST auxiliary constraint chain to prove a
+regular secondary and unchanged physical degree count. No observation was
+opened. See
 [`SIGMA_V12A_JOINT_ADM_RANK.md`](SIGMA_V12A_JOINT_ADM_RANK.md).
 
 ## 2026-08-04 Sigma v12A same-clock DHOST selection
