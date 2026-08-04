@@ -1,0 +1,74 @@
+{
+  "claim_boundary": [
+    "The pressure-column theorem applies to the standard symmetron thin-shell ordering, not every possible non-derivative scalar potential.",
+    "The CLASH products are spent NFW-deprojected diagnostics, not raw lensing evidence.",
+    "The Model S profile is an authoritative Solar-model input; the cluster pressure compactness deliberately assumes the hottest gas and all baryons in that phase, favoring the candidate.",
+    "Symmetron screening and conformal-disformal/TeVeS-like metrics are published prior art; the pressure-sourced combination is the tested project hypothesis."
+  ],
+  "cluster_spent_diagnostic": {
+    "largest_enclosed_mean_pressure_density_kg_m3": 1.5514244387579047e-25,
+    "maximum_cluster_to_solar_column_ratio": 78.12305484470794,
+    "maximum_pressure_column": 5.672466421955761e-10,
+    "median_cluster_to_solar_column_ratio": 23.422277284652715,
+    "median_pressure_column": 1.7006769856482355e-10,
+    "minimum_cluster_to_solar_column_ratio": 1.2881427817440942,
+    "minimum_pressure_column": 9.353124619426011e-12,
+    "points": 84,
+    "points_requiring_order_unity_extra": 84,
+    "pressure_compactness": 8.910694289218625e-05
+  },
+  "empirical_fit_performed": false,
+  "generated_utc": "2026-08-04T23:36:04.103790+00:00",
+  "hashes_verified": true,
+  "holdout_opened": false,
+  "optimistic_model_s_control": {
+    "boundary_residual": -4.0846145910045095e-13,
+    "cassini_gate_pass": false,
+    "central_field_fraction": 0.9051147616625363,
+    "critical_density_kg_m3": 1.5514244387579047e-25,
+    "gamma_excess_factor": 3128.4925151809766,
+    "gamma_proxy_at_cluster_strength_coupling": 0.07195532784916246,
+    "linear_unscreened_charge": 0.016855319595048282,
+    "numerics_gate_pass": true,
+    "range_to_solar_radius_ratio": 554419574078.5122,
+    "required_screening_fraction": 0.0002995560018004486,
+    "resolution_change": 4.730147036940661e-11,
+    "scalar_charge": 0.015796109560078153,
+    "screening_fraction": 0.9371587095102426,
+    "solver_success": true,
+    "surface_derivative": 0.015796109559698183,
+    "surface_field_fraction": 0.9842038904399218,
+    "vacuum_range_kpc": 12.5
+  },
+  "pressure_column_no_go": {
+    "all_required_cluster_columns_at_least_solar": true,
+    "cassini_gate_pass": false,
+    "cassini_limit": 2.3e-05,
+    "excess_factor": 3338.273958757659,
+    "gamma_lower_bound": 0.07678030105142615
+  },
+  "protocol": "configs/sigma_v17q_pressure_symmetron_no_go.json",
+  "protocol_sha256": "375ce91a0ceafab55ae139a4a9df8607e05f1ae20a6a2c96ed5d02d891fad026",
+  "report_version": "SIGMA-V17Q-PRESSURE-SYMMETRON-NO-GO-1.0.0",
+  "selection": {
+    "mechanism_reset_triggered": true,
+    "next_mechanism": "Reset the direct pressure-only reciprocal metric. The next root action must not add a fourth pressure screen; it must obtain galaxy dynamics and lensing from a different baryon-forced field mechanism.",
+    "optimistic_profile_cassini_gate_pass": false,
+    "outcome": "retire_standard_pressure_symmetron_and_reset_direct_pressure_metric",
+    "pressure_column_cassini_gate_pass": false,
+    "pressure_column_ordering_gate_pass": true,
+    "same_solar_cluster_gate_failures": [
+      "v17G_unscreened_pressure_metric",
+      "v17P_conserved_kinetic_flux_screen",
+      "v17Q_symmetry_restoring_charge_screen"
+    ]
+  },
+  "solar_model_s": {
+    "central_pressure_mass_density_kg_m3": 0.784167108767647,
+    "central_pressure_pa": 2.3492475e+16,
+    "pressure_column": 7.260937802843758e-12,
+    "pressure_compactness": 3.4208289505171493e-06,
+    "radial_points": 2402
+  },
+  "status": "completed_pressure_symmetron_no_go_audit"
+}

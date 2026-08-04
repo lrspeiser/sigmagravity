@@ -1,5 +1,31 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v17Q pressure-symmetron no-go and mechanism reset
+
+The standard non-derivative symmetry-restoring completion cannot rescue the
+direct pressure-only reciprocal metric. The full Model S Solar pressure
+profile gives `Pi_sun=3.42083e-6`. Every one of the 84 spent CLASH points that
+requires an order-unity extra Weyl field has a larger pressure-screening column
+than the Sun; their minimum, median, and maximum column ratios are 1.288,
+23.422, and 78.123. Because standard symmetron charge suppression is monotone
+in that column, cluster normalization imposes the coupling-independent bound
+`abs(gamma-1)>=0.0767803`, or 3,338.27 Cassini limits.
+
+An independent quartic boundary-value solve through all 2,402 Model S radii
+confirms the ordering. Even the most favorable declared 12.5 kpc range leaves
+93.716% of the Solar scalar charge, while Cassini permits only 0.02996%. Its
+slip proxy is `0.0719553`, 3,128.49 Cassini limits; the boundary residual is
+`4.08e-13` and the resolution change is `4.73e-11`. No holdout was opened and
+no target was fitted.
+
+V17G's unscreened propagation, v17P's conserved kinetic-flux screen, and
+v17Q's symmetry-restoring charge screen are three materially distinct failures
+at the same one-coupling Solar/cluster gate. The stopping rule is triggered:
+the direct pressure-only reciprocal metric is retired, and a fourth pressure
+screen is prohibited. The next root action must use a different baryon-forced
+source or propagation mechanism. See
+[`SIGMA_V17Q_PRESSURE_SYMMETRON_NO_GO.md`](SIGMA_V17Q_PRESSURE_SYMMETRON_NO_GO.md).
+
 ## 2026-08-04 Sigma v17P pressure flux-screen no-go
 
 Moving the v17 pressure susceptibility out of the derivative-dependent matter

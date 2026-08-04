@@ -325,3 +325,20 @@ def test_v17p_flux_no_go_registers_kinetic_and_metric_ancestry() -> None:
     assert {"K-MOUFLAGE", "AQUAL", "TEVES", "DISFORMAL-METRIC"}.issubset(
         set(v17p["published_overlap_ids"])
     )
+
+
+def test_v17q_pressure_symmetron_registers_screen_and_metric_ancestry() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17q = protocols["sigma_v17q_pressure_symmetron_no_go.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17q["formula_fragments"]
+    )
+
+    assert "Symmetron" in fragment_text
+    assert "Pi_sun/Pi_cluster" in fragment_text
+    assert {"SYMMETRON", "TEVES", "DISFORMAL-METRIC"}.issubset(
+        set(v17q["published_overlap_ids"])
+    )

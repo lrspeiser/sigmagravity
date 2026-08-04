@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 99,
+    "sigma_protocols": 100,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 116,
+    "sigma_formula_fragments": 120,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -6381,6 +6381,58 @@
         "TEVES"
       ],
       "sha256": "a1c1b067b2a478774ddd55ff4b9660ab3d3827450ad695f13d3647a85e91aade"
+    },
+    {
+      "config": "configs/sigma_v17q_pressure_symmetron_no_go.json",
+      "protocol_version": "SIGMA-V17Q-PRESSURE-SYMMETRON-NO-GO-1.0.0",
+      "status": "frozen after deriving the pressure-column comparison and before executable verification; no holdout is opened",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "candidate_action.action_class",
+          "formula": "Canonical quartic symmetron with a reciprocal TeVeS-like non-derivative physical metric",
+          "published_overlap_ids": [
+            "STVG-MOG",
+            "SYMMETRON",
+            "TEVES"
+          ]
+        },
+        {
+          "json_path": "candidate_action.action",
+          "formula": "S=integral sqrt(-g)[M_Pl^2 R/2-(grad X)^2/2-V(X)+L_aether]+S_m[g_tilde(X,U,g),psi]",
+          "published_overlap_ids": [
+            "SYMMETRON",
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        },
+        {
+          "json_path": "candidate_action.one_metric_response",
+          "formula": "The same q(X) sources the scalar through pressure and changes the Weyl metric; there is no analyst-supplied lens multiplier.",
+          "published_overlap_ids": [
+            "SYMMETRON"
+          ]
+        },
+        {
+          "json_path": "formula_inventory.equations",
+          "formula": "Symmetron V=-mu^2 X^2/2+lambda X^4/4; TeVeS-like disformal metric q=-X^2/(2M^2); V_eff=[-mu^2+rho_p/M^2]X^2/2+lambda X^4/4; A_obj proportional Pi_p GM/(Rc^2); abs(gamma-1)_sun>=2Pi_sun/Pi_cluster",
+          "published_overlap_ids": [
+            "DISFORMAL-METRIC",
+            "SYMMETRON",
+            "TEVES"
+          ]
+        }
+      ],
+      "formula_fragment_count": 4,
+      "published_overlap_ids": [
+        "STVG-MOG",
+        "DISFORMAL-METRIC",
+        "SYMMETRON",
+        "EINSTEIN-AETHER",
+        "AEST-MOND",
+        "TEVES"
+      ],
+      "sha256": "375ce91a0ceafab55ae139a4a9df8607e05f1ae20a6a2c96ed5d02d891fad026"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",
