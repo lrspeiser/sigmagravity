@@ -132,6 +132,8 @@ results/sigma_v1_nonmetricity_cycle/*
 !results/sigma_v8b_metric_noether_gate/**
 !results/sigma_v8b_source_constraint_gate/
 !results/sigma_v8b_source_constraint_gate/**
+!results/sigma_v8b_tilted_adm_gate/
+!results/sigma_v8b_tilted_adm_gate/**
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/

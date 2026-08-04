@@ -1,0 +1,43 @@
+{
+  "protocol_version": "Sigma-v8B-0.5-tilted-ADM-necessary-kinetic-gate",
+  "status": "frozen before observational data",
+  "candidate": "one-metric AeST plus cubic geometry interaction and preferred-time causal completion",
+  "physical_parameters": {
+    "names": ["a_sigma", "mu_sigma", "K_B", "K_2", "L_H"],
+    "count": 5,
+    "maximum_allowed": 5
+  },
+  "selected_values": {
+    "K_B": 1.0,
+    "K_2": 2.0,
+    "lambda_s": 1.0,
+    "alpha": 1.7777777777777777
+  },
+  "declared_local_envelope": {
+    "aether_velocities": [0.0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9],
+    "Q_over_Q0": [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5],
+    "a_sigma_over_Q0": [0.0001, 0.01, 1.0, 10.0, 100.0],
+    "maximum_L_H_Q0": 1.0,
+    "maximum_absolute_K_and_E_over_Q0": 0.1,
+    "random_samples": 1024,
+    "random_seed": 80804
+  },
+  "requirements": {
+    "remove_scalar_normal_acceleration_by_exact_boundary_subtraction": true,
+    "match_velocity_hessian_with_independent_centered_finite_difference": true,
+    "preserve_full_local_legendre_rank_and_inertia_inside_declared_envelope": true,
+    "locate_and_disclose_any_finite_rank_surface_outside_declared_envelope": true,
+    "do_not_interpret_raw_ADM_negative_conformal_direction_as_a_physical_ghost": true,
+    "do_not_claim_a_full_constraint_count_from_a_homogeneous_patch": true
+  },
+  "decision_rule": {
+    "local_advance": "Retain v8B for the full inhomogeneous Dirac and coupled-characteristic analysis only if the declared local envelope has full rank and unchanged inertia.",
+    "global_failure": "The full Hamiltonian gate remains failed unless every finite rank-changing surface is proved dynamically inaccessible or the action is replaced; a bounded scan cannot establish global regularity.",
+    "observational_lock": "Do not derive fits or open a new observational holdout from this result."
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "full inhomogeneous Dirac algebra, global reachability of the rank surface, coupled time-dependent characteristics, and only then Solar/PPN"
+  }
+}

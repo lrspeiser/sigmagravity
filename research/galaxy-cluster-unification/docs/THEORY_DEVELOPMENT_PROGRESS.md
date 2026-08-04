@@ -145,6 +145,31 @@ inhomogeneous uniqueness or the combined Hamiltonian count. V8B remains held
 before data. See
 [`SIGMA_V8B_SOURCE_CONSTRAINT_GATE.md`](SIGMA_V8B_SOURCE_CONSTRAINT_GATE.md).
 
+### v8B tilted-ADM necessary kinetic subgate
+
+Allowing the aether to tilt relative to an ADM slice exposes a scalar normal
+acceleration in the v8B completion. An exact antiderivative
+`F=x(Q-Q0)^3/(3 chi)` removes it by a boundary subtraction and produces a
+first-order metric--aether--scalar density. The identity residual is
+`2.71e-20`, and the resulting ten-velocity automatic-differentiation Hessian
+matches an independent centered finite difference to `5.37e-9` relative error.
+
+Across 385 deterministic and 1,024 frozen random points with `v_A<=0.9`,
+`0.5<=Q/Q0<=1.5`, `L_H Q0<=1`, and six decades in `a_sigma/Q0`, the base and
+combined Legendre maps have no rank failure or inertia change. The minimum
+combined singular value is `1.180292` and the minimum combined/base determinant
+ratio is `0.922509`. This supports a conditional six-degree-of-freedom local
+patch if the full diffeomorphism constraints survive; it is not a constraint
+count or Hamiltonian-positivity proof.
+
+A finite rank-changing surface occurs outside the envelope at `v_A=0.97` and
+`Q/Q0=2.8649430865`, where the raw inertia changes from `(1,0,9)` to `(2,0,8)`.
+The full Hamiltonian gate therefore remains false. V8B advances only to a full
+inhomogeneous Dirac and reachability analysis: if the field equations do not
+make this surface dynamically inaccessible, the candidate must be retired
+before Solar or observational tests. See
+[`SIGMA_V8B_TILTED_ADM_GATE.md`](SIGMA_V8B_TILTED_ADM_GATE.md).
+
 ## 2026-08-03 v5C exterior-law failure
 
 The fixed v5C row is retired before full variation or data. In the published

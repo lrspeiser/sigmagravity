@@ -1,0 +1,117 @@
+{
+  "all_completed_subgates_pass": true,
+  "base_rank_failures": 0,
+  "boundary_identity_residual": -2.710505431213761e-20,
+  "candidate": "one-metric AeST plus cubic geometry interaction and preferred-time causal completion",
+  "combined_rank_failures": 0,
+  "completed_subgates": {
+    "autodiff_hessian_matches_centered_finite_difference": true,
+    "declared_envelope_base_legendre_map_full_rank": true,
+    "declared_envelope_combined_legendre_map_full_rank": true,
+    "declared_envelope_has_no_determinant_sign_change": true,
+    "declared_envelope_preserves_kinetic_inertia": true,
+    "finite_outside_envelope_rank_surface_identified": true,
+    "tilted_scalar_acceleration_removed_by_exact_boundary_term": true
+  },
+  "conditional_local_dof_count": 6.0,
+  "data_policy": {
+    "authorization_after_this_stage": "full inhomogeneous Dirac algebra, global reachability of the rank surface, coupled time-dependent characteristics, and only then Solar/PPN",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retain_v8B_for_full_Dirac_and_reachability_audit_only",
+  "decision_rule": {
+    "global_failure": "The full Hamiltonian gate remains failed unless every finite rank-changing surface is proved dynamically inaccessible or the action is replaced; a bounded scan cannot establish global regularity.",
+    "local_advance": "Retain v8B for the full inhomogeneous Dirac and coupled-characteristic analysis only if the declared local envelope has full rank and unchanged inertia.",
+    "observational_lock": "Do not derive fits or open a new observational holdout from this result."
+  },
+  "declared_envelope": {
+    "a_sigma_over_q0_maximum": 100.0,
+    "a_sigma_over_q0_minimum": 0.0001,
+    "absolute_K_and_E_over_q0_random_maximum": 0.1,
+    "aether_velocity_maximum": 0.9,
+    "ell_h_q0_maximum": 1.0,
+    "invariant_Y_over_Q_squared_maximum_on_homogeneous_patch": 0.81,
+    "q_over_q0_maximum": 1.5,
+    "q_over_q0_minimum": 0.5
+  },
+  "full_hamiltonian_gate_pass": false,
+  "inertia_mismatches": 0,
+  "minimum_combined_singular_value": 1.1802923181834815,
+  "minimum_combined_singular_value_location": {
+    "a_sigma_over_q0": 0.0001,
+    "aether_velocity": 0.9,
+    "ell_h_q0": 1.0,
+    "kind": "deterministic",
+    "q_over_q0": 0.8
+  },
+  "minimum_determinant_ratio": 0.9225085120215986,
+  "minimum_determinant_ratio_location": {
+    "a_sigma_over_q0": 0.08180312133822965,
+    "aether_velocity": 0.8718368232712378,
+    "ell_h_q0": 0.9975640979316249,
+    "kind": "random",
+    "q_over_q0": 0.6821195360101555
+  },
+  "nonpositive_determinants": 0,
+  "observational_data_accessed": false,
+  "outside_envelope_singularity": {
+    "aether_velocity": 0.97,
+    "determinant_ratio": 2.1281232951046977e-11,
+    "invariant_Y_over_Q_squared": 0.9409,
+    "minimum_combined_singular_value": 8.555075509941386e-13,
+    "q_over_q0": 2.8649430865101815
+  },
+  "physical_parameters": {
+    "count": 5,
+    "maximum_allowed": 5,
+    "names": [
+      "a_sigma",
+      "mu_sigma",
+      "K_B",
+      "K_2",
+      "L_H"
+    ]
+  },
+  "protocol_version": "Sigma-v8B-0.5-tilted-ADM-necessary-kinetic-gate",
+  "raw_holdout_opened": false,
+  "reason": "The completion's scalar normal acceleration is removable by an exact boundary subtraction. The resulting local ten-velocity Legendre map is full rank with unchanged inertia throughout the declared bounded envelope. A finite rank-changing surface nevertheless exists outside that envelope, so global Hamiltonian regularity is not established.",
+  "representative_hessian_finite_difference_maximum_absolute_error": 2.8102520310824275e-08,
+  "representative_hessian_finite_difference_relative_error": 5.365000495011388e-09,
+  "representative_inertia": [
+    1,
+    0,
+    9
+  ],
+  "sample_counts": {
+    "deterministic": 385,
+    "random": 1024,
+    "total": 1409
+  },
+  "scope": "This is a homogeneous local necessary condition. It is neither the full inhomogeneous Dirac constraint algebra nor a proof that the Hamiltonian is bounded, that the extra negative direction is removed, or that all coupled characteristics are causal.",
+  "selected_values": {
+    "K_2": 2.0,
+    "K_B": 1.0,
+    "alpha": 1.7777777777777777,
+    "lambda_s": 1.0
+  },
+  "status": "completed necessary tilted-ADM kinetic subgate",
+  "unresolved_kill_gates": {
+    "full_coupled_characteristic_determinant_causal": false,
+    "full_inhomogeneous_dirac_algebra_closed": false,
+    "global_legendre_map_regular": false,
+    "hamiltonian_bounded_on_all_claimed_backgrounds": false
+  },
+  "velocity_order": [
+    "K_xx",
+    "K_yy",
+    "K_zz",
+    "K_xy",
+    "K_xz",
+    "K_yz",
+    "E_x",
+    "E_y",
+    "E_z",
+    "sigma"
+  ]
+}
