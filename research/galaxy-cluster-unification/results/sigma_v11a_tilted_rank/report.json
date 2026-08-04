@@ -1,0 +1,60 @@
+{
+  "all_nonlinear_rank_gates_pass": false,
+  "analytic_identity": {
+    "alignment": "z=c dot(phi)^2/[1+c dot(phi)^2], c=gamma^2 v^2/a_Sigma^2",
+    "alignment_second_derivative": "z''=2c[1-3c dot(phi)^2]/[1+c dot(phi)^2]^3",
+    "consequence": "At c dot(phi)^2=1, z''=-c/2; finite D_x chi can cancel and then reverse any finite positive base scalar Hessian.",
+    "projected_memory_gradient": "Dchi:Dchi=gamma^2 (D_x chi)^2",
+    "projected_scalar_magnitude": "S:S=gamma^2 v^2 dot(phi)^2"
+  },
+  "candidate": "Sigma v11A bounded anisotropic scalar memory",
+  "critical_configuration": {
+    "analytic_scalar_velocity_hessian": 0.0,
+    "finite_difference_relative_error": 1.1842378929335002e-09,
+    "finite_difference_scalar_velocity_hessian": 1.1842378929335002e-09,
+    "lagrangian": 36.00000000000001,
+    "memory_spatial_gradient": 32.49615361854384,
+    "projected_ratio_squared": 1.0,
+    "scalar_velocity": 1.7320508075688774
+  },
+  "crossing": [
+    {
+      "gradient_over_critical": 0.99,
+      "scalar_velocity_hessian": 0.159200000000002
+    },
+    {
+      "gradient_over_critical": 1.0,
+      "scalar_velocity_hessian": 0.0
+    },
+    {
+      "gradient_over_critical": 1.01,
+      "scalar_velocity_hessian": -0.16080000000000005
+    }
+  ],
+  "data_policy": {
+    "authorization": "local tilted nonlinear kinetic rank only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_exact_v11a_before_observational_data",
+  "gates": {
+    "above_surface_negative": true,
+    "analytic_hessian_matches_finite_difference": true,
+    "below_surface_positive": true,
+    "critical_surface_zero": true,
+    "finite_critical_configuration": true,
+    "globally_positive_scalar_velocity_hessian": false
+  },
+  "local_background": {
+    "aether": "A^mu=gamma(1,v,0,0)",
+    "chi_derivative": "partial_mu chi=(0,D_x chi,0,0)",
+    "metric": "Minkowski",
+    "phi_derivative": "partial_mu phi=(dot(phi),0,0,0)"
+  },
+  "no_patch_rule": "Do not impose a gradient cutoff or fit the anisotropy fraction toward zero. Zero anisotropy removes the directional mechanism and returns to the already-retired isotropic scalar-memory lane.",
+  "observational_data_accessed": false,
+  "raw_holdout_opened": false,
+  "reason": "On a finite tilted-aether background, the bounded S-alignment is a concave function of the coordinate scalar velocity. Its coefficient is multiplied by the unbounded but finite memory spatial-gradient energy. At the reported finite configuration the scalar Legendre Hessian vanishes and immediately beyond it is negative.",
+  "scope": "A negative diagonal Rayleigh direction of the fixed-metric scalar subblock is sufficient to retire the exact action; omitted velocity mixing cannot make that quadratic form positive. The failure persists for any finite positive base scalar Hessian, with the critical memory gradient shifted but finite.",
+  "status": "completed Sigma v11A tilted nonlinear kinetic falsification"
+}

@@ -1,5 +1,11 @@
 # Sigma v11A bounded anisotropic scalar-memory selection
 
+> **Superseded gate result (2026-08-04):** on a tilted-aether slice the
+> bounded `S` alignment depends nonlinearly on the AeST scalar velocity. A
+> finite memory gradient drives that scalar Legendre Hessian through zero and
+> negative. Exact v11A is retired before data. See
+> [`SIGMA_V11A_TILTED_RANK_FALSIFICATION.md`](SIGMA_V11A_TILTED_RANK_FALSIFICATION.md).
+
 ## Decision
 
 Sigma v11A passes a narrow theory-only mechanism-selection gate. It is the

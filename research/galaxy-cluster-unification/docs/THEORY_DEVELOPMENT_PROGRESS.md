@@ -1,5 +1,30 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v11A tilted nonlinear kinetic falsification
+
+Exact v11A is retired before data. On a local Minkowski slice with finite
+aether tilt `v=1/2`, choose `partial_t phi` and a finite orthogonal spatial
+memory gradient `partial_x chi`. The supposedly spatial AeST gradient then has
+`S:S=gamma^2 v^2 dot(phi)^2`, so the bounded alignment becomes
+`z=c dot(phi)^2/(1+c dot(phi)^2)`. Its exact curvature is
+`z''=2c(1-3c dot(phi)^2)/(1+c dot(phi)^2)^3` and is negative at finite
+velocity.
+
+The alignment energy is proportional to `(D_x chi)^2 z`. At
+`c dot(phi)^2=1`, the total scalar velocity Hessian is
+`H_phi-s alpha gamma^2 c (D_x chi)^2/4`. It crosses zero at a finite memory
+gradient for every finite positive base Hessian. With the conservative
+`H_phi=8`, the exact surface is `dot(phi)=sqrt(3)` and
+`D_x chi=sqrt(1056)=32.4962`; the Lagrangian is finite. The Hessian is
+`0.1592`, `0`, and `-0.1608` at `0.99`, `1`, and `1.01` times that gradient.
+
+A negative one-coordinate Rayleigh direction cannot be repaired by omitted
+off-diagonal velocity mixing. Zero anisotropy returns to the already-retired
+v4 isotropic-memory lane, and a fitted gradient cutoff is forbidden. This is
+the first failed closure after the v10 reset; it does not yet trigger another
+three-closure reset. See
+[`SIGMA_V11A_TILTED_RANK_FALSIFICATION.md`](SIGMA_V11A_TILTED_RANK_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v11A anisotropic scalar-memory selection
 
 The first post-reset candidate passes its fixed-background selection gate.

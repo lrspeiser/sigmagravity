@@ -15,7 +15,16 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
-The current theory-only selection is
+The current theory-only result is
+[`docs/SIGMA_V11A_TILTED_RANK_FALSIFICATION.md`](docs/SIGMA_V11A_TILTED_RANK_FALSIFICATION.md).
+Exact v11A is retired before data. On a finite tilted-aether background, its
+bounded alignment is a concave function of the AeST scalar coordinate
+velocity. An allowed finite memory gradient drives the scalar velocity
+Hessian through zero and negative; increasing the positive base kinetic term
+only moves this finite surface. The next candidate may not put a dynamical
+alignment gradient inside another field's kinetic coefficient without an
+exact global degeneracy identity.
+The preceding theory-only selection is
 [`docs/SIGMA_V11A_ANISOTROPIC_SCALAR_MEMORY_SELECTION.md`](docs/SIGMA_V11A_ANISOTROPIC_SCALAR_MEMORY_SELECTION.md).
 After the required v10 mechanism reset, v11A replaces the rank-two carrier
 with one bounded anisotropic scalar memory. Its fixed-background spatial

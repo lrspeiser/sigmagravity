@@ -1,0 +1,20 @@
+{
+  "protocol_version": "Sigma-v11A-0.2-tilted-global-rank",
+  "status": "frozen theory-only nonlinear kinetic gate",
+  "candidate": "Sigma v11A bounded anisotropic scalar memory",
+  "fixed_values": {
+    "aether_tilt": 0.5,
+    "acceleration_scale": 1.0,
+    "memory_speed_squared": 0.2727272727272727,
+    "anisotropy_fraction": 0.25,
+    "base_scalar_velocity_hessian": 8.0,
+    "finite_difference_step": 0.001
+  },
+  "failure_rule": "Retire exact v11A before data if an allowed finite tilted background and finite memory gradient makes the scalar velocity Hessian zero or negative. The base Hessian may be any finite positive value; a larger value only moves the finite gradient surface.",
+  "no_patch_rule": "Do not impose a gradient cutoff or fit the anisotropy fraction toward zero. Zero anisotropy removes the directional mechanism and returns to the already-retired isotropic scalar-memory lane.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "local tilted nonlinear kinetic rank only"
+  }
+}
