@@ -1,0 +1,299 @@
+{
+  "all_preregistered_gates_pass": false,
+  "broad_power": [
+    {
+      "cluster": "AS295",
+      "correction_power_fraction_wavelength_ge_50kpc": 0.8085819539087179
+    },
+    {
+      "cluster": "PLCKG287",
+      "correction_power_fraction_wavelength_ge_50kpc": 0.8145636775640738
+    }
+  ],
+  "claim_boundary": [
+    "This tests the lower-derivative field-stress mechanism on two already-spent projected maps; it is not a complete covariant theory or empirical validation.",
+    "The lens-plane vector scale ell_sigma is a projection proxy. It must be derived from the physical acceleration scale and lens geometry if the mechanism passes.",
+    "The AQUAL deflection is used as the background gravitational vector because the Sigma-v1 galaxy action already reduces to AQUAL; no target halo field enters the source.",
+    "The memory is static and two-dimensional in this audit. Causal four-dimensional completion remains unproved.",
+    "The compact-halo target contains fitted external shear and is a spent decomposition rather than direct truth.",
+    "No untouched galaxy or cluster evidence may be opened."
+  ],
+  "config_sha256": "1d1045b4f6d0ddbdf93ba731f13001421b3809d4290a901f8f43b367c73beab2",
+  "cross_transfer": [
+    {
+      "normalized_RMSE": 0.9287308866127628,
+      "tested_on": "PLCKG287",
+      "trained_on": "AS295"
+    },
+    {
+      "normalized_RMSE": 0.8685581146272674,
+      "tested_on": "AS295",
+      "trained_on": "PLCKG287"
+    }
+  ],
+  "decision": "retire_exact_v4b_vector_stress_memory_source",
+  "gates": {
+    "broad_correction_power": true,
+    "conserved_periodic_source": true,
+    "cross_cluster_transfer": false,
+    "each_cluster_twenty_percent_improvement": false,
+    "every_cluster_channel_improves": false,
+    "full_functional_directional_derivative": true,
+    "joint_map_accuracy": false,
+    "local_stress_directional_derivative": true,
+    "padding_stability": true,
+    "parameters_interior": true,
+    "positive_physical_action_sign": true,
+    "signed_source_support": true
+  },
+  "independent_training_fits": {
+    "AS295": {
+      "L_sigma_kpc": 119.38807623582557,
+      "ell_sigma_kpc": 14.279771559132165,
+      "eta_sigma_kpc2": 1301.1899792022314,
+      "function_evaluations": 463,
+      "normalized_RMSE": 0.8521819742906531,
+      "optimizer_message": "Optimization terminated successfully.",
+      "optimizer_success": true,
+      "per_channel": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8994374970022173,
+          "channel": "convergence",
+          "cluster": "AS295",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.8531035488373199
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.953889540426961,
+          "channel": "shear_1",
+          "cluster": "AS295",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.9001198593425658
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8415130697001787,
+          "channel": "shear_2",
+          "cluster": "AS295",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.8004004783207193
+        }
+      ],
+      "per_cluster": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8994511868959854,
+          "cluster": "AS295",
+          "fraction_of_AQUAL_baseline": 0.947446606003758,
+          "prediction_normalized_RMSE": 0.8521819742906531
+        }
+      ],
+      "unconstrained_eta_sigma_kpc2": 1301.1899792022314
+    },
+    "PLCKG287": {
+      "L_sigma_kpc": 33.89517323510532,
+      "ell_sigma_kpc": 16.1194513929467,
+      "eta_sigma_kpc2": 1190.6289198758318,
+      "function_evaluations": 443,
+      "normalized_RMSE": 0.9029308160444195,
+      "optimizer_message": "Optimization terminated successfully.",
+      "optimizer_success": true,
+      "per_channel": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.9180688488874194,
+          "channel": "convergence",
+          "cluster": "PLCKG287",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.9049195434526803
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.9444782715588886,
+          "channel": "shear_1",
+          "cluster": "PLCKG287",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.9346220941225128
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8833488218015043,
+          "channel": "shear_2",
+          "cluster": "PLCKG287",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.8680174749066779
+        }
+      ],
+      "per_cluster": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.9156408971721106,
+          "cluster": "PLCKG287",
+          "fraction_of_AQUAL_baseline": 0.98611892373206,
+          "prediction_normalized_RMSE": 0.9029308160444195
+        }
+      ],
+      "unconstrained_eta_sigma_kpc2": 1190.6289198758318
+    }
+  },
+  "manufactured_checks": {
+    "full_functional_directional_derivative_relative_error": 2.4357377078582707e-10,
+    "local_stress_directional_derivative_relative_error": 1.1890372319662846e-11,
+    "manufactured_potential_maximum": 0.0057693299763367034,
+    "manufactured_potential_minimum": 5.0698534003532504e-11,
+    "periodic_source_absolute_mean_over_RMS": 0.0
+  },
+  "padding_sensitivity_fractional_change_in_joint_RMSE": 3.2838417627248394e-06,
+  "padding_sensitivity_shared_fit": {
+    "L_sigma_kpc": 61.08795506931629,
+    "ell_sigma_kpc": 15.02340542656443,
+    "eta_sigma_kpc2": 960.7578231642437,
+    "function_evaluations": 523,
+    "normalized_RMSE": 0.8828772256612988,
+    "optimizer_message": "Optimization terminated successfully.",
+    "optimizer_success": true,
+    "per_channel": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994374970022173,
+        "channel": "convergence",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8619525330307859
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.953889540426961,
+        "channel": "shear_1",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.9020386461564254
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8415130697001787,
+        "channel": "shear_2",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8087368627469462
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9180688488874194,
+        "channel": "convergence",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.9077355418764987
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9444782715588886,
+        "channel": "shear_1",
+        "cluster": "PLCKG287",
+        "improved": false,
+        "prediction_normalized_RMSE": 0.9481060730793704
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8833488218015043,
+        "channel": "shear_2",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8621212398664517
+      }
+    ],
+    "per_cluster": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994511868959854,
+        "cluster": "AS295",
+        "fraction_of_AQUAL_baseline": 0.9543898563177936,
+        "prediction_normalized_RMSE": 0.8584270890265284
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9156408971721106,
+        "cluster": "PLCKG287",
+        "fraction_of_AQUAL_baseline": 0.9902006970857087,
+        "prediction_normalized_RMSE": 0.9066682546600077
+      }
+    ],
+    "unconstrained_eta_sigma_kpc2": 960.7578231642437
+  },
+  "parent_config_sha256": "77762bf4096decf1c88a2c7131166fde48bf72840eb74b21ec6551cb82c608c5",
+  "primary_shared_fit": {
+    "L_sigma_kpc": 61.09455245140096,
+    "ell_sigma_kpc": 15.023476798724358,
+    "eta_sigma_kpc2": 960.8231370620654,
+    "function_evaluations": 523,
+    "normalized_RMSE": 0.8828743264417144,
+    "optimizer_message": "Optimization terminated successfully.",
+    "optimizer_success": true,
+    "per_channel": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994374970022173,
+        "channel": "convergence",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.861950350383119
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.953889540426961,
+        "channel": "shear_1",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.9020371172468064
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8415130697001787,
+        "channel": "shear_2",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8087274883239706
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9180688488874194,
+        "channel": "convergence",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.9077370026877062
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9444782715588886,
+        "channel": "shear_1",
+        "cluster": "PLCKG287",
+        "improved": false,
+        "prediction_normalized_RMSE": 0.9481121390743047
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8833488218015043,
+        "channel": "shear_2",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8621077923575692
+      }
+    ],
+    "per_cluster": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994511868959854,
+        "cluster": "AS295",
+        "fraction_of_AQUAL_baseline": 0.9543851757027962,
+        "prediction_normalized_RMSE": 0.8584228790418136
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9156408971721106,
+        "cluster": "PLCKG287",
+        "fraction_of_AQUAL_baseline": 0.9901988838136438,
+        "prediction_normalized_RMSE": 0.9066665943539474
+      }
+    ],
+    "unconstrained_eta_sigma_kpc2": 960.8231370620654
+  },
+  "raw_holdout_opened": false,
+  "sample_is_spent": true,
+  "source_statistics": [
+    {
+      "absolute_full_source_mean_over_RMS": 3.8240838429903923e-19,
+      "cluster": "AS295",
+      "cropped_source_RMS_per_kpc2": 9.113758894299953e-05,
+      "negative_cropped_source_pixel_fraction": 0.44739456092781016,
+      "positive_cropped_source_pixel_fraction": 0.5526054390721898,
+      "potential_maximum": 0.017564821869530883
+    },
+    {
+      "absolute_full_source_mean_over_RMS": 3.1516731455790358e-18,
+      "cluster": "PLCKG287",
+      "cropped_source_RMS_per_kpc2": 0.00010063058863767779,
+      "negative_cropped_source_pixel_fraction": 0.4464280920293162,
+      "positive_cropped_source_pixel_fraction": 0.5535719079706838,
+      "potential_maximum": 0.024658067090559507
+    }
+  ],
+  "status": "completed Sigma v4B vector-stress memory audit"
+}

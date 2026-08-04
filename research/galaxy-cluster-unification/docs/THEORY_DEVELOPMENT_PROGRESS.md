@@ -1,5 +1,22 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 Sigma v4B vector-stress memory result
+
+The lower-derivative projected action built a bounded interaction from the
+quadratic total AQUAL field stress and one Helmholtz memory. Its analytic
+variation, positive sign, conservation, signed support, numerical stability,
+and broad-power gates pass. More than 80% of its correction power lies at
+wavelengths of at least 50 kpc, resolving v4A's edge-localization problem.
+
+The shared two-cluster fit nevertheless scores `0.882874` normalized Fourier
+RMSE against the `0.907582` AQUAL baseline and the preregistered `0.500` gate.
+It improves AS295 by `4.56%`, PLCKG287 by `0.98%`, worsens one of six map
+channels, and transfers at `0.928731` and `0.868558` versus the `0.800` gate.
+The exact mechanism is retired without opening an untouched observation. The
+lesson is sharper: broad vector-stress redistribution is not enough when its
+phase and shear geometry do not transfer. See
+[`SIGMA_V4B_VECTOR_STRESS_MEMORY_RESULTS.md`](SIGMA_V4B_VECTOR_STRESS_MEMORY_RESULTS.md).
+
 ## 2026-08-03 Sigma v3C spent operator inference
 
 The already-opened AS295 and PLCKG287 maps were used to infer the complete

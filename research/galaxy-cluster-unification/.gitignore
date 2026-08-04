@@ -84,6 +84,8 @@ results/sigma_v1_nonmetricity_cycle/*
 !results/sigma_v3c_spent_operator_inference/**
 !results/sigma_v4a_projected_variational_source_audit/
 !results/sigma_v4a_projected_variational_source_audit/**
+!results/sigma_v4b_vector_stress_memory_audit/
+!results/sigma_v4b_vector_stress_memory_audit/**
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/
