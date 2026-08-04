@@ -20,6 +20,11 @@ from voidscreen.sigma_v6_metric_memory import (
     trace_free_symmetric,
     v6a_perturbation_action,
     v6b_metric_memory_chi,
+    v6c_total_constitutive_coefficient,
+    v6d_cubic_orientation_correction,
+    v6d_deep_acceleration_enhancement,
+    v6d_parallel_ellipticity_coefficient,
+    v6d_total_constitutive_coefficient,
 )
 
 
@@ -188,3 +193,47 @@ def test_invalid_detuned_memory_inputs_are_rejected() -> None:
         detuned_massive_memory_step_response(1.0, 1.0, 0.0)
     with pytest.raises(ValueError):
         detuned_static_tensor_transfer(-1.0, 1.0)
+
+
+def test_v6c_inside_chi_placement_has_negative_deep_response() -> None:
+    invariant = np.geomspace(1.0e-16, 1.0e-6, 100)
+    for strength in (0.1, 0.5, 0.99):
+        coefficient = v6c_total_constitutive_coefficient(invariant, strength)
+        assert coefficient[0] == pytest.approx(-strength, abs=1.0e-7)
+        assert np.any(coefficient < 0.0)
+
+
+def test_v6d_preserves_quadratic_cancellation_and_positive_ellipticity() -> None:
+    invariant = np.geomspace(1.0e-16, 1.0e16, 100_000)
+    for strength in (0.0, 0.5, 0.9, 0.99, 0.999):
+        mu = v6d_total_constitutive_coefficient(invariant, strength)
+        parallel = v6d_parallel_ellipticity_coefficient(invariant, strength)
+        assert np.all(mu > 0.0)
+        assert np.all(parallel > 0.0)
+        expected_deep_slope = 1.5 * (1.0 - strength)
+        assert mu[0] / np.sqrt(invariant[0]) == pytest.approx(
+            expected_deep_slope, rel=2.0e-5, abs=2.0e-8
+        )
+
+
+def test_v6d_orientation_changes_only_cubic_and_higher_terms() -> None:
+    invariant = np.geomspace(1.0e-10, 1.0e-5, 500)
+    base = v6d_cubic_orientation_correction(invariant, 0.0)
+    oriented = v6d_cubic_orientation_correction(invariant, 0.8)
+    difference = oriented - base
+    slope = np.polyfit(np.log(invariant), np.log(difference), 1)[0]
+    assert slope == pytest.approx(1.5, rel=1.0e-3)
+    assert v6d_deep_acceleration_enhancement(0.99) == pytest.approx(10.0)
+
+
+def test_invalid_v6c_v6d_constitutive_inputs_are_rejected() -> None:
+    with pytest.raises(ValueError):
+        v6c_total_constitutive_coefficient(-1.0, 1.0)
+    with pytest.raises(ValueError):
+        v6d_cubic_orientation_correction(1.0, -1.0)
+    with pytest.raises(ValueError):
+        v6d_total_constitutive_coefficient(1.0, 1.1)
+    with pytest.raises(ValueError):
+        v6d_parallel_ellipticity_coefficient(0.0, 0.5)
+    with pytest.raises(ValueError):
+        v6d_deep_acceleration_enhancement(1.0)

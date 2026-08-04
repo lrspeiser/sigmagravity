@@ -1,0 +1,39 @@
+{
+  "protocol_version": "Sigma-v6D-0.1-pre-data-nonzero-background-selection",
+  "status": "frozen after v6C detuning and before observational data",
+  "retired_parent": "Sigma v6C chi=X*(1+lambda_sigma*C_Q)",
+  "candidate": "detuned memory with cubic-only orientation response",
+  "weak_scalar_surrogate": {
+    "total_lagrangian": "ell=X-f_D(X,C_Q)",
+    "f_D": "exp(-sqrt(X))*(X+lambda_sigma*C_Q*X^(3/2))",
+    "orientation_strength": "q=lambda_sigma*C_Q",
+    "allowed_q_interval": [0.0, 0.999],
+    "X_scan": [1e-16, 1e16],
+    "X_scan_points": 100000
+  },
+  "tensor_memory": {
+    "C_Q": "Z_Q/(Z_Q+phi_sigma^2)",
+    "Z_Q": "Q_mu_nu Q^mu_nu",
+    "Q_mu_nu": "spatial_STF[(Box_R-m_sigma^2)^-1 T_mu_nu]",
+    "T_mu_nu": "spatial_STF[nabla_mu nabla_nu U_R]",
+    "U_R": "Box_R^-1(R_mu_nu u^mu u^nu-R/2)"
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "lambda_sigma", "phi_sigma", "L_sigma=1/m_sigma"],
+    "count": 4,
+    "maximum_allowed": 5
+  },
+  "gates": {
+    "maximum_v6c_deep_coefficient_error": 1e-6,
+    "minimum_v6d_constitutive_coefficient": 0.0,
+    "minimum_v6d_parallel_ellipticity": 0.0,
+    "maximum_cubic_power_error": 0.002,
+    "minimum_deep_enhancement_at_q_099": 9.99,
+    "maximum_deep_enhancement_at_q_099": 10.01
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "complete CTP variation and covariant nonzero-background kinetic audit only"
+  }
+}

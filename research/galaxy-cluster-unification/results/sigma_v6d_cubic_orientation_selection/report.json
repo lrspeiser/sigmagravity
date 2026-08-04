@@ -1,0 +1,160 @@
+{
+  "all_v6D_selection_gates_pass": true,
+  "data_policy": {
+    "authorization_after_this_stage": "complete CTP variation and covariant nonzero-background kinetic audit only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "gates": {
+    "parameter_count": true,
+    "v6C_deep_limit_matches_minus_q": true,
+    "v6C_negative_deep_response_detected": true,
+    "v6D_cluster_sized_deep_enhancement_is_available": true,
+    "v6D_constitutive_response_positive": true,
+    "v6D_orientation_is_cubic_only": true,
+    "v6D_parallel_ellipticity_positive": true
+  },
+  "not_yet_demonstrated": [
+    "complete covariant CTP influence action and metric variation",
+    "Ward identity with metric-built u_mu and projected tensor memory",
+    "full scalar-vector-tensor kinetic matrix on nonzero backgrounds",
+    "spherical coefficient including both metric potentials",
+    "whether C_Q is small in coherent disks and large in real clusters",
+    "any observational performance"
+  ],
+  "observational_data_accessed": false,
+  "raw_holdout_opened": false,
+  "status": "completed Sigma v6C nonzero-background rejection and v6D selection",
+  "v6C": {
+    "decision": "retire_orientation_inside_quadratic_cancellation",
+    "maximum_deep_limit_error": 4.239459061583517e-08,
+    "reason": "For fixed nonzero C_Q, chi=(1+q)X changes the quadratic cancellation and the total deep constitutive coefficient tends to -q, producing a negative-response interval for every q>0.",
+    "records": [
+      {
+        "analytic_X_to_zero_limit": -0.0,
+        "minimum_coefficient": 1.5000000019860238e-08,
+        "q": 0.0,
+        "smallest_X_coefficient": 1.5000000019860238e-08
+      },
+      {
+        "analytic_X_to_zero_limit": -0.1,
+        "minimum_coefficient": -0.09999998269465404,
+        "q": 0.1,
+        "smallest_X_coefficient": -0.09999998269465404
+      },
+      {
+        "analytic_X_to_zero_limit": -0.5,
+        "minimum_coefficient": -0.4999999724432407,
+        "q": 0.5,
+        "smallest_X_coefficient": -0.4999999724432407
+      },
+      {
+        "analytic_X_to_zero_limit": -0.9,
+        "minimum_coefficient": -0.8999999607154612,
+        "q": 0.9,
+        "smallest_X_coefficient": -0.8999999607154612
+      },
+      {
+        "analytic_X_to_zero_limit": -0.99,
+        "minimum_coefficient": -0.9899999578913932,
+        "q": 0.99,
+        "smallest_X_coefficient": -0.9899999578913932
+      },
+      {
+        "analytic_X_to_zero_limit": -0.999,
+        "minimum_coefficient": -0.9989999576054094,
+        "q": 0.999,
+        "smallest_X_coefficient": -0.9989999576054094
+      }
+    ]
+  },
+  "v6D": {
+    "decision": "advance_cubic_only_orientation_to_complete_CTP_variation",
+    "deep_acceleration_enhancement_at_q_0.99": 9.999999999999995,
+    "global_minimum_constitutive_coefficient": 1.500022328571049e-11,
+    "global_minimum_parallel_ellipticity": 3.000042288570894e-11,
+    "measured_orientation_power_in_X": 1.4998116984143126,
+    "physical_parameters": {
+      "count": 4,
+      "maximum_allowed": 5,
+      "names": [
+        "a_sigma",
+        "lambda_sigma",
+        "phi_sigma",
+        "L_sigma=1/m_sigma"
+      ]
+    },
+    "records": [
+      {
+        "analytic_deep_mu_over_sqrt_X": 1.5,
+        "deep_acceleration_enhancement": 1.0,
+        "deep_mu_over_sqrt_X": 1.5000000019860238,
+        "minimum_constitutive_coefficient": 1.5000000019860238e-08,
+        "minimum_parallel_ellipticity": 2.9999999819860236e-08,
+        "q": 0.0
+      },
+      {
+        "analytic_deep_mu_over_sqrt_X": 1.35,
+        "deep_acceleration_enhancement": 1.0540925533894598,
+        "deep_mu_over_sqrt_X": 1.3500000006771984,
+        "minimum_constitutive_coefficient": 1.3500000006771984e-08,
+        "minimum_parallel_ellipticity": 2.6999999846771985e-08,
+        "q": 0.1
+      },
+      {
+        "analytic_deep_mu_over_sqrt_X": 0.75,
+        "deep_acceleration_enhancement": 1.414213562373095,
+        "deep_mu_over_sqrt_X": 0.750000006544127,
+        "minimum_constitutive_coefficient": 7.50000006544127e-09,
+        "minimum_parallel_ellipticity": 1.500000006544127e-08,
+        "q": 0.5
+      },
+      {
+        "analytic_deep_mu_over_sqrt_X": 0.14999999999999997,
+        "deep_acceleration_enhancement": 3.16227766016838,
+        "deep_mu_over_sqrt_X": 0.15000001241105565,
+        "minimum_constitutive_coefficient": 1.5000001241105565e-09,
+        "minimum_parallel_ellipticity": 3.000000284110554e-09,
+        "q": 0.9
+      },
+      {
+        "analytic_deep_mu_over_sqrt_X": 0.015000000000000013,
+        "deep_acceleration_enhancement": 9.999999999999995,
+        "deep_mu_over_sqrt_X": 0.015000023445566057,
+        "minimum_constitutive_coefficient": 1.5000023445566057e-10,
+        "minimum_parallel_ellipticity": 3.000004304556595e-10,
+        "q": 0.99
+      },
+      {
+        "analytic_deep_mu_over_sqrt_X": 0.0015000000000000013,
+        "deep_acceleration_enhancement": 31.622776601683782,
+        "deep_mu_over_sqrt_X": 0.001500022328571049,
+        "minimum_constitutive_coefficient": 1.500022328571049e-11,
+        "minimum_parallel_ellipticity": 3.000042288570894e-11,
+        "q": 0.999
+      }
+    ],
+    "tensor_memory": {
+      "C_Q": "Z_Q/(Z_Q+phi_sigma^2)",
+      "Q_mu_nu": "spatial_STF[(Box_R-m_sigma^2)^-1 T_mu_nu]",
+      "T_mu_nu": "spatial_STF[nabla_mu nabla_nu U_R]",
+      "U_R": "Box_R^-1(R_mu_nu u^mu u^nu-R/2)",
+      "Z_Q": "Q_mu_nu Q^mu_nu"
+    },
+    "weak_scalar_surrogate": {
+      "X_scan": [
+        1e-16,
+        1e+16
+      ],
+      "X_scan_points": 100000,
+      "allowed_q_interval": [
+        0.0,
+        0.999
+      ],
+      "f_D": "exp(-sqrt(X))*(X+lambda_sigma*C_Q*X^(3/2))",
+      "orientation_strength": "q=lambda_sigma*C_Q",
+      "total_lagrangian": "ell=X-f_D(X,C_Q)"
+    },
+    "why_it_evades_v6C": "The orientation factor multiplies only X^(3/2), leaving the X term available to cancel the Einstein quadratic action for every C_Q. The remaining deep coefficient is 1-q and stays positive for q<1."
+  }
+}

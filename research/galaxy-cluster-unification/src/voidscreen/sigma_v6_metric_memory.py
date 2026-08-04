@@ -288,3 +288,85 @@ def detuned_static_tensor_transfer(
     if not np.isfinite(memory_mass) or memory_mass <= 0.0:
         raise ValueError("memory mass must be finite and positive")
     return values**2 / (values**2 + memory_mass**2)
+
+
+def v6c_total_constitutive_coefficient(
+    gradient_ratio_squared: np.ndarray | float, orientation_strength: float
+) -> np.ndarray:
+    """Return d[X-f((1+q)X)]/dX for the retired v6C placement."""
+
+    values = np.asarray(gradient_ratio_squared, dtype=float)
+    if np.any(~np.isfinite(values)) or np.any(values < 0.0):
+        raise ValueError("gradient invariant must be finite and nonnegative")
+    if not np.isfinite(orientation_strength) or orientation_strength < 0.0:
+        raise ValueError("orientation strength must be finite and nonnegative")
+    factor = 1.0 + orientation_strength
+    root = np.sqrt(factor * values)
+    correction_derivative = factor * np.exp(-root) * (1.0 - 0.5 * root)
+    return 1.0 - correction_derivative
+
+
+def v6d_cubic_orientation_correction(
+    gradient_ratio_squared: np.ndarray | float, orientation_strength: float
+) -> np.ndarray:
+    """Return exp(-sqrt(X)) * [X + q X**(3/2)] for the v6D placement."""
+
+    values = np.asarray(gradient_ratio_squared, dtype=float)
+    if np.any(~np.isfinite(values)) or np.any(values < 0.0):
+        raise ValueError("gradient invariant must be finite and nonnegative")
+    if not np.isfinite(orientation_strength) or orientation_strength < 0.0:
+        raise ValueError("orientation strength must be finite and nonnegative")
+    root = np.sqrt(values)
+    return np.exp(-root) * (values + orientation_strength * values * root)
+
+
+def v6d_total_constitutive_coefficient(
+    gradient_ratio_squared: np.ndarray | float, orientation_strength: float
+) -> np.ndarray:
+    """Return d[X-f_D(X,q)]/dX for the v6D scalar weak-field surrogate."""
+
+    values = np.asarray(gradient_ratio_squared, dtype=float)
+    if np.any(~np.isfinite(values)) or np.any(values < 0.0):
+        raise ValueError("gradient invariant must be finite and nonnegative")
+    if not np.isfinite(orientation_strength) or not 0.0 <= orientation_strength <= 1.0:
+        raise ValueError("orientation strength must lie between zero and one")
+    root = np.sqrt(values)
+    bracket = (
+        1.0
+        + 0.5 * (3.0 * orientation_strength - 1.0) * root
+        - 0.5 * orientation_strength * values
+    )
+    return 1.0 - np.exp(-root) * bracket
+
+
+def v6d_parallel_ellipticity_coefficient(
+    gradient_ratio_squared: np.ndarray | float, orientation_strength: float
+) -> np.ndarray:
+    """Return mu+2X*mu_X, the radial/parallel ellipticity coefficient."""
+
+    values = np.asarray(gradient_ratio_squared, dtype=float)
+    if np.any(~np.isfinite(values)) or np.any(values <= 0.0):
+        raise ValueError("gradient invariant must be finite and positive")
+    if not np.isfinite(orientation_strength) or not 0.0 <= orientation_strength <= 1.0:
+        raise ValueError("orientation strength must lie between zero and one")
+    root = np.sqrt(values)
+    bracket = (
+        1.0
+        + 0.5 * (3.0 * orientation_strength - 1.0) * root
+        - 0.5 * orientation_strength * values
+    )
+    bracket_derivative = (
+        0.5 * (3.0 * orientation_strength - 1.0)
+        - orientation_strength * root
+    )
+    mu = 1.0 - np.exp(-root) * bracket
+    derivative_by_root = np.exp(-root) * (bracket - bracket_derivative)
+    return mu + root * derivative_by_root
+
+
+def v6d_deep_acceleration_enhancement(orientation_strength: float) -> float:
+    """Return the deep-field acceleration ratio relative to q=0 at fixed source."""
+
+    if not np.isfinite(orientation_strength) or not 0.0 <= orientation_strength < 1.0:
+        raise ValueError("orientation strength must lie in [0, 1)")
+    return float(1.0 / np.sqrt(1.0 - orientation_strength))
