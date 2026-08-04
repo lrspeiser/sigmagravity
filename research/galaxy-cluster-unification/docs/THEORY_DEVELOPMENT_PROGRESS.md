@@ -1,5 +1,21 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 Sigma v1 pure-geometry cycle
+
+The renewed action-first goal has now tested the smallest one-metric,
+baryon-only symmetric-teleparallel action.  The nonlinear nonmetricity action
+passes its invariant, deep-field, high-field, parameter-count, and external
+dwarf-galaxy gates.  Its regular isolated weak-field equations prove
+`Phi=Psi` and reduce exactly to standard-mu AQUAL.  It therefore inherits the
+frozen AQUAL raw-lensing result: `0.333` root convergence in both ready
+clusters and incorrect held-out topology.  The action is retired without a
+fit.  See [`SIGMA_V1_NONMETRICITY_ACTION_RESULTS.md`](SIGMA_V1_NONMETRICITY_ACTION_RESULTS.md).
+
+This closes the pure one-invariant geometric route.  Any next action must add
+a baryon-predictable vector/tensor or causal nonlocal state that supplies
+anisotropic stress; another scalar interpolation of the same invariant is not
+a materially new cycle.
+
 Status: active, updated 2026-07-29. The thresholds were recorded before H7a or
 H7s was scored. Neither candidate is advanced by changing a bound after the
 result.

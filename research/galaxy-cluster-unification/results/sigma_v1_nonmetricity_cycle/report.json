@@ -1,0 +1,58 @@
+{
+  "advances": false,
+  "decision": "retire as a galaxy-cluster unifier: the healthy isolated branch is exactly no-slip AQUAL and inherits its raw cluster topology failure",
+  "gate_results": {
+    "galaxy": true,
+    "independent_lensing_response": false,
+    "mathematical_and_limit_checks": true,
+    "raw_cluster_lensing": false
+  },
+  "input_hashes": {
+    "config": "87d62a2ac02e60834a92ee31f33c8cb518f0057f2e07940a7a4887e13abe6874",
+    "galaxy_report": "446ecb6540f0c05c926c4a1ef4e69303612868ecf4179ddaca545557a6dce82a",
+    "raw_cluster_scores": "19b959f404cb712996b0b07239bab3488b47044e3c9e05eda3884afea26498af"
+  },
+  "limits": {
+    "deep_relative_error": 0.0002500312421851447,
+    "deep_relative_error_max": 0.05,
+    "high_fractional_correction": 5.000000413701855e-11,
+    "high_fractional_correction_max": 1e-05
+  },
+  "model_id": "sigma_v1_pure_nonmetricity",
+  "next_mechanism_requirement": "An additional baryon-predictable vector/tensor or nonlocal state must generate anisotropic stress and the missing convergence/shear. Another regular scalar function of the same first-derivative nonmetricity invariant cannot do so.",
+  "postulate_audit": {
+    "global_physical_parameters": 1,
+    "interpretation": "nonlinear gravitational self-interaction of nonmetricity",
+    "lensing_only_parameters": 0,
+    "material_sources": [
+      "baryonic stress-energy"
+    ],
+    "per_object_gravity_parameters": 0,
+    "physical_matter_metrics": 1,
+    "separate_sigma_matter_stress_tensor": false
+  },
+  "spent_observation_mapping": {
+    "best_fixed_MOND_RMSE_km_s": 12.402825154124628,
+    "external_dwarf_galaxy_RMSE_km_s": 12.422246240404235,
+    "galaxy_RMSE_ratio": 1.0015658598777513,
+    "galaxy_gate_pass": true,
+    "justification": "the executable weak-field equations are exactly the frozen standard-mu AQUAL comparator",
+    "raw_cluster_all_topologies_correct": false,
+    "raw_cluster_gate_pass": false,
+    "raw_cluster_minimum_root_convergence_fraction": 0.3333333333333333,
+    "raw_cluster_rows": 2
+  },
+  "status": "completed Sigma v1 pure-nonmetricity action audit",
+  "weak_field_derivation": {
+    "action_derivative_relative_error": 1.416122115823314e-07,
+    "equal_potential_X_identity_max_abs_error": 1.7763568394002505e-14,
+    "massive_potential": "Psi",
+    "mu_positive": true,
+    "photon_Weyl_potential": "(Psi+Phi)/2=Psi on the regular isolated branch",
+    "reduced_equation": "div[mu(|grad Psi|/a_sigma) grad Psi]=4 pi G rho_b",
+    "reduced_theory": "standard-mu AQUAL",
+    "regular_isolated_branch_has_zero_slip": true,
+    "slip_invariant_identity_max_abs_error": 2.3092638912203256e-14,
+    "stegr_invariant_identity_max_abs_error": 4.263256414560601e-14
+  }
+}

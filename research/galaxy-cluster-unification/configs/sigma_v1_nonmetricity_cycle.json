@@ -1,0 +1,53 @@
+{
+  "protocol_version": "SIGMA-V1-NONMETRICITY-CYCLE-1.0.0",
+  "status": "frozen_before_executable_weak_field_and_spent_observation_audit",
+  "model_id": "sigma_v1_pure_nonmetricity",
+  "purpose": "Test the smallest covariant one-metric geometry-only action that can produce the successful galaxy low-acceleration limit without invisible matter.",
+  "physical_postulates": [
+    "Baryonic stress-energy is the only material source.",
+    "Matter and light couple minimally to one physical metric g_ab.",
+    "The independent connection is flat and torsion-free; it contributes no freely specifiable halo source.",
+    "The Sigma response is a nonlinear gravitational self-interaction of the STEGR nonmetricity scalar, not a material fluid.",
+    "The high-nonmetricity limit is the symmetric-teleparallel equivalent of GR.",
+    "All isolated systems use the same asymptotic boundary rule and the same acceleration scale.",
+    "No galaxy or cluster label, per-object force constant, or lensing-only multiplier is allowed."
+  ],
+  "action": {
+    "nonmetricity_tensor": "Q_a_mn=nabla_a g_mn with flat torsion-free Gamma",
+    "stegr_scalar": "Q=Q1/4-Q2/2-Q3/4+Q5/2",
+    "dimensionless_invariant": "X=Q c^4/(2 a_sigma^2)",
+    "interpolation": "F(X)=sqrt(X(1+X))-asinh(sqrt(X))",
+    "action_density": "L_g=-(c^4/8 pi G)(a_sigma^2/c^4) F(X)",
+    "matter_action": "S_b[g_ab,psi_b]",
+    "weak_metric": "ds^2=-(1+2 Psi/c^2)c^2dt^2+(1-2 Phi/c^2)dx^2"
+  },
+  "parameters": {
+    "a_sigma_m_s2": 1.2e-10,
+    "global_physical_parameter_count": 1,
+    "per_object_gravity_parameters": 0,
+    "lensing_only_parameters": 0
+  },
+  "gates": {
+    "invariant_identity_max_absolute_error": 1e-12,
+    "action_derivative_max_relative_error": 2e-5,
+    "deep_gbar_over_a_sigma": 1e-3,
+    "deep_relative_error_max": 0.05,
+    "high_gbar_over_a_sigma": 1e5,
+    "high_fractional_correction_max": 1e-5,
+    "galaxy_RMSE_ratio_to_best_fixed_MOND_max": 1.05,
+    "raw_cluster_root_convergence_fraction_min": 1.0,
+    "raw_cluster_all_topologies_correct_required": true
+  },
+  "spent_empirical_inputs": {
+    "galaxy_report": "results/p0711_external_galaxy_rotation_validation/report.json",
+    "raw_cluster_scores": "results/p0714_ready_subset_raw_lensing/cluster_model_scores.csv",
+    "mapped_weak_field_comparator": "AQUAL_simple_mu_3D",
+    "mapped_raw_lens_comparator": "AQUAL_simple_mu_diagnostic"
+  },
+  "decision_rule": "Advance only if the covariant action has a regular non-GR lensing response and passes both the galaxy and raw cluster gates. If its regular weak-field branch is exactly no-slip AQUAL, inherit the already-spent AQUAL scores and retire this action as a unifier without parameter fitting.",
+  "claim_boundary": [
+    "The action family f(Q) and symmetric-teleparallel gravity are prior art.",
+    "This cycle tests whether the specific GR-to-standard-mu geometric interpolation supplies the missing cluster response.",
+    "A weak-field no-go does not reject every nonmetricity theory; it rejects the one-invariant regular isolated branch tested here."
+  ]
+}

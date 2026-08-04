@@ -28,6 +28,15 @@ the candidate beats the frozen full-field MOND comparators on 13 new dwarf
 rotation curves, while the four-cluster test is not validly evaluable because
 only two selected targets meet the frozen catalog-readiness rules. The previous review entry is
 [`latest-findings/2026-08-02-p0695b-cubic-path-audit`](latest-findings/2026-08-02-p0695b-cubic-path-audit/README.md).
+
+The first action cycle under the renewed Sigma goal is now in
+[`docs/SIGMA_V1_NONMETRICITY_ACTION_RESULTS.md`](docs/SIGMA_V1_NONMETRICITY_ACTION_RESULTS.md).
+It derives the standard-mu galaxy limit from a one-parameter covariant
+nonmetricity action, but proves that the regular isolated branch has zero
+metric slip and is exactly AQUAL.  It passes the external dwarf-galaxy gate and
+fails the inherited raw cluster topology gate, so it is retired without
+fitting.  The next action must contain a baryon-predictable anisotropic-stress
+state rather than another scalar interpolation.
 It completes the only preregistered numerical repair of the straight-ray path
 operator without reading observational scores. The prior P0695, P0694, P0693, P0692, P0691, P0690, P0689, P0688, P0687, P0686, P0684, P0683, P0682, and P0677 snapshots remain in
 [`latest-findings/2026-08-02-p0695-radial-path-math-audit`](latest-findings/2026-08-02-p0695-radial-path-math-audit/README.md),

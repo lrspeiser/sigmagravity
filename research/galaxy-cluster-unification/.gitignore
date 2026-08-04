@@ -72,6 +72,10 @@ results/eaq0_derivation/*
 results/environmental_mog0/*
 !results/environmental_mog0/report.json
 !results/environmental_mog0/feasibility_points.csv
+!results/sigma_v1_nonmetricity_cycle/
+results/sigma_v1_nonmetricity_cycle/*
+!results/sigma_v1_nonmetricity_cycle/report.json
+!results/sigma_v1_nonmetricity_cycle/inherited_raw_cluster_scores.csv
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/
