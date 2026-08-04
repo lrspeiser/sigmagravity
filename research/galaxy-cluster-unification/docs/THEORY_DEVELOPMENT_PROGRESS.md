@@ -1470,6 +1470,32 @@ The concrete R0--R3 checkpoints are frozen in
 [`PREMISE_LEVEL_RETHINK.md`](PREMISE_LEVEL_RETHINK.md); R0 begins with the raw
 observable and covariance provenance behind the CLASH and BCG targets.
 
+## 2026-08-04 Sigma v13A exact clock-constraint falsification
+
+The first post-v12 repair attempted to remove the inherited AeST clock/Jeans
+sector exactly with
+
+$$
+\Delta L=\Lambda(U^\mu\nabla_\mu\phi-Q_0).
+$$
+
+The multiplier equation fixes the clock, but the shift-symmetric scalar
+equation integrates to `a^3(J_base+Lambda)=I`. On the aligned clock the reduced
+sector has `H=Q0 I`, `rho=Q0 I/a^3`, and zero pressure. The signed integration
+charge makes the unrestricted Hamiltonian unbounded; restricting it positive
+still leaves a dust-like gravitating state that is not predicted by baryons.
+
+The minimal finite regularization
+`Lambda deltaQ-chi Lambda^2/2` integrates out exactly to
+`deltaQ^2/(2 chi)`, or `K2 -> K2+1/(4 chi)`. It therefore restores a soft
+clock susceptibility instead of an exact constraint and provides no new
+escape from the v12A `K2` screen. The analytic identities, dust redshifting,
+and independent finite-difference stationarity check pass. Exact v13A is
+retired without observations. This is total post-v12 material failure `2` and
+the second bounded-Hamiltonian failure; the three-failure reset is not yet
+triggered. See
+[`SIGMA_V13A_CLOCK_CONSTRAINT_FALSIFICATION.md`](SIGMA_V13A_CLOCK_CONSTRAINT_FALSIFICATION.md).
+
 ## Universal variable-exponent result
 
 The curvature-running exponent was promoted from a constant to the bounded

@@ -1,5 +1,11 @@
 # Sigma v12A constraint-solved modal-energy falsification
 
+> **Subsequent result:** the minimal action-level clock constraint does not
+> remove this sector cleanly. It converts it into a freely specifiable signed
+> dust-like charge; a finite regularization only renormalizes `K2`. Exact v13A
+> is also retired before data. See
+> [`SIGMA_V13A_CLOCK_CONSTRAINT_FALSIFICATION.md`](SIGMA_V13A_CLOCK_CONSTRAINT_FALSIFICATION.md).
+
 ## Decision
 
 Exact Sigma v12A is retired before observational data under the project's

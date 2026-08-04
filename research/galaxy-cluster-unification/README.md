@@ -16,6 +16,19 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V13A_CLOCK_CONSTRAINT_FALSIFICATION.md`](docs/SIGMA_V13A_CLOCK_CONSTRAINT_FALSIFICATION.md).
+Exact v13A is retired before data. Its covariant multiplier enforces the AeST
+clock exactly, but shift symmetry leaves a freely specifiable conserved charge
+with `H=Q0 I`, `rho=Q0 I/a^3`, and zero pressure. Unrestricted signed charge
+makes the reduced Hamiltonian unbounded; nonnegative charge still supplies an
+invisible dust-like state not fixed by baryons. Giving the multiplier finite
+quadratic curvature integrates it out exactly into
+`K2 -> K2+1/(4 chi)`, restoring the already-failed soft clock sector rather
+than adding a constraint. This is total post-v12 material failure `2` and
+bounded-Hamiltonian failure `2/3`; no mechanism reset or observational access
+occurs.
+
+The preceding theory-only result is
 [`docs/SIGMA_V12A_REDUCED_ENERGY_FALSIFICATION.md`](docs/SIGMA_V12A_REDUCED_ENERGY_FALSIFICATION.md).
 Exact v12A is retired before data under the strict bounded-energy gate. Its
 finite descriptor modes solve the quadratic constraints, and canonical modal

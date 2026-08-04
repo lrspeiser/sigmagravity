@@ -1,0 +1,20 @@
+{
+  "protocol_status": "Theory-only exact clock-constraint structural audit fixed before execution. No astronomical data or holdouts are opened.",
+  "candidate": {
+    "name": "Sigma v13A exact clock-current constraint",
+    "action_term": "sqrt(-g) Lambda (U^mu nabla_mu phi-Q0)",
+    "purpose": "Remove the inherited AeST zero/Jeans clock sector with an action-level constraint rather than coefficient tuning."
+  },
+  "fixed_values": {
+    "q0": 1.0,
+    "k2": 4.0,
+    "scale_factors": [0.5, 1.0, 2.0, 10.0],
+    "signed_comoving_charges": [-100.0, -1.0, 0.0, 1.0, 100.0],
+    "positive_source_uniqueness_charges": [0.0, 1.0, 2.0],
+    "auxiliary_curvatures": [0.01, 0.1, 1.0, 10.0, 100.0],
+    "regularization_delta_q": 0.37,
+    "verification_tolerance": 1e-8
+  },
+  "data_policy": "Do not access galaxy, cluster, Solar-System, or holdout observations during this action-level constraint audit.",
+  "decision_rule": "Reject the exact multiplier lane if it leaves a freely specifiable dust-like conserved charge or an unrestricted negative Hamiltonian branch. A finite auxiliary curvature is not a rescue if integrating out the auxiliary only renormalizes K2 and restores the previously failed soft clock sector."
+}
