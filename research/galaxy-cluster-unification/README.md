@@ -1427,18 +1427,28 @@ python scripts/run_member_full_tidal_metric.py
 
 ## Complete formula scorecard
 
-The consolidated audit now contains 124 scientifically distinct formula/test
+The consolidated audit now contains 128 scientifically distinct formula/test
 rows. It reports every available original error and a descriptive normalized
 proximity percentage while keeping observational galaxy dynamics, GR/NFW-
 derived lensing accelerations, and raw image-coordinate lensing in separate
 columns. See [`docs/FORMULA_SCORECARD.md`](docs/FORMULA_SCORECARD.md), with
 machine-readable outputs in `results/formula_scorecard/`.
 
+The expanded [`docs/FORMULA_AND_PRIOR_ART_REGISTRY.md`](docs/FORMULA_AND_PRIOR_ART_REGISTRY.md)
+adds primary-source published formula families, explicit overlap/novelty notes,
+convenience-switch and per-object-fit flags, and the later Sigma v1--v17
+action/gate formula inventory. Its central rule is that a final candidate must
+come from one action or equation: a smooth regime transition is admissible only
+when one invariant produces it without an object label, retuning, or a separate
+lensing law.
+
 Rebuild and verify it with:
 
 ```powershell
 python scripts/build_formula_scorecard.py
+python scripts/build_formula_prior_art_registry.py
 python -m pytest tests/test_formula_scorecard.py -q
+python -m pytest tests/test_formula_prior_art_registry.py -q
 ```
 
 ## One-parameter multi-cluster raw-lensing result

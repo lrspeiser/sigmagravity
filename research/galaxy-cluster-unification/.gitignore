@@ -8,6 +8,8 @@ build/
 dist/
 results/*
 !results/.gitkeep
+!results/formula_prior_art_registry/
+!results/formula_prior_art_registry/**
 !results/cf4_theory_test/
 !results/cf4_theory_test/full_fit_comparison.csv
 !results/cf4_theory_test/theory_test_report.json

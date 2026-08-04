@@ -1,0 +1,132 @@
+{
+  "registry_version": "PROJECT-FORMULA-ADDENDA-1.0.0",
+  "purpose": "Canonical action or diagnostic equations documented in theory result files but not serialized as formula-valued fields in their corresponding Sigma protocol JSON. These entries close the post-scorecard action-cycle inventory without treating every algebraic intermediate or numerical gate as a distinct gravity law.",
+  "entries": [
+    {
+      "id": "SIGMA-V9A-BOUNDED-ALIGNMENT",
+      "config": "configs/sigma_v9a_bounded_alignment_gate.json",
+      "name": "Bounded scalar-aether alignment interaction",
+      "formula": "Delta L_9A = -4 eta_Sigma a_Sigma^2 N/(a_Sigma^2+Y)^2, with N=YZ-U^2, Y=S_mu S^mu, Z=J_mu J^mu, U=S_mu J^mu",
+      "kind": "action term",
+      "evidence_doc": "docs/SIGMA_V9A_BOUNDED_ALIGNMENT_FALSIFICATION.md",
+      "status": "tested and falsified by the bounded-alignment gate"
+    },
+    {
+      "id": "SIGMA-V9A-SYMMETRIC-BOUND",
+      "config": "configs/sigma_v9a_bounded_alignment_gate.json",
+      "name": "Symmetrically bounded scalar-aether alignment interaction",
+      "formula": "Delta L_9A,s = -4 eta_Sigma a_Sigma^4 N/[(a_Sigma^2+Y)^2(a_Sigma^2+Z)]",
+      "kind": "action term variant",
+      "evidence_doc": "docs/SIGMA_V9A_BOUNDED_ALIGNMENT_FALSIFICATION.md",
+      "status": "tested and falsified by the bounded-alignment gate"
+    },
+    {
+      "id": "SIGMA-V9B-FIRST-GRADIENT-CLOSURE",
+      "config": "configs/sigma_v9b_local_state_closure.json",
+      "name": "Local first-gradient scalar-aether closure",
+      "formula": "Delta L=F(Y,Z,U) implies P_a(J,S)=c_a G M_b(<r)/r^2 and therefore g_phys/g_bar=E(g_bar) in spherical symmetry",
+      "kind": "action-class no-go relation",
+      "evidence_doc": "docs/SIGMA_V9B_LOCAL_FIRST_GRADIENT_CLOSURE.md",
+      "status": "class closed as unable to distinguish systems at the same local baryonic acceleration"
+    },
+    {
+      "id": "SIGMA-V11A-ANISOTROPIC-SCALAR-MEMORY",
+      "config": "configs/sigma_v11a_anisotropic_scalar_memory_selection.json",
+      "name": "Anisotropic scalar memory carrier",
+      "formula": "Delta L_11A=(A.nabla chi)^2/2-C^mn nabla_m chi nabla_n chi/2-chi^2/(2L_chi^2)+beta D_m chi J^m; C^mn=s[q^mn-(1-u)S^mS^n/(a_Sigma^2+Y)]",
+      "kind": "action term",
+      "evidence_doc": "docs/SIGMA_V11A_ANISOTROPIC_SCALAR_MEMORY_SELECTION.md",
+      "status": "selected then falsified by the tilted-rank test"
+    },
+    {
+      "id": "SIGMA-V11B-ELASTIC-TRIAD",
+      "config": "configs/sigma_v11b_elastic_triad_selection.json",
+      "name": "Elastic material-coordinate triad",
+      "formula": "Delta L_11B=(M_P^2/L_Sigma^2)[Q_I Q^I/2-s(E_TF:E_TF+b(tr E)^2)/4], with E^IJ=q^mn nabla_m X^I nabla_n X^J-delta^IJ",
+      "kind": "action term",
+      "evidence_doc": "docs/SIGMA_V11B_ELASTIC_TRIAD_SELECTION.md",
+      "status": "selected then falsified by the tilted-rank test"
+    },
+    {
+      "id": "SIGMA-V11C-BIOT-STRETCH",
+      "config": "configs/sigma_v11c_biot_stretch_rank.json",
+      "name": "Finite Biot-stretch elastic carrier",
+      "formula": "L_Sigma=Q_IQ^I/2-s[S_TF:S_TF+b(tr S)^2], with C^IJ=q^mn nabla_m X^I nabla_n X^J, U=sqrt(C), S=U-I",
+      "kind": "action term",
+      "evidence_doc": "docs/SIGMA_V11C_BIOT_STRETCH_FALSIFICATION.md",
+      "status": "tested and falsified by global finite-stretch rank"
+    },
+    {
+      "id": "SIGMA-V12A-SAME-CLOCK-DHOST",
+      "config": "configs/sigma_v12a_same_clock_dhost_selection.json",
+      "name": "Same-clock luminal class-Ia DHOST completion",
+      "formula": "S_12A=S_AeST+integral sqrt(-g)[A3 L3+A4 L4+A5 L5], with A4=-A3-X^2 A3^2/(8F0), A5=X A3^2/(2F0)",
+      "kind": "covariant action",
+      "evidence_doc": "docs/SIGMA_V12A_SAME_CLOCK_DHOST_SELECTION.md",
+      "status": "selected then falsified by reduced-energy and characteristic gates"
+    },
+    {
+      "id": "SIGMA-V13A-CLOCK-CONSTRAINT",
+      "config": "configs/sigma_v13a_clock_constraint.json",
+      "name": "Algebraic scalar-clock constraint",
+      "formula": "Delta S_13A=integral sqrt(-g) Lambda(U^mu nabla_mu phi-Q0)",
+      "kind": "covariant action term",
+      "evidence_doc": "docs/SIGMA_V13A_CLOCK_CONSTRAINT_FALSIFICATION.md",
+      "status": "tested and falsified because an arbitrary dust-like integration constant leaves the Hamiltonian unbounded"
+    },
+    {
+      "id": "SIGMA-V13B-CONVEX-CARRIER",
+      "config": "configs/sigma_v13b_convex_carrier.json",
+      "name": "Globally convex MOND-like Hamiltonian carrier",
+      "formula": "H_13B=(a_Sigma^2/2)F_epsilon(z), z=(Pi^2+|grad sigma|^2)/a_Sigma^2, F_epsilon=epsilon z+(1-epsilon)[z-2 sqrt(z)+2 ln(1+sqrt(z))]",
+      "kind": "Hamiltonian density",
+      "evidence_doc": "docs/SIGMA_V13B_CONVEX_CARRIER_SELECTION.md",
+      "status": "passed convexity selection; required a covariant completion"
+    },
+    {
+      "id": "SIGMA-V13C-KHRONON",
+      "config": "configs/sigma_v13c_khronon_completion.json",
+      "name": "Khronon completion of the convex carrier",
+      "formula": "S_13C=(M_Pl^2/2) integral sqrt(-g)[R+w(L_C-L0)-c_tr Theta^2]+S_m, where L_C=p Theta-H_13B(p,a)",
+      "kind": "covariant action",
+      "evidence_doc": "docs/SIGMA_V13C_KHRONON_COMPLETION_FALSIFICATION.md",
+      "status": "tested and falsified by the exact scalar sound-speed gate"
+    },
+    {
+      "id": "SIGMA-V14-GAUGE-CARRIER",
+      "config": "configs/sigma_v14_gauge_carrier_gate.json",
+      "name": "Scalar-gauge rank-2 tidal carrier",
+      "formula": "delta A_mn=(nabla_m nabla_n+H^2 g_mn)alpha; F_mn|r=2 nabla_[m A_n]r; S_int=integral sqrt(-g) A_mn J^mn",
+      "kind": "gauge carrier and interaction",
+      "evidence_doc": "docs/SIGMA_V14_GAUGE_CARRIER_FALSIFICATION.md",
+      "status": "tested and falsified because generic curved backgrounds break the required scalar gauge invariance"
+    },
+    {
+      "id": "SIGMA-V15-LOCAL-INVARIANT-INFERENCE",
+      "config": "configs/sigma_v15_spent_invariant_inference.json",
+      "name": "Spent local baryonic invariant feature family",
+      "formula": "Delta W=F(Sigma_b, grad Sigma_b, Hessian Sigma_b, Sigma_g Sigma_star, grad Sigma_g tensor grad Sigma_star)",
+      "kind": "inverse diagnostic, not a theory",
+      "evidence_doc": "docs/SIGMA_V15_SPENT_INVARIANT_INFERENCE.md",
+      "status": "tested in symmetric spent-cluster transfer and found insufficient"
+    },
+    {
+      "id": "SIGMA-V16-HARMONIC-BOUNDARY",
+      "config": "configs/sigma_v16_spent_boundary_decomposition.json",
+      "name": "External harmonic boundary modes",
+      "formula": "psi_m proportional to Re(z^m) or Im(z^m), m>=2, with nabla^2 psi_m=0 inside the measured disk",
+      "kind": "oracle boundary diagnostic, not a theory",
+      "evidence_doc": "docs/SIGMA_V16_BOUNDARY_FALSIFICATION_AND_V17_DYNAMICAL_GATE.md",
+      "status": "tested as an oracle and measured-baryon boundary family; static outer baryons failed transfer"
+    },
+    {
+      "id": "SIGMA-V17-RANDOM-STRESS-SOURCE",
+      "config": "configs/sigma_v17_dynamical_stress_data_gate.json",
+      "name": "Landau-frame baryonic random-stress invariant",
+      "formula": "S_mn=h_m^a h_n^b T^b_ab; Theta_b=sqrt(S_mn S^mn)/(rho_b c^2), with q_gas=kappa_gas k_B T_X/(mu m_p c^2)",
+      "kind": "source postulate and inverse diagnostic, not yet an action",
+      "evidence_doc": "docs/SIGMA_V16_BOUNDARY_FALSIFICATION_AND_V17_DYNAMICAL_GATE.md",
+      "status": "current frozen data gate; no theory or novelty claim"
+    }
+  ]
+}
