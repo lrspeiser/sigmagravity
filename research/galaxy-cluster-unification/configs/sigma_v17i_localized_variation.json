@@ -1,0 +1,101 @@
+{
+  "protocol_version": "SIGMA-V17I-LOCALIZED-VARIATION-1.0.1",
+  "status": "frozen before any v17 temperature, thermal map, transfer score, root-scale score, or empirical v17H coupling fit existed",
+  "numerical_audit_amendment": "Version 1.0.1 replaces an ill-conditioned relative error for nearly orthogonal directional derivatives with the preregistered tolerance applied to the corresponding chain-rule norm. The first 1.0.0 run had absolute discrepancies at most 1.22e-11 but reported a 0.001 relative error when the true derivative was 1.16e-8. No equation, physical constant, sample, or tolerance changed.",
+  "purpose": "Localize and vary the v17H derivative-dependent aether susceptibility exactly enough to identify every field equation, reciprocal matter source, stress tensor, derivative order, and off-shell diffeomorphism identity before any observational use.",
+  "parent": {
+    "protocol": "configs/sigma_v17h_susceptibility_screened_pressure.json",
+    "sha256": "7aef260e6d974f9204c81d9943a92301c01daacb25fe84d8a6f7f4f9b9f4ab83"
+  },
+  "authorization": {
+    "observational_data_opened": false,
+    "empirical_fit_authorized": false,
+    "holdout_authorized": false,
+    "allowed_outcome": "advance to the full Dirac/principal-symbol calculation only"
+  },
+  "localized_action": {
+    "action_class": "Localized TeVeS-like scalar metric slip with a generalized Einstein-aether susceptibility and one disformal physical metric",
+    "action_under_test": "S_loc=integral sqrt(-g){M_Pl^2 R/2-M_Pl^2[(grad X)^2+L_sigma^-2 X^2]/2-M_Pl^2 c_U F_U^2/4-M_Pl^2(a_sigma^2/c^4)F_A(Z)+lambda(U^2+1)+B^m[A_m-U^n nabla_n U_m]}+S_m[g_tilde,psi]",
+    "mechanism": "A_m is an independent covector, B^m is a multiplier, Z=c^4 A_m A^m/a_sigma^2, F_A=sqrt(1+Z)-1, chi=(1+Z)^(-1/4), and q=alpha chi X.",
+    "matter_action": "g_tilde_mn=exp(2q)[g_mn+2q U_m U_n]; the B equation restores A_m=U^n nabla_n U_m exactly.",
+    "classical_equivalence": "Eliminating B imposes the defining aether acceleration; substituting that constraint reproduces v17H without adding a free initial condition or a source-free halo profile."
+  },
+  "matter_variation_definitions": {
+    "covariant_diagnostic": "At q=0 for a comoving perfect fluid, J=T+E=3p, while cold dust gives J=0.",
+    "densitized_physical_stress": "H^mn=[sqrt(-g_tilde)/sqrt(-g)] T_tilde^mn",
+    "metric_q_derivative": "D_mn=partial_q g_tilde_mn=2 exp(2q)[g_mn+(2q+1)U_m U_n]",
+    "reciprocal_scalar": "J=(1/2)H^mn D_mn",
+    "pressure_limit": "At q=0 with a perfect fluid comoving with U, J=T+E=3p; for cold dust J=0.",
+    "scalar_source": "Q_X=alpha chi J",
+    "acceleration_source": "Q_A^m=2 alpha X chi_Z J A^m c^4/a_sigma^2",
+    "aether_source": "Q_U^m=2q exp(2q)H^mn U_n",
+    "einstein_frame_matter_stress": "T_matter^mn=exp(2q)H^mn-2 alpha X chi_Z J A^m A^n c^4/a_sigma^2"
+  },
+  "euler_lagrange_equations": {
+    "scalar": "M_Pl^2(Box-L_sigma^-2)X+alpha chi J=0",
+    "acceleration_auxiliary": "B^m-2M_Pl^2 F_A,Z A^m+Q_A^m=0",
+    "acceleration_constraint": "A_m-U^n nabla_n U_m=0",
+    "unit_constraint": "U_m U^m=-1",
+    "aether": "M_Pl^2 c_U nabla_n F_U^nm+nabla_n(B^m U^n)-B^r nabla^m U_r+2lambda U^m+Q_U^m=0",
+    "metric": "M_Pl^2 G^mn=T_X^mn+T_F^mn+T_A^mn+T_lambda^mn+T_B^mn+T_matter^mn",
+    "multiplier_stress": "T_B^mn=g^mn L_B+2B^r U^(m nabla^n)U_r-nabla_r(B^r U^m U^n)",
+    "matter": "delta S_m/delta psi=0, equivalent to physical-metric matter equations and physical covariant conservation."
+  },
+  "off_shell_identity": {
+    "formula": "-nabla_m E_g^m_n+E_X nabla_n X+E_lambda nabla_n lambda+E_U^m nabla_n U_m-nabla_m(E_U^m U_n)+E_A^m nabla_n A_m-nabla_m(E_A^m A_n)+E_B,m nabla_n B^m+nabla_r(E_B,n B^r)+E_psi Lie_n psi=0",
+    "consequence": "On the X,U,A,B,lambda and matter equations, the metric Euler tensor is covariantly conserved. Matter alone is conserved with the one physical metric; Einstein-frame matter exchanges stress with X and U.",
+    "scope": "The identity follows from the manifestly covariant localized action. The full constraint rank and characteristic cone are separate gates."
+  },
+  "stress_tensors": {
+    "scalar": "T_X^mn=M_Pl^2[nabla^m X nabla^n X-g^mn((nabla X)^2+L_sigma^-2 X^2)/2]",
+    "maxwell_aether": "T_F^mn=M_Pl^2 c_U[F^m_r F^nr-g^mn F_rs F^rs/4]",
+    "born_infeld_acceleration": "T_A^mn=2M_Pl^2 F_A,Z A^m A^n-M_Pl^2(a_sigma^2/c^4)F_A g^mn",
+    "unit_multiplier": "T_lambda^mn=-2lambda U^m U^n on U^2=-1",
+    "constraint_multiplier": "T_B^mn=g^mn L_B+2B^r U^(m nabla^n)U_r-nabla_r(B^r U^m U^n)",
+    "matter": "T_matter^mn=exp(2q)H^mn-2 alpha X chi_Z J A^m A^n c^4/a_sigma^2"
+  },
+  "executable_variation_audit": {
+    "random_seed": 17009,
+    "samples": 256,
+    "finite_difference_stencil": "centered five point",
+    "finite_difference_steps": {
+      "g_mn": 0.01,
+      "U_m": 0.01,
+      "A_m": 0.01,
+      "X": 0.001
+    },
+    "error_normalization": "max(abs(numerical),abs(analytic),chain-rule derivative norm,1e-12)",
+    "dimensionless_a_sigma": 1.0,
+    "maximum_normalized_directional_derivative_error": 2e-6,
+    "perfect_fluid_source_tolerance": 1e-12,
+    "derivatives_checked": ["X", "A_m", "U_m", "g_mn"]
+  },
+  "derivative_order_claim": {
+    "metric": 2,
+    "scalar_X": 2,
+    "aether_U": 2,
+    "acceleration_A": 0,
+    "multiplier_B": 1,
+    "unit_multiplier_lambda": 0,
+    "qualification": "This is the Euler differential order of the localized classical system, not a proof that its constrained Hamiltonian has the desired number or sign of propagating modes."
+  },
+  "gates": {
+    "maximum_normalized_variation_error": 2e-6,
+    "maximum_perfect_fluid_source_error": 1e-12,
+    "maximum_gravitational_field_equation_order": 2,
+    "one_physical_metric": true,
+    "object_specific_parameters": 0,
+    "lensing_only_multiplier": false
+  },
+  "decision_rule": [
+    "Advance only if the localized equations reproduce the v17H action, every tested matter variation matches finite differences, J=3p exactly, and no localized Euler equation exceeds second differential order.",
+    "A pass establishes a reciprocal covariant equation set and stress accounting, not Hamiltonian health, causal propagation, PPN safety, or empirical success.",
+    "The next gate must compute the full tilted kinetic/constraint matrix including A and B. If rank changes or an unbounded mode appears, retire v17H rather than modifying chi after data.",
+    "No lensing target may be opened by this theory-only protocol."
+  ],
+  "complexity": {
+    "propagating_fields_added_by_localization": 0,
+    "new_physical_constants_added_by_localization": 0,
+    "multipliers_are_not_fit_parameters": true
+  }
+}

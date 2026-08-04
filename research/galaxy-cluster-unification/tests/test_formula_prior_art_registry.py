@@ -175,3 +175,20 @@ def test_v17h_susceptibility_screen_is_registered_as_aether_disformal_prior_art(
     assert {"TEVES", "DISFORMAL-METRIC", "EINSTEIN-AETHER"}.issubset(
         set(v17h["published_overlap_ids"])
     )
+
+
+def test_v17i_localization_preserves_the_same_prior_art_ancestry() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17i = protocols["sigma_v17i_localized_variation.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17i["formula_fragments"]
+    )
+
+    assert "B^m[A_m-U^n nabla_n U_m]" in fragment_text
+    assert "J=T+E=3p" in fragment_text
+    assert {"TEVES", "DISFORMAL-METRIC", "EINSTEIN-AETHER"}.issubset(
+        set(v17i["published_overlap_ids"])
+    )

@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 91,
+    "sigma_protocols": 92,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 72,
+    "sigma_formula_fragments": 78,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -5894,6 +5894,67 @@
         "TEVES"
       ],
       "sha256": "7aef260e6d974f9204c81d9943a92301c01daacb25fe84d8a6f7f4f9b9f4ab83"
+    },
+    {
+      "config": "configs/sigma_v17i_localized_variation.json",
+      "protocol_version": "SIGMA-V17I-LOCALIZED-VARIATION-1.0.1",
+      "status": "frozen before any v17 temperature, thermal map, transfer score, root-scale score, or empirical v17H coupling fit existed",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "localized_action.action_class",
+          "formula": "Localized TeVeS-like scalar metric slip with a generalized Einstein-aether susceptibility and one disformal physical metric",
+          "published_overlap_ids": [
+            "DISFORMAL-METRIC",
+            "EINSTEIN-AETHER",
+            "AEST-MOND",
+            "TEVES"
+          ]
+        },
+        {
+          "json_path": "localized_action.action_under_test",
+          "formula": "S_loc=integral sqrt(-g){M_Pl^2 R/2-M_Pl^2[(grad X)^2+L_sigma^-2 X^2]/2-M_Pl^2 c_U F_U^2/4-M_Pl^2(a_sigma^2/c^4)F_A(Z)+lambda(U^2+1)+B^m[A_m-U^n nabla_n U_m]}+S_m[g_tilde,psi]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "localized_action.mechanism",
+          "formula": "A_m is an independent covector, B^m is a multiplier, Z=c^4 A_m A^m/a_sigma^2, F_A=sqrt(1+Z)-1, chi=(1+Z)^(-1/4), and q=alpha chi X.",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "localized_action.matter_action",
+          "formula": "g_tilde_mn=exp(2q)[g_mn+2q U_m U_n]; the B equation restores A_m=U^n nabla_n U_m exactly.",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "matter_variation_definitions.covariant_diagnostic",
+          "formula": "At q=0 for a comoving perfect fluid, J=T+E=3p, while cold dust gives J=0.",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "off_shell_identity.formula",
+          "formula": "-nabla_m E_g^m_n+E_X nabla_n X+E_lambda nabla_n lambda+E_U^m nabla_n U_m-nabla_m(E_U^m U_n)+E_A^m nabla_n A_m-nabla_m(E_A^m A_n)+E_B,m nabla_n B^m+nabla_r(E_B,n B^r)+E_psi Lie_n psi=0",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 6,
+      "published_overlap_ids": [
+        "DISFORMAL-METRIC",
+        "EINSTEIN-AETHER",
+        "AEST-MOND",
+        "TEVES"
+      ],
+      "sha256": "832e3cebb94c74f553cf2bc89fd99e7d5120d7b510146767d2063009d2b3a1aa"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

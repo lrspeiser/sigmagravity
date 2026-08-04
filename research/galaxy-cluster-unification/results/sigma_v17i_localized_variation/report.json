@@ -1,0 +1,98 @@
+{
+  "decision": {
+    "outcome": "advance_to_Dirac_and_principal_symbol_only",
+    "scope": "This establishes the reciprocal localized Euler system and its stress bookkeeping. It does not establish the constrained degree-of-freedom count, energy sign, causal cones, PPN limit, or data transfer."
+  },
+  "empirical_fit_performed": false,
+  "gates": {
+    "cold_dust_source_cancels": true,
+    "full_Hamiltonian_health_pass": false,
+    "full_causality_pass": false,
+    "holdout_authorized": false,
+    "localized_derivative_order_pass": true,
+    "localized_variation_pass": true,
+    "matter_variation_finite_difference_pass": true,
+    "perfect_fluid_pressure_source_pass": true
+  },
+  "generated_utc": "2026-08-04T22:19:29.017947+00:00",
+  "localized_equation_system": {
+    "classically_equivalent_to_v17H": true,
+    "full_Dirac_constraint_matrix_computed": false,
+    "full_characteristic_matrix_computed": false,
+    "maximum_Euler_differential_order": 2,
+    "new_physical_constants": 0,
+    "new_propagating_fields_claimed": 0,
+    "off_shell_diffeomorphism_identity_derived": true,
+    "stress_tensors_explicitly_identified": true
+  },
+  "observational_data_opened": false,
+  "perfect_fluid_source": {
+    "dust_value": 0.0,
+    "identity": "J=T+E=3p",
+    "maximum_absolute_error": 0.0,
+    "rows": [
+      {
+        "J": 0.0,
+        "absolute_error": 0.0,
+        "energy_density": 100.0,
+        "expected_3p": 0.0,
+        "pressure": 0.0
+      },
+      {
+        "J": 3.0000000000000004e-08,
+        "absolute_error": 0.0,
+        "energy_density": 100.00000001,
+        "expected_3p": 3.0000000000000004e-08,
+        "pressure": 1e-08
+      },
+      {
+        "J": 0.75,
+        "absolute_error": 0.0,
+        "energy_density": 100.25,
+        "expected_3p": 0.75,
+        "pressure": 0.25
+      },
+      {
+        "J": 9.0,
+        "absolute_error": 0.0,
+        "energy_density": 103.0,
+        "expected_3p": 9.0,
+        "pressure": 3.0
+      },
+      {
+        "J": 60.0,
+        "absolute_error": 0.0,
+        "energy_density": 120.0,
+        "expected_3p": 60.0,
+        "pressure": 20.0
+      }
+    ]
+  },
+  "protocol": "configs/sigma_v17i_localized_variation.json",
+  "protocol_sha256": "832e3cebb94c74f553cf2bc89fd99e7d5120d7b510146767d2063009d2b3a1aa",
+  "report_version": "SIGMA-V17I-LOCALIZED-VARIATION-1.0.1",
+  "status": "passed_localized_variation",
+  "variation_finite_difference": {
+    "fields": {
+      "A": {
+        "maximum_normalized_error": 7.06894872259623e-07,
+        "median_normalized_error": 9.293175002323382e-10
+      },
+      "U": {
+        "maximum_normalized_error": 1.6014436900301116e-08,
+        "median_normalized_error": 4.376949440001098e-11
+      },
+      "X": {
+        "maximum_normalized_error": 1.2107486324346829e-08,
+        "median_normalized_error": 1.0173501778255302e-12
+      },
+      "metric": {
+        "maximum_normalized_error": 3.2193692053390665e-13,
+        "median_normalized_error": 1.0173107705563433e-14
+      }
+    },
+    "maximum_normalized_error": 7.06894872259623e-07,
+    "samples": 256,
+    "seed": 17009
+  }
+}
