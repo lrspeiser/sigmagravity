@@ -1,0 +1,125 @@
+{
+  "protocol_id": "sigma-v3d-triaxial-memory-action-audit-v1",
+  "frozen_utc": "2026-08-03T00:00:00Z",
+  "evidence_status": "spent-theory-and-synthetic-only",
+  "hypothesis": {
+    "response_equation": "(1-L_sigma^2 Box_ret) M_ab = S(g/a_sigma) E_ab/E_star",
+    "screen": "S(x)=1/(1+x^4)",
+    "curvature_scale": "E_star=a_sigma/L_sigma",
+    "invariants": {
+      "I2": "Tr(M^2)",
+      "I3": "Tr(M^3)",
+      "discriminant": "D=I2^3-6 I3^2",
+      "bounded_potential": "V=D/(1+I2)^3"
+    },
+    "action_envelope": "Gamma=Gamma_Sigma1+(M_Pl^2/2) integral sqrt(-g) lambda_sigma E_star V(M)",
+    "universal_constants_if_completed": [
+      "a_sigma",
+      "L_sigma",
+      "lambda_sigma"
+    ],
+    "object_specific_gravity_constants": 0,
+    "object_labels": 0,
+    "lensing_only_constants": 0
+  },
+  "claim_boundary": {
+    "established": [
+      "trace-free three-by-three eigenvalue discriminant",
+      "Weyl/Petrov speciality invariants",
+      "Helmholtz-type nonlocal memory operators"
+    ],
+    "project_test": "whether a bounded screened discriminant of baryon-forced tidal memory supplies a universal compact-versus-distributed structural discriminator",
+    "not_claimed": [
+      "a complete causal action",
+      "a positive nonlinear principal kinetic matrix",
+      "an empirical galaxy or cluster fit",
+      "originality of the discriminant"
+    ]
+  },
+  "dimensionless_fixture": {
+    "G": 1.0,
+    "a_sigma": 1.0,
+    "L_sigma": 1.0,
+    "primary_grid_points": 65,
+    "resolution_grid_points": 81,
+    "box_half_width_L_sigma": 3.0,
+    "analysis_half_width_L_sigma": 2.0,
+    "mass_normalizations": [0.3, 1.0, 3.0],
+    "galaxy_components": [
+      {
+        "mass_fraction": 0.3,
+        "center_L_sigma": [0.0, 0.0, 0.0],
+        "sigma_L_sigma": [0.12, 0.12, 0.12]
+      },
+      {
+        "mass_fraction": 0.7,
+        "center_L_sigma": [0.0, 0.0, 0.0],
+        "sigma_L_sigma": [0.22, 0.22, 0.1]
+      }
+    ],
+    "cluster_components": [
+      {
+        "mass_fraction": 0.2,
+        "center_L_sigma": [0.0, 0.0, 0.0],
+        "sigma_L_sigma": [0.3, 0.3, 0.3]
+      },
+      {
+        "mass_fraction": 0.16,
+        "center_L_sigma": [-0.75, -0.2, 0.1],
+        "sigma_L_sigma": [0.18, 0.18, 0.18]
+      },
+      {
+        "mass_fraction": 0.14,
+        "center_L_sigma": [0.65, 0.15, -0.1],
+        "sigma_L_sigma": [0.18, 0.18, 0.18]
+      },
+      {
+        "mass_fraction": 0.12,
+        "center_L_sigma": [0.1, 0.72, 0.15],
+        "sigma_L_sigma": [0.16, 0.16, 0.16]
+      },
+      {
+        "mass_fraction": 0.1,
+        "center_L_sigma": [-0.2, -0.65, -0.2],
+        "sigma_L_sigma": [0.16, 0.16, 0.16]
+      },
+      {
+        "mass_fraction": 0.08,
+        "center_L_sigma": [0.55, -0.55, 0.25],
+        "sigma_L_sigma": [0.14, 0.14, 0.14]
+      },
+      {
+        "mass_fraction": 0.08,
+        "center_L_sigma": [-0.6, 0.55, -0.25],
+        "sigma_L_sigma": [0.14, 0.14, 0.14]
+      },
+      {
+        "mass_fraction": 0.06,
+        "center_L_sigma": [0.95, 0.45, 0.0],
+        "sigma_L_sigma": [0.14, 0.14, 0.14]
+      },
+      {
+        "mass_fraction": 0.06,
+        "center_L_sigma": [-0.95, -0.4, 0.0],
+        "sigma_L_sigma": [0.14, 0.14, 0.14]
+      }
+    ]
+  },
+  "preregistered_gates": {
+    "maximum_trace_residual": 1e-10,
+    "maximum_rotation_invariance_relative_error": 1e-10,
+    "maximum_directional_gradient_relative_error": 2e-6,
+    "minimum_random_discriminant": -1e-12,
+    "maximum_axisymmetric_absolute_potential": 1e-12,
+    "minimum_overlap_potential": 1e-4,
+    "maximum_screen_at_g_over_a_sigma_1e5": 1e-18,
+    "minimum_primary_median_cluster_to_galaxy_response_ratio": 10.0,
+    "minimum_each_mass_cluster_to_galaxy_response_ratio": 2.0,
+    "maximum_resolution_fractional_change_in_primary_ratio": 0.2
+  },
+  "decision_rule": {
+    "advance": "all preregistered gates pass; then derive a causal closed-time-path or healthy local constrained completion before empirical fitting",
+    "retire": "any algebraic, screening, morphology-separation, or resolution gate fails",
+    "raw_holdout_failure_count_if_retired": 0
+  }
+}
