@@ -1,0 +1,81 @@
+{
+  "analytic_identity": {
+    "F_A": "sqrt(1+Z)-1",
+    "chi": "(1+Z)^(-1/4)",
+    "chi_squared": "2 dF_A/dZ=1/sqrt(1+Z)",
+    "response_at_g_over_a_sigma_0p1": 0.9950371902099893,
+    "response_at_g_over_a_sigma_1e5": 9.9999999995e-06,
+    "susceptibility_at_zero": 1.0
+  },
+  "cluster_theory_envelope": [
+    {
+      "g_over_a_sigma": 0.0,
+      "homogeneous_source_times_metric_response": 1.0,
+      "minimum_alpha_for_unit_extra_Weyl": 105.93616037065179
+    },
+    {
+      "g_over_a_sigma": 0.01,
+      "homogeneous_source_times_metric_response": 0.9999500037496877,
+      "minimum_alpha_for_unit_extra_Weyl": 105.9388086753517
+    },
+    {
+      "g_over_a_sigma": 0.1,
+      "homogeneous_source_times_metric_response": 0.9950371902099893,
+      "minimum_alpha_for_unit_extra_Weyl": 106.20001337392557
+    },
+    {
+      "g_over_a_sigma": 1.0,
+      "homogeneous_source_times_metric_response": 0.7071067811865475,
+      "minimum_alpha_for_unit_extra_Weyl": 125.98003564884841
+    },
+    {
+      "g_over_a_sigma": 10.0,
+      "homogeneous_source_times_metric_response": 0.09950371902099892,
+      "minimum_alpha_for_unit_extra_Weyl": 335.833929801948
+    }
+  ],
+  "decision": {
+    "empirical_requirement": "Derive Z from a target-blind three-dimensional baryonic/aether solution before applying the pressure source to any cluster lensing target.",
+    "outcome": "advance_to_exact_variation_only",
+    "scope": "The fixed susceptibility removes the v17G amplitude obstruction in a leading Solar control and keeps a positive reduced aether acceleration block. It is not a complete constraint, causality, PPN, or data result."
+  },
+  "empirical_fit_performed": false,
+  "gates": {
+    "analytic_selection_pass": true,
+    "full_PPN_pass": false,
+    "full_covariant_variation_pass": false,
+    "high_acceleration_response_pass": true,
+    "holdout_authorized": false,
+    "low_acceleration_retention_pass": true,
+    "maxwell_floored_block_pass": true,
+    "raw_acceleration_block_positive": true,
+    "solar_path_proxy_pass": true
+  },
+  "generated_utc": "2026-08-04T22:10:09.740177+00:00",
+  "observational_data_opened": false,
+  "protocol": "configs/sigma_v17h_susceptibility_screened_pressure.json",
+  "protocol_sha256": "7aef260e6d974f9204c81d9943a92301c01daacb25fe84d8a6f7f4f9b9f4ab83",
+  "reduced_local_health": {
+    "full_principal_symbol_computed": false,
+    "maxwell_floor_c_U": 1.0,
+    "minimum_raw_radial_eigenvalue": 1e-45,
+    "minimum_raw_tangential_eigenvalue": 1e-15,
+    "minimum_total_radial_eigenvalue": 1.0,
+    "minimum_total_tangential_eigenvalue": 1.000000000000001,
+    "raw_condition_number_at_Z_max": 1.0000000000000002e+30
+  },
+  "report_version": "SIGMA-V17H-SUSCEPTIBILITY-SCREENED-PRESSURE-1.0.0",
+  "solar_uniform_sphere_control": {
+    "effective_gamma_minus_one_upper_bound": 3.0036763268271656e-10,
+    "fraction_of_Cassini_limit": 1.3059462290552894e-05,
+    "is_full_PPN_calculation": false,
+    "largest_cluster_envelope_alpha_tested": 335.833929801948,
+    "maximum_Cassini_safe_alpha_in_this_control": 92931.28098257187,
+    "maximum_path_chi": 0.0014225045089035287,
+    "maximum_path_radius_au": 10.0,
+    "pressure_weighted_source_chi": 8.820414196174122e-07,
+    "surface_g_over_a_sigma": 2285070028662.004,
+    "surface_gravity_m_s2": 274.2084034394405
+  },
+  "status": "passed_conditional_action_selection"
+}

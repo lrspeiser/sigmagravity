@@ -158,3 +158,20 @@ def test_v17g_pressure_metric_is_registered_as_prior_art_completion() -> None:
     assert {"TEVES", "DISFORMAL-METRIC", "GR-EINSTEIN"}.issubset(
         set(v17g["published_overlap_ids"])
     )
+
+
+def test_v17h_susceptibility_screen_is_registered_as_aether_disformal_prior_art() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17h = protocols["sigma_v17h_susceptibility_screened_pressure.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17h["formula_fragments"]
+    )
+
+    assert "F_A(Z)=sqrt(1+Z)-1" in fragment_text
+    assert "chi(Z)" in fragment_text
+    assert {"TEVES", "DISFORMAL-METRIC", "EINSTEIN-AETHER"}.issubset(
+        set(v17h["published_overlap_ids"])
+    )

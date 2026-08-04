@@ -1,0 +1,117 @@
+{
+  "protocol_version": "SIGMA-V17H-SUSCEPTIBILITY-SCREENED-PRESSURE-1.0.0",
+  "status": "frozen before any v17 integrated temperature, regional temperature, thermal source map, v17E transfer result, or v17F root-scale result existed",
+  "purpose": "Theory-only action selection: test whether a fixed susceptibility of the same dynamical aether already used by the reciprocal pressure metric can remove the v17G Solar obstruction without suppressing low-acceleration cluster stress or adding an object label.",
+  "parents": {
+    "pressure_metric_gate": "configs/sigma_v17g_pressure_metric_gate.json",
+    "pressure_metric_gate_sha256": "10dd4d85891e286bdd09f820456014b308e0d6ef5fe094b7cec225a6902b0955",
+    "root_scale_protocol": "configs/sigma_v17f_root_scale_propagator.json",
+    "root_scale_protocol_sha256": "fb734bbb7af35ec657538ec321def83cb34a5ea5171c80b3d230c17456b735fa",
+    "reciprocal_metric_protocol": "configs/nbm0_reciprocal_action_protocol.json",
+    "reciprocal_metric_protocol_sha256": "3f8c15590e1cc8f7d6f7006f0db1ff32039b83856ee1b35a0c86b8b6e3b82c5c"
+  },
+  "authorization": {
+    "observational_data_opened": false,
+    "empirical_coupling_fit_authorized": false,
+    "holdout_authorized": false,
+    "allowed_outcome": "advance to exact covariant variation and characteristic analysis only"
+  },
+  "candidate_action": {
+    "action_class": "TeVeS-like scalar metric slip with a generalized Einstein-aether Born-Infeld susceptibility and one derivative-dependent disformal physical metric",
+    "action_under_test": "S=integral sqrt(-g){M_Pl^2 R/2-M_Pl^2[(grad X)^2+L_sigma^-2 X^2]/2-M_Pl^2 c_U F_U^2/4-M_Pl^2(a_sigma^2/c^4)F_A(Z)+lambda(U^2+1)}+S_m[g_tilde,psi]",
+    "mechanism": "A_m=U^nabla_n U_m, Z=c^4 A_m A^m/a_sigma^2, F_A(Z)=sqrt(1+Z)-1, and chi(Z)=[2 dF_A/dZ]^(1/2)=(1+Z)^(-1/4)",
+    "matter_action": "All matter and photons use g_tilde_mn=exp(2 alpha chi(Z) X)[g_mn+2 alpha chi(Z) X U_m U_n]",
+    "euler_lagrange_source": "At X=0 and alpha=beta, (Box-L_sigma^-2)X=-J_X/M_Pl^2 with J_X=3 alpha chi(Z) p for an isotropic fluid; cold dust cancels continuously rather than by object type.",
+    "one_metric_response": "Psi=U_N, Phi=U_N-c^2 alpha chi(Z)X, and W=U_N-c^2 alpha chi(Z)X/2 at leading weak-field order.",
+    "projected_root_equation": "[1-L_sigma^2 nabla_perp^2]s_sigma is proportional to chi(Z) J_T; delta W is proportional to alpha chi(Z)s_sigma, so source and metric together give the homogeneous response factor chi^2=1/sqrt(1+Z).",
+    "physical_postulate": "The pressure channel follows the normalized susceptibility of the dynamical local gravitational frame: diffuse low-acceleration stress is transmitted, while a frame already undergoing large proper acceleration becomes insensitive to that extra channel.",
+    "claim_boundary": "Generalized Einstein-aether MOND actions, TeVeS disformal metrics, Born-Infeld square-root kinetics, and derivative-dependent matter metrics are prior art. Only the fixed pressure-source/susceptibility combination and its cross-object predictions could be project-specific."
+  },
+  "fixed_theory_choices": {
+    "a_sigma_m_s2": 1.2e-10,
+    "maxwell_aether_coefficient_c_U": 1.0,
+    "susceptibility_exponent": -0.25,
+    "susceptibility_exponent_is_fitted": false,
+    "response_equation": "R(Z)=chi(Z)^2=1/sqrt(1+Z)",
+    "new_scale_beyond_existing_a_sigma": false,
+    "conditional_propagation_length": "Use no L_sigma if v17F selects zero; otherwise use the single common nonzero v17F length without refitting by object."
+  },
+  "cluster_selection_envelope": {
+    "pressure_compactness": 8.910694289218625e-5,
+    "minimum_extra_Weyl_fraction": 1.0,
+    "representative_g_over_a_sigma": [
+      0.0,
+      0.01,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "interpretation": "These are theory-only response coordinates, not measured cluster accelerations and not a fit. A target-blind three-dimensional baryonic/aether acceleration map is required before an empirical run."
+  },
+  "solar_control": {
+    "mass_kg": 1.98847e30,
+    "radius_m": 695700000.0,
+    "conservative_pressure_compactness": 1.061283377198102e-6,
+    "pressure_shape": "uniform-density hydrostatic sphere p(r) proportional to 1-(r/R)^2, normalized to the conservative v17G compactness",
+    "maximum_radio_path_radius_au": 10.0,
+    "cassini_absolute_gamma_minus_one_max": 2.3e-5,
+    "calculation": "Pressure source charge is weighted by chi[g(r)/a_sigma] through the stellar volume; the exterior metric response is conservatively bounded by its largest chi along 0 to 10 AU."
+  },
+  "local_health_scan": {
+    "Z_minimum_positive": 1e-20,
+    "Z_maximum": 1e30,
+    "Z_samples": 2001,
+    "effective_aether_density": "F_A(Z)=sqrt(1+Z)-1",
+    "normalized_tangential_acceleration_Hessian": "lambda_perp=1/sqrt(1+Z)",
+    "normalized_radial_acceleration_Hessian": "lambda_parallel=1/(1+Z)^(3/2)",
+    "maxwell_floor_rule": "The total reduced acceleration block adds c_U=1 to both eigenvalues.",
+    "scope": "This is a reduced local acceleration-block check, not the full metric-aether-scalar-matter principal symbol or Hamiltonian."
+  },
+  "gates": {
+    "maximum_response_at_g_over_a_sigma_1e5": 1e-5,
+    "minimum_response_at_g_over_a_sigma_0p1": 0.99,
+    "maximum_solar_gamma_minus_one": 2.3e-5,
+    "minimum_raw_acceleration_Hessian_eigenvalue": 0.0,
+    "minimum_total_acceleration_Hessian_eigenvalue": 0.999999999,
+    "one_metric": true,
+    "object_specific_parameters": 0,
+    "lensing_only_multiplier": false
+  },
+  "mandatory_next_gates": [
+    "Vary the derivative-dependent matter metric exactly with respect to g_mn, U_m, and X and verify the off-shell diffeomorphism identity.",
+    "Compute the full constrained kinetic and gradient matrices on tilted, time-dependent backgrounds; the reduced positive acceleration block is insufficient.",
+    "Derive PPN gamma, beta, alpha_1, and alpha_2 and the Mercury residual from the full screened solution, not only the leading Shapiro proxy.",
+    "Prove tensor and photon characteristic cones agree to 1e-15 on relevant backgrounds and that all other modes are causal.",
+    "Build Z from a target-blind three-dimensional baryonic/aether solve; a projected lensing target may never define the screen.",
+    "If v17E/F source transfer passes, freeze alpha and any selected L_sigma on development clusters before opening at least two untouched clusters."
+  ],
+  "decision_rule": [
+    "Advance only to exact action variation if every analytic selection gate passes.",
+    "Do not claim a Solar-System pass, a cluster fit, or a complete theory from this selection audit.",
+    "If the full principal symbol changes rank, develops a ghost, or crosses the physical light cone, retire this susceptibility metric rather than changing its exponent.",
+    "If a target-blind Z map cannot be built from observed baryons and dynamical fields, the screen is not empirically defined and must be retired.",
+    "The formula has no galaxy/cluster branch: p and Z are local covariant fields that are present in every system."
+  ],
+  "prior_art_primary_sources": [
+    "https://arxiv.org/abs/astro-ph/0403694",
+    "https://arxiv.org/abs/astro-ph/0607411",
+    "https://arxiv.org/abs/gr-qc/0606039",
+    "https://arxiv.org/abs/1308.4685",
+    "https://arxiv.org/abs/0801.1547"
+  ],
+  "physical_constants": {
+    "speed_of_light_m_s": 299792458.0,
+    "gravitational_constant_m3_kg_s2": 6.6743e-11,
+    "metres_per_au": 149597870700.0
+  },
+  "complexity": {
+    "candidate_constants": [
+      "a_sigma shared with the galaxy sector",
+      "alpha",
+      "c_U",
+      "L_sigma only if selected by v17F"
+    ],
+    "maximum_candidate_constants": 4,
+    "per_object_gravity_constants": 0
+  }
+}

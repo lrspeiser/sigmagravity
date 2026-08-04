@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 90,
+    "sigma_protocols": 91,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 65,
+    "sigma_formula_fragments": 72,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -5826,6 +5826,74 @@
         "EMSG"
       ],
       "sha256": "10dd4d85891e286bdd09f820456014b308e0d6ef5fe094b7cec225a6902b0955"
+    },
+    {
+      "config": "configs/sigma_v17h_susceptibility_screened_pressure.json",
+      "protocol_version": "SIGMA-V17H-SUSCEPTIBILITY-SCREENED-PRESSURE-1.0.0",
+      "status": "frozen before any v17 integrated temperature, regional temperature, thermal source map, v17E transfer result, or v17F root-scale result existed",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "candidate_action.action_class",
+          "formula": "TeVeS-like scalar metric slip with a generalized Einstein-aether Born-Infeld susceptibility and one derivative-dependent disformal physical metric",
+          "published_overlap_ids": [
+            "DISFORMAL-METRIC",
+            "EINSTEIN-AETHER",
+            "AEST-MOND",
+            "TEVES"
+          ]
+        },
+        {
+          "json_path": "candidate_action.action_under_test",
+          "formula": "S=integral sqrt(-g){M_Pl^2 R/2-M_Pl^2[(grad X)^2+L_sigma^-2 X^2]/2-M_Pl^2 c_U F_U^2/4-M_Pl^2(a_sigma^2/c^4)F_A(Z)+lambda(U^2+1)}+S_m[g_tilde,psi]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "candidate_action.mechanism",
+          "formula": "A_m=U^nabla_n U_m, Z=c^4 A_m A^m/a_sigma^2, F_A(Z)=sqrt(1+Z)-1, and chi(Z)=[2 dF_A/dZ]^(1/2)=(1+Z)^(-1/4)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "candidate_action.matter_action",
+          "formula": "All matter and photons use g_tilde_mn=exp(2 alpha chi(Z) X)[g_mn+2 alpha chi(Z) X U_m U_n]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "candidate_action.euler_lagrange_source",
+          "formula": "At X=0 and alpha=beta, (Box-L_sigma^-2)X=-J_X/M_Pl^2 with J_X=3 alpha chi(Z) p for an isotropic fluid; cold dust cancels continuously rather than by object type.",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "candidate_action.one_metric_response",
+          "formula": "Psi=U_N, Phi=U_N-c^2 alpha chi(Z)X, and W=U_N-c^2 alpha chi(Z)X/2 at leading weak-field order.",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "fixed_theory_choices.response_equation",
+          "formula": "R(Z)=chi(Z)^2=1/sqrt(1+Z)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 7,
+      "published_overlap_ids": [
+        "DISFORMAL-METRIC",
+        "EINSTEIN-AETHER",
+        "AEST-MOND",
+        "TEVES"
+      ],
+      "sha256": "7aef260e6d974f9204c81d9943a92301c01daacb25fe84d8a6f7f4f9b9f4ab83"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",
