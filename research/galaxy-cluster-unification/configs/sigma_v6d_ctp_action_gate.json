@@ -1,0 +1,39 @@
+{
+  "protocol_version": "Sigma-v6D-0.2-CTP-action-gate",
+  "status": "frozen after cubic-orientation selection and before observational data",
+  "candidate": "v6D closed-time-path localization",
+  "branch_fields": {
+    "physical_metric": 1,
+    "U_scalar_response_components": 1,
+    "A_scalar_multiplier_components": 1,
+    "Q_spatial_STF_response_components": 5,
+    "B_spatial_STF_multiplier_components": 5
+  },
+  "localized_branch_action": "S_EH+S_b+(Mpl^2/2) integral sqrt(-g) [a_sigma^2 f_D(X,C_Q)+A(Box U-S_g)+B^munu((Box-m_sigma^2)Q_munu-T_munu)+projection constraints]",
+  "closed_time_path": "Gamma=S_loc[+]-S_loc[-] with an invariant initial density functional and final branch matching",
+  "component_counts_for_constraint_pairs": [1, 5],
+  "kinetic_mixing": 1.0,
+  "causal_support_audit": {
+    "time_min": -10.0,
+    "time_max": 10.0,
+    "samples": 10001,
+    "impulse_time": 0.0,
+    "frequency": 1.3,
+    "maximum_forbidden_support": 1e-14
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "lambda_sigma", "phi_sigma", "L_sigma"],
+    "count": 4,
+    "maximum_allowed": 5
+  },
+  "gates": {
+    "maximum_negative_kinetic_directions": 0,
+    "maximum_extra_free_multiplier_components": 0,
+    "maximum_forbidden_causal_support": 1e-14
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "none for exact v6D if the fundamental action gate fails"
+  }
+}

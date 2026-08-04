@@ -108,6 +108,8 @@ results/sigma_v1_nonmetricity_cycle/*
 !results/sigma_v6c_detuned_memory_selection/**
 !results/sigma_v6d_cubic_orientation_selection/
 !results/sigma_v6d_cubic_orientation_selection/**
+!results/sigma_v6d_ctp_action_gate/
+!results/sigma_v6d_ctp_action_gate/**
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/
