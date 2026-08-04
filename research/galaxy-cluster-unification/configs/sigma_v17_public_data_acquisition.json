@@ -1,0 +1,30 @@
+{
+  "protocol_version": "SIGMA-V17-PUBLIC-DATA-ACQUISITION-1.0.0",
+  "status": "frozen before downloading the PLCKG287 member spectroscopy",
+  "purpose": "Acquire and hash the public PLCK G287 member-redshift inputs needed to commission the v17 collisionless-stress pipeline without reading any new lensing target.",
+  "base_url": "https://cdsarc.cds.unistra.fr/ftp/J/A%2BA/686/A4",
+  "raw_directory": "data/raw/sigma_v17_dynamical_stress/PLCKG287",
+  "files": [
+    {
+      "filename": "ReadMe",
+      "expected_bytes": 13185,
+      "expected_records": null
+    },
+    {
+      "filename": "tabled1.dat",
+      "expected_bytes": 7038,
+      "expected_records": 153
+    },
+    {
+      "filename": "tablee1.dat",
+      "expected_bytes": 44660,
+      "expected_records": 639
+    }
+  ],
+  "handling": [
+    "All files are open spectroscopy or documentation, not sealed lensing targets.",
+    "tabled1 contains the selected cluster-member positions, redshifts, source instruments, and F160W magnitudes.",
+    "tablee1 contains the full spectroscopic catalog and quality flags.",
+    "Downloading these data does not authorize a one-cluster formula selection."
+  ]
+}

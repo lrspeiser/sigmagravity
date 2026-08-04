@@ -1,0 +1,49 @@
+{
+  "config_sha256": "baaf98eda52aff26e0b9c6bb9dba8494998904f7d836c964d326eaf9bbea9b8c",
+  "files": [
+    {
+      "bytes": 13185,
+      "relative_path": "data/raw/sigma_v17_dynamical_stress/PLCKG287/ReadMe",
+      "reused": true,
+      "sha256": "dd997117959be829c7bf9188326e25d6c8f0240122aef1184018bdc45e5395d0"
+    },
+    {
+      "bytes": 7038,
+      "relative_path": "data/raw/sigma_v17_dynamical_stress/PLCKG287/tabled1.dat",
+      "reused": true,
+      "sha256": "6fcfaa93d0418414f1b36c79c03f0bc5c9e9e897ebebe283642b4754fe362947"
+    },
+    {
+      "bytes": 44660,
+      "relative_path": "data/raw/sigma_v17_dynamical_stress/PLCKG287/tablee1.dat",
+      "reused": true,
+      "sha256": "b1751cbc6d6d23575497a0dcbf692c59025ff05e780f803d5b85afafe63f0b38"
+    }
+  ],
+  "formula_selection_authorized": false,
+  "full_spectroscopy_summary": {
+    "likely_quality_2": 44,
+    "secure_quality_3": 402,
+    "single_line_quality_9": 136,
+    "spectroscopic_rows": 639,
+    "uncertain_quality_1": 57
+  },
+  "generated_utc": "2026-08-04T16:56:29.453164+00:00",
+  "lensing_target_opened": false,
+  "protocol_version": "SIGMA-V17-PUBLIC-DATA-ACQUISITION-1.0.0",
+  "selected_member_summary": {
+    "photometric_members": 24,
+    "selected_members": 153,
+    "spectroscopic_members": 129
+  },
+  "status": "open_PLCKG287_member_spectroscopy_downloaded_and_validated",
+  "velocity_table": {
+    "interpretation": "commissioning observable only; no local kernel, mass weight, or gravity score has been selected",
+    "median_redshift": 0.3833,
+    "members": 129,
+    "relative_path": "results/sigma_v17_public_data_acquisition/plckg287_selected_spectroscopic_members.csv",
+    "sha256": "06eac064eb37418ea69b29044a114ae1b4ba13ce7829897cddb77c853672048d",
+    "velocity_median_km_s": 0.0,
+    "velocity_standard_deviation_km_s": 1823.5335068128898
+  }
+}

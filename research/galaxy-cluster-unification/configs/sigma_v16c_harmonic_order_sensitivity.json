@@ -1,0 +1,29 @@
+{
+  "protocol_version": "SIGMA-V16C-HARMONIC-ORDER-SENSITIVITY-1.0.0",
+  "status": "frozen before fitting any higher-order harmonic basis",
+  "purpose": "Test whether the v16B failure of the harmonic boundary oracle in PLCK G287 was caused only by truncating the analytic exterior-potential expansion at m=6.",
+  "base_config": "configs/sigma_v16b_spent_boundary_interior.json",
+  "sample_is_spent": true,
+  "maximum_orders": [
+    6,
+    8,
+    10,
+    12
+  ],
+  "minimum_order": 2,
+  "decision_gates": {
+    "minimum_power_closed_each_cluster_at_m12": 0.5,
+    "minimum_PLCKG287_gain_from_m6_to_m12_to_call_truncation_material": 0.1
+  },
+  "decision_rule": [
+    "If both clusters close at least half of boundary power by m=12 and PLCK G287 gains at least 0.1 power fraction over m=6, the low-order oracle was insufficient, but the required high-order structure must still be predicted by measured baryons before a boundary mechanism advances.",
+    "If PLCK G287 remains below half-power at m=12, the static harmonic-boundary failure is robust to this order expansion.",
+    "These target-derived harmonic coefficients are an upper bound only and are never theory parameters."
+  ],
+  "claim_boundary": [
+    "This is a disclosed post-failure sensitivity on two spent comparator maps.",
+    "Increasing harmonic order after seeing the m=6 result cannot replace the v16B primary score.",
+    "The compact-halo target includes fitted external shear and is not direct truth.",
+    "No observational holdout or raw image position is opened."
+  ]
+}

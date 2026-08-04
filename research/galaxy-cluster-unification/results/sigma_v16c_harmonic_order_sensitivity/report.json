@@ -1,0 +1,106 @@
+{
+  "PLCKG287_power_gain_m6_to_m12": 0.00015541125023799118,
+  "claim_boundary": [
+    "This is a disclosed post-failure sensitivity on two spent comparator maps.",
+    "Increasing harmonic order after seeing the m=6 result cannot replace the v16B primary score.",
+    "The compact-halo target includes fitted external shear and is not direct truth.",
+    "No observational holdout or raw image position is opened."
+  ],
+  "decision": "the static harmonic-boundary failure remains robust through m=12; advance to a baryon-unique dynamical-state question",
+  "gate_results": {
+    "PLCKG287_material_order_gain": false,
+    "both_clusters_half_power_at_m12": false
+  },
+  "input_hashes": {
+    "base_config": "b290c084590363a6df5d0cfc57b4a97778684af057f7fa807bc6525f2b534bee",
+    "config": "f66b32c5eb49efc1d16c90a6246afc7f911a142257d3a70108e83684f9219113"
+  },
+  "maximum_order_rows": {
+    "AS295": {
+      "boundary_to_total_shear_power_ratio": 0.5158617759582461,
+      "cluster": "AS295",
+      "coefficient_count": 22,
+      "harmonic_oracle_NRMSE": 0.6167848901033998,
+      "harmonic_oracle_power_closed": 0.6195763993401371,
+      "maximum_order": 12
+    },
+    "PLCKG287": {
+      "boundary_to_total_shear_power_ratio": 0.1665952991325395,
+      "cluster": "PLCKG287",
+      "coefficient_count": 22,
+      "harmonic_oracle_NRMSE": 0.7917900474146821,
+      "harmonic_oracle_power_closed": 0.3730685208150555,
+      "maximum_order": 12
+    }
+  },
+  "observational_validation_claim": false,
+  "protocol_version": "SIGMA-V16C-HARMONIC-ORDER-SENSITIVITY-1.0.0",
+  "rows": [
+    {
+      "boundary_to_total_shear_power_ratio": 0.5158617759582461,
+      "cluster": "AS295",
+      "coefficient_count": 10,
+      "harmonic_oracle_NRMSE": 0.6169354810959263,
+      "harmonic_oracle_power_closed": 0.619390612164938,
+      "maximum_order": 6
+    },
+    {
+      "boundary_to_total_shear_power_ratio": 0.5158617759582461,
+      "cluster": "AS295",
+      "coefficient_count": 14,
+      "harmonic_oracle_NRMSE": 0.616835591342671,
+      "harmonic_oracle_power_closed": 0.6195138532529374,
+      "maximum_order": 8
+    },
+    {
+      "boundary_to_total_shear_power_ratio": 0.5158617759582461,
+      "cluster": "AS295",
+      "coefficient_count": 18,
+      "harmonic_oracle_NRMSE": 0.6168074885161637,
+      "harmonic_oracle_power_closed": 0.6195485221103825,
+      "maximum_order": 10
+    },
+    {
+      "boundary_to_total_shear_power_ratio": 0.5158617759582461,
+      "cluster": "AS295",
+      "coefficient_count": 22,
+      "harmonic_oracle_NRMSE": 0.6167848901033998,
+      "harmonic_oracle_power_closed": 0.6195763993401371,
+      "maximum_order": 12
+    },
+    {
+      "boundary_to_total_shear_power_ratio": 0.1665952991325395,
+      "cluster": "PLCKG287",
+      "coefficient_count": 10,
+      "harmonic_oracle_NRMSE": 0.7918881805123641,
+      "harmonic_oracle_power_closed": 0.3729131095648175,
+      "maximum_order": 6
+    },
+    {
+      "boundary_to_total_shear_power_ratio": 0.1665952991325395,
+      "cluster": "PLCKG287",
+      "coefficient_count": 14,
+      "harmonic_oracle_NRMSE": 0.7918705410329615,
+      "harmonic_oracle_power_closed": 0.3729410462441648,
+      "maximum_order": 8
+    },
+    {
+      "boundary_to_total_shear_power_ratio": 0.1665952991325395,
+      "cluster": "PLCKG287",
+      "coefficient_count": 18,
+      "harmonic_oracle_NRMSE": 0.7918122124371195,
+      "harmonic_oracle_power_closed": 0.37303342023543395,
+      "maximum_order": 10
+    },
+    {
+      "boundary_to_total_shear_power_ratio": 0.1665952991325395,
+      "cluster": "PLCKG287",
+      "coefficient_count": 22,
+      "harmonic_oracle_NRMSE": 0.7917900474146821,
+      "harmonic_oracle_power_closed": 0.3730685208150555,
+      "maximum_order": 12
+    }
+  ],
+  "sample_is_spent": true,
+  "status": "completed Sigma v16C harmonic-order sensitivity"
+}

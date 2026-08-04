@@ -2084,3 +2084,15 @@ python scripts/run_p0732_decoupled_observation_evaluation.py
 
 python scripts/run_p0733_composed_batch_observation_jobs.py
 ```
+
+## Sigma v16 static-boundary result
+
+The corrected spent-cluster boundary experiment finds that measured baryons
+from 200 to 1,800 kpc improve transferable missing-field NRMSE by only `0.5025%`
+and fail the frozen shear-alignment and power-closure gates. The original v16
+score is retained but excluded because its convergence taper created a shear
+ring at the scoring edge. Higher harmonic orders and a fair nested-increment
+control confirm the corrected failure. The next frozen question uses measured
+thermal and collisionless baryonic stress rather than another static density
+multiplier. See
+[`docs/SIGMA_V16_BOUNDARY_FALSIFICATION_AND_V17_DYNAMICAL_GATE.md`](docs/SIGMA_V16_BOUNDARY_FALSIFICATION_AND_V17_DYNAMICAL_GATE.md).

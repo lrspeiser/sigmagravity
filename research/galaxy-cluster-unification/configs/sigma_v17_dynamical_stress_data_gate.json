@@ -1,0 +1,99 @@
+{
+  "protocol_version": "SIGMA-V17-DYNAMICAL-STRESS-DATA-GATE-1.0.0",
+  "status": "frozen after the public-data inventory and before constructing any dynamical-stress feature or reading any dynamical-feature score",
+  "purpose": "Determine whether independently measured baryonic random stress carries transferable information about the spent cluster Weyl residual that static local and boundary baryon fields did not carry.",
+  "sample": {
+    "clusters": ["AS295", "PLCKG287"],
+    "sample_is_spent": true,
+    "source_redshift": 2.0,
+    "base_model": "AQUAL_simple_mu_diagnostic",
+    "target_model": "glafic_v2_compact_halo",
+    "target_interpretation": "same-catalog conventional halo reconstruction used only as a spent inverse target, not direct truth"
+  },
+  "physical_question": {
+    "postulate": "The gravitational source information may depend on the full coarse-grained baryonic stress-energy tensor rather than rest-mass density alone. Coherent bulk motion belongs to the local Landau-frame velocity, whereas thermal and multistream motion remains as spatial stress.",
+    "covariant_diagnostic": "Let u^mu be the timelike Landau eigenvector of T_b^{mu nu}, h_mu_nu=g_mu_nu+u_mu u_nu, rho_b=T_b^{mu nu}u_mu u_nu/c^2, and S_mu_nu=h_mu_alpha h_nu_beta T_b^{alpha beta}. The dimensionless random-stress invariant is Theta_b=sqrt(S_mu_nu S^{mu nu})/(rho_b c^2).",
+    "projected_gas_proxy": "q_gas(x)=kappa_gas(x) k_B T_X(x)/(mu m_p c^2)",
+    "projected_member_proxy": "q_member(x)=sum_i kappa_i(x) [v_los_i-vbar_los(x)]^2/c^2 using only secure spectroscopic members and a universal declared kernel",
+    "interpretation_limit": "The projected proxies test source information only. Their inverse coefficients are not physical constants, and a passing pattern would still require a healthy covariant action."
+  },
+  "stage_A_thermal_stress": {
+    "required_for_each_cluster": {
+      "registered_gas_surface_density_map": true,
+      "registered_stellar_surface_density_map": true,
+      "background_and_point_source_cleaned_chandra_events": true,
+      "temperature_regions_or_map_with_uncertainties": true,
+      "minimum_independent_temperature_regions_inside_350_kpc": 12,
+      "common_astrometric_frame": true
+    },
+    "feature_families": {
+      "static_baseline": "the unchanged five-scale v16B internal baryon family",
+      "thermal_total": "static baseline plus one-potential E-mode triplets generated from q_gas at the frozen 25, 75, and 150 kpc scales",
+      "thermal_component": "thermal_total plus gas-only temperature contrast relative to the cluster-wide spectroscopic temperature; no shock label"
+    },
+    "advance_condition": "Run only after both clusters satisfy every thermal requirement. A one-cluster temperature map is not sufficient for transfer selection."
+  },
+  "stage_B_collisionless_member_stress": {
+    "required_for_each_cluster": {
+      "secure_member_positions": true,
+      "secure_member_spectroscopic_redshifts": true,
+      "photometry_tied_stellar_mass_weights": true,
+      "minimum_secure_members_inside_1_8_Mpc": 50,
+      "declared_redshift_quality_selection": true,
+      "universal_spatial_kernel_and_membership_rule": true
+    },
+    "feature_families": {
+      "thermal_baseline": "the frozen stage-A family without changing its coefficients or scales",
+      "member_random_stress": "thermal baseline plus one-potential E-mode triplets generated from q_member",
+      "combined_random_stress": "thermal baseline plus q_gas+q_member with no object-type gate or per-cluster normalization"
+    },
+    "advance_condition": "Do not run or rank stage B until both clusters meet the same member-stress requirements. PLCK G287 alone cannot select a formula."
+  },
+  "frozen_fit_rule": {
+    "intercept": false,
+    "per_cluster_coefficients": false,
+    "per_cluster_amplitude_scale_shear_or_orientation": false,
+    "one_metric_feature_triplets": true,
+    "selection": "symmetric leave-one-cluster-out transfer on the spent pair",
+    "diagnostic_only": true
+  },
+  "diagnostic_gates": {
+    "maximum_symmetric_cross_cluster_full_field_NRMSE": 0.5,
+    "minimum_relative_improvement_over_static_baseline": 0.1,
+    "minimum_residual_shear_alignment_cosine_each_direction": 0.5,
+    "minimum_residual_power_closed_each_direction": 0.25,
+    "maximum_map_resolution_change": 0.02
+  },
+  "decision_rule": [
+    "If stage A passes every gate, require the next action to generate a thermal-stress response from a universally coupled healthy field; do not promote an inverse coefficient to a gravity constant.",
+    "If stage A fails, reject resolved projected gas thermal stress at the available resolution as the missing transferable source, but do not claim to reject collisionless member stress.",
+    "If matched stage B passes every gate, require the next action to generate coarse-graining dynamically from a universal propagator or physical correlation length rather than an analyst-selected cluster scale.",
+    "If matched stage B fails, retire the tested instantaneous baryonic random-stress family and move to causal history or a materially different mechanism.",
+    "No spent-map outcome validates a theory or authorizes opening a holdout."
+  ],
+  "inventory_at_freeze": {
+    "AS295": {
+      "registered_gas_and_stellar_maps_local": true,
+      "chandra_count_images_local": true,
+      "cleaned_event_and_temperature_products_local": false,
+      "published_resolved_temperature_structure": true,
+      "secure_member_velocity_catalog_local": false,
+      "secure_member_velocity_catalog_publicly_verified": false
+    },
+    "PLCKG287": {
+      "registered_gas_and_stellar_maps_local": true,
+      "chandra_count_images_local": true,
+      "cleaned_event_and_temperature_products_local": false,
+      "published_resolved_temperature_structure": true,
+      "secure_member_velocity_catalog_local": false,
+      "secure_member_velocity_catalog_publicly_verified": true
+    }
+  },
+  "claim_boundary": [
+    "The two comparator maps are spent and model-derived.",
+    "X-ray count morphology alone is not a temperature or pressure measurement.",
+    "Only line-of-sight velocities are observed; transverse stress and line-of-sight depth require disclosed projection assumptions.",
+    "The Landau-frame invariant is a source postulate, not yet an action or field equation.",
+    "Any matter-stress-dependent action must preserve universal metric coupling, diffeomorphism conservation, a bounded Hamiltonian, luminal tensor propagation, and Solar-System limits."
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "protocol_version": "SIGMA-V16D-INCREMENTAL-BOUNDARY-CONTROL-1.0.0",
+  "status": "frozen before fitting the nested boundary increments",
+  "purpose": "Give measured outer-baryon fields a fair nested test by preserving the v16B internal solution and fitting only incremental boundary coefficients, with an explicit zero-boundary limit.",
+  "base_config": "configs/sigma_v16b_spent_boundary_interior.json",
+  "sample_is_spent": true,
+  "internal_ridge_alpha": 1.0,
+  "boundary_ridge_alpha_grid": [
+    0.0,
+    1e-06,
+    0.0001,
+    0.01,
+    1.0,
+    100.0,
+    10000.0,
+    1000000.0,
+    100000000.0,
+    1000000000000.0
+  ],
+  "boundary_families": [
+    "boundary_total",
+    "boundary_components"
+  ],
+  "diagnostic_gates": {
+    "maximum_symmetric_cross_cluster_full_field_NRMSE": 0.5,
+    "minimum_relative_improvement_over_preserved_internal": 0.1,
+    "minimum_boundary_shear_alignment_cosine": 0.5,
+    "minimum_boundary_shear_power_closed": 0.25,
+    "maximum_zero_boundary_limit_difference": 1e-06
+  },
+  "decision_rule": [
+    "The preserved internal coefficients are fit on one spent cluster and transferred unchanged to the other before any boundary increment is fit.",
+    "Boundary alpha is selected by symmetric spent cross-transfer. As alpha tends to 1e12, the prediction must reproduce the preserved internal score within 1e-6.",
+    "A boundary family advances only if it improves the preserved internal score by ten percent, reaches NRMSE at most 0.5, aligns by 0.5, and closes 25 percent of inferred boundary power in both directions.",
+    "Failure closes the measured static outer-baryon boundary feature family; it does not rule out unmeasured line-of-sight structure."
+  ],
+  "claim_boundary": [
+    "This is a disclosed post-regression-integrity control on two spent clusters.",
+    "The compact-halo comparator is not direct truth.",
+    "The internal and boundary coefficients are inverse diagnostics, not physical constants.",
+    "No holdout or raw image position is opened."
+  ]
+}

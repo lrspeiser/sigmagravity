@@ -1,0 +1,1051 @@
+{
+  "base_AQUAL_scores": [
+    {
+      "cluster": "AS295",
+      "full_field_NRMSE": 0.902148163448784,
+      "residual_NRMSE": 1.0,
+      "residual_convergence_correlation": 0.0,
+      "residual_power_closed": 0.0,
+      "residual_shear_alignment_cosine": 0.0
+    },
+    {
+      "cluster": "PLCKG287",
+      "full_field_NRMSE": 0.895303511674135,
+      "residual_NRMSE": 1.0,
+      "residual_convergence_correlation": 0.0,
+      "residual_power_closed": 0.0,
+      "residual_shear_alignment_cosine": 0.0
+    }
+  ],
+  "best_boundary_family": "boundary_total",
+  "claim_boundary": [
+    "AS295 and PLCK G287 and their comparator maps are spent; this is mechanism discovery only.",
+    "The compact-halo comparator includes fitted external shear and is not direct pixel truth.",
+    "A finite-window internal/boundary split is not unique; padding sensitivity is therefore mandatory.",
+    "The registered baryon maps contain projected cluster-plane gas and stars but not all line-of-sight structure or matter beyond 1.8 Mpc.",
+    "Harmonic oracle coefficients are fitted separately to describe the spent target and are never theory parameters.",
+    "Outer-annulus regression coefficients and ridge penalties are inverse diagnostics, not proposed physical constants.",
+    "The one-potential construction is a two-dimensional integrability condition, not a four-dimensional covariant action."
+  ],
+  "decomposition_integrity": {
+    "passes_declared_separation": false,
+    "required_minimum_separation_kpc": 0.0,
+    "taper_start_minus_analysis_radius_kpc": -35.0
+  },
+  "decomposition_results": [
+    {
+      "boundary_to_total_shear_power_ratio": 0.8450254164255165,
+      "cluster": "AS295",
+      "harmonic_coefficients": {
+        "harmonic_m2_cos": 0.020224023271206135,
+        "harmonic_m2_sin": 0.19313500243659928,
+        "harmonic_m3_cos": 0.008519430057545017,
+        "harmonic_m3_sin": -0.019435489052706187,
+        "harmonic_m4_cos": 0.051083341030118,
+        "harmonic_m4_sin": 0.01959892882078801,
+        "harmonic_m5_cos": -0.02835799762016946,
+        "harmonic_m5_sin": -0.021054224009889714,
+        "harmonic_m6_cos": 0.027762980750268867,
+        "harmonic_m6_sin": -0.019960358465940662
+      },
+      "harmonic_oracle_NRMSE": 0.5999783594695756,
+      "harmonic_oracle_power_closed": 0.6400259681681968,
+      "padding_power_closed_span": 0.0013476521433665178,
+      "padding_sensitivity": {
+        "2": {
+          "boundary_to_total_shear_power_ratio": 0.847547339586716,
+          "harmonic_oracle_NRMSE": 0.5989823879676565,
+          "harmonic_oracle_power_closed": 0.6412200989045639
+        },
+        "3": {
+          "boundary_to_total_shear_power_ratio": 0.8450254164255165,
+          "harmonic_oracle_NRMSE": 0.5999783594695756,
+          "harmonic_oracle_power_closed": 0.6400259681681968
+        },
+        "4": {
+          "boundary_to_total_shear_power_ratio": 0.8445505859656126,
+          "harmonic_oracle_NRMSE": 0.6001062849519263,
+          "harmonic_oracle_power_closed": 0.6398724467611974
+        }
+      },
+      "primary_padding_factor": 3
+    },
+    {
+      "boundary_to_total_shear_power_ratio": 0.6272596464584124,
+      "cluster": "PLCKG287",
+      "harmonic_coefficients": {
+        "harmonic_m2_cos": 0.004339864981387166,
+        "harmonic_m2_sin": 0.0760468311397476,
+        "harmonic_m3_cos": -0.0047424052144151435,
+        "harmonic_m3_sin": -0.037245629186516346,
+        "harmonic_m4_cos": -0.005737960775859358,
+        "harmonic_m4_sin": -0.06981389134693494,
+        "harmonic_m5_cos": -0.028001123828129762,
+        "harmonic_m5_sin": -0.024059695290434332,
+        "harmonic_m6_cos": -0.003785262373019224,
+        "harmonic_m6_sin": 0.017131166081256467
+      },
+      "harmonic_oracle_NRMSE": 0.9067089356012399,
+      "harmonic_oracle_power_closed": 0.17787890610086665,
+      "padding_power_closed_span": 0.0007229647874108514,
+      "padding_sensitivity": {
+        "2": {
+          "boundary_to_total_shear_power_ratio": 0.6277057901019307,
+          "harmonic_oracle_NRMSE": 0.9063363484408893,
+          "harmonic_oracle_power_closed": 0.17855442349483497
+        },
+        "3": {
+          "boundary_to_total_shear_power_ratio": 0.6272596464584124,
+          "harmonic_oracle_NRMSE": 0.9067089356012399,
+          "harmonic_oracle_power_closed": 0.17787890610086665
+        },
+        "4": {
+          "boundary_to_total_shear_power_ratio": 0.6271954348931014,
+          "harmonic_oracle_NRMSE": 0.9067350998459119,
+          "harmonic_oracle_power_closed": 0.17783145870742412
+        }
+      },
+      "primary_padding_factor": 3
+    }
+  ],
+  "family_results": {
+    "boundary_components": {
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.15817731262303797,
+              "boundary_shear_normalized_RMSE": 51.70905519563099,
+              "boundary_shear_power_closed": -2672.826389224812,
+              "full_field_NRMSE": 31.133052369352438,
+              "residual_NRMSE": 33.75385168765581,
+              "residual_convergence_correlation": 0.41609219771252515,
+              "residual_power_closed": -1138.322503752265,
+              "residual_shear_alignment_cosine": 0.12706755720929433,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.41119749631610547,
+              "boundary_shear_normalized_RMSE": 0.9726162397498482,
+              "boundary_shear_power_closed": 0.054017650174865706,
+              "full_field_NRMSE": 0.858558976263139,
+              "residual_NRMSE": 0.9299893920013962,
+              "residual_convergence_correlation": 0.38639892420788413,
+              "residual_power_closed": 0.1351197307648735,
+              "residual_shear_alignment_cosine": 0.32734864620912185,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 22.02276178580429
+        },
+        {
+          "alpha": 1e-06,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.1581771155246466,
+              "boundary_shear_normalized_RMSE": 51.70832937067306,
+              "boundary_shear_power_closed": -2672.7513263060105,
+              "full_field_NRMSE": 31.132616731391195,
+              "residual_NRMSE": 33.75337921888274,
+              "residual_convergence_correlation": 0.416118142580156,
+              "residual_power_closed": -1138.2906086937053,
+              "residual_shear_alignment_cosine": 0.12706759779597226,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.40392966593462737,
+              "boundary_shear_normalized_RMSE": 0.9732904036355805,
+              "boundary_shear_power_closed": 0.052705790190888835,
+              "full_field_NRMSE": 0.8588494204523629,
+              "residual_NRMSE": 0.9302742791720894,
+              "residual_convergence_correlation": 0.38636889514908734,
+              "residual_power_closed": 0.13458976551084956,
+              "residual_shear_alignment_cosine": 0.3262111365926076,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 22.0224595228452
+        },
+        {
+          "alpha": 0.0001,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.15815928299992482,
+              "boundary_shear_normalized_RMSE": 51.63906221409813,
+              "boundary_shear_power_closed": -2665.5927463514977,
+              "full_field_NRMSE": 31.091037471631612,
+              "residual_NRMSE": 33.708285576658994,
+              "residual_convergence_correlation": 0.4185655718954034,
+              "residual_power_closed": -1135.2485165175967,
+              "residual_shear_alignment_cosine": 0.127072193417891,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.36568743036664925,
+              "boundary_shear_normalized_RMSE": 0.9766236212970548,
+              "boundary_shear_power_closed": 0.04620630232462675,
+              "full_field_NRMSE": 0.8604061210845613,
+              "residual_NRMSE": 0.9317551012795279,
+              "residual_convergence_correlation": 0.38596564964984753,
+              "residual_power_closed": 0.13183243123957678,
+              "residual_shear_alignment_cosine": 0.32033888082832157,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 21.9931001652291
+        },
+        {
+          "alpha": 0.01,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.15985851262139436,
+              "boundary_shear_normalized_RMSE": 49.991970166380305,
+              "boundary_shear_power_closed": -2498.1970811162582,
+              "full_field_NRMSE": 30.091230257230542,
+              "residual_NRMSE": 32.62584902780647,
+              "residual_convergence_correlation": 0.4583494906765307,
+              "residual_power_closed": -1063.4460247852203,
+              "residual_shear_alignment_cosine": 0.12873764230559923,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.39520896599355176,
+              "boundary_shear_normalized_RMSE": 0.9740928376219756,
+              "boundary_shear_power_closed": 0.05114314369356743,
+              "full_field_NRMSE": 0.8646224533612938,
+              "residual_NRMSE": 0.9340644437781088,
+              "residual_convergence_correlation": 0.37336487914839617,
+              "residual_power_closed": 0.12752361486949215,
+              "residual_shear_alignment_cosine": 0.31245772719160847,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 21.28649466657819
+        },
+        {
+          "alpha": 1.0,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.20334771741842148,
+              "boundary_shear_normalized_RMSE": 76.42590081316104,
+              "boundary_shear_power_closed": -5839.918315103129,
+              "full_field_NRMSE": 45.63378556637425,
+              "residual_NRMSE": 49.54100037802911,
+              "residual_convergence_correlation": 0.537473783752674,
+              "residual_power_closed": -2453.3107184558803,
+              "residual_shear_alignment_cosine": 0.1618931001448216,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.43621565277048874,
+              "boundary_shear_normalized_RMSE": 0.9862952544701963,
+              "boundary_shear_power_closed": 0.027221671009570736,
+              "full_field_NRMSE": 0.8465857972315545,
+              "residual_NRMSE": 0.9015539426447182,
+              "residual_convergence_correlation": 0.3207107504069468,
+              "residual_power_closed": 0.18720048850176418,
+              "residual_shear_alignment_cosine": 0.24761218912708094,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 32.27351152748877
+        },
+        {
+          "alpha": 100.0,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.2039161454601089,
+              "boundary_shear_normalized_RMSE": 7.880546951587508,
+              "boundary_shear_power_closed": -61.10302025617517,
+              "full_field_NRMSE": 4.765573632090325,
+              "residual_NRMSE": 5.176120902969614,
+              "residual_convergence_correlation": 0.5406605495481361,
+              "residual_power_closed": -25.79222760215897,
+              "residual_shear_alignment_cosine": 0.16159529066340853,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.4530323221862049,
+              "boundary_shear_normalized_RMSE": 0.999122914254921,
+              "boundary_shear_power_closed": 0.0017534022107539293,
+              "full_field_NRMSE": 0.8879617278615941,
+              "residual_NRMSE": 0.9799982100992437,
+              "residual_convergence_correlation": 0.31451416103579455,
+              "residual_power_closed": 0.03960350820227865,
+              "residual_shear_alignment_cosine": 0.2470414169210453,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 3.4277666251527044
+        }
+      ],
+      "cross_cluster_scores": [
+        {
+          "boundary_shear_alignment_cosine": 0.2039161454601089,
+          "boundary_shear_normalized_RMSE": 7.880546951587508,
+          "boundary_shear_power_closed": -61.10302025617517,
+          "full_field_NRMSE": 4.765573632090325,
+          "residual_NRMSE": 5.176120902969614,
+          "residual_convergence_correlation": 0.5406605495481361,
+          "residual_power_closed": -25.79222760215897,
+          "residual_shear_alignment_cosine": 0.16159529066340853,
+          "test_cluster": "PLCKG287",
+          "train_cluster": "AS295"
+        },
+        {
+          "boundary_shear_alignment_cosine": 0.4530323221862049,
+          "boundary_shear_normalized_RMSE": 0.999122914254921,
+          "boundary_shear_power_closed": 0.0017534022107539293,
+          "full_field_NRMSE": 0.8879617278615941,
+          "residual_NRMSE": 0.9799982100992437,
+          "residual_convergence_correlation": 0.31451416103579455,
+          "residual_power_closed": 0.03960350820227865,
+          "residual_shear_alignment_cosine": 0.2470414169210453,
+          "test_cluster": "AS295",
+          "train_cluster": "PLCKG287"
+        }
+      ],
+      "feature_names": [
+        "internal_total_smooth_5kpc",
+        "internal_total_smooth_10kpc",
+        "internal_total_smooth_25kpc",
+        "internal_total_smooth_75kpc",
+        "internal_total_smooth_150kpc",
+        "boundary_total_275_500kpc",
+        "boundary_total_500_900kpc",
+        "boundary_total_900_1300kpc",
+        "boundary_total_1300_1800kpc",
+        "boundary_gas_minus_star_275_500kpc",
+        "boundary_gas_minus_star_500_900kpc",
+        "boundary_gas_minus_star_900_1300kpc",
+        "boundary_gas_minus_star_1300_1800kpc"
+      ],
+      "joint_coefficients": {
+        "boundary_gas_minus_star_1300_1800kpc": 11.490631316836291,
+        "boundary_gas_minus_star_275_500kpc": 0.09205549875726086,
+        "boundary_gas_minus_star_500_900kpc": 0.2544159917332764,
+        "boundary_gas_minus_star_900_1300kpc": 0.7344099641451611,
+        "boundary_total_1300_1800kpc": 11.490631316836327,
+        "boundary_total_275_500kpc": 0.1177145985463663,
+        "boundary_total_500_900kpc": 0.2550293886251255,
+        "boundary_total_900_1300kpc": 0.7344099641451612,
+        "internal_total_smooth_10kpc": 0.055554800029281884,
+        "internal_total_smooth_150kpc": 0.09115300313896785,
+        "internal_total_smooth_25kpc": 0.05484105733537054,
+        "internal_total_smooth_5kpc": 0.05551130249447916,
+        "internal_total_smooth_75kpc": 0.061209481406614245
+      },
+      "joint_fit_condition_number": 1.8129800977771238e+18,
+      "joint_fit_scores": [
+        {
+          "cluster": "AS295",
+          "full_field_NRMSE": 0.8904732884991053,
+          "residual_NRMSE": 0.9838454076122787,
+          "residual_convergence_correlation": 0.31541293042624813,
+          "residual_power_closed": 0.032048213920229274,
+          "residual_shear_alignment_cosine": 0.33807252853492126
+        },
+        {
+          "cluster": "PLCKG287",
+          "full_field_NRMSE": 0.879253954891963,
+          "residual_NRMSE": 0.9813811771342806,
+          "residual_convergence_correlation": 0.5637151072517964,
+          "residual_power_closed": 0.03689098516653366,
+          "residual_shear_alignment_cosine": 0.5530503273304438
+        }
+      ],
+      "ranked_joint_contributions": [
+        {
+          "coefficient": 0.05551130249447916,
+          "feature": "internal_total_smooth_5kpc",
+          "pooled_contribution_RMS": 0.0025325206545716125
+        },
+        {
+          "coefficient": 0.055554800029281884,
+          "feature": "internal_total_smooth_10kpc",
+          "pooled_contribution_RMS": 0.002483908466120893
+        },
+        {
+          "coefficient": 0.09115300313896785,
+          "feature": "internal_total_smooth_150kpc",
+          "pooled_contribution_RMS": 0.002470937688688268
+        },
+        {
+          "coefficient": 0.05484105733537054,
+          "feature": "internal_total_smooth_25kpc",
+          "pooled_contribution_RMS": 0.002373284219704203
+        },
+        {
+          "coefficient": 0.061209481406614245,
+          "feature": "internal_total_smooth_75kpc",
+          "pooled_contribution_RMS": 0.0023007787138000003
+        },
+        {
+          "coefficient": 0.1177145985463663,
+          "feature": "boundary_total_275_500kpc",
+          "pooled_contribution_RMS": 0.0005740201003957549
+        },
+        {
+          "coefficient": 0.09205549875726086,
+          "feature": "boundary_gas_minus_star_275_500kpc",
+          "pooled_contribution_RMS": 0.00044283805530925796
+        },
+        {
+          "coefficient": 0.2550293886251255,
+          "feature": "boundary_total_500_900kpc",
+          "pooled_contribution_RMS": 0.0003435792414472075
+        },
+        {
+          "coefficient": 0.2544159917332764,
+          "feature": "boundary_gas_minus_star_500_900kpc",
+          "pooled_contribution_RMS": 0.0003433808193073923
+        },
+        {
+          "coefficient": 11.490631316836327,
+          "feature": "boundary_total_1300_1800kpc",
+          "pooled_contribution_RMS": 0.0001598764621861309
+        },
+        {
+          "coefficient": 11.490631316836291,
+          "feature": "boundary_gas_minus_star_1300_1800kpc",
+          "pooled_contribution_RMS": 0.00015987646218613042
+        },
+        {
+          "coefficient": 0.7344099641451612,
+          "feature": "boundary_total_900_1300kpc",
+          "pooled_contribution_RMS": 0.00014506338450300646
+        },
+        {
+          "coefficient": 0.7344099641451611,
+          "feature": "boundary_gas_minus_star_900_1300kpc",
+          "pooled_contribution_RMS": 0.00014506338450300644
+        }
+      ],
+      "selected_alpha": 100.0,
+      "symmetric_cross_cluster_full_field_NRMSE": 3.4277666251527044
+    },
+    "boundary_total": {
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.15980130620422134,
+              "boundary_shear_normalized_RMSE": 51.67460327923915,
+              "boundary_shear_power_closed": -2669.264624066753,
+              "full_field_NRMSE": 31.10396384865283,
+              "residual_NRMSE": 33.72374491315834,
+              "residual_convergence_correlation": 0.42441897313165033,
+              "residual_power_closed": -1136.290970967773,
+              "residual_shear_alignment_cosine": 0.1284596397741405,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.6486399108577583,
+              "boundary_shear_normalized_RMSE": 0.9448126269125499,
+              "boundary_shear_power_closed": 0.10732910002660678,
+              "full_field_NRMSE": 0.8479805540652644,
+              "residual_NRMSE": 0.9195900783262783,
+              "residual_convergence_correlation": 0.38759609957035285,
+              "residual_power_closed": 0.1543540878438694,
+              "residual_shear_alignment_cosine": 0.37259167519822833,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 22.00199579718139
+        },
+        {
+          "alpha": 1e-06,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.159801407412673,
+              "boundary_shear_normalized_RMSE": 51.67378921091342,
+              "boundary_shear_power_closed": -2669.180491413912,
+              "full_field_NRMSE": 31.10347368254282,
+              "residual_NRMSE": 33.7232135681182,
+              "residual_convergence_correlation": 0.4244458079724715,
+              "residual_power_closed": -1136.2551333609113,
+              "residual_shear_alignment_cosine": 0.12845992482348895,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.6486375062420948,
+              "boundary_shear_normalized_RMSE": 0.944812376047382,
+              "boundary_shear_power_closed": 0.10732957406770038,
+              "full_field_NRMSE": 0.8479816262823688,
+              "residual_NRMSE": 0.9195906417257367,
+              "residual_convergence_correlation": 0.3875934174288951,
+              "residual_power_closed": 0.15435305165044777,
+              "residual_shear_alignment_cosine": 0.3725893348817276,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 22.001649346800644
+        },
+        {
+          "alpha": 0.0001,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.15981295698985104,
+              "boundary_shear_normalized_RMSE": 51.59583866953071,
+              "boundary_shear_power_closed": -2661.1305680122405,
+              "full_field_NRMSE": 31.05652836838693,
+              "residual_NRMSE": 33.672326033487,
+              "residual_convergence_correlation": 0.4269767168924256,
+              "residual_power_closed": -1132.8255405054465,
+              "residual_shear_alignment_cosine": 0.1284885901625786,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.6484018993294525,
+              "boundary_shear_normalized_RMSE": 0.9447883388248435,
+              "boundary_shear_power_closed": 0.10737499482059276,
+              "full_field_NRMSE": 0.8480865108230138,
+              "residual_NRMSE": 0.9196461563416954,
+              "residual_convergence_correlation": 0.3873315493616296,
+              "residual_power_closed": 0.1542509471259459,
+              "residual_shear_alignment_cosine": 0.3723603813686871,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 21.96846836975967
+        },
+        {
+          "alpha": 0.01,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.16399654008198675,
+              "boundary_shear_normalized_RMSE": 49.3819303058645,
+              "boundary_shear_power_closed": -2437.575040733259,
+              "full_field_NRMSE": 29.703439601782303,
+              "residual_NRMSE": 32.208941536781765,
+              "residual_convergence_correlation": 0.46802751846603863,
+              "residual_power_closed": -1036.4159149198256,
+              "residual_shear_alignment_cosine": 0.1321600899669269,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.6337972540861494,
+              "boundary_shear_normalized_RMSE": 0.9449127396120621,
+              "boundary_shear_power_closed": 0.10713991451882732,
+              "full_field_NRMSE": 0.8531560391670068,
+              "residual_NRMSE": 0.9228547545577261,
+              "residual_convergence_correlation": 0.3746989953065085,
+              "residual_power_closed": 0.14833910199019906,
+              "residual_shear_alignment_cosine": 0.35990569464874755,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 21.012165516717886
+        },
+        {
+          "alpha": 1.0,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.2044876523032854,
+              "boundary_shear_normalized_RMSE": 79.91481075889432,
+              "boundary_shear_power_closed": -6385.376978629891,
+              "full_field_NRMSE": 47.70744121228354,
+              "residual_NRMSE": 51.79377796900275,
+              "residual_convergence_correlation": 0.5524263900527903,
+              "residual_power_closed": -2681.5954363023543,
+              "residual_shear_alignment_cosine": 0.16282418871734577,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.5210711105107143,
+              "boundary_shear_normalized_RMSE": 0.9778504955675099,
+              "boundary_shear_power_closed": 0.04380840831837518,
+              "full_field_NRMSE": 0.8427605580306575,
+              "residual_NRMSE": 0.8976725193118609,
+              "residual_convergence_correlation": 0.3208763065102405,
+              "residual_power_closed": 0.19418404807229672,
+              "residual_shear_alignment_cosine": 0.2649243061342564,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 33.73951831592785
+        },
+        {
+          "alpha": 100.0,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.20401883381600888,
+              "boundary_shear_normalized_RMSE": 4.055247091026744,
+              "boundary_shear_power_closed": -15.445028969280866,
+              "full_field_NRMSE": 2.5235999045420616,
+              "residual_NRMSE": 2.7466341815525146,
+              "residual_convergence_correlation": 0.5619580512230401,
+              "residual_power_closed": -6.543999327272652,
+              "residual_shear_alignment_cosine": 0.16276074042103975,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.4809966755248074,
+              "boundary_shear_normalized_RMSE": 0.9993113962551454,
+              "boundary_shear_power_closed": 0.0013767333145916494,
+              "full_field_NRMSE": 0.8880143143269573,
+              "residual_NRMSE": 0.98005281374663,
+              "residual_convergence_correlation": 0.3142056446880201,
+              "residual_power_closed": 0.03949648226731339,
+              "residual_shear_alignment_cosine": 0.2407352231046359,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 1.8917090025495833
+        }
+      ],
+      "cross_cluster_scores": [
+        {
+          "boundary_shear_alignment_cosine": 0.20401883381600888,
+          "boundary_shear_normalized_RMSE": 4.055247091026744,
+          "boundary_shear_power_closed": -15.445028969280866,
+          "full_field_NRMSE": 2.5235999045420616,
+          "residual_NRMSE": 2.7466341815525146,
+          "residual_convergence_correlation": 0.5619580512230401,
+          "residual_power_closed": -6.543999327272652,
+          "residual_shear_alignment_cosine": 0.16276074042103975,
+          "test_cluster": "PLCKG287",
+          "train_cluster": "AS295"
+        },
+        {
+          "boundary_shear_alignment_cosine": 0.4809966755248074,
+          "boundary_shear_normalized_RMSE": 0.9993113962551454,
+          "boundary_shear_power_closed": 0.0013767333145916494,
+          "full_field_NRMSE": 0.8880143143269573,
+          "residual_NRMSE": 0.98005281374663,
+          "residual_convergence_correlation": 0.3142056446880201,
+          "residual_power_closed": 0.03949648226731339,
+          "residual_shear_alignment_cosine": 0.2407352231046359,
+          "test_cluster": "AS295",
+          "train_cluster": "PLCKG287"
+        }
+      ],
+      "feature_names": [
+        "internal_total_smooth_5kpc",
+        "internal_total_smooth_10kpc",
+        "internal_total_smooth_25kpc",
+        "internal_total_smooth_75kpc",
+        "internal_total_smooth_150kpc",
+        "boundary_total_275_500kpc",
+        "boundary_total_500_900kpc",
+        "boundary_total_900_1300kpc",
+        "boundary_total_1300_1800kpc"
+      ],
+      "joint_coefficients": {
+        "boundary_total_1300_1800kpc": 11.959265493329497,
+        "boundary_total_275_500kpc": 0.11926877123596329,
+        "boundary_total_500_900kpc": 0.2611168220070624,
+        "boundary_total_900_1300kpc": 0.7741932473982338,
+        "internal_total_smooth_10kpc": 0.05554847748402442,
+        "internal_total_smooth_150kpc": 0.09116226927100098,
+        "internal_total_smooth_25kpc": 0.054837665658605254,
+        "internal_total_smooth_5kpc": 0.055504631658003484,
+        "internal_total_smooth_75kpc": 0.06121302107356042
+      },
+      "joint_fit_condition_number": 1341.9844751435805,
+      "joint_fit_scores": [
+        {
+          "cluster": "AS295",
+          "full_field_NRMSE": 0.8908137827832201,
+          "residual_NRMSE": 0.9841910889459795,
+          "residual_convergence_correlation": 0.31499186935702056,
+          "residual_power_closed": 0.03136790043932702,
+          "residual_shear_alignment_cosine": 0.2936191248800965
+        },
+        {
+          "cluster": "PLCKG287",
+          "full_field_NRMSE": 0.8803111688826739,
+          "residual_NRMSE": 0.982520672895096,
+          "residual_convergence_correlation": 0.5636470975316424,
+          "residual_power_closed": 0.034653127333767686,
+          "residual_shear_alignment_cosine": 0.5796613083816188
+        }
+      ],
+      "ranked_joint_contributions": [
+        {
+          "coefficient": 0.055504631658003484,
+          "feature": "internal_total_smooth_5kpc",
+          "pooled_contribution_RMS": 0.0025322163195911898
+        },
+        {
+          "coefficient": 0.05554847748402442,
+          "feature": "internal_total_smooth_10kpc",
+          "pooled_contribution_RMS": 0.002483625779050034
+        },
+        {
+          "coefficient": 0.09116226927100098,
+          "feature": "internal_total_smooth_150kpc",
+          "pooled_contribution_RMS": 0.002471188871140635
+        },
+        {
+          "coefficient": 0.054837665658605254,
+          "feature": "internal_total_smooth_25kpc",
+          "pooled_contribution_RMS": 0.002373137442575232
+        },
+        {
+          "coefficient": 0.06121302107356042,
+          "feature": "internal_total_smooth_75kpc",
+          "pooled_contribution_RMS": 0.0023009117649250314
+        },
+        {
+          "coefficient": 0.11926877123596329,
+          "feature": "boundary_total_275_500kpc",
+          "pooled_contribution_RMS": 0.0005815988236325624
+        },
+        {
+          "coefficient": 0.2611168220070624,
+          "feature": "boundary_total_500_900kpc",
+          "pooled_contribution_RMS": 0.00035178031880147534
+        },
+        {
+          "coefficient": 11.959265493329497,
+          "feature": "boundary_total_1300_1800kpc",
+          "pooled_contribution_RMS": 0.00016639686756085207
+        },
+        {
+          "coefficient": 0.7741932473982338,
+          "feature": "boundary_total_900_1300kpc",
+          "pooled_contribution_RMS": 0.00015292152640886952
+        }
+      ],
+      "selected_alpha": 100.0,
+      "symmetric_cross_cluster_full_field_NRMSE": 1.8917090025495833
+    },
+    "internal_only": {
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.7060574360037424,
+              "residual_NRMSE": 0.7747320796188284,
+              "residual_convergence_correlation": 0.5212380194536017,
+              "residual_power_closed": 0.39979020480948535,
+              "residual_shear_alignment_cosine": 0.47937623548136377,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.874197818151499,
+              "residual_NRMSE": 0.946026242546048,
+              "residual_convergence_correlation": 0.38235055095497517,
+              "residual_power_closed": 0.10503434841420611,
+              "residual_shear_alignment_cosine": 0.2776794695477846,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7945876063081465
+        },
+        {
+          "alpha": 1e-06,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.7060531734738938,
+              "residual_NRMSE": 0.77472764769825,
+              "residual_convergence_correlation": 0.5212587739948178,
+              "residual_power_closed": 0.39979707189193625,
+              "residual_shear_alignment_cosine": 0.47939604080445863,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.8741990747585384,
+              "residual_NRMSE": 0.9460269673499982,
+              "residual_convergence_correlation": 0.3823478618989728,
+              "residual_power_closed": 0.10503297704656533,
+              "residual_shear_alignment_cosine": 0.27767708560173104,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7945864037602334
+        },
+        {
+          "alpha": 0.0001,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.7056557753146393,
+              "residual_NRMSE": 0.7743149572870858,
+              "residual_convergence_correlation": 0.5232036038815144,
+              "residual_power_closed": 0.40043634692149854,
+              "residual_shear_alignment_cosine": 0.4812480942334041,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.8743218047930436,
+              "residual_NRMSE": 0.9460980842455361,
+              "residual_convergence_correlation": 0.3820852969825157,
+              "residual_power_closed": 0.10489841498692654,
+              "residual_shear_alignment_cosine": 0.27744423152584197,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7944774042008589
+        },
+        {
+          "alpha": 0.01,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.7030461458980894,
+              "residual_NRMSE": 0.7719858193040181,
+              "residual_convergence_correlation": 0.550054248189727,
+              "residual_power_closed": 0.40403789479350394,
+              "residual_shear_alignment_cosine": 0.5039724289155114,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.8797749884915451,
+              "residual_NRMSE": 0.9495873998899061,
+              "residual_convergence_correlation": 0.3694323682954119,
+              "residual_power_closed": 0.0982837699703275,
+              "residual_shear_alignment_cosine": 0.26584583772656667,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7963284227118407
+        },
+        {
+          "alpha": 1.0,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.730382692516928,
+              "residual_NRMSE": 0.8048071194083374,
+              "residual_convergence_correlation": 0.5632701217195577,
+              "residual_power_closed": 0.35228550054965413,
+              "residual_shear_alignment_cosine": 0.511701318928735,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.8552993163570235,
+              "residual_NRMSE": 0.9104923144517679,
+              "residual_convergence_correlation": 0.31874656297246423,
+              "residual_power_closed": 0.171003745324263,
+              "residual_shear_alignment_cosine": 0.21948094035088891,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7952973651688622
+        },
+        {
+          "alpha": 100.0,
+          "directions": [
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.8843421394665498,
+              "residual_NRMSE": 0.9871125187246749,
+              "residual_convergence_correlation": 0.5605939861286167,
+              "residual_power_closed": 0.025608875377028384,
+              "residual_shear_alignment_cosine": 0.507919040744055,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "boundary_shear_alignment_cosine": 0.0,
+              "boundary_shear_normalized_RMSE": 1.0,
+              "boundary_shear_power_closed": 0.0,
+              "full_field_NRMSE": 0.888272277784599,
+              "residual_NRMSE": 0.9803134777156047,
+              "residual_convergence_correlation": 0.3135481459951181,
+              "residual_power_closed": 0.0389854854091366,
+              "residual_shear_alignment_cosine": 0.2153613580248679,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8863093870418259
+        }
+      ],
+      "cross_cluster_scores": [
+        {
+          "boundary_shear_alignment_cosine": 0.0,
+          "boundary_shear_normalized_RMSE": 1.0,
+          "boundary_shear_power_closed": 0.0,
+          "full_field_NRMSE": 0.7056557753146393,
+          "residual_NRMSE": 0.7743149572870858,
+          "residual_convergence_correlation": 0.5232036038815144,
+          "residual_power_closed": 0.40043634692149854,
+          "residual_shear_alignment_cosine": 0.4812480942334041,
+          "test_cluster": "PLCKG287",
+          "train_cluster": "AS295"
+        },
+        {
+          "boundary_shear_alignment_cosine": 0.0,
+          "boundary_shear_normalized_RMSE": 1.0,
+          "boundary_shear_power_closed": 0.0,
+          "full_field_NRMSE": 0.8743218047930436,
+          "residual_NRMSE": 0.9460980842455361,
+          "residual_convergence_correlation": 0.3820852969825157,
+          "residual_power_closed": 0.10489841498692654,
+          "residual_shear_alignment_cosine": 0.27744423152584197,
+          "test_cluster": "AS295",
+          "train_cluster": "PLCKG287"
+        }
+      ],
+      "feature_names": [
+        "internal_total_smooth_5kpc",
+        "internal_total_smooth_10kpc",
+        "internal_total_smooth_25kpc",
+        "internal_total_smooth_75kpc",
+        "internal_total_smooth_150kpc"
+      ],
+      "joint_coefficients": {
+        "internal_total_smooth_10kpc": -7.466595620705026,
+        "internal_total_smooth_150kpc": 9.431646600472106,
+        "internal_total_smooth_25kpc": 0.9642776684067382,
+        "internal_total_smooth_5kpc": 9.024166737300536,
+        "internal_total_smooth_75kpc": -2.4815506013987014
+      },
+      "joint_fit_condition_number": 1340.3704203075974,
+      "joint_fit_scores": [
+        {
+          "cluster": "AS295",
+          "full_field_NRMSE": 0.8005698540830686,
+          "residual_NRMSE": 0.8516428405580676,
+          "residual_convergence_correlation": 0.4111242042765432,
+          "residual_power_closed": 0.2747044721261859,
+          "residual_shear_alignment_cosine": 0.2962102483469602
+        },
+        {
+          "cluster": "PLCKG287",
+          "full_field_NRMSE": 0.6620012858269926,
+          "residual_NRMSE": 0.724216793149927,
+          "residual_convergence_correlation": 0.584900139795275,
+          "residual_power_closed": 0.47551003651963575,
+          "residual_shear_alignment_cosine": 0.5443165136230323
+        }
+      ],
+      "ranked_joint_contributions": [
+        {
+          "coefficient": 9.024166737300536,
+          "feature": "internal_total_smooth_5kpc",
+          "pooled_contribution_RMS": 0.41169793583540304
+        },
+        {
+          "coefficient": -7.466595620705026,
+          "feature": "internal_total_smooth_10kpc",
+          "pooled_contribution_RMS": 0.3338386613865044
+        },
+        {
+          "coefficient": 9.431646600472106,
+          "feature": "internal_total_smooth_150kpc",
+          "pooled_contribution_RMS": 0.2556691524026402
+        },
+        {
+          "coefficient": -2.4815506013987014,
+          "feature": "internal_total_smooth_75kpc",
+          "pooled_contribution_RMS": 0.0932780129762504
+        },
+        {
+          "coefficient": 0.9642776684067382,
+          "feature": "internal_total_smooth_25kpc",
+          "pooled_contribution_RMS": 0.04172977482633014
+        }
+      ],
+      "selected_alpha": 0.0001,
+      "symmetric_cross_cluster_full_field_NRMSE": 0.7944774042008589
+    }
+  },
+  "gate_results": {
+    "boundary_absolute_source_sufficiency": false,
+    "boundary_alignment_both_directions": false,
+    "boundary_material_improvement": false,
+    "boundary_power_closed_both_directions": false,
+    "harmonic_oracle_each_cluster": false,
+    "harmonic_padding_robustness": true,
+    "measured_outer_baryon_boundary_source": false
+  },
+  "inferred_action_requirement": "the finite-window harmonic boundary interpretation is not robust enough to justify a static boundary mechanism; formulate a baryon-unique dynamical-state question and enumerate velocity, shock, and relaxation data",
+  "input_hashes": {
+    "AS295_baryon_map": "40db1a950ece8a641a5380eb5705bd6158ed1d98e1d9a01d1c99b5e67a0d3a2c",
+    "PLCKG287_baryon_map": "ae1ae809f1a8951b9c930dc713b005bfcb114bdebe8d578d349ae7c722c6d0a7",
+    "config": "c999550fc0159b30dcdc19c8f182799cdcab5b55643aa56ba0f5ec58cc944054"
+  },
+  "observational_validation_claim": false,
+  "one_metric_feature_triplets": true,
+  "per_cluster_gravity_parameters": 0,
+  "per_cluster_shear_or_orientation_parameters": 0,
+  "protocol_version": "SIGMA-V16-SPENT-BOUNDARY-DECOMPOSITION-1.0.0",
+  "relative_boundary_improvement_over_internal_only": -1.3810733855324644,
+  "sample_is_spent": true,
+  "sample_metadata": [
+    {
+      "cluster": "AS295",
+      "critical_surface_density_msun_kpc2": 2284133199.048394,
+      "lens_redshift": 0.3,
+      "mask_pixels": 17873
+    },
+    {
+      "cluster": "PLCKG287",
+      "critical_surface_density_msun_kpc2": 2094983503.0843925,
+      "lens_redshift": 0.39,
+      "mask_pixels": 17873
+    }
+  ],
+  "selected_family": "internal_only",
+  "status": "completed Sigma v16 spent boundary decomposition"
+}

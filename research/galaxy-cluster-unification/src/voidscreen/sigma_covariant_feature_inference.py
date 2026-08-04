@@ -390,17 +390,35 @@ def fit_equivariant_ridge(
     alpha: float,
 ) -> RidgeFit:
     """Fit one coefficient vector with scalar/spin channel covariance preserved."""
+    if not datasets:
+        raise ValueError("datasets must be nonempty")
+    names = [feature.name for feature in features_for_family(datasets[0].features, family)]
+    return fit_equivariant_ridge_features(
+        datasets,
+        feature_names=names,
+        alpha=alpha,
+    )
+
+
+def fit_equivariant_ridge_features(
+    datasets: list[EquivariantDataset],
+    *,
+    feature_names: list[str] | tuple[str, ...],
+    alpha: float,
+) -> RidgeFit:
+    """Fit an explicit shared feature list without using the v15 family hierarchy."""
     if not datasets or alpha < 0.0 or not np.isfinite(alpha):
         raise ValueError("datasets must be nonempty and alpha finite and nonnegative")
-    selected = features_for_family(datasets[0].features, family)
-    names = [feature.name for feature in selected]
+    names = list(feature_names)
     if not names:
-        raise ValueError("the requested family has no features")
+        raise ValueError("the requested feature list is empty")
+    if len(set(names)) != len(names):
+        raise ValueError("feature names must be unique")
     matrices = []
     targets = []
     for dataset in datasets:
-        if [value.name for value in features_for_family(dataset.features, family)] != names:
-            raise ValueError("all datasets must expose the same ordered feature names")
+        if any(name not in dataset.features for name in names):
+            raise ValueError("all datasets must expose every requested feature")
         weights = _output_weights(dataset)
         matrix = np.column_stack(
             [_feature_vector(dataset.features[name], dataset.mask) for name in names]
