@@ -42,6 +42,56 @@ under the planned mechanism-reset rule; no additional v7 response term will be
 fit.  See
 [`SIGMA_V7_POSITIVE_SPIN2_FALSIFICATION.md`](SIGMA_V7_POSITIVE_SPIN2_FALSIFICATION.md).
 
+## 2026-08-04 Sigma v8A one-metric Weyl-active selection
+
+The successor is a one-metric AeST action plus one cubic Horndeski interaction.
+Both ingredients are prior art; only their fixed combination and proposed use as
+a cluster-geometry correction remain candidates for novelty.  Unlike v7C, the
+AeST kinetic mixing puts the scalar directly into the physical metric with
+`delta Psi=delta Phi=delta Weyl`.  The cubic equation distinguishes equal-trace
+Hessians, giving responses `6` and `0` for isotropic and rank-one curvature.
+
+At the frozen construction point, the published AeST flat-background tensor,
+vector, and scalar squared speeds are `1`, `1`, and `0.75`.  The cubic term is
+third order in flat perturbations, so it does not change that quadratic result.
+The five-parameter row passes selection only.  Full combined variation,
+constraint counting, nonlinear characteristics, PPN, Solar screening, and
+source uniqueness remain mandatory before data.  See
+[`SIGMA_V8A_AEST_GALILEON_SELECTION.md`](SIGMA_V8A_AEST_GALILEON_SELECTION.md).
+
+### v8A cubic nonlinear-characteristic result
+
+The exact cubic interaction is now retired before observational use.  On its
+positive spherical exterior branch, the radial scalar characteristic crosses
+the physical light cone when the cubic supplies only `17.713%` of the conserved
+scalar flux, and tends to `c_r^2=4/3` in the nonlinear limit.  Reversing the sign
+makes the positive-source branch end where radial ellipticity vanishes.  Zero
+coupling is healthy but removes the proposed geometry response.  The one-metric
+AeST base is retained for a bounded replacement interaction.  See
+[`SIGMA_V8A_CUBIC_CHARACTERISTIC_GATE.md`](SIGMA_V8A_CUBIC_CHARACTERISTIC_GATE.md).
+
+### v8B preferred-time causal completion selection
+
+AeST's existing unit timelike vector permits a causal partner for the cubic
+static interaction. The added operator is
+`(alpha-1) L_H^2 (Q-Q0)^2 D^2 phi`; it vanishes on the static background and
+adds only to the perturbation time kinetic coefficient in the fixed-aether
+scalar limit. The coefficient is derived rather than fit:
+`alpha=1/[3 c_s^2(1-c_s^2)]=16/9`.
+
+The `20,001`-point positive spherical scan is positive and causal. Its maximum
+radial squared speed is `1`, with deep limits `c_r^2=0.75` and
+`c_tangential^2=0.1875`. The result remains selection only: the full dynamical
+vector/lapse constraint algebra and nonspherical characteristic cone can still
+retire it. See
+[`SIGMA_V8B_CAUSAL_COMPLETION_SELECTION.md`](SIGMA_V8B_CAUSAL_COMPLETION_SELECTION.md).
+
+The scalar cone result now also has a geometry-independent static bound. The
+nonnegative-source equation limits the most negative Hessian eigenvalue at each
+trace; maximizing the resulting directional speed reproduces the spherical
+extremizer and never exceeds `c^2`. This closes the arbitrary static scalar
+Hessian subgate, but not the dynamical vector/lapse or time-dependent gates.
+
 ## 2026-08-03 v5C exterior-law failure
 
 The fixed v5C row is retired before full variation or data. In the published

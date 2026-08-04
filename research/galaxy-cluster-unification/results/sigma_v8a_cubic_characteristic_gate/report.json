@@ -1,0 +1,53 @@
+{
+  "all_required_gates_pass": false,
+  "analytic_positive_sign_light_crossing": {
+    "dimensionless_tangential_hessian": 0.08071891388307384,
+    "maximum_nonlinear_fraction_of_total_flux": 0.17712434446770473,
+    "nonlinear_to_linear_flux": 0.21525043702153024,
+    "radial_speed_squared": 1.0
+  },
+  "candidate": "AeST scalar sector plus one cubic Horndeski geometry interaction",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_v8A_cubic_geometry_interaction_retain_one_metric_AeST_base",
+  "fixed_values": {
+    "base_scalar_speed_squared": 0.75,
+    "deep_branch_probe": 100000000.0,
+    "positive_cubic_sign": 1.0
+  },
+  "gates": {
+    "flat_base_is_causal": true,
+    "negative_sign_has_global_positive_source_branch": false,
+    "order_unity_geometry_available_before_superluminality": false,
+    "positive_branch_remains_causal_in_deep_probe": false,
+    "positive_branch_remains_hyperbolic_in_deep_probe": true
+  },
+  "observational_data_accessed": false,
+  "opposite_sign_branch_endpoint": {
+    "dimensionless_tangential_hessian_magnitude": 0.1875,
+    "maximum_dimensionless_flux": 0.0703125,
+    "radial_spatial_coefficient_at_endpoint": 0.0
+  },
+  "positive_sign_deep_branch": {
+    "causal": false,
+    "dimensionless_tangential_hessian": 100000000.0,
+    "nonlinear_fraction_of_total_flux": 0.99999999625,
+    "nonlinear_to_linear_flux": 266666666.66666666,
+    "positive": true,
+    "radial_speed_squared": 1.3333333338888889,
+    "radial_to_tangential_hessian": -0.5000000028125,
+    "tangential_speed_squared": 0.3333333334722222,
+    "temporal_coefficient": 300000000.4375
+  },
+  "raw_holdout_opened": false,
+  "reason": "For the selected positive sign, radial scalar characteristics cross the physical light cone when the cubic term supplies only 17.7% of the conserved spherical flux, and approach c_r^2=4/3 in the nonlinear limit. Reversing the sign makes the positive-source exterior branch terminate where its radial ellipticity vanishes. Zero coupling is healthy but supplies no Hessian geometry response.",
+  "scan_cross_check": {
+    "first_superluminal_dimensionless_hessian": 0.08086216915858974,
+    "maximum_radial_speed_squared": 1.349999997645685,
+    "samples": 20000
+  },
+  "scope": "This is an analytic and numerical necessary-condition failure of the exact cubic geometry interaction in its scalar decoupling regime. It is not a full characteristic determinant for every AeST-Horndeski theory and does not reject the one-metric AeST base or other degenerate geometry interactions.",
+  "status": "completed Sigma v8A cubic spherical characteristic gate"
+}

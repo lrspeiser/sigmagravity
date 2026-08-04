@@ -1,0 +1,38 @@
+{
+  "protocol_version": "Sigma-v8A-0.1-AeST-cubic-Horndeski-selection",
+  "status": "frozen before observational data",
+  "candidate": "one-metric AeST with one cubic Horndeski geometry interaction",
+  "action": "S=(16 pi G)^-1 int sqrt(-g)[R-K_B F_A^2/2+2(2-K_B)J^m grad_m(phi)-(2-K_B)Y-F(Y,Q)-lambda(A^2+1)-(L_H^2/2)(grad phi)^2 box(phi)]+S_m[g]",
+  "definitions": {
+    "Y": "(g^mn+A^m A^n) grad_m(phi) grad_n(phi)",
+    "Q": "A^m grad_m(phi)",
+    "free_function_F": "F(Y,Q)=(2-K_B) a_sigma^2 f(Y/a_sigma^2)-2 K_2 (Q-Q0)^2",
+    "interpolation_f": "f(y)=y-2 sqrt(y)+2 log(1+sqrt(y)); f_y=sqrt(y)/(1+sqrt(y))",
+    "derived_Q0": "Q0=mu_sigma sqrt[(2-K_B)/(2 K_2)]",
+    "physical_metric": "g_mn; all matter, photons, and the Einstein-Hilbert tensor mode use this one metric"
+  },
+  "fixed_selection_values": {
+    "K_B": 1.0,
+    "K_2": 2.0,
+    "lambda_s": 1.0,
+    "cubic_sign": 1.0
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "mu_sigma", "K_B", "K_2", "L_H"],
+    "count": 5,
+    "maximum_allowed": 5
+  },
+  "gates": {
+    "require_one_matter_metric": true,
+    "require_nonzero_scalar_Weyl_response": true,
+    "require_luminal_tensor_mode": true,
+    "require_positive_causal_base_spectrum": true,
+    "require_second_order_scalar_equation": true,
+    "require_equal_trace_geometry_discrimination": true
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "full combined variation, constraint, nonlinear characteristic, PPN, and Solar-screening audit only; no astronomical map"
+  }
+}

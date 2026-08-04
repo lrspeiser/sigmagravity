@@ -1,0 +1,64 @@
+{
+  "action": "S=(16 pi G)^-1 int sqrt(-g)[R-K_B F_A^2/2+2(2-K_B)J^m grad_m(phi)-(2-K_B)Y-F(Y,Q)-lambda(A^2+1)-(L_H^2/2)(grad phi)^2 box(phi)]+S_m[g]",
+  "all_v8a_selection_gates_pass": true,
+  "base_linear_spectrum": {
+    "causal_base_spectrum": true,
+    "positive_base_spectrum": true,
+    "scalar_speed_squared": 0.75,
+    "tensor_speed_squared": 1.0,
+    "vector_speed_squared": 1.0
+  },
+  "candidate": "one-metric AeST with one cubic Horndeski geometry interaction",
+  "data_policy": {
+    "authorization_after_this_stage": "full combined variation, constraint, nonlinear characteristic, PPN, and Solar-screening audit only; no astronomical map",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v8A_to_full_variation_and_nonlinear_health_only",
+  "definitions": {
+    "Q": "A^m grad_m(phi)",
+    "Y": "(g^mn+A^m A^n) grad_m(phi) grad_n(phi)",
+    "derived_Q0": "Q0=mu_sigma sqrt[(2-K_B)/(2 K_2)]",
+    "free_function_F": "F(Y,Q)=(2-K_B) a_sigma^2 f(Y/a_sigma^2)-2 K_2 (Q-Q0)^2",
+    "interpolation_f": "f(y)=y-2 sqrt(y)+2 log(1+sqrt(y)); f_y=sqrt(y)/(1+sqrt(y))",
+    "physical_metric": "g_mn; all matter, photons, and the Einstein-Hilbert tensor mode use this one metric"
+  },
+  "fixed_selection_values": {
+    "K_2": 2.0,
+    "K_B": 1.0,
+    "cubic_sign": 1.0,
+    "lambda_s": 1.0
+  },
+  "gates": {
+    "causal_base_linear_spectrum": true,
+    "cubic_does_not_change_flat_quadratic_spectrum": true,
+    "equal_trace_geometry_discrimination": true,
+    "luminal_tensor_mode": true,
+    "no_lensing_only_multiplier": true,
+    "no_linear_metric_slip": true,
+    "no_object_labels": true,
+    "one_minimally_coupled_matter_metric": true,
+    "parameter_count": true,
+    "positive_base_linear_spectrum": true,
+    "scalar_is_weyl_active": true,
+    "second_order_scalar_equation": true
+  },
+  "geometry_stress_test": {
+    "common_hessian_trace": 3.0,
+    "isotropic_hessian_response": 6.0,
+    "rank_one_hessian_response": 0.0,
+    "response_difference": 6.0
+  },
+  "metric_projection": {
+    "scalar_delta_phi": 1.0,
+    "scalar_delta_psi": 1.0,
+    "scalar_delta_weyl": 1.0
+  },
+  "next_gate": "Derive the complete metric, scalar, vector, and constraint equations from the combined action. Compute the full kinetic Hessian and principal symbol on time-gradient and static spatial-gradient backgrounds. Reject before data for any extra mode, negative eigenvalue, superluminal characteristic, singular branch, nonunique baryon-forced state, PPN failure, or loss of the AeST one-metric Weyl identity.",
+  "observational_data_accessed": false,
+  "physical_parameter_count": 5,
+  "raw_holdout_opened": false,
+  "reason": "Unlike v7, the scalar changes the single physical matter metric through the AeST kinetic mixing, giving equal nonzero shifts to Psi, Phi, and Weyl. The cubic Horndeski equation is second order, leaves the flat quadratic tensor cone unchanged, and distinguishes equal-trace Hessians (responses 6 and 0), providing a label-free route to component geometry.",
+  "scope": "This is an action-selection pass, not a viable theory or an observational result. AeST and the cubic Horndeski operator are both prior art. Their combination has not yet passed the full constraint algebra, nonlinear characteristic, PPN, Solar-screening, cosmology, or source-uniqueness gates.",
+  "status": "completed Sigma v8A pre-data action selection"
+}

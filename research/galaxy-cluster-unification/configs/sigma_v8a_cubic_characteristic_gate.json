@@ -1,0 +1,20 @@
+{
+  "protocol_version": "Sigma-v8A-0.2-cubic-spherical-characteristic-gate",
+  "status": "frozen before observational data",
+  "candidate": "AeST scalar sector plus one cubic Horndeski geometry interaction",
+  "fixed_values": {
+    "base_scalar_speed_squared": 0.75,
+    "positive_cubic_sign": 1.0,
+    "deep_branch_probe": 100000000.0
+  },
+  "gates": {
+    "minimum_temporal_coefficient": 0.0,
+    "minimum_spatial_eigenvalue": 0.0,
+    "maximum_speed_squared": 1.0,
+    "minimum_nonlinear_fraction_for_order_unity_geometry": 0.5
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  }
+}

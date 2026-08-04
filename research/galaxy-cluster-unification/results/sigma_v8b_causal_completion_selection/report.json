@@ -1,0 +1,50 @@
+{
+  "all_v8b_selection_gates_pass": true,
+  "candidate": "one-metric AeST plus cubic geometry interaction and derived preferred-time causal completion",
+  "completion_operator": "+(alpha-1) L_H^2 (Q-Q0)^2 q^mn nabla_m nabla_n(phi)",
+  "data_policy": {
+    "authorization_after_this_stage": "full covariant variation, constraint, arbitrary-background characteristic, PPN, and Solar audit only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v8B_to_full_covariant_constraint_and_arbitrary_background_characteristic_gate_only",
+  "derived_alpha": 1.7777777777777777,
+  "equal_trace_probes": {
+    "isotropic_maximum_speed_squared": 0.40714285714285714,
+    "rank_one_maximum_speed_squared": 0.5785714285714286
+  },
+  "gates": {
+    "all_nonnegative_source_hessians_are_causal": true,
+    "all_nonnegative_source_hessians_are_spatially_positive": true,
+    "complete_positive_spherical_scan_is_causal": true,
+    "complete_positive_spherical_scan_is_positive": true,
+    "derived_completion_adds_no_parameter": true,
+    "fixed_aether_third_derivatives_cancel": true,
+    "isotropic_equal_trace_probe_is_causal": true,
+    "parameter_count": true,
+    "rank_one_equal_trace_probe_is_causal": true,
+    "static_background_equation_unchanged_at_Q_equals_Q0": true
+  },
+  "nonnegative_source_extremal_bound": {
+    "large_trace_minimum_spatial_eigenvalue_limit": 0.0,
+    "maximum_speed_squared": 0.9999999519001036,
+    "maximum_speed_trace": 0.14078533801117238,
+    "minimum_spatial_eigenvalue_over_finite_scan": 2.1093750079970164e-09,
+    "samples": 20001
+  },
+  "observational_data_accessed": false,
+  "physical_parameter_count": 5,
+  "raw_holdout_opened": false,
+  "reason": "The derived preferred-time coefficient alpha=16/9 leaves the static cubic geometry equation unchanged and closes both the full positive spherical scalar cone and the extremal bound for every static Hessian permitted by a nonnegative source, without adding a physical parameter. The maximum squared speed is one and the deep spherical radial limit is 0.75.",
+  "scope": "This is only a fixed-aether static scalar-sector selection pass. The covariant operator contains the dynamical AeST vector and projected Hessian; its full variation may change the vector/lapse constraints or introduce an unhealthy characteristic on time-dependent backgrounds. The extremal spatial lower bound also tends to zero at infinite trace, so a finite EFT validity range remains mandatory.",
+  "spherical_scan": {
+    "deep_radial_speed_squared": 0.75000000140625,
+    "deep_tangential_speed_squared": 0.1875000003515625,
+    "maximum_radial_speed_location": 0.1875701208317944,
+    "maximum_radial_speed_squared": 0.9999999883494098,
+    "maximum_tangential_speed_squared": 0.75,
+    "minimum_temporal_coefficient": 1.0,
+    "samples": 20001
+  },
+  "status": "completed Sigma v8B scalar-sector action selection"
+}

@@ -120,6 +120,12 @@ results/sigma_v1_nonmetricity_cycle/*
 !results/sigma_v7c_metric_projection_gate/**
 !results/sigma_v7_positive_spin2_falsification/
 !results/sigma_v7_positive_spin2_falsification/**
+!results/sigma_v8a_aest_galileon_selection/
+!results/sigma_v8a_aest_galileon_selection/**
+!results/sigma_v8a_cubic_characteristic_gate/
+!results/sigma_v8a_cubic_characteristic_gate/**
+!results/sigma_v8b_causal_completion_selection/
+!results/sigma_v8b_causal_completion_selection/**
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/
