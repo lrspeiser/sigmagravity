@@ -1,0 +1,333 @@
+{
+  "decision": {
+    "holdout_authorized": false,
+    "outcome": "retire_acceleration_susceptibility_from_physical_metric",
+    "scope": "This gate tests the exact transverse principal direction of the explicit canonical matter system. Failure retires chi(A^2) inside g_tilde, not the luminal aether carrier or the baryon-derived halo-scale objective."
+  },
+  "empirical_fit_performed": false,
+  "exact_matter_action": {
+    "finite_difference_rows": [
+      {
+        "J_hat": 0.030001100026500575,
+        "analytic_matter_hessian": -1.5000550013250289e-07,
+        "c_14_effective": -5.000550013250289e-08,
+        "finite_difference_matter_hessian": -1.500054973210076e-07,
+        "matter_hessian": -1.5000550013250289e-07,
+        "matter_light_speed_squared": 0.99998,
+        "matter_scalar_kinetic": 1.0000300005500087,
+        "normalized_error": 1.8742614688642012e-08,
+        "p_hat": 0.01,
+        "q": 1e-05,
+        "rho_hat": 0.01,
+        "spin_1_speed_squared": -1.9997800188983885,
+        "w": 1.0
+      },
+      {
+        "J_hat": 0.050002200055359936,
+        "analytic_matter_hessian": -2.500110002767997e-07,
+        "c_14_effective": -1.500110002767997e-07,
+        "finite_difference_matter_hessian": -2.500109949669203e-07,
+        "matter_hessian": -2.500110002767997e-07,
+        "matter_light_speed_squared": 0.99998,
+        "matter_scalar_kinetic": 1.0000300005500087,
+        "normalized_error": 2.1238583073205162e-08,
+        "p_hat": 0.01,
+        "q": 1e-05,
+        "rho_hat": 1000.0,
+        "spin_1_speed_squared": -0.6666177801326595,
+        "w": 1e-05
+      },
+      {
+        "J_hat": 0.00010050175472734856,
+        "analytic_matter_hessian": -5.025087736367428e-08,
+        "c_14_effective": 4.9749122636325716e-08,
+        "finite_difference_matter_hessian": -5.025087642027958e-08,
+        "matter_hessian": -5.025087736367428e-08,
+        "matter_light_speed_squared": 0.998,
+        "matter_scalar_kinetic": 1.003005508847733,
+        "normalized_error": 1.877369604433192e-08,
+        "p_hat": 3.3333333333333335e-05,
+        "q": 0.001,
+        "rho_hat": 0.0001,
+        "spin_1_speed_squared": 2.010085700023626,
+        "w": 0.3333333333333333
+      }
+    ],
+    "maximum_normalized_hessian_error": 2.1238583073205162e-08,
+    "maximum_zero_q_identity_error": 8.881784197001252e-16,
+    "transverse_matter_mixing_at_A_zero": 0.0,
+    "zero_q_rows": [
+      {
+        "J_hat": 0.0,
+        "absolute_error": 0.0,
+        "expected_3p_hat": 0.0,
+        "p_hat": 0.0,
+        "rho_hat": 1.0
+      },
+      {
+        "J_hat": 2.999999999997449e-05,
+        "absolute_error": 2.5512632371299526e-17,
+        "expected_3p_hat": 3.0000000000000004e-05,
+        "p_hat": 1e-05,
+        "rho_hat": 1.0
+      },
+      {
+        "J_hat": 1.1999999999999993,
+        "absolute_error": 8.881784197001252e-16,
+        "expected_3p_hat": 1.2000000000000002,
+        "p_hat": 0.4,
+        "rho_hat": 2.0
+      },
+      {
+        "J_hat": 9.0,
+        "absolute_error": 0.0,
+        "expected_3p_hat": 9.0,
+        "p_hat": 3.0,
+        "rho_hat": 3.0
+      }
+    ]
+  },
+  "gates": {
+    "active_pressure_kinetic_pass": false,
+    "finite_positive_spin_1_speed_everywhere_pass": false,
+    "matter_hessian_identity_pass": true,
+    "no_finite_positive_density_zero_surface_pass": false,
+    "parent_protocol_hash_pass": true,
+    "parent_report_hash_pass": true,
+    "positive_c14_everywhere_pass": false,
+    "positive_matter_kinetic_pass": true,
+    "zero_q_pressure_identity_pass": true
+  },
+  "generated_utc": "2026-08-04T22:52:38.801773+00:00",
+  "grid": {
+    "first_unstable_background": {
+      "J_hat": 3000.0000011,
+      "c_14_effective": -5.000000005500002e-08,
+      "matter_hessian": -1.50000000055e-07,
+      "matter_light_speed_squared": 0.9999999998,
+      "matter_scalar_kinetic": 1.0000000003,
+      "p_hat": 1000.0,
+      "q": 1e-10,
+      "rho_hat": 1000.0,
+      "spin_1_speed_squared": -1.9999999977999992,
+      "w": 1.0
+    },
+    "minimum_c_14_effective": -15563.543773203386,
+    "q_samples": 81,
+    "rho_hat_samples": 49,
+    "stable_backgrounds": 12009,
+    "total_backgrounds": 19845,
+    "unstable_backgrounds": 7836,
+    "w_values": [
+      0.0,
+      1e-05,
+      0.001,
+      0.3333333333333333,
+      1.0
+    ]
+  },
+  "observational_data_opened": false,
+  "parent": {
+    "protocol": "configs/sigma_v17l_localized_luminal_pressure.json",
+    "protocol_hash_verified": true,
+    "protocol_sha256": "4781bb02c0c4c9f77ba847fcb26ece9696ed77b83ec4383649dc730aaf7d82bd",
+    "report": "results/sigma_v17l_localized_luminal_pressure/report.json",
+    "report_hash_verified": true,
+    "report_sha256": "2e57c042ef017d808ecfcf8d584c1a32cafa00c154a9bc33eeabdcab9797f895"
+  },
+  "protocol": "configs/sigma_v17m_active_pressure_kinetic_gate.json",
+  "protocol_sha256": "71d5cce06af9840374d4dca5002e565cabea75ae30d6fcb959b7f0cffa95ce47",
+  "report_version": "SIGMA-V17M-ACTIVE-PRESSURE-KINETIC-GATE-1.0.0",
+  "status": "failed_active_pressure_kinetic_gate",
+  "unused_gate_declaration": {
+    "lensing_only_multiplier": false,
+    "object_specific_parameters": 0,
+    "require_exact_zero_q_pressure_identity": true,
+    "require_finite_positive_spin_1_speed": true,
+    "require_no_finite_positive_density_zero_surface": true,
+    "require_parent_hashes": true,
+    "require_positive_c14_on_every_allowed_grid_background": true,
+    "require_positive_matter_kinetic": true
+  },
+  "zero_surfaces": {
+    "analytic_formula": "rho_hat_crit=2 epsilon/[q F(q,w)]",
+    "finite_positive_threshold_count": 25,
+    "rows": [
+      {
+        "p_hat_critical": 0.0,
+        "pressure_critical_Pa": 0.0,
+        "q": 1e-08,
+        "rho_hat_critical": 999999950.5663221,
+        "w": 0.0
+      },
+      {
+        "p_hat_critical": 6.6622249832756575,
+        "pressure_critical_Pa": 5.7192121077612723e-11,
+        "q": 1e-08,
+        "rho_hat_critical": 666222.4983275657,
+        "w": 1e-05
+      },
+      {
+        "p_hat_critical": 6.66662202251971,
+        "pressure_critical_Pa": 5.722986762646992e-11,
+        "q": 1e-08,
+        "rho_hat_critical": 6666.622022519709,
+        "w": 0.001
+      },
+      {
+        "p_hat_critical": 6.6666663333333425,
+        "pressure_critical_Pa": 5.723024801431703e-11,
+        "q": 1e-08,
+        "rho_hat_critical": 19.999999000000027,
+        "w": 0.3333333333333333
+      },
+      {
+        "p_hat_critical": 6.666666422222226,
+        "pressure_critical_Pa": 5.7230248777386996e-11,
+        "q": 1e-08,
+        "rho_hat_critical": 6.666666422222226,
+        "w": 1.0
+      },
+      {
+        "p_hat_critical": 0.0,
+        "pressure_critical_Pa": 0.0,
+        "q": 1e-06,
+        "rho_hat_critical": 99999.34999907525,
+        "w": 0.0
+      },
+      {
+        "p_hat_critical": 0.06249979882860663,
+        "pressure_critical_Pa": 5.365318749975047e-13,
+        "q": 1e-06,
+        "rho_hat_critical": 6249.979882860663,
+        "w": 1e-05
+      },
+      {
+        "p_hat_critical": 0.06662205181031625,
+        "pressure_critical_Pa": 5.719195108450364e-13,
+        "q": 1e-06,
+        "rho_hat_critical": 66.62205181031625,
+        "w": 0.001
+      },
+      {
+        "p_hat_critical": 0.06666633333383334,
+        "pressure_critical_Pa": 5.722996472500435e-13,
+        "q": 1e-06,
+        "rho_hat_critical": 0.19999900000150003,
+        "w": 0.3333333333333333
+      },
+      {
+        "p_hat_critical": 0.06666642222252964,
+        "pressure_critical_Pa": 5.723004103184018e-13,
+        "q": 1e-06,
+        "rho_hat_critical": 0.06666642222252964,
+        "w": 1.0
+      },
+      {
+        "p_hat_critical": 0.0,
+        "pressure_critical_Pa": 0.0,
+        "q": 1e-05,
+        "rho_hat_critical": 999.9350021258495,
+        "w": 0.0
+      },
+      {
+        "p_hat_critical": 0.003999824003315681,
+        "pressure_critical_Pa": 3.433663967533816e-14,
+        "q": 1e-05,
+        "rho_hat_critical": 399.98240033156804,
+        "w": 1e-05
+      },
+      {
+        "p_hat_critical": 0.006622316348774966,
+        "pressure_critical_Pa": 5.684952390292477e-14,
+        "q": 1e-05,
+        "rho_hat_critical": 6.622316348774966,
+        "w": 0.001
+      },
+      {
+        "p_hat_critical": 0.006666333338333353,
+        "pressure_critical_Pa": 5.722738940620856e-14,
+        "q": 1e-05,
+        "rho_hat_critical": 0.01999900001500006,
+        "w": 0.3333333333333333
+      },
+      {
+        "p_hat_critical": 0.00666642222529627,
+        "pressure_critical_Pa": 5.722815245968666e-14,
+        "q": 1e-05,
+        "rho_hat_critical": 0.00666642222529627,
+        "w": 1.0
+      },
+      {
+        "p_hat_critical": 0.0,
+        "pressure_critical_Pa": 0.0,
+        "q": 0.0001,
+        "rho_hat_critical": 9.993502124504783,
+        "w": 0.0
+      },
+      {
+        "p_hat_critical": 8.690398512139542e-05,
+        "pressure_critical_Pa": 7.46030530591022e-16,
+        "q": 0.0001,
+        "rho_hat_critical": 8.690398512139542,
+        "w": 1e-05
+      },
+      {
+        "p_hat_critical": 0.0006247988583034373,
+        "pressure_critical_Pa": 5.363609311145634e-15,
+        "q": 0.0001,
+        "rho_hat_critical": 0.6247988583034373,
+        "w": 0.001
+      },
+      {
+        "p_hat_critical": 0.0006663333833352215,
+        "pressure_critical_Pa": 5.720164004282249e-15,
+        "q": 0.0001,
+        "rho_hat_critical": 0.0019990001500056645,
+        "w": 0.3333333333333333
+      },
+      {
+        "p_hat_critical": 0.0006664222529605062,
+        "pressure_critical_Pa": 5.7209269089247915e-15,
+        "q": 0.0001,
+        "rho_hat_critical": 0.0006664222529605062,
+        "w": 1.0
+      },
+      {
+        "p_hat_critical": 0.0,
+        "pressure_critical_Pa": 0.0,
+        "q": 0.01,
+        "rho_hat_critical": 0.0009370751468250201,
+        "w": 0.0
+      },
+      {
+        "p_hat_critical": 9.357198305660952e-09,
+        "pressure_critical_Pa": 8.032722097917944e-20,
+        "q": 0.01,
+        "rho_hat_critical": 0.0009357198305660952,
+        "w": 1e-05
+      },
+      {
+        "p_hat_critical": 8.185191182965895e-07,
+        "pressure_critical_Pa": 7.026608173016487e-18,
+        "q": 0.01,
+        "rho_hat_critical": 0.0008185191182965895,
+        "w": 0.001
+      },
+      {
+        "p_hat_critical": 6.338351136860949e-06,
+        "pressure_critical_Pa": 5.4411813855247677e-17,
+        "q": 0.01,
+        "rho_hat_critical": 1.9015053410582848e-05,
+        "w": 0.3333333333333333
+      },
+      {
+        "p_hat_critical": 6.425271869735285e-06,
+        "pressure_critical_Pa": 5.515798815755406e-17,
+        "q": 0.01,
+        "rho_hat_critical": 6.425271869735285e-06,
+        "w": 1.0
+      }
+    ]
+  }
+}

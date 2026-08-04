@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 95,
+    "sigma_protocols": 96,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 97,
+    "sigma_formula_fragments": 100,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -6152,6 +6152,47 @@
         "TEVES"
       ],
       "sha256": "4781bb02c0c4c9f77ba847fcb26ece9696ed77b83ec4383649dc730aaf7d82bd"
+    },
+    {
+      "config": "configs/sigma_v17m_active_pressure_kinetic_gate.json",
+      "protocol_version": "SIGMA-V17M-ACTIVE-PRESSURE-KINETIC-GATE-1.0.0",
+      "status": "frozen before executing the active-pressure kinetic audit and without opening observational targets",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "explicit_matter_action.action_class",
+          "formula": "Canonical test matter completing the TeVeS-like derivative-disformal physical metric carried by the published Einstein-aether sector",
+          "published_overlap_ids": [
+            "DISFORMAL-METRIC",
+            "EINSTEIN-AETHER",
+            "AEST-MOND",
+            "TEVES"
+          ]
+        },
+        {
+          "json_path": "explicit_matter_action.action",
+          "formula": "S_phi=-integral sqrt(-g_tilde)[g_tilde^mn partial_m phi partial_n phi/2+V]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "formula_inventory.equations",
+          "formula": "L_phi(q)=y^2 exp(2q)/[2 sqrt(1-2q)]-V exp(4q)sqrt(1-2q); J(0)=3p; J(q)=3p+q(2rho+9p)+O(q^2); c_14,eff=epsilon-q J_hat(q)/2; s_1^2=epsilon/c_14,eff; rho_hat_crit=2epsilon/[qF(q,w)]",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        }
+      ],
+      "formula_fragment_count": 3,
+      "published_overlap_ids": [
+        "DISFORMAL-METRIC",
+        "EINSTEIN-AETHER",
+        "AEST-MOND",
+        "TEVES"
+      ],
+      "sha256": "71d5cce06af9840374d4dca5002e565cabea75ae30d6fcb959b7f0cffa95ce47"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",
