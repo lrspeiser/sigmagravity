@@ -1,0 +1,114 @@
+{
+  "protocol_version": "SIGMA-V17L-LOCALIZED-LUMINAL-PRESSURE-1.0.0",
+  "status": "frozen before executing the v17L variation audit and without opening any observational target",
+  "purpose": "Localize and vary the v17K acceleration-dependent physical metric with the selected luminal Einstein-aether carrier. Identify the complete reciprocal equation set, stress bookkeeping, differential order, and conservation identity before testing active pressure-background kinetics.",
+  "parent": {
+    "protocol": "configs/sigma_v17k_luminal_aether_pressure_carrier.json",
+    "sha256": "26ae41826eaae00e8d91e1a63eb76f90f406f71507b062204abf3677e8139a61",
+    "report": "results/sigma_v17k_luminal_aether_pressure_carrier/report.json",
+    "report_sha256": "1fc4de508e8832def5f83366423f7932092cea6e5ebf8d181bab7c225cb803bf"
+  },
+  "shared_matter_variation_kernel": {
+    "path": "scripts/audit_sigma_v17i_localized_variation.py",
+    "sha256": "ec35520b97417a2adfe8efed2840c212504774ae090931965692bc1d3eb8ccca",
+    "justification": "V17K deliberately retains the exact v17I physical metric q=alpha chi(A^2)X. The already finite-difference-verified matter chain rule is reused by hash; only the independent aether carrier and A equation change."
+  },
+  "authorization": {
+    "observational_data_opened": false,
+    "empirical_fit_authorized": false,
+    "holdout_authorized": false,
+    "allowed_outcome": "advance only to the active pressure-background kinetic matrix"
+  },
+  "localized_action": {
+    "action_class": "Localized luminal Einstein-aether carrier with one TeVeS-like derivative-disformal physical metric",
+    "action_under_test": "S_loc=integral sqrt(-g){M_Pl^2 R/2-M_Pl^2[(grad X)^2+L_sigma^-2 X^2]/2-(M_Pl^2/2)K^mn_ab nabla_m U^a nabla_n U^b+lambda(U^2+1)+B^m[A_m-U^n nabla_n U_m]}+S_m[g_tilde,psi]",
+    "aether_kinetic_tensor": "K^mn_ab=c_1 g^mn g_ab+c_2 delta^m_a delta^n_b+c_3 delta^m_b delta^n_a-c_4 U^m U^n g_ab, with c_1=epsilon, c_3=-epsilon, c_4=0, c_2=epsilon/(1-2epsilon)",
+    "matter_action": "g_tilde_mn=exp(2q)[g_mn+2q U_m U_n], q=alpha chi(Z)X, Z=c^4 A_m A^m/a_sigma^2, chi=(1+Z)^(-1/4)",
+    "constraint": "The B equation imposes A_m=U^n nabla_n U_m. Eliminating A and B returns v17K without adding an integration function, halo state, or physical constant.",
+    "born_infeld_acceleration_density_present": false
+  },
+  "matter_variation_definitions": {
+    "densitized_physical_stress": "H^mn=[sqrt(-g_tilde)/sqrt(-g)] T_tilde^mn",
+    "metric_q_derivative": "D_mn=partial_q g_tilde_mn=2 exp(2q)[g_mn+(2q+1)U_m U_n]",
+    "reciprocal_scalar": "J=(1/2)H^mn D_mn",
+    "covariant_diagnostic": "At q=0 for a comoving perfect fluid, J=T+E=3p, while cold dust gives J=0.",
+    "scalar_source": "Q_X=alpha chi J",
+    "acceleration_source": "Q_A^m=2 alpha X chi_Z J A^m c^4/a_sigma^2",
+    "aether_source": "Q_U^m=2q exp(2q)H^mn U_n",
+    "einstein_frame_matter_stress": "T_matter^mn=exp(2q)H^mn-2 alpha X chi_Z J A^m A^n c^4/a_sigma^2"
+  },
+  "formula_inventory": {
+    "equations": "J=(1/2)H^mn D_mn; Q_X=alpha chi J; Q_A^m=2 alpha X chi_Z J A^m c^4/a_sigma^2; B^m=-Q_A^m; T_U,mn=M_Pl^2{nabla_r[J_(m^r U_n)-J^r_(m U_n)-J_(mn)U^r]+c_1[(nabla_r U_m)(nabla^r U_n)-(nabla_m U_r)(nabla_n U^r)]+[U_a nabla_r J_U^(ra)]U_m U_n-g_mn L_U/2}"
+  },
+  "aether_definitions": {
+    "aether_current": "J_U^m_a=K^mn_ab nabla_n U^b",
+    "bare_aether_equation": "M_Pl^2 nabla_m J_U^m_a+2 lambda U_a=0 because c_4=0 in the selected family",
+    "aether_stress": "T_U,mn=M_Pl^2{nabla_r[J_(m^r U_n)-J^r_(m U_n)-J_(mn)U^r]+c_1[(nabla_r U_m)(nabla^r U_n)-(nabla_m U_r)(nabla_n U^r)]+[U_a nabla_r J_U^(ra)]U_m U_n-g_mn L_U/2}, with c_4=0",
+    "prior_art": "The current, equation, and stress are the standard Einstein-aether expressions specialized to the v17K coefficients; they are not project inventions."
+  },
+  "euler_lagrange_equations": {
+    "scalar": "M_Pl^2(Box-L_sigma^-2)X+alpha chi J=0",
+    "acceleration_auxiliary": "B^m+Q_A^m=0",
+    "acceleration_constraint": "A_m-U^n nabla_n U_m=0",
+    "unit_constraint": "U_m U^m=-1",
+    "aether": "M_Pl^2 nabla_n J_U^n_m+nabla_n(B_m U^n)-B^r nabla_m U_r+2lambda U_m+Q_U,m=0",
+    "metric": "M_Pl^2 G^mn=T_X^mn+T_U^mn+T_lambda^mn+T_B^mn+T_matter^mn",
+    "matter": "delta S_m/delta psi=0, equivalently the physical-metric matter equations and physical covariant conservation"
+  },
+  "stress_tensors": {
+    "scalar": "T_X^mn=M_Pl^2[nabla^m X nabla^n X-g^mn((nabla X)^2+L_sigma^-2 X^2)/2]",
+    "aether": "T_U^mn is the explicit standard current formula in aether_definitions.aether_stress",
+    "unit_multiplier": "T_lambda^mn=-2lambda U^m U^n on U^2=-1",
+    "constraint_multiplier": "T_B^mn=g^mn L_B+2B^r U^(m nabla^n)U_r-nabla_r(B^r U^m U^n)",
+    "matter": "T_matter^mn=exp(2q)H^mn-2 alpha X chi_Z J A^m A^n c^4/a_sigma^2"
+  },
+  "off_shell_identity": {
+    "formula": "-nabla_m E_g^m_n+E_X nabla_n X+E_lambda nabla_n lambda+E_U^m nabla_n U_m-nabla_m(E_U^m U_n)+E_A^m nabla_n A_m-nabla_m(E_A^m A_n)+E_B,m nabla_n B^m+nabla_r(E_B,n B^r)+E_psi Lie_n psi=0",
+    "consequence": "On the X,U,A,B,lambda and matter equations, the metric Euler tensor is covariantly conserved. Matter alone is conserved with g_tilde; in Einstein variables it exchanges stress with X and U."
+  },
+  "executable_variation_audit": {
+    "random_seed": 17009,
+    "samples": 256,
+    "finite_difference_stencil": "centered five point",
+    "maximum_normalized_directional_derivative_error": 2e-6,
+    "perfect_fluid_source_tolerance": 1e-12,
+    "derivatives_checked": ["X", "A_m", "U_m", "g_mn"],
+    "shared_kernel_is_hash_locked": true
+  },
+  "derivative_order_claim": {
+    "metric": 2,
+    "scalar_X": 2,
+    "aether_U": 2,
+    "acceleration_A": 0,
+    "multiplier_B": 1,
+    "unit_multiplier_lambda": 0,
+    "qualification": "Euler differential order is not a constrained Hamiltonian or characteristic proof."
+  },
+  "gates": {
+    "maximum_normalized_variation_error": 2e-6,
+    "maximum_perfect_fluid_source_error": 1e-12,
+    "maximum_gravitational_field_equation_order": 2,
+    "require_vacuum_B_zero": true,
+    "one_physical_metric": true,
+    "object_specific_parameters": 0,
+    "lensing_only_multiplier": false
+  },
+  "decision_rule": [
+    "Advance only if the hash-locked physical-metric variations remain exact, J=3p and dust cancellation hold, the v17K carrier coefficients are unchanged, B vanishes continuously at XJ=0, and every localized Euler equation is at most second order.",
+    "A pass proves reciprocal localization and stress bookkeeping, not active-background kinetic health, full PPN safety, or halo behavior.",
+    "The mandatory next gate must insert A=U.nabla U and compute the constrained kinetic Hessian for nonzero X and ordinary pressure. If a principal minor changes sign in an allowed background, retire this derivative susceptibility coupling rather than retuning epsilon from data."
+  ],
+  "prior_art_primary_sources": [
+    "https://arxiv.org/abs/gr-qc/0410001",
+    "https://arxiv.org/abs/gr-qc/0402005",
+    "https://arxiv.org/abs/astro-ph/0403694",
+    "https://arxiv.org/abs/1308.4685"
+  ],
+  "complexity": {
+    "new_physical_constants_added_by_localization": 0,
+    "new_propagating_fields_claimed": 0,
+    "multipliers_are_not_fit_parameters": true,
+    "maximum_candidate_constants": 4,
+    "per_object_gravity_constants": 0
+  }
+}

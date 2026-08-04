@@ -1,0 +1,138 @@
+{
+  "carrier_coefficients": {
+    "c_1": 1e-07,
+    "c_123": 1.00000020000004e-07,
+    "c_13": 0.0,
+    "c_14": 1e-07,
+    "c_2": 1.00000020000004e-07,
+    "c_3": -1e-07,
+    "c_4": 0.0
+  },
+  "decision": {
+    "outcome": "advance_to_active_pressure_kinetic_gate_only",
+    "scope": "This establishes the exact localized reciprocal equation and stress system. It does not establish the sign or rank of the active matter-background kinetic matrix, a complete Solar solution, or any halo prediction."
+  },
+  "empirical_fit_performed": false,
+  "gates": {
+    "active_pressure_kinetic_pass": false,
+    "cold_dust_source_cancels": true,
+    "derivative_order_pass": true,
+    "dust_auxiliary_B_zero": true,
+    "full_Sigma_PPN_pass": false,
+    "holdout_authorized": false,
+    "localized_variation_pass": true,
+    "luminal_carrier_coefficients_preserved": true,
+    "matter_variation_pass": true,
+    "parent_protocol_hash_pass": true,
+    "parent_report_hash_pass": true,
+    "pressure_source_pass": true,
+    "shared_kernel_hash_pass": true,
+    "vacuum_auxiliary_B_zero": true
+  },
+  "generated_utc": "2026-08-04T22:44:01.232905+00:00",
+  "localized_equations": {
+    "acceleration_auxiliary": "B^m=-Q_A^m",
+    "born_infeld_force_removed": true,
+    "dust_Q_A": [
+      -0.0,
+      -0.0,
+      0.0,
+      -0.0
+    ],
+    "maximum_Euler_differential_order": 2,
+    "new_physical_constants": 0,
+    "new_propagating_fields_claimed": 0,
+    "off_shell_diffeomorphism_identity_derived": true,
+    "stress_tensors_identified": true,
+    "vacuum_Q_A": [
+      -0.0,
+      -0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "matter_variation": {
+    "fields": {
+      "A": {
+        "maximum_normalized_error": 7.06894872259623e-07,
+        "median_normalized_error": 9.293175002323382e-10
+      },
+      "U": {
+        "maximum_normalized_error": 1.6014436900301116e-08,
+        "median_normalized_error": 4.376949440001098e-11
+      },
+      "X": {
+        "maximum_normalized_error": 1.2107486324346829e-08,
+        "median_normalized_error": 1.0173501778255302e-12
+      },
+      "metric": {
+        "maximum_normalized_error": 3.2193692053390665e-13,
+        "median_normalized_error": 1.0173107705563433e-14
+      }
+    },
+    "maximum_normalized_error": 7.06894872259623e-07,
+    "samples": 256,
+    "seed": 17009
+  },
+  "observational_data_opened": false,
+  "parent": {
+    "epsilon_aether_loaded": 1e-07,
+    "protocol": "configs/sigma_v17k_luminal_aether_pressure_carrier.json",
+    "protocol_hash_verified": true,
+    "protocol_sha256": "26ae41826eaae00e8d91e1a63eb76f90f406f71507b062204abf3677e8139a61",
+    "report": "results/sigma_v17k_luminal_aether_pressure_carrier/report.json",
+    "report_hash_verified": true,
+    "report_sha256": "1fc4de508e8832def5f83366423f7932092cea6e5ebf8d181bab7c225cb803bf"
+  },
+  "perfect_fluid_source": {
+    "dust_value": 0.0,
+    "identity": "J=T+E=3p",
+    "maximum_absolute_error": 0.0,
+    "rows": [
+      {
+        "J": 0.0,
+        "absolute_error": 0.0,
+        "energy_density": 100.0,
+        "expected_3p": 0.0,
+        "pressure": 0.0
+      },
+      {
+        "J": 3.0000000000000004e-08,
+        "absolute_error": 0.0,
+        "energy_density": 100.00000001,
+        "expected_3p": 3.0000000000000004e-08,
+        "pressure": 1e-08
+      },
+      {
+        "J": 0.75,
+        "absolute_error": 0.0,
+        "energy_density": 100.25,
+        "expected_3p": 0.75,
+        "pressure": 0.25
+      },
+      {
+        "J": 9.0,
+        "absolute_error": 0.0,
+        "energy_density": 103.0,
+        "expected_3p": 9.0,
+        "pressure": 3.0
+      },
+      {
+        "J": 60.0,
+        "absolute_error": 0.0,
+        "energy_density": 120.0,
+        "expected_3p": 60.0,
+        "pressure": 20.0
+      }
+    ]
+  },
+  "protocol": "configs/sigma_v17l_localized_luminal_pressure.json",
+  "protocol_sha256": "4781bb02c0c4c9f77ba847fcb26ece9696ed77b83ec4383649dc730aaf7d82bd",
+  "report_version": "SIGMA-V17L-LOCALIZED-LUMINAL-PRESSURE-1.0.0",
+  "shared_kernel": {
+    "hash_verified": true,
+    "path": "scripts/audit_sigma_v17i_localized_variation.py",
+    "sha256": "ec35520b97417a2adfe8efed2840c212504774ae090931965692bc1d3eb8ccca"
+  },
+  "status": "passed_localized_variation"
+}

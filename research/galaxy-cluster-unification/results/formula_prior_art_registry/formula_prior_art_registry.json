@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 94,
+    "sigma_protocols": 95,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 91,
+    "sigma_formula_fragments": 97,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -6091,6 +6091,67 @@
         "TEVES"
       ],
       "sha256": "26ae41826eaae00e8d91e1a63eb76f90f406f71507b062204abf3677e8139a61"
+    },
+    {
+      "config": "configs/sigma_v17l_localized_luminal_pressure.json",
+      "protocol_version": "SIGMA-V17L-LOCALIZED-LUMINAL-PRESSURE-1.0.0",
+      "status": "frozen before executing the v17L variation audit and without opening any observational target",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "localized_action.action_class",
+          "formula": "Localized luminal Einstein-aether carrier with one TeVeS-like derivative-disformal physical metric",
+          "published_overlap_ids": [
+            "DISFORMAL-METRIC",
+            "EINSTEIN-AETHER",
+            "AEST-MOND",
+            "TEVES"
+          ]
+        },
+        {
+          "json_path": "localized_action.action_under_test",
+          "formula": "S_loc=integral sqrt(-g){M_Pl^2 R/2-M_Pl^2[(grad X)^2+L_sigma^-2 X^2]/2-(M_Pl^2/2)K^mn_ab nabla_m U^a nabla_n U^b+lambda(U^2+1)+B^m[A_m-U^n nabla_n U_m]}+S_m[g_tilde,psi]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "localized_action.matter_action",
+          "formula": "g_tilde_mn=exp(2q)[g_mn+2q U_m U_n], q=alpha chi(Z)X, Z=c^4 A_m A^m/a_sigma^2, chi=(1+Z)^(-1/4)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "matter_variation_definitions.covariant_diagnostic",
+          "formula": "At q=0 for a comoving perfect fluid, J=T+E=3p, while cold dust gives J=0.",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "formula_inventory.equations",
+          "formula": "J=(1/2)H^mn D_mn; Q_X=alpha chi J; Q_A^m=2 alpha X chi_Z J A^m c^4/a_sigma^2; B^m=-Q_A^m; T_U,mn=M_Pl^2{nabla_r[J_(m^r U_n)-J^r_(m U_n)-J_(mn)U^r]+c_1[(nabla_r U_m)(nabla^r U_n)-(nabla_m U_r)(nabla_n U^r)]+[U_a nabla_r J_U^(ra)]U_m U_n-g_mn L_U/2}",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "off_shell_identity.formula",
+          "formula": "-nabla_m E_g^m_n+E_X nabla_n X+E_lambda nabla_n lambda+E_U^m nabla_n U_m-nabla_m(E_U^m U_n)+E_A^m nabla_n A_m-nabla_m(E_A^m A_n)+E_B,m nabla_n B^m+nabla_r(E_B,n B^r)+E_psi Lie_n psi=0",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 6,
+      "published_overlap_ids": [
+        "DISFORMAL-METRIC",
+        "EINSTEIN-AETHER",
+        "AEST-MOND",
+        "TEVES"
+      ],
+      "sha256": "4781bb02c0c4c9f77ba847fcb26ece9696ed77b83ec4383649dc730aaf7d82bd"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

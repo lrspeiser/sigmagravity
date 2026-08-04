@@ -238,3 +238,21 @@ def test_v17k_luminal_carrier_is_registered_as_published_aether_completion() -> 
     assert {"EINSTEIN-AETHER", "TEVES", "DISFORMAL-METRIC"}.issubset(
         set(v17k["published_overlap_ids"])
     )
+
+
+def test_v17l_localization_preserves_aether_and_disformal_ancestry() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17l = protocols["sigma_v17l_localized_luminal_pressure.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17l["formula_fragments"]
+    )
+
+    assert "B^m[A_m-U^n nabla_n U_m]" in fragment_text
+    assert "J=(1/2)H^mn D_mn" in fragment_text
+    assert "T_U,mn" in fragment_text
+    assert {"EINSTEIN-AETHER", "TEVES", "DISFORMAL-METRIC"}.issubset(
+        set(v17l["published_overlap_ids"])
+    )
