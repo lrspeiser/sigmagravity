@@ -1,5 +1,28 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v11B stress-free elastic-triad selection
+
+The second post-reset architecture passes its flat selection gate. V11B adds
+three spacetime scalars `X^I` with internal Euclidean symmetry. The aether-time
+velocity is `Q^I=A.nabla X^I`, while
+`E^IJ=q^mn nabla_m X^I nabla_n X^J-delta^IJ` is the spatial strain. The action
+is a positive `Q^2` time square minus positive trace/STF strain squares.
+
+The unstrained reference `X^I=x^I` has `Q=E=0`, so the action, first variation,
+and effective stress vanish. Linear displacements have two shear squared
+speeds `3/11` and one longitudinal squared speed `3/4`; these fix the bulk
+weight to `17/24`. Two thousand random directions reproduce that spectrum to
+`8.88e-16`, with every mode positive and causal. Scalar derivatives add no
+metric connection principal term, so the TT gravitational front remains
+luminal. An algebraic graviton mass remains possible and is explicitly a
+later gate.
+
+Only `L_Sigma` is new, retaining five physical constants. V11B is not yet a
+theory pass: nonlinear tilted rank, the complete constraint algebra, weak
+metric sign/amplitude, source uniqueness, graviton mass, Solar/PPN, and
+cosmology remain unresolved. No observation was opened. See
+[`SIGMA_V11B_ELASTIC_TRIAD_SELECTION.md`](SIGMA_V11B_ELASTIC_TRIAD_SELECTION.md).
+
 ## 2026-08-04 Sigma v11A tilted nonlinear kinetic falsification
 
 Exact v11A is retired before data. On a local Minkowski slice with finite

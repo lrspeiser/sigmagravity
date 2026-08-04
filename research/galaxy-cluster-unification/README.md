@@ -15,7 +15,16 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
-The current theory-only result is
+The current theory-only selection is
+[`docs/SIGMA_V11B_ELASTIC_TRIAD_SELECTION.md`](docs/SIGMA_V11B_ELASTIC_TRIAD_SELECTION.md).
+V11B treats the Sigma sector as a stress-free elastic spacetime triad. Three
+connection-free scalar material coordinates have zero action and stress in the
+unstrained vacuum, while carrying two shear phonons at squared speed `3/11`
+and one longitudinal phonon at `3/4`. The metric TT front remains
+Einstein-Hilbert, and one new rigidity length retains the five-constant cap.
+This advances only to nonlinear tilted-rank and full metric-constraint gates;
+no data are authorized.
+The preceding theory-only result is
 [`docs/SIGMA_V11A_TILTED_RANK_FALSIFICATION.md`](docs/SIGMA_V11A_TILTED_RANK_FALSIFICATION.md).
 Exact v11A is retired before data. On a finite tilted-aether background, its
 bounded alignment is a concave function of the AeST scalar coordinate

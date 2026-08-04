@@ -1,0 +1,70 @@
+{
+  "action_structure": {
+    "aether_velocity": "Q^I=A^mu nabla_mu X^I",
+    "fields": "three spacetime scalars X^I with internal delta_IJ",
+    "lagrangian": "M_P^2/L_Sigma^2 [Q_I Q_I/2-s(E_TF:E_TF+b tr(E)^2)/4]",
+    "strain": "E^IJ=q^mn nabla_m X^I nabla_n X^J-delta^IJ",
+    "vacuum": "X^I=x^I, Q^I=0, E^IJ=0"
+  },
+  "all_selection_gates_pass": true,
+  "candidate": "Sigma v11B aether-elastic spacetime triad",
+  "data_policy": {
+    "authorization": "stress-free reference and flat principal selection only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v11b_only_to_nonlinear_tilted_rank_and_metric_constraint_gates",
+  "derived_coefficients": {
+    "bulk_weight": 0.7083333333333334,
+    "expected_bulk_weight_exact": "17/24",
+    "longitudinal_speed_squared": 0.75,
+    "shear_speed_squared": 0.2727272727272727
+  },
+  "flat_principal_scan": {
+    "maximum_spectrum_error": 8.881784197001252e-16,
+    "maximum_speed_squared": 0.7500000000000009,
+    "minimum_speed_squared": 0.2727272727272723,
+    "random_directions": 2000
+  },
+  "observational_data_accessed": false,
+  "parameter_count": {
+    "derived_not_fitted": [
+      "c_shear^2=3/11",
+      "c_longitudinal^2=3/4",
+      "b=17/24"
+    ],
+    "list": [
+      "a_Sigma",
+      "mu_Sigma",
+      "K_B",
+      "K_2",
+      "L_Sigma"
+    ],
+    "maximum": 5,
+    "physical": 5
+  },
+  "raw_holdout_opened": false,
+  "reason": "The aether-provided time square and strain-square potential vanish with their first variations in the unstrained vacuum, while the three connection-free scalar coordinates carry two shear phonons at 3/11 and one longitudinal phonon at 3/4 in every direction. The metric TT front remains Einstein-Hilbert and the single new modulus length respects the five-constant cap.",
+  "scope": "This selects a new elastic-spacetime architecture. It does not yet prove nonlinear rank, the full metric constraint algebra, a useful weak gravitational response, Solar viability, or observational adequacy.",
+  "selection_gates": {
+    "TT_metric_front_cone_remains_Einstein_Hilbert": true,
+    "all_flat_phonon_modes_inside_metric_cone": true,
+    "all_flat_phonon_modes_positive": true,
+    "asymptotic_internal_Euclidean_frame_fixes_rigid_zero_modes": true,
+    "physical_parameter_cap_respected": true,
+    "random_phonon_spectra_match_two_shear_one_longitudinal": true,
+    "scalar_derivatives_add_no_metric_connection_principal_term": true,
+    "three_positive_phonon_time_kinetics": true,
+    "unstrained_vacuum_action_zero": true,
+    "unstrained_vacuum_stress_zero": true
+  },
+  "status": "completed Sigma v11B theory-only architecture selection",
+  "unresolved": {
+    "complete_covariant_variation_and_stress": false,
+    "full_metric_phonon_constraint_characteristics": false,
+    "graviton_mass_PPN_Solar_and_cosmology": false,
+    "nonlinear_tilted_global_rank": false,
+    "numerical_PDE_and_observational_tests": false,
+    "weak_Psi_Phi_and_curvature_strain_response": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "protocol_version": "Sigma-v11B-0.1-stress-free-elastic-triad-selection",
+  "status": "frozen theory-only architecture selection",
+  "candidate": "Sigma v11B aether-elastic spacetime triad",
+  "fixed_values": {
+    "shear_speed_squared": 0.2727272727272727,
+    "longitudinal_speed_squared": 0.75,
+    "physical_parameter_count": 5,
+    "maximum_physical_parameters": 5,
+    "random_directions": 2000
+  },
+  "coefficient_rule": "Reuse the already-derived causal interior speeds c_shear^2=3/11 and c_longitudinal^2=3/4. The exact plane-wave decomposition then fixes the bulk weight b=(c_L^2/c_T^2-4/3)/2=17/24, adding no fitted constant.",
+  "failure_rule": "Retire v11B before data if the reference state has nonzero action/stress, any flat phonon kinetic or squared speed is nonpositive or superluminal, the scalar-coordinate sector changes the TT metric principal cone, rigid zero modes are object-specific, or the fifth physical constant is exceeded.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "stress-free reference and flat principal selection only"
+  }
+}
