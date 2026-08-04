@@ -1,5 +1,38 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v12A on-shell constant-background common cone
+
+The arbitrary-covector action now reproduces the established unitary ADM
+Hessian to `1.10e-17` and preserves `X,U^2,Q,Y` under a general Lorentz boost
+to `4.44e-16`. More importantly, the tilted constant backgrounds now satisfy
+their own projected aether equation
+`sqrt(Y) dL/dQ=0`. The prior roughly `1.89c` off-shell rows remain a global
+warning but are not used as a physical-branch falsification.
+
+The original frozen `KB=1,K2=2` row nevertheless fails on shell: at tilt
+`0.5`, its fastest stable characteristic extrapolates to `1.002576c`. The sign
+of `k^2-omega^2` is Lorentz invariant, so this excess cannot be removed by a
+different slicing.
+
+A frozen 15-pair theory-side screen of the already-present `KB,K2` constants
+has one survivor: `KB=1,K2=4`, with flat scalar `c_s^2=1/4`. No parameter or
+equation was added and no observation was opened. On on-shell tilts
+`0.1,0.5,1,2,5,8`, both DHOST signs admit one sampled time direction common to
+five wave orientations at the declared finite-`k` thresholds. The negative
+sign is provisionally retained for its larger moderate-tilt hyperbolicity
+margin. Five negative-sign convergence sentinels preserve `24` finite plus
+`16` constraint roots at all `k=300,600,1000`; the worst absolute extrapolated
+frequency excess is `5.03e-6` and maximum normalized growth is `0.00808`.
+All eight constant-background gates pass.
+
+This is not a viability result. Some best-frame coordinate-energy diagnostics
+remain negative, reaching about `-34.4`, and no Dirac-reduced physical energy
+has been constructed on the common time. Nonzero scalar Hessian, aether
+gradient, extrinsic curvature, and spacetime curvature also remain open. The
+next kill gate is the reduced physical Hamiltonian, followed by those
+nonconstant backgrounds. See
+[`SIGMA_V12A_ON_SHELL_CONES.md`](SIGMA_V12A_ON_SHELL_CONES.md).
+
 ## 2026-08-04 Sigma v12A finite-tilt scalar-unitary characteristic warning
 
 The frozen finite-tilt characteristic grid keeps the homogeneous generalized

@@ -1,5 +1,13 @@
 # Sigma v12A finite-tilt scalar-unitary characteristic gate
 
+> **Subsequent result:** the general-covector audit imposes the constant
+> background aether equation and separates slicing-dependent growth from the
+> invariant norm of an oscillatory characteristic covector. It rejects the
+> original `K2=2` row but finds a constant-background common-cone survivor at
+> `KB=1,K2=4,lambda_D=-1`. See
+> [`SIGMA_V12A_ON_SHELL_CONES.md`](SIGMA_V12A_ON_SHELL_CONES.md). The results
+> below remain the historical scalar-unitary diagnostic.
+
 ## Decision
 
 Scalar-unitary metric time is **not** a universally healthy slicing of the

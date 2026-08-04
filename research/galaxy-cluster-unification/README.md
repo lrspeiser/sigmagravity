@@ -16,6 +16,19 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V12A_ON_SHELL_CONES.md`](docs/SIGMA_V12A_ON_SHELL_CONES.md).
+After imposing the constant-background aether equation, the original
+`KB=1,K2=2` row retains an invariant `0.2576%` principal cone excess and is
+rejected. A frozen screen of the already-present constants has one survivor:
+`KB=1,K2=4`, with flat scalar `c_s^2=1/4`. Both DHOST signs have a sampled
+common time through on-shell tilt 8; the negative sign is provisionally
+retained. Five principal convergence sentinels preserve the `24+16` root
+structure, and the worst extrapolated frequency excess is consistent with the
+metric cone at `5.03e-6`. All constant-background gates pass, but the reduced
+physical energy and nonconstant curved backgrounds remain mandatory pre-data
+kill gates. No observation or holdout was opened.
+
+The preceding theory-only result is
 [`docs/SIGMA_V12A_TILTED_CHARACTERISTICS.md`](docs/SIGMA_V12A_TILTED_CHARACTERISTICS.md).
 The complete finite-root count survives on all 72 frozen constant tilted
 backgrounds, but scalar-unitary metric time does not: 22 rows have principal
@@ -23,8 +36,9 @@ exponential growth, 31 have a real coordinate frequency more than 1% outside
 the metric light scale, and 38 contain a negative oscillatory coordinate-time
 energy. Both `lambda_D` signs are affected. This is not yet a covariant
 falsification because another common metric-timelike Cauchy covector may
-exist. The general-time common-cone calculation is now the decisive pre-data
-gate; no observational holdout is authorized.
+exist. The subsequent on-shell arbitrary-covector audit finds such sampled
+common directions for the rescued `K2=4` row, while rejecting the original
+`K2=2` row by its invariant principal cone excess.
 
 The preceding theory-only result is
 [`docs/SIGMA_V12A_FLAT_CHARACTERISTICS.md`](docs/SIGMA_V12A_FLAT_CHARACTERISTICS.md).

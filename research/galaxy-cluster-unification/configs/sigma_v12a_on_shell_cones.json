@@ -1,0 +1,50 @@
+{
+  "protocol_status": "Adaptive theory-only rescue screen; the final grid and thresholds were fixed before the recorded rerun after resolving low-k root-classification conditioning. No observational data are opened.",
+  "fixed_values": {
+    "parameter_pairs": [
+      [0.5, 2.0],
+      [0.5, 4.0],
+      [0.5, 8.0],
+      [0.5, 16.0],
+      [0.5, 32.0],
+      [1.0, 2.0],
+      [1.0, 4.0],
+      [1.0, 8.0],
+      [1.0, 16.0],
+      [1.0, 32.0],
+      [1.5, 2.0],
+      [1.5, 4.0],
+      [1.5, 8.0],
+      [1.5, 16.0],
+      [1.5, 32.0]
+    ],
+    "parameter_screen_orientation_strength": -1.0,
+    "parameter_screen_tilt_magnitudes": [0.1, 0.5, 1.0],
+    "wave_angles_degrees": [0.0, 45.0, 90.0, 135.0, 180.0],
+    "parameter_screen_wave_number": 1000.0,
+    "selected_k_b": 1.0,
+    "selected_k_2": 4.0,
+    "common_time_orientation_strengths": [-1.0, 1.0],
+    "common_time_tilt_magnitudes": [0.1, 0.5, 1.0, 2.0, 5.0, 8.0],
+    "boost_velocities": [-0.99, -0.98, -0.97, -0.95, -0.925, -0.9, -0.875, -0.85, -0.825, -0.8, -0.75, -0.5, -0.25, 0.0, 0.25, 0.5],
+    "common_time_wave_number": 300.0,
+    "convergence_wave_numbers": [300.0, 600.0, 1000.0],
+    "convergence_sentinels": [
+      {"tilt_magnitude": 0.5, "boost_velocity": 0.0},
+      {"tilt_magnitude": 1.0, "boost_velocity": 0.0},
+      {"tilt_magnitude": 2.0, "boost_velocity": -0.925},
+      {"tilt_magnitude": 5.0, "boost_velocity": -0.9},
+      {"tilt_magnitude": 8.0, "boost_velocity": -0.98}
+    ],
+    "principal_growth_threshold": 0.01,
+    "parameter_metric_cone_frequency_tolerance": 0.001,
+    "common_time_metric_cone_frequency_tolerance": 0.01,
+    "principal_cone_intercept_tolerance": 0.0001,
+    "polynomial_residual_tolerance": 1e-7,
+    "aether_eom_tolerance": 1e-10,
+    "parity_tolerance": 1e-12,
+    "lorentz_invariant_tolerance": 1e-12
+  },
+  "scope_limit": "The audit covers constant local metric frames, constant timelike scalar gradients, the nonaligned constant-background aether equation, boosts parallel to the background aether, and five wave directions. It does not yet include a complete curved solution, nonzero scalar Hessian, aether gradient, extrinsic curvature, curvature, the reduced physical Hamiltonian, PPN, or observations.",
+  "data_policy": "No galaxy, cluster, Solar-System, or holdout observation may be opened during this theory-side constant selection."
+}
