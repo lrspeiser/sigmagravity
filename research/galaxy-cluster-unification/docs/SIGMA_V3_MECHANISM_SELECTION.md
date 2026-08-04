@@ -1,5 +1,20 @@
 # Sigma v3 mechanism selection
 
+## Sigma v3A follow-up
+
+The preferred local degenerate branch has now received its cheapest decisive
+test.  The one-parameter, luminal `beta_1=0` beyond-Horndeski edge response
+passes the quadratic-DHOST identities but cannot supply the broad convergence
+amplitude: its smooth-profile correction is bounded below `18.75%`, and even
+an ultra-generous halo-scaled diagnostic closes only `39.82%` of the most
+favorable spent gap versus the frozen `75%` requirement.  It is retired as the
+sole broad response before a raw holdout or expensive scalar-health analysis.
+See [`SIGMA_V3A_DHOST_EDGE_AUDIT.md`](SIGMA_V3A_DHOST_EDGE_AUDIT.md).
+
+This does not increment the two completed action-level raw-topology failures.
+It selects the already declared fallback: derive a causal, baryon-forced
+nonlocal tidal response with no freely specifiable homogeneous halo state.
+
 ## Decision
 
 No Sigma v3 equation is frozen yet.  Two action-derived local scalar geometries

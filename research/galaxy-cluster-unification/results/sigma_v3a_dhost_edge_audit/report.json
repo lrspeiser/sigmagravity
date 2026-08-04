@@ -1,0 +1,67 @@
+{
+  "action_structure": {
+    "alpha_H_test_value_for_identities": 0.2,
+    "degeneracy_max_absolute_error": 45.54798556275925,
+    "degeneracy_max_relative_error": 4.232802739301711e-16,
+    "full_scalar_background_and_kinetic_health_proved": false,
+    "matter_minimally_coupled_to_one_metric": true,
+    "quadratic_DHOST_degenerate": true,
+    "tensor_kinetic_F_positive": true,
+    "tensor_speed_absolute_error": 0.0
+  },
+  "advances_to_full_2d_solver": false,
+  "claim_boundary": [
+    "The c_T=1 DHOST action class, Vainshtein breaking inside matter, and Xi coefficients are published prior art.",
+    "The smooth spherical amplitude audit cannot rule out every nonspherical or sharply localized DHOST topology effect.",
+    "No lensing coordinate, source, gravity coefficient, or target was fitted in this audit.",
+    "Because the full scalar kinetic and cosmological background are not yet fixed, this is an action-envelope screen rather than a frozen Sigma v3 theory."
+  ],
+  "decision": "retire the smooth local beta_1=0 DHOST edge term as the sole broad cluster response; its most generous amplitude bound cannot close the preregistered gap",
+  "gate_results": {
+    "degeneracy_tensor_speed_and_local_identities": true,
+    "full_scalar_health": false,
+    "smooth_amplitude_feasibility": false
+  },
+  "input_hashes": {
+    "cluster_report": "f266681d5852fc6e2cf0b5ff59d328e7a37717f70dac115f29d2fbf911fdd649",
+    "config": "c764a2a20c14c1a8b3d8d46a1cd692c5308d5242fe93298f7b450d8a4e8b27ac",
+    "structure_summary": "f3362b3f76bd3f62f271829112756a9b7efd8c5920ce4542aef1b71320075b82"
+  },
+  "model_id": "sigma_v3a_luminal_beyond_horndeski_edge",
+  "next_mechanism": "derive a causal baryon-forced nonlocal tidal response that spreads edge information over a universal geometric scale while retaining no free homogeneous halo state",
+  "spent_amplitude_feasibility": {
+    "best_ultra_generous_gap_closure_fraction": 0.39824225318737116,
+    "interpretation": "no-fit smooth spherical proxy; not raw validation",
+    "median_halo_convergence": 0.6886846826322559,
+    "median_newtonian_baryon_convergence": 0.0472957166296463,
+    "median_optimistic_existing_convergence": 0.3798735512677389,
+    "median_optimistic_existing_gap": 0.3242458000376813,
+    "median_sigma_v1_AQUAL_convergence": 0.102379390572759,
+    "median_sigma_v1_gap": 0.5812212873349543,
+    "required_gap_closure_fraction": 0.75,
+    "source_scaled_maximum_added_convergence": 0.008867946868058682,
+    "source_scaled_sigma_v1_gap_closure_fraction": 0.015257436472639272,
+    "ultra_generous_halo_scaled_added_convergence": 0.12912837799354798,
+    "ultra_generous_optimistic_gap_closure_fraction": 0.39824225318737116,
+    "ultra_generous_sigma_v1_gap_closure_fraction": 0.22216732388731675
+  },
+  "spherical_weak_field": {
+    "Xi_at_alpha_supremum": {
+      "Xi1_time_mass_second_derivative": -0.16666666666666666,
+      "Xi2_spatial_mass_first_derivative": 0.3333333333333333,
+      "Xi3_spatial_mass_second_derivative": 0.0
+    },
+    "edge_identity_max_absolute_error": 3.552713678800501e-15,
+    "exterior_vacuum_correction": 0.0,
+    "maximum_fractional_weyl_correction": 0.1875,
+    "numerical_vs_analytic_maximum_error": 2.7755575615628914e-17,
+    "smooth_power_law_maximizing_slope": 1.4999999999999998,
+    "uniform_core_matter_response_positive": true,
+    "uniform_core_ratios_just_below_alpha_supremum": {
+      "matter_psi_over_newtonian": 2.220446049250313e-16,
+      "photon_weyl_over_newtonian": 1.0,
+      "spatial_phi_over_newtonian": 1.9999999999999998
+    }
+  },
+  "status": "completed Sigma v3A local DHOST edge audit"
+}

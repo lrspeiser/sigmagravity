@@ -1,0 +1,57 @@
+{
+  "protocol_version": "SIGMA-V3A-DHOST-EDGE-AUDIT-1.0.0",
+  "status": "frozen_before_structural_and_spent-amplitude audit",
+  "model_id": "sigma_v3a_luminal_beyond_horndeski_edge",
+  "purpose": "Test whether the simplest one-parameter, c_T=1, degenerate local tidal geometry can supply enough baryon-registered Weyl curvature to justify a full Sigma v3 action and 2D solver.",
+  "action_envelope": {
+    "base": "Sigma v1 nonmetricity correction plus the total luminal class-I DHOST metric-scalar sector",
+    "scalar_invariant": "X=g^ab nabla_a(phi) nabla_b(phi), with universal timelike background X0<0",
+    "planck_function": "F(X)=F0*(-X/-X0)^(-alpha_H/2)",
+    "quadratic_DHOST_coefficients": "A1=A2=A5=0; A3=-4 F_X/X; A4=+4 F_X/X",
+    "equivalent_subclass": "c_T=1 beyond Horndeski with beta_1=0",
+    "matter_action": "S_b[g_ab,psi_b] with one physical metric",
+    "weak_spherical_time_potential": "dPsi/dr=G M/r^2-(alpha_H/2)G M''",
+    "weak_spherical_spatial_potential": "dPhi/dr=G M/r^2+alpha_H G M'/r",
+    "weak_spherical_weyl_edge": "delta dW/dr=-pi alpha_H G r^2 rho'(r)"
+  },
+  "parameters": {
+    "existing_a_sigma_m_s2": 1.2e-10,
+    "new_parameter": "alpha_H",
+    "new_parameter_count": 1,
+    "total_provisional_physical_parameter_count": 2,
+    "per_object_gravity_parameters": 0,
+    "lensing_only_parameters": 0,
+    "field_normalization_X0_counted_as_physical": false
+  },
+  "predeclared_domain": {
+    "edge_enhancing_sign": "alpha_H>0 for rho'<0",
+    "uniform_core_positive_matter_response": "alpha_H<1/3",
+    "audit_alpha_H_maximum": 0.3333333333333333,
+    "smooth_density_power_law_slope_min": 0.0,
+    "smooth_density_power_law_slope_max": 3.0
+  },
+  "gates": {
+    "degeneracy_identity_max_relative_error": 1e-10,
+    "weak_edge_identity_max_absolute_error": 1e-12,
+    "tensor_speed_absolute_error_max": 1e-15,
+    "positive_uniform_core_response_required": true,
+    "minimum_fraction_of_spent_convergence_gap_closed_to_justify_2d_solver": 0.75,
+    "maximum_total_universal_constants": 5
+  },
+  "spent_diagnostic_input": {
+    "structure_summary": "results/p0716_spent_arc_structure_deficit/structure_deficit_summary.csv",
+    "cluster_report": "results/p0716_spent_arc_structure_deficit/report.json",
+    "base_model": "AQUAL_simple_mu_axis_repaired",
+    "optimistic_existing_model": "P0707_Weyl_axis_repaired",
+    "newtonian_model": "baryon_only_GR_axis_repaired",
+    "halo_model": "glafic_v2_compact_halo",
+    "use": "post-unseal no-fit amplitude feasibility diagnostic only"
+  },
+  "decision_rule": "Advance this local screened branch to a full scalar-health derivation and 2D solver only if its maximum smooth-profile correction can close at least 75% of the measured convergence gap while alpha_H remains below 1/3. Otherwise retire it as the sole broad cluster response and move to the causal nonlocal tidal lane; do not count this as a third raw holdout test.",
+  "claim_boundary": [
+    "The c_T=1 DHOST action class, Vainshtein breaking inside matter, and Xi coefficients are published prior art.",
+    "The smooth spherical amplitude audit cannot rule out every nonspherical or sharply localized DHOST topology effect.",
+    "No lensing coordinate, source, gravity coefficient, or target was fitted in this audit.",
+    "Because the full scalar kinetic and cosmological background are not yet fixed, this is an action-envelope screen rather than a frozen Sigma v3 theory."
+  ]
+}

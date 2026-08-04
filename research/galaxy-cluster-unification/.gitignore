@@ -76,6 +76,8 @@ results/environmental_mog0/*
 results/sigma_v1_nonmetricity_cycle/*
 !results/sigma_v1_nonmetricity_cycle/report.json
 !results/sigma_v1_nonmetricity_cycle/inherited_raw_cluster_scores.csv
+!results/sigma_v3a_dhost_edge_audit/
+!results/sigma_v3a_dhost_edge_audit/**
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/

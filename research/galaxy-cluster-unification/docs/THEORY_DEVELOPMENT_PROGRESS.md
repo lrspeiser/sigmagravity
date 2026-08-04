@@ -1,5 +1,26 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 Sigma v3A local DHOST edge audit
+
+The first trace-free local framework after Sigma v2 was screened without
+opening a new raw holdout.  A one-parameter `c_T=1`, `beta_1=0`
+beyond-Horndeski envelope satisfies the quadratic-DHOST degeneracy identities
+to `4.23e-16` relative error and derives the spherical photon correction
+
+$$
+\Delta {dW\over dr}=-\pi\alpha_H G r^2\rho_b'(r).
+$$
+
+The same derivation supplies a hard amplitude veto.  Positive matter response
+in a uniform core requires $\alpha_H<1/3$, limiting any smooth power-law Weyl
+enhancement to `18.75%`.  The physically source-scaled correction closes only
+`1.53%` of the spent Sigma-v1 convergence gap; even an intentionally
+unphysical halo-scaled upper bound closes at most `39.82%`, below the frozen
+`75%` advancement threshold.  The local edge term is retired as the sole broad
+cluster response.  It does not count as a third raw-topology failure.  The next
+derivation target is the causal baryon-forced nonlocal tidal lane.  See
+[`SIGMA_V3A_DHOST_EDGE_AUDIT.md`](SIGMA_V3A_DHOST_EDGE_AUDIT.md).
+
 ## 2026-08-03 Sigma v2 trace-geometry cycle
 
 The second renewed action cycle added the independent squared second
