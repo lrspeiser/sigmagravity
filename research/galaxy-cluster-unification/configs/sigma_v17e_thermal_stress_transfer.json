@@ -10,7 +10,7 @@
     "static_incremental_control_report": "results/sigma_v16d_incremental_boundary_control/report.json",
     "static_incremental_control_report_sha256": "eca2edc45726e8fc17c1985b02a7292f5e8ade855ffefa2a8ec484b0c8130c67",
     "thermal_source_protocol": "configs/sigma_v17d_thermal_stress_map.json",
-    "thermal_source_protocol_sha256": "47ca3afdddbbcb7b2e19e545ff1d0bf98e499a7b088b87756f132cb1e2edceed"
+    "thermal_source_protocol_sha256": "c2e0e8d67cf59fe55048257497580d084eae70fdc1e3a37d93ef485504c6846e"
   },
   "authorization": {
     "required_thermal_source_status": "both_target_blind_thermal_stress_maps_constructed_and_frozen",

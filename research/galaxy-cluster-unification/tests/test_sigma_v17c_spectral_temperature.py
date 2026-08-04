@@ -29,11 +29,11 @@ def _load_fitter():
     return module
 
 
-def test_v106_freeze_preserves_science_and_bounds_external_concurrency() -> None:
+def test_v107_freeze_preserves_science_and_bounds_external_concurrency() -> None:
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
 
-    assert config["protocol_version"] == "SIGMA-V17C-SPECTRAL-TEMPERATURE-1.0.6"
-    assert config["execution"]["work_namespace"] == "spectral_v17c_v106"
+    assert config["protocol_version"] == "SIGMA-V17C-SPECTRAL-TEMPERATURE-1.0.7"
+    assert config["execution"]["work_namespace"] == "spectral_v17c_v107"
     assert config["execution"]["external_parallel_cells"] == 4
     assert config["extraction"]["parallel_inside_specextract"] is False
     assert config["extraction"]["source_grouping_during_extraction"] == "NONE"
@@ -112,7 +112,7 @@ def test_each_parallel_cell_receives_private_ciao_state(tmp_path, monkeypatch) -
         "log": tmp_path / "specextract.log",
     }
 
-    result = runner.execute_extraction_cell(task, tmp_path, "spectral_v17c_v106")
+    result = runner.execute_extraction_cell(task, tmp_path, "spectral_v17c_v107")
 
     assert result["obsid"] == 16127
     assert result["ccd_id"] == 2
@@ -131,6 +131,77 @@ def test_runner_keeps_internal_specextract_serial_and_results_ordered() -> None:
     assert '"nproc=1"' in source
     assert "ThreadPoolExecutor" in source
     assert "extracted = [future.result() for future in futures]" in source
+
+
+def test_blanksky_areascal_makes_effective_scale_equal_particle_count_ratio() -> None:
+    runner = _load_runner()
+    source_exposure = 44611.534044523
+    background_exposure = 600000.0
+    source_backscal = 0.0011035720258951
+    background_backscal = source_backscal
+    source_areascal = 1.0
+    bkgscale = 0.071173213
+
+    background_areascal = runner.required_background_areascal(
+        source_exposure,
+        background_exposure,
+        source_backscal,
+        background_backscal,
+        source_areascal,
+        bkgscale,
+    )
+    effective = (
+        source_exposure
+        / background_exposure
+        * source_backscal
+        / background_backscal
+        * source_areascal
+        / background_areascal
+    )
+    assert abs(effective / bkgscale - 1.0) < 1.0e-12
+    assert abs(background_areascal - 1.0 / bkgscale) > 1.0
+    source = RUNNER.read_text(encoding="utf-8")
+    assert '"key=AREASCAL"' in source
+    assert "effective_scale_relative_error_from_BKGSCALn" in source
+
+
+def _fits_header(cards: list[str]) -> bytes:
+    raw = b"".join(card.ljust(80).encode("ascii") for card in [*cards, "END"])
+    return raw + b" " * ((-len(raw)) % 2880)
+
+
+def test_single_pass_fits_header_reader_finds_spectrum_values(tmp_path: Path) -> None:
+    runner = _load_runner()
+    primary = _fits_header(
+        ["SIMPLE  =                    T", "BITPIX  =                    8", "NAXIS   =                    0"]
+    )
+    spectrum = _fits_header(
+        [
+            "XTENSION= 'BINTABLE'",
+            "BITPIX  =                    8",
+            "NAXIS   =                    2",
+            "NAXIS1  =                    1",
+            "NAXIS2  =                    1",
+            "PCOUNT  =                    0",
+            "GCOUNT  =                    1",
+            "EXTNAME = 'SPECTRUM'",
+            "EXPOSURE=        44611.534044523",
+            "BACKSCAL= 0.0011035720258951",
+            "AREASCAL=                  1.0",
+        ]
+    )
+    payload = b"\0" + b"\0" * 2879
+    path = tmp_path / "spectrum.pi"
+    path.write_bytes(primary + spectrum + payload)
+
+    values = runner.fits_numeric_header_values(
+        path, ("EXPOSURE", "BACKSCAL", "AREASCAL")
+    )
+    assert values == {
+        "EXPOSURE": 44611.534044523,
+        "BACKSCAL": 0.0011035720258951,
+        "AREASCAL": 1.0,
+    }
 
 
 def test_integrated_fitter_implements_the_frozen_model_and_failure_gate() -> None:

@@ -78,6 +78,73 @@ def header_number(path: Path, keyword: str, env: dict[str, str]) -> float:
     return float(command_text(["dmkeypar", str(path), keyword, "echo+"], env))
 
 
+def fits_numeric_header_values(
+    path: Path, keywords: tuple[str, ...], extension: str = "SPECTRUM"
+) -> dict[str, float]:
+    """Read numeric FITS keys without making CIAO reparse the table per key.
+
+    The v17C PHA tables take roughly 100 seconds per CIAO data-model open on
+    the analysis host.  This deliberately small FITS-header reader visits only
+    the 2880-byte header blocks and seeks over data payloads.  It supports the
+    standard IMAGE and binary-table size conventions needed to locate the
+    SPECTRUM extension; every returned value is still checked after ``dmhedit``.
+    """
+
+    wanted = set(keywords)
+    with path.open("rb") as handle:
+        while True:
+            header: dict[str, str] = {}
+            saw_card = False
+            while True:
+                block = handle.read(2880)
+                if not block:
+                    if saw_card:
+                        raise RuntimeError(f"truncated FITS header in {path}")
+                    raise RuntimeError(f"FITS extension {extension} absent from {path}")
+                if len(block) != 2880:
+                    raise RuntimeError(f"invalid FITS block length in {path}")
+                saw_card = True
+                end_found = False
+                for offset in range(0, 2880, 80):
+                    card = block[offset : offset + 80].decode("ascii")
+                    key = card[:8].strip()
+                    if key == "END":
+                        end_found = True
+                        break
+                    if card[8:10] == "= ":
+                        raw = card[10:].split("/", maxsplit=1)[0].strip()
+                        header[key] = raw
+                if end_found:
+                    break
+
+            extname = header.get("EXTNAME", "").strip().strip("'").strip()
+            if extname == extension:
+                missing = wanted.difference(header)
+                if missing:
+                    raise RuntimeError(
+                        f"missing FITS keys {sorted(missing)} in {path}[{extension}]"
+                    )
+                try:
+                    return {
+                        key: float(header[key].replace("D", "E")) for key in keywords
+                    }
+                except ValueError as exc:
+                    raise RuntimeError(
+                        f"non-numeric FITS key in {path}[{extension}]"
+                    ) from exc
+
+            bitpix = abs(int(header.get("BITPIX", "0")))
+            naxis = int(header.get("NAXIS", "0"))
+            elements = 0 if naxis == 0 else 1
+            for axis in range(1, naxis + 1):
+                elements *= int(header[f"NAXIS{axis}"])
+            pcount = int(header.get("PCOUNT", "0"))
+            gcount = int(header.get("GCOUNT", "1"))
+            data_bytes = (bitpix // 8 * elements + pcount) * gcount
+            padding = (-data_bytes) % 2880
+            handle.seek(data_bytes + padding, os.SEEK_CUR)
+
+
 def event_count(virtual_file: str, env: dict[str, str]) -> int:
     value = command_text(["dmlist", virtual_file, "counts"], env)
     return int(value.split()[0])
@@ -386,19 +453,87 @@ def celestial_coordinate_chip(
     return int(float(command_text(["pget", "dmcoords", "chip_id"], env)))
 
 
+def required_background_areascal(
+    source_exposure: float,
+    background_exposure: float,
+    source_backscal: float,
+    background_backscal: float,
+    source_areascal: float,
+    bkgscale: float,
+) -> float:
+    if bkgscale <= 0.0 or any(
+        value <= 0.0
+        for value in (
+            source_exposure,
+            background_exposure,
+            source_backscal,
+            background_backscal,
+            source_areascal,
+        )
+    ):
+        raise RuntimeError("blank-sky scaling inputs must all be positive")
+    return (
+        source_exposure
+        / background_exposure
+        * source_backscal
+        / background_backscal
+        * source_areascal
+        / bkgscale
+    )
+
+
 def verify_blanksky_scaling(
     source_pha: Path,
     background_pha: Path,
     bkgscale: float,
     env: dict[str, str],
 ) -> dict:
-    source_exposure = header_number(source_pha, "EXPOSURE", env)
-    background_exposure = header_number(background_pha, "EXPOSURE", env)
-    source_backscal = header_number(source_pha, "BACKSCAL", env)
-    background_backscal = header_number(background_pha, "BACKSCAL", env)
-    source_areascal = header_number(source_pha, "AREASCAL", env)
-    background_areascal = header_number(background_pha, "AREASCAL", env)
-    expected_background_areascal = 1.0 / bkgscale
+    """Make the analysis-software scale equal the measured particle-count ratio."""
+
+    header_keys = ("EXPOSURE", "BACKSCAL", "AREASCAL")
+    source_header = fits_numeric_header_values(source_pha, header_keys)
+    background_header = fits_numeric_header_values(background_pha, header_keys)
+    source_exposure = source_header["EXPOSURE"]
+    background_exposure = background_header["EXPOSURE"]
+    source_backscal = source_header["BACKSCAL"]
+    background_backscal = background_header["BACKSCAL"]
+    source_areascal = source_header["AREASCAL"]
+    initial_background_areascal = background_header["AREASCAL"]
+    if initial_background_areascal <= 0.0:
+        raise RuntimeError("initial blank-sky AREASCAL must be positive")
+    expected_background_areascal = required_background_areascal(
+        source_exposure,
+        background_exposure,
+        source_backscal,
+        background_backscal,
+        source_areascal,
+        bkgscale,
+    )
+    command = [
+        "dmhedit",
+        f"infile={background_pha}",
+        "filelist=",
+        "operation=add",
+        "key=AREASCAL",
+        f"value={expected_background_areascal:.16g}",
+        "comment=Sigma v17C: enforce effective scale equal to BKGSCALn",
+        "verbose=0",
+        "mode=h",
+    ]
+    completed = subprocess.run(
+        command,
+        check=False,
+        capture_output=True,
+        text=True,
+        env=env,
+    )
+    log = background_pha.with_suffix(".areascal.log")
+    log.write_text(completed.stdout + completed.stderr, encoding="utf-8")
+    if completed.returncode != 0:
+        raise RuntimeError(f"blank-sky AREASCAL correction failed; inspect {log}")
+    background_areascal = fits_numeric_header_values(
+        background_pha, ("AREASCAL",)
+    )["AREASCAL"]
     effective_scale = (
         source_exposure
         / background_exposure
@@ -407,11 +542,14 @@ def verify_blanksky_scaling(
         * source_areascal
         / background_areascal
     )
-    areascal_relative_error = abs(background_areascal / expected_background_areascal - 1.0)
-    if areascal_relative_error > 1e-6:
+    areascal_relative_error = abs(
+        background_areascal / expected_background_areascal - 1.0
+    )
+    effective_scale_relative_error = abs(effective_scale / bkgscale - 1.0)
+    if areascal_relative_error > 1e-6 or effective_scale_relative_error > 1e-6:
         raise RuntimeError(
-            f"blank-sky AREASCAL mismatch for {background_pha}: "
-            f"{background_areascal} vs {expected_background_areascal}"
+            f"blank-sky scale mismatch for {background_pha}: effective "
+            f"{effective_scale} vs measured {bkgscale}"
         )
     return {
         "BKGSCALn": bkgscale,
@@ -420,10 +558,15 @@ def verify_blanksky_scaling(
         "source_BACKSCAL": source_backscal,
         "background_BACKSCAL": background_backscal,
         "source_AREASCAL": source_areascal,
+        "initial_background_AREASCAL": initial_background_areascal,
         "background_AREASCAL": background_areascal,
         "expected_background_AREASCAL": expected_background_areascal,
         "areascal_relative_error": areascal_relative_error,
         "effective_background_scale": effective_scale,
+        "effective_scale_relative_error_from_BKGSCALn": effective_scale_relative_error,
+        "correction_command": command,
+        "correction_log": str(log),
+        "correction_log_sha256": sha256(log),
     }
 
 

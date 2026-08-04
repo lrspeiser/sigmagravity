@@ -8,7 +8,7 @@
     "static_spent_baseline": "configs/sigma_v16b_spent_boundary_interior.json",
     "static_spent_baseline_sha256": "b290c084590363a6df5d0cfc57b4a97778684af057f7fa807bc6525f2b534bee",
     "spectral_protocol": "configs/sigma_v17c_spectral_temperature.json",
-    "spectral_protocol_sha256": "7ec70d8a996329e18e04b94ddbd0ec9366562881d57c9972374442b01f179c20"
+    "spectral_protocol_sha256": "2fba4a7ed55751055b09e4385e6b5b0961e8a742a1687a64c400eb2389b7ec86"
   },
   "authorization": {
     "required_regional_temperature_status": "both_regional_temperature_gates_passed",

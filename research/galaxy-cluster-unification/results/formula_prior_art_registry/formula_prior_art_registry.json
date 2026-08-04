@@ -5633,15 +5633,15 @@
     },
     {
       "config": "configs/sigma_v17c_spectral_temperature.json",
-      "protocol_version": "SIGMA-V17C-SPECTRAL-TEMPERATURE-1.0.6",
-      "status": "frozen with pre-spectrum CIAO FOV-copy, explicit on-CCD response-reference, blank-sky detector-geometry metadata, and execution-only independent-cell concurrency corrections after the v17B spatial and HI4PI gates passed and before fitting any temperature or abundance, constructing any thermal-stress map, or reading any v17 lensing score",
+      "protocol_version": "SIGMA-V17C-SPECTRAL-TEMPERATURE-1.0.7",
+      "status": "frozen with pre-fit CIAO FOV-copy, on-CCD response-reference, blank-sky detector-geometry, independent-cell concurrency, and empirically verified blank-sky effective-scale corrections after the v17B spatial and HI4PI gates passed and before fitting any temperature or abundance, constructing any thermal-stress map, or reading any v17 lensing score",
       "role": "gate_or_data_protocol_no_new_formula_fragment",
       "formula_fragments": [],
       "formula_fragment_count": 0,
       "published_overlap_ids": [
         "NEWTON-POISSON"
       ],
-      "sha256": "7ec70d8a996329e18e04b94ddbd0ec9366562881d57c9972374442b01f179c20"
+      "sha256": "2fba4a7ed55751055b09e4385e6b5b0961e8a742a1687a64c400eb2389b7ec86"
     },
     {
       "config": "configs/sigma_v17d_thermal_stress_map.json",
@@ -5674,7 +5674,7 @@
         "FRT-GRAVITY",
         "EMSG"
       ],
-      "sha256": "47ca3afdddbbcb7b2e19e545ff1d0bf98e499a7b088b87756f132cb1e2edceed"
+      "sha256": "c2e0e8d67cf59fe55048257497580d084eae70fdc1e3a37d93ef485504c6846e"
     },
     {
       "config": "configs/sigma_v17e_thermal_stress_transfer.json",
@@ -5686,7 +5686,7 @@
       "published_overlap_ids": [
         "NEWTON-POISSON"
       ],
-      "sha256": "2141f9a3888073d124be0a174af3e4e8b74e8329b7cd7ffc64e14b1dfdd43ee5"
+      "sha256": "f86c119fc04dd0baaf4899938204c55ff57f1bfd58c2008c694dcdf8f62a37d8"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

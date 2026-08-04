@@ -95,7 +95,7 @@ def test_every_region_cell_has_private_ciao_state(monkeypatch, tmp_path: Path) -
         "response_reference": {},
         "translated_fov": {},
     }
-    result = module.execute_regional_cell(task, tmp_path, "spectral_v17c_v106")
+    result = module.execute_regional_cell(task, tmp_path, "spectral_v17c_v107")
     expected_tail = Path("regional") / "AS295" / "region_007" / "16524_ccd2"
     assert str(captured["pfiles"]).endswith(str(expected_tail))
     assert str(captured["scratch"]).endswith(str(expected_tail))
