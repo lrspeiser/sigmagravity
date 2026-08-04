@@ -1,0 +1,34 @@
+{
+  "all_v5a_gates_pass": false,
+  "checks": {
+    "derivative_growth_smallest_over_largest_probe": 1051.1966585781145,
+    "negative_Y_error": "the trace invariant must be non-negative",
+    "negative_Y_primitive_is_real": false,
+    "positive_Y_action_derivatives": [
+      -9.512492197250394,
+      -99.5012499921876,
+      -999.5001249999922,
+      -9999.5000125
+    ],
+    "v5b_signed_source_evenness_error": 0.0,
+    "v5b_source_derivative_at_zero": 0.0
+  },
+  "data_policy": "No galaxy or cluster calculation is permitted.",
+  "decision": "retire_exact_v5a_base_select_v5b_stegr_polarization",
+  "flrw_contractions": {
+    "Q_0": "6H",
+    "W_0": "6H",
+    "metric": "ds^2=-dt^2+a(t)^2 delta_ij dx^i dx^j",
+    "tilde_Q_0": "0",
+    "tilde_Q_a_tilde_Q^a": "0"
+  },
+  "gates": {
+    "v5a_finite_background_derivative": false,
+    "v5a_real_open_background_domain": false,
+    "v5b_signed_source_evenness": true,
+    "v5b_source_smooth_at_flrw": true
+  },
+  "observational_data_accessed": false,
+  "raw_holdout_opened": false,
+  "status": "completed Sigma v5A cosmological branch audit"
+}

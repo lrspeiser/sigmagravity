@@ -8,6 +8,7 @@ from voidscreen.sigma_causal_polarization import (
     local_transport_eigenvalues,
     maximum_characteristic_speed,
     minimum_static_operator_eigenvalue,
+    signed_trace_bandpass,
     transition_bandpass,
     transition_bandpass_y_derivative,
     weak_transport_gradient_contraction,
@@ -75,6 +76,15 @@ def test_transition_bandpass_y_derivative_matches_finite_difference() -> None:
     assert np.allclose(
         finite, transition_bandpass_y_derivative(y), rtol=2.0e-8, atol=1.0e-12
     )
+
+
+def test_signed_trace_source_is_real_even_and_smooth_through_zero() -> None:
+    value = np.linspace(-2.0, 2.0, 1001)
+    source = signed_trace_bandpass(value)
+    assert np.all(np.isfinite(source))
+    assert np.allclose(source, signed_trace_bandpass(-value))
+    assert signed_trace_bandpass(0.0) == 0.0
+    assert transition_bandpass_y_derivative(0.0) == 0.0
 
 
 def test_weak_transport_chain_rule_matches_directional_difference() -> None:

@@ -1,5 +1,23 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 v5A cosmological failure and v5B selection
+
+The exact v5A action is retired before data. On FLRW,
+`tilde(Q)_a tilde(Q)^a=0`, but generic perturbations make that Lorentzian
+invariant either sign. The inherited Sigma-v2 primitive rejects negative `Y`
+and its positive-side derivative grows from `-9.51` to `-9999.5` over the
+frozen near-zero probe. It has no open real differentiable background domain.
+See
+[`SIGMA_V5A_COSMOLOGICAL_BRANCH_RESULTS.md`](SIGMA_V5A_COSMOLOGICAL_BRANCH_RESULTS.md).
+
+The already-screened polarization source depends on `Z=Y^2` and is exactly
+real, even, and smooth through zero. Sigma v5B therefore places that causal
+polarization directly on STEGR/GR, with the same four constants and no MOND
+base. Its FLRW background has `sigma=0`, its background metric equations are
+GR, and its quadratic TT action has `c_T=c`. Galaxy and cluster departures
+must now arise from the same polarization field. See
+[`SIGMA_V5B_STEGR_POLARIZATION_ACTION.md`](SIGMA_V5B_STEGR_POLARIZATION_ACTION.md).
+
 ## 2026-08-03 Sigma v5A complete static weak variation
 
 The local v5A action now has compact exact metric, flat-connection, and scalar

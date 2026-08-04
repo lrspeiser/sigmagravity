@@ -60,6 +60,15 @@ compact exact form, and the coupled weak equations for `Psi`, `Phi`, and the
 polarization include every transition-source and anisotropic-chain term. All
 manufactured variation checks pass; background mode, cosmological `c_T`, and
 PPN proofs still precede any data fit.
+The subsequent cosmological-domain audit retires the exact v5A base in
+[`docs/SIGMA_V5A_COSMOLOGICAL_BRANCH_RESULTS.md`](docs/SIGMA_V5A_COSMOLOGICAL_BRANCH_RESULTS.md):
+the inherited Sigma-v2 primitive is not real and differentiable around FLRW.
+The causal polarization survives unchanged in the cleaner
+[`docs/SIGMA_V5B_STEGR_POLARIZATION_ACTION.md`](docs/SIGMA_V5B_STEGR_POLARIZATION_ACTION.md),
+which starts from STEGR/GR. Its homogeneous background is GR, its TT cone is
+luminal, and both galaxy and cluster departures must come from the same four-
+constant polarization field. Hamiltonian, PPN, cosmological-stability, and
+prior-art gates still prohibit fitting.
 The latest mechanism result is
 [`docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md`](docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md).
 Its positive baryon-seeded trace is broad, stable, and the strongest v4 source,

@@ -4,7 +4,7 @@ import numpy as np
 
 
 def transition_bandpass(acceleration_ratio) -> np.ndarray:
-    """Return the v5A geometric source ``x^4/(1+x^4)^2``.
+    """Return the v5-family geometric source ``x^4/(1+x^4)^2``.
 
     In the static weak branch, ``x=g_phi/a_sigma`` and the squared trace
     invariant is ``Z=x^4``.  The source is zero in flat space, peaks at the
@@ -17,18 +17,27 @@ def transition_bandpass(acceleration_ratio) -> np.ndarray:
     return fourth / np.square(1.0 + fourth)
 
 
+def signed_trace_bandpass(trace_ratio) -> np.ndarray:
+    """Return the globally real source ``Y^2/(1+Y^2)^2`` for signed Y."""
+    value = np.asarray(trace_ratio, dtype=float)
+    if np.any(~np.isfinite(value)):
+        raise ValueError("trace_ratio must be finite")
+    squared = np.square(value)
+    return squared / np.square(1.0 + squared)
+
+
 def transition_bandpass_y_derivative(y_squared) -> np.ndarray:
-    """Return ``d[y^2/(1+y^2)^2]/dy`` for ``y=|grad Phi|^2/a^2``."""
+    """Return ``d[Y^2/(1+Y^2)^2]/dY`` for signed trace ratio ``Y``."""
     value = np.asarray(y_squared, dtype=float)
-    if np.any(~np.isfinite(value)) or np.any(value < 0.0):
-        raise ValueError("y_squared must be finite and non-negative")
+    if np.any(~np.isfinite(value)):
+        raise ValueError("y_squared must be finite")
     return 2.0 * value * (1.0 - np.square(value)) / np.power(
         1.0 + np.square(value), 3
     )
 
 
 def bounded_disformal_fraction(nonmetricity_ratio, anisotropy: float) -> np.ndarray:
-    """Magnitude of the v5A rank-one disformal correction.
+    """Magnitude of the v5-family rank-one disformal correction.
 
     ``nonmetricity_ratio`` is ``|W_a W^a|/(4 q_sigma)^2``.  The returned
     fraction is strictly below ``alpha/(1+alpha)`` and therefore below one for

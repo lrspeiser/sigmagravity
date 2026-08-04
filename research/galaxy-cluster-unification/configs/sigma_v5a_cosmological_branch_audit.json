@@ -1,0 +1,28 @@
+{
+  "protocol_id": "sigma-v5a-cosmological-branch-audit-v1",
+  "status": "theory-only background-domain audit; no observational data",
+  "flrw_coincident_gauge": {
+    "metric": "ds^2=-dt^2+a(t)^2 delta_ij dx^i dx^j",
+    "Q_0": "6H",
+    "tilde_Q_0": "0",
+    "tilde_Q_a_tilde_Q^a": "0",
+    "W_0": "6H"
+  },
+  "perturbation_probe": {
+    "positive_Y_values": [
+      1e-4,
+      1e-8,
+      1e-12,
+      1e-16
+    ],
+    "negative_Y_probe": -1e-12
+  },
+  "gates": {
+    "require_real_action_in_open_signed_neighborhood_of_flrw": true,
+    "maximum_background_derivative_growth_ratio": 100.0,
+    "maximum_v5b_signed_source_evenness_error": 1e-15,
+    "maximum_v5b_source_derivative_at_zero": 1e-15
+  },
+  "decision_rule": "If the Sigma-v2 primitive is not real and differentiable on an open signed neighborhood of Y=0, retire exact v5A before any fit and move the already-screened polarization sector onto STEGR without modifying its four constants.",
+  "data_policy": "No galaxy or cluster calculation is permitted."
+}
