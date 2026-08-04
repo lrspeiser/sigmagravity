@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 100,
+    "sigma_protocols": 101,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 120,
+    "sigma_formula_fragments": 121,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -6433,6 +6433,30 @@
         "TEVES"
       ],
       "sha256": "375ce91a0ceafab55ae139a4a9df8607e05f1ae20a6a2c96ed5d02d891fad026"
+    },
+    {
+      "config": "configs/sigma_v18_post_pressure_flux_selection.json",
+      "protocol_version": "SIGMA-V18-POST-PRESSURE-FLUX-SELECTION-1.0.0",
+      "status": "frozen after the v17Q mechanism reset and v17B region pass, while the v17C spectra are still processing and before any temperature, thermal-stress map, v17E target score, or v17F scale result exists",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "formula_inventory.equations",
+          "formula": "nabla dot D=4 pi G rho_b; I_stat=integral{[H(D,nabla D,Z_b)-D dot nabla W]/(4piG)-rho_b W}d3x; nabla W=delta H/delta D; rho_Sigma,eff=-(4piG)^-1 nabla dot(g+D); H=D^2/2 gives Newton; H=H_0(|D|) is Legendre-dual AQUAL; minimal fixed-length elasticity gives delta g=-L^2(ds/dD)D^2/r^2",
+          "published_overlap_ids": [
+            "NEWTON-POISSON",
+            "AQUAL",
+            "EMERGENT-GRAVITY"
+          ]
+        }
+      ],
+      "formula_fragment_count": 1,
+      "published_overlap_ids": [
+        "NEWTON-POISSON",
+        "AQUAL",
+        "EMERGENT-GRAVITY"
+      ],
+      "sha256": "d86265531f97ab71cea5f35131b0c6a02a3c5884ec98a0e3d0f0c177c1cf6a6b"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

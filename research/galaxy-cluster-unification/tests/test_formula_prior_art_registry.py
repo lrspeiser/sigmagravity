@@ -342,3 +342,20 @@ def test_v17q_pressure_symmetron_registers_screen_and_metric_ancestry() -> None:
     assert {"SYMMETRON", "TEVES", "DISFORMAL-METRIC"}.issubset(
         set(v17q["published_overlap_ids"])
     )
+
+
+def test_v18_flux_selection_registers_newtonian_and_aqual_ancestry() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v18 = protocols["sigma_v18_post_pressure_flux_selection.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v18["formula_fragments"]
+    )
+
+    assert "rho_Sigma,eff" in fragment_text
+    assert "Legendre-dual AQUAL" in fragment_text
+    assert {"NEWTON-POISSON", "AQUAL"}.issubset(
+        set(v18["published_overlap_ids"])
+    )

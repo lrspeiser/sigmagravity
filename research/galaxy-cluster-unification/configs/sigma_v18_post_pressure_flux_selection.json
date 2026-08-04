@@ -1,0 +1,105 @@
+{
+  "protocol_version": "SIGMA-V18-POST-PRESSURE-FLUX-SELECTION-1.0.0",
+  "status": "frozen after the v17Q mechanism reset and v17B region pass, while the v17C spectra are still processing and before any temperature, thermal-stress map, v17E target score, or v17F scale result exists",
+  "purpose": "Define the post-pressure root-equation variables and a target-blind decision tree for learning what can set an apparent halo's size and shape without assigning a halo radius or adding a fourth pressure screen.",
+  "parents": {
+    "pressure_reset_protocol": {
+      "path": "configs/sigma_v17q_pressure_symmetron_no_go.json",
+      "sha256": "375ce91a0ceafab55ae139a4a9df8607e05f1ae20a6a2c96ed5d02d891fad026"
+    },
+    "pressure_reset_report": {
+      "path": "results/sigma_v17q_pressure_symmetron_no_go/report.json",
+      "sha256": "42208a931d5494a3d064185bc4427ae17d63fcb28fa79af1eccf2f258f029abc"
+    },
+    "halo_scale_audit": {
+      "path": "results/sigma_v17o_halo_scale_driver_audit/report.json",
+      "sha256": "2206d9f1f3905698e3f7b0da4e833e212b4d787adf1998f30b43c8392af0934e"
+    },
+    "static_invariant_audit": {
+      "path": "results/sigma_v15_spent_invariant_inference/report.json",
+      "sha256": "e627f8755857b1a54dd85bbe65ebf520c0fc559d622eb092cbb1ba57e723bc47"
+    },
+    "static_boundary_audit": {
+      "path": "results/sigma_v16d_incremental_boundary_control/report.json",
+      "sha256": "eca2edc45726e8fc17c1985b02a7292f5e8ade855ffefa2a8ec484b0c8130c67"
+    },
+    "temperature_region_report": {
+      "path": "results/sigma_v17b_temperature_regions/report.json",
+      "sha256": "e58698a2d14c124908810fc54ed829cf64834c4ec6d01fa58fc88faa8d0ee75a"
+    },
+    "thermal_transfer_protocol": {
+      "path": "configs/sigma_v17e_thermal_stress_transfer.json",
+      "sha256": "b81e718bf2726d0dbad906731960a0872d5ca4fc166385e29293a6bd5ed1ee23"
+    },
+    "root_scale_protocol": {
+      "path": "configs/sigma_v17f_root_scale_propagator.json",
+      "sha256": "fb734bbb7af35ec657538ec321def83cb34a5ea5171c80b3d230c17456b735fa"
+    }
+  },
+  "root_variables": {
+    "baryonic_flux": "D^i is an outward gravitational displacement field constrained by nabla_i D^i=4 pi G rho_b; it is not a dark medium and carries no independently fitted object charge.",
+    "physical_potential": "W is the weak-field potential of the one physical metric and g^i=-nabla^i W is the acceleration of slow matter. The eventual covariant action must make the same W determine photon lensing rather than imposing this relation by hand.",
+    "first_order_static_functional": "I_stat=integral d^3x { [H(D,nabla D,Z_b)-D dot nabla W]/(4 pi G) - rho_b W }",
+    "constitutive_equation": "nabla W=delta H/delta D, including spatial Euler-Lagrange derivatives when H depends on nabla D",
+    "effective_halo_density": "rho_Sigma,eff=-(4 pi G)^-1 nabla dot (g+D); this is a diagnostic derived from the predicted metric field, not invisible matter.",
+    "newtonian_limit": "H approaches D^2/2 and g approaches -D in the high-field limit."
+  },
+  "scale_logic": {
+    "aqual_limit": "If H=H_0(|D|) has no spatial-state dependence, eliminating D gives published AQUAL. The low-field transition surface |D| approximately a_Sigma yields r_M=sqrt(G M_b/a_Sigma) only in isolated spherical symmetry.",
+    "full_geometry": "For multiple or extended baryonic sources, D is solved as a vector field. Transition surfaces, overlap, and orientation are outputs of the baryonic boundary-value problem, so no object halo radius is supplied.",
+    "required_new_information": "Because AQUAL already misses cluster strength/topology and v15-v16 reject the tested static local and boundary features, a successor H must contain a measured dynamical spatial state or a genuinely different healthy constraint structure, not another scalar multiplier of |D|.",
+    "fixed_length_warning": "For the minimal local elasticity H_el=(L^2/2)s(|D|/a_Sigma)(partial_i D_j)^2, an isolated exterior D=G M/r^2 gives delta g=-L^2 (ds/dD)D^2/r^2. At r_M its relative amplitude scales as L^2/r_M^2 proportional to L^2/M. One common fixed length is therefore not an object halo radius and must pass the frozen cross-domain scale gate rather than be assumed."
+  },
+  "target_blind_branching": [
+    "If v17E thermal stress fails any frozen transfer, shear, power, extent, or resolution gate, do not put gas pressure or temperature into H; proceed only to the already-declared matched collisionless-stress test or a materially different causal-state mechanism.",
+    "If v17E passes and v17F selects L_Sigma=0, derive a source-local spatial-state constitutive action with no range constant.",
+    "If v17E passes and v17F selects one nonzero interior L_Sigma, permit exactly one universal correlation length in a dynamical spatial-state field; do not couple pressure directly to the physical metric.",
+    "If halo extent passes but full-field alignment or topology fails, retain only the scale clue and require a directional field; do not rescue the scalar response with a fitted orientation or shear.",
+    "If v17F selects its upper endpoint or fails, do not extend the length grid, add a second length, or create an object-dependent propagation scale."
+  ],
+  "covariant_completion_gates": {
+    "one_metric": true,
+    "matter_minimally_coupled_to_one_physical_metric": true,
+    "maximum_universal_physical_constants": 5,
+    "object_specific_gravity_parameters": 0,
+    "lensing_only_parameters": 0,
+    "no_direct_pressure_only_reciprocal_metric": true,
+    "no_derivative_dependent_matter_metric": true,
+    "static_convexity": "The constitutive Hessian and every spatial principal block must be positive on the declared field domain.",
+    "dynamic_health": "The covariant lift must have a bounded Hamiltonian, a well-posed initial-value problem, no extra tensor-speed shift, and no gradient instability.",
+    "solar_limit": "The complete response, including spatial-state terms, must be below 1e-5 when g/a_Sigma is at least 1e5 and must pass the explicit Cassini and Mercury calculations.",
+    "evidence_rule": "No holdout can open until the covariant action, weak-field matter and lensing potentials, constants, solver, and development/validation split are frozen."
+  },
+  "prior_art_boundary": {
+    "published_parents": [
+      "AQUAL first-order/nonlinear constitutive gravity",
+      "QUMOND source routing",
+      "Refracted Gravity permittivity",
+      "dipolar gravitational polarization",
+      "nonlocal gravity kernels",
+      "Einstein-aether and AeST vector/scalar completions"
+    ],
+    "not_new": "The flux variable, Legendre-dual AQUAL limit, polarization language, and the idea of a universal correlation length are not new.",
+    "possible_distinctive_claim_only_after_gates": "A baryon-measured dynamical spatial state that changes one metric's gravitational flux geometry, predicts effective halo size and raw lens topology with one frozen law, contains no dark medium, and passes Solar and action-health gates."
+  },
+  "authorization": {
+    "observational_target_opened": false,
+    "temperature_result_read": false,
+    "thermal_stress_map_constructed": false,
+    "empirical_coefficient_fit": false,
+    "formula_selected": false,
+    "allowed_next_action": "Complete the already-running v17C-v17F blinded measurement chain, then derive only the branch authorized by its frozen result."
+  },
+  "formula_inventory": {
+    "equations": "nabla dot D=4 pi G rho_b; I_stat=integral{[H(D,nabla D,Z_b)-D dot nabla W]/(4piG)-rho_b W}d3x; nabla W=delta H/delta D; rho_Sigma,eff=-(4piG)^-1 nabla dot(g+D); H=D^2/2 gives Newton; H=H_0(|D|) is Legendre-dual AQUAL; minimal fixed-length elasticity gives delta g=-L^2(ds/dD)D^2/r^2"
+  },
+  "prior_art_primary_sources": [
+    "https://adsabs.harvard.edu/pdf/1984ApJ...286....7B",
+    "https://arxiv.org/abs/0911.5464",
+    "https://arxiv.org/abs/1603.04943",
+    "https://arxiv.org/abs/0804.3518",
+    "https://arxiv.org/abs/1401.4819",
+    "https://arxiv.org/abs/gr-qc/0007031",
+    "https://arxiv.org/abs/2007.00082"
+  ]
+}

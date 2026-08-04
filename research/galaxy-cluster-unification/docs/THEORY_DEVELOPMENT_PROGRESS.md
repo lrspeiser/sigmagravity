@@ -1,5 +1,31 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v18 post-pressure gravitational-flux selection
+
+The post-v17Q root variables are now frozen without selecting a convenient
+new formula. An outward displacement field obeys
+`nabla dot D=4 pi G rho_b`; one physical weak-field potential obeys
+`nabla W=delta H/delta D`; and the conventional effective halo is an output,
+`rho_Sigma,eff=-(4 pi G)^-1 nabla dot(g+D)`. Newtonian gravity is
+`H=D^2/2`, while a spatially local `H_0(abs(D))` is only the published
+Legendre-dual form of AQUAL.
+
+This formulation makes the halo-size question explicit. In an isolated sphere,
+`abs(D)=GM/r^2` yields the MOND radius `sqrt(GM/a_Sigma)`. In a multi-source
+system, the transition surfaces must instead come from the full vector
+boundary-value solution. A minimal fixed elastic length is not automatically a
+universal halo radius: at the MOND radius its spherical correction scales as
+`L_Sigma^2/M_b`, preferentially changing dwarfs. V17F may retain one length
+only if the frozen cross-cluster extent and full-field gates select it.
+
+The spatial-state term remains target-blind and conditional. Both v17B cluster
+region gates have passed (29 AS295 and 21 PLCK G287 regions), and the frozen
+v17C spectral pipeline is currently processing them. If thermal stress fails
+v17E, it is prohibited from the constitutive law. If it passes, v17F decides
+between a source-local state and exactly one universal correlation length. A
+covariant, healthy one-metric action is still required before any holdout. See
+[`SIGMA_V18_POST_PRESSURE_FLUX_SELECTION.md`](SIGMA_V18_POST_PRESSURE_FLUX_SELECTION.md).
+
 ## 2026-08-04 Sigma v17Q pressure-symmetron no-go and mechanism reset
 
 The standard non-derivative symmetry-restoring completion cannot rescue the
