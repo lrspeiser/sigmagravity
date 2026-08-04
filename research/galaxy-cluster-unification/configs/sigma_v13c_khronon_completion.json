@@ -1,0 +1,30 @@
+{
+  "protocol_status": "Theory-only minimal covariant-placement audit. The action convention, grids, weights, counterterms, and tolerances were fixed before the recorded run. No observational data or holdouts are opened.",
+  "candidate": {
+    "name": "Sigma v13C minimal one-metric khronon trace completion",
+    "covariant_fields": "physical metric g_mu_nu, khronon T through u_mu=-nabla_mu T/sqrt(-nabla T squared), and algebraic carrier momentum p",
+    "carrier_term": "L_C=p Theta-H_13B(p,a), Theta=nabla_mu u^mu, a_mu=u^nu nabla_nu u_mu",
+    "minimal_modifier": "Delta L=L_C-(Theta^2-a^2)/2",
+    "static_purpose": "Make the total weak-field static energy exactly the v13B AQUAL energy while matter and light use the same metric."
+  },
+  "fixed_values": {
+    "selected_epsilon": 1e-6,
+    "selected_completion_weight": 1.0,
+    "selected_trace_counterterm": 0.0,
+    "acceleration_ratio_minimum": 1e-10,
+    "acceleration_ratio_maximum": 1000000000000.0,
+    "acceleration_ratio_samples": 1201,
+    "sentinel_acceleration_ratios": [0.0, 1e-6, 0.001, 0.1, 0.75, 1.0, 10.0, 100000.0, 10000000000.0],
+    "completion_weight_scan": [1e-6, 0.001, 1.0, 100.0, 1000000.0],
+    "trace_counterterm_scan": [-1000000.0, -1.0, -0.6666666666666666, -0.1, 0.0, 1e-6, 0.001, 1.0, 1000.0, 1000000.0],
+    "high_field_acceleration_ratio": 100000.0,
+    "high_field_fractional_force_tolerance": 1e-5,
+    "high_field_lambda_deviation_tolerance": 1e-5,
+    "static_derivative_tolerance": 2e-7,
+    "identity_tolerance": 1e-10,
+    "maximum_physical_constants": 5,
+    "candidate_physical_constants": 2
+  },
+  "data_policy": "Do not access galaxy, cluster, Solar-System, or holdout observations during this covariant-placement kill-gate audit.",
+  "scope_limit": "This tests the minimal same-weight placement of the v13B Legendre pair into the trace expansion of a hypersurface-orthogonal preferred foliation. It is not a proof against every possible covariant use of the standalone convex carrier."
+}

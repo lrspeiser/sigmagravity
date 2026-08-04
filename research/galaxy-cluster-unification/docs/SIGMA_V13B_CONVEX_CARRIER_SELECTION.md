@@ -281,3 +281,15 @@ python -m pytest -q tests/test_sigma_v13b_convex_carrier.py
 
 Machine-readable evidence is in
 `results/sigma_v13b_convex_carrier/report.json`.
+
+## Subsequent covariant-placement result
+
+The minimal identification of the carrier's temporal Legendre variable with a
+khronon foliation expansion was tested as v13C. Although it retains the static
+AQUAL response and the local TT tensor cone, the metric shift constraint turns
+the added positive trace curvature into a negative physical scalar kinetic
+coefficient at high acceleration. Positive weights and signed constant trace
+counterterms do not preserve both stability and the GR limit. The standalone
+v13B convexity result remains valid, but this covariant placement is rejected
+and triggers the three-failure preferred-clock/trace mechanism reset. See
+[`SIGMA_V13C_KHRONON_COMPLETION_FALSIFICATION.md`](SIGMA_V13C_KHRONON_COMPLETION_FALSIFICATION.md).

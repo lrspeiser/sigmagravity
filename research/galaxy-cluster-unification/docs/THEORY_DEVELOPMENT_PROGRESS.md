@@ -1,5 +1,33 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v13C khronon trace-completion falsification
+
+The minimal one-metric covariant placement defines a khronon normal, uses its
+expansion `Theta=nabla_mu u^mu` and acceleration, and adds the first-order
+Legendre pair `L_C=p Theta-H_13B(p,a)`. Subtracting the canonical reference
+preserves the exact v13B static AQUAL response. This static khronon lane and
+its equal weak-field metric potentials are established Blanchet--Marsat prior
+art; the tested distinction is only the v13B temporal completion.
+
+At a static acceleration background, Legendre duality fixes the extra trace
+curvature to `delta=w(1-epsilon)/(epsilon+a/a_sigma)>0`. The ADM kinetic term is
+then `K_ij K^ij-lambda K^2` with `lambda=1+c_trace-delta/2`. Eliminating the
+scalar shift gives the exact coefficient
+`2(1-3lambda)/(1-lambda)`, which is negative for `1/3<lambda<1`. On the frozen
+minimal row the ghost begins at `a/a_sigma=0.74999825`. At the `1e5` high-field
+sentinel, the static force correction passes at `9.99999e-6`, while the reduced
+scalar kinetic coefficient is `-799994.8`.
+
+Every finite positive completion weight approaches the ghost interval from
+below at high acceleration. A constant trace counterterm avoids the continuous
+crossing only for `c_trace<=-2/3` or `c_trace>=499999.5`; both fail the GR
+high-field limit. The trace modifier leaves both TT tensor polarizations
+unchanged, but that does not repair the scalar ghost. v13C is rejected before
+data. This is the third materially distinct post-v12 bounded-Hamiltonian
+failure, so the preferred-foliation clock/ADM-trace mechanism reset is
+triggered. See
+[`SIGMA_V13C_KHRONON_COMPLETION_FALSIFICATION.md`](SIGMA_V13C_KHRONON_COMPLETION_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v13B convex reduced-carrier selection
 
 v13B replaces the failed AeST clock/Jeans repair with the Hamiltonian-first

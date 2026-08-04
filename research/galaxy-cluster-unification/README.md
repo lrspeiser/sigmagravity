@@ -16,6 +16,21 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V13C_KHRONON_COMPLETION_FALSIFICATION.md`](docs/SIGMA_V13C_KHRONON_COMPLETION_FALSIFICATION.md).
+The minimal one-metric khronon embedding places the v13B Legendre variable in
+the foliation expansion `Theta=K` and retains the known khronon/AQUAL static
+response. Its temporal excess curvature is
+`delta=w(1-epsilon)/(epsilon+a/a_sigma)>0`, which changes the ADM trace
+coefficient to `lambda=1+c_trace-delta/2`. After the scalar shift is eliminated,
+the kinetic coefficient is `2(1-3lambda)/(1-lambda)` and is negative throughout
+the required high-acceleration regime. At `a/a_sigma=1e5`, the force correction
+passes at `9.99999e-6`, but the reduced scalar kinetic coefficient is
+`-799994.8`. Every positive weight has a high-field ghost; a constant trace
+counterterm avoids it only by abandoning the GR limit. v13C is retired before
+data. This is bounded-Hamiltonian failure `3/3`, so the preferred-foliation
+clock/trace mechanism reset is triggered.
+
+The preceding theory-only result is
 [`docs/SIGMA_V13B_CONVEX_CARRIER_SELECTION.md`](docs/SIGMA_V13B_CONVEX_CARRIER_SELECTION.md).
 v13B selects a Hamiltonian-first reduced carrier with
 `H=(a_sigma^2/2) F_epsilon((Pi^2+|grad sigma|^2)/a_sigma^2)`. Its complete

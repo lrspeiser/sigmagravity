@@ -1,0 +1,384 @@
+{
+  "all_physical_advancement_gates_pass": false,
+  "all_verification_gates_pass": true,
+  "analytic_failure": {
+    "constant_counterterm_no_ghost_domains": "c_trace<=-2/3 or c_trace>=delta_max/2",
+    "effective_adm_lambda": "lambda=1+c_trace-delta/2",
+    "ghost_interval": "1/3 < lambda < 1",
+    "minimum_constant_counterterm_avoiding_any_crossing": 499999.5,
+    "selected_no_counterterm_ghost_onset_acceleration_ratio": 0.74999825,
+    "shift_reduced_scalar_kinetic": "K_red=2(1-3lambda)/(1-lambda)",
+    "temporal_excess_curvature": "delta=w(1-epsilon)/(epsilon+a/a_sigma)>0",
+    "why_counterterm_is_not_rescue": "Avoiding the continuous ghost crossing requires a constant trace counterterm at least delta_max/2, but the same constant leaves lambda(infinity)=1+c_trace and therefore does not recover the GR high-field kinetic structure."
+  },
+  "bounded_hamiltonian_same_gate_failure_count": 3,
+  "candidate": {
+    "carrier_term": "L_C=p Theta-H_13B(p,a), Theta=nabla_mu u^mu, a_mu=u^nu nabla_nu u_mu",
+    "covariant_fields": "physical metric g_mu_nu, khronon T through u_mu=-nabla_mu T/sqrt(-nabla T squared), and algebraic carrier momentum p",
+    "minimal_modifier": "Delta L=L_C-(Theta^2-a^2)/2",
+    "name": "Sigma v13C minimal one-metric khronon trace completion",
+    "static_purpose": "Make the total weak-field static energy exactly the v13B AQUAL energy while matter and light use the same metric."
+  },
+  "completion_weight_rows": [
+    {
+      "analytic_ghost_onset_acceleration_ratio": 0.0,
+      "completion_weight": 1e-06,
+      "high_field_witness_acceleration_ratio": 100000.0,
+      "high_field_witness_adm_lambda": 0.999999999995,
+      "high_field_witness_reduced_kinetic": -799999933801.7086,
+      "positive_weight_has_high_field_ghost": true
+    },
+    {
+      "analytic_ghost_onset_acceleration_ratio": 0.00074899925,
+      "completion_weight": 0.001,
+      "high_field_witness_acceleration_ratio": 100000.0,
+      "high_field_witness_adm_lambda": 0.999999995000005,
+      "high_field_witness_reduced_kinetic": -800000798.223363,
+      "positive_weight_has_high_field_ghost": true
+    },
+    {
+      "analytic_ghost_onset_acceleration_ratio": 0.74999825,
+      "completion_weight": 1.0,
+      "high_field_witness_acceleration_ratio": 100000.0,
+      "high_field_witness_adm_lambda": 0.9999950000050001,
+      "high_field_witness_reduced_kinetic": -799994.8000133887,
+      "positive_weight_has_high_field_ghost": true
+    },
+    {
+      "analytic_ghost_onset_acceleration_ratio": 74.99992400000001,
+      "completion_weight": 100.0,
+      "high_field_witness_acceleration_ratio": 100000.0,
+      "high_field_witness_adm_lambda": 0.999500000500005,
+      "high_field_witness_reduced_kinetic": -7994.008000087704,
+      "positive_weight_has_high_field_ghost": true
+    },
+    {
+      "analytic_ghost_onset_acceleration_ratio": 749999.249999,
+      "completion_weight": 1000000.0,
+      "high_field_witness_acceleration_ratio": 10000000.0,
+      "high_field_witness_adm_lambda": 0.950000050000005,
+      "high_field_witness_reduced_kinetic": -74.00008000008796,
+      "positive_weight_has_high_field_ghost": true
+    }
+  ],
+  "covariant_action": {
+    "carrier": "L_C=p Theta-H_13B(p,sqrt(a_mu a^mu))",
+    "invariants": "Theta=nabla_mu u^mu; a_mu=u^nu nabla_nu u_mu",
+    "matter_coupling": "S_m[g,psi]; the same g_mu_nu governs massive matter and photons",
+    "modifier": "Delta L=L_C-(Theta^2-a_mu a^mu)/2",
+    "normal": "u_mu=-nabla_mu T/sqrt(-g^ab nabla_a T nabla_b T)"
+  },
+  "data_policy": "Do not access galaxy, cluster, Solar-System, or holdout observations during this covariant-placement kill-gate audit.",
+  "decision": "Reject the minimal v13C one-metric khronon trace completion before data. Its static response and local TT cone are correct, but the same positive temporal curvature places the shift-reduced scalar graviton in the negative-kinetic interval at every sufficiently high finite acceleration. Positive completion weights only move the crossing. A constant trace counterterm large enough to avoid it destroys the GR high-field limit. This is the third materially distinct bounded-Hamiltonian failure after the v12 reset, so stop repairing this preferred-foliation clock/trace mechanism.",
+  "high_field_sentinel": {
+    "acceleration_over_a_sigma": 100000.0,
+    "adm_lambda": 0.9999950000050001,
+    "analytic_reduced_kinetic_coefficient": -799994.8000133887,
+    "direct_schur_kinetic_coefficient": -799994.8000133887,
+    "dot_shift_coefficient": -3.9999700000300003,
+    "dot_squared_coefficient": -5.999955000045,
+    "gr_constraint_point": false,
+    "in_standard_ghost_interval": true,
+    "positive_reduced_scalar_kinetic": false,
+    "schur_identity_residual": 0.0,
+    "shift_squared_coefficient": 4.99999499992132e-06,
+    "static_fractional_extra_force": 9.999990000064685e-06,
+    "static_mu": 0.9999900001099988,
+    "stationary_shift_per_dot": 399997.40000669437,
+    "temporal_excess_curvature": 9.999989999900001e-06
+  },
+  "independent_identities": {
+    "maximum_direct_schur_identity_residual": 3.552713678800501e-15,
+    "maximum_static_function_derivative_residual": 1.2178899000403476e-08,
+    "tensor_modifier_contractions": {
+      "cross": 0.0,
+      "plus": 0.0
+    }
+  },
+  "next_gate": "Issue the three-failure mechanism reset. Return to the physical postulates and choose a carrier whose covariant kinetic variable is not the gravitational ADM trace, rather than adding another clock coefficient or interpolation parameter.",
+  "observational_data_accessed": false,
+  "physical_advancement_gates": {
+    "bounded_physical_hamiltonian": false,
+    "local_tt_tensor_cone_unchanged": true,
+    "manifestly_covariant_khronon_action_written": true,
+    "positive_reduced_scalar_kinetic_all_required_regimes": false,
+    "raw_lensing_gate": false,
+    "single_physical_metric_for_matter_and_light": true,
+    "solar_ppn_gate": false,
+    "static_aqual_response_retained": true
+  },
+  "post_v12_reset_total_material_formulation_failure_count": 3,
+  "prior_art_boundary": {
+    "established_static_lane": "Blanchet-Marsat khronon acceleration actions already derive MOND-like dynamics and equal weak-field metric potentials.",
+    "novelty_claimed": false,
+    "tested_distinction": "v13C tests the v13B convex Legendre pair as a temporal trace completion of that established static lane."
+  },
+  "protocol_status": "Theory-only minimal covariant-placement audit. The action convention, grids, weights, counterterms, and tolerances were fixed before the recorded run. No observational data or holdouts are opened.",
+  "raw_holdout_opened": false,
+  "scope_limit": "This tests the minimal same-weight placement of the v13B Legendre pair into the trace expansion of a hypersurface-orthogonal preferred foliation. It is not a proof against every possible covariant use of the standalone convex carrier.",
+  "selected_grid_summary": {
+    "ghost_row_count": 662,
+    "maximum_reduced_scalar_kinetic": 5.999991999992,
+    "minimum_reduced_scalar_kinetic": -7999288858556.16,
+    "total_row_count": 1202
+  },
+  "selected_parameters": {
+    "completion_weight": 1.0,
+    "epsilon": 1e-06,
+    "physical_constant_count": 2,
+    "trace_counterterm": 0.0
+  },
+  "selected_sentinel_rows": [
+    {
+      "acceleration_over_a_sigma": 0.0,
+      "adm_lambda": -499998.5,
+      "analytic_reduced_kinetic_coefficient": 5.999991999992,
+      "direct_schur_kinetic_coefficient": 5.999991999939084,
+      "dot_shift_coefficient": 2999993.0,
+      "dot_squared_coefficient": 4499989.5,
+      "gr_constraint_point": false,
+      "in_standard_ghost_interval": false,
+      "positive_reduced_scalar_kinetic": true,
+      "schur_identity_residual": -5.291589388889406e-11,
+      "shift_squared_coefficient": 499999.5,
+      "static_fractional_extra_force": 999999.0,
+      "static_mu": 1e-06,
+      "stationary_shift_per_dot": -2.999995999996,
+      "temporal_excess_curvature": 999999.0
+    },
+    {
+      "acceleration_over_a_sigma": 1e-06,
+      "adm_lambda": -249998.75,
+      "analytic_reduced_kinetic_coefficient": 5.999983999984,
+      "direct_schur_kinetic_coefficient": 5.999983999878168,
+      "dot_shift_coefficient": 1499994.5,
+      "dot_squared_coefficient": 2249991.75,
+      "gr_constraint_point": false,
+      "in_standard_ghost_interval": false,
+      "positive_reduced_scalar_kinetic": true,
+      "schur_identity_residual": -1.0583178777778812e-10,
+      "shift_squared_coefficient": 249999.75,
+      "static_fractional_extra_force": 499999.50000000006,
+      "static_mu": 1.9999980000019997e-06,
+      "stationary_shift_per_dot": -2.999991999992,
+      "temporal_excess_curvature": 499999.5
+    },
+    {
+      "acceleration_over_a_sigma": 0.001,
+      "adm_lambda": -498.5,
+      "analytic_reduced_kinetic_coefficient": 5.991991991991992,
+      "direct_schur_kinetic_coefficient": 5.9919919919921085,
+      "dot_shift_coefficient": 2993.0,
+      "dot_squared_coefficient": 4489.5,
+      "gr_constraint_point": false,
+      "in_standard_ghost_interval": false,
+      "positive_reduced_scalar_kinetic": true,
+      "schur_identity_residual": 1.163513729807164e-13,
+      "shift_squared_coefficient": 499.5,
+      "static_fractional_extra_force": 999.0,
+      "static_mu": 0.001,
+      "stationary_shift_per_dot": -2.995995995995996,
+      "temporal_excess_curvature": 999.0
+    },
+    {
+      "acceleration_over_a_sigma": 0.1,
+      "adm_lambda": -3.999945000549994,
+      "analytic_reduced_kinetic_coefficient": 5.1999911999912,
+      "direct_schur_kinetic_coefficient": 5.199991199991196,
+      "dot_shift_coefficient": 25.999670003299965,
+      "dot_squared_coefficient": 38.999505004949945,
+      "gr_constraint_point": false,
+      "in_standard_ghost_interval": false,
+      "positive_reduced_scalar_kinetic": true,
+      "schur_identity_residual": -4.440892098500626e-15,
+      "shift_squared_coefficient": 4.999945000549994,
+      "static_fractional_extra_force": 9.99989000109999,
+      "static_mu": 0.09090999999999999,
+      "stationary_shift_per_dot": -2.5999955999956,
+      "temporal_excess_curvature": 9.999890001099988
+    },
+    {
+      "acceleration_over_a_sigma": 0.75,
+      "adm_lambda": 0.33333488888681484,
+      "analytic_reduced_kinetic_coefficient": -1.4000014000212512e-05,
+      "direct_schur_kinetic_coefficient": -1.4000013999990467e-05,
+      "dot_shift_coefficient": -9.333320889037822e-06,
+      "dot_squared_coefficient": -1.3999981333334688e-05,
+      "gr_constraint_point": false,
+      "in_standard_ghost_interval": true,
+      "positive_reduced_scalar_kinetic": false,
+      "schur_identity_residual": 2.220446049250313e-16,
+      "shift_squared_coefficient": 0.6666651111131852,
+      "static_fractional_extra_force": 1.3333302222263708,
+      "static_mu": 0.42857199999999995,
+      "stationary_shift_per_dot": 7.000007000106256e-06,
+      "temporal_excess_curvature": 1.3333302222263703
+    },
+    {
+      "acceleration_over_a_sigma": 1.0,
+      "adm_lambda": 0.500000999999,
+      "analytic_reduced_kinetic_coefficient": -2.000016000016001,
+      "direct_schur_kinetic_coefficient": -2.000016000016001,
+      "dot_shift_coefficient": -1.0000059999940003,
+      "dot_squared_coefficient": -1.5000089999910005,
+      "gr_constraint_point": false,
+      "in_standard_ghost_interval": true,
+      "positive_reduced_scalar_kinetic": false,
+      "schur_identity_residual": 0.0,
+      "shift_squared_coefficient": 0.49999900000099995,
+      "static_fractional_extra_force": 0.9999980000020001,
+      "static_mu": 0.5000005,
+      "stationary_shift_per_dot": 1.0000080000080005,
+      "temporal_excess_curvature": 0.999998000002
+    },
+    {
+      "acceleration_over_a_sigma": 10.0,
+      "adm_lambda": 0.9500000549999945,
+      "analytic_reduced_kinetic_coefficient": -74.00008800008803,
+      "direct_schur_kinetic_coefficient": -74.00008800008803,
+      "dot_shift_coefficient": -3.700000329999967,
+      "dot_squared_coefficient": -5.550000494999951,
+      "gr_constraint_point": false,
+      "in_standard_ghost_interval": true,
+      "positive_reduced_scalar_kinetic": false,
+      "schur_identity_residual": 0.0,
+      "shift_squared_coefficient": 0.049999945000005486,
+      "static_fractional_extra_force": 0.09999989000001097,
+      "static_mu": 0.9090910000000001,
+      "stationary_shift_per_dot": 37.000044000044014,
+      "temporal_excess_curvature": 0.099999890000011
+    },
+    {
+      "acceleration_over_a_sigma": 100000.0,
+      "adm_lambda": 0.9999950000050001,
+      "analytic_reduced_kinetic_coefficient": -799994.8000133887,
+      "direct_schur_kinetic_coefficient": -799994.8000133887,
+      "dot_shift_coefficient": -3.9999700000300003,
+      "dot_squared_coefficient": -5.999955000045,
+      "gr_constraint_point": false,
+      "in_standard_ghost_interval": true,
+      "positive_reduced_scalar_kinetic": false,
+      "schur_identity_residual": 0.0,
+      "shift_squared_coefficient": 4.99999499992132e-06,
+      "static_fractional_extra_force": 9.999990000064685e-06,
+      "static_mu": 0.9999900001099988,
+      "stationary_shift_per_dot": 399997.40000669437,
+      "temporal_excess_curvature": 9.999989999900001e-06
+    },
+    {
+      "acceleration_over_a_sigma": 10000000000.0,
+      "adm_lambda": 0.99999999995,
+      "analytic_reduced_kinetic_coefficient": -79999993374.77087,
+      "direct_schur_kinetic_coefficient": -79999993374.77087,
+      "dot_shift_coefficient": -3.9999999997,
+      "dot_squared_coefficient": -5.999999999549999,
+      "gr_constraint_point": false,
+      "in_standard_ghost_interval": true,
+      "positive_reduced_scalar_kinetic": false,
+      "schur_identity_residual": 0.0,
+      "shift_squared_coefficient": 5.000000413701855e-11,
+      "static_fractional_extra_force": 1.000000082740371e-10,
+      "static_mu": 0.9999999999000001,
+      "stationary_shift_per_dot": 39999996687.38544,
+      "temporal_excess_curvature": 9.999989999999997e-11
+    }
+  ],
+  "status": "Sigma v13C minimal khronon completion falsification",
+  "theory_viable": false,
+  "three_failure_mechanism_reset_triggered": true,
+  "trace_counterterm_rows": [
+    {
+      "analytically_crosses_ghost_interval": false,
+      "lambda_at_infinite_acceleration": -999999.0,
+      "lambda_at_zero_acceleration": -1499998.5,
+      "preserves_high_field_gr_lambda": false,
+      "rescues_kinetic_and_high_field_gr_together": false,
+      "trace_counterterm": -1000000.0
+    },
+    {
+      "analytically_crosses_ghost_interval": false,
+      "lambda_at_infinite_acceleration": 0.0,
+      "lambda_at_zero_acceleration": -499999.5,
+      "preserves_high_field_gr_lambda": false,
+      "rescues_kinetic_and_high_field_gr_together": false,
+      "trace_counterterm": -1.0
+    },
+    {
+      "analytically_crosses_ghost_interval": false,
+      "lambda_at_infinite_acceleration": 0.33333333333333337,
+      "lambda_at_zero_acceleration": -499999.1666666667,
+      "preserves_high_field_gr_lambda": false,
+      "rescues_kinetic_and_high_field_gr_together": false,
+      "trace_counterterm": -0.6666666666666666
+    },
+    {
+      "analytically_crosses_ghost_interval": true,
+      "lambda_at_infinite_acceleration": 0.9,
+      "lambda_at_zero_acceleration": -499998.6,
+      "preserves_high_field_gr_lambda": false,
+      "rescues_kinetic_and_high_field_gr_together": false,
+      "trace_counterterm": -0.1
+    },
+    {
+      "analytically_crosses_ghost_interval": true,
+      "lambda_at_infinite_acceleration": 1.0,
+      "lambda_at_zero_acceleration": -499998.5,
+      "preserves_high_field_gr_lambda": true,
+      "rescues_kinetic_and_high_field_gr_together": false,
+      "trace_counterterm": 0.0
+    },
+    {
+      "analytically_crosses_ghost_interval": true,
+      "lambda_at_infinite_acceleration": 1.000001,
+      "lambda_at_zero_acceleration": -499998.499999,
+      "preserves_high_field_gr_lambda": true,
+      "rescues_kinetic_and_high_field_gr_together": false,
+      "trace_counterterm": 1e-06
+    },
+    {
+      "analytically_crosses_ghost_interval": true,
+      "lambda_at_infinite_acceleration": 1.001,
+      "lambda_at_zero_acceleration": -499998.499,
+      "preserves_high_field_gr_lambda": false,
+      "rescues_kinetic_and_high_field_gr_together": false,
+      "trace_counterterm": 0.001
+    },
+    {
+      "analytically_crosses_ghost_interval": true,
+      "lambda_at_infinite_acceleration": 2.0,
+      "lambda_at_zero_acceleration": -499997.5,
+      "preserves_high_field_gr_lambda": false,
+      "rescues_kinetic_and_high_field_gr_together": false,
+      "trace_counterterm": 1.0
+    },
+    {
+      "analytically_crosses_ghost_interval": true,
+      "lambda_at_infinite_acceleration": 1001.0,
+      "lambda_at_zero_acceleration": -498998.5,
+      "preserves_high_field_gr_lambda": false,
+      "rescues_kinetic_and_high_field_gr_together": false,
+      "trace_counterterm": 1000.0
+    },
+    {
+      "analytically_crosses_ghost_interval": false,
+      "lambda_at_infinite_acceleration": 1000001.0,
+      "lambda_at_zero_acceleration": 500001.5,
+      "preserves_high_field_gr_lambda": false,
+      "rescues_kinetic_and_high_field_gr_together": false,
+      "trace_counterterm": 1000000.0
+    }
+  ],
+  "v13b_reduced_convexity_result_retained": true,
+  "v13b_selected_for_more_same_mechanism_covariantization": false,
+  "v13c_formulation_rejected": true,
+  "verification_gates": {
+    "candidate_parameter_count_within_budget": true,
+    "direct_shift_elimination_matches_closed_form": true,
+    "no_constant_counterterm_preserves_gr_and_avoids_ghost": true,
+    "positive_weights_all_have_high_field_ghost_witness": true,
+    "selected_high_field_force_limit_passes": true,
+    "selected_high_field_scalar_kinetic_is_negative": true,
+    "static_f_derivative_reproduces_selected_mu": true,
+    "trace_modifier_leaves_tt_quadratic_kinetic_unchanged": true
+  }
+}
