@@ -1,0 +1,86 @@
+{
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "complete_delta_eff_proven_invertible": false,
+  "complete_dirac_chain_derived": false,
+  "data_policy": {
+    "authorization": "exact reduced AeST scalar function and synthetic gradient/tilt backgrounds only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_to_dhost_spatial_principal_operator",
+  "dhost_spatial_operator_included": false,
+  "exact_reduced_aest_result": {
+    "Q": "chi q+A.s",
+    "Y": "-q^2+s^2+Q^2",
+    "cauchy_identity": "|A|^2 Y-(Y_q/2)^2=|A|^2|s|^2-(A.s)^2>=0",
+    "global_lower_bound": "4K2+[4K2-(9/2)(2-KB)]|A|^2",
+    "selected_parameter_condition": {
+      "actual_k2": 2.0,
+      "constant_margin": 8.0,
+      "globally_positive_sufficient_condition": true,
+      "minimum_k2": 1.125,
+      "tilt_squared_margin": 3.5
+    },
+    "sufficient_parameter_condition": "K2>=9(2-KB)/8",
+    "susceptibility": "d2L_AeST/dq2=4K2 chi^2-(2-KB)[(1+f_y)Y_qq+f_yy Y_q^2/a_sigma^2]"
+  },
+  "gates": {
+    "all_sampled_analytic_bounds_positive": true,
+    "all_sampled_susceptibilities_positive": true,
+    "analytic_lower_bound_respected": true,
+    "projected_cauchy_identity": true,
+    "projected_cauchy_inequality": true,
+    "selected_parameters_satisfy_global_bound": true
+  },
+  "next_kill_gate": "Derive the v12A DHOST contribution to the spatial principal symbol of Delta_eff and prove that it cannot cancel or rank-change the positive AeST zeroth-order susceptibility on finite anisotropic backgrounds.",
+  "observational_data_accessed": false,
+  "physical_degree_count_proven_unchanged": false,
+  "random_scan": {
+    "maximum_aether_spatial_norm": 999965.1749727716,
+    "maximum_lower_bound_violation": 0.0,
+    "maximum_projected_cauchy_identity_relative_error": 5.941307916913652e-16,
+    "maximum_relative_lower_bound_violation": 0.0,
+    "maximum_scalar_spatial_gradient_norm": 999427.0941544153,
+    "minimum_analytic_lower_bound": 8.000000000003505,
+    "minimum_clock_susceptibility": 8.00000000000402,
+    "minimum_projected_cauchy_residual": 0.0,
+    "minimum_susceptibility_row": {
+      "Q": -505692.06370149576,
+      "Y": 2284651802.714349,
+      "aether_spatial": [
+        -1.5851878747194252e-07,
+        3.452609571559744e-07,
+        -9.278165209430912e-07
+      ],
+      "aether_squared": 1.005176831052776e-12,
+      "analytic_lower_bound": 8.000000000003519,
+      "bound_satisfied": true,
+      "chi": 1.0000000000005025,
+      "clock_susceptibility": 8.00000000000402,
+      "d2Y_dq2": 2.010353662105552e-12,
+      "dY_dq": 0.07038288180242186,
+      "f_y": 0.999979079073961,
+      "interpolation_curvature_term": 2.2680670665652815e-17,
+      "normal_clock": -505692.09889319073,
+      "projected_cauchy_identity_relative_error": 2.168404344971009e-19,
+      "projected_cauchy_residual": 0.0010580415464079994,
+      "relative_lower_bound_violation": 0.0,
+      "spatial_gradient": [
+        -37470.35399061605,
+        7730.150763593507,
+        -28651.43514777963
+      ],
+      "susceptibility_positive": true,
+      "trial": 22368,
+      "y_ratio": 2284651802.714349
+    },
+    "signed_log10_amplitude_limit": 6.0,
+    "trials": 50000
+  },
+  "raw_holdout_opened": false,
+  "reason": "After exactly eliminating the AeST scalar auxiliaries, the normal-clock susceptibility has the global lower bound 4K2+[4K2-(9/2)(2-KB)]|A|^2. The selected K_B=1,K2=2 row has bound 8+(7/2)|A|^2, so no finite tilt or scalar-gradient orientation can make the lower-derivative part of Delta_eff vanish.",
+  "scope_limit": "This computes the complete lower-derivative AeST contribution to the effective primary-secondary bracket after auxiliary elimination. It does not include the spatial differential operator contributed by the v12A DHOST terms, so it does not prove complete Delta_eff invertibility or the final degree count.",
+  "status": "completed Sigma v12A tilted reduced-AeST clock subgate",
+  "theory_viable": false,
+  "tilted_reduced_aest_susceptibility_globally_positive": true
+}

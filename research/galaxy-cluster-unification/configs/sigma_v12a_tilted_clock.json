@@ -1,0 +1,20 @@
+{
+  "protocol_version": "Sigma-v12A-0.6-tilted-clock-susceptibility",
+  "status": "frozen theory-only reduced-AeST tilt subgate",
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "fixed_values": {
+    "a_sigma": 1.0,
+    "k_b": 1.0,
+    "k_2": 2.0,
+    "random_trials": 50000,
+    "logarithmic_amplitude_limit": 6.0,
+    "random_seed": 12006
+  },
+  "pass_rule": "After eliminating the AeST mu/nu auxiliary pairs, derive the exact normal-clock susceptibility for arbitrary finite aether tilt and scalar-gradient orientation; prove a strictly positive global lower bound at the selected constants; and stress-test both the projected Cauchy inequality and the bound over signed logarithmic amplitudes including the exact Y=0 axis.",
+  "scope_limit": "This computes the complete lower-derivative AeST contribution to the effective primary-secondary bracket after auxiliary elimination. It does not include the spatial differential operator contributed by the v12A DHOST terms, so it does not prove complete Delta_eff invertibility or the final degree count.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "exact reduced AeST scalar function and synthetic gradient/tilt backgrounds only"
+  }
+}

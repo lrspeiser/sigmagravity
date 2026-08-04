@@ -16,6 +16,15 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V12A_TILTED_CLOCK.md`](docs/SIGMA_V12A_TILTED_CLOCK.md).
+After exactly eliminating the AeST scalar auxiliaries, the normal-clock
+susceptibility is bounded below by
+`4 K2+[4 K2-(9/2)(2-KB)]|A|^2`. At the selected `KB=1,K2=2` row this is
+`8+(7/2)|A|^2`, so arbitrary finite aether tilt and scalar-gradient orientation
+cannot remove the lower-derivative constraint bracket. The DHOST spatial
+principal operator remains the next kill gate.
+
+The preceding theory-only result is
 [`docs/SIGMA_V12A_HOMOGENEOUS_DIRAC.md`](docs/SIGMA_V12A_HOMOGENEOUS_DIRAC.md).
 The homogeneous aether-aligned v12A kinetic terms form an exact degenerate
 square. At the intended flat clock the new interaction vanishes, but the AeST

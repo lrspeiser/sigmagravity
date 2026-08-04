@@ -1,5 +1,27 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v12A tilted reduced-AeST clock susceptibility
+
+The exact lower-derivative AeST contribution to the v12A constraint bracket is
+strictly nonzero for arbitrary finite aether tilt and scalar-gradient
+orientation. With `Q=chi q+A.s` and `Y=-q^2+s^2+Q^2`, Cauchy gives
+`|A|^2Y-Y_q^2/4=|A|^2|s|^2-(A.s)^2>=0`. Applied to the fixed simple
+interpolation, this yields
+
+`d2L_AeST/dq2 >= 4K2+[4K2-(9/2)(2-KB)]|A|^2`.
+
+Thus `K2>=9(2-KB)/8` is a sufficient all-tilt condition. The selected
+`KB=1,K2=2` row has the strictly positive bound `8+(7/2)|A|^2`. A 50,000-row
+signed logarithmic scan, including 10,000 exact `Y=0` projected-axis fixtures,
+checks the direct susceptibility and analytic inequalities. All six gates
+pass: the minimum susceptibility is `8.00000000000402`, the maximum normalized
+Cauchy-identity error is `5.95e-16`, and the lower-bound violation is zero.
+
+This computes the reduced AeST zeroth-order part of `Delta_eff`, not the DHOST
+spatial differential operator. A finite-wave-vector cancellation or principal
+rank change remains possible and is the next kill gate. No observation was
+opened. See [`SIGMA_V12A_TILTED_CLOCK.md`](SIGMA_V12A_TILTED_CLOCK.md).
+
 ## 2026-08-04 Sigma v12A homogeneous aligned Dirac branch
 
 The homogeneous aether-aligned branch passes its primary-secondary test. With
