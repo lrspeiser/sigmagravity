@@ -69,6 +69,13 @@ which starts from STEGR/GR. Its homogeneous background is GR, its TT cone is
 luminal, and both galaxy and cluster departures must come from the same four-
 constant polarization field. Hamiltonian, PPN, cosmological-stability, and
 prior-art gates still prohibit fitting.
+The nonlinear constraint audit then retires exact v5B in
+[`docs/SIGMA_V5B_NONLINEAR_DEGENERACY_RESULTS.md`](docs/SIGMA_V5B_NONLINEAR_DEGENERACY_RESULTS.md).
+Although its `sigma=0` FLRW branch and free scalar are healthy, the transition
+source and orientation transport each make the lapse/flat-connection kinetic
+matrix full rank on generic polarized static backgrounds. The lost STEGR
+degeneracy exposes an additional sign-changing kinetic direction. No data were
+opened; a successor must prove degeneracy before source phenomenology.
 The latest mechanism result is
 [`docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md`](docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md).
 Its positive baryon-seeded trace is broad, stable, and the strongest v4 source,

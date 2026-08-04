@@ -1,5 +1,27 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 v5B nonlinear-degeneracy failure
+
+The exact v5B action is retired before data. Its `sigma=0` FLRW branch remains
+GR at linear order: the transition source begins at fourth metric-perturbation
+order, its tree-level feedback begins at eighth order, and the free scalar has
+positive subluminal kinetic coefficients. The nonlinear static background is
+decisive instead.
+
+In a local ADM reduction, STEGR plus a canonical scalar has a rank-two kinetic
+Hessian with a null lapse direction. The v5B band-pass source alone makes it
+rank three and changes the new lapse coefficient from negative below the
+transition to positive above it, crossing zero at the source maximum. The
+orientation transport alone is also rank three on all 5,000 frozen random
+backgrounds. The combined representative has eigenvalues `-11.5842`,
+`-0.178473`, and `2.49808`. The analytic Hessian matches finite differences to
+`1.17e-8`. See
+[`SIGMA_V5B_NONLINEAR_DEGENERACY_RESULTS.md`](SIGMA_V5B_NONLINEAR_DEGENERACY_RESULTS.md).
+
+No observational array was opened. The next action must be selected from a
+degenerate scalar/vector/tensor class before attaching a transition source or
+orientation carrier; changing a v5B parameter cannot repair the rank identity.
+
 ## 2026-08-03 v5A cosmological failure and v5B selection
 
 The exact v5A action is retired before data. On FLRW,

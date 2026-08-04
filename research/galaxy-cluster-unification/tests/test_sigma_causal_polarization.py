@@ -5,10 +5,13 @@ import pytest
 
 from voidscreen.sigma_causal_polarization import (
     bounded_disformal_fraction,
+    flrw_polarization_mode,
     local_transport_eigenvalues,
     maximum_characteristic_speed,
     minimum_static_operator_eigenvalue,
     signed_trace_bandpass,
+    static_reduced_kinetic_hessian,
+    static_reduced_velocity_lagrangian,
     transition_bandpass,
     transition_bandpass_y_derivative,
     weak_transport_gradient_contraction,
@@ -117,3 +120,106 @@ def test_weak_transport_chain_rule_matches_directional_difference() -> None:
     )
     analytic = float(np.sum(analytic_vector * direction))
     assert abs(finite - analytic) / max(abs(finite), abs(analytic), 1.0e-15) < 1.0e-8
+
+
+def test_v5b_flrw_scalar_mode_is_healthy_and_subluminal() -> None:
+    hubble_ratio = np.geomspace(1.0e-12, 1.0e12, 1000)
+    mode = flrw_polarization_mode(hubble_ratio, 10.0)
+    assert np.all(mode["time_kinetic"] >= 1.0)
+    assert np.all(mode["spatial_gradient"] == 1.0)
+    assert np.all(mode["sound_speed_squared"] > 0.0)
+    assert np.all(mode["sound_speed_squared"] <= 1.0)
+    assert np.all(mode["mass_squared_times_L_squared"] > 0.0)
+
+
+def test_static_reduced_hessian_matches_centered_finite_difference() -> None:
+    weyl = np.array([4.0, 1.0, 0.5])
+    gradient = np.array([0.7, -0.2, 0.4])
+    trace = np.array([1.4, 0.5, -0.3])
+    analytic = static_reduced_kinetic_hessian(
+        weyl, gradient, trace, 0.2, 2.0
+    )
+    step = 1.0e-4
+    origin = np.zeros(3)
+    finite = np.empty((3, 3))
+    base = static_reduced_velocity_lagrangian(
+        origin, weyl, gradient, trace, 0.2, 2.0
+    )
+    for row in range(3):
+        row_step = np.zeros(3)
+        row_step[row] = step
+        finite[row, row] = (
+            static_reduced_velocity_lagrangian(
+                origin + row_step, weyl, gradient, trace, 0.2, 2.0
+            )
+            - 2.0 * base
+            + static_reduced_velocity_lagrangian(
+                origin - row_step, weyl, gradient, trace, 0.2, 2.0
+            )
+        ) / step**2
+        for column in range(row):
+            column_step = np.zeros(3)
+            column_step[column] = step
+            finite[row, column] = finite[column, row] = (
+                static_reduced_velocity_lagrangian(
+                    origin + row_step + column_step,
+                    weyl,
+                    gradient,
+                    trace,
+                    0.2,
+                    2.0,
+                )
+                - static_reduced_velocity_lagrangian(
+                    origin + row_step - column_step,
+                    weyl,
+                    gradient,
+                    trace,
+                    0.2,
+                    2.0,
+                )
+                - static_reduced_velocity_lagrangian(
+                    origin - row_step + column_step,
+                    weyl,
+                    gradient,
+                    trace,
+                    0.2,
+                    2.0,
+                )
+                + static_reduced_velocity_lagrangian(
+                    origin - row_step - column_step,
+                    weyl,
+                    gradient,
+                    trace,
+                    0.2,
+                    2.0,
+                )
+            ) / (4.0 * step**2)
+    assert np.allclose(finite, analytic, rtol=2.0e-6, atol=2.0e-7)
+
+
+def test_v5b_static_kinetic_matrix_loses_the_stegr_lapse_null() -> None:
+    control = static_reduced_kinetic_hessian(
+        np.zeros(3), np.zeros(3), np.zeros(3), 0.0, 0.0
+    )
+    assert np.linalg.matrix_rank(control, tol=1.0e-10) == 2
+    assert np.linalg.det(control) == 0.0
+
+    source_only = static_reduced_kinetic_hessian(
+        np.zeros(3),
+        np.zeros(3),
+        np.array([np.sqrt(2.0), 0.0, 0.0]),
+        0.2,
+        0.0,
+    )
+    assert np.linalg.matrix_rank(source_only, tol=1.0e-10) == 3
+    assert source_only[0, 0] < 0.0
+
+    transport_only = static_reduced_kinetic_hessian(
+        np.array([4.0, 1.0, 0.5]),
+        np.array([0.7, -0.2, 0.4]),
+        np.zeros(3),
+        0.0,
+        2.0,
+    )
+    assert np.linalg.matrix_rank(transport_only, tol=1.0e-10) == 3
+    assert abs(np.linalg.det(transport_only)) > 1.0e-3

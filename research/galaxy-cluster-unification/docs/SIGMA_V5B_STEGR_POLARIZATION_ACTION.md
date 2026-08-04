@@ -2,14 +2,16 @@
 
 ## Status
 
-Sigma v5B is the theory successor selected by the v5A cosmological failure. It
-uses the same already-screened causal polarization sector but removes the
-nonanalytic Sigma-v2 base. No observational data have been used and no
-constant has been fitted.
+**Retired before observational fitting.** Sigma v5B was the theory successor
+selected by the v5A cosmological failure. It used the same locally screened
+causal polarization sector but removed the nonanalytic Sigma-v2 base. No
+observational data were used and no constant was fitted.
 
 The action, background, tensor, scalar, static-uniqueness, high-field, and weak
-equations are specified below. A full nonlinear Hamiltonian count, PPN
-solution, and prior-art audit remain mandatory before any map fit.
+equations are retained below as the exact theory record. The subsequent
+necessary-condition audit proves that its lapse/connection kinetic Hessian is
+generically full rank on a polarized static background. See
+[`SIGMA_V5B_NONLINEAR_DEGENERACY_RESULTS.md`](SIGMA_V5B_NONLINEAR_DEGENERACY_RESULTS.md).
 
 ## Covariant action
 
@@ -204,15 +206,14 @@ cluster lensing, and Solar limits, they do so through one polarization field.
 If it fails galaxies, it is rejected even if it helps clusters. If it requires
 different `L`, `alpha`, or `eta` by system, it is rejected.
 
-## Remaining pre-fit gates
+## Pre-fit verdict
 
-1. Perform the full Hamiltonian/constraint count beyond the FLRW quadratic
-   screen.
-2. Derive PPN parameters and solve the Solar transition-shell response with
-   the universal retarded boundary state.
-3. Audit cosmological scalar production and demonstrate that \(\sigma=0\) is
-   stable under realistic perturbations.
-4. Complete prior-art and invertible-field-redefinition comparisons.
-5. Only then preregister a numerical solver and spent-data source/phase test.
+The quadratic FLRW scalar is healthy and subluminal, and its sourced metric
+feedback starts only at eighth perturbative order. That success is
+insufficient. Both `J(tilde(Q)^2)` and the `W_a`-dependent transport term make
+the ADM lapse/flat-connection combination kinetic once the static polarization
+is nonzero. The reduced Hessian changes from the required rank two control to
+rank three for the source alone, transport alone, and their combination.
 
-No observational fitting is currently permitted.
+PPN and observational work on this exact action is cancelled. The next action
+must establish nonlinear degeneracy before any source phenomenology.

@@ -1,0 +1,78 @@
+{
+  "protocol_id": "sigma-v5b-nonlinear-degeneracy-audit-v1",
+  "status": "preregistered theory-only necessary-condition audit; no observational target accessed",
+  "action_under_test": "Sigma v5B STEGR plus causal polarization",
+  "velocity_variables": [
+    "x=dot(log lapse)",
+    "h=dot(log isotropic scale)",
+    "s=dot(sigma)"
+  ],
+  "normalization": {
+    "q_sigma": 1.0,
+    "polarization_weight": 1.0,
+    "note": "Positive local rescalings do not change Hessian rank; L_sigma is one in the source-only representative screen."
+  },
+  "perturbative_probe": {
+    "lambda_min": 0.0001,
+    "lambda_max": 0.1,
+    "points": 40
+  },
+  "flrw_scan": {
+    "hubble_over_q_min": 1e-12,
+    "hubble_over_q_max": 1000000000000.0,
+    "points": 2000,
+    "anisotropy_values": [0.0, 0.1, 1.0, 10.0]
+  },
+  "representative_backgrounds": {
+    "stegr_scalar_control": {
+      "weyl_spatial": [0.0, 0.0, 0.0],
+      "polarization_gradient": [0.0, 0.0, 0.0],
+      "trace_spatial": [0.0, 0.0, 0.0],
+      "sigma_background": 0.0,
+      "anisotropy": 0.0
+    },
+    "source_only_low_field": {
+      "weyl_spatial": [0.0, 0.0, 0.0],
+      "polarization_gradient": [0.0, 0.0, 0.0],
+      "trace_spatial": [1.4142135623730951, 0.0, 0.0],
+      "sigma_background": 0.2,
+      "anisotropy": 0.0
+    },
+    "transport_only": {
+      "weyl_spatial": [4.0, 1.0, 0.5],
+      "polarization_gradient": [0.7, -0.2, 0.4],
+      "trace_spatial": [0.0, 0.0, 0.0],
+      "sigma_background": 0.0,
+      "anisotropy": 2.0
+    },
+    "combined": {
+      "weyl_spatial": [4.0, 1.0, 0.5],
+      "polarization_gradient": [0.7, -0.2, 0.4],
+      "trace_spatial": [1.4, 0.5, -0.3],
+      "sigma_background": 0.2,
+      "anisotropy": 2.0
+    }
+  },
+  "source_sign_probe_Y": [0.01, 0.1, 0.5, 1.0, 2.0, 10.0, 100.0],
+  "random_transport_scan": {
+    "seed": 20260803,
+    "backgrounds": 5000,
+    "anisotropy": 2.0,
+    "weyl_standard_deviation": 4.0,
+    "gradient_standard_deviation": 1.0,
+    "full_rank_determinant_threshold": 1e-10
+  },
+  "gates": {
+    "maximum_source_order_error": 0.01,
+    "maximum_feedback_order_error": 0.02,
+    "minimum_flrw_time_kinetic": 1.0,
+    "minimum_flrw_spatial_gradient": 1.0,
+    "maximum_flrw_sound_speed_squared": 1.0,
+    "maximum_hessian_finite_difference_error": 5e-7,
+    "maximum_control_determinant": 1e-12,
+    "required_control_rank": 2,
+    "required_polarized_rank": 2,
+    "required_random_transport_degenerate_fraction": 1.0
+  },
+  "data_policy": "No galaxy, cluster, Solar, or other observational array may be opened by this audit."
+}

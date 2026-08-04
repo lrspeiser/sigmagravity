@@ -1,0 +1,223 @@
+{
+  "all_v5b_gates_pass": false,
+  "data_policy": "No galaxy, cluster, Solar, or other observational array may be opened by this audit.",
+  "decision": "retire_exact_v5b_before_observational_fit",
+  "flrw_scalar_mode": {
+    "maximum_sound_speed_squared": 1.0,
+    "minimum_mass_squared_times_L_squared": 0.5238095238095238,
+    "minimum_spatial_gradient": 1.0,
+    "minimum_time_kinetic": 1.0,
+    "records": [
+      {
+        "anisotropy": 0.0,
+        "maximum_sound_speed_squared": 1.0,
+        "minimum_mass_squared_times_L_squared": 1.0,
+        "minimum_sound_speed_squared": 1.0,
+        "minimum_spatial_gradient": 1.0,
+        "minimum_time_kinetic": 1.0
+      },
+      {
+        "anisotropy": 0.1,
+        "maximum_sound_speed_squared": 1.0,
+        "minimum_mass_squared_times_L_squared": 0.9166666666666667,
+        "minimum_sound_speed_squared": 0.9166666666666667,
+        "minimum_spatial_gradient": 1.0,
+        "minimum_time_kinetic": 1.0
+      },
+      {
+        "anisotropy": 1.0,
+        "maximum_sound_speed_squared": 1.0,
+        "minimum_mass_squared_times_L_squared": 0.6666666666666666,
+        "minimum_sound_speed_squared": 0.6666666666666666,
+        "minimum_spatial_gradient": 1.0,
+        "minimum_time_kinetic": 1.0
+      },
+      {
+        "anisotropy": 10.0,
+        "maximum_sound_speed_squared": 1.0,
+        "minimum_mass_squared_times_L_squared": 0.5238095238095238,
+        "minimum_sound_speed_squared": 0.5238095238095238,
+        "minimum_spatial_gradient": 1.0,
+        "minimum_time_kinetic": 1.0
+      }
+    ]
+  },
+  "gates": {
+    "analytic_hessian_matches_finite_difference": true,
+    "combined_background_retains_required_degeneracy": false,
+    "eighth_order_integrated_metric_feedback": true,
+    "generic_transport_degeneracy": false,
+    "healthy_quadratic_flrw_scalar": true,
+    "quartic_cosmological_source_onset": true,
+    "source_channel_retains_required_degeneracy": false,
+    "stegr_control_retains_lapse_constraint": true,
+    "transport_channel_retains_required_degeneracy": false
+  },
+  "hessian_finite_difference_maximum_absolute_error": 1.1682553369141147e-08,
+  "linear_cosmology_pass": true,
+  "nonlinear_degeneracy_pass": false,
+  "observational_data_accessed": false,
+  "perturbative_cosmology": {
+    "integrated_out_metric_feedback_order": 7.999984533611152,
+    "interpretation": "The sigma=0 FLRW branch is GR at linear order; J first appears at fourth metric order and its tree-level feedback at eighth order.",
+    "source_onset_order": 3.999992266805576
+  },
+  "random_transport_scan": {
+    "backgrounds": 5000,
+    "degenerate_fraction": 0.0,
+    "full_rank_fraction": 1.0,
+    "maximum_absolute_determinant": 84.82174855185077,
+    "median_absolute_determinant": 2.0124220228264154,
+    "minimum_absolute_determinant": 7.687575190821233e-08
+  },
+  "raw_holdout_opened": false,
+  "reason": "Both the source and orientation transport make the lapse/connection velocity Hessian generically full rank on the polarized static backgrounds the mechanism needs.",
+  "source_lapse_sign_probe": [
+    {
+      "J_Y": 0.019992001799680054,
+      "Y": 0.01,
+      "normalized_lapse_hessian": -0.015993601439744043
+    },
+    {
+      "J_Y": 0.19217684928967357,
+      "Y": 0.1,
+      "normalized_lapse_hessian": -0.15374147943173888
+    },
+    {
+      "J_Y": 0.384,
+      "Y": 0.5,
+      "normalized_lapse_hessian": -0.30720000000000003
+    },
+    {
+      "J_Y": 0.0,
+      "Y": 1.0,
+      "normalized_lapse_hessian": -0.0
+    },
+    {
+      "J_Y": -0.096,
+      "Y": 2.0,
+      "normalized_lapse_hessian": 0.07680000000000001
+    },
+    {
+      "J_Y": -0.001921768492896736,
+      "Y": 10.0,
+      "normalized_lapse_hessian": 0.0015374147943173887
+    },
+    {
+      "J_Y": -1.999200179968005e-06,
+      "Y": 100.0,
+      "normalized_lapse_hessian": 1.599360143974404e-06
+    }
+  ],
+  "static_kinetic_hessians": {
+    "combined": {
+      "determinant": 5.164674675839033,
+      "eigenvalues": [
+        -11.58415958721951,
+        -0.17847257129961516,
+        2.498083540229638
+      ],
+      "hessian": [
+        [
+          0.23703029650147078,
+          -0.4984210852090414,
+          0.9520608073879571
+        ],
+        [
+          -0.4984210852090414,
+          -11.501578914790958,
+          -0.9520608073879571
+        ],
+        [
+          0.9520608073879571,
+          -0.9520608073879571,
+          2.0
+        ]
+      ],
+      "negative_eigenvalues": 2,
+      "rank": 3
+    },
+    "source_only_low_field": {
+      "determinant": 7.3728,
+      "eigenvalues": [
+        -12.0,
+        -0.30720000000000003,
+        2.0
+      ],
+      "hessian": [
+        [
+          -0.30720000000000003,
+          -0.0,
+          0.0
+        ],
+        [
+          -0.0,
+          -12.0,
+          -0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          2.0
+        ]
+      ],
+      "negative_eigenvalues": 2,
+      "rank": 3
+    },
+    "stegr_scalar_control": {
+      "determinant": 0.0,
+      "eigenvalues": [
+        -12.0,
+        0.0,
+        2.0
+      ],
+      "hessian": [
+        [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        [
+          -0.0,
+          -12.0,
+          -0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          2.0
+        ]
+      ],
+      "negative_eigenvalues": 1,
+      "rank": 2
+    },
+    "transport_only": {
+      "determinant": -1.08506867344649,
+      "eigenvalues": [
+        -11.583816700563942,
+        0.036822767158036736,
+        2.5438361038239887
+      ],
+      "hessian": [
+        [
+          0.4984210852090414,
+          -0.4984210852090414,
+          0.9520608073879571
+        ],
+        [
+          -0.4984210852090414,
+          -11.501578914790958,
+          -0.9520608073879571
+        ],
+        [
+          0.9520608073879571,
+          -0.9520608073879571,
+          2.0
+        ]
+      ],
+      "negative_eigenvalues": 1,
+      "rank": 3
+    }
+  },
+  "status": "completed Sigma v5B theory-only nonlinear degeneracy audit"
+}
