@@ -1,5 +1,33 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v10B auxiliary aether-tidal sequence
+
+V10B keeps the six-component trace/STF geometry but sources it with
+`D_(m J_n)`, where `J_m=A^n nabla_n A_m` is the aether acceleration, and makes
+the tensor auxiliary rather than propagating. The fixed coefficient
+`beta^2=2 K_B/3` leaves the worst static Schur complement `K_B/3`. At `K_B=1`,
+the longitudinal static eigenvalues are `0.183503/1.816497` and the transverse
+ones are `0.422650/1.577350`. The response capacities are `3` longitudinal and
+`1.5` transverse; the first closes `93.26%` of the spent unit-to-`3.14465`
+amplitude gap. The linear static interaction changes the physical lapse while
+leaving the AeST traceless/no-slip and flat-TT equations unchanged, so dynamics
+and Weyl lensing receive the same metric correction at this order.
+
+The Dirac reduction succeeds. Six `pi_P=0` primaries generate six secondary
+elliptic equations; their bracket operator is positive, so all twelve
+constraints are second class and remove all six P configuration states. The
+reduced Hamiltonian is positive and the flat vector squared speeds decrease
+from one to `0.6` longitudinally and `0.75` transversely.
+
+The exact causal-front gate fails. Eliminating a finite-range second-class P
+produces a same-time Yukawa tail. In the physical transverse channel its local
+coefficient is `3/4`, inverse range `sqrt(3/4)/L_P`, and nonlocal coefficient
+`3/(16 L_P^2)`. It is nonzero at every radius on the same aether slice. This is
+not a first-class lapse gauge constraint, so exact v10B is retired before data.
+The positive aether-tidal static block survives as the starting point for a
+hyperbolic causal carrier. See
+[`SIGMA_V10B_AUXILIARY_AETHER_TIDAL_FALSIFICATION.md`](SIGMA_V10B_AUXILIARY_AETHER_TIDAL_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v10A spatial-polarization sequence
 
 V10A is a six-component symmetric tensor constrained to the AeST aether's

@@ -1,0 +1,33 @@
+{
+  "protocol_version": "Sigma-v10B-0.2-constraint-causality-gate",
+  "status": "frozen theory-only follow-up to v10B selection",
+  "question": "Do the six auxiliary tensor constraints remove P without introducing an equal-preferred-time physical response outside the metric light cone?",
+  "parent_protocol": "configs/sigma_v10b_auxiliary_aether_tidal_selection.json",
+  "fixed_values": {
+    "K_B": 1.0,
+    "inverse_carrier_length_units": 1.0,
+    "mixing": "beta=sqrt(2 K_B/3)"
+  },
+  "scan": {
+    "wave_numbers": [0.0, 0.01, 0.1, 1.0, 10.0, 100.0],
+    "radii_in_carrier_length_units": [0.01, 0.1, 1.0, 10.0]
+  },
+  "canonical_channel": {
+    "lagrangian": "L=K_B(dot a^2-k^2 a^2)/2-(k^2+m^2)p^2/2+b k p dot a",
+    "primary": "pi_p=0",
+    "secondary_bracket": "k^2+m^2+b^2 k^2/K_B",
+    "constraint_class": "positive primary-secondary bracket makes the pair second class"
+  },
+  "equal_time_kernel": {
+    "fourier": "C(k)=(k^2+m^2)/[(K_B+b^2)k^2+K_B m^2]",
+    "position": "delta(x)/(K_B+b^2)+[b^2 m^2/(K_B+b^2)^2] exp[-m sqrt(K_B/(K_B+b^2)) r]/(4 pi r)",
+    "physical_channel": "the transverse AeST aether vector is propagating and not a lapse gauge variable"
+  },
+  "advance_rule": "Advance only if all P pairs are second class and every physical channel has zero equal-time nonlocal tail for finite L_P and nonzero beta.",
+  "retire_rule": "Retire exact v10B if the finite-range second-class auxiliary constraint produces a nonzero equal-time transverse physical tail; do not call it a GR gauge constraint without a first-class cancellation.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "new_observational_product_accessed": false,
+    "raw_holdout_opened": false
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "all_causality_gates_pass": false,
+  "all_constraint_gates_pass": true,
+  "canonical_channel": {
+    "constraint_class": "positive primary-secondary bracket makes the pair second class",
+    "lagrangian": "L=K_B(dot a^2-k^2 a^2)/2-(k^2+m^2)p^2/2+b k p dot a",
+    "primary": "pi_p=0",
+    "secondary_bracket": "k^2+m^2+b^2 k^2/K_B"
+  },
+  "causality_gates": {
+    "finite_front_for_finite_range_carrier": false,
+    "no_equal_time_longitudinal_tail": false,
+    "no_equal_time_transverse_physical_tail": false
+  },
+  "coefficients": {
+    "carrier_spatial_stiffness": 1.0,
+    "mixing_beta": 0.816496580927726,
+    "mixing_fraction_beta_squared_over_KB": 0.6666666666666666
+  },
+  "constraint_gates": {
+    "all_primary_secondary_brackets_positive": true,
+    "all_twelve_constraints_second_class_on_flat_branch": true,
+    "auxiliary_tensor_adds_zero_configuration_dof": true,
+    "reduced_hamiltonian_channel_positive": true,
+    "six_primary_plus_six_secondary_constraints": true
+  },
+  "data_policy": {
+    "new_observational_product_accessed": false,
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_exact_v10B_finite_range_auxiliary_carrier",
+  "dirac": {
+    "longitudinal": {
+      "auxiliary_configuration_dof_per_component": 0.0,
+      "minimum_reduced_momentum_coefficient": 0.6000239985600865,
+      "minimum_secondary_bracket": 1.0,
+      "primary_constraints_per_component": 1,
+      "second_class_constraints_per_component": 2,
+      "secondary_constraints_per_component": 1
+    },
+    "transverse": {
+      "auxiliary_configuration_dof_per_component": 0.0,
+      "minimum_reduced_momentum_coefficient": 0.7500187485938555,
+      "minimum_secondary_bracket": 1.0,
+      "primary_constraints_per_component": 1,
+      "second_class_constraints_per_component": 2,
+      "secondary_constraints_per_component": 1
+    }
+  },
+  "equal_time_kernel_derivation": {
+    "fourier": "C(k)=(k^2+m^2)/[(K_B+b^2)k^2+K_B m^2]",
+    "physical_channel": "the transverse AeST aether vector is propagating and not a lapse gauge variable",
+    "position": "delta(x)/(K_B+b^2)+[b^2 m^2/(K_B+b^2)^2] exp[-m sqrt(K_B/(K_B+b^2)) r]/(4 pi r)"
+  },
+  "equal_time_kernels": {
+    "longitudinal": {
+      "effective_inverse_range": 0.7745966692414834,
+      "equal_time_nonlocal_tail_present": true,
+      "finite_light_cone_front": false,
+      "local_delta_coefficient": 0.6000000000000001,
+      "yukawa_tail_coefficient": 0.24000000000000005
+    },
+    "transverse": {
+      "effective_inverse_range": 0.8660254037844386,
+      "equal_time_nonlocal_tail_present": true,
+      "finite_light_cone_front": false,
+      "local_delta_coefficient": 0.75,
+      "yukawa_tail_coefficient": 0.1875
+    }
+  },
+  "equal_time_tail_values": {
+    "longitudinal": [
+      1.8951227585737505,
+      0.1767506712387252,
+      0.008802343625717194,
+      8.259823860740843e-07
+    ],
+    "transverse": [
+      1.4792116122367147,
+      0.13682970878023978,
+      0.006275977154058204,
+      2.586371270815906e-07
+    ]
+  },
+  "exact_v10b_survives": false,
+  "fixed_values": {
+    "K_B": 1.0,
+    "inverse_carrier_length_units": 1.0,
+    "mixing": "beta=sqrt(2 K_B/3)"
+  },
+  "new_observational_product_accessed": false,
+  "next_mechanism_requirement": "Give the aether-tidal tensor a hyperbolic causal completion whose full mixed characteristic cone remains inside the metric cone, while preserving the exact positive static block, one metric, five constants, and no homogeneous object state.",
+  "observational_data_accessed": false,
+  "parent_protocol": "configs/sigma_v10b_auxiliary_aether_tidal_selection.json",
+  "radii_in_carrier_length_units": [
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "raw_holdout_opened": false,
+  "reason": "The canonical constraint result is healthy but physical causality is not. Each of the six pi_P=0 primaries pairs with a positive secondary elliptic equation, so P adds no degree of freedom and the reduced Hamiltonian is positive. For every finite L_P and nonzero beta, eliminating P leaves an equal-time Yukawa tail. In the transverse channel at K_B=1 the local coefficient is 3/4, the inverse range is sqrt(3/4)/L_P, and the tail coefficient is 3/(16 L_P^2). The transverse aether vector is physical, not a lapse gauge variable, so a localized source changes its acceleration at all radii on the same preferred-time slice.",
+  "scope": "This retires the exact finite-range nondynamical v10B carrier. It does not retire the positive aether-tidal static block or a causal hyperbolic carrier. The massless limit removes the Yukawa tail only by removing the finite transition scale and nonlinear finite-range screening; beta zero removes the mechanism.",
+  "status": "completed Sigma v10B auxiliary-constraint causality falsification",
+  "wave_numbers": [
+    0.0,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ]
+}

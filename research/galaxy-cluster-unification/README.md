@@ -16,6 +16,17 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only checkpoint is
+[`docs/SIGMA_V10B_AUXILIARY_AETHER_TIDAL_FALSIFICATION.md`](docs/SIGMA_V10B_AUXILIARY_AETHER_TIDAL_FALSIFICATION.md).
+V10B moves the trace/STF tensor source from the vanishing-stiffness MOND scalar
+to the constant-stiffness aether acceleration and removes the tensor's time
+kinetic term. Its worst static eigenvalue is `0.183503`, its Schur complement
+is exactly `1/3`, its longitudinal capacity is `3`, and six primary plus six
+secondary second-class constraints remove all six carrier states with a
+positive reduced Hamiltonian. It is still retired before data: eliminating a
+finite-range second-class carrier leaves a nonzero equal-time Yukawa tail in
+the physical transverse aether mode. The successor must be a hyperbolic causal
+completion of this positive aether-tidal block.
+The preceding constant-mixing result is
 [`docs/SIGMA_V10A_SPATIAL_POLARIZATION_FALSIFICATION.md`](docs/SIGMA_V10A_SPATIAL_POLARIZATION_FALSIFICATION.md).
 V10A is the first post-v9B carrier to retain both trace and shear orientation.
 Its necessary flat block is positive and causal, its convex fixed-source state

@@ -1,0 +1,80 @@
+{
+  "protocol_version": "Sigma-v10B-0.1-auxiliary-aether-tidal-selection",
+  "status": "frozen before any observational access",
+  "question": "Can a nondynamical spatial tensor sourced by the aether-acceleration Hessian preserve v10A's trace/shear geometry while making the complete frozen static principal block positive in the deep-MOND regime?",
+  "candidate": "one-metric AeST plus an auxiliary symmetric aether-spatial polarization sourced by D_(m J_n)",
+  "action": "S=S_AeST+(16 pi G)^-1 int sqrt(-g)[-(1/2) D_l P_mn D^l P^mn-L_P^-2(P:P/2+(P:P)^2/4)+beta P^mn D_(m J_n)+zeta^n A^m P_mn]",
+  "definitions": {
+    "aether_projector": "q_mn=g_mn+A_m A_n",
+    "aether_acceleration": "J_m=A^n nabla_n A_m",
+    "carrier": "P_mn=P_nm and A^m P_mn=0; six auxiliary spatial components",
+    "source": "H_mn=D_(m J_n)",
+    "static_unitary_gauge": "J_i=D_i ln N=D_i Psi+O(2)",
+    "carrier_potential": "V(P)=P:P/2+(P:P)^2/4",
+    "time_kinetic_term": "none; P is an elliptic spatial constraint and has no independent initial data",
+    "physical_metric": "g_mn; matter and photons are minimally coupled to the same metric"
+  },
+  "fixed_coefficient_prescription": {
+    "carrier_spatial_stiffness": 1.0,
+    "mixing": "beta=sqrt(2 K_B/3)",
+    "reason": "the worst static Schur complement is exactly K_B/3 and the asymptotic longitudinal response is exactly 3",
+    "fitted_to_object": false
+  },
+  "fixed_selection_values": {
+    "K_B": 1.0,
+    "K_2": 2.0,
+    "lambda_s": 1.0,
+    "existing_spent_cluster_amplification_target": 3.14465
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "mu_sigma", "K_B", "K_2", "L_P"],
+    "count": 5,
+    "maximum_allowed": 5,
+    "object_specific_gravity_parameters": 0,
+    "lensing_only_parameters": 0
+  },
+  "selection_gates": {
+    "static_principal_energy": "positive in longitudinal, transverse, and unmixed channels",
+    "auxiliary_dynamics": "no independent P frequency root and positive subluminal reduced aether-vector speed",
+    "uniqueness": "strictly convex carrier potential and bounded divergence operator",
+    "geometry": "nonzero isotropic trace and spherical/STF tidal response",
+    "capacity": "asymptotic longitudinal response closes at least 75% of the unit-to-3.14465 spent amplitude gap",
+    "linear_metric": "static source changes Psi while the unchanged traceless equation retains Phi=Psi and delta Weyl=delta Psi",
+    "TT": "D_(m J_n)=0 for a pure flat TT perturbation",
+    "complexity": "at most five universal constants and no labels or object-specific field profile"
+  },
+  "mandatory_next_gates": {
+    "ADM": "perform full nonlinear lapse, shift, aether, scalar, P primary/secondary constraint count",
+    "principal_symbol": "derive the complete scalar-vector-metric reduced characteristic determinant",
+    "metric_variation": "derive nonlinear Psi, Phi, stress-energy, conservation, and Weyl equations from the action",
+    "causality": "show the elliptic P constraint is preserved by causal evolution and does not transmit a physical instantaneous signal",
+    "local_cosmology": "derive PPN, Solar screening, compact-source behavior, FLRW background, and perturbation stability"
+  },
+  "failure_rules": {
+    "retire": "retire exact v10B before data for an extra propagating mode, negative reduced kinetic/gradient direction, c_T change, nonunique homogeneous P state, physical instantaneous signal, or loss of one-metric lensing",
+    "no_patch": "do not add a sixth constant, object label, lens-only term, or data-selected acceleration gate"
+  },
+  "prior_art_scope": {
+    "established": [
+      "AeST and Einstein-aether acceleration",
+      "higher-derivative aether interactions",
+      "spatially covariant auxiliary constraints",
+      "convex auxiliary-field representations"
+    ],
+    "project_specific_hypothesis": "the fixed beta^2=2 K_B/3 auxiliary symmetric tensor sourced by D_(m J_n) as a one-metric baryon-geometry response",
+    "novelty_claim": false,
+    "primary_anchors": [
+      "https://arxiv.org/abs/2007.00082",
+      "https://arxiv.org/abs/2109.13287",
+      "https://arxiv.org/abs/1407.6014",
+      "https://arxiv.org/abs/1910.13995",
+      "https://arxiv.org/abs/1806.02811"
+    ]
+  },
+  "data_policy": {
+    "new_observational_product_accessed": false,
+    "raw_holdout_opened": false,
+    "spent_summary_allowed": "only the already-documented 3.14465 amplitude target",
+    "authorization_after_selection": "theory variation and numerical PDE construction only; no astronomical fitting"
+  }
+}

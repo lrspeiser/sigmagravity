@@ -1,0 +1,401 @@
+{
+  "action": "S=S_AeST+(16 pi G)^-1 int sqrt(-g)[-(1/2) D_l P_mn D^l P^mn-L_P^-2(P:P/2+(P:P)^2/4)+beta P^mn D_(m J_n)+zeta^n A^m P_mn]",
+  "all_mandatory_theory_gates_pass": false,
+  "all_selection_gates_pass": true,
+  "candidate": "one-metric AeST plus an auxiliary symmetric aether-spatial polarization sourced by D_(m J_n)",
+  "coefficients": {
+    "carrier_spatial_stiffness": 1.0,
+    "mixing_beta": 0.816496580927726,
+    "mixing_fraction_beta_squared_over_KB": 0.6666666666666666
+  },
+  "convexity": {
+    "0.0": {
+      "analytic_radial_eigenvalue": 1.0,
+      "analytic_transverse_eigenvalue": 1.0,
+      "eigenvalues": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "norm_squared": 0.0,
+      "strictly_convex": true
+    },
+    "0.1": {
+      "analytic_radial_eigenvalue": 1.03,
+      "analytic_transverse_eigenvalue": 1.01,
+      "eigenvalues": [
+        1.01,
+        1.01,
+        1.01,
+        1.01,
+        1.01,
+        1.03
+      ],
+      "norm_squared": 0.010000000000000002,
+      "strictly_convex": true
+    },
+    "1.0": {
+      "analytic_radial_eigenvalue": 4.0,
+      "analytic_transverse_eigenvalue": 2.0,
+      "eigenvalues": [
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        4.0
+      ],
+      "norm_squared": 1.0,
+      "strictly_convex": true
+    },
+    "10.0": {
+      "analytic_radial_eigenvalue": 301.0,
+      "analytic_transverse_eigenvalue": 101.0,
+      "eigenvalues": [
+        101.0,
+        101.0,
+        101.0,
+        101.0,
+        101.0,
+        301.0
+      ],
+      "norm_squared": 100.0,
+      "strictly_convex": true
+    }
+  },
+  "data_policy": {
+    "authorization_after_selection": "theory variation and numerical PDE construction only; no astronomical fitting",
+    "new_observational_product_accessed": false,
+    "raw_holdout_opened": false,
+    "spent_summary_allowed": "only the already-documented 3.14465 amplitude target"
+  },
+  "decision": "advance_to_full_ADM_constraint_and_reduced_characteristic_audit_only",
+  "definitions": {
+    "aether_acceleration": "J_m=A^n nabla_n A_m",
+    "aether_projector": "q_mn=g_mn+A_m A_n",
+    "carrier": "P_mn=P_nm and A^m P_mn=0; six auxiliary spatial components",
+    "carrier_potential": "V(P)=P:P/2+(P:P)^2/4",
+    "physical_metric": "g_mn; matter and photons are minimally coupled to the same metric",
+    "source": "H_mn=D_(m J_n)",
+    "static_unitary_gauge": "J_i=D_i ln N=D_i Psi+O(2)",
+    "time_kinetic_term": "none; P is an elliptic spatial constraint and has no independent initial data"
+  },
+  "fixed_coefficient_prescription": {
+    "carrier_spatial_stiffness": 1.0,
+    "fitted_to_object": false,
+    "mixing": "beta=sqrt(2 K_B/3)",
+    "reason": "the worst static Schur complement is exactly K_B/3 and the asymptotic longitudinal response is exactly 3"
+  },
+  "fixed_selection_values": {
+    "K_2": 2.0,
+    "K_B": 1.0,
+    "existing_spent_cluster_amplification_target": 3.14465,
+    "lambda_s": 1.0
+  },
+  "geometry": {
+    "isotropic_decomposition": {
+      "frobenius_norm": 0.8340388297674528,
+      "stf": [
+        [
+          5.551115123125783e-17,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          5.551115123125783e-17,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          5.551115123125783e-17
+        ]
+      ],
+      "stf_norm": 9.614813431917819e-17,
+      "trace": 1.444597628642518
+    },
+    "isotropic_response": [
+      [
+        0.48153254288083935,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.48153254288083935,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.48153254288083935
+      ]
+    ],
+    "operator_maximum_ratio": 0.9636807991303136,
+    "rank_one_decomposition": {
+      "frobenius_norm": 1.1039821489959274,
+      "stf": [
+        [
+          0.7359880993306183,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.36799404966530913,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.36799404966530913
+        ]
+      ],
+      "stf_norm": 0.901397650060418,
+      "trace": 1.1039821489959274
+    },
+    "rank_one_response": [
+      [
+        1.1039821489959274,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "spherical_tidal_decomposition": {
+      "frobenius_norm": 1.0,
+      "stf": [
+        [
+          0.8164965809277261,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.4082482904638631,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.4082482904638631
+        ]
+      ],
+      "stf_norm": 1.0,
+      "trace": 0.0
+    },
+    "spherical_tidal_response": [
+      [
+        0.8164965809277261,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        -0.4082482904638631,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        -0.4082482904638631
+      ]
+    ]
+  },
+  "linear_metric_structure": {
+    "base_no_slip_relation_retained_at_linear_static_order": true,
+    "delta_Psi_equals_delta_Phi_equals_delta_Weyl": true,
+    "flat_TT_source": 0.0,
+    "linear_lapse_equation_correction": "beta partial_i partial_j P_ij",
+    "linear_spatial_traceless_equation_correction": 0.0,
+    "nonlinear_metric_variation_complete": false,
+    "photon_only_rule": false,
+    "quadratic_new_term": "beta P_ij partial_i partial_j Psi",
+    "static_aether_acceleration": "J_i=partial_i Psi+O(2)"
+  },
+  "new_observational_product_accessed": false,
+  "next_gate": "Derive the complete quadratic and nonlinear ADM system. Track the six primary P momenta and their secondary equations, reduce lapse/shift/aether constraints, and reject if P introduces independent initial data, an odd-dimensional or nonclosing constraint surface, a negative reduced mode, c_T != 1, or a physical instantaneous signal. Then derive the complete weak metric equations before any data.",
+  "novelty_claim": false,
+  "physical_parameters": {
+    "count": 5,
+    "lensing_only_parameters": 0,
+    "maximum_allowed": 5,
+    "names": [
+      "a_sigma",
+      "mu_sigma",
+      "K_B",
+      "K_2",
+      "L_P"
+    ],
+    "object_specific_gravity_parameters": 0
+  },
+  "prior_art_scope": {
+    "established": [
+      "AeST and Einstein-aether acceleration",
+      "higher-derivative aether interactions",
+      "spatially covariant auxiliary constraints",
+      "convex auxiliary-field representations"
+    ],
+    "novelty_claim": false,
+    "primary_anchors": [
+      "https://arxiv.org/abs/2007.00082",
+      "https://arxiv.org/abs/2109.13287",
+      "https://arxiv.org/abs/1407.6014",
+      "https://arxiv.org/abs/1910.13995",
+      "https://arxiv.org/abs/1806.02811"
+    ],
+    "project_specific_hypothesis": "the fixed beta^2=2 K_B/3 auxiliary symmetric tensor sourced by D_(m J_n) as a one-metric baryon-geometry response"
+  },
+  "raw_holdout_opened": false,
+  "reason": "The auxiliary aether-tidal carrier keeps the v10A trace/STF geometry but replaces the failed deep-AQUAL derivative block with an exactly positive constant-stiffness block. At K_B=1 and beta=sqrt(2/3), the worst static eigenvalue is 0.1835 and the Schur complement is 1/3. Eliminating P adds no vector root, lowers the high-k vector squared speed to 0.6 in the worst channel, and gives a threefold longitudinal static capacity that closes 93.25% of the spent amplitude gap. The linear static interaction changes the lapse potential while leaving the traceless metric equation and flat TT source unchanged, so the AeST no-slip projection is retained at this order.",
+  "response": {
+    "capacities": {
+      "longitudinal": 2.9999999999999996,
+      "transverse": 1.4999999999999998,
+      "unmixed": 1.0
+    },
+    "existing_target": 3.14465,
+    "kL_for_seventy_five_percent_gap": 3.5107237413872476,
+    "longitudinal_gap_closure_fraction": 0.932553097241974,
+    "scale_rows": [
+      {
+        "kL": 0.0,
+        "longitudinal_static_amplification": 1.0,
+        "longitudinal_vector_speed_squared": 1.0,
+        "transverse_static_amplification": 1.0,
+        "transverse_vector_speed_squared": 1.0
+      },
+      {
+        "kL": 0.1,
+        "longitudinal_static_amplification": 1.0066445182724253,
+        "longitudinal_vector_speed_squared": 0.9934426229508196,
+        "transverse_static_amplification": 1.0033112582781458,
+        "transverse_vector_speed_squared": 0.9967105263157895
+      },
+      {
+        "kL": 1.0,
+        "longitudinal_static_amplification": 1.4999999999999998,
+        "longitudinal_vector_speed_squared": 0.75,
+        "transverse_static_amplification": 1.2,
+        "transverse_vector_speed_squared": 0.8571428571428571
+      },
+      {
+        "kL": 10.0,
+        "longitudinal_static_amplification": 2.941747572815534,
+        "longitudinal_vector_speed_squared": 0.6023856858846919,
+        "transverse_static_amplification": 1.4926108374384237,
+        "transverse_vector_speed_squared": 0.7518610421836228
+      },
+      {
+        "kL": 1000000.0,
+        "longitudinal_static_amplification": 2.9999999999939995,
+        "longitudinal_vector_speed_squared": 0.60000000000024,
+        "transverse_static_amplification": 1.49999999999925,
+        "transverse_vector_speed_squared": 0.7500000000001875
+      }
+    ],
+    "seventy_five_percent_gap_target": 2.6084875
+  },
+  "scope": "This is a construction pass, not a viable theory or observation result. The full nonlinear ADM constraint algebra, scalar/vector/metric characteristic determinant, physical causality of the elliptic auxiliary constraint, stress-energy, PPN, Solar screening, and cosmology remain mandatory. Only one spent scalar amplitude summary was used; no array, map, galaxy, cluster catalog, or holdout was opened.",
+  "selection_gates": {
+    "all_static_principal_channels_positive": true,
+    "auxiliary_constraint_adds_no_flat_vector_root": true,
+    "carrier_potential_strictly_convex": true,
+    "divergence_operator_norm_bounded": true,
+    "fixed_source_auxiliary_solution_unique": true,
+    "flat_TT_source_zero": true,
+    "flat_vector_speeds_positive_and_subluminal": true,
+    "linear_static_same_metric_dynamics_and_Weyl": true,
+    "longitudinal_capacity_closes_75_percent_gap": true,
+    "no_lensing_only_parameters": true,
+    "no_object_labels": true,
+    "no_object_specific_gravity_parameters": true,
+    "nonzero_spherical_exterior_tidal_response": true,
+    "nonzero_trace_and_STF_response": true,
+    "one_minimally_coupled_matter_metric": true,
+    "parameter_count": true,
+    "worst_static_schur_complement_positive": true
+  },
+  "static_channels": {
+    "longitudinal": {
+      "canonical_mixing": 0.816496580927726,
+      "determinant": 0.33333333333333337,
+      "eigenvalues": [
+        0.18350341907227397,
+        1.816496580927726
+      ],
+      "matrix": [
+        [
+          1.0,
+          -0.816496580927726
+        ],
+        [
+          -0.816496580927726,
+          1.0
+        ]
+      ],
+      "positive": true
+    },
+    "transverse": {
+      "canonical_mixing": 0.5773502691896257,
+      "determinant": 0.6666666666666667,
+      "eigenvalues": [
+        0.42264973081037427,
+        1.5773502691896257
+      ],
+      "matrix": [
+        [
+          1.0,
+          -0.5773502691896257
+        ],
+        [
+          -0.5773502691896257,
+          1.0
+        ]
+      ],
+      "positive": true
+    },
+    "unmixed": {
+      "canonical_mixing": 0.0,
+      "determinant": 1.0,
+      "eigenvalues": [
+        1.0,
+        1.0
+      ],
+      "matrix": [
+        [
+          1.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.0
+        ]
+      ],
+      "positive": true
+    }
+  },
+  "status": "completed Sigma v10B theory-only action selection",
+  "unresolved_mandatory_gates": {
+    "FLRW_background_and_perturbation_stability": false,
+    "Solar_PPN_and_compact_source_screening": false,
+    "complete_scalar_vector_metric_principal_symbol": false,
+    "full_nonlinear_ADM_constraint_count": false,
+    "nonlinear_one_metric_field_equations": false,
+    "numerical_PDE_convergence": false,
+    "retarded_constraint_propagation_and_causality": false
+  }
+}
