@@ -2,9 +2,15 @@
 
 ## Outcome
 
-The next derivation lane is a fixed, four-constant member of the **luminal
-Class-Ia quadratic DHOST** family. This is an action envelope, not an empirical
-theory: no observational data were accessed and no constant was fitted.
+**Historical selection record; the fixed row is now retired.** The selected
+derivation lane was a fixed, four-constant member of the **luminal Class-Ia
+quadratic DHOST** family. No observational data were accessed and no constant
+was fitted.
+
+The subsequent exterior-law audit proves that its screened vacuum is exactly
+GR and its linear massive-scalar exterior falls no slower than inverse-square.
+It cannot sustain flat galaxy curves. See
+[`SIGMA_V5C_EXTERIOR_LAW_RESULTS.md`](SIGMA_V5C_EXTERIOR_LAW_RESULTS.md).
 
 The exact v5B failure changes the order of work. We no longer invent a source
 and ask later whether its action is healthy. v5C first selects a published

@@ -1,5 +1,26 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 v5C exterior-law failure
+
+The fixed v5C row is retired before full variation or data. In the published
+screened luminal-DHOST limit, its potential corrections are proportional to
+`M'(r)` and `M''(r)` and vanish outside a source once enclosed baryonic mass is
+constant. The exterior is exactly GR. In the unscreened small-field limit, the
+fixed row is Newton plus an attractive massive scalar, with the identity
+`d log(g)/d log(r) <= -2` for every positive strength and range.
+
+Across `1e-8<=r/L<=1e8` and scalar strength through `1e6`, the shallowest
+acceleration slope is `-2`, no flat-slope interval exists, and circular speed
+falls to at most `0.316228` over a radial decade versus the required
+`0.9--1.1`. See
+[`SIGMA_V5C_EXTERIOR_LAW_RESULTS.md`](SIGMA_V5C_EXTERIOR_LAW_RESULTS.md).
+
+This rejects the fixed canonical massive-scalar row, not every DHOST theory.
+Together with the strict-causality failure of pure static `P(X)` derivative
+screening, it removes the present local one-scalar route. The next action must
+provide a constrained baryon-forced response that persists through vacuum
+without introducing a freely assigned halo state.
+
 ## 2026-08-03 v5C degeneracy-first action selection
 
 The successor lane is a fixed four-constant member of the published luminal

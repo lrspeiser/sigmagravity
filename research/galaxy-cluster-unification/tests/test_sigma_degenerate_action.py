@@ -7,6 +7,9 @@ from voidscreen.sigma_degenerate_action import (
     bounded_even_activation,
     k_mouflage_static_parallel_speed_squared,
     luminal_class_ia_coefficients,
+    newton_yukawa_acceleration_ratio,
+    newton_yukawa_circular_speed_ratio,
+    newton_yukawa_log_acceleration_slope,
     normalized_dhost_residuals,
     v5c_trial_coefficients,
 )
@@ -76,3 +79,28 @@ def test_invalid_degenerate_action_inputs_are_rejected() -> None:
         luminal_class_ia_coefficients(0.0, 0.0, 0.0, 0.0)
     with pytest.raises(ValueError):
         k_mouflage_static_parallel_speed_squared(1.0, 1.0, 0.0)
+
+
+def test_attractive_yukawa_exterior_is_never_flatter_than_inverse_square() -> None:
+    ratio = np.geomspace(1.0e-8, 1.0e8, 4000)
+    for strength in (0.0, 0.01, 1.0, 100.0, 1.0e6):
+        force = newton_yukawa_acceleration_ratio(ratio, strength)
+        slope = newton_yukawa_log_acceleration_slope(ratio, strength)
+        assert np.all(force >= 1.0)
+        assert np.all(slope <= -2.0)
+
+
+def test_attractive_yukawa_speed_declines_over_every_exterior_decade() -> None:
+    inner = np.geomspace(1.0e-8, 1.0e8, 4000)
+    for strength in (0.0, 1.0, 100.0):
+        ratio = newton_yukawa_circular_speed_ratio(10.0, inner, strength)
+        assert np.all(ratio <= 1.0 / np.sqrt(10.0) + 1.0e-14)
+
+
+def test_invalid_yukawa_inputs_are_rejected() -> None:
+    with pytest.raises(ValueError):
+        newton_yukawa_acceleration_ratio(-1.0, 1.0)
+    with pytest.raises(ValueError):
+        newton_yukawa_acceleration_ratio(1.0, -1.0)
+    with pytest.raises(ValueError):
+        newton_yukawa_circular_speed_ratio(1.0, 1.0, 1.0)

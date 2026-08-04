@@ -1,0 +1,87 @@
+{
+  "all_exterior_gates_pass": false,
+  "analytic_identity": "d log(g)/d log(r)=-2-alpha x^2 exp(-x)/[1+alpha(1+x)exp(-x)] <= -2",
+  "best_case": {
+    "flat_curve_required_log_acceleration_slope": [
+      -1.1,
+      -0.9
+    ],
+    "flat_curve_required_speed_ratio_over_decade": [
+      0.9,
+      1.1
+    ],
+    "longest_flat_slope_span_dex": 0.0,
+    "maximum_speed_ratio_over_decade": 0.31622776601683794,
+    "shallowest_log_acceleration_slope": -2.0
+  },
+  "data_policy": "Do not load a galaxy, cluster, Solar, or other observational array; this is an analytic exterior-law test.",
+  "decision": "retire_fixed_sigma_v5c_row_before_full_variation_or_data",
+  "gates": {
+    "linear_exterior_holds_speed_over_one_decade": false,
+    "linear_exterior_reaches_flat_acceleration_slope": false,
+    "screened_vacuum_differs_from_GR": false
+  },
+  "linear_newton_yukawa_scan": [
+    {
+      "longest_flat_slope_span_dex": 0.0,
+      "maximum_speed_ratio_over_decade": 0.31622776601683794,
+      "scalar_strength": 0.0,
+      "shallowest_log_acceleration_slope": -2.0,
+      "steepest_log_acceleration_slope": -2.0
+    },
+    {
+      "longest_flat_slope_span_dex": 0.0,
+      "maximum_speed_ratio_over_decade": 0.31622776601683794,
+      "scalar_strength": 0.01,
+      "shallowest_log_acceleration_slope": -2.0,
+      "steepest_log_acceleration_slope": -2.0053915513068783
+    },
+    {
+      "longest_flat_slope_span_dex": 0.0,
+      "maximum_speed_ratio_over_decade": 0.31622776601683794,
+      "scalar_strength": 0.1,
+      "shallowest_log_acceleration_slope": -2.0,
+      "steepest_log_acceleration_slope": -2.0520568114981357
+    },
+    {
+      "longest_flat_slope_span_dex": 0.0,
+      "maximum_speed_ratio_over_decade": 0.31622776601683794,
+      "scalar_strength": 1.0,
+      "shallowest_log_acceleration_slope": -2.0,
+      "steepest_log_acceleration_slope": -2.3993572722866734
+    },
+    {
+      "longest_flat_slope_span_dex": 0.0,
+      "maximum_speed_ratio_over_decade": 0.31622776601683794,
+      "scalar_strength": 10.0,
+      "shallowest_log_acceleration_slope": -2.0,
+      "steepest_log_acceleration_slope": -3.5692472627576657
+    },
+    {
+      "longest_flat_slope_span_dex": 0.0,
+      "maximum_speed_ratio_over_decade": 0.31622776601683794,
+      "scalar_strength": 100.0,
+      "shallowest_log_acceleration_slope": -2.0,
+      "steepest_log_acceleration_slope": -5.3852045629350656
+    },
+    {
+      "longest_flat_slope_span_dex": 0.0,
+      "maximum_speed_ratio_over_decade": 0.31622776601683794,
+      "scalar_strength": 1000000.0,
+      "shallowest_log_acceleration_slope": -2.0,
+      "steepest_log_acceleration_slope": -14.10100478650679
+    }
+  ],
+  "observational_data_accessed": false,
+  "raw_holdout_opened": false,
+  "reason": "Its screened exterior is exactly GR and its unscreened attractive scalar is no shallower than inverse-square, so it cannot sustain flat outer rotation curves.",
+  "scope": "This rejects the fixed canonical massive-scalar v5C row, not every luminal DHOST theory.",
+  "screened_limit": {
+    "M_prime": 0.0,
+    "M_second": 0.0,
+    "Phi_prime_exterior": "G_N M/r^2",
+    "Psi_prime_exterior": "G_N M/r^2",
+    "differs_from_GR": false
+  },
+  "status": "completed Sigma v5C theory-only exterior-law audit"
+}

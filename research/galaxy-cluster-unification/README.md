@@ -84,6 +84,13 @@ identities, and one fixed signed-safe scalar-Hessian coefficient can carry
 baryon-derived orientation. The class is prior art and the row is not yet a
 theory: full equations, cosmological/scalar health, PPN, branch uniqueness, and
 prior-art comparison still prohibit observational fitting.
+Its first physical feasibility gate is now complete in
+[`docs/SIGMA_V5C_EXTERIOR_LAW_RESULTS.md`](docs/SIGMA_V5C_EXTERIOR_LAW_RESULTS.md),
+and retires the fixed row before full variation. The screened DHOST exterior is
+exactly GR, while the unscreened canonical massive scalar falls at least as
+`1/r^2`; neither can sustain flat outer galaxy speeds. This removes the current
+local one-scalar lane and requires a causal baryon-forced memory/orientation
+carrier that persists through vacuum without a free halo profile.
 The latest mechanism result is
 [`docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md`](docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md).
 Its positive baryon-seeded trace is broad, stable, and the strongest v4 source,

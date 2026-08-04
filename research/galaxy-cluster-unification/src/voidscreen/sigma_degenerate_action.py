@@ -181,3 +181,58 @@ def k_mouflage_static_parallel_speed_squared(
     if np.any(parallel <= 0.0):
         raise FloatingPointError("the parallel gradient coefficient is non-positive")
     return parallel / first
+
+
+def newton_yukawa_acceleration_ratio(
+    radius_over_range,
+    scalar_strength: float,
+) -> np.ndarray:
+    """Return ``g/(GM/r^2)`` for an attractive massive conformal scalar.
+
+    The fixed v5C row is canonical when its DHOST operators are inactive.  Its
+    most favorable linear exterior law is therefore Newton plus a Yukawa force,
+    ``1+alpha(1+x)exp(-x)`` with ``x=r/L`` and non-negative strength.
+    """
+    ratio = np.asarray(radius_over_range, dtype=float)
+    strength = float(scalar_strength)
+    if np.any(~np.isfinite(ratio)) or np.any(ratio < 0.0):
+        raise ValueError("radius_over_range must be finite and non-negative")
+    if not np.isfinite(strength) or strength < 0.0:
+        raise ValueError("scalar_strength must be finite and non-negative")
+    return 1.0 + strength * (1.0 + ratio) * np.exp(-ratio)
+
+
+def newton_yukawa_log_acceleration_slope(
+    radius_over_range,
+    scalar_strength: float,
+) -> np.ndarray:
+    """Return ``d log(g)/d log(r)`` for Newton plus attractive Yukawa.
+
+    The exact expression is ``-2-alpha*x^2 exp(-x)/F(x)``.  It is never
+    shallower than ``-2`` for a non-negative scalar force, so this exterior
+    cannot supply the ``-1`` acceleration slope of a flat rotation curve.
+    """
+    ratio = np.asarray(radius_over_range, dtype=float)
+    strength = float(scalar_strength)
+    force_ratio = newton_yukawa_acceleration_ratio(ratio, strength)
+    return -2.0 - strength * np.square(ratio) * np.exp(-ratio) / force_ratio
+
+
+def newton_yukawa_circular_speed_ratio(
+    radius_ratio: float,
+    inner_radius_over_range,
+    scalar_strength: float,
+) -> np.ndarray:
+    """Return ``v_c(r2)/v_c(r1)`` with ``r2=radius_ratio*r1``."""
+    scale = float(radius_ratio)
+    inner = np.asarray(inner_radius_over_range, dtype=float)
+    if not np.isfinite(scale) or scale <= 1.0:
+        raise ValueError("radius_ratio must be finite and greater than one")
+    if np.any(~np.isfinite(inner)) or np.any(inner < 0.0):
+        raise ValueError("inner_radius_over_range must be finite and non-negative")
+    inner_force = newton_yukawa_acceleration_ratio(inner, scalar_strength)
+    outer_force = newton_yukawa_acceleration_ratio(
+        scale * inner, scalar_strength
+    )
+    # g=(GM/r^2)F and v_c^2=r g, hence v2/v1=sqrt(F2/(scale F1)).
+    return np.sqrt(outer_force / (scale * inner_force))

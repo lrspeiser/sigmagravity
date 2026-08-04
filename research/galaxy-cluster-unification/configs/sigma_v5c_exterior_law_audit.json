@@ -1,0 +1,30 @@
+{
+  "protocol_id": "sigma-v5c-exterior-law-audit-v1",
+  "status": "theory-only asymptotic necessary-condition audit; no observational target accessed",
+  "action_under_test": "fixed canonical massive-scalar luminal-DHOST v5C row",
+  "published_screened_limit": {
+    "source": "https://arxiv.org/abs/1711.07403",
+    "radial_potentials": "Phi'=G_N M/r^2+Xi1 G_N M'', Psi'=G_N M/r^2+Xi2 G_N M'/r+Xi3 G_N M''",
+    "vacuum_consequence": "When enclosed baryonic M is constant, M'=M''=0 and both potentials recover GR."
+  },
+  "linear_exterior_limit": {
+    "force": "g=(GM/r^2)[1+alpha(1+r/L)exp(-r/L)]",
+    "allowed_scalar_strengths": [0.0, 0.01, 0.1, 1.0, 10.0, 100.0, 1000000.0],
+    "radius_over_range_min": 1e-8,
+    "radius_over_range_max": 100000000.0,
+    "points": 10000
+  },
+  "flat_curve_requirement": {
+    "minimum_log_acceleration_slope": -1.1,
+    "maximum_log_acceleration_slope": -0.9,
+    "minimum_radial_span_dex": 1.0,
+    "minimum_speed_ratio_over_decade": 0.9,
+    "maximum_speed_ratio_over_decade": 1.1
+  },
+  "gates": {
+    "screened_vacuum_must_differ_from_GR": true,
+    "linear_exterior_must_reach_flat_acceleration_slope": true,
+    "linear_exterior_must_hold_speed_over_one_decade": true
+  },
+  "data_policy": "Do not load a galaxy, cluster, Solar, or other observational array; this is an analytic exterior-law test."
+}
