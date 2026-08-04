@@ -26,7 +26,7 @@ def _load_runner():
 def test_v17f_freeze_is_conditional_and_has_one_length() -> None:
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
 
-    assert config["protocol_version"] == "SIGMA-V17F-ROOT-SCALE-PROPAGATOR-1.0.0"
+    assert config["protocol_version"] == "SIGMA-V17F-ROOT-SCALE-PROPAGATOR-1.0.1"
     assert config["authorization"]["required_v17e_gate"] == "gate_results.advance=true"
     assert config["fit"]["thermal_parameters_per_direction"] == 1
     assert config["fit"]["per_cluster_gravity_parameters"] == 0
@@ -38,6 +38,7 @@ def test_v17f_freeze_is_conditional_and_has_one_length() -> None:
     ]
     assert min(config["propagation"]["L_sigma_kpc_grid"]) == 0.0
     assert config["integrity"]["v17e_result_existed_at_freeze"] is False
+    assert config["conditional_action_lift"]["action_is_complete_one_metric_theory"] is False
 
 
 def test_every_v17f_parent_hash_is_current() -> None:

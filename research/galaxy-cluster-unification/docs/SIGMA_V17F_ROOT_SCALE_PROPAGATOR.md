@@ -87,3 +87,7 @@ System, reproduce galaxies, and pass untouched raw multiple-image tests.
 
 The authoritative machine-readable freeze is
 `configs/sigma_v17f_root_scale_propagator.json`.
+
+The covariant source-sector lift and the precise reason it is not yet a
+one-metric gravity theory are derived in
+[`SIGMA_V17F_ACTION_LIFT.md`](SIGMA_V17F_ACTION_LIFT.md).

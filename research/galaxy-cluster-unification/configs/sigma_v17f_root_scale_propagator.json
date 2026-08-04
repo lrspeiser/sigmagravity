@@ -1,6 +1,7 @@
 {
-  "protocol_version": "SIGMA-V17F-ROOT-SCALE-PROPAGATOR-1.0.0",
+  "protocol_version": "SIGMA-V17F-ROOT-SCALE-PROPAGATOR-1.0.1",
   "status": "frozen before any regional temperature result, thermal source map, v17E inverse coefficient, v17E lensing score, or v17F result existed",
+  "pre_result_action_lift_amendment": "Version 1.0.1 adds the covariant source/propagator action and its one-metric lensing obstruction before any upstream thermal or lensing result. It changes no source, length grid, fit, score, or gate.",
   "purpose": "Conditional action-selection diagnostic: determine whether one source-derived thermal scale plus at most one universal propagation length can reproduce the apparent residual-field extent and morphology without the flexible three-scale v17E interpolation.",
   "parents": {
     "thermal_source_protocol": "configs/sigma_v17d_thermal_stress_map.json",
@@ -27,6 +28,15 @@
     "one_metric_response": "delta_kappa_sigma=beta_sigma s_sigma; delta_gamma_1 and delta_gamma_2 are the unique E-mode shears derived from the same delta_kappa_sigma",
     "physical_interpretation": "q_b supplies object-dependent size and geometry; L_sigma is one universal correlation length that can broaden but may not replace the source scale; beta_sigma controls amplitude but cannot change R50 or R80",
     "claim_boundary": "This is the projected weak-field signature of a candidate mediator, not a covariant action. Helmholtz/Yukawa propagation is established prior art. A passing result selects a scale mechanism for action derivation, not a novel theory."
+  },
+  "conditional_action_lift": {
+    "covariant_diagnostic": "Baryonic thermal stress-energy in the Landau frame: h_mn=g_mn+u_m u_n, S_mn=h_m^a h_n^b T^b_ab, and J_T=sqrt(S_mn S^mn)/(sqrt(3)c^2); for an isotropic fluid J_T=abs(p)/c^2 and projects to the q_total/q_contrast source family.",
+    "action_under_test": "Canonical scalar Helmholtz source action S_source=integral sqrt(-g)[-L_sigma^2 nabla_m s nabla^m s/2-s^2/2+b_sigma s J_T], after field normalization",
+    "euler_lagrange_source": "(1-L_sigma^2 Box)s=b_sigma J_T; the static limit is the v17F Helmholtz mediator before projection and normalization",
+    "healthy_source_sector_conditions": "L_sigma^2>0 gives positive canonical kinetic and gradient energy and mediator mass m_sigma=1/L_sigma; L_sigma=0 is a nondynamical algebraic source response.",
+    "exact_incompleteness": "With minimal metric coupling this scalar changes the Weyl metric only through source-quadratic scalar/interaction stress. With a purely conformal universal matter metric its direct linear contributions to Phi and Psi cancel from (Phi+Psi)/2. It therefore does not derive the assumed linear delta_kappa_sigma response.",
+    "required_completion_if_data_pass": "Derive a metric-active scalar-stress, universal disformal, or dynamical vector/tensor completion from one action and recompute both weak-field potentials; do not append a lens multiplier.",
+    "action_is_complete_one_metric_theory": false
   },
   "propagation": {
     "L_sigma_kpc_grid": [
