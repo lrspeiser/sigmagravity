@@ -126,7 +126,7 @@ def propagated_feature(
     name = feature_name(source_family, length_kpc)
     return MetricFeature(
         name=name,
-        family="root_scale_propagator",
+        family="scalar_scale",
         convergence=convergence,
         shear_1=shear_1,
         shear_2=shear_2,

@@ -77,6 +77,73 @@ def test_positive_length_broadens_a_compact_source_without_sign_flip() -> None:
     assert abs(float(np.sum(propagated)) - 1.0) < 1e-3
 
 
+def test_propagated_source_builds_registered_one_metric_triplet(tmp_path: Path) -> None:
+    runner = _load_runner()
+    axis = np.linspace(-8.0, 8.0, 17)
+    source = np.zeros((17, 17), dtype=float)
+    source[8, 8] = 1.0
+    product = tmp_path / "thermal.npz"
+    np.savez_compressed(
+        product,
+        source_axis_kpc=axis,
+        q_total=source,
+        q_contrast=-source,
+    )
+
+    feature = runner.propagated_feature(product, "q_total", 2.0, axis, 2)
+
+    assert feature.family == "scalar_scale"
+    assert feature.convergence.shape == source.shape
+    assert feature.shear_1.shape == source.shape
+    assert feature.shear_2.shape == source.shape
+    assert np.isfinite(feature.convergence).all()
+
+
+def test_cross_transfer_recovers_shared_one_metric_amplitude() -> None:
+    runner = _load_runner()
+    axis = np.linspace(-4.0, 4.0, 9)
+    east, north = np.meshgrid(axis, axis)
+    zeros = np.zeros_like(east)
+    mask = np.ones_like(east, dtype=bool)
+    beta = 2.75
+
+    def make_dataset(name: str, shift: float):
+        convergence = np.exp(-((east - shift) ** 2 + north**2) / 4.0)
+        shear_1 = convergence * (east**2 - north**2) / 20.0
+        shear_2 = convergence * east * north / 10.0
+        feature = runner.MetricFeature(
+            name="known_root",
+            family="scalar_scale",
+            convergence=convergence,
+            shear_1=shear_1,
+            shear_2=shear_2,
+        )
+        wrong = runner.MetricFeature(
+            name="wrong_root",
+            family="scalar_scale",
+            convergence=np.roll(convergence, 3, axis=0),
+            shear_1=np.roll(shear_1, 3, axis=0),
+            shear_2=np.roll(shear_2, 3, axis=0),
+        )
+        return runner.EquivariantDataset(
+            name=name,
+            mask=mask,
+            base=(zeros, zeros, zeros),
+            target=(beta * convergence, beta * shear_1, beta * shear_2),
+            features={"known_root": feature, "wrong_root": wrong},
+        )
+
+    datasets = [make_dataset("A", -0.5), make_dataset("B", 0.75)]
+    adjusted = [datasets, datasets]
+    known = runner.score_candidate(datasets, adjusted, "known_root", 4.0)
+    wrong = runner.score_candidate(datasets, adjusted, "wrong_root", 4.0)
+
+    assert known["symmetric_cross_cluster_full_field_NRMSE"] < 1e-12
+    assert known["directional_beta_log10_difference_dex"] < 1e-12
+    assert all(abs(row["beta_sigma"] - beta) < 1e-12 for row in known["directions"])
+    assert wrong["symmetric_cross_cluster_full_field_NRMSE"] > 0.1
+
+
 def test_authorization_fails_closed_without_upstream_reports(tmp_path: Path) -> None:
     runner = _load_runner()
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
