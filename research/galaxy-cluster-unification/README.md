@@ -16,6 +16,14 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V12A_ALIGNED_FINITE_K.md`](docs/SIGMA_V12A_ALIGNED_FINITE_K.md).
+Restoring the aligned normal-clock gradient exposes an exact finite-wave-vector
+zero for the frozen `lambda_D=+1` row, which is retired before data. The same
+calculation gives the theory-only safe interval
+`-8/sqrt(1+x0^2)<=lambda_D<=0`; the nonzero `lambda_D=-1` sentinel advances
+only to the fully tilted and anisotropic principal-matrix gate.
+
+The preceding theory-only result is
 [`docs/SIGMA_V12A_TILTED_CLOCK.md`](docs/SIGMA_V12A_TILTED_CLOCK.md).
 After exactly eliminating the AeST scalar auxiliaries, the normal-clock
 susceptibility is bounded below by

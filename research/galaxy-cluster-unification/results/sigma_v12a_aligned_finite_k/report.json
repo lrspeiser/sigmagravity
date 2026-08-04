@@ -1,0 +1,91 @@
+{
+  "aligned_reduction": {
+    "L3": "-q^2 V_*^2-q^3 K V_*",
+    "L4": "-q^2 V_*^2+q^2 |Dq|^2",
+    "L5": "q^4 V_*^2",
+    "gradient_coefficient": "C_bar=(q/q_sigma)^2 A4_bar",
+    "symbol": "Delta/F0=-(4K2+2 C_bar (k/q_sigma)^2)"
+  },
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "complete_delta_eff_proven_invertible": false,
+  "data_policy": {
+    "authorization": "covariant v12A action, published AeST ADM reduction, and synthetic Fourier backgrounds only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_positive_lambda_D_and_advance_negative_branch_to_tilted_anisotropic_symbol",
+  "full_tilted_anisotropic_symbol_derived": false,
+  "gates": {
+    "activation_weight_global_bound": true,
+    "negative_sentinel_A4_nonnegative_in_scan": true,
+    "negative_sentinel_retains_nonzero_interaction": true,
+    "negative_sentinel_satisfies_analytic_interval": true,
+    "negative_sentinel_symbol_positive_in_scan": true,
+    "selected_positive_row_has_finite_k_zero": true,
+    "selected_positive_row_has_negative_A4": true
+  },
+  "negative_branch_aligned_finite_k_regular": true,
+  "next_kill_gate": "Derive the full negative-branch Delta_eff principal matrix with nonzero scalar spatial gradient, finite aether tilt, arbitrary wave-vector orientation, and anisotropic metric/aether perturbations.",
+  "observational_data_accessed": false,
+  "physical_degree_count_proven_unchanged": false,
+  "raw_holdout_opened": false,
+  "reason": "The frozen lambda_D=+1 row has A4<0 and an exact finite-wave-vector zero in the primary-secondary bracket. The same covariant action has an analytically safe aligned branch for -8/sqrt(1+x0^2)<=lambda_D<0; lambda_D=-1 is retained as a theory-only sentinel, not an observational refit.",
+  "scope_limit": "This is exact for constant zero-momentum backgrounds with the scalar first gradient and aether aligned with the ADM normal. It does not include aether tilt, a nonzero scalar spatial first gradient, anisotropic extrinsic curvature, or the full coupled characteristic matrix, so it does not establish complete Delta_eff invertibility or theory viability.",
+  "selected_positive_row": {
+    "counterexample_clock_ratio": 2.0,
+    "critical_wave_number_ratio": 3.567874736625391,
+    "decision": "falsified_by_finite_wave_vector_constraint_rank_zero",
+    "normalized_symbol_residual": 0.0,
+    "orientation_strength": 1.0,
+    "row": {
+      "A3_bar": 0.06902684899626334,
+      "A4_bar": -0.07855626076096922,
+      "Delta_over_F0": -0.0,
+      "activation": 0.06902684899626334,
+      "clock_gradient_coefficient_bar": -0.3142250430438769,
+      "clock_ratio": 2.0,
+      "positive_core": 0.0,
+      "symbol_nonzero": false,
+      "wave_number_ratio": 3.567874736625391,
+      "x": -4.0,
+      "x0": -1.0,
+      "z": 1.1044295839402134
+    }
+  },
+  "selected_positive_row_survives": false,
+  "status": "completed Sigma v12A aligned finite-k sign subgate",
+  "surviving_negative_branch": {
+    "analytic_condition": {
+      "actual_orientation_strength": -1.0,
+      "interaction_nonzero": true,
+      "maximum_orientation_strength": 0.0,
+      "minimum_orientation_strength": -5.65685424949238,
+      "sufficient_condition_satisfied": true
+    },
+    "analytic_weighted_activation_bound": 1.4142135623730951,
+    "log10_wave_number_limit": 6.0,
+    "maximum_activation_bound_violation": 0.0,
+    "maximum_weighted_activation": 1.1193215117866797,
+    "minimum_A4_bar": 0.0,
+    "minimum_positive_symbol_core": 8.0,
+    "minimum_symbol_row": {
+      "A3_bar": -0.0,
+      "A4_bar": 0.0,
+      "Delta_over_F0": -8.0,
+      "activation": 0.0,
+      "clock_gradient_coefficient_bar": 0.0,
+      "clock_ratio": 1.0,
+      "positive_core": 8.0,
+      "symbol_nonzero": true,
+      "trial": 0,
+      "wave_number_ratio": 0.003081177612855917,
+      "x": -1.0,
+      "x0": -1.0,
+      "z": -0.0
+    },
+    "orientation_strength": -1.0,
+    "random_trials": 50000,
+    "signed_log10_clock_limit": 6.0
+  },
+  "theory_viable": false
+}

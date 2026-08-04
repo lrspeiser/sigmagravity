@@ -1,0 +1,23 @@
+{
+  "protocol_version": "Sigma-v12A-0.7-aligned-finite-k",
+  "status": "frozen theory-only aligned finite-wave-vector Dirac subgate",
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "fixed_values": {
+    "k_2": 2.0,
+    "background_clock_ratio": 1.0,
+    "selected_positive_strength": 1.0,
+    "surviving_negative_strength": -1.0,
+    "counterexample_clock_ratio": 2.0,
+    "random_trials": 50000,
+    "logarithmic_clock_limit": 6.0,
+    "logarithmic_wave_limit": 6.0,
+    "random_seed": 12007
+  },
+  "pass_rule": "Reduce L3-L5 exactly on the aether-aligned, zero-spatial-scalar-gradient auxiliary branch with a spatially varying normal clock; derive the finite-k primary-secondary symbol; falsify any selected sign possessing a finite-k zero; and admit a replacement sign branch only if an analytic all-X coefficient bound and a signed logarithmic scan keep the symbol nonzero.",
+  "scope_limit": "This is exact for constant zero-momentum backgrounds with the scalar first gradient and aether aligned with the ADM normal. It does not include aether tilt, a nonzero scalar spatial first gradient, anisotropic extrinsic curvature, or the full coupled characteristic matrix, so it does not establish complete Delta_eff invertibility or theory viability.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "covariant v12A action, published AeST ADM reduction, and synthetic Fourier backgrounds only"
+  }
+}
