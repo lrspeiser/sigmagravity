@@ -16,6 +16,16 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V12A_SAME_CLOCK_DHOST_SELECTION.md`](docs/SIGMA_V12A_SAME_CLOCK_DHOST_SELECTION.md).
+After the v11 mechanism reset, v12A adds no memory field. It places Hessian
+operators of the existing baryon-forced AeST scalar inside the exact luminal
+Class-Ia DHOST degeneracy identities. The interaction and its first derivative
+vanish on the AeST clock background, the flat squared speeds remain
+`1, 1, 3/4`, and equal-trace Hessians are distinguished covariantly. This is
+selection only: the combined AeST--DHOST ADM constraint algebra and arbitrary-
+background characteristics are the next pre-data kill gate.
+
+The preceding theory-only result is
 [`docs/SIGMA_V11C_BIOT_STRETCH_FALSIFICATION.md`](docs/SIGMA_V11C_BIOT_STRETCH_FALSIFICATION.md).
 Exact v11C is retired before data. Replacing Green strain by Biot stretch
 repairs v11B's one-dimensional negative quartic, but a finite

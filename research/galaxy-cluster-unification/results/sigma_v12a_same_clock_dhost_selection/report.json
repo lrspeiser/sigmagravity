@@ -1,0 +1,156 @@
+{
+  "action_identity": {
+    "activation": "d^2/[(1+d^2)^(3/2) sqrt(1+x^2)], x=X/q_sigma^2, d=x-x0",
+    "background": "x0=-Q0^2/q_sigma^2",
+    "basis": "S=S_AeST+integral sqrt(-g)[A3 L3+A4 L4+A5 L5]",
+    "dependent_coefficients": "A4=-A3-X^2 A3^2/(8F0); A5=X A3^2/(2F0)",
+    "tensor_condition": "A1=A2=0"
+  },
+  "all_selection_gates_pass": true,
+  "arbitrary_background_characteristics_proven": false,
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "coefficient_scan": {
+    "backgrounds": [
+      {
+        "background_kinetic_ratio": -100.0,
+        "maximum_absolute_normalized_coefficient": 0.021219690244045415,
+        "maximum_background_coefficient": 0.0,
+        "maximum_normalized_degeneracy_residual": 0.0
+      },
+      {
+        "background_kinetic_ratio": -1.0,
+        "maximum_absolute_normalized_coefficient": 0.3711919917140454,
+        "maximum_background_coefficient": 0.0,
+        "maximum_normalized_degeneracy_residual": 0.0
+      },
+      {
+        "background_kinetic_ratio": -0.01,
+        "maximum_absolute_normalized_coefficient": 0.2592285052299222,
+        "maximum_background_coefficient": 0.0,
+        "maximum_normalized_degeneracy_residual": 0.0
+      }
+    ],
+    "maximum_absolute_normalized_coefficient": 0.3711919917140454,
+    "maximum_normalized_degeneracy_residual": 0.0,
+    "signed_limit": 100000000.0,
+    "total_points": 8003
+  },
+  "complete_metric_stress_derived": false,
+  "data_policy": {
+    "authorization": "action-class selection, coefficient identities, flat spectrum, and static construction probes only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_only_to_complete_joint_adm_and_covariant_variation_gate",
+  "failure_rule_next": "Retire before data if the complete AeST-plus-DHOST ADM Hessian does not retain the published AeST constraint count plus the exact DHOST primary-secondary pair on arbitrary tilted backgrounds, or if any physical characteristic exceeds the one matter-metric cone.",
+  "flat_spectrum": {
+    "causal_propagating_modes": true,
+    "complete_flat_hamiltonian_positive_all_momenta": false,
+    "ir_jeans_like_sector_present": true,
+    "positive_propagating_modes": true,
+    "scalar_speed_squared": 0.75,
+    "tensor_speed_squared": 1.0,
+    "vector_speed_squared": 1.0,
+    "zero_frequency_constant_mode_hamiltonian": 0.0,
+    "zero_frequency_linearly_growing_mode_present": true,
+    "zero_frequency_sector_positive_all_momenta": false
+  },
+  "full_joint_adm_degeneracy_proven": false,
+  "gates": {
+    "background_first_derivative_zero": true,
+    "background_interaction_zero": true,
+    "equal_trace_geometry_distinguished": true,
+    "five_or_fewer_universal_constants": true,
+    "flat_propagating_modes_causal": true,
+    "flat_propagating_modes_positive": true,
+    "high_acceleration_activation_below_1e-5": true,
+    "luminal_class_ia_degeneracy": true,
+    "no_new_memory_field": true,
+    "normalized_coefficients_finite": true,
+    "one_physical_metric": true,
+    "static_invariants_rotation_covariant": true,
+    "tensor_front_luminal": true
+  },
+  "geometry_probe": {
+    "gradient": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "isotropic_hessian": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "isotropic_invariants": {
+      "L3": 3.0,
+      "L4": 1.0,
+      "L5": 1.0,
+      "gradient_hessian_gradient": 1.0,
+      "trace_hessian": 3.0
+    },
+    "maximum_directional_difference": 8.0,
+    "maximum_rotation_covariance_residual": 1.306105771156088e-14,
+    "rank_one_hessian": [
+      [
+        3.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "rank_one_invariants": {
+      "L3": 9.0,
+      "L4": 9.0,
+      "L5": 9.0,
+      "gradient_hessian_gradient": 3.0,
+      "trace_hessian": 3.0
+    },
+    "same_trace": true
+  },
+  "mechanism_reset": {
+    "new_family": "no new field; exact degenerate Hessian operators of the existing AeST scalar",
+    "retired_family": "independent material or memory fields carrying positive spatial strain",
+    "why_materially_distinct": "The directional state is a derivative of the baryon-forced AeST clock and the higher-derivative mode is removed algebraically; no material coordinates, response multipliers, or free halo profile are added."
+  },
+  "observational_data_accessed": false,
+  "provisional_constants": [
+    "a_sigma",
+    "mu_sigma",
+    "K_B",
+    "K_2",
+    "lambda_D"
+  ],
+  "raw_holdout_opened": false,
+  "reason": "The construction replaces the retired independent-memory family with exact higher-derivative degeneracy of the already baryon-forced AeST scalar. It adds no field or object state, preserves the flat AeST spectrum and one metric tensor cone, and carries trace-free directional information. These are selection conditions only; the shared metric can couple the AeST and DHOST constraint blocks, so the combined arbitrary-background Hamiltonian must be derived next.",
+  "screening_probe": {
+    "background_activation": 0.0,
+    "high_acceleration_ratio": 100000.0,
+    "high_field_activation": 1.00000001e-20,
+    "numerical_background_first_derivative": 9.998500136960491e-17
+  },
+  "selection_rule": "Advance only if the interaction vanishes to first order on the AeST clock background, exact luminal Class-Ia residuals stay below 1e-12, normalized coefficients remain finite across the signed scan, the published AeST flat propagating modes remain positive and causal, equal-trace Hessians are distinguished covariantly, and high-acceleration activation is below 1e-5.",
+  "status": "completed Sigma v12A same-clock DHOST selection",
+  "theory_viable": false
+}

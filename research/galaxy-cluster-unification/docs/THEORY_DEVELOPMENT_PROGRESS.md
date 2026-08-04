@@ -1,5 +1,25 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v12A same-clock DHOST selection
+
+The post-v11 reset selects a materially new theory-only lane. V12A adds no
+memory field or object state. It retains the one-metric AeST galaxy clock and
+uses its scalar Hessian in the published luminal Class-Ia DHOST basis with
+`A1=A2=0`, `A4=-A3-X^2 A3^2/(8F0)`, and `A5=X A3^2/(2F0)`.
+
+The provisional background-zero `A3` shape and its first derivative vanish on
+the AeST flat clock, so the finite-frequency squared speeds remain tensor `1`,
+vector `1`, and scalar `3/4`. The signed scan keeps normalized degeneracy
+residuals below `1e-12` and all normalized coefficients finite. Static `L3-L5`
+invariants distinguish equal-trace isotropic and rank-one Hessians and remain
+rotation covariant. Solar-boundary activation is below `1e-5`, five universal
+constants are retained, and no observation was opened.
+
+This is not yet a theory pass. The decisive next gate is the complete combined
+AeST--DHOST ADM Hessian and constraint chain on arbitrary tilted backgrounds;
+separate degeneracy of the two sectors does not prove joint degeneracy. See
+[`SIGMA_V12A_SAME_CLOCK_DHOST_SELECTION.md`](SIGMA_V12A_SAME_CLOCK_DHOST_SELECTION.md).
+
 ## 2026-08-04 Sigma v11C Biot-stretch falsification and mechanism reset
 
 Exact v11C is retired before data. It replaces v11B's Green strain by the Biot

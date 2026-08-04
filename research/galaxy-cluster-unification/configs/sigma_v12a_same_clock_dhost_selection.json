@@ -1,0 +1,24 @@
+{
+  "protocol_version": "Sigma-v12A-0.1-same-clock-DHOST-selection",
+  "status": "frozen theory-only mechanism-reset selection",
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "fixed_values": {
+    "k_b": 1.0,
+    "k_2": 2.0,
+    "lambda_s": 1.0,
+    "orientation_strength": 1.0,
+    "background_kinetic_ratios": [-100.0, -1.0, -0.01],
+    "signed_scan_limit": 100000000.0,
+    "signed_scan_points": 4001,
+    "high_acceleration_ratio": 100000.0,
+    "random_rotation_trials": 2000,
+    "random_seed": 12001
+  },
+  "selection_rule": "Advance only if the interaction vanishes to first order on the AeST clock background, exact luminal Class-Ia residuals stay below 1e-12, normalized coefficients remain finite across the signed scan, the published AeST flat propagating modes remain positive and causal, equal-trace Hessians are distinguished covariantly, and high-acceleration activation is below 1e-5.",
+  "failure_rule_next": "Retire before data if the complete AeST-plus-DHOST ADM Hessian does not retain the published AeST constraint count plus the exact DHOST primary-secondary pair on arbitrary tilted backgrounds, or if any physical characteristic exceeds the one matter-metric cone.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "action-class selection, coefficient identities, flat spectrum, and static construction probes only"
+  }
+}
