@@ -1,0 +1,36 @@
+{
+  "protocol_status": "frozen local covariant gauge-carrier gate; no observational fitting authorized",
+  "candidate_family": "Sigma v14 gauge-reduced zero-monopole tidal carrier",
+  "fixed_values": {
+    "constant_curvature": 0.2,
+    "weyl_tidal_amplitude": 0.3,
+    "gauge_gradient": [1.0, 0.2, -0.4, 0.6],
+    "tracefree_source_wave_squared": 1.7,
+    "tracefree_source_stress_trace": 2.3,
+    "curved_improvement_ricci_diagonal": [0.4, 0.2, -0.1, 0.3],
+    "fourth_order_massive_pole_squared": 3.0,
+    "identity_tolerance": 1e-12
+  },
+  "formulations": [
+    {
+      "id": "v14A_minimal_covariant_fracton",
+      "material_change": "Replace flat derivatives in the scalar-charge rank-two field strength by covariant derivatives.",
+      "required_gate": "Gauge variation must vanish on an arbitrary curved one-metric background.",
+      "failure": "The exact residual is R_mnr{}^s nabla_s alpha and is nonzero whenever curvature is present."
+    },
+    {
+      "id": "v14B_partially_massless_curvature_completion",
+      "material_change": "Add the unique constant-curvature metric term to the double-derivative gauge transformation.",
+      "required_gate": "The corrected gauge variation must vanish on a Weyl-curved galaxy background.",
+      "failure": "The constant-curvature contribution cancels, but the Weyl contraction C_mnr{}^s nabla_s alpha remains."
+    },
+    {
+      "id": "v14C_conformal_bach_completion",
+      "material_change": "Use the covariantly conserved trace-free Bach current and a local four-derivative conformal spin-two completion.",
+      "required_gate": "The complete local propagator must have only positive residues.",
+      "failure": "The fourth-order propagator decomposes into two second-order poles with exactly opposite residues."
+    }
+  ],
+  "scope_limit": "This closes the frozen local covariant scalar-gauge rank-two carrier family. It is not a theorem against every nonlocal, Lorentz-breaking, or higher-spin theory, but those alternatives would re-enter mechanism families already reset unless they identify a new constraint structure.",
+  "data_policy": "No galaxy, cluster, Solar-System, or holdout data may be opened for v14A, v14B, or v14C."
+}

@@ -1,0 +1,114 @@
+{
+  "action_gate_passed": false,
+  "all_verification_gates_pass": true,
+  "analytic_identities": {
+    "flat_improvement_curved_divergence": "R_ns nabla^s S",
+    "fourth_order_partial_fraction": "1/[k^2(k^2+m^2)]=(1/m^2)[1/k^2-1/(k^2+m^2)]",
+    "minimal_field_strength_variation": "delta F_mn|r=R_mnr{}^s nabla_s alpha",
+    "partially_massless_corrected_variation": "delta F_mn|r=C_mnr{}^s nabla_s alpha after the constant-curvature part cancels",
+    "tracefree_stress_double_divergence": "-box(T)/4 in four dimensions"
+  },
+  "candidate_family": "Sigma v14 gauge-reduced zero-monopole tidal carrier",
+  "common_failed_gate": "healthy local covariant gauge-reduced tidal carrier on arbitrary one-metric backgrounds",
+  "data_policy": "No galaxy, cluster, Solar-System, or holdout data may be opened for v14A, v14B, or v14C.",
+  "decision": "Reject the frozen local covariant gauge-reduced tidal carrier before data. Minimal covariantization loses gauge invariance on curvature; the partially-massless correction works only after removing the Weyl curvature that real galaxies and clusters require; and the local conformal/Bach completion restores covariance with an opposite-residue negative-energy spin-two mode. The three-variant stopping rule resets this carrier family rather than adding another curvature counterterm.",
+  "formulation_rows": [
+    {
+      "curved_gauge_residual_norm": 0.2,
+      "failure": "The exact residual is R_mnr{}^s nabla_s alpha and is nonzero whenever curvature is present.",
+      "flat_gauge_residual_norm": 0.0,
+      "formulation_rejected": true,
+      "id": "v14A_minimal_covariant_fracton",
+      "material_change": "Replace flat derivatives in the scalar-charge rank-two field strength by covariant derivatives.",
+      "required_gate": "Gauge variation must vanish on an arbitrary curved one-metric background.",
+      "required_gate_passes": false
+    },
+    {
+      "constant_curvature_gauge_residual_norm": 0.0,
+      "failure": "The constant-curvature contribution cancels, but the Weyl contraction C_mnr{}^s nabla_s alpha remains.",
+      "formulation_rejected": true,
+      "id": "v14B_partially_massless_curvature_completion",
+      "material_change": "Add the unique constant-curvature metric term to the double-derivative gauge transformation.",
+      "required_gate": "The corrected gauge variation must vanish on a Weyl-curved galaxy background.",
+      "required_gate_passes": false,
+      "weyl_curved_gauge_residual_norm": 0.6000000000000001
+    },
+    {
+      "failure": "The fourth-order propagator decomposes into two second-order poles with exactly opposite residues.",
+      "formulation_rejected": true,
+      "id": "v14C_conformal_bach_completion",
+      "massive_pole_residue": -0.3333333333333333,
+      "massless_pole_residue": 0.3333333333333333,
+      "material_change": "Use the covariantly conserved trace-free Bach current and a local four-derivative conformal spin-two completion.",
+      "opposite_residue_signs": true,
+      "required_gate": "The complete local propagator must have only positive residues.",
+      "required_gate_passes": false,
+      "residue_sum": 0.0
+    }
+  ],
+  "materially_distinct_failure_count": 3,
+  "next_gate": "Return to the physical postulates. Any successor must not require a local covariant scalar-gauge rank-two carrier. Do not open observations.",
+  "observational_data_accessed": false,
+  "partially_massless_weyl_identity_residual": 1.1102230246251565e-16,
+  "prior_art_boundary": {
+    "conformal_bach_completion": "established conformal-gravity construction and opposite-sign spin-two spectrum",
+    "higher_rank_scalar_gauge_symmetry": "established fracton and longitudinal-diffeomorphism prior art",
+    "partially_massless_spin_two": "established constant-curvature construction with published nonlinear/gravitational no-go results",
+    "sigma_novelty_claimed": false
+  },
+  "protocol_status": "frozen local covariant gauge-carrier gate; no observational fitting authorized",
+  "raw_holdout_opened": false,
+  "scope_limit": "This closes the frozen local covariant scalar-gauge rank-two carrier family. It is not a theorem against every nonlocal, Lorentz-breaking, or higher-spin theory, but those alternatives would re-enter mechanism families already reset unless they identify a new constraint structure.",
+  "source_rows": [
+    {
+      "decision": "reject because it restores the forbidden direct mass charge",
+      "double_divergence": 0.0,
+      "gauge_compatible": true,
+      "source": "complete conserved stress tensor T_mn",
+      "zero_monopole": false
+    },
+    {
+      "decision": "reject because stress conservation does not conserve its trace-free projection",
+      "double_divergence": -0.9774999999999999,
+      "gauge_compatible": false,
+      "source": "trace-free stress T_mn-g_mn T/4",
+      "zero_monopole": "not sufficient"
+    },
+    {
+      "curved_divergence_norm": 0.4,
+      "decision": "reject as a general covariant source because Ricci curvature spoils conservation",
+      "flat_divergence": 0.0,
+      "gauge_compatible": false,
+      "source": "flat improvement (nabla_mn-g_mn box)S",
+      "zero_monopole": true
+    },
+    {
+      "decision": "source identity passes, but the associated local conformal spin-two completion has an opposite-residue ghost",
+      "double_divergence": 0.0,
+      "gauge_compatible": true,
+      "source": "Bach tensor",
+      "zero_monopole": true
+    }
+  ],
+  "status": "Sigma v14 local covariant gauge-carrier falsification",
+  "theory_viable": false,
+  "three_failure_mechanism_reset_triggered": true,
+  "verification_gates": {
+    "all_three_materially_distinct_formulations_fail_common_gate": true,
+    "flat_improvement_is_not_conserved_on_generic_curvature": true,
+    "fourth_order_completion_has_opposite_residues": true,
+    "minimal_covariantization_has_curvature_residual": true,
+    "minimal_field_strength_is_gauge_invariant_in_flat_space": true,
+    "partially_massless_residual_equals_weyl_contraction": true,
+    "partially_massless_symmetry_fails_on_weyl_curvature": true,
+    "partially_massless_term_cancels_constant_curvature": true,
+    "synthetic_weyl_tensor_has_required_symmetries": true,
+    "tracefree_stress_source_is_not_conserved_for_generic_trace": true
+  },
+  "weyl_tensor_symmetry_residuals": {
+    "first_pair_antisymmetry": 0.0,
+    "pair_exchange_symmetry": 0.0,
+    "second_pair_antisymmetry": 0.0,
+    "single_trace": 0.0
+  }
+}

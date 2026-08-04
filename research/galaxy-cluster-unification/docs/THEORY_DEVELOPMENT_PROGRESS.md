@@ -1,5 +1,24 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v14 local covariant gauge-carrier falsification
+
+The gauge-reduced tidal question selected by the v14 reset fails its first
+action gate in three materially different local covariant forms. Minimal
+covariantization has the exact gauge residual
+`R_mnr{}^s nabla_s(alpha)`. The partially-massless metric correction cancels
+constant curvature but leaves `C_mnr{}^s nabla_s(alpha)`, so it fails on the
+Weyl curvature that carries real galaxy/cluster tides. A conserved neutral
+Bach current exists, but its local conformal fourth-order completion has
+opposite propagator residues, `+1/m^2` and `-1/m^2`.
+
+The full stress tensor is conserved but would restore the forbidden direct
+rank-two mass charge; its trace-free projection and the flat neutral
+improvement are not conserved on generic curved backgrounds. V14A, v14B, and
+v14C therefore trigger the three-formulation reset for the local covariant
+scalar-gauge rank-two carrier. No observational data were opened, and no
+viable theory is claimed. See
+[`SIGMA_V14_GAUGE_CARRIER_FALSIFICATION.md`](SIGMA_V14_GAUGE_CARRIER_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v14 mechanism reset and gauge-tidal postulates
 
 The post-v13C mechanism reset is now evidence-complete. Nine carrier classes
