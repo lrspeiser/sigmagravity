@@ -1,0 +1,39 @@
+{
+  "algebra": {
+    "fixed_overlap_potential": 0.1704419490648072,
+    "maximum_axisymmetric_absolute_potential": 7.513558290616469e-16,
+    "maximum_directional_gradient_relative_error": 4.2029104683692714e-08,
+    "maximum_rotation_invariance_relative_error": 1.849358121012018e-14,
+    "maximum_trace_residual": 3.552713678800501e-15,
+    "minimum_random_discriminant": 2.8833328542505772e-08,
+    "screen_at_g_over_a_sigma_1e5": 1e-20
+  },
+  "all_preregistered_gates_pass": false,
+  "config_sha256": "d919da5457f55dec49c0dad71d236465cfd831ef22615793ffa36af7ae3701f0",
+  "decision": "retire_v3d_discriminant_as_frozen_structural_mechanism",
+  "evidence_status": "spent-theory-and-synthetic-only",
+  "gates": {
+    "analytic_gradient": true,
+    "axisymmetric_null": true,
+    "each_mass_morphology_separation": false,
+    "nonnegative_discriminant": true,
+    "overlap_activation": true,
+    "primary_morphology_separation": false,
+    "resolution_stability": true,
+    "rotation_invariance": true,
+    "solar_screen": true,
+    "trace_free": true
+  },
+  "maximum_memory_trace_residual": 2.7755575615628914e-17,
+  "maximum_primary_mass_ratio": 3.520470372849991,
+  "minimum_primary_mass_ratio": 0.9599451792203121,
+  "preregistered_git_revision": "1944b244e5f6e18a725f24e3c66ef3ff8f58c38a",
+  "primary_grid_points": 65,
+  "primary_median_cluster_to_galaxy_response_ratio": 1.116740458868476,
+  "protocol_id": "sigma-v3d-triaxial-memory-action-audit-v1",
+  "raw_holdout_failure_count": 0,
+  "raw_holdout_opened": false,
+  "resolution_fractional_change_in_primary_ratio": 0.041268479236516775,
+  "resolution_grid_points": 81,
+  "resolution_median_cluster_to_galaxy_response_ratio": 1.070654278429084
+}

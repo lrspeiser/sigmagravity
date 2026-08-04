@@ -1,0 +1,34 @@
+{
+  "best_settings": {
+    "analysis_half_width": 0.5,
+    "memory_length": 1.0,
+    "screen_order": "after_memory",
+    "screen_power": 8.0,
+    "total_mass": 3.0
+  },
+  "combinations": 216,
+  "decision": "use_for_mechanism_selection_only",
+  "diagnostic_config_sha256": "8dbd1dc7cb7e5d593b08a499b0fa550f88804d28300470418081a0a843232ad8",
+  "dominant_sensitivity": "volume",
+  "fraction_combinations_at_least_ten": 0.3472222222222222,
+  "fragile_large_separation": false,
+  "frozen_v3d_decision_changed": false,
+  "material_sensitivities": {
+    "memory": true,
+    "ordering": true,
+    "screen": true,
+    "volume": true
+  },
+  "maximum_cluster_to_galaxy_response_ratio": 8.207824643858164e+28,
+  "maximum_factor_sensitivity": {
+    "memory": 6011473510076.4,
+    "ordering": 2.7178632976907462e+26,
+    "screen": 1.1752607532207212e+22,
+    "volume": 7.5524285808207055e+28
+  },
+  "maximum_high_ratio_neighbor_fraction": 1.0,
+  "parent_config_sha256": "d919da5457f55dec49c0dad71d236465cfd831ef22615793ffa36af7ae3701f0",
+  "protocol_id": "sigma-v3d-post-failure-forensics-v1",
+  "raw_holdout_opened": false,
+  "status": "diagnostic-only-after-frozen-failure"
+}
