@@ -1,5 +1,11 @@
 # Sigma v17H susceptibility-screened pressure action
 
+> **Superseded health interpretation:** the later
+> [v17J flat-kinetic audit](SIGMA_V17J_FLAT_KINETIC_FALSIFICATION.md) retains the
+> Lorentzian action sign and finds a zero transverse kinetic coefficient at the
+> frozen (c_U=1), plus a degenerate aether scalar. The selection and Solar
+> proxy below remain historical results; this action is retired before data.
+
 ## Selection result
 
 There is a parameter-economical way to remove v17G's Solar obstruction without

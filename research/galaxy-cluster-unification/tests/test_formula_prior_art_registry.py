@@ -192,3 +192,32 @@ def test_v17i_localization_preserves_the_same_prior_art_ancestry() -> None:
     assert {"TEVES", "DISFORMAL-METRIC", "EINSTEIN-AETHER"}.issubset(
         set(v17i["published_overlap_ids"])
     )
+
+
+def test_v17j_flat_kinetic_falsification_is_registered_as_aether_prior_art() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17j = protocols["sigma_v17j_flat_kinetic_gate.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17j["formula_fragments"]
+    )
+
+    assert "c_1=c_U, c_2=0, c_3=-c_U, c_4=-1" in fragment_text
+    assert "s_1^2" in fragment_text
+    assert "EINSTEIN-AETHER" in set(v17j["published_overlap_ids"])
+    characteristic_fragments = [
+        fragment
+        for fragment in v17j["formula_fragments"]
+        if fragment["json_path"]
+        in {
+            "frozen_action.einstein_aether_mapping.equations",
+            "characteristic_gate.equations",
+        }
+    ]
+    assert len(characteristic_fragments) == 2
+    assert all(
+        "EINSTEIN-AETHER" in fragment["published_overlap_ids"]
+        for fragment in characteristic_fragments
+    )

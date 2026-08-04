@@ -1,0 +1,886 @@
+{
+  "analytic_no_go": {
+    "frozen_sign_vector_partition_is_exhaustive": true,
+    "independent_scalar_obstruction": "c_123=0 for every c_U, so the aether spin-0 characteristic is zero or singular independently of the vector-cone rule.",
+    "real_c_U_vector_pass_exists": false,
+    "reason": "c_U<0 has wrong-sign gradient/energy numerator; c_U=0 is degenerate; 0<c_U<1 has K_T<0 and s_1^2<0; c_U=1 has K_T=0 and a singular spin-1 characteristic; c_U>1 has s_1^2=1+1/(c_U-1)>1."
+  },
+  "decision": {
+    "outcome": "retire_frozen_v17H_v17I_susceptibility_action",
+    "scope": "This rejects the frozen Maxwell plus negative Born-Infeld acceleration completion before data. It does not reject a pressure source, a baryon-derived halo scale, or every possible susceptibility carrier.",
+    "sign_flip_is_not_a_rescue": "The displayed sign flip is a distinct control. Although it repairs the vector quadratic sign for c_U>0, c_123 remains zero; it is not advanced or fit.",
+    "supersedes": "The v17H reduced static acceleration-Hessian statement that the Maxwell term supplied a positive floor. It did not retain the Lorentzian action sign in the time-dependent quadratic block."
+  },
+  "empirical_fit_performed": false,
+  "frozen_point": {
+    "c_U": 1.0,
+    "coefficients": {
+      "c_1": 1.0,
+      "c_123": 0.0,
+      "c_13": 0.0,
+      "c_14": 0.0,
+      "c_2": 0.0,
+      "c_3": -1.0,
+      "c_4": -1.0
+    },
+    "gates": {
+      "all_mode_gates_pass": false,
+      "spin_0_finite_positive": false,
+      "spin_1_energy_numerator_positive": true,
+      "spin_1_finite_nonnegative": false,
+      "spin_1_within_physical_cone": false,
+      "spin_2_luminal": true,
+      "transverse_gradient_positive": true,
+      "transverse_kinetic_positive": false
+    },
+    "mode_speeds": {
+      "spin_0_squared": null,
+      "spin_1_squared": null,
+      "spin_2_squared": 1.0
+    },
+    "newtonian_coupling_denominator": 1.0,
+    "quadratic": {
+      "spin_1_energy_numerator": 2.0,
+      "transverse_gradient": 1.0,
+      "transverse_kinetic": 0.0
+    }
+  },
+  "frozen_sign_scan": {
+    "acceleration_action_sign_sigma_A": -1.0,
+    "full_mode_gate_pass_count": 0,
+    "representative_rows": [
+      {
+        "c_U": -10.0,
+        "coefficients": {
+          "c_1": -10.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": -11.0,
+          "c_2": 0.0,
+          "c_3": 10.0,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": false,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": false,
+          "transverse_kinetic_positive": false
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": 0.9090909090909091,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 6.5,
+        "quadratic": {
+          "spin_1_energy_numerator": -20.0,
+          "transverse_gradient": -10.0,
+          "transverse_kinetic": -11.0
+        }
+      },
+      {
+        "c_U": -1.0,
+        "coefficients": {
+          "c_1": -1.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": -2.0,
+          "c_2": 0.0,
+          "c_3": 1.0,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": false,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": false,
+          "transverse_kinetic_positive": false
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": 0.5,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 2.0,
+        "quadratic": {
+          "spin_1_energy_numerator": -2.0,
+          "transverse_gradient": -1.0,
+          "transverse_kinetic": -2.0
+        }
+      },
+      {
+        "c_U": -0.1,
+        "coefficients": {
+          "c_1": -0.1,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": -1.1,
+          "c_2": 0.0,
+          "c_3": 0.1,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": false,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": false,
+          "transverse_kinetic_positive": false
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": 0.09090909090909091,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 1.55,
+        "quadratic": {
+          "spin_1_energy_numerator": -0.2,
+          "transverse_gradient": -0.1,
+          "transverse_kinetic": -1.1
+        }
+      },
+      {
+        "c_U": 0.0,
+        "coefficients": {
+          "c_1": 0.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": -1.0,
+          "c_2": 0.0,
+          "c_3": -0.0,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": false,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": false,
+          "transverse_kinetic_positive": false
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": -0.0,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 1.5,
+        "quadratic": {
+          "spin_1_energy_numerator": 0.0,
+          "transverse_gradient": 0.0,
+          "transverse_kinetic": -1.0
+        }
+      },
+      {
+        "c_U": 0.1,
+        "coefficients": {
+          "c_1": 0.1,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": -0.9,
+          "c_2": 0.0,
+          "c_3": -0.1,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": false,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": false
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": -0.11111111111111112,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 1.45,
+        "quadratic": {
+          "spin_1_energy_numerator": 0.2,
+          "transverse_gradient": 0.1,
+          "transverse_kinetic": -0.9
+        }
+      },
+      {
+        "c_U": 0.5,
+        "coefficients": {
+          "c_1": 0.5,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": -0.5,
+          "c_2": 0.0,
+          "c_3": -0.5,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": false,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": false
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": -1.0,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 1.25,
+        "quadratic": {
+          "spin_1_energy_numerator": 1.0,
+          "transverse_gradient": 0.5,
+          "transverse_kinetic": -0.5
+        }
+      },
+      {
+        "c_U": 0.9,
+        "coefficients": {
+          "c_1": 0.9,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": -0.09999999999999998,
+          "c_2": 0.0,
+          "c_3": -0.9,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": false,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": false
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": -9.000000000000002,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 1.05,
+        "quadratic": {
+          "spin_1_energy_numerator": 1.8,
+          "transverse_gradient": 0.9,
+          "transverse_kinetic": -0.09999999999999998
+        }
+      },
+      {
+        "c_U": 1.0,
+        "coefficients": {
+          "c_1": 1.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 0.0,
+          "c_2": 0.0,
+          "c_3": -1.0,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": false,
+          "spin_1_within_physical_cone": false,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": false
+        },
+        "mode_speeds": {
+          "spin_0_squared": null,
+          "spin_1_squared": null,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 1.0,
+        "quadratic": {
+          "spin_1_energy_numerator": 2.0,
+          "transverse_gradient": 1.0,
+          "transverse_kinetic": 0.0
+        }
+      },
+      {
+        "c_U": 1.1,
+        "coefficients": {
+          "c_1": 1.1,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 0.10000000000000009,
+          "c_2": 0.0,
+          "c_3": -1.1,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": false,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": 0.0,
+          "spin_1_squared": 10.999999999999991,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 0.95,
+        "quadratic": {
+          "spin_1_energy_numerator": 2.2,
+          "transverse_gradient": 1.1,
+          "transverse_kinetic": 0.10000000000000009
+        }
+      },
+      {
+        "c_U": 2.0,
+        "coefficients": {
+          "c_1": 2.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 1.0,
+          "c_2": 0.0,
+          "c_3": -2.0,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": false,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": 0.0,
+          "spin_1_squared": 2.0,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 0.5,
+        "quadratic": {
+          "spin_1_energy_numerator": 4.0,
+          "transverse_gradient": 2.0,
+          "transverse_kinetic": 1.0
+        }
+      },
+      {
+        "c_U": 3.0,
+        "coefficients": {
+          "c_1": 3.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 2.0,
+          "c_2": 0.0,
+          "c_3": -3.0,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": false,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": 0.0,
+          "spin_1_squared": 1.5,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 0.0,
+        "quadratic": {
+          "spin_1_energy_numerator": 6.0,
+          "transverse_gradient": 3.0,
+          "transverse_kinetic": 2.0
+        }
+      },
+      {
+        "c_U": 10.0,
+        "coefficients": {
+          "c_1": 10.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 9.0,
+          "c_2": 0.0,
+          "c_3": -10.0,
+          "c_4": -1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": false,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": 1.1111111111111112,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": -3.5,
+        "quadratic": {
+          "spin_1_energy_numerator": 20.0,
+          "transverse_gradient": 10.0,
+          "transverse_kinetic": 9.0
+        }
+      }
+    ],
+    "sample_count": 2403,
+    "vector_gate_pass_c_U_range": null,
+    "vector_gate_pass_count": 0
+  },
+  "gates": {
+    "any_c_U_passes_frozen_sign_full_mode_gate": false,
+    "any_c_U_passes_frozen_sign_vector_gate": false,
+    "flat_kinetic_gate_pass": false,
+    "frozen_spin_0_characteristic_pass": false,
+    "frozen_spin_1_characteristic_pass": false,
+    "frozen_tensor_speed_pass": true,
+    "frozen_transverse_gradient_pass": true,
+    "frozen_transverse_kinetic_pass": false,
+    "holdout_authorized": false,
+    "quadratic_expansion_verified": true
+  },
+  "generated_utc": "2026-08-04T22:27:19.094058+00:00",
+  "observational_data_opened": false,
+  "protocol": "configs/sigma_v17j_flat_kinetic_gate.json",
+  "protocol_sha256": "4d1994867d7c1284bbb4c9bdad66515148f5cc770752a5729d53f3a1190cc489",
+  "quadratic_expansion": {
+    "absolute_error": 5.001729553536644e-13,
+    "analytic_time_hessian_c_U_plus_sigma_A": 0.0,
+    "finite_difference_step": 0.001,
+    "numerical_time_hessian": 5.001729553536644e-13,
+    "verified": true
+  },
+  "report_version": "SIGMA-V17J-FLAT-KINETIC-GATE-1.0.0",
+  "sign_flipped_control_scan": {
+    "acceleration_action_sign_sigma_A": 1.0,
+    "full_mode_gate_pass_count": 0,
+    "representative_rows": [
+      {
+        "c_U": -10.0,
+        "coefficients": {
+          "c_1": -10.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": -9.0,
+          "c_2": 0.0,
+          "c_3": 10.0,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": false,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": false,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": false,
+          "transverse_kinetic_positive": false
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": 1.1111111111111112,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 5.5,
+        "quadratic": {
+          "spin_1_energy_numerator": -20.0,
+          "transverse_gradient": -10.0,
+          "transverse_kinetic": -9.0
+        }
+      },
+      {
+        "c_U": -1.0,
+        "coefficients": {
+          "c_1": -1.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 0.0,
+          "c_2": 0.0,
+          "c_3": 1.0,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": false,
+          "spin_1_finite_nonnegative": false,
+          "spin_1_within_physical_cone": false,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": false,
+          "transverse_kinetic_positive": false
+        },
+        "mode_speeds": {
+          "spin_0_squared": null,
+          "spin_1_squared": null,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 1.0,
+        "quadratic": {
+          "spin_1_energy_numerator": -2.0,
+          "transverse_gradient": -1.0,
+          "transverse_kinetic": 0.0
+        }
+      },
+      {
+        "c_U": -0.1,
+        "coefficients": {
+          "c_1": -0.1,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 0.9,
+          "c_2": 0.0,
+          "c_3": 0.1,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": false,
+          "spin_1_finite_nonnegative": false,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": false,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": 0.0,
+          "spin_1_squared": -0.11111111111111112,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 0.55,
+        "quadratic": {
+          "spin_1_energy_numerator": -0.2,
+          "transverse_gradient": -0.1,
+          "transverse_kinetic": 0.9
+        }
+      },
+      {
+        "c_U": 0.0,
+        "coefficients": {
+          "c_1": 0.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 1.0,
+          "c_2": 0.0,
+          "c_3": -0.0,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": false,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": false,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": 0.0,
+          "spin_1_squared": 0.0,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 0.5,
+        "quadratic": {
+          "spin_1_energy_numerator": 0.0,
+          "transverse_gradient": 0.0,
+          "transverse_kinetic": 1.0
+        }
+      },
+      {
+        "c_U": 0.1,
+        "coefficients": {
+          "c_1": 0.1,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 1.1,
+          "c_2": 0.0,
+          "c_3": -0.1,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": 0.0,
+          "spin_1_squared": 0.09090909090909091,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 0.44999999999999996,
+        "quadratic": {
+          "spin_1_energy_numerator": 0.2,
+          "transverse_gradient": 0.1,
+          "transverse_kinetic": 1.1
+        }
+      },
+      {
+        "c_U": 0.5,
+        "coefficients": {
+          "c_1": 0.5,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 1.5,
+          "c_2": 0.0,
+          "c_3": -0.5,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": 0.0,
+          "spin_1_squared": 0.3333333333333333,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 0.25,
+        "quadratic": {
+          "spin_1_energy_numerator": 1.0,
+          "transverse_gradient": 0.5,
+          "transverse_kinetic": 1.5
+        }
+      },
+      {
+        "c_U": 0.9,
+        "coefficients": {
+          "c_1": 0.9,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 1.9,
+          "c_2": 0.0,
+          "c_3": -0.9,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": 0.0,
+          "spin_1_squared": 0.4736842105263158,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 0.050000000000000044,
+        "quadratic": {
+          "spin_1_energy_numerator": 1.8,
+          "transverse_gradient": 0.9,
+          "transverse_kinetic": 1.9
+        }
+      },
+      {
+        "c_U": 1.0,
+        "coefficients": {
+          "c_1": 1.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 2.0,
+          "c_2": 0.0,
+          "c_3": -1.0,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": 0.0,
+          "spin_1_squared": 0.5,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": 0.0,
+        "quadratic": {
+          "spin_1_energy_numerator": 2.0,
+          "transverse_gradient": 1.0,
+          "transverse_kinetic": 2.0
+        }
+      },
+      {
+        "c_U": 1.1,
+        "coefficients": {
+          "c_1": 1.1,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 2.1,
+          "c_2": 0.0,
+          "c_3": -1.1,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": 0.5238095238095238,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": -0.050000000000000044,
+        "quadratic": {
+          "spin_1_energy_numerator": 2.2,
+          "transverse_gradient": 1.1,
+          "transverse_kinetic": 2.1
+        }
+      },
+      {
+        "c_U": 2.0,
+        "coefficients": {
+          "c_1": 2.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 3.0,
+          "c_2": 0.0,
+          "c_3": -2.0,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": 0.6666666666666666,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": -0.5,
+        "quadratic": {
+          "spin_1_energy_numerator": 4.0,
+          "transverse_gradient": 2.0,
+          "transverse_kinetic": 3.0
+        }
+      },
+      {
+        "c_U": 3.0,
+        "coefficients": {
+          "c_1": 3.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 4.0,
+          "c_2": 0.0,
+          "c_3": -3.0,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": 0.75,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": -1.0,
+        "quadratic": {
+          "spin_1_energy_numerator": 6.0,
+          "transverse_gradient": 3.0,
+          "transverse_kinetic": 4.0
+        }
+      },
+      {
+        "c_U": 10.0,
+        "coefficients": {
+          "c_1": 10.0,
+          "c_123": 0.0,
+          "c_13": 0.0,
+          "c_14": 11.0,
+          "c_2": 0.0,
+          "c_3": -10.0,
+          "c_4": 1.0
+        },
+        "gates": {
+          "all_mode_gates_pass": false,
+          "spin_0_finite_positive": false,
+          "spin_1_energy_numerator_positive": true,
+          "spin_1_finite_nonnegative": true,
+          "spin_1_within_physical_cone": true,
+          "spin_2_luminal": true,
+          "transverse_gradient_positive": true,
+          "transverse_kinetic_positive": true
+        },
+        "mode_speeds": {
+          "spin_0_squared": -0.0,
+          "spin_1_squared": 0.9090909090909091,
+          "spin_2_squared": 1.0
+        },
+        "newtonian_coupling_denominator": -4.5,
+        "quadratic": {
+          "spin_1_energy_numerator": 20.0,
+          "transverse_gradient": 10.0,
+          "transverse_kinetic": 11.0
+        }
+      }
+    ],
+    "sample_count": 2403,
+    "vector_gate_pass_c_U_range": [
+      1e-06,
+      1000000.0
+    ],
+    "vector_gate_pass_count": 1201
+  },
+  "status": "failed_flat_kinetic_gate"
+}

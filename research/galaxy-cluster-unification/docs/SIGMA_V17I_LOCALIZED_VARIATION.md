@@ -1,5 +1,11 @@
 # Sigma v17I localized covariant variation
 
+> **Subsequent gate:** the
+> [v17J flat-kinetic audit](SIGMA_V17J_FLAT_KINETIC_FALSIFICATION.md) finds that
+> the classically correct localized equations have an unhealthy flat-vacuum
+> quadratic sector. V17I's variation bookkeeping remains valid, but the frozen
+> v17H/v17I action is retired before data.
+
 ## Result
 
 The v17H susceptibility metric has a classically equivalent first-order

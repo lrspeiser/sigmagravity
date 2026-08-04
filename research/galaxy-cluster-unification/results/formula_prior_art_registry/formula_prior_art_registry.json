@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 92,
+    "sigma_protocols": 93,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 78,
+    "sigma_formula_fragments": 84,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -5955,6 +5955,68 @@
         "TEVES"
       ],
       "sha256": "832e3cebb94c74f553cf2bc89fd99e7d5120d7b510146767d2063009d2b3a1aa"
+    },
+    {
+      "config": "configs/sigma_v17j_flat_kinetic_gate.json",
+      "protocol_version": "SIGMA-V17J-FLAT-KINETIC-GATE-1.0.0",
+      "status": "frozen before executing the v17J audit and without opening an observational target; the possible sign obstruction was identified analytically before this executable protocol fixed the tests and decision rule",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "frozen_action.action_class",
+          "formula": "TeVeS-like scalar metric slip plus generalized Einstein-aether susceptibility, evaluated in its flat-vacuum Einstein-aether limit",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND",
+            "TEVES"
+          ]
+        },
+        {
+          "json_path": "frozen_action.action_under_test",
+          "formula": "S=integral sqrt(-g){M_Pl^2 R/2-M_Pl^2[(grad X)^2+L_sigma^-2 X^2]/2-M_Pl^2 c_U F_U^2/4-M_Pl^2(a_sigma^2/c^4)[sqrt(1+Z)-1]+lambda(U^2+1)}+S_m[g_tilde,psi], with Z=c^4 A^2/a_sigma^2 and A_m=U^n nabla_n U_m",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "frozen_action.quadratic_action",
+          "formula": "For a transverse aether perturbation u_T, L_T^(2)=(M_Pl^2/2)[(c_U-1)|dot u_T|^2-c_U k^2|u_T|^2]. The -1 is the actual quadratic contribution of -[sqrt(1+A^2)-1], not a positive Hessian floor.",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        },
+        {
+          "json_path": "frozen_action.einstein_aether_mapping.equations",
+          "formula": "c_1=c_U, c_2=0, c_3=-c_U, c_4=-1; hence c_13=0, c_14=c_U-1, and c_123=0",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        },
+        {
+          "json_path": "characteristic_gate.equations",
+          "formula": "s_2^2=1/(1-c_13); s_1^2=(2c_1-c_1^2+c_3^2)/[2c_14(1-c_13)]=c_U/(c_U-1); s_0^2=c_123(2-c_14)/[c_14(1-c_13)(2+c_13+3c_2)]",
+          "published_overlap_ids": [
+            "EINSTEIN-AETHER",
+            "AEST-MOND"
+          ]
+        },
+        {
+          "json_path": "sign_flipped_control.quadratic_action",
+          "formula": "L_T,control^(2)=(M_Pl^2/2)[(c_U+1)|dot u_T|^2-c_U k^2|u_T|^2]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 6,
+      "published_overlap_ids": [
+        "EINSTEIN-AETHER",
+        "AEST-MOND",
+        "TEVES"
+      ],
+      "sha256": "4d1994867d7c1284bbb4c9bdad66515148f5cc770752a5729d53f3a1190cc489"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

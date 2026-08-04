@@ -102,8 +102,12 @@ def closest_published_families(text: str) -> list[str]:
         (
             (
                 "aether",
+                "c_13",
+                "c_14",
+                "c_123",
                 "clock",
                 "preferred frame",
+                "spin-1 characteristic",
                 "tensor alignment",
                 "tensor dominance",
                 "tensor competition",
