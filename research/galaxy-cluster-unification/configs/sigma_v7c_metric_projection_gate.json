@@ -1,0 +1,35 @@
+{
+  "protocol_version": "Sigma-v7C-0.2-physical-metric-projection-gate",
+  "status": "frozen before observational data",
+  "candidate": "scalar-only cubic Hessian response projected into the physical metric",
+  "weak_field_convention": "ds^2=-(1+2 Psi)dt^2+(1-2 Phi)delta_ij dx^i dx^j; Weyl=(Psi+Phi)/2",
+  "decoupling_limit_field_redefinition": "h_hat_mn=h_tilde_mn-eta_mn pi-alpha_tilde partial_m(pi)partial_n(pi)/Lambda_3^3",
+  "frozen_v7c_content": {
+    "leading_conformal_mapping_derived": true,
+    "disformal_mapping_frozen": false,
+    "complete_dRGT_scalar_equation_frozen": false,
+    "coupled_tensor_X3_equation_frozen": false
+  },
+  "audit_samples": {
+    "scalar_minimum": -10.0,
+    "scalar_maximum": 10.0,
+    "points": 1001
+  },
+  "gates": {
+    "maximum_absolute_conformal_weyl_response": 1e-15,
+    "minimum_nonzero_null_response": 1e-12,
+    "require_nonzero_action_derived_lensing_response": true,
+    "require_complete_physical_metric_mapping": true,
+    "require_coupled_tensor_closure_if_claimed": true
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "theta_sigma", "L_sigma"],
+    "count": 3,
+    "maximum_allowed": 5
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "none unless a nonzero action-derived Weyl or null response is closed by the frozen equations"
+  }
+}

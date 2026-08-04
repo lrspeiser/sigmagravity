@@ -1,0 +1,49 @@
+{
+  "protocol_version": "Sigma-v7C-0.1-cubic-Hessian-construction-gate",
+  "status": "frozen before observational data",
+  "candidate": "three-dimensional cubic Galileon/Vainshtein helicity-zero equation",
+  "dimensionless_equation": "3 laplacian(pi)+kappa[(laplacian(pi))^2-H_ij H_ij]=source",
+  "fixed_coefficient": {
+    "kappa": 1.0,
+    "interpretation": "dimensionless units scaled by the one universal Vainshtein length; not a fitted object amplitude"
+  },
+  "manufactured_sphere": {
+    "grid_size": 11,
+    "spacing": 0.5,
+    "quadratic_amplitude": 0.02,
+    "relaxation": 0.2,
+    "tolerance": 1e-10,
+    "max_iterations": 1000
+  },
+  "separated_components": {
+    "coarse_grid_size": 15,
+    "coarse_spacing": 0.5,
+    "fine_grid_size": 29,
+    "fine_spacing": 0.25,
+    "component_amplitude": 50.0,
+    "component_sigma": 0.65,
+    "component_centers": [-1.0, 1.0],
+    "relaxation": 0.003,
+    "tolerance": 8e-7,
+    "max_iterations": 15000
+  },
+  "gates": {
+    "maximum_manufactured_relative_error": 1e-7,
+    "maximum_normalized_equation_residual": 1e-6,
+    "minimum_temporal_kinetic_coefficient": 0.0,
+    "minimum_spatial_ellipticity_eigenvalue": 0.0,
+    "minimum_component_nonadditivity": 0.05,
+    "maximum_rotation_covariance_error": 1e-10,
+    "maximum_resolution_change": 0.02
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "theta_sigma", "L_sigma"],
+    "count": 3,
+    "maximum_allowed": 5
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "physical-metric projection only if every construction gate passes; no observational map until a nonzero action-derived Weyl response is closed"
+  }
+}

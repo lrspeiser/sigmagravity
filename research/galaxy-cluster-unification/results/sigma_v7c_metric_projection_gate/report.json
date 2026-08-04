@@ -1,0 +1,61 @@
+{
+  "all_v7c_physical_projection_gates_pass": false,
+  "candidate": "scalar-only cubic Hessian response projected into the physical metric",
+  "data_policy": {
+    "authorization_after_this_stage": "none unless a nonzero action-derived Weyl or null response is closed by the frozen equations",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_scalar_only_v7C_as_lensing_carrier_retain_solver_as_dynamics_control",
+  "field_redefinition": "h_hat_mn=h_tilde_mn-eta_mn pi-alpha_tilde partial_m(pi)partial_n(pi)/Lambda_3^3",
+  "gates": {
+    "action_derived_nonzero_weyl_or_null_response": false,
+    "complete_scalar_metric_mapping": false,
+    "conformal_projection_identity": true,
+    "coupled_tensor_closure_if_used": false,
+    "no_lensing_only_multiplier": true,
+    "parameter_count": true,
+    "vdvz_helicity_decomposition": true
+  },
+  "next_mechanism_requirement": "Do not open spent or held-out maps. Under the three-formulation reset rule, synthesize v7A, v7B, and v7C as a failed positive-spin2 carrier sequence before selecting a physically distinct mechanism. Any later return to bimetric gravity must first freeze the full coupled physical metric and all action-linked interaction coefficients.",
+  "observational_data_accessed": false,
+  "physical_parameter_count": 3,
+  "projection": {
+    "frozen_content": {
+      "complete_scalar_equation": false,
+      "coupled_tensor_equation": false,
+      "disformal_mapping": false
+    },
+    "leading_conformal_shifts": "delta Psi=-pi/2; delta Phi=+pi/2; delta Weyl=0",
+    "massive_spin2_decomposition": {
+      "cavendish_normalized_weyl": 0.75,
+      "helicity0": {
+        "phi": -0.3333333333333333,
+        "psi": 0.3333333333333333,
+        "weyl": 0.0
+      },
+      "helicity2": {
+        "phi": 1.0,
+        "psi": 1.0,
+        "weyl": 1.0
+      },
+      "ppn_gamma": 0.5000000000000001,
+      "total": {
+        "phi": 0.6666666666666667,
+        "psi": 1.3333333333333333,
+        "weyl": 1.0
+      }
+    },
+    "maximum_absolute_conformal_weyl_response": 0.0,
+    "static_disformal_diagnostic": {
+      "aligned_null_contraction": -1.0,
+      "orthogonal_null_contraction": 0.0,
+      "time_time_component": 0.0
+    }
+  },
+  "raw_holdout_opened": false,
+  "reason": "The leading helicity-zero metric perturbation is conformal and cancels exactly from the Weyl potential. A static disformal term can affect null rays and a general dRGT branch can source the tensor through X^(3), but neither the disformal physical-metric mapping, the complete dRGT scalar equation, nor the coupled tensor equation is contained in the frozen v7C scalar PDE. Its 7.22% source nonadditivity therefore cannot be counted as a lensing prediction.",
+  "scope": "This retires the frozen scalar-only v7C equation as a lensing carrier. It does not claim that every Galileon, disformal scalar-tensor model, or fully coupled ghost-free bimetric solution has zero lensing response.",
+  "status": "completed Sigma v7C physical-metric projection gate",
+  "weak_field_convention": "ds^2=-(1+2 Psi)dt^2+(1-2 Phi)delta_ij dx^i dx^j; Weyl=(Psi+Phi)/2"
+}

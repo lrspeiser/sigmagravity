@@ -1,0 +1,60 @@
+{
+  "common_required_outcome": "one healthy Solar-safe universal carrier must produce useful galaxy-and-cluster lensing with geometry-sensitive shear from the same physical metric",
+  "data_policy": {
+    "authorization_after_this_stage": "select a physically distinct mechanism; no further v7 parameter or term variation",
+    "observational_data_accessed_by_synthesis": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_positive_spin2_carrier_as_current_sigma_route",
+  "distinct_candidate_count": 3,
+  "failed_gate_count": 3,
+  "formulations": [
+    {
+      "candidate": "massless graviton plus positive-norm Fierz-Pauli spin-2 carrier",
+      "decision": "retire_unscreened_v7A_retain_positive_spin2_as_screened_carrier_option",
+      "failed_gate": "large_scale_lensing_amplitude",
+      "formulation": "v7A_unscreened_linear",
+      "gate_value": false,
+      "observational_data_accessed": false,
+      "raw_holdout_opened": false
+    },
+    {
+      "candidate": "spherical Vainshtein-screened ghost-free bimetric carrier",
+      "decision": "retire_spherical_v7B_as_unifying_carrier_control",
+      "failed_gate": "useful_lensing_amplitude",
+      "formulation": "v7B_spherical_vainshtein",
+      "gate_value": false,
+      "observational_data_accessed": false,
+      "raw_holdout_opened": false
+    },
+    {
+      "candidate": "scalar-only cubic Hessian response projected into the physical metric",
+      "decision": "retire_scalar_only_v7C_as_lensing_carrier_retain_solver_as_dynamics_control",
+      "failed_gate": "action_derived_nonzero_weyl_or_null_response",
+      "formulation": "v7C_three_dimensional_scalar",
+      "gate_value": false,
+      "observational_data_accessed": false,
+      "raw_holdout_opened": false
+    }
+  ],
+  "gates": {
+    "mechanism_reset_required": true,
+    "minimum_distinct_formulations": true,
+    "minimum_failed_useful_lensing_gates": true,
+    "no_raw_holdout_consumed": true
+  },
+  "mechanism": "positive massive-spin2 carrier activated outside a screened high-field regime",
+  "mechanism_reset_required": true,
+  "next_mechanism_constraints": [
+    "the extra field must contribute to the Weyl potential at the same derived order as it changes massive dynamics",
+    "the physical metric must be frozen before any source-map solve",
+    "the activation cannot depend only on spherical enclosed density",
+    "the Solar limit must arise from the same equations without suppressing the required cluster response",
+    "no continuation may add a lens-only multiplier or object label"
+  ],
+  "observational_data_accessed_by_synthesis": false,
+  "raw_holdout_opened": false,
+  "reason": "Three materially distinct positive-spin2 implementations fail the same combined carrier objective for independent reasons: Solar-safe amplitude, spherical screening discrimination/amplitude, and closure of a nonzero physical lensing projection. Adding another response term to v7C would evade rather than pass the frozen gate.",
+  "scope": "This falsifies the present positive-spin2 carrier route under the Sigma universality and complexity rules. It does not falsify dRGT or Hassan-Rosen gravity as mathematical theories and does not prohibit a future complete coupled-metric proposal from entering as a new mechanism.",
+  "status": "completed Sigma v7 positive-spin2 mechanism falsification"
+}

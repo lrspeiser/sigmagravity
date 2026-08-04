@@ -1,0 +1,59 @@
+{
+  "all_v7a_gates_pass": false,
+  "analytic_response": {
+    "dynamical_force": "1+(4/3) alpha^2 (1+r/L) exp(-r/L)",
+    "kernel_derivative": "d[(1+x)exp(-x)]/dx=-x exp(-x)<=0",
+    "lensing_force": "1+alpha^2 (1+r/L) exp(-r/L)",
+    "ppn_gamma": "[1+(2/3)alpha^2]/[1+(4/3)alpha^2]",
+    "spatial_force": "1+(2/3) alpha^2 (1+r/L) exp(-r/L)"
+  },
+  "bounds": {
+    "maximum_jointly_allowed_residue": 7.500000000000001e-06,
+    "maximum_lensing_enhancement": 1.0000075,
+    "maximum_residue_from_high_field_force": 7.500000000000001e-06,
+    "maximum_residue_from_ppn": 3.4501587073005356e-05,
+    "minimum_locally_calibrated_far_force_ratio": 0.9999900000999989
+  },
+  "candidate": "massless graviton plus positive-norm Fierz-Pauli spin-2 carrier",
+  "data_policy": {
+    "authorization_after_this_stage": "none if an unscreened positive carrier cannot pass Solar and useful-amplitude gates simultaneously",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_unscreened_v7A_retain_positive_spin2_as_screened_carrier_option",
+  "gates": {
+    "declared_kinetic_signature": true,
+    "declared_spin2_constraint_count": true,
+    "fierz_pauli_constraint_count": true,
+    "high_field_extra_force": true,
+    "large_scale_lensing_amplitude": false,
+    "parameter_count": true,
+    "positive_local_kinetic_spectrum": true,
+    "solar_ppn_gamma": true,
+    "turns_on_with_distance": false
+  },
+  "next_mechanism_requirement": "Test whether a ghost-free nonlinear screening radius can suppress the same positive spin-2 mode locally while activating a useful, universal dynamics-and-lensing window across dwarfs, disks, and clusters.",
+  "nonlinear_completion_boundary": "Only Einstein-Hilbert kinetic terms plus a Hassan-Rosen/dRGT potential are admitted; BIMOND-like derivative metric interactions are excluded.",
+  "observational_data_accessed": false,
+  "physical_parameter_count": 3,
+  "quadratic_action": "S2=1/2 H E H + 1/2 M E M - m^2/4(M_mn M^mn-M^2) + (H_mn+alpha M_mn)T^mn/Mpl",
+  "raw_holdout_opened": false,
+  "reason": "The Fierz-Pauli carrier is locally healthy, but an unscreened long-range mode is limited by the high-field gate to alpha^2<=7.5e-6, so its maximum lensing enhancement is below 1.000008. Its positive Yukawa kernel also decreases with distance and cannot turn on outside the Solar-calibrated regime.",
+  "scope": "This rejects the unscreened linear carrier, not a nonlinear ghost-free Vainshtein-screened Hassan-Rosen/dRGT completion.",
+  "spectrum": {
+    "kinetic_eigenvalues": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "massive_spin2_degrees_of_freedom": 5,
+    "massless_spin2_degrees_of_freedom": 2,
+    "negative_kinetic_directions": 0,
+    "total_degrees_of_freedom": 7
+  },
+  "status": "completed Sigma v7A positive-local-carrier gate"
+}

@@ -1,0 +1,51 @@
+{
+  "all_v7c_construction_gates_pass": true,
+  "branch_health": {
+    "all_solves_converged": true,
+    "maximum_normalized_residual": 7.997402660268459e-07,
+    "minimum_spatial_ellipticity_eigenvalue": 2.0794456216750064,
+    "minimum_temporal_kinetic_coefficient": 3.003051827768351,
+    "principal_matrix": "Z_ij=3 delta_ij+2 kappa[(laplacian pi)delta_ij-H_ij]",
+    "temporal_coefficient": "Z_t=3+2 kappa laplacian(pi)"
+  },
+  "candidate": "three-dimensional cubic Galileon/Vainshtein helicity-zero equation",
+  "data_policy": {
+    "authorization_after_this_stage": "physical-metric projection only if every construction gate passes; no observational map until a nonzero action-derived Weyl response is closed",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "construction_pass_retain_as_dynamics_control_physical_projection_failed",
+  "dimensionless_equation": "3 laplacian(pi)+kappa[(laplacian(pi))^2-H_ij H_ij]=source",
+  "gates": {
+    "all_nonlinear_solves_converged": true,
+    "manufactured_spherical_recovery": true,
+    "material_component_nonadditivity": true,
+    "normalized_equation_residual": true,
+    "parameter_count": true,
+    "positive_spatial_ellipticity": true,
+    "positive_temporal_kinetic_coefficient": true,
+    "resolution_stability": true,
+    "rotation_covariance": true
+  },
+  "manufactured_sphere": {
+    "analytic_potential": "pi=A(x^2+y^2+z^2)",
+    "analytic_source": "18 A + 24 kappa A^2",
+    "iterations": 83,
+    "normalized_residual": 8.119635348073202e-11,
+    "relative_potential_error": 6.091350575338023e-11
+  },
+  "next_gate": "See sigma_v7c_metric_projection_gate/report.json. The scalar-only v7C lensing interpretation is retired; synthesize the three-formulation positive-spin2 failure before selecting another mechanism.",
+  "observational_data_accessed": false,
+  "physical_parameter_count": 3,
+  "raw_holdout_opened": false,
+  "reason": "The fixed 3D Hessian equation recovers an analytic spherical solution, remains temporally positive and spatially elliptic, is rotation covariant, changes by less than 2% at double resolution, and produces a 5%+ nonadditive response to separated sources. The separate physical-metric projection gate shows that this scalar nonadditivity cannot be counted as a lensing prediction.",
+  "scope": "Construction success establishes a numerical scalar dynamics control only. The leading conformal helicity-zero metric response cancels from the Weyl potential, while the disformal and coupled-tensor terms that could affect light are not closed by this frozen PDE. No observational-map test is authorized.",
+  "separated_components": {
+    "coarse_combined_iterations": 3194,
+    "coarse_to_double_resolution_change": 0.011651338757469187,
+    "fine_combined_iterations": 3444,
+    "relative_nonadditivity": 0.07223189504675186,
+    "rotation_covariance_error": 1.2629946577747577e-16
+  },
+  "status": "completed Sigma v7C cubic-Hessian construction gate"
+}

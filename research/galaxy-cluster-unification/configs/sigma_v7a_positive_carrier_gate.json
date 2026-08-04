@@ -1,0 +1,29 @@
+{
+  "protocol_version": "Sigma-v7A-0.1-positive-local-carrier",
+  "status": "frozen before observational data",
+  "candidate": "massless graviton plus positive-norm Fierz-Pauli spin-2 carrier",
+  "quadratic_action": "S2=1/2 H E H + 1/2 M E M - m^2/4(M_mn M^mn-M^2) + (H_mn+alpha M_mn)T^mn/Mpl",
+  "nonlinear_completion_boundary": "Only Einstein-Hilbert kinetic terms plus a Hassan-Rosen/dRGT potential are admitted; BIMOND-like derivative metric interactions are excluded.",
+  "physical_parameters": {
+    "names": ["a_sigma", "alpha_sigma", "L_sigma"],
+    "count": 3,
+    "maximum_allowed": 5
+  },
+  "scan": {
+    "radius_over_range_min": 1e-12,
+    "radius_over_range_max": 1e8,
+    "points": 20001
+  },
+  "gates": {
+    "maximum_ppn_gamma_minus_one": 2.3e-5,
+    "maximum_high_field_fractional_extra_force": 1e-5,
+    "minimum_useful_large_scale_lensing_enhancement": 1.5,
+    "maximum_negative_kinetic_directions": 0,
+    "required_total_spin2_degrees_of_freedom": 7
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "none if an unscreened positive carrier cannot pass Solar and useful-amplitude gates simultaneously"
+  }
+}

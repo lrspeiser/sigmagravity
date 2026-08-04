@@ -1,5 +1,47 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v7 positive-carrier sequence
+
+The v7 sequence replaced v6D's multiplier-localized retarded response with a
+positive-norm massive spin-2 carrier.  The unscreened v7A spectrum has two
+massless plus five massive healthy spin-2 modes, but Solar high-field bounds
+limit its residue to `7.5e-6`, leaving less than `0.00075%` useful lensing.  Its
+positive Yukawa response also decreases with radius.  V7A is retired before
+data; see
+[`SIGMA_V7A_POSITIVE_LOCAL_CARRIER_GATE.md`](SIGMA_V7A_POSITIVE_LOCAL_CARRIER_GATE.md).
+
+The spherical Vainshtein v7B control restores GR at high enclosed density, but
+its screening coordinate depends only on `M/r^3`.  Equal-density disk and
+strong-lens archetypes have identical screening for every universal range, to
+`6.54e-16` numerical precision.  The healthy bimetric exterior also caps light
+deflection at a factor `1.5`, below the factor-`3` carrier target.  The spherical
+control is retired; see
+[`SIGMA_V7B_SPHERICAL_VAINSHTEIN_GATE.md`](SIGMA_V7B_SPHERICAL_VAINSHTEIN_GATE.md).
+
+The full three-dimensional cubic Hessian v7C **construction** passes.  It
+recovers an analytic spherical solution to `6.09e-11`, has maximum normalized
+residual `7.997e-7`, minimum temporal coefficient `3.003`, minimum spatial
+ellipticity eigenvalue `2.079`, `1.165%` double-resolution change, and `7.223%`
+nonadditivity for separated sources with `1.26e-16` rotation error.  See
+[`SIGMA_V7C_CUBIC_HESSIAN_CONSTRUCTION_GATE.md`](SIGMA_V7C_CUBIC_HESSIAN_CONSTRUCTION_GATE.md).
+
+The subsequent physical-metric projection fails.  The leading helicity-zero
+metric perturbation gives `delta Psi=-pi/2` and `delta Phi=+pi/2`, hence exactly
+zero change in the Weyl potential.  A disformal term or residual `X^(3)` tensor
+mixing could affect light, but v7C froze neither the complete disformal scalar
+mapping nor the coupled tensor equation.  Its scalar nonadditivity cannot be
+scored as lensing.  No map was opened; v7C is retained only as a dynamics
+control.  See
+[`SIGMA_V7C_PHYSICAL_METRIC_PROJECTION_GATE.md`](SIGMA_V7C_PHYSICAL_METRIC_PROJECTION_GATE.md).
+
+This completes three materially distinct failures of the positive-spin-2
+carrier objective.  The v7A unscreened pole fails Solar-safe amplitude, v7B
+spherical screening fails amplitude and equal-density discrimination, and v7C
+fails closure of a nonzero physical lensing projection.  The route is retired
+under the planned mechanism-reset rule; no additional v7 response term will be
+fit.  See
+[`SIGMA_V7_POSITIVE_SPIN2_FALSIFICATION.md`](SIGMA_V7_POSITIVE_SPIN2_FALSIFICATION.md).
+
 ## 2026-08-03 v5C exterior-law failure
 
 The fixed v5C row is retired before full variation or data. In the published

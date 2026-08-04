@@ -1,0 +1,29 @@
+{
+  "protocol_version": "Sigma-v7-1.0-positive-spin2-mechanism-falsification",
+  "status": "frozen synthesis of three pre-data formulation gates",
+  "mechanism": "positive massive-spin2 carrier activated outside a screened high-field regime",
+  "common_required_outcome": "one healthy Solar-safe universal carrier must produce useful galaxy-and-cluster lensing with geometry-sensitive shear from the same physical metric",
+  "minimum_distinct_failures": 3,
+  "formulations": [
+    {
+      "name": "v7A_unscreened_linear",
+      "report": "results/sigma_v7a_positive_carrier_gate/report.json",
+      "failure_gate": "large_scale_lensing_amplitude"
+    },
+    {
+      "name": "v7B_spherical_vainshtein",
+      "report": "results/sigma_v7b_spherical_vainshtein_gate/report.json",
+      "failure_gate": "useful_lensing_amplitude"
+    },
+    {
+      "name": "v7C_three_dimensional_scalar",
+      "report": "results/sigma_v7c_metric_projection_gate/report.json",
+      "failure_gate": "action_derived_nonzero_weyl_or_null_response"
+    }
+  ],
+  "data_policy": {
+    "observational_data_accessed_by_synthesis": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "select a physically distinct mechanism; no further v7 parameter or term variation"
+  }
+}

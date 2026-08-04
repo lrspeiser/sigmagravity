@@ -1,0 +1,43 @@
+{
+  "protocol_version": "Sigma-v7B-0.1-spherical-Vainshtein-gate",
+  "status": "frozen before observational data",
+  "candidate": "spherical Vainshtein-screened ghost-free bimetric carrier",
+  "physical_parameters": {
+    "names": ["a_sigma", "theta_sigma", "L_sigma"],
+    "count": 3,
+    "maximum_allowed": 5
+  },
+  "range_scan": {
+    "minimum_kpc": 1.0,
+    "maximum_kpc": 10000000.0,
+    "points": 2001
+  },
+  "mixing_scan": {
+    "minimum_rad": 0.0,
+    "maximum_rad": 1.5707963267948966,
+    "points": 2001
+  },
+  "no_label_density_stress_test": {
+    "protected_system": {
+      "mass_solar": 100000000000.0,
+      "radius_kpc": 20.0,
+      "role": "already-fit low-acceleration trace sector must not receive a large independent carrier"
+    },
+    "target_system": {
+      "mass_solar": 100000000000000.0,
+      "radius_kpc": 200.0,
+      "role": "strong-lensing carrier target"
+    },
+    "analytic_identity": "Both systems have identical M/r^3, so r/r_V is identical for every universal carrier range."
+  },
+  "gates": {
+    "minimum_useful_lensing_enhancement": 3.0,
+    "maximum_equal_density_screening_residual": 1e-12,
+    "require_protected_screened_target_unscreened": true
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "archetypes_are_design_stress_tests_not_named_observations": true
+  }
+}
