@@ -534,3 +534,21 @@ literal global-sphere and hard-cavity candidates are retired. The remaining
 direction is a sourced, conservative tensor constitutive law, not another
 spherical amplitude. See
 [`SPHERICAL_SPACETIME_CAVITY_RESULTS.md`](SPHERICAL_SPACETIME_CAVITY_RESULTS.md).
+
+## Sigma v4A variational-source result
+
+After three scalar tidal-memory scores failed the same synthetic morphology
+gate, the strongest commutator interaction was varied to obtain its complete
+signed Euler--Lagrange Weyl source. The projected source is conserved, has
+both signs, passes its analytic derivatives at `6.27e-12` relative error, and
+selects the physically allowed positive action coefficient. It improves all
+six convergence/shear channels across spent AS295 and PLCKG287 maps.
+
+The improvement is only `0.398%` in joint RMSE: `0.907582` becomes `0.903971`,
+far above the frozen `0.500` gate. It explains `0.794%` of weighted missing
+field power. Cross-cluster transfers score `0.913907` and `0.894538` versus
+the required `0.800`, while changing the padding boundary alters the result by
+only `1.42e-8` fraction. The exact source is retired without opening a
+holdout. The result closes the possibility that the v3E scalar failed only
+because its earlier volume score discarded the sign. See
+[`SIGMA_V4A_PROJECTED_VARIATIONAL_SOURCE_RESULTS.md`](SIGMA_V4A_PROJECTED_VARIATIONAL_SOURCE_RESULTS.md).

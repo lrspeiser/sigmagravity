@@ -1,0 +1,289 @@
+{
+  "all_preregistered_gates_pass": false,
+  "claim_boundary": [
+    "This is a projected weak-field action-shape audit on two already-spent clusters, not an empirical validation or a complete covariant theory.",
+    "The fitted projected tensor scale tau_sigma is a proxy for the line-of-sight projection of the physical curvature scale a_sigma/L_sigma; a passing result must later derive that mapping rather than keep tau_sigma as an independent lensing constant.",
+    "AQUAL shear supplies the two-dimensional STF tide, so convergence/trace information enters only through the baseline and target, not the interaction invariant.",
+    "A two-dimensional Helmholtz memory is not the exact projection of a retarded four-dimensional operator.",
+    "The compact-halo target contains fitted external shear and is a useful spent decomposition, not direct truth.",
+    "The positive correction sign is fixed by the written projected functional; an unconstrained negative eta is a physical sign failure, not permission to flip the action.",
+    "No untouched galaxy or cluster evidence may be opened in this audit."
+  ],
+  "config_sha256": "721231fdb3d1a88ae663ab2e346595d496221db84ec97300a1fb825f63a5f518",
+  "cross_transfer": [
+    {
+      "normalized_RMSE": 0.9139068038496339,
+      "tested_on": "PLCKG287",
+      "trained_on": "AS295"
+    },
+    {
+      "normalized_RMSE": 0.8945379719006821,
+      "tested_on": "AS295",
+      "trained_on": "PLCKG287"
+    }
+  ],
+  "decision": "retire_exact_v4a_projected_variational_source",
+  "gates": {
+    "conserved_periodic_source": true,
+    "cross_cluster_transfer": false,
+    "each_cluster_twenty_percent_improvement": false,
+    "every_cluster_channel_improves": true,
+    "full_functional_directional_derivative": true,
+    "joint_map_accuracy": false,
+    "padding_stability": true,
+    "parameters_interior": true,
+    "positive_physical_action_sign": true,
+    "scalar_potential_directional_derivative": true,
+    "signed_source_support": true
+  },
+  "independent_training_fits": {
+    "AS295": {
+      "L_sigma_kpc": 54.55112378012219,
+      "eta_sigma_kpc2": 2.6756478652370936,
+      "function_evaluations": 531,
+      "normalized_RMSE": 0.8939556322937265,
+      "optimizer_message": "Optimization terminated successfully.",
+      "optimizer_success": true,
+      "per_channel": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8994374970022173,
+          "channel": "convergence",
+          "cluster": "AS295",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.8948438920785612
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.953889540426961,
+          "channel": "shear_1",
+          "cluster": "AS295",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.9479284530104881
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8415130697001787,
+          "channel": "shear_2",
+          "cluster": "AS295",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.8355573435209964
+        }
+      ],
+      "per_cluster": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8994511868959854,
+          "cluster": "AS295",
+          "fraction_of_AQUAL_baseline": 0.9938901024510024,
+          "prediction_normalized_RMSE": 0.8939556322937265
+        }
+      ],
+      "tau_sigma_projected": 0.059936037453886516,
+      "unconstrained_eta_sigma_kpc2": 2.6756478652370936
+    },
+    "PLCKG287": {
+      "L_sigma_kpc": 50.193401500464226,
+      "eta_sigma_kpc2": 0.9698413496717408,
+      "function_evaluations": 459,
+      "normalized_RMSE": 0.9137893859850467,
+      "optimizer_message": "Optimization terminated successfully.",
+      "optimizer_success": true,
+      "per_channel": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.9180688488874194,
+          "channel": "convergence",
+          "cluster": "PLCKG287",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.9159457925765989
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.9444782715588886,
+          "channel": "shear_1",
+          "cluster": "PLCKG287",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.9441024661635338
+        },
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.8833488218015043,
+          "channel": "shear_2",
+          "cluster": "PLCKG287",
+          "improved": true,
+          "prediction_normalized_RMSE": 0.8801971167084935
+        }
+      ],
+      "per_cluster": [
+        {
+          "AQUAL_baseline_normalized_RMSE": 0.9156408971721106,
+          "cluster": "PLCKG287",
+          "fraction_of_AQUAL_baseline": 0.9979779068488726,
+          "prediction_normalized_RMSE": 0.9137893859850467
+        }
+      ],
+      "tau_sigma_projected": 0.03781096449064311,
+      "unconstrained_eta_sigma_kpc2": 0.9698413496717408
+    }
+  },
+  "manufactured_checks": {
+    "full_functional_directional_derivative_relative_error": 6.27098853000688e-12,
+    "manufactured_potential_maximum": 0.0009288112888509563,
+    "manufactured_potential_minimum": 2.244738798739463e-64,
+    "periodic_source_absolute_mean_over_rms": 6.556997308554135e-18,
+    "scalar_potential_directional_derivative_relative_error": 1.3614539113353345e-11
+  },
+  "padding_sensitivity_fractional_change_in_joint_RMSE": 1.4240045200095417e-08,
+  "padding_sensitivity_shared_fit": {
+    "L_sigma_kpc": 50.07347688038205,
+    "eta_sigma_kpc2": 2.2436566493469416,
+    "function_evaluations": 555,
+    "normalized_RMSE": 0.9039709650361297,
+    "optimizer_message": "Optimization terminated successfully.",
+    "optimizer_success": true,
+    "per_channel": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994374970022173,
+        "channel": "convergence",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8948710964124346
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.953889540426961,
+        "channel": "shear_1",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.9478689404263569
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8415130697001787,
+        "channel": "shear_2",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8356609170683144
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9180688488874194,
+        "channel": "convergence",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.915977503964562
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9444782715588886,
+        "channel": "shear_1",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.9443989621950772
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8833488218015043,
+        "channel": "shear_2",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8800556064652895
+      }
+    ],
+    "per_cluster": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994511868959854,
+        "cluster": "AS295",
+        "fraction_of_AQUAL_baseline": 0.9939126869361408,
+        "prediction_normalized_RMSE": 0.8939759459356897
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9156408971721106,
+        "cluster": "PLCKG287",
+        "fraction_of_AQUAL_baseline": 0.9980513934315647,
+        "prediction_normalized_RMSE": 0.913856673305553
+      }
+    ],
+    "tau_sigma_projected": 0.057070241955219085,
+    "unconstrained_eta_sigma_kpc2": 2.2436566493469416
+  },
+  "parent_config_sha256": "77762bf4096decf1c88a2c7131166fde48bf72840eb74b21ec6551cb82c608c5",
+  "primary_shared_fit": {
+    "L_sigma_kpc": 50.07347688038205,
+    "eta_sigma_kpc2": 2.243660661748327,
+    "function_evaluations": 555,
+    "normalized_RMSE": 0.9039709521635425,
+    "optimizer_message": "Optimization terminated successfully.",
+    "optimizer_success": true,
+    "per_channel": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994374970022173,
+        "channel": "convergence",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8948710948854267
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.953889540426961,
+        "channel": "shear_1",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.9478689648674963
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8415130697001787,
+        "channel": "shear_2",
+        "cluster": "AS295",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8356607866464425
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9180688488874194,
+        "channel": "convergence",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.9159775033770735
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9444782715588886,
+        "channel": "shear_1",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.944398987597771
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8833488218015043,
+        "channel": "shear_2",
+        "cluster": "PLCKG287",
+        "improved": true,
+        "prediction_normalized_RMSE": 0.8800555995533501
+      }
+    ],
+    "per_cluster": [
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.8994511868959854,
+        "cluster": "AS295",
+        "fraction_of_AQUAL_baseline": 0.9939126507925172,
+        "prediction_normalized_RMSE": 0.8939759134262646
+      },
+      {
+        "AQUAL_baseline_normalized_RMSE": 0.9156408971721106,
+        "cluster": "PLCKG287",
+        "fraction_of_AQUAL_baseline": 0.9980514003507793,
+        "prediction_normalized_RMSE": 0.913856679641069
+      }
+    ],
+    "tau_sigma_projected": 0.057070241955219085,
+    "unconstrained_eta_sigma_kpc2": 2.243660661748327
+  },
+  "raw_holdout_opened": false,
+  "sample_is_spent": true,
+  "source_statistics": [
+    {
+      "absolute_full_source_mean_over_RMS": 4.9402513861147916e-18,
+      "cluster": "AS295",
+      "cropped_source_RMS_per_kpc2": 0.05807591045711419,
+      "negative_cropped_source_pixel_fraction": 0.49646970388466805,
+      "positive_cropped_source_pixel_fraction": 0.503530296115332,
+      "potential_maximum": 0.2257744288317328
+    },
+    {
+      "absolute_full_source_mean_over_RMS": 2.0099193037968573e-18,
+      "cluster": "PLCKG287",
+      "cropped_source_RMS_per_kpc2": 0.05293483422358286,
+      "negative_cropped_source_pixel_fraction": 0.49880533705602836,
+      "positive_cropped_source_pixel_fraction": 0.5011946629439716,
+      "potential_maximum": 0.150881637449645
+    }
+  ],
+  "status": "completed Sigma v4A projected variational source audit"
+}
