@@ -1,0 +1,23 @@
+{
+  "protocol_version": "Sigma-v8B-0.2-covariant-variation-and-FLRW-clock-gate",
+  "status": "frozen before observational data",
+  "candidate": "AeST-cubic geometry response with derived preferred-time causal completion",
+  "completion_lagrangian": "L_C=(alpha-1)L_H^2 B^2 H_perp; B=Q-Q0; H_perp=q^mn nabla_m nabla_n(phi)",
+  "fixed_values": {
+    "K_B": 1.0,
+    "K_2": 2.0,
+    "lambda_s": 1.0,
+    "base_scalar_speed_squared": 0.75,
+    "alpha": 1.7777777777777777
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "mu_sigma", "K_B", "K_2", "L_H"],
+    "count": 5,
+    "maximum_allowed": 5
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "derive metric stress tensor, Noether identity, Hamiltonian constraints, time-dependent principal symbol, and Solar/PPN behavior only"
+  }
+}

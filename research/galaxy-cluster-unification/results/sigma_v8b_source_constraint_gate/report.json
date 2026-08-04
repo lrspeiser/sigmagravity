@@ -1,0 +1,74 @@
+{
+  "all_completed_subgates_pass": true,
+  "boundary_policy": {
+    "cosmological_shift_charge": "I0=0 exactly",
+    "failure_rule": "If galaxy, cluster, or cosmological performance requires I0 nonzero or object-dependent, reject v8B under the baryon-only goal.",
+    "parameter_status": "fixed boundary condition, not a physical or fitted parameter"
+  },
+  "candidate": "one-metric AeST plus cubic geometry interaction and preferred-time causal completion",
+  "completed_subgates": {
+    "frozen_charge_is_zero_and_not_a_parameter": true,
+    "other_v8b_zero_current_branches_are_not_stable": true,
+    "parameter_count": true,
+    "published_base_dirac_count_reproduced": true,
+    "published_nonzero_charge_has_a_minus_three_density": true,
+    "v8b_clock_minimum_has_positive_current_slope": true,
+    "v8b_clock_minimum_is_a_zero_current_branch": true,
+    "zero_charge_removes_published_dustlike_density": true
+  },
+  "data_policy": {
+    "authorization_after_this_stage": "full combined ADM constraint derivation, arbitrary-background characteristic analysis, weak-field uniqueness, PPN, and Solar audit only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "hold_v8B_before_data_for_combined_Hamiltonian_and_inhomogeneous_uniqueness",
+  "frozen_cosmological_charge": 0.0,
+  "observational_data_accessed": false,
+  "physical_parameter_count": 5,
+  "pre_data_source_constraint_gate_pass": false,
+  "primary_sources": {
+    "base_hamiltonian": "https://arxiv.org/abs/2307.15126",
+    "base_theory": "https://arxiv.org/abs/2007.00082"
+  },
+  "published_base_constraint_count": {
+    "configuration_variables": 12,
+    "first_class_constraints": 4,
+    "phase_space_dimension": 24,
+    "physical_degrees_of_freedom": 6.0,
+    "second_class_constraints": 4
+  },
+  "published_quadratic_clock": {
+    "conserved_equation": "a^3 K_Q=I0",
+    "dust_density_ratio_a1_to_a2": 8.0,
+    "leading_density_times_8pi_G": "Q0 I0/a^3",
+    "subleading_density_times_8pi_G": "I0^2/(4 K2 a^6)",
+    "zero_charge_density_times_8pi_G": 0.0
+  },
+  "raw_holdout_opened": false,
+  "reason": "The published AeST base has six nonlinear physical degrees of freedom, but that count does not cover the added v8B projected-Hessian operator. A nonzero homogeneous shift charge supplies an arbitrary leading a^-3 density, so I0 is frozen to zero and may not be used as missing gravity. At I0=0, Q=Q0 is the only positive-clock homogeneous v8B branch; the other algebraic root has negative current slope. Full inhomogeneous uniqueness remains unproved.",
+  "scope": "This closes only the published-base count reproduction and homogeneous source subgate. It does not prove the AeST-plus-completion constraint count, Hamiltonian boundedness, arbitrary-background characteristics, or uniqueness for a three-dimensional baryonic source.",
+  "status": "completed v8B inherited-constraint and homogeneous-source audit",
+  "unresolved_kill_gates": {
+    "arbitrary_baryonic_data_select_unique_inhomogeneous_state": false,
+    "combined_v8b_hamiltonian_bounded_on_required_backgrounds": false,
+    "combined_v8b_has_published_six_dof_count": false,
+    "published_ir_zero_frequency_sector_resolved": false
+  },
+  "v8b_current_equation": "I0/a^3=(Q-Q0)[4 K2-3(alpha-1)L_H^2 H(3Q-Q0)]",
+  "v8b_zero_charge_branches": [
+    {
+      "current_density": 0.0,
+      "current_slope": 7.416666666666667,
+      "name": "clock_minimum",
+      "positive_clock": true,
+      "q_value": 0.5
+    },
+    {
+      "current_density": 0.0,
+      "current_slope": -7.416666666666666,
+      "name": "completion_root",
+      "positive_clock": false,
+      "q_value": 4.738095238095238
+    }
+  ]
+}

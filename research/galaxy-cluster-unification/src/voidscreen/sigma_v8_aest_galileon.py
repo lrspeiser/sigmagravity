@@ -253,7 +253,17 @@ def aest_linear_spectrum(
     k_2: float,
     lambda_s: float,
 ) -> dict[str, float | bool]:
-    """Return the published flat-background AeST mode-speed conditions."""
+    """Return the published flat-background AeST mode-speed conditions.
+
+    The finite-frequency tensor, vector, and scalar modes can be healthy while
+    the separate zero-frequency scalar sector is not positive at every
+    momentum.  The published analysis contains a constant zero-Hamiltonian
+    mode and a linearly growing mode whose Hamiltonian is negative below a
+    scale of order ``mu``.  The authors interpret the latter as Jeans-like,
+    rather than as a quantum-vacuum ghost.  Keeping those statements separate
+    prevents a propagating-mode check from being reported as full Hamiltonian
+    positivity.
+    """
 
     vector_coupling = float(k_b)
     clock_kinetic = float(k_2)
@@ -268,7 +278,7 @@ def aest_linear_spectrum(
             / (clock_kinetic * vector_coupling)
             * (1.0 + 0.5 * vector_coupling * scalar_coupling)
         )
-    positive_base = (
+    positive_propagating = (
         0.0 < vector_coupling < 2.0
         and clock_kinetic > 0.0
         and scalar_coupling > -1.0
@@ -278,10 +288,15 @@ def aest_linear_spectrum(
         "tensor_speed_squared": 1.0,
         "vector_speed_squared": 1.0,
         "scalar_speed_squared": float(scalar_speed_squared),
-        "positive_base_spectrum": bool(positive_base),
-        "causal_base_spectrum": bool(
-            positive_base and scalar_speed_squared <= 1.0
+        "positive_propagating_modes": bool(positive_propagating),
+        "causal_propagating_modes": bool(
+            positive_propagating and scalar_speed_squared <= 1.0
         ),
+        "zero_frequency_constant_mode_hamiltonian": 0.0,
+        "zero_frequency_linearly_growing_mode_present": True,
+        "zero_frequency_sector_positive_all_momenta": False,
+        "ir_jeans_like_sector_present": True,
+        "complete_flat_hamiltonian_positive_all_momenta": False,
     }
 
 
@@ -312,8 +327,16 @@ def audit_v8a_selection(
         "scalar_is_weyl_active": bool(np.isclose(float(projection.weyl), 1.0)),
         "no_linear_metric_slip": bool(np.isclose(float(projection.psi), float(projection.phi))),
         "luminal_tensor_mode": bool(np.isclose(spectrum["tensor_speed_squared"], 1.0)),
-        "positive_base_linear_spectrum": bool(spectrum["positive_base_spectrum"]),
-        "causal_base_linear_spectrum": bool(spectrum["causal_base_spectrum"]),
+        "positive_propagating_base_modes": bool(
+            spectrum["positive_propagating_modes"]
+        ),
+        "causal_propagating_base_modes": bool(
+            spectrum["causal_propagating_modes"]
+        ),
+        "published_zero_frequency_ir_sector_documented": bool(
+            spectrum["ir_jeans_like_sector_present"]
+            and not spectrum["zero_frequency_sector_positive_all_momenta"]
+        ),
         "cubic_does_not_change_flat_quadratic_spectrum": cubic_starts_beyond_quadratic,
         "second_order_scalar_equation": True,
         "equal_trace_geometry_discrimination": same_trace

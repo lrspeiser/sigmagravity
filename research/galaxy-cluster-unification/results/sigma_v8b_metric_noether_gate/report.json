@@ -1,0 +1,33 @@
+{
+  "all_metric_noether_subgates_pass": true,
+  "candidate": "v8B completion metric variation and diffeomorphism identity",
+  "data_policy": {
+    "authorization_after_this_stage": "nonlinear Hamiltonian constraint count, time-dependent characteristics, source uniqueness, and Solar/PPN only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v8B_to_nonlinear_Hamiltonian_and_time_dependent_characteristic_gate_only",
+  "gates": {
+    "completion_stress_is_conserved_on_scalar_vector_shell": true,
+    "constant_jet_metric_variation_matches_finite_difference": true,
+    "metric_euler_tensor_is_symmetric": true,
+    "off_shell_diffeomorphism_identity_derived": true,
+    "parameter_count": true,
+    "single_minimally_coupled_matter_metric_retained": true
+  },
+  "independent_fields": [
+    "g_mn",
+    "A^m",
+    "phi",
+    "lambda"
+  ],
+  "matter_metric": "g_mn",
+  "metric_directional_variation_relative_error": 1.0121655033210053e-12,
+  "metric_euler_tensor": "E_g^mn/C=1/2 g^mn B^2 H_perp-B^2 phi^mn+nabla_r(B^2 q^{r(m} nabla^{n)}phi)-1/2 nabla_r(B^2 q^mn nabla^r phi)",
+  "observational_data_accessed": false,
+  "off_shell_noether_identity": "-2 nabla_m E_g^m_n+E_phi nabla_n phi+E_A_m nabla_n A^m+nabla_m(E_A_n A^m)=0",
+  "raw_holdout_opened": false,
+  "reason": "The completion now has explicit scalar, vector, and metric Euler derivatives. Its constant-jet metric variation agrees with an independent finite difference, and general covariance yields an off-shell identity that reduces to completion-stress conservation on the scalar/vector equations.",
+  "scope": "The completion field equations and conservation identity are derived, but the full AeST-plus-completion Hamiltonian constraint algebra and time-dependent characteristic determinant remain open. Passing this gate does not establish a healthy degree-of-freedom count or observational viability.",
+  "status": "completed Sigma v8B metric-Noether subgate"
+}

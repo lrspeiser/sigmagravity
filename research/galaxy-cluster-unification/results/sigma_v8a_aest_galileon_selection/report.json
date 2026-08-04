@@ -2,11 +2,16 @@
   "action": "S=(16 pi G)^-1 int sqrt(-g)[R-K_B F_A^2/2+2(2-K_B)J^m grad_m(phi)-(2-K_B)Y-F(Y,Q)-lambda(A^2+1)-(L_H^2/2)(grad phi)^2 box(phi)]+S_m[g]",
   "all_v8a_selection_gates_pass": true,
   "base_linear_spectrum": {
-    "causal_base_spectrum": true,
-    "positive_base_spectrum": true,
+    "causal_propagating_modes": true,
+    "complete_flat_hamiltonian_positive_all_momenta": false,
+    "ir_jeans_like_sector_present": true,
+    "positive_propagating_modes": true,
     "scalar_speed_squared": 0.75,
     "tensor_speed_squared": 1.0,
-    "vector_speed_squared": 1.0
+    "vector_speed_squared": 1.0,
+    "zero_frequency_constant_mode_hamiltonian": 0.0,
+    "zero_frequency_linearly_growing_mode_present": true,
+    "zero_frequency_sector_positive_all_momenta": false
   },
   "candidate": "one-metric AeST with one cubic Horndeski geometry interaction",
   "data_policy": {
@@ -30,7 +35,7 @@
     "lambda_s": 1.0
   },
   "gates": {
-    "causal_base_linear_spectrum": true,
+    "causal_propagating_base_modes": true,
     "cubic_does_not_change_flat_quadratic_spectrum": true,
     "equal_trace_geometry_discrimination": true,
     "luminal_tensor_mode": true,
@@ -39,7 +44,8 @@
     "no_object_labels": true,
     "one_minimally_coupled_matter_metric": true,
     "parameter_count": true,
-    "positive_base_linear_spectrum": true,
+    "positive_propagating_base_modes": true,
+    "published_zero_frequency_ir_sector_documented": true,
     "scalar_is_weyl_active": true,
     "second_order_scalar_equation": true
   },
@@ -58,7 +64,7 @@
   "observational_data_accessed": false,
   "physical_parameter_count": 5,
   "raw_holdout_opened": false,
-  "reason": "Unlike v7, the scalar changes the single physical matter metric through the AeST kinetic mixing, giving equal nonzero shifts to Psi, Phi, and Weyl. The cubic Horndeski equation is second order, leaves the flat quadratic tensor cone unchanged, and distinguishes equal-trace Hessians (responses 6 and 0), providing a label-free route to component geometry.",
-  "scope": "This is an action-selection pass, not a viable theory or an observational result. AeST and the cubic Horndeski operator are both prior art. Their combination has not yet passed the full constraint algebra, nonlinear characteristic, PPN, Solar-screening, cosmology, or source-uniqueness gates.",
+  "reason": "Unlike v7, the scalar changes the single physical matter metric through the AeST kinetic mixing, giving equal nonzero shifts to Psi, Phi, and Weyl. The finite-frequency tensor, vector, and scalar modes at the selected row are positive and causal, while the published zero-frequency infrared sector is explicitly retained as an unresolved Jeans-like warning. The cubic Horndeski equation distinguishes equal-trace Hessians (responses 6 and 0), providing a label-free route to component geometry.",
+  "scope": "This is an action-selection pass, not a viable theory or an observational result. The published AeST base has a constant zero-Hamiltonian mode and a linearly growing mode with negative Hamiltonian below a scale of order mu; only its finite-frequency propagating modes passed this selection. AeST and the cubic Horndeski operator are prior art. Their combination has not yet passed the full constraint algebra, nonlinear characteristic, PPN, Solar-screening, cosmology, or source-uniqueness gates.",
   "status": "completed Sigma v8A pre-data action selection"
 }

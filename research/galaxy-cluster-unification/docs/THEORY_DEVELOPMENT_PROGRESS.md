@@ -54,9 +54,14 @@ Hessians, giving responses `6` and `0` for isotropic and rank-one curvature.
 At the frozen construction point, the published AeST flat-background tensor,
 vector, and scalar squared speeds are `1`, `1`, and `0.75`.  The cubic term is
 third order in flat perturbations, so it does not change that quadratic result.
-The five-parameter row passes selection only.  Full combined variation,
-constraint counting, nonlinear characteristics, PPN, Solar screening, and
-source uniqueness remain mandatory before data.  See
+These are the healthy finite-frequency propagating modes, not a proof of a
+positive Hamiltonian at every momentum.  The published `omega=0` sector also
+contains a constant zero-Hamiltonian mode and a linearly growing mode whose
+Hamiltonian is negative below a scale of order `mu`; it is described as
+Jeans-like but remains an explicit project warning.  The five-parameter row
+passes selection only. Full combined variation, constraint counting, nonlinear
+characteristics, PPN, Solar screening, and source uniqueness remain mandatory
+before data. See
 [`SIGMA_V8A_AEST_GALILEON_SELECTION.md`](SIGMA_V8A_AEST_GALILEON_SELECTION.md).
 
 ### v8A cubic nonlinear-characteristic result
@@ -91,6 +96,54 @@ nonnegative-source equation limits the most negative Hessian eigenvalue at each
 trace; maximizing the resulting directional speed reproduces the spherical
 extremizer and never exceeds `c^2`. This closes the arbitrary static scalar
 Hessian subgate, but not the dynamical vector/lapse or time-dependent gates.
+
+### v8B covariant variation and FLRW clock subgate
+
+The completion's exact scalar variation has two apparent third-derivative
+principal terms that cancel, while its vector variation is algebraic in the
+aether and adds no vector velocity. On aligned FLRW, the reduced operator has no
+lapse velocity and no metric-scalar velocity mixing at `Q=Q0`. It does reduce
+the scalar clock kinetic coefficient to
+`2 K_2-3(alpha-1)L_H^2 H Q0`. The selected row is stable only when
+`L_H^2 H Q0<12/7`, equivalently `L_H^2 H mu_sigma<24/7`.
+
+This is an open stable region, not a full constraint proof. The exact metric
+stress tensor, Noether identity, nonlinear Hamiltonian count, off-`Q0` mixing,
+and time-dependent characteristic determinant remain mandatory. See
+[`SIGMA_V8B_COVARIANT_VARIATION_GATE.md`](SIGMA_V8B_COVARIANT_VARIATION_GATE.md).
+
+### v8B metric Euler tensor and conservation identity
+
+Varying the connection and integrating by parts gives the completion's exact
+symmetric metric Euler tensor. Its algebraic constant-jet part matches an
+independent centered metric finite difference below `1e-9` relative error. The
+scalar, vector, and metric Euler derivatives satisfy the off-shell
+diffeomorphism identity, reducing to completion-stress conservation on the
+scalar/vector equations. This completes the new operator's variation subgate,
+not the combined theory's nonlinear constraint or characteristic gates. See
+[`SIGMA_V8B_METRIC_NOETHER_GATE.md`](SIGMA_V8B_METRIC_NOETHER_GATE.md).
+
+### v8B inherited constraints and homogeneous source uniqueness
+
+The published nonlinear AeST Hamiltonian has four first-class and four
+second-class constraints. Its 24-dimensional phase space therefore contains
+six physical degrees of freedom. That count does not cover v8B: the same paper
+states that Horndeski and more general higher-derivative extensions require a
+new canonical analysis.
+
+The base homogeneous shift equation integrates to `a^3 K_Q=I0`. A nonzero
+`I0` supplies an arbitrary leading density `8 pi G rho=Q0 I0/a^3`; the source
+paper explicitly notes that this density is not classically predicted. The
+project now freezes `I0=0` as a boundary condition, not a sixth parameter, and
+forbids using this dust-like state as missing gravity.
+
+For the full v8B homogeneous clock, the exact current is
+`I0/a^3=(Q-Q0)[4K2-3(alpha-1)L_H^2 H(3Q-Q0)]`. At zero charge, `Q=Q0` is the
+only positive-clock branch; the other algebraic root has negative current
+slope. This closes homogeneous stable-branch selection, but not arbitrary
+inhomogeneous uniqueness or the combined Hamiltonian count. V8B remains held
+before data. See
+[`SIGMA_V8B_SOURCE_CONSTRAINT_GATE.md`](SIGMA_V8B_SOURCE_CONSTRAINT_GATE.md).
 
 ## 2026-08-03 v5C exterior-law failure
 

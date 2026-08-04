@@ -40,13 +40,22 @@ def test_cubic_galileon_discriminates_equal_trace_hessians() -> None:
     assert float(cubic_galileon_eom(isotropic, 2.0)) == pytest.approx(24.0)
 
 
-def test_selected_aest_base_has_positive_subluminal_modes() -> None:
+def test_selected_aest_base_has_positive_subluminal_propagating_modes() -> None:
     spectrum = aest_linear_spectrum(k_b=1.0, k_2=2.0, lambda_s=1.0)
     assert spectrum["tensor_speed_squared"] == pytest.approx(1.0)
     assert spectrum["vector_speed_squared"] == pytest.approx(1.0)
     assert spectrum["scalar_speed_squared"] == pytest.approx(0.75)
-    assert spectrum["positive_base_spectrum"]
-    assert spectrum["causal_base_spectrum"]
+    assert spectrum["positive_propagating_modes"]
+    assert spectrum["causal_propagating_modes"]
+
+
+def test_selected_aest_base_does_not_overclaim_zero_frequency_health() -> None:
+    spectrum = aest_linear_spectrum(k_b=1.0, k_2=2.0, lambda_s=1.0)
+    assert spectrum["zero_frequency_constant_mode_hamiltonian"] == pytest.approx(0.0)
+    assert spectrum["zero_frequency_linearly_growing_mode_present"]
+    assert spectrum["ir_jeans_like_sector_present"]
+    assert not spectrum["zero_frequency_sector_positive_all_momenta"]
+    assert not spectrum["complete_flat_hamiltonian_positive_all_momenta"]
 
 
 def test_v8a_passes_selection_but_not_unchecked_nonlinear_gates() -> None:

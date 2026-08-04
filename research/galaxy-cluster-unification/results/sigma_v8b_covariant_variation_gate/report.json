@@ -1,0 +1,60 @@
+{
+  "all_covariant_subgates_pass": true,
+  "candidate": "AeST-cubic geometry response with derived preferred-time causal completion",
+  "completion_lagrangian": "L_C=(alpha-1)L_H^2 B^2 H_perp; B=Q-Q0; H_perp=q^mn nabla_m nabla_n(phi)",
+  "data_policy": {
+    "authorization_after_this_stage": "derive metric stress tensor, Noether identity, Hamiltonian constraints, time-dependent principal symbol, and Solar/PPN behavior only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_v8B_to_metric_stress_Noether_and_full_Hamiltonian_gate_only",
+  "derived_euler_derivatives": {
+    "scalar": "E_phi/C=nabla_n nabla_m(B^2 q^mn)-2 nabla_m(B H_perp A^m)",
+    "vector": "E_A_s/C=2 B H_perp nabla_s(phi)+2 B^2 A^m nabla_m nabla_s(phi)"
+  },
+  "fixed_values": {
+    "K_2": 2.0,
+    "K_B": 1.0,
+    "alpha": 1.7777777777777777,
+    "base_scalar_speed_squared": 0.75,
+    "lambda_s": 1.0
+  },
+  "flrw_clock_result": {
+    "above_limit_clock_coefficient": -0.040000000000000036,
+    "below_limit_clock_coefficient": 2.0,
+    "coefficient": "2 K_2-3(alpha-1)L_H^2 H Q0",
+    "equivalent_selected_limit_LH2_H_mu_sigma": 3.4285714285714284,
+    "selected_limit_LH2_H_Q0": 1.7142857142857144
+  },
+  "gates": {
+    "completion_has_no_lapse_velocity": true,
+    "completion_vector_equation_adds_no_aether_derivative": true,
+    "flrw_clock_bound_is_nontrivial": true,
+    "flrw_tensor_speed_unchanged_by_linear_trace_extrinsic_term": true,
+    "open_positive_flrw_clock_region_exists": true,
+    "parameter_count": true,
+    "q_equals_q0_has_zero_metric_scalar_velocity_mixing": true,
+    "scalar_principal_third_derivatives_cancel": true
+  },
+  "minisuperspace_completion_hessian_at_Q0": [
+    [
+      0.0,
+      -0.0
+    ],
+    [
+      -0.0,
+      -0.4666666666666666
+    ]
+  ],
+  "observational_data_accessed": false,
+  "physical_parameter_count": 5,
+  "raw_holdout_opened": false,
+  "reason": "The scalar third-derivative principal terms cancel exactly, the vector variation contains no derivative of the aether, and the Q=Q0 FLRW completion has no metric-scalar velocity mixing. A nonempty clock-stable region exists, but it imposes the new mandatory bound L_H^2 H Q0<12/7 at the selected row.",
+  "scalar_third_derivative_cancellation": {
+    "first_term": -0.7680353366834397,
+    "second_term": 0.7680353366834397,
+    "sum": 0.0
+  },
+  "scope": "This does not complete the covariant theory. The exact metric stress tensor, diffeomorphism identity, nonlinear Hamiltonian constraint count, off-Q0 kinetic mixing, time-dependent characteristic determinant, early cosmology, and Solar/PPN solution remain unproved. No observational use is authorized.",
+  "status": "completed Sigma v8B covariant-variation subgate"
+}

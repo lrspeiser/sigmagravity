@@ -1,0 +1,40 @@
+{
+  "protocol_version": "Sigma-v8B-0.4-source-constraint-gate",
+  "status": "frozen before observational data",
+  "candidate": "one-metric AeST plus cubic geometry interaction and preferred-time causal completion",
+  "primary_sources": {
+    "base_theory": "https://arxiv.org/abs/2007.00082",
+    "base_hamiltonian": "https://arxiv.org/abs/2307.15126"
+  },
+  "selected_values": {
+    "K_2": 2.0,
+    "alpha": 1.7777777777777777,
+    "L_H_audit_units": 1.0,
+    "H_audit_units": 0.25,
+    "Q0_audit_units": 0.5,
+    "I0": 0.0
+  },
+  "boundary_policy": {
+    "cosmological_shift_charge": "I0=0 exactly",
+    "parameter_status": "fixed boundary condition, not a physical or fitted parameter",
+    "failure_rule": "If galaxy, cluster, or cosmological performance requires I0 nonzero or object-dependent, reject v8B under the baryon-only goal."
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "mu_sigma", "K_B", "K_2", "L_H"],
+    "count": 5,
+    "maximum_allowed": 5
+  },
+  "requirements": {
+    "base_constraint_count_must_be_reproduced_not_assumed": true,
+    "combined_action_must_have_exactly_six_nonlinear_physical_dof": true,
+    "combined_hamiltonian_must_be_bounded_on_claimed_backgrounds": true,
+    "nonzero_shift_charge_may_not_supply_missing_gravity": true,
+    "fixed_baryons_and_universal_boundaries_must_select_one_stable_state": true,
+    "published_zero_frequency_ir_sector_must_be_resolved_or_bounded": true
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "full combined ADM constraint derivation, arbitrary-background characteristic analysis, weak-field uniqueness, PPN, and Solar audit only"
+  }
+}

@@ -26,7 +26,8 @@
     "require_one_matter_metric": true,
     "require_nonzero_scalar_Weyl_response": true,
     "require_luminal_tensor_mode": true,
-    "require_positive_causal_base_spectrum": true,
+    "require_positive_causal_propagating_modes": true,
+    "require_documented_zero_frequency_ir_sector": true,
     "require_second_order_scalar_equation": true,
     "require_equal_trace_geometry_discrimination": true
   },

@@ -161,7 +161,7 @@ The activation therefore cannot be reduced to local density or spherical
 `M/r^3`.  It responds to how curvature is distributed among principal
 directions, with no galaxy/cluster label.
 
-## Base linear health
+## Base linear propagating modes and infrared warning
 
 The construction point is
 
@@ -177,11 +177,22 @@ Using the published flat-background AeST spectrum gives
 | Vector | `1` |
 | Scalar | `0.75` |
 
-The base linear spectrum is positive and subluminal.  The cubic term starts at
-third perturbative order on the constant flat background and therefore does not
-change that quadratic spectrum or the tensor light cone.
+The finite-frequency tensor, vector, and scalar modes at this row are positive
+and subluminal.  This is not the same as positivity of the complete flat-space
+Hamiltonian.  The published AeST analysis also has an `omega=0` sector: one
+constant mode has zero Hamiltonian, and one linearly growing mode has positive
+Hamiltonian only above a momentum of order `mu` and negative Hamiltonian below
+it.  The authors interpret the low-momentum behavior as Jeans-like rather than
+as a quantum-vacuum instability, but it remains a mandatory infrared stability
+warning for this project.
 
-This is not enough to declare the combined theory healthy.  Static scalar
+The cubic term starts at third perturbative order on the constant flat
+background and therefore does not change the listed finite-frequency speeds or
+the tensor light cone.  It also does not remove the published `omega=0` sector
+at quadratic order.
+
+This is not enough to declare either the base or combined theory healthy at all
+momenta. Static scalar
 gradients activate the cubic term and change the principal symbol.  The full
 nonlinear characteristic cones, lapse/vector constraints, and branch uniqueness
 remain untested.

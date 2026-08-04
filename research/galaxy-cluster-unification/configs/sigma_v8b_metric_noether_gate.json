@@ -1,0 +1,14 @@
+{
+  "protocol_version": "Sigma-v8B-0.3-metric-Euler-and-Noether-gate",
+  "status": "frozen before observational data",
+  "candidate": "v8B completion metric variation and diffeomorphism identity",
+  "independent_fields": ["g_mn", "A^m", "phi", "lambda"],
+  "matter_metric": "g_mn",
+  "physical_parameter_count": 5,
+  "maximum_physical_parameters": 5,
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "nonlinear Hamiltonian constraint count, time-dependent characteristics, source uniqueness, and Solar/PPN only"
+  }
+}
