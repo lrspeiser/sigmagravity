@@ -1,0 +1,70 @@
+{
+  "protocol_id": "sigma-v3e-tidal-misalignment-action-audit-v1",
+  "frozen_utc": "2026-08-03T00:00:00Z",
+  "evidence_status": "spent-theory-and-synthetic-only",
+  "parent_results": [
+    "results/sigma_v3c_spent_operator_inference/report.json",
+    "results/sigma_v3d_triaxial_memory_action_audit/report.json",
+    "results/sigma_v3d_post_failure_diagnostics/report.json"
+  ],
+  "hypothesis": {
+    "memory_equation": "(1-L_sigma^2 Box_ret) M_ab = Ehat_ab",
+    "local_tide": "Ehat_ab=E_ab/E_star",
+    "curvature_scale": "E_star=a_sigma/L_sigma",
+    "commutator": "C=Ehat M-M Ehat",
+    "screen": "S(x)=1/(1+x^4)",
+    "bounded_potential": "V_mis=S(g/a_sigma) Tr(C^T C)/[2(1+Tr(Ehat^2))(1+Tr(M^2))]",
+    "action_envelope": "Gamma=Gamma_Sigma1+(M_Pl^2/2) integral sqrt(-g) lambda_sigma E_star V_mis",
+    "universal_constants_if_completed": [
+      "a_sigma",
+      "L_sigma",
+      "lambda_sigma"
+    ],
+    "object_specific_gravity_constants": 0,
+    "object_labels": 0,
+    "lensing_only_constants": 0,
+    "adjustable_homogeneous_memory": false
+  },
+  "claim_boundary": {
+    "established": [
+      "matrix commutators and the Bottcher-Wenzel Frobenius bound",
+      "electric Weyl tidal tensors",
+      "Helmholtz-type nonlocal memory operators"
+    ],
+    "project_test": "whether locally screened disagreement between baryonic tidal eigenframes at two scales is a universal compact-versus-distributed discriminator",
+    "not_claimed": [
+      "a complete causal action",
+      "a covariantly fixed timelike frame",
+      "a positive nonlinear principal kinetic matrix",
+      "an empirical galaxy or cluster fit",
+      "originality of commutator invariants"
+    ]
+  },
+  "dimensionless_fixture": {
+    "source_config": "configs/sigma_v3d_triaxial_memory_action_audit.json",
+    "source_config_sha256": "d919da5457f55dec49c0dad71d236465cfd831ef22615793ffa36af7ae3701f0",
+    "primary_grid_points": 65,
+    "resolution_grid_points": 81,
+    "analysis_half_width_L_sigma": 2.0,
+    "mass_normalizations": [0.3, 1.0, 3.0]
+  },
+  "preregistered_gates": {
+    "maximum_trace_residual": 1e-10,
+    "maximum_rotation_invariance_relative_error": 1e-10,
+    "maximum_directional_gradient_relative_error": 3e-6,
+    "minimum_random_potential": -1e-14,
+    "maximum_random_potential": 1.0,
+    "maximum_commuting_absolute_potential": 1e-12,
+    "minimum_noncommuting_potential": 1e-4,
+    "maximum_quartic_onset_relative_error": 1e-4,
+    "maximum_screen_at_g_over_a_sigma_1e5": 1e-18,
+    "minimum_primary_median_cluster_to_galaxy_response_ratio": 10.0,
+    "minimum_each_mass_cluster_to_galaxy_response_ratio": 2.0,
+    "maximum_resolution_fractional_change_in_primary_ratio": 0.2
+  },
+  "decision_rule": {
+    "advance": "all preregistered gates pass; then derive the covariant clock/frame, causal variational completion, and principal kinetic matrix before empirical fitting",
+    "retire": "any algebraic, screening, morphology-separation, or resolution gate fails",
+    "raw_holdout_failure_count_if_retired": 0
+  }
+}
