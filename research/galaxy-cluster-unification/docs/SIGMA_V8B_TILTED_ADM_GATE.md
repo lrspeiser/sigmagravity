@@ -1,5 +1,11 @@
 # Sigma v8B tilted-ADM necessary kinetic gate
 
+> **Superseded gate result (2026-08-04):** the bounded local patch reported
+> here is regular, but the subsequent analytic extension proves a finite global
+> Legendre-rank surface for every nonzero completion coupling. Exact v8B is
+> retired before data. See
+> [`SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md`](SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md).
+
 ## Verdict
 
 Sigma v8B passes a **bounded homogeneous local Legendre-rank subgate**, but it

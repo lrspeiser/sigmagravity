@@ -170,6 +170,33 @@ make this surface dynamically inaccessible, the candidate must be retired
 before Solar or observational tests. See
 [`SIGMA_V8B_TILTED_ADM_GATE.md`](SIGMA_V8B_TILTED_ADM_GATE.md).
 
+### v8B global Legendre-rank failure
+
+The bounded tilted patch does not extend to a globally regular action. At zero
+background curvature, the completion's large-clock kinetic mixing has Schur
+coefficient
+`[(32-20 K_B)x^3+(32-67 K_B)x^2+(8-78 K_B)x-27 K_B]/(4 K_B)`.
+For the frozen `K_B=1`, it becomes positive at finite aether velocity
+`0.9020884486`; every nonzero completion length then reaches a finite rank-zero
+surface. At `v_A=0.97`, `L_H Q0=1`, the first root is
+`Q/Q0=2.8649430865`, with finite canonical energy and a mixed metric--aether
+null mode. The raw inertia changes from `(1,0,9)` to `(2,0,8)`.
+
+The apparent high-`K_B` escape also fails. On isotropic extrinsic curvature,
+the determinant is exactly affine in `K` because the completion is linear in
+curvature and nonlinear in the scalar clock. At ordinary `v_A=0.5` and
+`Q/Q0=1.2`, finite roots occur at `K/Q0=2.8993, 2.8041, 1.8488, 1.1641,
+0.9337` for `K_B=1, 1.6, 1.7, 1.8, 1.95`; every crossing has finite momenta and
+adds the extra raw negative direction. The affine identity residual is below
+`2e-15`.
+
+Exact v8B is retired before data. `L_H=0` removes the proposed cluster-geometry
+interaction, while removing only the causal partner restores v8A's
+superluminal nonlinear cone. The next completion must be degenerate by
+construction on arbitrary tilted time-dependent backgrounds; another
+coefficient change is not authorized. See
+[`SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md`](SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md).
+
 ## 2026-08-03 v5C exterior-law failure
 
 The fixed v5C row is retired before full variation or data. In the published

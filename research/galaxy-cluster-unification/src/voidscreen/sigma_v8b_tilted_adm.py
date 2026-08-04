@@ -44,6 +44,13 @@ class KineticPoint:
     determinant_ratio: float
 
 
+@dataclass(frozen=True)
+class CanonicalPoint:
+    lagrangian: float
+    canonical_energy: float
+    momenta: Array
+
+
 def _finite(value: float, *, name: str) -> float:
     result = float(value)
     if not np.isfinite(result):
@@ -310,6 +317,51 @@ def centered_finite_difference_hessian(
                 + evaluate(center - row_step - column_step)
             ) / (4.0 * delta**2)
     return hessian
+
+
+def homogeneous_canonical_point(
+    velocities: Iterable[float],
+    *,
+    aether_velocity: float,
+    a_sigma_over_q0: float,
+    ell_h_q0: float,
+    k_b: float = 1.0,
+    k_2: float = 2.0,
+    alpha: float = 16.0 / 9.0,
+    include_completion: bool = True,
+) -> CanonicalPoint:
+    """Return the local velocity momenta and canonical energy density."""
+
+    values = np.asarray(tuple(velocities), dtype=float)
+    if values.shape != (10,) or np.any(~np.isfinite(values)):
+        raise ValueError("velocities must contain ten finite values")
+    tensor = torch.tensor(values, dtype=TORCH_DTYPE, requires_grad=True)
+    lagrangian = _homogeneous_adm_lagrangian(
+        tensor,
+        aether_velocity=aether_velocity,
+        a_sigma_over_q0=a_sigma_over_q0,
+        ell_h_q0=ell_h_q0,
+        k_b=k_b,
+        k_2=k_2,
+        alpha=alpha,
+        include_completion=bool(include_completion),
+    )
+    momenta_tensor = torch.autograd.grad(lagrangian, tensor)[0]
+    energy_tensor = tensor @ momenta_tensor - lagrangian
+    momenta = momenta_tensor.detach().cpu().numpy()
+    lagrangian_value = float(lagrangian.detach().cpu())
+    energy_value = float(energy_tensor.detach().cpu())
+    if not (
+        np.isfinite(lagrangian_value)
+        and np.isfinite(energy_value)
+        and np.all(np.isfinite(momenta))
+    ):
+        raise ValueError("homogeneous canonical point is not finite")
+    return CanonicalPoint(
+        lagrangian=lagrangian_value,
+        canonical_energy=energy_value,
+        momenta=momenta,
+    )
 
 
 def _inertia(eigenvalues: Array, *, tolerance: float = 1.0e-9) -> tuple[int, int, int]:

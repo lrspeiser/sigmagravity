@@ -16,14 +16,14 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only checkpoint is
-[`docs/SIGMA_V8B_TILTED_ADM_GATE.md`](docs/SIGMA_V8B_TILTED_ADM_GATE.md).
-The v8B scalar normal acceleration is removable by an exact ADM boundary
-subtraction, and its ten-velocity Legendre map stays full rank with unchanged
-inertia over 1,409 frozen points in a declared local envelope. A finite
-rank-changing surface nevertheless appears outside that envelope at
-`v_A=0.97`, `Q/Q0=2.8649430865`. V8B therefore has not passed its Hamiltonian
-gate and remains barred from data until the full inhomogeneous constraints and
-reachability of that surface are resolved.
+[`docs/SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md`](docs/SIGMA_V8B_GLOBAL_RANK_FALSIFICATION.md).
+It supersedes the healthy bounded patch in the preceding tilted-ADM audit. The
+v8B completion has a finite global Legendre-rank surface for every nonzero
+coupling: the frozen row fails at large clock velocity, and changing `K_B`
+cannot rescue it because the determinant is exactly affine in isotropic
+extrinsic curvature. Each representative crossing has finite energy and gains
+a second raw negative direction. Exact v8B is retired before data; the next
+completion must be degenerate by construction on arbitrary tilted backgrounds.
 
 The latest formula-development status is
 [`docs/P0715_P0718_LENSING_STRUCTURE_AND_TRANSFER_RESULTS.md`](docs/P0715_P0718_LENSING_STRUCTURE_AND_TRANSFER_RESULTS.md).

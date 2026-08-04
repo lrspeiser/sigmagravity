@@ -1,0 +1,250 @@
+{
+  "all_falsification_subgates_pass": true,
+  "asymptotic_schur_coefficient_formula": "[(32-20*K_B)x^3+(32-67*K_B)x^2+(8-78*K_B)x-27*K_B]/(4*K_B)",
+  "candidate": "one-metric AeST plus cubic geometry interaction and preferred-time causal completion",
+  "candidate_retired": true,
+  "completed_falsification_subgates": {
+    "asymptotic_rank_coefficient_positive_at_selected_tilt": true,
+    "critical_tilt_is_finite_and_subluminal": true,
+    "crossing_energy_and_momenta_are_finite": true,
+    "every_nonzero_tested_completion_length_has_finite_rank_surface": true,
+    "high_K_B_escape_closed_by_finite_extrinsic_curvature_surface": true,
+    "null_mode_mixes_metric_and_aether_sectors": true,
+    "rank_crossing_adds_raw_negative_direction": true,
+    "rank_surface_is_insensitive_to_a_sigma_escape": true
+  },
+  "critical_tilt": {
+    "K_B": 1.0,
+    "coefficient_at_root": -9.947598300641403e-14,
+    "critical_aether_velocity": 0.9020884486250939,
+    "critical_spatial_norm_squared": 4.369518710154624
+  },
+  "data_policy": {
+    "authorization_after_this_stage": "if retired, select a structurally bounded degenerate replacement from theory only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_exact_v8B_before_data",
+  "decision_rule": {
+    "no_parameter_rescue": "Do not move the singular surface by tuning a_sigma, L_H, K_B, or alpha after observational data. A replacement action must be selected before data.",
+    "no_zero_coupling_escape": "L_H=0 removes both the cubic geometry response and its causal completion, leaving the AeST base without the proposed cluster-Hessian mechanism. Alpha=1 instead removes only the causal partner and returns the nonzero v8A cubic to its already-retired superluminal cone.",
+    "retire": "Retire exact v8B before data if a finite admissible tilt activates a positive asymptotic Schur coefficient, every nonzero tested completion length crosses a rank surface, and the crossing is finite-energy with a mixed metric-aether null mode."
+  },
+  "global_legendre_map_regular": false,
+  "inertia_after_surface": [
+    2,
+    0,
+    8
+  ],
+  "inertia_before_surface": [
+    1,
+    0,
+    9
+  ],
+  "isotropic_extrinsic_rank_surfaces_by_K_B": {
+    "1": {
+      "K_B": 1.0,
+      "aether_velocity": 0.5,
+      "all_momenta_finite": true,
+      "alpha": 1.7777777777777777,
+      "canonical_energy_at_surface": -5.7070096976763285,
+      "determinant_affine_residual_at_two": 9.43689570931383e-16,
+      "determinant_ratio_at_root": 4.228434016775372e-16,
+      "inertia_above_surface": [
+        2,
+        0,
+        8
+      ],
+      "inertia_below_surface": [
+        1,
+        0,
+        9
+      ],
+      "isotropic_extrinsic_trace_over_q0": 2.899272028233622,
+      "lagrangian_at_surface": -6.006132401944262,
+      "minimum_singular_value_at_root": 2.913646303461329e-15,
+      "null_eigenvalue": 1.4988010832439613e-15,
+      "null_mode_sector_power": {
+        "aether": 0.21455115031474198,
+        "metric": 0.028649175908481393,
+        "scalar": 0.7567996737767766
+      },
+      "q_over_q0": 1.2,
+      "scalar_speed_squared": 0.75
+    },
+    "1.6": {
+      "K_B": 1.6,
+      "aether_velocity": 0.5,
+      "all_momenta_finite": true,
+      "alpha": 1.9115890083632026,
+      "canonical_energy_at_surface": -5.205230093513691,
+      "determinant_affine_residual_at_two": -1.6653345369377348e-16,
+      "determinant_ratio_at_root": -1.3644691003176832e-17,
+      "inertia_above_surface": [
+        2,
+        0,
+        8
+      ],
+      "inertia_below_surface": [
+        1,
+        0,
+        9
+      ],
+      "isotropic_extrinsic_trace_over_q0": 2.8041032243637227,
+      "lagrangian_at_surface": -5.381933107158094,
+      "minimum_singular_value_at_root": 7.34273056671e-17,
+      "null_eigenvalue": 4.685685386546831e-16,
+      "null_mode_sector_power": {
+        "aether": 0.011667971230486051,
+        "metric": 0.04885451288322466,
+        "scalar": 0.9394775158862891
+      },
+      "q_over_q0": 1.2,
+      "scalar_speed_squared": 0.22499999999999995
+    },
+    "1.7": {
+      "K_B": 1.7,
+      "aether_velocity": 0.5,
+      "all_momenta_finite": true,
+      "alpha": 2.4404017374140397,
+      "canonical_energy_at_surface": -2.252212351569568,
+      "determinant_affine_residual_at_two": -7.632783294297951e-16,
+      "determinant_ratio_at_root": -5.276777839847849e-16,
+      "inertia_above_surface": [
+        2,
+        0,
+        8
+      ],
+      "inertia_below_surface": [
+        1,
+        0,
+        9
+      ],
+      "isotropic_extrinsic_trace_over_q0": 1.8488346177453117,
+      "lagrangian_at_surface": -2.3775759611988367,
+      "minimum_singular_value_at_root": 4.985928949349099e-15,
+      "null_eigenvalue": -5.668456973233365e-15,
+      "null_mode_sector_power": {
+        "aether": 0.002476936152893079,
+        "metric": 0.11462935109685679,
+        "scalar": 0.8828937127502503
+      },
+      "q_over_q0": 1.2,
+      "scalar_speed_squared": 0.1632352941176471
+    },
+    "1.8": {
+      "K_B": 1.8,
+      "aether_velocity": 0.5,
+      "all_momenta_finite": true,
+      "alpha": 3.530565544295523,
+      "canonical_energy_at_surface": -0.9910387428225529,
+      "determinant_affine_residual_at_two": -1.1102230246251565e-15,
+      "determinant_ratio_at_root": -2.7656468346137196e-16,
+      "inertia_above_surface": [
+        2,
+        0,
+        8
+      ],
+      "inertia_below_surface": [
+        1,
+        0,
+        9
+      ],
+      "isotropic_extrinsic_trace_over_q0": 1.1641084732316618,
+      "lagrangian_at_surface": -0.9690402271214196,
+      "minimum_singular_value_at_root": 2.0937509467358805e-15,
+      "null_eigenvalue": -1.7771377927796866e-15,
+      "null_mode_sector_power": {
+        "aether": 0.00020671244172594438,
+        "metric": 0.28602903036793503,
+        "scalar": 0.7137642571903393
+      },
+      "q_over_q0": 1.2,
+      "scalar_speed_squared": 0.10555555555555551
+    },
+    "1.95": {
+      "K_B": 1.95,
+      "aether_velocity": 0.5,
+      "all_momenta_finite": true,
+      "alpha": 13.506549727562955,
+      "canonical_energy_at_surface": -5.751346709680129,
+      "determinant_affine_residual_at_two": 1.7763568394002505e-15,
+      "determinant_ratio_at_root": 5.024292654717438e-16,
+      "inertia_above_surface": [
+        2,
+        0,
+        8
+      ],
+      "inertia_below_surface": [
+        1,
+        0,
+        9
+      ],
+      "isotropic_extrinsic_trace_over_q0": 0.9336899894209425,
+      "lagrangian_at_surface": -0.9737954137344597,
+      "minimum_singular_value_at_root": 5.266658029267059e-16,
+      "null_eigenvalue": 5.668317133766585e-15,
+      "null_mode_sector_power": {
+        "aether": 0.011578337234408596,
+        "metric": 0.8967995664101429,
+        "scalar": 0.09162209635544862
+      },
+      "q_over_q0": 1.2,
+      "scalar_speed_squared": 0.025320512820512845
+    }
+  },
+  "observational_data_accessed": false,
+  "protocol_version": "Sigma-v8B-0.6-global-Legendre-rank-falsification",
+  "rank_surfaces_by_L_H_Q0": {
+    "0.25": 9.66481729427249,
+    "0.5": 5.133731270193288,
+    "1": 2.86494308651219,
+    "2": 1.7403283185373422
+  },
+  "rank_surfaces_by_a_sigma_over_Q0": {
+    "0.0001": 2.8598990093894763,
+    "1": 2.86494308651219,
+    "100": 2.923797977144796
+  },
+  "raw_holdout_opened": false,
+  "reason": "For the frozen K_B=1, the leading large-Q kinetic mixing has a positive Schur coefficient above finite aether tilt 0.902088. Every nonzero tested completion length therefore reaches a finite rank-zero surface. The crossing has finite canonical energy, mixes metric and aether velocities, and adds a second raw negative direction. Raising K_B removes that asymptotic sign but cannot rescue the action: its determinant is affine in isotropic extrinsic curvature and crosses zero at finite K for every tested K_B in the healthy open interval.",
+  "reference_surface_mode": {
+    "absolute_axis_traceless_overlap": 0.44490196173935237,
+    "absolute_conformal_overlap": 0.5667790918882335,
+    "aether_velocity": 0.97,
+    "all_canonical_momenta_finite": true,
+    "canonical_energy_at_zero_K_E": 14.574128788971612,
+    "lagrangian_at_zero_K_E": 1.3655002288559484,
+    "minimum_singular_value": 4.1176607382039903e-16,
+    "mode_components": {
+      "E_x": -0.692724866316205,
+      "E_y": 0.0,
+      "E_z": 0.0,
+      "K_xx": 0.6904909918809423,
+      "K_xy": 0.0,
+      "K_xz": 0.0,
+      "K_yy": 0.145599595968612,
+      "K_yz": 1.5407439555097887e-33,
+      "K_zz": 0.1455995959686152,
+      "sigma": -0.030918684092652415
+    },
+    "null_eigenvalue": 3.555752830829627e-15,
+    "q_over_q0": 2.86494308651219,
+    "sector_power": {
+      "aether": 0.4798677404128041,
+      "metric": 0.5191762945611745,
+      "scalar": 0.0009559650260212375
+    },
+    "spatial_norm_squared": 15.92047377326564
+  },
+  "scope": "This is a necessary global Legendre-regularity failure, not a complete Dirac constraint solution. A full Dirac calculation cannot make the already demonstrated global velocity Hessian regular; avoiding the surface would require a separately derived invariant domain restriction.",
+  "selected_tilt_coefficient": 9602.534495090447,
+  "selected_values": {
+    "K_2": 2.0,
+    "K_B": 1.0,
+    "alpha": 1.7777777777777777,
+    "selected_aether_velocity": 0.97
+  },
+  "status": "completed Sigma v8B global Legendre-rank falsification",
+  "zero_coupling_limit": "L_H=0 removes both the cubic geometry response and its causal partner, leaving the AeST base without the proposed cluster-Hessian mechanism. Alpha=1 retains the v8A cubic but removes its causal partner and restores the already-demonstrated superluminal nonlinear scalar cone."
+}

@@ -1,0 +1,35 @@
+{
+  "protocol_version": "Sigma-v8B-0.6-global-Legendre-rank-falsification",
+  "status": "frozen before observational data",
+  "candidate": "one-metric AeST plus cubic geometry interaction and preferred-time causal completion",
+  "selected_values": {
+    "K_B": 1.0,
+    "K_2": 2.0,
+    "alpha": 1.7777777777777777,
+    "selected_aether_velocity": 0.97
+  },
+  "robustness_values": {
+    "L_H_Q0": [0.25, 0.5, 1.0, 2.0],
+    "a_sigma_over_Q0": [0.0001, 1.0, 100.0],
+    "K_B_escape_scan": [1.0, 1.6, 1.7, 1.8, 1.95]
+  },
+  "requirements": {
+    "derive_large_Q_Schur_coefficient_analytically": true,
+    "verify_the_leading_vector_against_the_exact_autodiff_Hessian": true,
+    "locate_the_first_finite_rank_surface_for_every_nonzero_tested_L_H": true,
+    "show_the_crossing_has_finite_Lagrangian_energy_and_momenta": true,
+    "show_the_null_mode_is_not_the_pure_GR_conformal_direction": true,
+    "show_the_raw_inertia_gains_an_additional_negative_direction": true,
+    "close_the_high_K_B_escape_with_the_affine_extrinsic_curvature_surface": true
+  },
+  "decision_rule": {
+    "retire": "Retire exact v8B before data if a finite admissible tilt activates a positive asymptotic Schur coefficient, every nonzero tested completion length crosses a rank surface, and the crossing is finite-energy with a mixed metric-aether null mode.",
+    "no_zero_coupling_escape": "L_H=0 removes both the cubic geometry response and its causal completion, leaving the AeST base without the proposed cluster-Hessian mechanism. Alpha=1 instead removes only the causal partner and returns the nonzero v8A cubic to its already-retired superluminal cone.",
+    "no_parameter_rescue": "Do not move the singular surface by tuning a_sigma, L_H, K_B, or alpha after observational data. A replacement action must be selected before data."
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "if retired, select a structurally bounded degenerate replacement from theory only"
+  }
+}
