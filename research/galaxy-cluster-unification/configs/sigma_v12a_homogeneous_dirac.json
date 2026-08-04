@@ -1,0 +1,23 @@
+{
+  "protocol_version": "Sigma-v12A-0.5-homogeneous-Dirac",
+  "status": "frozen theory-only homogeneous aligned constraint subgate",
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "fixed_values": {
+    "f0": 1.0,
+    "k_2": 2.0,
+    "orientation_strength": 1.0,
+    "background_clock": 1.0,
+    "clock_scan_minimum": -4.0,
+    "clock_scan_maximum": 4.0,
+    "clock_scan_points": 4001,
+    "random_velocity_trials": 2,
+    "random_seed": 12005
+  },
+  "pass_rule": "On the homogeneous aether-aligned branch, the covariant L3-L5 invariants must reduce to a=b^2/kappa; the canonical primary and velocity-independent reduced Hamiltonian identities must hold throughout the signed clock scan; and the primary-secondary bracket must remain nonzero at the flat AeST clock where A3=0.",
+  "scope_limit": "This proves regularity only on the homogeneous aligned branch. It does not compute Delta_eff for nonzero spatial scalar gradients, aether tilt, anisotropic extrinsic curvature, or inhomogeneous differential operators and therefore is not a complete Dirac or theory-health pass.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "exact homogeneous action reduction and synthetic algebra checks only"
+  }
+}

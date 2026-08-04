@@ -1,0 +1,59 @@
+{
+  "arbitrary_gradient_tilt_regular": false,
+  "background": {
+    "A3": 0.0,
+    "absolute_primary_secondary_bracket": 8.0,
+    "clock": 1.0,
+    "mixing_b": -0.0,
+    "primary_secondary_bracket": -8.0
+  },
+  "branch": "homogeneous scalar, aether aligned with ADM normal, zero spatial scalar gradient",
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "complete_dirac_chain_derived": false,
+  "data_policy": {
+    "authorization": "exact homogeneous action reduction and synthetic algebra checks only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_to_spatial_gradient_and_aether_tilt_effective_bracket",
+  "gates": {
+    "background_activation_exactly_zero": true,
+    "background_primary_reduces_to_p_q": true,
+    "background_secondary_bracket_nonzero": true,
+    "canonical_primary_identity": true,
+    "homogeneous_class_ia_identity": true,
+    "reduced_hamiltonian_independent_of_dhost_velocity": true
+  },
+  "homogeneous_aligned_dirac_pair_regular": true,
+  "homogeneous_reduction": {
+    "invariants": {
+      "L3": "-q^2 V_*^2-q^3 K V_*",
+      "L4": "-q^2 V_*^2",
+      "L5": "q^4 V_*^2"
+    },
+    "metric_trace_coefficient": "kappa=-2 F0/3",
+    "mixing": "b=-q^3 A3/2",
+    "primary": "Psi=p_q-(b/kappa) pi_K",
+    "primary_secondary_bracket": "{Psi,Omega}=-d^2L_AeST/dq^2=-4 K2",
+    "reduced_hamiltonian": "H=pi_K^2/(4 kappa)+p_phi q-L_AeST(q)",
+    "scalar_velocity_coefficient": "a=b^2/kappa=-3 q^6 A3^2/(8 F0)",
+    "secondary": "Omega=-p_phi+dL_AeST/dq"
+  },
+  "next_kill_gate": "Evaluate the full Delta_eff principal symbol with nonzero spatial B_i, finite aether tilt, and anisotropic K_ij; retire v12A if it vanishes or changes differential rank on any finite admitted background.",
+  "observational_data_accessed": false,
+  "physical_degree_count_proven_unchanged": false,
+  "raw_holdout_opened": false,
+  "reason": "The Class-Ia terms form an exact degenerate square on the homogeneous branch and disappear from the reduced Hamiltonian. At the intended flat clock A3 and its mixing vanish, but the AeST clock susceptibility leaves the primary-secondary bracket equal to -4 K2, so the auxiliary pair is regular rather than strongly coupled.",
+  "scan": {
+    "clock_maximum": 4.0,
+    "clock_minimum": -4.0,
+    "clock_points": 4001,
+    "maximum_hamiltonian_velocity_residual": 3.552713678800501e-15,
+    "maximum_normalized_degeneracy_residual": 1.3877787807814457e-16,
+    "maximum_primary_residual": 4.440892098500626e-16,
+    "velocity_trials_per_clock": 2
+  },
+  "scope_limit": "This proves regularity only on the homogeneous aligned branch. It does not compute Delta_eff for nonzero spatial scalar gradients, aether tilt, anisotropic extrinsic curvature, or inhomogeneous differential operators and therefore is not a complete Dirac or theory-health pass.",
+  "status": "completed Sigma v12A homogeneous aligned Dirac subgate",
+  "theory_viable": false
+}

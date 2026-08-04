@@ -1,5 +1,26 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v12A homogeneous aligned Dirac branch
+
+The homogeneous aether-aligned branch passes its primary-secondary test. With
+`q=nabla_n phi`, normal scalar Hessian `V_*`, and metric trace `K`, the v12A
+invariants give `kappa=-2F0/3`, `b=-q^3 A3/2`, and
+`a=-3q^6 A3^2/(8F0)=b^2/kappa`. The canonical primary is
+`Psi=p_q-(b/kappa)pi_K`, and the reduced Hamiltonian loses all dependence on
+`V_*` and `b(q)`.
+
+The secondary is `Omega=-p_phi+dL_AeST/dq`. At the intended clock `q=Q0`, the
+v12A activation and `b` vanish exactly, but
+`{Psi,Omega}=-d^2L_AeST/dq^2=-4K2`; it is `-8` on the selected `K2=2` row.
+Thus the new auxiliary Hessian coordinate is not strongly coupled at the flat
+vacuum. A 4,001-point signed clock scan verifies the exact degeneracy and
+Legendre identities.
+
+This is not the arbitrary-gradient result. Spatial scalar gradients, aether
+tilt, anisotropic metric velocity, and the full differential `Delta_eff` remain
+the next kill gate. No observation was opened. See
+[`SIGMA_V12A_HOMOGENEOUS_DIRAC.md`](SIGMA_V12A_HOMOGENEOUS_DIRAC.md).
+
 ## 2026-08-04 Sigma v12A canonical primary and conditional Dirac chain
 
 The published reduced AeST metric momentum is exactly the GR momentum, so the

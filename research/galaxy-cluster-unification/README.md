@@ -16,6 +16,14 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V12A_HOMOGENEOUS_DIRAC.md`](docs/SIGMA_V12A_HOMOGENEOUS_DIRAC.md).
+The homogeneous aether-aligned v12A kinetic terms form an exact degenerate
+square. At the intended flat clock the new interaction vanishes, but the AeST
+clock susceptibility keeps the primary-secondary bracket equal to `-4 K2`, so
+that branch is regular rather than strongly coupled. Spatial gradients,
+aether tilt, and the full differential `Delta_eff` remain the next kill gate.
+
+The preceding theory-only result is
 [`docs/SIGMA_V12A_PRIMARY_DIRAC.md`](docs/SIGMA_V12A_PRIMARY_DIRAC.md).
 The exact Class-Ia primary constraint survives unchanged in the published
 reduced AeST canonical variables, and its preservation necessarily produces a
