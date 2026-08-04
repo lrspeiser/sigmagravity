@@ -1,5 +1,26 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v12A unreduced joint ADM kinetic-rank subgate
+
+The exact highest-velocity AeST--DHOST block preserves the Class-Ia primary
+null direction. After introducing `B_mu=nabla_mu phi`, all `V_*` dependence is
+inside the standard DHOST block. The AeST Maxwell field strength is connection-
+free and adds a positive `K_B I_3` aether-velocity block. `Y`, `Q`, and
+`F(Y,Q)` are configuration functions, while `J^mu B_mu` is affine in metric and
+aether velocities and therefore shifts momenta without changing the Hessian.
+
+Thus `H_total=diag(H_DHOST,K_B G_E)` with positive electric metric `G_E`. Two
+thousand random Schur-degenerate DHOST blocks and random positive spatial-metric
+congruences retain one exact null direction; the inertia changes only from
+`(1,1,5)` to `(1,1,8)`, adding three positive modes. A finite-difference test
+confirms arbitrary linear AeST momentum shifts leave the Hessian unchanged.
+
+This is an unreduced kinetic statement, not a full Dirac or arbitrary-tilt
+health pass. The primary constraint must be expressed in canonical variables
+and preserved in time against the AeST unit-vector constraint chain to prove a
+regular secondary and unchanged physical degree count. No observation was opened. See
+[`SIGMA_V12A_JOINT_ADM_RANK.md`](SIGMA_V12A_JOINT_ADM_RANK.md).
+
 ## 2026-08-04 Sigma v12A same-clock DHOST selection
 
 The post-v11 reset selects a materially new theory-only lane. V12A adds no

@@ -1,0 +1,93 @@
+{
+  "adm_velocity_basis": {
+    "aether": "three physical Maxwell aether velocities",
+    "dhost": "(V_*, six K_ij components)",
+    "lapse_shift": "no velocities"
+  },
+  "analytic_block_identity": {
+    "aest_maxwell": "H_A=K_B G_E with G_E positive definite (I_3 in an orthonormal ADM basis)",
+    "dhost": "H_D=[[B^T K^-1 B,B^T],[B,K]]",
+    "dhost_null": "n_D=(1,-K^-1 B)",
+    "joint": "H_total=diag(H_D,H_A)",
+    "linear_terms": "J^mu nabla_mu phi is affine in K_ij and aether velocity and shifts momenta without changing H_total"
+  },
+  "arbitrary_background_characteristics_proven": false,
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "complete_dirac_chain_derived": false,
+  "complete_metric_stress_derived": false,
+  "constraint_reduced": false,
+  "data_policy": {
+    "authorization": "exact ADM velocity-degree audit and generic numerical block verification only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "advance_to_secondary_constraint_and_complete_dirac_chain",
+  "dhost_primary_constraint_kinematically_present": true,
+  "dhost_secondary_constraint_derived": false,
+  "gates": {
+    "aether_velocity_block_positive": true,
+    "dhost_inertia_constant": true,
+    "dhost_primary_null_preserved": true,
+    "joint_inertia_adds_only_positive_aether_modes": true,
+    "joint_primary_null_preserved": true,
+    "linear_aest_terms_do_not_change_hessian": true,
+    "no_lapse_velocity_added": true
+  },
+  "joint_kinetic_rank_subgate_pass": true,
+  "next_kill_gate": "Derive the primary constraint explicitly in canonical variables, preserve it in time, and show that its Poisson bracket with the AeST unit-vector constraints generates one regular secondary rather than fixing a forbidden multiplier or changing rank.",
+  "observational_data_accessed": false,
+  "physical_degree_count_proven_unchanged": false,
+  "random_audit": {
+    "maximum_dhost_null_residual": 1.1363696703589205e-15,
+    "maximum_finite_difference_hessian_residual": 2.23487894857044e-12,
+    "maximum_joint_null_residual": 1.029672003302592e-15,
+    "minimum_aether_block_eigenvalue": 0.20009365574705368,
+    "observed_dhost_inertias": [
+      [
+        1,
+        1,
+        5
+      ]
+    ],
+    "observed_joint_inertias": [
+      [
+        1,
+        1,
+        8
+      ]
+    ],
+    "representative": {
+      "aether_metric_eigenvalues": [
+        0.30000620655604837,
+        0.8583285714412958,
+        1.5855764334134543
+      ],
+      "dhost_inertia": [
+        1,
+        1,
+        5
+      ],
+      "dhost_null_residual": 9.412373634839028e-17,
+      "finite_difference_hessian_residual": 2.23487894857044e-12,
+      "joint_inertia": [
+        1,
+        1,
+        8
+      ],
+      "joint_null_residual": 1.1610990315520314e-16,
+      "linear_momentum_shift_norm": 3.383003628276358
+    },
+    "trials": 2000
+  },
+  "raw_holdout_opened": false,
+  "reason": "After introducing B_mu=nabla_mu phi, all second-scalar-derivative velocities reside in the DHOST block. The AeST Maxwell term is connection-free and supplies a separate positive vector block; the remaining AeST scalar/aether interaction is affine in ADM velocities. It shifts momenta but cannot lift the exact Class-Ia null direction.",
+  "scope_limit": "This is an unreduced kinetic-rank subgate. It does not prove that the null direction survives the coupled unit-vector and DHOST constraint reduction, preservation of the DHOST secondary constraint, the complete AeST Dirac chain, physical mode count, positive reduced Hamiltonian, or causal characteristics.",
+  "status": "completed Sigma v12A unreduced joint ADM kinetic-rank subgate",
+  "theory_viable": false,
+  "why_block_identity_is_background_independent": {
+    "aether_scalar_mixing": "A^nu nabla_nu A^mu B_mu is first order in the aether/metric velocities and contains no V_*",
+    "constraint": "A^2=-1 is algebraic",
+    "maxwell": "F_mu_nu=partial_mu A_nu-partial_nu A_mu contains no metric connection; the electric velocity form is a positive spatial-metric congruence",
+    "scalar_first_derivatives": "Y, Q, and F(Y,Q) contain no V_* after B_mu=nabla_mu phi is introduced as an auxiliary coordinate"
+  }
+}

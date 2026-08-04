@@ -16,6 +16,15 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V12A_JOINT_ADM_RANK.md`](docs/SIGMA_V12A_JOINT_ADM_RANK.md).
+The v12A unreduced joint kinetic-rank subgate passes. In auxiliary-gradient ADM
+variables, AeST adds a separate positive Maxwell-aether block and only affine
+momentum shifts to the Class-Ia DHOST Hessian, so it does not lift the primary
+null direction. This does not yet prove survival after the coupled constraint
+reduction, the secondary constraint, or the physical mode count; the complete
+Dirac chain is the next gate.
+
+The preceding theory-only result is
 [`docs/SIGMA_V12A_SAME_CLOCK_DHOST_SELECTION.md`](docs/SIGMA_V12A_SAME_CLOCK_DHOST_SELECTION.md).
 After the v11 mechanism reset, v12A adds no memory field. It places Hessian
 operators of the existing baryon-forced AeST scalar inside the exact luminal

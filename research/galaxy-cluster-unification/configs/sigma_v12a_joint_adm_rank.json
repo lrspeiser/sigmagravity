@@ -1,0 +1,18 @@
+{
+  "protocol_version": "Sigma-v12A-0.3-unreduced-joint-ADM-rank",
+  "status": "frozen theory-only unreduced joint kinetic-rank subgate",
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "fixed_values": {
+    "k_b": 1.0,
+    "random_trials": 2000,
+    "random_seed": 12002,
+    "finite_difference_step": 0.0001
+  },
+  "pass_rule": "The exact DHOST primary null direction must remain null in the unreduced auxiliary-variable Hessian after adding the complete AeST velocity dependence; positive spatial-metric congruences of the aether Maxwell block must add only three positive directions; lapse and shift must remain velocity-free; and arbitrary linear AeST momentum shifts must leave the Hessian unchanged.",
+  "scope_limit": "This is an unreduced kinetic-rank subgate. It does not prove that the null direction survives the coupled unit-vector and DHOST constraint reduction, preservation of the DHOST secondary constraint, the complete AeST Dirac chain, physical mode count, positive reduced Hamiltonian, or causal characteristics.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "exact ADM velocity-degree audit and generic numerical block verification only"
+  }
+}
