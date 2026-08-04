@@ -1,5 +1,12 @@
 # Sigma v10C hyperbolic aether-tidal selection
 
+> **Superseded gate result (2026-08-04):** exact v10C fails its nonlinear
+> kinetic gate and is retired before data. On a nonzero spatial carrier
+> background, the physical aether-vector kinetic matrix is
+> `K_B I-beta P`; it crosses zero at the finite isotropic amplitude
+> `P=sqrt(11 K_B/2) I` and becomes negative beyond it. See
+> [`SIGMA_V10C_NONLINEAR_KINETIC_FALSIFICATION.md`](SIGMA_V10C_NONLINEAR_KINETIC_FALSIFICATION.md).
+
 ## Decision
 
 Sigma v10C passes a narrow theory-only selection gate and advances to complete

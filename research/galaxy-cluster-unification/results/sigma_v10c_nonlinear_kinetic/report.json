@@ -1,0 +1,102 @@
+{
+  "all_derivation_gates_pass": true,
+  "all_viability_gates_pass": false,
+  "amplitudes": {
+    "above": 2.368659958710832,
+    "below": 2.3217558011125976,
+    "critical": 2.345207879911715,
+    "zero": 0.0
+  },
+  "candidate": "Sigma v10C one-metric AeST plus hyperbolic aether-tidal polarization",
+  "constraint_derivation": "At A^m=(1,0), d_t(A^m P_mi)=0 gives d_t P^0i=P_ij d_t A^j; therefore -beta(nabla_m P^mi)J_i=-beta P_ij d_t A^i d_t A^j",
+  "critical_isotropic_carrier_amplitude": 2.345207879911715,
+  "critical_potential_dimensionless": 76.31250000000001,
+  "data_policy": {
+    "authorization": "nonlinear local kinetic and constraint audit only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_exact_v10c_before_observational_data",
+  "derivation_gates": {
+    "carrier_potential_finite_at_critical_amplitude": true,
+    "finite_critical_amplitude": true,
+    "kinetic_eigenvalue_zero_at_critical_amplitude": true,
+    "kinetic_ghost_above_critical_amplitude": true,
+    "published_flat_AeST_vector_modes_are_physical": true,
+    "reduced_velocity_hessian_matches_finite_difference": true,
+    "spatiality_constraint_does_not_bound_carrier_amplitude": true,
+    "zero_background_vector_kinetic_positive": true
+  },
+  "finite_difference_max_abs_error": 4.440892098500626e-16,
+  "minimum_eigenvalues": {
+    "above": -0.020000000000000462,
+    "below": 0.020000000000000018,
+    "critical": 0.0,
+    "zero": 1.0
+  },
+  "no_patch_rule": "Do not impose a data- or object-selected P cutoff. Removing beta removes the mechanism; bounding the kinetic mixing or completing it as a positive square defines a materially new action.",
+  "observational_data_accessed": false,
+  "raw_holdout_opened": false,
+  "reason": "The spatial constraint converts the first-order carrier/aether interaction into an amplitude-dependent physical vector kinetic matrix K_B I-beta P. At the finite isotropic amplitude P=sqrt(11 K_B/2) I an eigenvalue vanishes, and immediately above it three physical vector directions are ghosts. The convex quartic potential is finite there and the spatiality constraint imposes no amplitude bound.",
+  "reduced_kinetic_density": "L_kin=dot(a)^T[K_B I-beta P]dot(a)+dot(P):dot(P)/2",
+  "retire_exact_v10c": true,
+  "scope": "The failure occurs in a local homogeneous decoupling subblock containing the physical AeST vector modes, so lapse/shift constraints cannot restore the negative kinetic directions. A full ADM count is unnecessary for retiring this exact action.",
+  "selected_closed_form_critical_amplitude": "sqrt(11 K_B/2)",
+  "selected_coefficients": {
+    "K_B": 1.0,
+    "beta": 0.4264014327112209,
+    "beta_squared_over_K_B": 0.18181818181818182
+  },
+  "status": "completed Sigma v10C nonlinear kinetic falsification",
+  "velocity_hessian_eigenvalues": {
+    "above": [
+      -0.020000000000000462,
+      -0.020000000000000462,
+      -0.020000000000000462,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "below": [
+      0.020000000000000018,
+      0.020000000000000018,
+      0.020000000000000018,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "critical": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "zero": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.0,
+      2.0,
+      2.0
+    ]
+  },
+  "viability_gates": {
+    "globally_well_posed_carrier_vector_initial_value_problem": false,
+    "no_finite_strong_coupling_surface": false,
+    "positive_kinetic_matrix_for_all_finite_carrier_initial_data": false
+  }
+}

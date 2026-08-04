@@ -16,6 +16,16 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only follow-up is
+[`docs/SIGMA_V10C_NONLINEAR_KINETIC_FALSIFICATION.md`](docs/SIGMA_V10C_NONLINEAR_KINETIC_FALSIFICATION.md).
+Exact v10C is retired before data. Enforcing that `P` stays spatial relative to
+the moving aether changes the physical vector kinetic matrix to
+`K_B I-beta P`. At the finite isotropic amplitude
+`P=sqrt(11 K_B/2) I` its Legendre map becomes singular; above it the three
+AeST vector directions are ghosts. The quartic potential is finite there and
+the spatiality constraint does not bound amplitude. A successor must use a
+materially different globally positive coupling, not an object-selected
+carrier cutoff.
+The preceding variation result is
 [`docs/SIGMA_V10C_COVARIANT_VARIATION.md`](docs/SIGMA_V10C_COVARIANT_VARIATION.md).
 The exact projected carrier momentum passes a tilted-aether finite-difference
 check, the spatiality constraint has rank four and leaves six carrier

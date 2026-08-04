@@ -1,0 +1,16 @@
+{
+  "protocol_version": "Sigma-v10C-0.4-nonlinear-kinetic",
+  "status": "frozen theory-only nonlinear kinetic gate",
+  "candidate": "Sigma v10C one-metric AeST plus hyperbolic aether-tidal polarization",
+  "question": "Does the first-order aether-tidal interaction keep the physical vector/carrier kinetic matrix positive for every finite carrier initial amplitude?",
+  "fixed_values": {
+    "K_B": 1.0,
+    "beta_squared_over_K_B": 0.18181818181818182
+  },
+  "failure_rule": "Retire exact v10C before data if a finite allowed P background makes a physical aether-vector kinetic eigenvalue zero or negative.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "nonlinear local kinetic and constraint audit only"
+  }
+}

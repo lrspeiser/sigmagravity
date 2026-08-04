@@ -1,5 +1,10 @@
 # Sigma v10C covariant first-order variation subgate
 
+> **Superseded gate result (2026-08-04):** the first nonlinear kinetic check
+> finds a finite-amplitude physical vector ghost, so exact v10C is retired
+> before data. See
+> [`SIGMA_V10C_NONLINEAR_KINETIC_FALSIFICATION.md`](SIGMA_V10C_NONLINEAR_KINETIC_FALSIFICATION.md).
+
 ## Decision
 
 V10C passes its covariant variation/order subgate and advances to the nonlinear

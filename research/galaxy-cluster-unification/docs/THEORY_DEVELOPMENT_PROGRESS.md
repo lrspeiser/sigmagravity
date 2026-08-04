@@ -1,5 +1,22 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v10C nonlinear kinetic falsification
+
+Exact v10C is retired before data. On a locally inertial aether-rest event,
+differentiating `A^mP_mi=0` gives `dot(P)^0i=P_ij dot(A)^j`. The first-order
+interaction therefore changes the physical aether-vector kinetic density to
+`dot(A)^T[K_B I-beta P]dot(A)`. The full reduced nine-velocity Hessian agrees
+with finite differences below `1e-9`.
+
+For `P_ij=p delta_ij`, the vector coefficient crosses zero at
+`p_star=K_B/beta=sqrt(11K_B/2)`, or `2.34521` at `K_B=1`. It is negative just
+above that finite amplitude. The convex quartic potential remains finite at
+the surface and the spatiality constraint imposes no amplitude bound, so the
+hyperbolic carrier admits initial data at and beyond the kinetic singularity.
+These are the published physical AeST vector modes, not lapse/shift gauge
+directions. No observation was opened. See
+[`SIGMA_V10C_NONLINEAR_KINETIC_FALSIFICATION.md`](SIGMA_V10C_NONLINEAR_KINETIC_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v10C covariant variation subgate
 
 The v10C carrier has now been written with exact projected time and spatial
