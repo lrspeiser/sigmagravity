@@ -1,0 +1,63 @@
+{
+  "all_tensor_cone_gates_pass": false,
+  "analytic_result": {
+    "TT_speed_squared": "c_TT^2=1+c_P^2(Delta p)^2",
+    "axisymmetric_background": "P=diag(p_perp,p_perp,p_parallel), k along symmetry axis",
+    "connection_residual_norm": "R:R=(Delta p)^2(h:h)/2",
+    "consequence": "c_TT exceeds the physical metric cone for every nonzero carrier anisotropy",
+    "field_redefinition": "r_ij=delta(P)_ij-(h_i^k P_kj+P_i^k h_kj)/2"
+  },
+  "candidate": "Sigma v10D exponential aether-tidal carrier",
+  "data_policy": {
+    "authorization": "exact local spin-2 principal-symbol analysis only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "retire_exact_v10d_and_reset_aether_tidal_carrier_family",
+  "demonstration": {
+    "TT_speed_squared": 1.0000000000002727,
+    "anisotropy": 1e-06,
+    "declared_relative_speed_tolerance": 1e-15,
+    "maximum_anisotropy_consistent_with_tolerance": 8.563488385776757e-08,
+    "relative_TT_speed_excess": 1.3636363636362705e-13,
+    "roots": [
+      0.27272727272727265,
+      0.27272727272727265,
+      0.27272727272727265,
+      0.2727272727272727,
+      0.2727272727272727,
+      0.2727272727272727,
+      1.0000000000002724,
+      1.0000000000002724
+    ]
+  },
+  "gates": {
+    "anisotropic_carrier_preserves_metric_TT_cone": false,
+    "axisymmetric_numerical_roots_match_exact_formula": true,
+    "demonstration_background_satisfies_declared_speed_tolerance": false,
+    "isotropic_carrier_preserves_luminal_TT_cone": true
+  },
+  "isotropic_roots": [
+    0.27272727272727265,
+    0.27272727272727265,
+    0.27272727272727265,
+    0.2727272727272727,
+    0.2727272727272727,
+    0.2727272727272727,
+    0.9999999999999998,
+    0.9999999999999998
+  ],
+  "no_patch_rule": "V10B, v10C, and v10D are three materially distinct closures of the aether-tidal carrier family failing the common mathematical causality/stability gate. Do not create a v10E counterterm patch; return to mechanism selection.",
+  "observational_data_accessed": false,
+  "raw_holdout_opened": false,
+  "reason": "On an axisymmetric carrier background the spin-2 sector is exact and has c_TT^2=1+c_P^2(p_parallel-p_perp)^2. Every nonzero anisotropy is therefore outside the physical metric cone; neither the exponential aether completion nor lapse, scalar, or vector constraints enter this symmetry sector.",
+  "scan": {
+    "maximum_analytic_root": 2.090909090909091,
+    "maximum_anisotropy": 2.0,
+    "maximum_numerical_root": 2.0909090909090904,
+    "maximum_root_error": 8.881784197001252e-16,
+    "samples": 401
+  },
+  "scope": "This necessary local characteristic failure retires the exact action. It does not infer an astronomical carrier amplitude or score observational data.",
+  "status": "completed Sigma v10D exact tensor-cone falsification"
+}

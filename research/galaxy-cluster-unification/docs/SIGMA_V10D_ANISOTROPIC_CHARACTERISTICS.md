@@ -1,5 +1,11 @@
 # Sigma v10D anisotropic source-block characteristics
 
+> **Superseded gate result (2026-08-04):** this fixed-metric source block is
+> healthy, but the omitted physical TT metric block has
+> `c_TT^2=1+c_P^2(p_parallel-p_perp)^2` on an exact axisymmetric sector.
+> Exact v10D is retired and the mechanism family is reset. See
+> [`SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md`](SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md).
+
 ## Decision
 
 V10D passes the arbitrary-carrier-orientation characteristic gate for its

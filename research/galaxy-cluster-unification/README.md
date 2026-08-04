@@ -15,15 +15,24 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
-The current theory-only follow-up is
+The current theory-only result is
+[`docs/SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md`](docs/SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md).
+Exact v10D is retired before data. On the exact axisymmetric spin-two sector,
+its nonzero carrier background gives
+`c_TT^2=1+c_P^2(p_parallel-p_perp)^2`, so every anisotropy widens the physical
+metric cone. V10B, v10C, and v10D are three materially distinct closures of
+the same aether-tidal carrier family that fail the mathematical
+causality/stability gate; the family is reset rather than patched with v10E.
+No observational holdout was opened.
+The preceding theory-only subgate is
 [`docs/SIGMA_V10D_ADM_RANK.md`](docs/SIGMA_V10D_ADM_RANK.md).
 In an aether-rest ADM frame the carrier derivative is the perfect square
 `W=dot(P)-K.P-P.K`. The triangular velocity map `(dot(h),dot(P))` to
 `(dot(h),W)` has determinant one for every `P`, so the combined Legendre
 inertia remains one inherited DeWitt negative direction and fifteen positive
 directions, with no zero. The generic count is the published six AeST modes
-plus six carrier modes. Arbitrary-foliation constraints and the full nonzero-P
-metric cones remain unresolved.
+plus six carrier modes. That local rank result remains correct but was not
+sufficient to guarantee a causal spatial characteristic.
 The preceding source-block result is
 [`docs/SIGMA_V10D_ANISOTROPIC_CHARACTERISTICS.md`](docs/SIGMA_V10D_ANISOTROPIC_CHARACTERISTICS.md).
 For arbitrary carrier orientation, the completed aether kinetic matrix obeys

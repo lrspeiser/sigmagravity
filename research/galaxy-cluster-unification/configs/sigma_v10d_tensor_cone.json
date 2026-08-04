@@ -1,0 +1,19 @@
+{
+  "protocol_version": "Sigma-v10D-0.4-exact-axisymmetric-TT-cone",
+  "status": "frozen theory-only metric characteristic kill gate",
+  "candidate": "Sigma v10D exponential aether-tidal carrier",
+  "fixed_values": {
+    "carrier_speed_squared": 0.2727272727272727,
+    "relative_metric_speed_tolerance": 1e-15,
+    "demonstration_anisotropy": 1e-6,
+    "scan_maximum_anisotropy": 2.0,
+    "scan_samples": 401
+  },
+  "failure_rule": "Retire exact v10D before data if any allowed nonzero carrier anisotropy widens the physical transverse-traceless characteristic beyond the one-metric null cone.",
+  "mechanism_reset_rule": "V10B, v10C, and v10D are three materially distinct closures of the aether-tidal carrier family failing the common mathematical causality/stability gate. Do not create a v10E counterterm patch; return to mechanism selection.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "exact local spin-2 principal-symbol analysis only"
+  }
+}

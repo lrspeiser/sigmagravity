@@ -1,5 +1,33 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v10D tensor-cone falsification and mechanism reset
+
+Exact v10D fails the decisive nonzero-background metric characteristic gate.
+For an axisymmetric carrier
+`P=diag(p_perp,p_perp,p_parallel)` and a wave along its symmetry axis, axial
+spin makes the two TT metric polarizations an exact invariant sector. The
+unit-determinant field redefinition that diagonalizes the carrier time
+derivative leaves a spatial connection residual with
+`R:R=(p_parallel-p_perp)^2(h:h)/2`. Hence
+
+`c_TT^2=1+c_P^2(p_parallel-p_perp)^2`.
+
+Every nonzero anisotropy is outside the one-metric null cone. At the frozen
+`c_P^2=3/11`, an illustrative anisotropy of only `1e-6` already gives a
+relative speed excess `1.3636e-13`, above the declared `1e-15` tolerance. The
+stronger failure is analytic and amplitude-independent: the theory admits
+arbitrary anisotropic carrier backgrounds, and all nonzero values are
+superluminal. The aether exponential, lapse, scalar, and vector constraints do
+not enter this spin-two sector.
+
+V10B's instantaneous auxiliary tail, v10C's finite-amplitude vector ghost, and
+v10D's widened TT cone are three materially distinct closures of the same
+aether-tidal carrier mechanism failing Action 12's common
+causality/stability gate. The preregistered three-closure rule is triggered:
+do not patch a v10E; reset mechanism selection. No observational product or
+holdout was opened. See
+[`SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md`](SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md).
+
 ## 2026-08-04 Sigma v10D aether-rest ADM rank
 
 The nonlinear local Legendre-rank subgate passes. In an aether-rest ADM frame,

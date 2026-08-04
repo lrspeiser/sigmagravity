@@ -1,5 +1,11 @@
 # Sigma v10D aether-rest ADM Legendre-rank gate
 
+> **Superseded gate result (2026-08-04):** the exact nonzero-carrier TT
+> characteristic is `c_TT^2=1+c_P^2(p_parallel-p_perp)^2`, so anisotropic
+> carrier backgrounds are outside the one-metric null cone. Exact v10D is
+> retired and the aether-tidal carrier family is reset. See
+> [`SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md`](SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md).
+
 ## Decision
 
 V10D passes its aether-rest nonlinear ADM Legendre-rank subgate. The carrier's

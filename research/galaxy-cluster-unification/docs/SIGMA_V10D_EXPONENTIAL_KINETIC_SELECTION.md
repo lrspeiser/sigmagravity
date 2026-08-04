@@ -1,5 +1,12 @@
 # Sigma v10D exponential kinetic selection
 
+> **Superseded gate result (2026-08-04):** the exponential removes v10C's
+> finite-amplitude vector ghost, but it does not enter the exact spin-two
+> sector. An anisotropic carrier gives
+> `c_TT^2=1+c_P^2(p_parallel-p_perp)^2`, outside the physical metric cone.
+> Exact v10D is retired and the aether-tidal family is reset. See
+> [`SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md`](SIGMA_V10D_TENSOR_CONE_FALSIFICATION.md).
+
 ## Decision
 
 Sigma v10D passes a narrow, theory-only successor-selection gate. It removes
