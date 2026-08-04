@@ -1,0 +1,104 @@
+{
+  "protocol_version": "SIGMA-V17A-GAIA-ASTROMETRY-1.0.1",
+  "status": "frozen metadata correction after the wrong-field Gaia cone exposed the preregistered PLCK center transcription error, before querying the corrected PLCK cone, matching any PLCK X-ray source, or constructing any temperature map; the unchanged AS295 match outcomes are already known",
+  "metadata_correction": {
+    "reason": "The reduction protocol transcribed PLCK G287 as 10:50:49.40 +28:04:44.30. The downloaded Chandra event WCS is centered near 11:50 -28 degrees, and the Chandra X-ray Center lists 11:50:49.2 -28:04:37. This is an object-coordinate transcription error, not a fitted astrometric or physics correction.",
+    "authoritative_public_source": "https://chandra.harvard.edu/photo/2025/g287/",
+    "wrong_center_ra_deg": 162.70583333333335,
+    "wrong_center_dec_deg": 28.07897222222222,
+    "wrong_field_catalog_preserved_as": "data/raw/sigma_v17_gaia_dr3/PLCKG287_wrong_center_gaia_dr3.csv",
+    "corrected_center_ra_deg": 177.70583333333335,
+    "corrected_center_dec_deg": -28.07897222222222,
+    "matching_or_temperature_outcome_used_to_choose_corrected_center": false,
+    "matching_rules_changed": false
+  },
+  "purpose": "Register every frozen Chandra observation to the Gaia DR3 ICRS frame with one translation-only rule before constructing the v17A temperature maps.",
+  "parent_reduction_protocol": "configs/sigma_v17a_chandra_reduction.json",
+  "cleaning_report": "results/sigma_v17a_chandra_cleaning/report.json",
+  "archive": {
+    "release": "Gaia DR3",
+    "tap_sync_url": "https://gea.esac.esa.int/tap-server/tap/sync",
+    "table": "gaiadr3.gaia_source",
+    "format": "csv",
+    "cone_radius_deg": 0.4,
+    "columns": [
+      "source_id",
+      "designation",
+      "ref_epoch",
+      "ra",
+      "dec",
+      "ra_error",
+      "dec_error",
+      "pmra",
+      "pmdec",
+      "pmra_error",
+      "pmdec_error",
+      "astrometric_params_solved",
+      "phot_g_mean_mag",
+      "ruwe",
+      "duplicated_source",
+      "visibility_periods_used"
+    ],
+    "selection": "all Gaia DR3 sources in the frozen cone; no magnitude, proper-motion, or RUWE cut",
+    "raw_directory": "data/raw/sigma_v17_gaia_dr3"
+  },
+  "clusters": {
+    "AS295": {
+      "center_ra_deg": 41.37358333333333,
+      "center_dec_deg": -53.037325
+    },
+    "PLCKG287": {
+      "center_ra_deg": 177.70583333333335,
+      "center_dec_deg": -28.07897222222222
+    }
+  },
+  "epoch_propagation": {
+    "target_epoch": "midpoint of DATE-OBS and DATE-END for each ObsID, expressed as Julian year",
+    "five_or_six_parameter_sources": "linear tangent-plane propagation using pmra=mu_alpha*cos(dec) and pmdec from Gaia DR3",
+    "two_parameter_sources": "retain the Gaia DR3 reference-epoch position and uncertainty; do not invent a proper motion",
+    "parallax_and_perspective_acceleration": "not applied because the frozen 2-arcsec match radius and 0.5-arcsec residual gate dominate these terms for this use"
+  },
+  "xray_source_selection": {
+    "minimum_source_significance": 3.0,
+    "minimum_net_counts_exclusive": 0.0,
+    "catalog": "the already frozen binsize-2 0.5-7 keV wavdetect catalog",
+    "additional_morphology_or_brightness_cut": "none"
+  },
+  "matching": {
+    "tool": "CIAO reproject_aspect 4.18.0",
+    "method": "trans",
+    "initial_radius_arcsec": 2.0,
+    "residual_limit_arcsec": 0.5,
+    "residual_type": 0,
+    "residual_factor": 0.0,
+    "minimum_final_source_pairs": 3,
+    "maximum_final_radial_rms_arcsec": 0.5,
+    "rotation_deg": 0.0,
+    "scale": 1.0,
+    "shear": 0.0,
+    "failure_rule": "Fail the cluster map if any contributing ObsID has fewer than three final source pairs or exceeds the final RMS gate; do not widen the radius, relax the residual gate, or fit rotation/scale."
+  },
+  "application": {
+    "update": "apply the fitted transform to every aspect solution for the ObsID, then regenerate science and blank-sky event sky coordinates from the corrected aspect solution",
+    "relative_check": "after absolute correction, verify all contributing ObsIDs against the greatest-cleaned-exposure reference observation for the cluster",
+    "reference_observation": "greatest cleaned exposure, with lower ObsID breaking a tie",
+    "event_image_inspection_before_gate": false
+  },
+  "integrity": {
+    "count_only_service_check_before_freeze": {
+      "cluster": "AS295",
+      "radius_deg": 0.35,
+      "returned_count": 1622,
+      "positions_or_matches_returned": false
+    },
+    "state_before_1_0_1_correction": {
+      "wrong_PLCK_cone_rows_downloaded": 1297,
+      "wrong_PLCK_Xray_matches": 0,
+      "AS295_matching_already_run": true,
+      "AS295_obsid_16282_final_pairs": 2,
+      "AS295_rules_or_catalog_changed_by_1_0_1": false
+    },
+    "lensing_target_opened": false,
+    "temperature_map_constructed": false
+  }
+}

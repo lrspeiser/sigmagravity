@@ -1,0 +1,80 @@
+{
+  "protocol_version": "SIGMA-V17D-THERMAL-STRESS-MAP-1.0.0",
+  "status": "frozen before any regional temperature result, thermal-stress map, v17 thermal inverse coefficient, or v17 lensing score existed",
+  "purpose": "Construct outcome-blind projected gas random-stress source maps from the frozen registered baryon maps and independently fitted Chandra temperatures, before opening the spent lensing residual.",
+  "parents": {
+    "dynamical_stress_gate": "configs/sigma_v17_dynamical_stress_data_gate.json",
+    "dynamical_stress_gate_sha256": "c2705e1078711ba50c10dc9e5d1f2ff67d45aeccb8eb0787b7ae016bfc0a2417",
+    "static_spent_baseline": "configs/sigma_v16b_spent_boundary_interior.json",
+    "static_spent_baseline_sha256": "b290c084590363a6df5d0cfc57b4a97778684af057f7fa807bc6525f2b534bee",
+    "spectral_protocol": "configs/sigma_v17c_spectral_temperature.json",
+    "spectral_protocol_sha256": "7ec70d8a996329e18e04b94ddbd0ec9366562881d57c9972374442b01f179c20"
+  },
+  "authorization": {
+    "required_regional_temperature_status": "both_regional_temperature_gates_passed",
+    "required_flag": "thermal_stress_construction_authorized=true",
+    "minimum_passing_regions_per_cluster": 12,
+    "prohibition": "Do not construct any thermal source if either cluster fails the frozen regional gate."
+  },
+  "physical_proxy": {
+    "dimensionless_equation": "q_total(x)=kappa_gas(x) [k_B T_X(x)/(mu m_p c^2)]",
+    "response_equation": "q_contrast(x)=kappa_gas(x) [k_B (T_X(x)-T_global)/(mu m_p c^2)] inside resolved bins and zero outside",
+    "gas_convergence": "kappa_gas=Sigma_gas/Sigma_critical using the registered baryon-map lens redshift and source redshift z_s=2.0",
+    "mean_molecular_weight_mu": 0.61,
+    "mu_interpretation": "fixed fully ionized intracluster-plasma conversion factor, not a gravity parameter",
+    "temperature_unit": "keV interpreted as k_B T",
+    "source_redshift": 2.0
+  },
+  "temperature_assignment": {
+    "inside_resolved_bin": "use that bin's primary best-fit regional temperature whether or not its uncertainty or reduced-statistic subgate passed; never select bins by fitted outcome",
+    "outside_resolved_bin": "use the same cluster's primary integrated best-fit temperature for q_total",
+    "contrast_outside_resolved_bin": 0.0,
+    "nonfinite_best_fit_rule": "fail construction rather than impute, merge, smooth, or drop the bin",
+    "bin_sampling": "nearest integer pixel in the frozen celestial-WCS binmap after transforming each registered baryon-grid point from the baryon-map center and physical axis",
+    "coordinate_scale": "use the registered baryon map's lens redshift because its physical kpc axis was built at that redshift"
+  },
+  "feature_construction": {
+    "registered_baryon_map_radius_kpc": 1800.0,
+    "target_half_width_kpc": 350.0,
+    "target_grid_points": 193,
+    "analysis_radius_kpc": 200.0,
+    "gaussian_scales_kpc": [25.0, 75.0, 150.0],
+    "fourier_padding_factor": 2,
+    "one_metric_triplet": "each smoothed scalar source generates convergence, shear_1, and shear_2 through the same E-mode potential operator",
+    "families": {
+      "thermal_total": "three q_total one-potential triplets at 25, 75, and 150 kpc",
+      "thermal_component": "thermal_total plus three q_contrast one-potential triplets at the same scales"
+    }
+  },
+  "clusters": {
+    "AS295": {
+      "baryon_map": "results/p0641_registered_cluster_baryon_maps/maps/AS295_baryons.npz",
+      "baryon_map_sha256": "40db1a950ece8a641a5380eb5705bd6158ed1d98e1d9a01d1c99b5e67a0d3a2c",
+      "temperature_binmap": "results/sigma_v17b_temperature_regions/frozen_region_products/AS295/images/binmap.fits",
+      "temperature_binmap_sha256": "cf29c7da8755552f010019b1701bbba632ebcf3604b0fea2ccd4c9babba26fc8",
+      "expected_region_count": 29
+    },
+    "PLCKG287": {
+      "baryon_map": "results/p0641_registered_cluster_baryon_maps/maps/PLCKG287_baryons.npz",
+      "baryon_map_sha256": "ae1ae809f1a8951b9c930dc713b005bfcb114bdebe8d578d349ae7c722c6d0a7",
+      "temperature_binmap": "results/sigma_v17b_temperature_regions/frozen_region_products/PLCKG287/images/binmap.fits",
+      "temperature_binmap_sha256": "082ba8bfcdaf038a4538e4a3cddba8ee1fa9dc59ae388aa2ef9ee1c62546bcaf",
+      "expected_region_count": 21
+    }
+  },
+  "integrity": {
+    "regional_temperature_result_existed_at_freeze": false,
+    "thermal_stress_constructed_at_freeze": false,
+    "v17_lensing_target_opened": false,
+    "per_cluster_normalization": false,
+    "per_cluster_scale_or_orientation": false,
+    "object_type_label": false
+  },
+  "claim_boundary": [
+    "This map tests whether independently observed gas random stress carries transferable spatial information; it is not a derived gravity law.",
+    "The later inverse coefficient is a diagnostic coefficient, not a universal gravity constant.",
+    "The bin temperatures are projected single-temperature plasma fits and do not reconstruct the full three-dimensional stress tensor.",
+    "The same source, scales, and one-potential operator must be used in both clusters.",
+    "No spent lensing target may be read until the source maps and their hashes have been written."
+  ]
+}

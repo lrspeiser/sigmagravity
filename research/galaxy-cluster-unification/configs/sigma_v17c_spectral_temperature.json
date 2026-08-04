@@ -1,0 +1,144 @@
+{
+  "protocol_version": "SIGMA-V17C-SPECTRAL-TEMPERATURE-1.0.6",
+  "status": "frozen with pre-spectrum CIAO FOV-copy, explicit on-CCD response-reference, blank-sky detector-geometry metadata, and execution-only independent-cell concurrency corrections after the v17B spatial and HI4PI gates passed and before fitting any temperature or abundance, constructing any thermal-stress map, or reading any v17 lensing score",
+  "pre_spectrum_execution_correction": "A commissioning-only wcs_update check established that CIAO edits FITS FOV tables in place and ignores outfile. The one touched generated FOV was preserved and restored from a fresh chandra_repro run with the unchanged frozen configuration; all 131 other repro products remain byte-identical to their report. Version 1.0.1 requires copying each FOV to the spectral work directory before translating that copy in place. No spectrum or response had been created, no temperature or abundance had been fitted, and no scientific parameter changed.",
+  "pre_response_execution_correction": "The first integrated specextract invocation rejected resp_pos=REGION because CIAO used the first shape in the union of frozen contour pixels, which lay on a different CCD than the filtered extraction. Version 1.0.2 then established that resp_pos=CENTROID is the centroid of every image pixel encompassed by the multi-shape region rather than the centroid of the already CCD-filtered events, so that location could also lie on a different CCD. Neither invocation created a source PHA, background PHA, ARF, or RMF. Version 1.0.3 supplies refcoord at the arithmetic mean sky position of the actual 0.5-7.0 keV source events after the already frozen FOV, CCD, and region filters. A mean of points on one ACIS CCD lies on that CCD, and the event-file WCS converts it to ICRS before specextract. This correction uses no temperature, lensing target, gravity residual, or tunable threshold. All scientific extraction, background, response-weighting, grouping, and fit rules remain unchanged, and 1.0.3 uses a fresh output namespace.",
+  "pre_background_geometry_execution_correction": "The first version 1.0.3 invocation proved that the explicit refcoord maps to the requested CCD in the registered science event file, but CIAO also validates it against the reprojected CALDB blank-sky event header even when bkgresp=no. That blank-sky header is intentionally marked DETNAM=Merged, lacks the matched observation SIM_Z, has ROLL_NOM=0, and lacks OBS_ID; consequently the same celestial coordinate mapped spuriously to another CCD before any spectrum or response was written. Version 1.0.4 copies each blank-sky event file to a fresh spectral namespace and changes only OBS_ID and the standard detector-geometry pointing keywords to their values in the matched registered science event file. Event rows, filters, BKGSCALn values, exposures, regions, response weighting, grouping, fit rules, and all scientific parameters remain unchanged. The runner verifies row-count identity and the requested source/background CCD mapping before specextract.",
+  "pre_parallel_execution_correction": "Version 1.0.4 successfully completed the first ObsID/CCD source PHA, blank-sky PHA, weighted ARF, and weighted RMF and had written all four products for the second cell when measured response-construction time established that the eleven independent cells would require several hours sequentially. The v1.0.4 parent was already stopped and its active child was terminated only during prolonged CIAO history bookkeeping after those four second-cell files existed; that partial namespace is abandoned and no v1.0.4 product is reused. No temperature or abundance was fitted. Version 1.0.5 uses a fresh output namespace and executes at most four independent ObsID/CCD specextract processes concurrently. Each cell has a unique PFILES, ASCDS_WORK_PATH, and TMPDIR and distinct output files; specextract itself remains parallel=no and nproc=1. Task order, events, filters, response reference, response weighting, background convention, grouping, fit rules, and scientific parameters are unchanged.",
+  "pre_v105_documentation_freeze_correction": "The v1.0.5 runner began only the deterministic event-count and coordinate-planning pass. While it was still planning and before any v1.0.5 spectrum or response existed, the provenance wording for the abandoned v1.0.4 run was corrected to state precisely where its second child was terminated. Because that text changes the config hash, v1.0.5 was stopped before extraction and v1.0.6 uses a fresh namespace. This is documentation-only; no extraction or scientific setting changed and no temperature, abundance, thermal-stress map, or lensing score was read.",
+  "purpose": "Extract and fit one integrated and one frozen regional Chandra temperature data product for AS295 and PLCKG287 under identical detector, response, background, grouping, and likelihood rules.",
+  "execution": {
+    "work_namespace": "spectral_v17c_v106",
+    "external_parallel_cells": 4,
+    "cell_isolation": "unique PFILES, ASCDS_WORK_PATH, and TMPDIR for every cluster/ObsID/CCD cell",
+    "specextract_internal_parallelism": "parallel=no and nproc=1"
+  },
+  "parents": {
+    "reduction_config": "configs/sigma_v17a_chandra_reduction.json",
+    "reduction_config_sha256": "db6c8e671f4057e778800fde4aa048b93ac633a3fa38c675960a36736b699f70",
+    "temperature_region_report": "results/sigma_v17b_temperature_regions/report.json",
+    "temperature_region_report_sha256": "e58698a2d14c124908810fc54ed829cf64834c4ec6d01fa58fc88faa8d0ee75a",
+    "spatial_visual_audit": "results/sigma_v17b_temperature_regions/audit/visual_audit.json",
+    "spatial_visual_audit_sha256": "1b3e030fe630ba025a20d945d52dc08f05d1cb91ad02e44ba8eca315010a1c1a",
+    "hi4pi_provenance": "results/sigma_v17c_hi4pi_acquisition/provenance.json",
+    "hi4pi_provenance_sha256": "1ecd51f5a77b8662f631f003cfd965d1643acaabb2180588bf4ebff20ab9de53",
+    "response_commissioning_restoration": "results/sigma_v17c_response_commissioning/restoration.json",
+    "response_commissioning_restoration_sha256": "306265fc180ea835faa3a3e83596f25304e01492af6620239509f44f8da5adfb"
+  },
+  "clusters": {
+    "AS295": {
+      "redshift": 0.3001,
+      "obsids": [12260, 16127, 16282, 16524, 16525, 16526],
+      "frozen_region_count": 29,
+      "weighted_HI4PI_nH_cm2": 3.31e20,
+      "published_global_temperature_keV_validation_only": 9.51
+    },
+    "PLCKG287": {
+      "redshift": 0.383,
+      "obsids": [17165, 17166, 17494, 17495, 18807],
+      "frozen_region_count": 21,
+      "weighted_HI4PI_nH_cm2": 6.94e20,
+      "published_global_temperature_keV_validation_only": 12.73
+    }
+  },
+  "aperture": {
+    "integrated": "the exact union of every accepted v17B contour region for the cluster; do not substitute a new circle or edit a region",
+    "regional": "each frozen v17B CIAO region file unchanged",
+    "field_of_view": "intersect every source and blank-sky extraction with the corresponding Gaia-translated observation FOV and CCD_ID"
+  },
+  "extraction": {
+    "tool": "CIAO specextract 4.18.2",
+    "unit": "each ObsID and CCD having at least one 0.5-7.0 keV source event in the FOV-intersected frozen region",
+    "source_events": "the v17B point-source-excluded, Gaia-registered, reference-reprojected science events",
+    "background_events": "the matching v17B point-source-excluded, Gaia-registered, reference-reprojected CALDB blank-sky events",
+    "background_geometry_metadata": "a spectral-work copy with OBS_ID, DETNAM, SIM_X/Y/Z, RA/DEC/ROLL_PNT, RA/DEC/ROLL_NOM, and DY/DZ/DTH_AVG copied from the matched registered science event header; event rows and BKGSCALn values unchanged",
+    "aspect": "the observation-specific Gaia-corrected aspect solution list",
+    "detector_mask": "the observation-specific chandra_repro mask",
+    "bad_pixel_file": "the observation-specific chandra_repro bad-pixel product",
+    "bkgresp": false,
+    "weight_arf": true,
+    "weight_rmf": true,
+    "correctpsf": false,
+    "response_position": "explicit refcoord at the arithmetic mean sky position of the actual 0.5-7.0 keV source events after the frozen FOV, CCD, and region filters; converted to ICRS with that registered event file's WCS; resp_pos is ignored when refcoord is supplied",
+    "energy_wmap_eV": [500, 7000],
+    "binwmap": "det=8",
+    "binarfwmap": 1,
+    "response_energy_keV": [0.3, 11.0, 0.01],
+    "source_grouping_during_extraction": "NONE",
+    "background_grouping_during_extraction": "NONE",
+    "parallel_inside_specextract": false,
+    "background_scaling": "accept the CIAO 4.18.2 blank-sky convention bkg_AREASCAL=1/BKGSCALn; do not scale events or edit AREASCAL",
+    "empty_coverage_rule": "skip only an ObsID/CCD/region cell with zero source-band events after the frozen FOV and region filters; record every skip before fitting"
+  },
+  "combination": {
+    "tool": "CIAO combine_spectra 4.18.2",
+    "method": "sum",
+    "bscale_method": "asca",
+    "exp_origin": "pha",
+    "group_after_combination": {
+      "tool": "dmgroup",
+      "grouptype": "NUM_CTS",
+      "minimum_counts": 25
+    }
+  },
+  "model": {
+    "engine": "Sherpa 4.18.0 with XSPEC 12.14.0k",
+    "expression": "xstbabs * xsapec",
+    "abundance_table": "aspl (Asplund et al. 2009)",
+    "fit_energy_keV": [0.5, 7.0],
+    "statistic": "chi2xspecvar",
+    "temperature_keV": {
+      "initial": 8.0,
+      "minimum": 1.0,
+      "maximum": 30.0
+    },
+    "abundance_solar": {
+      "integrated_initial": 0.3,
+      "minimum": 0.0,
+      "maximum": 2.0,
+      "regional_rule": "fixed to the same cluster's integrated best-fit value before any regional fit"
+    },
+    "normalization": {
+      "initial_rule": "max(1e-8, 0.01 times the background-unsubtracted 0.5-7.0 count rate in counts per second)",
+      "minimum": 1e-10,
+      "maximum": 1.0
+    },
+    "fixed": [
+      "redshift",
+      "weighted HI4PI hydrogen column",
+      "integrated abundance during regional fits"
+    ],
+    "optimization": "levmar; if it fails or returns a non-finite statistic, run neldermead and then one levmar polish from that result",
+    "uncertainty": "Sherpa conf 68-percent profile-likelihood interval for temperature with every other free parameter profiled",
+    "no_fit_selection": "Never drop an observation, CCD, energy interval, or region because its fitted temperature is surprising."
+  },
+  "gates": {
+    "integrated": {
+      "finite_temperature_abundance_and_intervals": true,
+      "maximum_reduced_statistic": 1.5,
+      "maximum_fractional_difference_from_published_temperature": 0.2,
+      "failure_rule": "fail the reduction rather than alter absorption, energy band, background normalization, abundance table, or model"
+    },
+    "regional": {
+      "finite_temperature_and_interval": true,
+      "maximum_fractional_68_percent_half_width": 0.5,
+      "maximum_reduced_statistic": 1.5,
+      "minimum_passing_regions_per_cluster": 12,
+      "failure_rule": "retain and report every failed region; do not merge, split, smooth, or refit it with a different model"
+    }
+  },
+  "robustness_after_primary_freeze": {
+    "local_background": "repeat where coverage permits but never use it to select the primary map",
+    "regional_abundance_free": "repeat only where identifiable and never use it to select the primary map",
+    "map_pixel_scale_arcsec": 0.492,
+    "maximum_scored_observable_change": 0.02
+  },
+  "integrity": {
+    "spectrum_extracted_at_freeze": false,
+    "response_constructed_at_freeze": false,
+    "temperature_or_abundance_fit_at_freeze": false,
+    "thermal_stress_constructed_at_freeze": false,
+    "lensing_target_opened": false,
+    "physics_parameter_changed": false
+  }
+}

@@ -124,3 +124,20 @@ def test_v17_stress_prior_art_is_not_overclaimed_as_new() -> None:
     assert {"GR-EINSTEIN", "FRT-GRAVITY", "EMSG"}.issubset(
         set(v17["published_overlap_ids"])
     )
+
+
+def test_v17d_thermal_proxy_retains_its_stress_energy_ancestry() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17d = protocols["sigma_v17d_thermal_stress_map.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17d["formula_fragments"]
+    )
+
+    assert "q_total" in fragment_text
+    assert "q_contrast" in fragment_text
+    assert {"GR-EINSTEIN", "FRT-GRAVITY", "EMSG"}.issubset(
+        set(v17d["published_overlap_ids"])
+    )

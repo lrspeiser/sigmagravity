@@ -1,0 +1,93 @@
+{
+  "protocol_version": "SIGMA-V17B-TEMPERATURE-REGIONS-1.0.2",
+  "status": "frozen with recorded CIAO execution-domain corrections after merged count, exposure, and background construction and the deterministic centroid calculation, but before visual image inspection, contour-region selection, spectral fitting, temperature inference, thermal-stress construction, or reading any v17 stress or lensing score",
+  "pre_image_execution_correction": "The first blank-sky reproject_events invocation rejected random=-1 because CALDB blank-sky events have no TIME column. It created no output. Version 1.0.1 keeps aspect=none and random=-1 for science events to preserve EDSER coordinates, and uses random=integer ObsID for blank-sky events as the already frozen deterministic seed. No registered image, merged image, centroid, region, spectrum, temperature, or v17 score had been produced or inspected.",
+  "post_merge_execution_correction": "The first 1.0.1 mask construction reached the frozen merged images and deterministic centroid but stopped before contour binning because CIAO dmimgcalc 4.18 converted a casted Boolean image expression into a null zero-dimensional dataset. Version 1.0.2 replaces only that representation with the algebraically equivalent numerical Heaviside expression, using a relative 1e-12 inclusion epsilon below the real4 exposure-map resolution so pixels exactly at the already frozen >= threshold remain included. The run had not produced or inspected a contour region, spectrum, temperature, thermal-stress map, or v17 lensing score. No scientific parameter or rule changed, and 1.0.2 uses a fresh output namespace.",
+  "purpose": "Construct one comparable set of point-source-excluded, background-aware contour bins for AS295 and PLCKG287 under the already frozen v17A spectral rules.",
+  "parent_reduction_protocol": "configs/sigma_v17a_chandra_reduction.json",
+  "astrometry_protocol": "configs/sigma_v17a2_hierarchical_astrometry.json",
+  "astrometry_report": "results/sigma_v17a2_hierarchical_astrometry/report.json",
+  "registered_input": {
+    "reprojection": "CIAO reproject_events with aspect=none; science uses random=-1 to preserve EDSER event positions, while TIME-less blank-sky events use deterministic random=integer ObsID as required by CIAO; only the tangent plane changes to the Gaia-anchored reference event",
+    "point_sources": "exclude the frozen per-ObsID 1.5-times-wavdetect ellipses from science and corresponding blank-sky events before reprojection",
+    "reference_obsids": {
+      "AS295": 16524,
+      "PLCKG287": 17494
+    }
+  },
+  "coordinates": {
+    "cosmology": "Planck18",
+    "native_pixel_arcsec": 0.492,
+    "output_pixel_arcsec": 0.984,
+    "image_binsize_native_pixels": 2,
+    "grid_half_width_kpc": 400.0,
+    "analysis_radius_kpc": 350.0,
+    "clusters": {
+      "AS295": {
+        "redshift": 0.3001,
+        "initial_center_ra_deg": 41.37358333333333,
+        "initial_center_dec_deg": -53.037325,
+        "kpc_per_arcsec_Planck18": 4.59823408036604
+      },
+      "PLCKG287": {
+        "redshift": 0.383,
+        "initial_center_ra_deg": 177.70583333333335,
+        "initial_center_dec_deg": -28.07897222222222,
+        "kpc_per_arcsec_Planck18": 5.395621970789672,
+        "metadata_correction_source": "configs/sigma_v17a_gaia_astrometry.json"
+      }
+    }
+  },
+  "science_image": {
+    "energy_keV": [0.5, 7.0],
+    "effective_energy_keV": 2.3,
+    "exposure_tool": "CIAO flux_obs 4.18.2",
+    "exposure_map": "sum of per-ObsID effective-area-times-exposure maps on the common tangent grid",
+    "minimum_relative_exposure": 0.5
+  },
+  "blank_sky": {
+    "normalization": "use each frozen BKGSCALn value once for its matching CCD_ID; do not rescale events or apply a second AREASCAL factor",
+    "scaled_background_image": "sum over ObsID and CCD of BKGSCALn times the raw blank-sky counts image",
+    "variance_image": "sum over ObsID and CCD of BKGSCALn squared times the raw blank-sky counts image",
+    "noise_map": "sqrt(science counts plus blank-sky variance)",
+    "background_exposure_map_for_contbin": "the same science exposure map because the background image is already scaled into equivalent science counts"
+  },
+  "centroid": {
+    "weight": "positive part of (science-background)/exposure within the current 350-kpc aperture and the relative-exposure mask",
+    "initialization": "the corrected published X-ray center",
+    "convergence_output_pixels": 0.1,
+    "maximum_iterations": 100,
+    "failure_rule": "fail rather than alter the aperture or weighting rule"
+  },
+  "contour_binning": {
+    "implementation": "Jeremy Sanders original C++ contbin",
+    "source_url": "https://github.com/jeremysanders/contbin.git",
+    "commit": "420d390a889750ec81f0888989912a86f6169c00",
+    "version": "1.7",
+    "contbin_sha256": "e26afa6ce36d15abca5a69f1a622b43653da25d6b2c52721019409f4dd1203d8",
+    "accumulate_smooth_sha256": "3eb7535f50106dc8862bf2d55f7f3afecf9d06e27ce4d59057c19983f297238f",
+    "make_region_files_sha256": "cfa517a69630b4294259c439ba257be8435eba4e1ba8a83ace1a5819d698082c",
+    "linked_cfitsio": "/home/henry/miniforge3/envs/sigma-ciao-4.18/lib/libcfitsio.so.10",
+    "target_signal_to_noise": 40.0,
+    "smoothing_signal_to_noise": 20.0,
+    "geometric_constraint": true,
+    "geometric_constraint_factor": 1.5,
+    "mask": "inside the iterated 350-kpc aperture with relative exposure at least 0.5; point-source photons were already excluded per observation",
+    "minimum_net_counts_per_region": 1300.0,
+    "source_fraction_definition": "(science_counts-scaled_background_counts)/science_counts",
+    "minimum_source_fraction": 0.8,
+    "minimum_valid_regions": 12,
+    "failure_rule": "do not change S/N, smoothing, aperture, exposure cut, count cut, source-fraction cut, or geometric constraint for one cluster"
+  },
+  "integrity": {
+    "registered_event_images_inspected_at_freeze": false,
+    "merged_image_values_constructed_before_version_1_0_2": true,
+    "merged_images_visually_inspected_at_freeze": false,
+    "deterministic_centroid_computed_before_version_1_0_2": true,
+    "contour_region_constructed_at_freeze": false,
+    "temperature_map_constructed_at_freeze": false,
+    "lensing_target_opened": false,
+    "published_temperature_used_for_region_selection": false,
+    "physics_or_temperature_parameter_changed": false
+  }
+}

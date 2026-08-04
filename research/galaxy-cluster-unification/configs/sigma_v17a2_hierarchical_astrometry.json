@@ -1,0 +1,53 @@
+{
+  "protocol_version": "SIGMA-V17A2-HIERARCHICAL-ASTROMETRY-1.0.0",
+  "status": "frozen after the direct-per-ObsID Gaia gate failed and before any relative Chandra-to-Chandra cross-match, any astrometric transform application, any registered event-image inspection, or any temperature-map construction",
+  "purpose": "Replace the falsified requirement that every short Chandra exposure independently contain three Gaia counterparts with a standard two-level astrometric chain: one Gaia-anchored observation per cluster and translation-only relative registration of every other observation to that anchor.",
+  "parent_direct_protocol": "configs/sigma_v17a_gaia_astrometry.json",
+  "parent_direct_report": "results/sigma_v17a_chandra_astrometry/report.json",
+  "parent_direct_report_sha256": "7e5eb8f0352112d6138c214841fe14bcf4dde7dcc59b6c12df135cba06201fa0",
+  "parent_failure": {
+    "formal_status": "frozen_Gaia_DR3_astrometric_gate_failed",
+    "failed_obsids": [16282, 17166, 17495, 18807],
+    "decisive_observation": "PLCKG287 ObsID 18807 had only two initial Gaia coincidences inside the frozen 2-arcsec radius, so the direct three-Gaia-pair gate cannot pass without changing its source or radius rules.",
+    "claim_boundary": "This is a data-registration design failure, not evidence for or against the thermal-stress gravity source."
+  },
+  "reference_selection": {
+    "rule": "greatest cleaned exposure within each cluster, with lower ObsID breaking an exact tie",
+    "resolved_reference_obsids": {
+      "AS295": 16524,
+      "PLCKG287": 17494
+    },
+    "reference_must_pass_original_Gaia_gate": true,
+    "reference_Gaia_transform": "reuse the content-addressed transform from the failed direct protocol; do not refit it"
+  },
+  "relative_matching": {
+    "input_sources": "the unchanged binsize-2 0.5-7 keV wavdetect catalogs with SRC_SIGNIFICANCE>=3 and NET_COUNTS>0",
+    "reference_sources": "the selected source catalog of the cluster reference ObsID after applying only its frozen Gaia translation to the catalog WCS",
+    "tool": "CIAO wcs_match 4.18.0",
+    "method": "trans",
+    "initial_radius_arcsec": 2.0,
+    "residual_limit_arcsec": 0.5,
+    "residual_type": 0,
+    "residual_factor": 0.0,
+    "minimum_final_source_pairs": 3,
+    "maximum_final_radial_rms_arcsec": 0.5,
+    "rotation_deg": 0.0,
+    "scale": 1.0,
+    "shear": 0.0,
+    "failure_rule": "Fail the cluster map if the Gaia anchor or any relative observation has fewer than three final pairs or exceeds the 0.5-arcsec RMS gate; do not widen the radius, lower source significance, or fit rotation/scale."
+  },
+  "application": {
+    "reference_observation": "apply its already frozen Gaia translation",
+    "other_observations": "apply only their frozen relative translation into the Gaia-anchored reference frame",
+    "files": "update every aspect solution and copied clean science/blank-sky event WCS; set ASOLFILE to the corrected aspect list",
+    "derived_products": "recreate images, exposure maps, FOVs, masks, and spectra after registration",
+    "no_transform_application_before_all_matches_pass": true
+  },
+  "integrity": {
+    "relative_match_outcomes_known_at_freeze": false,
+    "registered_event_images_inspected": false,
+    "temperature_map_constructed": false,
+    "lensing_target_opened": false,
+    "physics_or_temperature_parameter_changed": false
+  }
+}

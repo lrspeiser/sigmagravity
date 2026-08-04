@@ -1,0 +1,62 @@
+{
+  "protocol_version": "SIGMA-V17A-CHANDRA-ACQUISITION-1.0.0",
+  "status": "frozen before downloading any analysis-grade event or calibration product",
+  "purpose": "Acquire the public Chandra products needed to reprocess and fit matched AS295 and PLCK G287 temperature maps without using lensing information.",
+  "archive_base_url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid",
+  "raw_directory": "data/raw/sigma_v17_chandra_archive",
+  "maximum_workers": 4,
+  "clusters": {
+    "AS295": {
+      "redshift": 0.300,
+      "obsids": [12260, 16127, 16282, 16524, 16525, 16526]
+    },
+    "PLCKG287": {
+      "redshift": 0.383,
+      "obsids": [17165, 17166, 17494, 17495, 18807]
+    }
+  },
+  "included_products": {
+    "root": ["00README", "oif.fits"],
+    "primary_suffixes": [
+      "_evt2.fits.gz",
+      "_bpix1.fits.gz",
+      "_fov1.fits.gz",
+      "_eph1.fits.gz",
+      "_asol1.fits.gz"
+    ],
+    "secondary_suffixes": [
+      "_evt1.fits.gz",
+      "_flt1.fits.gz",
+      "_msk1.fits.gz",
+      "_mtl1.fits.gz",
+      "_stat1.fits.gz",
+      "_bias0.fits.gz",
+      "_pbk0.fits.gz"
+    ],
+    "secondary_aspect_suffixes": ["_osol1.fits.gz", "_aqual1.fits.gz"],
+    "secondary_ephem_suffixes": ["_eph1.fits.gz"]
+  },
+  "required_roles_per_obsid": {
+    "evt1": 1,
+    "evt2": 1,
+    "bpix1": 1,
+    "fov1": 1,
+    "asol1": 1,
+    "msk1": 1,
+    "pbk0": 1,
+    "bias0": 1
+  },
+  "exclusions": [
+    "V&V and V&V-reference PDF files",
+    "JPEG previews",
+    "derived count images already acquired by P0640",
+    "source catalogs and source images",
+    "grating-only products"
+  ],
+  "claim_boundary": [
+    "All products are detector events or calibration/observation metadata; no lensing target is opened.",
+    "Level-1 events and calibration ancillaries are retained because the Chandra X-ray Center recommends reprocessing with the current CALDB.",
+    "The archived Level-2 event is retained only as a reproducibility control and will not replace current-CALDB reprocessing.",
+    "Successful acquisition does not imply that a valid temperature map or thermal-stress source has been constructed."
+  ]
+}
