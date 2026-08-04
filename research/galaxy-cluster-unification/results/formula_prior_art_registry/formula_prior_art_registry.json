@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 87,
+    "sigma_protocols": 88,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 53,
     "eligibility": {
@@ -5675,6 +5675,18 @@
         "EMSG"
       ],
       "sha256": "47ca3afdddbbcb7b2e19e545ff1d0bf98e499a7b088b87756f132cb1e2edceed"
+    },
+    {
+      "config": "configs/sigma_v17e_thermal_stress_transfer.json",
+      "protocol_version": "SIGMA-V17E-THERMAL-STRESS-TRANSFER-1.0.0",
+      "status": "frozen after the thermal-source protocol and before any regional temperature result, thermal source map, v17 inverse coefficient, or v17 lensing score existed",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "2141f9a3888073d124be0a174af3e4e8b74e8329b7cd7ffc64e14b1dfdd43ee5"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

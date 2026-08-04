@@ -1,0 +1,118 @@
+{
+  "protocol_version": "SIGMA-V17E-THERMAL-STRESS-TRANSFER-1.0.0",
+  "status": "frozen after the thermal-source protocol and before any regional temperature result, thermal source map, v17 inverse coefficient, or v17 lensing score existed",
+  "purpose": "Test whether independently measured projected gas thermal stress adds transferable spatial information to the unchanged v16B internal-baryon baseline on the two spent clusters.",
+  "parents": {
+    "dynamical_stress_gate": "configs/sigma_v17_dynamical_stress_data_gate.json",
+    "dynamical_stress_gate_sha256": "c2705e1078711ba50c10dc9e5d1f2ff67d45aeccb8eb0787b7ae016bfc0a2417",
+    "static_baseline_config": "configs/sigma_v16b_spent_boundary_interior.json",
+    "static_baseline_config_sha256": "b290c084590363a6df5d0cfc57b4a97778684af057f7fa807bc6525f2b534bee",
+    "static_incremental_control_report": "results/sigma_v16d_incremental_boundary_control/report.json",
+    "static_incremental_control_report_sha256": "eca2edc45726e8fc17c1985b02a7292f5e8ade855ffefa2a8ec484b0c8130c67",
+    "thermal_source_protocol": "configs/sigma_v17d_thermal_stress_map.json",
+    "thermal_source_protocol_sha256": "47ca3afdddbbcb7b2e19e545ff1d0bf98e499a7b088b87756f132cb1e2edceed"
+  },
+  "authorization": {
+    "required_thermal_source_status": "both_target_blind_thermal_stress_maps_constructed_and_frozen",
+    "required_source_flags": {
+      "source_maps_frozen": true,
+      "inverse_coefficients_fit": false,
+      "lensing_target_opened": false
+    },
+    "prohibition": "Do not import, construct, or evaluate either spent lensing target until the thermal-source report and both source-product hashes exist and pass validation."
+  },
+  "sample": {
+    "clusters": [
+      "AS295",
+      "PLCKG287"
+    ],
+    "sample_is_spent": true,
+    "source_redshift": 2.0,
+    "base_model": "AQUAL_simple_mu_diagnostic",
+    "target_model": "glafic_v2_compact_halo",
+    "target_interpretation": "same-catalog conventional halo reconstruction used only as a spent inverse target, not raw truth or a holdout"
+  },
+  "static_baseline": {
+    "feature_family": "the unchanged five-scale v16B internal-only one-metric family",
+    "internal_ridge_alpha": 1.0,
+    "expected_symmetric_cross_cluster_full_field_NRMSE": 0.8179409946003608,
+    "maximum_reproduction_error": 1e-09,
+    "rule": "Fit the internal coefficients on the training cluster, transfer them unchanged to the other cluster, and freeze that prediction before fitting any thermal increment."
+  },
+  "thermal_features": {
+    "gaussian_scales_kpc": [
+      25.0,
+      75.0,
+      150.0
+    ],
+    "families": {
+      "thermal_total": [
+        "thermal_total"
+      ],
+      "thermal_component": [
+        "thermal_total",
+        "thermal_contrast"
+      ]
+    },
+    "one_metric_rule": "Every scalar source and scale supplies one convergence/shear_1/shear_2 triplet, and exactly one real coefficient multiplies all three channels.",
+    "object_label_or_regime_switch": false,
+    "per_cluster_normalization_scale_orientation_or_shear": false
+  },
+  "fit": {
+    "intercept": false,
+    "selection": "minimum symmetric leave-one-cluster-out full-field NRMSE on the spent pair",
+    "alpha_tie_break": "smallest alpha",
+    "thermal_ridge_alpha_grid": [
+      0.0,
+      1e-06,
+      0.0001,
+      0.01,
+      1.0,
+      100.0,
+      10000.0,
+      1000000.0,
+      100000000.0,
+      1000000000000.0
+    ],
+    "zero_thermal_limit_alpha": 1000000000000.0,
+    "inverse_coefficients_are_physical_constants": false,
+    "final_theory_claim": false
+  },
+  "resolution_control": {
+    "primary_grid_points": 193,
+    "doubled_linear_resolution_grid_points": 385,
+    "reuse_primary_selected_family_and_alpha": true,
+    "change_metric": "maximum of relative change in symmetric and directional full-field NRMSE and absolute change in directional residual-shear alignment and residual-power closure",
+    "maximum_allowed_change": 0.02
+  },
+  "diagnostic_gates": {
+    "maximum_symmetric_cross_cluster_full_field_NRMSE": 0.5,
+    "minimum_relative_improvement_over_static_baseline": 0.1,
+    "minimum_residual_shear_alignment_cosine_each_direction": 0.5,
+    "minimum_residual_power_closed_each_direction": 0.25,
+    "maximum_zero_thermal_limit_difference": 1e-06,
+    "maximum_map_resolution_change": 0.02
+  },
+  "decision_rule": [
+    "Advance only if the static baseline is reproduced, the zero-thermal limit is valid, and every improvement, absolute-error, alignment, power, and resolution gate passes simultaneously.",
+    "If stage A passes, the next task is to derive the response from one universally coupled healthy action; no inverse coefficient may be promoted to a gravity constant.",
+    "If stage A fails, reject the tested resolved projected gas thermal-stress source at this resolution and do not rescue it with a cluster label, private normalization, fitted orientation, or lens-only law.",
+    "A stage-A failure does not reject collisionless member stress, causal history, line-of-sight structure, or a materially different carrier.",
+    "No outcome on this spent pair validates a theory or authorizes opening an untouched cluster."
+  ],
+  "integrity": {
+    "regional_temperature_result_existed_at_freeze": false,
+    "thermal_source_map_existed_at_freeze": false,
+    "v17_inverse_coefficient_existed_at_freeze": false,
+    "v17_lensing_target_opened_at_freeze": false,
+    "galaxy_cluster_formula_switch": false,
+    "per_cluster_gravity_parameters": 0,
+    "lensing_only_physical_parameters": 0
+  },
+  "claim_boundary": [
+    "This is a source-information diagnostic on two spent, model-derived comparator maps, not a gravity theory and not an observational validation.",
+    "The thermal proxy is constructed from independent baryonic X-ray measurements before the spent target is opened.",
+    "The compared thermal families are predeclared nested hypotheses, not a formula selected from an object label.",
+    "A transferable inverse pattern would still have to emerge from one action governing both massive matter and photons, pass galaxy and raw multi-cluster lensing holdouts, and satisfy Solar-System and stability constraints."
+  ]
+}
