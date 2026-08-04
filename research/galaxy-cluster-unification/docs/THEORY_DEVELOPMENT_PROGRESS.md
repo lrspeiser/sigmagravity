@@ -1,5 +1,33 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v17F root-scale propagator freeze
+
+Before any regional temperature, thermal source map, v17E target score, or
+v17F result existed, the conditional reduction from source discovery to one
+scale equation was frozen. V17F can run only if every v17E gate passes. It
+replaces the flexible three-scale thermal interpolation with
+
+$$
+(1-L_\Sigma^2\nabla_\perp^2)s_\Sigma=q_b,
+\qquad
+\Delta\kappa_\Sigma=\beta_\Sigma s_\Sigma,
+$$
+
+and derives both shear components from the same E-mode potential. One common
+thermal source family and one common $L_\Sigma$ are selected by symmetric
+cross-transfer; the amplitude is trained on one cluster and applied unchanged
+to the other. $L_\Sigma=0$ is the explicit source-only limit. The upper grid
+endpoint fails identifiability rather than authorizing a longer post-result
+search.
+
+The candidate must retain every full-field and $R_{50}/R_{80}$ gate, stay
+within 5% of the flexible v17E error, yield positive directional amplitudes
+that agree within 0.15 dex, and remain stable when resolution doubles. A pass
+would select either a source-derived or one-length propagation mechanism for
+covariant action derivation; it would not validate a theory. Helmholtz/Yukawa
+propagation is explicitly registered as prior art. See
+[`SIGMA_V17F_ROOT_SCALE_PROPAGATOR.md`](SIGMA_V17F_ROOT_SCALE_PROPAGATOR.md).
+
 ## 2026-08-04 Sigma v17E halo-scale identifiability gate
 
 Before either spent v17 lensing target was opened, the thermal-stress transfer

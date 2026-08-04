@@ -1,0 +1,114 @@
+{
+  "protocol_version": "SIGMA-V17F-ROOT-SCALE-PROPAGATOR-1.0.0",
+  "status": "frozen before any regional temperature result, thermal source map, v17E inverse coefficient, v17E lensing score, or v17F result existed",
+  "purpose": "Conditional action-selection diagnostic: determine whether one source-derived thermal scale plus at most one universal propagation length can reproduce the apparent residual-field extent and morphology without the flexible three-scale v17E interpolation.",
+  "parents": {
+    "thermal_source_protocol": "configs/sigma_v17d_thermal_stress_map.json",
+    "thermal_source_protocol_sha256": "c2e0e8d67cf59fe55048257497580d084eae70fdc1e3a37d93ef485504c6846e",
+    "thermal_transfer_protocol": "configs/sigma_v17e_thermal_stress_transfer.json",
+    "thermal_transfer_protocol_sha256": "b81e718bf2726d0dbad906731960a0872d5ca4fc166385e29293a6bd5ed1ee23",
+    "static_baseline_protocol": "configs/sigma_v16b_spent_boundary_interior.json",
+    "static_baseline_protocol_sha256": "b290c084590363a6df5d0cfc57b4a97778684af057f7fa807bc6525f2b534bee"
+  },
+  "authorization": {
+    "required_v17e_status": "completed Sigma v17E thermal-stress transfer diagnostic",
+    "required_v17e_gate": "gate_results.advance=true",
+    "rule": "Do not run v17F if v17E fails. The v17E family is a strict superset of the one-source one-length v17F family, so a v17F run cannot rescue a failed source-information gate.",
+    "sample_is_spent": true,
+    "holdout_opened": false
+  },
+  "projected_root_equation": {
+    "source_families": [
+      "q_total",
+      "q_contrast"
+    ],
+    "mediator_equation": "Helmholtz mediator: (1-L_sigma^2 nabla_perp^2) s_sigma(x)=q_b(x), with q_b in {q_total,q_contrast}",
+    "fourier_solution": "Helmholtz Fourier solution: s_hat_sigma(k)=q_hat_b(k)/(1+(k L_sigma)^2)",
+    "one_metric_response": "delta_kappa_sigma=beta_sigma s_sigma; delta_gamma_1 and delta_gamma_2 are the unique E-mode shears derived from the same delta_kappa_sigma",
+    "physical_interpretation": "q_b supplies object-dependent size and geometry; L_sigma is one universal correlation length that can broaden but may not replace the source scale; beta_sigma controls amplitude but cannot change R50 or R80",
+    "claim_boundary": "This is the projected weak-field signature of a candidate mediator, not a covariant action. Helmholtz/Yukawa propagation is established prior art. A passing result selects a scale mechanism for action derivation, not a novel theory."
+  },
+  "propagation": {
+    "L_sigma_kpc_grid": [
+      0.0,
+      12.5,
+      25.0,
+      37.5,
+      50.0,
+      75.0,
+      100.0,
+      150.0,
+      225.0,
+      300.0
+    ],
+    "L_sigma_zero_interpretation": "source-derived scale only; no propagation-length constant",
+    "maximum_L_sigma_interpretation": "identifiability boundary only; a selected 300 kpc endpoint fails the length-identification gate",
+    "source_map_half_width_kpc": 1800.0,
+    "target_half_width_kpc": 350.0,
+    "analysis_radius_kpc": 200.0,
+    "fourier_padding_factor": 2,
+    "periodic_wrap_allowed": false,
+    "object_specific_length_allowed": false
+  },
+  "fit": {
+    "static_baseline": "unchanged v16B internal-only response fitted on the training cluster and frozen before the thermal increment",
+    "thermal_parameters_per_direction": 1,
+    "thermal_parameter": "one real beta_sigma fitted on the training cluster across convergence, shear_1, and shear_2 together",
+    "intercept": false,
+    "coefficient_sign": "beta_sigma must be finite and strictly positive in both transfer directions",
+    "selection": "among candidates with finite strictly positive beta_sigma in both directions, choose one common source family and L_sigma by minimum symmetric leave-one-cluster-out full-field NRMSE; each directional beta_sigma is fitted only on its training cluster and transferred unchanged; if no positive candidate exists, retain the unconstrained minimum only to document failure",
+    "tie_break": "smaller L_sigma, then q_total before q_contrast",
+    "post_selection_joint_fit": "After all spent gates pass, fit one beta_sigma jointly on both spent clusters and freeze {source family,L_sigma,beta_sigma} before any untouched cluster is opened.",
+    "per_cluster_gravity_parameters": 0,
+    "lensing_only_multiplier": false
+  },
+  "scale_diagnostic": {
+    "field_energy_density": "u=delta_kappa^2+delta_gamma_1^2+delta_gamma_2^2",
+    "radii": [
+      "R50",
+      "R80"
+    ],
+    "centering": "required and predicted fields use their own field-energy centroids only for the extent diagnostic; full-field scores retain absolute position and orientation",
+    "amplitude_invariance": "beta_sigma cancels from both predicted radii",
+    "source_vs_propagation_decision": [
+      "If L_sigma=0 passes, the apparent halo extent is source-derived in this diagnostic and no propagation-length constant is justified.",
+      "If an identified nonzero common L_sigma passes, retain one universal propagation length for covariant action derivation.",
+      "If amplitude passes while either radius fails, the thermal source can correlate with strength but does not explain halo size.",
+      "If size passes while full-field alignment or topology fails, the scale mechanism is useful but lacks the required directional carrier."
+    ]
+  },
+  "resolution_control": {
+    "primary_grid_points": 193,
+    "doubled_linear_resolution_grid_points": 385,
+    "reuse_selected_source_L_sigma_and_directional_beta_sigma": true,
+    "maximum_allowed_observable_change": 0.02
+  },
+  "gates": {
+    "maximum_symmetric_cross_cluster_full_field_NRMSE": 0.5,
+    "minimum_relative_improvement_over_static_baseline": 0.1,
+    "maximum_relative_NRMSE_degradation_from_flexible_v17e": 0.05,
+    "minimum_residual_shear_alignment_cosine_each_direction": 0.5,
+    "minimum_residual_power_closed_each_direction": 0.25,
+    "maximum_fractional_R50_or_R80_error_each_direction": 0.25,
+    "maximum_directional_beta_log10_difference_dex": 0.15,
+    "maximum_resolution_change": 0.02,
+    "selected_L_sigma_must_not_equal_upper_grid_boundary": true
+  },
+  "decision_rule": [
+    "Advance a root-scale mechanism only if every gate passes simultaneously with one common source family and L_sigma.",
+    "A passing L_sigma is a candidate universal physical constant, not an object radius; source geometry must still generate object-to-object scale variation.",
+    "A passing projected equation must be derived from one healthy covariant action with one physical metric before a holdout is opened.",
+    "Do not add a second length, fractional exponent, object label, private orientation, cluster normalization, or lensing-only coefficient after failure.",
+    "If v17F fails, reject the tested instantaneous gas-stress plus single finite-range mediator and follow the v17 mechanism decision tree rather than tuning it."
+  ],
+  "integrity": {
+    "regional_temperature_result_existed_at_freeze": false,
+    "thermal_source_map_existed_at_freeze": false,
+    "v17e_lensing_target_opened_at_freeze": false,
+    "v17e_result_existed_at_freeze": false,
+    "v17f_result_existed_at_freeze": false,
+    "formula_constants_if_nonzero_length_advances": 2,
+    "formula_constants_if_zero_length_advances": 1,
+    "galaxy_cluster_switch": false
+  }
+}

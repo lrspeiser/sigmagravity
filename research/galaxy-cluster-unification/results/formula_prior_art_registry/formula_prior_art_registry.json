@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 88,
+    "sigma_protocols": 89,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 53,
+    "sigma_formula_fragments": 56,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -5687,6 +5687,46 @@
         "NEWTON-POISSON"
       ],
       "sha256": "b81e718bf2726d0dbad906731960a0872d5ca4fc166385e29293a6bd5ed1ee23"
+    },
+    {
+      "config": "configs/sigma_v17f_root_scale_propagator.json",
+      "protocol_version": "SIGMA-V17F-ROOT-SCALE-PROPAGATOR-1.0.0",
+      "status": "frozen before any regional temperature result, thermal source map, v17E inverse coefficient, v17E lensing score, or v17F result existed",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "projected_root_equation.mediator_equation",
+          "formula": "Helmholtz mediator: (1-L_sigma^2 nabla_perp^2) s_sigma(x)=q_b(x), with q_b in {q_total,q_contrast}",
+          "published_overlap_ids": [
+            "NONLOCAL-GRAVITY",
+            "GR-EINSTEIN",
+            "FRT-GRAVITY",
+            "EMSG"
+          ]
+        },
+        {
+          "json_path": "projected_root_equation.fourier_solution",
+          "formula": "Helmholtz Fourier solution: s_hat_sigma(k)=q_hat_b(k)/(1+(k L_sigma)^2)",
+          "published_overlap_ids": [
+            "NONLOCAL-GRAVITY"
+          ]
+        },
+        {
+          "json_path": "projected_root_equation.one_metric_response",
+          "formula": "delta_kappa_sigma=beta_sigma s_sigma; delta_gamma_1 and delta_gamma_2 are the unique E-mode shears derived from the same delta_kappa_sigma",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 3,
+      "published_overlap_ids": [
+        "NONLOCAL-GRAVITY",
+        "GR-EINSTEIN",
+        "FRT-GRAVITY",
+        "EMSG"
+      ],
+      "sha256": "d7476a822a4d6d99eb5f1ac66a466d711c67c6a7beda2d564eed52612a09c53a"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",
