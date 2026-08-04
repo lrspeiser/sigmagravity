@@ -5678,7 +5678,7 @@
     },
     {
       "config": "configs/sigma_v17e_thermal_stress_transfer.json",
-      "protocol_version": "SIGMA-V17E-THERMAL-STRESS-TRANSFER-1.0.0",
+      "protocol_version": "SIGMA-V17E-THERMAL-STRESS-TRANSFER-1.0.1",
       "status": "frozen after the thermal-source protocol and before any regional temperature result, thermal source map, v17 inverse coefficient, or v17 lensing score existed",
       "role": "gate_or_data_protocol_no_new_formula_fragment",
       "formula_fragments": [],
@@ -5686,7 +5686,7 @@
       "published_overlap_ids": [
         "NEWTON-POISSON"
       ],
-      "sha256": "f86c119fc04dd0baaf4899938204c55ff57f1bfd58c2008c694dcdf8f62a37d8"
+      "sha256": "b81e718bf2726d0dbad906731960a0872d5ca4fc166385e29293a6bd5ed1ee23"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

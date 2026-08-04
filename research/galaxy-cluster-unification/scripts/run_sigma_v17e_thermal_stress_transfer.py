@@ -64,6 +64,99 @@ def symmetric_error(scores: list[dict[str, Any]]) -> float:
     )
 
 
+def field_energy_extent(
+    triplet: tuple[np.ndarray, np.ndarray, np.ndarray],
+    mask: np.ndarray,
+    half_width_kpc: float,
+    quantiles: tuple[float, ...] = (0.5, 0.8),
+) -> dict[str, Any]:
+    """Measure amplitude-independent radii of a one-metric residual triplet."""
+
+    channels = tuple(np.asarray(values, dtype=float) for values in triplet)
+    shape = channels[0].shape
+    if (
+        len(shape) != 2
+        or any(values.shape != shape for values in channels)
+        or np.asarray(mask).shape != shape
+        or half_width_kpc <= 0.0
+        or any(not 0.0 < quantile < 1.0 for quantile in quantiles)
+    ):
+        raise ValueError("invalid one-metric field-extent inputs")
+    valid_mask = np.asarray(mask, dtype=bool)
+    energy = sum(values**2 for values in channels)
+    finite = valid_mask & np.isfinite(energy)
+    energy = np.where(finite, energy, 0.0)
+    total = float(np.sum(energy))
+    if not np.isfinite(total) or total <= np.finfo(float).tiny:
+        return {
+            "valid": False,
+            "field_energy": total,
+            "centroid_east_kpc": None,
+            "centroid_north_kpc": None,
+            "radii_kpc": {f"R{round(100 * q)}": None for q in quantiles},
+        }
+
+    axis = np.linspace(-half_width_kpc, half_width_kpc, shape[0])
+    east, north = np.meshgrid(axis, axis)
+    centroid_east = float(np.sum(energy * east) / total)
+    centroid_north = float(np.sum(energy * north) / total)
+    radius = np.sqrt(
+        (east - centroid_east) ** 2 + (north - centroid_north) ** 2
+    )
+    order = np.argsort(radius[finite], kind="stable")
+    sorted_radius = radius[finite][order]
+    cumulative = np.cumsum(energy[finite][order])
+    radii = {}
+    for quantile in quantiles:
+        index = int(np.searchsorted(cumulative, quantile * total, side="left"))
+        index = min(index, sorted_radius.size - 1)
+        radii[f"R{round(100 * quantile)}"] = float(sorted_radius[index])
+    return {
+        "valid": True,
+        "field_energy": total,
+        "centroid_east_kpc": centroid_east,
+        "centroid_north_kpc": centroid_north,
+        "radii_kpc": radii,
+    }
+
+
+def compare_field_extents(
+    required: tuple[np.ndarray, np.ndarray, np.ndarray],
+    predicted: tuple[np.ndarray, np.ndarray, np.ndarray],
+    mask: np.ndarray,
+    half_width_kpc: float,
+) -> dict[str, Any]:
+    required_extent = field_energy_extent(required, mask, half_width_kpc)
+    predicted_extent = field_energy_extent(predicted, mask, half_width_kpc)
+    valid = bool(
+        required_extent["valid"]
+        and predicted_extent["valid"]
+        and all(
+            radius > np.finfo(float).tiny
+            for radius in required_extent["radii_kpc"].values()
+        )
+    )
+    errors: dict[str, float | None] = {}
+    if valid:
+        for key, required_radius in required_extent["radii_kpc"].items():
+            predicted_radius = predicted_extent["radii_kpc"][key]
+            errors[key] = float(
+                abs(predicted_radius - required_radius) / required_radius
+            )
+    else:
+        errors = {key: None for key in required_extent["radii_kpc"]}
+    finite_errors = [value for value in errors.values() if value is not None]
+    return {
+        "valid": valid,
+        "required": required_extent,
+        "predicted": predicted_extent,
+        "fractional_radius_errors": errors,
+        "maximum_fractional_radius_error": (
+            max(finite_errors) if valid and finite_errors else None
+        ),
+    }
+
+
 def thermal_feature_names(config: dict[str, Any], family: str) -> list[str]:
     families = config["thermal_features"]["families"]
     if family not in families:
@@ -279,6 +372,7 @@ def score_thermal_at_alpha(
     adjusted_by_direction: list[list[EquivariantDataset]],
     names: list[str],
     alpha: float,
+    half_width_kpc: float,
 ) -> dict[str, Any]:
     directions = []
     for direction_index, (train_index, test_index) in enumerate(((0, 1), (1, 0))):
@@ -288,12 +382,27 @@ def score_thermal_at_alpha(
             feature_names=names,
             alpha=alpha,
         )
+        prediction = predict_residual(adjusted[test_index], fit.coefficients)
+        required = tuple(
+            target - base
+            for target, base in zip(
+                adjusted[test_index].target,
+                adjusted[test_index].base,
+                strict=True,
+            )
+        )
         directions.append(
             {
                 "train_cluster": datasets[train_index].name,
                 "test_cluster": datasets[test_index].name,
                 "thermal_coefficients": fit.coefficients,
                 "thermal_fit_condition_number": fit.standardized_condition_number,
+                "halo_scale_diagnostic": compare_field_extents(
+                    required,
+                    prediction,
+                    adjusted[test_index].mask,
+                    half_width_kpc,
+                ),
                 **score_prediction(adjusted[test_index], fit.coefficients),
             }
         )
@@ -315,11 +424,21 @@ def evaluate_primary(
         "symmetric_cross_cluster_full_field_NRMSE": symmetric_error(baseline_directions),
     }
     alpha_grid = [float(value) for value in config["fit"]["thermal_ridge_alpha_grid"]]
+    half_width_kpc = float(
+        base_config["map_measurement"]["target_half_width_kpc"]
+    )
     family_results = {}
     for family in config["thermal_features"]["families"]:
         names = thermal_feature_names(config, family)
         sweep = [
-            score_thermal_at_alpha(datasets, adjusted, names, alpha) for alpha in alpha_grid
+            score_thermal_at_alpha(
+                datasets,
+                adjusted,
+                names,
+                alpha,
+                half_width_kpc,
+            )
+            for alpha in alpha_grid
         ]
         selected = min(
             sweep,
@@ -360,7 +479,7 @@ def resolution_change(
     def relative(first: float, second: float) -> float:
         return float(abs(second - first) / max(abs(first), tiny))
 
-    changes: dict[str, float] = {
+    changes: dict[str, float | None] = {
         "symmetric_full_field_NRMSE_relative_change": relative(
             primary_symmetric,
             doubled_symmetric,
@@ -385,9 +504,24 @@ def resolution_change(
             float(other["residual_power_closed"])
             - float(row["residual_power_closed"])
         )
+        for radius in ("R50", "R80"):
+            primary_radius = row["halo_scale_diagnostic"]["predicted"][
+                "radii_kpc"
+            ][radius]
+            doubled_radius = other["halo_scale_diagnostic"]["predicted"][
+                "radii_kpc"
+            ][radius]
+            changes[f"{tag}_predicted_{radius}_relative_change"] = (
+                relative(float(primary_radius), float(doubled_radius))
+                if primary_radius is not None and doubled_radius is not None
+                else None
+            )
+    finite_changes = [value for value in changes.values() if value is not None]
+    valid = len(finite_changes) == len(changes)
     return {
         "components": changes,
-        "maximum_change": max(changes.values()),
+        "valid": valid,
+        "maximum_change": max(finite_changes) if valid else None,
     }
 
 
@@ -399,7 +533,8 @@ def render_figure(
     doubled: dict[str, Any],
     output: Path,
 ) -> Path:
-    figure, axes = plt.subplots(1, 3, figsize=(15, 4.5), constrained_layout=True)
+    figure, axes_grid = plt.subplots(2, 2, figsize=(15, 9), constrained_layout=True)
+    axes = axes_grid.ravel()
     for family, result in families.items():
         axes[0].plot(
             [row["alpha"] for row in result["alpha_sweep"]],
@@ -451,6 +586,29 @@ def render_figure(
     axes[2].axhline(0.25, color="black", linestyle=":", linewidth=0.8)
     axes[2].set(ylabel="dimensionless", title="Transferred residual structure")
     axes[2].legend(fontsize=8)
+
+    scale_labels = []
+    required_radii = []
+    predicted_radii = []
+    for row in directions:
+        direction = f"{row['train_cluster']} to {row['test_cluster']}"
+        diagnostic = row["halo_scale_diagnostic"]
+        for radius in ("R50", "R80"):
+            scale_labels.append(f"{direction}\n{radius}")
+            required_radius = diagnostic["required"]["radii_kpc"][radius]
+            predicted_radius = diagnostic["predicted"]["radii_kpc"][radius]
+            required_radii.append(
+                float(required_radius) if required_radius is not None else np.nan
+            )
+            predicted_radii.append(
+                float(predicted_radius) if predicted_radius is not None else np.nan
+            )
+    positions = np.arange(len(scale_labels))
+    axes[3].bar(positions - 0.18, required_radii, width=0.36, label="required residual")
+    axes[3].bar(positions + 0.18, predicted_radii, width=0.36, label="thermal prediction")
+    axes[3].set_xticks(positions, scale_labels, rotation=15)
+    axes[3].set(ylabel="field-energy radius (kpc)", title="Amplitude-independent residual extent")
+    axes[3].legend(fontsize=8)
 
     path = output / "thermal_stress_transfer.png"
     figure.savefig(path, dpi=180)
@@ -537,6 +695,7 @@ def main() -> None:
         doubled_adjusted,
         thermal_feature_names(config, best_family),
         float(best["selected_alpha"]),
+        float(base_config["map_measurement"]["target_half_width_kpc"]),
     )
     doubled["static_symmetric_cross_cluster_full_field_NRMSE"] = symmetric_error(
         doubled_baseline_directions
@@ -574,7 +733,18 @@ def main() -> None:
             >= float(gates["minimum_residual_power_closed_each_direction"])
             for row in best["cross_cluster_scores"]
         ),
-        "doubled_resolution_stable": stability["maximum_change"]
+        "halo_scale_both_directions": all(
+            row["halo_scale_diagnostic"]["valid"]
+            and row["halo_scale_diagnostic"]["maximum_fractional_radius_error"]
+            <= float(
+                gates[
+                    "maximum_fractional_halo_scale_error_each_quantile_each_direction"
+                ]
+            )
+            for row in best["cross_cluster_scores"]
+        ),
+        "doubled_resolution_stable": stability["valid"]
+        and stability["maximum_change"]
         <= float(gates["maximum_map_resolution_change"]),
     }
     gate_results["advance"] = all(gate_results.values())

@@ -64,6 +64,38 @@ def test_nested_thermal_feature_families_are_exact_and_one_metric() -> None:
         "thermal_contrast_smooth_150kpc",
     ]
     assert len(component) == len(set(component)) == 6
+    assert config["halo_scale_diagnostic"]["quantiles"] == [0.5, 0.8]
+    assert (
+        config["halo_scale_diagnostic"][
+            "maximum_fractional_radius_error_each_quantile_each_direction"
+        ]
+        == 0.25
+    )
+
+
+def test_one_metric_field_extent_is_amplitude_invariant_and_width_sensitive() -> None:
+    module = _load_module()
+    axis = np.linspace(-100.0, 100.0, 81)
+    east, north = np.meshgrid(axis, axis)
+    narrow = np.exp(-((east - 15.0) ** 2 + (north + 10.0) ** 2) / (2.0 * 15.0**2))
+    wide = np.exp(-((east - 15.0) ** 2 + (north + 10.0) ** 2) / (2.0 * 30.0**2))
+    mask = np.ones(narrow.shape, dtype=bool)
+    narrow_triplet = (narrow, 0.5 * narrow, -0.25 * narrow)
+    scaled_triplet = tuple(-7.0 * values for values in narrow_triplet)
+    wide_triplet = (wide, 0.5 * wide, -0.25 * wide)
+
+    narrow_extent = module.field_energy_extent(narrow_triplet, mask, 100.0)
+    scaled_extent = module.field_energy_extent(scaled_triplet, mask, 100.0)
+    wide_extent = module.field_energy_extent(wide_triplet, mask, 100.0)
+    assert narrow_extent["valid"] and scaled_extent["valid"] and wide_extent["valid"]
+    np.testing.assert_allclose(
+        list(narrow_extent["radii_kpc"].values()),
+        list(scaled_extent["radii_kpc"].values()),
+        rtol=0.0,
+        atol=1.0e-12,
+    )
+    assert wide_extent["radii_kpc"]["R50"] > narrow_extent["radii_kpc"]["R50"]
+    assert wide_extent["radii_kpc"]["R80"] > narrow_extent["radii_kpc"]["R80"]
 
 
 def test_target_authorization_requires_immutable_blind_source_products(
@@ -140,6 +172,9 @@ def test_resolution_stability_metric_includes_error_alignment_and_power() -> Non
             "full_field_NRMSE": 0.5,
             "residual_shear_alignment_cosine": 0.6,
             "residual_power_closed": 0.3,
+            "halo_scale_diagnostic": {
+                "predicted": {"radii_kpc": {"R50": 100.0, "R80": 150.0}}
+            },
         },
         {
             "train_cluster": "B",
@@ -147,6 +182,9 @@ def test_resolution_stability_metric_includes_error_alignment_and_power() -> Non
             "full_field_NRMSE": 0.4,
             "residual_shear_alignment_cosine": 0.7,
             "residual_power_closed": 0.4,
+            "halo_scale_diagnostic": {
+                "predicted": {"radii_kpc": {"R50": 80.0, "R80": 120.0}}
+            },
         },
     ]
     doubled = [
@@ -156,6 +194,9 @@ def test_resolution_stability_metric_includes_error_alignment_and_power() -> Non
             "full_field_NRMSE": 0.505,
             "residual_shear_alignment_cosine": 0.59,
             "residual_power_closed": 0.295,
+            "halo_scale_diagnostic": {
+                "predicted": {"radii_kpc": {"R50": 101.0, "R80": 151.5}}
+            },
         },
         {
             "train_cluster": "B",
@@ -163,11 +204,14 @@ def test_resolution_stability_metric_includes_error_alignment_and_power() -> Non
             "full_field_NRMSE": 0.404,
             "residual_shear_alignment_cosine": 0.69,
             "residual_power_closed": 0.39,
+            "halo_scale_diagnostic": {
+                "predicted": {"radii_kpc": {"R50": 80.8, "R80": 121.2}}
+            },
         },
     ]
     result = module.resolution_change(0.45, primary, 0.4545, doubled)
     np.testing.assert_allclose(result["maximum_change"], 0.01, atol=1.0e-12)
-    assert len(result["components"]) == 7
+    assert len(result["components"]) == 11
 
 
 def test_source_authorization_precedes_any_target_dataset_construction() -> None:
