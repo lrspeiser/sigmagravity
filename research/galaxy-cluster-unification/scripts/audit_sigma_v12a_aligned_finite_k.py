@@ -43,10 +43,10 @@ def main() -> None:
         random_seed=int(fixed["random_seed"]),
     )
     report = {
-        "status": "corrected Sigma v12A aligned finite-k null-projection subgate",
+        "status": "corrected Sigma v12A aligned finite-k dynamical-aether subgate",
         **audit,
         "decision": "withdraw_positive_sign_falsification_and_advance_both_signs_to_full_tilted_anisotropic_symbol",
-        "reason": "The earlier clock-only block omitted the conformal metric component of the Class-Ia null direction. Einstein clock-metric and metric-gradient terms cancel the A4 clock-gradient term exactly, leaving the positive AeST Maxwell coefficient K_B/r^2. The prior lambda_D=+1 finite-k zero is therefore absent from the complete aligned operator.",
+        "reason": "The first clock-only block omitted the conformal metric component of the Class-Ia null direction. The second correction included that metric component but held the longitudinal aether velocity fixed. Class-Ia cancels the DHOST/metric gradients, and the dynamical aether Schur term then cancels the apparent Maxwell lapse gradient. The fully reduced aligned bracket is the nonzero AeST clock susceptibility -4 K2 for both signs.",
         "scope_limit": config["scope_limit"],
         "next_kill_gate": "Derive the full Delta_eff principal matrix for both orientation signs with nonzero scalar spatial gradient, finite aether tilt, arbitrary wave-vector orientation, and anisotropic metric/aether perturbations.",
         "data_policy": config["data_policy"],

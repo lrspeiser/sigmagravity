@@ -119,7 +119,15 @@ def audit_v12a_same_clock_dhost(
         raise ValueError("coefficient scan must span a finite signed interval")
     if high_acceleration_ratio <= 1.0 or random_rotation_trials < 1:
         raise ValueError("high-field and rotation audits require positive coverage")
-    spectrum = aest_linear_spectrum(k_b=k_b, k_2=k_2, lambda_s=lambda_s)
+    # ``lambda_s`` is the high-Y coefficient of the frozen simple
+    # interpolation.  The actual tangent entering the Minkowski quadratic
+    # spectrum is f_y(0)=0, not its asymptotic value one.
+    flat_tangent_lambda_s = 0.0
+    spectrum = aest_linear_spectrum(
+        k_b=k_b,
+        k_2=k_2,
+        lambda_s=flat_tangent_lambda_s,
+    )
     magnitude = np.geomspace(1.0e-12, float(signed_scan_limit), signed_scan_points)
     ratio = np.concatenate((-magnitude[::-1], [0.0], magnitude))
     coefficient_audits: list[dict[str, float]] = []
@@ -247,6 +255,11 @@ def audit_v12a_same_clock_dhost(
             "lambda_D",
         ],
         "flat_spectrum": spectrum,
+        "flat_spectrum_interpolation": {
+            "asymptotic_lambda_s": float(lambda_s),
+            "local_tangent_lambda_s": flat_tangent_lambda_s,
+            "reason": "the frozen simple interpolation has f_y(0)=0 and f_y(infinity)=1",
+        },
         "coefficient_scan": {
             "signed_limit": float(signed_scan_limit),
             "total_points": int(ratio.size),

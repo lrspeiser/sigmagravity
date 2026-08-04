@@ -1,0 +1,24 @@
+{
+  "protocol_version": "Sigma-v12A-1.0-flat-characteristic-regression",
+  "status": "theory-only direct flat characteristic subgate",
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "fixed_values": {
+    "k_b": 1.0,
+    "k_2": 2.0,
+    "background_clock_ratio": 1.0,
+    "aligned_tilt_sentinel": 0.00001,
+    "orientation_strengths": [-1.0, 1.0],
+    "wave_number_sentinels": [100.0, 300.0, 1000.0],
+    "scalar_speed_squared_target": 0.5,
+    "scalar_limit_tolerance": 0.00001,
+    "luminal_limit_tolerance": 0.000001,
+    "polynomial_residual_tolerance": 1e-8
+  },
+  "pass_rule": "Construct the complete 26-variable real-phase Euler polynomial before imposing h13=h23=h33=0 in each phase; require exactly 24 finite generalized roots and 16 constraint roots at infinity, corresponding to six linear physical configuration degrees; reproduce four zero-sector roots, four scalar roots with principal c_s^2=1/2, and sixteen tensor/vector roots with principal c^2=1; require positive quadratic energy for all twenty finite-frequency roots, polynomial residual below 1e-8, and no dependence on the sign of lambda_D at the flat clock background.",
+  "scope_limit": "This is a direct flat linear characteristic and quadratic-energy regression at a differentiable positive-tilt sentinel approaching Y=0. It does not resolve the published AeST zero-frequency Jeans-like sector, prove hyperbolicity or positive energy on finite tilted backgrounds, establish a common Cauchy cone, include nonconstant scalar/aether/metric backgrounds, or prove the nonlinear six-degree count.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "covariant v12A action and synthetic local Fourier backgrounds only"
+  }
+}

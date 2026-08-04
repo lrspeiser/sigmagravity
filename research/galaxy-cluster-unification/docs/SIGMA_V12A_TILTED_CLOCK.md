@@ -7,9 +7,10 @@ primary-secondary bracket remains strictly nonzero for every finite aether
 tilt and scalar-gradient orientation at the selected constants. This removes
 another possible constraint-rank failure.
 
-It is not yet the full `Delta_eff`: the spatial differential operator from the
-new DHOST terms remains to be derived and could still produce a zero mode or
-rank change.
+It is not by itself the full `Delta_eff`. The subsequent constant-background
+tilted audit includes the Class-Ia and dynamical-aether reductions and finds a
+regular wave-number-independent block. Nonconstant backgrounds and the
+physical characteristic/energy matrices remain open.
 
 ## Reduced tilted invariants
 
@@ -169,11 +170,13 @@ This uses no astronomical data and introduces no parameter.
 
 ## Remaining kill gate
 
-The positive zeroth-order term does not by itself prove an invertible
-differential operator. The new `L3-L5` terms can contribute spatial derivatives
-to `Delta_eff`. We must derive their principal symbol on anisotropic
-backgrounds and determine whether a finite wave vector can cancel the positive
-AeST susceptibility or change operator rank. That is the next calculation.
+The positive zeroth-order term does not by itself prove an invertible operator.
+The constant-background follow-up now shows that Class-Ia cancels the direct
+DHOST/metric gradients and the dynamical aether cancels the apparent Maxwell
+gradient. The remaining kill gate is the complete physical characteristic and
+energy system, followed by backgrounds with scalar Hessian, aether gradient,
+extrinsic curvature, and spacetime curvature. See
+[`SIGMA_V12A_TILTED_PRINCIPAL.md`](SIGMA_V12A_TILTED_PRINCIPAL.md).
 
 The AeST invariants and auxiliary reduction follow the published
 [AeST Hamiltonian formulation](https://arxiv.org/abs/2307.15126). The use of a

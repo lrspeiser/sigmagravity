@@ -1,41 +1,31 @@
-# Sigma v12A corrected aligned finite-wave-vector Dirac subgate
+# Sigma v12A aligned finite-wave-vector Dirac correction
 
-## Correction and decision
+## Decision
 
-The earlier project conclusion that `lambda_D=+1` has an aligned finite-wave-
-vector constraint zero is withdrawn. That calculation retained the
-`A4 q^2|Dq|^2` clock-gradient term but omitted the spatial-metric component of
-the Class-Ia primary null direction. It was a zero of one unprojected matrix
-block, not a zero of the Dirac operator.
+Both signs of `lambda_D` survive the aligned constant-background Dirac gate.
+The aligned calculation does not select a sign, and v12A is not yet a viable
+theory.
 
-Including the conformal metric displacement, its Einstein curvature terms,
-and the AeST Maxwell term gives the complete aligned symbol
+Two earlier reductions were incomplete:
 
-$$
-\boxed{
-{\Delta(\bar k)\over F_0}
-=-\left[4K_2+{2K_B\over r^2}\bar k^2\right],
-\qquad r={q\over q_\Sigma}.
-}
-$$
+1. the clock-only calculation omitted the conformal metric component of the
+   Class-Ia primary null direction; and
+2. the first correction restored that metric component but held the
+   longitudinal aether velocity fixed.
 
-It is strictly nonzero for every finite nonzero aligned clock and wave number
-when `K2>0` and `K_B>0`, independently of the sign or magnitude of `lambda_D`.
-The positive and negative sign sentinels therefore both survive this aligned
-subgate. Neither has yet passed the tilted, nonzero-gradient, anisotropic
-principal matrix.
-
-## Clock and metric must be projected together
-
-On the aether-aligned, zero-spatial-scalar-gradient auxiliary branch, write
+The complete constant-background reduction cancels both apparent spatial
+terms. The aligned bracket is
 
 $$
-q=\nabla_n\phi,\qquad
-V_*=\phi_{nn},\qquad
-u_i=D_iq.
+\boxed{\Delta/F_0=-4K_2,}
 $$
 
-The covariant Hessian invariants are
+independent of wave number and of the sign of `lambda_D`.
+
+## First incomplete block: clock only
+
+For an aligned scalar clock `q`, normal Hessian `V_*`, metric trace `K`, and
+spatial clock gradient `D_iq`,
 
 $$
 L_3=-q^2V_*^2-q^3KV_*,
@@ -43,82 +33,42 @@ $$
 
 $$
 L_4=-q^2V_*^2+q^2|Dq|^2,
-$$
-
-$$
+\qquad
 L_5=q^4V_*^2.
 $$
 
-The velocity terms form the Class-Ia degenerate square
+Keeping only the direct `A4 q^2|Dq|^2` term gives
 
 $$
-\kappa K^2+2bKV_*+{b^2\over\kappa}V_*^2,
+\Delta_{\rm clock}/F_0
+=-[4K_2+2r^2\bar A_4\bar k^2].
 $$
 
-with
+For `lambda_D=+1`, `r=2`, and `K2=2`, this incomplete block vanishes at
+`k_bar=3.5678747366`. That numerical zero is retained as a regression fixture,
+not as a physical result.
+
+## Second incomplete block: metric restored, aether fixed
+
+The Class-Ia primary moves the conformal spatial metric with the clock:
 
 $$
-\kappa=-{2F_0\over3},
+\delta\zeta=\eta\,\delta r,
 \qquad
-b=-{q^3A_3\over2}.
+\eta=-{r^3\bar A_3\over4}.
 $$
 
-The null velocity therefore does not change `q` alone. For a conformal
-spatial-metric perturbation `zeta`, it obeys
+The direct DHOST, Einstein cross, and Einstein metric terms are
 
 $$
-\delta\zeta
-=-{q^3A_3\over4F_0}\delta q.
-$$
-
-Any spatial principal calculation that varies `q` while holding this metric
-direction fixed is not the primary-secondary bracket.
-
-For a nonzero timelike clock, unitary gauge may then be imposed regularly.
-The scalar definition gives `delta N/N=-delta q/q`. The published DHOST
-Hamiltonian analysis shows that the gauge-fixed Dirac determinant contains
-the same primary-secondary factor (multiplied only by nonzero lapse powers),
-so this is a convenient way to compute the complete aligned operator. The
-clock-lapse relation is what generates the Einstein clock-metric cross term
-and lets the AeST electric/Maxwell lapse gradient enter the final Schur
-complement. Imposing the relation while omitting the metric null displacement,
-as the superseded audit effectively did, is inconsistent.
-
-## Complete aligned spatial quadratic form
-
-Use the normalized variables
-
-$$
-r={q\over q_\Sigma},
+r^2\bar A_4,
 \qquad
-\bar A_3={q_\Sigma^4A_3\over F_0},
+-{4\eta\over r},
 \qquad
-\eta=-{r^3\bar A_3\over4},
+2\eta^2.
 $$
 
-so that `delta zeta=eta delta r`. There are four spatial-gradient
-contributions along the null direction:
-
-| source | normalized coefficient |
-|---|---:|
-| direct DHOST clock term | `r^2 A4_bar` |
-| Einstein clock-metric cross term | `-4 eta/r` |
-| Einstein metric term | `2 eta^2` |
-| AeST Maxwell term | `K_B/r^2` |
-
-The first three sum to
-
-$$
-r^2\bar A_4-{4\eta\over r}+2\eta^2.
-$$
-
-Substituting
-
-$$
-\bar A_4=-\bar A_3-{r^4\bar A_3^2\over8}
-$$
-
-and `eta=-r^3 A3_bar/4` gives the exact Class-Ia cancellation
+The luminal Class-Ia relation makes their sum vanish identically:
 
 $$
 \boxed{
@@ -126,66 +76,58 @@ r^2\bar A_4-{4\eta\over r}+2\eta^2=0.
 }
 $$
 
-The entire `lambda_D`-dependent aligned gradient coefficient disappears. The
-only remaining spatial term is
+If the aether is then held fixed, the Maxwell sector appears to leave
+`K_B/r^2`. This was the result reported by the preceding version of this
+document. It is still not the full Dirac reduction.
+
+## Complete aligned reduction: dynamical aether
+
+The longitudinal Maxwell sector is a perfect square. Schematically,
 
 $$
-\boxed{C_{\rm aligned}={K_B\over r^2}>0.}
+L_M=K_B|\dot A_L+i k\,\delta N|^2.
 $$
 
-Combining this with the AeST clock susceptibility `4K2` yields the complete
-aligned symbol quoted above.
-
-## Reassessment of the old counterexample
-
-The old clock-only block at `r=2`, `lambda_D=+1`, and `K2=2` has
+Its direct lapse-gradient term is positive, but the canonical aether momentum
+contains the same combination. Performing the Legendre/Schur reduction gives
 
 $$
-\bar A_4=-0.0785562607610
+{K_B\over r^2}
++\left(-{K_B\over r^2}\right)=0.
 $$
 
-and vanishes at `k_bar=3.56787473663`. The corrected calculation deliberately
-reproduces that incomplete zero and then adds the missing terms. At the same
-background and wave number:
+Thus the full aligned gradient coefficient is zero. The ordinary AeST clock
+curvature remains:
 
-- the Class-Ia DHOST-plus-Einstein sum is zero to numerical precision;
-- the AeST Maxwell coefficient is `K_B/r^2=0.25`;
-- the full positive core is greater than 8, not zero.
+$$
+\Delta/F_0=-4K_2.
+$$
 
-Thus the old point is a regression fixture demonstrating why the correction
-matters, not a physical counterexample.
+At `K2=2`, it is `-8`. The result is nonzero for every finite nonzero clock
+whenever `K2>0`.
 
 ## Executable audit
 
-The corrected audit evaluates 50,000 signed clock and wave-number backgrounds
-over `10^-6` through `10^6` for both `lambda_D=+1` and `lambda_D=-1`. It checks:
+The 50,000-row signed logarithmic scan:
 
-1. exact reproduction of the superseded clock-block zero;
-2. explicit incomplete-projection labeling of that block;
-3. Class-Ia cancellation after adding the metric null direction;
-4. removal of the old counterexample in the complete symbol;
-5. positive complete symbols for both sign sentinels; and
-6. a positive AeST Maxwell coefficient.
+- reproduces the original clock-only zero;
+- verifies the Class-Ia metric cancellation;
+- verifies the dynamical-aether Maxwell cancellation;
+- obtains the exact positive core `4K2=8` for both signs at every wave number;
+- keeps all observational-data flags closed.
 
-The full test suite passes. No astronomical data or holdout was opened.
+The aligned conclusion is unchanged: neither sign is falsified or selected.
+What changed is the reason the bracket remains nonzero.
 
-## Remaining kill gate
+## Scope
 
-This correction is exact only on the constant, zero-momentum, aligned branch.
-It does not establish the sign of the full principal matrix when the scalar
-has a spatial first gradient, the aether is tilted, the wave vector has an
-arbitrary orientation, or tensor/vector metric and aether directions mix.
-Those components must be projected onto the complete Class-Ia/AeST constraint
-surface before any sign conclusion is valid.
+This result is exact only for a local constant background with scalar gradient
+and aether aligned. The separate tilted audit extends the constraint bracket
+to arbitrary constant aether tilt. Neither calculation includes background
+scalar Hessian, aether gradient, extrinsic curvature, spacetime curvature, or
+the reduced physical characteristic and energy matrices.
 
-The next gate therefore scans both orientation signs; the aligned calculation
-does not select one. The theory remains explicitly marked not viable.
-
-The covariant degeneracy and primary-null construction follow the published
-[DHOST Hamiltonian analysis](https://arxiv.org/abs/1512.06820). The remaining
-positive lapse/aether gradient follows the published
-[AeST ADM action](https://arxiv.org/abs/2307.15126). The explicit correction
-and cancellation audit are project calculations; no novelty claim is made.
+No observational data or holdout were opened.
 
 ## Reproduction
 

@@ -31,7 +31,7 @@ def main() -> None:
     audit = audit_v12a_same_clock_dhost(
         k_b=float(fixed["k_b"]),
         k_2=float(fixed["k_2"]),
-        lambda_s=float(fixed["lambda_s"]),
+        lambda_s=float(fixed["lambda_s_asymptotic"]),
         orientation_strength=float(fixed["orientation_strength"]),
         background_kinetic_ratios=[float(value) for value in fixed["background_kinetic_ratios"]],
         signed_scan_limit=float(fixed["signed_scan_limit"]),
@@ -44,7 +44,7 @@ def main() -> None:
         "status": "completed Sigma v12A same-clock DHOST selection",
         **audit,
         "decision": "advance_only_to_complete_joint_adm_and_covariant_variation_gate",
-        "reason": "The construction replaces the retired independent-memory family with exact higher-derivative degeneracy of the already baryon-forced AeST scalar. It adds no field or object state, preserves the flat AeST spectrum and one metric tensor cone, and carries trace-free directional information. These are selection conditions only; the shared metric can couple the AeST and DHOST constraint blocks, so the combined arbitrary-background Hamiltonian must be derived next.",
+        "reason": "The construction replaces the retired independent-memory family with exact higher-derivative degeneracy of the already baryon-forced AeST scalar. It adds no field or object state, preserves the corrected local flat AeST spectrum and one metric tensor cone, and carries trace-free directional information. The simple interpolation has asymptotic coefficient one but flat tangent f_y(0)=0, so the scalar squared front is 1/2 rather than the previously reported 3/4. These are selection conditions only; the shared metric can couple the AeST and DHOST constraint blocks, so the combined arbitrary-background Hamiltonian must be derived next.",
         "selection_rule": config["selection_rule"],
         "failure_rule_next": config["failure_rule_next"],
         "data_policy": config["data_policy"],

@@ -1,0 +1,26 @@
+{
+  "protocol_version": "Sigma-v12A-0.9-constant-tilted-Dirac-block",
+  "status": "theory-only constant-background tilted Dirac subgate",
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "fixed_values": {
+    "k_b": 1.0,
+    "k_2": 2.0,
+    "background_clock_ratio": 1.0,
+    "positive_orientation_strength": 1.0,
+    "negative_orientation_strength": -1.0,
+    "random_trials": 48,
+    "logarithmic_clock_limit": 2.0,
+    "logarithmic_tilt_limit": 2.0,
+    "wave_number_sentinels": [0.1, 1.0, 10.0],
+    "wave_invariance_trials": 4,
+    "aligned_limit_tilt": 0.0001,
+    "random_seed": 12008
+  },
+  "pass_rule": "Retain all six spatial-metric components until the Class-Ia null direction is constructed; obtain exactly six shift primaries plus two real-phase DHOST primaries; reproduce the analytic conformal null ratio; require the clock-normalized DHOST primary self-bracket and its spatial-diffeomorphism cross-brackets below 1e-9; require a negative nonzero 2x2 primary-secondary block for both coupling signs throughout the frozen scan; prove its wave-number independence after the dynamical aether Schur reduction; and recover the aligned continuum bracket -4 K2.",
+  "scope_limit": "The audit is exact for local constant Minkowski metric, constant timelike scalar first gradient, arbitrary constant aether tilt, and arbitrary wave-vector angle represented by the relative parallel/perpendicular tilt. It does not include background scalar Hessian, aether gradient, extrinsic curvature, spacetime curvature, the complete reduced physical characteristic cones, or Hamiltonian-energy signs. It therefore does not establish full Delta_eff invertibility, the final degree count, or theory viability.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "covariant v12A action, published AeST ADM variables, and synthetic local Fourier backgrounds only"
+  }
+}

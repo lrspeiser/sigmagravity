@@ -1,0 +1,1546 @@
+{
+  "all_flat_characteristic_gates_pass": true,
+  "calculation": {
+    "euler_polynomial": "P(s)=s^2 K+s(A-A^T)-B",
+    "flat_endpoint_regulator": "positive aether-tilt sentinel because the sqrt(Y) representation is not twice differentiable at exact Y=0",
+    "linearized_pencil": "[[0,I],[B,-(A-A^T)]] u=s [[I,0],[0,K]] u",
+    "real_phase_multiplicity": "four finite roots per physical configuration degree: +/- time roots times sine/cosine phases",
+    "spatial_gauge": "h13=h23=h33=0 per real phase after full EOM construction"
+  },
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "data_policy": {
+    "authorization": "covariant v12A action and synthetic local Fourier backgrounds only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "decision": "flat finite-frequency spectrum and energy signs pass; proceed to the finite-tilt common-Cauchy-cone and reduced-energy gate",
+  "diagnostics": {
+    "maximum_luminal_limit_residual": 2.0901647079796248e-10,
+    "maximum_polynomial_residual": 1.0635891589342367e-11,
+    "maximum_positive_negative_sign_spectrum_difference": 0.0,
+    "maximum_scalar_limit_residual": 2.49991455036902e-06,
+    "maximum_speed_squared_imaginary": 2.2879388631791256e-12,
+    "maximum_zero_frequency_limit_residual": 5.714869131133377e-20,
+    "minimum_normalized_propagating_mode_energy": 0.4000020798557671
+  },
+  "fixed_values": {
+    "aligned_tilt_sentinel": 1e-05,
+    "background_clock_ratio": 1.0,
+    "k_2": 2.0,
+    "k_b": 1.0,
+    "orientation_strengths": [
+      -1.0,
+      1.0
+    ],
+    "scalar_speed_squared_target": 0.5,
+    "wave_number_sentinels": [
+      100.0,
+      300.0,
+      1000.0
+    ]
+  },
+  "flat_finite_frequency_energy_positive": true,
+  "flat_linear_six_degree_count_reproduced": true,
+  "gates": {
+    "finite_frequency_mode_energies_positive": true,
+    "full_euler_matrices_built_before_spatial_gauge": true,
+    "quadratic_polynomial_residual": true,
+    "scalar_front_reproduces_local_half": true,
+    "six_linear_degrees_from_24_finite_roots": true,
+    "squared_roots_numerically_real": true,
+    "tensor_vector_fronts_luminal": true,
+    "v12a_sign_absent_from_flat_quadratic_spectrum": true,
+    "zero_frequency_sector_reproduced": true
+  },
+  "next_kill_gate": "Classify the invariant characteristic cones and reduced energy signs for finite aether/scalar tilt and arbitrary wave orientation, including whether a common Cauchy covector exists when scalar-unitary time is not itself a valid slicing.",
+  "nonconstant_background_characteristics_proven": false,
+  "nonlinear_physical_degree_count_proven": false,
+  "observational_data_accessed": false,
+  "principal_limits": {
+    "negative": {
+      "luminal_maximum_speed_squared": 1.0000000001998857,
+      "luminal_minimum_speed_squared": 0.9999999997909835,
+      "orientation_strength": -1.0,
+      "scalar_speed_squared": 0.5000024999145504,
+      "zero_frequency_speed_squared": -5.714869131133377e-20
+    },
+    "positive": {
+      "luminal_maximum_speed_squared": 1.0000000001998857,
+      "luminal_minimum_speed_squared": 0.9999999997909835,
+      "orientation_strength": 1.0,
+      "scalar_speed_squared": 0.5000024999145504,
+      "zero_frequency_speed_squared": -5.714869131133377e-20
+    }
+  },
+  "raw_holdout_opened": false,
+  "reason": "The complete quadratic Euler pencil independently reproduces six local linear degrees, the corrected scalar front c_s^2=1/2, four luminal tensor/vector modes, and positive energy for every finite-frequency root. The zero-frequency sector and nonaligned backgrounds remain open.",
+  "rows": {
+    "negative": [
+      {
+        "all_identified_finite_frequency_mode_energies_positive": true,
+        "background": {
+          "a_sigma": 1.0,
+          "aether_parallel": 0.0,
+          "aether_perpendicular": 1e-05,
+          "background_clock_ratio": 1.0,
+          "f_0": 1.0,
+          "k_2": 2.0,
+          "k_b": 1.0,
+          "orientation_strength": -1.0,
+          "scalar_clock_ratio": 1.0
+        },
+        "finite_generalized_root_count": 24,
+        "full_euler_dimension": 26,
+        "gauge_applied_after_full_euler_matrices": true,
+        "gauge_fixed_euler_dimension": 20,
+        "groups": {
+          "finite_scalar": {
+            "count": 4,
+            "maximum_absolute_imaginary": 3.189570072787011e-14,
+            "maximum_real": 0.5001025009235465,
+            "mean_real": 0.5001025009235212,
+            "minimum_real": 0.5001025009234957
+          },
+          "tensor_vector_luminal": {
+            "count": 16,
+            "maximum_absolute_imaginary": 5.0349471836299865e-14,
+            "maximum_real": 1.000100002200225,
+            "mean_real": 1.0000500007499353,
+            "minimum_real": 0.9999999997999398
+          },
+          "zero_frequency_sector": {
+            "count": 4,
+            "maximum_absolute_imaginary": 1.2358634667688343e-24,
+            "maximum_real": 9.7471317036463e-19,
+            "mean_real": 9.747130257296835e-19,
+            "minimum_real": 9.747128810947366e-19
+          }
+        },
+        "inferred_linear_physical_degrees_of_freedom": 6.0,
+        "infinite_generalized_root_count": 16,
+        "maximum_infinite_homogeneous_beta_margin": 0.0,
+        "maximum_polynomial_residual": 8.523502222154231e-14,
+        "minimum_finite_homogeneous_beta_margin": 6325.67761181426,
+        "minimum_normalized_propagating_mode_energy": 0.40004959049753097,
+        "propagating_energy_root_count": 20,
+        "roots": [
+          {
+            "growth_rate_imaginary": 9.87275483892408e-08,
+            "growth_rate_real": 5.0172190631135525e-14,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 1.0822486630146803e-17,
+            "speed_squared_imaginary": -9.906754756659293e-25,
+            "speed_squared_real": 9.747128810947366e-19
+          },
+          {
+            "growth_rate_imaginary": -9.872754838924083e-08,
+            "growth_rate_real": 5.0172190631135525e-14,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 1.0822486630142173e-17,
+            "speed_squared_imaginary": 9.906754756659299e-25,
+            "speed_squared_real": 9.747128810947376e-19
+          },
+          {
+            "growth_rate_imaginary": 9.872756303915444e-08,
+            "growth_rate_real": -6.258958636904175e-14,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 5.5679382223653685e-16,
+            "speed_squared_imaginary": 1.2358634667688343e-24,
+            "speed_squared_real": 9.747131703646297e-19
+          },
+          {
+            "growth_rate_imaginary": -9.872756303915445e-08,
+            "growth_rate_real": -6.258958636904174e-14,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 5.56793822236538e-16,
+            "speed_squared_imaginary": -1.2358634667688343e-24,
+            "speed_squared_real": 9.7471317036463e-19
+          },
+          {
+            "growth_rate_imaginary": 70.71792565704227,
+            "growth_rate_real": -2.2551354859129593e-12,
+            "normalized_mode_energy": 0.4000495904975878,
+            "polynomial_residual": 1.1489653108579242e-15,
+            "speed_squared_imaginary": 3.189570072787011e-14,
+            "speed_squared_real": 0.5001025009234957
+          },
+          {
+            "growth_rate_imaginary": -70.71792565704227,
+            "growth_rate_real": -2.2551354859129593e-12,
+            "normalized_mode_energy": 0.4000495904975878,
+            "polynomial_residual": 1.1489653108579242e-15,
+            "speed_squared_imaginary": -3.189570072787011e-14,
+            "speed_squared_real": 0.5001025009234957
+          },
+          {
+            "growth_rate_imaginary": 70.71792565704585,
+            "growth_rate_real": 5.25890658469126e-13,
+            "normalized_mode_energy": 0.40004959049753097,
+            "polynomial_residual": 1.522067997266069e-16,
+            "speed_squared_imaginary": -7.437979297870909e-15,
+            "speed_squared_real": 0.5001025009235465
+          },
+          {
+            "growth_rate_imaginary": -70.71792565704585,
+            "growth_rate_real": 5.258906584691259e-13,
+            "normalized_mode_energy": 0.40004959049753097,
+            "polynomial_residual": 1.522067997266069e-16,
+            "speed_squared_imaginary": 7.437979297870909e-15,
+            "speed_squared_real": 0.5001025009235465
+          },
+          {
+            "growth_rate_imaginary": 99.999999989997,
+            "growth_rate_real": 2.5174735920668155e-12,
+            "normalized_mode_energy": 1250.0018751032414,
+            "polynomial_residual": 3.8220421689950374e-15,
+            "speed_squared_imaginary": -5.034947183629985e-14,
+            "speed_squared_real": 0.9999999997999398
+          },
+          {
+            "growth_rate_imaginary": -99.99999998999701,
+            "growth_rate_real": 2.517473592066816e-12,
+            "normalized_mode_energy": 1250.0018751032417,
+            "polynomial_residual": 3.8197435498714435e-15,
+            "speed_squared_imaginary": 5.0349471836299865e-14,
+            "speed_squared_real": 0.9999999997999403
+          },
+          {
+            "growth_rate_imaginary": -99.99999998999964,
+            "growth_rate_real": -2.107077653036631e-18,
+            "normalized_mode_energy": 2500.0025001874747,
+            "polynomial_residual": 1.5426851485820636e-17,
+            "speed_squared_imaginary": -4.214155305651831e-20,
+            "speed_squared_real": 0.9999999997999929
+          },
+          {
+            "growth_rate_imaginary": 99.99999998999965,
+            "growth_rate_real": -2.107077653036631e-18,
+            "normalized_mode_energy": 2500.0025001874747,
+            "polynomial_residual": 3.768969610201565e-17,
+            "speed_squared_imaginary": 4.2141553056518315e-20,
+            "speed_squared_real": 0.9999999997999931
+          },
+          {
+            "growth_rate_imaginary": 99.99999999000381,
+            "growth_rate_real": -8.334108350075074e-13,
+            "normalized_mode_energy": 1250.0018751026505,
+            "polynomial_residual": 1.734194737412149e-14,
+            "speed_squared_imaginary": 1.6668216698483963e-14,
+            "speed_squared_real": 0.9999999998000764
+          },
+          {
+            "growth_rate_imaginary": -99.99999999000383,
+            "growth_rate_real": -8.334108350075074e-13,
+            "normalized_mode_energy": 1250.0018751026505,
+            "polynomial_residual": 1.7343206028917068e-14,
+            "speed_squared_imaginary": -1.6668216698483963e-14,
+            "speed_squared_real": 0.9999999998000766
+          },
+          {
+            "growth_rate_imaginary": 99.99999999000437,
+            "growth_rate_real": 1.001432084683677e-12,
+            "normalized_mode_energy": 2500.002500187512,
+            "polynomial_residual": 6.190132484629999e-15,
+            "speed_squared_imaginary": -2.0028641691671553e-14,
+            "speed_squared_real": 0.9999999998000875
+          },
+          {
+            "growth_rate_imaginary": -99.9999999900044,
+            "growth_rate_real": 1.001432084683677e-12,
+            "normalized_mode_energy": 2500.002500187513,
+            "polynomial_residual": 6.221514171599227e-15,
+            "speed_squared_imaginary": 2.0028641691671556e-14,
+            "speed_squared_real": 0.9999999998000879
+          },
+          {
+            "growth_rate_imaginary": 100.00499993496884,
+            "growth_rate_real": 1.661338392206355e-12,
+            "normalized_mode_energy": 5000.490002277955,
+            "polynomial_residual": 8.519055010161188e-14,
+            "speed_squared_imaginary": -3.322842916091155e-14,
+            "speed_squared_real": 1.0001000011993115
+          },
+          {
+            "growth_rate_imaginary": -100.00499993496882,
+            "growth_rate_real": 1.6613383922063551e-12,
+            "normalized_mode_energy": 5000.490002277954,
+            "polynomial_residual": 8.523502222154231e-14,
+            "speed_squared_imaginary": 3.322842916091155e-14,
+            "speed_squared_real": 1.0001000011993115
+          },
+          {
+            "growth_rate_imaginary": -100.0049999350035,
+            "growth_rate_real": 1.0633572403790631e-15,
+            "normalized_mode_energy": 5000.490002279786,
+            "polynomial_residual": 2.5240327449338743e-16,
+            "speed_squared_imaginary": 2.1268208150998742e-17,
+            "speed_squared_real": 1.0001000012000048
+          },
+          {
+            "growth_rate_imaginary": 100.00499993500351,
+            "growth_rate_real": 1.0633572403790631e-15,
+            "normalized_mode_energy": 5000.490002279786,
+            "polynomial_residual": 2.3014334152896505e-16,
+            "speed_squared_imaginary": -2.1268208150998748e-17,
+            "speed_squared_real": 1.0001000012000052
+          },
+          {
+            "growth_rate_imaginary": 100.00499998499293,
+            "growth_rate_real": 5.842166268259269e-13,
+            "normalized_mode_energy": 5000.4699901832455,
+            "polynomial_residual": 3.2877925975389e-14,
+            "speed_squared_imaginary": -1.1684916751391887e-14,
+            "speed_squared_real": 1.0001000021998434
+          },
+          {
+            "growth_rate_imaginary": -100.00499998499293,
+            "growth_rate_real": 5.842166268259268e-13,
+            "normalized_mode_energy": 5000.4699901832455,
+            "polynomial_residual": 3.2877925975389e-14,
+            "speed_squared_imaginary": 1.1684916751391885e-14,
+            "speed_squared_real": 1.0001000021998434
+          },
+          {
+            "growth_rate_imaginary": 100.00499998501198,
+            "growth_rate_real": -6.512598986037648e-13,
+            "normalized_mode_energy": 5000.469990184987,
+            "polynomial_residual": 2.1683426380237088e-14,
+            "speed_squared_imaginary": 1.3025849230021681e-14,
+            "speed_squared_real": 1.0001000022002247
+          },
+          {
+            "growth_rate_imaginary": -100.00499998501199,
+            "growth_rate_real": -6.512598986037649e-13,
+            "normalized_mode_energy": 5000.469990184988,
+            "polynomial_residual": 2.1717075349109123e-14,
+            "speed_squared_imaginary": -1.3025849230021684e-14,
+            "speed_squared_real": 1.000100002200225
+          }
+        ],
+        "wave_number_ratio": 100.0
+      },
+      {
+        "all_identified_finite_frequency_mode_energies_positive": true,
+        "background": {
+          "a_sigma": 1.0,
+          "aether_parallel": 0.0,
+          "aether_perpendicular": 1e-05,
+          "background_clock_ratio": 1.0,
+          "f_0": 1.0,
+          "k_2": 2.0,
+          "k_b": 1.0,
+          "orientation_strength": -1.0,
+          "scalar_clock_ratio": 1.0
+        },
+        "finite_generalized_root_count": 24,
+        "full_euler_dimension": 26,
+        "gauge_applied_after_full_euler_matrices": true,
+        "gauge_fixed_euler_dimension": 20,
+        "groups": {
+          "finite_scalar": {
+            "count": 4,
+            "maximum_absolute_imaginary": 6.478629317866912e-14,
+            "maximum_real": 0.5000136111496836,
+            "mean_real": 0.5000136111480982,
+            "minimum_real": 0.5000136111465127
+          },
+          "tensor_vector_luminal": {
+            "count": 16,
+            "maximum_absolute_imaginary": 4.155681516431901e-14,
+            "maximum_real": 1.000011111533103,
+            "mean_real": 1.000005555638453,
+            "minimum_real": 0.9999999997984164
+          },
+          "zero_frequency_sector": {
+            "count": 4,
+            "maximum_absolute_imaginary": 7.709687089831414e-25,
+            "maximum_real": 9.56768818393409e-21,
+            "mean_real": 4.7835758505575196e-21,
+            "minimum_real": -6.650392586286942e-25
+          }
+        },
+        "inferred_linear_physical_degrees_of_freedom": 6.0,
+        "infinite_generalized_root_count": 16,
+        "maximum_infinite_homogeneous_beta_margin": 0.0,
+        "maximum_polynomial_residual": 3.382289284559732e-13,
+        "minimum_finite_homogeneous_beta_margin": 2108.2219990882845,
+        "minimum_normalized_propagating_mode_energy": 0.4000069332387284,
+        "propagating_energy_root_count": 20,
+        "roots": [
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": -2.4464981765082614e-10,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 6.030994827478239e-16,
+            "speed_squared_imaginary": 0.0,
+            "speed_squared_real": -6.650392586286942e-25
+          },
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": 1.9160734368022592e-10,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 6.029438645713434e-16,
+            "speed_squared_imaginary": -0.0,
+            "speed_squared_real": -4.0792637946880245e-25
+          },
+          {
+            "growth_rate_imaginary": 2.9344368078932634e-08,
+            "growth_rate_real": -1.1822913279618082e-12,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 2.720864179466933e-18,
+            "speed_squared_imaginary": 7.7096870898314135e-25,
+            "speed_squared_real": 9.567688183934087e-21
+          },
+          {
+            "growth_rate_imaginary": -2.9344368078932637e-08,
+            "growth_rate_real": -1.1822913279618082e-12,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 2.720864179464798e-18,
+            "speed_squared_imaginary": -7.709687089831414e-25,
+            "speed_squared_real": 9.56768818393409e-21
+          },
+          {
+            "growth_rate_imaginary": 212.134921696514,
+            "growth_rate_real": 7.869476853395279e-12,
+            "normalized_mode_energy": 0.4000069332569183,
+            "polynomial_residual": 1.806858478018645e-16,
+            "speed_squared_imaginary": -3.7097574579723046e-14,
+            "speed_squared_real": 0.5000136111465127
+          },
+          {
+            "growth_rate_imaginary": -212.13492169651403,
+            "growth_rate_real": 7.869476853395279e-12,
+            "normalized_mode_energy": 0.40000693325873726,
+            "polynomial_residual": 1.8427410044493755e-16,
+            "speed_squared_imaginary": 3.709757457972305e-14,
+            "speed_squared_real": 0.5000136111465128
+          },
+          {
+            "growth_rate_imaginary": 212.13492169718666,
+            "growth_rate_real": 1.3743061112784117e-11,
+            "normalized_mode_energy": 0.4000069332387284,
+            "polynomial_residual": 1.3125930072951297e-16,
+            "speed_squared_imaginary": -6.478629317866912e-14,
+            "speed_squared_real": 0.5000136111496836
+          },
+          {
+            "growth_rate_imaginary": -212.13492169718666,
+            "growth_rate_real": 1.3743061112784117e-11,
+            "normalized_mode_energy": 0.4000069332387284,
+            "polynomial_residual": 1.3125930072951297e-16,
+            "speed_squared_imaginary": 6.478629317866912e-14,
+            "speed_squared_real": 0.5000136111496836
+          },
+          {
+            "growth_rate_imaginary": 299.9999999697624,
+            "growth_rate_real": 1.3257618808925886e-12,
+            "normalized_mode_energy": 11250.151865351017,
+            "polynomial_residual": 2.1721767743436268e-13,
+            "speed_squared_imaginary": -8.838412538393084e-15,
+            "speed_squared_real": 0.9999999997984164
+          },
+          {
+            "growth_rate_imaginary": -299.9999999697625,
+            "growth_rate_real": 1.3257618808925886e-12,
+            "normalized_mode_energy": 11250.15186535102,
+            "polynomial_residual": 2.1721503627759447e-13,
+            "speed_squared_imaginary": 8.838412538393086e-15,
+            "speed_squared_real": 0.9999999997984166
+          },
+          {
+            "growth_rate_imaginary": -299.9999999699241,
+            "growth_rate_real": 1.5894298217286345e-12,
+            "normalized_mode_energy": 11250.151862935667,
+            "polynomial_residual": 1.5004151869118163e-13,
+            "speed_squared_imaginary": 1.059619881046193e-14,
+            "speed_squared_real": 0.9999999997994942
+          },
+          {
+            "growth_rate_imaginary": 299.9999999699241,
+            "growth_rate_real": 1.5894298217286347e-12,
+            "normalized_mode_energy": 11250.151862935667,
+            "polynomial_residual": 1.5004151869118163e-13,
+            "speed_squared_imaginary": -1.0596198810461932e-14,
+            "speed_squared_real": 0.9999999997994942
+          },
+          {
+            "growth_rate_imaginary": -299.9999999700005,
+            "growth_rate_real": -1.1332996981803044e-16,
+            "normalized_mode_energy": 22500.202489088188,
+            "polynomial_residual": 7.231384892358376e-17,
+            "speed_squared_imaginary": -7.555331320446509e-19,
+            "speed_squared_real": 0.9999999998000033
+          },
+          {
+            "growth_rate_imaginary": 299.9999999700005,
+            "growth_rate_real": -1.1332996981803041e-16,
+            "normalized_mode_energy": 22500.202489088188,
+            "polynomial_residual": 7.231384892358376e-17,
+            "speed_squared_imaginary": 7.555331320446508e-19,
+            "speed_squared_real": 0.9999999998000033
+          },
+          {
+            "growth_rate_imaginary": 299.9999999701307,
+            "growth_rate_real": -3.729046271829378e-12,
+            "normalized_mode_energy": 22500.202489283787,
+            "polynomial_residual": 3.382258238403667e-13,
+            "speed_squared_imaginary": 2.4860308476387322e-14,
+            "speed_squared_real": 0.9999999998008715
+          },
+          {
+            "growth_rate_imaginary": -299.9999999701308,
+            "growth_rate_real": -3.729046271829379e-12,
+            "normalized_mode_energy": 22500.20248928379,
+            "polynomial_residual": 3.382289284559732e-13,
+            "speed_squared_imaginary": -2.4860308476387335e-14,
+            "speed_squared_real": 0.999999999800872
+          },
+          {
+            "growth_rate_imaginary": -300.00166670856566,
+            "growth_rate_real": 4.169959783878734e-12,
+            "normalized_mode_energy": 44999.6900531812,
+            "polynomial_residual": 2.38005131985135e-13,
+            "speed_squared_imaginary": 2.779988633936246e-14,
+            "speed_squared_real": 1.0000111114213037
+          },
+          {
+            "growth_rate_imaginary": 300.0016667085657,
+            "growth_rate_real": 4.169959783878734e-12,
+            "normalized_mode_energy": 44999.69005318121,
+            "polynomial_residual": 2.3797722603117754e-13,
+            "speed_squared_imaginary": -2.7799886339362465e-14,
+            "speed_squared_real": 1.0000111114213042
+          },
+          {
+            "growth_rate_imaginary": -300.0016667087029,
+            "growth_rate_real": -4.012451930086058e-12,
+            "normalized_mode_energy": 44999.69005211599,
+            "polynomial_residual": 3.4259024220186977e-15,
+            "speed_squared_imaginary": -2.6749828146985987e-14,
+            "speed_squared_real": 1.0000111114222185
+          },
+          {
+            "growth_rate_imaginary": 300.0016667087029,
+            "growth_rate_real": -4.012451930086058e-12,
+            "normalized_mode_energy": 44999.69005211599,
+            "polynomial_residual": 3.4259024220186977e-15,
+            "speed_squared_imaginary": 2.6749828146985987e-14,
+            "speed_squared_real": 1.0000111114222185
+          },
+          {
+            "growth_rate_imaginary": 300.0016667252021,
+            "growth_rate_real": 6.233487642944677e-12,
+            "normalized_mode_energy": 44998.07017742101,
+            "polynomial_residual": 1.3750526241410184e-13,
+            "speed_squared_imaginary": -4.1556815164318995e-14,
+            "speed_squared_real": 1.000011111532214
+          },
+          {
+            "growth_rate_imaginary": -300.00166672520214,
+            "growth_rate_real": 6.233487642944678e-12,
+            "normalized_mode_energy": 44998.07017742101,
+            "polynomial_residual": 1.3746571474741831e-13,
+            "speed_squared_imaginary": 4.155681516431901e-14,
+            "speed_squared_real": 1.0000111115322143
+          },
+          {
+            "growth_rate_imaginary": -300.0016667253354,
+            "growth_rate_real": -1.520405981917921e-12,
+            "normalized_mode_energy": 44998.07017742462,
+            "polynomial_residual": 2.868213041315388e-14,
+            "speed_squared_imaginary": -1.0136096192767699e-14,
+            "speed_squared_real": 1.0000111115331025
+          },
+          {
+            "growth_rate_imaginary": 300.00166672533544,
+            "growth_rate_real": -1.5204059819179212e-12,
+            "normalized_mode_energy": 44998.07017742462,
+            "polynomial_residual": 2.864261742366765e-14,
+            "speed_squared_imaginary": 1.0136096192767703e-14,
+            "speed_squared_real": 1.000011111533103
+          }
+        ],
+        "wave_number_ratio": 300.0
+      },
+      {
+        "all_identified_finite_frequency_mode_energies_positive": true,
+        "background": {
+          "a_sigma": 1.0,
+          "aether_parallel": 0.0,
+          "aether_perpendicular": 1e-05,
+          "background_clock_ratio": 1.0,
+          "f_0": 1.0,
+          "k_2": 2.0,
+          "k_b": 1.0,
+          "orientation_strength": -1.0,
+          "scalar_clock_ratio": 1.0
+        },
+        "finite_generalized_root_count": 24,
+        "full_euler_dimension": 26,
+        "gauge_applied_after_full_euler_matrices": true,
+        "gauge_fixed_euler_dimension": 20,
+        "groups": {
+          "finite_scalar": {
+            "count": 4,
+            "maximum_absolute_imaginary": 1.2334979080946418e-13,
+            "maximum_real": 0.5000034999234919,
+            "mean_real": 0.5000034999154808,
+            "minimum_real": 0.5000034999074695
+          },
+          "tensor_vector_luminal": {
+            "count": 16,
+            "maximum_absolute_imaginary": 2.2879388631791256e-12,
+            "maximum_real": 1.0000010002200255,
+            "mean_real": 1.0000005000128735,
+            "minimum_real": 0.9999999997853639
+          },
+          "zero_frequency_sector": {
+            "count": 4,
+            "maximum_absolute_imaginary": 0.0,
+            "maximum_real": -9.207948721538968e-24,
+            "mean_real": -7.973120963556235e-23,
+            "minimum_real": -1.5000515594436753e-22
+          }
+        },
+        "inferred_linear_physical_degrees_of_freedom": 6.0,
+        "infinite_generalized_root_count": 16,
+        "maximum_infinite_homogeneous_beta_margin": 0.0,
+        "maximum_polynomial_residual": 1.0635891589342367e-11,
+        "minimum_finite_homogeneous_beta_margin": 632.4550893427713,
+        "minimum_normalized_propagating_mode_energy": 0.4000020798557671,
+        "propagating_energy_root_count": 20,
+        "roots": [
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": 1.2247659202654502e-08,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 3.5332126819571754e-19,
+            "speed_squared_imaginary": -0.0,
+            "speed_squared_real": -1.5000515594436753e-22
+          },
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": -1.2246666449599685e-08,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 7.637135292896365e-14,
+            "speed_squared_imaginary": 0.0,
+            "speed_squared_real": -1.4998083912775057e-22
+          },
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": -3.11943821041423e-09,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 2.9655935444680803e-16,
+            "speed_squared_imaginary": 0.0,
+            "speed_squared_real": -9.730894748592333e-24
+          },
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": 3.0344602026619114e-09,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 2.975992217044129e-16,
+            "speed_squared_imaginary": -0.0,
+            "speed_squared_real": -9.207948721538968e-24
+          },
+          {
+            "growth_rate_imaginary": -707.109255990522,
+            "growth_rate_real": 8.527924472247277e-11,
+            "normalized_mode_energy": 0.4000020800594939,
+            "polynomial_residual": 1.487848445892126e-16,
+            "speed_squared_imaginary": 1.2060348657428274e-13,
+            "speed_squared_real": 0.5000034999074695
+          },
+          {
+            "growth_rate_imaginary": 707.1092559905221,
+            "growth_rate_real": 8.527924472247277e-11,
+            "normalized_mode_energy": 0.40000208008132176,
+            "polynomial_residual": 1.591026647892976e-16,
+            "speed_squared_imaginary": -1.2060348657428276e-13,
+            "speed_squared_real": 0.5000034999074697
+          },
+          {
+            "growth_rate_imaginary": -707.1092560018513,
+            "growth_rate_real": 8.722116827243258e-11,
+            "normalized_mode_energy": 0.4000020798557671,
+            "polynomial_residual": 1.4792539690024955e-16,
+            "speed_squared_imaginary": 1.2334979080946418e-13,
+            "speed_squared_real": 0.5000034999234918
+          },
+          {
+            "growth_rate_imaginary": 707.1092560018515,
+            "growth_rate_real": 8.722116827243258e-11,
+            "normalized_mode_energy": 0.40000207987759495,
+            "polynomial_residual": 1.4364481156772056e-16,
+            "speed_squared_imaginary": -1.2334979080946418e-13,
+            "speed_squared_real": 0.5000034999234919
+          },
+          {
+            "growth_rate_imaginary": -999.9999998926819,
+            "growth_rate_real": 3.658985099004788e-10,
+            "normalized_mode_energy": 250024.9865756703,
+            "polynomial_residual": 3.603659668844862e-12,
+            "speed_squared_imaginary": 7.317970197224226e-13,
+            "speed_squared_real": 0.9999999997853639
+          },
+          {
+            "growth_rate_imaginary": 999.999999892682,
+            "growth_rate_real": 3.658985099004789e-10,
+            "normalized_mode_energy": 250024.98657567034,
+            "polynomial_residual": 3.6036561158043493e-12,
+            "speed_squared_imaginary": -7.317970197224229e-13,
+            "speed_squared_real": 0.9999999997853641
+          },
+          {
+            "growth_rate_imaginary": 999.999999898219,
+            "growth_rate_real": -4.4107181190388245e-12,
+            "normalized_mode_energy": 125018.74199296553,
+            "polynomial_residual": 1.341312041355246e-13,
+            "speed_squared_imaginary": 8.821436237179796e-15,
+            "speed_squared_real": 0.9999999997964382
+          },
+          {
+            "growth_rate_imaginary": -999.999999898219,
+            "growth_rate_real": -4.4107181190388245e-12,
+            "normalized_mode_energy": 125018.74199296553,
+            "polynomial_residual": 1.341312041355246e-13,
+            "speed_squared_imaginary": -8.821436237179796e-15,
+            "speed_squared_real": 0.9999999997964382
+          },
+          {
+            "growth_rate_imaginary": 999.9999999000206,
+            "growth_rate_real": -1.0116255164009772e-15,
+            "normalized_mode_energy": 250024.98703269337,
+            "polynomial_residual": 4.270732132673806e-17,
+            "speed_squared_imaginary": 2.023251032599671e-18,
+            "speed_squared_real": 0.9999999998000413
+          },
+          {
+            "growth_rate_imaginary": -999.9999999000208,
+            "growth_rate_real": -1.0116255164009774e-15,
+            "normalized_mode_energy": 250024.98703269343,
+            "polynomial_residual": 1.422631688516677e-17,
+            "speed_squared_imaginary": -2.023251032599672e-18,
+            "speed_squared_real": 0.9999999998000417
+          },
+          {
+            "growth_rate_imaginary": -999.9999999330917,
+            "growth_rate_real": 1.1439694316661038e-09,
+            "normalized_mode_energy": 125018.74634114039,
+            "polynomial_residual": 1.0635889818957232e-11,
+            "speed_squared_imaginary": 2.2879388631791256e-12,
+            "speed_squared_real": 0.9999999998661833
+          },
+          {
+            "growth_rate_imaginary": 999.9999999330918,
+            "growth_rate_real": 1.1439694316661038e-09,
+            "normalized_mode_energy": 125018.74634114039,
+            "polynomial_residual": 1.0635891589342367e-11,
+            "speed_squared_imaginary": -2.2879388631791256e-12,
+            "speed_squared_real": 0.9999999998661835
+          },
+          {
+            "growth_rate_imaginary": 1000.0005001048518,
+            "growth_rate_real": 3.0074908326506377e-12,
+            "normalized_mode_energy": 499900.58064508904,
+            "polynomial_residual": 6.1448612989615845e-15,
+            "speed_squared_imaginary": -6.01498467342279e-15,
+            "speed_squared_real": 1.0000010002099535
+          },
+          {
+            "growth_rate_imaginary": -1000.0005001048518,
+            "growth_rate_real": 3.0074908326506377e-12,
+            "normalized_mode_energy": 499900.58064508904,
+            "polynomial_residual": 6.1448612989615845e-15,
+            "speed_squared_imaginary": 6.01498467342279e-15,
+            "speed_squared_real": 1.0000010002099535
+          },
+          {
+            "growth_rate_imaginary": -1000.0005001048526,
+            "growth_rate_real": -2.87005714333833e-10,
+            "normalized_mode_energy": 499900.5845736781,
+            "polynomial_residual": 7.253458344115038e-14,
+            "speed_squared_imaginary": -5.74011715733567e-13,
+            "speed_squared_real": 1.0000010002099553
+          },
+          {
+            "growth_rate_imaginary": 1000.0005001048526,
+            "growth_rate_real": -2.87005714333833e-10,
+            "normalized_mode_energy": 499900.5845736781,
+            "polynomial_residual": 7.253458344115038e-14,
+            "speed_squared_imaginary": 5.74011715733567e-13,
+            "speed_squared_real": 1.0000010002099553
+          },
+          {
+            "growth_rate_imaginary": -1000.0005001073888,
+            "growth_rate_real": -1.1230322288914839e-09,
+            "normalized_mode_energy": 499700.82661202585,
+            "polynomial_residual": 6.899722422663971e-13,
+            "speed_squared_imaginary": -2.246065581056399e-12,
+            "speed_squared_real": 1.0000010002150277
+          },
+          {
+            "growth_rate_imaginary": 1000.000500107389,
+            "growth_rate_real": -1.1230322288914837e-09,
+            "normalized_mode_energy": 499700.82661202597,
+            "polynomial_residual": 6.899223347573889e-13,
+            "speed_squared_imaginary": 2.246065581056399e-12,
+            "speed_squared_real": 1.0000010002150281
+          },
+          {
+            "growth_rate_imaginary": 1000.0005001098875,
+            "growth_rate_real": 3.5065052028141414e-12,
+            "normalized_mode_energy": 499700.8715635111,
+            "polynomial_residual": 1.1709325052269867e-14,
+            "speed_squared_imaginary": -7.0130139129041276e-15,
+            "speed_squared_real": 1.000001000220025
+          },
+          {
+            "growth_rate_imaginary": -1000.0005001098876,
+            "growth_rate_real": 3.5065052028141418e-12,
+            "normalized_mode_energy": 499700.87156351114,
+            "polynomial_residual": 1.1729800259820563e-14,
+            "speed_squared_imaginary": 7.01301391290413e-15,
+            "speed_squared_real": 1.0000010002200255
+          }
+        ],
+        "wave_number_ratio": 1000.0
+      }
+    ],
+    "positive": [
+      {
+        "all_identified_finite_frequency_mode_energies_positive": true,
+        "background": {
+          "a_sigma": 1.0,
+          "aether_parallel": 0.0,
+          "aether_perpendicular": 1e-05,
+          "background_clock_ratio": 1.0,
+          "f_0": 1.0,
+          "k_2": 2.0,
+          "k_b": 1.0,
+          "orientation_strength": 1.0,
+          "scalar_clock_ratio": 1.0
+        },
+        "finite_generalized_root_count": 24,
+        "full_euler_dimension": 26,
+        "gauge_applied_after_full_euler_matrices": true,
+        "gauge_fixed_euler_dimension": 20,
+        "groups": {
+          "finite_scalar": {
+            "count": 4,
+            "maximum_absolute_imaginary": 3.189570072787011e-14,
+            "maximum_real": 0.5001025009235465,
+            "mean_real": 0.5001025009235212,
+            "minimum_real": 0.5001025009234957
+          },
+          "tensor_vector_luminal": {
+            "count": 16,
+            "maximum_absolute_imaginary": 5.0349471836299865e-14,
+            "maximum_real": 1.000100002200225,
+            "mean_real": 1.0000500007499353,
+            "minimum_real": 0.9999999997999398
+          },
+          "zero_frequency_sector": {
+            "count": 4,
+            "maximum_absolute_imaginary": 1.2358634667688343e-24,
+            "maximum_real": 9.7471317036463e-19,
+            "mean_real": 9.747130257296835e-19,
+            "minimum_real": 9.747128810947366e-19
+          }
+        },
+        "inferred_linear_physical_degrees_of_freedom": 6.0,
+        "infinite_generalized_root_count": 16,
+        "maximum_infinite_homogeneous_beta_margin": 0.0,
+        "maximum_polynomial_residual": 8.523502222154231e-14,
+        "minimum_finite_homogeneous_beta_margin": 6325.67761181426,
+        "minimum_normalized_propagating_mode_energy": 0.40004959049753097,
+        "propagating_energy_root_count": 20,
+        "roots": [
+          {
+            "growth_rate_imaginary": 9.87275483892408e-08,
+            "growth_rate_real": 5.0172190631135525e-14,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 1.0822486630146803e-17,
+            "speed_squared_imaginary": -9.906754756659293e-25,
+            "speed_squared_real": 9.747128810947366e-19
+          },
+          {
+            "growth_rate_imaginary": -9.872754838924083e-08,
+            "growth_rate_real": 5.0172190631135525e-14,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 1.0822486630142173e-17,
+            "speed_squared_imaginary": 9.906754756659299e-25,
+            "speed_squared_real": 9.747128810947376e-19
+          },
+          {
+            "growth_rate_imaginary": 9.872756303915444e-08,
+            "growth_rate_real": -6.258958636904175e-14,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 5.5679382223653685e-16,
+            "speed_squared_imaginary": 1.2358634667688343e-24,
+            "speed_squared_real": 9.747131703646297e-19
+          },
+          {
+            "growth_rate_imaginary": -9.872756303915445e-08,
+            "growth_rate_real": -6.258958636904174e-14,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 5.56793822236538e-16,
+            "speed_squared_imaginary": -1.2358634667688343e-24,
+            "speed_squared_real": 9.7471317036463e-19
+          },
+          {
+            "growth_rate_imaginary": 70.71792565704227,
+            "growth_rate_real": -2.2551354859129593e-12,
+            "normalized_mode_energy": 0.4000495904975878,
+            "polynomial_residual": 1.1489653108579242e-15,
+            "speed_squared_imaginary": 3.189570072787011e-14,
+            "speed_squared_real": 0.5001025009234957
+          },
+          {
+            "growth_rate_imaginary": -70.71792565704227,
+            "growth_rate_real": -2.2551354859129593e-12,
+            "normalized_mode_energy": 0.4000495904975878,
+            "polynomial_residual": 1.1489653108579242e-15,
+            "speed_squared_imaginary": -3.189570072787011e-14,
+            "speed_squared_real": 0.5001025009234957
+          },
+          {
+            "growth_rate_imaginary": 70.71792565704585,
+            "growth_rate_real": 5.25890658469126e-13,
+            "normalized_mode_energy": 0.40004959049753097,
+            "polynomial_residual": 1.522067997266069e-16,
+            "speed_squared_imaginary": -7.437979297870909e-15,
+            "speed_squared_real": 0.5001025009235465
+          },
+          {
+            "growth_rate_imaginary": -70.71792565704585,
+            "growth_rate_real": 5.258906584691259e-13,
+            "normalized_mode_energy": 0.40004959049753097,
+            "polynomial_residual": 1.522067997266069e-16,
+            "speed_squared_imaginary": 7.437979297870909e-15,
+            "speed_squared_real": 0.5001025009235465
+          },
+          {
+            "growth_rate_imaginary": 99.999999989997,
+            "growth_rate_real": 2.5174735920668155e-12,
+            "normalized_mode_energy": 1250.0018751032414,
+            "polynomial_residual": 3.8220421689950374e-15,
+            "speed_squared_imaginary": -5.034947183629985e-14,
+            "speed_squared_real": 0.9999999997999398
+          },
+          {
+            "growth_rate_imaginary": -99.99999998999701,
+            "growth_rate_real": 2.517473592066816e-12,
+            "normalized_mode_energy": 1250.0018751032417,
+            "polynomial_residual": 3.8197435498714435e-15,
+            "speed_squared_imaginary": 5.0349471836299865e-14,
+            "speed_squared_real": 0.9999999997999403
+          },
+          {
+            "growth_rate_imaginary": -99.99999998999964,
+            "growth_rate_real": -2.107077653036631e-18,
+            "normalized_mode_energy": 2500.0025001874747,
+            "polynomial_residual": 1.5426851485820636e-17,
+            "speed_squared_imaginary": -4.214155305651831e-20,
+            "speed_squared_real": 0.9999999997999929
+          },
+          {
+            "growth_rate_imaginary": 99.99999998999965,
+            "growth_rate_real": -2.107077653036631e-18,
+            "normalized_mode_energy": 2500.0025001874747,
+            "polynomial_residual": 3.768969610201565e-17,
+            "speed_squared_imaginary": 4.2141553056518315e-20,
+            "speed_squared_real": 0.9999999997999931
+          },
+          {
+            "growth_rate_imaginary": 99.99999999000381,
+            "growth_rate_real": -8.334108350075074e-13,
+            "normalized_mode_energy": 1250.0018751026505,
+            "polynomial_residual": 1.734194737412149e-14,
+            "speed_squared_imaginary": 1.6668216698483963e-14,
+            "speed_squared_real": 0.9999999998000764
+          },
+          {
+            "growth_rate_imaginary": -99.99999999000383,
+            "growth_rate_real": -8.334108350075074e-13,
+            "normalized_mode_energy": 1250.0018751026505,
+            "polynomial_residual": 1.7343206028917068e-14,
+            "speed_squared_imaginary": -1.6668216698483963e-14,
+            "speed_squared_real": 0.9999999998000766
+          },
+          {
+            "growth_rate_imaginary": 99.99999999000437,
+            "growth_rate_real": 1.001432084683677e-12,
+            "normalized_mode_energy": 2500.002500187512,
+            "polynomial_residual": 6.190132484629999e-15,
+            "speed_squared_imaginary": -2.0028641691671553e-14,
+            "speed_squared_real": 0.9999999998000875
+          },
+          {
+            "growth_rate_imaginary": -99.9999999900044,
+            "growth_rate_real": 1.001432084683677e-12,
+            "normalized_mode_energy": 2500.002500187513,
+            "polynomial_residual": 6.221514171599227e-15,
+            "speed_squared_imaginary": 2.0028641691671556e-14,
+            "speed_squared_real": 0.9999999998000879
+          },
+          {
+            "growth_rate_imaginary": 100.00499993496884,
+            "growth_rate_real": 1.661338392206355e-12,
+            "normalized_mode_energy": 5000.490002277955,
+            "polynomial_residual": 8.519055010161188e-14,
+            "speed_squared_imaginary": -3.322842916091155e-14,
+            "speed_squared_real": 1.0001000011993115
+          },
+          {
+            "growth_rate_imaginary": -100.00499993496882,
+            "growth_rate_real": 1.6613383922063551e-12,
+            "normalized_mode_energy": 5000.490002277954,
+            "polynomial_residual": 8.523502222154231e-14,
+            "speed_squared_imaginary": 3.322842916091155e-14,
+            "speed_squared_real": 1.0001000011993115
+          },
+          {
+            "growth_rate_imaginary": -100.0049999350035,
+            "growth_rate_real": 1.0633572403790631e-15,
+            "normalized_mode_energy": 5000.490002279786,
+            "polynomial_residual": 2.5240327449338743e-16,
+            "speed_squared_imaginary": 2.1268208150998742e-17,
+            "speed_squared_real": 1.0001000012000048
+          },
+          {
+            "growth_rate_imaginary": 100.00499993500351,
+            "growth_rate_real": 1.0633572403790631e-15,
+            "normalized_mode_energy": 5000.490002279786,
+            "polynomial_residual": 2.3014334152896505e-16,
+            "speed_squared_imaginary": -2.1268208150998748e-17,
+            "speed_squared_real": 1.0001000012000052
+          },
+          {
+            "growth_rate_imaginary": 100.00499998499293,
+            "growth_rate_real": 5.842166268259269e-13,
+            "normalized_mode_energy": 5000.4699901832455,
+            "polynomial_residual": 3.2877925975389e-14,
+            "speed_squared_imaginary": -1.1684916751391887e-14,
+            "speed_squared_real": 1.0001000021998434
+          },
+          {
+            "growth_rate_imaginary": -100.00499998499293,
+            "growth_rate_real": 5.842166268259268e-13,
+            "normalized_mode_energy": 5000.4699901832455,
+            "polynomial_residual": 3.2877925975389e-14,
+            "speed_squared_imaginary": 1.1684916751391885e-14,
+            "speed_squared_real": 1.0001000021998434
+          },
+          {
+            "growth_rate_imaginary": 100.00499998501198,
+            "growth_rate_real": -6.512598986037648e-13,
+            "normalized_mode_energy": 5000.469990184987,
+            "polynomial_residual": 2.1683426380237088e-14,
+            "speed_squared_imaginary": 1.3025849230021681e-14,
+            "speed_squared_real": 1.0001000022002247
+          },
+          {
+            "growth_rate_imaginary": -100.00499998501199,
+            "growth_rate_real": -6.512598986037649e-13,
+            "normalized_mode_energy": 5000.469990184988,
+            "polynomial_residual": 2.1717075349109123e-14,
+            "speed_squared_imaginary": -1.3025849230021684e-14,
+            "speed_squared_real": 1.000100002200225
+          }
+        ],
+        "wave_number_ratio": 100.0
+      },
+      {
+        "all_identified_finite_frequency_mode_energies_positive": true,
+        "background": {
+          "a_sigma": 1.0,
+          "aether_parallel": 0.0,
+          "aether_perpendicular": 1e-05,
+          "background_clock_ratio": 1.0,
+          "f_0": 1.0,
+          "k_2": 2.0,
+          "k_b": 1.0,
+          "orientation_strength": 1.0,
+          "scalar_clock_ratio": 1.0
+        },
+        "finite_generalized_root_count": 24,
+        "full_euler_dimension": 26,
+        "gauge_applied_after_full_euler_matrices": true,
+        "gauge_fixed_euler_dimension": 20,
+        "groups": {
+          "finite_scalar": {
+            "count": 4,
+            "maximum_absolute_imaginary": 6.478629317866912e-14,
+            "maximum_real": 0.5000136111496836,
+            "mean_real": 0.5000136111480982,
+            "minimum_real": 0.5000136111465127
+          },
+          "tensor_vector_luminal": {
+            "count": 16,
+            "maximum_absolute_imaginary": 4.155681516431901e-14,
+            "maximum_real": 1.000011111533103,
+            "mean_real": 1.000005555638453,
+            "minimum_real": 0.9999999997984164
+          },
+          "zero_frequency_sector": {
+            "count": 4,
+            "maximum_absolute_imaginary": 7.709687089831414e-25,
+            "maximum_real": 9.56768818393409e-21,
+            "mean_real": 4.7835758505575196e-21,
+            "minimum_real": -6.650392586286942e-25
+          }
+        },
+        "inferred_linear_physical_degrees_of_freedom": 6.0,
+        "infinite_generalized_root_count": 16,
+        "maximum_infinite_homogeneous_beta_margin": 0.0,
+        "maximum_polynomial_residual": 3.382289284559732e-13,
+        "minimum_finite_homogeneous_beta_margin": 2108.2219990882845,
+        "minimum_normalized_propagating_mode_energy": 0.4000069332387284,
+        "propagating_energy_root_count": 20,
+        "roots": [
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": -2.4464981765082614e-10,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 6.030994827478239e-16,
+            "speed_squared_imaginary": 0.0,
+            "speed_squared_real": -6.650392586286942e-25
+          },
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": 1.9160734368022592e-10,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 6.029438645713434e-16,
+            "speed_squared_imaginary": -0.0,
+            "speed_squared_real": -4.0792637946880245e-25
+          },
+          {
+            "growth_rate_imaginary": 2.9344368078932634e-08,
+            "growth_rate_real": -1.1822913279618082e-12,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 2.720864179466933e-18,
+            "speed_squared_imaginary": 7.7096870898314135e-25,
+            "speed_squared_real": 9.567688183934087e-21
+          },
+          {
+            "growth_rate_imaginary": -2.9344368078932637e-08,
+            "growth_rate_real": -1.1822913279618082e-12,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 2.720864179464798e-18,
+            "speed_squared_imaginary": -7.709687089831414e-25,
+            "speed_squared_real": 9.56768818393409e-21
+          },
+          {
+            "growth_rate_imaginary": 212.134921696514,
+            "growth_rate_real": 7.869476853395279e-12,
+            "normalized_mode_energy": 0.4000069332569183,
+            "polynomial_residual": 1.806858478018645e-16,
+            "speed_squared_imaginary": -3.7097574579723046e-14,
+            "speed_squared_real": 0.5000136111465127
+          },
+          {
+            "growth_rate_imaginary": -212.13492169651403,
+            "growth_rate_real": 7.869476853395279e-12,
+            "normalized_mode_energy": 0.40000693325873726,
+            "polynomial_residual": 1.8427410044493755e-16,
+            "speed_squared_imaginary": 3.709757457972305e-14,
+            "speed_squared_real": 0.5000136111465128
+          },
+          {
+            "growth_rate_imaginary": 212.13492169718666,
+            "growth_rate_real": 1.3743061112784117e-11,
+            "normalized_mode_energy": 0.4000069332387284,
+            "polynomial_residual": 1.3125930072951297e-16,
+            "speed_squared_imaginary": -6.478629317866912e-14,
+            "speed_squared_real": 0.5000136111496836
+          },
+          {
+            "growth_rate_imaginary": -212.13492169718666,
+            "growth_rate_real": 1.3743061112784117e-11,
+            "normalized_mode_energy": 0.4000069332387284,
+            "polynomial_residual": 1.3125930072951297e-16,
+            "speed_squared_imaginary": 6.478629317866912e-14,
+            "speed_squared_real": 0.5000136111496836
+          },
+          {
+            "growth_rate_imaginary": 299.9999999697624,
+            "growth_rate_real": 1.3257618808925886e-12,
+            "normalized_mode_energy": 11250.151865351017,
+            "polynomial_residual": 2.1721767743436268e-13,
+            "speed_squared_imaginary": -8.838412538393084e-15,
+            "speed_squared_real": 0.9999999997984164
+          },
+          {
+            "growth_rate_imaginary": -299.9999999697625,
+            "growth_rate_real": 1.3257618808925886e-12,
+            "normalized_mode_energy": 11250.15186535102,
+            "polynomial_residual": 2.1721503627759447e-13,
+            "speed_squared_imaginary": 8.838412538393086e-15,
+            "speed_squared_real": 0.9999999997984166
+          },
+          {
+            "growth_rate_imaginary": -299.9999999699241,
+            "growth_rate_real": 1.5894298217286345e-12,
+            "normalized_mode_energy": 11250.151862935667,
+            "polynomial_residual": 1.5004151869118163e-13,
+            "speed_squared_imaginary": 1.059619881046193e-14,
+            "speed_squared_real": 0.9999999997994942
+          },
+          {
+            "growth_rate_imaginary": 299.9999999699241,
+            "growth_rate_real": 1.5894298217286347e-12,
+            "normalized_mode_energy": 11250.151862935667,
+            "polynomial_residual": 1.5004151869118163e-13,
+            "speed_squared_imaginary": -1.0596198810461932e-14,
+            "speed_squared_real": 0.9999999997994942
+          },
+          {
+            "growth_rate_imaginary": -299.9999999700005,
+            "growth_rate_real": -1.1332996981803044e-16,
+            "normalized_mode_energy": 22500.202489088188,
+            "polynomial_residual": 7.231384892358376e-17,
+            "speed_squared_imaginary": -7.555331320446509e-19,
+            "speed_squared_real": 0.9999999998000033
+          },
+          {
+            "growth_rate_imaginary": 299.9999999700005,
+            "growth_rate_real": -1.1332996981803041e-16,
+            "normalized_mode_energy": 22500.202489088188,
+            "polynomial_residual": 7.231384892358376e-17,
+            "speed_squared_imaginary": 7.555331320446508e-19,
+            "speed_squared_real": 0.9999999998000033
+          },
+          {
+            "growth_rate_imaginary": 299.9999999701307,
+            "growth_rate_real": -3.729046271829378e-12,
+            "normalized_mode_energy": 22500.202489283787,
+            "polynomial_residual": 3.382258238403667e-13,
+            "speed_squared_imaginary": 2.4860308476387322e-14,
+            "speed_squared_real": 0.9999999998008715
+          },
+          {
+            "growth_rate_imaginary": -299.9999999701308,
+            "growth_rate_real": -3.729046271829379e-12,
+            "normalized_mode_energy": 22500.20248928379,
+            "polynomial_residual": 3.382289284559732e-13,
+            "speed_squared_imaginary": -2.4860308476387335e-14,
+            "speed_squared_real": 0.999999999800872
+          },
+          {
+            "growth_rate_imaginary": -300.00166670856566,
+            "growth_rate_real": 4.169959783878734e-12,
+            "normalized_mode_energy": 44999.6900531812,
+            "polynomial_residual": 2.38005131985135e-13,
+            "speed_squared_imaginary": 2.779988633936246e-14,
+            "speed_squared_real": 1.0000111114213037
+          },
+          {
+            "growth_rate_imaginary": 300.0016667085657,
+            "growth_rate_real": 4.169959783878734e-12,
+            "normalized_mode_energy": 44999.69005318121,
+            "polynomial_residual": 2.3797722603117754e-13,
+            "speed_squared_imaginary": -2.7799886339362465e-14,
+            "speed_squared_real": 1.0000111114213042
+          },
+          {
+            "growth_rate_imaginary": -300.0016667087029,
+            "growth_rate_real": -4.012451930086058e-12,
+            "normalized_mode_energy": 44999.69005211599,
+            "polynomial_residual": 3.4259024220186977e-15,
+            "speed_squared_imaginary": -2.6749828146985987e-14,
+            "speed_squared_real": 1.0000111114222185
+          },
+          {
+            "growth_rate_imaginary": 300.0016667087029,
+            "growth_rate_real": -4.012451930086058e-12,
+            "normalized_mode_energy": 44999.69005211599,
+            "polynomial_residual": 3.4259024220186977e-15,
+            "speed_squared_imaginary": 2.6749828146985987e-14,
+            "speed_squared_real": 1.0000111114222185
+          },
+          {
+            "growth_rate_imaginary": 300.0016667252021,
+            "growth_rate_real": 6.233487642944677e-12,
+            "normalized_mode_energy": 44998.07017742101,
+            "polynomial_residual": 1.3750526241410184e-13,
+            "speed_squared_imaginary": -4.1556815164318995e-14,
+            "speed_squared_real": 1.000011111532214
+          },
+          {
+            "growth_rate_imaginary": -300.00166672520214,
+            "growth_rate_real": 6.233487642944678e-12,
+            "normalized_mode_energy": 44998.07017742101,
+            "polynomial_residual": 1.3746571474741831e-13,
+            "speed_squared_imaginary": 4.155681516431901e-14,
+            "speed_squared_real": 1.0000111115322143
+          },
+          {
+            "growth_rate_imaginary": -300.0016667253354,
+            "growth_rate_real": -1.520405981917921e-12,
+            "normalized_mode_energy": 44998.07017742462,
+            "polynomial_residual": 2.868213041315388e-14,
+            "speed_squared_imaginary": -1.0136096192767699e-14,
+            "speed_squared_real": 1.0000111115331025
+          },
+          {
+            "growth_rate_imaginary": 300.00166672533544,
+            "growth_rate_real": -1.5204059819179212e-12,
+            "normalized_mode_energy": 44998.07017742462,
+            "polynomial_residual": 2.864261742366765e-14,
+            "speed_squared_imaginary": 1.0136096192767703e-14,
+            "speed_squared_real": 1.000011111533103
+          }
+        ],
+        "wave_number_ratio": 300.0
+      },
+      {
+        "all_identified_finite_frequency_mode_energies_positive": true,
+        "background": {
+          "a_sigma": 1.0,
+          "aether_parallel": 0.0,
+          "aether_perpendicular": 1e-05,
+          "background_clock_ratio": 1.0,
+          "f_0": 1.0,
+          "k_2": 2.0,
+          "k_b": 1.0,
+          "orientation_strength": 1.0,
+          "scalar_clock_ratio": 1.0
+        },
+        "finite_generalized_root_count": 24,
+        "full_euler_dimension": 26,
+        "gauge_applied_after_full_euler_matrices": true,
+        "gauge_fixed_euler_dimension": 20,
+        "groups": {
+          "finite_scalar": {
+            "count": 4,
+            "maximum_absolute_imaginary": 1.2334979080946418e-13,
+            "maximum_real": 0.5000034999234919,
+            "mean_real": 0.5000034999154808,
+            "minimum_real": 0.5000034999074695
+          },
+          "tensor_vector_luminal": {
+            "count": 16,
+            "maximum_absolute_imaginary": 2.2879388631791256e-12,
+            "maximum_real": 1.0000010002200255,
+            "mean_real": 1.0000005000128735,
+            "minimum_real": 0.9999999997853639
+          },
+          "zero_frequency_sector": {
+            "count": 4,
+            "maximum_absolute_imaginary": 0.0,
+            "maximum_real": -9.207948721538968e-24,
+            "mean_real": -7.973120963556235e-23,
+            "minimum_real": -1.5000515594436753e-22
+          }
+        },
+        "inferred_linear_physical_degrees_of_freedom": 6.0,
+        "infinite_generalized_root_count": 16,
+        "maximum_infinite_homogeneous_beta_margin": 0.0,
+        "maximum_polynomial_residual": 1.0635891589342367e-11,
+        "minimum_finite_homogeneous_beta_margin": 632.4550893427713,
+        "minimum_normalized_propagating_mode_energy": 0.4000020798557671,
+        "propagating_energy_root_count": 20,
+        "roots": [
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": 1.2247659202654502e-08,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 3.5332126819571754e-19,
+            "speed_squared_imaginary": -0.0,
+            "speed_squared_real": -1.5000515594436753e-22
+          },
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": -1.2246666449599685e-08,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 7.637135292896365e-14,
+            "speed_squared_imaginary": 0.0,
+            "speed_squared_real": -1.4998083912775057e-22
+          },
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": -3.11943821041423e-09,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 2.9655935444680803e-16,
+            "speed_squared_imaginary": 0.0,
+            "speed_squared_real": -9.730894748592333e-24
+          },
+          {
+            "growth_rate_imaginary": 0.0,
+            "growth_rate_real": 3.0344602026619114e-09,
+            "normalized_mode_energy": null,
+            "polynomial_residual": 2.975992217044129e-16,
+            "speed_squared_imaginary": -0.0,
+            "speed_squared_real": -9.207948721538968e-24
+          },
+          {
+            "growth_rate_imaginary": -707.109255990522,
+            "growth_rate_real": 8.527924472247277e-11,
+            "normalized_mode_energy": 0.4000020800594939,
+            "polynomial_residual": 1.487848445892126e-16,
+            "speed_squared_imaginary": 1.2060348657428274e-13,
+            "speed_squared_real": 0.5000034999074695
+          },
+          {
+            "growth_rate_imaginary": 707.1092559905221,
+            "growth_rate_real": 8.527924472247277e-11,
+            "normalized_mode_energy": 0.40000208008132176,
+            "polynomial_residual": 1.591026647892976e-16,
+            "speed_squared_imaginary": -1.2060348657428276e-13,
+            "speed_squared_real": 0.5000034999074697
+          },
+          {
+            "growth_rate_imaginary": -707.1092560018513,
+            "growth_rate_real": 8.722116827243258e-11,
+            "normalized_mode_energy": 0.4000020798557671,
+            "polynomial_residual": 1.4792539690024955e-16,
+            "speed_squared_imaginary": 1.2334979080946418e-13,
+            "speed_squared_real": 0.5000034999234918
+          },
+          {
+            "growth_rate_imaginary": 707.1092560018515,
+            "growth_rate_real": 8.722116827243258e-11,
+            "normalized_mode_energy": 0.40000207987759495,
+            "polynomial_residual": 1.4364481156772056e-16,
+            "speed_squared_imaginary": -1.2334979080946418e-13,
+            "speed_squared_real": 0.5000034999234919
+          },
+          {
+            "growth_rate_imaginary": -999.9999998926819,
+            "growth_rate_real": 3.658985099004788e-10,
+            "normalized_mode_energy": 250024.9865756703,
+            "polynomial_residual": 3.603659668844862e-12,
+            "speed_squared_imaginary": 7.317970197224226e-13,
+            "speed_squared_real": 0.9999999997853639
+          },
+          {
+            "growth_rate_imaginary": 999.999999892682,
+            "growth_rate_real": 3.658985099004789e-10,
+            "normalized_mode_energy": 250024.98657567034,
+            "polynomial_residual": 3.6036561158043493e-12,
+            "speed_squared_imaginary": -7.317970197224229e-13,
+            "speed_squared_real": 0.9999999997853641
+          },
+          {
+            "growth_rate_imaginary": 999.999999898219,
+            "growth_rate_real": -4.4107181190388245e-12,
+            "normalized_mode_energy": 125018.74199296553,
+            "polynomial_residual": 1.341312041355246e-13,
+            "speed_squared_imaginary": 8.821436237179796e-15,
+            "speed_squared_real": 0.9999999997964382
+          },
+          {
+            "growth_rate_imaginary": -999.999999898219,
+            "growth_rate_real": -4.4107181190388245e-12,
+            "normalized_mode_energy": 125018.74199296553,
+            "polynomial_residual": 1.341312041355246e-13,
+            "speed_squared_imaginary": -8.821436237179796e-15,
+            "speed_squared_real": 0.9999999997964382
+          },
+          {
+            "growth_rate_imaginary": 999.9999999000206,
+            "growth_rate_real": -1.0116255164009772e-15,
+            "normalized_mode_energy": 250024.98703269337,
+            "polynomial_residual": 4.270732132673806e-17,
+            "speed_squared_imaginary": 2.023251032599671e-18,
+            "speed_squared_real": 0.9999999998000413
+          },
+          {
+            "growth_rate_imaginary": -999.9999999000208,
+            "growth_rate_real": -1.0116255164009774e-15,
+            "normalized_mode_energy": 250024.98703269343,
+            "polynomial_residual": 1.422631688516677e-17,
+            "speed_squared_imaginary": -2.023251032599672e-18,
+            "speed_squared_real": 0.9999999998000417
+          },
+          {
+            "growth_rate_imaginary": -999.9999999330917,
+            "growth_rate_real": 1.1439694316661038e-09,
+            "normalized_mode_energy": 125018.74634114039,
+            "polynomial_residual": 1.0635889818957232e-11,
+            "speed_squared_imaginary": 2.2879388631791256e-12,
+            "speed_squared_real": 0.9999999998661833
+          },
+          {
+            "growth_rate_imaginary": 999.9999999330918,
+            "growth_rate_real": 1.1439694316661038e-09,
+            "normalized_mode_energy": 125018.74634114039,
+            "polynomial_residual": 1.0635891589342367e-11,
+            "speed_squared_imaginary": -2.2879388631791256e-12,
+            "speed_squared_real": 0.9999999998661835
+          },
+          {
+            "growth_rate_imaginary": 1000.0005001048518,
+            "growth_rate_real": 3.0074908326506377e-12,
+            "normalized_mode_energy": 499900.58064508904,
+            "polynomial_residual": 6.1448612989615845e-15,
+            "speed_squared_imaginary": -6.01498467342279e-15,
+            "speed_squared_real": 1.0000010002099535
+          },
+          {
+            "growth_rate_imaginary": -1000.0005001048518,
+            "growth_rate_real": 3.0074908326506377e-12,
+            "normalized_mode_energy": 499900.58064508904,
+            "polynomial_residual": 6.1448612989615845e-15,
+            "speed_squared_imaginary": 6.01498467342279e-15,
+            "speed_squared_real": 1.0000010002099535
+          },
+          {
+            "growth_rate_imaginary": -1000.0005001048526,
+            "growth_rate_real": -2.87005714333833e-10,
+            "normalized_mode_energy": 499900.5845736781,
+            "polynomial_residual": 7.253458344115038e-14,
+            "speed_squared_imaginary": -5.74011715733567e-13,
+            "speed_squared_real": 1.0000010002099553
+          },
+          {
+            "growth_rate_imaginary": 1000.0005001048526,
+            "growth_rate_real": -2.87005714333833e-10,
+            "normalized_mode_energy": 499900.5845736781,
+            "polynomial_residual": 7.253458344115038e-14,
+            "speed_squared_imaginary": 5.74011715733567e-13,
+            "speed_squared_real": 1.0000010002099553
+          },
+          {
+            "growth_rate_imaginary": -1000.0005001073888,
+            "growth_rate_real": -1.1230322288914839e-09,
+            "normalized_mode_energy": 499700.82661202585,
+            "polynomial_residual": 6.899722422663971e-13,
+            "speed_squared_imaginary": -2.246065581056399e-12,
+            "speed_squared_real": 1.0000010002150277
+          },
+          {
+            "growth_rate_imaginary": 1000.000500107389,
+            "growth_rate_real": -1.1230322288914837e-09,
+            "normalized_mode_energy": 499700.82661202597,
+            "polynomial_residual": 6.899223347573889e-13,
+            "speed_squared_imaginary": 2.246065581056399e-12,
+            "speed_squared_real": 1.0000010002150281
+          },
+          {
+            "growth_rate_imaginary": 1000.0005001098875,
+            "growth_rate_real": 3.5065052028141414e-12,
+            "normalized_mode_energy": 499700.8715635111,
+            "polynomial_residual": 1.1709325052269867e-14,
+            "speed_squared_imaginary": -7.0130139129041276e-15,
+            "speed_squared_real": 1.000001000220025
+          },
+          {
+            "growth_rate_imaginary": -1000.0005001098876,
+            "growth_rate_real": 3.5065052028141418e-12,
+            "normalized_mode_energy": 499700.87156351114,
+            "polynomial_residual": 1.1729800259820563e-14,
+            "speed_squared_imaginary": 7.01301391290413e-15,
+            "speed_squared_real": 1.0000010002200255
+          }
+        ],
+        "wave_number_ratio": 1000.0
+      }
+    ]
+  },
+  "scope_limit": "This is a direct flat linear characteristic and quadratic-energy regression at a differentiable positive-tilt sentinel approaching Y=0. It does not resolve the published AeST zero-frequency Jeans-like sector, prove hyperbolicity or positive energy on finite tilted backgrounds, establish a common Cauchy cone, include nonconstant scalar/aether/metric backgrounds, or prove the nonlinear six-degree count.",
+  "status": "Sigma v12A direct flat characteristic regression",
+  "theory_viable": false,
+  "tilted_background_characteristics_proven": false,
+  "zero_frequency_jeans_sector_resolved": false
+}

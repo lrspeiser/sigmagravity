@@ -128,21 +128,25 @@ state. `Q0` is derived from the AeST constants as before.
 At the fixed AeST construction row
 
 $$
-K_B=1,\qquad K_2=2,\qquad\lambda_s=1,
+K_B=1,\qquad K_2=2,
 $$
 
-the published finite-frequency squared speeds remain
+the frozen simple interpolation has asymptotic coefficient one but local
+Minkowski tangent `f_y(0)=0`. The published finite-frequency squared speeds at
+that tangent are therefore
 
 | mode | squared speed |
 |---|---:|
 | tensor | `1` |
 | vector | `1` |
-| scalar | `3/4` |
+| scalar | `1/2` |
 
 Because the v12A coefficient and its first derivative vanish at `X=X0`, the
-new interaction does not enter that quadratic spectrum. The published AeST
-zero-frequency Jeans-like warning remains; this selection does not relabel it
-as a pass.
+new interaction does not enter that quadratic spectrum. The earlier `3/4`
+entry incorrectly substituted the interpolation's asymptotic coefficient for
+its local tangent. The corrected `1/2` remains positive and subluminal. The
+published AeST zero-frequency Jeans-like warning remains; this selection does
+not relabel it as a pass.
 
 Across the signed coefficient scan and three representative clock-background
 ratios, the normalized Class-Ia residuals are below `10^-12`, every normalized

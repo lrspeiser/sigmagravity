@@ -1,5 +1,82 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v12A finite-tilt scalar-unitary characteristic warning
+
+The frozen finite-tilt characteristic grid keeps the homogeneous generalized
+eigenpairs `(alpha,beta)` until constraint roots are classified, avoiding
+spurious huge frequencies from dividing an exact Class-Ia `beta=0` root. All
+72 backgrounds retain 24 finite roots and 16 roots at infinity, and none fail
+the `1e-7` Euler-polynomial residual gate.
+
+The physical scalar-unitary slicing gates nevertheless fail. Across both
+coupling signs, clock ratios `0.5,1,2`, tilt magnitudes `0.1,0.5,1,2`, and
+relative angles `0,45,90` degrees, 22 rows have growth proportional to wave
+number, 31 exceed the 1% metric-frequency tolerance, and 38 contain a negative
+oscillatory coordinate-time energy. The worst normalized growth is `0.90355`,
+the largest frequency/light ratio is `1.36698`, and the minimum energy is
+`-48.7730`.
+
+Wave-number sentinels confirm three persistent effects: growth approaches
+`0.45162 k` at preferred clock/perpendicular tilt 2; an off-clock branch
+approaches `1.19319` times the metric light frequency; and a parallel branch's
+energy approaches `-3.7808`. These are not lower-order finite-wave artifacts.
+
+This proves that scalar-unitary metric time is not a universal healthy slicing,
+but it does not yet prove that no other common metric-timelike Cauchy covector
+exists. Exact v12A is held before data while the general-time invariant cone
+and reduced-energy calculation is derived. See
+[`SIGMA_V12A_TILTED_CHARACTERISTICS.md`](SIGMA_V12A_TILTED_CHARACTERISTICS.md).
+
+## 2026-08-04 Sigma v12A direct flat characteristic regression
+
+The full local quadratic Euler system is now converted to the generalized
+characteristic pencil `P(s)=s^2K+s(A-A^T)-B`. All 26 lapse, shift, metric, and
+aether real-phase amplitudes are retained until the Euler matrices are formed;
+only then is `h13=h23=h33=0` imposed in each phase. The resulting 40-dimensional
+first-order pencil has 24 finite roots and 16 constraint roots at infinity.
+Because each physical configuration mode contributes four real-phase/time
+roots, this directly reproduces the six local linear AeST modes.
+
+Using the frozen differentiable tilt sentinel `1e-5` and extrapolating three
+wave numbers in `1/k^2`, the scalar principal squared speed is `0.5000024999`,
+while the tensor/vector interval is `0.9999999998--1.0000000002`. Four roots
+remain in the zero-frequency sector. All twenty finite-frequency roots have
+positive quadratic energy; the minimum normalized energy is `0.4000021`.
+The maximum Euler-polynomial residual is `1.06e-11`, and the two `lambda_D`
+signs give identical spectra because the v12A interaction vanishes to first
+order on the flat clock.
+
+All nine flat gates pass. The documented Jeans-like zero sector, finite-tilt
+common-Cauchy cone and energy problem, nonlinear degree count, and nonconstant
+backgrounds remain open. No data were opened. See
+[`SIGMA_V12A_FLAT_CHARACTERISTICS.md`](SIGMA_V12A_FLAT_CHARACTERISTICS.md).
+
+## 2026-08-04 Sigma v12A constant-background tilted Dirac block
+
+The complete local quadratic action now retains all six spatial-metric
+components, all three shifts, all three aether components, and the lapse before
+constructing the Class-Ia nullspace. In a real sine/cosine Fourier basis, its
+26-dimensional kinetic matrix has exactly six shift primaries plus two DHOST
+primaries. After normalizing the latter to a unit physical-clock perturbation,
+their conformal metric component agrees with
+`delta zeta=-(r^3 A3_bar/4)delta r` to `1.67e-16`.
+
+The exact reduced block is
+`Z^T[-B-(A^T-A)K^+(A^T-A)]Z`. The antisymmetric mixing term includes the
+dynamical longitudinal aether. It cancels the apparent Maxwell lapse-gradient
+term, leaving a wave-number-independent constant-background bracket. A frozen
+48-background signed scan per coupling sign spans clock and tilt magnitudes
+from `1e-2` to `1e2` and arbitrary relative angles. All nine gates pass. The
+closest eigenvalues to zero are `-1.2975747367` for `lambda_D=+1` and
+`-4.0032986306` for `lambda_D=-1`; there are no rank or sign failures, and the
+maximum wave-number residual is `3.15e-13`.
+
+Both signs survive; neither is selected. This proves only the constant-
+background Dirac pair. Physical characteristic cones and energy signs, then
+background scalar Hessian, aether gradient, extrinsic curvature, and curvature
+remain open. No data were opened. See
+[`SIGMA_V12A_TILTED_PRINCIPAL.md`](SIGMA_V12A_TILTED_PRINCIPAL.md).
+
 ## 2026-08-04 Sigma v12A corrected aligned finite-wave-vector gate
 
 The earlier positive-sign falsification is withdrawn. It projected only the
@@ -7,15 +84,18 @@ The earlier positive-sign falsification is withdrawn. It projected only the
 Class-Ia primary null direction. With
 `delta zeta=-(r^3 A3_bar/4)delta r`, the direct DHOST, Einstein cross, and
 Einstein metric coefficients obey
-`r^2 A4_bar-4 eta/r+2 eta^2=0` exactly. The complete aligned symbol is therefore
-`Delta/F0=-[4K2+2 K_B(k_bar/r)^2]`, which is nonzero for `K2,K_B>0` and does
-not constrain the sign of `lambda_D`.
+`r^2 A4_bar-4 eta/r+2 eta^2=0` exactly. That correction still held the
+longitudinal aether fixed. In the full Maxwell square
+`K_B|dot A_L+i k delta N|^2`, the aether momentum contributes a Schur term
+`-K_B/r^2` that cancels the apparent direct `+K_B/r^2` lapse gradient. The
+complete aligned symbol is therefore `Delta/F0=-4K2`, which is nonzero for
+`K2>0` and does not constrain the sign of `lambda_D`.
 
 The corrected 50,000-row scan reproduces the old incomplete zero as a
-regression fixture, verifies the Class-Ia cancellation, and keeps the complete
-positive- and negative-sign symbols above zero. No data were opened. The full
-tilted, nonzero-gradient, anisotropic principal matrix remains the next kill
-gate; the theory is still not viable. See
+regression fixture, verifies both cancellations, and keeps the exact positive
+core at `4K2=8` for both signs and all wave numbers. No data were opened. The
+constant tilted Dirac block is now also complete, but physical characteristics
+and nonconstant backgrounds remain open; the theory is still not viable. See
 [`SIGMA_V12A_ALIGNED_FINITE_K.md`](SIGMA_V12A_ALIGNED_FINITE_K.md).
 
 ## 2026-08-04 Sigma v12A tilted reduced-AeST clock susceptibility
@@ -112,8 +192,10 @@ uses its scalar Hessian in the published luminal Class-Ia DHOST basis with
 `A1=A2=0`, `A4=-A3-X^2 A3^2/(8F0)`, and `A5=X A3^2/(2F0)`.
 
 The provisional background-zero `A3` shape and its first derivative vanish on
-the AeST flat clock, so the finite-frequency squared speeds remain tensor `1`,
-vector `1`, and scalar `3/4`. The signed scan keeps normalized degeneracy
+the AeST flat clock. The frozen simple interpolation has asymptotic coefficient
+one but local tangent `f_y(0)=0`, so the corrected finite-frequency squared
+speeds are tensor `1`, vector `1`, and scalar `1/2`; the earlier `3/4` entry used
+the wrong tangent. The signed scan keeps normalized degeneracy
 residuals below `1e-12` and all normalized coefficients finite. Static `L3-L5`
 invariants distinguish equal-trace isotropic and rank-one Hessians and remain
 rotation covariant. Solar-boundary activation is below `1e-5`, five universal

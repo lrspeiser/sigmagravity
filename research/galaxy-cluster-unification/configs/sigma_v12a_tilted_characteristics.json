@@ -1,0 +1,50 @@
+{
+  "protocol_version": "Sigma-v12A-1.1-tilted-unitary-characteristics",
+  "status": "theory-only finite-tilt scalar-unitary slicing gate",
+  "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
+  "fixed_values": {
+    "k_b": 1.0,
+    "k_2": 2.0,
+    "background_clock_ratio": 1.0,
+    "orientation_strengths": [-1.0, 1.0],
+    "scalar_clock_ratios": [0.5, 1.0, 2.0],
+    "tilt_magnitudes": [0.1, 0.5, 1.0, 2.0],
+    "relative_angles_degrees": [0.0, 45.0, 90.0],
+    "grid_wave_number": 300.0,
+    "convergence_wave_numbers": [100.0, 300.0, 1000.0],
+    "convergence_sentinels": [
+      {
+        "name": "perpendicular_principal_growth",
+        "scalar_clock_ratio": 1.0,
+        "tilt_magnitude": 2.0,
+        "relative_angle_degrees": 90.0,
+        "orientation_strength": 1.0
+      },
+      {
+        "name": "off_clock_superluminal_frequency",
+        "scalar_clock_ratio": 0.5,
+        "tilt_magnitude": 0.5,
+        "relative_angle_degrees": 90.0,
+        "orientation_strength": 1.0
+      },
+      {
+        "name": "parallel_negative_energy",
+        "scalar_clock_ratio": 2.0,
+        "tilt_magnitude": 0.5,
+        "relative_angle_degrees": 0.0,
+        "orientation_strength": -1.0
+      }
+    ],
+    "principal_growth_threshold": 0.01,
+    "metric_cone_frequency_tolerance": 0.01,
+    "polynomial_residual_tolerance": 1e-7
+  },
+  "pass_rule": "On every frozen constant background, retain exactly 24 finite physical roots and 16 constraint roots at infinity, keep normalized Euler-polynomial residuals below 1e-7, find no exponential growth proportional to k above 0.01, no real frequency more than 1 percent outside the matter-metric light scale, and no negative quadratic energy among roots that are oscillatory in scalar-unitary metric time.",
+  "decision_rule": "A failure proves that scalar-unitary metric time is not a universal healthy slicing. It does not by itself retire the covariant theory; before retirement derive the fully covariant principal polynomial for a general time covector and test whether any common metric-timelike Cauchy covector exists. Persistent negative physical energy under every such covector or absence of a common hyperbolicity cone retires v12A before data.",
+  "scope_limit": "This grid covers constant Minkowski metric, constant timelike scalar first gradient, finite constant aether tilt, and three relative wave angles. It does not include background scalar Hessian, aether gradient, extrinsic curvature, spacetime curvature, or a general time covector. A scalar-unitary slicing failure is a diagnosis requiring an invariant common-cone audit, not yet a covariant falsification.",
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization": "covariant v12A action and synthetic local Fourier backgrounds only"
+  }
+}

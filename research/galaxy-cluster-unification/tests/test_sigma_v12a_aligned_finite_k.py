@@ -10,6 +10,7 @@ from voidscreen.sigma_v12a_aligned_finite_k import (
     critical_wave_number_ratio,
     negative_strength_sufficient_condition,
     normalized_aligned_coefficients,
+    normalized_dynamical_aether_aligned_symbol,
     normalized_full_aligned_symbol,
     normalized_primary_secondary_symbol,
 )
@@ -93,7 +94,7 @@ def test_positive_selected_sign_clock_only_block_has_superseded_zero() -> None:
     assert not row["projection_complete"]
 
 
-def test_full_null_projection_cancels_dhost_gradient_exactly() -> None:
+def test_metric_null_projection_still_holds_aether_velocity_fixed() -> None:
     row = normalized_full_aligned_symbol(
         2.0,
         3.567874736625391,
@@ -109,6 +110,28 @@ def test_full_null_projection_cancels_dhost_gradient_exactly() -> None:
     assert terms["full_null_projected"] == pytest.approx(0.25)
     assert row["positive_core"] > 8.0
     assert row["symbol_nonzero"]
+    assert row["metric_null_projection_complete"]
+    assert not row["dynamical_aether_schur_included"]
+    assert not row["projection_complete_on_aligned_branch"]
+
+
+def test_dynamical_aether_schur_cancels_maxwell_gradient() -> None:
+    row = normalized_dynamical_aether_aligned_symbol(
+        2.0,
+        3.567874736625391,
+        background_clock_ratio=1.0,
+        orientation_strength=1.0,
+        k_b=1.0,
+        k_2=2.0,
+    )
+    terms = row["gradient_terms"]
+    assert terms["class_ia_sum"] == pytest.approx(0.0, abs=1.0e-15)
+    assert terms["aest_maxwell"] == pytest.approx(0.25)
+    assert terms["aether_dynamical_schur"] == pytest.approx(-0.25)
+    assert terms["full_null_projected"] == pytest.approx(0.0, abs=1.0e-15)
+    assert row["positive_core"] == pytest.approx(8.0)
+    assert row["Delta_over_F0"] == pytest.approx(-8.0)
+    assert row["dynamical_aether_schur_included"]
     assert row["projection_complete_on_aligned_branch"]
 
 

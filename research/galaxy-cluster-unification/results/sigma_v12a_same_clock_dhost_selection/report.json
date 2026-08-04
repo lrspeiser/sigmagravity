@@ -48,12 +48,17 @@
     "complete_flat_hamiltonian_positive_all_momenta": false,
     "ir_jeans_like_sector_present": true,
     "positive_propagating_modes": true,
-    "scalar_speed_squared": 0.75,
+    "scalar_speed_squared": 0.5,
     "tensor_speed_squared": 1.0,
     "vector_speed_squared": 1.0,
     "zero_frequency_constant_mode_hamiltonian": 0.0,
     "zero_frequency_linearly_growing_mode_present": true,
     "zero_frequency_sector_positive_all_momenta": false
+  },
+  "flat_spectrum_interpolation": {
+    "asymptotic_lambda_s": 1.0,
+    "local_tangent_lambda_s": 0.0,
+    "reason": "the frozen simple interpolation has f_y(0)=0 and f_y(infinity)=1"
   },
   "full_joint_adm_degeneracy_proven": false,
   "gates": {
@@ -143,7 +148,7 @@
     "lambda_D"
   ],
   "raw_holdout_opened": false,
-  "reason": "The construction replaces the retired independent-memory family with exact higher-derivative degeneracy of the already baryon-forced AeST scalar. It adds no field or object state, preserves the flat AeST spectrum and one metric tensor cone, and carries trace-free directional information. These are selection conditions only; the shared metric can couple the AeST and DHOST constraint blocks, so the combined arbitrary-background Hamiltonian must be derived next.",
+  "reason": "The construction replaces the retired independent-memory family with exact higher-derivative degeneracy of the already baryon-forced AeST scalar. It adds no field or object state, preserves the corrected local flat AeST spectrum and one metric tensor cone, and carries trace-free directional information. The simple interpolation has asymptotic coefficient one but flat tangent f_y(0)=0, so the scalar squared front is 1/2 rather than the previously reported 3/4. These are selection conditions only; the shared metric can couple the AeST and DHOST constraint blocks, so the combined arbitrary-background Hamiltonian must be derived next.",
   "screening_probe": {
     "background_activation": 0.0,
     "high_acceleration_ratio": 100000.0,

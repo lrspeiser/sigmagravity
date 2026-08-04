@@ -75,6 +75,8 @@ def test_v12a_selection_passes_but_does_not_claim_theory_viability() -> None:
         random_seed=12001,
     )
     assert report["all_selection_gates_pass"]
+    assert report["flat_spectrum_interpolation"]["local_tangent_lambda_s"] == 0.0
+    assert report["flat_spectrum"]["scalar_speed_squared"] == pytest.approx(0.5)
     assert not report["full_joint_adm_degeneracy_proven"]
     assert not report["complete_metric_stress_derived"]
     assert not report["arbitrary_background_characteristics_proven"]

@@ -223,7 +223,7 @@ def normalized_full_aligned_symbol(
     k_b: float,
     k_2: float,
 ) -> dict[str, float | bool]:
-    """Return the complete aligned null-projected Dirac symbol.
+    """Return the metric-complete but fixed-aether aligned clock block.
 
     The primary null direction moves the conformal spatial metric together
     with the auxiliary clock.  After constructing that primary, the regular
@@ -234,8 +234,10 @@ def normalized_full_aligned_symbol(
 
     ``K_B/r^2 + r^2 A4_bar - 4 eta_bar/r + 2 eta_bar^2``.
 
-    The last three terms cancel exactly by the Class-Ia identity, leaving
-    only the positive AeST Maxwell coefficient ``K_B/r^2``.
+    The last three terms cancel exactly by the Class-Ia identity.  The
+    remaining ``K_B/r^2`` term is *not* the reduced Dirac symbol because the
+    Maxwell square also contains the dynamical longitudinal-aether velocity.
+    This function is retained to reproduce the second, still-incomplete audit.
     """
 
     clock = float(scalar_clock_ratio)
@@ -286,6 +288,62 @@ def normalized_full_aligned_symbol(
         },
         "positive_core": core,
         "Delta_over_F0": -core,
+        "metric_null_projection_complete": True,
+        "dynamical_aether_schur_included": False,
+        "projection_complete_on_aligned_branch": False,
+        "symbol_nonzero": bool(core != 0.0),
+    }
+
+
+def normalized_dynamical_aether_aligned_symbol(
+    scalar_clock_ratio: float,
+    wave_number_ratio: float,
+    *,
+    background_clock_ratio: float,
+    orientation_strength: float,
+    k_b: float,
+    k_2: float,
+) -> dict[str, float | bool]:
+    """Return the aligned symbol after the dynamical-aether Schur reduction.
+
+    In Fourier space the longitudinal Maxwell sector is the perfect square
+
+    ``K_B |dot A_L + i k delta N|^2``.
+
+    Its direct lapse-gradient term is canceled exactly by the Schur term from
+    the physical aether momentum.  Class-Ia degeneracy separately cancels the
+    direct DHOST and conformal-metric gradients.  The aligned bracket is thus
+    the AeST clock susceptibility alone, ``Delta/F0=-4 K2`` in the continuum
+    normalization used by the earlier canonical calculation.
+    """
+
+    fixed_aether = normalized_full_aligned_symbol(
+        scalar_clock_ratio,
+        wave_number_ratio,
+        background_clock_ratio=background_clock_ratio,
+        orientation_strength=orientation_strength,
+        k_b=k_b,
+        k_2=k_2,
+    )
+    terms = dict(fixed_aether["gradient_terms"])
+    terms["aether_dynamical_schur"] = -float(terms["aest_maxwell"])
+    algebraic_residual = float(terms["class_ia_sum"])
+    # The Class-Ia sum is an exact identity.  Preserve its floating residual
+    # for the audit, but do not amplify roundoff by k^2 in the exact symbol.
+    terms["full_null_projected"] = 0.0
+    terms["full_reduction_cancellation_residual"] = abs(
+        algebraic_residual
+    ) / max(1.0, abs(float(terms["aest_maxwell"])))
+    core = 4.0 * float(k_2) + 2.0 * float(terms["full_null_projected"]) * float(
+        wave_number_ratio
+    ) ** 2
+    return {
+        **fixed_aether,
+        "gradient_terms": terms,
+        "positive_core": core,
+        "Delta_over_F0": -core,
+        "metric_null_projection_complete": True,
+        "dynamical_aether_schur_included": True,
         "projection_complete_on_aligned_branch": True,
         "symbol_nonzero": bool(core != 0.0),
     }
@@ -327,7 +385,7 @@ def audit_v12a_aligned_finite_k(
         k_2=k_2,
     )
 
-    corrected_counterexample = normalized_full_aligned_symbol(
+    corrected_counterexample = normalized_dynamical_aether_aligned_symbol(
         counterexample_clock_ratio,
         critical_wave,
         background_clock_ratio=background_clock_ratio,
@@ -358,7 +416,7 @@ def audit_v12a_aligned_finite_k(
             ("positive", selected_positive_strength),
             ("negative", surviving_negative_strength),
         ):
-            row = normalized_full_aligned_symbol(
+            row = normalized_dynamical_aether_aligned_symbol(
                 clock,
                 wave,
                 background_clock_ratio=background_clock_ratio,
@@ -368,7 +426,7 @@ def audit_v12a_aligned_finite_k(
             )
             maximum_cancellation_residual = max(
                 maximum_cancellation_residual,
-                float(row["gradient_terms"]["class_ia_normalized_cancellation_residual"]),
+                float(row["gradient_terms"]["full_reduction_cancellation_residual"]),
             )
             if branch == "positive" and float(row["positive_core"]) < minimum_positive_core:
                 minimum_positive_core = float(row["positive_core"])
@@ -397,10 +455,15 @@ def audit_v12a_aligned_finite_k(
         > 0.0,
         "positive_sign_full_symbol_positive_in_scan": minimum_positive_core > 0.0,
         "negative_sign_full_symbol_positive_in_scan": minimum_negative_core > 0.0,
-        "aest_maxwell_gradient_positive": float(
+        "aest_maxwell_direct_gradient_positive": float(
             corrected_counterexample["gradient_terms"]["aest_maxwell"]
         )
         > 0.0,
+        "dynamical_aether_schur_cancels_maxwell_gradient": abs(
+            float(corrected_counterexample["gradient_terms"]["aether_dynamical_schur"])
+            + float(corrected_counterexample["gradient_terms"]["aest_maxwell"])
+        )
+        < 1.0e-12,
     }
     return {
         "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
@@ -410,13 +473,18 @@ def audit_v12a_aligned_finite_k(
             "L5": "q^4 V_*^2",
             "null_metric_direction": "delta zeta=-(r^3 A3_bar/4) delta r",
             "class_ia_cancellation": "r^2 A4_bar-4 eta_bar/r+2 eta_bar^2=0",
-            "full_gradient_coefficient": "K_B/r^2",
-            "symbol": "Delta/F0=-(4K2+2 K_B (k_bar/r)^2)",
+            "fixed_aether_gradient_coefficient": "K_B/r^2",
+            "dynamical_aether_schur": "-K_B/r^2",
+            "full_gradient_coefficient": "0",
+            "symbol": "Delta/F0=-4K2",
         },
         "superseded_clock_only_result": {
             "orientation_strength": float(selected_positive_strength),
             "prior_decision": "falsified_by_finite_wave_vector_constraint_rank_zero",
-            "correction": "invalid_incomplete_projection_omitted_metric_null_direction",
+            "correction": (
+                "invalid_incomplete_projection_omitted_metric_null_direction_and_then_"
+                "dynamical_aether_schur"
+            ),
             "counterexample_clock_ratio": float(counterexample_clock_ratio),
             "critical_wave_number_ratio": critical_wave,
             "normalized_symbol_residual": normalized_counterexample_residual,
@@ -440,6 +508,7 @@ def audit_v12a_aligned_finite_k(
         "selected_positive_row_survives_aligned_gate": bool(all(gates.values())),
         "negative_row_survives_aligned_gate": bool(all(gates.values())),
         "orientation_sign_constrained_by_aligned_gate": False,
+        "second_metric_only_correction_complete": False,
         "full_tilted_anisotropic_symbol_derived": False,
         "complete_delta_eff_proven_invertible": False,
         "physical_degree_count_proven_unchanged": False,

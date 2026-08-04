@@ -1,6 +1,6 @@
 {
-  "protocol_version": "Sigma-v12A-0.8-corrected-aligned-null-projection",
-  "status": "corrected theory-only aligned finite-wave-vector Dirac subgate",
+  "protocol_version": "Sigma-v12A-0.8b-dynamical-aether-aligned-reduction",
+  "status": "superseded-and-corrected theory-only aligned finite-wave-vector Dirac subgate",
   "candidate": "Sigma v12A same-AeST-clock luminal DHOST geometry",
   "fixed_values": {
     "k_b": 1.0,
@@ -14,8 +14,8 @@
     "logarithmic_wave_limit": 6.0,
     "random_seed": 12007
   },
-  "pass_rule": "Project the complete spatial quadratic form onto the Class-Ia primary null direction, including the conformal metric displacement, Einstein curvature terms, and AeST Maxwell term; reproduce and explicitly invalidate the earlier clock-only zero; prove the aligned full symbol nonzero for both sign sentinels; and retain the incomplete scope flags.",
-  "scope_limit": "This corrected result is exact for constant zero-momentum backgrounds with the scalar first gradient and aether aligned with the ADM normal. It does not include aether tilt, a nonzero scalar spatial first gradient, anisotropic tensor/vector directions, or the full coupled characteristic matrix, so it does not establish complete Delta_eff invertibility or theory viability.",
+  "pass_rule": "Project the spatial quadratic form onto the Class-Ia metric-clock null direction and then Schur-reduce the dynamical longitudinal aether; reproduce both earlier incomplete formulas; prove that Class-Ia cancels the DHOST/metric gradients, the aether momentum cancels the apparent Maxwell lapse gradient, and the aligned symbol is the nonzero clock bracket -4 K2 for both sign sentinels; retain all incomplete scope flags.",
+  "scope_limit": "This corrected result is exact for constant backgrounds with the scalar first gradient and aether aligned with the ADM normal. The separate tilted-principal audit extends the Dirac bracket to arbitrary constant tilt, but neither result includes background scalar Hessian, aether gradient, extrinsic curvature, spacetime curvature, or the fully reduced physical characteristic and energy matrices. It does not establish full Delta_eff invertibility or theory viability.",
   "data_policy": {
     "observational_data_accessed": false,
     "raw_holdout_opened": false,

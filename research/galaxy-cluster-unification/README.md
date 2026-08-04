@@ -16,13 +16,46 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current theory-only result is
+[`docs/SIGMA_V12A_TILTED_CHARACTERISTICS.md`](docs/SIGMA_V12A_TILTED_CHARACTERISTICS.md).
+The complete finite-root count survives on all 72 frozen constant tilted
+backgrounds, but scalar-unitary metric time does not: 22 rows have principal
+exponential growth, 31 have a real coordinate frequency more than 1% outside
+the metric light scale, and 38 contain a negative oscillatory coordinate-time
+energy. Both `lambda_D` signs are affected. This is not yet a covariant
+falsification because another common metric-timelike Cauchy covector may
+exist. The general-time common-cone calculation is now the decisive pre-data
+gate; no observational holdout is authorized.
+
+The preceding theory-only result is
+[`docs/SIGMA_V12A_FLAT_CHARACTERISTICS.md`](docs/SIGMA_V12A_FLAT_CHARACTERISTICS.md).
+The complete 26-variable Euler system is formed before spatial gauge fixing
+and then solved as a singular generalized eigenproblem. It yields 24 finite
+roots, corresponding to the six local linear AeST modes. The extrapolated
+principal squared speeds are zero for the documented infrared sector, `1/2`
+for the finite scalar, and `1` for all four tensor/vector modes. Every
+finite-frequency root has positive quadratic energy, and the result is
+identical for both v12A coupling signs. Finite-tilt common-Cauchy cones,
+tilted energy signs, and nonconstant backgrounds remain open. The subsequent
+finite-tilt audit shows that scalar-unitary time fails on part of that domain.
+
+The preceding theory-only result is
+[`docs/SIGMA_V12A_TILTED_PRINCIPAL.md`](docs/SIGMA_V12A_TILTED_PRINCIPAL.md).
+Keeping all ADM metric and aether components until after the Class-Ia primary
+is constructed yields exactly six shift primaries plus two real-phase DHOST
+primaries on arbitrary constant aether tilt. The reduced 2x2 Dirac block stays
+negative and nonzero for both coupling signs across the frozen scan. The
+apparent Maxwell lapse-gradient term cancels against the dynamical aether
+momentum, so the constant-background bracket is wave-number independent. Both
+signs survive; tilted physical characteristic cones, tilted energy signs, and
+nonconstant backgrounds remain mandatory pre-data gates.
+
+The preceding theory-only result is
 [`docs/SIGMA_V12A_ALIGNED_FINITE_K.md`](docs/SIGMA_V12A_ALIGNED_FINITE_K.md).
-It corrects the preceding clock-only projection: the Class-Ia primary null
-direction moves the conformal metric with the clock. Einstein curvature terms
-then cancel the entire `A4` gradient contribution, leaving the strictly
-positive aligned symbol `4K2+2 K_B (k_bar/r)^2`. The prior `lambda_D=+1`
-falsification is withdrawn; both signs advance only to the fully tilted and
-anisotropic principal-matrix gate.
+It now records both incomplete reductions. The conformal metric cancels the
+direct DHOST gradient, and the dynamical longitudinal aether cancels the
+remaining apparent Maxwell lapse gradient. The exact aligned symbol is
+`Delta/F0=-4K2`, independent of wave number and coupling sign. The prior
+`lambda_D=+1` falsification remains withdrawn.
 
 The preceding theory-only result is
 [`docs/SIGMA_V12A_TILTED_CLOCK.md`](docs/SIGMA_V12A_TILTED_CLOCK.md).
@@ -63,10 +96,10 @@ The preceding theory-only result is
 After the v11 mechanism reset, v12A adds no memory field. It places Hessian
 operators of the existing baryon-forced AeST scalar inside the exact luminal
 Class-Ia DHOST degeneracy identities. The interaction and its first derivative
-vanish on the AeST clock background, the flat squared speeds remain
-`1, 1, 3/4`, and equal-trace Hessians are distinguished covariantly. This is
-selection only: the combined AeST--DHOST ADM constraint algebra and arbitrary-
-background characteristics are the next pre-data kill gate.
+vanish on the AeST clock background, and equal-trace Hessians are distinguished
+covariantly. The frozen simple interpolation has local flat tangent `f_y(0)=0`,
+so the corrected squared speeds are `1,1,1/2`; the earlier scalar `3/4` used
+its asymptotic rather than local coefficient. This remains selection only.
 
 The preceding theory-only result is
 [`docs/SIGMA_V11C_BIOT_STRETCH_FALSIFICATION.md`](docs/SIGMA_V11C_BIOT_STRETCH_FALSIFICATION.md).

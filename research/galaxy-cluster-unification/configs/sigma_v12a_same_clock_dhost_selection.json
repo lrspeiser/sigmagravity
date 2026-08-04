@@ -5,7 +5,8 @@
   "fixed_values": {
     "k_b": 1.0,
     "k_2": 2.0,
-    "lambda_s": 1.0,
+    "lambda_s_asymptotic": 1.0,
+    "lambda_s_flat_tangent": 0.0,
     "orientation_strength": 1.0,
     "background_kinetic_ratios": [-100.0, -1.0, -0.01],
     "signed_scan_limit": 100000000.0,
