@@ -1,0 +1,40 @@
+{
+  "protocol_version": "Sigma-v6B-0.1-pre-data-differentiability-selection",
+  "status": "frozen after v6A selection and before full variation or observational data",
+  "retired_parent": "Sigma v6A chi=X+lambda*sqrt(Z)",
+  "candidate": "twice-retarded bounded tensor coherence",
+  "perturbation_audit": {
+    "gradient_coefficient": 1.0,
+    "hessian_coefficient": 4.0,
+    "orientation_coupling": 0.7,
+    "finite_difference_steps": [1e-4, 1e-6, 1e-8, 1e-10],
+    "hessian_powers": [0.5, 0.75, 1.0, 1.25, 1.5, 2.0]
+  },
+  "v6b_envelope": {
+    "chi": "X*(1+lambda_sigma*C_Q)",
+    "C_Q": "Z_Q/(Z_Q+phi_sigma^2)",
+    "Z_Q": "Q_mu_nu Q^mu_nu",
+    "Q_mu_nu": "spatial_STF[Box_R^-1 T_mu_nu]",
+    "T_mu_nu": "spatial_STF[nabla_mu nabla_nu U_R]",
+    "U_R": "Box_R^-1(R_mu_nu u^mu u^nu-R/2)",
+    "activation": "f(chi)=chi*exp(-sqrt(chi))"
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "lambda_sigma", "phi_sigma"],
+    "count": 3,
+    "maximum_allowed": 5
+  },
+  "gates": {
+    "minimum_v6a_derivative_jump": 1.0,
+    "maximum_v6b_orientation_perturbation_order_error": 0.02,
+    "minimum_v6b_orientation_perturbation_order": 3.9,
+    "maximum_static_projector_norm_variation": 1e-12,
+    "maximum_coherence": 1.0,
+    "minimum_coherence": 0.0
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "complete CTP variation, Ward identity, and nonlinear background spectrum only"
+  }
+}

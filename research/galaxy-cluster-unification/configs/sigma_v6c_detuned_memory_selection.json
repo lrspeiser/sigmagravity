@@ -1,0 +1,40 @@
+{
+  "protocol_version": "Sigma-v6C-0.1-pre-data-secular-selection",
+  "status": "frozen after v6B differentiability selection and before observational data",
+  "retired_parent": "Sigma v6B Q=STF[Box_R^-1 T]",
+  "candidate": "detuned massive causal tensor memory",
+  "mode_audit": {
+    "wavenumber": 1.0,
+    "peak_index_early": 10,
+    "peak_index_late": 1000,
+    "periods_for_bounded_scan": 2000,
+    "samples_for_bounded_scan": 200000,
+    "memory_mass_over_wavenumber": [0.01, 0.1, 0.3, 1.0, 3.0, 10.0]
+  },
+  "v6c_envelope": {
+    "chi": "X*(1+lambda_sigma*C_Q)",
+    "C_Q": "Z_Q/(Z_Q+phi_sigma^2)",
+    "Z_Q": "Q_mu_nu Q^mu_nu",
+    "Q_mu_nu": "spatial_STF[(Box_R-m_sigma^2)^-1 T_mu_nu]",
+    "T_mu_nu": "spatial_STF[nabla_mu nabla_nu U_R]",
+    "U_R": "Box_R^-1(R_mu_nu u^mu u^nu-R/2)",
+    "activation": "f(chi)=chi*exp(-sqrt(chi))"
+  },
+  "physical_parameters": {
+    "names": ["a_sigma", "lambda_sigma", "phi_sigma", "L_sigma=1/m_sigma"],
+    "count": 4,
+    "maximum_allowed": 5
+  },
+  "gates": {
+    "minimum_v6b_late_to_early_peak_ratio": 50.0,
+    "maximum_detuned_response_over_analytic_bound": 1.000000000001,
+    "maximum_static_transfer": 1.0,
+    "minimum_static_transfer": 0.0,
+    "maximum_high_wavenumber_log_slope": 0.01
+  },
+  "data_policy": {
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false,
+    "authorization_after_this_stage": "complete CTP variation, Ward identity, and nonzero-background health audit only"
+  }
+}

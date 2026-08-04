@@ -1,0 +1,131 @@
+{
+  "all_v6B_selection_gates_pass": true,
+  "data_policy": {
+    "authorization_after_this_stage": "complete CTP variation, Ward identity, and nonlinear background spectrum only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "gates": {
+    "parameter_count": true,
+    "v6A_cusp_detected": true,
+    "v6A_unique_first_variation": false,
+    "v6B_action_orientation_begins_at_fourth_order": true,
+    "v6B_coherence_is_bounded": true,
+    "v6B_orientation_begins_at_fourth_order": true,
+    "v6B_static_transfer_has_no_wavenumber_growth": true
+  },
+  "not_yet_demonstrated": [
+    "complete closed-time-path variation",
+    "diffeomorphism Ward identity after the retarded physical limit",
+    "health about nonzero galactic, cluster, and FLRW memory backgrounds",
+    "absence of nonlinear secular growth from the second retarded inverse",
+    "static spherical MOND coefficient",
+    "any galaxy or cluster performance"
+  ],
+  "observational_data_accessed": false,
+  "power_classification": [
+    {
+      "finite_quadratic_variation": false,
+      "first_variation_exists": false,
+      "perturbation_order": 1.0,
+      "power": 0.5,
+      "spectrum_role": "singular_or_undefined_quadratic_variation"
+    },
+    {
+      "finite_quadratic_variation": false,
+      "first_variation_exists": true,
+      "perturbation_order": 1.5,
+      "power": 0.75,
+      "spectrum_role": "singular_or_undefined_quadratic_variation"
+    },
+    {
+      "finite_quadratic_variation": true,
+      "first_variation_exists": true,
+      "perturbation_order": 2.0,
+      "power": 1.0,
+      "spectrum_role": "changes_quadratic_operator"
+    },
+    {
+      "finite_quadratic_variation": true,
+      "first_variation_exists": true,
+      "perturbation_order": 2.5,
+      "power": 1.25,
+      "spectrum_role": "nonlinear_only_about_zero_background"
+    },
+    {
+      "finite_quadratic_variation": true,
+      "first_variation_exists": true,
+      "perturbation_order": 3.0,
+      "power": 1.5,
+      "spectrum_role": "nonlinear_only_about_zero_background"
+    },
+    {
+      "finite_quadratic_variation": true,
+      "first_variation_exists": true,
+      "perturbation_order": 4.0,
+      "power": 2.0,
+      "spectrum_role": "nonlinear_only_about_zero_background"
+    }
+  ],
+  "raw_holdout_opened": false,
+  "status": "completed Sigma v6A differentiability rejection and v6B pre-data selection",
+  "v6A": {
+    "analytic_derivative_jump": 2.8,
+    "decision": "retire_exact_sqrt_Z_orientation_closure",
+    "finite_difference_first_variations": [
+      {
+        "jump": 2.767261660613667,
+        "left_first_variation": -1.3836308303068334,
+        "right_first_variation": 1.3836308303068334,
+        "step": 0.0001
+      },
+      {
+        "jump": 2.7966909510018088,
+        "left_first_variation": -1.3983454755009044,
+        "right_first_variation": 1.3983454755009044,
+        "step": 1e-06
+      },
+      {
+        "jump": 2.799668739127824,
+        "left_first_variation": -1.399834369563912,
+        "right_first_variation": 1.399834369563912,
+        "step": 1e-08
+      },
+      {
+        "jump": 2.7999668703492104,
+        "left_first_variation": -1.3999834351746052,
+        "right_first_variation": 1.3999834351746052,
+        "step": 1e-10
+      }
+    ],
+    "reason": "Z is second order in a metric perturbation, so sqrt(Z) is proportional to the absolute perturbation amplitude and the first variation is not unique at a zero-Hessian GR background."
+  },
+  "v6B": {
+    "coherence_maximum": 1.0,
+    "coherence_minimum": 1e-18,
+    "decision": "advance_twice_retarded_bounded_coherence_to_full_CTP_variation",
+    "envelope": {
+      "C_Q": "Z_Q/(Z_Q+phi_sigma^2)",
+      "Q_mu_nu": "spatial_STF[Box_R^-1 T_mu_nu]",
+      "T_mu_nu": "spatial_STF[nabla_mu nabla_nu U_R]",
+      "U_R": "Box_R^-1(R_mu_nu u^mu u^nu-R/2)",
+      "Z_Q": "Q_mu_nu Q^mu_nu",
+      "activation": "f(chi)=chi*exp(-sqrt(chi))",
+      "chi": "X*(1+lambda_sigma*C_Q)"
+    },
+    "orientation_action_perturbation_order": 3.9998654893589025,
+    "orientation_chi_perturbation_order": 4.000000259116525,
+    "physical_parameters": {
+      "count": 3,
+      "maximum_allowed": 5,
+      "names": [
+        "a_sigma",
+        "lambda_sigma",
+        "phi_sigma"
+      ]
+    },
+    "static_projector_expected_norm": 0.816496580927726,
+    "static_projector_norm_variation_24_decades": 4.440892098500626e-16,
+    "why_it_evades_v6A": "The bounded Q-tensor coherence is analytic at Q=0 and is multiplied by X, so it first changes the action at fourth perturbative order and does not alter the zero-background quadratic propagator."
+  }
+}

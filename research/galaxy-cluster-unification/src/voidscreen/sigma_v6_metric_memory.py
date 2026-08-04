@@ -134,3 +134,157 @@ def metric_memory_chi(
     if not np.isfinite(orientation_coupling) or orientation_coupling < 0.0:
         raise ValueError("orientation coupling must be finite and nonnegative")
     return gradient + orientation_coupling * np.sqrt(hessian)
+
+
+def v6a_perturbation_action(
+    amplitude: np.ndarray | float,
+    gradient_coefficient: float,
+    hessian_coefficient: float,
+    orientation_coupling: float,
+) -> np.ndarray:
+    """Evaluate the frozen v6A envelope along a one-parameter perturbation.
+
+    For a metric perturbation ``h = amplitude * h0``, the gradient and squared
+    Hessian invariants begin as ``X=A*amplitude**2`` and
+    ``Z=B*amplitude**2``.  The frozen ``sqrt(Z)`` term therefore exposes its
+    absolute-value cusp directly.
+    """
+
+    values = np.asarray(amplitude, dtype=float)
+    coefficients = (gradient_coefficient, hessian_coefficient, orientation_coupling)
+    if np.any(~np.isfinite(values)):
+        raise ValueError("amplitude must be finite")
+    if any(not np.isfinite(value) or value < 0.0 for value in coefficients):
+        raise ValueError("perturbation coefficients must be finite and nonnegative")
+    chi = (
+        gradient_coefficient * values**2
+        + orientation_coupling * np.sqrt(hessian_coefficient * values**2)
+    )
+    return metric_memory_activation(chi)
+
+
+def hessian_power_regularities(power: float) -> dict[str, float | bool | str]:
+    """Classify ``Z**power`` when ``Z`` starts at second perturbative order."""
+
+    if not np.isfinite(power) or power <= 0.0:
+        raise ValueError("power must be finite and positive")
+    perturbation_order = 2.0 * power
+    first_variation_exists = perturbation_order > 1.0
+    finite_quadratic_variation = perturbation_order >= 2.0
+    if perturbation_order < 2.0:
+        spectrum_role = "singular_or_undefined_quadratic_variation"
+    elif perturbation_order == 2.0:
+        spectrum_role = "changes_quadratic_operator"
+    else:
+        spectrum_role = "nonlinear_only_about_zero_background"
+    return {
+        "power": float(power),
+        "perturbation_order": perturbation_order,
+        "first_variation_exists": first_variation_exists,
+        "finite_quadratic_variation": finite_quadratic_variation,
+        "spectrum_role": spectrum_role,
+    }
+
+
+def bounded_tensor_coherence(
+    tensor_invariant: np.ndarray | float, potential_scale: float
+) -> np.ndarray:
+    """Return the analytic bounded v6B orientation coherence ``Z/(Z+phi^2)``."""
+
+    values = np.asarray(tensor_invariant, dtype=float)
+    if np.any(~np.isfinite(values)) or np.any(values < 0.0):
+        raise ValueError("tensor invariant must be finite and nonnegative")
+    if not np.isfinite(potential_scale) or potential_scale <= 0.0:
+        raise ValueError("potential scale must be finite and positive")
+    return values / (values + potential_scale**2)
+
+
+def v6b_metric_memory_chi(
+    gradient_ratio_squared: np.ndarray | float,
+    tensor_invariant: np.ndarray | float,
+    orientation_coupling: float,
+    potential_scale: float,
+) -> np.ndarray:
+    """Return the differentiable v6B scalar-times-orientation invariant."""
+
+    gradient = np.asarray(gradient_ratio_squared, dtype=float)
+    if np.any(~np.isfinite(gradient)) or np.any(gradient < 0.0):
+        raise ValueError("gradient invariant must be finite and nonnegative")
+    if not np.isfinite(orientation_coupling) or orientation_coupling < 0.0:
+        raise ValueError("orientation coupling must be finite and nonnegative")
+    coherence = bounded_tensor_coherence(tensor_invariant, potential_scale)
+    return gradient * (1.0 + orientation_coupling * coherence)
+
+
+def static_trace_free_projector(direction: np.ndarray | list[float]) -> np.ndarray:
+    """Return ``n_i n_j-delta_ij/3`` for the twice-retarded static memory."""
+
+    values = np.asarray(direction, dtype=float)
+    if values.shape != (3,) or not np.all(np.isfinite(values)):
+        raise ValueError("direction must be a finite three-vector")
+    norm = float(np.linalg.norm(values))
+    if norm <= 0.0:
+        raise ValueError("direction must be nonzero")
+    unit = values / norm
+    return np.outer(unit, unit) - np.eye(3) / 3.0
+
+
+def repeated_massless_memory_step_response(
+    time: np.ndarray | float, wavenumber: float, source_amplitude: float = 1.0
+) -> np.ndarray:
+    """Response of two identical retarded wave inverses to a switched-on mode.
+
+    The first response is ``S/k^2 * (1-cos(k t))``.  Feeding it through the
+    same operator produces the resonant ``t*sin(k t)`` term returned here.
+    """
+
+    values = np.asarray(time, dtype=float)
+    if np.any(~np.isfinite(values)) or np.any(values < 0.0):
+        raise ValueError("time must be finite and nonnegative")
+    if not np.isfinite(wavenumber) or wavenumber <= 0.0:
+        raise ValueError("wavenumber must be finite and positive")
+    if not np.isfinite(source_amplitude):
+        raise ValueError("source amplitude must be finite")
+    phase = wavenumber * values
+    return source_amplitude * (
+        (1.0 - np.cos(phase)) / wavenumber**2
+        - values * np.sin(phase) / (2.0 * wavenumber)
+    )
+
+
+def detuned_massive_memory_step_response(
+    time: np.ndarray | float,
+    wavenumber: float,
+    memory_mass: float,
+    source_amplitude: float = 1.0,
+) -> np.ndarray:
+    """Response of a massive retarded tensor memory driven by the first mode."""
+
+    values = np.asarray(time, dtype=float)
+    if np.any(~np.isfinite(values)) or np.any(values < 0.0):
+        raise ValueError("time must be finite and nonnegative")
+    if not np.isfinite(wavenumber) or wavenumber <= 0.0:
+        raise ValueError("wavenumber must be finite and positive")
+    if not np.isfinite(memory_mass) or memory_mass <= 0.0:
+        raise ValueError("memory mass must be finite and positive")
+    if not np.isfinite(source_amplitude):
+        raise ValueError("source amplitude must be finite")
+    omega = np.sqrt(wavenumber**2 + memory_mass**2)
+    constant_response = (1.0 - np.cos(omega * values)) / omega**2
+    oscillatory_response = (
+        np.cos(wavenumber * values) - np.cos(omega * values)
+    ) / memory_mass**2
+    return source_amplitude * (constant_response - oscillatory_response)
+
+
+def detuned_static_tensor_transfer(
+    wavenumber: np.ndarray | float, memory_mass: float
+) -> np.ndarray:
+    """Return the static v6C transfer k^2/(k^2+m^2)."""
+
+    values = np.asarray(wavenumber, dtype=float)
+    if np.any(~np.isfinite(values)) or np.any(values < 0.0):
+        raise ValueError("wavenumber must be finite and nonnegative")
+    if not np.isfinite(memory_mass) or memory_mass <= 0.0:
+        raise ValueError("memory mass must be finite and positive")
+    return values**2 / (values**2 + memory_mass**2)

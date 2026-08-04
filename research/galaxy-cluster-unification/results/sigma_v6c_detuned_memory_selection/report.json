@@ -1,0 +1,103 @@
+{
+  "all_v6C_selection_gates_pass": true,
+  "data_policy": {
+    "authorization_after_this_stage": "complete CTP variation, Ward identity, and nonzero-background health audit only",
+    "observational_data_accessed": false,
+    "raw_holdout_opened": false
+  },
+  "gates": {
+    "parameter_count": true,
+    "v6B_repeated_pole_secular_growth_detected": true,
+    "v6C_detuned_responses_are_bounded": true,
+    "v6C_static_transfer_has_no_UV_growth": true,
+    "v6C_static_transfer_is_bounded": true
+  },
+  "not_yet_demonstrated": [
+    "complete closed-time-path influence action",
+    "diffeomorphism Ward identity",
+    "positive spectrum on nonzero memory backgrounds",
+    "acceptable preferred-time and FLRW behavior",
+    "derived spherical MOND and lensing equations",
+    "whether one universal L_sigma transfers between galaxies and clusters",
+    "any observational performance"
+  ],
+  "observational_data_accessed": false,
+  "raw_holdout_opened": false,
+  "status": "completed Sigma v6B secular rejection and v6C pre-data selection",
+  "v6B": {
+    "analytic_response": "S[(1-cos kt)/k^2-t sin(kt)/(2k)]",
+    "decision": "retire_exact_second_massless_inverse",
+    "early_peak_absolute_response": 31.201324699295384,
+    "early_peak_time": 64.40264939859075,
+    "late_peak_absolute_response": 3141.378051753191,
+    "late_peak_time": 6284.756103506381,
+    "late_to_early_peak_ratio": 100.68091922469344,
+    "reason": "The repeated retarded pole produces a linearly growing oscillatory memory. Bounded coherence hides the amplitude divergence only by eventually saturating and erasing morphology contrast."
+  },
+  "v6C": {
+    "decision": "advance_detuned_massive_memory_to_complete_CTP_variation",
+    "detuned_mode_records": [
+      {
+        "analytic_absolute_bound": 20001.99980002,
+        "measured_maximum_absolute_response": 6179.985176908995,
+        "measured_to_bound_ratio": 0.3089683650983146,
+        "memory_mass_over_wavenumber": 0.01
+      },
+      {
+        "analytic_absolute_bound": 201.98019801980195,
+        "measured_maximum_absolute_response": 199.99562383208502,
+        "measured_to_bound_ratio": 0.9901744121098328,
+        "memory_mass_over_wavenumber": 0.1
+      },
+      {
+        "analytic_absolute_bound": 24.057084607543324,
+        "measured_maximum_absolute_response": 22.222041590363883,
+        "measured_to_bound_ratio": 0.9237213050909733,
+        "memory_mass_over_wavenumber": 0.3
+      },
+      {
+        "analytic_absolute_bound": 3.0,
+        "measured_maximum_absolute_response": 1.999988982025333,
+        "measured_to_bound_ratio": 0.6666629940084443,
+        "memory_mass_over_wavenumber": 1.0
+      },
+      {
+        "analytic_absolute_bound": 0.4222222222222222,
+        "measured_maximum_absolute_response": 0.22222218253708845,
+        "measured_to_bound_ratio": 0.526315695482578,
+        "memory_mass_over_wavenumber": 3.0
+      },
+      {
+        "analytic_absolute_bound": 0.0398019801980198,
+        "measured_maximum_absolute_response": 0.01999965246505091,
+        "measured_to_bound_ratio": 0.5024788305895875,
+        "memory_mass_over_wavenumber": 10.0
+      }
+    ],
+    "envelope": {
+      "C_Q": "Z_Q/(Z_Q+phi_sigma^2)",
+      "Q_mu_nu": "spatial_STF[(Box_R-m_sigma^2)^-1 T_mu_nu]",
+      "T_mu_nu": "spatial_STF[nabla_mu nabla_nu U_R]",
+      "U_R": "Box_R^-1(R_mu_nu u^mu u^nu-R/2)",
+      "Z_Q": "Q_mu_nu Q^mu_nu",
+      "activation": "f(chi)=chi*exp(-sqrt(chi))",
+      "chi": "X*(1+lambda_sigma*C_Q)"
+    },
+    "maximum_high_wavenumber_log_slope": 0.0,
+    "maximum_measured_to_analytic_bound_ratio": 0.9901744121098328,
+    "physical_parameters": {
+      "count": 4,
+      "maximum_allowed": 5,
+      "names": [
+        "a_sigma",
+        "lambda_sigma",
+        "phi_sigma",
+        "L_sigma=1/m_sigma"
+      ]
+    },
+    "static_transfer": "k^2/(k^2+m_sigma^2)",
+    "static_transfer_maximum": 1.0,
+    "static_transfer_minimum": 1e-24,
+    "why_it_evades_v6B": "m_sigma>0 moves the second response pole from omega^2=k^2 to omega^2=k^2+m_sigma^2, eliminating the resonance while retaining a causal, source-forced, bounded static orientation response."
+  }
+}

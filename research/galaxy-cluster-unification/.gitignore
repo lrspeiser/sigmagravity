@@ -102,6 +102,10 @@ results/sigma_v1_nonmetricity_cycle/*
 !results/sigma_v5c_exterior_law_audit/**
 !results/sigma_v6a_metric_memory_selection/
 !results/sigma_v6a_metric_memory_selection/**
+!results/sigma_v6b_differentiable_orientation_selection/
+!results/sigma_v6b_differentiable_orientation_selection/**
+!results/sigma_v6c_detuned_memory_selection/
+!results/sigma_v6c_detuned_memory_selection/**
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/
