@@ -1,5 +1,23 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v17E halo-scale identifiability gate
+
+Before either spent v17 lensing target was opened, the thermal-stress transfer
+protocol added an amplitude-independent spatial-extent test. After the
+unchanged static response is transferred, the required and thermal-predicted
+one-metric residual triplets are each reduced to the field energy
+`delta_kappa^2+delta_gamma_1^2+delta_gamma_2^2`. Their independently centered
+`R50` and `R80` radii must agree within 25% in both cluster-transfer directions,
+and the predicted radii must change by at most 2% when map resolution doubles.
+
+This separates a halo-strength correlation from a halo-size explanation. A
+single coefficient cannot alter the radii, and a cluster-specific propagation
+length remains prohibited. The source/propagator distinction, provisional
+constant roles, and action consequences are derived in
+[`SIGMA_HALO_SCALE_IDENTIFIABILITY.md`](SIGMA_HALO_SCALE_IDENTIFIABILITY.md).
+No target value or fitted inverse coefficient existed when this gate was
+frozen.
+
 ## 2026-08-04 Sigma v15 spent covariant-invariant inference
 
 After the v14 gauge-carrier reset, v15 asks which baryonic information the
