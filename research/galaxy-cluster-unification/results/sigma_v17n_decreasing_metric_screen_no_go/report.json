@@ -1,0 +1,108 @@
+{
+  "curve_rows": [
+    {
+      "J_hat_at_unit_density": 3.000110002650058,
+      "J_hat_critical": 0.019999999999999997,
+      "analytic_matter_hessian": -1.500055001325029e-05,
+      "chi": 1.0,
+      "chi_prime": -0.25,
+      "finite_difference_matter_hessian": -1.500054973210076e-05,
+      "finite_positive_zero_surface": true,
+      "formula": "chi(z)=(1+z)^(-1/4)",
+      "id": "original",
+      "normalized_hessian_error": 1.8742614794517243e-08,
+      "q": 1e-05,
+      "rho_hat_critical_for_w_1": 0.00666642222529627,
+      "z": 0.0
+    },
+    {
+      "J_hat_at_unit_density": 3.0001008726731726,
+      "J_hat_critical": 0.043620309306610296,
+      "analytic_matter_hessian": -6.877761575657905e-06,
+      "chi": 0.9170040432046712,
+      "chi_prime": -0.1146255054005839,
+      "finite_difference_matter_hessian": -6.877761620773097e-06,
+      "finite_positive_zero_surface": true,
+      "formula": "chi(z)=(1+z^2)^(-1/8)",
+      "id": "quartic_soft_start",
+      "normalized_hessian_error": 6.559574791842275e-09,
+      "q": 9.170040432046713e-06,
+      "rho_hat_critical_for_w_1": 0.014539614218952376,
+      "z": 1.0
+    },
+    {
+      "J_hat_at_unit_density": 3.000110002650058,
+      "J_hat_critical": 0.019999999999999997,
+      "analytic_matter_hessian": -1.500055001325029e-05,
+      "chi": 1.0,
+      "chi_prime": -0.25,
+      "finite_difference_matter_hessian": -1.5000550006999567e-05,
+      "finite_positive_zero_surface": true,
+      "formula": "chi(z)=exp(-z/4)",
+      "id": "exponential",
+      "normalized_hessian_error": 4.166996326438014e-10,
+      "q": 1e-05,
+      "rho_hat_critical_for_w_1": 0.00666642222529627,
+      "z": 0.0
+    },
+    {
+      "J_hat_at_unit_density": 3.000110002650058,
+      "J_hat_critical": 0.019999999999999997,
+      "analytic_matter_hessian": -1.500055001325029e-05,
+      "chi": 1.0,
+      "chi_prime": -0.25,
+      "finite_difference_matter_hessian": -1.5000549975752225e-05,
+      "finite_positive_zero_surface": true,
+      "formula": "chi(z)=1/(1+z/4)",
+      "id": "rational",
+      "normalized_hessian_error": 2.499779376929262e-09,
+      "q": 1e-05,
+      "rho_hat_critical_for_w_1": 0.00666642222529627,
+      "z": 0.0
+    },
+    {
+      "J_hat_at_unit_density": 3.000110002650058,
+      "J_hat_critical": 0.009999999999999998,
+      "analytic_matter_hessian": -3.000110002650058e-05,
+      "chi": 1.0,
+      "chi_prime": -0.5,
+      "finite_difference_matter_hessian": -3.0001098827034358e-05,
+      "finite_positive_zero_surface": true,
+      "formula": "chi(z)=1-z/[2(1+z)]",
+      "id": "saturating_half",
+      "normalized_hessian_error": 3.998074143164233e-08,
+      "q": 1e-05,
+      "rho_hat_critical_for_w_1": 0.003333211112648135,
+      "z": 0.0
+    }
+  ],
+  "decision": {
+    "holdout_authorized": false,
+    "next_mechanism_requirement": "Move environmental susceptibility outside derivative dependence of the physical matter metric; retain one metric for matter and light.",
+    "outcome": "retire_all_decreasing_acceleration_screens_inside_physical_metric"
+  },
+  "empirical_fit_performed": false,
+  "gates": {
+    "decreasing_metric_screen_class_survives": false,
+    "every_decreasing_curve_has_no_finite_zero_surface_pass": false,
+    "exact_transverse_hessian_identity_pass": true,
+    "parent_protocol_hash_pass": true,
+    "parent_report_hash_pass": true,
+    "quartic_soft_start_removes_failure_pass": false,
+    "shared_exact_matter_kernel_hash_pass": true
+  },
+  "generated_utc": "2026-08-04T22:58:42.883521+00:00",
+  "observational_data_opened": false,
+  "parent_hashes_verified": true,
+  "protocol": "configs/sigma_v17n_decreasing_metric_screen_no_go.json",
+  "protocol_sha256": "234ab64d4d635fa8633454f0f7cf01cbdc2c7fd0da21671149420225078d4da2",
+  "report_version": "SIGMA-V17N-DECREASING-METRIC-SCREEN-NO-GO-1.0.0",
+  "shared_exact_matter_kernel_hash_verified": true,
+  "status": "decreasing_metric_screen_class_retired",
+  "theorem": {
+    "finite_zero_surface": "J_hat_crit=K_b/[-2 q_base chi_prime(z_0)]",
+    "maximum_normalized_hessian_error": 3.998074143164233e-08,
+    "mean_value_consequence": "Every differentiable susceptibility that decreases on an interval has chi_prime<0 somewhere and therefore a finite positive-density zero surface for finite matter-independent K_b.",
+    "transverse_identity": "Delta K_T=2 q_base J_hat chi_prime(z_0)"
+  }
+}

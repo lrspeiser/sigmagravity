@@ -1,0 +1,74 @@
+{
+  "protocol_version": "SIGMA-V17N-DECREASING-METRIC-SCREEN-NO-GO-1.0.0",
+  "status": "frozen before executing the mechanism-level no-go audit and without opening observational targets",
+  "purpose": "Determine whether replacing the v17M susceptibility curve can rescue an acceleration-screened physical metric. Prove or refute the full differentiable class q=q_base chi(A^2) with chi decreasing anywhere and a finite positive bare transverse kinetic coefficient.",
+  "parent": {
+    "protocol": "configs/sigma_v17m_active_pressure_kinetic_gate.json",
+    "sha256": "71d5cce06af9840374d4dca5002e565cabea75ae30d6fcb959b7f0cffa95ce47",
+    "report": "results/sigma_v17m_active_pressure_kinetic_gate/report.json",
+    "report_sha256": "e9616f4a853b3d2754e689ca317addcf318ffbe6deb09d8dde9137715bcff096"
+  },
+  "shared_exact_matter_kernel": {
+    "path": "scripts/audit_sigma_v17m_active_pressure_kinetics.py",
+    "sha256": "ab7c5127011b5fa39068a1b4c0ad528b767d675988c19d15493197408830b305"
+  },
+  "authorization": {
+    "observational_data_opened": false,
+    "empirical_fit_authorized": false,
+    "holdout_authorized": false,
+    "allowed_outcome": "retain or retire the full class of decreasing acceleration susceptibilities inside the physical matter metric"
+  },
+  "theorem": {
+    "action_class": "TeVeS-like derivative-disformal physical metric carried by a finite positive Einstein-aether transverse sector",
+    "assumptions": "At a local background let z=v_i v_i>=0, q=q_base chi(z), q_base>0, a differentiable chi, positive reciprocal matter source J_hat=dL_m_hat/dq, and finite bare transverse kinetic coefficient K_b(z)>0 independent of the local matter amplitude.",
+    "transverse_variation": "Choose delta v perpendicular to the background v. Then z(delta v)=z_0+(delta v)^2, partial q/partial delta v=0, and partial^2 q/partial(delta v)^2=2 q_base chi_prime(z_0).",
+    "exact_matter_hessian": "Delta K_T=2 q_base J_hat(q) chi_prime(z_0). No L_qq term remains because the first transverse derivative of q vanishes.",
+    "total_coefficient": "K_T=K_b(z_0)+2 q_base J_hat(q) chi_prime(z_0).",
+    "zero_surface": "If chi_prime(z_0)<0, J_hat_crit=K_b(z_0)/[-2 q_base chi_prime(z_0)] is finite and positive. Scaling any canonical matter realization with J_hat>0 reaches K_T=0 and then K_T<0.",
+    "mean_value_step": "Any differentiable screen with chi(z_2)<chi(z_1) for z_2>z_1 has chi_prime(z_*)<0 at some z_* in (z_1,z_2). Therefore a soft start chi_prime(0)=0 relocates the zero surface but cannot remove it.",
+    "scope_limits": "The theorem does not cover a constant or everywhere increasing chi, a singular infinite bare kinetic coefficient, an explicit matter-dependent compensating kinetic term, or moving the susceptibility out of the physical metric. Those are materially different mechanisms."
+  },
+  "representative_curves": [
+    {"id": "original", "formula": "chi(z)=(1+z)^(-1/4)", "audit_z": 0.0},
+    {"id": "quartic_soft_start", "formula": "chi(z)=(1+z^2)^(-1/8)", "audit_z": 1.0},
+    {"id": "exponential", "formula": "chi(z)=exp(-z/4)", "audit_z": 0.0},
+    {"id": "rational", "formula": "chi(z)=1/(1+z/4)", "audit_z": 0.0},
+    {"id": "saturating_half", "formula": "chi(z)=1-z/[2(1+z)]", "audit_z": 0.0}
+  ],
+  "executable_audit": {
+    "q_base": 1e-5,
+    "epsilon_aether_as_bare_K": 1e-7,
+    "canonical_witness_rho_hat": 1.0,
+    "canonical_witness_w": 1.0,
+    "transverse_finite_difference_step": 0.01,
+    "maximum_normalized_hessian_error": 1e-5,
+    "derivative_sign_tolerance": 1e-14
+  },
+  "gates": {
+    "require_parent_and_kernel_hashes": true,
+    "require_exact_transverse_hessian_identity": true,
+    "require_every_decreasing_curve_to_have_no_finite_zero_surface": true,
+    "require_quartic_soft_start_to_remove_not_relocate_failure": true,
+    "object_specific_parameters": 0,
+    "lensing_only_multiplier": false
+  },
+  "decision_rule": [
+    "Retain curve exploration only if a differentiable curve can decrease over some acceleration interval while maintaining a positive transverse coefficient for arbitrary positive canonical matter amplitude and finite bare K_b.",
+    "If every decreasing representative has a finite positive J_hat_crit and the exact transverse Hessian identity is numerically verified, retire the complete decreasing chi(A^2) physical-metric class rather than testing more curve shapes.",
+    "Do not count the five curves as five separate physical formulations; they are witnesses to one analytic mechanism-level result. The next candidate must move environmental susceptibility outside derivative dependence of the matter metric."
+  ],
+  "formula_inventory": {
+    "equations": "Delta K_T=2 q_base J_hat chi_prime(z_0); K_T=K_b+2 q_base J_hat chi_prime(z_0); J_hat_crit=K_b/[-2 q_base chi_prime(z_0)]; chi(z_2)<chi(z_1) implies chi_prime(z_*)<0"
+  },
+  "prior_art_primary_sources": [
+    "https://arxiv.org/abs/gr-qc/0402005",
+    "https://arxiv.org/abs/astro-ph/0403694",
+    "https://arxiv.org/abs/1308.4685"
+  ],
+  "complexity": {
+    "new_physical_constants": 0,
+    "curve_variants_are_diagnostics_not_new_fitted_theories": true,
+    "per_object_gravity_constants": 0,
+    "observational_parameters_used": 0
+  }
+}

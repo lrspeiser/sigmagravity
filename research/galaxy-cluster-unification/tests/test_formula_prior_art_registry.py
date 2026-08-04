@@ -273,3 +273,20 @@ def test_v17m_kinetic_gate_preserves_aether_and_disformal_ancestry() -> None:
     assert {"EINSTEIN-AETHER", "TEVES", "DISFORMAL-METRIC"}.issubset(
         set(v17m["published_overlap_ids"])
     )
+
+
+def test_v17n_no_go_preserves_aether_and_disformal_ancestry() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v17n = protocols["sigma_v17n_decreasing_metric_screen_no_go.json"]
+    fragment_text = " ".join(
+        fragment["formula"] for fragment in v17n["formula_fragments"]
+    )
+
+    assert "Delta K_T=2 q_base J_hat chi_prime(z_0)" in fragment_text
+    assert "J_hat_crit" in fragment_text
+    assert {"EINSTEIN-AETHER", "TEVES", "DISFORMAL-METRIC"}.issubset(
+        set(v17n["published_overlap_ids"])
+    )

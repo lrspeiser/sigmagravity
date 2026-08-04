@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 35,
-    "sigma_protocols": 96,
+    "sigma_protocols": 97,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 100,
+    "sigma_formula_fragments": 107,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -6193,6 +6193,74 @@
         "TEVES"
       ],
       "sha256": "71d5cce06af9840374d4dca5002e565cabea75ae30d6fcb959b7f0cffa95ce47"
+    },
+    {
+      "config": "configs/sigma_v17n_decreasing_metric_screen_no_go.json",
+      "protocol_version": "SIGMA-V17N-DECREASING-METRIC-SCREEN-NO-GO-1.0.0",
+      "status": "frozen before executing the mechanism-level no-go audit and without opening observational targets",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "theorem.action_class",
+          "formula": "TeVeS-like derivative-disformal physical metric carried by a finite positive Einstein-aether transverse sector",
+          "published_overlap_ids": [
+            "DISFORMAL-METRIC",
+            "EINSTEIN-AETHER",
+            "AEST-MOND",
+            "TEVES"
+          ]
+        },
+        {
+          "json_path": "representative_curves[0].formula",
+          "formula": "chi(z)=(1+z)^(-1/4)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "representative_curves[1].formula",
+          "formula": "chi(z)=(1+z^2)^(-1/8)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "representative_curves[2].formula",
+          "formula": "chi(z)=exp(-z/4)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "representative_curves[3].formula",
+          "formula": "chi(z)=1/(1+z/4)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "representative_curves[4].formula",
+          "formula": "chi(z)=1-z/[2(1+z)]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "formula_inventory.equations",
+          "formula": "Delta K_T=2 q_base J_hat chi_prime(z_0); K_T=K_b+2 q_base J_hat chi_prime(z_0); J_hat_crit=K_b/[-2 q_base chi_prime(z_0)]; chi(z_2)<chi(z_1) implies chi_prime(z_*)<0",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 7,
+      "published_overlap_ids": [
+        "DISFORMAL-METRIC",
+        "EINSTEIN-AETHER",
+        "AEST-MOND",
+        "TEVES"
+      ],
+      "sha256": "234ab64d4d635fa8633454f0f7cf01cbdc2c7fd0da21671149420225078d4da2"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",
