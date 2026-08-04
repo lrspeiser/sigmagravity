@@ -1,0 +1,1099 @@
+{
+  "base_AQUAL_scores": [
+    {
+      "cluster": "AS295",
+      "full_field_NRMSE": 0.902148163448784,
+      "residual_NRMSE": 1.0,
+      "residual_convergence_correlation": 0.0,
+      "residual_power_closed": 0.0,
+      "residual_shear_alignment_cosine": 0.0
+    },
+    {
+      "cluster": "PLCKG287",
+      "full_field_NRMSE": 0.895303511674135,
+      "residual_NRMSE": 1.0,
+      "residual_convergence_correlation": 0.0,
+      "residual_power_closed": 0.0,
+      "residual_shear_alignment_cosine": 0.0
+    }
+  ],
+  "claim_boundary": [
+    "This is a disclosed post-failure scale sensitivity on the same two spent clusters.",
+    "Both clusters and their comparator maps were previously opened; this is mechanism discovery only.",
+    "The compact-halo comparator is a fitted reconstruction, includes external shear, and is not direct pixel truth.",
+    "Metric-compatible feature triplets enforce one scalar lens potential at this diagnostic level but are not derived from a four-dimensional action.",
+    "Feature coefficients and ridge penalties are inverse-problem diagnostics, not proposed physical constants.",
+    "Only two clusters have complete ready comparator paths, so cross-cluster transfer is necessary but not sufficient evidence of universality."
+  ],
+  "family_results": {
+    "component_overlap": {
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 1.5262996407657463,
+              "residual_NRMSE": 1.685514637132979,
+              "residual_convergence_correlation": -0.08878434757950032,
+              "residual_power_closed": -1.840959591989518,
+              "residual_shear_alignment_cosine": 0.09892835718884782,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8169903455852384,
+              "residual_NRMSE": 0.8797194910472097,
+              "residual_convergence_correlation": 0.47023943351691216,
+              "residual_power_closed": 0.22609361707163833,
+              "residual_shear_alignment_cosine": 0.5332173368624092,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 1.2241453790667867
+        },
+        {
+          "alpha": 1e-06,
+          "directions": [
+            {
+              "full_field_NRMSE": 1.3371857092818096,
+              "residual_NRMSE": 1.4961209582751407,
+              "residual_convergence_correlation": -0.23681699408897378,
+              "residual_power_closed": -1.2383779217901254,
+              "residual_shear_alignment_cosine": 0.05785713239337526,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 1.0147584754271035,
+              "residual_NRMSE": 1.1677642374406862,
+              "residual_convergence_correlation": 0.263778361405168,
+              "residual_power_closed": -0.36367331424542737,
+              "residual_shear_alignment_cosine": 0.29316774456228073,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 1.1869710157705275
+        },
+        {
+          "alpha": 0.0001,
+          "directions": [
+            {
+              "full_field_NRMSE": 1.1325130812261666,
+              "residual_NRMSE": 1.2491240090651188,
+              "residual_convergence_correlation": -0.14258908104613513,
+              "residual_power_closed": -0.560310790022915,
+              "residual_shear_alignment_cosine": 0.17884342168843745,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 1.0059617208746694,
+              "residual_NRMSE": 1.153006257729101,
+              "residual_convergence_correlation": 0.23874039577350084,
+              "residual_power_closed": -0.3294234303624659,
+              "residual_shear_alignment_cosine": 0.27751366133554933,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 1.071108039138329
+        },
+        {
+          "alpha": 0.01,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.856720409442643,
+              "residual_NRMSE": 0.9439021565941772,
+              "residual_convergence_correlation": 0.12267190474319498,
+              "residual_power_closed": 0.1090487187768614,
+              "residual_shear_alignment_cosine": 0.33599482177940504,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8056341735595126,
+              "residual_NRMSE": 0.8753930617502578,
+              "residual_convergence_correlation": 0.43503768509435853,
+              "residual_power_closed": 0.23368698743950933,
+              "residual_shear_alignment_cosine": 0.4357905764067883,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8315696848618548
+        },
+        {
+          "alpha": 1.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.6797382930416177,
+              "residual_NRMSE": 0.7483641408157469,
+              "residual_convergence_correlation": 0.5131493254466556,
+              "residual_power_closed": 0.439951112741109,
+              "residual_shear_alignment_cosine": 0.5686009953660875,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8156794925282187,
+              "residual_NRMSE": 0.8751268149620185,
+              "residual_convergence_correlation": 0.4659267126126834,
+              "residual_power_closed": 0.23415305773443307,
+              "residual_shear_alignment_cosine": 0.4171144587758996,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7507919757023994
+        },
+        {
+          "alpha": 100.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.8502777998184627,
+              "residual_NRMSE": 0.947839750385525,
+              "residual_convergence_correlation": 0.5892202889484912,
+              "residual_power_closed": 0.10159980758910558,
+              "residual_shear_alignment_cosine": 0.6243267753807555,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8540854986398809,
+              "residual_NRMSE": 0.9337087426693309,
+              "residual_convergence_correlation": 0.36890059465247055,
+              "residual_power_closed": 0.12818798386285724,
+              "residual_shear_alignment_cosine": 0.3505562295904805,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8521837759107656
+        }
+      ],
+      "cross_cluster_scores": [
+        {
+          "full_field_NRMSE": 0.6797382930416177,
+          "residual_NRMSE": 0.7483641408157469,
+          "residual_convergence_correlation": 0.5131493254466556,
+          "residual_power_closed": 0.439951112741109,
+          "residual_shear_alignment_cosine": 0.5686009953660875,
+          "test_cluster": "PLCKG287",
+          "train_cluster": "AS295"
+        },
+        {
+          "full_field_NRMSE": 0.8156794925282187,
+          "residual_NRMSE": 0.8751268149620185,
+          "residual_convergence_correlation": 0.4659267126126834,
+          "residual_power_closed": 0.23415305773443307,
+          "residual_shear_alignment_cosine": 0.4171144587758996,
+          "test_cluster": "AS295",
+          "train_cluster": "PLCKG287"
+        }
+      ],
+      "directional_prediction_agreement_cosine": 0.9679956293838345,
+      "joint_coefficients": {
+        "gas_minus_star_10kpc": 0.26322970848447147,
+        "gas_minus_star_150kpc": 0.5383204144058509,
+        "gas_minus_star_25kpc": 0.30458027488487394,
+        "gas_minus_star_5kpc": 0.16748840679785604,
+        "gas_minus_star_75kpc": 0.36675799096732875,
+        "gas_star_cross_gradient_10kpc": -525.8525112651313,
+        "gas_star_cross_gradient_150kpc": -785.6965883259818,
+        "gas_star_cross_gradient_25kpc": -137.8667313509449,
+        "gas_star_cross_gradient_5kpc": -198.9231482381946,
+        "gas_star_cross_gradient_75kpc": 397.1488816045402,
+        "gas_star_difference_gradient_10kpc": -84.30973451077249,
+        "gas_star_difference_gradient_150kpc": -26.599192460280914,
+        "gas_star_difference_gradient_25kpc": 184.95486804811247,
+        "gas_star_difference_gradient_5kpc": -83.47366955623171,
+        "gas_star_difference_gradient_75kpc": 94.240562404819,
+        "gas_star_mixing_10kpc": 0.42750354282214137,
+        "gas_star_mixing_150kpc": 5.312387011047458,
+        "gas_star_mixing_25kpc": 1.403313559748757,
+        "gas_star_mixing_5kpc": 0.38495554468867577,
+        "gas_star_mixing_75kpc": 5.4197226925825355,
+        "total_gradient_axis_10kpc": -89.35364567702103,
+        "total_gradient_axis_150kpc": -25.60457840329443,
+        "total_gradient_axis_25kpc": 104.29827506926264,
+        "total_gradient_axis_5kpc": -83.0934463722154,
+        "total_gradient_axis_75kpc": 69.59572190854121,
+        "total_gradient_magnitude_10kpc": 1.4901040081735304,
+        "total_gradient_magnitude_150kpc": -1.019821181609999,
+        "total_gradient_magnitude_25kpc": 5.096806681649476,
+        "total_gradient_magnitude_5kpc": 0.1463696300123216,
+        "total_gradient_magnitude_75kpc": 0.7490698146456137,
+        "total_hessian_axis_10kpc": -1.5033532199530302,
+        "total_hessian_axis_150kpc": -1.2499759758083988,
+        "total_hessian_axis_25kpc": 0.7370666202998994,
+        "total_hessian_axis_5kpc": -2.748837930875119,
+        "total_hessian_axis_75kpc": -3.698082319510154,
+        "total_smooth_10kpc": 0.38032274138384053,
+        "total_smooth_150kpc": 0.5314176408921005,
+        "total_smooth_25kpc": 0.387547378809157,
+        "total_smooth_5kpc": 0.4074556718280127,
+        "total_smooth_75kpc": 0.4320229802111606
+      },
+      "joint_fit_condition_number": 1.966293140173945e+17,
+      "joint_fit_scores": [
+        {
+          "cluster": "AS295",
+          "full_field_NRMSE": 0.7271050061953244,
+          "residual_NRMSE": 0.7732322032688336,
+          "residual_convergence_correlation": 0.5408001162291068,
+          "residual_power_closed": 0.4021119598280253,
+          "residual_shear_alignment_cosine": 0.5415114293409193
+        },
+        {
+          "cluster": "PLCKG287",
+          "full_field_NRMSE": 0.6014140594267644,
+          "residual_NRMSE": 0.6593958298902917,
+          "residual_convergence_correlation": 0.6434741672776018,
+          "residual_power_closed": 0.5651971395232935,
+          "residual_shear_alignment_cosine": 0.6734678646271598
+        }
+      ],
+      "ranked_joint_contributions": [
+        {
+          "coefficient": 5.4197226925825355,
+          "feature": "gas_star_mixing_75kpc",
+          "pooled_contribution_RMS": 0.03904850867541652
+        },
+        {
+          "coefficient": 5.312387011047458,
+          "feature": "gas_star_mixing_150kpc",
+          "pooled_contribution_RMS": 0.02807585198496815
+        },
+        {
+          "coefficient": 0.5314176408921005,
+          "feature": "total_smooth_150kpc",
+          "pooled_contribution_RMS": 0.019413942559534162
+        },
+        {
+          "coefficient": 5.096806681649476,
+          "feature": "total_gradient_magnitude_25kpc",
+          "pooled_contribution_RMS": 0.018884247499711022
+        },
+        {
+          "coefficient": 0.4074556718280127,
+          "feature": "total_smooth_5kpc",
+          "pooled_contribution_RMS": 0.018801826239323152
+        },
+        {
+          "coefficient": 0.4320229802111606,
+          "feature": "total_smooth_75kpc",
+          "pooled_contribution_RMS": 0.018375991007078676
+        },
+        {
+          "coefficient": 0.5383204144058509,
+          "feature": "gas_minus_star_150kpc",
+          "pooled_contribution_RMS": 0.01822550532011049
+        },
+        {
+          "coefficient": 0.387547378809157,
+          "feature": "total_smooth_25kpc",
+          "pooled_contribution_RMS": 0.01740293376608693
+        },
+        {
+          "coefficient": 0.38032274138384053,
+          "feature": "total_smooth_10kpc",
+          "pooled_contribution_RMS": 0.017297558291583214
+        },
+        {
+          "coefficient": 1.403313559748757,
+          "feature": "gas_star_mixing_25kpc",
+          "pooled_contribution_RMS": 0.016128222050458888
+        },
+        {
+          "coefficient": 0.36675799096732875,
+          "feature": "gas_minus_star_75kpc",
+          "pooled_contribution_RMS": 0.014335887324097336
+        },
+        {
+          "coefficient": -83.47366955623171,
+          "feature": "gas_star_difference_gradient_5kpc",
+          "pooled_contribution_RMS": 0.012666824538201043
+        },
+        {
+          "coefficient": -83.0934463722154,
+          "feature": "total_gradient_axis_5kpc",
+          "pooled_contribution_RMS": 0.012653404831730468
+        },
+        {
+          "coefficient": 0.30458027488487394,
+          "feature": "gas_minus_star_25kpc",
+          "pooled_contribution_RMS": 0.012530273064745311
+        },
+        {
+          "coefficient": 0.26322970848447147,
+          "feature": "gas_minus_star_10kpc",
+          "pooled_contribution_RMS": 0.010982108176841792
+        },
+        {
+          "coefficient": -1.019821181609999,
+          "feature": "total_gradient_magnitude_150kpc",
+          "pooled_contribution_RMS": 0.010783630906535753
+        },
+        {
+          "coefficient": -3.698082319510154,
+          "feature": "total_hessian_axis_75kpc",
+          "pooled_contribution_RMS": 0.010403932469296124
+        },
+        {
+          "coefficient": -2.748837930875119,
+          "feature": "total_hessian_axis_5kpc",
+          "pooled_contribution_RMS": 0.009434554609438713
+        },
+        {
+          "coefficient": -1.2499759758083988,
+          "feature": "total_hessian_axis_150kpc",
+          "pooled_contribution_RMS": 0.00851122346188647
+        },
+        {
+          "coefficient": 0.38495554468867577,
+          "feature": "gas_star_mixing_5kpc",
+          "pooled_contribution_RMS": 0.008066353742314354
+        },
+        {
+          "coefficient": -785.6965883259818,
+          "feature": "gas_star_cross_gradient_150kpc",
+          "pooled_contribution_RMS": 0.008010388569988985
+        },
+        {
+          "coefficient": 94.240562404819,
+          "feature": "gas_star_difference_gradient_75kpc",
+          "pooled_contribution_RMS": 0.007785944872024868
+        },
+        {
+          "coefficient": 0.42750354282214137,
+          "feature": "gas_star_mixing_10kpc",
+          "pooled_contribution_RMS": 0.007584068941408221
+        },
+        {
+          "coefficient": 1.4901040081735304,
+          "feature": "total_gradient_magnitude_10kpc",
+          "pooled_contribution_RMS": 0.007213045906826431
+        },
+        {
+          "coefficient": 0.16748840679785604,
+          "feature": "gas_minus_star_5kpc",
+          "pooled_contribution_RMS": 0.007109984224554546
+        },
+        {
+          "coefficient": 69.59572190854121,
+          "feature": "total_gradient_axis_75kpc",
+          "pooled_contribution_RMS": 0.007011253422554386
+        },
+        {
+          "coefficient": -25.60457840329443,
+          "feature": "total_gradient_axis_150kpc",
+          "pooled_contribution_RMS": 0.00581431951710152
+        },
+        {
+          "coefficient": 0.7490698146456137,
+          "feature": "total_gradient_magnitude_75kpc",
+          "pooled_contribution_RMS": 0.005641286391104356
+        },
+        {
+          "coefficient": -26.599192460280914,
+          "feature": "gas_star_difference_gradient_150kpc",
+          "pooled_contribution_RMS": 0.0050295527822588155
+        },
+        {
+          "coefficient": -89.35364567702103,
+          "feature": "total_gradient_axis_10kpc",
+          "pooled_contribution_RMS": 0.004753592181993821
+        },
+        {
+          "coefficient": -1.5033532199530302,
+          "feature": "total_hessian_axis_10kpc",
+          "pooled_contribution_RMS": 0.0046481522233403965
+        },
+        {
+          "coefficient": -84.30973451077249,
+          "feature": "gas_star_difference_gradient_10kpc",
+          "pooled_contribution_RMS": 0.0044085699558088255
+        },
+        {
+          "coefficient": 184.95486804811247,
+          "feature": "gas_star_difference_gradient_25kpc",
+          "pooled_contribution_RMS": 0.0031673652568262344
+        },
+        {
+          "coefficient": 397.1488816045402,
+          "feature": "gas_star_cross_gradient_75kpc",
+          "pooled_contribution_RMS": 0.002469554600942962
+        },
+        {
+          "coefficient": 104.29827506926264,
+          "feature": "total_gradient_axis_25kpc",
+          "pooled_contribution_RMS": 0.0021029163407275163
+        },
+        {
+          "coefficient": -525.8525112651313,
+          "feature": "gas_star_cross_gradient_10kpc",
+          "pooled_contribution_RMS": 0.0016895052115247092
+        },
+        {
+          "coefficient": 0.7370666202998994,
+          "feature": "total_hessian_axis_25kpc",
+          "pooled_contribution_RMS": 0.001398606426566101
+        },
+        {
+          "coefficient": 0.1463696300123216,
+          "feature": "total_gradient_magnitude_5kpc",
+          "pooled_contribution_RMS": 0.000989446942236196
+        },
+        {
+          "coefficient": -137.8667313509449,
+          "feature": "gas_star_cross_gradient_25kpc",
+          "pooled_contribution_RMS": 0.0005748833210000994
+        },
+        {
+          "coefficient": -198.9231482381946,
+          "feature": "gas_star_cross_gradient_5kpc",
+          "pooled_contribution_RMS": 0.00046103896777304853
+        }
+      ],
+      "selected_alpha": 1.0,
+      "self_fit_scores": [
+        {
+          "cluster": "AS295",
+          "full_field_NRMSE": 0.6962015169001277,
+          "residual_NRMSE": 0.7387022495015197,
+          "residual_convergence_correlation": 0.5784500304945067,
+          "residual_power_closed": 0.45431898658139447,
+          "residual_shear_alignment_cosine": 0.6214858298231334
+        },
+        {
+          "cluster": "PLCKG287",
+          "full_field_NRMSE": 0.566221633207001,
+          "residual_NRMSE": 0.6182690472997029,
+          "residual_convergence_correlation": 0.6620909311722782,
+          "residual_power_closed": 0.6177433851511178,
+          "residual_shear_alignment_cosine": 0.6857857636063248
+        }
+      ],
+      "symmetric_cross_cluster_full_field_NRMSE": 0.7507919757023994
+    },
+    "scalar_scale": {
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.6886569511583994,
+              "residual_NRMSE": 0.7575521602054832,
+              "residual_convergence_correlation": 0.49987706484540106,
+              "residual_power_closed": 0.4261147245680059,
+              "residual_shear_alignment_cosine": 0.5367506099351955,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8064100011763865,
+              "residual_NRMSE": 0.8719824620485555,
+              "residual_convergence_correlation": 0.40972049707588015,
+              "residual_power_closed": 0.23964658587973953,
+              "residual_shear_alignment_cosine": 0.43850408901387466,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7498484801531847
+        },
+        {
+          "alpha": 1e-06,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.6886562618370248,
+              "residual_NRMSE": 0.7575517741648091,
+              "residual_convergence_correlation": 0.4998861045332505,
+              "residual_power_closed": 0.42611530945975007,
+              "residual_shear_alignment_cosine": 0.5367578629011237,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.80641437270981,
+              "residual_NRMSE": 0.8719872835156518,
+              "residual_convergence_correlation": 0.40971064150817277,
+              "residual_power_closed": 0.23963817738699433,
+              "residual_shear_alignment_cosine": 0.43850230542893137,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7498505142627766
+        },
+        {
+          "alpha": 0.0001,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.688579015536786,
+              "residual_NRMSE": 0.7574958508742694,
+              "residual_convergence_correlation": 0.5006878138287737,
+              "residual_power_closed": 0.4262000359082666,
+              "residual_shear_alignment_cosine": 0.5373939971473203,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8068299202369699,
+              "residual_NRMSE": 0.872445180765897,
+              "residual_convergence_correlation": 0.4087744613071457,
+              "residual_power_closed": 0.23883940655836122,
+              "residual_shear_alignment_cosine": 0.4383250804498444,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7500385259529022
+        },
+        {
+          "alpha": 0.01,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.6830000885650138,
+              "residual_NRMSE": 0.7504266254786285,
+              "residual_convergence_correlation": 0.5084836417945007,
+              "residual_power_closed": 0.4368598797727583,
+              "residual_shear_alignment_cosine": 0.5419354387094747,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8162910670153241,
+              "residual_NRMSE": 0.8826076281559926,
+              "residual_convergence_correlation": 0.38732143695975696,
+              "residual_power_closed": 0.22100377472085309,
+              "residual_shear_alignment_cosine": 0.432076308899194,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7526022279626978
+        },
+        {
+          "alpha": 1.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7019168102103622,
+              "residual_NRMSE": 0.7711658605868152,
+              "residual_convergence_correlation": 0.5347239303130151,
+              "residual_power_closed": 0.4053032154653966,
+              "residual_shear_alignment_cosine": 0.5626635037814363,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.802801864228152,
+              "residual_NRMSE": 0.8577384801421004,
+              "residual_convergence_correlation": 0.33527693172716233,
+              "residual_power_closed": 0.26428469968351964,
+              "residual_shear_alignment_cosine": 0.4073208069114278,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7540484207476619
+        },
+        {
+          "alpha": 100.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.8821633896286551,
+              "residual_NRMSE": 0.9845074282808511,
+              "residual_convergence_correlation": 0.5329430219128687,
+              "residual_power_closed": 0.030745123659824736,
+              "residual_shear_alignment_cosine": 0.5596685673423349,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8859416445066778,
+              "residual_NRMSE": 0.9775269482955198,
+              "residual_convergence_correlation": 0.327929257459322,
+              "residual_power_closed": 0.04444106535604819,
+              "residual_shear_alignment_cosine": 0.4032834835783351,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8840545354988897
+        }
+      ],
+      "cross_cluster_scores": [
+        {
+          "full_field_NRMSE": 0.6886569511583994,
+          "residual_NRMSE": 0.7575521602054832,
+          "residual_convergence_correlation": 0.49987706484540106,
+          "residual_power_closed": 0.4261147245680059,
+          "residual_shear_alignment_cosine": 0.5367506099351955,
+          "test_cluster": "PLCKG287",
+          "train_cluster": "AS295"
+        },
+        {
+          "full_field_NRMSE": 0.8064100011763865,
+          "residual_NRMSE": 0.8719824620485555,
+          "residual_convergence_correlation": 0.40972049707588015,
+          "residual_power_closed": 0.23964658587973953,
+          "residual_shear_alignment_cosine": 0.43850408901387466,
+          "test_cluster": "AS295",
+          "train_cluster": "PLCKG287"
+        }
+      ],
+      "directional_prediction_agreement_cosine": 0.96960632200465,
+      "joint_coefficients": {
+        "total_smooth_10kpc": -10.403272290459103,
+        "total_smooth_150kpc": 5.254080950188418,
+        "total_smooth_25kpc": 10.813778959267616,
+        "total_smooth_5kpc": 10.025860843300078,
+        "total_smooth_75kpc": -8.630136390407703
+      },
+      "joint_fit_condition_number": 3784.5002493360435,
+      "joint_fit_scores": [
+        {
+          "cluster": "AS295",
+          "full_field_NRMSE": 0.7649696701918745,
+          "residual_NRMSE": 0.8151099722002392,
+          "residual_convergence_correlation": 0.45208716549878725,
+          "residual_power_closed": 0.33559573321972536,
+          "residual_shear_alignment_cosine": 0.45067148989749034
+        },
+        {
+          "cluster": "PLCKG287",
+          "full_field_NRMSE": 0.6466049914858231,
+          "residual_NRMSE": 0.7063471520873333,
+          "residual_convergence_correlation": 0.5358947767509415,
+          "residual_power_closed": 0.5010737007381136,
+          "residual_shear_alignment_cosine": 0.5691391170287927
+        }
+      ],
+      "ranked_joint_contributions": [
+        {
+          "coefficient": 10.813778959267616,
+          "feature": "total_smooth_25kpc",
+          "pooled_contribution_RMS": 0.4855960568421528
+        },
+        {
+          "coefficient": -10.403272290459103,
+          "feature": "total_smooth_10kpc",
+          "pooled_contribution_RMS": 0.47315395396199333
+        },
+        {
+          "coefficient": 10.025860843300078,
+          "feature": "total_smooth_5kpc",
+          "pooled_contribution_RMS": 0.46263804018153376
+        },
+        {
+          "coefficient": -8.630136390407703,
+          "feature": "total_smooth_75kpc",
+          "pooled_contribution_RMS": 0.36708072478570797
+        },
+        {
+          "coefficient": 5.254080950188418,
+          "feature": "total_smooth_150kpc",
+          "pooled_contribution_RMS": 0.1919439964372791
+        }
+      ],
+      "selected_alpha": 0.0,
+      "self_fit_scores": [
+        {
+          "cluster": "AS295",
+          "full_field_NRMSE": 0.7558858622368805,
+          "residual_NRMSE": 0.8023568252578368,
+          "residual_convergence_correlation": 0.4774991293468355,
+          "residual_power_closed": 0.35622352496216514,
+          "residual_shear_alignment_cosine": 0.462204223608489
+        },
+        {
+          "cluster": "PLCKG287",
+          "full_field_NRMSE": 0.6310386689243969,
+          "residual_NRMSE": 0.688483455048929,
+          "residual_convergence_correlation": 0.5567597279151055,
+          "residual_power_closed": 0.5259905321238894,
+          "residual_shear_alignment_cosine": 0.5853467811476565
+        }
+      ],
+      "symmetric_cross_cluster_full_field_NRMSE": 0.7498484801531847
+    },
+    "total_tidal": {
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 1.2296476936288292,
+              "residual_NRMSE": 1.3648392424314637,
+              "residual_convergence_correlation": -0.24316059445927696,
+              "residual_power_closed": -0.8627861576808917,
+              "residual_shear_alignment_cosine": 0.11873529723507992,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.9065471729338824,
+              "residual_NRMSE": 1.0062146256809252,
+              "residual_convergence_correlation": 0.4215176030547548,
+              "residual_power_closed": -0.012467872934204483,
+              "residual_shear_alignment_cosine": 0.33795081826997736,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 1.0802456265130431
+        },
+        {
+          "alpha": 1e-06,
+          "directions": [
+            {
+              "full_field_NRMSE": 1.2171525092237472,
+              "residual_NRMSE": 1.3497288789695545,
+              "residual_convergence_correlation": -0.23717249130604345,
+              "residual_power_closed": -0.8217680467244104,
+              "residual_shear_alignment_cosine": 0.12621100152469783,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.9053286918426747,
+              "residual_NRMSE": 1.0042685898200885,
+              "residual_convergence_correlation": 0.4209800905302777,
+              "residual_power_closed": -0.008555400499229204,
+              "residual_shear_alignment_cosine": 0.33841327688381617,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 1.0726323393836383
+        },
+        {
+          "alpha": 0.0001,
+          "directions": [
+            {
+              "full_field_NRMSE": 1.0726042943647585,
+              "residual_NRMSE": 1.1765912321720553,
+              "residual_convergence_correlation": -0.127086319543062,
+              "residual_power_closed": -0.38436692762415525,
+              "residual_shear_alignment_cosine": 0.22302291636311145,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8786700347842746,
+              "residual_NRMSE": 0.9616896434230605,
+              "residual_convergence_correlation": 0.41018712765653775,
+              "residual_power_closed": 0.07515302973282667,
+              "residual_shear_alignment_cosine": 0.351874997303474,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.9804440326498804
+        },
+        {
+          "alpha": 0.01,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.853024865232492,
+              "residual_NRMSE": 0.9407136634067117,
+              "residual_convergence_correlation": 0.12795330060019022,
+              "residual_power_closed": 0.11505780347992389,
+              "residual_shear_alignment_cosine": 0.32412825128830935,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.7936994236052152,
+              "residual_NRMSE": 0.8514177849817756,
+              "residual_convergence_correlation": 0.45512108117041483,
+              "residual_power_closed": 0.27508775541672703,
+              "residual_shear_alignment_cosine": 0.45184184827511464,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8238962907235843
+        },
+        {
+          "alpha": 1.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7095291175956482,
+              "residual_NRMSE": 0.7819618667533405,
+              "residual_convergence_correlation": 0.4643049567050971,
+              "residual_power_closed": 0.3885356389436311,
+              "residual_shear_alignment_cosine": 0.518342349469608,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.80254440597768,
+              "residual_NRMSE": 0.8561963499584453,
+              "residual_convergence_correlation": 0.4134338577397499,
+              "residual_power_closed": 0.2669278103178355,
+              "residual_shear_alignment_cosine": 0.4167499511015506,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7574658712714806
+        },
+        {
+          "alpha": 100.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.8715819069276536,
+              "residual_NRMSE": 0.9724260531765762,
+              "residual_convergence_correlation": 0.520891790160926,
+              "residual_power_closed": 0.054387571103426735,
+              "residual_shear_alignment_cosine": 0.5609085735108001,
+              "test_cluster": "PLCKG287",
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8718463768986872,
+              "residual_NRMSE": 0.958982741513672,
+              "residual_convergence_correlation": 0.38370659956163616,
+              "residual_power_closed": 0.08035210147892169,
+              "residual_shear_alignment_cosine": 0.40649824028820053,
+              "test_cluster": "AS295",
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8717141519428868
+        }
+      ],
+      "cross_cluster_scores": [
+        {
+          "full_field_NRMSE": 0.7095291175956482,
+          "residual_NRMSE": 0.7819618667533405,
+          "residual_convergence_correlation": 0.4643049567050971,
+          "residual_power_closed": 0.3885356389436311,
+          "residual_shear_alignment_cosine": 0.518342349469608,
+          "test_cluster": "PLCKG287",
+          "train_cluster": "AS295"
+        },
+        {
+          "full_field_NRMSE": 0.80254440597768,
+          "residual_NRMSE": 0.8561963499584453,
+          "residual_convergence_correlation": 0.4134338577397499,
+          "residual_power_closed": 0.2669278103178355,
+          "residual_shear_alignment_cosine": 0.4167499511015506,
+          "test_cluster": "AS295",
+          "train_cluster": "PLCKG287"
+        }
+      ],
+      "directional_prediction_agreement_cosine": 0.9721080348164423,
+      "joint_coefficients": {
+        "total_gradient_axis_10kpc": -144.7452063458992,
+        "total_gradient_axis_150kpc": -66.87687864062043,
+        "total_gradient_axis_25kpc": -92.77834492673801,
+        "total_gradient_axis_5kpc": -121.91409506090572,
+        "total_gradient_axis_75kpc": 18.80981457645283,
+        "total_gradient_magnitude_10kpc": 2.908876408541004,
+        "total_gradient_magnitude_150kpc": -0.5909058295167975,
+        "total_gradient_magnitude_25kpc": 7.921463530962663,
+        "total_gradient_magnitude_5kpc": 0.7015830624058903,
+        "total_gradient_magnitude_75kpc": 1.5198954896709542,
+        "total_hessian_axis_10kpc": -1.5568282287094797,
+        "total_hessian_axis_150kpc": -2.423653362434655,
+        "total_hessian_axis_25kpc": -0.06114391431604761,
+        "total_hessian_axis_5kpc": -3.767680121331451,
+        "total_hessian_axis_75kpc": -5.462684687665861,
+        "total_smooth_10kpc": 0.6908961562324046,
+        "total_smooth_150kpc": 1.013807606919961,
+        "total_smooth_25kpc": 0.7196202798278933,
+        "total_smooth_5kpc": 0.710071662085867,
+        "total_smooth_75kpc": 0.7948321938036027
+      },
+      "joint_fit_condition_number": 134732.33055981703,
+      "joint_fit_scores": [
+        {
+          "cluster": "AS295",
+          "full_field_NRMSE": 0.7412716206119829,
+          "residual_NRMSE": 0.7877083586105279,
+          "residual_convergence_correlation": 0.4779063181284363,
+          "residual_power_closed": 0.37951554177510793,
+          "residual_shear_alignment_cosine": 0.5111570031806011
+        },
+        {
+          "cluster": "PLCKG287",
+          "full_field_NRMSE": 0.6465783408484044,
+          "residual_NRMSE": 0.7096464306868308,
+          "residual_convergence_correlation": 0.569733127753346,
+          "residual_power_closed": 0.4964019434134411,
+          "residual_shear_alignment_cosine": 0.6086388322270484
+        }
+      ],
+      "ranked_joint_contributions": [
+        {
+          "coefficient": 1.013807606919961,
+          "feature": "total_smooth_150kpc",
+          "pooled_contribution_RMS": 0.03703678826717603
+        },
+        {
+          "coefficient": 0.7948321938036027,
+          "feature": "total_smooth_75kpc",
+          "pooled_contribution_RMS": 0.03380799150622197
+        },
+        {
+          "coefficient": 0.710071662085867,
+          "feature": "total_smooth_5kpc",
+          "pooled_contribution_RMS": 0.03276588088247591
+        },
+        {
+          "coefficient": 0.7196202798278933,
+          "feature": "total_smooth_25kpc",
+          "pooled_contribution_RMS": 0.032314769113029704
+        },
+        {
+          "coefficient": 0.6908961562324046,
+          "feature": "total_smooth_10kpc",
+          "pooled_contribution_RMS": 0.03142282918022893
+        },
+        {
+          "coefficient": 7.921463530962663,
+          "feature": "total_gradient_magnitude_25kpc",
+          "pooled_contribution_RMS": 0.02934992186719974
+        },
+        {
+          "coefficient": -121.91409506090572,
+          "feature": "total_gradient_axis_5kpc",
+          "pooled_contribution_RMS": 0.01856498276157111
+        },
+        {
+          "coefficient": -2.423653362434655,
+          "feature": "total_hessian_axis_150kpc",
+          "pooled_contribution_RMS": 0.016502921464944895
+        },
+        {
+          "coefficient": -5.462684687665861,
+          "feature": "total_hessian_axis_75kpc",
+          "pooled_contribution_RMS": 0.015368344369105802
+        },
+        {
+          "coefficient": -66.87687864062043,
+          "feature": "total_gradient_axis_150kpc",
+          "pooled_contribution_RMS": 0.015186484799646549
+        },
+        {
+          "coefficient": 2.908876408541004,
+          "feature": "total_gradient_magnitude_10kpc",
+          "pooled_contribution_RMS": 0.014080801713840642
+        },
+        {
+          "coefficient": -3.767680121331451,
+          "feature": "total_hessian_axis_5kpc",
+          "pooled_contribution_RMS": 0.012931422204393736
+        },
+        {
+          "coefficient": 1.5198954896709542,
+          "feature": "total_gradient_magnitude_75kpc",
+          "pooled_contribution_RMS": 0.01144641737544597
+        },
+        {
+          "coefficient": -144.7452063458992,
+          "feature": "total_gradient_axis_10kpc",
+          "pooled_contribution_RMS": 0.007700409715279208
+        },
+        {
+          "coefficient": -0.5909058295167975,
+          "feature": "total_gradient_magnitude_150kpc",
+          "pooled_contribution_RMS": 0.006248262421819665
+        },
+        {
+          "coefficient": -1.5568282287094797,
+          "feature": "total_hessian_axis_10kpc",
+          "pooled_contribution_RMS": 0.004813489269581735
+        },
+        {
+          "coefficient": 0.7015830624058903,
+          "feature": "total_gradient_magnitude_5kpc",
+          "pooled_contribution_RMS": 0.004742645149569466
+        },
+        {
+          "coefficient": 18.80981457645283,
+          "feature": "total_gradient_axis_75kpc",
+          "pooled_contribution_RMS": 0.0018949494769244304
+        },
+        {
+          "coefficient": -92.77834492673801,
+          "feature": "total_gradient_axis_25kpc",
+          "pooled_contribution_RMS": 0.00187064548749752
+        },
+        {
+          "coefficient": -0.06114391431604761,
+          "feature": "total_hessian_axis_25kpc",
+          "pooled_contribution_RMS": 0.000116022445125837
+        }
+      ],
+      "selected_alpha": 1.0,
+      "self_fit_scores": [
+        {
+          "cluster": "AS295",
+          "full_field_NRMSE": 0.7146304753490275,
+          "residual_NRMSE": 0.7586419414840576,
+          "residual_convergence_correlation": 0.5296188609155014,
+          "residual_power_closed": 0.4244624046212997,
+          "residual_shear_alignment_cosine": 0.5785837748340037
+        },
+        {
+          "cluster": "PLCKG287",
+          "full_field_NRMSE": 0.6080326180905565,
+          "residual_NRMSE": 0.6646717193270253,
+          "residual_convergence_correlation": 0.6002445901868712,
+          "residual_power_closed": 0.5582115055268562,
+          "residual_shear_alignment_cosine": 0.6331963246312622
+        }
+      ],
+      "symmetric_cross_cluster_full_field_NRMSE": 0.7574658712714806
+    }
+  },
+  "feature_counts": {
+    "component_overlap": 40,
+    "scalar_scale": 5,
+    "total_tidal": 20
+  },
+  "gate_results": {
+    "absolute_local_source_sufficiency": false,
+    "material_improvement_over_scalar_scale": false,
+    "minimum_residual_power_closed_both_directions": false,
+    "minimum_residual_shear_alignment_both_directions": false
+  },
+  "inferred_action_requirement": "the tested local scalar/tidal/component invariants do not transfer materially beyond scale-only baryons; the next mechanism must add wider environment, dynamics, or causal state; the local library is quantitatively insufficient and cannot be promoted as a weak-field closure",
+  "input_hashes": {
+    "AS295_baryon_map": "40db1a950ece8a641a5380eb5705bd6158ed1d98e1d9a01d1c99b5e67a0d3a2c",
+    "PLCKG287_baryon_map": "ae1ae809f1a8951b9c930dc713b005bfcb114bdebe8d578d349ae7c722c6d0a7",
+    "config": "28047598aa4e93f400f4228f51bc6fa75b77c69a38d85e77503b234abb7b3e4e"
+  },
+  "observational_validation_claim": false,
+  "one_metric_feature_triplets": true,
+  "per_cluster_gravity_parameters": 0,
+  "protocol_version": "SIGMA-V15B-SPENT-INVARIANT-RESOLUTION-SENSITIVITY-1.0.0",
+  "relative_improvements": {
+    "best_non_scalar_over_scalar_scale": -0.0012582482650654247,
+    "component_overlap_over_best_noncomponent": -0.0012582482650654247,
+    "total_tidal_over_scalar_scale": -0.01015857379178752
+  },
+  "sample_is_spent": true,
+  "sample_metadata": [
+    {
+      "cluster": "AS295",
+      "critical_surface_density_msun_kpc2": 2284133199.048394,
+      "lens_redshift": 0.3,
+      "mask_pixels": 17873
+    },
+    {
+      "cluster": "PLCKG287",
+      "critical_surface_density_msun_kpc2": 2094983503.0843925,
+      "lens_redshift": 0.39,
+      "mask_pixels": 17873
+    }
+  ],
+  "selected_family": "scalar_scale",
+  "status": "completed Sigma v15 spent covariant-invariant inference"
+}

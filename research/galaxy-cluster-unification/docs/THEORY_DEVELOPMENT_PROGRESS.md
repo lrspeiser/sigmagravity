@@ -1,5 +1,30 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v15 spent covariant-invariant inference
+
+After the v14 gauge-carrier reset, v15 asks which baryonic information the
+missing cluster Weyl Hessian actually depends on before selecting another
+field. Every scalar or spin-two baryonic feature is projected into a
+convergence/shear triplet from one lens potential; no coefficient can tune the
+two shear components independently. One shared operator is transferred in both
+directions between the spent AS295 and PLCK G287 maps.
+
+The primary scale-only family scores `0.771407` cross-cluster NRMSE, above the
+frozen `0.500` gate. Total-baryon tidal invariants worsen it to `0.797320`, and
+gas--star overlap/orientation reaches `0.788787`. A post-failure sensitivity
+adding 5 and 10 kpc structure improves the winner only to `0.749848`, or
+`2.795%`, below the required ten-percent rescue. The compact-scale winner also
+uses alternating unregularized scale coefficients and still fails transferred
+power and shear gates into AS295.
+
+Static local density, gradient, Hessian, and component-overlap information is
+therefore insufficient over the tested 5--150 kpc scales. No holdout was opened
+and the inverse coefficients are not theory constants. The next spent stage
+must separate internal E modes from harmonic boundary modes and enlarge the
+baryonic context before a genuinely new dynamical-state postulate is allowed.
+See
+[`SIGMA_V15_SPENT_INVARIANT_INFERENCE.md`](SIGMA_V15_SPENT_INVARIANT_INFERENCE.md).
+
 ## 2026-08-04 Sigma v14 local covariant gauge-carrier falsification
 
 The gauge-reduced tidal question selected by the v14 reset fails its first

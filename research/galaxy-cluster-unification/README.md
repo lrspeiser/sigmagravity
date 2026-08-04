@@ -15,7 +15,27 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
-The current theory-only result is
+The current mechanism-discovery result is
+[`docs/SIGMA_V15_SPENT_INVARIANT_INFERENCE.md`](docs/SIGMA_V15_SPENT_INVARIANT_INFERENCE.md).
+On the spent AS295 and PLCK G287 maps, every tested baryonic scalar or spin-two
+feature is converted into a convergence/shear triplet from one lens potential.
+The best symmetric cross-cluster score is the scale-only total-baryon family at
+`0.771407` NRMSE, above the frozen `0.500` gate. Total-tidal and gas--star
+component features worsen transfer. Adding 5 and 10 kpc structure improves the
+winner only to `0.749848`, or `2.795%`, so the failure is not simply erased
+member-galaxy resolution. No holdout was opened. The next spent question is
+whether the missing phase and shear orientation live in wider baryonic boundary
+conditions or require genuinely dynamical state.
+
+The latest theory-only result is
+[`docs/SIGMA_V14_GAUGE_CARRIER_FALSIFICATION.md`](docs/SIGMA_V14_GAUGE_CARRIER_FALSIFICATION.md).
+Minimal covariantization of the scalar-gauge rank-two carrier breaks its gauge
+symmetry by the Riemann tensor; the partially-massless repair leaves the Weyl
+curvature; and the local Bach/conformal completion has opposite spin-two pole
+residues. These three distinct failures reset the local covariant gauge-carrier
+mechanism before observations.
+
+The preceding theory-only result is
 [`docs/SIGMA_V13C_KHRONON_COMPLETION_FALSIFICATION.md`](docs/SIGMA_V13C_KHRONON_COMPLETION_FALSIFICATION.md).
 The minimal one-metric khronon embedding places the v13B Legendre variable in
 the foliation expansion `Theta=K` and retains the known khronon/AQUAL static
