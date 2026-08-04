@@ -1,0 +1,20 @@
+{
+  "protocol_id": "sigma-v5a-weak-field-derivation-v1",
+  "status": "theory-only analytic and finite-difference audit; no observational data",
+  "manufactured": {
+    "random_seed": 20260803,
+    "samples": 3000,
+    "acceleration_scale": 1.7,
+    "memory_length": 2.3,
+    "anisotropy": 2.7,
+    "polarization_scale": 0.8,
+    "finite_difference_step": 1e-6
+  },
+  "gates": {
+    "maximum_transport_chain_relative_error": 1e-7,
+    "maximum_source_derivative_relative_error": 1e-7,
+    "maximum_complete_local_polarization_derivative_relative_error": 1e-7,
+    "maximum_weyl_trace_identity_error": 1e-12
+  },
+  "data_policy": "No galaxy or cluster calculation is permitted in this stage."
+}

@@ -1,0 +1,19 @@
+{
+  "all_gates_pass": true,
+  "checks": {
+    "complete_local_polarization_derivative_relative_error": 4.2404722575674535e-10,
+    "source_derivative_relative_error": 1.5340701893550943e-09,
+    "transport_chain_relative_error": 1.0901846971012033e-08,
+    "weyl_trace_identity_maximum_absolute_error": 4.050093593832571e-13
+  },
+  "data_policy": "No galaxy or cluster calculation is permitted in this stage.",
+  "decision": "continue_full_background_and_constraint_derivation_no_data_fit",
+  "gates": {
+    "complete_local_polarization_derivative": true,
+    "source_derivative": true,
+    "transport_chain": true,
+    "weyl_trace_identity": true
+  },
+  "observational_data_accessed": false,
+  "status": "completed Sigma v5A weak-field variational audit"
+}

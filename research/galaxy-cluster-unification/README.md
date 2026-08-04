@@ -53,6 +53,13 @@ theory-only algebraic, local-mode, causality, Solar-source, and parameter gates
 pass, but the full nonmetricity mode count, cosmological tensor speed, weak
 metric equations, and PPN limits remain unresolved; observational fitting is
 still prohibited.
+Its complete leading static variation is now in
+[`docs/SIGMA_V5A_WEAK_FIELD_DERIVATION.md`](docs/SIGMA_V5A_WEAK_FIELD_DERIVATION.md).
+The metric, flat-connection, and polarization Euler equations are stated in
+compact exact form, and the coupled weak equations for `Psi`, `Phi`, and the
+polarization include every transition-source and anisotropic-chain term. All
+manufactured variation checks pass; background mode, cosmological `c_T`, and
+PPN proofs still precede any data fit.
 The latest mechanism result is
 [`docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md`](docs/SIGMA_V4C_BARYON_SEEDED_COHERENCE_TRACE_RESULTS.md).
 Its positive baryon-seeded trace is broad, stable, and the strongest v4 source,

@@ -1,5 +1,20 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-03 Sigma v5A complete static weak variation
+
+The local v5A action now has compact exact metric, flat-connection, and scalar
+Euler equations plus the complete leading static equations for `Psi`, `Phi`,
+and the polarization. The derivation includes the metric dependence of both
+the transition source and orientation-dependent kinetic tensor. Independent
+finite differences pass at `1.09e-8` for the transport chain, `1.53e-9` for
+the source derivative, and `4.24e-10` for the combined polarization variation.
+
+Massive tracers respond to `-grad(Psi)` and photons to
+`W=(Psi+Phi)/2` from the same metric; no photon multiplier is inserted. This
+closes the static weak-variation gate, but not the nonlinear mode, FLRW tensor,
+cosmological-branch, or PPN gates. See
+[`SIGMA_V5A_WEAK_FIELD_DERIVATION.md`](SIGMA_V5A_WEAK_FIELD_DERIVATION.md).
+
 ## 2026-08-03 Sigma v5A causal-polarization action screen
 
 The first local causal completion now has a concrete covariant action

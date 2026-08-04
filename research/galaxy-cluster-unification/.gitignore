@@ -90,6 +90,8 @@ results/sigma_v1_nonmetricity_cycle/*
 !results/sigma_v4c_baryon_seeded_coherence_trace_audit/**
 !results/sigma_v5a_causal_polarization_action_audit/
 !results/sigma_v5a_causal_polarization_action_audit/**
+!results/sigma_v5a_weak_field_derivation/
+!results/sigma_v5a_weak_field_derivation/**
 !results/p0593_diffusion_cross_domain/
 !results/p0593_diffusion_cross_domain/**
 !results/p0593b_diffusion_formula_holdout/

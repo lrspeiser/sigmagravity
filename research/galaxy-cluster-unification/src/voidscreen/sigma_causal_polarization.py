@@ -17,6 +17,16 @@ def transition_bandpass(acceleration_ratio) -> np.ndarray:
     return fourth / np.square(1.0 + fourth)
 
 
+def transition_bandpass_y_derivative(y_squared) -> np.ndarray:
+    """Return ``d[y^2/(1+y^2)^2]/dy`` for ``y=|grad Phi|^2/a^2``."""
+    value = np.asarray(y_squared, dtype=float)
+    if np.any(~np.isfinite(value)) or np.any(value < 0.0):
+        raise ValueError("y_squared must be finite and non-negative")
+    return 2.0 * value * (1.0 - np.square(value)) / np.power(
+        1.0 + np.square(value), 3
+    )
+
+
 def bounded_disformal_fraction(nonmetricity_ratio, anisotropy: float) -> np.ndarray:
     """Magnitude of the v5A rank-one disformal correction.
 
@@ -97,3 +107,46 @@ def minimum_static_operator_eigenvalue(
     if np.any(minimum_spatial <= 0.0):
         raise FloatingPointError("the spatial transport tensor lost positivity")
     return np.ones_like(minimum_spatial)
+
+
+def weak_transport_tensor(weyl_gradient_ratio, anisotropy: float) -> np.ndarray:
+    """Return the static weak ``K^ij`` for ``u=grad(W)/a_sigma``."""
+    vector = np.asarray(weyl_gradient_ratio, dtype=float)
+    alpha = float(anisotropy)
+    if vector.ndim == 0 or np.any(~np.isfinite(vector)):
+        raise ValueError("weyl_gradient_ratio must be a finite vector array")
+    if not np.isfinite(alpha) or alpha < 0.0:
+        raise ValueError("anisotropy must be finite and non-negative")
+    squared = np.sum(np.square(vector), axis=-1)
+    denominator = np.sqrt(1.0 + np.square(squared))
+    coefficient = alpha / (1.0 + alpha)
+    identity = np.eye(vector.shape[-1])
+    return identity - coefficient * (
+        np.einsum("...i,...j->...ij", vector, vector) / denominator[..., None, None]
+    )
+
+
+def weak_transport_gradient_contraction(
+    weyl_gradient_ratio,
+    polarization_gradient,
+    anisotropy: float,
+) -> np.ndarray:
+    """Return ``(partial K^jk/partial u_i) sigma_j sigma_k`` analytically."""
+    vector = np.asarray(weyl_gradient_ratio, dtype=float)
+    gradient = np.asarray(polarization_gradient, dtype=float)
+    alpha = float(anisotropy)
+    if vector.shape != gradient.shape or vector.ndim == 0:
+        raise ValueError("the two finite vector arrays must have matching shapes")
+    if np.any(~np.isfinite(vector + gradient)):
+        raise ValueError("the two vector arrays must be finite")
+    if not np.isfinite(alpha) or alpha < 0.0:
+        raise ValueError("anisotropy must be finite and non-negative")
+    squared = np.sum(np.square(vector), axis=-1)
+    denominator = np.sqrt(1.0 + np.square(squared))
+    dot = np.sum(vector * gradient, axis=-1)
+    coefficient = alpha / (1.0 + alpha)
+    return -2.0 * coefficient * (
+        gradient * (dot / denominator)[..., None]
+        - vector
+        * (squared * np.square(dot) / np.power(denominator, 3))[..., None]
+    )

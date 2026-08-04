@@ -9,6 +9,9 @@ from voidscreen.sigma_causal_polarization import (
     maximum_characteristic_speed,
     minimum_static_operator_eigenvalue,
     transition_bandpass,
+    transition_bandpass_y_derivative,
+    weak_transport_gradient_contraction,
+    weak_transport_tensor,
 )
 
 
@@ -57,3 +60,50 @@ def test_invalid_inputs_are_rejected() -> None:
         bounded_disformal_fraction([1.0], -0.1)
     with pytest.raises(ValueError):
         local_transport_eigenvalues([1.0], 1.0, orientation="null")
+
+
+def test_transition_bandpass_y_derivative_matches_finite_difference() -> None:
+    y = np.geomspace(1.0e-5, 1.0e5, 1000)
+    step = 1.0e-6
+    plus = np.square(y * np.exp(step)) / np.square(
+        1.0 + np.square(y * np.exp(step))
+    )
+    minus = np.square(y * np.exp(-step)) / np.square(
+        1.0 + np.square(y * np.exp(-step))
+    )
+    finite = (plus - minus) / (2.0 * step * y)
+    assert np.allclose(
+        finite, transition_bandpass_y_derivative(y), rtol=2.0e-8, atol=1.0e-12
+    )
+
+
+def test_weak_transport_chain_rule_matches_directional_difference() -> None:
+    rng = np.random.default_rng(7501)
+    vector = rng.normal(size=(200, 3))
+    polarization_gradient = rng.normal(size=(200, 3))
+    direction = rng.normal(size=(200, 3))
+    direction /= np.sqrt(np.mean(np.square(direction)))
+    alpha = 2.7
+    step = 1.0e-6
+
+    def energy(argument: np.ndarray) -> float:
+        tensor = weak_transport_tensor(argument, alpha)
+        return float(
+            np.sum(
+                np.einsum(
+                    "...i,...ij,...j->...",
+                    polarization_gradient,
+                    tensor,
+                    polarization_gradient,
+                )
+            )
+        )
+
+    finite = (energy(vector + step * direction) - energy(vector - step * direction)) / (
+        2.0 * step
+    )
+    analytic_vector = weak_transport_gradient_contraction(
+        vector, polarization_gradient, alpha
+    )
+    analytic = float(np.sum(analytic_vector * direction))
+    assert abs(finite - analytic) / max(abs(finite), abs(analytic), 1.0e-15) < 1.0e-8
