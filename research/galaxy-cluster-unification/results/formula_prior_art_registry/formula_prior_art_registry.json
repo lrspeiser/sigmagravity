@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 170,
+    "sigma_protocols": 171,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 145,
     "eligibility": {
@@ -7139,6 +7139,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "bf70d96a25dd5f2f570e95357559a04fe7d1189576d7aff23de0a7d6bdc9f12c"
+    },
+    {
+      "config": "configs/sigma_v19bg_broad_phenomenology_contract.json",
+      "protocol_version": "SIGMA-V19BG-BROAD-PHENOMENOLOGY-CONTRACT-1.0.0",
+      "status": "frozen while V19W response production was still active, after V19BF passed, before V19X gas-state completion, selection of a covariant long-wave action or universal Sigma constant, opening any new holdout, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "d877284d92a35083e7976126ec7c67f9cfe00ec2187efd3018d1676edc98eb7d"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

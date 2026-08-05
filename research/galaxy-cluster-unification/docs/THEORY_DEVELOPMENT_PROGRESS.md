@@ -1,5 +1,31 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma v19BG broad-phenomenology contract
+
+The long-wave source-state lane is now explicitly prevented from optimizing
+around the Solar System, one galaxy class, or one cluster. Detailed local
+parameter work is deferred while Solar/PPN/propagation/health constraints
+remain a mandatory final exclusion gate. The near-term priority is one frozen
+metric across eight galaxy strata and six cluster states.
+
+The audit also closes an apparent shortcut. The point-source activation
+`1+A[1-(1+r/L)exp(-r/L)]` is exactly the published STVG/MOG radial shape. Its
+existing action-level control had already covered 131 SPARC galaxies (3,034
+points), 20 CLASH systems (84 model-derived radial points), and 34 BCG systems
+and failed before an observational fit. Changing only its amplitude, range, or
+Fourier exponent is not a new long-wave theory.
+
+The surviving class remains a nonlinear, baryon-forced,
+source-state-sensitive one-metric response. The future blind strong-lensing
+sample is raised to at least six systems, including at least two relaxed and
+two disturbed/merging clusters, with complete baryons and raw positional
+uncertainties. Seven additional forward-prediction obligations are registered:
+weak lensing, colliding-cluster offsets, dwarf/satellite dynamics, streams and
+compact substructure, dynamical friction, cosmic growth, and the primary/lensed
+CMB. The last three cannot be scored honestly until a covariant action supplies
+field energy, background evolution, and perturbation equations. See
+[`SIGMA_V19BG_BROAD_PHENOMENOLOGY_CONTRACT.md`](SIGMA_V19BG_BROAD_PHENOMENOLOGY_CONTRACT.md).
+
 ## 2026-08-04 Sigma v19B-v19F causal-source readiness checkpoint
 
 The causal-assembly branch has a new target-blind mechanism-development pair:

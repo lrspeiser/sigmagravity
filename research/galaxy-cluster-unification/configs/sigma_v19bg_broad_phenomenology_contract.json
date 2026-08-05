@@ -1,0 +1,235 @@
+{
+  "protocol_version": "SIGMA-V19BG-BROAD-PHENOMENOLOGY-CONTRACT-1.0.0",
+  "status": "frozen while V19W response production was still active, after V19BF passed, before V19X gas-state completion, selection of a covariant long-wave action or universal Sigma constant, opening any new holdout, or changing gravity physics",
+  "purpose": "Prevent the long-wave source-state program from being optimized around one galaxy class, one cluster, or the Solar System. Register the galaxy and cluster diversity that the same frozen metric must cover first, and state the additional dark-matter-attributed observables that the eventual action must predict.",
+  "parents": {
+    "identity_long_wave_control": {
+      "path": "results/environmental_mog0/report.json",
+      "sha256": "2916c465457f9f363d6346c01d655fe2d61a55c7e3714880de98f338d420742b"
+    },
+    "cross_domain_regime_diagnostics": {
+      "path": "results/p0622_comprehensive_regime_diagnostics/report.json",
+      "sha256": "7ee7443596efceb8c5c697138389ae0f62115dca72c345963f8eb2c3fb419bd0"
+    },
+    "resolved_cluster_evidence_registry": {
+      "path": "results/p0753_cluster_evidence_registry/registry.json",
+      "sha256": "be1721ab8b6d6c1a16b601b110c2ff5d3c63c2908fdbae585d128f9c0e3055fa"
+    },
+    "two_merger_directional_source_state": {
+      "path": "results/sigma_v19bd_two_cluster_directional_source_uncertainty/report.json",
+      "sha256": "7de820f46b284c78a86aec616bca5d4309b4aec2b1f4daa25e00e4ada59edef8"
+    },
+    "long_wave_scale_window": {
+      "path": "results/sigma_v19bf_long_wave_scale_window/report.json",
+      "sha256": "ff302af76d070ccecfab3f5063f2b7263fd0599bfa41d4a85aa9de6fb6979801"
+    }
+  },
+  "mechanism_boundary": {
+    "closed_control": "A linear isotropic identity-source response with one fixed long range is the STVG/MOG or linear nonlocal control. It failed the frozen joint structural test and cannot be revived by renaming its strength, length, or Fourier exponent.",
+    "active_hypothesis_class": "One nonlinear, baryon-forced, source-state-sensitive long-wave metric response whose orientation and activation follow covariantly from baryonic density, current, pressure, stress, overlap, and causal assembly state.",
+    "one_physical_metric_for_matter_and_light": true,
+    "maximum_universal_physical_constants": 5,
+    "per_object_gravity_parameters": 0,
+    "object_type_switches": 0,
+    "lensing_only_multipliers": 0,
+    "action_selected_here": false,
+    "constant_selected_here": false
+  },
+  "priority": {
+    "first": "Broad galaxy and cluster transfer using development and spent evidence, followed by untouched holdouts only after the action and constants are frozen.",
+    "second": "Consequences for other phenomena commonly attributed to dark matter, beginning with observables computable from the same quasistatic metric and then extending to cosmological perturbations.",
+    "later_hard_exclusion_gate": "Solar-System, binary-pulsar, PPN, propagation-speed, radiation-loss, stability, and causal initial-value tests.",
+    "detailed_solar_parameter_optimization_authorized_now": false,
+    "solar_exclusion_gate_retained": true
+  },
+  "current_core_evidence": [
+    {
+      "id": "G1_SPARC_FULL",
+      "domain": "galaxy_dynamics",
+      "systems": 131,
+      "observations": 3034,
+      "scientific_role": "spent_development_and_comparator_evidence",
+      "observable": "resolved circular-speed curves from measured gas, disk, and bulge components",
+      "current_use": "Fit or reject a universal development candidate and measure residuals by morphology; never fit a gravity constant per galaxy."
+    },
+    {
+      "id": "G2_SPARC_STRATIFIED",
+      "domain": "galaxy_morphology_transfer",
+      "systems": 131,
+      "regime_rows": 32,
+      "continuous_correlations": 22,
+      "scientific_role": "spent_development_diagnostics",
+      "observable": "residual transfer across baryonic mass, gas fraction, surface brightness, bulge fraction, concentration, extent, and acceleration",
+      "current_use": "Expose a formula that succeeds only for one galaxy type."
+    },
+    {
+      "id": "G3_BCG_PRESSURE_SUPPORTED",
+      "domain": "pressure_supported_galaxy_dynamics",
+      "systems": 34,
+      "scientific_role": "spent_development_evidence",
+      "observable": "BCG dynamical acceleration constraints",
+      "current_use": "Test whether a disk-derived rule transfers to pressure-supported giant galaxies."
+    },
+    {
+      "id": "C1_CLASH_RADIAL",
+      "domain": "cluster_radial_field",
+      "systems": 20,
+      "observations": 84,
+      "scientific_role": "model_derived_discovery_target_only",
+      "observable": "radial acceleration inferred through published NFW lens models",
+      "current_use": "Structural screening and inverse hypothesis generation only; not validation."
+    },
+    {
+      "id": "C2_RAW_LENSING_SPENT",
+      "domain": "cluster_strong_lensing",
+      "systems": 5,
+      "geometry_variants_per_system": 9,
+      "scientific_role": "spent_development_raw_lensing",
+      "observable": "multiple-image roots, multiplicity, topology, and positional residuals",
+      "current_use": "Reject radial or fixed-orientation formulas before a new holdout is opened."
+    },
+    {
+      "id": "C3_RELICS_RESOLVED_BARYONS",
+      "domain": "cluster_resolved_baryon_geometry",
+      "systems": 4,
+      "scientific_role": "spent_development_baryonic_inputs",
+      "observable": "registered 2D stellar and gas maps with shared uncertainty brackets",
+      "current_use": "Forward field inputs and inverse-map discovery; zero systems currently have a defensible raw likelihood because positional uncertainties are missing."
+    },
+    {
+      "id": "C4_MERGER_SOURCE_STATE",
+      "domain": "merging_cluster_directional_state",
+      "systems": 2,
+      "scientific_role": "spent_source_only_development",
+      "observable": "collisionless luminosity, signed current, and velocity-second-moment uncertainty ensembles for Bullet and Abell 2146",
+      "current_use": "Determine whether a universal source operator can read different merger orientations without a cluster label; no lensing residual has been opened in this lane."
+    }
+  ],
+  "required_galaxy_strata": [
+    "low_baryonic_mass_dwarf",
+    "high_baryonic_mass_giant",
+    "gas_rich",
+    "gas_poor",
+    "low_surface_brightness",
+    "high_surface_brightness",
+    "bulgeless_disk",
+    "bulge_dominated_or_pressure_supported"
+  ],
+  "required_cluster_strata": [
+    "relaxed_cool_core",
+    "relaxed_non_cool_core",
+    "plane_of_sky_merger",
+    "line_of_sight_or_projection_challenging_merger",
+    "lower_mass_strong_lens",
+    "high_mass_strong_lens"
+  ],
+  "future_blind_core_gate": {
+    "minimum_new_clusters": 6,
+    "minimum_relaxed_clusters": 2,
+    "minimum_disturbed_or_merging_clusters": 2,
+    "minimum_secure_families_per_cluster": 3,
+    "minimum_spectroscopic_families_per_cluster": 1,
+    "minimum_images_per_cluster": 8,
+    "per_image_position_uncertainties_required": true,
+    "complete_stars_gas_BCG_ICL_and_member_baryon_model_required": true,
+    "galaxy_overall_RMSE_maximum_relative_to_fixed_MOND_RAR": 1.05,
+    "galaxy_each_predefined_stratum_RMSE_maximum_relative_to_fixed_MOND_RAR": 1.25,
+    "cluster_image_root_recovery_fraction_minimum": 1.0,
+    "cluster_image_RMS_maximum_relative_to_same_catalog_halo_comparator": 1.25,
+    "cluster_baryon_to_halo_gap_closure_fraction_minimum": 0.75,
+    "equation_and_constants_frozen_before_opening": true
+  },
+  "other_dark_matter_attributed_phenomena": [
+    {
+      "id": "P1_GALAXY_GALAXY_AND_CLUSTER_WEAK_LENSING",
+      "prediction_required": "Tangential and cross shear, reduced shear, magnification, and their scale dependence from the same Weyl potential used for strong lensing.",
+      "long_wave_signature": "A universal coherence length predicts a common physical-scale bend; source-state anisotropy predicts non-radial shear tied to baryonic geometry.",
+      "minimum_data": "Lens/source redshifts, calibrated shapes, boost and selection corrections, stellar and gas baryon models, covariance, and random-point nulls.",
+      "theory_prerequisite": "Weak-field metric potentials and a line-of-sight solver.",
+      "current_state": "not_scored_by_active_long_wave_candidate"
+    },
+    {
+      "id": "P2_COLLIDING_CLUSTER_OFFSETS",
+      "prediction_required": "Convergence, shear, critical curves, and image roots relative to independently measured gas, galaxies, and intracluster light through time.",
+      "long_wave_signature": "A causal source-state field may lag, lead, or redirect baryonic gravity during a merger; the displacement and orientation must be predicted from the measured state, not fit to a halo map.",
+      "minimum_data": "Multiwavelength baryon maps, member velocities, gas temperature and shock state, raw strong/weak lensing catalogs, and projection uncertainty.",
+      "theory_prerequisite": "Retarded source-state evolution and one physical metric.",
+      "current_state": "collisionless_source_state_available_for_two_spent_mergers;_gas_state_in_production"
+    },
+    {
+      "id": "P3_DWARF_SPHEROIDAL_AND_SATELLITE_DYNAMICS",
+      "prediction_required": "Line-of-sight velocity-dispersion profiles, escape speeds, tidal radii, and host-distance dependence without assigning a halo to each satellite.",
+      "long_wave_signature": "The host and satellite baryonic sources overlap within one long mode, producing a calculable environmental or external-field response.",
+      "minimum_data": "Membership probabilities, binary-star treatment, stellar density, anisotropy nuisance model, proper motions, orbit, and host baryon model.",
+      "theory_prerequisite": "Three-dimensional nonlinear field solver and massive-particle geodesics.",
+      "current_state": "not_scored_by_active_long_wave_candidate"
+    },
+    {
+      "id": "P4_STELLAR_STREAMS_AND_SUBSTRUCTURE_LENSING",
+      "prediction_required": "Stream track, precession, width, density gaps, and strong-lens flux or astrometric perturbations from baryons plus the Sigma field.",
+      "long_wave_signature": "A smooth tens-of-kpc response should alter global stream precession but cannot imitate arbitrary compact dark subhalos unless baryonic or self-generated field structure produces them.",
+      "minimum_data": "Six-dimensional stream phase space, baryonic perturber inventory, time-dependent host baryons, lens imaging, and selection functions.",
+      "theory_prerequisite": "Time-dependent nonlinear solutions and a prediction for whether the field forms compact self-structures.",
+      "current_state": "not_scored_and_potential_high_risk_discriminator"
+    },
+    {
+      "id": "P5_DYNAMICAL_FRICTION_AND_MERGER_TIMES",
+      "prediction_required": "Orbital-energy and angular-momentum loss for satellites, bars, globular clusters, and merging galaxies.",
+      "long_wave_signature": "Without particle dark-matter wakes, dissipation must arise from baryons and radiation or excitation of the Sigma field; the action fixes the sign and rate.",
+      "minimum_data": "Orbital phase space, baryonic mass models, ages, bar pattern speeds, and merger-stage constraints.",
+      "theory_prerequisite": "Field energy, radiation, retarded response, and backreaction derived from the action.",
+      "current_state": "not_predictable_until_action_is_selected"
+    },
+    {
+      "id": "P6_COSMIC_STRUCTURE_GROWTH",
+      "prediction_required": "Background expansion, scale-dependent linear growth, gravitational slip, redshift-space distortions, nonlinear clustering, halo-free collapse, and cosmic shear.",
+      "long_wave_signature": "The fixed physical or comoving interpretation of the coherence length creates a specific scale and redshift dependence that cannot be chosen independently at each epoch.",
+      "minimum_data": "Galaxy clustering and RSD covariances, weak-lensing tomography, BAO distances, peculiar velocities, and baryon feedback models.",
+      "theory_prerequisite": "Covariant cosmological background and perturbation equations with initial conditions.",
+      "current_state": "not_predictable_until_covariant_action_exists"
+    },
+    {
+      "id": "P7_CMB_PRIMARY_AND_LENSING",
+      "prediction_required": "Acoustic peak positions and heights, early and late integrated Sachs-Wolfe effects, damping tail, and CMB lensing power with no cold-dark-matter density inserted.",
+      "long_wave_signature": "The field must supply the pre-recombination potential evolution normally stabilized by dark matter while remaining consistent with its late-time galactic scale.",
+      "minimum_data": "Temperature, polarization, and lensing likelihoods with foreground nuisance models and a baryon-only background inventory.",
+      "theory_prerequisite": "Relativistic background and Boltzmann perturbation implementation.",
+      "current_state": "not_predictable_until_covariant_cosmology_exists;_likely_strongest_nonlocal_challenge"
+    }
+  ],
+  "authorization": {
+    "read_only_existing_spent_and_development_reports": true,
+    "register_future_prediction_contract": true,
+    "open_new_holdout": false,
+    "fit_or_select_action": false,
+    "fit_or_select_universal_constant": false,
+    "change_gravity_formula": false,
+    "use_halo_maps_as_validation_truth": false,
+    "perform_detailed_solar_optimization": false
+  },
+  "required_gates": {
+    "all_parent_hashes_exact": true,
+    "identity_long_wave_control_confirmed_closed": true,
+    "scale_window_confirmed_as_compatibility_only": true,
+    "galaxy_and_cluster_diversity_registered": true,
+    "future_blind_cluster_sample_is_state_stratified": true,
+    "other_dark_matter_phenomena_have_forward_prediction_contracts": true,
+    "data_roles_do_not_confuse_inferred_halo_maps_with_raw_observations": true,
+    "solar_gate_retained_but_not_optimized_first": true,
+    "no_action_constant_holdout_or_formula_change": true
+  },
+  "outputs": {
+    "report": "results/sigma_v19bg_broad_phenomenology_contract/report.json"
+  },
+  "claim_boundary": [
+    "Passing this protocol proves coverage and sequencing discipline, not that a long-wave Sigma theory fits any observation.",
+    "The exact isotropic radial long-wave control is already closed; only a materially different source-state-dependent action may advance.",
+    "Model-derived CLASH and RELICS lens maps may generate hypotheses but may not validate the theory.",
+    "The other-phenomena entries are forward-prediction obligations; they are not post-hoc explanations or completed tests.",
+    "Detailed Solar work is deprioritized, not waived; the final theory still must pass every local and relativistic exclusion gate."
+  ],
+  "implementation": {
+    "runner": "scripts/check_sigma_v19bg_broad_phenomenology_contract.py",
+    "runner_sha256": "bc087e3c7312bb9f41b5864c8b257451230b99a7a66fab418debc3888d4cbcb5"
+  }
+}
