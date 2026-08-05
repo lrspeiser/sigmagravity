@@ -1,0 +1,92 @@
+{
+  "protocol_version": "SIGMA-V19AN-NSC-DECAM-GROUP-CUTOUTS-1.0.0",
+  "status": "frozen_before_v19an_pixel_retrieval",
+  "purpose": "Retrieve every calibrated DECam detector group required by the fifteen approved anchors using one deterministic bounding cutout per exposure and detector extension, then verify transport, FITS and WCS integrity without selecting exposures or fitting photometry.",
+  "parent_artifacts": [
+    {
+      "path": "configs/sigma_v19am_nsc_sia_anchor_coverage.json",
+      "sha256": "23fc3c9bcd5651507e6333c7ba5f74b17022b189f272abc6dda886aa01530753"
+    },
+    {
+      "path": "results/sigma_v19am_nsc_sia_anchor_coverage/report.json",
+      "sha256": "aad285e1ff79517b123f79982dbbce111a8d910d75af376b0b5b267acda22899"
+    },
+    {
+      "path": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+      "sha256": "12a7dcb915753a42edbe0a2fafdcc77be19b66b6a90fd5250ca4a1d722ee7c8f"
+    }
+  ],
+  "inputs": {
+    "v19am_manifest": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv"
+  },
+  "group_cutout": {
+    "group_key": "exact NSC exposure plus exact SIA detector extension",
+    "center_rule": "coordinate midpoint of the minimum and maximum frozen anchor RA and declination in each group",
+    "fixed_sky_margin_degrees": 0.01,
+    "fixed_sky_margin_arcsec": 36.0,
+    "ra_margin_rule": "divide the fixed angular margin by cosine of the group-center declination before adding it to the coordinate bounding box",
+    "minimum_coordinate_size_degrees": 0.02,
+    "maximum_ra_coordinate_size_degrees": 0.25,
+    "maximum_dec_coordinate_size_degrees": 0.15,
+    "retention_rule": "Build and retrieve all exposure-extension groups. Do not use flags, seeing, finite-pixel fraction, edge margin, band, date, split or photometric performance to rank or omit a group."
+  },
+  "retrieval": {
+    "authority": "NSF NOIRLab Astro Data Lab NSC DR2 cutout service",
+    "timeout_seconds": 240,
+    "maximum_attempts": 3,
+    "wcs_containment_tolerance_pixel": 1.0,
+    "resume_rule": "Reuse an existing exact output path only after opening and revalidating its FITS and WCS contents; otherwise retrieve the frozen URL."
+  },
+  "frozen_group_plan": {
+    "path": "data/derived/sigma_v19an_nsc_decam_group_cutouts/group_plan.csv",
+    "sha256": "a4b82c98ecab29b4ab2174619ca50f88399fafddc427ab40cf997b42e231df22"
+  },
+  "gates": {
+    "exact_measurement_rows": 1032,
+    "exact_unique_exposures": 82,
+    "exact_exposure_extension_groups": 139,
+    "http_200_every_group": true,
+    "fits_integrity_every_group": true,
+    "celestial_wcs_every_group": true,
+    "all_frozen_anchors_contained": true,
+    "at_least_one_finite_pixel_every_group": true,
+    "all_groups_retained_without_exposure_selection": true,
+    "no_photometric_model_or_prohibited_payload_opened": true
+  },
+  "outputs": {
+    "group_plan": "data/derived/sigma_v19an_nsc_decam_group_cutouts/group_plan.csv",
+    "cutout_directory": "data/raw/sigma_v19an_nsc_decam_group_cutouts",
+    "download_manifest": "data/derived/sigma_v19an_nsc_decam_group_cutouts/download_manifest.csv",
+    "report": "results/sigma_v19an_nsc_decam_group_cutouts/report.json"
+  },
+  "claim_boundary": [
+    "A pass proves lossless retrieval and structural usability of every frozen detector-group cutout; it does not establish unbiased galaxy photometry, a valid PSF, successful deblending or stellar mass.",
+    "FITS pixels may be opened only for checksum/structure, finite-value and celestial-WCS containment checks. No pixel residual, source morphology, color or validation performance may be used in V19AN.",
+    "Every group remains in the manifest even if a later profile-photometry stage declares it unusable under separately frozen quality rules.",
+    "No ambiguous counterpart, lensing/halo payload, gravity result or untouched holdout is accessed."
+  ],
+  "authorization": {
+    "build_and_hash_complete_group_plan": true,
+    "download_every_group_cutout": true,
+    "open_pixels_for_fits_wcs_and_finite_value_integrity_only": true,
+    "persist_raw_cutouts_hashes_and_integrity_metadata": true,
+    "rank_or_select_exposures": false,
+    "fit_or_compare_photometry": false,
+    "choose_psf_or_deblend_model": false,
+    "query_ambiguous_candidates": false,
+    "infer_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "deterministic_group_plan_built_and_hashed_before_pixel_access": true,
+    "group_plan_sha256_at_freeze": "a4b82c98ecab29b4ab2174619ca50f88399fafddc427ab40cf997b42e231df22",
+    "image_pixels_downloaded_at_freeze": false,
+    "photometry_psf_mass_current_lensing_halo_or_gravity_payload_opened_at_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/acquire_sigma_v19an_nsc_decam_group_cutouts.py",
+    "runner_sha256": "6c50e5c0af1836aeea5e6bcbec8b4f9d76ee32e0c2cbbad40a45941a1f92cc0c"
+  }
+}
