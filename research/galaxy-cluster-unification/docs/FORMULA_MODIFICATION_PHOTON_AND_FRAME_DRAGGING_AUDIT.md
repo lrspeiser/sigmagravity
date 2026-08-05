@@ -236,6 +236,47 @@ response.  Both matter and light see the resulting metric; this is not a
 lens-only multiplier.  The two universal quantities are the strength `A` and
 the coherence length `L_Sigma`.
 
+### Literal wave reading of the same premise
+
+There is a narrower version of the idea that must not be conflated with the
+transfer function above. Suppose an additional, source-generated metric mode
+has a characteristic spatial wavelength
+
+\[
+ k_\Sigma={2\pi\over\lambda_\Sigma},\qquad
+ \delta g_{\mu\nu}\propto
+ \mathcal M_{\mu\nu}\cos(k_\Sigma s+\varphi).
+\]
+
+Across a star system of diameter `D_star << lambda_Sigma`, its Taylor
+expansion is
+
+\[
+ \delta g_{\mu\nu}(s+\Delta s)=
+ \delta g_{\mu\nu}(s)
+ +O(D_\star/\lambda_\Sigma)
+ +O[(D_\star/\lambda_\Sigma)^2].
+\]
+
+The constant metric offset is locally unobservable, and a nearly uniform
+first-gradient acceleration is removed in a freely falling frame. The first
+intrinsically local observable is the tidal curvature, so the anomalous
+Solar-System signal can be suppressed approximately as
+`(D_star/lambda_Sigma)^2`, while phase and curvature changes can become
+measurable across a galaxy or cluster. This supplies a physical reason for a
+local GR limit; it does **not** by itself determine the wave amplitude, source,
+polarization, phase, sign, or whether the large-scale response is attractive.
+
+A viable test therefore cannot insert an arbitrary cosmic sinusoid. Its
+phase, direction, and tensor polarization must be generated uniquely by the
+observed baryonic stress-energy and propagated through the one physical
+metric. The pending formulation target is a covariant, retarded tensor mode
+with one universal wavelength whose source depends on baryonic current,
+stress, overlap, or tidal orientation. It must predict the same matter and
+photon metric, reduce to GR over Solar-System baselines, and be frozen before
+the replacement-cluster lensing targets are opened. No result for this
+literal source-generated wave model is claimed yet.
+
 This exact concept was already made quantitative in Sigma V3B and then tested
 as an isotropic wavelength-only operator in V3C.  It could separate Solar,
 galaxy and cluster scales and it generated nonzero shear on a manufactured

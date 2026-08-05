@@ -1,0 +1,157 @@
+{
+  "protocol_version": "SIGMA-V19X-SPECTRAL-COMBINATION-COMMISSIONING-1.0.0",
+  "status": "frozen while V19W response production was running, after 51 of 5082 checkpoints existed with zero failures, but before V19W completed, before combining any V19W spectrum, fitting either integrated abundance or a regional temperature, opening replacement-cluster lensing data, or changing gravity physics",
+  "purpose": "Commission the exact V19H integrated and regional spectrum-combination and temperature-fit chain on both clusters before launching all 494 regional fits.",
+  "parents": {
+    "v19h_config": "configs/sigma_v19h_causal_observable_protocol.json",
+    "v19h_config_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
+    "v19s_config": "configs/sigma_v19s_hi4pi_acquisition.json",
+    "v19s_config_sha256": "93dcd0a9690dbff7e23fa946c894ac6816f38c13396d77e4dfe1917c81a5eadf",
+    "v19s_provenance": "results/sigma_v19s_hi4pi_acquisition/provenance.json",
+    "v19s_provenance_sha256": "ff37ee2ed99aa3df88815b7564cb72b6881f232175f22d5abbfe045d8919db4e",
+    "v19t_config": "configs/sigma_v19t_temperature_fit_commissioning.json",
+    "v19t_config_sha256": "844d8bd8f3bdbbb9292ffd0e1df44c55fec5868310b0b552083e711fc1fd6f26",
+    "v19t_report": "results/sigma_v19t_temperature_fit_commissioning/report.json",
+    "v19t_report_sha256": "9073cc96bbfa87fd4264ea6c2ddf893c3f8f6fa34257381fcf757757cf6ad363",
+    "v19u_manifest": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+    "v19u_manifest_sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd",
+    "v19w_config": "configs/sigma_v19w_full_response_production.json",
+    "v19w_config_sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197",
+    "v19w_runner": "scripts/run_sigma_v19w_full_response_production.py",
+    "v19w_runner_sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1",
+    "inherited_spectral_config": "configs/sigma_v17c_spectral_temperature.json",
+    "inherited_spectral_config_sha256": "2fba4a7ed55751055b09e4385e6b5b0961e8a742a1687a64c400eb2389b7ec86",
+    "inherited_integrated_combiner": "scripts/run_sigma_v17c_integrated_spectra.py",
+    "inherited_integrated_combiner_sha256": "1116dff3c8da44c54a0402d20dbcf7094945579abdbcf89e9278a3017685dd21",
+    "inherited_regional_combiner": "scripts/run_sigma_v17c_regional_spectra.py",
+    "inherited_regional_combiner_sha256": "505c17797b28ced3f5202e908b3407ecfc8e82ea2d1157016cc38f18f511c19a",
+    "inherited_integrated_fitter": "scripts/fit_sigma_v17c_integrated_temperatures.py",
+    "inherited_integrated_fitter_sha256": "aff18b05f20eaa41db1a7be5535a7be96380c938af0f036392b3d6a4d56a390f",
+    "inherited_regional_fitter": "scripts/fit_sigma_v17c_regional_temperatures.py",
+    "inherited_regional_fitter_sha256": "2cfdb2248f2cebcda75206ac3bb50d8ad040deb5c4fe3505b97b1f4505a6d78b"
+  },
+  "runtime_authorization": {
+    "required_v19w_report": "results/sigma_v19w_full_response_production/report.json",
+    "required_status": "all_response_cells_passed_and_regional_spectral_fitting_authorized",
+    "required_completed_cells": 5082,
+    "required_product_index_rows": 5082,
+    "required_product_index_hash_from_report": true,
+    "required_cell_product_hash_validation": true,
+    "may_start_before_authorization": false
+  },
+  "registered_workload": {
+    "clusters": {
+      "BULLET": {
+        "redshift": 0.296,
+        "galactic_nh_cm2": 4.38e20,
+        "total_cells": 3812,
+        "total_regions": 366,
+        "total_source_events_0p5_7_keV": 660535,
+        "total_background_events_0p5_7_keV": 634253,
+        "total_scaled_background_events_0p5_7_keV": 26452.357326816054,
+        "commissioning_region": {
+          "bin_id": 169,
+          "cells": 9,
+          "source_events_0p5_7_keV": 2675,
+          "background_events_0p5_7_keV": 1123,
+          "scaled_background_events_0p5_7_keV": 46.40029947
+        }
+      },
+      "ABELL2146": {
+        "redshift": 0.2323,
+        "galactic_nh_cm2": 2.62e20,
+        "total_cells": 1270,
+        "total_regions": 128,
+        "total_source_events_0p5_7_keV": 227561,
+        "total_background_events_0p5_7_keV": 81581,
+        "total_scaled_background_events_0p5_7_keV": 9188.855528998003,
+        "commissioning_region": {
+          "bin_id": 62,
+          "cells": 10,
+          "source_events_0p5_7_keV": 2503,
+          "background_events_0p5_7_keV": 4204,
+          "scaled_background_events_0p5_7_keV": 472.81041972599996
+        }
+      }
+    },
+    "commissioning_region_selection_rule": "within each cluster, the unique accepted region with the greatest sum of frozen V19U source_band_events; no spectrum, response shape, temperature, fit statistic, front, lensing coordinate or published temperature enters selection",
+    "same_rules_for_both_clusters": true
+  },
+  "combination": {
+    "integrated_aperture": "the union of every accepted V19M region, represented by all V19W cells for that cluster without overlap or exclusion",
+    "regional_aperture": "the exact selected V19M region represented by every V19W cell for that cluster and bin_id",
+    "tool": "CIAO combine_spectra 4.18.2",
+    "method": "sum",
+    "bscale_method": "asca",
+    "exp_origin": "pha",
+    "primary_combination": "directly combine the complete deterministic source-PHA list for the aperture; do not use fitted temperature or response shape to select or weight cells",
+    "group_after_combination": {
+      "tool": "CIAO dmgroup 4.18",
+      "grouptype": "NUM_CTS",
+      "minimum_counts": 25,
+      "xcolumn": "CHANNEL",
+      "ycolumn": "COUNTS"
+    },
+    "failure_rule": "retain the failed command and products; do not drop cells, change grouping, alter background scaling, or introduce an observation hierarchy after seeing a spectral or fit outcome"
+  },
+  "fit_sequence": {
+    "order": [
+      "combine and group the full integrated spectrum for both clusters",
+      "fit each integrated spectrum with abundance free",
+      "freeze each cluster's integrated best-fit abundance",
+      "combine and group the preregistered commissioning region for both clusters",
+      "fit each commissioning region with its own cluster's integrated abundance fixed"
+    ],
+    "model": "xstbabs * xsapec",
+    "abundance_table": "aspl (Asplund et al. 2009)",
+    "fit_energy_keV": [0.5, 7.0],
+    "statistic": "chi2xspecvar",
+    "temperature_keV": {
+      "initial": 8.0,
+      "minimum": 1.0,
+      "maximum": 30.0
+    },
+    "integrated_abundance_solar": {
+      "initial": 0.3,
+      "minimum": 0.0,
+      "maximum": 2.0
+    },
+    "regional_abundance_rule": "fixed to the same cluster's integrated best-fit value",
+    "normalization": {
+      "initial_rule": "max(1e-8, 0.01 times the background-unsubtracted 0.5-7.0 count rate in counts per second)",
+      "minimum": 1e-10,
+      "maximum": 1.0
+    },
+    "optimization": "levmar; if it fails or returns a non-finite statistic, run neldermead and then one levmar polish",
+    "uncertainty": "Sherpa conf 68-percent profile-likelihood interval for temperature with every other free parameter profiled",
+    "published_temperature_used_as_gate": false
+  },
+  "gates": {
+    "v19w_complete_and_every_product_hash_exact": true,
+    "combination_uses_every_registered_cell_exactly_once": true,
+    "combined_source_background_arf_and_rmf_exist_and_links_are_exact": true,
+    "fit_band_source_counts_equal_the_frozen_manifest_sums": true,
+    "both_integrated_fits_have_finite_temperature_abundance_normalization_and_ordered_interval": true,
+    "both_integrated_reduced_statistics_at_most": 1.5,
+    "both_regional_fits_have_finite_temperature_normalization_and_ordered_interval": true,
+    "both_regional_fractional_68_percent_temperature_half_widths_at_most": 0.5,
+    "both_regional_reduced_statistics_at_most": 1.5,
+    "all_free_parameters_strictly_inside_bounds": true,
+    "failure_rule": "do not start the 494-region production fit; report the failed cluster and stage without changing grouping, energy band, nH, redshift, abundance rule, statistic, optimizer sequence, parameter bounds or cell membership"
+  },
+  "advance": {
+    "if_all_gates_pass": "freeze and run all 494 regional combinations and fits with the identical rules",
+    "if_any_gate_fails": "issue an implementation or identifiability report before any new protocol; do not inspect replacement-cluster lensing targets",
+    "gravity_theory_tested_here": false
+  },
+  "integrity": {
+    "v19w_final_report_existed_at_freeze": false,
+    "v19w_completed_cells_observed_at_freeze": 51,
+    "v19w_failed_cells_observed_at_freeze": 0,
+    "v19w_product_opened_for_combination_at_freeze": false,
+    "combined_spectrum_or_fit_statistic_known_at_freeze": false,
+    "integrated_abundance_or_regional_temperature_known_at_freeze": false,
+    "replacement_cluster_lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}
