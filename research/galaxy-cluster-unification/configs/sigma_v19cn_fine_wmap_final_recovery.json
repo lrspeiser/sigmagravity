@@ -1,0 +1,108 @@
+{
+  "protocol_version": "SIGMA-V19CN-FINE-WMAP-FINAL-RECOVERY-1.0.0",
+  "status": "frozen after the V19CM det=1 diagnostic passed every response and nonmutation gate and before preserving the second failed partial, creating a final cell, modifying the recovery archive, rerunning V19W5, or resuming V19BR",
+  "purpose": "Recover the sole edge-aliased ACIS response with the validated fine WMAP, independently re-audit the full 5,082-cell archive, and resume only the unchanged target-sealed V19BR source chain.",
+  "parents": {
+    "v19cm_report": {
+      "path": "results/sigma_v19cm_fine_wmap_edge_diagnostic/report.json",
+      "sha256": "22ed4ca399dd4dae4ff5a0a691c0cba2e05c37a3a2d8869fcb0f81ff9e98c906",
+      "required_decision": "fine_wmap_physically_equivalent_recovery_candidate_passed_separate_final_protocol_required"
+    },
+    "v19w2_runner": {
+      "path": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
+      "sha256": "7bfa95bacc2d6904fb67262b1523cb58fab9cb492a0ccfcec15ae1ea41185810"
+    },
+    "v19w3_runner": {
+      "path": "scripts/run_sigma_v19w3_full_response_recovery.py",
+      "sha256": "7834b35463750600d3e373172be84f924f93eda955f509939e4f9d57644aafcd"
+    },
+    "v19w_auditor": {
+      "path": "scripts/audit_sigma_v19w_live_archive.py",
+      "sha256": "29a3fe09b2df37f5d55ab5d7587ac6f28ce530ad1ba29d564f6aa97d31218670"
+    },
+    "v19w5_config": {
+      "path": "configs/sigma_v19w5_ccd7_hardened_response_recovery.json",
+      "sha256": "a97c9bf33dde0ae528406c220bd8228c7fce61b658abd3a639790bfff0925f7a"
+    },
+    "v19w5_runner": {
+      "path": "scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+      "sha256": "0a489855a765e1438af29b65355ccfbc4431f92d96f7ba35f393a4620f54ed72"
+    },
+    "v19br_config": {
+      "path": "configs/sigma_v19br_target_sealed_terminal_chain.json",
+      "sha256": "8a5205d978ab25d53b8befb11472ff420e2e8116ad06cd9c43e4d158a9d580ed"
+    },
+    "v19br_runner": {
+      "path": "scripts/run_sigma_v19br_target_sealed_terminal_chain.py",
+      "sha256": "d0f4c2f48a0a22e898fadaf3f637785df5d8cbfeb50f81164aec5e39c2c30bcc"
+    }
+  },
+  "boundary": {
+    "cell": "BULLET_bin384_obs5358_ccd0",
+    "token": "c3432",
+    "scratch": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100",
+    "base_scratch": "/home/henry/sigma-v19w-response-production/v100",
+    "current_failed_partial": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100/partial/c3432",
+    "failed_attempt2_destination": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100/failed_attempts/c3432_rmf_attempt2",
+    "completed_before": 383,
+    "completed_after_edge_recovery": 384,
+    "current_failed_log_sha256": "ee083a7ff3e68d11498a68ede5a111c92b518907c3e10dd1fcbd84989a72933c"
+  },
+  "edge_recovery": {
+    "implementation": "Call the byte-identical V19W2 exact-cell producer while intercepting only its specextract command and replacing the unique binwmap=det=8 argument with binwmap=det=1.",
+    "unchanged": [
+      "manifest cell, source and background event filters",
+      "exact integer bin mask",
+      "detector-medoid response position and reference coordinate",
+      "weight=yes and weight_rmf=yes",
+      "energy=0.3:11.0:0.01 and energy_wmap=500:7000",
+      "binarfwmap=1, calibration, aspect, bad pixels and blank-sky scaling",
+      "all V19W2 cell audits and all V19W5 double audits"
+    ],
+    "only_change": "binwmap=det=1 instead of binwmap=det=8",
+    "no_diagnostic_product_admitted": true,
+    "preserve_both_failed_attempts": true
+  },
+  "execution": {
+    "environment_prefix": "/home/henry/miniforge3/envs/sigma-ciao-4.18",
+    "v19w5_output": "results/sigma_v19w5_ccd7_hardened_response_recovery",
+    "v19w5_report": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+    "v19br_report": "results/sigma_v19br_target_sealed_terminal_chain/report.json"
+  },
+  "required_gates": {
+    "all_parent_hashes_and_v19cm_pass_exact": true,
+    "scratch_has_383_completed_one_partial_two_failure_records_after_preservation": true,
+    "exactly_one_specextract_argument_changed_to_det1": true,
+    "edge_cell_passes_every_original_v19w2_gate": true,
+    "edge_checkpoint_passes_independent_manifest_audit": true,
+    "v19w5_passes_5082_cells_20328_products_and_protected_base_audits": true,
+    "unchanged_v19br_reaches_terminal_source_decision": true,
+    "no_lensing_halo_action_gravity_holdout_or_solar_optimization_access": true
+  },
+  "authorization": {
+    "preserve_second_failed_partial": true,
+    "create_one_final_det1_edge_checkpoint": true,
+    "run_unchanged_v19w5_full_audit": true,
+    "run_unchanged_v19br_source_chain_after_v19w5_pass": true,
+    "drop_cell_change_manifest_or_admit_diagnostic_product": false,
+    "open_lensing_halo_action_gravity_or_holdout": false,
+    "derive_action_or_change_gravity_constants": false,
+    "run_v19bs_disposition_here": false,
+    "perform_detailed_solar_optimization": false
+  },
+  "outputs": {
+    "report": "results/sigma_v19cn_fine_wmap_final_recovery/report.json",
+    "v19w5_log": "results/sigma_v19cn_fine_wmap_final_recovery/v19w5_full_audit.log",
+    "v19br_log": "results/sigma_v19cn_fine_wmap_final_recovery/v19br_source_chain.log"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19cn_fine_wmap_final_recovery.py",
+    "tests": "tests/test_sigma_v19cn_fine_wmap_final_recovery.py"
+  },
+  "claim_boundary": [
+    "V19CN is an instrument-response recovery and source-only chain; it is not a gravity-theory result.",
+    "The response-map refinement is applied because of a directly observed detector-edge alias, not because of a physics score.",
+    "V19BR may end in a valid source-invariant pass or failure; neither outcome may be retried or tuned here.",
+    "V19BS remains the separate frozen authority for whether action derivation may begin."
+  ]
+}

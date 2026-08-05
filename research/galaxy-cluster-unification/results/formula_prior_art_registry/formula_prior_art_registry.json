@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 209,
+    "sigma_protocols": 210,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7574,6 +7574,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "bbcd6418f822d5996b838592a738d4be9a2b18649c29658308fc3248dc93e7f4"
+    },
+    {
+      "config": "configs/sigma_v19cn_fine_wmap_final_recovery.json",
+      "protocol_version": "SIGMA-V19CN-FINE-WMAP-FINAL-RECOVERY-1.0.0",
+      "status": "frozen after the V19CM det=1 diagnostic passed every response and nonmutation gate and before preserving the second failed partial, creating a final cell, modifying the recovery archive, rerunning V19W5, or resuming V19BR",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "890f2f117c873b17de9c910e2f78cf080d7425de02839fd9d47d7e6cf10a6e2c"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",
