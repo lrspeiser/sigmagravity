@@ -1,0 +1,105 @@
+{
+  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.0.0",
+  "status": "frozen after the read-only V19W live archive audit identified three implementation failure classes and before constructing any exact-bin mask, running a corrected response, reading a spectral fit, changing a scientific region or event assignment, opening lensing data, or changing gravity physics",
+  "purpose": "Commission one implementation correction that restores the frozen disjoint V19P/V19Q binmap event partition, removes the invalid manually transformed low-count response coordinate, and shortens CIAO runtime paths without changing any admitted region, event, energy band, response weighting, background scaling or scientific threshold.",
+  "parents": {
+    "v19w_config": {
+      "path": "configs/sigma_v19w_full_response_production.json",
+      "sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197"
+    },
+    "v19w_runner": {
+      "path": "scripts/run_sigma_v19w_full_response_production.py",
+      "sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1"
+    },
+    "v19u_manifest": {
+      "path": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+      "sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd"
+    },
+    "v19v_runner": {
+      "path": "scripts/run_sigma_v19v_response_throughput_pilot.py",
+      "sha256": "3123f21fae56f468c8c7ac42050a79cae9019c799a9d3f726112c6e34740d9bd"
+    },
+    "live_audit_results": {
+      "path": "docs/SIGMA_V19W_LIVE_ARCHIVE_AUDIT_RESULTS.md",
+      "sha256": "cad6e718e0c4e33227eb503677c8fb4cdd7e572dbdc76ff47e3f6fe68622c905"
+    }
+  },
+  "commissioning_cells": [
+    {
+      "cell_name": "BULLET_bin45_obs554_ccd3",
+      "failure_class": "source polygon includes one event assigned by the frozen binmap to another region",
+      "expected_source_band_events": 85,
+      "expected_background_band_events": 17
+    },
+    {
+      "cell_name": "BULLET_bin135_obs3184_ccd3",
+      "failure_class": "background polygon includes one event assigned by the frozen binmap to another region",
+      "expected_source_band_events": 346,
+      "expected_background_band_events": 919
+    },
+    {
+      "cell_name": "BULLET_bin232_obs4984_ccd3",
+      "failure_class": "source and background polygons each include one event assigned elsewhere by the frozen binmap",
+      "expected_source_band_events": 271,
+      "expected_background_band_events": 323
+    },
+    {
+      "cell_name": "BULLET_bin154_obs4985_ccd3",
+      "failure_class": "two-event reprojected-sky centroid transforms to adjacent CCD",
+      "expected_source_band_events": 2,
+      "expected_background_band_events": 7
+    },
+    {
+      "cell_name": "BULLET_bin36_obs4984_ccd3",
+      "failure_class": "both unchanged base attempts failed with AF_UNIX path too long",
+      "expected_source_band_events": 14,
+      "expected_background_band_events": 0,
+      "base_attempt_log_sha256": "8a8f6876e228f65384c164477800827cc0bf5c43ab29be3b170a6e0a33cd7ec8"
+    }
+  ],
+  "implementation_correction": {
+    "source_selection": "science event file filtered by frozen observation FOV, declared CCD_ID and sky=mask(binary image where frozen V19M binmap equals bin_id)",
+    "background_selection": "WCS-corrected blank-sky event file filtered by declared CCD_ID and the same exact bin mask",
+    "response_position": "leave refcoord unset and use resp_pos=CENTROID, the CIAO-supported mode for a pixel-mask filter",
+    "response_weighting": "unchanged weight=yes, weight_rmf=yes, energy_wmap=500:7000 eV, binwmap=det=8, binarfwmap=1",
+    "runtime_path": "use a short scratch root and production-index cell token for PFILES, TMPDIR and partial directories; retain canonical cell and product names",
+    "scientific_values_changed": false
+  },
+  "execution": {
+    "scratch_root": "/home/henry/sv19w2",
+    "maximum_concurrent_cells": 2,
+    "attempts_per_commissioning_cell": 1,
+    "base_v19w_archive_is_read_only": true
+  },
+  "gates": {
+    "all_five_cells_use_the_exact_frozen_manifest_counts": true,
+    "all_source_and_background_pha_histograms_match_their_exact_mask_event_lists": true,
+    "all_arf_rmf_link_and_blanksky_audits_pass": true,
+    "all_responses_use_mask_centroid_with_no_manual_refcoord": true,
+    "the_path_length_cell_completes_under_the_short_runtime_root": true,
+    "failure_rule": "Fail closed without changing the binmap, event membership, CCD_ID, FOV, energy band, background scaling, response weighting, response binning, concurrency, attempt count or selected commissioning cells. Do not modify or promote into the live base V19W archive."
+  },
+  "advance": {
+    "if_all_gates_pass": "freeze a separate full missing-cell recovery and 5082-cell final archive audit that runs only after the base V19W process exits",
+    "if_any_gate_fails": "retain the failed products and diagnose the implementation before another recovery protocol",
+    "v19x_authorized_here": false
+  },
+  "claim_boundary": [
+    "V19W2 tests an extraction and response implementation correction; it does not fit or interpret a spectrum.",
+    "A pass does not repair or authorize the base V19W archive by itself.",
+    "The exact binmap is inherited from target-blind V19M/V19P/V19Q products and is not altered after seeing these failures.",
+    "No temperature, density, Mach number, propagation state, lensing target, halo map or gravity parameter enters this protocol."
+  ],
+  "integrity": {
+    "exact_bin_mask_constructed_at_freeze": false,
+    "corrected_response_product_existed_at_freeze": false,
+    "spectral_fit_or_temperature_known_at_freeze": false,
+    "base_v19w_archive_modified_at_freeze": false,
+    "lensing_halo_or_gravity_payload_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
+    "runner_sha256": "bddad544ec1674c7f29de52c971c242588c6a9a66597083aa312523f05d498dd"
+  }
+}
