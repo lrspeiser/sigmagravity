@@ -1,7 +1,11 @@
 {
-  "protocol_version": "SIGMA-V19BB-ABELL2146-LUMINOSITY-CURRENT-ENSEMBLE-1.0.0",
+  "protocol_version": "SIGMA-V19BB-ABELL2146-LUMINOSITY-CURRENT-ENSEMBLE-1.0.1",
   "status": "frozen_before_fitting_the_catalog_level_astrometric_scale_or_generating_any_abell2146_luminosity_current_draw",
   "purpose": "Test whether one source-only catalog-level astrometric uncertainty reconciles the Abell 2146 spectroscopic coordinates with the frozen HSC/NSC candidate excess, then propagate the resulting candidate/null posterior, HST F814W luminosity availability, and quoted redshift errors into a deterministic luminosity-current ensemble without choosing hard counterparts or reading lensing, halo, or gravity targets.",
+  "implementation": {
+    "runner": "scripts/run_sigma_v19bb_abell2146_luminosity_current_ensemble.py",
+    "runner_sha256": "5892b3be6cdce9d5677a40e78715afc94f7ec8126333240f7a2c1041ab31a85c"
+  },
   "parents": {
     "v19aa_config": {
       "path": "configs/sigma_v19aa_member_counterpart_association.json",
