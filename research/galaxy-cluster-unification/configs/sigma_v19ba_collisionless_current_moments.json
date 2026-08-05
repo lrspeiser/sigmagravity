@@ -1,5 +1,5 @@
 {
-  "protocol_version": "SIGMA-V19BA-COLLISIONLESS-CURRENT-MOMENTS-1.0.0",
+  "protocol_version": "SIGMA-V19BA-COLLISIONLESS-CURRENT-MOMENTS-1.0.1",
   "status": "frozen_before_rasterizing_any_member_ensemble_draw_or_computing_any_current_moment",
   "purpose": "Project the target-blind V19AZ Bullet member ensemble onto the frozen V19H Chandra tangent grid as the three unsmoothed sufficient moment maps needed to test a long-wavelength collisionless-current or Reynolds-stress source, without selecting counterparts, fitting a propagation length, inferring absolute mass, opening lensing data, or changing gravity physics.",
   "parents": {
@@ -106,5 +106,9 @@
     "long_wave_length_or_amplitude_selected_at_freeze": false,
     "lensing_or_halo_payload_opened_at_freeze": false,
     "gravity_formula_or_parameter_changed_at_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ba_collisionless_current_moments.py",
+    "runner_sha256": "51bcbf0503b4f9947e15d5693bd44a057fb4de3cd4f3ba50ab4730cd708cf28c"
   }
 }
