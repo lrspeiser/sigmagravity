@@ -34,6 +34,12 @@ components, and propagate all quantities into the 4,096-draw projection/clock
 ensemble.  Failure at any point is an identifiability failure and does not
 authorize lowering a threshold.
 
+The discrete member requirement subsequently failed in both clusters.  The
+frozen BIC rule selected one phase component after 4,000/4,000 bootstraps
+converged.  See `docs/SIGMA_V19H_MEMBER_PHASE_IDENTIFIABILITY_FAILURE.md`.
+V19H therefore cannot pass its complete advance gate, although its map products
+remain valid inputs to a separately frozen continuous-field successor.
+
 Machine-readable records:
 
 - `configs/sigma_v19h_causal_observable_protocol.json`

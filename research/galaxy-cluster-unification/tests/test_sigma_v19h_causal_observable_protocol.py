@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19h_causal_observable_protocol.json"
 RUNNER = ROOT / "scripts" / "run_sigma_v19h_source_maps.py"
 MAP_REPORT = ROOT / "results" / "sigma_v19h_source_maps" / "report.json"
+MEMBER_RUNNER = ROOT / "scripts" / "run_sigma_v19h_member_phase.py"
+MEMBER_REPORT = ROOT / "results" / "sigma_v19h_member_phase" / "report.json"
 
 
 def load() -> dict:
@@ -135,5 +137,53 @@ def test_v19h_source_map_runner_is_importable_without_ciao() -> None:
         )
         assert config["protocol_version"] == "SIGMA-V19H-CAUSAL-OBSERVABLES-1.0.0"
         assert astrometry["observation_count"] == cleaning["observation_count"] == 20
+    finally:
+        sys.path.remove(scripts)
+
+
+def test_v19h_member_phase_gate_records_identifiability_failure() -> None:
+    report = json.loads(MEMBER_REPORT.read_text(encoding="utf-8"))
+    assert report["status"] == "frozen_v19h_member_phase_gate_failed"
+    assert set(report["failed_clusters"]) == {"BULLET", "ABELL2146"}
+    assert report["published_subcluster_labels_used_for_fit_or_selection"] is False
+    assert report["lensing_target_opened"] is False
+    assert report["gravity_parameter_changed"] is False
+    for row in report["clusters"]:
+        assert row["selected_components"] == 1
+        assert row["gates"]["minimum_identifiable_merger_components"] is False
+        assert row["gates"]["selected_fit_converged"] is True
+        assert row["bootstrap"]["requested_draws"] == 2000
+        assert row["bootstrap"]["accepted_draws"] == 2000
+        assert row["bootstrap"]["failed_draws"] == 0
+        path = ROOT / row["bootstrap"]["draws_file"]
+        assert sha256(path) == row["bootstrap"]["draws_sha256"]
+
+
+def test_v19h_member_mixture_recovers_a_synthetic_two_component_case() -> None:
+    scripts = str(ROOT / "scripts")
+    sys.path.insert(0, scripts)
+    try:
+        spec = importlib.util.spec_from_file_location(
+            "sigma_v19h_member_test", MEMBER_RUNNER
+        )
+        assert spec and spec.loader
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        import numpy as np
+
+        generator = np.random.default_rng(19008)
+        observed = np.vstack(
+            [
+                generator.normal([-2.0, 0.0, 0.0], [0.3, 0.4, 0.5], (60, 3)),
+                generator.normal([2.0, 0.0, 1.0], [0.4, 0.3, 0.5], (60, 3)),
+            ]
+        )
+        errors = np.zeros_like(observed)
+        errors[:, 2] = 0.1
+        fits = [
+            module.fit_mixture(observed, errors, components, 20 + components)
+            for components in (1, 2, 3)
+        ]
+        assert len(module.select_fit(fits)["weights"]) == 2
     finally:
         sys.path.remove(scripts)

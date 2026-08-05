@@ -29,6 +29,11 @@ All 20 also passed the frozen translation-only Gaia registration gate, with
 239 accepted pairs and 0.176--0.350 arcsec radial RMS.
 The first V19H common-map gate also passed with 100.000%/99.994% usable area
 and approximately 429,000/167,000 net soft X-ray counts inside 1 Mpc.
+The subsequent discrete member-phase gate failed target-blindly in both
+clusters: one Gaussian phase component was preferred over two or three despite
+4,000 successful bootstraps.  The failure and continuous-field successor are
+documented in
+[`docs/SIGMA_V19H_MEMBER_PHASE_IDENTIFIABILITY_FAILURE.md`](docs/SIGMA_V19H_MEMBER_PHASE_IDENTIFIABILITY_FAILURE.md).
 No replacement-cluster lensing target has been opened. This makes a causal
 source measurable but does not yet show that it predicts halo size. The next
 required freeze covers X-ray edge/thermodynamic uncertainties and the
