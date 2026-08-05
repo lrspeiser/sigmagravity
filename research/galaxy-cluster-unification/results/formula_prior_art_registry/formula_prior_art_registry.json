@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 194,
+    "sigma_protocols": 195,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7382,6 +7382,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "5d3cc37a5aeac4aae1c9617e5a548dd27f97fb4190030dc523cf39efa4909738"
+    },
+    {
+      "config": "configs/sigma_v19by_wallaby_moment0_source_maps.json",
+      "protocol_version": "SIGMA-V19BY-WALLABY-MOMENT0-SOURCE-MAPS-1.0.0",
+      "status": "frozen before downloading any WALLABY image product or opening any kinematic target",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "ad70c63de24537b4fd76d53410ee879e88b0ee7d3b201722f85362660393ea47"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

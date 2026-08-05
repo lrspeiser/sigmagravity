@@ -2524,3 +2524,18 @@ around the 31 Norma sources. This is direct evidence that a nearest optical
 neighbor cannot be treated as the counterpart: the next source-only step must
 combine H I footprints, optical cutouts and star masks under a frozen
 probabilistic association model. No counterpart or target was selected.
+
+## 2026-08-05 V19BY WALLABY moment-zero map contract
+
+The H I spatial-footprint acquisition is now frozen before any image download.
+It requires one public two-dimensional moment-zero FITS map for all 711 V19BU
+release rows, including every Hydra TR1/TR2 alternative. Only four declared
+DR1 `source_data_*` planes and `_mom0.fits` artifacts are eligible.
+
+Cubes, channel masks, moment-1/2 maps, spectra and kinematic planes are
+explicitly rejected. Every admitted file must reproduce the CADC byte length
+and MD5 and have `NAXIS=2` with no third coordinate axis. Five contract tests
+pass. The maps will support later H I/optical spatial association, but this
+checkpoint cannot choose a counterpart, evidence split, action or constant.
+See
+[`SIGMA_V19BY_WALLABY_MOMENT0_SOURCE_MAPS.md`](SIGMA_V19BY_WALLABY_MOMENT0_SOURCE_MAPS.md).

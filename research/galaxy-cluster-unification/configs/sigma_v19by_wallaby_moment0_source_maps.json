@@ -1,0 +1,95 @@
+{
+  "protocol_version": "SIGMA-V19BY-WALLABY-MOMENT0-SOURCE-MAPS-1.0.0",
+  "status": "frozen before downloading any WALLABY image product or opening any kinematic target",
+  "purpose": "Acquire the two-dimensional integrated H I moment-zero source map for every one of the 711 V19BU release rows, retaining all duplicate-release alternatives and excluding every spectral or kinematic product.",
+  "parent": {
+    "path": "results/sigma_v19bx_skymapper_source_only_candidates/report.json",
+    "sha256": "09b5ea2cd5a036b35394c482dc7de539e09cbc1a5c84fe97e224f0da43a9cf0c"
+  },
+  "input": {
+    "path": "data/raw/sigma_v19bu_wallaby_source_metadata/wallaby_pilot_dr1_source_only.csv",
+    "sha256": "58e59cdfc48cf8192ff2038b949285adfa3ab0b1038603b31afcf81df8fbac4d",
+    "rows": 711,
+    "unique_names": 592,
+    "duplicate_names": 119
+  },
+  "primary_source": {
+    "archive": "Canadian Astronomy Data Centre CAOM2 public WALLABY collection",
+    "tap_endpoint": "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/sync",
+    "data_base_url": "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/data/pub/WALLABY/",
+    "collection": "WALLABY",
+    "documentation": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/doc/tap/"
+  },
+  "release_product_ids": {
+    "Hydra TR1": "source_data_Hydra_TR1",
+    "Hydra TR2": "source_data_Hydra_TR2",
+    "NGC 4636 TR1": "source_data_NGC_4636_TR1",
+    "Norma TR1": "source_data_Norma_TR1"
+  },
+  "artifact_policy": {
+    "required_uri_suffix": "_mom0.fits",
+    "required_content_type": "application/fits",
+    "required_product_type": "science",
+    "required_release_type": "data",
+    "required_fits_naxis": 2,
+    "forbidden_uri_tokens": [
+      "_cube",
+      "_mask",
+      "_mom1",
+      "_mom2",
+      "_spec",
+      "kinematic",
+      "model",
+      "residual",
+      "rotation"
+    ],
+    "interpretation": "A moment-zero map integrates H I intensity over the spectral axis. It supplies source morphology but no resolved velocity field."
+  },
+  "download_policy": {
+    "workers": 8,
+    "retries": 3,
+    "verify_archive_content_length": true,
+    "verify_archive_md5": true,
+    "verify_fits_header_without_scoring_pixels": true,
+    "retain_all_release_alternatives": true
+  },
+  "access_boundary": {
+    "caom_metadata_read": true,
+    "moment0_source_maps_authorized": true,
+    "cube_or_spectral_mask_downloaded": false,
+    "moment1_or_moment2_downloaded": false,
+    "spectrum_downloaded": false,
+    "kinematic_plane_or_table_read": false,
+    "rotation_speed_or_velocity_field_read": false,
+    "inclination_or_kinematic_angle_read": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "optical_counterpart_selected": false,
+    "development_validation_holdout_split_selected": false,
+    "gravity_action_or_constant_changed": false,
+    "solar_system_optimization_performed": false
+  },
+  "required_gates": {
+    "parent_and_input_hashes_exact": true,
+    "exact_moment0_artifact_policy_used": true,
+    "one_map_per_all_711_release_rows": true,
+    "all_archive_lengths_and_md5s_exact": true,
+    "all_files_are_two_dimensional_fits": true,
+    "manifest_reproduces_downloads": true,
+    "kinematic_gravity_and_solar_targets_remain_sealed": true,
+    "no_counterpart_or_evidence_split_claimed": true
+  },
+  "outputs": {
+    "map_directory": "data/raw/sigma_v19by_wallaby_moment0_source_maps/maps",
+    "manifest_csv": "data/raw/sigma_v19by_wallaby_moment0_source_maps/manifest.csv",
+    "report": "results/sigma_v19by_wallaby_moment0_source_maps/report.json"
+  },
+  "claim_boundary": [
+    "V19BY acquires integrated H I source morphology; it does not acquire the spectral cube, channel mask, moment-1 velocity map, moment-2 dispersion map, spectrum, rotation curve or kinematic model.",
+    "Every Hydra TR1/TR2 alternative remains separate, so the V19BV release-row systematic can be propagated.",
+    "A spatial overlap with an optical candidate will later contribute to a prespecified association probability; V19BY does not choose a counterpart.",
+    "No velocity target, gravity residual, action, constant, evidence split or Solar-System result enters this acquisition."
+  ],
+  "implementation": {
+    "runner": "scripts/acquire_sigma_v19by_wallaby_moment0_source_maps.py"
+  }
+}
