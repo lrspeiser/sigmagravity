@@ -1,0 +1,65 @@
+{
+  "claim_boundary": [
+    "V19AX is an image acquisition and geometric/integrity audit, not a source measurement.",
+    "Opening pixels to verify FITS structure, WCS, dimensions, finite values and weight support does not authorize flux measurement at any anchor or candidate position.",
+    "The acquired coadds do not establish that a candidate is a cluster member and do not create a baryonic mass map.",
+    "A pass authorizes a separately frozen development-anchor photometry and crowded-field deblending comparison; it does not authorize candidate interpretation, mass, lensing, halo or gravity claims."
+  ],
+  "decision": "failed_closed",
+  "failure": "The frozen acquisition runner stopped when the g-band weight plane had less than 99% positive support.",
+  "gate_results": {
+    "all_candidates_inside_every_product": true,
+    "common_shape": true,
+    "exact_products": true,
+    "exact_sia_rows": true,
+    "minimum_positive_weight_fraction_every_band": false,
+    "no_source_photometry_or_association": true
+  },
+  "post_failure_optimistic_union": {
+    "coadd_and_prior_stack_intersection": 164,
+    "definition": "Candidate-center positive coadd weight in all griz OR prior V19AV signed-stack SNR >= 3 in all griz. This is an upper-bound support diagnostic, not a combined flux measurement.",
+    "members_with_at_least_one_union_candidate": 57,
+    "prior_signed_stack_complete_candidates": 200,
+    "union_candidates": 475,
+    "union_fraction": 0.8362676056338029,
+    "v19av_candidate_stacks_sha256": "271772b5a68652bf5ffec0c4ffefbed37d3f40bbadc35125c5ba0ae5a156712e"
+  },
+  "post_failure_summarizer": "scripts/summarize_sigma_v19ax_delve_dr3_coadds.py",
+  "post_failure_summarizer_sha256": "8748ad761687723bc875427f689dc47a29629caa65d40af4120c5ea56fef484f",
+  "products": {
+    "bytes": 261158400,
+    "count": 12,
+    "manifest": "data/derived/sigma_v19ax_delve_dr3_coadd_acquisition/product_manifest.csv",
+    "manifest_sha256": "28a87b37d5d712e7724973b6538b0f258215072f4404e770f7757a34a396935d",
+    "shapes": [
+      [
+        2331,
+        2333
+      ]
+    ]
+  },
+  "protocol_version": "SIGMA-V19AX-DELVE-DR3-COADD-ACQUISITION-1.0.0",
+  "sia": {
+    "query_url_sha256": "b3cc9bf32f11e8cff45292843db1a55b293c00847a85746dfed47595ca4e1873",
+    "response_sha256": "15cea5195194f3060d2f61854fabdd4d2d71229f7f52551294d43fd36f77996d",
+    "rows": 27
+  },
+  "source_photometry_or_candidate_association_computed": false,
+  "weight_support": {
+    "candidate_centers_with_positive_weight_all_griz": 439,
+    "candidate_centers_with_positive_weight_by_band": {
+      "g": 441,
+      "i": 568,
+      "r": 568,
+      "z": 566
+    },
+    "global_positive_fraction_by_band": {
+      "g": 0.987732022022635,
+      "i": 0.9997000858552508,
+      "r": 0.9998481121498696,
+      "z": 0.9892836318039918
+    },
+    "maximum_possible_complete_candidate_fraction": 0.772887323943662,
+    "members_with_at_least_one_all_griz_supported_candidate": 52
+  }
+}
